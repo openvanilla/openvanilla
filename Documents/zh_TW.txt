@@ -294,6 +294,15 @@ http://osxchat.blogspot.com/
 
 === OpenVanilla 計畫的背景 ===
 
+(by gugod)
+lukhnos 在完成了香草輸入法 0.64 版之後，接下來所進行的工作，先是進行了 CarbonInputMethod 計畫，CarbonInputMethod 計畫是目前的 OpenVanilla 最早的雛型。
+
+CarbonInputMethod 的內容是重新整理蘋果發展者網站（Apple Developer Connection）所提供的輸入法設計範例— BIM（Basic Input Method） ，原因是目前各種在 OSX 平台上可以看到的、開放原始碼的輸入法如香草輸入法、SpaceChewing 酷音輸入法，以及日文輸入法 MacUIM 等等，都是使用 BIM 為基礎開發。而BIM的寫作本身有些混亂，且本身帶有許多 OS9 殘留的痕跡，多使用比較老舊的 API，但其實蘋果提供了許多新的 API 可以使用，lukhnos 的目標，首先是整理出一份精簡的、簡潔的、而且比較符合新的環境的輸入法設計範例。
+
+在整理 CarbonInputMethod 到了一個程度之後，lukhnos 則在原有的基礎上，進行 OpenVanilla 計畫。OpenVanilla 的目的是，成為一個輸入法核心與 OSX 連接的通用介面，包括可以動態載入 Dynamic Library（.dylib） 檔案，將各種輸入法以 dylib 方式載入，以及所有輸入法的共通介面，如選字視窗、按鍵處理、資料的傳入與送出等等。
+
+之後，程式設計者如果想要在 OSX 上開發輸入法，如果是透過 OpenVanilla 框架，就只要將輸入法核心寫成符合一定規範的 dylib 檔案即可。設計者不用將心力放在處理 OSX 的介面問題上，只需要專心在輸入法本身，也就是，在之前有許多個別的輸入法計畫，都必須自己處理許多 Carbon API 方面的問題，而 OpenVanilla 就是負責將 Carbon API 的問題處理完成，並且將這些之前的計畫，納入在一個簡單的框架之下。
+
 === 漁村輸入法的淵源 ===
 
 (by zonble)
