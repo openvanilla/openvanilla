@@ -92,7 +92,7 @@ int OVIMXcin::identifier(char *s)
 int OVIMXcin::name(char *locale, void *s, OVEncoding *enc)
 {
     *enc=ovEncodingUTF8;
-    if (1 || !strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
+    if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
     {
         *enc=cnameencoding;
         murmur ("asking ename=%s, cname=%s, encoding=%d", ename, cname, *enc);
