@@ -192,7 +192,8 @@ enum
     ovkDelete=127, ovkBackspace=8,
     ovkUp=30, ovkDown=31, ovkLeft=28, ovkRight=29,
     ovkHome=1, ovkEnd=4,
-    ovkPageUp=11, ovkPageDown=12
+    ovkPageUp=11, ovkPageDown=12,
+    ovkTab='\t'
 };
 
 #endif  // of #ifndef __OpenVanilla_h
