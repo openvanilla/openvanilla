@@ -269,17 +269,8 @@ int CIMCustomActivate(void *data, CIMInputBuffer *buf)
     return 1;
 }
 
-int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
-{
-    CIMContext *c=(CIMContext*)data;    
-    if (!c->ovcontext) return 0;
 
-    if (c->bar.onScreen()) {
-        c->onScreen=1;
-        if (floatingwindowlock) c->bar.unlock();
-        c->bar.hide();		
-    }
-
+void SetFloatingWindowPosition(CIMContext *c) {
     if (floatingwindowlock) {
         int newx, newy;
         c->bar.getPosition(&newx, &newy);
@@ -295,6 +286,19 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
             delete global;
         }
     }
+}
+
+int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
+{
+    CIMContext *c=(CIMContext*)data;    
+    if (!c->ovcontext) return 0;
+
+    if (c->bar.onScreen()) {
+        c->onScreen=1;
+        if (floatingwindowlock) c->bar.unlock();
+        c->bar.hide();		
+    }
+    SetFloatingWindowPosition(c);
 
     c->ovcontext->deactivate(&srv);
     return 1;
