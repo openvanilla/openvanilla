@@ -93,7 +93,7 @@ public:
         
     virtual int identifier(char* s)
     {
-        return strlen(strcpy(s, "OVPhoneIM"));
+        return strlen(strcpy(s, "OVIMPhonetic"));
     }
     
     virtual int name(char *locale, void *s, OVEncoding *enc)
@@ -108,17 +108,8 @@ public:
     virtual int initialize(OVDictionary* g, OVDictionary* l, OVService*, char*)
     {
         fprintf (stderr, "IM module initialized by IM loader\n");
-
-		if (l)
-		{        
-	        if (!l->keyExist("鍵盤配置")) l->setInt("鍵盤配置", 0);
-	        keylayout=l->getInt("鍵盤配置");
-	    } else
-	    {
-	    	murmur ("no OVDictionary *l !");
-	    	keylayout=0;
-	    }
-	    
+	    if (!l->keyExist("keyboardLayout")) l->setInt("keyboardLayout", 0);
+	    keylayout=l->getInt("keyboardLayout");
         murmur ("key layout set to %d\n", keylayout);
         
         return 1;
@@ -133,19 +124,9 @@ public:
     virtual int update(OVDictionary* g, OVDictionary* l)
     {
         fprintf (stderr, "IM loader requested updating module's config\n");
-
-		if (l)
-		{        
-	        if (!l->keyExist("鍵盤配置")) l->setInt("鍵盤配置", 0);
-	        keylayout=l->getInt("鍵盤配置");
-	    } else
-	    {
-	    	murmur ("no OVDictionary *l !");
-	    	keylayout=0;
-	    }
-        
-        murmur ("key layout changed to %d\n", keylayout);
-        
+	    if (!l->keyExist("keyboardLayout")) l->setInt("keyboardLayout", 0);
+	    keylayout=l->getInt("keyboardLayout");
+        murmur ("key layout changed to %d\n", keylayout);        
         return 1;
     }
 
@@ -178,7 +159,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 {
     int inCharCode=key->code();
     
-    if (parent->getKeyLayout()==0) vimKeyboardLayoutEten=1;
+    if (parent->getKeyLayout()==1) vimKeyboardLayoutEten=1;
     else vimKeyboardLayoutEten=0;
     
     
