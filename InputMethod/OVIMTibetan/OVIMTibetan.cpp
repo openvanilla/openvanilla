@@ -231,8 +231,28 @@ public:
 								buf->append(&i, ovEncodingUTF16Auto, 1)->update();
 							} else 
 							{
-								i = ConsonantChars[isConsonantKey(keyseq.buf[1])];
-								buf->append(&i, ovEncodingUTF16Auto, 1);
+								if(((k = isHtransform(isConsonantKey(keyseq.buf[1]))) > -1) &&
+								   isConsonantKey(keyseq.buf[2]) == htransform)
+								{
+									i = htransfromChars[k];
+									buf->append(&i, ovEncodingUTF16Auto, 1);
+								} 
+								else if (isConsonantKey(keyseq.buf[1]) == 0 && 
+										 isConsonantKey(keyseq.buf[2]) == 34) 
+								{
+									i = 0x0FB9;
+									buf->append(&i, ovEncodingUTF16Auto, 1);
+								} 
+								else 
+								{
+									i = ConsonantChars[isConsonantKey(keyseq.buf[1])];
+									buf->append(&i, ovEncodingUTF16Auto, 1);
+									if(keyseq.len == 4)
+									{
+										i = ConsonantChars[isConsonantKey(keyseq.buf[2])];
+										buf->append(&i, ovEncodingUTF16Auto, 1);
+									}
+								}
 								i = 0x0FB9;
 								buf->append(&i, ovEncodingUTF16Auto, 1)->update();
 							}
@@ -251,8 +271,29 @@ public:
 								i = htransfromChars[k];
 								buf->append(&i, ovEncodingUTF16Auto, 1)->update();
 							} else {
-								i = ConsonantChars[isConsonantKey(keyseq.buf[1])];
-								buf->append(&i, ovEncodingUTF16Auto, 1);
+								int l = -1;
+								if(((l = isHtransform(isConsonantKey(keyseq.buf[1]))) > -1) &&
+								    isConsonantKey(keyseq.buf[2]) == htransform)
+								{
+									i = htransfromChars[l];
+									buf->append(&i, ovEncodingUTF16Auto, 1);
+								} 
+								else if (isConsonantKey(keyseq.buf[1]) == 0 && 
+										 isConsonantKey(keyseq.buf[2]) == 34) 
+								{
+									i = 0x0FB9;
+									buf->append(&i, ovEncodingUTF16Auto, 1);
+								} 
+								else 
+								{
+									i = ConsonantChars[isConsonantKey(keyseq.buf[1])];
+									buf->append(&i, ovEncodingUTF16Auto, 1);
+									if(keyseq.len == 4)
+									{
+										i = ConsonantChars[isConsonantKey(keyseq.buf[2])];
+										buf->append(&i, ovEncodingUTF16Auto, 1);
+									}
+								}
 								i = htransfromChars[k] + 0x50;
 								buf->append(&i, ovEncodingUTF16Auto, 1)->update();
 							}
