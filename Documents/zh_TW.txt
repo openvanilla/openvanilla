@@ -33,15 +33,19 @@ OV 與蘋果內建的中文輸入法 TCIM（Traditional Chinese Input Method）�
 
 http://www.osxgnu.org/info/pkgdelete.html
 
+在刪除完畢後，請重新登入。
+
 === 手動反安裝 ===
 
-OV 的資料會裝在以下位置：
+您也可以手動刪除OV，OV的資料會裝在以下位置：
 
-/Library/Components/OVLoader.bundle/
-/Library/OpenVanilla/
-/Library/PreferencePanes/OVPrefPane.prefPane/
-/Library/Frameworks/OpenVanilla.framework/
-/usr/local/lib/libchewing*
+* /Library/Components/OVLoader.bundle/	（輸入法載入器）
+* /Library/OpenVanilla/	（各種輸入法套件）
+* /Library/PreferencePanes/OVPrefPane.prefPane/	（OV在系統偏好設定中的程式）
+* /Library/Frameworks/OpenVanilla.framework/	（OpenVanilla Framework）
+* /usr/local/lib/libchewing*	（酷音輸入法使用的libchewing）
+
+請在「系統偏好設定」、「國際設定」中關閉OV之後，刪除這些檔案後，重新登入。
 
 == 使用方法 ==
 
