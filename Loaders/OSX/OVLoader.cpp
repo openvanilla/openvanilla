@@ -362,10 +362,9 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
 
     if (command >= usermenu && command <= usermenu+list.imcntr) {
     	int newpos=command-usermenu;
-    	
-    	char buf[256];
-    	inputmethod->identifier(buf);
-    	int oldpos=list.findPos(buf);
+    	char imid[256];
+    	inputmethod->identifier(imid);
+    	int oldpos=list.findPos(imid);
     	SetItemMark(mnu, oldpos+1, 0);
     	SetItemMark(mnu, newpos+1, checkMark);
     	
@@ -376,11 +375,11 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
             list.impair[newpos].inited=1;
         }
 		
-    	newim->identifier(buf);
+    	newim->identifier(imid);
     	murmur ("user wants to switch IM, newimpos=%d, new im id=%s", newpos, buf);
         KillAllExistingContext(newim);
         inputmethod=newim;
-        SetCurrentInputMethod(buf);
+        SetCurrentInputMethod(imid);
         sysconfig->write();
     }
     return 0;
