@@ -247,8 +247,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         // if autocomposing is on
         if (keyseq.length() && parent->isAutoCompose())
         {
-			string inKey(keyseq.getSeq());
-            if (cintab->isValidKey(inKey))
+			if (cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector))
             {
                 autocomposing=1;
                 compose(buf, textbar, srv);
@@ -339,15 +338,20 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
             }
             else if (candi.onDuty()) cancelAutoCompose(textbar);
         }
-        
+		        
         return 1;
     }
-
-    cancelAutoCompose(textbar);
-    keyseq.clear();
-    if (buf->length()) buf->send();
-    
-    return 0;
+	// <comment author='b6s'>For undefined key events, do nothing.
+	else {
+		/*
+		cancelAutoCompose(textbar);
+		keyseq.clear();
+		if (buf->length()) buf->send();
+		*/
+		
+		return 0;
+	}
+	// </comment>	
 }
 
 void OVXcinContext::cancelAutoCompose(OVTextBar *textbar)
