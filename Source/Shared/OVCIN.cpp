@@ -1,6 +1,6 @@
-// OVXCIN.cpp
+// OVCIN.cpp
 
-#include "OVXCIN.h"
+#include "OVCIN.h"
 #include "OVFileHandler.h"
 #include "OVStringToolKit.h"
 
@@ -11,7 +11,7 @@
 
 using namespace std;
 
-OVXCIN::OVXCIN(char* fileName)
+OVCIN::OVCIN(char* fileName)
 {
 	OVFileHandler* fileHandler = new OVFileHandler(fileName);
 	vector<string> stringVector;
@@ -21,28 +21,58 @@ OVXCIN::OVXCIN(char* fileName)
 	ename = getPropertyByName(stringVector, "ename");
 	cname = getPropertyByName(stringVector, "cname");
 	selkey = getPropertyByName(stringVector, "selkey");
+	endkey = getPropertyByName(stringVector, "endkey");
 	
 	getMapByName(stringVector, keyMap, "keyname");
 	getMapByName(stringVector, charMap, "chardef");
 }
 
-OVXCIN::~OVXCIN()
+OVCIN::~OVCIN()
 {
 	charMap.clear();
 	keyMap.clear();
 }
 
-vector<string> OVXCIN::getCharVectorByKey(string key)
+string OVCIN::getSelKey()
+{
+	return selkey;
+}
+
+string OVCIN::getCName()
+{
+	return cname;
+}
+
+string OVCIN::getEName()
+{
+	return ename;
+}
+
+string OVCIN::getEndKey()
+{
+	return endkey;
+}
+
+bool OVCIN::isEndKey(char keyChar)
+{
+	int foundIndex = endkey.find(keyChar, 0);
+	if(foundIndex > -1)
+		return true;
+	else
+		return false;
+}
+
+vector<string> OVCIN::getCharVectorByKey(string key)
 {
 	return getVectorFromMap(keyMap, key);
 }
 
-vector<string> OVXCIN::getWordVectorByChar(string key)
+vector<string> OVCIN::getWordVectorByChar(string key)
 {
 	return getVectorFromMap(charMap, key);
 }
 
-vector<string> OVXCIN::getVectorFromMap(map< string, vector<string> >& inMapRef,
+vector<string> OVCIN::getVectorFromMap(map< string, vector<string> >& inMapRef,
 									  string key)
 {
 	if(inMapRef[key].size() > 0)
@@ -54,7 +84,7 @@ vector<string> OVXCIN::getVectorFromMap(map< string, vector<string> >& inMapRef,
 	}
 }
  
-string OVXCIN::getPropertyByName(vector<string>& inStringVectorRef,
+string OVCIN::getPropertyByName(vector<string>& inStringVectorRef,
 								 string propertyName)
 {
 	string pattern = "%" + propertyName;
@@ -67,27 +97,33 @@ string OVXCIN::getPropertyByName(vector<string>& inStringVectorRef,
 									currentString.length() - startIndex + 1);
 	}
 	
-	return NULL;
+	return string("");
 }
 
-int OVXCIN::getMapByName(vector<string>& inStringVectorRef,
+int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 						 map< string, vector<string> >& outMapRef,
 						 string mapName)
 {
 	bool doGet = false;
-	string pattern = "%" + mapName + " begin";	
+	string pattern = "begin";	
 	for(int i = 0; i < inStringVectorRef.size(); i++)
 	{
 		string currentString = inStringVectorRef[i];
+		int foundIndex = currentString.find("%" + mapName, 0);		
 		if(!doGet) {
-			if(currentString.find(pattern, 0) == 0) {
-				doGet = true;
-				pattern = "%" + mapName + " end";
+			if(foundIndex == 0) {
+				int foundBegin = currentString.find(pattern, foundIndex);
+				if(foundBegin > -1) {					
+					doGet = true;
+					pattern = "end";
+				}
 			}
 		} else {
-			if(currentString.find(pattern, 0) == 0)
-				break;
-			else {
+			if(foundIndex == 0) {
+				int foundEnd = currentString.find(pattern, foundIndex);
+				if(foundEnd)
+					break;
+			} else {
 				vector<string> pairVector;
 				int vectorSize = OVStringToolKit::splitString(currentString,
 															  pairVector, ' ');
@@ -110,16 +146,25 @@ int OVXCIN::getMapByName(vector<string>& inStringVectorRef,
 
 int main(int argc, char**argv)
 {
-    OVXCIN ovxcin(argv[1]);
+    OVCIN ovcin(argv[1]);
 	
-	cout << "ename:\t" << ovxcin.ename << endl;
-	cout << "cname:\t" << ovxcin.cname << endl;
-	cout << "selkey:\t" << ovxcin.selkey << endl;
+	cout << "ename:\t" << ovcin.getEName() << endl;
+	cout << "cname:\t" << ovcin.getCName() << endl;
+	cout << "selkey:\t" << ovcin.getSelKey() << endl;
+	cout << "endkey:\t" << ovcin.getEndKey() << endl;
+	
+	char keyChar;
+	cout << "is end key?\t";
+	cin >> keyChar;
+	if(ovcin.isEndKey(keyChar))
+		cout << "Yes" << endl;
+	else
+		cout << "No" << endl;
 		
 	string inKey;
 	cout << "key:";
 	cin >> inKey;
-	vector<string> charVector = ovxcin.getCharVectorByKey(inKey);	
+	vector<string> charVector = ovcin.getCharVectorByKey(inKey);	
 	for(int i = 0; i < charVector.size(); i++)
 		cout << "keyMap[\"" + inKey + "\"] = " << charVector[i] << endl;
 	charVector.clear();
@@ -128,7 +173,7 @@ int main(int argc, char**argv)
 	string inChar;
 	cout << "char:";
 	cin >> inChar;
-	vector<string> wordVector = ovxcin.getWordVectorByChar(inChar);
+	vector<string> wordVector = ovcin.getWordVectorByChar(inChar);
 	for(int j = 0; j < wordVector.size(); j++)
 		cout << "charMap[\"" + inChar + "\"] = " << wordVector[j] << endl;
 	wordVector.clear();

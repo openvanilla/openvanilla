@@ -16,6 +16,7 @@ int OVStringToolKit::splitString(string inString,
 								 vector<string>& outStringVectorRef,
 								 char delimiter)
 {
+	///* string::find()
 	int previousPosition = 0, currentPosition = 0;
 	string currentSubString;
 	while(currentPosition > -1)
@@ -37,6 +38,7 @@ int OVStringToolKit::splitString(string inString,
 			currentSubString.clear();
 		}
 	}
+	//*/
 	
 	/* handcraft sequencial search... =_=
 	bool doPush = false;
