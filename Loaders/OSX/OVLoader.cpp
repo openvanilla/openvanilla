@@ -280,13 +280,6 @@ int CIMCustomClose(void *data)
     return 1;
 }
 
-void CIMCustomFix(void *data)
-{	
-	murmur("OVXSimpleLoader: SessionFixing ...");
-	CIMContext *c=(CIMContext*)data;   
-	c->ovcontext->clear();
-}
-
 int RefreshConfig() {
     OVAUTODELETE;
     if (sysconfig->changed()) {
@@ -389,7 +382,25 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
     SetFloatingWindowPosition(c);
 
     c->ovcontext->deactivate(&srv);
+    c->ovcontext->clear();
     
+    return 1;
+}
+
+
+void CIMCustomFix(void *data)
+{	
+    murmur("OVXSimpleLoader: SessionFixing ...");
+    CIMContext *c=(CIMContext*)data;   
+    if (!c->ovcontext) return 0;
+	
+    if (c->bar.onScreen()) {
+        c->onScreen=1;
+        if (floatingwindowlock) c->bar.unlock();
+        c->bar.hide();		
+    }
+    SetFloatingWindowPosition(c);
+    c->ovcontext->deactivate(&srv);
     return 1;
 }
 
