@@ -590,7 +590,7 @@ OV所使用的輸入法檔案，都位在系統硬碟中的「資源庫」→「
 
 http://svn.openfoundry.org/openvanilla
 
-如果您需要酷音輸入法的原始程式，您需要：
+如果您不熟悉svn這樣的版本管理系統，您不妨參閱附錄中的「自行編譯 OpenVanilla 部份」。又，如果您需要酷音輸入法的原始程式，您需要：
 
 * libchewing： https://svn.csie.net/chewing/libchewing
 * libchewingpp： https://svn.csie.net/chewing/libchewingpp
@@ -606,7 +606,7 @@ http://openvanilla.org/
 
 而如果您發現OV有任何問題，或任何建議，希望能夠有怎樣的改進，您也可以使用前述「自由軟體鑄造場」的RT（RequestTracker）回報系統反應。
 
-而在您回報錯誤時，希望您可以盡可能描述您所遇到的狀況，例如您在那個應用程式中、使用OV輸入法輸入了怎樣的內容出現了問題，而如果酷音輸入法造成應用軟體當機，OSX會提供應用程式當掉時的錯誤訊息，詢問您是否要當機紀錄回報給蘋果，我們也希望您能夠保留這份紀錄，提供給我們參考。
+而在您回報錯誤時，希望您可以盡可能描述您所遇到的狀況，例如您在那個應用程式中、使用那一套輸入法、輸入了怎樣的內容而造成問題，而如果 OV 造成應用軟體當機，OSX會提供應用程式當掉時的錯誤訊息，詢問您是否要當機紀錄回報給蘋果，我們也希望您能夠保留這份紀錄，提供給我們參考。
 
 如果您熟悉使用IRC網路聊天室的話，您也可以在IRC上找到OV的發展者，我們經常會出沒在irc.seed.net.tw的「#osxchat」頻道裡。而各項最新的消息，也會發表在「#osxchat」頻道的專屬網誌：
 
@@ -680,6 +680,84 @@ CarbonInputMethod 的內容是重新整理蘋果發展者網站（Apple Develope
 視窗作業系統中並沒有一套適合快速輸入「中國海字集」符號的輸入方式，因此，當時一群文書兵就在營部辦公室，使用 Windows 內建的自訂輸入法產生工具，製作一套好記的、方便輸入「中國海字集」符號的輸入法，「漁村輸入法」於焉誕生，名稱來自於工兵營駐地名稱。這套輸入法最早也叫做「漁光」輸入法，意思是「漁村之光」，也稱「豬頭輸入法」，因為這套輸入法誕生的原因，實在是因為國軍的長官所制定的規定，實在是非常豬頭。
 
 而前兩天有朋友覺得，在 MacOS X 環境底下輸入特殊符號並不方便，看了一下，MacOS X 環境當中，的確沒有一套拿來方便輸入各種符號的輸入法，而系統內建的「字元面板」一方面不見得方便，二方面似乎很容易當掉，製作一個專門用來輸入符號的輸入法，似乎是一種不錯的選擇，所以使用過去製作「漁村輸入法」的邏輯，製作了「漁村輸入法X」。
+
+=== 自行編譯 OpenVanilla ===
+
+除了使用 OpenVanilla 所提供的安裝套件安裝外，您也可以使用原始碼編譯安裝，而如果您有程式設計的基礎，您也可以自行直接修改 OV 的原始程式，符合您的需要。
+
+首先，您需要安裝蘋果所提供的程式開發工具 Xcode （http://www.apple.com/macosx/features/xcode/），您才能夠在MacOS X上編譯程式，如果您使用 MacOS X 10.3 Panther的話，Xcode會附在一同出貨的「軟體重新安裝」（Software Restore）光碟中，要不然，您需要成為蘋果開發者網站（Apple Developer Connection，http://developer.apple.com/）的會員，便可以從網路上下載 Xcode。然後，請從OpenVanilla 的 subversion 檔案庫取回最新的程式原始碼。
+
+最簡單取得 OV 原始程式碼的方法，是利用 MacOS X 的功能將網路硬碟掛上您的桌面，您只要用 Finder 的「前往」（Go）選單，選擇 「連接伺服器」（Connect to Server...） 、在「伺服器位置」（Server Address:）欄位填入：
+
+ http://svn.openfoundry.org/openvanilla 
+
+然後按「連接」（Connect），這時候就能夠在桌面上看到 openvanilla 硬碟圖示，Finder 還會自動打開它，這時候只要把 trunk 檔案夾拖曳到您要的地方（拖曳的時候圖示的右下應該會有綠色的十字圖樣表示拷貝動作）。動作完成後，您只需要把這個網路硬碟拖到垃圾桶上就可以終止連線。
+
+若您想使用 wget，請把下面那行貼進終端機執行：
+
+ wget -r -nH --cut-dir=2 -P ~/ov http://svn.openfoundry.org/openvanilla/trunk
+
+這樣會把最新的檔案庫抓到您個人目錄下的 ov 目錄裡。
+
+若您想使用 SVK，請參閱「如何透過 SVK 取得 Open Vanilla 的源碼」。
+
+要事先說明的是，所謂「最新版」通常會放在檔案庫的 trunk 目錄下，接下來提到的源碼所在位置就是從這裡算起，因此要是您的路徑和這裡寫的不太一致，那表示您當時取出遠端檔案庫的方式和這裡的範例不同，如需更詳細的說明，請參考「SVK 指南」。
+
+接下來，若您完全沒裝過 OpenVanilla，請打開終端機，進到源碼所在的根目錄下，編譯 OpenVanilla 輸入法框架。假設源碼所在的目錄是您個人目錄下的 "ov"：
+
+ cd ~/ov ; sudo make all install clean
+
+使用 sudo 這個指令時通常需要密碼，此時請輸入您個人的密碼即可。
+
+再來，請到 Loaders 目錄下編譯 OpenVanilla 的 Mac OS X 版輸入法載入器：
+
+ cd ~/ov/Loaders/OSX ; sudo make all install clean
+
+如果您之前已經裝過 OpenVanilla，那麼您通常只需要更新自己常用的輸入法模組即可。以 Xcin 輸入法模組為例：
+
+cd ~/ov/InputMethod/OVIMXcin ; sudo make all install clean
+
+最後，為了讓更新完全生效，請重新登入。若只是更新了某種輸入法模組，當您開啟一個新的應用程式時，輸入法載入器就會載入您已編譯成功的新版輸入法模組，然而在此之前已經開啟的應用程式中，仍會使用舊的輸入法模組；倘若您還更新了輸入法載入器或甚至是 OpenVanilla 輸入法框架，就非得重新登入不可了。
+
+=== 透過 SVK 取得 OpenVanilla 的程式原始碼 ===
+
+雖然使用上述方式，您便可以取得 OpenVanilla 的原始碼，但是我們還是建議您使用 svk 等版本管理工具，這樣當我們做了任何的更新，您都可以只要下一個指令，就能夠與檔案庫中最新的更新狀況同步。svk 提供在 MacOS X 上安裝的 dmg 檔案，只要點選安裝套件（Installer Package），便可以快速完成安裝。您可以從
+
+http://rt.openfoundry.org/Foundry/Project/Download/?Queue=82
+
+取得svk。安裝完成後請在終端機內輸入：
+
+ svk depotmap --init
+
+這會問你要不要建立 depot，打 y，接著輸入：
+
+ svk cp http://svn.openfoundry.org/openvanilla/trunk ov
+
+第一個問題按 enter 跳過，表示要映射所有 http://svn.openfoundry.org/openvanilla/trunk 裡的東西。
+
+第二個問題打 ov，表示把映射內容存到自己機器上 svn 資料庫裡的 //mirror/ov 的目錄裡。
+
+第三個問題打 a，表示要映射從古至今所有的版本。
+
+然後會需要等一陣子，svk會取得 OV 的所有版本紀錄，存放在您本機的硬碟上。等全部 copy 完後, 又會問你一個問題，要把東西 copy 到哪去，這時你還是可以打 ov，只是這個 ov 跟前個 ov 「不」一樣，這個 ov 會把東西複製到 //ov 而不是 //mirror/ov。
+
+然後會跑進某編輯器（通常是 vi 啦），隨便打幾個字吧，像「I learn svk now!」或「clkao is great!」或「svk++ ; ov++」都行...
+
+接著存檔（ESC :wq!）。
+
+現在你什麼都有了，在一個叫 ov 的目錄下，通常這個目錄會在你的個人目錄裡（/User/yourname），裡面的源碼就是最新版本了。
+
+以後要更新，在 ov 目錄下打 svk pull 即可。
+
+=== 使用 svn 取得 OpenVanilla 原始程式碼 ===
+
+使用 svn 取得 OV 原始程式碼的方法是，在終端機中下以下指令：
+
+ svk  http://svn.openfoundry.org/openvanilla/trunk
+
+基本上我們比較不鼓勵使用 svn，而建議您使用 svk。原因是在 svn會在檔案庫的每個目錄下，分別建立一個「.svn」目錄，記錄版本紀錄，如果這個目錄被刪除，就會造成 svn 無法運作。而 MacOS X 的文件格式常常使用目錄 bundle，而各種應用程式在修改目錄 bundle 形式的文件的時候，往往會刪除 .svn  目錄而造成困擾。
+
+您可以使用 fink 或 dports 安裝 svn，而，如果您安裝了 svk，其實裡頭就已經內建了一份 svn。
 
 === 特別感謝 ===
 
