@@ -198,7 +198,6 @@ void OVXcinContext::updateDisplay(OVBuffer *buf)
 int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar, 
     OVService *srv)
 {
-	cerr<<"KeyEvent:"<<static_cast<char>(key->code())<<endl;
     if (candi.onDuty())
     {
         if (!autocomposing) return candidateEvent(key, buf, textbar, srv);
@@ -262,14 +261,15 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     }
     
     // shift and capslock processing
-    if (key->isPrintable() && (key->isCapslock() || key->isShift()))
-    {    
+	// <comment author='b6s'>Shift processing is disabled.</comment>
+    if (key->isPrintable() && (key->isCapslock() /*|| key->isShift()*/))
+    {
         if (key->isCapslock())
         {
             if (key->isShift()) buf->appendChar(key->upper());
             else buf->appendChar(key->lower());
         }
-        else if (key->isShift()) buf->appendChar(key->lower());
+        //else if (key->isShift()) buf->appendChar(key->lower());
         cancelAutoCompose(textbar);
         keyseq.clear();
         buf->send();
@@ -277,7 +277,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     }
 
     if (key->isPrintable() && keyseq.valid(static_cast<char>(key->code())) &&
-        !key->isShift() && !key->isCapslock())
+		/*!key->isShift() &&*/ !key->isCapslock())
     {
         if (keyseq.length() == parent->maxSeqLen())
         {
