@@ -19,6 +19,15 @@ public:
 			if (c) buffer[i]=c;
 		}
 	}
+	
+	void simpChineseToTradChinese()
+	{
+		for (int i=0; i<len; i++)
+		{
+			unsigned short c=VXUCS2SimpToTradChinese(buffer[i]);
+			if (c) buffer[i]=c;
+		}
+	}
 };
 
 
@@ -35,11 +44,16 @@ public:
     { 
         if (cimbuf) 
         {
-			if (conversionfilter==1)
+			if (conversionfilter)
 			{
 				// we use a C++ hack here
 				VXCIMBufferFilter *f=(VXCIMBufferFilter*)cimbuf;
-				f->tradChineseToSimpChinese();
+				
+				switch (conversionfilter)
+				{
+					case 1: f->tradChineseToSimpChinese(); break;
+					case 2: f->simpChineseToTradChinese(); break;
+				}
 			}
 			
             cimbuf->update(TRUE, -1, -1, -1, lookupscript(lang), 

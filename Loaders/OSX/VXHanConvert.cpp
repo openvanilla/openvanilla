@@ -5,9 +5,9 @@
 #include "VXHanConvert.h"
 
 const size_t vxTC2SCTableSize=3214;
-// const size_t vxTC2SCTableSize=3214;
+const size_t vxSC2TCTableSize=8189;
 extern unsigned short vxTC2SCTable[];
-// extern unsigned short vxSC2TCTable[];
+extern unsigned short vxSC2TCTable[];
 
 struct VXHCData
 {
@@ -34,4 +34,9 @@ unsigned short VXHCFind(unsigned key, unsigned short *table, size_t size)
 unsigned short VXUCS2TradToSimpChinese(unsigned short c)
 {
 	return VXHCFind(c, vxTC2SCTable, vxTC2SCTableSize);
+}
+
+unsigned short VXUCS2SimpToTradChinese(unsigned short c)
+{
+	return VXHCFind(c, vxSC2TCTable, vxSC2TCTableSize);
 }
