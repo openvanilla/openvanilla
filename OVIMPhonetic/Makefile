@@ -1,5 +1,5 @@
-OBJS=OVIMPhone.o vanilladata.o vanillaphone.o
-GOALS=OVIMPhone.dylib
+OBJS=OVIMPhonetic.o vanilladata.o vanillaphone.o
+GOALS=OVIMPhonetic.dylib
 INST_PATH=/Library/OpenVanilla/Development
 CONF_PATH=$(INST_PATH)/OVXSimpleLoader.config
 
