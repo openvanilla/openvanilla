@@ -9,24 +9,33 @@
 class VXDictionary : public OVDictionary
 {
 public:
-    VXDictionary(CFDictionaryRef ref=NULL)
+    VXDictionary(CFDictionaryRef ref=NULL, int cpy=0)
     {
-        if (!ref) dict=CFDictionaryCreateMutable(kCFAllocatorDefault,
-            0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
-        else dict=CFDictionaryCreateMutableCopy(kCFAllocatorDefault,
-            0, ref);
-    }
-    
-    VXDictionary(CFDataRef ref)
-    {
+        if (!ref) dict=CFDictionaryCreateMutable(NULL, 0, 
+            &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+        else
+        {
+            if (cpy)                
+                dict=CFDictionaryCreateMutableCopy(NULL, 0, ref);
+            else
+            {   
+                dict=(CFMutableDictionaryRef)ref;
+				printf ("before retain: %d\n", CFGetRetainCount(dict));
+                CFRetain(dict);
+				printf ("after retain: %d\n", CFGetRetainCount(dict));
+
+            }
+        }
     }
     
     virtual ~VXDictionary()
     {
+		printf ("before release: %d\n", CFGetRetainCount(dict));
+
         if (dict) CFRelease(dict);
     }
 
-    virtual int keyExist(void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
+    virtual int keyExist(const void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
     {
         CFStringRef keyref=VXCreateCFString(key, e, keylen);
         if (!keyref) return 0;
@@ -35,25 +44,26 @@ public:
         return r;
     }
         
-    virtual int getInt(void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
+    virtual int getInt(const void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
     {
         int r=0;
         CFStringRef keyref=VXCreateCFString(key, e, keylen);
         if (!keyref) return 0;
-		CFNumberRef n;
-        if (!(n=(CFNumberRef)CFDictionaryGetValue(dict, keyref))) return -1;
-        CFNumberGetValue(n, kCFNumberIntType, &r);
+		CFTypeRef n;
+        if (!(n=CFDictionaryGetValue(dict, keyref))) return 0;
+        if (CFGetTypeID(n) != CFNumberGetTypeID()) return 0;
+        CFNumberGetValue((CFNumberRef)n, kCFNumberIntType, &r);
         CFRelease(keyref);
         return r; 
     }
     
-    virtual int putInt(void *key, int value, OVEncoding e=ovEncodingUTF8,
+    virtual int setInt(const void *key, int value, OVEncoding e=ovEncodingUTF8,
         int keylen=0)
     {
 		printf ("setting value=%d\n", value);
 		
         CFStringRef keyref=VXCreateCFString(key, e, keylen);
-        CFNumberRef numref=CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType,
+        CFNumberRef numref=CFNumberCreate(NULL, kCFNumberIntType,
             &value);
         if (!keyref || !numref) return 0;    
         CFDictionarySetValue(dict, keyref, numref);
@@ -62,20 +72,21 @@ public:
         return 1;
     }
             	
-	virtual int getString(void *key, void *str, OVEncoding e=ovEncodingUTF8,
+	virtual int getString(const void *key, void *str, OVEncoding e=ovEncodingUTF8,
 		int keylen=0, int maxlen=0)
     {
         CFStringRef keyref=VXCreateCFString(key, e, keylen);
         if (!keyref) return 0;
-        CFStringRef valueref;
-        if (!(valueref=(CFStringRef)CFDictionaryGetValue(dict, keyref))) return 0;
-        int r=VXConvertCFString(valueref, str, e, maxlen);
+        CFTypeRef valueref;
+        if (!(valueref=CFDictionaryGetValue(dict, keyref))) return 0;
+        if (CFGetTypeID(valueref) != CFStringGetTypeID()) return 0;
+        int r=VXConvertCFString((CFStringRef)valueref, str, e, maxlen);
         CFRelease(keyref);
         return r;
     }
     
-	virtual int putString(void *key, void *value, OVEncoding e=ovEncodingUTF8,
-		int keylen=0, int valuelen=0) 
+	virtual int setString(const void *key, const void *value, OVEncoding
+	    e=ovEncodingUTF8, int keylen=0, int valuelen=0) 
     { 
         CFStringRef keyref=VXCreateCFString(key, e, keylen);
         CFStringRef valueref=VXCreateCFString(value, e, valuelen);
@@ -86,36 +97,70 @@ public:
         return 1;
     }
 
-    virtual CFDictionaryRef getdictref() { return dict; }
-    
-    virtual CFDictionaryRef getDictionary(void *key, OVEncoding e=ovEncodingUTF8,
+    virtual int newDictionary(const void *key, OVEncoding e=ovEncodingUTF8, 
         int keylen=0)
     {
         CFStringRef keyref=VXCreateCFString(key, e, keylen);
-        if (!keyref) return 0;
-        CFDictionaryRef r=(CFDictionaryRef)CFDictionaryGetValue(dict, keyref);
-        CFRelease(keyref);
-        return ;
-
-    }
-    
-	virtual int putDictionary(void *key, CFDictionaryRef dref, 
-        OVEncoding e=ovEncodingUTF8, int keylen=0, int valuelen=0) 
-    {
-        CFStringRef keyref=VXCreateCFString(key, e, keylen);
-        if (!keyref) return 0;
-        CFDictionarySetValue(dict, keyref, dref);
+        if (!keyref) return 0;        
+        VXDictionary newdict;        
+        CFDictionarySetValue(dict, keyref, newdict.getDictRef());
         CFRelease(keyref);
         return 1;
     }
 
-    virtual CFDataRef createxml()
+    virtual OVDictionary* getDictionary(const void *key, OVEncoding 
+        e=ovEncodingUTF8, int keylen=0)
     {
-        return CFPropertyListCreateXMLData(kCFAllocatorDefault, dict);
+        CFStringRef keyref=VXCreateCFString(key, e, keylen);
+        if (!keyref) return NULL;
+        CFTypeRef r=CFDictionaryGetValue(dict, keyref);
+        if (!r) return NULL;
+        if (CFGetTypeID(r) != CFDictionaryGetTypeID()) return NULL;
+        CFRelease(keyref);
+        VXDictionary *dict=new VXDictionary((CFDictionaryRef)r);
+        return dict;
+    }
+    
+    virtual CFDictionaryRef getDictRef() { return dict; }
+
+    virtual CFDataRef createXML()
+    {
+        return CFPropertyListCreateXMLData(NULL, dict);
     }
 
-    
+    virtual int writeToURL(CFURLRef url)
+    {
+        Boolean status;
+        SInt32 errcode;
+        
+        CFDataRef data=createXML();
+        if (!data) return 0;
+        
+        status=CFURLWriteDataAndPropertiesToResource(url, data, NULL, &errcode);
+        CFRelease(data);
+        return status;
+    }
 
+
+    virtual int readFromURL(CFURLRef url)
+    {
+        SInt32 errcode;
+        CFDataRef data;
+        Boolean status=CFURLCreateDataAndPropertiesFromResource(NULL,
+            url, &data, NULL, NULL, &errcode);
+        if (!status) return 0;
+        
+        CFPropertyListRef p=CFPropertyListCreateFromXMLData
+            (NULL, data,  kCFPropertyListMutableContainersAndLeaves, NULL);
+        CFRelease(data);
+        
+        if (!p) return 0;
+        if (CFGetTypeID(p) != CFDictionaryGetTypeID()) return 0;
+        
+        if (dict) CFRelease(dict);
+        dict=(CFMutableDictionaryRef)p;
+        return 1;
+    }
 
 protected:
     CFMutableDictionaryRef dict;

@@ -4,7 +4,7 @@
 
 const int VXDefMaxLen=1024;
 CFStringEncoding VXMapEncoding(OVEncoding e);
-CFStringRef VXCreateCFStringNon8BitEncoding(void *s, OVEncoding e, int l);
+CFStringRef VXCreateCFStringNon8BitEncoding(const void *s, OVEncoding e, int l);
 int VXConvertCFStringNon8BitEncoding(CFStringRef ref, void *s,
 	OVEncoding e, int l);
 
@@ -22,7 +22,7 @@ CFStringEncoding VXMapEncoding(OVEncoding e)
     return enc;
 }
 
-CFStringRef VXCreateCFString(void *s, OVEncoding e, int l)
+CFStringRef VXCreateCFString(const void *s, OVEncoding e, int l)
 {
     if (e & ovEncodingNon8BitEncodingMask)
         return VXCreateCFStringNon8BitEncoding(s, e, l);
@@ -32,7 +32,7 @@ CFStringRef VXCreateCFString(void *s, OVEncoding e, int l)
 
 
 #warning Architecture-dependent code (currently only for big-endian machines)
-CFStringRef VXCreateCFStringNon8BitEncoding(void *s, OVEncoding e, int l)
+CFStringRef VXCreateCFStringNon8BitEncoding(const void *s, OVEncoding e, int l)
 {    
     switch (e)
     {
@@ -71,5 +71,21 @@ int VXConvertCFStringNon8BitEncoding(CFStringRef ref, void *s, OVEncoding e,
     return 0;
 }
 
-
-
+CFURLRef VXCreateURL(char *localfilename)
+{
+    CFMutableStringRef str=CFStringCreateMutable(NULL, 0);
+    if (!str) return NULL;
+    
+    CFStringRef filename=VXCreateCFString(localfilename);
+    if (!filename) return NULL;
+    
+    CFStringAppendCString(str, "file://", kCFStringEncodingUTF8);
+    CFStringAppend(str, filename);
+    
+    CFURLRef url=CFURLCreateWithString(NULL, str, NULL);
+    
+    CFRelease(filename);
+    CFRelease(str);
+    
+    return url;
+}

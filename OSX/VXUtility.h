@@ -7,8 +7,10 @@
 #include "OpenVanilla/OpenVanilla.h"
 #include "OpenVanilla/OVUtility.h"
 
-CFStringRef VXCreateCFString(void *s, OVEncoding e=ovEncodingUTF8, int l=0);
+CFStringRef VXCreateCFString(const void *s, OVEncoding e=ovEncodingUTF8, int l=0);
 int VXConvertCFString(CFStringRef ref, void *s, OVEncoding e=ovEncodingUTF8, 
     int maxlen=0);
+
+CFURLRef VXCreateURL(char *localfilename);
 
 #endif

@@ -105,8 +105,8 @@ public:
             	
 	virtual int getString(const void *key, void *str, OVEncoding e=ovEncodingUTF8,
 		int keylen=0, int maxlen=0) { return 0; }
-	virtual int setString(const void *key, void *value, OVEncoding e=ovEncodingUTF8,
-		int keylen=0, int valuelen=0) { return 0; }
+	virtual int setString(const void *key, const void *value, 
+        OVEncoding e=ovEncodingUTF8, int keylen=0, int valuelen=0) { return 0; }
 		
     virtual int newDictionary(const void *key, OVEncoding e=ovEncodingUTF8, 
         int keylen=0) { return 0; }
