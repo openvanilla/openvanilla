@@ -5,9 +5,12 @@ http://openvanilla.org/
 
 == 0.6.3 ==
 
-* 新增藏文輸入法。使用的是 Sambhota 藏文鍵盤，關於 Sambhota 鍵盤的完整說明請參見
- http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf
+* 解決 FixtextService 的相關問題
+* 增加選字窗自訂配色功能與相關偏好設定選項
+* 新增藏文輸入法，支援Sambhota Keymap One、TCC Keyboard #1以及TCC Keyboard #2三種鍵盤配置，並提供切換鍵盤配置的偏好設定選項
 * 新增Unicode輸入法
+* 新增客家POJ輸入法
+* 修正行列輸入法的選字換頁按鍵問題
 * 修正Xcin模組的標點符號問題
 
 == 0.6.2 ==
