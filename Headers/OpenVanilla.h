@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-const unsigned int ovVersion=0x0000ffff;
+const unsigned int ovVersion=0x00600200;    // for 0.6.2 (0x00,0x06,0x02,0x00)
 
 class OVObject
 {

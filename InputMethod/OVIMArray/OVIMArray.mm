@@ -75,7 +75,7 @@ OVIMXcin::OVIMXcin(char *lpath, char *cfile, char *en, char *cn,
     cintab=NULL;
    
     cnameencoding=enc;
-    strcpy(ename, "OV Array30 IM");
+    strcpy(ename, "OV Array30");
     strcpy(cname, "OV 行列");
 }
 

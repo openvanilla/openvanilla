@@ -37,9 +37,9 @@ public:
 };
 
 const int vxMaxContext = 256;
-const char *defaultplistfile  = "/Library/OpenVanilla/0.6.1/OVLoader.plist";
+const char *defaultplistfile  = "/Library/OpenVanilla/0.6.2/OVLoader.plist";
 char userplistfile[PATH_MAX];
-const char *loaddir    = "/Library/OpenVanilla/0.6.1/";
+const char *loaddir    = "/Library/OpenVanilla/0.6.2/";
 
 int floatingwindowlock=0, defposx, defposy, textsize=20, conversionfilter=0, fullwidthfilter=0;
 int listloaded=0;
@@ -187,7 +187,7 @@ void SwitchToCurrentInputMethod(MenuRef mnu,OVDictionary *global) {
 
 void CreateUserConfig()
 {	
-	// first we determine if ~/Library/OpenVanilla/0.6.1/ already exists
+	// first we determine if ~/Library/OpenVanilla/0.6.2/ already exists
 	
 	char *ptr;
     static char userpref[PATH_MAX];
@@ -202,7 +202,7 @@ void CreateUserConfig()
 
     strcat(userpref, "/Library/OpenVanilla") ;
     mkdir(userpref, S_IRWXU) ;
-    strcat(userpref, "/0.6.1");
+    strcat(userpref, "/0.6.2");
     mkdir(userpref, S_IRWXU) ;
 
 	strcat(userpref, "/OVLoader.plist");
@@ -210,7 +210,7 @@ void CreateUserConfig()
 	
 	struct stat filestat;
 	
-	// if ~/Lib/OV/0.6.1/OVLoader.plist does not exist, copy from default
+	// if ~/Lib/OV/0.6.2/OVLoader.plist does not exist, copy from default
 	if (stat(userpref, &filestat))         // any error
 	{
 		VXConfig def(defaultplistfile);

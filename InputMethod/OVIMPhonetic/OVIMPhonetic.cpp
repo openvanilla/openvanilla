@@ -103,8 +103,10 @@ public:
         *enc=ovEncodingUTF8;
         if (!strcasecmp(locale, "zh_TW"))
             return strlen(strcpy((char*)s, "OV 注音"));
+        else if (!strcasecmp(locale, "zh_CN"))
+            return strlen(strcpy((char*)s, "OV 正体注音"));
         else
-            return strlen(strcpy((char*)s, "OV Phonetic IM"));
+            return strlen(strcpy((char*)s, "OV Phonetic (Bopomofo)"));
     }
 
     virtual int initialize(OVDictionary* g, OVDictionary* l, OVService*, char*)

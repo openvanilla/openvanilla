@@ -51,8 +51,10 @@ public:
         *enc=ovEncodingUTF8;
         if (!strcasecmp(locale, "zh_TW"))
             return strlen(strcpy((char*)s, "OV 英數"));
+        if (!strcasecmp(locale, "zh_CN"))
+            return strlen(strcpy((char*)s, "OV 英数"));
         else
-            return strlen(strcpy((char*)s, "OV English"));
+            return strlen(strcpy((char*)s, "OV Roman"));
     }
 
     virtual int initialize(OVDictionary*, OVDictionary*, OVService*, char*)

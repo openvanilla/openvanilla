@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <pwd.h>
 
-const char *defaultplistfile  = "/Library/OpenVanilla/0.6.1/OVLoader.plist";
+const char *defaultplistfile  = "/Library/OpenVanilla/0.6.2/OVLoader.plist";
 
 @implementation OpenVanillaPreferencePane
 
@@ -79,7 +79,7 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.1/OVLoader.plist";
 
 -(void)createUserConfig
 {	
-	// first we determine if ~/Library/OpenVanilla/0.6.1/ already exists
+	// first we determine if ~/Library/OpenVanilla/0.6.2/ already exists
 	
 	char *ptr;    
     if (!(ptr=getenv("HOME")))
@@ -92,7 +92,7 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.1/OVLoader.plist";
 
     strcat(userpref, "/Library/OpenVanilla") ;
     mkdir(userpref, S_IRWXU) ;
-    strcat(userpref, "/0.6.1");
+    strcat(userpref, "/0.6.2");
     mkdir(userpref, S_IRWXU) ;
 
 	strcat(userpref, "/OVLoader.plist");
@@ -100,7 +100,7 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.1/OVLoader.plist";
 	
 	struct stat filestat;
 	
-	// if ~/Lib/OV/0.6.1/OVLoader.plist does not exist, copy from default
+	// if ~/Lib/OV/0.6.2/OVLoader.plist does not exist, copy from default
 	if (stat(userpref, &filestat))         // any error
 	{
 		VXConfig def(defaultplistfile);

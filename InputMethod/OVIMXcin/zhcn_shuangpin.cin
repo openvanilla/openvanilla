@@ -1,6 +1,6 @@
 %gen_inp
-%ename [CN]ShuangPin
-%cname [簡]雙拼
+%ename [CN]Shuangpin
+%cname 简体双拼 
 %selkey 1234567890
 %keyname begin
 a a

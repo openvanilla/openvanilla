@@ -51,6 +51,7 @@
 				French,
 				German,
 				zh_TW,
+				zh_CN,
 			);
 			mainGroup = 089C166AFE841209C02AAC07;
 			projectDirPath = "";
@@ -259,10 +260,19 @@
 			settings = {
 			};
 		};
+		6A4CA935077A479B001E465F = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = zh_CN;
+			path = zh_CN.lproj/OVPrefPane.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
 		6A9738D80772BCA400BF0F52 = {
 			children = (
 				6A9738D90772BCA400BF0F52,
 				6AD36CA40773217300E3BB73,
+				6A4CA935077A479B001E465F,
 			);
 			isa = PBXVariantGroup;
 			name = OVPrefPane.nib;

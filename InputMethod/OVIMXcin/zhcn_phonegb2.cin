@@ -1,6 +1,6 @@
 %gen_inp
 %ename [CN]Phonetic
-%cname [簡]注音
+%cname 简体注音
 %encoding UTF-8
 %selkey 1234567890
 %endkey 3467

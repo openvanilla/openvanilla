@@ -78,15 +78,19 @@ public:
         {
 	        if (!strcasecmp(locale, "zh_TW"))
     	        return strlen(strcpy((char*)s, "OV 倉頡"));
-        	else
-            	return strlen(strcpy((char*)s, "OV Cangjei IM"));
+        	else if (!strcasecmp(locale, "zh_CN"))
+                return strlen(strcpy((char*)s, "OV 正体仓颉"));
+            else
+            	return strlen(strcpy((char*)s, "OV Cangjei"));
         }
         else
         {
 	        if (!strcasecmp(locale, "zh_TW"))
     	        return strlen(strcpy((char*)s, "OV 簡易"));
+        	else if (!strcasecmp(locale, "zh_CN"))
+                return strlen(strcpy((char*)s, "OV 正体简易"));
         	else
-            	return strlen(strcpy((char*)s, "OV Simplex IM"));
+            	return strlen(strcpy((char*)s, "OV Simplex (Jianyi)"));
         }        
     }
 

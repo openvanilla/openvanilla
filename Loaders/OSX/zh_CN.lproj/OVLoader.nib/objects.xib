@@ -6,8 +6,8 @@
   </object>
   <array count="6" name="allObjects">
     <object class="IBCarbonWindow" id="186">
-      <string name="windowRect">549 -12 746 384 </string>
-      <string name="title">說到 OpenVanilla 0.6.2 ...</string>
+      <string name="windowRect">268 231 465 627 </string>
+      <string name="title">关于 OpenVanilla 0.6.2</string>
       <object name="rootControl" class="IBCarbonRootControl" id="187">
         <string name="bounds">0 0 197 396 </string>
         <string name="viewFrame">0 0 396 197 </string>
@@ -15,7 +15,7 @@
           <object class="IBCarbonStaticText" id="193">
             <string name="bounds">20 20 36 376 </string>
             <string name="viewFrame">20 20 356 16 </string>
-            <string name="title">OpenVanilla 輸入法載入器 0.6.2 / Mac OS X</string>
+            <string name="title">OpenVanilla 输入法载入器 0.6.2 / Mac OS X</string>
             <int name="justification">-2</int>
           </object>
           <object class="IBCarbonStaticText" id="194">
@@ -26,7 +26,7 @@
           <object class="IBCarbonStaticText" id="195">
             <string name="bounds">101 20 141 376 </string>
             <string name="viewFrame">20 101 356 40 </string>
-            <string name="title">本軟體為開放源碼 (open source) 軟體，採用 Artistic License 釋出。相關權利義務，請參閱授權條款原文。</string>
+            <string name="title">本软件为开放源代码 (open source) 软件，采用 Artistic License 释出。相关权利义务，请参阅授权条款原文。</string>
           </object>
           <object class="IBCarbonStaticText" id="196">
             <string name="bounds">149 20 177 376 </string>

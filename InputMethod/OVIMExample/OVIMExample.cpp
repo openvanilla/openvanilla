@@ -88,9 +88,11 @@ public:
     {
         *enc=ovEncodingUTF8;
         if (!strcasecmp(locale, "zh_TW"))
-            return strlen(strcpy((char*)s, "OpenVanilla輸入法範例"));
+            return strlen(strcpy((char*)s, "OV 輸入法範例程式"));
+        else if (!strcasecmp(locale, "zh_CN"))
+            return strlen(strcpy((char*)s, "OV 输入法范例程式"));
         else
-            return strlen(strcpy((char*)s, "OpenVanilla Example IM"));
+            return strlen(strcpy((char*)s, "OV Example"));
     }
 
     virtual int initialize(OVDictionary*, OVDictionary*, OVService*, char*)
