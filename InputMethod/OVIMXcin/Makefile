@@ -1,4 +1,5 @@
-OBJS=OVIMXcin.o VXCIN.o VXUtility.o VXCandidate.o XcinCinList.o
+OBJS=OVCIN.o OVCandidate.o OVFileHandler.o OVIMXcin.o OVStringToolKit.o XcinCinList.o
+
 GOALS=OVIMXcin.dylib 
 
 $(GOALS): $(OBJS)
