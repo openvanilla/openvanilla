@@ -9,6 +9,10 @@ http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf for 
 
 class OVTibetanIM;
 
+#define VOWEL 2
+#define CONSONAT 1
+#define OTHER 0
+
 const int ebMaxKeySeq=10;
 class KeySeq
 {
@@ -26,8 +30,9 @@ void remove()
 	buf[--len]=0;
 }
 void clear() { len=0; buf[0]=0; }
-void lastisword() {last= 1;}
-void lastisnotword() {last= 0;}
+void lastisvowel() {last=VOWEL;}
+void lastisconsonant() {last=CONSONAT;}
+void lastisother() {last=OTHER;}
 char buf[ebMaxKeySeq];
 int len;
 int last;
@@ -36,6 +41,8 @@ int last;
 #define SYMBOL_NUM 10
 #define CONSONAT_NUM 37
 #define VOWEL_NUM 8
+
+char ComposeKey = 'f';
 
 char SymbolKeys[SYMBOL_NUM] = 
 {
@@ -122,7 +129,7 @@ public:
     virtual int activate(OVService *)
     {
 		keyseq.clear();
-		keyseq.lastisnotword();
+		keyseq.lastisother();
         return 1;
     }
     
@@ -135,6 +142,7 @@ public:
         OVService *srv)
     {
 		unsigned short i;
+		short j = -1;
 		
 		if (key->isOpt() || key->isCommand() || key->isCtrl())
         {
@@ -146,7 +154,7 @@ public:
             if (!keyseq.len) return 0;   // if buffer is empty, don't process
 			buf->send()->clear();
 			keyseq.clear();
-			keyseq.lastisword();
+			keyseq.lastisother();
 			textbar->hide();
             return 1;   // key processed
         }
@@ -154,16 +162,16 @@ public:
 		if (key->isCode(4, ovkUp, ovkDown, ovkLeft, ovkRight)) //Lock when composing
 		{ 
 			if(!keyseq.len) return 0;
-			keyseq.lastisnotword();
-			return 1;
+			keyseq.lastisother();
+			return 1;	// key processed
 		}
 		
-		if (key->isCode(1, ovkSpace)) //Space to keyin Tibetan common.
+		if (key->isCode(1, ovkSpace)) //Space to keyin Tibetan seperator.
         {
 			i = 0x0F0B;
 			buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 			keyseq.clear();
-			keyseq.lastisword();
+			keyseq.lastisother();
 			textbar->hide();
             return 1;   // key processed
         }
@@ -171,40 +179,35 @@ public:
 		if (key->isCode(2, ovkDelete, ovkBackspace))
 		{
 			if(!keyseq.len) return 0;
-			keyseq.clear();
-			keyseq.lastisnotword();
 			buf->clear()->update();
+			keyseq.clear();
+			keyseq.lastisother();
 			textbar->hide();
 			return 1;
 		}
 		
         if (key->isPrintable())
-        {
-			int isSymbol = -1, isVowel = -1, isConsonant = -1, isConsonantPrev = -1;
-			
+        {			
 			if(key->code() == '.') // Keyin a space.
 			{ 
-				i = 0x0F20 + (key->code() - '0');
 				buf->append((char *)" ")->send();
 				keyseq.clear();
-				keyseq.lastisnotword();
+				keyseq.lastisother();
 				textbar->hide();
 				return 1;   // key processed
 			}
 			
-			if(key->code() == 'f' || key->code() == 'F')	// 如果是 f
+			if(key->code() == ComposeKey)	// Compose key
 			{ 
-				if(keyseq.buf[0] == 'f')
+				buf->send()->clear();
+				keyseq.clear();
+				if(keyseq.buf[0] == ComposeKey) //End Composing
 				{
-					buf->send()->clear();
-					keyseq.clear();
-					keyseq.lastisword();
+					keyseq.lastisconsonant();
 					textbar->hide();
-				} else{
-					buf->send()->clear();
-					keyseq.clear();
-					keyseq.lastisnotword();
-					keyseq.add('f');
+				} else { //Begin Composing
+					keyseq.lastisother();
+					keyseq.add(ComposeKey);
 					textbar->clear()->append((char *)"Composing...")->show();
 				}
 				return 1;   // key processed
@@ -216,68 +219,55 @@ public:
 					i = (key->code() == '%') ? 0x0F82 : 0x0F7E;
 					buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 					keyseq.clear();
-					keyseq.lastisnotword();
+					keyseq.lastisother();
 					textbar->hide();
 				}
 			}
-			if(key->code() >= '0' && key->code() <= '9')	// 輸入的是數字，直接送出
+			if(key->code() >= '0' && key->code() <= '9')	// Numbers
 			{ 
 				i = 0x0F20 + (key->code() - '0');
 				buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 				keyseq.clear();
-				keyseq.lastisnotword();
+				keyseq.lastisother();
 				textbar->hide();
 				return 1;   // key processed
 			}
-			if((isSymbol = isSymbolKey(key->code())) > -1) // 輸入的是符號
+			if((j = isSymbolKey(key->code())) > -1) // Symbols
 			{
-				i = SymbolChars[isSymbol];
+				i = SymbolChars[j];
 				buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 				keyseq.clear();
-				keyseq.lastisnotword();
+				keyseq.lastisother();
 				textbar->hide();
 				return 1;   // key processed
 			}
-			if((isVowel = isVowelKey(key->code())) > -1)	// 輸入的是母音
+			if((j = isVowelKey(key->code())) > -1)	// Vowels
 			{ 
-				if(keyseq.buf[0] &&
-				   (isConsonantKey(keyseq.buf[0]) > -1 || keyseq.buf[0] == 'f'))
+				if(keyseq.last == 1 || (keyseq.buf[0] == ComposeKey && keyseq.len > 3))
 				{
-					i = VowelChars[isVowel];
+					i = VowelChars[j];
 					buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 					keyseq.clear();
-					keyseq.lastisword();
+					keyseq.lastisvowel();
 					textbar->hide();
 				}
 				return 1;   // key processed
 			}
-			if((isConsonant = isConsonantKey(key->code())) > -1) // 輸入的是子音
+			if((j = isConsonantKey(key->code())) > -1) // Consonant
 			{ 
-				if(keyseq.buf[0] == 'f') 
+				i = ConsonantChars[j];
+				keyseq.lastisconsonant();
+				if(keyseq.buf[0] == ComposeKey && keyseq.len < 4) 
 				{
-					if(keyseq.len < 4)
-					{
-						i = ConsonantChars[isConsonant];
-						if(keyseq.len > 1)
-							i = i + 0x50; // 加了50就會變成sub的字母囉！
-						buf->append(&i, ovEncodingUTF16Auto, 1)->update();
-						keyseq.add(key->code());
-						return 1;
-					} else {
-					buf->send()->clear();
-					keyseq.clear();
-					keyseq.lastisword();
-					textbar->hide();
-					}
-				} else if((isConsonantPrev = isConsonantKey(keyseq.buf[0])) > -1) {
-					//前一個也是子音，把前一個送出
-					buf->send()->clear();
-					keyseq.clear();
-					textbar->hide();
+					if(keyseq.len > 1)
+						i = i + 0x50; // Sub characters.
+					buf->append(&i, ovEncodingUTF16Auto, 1)->update();
+					keyseq.add(key->code());
+					return 1;
 				} 
-				i = ConsonantChars[isConsonant];
-				buf->append(&i, ovEncodingUTF16Auto, 1)->update();
-				keyseq.add(key->code());
+				buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
+				keyseq.clear();
+				textbar->hide();
 				return 1;   // key processed
 			}
 			return 1;
@@ -304,11 +294,11 @@ public:
     {
         *enc=ovEncodingUTF8;
         if (!strcasecmp(locale, "zh_TW"))
-            return strlen(strcpy((char*)s, "OV 藏文 (Sambhota鍵盤)"));
+            return strlen(strcpy((char*)s, "OV 藏文(Sambhota Keymap One)"));
         else if (!strcasecmp(locale, "zh_CN"))
-            return strlen(strcpy((char*)s, "OV 藏文 (Sambhota键盘)"));
+            return strlen(strcpy((char*)s, "OV 藏文(Sambhota Keymap One)"));
         else
-            return strlen(strcpy((char*)s, "OV Tibetan (Sambhota Keyboard One)"));
+            return strlen(strcpy((char*)s, "OV Tibetan(Sambhota Keymap One)"));
     }
 
     virtual int initialize(OVDictionary*, OVDictionary*, OVService*, char*)
