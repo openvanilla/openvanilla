@@ -26,7 +26,7 @@ public:
     OVCandidate* pageUp();
     OVCandidate* pageDown();
     bool select(char inKey, string& outStringRef);
-    
+	const char* getSelKey() { return selkey; }
 protected:
     int onduty;
     char selkey[32];

@@ -161,10 +161,7 @@ int OVIMXcin::update(OVDictionary* global, OVDictionary* local)
 		doShiftSelKey = false;
 	else
 		doShiftSelKey = true;
-	
-	cerr<<"sk:"<<local->getInt(sk)<<endl;
-	cerr<<"doShiftSelKey:"<<doShiftSelKey<<endl;
-	
+
     return 1;
 }
 
@@ -400,7 +397,7 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     // space (when candidate list has only one page) == first candidate
     char c=key->code();
     if (key->isCode(2, ovkReturn, ovkMacEnter) || 
-        (candi.onePage() && key->code()==ovkSpace)) c=cintab->getSelKey()[0];
+        (candi.onePage() && key->code()==ovkSpace)) c=candi.getSelKey()[0];
 
     string output;
     if (candi.select(c, output)) {
