@@ -1,4 +1,4 @@
-// OVIMExample.cpp
+// OVIMExample.mm
 
 #include <Cocoa/Cocoa.h>
 #include "openvanilla.h"
@@ -9,19 +9,6 @@ extern "C" void _init()
 {
     pool=[NSAutoreleasePool new];
     if (pool) fprintf (stderr, "initializing dylib, creating autorelease pool\n");
-}
-
-// this will NEVER be called as Darwin never dlclose() a .dylib
-// see https://svn.r-project.org/R/trunk/src/unix/dlfcn-darwin.c
-// for the source code of Darwin's dlopen() and dlclose()
-extern "C" void _fini()
-{
-    fprintf (stderr, "closing dylib by _fini\n");
-    if (pool) 
-    {
-        fprintf (stderr, "releasing autorelease pool\n");
-//        [pool release];
-    } 
 }
 
 id MakeNSStr(char *s)
@@ -44,7 +31,7 @@ DayiTable ReadDayi(char *fname)
     FILE *in=fopen(fname, "r");
     if (!in) return tab;
     
-    fprintf (stderr, "reading dayi3.cin\n");
+    fprintf (stderr, "reading %s\n", fname);
     
     tab.keytable=[NSMutableDictionary new];
     tab.chartable=[NSMutableDictionary new];
@@ -63,8 +50,9 @@ DayiTable ReadDayi(char *fname)
         // printf ("key=%s, value=%s\n", key, value);
 
         if (!strcmp(key, "%selkey"))
-        {
-            strcpy(tab.selkey, value);
+        {   
+            strcpy(tab.selkey, " ");
+            strcat(tab.selkey, value);
             printf ("selkey=%s\n", tab.selkey);
         }
 
@@ -159,35 +147,66 @@ public:
  
         if (candi)
         {
-            if (key->code()==ovkEscape)
+            int keycode=key->uppercode();
+            if (keycode==ovkReturn) keycode=ovkSpace;
+        
+            if (keycode==ovkEscape)
             {
                 textbar->hide();
                 delkeyseq();
-                buf->clear()->updatedisplay();
+                buf->clear()->updatedisplay(ovLangTradChinese);
                 candi=0;
                 return 1;
             }
-            
-            int i, l=strlen(tab->selkey);
+
+            int i, nextsend=0, l=strlen(tab->selkey);
             // fprintf (stderr, "searching selkey=%s, len=%d\n", tab->selkey, l);
 
-            for (i=0; i<l; i++) if (key->code()==tab->selkey[i]) break;
+            for (i=0; i<l; i++) if (keycode==tab->selkey[i]) break;
             // fprintf (stderr, "index=%d, candistr_length=%d\n", i, [(NSString*)candistr length]);
             if (i==l || i >[(NSString*)candistr length]) 
             {
-                return 1;
+                // test if char key
+                char bbuf[2];
+                bbuf[1]=0;
+                bbuf[0]=key->uppercode();
+        
+                id ss=[NSString stringWithCString: bbuf];
+                id vvv=[tab->keytable objectForKey: ss];
+                if (vvv)
+                {
+                    i=0;
+                    nextsend=1;
+                }
+                else return 1;
             }
-            
+                 
             NSRange r;
             r.location=i;
             r.length=1;
             id v=[candistr substringWithRange: r];
-            buf->clear()->append([v UTF8String])->send();
+            buf->clear()->append([v UTF8String])->send(ovLangTradChinese);
+            
+            if (nextsend)
+            {
+                addkeyseq(key->uppercode());
+                updatekeyseqdisplay(buf);
+                if (key->code()=='=') goto SPAGHETTI;
+
+            }
+            
             textbar->hide();
             candi=0;
             return 1;
         }
         
+ 
+        if (key->code()==ovkEscape)
+        {
+            buf->clear()->updatedisplay();
+            clearkeyseq();
+            return 1;
+        }
  
         if (key->iscode(2, ovkDelete, ovkBackspace))
         {
@@ -199,6 +218,7 @@ public:
         
         if (key->code()==ovkSpace)
         {
+SPAGHETTI:
             if (!keyseqlen) return 0;
             
             fprintf (stderr, "query string=%s ", keyseq);
@@ -216,12 +236,12 @@ public:
                     textbar->show();
                     textbar->clear()->append([v UTF8String]);
                     textbar->update();
-                    buf->clear()->append("？")->updatedisplay();
+                    buf->clear()->append("？")->updatedisplay(ovLangTradChinese);
                     return 1;
                 }
             
                 fprintf (stderr, "result=%s", [v UTF8String]);
-                buf->clear()->append([v UTF8String])->send();
+                buf->clear()->append([v UTF8String])->send(ovLangTradChinese);
                 clearkeyseq();
             }
             fprintf (stderr, "\n");
@@ -233,14 +253,28 @@ public:
         {
             if (!keyseqlen) return 0;
             clearkeyseq();
-            buf->send();
+            buf->send(ovLangTradChinese);
             return 1;
         }
     
         if (key->isprintable())
         {
+            if (key->isshift())
+            {
+                char bbuf[3];
+                bbuf[1]=0;
+                bbuf[0]=key->lowercode();
+                buf->clear()->append(bbuf)->send();
+                return 1;
+            }
+            
+            
+            if (key->iscapslock()) return 0;
+
             addkeyseq(key->uppercode());
             updatekeyseqdisplay(buf);
+            
+            if (key->code()=='=') goto SPAGHETTI;
             return 1;
         }    
  
@@ -323,7 +357,7 @@ public:
     OVExampleIM()
     {
         fprintf (stderr, "new IM instance created\n");
-        tab=ReadDayi("/tmp/dayi3.cin");
+        tab=ReadDayi("/tmp/dayi3.cin"); // XXX hard-coded path
 
         fprintf (stderr, "creating new per-instance autorelease pool\n");
         pool=[[NSAutoreleasePool alloc] init];
