@@ -62,26 +62,25 @@ bool OVCIN::isEndKey(char keyChar)
 		return false;
 }
 
-vector<string> OVCIN::getCharVectorByKey(string key)
+int OVCIN::getCharVectorByKey(string inKey,
+							  vector<string>& outStringVectorRef)
 {
-	return getVectorFromMap(keyMap, key);
+	return getVectorFromMap(keyMap, inKey, outStringVectorRef);
 }
 
-vector<string> OVCIN::getWordVectorByChar(string key)
+int OVCIN::getWordVectorByChar(string inKey,
+							   vector<string>& outStringVectorRef)
 {
-	return getVectorFromMap(charMap, key);
+	return getVectorFromMap(charMap, inKey, outStringVectorRef);
 }
 
-vector<string> OVCIN::getVectorFromMap(map< string, vector<string> >& inMapRef,
-									  string key)
+int OVCIN::getVectorFromMap(map< string, vector<string> >& inMapRef,
+							string inKey,
+							vector<string>& outStringVectorRef)
 {
-	if(inMapRef[key].size() > 0)
-		return inMapRef[key];
-	else {
-		vector<string> selfVector;
-		selfVector.push_back(key);
-		return selfVector;
-	}
+	outStringVectorRef = inMapRef[inKey];
+	
+	return inMapRef[inKey].size();
 }
  
 string OVCIN::getPropertyByName(vector<string>& inStringVectorRef,
@@ -164,19 +163,25 @@ int main(int argc, char**argv)
 	string inKey;
 	cout << "key:";
 	cin >> inKey;
-	vector<string> charVector = ovcin.getCharVectorByKey(inKey);	
-	for(int i = 0; i < charVector.size(); i++)
-		cout << "keyMap[\"" + inKey + "\"] = " << charVector[i] << endl;
-	charVector.clear();
+	vector<string> charVector;
+	int charVectorSize = ovcin.getCharVectorByKey(inKey, charVector);
+	if(charVectorSize > 0)
+		for(int i = 0; i < charVectorSize; i++)
+			cout << "keyMap[\"" + inKey + "\"] = " << charVector[i] << endl;
+	else
+		cout << "Not found." << endl;
 	inKey.clear();
 
 	string inChar;
 	cout << "char:";
 	cin >> inChar;
-	vector<string> wordVector = ovcin.getWordVectorByChar(inChar);
-	for(int j = 0; j < wordVector.size(); j++)
-		cout << "charMap[\"" + inChar + "\"] = " << wordVector[j] << endl;
-	wordVector.clear();
+	vector<string> wordVector;
+	int wordVectorSize = ovcin.getWordVectorByChar(inChar, wordVector);
+	if(wordVectorSize > 0)
+		for(int j = 0; j < wordVectorSize; j++)
+			cout << "charMap[\"" + inChar + "\"] = " << wordVector[j] << endl;
+	else
+		cout << "Not found." << endl;
 	inChar.clear();
 	
 	return 0;
