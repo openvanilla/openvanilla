@@ -1,9 +1,13 @@
 // VXTextBar.cpp
 
+#define OVDEBUG 1
+
 #include "VXTextBar.h"
 #include "VXUtility.h"
 
 void VXTBSetRect(Rect *r, int fontsize, int textlen);
+void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString);
+
 void VXTBFixPosition(Point *p, int width, int height);
 
 VXTextBar::VXTextBar(int fsize) : fontsize(fsize)
@@ -14,10 +18,10 @@ VXTextBar::VXTextBar(int fsize) : fontsize(fsize)
     CFStringAppendCString(text, " ", kCFStringEncodingMacRoman);
     
     // create window rectanble
-	Rect windowrect, labelrect;
-	SetRect(&labelrect, 0, 0, 24, 10);
-	SetRect(&windowrect, 100, 100, 200, 40);
-//	windowrect=labelrect;
+    Rect windowrect, labelrect;
+    SetRect(&labelrect, 0, 0, 24, 10);
+    SetRect(&windowrect, 100, 100, 200, 40);
+    // windowrect=labelrect;
         
     if (CreateNewWindow(kUtilityWindowClass, 
         kWindowStandardHandlerAttribute | kWindowMetalAttribute |   
@@ -29,7 +33,7 @@ VXTextBar::VXTextBar(int fsize) : fontsize(fsize)
     ControlFontStyleRec fontstyle;
     fontstyle.flags=kControlUseSizeMask;
     fontstyle.size=vxtbDefFontSize;
-    
+
     CreateStaticTextControl(window, &labelrect, text, &fontstyle, &label);
     MoveWindow(window, windowrect.left, windowrect.top, true);
 
@@ -91,27 +95,33 @@ OVTextBar* VXTextBar::update()
     if (!(textupdated || lookupdated || posupdated)) return this;
     
     Rect windowrect, labelrect;
-    
+
+    SetPortWindowPort(window);
+   
     if (textupdated)
     {
         if (SetControlData(label, kControlEntireControl, 
             kControlStaticTextCFStringTag, sizeof(CFStringRef), &text) != noErr)
                 return this;   // should throw exception
         
-        VXTBSetRect(&labelrect, fontsize, CFStringGetLength(text));
+        VXTBSetRect(&labelrect, fontsize, text);
         windowrect=labelrect;        
         SetControlBounds(label, &labelrect);
         SizeWindow(window, windowrect.right, windowrect.bottom, TRUE);
+
+        murmur(stderr,"textupdate: windowsize: right = %d , bottom = %d",windowrect.right, windowrect.bottom);
 
         textupdated=0;    
     }
     
     if (lookupdated)
     {
-        VXTBSetRect(&labelrect, fontsize, CFStringGetLength(text));
+        VXTBSetRect(&labelrect, fontsize, text);
         windowrect=labelrect;        
         SetControlBounds(label, &labelrect);
         SizeWindow(window, windowrect.right, windowrect.bottom, TRUE);
+
+        murmur(stderr,"lookupdated: windowsize: right = %d , bottom = %d",windowrect.right, windowrect.bottom);
 
         lookupdated=0;
     }
@@ -122,11 +132,69 @@ OVTextBar* VXTextBar::update()
         posupdated=0;
     }
 
-    VXTBSetRect(&labelrect, fontsize, CFStringGetLength(text));
+    VXTBSetRect(&labelrect, fontsize, text);
     VXTBFixPosition(&pos, labelrect.right, labelrect.bottom);
     MoveWindow(window, pos.h, pos.v, TRUE);        
     DrawControls(window);
     return this;
+}
+
+#define ff(a) ((Fixed)(a) << 16)
+
+void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString)
+{
+  ATSUStyle      Style;
+  ATSUTextLayout Layout;
+  Fixed          fontSize;
+
+  ATSUAttributeTag      theTag;
+  ATSUAttributeValuePtr theValue;
+  ByteCount             theSize;
+
+  murmur(stderr, "VXTBSetRect: Initializing.");
+
+  theTag   = kATSUSizeTag;
+  fontSize = ff(fontsize);
+  theValue = &fontSize;
+  theSize  = (ByteCount) sizeof(Fixed);
+
+  ATSUCreateStyle(&Style);
+  ATSUSetAttributes(Style,1,&theTag,&theSize,&theValue);
+
+  UniChar*     Text;
+  UniCharCount TextLength = CFStringGetLength(inString);
+
+  Text = (UniChar*) malloc (TextLength * sizeof(UniChar));
+  CFStringGetCharacters(inString,CFRangeMake(0,TextLength) ,Text);
+
+  murmur(stderr, "VXTBSetRect: Create text layout. TextLength = %d",(int)TextLength);
+
+  ATSUStyle Styles[1];        Styles[0]     = Style;
+  UniCharCount runLengths[1]; runLengths[0] = TextLength;
+
+  ATSUCreateTextLayoutWithTextPtr(Text,
+		  0,
+		  TextLength,
+		  TextLength,
+		  1,
+		  runLengths,
+		  Styles,
+		  &Layout);
+
+  murmur(stderr, "VXTBSetRect: measure the Size.");
+
+  Rect r2;
+  ATSUMeasureTextImage(Layout,0,TextLength,
+	kATSUUseGrafPortPenLoc,kATSUUseGrafPortPenLoc,&r2);
+
+  murmur(stderr, "VXTBSetRect: Measured: top = %d, left = %d, bottom = %d, right = %d",r2.top,r2.left, r2.bottom, r2.right);
+
+  SetRect(r, 0,0, r2.right - r2.left, r2.bottom - r2.top );
+  murmur(stderr, "VXTBSetRect: done, dispose all objects");
+
+  free(Text);
+  ATSUDisposeStyle(Style);
+  ATSUDisposeTextLayout(Layout);
 }
 
 void VXTBSetRect(Rect *r, int fontsize, int textlen)
