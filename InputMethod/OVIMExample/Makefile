@@ -1,19 +1,12 @@
 OBJS=OVIMExample.o
 GOALS=OVIMExample.dylib
-INST_PATH=/Library/OpenVanilla/Development
-
-all: $(GOALS)
 
 $(GOALS): $(OBJS)
-	g++ -O2 -o $@ -bundle $<
+	$(CPP) -bundle -o $@ $(OBJS)
 
-install: $(GOALS)
-	mkdir -p $(INST_PATH)
-	cp $(GOALS) $(INST_PATH)
+include ../../Mk/ov.im.mk
+include ../../Mk/ov.vars.mk
+include ../../Mk/ov.general.mk
+include ../../Mk/ov.osx.mk
 
-clean:
-	rm -f $(GOALS)
 
-%.o: %.cpp
-	gcc -O2 -c $<
-	
