@@ -104,7 +104,6 @@ while (<LIST>) {
     }
     close FLST;
     
-    print "making package $name\n";
     system "./mksub.sh $name";
 }
 

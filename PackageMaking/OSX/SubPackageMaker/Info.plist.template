@@ -9,7 +9,7 @@
 	<key>IFPkgFlagAllowBackRev</key>
 	<false/>
 	<key>IFPkgFlagAuthorizationAction</key>
-	<string>AdminAuthorization</string>
+	<string>RootAuthorization</string>
 	<key>IFPkgFlagDefaultLocation</key>
 	<string>/</string>
 	<key>IFPkgFlagInstallFat</key>
