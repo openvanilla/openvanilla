@@ -318,21 +318,35 @@ void RefreshDisplay(CIMContext *c,CIMInputBuffer *buf) {
     int forec[3], backc[3];
     char buffer[80];
     {
-    global->getString("forer", buffer);
-    forec[0] = (unsigned short)(atof(buffer) * 255 * 256);
-    global->getString("foreg", buffer);
-    forec[1] = (unsigned short)(atof(buffer) * 255 * 256);
-    global->getString("foreb", buffer);
-    forec[2] = (unsigned short)(atof(buffer) * 255 * 256);
-    global->getString("backr", buffer);
-    backc[0] = (unsigned short)(atof(buffer) * 255 * 256);
-    if(!backc[0]) backc[0] = 255 * 256;
-    global->getString("backg", buffer);
-    backc[1] = (unsigned short)(atof(buffer) * 255 * 256);
-    if(!backc[1]) backc[1] = 255 * 256;
-    global->getString("backb", buffer);
-    backc[2] = (unsigned short)(atof(buffer) * 255 * 256);
-    if(!backc[2]) backc[2] = 255 * 256;
+    if(global->keyExist("forer")){
+	    global->getString("forer", buffer);
+	    forec[0] = (unsigned short)(atof(buffer) * 255 * 256);
+    } else forec[0] = 0;
+
+    if(global->keyExist("foreg")){
+	    global->getString("foreg", buffer);
+	    forec[1] = (unsigned short)(atof(buffer) * 255 * 256);
+    } else forec[1] = 0;
+
+    if(global->keyExist("foreb")){
+	    global->getString("foreb", buffer);
+	    forec[2] = (unsigned short)(atof(buffer) * 255 * 256);
+    } else forec[2] = 0;
+
+    if(global->keyExist("backr")){
+	    global->getString("backr", buffer);
+	    backc[0] = (unsigned short)(atof(buffer) * 255 * 256);
+    } else backc[0] = 255 * 256;
+
+    if(global->keyExist("backg")){
+	    global->getString("backg", buffer);
+	    backc[1] = (unsigned short)(atof(buffer) * 255 * 256);
+    } else backc[1] = 255 * 256;
+
+    if(global->keyExist("backb")){
+	    global->getString("backb", buffer);
+	    backc[2] = (unsigned short)(atof(buffer) * 255 * 256);
+    } else backc[2] = 255 * 256;
     }
 
     c->bar.setFontSize(global->getInt("textSize"),
