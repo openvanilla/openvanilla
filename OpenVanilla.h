@@ -138,6 +138,8 @@ public:
     virtual int isOpt() { return 0; }
     virtual int isCommand() { return 0; }
     virtual int isPrintable() { return isprint(code()); }
+    virtual int isAlpha() { return isalpha(code()); }
+    virtual int isNumeric() { return (code() <= '9' && code() >= '0'); }
 };
 
 class OVIMContext : public OVObject

@@ -179,11 +179,6 @@ public:
             return 1;            
         }
         
-/*        if (key->code()==32 && !buf->length())
-        {
-            return 0;
-        } */
-        
         if ((key->code()==ovkReturn || seq.isCompose(key->code())) && buf->length()) {
             if (key->code()!=ovkReturn) seq.add(key->code());
             seq.compose(composebuf);
@@ -192,20 +187,17 @@ public:
             return 1;
         }
         
-        if (isalpha(key->code())) {
+        if (key->isAlpha()) {
             seq.add(key->code());
             seq.compose(composebuf);
             murmur("isPrintable: %c , composed: %s",key->code(),composebuf);
             buf->clear()->append(composebuf)->update();
-            // textbar->clear()->append((char*)"composing: ")->append((char*)composebuf)->update();
-        
             return 1;
         }
         
         murmur ("charcode=(%c), kicking it back to app)", key->code());
         if (buf->length()) buf->send();
         seq.clear();
-        
         
         return 0;
     }
