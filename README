@@ -1,0 +1,7 @@
+
+Directory Hierarchy description
+
+- Header/    - Platform-independent header files
+- Source/    - Platform-independent source code
+- build/     - Object files goes here, not under version control
+
