@@ -48,7 +48,8 @@ enum
 {
     ovException=0,
     ovExceptionMemory=1,
-    ovExceptionBuffer=2
+    ovExceptionBuffer=2,
+    ovExceptionNotSupported=3
 };
 
 class OVTextBar : public OVObject
@@ -94,18 +95,23 @@ public:
 class OVDictionary : public OVObject
 {
 public:
-    virtual int keyExist(void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
+    virtual int keyExist(const void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
         { return 0; }
         
-    virtual int getInt(void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
+    virtual int getInt(const void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
         { return 0; }
-    virtual int putInt(void *key, int value, OVEncoding e=ovEncodingUTF8,
+    virtual int putInt(const void *key, int value, OVEncoding e=ovEncodingUTF8,
         int keylen=0) { return 0; }
             	
-	virtual int getString(void *key, void *str, OVEncoding e=ovEncodingUTF8,
+	virtual int getString(const void *key, void *str, OVEncoding e=ovEncodingUTF8,
 		int keylen=0, int maxlen=0) { return 0; }
-	virtual int putString(void *key, void *value, OVEncoding e=ovEncodingUTF8,
+	virtual int putString(const void *key, void *value, OVEncoding e=ovEncodingUTF8,
 		int keylen=0, int valuelen=0) { return 0; }
+		
+    virtual int newDictionary(const void *key, OVEncoding e=ovEncodingUTF8, 
+        int keylen=0) { return 0; }
+    virtual OVDictionary* getDictionary(const void *key, 
+        OVEncoding e=ovEncodingUTF8, int keylen=0)   { return NULL; }
 };
 
 
