@@ -1,4 +1,5 @@
-IM=OVIMExample OVIMCangjei OVIMPOJ OVIMPhonetic OVIMXcin OVIMezbasic
+IM=OVIMExample OVIMCangjei OVIMPOJ OVIMPhonetic OVIMXcin OVIMezbasic \
+   OVIMArray
 
 all:
 	for i in $(IM) ; do make -C $$i all ;done
