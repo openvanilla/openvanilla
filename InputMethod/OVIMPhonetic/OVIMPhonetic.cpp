@@ -108,9 +108,17 @@ public:
     virtual int initialize(OVDictionary* g, OVDictionary* l, OVService*, char*)
     {
         fprintf (stderr, "IM module initialized by IM loader\n");
-        
-        if (!l->keyExist("鍵盤配置")) l->setInt("鍵盤配置", 0);
-        keylayout=l->getInt("鍵盤配置");
+
+		if (l)
+		{        
+	        if (!l->keyExist("鍵盤配置")) l->setInt("鍵盤配置", 0);
+	        keylayout=l->getInt("鍵盤配置");
+	    } else
+	    {
+	    	murmur ("no OVDictionary *l !");
+	    	keylayout=0;
+	    }
+	    
         murmur ("key layout set to %d\n", keylayout);
         
         return 1;
@@ -125,8 +133,17 @@ public:
     virtual int update(OVDictionary* g, OVDictionary* l)
     {
         fprintf (stderr, "IM loader requested updating module's config\n");
+
+		if (l)
+		{        
+	        if (!l->keyExist("鍵盤配置")) l->setInt("鍵盤配置", 0);
+	        keylayout=l->getInt("鍵盤配置");
+	    } else
+	    {
+	    	murmur ("no OVDictionary *l !");
+	    	keylayout=0;
+	    }
         
-        if (l->keyExist("鍵盤配置")) keylayout=l->getInt("鍵盤配置");
         murmur ("key layout changed to %d\n", keylayout);
         
         return 1;
