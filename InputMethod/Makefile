@@ -1,4 +1,4 @@
-IM=OVIMCangjei OVIMPOJ OVIMPhonetic OVIMXcin
+IM=OVIMExample OVIMCangjei OVIMPOJ OVIMPhonetic OVIMXcin
 
 all:
 	for i in $(IM) ; do make -C $$i all ;done
@@ -8,5 +8,4 @@ install: all
 
 clean:
 	for i in $(IM) ; do make -C $$i clean ;done
-
 
