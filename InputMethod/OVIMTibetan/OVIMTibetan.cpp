@@ -213,7 +213,7 @@ public:
 			if(key->code() == '%' || key->code() == '&')	// 輸入的是 % 或是 &
 			{
 				if(keyseq.last || keyseq.len){
-					i = (key->code() == '%') ? 0x0F82 : 0x0F83;
+					i = (key->code() == '%') ? 0x0F82 : 0x0F7E;
 					buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 					keyseq.clear();
 					keyseq.lastisnotword();
