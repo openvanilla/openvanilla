@@ -270,7 +270,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 				int i, l=strlen(msgstr);
 				VPUTF16 utfstr[256];
 				for (i=0; i<l; i++) utfstr[i]=(VPUTF16)msgstr[i];
-                textbar->clear()->append(utfstr, ovEncodingUTF16BE, l)->update();
+                textbar->clear()->append(utfstr, ovEncodingUTF16BE, l)->update()->show();
 
 				return 1;		
 			}
@@ -361,7 +361,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 			
 			VPUTF16 symbolstr[16];
 			int ssl=VPSymbolStringUTF16(vimCurrentSymbol, symbolstr);
-			buf->append(symbolstr, ovEncodingUTF16BE, ssl)->update();
+			buf->clear()->append(symbolstr, ovEncodingUTF16BE, ssl)->update();
 		}
 		
 		if (hit || inCharCode==0x3 || inCharCode==0xd || inCharCode==0x20)
