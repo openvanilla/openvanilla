@@ -80,16 +80,24 @@ DayiTable ReadDayi(char *fname)
         
         if (state==1)
         {
-            // printf ("adding key=%s, value=%s\n", key, value);
-            [tab.keytable setObject: MakeNSStr(value)
-                forKey: [[NSString stringWithCString: key] uppercaseString]];
+            id keyobj=[[NSString stringWithCString: key] uppercaseString];
+            id valueobj=MakeNSStr(value);
+
+            murmur("adding key=%s, value=%s", key, value);
+	    if(keyobj && valueobj)	
+	        [tab.keytable setObject: valueobj forKey: keyobj];
         }
         
         if (state==2)
         {
             id keyobj=[[NSString stringWithCString: key] uppercaseString];
             id valueobj=MakeNSStr(value);
+
+	    if(!keyobj || !valueobj)
+		continue;
+
             id str=[tab.chartable objectForKey: keyobj];
+
             
             if (str)
             {
@@ -181,7 +189,7 @@ public:
             r.location=i;
             r.length=1;
             id v=[candistr substringWithRange: r];
-            buf->clear()->append([v UTF8String])->send(ovLangTradChinese);
+            buf->clear()->append((char*)[v UTF8String])->send(ovLangTradChinese);
             
             if (nextsend)
             {
@@ -230,14 +238,14 @@ SPAGHETTI:
                     candistr=[[NSString alloc]initWithString: v];
                     if (!candistr) murmur("copy candistr err!");
                     textbar->show();
-                    textbar->clear()->append([v UTF8String]);
+                    textbar->clear()->append((char*)[v UTF8String]);
                     textbar->update();
-                    buf->clear()->append("？")->update(ovLangTradChinese);
+                    buf->clear()->append((char*)"？")->update(ovLangTradChinese);
                     return 1;
                 }
             
                 murmur("result=%s", [v UTF8String]);
-                buf->clear()->append([v UTF8String])->send(ovLangTradChinese);
+                buf->clear()->append((char*)[v UTF8String])->send(ovLangTradChinese);
 //              buf->clear();
                 clearkeyseq();
             }
@@ -373,8 +381,8 @@ public:
     {
         *enc=ovEncodingUTF8;
         if (!strcasecmp(locale, "zh_TW"))
-            return strlen(strcpy(s, "OpenVanilla 大易輸入法試作版"));
-        return strlen(strcpy(s, "OpenVanilla Dayi Module"));
+            return strlen(strcpy((char*)s, "OpenVanilla 大易輸入法試作版"));
+        return strlen(strcpy((char*)s, "OpenVanilla Dayi Module"));
     }
     
     virtual int terminate(OVDictionary*, OVDictionary*, OVService*)
@@ -383,7 +391,7 @@ public:
         return 1;
     }
 
-    virtual initialize(OVDictionary*, OVDictionary*, OVService*, char* path)
+    virtual int initialize(OVDictionary*, OVDictionary*, OVService*, char* path)
     {
         murmur("begin to initialize Dayi at path %s", path);
         char dayipath[256];
