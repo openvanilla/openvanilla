@@ -300,14 +300,43 @@
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		6A9738DE0772BCD000BF0F52 = {
-			fileRef = 6A9738DC0772BCCF00BF0F52;
+		6A9738DF0772BCD000BF0F52 = {
+			fileRef = 6A9738DD0772BCCF00BF0F52;
 			isa = PBXBuildFile;
 			settings = {
 			};
 		};
-		6A9738DF0772BCD000BF0F52 = {
-			fileRef = 6A9738DD0772BCCF00BF0F52;
+		6AA087E5077341CC00EC9702 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AA087E6077341E000EC9702,
+				6AA087E7077341E000EC9702,
+				6AA087E8077341E000EC9702,
+				6AA087E9077341E000EC9702,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AA087E6077341E000EC9702 = {
+			fileRef = 6AD36B3D0772E23700E3BB73;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA087E7077341E000EC9702 = {
+			fileRef = 6AD36B050772CE6D00E3BB73;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA087E8077341E000EC9702 = {
+			fileRef = 6AD36B060772CE6D00E3BB73;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA087E9077341E000EC9702 = {
+			fileRef = 6A9738DC0772BCCF00BF0F52;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -343,18 +372,6 @@
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
 		};
-		6AD36B070772CE6D00E3BB73 = {
-			fileRef = 6AD36B050772CE6D00E3BB73;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		6AD36B080772CE6D00E3BB73 = {
-			fileRef = 6AD36B060772CE6D00E3BB73;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		6AD36B3D0772E23700E3BB73 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -363,12 +380,6 @@
 			path = ../../Headers/OSX/VXUtility.h;
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
-		};
-		6AD36B3E0772E23700E3BB73 = {
-			fileRef = 6AD36B3D0772E23700E3BB73;
-			isa = PBXBuildFile;
-			settings = {
-			};
 		};
 		6AD36B3F0772E24800E3BB73 = {
 			fileEncoding = 4;
@@ -416,6 +427,7 @@
 				8D5B49AF048680CD000E48DA,
 				8D5B49B1048680CD000E48DA,
 				8D5B49B3048680CD000E48DA,
+				6AA087E5077341CC00EC9702,
 			);
 			buildRules = (
 			);
@@ -442,11 +454,7 @@
 			files = (
 				8D5B49B0048680CD000E48DA,
 				6A9738DA0772BCA400BF0F52,
-				6A9738DE0772BCD000BF0F52,
 				6AD36AB90772C6C500E3BB73,
-				6AD36B070772CE6D00E3BB73,
-				6AD36B080772CE6D00E3BB73,
-				6AD36B3E0772E23700E3BB73,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

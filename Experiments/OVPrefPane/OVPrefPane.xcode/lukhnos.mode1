@@ -193,7 +193,7 @@
 						<key>PBXProjectModuleLabel</key>
 						<string>InfoPlist.strings</string>
 						<key>bookmark</key>
-						<string>6AD36D7C07732D0200E3BB73</string>
+						<string>6AA087F90773422100EC9702</string>
 						<key>history</key>
 						<array>
 							<string>6AD36C650773203F00E3BB73</string>
@@ -201,30 +201,15 @@
 							<string>6AD36CD00773255000E3BB73</string>
 							<string>6AD36CD10773255000E3BB73</string>
 							<string>6AD36CD20773255000E3BB73</string>
-							<string>6AD36CCC0773254500E3BB73</string>
+							<string>6ABD67F70773372500443DD7</string>
 						</array>
 						<key>prevStack</key>
 						<array>
 							<string>6AD36B0E0772CE9900E3BB73</string>
 							<string>6AD36B300772E18B00E3BB73</string>
-							<string>6AD36B350772E20000E3BB73</string>
-							<string>6AD36B360772E20000E3BB73</string>
-							<string>6AD36B3A0772E20900E3BB73</string>
-							<string>6AD36B470772E25B00E3BB73</string>
 							<string>6AD36B480772E25B00E3BB73</string>
-							<string>6AD36B9C0772E7AA00E3BB73</string>
-							<string>6AD36B9D0772E7AA00E3BB73</string>
-							<string>6AD36C2C07731A1200E3BB73</string>
-							<string>6AD36C2D07731A1200E3BB73</string>
-							<string>6AD36C5B07731FB100E3BB73</string>
-							<string>6AD36C6007731FC600E3BB73</string>
-							<string>6AD36C670773203F00E3BB73</string>
-							<string>6AD36C680773203F00E3BB73</string>
-							<string>6AD36C690773203F00E3BB73</string>
-							<string>6AD36CD30773255000E3BB73</string>
 							<string>6AD36CD40773255000E3BB73</string>
 							<string>6AD36CD50773255000E3BB73</string>
-							<string>6AD36CD60773255000E3BB73</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -315,20 +300,24 @@
 								<string>089C167DFE841241C02AAC07</string>
 								<string>6A9738D80772BCA400BF0F52</string>
 								<string>1C37FBAC04509CD000000102</string>
-								<string>6AD36AFE0772CDB700E3BB73</string>
-								<string>6AD36AFF0772CDB700E3BB73</string>
+								<string>6AA087EA077341EA00EC9702</string>
+								<string>6AA087EB077341EA00EC9702</string>
+								<string>089C167DFE841241C02AAC07</string>
+								<string>6A9738D80772BCA400BF0F52</string>
+								<string>6AA087EC077341EA00EC9702</string>
+								<string>6AA087ED077341EA00EC9702</string>
+								<string>6AA087EE077341EA00EC9702</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>21</integer>
 									<integer>19</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {275, 504}}</string>
+							<string>{{0, 308}, {275, 504}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -359,7 +348,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>OVPrefPane.nib</string>
+								<string>VXUtility.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -367,19 +356,20 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>OVPrefPane.nib</string>
+										<string>VXUtility.h</string>
 										<key>bookmark</key>
-										<string>6AD36D7A07732D0200E3BB73</string>
+										<string>6AA087F80773422100EC9702</string>
 										<key>history</key>
 										<array>
 											<string>6AD36ACF0772C84300E3BB73</string>
 											<string>6AD36BEC077316DC00E3BB73</string>
-											<string>6AD36C770773215D00E3BB73</string>
 											<string>6AD36C780773215D00E3BB73</string>
 											<string>6AD36C9E0773216B00E3BB73</string>
 											<string>6AD36D040773270D00E3BB73</string>
-											<string>6AD36D2D07732AFE00E3BB73</string>
 											<string>6AD36D2E07732AFE00E3BB73</string>
+											<string>6AA087EF077341EA00EC9702</string>
+											<string>6AA087F0077341EA00EC9702</string>
+											<string>6AA087F1077341EA00EC9702</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -388,29 +378,10 @@
 											<string>6A9738F70772C09A00BF0F52</string>
 											<string>6A97390D0772C20F00BF0F52</string>
 											<string>6A9739140772C27B00BF0F52</string>
-											<string>6AD36AC20772C6F300E3BB73</string>
-											<string>6AD36AC30772C6F300E3BB73</string>
 											<string>6AD36AD10772C84300E3BB73</string>
-											<string>6AD36AD20772C84300E3BB73</string>
-											<string>6AD36AED0772C9F100E3BB73</string>
-											<string>6AD36B430772E25B00E3BB73</string>
-											<string>6AD36BEE077316DC00E3BB73</string>
-											<string>6AD36BEF077316DC00E3BB73</string>
-											<string>6AD36C7B0773215D00E3BB73</string>
-											<string>6AD36C7C0773215D00E3BB73</string>
-											<string>6AD36C7D0773215D00E3BB73</string>
 											<string>6AD36C7E0773215D00E3BB73</string>
-											<string>6AD36C7F0773215D00E3BB73</string>
-											<string>6AD36C800773215D00E3BB73</string>
-											<string>6AD36C810773215D00E3BB73</string>
-											<string>6AD36C820773215D00E3BB73</string>
-											<string>6AD36C970773216700E3BB73</string>
-											<string>6AD36CCD0773255000E3BB73</string>
-											<string>6AD36D060773270D00E3BB73</string>
-											<string>6AD36D070773270D00E3BB73</string>
-											<string>6AD36D080773270D00E3BB73</string>
-											<string>6AD36D090773270D00E3BB73</string>
-											<string>6AD36D2F07732AFE00E3BB73</string>
+											<string>6AA087F2077341EA00EC9702</string>
+											<string>6AA087F3077341EA00EC9702</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -468,9 +439,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>6AD36ABD0772C6D900E3BB73</string>
+				<string>6AA087F5077341EA00EC9702</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>6AD36ABE0772C6D900E3BB73</string>
+				<string>6AA087F6077341EA00EC9702</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -498,9 +469,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>6AD36B0B0772CE9900E3BB73</string>
-		<string>6AD36AE30772C96200E3BB73</string>
 		<string>/Users/lukhnos/logiciel/OpenVanilla/Experiments/OVPrefPane/OVPrefPane.xcode</string>
 	</array>
 	<key>WindowString</key>

@@ -7,7 +7,7 @@ GOALS=OVIMXcin.dylib
 
 DATA=cj.cin dayi3.cin jtcj_gb.cin jyutping.cin\
      phonegb2.cin pinyin.cin pinyinbig5.cin simplex.cin wubizixing.cin\
-     shuangpin.cin
+     shuangpin.cin ukiyoe.cin
 
 $(GOALS): $(OBJS)
 	$(CPP) -bundle -o $@ $(OBJS)

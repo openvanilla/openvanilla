@@ -465,8 +465,9 @@ void StartupPreferenceEditor()
 {
     char sbuf[512];
     murmur("launching application to edit %s", userplistfile);
-    sprintf (sbuf, "open %s", userplistfile);
-    system(sbuf);   
+//    sprintf (sbuf, "open %s", userplistfile);
+//    system(sbuf);   
+    system("open /Library/PreferencePanes/OVPrefPane.prefPane");
 }
 
 void UpdateFilterConfig() {
