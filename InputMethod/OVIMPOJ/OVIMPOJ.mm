@@ -142,7 +142,7 @@ void OVIMPOJContext::queryAndCompose(char *qstr, char *disp, OVBuffer *buf,
 {
     NSArray *result=cintab->find(qstr);
 
-    if (fullPOJoutput)
+    if (parent->isFullPOJ())
     {
         buf->send();
     }
