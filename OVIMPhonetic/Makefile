@@ -15,7 +15,7 @@ install:
 	echo $(INST_PATH)/$(GOALS)   >> $(CONF_PATH)
 
 clean:
-	rm $(GOALS)
+	rm -f $(GOALS) *.o
 
 %.o: %.cpp
 	gcc -c $<

@@ -286,7 +286,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 		
 			if (inCharCode==',')
 			{
-			    buf->append("符")->update(); 
+			    buf->append((char*)"符")->update(); 
 				vimPunctuationWindow=1;
 				char msgstr[]="press a key to get punctuation...";
 				int i, l=strlen(msgstr);
