@@ -1,4 +1,4 @@
-IM=OVIMEnglish OVIMCangjei OVIMPOJ OVIMPhonetic OVIMXcin OVIMezbasic \
+IM=OVIMRoman OVIMCangjei OVIMPOJ OVIMPhonetic OVIMXcin OVIMezbasic \
    OVIMArray
 
 all:
