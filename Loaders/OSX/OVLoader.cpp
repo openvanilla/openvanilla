@@ -195,14 +195,8 @@ void *CIMCustomOpen()
 
 int CIMCustomClose(void *data)
 {
-    // lukhnos' comment
-    
     CIMContext *c=(CIMContext*)data;    
-    if (!c->ovcontext)
-    {
-        return 0;
-    }
-    
+    if (!c->ovcontext) return 0;
     if (inputmethod) inputmethod->deleteContext(c->ovcontext);
 	delete c;
     return 1;

@@ -6,8 +6,7 @@
 
 VXCIN::VXCIN()
 {
-    selkey[0]=0;
-    ename[0]=0;
+    selkey[0]=endkey[0]=ename[0]=0;
         
     encoding=ovEncodingUTF8;
     keytable=[NSMutableDictionary new];
@@ -23,7 +22,33 @@ VXCIN::~VXCIN()
     if (cname) [cname release];
 }
 
-NSMutableArray* VXCIN::find(char *key)
+int isEndKey(char c)
+{
+    if (!strlen(endkey)) return 0;
+    if (strchr(endkey, tolower(c))) return 1;
+    return 0;
+}
+
+
+int VXCIN::selKeyOrder(char keycode)
+{
+    char c=tolower(keycode);
+    int l=strlen(selkey);
+    for (int i=0; i<l; i++) if (c==selkey[i]) return i;
+    return -1;
+}
+
+int VXCIN::name(char *locale, void *s, OVEncoding *enc)
+{
+    *enc=ovEncodingUTF8;
+    
+    if (!strlen(ename)) return strlen(strcpy((char*)s, "VXCIN no ename"));
+    if (!strcasecmp(locale, "zh_tw") || !strcasecmp(locale, "zh_cn"))
+        return strlen(strcpy((char*)s, [cname UTF8String]));
+    return strlen(strcpy((char*)s, ename));
+}
+
+NSArray* VXCIN::find(char *key)
 {
     murmur ("VXCIN::find, query string=%s", key);
     NSString* qs=(NSString*)VXCreateCFString(key);
@@ -38,9 +63,9 @@ NSString* VXCIN::getKey(char keycode)
     buf[0]=tolower(keycode);
     buf[1]=0;
     
-    murmur ("VXCIN::getKey, keycode=%s", buf);
     NSString* qs=(NSString*)VXCreateCFString(buf);
     NSString* s=[keytable objectForKey: qs];
+    murmur ("VXCIN::getKey, keycode=%s, string=%s", buf, s ? [s UTF8String] : NULL);
     [qs release];
     return s;
 }
@@ -73,7 +98,12 @@ void VXCIN::read(char *fname, OVEncoding enc, int shiftselkey)
         {
             strcpy(ename, value);
         }
-            
+
+        if (!strcasecmp(key, "%endkey"))
+        {
+            strcpy(endkey, value);
+        }            
+
         if (!strcasecmp(key, "%cname"))
         {
             
