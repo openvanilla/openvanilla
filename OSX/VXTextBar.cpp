@@ -109,7 +109,7 @@ OVTextBar* VXTextBar::update()
         SetControlBounds(label, &labelrect);
         SizeWindow(window, windowrect.right, windowrect.bottom, TRUE);
 
-        murmur(stderr,"textupdate: windowsize: right = %d , bottom = %d",windowrect.right, windowrect.bottom);
+        murmur("textupdate: windowsize: right = %d , bottom = %d",windowrect.right, windowrect.bottom);
 
         textupdated=0;    
     }
@@ -121,7 +121,7 @@ OVTextBar* VXTextBar::update()
         SetControlBounds(label, &labelrect);
         SizeWindow(window, windowrect.right, windowrect.bottom, TRUE);
 
-        murmur(stderr,"lookupdated: windowsize: right = %d , bottom = %d",windowrect.right, windowrect.bottom);
+        murmur("lookupdated: windowsize: right = %d , bottom = %d",windowrect.right, windowrect.bottom);
 
         lookupdated=0;
     }
@@ -151,7 +151,7 @@ void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString)
   ATSUAttributeValuePtr theValue;
   ByteCount             theSize;
 
-  murmur(stderr, "VXTBSetRect: Initializing.");
+  murmur("VXTBSetRect: Initializing.");
 
   theTag   = kATSUSizeTag;
 
@@ -169,7 +169,7 @@ void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString)
   Text = (UniChar*) malloc (TextLength * sizeof(UniChar));
   CFStringGetCharacters(inString,CFRangeMake(0,TextLength) ,Text);
 
-  murmur(stderr, "VXTBSetRect: Create text layout. TextLength = %d",(int)TextLength);
+  murmur("VXTBSetRect: Create text layout. TextLength = %d",(int)TextLength);
 
   ATSUStyle Styles[1];        Styles[0]     = Style;
   UniCharCount runLengths[1]; runLengths[0] = TextLength;
@@ -183,16 +183,16 @@ void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString)
 		  Styles,
 		  &Layout);
 
-  murmur(stderr, "VXTBSetRect: measure the Size.");
+  murmur("VXTBSetRect: measure the Size.");
 
   Rect r2;
   ATSUMeasureTextImage(Layout,0,TextLength,
 	kATSUUseGrafPortPenLoc,kATSUUseGrafPortPenLoc,&r2);
 
-  murmur(stderr, "VXTBSetRect: Measured: top = %d, left = %d, bottom = %d, right = %d",r2.top,r2.left, r2.bottom, r2.right);
+  murmur("VXTBSetRect: Measured: top = %d, left = %d, bottom = %d, right = %d",r2.top,r2.left, r2.bottom, r2.right);
 
   SetRect(r, 0,0, r2.right - r2.left, r2.bottom - r2.top );
-  murmur(stderr, "VXTBSetRect: done, dispose all objects");
+  murmur("VXTBSetRect: done, dispose all objects");
 
   free(Text);
   ATSUDisposeStyle(Style);
