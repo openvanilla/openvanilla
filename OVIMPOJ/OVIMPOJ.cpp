@@ -110,7 +110,7 @@ public:
         if (!len)
         {
             *buf=0;
-            return 0;
+            return buf;
         }
 
         if (seq[len-1] >= '1' && seq[len-1] <= '8') tone=seq[len-1]-'0';
@@ -215,7 +215,7 @@ public:
     virtual int name(char *locale, void *s, OVEncoding *enc)
     {
         *enc=ovEncodingUTF8;
-        return strlen(strcpy((char*)s, "OpenVanilla Pe̍h-oē-jī/peh8-oe7-ji7"));
+        return strlen(strcpy((char*)s, "OpenVanilla Pe̍h-oē-jī (POJ)"));
     }
     
     virtual int initialize(OVDictionary* globalconfig, OVDictionary* localconfig,

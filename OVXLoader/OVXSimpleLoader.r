@@ -2765,6 +2765,6 @@ resource 'MENU' (cimBaseResourceID + 1)
 
 resource 'STR ' (cimBaseResourceID)
 {
-    "OpenVanilla SimpleLoader for OS X"
+    "OpenVanilla SimpleLoader 0.04"
 };
 
