@@ -198,6 +198,7 @@ void OVXcinContext::updateDisplay(OVBuffer *buf)
 int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar, 
     OVService *srv)
 {
+	cerr<<"KeyEvent:"<<static_cast<char>(key->code())<<endl;
     if (candi.onDuty())
     {
         if (!autocomposing) return candidateEvent(key, buf, textbar, srv);
