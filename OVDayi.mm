@@ -77,12 +77,12 @@ DayiTable ReadDayi(char *fname)
         {
             // printf ("adding key=%s, value=%s\n", key, value);
             [tab.keytable setObject: MakeNSStr(value)
-                forKey: [NSString stringWithCString: key]];
+                forKey: [[NSString stringWithCString: key] uppercaseString]];
         }
         
         if (state==2)
         {
-            id keyobj=[NSString stringWithCString: key];
+            id keyobj=[[NSString stringWithCString: key] uppercaseString];
             id valueobj=MakeNSStr(value);
             id str=[tab.chartable objectForKey: keyobj];
             
