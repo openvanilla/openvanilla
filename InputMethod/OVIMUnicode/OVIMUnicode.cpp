@@ -40,14 +40,14 @@ public:
     
     virtual int activate(OVService *)
     {
-		keyseq.clear();
-        return 1;
+	    keyseq.clear();
+	    return 1;
     }
     
     virtual int deactivate(OVService *)
     {
-		keyseq.clear();
-        return 1;
+	    keyseq.clear();
+	    return 1;
     }
 	
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,

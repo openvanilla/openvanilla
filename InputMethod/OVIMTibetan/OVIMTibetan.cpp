@@ -59,38 +59,30 @@ short isFinalAddKey(int key)
 class OVTibetanContext : public OVIMContext
 {
 public:
-    OVTibetanContext(OVIMTibetan *p)
-    {
-        parent=p;
-        fprintf (stderr, "New IM context created\n");
-    }
-    
+    OVTibetanContext(OVIMTibetan *p){parent=p;}
     virtual ~OVTibetanContext(){}
     
     virtual int activate(OVService *)
     {
 		keyseq.clear();
 		keyseq.lastisother();
-        return 1;
+		return 1;
     }
     
     virtual int deactivate(OVService *)
     {
 		keyseq.clear();
 		keyseq.lastisother();
-        return 1;
+		return 1;
     }
-    
+
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         OVService *srv)
     {
 		unsigned short i;
 		short j = -1;
 				
-		if (key->isOpt() || key->isCommand() || key->isCtrl())
-        {
-			return 0;
-        }
+		if (key->isOpt() || key->isCommand() || key->isCtrl()){return 0;}
 		
 		if (key->isCapslock()) { //CapLock
 			if (key->isShift()) buf->appendChar(key->upper());
@@ -138,6 +130,16 @@ public:
 		
         if (key->isPrintable())
         {
+			if(key->code() >= '0' && key->code() <= '9')	// Numbers
+			{ 
+				i = 0x0F20 + (key->code() - '0');
+				buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
+				keyseq.clear();
+				keyseq.lastisother();
+				textbar->hide();
+				return 1;   // key processed
+			}
+			
 			if(key->code() == SpaceKey[keyboardlayout]) // Keyin a space.
 			{ 
 				buf->append((char *)" ")->send();
@@ -161,16 +163,6 @@ public:
 					keyseq.add(key->code());
 					textbar->clear()->append((char *)"Stacking...")->show();
 				}
-				return 1;   // key processed
-			}
-			
-			if(key->code() >= '0' && key->code() <= '9')	// Numbers
-			{ 
-				i = 0x0F20 + (key->code() - '0');
-				buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
-				keyseq.clear();
-				keyseq.lastisother();
-				textbar->hide();
 				return 1;   // key processed
 			}
 			
