@@ -28,7 +28,7 @@ typedef void OVLDeleteType(OVInputMethod*);
 
 // there two are optional
 extern "C" int OVLoadableAvailableIMCount(char *path);
-extern "C" int OVLoadableCanUnoad();
+extern "C" int OVLoadableCanUnload();
 
 // We also have an OVLOADABLEWRAPPER ("OpenVanilla loadble IM wrapper").
 // If you only have one IM module, e.g. class MyInputMethod, you can simply
