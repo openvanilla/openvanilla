@@ -150,6 +150,10 @@ OVService *srv)
 void OVIMPOJContext::queryAndCompose(char *qstr, char *disp, OVBuffer *buf, 
     OVTextBar *textbar, OVService *srv)
 {
+    // we have to "lowercase" every character in the query string
+    char *p=qstr;
+    while (*p) *p++=tolower(*p);
+    
     NSArray *result=cintab->find(qstr);
 
     if (parent->isFullPOJ())
@@ -158,19 +162,17 @@ void OVIMPOJContext::queryAndCompose(char *qstr, char *disp, OVBuffer *buf,
     }
     else
     {
-    
-    if (!result)
-    {
-        buf->send();
-    }
-    else
-    {
-        [list removeAllObjects];
-        [list addObject: [NSString stringWithUTF8String: disp]];
-        [list addObjectsFromArray: result];
-        
-        candi.prepare(list, cintab->selKey(), textbar);
-    }
+        if (!result)
+        {
+            buf->send();
+        }
+        else
+        {
+            [list removeAllObjects];
+            [list addObject: [NSString stringWithUTF8String: disp]];
+            [list addObjectsFromArray: result];    
+            candi.prepare(list, cintab->selKey(), textbar);
+        }
     }
 }
 
