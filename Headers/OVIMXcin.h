@@ -8,6 +8,9 @@
 #include "OVCIN.h"
 #include "OVKeySequence.h"
 #include "OVCandidate.h"
+#include <string>
+
+using namespace std;
 
 class XcinKeySequence : public OVKeySequenceSimple
 {

@@ -4,6 +4,8 @@
 #include <OpenVanilla/OVUtility.h>
 #include "OVCandidate.h"
 
+using namespace std;
+
 void OVCandidate::prepare(vector<string>* l, char* skey, OVTextBar *textbar)
 {
     onduty=1;

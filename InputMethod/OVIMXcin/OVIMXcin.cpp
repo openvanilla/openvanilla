@@ -9,6 +9,9 @@
 #include "OVCIN.h"
 #include "XcinCinList.h"
 #include <string>
+#include <iostream>
+
+using namespace std;
 
 //OVLOADABLEOBJCWRAPPER;
 
@@ -31,7 +34,7 @@ extern "C" unsigned int OVLoadableVersion()
 
 extern "C" OVInputMethod* OVLoadableNewIM(int x)
 {
-	murmur("loading...");
+	cerr << "loading..." << endl;
     return new OVIMXcin(cinlist.cinpath, cinlist.list[x].filename,
         cinlist.list[x].ename, cinlist.list[x].cname, cinlist.list[x].encoding);
 }
@@ -104,7 +107,10 @@ int OVIMXcin::name(char *locale, void *s, OVEncoding *enc)
     if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
     {
         *enc=cnameencoding;
-        murmur ("asking ename=%s, cname=%s, encoding=%d", ename, cname, *enc);
+        cerr << "asking ename=" << ename;
+		cerr << ", cname=" << cname;
+		cerr << ", encoding" << *enc;
+		cerr << endl;
         return strlen(strcpy((char*)s, cname));
     }
         
@@ -113,7 +119,7 @@ int OVIMXcin::name(char *locale, void *s, OVEncoding *enc)
 
 int OVIMXcin::initialize(OVDictionary* global, OVDictionary* local, OVService*, char*)
 {
-	murmur("initializing");
+	cerr << "initializing" << endl;
     if (cintab) return 0;
     
     const char *sk="shiftSelectionKey";
@@ -136,7 +142,7 @@ int OVIMXcin::initialize(OVDictionary* global, OVDictionary* local, OVService*, 
     //cintab->read(cinfilename, enc, selkeyshift);
     cintab=new OVCIN(cinfilename);
 	
-	murmur("initialized.");
+	cerr << "initialized." << endl;
     return 1;
 }
 
@@ -178,7 +184,9 @@ void OVXcinContext::updateDisplay(OVBuffer *buf)
     {
         string *ms= new string;
         keyseq.compose(ms);
-        buf->append((void*)ms);
+		cerr << "OVXcinContext::updateDisplay:" << ms->data() << endl;
+		char* s = const_cast<char*>(ms->c_str());
+        buf->append((void*)s);
         delete ms;
     }
     buf->update();
@@ -188,8 +196,11 @@ void OVXcinContext::updateDisplay(OVBuffer *buf)
 int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar, 
     OVService *srv)
 {
+	cerr << "OVXcinContext::keyEvent" << endl;
     if (candi.onDuty())
     {
+		cerr << "OVXcinContext::KeyEvent - if(candi.onDuty())" << endl;
+		
         if (!autocomposing) return candidateEvent(key, buf, textbar, srv);
         
         if (string* output=candi.select(key->code()))
@@ -268,9 +279,12 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     if (key->isPrintable() && keyseq.valid(key->code()) &&
         !key->isShift() && !key->isCapslock())
     {
+		cerr << "Show keystroke -> character" << endl;
+		cerr << "length=" << keyseq.length() << endl;
+		cerr << "maxSeqLen=" << parent->maxSeqLen() << endl;
         if (keyseq.length() == parent->maxSeqLen())
         {
-            updateDisplay(buf);            
+            updateDisplay(buf);
             if (parent->isBeep()) srv->beep();
             return 1;
         }
@@ -281,7 +295,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
             autocomposing=0;
             return compose(buf, textbar, srv);
         }
-           
+		
         updateDisplay(buf);
         if (cintab->isEndKey(key->code()))
         {
