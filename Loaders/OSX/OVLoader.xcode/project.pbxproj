@@ -7,10 +7,13 @@
 	objects = {
 		6A2536B507C0F391003C843C = {
 			children = (
-				6A2536CB07C0F40B003C843C,
-				6A2536C907C0F3EC003C843C,
+				6ABC395107C1048000F093B9,
+				6ABC392807C102AF00F093B9,
+				6ABC392707C102A600F093B9,
 				6A2536C207C0F3BA003C843C,
 				6A2536C307C0F3BA003C843C,
+				6ABC38F807C1006D00F093B9,
+				6ABC392507C1029000F093B9,
 			);
 			isa = PBXGroup;
 			refType = 4;
@@ -39,11 +42,20 @@
 			);
 			hasScannedForEncodings = 0;
 			isa = PBXProject;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				zh_TW,
+			);
 			mainGroup = 6A2536B507C0F391003C843C;
 			productRefGroup = 6A2536C207C0F3BA003C843C;
 			projectDirPath = "";
 			targets = (
 				6A2536C007C0F3BA003C843C,
+				6ABC38F607C1006D00F093B9,
+				6ABC392207C1029000F093B9,
 			);
 		};
 		6A2536BD07C0F3BA003C843C = {
@@ -86,7 +98,6 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				INFOPLIST_FILE = "OVLoader-0.7-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
-				OPTIMIZATION_CFLAGS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-framework Carbon";
 				OTHER_REZFLAGS = "";
@@ -136,6 +147,8 @@
 		6A2536C207C0F3BA003C843C = {
 			children = (
 				6A2536C107C0F3BA003C843C,
+				6ABC38F707C1006D00F093B9,
+				6ABC392307C1029000F093B9,
 			);
 			isa = PBXGroup;
 			name = Products;
@@ -178,6 +191,7 @@
 			);
 			isa = PBXGroup;
 			name = CarbonInputMethod;
+			path = "";
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -187,6 +201,7 @@
 			);
 			isa = PBXGroup;
 			name = Localizables;
+			path = "";
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -294,6 +309,303 @@
 		};
 		6A2536E307C0F47F003C843C = {
 			fileRef = 6A2536DD07C0F47F003C843C;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A959AF707C10B60007F9257 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = zh_TW;
+			path = zh_TW.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABC38F307C1006D00F093B9 = {
+			buildActionMask = 2147483647;
+			files = (
+				6ABC39E607C10AD900F093B9,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ABC38F407C1006D00F093B9 = {
+			buildActionMask = 2147483647;
+			files = (
+				6ABC392F07C1032900F093B9,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ABC38F507C1006D00F093B9 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ABC38F607C1006D00F093B9 = {
+			buildPhases = (
+				6ABC38F307C1006D00F093B9,
+				6ABC38F407C1006D00F093B9,
+				6ABC38F507C1006D00F093B9,
+				6ABC391807C1025600F093B9,
+				6ABC391C07C1026900F093B9,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVCocoa-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = OVCocoa;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = OVCocoa;
+			productName = OVCocoa;
+			productReference = 6ABC38F707C1006D00F093B9;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OVCocoa</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.OVCocoa</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		6ABC38F707C1006D00F093B9 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = OVCocoa.bundle;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6ABC38F807C1006D00F093B9 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "OVCocoa-Info.plist";
+			path = "/Users/lukhnos/logiciel/OV0.7/Loaders/OSX/OVCocoa-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6ABC391807C1025600F093B9 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ABC391C07C1026900F093B9 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXRezBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ABC391F07C1029000F093B9 = {
+			buildActionMask = 2147483647;
+			files = (
+				6ABC39E707C10ADF00F093B9,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ABC392007C1029000F093B9 = {
+			buildActionMask = 2147483647;
+			files = (
+				6ABC395B07C104E700F093B9,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ABC392107C1029000F093B9 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ABC392207C1029000F093B9 = {
+			buildPhases = (
+				6ABC391F07C1029000F093B9,
+				6ABC392007C1029000F093B9,
+				6ABC392107C1029000F093B9,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVCocoaTester-Info.plist";
+				INSTALL_PATH = "$(USER_APPS_DIR)";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Carbon";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = OVCocoaTester;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = OVCocoaTester;
+			productName = OVCocoaTester;
+			productReference = 6ABC392307C1029000F093B9;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OVCocoaTester</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.OVCocoaTester</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.application";
+		};
+		6ABC392307C1029000F093B9 = {
+			explicitFileType = wrapper.application;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = OVCocoaTester.app;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6ABC392507C1029000F093B9 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "OVCocoaTester-Info.plist";
+			path = "/Users/lukhnos/logiciel/OV0.7/Loaders/OSX/OVCocoaTester-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6ABC392707C102A600F093B9 = {
+			children = (
+				6ABC395207C1049600F093B9,
+				6ABC392E07C1032900F093B9,
+			);
+			isa = PBXGroup;
+			name = OVCocoa;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABC392807C102AF00F093B9 = {
+			children = (
+				6ABC395A07C104E700F093B9,
+			);
+			isa = PBXGroup;
+			name = OVCocoaTester;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABC392E07C1032900F093B9 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = OVCocoa.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABC392F07C1032900F093B9 = {
+			fileRef = 6ABC392E07C1032900F093B9;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6ABC395107C1048000F093B9 = {
+			children = (
+				6A2536CB07C0F40B003C843C,
+				6A2536C907C0F3EC003C843C,
+			);
+			isa = PBXGroup;
+			name = OVLoader;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABC395207C1049600F093B9 = {
+			children = (
+				6ABC39E507C10AD900F093B9,
+			);
+			isa = PBXGroup;
+			name = Localizables;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABC395407C104A800F093B9 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = English;
+			path = English.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABC395A07C104E700F093B9 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			path = OVCocoaTester.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABC395B07C104E700F093B9 = {
+			fileRef = 6ABC395A07C104E700F093B9;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6ABC39E507C10AD900F093B9 = {
+			children = (
+				6ABC395407C104A800F093B9,
+				6A959AF707C10B60007F9257,
+			);
+			isa = PBXVariantGroup;
+			name = Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABC39E607C10AD900F093B9 = {
+			fileRef = 6ABC39E507C10AD900F093B9;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6ABC39E707C10ADF00F093B9 = {
+			fileRef = 6ABC39E507C10AD900F093B9;
 			isa = PBXBuildFile;
 			settings = {
 			};

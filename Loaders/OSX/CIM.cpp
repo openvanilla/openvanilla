@@ -137,8 +137,8 @@ ComponentResult CIMSessionDeactivate(CIMSessionHandle hndl)
 ComponentResult CIMSessionFix(CIMSessionHandle hndl)
 {
     if ((*hndl)->sessionFixLock) return noErr;
-    if (!CIMCustomSessionFix((*hndl)->data,
-        (*hndl)->buffer->bind((*hndl)->instance))) return invalidHandler;
+	CIMInputBuffer *buf=(*hndl)->buffer->bind((*hndl)->instance);
+	if (buf->length()) buf->send();
     return noErr;
 }
 
@@ -176,7 +176,6 @@ ComponentResult CIMSessionEvent(CIMSessionHandle hndl, EventRef evnt)
 	(*hndl)->sessionFixLock=0;
 	return x;
 }
-
 
 
 pascal OSStatus CIMPencilMenuHandler(EventHandlerCallRef callref, 
