@@ -96,7 +96,7 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = OpenVanilla.h;
-			path = ../../OpenVanilla/OpenVanilla.h;
+			path = ../OpenVanilla.h;
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -111,7 +111,7 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = VXTextBar.cpp;
-			path = ../../OpenVanilla/OSX/VXTextBar.cpp;
+			path = ../OSX/VXTextBar.cpp;
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -120,7 +120,7 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = VXTextBar.h;
-			path = ../../OpenVanilla/OSX/VXTextBar.h;
+			path = ../OSX/VXTextBar.h;
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -129,7 +129,7 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = VXUtility.cpp;
-			path = ../../OpenVanilla/OSX/VXUtility.cpp;
+			path = ../OSX/VXUtility.cpp;
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -138,7 +138,7 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = VXUtility.h;
-			path = ../../OpenVanilla/OSX/VXUtility.h;
+			path = ../OSX/VXUtility.h;
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -171,7 +171,7 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = VXBuffer.h;
-			path = ../../OpenVanilla/OSX/VXBuffer.h;
+			path = ../OSX/VXBuffer.h;
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
 		};
