@@ -41,8 +41,11 @@ int last;
 #define SYMBOL_NUM 10
 #define CONSONAT_NUM 37
 #define VOWEL_NUM 8
+#define FINALADD_NUM 2
+#define MAX_COMPOSE 5
 
 char ComposeKey = 'f';
+char SpaceKey = '.';
 
 char SymbolKeys[SYMBOL_NUM] = 
 {
@@ -82,6 +85,16 @@ unsigned short VowelChars[VOWEL_NUM] =
 	0x0F7A,0x0F7B,0x0F7D,0x0F80
 }; 
 
+char FinalAddKeys[VOWEL_NUM] = 
+{
+	'%','&'
+};
+
+unsigned short FinalAddChars[FINALADD_NUM] = 
+{
+	0x0F82,0x0F7E
+};
+
 short isSymbolKey(int key)
 {
 	int i;
@@ -110,6 +123,17 @@ short isVowelKey(int key)
 	for(i=0; i< VOWEL_NUM; i++)
 	{
 		if(key == VowelKeys[i])
+			return i;
+	}
+	return -1;
+}
+
+short isFinalAddKey(int key)
+{
+	int i;
+	for(i=0; i< FINALADD_NUM; i++)
+	{
+		if(key == FinalAddKeys[i])
 			return i;
 	}
 	return -1;
@@ -159,7 +183,7 @@ public:
             return 1;   // key processed
         }
 		
-		if (key->isCode(4, ovkUp, ovkDown, ovkLeft, ovkRight)) //Lock when composing
+		if (key->isCode(4, ovkUp, ovkDown, ovkLeft, ovkRight)) //Locked when composing
 		{ 
 			if(!keyseq.len) return 0;
 			keyseq.lastisother();
@@ -188,11 +212,13 @@ public:
 		
         if (key->isPrintable())
         {
-			if (key->isCapslock()) {
-				buf->appendChar(key->lower())->send();
+			if (key->isCapslock()) { //CapLock
+				if (key->isShift()) buf->appendChar(key->upper());
+				else buf->appendChar(key->lower())->send();
 				return 1;
 			}
-			if(key->code() == '.') // Keyin a space.
+			
+			if(key->code() == SpaceKey) // Keyin a space.
 			{ 
 				buf->append((char *)" ")->send();
 				keyseq.clear();
@@ -217,16 +243,6 @@ public:
 				return 1;   // key processed
 			}
 			
-			if(key->code() == '%' || key->code() == '&')	// 輸入的是 % 或是 &
-			{
-				if(keyseq.last || keyseq.len){
-					i = (key->code() == '%') ? 0x0F82 : 0x0F7E;
-					buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
-					keyseq.clear();
-					keyseq.lastisother();
-					textbar->hide();
-				}
-			}
 			if(key->code() >= '0' && key->code() <= '9')	// Numbers
 			{ 
 				i = 0x0F20 + (key->code() - '0');
@@ -236,6 +252,19 @@ public:
 				textbar->hide();
 				return 1;   // key processed
 			}
+			
+			if((j = isFinalAddKey(key->code())) > -1)	// Final M or N
+			{
+				if(keyseq.last || keyseq.len){
+					i = FinalAddChars[j];
+					buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
+					keyseq.clear();
+					keyseq.lastisother();
+					textbar->hide();
+				}
+				return 1;
+			}
+
 			if((j = isSymbolKey(key->code())) > -1) // Symbols
 			{
 				i = SymbolChars[j];
@@ -245,6 +274,7 @@ public:
 				textbar->hide();
 				return 1;   // key processed
 			}
+
 			if((j = isVowelKey(key->code())) > -1)	// Vowels
 			{ 
 				if(keyseq.last == 1 || (keyseq.buf[0] == ComposeKey && keyseq.len > 3))
@@ -257,11 +287,12 @@ public:
 				}
 				return 1;   // key processed
 			}
+
 			if((j = isConsonantKey(key->code())) > -1) // Consonant
 			{ 
 				i = ConsonantChars[j];
 				keyseq.lastisconsonant();
-				if(keyseq.buf[0] == ComposeKey && keyseq.len < 4) 
+				if(keyseq.buf[0] == ComposeKey && keyseq.len < MAX_COMPOSE) 
 				{
 					if(keyseq.len > 1)
 						i = i + 0x50; // Sub characters.
