@@ -10,7 +10,6 @@ $(GOALS): $(OBJS)
 install:
 	mkdir -p $(INST_PATH)
 	cp $(GOALS) $(INST_PATH)
-	cp test.cin $(INST_PATH)
 
 VXCIN.o: ../../Source/OSX/VXCIN.mm
 	gcc -I../../Loaders/OSX -o VXCIN.o -c $<
