@@ -1,66 +1,24 @@
 // OVIMXcin.mm
 
 #define OVDEBUG
-#include "OVIMXcin.h"
-#include <sys/param.h>
-#include <sys/types.h>
-#include <dirent.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLoadable.h>
+#include <stdlib.h>
+#include "OVIMXcin.h"
+#include "XcinCinList.h"
 
 OVLOADABLEOBJCWRAPPER;
 
 // functions that help load all .cin --------------------------------
 
-const int vxMaxCINFiles=64;
-
-int cinpos=0;
-char cinpath[PATH_MAX];
-char cinfile[vxMaxCINFiles][PATH_MAX];
-
-char selectfilter[PATH_MAX];
-
-int file_select(struct dirent *entry)
-{
-    int p=strlen(entry->d_name)-strlen(selectfilter);
-    if (p<0) return 0;
-    if (!strcmp(entry->d_name+p, selectfilter)) return 1; 
-    return 0;
-}
-
-void addglob(char *libpath, char *ext)
-{
-    struct dirent **files;
-    char searchpath[PATH_MAX];
-
-    if (ext) strcpy(selectfilter, ext); else strcpy(selectfilter, ".cin");
-
-    strcpy(searchpath, libpath);
-    int l=strlen(searchpath);
-    if (l) if (searchpath[l-1]=='/') searchpath[l-1]=0;
-
-    murmur ("VXLibraryList::addglob, path=%s, ext=%s", searchpath, ext);    
-    int count=scandir(searchpath, &files, file_select, alphasort); 
-    if (count<=0) return;
-    
-    for (int i=0; i<count; i++)
-    {
-        strcpy (cinfile[cinpos++], files[i]->d_name);
-    	murmur ("OVIMXcin: adding .cin file %s", files[i]->d_name);
-        free(files[i]);
-    }
-    free(files);
-}
+CinList cinlist;
 
 // OpenVanilla Loadable IM interface functions -------------------------------
 
 extern "C" int OVLoadableAvailableIMCount(char* p)
 {
-    strcpy(cinpath, p);
-    addglob(cinpath, ".cin");
-    return cinpos;
+    cinlist.load(p);
+    return cinlist.index;
 }
 
 extern "C" unsigned int OVLoadableVersion()
@@ -70,7 +28,8 @@ extern "C" unsigned int OVLoadableVersion()
 
 extern "C" OVInputMethod* OVLoadableNewIM(int x)
 {
-    return new OVIMXcin(cinpath, cinfile[x]);
+    return new OVIMXcin(cinlist.cinpath, cinlist.list[x].filename,
+        cinlist.list[x].ename, cinlist.list[x].cname, cinlist.list[x].encoding);
 }
 
 extern "C" void OVLoadableDeleteIM(OVInputMethod *im)
@@ -113,15 +72,8 @@ OVIMXcin::OVIMXcin(char *lpath, char *cfile, char *en, char *cn,
     cintab=NULL;
    
     cnameencoding=enc;
-    if (en)
-        strcpy(ename, en);
-    else
-        sprintf(ename, "OVIMXcin (%s)", cfile);
-
-    if (cn)
-        strcpy(cname, cn);
-    else 
-        sprintf(cname, "xcin模組 (%s)", cfile);
+    sprintf(ename, "OpenVanilla xcin (%s)", en ? en : cfile);
+    sprintf(cname, "OpenVanilla xcin (%s)", cn ? cn : cfile);
 }
 
 OVIMXcin::~OVIMXcin()
@@ -140,18 +92,14 @@ int OVIMXcin::identifier(char *s)
 int OVIMXcin::name(char *locale, void *s, OVEncoding *enc)
 {
     *enc=ovEncodingUTF8;
-    if (!cintab)
+    if (1 || !strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
     {
-        if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
-        {
-            *enc=cnameencoding;
-            return strlen(strcpy((char*)s, cname));
-        }
-        
-        return strlen(strcpy((char*)s, ename));
+        *enc=cnameencoding;
+        murmur ("asking ename=%s, cname=%s, encoding=%d", ename, cname, *enc);
+        return strlen(strcpy((char*)s, cname));
     }
-
-    return cintab->name(locale, s, enc);
+        
+    return strlen(strcpy((char*)s, ename));
 }
 
 int OVIMXcin::initialize(OVDictionary* global, OVDictionary* local, OVService*, char*)
@@ -163,17 +111,12 @@ int OVIMXcin::initialize(OVDictionary* global, OVDictionary* local, OVService*, 
     char buf[256];
     OVEncoding enc=ovEncodingUTF8;
     if (!local->keyExist(sk)) local->setInt(sk, 0);
-    if (!local->keyExist(encoding)) local->setString(encoding, "big5");
+//  if (!local->keyExist(encoding)) local->setString(encoding, "big5");
 
     update(global, local);  // run-time configurable settings    
     int selkeyshift=local->getInt(sk);
     local->getString(encoding, buf);
-    
-    if (!strcasecmp(buf, "big5")) enc=ovEncodingBig5HKSCS;
-    if (!strcasecmp(buf, "big5e")) enc=ovEncodingBig5HKSCS;
-    if (!strcasecmp(buf, "big5hkscs")) enc=ovEncodingBig5HKSCS;
-    if (!strcasecmp(buf, "euc")) enc=ovEncodingEUC_CN;
-    if (!strcasecmp(buf, "euc_cn")) enc=ovEncodingEUC_CN;
+    enc=VXEncodingMapper(buf);
 
     char cinfilename[PATH_MAX];
     strcpy (cinfilename, loadpath);
@@ -261,6 +204,18 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         keyseq.remove();
         updateDisplay(buf);
         if (!keyseq.length() && autocomposing) cancelAutoCompose(textbar);
+        
+        // if autocomposing is on
+        if (keyseq.length() && parent->isAutoCompose())
+        {
+            if (cintab->find(keyseq.getSeq()))
+            {
+                autocomposing=1;
+                compose(buf, textbar, srv);
+            }
+            else if (candi.onDuty()) cancelAutoCompose(textbar);
+        }
+
         return 1;
     }
 

@@ -7,6 +7,8 @@
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVUtility.h>
 
+OVEncoding VXEncodingMapper(const char *s);
+
 class VXCIN
 {
 public:

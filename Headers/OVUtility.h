@@ -31,6 +31,7 @@ public:
     ~OVAutoDeletePool() { for (int i=0; i<p; i++) if (pool[i]) delete pool[i]; }
     OVObject* add(OVObject *o)
     {
+        if (!o) return o;
         if (p==ovMaxPoolSize) return o; // note: no exception
         return pool[p++]=o;
     }

@@ -1,4 +1,4 @@
-// OVXLoader.cpp
+// OVLoader.cpp
 
 #define OVDEBUG
 
@@ -32,7 +32,7 @@ public:
 };
 
 const int vxMaxContext = 256;
-const char *plistfile  = "/Library/OpenVanilla/Development/OVXLoader.plist";
+const char *plistfile  = "/Library/OpenVanilla/Development/OVLoader.plist";
 const char *loaddir    = "/Library/OpenVanilla/Development/";
 
 int floatingwindowlock=0, defposx, defposy, textsize=24;
@@ -85,7 +85,7 @@ void SetupMenuString(MenuRef mnu, int pos) {
     VXCFAutoreleasePool p;
     CFBundleRef bdl = CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName));
     CFStringRef str = (CFStringRef)p.add
-        (CFBundleCopyLocalizedString(bdl,CFSTR("Preferences"),NULL,NULL));
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Preferences"),NULL,NULL));	
     InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'PREF');
     str = (CFStringRef)p.add
         (CFBundleCopyLocalizedString(bdl,CFSTR("About"),NULL,NULL));
@@ -104,6 +104,7 @@ int SetupMenuList(MenuRef mnu) {
         char imn[256];
         list.impair[i].im->name(locale, imn, &enc);
         CFStringRef imname=VXCreateCFString(imn, enc);
+		if (!imname) imname=VXCreateCFString(list.impair[i].id);		
         InsertMenuItemTextWithCFString(mnu, imname, i, 0, usermenu+i);
         SetMenuItemCommandKey(mnu, i+1, FALSE, '1'+i);
         SetMenuItemModifiers(mnu, i+1, kMenuControlModifier);

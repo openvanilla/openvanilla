@@ -23,6 +23,7 @@ public:
     ~VXCFAutoreleasePool() { for (int i=0; i<p; i++) CFRelease(pool[i]); }
     CFTypeRef add(CFTypeRef r)
     {
+		if (!r) return r;
         if (p==vxMaxPoolSize) return r;     // note: no exception
         return pool[p++]=r;
     }        

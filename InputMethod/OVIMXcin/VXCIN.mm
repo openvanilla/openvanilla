@@ -4,6 +4,17 @@
 #include "VXCIN.h"
 #include "VXUtility.h"
 
+OVEncoding VXEncodingMapper(const char *s)
+{
+    if (!strcasecmp(s, "big5")) return ovEncodingBig5HKSCS;
+    if (!strcasecmp(s, "big5e")) return ovEncodingBig5HKSCS;
+    if (!strcasecmp(s, "big5hkscs")) return ovEncodingBig5HKSCS;
+    if (!strcasecmp(s, "big5-hkscs")) return ovEncodingBig5HKSCS;
+    if (!strcasecmp(s, "euc")) return ovEncodingEUC_CN;
+    if (!strcasecmp(s, "euc_cn")) return ovEncodingEUC_CN;
+    return ovEncodingUTF8;
+}
+
 VXCIN::VXCIN()
 {
     selkey[0]=endkey[0]=ename[0]=0;
@@ -92,22 +103,31 @@ void VXCIN::read(char *fname, OVEncoding enc, int shiftselkey)
         {   
             if (shiftselkey) strcpy(selkey, " ");
             strcat(selkey, value);
+            continue;
         }
 
         if (!strcasecmp(key, "%ename"))
         {
             strcpy(ename, value);
+            continue;
+        }
+
+        if (!strcasecmp(key, "%encoding"))
+        {
+            enc=VXEncodingMapper(value);
+            continue;
         }
 
         if (!strcasecmp(key, "%endkey"))
         {
             strcpy(endkey, value);
+            continue;
         }            
 
         if (!strcasecmp(key, "%cname"))
         {
-            
             cname=(NSString*)VXCreateCFString(value, enc);
+            continue;
         }
 
         #define NAMESTATE(a, b, c)  \
@@ -131,6 +151,7 @@ void VXCIN::read(char *fname, OVEncoding enc, int shiftselkey)
         if (state==2)
         {
             id keyobj=[[NSString stringWithCString: key] lowercaseString];
+            
             NSString* valueobj=(NSString*)VXCreateCFString(value, enc);
 
             if(!keyobj || !valueobj) continue;
