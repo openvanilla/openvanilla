@@ -1,0 +1,24 @@
+# Makefile.Darwin
+# first written by gugod for OV 0.6.x; edited for OV 0.7
+
+HDRDIR=Headers
+HEADERS=OpenVanilla.h OVModuleWrapper.h OVModuleLoader.h OVUtility.h
+BUILDDIR=build/OSX
+OSXFRAMEWORK=$(BUILDDIR)/OpenVanilla.framework
+
+all: osx-framework
+
+install: install-osx-framework
+
+clean:
+	rm -rf $(BUILDDIR)
+
+# OSX-Specific targets
+
+install-osx-framework: osx-framework
+	cp -rf $(OSXFRAMEWORK) /Library/Frameworks/
+
+osx-framework:
+	mkdir -p $(OSXFRAMEWORK)/Headers
+	for file in $(HEADERS) ; do cp $(HDRDIR)/$$file $(OSXFRAMEWORK)/Headers; done;
+
