@@ -1,7 +1,5 @@
 // VXLoadableIM.cpp
 
-#define OVDEBUG
-
 #include <sys/param.h>
 #include <sys/types.h>
 #include <dirent.h>

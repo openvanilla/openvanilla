@@ -22,7 +22,11 @@ public:
     virtual int onScreen() { return displaying; }
     
     virtual int setPosition(int x, int y);
-    
+    virtual void getPosition(int *x, int *y);
+	virtual void setFontSize(int s);
+	virtual VXTextBar* lock();
+	virtual VXTextBar* unlock();
+	
 protected:
     WindowRef window;
     ControlRef label;
@@ -34,6 +38,7 @@ protected:
     int textupdated;
     int posupdated;
     int displaying;
+	int locked;
 };    
 
 #endif

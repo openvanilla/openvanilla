@@ -1,5 +1,7 @@
 // OVXLoader.cpp
 
+#define OVDEBUG
+
 #include <Carbon/Carbon.h>
 #include <dlfcn.h>
 #include <sys/syslimits.h>
@@ -38,6 +40,7 @@ void CIMContext::remove()
 	{ for (int c=0; c<vxMaxContext; c++) if (pool[c]==this) pool[c]=NULL; }
 
 
+int floatingwindowlock=0, defposx, defposy, textsize=24;
 OVService srv;
 VXConfig *sysconfig=NULL;
 VXLibraryList list;
@@ -123,6 +126,21 @@ int CIMCustomInitialize(MenuRef mnu)
 	CFRelease(mstr);
 	
 	
+	// get floating window settings
+	if (!global->keyExist("floatingwindowlock")) 
+	{
+		global->setInt("floatingWindowLock", 0);
+		global->setInt("floatingWindowLockPosX", 0);
+		global->setInt("floatingWindowLockPosY", 500);
+	}
+	
+	if (!global->keyExist("textSize")) global->setInt("textSize", 24);
+	textsize=global->getInt("textSize");
+	
+	floatingwindowlock=global->getInt("floatingWindowLock");
+	defposx=global->getInt("floatingWindowLockPosX");
+	defposy=global->getInt("floatingWindowLockPosY");	
+	
 	// look for the input method we want to use
 	char currentim[256];
 	if (global->keyExist("currentIM"))
@@ -166,6 +184,15 @@ void CIMCustomTerminate()
 void *CIMCustomOpen()
 {
     CIMContext *c=new CIMContext;
+
+	c->bar.setFontSize(textsize);
+	if (floatingwindowlock) 
+	{
+		c->bar.unlock();
+		c->bar.setPosition(defposx, defposy);
+		c->bar.lock(); 
+	}
+
     if (inputmethod) c->ovcontext=inputmethod->newContext();
     return c;
 }
@@ -191,6 +218,21 @@ int CIMCustomActivate(void *data, CIMInputBuffer *buf)
 		char buf[256];
 		inputmethod->identifier(buf);
 		OVDictionary *global=GetGlobalConfig();
+	
+		c->bar.setFontSize(global->getInt("textSize"));
+		
+		floatingwindowlock=global->getInt("floatingWindowLock");
+		defposx=global->getInt("floatingWindowLockPosX");
+		defposy=global->getInt("floatingWindowLockPosY");
+
+		if (floatingwindowlock) 
+		{
+			c->bar.unlock();
+			c->bar.setPosition(defposx, defposy);
+			c->bar.lock(); 
+		}
+		else c->bar.unlock();
+		
 		OVDictionary *local=GetLocalConfig(buf);
 		inputmethod->update(global, local);
 		c->onScreen=0;
@@ -229,6 +271,23 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
     {
         c->onScreen=1;
         c->bar.hide();
+		
+		if (floatingwindowlock)
+		{
+			int newx, newy;
+			c->bar.getPosition(&newx, &newy);
+			if ((newx != defposx) || (newy != defposy))
+			{
+				murmur("old: (%d,%d), new: (%d,%d)", defposx, defposy, newx, newy);
+				OVDictionary *global=GetGlobalConfig();
+				defposx=newx;
+				defposy=newy;
+				global->setInt("floatingWindowLock", floatingwindowlock);
+				global->setInt("floatingWindowLockPosX", defposx);
+				global->setInt("floatingWindowLockPosY", defposy);
+				sysconfig->write();
+			}
+		}
     }
 
 	c->ovcontext->deactivate(&srv);

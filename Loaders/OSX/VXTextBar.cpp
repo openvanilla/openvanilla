@@ -1,7 +1,5 @@
 // VXTextBar.cpp
 
-#define OVDEBUG 1
-
 #include "VXTextBar.h"
 #include "VXUtility.h"
 
@@ -12,7 +10,7 @@ void VXTBFixPosition(Point *p, int width, int height);
 
 VXTextBar::VXTextBar(int fsize) : fontsize(fsize)
 {
-    lookupdated=textupdated=posupdated=displaying=0;
+    lookupdated=textupdated=posupdated=displaying=locked=0;
     pos.h=pos.v=20;
     text=CFStringCreateMutable(NULL, 0);
     CFStringAppendCString(text, " ", kCFStringEncodingMacRoman);
@@ -32,7 +30,7 @@ VXTextBar::VXTextBar(int fsize) : fontsize(fsize)
 
     ControlFontStyleRec fontstyle;
     fontstyle.flags=kControlUseSizeMask;
-    fontstyle.size=vxtbDefFontSize;
+    fontstyle.size=fontsize;
 
     CreateStaticTextControl(window, &labelrect, text, &fontstyle, &label);
     MoveWindow(window, windowrect.left, windowrect.top, true);
@@ -66,6 +64,13 @@ OVTextBar* VXTextBar::append(void*s, OVEncoding e, int l)
 
 OVTextBar* VXTextBar::hide()
 {
+	if (locked)
+	{
+		clear();
+		update();
+		return this;
+	}
+	
     if (displaying)
 	{
 		if (window) HideWindow(window);
@@ -83,11 +88,55 @@ OVTextBar* VXTextBar::show()
 	return this;
 }
 
+VXTextBar* VXTextBar::lock()
+{
+	locked=1;
+	
+	return this;
+}
+
+VXTextBar* VXTextBar::unlock()
+{
+	locked=0;
+	return this;
+}
+
 int VXTextBar::setPosition(int x, int y)
 {
-    pos.h=x;
-    pos.v=y;
+	if (!locked)
+	{
+		pos.h=x;
+		pos.v=y;
+	}
+	else
+	{
+		Rect wbr;
+		GetWindowBounds(window, kWindowGlobalPortRgn, &wbr);
+		pos.h=wbr.left;
+		pos.v=wbr.top;
+	}
+
     return posupdated=1;
+}
+
+void VXTextBar::setFontSize(int s)
+{
+	if (s < 6 || s==fontsize) return;
+	fontsize=s;
+	lookupdated=1;
+	
+	ControlFontStyleRec fontstyle;
+    fontstyle.flags=kControlUseSizeMask;
+    fontstyle.size=s;
+	SetControlData(label, kControlEntireControl, 
+            kControlFontStyleTag, sizeof(ControlFontStyleRec), 
+			&fontstyle);
+}
+
+void VXTextBar::getPosition(int *x, int *y)
+{
+	*x=pos.h;
+	*y=pos.v;
 }
 
 OVTextBar* VXTextBar::update()
@@ -107,7 +156,20 @@ OVTextBar* VXTextBar::update()
         VXTBSetRect(&labelrect, fontsize, text);
         windowrect=labelrect;        
         SetControlBounds(label, &labelrect);
-        SizeWindow(window, windowrect.right, windowrect.bottom, TRUE);
+		
+        if (!locked) 
+		{
+			SizeWindow(window, windowrect.right, windowrect.bottom, TRUE);
+		}
+		else
+		{
+			Rect bound=(*GetMainDevice())->gdRect;
+			int w=bound.right-bound.left-25;
+			labelrect.right=labelrect.left+w;
+			SetControlBounds(label, &labelrect);
+				
+			SizeWindow(window, w, windowrect.bottom, TRUE);
+		}
 
         murmur("textupdate: windowsize: right = %d , bottom = %d",windowrect.right, windowrect.bottom);
 
@@ -132,9 +194,10 @@ OVTextBar* VXTextBar::update()
         posupdated=0;
     }
 
-    VXTBSetRect(&labelrect, fontsize, text);
-    VXTBFixPosition(&pos, labelrect.right, labelrect.bottom);
-    MoveWindow(window, pos.h, pos.v, TRUE);        
+    VXTBSetRect(&labelrect, fontsize, text);	
+	VXTBFixPosition(&pos, labelrect.right, labelrect.bottom);
+	MoveWindow(window, pos.h, pos.v, TRUE);
+		
     DrawControls(window);
     return this;
 }
