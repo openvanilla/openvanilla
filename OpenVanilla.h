@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+const unsigned int ovVersion=0x00000001;
+
 class OVObject
 {
 public:

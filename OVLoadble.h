@@ -9,7 +9,7 @@
 
 #include "OpenVanilla.h"
 
-// declares the three required inteface functions, must be extern "C"
+// declares the required inteface functions, must be extern "C"
 //      int OVLoadableAvailableIMCount(char *path)
 //          receives the path base where the module is loaded
 //          (e.g. if the module is /Library/OpenVanilla/foobar.dylib,
@@ -19,9 +19,10 @@
 //      an instance of IM module. The parameter "imid" corresponds to the
 //      available IM's that OVLoadableAvailableIMCount() returned.
 
-// these two are required
+// these three are required
 extern "C" OVInputMethod* OVLoadableNewIM(int imid);
 extern "C" void OVLoadbleDeleteIM(OVInputMethod *im);
+extern "C" unsigned int OVLoadableVersion();
 
 typedef OVInputMethod* OVLNewType(int);
 typedef void OVLDeleteType(OVInputMethod*);
@@ -43,6 +44,10 @@ extern "C" int OVLoadableCanUnload();
     extern "C" int OVLoadableCanUnload()    \
     {   \
         return 0;   \
+    }   \
+    extern "C" int OVLoadableVersion()  \
+    {   \
+        return ovVersion;   \
     }   \
     extern "C" OVInputMethod* OVLoadableNewIM(int) \
     {   \
