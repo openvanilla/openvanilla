@@ -604,5 +604,27 @@ int OVIMPOJContext::copyAndDispose(OVBuffer *buf, int c)
 
 // standard wrappers
 OVLOADABLEWRAPPER(OVIMPOJ);
-OVLOADABLECANUNLOAD;
+
+
+id autoreleasepool;
+extern "C" void _init()
+{
+    murmur ("init!\n");
+    
+    NSApplicationLoad();    
+    
+    murmur ("Cocoa multithread mode: %d", [NSThread isMultiThreaded]);
+    
+    murmur ("alloc");
+    autoreleasepool=[NSAutoreleasePool alloc];
+    
+    murmur ("init");
+    [autoreleasepool init];
+}  
+
+extern "C" int OVLoadableCanUnload() 
+{
+    return 0; 
+}
+
 
