@@ -46,8 +46,16 @@ public:
         if (!keyref) return 0;
 		CFTypeRef n;
         if (!(n=CFDictionaryGetValue(dict, keyref))) return 0;
-        if (CFGetTypeID(n) != CFNumberGetTypeID()) return 0;
-        CFNumberGetValue((CFNumberRef)n, kCFNumberIntType, &r);
+        if (CFGetTypeID(n) != CFNumberGetTypeID())
+        {
+            if (CFGetTypeID(n) != CFStringGetTypeID()) return 0;
+            r=CFStringGetIntValue((CFStringRef)n);
+        }
+        else
+        {
+            CFNumberGetValue((CFNumberRef)n, kCFNumberIntType, &r);
+        }
+        
         CFRelease(keyref);
         return r; 
     }
@@ -72,7 +80,17 @@ public:
         if (!keyref) return 0;
         CFTypeRef valueref;
         if (!(valueref=CFDictionaryGetValue(dict, keyref))) return 0;
-        if (CFGetTypeID(valueref) != CFStringGetTypeID()) return 0;
+        if (CFGetTypeID(valueref) != CFStringGetTypeID())
+        {
+            if (CFGetTypeID(valueref) != CFNumberGetTypeID()) return 0;
+            char buf[256];
+            sprintf (buf, "%d", getInt(key, e, keylen));
+            CFStringRef sr=VXCreateCFString(buf);                        
+            int l=VXConvertCFString(sr, str, e, maxlen);
+            CFRelease(sr);
+            return l;
+        }
+        
         int r=VXConvertCFString((CFStringRef)valueref, str, e, maxlen);
         CFRelease(keyref);
         return r;

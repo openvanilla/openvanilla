@@ -8,17 +8,19 @@ VXCIN::VXCIN()
 {
     selkey[0]=0;
     ename[0]=0;
-    cname[0]=0;
         
+    encoding=ovEncodingUTF8;
     keytable=[NSMutableDictionary new];
     chartable=[NSMutableDictionary new];
+    cname=NULL;
     if (!keytable || !chartable) throw ovExceptionMemory;
 }
 
 VXCIN::~VXCIN()
 {
-    [keytable release];
-    [chartable release];
+    if (keytable) [keytable release];
+    if (chartable) [chartable release];
+    if (cname) [cname release];
 }
 
 NSMutableArray* VXCIN::find(char *key)
@@ -30,15 +32,28 @@ NSMutableArray* VXCIN::find(char *key)
     return a;
 }
 
+NSString* VXCIN::getKey(char keycode)
+{
+    char buf[2];
+    buf[0]=tolower(keycode);
+    buf[1]=0;
+    
+    murmur ("VXCIN::getKey, keycode=%s", buf);
+    NSString* qs=(NSString*)VXCreateCFString(buf);
+    NSString* s=[keytable objectForKey: qs];
+    [qs release];
+    return s;
+}
+
 void VXCIN::read(char *fname, OVEncoding enc, int shiftselkey)
 {
     FILE *in=fopen(fname, "r");
-        
     if (!in) throw ovException;
-    murmur("VXCIN::read, filename=%s", fname);
-    
-    char buf[256];
+
+    encoding=enc;    
     int state=0;
+    char buf[256];
+
     while (!feof(in))
     {
         char key[256], value[256];
@@ -52,19 +67,17 @@ void VXCIN::read(char *fname, OVEncoding enc, int shiftselkey)
         {   
             if (shiftselkey) strcpy(selkey, " ");
             strcat(selkey, value);
-            murmur ("selkey=%s", selkey);
         }
 
         if (!strcasecmp(key, "%ename"))
         {
-            strcmp(ename, value);
-            murmur("ename=%s", ename);
+            strcpy(ename, value);
         }
             
         if (!strcasecmp(key, "%cname"))
         {
-            strcmp(cname, value);
-            murmur("cname=%s", cname);
+            
+            cname=(NSString*)VXCreateCFString(value, enc);
         }
 
         #define NAMESTATE(a, b, c)  \
@@ -108,40 +121,5 @@ void VXCIN::read(char *fname, OVEncoding enc, int shiftselkey)
     }
     
     fclose(in);
+    murmur ("Finished read %s, ename=%s, cname=%s, selkey=\"%s\", number of keytable=%d, number of chartable=%d", fname, ename, [cname UTF8String], selkey, [keytable count], [chartable count]);
 }
-
-/*
-int main(int argc, char**argv)
-{
-    if (argc < 2) return 0;
-    
-    id pool=[NSAutoreleasePool new];
-    
-    VXCIN cin;
-    cin.read(argv[1]);
-    
-    while (!feof(stdin))
-    {
-        char buf[256];
-        fscanf(stdin, "%s", buf);
-        
-        NSArray *ar=cin.find(buf);
-        
-        if (!ar)
-        {
-            murmur("key %s not found!", buf);
-            continue;
-        }
-        
-        int c=[ar count];
-        murmur("total canidates=%d", c);
-        for (int i=0; i<c; i++)
-        {
-            murmur("candidate %d=%s", i, [[ar objectAtIndex: i] UTF8String]);
-        }
-    }
-    
-    [pool release];
-}
-*/
-

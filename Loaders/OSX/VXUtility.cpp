@@ -17,6 +17,10 @@ CFStringEncoding VXMapEncoding(OVEncoding e)
     {
         case ovEncodingBig5HKSCS:
             enc=kCFStringEncodingBig5_HKSCS_1999;
+            break;
+        case ovEncodingEUC_CN:
+            enc=kCFStringEncodingEUC_CN;
+            break;
     } 
     
     return enc;

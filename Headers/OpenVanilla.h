@@ -31,6 +31,7 @@ enum
 //  ovEncodingUTF16LE=3,
     ovEncodingBig5=16,
     ovEncodingBig5HKSCS=16,
+    ovEncodingEUC_CN=24,
     ovEncodingNon8BitEncodingMask=7
 };
 

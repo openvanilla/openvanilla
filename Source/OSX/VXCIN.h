@@ -14,13 +14,16 @@ public:
     ~VXCIN();
     void read(char *fname, OVEncoding enc=ovEncodingUTF8, int shiftselkey=0);
     NSMutableArray* find(char *key);
+    NSString* getKey(char keycode);
     
 protected:
     NSMutableDictionary* keytable;
     NSMutableDictionary* chartable;
     char selkey[32];
     char ename[256];
-    char cname[256];
+    NSString* cname;
+    
+    OVEncoding encoding;
 };
 
 #endif
