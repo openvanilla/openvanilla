@@ -18,5 +18,5 @@ CC=$(GCC)
 CPP=$(GPP)
 endif
 
-VPATH=../../Source/Shared/
+VPATH+=.:../../Source/Shared/
 
