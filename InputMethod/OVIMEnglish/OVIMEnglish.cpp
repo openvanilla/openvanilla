@@ -1,16 +1,16 @@
-// OVIMExample.cpp
+// OVIMRoman.cpp
 
 #include <stdio.h>
 #include <string.h>
 #include "OpenVanilla/OpenVanilla.h"
 #include "OpenVanilla/OVLoadable.h"
 
-class OVEnglishIM;
+class OVIMRoman;
 
 class OVEnglishContext : public OVIMContext
 {
 public:
-    OVEnglishContext(OVEnglishIM *p) { parent=p; }
+    OVEnglishContext(OVIMRoman *p) { parent=p; }
     virtual ~OVEnglishContext() {}
     virtual int activate(OVService *) { return 1; }
     virtual int deactivate(OVService *) { return 1; }
@@ -33,17 +33,17 @@ public:
     }
     
 protected:
-    OVEnglishIM *parent;
+    OVIMRoman *parent;
 };
 
-class OVEnglishIM : public OVInputMethod
+class OVIMRoman : public OVInputMethod
 {
 public:
-    OVEnglishIM() {}
-    virtual ~OVEnglishIM() {}
+    OVIMRoman() {}
+    virtual ~OVIMRoman() {}
     virtual int identifier(char* s)
     {
-        return strlen(strcpy(s, "OVEnglishIM"));
+        return strlen(strcpy(s, "OVIMRoman"));
     }
     
     virtual int name(char *locale, void *s, OVEncoding *enc)
@@ -85,5 +85,5 @@ public:
 
 
 // use these two wrappers
-OVLOADABLEWRAPPER(OVEnglishIM)
+OVLOADABLEWRAPPER(OVIMRoman)
 OVLOADABLECANUNLOAD
