@@ -6,7 +6,7 @@ Directory Hierarchy description
              - Platform-dependent Makefile, should have
                "all" "install" and "clean", 3 standard targets.
 
-- Header/    - Platform-independent header files
+- Headers/   - Platform-independent header files
   - OSX/     - OSX-dependent header files
   - Win32/   - Win32-dependent header files
 
