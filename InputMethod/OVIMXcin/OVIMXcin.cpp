@@ -404,14 +404,14 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
         return 1;
     }
 
-    if (key->isCode(3, ovkDown, ovkLeft, '>') ||
+    if (key->isCode(2, ovkDown, ovkLeft) ||
         (!candi.onePage() && key->code()==ovkSpace))
     {
         candi.pageDown()->update(textbar);
         return 1;
     }
 
-    if (key->isCode(3, ovkUp, ovkRight, '<'))
+    if (key->isCode(2, ovkUp, ovkRight))
     {
         candi.pageUp()->update(textbar);
         return 1;
@@ -432,17 +432,19 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
         textbar->hide()->clear();
         return 1;
     }
-    
-    string inKey;
-    inKey.push_back(c);
-    if (cintab->isValidKey(inKey)) {
+
+	string inKey;
+	inKey.push_back(c);		
+    if (cintab->isValidKey(inKey) || cintab->isEndKey(c)) {
         string output;
         candi.select(candi.getSelKey()[0], output);
-			
+
 		buf->clear()->append((void*)const_cast<char*>(output.c_str()),
 							 parent->getCNameEncoding())
 					->send();
-        keyseq.add(c);
+		keyseq.add(c);
+		if(cintab->isEndKey(c))
+			compose(buf, textbar, srv);
 		updateDisplay(buf);
 		candi.cancel();
 		textbar->hide()->clear();
