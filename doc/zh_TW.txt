@@ -15,18 +15,31 @@ OpenVanilla與蘋果內建的中文輸入法TCIM（Traditional Chinese Input Met
 
 ※安裝環境：
 
-MacOS X作業系統（目前主要在10.3 Panther環境下開發）
+安裝MacOS X作業系統的麥金塔電腦（目前主要在OSX 10.3 Panther下開發）
 
 ※下載安裝：
 
-您可以在OpenVanilla官方網站的下載頁面，或是從OpenVanilla位在中研院資訊所自由軟體鑄造場的專案頁面下載區（http://rt.openfoundry.org/Foundry/Project/Download/?Queue=209）中，取得最新版本的OpenVanilla安裝套件。
+您可以在OpenVanilla官方網站的下載頁面，或是從OpenVanilla位在中研院資訊所自由軟體鑄造場的專案頁面下載區（http://rt.openfoundry.org/Foundry/Project/Download/?Queue=209）中，取得最新版本的OpenVanilla安裝套件，下載完成後直接點選安裝套件圖示，便開始進行安裝。
 
-※啟用OpenVanilla：
+完成安裝後，OpenVanilla主程式會安裝在「/Library/Components」底下，也就是在「資源庫」底下的「Components」裡頭，您可以看到一個叫做OpenVanilla.bundle的圖示。
 
 ※反安裝：
 
+※啟用OpenVanilla：
+
+在安裝完之後，請重新登入。然後，請在「系統偏好設定」（System Preference，位在螢幕左上角蘋果選單中）裡頭，打開「國際設定」（International）中的「輸入法選單」（Input method），在列表中，就可以看到多了一個「OpenVanilla輸入法載入器」（繁體中文語系）或是「OpenVanilla Loader」（英文語系），出現的圖示是在蘋果符號當中，寫了一個「酷」字。您也可以在螢幕左上角的輸入法選單中，直接選擇「打開國際設定⋯」。
+
+勾選之後，就可以在螢幕右上角的「輸入法選單」上，看到SpceChewing輸入法。您只要在輸入法選單上，或是使用Command按鈕（⌘）加上空白鍵切換輸入法（或使用Command按鈕加上Option按鈕，在加上空白鍵，三個按鍵一起按之後切換各國輸入語系），就可以切換到OpenVanilla。
 
 ※各項輸入法相關說明：
+
+○注音
+
+○倉頡
+
+○簡易
+
+○酷音
 
 ○白話字漢羅輸入
 
@@ -101,6 +114,24 @@ OpenVanilla 0.6.1 版所使用的輸入法檔案，都位在系統硬碟中的�
 
 在設定完按鍵之後，就是設定每一個按鍵組合所應該產生的結果了，這些設定放在%chardef begin與%chardef end之間，前面設定的是您在前面%keyname所設定的按鍵定義的組合，空一個空格後，是產生的結果。比方說，您可以在注音輸入法當中加入自己創建的新字，想要用「ㄅㄧㄤ\」打出「棒」這個字，就是多加一行「1u;4 棒」。此外，在%keyname與%chardef所定義的英文按鍵，是沒有區分大小寫的。
 
+※使用授權
+
+本軟體為開放源碼 (open source) 軟體，採用 Artistic License 釋出。相關權利義務，請參閱授權條款原文。
+
+※線上相關文件以及聯絡方式
+
+目前OpenVanilla的各種說明文件以及相關進度，都是在Wiki上進行、發佈，您可以在以下網址，取得各項說明文件：
+
+http://openvanilla.org/
+
+而如果您發現OpenVanilla有任何問題，或任何建議，希望能夠有怎樣的改進，您也可以使用前述「自由軟體鑄造場」的RT（Request Tracker）回報系統反應。
+
+而在您回報錯誤時，希望您可以盡可能描述您所遇到的狀況，例如您在那個應用程式中、使用OpenVanilla輸入法輸入了怎樣的內容出現了問題，而如果酷音輸入法造成應用軟體當機，OSX會提供應用程式當掉時的錯誤訊息，詢問您是否要當機紀錄回報給蘋果，我們也希望您能夠保留這份紀錄，提供給我們參考。
+
+如果您熟悉使用IRC網路聊天室的話，您也可以在IRC上找到OpenVanilla的發展者，我們經常會出沒在irc.seed.net.tw的「#osxchat」頻道裡。而各項最新的消息，也會發表在「#osxchat」頻道的專屬網誌：
+
+http://osxchat.blogspot.com/
+
 ※附錄
 
 ○OpenVanilla計畫的背景
@@ -108,3 +139,5 @@ OpenVanilla 0.6.1 版所使用的輸入法檔案，都位在系統硬碟中的�
 ○漁村輸入法的淵源
 
 ○特別感謝
+* 老地方冰果室、OIKOS生活網對於OpenVanilla的相關報導。
+* 新酷音發展計畫（http://chewing.csie.net/news.html）
