@@ -1,9 +1,8 @@
 %gen_inp
 %ename Iroha
-%cname 日文假名
+%cname 日文假名輸入
 %encoding UTF-8
 %selkey 1234567890
-%endkey <>_"
 %keyname begin
 a a
 b b
@@ -31,17 +30,13 @@ w w
 x x
 y y
 z z
-< ，
-> 。
-" 、
-_ ─
 %keyname end
 %chardef begin
 a      あ
 xa     ぁ
 la	ぁ
 i      い
-iroha	伊呂波
+iroha   伊呂波
 xi     ぃ
 li	ぃ
 lyi	ぃ
@@ -76,7 +71,6 @@ kyuu	きゅう
 kye	きぇ
 kyo	きょ
 kyou	きょう
-kyou	今日
 ku	 く
 cu	   く
 qu	   く
@@ -312,6 +306,7 @@ yu     ゆ
 xyu    ゅ
 lyu	ゅ
 yo     よ
+you よう
 xyo    ょ
 lyo	ょ
 ra     ら
@@ -372,6 +367,7 @@ kyuu	キュウ
 kye	キェ
 kyo	キョ
 kyou	キョウ
+kyou	今日
 KU     ク
 qya	クャ
 qyu	クュ
@@ -577,6 +573,7 @@ YU     ユ
 XYU    ュ
 lyu	ュ
 YO     ヨ
+you  ヨウ
 XYO    ョ
 lyo	ョ
 RA     ラ
@@ -594,9 +591,9 @@ RO     ロ
 WA     ワ
 XWA    ヮ
 lwa	ヮ
-XI     ヰ
-XE     ヱ
-wO      ヲ
+WI     ヰ
+WE     ヱ
+wo      ヲ
 n	ン
 nn	ン
 n'	ン
@@ -606,8 +603,10 @@ XKA    ヵ
 lka	ヵ
 XKE    ヶ
 lke	ヶ
+%chardef begin
 < ，
 > 。
 " 、
 _ ─
 %chardef end
+
