@@ -1,4 +1,4 @@
-= OpenVanilla 輸入法框架 0.6.3 使用說明
+n= OpenVanilla 輸入法框架 0.6.3 使用說明
 http://openvanilla.org/
 
 2004 © lukhnos D. Kang-min "gugod" Liu, Barabbas Jian, Pektong Chen. Wei-zhong "zonble" Yang and Mengjuei Hshieh.
@@ -753,7 +753,7 @@ http://rt.openfoundry.org/Foundry/Project/Download/?Queue=82
 
 使用 svn 取得 OV 原始程式碼的方法是，在終端機中下以下指令：
 
- svk  http://svn.openfoundry.org/openvanilla/trunk
+ svn co http://svn.openfoundry.org/openvanilla/trunk
 
 基本上我們比較不鼓勵使用 svn，而建議您使用 svk。原因是在 svn會在檔案庫的每個目錄下，分別建立一個「.svn」目錄，記錄版本紀錄，如果這個目錄被刪除，就會造成 svn 無法運作。而 MacOS X 的文件格式常常使用目錄 bundle，而各種應用程式在修改目錄 bundle 形式的文件的時候，往往會刪除 .svn  目錄而造成困擾。
 
