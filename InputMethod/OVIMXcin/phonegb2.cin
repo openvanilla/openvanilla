@@ -1,6 +1,6 @@
 %gen_inp
 %ename	phonegb
-%cname	×¢Òô
+%cname	×¢Òô(EUC-CN)
 %encoding euc_cn
 %selkey  1234567890
 %endkey  3467

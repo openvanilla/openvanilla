@@ -77,7 +77,7 @@ int CinList::preparse(char *loadpath, char *fname, int i)
 
         if (!strcasecmp(key, "%ename")) strcpy(list[i].ename, value);
         if (!strcasecmp(key, "%encoding"))
-			list[i].encoding=OVEncodingMapper(value);
+			list[i].encoding = OVEncodingMapper(value);
         if (!strcasecmp(key, "%cname")) strcpy(list[i].cname, value);
         
         line++;

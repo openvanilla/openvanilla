@@ -81,7 +81,7 @@ bool OVCIN::isEndKey(char keyChar)
 
 bool OVCIN::isValidKey(string keyString)
 {
-	if(charMap.count(keyString) > 0)
+	if(keyMap.count(keyString) > 0)
 		return true;
 	else
 		return false;
