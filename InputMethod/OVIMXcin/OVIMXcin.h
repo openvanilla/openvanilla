@@ -74,7 +74,10 @@ public:
     virtual int isBeep() { return cfgBeep; }
     virtual int isAutoCompose() { return cfgAutoCompose; }
     virtual int isHitMaxAndCompose() { return cfgHitMaxAndCompose; }
+	virtual bool isShiftSelKey() { return doShiftSelKey; };
     
+	virtual OVEncoding getCNameEncoding() { return cnameencoding; };
+
 protected:
     char loadpath[PATH_MAX];
     char cinfile[PATH_MAX];
@@ -88,6 +91,8 @@ protected:
     int cfgBeep;
     int cfgAutoCompose;
     int cfgHitMaxAndCompose;
+	
+	bool doShiftSelKey;
 };
 
 #endif

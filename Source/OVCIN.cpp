@@ -9,6 +9,9 @@
 #include <string>
 #include <vector>
 
+#include <cctype>
+#include <algorithm>
+
 using namespace std;
 
 OVEncoding OVEncodingMapper(const char *s)
@@ -112,12 +115,16 @@ string OVCIN::getPropertyByName(vector<string>& inStringVectorRef,
 								 string propertyName)
 {
 	string pattern = "%" + propertyName;
+	vector<string> delimiters;
+	delimiters.push_back(" ");
+	delimiters.push_back("\t");
 	for(unsigned int i = 0; i < inStringVectorRef.size(); i++)
 	{
 		string currentString = inStringVectorRef[i];
 		if(currentString.find(pattern, 0) == 0) {
 			vector<string> tempVectorRef;
-			OVStringToolKit::splitString(currentString, tempVectorRef, " "); 
+			OVStringToolKit::splitString(currentString, tempVectorRef,
+										 delimiters, false); 
 			return tempVectorRef[1];
 		}
 	}
@@ -131,6 +138,9 @@ int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 {
 	bool doGet = false;
 	string sectionMark = "begin";
+	vector<string> delimiters;
+	delimiters.push_back(" ");
+	delimiters.push_back("\t");
 	for(unsigned int i = 0; i < inStringVectorRef.size(); i++)
 	{
 		string currentString = inStringVectorRef[i];
@@ -150,18 +160,21 @@ int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 					break;
 			} else {
 				vector<string> pairVector;
-				int vectorSize = OVStringToolKit::splitString(currentString,
-															  pairVector, " ");
+				int vectorSize =
+					OVStringToolKit::splitString(currentString, pairVector,
+												 delimiters, false);
 				if(vectorSize == 2) {
-					// pairVector[0] is the key,
-					// pairVector[1] is the value.
-					if(outMapRef.find(pairVector[0]) == outMapRef.end()) {
+					string keyString = pairVector[0];
+					string valueString = pairVector[1];
+					transform(keyString.begin(), keyString.end(),
+							  keyString.begin(), (int(*)(int))tolower);
+					if(outMapRef.find(keyString) == outMapRef.end()) {
 						vector<string> currentVector;
-						currentVector.push_back(pairVector[1]);
-						outMapRef.insert(make_pair(pairVector[0],
+						currentVector.push_back(valueString);
+						outMapRef.insert(make_pair(keyString,
 												   currentVector));
 					} else
-						outMapRef[pairVector[0]].push_back(pairVector[1]);
+						outMapRef[keyString].push_back(valueString);
 				}
 			}
 		} // The end of if(!doGet)
