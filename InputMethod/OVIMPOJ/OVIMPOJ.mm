@@ -64,7 +64,7 @@ int tonemark(char c)
         case '`': return 3;
         case '^': return 5;
         case '=': return 7;
-        case 'x': return 8;
+        case '|': return 8;
     }
     return 0;
 }
