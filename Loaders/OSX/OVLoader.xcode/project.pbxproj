@@ -5,6 +5,118 @@
 	};
 	objectVersion = 39;
 	objects = {
+		6A2C9FD2075AFDB8005462F0 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = VXBuffer.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2C9FD3075AFDB8005462F0 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = VXConfig.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2C9FD4075AFDB8005462F0 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = VXDictionary.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2C9FD5075AFDB8005462F0 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = VXKeyCode.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2C9FD6075AFDB8005462F0 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			path = VXTextBar.cpp;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2C9FD7075AFDB8005462F0 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = VXTextBar.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2C9FD8075AFDB8005462F0 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			path = VXUtility.cpp;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2C9FD9075AFDB8005462F0 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = VXUtility.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2C9FDA075AFDB8005462F0 = {
+			fileRef = 6A2C9FD2075AFDB8005462F0;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2C9FDB075AFDB8005462F0 = {
+			fileRef = 6A2C9FD3075AFDB8005462F0;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2C9FDC075AFDB8005462F0 = {
+			fileRef = 6A2C9FD4075AFDB8005462F0;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2C9FDD075AFDB8005462F0 = {
+			fileRef = 6A2C9FD5075AFDB8005462F0;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2C9FDE075AFDB8005462F0 = {
+			fileRef = 6A2C9FD6075AFDB8005462F0;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2C9FDF075AFDB8005462F0 = {
+			fileRef = 6A2C9FD7075AFDB8005462F0;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2C9FE0075AFDB8005462F0 = {
+			fileRef = 6A2C9FD8075AFDB8005462F0;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2C9FE1075AFDB8005462F0 = {
+			fileRef = 6A2C9FD9075AFDB8005462F0;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		6A8BE8C307544DB1002FBA64 = {
 			children = (
 				6A8BE99207544E75002FBA64,
@@ -12,7 +124,6 @@
 				6A8BE8D907544E1F002FBA64,
 				6A8BE8D807544E15002FBA64,
 				6A8BE8D007544DC3002FBA64,
-				6A8BE8D107544DC3002FBA64,
 			);
 			isa = PBXGroup;
 			refType = 4;
@@ -58,12 +169,12 @@
 		6A8BE8CC07544DC3002FBA64 = {
 			buildActionMask = 2147483647;
 			files = (
-				6A8BE98D07544E62002FBA64,
-				6A8BE98F07544E62002FBA64,
 				6A8BE99707544E8A002FBA64,
 				6A8BE99907544E8A002FBA64,
-				6A8BE99F07544E9A002FBA64,
 				6A8BE9A107544E9A002FBA64,
+				6AD0EAE1075AFC6A005045FE,
+				6A2C9FDE075AFDB8005462F0,
+				6A2C9FE0075AFDB8005462F0,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,26 +259,18 @@
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		6A8BE8D107544DC3002FBA64 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.xml;
-			name = "OVLoader-Info.plist";
-			path = "/Users/lukhnos/logiciel/OpenVanilla/OVXLoader/OVLoader-Info.plist";
-			refType = 0;
-			sourceTree = "<absolute>";
-		};
 		6A8BE8D207544DE8002FBA64 = {
 			buildActionMask = 2147483647;
 			files = (
-				6A8BE98707544E62002FBA64,
-				6A8BE98A07544E62002FBA64,
-				6A8BE98B07544E62002FBA64,
-				6A8BE98C07544E62002FBA64,
-				6A8BE98E07544E62002FBA64,
-				6A8BE99007544E62002FBA64,
 				6A8BE99807544E8A002FBA64,
 				6A8BE99A07544E8A002FBA64,
 				6A8BE9A207544E9A002FBA64,
+				6A2C9FDA075AFDB8005462F0,
+				6A2C9FDB075AFDB8005462F0,
+				6A2C9FDC075AFDB8005462F0,
+				6A2C9FDD075AFDB8005462F0,
+				6A2C9FDF075AFDB8005462F0,
+				6A2C9FE1075AFDB8005462F0,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,21 +278,23 @@
 		6A8BE8D307544DF5002FBA64 = {
 			buildActionMask = 2147483647;
 			files = (
-				6A8BE9A007544E9A002FBA64,
+				6AD0EAE2075AFC6A005045FE,
 			);
 			isa = PBXRezBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6A8BE8D807544E15002FBA64 = {
 			children = (
-				6A8BE97C07544E62002FBA64,
-				6A8BE97F07544E62002FBA64,
-				6A8BE98007544E62002FBA64,
-				6A8BE98107544E62002FBA64,
-				6A8BE98207544E62002FBA64,
-				6A8BE98307544E62002FBA64,
-				6A8BE98407544E62002FBA64,
-				6A8BE98507544E62002FBA64,
+				6A2C9FD2075AFDB8005462F0,
+				6A2C9FD3075AFDB8005462F0,
+				6A2C9FD4075AFDB8005462F0,
+				6A2C9FD5075AFDB8005462F0,
+				6A2C9FD6075AFDB8005462F0,
+				6A2C9FD7075AFDB8005462F0,
+				6A2C9FD8075AFDB8005462F0,
+				6A2C9FD9075AFDB8005462F0,
+				6A8BE99D07544E9A002FBA64,
+				6A8BE99E07544E9A002FBA64,
 			);
 			isa = PBXGroup;
 			name = OSX;
@@ -234,126 +339,6 @@
 			settings = {
 			};
 		};
-		6A8BE97C07544E62002FBA64 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = VXBuffer.h;
-			path = ../Source/OSX/VXBuffer.h;
-			refType = 2;
-			sourceTree = SOURCE_ROOT;
-		};
-		6A8BE97F07544E62002FBA64 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = VXConfig.h;
-			path = ../Source/OSX/VXConfig.h;
-			refType = 2;
-			sourceTree = SOURCE_ROOT;
-		};
-		6A8BE98007544E62002FBA64 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = VXDictionary.h;
-			path = ../Source/OSX/VXDictionary.h;
-			refType = 2;
-			sourceTree = SOURCE_ROOT;
-		};
-		6A8BE98107544E62002FBA64 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = VXKeyCode.h;
-			path = ../Source/OSX/VXKeyCode.h;
-			refType = 2;
-			sourceTree = SOURCE_ROOT;
-		};
-		6A8BE98207544E62002FBA64 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = VXTextBar.cpp;
-			path = ../Source/OSX/VXTextBar.cpp;
-			refType = 2;
-			sourceTree = SOURCE_ROOT;
-		};
-		6A8BE98307544E62002FBA64 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = VXTextBar.h;
-			path = ../Source/OSX/VXTextBar.h;
-			refType = 2;
-			sourceTree = SOURCE_ROOT;
-		};
-		6A8BE98407544E62002FBA64 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = VXUtility.cpp;
-			path = ../Source/OSX/VXUtility.cpp;
-			refType = 2;
-			sourceTree = SOURCE_ROOT;
-		};
-		6A8BE98507544E62002FBA64 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = VXUtility.h;
-			path = ../Source/OSX/VXUtility.h;
-			refType = 2;
-			sourceTree = SOURCE_ROOT;
-		};
-		6A8BE98707544E62002FBA64 = {
-			fileRef = 6A8BE97C07544E62002FBA64;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		6A8BE98A07544E62002FBA64 = {
-			fileRef = 6A8BE97F07544E62002FBA64;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		6A8BE98B07544E62002FBA64 = {
-			fileRef = 6A8BE98007544E62002FBA64;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		6A8BE98C07544E62002FBA64 = {
-			fileRef = 6A8BE98107544E62002FBA64;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		6A8BE98D07544E62002FBA64 = {
-			fileRef = 6A8BE98207544E62002FBA64;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		6A8BE98E07544E62002FBA64 = {
-			fileRef = 6A8BE98307544E62002FBA64;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		6A8BE98F07544E62002FBA64 = {
-			fileRef = 6A8BE98407544E62002FBA64;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		6A8BE99007544E62002FBA64 = {
-			fileRef = 6A8BE98507544E62002FBA64;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		6A8BE99107544E6B002FBA64 = {
 			children = (
 				6A8BE99307544E8A002FBA64,
@@ -368,10 +353,8 @@
 		};
 		6A8BE99207544E75002FBA64 = {
 			children = (
-				6A8BE99B07544E9A002FBA64,
-				6A8BE99C07544E9A002FBA64,
-				6A8BE99D07544E9A002FBA64,
-				6A8BE99E07544E9A002FBA64,
+				6AD0EADF075AFC6A005045FE,
+				6AD0EAE0075AFC6A005045FE,
 			);
 			isa = PBXGroup;
 			name = OVLoader;
@@ -434,22 +417,6 @@
 			settings = {
 			};
 		};
-		6A8BE99B07544E9A002FBA64 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			path = OVXLoader.cpp;
-			refType = 2;
-			sourceTree = SOURCE_ROOT;
-		};
-		6A8BE99C07544E9A002FBA64 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.rez;
-			path = OVXLoader.r;
-			refType = 2;
-			sourceTree = SOURCE_ROOT;
-		};
 		6A8BE99D07544E9A002FBA64 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -466,18 +433,6 @@
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
 		};
-		6A8BE99F07544E9A002FBA64 = {
-			fileRef = 6A8BE99B07544E9A002FBA64;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		6A8BE9A007544E9A002FBA64 = {
-			fileRef = 6A8BE99C07544E9A002FBA64;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		6A8BE9A107544E9A002FBA64 = {
 			fileRef = 6A8BE99D07544E9A002FBA64;
 			isa = PBXBuildFile;
@@ -486,6 +441,34 @@
 		};
 		6A8BE9A207544E9A002FBA64 = {
 			fileRef = 6A8BE99E07544E9A002FBA64;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AD0EADF075AFC6A005045FE = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			path = OVLoader.cpp;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AD0EAE0075AFC6A005045FE = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.rez;
+			path = OVLoader.r;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AD0EAE1075AFC6A005045FE = {
+			fileRef = 6AD0EADF075AFC6A005045FE;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AD0EAE2075AFC6A005045FE = {
+			fileRef = 6AD0EAE0075AFC6A005045FE;
 			isa = PBXBuildFile;
 			settings = {
 			};
