@@ -60,7 +60,7 @@ class VarTable {
         VarTable();
         int index(cchar*);
         double set(int idx, double val);
-        double& get(int idx);
+        double get(int idx);
 
     protected:
         double var[27];
@@ -206,7 +206,7 @@ void inputstat (BASICLex& lex)
 
         switch (t)
         {
-            case BTliteral: cin >> vars.get(vars.index(buf)); break;
+//          case BTliteral: cin >> vars.get(vars.index(buf)); break;
             case BTstring:  strout << buf; break;
             case BTsmcln:   strout << "? "; break;
             case BTcomma:   strout << " "; break;
@@ -249,6 +249,7 @@ void forstat (BASICLex& lex, FILEinput& input)
     for ( ; vars.get(index) <= toval ; vars.set(index, vars.get(index) + stepval))
     {
         input.set(pos, line);
+        lex.consume();
         statement(lex, input);
     }
 }
@@ -355,7 +356,7 @@ double VarTable::set(int idx, double val)
     return (var[idx] = val);
 }
 
-double& VarTable::get(int idx)
+double VarTable::get(int idx)
 {
     return (var[idx]);
 }
