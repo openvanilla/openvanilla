@@ -75,7 +75,7 @@ int VXTextBar::show()
     return displaying=1;
 }
 
-int VXTextBar::setposition(int x, int y)
+int VXTextBar::setPosition(int x, int y)
 {
     pos.h=x;
     pos.v=y;

@@ -11,17 +11,17 @@ class VXKeyCode : public OVKeyCode
 public:
     virtual int code()
         { return charcode; }
-    virtual int isshift()
+    virtual int isShift()
         { return modifiers & (shiftKey | rightShiftKey); }
-    virtual int iscapslock()
+    virtual int isCapslock()
         { return modifiers & alphaLock; }
-    virtual int isctrl()
+    virtual int isCtrl()
         { return modifiers & (controlKey | rightControlKey); }
-    virtual int isalt()
+    virtual int isAlt()
         { return isopt(); }
-    virtual int isopt()
+    virtual int isOpt()
         { return modifiers & (optionKey | rightOptionKey); }
-    virtual int iscommand()
+    virtual int isCommand()
         { return modifiers & cmdKey; }
     virtual void set(unsigned char c, UInt32 k, UInt32 m)
         { charcode=c; keycode=k; modifiers=m; }

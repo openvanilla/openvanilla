@@ -21,7 +21,7 @@ public:
     virtual int show();
     virtual int update();
     
-    virtual int setposition(int x, int y);
+    virtual int setPosition(int x, int y);
     
 protected:
     WindowRef window;

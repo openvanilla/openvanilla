@@ -26,7 +26,7 @@ public:
         if (dict) CFRelease(dict);
     }
 
-    virtual int keyexist(void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
+    virtual int keyExist(void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
     {
         CFStringRef keyref=VXCreateCFString(key, e, keylen);
         if (!keyref) return 0;
@@ -35,7 +35,7 @@ public:
         return r;
     }
         
-    virtual int getint(void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
+    virtual int getInt(void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
     {
         int r=0;
         CFStringRef keyref=VXCreateCFString(key, e, keylen);
@@ -47,7 +47,7 @@ public:
         return r; 
     }
     
-    virtual int putint(void *key, int value, OVEncoding e=ovEncodingUTF8,
+    virtual int putInt(void *key, int value, OVEncoding e=ovEncodingUTF8,
         int keylen=0)
     {
 		printf ("setting value=%d\n", value);
@@ -62,7 +62,7 @@ public:
         return 1;
     }
             	
-	virtual int getstring(void *key, void *str, OVEncoding e=ovEncodingUTF8,
+	virtual int getString(void *key, void *str, OVEncoding e=ovEncodingUTF8,
 		int keylen=0, int maxlen=0)
     {
         CFStringRef keyref=VXCreateCFString(key, e, keylen);
@@ -74,7 +74,7 @@ public:
         return r;
     }
     
-	virtual int putstring(void *key, void *value, OVEncoding e=ovEncodingUTF8,
+	virtual int putString(void *key, void *value, OVEncoding e=ovEncodingUTF8,
 		int keylen=0, int valuelen=0) 
     { 
         CFStringRef keyref=VXCreateCFString(key, e, keylen);
@@ -88,7 +88,7 @@ public:
 
     virtual CFDictionaryRef getdictref() { return dict; }
     
-    virtual CFDictionaryRef getdictionary(void *key, OVEncoding e=ovEncodingUTF8,
+    virtual CFDictionaryRef getDictionary(void *key, OVEncoding e=ovEncodingUTF8,
         int keylen=0)
     {
         CFStringRef keyref=VXCreateCFString(key, e, keylen);
@@ -99,7 +99,7 @@ public:
 
     }
     
-	virtual int putdictionary(void *key, CFDictionaryRef dref, 
+	virtual int putDictionary(void *key, CFDictionaryRef dref, 
         OVEncoding e=ovEncodingUTF8, int keylen=0, int valuelen=0) 
     {
         CFStringRef keyref=VXCreateCFString(key, e, keylen);
