@@ -1,0 +1,63 @@
+{\rtf1\mac\ansicpg10002\cocoartf102
+{\fonttbl\f0\fnil\fcharset77 LucidaGrande;\f1\fnil\fcharset77 Monaco;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww8620\viewh9520\viewkind0
+\pard\tx565\tx1133\tx1700\tx2266\tx2832\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802\ql\qnatural
+
+\f0\fs36 \cf0 OpenVanilla 0.6.3 for Mac OS X\
+
+\fs24 \
+Copyright \'a9 2004 by Lukhnos, Kang-ming Liu, Tian-jian Jiang, Pek-tiong Tan, Weizhong Yang and Mengjuei Hsieh\
+\
+\ul Overview\
+\ulnone \
+This packages installs OpenVanilla Loader 0.6.3 with pre-bundled input methods. OpenVanilla is an "input method" framework that is able to load various input method modules. This packages also comes with several Chinese input method modules that are popular among users of Traditional Chinese. Extras and additional input methods (such as modules or data files for Simplified Chinese) can be downloaded at our website 
+\f1 http://openvanilla.org.
+\f0 \
+\
+\pard\tx565\tx1133\tx1700\tx2266\tx2832\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802\ql\qnatural
+\cf0 \ul \ulc0 What's New in 0.6.3\
+\pard\tx565\tx1133\tx1700\tx2266\tx2832\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802\ql\qnatural
+\cf0 \ulnone \
+\pard\tx560\tx565\tx1133\tx1700\tx2266\tx2832\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802\li580\fi-580\ql\qnatural
+\cf0 *	You can customize the foreground color, background color and transparency of the candidate window (text bar) now via the OpenVanilla System Preferences Panel.\
+*	You can customize your own key combination to switch among input methods. Before it was restricted to CTRL-OPT. Now combinations of SHIFT, CTRL, OPT, and COMMAND is accepted.\
+*	A major bug fix that kept haunting 0.6.2 is now gone. It involves the "dirty pre-edit buffer" that persisted even after you switched to other non-OpenVanilla input methods or keyboard layouts.\
+*	This installer no longer installs a wholesale bunch of input methods that you may not need. You can choose which packages and input methods to install now.\
+*	A comprehensive document that serves both as help file and user's guide. You can open the document via OpenVanilla's menu.\
+\pard\tx565\tx1133\tx1700\tx2266\tx2832\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802\ql\qnatural
+\cf0 \
+\pard\tx565\tx1133\tx1700\tx2266\tx2832\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802\ql\qnatural
+\cf0 \ul How to Uninstall\
+\pard\tx565\tx1133\tx1700\tx2266\tx2832\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802\ql\qnatural
+\cf0 \ulnone \
+In case you need to uninstall OpenVanilla, please follow these steps. Caution should be taken, because "
+\f1 sudo rm
+\f0 " is a very powerful command that might erase important system or user files. So be sure to follow this instruction letter-by-letter.\
+\
+1. Remove OpenVanilla Loader from your Input Method settings (in the International settings in System Preferences)\
+2. Get into shell (Terminal.app will do)\
+3. Use the folloing commands:\
+\
+\pard\tx565\tx1133\tx1700\tx2266\tx2832\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802\ql\qnatural
+
+\f1 \cf0 	sudo rm -rf /Library/Components/OVLoader.bundle\
+	sudo rm -rf /Library/OpenVanilla/0.6.3\
+	sudo rm -rf ~/Library/OpenVanilla/0.6.3\
+	sudo rm -rf /Library/PreferencePanes/OVPrefPane*\
+\pard\tx565\tx1133\tx1700\tx2266\tx2832\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802\ql\qnatural
+
+\f0 \cf0 \
+4. Reboot (relogin only results in an incomplete uninstall)\
+\
+\pard\tx565\tx1133\tx1700\tx2266\tx2832\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802\ql\qnatural
+\cf0 \ul Copyright and License\
+\pard\tx565\tx1133\tx1700\tx2266\tx2832\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802\ql\qnatural
+\cf0 \ulnone \
+OpenVanilla and its moudles are released under Artistic License. Please refer to Artistic License for what you can and can't do with the binary, source code, and documentation of this project.\
+\
+The official site of OpenVanilla is at 
+\f1 http://openvanilla.org
+\f0 \
+\
+}

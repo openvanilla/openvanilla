@@ -1,0 +1,29 @@
+SRCDIR=Source/OSX
+HDRDIR=Headers
+
+HEADERS=OpenVanilla.h OVLoadable.h OVUtility.h
+
+OSXHDR=VXBuffer.h VXCIN.h VXConfig.h VXDictionary.h VXKeyCode.h VXTextBar.h VXUtility.h VanillaOSX.h
+# $(SRCDIR)/VXCIN.mm 
+SOURCES=$(SRCDIR)/VXTextBar.cpp $(SRCDIR)/VXUtility.cpp
+
+BUILDDIR=build/OSX
+OSXFRAMEWORK=$(BUILDDIR)/OpenVanilla.framework
+GOALS=osx-framework
+
+all: osx-framework
+
+install: install-osx-framework
+
+clean:
+	rm -rf $(BUILDDIR)
+
+# OSX-Specific targets
+
+install-osx-framework: osx-framework
+	cp -rf $(OSXFRAMEWORK) /Library/Frameworks/
+
+osx-framework:
+	mkdir -p $(OSXFRAMEWORK)/Headers
+	for file in $(HEADERS) ; do cp $(HDRDIR)/$$file $(OSXFRAMEWORK)/Headers; done;
+

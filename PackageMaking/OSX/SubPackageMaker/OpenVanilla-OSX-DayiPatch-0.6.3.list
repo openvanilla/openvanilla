@@ -1,0 +1,11 @@
+#
+# OpenVanilla-OSX-DayiPatch-0.6.3.list
+#
+@name OpenVanilla-OSX-DayiPatch-0.6.3.pkg
+@title
+Dayi IM (wish punctuation patch)
+@title zh_TW
+大易輸入法（標點符號修正版）
+@files
+/Library/OpenVanilla/0.6.3/OVIMXcin/dayi3.cin
+@end
