@@ -17,7 +17,7 @@ VXUtility.o: ../../Loaders/OSX/VXUtility.cpp
 	gcc -o VXUtility.o -c $<
 
 clean:
-	rm $(GOALS)
+	rm -f $(GOALS) $(OBJS)
 
 %.o: %.cpp
 	gcc -O2 -c $<
