@@ -1,13 +1,18 @@
 A
-AA
-AAA
-AAAA
-AAAAA
 I
+W
+AA
 II
+WW
+AAA
 III
+WWW
+AAAA
 IIII
+WWWW
+AAAAA
 IIIII
+WWWWW
 Quick
 Quick Fox
 Quick Fox Jump
@@ -20,6 +25,16 @@ Quick Fox Jump Over Lazy Sleeping Rabbit
 一二三
 一二三四
 一二三四五
+一 
+一.
+一 二 
+一.二.
+一 二 三 
+一.二.三.
+一 二 三 四 
+一.二.三.四.
+一 二 三 四 五 
+一.二.三.四.五.
 a. 一
 a. 一 b. 二
 a. 一 b. 二 c. 三
