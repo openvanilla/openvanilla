@@ -26,22 +26,25 @@ void remove()
 	buf[--len]=0;
 }
 void clear() { len=0; buf[0]=0; }
+void lastisword() {last= 1;}
+void lastisnotword() {last= 0;}
 char buf[ebMaxKeySeq];
 int len;
+int last;
 };
 
-#define SYMBOL_NUM 6
+#define SYMBOL_NUM 10
 #define CONSONAT_NUM 37
 #define VOWEL_NUM 8
 
 char SymbolKeys[SYMBOL_NUM] = 
 {
-	'!', '|', '~', '@', '{', '}'
+	'!', ',', '#', '$', '(', ')', '@', ':', ';','-'
 };
 
 unsigned short SymbolChars[SYMBOL_NUM] =
 {
-	0x0F00,0x0F0D,0x0F04,0x0F05,0x0F3C,0x0F3D
+	0x0F00,0x0F0D,0x0F04,0x0F05,0x0F3C,0x0F3D,0x0F85,0x0F7F,0x0F14,0x0F11
 };
 
 char ConsonantKeys[CONSONAT_NUM] = 
@@ -119,6 +122,7 @@ public:
     virtual int activate(OVService *)
     {
 		keyseq.clear();
+		keyseq.lastisnotword();
         return 1;
     }
     
@@ -142,6 +146,7 @@ public:
             if (!(strlen(keyseq.buf))) return 0;   // if buffer is empty, don't process
 			buf->send()->clear();
 			keyseq.clear();
+			keyseq.lastisword();
 			textbar->hide();
             return 1;   // key processed
         }
@@ -149,6 +154,7 @@ public:
 		if (key->isCode(4, ovkUp, ovkDown, ovkLeft, ovkRight)) //Lock when composing
 		{ 
 			if(!strlen(keyseq.buf)) return 0;
+			keyseq.lastisnotword();
 			return 1;
 		}
 		
@@ -157,6 +163,7 @@ public:
 			i = 0x0F0B;
 			buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 			keyseq.clear();
+			keyseq.lastisword();
 			textbar->hide();
             return 1;   // key processed
         }
@@ -164,7 +171,8 @@ public:
 		if (key->isCode(2, ovkDelete, ovkBackspace))
 		{
 			if(!strlen(keyseq.buf)) return 0;
-			keyseq.remove();
+			keyseq.clear();
+			keyseq.lastisnotword();
 			buf->clear()->update();
 			textbar->hide();
 			return 1;
@@ -179,6 +187,7 @@ public:
 				i = 0x0F20 + (key->code() - '0');
 				buf->append((char *)" ")->send();
 				keyseq.clear();
+				keyseq.lastisnotword();
 				textbar->hide();
 				return 1;   // key processed
 			}
@@ -189,21 +198,34 @@ public:
 				{
 					buf->send()->clear();
 					keyseq.clear();
+					keyseq.lastisword();
 					textbar->hide();
 				} else{
 					buf->send()->clear();
 					keyseq.clear();
+					keyseq.lastisnotword();
 					keyseq.add('f');
 					textbar->clear()->append((char *)"Composing...")->show();
 				}
 				return 1;   // key processed
 			}
 			
+			if(key->code() == '%' || key->code() == '&')	// 輸入的是 % 或是 &
+			{
+				if(keyseq.last){
+					i = (key->code() == '%') ? 0x0F82 : 0x0F83;
+					buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
+					keyseq.clear();
+					keyseq.lastisnotword();
+					textbar->hide();
+				}
+			}
 			if(key->code() >= '0' && key->code() <= '9')	// 輸入的是數字，直接送出
 			{ 
 				i = 0x0F20 + (key->code() - '0');
 				buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 				keyseq.clear();
+				keyseq.lastisnotword();
 				textbar->hide();
 				return 1;   // key processed
 			}
@@ -212,6 +234,7 @@ public:
 				i = SymbolChars[isSymbol];
 				buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 				keyseq.clear();
+				keyseq.lastisnotword();
 				textbar->hide();
 				return 1;   // key processed
 			}
@@ -223,6 +246,7 @@ public:
 					i = VowelChars[isVowel];
 					buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 					keyseq.clear();
+					keyseq.lastisword();
 					textbar->hide();
 				}
 				return 1;   // key processed
@@ -242,6 +266,7 @@ public:
 					} else {
 					buf->send()->clear();
 					keyseq.clear();
+					keyseq.lastisword();
 					textbar->hide();
 					}
 				} else if((isConsonantPrev = isConsonantKey(keyseq.buf[0])) > -1) {
