@@ -67,7 +67,7 @@ OVTextBar* VXTextBar::hide()
 	if (locked)
 	{
 		clear();
-		append("(選字窗)");
+		append((char*)"(選字窗)");
 		update();
 		return this;
 	}
