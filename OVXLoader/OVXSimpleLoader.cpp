@@ -1,10 +1,14 @@
 // OVXSimpleLoader.cpp
 
+#include <Carbon/Carbon.h>
+#include <dlfcn.h>
+#include <sys/syslimits.h>
 #include "CIM.h"
+#include "OpenVanilla.h"
+#include "OVLoadable.h"
 #include "VXTextBar.h"
 #include "VXBuffer.h"
 #include "VXKeyCode.h"
-#include <dlfcn.h>
 
 struct OVXLoadableLibrary
 {
@@ -14,26 +18,26 @@ struct OVXLoadableLibrary
         libhandle=NULL;
         availableim=1;
         unloadable=0;
-        imnew=0;
-        imdelete=0;
+        imnew=NULL;
+        imdelete=NULL;
     }
     
     int load(char *libpath, char *workpath)
     {
-        fprintf (stderr, "loading loadable library %s\n", p);
-        strcpy(path, p);
-        if (!libhandle=(p, RTLD_LAZY)) 
+        fprintf (stderr, "loading loadable library %s, working path=%s\n", libpath, workpath);
+        strcpy(path, libpath);
+        if (!(libhandle=dlopen(path, RTLD_LAZY)))
         {
             fprintf (stderr, "loading failed\n");
             return 0;
         }
 
-        imnew=(OVLNewType*)dlsym(libh, "OVLoadableNewIM");
-        imdelete=(OVLDeleteType*)dlsym(libh, "OVLoadbleDeleteIM");
-        OVLVersionType ver=(OVLVersionType*)dlsym(libh, "OVLoadableVersion");
-        OVLAvailableType avl=(OVLAvailableType*)dlsym(libh, 
+        imnew=(OVLNewType*)dlsym(libhandle, "OVLoadableNewIM");
+        imdelete=(OVLDeleteType*)dlsym(libhandle, "OVLoadableDeleteIM");
+        OVLVersionType *ver=(OVLVersionType*)dlsym(libhandle, "OVLoadableVersion");
+        OVLAvailableType *avl=(OVLAvailableType*)dlsym(libhandle, 
             "OVLoadableAvailableIMCount");
-        OVLUnloadType unl=(OVLUnloadType*)dysym(libh, "OVLoadableCanUnload");
+        OVLUnloadType *unl=(OVLUnloadType*)dlsym(libhandle, "OVLoadableCanUnload");
         
         if (!imnew || !imdelete || !ver) 
         {
@@ -55,13 +59,13 @@ struct OVXLoadableLibrary
             dlclose(libhandle), dlerror());
     }
     
-    char path[MAXPATH];
+    char path[PATH_MAX];
     void *libhandle;
     int availableim;
     int unloadable;
     unsigned int version;
-    OVLNewType imnew;
-    OVLDeleteType imdelete;
+    OVLNewType *imnew;
+    OVLDeleteType *imdelete;
 };
 
 
@@ -80,6 +84,7 @@ const char *configfile="/Library/OpenVanilla/Development/OVXSimpleLoader.config"
 
 int CIMCustomInitialize(MenuRef mnu)
 {
+	char buf[256];
     fprintf (stderr, "OVXSimpleLoader: initializing\n");
 
     // open OVXSimpleLoader's config file
@@ -91,7 +96,6 @@ int CIMCustomInitialize(MenuRef mnu)
         return 0;
     }
     
-    char buf[256];
     while (!feof(config))
     {
         fgets(buf, 255, config);
@@ -108,7 +112,8 @@ int CIMCustomInitialize(MenuRef mnu)
     
     char workpath[256];
     strcpy (workpath, buf);
-    for (int i=strlen(workpath)-1; i>0; i--) if (workpath[i]=='/') break;
+	int i=0;
+    for (i=strlen(workpath)-1; i>0; i--) if (workpath[i]=='/') break;
     workpath[i+1]=0;
     
     lib=new OVXLoadableLibrary;
@@ -134,14 +139,15 @@ int CIMCustomInitialize(MenuRef mnu)
         }  
     }
 
-    char buf[256];
-    inputmethod->identifier(buf);
-    fprintf ("loaded input method id=%s\n", buf);
+	if (!inputmethod) return 0;
+	
+	inputmethod->identifier(buf);
+    fprintf (stderr, "loaded input method id=%s\n", buf);
         
     // TODO: put OS X locale information here
     OVEncoding e;
     int l=inputmethod->name("zh_TW", buf, &e);
-    CFString imname=VXCreateCFString(buf, e, l);
+    CFStringRef imname=VXCreateCFString(buf, e, l);
     InsertMenuItemTextWithCFString(mnu, imname, 0, 0, 'OVXL');
     
     return 1;
@@ -163,25 +169,25 @@ void *CIMCustomOpen()
 
 int CIMCustomClose(void *data)
 {
-    CIMContext *c=(CIMContext*c)data;    
+    CIMContext *c=(CIMContext*)data;    
     if (!c->ovcontext) return 0;
-    if (inputmethod) inputmethod->deleteContext(c);
+    if (inputmethod) inputmethod->deleteContext(c->ovcontext);
     return 1;
 }
 
 int CIMCustomActivate(void *data, CIMInputBuffer *buf)
 {
-    CIMContext *c=(CIMContext*c)data;    
+    CIMContext *c=(CIMContext*)data;    
     if (!c->ovcontext) return 0;
 
     if (c->onscreen)
     {
-        onscreen=0;
+        c->onscreen=0;
         
         if (buf->length()) 
         {
             c->bar.show();
-            onscreen=0;
+            c->onscreen=0;
         }
         else
         {
@@ -194,13 +200,13 @@ int CIMCustomActivate(void *data, CIMInputBuffer *buf)
 
 int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
 {
-    CIMContext *c=(CIMContext*c)data;    
+    CIMContext *c=(CIMContext*)data;    
     if (!c->ovcontext) return 0;
 
-    if (bar.onscreen())
+    if (c->bar.onscreen())
     {
-        onscreen=1;
-        bar.hide();
+        c->onscreen=1;
+        c->bar.hide();
     }
     return 1;
 }
@@ -208,7 +214,7 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
 int CIMCustomHandleInput(void *data, CIMInputBuffer *buf, unsigned char charcode,
 		UInt32 keycode, UInt32 modifiers, Point *pnt)
 {
-    CIMContext *c=(CIMContext*c)data;    
+    CIMContext *c=(CIMContext*)data;    
     if (!c->ovcontext) return 0;
 
 	OVService srv;
@@ -222,13 +228,13 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf, unsigned char charcode
         charcode, pnt->h, pnt->v);
         
     c->bar.setPosition(pnt->h, pnt->v);
-	return c->ovcontext->keyEvent(&key, &vxb, &cntr->bar, &srv);
+	return c->ovcontext->keyEvent(&key, &vxb, &c->bar, &srv);
 }
 
 int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu, 
     CIMInputBuffer *buf)
 {
-    CustomCounter *cntr=(CustomCounter*)data;
+    CIMContext *c=(CIMContext*)data;    
     switch (command)
     {
         case 'OVXL':

@@ -20,7 +20,7 @@ public:
             lookuplang(lang)); 
         return this; 
     }
-    virtual OVBuffer* updated(int cursorpos=-1, int hilitefrom=-1, 
+    virtual OVBuffer* update(int cursorpos=-1, int hilitefrom=-1, 
         int hiliteto=-1, OVLanguage lang=ovLangAll)
     {
         if (cimbuf) cimbuf->update(FALSE, cursorpos, hilitefrom, hiliteto,

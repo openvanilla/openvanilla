@@ -2,7 +2,7 @@
 all: OVIMExample.dylib
 
 OVIMExample.dylib: OVIMExample.o
-	g++ -o $@ -dynamiclib $<
+	g++ -o $@ -bundle $<
 
 install: OVIMExample.dylib
 	cp OVIMExample.dylib /Library/OpenVanilla/Development/
@@ -10,6 +10,7 @@ install: OVIMExample.dylib
 	echo "/Library/OpenVanilla/Development/OVIMExample.dylib" >> /Library/OpenVanilla/Development/OVXSimpleLoader.config
 
 clean:
+	rm OVIMExample.dylib
 	rm /Library/OpenVanilla/Development/OVIMExample.dylib
 	rm /Library/OpenVanilla/Development/OVXSimpleLoader.config
 

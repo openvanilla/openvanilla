@@ -16,10 +16,10 @@ public:
     
     virtual OVTextBar* clear();
     virtual OVTextBar* append(void *s, OVEncoding e=ovEncodingUTF8, int l=0);
+    virtual OVTextBar* hide();
+    virtual OVTextBar* show();
+    virtual OVTextBar* update();
     virtual int onscreen() { return displaying; }
-    virtual int hide();
-    virtual int show();
-    virtual int update();
     
     virtual int setPosition(int x, int y);
     

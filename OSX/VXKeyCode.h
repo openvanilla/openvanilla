@@ -18,7 +18,7 @@ public:
     virtual int isCtrl()
         { return modifiers & (controlKey | rightControlKey); }
     virtual int isAlt()
-        { return isopt(); }
+        { return isOpt(); }
     virtual int isOpt()
         { return modifiers & (optionKey | rightOptionKey); }
     virtual int isCommand()

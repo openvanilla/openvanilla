@@ -28,7 +28,7 @@ enum
 //  ovEncodingUTF16LE=3,
     ovEncodingBig5=16,
     ovEncodingBig5HKSCS=16,
-    ovEncodingNone8BitEncodingMask=7
+    ovEncodingNon8BitEncodingMask=7
 };
 
 enum
@@ -143,7 +143,7 @@ class OVIMContext : public OVObject
 public:
     virtual int activate(OVService*) { return 1; }
     virtual int deactivate(OVService*) { return 1; }
-    virtual int clear(OVService*) { return 1; }
+    virtual int clear() { return 1; }
     virtual int keyEvent(OVKeyCode*, OVBuffer*, OVTextBar*, OVService*) 
         { return 0; }        
 };

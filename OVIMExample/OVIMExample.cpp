@@ -36,11 +36,13 @@ public:
     {
         fprintf (stderr, "Recevied key code=%d\n", key->code());
     
+        if (buf->length()) textbar->show();
+    
         if (key->isCode(2, ovkReturn, ovkMacEnter))
         {
             if (!buf->length()) return 0;   // if buffer is empty, don't process
             buf->send();
-            textbar->clear();
+            textbar->clear()->hide();
             fprintf (stderr, "Sending the content of input buffer to the app\n");
             return 1;   // key processed
         }
@@ -50,7 +52,6 @@ public:
             char str[2];
             str[1]=0;
             str[0]=key->code();
-            fprintf (stderr, "key=%s\n", str);
             textbar->append(str)->update();
             buf->append(str)->update();
             return 1;   // key processed

@@ -60,19 +60,23 @@ OVTextBar* VXTextBar::append(void*s, OVEncoding e, int l)
     return this;
 }
 
-int VXTextBar::hide()
+OVTextBar* VXTextBar::hide()
 {
-    if (!displaying) return 1;
-    if (window) HideWindow(window);
-    return displaying=0;
+    if (displaying)
+	{
+		if (window) HideWindow(window);
+		displaying=0;
+	}
+	return this;
 }
 
-int VXTextBar::show()
+OVTextBar* VXTextBar::show()
 {
     update();
-    if (displaying) return 1;    
+    if (displaying) return this;
     if (window) ShowWindow(window);
-    return displaying=1;
+    displaying=1;
+	return this;
 }
 
 int VXTextBar::setPosition(int x, int y)
@@ -82,9 +86,9 @@ int VXTextBar::setPosition(int x, int y)
     return posupdated=1;
 }
 
-int VXTextBar::update()
+OVTextBar* VXTextBar::update()
 {
-    if (!(textupdated || lookupdated || posupdated)) return 1;
+    if (!(textupdated || lookupdated || posupdated)) return this;
     
     Rect windowrect, labelrect;
     
@@ -92,11 +96,10 @@ int VXTextBar::update()
     {
         if (SetControlData(label, kControlEntireControl, 
             kControlStaticTextCFStringTag, sizeof(CFStringRef), &text) != noErr)
-                return 0;   // should throw exception
+                return this;   // should throw exception
         
         VXTBSetRect(&labelrect, fontsize, CFStringGetLength(text));
         windowrect=labelrect;        
-        printf ("%d,%d,%d,%d\n", labelrect.left, labelrect.top, labelrect.right, labelrect.bottom);
         SetControlBounds(label, &labelrect);
         SizeWindow(window, windowrect.right, windowrect.bottom, TRUE);
 
@@ -123,7 +126,7 @@ int VXTextBar::update()
     VXTBFixPosition(&pos, labelrect.right, labelrect.bottom);
     MoveWindow(window, pos.h, pos.v, TRUE);        
     DrawControls(window);
-    return 1;
+    return this;
 }
 
 void VXTBSetRect(Rect *r, int fontsize, int textlen)
