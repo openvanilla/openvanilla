@@ -124,7 +124,8 @@ void SetupGlobalConfig(OVDictionary *global) {
         global->setInt("floatingWindowLockPosX", 20);
         global->setInt("floatingWindowLockPosY", 760);
     }
-    global->keyExist("textSize") || global->setInt("textSize", 24);
+    if(!global->keyExist("textSize"))
+        global->setInt("textSize", 24);
     floatingwindowlock = global->getInt("floatingWindowLock");
     textsize = global->getInt("textSize");
     defposx  = global->getInt("floatingWindowLockPosX");
