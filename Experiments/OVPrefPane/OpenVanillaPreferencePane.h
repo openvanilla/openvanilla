@@ -12,6 +12,7 @@
     IBOutlet id prefFontSizeText;
     IBOutlet id prefPhoneticLayout;
     IBOutlet id prefPOJAsciiOutput;
+    IBOutlet id prefPOJFull;
     IBOutlet id prefPOJLayout;
     IBOutlet id prefWarningBeep;
 	

@@ -21,6 +21,7 @@
                 prefFontSizeSlider = id; 
                 prefFontSizeText = id; 
                 prefPOJAsciiOutput = id; 
+                prefPOJFull = id; 
                 prefPOJLayout = id; 
                 prefPhoneticLayout = id; 
                 prefWarningBeep = id; 

@@ -50,6 +50,7 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.2/OVLoader.plist";
 	[prefPhoneticLayout selectItemAtIndex: phonetic->getIntDefault("keyboardLayout", 0)];
 	[prefChewingLayout selectItemAtIndex: chewing->getIntDefault("keyboardLayout", 0)];
 	[prefPOJLayout selectItemAtIndex: poj->getIntDefault("keyboardLayout", 0)];
+	[prefPOJFull setState: poj->getIntDefault("fullPOJOutput", 0)];
 	[prefPOJAsciiOutput setState: poj->getIntDefault("ASCIIOutput", 0)];
 	[prefFontSizeSlider setIntValue: loader->getIntDefault("textSize", 20)];
 	[prefFontSizeText setIntValue: loader->getIntDefault("textSize", 20)];
@@ -72,6 +73,7 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.2/OVLoader.plist";
 	chewing->setInt("keyboardLayout", [prefChewingLayout indexOfSelectedItem]);
 	poj->setInt("keyboardLayout", [prefPOJLayout indexOfSelectedItem]);
 	poj->setInt("ASCIIOutput", [prefPOJAsciiOutput state]);
+	poj->setInt("fullPOJOutput", [prefPOJFull state]);
 	
 	
 	sysconfig->write();

@@ -56,10 +56,10 @@ public:
     virtual int isFullPOJ() { return fullPOJOutput; }
     
 protected:
+    int fullPOJOutput;
     int asciioutput;
     int beep;
     int keylayout;
-    int fullPOJOutput;
     VXCIN *cintab;
 };
 
