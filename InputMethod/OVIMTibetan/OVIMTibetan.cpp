@@ -9,7 +9,6 @@ http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf for 
 #include "OVIMTibetan.h"
 
 class OVTibetanIM;
-
 int keyboardlayout = 0;
 
 short isSymbolKey(int key)
@@ -258,6 +257,8 @@ public:
     {
 		if (!l->keyExist("keyboardLayout")) l->setInt("keyboardLayout", 0);
 		keyboardlayout=l->getInt("keyboardLayout");
+		if(keyboardlayout >= KEYBOARDS)
+			keyboardlayout = 0;
         return 1;
     }
     
