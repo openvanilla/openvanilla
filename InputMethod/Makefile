@@ -1,6 +1,5 @@
-IM=OVIMArray OVIMCangjei OVIMPOJHolo OVIMPOJHakka OVIMPhonetic \
-   OVIMRoman OVIMSocket OVIMTibetan OVIMUnicode OVIMXcin \
-   OVIMezbasic OVIMphp
+IM=OVIMArray OVIMCangjei OVIMExample OVIMPOJ OVIMPOJHakka OVIMPhonetic \
+   OVIMRoman OVIMSocket OVIMTibetan OVIMUnicode OVIMXcin OVIMezbasic OVIMphp
 
 all:
 	for i in $(IM) ; do make -C $$i all ;done
