@@ -1,6 +1,6 @@
 %gen_inp
-%ename PinYin
-%cname 拼音
+%ename [CN]PinYin
+%cname [簡]漢語拼音
 %encoding UTF-8
 %selkey 1234567890
 %keyname begin

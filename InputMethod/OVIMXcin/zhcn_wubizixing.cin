@@ -1,6 +1,6 @@
 %gen_inp
-%ename  WuBiZiXing
-%cname 五笔
+%ename [CN]WuBiZiXing
+%cname [簡]五筆
 %selkey 1234567890
 %keyname begin
 a a

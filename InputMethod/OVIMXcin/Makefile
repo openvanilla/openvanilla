@@ -5,9 +5,10 @@ OBJS=OVCIN.o OVCandidate.o OVFileHandler.o OVIMXcin.o\
 
 GOALS=OVIMXcin.dylib 
 
-DATA=cj.cin dayi3.cin jtcj_gb.cin jyutping.cin\
-     phonegb2.cin pinyin.cin pinyinbig5.cin simplex.cin wubizixing.cin\
-     shuangpin.cin ukiyoe.cin
+DATA= cj.cin dayi3.cin jyutping.cin\
+      pinyinbig5.cin simplex.cin ukiyoe.cin\
+      zhcn_jtcj.cin zhcn_phonegb2.cin zhcn_pinyin.cin\
+      zhcn_shuangpin.cin zhcn_wubizixing.cin
 
 $(GOALS): $(OBJS)
 	$(CPP) -bundle -o $@ $(OBJS)

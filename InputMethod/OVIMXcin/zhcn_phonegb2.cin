@@ -1,10 +1,10 @@
 %gen_inp
-%ename	phonegb
-%cname	注音(EUC-CN)
+%ename [CN]Phonetic
+%cname [簡]注音
 %encoding UTF-8
-%selkey  1234567890
-%endkey  3467
-%keyname  begin
+%selkey 1234567890
+%endkey 3467
+%keyname begin
 ,  ㄝ
 -  ㄦ
 .  ㄡ
@@ -8159,4 +8159,4 @@ zp6 焚
 zp6 汾
 zp6 棼
 zp6 鼢
-%chardef  end
+%chardef end

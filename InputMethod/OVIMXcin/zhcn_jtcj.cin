@@ -5,8 +5,8 @@
 # for further information.
 #
 %gen_inp
-%ename jtcj_gb
-%cname 仓颉
+%ename [CN]ChangJei
+%cname [簡]倉頡
 %encoding UTF-8
 %selkey 1234567890
 %endkey <>?:"{}|~!@#$%^&*()_+

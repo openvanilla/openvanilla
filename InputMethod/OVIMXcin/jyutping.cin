@@ -20,8 +20,8 @@
 #  website.  The romanisation system is a little bit different from
 #  common Hong Kong usage, but this system is a lot more systematic.
 
-%ename Jyutping
-%cname 粵拼
+%ename Cantonese PingYin
+%cname 粵語拼音
 %encoding UTF-8
 %selkey 1234567890
 %endkey 123456
@@ -12677,3 +12677,4 @@ zyut6   拙
 zyut6   輟
 zyut6   絀
 zyut6   黜
+%chardef end

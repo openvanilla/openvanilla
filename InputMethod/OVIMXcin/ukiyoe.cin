@@ -1,6 +1,6 @@
 %gen_inp
 %ename JapaneseKana
-%cname 日文符號輸入
+%cname 日文假名
 %encoding UTF-8
 %selkey 1234567890
 %keyname begin

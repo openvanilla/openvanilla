@@ -4,7 +4,7 @@
 # 的格式以適合其他平台或輸入法軟體使用。
 #
 %gen_inp
-%ename dayi3
+%ename Dayi3
 %cname 大易
 %encoding UTF-8
 %selkey '[]-\6789

@@ -33,6 +33,7 @@ VXTextBar::VXTextBar(int fsize) : fontsize(fsize)
     fontstyle.size=fontsize;
 
     CreateStaticTextControl(window, &labelrect, text, &fontstyle, &label);
+	SetWindowAlpha(window, 0.8); //zonble
     MoveWindow(window, windowrect.left, windowrect.top, true);
 
 }

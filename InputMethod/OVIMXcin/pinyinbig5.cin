@@ -1,6 +1,6 @@
 %gen_inp
-%ename  PinYinBig5
-%cname  繁體拼音
+%ename PinYin
+%cname 漢語拼音
 %encoding UTF-8
 %selkey 1234567890
 %endkey 1234.
