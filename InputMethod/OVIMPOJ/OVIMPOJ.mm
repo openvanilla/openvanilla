@@ -270,8 +270,9 @@ public:
             
             int vo=vowelorder(c);
 
-            // nasel? ("nn")
-            if (tolower(c)=='n' && tolower(cnext)=='n')
+            // nasel? ("nn") -- note that this rule should never apply
+            // when "nn" appears in the beginning of the sequence
+            if (tolower(c)=='n' && tolower(cnext)=='n' && tolower(*(s+2))!='g')
             {
                 strcat(b, nasel);
                 b+=strlen(nasel);
@@ -308,13 +309,13 @@ public:
 #undef IRULE
 
             // "ou" and "OU" rule
-            if (c=='o' && cnext=='u')
+            if (c=='o' && tolower(cnext)=='u')
             {
                 c='q';
                 s++;    // shift one char
             }
             
-            if (c=='O' && cnext=='U')
+            if (c=='O' && tolower(cnext)=='u')
             {
                 c='Q';
                 s++;    // shift one char
@@ -372,7 +373,7 @@ protected:
     int candi;
     NSMutableArray* list;
     void composeCandidate(char *pojs, NSArray* ar, OVTextBar *textbar);
-    int copyAndDispose(OVBuffer *buf, int c);
+    int copyAndDispose(OVBuffer *buf, int c, char *append);
 };
 
 class OVIMPOJ : public OVInputMethod
@@ -471,15 +472,24 @@ int OVIMPOJContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     int ascii=parent->isAsciiOutput();
     char composebuf[256];
 
+	char *dash="-";
+	char *space=" ";
+	char *append=NULL;
+
     if (candi)
     {
         int c=key->code();
         
-        if (c >= '0' && c <= '9')
+        if ((c >= '0' && c <= '9') || c==' ' || c=='-')
         {
-            int cc=c-'0';
+            int cc=1;
+            if (c==' ') append=space;
+            if (c=='-') append=dash;
+            
+            if (c >= '0' && c <='9') cc=c-'0';
             if (!cc) cc=10; else cc--;
-            if (!copyAndDispose(buf, cc)) return 1;
+            
+            if (!copyAndDispose(buf, cc, append)) return 1;
             textbar->hide();
             candi=0;
             return 1;
@@ -525,7 +535,9 @@ int OVIMPOJContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         NSArray *ar=parent->find(query);
         if (!ar)
         {
-            buf->append(" ")->send();
+//            buf->append(" ")->send();
+            buf->send();
+
         }
         else
         {
@@ -572,7 +584,7 @@ void OVIMPOJContext::composeCandidate(char *pojs, NSArray *ar, OVTextBar *textba
     char pojstr[256];
     strcpy(buf, "1.");
     strcpy(pojstr, pojs);
-    strcat(pojstr, " ");
+//    strcat(pojstr, " ");
     
     list=[NSMutableArray new];
     [list addObject: (NSString*)VXCreateCFString(pojstr)];
@@ -589,12 +601,14 @@ void OVIMPOJContext::composeCandidate(char *pojs, NSArray *ar, OVTextBar *textba
     textbar->update();
 }
 
-int OVIMPOJContext::copyAndDispose(OVBuffer *buf, int c)
+int OVIMPOJContext::copyAndDispose(OVBuffer *buf, int c, char* append)
 {
     if (c >= [list count]) return 0;
     
     NSString *s=[list objectAtIndex: c];
-    buf->clear()->append([s UTF8String])->send();
+    buf->clear()->append([s UTF8String]);
+    if (append) buf->append(append);
+    buf->send();
     [list release];
     list=nil;
     return 1;

@@ -18,7 +18,7 @@ clean:
 	rm /Library/OpenVanilla/Development/OVXSimpleLoader.config
 
 %.o: %.cpp
-	gcc -c $<
+	gcc -O3 -c $<
 	
 %.o: %.mm
-	gcc -c $<
+	gcc -O3 -c $<
