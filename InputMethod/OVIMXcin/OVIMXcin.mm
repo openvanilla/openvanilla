@@ -158,7 +158,7 @@ int OVIMXcin::update(OVDictionary* global, OVDictionary* local)
     const char *sendSpaceWhenAutoCompose="sendSpaceWhenAutoCompose";
 #ifndef OVIMARRAY
     if (!global->keyExist(warningBeep)) global->setInt(warningBeep, 1);
-    if (!local->keyExist(maxSeqLen)) local->setInt(maxSeqLen, 5);
+    if (!local->keyExist(maxSeqLen)) local->setInt(maxSeqLen, 4);
     if (!local->keyExist(autoCompose)) local->setInt(autoCompose, 0);
     if (!local->keyExist(hitMax)) local->setInt(hitMax, 0);
 	if (!local->keyExist(sendSpaceWhenAutoCompose))
@@ -212,7 +212,7 @@ void OVXcinContext::updateDisplay(OVBuffer *buf)
 	if (keyseq.length()==2 && *(keyseq.getSeq())=='w')
 	{
 		char c=(keyseq.getSeq())[1];
-		if (c >= '1' && c <= '9')
+		if (c >= '0' && c <= '9')
 		{
 			buf->append(keyseq.getSeq())->update();
 			return;
@@ -308,7 +308,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
 
 #ifdef OVIMARRAY
 	if (keyseq.length()==1 && *(keyseq.getSeq())=='w' &&
-	    key->code() >= '1' && key->code() <= '9') validkey=1;
+	    key->code() >= '0' && key->code() <= '9') validkey=1;
 #endif
     
     // shift and capslock processing
@@ -353,7 +353,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         if (cintab->isEndKey(key->code())
 #ifdef OVIMARRAY
             || (keyseq.length()==2 && *(keyseq.getSeq())=='w' &&
-                key->code() >= '1' && key->code() <= '9')
+                key->code() >= '0' && key->code() <= '9')
 #endif
            )
         {

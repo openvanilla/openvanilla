@@ -26,9 +26,9 @@ typedef int OVException;
 enum
 {
     ovEncodingUTF8=0,
-//  ovEncodingUTF16Auto=1,
+    ovEncodingUTF16Auto=1,	// use this if you have e.g. short x=0xae10;
     ovEncodingUTF16BE=2,     
-//  ovEncodingUTF16LE=3,
+    ovEncodingUTF16LE=4,
     ovEncodingBig5=16,
     ovEncodingBig5HKSCS=16,
     ovEncodingEUC_CN=24,
@@ -64,9 +64,9 @@ public:
     virtual OVTextBar* append(void *s, OVEncoding e=ovEncodingUTF8, int len=0)
         { return this; }
 
-    virtual OVTextBar* hide() { return 0; }
-    virtual OVTextBar* show() { return 0; }
-    virtual OVTextBar* update() { return 0; }
+    virtual OVTextBar* hide() { return this; }
+    virtual OVTextBar* show() { return this; }
+    virtual OVTextBar* update() { return this; }
     virtual int onScreen() { return 0; }
 };
 
