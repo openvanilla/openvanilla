@@ -101,15 +101,13 @@ int VXGetCurrentLocale(CFBundleRef bundle, char *str, int maxlen)
 	if (!ar) return strlen(defvalue);
 	
 	CFArrayRef pref=CFBundleCopyPreferredLocalizationsFromArray(ar);
+	CFRelease(ar);
 	if (!pref) 
-	{
-		CFRelease(ar);
 		return strlen(defvalue);
-	}
     
 	if (CFArrayGetCount(pref))
 	{
-		CFStringRef r=CFArrayGetValueAtIndex(pref, 0);
+		CFStringRef r=(CFStringRef)CFArrayGetValueAtIndex(pref, 0);
 		if (r)
 		{
 			CFStringRef cr=CFLocaleCreateCanonicalLocaleIdentifierFromString
@@ -117,16 +115,13 @@ int VXGetCurrentLocale(CFBundleRef bundle, char *str, int maxlen)
 			if (cr)
 			{
 				if (!CFStringGetCString(cr, str, maxlen, kCFStringEncodingUTF8))
-				{
 					strcpy(str, defvalue);
-				}
-				
+
 				CFRelease(cr);
 			}
+		        CFRelease(r);
 		}
-		CFRelease(pref);
-		CFRelease(ar);
 	}
-	
+	CFRelease(pref);
 	return strlen(str);
 }
