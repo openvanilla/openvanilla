@@ -1,0 +1,97 @@
+#
+# holo.cin (encoded in UTF8)
+#
+# this example .cin constructs a big enough corpus that can be used to
+# compose the following sentence:
+#
+#     咱需要 khah 多元化 ê 思考，提供空間有人去發展 khah 活潑 ê 母語文化。
+#
+%gen_inp
+%ename POJ
+%cname 白話字漢羅
+%selkey 1234567890
+%keyname begin
+a a
+b b
+c c
+d d
+e e
+f f
+g g
+h h
+i i
+j j
+k k
+l l
+m m
+n n
+o o
+p p
+q q
+r r
+s s
+t t
+u u
+v v
+w w
+x x 
+y y
+z z
+1 1
+2 2
+3 3
+4 4
+5 5
+6 6
+7 7
+8 8
+9 9
+0 0
+- -
+' '
+` `
+^ ^
+= =
+| |
+%keyname end
+%chardef begin
+lan2 咱
+lan2 懶
+su 需
+su 輸
+su 思
+iau3 要
+iau3 猶 
+to 多 
+goan5 元
+goan5 源
+hoa3 化 
+kho2 考
+kho2 可
+the5 提
+the5 堤
+kiong 供
+kiong 宮
+khong 空
+khong 悾
+kan 間
+kan 干
+u7 有
+u7 預
+lang5 人 
+khi3 去
+hoat 發
+tian2 展
+tian2 典
+oah8 活
+phoat 潑
+bo2 母 媬
+gi2 語
+bun5 文 眠
+su-iau3 需要
+su-kho  思考
+the5-kiong 提供
+khong-kan 空間
+hoat-tian2 發展
+bo2-gi2 母語
+%chardef end

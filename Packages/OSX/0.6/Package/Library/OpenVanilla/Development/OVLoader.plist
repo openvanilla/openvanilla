@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IM-OVIMXcin-array30.cin</key>
+	<dict>
+		<key>autoCompose</key>
+		<integer>1</integer>
+	</dict>
+	<key>IM-OVIMXcin-cj.cin</key>
+	<dict>
+		<key>autoCompose</key>
+		<integer>1</integer>
+	</dict>
+	<key>IM-OVIMXcin-dayi3.cin</key>
+	<dict>
+		<key>shiftSelectionKey</key>
+		<integer>1</integer>
+	</dict>
+	<key>IM-OVIMXcin-jtcj_gb.cin</key>
+	<dict>
+		<key>autoCompose</key>
+		<integer>1</integer>
+	</dict>
+	<key>IM-OVIMXcin-pinyin.cin</key>
+	<dict>
+		<key>maxKeySequenceLength</key>
+		<integer>10</integer>
+	</dict>
+	<key>IM-OVIMXcin-pinyinbig5.cin</key>
+	<dict>
+		<key>maxKeySequenceLength</key>
+		<integer>10</integer>
+	</dict>
+	<key>IM-OVIMXcin-simplex.cin</key>
+	<dict>
+		<key>hitMaxAndCompose</key>
+		<integer>1</integer>
+		<key>maxKeySequenceLength</key>
+		<integer>2</integer>
+	</dict>
+</dict>
+</plist>
