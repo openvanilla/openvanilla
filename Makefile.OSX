@@ -1,10 +1,14 @@
 SRCDIR=Source
 HDRDIR=Header
-HEADERS=$(HDRDIR)/OpenVanilla.h $(HDRDIR)/OVLoadable.h $(HDRDIR)/OVUtility.h
 
-BUILDDIR=build
+HEADERS=OpenVanilla.h OVLoadable.h OVUtility.h
+SOURCES=VXBuffer.h VXCIN.h VXCIN.mm VXConfig.h VXDictionary.h VXKeyCode.h VXTextBar.cpp VXTextBar.h VXUtility.cpp VXUtility.h VanillaOSX.h
+
+BUILDDIR=build/OSX
 OSXFRAMEWORK=$(BUILDDIR)/OpenVanilla.framework
 GOALS=osx-framework
+
+all: osx-framework
 
 build: osx-framework
 
@@ -20,5 +24,6 @@ install-osx-framework: osx-framework
 
 osx-framework:
 	mkdir -p $(OSXFRAMEWORK)/Headers
-	cp $(HEADERS) $(OSXFRAMEWORK)/Headers
+	for file in $(HEADERS) ; do cp $(HDRDIR)/$$file $(OSXFRAMEWORK)/Headers; done;
+
 
