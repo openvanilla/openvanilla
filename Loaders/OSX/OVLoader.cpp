@@ -318,7 +318,6 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf, unsigned char charcode
     return c->ovcontext->keyEvent(&key, &vxb, &c->bar, &srv);
 }
 
-
 void InitInputMethod(OVInputMethod *im) {
     char imid[256];
     im->identifier(imid);
@@ -326,6 +325,12 @@ void InitInputMethod(OVInputMethod *im) {
     OVDictionary *local=GetLocalConfig(imid);
     im->initialize(global, local, &srv, (char*)loaddir);
     delete local;
+    delete global;
+}
+
+void SetCurrentInputMethod(char *imid) {
+    OVDictionary *global=GetGlobalConfig();
+    global->setString("currentIM", imid);
     delete global;
 }
 
@@ -364,7 +369,6 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
 		
     	newim->identifier(buf);
     	murmur ("user wants to switch IM, newimpos=%d, new im id=%s", newpos, buf);
-    	
         // kill all existing context
         for (int i=0; i<vxMaxContext; i++) {
             if (pool[i]) {
@@ -374,12 +378,8 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
         }
 
         inputmethod=newim;
-    	OVDictionary *global=GetGlobalConfig();
-    	global->setString("currentIM", buf);
-        delete global;
+        SetCurrentInputMethod(buf);
         sysconfig->write();
     }
-    
-    
     return 0;
 }
