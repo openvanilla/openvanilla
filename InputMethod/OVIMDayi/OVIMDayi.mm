@@ -128,13 +128,11 @@ public:
         keyseqlen=0;
         keyseq[0]=0;
         candi=0;
-        autoreleasepool=[NSAutoreleasePool new];
         murmur("new im Context instance created");
     }
     
     virtual ~OVDayiContext()
     {
-        [autoreleasepool release];
         murmur("im Context instance destroyed");
     }
     
@@ -369,7 +367,6 @@ protected:
     int keyseqlen;
     char keyseq[10];
     
-    id autoreleasepool;
 };
 
 class OVDayiIM : public OVInputMethod
@@ -429,6 +426,11 @@ public:
     }
     
     OVIMContext *newContext() { return new OVDayiContext(this, &tab); }
+/*    void deleteContext(OVIMContext *c)
+    {
+    	murmur ("deleting context %x", c);
+    	delete c;
+    } */
     
     DayiTable tab;
     id autoreleasepool;
