@@ -1,7 +1,10 @@
 // VXLoadableIM.cpp
 
+#include <OpenVanilla/OpenVanilla.h>
+#include <OpenVanilla/OVUtility.h>
 #include <sys/param.h>
 #include <sys/types.h>
+#include <dlfcn.h>
 #include <dirent.h>
 #include <string.h>
 #include <unistd.h>
