@@ -7,5 +7,4 @@
 ./AddPlist /Library/OpenVanilla/0.6.1/OVLoader.plist IM-OVIMXcin-dayi3.cin shiftSelectionKey integer 1
 ./AddPlist /Library/OpenVanilla/0.6.1/OVLoader.plist IM-OVIMXcin-pinyin.cin maxKeySequenceLength integer 10
 ./AddPlist /Library/OpenVanilla/0.6.1/OVLoader.plist IM-OVIMXcin-pinyinbig5.cin maxKeySequenceLength integer 10
-
-
+chmod 666 /Library/OpenVanilla/0.6.1/OVLoader.plist
