@@ -3,8 +3,6 @@ http://openvanilla.org/
 
 版本沿革
 
-== 0.7 ==
-
 == 0.6.3 ==
 
 * 解決 FixtextService 的相關問題
@@ -14,6 +12,7 @@ http://openvanilla.org/
 * 新增客家POJ輸入法
 * 修正行列輸入法的選字換頁按鍵問題
 * 修正Xcin模組的標點符號問題
+* 使用手冊完成
 
 == 0.6.2 ==
 Dec 24, 2004
