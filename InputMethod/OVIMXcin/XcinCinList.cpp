@@ -26,6 +26,8 @@ int file_select(struct dirent *entry)
 
 void CinList::load(char *libpath)
 {
+	murmur("load cin list");
+	
     struct dirent **files;
     char searchpath[PATH_MAX];
 
@@ -47,11 +49,15 @@ void CinList::load(char *libpath)
         free(files[i]);
     }
     free(files);
+	
+	murmur("cin list loaded.");
 }
 
 
 int CinList::preparse(char *loadpath, char *fname, int i)
 {
+	murmur("CinList::preparse");
+	
     char filename[PATH_MAX];
     sprintf(filename, "%s/%s", loadpath, fname);
     
@@ -84,5 +90,7 @@ int CinList::preparse(char *loadpath, char *fname, int i)
     }
     
     fclose(in);
+	
+	murmur("CinList::preparse end.");
     return 1;
 }

@@ -3,6 +3,7 @@
 #define OVDEBUG
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLoadable.h>
+#include <OpenVanilla/OVUtility.h>
 #include <stdlib.h>
 #include "OVIMXcin.h"
 #include "OVCIN.h"
@@ -30,6 +31,7 @@ extern "C" unsigned int OVLoadableVersion()
 
 extern "C" OVInputMethod* OVLoadableNewIM(int x)
 {
+	murmur("loading...");
     return new OVIMXcin(cinlist.cinpath, cinlist.list[x].filename,
         cinlist.list[x].ename, cinlist.list[x].cname, cinlist.list[x].encoding);
 }
@@ -48,7 +50,7 @@ int XcinKeySequence::valid(char c)
 {
 	string inKey;
 	inKey.push_back(c);
-    if (cinTable->isValidKey(inKey)) return 0;
+    if (!cinTable->isValidKey(inKey)) return 0;
     return 1;
 }
     
@@ -102,7 +104,7 @@ int OVIMXcin::name(char *locale, void *s, OVEncoding *enc)
     if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
     {
         *enc=cnameencoding;
-        //murmur ("asking ename=%s, cname=%s, encoding=%d", ename, cname, *enc);
+        murmur ("asking ename=%s, cname=%s, encoding=%d", ename, cname, *enc);
         return strlen(strcpy((char*)s, cname));
     }
         
@@ -111,6 +113,7 @@ int OVIMXcin::name(char *locale, void *s, OVEncoding *enc)
 
 int OVIMXcin::initialize(OVDictionary* global, OVDictionary* local, OVService*, char*)
 {
+	murmur("initializing");
     if (cintab) return 0;
     
     const char *sk="shiftSelectionKey";
@@ -124,13 +127,16 @@ int OVIMXcin::initialize(OVDictionary* global, OVDictionary* local, OVService*, 
     local->getString(encoding, buf);
     //enc=VXEncodingMapper(buf);
 	enc = ovEncodingUTF8;
-		
+	//<comment author='b6s'>encoding should be taken care by iconv?</comment>
+	
     char cinfilename[PATH_MAX];
     strcpy (cinfilename, loadpath);
     if (cinfilename[strlen(cinfilename)-1]!='/') strcat(cinfilename, "/");
     strcat(cinfilename, cinfile);
-    cintab=new OVCIN(cinfilename);
     //cintab->read(cinfilename, enc, selkeyshift);
+    cintab=new OVCIN(cinfilename);
+	
+	murmur("initialized.");
     return 1;
 }
 
