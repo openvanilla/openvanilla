@@ -74,8 +74,9 @@ int OVIMXcin::name(char *locale, void *s, OVEncoding *enc)
     *enc=ovEncodingUTF8;
     if (!cintab)
     {
-        strcpy((char*)s, "OVXCin broken file - ");
+        strcpy((char*)s, "OVIMXCin (");
         strcat((char*)s, cinfile);
+        strcat((char*)s, ")");
         return strlen((char*)s);
     }
 

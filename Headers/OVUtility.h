@@ -22,5 +22,23 @@ inline void murmur(const char* format,...) {
 #endif
 }
 
+const int ovMaxPoolSize=256;
+
+class OVAutoDeletePool
+{
+public:
+    OVAutoDeletePool() : p(0) {}
+    ~OVAutoDeletePool() { for (int i=0; i<p; i++) if (pool[i]) delete pool[i]; }
+    OVObject* add(OVObject *o)
+    {
+        if (p==ovMaxPoolSize) return o; // note: no exception
+        return pool[p++]=o;
+    }
+        
+protected:
+    int p;
+    OVObject pool[ovMaxPoolSize];
+};
+
 #endif /* _OVUTILITY_H */
 

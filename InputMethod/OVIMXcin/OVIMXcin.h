@@ -33,7 +33,9 @@ public:
 
 protected:
     virtual void updateDisplay(OVBuffer *buf);
-    virtual int compose(OVBuffer *buf);
+    virtual int compose(OVBuffer *buf, OVTextBar *textbar);
+    
+    virtual int candidateEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar);
     
     OVIMXcin *parent;
     XcinKeySequence keyseq;

@@ -14,4 +14,23 @@ int VXConvertCFString(CFStringRef ref, void *s, OVEncoding e=ovEncodingUTF8,
 CFURLRef VXCreateURL(char *localfilename);
 int VXGetCurrentLocale(CFBundleRef bundle, char *str, int maxlen=256);
 
+const int vxMaxPoolSize=256;
+
+class VXCFAutoreleasePool
+{
+public:
+    VXCFAutoreleasePool() : p(0) {}
+    ~VXCFAutoreleasePool() { for (int i=0; i<p; i++) CFRelease(pool[i]); }
+    CFTypeRef add(CFTypeRef r)
+    {
+        if (p==vxMaxPoolSize) return r;     // note: no exception
+        return pool[p++]=r;
+    }        
+    
+protected:
+    CFTypeRef pool[vxMaxPoolSize];
+    int p;
+};
+
+
 #endif
