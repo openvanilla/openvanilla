@@ -1,6 +1,10 @@
 #!/bin/sh
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-array30.cin autoCompose integer 1
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-cj.cin autoCompose integer 1
+./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-cj-j.cin autoCompose integer 1
+./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-qcj.cin autoCompose integer 1
+./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-tcj.cin autoCompose integer 1
+./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-scj7.cin autoCompose integer 1
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-simplex.cin hitMaxAndCompose integer 1
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-simplex.cin maxKeySequenceLength integer 2
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-dayi3.cin shiftSelectionKey integer 1
@@ -13,8 +17,8 @@
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-liu57.cin autoCompose integer 1 
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-liu57.cin hitMaxAndCompose integer 1
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-ehq.cin maxKeySequenceLength integer 6
-./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-ukiyoe.cin maxKeySequenceLength integer 4
-./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-ukiyoe.cin hitMaxAndCompose integer 1
+./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-iroha.cin maxKeySequenceLength integer 4
+./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-iroha.cin hitMaxAndCompose integer 1
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-kk.cin maxKeySequenceLength integer 2
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-kk.cin hitMaxAndCompose integer 1
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-klingon.cin maxKeySequenceLength integer 1 
