@@ -143,24 +143,24 @@ void POJHakkaKeySeq::clear()
 
 char *POJHakkaKeySeq::normalize()
 {
-    int t=presettone;
-    presettone=0;
+    //int t=presettone;
+    //presettone=0;
     
-    if (!t) return seq;
-    if (!len) return seq;
+    //if (!t) return seq;
+    //if (!len) return seq;
     
     // there is no tone 6 in Holo, tone 1 needs no extra mark,
     // tone 4 is not necessary (if syllable ends in h/k/p/t and tone!=8,
     // it's tone 4)
-    if (t==1 || t==6 || t==4) return seq;
+    //if (t==1 || t==6 || t==4) return seq;
     
     // only tone 8 is possible for syllable ending in h, k, p, t
-    char c=tolower(seq[len-1]);
-    int hkpt=(c=='h' || c=='k' || c=='p' || c=='t');
-    if (hkpt && t!=8) return seq;
-    if (!hkpt && t==8) return seq;
+    //char c=tolower(seq[len-1]);
+    //int hkpt=(c=='h' || c=='k' || c=='p' || c=='t');
+    //if (hkpt && t!=8) return seq;
+    //if (!hkpt && t==8) return seq;
     
-    presettone=t;
+    //presettone=t;
     return seq;
 }
 
