@@ -60,42 +60,36 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.2/OVLoader.plist";
 	[prefOpacitySlider setIntValue: loader->getIntDefault("opacity", 80)];
 	[prefOpacityText setIntValue: loader->getIntDefault("opacity", 80)];
 	
+	int keyMask=loader->getIntDefault("menuKey", kMenuOptionModifier | kMenuShiftModifier | kMenuNoCommandModifier);
+	
+	[prefKeyOpt setState: 0];
+	[prefKeyShift setState: 0];
+	[prefKeyCtrl setState: 0];
+	[prefKeyCommand setState: 0];
+	if (keyMask != -1)
+	{
+		if (keyMask & kMenuOptionModifier) [prefKeyOpt setState: 1];
+		if (keyMask & kMenuShiftModifier) [prefKeyShift setState: 1];
+		if (keyMask & kMenuControlModifier) [prefKeyCtrl setState: 1];
+		if (!(keyMask & kMenuNoCommandModifier)) [prefKeyCommand setState: 1];
+	}
+	
 	float r = 0.0f, g = 0.0f, b = 0.0f;
 	char rc[80], gc[80], bc[80];
 	
-	if(loader->keyExist("forer")){
-		loader->getString("forer", rc);
-		r=atof(rc);
-	}
-	if(loader->keyExist("foreg")){
-		loader->getString("foreg", gc);
-		g=atof(gc);
-	}
-	if(loader->keyExist("foreb")){
-		loader->getString("foreb", bc);
-		b=atof(bc);
-	}
+	if(loader->keyExist("forer")) { loader->getString("forer", rc); r=atof(rc); }
+	if(loader->keyExist("foreg")) { loader->getString("foreg", gc); g=atof(gc); }
+	if(loader->keyExist("foreb")) { loader->getString("foreb", bc); b=atof(bc); }
 
-	[prefColorForeground setColor: [NSColor colorWithCalibratedRed: r green: g blue: b alpha: 1.0f]];
-	
+	[prefColorForeground setColor: [NSColor colorWithCalibratedRed: r 
+		green: g blue: b alpha: 1.0f]];
 	r = g = b = 1.0f;
 	
-	if(loader->keyExist("backr")){
-		loader->getString("backr", rc);
-		r=atof(rc);
-	}
-	if(loader->keyExist("backg")){
-		loader->getString("backg", gc);
-		g=atof(gc);
-	}
-	if(loader->keyExist("backb")){
-		loader->getString("backb", bc);
-		b=atof(bc);
-	}
-	
-	[prefColorBackground setColor: [NSColor colorWithCalibratedRed: r green: g blue: b alpha: 1.0f]];
-	
-	
+	if(loader->keyExist("backr")){ loader->getString("backr", rc); r=atof(rc); }
+	if(loader->keyExist("backg")){ loader->getString("backg", gc); g=atof(gc); }
+	if(loader->keyExist("backb")){ loader->getString("backb", bc); b=atof(bc); }
+	[prefColorBackground setColor: [NSColor colorWithCalibratedRed: r 
+		green: g blue: b alpha: 1.0f]];
 }
 
 - (void)willUnselect
@@ -120,6 +114,35 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.2/OVLoader.plist";
 	pojholo->setInt("ASCIIOutput", [prefPOJAsciiOutput state]);
 	pojholo->setInt("fullPOJOutput", [prefPOJFull state]);
 	
+	
+	int keyMask=0;
+	if ([prefKeyOpt state]) keyMask |= kMenuOptionModifier;
+	if ([prefKeyShift state]) keyMask |= kMenuShiftModifier;
+	if ([prefKeyCtrl state]) keyMask |= kMenuControlModifier;
+	if (![prefKeyCommand state]) keyMask |= kMenuNoCommandModifier;
+
+	// we deny the "only shift" case
+	if (
+	     (keyMask & kMenuShiftModifier) && 
+		 (keyMask & kMenuNoCommandModifier) &&
+		 !(keyMask & (kMenuOptionModifier | kMenuControlModifier))
+	   )
+	{
+		fprintf (stderr, "only shift!\n");
+		keyMask = kMenuShiftModifier | kMenuOptionModifier | kMenuNoCommandModifier;
+	}
+	else 
+	{
+		if (((keyMask & kMenuNoCommandModifier) && 
+		 !(keyMask & (kMenuOptionModifier | kMenuControlModifier))))
+		{
+			fprintf (stderr, "none!\n");
+			keyMask = -1;
+		}
+	}
+
+	loader->setInt("menuKey", keyMask);
+
 	float r, g, b, a;
 	char rc[3], gc[3], bc[3];
 	

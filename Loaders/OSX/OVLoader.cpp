@@ -135,6 +135,11 @@ int SetupMenuList(MenuRef mnu) {
     char locale[256];
     VXGetCurrentLocale(CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName)),
                        locale);
+					   
+	OVDictionary *global=GetGlobalConfig();
+	int keyMask=global->getIntDefault("menuKey", 
+		kMenuOptionModifier | kMenuShiftModifier | kMenuNoCommandModifier);
+
     // for the time being, we use id as menu names
     // (and we initialize everything)
     int i;
@@ -145,11 +150,15 @@ int SetupMenuList(MenuRef mnu) {
         CFStringRef imname=VXCreateCFString(imn, enc);
 		if (!imname) imname=VXCreateCFString(list.impair[i].id);		
         InsertMenuItemTextWithCFString(mnu, imname, i, 0, usermenu+i);
-        SetMenuItemCommandKey(mnu, i+1, FALSE, '1'+i);
-        SetMenuItemModifiers(mnu, i+1, kMenuOptionModifier + kMenuShiftModifier + kMenuNoCommandModifier);
+		
+		if (i < 9 && keyMask != -1) {
+			SetMenuItemCommandKey(mnu, i+1, FALSE, '1'+i);
+			SetMenuItemModifiers(mnu, i+1, keyMask);
+		}
         CFRelease(imname);
     }
 
+	delete global;
     return i;
 }
 
