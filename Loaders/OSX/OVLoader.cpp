@@ -416,6 +416,7 @@ void SetFloatingWindowPosition(CIMContext *c) {
     }
 }
 
+
 int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
 {
     CIMContext *c=(CIMContext*)data;    
@@ -429,8 +430,17 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
     SetFloatingWindowPosition(c);
 
     c->ovcontext->deactivate(&srv);
-    c->ovcontext->clear();
+//  c->ovcontext->clear();
     
+    return 1;
+}
+
+int CIMCustomSessionFix(void *data, CIMInputBuffer *buf)
+{
+    CIMContext *c=(CIMContext*)data;
+    if (!c->ovcontext) return 0;
+    c->ovcontext->clear();
+    /* if (buf->length()) */ buf->send();
     return 1;
 }
 

@@ -164,8 +164,25 @@ ComponentResult CIMSessionDeactivate(CIMSessionHandle hndl)
 			(*hndl)->buffer->bind((*hndl)->instance)))
 				return invalidHandler;
 	#endif
-	
-	return CIMSessionFix(hndl);
+
+    return noErr;	
+}
+
+ComponentResult CIMSessionFix(CIMSessionHandle hndl)
+{
+    fprintf (stderr, "CIM: SessionFix\n");
+    if ((*hndl)->sessionFixLock) return noErr;
+    
+    fprintf (stderr, "CIM: SessionFix really entered\n");
+	#ifdef CIMCUSTOM
+		if (!CIMCustomSessionFix((*hndl)->data,
+			(*hndl)->buffer->bind((*hndl)->instance)))
+				return invalidHandler;
+	#else
+        (*hndl)->buffer->bind((*hndl)->instance)->send();
+    #endif
+    
+    return noErr;
 }
 
 ComponentResult CIMSessionHidePalettes(CIMSessionHandle hndl)
@@ -193,30 +210,22 @@ ComponentResult CIMSessionEvent(CIMSessionHandle hndl, EventRef evnt)
     GetEventParameter(evnt, kEventParamKeyModifiers, typeUInt32, nil,
         sizeof(modifiers), nil, &modifiers);
 
+    (*hndl)->sessionFixLock=1;
+    
 	#ifdef CIMCUSTOM
 		Point p;
 		CIMGetInputPosition(hndl, &p);
 	
-		return CIMCustomHandleInput((*hndl)->data, 
+		int x=CIMCustomHandleInput((*hndl)->data, 
 			(*hndl)->buffer->bind((*hndl)->instance),
 			charcode, keycode, modifiers, &p);
 	#else
-		return CIMHandleInput((*hndl)->buffer->bind((*hndl)->instance),
+		int x=CIMHandleInput((*hndl)->buffer->bind((*hndl)->instance),
 			charcode, keycode, modifiers);
 	#endif
-}
-
-ComponentResult CIMSessionFix(CIMSessionHandle hndl)
-{
-	#ifdef CIMCUSTOM
-		if (!CIMCustomDeactivate((*hndl)->data,
-			(*hndl)->buffer->bind((*hndl)->instance)))
-				return invalidHandler;
-	#endif
-
-    (*hndl)->buffer->bind((*hndl)->instance)->send();
-    (*hndl)->buffer->clearLastUpdate();    
-    return noErr;
+	
+	(*hndl)->sessionFixLock=0;
+	return x;
 }
 
 
