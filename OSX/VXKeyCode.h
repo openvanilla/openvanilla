@@ -12,7 +12,7 @@ public:
     virtual int code()
         { return charcode; }
     virtual int isshift()
-        { return modifiers & (controlKey | rightControlKey); }
+        { return modifiers & (shiftKey | rightShiftKey); }
     virtual int iscapslock()
         { return modifiers & alphaLock; }
     virtual int isctrl()

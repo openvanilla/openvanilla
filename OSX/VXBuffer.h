@@ -14,7 +14,7 @@ public:
     
     virtual OVBuffer* clear()
         { if (cimbuf) cimbuf->clear(); return this; }
-    virtual OVBuffer* send(OVLanguage lang)
+    virtual OVBuffer* send(OVLanguage lang=ovLangAll)
     { 
         if (cimbuf) cimbuf->update(TRUE, -1, -1, -1, 
             lookupscript(lang), lookuplang(lang)); 
@@ -24,7 +24,7 @@ public:
         int hiliteto=-1, OVLanguage lang=ovLangAll)
     {
         if (cimbuf) cimbuf->update(FALSE, cursorpos, hilitefrom, hiliteto,
-            lookupscript(lang), lookuplang(lang));
+			lookupscript(lang), lookuplang(lang));
         return this;
     }
     virtual OVBuffer* append (void *s, OVEncoding e=ovEncodingUTF8, int l=0)

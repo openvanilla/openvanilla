@@ -4,9 +4,8 @@
 
 const int VXDefMaxLen=1024;
 CFStringEncoding VXMapEncoding(OVEncoding e);
-CFStringRef VXCreateCFStringNone8BitEncoding(void *s, 
-    OVEncoding e, int l);
-int VXConvertCFStringNone8BitEncoding(CFStringRef ref, void *s,
+CFStringRef VXCreateCFStringNon8BitEncoding(void *s, OVEncoding e, int l);
+int VXConvertCFStringNon8BitEncoding(CFStringRef ref, void *s,
 	OVEncoding e, int l);
 
 CFStringEncoding VXMapEncoding(OVEncoding e)
@@ -19,19 +18,21 @@ CFStringEncoding VXMapEncoding(OVEncoding e)
         case ovEncodingBig5HKSCS:
             enc=kCFStringEncodingBig5_HKSCS_1999;
     } 
+    
+    return enc;
 }
 
 CFStringRef VXCreateCFString(void *s, OVEncoding e, int l)
 {
-    if (e & ovEncodingNone8BitEncodingMask)
-        return VXCreateCFStringNone8BitEncoding(s, e, l);
+    if (e & ovEncodingNon8BitEncodingMask)
+        return VXCreateCFStringNon8BitEncoding(s, e, l);
     
     return CFStringCreateWithCString(NULL, (const char*)s, VXMapEncoding(e));
 }
 
 
 #warning Architecture-dependent code (currently only for big-endian machines)
-CFStringRef VXCreateCFStringNone8BitEncoding(void *s, OVEncoding e, int l)
+CFStringRef VXCreateCFStringNon8BitEncoding(void *s, OVEncoding e, int l)
 {    
     switch (e)
     {
@@ -44,15 +45,15 @@ CFStringRef VXCreateCFStringNone8BitEncoding(void *s, OVEncoding e, int l)
 
 int VXConvertCFString(CFStringRef ref, void *s, OVEncoding e, int maxlen)
 {
-    if (e & ovEncodingNone8BitEncodingMask)
-        return VXConvertCFStringNone8BitEncoding(ref, s, e, maxlen);
+    if (e & ovEncodingNon8BitEncodingMask)
+        return VXConvertCFStringNon8BitEncoding(ref, s, e, maxlen);
 
     int l=maxlen ? maxlen : VXDefMaxLen;
     if (!CFStringGetCString(ref, (char*)s, l, VXMapEncoding(e))) return 0;
     return strlen((const char*)s);	
 }
 
-int VXConvertCFStringNone8BitEncoding(CFStringRef ref, void *s, OVEncoding e, 
+int VXConvertCFStringNon8BitEncoding(CFStringRef ref, void *s, OVEncoding e, 
     int maxlen)
 {
     CFRange r;

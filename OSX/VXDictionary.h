@@ -17,6 +17,10 @@ public:
             0, ref);
     }
     
+    VXDictionary(CFDataRef ref)
+    {
+    }
+    
     virtual ~VXDictionary()
     {
         if (dict) CFRelease(dict);
