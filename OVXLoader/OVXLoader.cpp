@@ -1,7 +1,10 @@
 // OVXLoader.cpp
 
+#define OVDEBUG 1
+
 #include "CIM.h"
 #include "OpenVanilla.h"
+#include "OpenVanilla/OVUtility.h"
 #include "OVLoadable.h"
 #include "OVDebugIM.h"
 

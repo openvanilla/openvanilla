@@ -17,6 +17,6 @@ install-osx-framework: osx-framework
 osx-framework: OpenVanilla.h OVLoadable.h
 	mkdir -p $(OSXFRAMEWORK)/Headers
 	touch $(OSXFRAMEWORK)/OpenVanilla
-	cp OpenVanilla.h OVLoadable.h $(OSXFRAMEWORK)/Headers
+	cp OpenVanilla.h OVLoadable.h OVUtility.h $(OSXFRAMEWORK)/Headers
 
 
