@@ -21,7 +21,7 @@ struct DayiTable
     char selkey[32];
 };
 
-DayiTable ReadDayi(char *fname)
+DayiTable ReadDayi(char *fname, int selshift)
 {
     DayiTable tab;
     FILE *in=fopen(fname, "r");
@@ -51,8 +51,16 @@ DayiTable ReadDayi(char *fname)
 
         if (!strcmp(key, "%selkey"))
         {   
-            strcpy(tab.selkey, " ");
-            strcat(tab.selkey, value);
+            if (selshift)
+            {
+            	strcpy(tab.selkey, " ");
+	            strcat(tab.selkey, value);
+	        }
+	        else
+	        {
+	        	strcpy(tab.selkey, value);
+	        }
+	        
             printf ("selkey=%s\n", tab.selkey);
         }
 
@@ -168,7 +176,12 @@ public:
             int i, nextsend=0, l=strlen(tab->selkey);
             // murmur("searching selkey=%s, len=%d", tab->selkey, l);
 
-            for (i=0; i<l; i++) if (keycode==tab->selkey[i]) break;
+			if (keycode==' ') i=0;
+			else
+			{
+            	for (i=0; i<l; i++) if (keycode==tab->selkey[i]) break;
+            }
+            
             // murmur("index=%d, candistr_length=%d", i, [(NSString*)candistr length]);
             if (i==l || i >[(NSString*)candistr length]) 
             {
@@ -420,8 +433,15 @@ public:
             strcpy(cinfile, "dayi3.cin");            
         }
         
+        int sel=1;
+        
+        if (!local->keyExist("shift-selkey")) local->setInt("shift-selkey", 1);
+    	sel=local->getInt("shift-selkey");
+        	
+        
+        
         strcat(dayipath, cinfile);
-        tab=ReadDayi(dayipath); // XXX hard-coded path
+        tab=ReadDayi(dayipath, sel); // XXX hard-coded path
         return 1;
     }
     

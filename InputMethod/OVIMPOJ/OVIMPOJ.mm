@@ -403,14 +403,22 @@ public:
             localconfig->setInt("ASCII_Output", 0);
         
         if (!localconfig->keyExist("Keyboard_Layout"))
-            localconfig->setInt("Keyboard_Layout", pojToneByNumber);
-        
+            localconfig->setInt("Keyboard_Layout", pojToneByNumber);       
         
         if (!localconfig->keyExist("POJ_cin_path"))
-            localconfig->setString("POJ_cin_path", "/Library/OpenVanilla/Development/POJ.cin");
+            localconfig->setString("POJ_cin_path", 
+            "/Library/OpenVanilla/Development/POJ.cin");
+            
+        if (!localconfig->keyExist("script"))
+        	localconfig->setInt("script", 1);
+        if (!localconfig->keyExist("lang"))
+        	localconfig->setInt("lang", 1);
         
         asciioutput=localconfig->getInt("ASCII_Output");
         keylayout=localconfig->getInt("Keyboard_Layout");
+        
+        script=localconfig->getInt("script");
+        lang=localconfig->getInt("lang");
         
         char buf[256];
         localconfig->getString("POJ_cin_path", buf);
@@ -429,6 +437,8 @@ public:
     {
         asciioutput=localconfig->getInt("ASCII_Output");
         keylayout=localconfig->getInt("Keyboard_Layout");
+		script=localconfig->getInt("script");
+		lang=localconfig->getInt("lang");
 
         murmur ("config changed, asciioutput now=%d, keyboard layout=%d", asciioutput, keylayout);
         
@@ -459,6 +469,9 @@ public:
     {
         return cin.find(key);
     }
+    
+    int script;
+    int lang;
     
 protected:
     int asciioutput;
@@ -536,8 +549,8 @@ int OVIMPOJContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         if (!ar)
         {
 //            buf->append(" ")->send();
-            buf->send();
-
+			murmur ("script=%d, lang=%d", parent->script, parent->lang);
+            buf->send((unsigned int)0xf0000000+(unsigned int)(parent->script << 16)+(unsigned int)parent->lang);
         }
         else
         {
@@ -614,31 +627,6 @@ int OVIMPOJContext::copyAndDispose(OVBuffer *buf, int c, char* append)
     return 1;
 }
 
-
-
 // standard wrappers
 OVLOADABLEWRAPPER(OVIMPOJ);
-
-
-id autoreleasepool;
-extern "C" void _init()
-{
-    murmur ("init!\n");
-    
-    NSApplicationLoad();    
-    
-    murmur ("Cocoa multithread mode: %d", [NSThread isMultiThreaded]);
-    
-    murmur ("alloc");
-    autoreleasepool=[NSAutoreleasePool alloc];
-    
-    murmur ("init");
-    [autoreleasepool init];
-}  
-
-extern "C" int OVLoadableCanUnload() 
-{
-    return 0; 
-}
-
-
+OVLOADABLEOBJCWRAPPER;

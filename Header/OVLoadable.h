@@ -58,26 +58,35 @@ typedef int OVLUnloadType();
     {   \
         delete im;  \
     }
+
+// use this wrapper if your IM will be statically linked into the Loader
+#define OVSTATICWRAPPER(classname)	\
+	OVInputMethod* OVStatcLinkedIM_##classname()	\
+	{	\
+		return new classname;	\
+	}
     
-// use this wrapper if your IM module is unloadable    
+// use this wrapper if your IM module is unloadable
+// if you use Objective-C(++) to write your IM moudle, you should NEVER
+// call use this wrapper
 #define OVLOADABLECANUNLOAD   \
     extern "C" int OVLoadableCanUnload()    \
     {   \
         return 1;   \
     }
 
-// if you use Objective-C/Objective-C++ to write an IM moudle,
-// you MUST call this wrapper
+// if you use Objective-C(++) to write an IM moudle,
+// you MUST use this wrapper
 #define OVLOADABLEOBJCWRAPPER   \
     id autoreleasepool;    \
     extern "C" void _init() \
     {   \
+	    NSApplicationLoad();	\
         autoreleasepool=[[NSAutoreleasePool alloc] init]; \
     }   \
     extern "C" int OVLoadableCanUnload()    \
     {   \
         return 0;   \
     }
-
     
 #endif

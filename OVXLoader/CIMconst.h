@@ -6,6 +6,7 @@
 #define cimScript   2		// smTradChinese
 #define cimLanguage	19		// langTradChinese
 // #define cimBaseResourceID	(15872+cimScript*512)
+// #define cimBaseResourceID 16384
 #define cimBaseResourceID	16896
 
 
