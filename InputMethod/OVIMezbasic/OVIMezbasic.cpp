@@ -15,21 +15,21 @@ const int ebMaxKeySeq=8192;
 class KeySeq
 {
 public:
-	KeySeq() { len=0; buf[0]=0; }
-	void add(char c)
-	{
-		if (len == ebMaxKeySeq) return;
-		buf[len++]=c;
-		buf[len]=0;
-	}
-	void remove()
-	{
-		if (!len) return;
-		buf[--len]=0;
-	}
-	void clear() { len=0; buf[0]=0; }
-	char buf[ebMaxKeySeq];
-	int len;
+    KeySeq() { len=0; buf[0]=0; }
+    void add(char c)
+    {
+        if (len == ebMaxKeySeq) return;
+        buf[len++]=c;
+        buf[len]=0;
+    }
+    void remove()
+    {
+        if (!len) return;
+        buf[--len]=0;
+    }
+    void clear() { len=0; buf[0]=0; }
+    char buf[ebMaxKeySeq];
+    int len;
 };
 
 class OVezbasicContext : public OVIMContext
@@ -41,44 +41,43 @@ public:
     virtual int deactivate(OVService *) { return 1; }
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         OVService *srv)
-    {    	
+    {        
         if (key->isCode(2, ovkReturn, ovkMacEnter))
         {
-            if (!buf->length()) return 0;   // if buffer is empty, don't process
-            
+            if (!buf->length()) return 0;
             char *result=EvalEZBasic(keyseq.buf);
             buf->clear()->append(result)->send();
             keyseq.clear();
-            return 1;   // key processed
+            return 1;
         }
 
-		if (key->isCode(2, ovkBackspace, ovkDelete))
-		{
-			if (!buf->length()) return 0;
-			keyseq.remove();
-			buf->clear()->append(keyseq.buf)->update();
-			return 1;
-		}
+        if (key->isCode(2, ovkBackspace, ovkDelete))
+        {
+            if (!buf->length()) return 0;
+            keyseq.remove();
+            buf->clear()->append(keyseq.buf)->update();
+            return 1;
+        }
 
-    	if (!key->isPrintable() || key->isOpt() || key->isCtrl()
-    	    || key->isCommand())
-    	{
-    		keyseq.clear();
-    		if (buf->length()) buf->clear();
-			return 0;    		
-    	}
+        if (!key->isPrintable() || key->isOpt() || key->isCtrl()
+            || key->isCommand())
+        {
+            keyseq.clear();
+            if (buf->length()) buf->clear();
+            return 0;            
+        }
         
         if (key->isPrintable())
         {
-        	keyseq.add(key->code());
+            keyseq.add(key->code());
             buf->clear()->append(keyseq.buf)->update();
-            return 1;   // key processed
+            return 1;
         }
 
-    	keyseq.clear();
-    	if (buf->length()) buf->clear();
+        keyseq.clear();
+        if (buf->length()) buf->clear();
         
-        return 0;   // key not processed
+        return 0;
     }
     
 protected:
