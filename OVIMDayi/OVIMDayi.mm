@@ -1,5 +1,7 @@
 // OVIMDayi.mm
 
+#define OVDEBUG
+
 #include <Cocoa/Cocoa.h>
 #include "OpenVanilla/OpenVanilla.h"
 #include "OpenVanilla/OVLoadable.h"
@@ -398,12 +400,24 @@ public:
         return 1;
     }
 
-    virtual int initialize(OVDictionary*, OVDictionary*, OVService*, char* path)
+    virtual int initialize(OVDictionary*, OVDictionary* local, OVService*, char* path)
     {
         murmur("begin to initialize Dayi at path %s", path);
+        char cinfile[256];
         char dayipath[256];
         strcpy(dayipath, path);
-        strcat(dayipath, "dayi3.cin");
+        
+        if (local->keyExist("cin-filename"))
+        {
+            local->getString("cin-filename", cinfile);   
+        }
+        else
+        {
+            local->setString("cin-filename", "dayi3.cin");
+            strcpy(cinfile, "dayi3.cin");            
+        }
+        
+        strcat(dayipath, cinfile);
         tab=ReadDayi(dayipath); // XXX hard-coded path
         return 1;
     }
