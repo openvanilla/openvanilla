@@ -89,3 +89,44 @@ CFURLRef VXCreateURL(char *localfilename)
     
     return url;
 }
+
+int VXGetCurrentLocale(CFBundleRef bundle, char *str, int maxlen)
+{
+	char *defvalue="en";
+	strcpy(str, defvalue);
+	
+	if (!bundle) return strlen(defvalue);
+
+	CFArrayRef ar=CFBundleCopyBundleLocalizations(bundle);
+	if (!ar) return strlen(defvalue);
+	
+	CFArrayRef pref=CFBundleCopyPreferredLocalizationsFromArray(ar);
+	if (!pref) 
+	{
+		CFRelease(ar);
+		return strlen(defvalue);
+	}
+    
+	if (CFArrayGetCount(pref))
+	{
+		CFStringRef r=CFArrayGetValueAtIndex(pref, 0);
+		if (r)
+		{
+			CFStringRef cr=CFLocaleCreateCanonicalLocaleIdentifierFromString
+				(NULL, r);			
+			if (cr)
+			{
+				if (!CFStringGetCString(cr, str, maxlen, kCFStringEncodingUTF8))
+				{
+					strcpy(str, defvalue);
+				}
+				
+				CFRelease(cr);
+			}
+		}
+		CFRelease(pref);
+		CFRelease(ar);
+	}
+	
+	return strlen(str);
+}

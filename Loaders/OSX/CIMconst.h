@@ -9,7 +9,7 @@
 // #define cimBaseResourceID 16384
 #define cimBaseResourceID	16896
 
-
+#define cimBundleName "org.openvanilla.ovloader"
 #define cimVendorCode 'lkns'		// used in CIM.r
 
 #endif  // of #ifndef __CIMConst_h

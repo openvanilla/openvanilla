@@ -2762,8 +2762,18 @@ resource 'MENU' (cimBaseResourceID + 1)
 	{}
 };
 
+data 'cbnm' (0, "Component Bundle Name") {
+	$"18" "org.openvanilla.ovloader"
+};
+
+data 'STR ' (cimBaseResourceID, "IM Component Name") {
+	$"16" "OpenVanilla Loader 0.6"
+};
+
+/*
 resource 'STR ' (cimBaseResourceID)
 {
-    "OpenVanilla Loader 0.06"
+    "OpenVanilla Loader 0.6"
 };
+*/
 

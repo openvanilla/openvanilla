@@ -5,6 +5,100 @@
 	};
 	objectVersion = 39;
 	objects = {
+		6A2415BA075C283800A155A6 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = English;
+			path = English.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A2415C3075C284D00A155A6 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = English;
+			path = English.lproj/InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A2415C5075C285F00A155A6 = {
+			children = (
+				6A2415C3075C284D00A155A6,
+				6A2415C7075C286300A155A6,
+			);
+			isa = PBXVariantGroup;
+			name = InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A2415C6075C285F00A155A6 = {
+			fileRef = 6A2415C5075C285F00A155A6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2415C7075C286300A155A6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = zh_TW;
+			path = zh_TW.lproj/InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A2415C8075C286900A155A6 = {
+			children = (
+				6A2415BA075C283800A155A6,
+				6A2415CA075C286D00A155A6,
+			);
+			isa = PBXVariantGroup;
+			name = Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A2415C9075C286900A155A6 = {
+			fileRef = 6A2415C8075C286900A155A6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2415CA075C286D00A155A6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = zh_TW;
+			path = zh_TW.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A241657075C362400A155A6 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = OVAbout.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A241658075C362400A155A6 = {
+			fileRef = 6A241657075C362400A155A6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A241659075C362F00A155A6 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			path = OVAbout.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A24165A075C362F00A155A6 = {
+			fileRef = 6A241659075C362F00A155A6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		6A2C9FD2075AFDB8005462F0 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -152,6 +246,13 @@
 			);
 			hasScannedForEncodings = 0;
 			isa = PBXProject;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				zh_TW,
+			);
 			mainGroup = 6A8BE8C307544DB1002FBA64;
 			productRefGroup = 6A8BE8D007544DC3002FBA64;
 			projectDirPath = "";
@@ -162,6 +263,8 @@
 		6A8BE8CB07544DC3002FBA64 = {
 			buildActionMask = 2147483647;
 			files = (
+				6A2415C9075C286900A155A6,
+				6A2415C6075C285F00A155A6,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,6 +278,7 @@
 				6AD0EAE1075AFC6A005045FE,
 				6A2C9FDE075AFDB8005462F0,
 				6A2C9FE0075AFDB8005462F0,
+				6A24165A075C362F00A155A6,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,6 +375,7 @@
 				6A2C9FDD075AFDB8005462F0,
 				6A2C9FDF075AFDB8005462F0,
 				6A2C9FE1075AFDB8005462F0,
+				6A241658075C362400A155A6,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,6 +458,10 @@
 		};
 		6A8BE99207544E75002FBA64 = {
 			children = (
+				6A241659075C362F00A155A6,
+				6A241657075C362400A155A6,
+				6A2415C5075C285F00A155A6,
+				6A2415C8075C286900A155A6,
 				6AD0EADF075AFC6A005045FE,
 				6AD0EAE0075AFC6A005045FE,
 			);

@@ -12,5 +12,6 @@ int VXConvertCFString(CFStringRef ref, void *s, OVEncoding e=ovEncodingUTF8,
     int maxlen=0);
 
 CFURLRef VXCreateURL(char *localfilename);
+int VXGetCurrentLocale(CFBundleRef bundle, char *str, int maxlen=256);
 
 #endif

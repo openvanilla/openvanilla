@@ -6,11 +6,13 @@
 #include "CIM.h"
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLoadable.h>
+#include "CIMConst.h"
 #include "VXTextBar.h"
 #include "VXBuffer.h"
 #include "VXKeyCode.h"
 #include "VXConfig.h"
 #include "VXLoadableIM.h"
+#include "OVAbout.h"
 
 class CIMContext
 {
@@ -24,6 +26,8 @@ public:
 	void add();
 	void remove();
 };
+
+int listloaded=0;
 
 const int vxMaxContext=256;
 CIMContext* pool[vxMaxContext];
@@ -73,16 +77,31 @@ int CIMCustomInitialize(MenuRef mnu)
 	OVDictionary *global=GetGlobalConfig();
 
 
-	// load every .dylib
-	list.addglob(loaddir, ".dylib");
+	// load every .dylib; this is to prevent a strange "load twice" bug in iTerm
+	if (!listloaded)
+	{
+		list.addglob(loaddir, ".dylib");
+		listloaded=1;
+	}
+	
+	
+	char locale[256];
+	VXGetCurrentLocale(CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName)), locale);
 	
 	// for the time being, we use id as menu names
 	// (and we initialize everything)
 	int i=0;
 	for (i=0; i<list.imcntr; i++)
 	{
-		CFStringRef imname=VXCreateCFString(list.impair[i].id);
+		OVEncoding enc;
+		char imn[256];
+		list.impair[i].im->name(locale, imn, &enc);
+		CFStringRef imname=VXCreateCFString(imn, enc);
 		InsertMenuItemTextWithCFString(mnu, imname, i, 0, usermenu+i);
+		
+		SetMenuItemCommandKey(mnu, i+1, FALSE, '1'+i);
+		SetMenuItemModifiers(mnu, i+1, kMenuControlModifier);
+		
 		CFRelease(imname);
 
 		char id[256];
@@ -93,7 +112,15 @@ int CIMCustomInitialize(MenuRef mnu)
 	}
 	
 	InsertMenuItemTextWithCFString(mnu, CFSTR("-"), i++, 0, 0);
-	InsertMenuItemTextWithCFString(mnu, CFSTR("Preferences..."), i++, 0, 'PREF');
+
+	CFBundleRef bundle=CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName));
+    CFStringRef mstr;
+	mstr=CFBundleCopyLocalizedString(bundle, CFSTR("Preferences"), NULL, NULL);
+	InsertMenuItemTextWithCFString(mnu, mstr, i++, 0, 'PREF');
+	CFRelease(mstr);
+	mstr=CFBundleCopyLocalizedString(bundle, CFSTR("About"), NULL, NULL);
+	InsertMenuItemTextWithCFString(mnu, mstr, i++, 0, 'ABUT');
+	CFRelease(mstr);
 	
 	
 	// look for the input method we want to use
@@ -239,6 +266,10 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
 			fprintf (stderr, "launching application to edit %s\n", plistfile);
 			sprintf (sbuf, "open %s", plistfile);
 			system(sbuf);
+			return 1;
+			
+		case 'ABUT':
+			ShowAbout();
 			return 1;
 	}
     
