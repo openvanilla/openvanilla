@@ -410,6 +410,7 @@ int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar, OVService *srv)
     {
         buf->clear()->append((void*)[[array objectAtIndex: 0] UTF8String])->send();
         keyseq.clear();
+        if (candi.onDuty()) cancelAutoCompose(textbar);
         return 1;
     }
 
