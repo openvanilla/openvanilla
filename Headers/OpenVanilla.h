@@ -6,9 +6,6 @@
 #define __OpenVanilla_h
 
 #include <ctype.h>
-#include <stdarg.h>
-#include <stdlib.h>
-#include <string.h>
 
 const unsigned int ovVersion=0x00070000;    // OpenVanilla 0.7.0
 
@@ -33,22 +30,7 @@ public:
     virtual int isNumeric() { return (code() >= '0' && code() <= '9'); }
     virtual int upper() { return toupper(code()); }
     virtual int lower() { return tolower(code()); }
-    
-    virtual int isKey(int c)
-    {
-        return (c == code());
-    }
-    
-    virtual int isCode(int argc, ...)
-    {
-        int r=0;
-        va_list ap;
-        va_start(ap, argc);
-        for (int i=0; i<argc; i++) 
-            { int j=va_arg(ap, int); if (j==code()) { r=1; break; } }
-        va_end(ap);
-        return r;
-    }
+    virtual int isKey(int c) { return (c == code()); }
 };
 
 class OVBuffer : public OVObject {
@@ -67,6 +49,7 @@ public:
 class OVInfoBox : public OVObject {
 public:
     virtual OVInfoBox* setSelectKey(const char *key)=0;
+    virtual OVInfoBox* setPassThruKey(const char *key)=0;
     virtual OVInfoBox* show()=0;
     virtual OVInfoBox* hide()=0;
     virtual OVInfoBox* finalize()=0;
@@ -103,8 +86,8 @@ public:
 
 class OVIMContext : public OVObject {
 public:
-    virtual int activate(OVInfoBox *infobox) { return 1; }
-    virtual int deactivate(OVBuffer *buf, OVInfoBox *infobox) { clear(); return 1; }
+    virtual void activate() {}
+    virtual void deactivate() { clear(); }
     virtual void clear() {}
 
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, 
@@ -140,8 +123,5 @@ class OVBufferFilter : public OVComponent {
 public:
     virtual const char *process(const char *source);
 };
-
-
-
 
 #endif

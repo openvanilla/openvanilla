@@ -1,4 +1,5 @@
 // OVModuleLoader.h
+// This provides an abstract interface for writing OV-conforming Loaders.
 
 #ifndef __OVModuleLoader_h
 #define __OVModuleLoader_h
@@ -12,20 +13,14 @@ typedef int OVMAvailableCountType(char*);
 
 class OVModuleLoader : public OVObject {
 public:
-    OVModuleLoader();
     virtual int load(const char *fileName, const char *modulePath, const char 
-        *userPath);
-    virtual int getInputMethodCount();
-    virtual int getBufferFilterCount();
-    virtual OVInputMethod *newInputMethod(int idx);
-    virtual OVBufferFilter *newBufferFilter(int idx);
-    
-protected:
-    void *libhandle;
-    int imcount, bfcount;
-    OVMNewInputMethodType *newim;
-    OVMNewBufferFilterType *newbf;
+        *userPath)=0;
+    virtual int getInputMethodCount()=0;
+    virtual int getBufferFilterCount()=0;
+    virtual OVInputMethod *newInputMethod(int idx)=0;
+    virtual OVBufferFilter *newBufferFilter(int idx)=0;
 };
+
 
 
 

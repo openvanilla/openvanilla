@@ -1,7 +1,9 @@
-// OVModule.h
+// OVModuleWrapper.h
+// This header file does nothing. It only provides a few macros so that
+// you don't have to implement every "module outlet" function.
 
-#ifndef __OVModule_h
-#define __OVModule_h
+#ifndef __OVModuleWrapper_h
+#define __OVModuleWrapper_h
 
 #include "OpenVanilla.h"
 
