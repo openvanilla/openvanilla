@@ -29,7 +29,6 @@ public:
     CIMContext() : ovcontext(NULL), onScreen(0) { add(); }
     ~CIMContext() { remove(); }
     VXTextBar bar;
-    VXTextBar otsbar;
     
     OVIMContext *ovcontext;
     int onScreen;
@@ -375,8 +374,6 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
     CIMContext *c=(CIMContext*)data;    
     if (!c->ovcontext) return 0;
 
-    c->otsbar.hide();
-
     if (c->bar.onScreen()) {
         c->onScreen=1;
         if (floatingwindowlock) c->bar.unlock();
@@ -385,6 +382,7 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
     SetFloatingWindowPosition(c);
 
     c->ovcontext->deactivate(&srv);
+    
     return 1;
 }
 
@@ -395,9 +393,7 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf,
     CIMContext *c=(CIMContext*)data;    
     if (!c->ovcontext) return 0;
 
-    VXBuffer vxb;
-    c->otsbar.show();
-    
+    VXBuffer vxb;    
     VXKeyCode key;
 
 	vxb.setConversionFilter(conversionfilter);
