@@ -14,17 +14,17 @@ const char *optBeep="warningBeep";
 
 int OVIMPOJ::identifier(char* s)
 {
-    return strlen(strcpy(s, "OVIMPOJ"));
+    return strlen(strcpy(s, "OVIMPOJHolo"));
 }
 
 int OVIMPOJ::name(char *locale, void *s, OVEncoding *enc)
 {
     *enc=ovEncodingUTF8;
     if (!strcasecmp(locale, "zh_TW"))
-        return strlen(strcpy((char*)s, "OV 白話字(POJ)漢羅"));
+        return strlen(strcpy((char*)s, "OV 河洛白話字漢羅"));
     if (!strcasecmp(locale, "zh_CN"))
-        return strlen(strcpy((char*)s, "OV 白話字(POJ)汉罗"));
-    return strlen(strcpy((char*)s, "OV Pe̍h-ōe-jī (POJ)"));
+        return strlen(strcpy((char*)s, "OV 河洛白話字汉罗"));
+    return strlen(strcpy((char*)s, "OV Holo Pe̍h-ōe-jī (POJ)"));
 }
 
 int OVIMPOJ::initialize(OVDictionary* global, OVDictionary* local,
@@ -38,7 +38,7 @@ int OVIMPOJ::initialize(OVDictionary* global, OVDictionary* local,
         local->setInt(optKeyLayout, pojToneByNumber);
         
     strcpy(cinpath, path);
-    strcat(cinpath, "OVIMPOJ/poj.cin");        
+    strcat(cinpath, "OVIMPOJHolo/poj.cin");        
     murmur ("OVIMPOJ: loading poj.cin at %s", cinpath);
     
     update(global, local);

@@ -1,6 +1,6 @@
-IMID=OVIMPOJ
+IMID=OVIMPOJHolo
 OBJS=OVIMPOJ.o VXCIN.o VXUtility.o VXCandidate.o POJKeySeq.o
-GOALS=OVIMPOJ.dylib 
+GOALS=OVIMPOJHolo.dylib 
 DATA=poj.cin
 
 $(GOALS): $(OBJS)
