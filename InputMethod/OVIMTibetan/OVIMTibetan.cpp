@@ -143,6 +143,8 @@ public:
 					keyseq.clear();
 					textbar->hide();
 				} else{
+					buf->send()->clear();
+					keyseq.clear();
 					keyseq.add('f');
 					textbar->clear()->append((char *)"Composing...")->show();
 				}
