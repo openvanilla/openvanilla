@@ -1,0 +1,42 @@
+################################################################################
+# Spork Configuration File.
+# 
+# Please read this file over and set the values to your own.
+#
+# If you want global settings for all your slideshows, copy this file to
+# ~/.sporkrc/config.yaml. Any settings in this local file will override
+# the global value of that setting.
+# 
+# See C<perldoc Spork::Config> for details on settings.
+################################################################################
+author_name: lukhnos
+author_email: lukhnos@openvanilla.org
+author_webpage: http://openvanilla.org
+copyright_string: Copyright &copy; 2005 Lukhnos
+
+banner_bgcolor: lightgreen
+show_controls: 1
+mouse_controls: 0
+image_width: 350
+auto_scrolldown: 1
+logo_image: cpan.jpg
+file_base: /Users/lukhnos/ovdesign/slides/images/
+
+slides_file: Spork.slides
+template_directory: template/tt2
+template_path: 
+- ./template/tt2
+slides_directory: slides
+download_method: wget
+character_encoding: utf-8
+link_previous: &lt; &lt; Previous
+link_next: Next &gt;&gt;
+link_index: Index
+
+start_command: open slides/start.html
+
+template_class: Spork::Template::TT2
+formatter_class: Spork::Formatter
+
+# plugin_classes:
+# - Kwiki::PerlMode
