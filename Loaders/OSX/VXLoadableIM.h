@@ -3,8 +3,6 @@
 #ifndef __VXLoadableIM_h
 #define __VXLoadableIM_h
 
-#include <dlfcn.h>
-#include <sys/syslimits.h>
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLoadable.h>
 #include <OpenVanilla/OVUtility.h>

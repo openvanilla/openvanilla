@@ -1,16 +1,62 @@
 // OVIMXcin.mm
 
 #define OVDEBUG
-#include <OpenVanilla/OVLoadable.h>
 #include "OVIMXcin.h"
+#include <sys/param.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <OpenVanilla/OVLoadable.h>
 
 OVLOADABLEOBJCWRAPPER;
 
+const int vxMaxCINFiles=32;
+
+int cinpos=0;
 char cinpath[PATH_MAX];
+char cinfile[vxMaxCINFiles][PATH_MAX];
+
+char selectfilter[PATH_MAX];
+
+int file_select(struct dirent *entry)
+{
+    int p=strlen(entry->d_name)-strlen(selectfilter);
+    if (p<0) return 0;
+    if (!strcmp(entry->d_name+p, selectfilter)) return 1; 
+    return 0;
+}
+
+void addglob(char *libpath, char *ext)
+{
+    struct dirent **files;
+    char searchpath[PATH_MAX];
+
+    if (ext) strcpy(selectfilter, ext); else strcpy(selectfilter, ".cin");
+
+    strcpy(searchpath, libpath);
+    int l=strlen(searchpath);
+    if (l) if (searchpath[l-1]=='/') searchpath[l-1]=0;
+
+    murmur ("VXLibraryList::addglob, path=%s, ext=%s", searchpath, ext);    
+    int count=scandir(searchpath, &files, file_select, alphasort); 
+    if (count<=0) return;
+    
+    for (int i=0; i<count; i++)
+    {
+        strcpy (cinfile[cinpos++], files[i]->d_name);
+    	murmur ("OVIMXcin: adding .cin file %s", files[i]->d_name);
+        free(files[i]);
+    }
+    free(files);
+}
+
 extern "C" int OVLoadableAvailableIMCount(char* p)
 {
     strcpy(cinpath, p);
-    return 1;
+    addglob(cinpath, ".cin");
+    return cinpos;
 }
 
 extern "C" unsigned int OVLoadableVersion()
@@ -18,14 +64,80 @@ extern "C" unsigned int OVLoadableVersion()
     return ovVersion;
 }
 
-extern "C" OVInputMethod* OVLoadableNewIM(int)
+extern "C" OVInputMethod* OVLoadableNewIM(int x)
 {
-    return new OVIMXcin(cinpath, "test.cin");
+    return new OVIMXcin(cinpath, cinfile[x]);
 }
 
 extern "C" void OVLoadableDeleteIM(OVInputMethod *im)
 {
     delete im;
+}
+
+void XcinCandidate::prepare(NSArray *l, char *skey, OVTextBar *textbar)
+{
+    onduty=1;
+    list=l;
+    strcpy(selkey, skey);
+    perpage=strlen(selkey);
+    pos=0;
+    count=[list count];
+    
+    murmur ("prepare, selkey=%s, perpage=%d, pos=%d, count=%d",
+        selkey, perpage, pos, count);
+    
+    update(textbar);
+    textbar->show();
+}
+
+void XcinCandidate::update(OVTextBar *textbar)
+{
+    char buf[256];
+    int bound=pos+perpage;
+    if (bound > count) bound=count;
+    
+    textbar->clear();
+    
+    for (int i=pos, j=0; i<bound; i++, j++)
+    {
+        sprintf (buf, "%c.", selkey[j]);
+        textbar->append(buf)->append((void*)[[list objectAtIndex: i] UTF8String])->
+            append((void*)" ");
+    }
+    
+    int totalpage=(count/perpage)+1;
+    int currentpage=(pos/perpage)+1;
+    sprintf (buf, "(%d/%d)", currentpage, totalpage);
+    textbar->append(buf);
+    textbar->update();   
+}
+
+XcinCandidate* XcinCandidate::pageUp()
+{
+    pos-=perpage;
+    if (pos < 0) pos=0;
+    return this;
+}
+
+XcinCandidate* XcinCandidate::pageDown()
+{
+    int oldpos=pos;
+    pos+=perpage;  
+    if (pos > count) pos=0;
+    return this;
+}
+
+NSString* XcinCandidate::select(char c)
+{
+    int i;
+    for (i=0; i<perpage; i++)
+        if (selkey[i]==c)
+        {
+            onduty=0;
+            return [list objectAtIndex: pos+i];
+        }
+        
+    return NULL;        
 }
 
 XcinKeySequence::XcinKeySequence(VXCIN* cintab)
@@ -139,6 +251,8 @@ void OVXcinContext::updateDisplay(OVBuffer *buf)
 int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar, 
     OVService *srv)
 {
+    if (candi.onDuty()) return candidateEvent(key, buf, textbar);
+
     if (!keyseq.length() && !key->isPrintable()) return 0;
     
     if (key->code()==ovkEscape)
@@ -155,7 +269,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         return 1;
     }
 
-    if (keyseq.length() && key->code()==ovkSpace) return compose(buf);
+    if (keyseq.length() && key->code()==ovkSpace) return compose(buf, textbar);
     
     if (key->isPrintable())
     {
@@ -173,7 +287,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         if (keyseq.add(key->code()))
         {
             updateDisplay(buf);
-            if (cintab->isEndKey(key->code())) return compose(buf);
+            if (cintab->isEndKey(key->code())) return compose(buf, textbar);
             return 1;
         }
     }
@@ -187,11 +301,11 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     return 0;
 }
         
-int OVXcinContext::compose(OVBuffer *buf)
+int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar)
 {
     if (!keyseq.length()) return 0;
 
-    NSMutableArray *array=cintab->find(keyseq.getSeq());
+    NSArray *array=cintab->find(keyseq.getSeq());
     
     if (!array) 
     {
@@ -206,14 +320,59 @@ int OVXcinContext::compose(OVBuffer *buf)
         return 1;
     }
 
-    for (int i=0; i<[array count]; i++)
-    {
-        murmur ("candidate %d = %s", i, [[array objectAtIndex: i] UTF8String]);
-    }
-
-    buf->clear()->append((void*)[[array objectAtIndex: 1] UTF8String])->send();
-    
+    buf->clear()->append((void*)[[array objectAtIndex: 0] UTF8String])->update();
+    candi.prepare(array, cintab->selKey(), textbar);    
     keyseq.clear();
     return 1;
 }
 
+int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar)
+{
+    if (key->isCode(2, ovkEscape, ovkBackspace))
+    {
+        textbar->hide()->clear();
+        candi.cancel();
+        buf->clear()->update();
+        return 1;
+    }
+
+    if (key->isCode(4, ovkSpace, ovkDown, ovkLeft, '>'))
+    {
+        candi.pageDown()->update(textbar);
+        return 1;
+    }
+
+    if (key->isCode(3, ovkUp, ovkRight, '<'))
+    {
+        candi.pageUp()->update(textbar);
+        return 1;
+    }
+
+    // enter == first candidate
+    char c=key->code();
+    if (key->isCode(2, ovkReturn, ovkMacEnter)) c=*(cintab->selKey());
+    
+    NSString *output;
+    
+    if (output=candi.select(c))
+    {
+        buf->clear()->append((void*)[output UTF8String])->send();
+        candi.cancel();
+        textbar->hide()->clear();
+        return 1;
+    }
+    
+    if (output=cintab->getKey(c))
+    {
+        buf->clear()->append((void*)[candi.select(*(cintab->selKey())) UTF8String])->send();
+        keyseq.add(c);
+        updateDisplay(buf);
+        candi.cancel();
+        textbar->hide()->clear();
+        return 1;
+    }    
+
+    // invalid key, let's beep?
+
+    return 1;
+}

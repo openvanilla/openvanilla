@@ -22,7 +22,7 @@ VXCIN::~VXCIN()
     if (cname) [cname release];
 }
 
-int isEndKey(char c)
+int VXCIN::isEndKey(char c)
 {
     if (!strlen(endkey)) return 0;
     if (strchr(endkey, tolower(c))) return 1;

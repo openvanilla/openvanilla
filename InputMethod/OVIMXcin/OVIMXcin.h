@@ -20,6 +20,32 @@ protected:
     VXCIN *cinTable;
 };
 
+class XcinCandidate : public OVObject
+{
+public:
+    XcinCandidate()
+    {
+        onduty=0;
+    }
+    
+    void prepare(NSArray *l, char *skey, OVTextBar *textbar);
+    int onDuty() { return onduty; }
+    void cancel() { onduty=0; }
+    void update(OVTextBar *textbar);
+    XcinCandidate* pageUp();
+    XcinCandidate* pageDown();
+    NSString* select(char c);
+    
+protected:
+    int onduty;
+    char selkey[32];
+    int count;
+    int perpage;
+    int pos;
+    NSArray *list;
+};
+
+
 class OVIMXcin;
 
 class OVXcinContext : public OVIMContext
@@ -34,11 +60,12 @@ public:
 protected:
     virtual void updateDisplay(OVBuffer *buf);
     virtual int compose(OVBuffer *buf, OVTextBar *textbar);
-    
+
     virtual int candidateEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar);
     
     OVIMXcin *parent;
     XcinKeySequence keyseq;
+    XcinCandidate candi;
     VXCIN *cintab;
 };
 
