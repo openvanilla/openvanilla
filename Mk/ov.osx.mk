@@ -1,3 +1,3 @@
 
-VPATH+= ../../Loaders/OSX:../../InputMethod/OVIMXcin
+VPATH+= ../../Source/Shared:../../InputMethod/OVIMXcin
 

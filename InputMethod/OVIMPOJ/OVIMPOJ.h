@@ -8,11 +8,11 @@
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLoadable.h>
 #include <OpenVanilla/OVUtility.h>
-#include "../OVIMXcin/VXCIN.h"
-#include "../OVIMXcin/VXCandidate.h"
-#include "../../Loaders/OSX/VXUtility.h"
+#include "VXCIN.h"
+#include "VXCandidate.h"
+#include "VXUtility.h"
 #include "POJKeySeq.h"
-#include "../OVIMXcin/VXCandidate.h"
+#include "VXCandidate.h"
 
 class OVIMPOJ;
 
