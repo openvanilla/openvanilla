@@ -16,8 +16,12 @@ public:
         { if (cimbuf) cimbuf->clear(); return this; }
     virtual OVBuffer* send(OVLanguage lang=ovLangAll)
     { 
-        if (cimbuf) cimbuf->update(TRUE, -1, -1, -1, lookupscript(lang), 
-            lookuplang(lang)); 
+        if (cimbuf) 
+        {
+            cimbuf->update(TRUE, -1, -1, -1, lookupscript(lang), 
+                lookuplang(lang)); 
+            cimbuf->clear();
+        }
         return this; 
     }
     virtual OVBuffer* update(int cursorpos=-1, int hilitefrom=-1, 

@@ -237,6 +237,7 @@ SPAGHETTI:
             
                 fprintf (stderr, "result=%s", [v UTF8String]);
                 buf->clear()->append([v UTF8String])->send(ovLangTradChinese);
+//              buf->clear();
                 clearkeyseq();
             }
             fprintf (stderr, "\n");
