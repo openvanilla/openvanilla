@@ -460,13 +460,14 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 	VPUTF16 symbolstr[16];
 	int ssl=VPSymbolStringUTF16(vimCurrentSymbol, symbolstr);
 
-    fprintf (stderr, "ssl=%d\n", ssl);
+    // fprintf (stderr, "ssl=%d\n", ssl);
 	// if still no data, must be a unrecognizable key (e.g. "5" in Eten layout)
 
 	if (vimCurrentSymbol)
 	{
-	   fprintf (stderr, "sending\n");
-        buf->clear()->append(symbolstr, ovEncodingUTF16BE, ssl)->update(ovLangTradChinese);
+	   	// fprintf (stderr, "sending\n");
+		buf->clear()->append(symbolstr, ovEncodingUTF16BE, ssl)
+			->update(ovLangTradChinese);
 	}
 	else
 	{

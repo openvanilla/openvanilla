@@ -6,6 +6,9 @@
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLoadable.h>
 #include <OpenVanilla/OVUtility.h>
+#include <sys/param.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 enum
 {
