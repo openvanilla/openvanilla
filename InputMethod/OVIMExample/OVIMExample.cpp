@@ -24,11 +24,13 @@ public:
     virtual int activate(OVService *)
     {
         fprintf (stderr, "IM context activated\n");
+        return 1;
     }
     
     virtual int deactivate(OVService *)
     {
         fprintf (stderr, "IM context deactivated\n");
+        return 1;
     }
     
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
