@@ -165,13 +165,13 @@ void VXLibraryList::addglob(char *libpath, char *ext)
     struct dirent **files;
     char searchpath[PATH_MAX];
 
-	if (ext) strcpy(selectfilter, ext); else strcpy(selectfilter, ".dylib");
+    if (ext) strcpy(selectfilter, ext); else strcpy(selectfilter, ".dylib");
 
-	strcpy(searchpath, libpath);
-	int l=strlen(searchpath);
-	if (l) if (searchpath[l-1]=='/') searchpath[l-1]=0;
+    strcpy(searchpath, libpath);
+    int l=strlen(searchpath);
+    if (l) if (searchpath[l-1]=='/') searchpath[l-1]=0;
 
-	murmur ("VXLibraryList::addglob, path=%s, ext=%s", searchpath, ext);    
+    murmur ("VXLibraryList::addglob, path=%s, ext=%s", searchpath, ext);    
     int count=scandir(searchpath, &files, file_select, alphasort); 
     if (count<=0) return;
     
