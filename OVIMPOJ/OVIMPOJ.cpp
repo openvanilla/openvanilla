@@ -49,6 +49,11 @@ char *vowel2tone(char c, int tone)  // tone must be between 1-8
 
 #define pojMaxSeqLen 10
 
+enum {
+	pojVowelMN=1,
+	pojVowelAEIOU=2
+};
+
 class POJKeySeq
 {
 public:
@@ -146,7 +151,21 @@ public:
                 s+=2;
                 continue;
             }
+
+			// If previously we have M or N, and now we have another
+			// vowel right here, we should discard tone on M,N.
+			// (That means re-copy all leading characters.)
+            if (vcomposed == pojVowelMN && ( vo != -1 )) {
+                murmur("VowelMNRule: char: %c, tone: %d", *s, tone);
+            	char *t=seq;
+            	b=buf;
+            	while(t<s) {*b++=*t++;}
+            	murmur("VowelMNRule: seq: %s, buf: %s",seq,buf);
+            	vcomposed = 0;
+            	*b=0;
+            }
             
+
             // if vowel already composed, or not vowel,
             // here we also apply "i" rule (if "i" is followed by a vowel,
             // the tone mark will never be placed upon "i")
@@ -177,7 +196,8 @@ public:
                 murmur("char: %c, tone: %d, vowel2tone: %s", *s, tone, vstr);
                 strcat(b, vstr);
                 b+=strlen(vstr);
-                vcomposed=1;
+                vcomposed =
+                	(tolower(c) == 'm' || tolower(c) == 'n') ? pojVowelMN : pojVowelAEIOU;
             }
             s++;
         }
