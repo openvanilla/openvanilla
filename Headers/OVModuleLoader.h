@@ -15,19 +15,24 @@
 
 class OVLoadableModuleFile;
 
-OVLoadableModuleFile* OVLoadModuleFile(OVDictionary *globalPref, OVService *srv,
-    const char *modulePath, const char *userPath, const char *seperator);
-
+OVLoadableModuleFile* OVLoadModuleFile(const char *libfile,
+    OVDictionary *globalPref, OVService *srv, const char *modulePath, 
+    const char *userPath, const char *seperator);
+    
 typedef OVInputMethod* _OVNewIMType(int idx);
 typedef OVOutputFilter* _OVNewOFType(int idx);
+typedef unsigned int _OVVersionType();
+typedef unsigned int _OVGetCountType();
+typedef unsigned int _OVInitType(OVDictionary*, OVService*, const char*,
+    const char*, const char*);
     
 class OVLoadableModuleFile : public OVBase
 {
 public:
     int availableInputMethodCount() { return imcount; }
     int availableOutputFilterCount() { return ofcount; }
-    OVInputMethod* newInputMethod(int idx);
-    OVOutputFilter* newOutputFilter(int idx);
+    OVInputMethod* newInputMethod(int i) { return (i<imcount) ? newim(i) : 0; }
+    OVOutputFilter* newOutputFilter(int i) { return (i<imcount) ? newof(i) : 0; } 
 
 protected:
     OVLoadableModuleFile() { imcount=ofcount=0; }
@@ -37,9 +42,9 @@ protected:
     _OVNewOFType *newof;
     int imcount;
     int ofcount;
-    
-    friend OVLoadableModuleFile* OVLoadModuleFile(OVDictionary*, OVService*,
-        const char*, const char*, const char*);
+
+    friend OVLoadableModuleFile* OVLoadModuleFile(const char*,
+        OVDictionary*, OVService*,const char*, const char*, const char*);
 };
 
 const int ovMLMaxItem=256;

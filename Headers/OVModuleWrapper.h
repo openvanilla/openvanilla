@@ -26,7 +26,7 @@
 /*
     extern "C"
     {
-        int OVModuleVersion();    
+        unsigned int OVModuleVersion();    
         
         int OVModuleInitialize(OVDictionary *globalPref, OVService *srv,
             const char *modulePath, const char *userPath, const char *seperator);
@@ -40,7 +40,7 @@
 */
 
 #define OVMODULEWRAPPER_INPUTMETHOD(im) \
-    extern "C" int OVModuleVersion() { return ovVersion; }  \
+    extern "C" unsigned int OVModuleVersion() { return ovVersion; }  \
     extern "C" int OVModuleAvailableInputMethodCount() { return 1; } \
     extern "C" OVInputMethod* OVModuleNewInputMethod(int) { return new im; }
 

@@ -96,7 +96,7 @@ public:
     virtual int getInteger(const char *key)=0;
     virtual int setInteger(const char *key, int value)=0;
     virtual const char* getString(const char *key)=0;
-    virtual int setString(const char *key, const char *value=0);
+    virtual const char* setString(const char *key, const char *value=0)=0;
     virtual int getIntegerWithDefault(const char *key, int value)
     {
         if (!keyExist(key)) setInteger(key, value);

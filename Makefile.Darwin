@@ -2,7 +2,7 @@
 # first written by gugod for OV 0.6.x; edited for OV 0.7
 
 HDRDIR=Headers
-HEADERS=OpenVanilla.h OVModuleWrapper.h
+HEADERS=OpenVanilla.h OVModuleWrapper.h OVModuleLoader.h OVUtility.h
 BUILDDIR=build/OSX
 OSXFRAMEWORK=$(BUILDDIR)/OpenVanilla.framework
 
