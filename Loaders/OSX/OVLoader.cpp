@@ -145,7 +145,7 @@ void SwitchToCurrentInputMethod(MenuRef mnu,OVDictionary *global) {
         list.impair[pos].inited=1;
         inputmethod->identifier(currentim);
         global->setString("currentIM", currentim);
-        int pos=list.findPos(currentim);
+        pos=list.findPos(currentim);
         SetItemMark(mnu, pos+1, checkMark);
     }
 }
