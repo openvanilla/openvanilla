@@ -4,7 +4,7 @@ GOALS=OVIMPOJ.dylib
 DATA=poj.oin
 
 $(GOALS): $(OBJS)
-	g++ -framework Cocoa -o $@ -bundle $(OBJS)
+	$(CPP) -framework Cocoa -o $@ -bundle $(OBJS)
 
 include ../../Mk/ov.im.mk
 include ../../Mk/ov.vars.mk
