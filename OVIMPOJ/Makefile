@@ -8,11 +8,9 @@ all: $(GOALS)
 $(GOALS): $(OBJS)
 	g++ -o $@ -bundle $(OBJS)
 
-install: $(GOALS) generate-config
+install:
 	mkdir -p $(INST_PATH)
 	cp $(GOALS) $(INST_PATH)
-
-generate-config:
 	echo "# This loads $(GOALS)" >  $(CONF_PATH)
 	echo $(INST_PATH)/$(GOALS)   >> $(CONF_PATH)
 
