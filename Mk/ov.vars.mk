@@ -1,4 +1,5 @@
 
+ECHO=/bin/echo
 RM=/bin/rm -f
 CP=/bin/cp
 MKDIR=/bin/mkdir -p
@@ -21,5 +22,6 @@ CC=$(GCC)
 CPP=$(GPP)
 endif
 
-VPATH+=.:../../Source/
+VPATH+= ../../Source/
+DATA?=
 
