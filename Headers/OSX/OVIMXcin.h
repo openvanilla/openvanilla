@@ -31,7 +31,7 @@ public:
     OVXcinContext(OVIMXcin *p, VXCIN *tab) : parent(p), keyseq(tab), cintab(tab),
         autocomposing(0) {}
     virtual int activate(OVService *) { return 1; }
-    virtual int deactivate(OVService *) { return 1; }
+    virtual int deactivate(OVService *);
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf,
         OVTextBar *textbar, OVService *srv);
 
