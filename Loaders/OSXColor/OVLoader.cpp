@@ -143,7 +143,7 @@ int SetupMenuList(MenuRef mnu) {
 		if (!imname) imname=VXCreateCFString(list.impair[i].id);		
         InsertMenuItemTextWithCFString(mnu, imname, i, 0, usermenu+i);
         SetMenuItemCommandKey(mnu, i+1, FALSE, '1'+i);
-        SetMenuItemModifiers(mnu, i+1, kMenuControlModifier);
+        SetMenuItemModifiers(mnu, i+1, kMenuOptionModifier + kMenuShiftModifier + kMenuNoCommandModifier);
         CFRelease(imname);
     }
 
