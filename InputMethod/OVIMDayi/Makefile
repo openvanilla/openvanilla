@@ -7,16 +7,14 @@ OVIMDayi.dylib: OVIMDayi.o
 install: OVIMDayi.dylib
 	cp OVIMDayi.dylib /Library/OpenVanilla/Development/
 	cp dayi3.cin /Library/OpenVanilla/Development/
-	echo "# This loads OVIMDayi.dylib" > /Library/OpenVanilla/Development/OVXSimpleLoader.config
-	echo "/Library/OpenVanilla/Development/OVIMDayi.dylib" >> /Library/OpenVanilla/Development/OVXSimpleLoader.config
-#	cp dayi3.cin /Library/OpenVanilla/Development/
 
 clean:
-	rm *.o
-	rm *.dylib
+	rm -f *.o
+	rm -f *.dylib
 
 %.o: %.cpp
-	gcc -O3 -c $<
+	gcc -O2 -c $<
 	
 %.o: %.mm
-	gcc -O3 -c $<
+	gcc -O2 -c $<
+
