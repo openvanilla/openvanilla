@@ -1,4 +1,4 @@
-BUILDER=xcodebuild
+BUILDER=xcodebuild -project OVLoader.xcode
 BUILDSTYLE?=Development
 
 all:
