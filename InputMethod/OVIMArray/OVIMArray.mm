@@ -317,7 +317,11 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     if (key->isPrintable() && validkey &&
         !(key->isCtrl() || key->isOpt() || key->isCommand()))
     {
-        if (keyseq.length() == parent->maxSeqLen())
+        // if reached maxLength, or if keyseq length==4 but the incoming
+        // key is not 'i' (the only possible case for Array that has
+        // length of 5, for unicode chars), then we refuse the key
+        if ((keyseq.length() == parent->maxSeqLen()) ||
+            (keyseq.length() == 4 && key->lower() != 'i')) 
         {
             updateDisplay(buf);            
             if (parent->isBeep()) srv->beep();
@@ -332,8 +336,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         }
            
         updateDisplay(buf);
-        
-        
+           
         // the w-rule in Array        
         if (cintab->isEndKey(key->code())
             || (keyseq.length()==2 && *(keyseq.getSeq())=='w' &&
@@ -448,10 +451,18 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     
     if ( (output=candi.select(c)) )
     {
-        buf->clear()->append((void*)[output UTF8String])->send();
-        candi.cancel();
-        textbar->hide()->clear();
-        return 1;
+        char *s=[output UTF8String];
+/*        if (!strcasecmp(s, "!err")) 
+        {
+            srv->beep();
+        }
+        else */
+//        {
+            buf->clear()->append((void*)[output UTF8String])->send();
+            candi.cancel();
+            textbar->hide()->clear();
+            return 1;
+///        }
     }
     
     if ((output=cintab->getKey(c)))
