@@ -89,13 +89,13 @@ data 'cbnm' (0, "Component Bundle Name") {
 };
 
 data 'STR ' (cimBaseResourceID, "IM Component Name") {
-	$"18" "OpenVanilla Loader 0.6.2"
+	$"18" "OpenVanilla Loader 0.6.3"
 };
 
 /*
 resource 'STR ' (cimBaseResourceID)
 {
-    "OpenVanilla Loader 0.6.2"
+    "OpenVanilla Loader 0.6.3"
 };
 */
 
