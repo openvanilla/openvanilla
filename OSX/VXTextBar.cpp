@@ -139,7 +139,7 @@ OVTextBar* VXTextBar::update()
     return this;
 }
 
-#define ff(a) ((Fixed)(a) << 16)
+#define IntToFixed(a)	   ((Fixed)(a) << 16)
 
 void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString)
 {
@@ -154,7 +154,9 @@ void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString)
   murmur(stderr, "VXTBSetRect: Initializing.");
 
   theTag   = kATSUSizeTag;
-  fontSize = ff(fontsize);
+
+  // fontsize * 3/2 , because the unit here seems to be px, not pt.
+  fontSize = IntToFixed(fontsize * 3/2 );
   theValue = &fontSize;
   theSize  = (ByteCount) sizeof(Fixed);
 
