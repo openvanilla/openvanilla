@@ -324,14 +324,19 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf,
     return c->ovcontext->keyEvent(&key, &vxb, &c->bar, &srv);
 }
 
-void InitInputMethod(OVInputMethod *im) {
-    char imid[256];
-    im->identifier(imid);
-    OVDictionary *global=GetGlobalConfig();
-    OVDictionary *local=GetLocalConfig(imid);
-    im->initialize(global, local, &srv, (char*)loaddir);
-    delete local;
-    delete global;
+OVInputMethod* InitInputMethodAtMenuPos(int pos) {
+    OVInputMethod *im=list.impair[pos].im;
+    if (!list.impair[pos].inited) {
+        char imid[256];
+        im->identifier(imid);
+        OVDictionary *global=GetGlobalConfig();
+        OVDictionary *local=GetLocalConfig(imid);
+        im->initialize(global, local, &srv, (char*)loaddir);
+        delete local;
+        delete global;
+        list.impair[pos].inited=1;
+    }
+    return im;
 }
 
 void SetCurrentInputMethod(char *imid) {
@@ -376,14 +381,7 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
     	char imid[256];
     	inputmethod->identifier(imid);
         SwitchMenuItemMark(mnu,list.findPos(imid)+1,command-usermenu+1);
-
-        OVInputMethod *newim=list.impair[command-usermenu].im;
-		
-        if (!list.impair[command-usermenu].inited) {
-            InitInputMethod(newim);
-            list.impair[command-usermenu].inited=1;
-        }
-		
+        OVInputMethod *newim = InitInputMethodAtMenuPos(command-usermenu);
     	newim->identifier(imid);
     	murmur ("user wants to switch IM, newimpos=%d, new im id=%s",
                 command-usermenu, buf);
