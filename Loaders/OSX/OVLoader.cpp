@@ -15,6 +15,7 @@
 #include "VXConfig.h"
 #include "VXLoadableIM.h"
 #include "VXUtility.h"
+#include "VXFullWidth.h"
 #include "VXService.h"
 #include "OVAbout.h"
 
@@ -34,8 +35,9 @@ const int vxMaxContext = 256;
 const char *plistfile  = "/Library/OpenVanilla/Development/OVLoader.plist";
 const char *loaddir    = "/Library/OpenVanilla/Development/";
 
-int floatingwindowlock=0, defposx, defposy, textsize=24, conversionfilter=0;
+int floatingwindowlock=0, defposx, defposy, textsize=24, conversionfilter=0, fullwidthfilter=0;
 int listloaded=0;
+int menuPosFullWidthStart=0, menuPosHanConvertStart=0;
 UInt32 usermenu='USRM';
 
 VXConfig *sysconfig=NULL;
@@ -83,7 +85,34 @@ void LoadEveryDylib() {
 void SetupMenuString(MenuRef mnu, int pos) {
 	VXCFAUTORELEASE;
     CFBundleRef bdl = CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName));
-    CFStringRef str = (CFStringRef)VXSafe
+	CFStringRef str;
+	
+    InsertMenuItemTextWithCFString(mnu, CFSTR("-"), pos++, 0, 0);
+	menuPosFullWidthStart=pos+1;
+		
+    str = (CFStringRef)VXSafe
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Half-width ASCII characters"),NULL,NULL));	
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'FHWC');
+    str = (CFStringRef)VXSafe
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Full-width ASCII characters"),NULL,NULL));	
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'FFWC');
+
+    InsertMenuItemTextWithCFString(mnu, CFSTR("-"), pos++, 0, 0);
+	menuPosHanConvertStart=pos+1;
+	
+    str = (CFStringRef)VXSafe
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Normal Output"),NULL,NULL));	
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'FHCN');
+    str = (CFStringRef)VXSafe
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Traditional to Simplified Chinese"),NULL,NULL));	
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'FHCS');
+    str = (CFStringRef)VXSafe
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Simplified to Traditional Chinese"),NULL,NULL));	
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'FHCT');
+
+
+    InsertMenuItemTextWithCFString(mnu, CFSTR("-"), pos++, 0, 0);
+    str = (CFStringRef)VXSafe
         (CFBundleCopyLocalizedString(bdl,CFSTR("Preferences"),NULL,NULL));	
     InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'PREF');
     str = (CFStringRef)VXSafe
@@ -123,6 +152,7 @@ void SetupGlobalConfig(OVDictionary *global) {
     defposx  = global->getIntDefault("floatingWindowLockPosX", 20);
     defposy  = global->getIntDefault("floatingWindowLockPosY", 760);	
 	conversionfilter=global->getIntDefault("useHanConversionFilter", 0);
+	fullwidthfilter=global->getIntDefault("fullWidthCharFilter", 0);
 }
 
 void SwitchToCurrentInputMethod(MenuRef mnu,OVDictionary *global) {
@@ -158,11 +188,14 @@ int CIMCustomInitialize(MenuRef mnu)
     ClearContextPool();
     LoadEveryDylib();
     int pos = SetupMenuList(mnu);
-    InsertMenuItemTextWithCFString(mnu, CFSTR("-"), pos++, 0, 0);
     SetupMenuString(mnu,pos);
     OVDictionary *global=(OVDictionary*)OVSafe(GetGlobalConfig());
     SetupGlobalConfig(global);
     SwitchToCurrentInputMethod(mnu, global);
+	
+	SetItemMark(mnu, menuPosFullWidthStart+fullwidthfilter, checkMark);
+	SetItemMark(mnu, menuPosHanConvertStart+conversionfilter, checkMark);
+	
     sysconfig->write();	
     return 1;
 }
@@ -216,6 +249,7 @@ int RefreshConfig() {
         defposx=global->getInt("floatingWindowLockPosX");
         defposy=global->getInt("floatingWindowLockPosY");
 		conversionfilter=global->getInt("useHanConversionFilter");
+		fullwidthfilter=global->getInt("fullWidthCharFilter");
         
         inputmethod->update(global, local);
 
@@ -316,6 +350,7 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf,
     VXKeyCode key;
 
 	vxb.setConversionFilter(conversionfilter);
+	vxb.setFullWidthFilter(fullwidthfilter);
     vxb.bind(buf);
     key.set(charcode, keycode, modifiers);
 
@@ -325,7 +360,17 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf,
     // textbar pos.y down 5 pt from cursur pos (pnt->v+5) to prevent
     // masking the "composing underline area"
     c->bar.setPosition(pnt->h, pnt->v+5);     
-    return c->ovcontext->keyEvent(&key, &vxb, &c->bar, &srv);
+    if (c->ovcontext->keyEvent(&key, &vxb, &c->bar, &srv)) return 1;
+	 
+	// full-width post filter
+	if (key.isCommand() || key.isOpt() || key.isCtrl()) return 0;
+	if (!key.isPrintable()) return 0;
+	if (!fullwidthfilter) return 0;
+	
+	unsigned short fullwidthc;
+	if ((fullwidthc=VXHalfToFullWidthChar(key.code()))==key.code()) return 0;
+	vxb.append(&fullwidthc, ovEncodingUTF16Auto, 1)->send();
+	return 1;
 }
 
 OVInputMethod* InitInputMethodAtMenuPos(int pos) {
@@ -371,11 +416,46 @@ void StartupPreferenceEditor()
     system(sbuf);   
 }
 
+void UpdateFilterConfig() {
+    OVDictionary *global=GetGlobalConfig();
+	global->setInt("useHanConversionFilter", conversionfilter);
+	global->setInt("fullWidthCharFilter", fullwidthfilter);
+    delete global;
+	sysconfig->write();
+}
 
 int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu, 
                          CIMInputBuffer *buf)
 {
     switch (command) {
+	case 'FHWC':
+		fullwidthfilter=0;
+		SwitchMenuItemMark(mnu, menuPosFullWidthStart+1, menuPosFullWidthStart);
+		UpdateFilterConfig();
+		return 1;
+	case 'FFWC':
+		fullwidthfilter=1;
+		SwitchMenuItemMark(mnu, menuPosFullWidthStart, menuPosFullWidthStart+1);
+		UpdateFilterConfig();
+		return 1;
+	case 'FHCN':
+		conversionfilter=0;
+		SwitchMenuItemMark(mnu, menuPosHanConvertStart+1, menuPosHanConvertStart);		
+		SwitchMenuItemMark(mnu, menuPosHanConvertStart+2, menuPosHanConvertStart);
+		UpdateFilterConfig();
+		return 1;
+	case 'FHCS':
+		conversionfilter=1;
+		SwitchMenuItemMark(mnu, menuPosHanConvertStart, menuPosHanConvertStart+1);		
+		SwitchMenuItemMark(mnu, menuPosHanConvertStart+2, menuPosHanConvertStart+1);
+		UpdateFilterConfig();
+		return 1;
+	case 'FHCT':
+		conversionfilter=2;
+		SwitchMenuItemMark(mnu, menuPosHanConvertStart, menuPosHanConvertStart+2);		
+		SwitchMenuItemMark(mnu, menuPosHanConvertStart+1, menuPosHanConvertStart+2);
+		UpdateFilterConfig();
+		return 1;		
     case 'PREF':
         StartupPreferenceEditor();
         return 1;
