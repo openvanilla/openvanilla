@@ -134,17 +134,21 @@ void SetupGlobalConfig(OVDictionary *global) {
 void SwitchToCurrentInputMethod(MenuRef mnu,OVDictionary *global) {
     OVAutoDeletePool p;
     char currentim[256];
+	int pos=-1;    
+	
     if (global->keyExist("currentIM"))
+    {
         global->getString("currentIM", currentim);
-
-    int pos=list.findPos(currentim);
+        pos=list.findPos(currentim);
+    }
+       
     if (pos==-1) pos=0;
     inputmethod=list.impair[pos].im;
     if (inputmethod) {
+        inputmethod->identifier(currentim);
         OVDictionary *local= (OVDictionary*)p.add(GetLocalConfig(currentim));
         inputmethod->initialize(global, local, &srv, (char*)loaddir);
         list.impair[pos].inited=1;
-        inputmethod->identifier(currentim);
         global->setString("currentIM", currentim);
         pos=list.findPos(currentim);
         SetItemMark(mnu, pos+1, checkMark);
