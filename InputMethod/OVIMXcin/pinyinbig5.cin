@@ -3,7 +3,7 @@
 %cname 漢語拼音
 %encoding UTF-8
 %selkey 1234567890
-%endkey 1234.
+%endkey 234.,[]
 %keyname begin
 a Ａ
 b Ｂ
@@ -36,13 +36,12 @@ z Ｚ
 , ，
 [ 〔
 ] 〕
-1 １
-2 ２
-3 ３
-4 ４
 %keyname end
 %chardef begin
-,	 ，
+,        ，
+.        ．
+[        〔
+]        〕
 a        阿
 a        ㄚ
 a4       阿

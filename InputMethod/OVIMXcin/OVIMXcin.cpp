@@ -434,7 +434,7 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     }
 
 	string inKey;
-	inKey.push_back(c);		
+	inKey.push_back(c);
     if (cintab->isValidKey(inKey) || cintab->isEndKey(c)) {
         string output;
         candi.select(candi.getSelKey()[0], output);
