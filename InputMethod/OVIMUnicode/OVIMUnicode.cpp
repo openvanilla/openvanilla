@@ -92,7 +92,8 @@ public:
 		
         if (key->isPrintable())
         {
-			if((key->code() >= 'a' && key->code() <= 'f') || (key->code() >= '0' && key->code() <= '9')){
+			if((key->code() >= 'a' && key->code() <= 'f') || (key->code() >= '0' && key->code() <= '9'))
+			{
 				keyseq.add(key->code());
 				textbar->clear()->append((char *)"U+")->append(keyseq.buf)->update()->show();
 			}

@@ -1,4 +1,6 @@
 // OVIMTibetan.cpp 2004 by Weizhong Yang
+/* OpenVanilla Tibetan Input Method is based on the Sambhota Keyboard, please check
+http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf for detail. */
 
 #include <stdio.h>
 #include <string.h>
@@ -281,7 +283,7 @@ public:
         else if (!strcasecmp(locale, "zh_CN"))
             return strlen(strcpy((char*)s, "OV 藏文 (Sambhota键盘)"));
         else
-            return strlen(strcpy((char*)s, "OV Tibetan(Sambhota Keyboard One)"));
+            return strlen(strcpy((char*)s, "OV Tibetan (Sambhota Keyboard One)"));
     }
 
     virtual int initialize(OVDictionary*, OVDictionary*, OVService*, char*)
