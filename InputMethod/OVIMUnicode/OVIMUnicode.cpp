@@ -1,4 +1,5 @@
 // OVIMUnicode.cpp 2004 by Weizhong Yang
+// openvanilla.org
 
 #include <stdio.h>
 #include <string.h>
@@ -82,7 +83,8 @@ public:
 			if(!strlen(keyseq.buf)) 
 				textbar->clear()->hide();
 			else
-				textbar->clear()->append((char *)"U+")->append(keyseq.buf)->update()->show();
+				textbar->clear()->append((char *)"[OV Unicode Hex] U+")->append(keyseq.buf)->update()->show();
+			buf->clear()->append(keyseq.buf)->update();
 			return 1;
 		}
 		
@@ -93,7 +95,8 @@ public:
 			if((key->code() >= 'a' && key->code() <= 'f') || (key->code() >= '0' && key->code() <= '9'))
 			{
 				keyseq.add(key->code());
-				textbar->clear()->append((char *)"U+")->append(keyseq.buf)->update()->show();
+				buf->clear()->append(keyseq.buf)->update();
+				textbar->clear()->append((char *)"[OV Unicode Hex] U+")->append(keyseq.buf)->update()->show();
 			}
 			return 1;   // key processed
         }        
