@@ -1,4 +1,4 @@
-OBJS=OVIMPOJ.o VXCIN.o VXUtility.o VXCandidate.o
+OBJS=OVIMPOJ.o VXCIN.o VXUtility.o VXCandidate.o POJKeySeq.o
 GOALS=OVIMPOJ.dylib 
 INST_PATH=/Library/OpenVanilla/Development
 
