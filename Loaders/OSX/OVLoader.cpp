@@ -349,6 +349,12 @@ void KillAllExistingContext(OVInputMethod *newim) {
     }
 }
 
+void SwitchMenuItemMark(MenuRef mnu,int oldp, int newp) 
+{
+    SetItemMark(mnu, oldp, 0);
+    SetItemMark(mnu, newp, checkMark);
+}
+
 int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu, 
                          CIMInputBuffer *buf)
 {
@@ -367,23 +373,20 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
     }
 
     if (command >= usermenu && command <= usermenu+list.imcntr) {
-    	int newpos=command-usermenu;
     	char imid[256];
     	inputmethod->identifier(imid);
-    	int oldpos=list.findPos(imid);
-    	SetItemMark(mnu, oldpos+1, 0);
-    	SetItemMark(mnu, newpos+1, checkMark);
-    	
-        OVInputMethod *newim=list.impair[newpos].im;
+        SwitchMenuItemMark(mnu,list.findPos(imid)+1,command-usermenu+1);
+
+        OVInputMethod *newim=list.impair[command-usermenu].im;
 		
-        if (!list.impair[newpos].inited) {
+        if (!list.impair[command-usermenu].inited) {
             InitInputMethod(newim);
-            list.impair[newpos].inited=1;
+            list.impair[command-usermenu].inited=1;
         }
 		
     	newim->identifier(imid);
     	murmur ("user wants to switch IM, newimpos=%d, new im id=%s",
-                newpos, buf);
+                command-usermenu, buf);
         KillAllExistingContext(newim);
         inputmethod=newim;
         SetCurrentInputMethod(imid);
