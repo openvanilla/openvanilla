@@ -202,39 +202,31 @@ int CIMCustomClose(void *data)
     return 1;
 }
 
-int CIMCustomActivate(void *data, CIMInputBuffer *buf)
-{
-    CIMContext *c=(CIMContext*)data;    
-    if (!c->ovcontext) return 0;
-
+int RefreshConfig() {
     if (sysconfig->changed()) {
         sysconfig->read();
 	
         char buf[256];
         inputmethod->identifier(buf);
+
         OVDictionary *global=GetGlobalConfig();
-	
-        c->bar.setFontSize(global->getInt("textSize"));
-		
         floatingwindowlock=global->getInt("floatingWindowLock");
         defposx=global->getInt("floatingWindowLockPosX");
         defposy=global->getInt("floatingWindowLockPosY");
         
-        if (floatingwindowlock) {
-            c->bar.unlock();
-            c->bar.setPosition(defposx, defposy);
-            c->bar.lock(); 
-        } else {
-            c->bar.unlock();
-        }
         OVDictionary *local=GetLocalConfig(buf);
         inputmethod->update(global, local);
-        c->onScreen=0;
-        c->ovcontext->clear();
         delete global;
         delete local;
+        return 1;
     }
+    return 0;
+}
 
+void RefreshDisplay(CIMContext *c,CIMInputBuffer *buf) {
+    OVDictionary *global=GetGlobalConfig();
+    c->bar.setFontSize(global->getInt("textSize"));
+    delete global;
     if (c->onScreen) {
         c->onScreen=0;
         if (buf->length()) {
@@ -253,7 +245,26 @@ int CIMCustomActivate(void *data, CIMInputBuffer *buf)
         c->bar.append((char*)"(選字窗)");
         c->bar.update();
     }
-    
+}
+
+int CIMCustomActivate(void *data, CIMInputBuffer *buf)
+{
+    CIMContext *c=(CIMContext*)data;    
+    if(!c->ovcontext) return 0;
+    if(RefreshConfig()) {
+        c->onScreen = 0;
+        c->ovcontext->clear();
+    }
+
+    if (floatingwindowlock) {
+        c->bar.unlock();
+        c->bar.setPosition(defposx, defposy);
+        c->bar.lock(); 
+    } else {
+        c->bar.unlock();
+    }
+
+    RefreshDisplay(c,buf);
     c->ovcontext->activate(&srv);
     return 1;
 }
