@@ -15,25 +15,24 @@
 - (BOOL)isNumeric;
 - (int)upper;
 - (int)lower;
-}
 @end
 
-@protocol OVStringBufffer
+@protocol OVAppendable
 - clear;
 - update;
 - append:(const char*)str;
 @end
 
-@protocol OVPreeditArea <OVStringBuffer>
+@protocol OVPreeditArea <OVAppendable>
 - send;
 - updateWithCursor:(int)cursorPos highLightFrom:(int)from highLightTo:(int)to;
 - appendChar:(char)c;
 - (BOOL)isEmpty;
 @end
 
-@protocol OVInfoBox <OVStringBuffer>
+@protocol OVInfoBox <OVAppendable>
 - setSelectKey:(const char*)key;
-- setValidAndCloseKey:(conar char*)ley;
+- setValidAndCloseKey:(const char*)key;
 - show;
 - hide;
 - finalize;
@@ -43,14 +42,13 @@
 
 @protocol OVService
 - beep;
-@end;
+@end
 
 @protocol OVIMContext
 - activate;
 - deactivate;
 - clear;
 - (int)keyEvent:(id)key preedit:(id)area infoBox:(id)box service:(id)srv;
-- (int)candidateEvent:(id)key preedit:(id)area infoBox:(id)box service:(id)srv;
 @end
 
 @protocol OVComponent
@@ -60,14 +58,14 @@
   userPath:(const char*)upath seperator:(const char*)spr;
 - terminate: (NSArray*)modulePref;
 - update: (NSArray*)modulePref;
-@end;
+@end
 
 @protocol OVInputMethod <OVComponent>
 - createNewContext;
-@end;
+@end
 
 @protocol OVBufferFilter <OVComponent>
-- (NSString*) 
-@end;
+- (NSString*)process: (NSString*)src;
+@end
 
 #endif
