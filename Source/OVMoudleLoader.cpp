@@ -4,6 +4,7 @@
 #define OVDEBUG
 #include <OpenVanilla/OVModuleLoader.h>
 #include <OpenVanilla/OVUtility.h>
+#include <string.h>
 
 // let's tell first if this is compiled on Windows platform
 #if defined(_Windows) || defined(__WINDOWS__) || defined(__WIN32__) || \
@@ -95,6 +96,7 @@ int main(int argc, char *argv[])
     OVLoadableModuleFile *f=OVLoadModuleFile(argv[1],
         new Dump, new Srv, "", "", "");
         
+    OVModuleManager m;
     if (f)
     {
         murmur("loaded");
@@ -103,6 +105,11 @@ int main(int argc, char *argv[])
         {
             murmur("im!");
             printf ("im identifier=%s\n", im->identifier());
+            m.addInputMethod(im);
+            m.addInputMethod(im);
+            printf ("count=%d\n", m.imlist.count());
+            printf ("idx for %s=%d\n", im->identifier(), m.imlist.find(im->identifier()));
+            printf ("idx for foo=%d\n", m.imlist.find("foo"));
         }
     }
     

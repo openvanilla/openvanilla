@@ -5,8 +5,8 @@
 // dynamically linked library, unload and reload are not taken into account
 // in the design of this interface. In fact, closing and reloading an application
 // (and henceforth the reloading of DLLs/shared libraries) are fast and memory-
-// safe in modern operating system, so we don't really have to get into 
-// trouble ourselves.
+// safe in almost every modern operating system, so we don't really have to get
+// into the trouble ourselves.
 
 #ifndef __OVModuleLoader_h
 #define __OVModuleLoader_h
@@ -47,46 +47,54 @@ protected:
         OVDictionary*, OVService*,const char*, const char*, const char*);
 };
 
-const int ovMLMaxItem=256;
+const int ovMSMax=64;
 
+// this is a list WITHOUT ownership, i.e. we don't new/delete object herein
 template<class T> class OVModuleList : public OVBase
 {
 public:
-    OVModuleList ()
+    OVModuleList() 
     {
-        counter=0;
-        for (int i=0; i<ovMLMaxItem; i++)
-        {
-            initialized[i]=0;
-            list[i]=0;
-        }
+        counter=0; 
+        for (int i=0; i<ovMSMax; i++) { list[i]=0; inited[i]=0; }
+    }
+
+    void add(const T x)         { if (counter<ovMSMax) list[counter++]=x; }
+    int count()                 { return counter; }
+    T get(int i)                { return (i >=0 && i<ovMSMax) ? list[i] : 0; }
+    T get(const char *i)        { return get(find(i)); }
+    void setInitialized(int i)  { if (i >=0 && i<ovMSMax) inited[i]=1; }
+    int isInitialized(int i)    { return (i >=0 && i<ovMSMax) ? inited[i]: 0; }
+    void setInitialized(const char *i) { setInitialized(find(i)); }
+    int isInitialized(const char* i) { return isInitialized(find(i)); }
+    
+    int find(const char *identifier)
+    {
+        for (int i=0; i<counter; i++)
+            if (!strcmp(list[i]->identifier(), identifier)) return i;
+        return -1;
     }
     
-    ~OVModuleList ();
-    int add(const T& x)     { list[counter++]=x; }
-    int count();
-    int find(const char *identifier);   // -1 if not found
-    int remove(int idx);
-    T get(int idx);
-    void setInitialized(int idx);
-    int isInitialized(int idx);
-    
 protected:
+    T list[ovMSMax];
+    int inited[ovMSMax];
     int counter;
-    int initialized[ovMLMaxItem];
-    T list[ovMLMaxItem];    
 };
 
 class OVModuleManager : public OVBase
 {
 public:
-    void addFile(OVLoadableModuleFile *f);
-    void addInputMethod(OVInputMethod *im)
+    void addFile(OVLoadableModuleFile *f)
     {
-        imlist.add(im);
+        int i;
+        for (i=0; i<f->availableInputMethodCount(); i++)
+            imlist.add(f->newInputMethod(i));
+        for (i=0; i<f->availableOutputFilterCount(); i++)
+            oflist.add(f->newOutputFilter(i));        
     }
     
-    void addOutputFilter(OVOutputFilter *of);
+    void addInputMethod(OVInputMethod *im) { imlist.add(im); }
+    void addOutputFilter(OVOutputFilter *of) { oflist.add(of); }
     
     OVModuleList<OVInputMethod*> imlist;
     OVModuleList<OVOutputFilter*> oflist;
