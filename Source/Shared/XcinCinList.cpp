@@ -76,7 +76,7 @@ int CinList::preparse(char *loadpath, char *fname, int i)
         sscanf(buf, "%s %s", key, value);
 
         if (!strcasecmp(key, "%ename")) strcpy(list[i].ename, value);
-        if (!strcasecmp(key, "%encoding")) list[i].encoding=VXEncodingMapper(value);
+        if (!strcasecmp(key, "%encoding")) list[i].encoding=ovEncodingUTF8;
         if (!strcasecmp(key, "%cname")) strcpy(list[i].cname, value);
         
         line++;

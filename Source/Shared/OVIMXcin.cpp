@@ -46,15 +46,19 @@ XcinKeySequence::XcinKeySequence(OVCIN* cintab)
     
 int XcinKeySequence::valid(char c)
 {
+	string inKey;
+	inKey.push_back(c);
 	vector<string> outStringVectorRef;
-    if (cinTable->getKey(c, outStringVectorRef) == 0) return 0;
+    if (cinTable->getCharVectorByKey(inKey, outStringVectorRef) == 0) return 0;
     return 1;
 }
     
 int XcinKeySequence::add(char c)
 {
+	string inKey;
+	inKey.push_back(c);
 	vector<string> outStringVectorRef;
-    if (cinTable->getKey(c, outStringVectorRef) == 0) return 0;
+    if (cinTable->getCharVectorByKey(inKey, outStringVectorRef) == 0) return 0;
     return OVKeySequenceSimple::add(c);
 }
     
@@ -62,8 +66,10 @@ string *XcinKeySequence::compose(string *s)
 {
     for (int i=0; i<len; i++)
     {
-		vector<string> outStringVectorRef
-        if (cinTable->getKey(seq[i], outStringVectorRef) > 0)
+		string inKey;
+		inKey.push_back(seq[i]);
+		vector<string> outStringVectorRef;
+        if (cinTable->getCharVectorByKey(inKey, outStringVectorRef) > 0)
 			s->append(outStringVectorRef[0]);
     }
     return s;
@@ -100,7 +106,7 @@ int OVIMXcin::name(char *locale, void *s, OVEncoding *enc)
     if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
     {
         *enc=cnameencoding;
-        murmur ("asking ename=%s, cname=%s, encoding=%d", ename, cname, *enc);
+        //murmur ("asking ename=%s, cname=%s, encoding=%d", ename, cname, *enc);
         return strlen(strcpy((char*)s, cname));
     }
         
@@ -121,8 +127,9 @@ int OVIMXcin::initialize(OVDictionary* global, OVDictionary* local, OVService*, 
     update(global, local);  // run-time configurable settings    
     int selkeyshift=local->getInt(sk);
     local->getString(encoding, buf);
-    enc=VXEncodingMapper(buf);
-
+    //enc=VXEncodingMapper(buf);
+	enc = ovEncodingUTF8;
+		
     char cinfilename[PATH_MAX];
     strcpy (cinfilename, loadpath);
     if (cinfilename[strlen(cinfilename)-1]!='/') strcat(cinfilename, "/");
@@ -327,19 +334,19 @@ int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar, OVService *srv)
 
     if (size ==1 && !autocomposing)
     {
-        buf->clear()->append((void*)array[0])->send();
+        buf->clear()->append((void*)array[0].c_str())->send();
         keyseq.clear();
         return 1;
     }
 
     if (!autocomposing)
     {    
-        buf->clear()->append((void*)array[0])
+        buf->clear()->append((void*)array[0].c_str())
             ->update();
         keyseq.clear();
     }
     
-    candi.prepare(array, cintab->getSelKey().c_str(), textbar);    
+    candi.prepare(&array, const_cast<char*>(cintab->getSelKey().c_str()), textbar);    
 
     return 1;
 }
@@ -384,8 +391,10 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
         return 1;
     }
     
+	string inKey;
+	inKey.push_back(c);
 	vector<string> outStringVectorRef;
-    if (cintab->getKey(c, outStringVectorRef) > 0)
+    if (cintab->getCharVectorByKey(inKey, outStringVectorRef) > 0)
     {
         buf->clear()->append((void*)candi.select(cintab->getSelKey()[0]))->send();
         keyseq.add(c);

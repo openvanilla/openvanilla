@@ -4,7 +4,7 @@
 #include <OpenVanilla/OVUtility.h>
 #include "OVCandidate.h"
 
-void OVCandidate::prepare(vector<string> *l, char *skey, OVTextBar *textbar)
+void OVCandidate::prepare(vector<string>* l, char* skey, OVTextBar *textbar)
 {
     onduty=1;
     list=l;
@@ -31,7 +31,7 @@ void OVCandidate::update(OVTextBar *textbar)
     for (int i=pos, j=0; i<bound; i++, j++)
     {
         sprintf (buf, "%c.", selkey[j]);
-        textbar->append(buf)->append((void*)list->at(i))->
+        textbar->append(buf)->append((void*)list->at(i).c_str())->
             append((void*)" ");
     }
     

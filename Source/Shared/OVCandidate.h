@@ -18,7 +18,7 @@ public:
         onduty=0;
     }
     
-    void prepare(vector<string> *l, char *skey, OVTextBar *textbar);
+    void prepare(vector<string>* l, char* skey, OVTextBar *textbar);
     int onDuty() { return onduty; }
     int onePage() { return (count <= perpage); }
     void cancel() { onduty=0; }
