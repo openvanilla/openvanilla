@@ -3,7 +3,7 @@ OBJS=OVCIN.o OVCandidate.o OVFileHandler.o OVIMXcin.o OVStringToolKit.o XcinCinL
 GOALS=OVIMXcin.dylib 
 
 $(GOALS): $(OBJS)
-	$(CPP) -framework Cocoa -bundle -o $@ $(OBJS)
+	$(CPP) -bundle -o $@ $(OBJS)
 
 include ../../Mk/ov.im.mk
 include ../../Mk/ov.vars.mk
