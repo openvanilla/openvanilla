@@ -1,8 +1,17 @@
 #
-# OVOSXBasePackageList.txt
+# OpenVanilla-OSX-Base-0.6.3-Release.list
 #
 # This makes the basic installation package for OpenVanilla for OS X
 #
+# format:
+#  @name package_filename [restart option]
+#  @title [localization tag]
+#  title here
+#  @description [localization tag]     # optional
+#  description here
+#  @files
+#  filelist here
+#  @end
 @name OVOSX-base-0.6.3.pkg RequiredRestart
 @title
 OpenVanilla loader and core modules
