@@ -3,7 +3,6 @@
 #ifndef __OVIMXcin_h
 #define __OVIMXcin_h
 
-//#include <Cocoa/Cocoa.h>                // to be removed after de-Cocoa-ized
 #include <OpenVanilla/OpenVanilla.h>
 #include "OVCIN.h"
 #include "OVKeySequence.h"
