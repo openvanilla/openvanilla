@@ -12,5 +12,4 @@ clean:
 include ../../Mk/ov.osx.mk
 include ../../Mk/ov.vars.mk
 include ../../Mk/ov.general.mk
-
-
+INC=-I../../Headers/OSX -I../../Headers
