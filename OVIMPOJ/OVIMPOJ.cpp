@@ -76,6 +76,18 @@ public:
     void remove()
     {
         if (!len) return;
+        
+        // "ou" rule
+        if (tolower(seq[len-1])=='u')
+        {
+            if (len>1 && tolower(seq[len-2])=='o')
+            {
+                len-=2;
+                seq[len]=0;
+                return;
+            }
+        }
+        
         seq[--len]=0;
     }
 
