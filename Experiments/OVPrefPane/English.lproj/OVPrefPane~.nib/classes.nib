@@ -13,7 +13,7 @@
             SUPERCLASS = NSObject; 
         }, 
         {
-            ACTIONS = {testAction = id; }; 
+            ACTIONS = {advancedButton = id; }; 
             CLASS = OpenVanillaPreferencePane; 
             LANGUAGE = ObjC; 
             OUTLETS = {

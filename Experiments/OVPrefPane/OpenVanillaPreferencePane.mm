@@ -11,11 +11,21 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.1/OVLoader.plist";
 
 - (IBAction)advancedButton:(id)sender
 {
+	// will cause some syncing problem as method willUnselect will be called
+	// once again *after* XML editor is called, but anyway we pretend there
+	// is no problem in that
+	[self willUnselect];	
 	
     char sbuf[PATH_MAX];
     sprintf (sbuf, "open %s", userpref);
     system(sbuf);
-	[_window close];
+
+	// this is the easiest way to quite System Preferences.app, 
+	// no Apple Event, no hustle-bustle, babe
+	NSAppleScript *script=[[NSAppleScript alloc] initWithSource: 
+		@"tell application \"System Preferences\" to quit"];
+	NSDictionary *dict;
+	[script executeAndReturnError: &dict];
 }
 
 - (void)willSelect
@@ -62,6 +72,8 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.1/OVLoader.plist";
 	chewing->setInt("keyboardLayout", [prefChewingLayout indexOfSelectedItem]);
 	poj->setInt("keyboardLayout", [prefPOJLayout indexOfSelectedItem]);
 	poj->setInt("ASCIIOutput", [prefPOJAsciiOutput state]);
+	
+	
 	sysconfig->write();
 }
 
