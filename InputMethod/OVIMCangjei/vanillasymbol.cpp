@@ -95,14 +95,14 @@ extern "C" VPSymbol VPStandardKeyToSymbol (VPChar c)
 {
 	VPChar cc=VPToUpper(c);
 	if (cc > 96) return 0;
-	return vpStandardKeyTable[cc];
+	return vpStandardKeyTable[(int)cc];
 }
 
 extern "C" VPSymbol VPEtenKeyToSymbol (VPChar c)
 {
 	VPChar cc=VPToUpper(c);
 	if (cc > 96) return 0;
-	return vpEtenKeyTable[cc];
+	return vpEtenKeyTable[(int)cc];
 }
 
 // persumes that ONLY ONE SYMBOL is converted AND there ARE NO OTHER MASKED SYMBOLS

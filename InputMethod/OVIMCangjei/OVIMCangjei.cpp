@@ -102,6 +102,7 @@ public:
 
     virtual int update(OVDictionary* g, OVDictionary* l)
     {
+        return 1;
     }
 
     virtual OVIMContext* newContext() 
