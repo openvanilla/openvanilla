@@ -49,8 +49,7 @@ public:
             buf->append("中")->updatedisplay();
             fprintf (stderr, "a chinese is inputed\n");
         }
-        
-        if (key->isprintable())
+        else if (key->isprintable())
         {
             char str[2];
             str[1]=0;

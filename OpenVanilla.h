@@ -78,6 +78,8 @@ class OVKeyCode : public OVObject
 {
 public:
     virtual int code() { return 0; }
+    virtual int uppercode() { return toupper(code()); }
+    virtual int lowercode() { return tolower(code()); }
     
     virtual int iscode(int argc, ...)
     {
