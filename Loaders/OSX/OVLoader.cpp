@@ -127,11 +127,11 @@ int CIMCustomInitialize(MenuRef mnu)
 	
 	
 	// get floating window settings
-	if (!global->keyExist("floatingwindowlock")) 
+	if (!global->keyExist("floatingWindowLock")) 
 	{
 		global->setInt("floatingWindowLock", 0);
-		global->setInt("floatingWindowLockPosX", 0);
-		global->setInt("floatingWindowLockPosY", 500);
+		global->setInt("floatingWindowLockPosX", 20);
+		global->setInt("floatingWindowLockPosY", 760);
 	}
 	
 	if (!global->keyExist("textSize")) global->setInt("textSize", 24);
@@ -257,6 +257,15 @@ int CIMCustomActivate(void *data, CIMInputBuffer *buf)
             c->ovcontext->clear();    
         }
     }    
+
+	if (floatingwindowlock) 
+	{
+		c->bar.clear();
+		c->bar.show();
+		c->bar.lock();
+		c->bar.append("(選字窗)");
+		c->bar.update();
+	}
 	
 	c->ovcontext->activate(&srv);
     return 1;
@@ -270,25 +279,30 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
     if (c->bar.onScreen())
     {
         c->onScreen=1;
-        c->bar.hide();
-		
 		if (floatingwindowlock)
 		{
-			int newx, newy;
-			c->bar.getPosition(&newx, &newy);
-			if ((newx != defposx) || (newy != defposy))
-			{
-				murmur("old: (%d,%d), new: (%d,%d)", defposx, defposy, newx, newy);
-				OVDictionary *global=GetGlobalConfig();
-				defposx=newx;
-				defposy=newy;
-				global->setInt("floatingWindowLock", floatingwindowlock);
-				global->setInt("floatingWindowLockPosX", defposx);
-				global->setInt("floatingWindowLockPosY", defposy);
-				sysconfig->write();
-			}
+			c->bar.unlock();
+			c->bar.hide();		
 		}
     }
+
+	if (floatingwindowlock)
+	{
+		int newx, newy;
+		c->bar.getPosition(&newx, &newy);
+		if ((newx != defposx) || (newy != defposy))
+		{
+			murmur("old: (%d,%d), new: (%d,%d)", defposx, defposy, newx, newy);
+			OVDictionary *global=GetGlobalConfig();
+			defposx=newx;
+			defposy=newy;
+			global->setInt("floatingWindowLock", floatingwindowlock);
+			global->setInt("floatingWindowLockPosX", defposx);
+			global->setInt("floatingWindowLockPosY", defposy);
+			sysconfig->write();
+		}
+	}
+
 
 	c->ovcontext->deactivate(&srv);
 
