@@ -43,7 +43,7 @@ public:
     
     virtual int activate(OVService *)
     {
-		//keyseq.clear();
+		keyseq.clear();
         return 1;
     }
     
