@@ -1,13 +1,14 @@
 // OVEmuClasses.h
 
-#ifndef __OVEmuClasses_h
-#define __OVEmuClasses_h
+// #ifndef __OVEmuClasses_h
+// #define __OVEmuClasses_h
 
 #define OVDEBUG
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVUtility.h>
 #include <stdint.h>
 #include <stdio.h>
+#include "VXLoadableIM.h"
 
 inline const char *EMMapEncoding(OVEncoding e)
 {
@@ -358,6 +359,28 @@ public:
 	int c, shift, capslock, ctrl, alt, command;
 };
 
+// #endif  // of #ifndef __OVEmuClasses_h
 
-#endif  // of #ifndef __OVEmuClasses_h
+int main(int argc, char **argv)
+{
+	if (argc < 2)
+	{
+		murmur("usage: OVEmu imLibraryName");
+		return 0;
+	}
+	
+	VXLoadableLibrary lib;
+	lib.load(argv[1], "./");		// for Windows here must be changed
+	
+	char buf[256];
+	EMDictionary globalconfig, localconfig;
+	
+	OVInputMethod *im=lib.imnew(0);
+	im->identifier(buf);
+	murmur ("OVEmu: loaded input method, identifier=%s", buf);
+	lib.imdelete(im);
+	lib.unload();
+}
+
+
 
