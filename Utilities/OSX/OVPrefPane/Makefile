@@ -10,5 +10,6 @@ clean:
 	rm -rf build
 
 install:
+	rm -rf /Library/PreferencePanes/OVPrefPane.prefPane
 	mv build/OVPrefPane.prefPane /Library/PreferencePanes/.
 
