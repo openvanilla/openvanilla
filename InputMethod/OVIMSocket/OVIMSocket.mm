@@ -80,7 +80,7 @@ int OVIMSocketContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textba
     
     if (key->isPrintable())
     {
-        sprintf(sbuf, "key %c\n", key->code());
+        sprintf(sbuf, "key %d\n", key->code());
         writeBuf(sbuf);
         
         while (!readBuf(sbuf)) ;

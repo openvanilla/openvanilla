@@ -23,7 +23,10 @@ while (my $client = $server->accept())
         
         if ($cmd[0] eq "key")
         {
-            print $client "buffer-add ", $cmd[1].$cmd[1], "\n";
+            my $c=chr $cmd[1];
+            my $r;
+            if ($c =~ /[0-9]/) { $r=$c.$c.$c; } else { $r=$c.$c; }
+            print $client "buffer-add ", $r, "\n";
         }
 	}
 
