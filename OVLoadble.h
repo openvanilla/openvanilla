@@ -41,10 +41,6 @@ extern "C" int OVLoadableCanUnload();
     {   \
         return 1;   \
     }   \
-    extern "C" int OVLoadableCanUnload()    \
-    {   \
-        return 0;   \
-    }   \
     extern "C" int OVLoadableVersion()  \
     {   \
         return ovVersion;   \
@@ -62,11 +58,17 @@ extern "C" int OVLoadableCanUnload();
 // you MUST call this wrapper
 
 #define OVLOADABLEOBJCWRAPPER   \
-    id _autoreleasepool;    \
+    id autoreleasepool;    \
     extern "C" void _init() \
     {   \
-        _autoreleasepool=[[NSAutoreleasePool] alloc] init]; \
+        autoreleasepool=[[NSAutoreleasePool] alloc] init]; \
     }
     
+#define OVLOADABLECANUNLOAD   \
+    extern "C" int OVLoadableCanUnload()    \
+    {   \
+        return 1;   \
+    }   \
+
     
 #endif
