@@ -170,7 +170,7 @@ int CIMCustomInitialize(MenuRef mnu)
 
 void CIMCustomTerminate()
 {    
-    fprintf (stderr, "OVXSimpleLoader: Terminating\n");
+    murmur("OVXSimpleLoader: Terminating");
     if (inputmethod) {
         // XXX: Not implemented: Free each element in XVLibraryList List
     }
@@ -336,7 +336,7 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
     switch (command)
     {
     case 'PREF':
-        fprintf (stderr, "launching application to edit %s\n", plistfile);
+        murmur("launching application to edit %s", plistfile);
         sprintf (sbuf, "open %s", plistfile);
         system(sbuf);
         return 1;
