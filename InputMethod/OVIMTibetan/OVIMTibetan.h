@@ -11,7 +11,7 @@ public:
 {
 		if (len == ebMaxKeySeq) return;
 		buf[len++]=c;
-		buf[len]=0;
+//		buf[len]=0;
 }
 void remove()
 {
@@ -53,6 +53,16 @@ char SymbolKeys[KEYBOARDS][SYMBOL_NUM] =
 unsigned short SymbolChars[SYMBOL_NUM] =
 {
 	0x0F00,0x0F0D,0x0F04,0x0F05,0x0F3C,0x0F3D,0x0F85,0x0F7F,0x0F14,0x0F11,0x0F08
+};
+
+int htransform = 28;
+
+int htransformKey[5] = {
+	2, 10, 14, 18, 32
+};
+
+unsigned short htransfromChars[5] = {
+	0x0F43, 0x0f52, 0x0f57, 0x0f5C, 0x0f4D
 };
 
 char ConsonantKeys[KEYBOARDS][CONSONAT_NUM] = 

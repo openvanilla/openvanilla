@@ -56,6 +56,17 @@ short isFinalAddKey(int key)
 	return -1;
 }
 
+short isHtransform(int key)
+{
+	int i;
+	for(i=0; i< 5; i++)
+	{
+		if(key == htransformKey[i])
+			return i;
+	}
+	return -1;
+}
+
 class OVTibetanContext : public OVIMContext
 {
 public:
@@ -80,8 +91,8 @@ public:
         OVService *srv)
     {
 		unsigned short i;
-		short j = -1;
-				
+		short j = -1, k = -1;
+							
 		if (key->isOpt() || key->isCommand() || key->isCtrl()){return 0;}
 		
 		if (key->isCapslock()) { //CapLock
@@ -130,6 +141,8 @@ public:
 		
         if (key->isPrintable())
         {
+			fprintf (stderr, "keysེeq: %s, len: %d, keycode: %c \n", keyseq.buf, keyseq.len, key->code());
+
 			if(key->code() >= '0' && key->code() <= '9')	// Numbers
 			{ 
 				i = 0x0F20 + (key->code() - '0');
@@ -152,7 +165,7 @@ public:
 			if(key->code() == ComposeKey[keyboardlayout])	// Compose key
 			{ 
 				buf->send()->clear();
-				if(keyseq.buf[0] == ComposeKey[keyboardlayout]) //End Composing
+				if(keyseq.buf[0] == ComposeKey[keyboardlayout]) //End Stacking
 				{
 					keyseq.clear();
 					keyseq.lastisconsonant();
@@ -205,10 +218,57 @@ public:
 			{ 
 				i = ConsonantChars[j];
 				keyseq.lastisconsonant();
-				if(keyseq.buf[0] == ComposeKey[keyboardlayout] && keyseq.len < MAX_COMPOSE) 
+				if(keyseq.buf[0] == ComposeKey[keyboardlayout] && keyseq.len < MAX_COMPOSE)  // Stacking 
 				{
-					if(keyseq.len > 1)
-						i = i + 0x50; // Sub characters.
+					if(j == 34 && keyseq.len > 1) //kb transform
+					{ 
+						if(isConsonantKey(keyseq.buf[keyseq.len -1]) == 0)
+						{
+							buf->clear()->update();
+							if(keyseq.len < 3)
+							{
+								i = 0x0F69;
+								buf->append(&i, ovEncodingUTF16Auto, 1)->update();
+							} else 
+							{
+								i = ConsonantChars[isConsonantKey(keyseq.buf[1])];
+								buf->append(&i, ovEncodingUTF16Auto, 1);
+								i = 0x0FB9;
+								buf->append(&i, ovEncodingUTF16Auto, 1)->update();
+							}
+							keyseq.add(key->code());
+							return 1;
+						}
+					}
+					
+					if(j == htransform && keyseq.len > 1) //H transform
+					{ 
+						if((k = isHtransform(isConsonantKey(keyseq.buf[keyseq.len -1]))) > -1)
+						{
+							buf->clear()->update();
+							if(keyseq.len < 3)
+							{
+								i = htransfromChars[k];
+								buf->append(&i, ovEncodingUTF16Auto, 1)->update();
+							} else {
+								i = ConsonantChars[isConsonantKey(keyseq.buf[1])];
+								buf->append(&i, ovEncodingUTF16Auto, 1);
+								i = htransfromChars[k] + 0x50;
+								buf->append(&i, ovEncodingUTF16Auto, 1)->update();
+							}
+							keyseq.add(key->code());
+							return 1;
+						}
+					}
+					if(keyseq.len > 1) 
+					{
+						if(j == 22) 
+						{
+							i = 0x0F71;
+						} else {
+							i = i + 0x50; // Sub characters.
+						}
+					}
 					buf->append(&i, ovEncodingUTF16Auto, 1)->update();
 					keyseq.add(key->code());
 					return 1;
