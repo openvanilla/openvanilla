@@ -184,7 +184,8 @@ int CIMCustomInitialize(MenuRef mnu)
     InsertMenuItemTextWithCFString(mnu, imname, 0, 0, 'OVXL');
 	CFRelease(imname);
 
-	InsertMenuItemTextWithCFString(mnu, CFSTR("Preferences..."), 0, 0, 'PREF');
+	InsertMenuItemTextWithCFString(mnu, CFSTR("-"), 1, 0, 0);
+	InsertMenuItemTextWithCFString(mnu, CFSTR("Preferences..."), 2, 0, 'PREF');
 	
 	sysconfig->write();
 	

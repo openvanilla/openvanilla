@@ -95,9 +95,14 @@ public:
         return seq;
     }
     
-    int compose(char *buf)
+    char *compose(char *buf, int asciioutput=0)
     {
         murmur ("composing syllable, internal representation=%s\n", seq);
+        
+        *buf=0;
+        
+        // if asciioutput is on, directly copy the internal representation
+        if (asciioutput) return strcpy(buf, seq);
         
         int tone=1;    
         char *b=buf;
@@ -165,7 +170,7 @@ public:
             s++;
         }
         *b=0;
-        return strlen(buf);            
+        return buf;
     }
 
 protected:
@@ -182,39 +187,12 @@ public:
     virtual int activate(OVService*) { return 1; }
     virtual int deactivate(OVService*) { return 1; }
     virtual int clear() { return 1; }
-    virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar, OVService *srv) 
-    {
-        char composebuf[256];
-//        if (!textbar->onScreen()) textbar->show();
-        
-        if (key->isCode(2, ovkBackspace, ovkDelete) && buf->length())
-        { 
-            seq.remove();
-            seq.compose(composebuf);
-            buf->clear()->append(composebuf)->update();
-            return 1;            
-        }
-        
-        if ((key->code()==ovkReturn || seq.isCompose(key->code())) && buf->length()) {
-            if (key->code()!=ovkReturn) seq.add(key->code());
-            seq.compose(composebuf);
-            buf->clear()->append(composebuf)->send();
-            seq.clear();
-            return 1;
-        }
-        
-        if (key->isAlpha()) {
-            seq.add(key->code());
-            seq.compose(composebuf);
-            buf->clear()->append(composebuf)->update();
-            return 1;
-        }
-        
-        if (buf->length()) buf->send();
-        seq.clear();
-        
-        return 0;
-    }
+    
+    // as this method uses a parent's method--which is not yet declared,
+    // we have to move the implementation of this method towards the end
+    // of this .cpp file
+    virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar, 
+        OVService *srv);
     
 protected:
     OVIMPOJ *parent;
@@ -224,6 +202,11 @@ protected:
 class OVIMPOJ : public OVInputMethod
 {
 public:
+    OVIMPOJ()
+    {
+        asciioutput=0;
+    }
+    
     virtual int identifier(char* s)
     {
         return strlen(strcpy(s, "OVIMPOJ"));
@@ -238,6 +221,11 @@ public:
     virtual int initialize(OVDictionary* globalconfig, OVDictionary* localconfig,
         OVService* srv, char* path)
     {
+        if (!localconfig->keyExist("改用ASCII輸出")) 
+            localconfig->setInt("改用ASCII輸出", 0);
+        
+        asciioutput=localconfig->getInt("改用ASCII輸出");
+        
         return 1;
     }
     
@@ -246,8 +234,11 @@ public:
         return 1;
     }
     
-    virtual int update(OVDictionary*, OVDictionary*)
+    virtual int update(OVDictionary*, OVDictionary* localconfig)
     {
+        asciioutput=localconfig->getInt("改用ASCII輸出");
+        murmur ("config changed, asciioutput option now set to %d\n", asciioutput);
+
         return 1;
     }
     
@@ -260,9 +251,55 @@ public:
     {
         delete s; 
     }
+    
+    virtual int isAsciiOutput()
+    {
+        return asciioutput;
+    }
+    
+protected:
+    int asciioutput;
 };
 
-//
+int OVIMPOJContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
+    OVService *srv) 
+{
+    int ascii=parent->isAsciiOutput();
+    char composebuf[256];
+        
+    // if backspace of delete key is hit
+    if (key->isCode(2, ovkBackspace, ovkDelete) && buf->length())
+    { 
+        seq.remove();
+        buf->clear()->append(seq.compose(composebuf, ascii))->update();
+        return 1;            
+    }
+    
+    // if enter or compose key is hit
+    if ((key->code()==ovkReturn || seq.isCompose(key->code())) && buf->length()) 
+    {
+        if (key->code()!=ovkReturn) seq.add(key->code());
+        buf->clear()->append(seq.compose(composebuf, ascii))->send();
+        seq.clear();
+        return 1;
+    }
+    
+    // key=[a-z][A-Z], so add to our key sequence
+    if (key->isAlpha())
+    {
+        seq.add(key->code());
+        buf->clear()->append(seq.compose(composebuf, ascii))->update();
+        return 1;
+    }
+    
+    // we find it's not a "valid" character, so we send up the buffer,
+    // then tell the app the process the character itself    
+    if (buf->length()) buf->send();
+    seq.clear();        
+    return 0;
+}
+
+// standard wrappers
 OVLOADABLEWRAPPER(OVIMPOJ);
 OVLOADABLECANUNLOAD;
 
