@@ -88,7 +88,10 @@ OVService *srv)
     char composebuf[256];
 
     if (candi.onDuty()) return candidateEvent(key, buf, textbar, srv);
-
+ 
+    //Ignore arrow keys.
+    if (key->isCode(4, ovkDown, ovkUP, ovkLeft, ovkRight))
+	return 1;
     
     // if backspace of delete key is hit
     if (key->isCode(2, ovkBackspace, ovkDelete) && buf->length())

@@ -52,6 +52,12 @@ public:
         return 1;
     }
     
+	virtual int clear()
+	{
+		keyseq.clear();
+        return 1;
+	}
+	
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         OVService *srv)
     {

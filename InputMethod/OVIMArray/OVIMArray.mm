@@ -234,6 +234,9 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         keyseq.clear();
         return 1;
     }
+
+    if (key->isCode(4, ovkDown, ovkUp, ovkLeft, ovkRight))
+        return 1;
     
     if (key->isCode(2, ovkDelete, ovkBackspace))
     {
