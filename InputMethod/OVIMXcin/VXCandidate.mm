@@ -54,7 +54,6 @@ VXCandidate* VXCandidate::pageUp()
 
 VXCandidate* VXCandidate::pageDown()
 {
-    int oldpos=pos;
     pos+=perpage;  
     if (pos >= count) pos=0;
     return this;

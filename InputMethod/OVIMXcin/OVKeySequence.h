@@ -35,6 +35,7 @@ public:
     {
         len=0;
         seq[0]=0;
+        return this;
     }
     
 protected:    

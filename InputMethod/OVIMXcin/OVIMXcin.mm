@@ -72,7 +72,7 @@ NSString *XcinKeySequence::compose(NSMutableString *s)
     for (int i=0; i<len; i++)
     {
         NSString *ks;
-        if (ks=cinTable->getKey(seq[i])) [s appendString: ks];
+        if ((ks=cinTable->getKey(seq[i]))) [s appendString: ks];
     }
     return s;
 }
@@ -457,7 +457,7 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     
     NSString *output;
     
-    if (output=candi.select(c))
+    if ( (output=candi.select(c)) )
     {
         buf->clear()->append((void*)[output UTF8String])->send();
         candi.cancel();
@@ -465,7 +465,7 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
         return 1;
     }
     
-    if (output=cintab->getKey(c))
+    if ((output=cintab->getKey(c)))
     {
         buf->clear()->append((void*)[candi.select(*(cintab->selKey())) UTF8String])->send();
         keyseq.add(c);
