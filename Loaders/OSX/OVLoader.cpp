@@ -292,6 +292,7 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
             global->setInt("floatingWindowLockPosX", defposx);
             global->setInt("floatingWindowLockPosY", defposy);
             sysconfig->write();
+            delete global;
         }
     }
 
@@ -376,7 +377,8 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
         }
 		
     	newim->identifier(imid);
-    	murmur ("user wants to switch IM, newimpos=%d, new im id=%s", newpos, buf);
+    	murmur ("user wants to switch IM, newimpos=%d, new im id=%s",
+                newpos, buf);
         KillAllExistingContext(newim);
         inputmethod=newim;
         SetCurrentInputMethod(imid);
