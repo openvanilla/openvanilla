@@ -1,24 +1,11 @@
-SRCDIR=Source
-HDRDIR=Header
-HEADERS=$(HDRDIR)/OpenVanilla.h $(HDRDIR)/OVLoadable.h $(HDRDIR)/OVUtility.h
+OS=`uname`
 
-BUILDDIR=build
-OSXFRAMEWORK=$(BUILDDIR)/OpenVanilla.framework
-GOALS=osx-framework
+all:
+	make -f Makefile.$(OS) $@
 
-build: osx-framework
-
-install: install-osx-framework
+install:
+	make -f Makefile.$(OS) $@
 
 clean:
-	rm -rf $(BUILDDIR)
-
-# OSX-Specific targets
-
-install-osx-framework: osx-framework
-	cp -rf $(OSXFRAMEWORK) /Library/Frameworks/
-
-osx-framework:
-	mkdir -p $(OSXFRAMEWORK)/Headers
-	cp $(HEADERS) $(OSXFRAMEWORK)/Headers
+	make -f Makefile.$(OS) $@
 
