@@ -334,6 +334,15 @@ void SetCurrentInputMethod(char *imid) {
     delete global;
 }
 
+void KillAllExistingContext(OVInputMethod *newim) {
+    for (int i=0; i<vxMaxContext; i++) {
+        if (pool[i]) {
+            inputmethod->deleteContext(pool[i]->ovcontext);
+            pool[i]->ovcontext=newim->newContext();
+        }
+    }
+}
+
 int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu, 
     CIMInputBuffer *buf)
 {
@@ -369,14 +378,7 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
 		
     	newim->identifier(buf);
     	murmur ("user wants to switch IM, newimpos=%d, new im id=%s", newpos, buf);
-        // kill all existing context
-        for (int i=0; i<vxMaxContext; i++) {
-            if (pool[i]) {
-                inputmethod->deleteContext(pool[i]->ovcontext);
-                pool[i]->ovcontext=newim->newContext();
-            }
-        }
-
+        KillAllExistingContext(newim);
         inputmethod=newim;
         SetCurrentInputMethod(buf);
         sysconfig->write();
