@@ -3,7 +3,7 @@
 #include <Cocoa/Cocoa.h>
 #include "openvanilla.h"
 
-id pool=nil;
+// id pool=nil;
 
 id MakeNSStr(char *s)
 {
@@ -320,14 +320,14 @@ public:
 
 extern "C" OVExampleIM *create()
 {
-    if (!pool) pool=[[NSAutoreleasePool alloc] init];
+//    if (!pool) pool=[[NSAutoreleasePool alloc] init];
     return new OVExampleIM;
 }
 
 extern "C" void destroy(OVExampleIM *o)
 {
     delete o;
-    [pool release];
+//    [pool release];
 }
 
 

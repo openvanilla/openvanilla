@@ -24,7 +24,6 @@ public:
     }
     virtual OVBuffer* append (void *s, OVEncoding e=ovEncodingUTF8, int l=0)
     {
-        int ol=length();
         CFStringRef ref=VXCreateCFString(s, e, l);
         if (!ref) return this;
         if (cimbuf) cimbuf->put(ref);
