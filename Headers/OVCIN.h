@@ -1,7 +1,7 @@
-// OVXCIN.h
+// OVCIN.h
 
-#ifndef __OVXCIN_h
-#define __OVXCIN_h
+#ifndef __OVCIN_h
+#define __OVCIN_h
 
 #include <string>
 #include <vector>
@@ -9,17 +9,19 @@
 
 using namespace std;
 
-class OVXCIN
+class OVCIN
 {
-public:
-	string selkey;
-    string ename;
-    string cname;
-	
-    OVXCIN(char* fileName);
-    ~OVXCIN();
-	vector<string> getCharVectorByKey(string key);
-	vector<string> getWordVectorByChar(string key);
+public:	
+    OVCIN(char* fileName);	// VXCIN::read()
+    ~OVCIN();
+
+	string getSelKey();	// VXCIN::selKey()
+	string getCName();	// VXCIN::name()
+	string getEName();	// VXCIN::name()
+	string getEndKey();
+	bool isEndKey(char keyChar);	// VXCIN::isEndKey()
+	vector<string> getCharVectorByKey(string key);	// VXCIN::getKey()
+	vector<string> getWordVectorByChar(string key);	// VXCIN::find()
 
 protected:
 	vector<string> getVectorFromMap(map< string, vector<string> >& inMapRef,
@@ -31,6 +33,11 @@ protected:
 					 string mapName);
 	
 private:
+	string selkey;
+    string ename;
+    string cname;
+	string endkey;
+
 	map<string, vector<string> > keyMap;
 	map<string, vector<string> > charMap;
 };
