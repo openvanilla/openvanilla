@@ -1,6 +1,9 @@
-= OpenVanilla 輸入法框架使用說明
+= OpenVanilla 輸入法框架 0.6.3 使用說明
+http://openvanilla.org/
 
-2004 © Lukhnos、劉康民、姜天戩、陳柏中、楊維中、謝孟叡
+2004 © lukhnos D. Kang-min "gugod" Liu, Barabbas Jian, Pektong Chen. Wei-zhong "zonble" Yang and Mengjuei Hshieh.
+
+劉燈、劉康民、姜天戩、陳柏中、楊維中、謝孟叡版權所有
 
 == 簡介 ==
 
@@ -115,7 +118,13 @@ OV 提供兩種不同的輸入法模組：一是Xcin輸入法模組，Xcin輸入
 
 ==== 注音輸入法 ====
 
+OV 提供的注音輸入法源自於香草注音輸入法，是傳統的、必須手動選字的注音輸入法。與系統內建的注音輸入法比較，OV所提供的注音輸入法提供倚天鍵盤配置，您可以在OpenVanilla系統偏好設置中切換。
+
 ==== 行列輸入法 ====
+
+MacOS X內建的中文輸入法中，一直缺乏對於行列輸入法的支援，可說是行列使用者在使用蘋果作業系統時的一大憾事。感謝行列科技廖明德先生（也就試航劣輸入法的發明人）慷慨提供行列輸入表格，OV所使用的行列輸入法表格是使用Unicode編碼的，包含繁、簡中文字集共兩萬九千餘字。
+
+關於行列輸入法的各種相關資訊，請參見行列科技網站：http://www.array.com.tw/ 。
 
 ==== 酷音輸入法 ====
 
@@ -196,47 +205,55 @@ OV 提供兩種不同的輸入法模組：一是Xcin輸入法模組，Xcin輸入
 
 英數輸入法就是直接送出您所打的英文字母或數字，您可以配合「全形英數字」選項使用，快速輸入全形的英數字。
 
-==== 藏文輸入法（Sambhota 鍵盤） ====
+==== 藏文輸入法 ====
 
-OV 所提供的藏文輸入法為 Sambhota 鍵盤配置，可以直接在大多數 MacOS X 應用程式中，輸入Unicode當中的藏文，而因為在 MacOS X 中內建的簡體中文就有納入藏文的字集，所以，如果您有安裝中文套件（相信您應該會裝），在顯示藏文方面，應該沒有問題。
+OV 藏文輸入法目前提供三種鍵盤配置，包括 Sambhota Keymap One、Tibetan Computer Company Keyboard #1 以及 Tibetan Computer Company Keyboard #2。您可以在系統偏好設定中的OpenVailla偏好設定控制台中，切換藏文鍵盤配置。
 
-不過，因為藏文有組合字的特色，雖然大多數程式都可以輸入藏文，但目前已知只有 Cocoa 的文字編輯物件可以正確處理藏文組合字，您至少可以使用 MacOS X 內建的「文字編輯」等編輯器，正確輸入有組合字的藏文。
+您可以直接在大多數支援 Unicode 的 MacOS X 應用程式中，輸入Unicode當中的藏文，而因為在 MacOS X 中內建的簡體中文就有納入藏文的字集，所以，如果您有安裝中文套件（相信您應該會裝），在顯示藏文方面，應該沒有問題。
 
-您可以從以下的 RTF 文件，取得關於 Sambhota 鍵盤的額外說明：
-http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf
+不過，因為藏文有組合字（Stacking）的特色，雖然大多數程式都可以輸入藏文，但目前已知只有 Cocoa 的文字編輯物件可以正確處理藏文組合字，您至少可以使用 MacOS X 內建的「文字編輯」等編輯器，正確輸入有組合字的藏文。或是，您會需要安裝能夠處理組合字的字體，例如Tibetan Machine Uni等，Tibetan Machine Uni 是一套以 GPL 授權釋出的自由軟體，您可以從 http://iris.lib.virginia.edu/tibet/xml/show.php?xml=/tools/tibfonts.xml 下載。
+
+您可以從以下的 RTF 文件，取得關於 Sambhota 、TCC #1 以及 TCC #2 鍵盤的額外說明：
+
+* http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf
+* http://iris.lib.virginia.edu/tibet/tools/jskad_docs/TCC_keyboard_1.rtf
+* http://iris.lib.virginia.edu/tibet/tools/jskad_docs/TCC_keyboard_2.rtf
 
 這份文件必須使用 JSKAD 這個使用 Java 寫成的編輯器開啟：
 http://iris.lib.virginia.edu/tibet/tools/jskad.html
 
-Sambhota 鍵盤配置如下：
+這三種鍵盤的數字鍵，都是直接輸入藏文數字： 
+ ༡་ 1 ༢་2 ༣་ 3 ༤་ 4 ༥་5 ༦་6 ༧་7 ༨་8 ༩་9 ༠་0
 
-===== 子音 =====
+===== Sambhota 鍵盤配置： =====
 
- ཀ་k ཁ་K ག་g ང་G ཅ་c ཅ་C
+====== 子音 ======
+
+ ཀ་k ཁ་K ག་g ང་G ཅ་c ཆ་C
  ཇ་j ཉ་N ཏ་t ཐ་T ད་d ན་n
  པ་p ཕ་P བ་b མ་m ཙ་x ཚ་X
- དྷ་D ཝ་w ཞ་Z ཟ་z འ་' ཡ་y
+ ཛ་D ཝ་w ཞ་Z ཟ་z འ་' ཡ་y
  ར་r ལ་l ཤ་S ས་s ཧ་h ཨ་A
 
-===== 梵文子音 =====
+====== 梵文子音 ======
 
- ཊ་q ཋ་Q ཌ་v ཎ་V བྷ་B
+ ཊ་q ཋ་Q ཌ་v ཎ་V ཥ་B
 
-===== 組合字 =====
+====== 組合字 ======
 
  སྒྲ་fsgr ལྷ་flh ཀྰ་fk'
 
-===== 梵文組合字 =====
+====== 梵文組合字 ======
 
  ཀྲྱ་fkry ཁྑ་fkk
 
-===== 母音 =====
+====== 母音 ======
 
  ཨི་Ai
  ཀ་k或ka ཀི་ki ཀུ་ku ཀོ་ko
  ཀེ་ke ཀཻ་kE ཀཽ་kO ཀྀ་KI
 
-===== 標點 =====
+====== 標點 ======
 
  །་, ་空白鍵 [空白].
 ཿ ་: ༔་; ྅་@ ༼་( ༽་)
@@ -244,10 +261,78 @@ Sambhota 鍵盤配置如下：
  ཨྃ་A& ཨོཾ་Ao& ཨིཾ་Ai& ཨཽཾ་AO&
  ཀྂ་k% ཧྰུྂ་fh'u%
 
-===== 數字 =====
+=====TCC Keyboard #1 鍵盤配置：=====
 
- ༡་ 1 ༢་2 ༣་ 3 ༤་ 4 ༥་5
- ༦་6 ༧་7 ༨་8 ༩་9 ༠་0
+====== 子音 ======
+
+ ཀ་q ཁ་w ག་e ང་r ཅ་t ཆ་y
+ ཇ་u ཉ་j ཏ་o ཐ་p ད་[ ན་]
+ པ་a ཕ་s བ་d མ་f ཙ་k ཚ་l
+ ཛ་; ཝ་' ཞ་z ཟ་x འ་c ཡ་v
+ ར་m ལ་' ཤ་. ས་/ ཧ་> ཨ་?
+
+====== 梵文子音 ======
+
+ ཊ་Q ཋ་W ཌ་E ཎ་R ཥ་T
+
+====== 組合字 ======
+
+ སྒྲ་h/em ལྷ་h,> ཀྰ་hqc
+
+====== 梵文組合字 ======
+
+ ཀྲྱ་hrem ཁྑ་hww
+
+====== 母音 ======
+
+ ཨི་?g
+ ཀ་q ཀི་qg ཀུ་qj ཀོ་qn
+ ཀེ་qb ཀཻ་qB ཀཽ་qN ཀྀ་qG
+
+====== 標點 ======
+
+ །་\ ་空白鍵 [空白]-
+ཿ ་: ༔་% ྅་$ ༼་( ༽་)
+ ༑་-
+ ཨྃ་?* ཨོཾ་?n* ཨིཾ་?g* ཨཽཾ་?N*
+ ཀྂ་q` ཧྰུྂ་h>cj`
+
+=====TCC Keyboard #2 鍵盤配置：=====
+
+====== 子音 ======
+
+ ཀ་q ཁ་w ག་s ང་e ཅ་b ཆ་n
+ ཇ་m ཉ་' ཏ་o ཐ་p ད་j ན་k
+ པ་r ཕ་/ བ་d མ་f ཙ་; ཚ་'
+ ཛ་[ ཝ་] ཞ་z ཟ་x འ་c ཡ་g
+ ར་h ལ་v ཤ་. ས་l ཧ་G ཨ་H
+
+====== 梵文子音 ======
+
+ ཊ་O ཋ་P ཌ་j ཎ་K ཥ་>
+
+====== 組合字 ======
+
+ སྒྲ་alsh ལྷ་avG ཀྰ་aqc
+
+====== 梵文組合字 ======
+
+ ཀྲྱ་aqhg ཁྑ་aww
+
+====== 母音 ======
+
+ ཨི་Ht
+ ཀ་q ཀི་qt ཀུ་qu ཀོ་qi
+ ཀེ་qy ཀཻ་qY ཀཽ་qI ཀྀ་qT
+
+====== 標點 ======
+
+ །་\ ་空白鍵 [空白]-
+ཿ ་: ༔་% ྅་$ ༼་( ༽་)
+ ༑་-
+ ཨྃ་q* ཨོཾ་qi* ཨིཾ་qt* ཨཽཾ་qI*
+ ཀྂ་q` ཧྰུྂaGcu`
+
 
 ==== Unicode Hex 輸入法 ====
 
