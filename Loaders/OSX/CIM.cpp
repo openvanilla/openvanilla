@@ -3,9 +3,11 @@
 #include <Carbon/Carbon.h>
 #include <stdarg.h>
 
-
 #include "CIM.h"
 #include "CIMconst.h"
+
+#include "VXUtility.h"
+#define OVDEBUG
 
 const short cimMenu_Pencil=cimBaseResourceID+1;
 
@@ -212,6 +214,7 @@ ComponentResult CIMSessionFix(CIMSessionHandle hndl)
 	#ifdef CIMCUSTOM
 	CIMCustomDeactivate((*hndl)->data, (*hndl)->buffer->bind((*hndl)->instance));
 	#endif
+	murmur("Fixing session");
     return (*hndl)->buffer->bind((*hndl)->instance)->send();
 }
 

@@ -142,10 +142,11 @@ public:
         if (key->isPrintable())
         {
 			/* fprintf (stderr, "keysེeq: %s, len: %d, keycode: %c \n", keyseq.buf, keyseq.len, key->code()); */
+			char keycode = key->code();
 
-			if(key->code() >= '0' && key->code() <= '9')	// Numbers
+			if(keycode >= '0' && keycode <= '9')	// Numbers
 			{ 
-				i = 0x0F20 + (key->code() - '0');
+				i = 0x0F20 + (keycode - '0');
 				buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 				keyseq.clear();
 				keyseq.lastisother();
@@ -153,7 +154,7 @@ public:
 				return 1;   // key processed
 			}
 			
-			if(key->code() == SpaceKey[keyboardlayout]) // Keyin a space.
+			if(keycode == SpaceKey[keyboardlayout]) // Keyin a space.
 			{ 
 				buf->append((char *)" ")->send();
 				keyseq.clear();
@@ -162,7 +163,7 @@ public:
 				return 1;   // key processed
 			}
 			
-			if(key->code() == ComposeKey[keyboardlayout])	// Compose key
+			if(keycode == ComposeKey[keyboardlayout])	// Compose key
 			{ 
 				buf->send()->clear();
 				if(keyseq.buf[0] == ComposeKey[keyboardlayout]) //End Stacking
@@ -173,14 +174,15 @@ public:
 				} else { //Begin Composing
 					keyseq.clear();
 					keyseq.lastisother();
-					keyseq.add(key->code());
+					keyseq.add(keycode);
 					textbar->clear()->append((char *)"Stacking...")->show();
 				}
 				return 1;   // key processed
 			}
 			
-			if((j = isFinalAddKey(key->code())) > -1)	// Final M or N
+			if((j = isFinalAddKey(keycode)) > -1)	// Final M or N
 			{
+				if(keyseq.buf[0]=='f' && keyseq.len == 1) return 1;
 				if(keyseq.last || keyseq.len){
 					i = FinalAddChars[j];
 					buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
@@ -191,7 +193,7 @@ public:
 				return 1;
 			}
 
-			if((j = isSymbolKey(key->code())) > -1) // Symbols
+			if((j = isSymbolKey(keycode)) > -1) // Symbols
 			{
 				i = SymbolChars[j];
 				buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
@@ -201,7 +203,7 @@ public:
 				return 1;   // key processed
 			}
 
-			if((j = isVowelKey(key->code())) > -1)	// Vowels
+			if((j = isVowelKey(keycode)) > -1)	// Vowels
 			{ 
 				if(keyseq.last == 1 || (keyseq.buf[0] == ComposeKey[keyboardlayout] && keyseq.len > 3))
 				{
@@ -213,8 +215,14 @@ public:
 				}
 				return 1;   // key processed
 			}
+			
+			if(keyboardlayout == 1) //Sambhota Keymap #2
+			{
+				if(keycode == 'D') keycode = 'm';
+				if(keycode == 'F') keycode = '\'';
+			}
 
-			if((j = isConsonantKey(key->code())) > -1) // Consonant
+			if((j = isConsonantKey(keycode)) > -1) // Consonant
 			{ 
 				i = ConsonantChars[j];
 				keyseq.lastisconsonant();
@@ -256,7 +264,7 @@ public:
 								i = 0x0FB9;
 								buf->append(&i, ovEncodingUTF16Auto, 1)->update();
 							}
-							keyseq.add(key->code());
+							keyseq.add(keycode);
 							return 1;
 						}
 					}
@@ -297,7 +305,7 @@ public:
 								i = htransfromChars[k] + 0x50;
 								buf->append(&i, ovEncodingUTF16Auto, 1)->update();
 							}
-							keyseq.add(key->code());
+							keyseq.add(keycode);
 							return 1;
 						}
 					}
@@ -311,13 +319,35 @@ public:
 						}
 					}
 					buf->append(&i, ovEncodingUTF16Auto, 1)->update();
-					keyseq.add(key->code());
+					keyseq.add(keycode);
 					return 1;
 				} 
 				buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 				keyseq.clear();
 				textbar->hide();
 				return 1;   // key processed
+			}
+			{ //Extra 
+				if(keycode == 'M' || keycode == '>')
+				{
+					buf->clear()->append((char*)"ཧཱུྃ")->send();keyseq.clear();textbar->hide();
+				}
+				if(keycode == '+' || keycode == '!')
+				{
+					buf->clear()->append((char*)"༄༅")->send();keyseq.clear();textbar->hide();
+				}
+				if(keycode == '=')
+				{
+					buf->clear()->append((char*)"ཨཱཿ")->send();keyseq.clear();textbar->hide();
+				}
+				if(keycode == '<')
+				{
+					buf->clear()->append((char*)"ཨོཾ")->send();keyseq.clear();textbar->hide();
+				}
+				if(keycode == '^')
+				{
+					buf->clear()->append((char*)"༁ྃ")->send();keyseq.clear();textbar->hide();
+				}
 			}
 			return 1;
         }        

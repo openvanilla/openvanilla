@@ -242,7 +242,7 @@ OV 的酷音輸入法改變過去的 SpaceChewing 的架構，使用「新酷音
 
 ==== 藏文輸入法 ====
 
-OV 藏文輸入法目前提供三種鍵盤配置，包括 Sambhota Keymap One、Tibetan Computer Company Keyboard #1 以及 Tibetan Computer Company Keyboard #2。您可以在系統偏好設定中的OpenVailla偏好設定控制台中，切換藏文鍵盤配置。
+OV 藏文輸入法目前提供四種鍵盤配置，包括 Sambhota Keymap One、Sambhota Keymap Two、Tibetan Computer Company Keyboard #1 以及 Tibetan Computer Company Keyboard #2。您可以在系統偏好設定中的OpenVailla偏好設定控制台中，切換藏文鍵盤配置。
 
 您可以直接在大多數支援 Unicode 的 MacOS X 應用程式中，輸入Unicode當中的藏文，而因為在 MacOS X 中內建的簡體中文就有納入藏文的字集，所以，如果您有安裝中文套件（相信您應該會裝），在顯示藏文方面，應該沒有問題。
 
@@ -260,7 +260,7 @@ http://iris.lib.virginia.edu/tibet/tools/jskad.html
 這三種鍵盤的數字鍵，都是直接輸入藏文數字： 
  ༡་ 1 ༢་2 ༣་ 3 ༤་ 4 ༥་5 ༦་6 ༧་7 ༨་8 ༩་9 ༠་0
 
-===== Sambhota 鍵盤配置： =====
+===== Sambhota Keymap One 鍵盤配置： =====
 
 ====== 子音 ======
 
@@ -294,7 +294,41 @@ http://iris.lib.virginia.edu/tibet/tools/jskad.html
 ཿ ་: ༔་; ྅་@ ༼་( ༽་)
  ༑་-
  ཨྃ་A& ཨོཾ་Ao& ཨིཾ་Ai& ཨཽཾ་AO&
- ཀྂ་k% ཧྰུྂ་fh'u%
+ ཀ ྃ་k% ཧྰུ ྃ་fh'u%
+
+==== Sambhota Keymap Two 鍵盤配置：====
+
+===== 子音 =====
+
+ ཀ་q ཁ་w ག་e ང་r  ཅ་t  ཆ་y
+ ཇ་u ཉ་i  ཏ་o  ཐ་p  ད་[  ན་]
+ པ་a ཕ་s བ་d མ་f ཙ་k ཚ་l
+ ཛ་; ཝ་'  ཞ་z ཟ་x  འ་c ཡ་v
+ ར་m ལ་, ཤ་. ས་/ ཧ་> ཨ་/
+
+===== 梵文子音 =====
+
+ ཊ་Q ཋ་W ཌ་E  ཎ་R ཥ་T
+
+===== 組合字 =====
+
+ སྒྲ་h/em ལྷ་h,> ཀྰ་hqc
+
+===== 梵文組合字 =====
+ ཀྲྱ་hqme ཁྑ་hww
+
+===== 母音 =====
+ ཨི་?g
+ ཀ་q ཀི་qg ཀུ་qj ཀོ་qn
+ ཀེ་qb ཀཻ་qB ཀཽ་qN ཀྀ་qG
+
+===== 標點 =====
+
+ །་c ་空白鍵 [空白]-
+ཿ་:  ༔་K  ྅་| ༼་( ༽་)
+ ༑་{
+ ཨྃ་?! ཨོཾ་?n! ཨིཾ་?q! ཨཽཾ་?J!
+ ཀྃ་q% ཧྰུྃ་h>Gcj%
 
 =====TCC Keyboard #1 鍵盤配置：=====
 
@@ -330,7 +364,7 @@ http://iris.lib.virginia.edu/tibet/tools/jskad.html
 ཿ ་: ༔་% ྅་$ ༼་( ༽་)
  ༑་-
  ཨྃ་?* ཨོཾ་?n* ཨིཾ་?g* ཨཽཾ་?N*
- ཀྂ་q` ཧྰུྂ་h>cj`
+ ཀ ྃ་q` ཧྰུ ྃ་h>cj`
 
 =====TCC Keyboard #2 鍵盤配置：=====
 
@@ -366,7 +400,7 @@ http://iris.lib.virginia.edu/tibet/tools/jskad.html
 ཿ ་: ༔་% ྅་$ ༼་( ༽་)
  ༑་-
  ཨྃ་q* ཨོཾ་qi* ཨིཾ་qt* ཨཽཾ་qI*
- ཀྂ་q` ཧྰུྂaGcu`
+ ཀ ྃ་q` ཧྰུ ྃaGcu`
 
 ==== Unicode Hex 輸入法 ====
 

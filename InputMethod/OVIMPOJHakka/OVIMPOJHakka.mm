@@ -21,10 +21,10 @@ int OVIMPOJHakka::name(char *locale, void *s, OVEncoding *enc)
 {
     *enc=ovEncodingUTF8;
     if (!strcasecmp(locale, "zh_TW"))
-        return strlen(strcpy((char*)s, "OV 白話字(POJHakka)漢羅"));
+        return strlen(strcpy((char*)s, "OV 客家白話字漢羅"));
     if (!strcasecmp(locale, "zh_CN"))
-        return strlen(strcpy((char*)s, "OV 白話字(POJHakka)汉罗"));
-    return strlen(strcpy((char*)s, "OV Pe̍h-ōe-jī (POJHakka)"));
+        return strlen(strcpy((char*)s, "OV 客家白話字汉罗"));
+    return strlen(strcpy((char*)s, "OV Hakka Pe̍h-ōe-jī (POJ)"));
 }
 
 int OVIMPOJHakka::initialize(OVDictionary* global, OVDictionary* local,

@@ -126,6 +126,9 @@ void SetupMenuString(MenuRef mnu, int pos) {
     /* str = (CFStringRef)VXSafe
         (CFBundleCopyLocalizedString(bdl,CFSTR("About"),NULL,NULL));
     InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'ABUT'); */
+    str = (CFStringRef)VXSafe
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Help"),NULL,NULL));
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'HELP'); 
 }
 
 int SetupMenuList(MenuRef mnu) {
@@ -504,11 +507,18 @@ void SwitchMenuItemMark(MenuRef mnu,int oldp, int newp)
 
 void StartupPreferenceEditor() 
 {
-    char sbuf[512];
-    murmur("launching application to edit %s", userplistfile);
-//    sprintf (sbuf, "open %s", userplistfile);
-//    system(sbuf);   
+//  char sbuf[512];
+//  murmur("launching application to edit %s", userplistfile);
+//  sprintf (sbuf, "open %s", userplistfile);
+//  system(sbuf);   
     system("open /Library/PreferencePanes/OVPrefPane.prefPane");
+}
+
+void ShowHelp() 
+{
+    char sbuf[512];
+    sprintf(sbuf, "open %sov.pdf",  (char*)loaddir);
+    system(sbuf);
 }
 
 void UpdateFilterConfig() {
@@ -556,6 +566,9 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
         return 1;
     case 'ABUT':
         ShowAbout();
+        return 1;
+    case 'HELP':
+        ShowHelp();
         return 1;
     }
 

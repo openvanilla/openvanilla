@@ -32,20 +32,22 @@ int last;
 #define VOWEL_NUM 8
 #define FINALADD_NUM 2
 #define MAX_COMPOSE 5
-#define KEYBOARDS 3
+#define KEYBOARDS 4
 
 /* 
  0: Sambhota Keymap One
- 1: TCC keyboard #1
- 2: TCC keyboard #2
+ 1: Sambhota Keymap Two
+ 2: TCC keyboard #1
+ 3: TCC keyboard #2
 */
 
-char ComposeKey[KEYBOARDS] = {'f', 'h', 'a'};
-char SpaceKey[KEYBOARDS] = {'.', '-', '-'};
+char ComposeKey[KEYBOARDS] = {'f','h', 'h', 'a'};
+char SpaceKey[KEYBOARDS] = {'.','-', '-', '-'};
 
 char SymbolKeys[KEYBOARDS][SYMBOL_NUM] = 
 {
 	{'!', ',', '#', '$', '(', ')', '@', ':', ';','-', '|'},
+	{'V', 'C', '@', '#', '(', ')', '|', ':', 'K','{', '&'},
 	{'A', '\\', '!', '@', '(', ')', '$', ':', '%','+', '|'},
 	{'A', '\\', '!', '@', '(', ')', '$', ':', '%','+', '|'}
 };
@@ -80,6 +82,12 @@ char ConsonantKeys[KEYBOARDS][CONSONAT_NUM] =
 	'Q','W','E','R','T'
 	},
 	{
+	'q','w','e','r','t','y','u','i','o','p',
+	'[',']','a','s','d','f','k','l',';','\'',
+	'z','x','c','v','m',',','.','/','>','?',
+	'Q','W','E','R','T'
+	},
+	{
 	'q','w','s','e','b','n','m',',','o','p',
 	'j','k','r','/','d','f',';','\'','[',']',
 	'z','x','c','g','h','v','.','l','G','H',
@@ -99,6 +107,7 @@ char VowelKeys[KEYBOARDS][VOWEL_NUM] =
 {
 	{'a','i','u','o','e','E','O','I'},
 	{' ','g','j','n','b','B','N','G'},
+	{' ','g','j','n','b','B','N','G'},
 	{' ','t','u','i','y','Y','I','T'}
 };
 
@@ -110,13 +119,14 @@ unsigned short VowelChars[VOWEL_NUM] =
 char FinalAddKeys[KEYBOARDS][VOWEL_NUM]=
 { 
 	{'%','&'},
+	{'!','%'},
 	{'`','*'},
 	{'`','*'}
 };
 
 unsigned short FinalAddChars[FINALADD_NUM] = 
 {
-	0x0F82,0x0F7E
+	0x0F83,0x0F7E
 };
 
 /* Wylie */
