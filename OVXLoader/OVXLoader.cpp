@@ -29,7 +29,7 @@ const int vxMaxContext=256;
 CIMContext* pool[vxMaxContext];
 
 void CIMContext::add()
-	{ for (int c=0; c<vxMaxContext; c++) if (!pool[c]) pool[c]=this; }
+	{ for (int c=0; c<vxMaxContext; c++) if (!pool[c]) { pool[c]=this; break; } }
 void CIMContext::remove()
 	{ for (int c=0; c<vxMaxContext; c++) if (pool[c]==this) pool[c]=NULL; }
 
@@ -259,8 +259,11 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
 		// kill all existing context
 		for (int i=0; i<vxMaxContext; i++)
 		{
-			if (pool[i]) inputmethod->deleteContext(pool[i]->ovcontext);
-			pool[i]->ovcontext=newim->newContext();
+			if (pool[i])
+			{
+				inputmethod->deleteContext(pool[i]->ovcontext);
+				pool[i]->ovcontext=newim->newContext();
+			}
 		}
 		
 		inputmethod=newim;
