@@ -1,31 +1,12 @@
 OBJS=OVIMPOJ.o VXCIN.o VXUtility.o VXCandidate.o POJKeySeq.o
 GOALS=OVIMPOJ.dylib 
-INST_PATH=/Library/OpenVanilla/Development
-
-all: $(GOALS)
 
 $(GOALS): $(OBJS)
 	g++ -framework Cocoa -o $@ -bundle $(OBJS)
 
-install:
-	mkdir -p $(INST_PATH)
-	cp $(GOALS) $(INST_PATH)
-	cp poj.cin $(INST_PATH)
+include ../../Mk/ov.im.mk
+include ../../Mk/ov.vars.mk
+include ../../Mk/ov.general.mk
+include ../../Mk/ov.osx.mk
 
-VXCandidate.o: ../OVIMXcin/VXCandidate.mm
-	gcc -I../../Loaders/OSX -o VXCandidate.o -c $<
 
-VXCIN.o: ../OVIMXcin/VXCIN.mm
-	gcc -I../../Loaders/OSX -o VXCIN.o -c $<
-
-VXUtility.o: ../../Loaders/OSX/VXUtility.cpp
-	gcc -o VXUtility.o -c $<
-
-clean:
-	rm $(GOALS)
-
-%.o: %.cpp
-	gcc -O2 -c $<
-
-%.o: %.mm
-	gcc -O2 -c -I../../Source/OSX/ -I../../Loaders/OSX $<

@@ -4,7 +4,7 @@ MKDIR=/bin/mkdir -p
 
 INST_PATH=/Library/OpenVanilla/Development
 
-CFLAGS=-O2 -Wall
+CFLAGS=-O2 -Wall -I../../Source/OSX/ -I../../Loaders/OSX 
 
 GCC=/usr/bin/gcc
 GPP=/usr/bin/g++
