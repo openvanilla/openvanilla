@@ -11,7 +11,7 @@ $(GOALS): $(OBJS)
 install:
 	mkdir -p $(INST_PATH)
 	cp $(GOALS) $(INST_PATH)
-    cp poj.cin $(INST_PAT)
+	cp poj.cin $(INST_PATH)
 	echo "# This loads $(GOALS)" >  $(CONF_PATH)
 	echo $(INST_PATH)/$(GOALS)   >> $(CONF_PATH)
 
@@ -28,4 +28,4 @@ clean:
 	gcc -c $<
 
 %.o: %.mm
-	gcc -c $<
+	gcc -c -I../OSX/ $<

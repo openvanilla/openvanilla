@@ -1,6 +1,6 @@
 // OVIMDayi.mm
 
-// #define OVDEBUG
+#define OVDEBUG
 
 #include <Cocoa/Cocoa.h>
 #include "OpenVanilla/OpenVanilla.h"
@@ -85,7 +85,7 @@ DayiTable ReadDayi(char *fname)
             id keyobj=[[NSString stringWithCString: key] uppercaseString];
             id valueobj=MakeNSStr(value);
 
-            murmur("adding key=%s, value=%s", key, value);
+//            murmur("adding key=%s, value=%s", key, value);
 	    if(keyobj && valueobj)	
 	        [tab.keytable setObject: valueobj forKey: keyobj];
         }
@@ -128,11 +128,13 @@ public:
         keyseqlen=0;
         keyseq[0]=0;
         candi=0;
+        autoreleasepool=[NSAutoreleasePool new];
         murmur("new im Context instance created");
     }
     
     virtual ~OVDayiContext()
     {
+        [autoreleasepool release];
         murmur("im Context instance destroyed");
     }
     
@@ -366,6 +368,8 @@ protected:
     
     int keyseqlen;
     char keyseq[10];
+    
+    id autoreleasepool;
 };
 
 class OVDayiIM : public OVInputMethod
@@ -374,11 +378,13 @@ public:
     OVDayiIM()
     {
         murmur("Dayi IM instance created");
+        autoreleasepool=[NSAutoreleasePool new];
     }
     
     virtual ~OVDayiIM()
     {
         murmur("Dayi IM instance destroyed");
+        [autoreleasepool release];
     }
 
     virtual int identifier(char *s)
@@ -425,10 +431,31 @@ public:
     OVIMContext *newContext() { return new OVDayiContext(this, &tab); }
     
     DayiTable tab;
+    id autoreleasepool;
 };
 
 OVLOADABLEWRAPPER(OVDayiIM);
-OVLOADABLEOBJCWRAPPER;
+
+id autoreleasepool;
+extern "C" void _init()
+{
+    murmur ("init!\n");
+    
+    NSApplicationLoad();    
+    
+    murmur ("Cocoa multithread mode: %d", [NSThread isMultiThreaded]);
+    
+    murmur ("alloc");
+    autoreleasepool=[NSAutoreleasePool alloc];
+    
+    murmur ("init");
+    [autoreleasepool init];
+}  
+
+extern "C" int OVLoadableCanUnload() 
+{
+    return 0; 
+}
 
 
 
