@@ -42,7 +42,7 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.1/OVLoader.plist";
 char userplistfile[PATH_MAX];
 const char *loaddir    = "/Library/OpenVanilla/0.6.1/";
 
-int floatingwindowlock=0, defposx, defposy, textsize=24, conversionfilter=0, fullwidthfilter=0;
+int floatingwindowlock=0, defposx, defposy, textsize=20, conversionfilter=0, fullwidthfilter=0;
 int listloaded=0;
 int menuPosFullWidthStart=0, menuPosHanConvertStart=0;
 UInt32 usermenu='USRM';
@@ -155,7 +155,7 @@ void ClearContextPool() {
 
 void SetupGlobalConfig(OVDictionary *global) {
     floatingwindowlock = global->getIntDefault("floatingWindowLock", 0);
-    textsize = global->getIntDefault("textSize", 24);
+    textsize = global->getIntDefault("textSize", 20);
     defposx  = global->getIntDefault("floatingWindowLockPosX", 20);
     defposy  = global->getIntDefault("floatingWindowLockPosY", 760);	
 	conversionfilter=global->getIntDefault("useHanConversionFilter", 0);
