@@ -1,4 +1,5 @@
 #include "OVStringToolKit.h"
+#include <iostream>
 
 using namespace std;
 
@@ -9,12 +10,12 @@ OVStringToolKit::~OVStringToolKit() {}
 int OVStringToolKit::getLines(string inString,
 							  vector<string>& outStringVectorRef)
 {
-	return splitString(inString, outStringVectorRef, '\n');
+	return splitString(inString, outStringVectorRef, "\n");
 }
 
 int OVStringToolKit::splitString(string inString,
 								 vector<string>& outStringVectorRef,
-								 char delimiter)
+								 string delimiter)
 {
 	///* string::find()
 	int previousPosition = 0, currentPosition = 0;
@@ -26,14 +27,14 @@ int OVStringToolKit::splitString(string inString,
 			currentSubString =
 				inString.substr(previousPosition,
 								currentPosition - previousPosition);
-				
+
 			previousPosition = currentPosition + 1;
 		} else
 			currentSubString =
 				inString.substr(previousPosition,
 								inString.length() - previousPosition + 1);
 
-		if(currentSubString.length() > 0) {
+		if(currentSubString.length() > 0 && currentSubString != delimiter) {
 			outStringVectorRef.push_back(currentSubString);
 			currentSubString.clear();
 		}

@@ -71,10 +71,6 @@ bool OVCandidate::select(char inKey, string& outStringRef)
 	{
         if (selkey[i]==inKey && (pos+i < count)) {
             onduty=0;
-			cerr << "list address=" << list << endl;
-			cerr << "pos=" << pos << endl;
-			cerr << "i=" << i << endl;
-			cerr << "list->size()=" << list->size() << endl;
             outStringRef = list->at(pos+i);
 			return true;
         }

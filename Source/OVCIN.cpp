@@ -112,13 +112,14 @@ string OVCIN::getPropertyByName(vector<string>& inStringVectorRef,
 								 string propertyName)
 {
 	string pattern = "%" + propertyName;
-	int startIndex = pattern.length() + 1;
 	for(unsigned int i = 0; i < inStringVectorRef.size(); i++)
 	{
 		string currentString = inStringVectorRef[i];
-		if(currentString.find(pattern, 0) == 0)
-			return currentString.substr(startIndex,
-									currentString.length() - startIndex + 1);
+		if(currentString.find(pattern, 0) == 0) {
+			vector<string> tempVectorRef;
+			OVStringToolKit::splitString(currentString, tempVectorRef, " "); 
+			return tempVectorRef[1];
+		}
 	}
 	
 	return string("");
@@ -150,7 +151,7 @@ int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 			} else {
 				vector<string> pairVector;
 				int vectorSize = OVStringToolKit::splitString(currentString,
-															  pairVector, ' ');
+															  pairVector, " ");
 				if(vectorSize == 2) {
 					// pairVector[0] is the key,
 					// pairVector[1] is the value.
@@ -168,4 +169,3 @@ int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 	
 	return outMapRef.size();
 }
-

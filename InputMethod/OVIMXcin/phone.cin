@@ -1,9 +1,9 @@
 %gen_inp
-%ename	phone
-%cname	注音
+%ename    phone
+%cname    注音
 %encoding UTF-8
-%selkey  1234567890
-%endkey  3467
+%selkey   1234567890
+%endkey   3467
 %keyname  begin
 ,  ㄝ
 -  ㄦ

@@ -344,6 +344,7 @@ int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar, OVService *srv)
         keyseq.clear();
     }
 	
+	cerr << cintab->getSelKey().c_str() << endl;
     candi.prepare(&candidateStringVector,
 				  const_cast<char*>(cintab->getSelKey().c_str()), textbar);    
 
@@ -390,8 +391,7 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     
 	string inKey;
 	inKey.push_back(c);
-	vector<string> outStringVectorRef;
-    if (cintab->getCharVectorByKey(inKey, outStringVectorRef) > 0)
+    if (cintab->isValidKey(inKey))
     {
 		string output;
 		if(candi.select(c, output)) {
