@@ -4,7 +4,7 @@
 #include "OVXCIN.h"
 
 #include <fstream>
-#include <locale>
+#include <iostream>
 
 using namespace std;
 
@@ -23,19 +23,22 @@ vector<string> OVXCIN::find(string key)
 
 void OVXCIN::read(char *fname, int shiftselkey)
 {
-	locale utf8Locale("");
-	locale::global(utf8Locale);
+	ifstream in(fname, ios_base::binary);
 	
-	ifstream in(fname);
-	in.imbue(utf8Locale);
-	    
-	ofstream out("test.txt");
-	string buf;
-	out.imbue(utf8Locale);
-    in >> buf;
-	out<<buf<<endl;
+	in.seekg(0, ios_base::end);
+	int length = in.tellg();
+	in.seekg(0);
+
+	cout<<length<<endl;
+	
+	char buffer[length];
+	in.get(buffer, length);
+	
+	ofstream out("test.txt", ios_base::binary);
+	out.write(buffer, length);
+	
+	out.close();	
 	in.close();
-	out.close();
 }
 
 int main(int argc, char**argv)
