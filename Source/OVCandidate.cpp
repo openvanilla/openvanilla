@@ -16,10 +16,7 @@ void OVCandidate::prepare(vector<string>* l, char* skey, OVTextBar *textbar)
     pos=0;
 	list = l;	
     count=list->size();
-    
-    cerr << "prepare, selkey=" << selkey << ", perpage=" << perpage <<
-		", pos=" << pos << ", count=" << count << endl;
-    
+        
     update(textbar);
     textbar->show();
 }
