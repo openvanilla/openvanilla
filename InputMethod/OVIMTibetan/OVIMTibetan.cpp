@@ -187,7 +187,11 @@ public:
 		}
 		
         if (key->isPrintable())
-        {			
+        {
+			if (key->isCapslock()) {
+				buf->appendChar(key->lower())->send();
+				return 1;
+			}
 			if(key->code() == '.') // Keyin a space.
 			{ 
 				buf->append((char *)" ")->send();
