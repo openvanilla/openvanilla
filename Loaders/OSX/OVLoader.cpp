@@ -14,6 +14,7 @@
 #include "VXKeyCode.h"
 #include "VXConfig.h"
 #include "VXLoadableIM.h"
+#include "VXUtility.h"
 #include "OVAbout.h"
 
 class CIMContext
@@ -79,14 +80,15 @@ void LoadEveryDylib() {
 }
 
 void SetupMenuString(MenuRef mnu, int pos) {
-    CFBundleRef bundle=CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName));
-    CFStringRef mstr;
-    mstr=CFBundleCopyLocalizedString(bundle, CFSTR("Preferences"), NULL, NULL);
-    InsertMenuItemTextWithCFString(mnu, mstr, pos++, 0, 'PREF');
-    CFRelease(mstr);
-    mstr=CFBundleCopyLocalizedString(bundle, CFSTR("About"), NULL, NULL);
-    InsertMenuItemTextWithCFString(mnu, mstr, pos++, 0, 'ABUT');
-    CFRelease(mstr);
+    VXCFAutoreleasePool p;
+    CFBundleRef bdl = (CFBundleRef)p.add
+        (CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName)));
+    CFStringRef str = (CFStringRef)p.add
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Preferences"),NULL,NULL));
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'PREF');
+    str = (CFStringRef)p.add
+        (CFBundleCopyLocalizedString(bdl,CFSTR("About"),NULL,NULL));
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'ABUT');
 }
 
 int SetupMenuList(MenuRef mnu) {
