@@ -304,8 +304,9 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
     return 1;
 }
 
-int CIMCustomHandleInput(void *data, CIMInputBuffer *buf, unsigned char charcode,
-		UInt32 keycode, UInt32 modifiers, Point *pnt)
+int CIMCustomHandleInput(void *data, CIMInputBuffer *buf,
+                         unsigned char charcode,
+                         UInt32 keycode, UInt32 modifiers, Point *pnt)
 {
     CIMContext *c=(CIMContext*)data;    
     if (!c->ovcontext) return 0;
@@ -349,7 +350,7 @@ void KillAllExistingContext(OVInputMethod *newim) {
 }
 
 int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu, 
-    CIMInputBuffer *buf)
+                         CIMInputBuffer *buf)
 {
     char sbuf[512];
     switch (command)
