@@ -42,7 +42,7 @@ protected:
 class OVIMPOJ : public OVInputMethod
 {
 public:
-    OVIMPOJ() : fullPOJoutput(0), asciioutput(0), beep(0), keylayout(pojToneByNumber), cintab(NULL) {}
+    OVIMPOJ() : fullPOJOutput(0), asciioutput(0), beep(0), keylayout(pojToneByNumber), cintab(NULL) {}
     virtual int identifier(char* s);
     virtual int name(char *locale, void *s, OVEncoding *enc);
     virtual int initialize(OVDictionary*, OVDictionary*, OVService*, char*);
@@ -53,13 +53,13 @@ public:
     virtual int isAsciiOutput() { return asciioutput; }
     virtual int isBeep() { return beep; }
     virtual int getKeyLayout() { return keylayout; }
-    virtual int isFullPOJ() { return fullPOJoutput; }
+    virtual int isFullPOJ() { return fullPOJOutput; }
     
 protected:
     int asciioutput;
     int beep;
     int keylayout;
-    int fullPOJoutput;
+    int fullPOJOutput;
     VXCIN *cintab;
 };
 

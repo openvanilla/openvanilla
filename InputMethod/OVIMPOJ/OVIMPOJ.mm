@@ -60,7 +60,7 @@ int OVIMPOJ::update(OVDictionary* global, OVDictionary* local)
     asciioutput=local->getInt(optASCIIOutput);
     keylayout=local->getInt(optKeyLayout);
     beep=global->getInt(optBeep);
-    fullPOJoutput=local->getIntDefault("fullPOJoutput", 0);
+    fullPOJOutput=local->getIntDefault("fullPOJOutput", 0);
     return 1;
 }
 
