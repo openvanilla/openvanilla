@@ -1,4 +1,5 @@
-// OVIMXcin.mm
+// OVIMArray.mm
+// 2004 openvanilla.org
 
 #define OVDEBUG
 #include <OpenVanilla/OpenVanilla.h>
@@ -410,14 +411,14 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
         return 1;
     }
 
-    if (key->isCode(3, ovkDown, ovkLeft, '>') ||
+    if (key->isCode(3, ovkDown, ovkRight, '>') ||
         (!candi.onePage() && key->code()==ovkSpace))
     {
         candi.pageDown()->update(textbar);
         return 1;
     }
 
-    if (key->isCode(3, ovkUp, ovkRight, '<'))
+    if (key->isCode(3, ovkUp, ovkLeft, '<'))
     {
         candi.pageUp()->update(textbar);
         return 1;
