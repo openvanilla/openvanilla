@@ -125,15 +125,12 @@ int OVIMXcin::initialize(OVDictionary* global, OVDictionary* local, OVService*, 
 
     update(global, local);  // run-time configurable settings    
     local->getString(encoding, buf);
-    //enc=VXEncodingMapper(buf);
-	enc = ovEncodingUTF8;
-	//<comment author='b6s'>encoding should be taken care by iconv?</comment>
+    enc=OVEncodingMapper(buf);
 	
     char cinfilename[PATH_MAX];
     strcpy (cinfilename, loadpath);
     if (cinfilename[strlen(cinfilename)-1]!='/') strcat(cinfilename, "/");
     strcat(cinfilename, cinfile);
-    //cintab->read(cinfilename, enc, selkeyshift);
     cintab=new OVCIN(cinfilename);
 	
     return 1;
@@ -384,14 +381,11 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     // enter == first candidate
     // space (when candidate list has only one page) == first candidate
     char c=key->code();
-	cerr << "before c=" << c << endl;
     if (key->isCode(2, ovkReturn, ovkMacEnter) || 
         (candi.onePage() && key->code()==ovkSpace)) c=cintab->getSelKey()[0];
 
-	cerr << "after c=" << c << endl;    
     string output;
     if (candi.select(c, output)) {
-		cerr << "1.output=" << output.c_str() << endl;
         buf->clear()->append((void*)const_cast<char*>(output.c_str()))->send();
         candi.cancel();
         textbar->hide()->clear();
@@ -405,7 +399,6 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     {
 		string output;
 		if(candi.select(c, output)) {
-			cerr << "2.output=" << output << endl;			
 			buf->clear()->
 				append((void*)const_cast<char*>(output.c_str()))->send();
 			keyseq.add(c);

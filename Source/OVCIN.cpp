@@ -11,6 +11,17 @@
 
 using namespace std;
 
+OVEncoding OVEncodingMapper(const char *s)
+{
+    if (!strcasecmp(s, "big5")) return ovEncodingBig5HKSCS;
+    if (!strcasecmp(s, "big5e")) return ovEncodingBig5HKSCS;
+    if (!strcasecmp(s, "big5hkscs")) return ovEncodingBig5HKSCS;
+    if (!strcasecmp(s, "big5-hkscs")) return ovEncodingBig5HKSCS;
+    if (!strcasecmp(s, "euc")) return ovEncodingEUC_CN;
+    if (!strcasecmp(s, "euc_cn")) return ovEncodingEUC_CN;
+    return ovEncodingUTF8;
+}
+
 OVCIN::OVCIN(char* fileName)
 {
 	OVFileHandler* fileHandler = new OVFileHandler(fileName);
@@ -21,6 +32,7 @@ OVCIN::OVCIN(char* fileName)
 	ename = getPropertyByName(stringVector, "ename");
 	cname = getPropertyByName(stringVector, "cname");
 	selkey = getPropertyByName(stringVector, "selkey");
+	encoding = getPropertyByName(stringVector, "encoding");	
 	endkey = getPropertyByName(stringVector, "endkey");
 	
 	getMapByName(stringVector, keyMap, "keyname");
@@ -46,6 +58,11 @@ string& OVCIN::getCName()
 string& OVCIN::getEName()
 {
 	return ename;
+}
+
+string& OVCIN::getEncoding()
+{
+	return encoding;
 }
 
 string& OVCIN::getEndKey()

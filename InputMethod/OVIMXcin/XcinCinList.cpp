@@ -9,7 +9,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
-//#include "OVCIN.h"
+#include "OVCIN.h"
 #include "XcinCinList.h"
 
 const int vxPreparseSuppress=100;   // max. lines to be read for preparser
@@ -76,7 +76,8 @@ int CinList::preparse(char *loadpath, char *fname, int i)
         sscanf(buf, "%s %s", key, value);
 
         if (!strcasecmp(key, "%ename")) strcpy(list[i].ename, value);
-        if (!strcasecmp(key, "%encoding")) list[i].encoding=ovEncodingUTF8;
+        if (!strcasecmp(key, "%encoding"))
+			list[i].encoding=OVEncodingMapper(value);
         if (!strcasecmp(key, "%cname")) strcpy(list[i].cname, value);
         
         line++;
