@@ -19,7 +19,7 @@ OV 與蘋果內建的中文輸入法 TCIM（Traditional Chinese Input Method）�
 
 == 下載安裝 ==
 
-您可以在 OV 官方網站的下載頁面，或是從OV位在中研院資訊所自由軟體鑄造場的專案頁面下載區（http://rt.openfoundry.org/Foundry/Project/Download/?Queue=209）中，取得最新版本的 OV 安裝套件，下載完成後直接點選安裝套件圖示，便開始進行安裝。
+您可以在 OV 官方網站的下載頁面，或是從 OV 位在中研院資訊所自由軟體鑄造場的專案頁面下載區（http://rt.openfoundry.org/Foundry/Project/Download/?Queue=209）中，取得最新版本的 OV 安裝套件，下載完成後直接點選安裝套件圖示，便開始進行安裝。
 
 完成安裝後，OV 主程式會安裝在「/Library/Components」底下，也就是在「資源庫」底下的「Components」裡頭，您可以看到一個叫做 OVLoader.bundle 的圖示。
 
@@ -228,7 +228,7 @@ OV 最大的特色之一，就是能夠更方便的修改安裝包當中內建�
 
 === 刪除不需要的輸入法 ===
 
-OV所使用的輸入法檔案，都位在系統硬碟中的「資源庫」→「OpenVanilla」→「版本號碼」目錄下。在這個目錄中，您可以看到許多副檔名是 .dylib 的檔案，這些是各個輸入法所使用的動態執行檔案，如果您覺得有些輸入法實在用不著，您可以刪除這些檔案（在您刪除檔案之前，建議您先在系統偏好設定中的「國際設定」，暫時停用OV）。
+OV所使用的輸入法檔案，都位在系統硬碟中的「資源庫」→「OpenVanilla」→「版本號碼」目錄下。在這個目錄中，您可以看到許多副檔名是 .dylib 的檔案，這些是各個輸入法所使用的動態執行檔案，如果您覺得有些輸入法實在用不著，您可以刪除這些檔案（在您刪除檔案之前，建議您先在系統偏好設定中的「國際設定」，暫時停用 OV）。
 
 其中，OVIMArray 是行列輸入法、OVIMCanjei 是倉頡、OVIMChewing 是酷音、OVIMPhonetic 是注音、OVIMPOJ 是台語白話字輸入法、OCIMXcin 則是可以載入各種 Xcin 輸入法表格的通用輸入法模組。
 
@@ -307,6 +307,6 @@ http://osxchat.blogspot.com/
 
 === 特別感謝 ===
 
-* 老地方冰果室（http://www.frostyplace.com/）、OIKOS生活網（http://www.oikos.com.tw/）對於OV的相關報導。
+* 老地方冰果室（http://www.frostyplace.com/）、OIKOS生活網（http://www.oikos.com.tw/）對於 OV 的相關報導。
 * 新酷音發展計畫（http://chewing.csie.net/news.html）共同發展各平台的酷音輸入法。
 * 行列科技（http://www.array.com.tw/）提供完整的行列輸入法表格。
