@@ -106,7 +106,7 @@ int OVIMXcin::identifier(char *s)
     strcpy(idbuf, "OVIMXcin-");
     strcat(idbuf, cinfile);
 #else
-	strcpy(idbuf, "OVIMArray");http://the.taoofmac.com/space/blog/2004-12-04.16%3A24
+    strcpy(idbuf, "OVIMArray");
 #endif
     return strlen(strcpy(s, idbuf));
 }
