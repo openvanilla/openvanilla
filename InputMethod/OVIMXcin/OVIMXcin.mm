@@ -236,7 +236,10 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     
     // shift and capslock processing
 
-    if (key->isPrintable() && (key->isCapslock() || key->isShift()))
+    if (key->isPrintable() && 
+        (key->isCapslock() || 
+         (key->isShift() && !keyseq.valid(key->code()))
+        ))
     {    
         if (key->isCapslock())
         {
@@ -251,7 +254,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     }
     
     if (key->isPrintable() && keyseq.valid(key->code()) &&
-        !key->isShift() && !key->isCapslock())
+        !key->isCtrl() && !key->isOpt() && !key->isCommand())
     {
         if (keyseq.length() == parent->maxSeqLen())
         {
