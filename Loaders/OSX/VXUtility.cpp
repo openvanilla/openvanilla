@@ -40,6 +40,7 @@ CFStringRef VXCreateCFStringNon8BitEncoding(const void *s, OVEncoding e, int l)
 {    
     switch (e)
     {
+        case ovEncodingUTF16Auto:
         case ovEncodingUTF16BE:
             return CFStringCreateWithCharacters(NULL, (const UniChar*)s, l);
     }
@@ -65,6 +66,7 @@ int VXConvertCFStringNon8BitEncoding(CFStringRef ref, void *s, OVEncoding e,
     int l=maxlen ? maxlen : VXDefMaxLen;
     switch (e)
     {
+        case ovEncodingUTF16Auto:
         case ovEncodingUTF16BE:
             r.location=0;
             r.length=(l > strl) ? strl : l;

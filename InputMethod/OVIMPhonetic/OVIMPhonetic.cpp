@@ -196,7 +196,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 		{
 			vimPunctuationWindow=0;
 			textbar->hide();
-			buf->clear()->append(&uc, ovEncodingUTF16BE, 1)->send();
+			buf->clear()->append(&uc, ovEncodingUTF16Auto, 1)->send();
 			return 1;
 		}
 		
@@ -264,14 +264,14 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 			{
 				vimCandidateWindow=0;
 				textbar->hide();
-				buf->clear()->append(&uc, ovEncodingUTF16BE, 1)->send();
+				buf->clear()->append(&uc, ovEncodingUTF16Auto, 1)->send();
 				
 				// trying: display "accelertor" key -- WORKED!
 				if (refreshacckey)
 				{
 					VPUTF16 symbolstr[16];
 					int ssl=VPSymbolStringUTF16(vimCurrentSymbol, symbolstr);
-					buf->append(symbolstr, ovEncodingUTF16BE, ssl)->update();
+					buf->append(symbolstr, ovEncodingUTF16Auto, ssl)->update();
 				}
 
 				return 1;
@@ -282,7 +282,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 		{
 			VPUTF16 string[256];
 			int len=vimCandidatelist.updatecontent(string);
-			textbar->clear()->append(&string, ovEncodingUTF16BE, len)->update();
+			textbar->clear()->append(&string, ovEncodingUTF16Auto, len)->update();
 			return 1;
 		}
 		
@@ -309,7 +309,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 				int i, l=strlen(msgstr);
 				VPUTF16 utfstr[256];
 				for (i=0; i<l; i++) utfstr[i]=(VPUTF16)msgstr[i];
-                textbar->clear()->append(utfstr, ovEncodingUTF16BE, l)->update()->show();
+                textbar->clear()->append(utfstr, ovEncodingUTF16Auto, l)->update()->show();
 
 				return 1;		
 			}
@@ -356,7 +356,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 		
 		if (pml==1)
 		{
-            buf->append(&pmstr[0], ovEncodingUTF16BE, 1)->send();
+            buf->append(&pmstr[0], ovEncodingUTF16Auto, 1)->send();
 			return 1;
 		}
 		
@@ -366,11 +366,11 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 			VPUTF16 utfstr[256];
 			int usl=vimCandidatelist.updatecontent(utfstr);
 
-            textbar->clear()->append(utfstr, ovEncodingUTF16BE, usl)->show();
+            textbar->clear()->append(utfstr, ovEncodingUTF16Auto, usl)->show();
             
 			// strange, some applications still processes "candidatable"
 			// punctuation marks itself... we have to "eat" these symbols
-			buf->append(&pmstr[0], ovEncodingUTF16BE, 1)->update();
+			buf->append(&pmstr[0], ovEncodingUTF16Auto, 1)->update();
 			// buf.clear();
 			// buf.refreshdisplay();			// works not
 			// buf.send();		// we'll see if this works
@@ -400,7 +400,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 			
 			VPUTF16 symbolstr[16];
 			int ssl=VPSymbolStringUTF16(vimCurrentSymbol, symbolstr);
-			buf->clear()->append(symbolstr, ovEncodingUTF16BE, ssl)->update();
+			buf->clear()->append(symbolstr, ovEncodingUTF16Auto, ssl)->update();
 		}
 		
 		if (hit || inCharCode==0x3 || inCharCode==0xd || inCharCode==0x20)
@@ -416,7 +416,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 			vimCurrentSymbol=0;		// IF WE DON'T WASH THIS AWAY, THINGS GONNA BE FUNNY...
 			if (cl==1)
 			{
-			     buf->clear()->append(&candi[0], ovEncodingUTF16BE, 1)->send();
+			     buf->clear()->append(&candi[0], ovEncodingUTF16Auto, 1)->send();
 			}
 			else
 			{
@@ -424,7 +424,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 				// there is a rationale in doing this, that is, if Vanilla gets deactivated,
 				// and if the application requests a "fix," then at least we'll have 
 				// something to give out, instead of a funny symbol string...
-			     buf->clear()->append(&candi[0], ovEncodingUTF16BE, 1)->update();
+			     buf->clear()->append(&candi[0], ovEncodingUTF16Auto, 1)->update();
 				
 				vimCandidateWindow=1;
 				vimCandidatelist.load(candi, cl);
@@ -432,7 +432,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 				VPUTF16 utfstr[256];
 				int usl=vimCandidatelist.updatecontent(utfstr);
 				
-                textbar->clear()->append(utfstr, ovEncodingUTF16BE, usl)->update()->show();
+                textbar->clear()->append(utfstr, ovEncodingUTF16Auto, usl)->update()->show();
 			}
 			return 1;
 		}
@@ -466,7 +466,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 	if (vimCurrentSymbol)
 	{
 	   	// fprintf (stderr, "sending\n");
-		buf->clear()->append(symbolstr, ovEncodingUTF16BE, ssl)
+		buf->clear()->append(symbolstr, ovEncodingUTF16Auto, ssl)
 			->update(ovLangTradChinese);
 	}
 	else
