@@ -413,18 +413,22 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     inKey.push_back(c);
     if (cintab->isValidKey(inKey)) {
         string output;
-        if(candi.select(c, output)) {
-			buf->clear()
-				->append((void*)const_cast<char*>(output.c_str()),
-						 parent->getCNameEncoding())
-				->send();
-            keyseq.add(c);
-            updateDisplay(buf);
-            candi.cancel();
-            textbar->hide()->clear();
-            return 1;
-        }
-    }    
+		bool isSelKey = candi.select(c, output);
+        if(!isSelKey)
+			candi.select(candi.getSelKey()[0], output);
+			
+		buf->clear()->append((void*)const_cast<char*>(output.c_str()),
+							 parent->getCNameEncoding())
+					->send();
+		updateDisplay(buf);
+		candi.cancel();
+		textbar->hide()->clear();
+		
+		if(!isSelKey)
+			keyseq.add(c);
+		
+		return 1;			
+    }
 
     if (parent->isBeep()) srv->beep();
 
