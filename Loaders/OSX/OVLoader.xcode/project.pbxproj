@@ -152,7 +152,7 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = VXUtility.cpp;
-			path = ../../Source/Shared/VXUtility.cpp;
+			path = ../../Source/OSX/VXUtility.cpp;
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -161,7 +161,7 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = VXUtility.h;
-			path = ../../Headers/VXUtility.h;
+			path = ../../Headers/OSX/VXUtility.h;
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -270,7 +270,7 @@
 		6A8BE8C507544DB1002FBA64 = {
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				HEADER_SEARCH_PATHS = ../../Headers;
+				HEADER_SEARCH_PATHS = ../../Headers/OSX;
 			};
 			isa = PBXBuildStyle;
 			name = Development;
@@ -278,7 +278,7 @@
 		6A8BE8C607544DB1002FBA64 = {
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				HEADER_SEARCH_PATHS = ../../Headers;
+				HEADER_SEARCH_PATHS = ../../Headers/OSX;
 			};
 			isa = PBXBuildStyle;
 			name = Deployment;
