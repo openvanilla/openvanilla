@@ -139,7 +139,7 @@ int OVIMXcin::update(OVDictionary* global, OVDictionary* local)
 
     // this is now hard-written for Array
     if (!global->keyExist(warningBeep)) global->setInt(warningBeep, 1);
-    if (!local->keyExist(maxSeqLen)) local->setInt(maxSeqLen, 4);
+    if (!local->keyExist(maxSeqLen)) local->setInt(maxSeqLen, 5);
     if (!local->keyExist(autoCompose)) local->setInt(autoCompose, 1);
     if (!local->keyExist(hitMax)) local->setInt(hitMax, 0);
 	if (!local->keyExist(sendSpaceWhenAutoCompose))
@@ -168,6 +168,7 @@ OVIMContext *OVIMXcin::newContext()
 int OVXcinContext::deactivate(OVService *)
 {
     candi.cancel();
+    keyseq.clear();
     return 1;
 }
 
@@ -353,25 +354,19 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
                 autocomposing=1;
                 compose(buf, textbar, srv);
             }
-            else
-            {
-                // invalid combination is ignored (ticket #6504)
-
-                srv->beep();
-                
-                if (keyseq.length()==1)
-                {
-                    if (candi.onDuty()) cancelAutoCompose(textbar);
-                }
-                        
-                keyseq.remove();
-                updateDisplay(buf);
-            }
+            else if (candi.onDuty()) cancelAutoCompose(textbar);
         }
         
         return 1;
     }
 
+    // If pre-edit buffer is working, don't "throw away" the sequence
+    if (keyseq.length())
+    {
+        srv->beep();
+        return 1;
+    }
+        
     cancelAutoCompose(textbar);
     keyseq.clear();
     if (buf->length()) buf->send();
