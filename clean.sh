@@ -1,5 +1,5 @@
 #!/bin/sh
-/usr/bin/make clean
+make clean
 
 cd Loaders/OSX ; xcodebuild clean ; cd ..
 
