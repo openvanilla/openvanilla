@@ -19,7 +19,7 @@ public:
     virtual OVTextBar* hide();
     virtual OVTextBar* show();
     virtual OVTextBar* update();
-    virtual int onscreen() { return displaying; }
+    virtual int onScreen() { return displaying; }
     
     virtual int setPosition(int x, int y);
     

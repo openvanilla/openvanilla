@@ -62,7 +62,7 @@ public:
     virtual OVTextBar* hide() { return 0; }
     virtual OVTextBar* show() { return 0; }
     virtual OVTextBar* update() { return 0; }
-    virtual int onscreen() { return 0; }
+    virtual int onScreen() { return 0; }
 };
 
 

@@ -72,10 +72,10 @@ struct OVXLoadableLibrary
 class CIMContext
 {
 public:
-    CIMContext() : ovcontext(NULL), onscreen(0) {}
+    CIMContext() : ovcontext(NULL), onScreen(0) {}
     VXTextBar bar;
     OVIMContext *ovcontext;
-    int onscreen;
+    int onScreen;
 };
 
 OVXLoadableLibrary *lib=NULL;
@@ -183,14 +183,14 @@ int CIMCustomActivate(void *data, CIMInputBuffer *buf)
     CIMContext *c=(CIMContext*)data;    
     if (!c->ovcontext) return 0;
 
-    if (c->onscreen)
+    if (c->onScreen)
     {
-        c->onscreen=0;
+        c->onScreen=0;
         
         if (buf->length()) 
         {
             c->bar.show();
-            c->onscreen=0;
+            c->onScreen=0;
         }
         else
         {
@@ -206,9 +206,9 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
     CIMContext *c=(CIMContext*)data;    
     if (!c->ovcontext) return 0;
 
-    if (c->bar.onscreen())
+    if (c->bar.onScreen())
     {
-        c->onscreen=1;
+        c->onScreen=1;
         c->bar.hide();
     }
     return 1;
