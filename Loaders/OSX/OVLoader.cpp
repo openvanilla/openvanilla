@@ -387,23 +387,6 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
     return 1;
 }
 
-
-void CIMCustomFix(void *data)
-{	
-    murmur("OVXSimpleLoader: SessionFixing ...");
-    CIMContext *c=(CIMContext*)data;   
-    if (!c->ovcontext) return 0;
-	
-    if (c->bar.onScreen()) {
-        c->onScreen=1;
-        if (floatingwindowlock) c->bar.unlock();
-        c->bar.hide();		
-    }
-    SetFloatingWindowPosition(c);
-    c->ovcontext->deactivate(&srv);
-    return 1;
-}
-
 int CIMCustomHandleInput(void *data, CIMInputBuffer *buf,
                          unsigned char charcode,
                          UInt32 keycode, UInt32 modifiers, Point *pnt)

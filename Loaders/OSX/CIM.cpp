@@ -210,7 +210,7 @@ ComponentResult CIMSessionEvent(CIMSessionHandle hndl, EventRef evnt)
 ComponentResult CIMSessionFix(CIMSessionHandle hndl)
 {
 	#ifdef CIMCUSTOM
-	CIMCustomFix((*hndl)->data);
+	CIMCustomDeactivate((*hndl)->data, (*hndl)->buffer->bind((*hndl)->instance));
 	#endif
     return (*hndl)->buffer->bind((*hndl)->instance)->send();
 }
