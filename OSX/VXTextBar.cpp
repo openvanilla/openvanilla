@@ -51,7 +51,7 @@ OVTextBar* VXTextBar::clear()
     return this;
 }
 
-OXTextBar* VXTextBar::append(void*s, OVEncoding e, int l)
+OVTextBar* VXTextBar::append(void*s, OVEncoding e, int l)
 {
     CFStringRef newstr=VXCreateCFString(s, e, l);
     CFStringAppend(text, newstr);

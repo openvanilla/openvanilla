@@ -45,10 +45,8 @@ public:
         
         if (key->code()=='a')
         {
-            textbar->append("中");
-            textbar->update();
-            buf->append("中");
-            buf->updatedisplay();
+            textbar->append("中")->update();
+            buf->append("中")->updatedisplay();
             fprintf (stderr, "a chinese is inputed\n");
         }
         
@@ -58,10 +56,8 @@ public:
             str[1]=0;
             str[0]=key->code();
             fprintf (stderr, "key=%s\n", str);
-            textbar->append(str);
-            textbar->update();
-            buf->append(str);
-            buf->updatedisplay();
+            textbar->append(str)->update();
+            buf->append(str)->updatedisplay();
         }
         
         return 0;

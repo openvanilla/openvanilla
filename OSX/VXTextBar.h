@@ -15,7 +15,7 @@ public:
     virtual ~VXTextBar();
     
     virtual OVTextBar* clear();
-    virtual OVTextBar append(void *s, OVEncoding e=ovEncodingUTF8, int l=0);
+    virtual OVTextBar* append(void *s, OVEncoding e=ovEncodingUTF8, int l=0);
     virtual int onscreen() { return displaying; }
     virtual int hide();
     virtual int show();

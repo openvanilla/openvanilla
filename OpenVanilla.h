@@ -129,11 +129,11 @@ enum
 {
     ovkEscape=27, 
     ovkSpace=32,
-    ovkReturn=13, ovkMacEnter=0x120,
+    ovkReturn=13, ovkMacEnter=3,
     ovkDelete=8, ovkBackspace=127,
-    ovkUp=0x101, ovkDown=0x102, ovkLeft=0x103, ovkRight=0x104,
-    ovkHome=0x111, ovkEnd=0x112,
-    ovkPageUp=0x123, ovkPageDown=0x134,
+    ovkUp=30, ovkDown=31, ovkLeft=28, ovkRight=29,
+    ovkHome=1, ovkEnd=4,
+    ovkPageUp=11, ovkPageDown=12,
     ovkUndefined=0xffff
 };
 
