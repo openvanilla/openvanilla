@@ -82,8 +82,7 @@ void LoadEveryDylib() {
 
 void SetupMenuString(MenuRef mnu, int pos) {
     VXCFAutoreleasePool p;
-    CFBundleRef bdl = (CFBundleRef)p.add
-        (CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName)));
+    CFBundleRef bdl = CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName));
     CFStringRef str = (CFStringRef)p.add
         (CFBundleCopyLocalizedString(bdl,CFSTR("Preferences"),NULL,NULL));
     InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'PREF');
