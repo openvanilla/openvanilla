@@ -16,7 +16,7 @@ public:
     virtual int iscapslock()
         { return modifiers & alphaLock; }
     virtual int isctrl()
-        { return mofidifers & (controlKey | rightControlKey); }
+        { return modifiers & (controlKey | rightControlKey); }
     virtual int isalt()
         { return isopt(); }
     virtual int isopt()
