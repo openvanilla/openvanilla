@@ -56,8 +56,8 @@ public:
     
 protected:
     int asciioutput;
-    int keylayout;
     int beep;
+    int keylayout;
     VXCIN *cintab;
 };
 

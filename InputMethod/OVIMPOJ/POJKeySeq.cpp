@@ -209,7 +209,7 @@ char *POJKeySeq::compose(char *buf, int asciioutput)
     char c, *s=seq;
     int vcomposed=0;        // if the first vowel is composed
     
-    while (c=*s)        // C style, very C style
+    while((c=*s))        // C style, very C style
     {
         char cnext=*(s+1);
 

@@ -186,7 +186,7 @@ int OVIMPOJContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     
     NSString *output;
     
-    if (output=candi.select(c))
+    if ((output=candi.select(c)))
     {
         buf->clear()->append((void*)[output UTF8String]);
         if (candi.onePage() && key->code()==ovkSpace) buf->append((char*)" ");
@@ -197,7 +197,7 @@ int OVIMPOJContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
         return 1;
     }
     
-    if (output=cintab->getKey(c))
+    if ((output=cintab->getKey(c)))
     {
         buf->clear()->append((void*)[candi.select(*(cintab->selKey())) UTF8String])->send();
         seq.add(c);
