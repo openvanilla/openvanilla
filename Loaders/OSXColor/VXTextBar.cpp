@@ -167,8 +167,8 @@ void VXTextBar::setFontSize(int s, int o, int *f, int *b)
 	SetControlData(label, kControlEntireControl, 
 			kControlFontStyleTag, sizeof(ControlFontStyleRec), 
 			&fontstyle);
-	//SetWindowAlpha(window, (float)(opacity/100)); //zonble
-	SetWindowAlpha(window, 0.7); //zonble
+	SetWindowAlpha(window, (float)(opacity/100.0)); //zonble
+	//SetWindowAlpha(window, 0.7); //zonble
 	murmur("opacity: %f", (float)(opacity/100));
 }
 
