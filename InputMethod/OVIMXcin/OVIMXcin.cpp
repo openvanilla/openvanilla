@@ -70,7 +70,7 @@ string *XcinKeySequence::compose(string *s)
 		inKey.push_back(seq[i]);
 		vector<string> outStringVectorRef;
         if (cinTable->getCharVectorByKey(inKey, outStringVectorRef) > 0)
-			s->append(outStringVectorRef[0]);
+			s->append(outStringVectorRef[0], cnameencoding);
     }
     return s;
 }
@@ -174,7 +174,7 @@ void OVXcinContext::updateDisplay(OVBuffer *buf)
     {
         string *ms= new string;
         keyseq.compose(ms);
-        buf->append((void*)const_cast<char*>(ms->c_str()));
+        buf->append((void*)const_cast<char*>(ms->c_str()), cnameencoding);
         delete ms;
     }
     buf->update();
@@ -192,7 +192,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         if (candi.select(key->code(), output))
         {			
             buf->clear()->
-                append((void*)const_cast<char*>(output.c_str()))->send();
+                append((void*)const_cast<char*>(output.c_str()), cnameencoding)->send();
             keyseq.clear();
             cancelAutoCompose(textbar);
             return 1;
@@ -331,7 +331,8 @@ int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar, OVService *srv)
     if (size ==1 && !autocomposing)
     {
         buf->clear()->append((void*)const_cast<char*>
-                             (candidateStringVector[0].c_str()))->send();
+                             (candidateStringVector[0].c_str()), cnameencoding)
+                    ->send();
         keyseq.clear();
         return 1;
     }
@@ -339,7 +340,8 @@ int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar, OVService *srv)
     if (!autocomposing)
     {    
         buf->clear()->append((void*)const_cast<char*>
-                             (candidateStringVector[0].c_str()))->update();
+                             (candidateStringVector[0].c_str()), cnameencoding)
+                    ->update();
         keyseq.clear();
     }
 	
@@ -382,7 +384,8 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
 
     string output;
     if (candi.select(c, output)) {
-        buf->clear()->append((void*)const_cast<char*>(output.c_str()))->send();
+        buf->clear()->append((void*)const_cast<char*>(output.c_str()),
+                             cnameencoding)->send();
         candi.cancel();
         textbar->hide()->clear();
         return 1;
@@ -394,7 +397,7 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
         string output;
         if(candi.select(c, output)) {
             buf->clear()
-                ->append((void*)const_cast<char*>(output.c_str()))
+                ->append((void*)const_cast<char*>(output.c_str()), cnameencoding)
                 ->send();
             keyseq.add(c);
             updateDisplay(buf);

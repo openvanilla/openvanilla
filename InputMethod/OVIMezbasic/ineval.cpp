@@ -70,6 +70,7 @@ class VarTable {
 
 void    statement(BASICLex&, FILEinput&);
 void    print(BASICLex&);
+void    systemstat(BASICLex&);
 void    assignment(BASICLex&, int index);
 void    inputstat(BASICLex&);
 void    forstat(BASICLex&, FILEinput&);
@@ -82,6 +83,10 @@ strstream strout(outbuf, 8192);
 
 extern "C" char *EvalEZBasic(char *inbuf)
 {
+    memset(outbuf, 0, 8192);
+    strstreambuf *pbuf;
+    pbuf=strout.rdbuf();
+    pbuf->pubseekpos(0);
     try
     {
     	FILEinput input(inbuf);
@@ -138,6 +143,11 @@ void statement (BASICLex& lex, FILEinput& input)
             case BTinput:
                 inputstat (lex);
                 break;
+
+            case BTsystem:
+                systemstat(lex);
+                break;
+                
 
             case BTfor:
                 forstat (lex, input);
@@ -196,6 +206,68 @@ void print (BASICLex& lex)
         }
     }
 }
+
+void systemstat (BASICLex& lex)
+{
+    int sendlf = 1;
+
+    while (1)
+    {
+        Token t = lex.ahead();
+
+        if (t == BTliteral || t == BTint || t == BTlp)
+        {
+            strout << expression(lex);
+            sendlf =  1;
+            continue;
+        }
+
+
+        cchar* buf = lex.consume();
+
+        char commandbuf[256];
+        FILE *f;
+        switch(t)
+        {
+            case BTstring:
+                strout << buf;
+
+                strcpy(commandbuf, buf);
+                strcat(commandbuf, " > /tmp/result");
+                system(commandbuf);
+
+                f=fopen("/tmp/result", "r");
+                char linebuf[256];
+                while (!feof(f))
+                {
+                    fgets(linebuf, 255, f);
+                    strout << linebuf;
+                }
+                fclose(f);
+    
+                sendlf = 1;
+                break;
+
+            case TKends:
+            case TKend:
+                if (sendlf) strout << endl;
+                return;
+
+            case BTsmcln:
+                sendlf = 0;
+                break;
+
+            case BTcomma:
+                strout << "\t";
+                break;
+
+            default:
+                LexError (LEsyntax, lex.line());
+        }
+    }
+}
+
+
 
 void inputstat (BASICLex& lex)
 {
