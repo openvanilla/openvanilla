@@ -1,3 +1,4 @@
+IMID=OVIMCangjei
 OBJS=OVIMCangjei.o vanillacj.o vanillasymbol.o vcdata.o vcdata_simplex.o
 GOALS=OVIMCangjei.dylib
 

@@ -1,3 +1,4 @@
+IMID=OVIMPhonetic
 OBJS=OVIMPhonetic.o vanilladata.o vanillaphone.o
 GOALS=OVIMPhonetic.dylib
 

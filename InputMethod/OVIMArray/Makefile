@@ -1,3 +1,4 @@
+IMID=OVIMArray
 OBJS=VXCIN.o VXUtility.o VXCandidate.o XcinCinList.o OVIMArray.o 
 GOALS=OVIMArray.dylib 
 DATA=array30.cin
