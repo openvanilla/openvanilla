@@ -22,7 +22,7 @@
 
 %ename Jyutping
 %cname 粵拼
-%encoding big5
+%encoding UTF-8
 %selkey 1234567890
 %endkey 123456
 %keyname begin

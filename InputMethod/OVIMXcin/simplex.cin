@@ -1,7 +1,7 @@
 %gen_inp
 %ename simplex
 %cname 簡易
-%encoding big5
+%encoding UTF-8
 %selkey 1234567890
 %keyname begin
 a 日

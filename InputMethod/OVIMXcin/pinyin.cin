@@ -1,7 +1,7 @@
 %gen_inp
 %ename PinYin
 %cname 拼音
-%encoding euc_cn
+%encoding UTF-8
 %selkey 1234567890
 %keyname begin
 a a

@@ -7,7 +7,7 @@
 %gen_inp
 %ename jtcj_gb
 %cname 仓颉
-%encoding euc_cn
+%encoding UTF-8
 %selkey 1234567890
 %keyname begin
 a	日

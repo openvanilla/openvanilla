@@ -6,7 +6,7 @@
 %gen_inp
 %ename dayi3
 %cname 大易
-%encoding big5
+%encoding UTF-8
 %selkey '[]-\6789
 %keyname begin
 ,   力
