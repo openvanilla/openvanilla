@@ -16,6 +16,7 @@ public:
 
 typedef int OVEncoding;
 typedef int OVLanguage;
+typedef int OVException;
 
 enum
 {
@@ -36,6 +37,12 @@ enum
     ovLangSimpChinese=2,
     ovLangJapanese=3,
     ovLangKorean=4
+};
+
+enum
+{
+    ovException=0,
+    ovMemoryException=1
 };
 
 class OVTextBar : public OVObject
@@ -59,8 +66,10 @@ class OVBuffer : public OVObject
 public:
     virtual OVBuffer* clear() { return this; }
     virtual OVBuffer* send(OVLanguage lang=ovLangAll) { return this; }
-    virtual OVBuffer* updatedisplay(int cursorpos=-1, 
-        int hilitefrom=-1, int hiliteto=-1, OVLanguage lang=ovLangAll)
+    virtual OVBuffer* updatedisplay(OVLanguage lang=ovLangAll)
+            { return updatedisplay(-1, -1, -1, lang); }
+    virtual OVBuffer* updatedisplay(int cursorpos, int hilitefrom, 
+        int hiliteto, OVLanguage lang=ovLangAll)
             { return this; }
     virtual OVBuffer* append (void *s, OVEncoding e=ovEncodingUTF8, int l=0)
         { return this; }
@@ -71,17 +80,18 @@ public:
 class OVDictionary : public OVObject
 {
 public:
-    virtual int getint(char *key) { return 0; }
-    virtual int getint(char *key, int defvalue) { return 0; }
-    virtual int putint(char *key, int value) { return 0; }
-	
-	virtual int getstring(char *key, void *str, OVEncoding e=ovEncodingUTF8,
-		int maxlen=-1)	{ return 0; }
-	virtual int getstring(char *key, void *str, void *defvalue,
-		OVEncoding e=ovEncodingUTF8, int deflen=-1, int maxlen=-1)
-			{ return 0; }
-	virtual int setstring(char *key, void *value, OVEncoding e=ovEncodingUTF8,
-		int len=-1) { return 0; }
+    virtual int keyexist(void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
+        { return 0; }
+        
+    virtual int getint(void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
+        { return 0; }
+    virtual int putint(void *key, int value, OVEncoding e=ovEncodingUTF8,
+        int keylen=0) { return 0; }
+            	
+	virtual int getstring(void *key, void *str, OVEncoding e=ovEncodingUTF8,
+		int keylen=0, int maxlen=0) { return 0; }
+	virtual int putstring(void *key, void *value, OVEncoding e=ovEncodingUTF8,
+		int keylen=0, int valuelen=0) { return 0; }
 };
 
 
@@ -126,7 +136,7 @@ public:
     virtual int clear(OVService*) { return 1; }
 
     virtual int keyevent(OVKeyCode*, OVBuffer*, OVTextBar*, OVService*) 
-        { return 0; }
+        { return 0; }        
 };
 
 class OVInputMethod : public OVObject
