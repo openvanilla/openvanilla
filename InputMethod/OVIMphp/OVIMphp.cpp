@@ -12,7 +12,7 @@
 #define OUT_PATH "/tmp/ovphp-out.tmp"
 #define IN_PATH "/tmp/ovphp-in.tmp"
 
-class OVPHPIM;
+class OVIMPHP;
 
 const int ebMaxKeySeq=1024;
 class KeySeq
@@ -38,7 +38,7 @@ int len;
 class OVPHPContext : public OVIMContext
 {
 public:
-    OVPHPContext(OVPHPIM *p)
+    OVPHPContext(OVIMPHP *p)
     {
         parent=p;
         fprintf (stderr, "New IM context created\n");
@@ -127,19 +127,19 @@ public:
     }
     
 protected:
-    OVPHPIM *parent;
+    OVIMPHP *parent;
 	KeySeq keyseq;
 };
 
-class OVPHPIM : public OVInputMethod
+class OVIMPHP : public OVInputMethod
 {
 public:
-    OVPHPIM(){}
-    virtual ~OVPHPIM(){}
+    OVIMPHP(){}
+    virtual ~OVIMPHP(){}
         
     virtual int identifier(char* s)
     {
-        return strlen(strcpy(s, "OVPHPIM"));
+        return strlen(strcpy(s, "OVIMPHP"));
     }
     
     virtual int name(char *locale, void *s, OVEncoding *enc)
@@ -181,5 +181,5 @@ public:
 
 
 // use these two wrappers
-OVLOADABLEWRAPPER(OVPHPIM)
+OVLOADABLEWRAPPER(OVIMPHP)
 OVLOADABLECANUNLOAD
