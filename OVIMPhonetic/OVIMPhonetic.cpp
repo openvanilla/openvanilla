@@ -4,6 +4,7 @@
 #include <string.h>
 #include "OpenVanilla/OpenVanilla.h"
 #include "OpenVanilla/OVLoadable.h"
+#include "OpenVanilla/OVUtility.h"
 #include "vanillaphone.h"
 
 const int vimclMaxCandidate=256;
@@ -80,6 +81,7 @@ public:
     OVPhoneIM()
     {
         fprintf (stderr, "IM moudle instance created by loadble moudle\n");
+        keylayout=0;
     }
     
     virtual ~OVPhoneIM()
@@ -101,9 +103,14 @@ public:
             return strlen(strcpy((char*)s, "OpenVanilla Phone IM"));
     }
 
-    virtual int initialize(OVDictionary*, OVDictionary*, OVService*, char*)
+    virtual int initialize(OVDictionary* g, OVDictionary* l, OVService*, char*)
     {
         fprintf (stderr, "IM module initialized by IM loader\n");
+        
+        if (!l->keyExist("鍵盤配置")) l->setInt("鍵盤配置", 0);
+        keylayout=l->getInt("鍵盤配置");
+        murmur ("key layout set to %d\n", keylayout);
+        
         return 1;
     }
     
@@ -113,9 +120,13 @@ public:
         return 1;
     }
 
-    virtual int update(OVDictionary*, OVDictionary*)
+    virtual int update(OVDictionary* g, OVDictionary* l)
     {
         fprintf (stderr, "IM loader requested updating module's config\n");
+        
+        if (l->keyExist("鍵盤配置")) keylayout=l->getInt("鍵盤配置");
+        murmur ("key layout changed to %d\n", keylayout);
+        
         return 1;
     }
 
@@ -130,6 +141,11 @@ public:
         fprintf (stderr, "IM module destroying a new IM context\n");
         delete s; 
     }
+    
+    virtual int getKeyLayout() { return keylayout; }
+    
+protected:
+    int keylayout;
 };
 
 
@@ -142,6 +158,10 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
     *textbar, OVService *srv)
 {
     int inCharCode=key->code();
+    
+    if (parent->getKeyLayout()==0) vimKeyboardLayoutEten=1;
+    else vimKeyboardLayoutEten=0;
+    
     
 	if (vimPunctuationWindow)
 	{

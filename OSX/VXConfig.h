@@ -19,7 +19,7 @@ typedef struct timespec CLibTimeSpec;
 class VXConfig
 {
 public:
-    VXConfig(char *fn)
+    VXConfig(const char *fn)
     {
         bzero(&timestamp, sizeof(timestamp));
         strcpy(filename, fn);

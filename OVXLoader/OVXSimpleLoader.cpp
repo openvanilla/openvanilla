@@ -9,6 +9,7 @@
 #include "VXTextBar.h"
 #include "VXBuffer.h"
 #include "VXKeyCode.h"
+#include "VXConfig.h"
 
 struct OVXLoadableLibrary
 {
@@ -80,12 +81,39 @@ public:
 
 OVXLoadableLibrary *lib=NULL;
 OVInputMethod *inputmethod=NULL;
+VXConfig *sysconfig=NULL;
 const char *configfile="/Library/OpenVanilla/Development/OVXSimpleLoader.config";
+const char *plistfile="/Library/OpenVanilla/Development/OVXSimpleLoader.plist";
+
+char imid[256];
+
+OVDictionary *GetGlobalConfig()
+{
+	OVDictionary *d=sysconfig->getDictionaryRoot();
+	
+	if (!d->keyExist("global_settings")) d->newDictionary("global_settings");
+	return d->getDictionary("global_settings");
+}
+
+OVDictionary *GetLocalConfig(char *id)
+{
+	OVDictionary *d=sysconfig->getDictionaryRoot();
+
+	char buf[256];
+	strcpy (buf, "local_settings-");
+	strcat (buf, id);
+
+	if (!d->keyExist(buf)) d->newDictionary(buf);
+	return d->getDictionary(buf);
+}
+
 
 int CIMCustomInitialize(MenuRef mnu)
 {
 	char buf[256];
     fprintf (stderr, "OVXSimpleLoader: initializing\n");
+
+	sysconfig=new VXConfig(plistfile);
 
     // open OVXSimpleLoader's config file
 
@@ -141,17 +169,27 @@ int CIMCustomInitialize(MenuRef mnu)
 
 	if (!inputmethod) return 0;
 	
-	inputmethod->identifier(buf);
-    fprintf (stderr, "loaded input method id=%s\n", buf);
+	inputmethod->identifier(imid);
+    fprintf (stderr, "loaded input method id=%s\n", imid);
         
-    OVDictionary dict;
+	OVDictionary *global=GetGlobalConfig();
+	OVDictionary *local=GetLocalConfig(imid);
+
     OVService srv;
-    inputmethod->initialize(&dict, &dict, &srv, workpath);
+    inputmethod->initialize(global, local, &srv, workpath);
     // TODO: put OS X locale information here
     OVEncoding e;
     int l=inputmethod->name("zh_TW", buf, &e);
     CFStringRef imname=VXCreateCFString(buf, e, l);
     InsertMenuItemTextWithCFString(mnu, imname, 0, 0, 'OVXL');
+	CFRelease(imname);
+
+	InsertMenuItemTextWithCFString(mnu, CFSTR("Preferences..."), 0, 0, 'PREF');
+	
+	sysconfig->write();
+	
+	delete global;
+	delete local;
     
     return 1;
 }
@@ -159,8 +197,22 @@ int CIMCustomInitialize(MenuRef mnu)
 void CIMCustomTerminate()
 {    
     fprintf (stderr, "OVXSimpleLoader: Terminating\n");
-    if (inputmethod) if (lib) lib->imdelete(inputmethod);
-    lib->unload();
+    if (inputmethod)
+	{
+		OVDictionary *global=GetGlobalConfig();
+		OVDictionary *local=GetLocalConfig(imid);
+		OVService srv;
+		inputmethod->terminate(global, local, &srv);
+		sysconfig->write();
+		delete global;
+		delete local;
+		
+		if (lib) lib->imdelete(inputmethod);
+	}
+	
+    if (lib) lib->unload();
+	
+	delete sysconfig;
 }
 
 void *CIMCustomOpen()
@@ -183,6 +235,21 @@ int CIMCustomActivate(void *data, CIMInputBuffer *buf)
     CIMContext *c=(CIMContext*)data;    
     if (!c->ovcontext) return 0;
 
+	if (sysconfig->changed())
+	{
+		sysconfig->read();
+	
+		OVDictionary *global=GetGlobalConfig();
+		OVDictionary *local=GetLocalConfig(imid);
+		OVService srv;
+		inputmethod->update(global, local);
+		c->onScreen=0;
+		c->ovcontext->clear();
+		delete global;
+		delete local;
+	}
+
+
     if (c->onScreen)
     {
         c->onScreen=0;
@@ -197,7 +264,10 @@ int CIMCustomActivate(void *data, CIMInputBuffer *buf)
             c->bar.hide()->clear();
             c->ovcontext->clear();    
         }
-    }       
+    }    
+	
+	OVService srv;
+	c->ovcontext->activate(&srv);
     return 1;
 }
 
@@ -211,6 +281,10 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
         c->onScreen=1;
         c->bar.hide();
     }
+
+	OVService srv;
+	c->ovcontext->deactivate(&srv);
+
     return 1;
 }
 
@@ -238,8 +312,16 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
     CIMInputBuffer *buf)
 {
     CIMContext *c=(CIMContext*)data;    
+	char sbuf[512];
     switch (command)
     {
+		case 'PREF':
+			fprintf (stderr, "launching application to edit %s\n", plistfile);
+			sprintf (sbuf, "open %s", plistfile);
+			system(sbuf);
+			return 1;
+			
+			
         case 'OVXL':
             fprintf (stderr, "Menu item selected\n");
             return 1;
