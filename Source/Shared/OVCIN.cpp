@@ -62,6 +62,14 @@ bool OVCIN::isEndKey(char keyChar)
 		return false;
 }
 
+bool OVCIN::isValidKey(string keyString)
+{
+	if(charMap.count(keyString) > 0)
+		return true;
+	else
+		return false;
+}
+
 int OVCIN::getCharVectorByKey(string inKey,
 							  vector<string>& outStringVectorRef)
 {

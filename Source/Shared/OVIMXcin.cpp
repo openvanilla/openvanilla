@@ -48,17 +48,13 @@ int XcinKeySequence::valid(char c)
 {
 	string inKey;
 	inKey.push_back(c);
-	vector<string> outStringVectorRef;
-    if (cinTable->getCharVectorByKey(inKey, outStringVectorRef) == 0) return 0;
+    if (cinTable->isValidKey(inKey)) return 0;
     return 1;
 }
     
 int XcinKeySequence::add(char c)
 {
-	string inKey;
-	inKey.push_back(c);
-	vector<string> outStringVectorRef;
-    if (cinTable->getCharVectorByKey(inKey, outStringVectorRef) == 0) return 0;
+    if (valid(c) == 0) return 0;
     return OVKeySequenceSimple::add(c);
 }
     

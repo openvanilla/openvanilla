@@ -31,6 +31,8 @@ public:
 	// VXCIN::isEndKey()
 	bool isEndKey(char keyChar);
 	
+	bool isValidKey(string keyString);
+	
 	// VXCIN::getKey()
 	int getCharVectorByKey(string inKey,
 						   vector<string>& outStringVectorRef);
