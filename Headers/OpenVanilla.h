@@ -14,11 +14,9 @@
 
 // OpenVanilla does not define anything beyond a pure abstract interface.
 // It does not even define the default encoding to be used. However it is 
-// suggested UTF-8 be used throughout all levels. The only two places that
-// OpenVanilla asks for encoding information are OVBuffer::append() and
-// OVTextBar::append(). This offers a way for IM developers to make use
-// of existing non-UTF-8 data without the need of any encoding convertor.
-// The encoding conversion should be implemented by a Loader.
+// recommended UTF-8 be used throughout all levels. A simple, one-way 
+// conversion utility is provided as OVService::toUTF8(), and this must be
+// implemented by a Loader.
 
 // OpenVanilla makes a few assumptions about modern GUI and operating system,
 // and makes minimal use of user-defined types and C++ features. For detailed
@@ -33,9 +31,6 @@
 #define __OpenVanilla_h
 
 #define ovVersion (0x00070000)      // version 0.7.0
-
-typedef int OVEncoding;
-const OVEncoding oveUTF8=0;
 
 // A pure base class that defines the virtual destructor
 class OVBase
@@ -63,7 +58,7 @@ class OVBuffer : public OVBase
 {
 public:
     virtual OVBuffer* clear()=0;
-    virtual OVBuffer* append(const void *s, OVEncoding e=oveUTF8, int len=0)=0;
+    virtual OVBuffer* append(const char *s)=0;
     virtual OVBuffer* send()=0;
     virtual OVBuffer* update()=0;
     virtual OVBuffer* update(int cursorPos, int selectFrom=-1, int selectTo=-1)=0;
@@ -78,7 +73,7 @@ class OVTextBar : public OVBase
 {
 public:
     virtual OVTextBar* clear()=0;
-    virtual OVTextBar* append(const void *s, OVEncoding e=oveUTF8, int len=0)=0;
+    virtual OVTextBar* append(const char *s)=0;
     virtual OVTextBar* hide()=0;
     virtual OVTextBar* show()=0;
     virtual OVTextBar* update()=0;
@@ -114,6 +109,10 @@ class OVService : public OVBase
 {
 public:
     virtual void beep()=0;
+    
+    // this returns a pointer to an internal buffer from which the 
+    // caller can copy the converted content
+    virtual const char *toUTF8(const char *encoding, const void *src, int len=0)=0;
 };
 
 // The input method context. The context is always created by the IM module
@@ -142,10 +141,9 @@ class OVModule : public OVBase
 public:
     virtual const char *identifier()=0;
     virtual const char *localizedName(const char*) { return identifier(); }
-    
-    virtual void initialize(
-        OVDictionary *globalPref, OVDictionary *modulePref, OVService *srv,
-        const char *modulePath, const char *userPath, const char *seperator) {}
+    virtual void initialize(OVDictionary *globalPref, OVDictionary *modulePref,
+        OVService *srv, const char *modulePath, const char *userPath, 
+        const char *seperator) {}
     virtual void terminate(OVDictionary *modulePref, OVService *srv) {}
     virtual void update(OVDictionary *modulePref, OVService *srv) {}
 };
@@ -178,7 +176,7 @@ enum
     ovkDelete=127, ovkBackspace=8,
     ovkUp=30, ovkDown=31, ovkLeft=28, ovkRight=29,
     ovkHome=1, ovkEnd=4, ovkPageUp=11, ovkPageDown=12,
-    ovkTab='\t'
+    ovkTab=9
 };
 
 #endif
