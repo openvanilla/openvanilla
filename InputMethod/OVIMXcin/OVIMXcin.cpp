@@ -270,6 +270,18 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         return compose(buf, textbar, srv);
     }
     
+    // we send back any CTRL/OPT/CMD key combination 
+    // <comment author='lukhnos'>In OV 0.7 this part will be processed by
+    // pre-IM key filters</comment>
+    if (key->isOpt() || key->isCommand() || key->isCtrl())
+    {
+        cancelAutoCompose(textbar);
+        buf->clear()->update();
+        keyseq.clear();
+        return 0;
+    }
+    
+    
     // shift and capslock processing
 	// <comment author='b6s'>Shift processing is disabled.</comment>
     if (key->isPrintable() && (key->isCapslock() /*|| key->isShift()*/))
