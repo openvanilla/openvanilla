@@ -7,9 +7,11 @@
 #include <OpenVanilla/OpenVanilla.h>
 #include "OpenVanilla/OVLoadable.h"
 #include "OpenVanilla/OVUtility.h"
+#include "VXCIN.h"
+#include "VXUtility.h"
+
 
 char *vowel="aeimnoquAEIMNOQU";
-
 char *nasel="ⁿ";
 
 char *tonetable[]=
@@ -83,13 +85,15 @@ public:
 
     int isCompose(char c)
     {
-        if (strchr("12345678", c)) return 1;
+        if (strchr(" 12345678", c)) return 1;
         return 0;
     }
     
     int add(char c, int layout=0)
     {   
         if (len == pojMaxSeqLen) return 0;
+        
+        if (c==32) return 1;
         
         if (c >= '1' && c <= '8')
         {
@@ -228,7 +232,7 @@ public:
     
     char *compose(char *buf, int asciioutput=0)
     {
-        murmur ("composing syllable, internal representation=%s\n", seq);
+        murmur ("composing syllable, internal representation=%s", seq);
         
         *buf=0;
         
@@ -298,6 +302,7 @@ public:
             if (vcomposed || ( vo == -1 ) || IRULE )
             {
                 *b++=*s++;
+                *b=0;   // to supress junk
                 continue;
             }
 #undef IRULE
@@ -319,8 +324,12 @@ public:
             if (vstr)
             {
                 // compose the tone mark
-                murmur("char: %c, tone: %d, vowel2tone: %s", *s, tone, vstr);
+                murmur("char: %c, tone: %d, vowel2tone: %s (strlen=%d)", *s, tone, vstr, strlen(vstr));
+                
+                murmur("before buf=%s, b=%s, len=%d", buf, b, strlen(b));
                 strcat(b, vstr);
+                murmur("after buf=%s, b=%s, len=%d", buf, b, strlen(b));
+
                 b+=strlen(vstr);
                 vcomposed =
                 	(tolower(c) == 'm' || tolower(c) == 'n') ? pojVowelMN : pojVowelAEIOU;
@@ -345,7 +354,7 @@ class OVIMPOJ;
 class OVIMPOJContext : public OVIMContext
 {
 public:
-    OVIMPOJContext(OVIMPOJ *p) : parent(p) {}
+    OVIMPOJContext(OVIMPOJ *p) : parent(p), candi(0), list(nil) {}
     virtual int activate(OVService*) { return 1; }
     virtual int deactivate(OVService*) { return 1; }
     virtual int clear() { return 1; }
@@ -359,6 +368,11 @@ public:
 protected:
     OVIMPOJ *parent;
     POJKeySeq seq;
+    
+    int candi;
+    NSMutableArray* list;
+    void composeCandidate(char *pojs, NSArray* ar, OVTextBar *textbar);
+    int copyAndDispose(OVBuffer *buf, int c);
 };
 
 class OVIMPOJ : public OVInputMethod
@@ -390,8 +404,17 @@ public:
         if (!localconfig->keyExist("Keyboard_Layout"))
             localconfig->setInt("Keyboard_Layout", pojToneByNumber);
         
+        
+        if (!localconfig->keyExist("POJ_cin_path"))
+            localconfig->setString("POJ_cin_path", "/Library/OpenVanilla/Development/POJ.cin");
+        
         asciioutput=localconfig->getInt("ASCII_Output");
         keylayout=localconfig->getInt("Keyboard_Layout");
+        
+        char buf[256];
+        localconfig->getString("POJ_cin_path", buf);
+        murmur ("POJ.cin path=%s", buf);
+        cin.read(buf);
         
         return 1;
     }
@@ -406,8 +429,8 @@ public:
         asciioutput=localconfig->getInt("ASCII_Output");
         keylayout=localconfig->getInt("Keyboard_Layout");
 
-        murmur ("config changed, asciioutput now=%d, keyboard layout=%d\n", asciioutput, keylayout);
-
+        murmur ("config changed, asciioutput now=%d, keyboard layout=%d", asciioutput, keylayout);
+        
         return 1;
     }
     
@@ -431,9 +454,15 @@ public:
         return keylayout;
     }
     
+    virtual NSArray *find(char *key)
+    {
+        return cin.find(key);
+    }
+    
 protected:
     int asciioutput;
     int keylayout;
+    VXCIN cin;
 };
 
 int OVIMPOJContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
@@ -441,6 +470,32 @@ int OVIMPOJContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
 {
     int ascii=parent->isAsciiOutput();
     char composebuf[256];
+
+    if (candi)
+    {
+        int c=key->code();
+        
+        if (c >= '0' && c <= '9')
+        {
+            int cc=c-'0';
+            if (!cc) cc=10; else cc--;
+            if (!copyAndDispose(buf, cc)) return 1;
+            textbar->hide();
+            candi=0;
+            return 1;
+        }
+        
+        if (c==ovkEscape)
+        {
+            textbar->hide();
+            buf->clear()->update();
+            candi=0;
+            return 1;
+        }
+        
+        return 1;
+    }
+
         
     // if backspace of delete key is hit
     if (key->isCode(2, ovkBackspace, ovkDelete) && buf->length())
@@ -453,19 +508,45 @@ int OVIMPOJContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     // if enter or compose key is hit
     if ((key->code()==ovkReturn || seq.isCompose(key->code())) && buf->length()) 
     {
+        murmur("composing! code=%d", key->code());
+        char final[256];
+        
         if (key->code()!=ovkReturn) seq.add(key->code());
         seq.normalize();
-        buf->clear()->append(seq.compose(composebuf, ascii))->send();
-        murmur ("key composed, final internal representation=%s", seq.finalize());
-        seq.clear();
+        strcpy(final, seq.compose(composebuf, ascii));
+        buf->clear()->append(final)->update();
+        
+        char query[256];
+        strcpy (query, seq.finalize());
+                
+        murmur ("key composed, final internal representation=%s", query);
+        
+        // query string
+        NSArray *ar=parent->find(query);
+        if (!ar)
+        {
+            buf->append(" ")->send();
+        }
+        else
+        {
+            candi=1;
+            textbar->clear();
+            composeCandidate(final, ar, textbar);
+            textbar->update()->show();
+        }
+
+        seq.clear();        
         return 1;
     }
     
     // key=[a-z][A-Z], so add to our key sequence
     if (key->isAlpha() || (parent->keyLayout() && tonemark(key->code())))
     {
+        murmur("alpha: %d", key->code());
         seq.add(key->code(), parent->keyLayout());
-        buf->clear()->append(seq.compose(composebuf, 0))->update();
+        char *b=seq.compose(composebuf, 0);
+        murmur("composed=%s", b);
+        buf->clear()->append(b)->update();
         return 1;
     }
     
@@ -480,6 +561,46 @@ int OVIMPOJContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     seq.clear();        
     return 0;
 }
+
+void OVIMPOJContext::composeCandidate(char *pojs, NSArray *ar, OVTextBar *textbar)
+{
+    if (list) [list release];
+      
+    textbar->clear();
+    
+    char buf[256];
+    char pojstr[256];
+    strcpy(buf, "1.");
+    strcpy(pojstr, pojs);
+    strcat(pojstr, " ");
+    
+    list=[NSMutableArray new];
+    [list addObject: (NSString*)VXCreateCFString(pojstr)];
+    textbar->append(buf)->append(pojstr);
+        
+    for (int i=0; i<[ar count]; i++)
+    {
+        sprintf (buf, " %d.", i+2);
+        NSString* str=[ar objectAtIndex: i];
+        [list addObject: str];
+        textbar->append(buf)->append([str UTF8String]);
+    }    
+    
+    textbar->update();
+}
+
+int OVIMPOJContext::copyAndDispose(OVBuffer *buf, int c)
+{
+    if (c >= [list count]) return 0;
+    
+    NSString *s=[list objectAtIndex: c];
+    buf->clear()->append([s UTF8String])->send();
+    [list release];
+    list=nil;
+    return 1;
+}
+
+
 
 // standard wrappers
 OVLOADABLEWRAPPER(OVIMPOJ);
