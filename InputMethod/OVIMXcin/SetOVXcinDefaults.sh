@@ -14,6 +14,7 @@
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-liu57.cin hitMaxAndCompose integer 1
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-ehq.cin maxKeySequenceLength integer 6
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-ukiyoe.cin maxKeySequenceLength integer 4
+./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-ukiyoe.cin hitMaxAndCompose integer 1
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-kk.cin maxKeySequenceLength integer 2
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-kk.cin hitMaxAndCompose integer 1
 ./AddPlist /Library/OpenVanilla/0.6.2/OVLoader.plist IM-OVIMXcin-klingon.cin maxKeySequenceLength integer 1 
