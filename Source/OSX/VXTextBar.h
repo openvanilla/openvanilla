@@ -4,7 +4,7 @@
 #define __VXTextBar_h
 
 #include <Carbon/Carbon.h>
-#include "OpenVanilla.h"
+#include <OpenVanilla/OpenVanilla.h>
 
 const int vxtbDefFontSize=24;
 

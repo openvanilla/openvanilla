@@ -3,7 +3,7 @@
 #ifndef __VXDictionary_h
 #define __VXDictionary_h
 
-#include "OpenVanilla.h"
+#include <OpenVanilla/OpenVanilla.h>
 #include "VXUtility.h"
 
 class VXDictionary : public OVDictionary

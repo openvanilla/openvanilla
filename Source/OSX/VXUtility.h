@@ -4,8 +4,8 @@
 #define __VXUtility_h
 
 #include <Carbon/Carbon.h>
-#include "OpenVanilla/OpenVanilla.h"
-#include "OpenVanilla/OVUtility.h"
+#include <OpenVanilla/OpenVanilla.h>
+#include <OpenVanilla/OVUtility.h>
 
 CFStringRef VXCreateCFString(const void *s, OVEncoding e=ovEncodingUTF8, int l=0);
 int VXConvertCFString(CFStringRef ref, void *s, OVEncoding e=ovEncodingUTF8, 

@@ -4,7 +4,7 @@
 #define __VXKeyCode_h
 
 #include <Carbon/Carbon.h>
-#include "OpenVanilla.h"
+#include <OpenVanilla/OpenVanilla.h>
 
 class VXKeyCode : public OVKeyCode
 {

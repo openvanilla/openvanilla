@@ -4,7 +4,7 @@
 #define __VXBuffer_h
 
 #include <Carbon/Carbon.h>
-#include "OpenVanilla.h"
+#include <OpenVanilla/OpenVanilla.h>
 #include "VXUtility.h"
 
 class VXBuffer : public OVBuffer
