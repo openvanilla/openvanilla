@@ -41,7 +41,7 @@ extern "C" int OVLoadableCanUnload();
     {   \
         return 1;   \
     }   \
-    extern "C" int OVLoadableVersion()  \
+    extern "C" unsigned int OVLoadableVersion()  \
     {   \
         return ovVersion;   \
     }   \
@@ -68,7 +68,7 @@ extern "C" int OVLoadableCanUnload();
     extern "C" int OVLoadableCanUnload()    \
     {   \
         return 1;   \
-    }   \
+    }
 
     
 #endif
