@@ -1,7 +1,7 @@
 IMID=OVIMPOJ
 OBJS=OVIMPOJ.o VXCIN.o VXUtility.o VXCandidate.o POJKeySeq.o
 GOALS=OVIMPOJ.dylib 
-DATA=poj.oin
+DATA=poj.cin
 
 $(GOALS): $(OBJS)
 	$(CPP) -framework Cocoa -o $@ -bundle $(OBJS)

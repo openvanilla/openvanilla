@@ -37,8 +37,8 @@ int OVIMPOJ::initialize(OVDictionary* global, OVDictionary* local,
         local->setInt(optKeyLayout, pojToneByNumber);
         
     strcpy(cinpath, path);
-    strcat(cinpath, "OVIMPOJ/poj.oin");        
-    murmur ("OVIMPOJ: loading poj.oin at %s", cinpath);
+    strcat(cinpath, "OVIMPOJ/poj.cin");        
+    murmur ("OVIMPOJ: loading poj.cin at %s", cinpath);
     
     update(global, local);
     
