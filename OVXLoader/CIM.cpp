@@ -422,7 +422,7 @@ OSErr CIMInputBuffer::update(Boolean send, int cursorpos, int hilitefrom,
     TextRange pinrange;
     TextRangeArrayPtr hiliterangeptr=nil, updaterangeptr=nil;
 
-    if (send) fixlen=len*2;       // why *2 ?
+    if (send) fixlen=len*sizeof(UniChar);       // why *2 ?
 
     // create a new Text Input event, class=kEventClassTextInput,
     // kind=kEventTextInputUpdateActiveInputArea
@@ -452,9 +452,10 @@ OSErr CIMInputBuffer::update(Boolean send, int cursorpos, int hilitefrom,
         error=SetEventParameter(event, kEventParamTextInputSendText,
             typeUnicodeText, len * sizeof(UniChar), buffer);
     
+    
     // 4th paramter: "fix" length, >0 if we're dumping ("sending") the buffer
     if (error==noErr)
-        error=SetEventParameter(event,kEventParamTextInputSendFixLen,
+        error=SetEventParameter(event, kEventParamTextInputSendFixLen,
             typeLongInteger, sizeof(long), &fixlen);
 
     //  If the text hasn't been changed, then we want to pass an update handle that contains no
@@ -469,22 +470,23 @@ OSErr CIMInputBuffer::update(Boolean send, int cursorpos, int hilitefrom,
         if (!updaterangeptr) error=memFullErr;
         else
         {
+            fprintf (stderr, "update region\n");
             updaterangeptr->fNumOfRanges=2;
             updaterangeptr->fRange[0].fStart=0;
-            updaterangeptr->fRange[0].fEnd=lastupdate*2;
+            updaterangeptr->fRange[0].fEnd=lastupdate*sizeof(UniChar);
             updaterangeptr->fRange[0].fHiliteStyle=0;
             updaterangeptr->fRange[1].fStart=0;
             updaterangeptr->fRange[1].fEnd=len*sizeof(UniChar);
             updaterangeptr->fRange[1].fHiliteStyle=0;
 
             lastupdate=len;
+            fprintf (stderr, "lastupdate len=%d\n", lastupdate);
             error=SetEventParameter(event, kEventParamTextInputSendUpdateRng,
                 typeTextRangeArray, sizeof(short)+sizeof(TextRange)*2,
                 updaterangeptr);
         }
     }
 
-    // mark the hilighted ("hilite") range, currently none
     if(error==noErr)
     {
         hiliterangeptr=(TextRangeArrayPtr)NewPtrClear(sizeof(short)+
@@ -501,31 +503,41 @@ OSErr CIMInputBuffer::update(Boolean send, int cursorpos, int hilitefrom,
         if(!hiliterangeptr) error=memFullErr;
         else
         {
+            fprintf (stderr, "hilite and cursor\n");
+            
             hiliterangeptr->fNumOfRanges=2;
 			
 			int realcur=len*sizeof(UniChar);
 			// set cursor position
-			if (cursorpos>=0 && cursorpos<=length()) realcur=cursorpos*sizeof(UniChar);
-			SETRANGE(0, realcur, realcur, kCaretPosition);
+			if (cursorpos>=0 && cursorpos<=length()) 
+                realcur=realpos(cursorpos)*sizeof(UniChar);
+
+            fprintf (stderr, "realcur=%d\n", realcur);
+
+                
+            SETRANGE(0, 0, len*sizeof(UniChar), kConvertedText);
+			SETRANGE(1, realcur, realcur, kCaretPosition);
 			
 			// requests app to draw a light gray underline to our text area
-			SETRANGE(1, 0, len*sizeof(UniChar), kConvertedText);
 
 			// if hitelitefrom & hiteliteto are set, draw a darker line
 			if 	((hilitefrom>=0 && hilitefrom<=length()) &&
 				(hiliteto>hilitefrom && hiliteto<=length()))
 			{
+			     fprintf (stderr, "cursor from & to\n");
 				hiliterangeptr->fNumOfRanges++;		// send one more range block
 
-				SETRANGE(2, realpos(hilitefrom)*sizeof(UniChar),
+				SETRANGE(1, realpos(hilitefrom)*sizeof(UniChar),
 					realpos(hiliteto)*sizeof(UniChar), 
 					kSelectedConvertedText);
+			    SETRANGE(2, realcur, realcur, kCaretPosition);
 			}
+
             
             error=SetEventParameter(event, kEventParamTextInputSendHiliteRng,
                 typeTextRangeArray, 
 				sizeof(short)+sizeof(TextRange)*hiliterangeptr->fNumOfRanges,
-                hiliterangeptr );
+                hiliterangeptr);
         }
     }
 

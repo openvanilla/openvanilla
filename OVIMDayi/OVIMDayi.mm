@@ -233,19 +233,26 @@ SPAGHETTI:
                 murmur("number of candidates: %d", [(NSString*)v length]);
                 if ([(NSString*)v length] > 1)
                 {
+                    char bbb[256];
+                    sprintf (bbb, " (%d candidates)    ", [v length]);
+
                     candi=1;
                     clearkeyseq();
                     candistr=[[NSString alloc]initWithString: v];
                     if (!candistr) murmur("copy candistr err!");
+                    textbar->clear()->append((char*)[v UTF8String])->append(bbb)->
+                        update();
                     textbar->show();
-                    textbar->clear()->append((char*)[v UTF8String]);
-                    textbar->update();
+
                     buf->clear()->append((char*)"？")->update(ovLangTradChinese);
                     return 1;
                 }
             
                 murmur("result=%s", [v UTF8String]);
-                buf->clear()->append((char*)[v UTF8String])->send(ovLangTradChinese);
+                buf->clear()->append((char*)[v UTF8String])->
+                    send(ovLangTradChinese);
+                
+                
 //              buf->clear();
                 clearkeyseq();
             }

@@ -29,8 +29,8 @@ const int cimIBMaxLen=1024;
 class CIMInputBuffer
 {
 public:
-    CIMInputBuffer() { instance=0; clear(); }
-    void clear() { len=lastupdate=0; }
+    CIMInputBuffer() { instance=0; lastupdate=0; clear(); }
+    void clear() { len=0; }
     void deletechar(); 
     
     int length();   // returns actual Unicode (UTF-32) chars, not UTF-16 chars

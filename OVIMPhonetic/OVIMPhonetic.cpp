@@ -1,5 +1,7 @@
 // OVIMPhone.cpp
 
+#define OVDEBUG
+
 #include <stdio.h>
 #include <string.h>
 #include "OpenVanilla/OpenVanilla.h"
@@ -446,7 +448,8 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 
 	if (vimCurrentSymbol)
 	{
-        buf->clear()->append(symbolstr, ovEncodingUTF16BE, ssl)->update();
+	   fprintf (stderr, "sending\n");
+        buf->clear()->append(symbolstr, ovEncodingUTF16BE, ssl)->update(ovLangTradChinese);
 	}
 	else
 	{

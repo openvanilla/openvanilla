@@ -57,7 +57,7 @@ protected:
             case ovLangJapanese: return smJapanese;
             case ovLangKorean: return smKorean;
         }
-        return smUnicodeScript;
+        return smRoman;
     }
     
     LangCode lookuplang(OVLanguage lang)
