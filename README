@@ -2,6 +2,12 @@
 Directory Hierarchy description
 
 - Header/    - Platform-independent header files
+  - OSX/     - OSX-dependent header files
+  - Win32/   - Win32-dependent header files
+
 - Source/    - Platform-independent source code
+  - OSX/     - OSX-dependent source code
+  - Win32/   - Win32-dependent source code
+
 - build/     - Object files goes here, not under version control
 
