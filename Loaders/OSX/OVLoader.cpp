@@ -256,10 +256,8 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
 
     if (c->bar.onScreen()) {
         c->onScreen=1;
-        if (floatingwindowlock) {
-            c->bar.unlock();
-            c->bar.hide();		
-        }
+        if (floatingwindowlock) c->bar.unlock();
+        c->bar.hide();		
     }
 
     if (floatingwindowlock) {
