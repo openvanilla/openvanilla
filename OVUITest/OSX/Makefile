@@ -1,4 +1,5 @@
-OVDEBUG=1
+OVDEUBG=1
+CFLAGS=-I../../Loaders/OSX -I../../Headers/OSX
 
 test: Textbar
 	./Textbar < TextbarTests.txt
@@ -10,10 +11,10 @@ clean:
 	rm -f Textbar *.o
 
 VXTextBar.o: ../../Loaders/OSX/VXTextBar.cpp
-	g++ -o $@ -c -I ../../Headers/OSX -I ../../Loaders/OSX -I ../.. $<
+	g++ -o $@ -c $(CFLAGS) $<
 
 VXUtility.o: ../../Source/OSX/VXUtility.cpp
-	g++ -o $@ -c -I ../../Headers/OSX -I ../.. $<
+	g++ -o $@ -c $(CFLAGS) $<
 
 %.o: %.cpp
-	g++ -c -I ../../OSX -I ../.. $<
+	g++ -c $(CFLAGS) $<

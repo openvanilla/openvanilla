@@ -1,8 +1,8 @@
 
 #define OVDEBUG 1
 
-#include <OpenVanilla/OpenVanilla.h>
-#include <OpenVanilla/OVUtility.h>
+#include "OpenVanilla/OpenVanilla.h"
+#include "OpenVanilla/OVUtility.h"
 #include "../../Loaders/OSX/VXTextBar.h"
 
 #include <string.h>
