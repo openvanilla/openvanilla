@@ -165,6 +165,7 @@ OVIMContext *OVIMXcin::newContext()
 
 int OVXcinContext::deactivate(OVService *)
 {
+    candi.cancel();
     keyseq.clear();
     return 1;
 }
