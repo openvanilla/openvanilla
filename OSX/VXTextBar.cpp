@@ -145,23 +145,22 @@ void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString)
 {
   ATSUStyle      Style;
   ATSUTextLayout Layout;
-  Fixed          fontSize;
+  Fixed          fontSize = IntToFixed(fontsize * 8 / 5);
 
-  ATSUAttributeTag      theTag;
-  ATSUAttributeValuePtr theValue;
-  ByteCount             theSize;
+#define ATTRS 1
+  ATSUAttributeTag      Tags[ATTRS];
+  ATSUAttributeValuePtr Values[ATTRS];
+  ByteCount             Sizes[ATTRS];
+#undef ATTRS
 
   murmur("VXTBSetRect: Initializing.");
 
-  theTag   = kATSUSizeTag;
-
-  // fontsize * 3/2 , because the unit here seems to be px, not pt.
-  fontSize = IntToFixed(fontsize * 8/5 );
-  theValue = &fontSize;
-  theSize  = (ByteCount) sizeof(Fixed);
+  Tags[0]   = kATSUSizeTag;
+  Sizes[0]  = (ByteCount) sizeof(Fixed);
+  Values[0] = &fontSize;
 
   ATSUCreateStyle(&Style);
-  ATSUSetAttributes(Style,1,&theTag,&theSize,&theValue);
+  ATSUSetAttributes(Style,1,Tags,Sizes,Values);
 
   UniChar*     Text;
   UniCharCount TextLength = CFStringGetLength(inString);
