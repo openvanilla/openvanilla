@@ -50,7 +50,7 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.2/OVLoader.plist";
 	[prefPhoneticLayout selectItemAtIndex: phonetic->getIntDefault("keyboardLayout", 0)];
 	[prefChewingLayout selectItemAtIndex: chewing->getIntDefault("keyboardLayout", 0)];
 	[prefPOJLayout selectItemAtIndex: poj->getIntDefault("keyboardLayout", 0)];
-	[prefPOJAsciiOutput setState: poj->getIntDefault("ASCIIOutput", 1)];
+	[prefPOJAsciiOutput setState: poj->getIntDefault("ASCIIOutput", 0)];
 	[prefFontSizeSlider setIntValue: loader->getIntDefault("textSize", 20)];
 	[prefFontSizeText setIntValue: loader->getIntDefault("textSize", 20)];
 }
