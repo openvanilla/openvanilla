@@ -8,7 +8,7 @@ cd InputMethod ; make ; sudo make install; cd ..
 
 cd InputMethod/OVIMXcin ; make -f Makefile.AddPlist ; sudo ./AddPlist ; cd ../..
 
-cd Experiments/OVPrefPane ; make ; sudo make install ; cd ../..
+cd /Utilities/OSX/OVPrefPane ; make ; sudo make install ; cd ../../..
 
 cd Documents ; sudo make install ; cd ..
 
