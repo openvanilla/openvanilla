@@ -31,6 +31,7 @@ class CIMInputBuffer
 public:
     CIMInputBuffer() { instance=0; lastupdate=0; clear(); }
     void clear() { len=0; }
+    void clearLastUpdate() { lastupdate=0; }  // to fix a mysterious bug
     void deletechar(); 
     
     int length();   // returns actual Unicode (UTF-32) chars, not UTF-16 chars

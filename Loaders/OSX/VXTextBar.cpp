@@ -1,9 +1,10 @@
 // VXTextBar.cpp
 
+#define OVDEBUG
+
+
 #include "VXTextBar.h"
 #include "VXUtility.h"
-
-#define OVDEBUG
 
 void VXTBSetRect(Rect *r, int fontsize, int textlen);
 void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString);
@@ -241,69 +242,6 @@ OVTextBar* VXTextBar::update()
     return this;
 }
 
-#define IntToFixed(a)	   ((Fixed)(a) << 16)
-
-void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString)
-{
-  ATSUStyle      Style;
-  ATSUTextLayout Layout;
-  Fixed          fontSize = IntToFixed(fontsize * 8 / 5);
-
-#define ATTRS 1
-  ATSUAttributeTag      Tags[ATTRS];
-  ATSUAttributeValuePtr Values[ATTRS];
-  ByteCount             Sizes[ATTRS];
-#undef ATTRS
-
-  murmur("VXTBSetRect: Initializing.");
-
-  Tags[0]   = kATSUSizeTag;
-  Sizes[0]  = (ByteCount) sizeof(Fixed);
-  Values[0] = &fontSize;
-
-  ATSUCreateStyle(&Style);
-  ATSUSetAttributes(Style,1,Tags,Sizes,Values);
-
-  UniChar*     Text;
-  UniCharCount TextLength = CFStringGetLength(inString);
-
-  Text = (UniChar*) malloc (TextLength * sizeof(UniChar));
-  CFStringGetCharacters(inString,CFRangeMake(0,TextLength) ,Text);
-
-  murmur("VXTBSetRect: Create text layout. TextLength = %d",(int)TextLength);
-
-  ATSUStyle Styles[1];        Styles[0]     = Style;
-  UniCharCount runLengths[1]; runLengths[0] = TextLength;
-
-  ATSUCreateTextLayoutWithTextPtr(Text,
-		  0,
-		  TextLength,
-		  TextLength,
-		  1,
-		  runLengths,
-		  Styles,
-		  &Layout);
-
-  murmur("VXTBSetRect: measure the Size.");
-
-  Rect r2;
-  ATSUMeasureTextImage(Layout,0,TextLength,
-	kATSUUseGrafPortPenLoc,kATSUUseGrafPortPenLoc,&r2);
-
-  murmur("VXTBSetRect: Measured: top = %d, left = %d, bottom = %d, right = %d",r2.top,r2.left, r2.bottom, r2.right);
-
-//  SetRect(r, 0,0, r2.right - r2.left, r2.bottom - r2.top );
-
-  SetRect(r, 0,0, r2.right - r2.left + 50, r2.bottom - r2.top );
-
-
-  murmur("VXTBSetRect: done, dispose all objects");
-
-  free(Text);
-  ATSUDisposeStyle(Style);
-  ATSUDisposeTextLayout(Layout);
-}
-
 void VXTBSetRect(Rect *r, int fontsize, int textlen)
 {
     int w=textlen*fontsize;
@@ -341,5 +279,84 @@ void VXTBFixPosition(Point *p, int width, int height)
 	if (p->v < avail.top+GetMBarHeight()) p->v=avail.top+GetMBarHeight();
 	if (p->h < avail.left) p->h=avail.left+widthfixer;
 }
+
+#define IntToFixed(a)	   ((Fixed)(a) << 16)
+
+void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString)
+{    
+  ATSUStyle      Style;
+  ATSUTextLayout Layout;
+//  Fixed          fontSize = IntToFixed(fontsize * 8 / 5);
+
+  Fixed          fontSize = IntToFixed(fontsize);
+
+#define ATTRS 1
+  ATSUAttributeTag      Tags[ATTRS];
+  ATSUAttributeValuePtr Values[ATTRS];
+  ByteCount             Sizes[ATTRS];
+#undef ATTRS
+
+  murmur("VXTBSetRect: Initializing.");
+
+  Tags[0]   = kATSUSizeTag;
+  Sizes[0]  = (ByteCount) sizeof(Fixed);
+  Values[0] = &fontSize;
+
+  ATSUCreateStyle(&Style);
+  ATSUSetAttributes(Style,1,Tags,Sizes,Values);
+
+  UniChar *Text, *RawText;
+  UniCharCount RawLength = CFStringGetLength(inString);
+  UniCharCount TextLength = 0;
+  UniCharCount NonRomanCount=0;
+  
+  murmur("VXTBSetRect: Create text layout. TextLength = %d",(int)RawLength);
+  RawText = (UniChar*) malloc (RawLength * sizeof(UniChar));
+  Text = (UniChar*) malloc (RawLength * sizeof(UniChar));
+  CFStringGetCharacters(inString,CFRangeMake(0,RawLength) ,RawText);
+
+  for (UniCharCount i=0; i<RawLength; i++) {
+    UniChar c=RawText[i];
+    if (c < 0x80) {
+        Text[TextLength++]=c;
+    }
+    else NonRomanCount++;
+  }
+
+  ATSUStyle Styles[1];        Styles[0]     = Style;
+  UniCharCount runLengths[1]; runLengths[0] = TextLength;
+
+  ATSUCreateTextLayoutWithTextPtr(Text,
+		  0,
+		  TextLength,
+		  TextLength,
+		  1,
+		  runLengths,
+		  Styles,
+		  &Layout);
+
+  murmur("VXTBSetRect: measure the Size.");
+
+  Rect r2;
+  ATSUMeasureTextImage(Layout,0,TextLength,
+	kATSUUseGrafPortPenLoc,kATSUUseGrafPortPenLoc,&r2);
+
+  murmur("VXTBSetRect: Measured: top = %d, left = %d, bottom = %d, right = %d",r2.top,r2.left, r2.bottom, r2.right);
+
+//  SetRect(r, 0,0, r2.right - r2.left, r2.bottom - r2.top );
+
+  murmur("RawLength=%d, TextLength=%d, NonRomanCount=%d",
+    RawLength, TextLength, NonRomanCount);
+  SetRect(r, 0,0, r2.right-r2.left+NonRomanCount*fontsize+7, fontsize+5);
+
+
+  murmur("VXTBSetRect: done, dispose all objects");
+
+  free(RawText);
+  free(Text);
+  ATSUDisposeStyle(Style);
+  ATSUDisposeTextLayout(Layout);
+}
+
 
 

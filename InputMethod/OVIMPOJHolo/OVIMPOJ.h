@@ -22,6 +22,7 @@ public:
     OVIMPOJContext(OVIMPOJ *p, VXCIN *ctab);
     ~OVIMPOJContext();
     
+    virtual int deactivate(OVService *srv);
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar, 
         OVService *srv);
     

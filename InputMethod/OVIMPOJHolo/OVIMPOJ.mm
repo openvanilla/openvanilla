@@ -81,6 +81,13 @@ OVIMPOJContext::~OVIMPOJContext()
     [list release];
 }
     
+int OVIMPOJContext::deactivate(OVService *srv)
+{
+    candi.cancel();
+    seq.clear();
+    return 1;
+}
+
 int OVIMPOJContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
 OVService *srv) 
 {

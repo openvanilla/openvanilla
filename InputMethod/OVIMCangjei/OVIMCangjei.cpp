@@ -42,6 +42,13 @@ public:
 		vimInputMethodSimplex=simplex;
 	}
 
+    virtual int deactivate(OVService *srv)
+    {
+        vimCJString.Clean();
+        vimCandidateWindow=0;
+        return 1;
+    }
+    
 	virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
 		OVService *srv);
 

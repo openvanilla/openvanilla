@@ -80,6 +80,13 @@ OVIMPOJHakkaContext::~OVIMPOJHakkaContext()
     [list release];
 }
     
+int OVIMPOJHakkaContext::deactivate(OVService *srv)
+{
+    candi.cancel();
+    seq.clear();
+    return 1;
+}
+
 int OVIMPOJHakkaContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
 OVService *srv) 
 {

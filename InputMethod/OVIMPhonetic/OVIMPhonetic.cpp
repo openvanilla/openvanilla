@@ -65,6 +65,17 @@ public:
         return 1;
     }
     
+    virtual int clear()
+    {
+        murmur("OVIMPhonetic: clear buffer\n");
+        
+        // textbar will be forced to close anyway, so we can just set them
+        // to 0 without extra worries
+        vimPunctuationWindow=vimCandidateWindow=0;
+        vimCurrentSymbol=0;
+        return 1;
+    }
+    
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         OVService *srv);
 

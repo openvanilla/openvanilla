@@ -137,8 +137,9 @@ int OVIMXcin::update(OVDictionary* global, OVDictionary* local)
     const char *hitMax="hitMaxAndCompose";
     const char *sendSpaceWhenAutoCompose="sendSpaceWhenAutoCompose";
 
+    // this is now hard-written for Array
     if (!global->keyExist(warningBeep)) global->setInt(warningBeep, 1);
-    if (!local->keyExist(maxSeqLen)) local->setInt(maxSeqLen, 5);
+    if (!local->keyExist(maxSeqLen)) local->setInt(maxSeqLen, 4);
     if (!local->keyExist(autoCompose)) local->setInt(autoCompose, 1);
     if (!local->keyExist(hitMax)) local->setInt(hitMax, 0);
 	if (!local->keyExist(sendSpaceWhenAutoCompose))
@@ -167,6 +168,11 @@ OVIMContext *OVIMXcin::newContext()
 int OVXcinContext::deactivate(OVService *)
 {
     candi.cancel();
+    return 1;
+}
+
+int OVXcinContext::clear()
+{
     keyseq.clear();
     return 1;
 }
@@ -347,7 +353,20 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
                 autocomposing=1;
                 compose(buf, textbar, srv);
             }
-            else if (candi.onDuty()) cancelAutoCompose(textbar);
+            else
+            {
+                // invalid combination is ignored (ticket #6504)
+
+                srv->beep();
+                
+                if (keyseq.length()==1)
+                {
+                    if (candi.onDuty()) cancelAutoCompose(textbar);
+                }
+                        
+                keyseq.remove();
+                updateDisplay(buf);
+            }
         }
         
         return 1;

@@ -6,9 +6,6 @@
 #include "CIM.h"
 #include "CIMconst.h"
 
-#include "VXUtility.h"
-#define OVDEBUG
-
 const short cimMenu_Pencil=cimBaseResourceID+1;
 
 CIMSessionHandle cimActiveSession;
@@ -168,7 +165,7 @@ ComponentResult CIMSessionDeactivate(CIMSessionHandle hndl)
 				return invalidHandler;
 	#endif
 	
-    return noErr;
+	return CIMSessionFix(hndl);
 }
 
 ComponentResult CIMSessionHidePalettes(CIMSessionHandle hndl)
@@ -211,11 +208,9 @@ ComponentResult CIMSessionEvent(CIMSessionHandle hndl, EventRef evnt)
 
 ComponentResult CIMSessionFix(CIMSessionHandle hndl)
 {
-	#ifdef CIMCUSTOM
-	CIMCustomDeactivate((*hndl)->data, (*hndl)->buffer->bind((*hndl)->instance));
-	#endif
-	murmur("Fixing session");
-    return (*hndl)->buffer->bind((*hndl)->instance)->send();
+    (*hndl)->buffer->bind((*hndl)->instance)->send();
+    (*hndl)->buffer->clearLastUpdate();    
+    return noErr;
 }
 
 
