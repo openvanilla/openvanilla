@@ -104,23 +104,23 @@ int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 						 string mapName)
 {
 	bool doGet = false;
-	string pattern = "begin";	
+	string sectionMark = "begin";
 	for(int i = 0; i < inStringVectorRef.size(); i++)
 	{
 		string currentString = inStringVectorRef[i];
 		int foundIndex = currentString.find("%" + mapName, 0);		
 		if(!doGet) {
 			if(foundIndex == 0) {
-				int foundBegin = currentString.find(pattern, foundIndex);
-				if(foundBegin > -1) {					
+				int foundBegin = currentString.find(sectionMark, foundIndex);
+				if(foundBegin > -1) {	// ready to read name-value pairs
 					doGet = true;
-					pattern = "end";
+					sectionMark = "end";
 				}
 			}
 		} else {
 			if(foundIndex == 0) {
-				int foundEnd = currentString.find(pattern, foundIndex);
-				if(foundEnd)
+				int foundEnd = currentString.find(sectionMark, foundIndex);
+				if(foundEnd > -1)	// stop reading pairs
 					break;
 			} else {
 				vector<string> pairVector;
@@ -132,7 +132,8 @@ int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 					if(outMapRef.find(pairVector[0]) == outMapRef.end()) {
 						vector<string> currentVector;
 						currentVector.push_back(pairVector[1]);
-						outMapRef.insert(make_pair(pairVector[0], currentVector));
+						outMapRef.insert(make_pair(pairVector[0],
+												   currentVector));
 					} else
 						outMapRef[pairVector[0]].push_back(pairVector[1]);
 				}
@@ -153,33 +154,33 @@ int main(int argc, char**argv)
 	cout << "endkey:\t" << ovcin.getEndKey() << endl;
 	
 	char keyChar;
-	cout << "is end key?\t";
+	cout << "Is an end key or not:";
 	cin >> keyChar;
 	if(ovcin.isEndKey(keyChar))
-		cout << "Yes" << endl;
+		cout << "Yes." << endl;
 	else
-		cout << "No" << endl;
+		cout << "No." << endl;
 		
 	string inKey;
-	cout << "key:";
+	cout << "Get character(s) by a keystroke:";
 	cin >> inKey;
 	vector<string> charVector;
 	int charVectorSize = ovcin.getCharVectorByKey(inKey, charVector);
 	if(charVectorSize > 0)
 		for(int i = 0; i < charVectorSize; i++)
-			cout << "keyMap[\"" + inKey + "\"] = " << charVector[i] << endl;
+			cout << inKey << "->" << charVector[i] << endl;
 	else
 		cout << "Not found." << endl;
 	inKey.clear();
 
 	string inChar;
-	cout << "char:";
+	cout << "Get word(s) by a character:";
 	cin >> inChar;
 	vector<string> wordVector;
 	int wordVectorSize = ovcin.getWordVectorByChar(inChar, wordVector);
 	if(wordVectorSize > 0)
 		for(int j = 0; j < wordVectorSize; j++)
-			cout << "charMap[\"" + inChar + "\"] = " << wordVector[j] << endl;
+			cout << inChar << "->" << wordVector[j] << endl;
 	else
 		cout << "Not found." << endl;
 	inChar.clear();
