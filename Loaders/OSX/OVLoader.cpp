@@ -35,7 +35,7 @@ const int vxMaxContext = 256;
 const char *plistfile  = "/Library/OpenVanilla/Development/OVLoader.plist";
 const char *loaddir    = "/Library/OpenVanilla/Development/";
 
-int floatingwindowlock=0, defposx, defposy, textsize=24;
+int floatingwindowlock=0, defposx, defposy, textsize=24, conversionfilter=0;
 int listloaded=0;
 UInt32 usermenu='USRM';
 
@@ -126,10 +126,13 @@ void SetupGlobalConfig(OVDictionary *global) {
     }
     if(!global->keyExist("textSize"))
         global->setInt("textSize", 24);
+	if (!global->keyExist("useHanConversionFilter"))
+		global->setInt("useHanConversionFilter", 0);
     floatingwindowlock = global->getInt("floatingWindowLock");
     textsize = global->getInt("textSize");
     defposx  = global->getInt("floatingWindowLockPosX");
     defposy  = global->getInt("floatingWindowLockPosY");	
+	conversionfilter=global->getInt("useHanConversionFilter");
 }
 
 void SwitchToCurrentInputMethod(MenuRef mnu,OVDictionary *global) {
@@ -222,6 +225,7 @@ int RefreshConfig() {
         floatingwindowlock=global->getInt("floatingWindowLock");
         defposx=global->getInt("floatingWindowLockPosX");
         defposy=global->getInt("floatingWindowLockPosY");
+		conversionfilter=global->getInt("useHanConversionFilter");
         
         inputmethod->update(global, local);
 
@@ -321,6 +325,7 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf,
     VXBuffer vxb;
     VXKeyCode key;
 
+	vxb.setConversionFilter(conversionfilter);
     vxb.bind(buf);
     key.set(charcode, keycode, modifiers);
 

@@ -6,18 +6,42 @@
 #include <Carbon/Carbon.h>
 #include <OpenVanilla/OpenVanilla.h>
 #include "VXUtility.h"
+#include "VXHanConvert.h"
+
+class VXCIMBufferFilter : public CIMInputBuffer
+{
+public:
+	void tradChineseToSimpChinese()
+	{
+		for (int i=0; i<len; i++)
+		{
+			unsigned short c=VXUCS2TradToSimpChinese(buffer[i]);
+			if (c) buffer[i]=c;
+		}
+	}
+};
+
 
 class VXBuffer : public OVBuffer
 {
 public:
-    VXBuffer() : cimbuf(NULL) {}
+    VXBuffer() : cimbuf(NULL), conversionfilter(0) {}
     
+	virtual void setConversionFilter(int f) { conversionfilter=f; }
+	
     virtual OVBuffer* clear()
         { if (cimbuf) cimbuf->clear(); return this; }
     virtual OVBuffer* send(OVLanguage lang=ovLangAll)
     { 
         if (cimbuf) 
         {
+			if (conversionfilter==1)
+			{
+				// we use a C++ hack here
+				VXCIMBufferFilter *f=(VXCIMBufferFilter*)cimbuf;
+				f->tradChineseToSimpChinese();
+			}
+			
             cimbuf->update(TRUE, -1, -1, -1, lookupscript(lang), 
                 lookuplang(lang)); 
             cimbuf->clear();
@@ -46,6 +70,8 @@ public:
         { cimbuf=buf; }
     
 protected:
+	int conversionfilter;
+
     CIMInputBuffer *cimbuf;
     
     ScriptCode lookupscript(OVLanguage lang)
