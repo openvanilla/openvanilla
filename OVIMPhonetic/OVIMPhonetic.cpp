@@ -134,8 +134,8 @@ public:
 
 
 // use these two wrappers
-OVLOADABLEWRAPPER(OVPhoneIM)
-OVLOADABLECANUNLOAD
+OVLOADABLEWRAPPER(OVPhoneIM);
+OVLOADABLECANUNLOAD;
 
 
 int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar 
@@ -305,7 +305,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 		if (inCharCode==0x3 || inCharCode==0xd || inCharCode==0x20 || inCharCode==0x8 || inCharCode==0x7f
 		    || inCharCode < 0x20)
 		{
-            buf->send();
+//            buf->send();
 			return 0;		// so it means an EMPTY ENTER/SPACE/DELETE...
 		}
 
@@ -421,6 +421,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 	VPUTF16 symbolstr[16];
 	int ssl=VPSymbolStringUTF16(vimCurrentSymbol, symbolstr);
 
+    fprintf (stderr, "ssl=%d\n", ssl);
 	// if still no data, must be a unrecognizable key (e.g. "5" in Eten layout)
 
 	if (vimCurrentSymbol)
@@ -429,10 +430,12 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 	}
 	else
 	{
-	    char charbuf[2];
+	   fprintf (stderr, "unrecognizable key\n");
+	   return 0;
+/*	    char charbuf[2];
 	    charbuf[1]=0;
 	    charbuf[0]=inCharCode;
-	    buf->append(charbuf)->send();
+	    buf->append(charbuf)->send(); */
 	}
 	
 	return 1;

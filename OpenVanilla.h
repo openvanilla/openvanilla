@@ -44,7 +44,8 @@ enum
 enum
 {
     ovException=0,
-    ovMemoryException=1
+    ovExceptionMemory=1,
+    ovExceptionBuffer=2
 };
 
 class OVTextBar : public OVObject
