@@ -211,6 +211,10 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     if (candi.onDuty())
     {
         if (!autocomposing) return candidateEvent(key, buf, textbar, srv);
+
+		if (key->isCode(4, ovkDown, ovkLeft, ovkUp, ovkRight) ||
+			(!candi.onePage() && key->code()==ovkSpace))
+			return candidateEvent(key, buf, textbar, srv);
         
 		string output;
         if (candi.select(key->code(), output))
@@ -407,14 +411,14 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
         return 1;
     }
 
-    if (key->isCode(2, ovkDown, ovkLeft) ||
+    if (key->isCode(2, ovkDown, ovkRight) ||
         (!candi.onePage() && key->code()==ovkSpace))
     {
         candi.pageDown()->update(textbar);
         return 1;
     }
 
-    if (key->isCode(2, ovkUp, ovkRight))
+    if (key->isCode(2, ovkUp, ovkLeft))
     {
         candi.pageUp()->update(textbar);
         return 1;
