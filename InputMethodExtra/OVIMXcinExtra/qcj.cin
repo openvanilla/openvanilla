@@ -9,7 +9,7 @@
 #	http://www.info.gov.hk/digital21/chi/hkscs/index.html
 #
 %gen_inp
-%ename QuickCJ
+%ename Quick-Changjei
 %cname 順序速成
 %encoding UTF-8
 %selkey 1234567890
