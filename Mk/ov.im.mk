@@ -1,25 +1,14 @@
-CFLAGS=-O2 -Wall
 
-GCC=/usr/bin/gcc
-GPP=/usr/bin/g++
+all: build
 
-CCACHE=/usr/local/bin/ccache
+build: $(GOALS)
 
-ifdef USE_CCACHE
-CC=$(CCACHE) $(GCC)
-CPP=$(CCACHE) $(GPP)
-else
-CC=$(GCC)
-CPP=$(GPP)
-endif
+install:
+	$(MKDIR) $(INST_PATH)
+	$(CP) $(GOALS) $(INST_PATH)
+	$(CP) *.cin $(INST_PATH)
 
-VXUtility.o: ../../Loaders/OSX/VXUtility.cpp
-	$(CPP) $(CFLAGS) -c $<
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $<
-
-%.o: %.mm
-	$(CPP) $(CFLAGS) -c -I../../Source/OSX/ -I../../Loaders/OSX $<
+clean:
+	$(RM) $(GOALS) $(OBJS)
 
 

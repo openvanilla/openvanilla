@@ -1,17 +1,16 @@
 OBJS=AddPlist.o VXUtility.o
 GOALS=AddPlist
-INST_PATH=/Library/OpenVanilla/Development
 
 all: $(GOALS)
 
 $(GOALS): $(OBJS)
-	g++ -framework Carbon -o $@ $(OBJS)
-
-VXUtility.o: ../../Loaders/OSX/VXUtility.cpp
-	gcc -o VXUtility.o -c $<
+	$(CPP) -framework Cocoa -o $@ $(OBJS)
 
 clean:
-	rm $(GOALS)
+	$(RM) $(GOALS)
 
-%.o: %.cpp
-	gcc -O2 -c $<
+include ../../Mk/ov.osx.mk
+include ../../Mk/ov.vars.mk
+include ../../Mk/ov.general.mk
+
+
