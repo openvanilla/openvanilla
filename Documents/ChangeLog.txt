@@ -3,7 +3,15 @@ http://openvanilla.org/
 
 版本沿革
 
-0.6.2
+== 0.6.3 ==
+
+* 新增藏文輸入法。使用的是 Sambhota 藏文鍵盤，關於 Sambhota 鍵盤的完整說明請參見
+ http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf
+* 新增Unicode輸入法
+* 修正Xcin模組的標點符號問題
+
+== 0.6.2 ==
+Dec 24, 2004
 
 * 新增英數輸入法，可以在配合全形英數字狀態下，快速輸入全形英數以及標點符號。
 * 解決Xcin模組下各種輸入法（如繁體漢語拼音輸入法）在處理標點符號的相關問題。
