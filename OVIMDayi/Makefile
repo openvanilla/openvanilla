@@ -1,19 +1,19 @@
 
-all: OVDayi.dylib
+all: OVIMDayi.dylib
 
-OVDayi.dylib: OVDayi.o
+OVIMDayi.dylib: OVIMDayi.o
 	g++ -framework Cocoa -o $@ -bundle $<
 
-install: OVDayi.dylib
-	cp OVDayi.dylib /Library/OpenVanilla/Development/
+install: OVIMDayi.dylib
+	cp OVIMDayi.dylib /Library/OpenVanilla/Development/
 	cp dayi3.cin /Library/OpenVanilla/Development/
-	echo "# This loads OVDayi.dylib" > /Library/OpenVanilla/Development/OVXSimpleLoader.config
-	echo "/Library/OpenVanilla/Development/OVDayi.dylib" >> /Library/OpenVanilla/Development/OVXSimpleLoader.config
+	echo "# This loads OVIMDayi.dylib" > /Library/OpenVanilla/Development/OVXSimpleLoader.config
+	echo "/Library/OpenVanilla/Development/OVIMDayi.dylib" >> /Library/OpenVanilla/Development/OVXSimpleLoader.config
 
 clean:
 	rm *.o
 	rm *.dylib
-	rm /Library/OpenVanilla/Development/OVDayi.dylib
+	rm /Library/OpenVanilla/Development/OVIMDayi.dylib
 	rm /Library/OpenVanilla/Development/OVXSimpleLoader.config
 
 %.o: %.cpp
