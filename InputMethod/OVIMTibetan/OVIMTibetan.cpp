@@ -10,6 +10,7 @@ http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf for 
 
 class OVIMTibetan;
 int keyboardlayout = 0;
+char *imlocale;
 
 short isSymbolKey(int key)
 {
@@ -156,7 +157,7 @@ public:
 					keyseq.clear();
 					keyseq.lastisother();
 					keyseq.add(key->code());
-					textbar->clear()->append((char *)"Composing...")->show();
+					textbar->clear()->append((char *)"Stacking...")->show();
 				}
 				return 1;   // key processed
 			}
@@ -246,12 +247,13 @@ public:
     virtual int name(char *locale, void *s, OVEncoding *enc)
     {
         *enc=ovEncodingUTF8;
+		imlocale = locale;
         if (!strcasecmp(locale, "zh_TW"))
             return strlen(strcpy((char*)s, "OV 藏文"));
         else if (!strcasecmp(locale, "zh_CN"))
             return strlen(strcpy((char*)s, "OV 藏文"));
         else
-            return strlen(strcpy((char*)s, "OV Tibetan IM"));
+            return strlen(strcpy((char*)s, "OV Tibetan"));
     }
 
     virtual int initialize(OVDictionary* g, OVDictionary* l, OVService*, char*)
