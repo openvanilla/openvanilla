@@ -41,26 +41,26 @@ public:
     OVPHPContext(OVIMPHP *p)
     {
         parent=p;
-        fprintf (stderr, "New IM context created\n");
     }
     
-    virtual ~OVPHPContext()
-    {
-        fprintf (stderr, "IM context destroyed\n");
-    }
+    virtual ~OVPHPContext(){}
     
     virtual int activate(OVService *)
     {
-        fprintf (stderr, "IM context activated\n");
         return 1;
     }
     
     virtual int deactivate(OVService *)
     {
-        fprintf (stderr, "IM context deactivated\n");
         return 1;
     }
-    
+	
+	virtual int clear()
+	{
+		keyseq.clear();
+		return 1;
+	}
+	
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         OVService *srv)
     {			
