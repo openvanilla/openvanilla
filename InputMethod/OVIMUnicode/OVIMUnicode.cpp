@@ -5,7 +5,7 @@
 #include "OpenVanilla/OpenVanilla.h"
 #include "OpenVanilla/OVLoadable.h"
 
-class OVUnicodeIM;
+class OVIMUnicode;
 
 const int ebMaxKeySeq=4;
 class KeySeq
@@ -31,7 +31,7 @@ int len;
 class OVUnicodeContext : public OVIMContext
 {
 public:
-    OVUnicodeContext(OVUnicodeIM *p)
+    OVUnicodeContext(OVIMUnicode *p)
     {
         parent=p;
         fprintf (stderr, "New IM context created\n");
@@ -103,18 +103,18 @@ public:
     }
     
 protected:
-    OVUnicodeIM *parent;
+    OVIMUnicode *parent;
 	KeySeq keyseq;
 };
 
-class OVUnicodeIM : public OVInputMethod
+class OVIMUnicode : public OVInputMethod
 {
 public:
-    OVUnicodeIM(){}
-    virtual ~OVUnicodeIM(){}
+    OVIMUnicode(){}
+    virtual ~OVIMUnicode(){}
     virtual int identifier(char* s)
     {
-        return strlen(strcpy(s, "OVUnicodeIM"));
+        return strlen(strcpy(s, "OVIMUnicode"));
     }
     
     virtual int name(char *locale, void *s, OVEncoding *enc)
@@ -156,5 +156,5 @@ public:
 
 
 // use these two wrappers
-OVLOADABLEWRAPPER(OVUnicodeIM)
+OVLOADABLEWRAPPER(OVIMUnicode)
 OVLOADABLECANUNLOAD
