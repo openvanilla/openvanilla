@@ -452,17 +452,17 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     if ( (output=candi.select(c)) )
     {
         char *s=[output UTF8String];
-/*        if (!strcasecmp(s, "!err")) 
+        if (!strcasecmp(s, "!err")) 
         {
             srv->beep();
         }
-        else */
-//        {
+        else 
+        {
             buf->clear()->append((void*)[output UTF8String])->send();
             candi.cancel();
             textbar->hide()->clear();
             return 1;
-///        }
+        }
     }
     
     if ((output=cintab->getKey(c)))
