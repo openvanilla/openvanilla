@@ -156,7 +156,7 @@ void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString)
   theTag   = kATSUSizeTag;
 
   // fontsize * 3/2 , because the unit here seems to be px, not pt.
-  fontSize = IntToFixed(fontsize * 3/2 );
+  fontSize = IntToFixed(fontsize * 8/5 );
   theValue = &fontSize;
   theSize  = (ByteCount) sizeof(Fixed);
 
