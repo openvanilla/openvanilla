@@ -21,7 +21,7 @@
 	<key>IFPkgFlagRelocatable</key>
 	<false/>
 	<key>IFPkgFlagRestartAction</key>
-	<string>NoRestart</string>
+	<string>REPLACESTARTPARAM</string>
 	<key>IFPkgFlagRootVolumeOnly</key>
 	<true/>
 	<key>IFPkgFlagUpdateInstalledLanguages</key>
