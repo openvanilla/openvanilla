@@ -151,7 +151,8 @@
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			path = VXUtility.cpp;
+			name = VXUtility.cpp;
+			path = ../../Source/Shared/VXUtility.cpp;
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -159,7 +160,8 @@
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			path = VXUtility.h;
+			name = VXUtility.h;
+			path = ../../Headers/VXUtility.h;
 			refType = 2;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -268,6 +270,7 @@
 		6A8BE8C507544DB1002FBA64 = {
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				HEADER_SEARCH_PATHS = ../../Headers;
 			};
 			isa = PBXBuildStyle;
 			name = Development;
@@ -275,6 +278,7 @@
 		6A8BE8C607544DB1002FBA64 = {
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
+				HEADER_SEARCH_PATHS = ../../Headers;
 			};
 			isa = PBXBuildStyle;
 			name = Deployment;
