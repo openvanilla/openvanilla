@@ -191,10 +191,11 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     {
         if (!autocomposing) return candidateEvent(key, buf, textbar, srv);
         
-        if (string* output=candi.select(key->code()))
+		string output;
+        if (candi.select(key->code(), output))
         {
             buf->clear()->
-				append((void*)const_cast<char*>(output->c_str()))->send();
+				append((void*)const_cast<char*>(output.c_str()))->send();
             keyseq.clear();
             cancelAutoCompose(textbar);
             return 1;
@@ -324,8 +325,8 @@ int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar, OVService *srv)
 {
     if (!keyseq.length()) return 0;
 
-	vector<string> array;
-	int size = cintab->getWordVectorByChar(keyseq.getSeq(), array);
+	int size =
+		cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
     
     if (size == 0)
     {
@@ -336,7 +337,8 @@ int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar, OVService *srv)
     if (size ==1 && !autocomposing)
     {
         buf->clear()->
-			append((void*)const_cast<char*>(array[0].c_str()))->send();
+			append((void*)
+				const_cast<char*>(candidateStringVector[0].c_str()))->send();
         keyseq.clear();
         return 1;
     }
@@ -344,11 +346,13 @@ int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar, OVService *srv)
     if (!autocomposing)
     {    
         buf->clear()->
-			append((void*)const_cast<char*>(array[0].c_str()))->update();
+			append((void*)
+				const_cast<char*>(candidateStringVector[0].c_str()))->update();
         keyseq.clear();
     }
-    
-    candi.prepare(&array, const_cast<char*>(cintab->getSelKey().c_str()), textbar);    
+	
+    candi.prepare(&candidateStringVector,
+				  const_cast<char*>(cintab->getSelKey().c_str()), textbar);    
 
     return 1;
 }
@@ -380,14 +384,15 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     // enter == first candidate
     // space (when candidate list has only one page) == first candidate
     char c=key->code();
+	cerr << "before c=" << c << endl;
     if (key->isCode(2, ovkReturn, ovkMacEnter) || 
         (candi.onePage() && key->code()==ovkSpace)) c=cintab->getSelKey()[0];
-    
-    string *output = new string;
-    
-    if ((output=candi.select(c)))
-    {
-        buf->clear()->append((void*)const_cast<char*>(output->c_str()))->send();
+
+	cerr << "after c=" << c << endl;    
+    string output;
+    if (candi.select(c, output)) {
+		cerr << "1.output=" << output.c_str() << endl;
+        buf->clear()->append((void*)const_cast<char*>(output.c_str()))->send();
         candi.cancel();
         textbar->hide()->clear();
         return 1;
@@ -398,13 +403,17 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
 	vector<string> outStringVectorRef;
     if (cintab->getCharVectorByKey(inKey, outStringVectorRef) > 0)
     {
-        buf->clear()->
-			append((void*)const_cast<char*>(candi.select(c)->c_str()))->send();
-        keyseq.add(c);
-        updateDisplay(buf);
-        candi.cancel();
-        textbar->hide()->clear();
-        return 1;
+		string output;
+		if(candi.select(c, output)) {
+			cerr << "2.output=" << output << endl;			
+			buf->clear()->
+				append((void*)const_cast<char*>(output.c_str()))->send();
+			keyseq.add(c);
+			updateDisplay(buf);
+			candi.cancel();
+			textbar->hide()->clear();
+			return 1;
+		}
     }    
 
     if (parent->isBeep()) srv->beep();

@@ -25,7 +25,7 @@ public:
     void update(OVTextBar *textbar);
     OVCandidate* pageUp();
     OVCandidate* pageDown();
-    string* select(char c);
+    bool select(char inKey, string& outStringRef);
     
 protected:
     int onduty;
@@ -33,7 +33,7 @@ protected:
     int count;
     int perpage;
     int pos;
-    vector<string> *list;
+    vector<string>* list;
 };
 
 #endif

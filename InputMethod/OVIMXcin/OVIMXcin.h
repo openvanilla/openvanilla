@@ -9,6 +9,7 @@
 #include "OVKeySequence.h"
 #include "OVCandidate.h"
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -53,6 +54,8 @@ protected:
     OVCIN* cintab;
     
     int autocomposing;
+	
+	vector<string> candidateStringVector;
 };
 
 class OVIMXcin : public OVInputMethod

@@ -3,20 +3,22 @@
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVUtility.h>
 #include "OVCandidate.h"
+#include "OVCIN.h"
+#include <iostream>
 
 using namespace std;
 
 void OVCandidate::prepare(vector<string>* l, char* skey, OVTextBar *textbar)
 {
     onduty=1;
-    list=l;
     strcpy(selkey, skey);
     perpage=strlen(selkey);
     pos=0;
+	list = l;	
     count=list->size();
     
-    murmur ("prepare, selkey=%s, perpage=%d, pos=%d, count=%d",
-        selkey, perpage, pos, count);
+    cerr << "prepare, selkey=" << selkey << ", perpage=" << perpage <<
+		", pos=" << pos << ", count=" << count << endl;
     
     update(textbar);
     textbar->show();
@@ -33,7 +35,8 @@ void OVCandidate::update(OVTextBar *textbar)
     for (int i=pos, j=0; i<bound; i++, j++)
     {
         sprintf (buf, "%c.", selkey[j]);
-        textbar->append(buf)->append((void*)list->at(i).c_str())->
+        textbar->append(buf)->
+			append((void*)const_cast<char*>(list->at(i).c_str()))->
             append((void*)" ");
     }
     
@@ -61,15 +64,21 @@ OVCandidate* OVCandidate::pageDown()
     return this;
 }
 
-string* OVCandidate::select(char c)
+bool OVCandidate::select(char inKey, string& outStringRef)
 {
     int i;
     for (i=0; i<perpage; i++)
-        if (selkey[i]==c && (pos+i < count))
-        {
+	{
+        if (selkey[i]==inKey && (pos+i < count)) {
             onduty=0;
-            return &(list->at(pos+i));
+			cerr << "list address=" << list << endl;
+			cerr << "pos=" << pos << endl;
+			cerr << "i=" << i << endl;
+			cerr << "list->size()=" << list->size() << endl;
+            outStringRef = list->at(pos+i);
+			return true;
         }
-        
-    return NULL;        
+	}
+	
+    return false;
 }
