@@ -1,9 +1,13 @@
 // OVLoader.cpp
 
-#define OVDEBUG		1		// doesn't seem to work, why?
+#define OVDEBUG	
 #include <Carbon/Carbon.h>
 #include <dlfcn.h>
+#include <sys/stat.h>
 #include <sys/syslimits.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <pwd.h>
 #include "CIM.h"
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLoadable.h>
@@ -25,6 +29,8 @@ public:
     CIMContext() : ovcontext(NULL), onScreen(0) { add(); }
     ~CIMContext() { remove(); }
     VXTextBar bar;
+    VXTextBar otsbar;
+    
     OVIMContext *ovcontext;
     int onScreen;
     void add();
@@ -32,8 +38,9 @@ public:
 };
 
 const int vxMaxContext = 256;
-const char *plistfile  = "/Library/OpenVanilla/Development/OVLoader.plist";
-const char *loaddir    = "/Library/OpenVanilla/Development/";
+const char *defaultplistfile  = "/Library/OpenVanilla/0.6.1/OVLoader.plist";
+char userplistfile[PATH_MAX];
+const char *loaddir    = "/Library/OpenVanilla/0.6.1/";
 
 int floatingwindowlock=0, defposx, defposy, textsize=24, conversionfilter=0, fullwidthfilter=0;
 int listloaded=0;
@@ -179,12 +186,52 @@ void SwitchToCurrentInputMethod(MenuRef mnu,OVDictionary *global) {
     }
 }
 
+void CreateUserConfig()
+{	
+	// first we determine if ~/Library/OpenVanilla/0.6.1/ already exists
+	
+	char *ptr;
+    static char userpref[PATH_MAX];
+    
+    if (!(ptr=getenv("HOME")))
+    {
+        struct passwd *pw = getpwuid(getuid());
+        if (pw == NULL) strcpy(userpref, "/tmp");
+        else strcpy(userpref, pw->pw_dir);
+    }
+    else strcpy(userpref, ptr);
+
+    strcat(userpref, "/Library/OpenVanilla") ;
+    mkdir(userpref, S_IRWXU) ;
+    strcat(userpref, "/0.6.1");
+    mkdir(userpref, S_IRWXU) ;
+
+	strcat(userpref, "/OVLoader.plist");
+    sysconfig=new VXConfig(userpref);
+	
+	struct stat filestat;
+	
+	// if ~/Lib/OV/0.6.1/OVLoader.plist does not exist, copy from default
+	if (!stat(userpref, &filestat))
+	{
+		VXConfig def(defaultplistfile);
+		def.read();
+		VXDictionary *userdict=new VXDictionary(def.getDictionaryRoot()->getDictRef(), 1);
+		sysconfig->changeDictionary(userdict);
+		sysconfig->write();
+	}
+
+	strcpy(userplistfile, userpref);
+	murmur ("OVLoader: user preference file at %s", userplistfile);
+}
+
+
 int CIMCustomInitialize(MenuRef mnu)
 {
     murmur ("OVLoader: initializing");
     OVAUTODELETE;
-    sysconfig=new VXConfig(plistfile);
-
+	
+	CreateUserConfig();
     ClearContextPool();
     LoadEveryDylib();
     int pos = SetupMenuList(mnu);
@@ -328,6 +375,8 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
     CIMContext *c=(CIMContext*)data;    
     if (!c->ovcontext) return 0;
 
+    c->otsbar.hide();
+
     if (c->bar.onScreen()) {
         c->onScreen=1;
         if (floatingwindowlock) c->bar.unlock();
@@ -347,6 +396,8 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf,
     if (!c->ovcontext) return 0;
 
     VXBuffer vxb;
+    c->otsbar.show();
+    
     VXKeyCode key;
 
 	vxb.setConversionFilter(conversionfilter);
@@ -354,12 +405,14 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf,
     vxb.bind(buf);
     key.set(charcode, keycode, modifiers);
 
-    murmur("received keycode=%d, buffer position=(%d,%d)\n",
+    murmur("received keycode=%d, buffer position=(%d,%d)",
            charcode, pnt->h, pnt->v);
         
     // textbar pos.y down 5 pt from cursur pos (pnt->v+5) to prevent
     // masking the "composing underline area"
+//    c->otsbar.setPosition(pnt->h, pnt->v+5);
     c->bar.setPosition(pnt->h, pnt->v+5);     
+    
     if (c->ovcontext->keyEvent(&key, &vxb, &c->bar, &srv)) return 1;
 	 
 	// full-width post filter
@@ -411,8 +464,8 @@ void SwitchMenuItemMark(MenuRef mnu,int oldp, int newp)
 void StartupPreferenceEditor() 
 {
     char sbuf[512];
-    murmur("launching application to edit %s", plistfile);
-    sprintf (sbuf, "open %s", plistfile);
+    murmur("launching application to edit %s", userplistfile);
+    sprintf (sbuf, "open %s", userplistfile);
     system(sbuf);   
 }
 

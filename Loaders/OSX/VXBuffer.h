@@ -149,4 +149,30 @@ protected:
     }
 };
 
+
+// trying
+class OTSBuffer : public VXBuffer
+{
+public:
+    OTSBuffer(OVTextBar *tb) : textbar(tb) {}
+
+    virtual OTSBuffer* clear()
+    {
+        textbar->clear();
+        return VXBuffer::clear();
+    }
+
+    virtual OVBuffer* append (void *s, OVEncoding e=ovEncodingUTF8, int l=0)
+    {
+        textbar->append(s, e, l)->append("@");
+        return VXBuffer::append(s, e, l);
+    }
+
+
+protected:
+    OVTextBar *textbar;
+};
+
+
+
 #endif

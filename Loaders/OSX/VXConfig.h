@@ -30,6 +30,12 @@ public:
         delete dictroot;
     }
     
+    void changeDictionary(VXDictionary *dict)
+    {
+        delete dictroot;
+        dictroot=dict;
+    }
+    
     int changed()
     {
         CLibStat fstat;

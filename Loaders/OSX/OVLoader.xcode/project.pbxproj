@@ -390,6 +390,7 @@
 				OTHER_LDFLAGS = "-framework Carbon";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = OVLoader;
+				REZ_PREPROCESSOR_DEFINITIONS = OVDEBUG;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
 			};

@@ -254,7 +254,11 @@ void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString)
 
   murmur("VXTBSetRect: Measured: top = %d, left = %d, bottom = %d, right = %d",r2.top,r2.left, r2.bottom, r2.right);
 
-  SetRect(r, 0,0, r2.right - r2.left, r2.bottom - r2.top );
+//  SetRect(r, 0,0, r2.right - r2.left, r2.bottom - r2.top );
+
+  SetRect(r, 0,0, r2.right - r2.left + 50, r2.bottom - r2.top );
+
+
   murmur("VXTBSetRect: done, dispose all objects");
 
   free(Text);
