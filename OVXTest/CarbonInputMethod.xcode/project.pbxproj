@@ -5,6 +5,20 @@
 	};
 	objectVersion = 39;
 	objects = {
+		6A02CC6807316B4C0050CE18 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			path = CIMCustomExample.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A02CC6907316B4C0050CE18 = {
+			fileRef = 6A02CC6807316B4C0050CE18;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		6A16B4DD072B863E00B68665 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -15,20 +29,6 @@
 		};
 		6A16B4DE072B863E00B68665 = {
 			fileRef = 6A16B4DD072B863E00B68665;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		6A22FC9A072D4D1C00ED077E = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.objcpp;
-			path = CIMCustomExample.mm;
-			refType = 2;
-			sourceTree = SOURCE_ROOT;
-		};
-		6A22FC9B072D4D1C00ED077E = {
-			fileRef = 6A22FC9A072D4D1C00ED077E;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -183,9 +183,9 @@
 		};
 		6AC4C78107130E970033BDF9 = {
 			children = (
+				6A02CC6807316B4C0050CE18,
 				6A22FCA1072D4D5500ED077E,
 				6A22FC9C072D4D2B00ED077E,
-				6A22FC9A072D4D1C00ED077E,
 				6A16B4DD072B863E00B68665,
 				6A942D5C072ABB05003DEA47,
 				6AC4C79B07130F2D0033BDF9,
@@ -244,8 +244,8 @@
 				6AC4C7A007130F2D0033BDF9,
 				6A942D63072ABB3A003DEA47,
 				6A942D65072ABB3A003DEA47,
-				6A22FC9B072D4D1C00ED077E,
 				6A22FCA2072D4D5500ED077E,
+				6A02CC6907316B4C0050CE18,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

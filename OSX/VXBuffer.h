@@ -14,12 +14,17 @@ public:
     
     virtual OVBuffer* clear()
         { if (cimbuf) cimbuf->clear(); return this; }
-    virtual OVBuffer* send()
-        { if (cimbuf) cimbuf->update(TRUE); return this; }
+    virtual OVBuffer* send(OVLanguage lang)
+    { 
+        if (cimbuf) cimbuf->update(TRUE, -1, -1, -1, 
+            lookupscript(lang), lookuplang(lang)); 
+        return this; 
+    }
     virtual OVBuffer* updatedisplay(int cursorpos=-1, int hilitefrom=-1, 
-        int hiliteto=-1)
+        int hiliteto=-1, OVLanguage lang=ovLangAll)
     {
-        if (cimbuf) cimbuf->update(FALSE, cursorpos, hilitefrom, hiliteto);
+        if (cimbuf) cimbuf->update(FALSE, cursorpos, hilitefrom, hiliteto,
+            lookupscript(lang), lookuplang(lang));
         return this;
     }
     virtual OVBuffer* append (void *s, OVEncoding e=ovEncodingUTF8, int l=0)
@@ -38,6 +43,30 @@ public:
     
 protected:
     CIMInputBuffer *cimbuf;
+    
+    ScriptCode lookupscript(OVLanguage lang)
+    {
+        switch (lang)
+        {
+            case ovLangTradChinese: return smTradChinese;
+            case ovLangSimpChinese: return smSimpChinese;
+            case ovLangJapanese: return smJapanese;
+            case ovLangKorean: return smKorean;
+        }
+        return smUnicodeScript;
+    }
+    
+    LangCode lookuplang(OVLanguage lang)
+    {
+        switch (lang)
+        {
+            case ovLangTradChinese: return langTradChinese;
+            case ovLangSimpChinese: return langSimpChinese;
+            case ovLangJapanese: return langJapanese;
+            case ovLangKorean: return langKorean;
+        }
+        return langEnglish;
+    }
 };
 
 #endif

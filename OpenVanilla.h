@@ -15,6 +15,7 @@ public:
 };
 
 typedef int OVEncoding;
+typedef int OVLanguage;
 
 enum
 {
@@ -26,6 +27,15 @@ enum
     ovEncodingBig5=16,
     ovEncodingBig5HKSCS=16,
     ovEncodingNone8BitEncodingMask=7
+};
+
+enum
+{
+    ovLangAll=0,
+    ovLangTradChinese=1,
+    ovLangSimpChinese=2,
+    ovLangJapanese=3,
+    ovLangKorean=4
 };
 
 class OVTextBar : public OVObject
@@ -48,9 +58,9 @@ class OVBuffer : public OVObject
 {
 public:
     virtual OVBuffer* clear() { return this; }
-    virtual OVBuffer* send() { return this; }
+    virtual OVBuffer* send(OVLanguage lang=ovLangAll) { return this; }
     virtual OVBuffer* updatedisplay(int cursorpos=-1, 
-        int hilitefrom=-1, int hiliteto=-1)
+        int hilitefrom=-1, int hiliteto=-1, OVLanguage lang=ovLangAll)
             { return this; }
     virtual OVBuffer* append (void *s, OVEncoding e=ovEncodingUTF8, int l=0)
         { return this; }
@@ -61,9 +71,17 @@ public:
 class OVDictionary : public OVObject
 {
 public:
-    virtual int getint(char*) { return 0; }
-    virtual int getint(char*, int) { return 0; }
-    virtual int putint(char*, int) { return 0; }
+    virtual int getint(char *key) { return 0; }
+    virtual int getint(char *key, int defvalue) { return 0; }
+    virtual int putint(char *key, int value) { return 0; }
+	
+	virtual int getstring(char *key, void *str, OVEncoding e=ovEncodingUTF8,
+		int maxlen=-1)	{ return 0; }
+	virtual int getstring(char *key, void *str, void *defvalue,
+		OVEncoding e=ovEncodingUTF8, int deflen=-1, int maxlen=-1)
+			{ return 0; }
+	virtual int setstring(char *key, void *value, OVEncoding e=ovEncodingUTF8,
+		int len=-1) { return 0; }
 };
 
 
@@ -105,6 +123,7 @@ class OVIMSession : public OVObject
 public:
     virtual int activate(OVService*) { return 1; }
     virtual int deactivate(OVService*) { return 1; }
+    virtual int clear(OVService*) { return 1; }
 
     virtual int keyevent(OVKeyCode*, OVBuffer*, OVTextBar*, OVService*) 
         { return 0; }
@@ -116,9 +135,9 @@ public:
     virtual int identifier(char* p)
         { *p=0; return 0; }
 
-    virtual int open(OVService*, OVDictionary*, OVDictionary*)
+    virtual int initialize(OVDictionary*, OVDictionary*, OVService*, char*)
         { return 1; }
-    virtual int close(OVService*, OVDictionary*, OVDictionary*)
+    virtual int terminate(OVDictionary*, OVDictionary*, OVService*)
         { return 1; }    
     virtual int update(OVDictionary*, OVDictionary*) { return 1; }
     

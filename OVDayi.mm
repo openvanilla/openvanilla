@@ -16,15 +16,12 @@ extern "C" void _init()
 // for the source code of Darwin's dlopen() and dlclose()
 extern "C" void _fini()
 {
-/*    fprintf (stderr, "closing dylib\n");
+    fprintf (stderr, "closing dylib by _fini\n");
     if (pool) 
     {
         fprintf (stderr, "releasing autorelease pool\n");
-        [pool release];
-    } */
-    FILE *o=fopen("/tmp/fini.log", "w+");
-    fprintf (o, "dylib closed\n");
-    fclose (o);
+//        [pool release];
+    } 
 }
 
 id MakeNSStr(char *s)
@@ -327,16 +324,23 @@ public:
     {
         fprintf (stderr, "new IM instance created\n");
         tab=ReadDayi("/tmp/dayi3.cin");
+
+        fprintf (stderr, "creating new per-instance autorelease pool\n");
+        pool=[[NSAutoreleasePool alloc] init];
+        if (pool) fprintf (stderr, "per-instance autorelease pool creation succeeded\n");
     }
     
     virtual ~OVExampleIM()
     {
         fprintf (stderr, "IM instance destroyed\n");
+        fprintf (stderr, "releasing per-instance autorelease pool\n");
+        [pool release];
     }
     
     OVIMSession *newsession() { return new OVExampleSession(this, &tab); }
     
     DayiTable tab;
+    id pool;
 };
 
 
