@@ -1,8 +1,9 @@
 // OVIMDayi.mm
 
 #include <Cocoa/Cocoa.h>
-#include "OpenVanilla.h"
-#include "OVLoadable.h"
+#include "OpenVanilla/OpenVanilla.h"
+#include "OpenVanilla/OVLoadable.h"
+#include "OpenVanilla/OVUtility.h"
 
 id MakeNSStr(char *s)
 {
@@ -28,7 +29,7 @@ DayiTable ReadDayi(char *fname)
         return tab;
     }
     
-    fprintf (stderr, "reading %s\n", fname);
+    murmur("reading %s", fname);
     
     tab.keytable=[NSMutableDictionary new];
     tab.chartable=[NSMutableDictionary new];
@@ -117,28 +118,28 @@ public:
         keyseqlen=0;
         keyseq[0]=0;
         candi=0;
-        fprintf (stderr, "new im Context instance created\n");
+        murmur("new im Context instance created");
     }
     
     virtual ~OVDayiContext()
     {
-        fprintf (stderr, "im Context instance destroyed\n");
+        murmur("im Context instance destroyed");
     }
     
     virtual int activate(OVService *)
     {
-        fprintf (stderr, "im Context activated\n");
+        murmur("im Context activated");
     }
     
     virtual int deactivate(OVService *)
     {
-        fprintf (stderr, "im Context deactivated\n");
+        murmur("im Context deactivated");
     }
     
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf,
         OVTextBar *textbar, OVService *srv)
     {
-        fprintf (stderr, "recevied key code=%d\n", key->code());
+        murmur("recevied key code=%d", key->code());
  
         if (candi)
         {
@@ -155,10 +156,10 @@ public:
             }
 
             int i, nextsend=0, l=strlen(tab->selkey);
-            // fprintf (stderr, "searching selkey=%s, len=%d\n", tab->selkey, l);
+            // murmur("searching selkey=%s, len=%d", tab->selkey, l);
 
             for (i=0; i<l; i++) if (keycode==tab->selkey[i]) break;
-            // fprintf (stderr, "index=%d, candistr_length=%d\n", i, [(NSString*)candistr length]);
+            // murmur("index=%d, candistr_length=%d", i, [(NSString*)candistr length]);
             if (i==l || i >[(NSString*)candistr length]) 
             {
                 // test if char key
@@ -216,18 +217,18 @@ public:
 SPAGHETTI:
             if (!keyseqlen) return 0;
             
-            fprintf (stderr, "query string=%s ", keyseq);
+            murmur("query string=%s ", keyseq);
             id qs=[NSString stringWithCString: keyseq];
             id v=[tab->chartable objectForKey: qs];
             if (v)
             {
-                fprintf (stderr, "number of candidates: %d\n", [(NSString*)v length]);
+                murmur("number of candidates: %d", [(NSString*)v length]);
                 if ([(NSString*)v length] > 1)
                 {
                     candi=1;
                     clearkeyseq();
                     candistr=[[NSString alloc]initWithString: v];
-                    if (!candistr) fprintf (stderr, "copy candistr err!\n");
+                    if (!candistr) murmur("copy candistr err!");
                     textbar->show();
                     textbar->clear()->append([v UTF8String]);
                     textbar->update();
@@ -235,12 +236,11 @@ SPAGHETTI:
                     return 1;
                 }
             
-                fprintf (stderr, "result=%s", [v UTF8String]);
+                murmur("result=%s", [v UTF8String]);
                 buf->clear()->append([v UTF8String])->send(ovLangTradChinese);
 //              buf->clear();
                 clearkeyseq();
             }
-            fprintf (stderr, "\n");
             
             return 1;
         }
@@ -301,18 +301,17 @@ protected:
             buf[0]=keyseq[i];
             
             id ss=[NSString stringWithCString: buf];
-            fprintf (stderr, "keyseq=%s ", [ss UTF8String]);
+            murmur("keyseq=%s ", [ss UTF8String]);
             id v=[tab->keytable objectForKey: ss];
             if (v)
             {
                 [ms appendString: v];
-                fprintf (stderr, "appended=%s, now=%s ", [v UTF8String], [ms UTF8String]);
+                murmur("appended=%s, now=%s ", [v UTF8String], [ms UTF8String]);
             }
         }
-        
+
         char *cc=(char*)[ms UTF8String];
         buf->clear()->append((void*)cc)->update();
-        fprintf (stderr, "\n");
     }
         
     void clearkeyseq()
@@ -357,12 +356,12 @@ class OVDayiIM : public OVInputMethod
 public:
     OVDayiIM()
     {
-        fprintf (stderr, "Dayi IM instance created\n");
+        murmur("Dayi IM instance created");
     }
     
     virtual ~OVDayiIM()
     {
-        fprintf (stderr, "Dayi IM instance destroyed\n");
+        murmur("Dayi IM instance destroyed");
     }
 
     virtual int identifier(char *s)
@@ -380,13 +379,13 @@ public:
     
     virtual int terminate(OVDictionary*, OVDictionary*, OVService*)
     {
-        fprintf (stderr, "Dayi module terminated by IM loader\n");
+        murmur("Dayi module terminated by IM loader");
         return 1;
     }
 
     virtual initialize(OVDictionary*, OVDictionary*, OVService*, char* path)
     {
-        fprintf (stderr, "begin to initialize Dayi at path %s\n", path);
+        murmur("begin to initialize Dayi at path %s", path);
         char dayipath[256];
         strcpy(dayipath, path);
         strcat(dayipath, "dayi3.cin");
