@@ -1,6 +1,11 @@
 
 Directory Hierarchy description
 
+- Makefile   - Auto-detect your OS and dispatch to proper Makefile
+- Makefile.<OS>
+             - Platform-dependent Makefile, should have
+               "all" "install" and "clean", 3 standard targets.
+
 - Header/    - Platform-independent header files
   - OSX/     - OSX-dependent header files
   - Win32/   - Win32-dependent header files
