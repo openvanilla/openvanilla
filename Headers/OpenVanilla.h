@@ -1,6 +1,6 @@
 // OpenVanilla.h: The OpenVanilla Framework
 // Copyright (c) 2004-2005 The OpenVanilla Project (http://openvanilla.org)
-
+`
 // The OpenVanilla Framework is released under the Artisitc License, that is,
 // it is released under the same term that Perl is.
 
@@ -46,11 +46,12 @@ class OVKeyCode : public OVBase
 public:
     virtual int code()=0;
     virtual int isShift()=0;
-    virtual int isCapslock()=0;
+    virtual int isCapslock()=0;    
     virtual int isCtrl()=0;
     virtual int isAlt()=0;
     virtual int isOpt() { return isAlt(); }
     virtual int isCommand() { return isAlt(); }
+    virtual int isFunctionKey() { return isCtrl()||isAlt()||isOpt()||isCommand(); }
 };
 
 // Abstract interface for the pre-edit and composing buffer.
@@ -61,22 +62,22 @@ public:
     virtual OVBuffer* append(const char *s)=0;
     virtual OVBuffer* send()=0;
     virtual OVBuffer* update()=0;
-    virtual OVBuffer* update(int cursorPos, int selectFrom=-1, int selectTo=-1)=0;
+    virtual OVBuffer* update(int cursorPos, int markFrom=-1, int markTo=-1)=0;
     virtual int isEmpty()=0;
 };
 
-// Abstract interface for the message bar (called TextBar in OpenVanilla).
+// Abstract interface for the message bar (called InfoBox in OpenVanilla).
 // By default it is a simple horizontal strip, but it is possible, for example,
-// to send marked-up texts through OVTextBar::append(). The implementation
+// to send marked-up texts through OVInfoBox::append(). The implementation
 // is up to the IM environment (Loader) that provides this interface to the IM.
-class OVTextBar : public OVBase 
+class OVInfoBox : public OVBase 
 {
 public:
-    virtual OVTextBar* clear()=0;
-    virtual OVTextBar* append(const char *s)=0;
-    virtual OVTextBar* hide()=0;
-    virtual OVTextBar* show()=0;
-    virtual OVTextBar* update()=0;
+    virtual OVInfoBox* clear()=0;
+    virtual OVInfoBox* append(const char *s)=0;
+    virtual OVInfoBox* hide()=0;
+    virtual OVInfoBox* show()=0;
+    virtual OVInfoBox* update()=0;
     virtual int onScreen()=0;
 };
 
@@ -122,6 +123,10 @@ public:
         int maxdestlen=0)=0;
     virtual int fromUTF8(const char *encoding, const char *src, void *dest,
         int maxdestlen=0)=0;
+        
+    // an optional message (e.g. "wrong keystroke"), but the Loader is not
+    // required to implement this (i.e. can simply fill in an empty function)
+    virtual void notify(const char *msg)=0;
 };
 
 // The input method context. The context is always created by the IM module
@@ -133,10 +138,9 @@ public:
 class OVInputMethodContext : public OVBase 
 {
 public:
-    virtual void activate(OVBuffer*, OVTextBar*, OVService*) {}
-    virtual void deactivate(OVBuffer*, OVTextBar*, OVService*) {}
+    virtual void start(OVBuffer*, OVInfoBox*, OVService*) {}
     virtual void clear() {}
-    virtual int keyEvent(OVKeyCode*, OVBuffer*, OVTextBar*, OVService*)=0;
+    virtual int keyEvent(OVKeyCode*, OVBuffer*, OVInfoBox*, OVService*)=0;
 };
 
 // The common OpenVanilla module interface. Currently OpenVanilla has two
@@ -149,11 +153,10 @@ class OVModule : public OVBase
 {
 public:
     virtual const char *identifier()=0;
-    virtual const char *localizedName(const char*) { return identifier(); }
+    virtual const char *localizedName(const char* locale) { return identifier(); }
     virtual void initialize(OVDictionary *globalPref, OVDictionary *modulePref,
         OVService *srv, const char *modulePath, const char *userPath, 
         const char *seperator) {}
-    virtual void terminate(OVDictionary *modulePref, OVService *srv) {}
     virtual void update(OVDictionary *modulePref, OVService *srv) {}
 };
 
@@ -173,7 +176,7 @@ public:
 class OVOutputFilter : public OVModule
 {
 public:
-    virtual const char* process(const char *source)=0;
+    virtual const char* process(const char *source, OVService *srv)=0;
 };
 
 // Common key codes. Note these are FIXED DEFINITIONS in OpenVanilla.h; an
