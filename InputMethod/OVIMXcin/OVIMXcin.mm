@@ -123,7 +123,7 @@ XcinCandidate* XcinCandidate::pageDown()
 {
     int oldpos=pos;
     pos+=perpage;  
-    if (pos > count) pos=0;
+    if (pos >= count) pos=0;
     return this;
 }
 
