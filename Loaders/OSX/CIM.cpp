@@ -389,7 +389,7 @@ int CIMInputBuffer::put(CFStringRef s)
     int r=1;
     UniChar csbuf[cimIBMaxLen];
 
-    CFRange rng=CFRangeMake(0, l);
+    CFRange rng=CFRangeMake(0, (l > cimIBMaxLen ? cimIBMaxLen : l));
     CFStringGetCharacters(s, rng, csbuf);
     for (int i=0; i<l; i++) if (!(r=put(csbuf[i]))) break;
     return r;

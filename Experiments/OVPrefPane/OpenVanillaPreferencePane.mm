@@ -11,9 +11,11 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.1/OVLoader.plist";
 
 - (IBAction)advancedButton:(id)sender
 {
+	
     char sbuf[PATH_MAX];
     sprintf (sbuf, "open %s", userpref);
-    system(sbuf);   
+    system(sbuf);
+	[_window close];
 }
 
 - (void)willSelect
