@@ -177,6 +177,18 @@ OVIMContext *OVIMXcin::newContext()
     return new OVXcinContext(this, cintab);
 }
 
+int OVXcinContext::activate(OVService *)
+{
+    return 1;
+    
+}
+
+int OVXcinContext::deactivate(OVService *)
+{
+    keyseq.clear();
+    return 1;
+}
+
 void OVXcinContext::updateDisplay(OVBuffer *buf)
 {
     buf->clear();
@@ -413,19 +425,15 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     inKey.push_back(c);
     if (cintab->isValidKey(inKey)) {
         string output;
-		bool isSelKey = candi.select(c, output);
-        if(!isSelKey)
-			candi.select(candi.getSelKey()[0], output);
+        candi.select(candi.getSelKey()[0], output);
 			
 		buf->clear()->append((void*)const_cast<char*>(output.c_str()),
 							 parent->getCNameEncoding())
 					->send();
+        keyseq.add(c);
 		updateDisplay(buf);
 		candi.cancel();
 		textbar->hide()->clear();
-		
-		if(!isSelKey)
-			keyseq.add(c);
 		
 		return 1;			
     }

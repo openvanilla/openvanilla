@@ -166,6 +166,7 @@ OVIMContext *OVIMXcin::newContext()
 int OVXcinContext::deactivate(OVService *)
 {
     keyseq.clear();
+    return 1;
 }
 
 void OVXcinContext::updateDisplay(OVBuffer *buf)
