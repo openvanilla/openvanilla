@@ -446,11 +446,11 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
 							 parent->getCNameEncoding())
 					->send();
 		keyseq.add(c);
-		if(cintab->isEndKey(c))
-			compose(buf, textbar, srv);
 		updateDisplay(buf);
 		candi.cancel();
 		textbar->hide()->clear();
+		if(cintab->isEndKey(c))
+			compose(buf, textbar, srv);
 		
 		return 1;			
     }
