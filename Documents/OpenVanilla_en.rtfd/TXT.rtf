@@ -1,0 +1,3300 @@
+{\rtf1\mac\ansicpg10002\cocoartf102
+{\fonttbl\f0\froman\fcharset77 Palatino-Italic;\f1\fswiss\fcharset77 ArialMT;\f2\fswiss\fcharset77 Arial-ItalicMT;
+\f3\fswiss\fcharset77 Arial-Black;\f4\fnil\fcharset79 LiGothicMed;\f5\fnil\fcharset77 TrebuchetMS;
+\f6\fnil\fcharset77 TrebuchetMS-Italic;\f7\fnil\fcharset77 LucidaGrande;\f8\fnil\fcharset102 STXihei;
+\f9\fnil\fcharset78 HiraKakuPro-W3;\f10\fnil\fcharset77 AppleSymbols;\f11\fswiss\fcharset77 Helvetica;
+\f12\fmodern\fcharset77 CourierNewPSMT;\f13\fmodern\fcharset77 Courier;\f14\fnil\fcharset78 Osaka;
+}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww15860\viewh13260\viewkind1\viewscale128
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl287\slmult1\sb20\qc
+\cf0 {{\NeXTGraphic openvanilla.tif \width1550 \height1905
+}¬}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl287\slmult1\sb20\qc
+
+\f0\i\fs96 \cf0 \
+OpenVanilla \
+
+\f1\i0\fs36 Input Method Framework
+\f2\i \
+
+\f0 0.6.3\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qc
+
+\f3\i0\b\fs48 \cf0 User Help
+\fs26 \
+
+\f4\b0 \
+
+\f5 2004-2005 \'a9 
+\f4 L
+\f5 ukhno, Kang-min "gugod" Liu, Tian-jian Jiang, Pek-tong Tan,\
+ Wei-zhong "zonble" Yang and Mengjuei Hsieh.\
+
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\ql\qnatural
+\cf0 \
+
+\f1\fs36 1. Introduction
+\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs22 \cf0 OpenVanilla is a free, open source Chinese input method framework designed for Mac OS X platform, it is a loader but not a input method program, it is a bridge between the operating system and input methods. However, you can use it to load varied input methods that you want to use.\
+Openvanilla now supports not only Cangei, Simplex, Phonetic (Zuin), Chewing, Array and Dayi, but also Japanese Kana, Pinyin, Tibean and H\uc0\u333 -l\'97 Peh-oe-ji (POJ). The standard installation of OV contains a module called '
+\f6\i Xcin
+\f5\i0 ' (Xcin is a popular Chinese input method framework used in X window, the Graphical User Interface of Linux, FreeBSD and so on, ) this module is used to load any input method tables as a plain text file with file extension as \'d4.cin\'d5. You can create new tables for new input method easily, if the way by using input method table cannot satisfy you, to work on coding a input method with OpenVanilla API is easy, too.\
+Compare to the Traditional Chinese Input Method (TCIM) bundled in Mac OS X or any other input methods, the performance of OpenVanilla is improved, you do not need to wait so long for loading. Most of all, OV is a open source software, we develop it with the experience of developing pervious works such as SpaceChewing OSX and Vanilla Input Method, we can response to any issue soon and solve it, and anyone is interested in it can participate us and work on it together. \
+
+\f4\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f1\fs36 \cf0 2. Requirement\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs22 \cf0 Mac OS X is required. We are now developing OV on Mac OS X 10.3 panther and we know it cannot work on previous versions of Mac OS X. However, we are trying to porting it to the previous versions.
+\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f4 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f1\fs36 \cf0 3. Install\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs22 \cf0 You can download the installer packages from our website: http://openvanilla.org. By the way, you can download it from the download area of our project page hosted in OpenFoundry system of Academia Sinica, Institute of Information Science: \
+http://rt.openfoundry.org/Foundry/Project/Download/?Queue=209. \
+Just click on the icon of the installation package and start the installation.\
+After the installation is finished, the main loader is installed in "/Libray/Components", you can see there is a icon names as OVLoader.bundle. The modules are placed into "/Library/OpenVanilla".\
+Then, please launch System Preference and visit the International Preference Pane, select Input Menu tab and enable OpenVanilla. 
+\fs24 \
+
+\f4\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f1\fs36 \cf0 4. Uninstall\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\fs32 \cf0 4.1. Automatic Uninstall\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs22 \cf0 You can use \CocoaLigature2 OSX Package Manager(\CocoaLigature1 OSXPM\CocoaLigature2 ) to uninstall OV automatically, since we use \CocoaLigature1 Installer Package to install OV. You can download OSXPM from OSXGNU (http://www.osxgnu.org/), and you can obtain more detail about OSXPM from:\
+http://www.osxgnu.org/info/pkgdelete.html\
+Please re-login after you uninstall OV.
+\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\f1\fs32 \cf0 4.2. Manuel Uninstall\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs22 \cf0 Please delete everything listed below: \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb60\qj
+\cf0 Loader: /Library/Components/OVLoader.bundle\
+Input method modules: /Library/OpenVanilla/0.6.3/
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5 \cf0 OV Preference Pane:
+\f4  
+\f5 /Library/PreferencePanes/OVPrefPane.prefPane/
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\ql\qnatural
+
+\f5 \cf0 libchewingpp Framework: /Library/Frameworks/ChewingPP.framework/
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5 \cf0 libchewing
+\f4 : 
+\f5 /usr/local/lib/libchewing
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 Please re-login after you uninstall OV.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f4\fs26 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f1\fs36 \cf0 5. Usage\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\fs32 \cf0 5.1. Enable OpenVanilla\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs22 \cf0 Please launch System Preference and visit the International Preference Pane, select Input Menu tab and enable OpenVanilla. You will see there is a item call "OpenVanilla Loader" with a icon as a blooming flower. Just click on the check box to enable it on.
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qc
+\cf0 {{\NeXTGraphic International.jpg \width7000 \height6180
+}¬}\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qc
+
+\f4\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qc
+
+\f5 \cf0 Enable OpenVanilla from the "International" preference pane
+\f4 .\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs22 \cf0 After checked on the box, you will see the icon of OpenVanilla appear in the Input Menu located in the top-right corner of your screen. You can press  command (
+\f7 \'f0
+\f5 /
+\f7 \uc0\u8984 
+\f5 ) key and space key, or press command, option and space key to switch to OV.
+\f4\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\f1\fs32 \cf0 5.2. Switch Input Method Module\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs22 \cf0 Just select the Input Method Module from the menu of OpenVanilla, you will switch to the module that you want to use.
+\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\f1\fs32 \cf0 5.3. Traditional and Simplified Chinese Conversion\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs22 \cf0 OV supports Traditional and Simplified Chinese conversion function. That means, you can use a Traditional Chinese input method to input texts and OV will convert the texts into Simplified Chinese at once. The way to enable Traditional and Simplified Chinese conversion is to select the item labeled as "Traditional to Simplified Chinese" or "Simplified to Traditional Chinese" in the menu of OV.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+\cf0 {{\NeXTGraphic menu.jpg \width3840 \height8000
+}¬}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f4\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qc
+
+\f5 \cf0 OpenVanilla\'d5s menu.
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\f1\fs32 \cf0 5.4 Full and half width ASCII characters\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs22 \cf0 You can choose to input full-width or half-width ASCII characters. Just select "Full-width ASCII Characters" or "Half-width ASCII characters" in OV\'d5s menu.
+\f4\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\f1\fs32 \cf0 5.5 Unicode Support and Inputing characters out of the range of Big5 standard
+\f5 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs22 \cf0 OV support Unicode perfectly. You can use OV to input the extend ASCII characters used by POJ, the Unicode Tibetan characters and even Klingon characters! Most application on Mac OS X supports Unicode and you can input Unicode characters in them, but some do not.\
+For instance, the Traditional Chinese version AppleWorks 6 supports Big5 only, therefore if you input some Chinese character defined in Big5-HKSCS standard, such as \'d4
+\f8 \uc0\u22531 
+\f5 \'d5, you will find the application halt and you cannot input characters anymore. This issue appears while you use TCIM and any other Chinese input method too. We have known that the issue appears in AppleWorks and Terminal applications with Big5 encoding (which means you can not type non-Big5 Unicode Chinese in Bi5 terminals).
+\f8 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\f1\fs32 \cf0 5.6 Preferences\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs22 \cf0 You can launch the preference pane of OV by clicking on \'d4Preferences...\'d5in Ov\'d5s menu, or select \'d4OpenVanilla\'d5 in the System Preference application. You can do settings as the font size and window opacity of the Candidate Window, if the system should beep on errors, and the keyboard layouts of Phonetic, Chewing and Tibetan input methods.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qc
+\cf0 {{\NeXTGraphic pref.jpg \width8000 \height4680
+}¬}\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qc
+
+\f5\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qc
+
+\fs22 \cf0 OpenVanilla Preferences
+\f8 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f1\fs36 \cf0 6. Input Methods Modules\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs22 \cf0 OV is a input method framework only. You can decide what input method modules to load and use in this framework by your self.\
+There are two kinds of input modules in OV. One kind of them is the \'d4Xcin\'d5 modules, they are UTF-8 encoded plain text files located under \'d4Library/OpenVanilla/0.6.3/OVIMXcin\'d5. There are informations about key mappings and key strokes - characters (or phrases) mapping in these files. You can edit these files with your favorite text editors.\
+Another kind is standalone modules, these modules are designed with more complex schema and more customizable options, and the needs can not be satisfied with only a plain text mapping table. If you want to adjust the behaviors of these modules, you need to download, edit and compile the source code of OpenVanilla. Please read the \'d2Cusomize\'d3 section if you need to know the detail.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\fs32 \cf0 6.1. Xcin Modules
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl288\slmult1\sb240\qj
+
+\f5\fs24 \cf0 While using Xcin input method modules, you can instantly input lower cased roman character by holding the shift key or press down the caps lock key without switching to roman keyboards. And you can decide to input full or half with ascii characters by selecting the options from the menu of OpenVanilla. \
+Each Xcin modules are editable to match your need. 
+\fs22  Please read the \'d2Cusomize\'d3 section if you need to know the detail.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f1\fs28 \cf0 6.1.1 Canjei and Simplex\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'a6\'62
+\f5  OV 
+\f4 \'aa\'ba\'ab\'65\'a8\'ad\'a1\'75\'ad\'bb\'af\'f3\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'76\'aa\'ba\'b6\'7d\'b5\'6f\'b9\'4c\'b5\'7b\'a4\'a4\'a1\'41\'a1\'75\'ad\'bb\'af\'f3\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'76\'a6\'fc\'a5\'47\'b8\'d1\'a8\'4d\'a4\'46\'b3\'5c\'a6\'68\'a4\'a4\'a4\'e5\'a8\'cf\'a5\'ce\'aa\'cc\'a6\'62\'a8\'cf\'a5\'ce\'ad\'dc\'be\'65\'bf\'e9\'a4\'4a\'aa\'6b\'ae\'c9\'aa\'ba\'a7\'78\'c2\'5a\'a1\'41\'a6\'d3\'ab\'e7\'bc\'cb\'ba\'a1\'a8\'ac\'ad\'dc\'be\'65\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'a6\'55\'ba\'d8\'a8\'cf\'a5\'ce\'b2\'df\'ba\'44\'a1\'41\'a4\'5d\'ac\'4f\'a6\'62\'b6\'7d\'b5\'6f
+\f5 OV
+\f4 \'aa\'ba\'a6\'55\'ba\'d8\'bf\'e9\'a4\'4a\'aa\'6b\'ae\'c9\'a1\'41\'b9\'4a\'a8\'ec\'b3\'cc\'bd\'c6\'c2\'f8\'aa\'ba\'aa\'ac\'aa\'70\'aa\'ba\'a6\'61\'a4\'e8\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 Mac OS X 10.3 
+\f4 \'a6\'62
+\f5  TCIM 
+\f4 \'a4\'a4\'a4\'ba\'ab\'d8\'aa\'ba\'ad\'dc\'be\'65\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'a6\'5d\'ac\'b0\'a4\'e4\'b4\'a9\'bf\'e9\'a4\'4a 
+\f5 Big5-HKSCS 
+\f4 \'bd\'73\'bd\'58\'a4\'a4\'aa\'ba\'b2\'a7\'c5\'e9\'a6\'72\'a5\'48\'a4\'ce\'c2\'b2\'c5\'e9\'a4\'a4\'a4\'e5\'a1\'41\'a6\'d3\'b3\'79\'a6\'a8\'b3\'5c\'a6\'68\'ad\'ec\'a5\'bb\'aa\'ba\'ad\'dc\'be\'65\'a6\'72\'ae\'da\'a1\'41\'a8\'c3\'a8\'53\'a6\'b3\'b9\'ef\'c0\'b3\'a8\'ec\'b3\'5c\'a6\'68\'a8\'cf\'a5\'ce\'aa\'cc\'a9\'d2\'b9\'77\'b4\'c1\'aa\'ba\'a4\'a4\'a4\'e5\'a6\'72\'a1\'41\'a5\'74\'a5\'7e\'ad\'dc\'be\'65\'a5\'bb\'a8\'ad\'b4\'4e\'a6\'b3\'a6\'68\'ba\'d8\'aa\'a9\'a5\'bb\'a1\'41\'a5\'5d\'ac\'41\'ad\'dc\'be\'65\'a4\'54\'a5\'4e\'a1\'42\'ad\'dc\'be\'65\'a4\'ad\'a5\'4e\'b5\'a5\'b5\'a5\'a1\'41\'a6\'d3\'a4\'ba\'ab\'d8\'aa\'ba\'ad\'dc\'be\'65\'bf\'e9\'a4\'4a\'aa\'6b\'ab\'68\'ac\'4f\'b2\'56\'a5\'ce\'a4\'46\'a6\'68\'ba\'d8\'aa\'a9\'a5\'bb\'aa\'ba\'ad\'dc\'be\'65\'a6\'72\'ae\'da\'a1\'41\'a6\'d3\'b3\'79\'a6\'a8\'ac\'db\'b7\'ed\'a4\'6a\'aa\'ba\'b2\'56\'b2\'63\'a1\'43\
+
+\f5 OV Xcin 
+\f4 \'bc\'d2\'b2\'d5\'a4\'a4\'a9\'d2\'b4\'a3\'a8\'d1\'aa\'ba\'ac\'4f\'a8\'d3\'a6\'db 
+\f5 Xcin 
+\f4 \'aa\'ba\'ad\'dc\'be\'65\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'a5\'48\'ad\'dc\'be\'65\'a4\'54\'a5\'4e\'ac\'b0\'b0\'f2\'c2\'a6\'a1\'41\'a6\'d3\'ae\'da\'be\'da\'b1\'7a\'aa\'ba\'bb\'dd\'ad\'6e\'a1\'41\'b1\'7a\'a4\'5d\'a5\'69\'a5\'48\'a6\'db\'a6\'e6\'c2\'e0\'b4\'ab\'a9\'ce\'a8\'fa\'b1\'6f\'b2\'c4\'a4\'ad\'a5\'4e\'ad\'dc\'be\'65\'a1\'42\'b6\'b6\'a7\'c7\'b3\'74\'a6\'a8\'a1\'42\'a7\'d6\'ad\'dc 
+\f5 2000 
+\f4 \'b5\'a5\'aa\'a9\'a5\'bb\'aa\'ba\'ad\'dc\'be\'65\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ed\'ae\'e6\'a1\'41\'b4\'c0\'a5\'4e\'a4\'ba\'ab\'d8\'aa\'ba\'ad\'dc\'be\'65\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'43\
+\'a8\'74\'b2\'ce\'a4\'ba\'ab\'d8\'aa\'ba\'ad\'dc\'be\'65\'bf\'e9\'a4\'4a\'aa\'6b\'b9\'77\'b3\'5d\'ad\'c8\'ac\'4f\'b7\'7c\'a6\'62\'b1\'7a\'bf\'e9\'a4\'4a\'a6\'72\'ae\'da\'aa\'ba\'a6\'50\'ae\'c9\'a1\'41\'a7\'59\'ae\'c9\'a6\'43\'a5\'58\'b2\'c5\'a6\'58\'a5\'d8\'ab\'65\'a9\'d2\'bf\'e9\'a4\'4a\'a6\'72\'ae\'da\'aa\'ba\'ad\'d4\'bf\'ef\'a6\'72\'a1\'41\'ab\'f6\'a4\'55\'bc\'c6\'a6\'72\'c1\'e4\'ab\'4b\'a5\'69\'a5\'48\'aa\'bd\'b1\'b5\'bf\'ef\'a6\'72\'a1\'46\'a6\'d3 
+\f5 OV 
+\f4 \'a5\'d8\'ab\'65\'aa\'ba\'b3\'5d\'ad\'70\'a1\'41\'bb\'50\'a4\'ba\'ab\'d8\'aa\'ba\'a4\'a4\'a4\'e5\'bf\'e9\'a4\'4a\'aa\'6b
+\f5  TCIM 
+\f4 \'a6\'62\'b3\'6f\'a4\'40\'c2\'49\'a4\'57\'b5\'79\'a6\'b3\'a4\'a3\'a6\'50\'a1\'41
+\f5 TCIM 
+\f4 \'b7\'7c\'a6\'43\'a5\'58\'a9\'d2\'a6\'b3\'a5\'48\'a5\'d8\'ab\'65\'a6\'72\'ae\'da\'b6\'7d\'c0\'59\'aa\'ba\'ad\'d4\'bf\'ef\'a6\'72\'a1\'41\'a6\'d3
+\f5  OV 
+\f4 \'ab\'68\'ac\'4f\'a6\'43\'a5\'58\'a7\'b9\'a5\'fe\'b2\'c5\'a6\'58\'b2\'c5\'a6\'58\'a5\'d8\'ab\'65\'a6\'72\'ae\'da\'aa\'ba\'ad\'d4\'bf\'ef\'a6\'72\'a1\'41\'a4\'5d\'b4\'4e\'ac\'4f\'a4\'f1\'a4\'e8\'bb\'a1\'a1\'41\'b7\'ed\'b1\'7a\'a5\'b4\'a4\'55\'a1\'75
+\f5 A
+\f4 \'a1\'76\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41
+\f5 TCIM
+\f4 \'b7\'7c\'b1\'71\'ac\'4f\'a1\'5d\'a4\'e9\'a4\'40\'a4\'52\'a4\'48\'a1\'5e\'b6\'7d\'a9\'6c\'a6\'43\'a5\'58\'a1\'41\'a6\'d3
+\f5  OV 
+\f4 \'ab\'68\'b7\'7c\'a6\'43\'a5\'58\'b2\'c5\'a6\'58\'a5\'75\'a6\'b3\'a4\'40\'ad\'d3\'a1\'75\'a4\'e9\'a1\'76\'a4\'6c\'ae\'da\'aa\'ba\'ab\'e1\'bf\'ef\'a6\'72\'a1\'75\'a4\'e9\'a1\'76\'bb\'50\'a1\'75\'a4\'ea\'a1\'76\'a1\'43\
+\'a6\'70\'aa\'47\'b1\'7a\'aa\'ba\'b2\'df\'ba\'44\'ac\'4f\'a6\'62\'a5\'b4\'a7\'b9\'a6\'72\'ae\'da\'a4\'a7\'ab\'e1\'a1\'41\'ab\'f6\'a4\'55\'aa\'c5\'a5\'d5\'c1\'e4\'a4\'7e\'a5\'58\'b2\'7b\'a6\'55\'ba\'d8\'ad\'d4\'bf\'ef\'a6\'72\'aa\'ba\'b8\'dc\'a1\'41\'b1\'7a\'a5\'69\'a5\'48\'c3\'f6\'b3\'ac\'b3\'6f\'ad\'d3\'bf\'ef\'b6\'b5\'a1\'41\'bd\'d5\'be\'e3\'bf\'ef\'b6\'b5\'aa\'ba\'a4\'e8\'a6\'a1\'a1\'41\'bd\'d0\'b0\'d1\'a8\'a3\'a4\'e2\'a5\'55\'a4\'a4\'a1\'75\'b6\'69\'b6\'a5\'b3\'5d\'a9\'77\'a1\'76\'b3\'a1\'a5\'f7\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f1\fs28 \cf0 6.1.2 Dayi
+\f4\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 OV 
+\f4 \'b7\'ed\'a4\'a4\'aa\'ba\'a4\'6a\'a9\'f6\'bf\'e9\'a4\'4a\'aa\'6b\'a8\'cf\'a5\'ce\'aa\'ba\'ac\'4f\'a4\'d3\'a9\'f6\'b8\'ea\'b0\'54\'a4\'bd\'a5\'71
+\f5  (http://www.dayi.com) 
+\f4 \'a6\'50\'b7\'4e\'b6\'7d\'a9\'f1\'a8\'d1\'a4\'a4\'a4\'e5\'a8\'cf\'a5\'ce\'aa\'cc\'a6\'db\'a5\'d1\'ac\'79\'b3\'71\'a8\'cf\'a5\'ce\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'b8\'ea\'ae\'c6\'aa\'ed\'ae\'e6\'a1\'43\'b1\'7a\'a4\'a3\'b1\'6f\'a5\'f4\'b7\'4e\'a7\'f3\'a7\'ef\'a6\'b9\'aa\'ed\'ae\'e6\'a4\'a4\'a8\'43\'ad\'d3\'a6\'72\'aa\'ba\'bd\'73\'bd\'58\'b3\'57\'ab\'68\'a8\'c3\'ad\'ab\'b7\'73\'b4\'b2\'a7\'47\'a1\'41\'a6\'fd\'b1\'7a\'a5\'69\'a5\'48\'a7\'ef\'c5\'dc\'a4\'6a\'a9\'f6\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'aa\'ed\'ae\'e6\'a4\'ba\'ae\'65\'a1\'41\'be\'41\'a6\'58\'b1\'7a\'a6\'db\'a4\'76\'aa\'ba\'bb\'dd\'a8\'44\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f1\fs28 \cf0 6.1.3 Japanese Kana
+\f4\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 OV 0.6.3 
+\f4 \'a4\'a7\'ab\'e1\'a8\'cf\'a5\'ce\'aa\'ba\'a4\'e9\'a4\'e5\'b0\'b2\'a6\'57\'bf\'e9\'a4\'4a\'b0\'b5\'a4\'46\'ac\'db\'b7\'ed\'b2\'c5\'b8\'b9\'aa\'ba\'ad\'d7\'a7\'ef\'a1\'41
+\f5 0.6.2 
+\f4 \'a4\'a7\'ab\'65\'a8\'cf\'a5\'ce\'aa\'ba\'a4\'e9\'a4\'e5\'b2\'c5\'b8\'b9\'bf\'e9\'a4\'4a\'aa\'ed\'ae\'e6\'a1\'5d
+\f5 ukiyoe.cin
+\f4 \'a1\'5e\'b7\'bd\'a6\'db\'a9\'f3\'a4\'51\'b4\'58\'a6\'7e\'ab\'65\'ad\'ca\'a4\'d1\'a4\'a4\'a4\'e5\'ae\'c9\'a5\'4e\'aa\'ba\'b0\'b2\'a6\'57\'b8\'ea\'ae\'c6\'aa\'ed\'a1\'41\'a5\'ce\'b0\'5f\'a8\'d3\'a4\'51\'a4\'c0\'a6\'59\'a4\'4f\'a1\'41\'b9\'ef\'a9\'f3\'b1\'60\'ad\'6e\'a6\'62\'a4\'a4\'a4\'e5\'a4\'55\'bf\'e9\'a4\'4a\'a4\'e9\'a4\'e5\'a6\'72\'a5\'c0\'aa\'ba\'a8\'cf\'a5\'ce\'aa\'cc\'a8\'d3\'bb\'a1\'ac\'db\'b7\'ed\'b3\'c2\'b7\'d0\'a1\'41\'a6\'d3\'a5\'42\'bf\'f9\'ba\'7c\'ac\'c6\'a6\'68\'a1\'43\'c1\'7c\'a8\'d2\'a8\'a5\'a4\'a7\'a1\'41\'a6\'62
+\f5  Windows 
+\f4 \'a4\'55\'aa\'ba 
+\f5 Japanese IME
+\f4  \'bb\'50\'c4\'e5\'aa\'e1\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'b3\'a3\'a5\'69\'a5\'48\'a5\'b4
+\f5  kyo 
+\f4 \'a5\'58
+\f5  
+\f8 \'a4\'ad\'a4\'e7
+\f4 \'a1\'41\'a6\'fd\'a6\'62\'b8\'d3\'a5\'f7\'c2\'c2\'b8\'ea\'ae\'c6\'aa\'ed\'ae\'e6\'a4\'a4\'a1\'41\'a4\'40\'a9\'77\'ad\'6e\'a5\'b4\'a6\'a8
+\f5  ki xyo 
+\f4 \'a1\'41\'b7\'ed\'b3\'f5\'a6\'68\'a4\'46\'a4\'40\'ad\'bf\'a5\'48\'a4\'57\'aa\'ba\'ae\'c9\'b6\'a1\'a1\'43\'a6\'41\'a6\'70\'a8\'53\'a6\'b3 
+\f8 \'a4\'f1
+\f4 \'a1\'42\'a5\'b4 
+\f5 ng 
+\f4 \'a4\'7e\'b7\'7c\'a6\'b3\'a5\'ad\'b1\'60\'a5\'b4 
+\f5 n 
+\f4 \'b4\'4e\'a5\'58\'a8\'d3\'aa\'ba 
+\f8 \'a4\'f3
+\f5  
+\f4 \'b5\'a5\'b5\'a5\'a1\'41\'a4\'5d\'ac\'4f\'ab\'dc\'c3\'f8\'be\'41\'c0\'b3\'aa\'ba\'a6\'61\'a4\'e8\'a1\'43\
+\'a6\'5d\'a6\'b9\'a1\'41\'b3\'6f\'ad\'d3\'aa\'ed\'ae\'e6\'b0\'b5\'a4\'46\'a5\'48\'a4\'55\'bc\'57\'a5\'5b\'bb\'50\'a7\'ef\'c5\'dc\'a1\'41\'a8\'c3\'a7\'f3\'a6\'57\'ac\'b0
+\f5  iroha.cin
+\f4 \'a1\'5d\'a1\'75\'a5\'ec\'a7\'66\'aa\'69\'a1\'76\'a4\'a7\'b7\'4e\'a1\'5e\'a1\'43\'a4\'e9\'a4\'e5\'c3\'b9\'b0\'a8\'ab\'f7\'ad\'b5\'a1\'41\'ad\'ec\'ab\'68\'a4\'57\'ac\'4f\'a5\'d1\'a5\'c0\'ad\'b5 
+\f5 a, i, u, e, o 
+\f4 \'bb\'50\'a4\'6c\'ad\'b5
+\f5  k, s, t, n, h, m, y, r, w
+\f4 \'a1\'41\'a5\'5b\'a4\'57\'b3\'e6\'bf\'57\'b5\'6f\'ad\'b5\'aa\'ba
+\f5  n 
+\f4 \'b2\'d5\'a6\'58\'a6\'d3\'a6\'a8\'a1\'43\'a5\'75\'ad\'6e\'a7\'41\'aa\'be\'b9\'44\'b3\'6f\'ad\'d3\'ad\'ec\'ab\'68\'a1\'41\'a7\'59\'a8\'cf\'a7\'41\'a4\'a3\'b7\'7c\'a4\'e9\'a4\'e5\'a1\'41\'a4\'5d\'a5\'69\'a5\'48\'a4\'c1\'b4\'ab\'a6\'dc
+\f5  OV 
+\f4 \'aa\'ba\'a4\'e9\'a4\'e5\'b0\'b2\'a6\'57\'bf\'e9\'a4\'4a\'a1\'41\'b6\'c3\'a5\'b4\'a5\'58\'a4\'40\'b0\'ef\'a4\'e9\'a4\'e5\'a6\'72\'a5\'c0\'a1\'41\'a6\'d3\'b5\'4c\'bb\'dd\'a4\'c1\'b4\'ab\'a8\'ec 
+\f5 Mac 
+\f4 \'aa\'ba\'a4\'e9\'a4\'e5\'c0\'f4\'b9\'d2\'a1\'43\
+\'b0\'b2\'b3\'5d\'a7\'41\'a4\'77\'b8\'67\'bb\'7b\'c3\'d1\'a4\'e9\'a4\'e5\'aa\'ba 
+\f5 50 
+\f4 \'ad\'b5\'a1\'41\'a8\'ba\'bb\'f2\'b3\'6f\'ad\'d3\'b7\'73\'aa\'a9\'aa\'ba\'a4\'e9\'a4\'e5\'b0\'b2\'a6\'57\'bf\'e9\'a4\'4a\'aa\'6b\'a5\'69\'a5\'48\'c0\'b0\'a7\'55\'a7\'41\'a6\'62\'a4\'a4\'a4\'e5\'c0\'f4\'b9\'d2\'a4\'55\'bf\'e9\'a4\'4a\'a7\'41\'a9\'d2\'bb\'dd\'ad\'6e\'aa\'ba\'a4\'e9\'a4\'e5\'a5\'ad\'b0\'b2\'a6\'57\'a1\'42\'a4\'f9\'b0\'b2\'a6\'57\'a1\'43\'ab\'65\'aa\'a9\'aa\'ba\'a4\'e9\'a4\'e5\'b0\'b2\'a6\'57\'bf\'e9\'a4\'4a\'aa\'6b\'a6\'a8\'a5\'df\'a9\'f3\'a4\'51\'b4\'58\'a6\'7e\'ab\'65\'a1\'41\'b7\'a5\'c2\'b2\'ad\'ae\'a5\'42\'a6\'b3\'bd\'d1\'a6\'68\'b0\'dd\'c3\'44\'a1\'41\'ac\'47\'a6\'62\'b7\'73\'aa\'a9\'b8\'cc\'b0\'b5\'a4\'46\'a4\'6a\'b4\'54\'ad\'d7\'a5\'bf\'a1\'41\'a4\'b6\'b2\'d0\'a6\'70\'a4\'55\'a1\'47\
+
+\f5 1. 
+\f4 \'a5\'48\'c3\'b9\'b0\'a8\'ab\'f7\'ad\'b5\'aa\'ed\'ac\'b0\'ae\'da\'be\'da\'a1\'41\'ad\'d7\'a5\'bf\'bf\'f9\'ba\'7c\'a1\'43\'a6\'70\'aa\'47\'b1\'7a\'a4\'a3\'be\'e5\'b1\'6f 
+\f5 50 
+\f4 \'ad\'b5\'aa\'ba\'c3\'b9\'b0\'a8\'ab\'f7\'ad\'b5\'a1\'41\'b0\'a3\'a4\'46\'a7\'e2 
+\f5 OV 0.6.3 
+\f4 \'a4\'a4\'aa\'ba
+\f5  iroha.cin 
+\f4 \'a5\'b4\'b6\'7d\'a8\'d3\'ac\'dd\'a1\'41\'a4\'5d\'a5\'69\'b0\'d1\'a6\'d2\'a4\'e9\'a4\'e5\'a6\'72\'a8\'e5\'a4\'a4\'aa\'ba\'b0\'b2\'a6\'57\'c3\'b9\'b0\'a8\'a6\'72\'aa\'ed\'b0\'4f\'a9\'ce\'a4\'e9\'bb\'79\'be\'c7\'b2\'df\'ae\'d1\'c4\'79\'a1\'43\
+
+\f5 2. 
+\f4 \'bc\'57\'a5\'5b\'a4\'6a\'b6\'71\'aa\'f8\'ad\'b5\'a1\'47\'a6\'70\'a5\'b4
+\f5  kyo 
+\f4 \'a5\'58
+\f5  
+\f8 \'a4\'ad\'a4\'e7
+\f4 \'a1\'41\'a6\'41\'a5\'5b\'a4\'57
+\f5  Japanese IME 
+\f4 \'a9\'ce\'c4\'e5\'aa\'e1\'bf\'e9\'a4\'4a\'aa\'6b\'a9\'d2\'b5\'4c\'a1\'41\'a6\'fd\'ab\'dc\'b1\'60\'a5\'ce\'aa\'ba\'aa\'f8\'ad\'b5\'a1\'41\'a6\'70\'a5\'b4
+\f5  you 
+\f4 \'a5\'58\'b2\'7b
+\f5  
+\f8 \'a4\'e8\'a4\'a6
+\f4 \'a1\'42
+\f5  syou 
+\f4 \'b7\'7c\'a5\'58\'b2\'7b 
+\f8 \'a4\'b7\'a4\'e7\'a4\'a6\'a1\'a3
+\f4 \'a9\'d2\'bf\'d7\'b1\'60\'a5\'ce\'a1\'41\'ac\'4f\'a5\'48\'bc\'73\'c3\'e3\'ad\'62\'b9\'71\'a4\'6c\'c3\'e3\'a8\'e5\'b2\'c4\'a4\'ad\'aa\'a9\'b3\'76\'a4\'40\'b9\'ef\'b9\'4c\'a1\'41\'ad\'59\'a5\'48\'c3\'b9\'b0\'a8\'ab\'f7\'ad\'b5\'a4\'4a\'a4\'4f\'a1\'41\'a5\'58\'a8\'d3\'aa\'ba\'b5\'fc\'b2\'d5\'a7\'43\'a9\'f3\'a4\'47\'ad\'d3\'a1\'41\'ac\'c6\'a6\'dc\'a8\'53\'a6\'b3\'b3\'6f\'ba\'d8\'a5\'ce\'aa\'6b\'aa\'ba\'a1\'41\'b4\'4e\'a4\'a3\'a5\'5b
+\f5 (
+\f4 \'a6\'70 
+\f5 dyuu=
+\f8 \'a4\'c2\'a4\'e5\'a4\'a6
+\f5 )\
+3. 
+\f4 \'a5\'b4\'a4\'e9\'a4\'e5\'c3\'b9\'b0\'a8\'ab\'f7\'ad\'b5\'a5\'58\'ba\'7e\'a6\'72\'aa\'ba\'a4\'70\'b9\'ea\'c5\'e7\'a1\'47\'a4\'e9\'a4\'e5\'a6\'72\'a5\'c0\'c2\'e0\'ba\'7e\'a6\'72\'a1\'42\'b5\'fc\'ac\'4f\'a4\'6a\'a4\'75\'b5\'7b\'a1\'41\'a5\'d8\'ab\'65\'a5\'75\'a5\'5b\'a4\'46\'a5\'b4
+\f5 kyou 
+\f4 \'a5\'58\'a1\'75\'a4\'b5\'a4\'e9\'a1\'76
+\f5 (
+\f4 \'a6\'5d\'ac\'b0\'a6\'b9\'b5\'6f\'ad\'b5\'b6\'c8\'b9\'ef\'c0\'b3\'a6\'b9\'b5\'fc
+\f5 )
+\f4 \'a1\'41\'a5\'b4 
+\f5 iroha 
+\f4 \'a5\'58\'a1\'75\'a5\'ec\'a7\'66\'aa\'69\'a1\'76\'a1\'41\'a5\'48\'a6\'56\'b6\'b0\'a6\'a8\'a4\'e9\'a4\'e5\'b0\'b2\'a6\'57\'a1\'42\'a9\'77\'a4\'55\'a4\'e9\'bb\'79\'b0\'b2\'a6\'57\'b0\'f2\'c2\'a6\'aa\'ba\'a1\'6d\'a5\'ec\'a7\'66\'aa\'69\'ba\'71\'a1\'6e\'a1\'5d\'b3\'cc\'a5\'6a\'aa\'ba\'aa\'a9\'a5\'bb\'a6\'a8\'a9\'f3\'a6\'e8\'a4\'b8 
+\f5 1079 
+\f4 \'a6\'7e\'a1\'5e\'aa\'ed\'a5\'dc\'ad\'50\'b7\'71\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f1\fs28 \cf0 6.1.4 EHQ-Symbols
+\f5\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 EHQ-Symbols is an easy to use input method used to input special Unicode symbols. It is designed with a schema to match the key strokes to familiar symbols. You can use it to input:\
+Special extend roman characteristic and numeric symbols. For instance, while you press \'d4a\'d5, you can input 
+\f9 \'85\'db
+\f5 , 
+\f9 \uc0\u9424 
+\f5  and 
+\f9 \uc0\u9424 
+\f5 , while you press \'d41\'d5 you will get  \'d4
+\f9 \'85\'40
+\f5 \'d5,\'d4
+\f9 \'85\'5e
+\f5 \'d5, and \'d4
+\f9 \'85\'92
+\f5 \'d5.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \
+\'a6\'55\'ba\'d8\'b6\'ea\'a7\'ce\'a1\'42\'a4\'e8\'a7\'ce\'bb\'50\'a4\'54\'a8\'a4\'a7\'ce\'b5\'a5\'b2\'c5\'b8\'b9\'a1\'43\'a5\'b4\'a5\'58\'b6\'ea\'a7\'ce\'b2\'c5\'b8\'b9\'aa\'ba\'a4\'e8\'aa\'6b\'ac\'4f\'ab\'f6\'a4\'55\'a5\'79\'b8\'b9\'a1\'75
+\f5 .
+\f4 \'a1\'76\'a1\'41\'a4\'e8\'a7\'ce\'ac\'4f\'b3\'72\'c2\'49\'a1\'75
+\f5 ,
+\f4 \'a1\'76\'a1\'41\'a4\'54\'a8\'a4\'a7\'ce\'ab\'68\'ac\'4f\'a1\'75
+\f5 /\\
+\f4 \'a1\'76\'a9\'ce\'a1\'75
+\f5 \\/
+\f4 \'a1\'76\'a1\'41\'ac\'50\'a7\'ce\'b2\'c5\'b8\'b9\'ac\'4f\'a1\'75
+\f5 *
+\f4 \'a1\'76\'b5\'a5\'a1\'43\'ab\'f6\'a4\'55\'a1\'75
+\f5 <
+\f4 \'a1\'76\'a1\'42\'a1\'75
+\f5 <<
+\f4 \'a1\'76\'a1\'42\'a1\'75
+\f5 >
+\f4 \'a1\'76\'bb\'50\'a1\'75
+\f5 >>
+\f4 \'a1\'76\'a1\'41\'ab\'68\'a5\'69\'a5\'48\'bf\'e9\'a4\'4a\'a6\'55\'ba\'d8\'ac\'41\'a9\'b7\'a9\'ce\'b2\'7b\'a5\'4e\'ae\'d1\'a6\'57\'b8\'b9\'a1\'41\'a8\'d2\'a6\'70\'a1\'75
+\f5 \'c8
+\f4 \'a1\'76\'a1\'43\
+\'a5\'69\'a5\'48\'a5\'ce\'a8\'d3\'bf\'e9\'a4\'4a\'a6\'55\'ba\'d8\'bd\'62\'c0\'59\'a1\'43\'a5\'69\'a8\'cf\'a5\'ce\'aa\'ba\'ab\'f6\'c1\'e4\'a5\'5d\'ac\'41\'a1\'75
+\f5 <-
+\f4 \'a1\'76\'a1\'5d\'a1\'f6\'a1\'5e\'a1\'42\'a1\'75
+\f5 ->
+\f4 \'a1\'76\'a1\'5d\'a1\'f7\'a1\'5e\'a1\'42\'a1\'75
+\f5 <\\
+\f4 \'a1\'76\'a1\'5d\'a1\'f8\'a1\'5e\'a1\'42\'a1\'75
+\f5 />
+\f4 \'a1\'76\'a1\'5d\'a1\'f9\'a1\'5e\'a1\'42\'a1\'75
+\f5 </
+\f4 \'a1\'76\'a1\'5d\'a1\'fa\'a1\'5e\'a1\'42\'a1\'75
+\f5 \\>
+\f4 \'a1\'76\'a1\'5d\'a1\'fb\'a1\'5e\'a1\'42\'a1\'75
+\f5 <->
+\f4 \'a1\'76\'a1\'5d
+\f9 \'86\'cc\'81\'6a\'81\'75
+\f5 <|
+\f9 \'81\'76\'81\'69\'81\'aa\'81\'6a\'81\'41\'81\'75
+\f5 |>
+\f9 \'81\'76\'81\'69\'81\'ab\'81\'6a\'93\'99\'93\'99\'81\'42\
+
+\f4 \'a5\'69\'a5\'48\'bf\'e9\'a4\'4a\'a4\'4b\'a8\'f6\'b2\'c5\'b8\'b9\'a1\'41\'a5\'48\'a1\'75
+\f5 |
+\f4 \'a1\'76\'a5\'4e\'aa\'ed\'b0\'ae\'a8\'f6\'a1\'41\'a5\'48\'a1\'75
+\f5 :
+\f4 \'a1\'76\'a5\'4e\'aa\'ed\'a9\'5b\'a8\'f6\'a1\'46\'a8\'d2\'a6\'70\'a1\'75
+\f5 :|:
+\f4 \'a1\'76\'b4\'4e\'ac\'4f\'a1\'75
+\f10 \uc0\u9781 
+\f4 \'a1\'76\'a1\'43\
+\'ad\'b5\'b2\'c5\'b2\'c5\'b8\'b9\'a1\'43\'a6\'70\'a1\'75
+\f5 o/~
+\f4 \'a1\'76\'a5\'69\'a5\'48\'bf\'e9\'a4\'4a\'a1\'75
+\f10 \uc0\u9834 
+\f4 \'a1\'76\'a1\'43\
+\'bf\'e9\'a4\'4a\'a1\'75
+\f5 pen
+\f4 \'a1\'76\'a1\'41\'a5\'69\'a5\'48\'a6\'43\'a5\'58\'a9\'d2\'a6\'b3\'bb\'50\'b5\'a7\'ac\'db\'c3\'f6\'aa\'ba\'b2\'c5\'b8\'b9\'a1\'43\'a1\'75
+\f5 mail
+\f4 \'a1\'76\'bb\'50\'a1\'75
+\f5 tel
+\f4 \'a1\'76\'a4\'5d\'a4\'c0\'a7\'4f\'a5\'4e\'aa\'ed\'b6\'6c\'a5\'f3\'bb\'50\'b9\'71\'b8\'dc\'ac\'db\'c3\'f6\'b2\'c5\'b8\'b9\'a1\'43\
+\'bf\'e9\'a4\'4a\'a1\'75
+\f5 astro
+\f4 \'a1\'76\'a1\'41\'a5\'69\'a5\'48\'a6\'43\'a5\'58\'a9\'d2\'a6\'b3\'aa\'ba\'a6\'e8\'ac\'76\'ac\'50\'ae\'79\'b2\'c5\'b8\'b9\'a1\'43\
+\'bf\'e9\'a4\'4a\'a1\'75
+\f5 planet
+\f4 \'a1\'76\'a1\'41\'a5\'69\'a5\'48\'a6\'43\'a5\'58\'a9\'d2\'a6\'b3\'aa\'ba\'a6\'e8\'ac\'76\'a4\'45\'a4\'6a\'a6\'e6\'ac\'50\'a5\'4e\'aa\'ed\'b2\'c5\'b8\'b9\'a1\'43\
+\'bf\'e9\'a4\'4a\'a1\'75
+\f5 chess
+\f4 \'a1\'76\'a1\'41\'a5\'69\'a5\'48\'a6\'43\'a5\'58\'a9\'d2\'a6\'b3\'aa\'ba\'a6\'e8\'ac\'76\'b4\'d1\'b2\'c5\'b8\'b9\'a1\'43\
+\'bf\'e9\'a4\'4a\'a1\'75
+\f5 poker
+\f4 \'a1\'76\'a1\'41\'a5\'69\'a5\'48\'a6\'43\'a5\'58\'a9\'d2\'a6\'b3\'aa\'ba\'be\'f4\'b5\'50\'b2\'c5\'b8\'b9\'a1\'43\
+\'c4\'ab\'aa\'47\'a8\'74\'b2\'ce\'b2\'c5\'b8\'b9\'a1\'43\'a8\'d2\'a6\'70\'a5\'b4\'a1\'75
+\f5 cmd
+\f4 \'a1\'76\'a5\'69\'a5\'48\'a5\'b4\'a5\'58\'a1\'75
+\f7 \uc0\u8984 
+\f4 \'a1\'76\'a1\'42\'a1\'75\uc0\u63743 \'a1\'76\'a1\'41\'a5\'b4\'a1\'75
+\f5 opt
+\f4 \'a1\'76\'a5\'69\'a5\'48\'a5\'b4\'a5\'58\'a1\'75
+\f7 \uc0\u8997 
+\f4 \'a1\'76\'a1\'42\'a1\'75
+\f7 \uc0\u9095 
+\f4 \'a1\'76\'a1\'43\
+\'a8\'e4\'a5\'4c\'af\'53\'a7\'4f\'b2\'c5\'b8\'b9\'a1\'43\'a8\'d2\'a6\'70\'a1\'75
+\f5 sss
+\f4 \'a1\'76\'a5\'69\'a5\'48\'bf\'e9\'a4\'4a\'b7\'c5\'ac\'75\'b2\'c5\'b8\'b9\'a1\'75
+\f10 \uc0\u9832 
+\f4 \'a1\'76\'a1\'41\'a1\'75
+\f5 ox
+\f4 \'a1\'76\'a5\'69\'a5\'48\'bf\'e9\'a4\'4a\'a1\'75
+\f10 \uc0\u9760 
+\f4 \'a1\'76\'b5\'a5\'a1\'43\
+\'a5\'d1\'a9\'f3\'ba\'ae\'a7\'f8\'bf\'e9\'a4\'4a\'aa\'6b\'a5\'bb\'a8\'ad\'aa\'ba
+\f5  cin 
+\f4 \'c0\'c9\'ae\'d7\'a4\'a3\'b7\'7c\'ab\'dc\'a4\'6a\'a1\'41\'a9\'d2\'a5\'48\'a1\'41\'a6\'70\'aa\'47\'b7\'51\'ad\'6e\'aa\'be\'b9\'44\'ba\'ae\'a7\'f8\'bf\'e9\'a4\'4a\'aa\'6b\'a5\'fe\'b3\'a1\'a4\'e4\'b4\'a9\'aa\'ba\'b2\'c5\'b8\'b9\'a1\'41\'a4\'a3\'a7\'ab\'a8\'cf\'a5\'ce\'a4\'e5\'ae\'d1\'bd\'73\'bf\'e8\'b3\'6e\'c5\'e9\'a1\'41\'b6\'7d\'b1\'d2\'ba\'ae\'a7\'f8\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba
+\f5  cin 
+\f4 \'aa\'ed\'ae\'e6\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs28 \cf0 KK 
+\f4 \'ad\'b5\'bc\'d0\'bf\'e9\'a4\'4a\'aa\'6b\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 \'b1\'7a\'a5\'69\'a5\'48\'a4\'55\'b8\'fc
+\f5  OV 
+\f4 \'aa\'ba\'a1\'75\'bf\'e9\'a4\'4a\'aa\'6b\'a9\'b5\'a6\'f9\'ae\'4d\'a5\'f3\'a1\'76\'a8\'d3\'a6\'77\'b8\'cb
+\f5  KK 
+\f4 \'ad\'b5\'bc\'d0\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'43\
+\'b4\'4e\'ac\'59\'a4\'e8\'ad\'b1\'a8\'d3\'bb\'a1\'a1\'41 
+\f5 KK 
+\f4 \'ad\'b5\'bc\'d0\'bf\'e9\'a4\'4a\'aa\'6b\'a4\'5d\'a5\'69\'a5\'48\'ba\'e2\'ac\'4f\'a4\'40\'ba\'d8\'a4\'a4\'a4\'e5\'bf\'e9\'a4\'4a\'aa\'6b\'a7\'61\'a1\'48\'a6\'5d\'ac\'b0\'b2\'7b\'a4\'b5\'a5\'fe\'a5\'40\'ac\'c9\'a5\'75\'a6\'b3\'b3\'d1\'a4\'55\'a5\'78\'c6\'57\'c1\'d9\'a6\'62\'a9\'ea\'b4\'dd\'a6\'75\'af\'ca\'a6\'61\'a8\'cf\'a5\'ce\'b3\'6f\'ad\'d3\'a4\'77\'b8\'67\'aa\'f1\'a5\'62\'a5\'40\'ac\'f6\'a8\'53\'a6\'62\'ad\'d7\'ad\'71\'b9\'4c\'aa\'ba\'ad\'b5\'bc\'d0\'a8\'74\'b2\'ce\'a1\'41\'a8\'d3\'b6\'69\'a6\'e6\'ad\'5e\'a4\'e5\'b1\'d0\'be\'c7\'a1\'5d\'a8\'e4\'a5\'4c\'b0\'ea\'ae\'61\'b3\'a3\'a8\'cf\'a5\'ce\'a5\'48\'b0\'ea\'bb\'da\'ad\'b5\'bc\'d0 
+\f5 IPA 
+\f4 \'b0\'b5\'ac\'b0\'b5\'6f\'ad\'b5\'b1\'d0\'be\'c7\'a5\'ce\'a1\'5e\'a1\'41\'a6\'62 
+\f5 Mac OS X 
+\f4 \'a5\'ad\'a5\'78\'a9\'d2\'a4\'e4\'b4\'a9\'aa\'ba\'a6\'55\'c3\'fe 
+\f5 Unicode 
+\f4 \'a6\'72\'bd\'58\'bb\'50\'a6\'72\'c5\'e9\'a4\'a4\'a1\'41\'b3\'a3\'af\'e0\'b0\'f7\'c5\'e3\'a5\'dc 
+\f5 KK 
+\f4 \'ad\'b5\'bc\'d0\'a9\'d2\'a8\'cf\'a5\'ce\'aa\'ba\'a6\'55\'ba\'d8\'a9\'d4\'a4\'42\'a6\'72\'a5\'c0\'a1\'41\'a6\'fd\'ac\'4f\'ab\'6f\'af\'ca\'a4\'d6\'a4\'40\'ae\'4d\'a5\'69\'a5\'48\'a4\'e8\'ab\'4b\'bf\'e9\'a4\'4a\'aa\'ba\'a4\'e8\'a6\'a1\'a1\'43
+\f5  KK 
+\f4 \'ad\'b5\'bc\'d0\'bf\'e9\'a4\'4a\'aa\'6b\'bf\'e9\'a4\'4a\'af\'53\'ae\'ed\'ad\'b5\'bc\'d0\'b2\'c5\'b8\'b9\'aa\'ba\'a4\'e8\'aa\'6b\'ac\'4f\'a1\'47\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+\cf0 \'a1\'44\'a5\'b4\'a1\'75
+\f5 a
+\f4 \'a1\'76\'a5\'69\'a5\'48\'bf\'ef\'be\'dc\'a1\'75
+\f5 \uc0\u945 
+\f4 \'a1\'76\'a9\'ce\'a1\'75
+\f7 \uc0\u601 
+\f4 \'a1\'76\'a1\'43\
+\'a1\'44\'a5\'b4\'a1\'75
+\f5 e
+\f4 \'a1\'76\'a5\'69\'a5\'48\'bf\'ef\'be\'dc\'a1\'75
+\f5 \uc0\u949 
+\f4 \'a1\'76\'a9\'ce\'a1\'75
+\f5 e
+\f4 \'a1\'76\'a1\'43\
+\'a1\'44\'a5\'b4\'a1\'75
+\f5 i
+\f4 \'a1\'76\'a5\'69\'a5\'48\'bf\'ef\'be\'dc\'a1\'75
+\f7 \uc0\u618 
+\f4 \'a1\'76\'a9\'ce\'a1\'75
+\f5 i
+\f4 \'a1\'76\'a1\'43\
+\'a1\'44\'a5\'b4\'a1\'75
+\f5 o
+\f4 \'a1\'76\'a5\'69\'a5\'48\'bf\'ef\'be\'dc\'a1\'75
+\f7 \uc0\u596 
+\f4 \'a1\'76\'a9\'ce\'a1\'75
+\f5 o
+\f4 \'a1\'76\'a1\'43\
+\'a1\'44\'a5\'b4\'a1\'75
+\f5 u
+\f4 \'a1\'76\'a5\'69\'a5\'48\'bf\'ef\'be\'dc\'a1\'75
+\f7 \uc0\u650 
+\f4 \'a1\'76\'a9\'ce\'a1\'75
+\f7 \uc0\u652 
+\f4 \'a1\'76\'a1\'43\
+\'a1\'44\'a5\'b4\'a1\'75
+\f5 ae
+\f4 \'a1\'76\'b7\'7c\'a5\'58\'b2\'7b\'a1\'75
+\f5 \'be
+\f4 \'a1\'76\'a1\'43\
+\'a1\'44\'a5\'b4\'a1\'75
+\f5 er
+\f4 \'a1\'76\'b7\'7c\'a5\'58\'b2\'7b\'a1\'75
+\f7 \uc0\u602 
+\f4 \'a1\'76\'a1\'43\
+\'a1\'44\'a5\'b4\'a1\'75
+\f5 ur
+\f4 \'a1\'76\'b7\'7c\'a5\'58\'b2\'7b\'a1\'75
+\f7 \uc0\u605 
+\f4 \'a1\'76\'a1\'43\
+\'a1\'44\'a5\'b4\'a1\'75
+\f5 th
+\f4 \'a1\'76\'a5\'69\'a5\'48\'bf\'ef\'be\'dc\'a1\'75
+\f5 \uc0\u952 
+\f4 \'a1\'76\'a9\'ce\'a1\'75
+\f5 \uc0\u240 
+\f4 \'a1\'76\'a1\'43\
+\'a1\'44\'a5\'b4\'a1\'75
+\f5 gr
+\f4 \'a1\'76\'b7\'7c\'a5\'58\'b2\'7b\'a1\'75
+\f7 \uc0\u676 
+\f4 \'a1\'76\'a1\'43\
+\'a1\'44\'a5\'b4\'a1\'75
+\f5 sh
+\f4 \'a1\'76\'b7\'7c\'a5\'58\'b2\'7b\'a1\'75
+\f7 \uc0\u643 
+\f4 \'a1\'76\'a1\'43\
+\'a1\'44\'a5\'b4\'a1\'75
+\f5 ch
+\f4 \'a1\'76\'b7\'7c\'a5\'58\'b2\'7b\'a1\'75
+\f7 \uc0\u679 
+\f4 \'a1\'76\'a1\'43\
+\'a1\'44\'a5\'b4\'a1\'75
+\f5 ng
+\f4 \'a1\'76\'b7\'7c\'a5\'58\'b2\'7b\'a1\'75
+\f5 \uc0\u331 
+\f4 \'a1\'76\'a1\'43\
+\'a1\'44\'a8\'e4\'a5\'4c\'ab\'f6\'c1\'e4\'b7\'7c\'aa\'bd\'b1\'b5\'a5\'b4\'a5\'58\'ad\'ec\'a5\'bb\'aa\'ba\'ad\'5e\'a4\'e5\'a6\'72\'a5\'c0\'a1\'43
+\f5  
+\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\fs32 \cf0 2. 
+\f4 \'bf\'57\'a5\'df\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs28 \cf0 \'b6\'c7\'b2\'ce\'aa\'60\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b
+\f5\fs24 \
+OV 
+\f4 \'b4\'a3\'a8\'d1\'aa\'ba\'aa\'60\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'b7\'bd\'a6\'db\'a9\'f3\'a1\'75\'ad\'bb\'af\'f3\'aa\'60\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'76\'a1\'41\'ac\'4f\'b6\'c7\'b2\'ce\'a5\'b2\'b6\'b7\'a4\'e2\'b0\'ca\'bf\'ef\'a6\'72\'aa\'ba\'aa\'60\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'43\'bb\'50\'a8\'74\'b2\'ce\'a4\'ba\'ab\'d8\'aa\'ba\'aa\'60\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a4\'f1\'b8\'fb\'b0\'5f\'a8\'d3\'a1\'41
+\f5 OV 
+\f4 \'a9\'d2\'b4\'a3\'a8\'d1\'aa\'ba\'aa\'60\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'b4\'a3\'a8\'d1\'a4\'46\'ad\'ca\'a4\'d1\'c1\'e4\'bd\'4c\'b0\'74\'b8\'6d\'a1\'41\'bf\'ef\'a6\'72\'aa\'ba\'b6\'b6\'a7\'c7\'a4\'5d\'a9\'4d 
+\f5 Windows
+\f4 \'a1\'42
+\f5 Linux/FreeBSD 
+\f4 \'a4\'57\'aa\'ba 
+\f5 Xcin 
+\f4 \'a4\'40\'ad\'50\'a1\'43\'b1\'7a\'a5\'69\'a5\'48\'a6\'62 
+\f5 OpenVanilla 
+\f4 \'a8\'74\'b2\'ce\'b0\'be\'a6\'6e\'b3\'5d\'b8\'6d\'a4\'a4\'a4\'c1\'b4\'ab\'c1\'e4\'bd\'4c\'b0\'74\'b8\'6d\'a1\'43
+\f5 \
+
+\f4\fs28 \'a6\'e6\'a6\'43\'bf\'e9\'a4\'4a\'aa\'6b
+\f5\fs24 \
+Mac OS X 
+\f4 \'a4\'ba\'ab\'d8\'aa\'ba\'a4\'a4\'a4\'e5\'bf\'e9\'a4\'4a\'aa\'6b\'a4\'a4\'a1\'41\'a4\'40\'aa\'bd\'af\'ca\'a5\'46\'b9\'ef\'a9\'f3\'a6\'e6\'a6\'43\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'a4\'e4\'b4\'a9\'a1\'41\'a5\'69\'bb\'a1\'ac\'4f\'a6\'e6\'a6\'43\'a8\'cf\'a5\'ce\'aa\'cc\'a6\'62\'a8\'cf\'a5\'ce\'c4\'ab\'aa\'47\'a7\'40\'b7\'7e\'a8\'74\'b2\'ce\'ae\'c9\'aa\'ba\'a4\'40\'a4\'6a\'be\'d1\'a8\'c6\'a1\'43\'b7\'50\'c1\'c2\'a6\'e6\'a6\'43\'ac\'ec\'a7\'de\'b9\'f9\'a9\'fa\'bc\'77\'a5\'fd\'a5\'cd\'a1\'5d\'a4\'5d\'b4\'4e\'ac\'4f\'a6\'e6\'a6\'43\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'b5\'6f\'a9\'fa\'a4\'48\'a1\'5e\'ba\'42\'b4\'6e\'b4\'a3\'a8\'d1\'a6\'e6\'a6\'43\'bf\'e9\'a4\'4a\'aa\'ed\'ae\'e6\'a1\'41
+\f5 OV 
+\f4 \'a9\'d2\'a8\'cf\'a5\'ce\'aa\'ba\'a6\'e6\'a6\'43\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ed\'ae\'e6\'ac\'4f\'a8\'cf\'a5\'ce 
+\f5 Unicode 
+\f4 \'bd\'73\'bd\'58\'aa\'ba\'a1\'41\'a5\'5d\'a7\'74\'c1\'63\'a1\'42\'c2\'b2\'a4\'a4\'a4\'e5\'a6\'72\'b6\'b0\'a6\'40\'a8\'e2\'b8\'55\'a4\'45\'a4\'64\'be\'6c\'a6\'72\'a1\'43\
+\'c3\'f6\'a9\'f3\'a6\'e6\'a6\'43\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'a6\'55\'ba\'d8\'ac\'db\'c3\'f6\'b8\'ea\'b0\'54\'a1\'41\'bd\'d0\'b0\'d1\'a8\'a3\'a6\'e6\'a6\'43\'ac\'ec\'a7\'de\'ba\'f4\'af\'b8\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 http://www.array.com.tw/ \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs28 \cf0 \'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b
+\f5\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'ac\'4f\'a4\'40\'ae\'4d\'a5\'69\'a5\'48\'b4\'bc\'bc\'7a\'bf\'ef\'a6\'72\'aa\'ba\'a4\'a4\'a4\'e5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'c3\'fe\'a6\'fc\'a9\'f3\'ba\'7e\'ad\'b5\'a1\'42\'a6\'db\'b5\'4d\'a5\'48\'a4\'ce\'b7\'4c\'b3\'6e\'b7\'73\'aa\'60\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'43\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'ad\'ec\'a5\'bb\'ac\'4f\'a6\'62
+\f5  Linux / FreeBSD 
+\f4 \'a4\'55\'aa\'ba\'a4\'a4\'a4\'e5\'c0\'f4\'b9\'d2\'a4\'55\'b6\'7d\'b5\'6f\'a1\'41\'a6\'d3\'a4\'a7\'ab\'65\'a4\'5d\'a4\'77\'b8\'67\'a6\'b3
+\f5  SpaceChewingOSX 
+\f4 \'b3\'6f\'bc\'cb\'aa\'ba\'b2\'be\'b4\'d3\'a8\'ec
+\f5  Mac OS X 
+\f4 \'a5\'ad\'a5\'78\'a4\'57\'b1\'4d\'ae\'d7\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 OV 
+\f4 \'aa\'ba\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a7\'ef\'c5\'dc\'b9\'4c\'a5\'68\'aa\'ba
+\f5  SpaceChewingOSX 
+\f4 \'aa\'ba\'ac\'5b\'ba\'63\'a1\'41\'a8\'cf\'a5\'ce\'a1\'75\'b7\'73\'bb\'c5\'ad\'b5\'a1\'76\'b1\'4d\'ae\'d7\'aa\'ba
+\f5  libchewing
+\f4 \'a1\'41\'b1\'4e\'ad\'ec\'a5\'bb
+\f5  SpaceChewingOSX 
+\f4 \'bb\'50\'b7\'73\'bb\'c5\'ad\'b5\'a8\'e2\'ad\'d3\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'b6\'7d\'b5\'6f\'a4\'c0\'a4\'e4\'a6\'58\'a4\'40\'a1\'41\'a4\'e9\'ab\'e1\'b7\'73\'bb\'c5\'ad\'b5\'a6\'b3\'a5\'f4\'a6\'f3\'b7\'73\'a5\'5c\'af\'e0\'a1\'41\'a4\'5d\'a5\'69\'a5\'48\'a5\'df\'a7\'59\'c5\'fd
+\f5  Mac OS X 
+\f4 \'aa\'ba\'a8\'cf\'a5\'ce\'aa\'cc\'a8\'c9\'a6\'b3\'a1\'41\'a7\'da\'ad\'cc\'a5\'d8\'ab\'65\'a4\'5d\'a7\'56\'a4\'4f\'b1\'4e\'ad\'ec\'a5\'bb
+\f5  SpaceChewing OSX 
+\f4 \'aa\'ba\'a5\'5c\'af\'e0\'a1\'41\'ba\'43\'ba\'43\'a5\'5b\'a4\'4a\'a8\'ec
+\f5  libchewing 
+\f4 \'a4\'a4\'a1\'43\
+\'a6\'d3\'a6\'62
+\f5  Mac OS X 
+\f4 \'a5\'ad\'a5\'78\'a4\'57\'a1\'41\'a4\'77\'b8\'67\'a4\'ba\'ab\'d8\'a4\'46\'c3\'fe\'a6\'fc\'aa\'ba\'ba\'7e\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'a6\'d3\'bb\'c5\'ad\'b5\'bb\'50\'ba\'7e\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'a4\'a3\'a6\'50\'a4\'a7\'b3\'42\'a1\'41\'a5\'5d\'ac\'41\'a4\'e4\'b4\'a9\'b3\'5c\'a6\'68\'a4\'48\'a4\'77\'b8\'67\'ab\'44\'b1\'60\'b2\'df\'ba\'44\'a6\'62
+\f5  Windows 
+\f4 \'a5\'ad\'a5\'78\'a4\'57\'aa\'ba\'a6\'db\'b5\'4d\'bf\'e9\'a4\'4a\'aa\'6b\'a9\'d2\'b4\'a3\'a8\'d1\'aa\'ba\'b3\'5c\'a4\'f3\'c1\'e4\'bd\'4c\'a1\'41\'a5\'74\'a5\'7e\'a1\'41\'a4\'5d\'a4\'e4\'b4\'a9\'ad\'ca\'a4\'d1\'c1\'e4\'bd\'4c\'b0\'74\'b8\'6d\'a5\'48\'a4\'ce\'ad\'ca\'a4\'d1\'a4\'47\'a4\'51\'a4\'bb\'c1\'e4\'c1\'e4\'bd\'4c\'a1\'43\
+
+\f5 1. 
+\f4 \'bf\'ef\'a6\'72\'a4\'ce\'bf\'ef\'b5\'fc
+\f5 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b7\'ed\'b1\'7a\'a6\'62\'a5\'b4\'a6\'72\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'a5\'75\'ad\'6e\'ab\'f6\'a4\'55\'aa\'c5\'a5\'d5\'c1\'e4\'a1\'42\'a9\'ce\'a6\'62\'a4\'e8\'a6\'56\'c1\'e4\'a4\'57\'ab\'f6\'a1\'75\'a4\'55\'a1\'76\'a1\'41\'b4\'4e\'b7\'7c\'a6\'62\'b1\'7a\'bf\'e9\'a4\'4a\'a6\'ec\'b8\'6d\'aa\'ba\'a4\'55\'a4\'e8\'a1\'41\'b8\'f5\'a5\'58\'bf\'ef\'a6\'72\'b5\'f8\'b5\'a1\'a1\'41\'a6\'62\'bf\'ef\'a6\'72\'bc\'d2\'a6\'a1\'a4\'55\'a1\'41\'a5\'69\'a5\'48\'bf\'ef\'b5\'fc\'bb\'50\'bf\'ef\'a6\'72\'a1\'41\'b5\'4d\'ab\'e1\'a1\'41\'ab\'f6\'a4\'55\'bc\'c6\'a6\'72\'c1\'e4 
+\f5 1 
+\f4 \'a8\'ec
+\f5 7
+\f4 \'a1\'5d\'a6\'62\'b3\'5c\'a4\'f3\'c1\'e4\'bd\'4c\'b0\'74\'b8\'6d\'a4\'55\'a1\'41\'ab\'68\'ac\'4f\'a5\'ce 
+\f5 a
+\f4 , 
+\f5 s
+\f4 , 
+\f5 d
+\f4 , 
+\f5 f
+\f4 , 
+\f5 j
+\f4 , 
+\f5 k
+\f4 , 
+\f5 l
+\f4 \'a1\'5e\'a1\'41\'b4\'4e\'b7\'7c\'bf\'e9\'a4\'4a\'b1\'7a\'a9\'d2\'bf\'ef\'be\'dc\'aa\'ba\'a6\'72\'a9\'ce\'b5\'fc\'a1\'43\
+\'a6\'62\'ab\'f6\'a4\'55\'aa\'c5\'a5\'d5\'c1\'e4\'a9\'ce\'a6\'62\'a4\'e8\'a6\'56\'c1\'e4\'a4\'57\'ab\'f6\'a1\'75\'a4\'55\'a1\'76\'a4\'a7\'ab\'e1\'a1\'41\'a4\'c1\'b4\'ab\'bf\'ef\'a6\'72\'aa\'ba\'ac\'4f\'b4\'e5\'bc\'d0\'a9\'d2\'a6\'62\'a6\'ec\'b8\'6d\'aa\'ba\'a4\'55\'a4\'40\'ad\'d3\'a6\'72\'a1\'41\'bb\'50\'ba\'7e\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'b5\'79\'a6\'b3\'a4\'a3\'a6\'50\'a1\'41\'ba\'7e\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'ac\'4f\'bf\'ef\'be\'dc\'b4\'e5\'bc\'d0\'a9\'d2\'a6\'62\'aa\'ba\'ab\'65\'a4\'40\'ad\'d3\'a6\'72\'a1\'43\'a6\'d3\'a6\'70\'aa\'47\'a8\'74\'b2\'ce\'b5\'fc\'ae\'77\'a4\'a4\'a1\'41\'a6\'b3\'a5\'48\'b1\'7a\'a5\'d8\'ab\'65\'a9\'d2\'bf\'ef\'be\'dc\'aa\'ba\'a6\'72\'ad\'b5\'b6\'7d\'c0\'59\'aa\'ba\'b5\'fc\'b7\'4a\'a1\'41\'b4\'4e\'b7\'7c\'a5\'fd\'a5\'58\'b2\'7b\'bf\'ef\'b5\'fc\'aa\'ba\'b5\'65\'ad\'b1\'a1\'41\'ab\'f6\'a4\'40\'a4\'55\'aa\'c5\'a5\'d5\'c1\'e4\'a9\'ce\'a1\'75\'a4\'57\'a1\'76\'a1\'42\'a1\'75\'a4\'55\'a1\'76\'a4\'e8\'a6\'56\'c1\'e4\'a1\'41\'b4\'4e\'b7\'7c\'a4\'c1\'b4\'ab\'bf\'ef\'a6\'72\'a4\'ce\'bf\'ef\'b5\'fc\'bc\'d2\'a6\'a1\'a1\'43\
+\'a4\'f1\'a6\'70\'bb\'a1\'a1\'41\'bf\'e9\'a4\'4a\'a1\'75\'aa\'f1\'b5\'f8\'a1\'76\'a4\'a7\'ab\'e1\'a1\'41\'b1\'4e\'b4\'e5\'bc\'d0\'b2\'be\'b0\'ca\'a8\'ec\'a1\'75\'aa\'f1\'b5\'f8\'a1\'76\'a4\'40\'b5\'fc\'aa\'ba\'b3\'cc\'ab\'65\'ad\'b1\'a1\'41\'ab\'f6\'a4\'55\'aa\'c5\'a5\'d5\'c1\'e4\'a1\'41\'ab\'4b\'a5\'69\'ac\'dd\'a8\'ec\'b3\'5c\'a6\'68\'bf\'ef\'b6\'b5\'a1\'43\'a6\'b9\'ae\'c9\'aa\'bd\'b1\'b5\'a6\'41\'ab\'f6\'a4\'55\'aa\'c5\'a5\'d5\'c1\'e4\'a1\'41\'ab\'4b\'a5\'69\'bf\'ef\'a4\'a3\'a6\'50\'aa\'ba\'a1\'75\'aa\'f1\'a1\'76\'a6\'72\'a1\'43\
+\'a6\'62\'bf\'ef\'a6\'72\'a9\'ce\'a9\'ce\'bf\'ef\'b5\'fc\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'a6\'70\'aa\'47\'a5\'69\'a5\'48\'bf\'ef\'be\'dc\'aa\'ba\'bf\'ef\'b6\'b5\'bc\'c6\'b6\'71\'b6\'57\'b9\'4c\'a4\'40\'ad\'b6\'a5\'69\'a5\'48\'c5\'e3\'a5\'dc\'aa\'ba\'bd\'64\'b3\'f2\'a1\'41\'b4\'4e\'b7\'7c\'a5\'48\'a4\'c0\'ad\'b6\'a4\'e8\'a6\'a1\'a7\'65\'b2\'7b\'a1\'41\'a5\'75\'ad\'6e\'ab\'f6\'a5\'aa\'c1\'e4\'bb\'50\'a5\'6b\'c1\'e4\'a1\'41\'ab\'4b\'a5\'69\'a5\'48\'c2\'bd\'ad\'b6\'a1\'41\'c2\'bd\'ad\'b6\'a8\'ec\'a9\'b3\'ae\'c9\'b7\'7c\'b4\'60\'c0\'f4\'a1\'41\'a6\'5e\'a8\'ec\'bf\'ef\'a6\'72\'aa\'ba\'b2\'c4\'a4\'40\'ad\'b6\'b5\'65\'ad\'b1\'a1\'41\'a6\'62\'bf\'ef\'a6\'72\'a1\'5d\'a9\'ce\'bf\'ef\'b5\'fc\'b5\'f8\'b5\'a1\'a1\'5e\'a4\'57\'a1\'41\'a4\'5d\'b7\'7c\'a5\'58\'b2\'7b\'a5\'fe\'b3\'a1\'ad\'b6\'bc\'c6\'a1\'42\'b1\'7a\'a5\'d8\'ab\'65\'a9\'d2\'a6\'62\'ad\'b6\'bc\'c6\'a1\'42\'a5\'48\'a4\'ce\'ac\'4f\'a7\'5f\'a5\'69\'a5\'48\'ab\'f6\'a4\'55\'a5\'aa\'a5\'6b\'c1\'e4\'c2\'bd\'ad\'b6\'aa\'ba\'bd\'62\'c0\'59\'ab\'fc\'a5\'dc\'a1\'43\
+\'a6\'70\'a5\'48\'aa\'c5\'a5\'d5\'c1\'e4\'bf\'ef\'b5\'fc\'c2\'bd\'ad\'b6\'a1\'5d\'a5\'75\'af\'e0\'a9\'b9\'ab\'e1\'c2\'bd\'a1\'5e\'a8\'ec\'a9\'b3\'ae\'c9\'a1\'41\'a6\'41\'ab\'f6\'a4\'40\'a4\'55\'b7\'7c\'b6\'69\'a4\'4a\'bf\'ef\'a6\'72\'a1\'43\'a6\'62\'bf\'ef\'a6\'72\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'a6\'70\'aa\'47\'ab\'f6\'a4\'55\'aa\'c5\'a5\'d5\'c1\'e4\'a1\'41\'b4\'4e\'b7\'7c\'a6\'5e\'a8\'ec\'bf\'ef\'a6\'72\'aa\'ba\'b2\'c4\'a4\'40\'ad\'b6\'a1\'43\'a6\'b9\'a5\'7e\'a1\'41\'a6\'70\'aa\'47\'a8\'74\'b2\'ce\'a4\'a4\'a6\'b3\'a5\'48\'ac\'59\'ad\'d3\'a6\'72\'ad\'b5\'b6\'7d\'c0\'59\'a1\'41\'a6\'fd\'ac\'4f\'a6\'72\'bc\'c6\'a4\'a3\'a6\'50\'aa\'ba\'a5\'69\'bf\'ef\'b5\'fc\'b7\'4a\'a1\'41\'a4\'f1\'a4\'e8\'bb\'a1\'a1\'41\'b7\'ed\'b1\'7a\'bf\'e9\'a4\'4a\'a1\'75\'b7\'4e\'ae\'f0\'ad\'b7\'b5\'6f\'a1\'76\'ae\'c9\'a1\'41\'b1\'7a\'ab\'4b\'a5\'69\'a5\'48\'bf\'ef\'be\'dc\'a5\'7c\'a6\'72\'b5\'fc\'a1\'75\'b7\'4e\'ae\'f0\'ad\'b7\'b5\'6f\'a1\'76\'a5\'48\'a4\'ce\'a1\'75\'b7\'4e\'ae\'f0\'a1\'76\'a1\'41\'a8\'74\'b2\'ce\'b7\'7c\'a5\'fd\'b8\'f5\'a5\'58\'a5\'7c\'a6\'72\'b5\'fc\'aa\'ba\'bf\'ef\'b5\'fc\'aa\'ac\'ba\'41\'a1\'41\'a6\'41\'ab\'f6\'a4\'40\'a4\'55\'aa\'c5\'a5\'d5\'c1\'e4\'a9\'ce\'a1\'75\'a4\'55\'a1\'76\'a1\'41\'a4\'7e\'b7\'7c\'b8\'f5\'a5\'58\'a4\'47\'a6\'72\'b5\'fc\'a1\'75\'b7\'4e\'ae\'f0\'a1\'76\'aa\'ba\'bf\'ef\'b5\'fc\'aa\'ac\'ba\'41\'a1\'41\'b5\'4d\'ab\'e1\'a4\'7e\'ac\'4f\'a1\'75\'b7\'4e\'a1\'76\'b3\'6f\'ad\'d3\'a6\'72\'aa\'ba\'bf\'ef\'a6\'72\'aa\'ac\'ba\'41\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 2. 
+\f4 \'a4\'c1\'b4\'ab\'c1\'e4\'bd\'4c\'b0\'74\'b8\'6d
+\f5 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a4\'e4\'b4\'a9\'b9\'77\'b3\'5d\'c1\'e4\'bd\'4c\'a1\'42\'b3\'5c\'a4\'f3\'c1\'e4\'bd\'4c\'a1\'42\'ad\'ca\'a4\'d1\'c1\'e4\'bd\'4c\'a1\'42\'ad\'ca\'a4\'d1\'a4\'47\'a4\'51\'a4\'bb\'c1\'e4\'a1\'42
+\f5 IBM 
+\f4 \'c1\'e4\'bd\'4c\'a5\'48\'a4\'ce\'ba\'eb\'b7\'7e\'c1\'e4\'bd\'4c\'b5\'a5\'a4\'a3\'a6\'50\'aa\'ba\'c1\'e4\'bd\'4c\'b0\'74\'b8\'6d\'a1\'41\'b1\'7a\'a5\'69\'a5\'48\'a6\'62 
+\f5 OV 
+\f4 \'aa\'ba\'b0\'be\'a6\'6e\'b3\'5d\'a9\'77\'a4\'a4\'a4\'c1\'b4\'ab\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 3. 
+\f4 \'a4\'a4\'ad\'5e\'a4\'e5\'b2\'56\'c2\'f8\'bf\'e9\'a4\'4a
+\f5 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a6\'70\'aa\'47\'a6\'62\'bf\'e9\'a4\'4a\'aa\'ba\'a6\'50\'ae\'c9\'a1\'41\'ab\'f6\'a4\'55\'a1\'75
+\f5 caps lock
+\f4 \'a1\'76\'ab\'f6\'b6\'73\'a1\'41\'ab\'4b\'a5\'69\'a5\'48\'a6\'62\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'c0\'f4\'b9\'d2\'a4\'55\'a1\'41\'bf\'e9\'a4\'4a\'ad\'5e\'a4\'e5\'a1\'41\'a4\'a3\'bb\'dd\'ad\'6e\'a6\'62\'a4\'c1\'b4\'ab\'a8\'ec\'ad\'5e\'a4\'e5\'bb\'79\'a8\'74\'c0\'f4\'b9\'d2\'a4\'55\'a1\'41\'a4\'7e\'a5\'69\'a5\'48\'bf\'e9\'a4\'4a\'ad\'5e\'a4\'e5\'a1\'43\'a6\'d3\'a5\'75\'ad\'6e\'a6\'41\'ab\'f6\'a4\'40\'a4\'55\'a1\'75
+\f5 caps lock
+\f4 \'a1\'76\'ab\'f6\'b6\'73\'a1\'41\'b4\'4e\'a5\'69\'a5\'48\'a4\'c1\'b4\'ab\'a6\'5e\'a4\'a4\'a4\'e5\'bf\'e9\'a4\'4a\'aa\'ac\'ba\'41\'a1\'43\'a6\'b9\'a5\'7e\'a1\'41\'a6\'62\'a4\'6a\'a6\'68\'bc\'c6\'aa\'ba\'aa\'ac\'aa\'70\'a4\'55\'a1\'41\'a5\'75\'ad\'6e\'ab\'f6\'a4\'55 
+\f5 shift
+\f4 \'a5\'48\'a4\'ce\'a8\'e4\'a5\'4c\'ab\'f6\'c1\'e4\'a1\'41\'ab\'4b\'a5\'69\'a5\'48\'bf\'e9\'a4\'4a\'ad\'5e\'a4\'e5\'a6\'72\'a5\'c0\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 4. 
+\f4 \'a4\'e2\'b0\'ca\'c2\'5f\'b5\'fc
+\f5 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a6\'b3\'ae\'c9\'ad\'d4\'a1\'41\'a8\'74\'b2\'ce\'a6\'db\'b0\'ca\'bf\'ef\'b5\'fc\'aa\'ba\'b5\'b2\'aa\'47\'a1\'41\'a8\'c3\'a4\'a3\'b2\'c5\'a6\'58\'a7\'da\'ad\'cc\'aa\'ba\'b4\'c1\'ab\'dd\'a1\'41\'b1\'4e\'a4\'40\'a8\'c7\'a4\'a3\'c0\'b3\'b8\'d3\'b3\'51\'a7\'50\'c2\'5f\'a6\'a8\'b5\'fc\'b7\'4a\'aa\'ba\'a6\'72\'aa\'ba\'b2\'d5\'a6\'58\'a1\'41\'b7\'ed\'a6\'a8\'ac\'4f\'b5\'fc\'b7\'4a\'b3\'42\'b2\'7a\'a1\'43\'a4\'f1\'a4\'e8\'bb\'a1\'a1\'41\'b1\'7a\'a6\'62\'bf\'e9\'a4\'4a\'a1\'75\'ad\'70\'ba\'e2\'be\'f7\'bb\'50\'a5\'b4\'a6\'72\'be\'f7\'a1\'76\'a4\'a7\'ab\'e1\'a1\'41\'a5\'58\'b2\'7b\'aa\'ba\'b5\'b2\'aa\'47\'ab\'6f\'ac\'4f\'a1\'47\
+\'a1\'75\'ad\'70\'ba\'e2
+\f5  
+\f4 \'bf\'6e\'ab\'42
+\f5  
+\f4 \'a5\'b4\'a6\'72\'be\'f7\'a1\'76\
+\'b3\'6f\'ae\'c9\'ad\'d4\'a1\'41\'b1\'7a\'a5\'69\'a5\'48\'ab\'f6\'a4\'55\'a1\'75\'bf\'6e\'a1\'76\'a9\'4d\'a1\'75\'ab\'42\'a1\'76\'a4\'a7\'b6\'a1\'a1\'41\'ab\'f6\'a4\'55\'a1\'75
+\f5 tab
+\f4 \'a1\'76\'ab\'f6\'b6\'73\'a1\'41\'b1\'6a\'ad\'a2\'a1\'75\'bf\'6e\'a1\'76\'a9\'4d\'a1\'75\'ab\'42\'a1\'76\'a4\'a7\'b6\'a1\'c2\'5f\'b6\'7d\'a1\'41\'a6\'d3\'a4\'a3\'ad\'6e\'b1\'4e\'a1\'75\'bf\'6e\'ab\'42\'a1\'76\'b5\'f8\'a7\'40\'ac\'4f\'a4\'40\'ad\'d3\'b5\'fc\'b7\'4a\'a1\'41\'a6\'d3\'b1\'6f\'a8\'ec\'a5\'bf\'bd\'54\'aa\'ba\'b5\'b2\'aa\'47\'a1\'43\'a6\'62\'b3\'5c\'a4\'f3\'c1\'e4\'bd\'4c\'a4\'55\'a1\'41\'b1\'7a\'a4\'5d\'a5\'69\'a5\'48\'a8\'cf\'a5\'ce\'b9\'b3\'a6\'db\'b5\'4d\'bf\'e9\'a4\'4a\'aa\'6b\'a4\'40\'bc\'cb\'aa\'ba\'a4\'e8\'a6\'a1\'a1\'41\'a5\'ce\'a1\'75
+\f5 q
+\f4 \'a1\'76\'ab\'f6\'c1\'e4\'c2\'5f\'b5\'fc\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 5. 
+\f4 \'a5\'5b\'a4\'4a\'a6\'db\'ad\'71\'b5\'fc\'b7\'4a
+\f5 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b7\'ed\'b1\'7a\'a6\'62\'bf\'e9\'a4\'4a\'a1\'42\'bf\'ef\'a6\'72\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'a8\'74\'b2\'ce\'b4\'4e\'b7\'7c\'a6\'db\'b0\'ca\'c0\'b0\'b1\'7a\'a7\'e2\'b5\'fc\'ae\'77\'b7\'ed\'a4\'a4\'ad\'ec\'a5\'bb\'a8\'53\'a6\'b3\'aa\'ba\'b5\'fc\'b7\'4a\'a1\'41\'a5\'5b\'a4\'4a\'a8\'ec\'b1\'7a\'aa\'ba\'a6\'db\'ad\'71\'b5\'fc\'ae\'77\'b7\'ed\'a4\'a4\'a4\'46\'a1\'41\'a9\'d2\'a5\'48\'a1\'41\'a6\'62\'bf\'e9\'a4\'4a\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'a8\'74\'b2\'ce\'b7\'7c\'a6\'db\'b0\'ca\'a5\'58\'b2\'7b\'b1\'7a\'b3\'cc\'aa\'f1\'bf\'e9\'a4\'4a\'ae\'c9\'b1\'60\'a5\'ce\'aa\'ba\'b5\'fc\'b7\'4a\'a1\'43\
+\'a5\'74\'a5\'7e\'a1\'41\'b1\'7a\'a4\'5d\'a5\'69\'a5\'48\'a4\'e2\'b0\'ca\'a5\'5b\'a4\'4a\'b7\'73\'b5\'fc\'a1\'41\'a6\'62\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a4\'a4\'a1\'41\'a5\'d8\'ab\'65\'a4\'e4\'b4\'a9\'a8\'e2\'ba\'d8\'b7\'73\'bc\'57\'a6\'db\'ad\'71\'c3\'e3\'a8\'e5\'aa\'ba\'a4\'e8\'aa\'6b\'a1\'41\'b1\'7a\'a5\'69\'a5\'48\'a6\'db\'ad\'71\'b7\'73\'bc\'57\'a4\'47\'a6\'72\'b5\'fc\'a8\'ec\'a4\'45\'a6\'72\'b5\'fc\'a1\'43\'b2\'c4\'a4\'40\'ba\'d8\'ac\'4f\'aa\'75\'a5\'ce\'b9\'4c\'a5\'68\'a6\'62 
+\f5 X window 
+\f4 \'c0\'f4\'b9\'d2\'a4\'55\'aa\'ba\'a4\'e8\'a6\'a1\'a1\'41\'a4\'e8\'aa\'6b\'ac\'4f\'a1\'47
+\f5 1.
+\f4 \'a5\'fd\'a7\'e2\'b4\'e5\'bc\'d0\'b2\'be\'a8\'ec\'ad\'6e\'a6\'73\'aa\'ba\'b5\'fc\'aa\'ba\'ab\'65\'ad\'b1\'a1\'41
+\f5 2.
+\f4 \'ad\'70\'ba\'e2\'ad\'6e\'a6\'73\'aa\'ba\'b5\'fc\'aa\'ba\'aa\'f8\'ab\'d7\'a1\'41\'a8\'d2\'a6\'70\'a4\'54\'ad\'d3\'a6\'72\'a1\'41
+\f5 3.
+\f4 \'ab\'f6\'a4\'55 
+\f5 ctrl-3
+\f4 \'a1\'43\
+\'a5\'74\'a5\'7e\'a4\'40\'ba\'d8\'a4\'e8\'aa\'6b\'a1\'41\'ab\'68\'ac\'4f\'a6\'d2\'bc\'7b\'a8\'ec\'b3\'5c\'a6\'68\'ba\'44\'a5\'ce\'ba\'7e\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'a8\'cf\'a5\'ce\'aa\'cc\'aa\'ba\'b2\'df\'ba\'44\'a1\'41\'a5\'74\'a5\'7e\'a5\'5b\'a4\'4a\'a4\'46\'ba\'7e\'ad\'b5\'bc\'d2\'a6\'a1\'aa\'ba\'a5\'5b\'a4\'4a\'a6\'db\'ad\'71\'b5\'fc\'b7\'4a\'a4\'e8\'a6\'a1\'a1\'43\'a4\'e8\'aa\'6b\'ac\'4f\'a1\'41\'b7\'ed\'b1\'7a\'a6\'62\'bf\'e9\'a4\'4a\'a4\'e5\'a6\'72\'aa\'ba\'aa\'ac\'ba\'41\'a4\'55\'a1\'41\'ab\'f6\'a4\'55
+\f5  shift 
+\f4 \'ab\'f6\'b6\'73\'a5\'48\'a4\'ce\'a5\'aa\'a5\'6b\'c1\'e4\'a1\'41\'ab\'4b\'b7\'7c\'a5\'58\'b2\'7b\'a4\'40\'ac\'71\'a9\'b3\'bd\'75\'a5\'5b\'b2\'ca\'aa\'ba\'a4\'e5\'a6\'72\'bd\'64\'b3\'f2\'a1\'41\'b3\'6f\'ae\'c9\'ad\'d4\'a1\'41\'a5\'75\'ad\'6e\'a6\'41\'ab\'f6\'a4\'55
+\f5  return 
+\f4 \'c1\'e4\'a1\'41\'b4\'4e\'a5\'69\'a5\'48\'b1\'4e\'a5\'fd\'ab\'65\'a9\'d2\'bf\'ef\'be\'dc\'aa\'ba\'bd\'64\'b3\'f2\'a1\'41\'a5\'5b\'a4\'4a\'a6\'db\'ad\'71\'c3\'e3\'a8\'e5\'c0\'c9\'ae\'d7\'a4\'a4\'a1\'41\'a6\'d3\'a6\'70\'aa\'47\'ab\'f6\'a4\'55\'aa\'ba\'ac\'4f\'a8\'e4\'a5\'4c\'aa\'ba\'ab\'f6\'c1\'e4\'a1\'41\'b4\'4e\'b7\'7c\'b8\'f5\'a5\'58\'bf\'ef\'a6\'72\'bc\'d2\'a6\'a1\'a1\'43\
+\'b1\'7a\'a6\'db\'ad\'71\'aa\'ba\'b5\'fc\'b7\'4a\'a1\'41\'b7\'7c\'c0\'78\'a6\'73\'a6\'62\'b1\'7a\'ad\'d3\'a4\'48\'a5\'d8\'bf\'fd\'a4\'55\'a1\'f7\'a1\'75\'b8\'ea\'b7\'bd\'ae\'77\'a1\'76\'a1\'f7\'a1\'75
+\f5 OVIMChewing
+\f4 \'a1\'76\'a4\'55\'aa\'ba\'a1\'75
+\f5 hash.dat
+\f4 \'a1\'76\'c0\'c9\'ae\'d7\'a4\'a4\'a1\'41\'b1\'7a\'a5\'69\'a5\'48\'b1\'4e\'b3\'6f\'ad\'d3\'c0\'c9\'ae\'d7\'a1\'41\'bd\'c6\'bb\'73\'a8\'ec\'a8\'e4\'a5\'4c\'aa\'ba\'b9\'71\'b8\'a3\'a4\'57\'a8\'cf\'a5\'ce\'a1\'41\'a6\'d3\'a6\'70\'aa\'47\'b1\'7a\'c4\'b1\'b1\'6f\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'b0\'f5\'a6\'e6\'b3\'74\'ab\'d7\'a4\'d3\'ba\'43\'a1\'41\'a4\'5d\'a5\'69\'a5\'48\'aa\'bd\'b1\'b5\'a7\'52\'b0\'a3\'b3\'6f\'ad\'d3\'c0\'c9\'ae\'d7\'a1\'41\'c5\'fd\'a8\'74\'b2\'ce\'a4\'a3\'ad\'6e\'c5\'aa\'a8\'fa\'b1\'7a\'aa\'ba\'a6\'db\'ad\'71\'c3\'e3\'a8\'e5\'a1\'43
+\f5 \'d1
+\f4 \'ab\'dc\'a9\'ea\'ba\'70\'a1\'41\'a5\'d8\'ab\'65\'c1\'d9\'a8\'53\'a6\'b3\'ba\'de\'b2\'7a\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a6\'db\'ad\'71\'c3\'e3\'a8\'e5\'aa\'ba\'a4\'75\'a8\'e3\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 6. 
+\f4 \'af\'53\'ae\'ed\'b2\'c5\'b8\'b9\'bf\'e9\'a4\'4a
+\f5 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b7\'ed\'b1\'7a\'a6\'62\'bf\'e9\'a4\'4a\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'a5\'75\'ad\'6e\'ab\'f6\'a4\'55\'a6\'62\'aa\'60\'ad\'b5\'b2\'c5\'b8\'b9\'a4\'a7\'a5\'7e\'aa\'ba\'bc\'d0\'c2\'49\'b2\'c5\'b8\'b9\'a1\'41\'b4\'4e\'a5\'69\'a5\'48\'a5\'b4\'a5\'58\'a5\'fe\'a7\'ce\'bc\'d0\'c2\'49\'b2\'c5\'b8\'b9\'a1\'41\'a8\'d2\'a6\'70 
+\f5 shift 
+\f4 \'a5\'5b\'a4\'57\'a1\'75
+\f5 ,
+\f4 \'a1\'76\'a1\'41\'b4\'4e\'a5\'69\'a5\'48\'bf\'e9\'a4\'4a\'a1\'75\'a1\'41\'a1\'76\'a1\'43\'a6\'62\'b3\'5c\'a4\'f3\'c1\'e4\'bd\'4c\'b0\'74\'b8\'6d\'a4\'55\'a1\'41\'b1\'7a\'a4\'5d\'a5\'69\'a5\'48\'aa\'bd\'b1\'b5\'bf\'e9\'a4\'4a\'a1\'75
+\f5 ,
+\f4 \'a1\'76\'a1\'41\'b4\'4e\'a5\'58\'b2\'7b\'a5\'fe\'a7\'ce\'aa\'ba\'a1\'75\'a1\'41\'a1\'76\'a1\'41\'bf\'e9\'a4\'4a\'a1\'75
+\f5 .
+\f4 \'a1\'76\'a5\'58\'b2\'7b\'a5\'fe\'a7\'ce\'aa\'ba\'a1\'75\'a1\'43\'a1\'76\'a1\'41\'a6\'d3\'ab\'f6\'a4\'55\'a4\'46
+\f5  shift 
+\f4 \'a5\'48\'a4\'ce\'aa\'c5\'a5\'d5\'c1\'e4\'a1\'41\'ab\'68\'a5\'69\'a5\'48\'bf\'e9\'a4\'4a\'a5\'fe\'a7\'ce\'aa\'c5\'a5\'d5\'a1\'43\
+\'a6\'70\'aa\'47\'b1\'7a\'bc\'f4\'b1\'78\'a1\'75\'ba\'7e\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'76\'aa\'ba\'a8\'cf\'a5\'ce\'c0\'f4\'b9\'d2\'a1\'41\'b1\'7a\'a9\'ce\'b3\'5c\'b7\'7c\'b2\'df\'ba\'44\'ab\'f6\'a4\'55\'a1\'75
+\f5 `
+\f4 \'a1\'76\'ab\'f6\'b6\'73\'a1\'41\'b4\'4e\'b7\'7c\'a5\'58\'b2\'7b\'b2\'c5\'b8\'b9\'aa\'ed\'bf\'ef\'be\'dc\'b2\'4d\'b3\'e6\'a1\'41\'a6\'62\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a4\'a4\'a1\'41\'a4\'5d\'a6\'b3\'a6\'50\'bc\'cb\'aa\'ba\'a5\'5c\'af\'e0\'a1\'41\'a4\'a3\'b9\'4c\'a5\'73\'a5\'58\'b2\'c5\'b8\'b9\'aa\'ed\'aa\'ba\'a4\'e8\'aa\'6b\'ac\'4f\'ab\'f6\'a4\'55
+\f5  ctrl 
+\f4 \'a5\'5b\'a4\'57\'a1\'75
+\f5 1
+\f4 \'a1\'76\'a9\'ce\'ac\'4f\'a1\'75
+\f5 0
+\f4 \'a1\'76\'a1\'43\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+\cf0 {{\NeXTGraphic ChewingSymbol.jpg \width7060 \height2420
+}¬}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f4\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+\cf0 \'a6\'62\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a4\'a4\'a1\'41\'b1\'7a\'a4\'5d\'a5\'69\'a5\'48\'a6\'50\'ae\'c9\'ab\'f6\'a4\'55
+\f5  ctrl 
+\f4 \'a5\'48\'a4\'ce
+\f5  option 
+\f4 \'ab\'f6\'b6\'73\'a1\'41\'b5\'4d\'ab\'e1\'ab\'f6\'a4\'55\'a1\'75
+\f5 a
+\f4 \'a1\'76\'a8\'ec\'a1\'75
+\f5 z
+\f4 \'a1\'76\'b5\'a5\'ab\'f6\'b6\'73\'a1\'41\'a4\'5d\'a5\'69\'a5\'48\'bf\'e9\'a4\'4a\'c3\'fe\'a6\'fc\'b9\'4c\'a5\'68\'a6\'62\'ad\'ca\'a4\'d1\'a4\'a4\'a4\'e5\'c0\'f4\'b9\'d2\'a4\'55\'aa\'ba\'af\'53\'ae\'ed\'b2\'c5\'b8\'b9\'a1\'43\
+\'a6\'d3\'a6\'5d\'ac\'b0\'a6\'62
+\f5  Mac OS X 
+\f4 \'c0\'f4\'b9\'d2\'a4\'a4\'a1\'41\'a8\'74\'b2\'ce\'a4\'77\'b8\'67\'a5\'ce\'b1\'bc\'a4\'46\'a4\'a3\'a4\'d6\'aa\'ba\'a7\'d6\'b3\'74\'c1\'e4\'a1\'41\'b3\'5c\'a6\'68\'aa\'ba\'c0\'b3\'a5\'ce\'b5\'7b\'a6\'a1\'a4\'5d\'b3\'5d\'ad\'70\'a4\'46\'a6\'55\'ba\'d8\'aa\'ba\'c1\'e4\'bd\'4c\'a7\'d6\'b3\'74\'c1\'e4\'a1\'41\'a6\'62
+\f5  Mac OS X 
+\f4 \'a4\'a4\'a1\'41\'a6\'5d\'ac\'b0\'a8\'74\'b2\'ce\'a5\'48\'a4\'ce\'c0\'b3\'a5\'ce\'b5\'7b\'a6\'a1\'aa\'ba\'ab\'f6\'c1\'e4\'a1\'41\'b3\'a3\'b7\'7c\'a4\'f1\'bf\'e9\'a4\'4a\'aa\'6b\'a7\'f3\'a5\'5b\'aa\'ba\'c0\'75\'a5\'fd\'a1\'41\'a9\'d2\'a5\'48\'a9\'b9\'a9\'b9\'b3\'79\'a6\'a8\'a5\'ce
+\f5  ctrl 
+\f4 \'a5\'48\'a4\'ce
+\f5  option 
+\f4 \'ab\'f6\'c1\'e4\'bf\'e9\'a4\'4a\'aa\'ba\'af\'53\'ae\'ed\'b2\'c5\'b8\'b9\'a1\'41\'a6\'5d\'ac\'b0\'bb\'50\'a8\'74\'b2\'ce\'a9\'ce\'c0\'b3\'a5\'ce\'b5\'7b\'a6\'a1\'bd\'c4\'ac\'f0\'a6\'d3\'a5\'a2\'c6\'46\'a1\'43\'a8\'d2\'a1\'41\'ab\'f6\'a4\'55\'a1\'75
+\f5 m
+\f4 \'a1\'76\'b7\'7c\'c5\'dc\'a6\'a8\'bf\'e9\'a4\'4a\'a1\'75
+\f5 return
+\f4 \'a1\'76\'a1\'41\'ab\'f6\'a4\'55\'a1\'75
+\f5 i
+\f4 \'a1\'76\'b7\'7c\'a6\'a8\'ac\'b0\'a6\'62\'ad\'5e\'a4\'e5\'c0\'f4\'b9\'d2\'a4\'55\'bf\'e9\'a4\'4a\'a1\'75
+\f5 tab
+\f4 \'a1\'76\'aa\'ba\'ae\'c4\'aa\'47\'a1\'41\'a8\'74\'b2\'ce\'aa\'ba\'b2\'d7\'ba\'dd\'be\'f7\'a4\'5d\'b8\'67\'b1\'60\'b7\'7c\'c4\'64\'ba\'49\'b1\'bc\'b3\'6f\'a8\'c7\'ab\'f6\'c1\'e4
+\f5 \'d1
+\f4 \'b3\'6f\'ac\'4f
+\f5  Mac OS X 
+\f4 \'aa\'ba\'a5\'fd\'a4\'d1\'b3\'5d\'ad\'70\'b0\'dd\'c3\'44\'a1\'41\'c3\'f8\'a5\'48\'a7\'4a\'aa\'41\'a1\'43\
+\'af\'53\'ae\'ed\'b2\'c5\'b8\'b9\'bf\'e9\'a4\'4a\'aa\'ba\'ab\'f6\'c1\'e4\'a6\'ec\'b8\'6d\'bb\'50\'b2\'c5\'b8\'b9\'b9\'ef\'c0\'b3\'a6\'70\'a4\'55\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0  q
+\f4 \'a2\'7a
+\f5  w
+\f4 \'a2\'73
+\f5  e
+\f4 \'a2\'7b
+\f5   r\uc0\u9633   t
+\f4 \'a1\'71
+\f5   y
+\f4 \'a1\'72
+\f5   u
+\f4 \'a1\'4b
+\f5   I
+\f4 \'b5\'4c
+\f5   o
+\f4 \'a1\'43
+\f5  p
+\f4 \'a1\'b0\
+
+\f5  a
+\f4 \'b5\'4c
+\f5  s
+\f4 \'a2\'71
+\f5   d
+\f4 \'b5\'4c
+\f5   f
+\f4 \'a1\'69
+\f5  g
+\f4 \'a1\'6a
+\f5   h
+\f4 \'b5\'4c
+\f5   j
+\f4 \'a1\'b3
+\f5   k\'d1  l
+\f4 \'a2\'78
+\f5   ;
+\f4 \'a1\'46
+\f5   '
+\f4 \'a1\'47\
+
+\f5  z
+\f4 \'a2\'7c
+\f5  x
+\f4 \'a2\'72
+\f5   c
+\f4 \'b5\'4c
+\f5   v\'ff  b
+\f4 \'a1\'6d
+\f5   n
+\f4 \'a1\'6e
+\f5  m
+\f4 \'b5\'4c
+\f5   ,
+\f4 \'a1\'41
+\f5   .
+\f4 \'a1\'44
+\f5  /
+\f4 \'a1\'48\
+\'a6\'70\'aa\'47\'b1\'7a\'b8\'67\'b1\'60\'bc\'b6\'bc\'67\'a4\'a4\'a4\'e5\'be\'c7\'b3\'4e\'bd\'d7\'a4\'e5\'a1\'41\'b1\'7a\'c0\'b3\'b8\'d3\'b7\'7c\'a6\'62\'bc\'b6\'bc\'67\'b0\'d1\'a6\'d2\'ae\'d1\'a5\'d8\'bb\'50\'b5\'f9\'b8\'7d\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'b8\'67\'b1\'60\'bb\'dd\'ad\'6e\'bf\'e9\'a4\'4a\'b7\'73\'a6\'a1\'aa\'ba\'ae\'d1\'a6\'57\'b8\'b9\'a1\'41\'a6\'62\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a4\'55\'ad\'6e\'bf\'e9\'a4\'4a\'b7\'73\'a6\'a1\'ae\'d1\'a6\'57\'b8\'b9\'ac\'db\'b7\'ed\'a4\'e8\'ab\'4b\'a6\'d3\'a5\'42\'a7\'d6\'b3\'74\'a1\'41\'b1\'7a\'a5\'75\'bb\'dd\'ad\'6e\'b0\'4f\'a6\'ed\'a1\'41\'a6\'62\'c1\'e4\'bd\'4c\'a4\'a4\'a5\'a1\'aa\'ba\'a6\'61\'a4\'e8\'a1\'41\'a6\'b3\'a4\'54\'b2\'d5\'ac\'41\'a9\'b7\'a1\'41\'a8\'d2\'a6\'70\'a1\'41\'ab\'f6\'a4\'55\'a1\'75
+\f5 b
+\f4 \'a1\'76\'bb\'50\'a1\'75
+\f5 n
+\f4 \'a1\'76\'b4\'4e\'ac\'4f\'a1\'75\'a1\'6d\'a1\'76\'bb\'50\'a1\'75\'a1\'6e\'a1\'76\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs28 \cf0 Holo POJ Input
+\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a1\'75\'aa\'65\'ac\'a5\'a5\'d5\'b8\'dc\'a6\'72
+\f5  POJ 
+\f4 \'bf\'e9\'a4\'4a\'aa\'6b\'a1\'76\'ac\'4f\'a4\'40\'ae\'4d\'a5\'ce\'a8\'d3\'bf\'e9\'a4\'4a\'a5\'78\'bb\'79\'a5\'d5\'b8\'dc\'a6\'72\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'43\'a5\'d8\'ab\'65\'a6\'62\'a6\'55\'ba\'d8\'a7\'40\'b7\'7e\'a8\'74\'b2\'ce\'a4\'a4\'a1\'41\'ad\'6e\'bf\'e9\'a4\'4a\'c3\'b9\'b0\'a8\'ab\'f7\'ad\'b5\'aa\'ba\'a5\'78\'bb\'79\'b2\'c5\'b8\'b9\'a6\'72\'a1\'42\'a5\'48\'a5\'d5\'b8\'dc\'a6\'72\'b6\'69\'a6\'e6\'bc\'67\'a7\'40\'a1\'41\'b3\'a3\'af\'ca\'a4\'d6\'a4\'40\'ae\'4d\'a4\'e8\'ab\'4b\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'43\'a6\'d3 
+\f5 OV 
+\f4 \'aa\'ba
+\f5  POJ 
+\f4 \'bf\'e9\'a4\'4a\'aa\'6b\'a5\'bf\'a5\'69\'a5\'48\'b8\'c9\'a8\'ac\'b3\'6f\'bc\'cb\'aa\'ba\'bb\'dd\'ad\'6e\'a1\'43\'a5\'5c\'af\'e0\'a6\'70\'a4\'55\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 1. 
+\f4 \'a5\'b4\'c3\'b9\'b0\'a8\'a6\'72\'a5\'c0\'a9\'4d\'c1\'6e\'b2\'c5\'a1\'41\'a5\'69\'a5\'48\'a5\'58\'b2\'7b\'b0\'74\'a4\'57\'bd\'d5\'b8\'b9\'aa\'ba\'ad\'b5\'b8\'60\'a1\'41\'a8\'d2\'a6\'70\'a5\'b4 
+\f5 "chan2" 
+\f4 \'b7\'7c\'a5\'58\'b2\'7b 
+\f5 ch\'87n 
+\f4 \'a1\'41\'a5\'b4 
+\f5 "peh8" 
+\f4 \'b7\'7c\'a5\'58\'b2\'7b
+\f5 "p
+\f7 e\uc0\u781 h
+\f5  
+\f4 \'b5\'a5\'b5\'a5\'a1\'43\
+
+\f5 2. 
+\f4 \'a5\'b4
+\f5  q 
+\f4 \'a9\'4d
+\f5  ou 
+\f4 \'b3\'a3\'b7\'7c\'a5\'58\'b2\'7b 
+\f5 o\'e1
+\f4 \'a1\'43\
+
+\f5 3. 
+\f4 \'a6\'62
+\f5  OV 
+\f4 \'b0\'be\'a6\'6e\'b3\'5d\'a9\'77\'a4\'a4\'aa\'ba\'ad\'d7\'a7\'ef\'bf\'ef\'b6\'b5\'ab\'e1\'a1\'41\'ad\'59\'bf\'ef\'be\'dc\'a1\'75\'a4\'a3\'ad\'6e\'bf\'e9\'a4\'4a
+\f5  Unicode 
+\f4 \'a6\'72\'a4\'b8\'a1\'41\'a5\'fe\'b3\'a1\'a7\'ef\'a5\'ce
+\f5  ASCII 
+\f4 \'bf\'e9\'a5\'58\'a1\'76\'a1\'41\'ab\'68
+\f5  POJ 
+\f4 \'bf\'e9\'a4\'4a\'aa\'6b\'a4\'a3\'b7\'7c\'b2\'a3\'a5\'cd
+\f5  Unicode 
+\f4 \'bf\'e9\'a5\'58\'a1\'41\'a6\'d3\'ac\'4f\'aa\'bd\'b1\'b5\'a5\'58
+\f5  ASCII 
+\f4 \'a6\'72\'a5\'c0\'a1\'41\'a8\'d2\'a6\'70\'a5\'b4\'a1\'75
+\f5 chan2
+\f4 \'a1\'76\'b4\'4e\'a5\'58\'b2\'7b\'a1\'75
+\f5 chan2
+\f4 \'a1\'76\'a1\'41\'be\'41\'a6\'58\'a6\'62\'a8\'53\'a6\'b3
+\f5  Unicode 
+\f4 \'a4\'e4\'b4\'a9\'aa\'ba\'c0\'f4\'b9\'d2\'a8\'cf\'a5\'ce\'a1\'43\
+
+\f5 4. OV 
+\f4 \'aa\'ba 
+\f5 POJ 
+\f4 \'bc\'d2\'b2\'d5\'b7\'7c\'b9\'ef\'ad\'b5\'b8\'60\'b6\'69\'a6\'e6\'a1\'75\'a4\'e5\'aa\'6b\'c0\'cb\'ac\'64\'a1\'76\'a1\'41\'a8\'d2\'a6\'70 
+\f5 h
+\f4 \'a1\'42
+\f5 k
+\f4 \'a1\'42
+\f5 p
+\f4 \'a1\'42
+\f5 t 
+\f4 \'a6\'72\'a7\'c0\'aa\'ba\'ad\'b5\'b8\'60\'a1\'41\'b6\'c8\'a5\'69\'af\'e0\'a6\'b3\'a5\'7c\'c1\'6e\'bb\'50\'a4\'4b\'c1\'6e\'a8\'e2\'ba\'d8\'a5\'69\'af\'e0\'a1\'41\'a6\'5d\'a6\'b9\'ad\'59\'a5\'58\'b2\'7b\'a8\'d2\'a6\'70 
+\f5 peh5 
+\f4 \'a9\'ce 
+\f5 kap3 
+\f4 \'b3\'6f\'bc\'cb\'aa\'ba\'ad\'b5\'b8\'60\'a1\'41\'ab\'4b\'b7\'7c\'a5\'bf\'b3\'57\'a4\'c6\'a1\'5d
+\f5 normailize
+\f4 \'a1\'5e\'a6\'a8
+\f5  peh 
+\f4 \'a9\'4d 
+\f5 kap
+\f4 \'a1\'43\
+\'a4\'77\'aa\'be\'b0\'dd\'c3\'44\'a1\'47\'a6\'62 
+\f5 Microsoft Word 
+\f4 \'a5\'b4\'a5\'58\'a6\'b3\'c1\'6e\'bd\'d5\'aa\'ba\'b2\'c5\'b8\'b9\'a1\'41\'b7\'7c\'b0\'74\'a4\'57\'bf\'f9\'bb\'7e\'aa\'ba\'a6\'72\'ab\'ac\'a1\'5d\'a8\'d2\'a6\'70\'a1\'41\'ad\'ec\'a5\'fd\'a8\'cf\'a5\'ce 
+\f5 Times New Roman
+\f4 \'a1\'41\'a5\'b4\'a5\'58\'bd\'d5\'b8\'b9\'a6\'72\'a5\'c0\'ab\'e1\'a1\'41\'a6\'72\'ab\'ac\'ab\'6f\'b7\'7c\'c5\'dc\'a6\'a8\'b7\'73\'b2\'d3\'a9\'fa\'c5\'e9\'a1\'5e\'a1\'41\'b3\'79\'a6\'a8\'a5\'b4\'a5\'58\'a8\'d3\'aa\'ba\'ad\'b5\'b8\'60\'ab\'dc\'a4\'a3\'b6\'ae\'c6\'5b\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs28 \cf0 Roman Input
+\f5\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'ad\'5e\'bc\'c6\'bf\'e9\'a4\'4a\'aa\'6b\'b4\'4e\'ac\'4f\'aa\'bd\'b1\'b5\'b0\'65\'a5\'58\'b1\'7a\'a9\'d2\'a5\'b4\'aa\'ba\'ad\'5e\'a4\'e5\'a6\'72\'a5\'c0\'a9\'ce\'bc\'c6\'a6\'72\'a1\'41\'b1\'7a\'a5\'69\'a5\'48\'b0\'74\'a6\'58\'a1\'75\'a5\'fe\'a7\'ce\'ad\'5e\'bc\'c6\'a6\'72\'a1\'76\'bf\'ef\'b6\'b5\'a8\'cf\'a5\'ce\'a1\'41\'a7\'d6\'b3\'74\'bf\'e9\'a4\'4a\'a5\'fe\'a7\'ce\'aa\'ba\'ad\'5e\'bc\'c6\'a6\'72\'a1\'43
+\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs24 \cf0 Tibetan Input\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs22 \cf0 The Tibetan input method contained supports four keyboard layouts: Sambhota Keymap One
+\f4 , 
+\f5 Sambhota Keymap Two
+\f4 , 
+\f5 Tibetan Computer Company Keyboard #1 and Tibetan Computer Company Keyboard #2. You can switch the keyboard layout in the Preference pane of OpenVanilla.\
+If you prefer to use Wylie Transcript System, you may try MacUIM, another open source input method, and switch to "m17n-bo-wylie". You can download MacUIM from:\
+http://www.digital-genes.com/~yatsu/macuim/\
+You can use OpenVanilla to input Tibetan in most applications. The glyphs are included in the Simplified Chinese fonts of Mac OS X, therefore there should be no problem to display the Tibetan characters if you installed the Simplified Chinese locale package of Mac OS X.\
+However, Tibetan is a complex Asian script with feature of stacking characters, although the text object of cocoa applications support Tibetan, most others not. You may need to installed some smart fonts such as Tibetan Machine Uni. Tibetan Machine Uni can be downloaded from:
+\f4  
+\f5 http://iris.lib.virginia.edu/tibet/xml/show.php?xml=/tools/tibfonts.xml .\
+You can read details about Sambhota and TCC keyboard from the documents in RTF format listed below:
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5 \cf0 http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf\
+http://iris.lib.virginia.edu/tibet/tools/jskad_docs/TCC_keyboard_1.rtf\
+http://iris.lib.virginia.edu/tibet/tools/jskad_docs/TCC_keyboard_2.rtf\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5 \cf0 These documents must be opened by JSKAD, a editor written in Java:\
+http://iris.lib.virginia.edu/tibet/tools/jskad.html\
+\
+The number keys of per keyboard layout is used to input the Tibetan numbers:
+\fs24  
+\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f8\fs72 \cf0 \uc0\u3873 \u3851 
+\f5\fs26  1	
+\f8\fs72 \uc0\u3874 \u3851 
+\f5\fs26 2		
+\f8\fs72 \uc0\u3875 \u3851 
+\f5\fs26  3
+\fs72 	
+\f8 \uc0\u3876 \u3851 
+\f5\fs26 4
+\fs72 	
+\f8 \uc0\u3877 \u3851 
+\f5\fs26 5	\
+
+\f8\fs72 \uc0\u3878 \u3851 
+\f5\fs26 6 	
+\f8\fs72 \uc0\u3879 \u3851 
+\f5\fs26 7 	
+\f8\fs72 \uc0\u3880 \u3851 
+\f5\fs26 8 		
+\f8\fs72 \uc0\u3881 \u3851 
+\f5\fs26 9		
+\f8\fs72 \uc0\u3872 \u3851 
+\f5\fs26 0
+\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+\cf0 Sambhota Keymap One
+\f4 :\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0 Consonant
+\f4\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f8\fs72 \cf0 \uc0\u3904 \u3851 
+\f5\fs26 k	 
+\f8\fs72 \uc0\u3905 \u3851 
+\f5\fs26 K 	
+\f8\fs72 \uc0\u3906 \u3851 
+\f5\fs26 g		
+\f8\fs72 \uc0\u3908 \u3851 
+\f5\fs26 G		
+\f8\fs72 \uc0\u3909 \u3851 
+\f5\fs26 c 		
+\f8\fs72 \uc0\u3910 \u3851 
+\f5\fs26 C\
+ 
+\f8\fs72 \uc0\u3911 \u3851 
+\f5\fs26 j	 
+\f8\fs72 \uc0\u3913 \u3851 
+\f5\fs26 N		
+\f8\fs72 \uc0\u3919 \u3851 
+\fs26 \uc0\u3851 
+\f5 t		
+\f8\fs72 \uc0\u3920 \u3851 
+\f5\fs26 T		
+\f8\fs72 \uc0\u3921 \u3851 
+\f5\fs26 d		
+\f8\fs72 \uc0\u3923 \u3851 
+\f5\fs26 n\
+ 
+\f8\fs72 \uc0\u3924 \u3851 
+\f5\fs26 p	 
+\f8\fs72 \uc0\u3925 \u3851 
+\f5\fs26 P 	
+\f8\fs72 \uc0\u3926 \u3851 
+\f5\fs26 b 	
+\f8\fs72 \uc0\u3928 \u3851 
+\f5\fs26 m 	
+\f8\fs72 \uc0\u3929 \u3851 
+\f5\fs26 x 	
+\f8\fs72 \uc0\u3930 \u3851 
+\f5\fs26 X\
+ 
+\f8\fs72 \uc0\u3931 \u3851 
+\f5\fs26 D	
+\f8\fs72 \uc0\u3933 \u3851 
+\f5\fs26 w		
+\f8\fs72 \uc0\u3934 \u3851 
+\f5\fs26 Z 	
+\f8\fs72 \uc0\u3935 \u3851 
+\f5\fs26 z 		
+\f8\fs72 \uc0\u3936 \u3851 
+\f5\fs26 ' 		
+\f8\fs72 \uc0\u3937 \u3851 
+\f5\fs26 y\
+ 
+\f8\fs72 \uc0\u3938 \u3851 
+\f5\fs26 r 	
+\f8\fs72 \uc0\u3939 \u3851 
+\f5\fs26 l 		
+\f8\fs72 \uc0\u3940 \u3851 
+\f5\fs26 S 	
+\f8\fs72 \uc0\u3942 \u3851 
+\f5\fs26 s 	
+\f8\fs72 \uc0\u3943 \u3851 
+\f5\fs26 h 	
+\f8\fs72 \uc0\u3944 \u3851 
+\f5\fs26 A\
+Sanskrit Consonant
+\f4\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0  
+\f8\fs72 \uc0\u3914 \u3851 
+\f5\fs26 q	
+\f8\fs72 \uc0\u3915 \u3851 
+\f5\fs26 Q 	
+\f8\fs72 \uc0\u3916 \u3851 
+\f5\fs26 v 		
+\f8\fs72 \uc0\u3918 \u3851 
+\f5\fs26 V 	
+\f8\fs72 \uc0\u3941 \u3851 
+\f5\fs26 B\
+Stacking
+\f4\fs24 \
+
+\f5\fs26  
+\f8\fs72 \uc0\u3942 \u3986 \u4018 \u3851 
+\f5\fs26 fsgr 	
+\f8\fs72 \uc0\u3939 \u4023 \u3851 
+\f5\fs26 flh 	
+\f8\fs72 \uc0\u3904 \u4016 \u3851 
+\f5\fs26 fk'\
+Sanskrit Stacking\
+ 
+\f8\fs72 \uc0\u3904 \u4018 \u4017 \u3851 
+\f5\fs26 fkry 	
+\f8\fs72 \uc0\u3905 \u3985 \u3851 
+\f5\fs26 fkk\
+Vowels\
+ 
+\f8\fs72 \uc0\u3944 \u3954 \u3851 
+\f5\fs26 Ai\
+ 
+\f8\fs72 \uc0\u3904 \u3851 
+\f5\fs26 k
+\f8 \'bb\'f2
+\f5 ka 	
+\f8\fs72 \uc0\u3904 \u3954 \u3851 
+\f5\fs26 ki 	
+\f8\fs72 \uc0\u3904 \u3956 \u3851 
+\f5\fs26 ku 	
+\f8\fs72 \uc0\u3904 \u3964 \u3851 
+\f5\fs26 ko\
+ 
+\f8\fs72 \uc0\u3904 \u3962 \u3851 
+\f5\fs26 ke 		
+\f8\fs72 \uc0\u3904 \u3963 \u3851 
+\f5\fs26 kE 	
+\f8\fs72 \uc0\u3904 \u3965 \u3851 
+\f5\fs26 kO 	
+\f8\fs72 \uc0\u3904 \u3968 \u3851 
+\f5\fs26 KI\
+Punctuation
+\f4\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs26 \cf0  
+\f8\fs72 \uc0\u3853 \u3851 
+\f5\fs26 , 	
+\f8\fs72 \uc0\u3851 
+\f5\fs24 space 	[space].
+\f8\fs72 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+\cf0 \uc0\u3967 \u3851 
+\f5\fs26 :		 
+\f8\fs72 \uc0\u3860 \u3851 
+\f5\fs26 ; 		
+\f8\fs72 \uc0\u3973 \u3851 
+\f5\fs26 @ 	
+\f8\fs72 \uc0\u3900 \u3851 
+\f5\fs26 ( 	
+\f8\fs72 \uc0\u3901 \u3851 
+\f5\fs26 )\
+ 
+\f8\fs72 \uc0\u3857 \u3851 
+\f5\fs26 -\
+ 
+\f8\fs72 \uc0\u3944 \u3971 \u3851 
+\f5\fs26 A& 	
+\f8\fs72 \uc0\u3944 \u3964 \u3966 \u3851 
+\f5\fs26 Ao& 	
+\f8\fs72 \uc0\u3944 \u3954 \u3966 \u3851 
+\f5\fs26 Ai& 	
+\f8\fs72 \uc0\u3944 \u3965 \u3966 \u3851 
+\f5\fs26 AO&\
+ 
+\f8\fs72 \uc0\u3904 \u3971 \u3851 
+\f5\fs26 k% 	
+\f8\fs72 \uc0\u3943 \u4016 \u3956 \u3971 \u3851 
+\f5\fs26 fh'u%\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 Sambhota Keymap Two:\
+Consonants
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs26 \cf0  
+\f8\fs72 \uc0\u3904 \u3851 
+\f5\fs26 q 	
+\f8\fs72 \uc0\u3905 \u3851 
+\f5\fs26 w 	
+\f8\fs72 \uc0\u3906 \u3851 
+\f5\fs26 e 	
+\f8\fs72 \uc0\u3908 \u3851 
+\f5\fs26 r 		
+\f8\fs72 \uc0\u3909 \u3851 
+\f5\fs26 t 		
+\f8\fs72 \uc0\u3910 \u3851 
+\f5\fs26 y\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+\cf0  
+\f8\fs72 \uc0\u3911 \u3851 
+\f5\fs26 u 	
+\f8\fs72 \uc0\u3913 \u3851 
+\f5\fs26 i 		
+\f8\fs72 \uc0\u3919 \u3851 
+\f5\fs26 o 		
+\f8\fs72 \uc0\u3920 \u3851 
+\f5\fs26 p 		
+\f8\fs72 \uc0\u3921 \u3851 
+\f5\fs26 [ 		
+\f8\fs72 \uc0\u3923 \u3851 
+\f5\fs26 ]\
+ 
+\f8\fs72 \uc0\u3924 \u3851 
+\f5\fs26 a 	
+\f8\fs72 \uc0\u3925 \u3851 
+\f5\fs26 s 	
+\f8\fs72 \uc0\u3926 \u3851 
+\f5\fs26 d 	
+\f8\fs72 \uc0\u3928 \u3851 
+\f5\fs26 f 	
+\f8\fs72 \uc0\u3929 \u3851 
+\f5\fs26 k 	
+\f8\fs72 \uc0\u3930 \u3851 
+\f5\fs26 l\
+ 
+\f8\fs72 \uc0\u3931 \u3851 
+\f5\fs26 ; 	
+\f8\fs72 \uc0\u3933 \u3851 
+\f5\fs26 ' 		
+\f8\fs72 \uc0\u3934 \u3851 
+\f5\fs26 z 	
+\f8\fs72 \uc0\u3935 \u3851 
+\f5\fs26 x 		
+\f8\fs72 \uc0\u3936 \u3851 
+\f5\fs26 c 	
+\f8\fs72 \uc0\u3937 \u3851 
+\f5\fs26 v\
+ 
+\f8\fs72 \uc0\u3938 \u3851 
+\f5\fs26 m 	
+\f8\fs72 \uc0\u3939 \u3851 
+\f5\fs26 , 	
+\f8\fs72 \uc0\u3940 \u3851 
+\f5\fs26 . 	
+\f8\fs72 \uc0\u3942 \u3851 
+\f5\fs26 / 	
+\f8\fs72 \uc0\u3943 \u3851 
+\f5\fs26 > 	
+\f8\fs72 \uc0\u3944 \u3851 
+\f5\fs26 /
+\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+\cf0 Sanskrit Consonant\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\fs26 \cf0  
+\f8\fs72 \uc0\u3914 \u3851 
+\f5\fs26 Q 	
+\f8\fs72 \uc0\u3915 \u3851 
+\f5\fs26 W 	
+\f8\fs72 \uc0\u3916 \u3851 
+\f5\fs26 E 		
+\f8\fs72 \uc0\u3918 \u3851 
+\f5\fs26 R 	
+\f8\fs72 \uc0\u3941 \u3851 
+\f5\fs26 T\
+Stacking
+\f4\fs24 \
+
+\f5\fs26  
+\f8\fs72 \uc0\u3942 \u3986 \u4018 \u3851 
+\f5\fs26 h/em 	
+\f8\fs72 \uc0\u3939 \u4023 \u3851 
+\f5\fs26 h,> 	
+\f8\fs72 \uc0\u3904 \u4016 \u3851 
+\f5\fs26 hqc\
+Sanskrit Stacking\
+ 
+\f8\fs72 \uc0\u3904 \u4018 \u4017 \u3851 
+\f5\fs26 hqme 	
+\f8\fs72 \uc0\u3905 \u3985 \u3851 
+\f5\fs26 hww\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'a5\'c0\'ad\'b5
+\f5\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+\cf0  
+\f8\fs72 \uc0\u3944 \u3954 \u3851 
+\f5\fs26 ?g\
+ 
+\f8\fs72 \uc0\u3904 \u3851 
+\f5\fs26 q 	
+\f8\fs72 \uc0\u3904 \u3954 \u3851 
+\f5\fs26 qg 	
+\f8\fs72 \uc0\u3904 \u3956 \u3851 
+\f5\fs26 qj 	
+\f8\fs72 \uc0\u3904 \u3964 \u3851 
+\f5\fs26 qn\
+ 
+\f8\fs96 \uc0\u3904 \u3962 \u3851 
+\f5\fs26 qb  
+\f8\fs72 \uc0\u3904 \u3963 \u3851 
+\f5\fs26 qB 	
+\f8\fs72 \uc0\u3904 \u3965 \u3851 
+\f5\fs26 qN 	
+\f8\fs72 \uc0\u3904 \u3968 \u3851 
+\f5\fs26 qG\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'bc\'d0\'c2\'49
+\f5\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+\cf0  
+\f8\fs72 \uc0\u3853 \u3851 
+\f5\fs26 c 	
+\f8\fs72 \uc0\u3851 
+\fs26 \'bf\'d5\'b0\'d7\uc0\u37749 
+\f5  	[
+\f8 \'bf\'d5\'b0\'d7
+\f5 ]
+\f4 -
+\f8\fs72 \
+\uc0\u3967 \u3851 
+\f5\fs26 : 		
+\f8\fs72 \uc0\u3860 \u3851 
+\f5\fs26 K 		
+\f8\fs72 \uc0\u3973 \u3851 
+\f5\fs26 | 	
+\f8\fs72 \uc0\u3900 \u3851 
+\f5\fs26 ( 	
+\f8\fs72 \uc0\u3901 \u3851 
+\f5\fs26 )\
+ 
+\f8\fs72 \uc0\u3857 \u3851 
+\f5\fs26 \{\
+ 
+\f8\fs72 \uc0\u3944 \u3971 \u3851 
+\f5\fs26 ?! 	
+\f8\fs72 \uc0\u3944 \u3964 \u3966 \u3851 
+\f5\fs26 ?n! 	
+\f8\fs72 \uc0\u3944 \u3954 \u3966 \u3851 
+\f5\fs26 ?q! 	
+\f8\fs72 \uc0\u3944 \u3965 \u3966 \u3851 
+\f5\fs26 ?J!\
+ 
+\f8\fs72 \uc0\u3904 \u3971 \u3851 
+\f5\fs26 q% 	
+\f8\fs72 \uc0\u3943 \u4016 \u3956 \u3971 \u3851 
+\fs26 h>
+\f5 Gcj%\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 TCC Keyboard #1
+\f4 \
+\'a4\'6c\'ad\'b5\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0  
+\f8\fs72 \uc0\u3904 \u3851 
+\f5\fs26 q	
+\f8\fs72 \uc0\u3905 \u3851 
+\f5\fs26 w 	
+\f8\fs72 \uc0\u3906 \u3851 
+\f5\fs26 e 	
+\f8\fs72 \uc0\u3908 \u3851 
+\f5\fs26 r 		
+\f8\fs72 \uc0\u3909 \u3851 
+\f5\fs26 t 		
+\f8\fs72 \uc0\u3910 \u3851 
+\f5\fs26 y\
+ 
+\f8\fs72 \uc0\u3911 \u3851 
+\f5\fs26 u 	
+\f8\fs72 \uc0\u3913 \u3851 
+\f5\fs26 j 		
+\f8\fs72 \uc0\u3919 \u3851 
+\f5\fs26 o 		
+\f8\fs72 \uc0\u3920 \u3851 
+\f5\fs26 p 		
+\f8\fs72 \uc0\u3921 \u3851 
+\f5\fs26 [ 		
+\f8\fs72 \uc0\u3923 \u3851 
+\f5\fs26 ]\
+ 
+\f8\fs72 \uc0\u3924 \u3851 
+\f5\fs26 a 	
+\f8\fs72 \uc0\u3925 \u3851 
+\f5\fs26 s 	
+\f8\fs72 \uc0\u3926 \u3851 
+\f5\fs26 d 	
+\f8\fs72 \uc0\u3928 \u3851 
+\f5\fs26 f 	
+\f8\fs72 \uc0\u3929 \u3851 
+\f5\fs26 k 	
+\f8\fs72 \uc0\u3930 \u3851 
+\f5\fs26 l\
+ 
+\f8\fs72 \uc0\u3931 \u3851 
+\f5\fs26 ; 	
+\f8\fs72 \uc0\u3933 \u3851 
+\f5\fs26 ' 		
+\f8\fs72 \uc0\u3934 \u3851 
+\f5\fs26 z 	
+\f8\fs72 \uc0\u3935 \u3851 
+\f5\fs26 x 		
+\f8\fs72 \uc0\u3936 \u3851 
+\f5\fs26 c 	
+\f8\fs72 \uc0\u3937 \u3851 
+\f5\fs26 v\
+ 
+\f8\fs72 \uc0\u3938 \u3851 
+\f5\fs26 m 	
+\f8\fs72 \uc0\u3939 \u3851 
+\f5\fs26 ' 		
+\f8\fs72 \uc0\u3940 \u3851 
+\f5\fs26 . 	
+\f8\fs72 \uc0\u3942 \u3851 
+\f5\fs26 / 	
+\f8\fs72 \uc0\u3943 \u3851 
+\f5\fs26 > 	
+\f8\fs72 \uc0\u3944 \u3851 
+\f5\fs26 ?
+\fs24 \
+
+\fs26 Sanskrit Consonant
+\f4\fs24 \
+
+\f5\fs26  
+\f8\fs72 \uc0\u3914 \u3851 
+\f5\fs26 Q 	
+\f8\fs72 \uc0\u3915 \u3851 
+\f5\fs26 W 	
+\f8\fs72 \uc0\u3916 \u3851 
+\f5\fs26 E 		
+\f8\fs72 \uc0\u3918 \u3851 
+\f5\fs26 R 	
+\f8\fs72 \uc0\u3941 \u3851 
+\f5\fs26 T
+\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b2\'d5\'a6\'58\'a6\'72\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0  
+\f8\fs72 \uc0\u3942 \u3986 \u4018 \u3851 
+\f5\fs26 h/em 	
+\f8\fs72 \uc0\u3939 \u4023 \u3851 
+\f5\fs26 h,> 	
+\f8\fs72 \uc0\u3904 \u4016 \u3851 
+\f5\fs26 hqc\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'b1\'eb\'a4\'e5\'b2\'d5\'a6\'58\'a6\'72\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0  
+\f8\fs72 \uc0\u3904 \u4018 \u4017 \u3851 
+\f5\fs26 hrem 	
+\f8\fs72 \uc0\u3905 \u3985 \u3851 
+\f5\fs26 hww\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'a5\'c0\'ad\'b5\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0  
+\f8\fs72 \uc0\u3944 \u3954 \u3851 
+\f5\fs26 ?g\
+ 
+\f8\fs72 \uc0\u3904 \u3851 
+\f5\fs26 q 	
+\f8\fs72 \uc0\u3904 \u3954 \u3851 
+\f5\fs26 qg 	
+\f8\fs72 \uc0\u3904 \u3956 \u3851 
+\f5\fs26 qj 	
+\f8\fs72 \uc0\u3904 \u3964 \u3851 
+\f5\fs26 qn\
+ 
+\f8\fs72 \uc0\u3904 \u3962 \u3851 
+\f5\fs26 qb 	
+\f8\fs72 \uc0\u3904 \u3963 \u3851 
+\f5\fs26 qB 	
+\f8\fs72 \uc0\u3904 \u3965 \u3851 
+\f5\fs26 qN 	
+\f8\fs72 \uc0\u3904 \u3968 \u3851 
+\f5\fs26 qG\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'bc\'d0\'c2\'49\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0  
+\f8\fs72 \uc0\u3853 \u3851 
+\f5\fs26 \\ 	
+\f8\fs72 \uc0\u3851 
+\fs26 \'bf\'d5\'b0\'d7\uc0\u37749 
+\f5  	[
+\f8 \'bf\'d5\'b0\'d7
+\f5 ]-
+\f8\fs72 \
+\uc0\u3967 
+\f5\fs26  
+\f8\fs72 \uc0\u3851 
+\f5\fs26 : 	
+\f8\fs72 \uc0\u3860 \u3851 
+\f5\fs26 % 		
+\f8\fs72 \uc0\u3973 \u3851 
+\f5\fs26 $ 	
+\f8\fs72 \uc0\u3900 \u3851 
+\f5\fs26 ( 	
+\f8\fs72 \uc0\u3901 \u3851 
+\f5\fs26 )\
+ 
+\f8\fs72 \uc0\u3857 \u3851 
+\f5\fs26 -\
+ 
+\f8\fs72 \uc0\u3944 \u3971 \u3851 
+\f5\fs26 ?* 	
+\f8\fs72 \uc0\u3944 \u3964 \u3966 \u3851 
+\f5\fs26 ?n* 	
+\f8\fs72 \uc0\u3944 \u3954 \u3966 \u3851 
+\f5\fs26 ?g* 	
+\f8\fs72 \uc0\u3944 \u3965 \u3966 \u3851 
+\f5\fs26 ?N*\
+ 
+\f8\fs72 \uc0\u3904 \u3971 \u3851 
+\f5\fs26 q` 	
+\f8\fs72 \uc0\u3943 \u4016 \u3956 \u3971 \u3851 
+\f5\fs26 h>cj`\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 TCC Keyboard #2:
+\f4 \
+\'a4\'6c\'ad\'b5\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0  
+\f8\fs72 \uc0\u3904 \u3851 
+\f5\fs26 q 	
+\f8\fs72 \uc0\u3905 \u3851 
+\f5\fs26 w 	
+\f8\fs72 \uc0\u3906 \u3851 
+\f5\fs26 s 	
+\f8\fs72 \uc0\u3908 \u3851 
+\f5\fs26 e 		
+\f8\fs72 \uc0\u3909 \u3851 
+\f5\fs26 b 	
+\f8\fs72 \uc0\u3910 \u3851 
+\f5\fs26 n\
+ 
+\f8\fs72 \uc0\u3911 \u3851 
+\f5\fs26 m 	
+\f8\fs72 \uc0\u3913 \u3851 
+\f5\fs26 ' 		
+\f8\fs72 \uc0\u3919 \u3851 
+\f5\fs26 o 		
+\f8\fs72 \uc0\u3920 \u3851 
+\f5\fs26 p 		
+\f8\fs72 \uc0\u3921 \u3851 
+\f5\fs26 j 		
+\f8\fs72 \uc0\u3923 \u3851 
+\f5\fs26 k\
+ 
+\f8\fs72 \uc0\u3924 \u3851 
+\f5\fs26 r 	
+\f8\fs72 \uc0\u3925 \u3851 
+\f5\fs26 / 	
+\f8\fs72 \uc0\u3926 \u3851 
+\f5\fs26 d 	
+\f8\fs72 \uc0\u3928 \u3851 
+\f5\fs26 f 	
+\f8\fs72 \uc0\u3929 \u3851 
+\f5\fs26 ; 	
+\f8\fs72 \uc0\u3930 \u3851 
+\f5\fs26 '\
+ 
+\f8\fs72 \uc0\u3931 \u3851 
+\f5\fs26 [ 	
+\f8\fs72 \uc0\u3933 \u3851 
+\f5\fs26 ] 		
+\f8\fs72 \uc0\u3934 \u3851 
+\f5\fs26 z 	
+\f8\fs72 \uc0\u3935 \u3851 
+\f5\fs26 x 		
+\f8\fs72 \uc0\u3936 \u3851 
+\f5\fs26 c 	
+\f8\fs72 \uc0\u3937 \u3851 
+\f5\fs26 g\
+ 
+\f8\fs72 \uc0\u3938 \u3851 
+\f5\fs26 h 	
+\f8\fs72 \uc0\u3939 \u3851 
+\f5\fs26 v 	
+\f8\fs72 \uc0\u3940 \u3851 
+\f5\fs26 . 	
+\f8\fs72 \uc0\u3942 \u3851 
+\f5\fs26 l 		
+\f8\fs72 \uc0\u3943 \u3851 
+\f5\fs26 G 	
+\f8\fs72 \uc0\u3944 \u3851 
+\f5\fs26 H
+\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b1\'eb\'a4\'e5\'a4\'6c\'ad\'b5\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0  
+\f8\fs72 \uc0\u3914 \u3851 
+\f5\fs26 O 	
+\f8\fs72 \uc0\u3915 \u3851 
+\f5\fs26 P 		
+\f8\fs72 \uc0\u3916 \u3851 
+\f5\fs26 j 		
+\f8\fs72 \uc0\u3918 \u3851 
+\f5\fs26 K 		
+\f8\fs72 \uc0\u3941 \u3851 
+\f5\fs26 >\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'b2\'d5\'a6\'58\'a6\'72\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0  
+\f8\fs72 \uc0\u3942 \u3986 \u4018 \u3851 
+\f5\fs26 alsh 	
+\f8\fs72 \uc0\u3939 \u4023 \u3851 
+\f5\fs26 avG 	
+\f8\fs72 \uc0\u3904 \u4016 \u3851 
+\f5\fs26 aqc\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'b1\'eb\'a4\'e5\'b2\'d5\'a6\'58\'a6\'72\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0  
+\f8\fs72 \uc0\u3904 \u4018 \u4017 \u3851 
+\f5\fs26 aqhg 	
+\f8\fs72 \uc0\u3905 \u3985 \u3851 
+\f5\fs26 aww\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'a5\'c0\'ad\'b5
+\f5\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+\cf0  
+\f8\fs72 \uc0\u3944 \u3954 \u3851 
+\f5\fs26 Ht\
+ 
+\f8\fs72 \uc0\u3904 \u3851 
+\f5\fs26 q 	
+\f8\fs72 \uc0\u3904 \u3954 \u3851 
+\f5\fs26 qt 	
+\f8\fs72 \uc0\u3904 \u3956 \u3851 
+\f5\fs26 qu 	
+\f8\fs72 \uc0\u3904 \u3964 \u3851 
+\f5\fs26 qi\
+ 
+\f8\fs96 \uc0\u3904 \u3962 \u3851 
+\f5\fs26 qy  
+\f8\fs72 \uc0\u3904 \u3963 \u3851 
+\f5\fs26 qY 	
+\f8\fs72 \uc0\u3904 \u3965 \u3851 
+\f5\fs26 qI 	
+\f8\fs72 \uc0\u3904 \u3968 \u3851 
+\f5\fs26 qT\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'bc\'d0\'c2\'49
+\f5\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+\cf0  
+\f8\fs72 \uc0\u3853 \u3851 
+\f5\fs26 \\ 	
+\f8\fs72 \uc0\u3851 
+\fs26 \'bf\'d5\'b0\'d7\uc0\u37749 
+\f5  	[
+\f8 \'bf\'d5\'b0\'d7
+\f5 ]-
+\f8\fs72 \
+\uc0\u3967 \u3851 
+\f5\fs26 : 		
+\f8\fs72 \uc0\u3860 \u3851 
+\f5\fs26 % 		
+\f8\fs72 \uc0\u3973 \u3851 
+\f5\fs26 $ 	
+\f8\fs72 \uc0\u3900 \u3851 
+\f5\fs26 ( 	
+\f8\fs72 \uc0\u3901 \u3851 
+\f5\fs26 )\
+ 
+\f8\fs72 \uc0\u3857 \u3851 
+\f5\fs26 -\
+ 
+\f8\fs72 \uc0\u3944 \u3971 \u3851 
+\f5\fs26 q* 	
+\f8\fs72 \uc0\u3944 \u3964 \u3966 \u3851 
+\f5\fs26 qi* 	
+\f8\fs72 \uc0\u3944 \u3954 \u3966 \u3851 
+\f5\fs26 qt* 	
+\f8\fs72 \uc0\u3944 \u3965 \u3966 \u3851 
+\f5\fs26 qI*\
+ 
+\f8\fs72 \uc0\u3904 \u3971 \u3851 
+\f5\fs26 q` 	
+\f8\fs72 \uc0\u3943 \u4016 \u3956 \u3971 \u3851 
+\f5\fs26 aGcu`
+\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\f4\fs26 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 \'a6\'70\'aa\'47\'b1\'7a\'a4\'a3\'bc\'f4\'b1\'78\'c2\'c3\'a4\'e5\'a1\'41\'a4\'53\'b9\'ef\'c2\'c3\'a4\'e5\'bf\'e9\'a4\'4a\'aa\'6b\'a6\'b3\'bf\'b3\'bd\'ec\'aa\'ba\'b8\'dc\'a1\'41\'b1\'7a\'a5\'69\'a5\'48\'a6\'62 
+\f5 Smabhota 
+\f4 \'c1\'e4\'bd\'4c\'a4\'a4\'a8\'cf\'a5\'ce\'a5\'48\'a4\'55\'aa\'ba\'ab\'f6\'c1\'e4\'a1\'47\'a1\'75
+\f5 Ao& m ni pfdme fh'u% 
+\f4 \'a1\'76\'a1\'41\'b4\'4e\'a5\'69\'a5\'48\'bf\'e9\'a4\'4a\'a1\'47
+\fs26 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\f11\fs72 \cf0  
+\f8 \uc0\u3944 \u3964 \u3966 \u3851 \u3928 \u3851 \u3923 \u3954 \u3851 \u3924 \u3921 \u4008 \u3962 \u3851 \u3943 \u3953 \u3956 \u3971 \u3851 
+\fs26 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\f4 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs24 \cf0 which means "Om Ma Ni Pa Dme Hon"\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs28 \cf0 Unicode Hex Input
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs24 \cf0 Unicode Hex  
+\f4 \'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'a5\'ce\'b3\'7e\'a1\'41\'aa\'f1\'a6\'fc\'a9\'f3\'b9\'4c\'a5\'68\'a6\'55\'ba\'d8\'a5\'48
+\f5  Big5 
+\f4 \'bd\'73\'bd\'58\'ac\'b0\'b0\'f2\'c2\'a6\'aa\'ba\'a4\'a4\'a4\'e5\'a8\'74\'b2\'ce\'aa\'ba\'a4\'ba\'bd\'58\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'46\'a6\'62\'bf\'e9\'a4\'4a\'a4\'46 
+\f5 Unicode Hex 
+\f4 \'bd\'58\'a4\'a7\'ab\'e1\'a1\'41\'b3\'6f\'ad\'d3\'bf\'e9\'a4\'4a\'aa\'6b\'b4\'4e\'b7\'7c\'bf\'e9\'a5\'58\'b9\'ef\'c0\'b3\'aa\'ba
+\f5  Unicode 
+\f4 \'a6\'72\'bd\'58\'a1\'43
+\f5 Unicode Hex 
+\f4 \'bf\'e9\'a4\'4a\'aa\'6b\'a6\'62\'a5\'ad\'b1\'60\'a8\'cf\'a5\'ce\'a4\'57\'a9\'ce\'b3\'5c\'a5\'ce\'b3\'42\'a4\'a3\'a4\'6a\'a1\'41\'a4\'a3\'b9\'4c\'a1\'41\'a6\'70\'aa\'47\'b1\'7a\'bb\'dd\'ad\'6e\'bf\'e9\'a4\'4a\'ac\'59\'ad\'d3\'af\'53\'ae\'ed\'aa\'ba\'a1\'42\'a8\'e4\'a5\'4c\'bf\'e9\'a4\'4a\'aa\'6b\'b3\'a3\'b5\'4c\'aa\'6b\'a5\'b4\'a5\'58\'aa\'ba\'a4\'e5\'a6\'72\'a1\'41\'a6\'d3\'b1\'7a\'a4\'53\'aa\'be\'b9\'44\'b3\'6f\'ad\'d3\'a4\'e5\'a6\'72\'a6\'62
+\f5  Unicode 
+\f4 \'b7\'ed\'a4\'a4\'aa\'ba\'a6\'ec\'b8\'6d\'a1\'41
+\f5 Unicode Hex 
+\f4 \'ab\'4b\'a5\'69\'a5\'48\'ac\'a3\'a4\'57\'a5\'ce\'b3\'f5\'a1\'43\
+\'a4\'53\'a1\'41\'a6\'70\'aa\'47\'b1\'7a\'a6\'b3\'bf\'e9\'a4\'4a\'a6\'62
+\f5  Big5 
+\f4 \'a4\'a7\'a5\'7e\'a1\'41\'b1\'60\'a8\'a3\'a4\'a4\'a4\'e5\'bf\'e9\'a4\'4a\'aa\'6b\'b3\'a3\'b5\'4c\'aa\'6b\'b3\'42\'b2\'7a\'aa\'ba\'aa\'ba\'af\'53\'ae\'ed\'b2\'c5\'b8\'b9\'bb\'dd\'a8\'44\'a1\'41\'a9\'ce\'b3\'5c\'a5\'69\'a5\'48\'b8\'d5\'b8\'d5\'ac\'dd\'ba\'ae\'a7\'f8\'b2\'c5\'b8\'b9\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'5d\'bd\'d0\'b0\'d1\'a8\'a3
+\f5  Xcin 
+\f4 \'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'b3\'a1\'a5\'f7\'a1\'5e\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs28 \cf0 EZBasic Input
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs24 \cf0 EZBasic is not an input method indeed but a BASIC interpreter using input method components. Saying it\'d5s not a input method is because of that it does not handle any human language processing. However, it is designed for our imagination of \'d2What a input method can do?\'d3\
+Let us think about it. What an input method does is not to input, but output. As we input something with an input method, the input method should translate or converts the key strokes and gives us a string as output. Maybe we should not call input methods as input methods, but output methods.\
+You can input in-line Basic codes in the EZBasic input methods, after pressing down the return key, you will send commands and get a result. For instance, if you input "Print 1+2", you will get "3"; You can try loops such as \'d2FOR I = 1 TO 10: PRINT "*": NEXT\'d3 too, you will get ten asterisks. If you needs some basic computing and  use input methods often, and you know Basic language, EZBasic input methid may help.\
+You can aslo call system commands, e.g:  system "ls" .\
+EZBasic is just a experiment, therefore we stopped packaging it into the standard installer package since the release of Openvanilla 0.6.3. However, you can retrieve the source code from our repository and compile it by your self. Please read the \'d2Source Code\'d3 section to know the detail.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f1\fs36 \cf0 7. Advanced Settings\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f4\fs24 \cf0 \'a9\'d2\'a6\'b3
+\f5 OV
+\f4 \'aa\'ba\'b3\'5d\'a9\'77\'b8\'ea\'b0\'54\'a1\'41\'a5\'fe\'b3\'a1\'b3\'a3\'a6\'73\'a9\'f1\'a6\'62\'b1\'7a\'ad\'d3\'a4\'48\'b1\'62\'b8\'b9\'a5\'d8\'bf\'fd\'a4\'55\'aa\'ba\'a1\'75\'b8\'ea\'b7\'bd\'ae\'77\'a1\'76\'a1\'f7 \'a1\'75
+\f5 OpenVanilla
+\f4 \'a1\'76\'a1\'f7\'a1\'75
+\f5 0.6.3
+\f4 \'a1\'76\'a5\'d8\'bf\'fd\'a4\'55\'aa\'ba\'a1\'75
+\f5 OVLoader.plist
+\f4 \'a1\'76\'c0\'c9\'ae\'d7\'b7\'ed\'a4\'a4\'a1\'5d
+\f5 ~/Library/OpenVanilla/0.6.3/OVLoader.plist
+\f4 \'a1\'5e\'a1\'41\'a6\'62\'b1\'7a\'b2\'c4\'a4\'40\'a6\'b8\'a8\'cf\'a5\'ce 
+\f5 OV 
+\f4 \'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'b4\'4e\'b7\'7c\'a6\'db\'b0\'ca\'b2\'a3\'a5\'cd\'b3\'6f\'ad\'d3\'c0\'c9\'ae\'d7\'a1\'43\'a1\'75\'a8\'74\'b2\'ce\'b0\'be\'a6\'6e\'b3\'5d\'a9\'77\'a1\'76\'a4\'a4\'aa\'ba\'a1\'75
+\f5 OpenVanilla
+\f4 \'a1\'76\'b0\'be\'a6\'6e\'b3\'5d\'a9\'77\'b1\'b1\'a8\'ee\'a5\'78\'a1\'41\'a8\'e4\'b9\'ea\'a4\'5d\'b4\'4e\'ac\'4f\'a6\'62\'ad\'d7\'a7\'ef\'b3\'6f\'ad\'d3\'b3\'5d\'a9\'77\'c0\'c9\'ae\'d7\'a4\'a4\'aa\'ba\'bc\'c6\'ad\'c8\'a1\'43\'a6\'fd\'a1\'41\'a6\'5d\'ac\'b0\'b1\'7a\'a5\'69\'a5\'48\'a4\'e2\'b0\'ca\'b7\'73\'bc\'57\'a6\'db\'a4\'76\'aa\'ba 
+\f5 Xcin 
+\f4 \'bc\'d2\'b2\'d5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'a1\'75\'a8\'74\'b2\'ce\'b0\'be\'a6\'6e\'b3\'5d\'a9\'77\'a1\'76\'a9\'d2\'b4\'a3\'a8\'d1\'aa\'ba\'bf\'ef\'b6\'b5\'a5\'69\'af\'e0\'a4\'a3\'bc\'c5\'a8\'cf\'a5\'ce\'a1\'41\'b1\'7a\'ab\'4b\'b7\'7c\'bb\'dd\'ad\'6e\'a8\'cf\'a5\'ce\'a8\'ec\'b6\'69\'b6\'a5\'b3\'5d\'a9\'77\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+\cf0 \'b3\'6f\'ad\'d3\'c0\'c9\'ae\'d7\'ac\'4f\'a4\'40\'ad\'d3
+\f5  XML
+\f4 \'a1\'5d
+\f5 eXtensive Markup Language
+\f4 \'a1\'5e\'ae\'e6\'a6\'a1\'aa\'ba\'af\'c2\'a4\'e5\'a6\'72\'c0\'c9\'ae\'d7\'a1\'41\'b7\'ed\'b1\'7a\'a6\'62\'a1\'75\'a8\'74\'b2\'ce\'b0\'be\'a6\'6e\'b3\'5d\'a9\'77\'a1\'76\'aa\'ba
+\f5  OV 
+\f4 \'b3\'5d\'a9\'77\'a4\'a4\'a1\'41\'ab\'f6\'a4\'55\'a1\'75\'b6\'69\'b6\'a5\'b3\'5d\'a9\'77\'a1\'4b\'a1\'76\'a1\'41\'b4\'4e\'b7\'7c\'a5\'48\'b1\'7a\'a8\'74\'b2\'ce\'a4\'a4\'a5\'d8\'ab\'65\'b9\'77\'b3\'5d\'aa\'ba
+\f5  XML 
+\f4 \'bd\'73\'bf\'e8\'be\'b9\'a1\'41\'ad\'d7\'a7\'ef\'b3\'6f\'ad\'d3\'b3\'5d\'a9\'77\'c0\'c9\'ae\'d7\'a1\'43\'a6\'70\'aa\'47\'b1\'7a\'a6\'b3\'a6\'77\'b8\'cb\'c4\'ab\'aa\'47\'aa\'ba\'b5\'7b\'a6\'a1\'b6\'7d\'b5\'6f\'a4\'75\'a8\'e3 
+\f5 Xcode 
+\f4 \'aa\'ba\'b8\'dc\'a1\'41\'b4\'4e\'b7\'7c\'a5\'ce 
+\f5 Property List Editor 
+\f4 \'b6\'7d\'b1\'d2\'a1\'41\'a4\'a3\'b5\'4d\'a1\'41\'b4\'4e\'b7\'7c\'b6\'7d\'b1\'d2\'a6\'70\'a1\'75\'a4\'e5\'a6\'72\'bd\'73\'bf\'e8\'a1\'76\'a1\'5d
+\f5 TextEdit.app
+\f4 \'a1\'5e\'b5\'a5\'bd\'73\'bf\'e8\'be\'b9\'a1\'43\
+\'a6\'62 
+\f5 OVLoader.plist 
+\f4 \'a4\'a4\'a1\'41\'a8\'43\'a4\'40\'ac\'71\'aa\'ba\'b3\'5d\'a9\'77\'a1\'41\'b3\'a3\'ac\'4f\'a5\'48 
+\f5 key 
+\f4 \'bb\'50 
+\f5 dict 
+\f4 \'a8\'e2\'ad\'d3\'bc\'d0\'c5\'d2\'b2\'d5\'a6\'a8\'a1\'41\'a8\'d2\'a6\'70\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'b3\'5d\'a9\'77\'a1\'41\'b4\'4e\'ac\'4f\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+\cf0 <key>IM-OVIMChewing</key>\
+<dict>\
+    <key>keyboardLayout</key>\
+    <integer>0</integer>\
+</dict>
+\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'a8\'e4\'a4\'a4\'a1\'41\'a8\'e2\'ad\'d3 
+\f5 key 
+\f4 \'bc\'d0\'c5\'d2\'a4\'a4\'aa\'ba\'a6\'57\'ba\'d9\'a1\'75
+\f5 IM-OVIMChewing
+\f4 \'a1\'76\'a1\'41\'b4\'4e\'ac\'4f\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'a5\'4e\'b8\'b9\'a1\'41\'a6\'d3
+\f5 dict 
+\f4 \'b7\'ed\'a4\'a4\'aa\'ba\'a4\'ba\'ae\'65\'a1\'41\'a5\'4e\'aa\'ed\'aa\'ba\'ac\'4f 
+\f5 keyboardLayout 
+\f4 \'ac\'b0 
+\f5 0
+\f4 \'a1\'41\'a4\'5d\'b4\'4e\'ac\'4f\'c1\'e4\'bd\'4c\'b0\'74\'b8\'6d\'a8\'cf\'a5\'ce\'aa\'ba\'ac\'4f\'b9\'77\'b3\'5d\'b0\'74\'b8\'6d\'a1\'43\
+\'a8\'43\'ad\'d3\'bf\'57\'a5\'df\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'a1\'41\'b3\'a3\'b7\'7c\'a6\'b3\'a4\'a3\'a6\'50\'aa\'ba\'b3\'5d\'a9\'77\'ad\'c8\'a1\'41\'a6\'d3\'a6\'70\'aa\'47\'ac\'4f 
+\f5 Xcin 
+\f4 \'bc\'d2\'b2\'d5\'a4\'55\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'ab\'68\'b7\'7c\'a8\'cf\'a5\'ce\'ac\'db\'a6\'50\'aa\'ba\'a5\'7c\'b2\'d5\'b3\'5d\'a9\'77\'ad\'c8\'a1\'41\'a8\'d2\'a6\'70 
+\f5 Xcin 
+\f4 \'ad\'dc\'be\'65\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'b3\'5d\'a9\'77\'a5\'69\'af\'e0\'ac\'4f\'a1\'47
+\f8\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs24 \cf0 <key>IM-OVIMXcin-cj.cin</key>\
+<dict>\
+    <key>autoCompose</key>\
+    <integer>0</integer>\
+    <key>hitMaxAndCompose</key>\
+    <integer>0</integer>\
+    <key>maxKeySequenceLength</key>\
+    <integer>5</integer>\
+    <key>shiftSelectionKey</key>\
+    <integer>0</integer>\
+</dict>
+\fs26 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'a6\'62\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'a6\'57\'ba\'d9\'a4\'e8\'ad\'b1\'a1\'41
+\f5 Xcin 
+\f4 \'bc\'d2\'b2\'d5\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'b3\'a3\'b7\'7c\'a5\'48\'a1\'75
+\f5 IM-OVIMXcin
+\f4 \'a1\'76\'b6\'7d\'c0\'59\'a1\'41\'ab\'e1\'ad\'b1\'ab\'68\'ac\'4f\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ed\'ae\'e6 
+\f5 cin 
+\f4 \'c0\'c9\'ae\'d7\'aa\'ba\'c0\'c9\'a6\'57\'a1\'43
+\f5 OV 
+\f4 \'b4\'a3\'a8\'d1\'aa\'ba 
+\f5 cin 
+\f4 \'c0\'c9\'ae\'d7\'a6\'57\'ba\'d9\'a6\'70\'a6\'43\'aa\'ed\'a1\'47\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5 \cf0 * Canjei: cj.cin\
+* Dayi: dayi3.cin\
+* Cantonese Pinyin: jyutping.cin\
+* PinYin for Traditional Chinese: pinyinbig5.cin\
+* Simplex: simplex.cin\
+* Japanese Kana: ukiyoe.cin\
+* Canjei for Simplified Chinese: zhcn_jtcj.cin\
+* Phonetic for Simplified Chinese: zhcn_phonegb2.cin\
+* Pinyin for Simplified Chinese: zhcn_pinyin.cin\
+* 
+\f4 \'c2\'b2\'c5\'e9\'c2\'f9\'ab\'f7\'a1\'47
+\f5 zhcn_shuangpin.cin\
+* 
+\f4 \'c2\'b2\'c5\'e9\'a4\'ad\'b5\'a7\'a6\'72\'a7\'ce\'a1\'47
+\f5 zhcn_wubizixing.cin\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\fs26 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'a6\'d3\'a6\'55\'b6\'b5\'b3\'5d\'a9\'77\'aa\'ba\'b7\'4e\'b8\'71\'a6\'70\'a4\'55\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 maxKeySequenceLength 
+\f4 \'ab\'f6\'c1\'e4\'b2\'d5\'a6\'58\'a4\'57\'ad\'ad
+\f5 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b3\'6f\'ad\'d3\'bf\'ef\'b6\'b5\'aa\'ba\'b7\'4e\'ab\'e4\'ac\'4f\'ac\'59\'ad\'d3\'bf\'e9\'a4\'4a\'aa\'6b\'b3\'cc\'a6\'68\'a5\'69\'a5\'48\'a5\'ce\'b4\'58\'ad\'d3\'ab\'f6\'c1\'e4\'a1\'41\'b2\'d5\'a5\'58\'a4\'40\'ad\'d3\'a6\'72\'a9\'ce\'ac\'4f\'b5\'fc\'b7\'4a\'a1\'43\'a8\'d2\'a6\'70\'aa\'60\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a8\'43\'ad\'d3\'a6\'72\'b3\'a3\'ac\'4f\'a5\'48\'a4\'54\'ad\'d3\'aa\'60\'ad\'b5\'b2\'c5\'b8\'b9\'a5\'5b\'a4\'57\'a4\'40\'ad\'d3\'ad\'b5\'bd\'d5\'b8\'b9\'b2\'d5\'a6\'a8\'a1\'41\'a9\'d2\'a5\'48\'b3\'cc\'a6\'68\'ac\'4f\'a5\'7c\'ad\'d3\'ab\'f6\'c1\'e4\'a1\'41\'a6\'d3\'b3\'6f\'ad\'d3\'b3\'5d\'a9\'77\'b4\'4e\'ac\'4f  
+\f5 4
+\f4 \'a1\'43\'ba\'ae\'a7\'f8\'b2\'c5\'b8\'b9\'bf\'e9\'a4\'4a\'aa\'6b\'b3\'cc\'a6\'68\'bb\'dd\'ad\'6e\'a5\'b4\'a1\'75
+\f5 planet
+\f4 \'a1\'76\'b3\'6f\'bc\'cb\'a4\'bb\'ad\'d3\'a6\'72\'a1\'41\'b2\'a3\'a5\'cd\'a4\'45\'a4\'6a\'a6\'e6\'ac\'50\'b2\'c5\'b8\'b9\'a6\'43\'aa\'ed\'a1\'41\'a9\'d2\'a5\'48\'b4\'4e\'ac\'4f  
+\f5 6
+\f4 \'a1\'43\'b3\'6f\'ad\'d3\'bf\'ef\'b6\'b5\'a5\'b2\'b6\'b7\'ac\'4f\'a4\'6a\'a9\'f3 
+\f5 0 
+\f4 \'aa\'ba\'be\'e3\'bc\'c6\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 AutoCompose 
+\f4 \'a6\'db\'b0\'ca\'b2\'d5\'a6\'72
+\f5 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'ac\'4f\'a7\'5f\'a6\'62\'a5\'b4\'a4\'4a\'ab\'f6\'c1\'e4\'ae\'c9\'a1\'41\'a6\'50\'a8\'42\'c5\'e3\'a5\'dc\'a5\'d8\'ab\'65\'a5\'b4\'a4\'4a\'aa\'ba\'a6\'72\'ae\'da\'aa\'ba\'b2\'d5\'a6\'72\'b5\'b2\'aa\'47\'a1\'41\'a6\'d3\'a4\'a3\'a5\'ce\'ab\'f6\'a4\'55\'aa\'c5\'a5\'d5\'c1\'e4\'a4\'7e\'b2\'d5\'a6\'72\'a1\'43\'b3\'6f\'ad\'d3\'bf\'ef\'b6\'b5\'ac\'b0 
+\f5 1 
+\f4 \'a9\'ce 
+\f5 0
+\f4 \'a1\'41
+\f5 1 
+\f4 \'ac\'4f\'b1\'d2\'a5\'ce\'a1\'41
+\f5 0 
+\f4 \'ac\'b0\'b0\'b1\'a5\'ce\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 hitMaxAndCompose 
+\f4 \'ab\'f6\'c1\'e4\'b9\'46\'a4\'57\'ad\'ad\'ae\'c9\'b2\'d5\'a6\'72
+\f5 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b7\'ed\'b1\'7a\'bf\'e9\'a4\'4a\'aa\'ba\'ab\'f6\'c1\'e4\'bc\'c6\'a5\'d8\'a8\'ec\'a4\'46\'ab\'65\'ad\'b1\'a9\'77\'b8\'71\'aa\'ba\'a4\'57\'ad\'ad\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'ac\'4f\'a7\'5f\'ad\'6e\'aa\'bd\'b1\'b5\'b0\'65\'a5\'58\'b2\'d5\'a6\'72\'aa\'ba\'b5\'b2\'aa\'47\'a1\'41\'a6\'d3\'a4\'a3\'a5\'ce\'ab\'f6\'a4\'55\'aa\'c5\'a5\'d5\'c1\'e4\'b2\'d5\'a6\'72\'a1\'43\'b3\'6f\'ad\'d3\'bf\'ef\'b6\'b5\'ac\'b0 
+\f5 1 
+\f4 \'a9\'ce 
+\f5 0
+\f4 \'a1\'41
+\f5 1 
+\f4 \'ac\'4f\'b1\'d2\'a5\'ce\'a1\'41
+\f5 0 
+\f4 \'ac\'b0\'b0\'b1\'a5\'ce\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 shiftSelectionKey 
+\f4 \'b2\'be\'b0\'ca\'bf\'ef\'a6\'72\'ad\'d4\'bf\'ef\'ab\'f6\'c1\'e4\'b1\'c6\'a6\'43
+\f5 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a4\'40\'af\'eb\'a6\'d3\'a8\'a5\'a1\'41\'a6\'62\'b8\'f5\'a5\'58\'bf\'ef\'a6\'72\'b5\'a1\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'a9\'d2\'a6\'b3\'ad\'d4\'bf\'ef\'a6\'72\'aa\'ba\'ab\'f6\'c1\'e4\'a1\'41\'b3\'a3\'b7\'7c\'ac\'4f\'b1\'71\'a1\'75
+\f5 1
+\f4 \'a1\'76\'b6\'7d\'a9\'6c\'aa\'ba\'bc\'c6\'a6\'72\'c1\'e4\'a1\'46\'a6\'d3\'a6\'62\'b1\'7a\'b6\'7d\'b1\'d2\'a4\'46
+\f5   shiftSelectionKey 
+\f4 \'bf\'ef\'b6\'b5\'a4\'a7\'ab\'e1\'a1\'41\'ab\'68\'ac\'4f\'a5\'48\'aa\'c5\'a5\'d5\'c1\'e4\'bf\'ef\'b2\'c4\'a4\'40\'ad\'d3\'a6\'72\'a1\'41\'b1\'71\'b2\'c4\'a4\'47\'ad\'d3\'a6\'72\'b6\'7d\'a9\'6c\'a5\'48\'a1\'75
+\f5 1
+\f4 \'a1\'76\'b6\'7d\'a9\'6c\'b1\'c6\'a6\'43\'a1\'41\'a6\'62\'e5\'46\'bd\'bc\'a6\'cc\'a9\'ce\'a4\'6a\'a9\'f6\'b5\'a5\'a6\'b3\'ad\'d4\'bf\'ef\'a6\'72\'a1\'41\'a6\'fd\'ac\'4f\'ad\'d4\'bf\'ef\'a6\'72\'b8\'fb\'a4\'d6\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'a4\'a4\'a1\'41\'a5\'69\'a5\'48\'a4\'e8\'ab\'4b\'b1\'7a\'a8\'cf\'a5\'ce\'aa\'c5\'a5\'d5\'c1\'e4\'a7\'d6\'b3\'74\'bf\'e9\'a4\'4a\'b2\'c4\'a4\'40\'ad\'d3\'ad\'d4\'bf\'ef\'a6\'72\'a1\'43\'b3\'6f\'ad\'d3\'bf\'ef\'b6\'b5\'a5\'75\'af\'e0\'ac\'4f 
+\f5 1 
+\f4 \'a9\'ce 
+\f5 0
+\f4 \'a1\'41
+\f5 1 
+\f4 \'ac\'4f\'b1\'d2\'a5\'ce\'a1\'41
+\f5 0 
+\f4 \'ac\'b0\'b0\'b1\'a5\'ce\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f1\fs36 \cf0 8. Customization\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f5\fs24 \cf0 \
+OV 
+\f4 \'b3\'cc\'a4\'6a\'aa\'ba\'af\'53\'a6\'e2\'a4\'a7\'a4\'40\'a1\'41\'b4\'4e\'ac\'4f\'af\'e0\'b0\'f7\'a7\'f3\'a4\'e8\'ab\'4b\'aa\'ba\'ad\'d7\'a7\'ef\'a6\'77\'b8\'cb\'a5\'5d\'b7\'ed\'a4\'a4\'a4\'ba\'ab\'d8\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ed\'ae\'e6\'a1\'41\'b2\'c5\'a6\'58\'a6\'db\'a4\'76\'aa\'ba\'af\'53\'ae\'ed\'bb\'dd\'ad\'6e\'a1\'41\'a4\'f1\'a4\'e8\'bb\'a1\'b4\'4e\'ad\'ec\'a5\'bb\'aa\'ba\'aa\'60\'ad\'b5\'a9\'ce\'ad\'dc\'be\'65\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'b7\'73\'bc\'57\'b4\'58\'ad\'d3\'a6\'db\'a4\'76\'a9\'d2\'b2\'df\'ba\'44\'aa\'ba\'ab\'f6\'c1\'e4\'a1\'46\'a4\'5d\'a5\'69\'a5\'48\'a8\'cf\'a5\'ce\'a4\'f1\'c4\'ab\'aa\'47 
+\f5 TCIM 
+\f4 \'a9\'d2\'b4\'a3\'a8\'d1\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'bd\'73\'bf\'e8\'a4\'75\'a8\'e3\'a7\'f3\'a8\'e3\'a6\'b3\'bc\'75\'a9\'ca\'aa\'ba\'a4\'e8\'a6\'a1\'a1\'41\'b3\'5d\'ad\'70\'a6\'db\'a4\'76\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+\cf0 \'a9\'ce\'b3\'6f\'bb\'f2\'bb\'a1\'a1\'41\'b3\'5c\'a6\'68\'aa\'42\'a4\'cd\'b3\'a3\'a6\'b3\'a6\'62 
+\f5 Mac OS X 
+\f4 \'a4\'57\'a7\'e4\'a4\'a3\'a8\'ec\'e5\'46\'bd\'bc\'a6\'cc\'bf\'e9\'a4\'4a\'aa\'6b\'a5\'69\'a5\'ce\'aa\'ba\'b0\'dd\'c3\'44\'a1\'41
+\f5 OV 
+\f4 \'a5\'d8\'ab\'65\'a4\'5d\'b5\'4c\'aa\'6b\'aa\'bd\'b1\'b5\'b4\'a3\'a8\'d1\'e5\'46\'bd\'bc\'a6\'cc\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'ad\'ec\'a6\'5d\'ac\'4f\'a6\'62\'e5\'46\'bd\'bc\'a6\'cc\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'a9\'d2\'a6\'b3\'aa\'cc\'a6\'e6\'a9\'f6\'a4\'bd\'a5\'71\'a1\'41\'b9\'ef\'b2\'a3\'ab\'7e\'aa\'ba\'ac\'46\'b5\'a6\'b0\'dd\'c3\'44\'a1\'43\'a6\'d3\'a6\'70\'aa\'47\'b1\'7a\'a5\'69\'a5\'48\'a7\'e4\'a8\'ec\'e5\'46\'bd\'bc\'a6\'cc\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'aa\'ed\'ae\'e6\'a1\'41\'a8\'c3\'a5\'42\'c2\'e0\'b4\'ab\'a6\'a8 
+\f5 OV 
+\f4 \'a9\'d2\'a8\'cf\'a5\'ce\'aa\'ba\'ae\'e6\'a6\'a1\'a1\'41\'b5\'4d\'ab\'e1\'a9\'f1\'a8\'ec 
+\f5 OV 
+\f4 \'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'c0\'c9\'ae\'d7\'a5\'d8\'bf\'fd\'a4\'a4\'a1\'41\'b3\'e6\'af\'c2\'b4\'4e\'a7\'de\'b3\'4e\'a4\'57\'a8\'d3\'bb\'a1\'a1\'41\'ad\'6e\'b9\'ea\'b2\'7b\'a6\'62 
+\f5 OV 
+\f4 \'ac\'5b\'ba\'63\'a4\'55\'a8\'cf\'a5\'ce\'e5\'46\'bd\'bc\'a6\'cc\'a1\'41\'ac\'4f\'a5\'69\'a6\'e6\'aa\'ba\'a1\'46\'a6\'fd\'ac\'4f\'b3\'6f\'bc\'cb\'a5\'bc\'b8\'67\'a6\'e6\'a9\'f6\'a4\'bd\'a5\'71\'b1\'c2\'c5\'76\'a1\'41\'ab\'4b\'b3\'77\'a6\'e6\'a8\'cf\'a5\'ce\'e5\'46\'bd\'bc\'a6\'cc\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'bd\'d0\'a4\'54\'ab\'e4\'b1\'7a\'a9\'d2\'a5\'b2\'b6\'b7\'ad\'74\'be\'e1\'aa\'ba\'b3\'64\'a5\'f4\'a1\'43\
+\'a5\'69\'a5\'48\'a8\'cf\'a5\'ce\'aa\'ed\'ae\'e6\'a4\'e8\'a6\'a1\'b8\'fc\'a4\'4a\'a1\'41\'a6\'d3\'a6\'62\'a5\'d8\'ab\'65 
+\f5 OV 
+\f4 \'c1\'d9\'a8\'53\'a6\'b3\'b4\'a3\'a8\'d1\'a1\'42\'a5\'42\'b5\'4c\'aa\'6b\'b4\'a3\'a8\'d1\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'be\'da\'a7\'da\'ad\'cc\'a9\'d2\'aa\'be\'a6\'b3\'a1\'47
+\f8\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+
+\f5\fs24 \cf0 * 
+\f4 \'e5\'46\'bd\'bc\'a6\'cc\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'47
+\f5  http://www.liu.com.tw\
+* 
+\f4 \'bb\'b4\'c3\'50\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'47
+\f5  http://homepage.mac.com/eshen/ez/index5.html\
+* 
+\f4 \'b4\'b9\'b4\'b9\'bd\'58\'ba\'7e\'a6\'72\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'47
+\f5  http://input.foruto.com/jjmjsm/
+\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\f4\fs32 \cf0 1. \'a7\'52\'b0\'a3\'a4\'a3\'bb\'dd\'ad\'6e\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b
+\f5\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a9\'d2\'a6\'b3 
+\f5 OV 
+\f4 \'a8\'cf\'a5\'ce\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'a4\'ce\'b8\'ea\'ae\'c6\'c0\'c9\'ae\'d7\'a1\'41\'b3\'a3\'a6\'ec\'a6\'62\'a8\'74\'b2\'ce\'b5\'77\'ba\'d0\'a4\'a4\'aa\'ba\'a1\'75\'b8\'ea\'b7\'bd\'ae\'77\'a1\'76\'a1\'5d\'a9\'ce\'ac\'4f\'ad\'5e\'a4\'e5\'ac\'c9\'ad\'b1\'a4\'55\'aa\'ba
+\f5  Library
+\f4 \'a1\'5e\'a1\'f7\'a1\'75
+\f5 OpenVanilla
+\f4 \'a1\'76\'a1\'f7\'a1\'75
+\f5 0.6.3
+\f4 \'a1\'76\'a5\'d8\'bf\'fd\'a4\'55\'a1\'43\'a6\'62\'b3\'6f\'ad\'d3\'a5\'d8\'bf\'fd\'a4\'a4\'a1\'41\'b1\'7a\'a5\'69\'a5\'48\'ac\'dd\'a8\'ec\'b3\'5c\'a6\'68\'b0\'c6\'c0\'c9\'a6\'57\'ac\'4f 
+\f5 .dylib 
+\f4 \'aa\'ba\'c0\'c9\'ae\'d7\'a1\'41\'b3\'6f\'a8\'c7\'ac\'4f\'a6\'55\'ad\'d3\'bf\'e9\'a4\'4a\'aa\'6b\'a9\'d2\'a8\'cf\'a5\'ce\'aa\'ba\'b0\'ca\'ba\'41\'b0\'f5\'a6\'e6\'c0\'c9\'ae\'d7\'a1\'41\'a6\'70\'aa\'47\'b1\'7a\'c4\'b1\'b1\'6f\'a6\'b3\'a8\'c7\'bf\'e9\'a4\'4a\'aa\'6b\'b9\'ea\'a6\'62\'a5\'ce\'a4\'a3\'b5\'db\'a1\'41\'b1\'7a\'a5\'69\'a5\'48\'a7\'52\'b0\'a3\'b3\'6f\'a8\'c7\'c0\'c9\'ae\'d7\'a1\'5d\'a6\'62\'b1\'7a\'a7\'52\'b0\'a3\'c0\'c9\'ae\'d7\'a4\'a7\'ab\'65\'a1\'41\'ab\'d8\'c4\'b3\'b1\'7a\'a5\'fd\'a6\'62\'a8\'74\'b2\'ce\'b0\'be\'a6\'6e\'b3\'5d\'a9\'77\'a4\'a4\'aa\'ba\'a1\'75\'b0\'ea\'bb\'da\'b3\'5d\'a9\'77\'a1\'76\'a1\'41\'b0\'b1\'a5\'ce 
+\f5 OV
+\f4 \'a1\'41\'a7\'52\'b0\'a3\'a7\'b9\'ab\'e1\'a6\'41\'ad\'ab\'b7\'73\'b1\'d2\'a5\'ce\'a1\'5e\'a1\'43\
+\'a8\'e4\'a4\'a4\'a1\'41
+\f5 OVIMArray 
+\f4 \'ac\'4f\'a6\'e6\'a6\'43\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'42
+\f5 OVIMCanjei 
+\f4 \'ac\'4f\'ad\'dc\'be\'65\'a1\'42
+\f5 OVIMChewing 
+\f4 \'ac\'4f\'bb\'c5\'ad\'b5\'a1\'42
+\f5 OVIMPhonetic 
+\f4 \'ac\'4f\'aa\'60\'ad\'b5\'a1\'42
+\f5 OVIMPOJHolo 
+\f4 \'ac\'4f\'a5\'78\'bb\'79\'a5\'d5\'b8\'dc\'a6\'72\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'42
+\f5 OCIMXcin 
+\f4 \'ab\'68\'ac\'4f\'a5\'69\'a5\'48\'b8\'fc\'a4\'4a\'a6\'55\'ba\'d8 
+\f5 Xcin 
+\f4 \'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ed\'ae\'e6\'aa\'ba\'b3\'71\'a5\'ce\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\fs32 \cf0 2.\'bd\'73\'bf\'e8
+\f5  cin 
+\f4 \'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ed\'ae\'e6\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 \'a8\'43\'ad\'d3\'bf\'e9\'a4\'4a\'aa\'6b\'bb\'dd\'ad\'6e\'aa\'ba\'c0\'c9\'ae\'d7\'a1\'41\'b3\'a3\'a6\'ec\'a6\'62\'a6\'50\'a6\'57\'aa\'ba\'a5\'d8\'bf\'fd\'a4\'55\'a1\'43\'a4\'f1\'a4\'e8\'bb\'a1\'a1\'41\'bf\'ef\'b3\'e6\'a4\'57\'aa\'ba\'a1\'75
+\f5 OV 
+\f4 \'a6\'e6\'a6\'43\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'76\'aa\'ba\'aa\'ed\'ae\'e6\'a1\'41\'b4\'4e\'ac\'4f\'a6\'62 
+\f5 OVIMArray 
+\f4 \'a4\'55\'aa\'ba 
+\f5 array30.cin
+\f4 \'a1\'41\'a6\'d3\'aa\'65\'ac\'a5\'a5\'d5\'b8\'dc\'a6\'72\'a1\'5d
+\f5 POJ
+\f4 \'a1\'5e\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'aa\'ed\'ae\'e6\'ac\'4f 
+\f5 OVIMPOJHolo 
+\f4 \'a4\'55\'aa\'ba 
+\f5 poj.cin
+\f4 \'a1\'41\'a6\'d3\'b1\'7a\'b7\'7c\'ad\'d7\'a7\'ef\'a1\'42\'b7\'73\'bc\'57\'aa\'ba\'c0\'c9\'ae\'d7\'a1\'41\'b3\'71\'b1\'60\'ab\'4b\'a6\'ec\'a6\'62 
+\f5 OVIMXcin 
+\f4 \'a4\'55\'a1\'41
+\f5 Xcin 
+\f4 \'bc\'d2\'b2\'d5\'a8\'cf\'a5\'ce\'aa\'ba 
+\f5 cin 
+\f4 \'c0\'c9\'ae\'d7\'a6\'57\'ba\'d9\'bb\'50\'bf\'e9\'a4\'4a\'aa\'6b\'b9\'ef\'c0\'b3\'a6\'43\'aa\'ed\'a1\'41\'bd\'d0\'b0\'d1\'a8\'a3\'ab\'65\'b3\'b9\'a1\'75\'b6\'69\'b6\'a5\'b3\'5d\'a9\'77\'a1\'76\'a1\'43\
+\'b1\'7a\'a5\'69\'a5\'48\'a8\'cf\'a5\'ce\'a5\'f4\'a6\'f3\'a5\'69\'a5\'48\'a4\'40\'ae\'4d\'bd\'73\'bf\'e8\'af\'c2\'a4\'e5\'a6\'72\'c0\'c9\'ae\'d7\'aa\'ba\'bd\'73\'bf\'e8\'b3\'6e\'c5\'e9\'a1\'41\'ad\'d7\'a7\'ef\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ed\'ae\'e6\'a1\'43\'aa\'60\'b7\'4e\'a1\'47\'a5\'d1\'a9\'f3\'a9\'f1\'a6\'62\'a1\'75\'b8\'ea\'b7\'bd\'ae\'77\'a1\'76\'a5\'d8\'bf\'fd\'a4\'55\'aa\'ba\'c0\'c9\'ae\'d7\'b3\'a3\'a6\'b3\'c5\'76\'ad\'ad\'b1\'b1\'ba\'de\'a1\'41\'b1\'7a\'a5\'b2\'b6\'b7\'a5\'fd\'b1\'4e\'b1\'7a\'b7\'51\'ad\'d7\'a7\'ef\'aa\'ba\'b8\'ea\'ae\'c6\'c0\'c9\'a1\'41\'ab\'fe\'a8\'a9\'a4\'40\'a5\'f7\'a6\'dc\'b1\'7a\'aa\'ba\'a4\'75\'a7\'40\'a5\'d8\'bf\'fd\'a4\'a4\'a1\'41\'ab\'dd\'ad\'d7\'a7\'ef\'a7\'b9\'ab\'e1\'a1\'41\'a6\'41\'a5\'48\'bb\'5c\'bc\'67\'a4\'e8\'a6\'a1\'a9\'f1\'a6\'5e\'ad\'ec\'a8\'d3\'a5\'d8\'bf\'fd\'a1\'43\'bb\'5c\'bc\'67\'ae\'c9\'a1\'41\'b1\'7a\'a5\'b2\'b6\'b7\'be\'d6\'a6\'b3\'a8\'74\'b2\'ce\'ba\'de\'b2\'7a\'a4\'48\'aa\'ba\'c5\'76\'ad\'ad\'a1\'41
+\f5 OS X 
+\f4 \'aa\'ba 
+\f5 Finder 
+\f4 \'b7\'7c\'a6\'62\'bb\'5c\'bc\'67\'ae\'c9\'ad\'6e\'a8\'44\'b1\'7a\'bf\'e9\'a4\'4a\'b1\'7a\'aa\'ba\'b1\'4b\'bd\'58\'a1\'43\
+\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ed\'ae\'e6\'aa\'ba\'b0\'c6\'c0\'c9\'a6\'57\'a5\'b2\'b6\'b7\'ac\'4f\'a1\'75
+\f5 .cin
+\f4 \'a1\'76\'a1\'41\'a6\'62\'a6\'73\'c0\'c9\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'a4\'5d\'a5\'b2\'b6\'b7\'a8\'cf\'a5\'ce 
+\f5 UTF-8 
+\f4 \'bd\'73\'bd\'58\'a6\'73\'c0\'c9\'a1\'41
+\f5 Mac OS X 
+\f4 \'a4\'ba\'ab\'d8\'aa\'ba\'a1\'75\'a4\'e5\'a6\'72\'bd\'73\'bf\'e8\'a1\'76\'a1\'5d
+\f5 TextEdit
+\f4 \'a1\'5e\'b4\'4e\'ac\'4f\'a4\'40\'ae\'4d\'a5\'69\'a5\'48\'bd\'73\'bf\'e8\'af\'c2\'a4\'e5\'a6\'72\'c0\'c9\'ae\'d7\'a1\'41\'a5\'48\'a4\'ce\'c2\'e0\'b4\'ab\'bd\'73\'bd\'58\'aa\'ba\'bd\'73\'bf\'e8\'b3\'6e\'c5\'e9\'a1\'43\'a6\'62\'a4\'40\'ad\'d3 
+\f5 .cin 
+\f4 \'c0\'c9\'ae\'d7\'a4\'a4\'a1\'41\'c0\'b3\'b8\'d3\'ad\'6e\'a5\'5d\'a7\'74\'a5\'48\'a4\'55\'b8\'ea\'b0\'54\'a1\'43\
+\'a5\'48\'ba\'ae\'a7\'f8\'bf\'e9\'a4\'4a\'aa\'6b\'ac\'b0\'a8\'d2\'a1\'41\'a6\'62\'c0\'c9\'ae\'d7\'aa\'ba\'b6\'7d\'c0\'59\'bb\'dd\'ad\'6e\'a6\'b3\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+
+\f12 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+
+\f5 \cf0  %gen_inp\
+ %ename EHQ-Symbols\
+ %cname 
+\f4 \'ba\'ae\'a7\'f8\'b2\'c5\'b8\'b9\
+
+\f5  %encoding UTF-8\
+ %selkey 1234567890\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a8\'e4\'a4\'a4\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 %gen_inp
+\f4 \'a1\'47\'a9\'d2\'a6\'b3\'aa\'ba
+\f5  .cin 
+\f4 \'c0\'c9\'ae\'d7\'a1\'41\'b3\'a3\'a5\'b2\'b6\'b7\'a5\'48\'a6\'b9\'b6\'7d\'c0\'59\'a1\'43\
+
+\f5 * %ename: The English name
+\f4 \
+
+\f5 * %cname: The Chinese name\
+* %encoding: Please do not modify this line.
+\f4 \
+
+\f5 * %selkey
+\f4 \'a1\'47\'bf\'ef\'a6\'72\'ab\'f6\'c1\'e4\'aa\'ba\'b3\'5d\'a9\'77\'a1\'41\'a4\'5d\'b4\'4e\'ac\'4f\'b7\'ed\'b1\'7a\'bf\'e9\'a4\'4a\'aa\'ba\'ab\'f6\'c1\'e4\'a5\'69\'a5\'48\'b2\'a3\'a5\'cd\'a6\'68\'ba\'d8\'b5\'b2\'aa\'47\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'b1\'7a\'b7\'51\'ad\'6e\'a8\'cf\'a5\'ce\'ab\'e7\'bc\'cb\'aa\'ba\'ab\'f6\'c1\'e4\'bf\'ef\'be\'dc\'a6\'62\'bf\'ef\'a6\'72\'b5\'f8\'b5\'a1\'a4\'a4\'a5\'58\'b2\'7b\'aa\'ba\'bf\'ef\'b6\'b5\'a1\'43\'a4\'57\'ad\'b1\'aa\'ba\'bd\'64\'a8\'d2\'ac\'4f\'a8\'cf\'a5\'ce
+\f5  1 
+\f4 \'a8\'ec
+\f5  0 
+\f4 \'aa\'ba\'bc\'c6\'a6\'72\'c1\'e4\'b7\'ed\'a6\'a8\'bf\'ef\'a6\'72\'ab\'f6\'c1\'e4\'a1\'41\'b1\'7a\'a4\'5d\'a5\'69\'a5\'48\'a7\'ef\'a6\'a8\'a5\'ce\'a1\'75
+\f5 qwer
+\f4 \'a1\'4b\'a1\'76\'ab\'f6\'c1\'e4\'bf\'ef\'a6\'72\'a1\'43\
+\'b1\'b5\'a4\'55\'a8\'d3\'a5\'b2\'b6\'b7\'ad\'6e\'a6\'b3
+\f5  %keyname begin 
+\f4 \'bb\'50
+\f5  %keyname end
+\f4 \'a1\'43\'a6\'62\'b3\'6f\'a8\'e2\'ad\'d3\'bc\'d0\'c5\'d2\'aa\'ba\'a4\'ba\'ae\'65\'a4\'a4\'a9\'77\'b8\'71\'aa\'ba\'ac\'4f\'bf\'e9\'a4\'4a\'ae\'c9\'a9\'d2\'a8\'cf\'a5\'ce\'aa\'ba\'ab\'f6\'c1\'e4\'a1\'41\'c1\'d9\'a6\'b3\'ab\'f6\'a4\'55\'aa\'ba\'ae\'c9\'ad\'d4\'c0\'b3\'b8\'d3\'a5\'fd\'b2\'a3\'a5\'cd\'ab\'e7\'bc\'cb\'aa\'ba\'b5\'b2\'aa\'47\'a1\'41\'ab\'f6\'c1\'e4\'a6\'57\'ba\'d9\'bb\'50\'c5\'e3\'a5\'dc\'a6\'57\'ba\'d9\'a4\'a4\'b6\'a1\'b9\'6a\'a4\'40\'ad\'d3\'aa\'c5\'a5\'d5\'a1\'41\'a8\'43\'ad\'d3\'ab\'f6\'c1\'e4\'aa\'ba\'b3\'5d\'a9\'77\'bc\'67\'a6\'a8\'a4\'40\'a6\'e6\'a1\'43\'a4\'f1\'a4\'e8\'bb\'a1\'a1\'41\'a6\'62\'ad\'dc\'be\'65\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'b3\'5d\'a9\'77\'a4\'a4\'a1\'41\'b4\'4e\'ac\'4f\'a1\'75
+\f5 q 
+\f4 \'a4\'e2\'a1\'76\'a1\'42\'a1\'75
+\f5 a 
+\f4 \'a4\'e9\'a1\'76\'a1\'41\'bc\'d0\'b7\'c7\'c1\'e4\'bd\'4c\'b0\'74\'b8\'6d\'aa\'ba\'aa\'60\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'b4\'4e\'ac\'4f\'a1\'75
+\f5 1 
+\f4 \'a3\'74\'a1\'76\'a1\'42\'a1\'75
+\f5 q 
+\f4 \uc0\u12550 \'a1\'76\'b5\'a5\'a1\'43\
+\'a6\'62\'b3\'5d\'a9\'77\'a7\'b9\'ab\'f6\'c1\'e4\'a4\'a7\'ab\'e1\'a1\'41\'b4\'4e\'ac\'4f\'b3\'5d\'a9\'77\'a8\'43\'a4\'40\'ad\'d3\'ab\'f6\'c1\'e4\'b2\'d5\'a6\'58\'a9\'d2\'c0\'b3\'b8\'d3\'b2\'a3\'a5\'cd\'aa\'ba\'b5\'b2\'aa\'47\'a4\'46\'a1\'41\'b3\'6f\'a8\'c7\'b3\'5d\'a9\'77\'a9\'f1\'a6\'62
+\f5  %chardef begin 
+\f4 \'bb\'50
+\f5  %chardef end 
+\f4 \'a4\'a7\'b6\'a1\'a1\'41\'ab\'65\'ad\'b1\'b3\'5d\'a9\'77\'aa\'ba\'ac\'4f\'b1\'7a\'a6\'62\'ab\'65\'ad\'b1
+\f5  %keyname 
+\f4 \'a9\'d2\'b3\'5d\'a9\'77\'aa\'ba\'ab\'f6\'c1\'e4\'a9\'77\'b8\'71\'aa\'ba\'b2\'d5\'a6\'58\'a1\'41\'aa\'c5\'a4\'40\'ad\'d3\'aa\'c5\'ae\'e6\'ab\'e1\'a1\'41\'ac\'4f\'b2\'a3\'a5\'cd\'aa\'ba\'b5\'b2\'aa\'47\'a1\'43\'a4\'f1\'a4\'e8\'bb\'a1\'a1\'41\'b1\'7a\'a5\'69\'a5\'48\'a6\'62\'aa\'60\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'b7\'ed\'a4\'a4\'a5\'5b\'a4\'4a\'a6\'db\'a4\'76\'b3\'d0\'ab\'d8\'aa\'ba\'b7\'73\'a6\'72\'a1\'41\'b7\'51\'ad\'6e\'a5\'ce\'a1\'75\'a3\'74\'a3\'b8\'a3\'b5\'a3\'bf\'a1\'76\'a5\'b4\'a5\'58\'a1\'75\'b4\'ce\'a1\'76\'b3\'6f\'ad\'d3\'a6\'72\'a1\'41\'b4\'4e\'ac\'4f\'a6\'68\'a5\'5b\'a4\'40\'a6\'e6\'a1\'75
+\f5 1u;4 
+\f4 \'b4\'ce\'a1\'76\'a1\'43\'a6\'b9\'a5\'7e\'a1\'41\'a6\'62
+\f5  %keyname 
+\f4 \'bb\'50
+\f5  %chardef 
+\f4 \'a9\'d2\'a9\'77\'b8\'71\'aa\'ba\'ad\'5e\'a4\'e5\'ab\'f6\'c1\'e4\'a1\'41\'ac\'4f\'a8\'53\'a6\'b3\'b0\'cf\'a4\'c0\'a4\'6a\'a4\'70\'bc\'67\'aa\'ba\'a1\'43\
+\'a6\'62 
+\f5 cin 
+\f4 \'c0\'c9\'ae\'d7\'a4\'a4\'c1\'d9\'a6\'b3\'a4\'40\'b6\'b5
+\f5  %endkey 
+\f4 \'bf\'ef\'b6\'b5\'a1\'41\'a6\'5d\'ac\'b0\'a5\'69\'a5\'48\'c0\'b3\'a5\'ce\'aa\'ba\'bd\'64\'b3\'f2\'a4\'f1\'b8\'fb\'bd\'c6\'c2\'f8\'a1\'41\'b1\'4e\'b7\'7c\'a6\'62\'a4\'55\'a4\'40\'b8\'60\'a4\'a4\'b8\'d4\'ad\'7a\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\f1\fs32 \cf0 3. Customize the Full-width Punctuation
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 \'a4\'a3\'a6\'50\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'b9\'ef\'a9\'f3\'a6\'70\'a6\'f3\'ab\'4b\'b1\'b6\'a6\'61\'bf\'e9\'a4\'4a\'a5\'fe\'ab\'ac\'bc\'d0\'c2\'49\'b2\'c5\'b8\'b9\'a1\'41\'c1\'60\'ac\'4f\'a6\'b3\'a4\'a3\'a6\'50\'aa\'ba\'a7\'40\'aa\'6b\'a1\'46\'a7\'f3\'a6\'b3\'ac\'c6\'aa\'cc\'a1\'41\'a6\'50\'a4\'40\'ba\'d8\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'a4\'5d\'b7\'7c\'a6\'b3\'a6\'6e\'b4\'58\'ba\'d8\'a4\'a3\'a6\'50\'aa\'ba\'b2\'df\'ba\'44\'a1\'43\'a6\'b3\'a4\'48\'a7\'c6\'b1\'e6\'ab\'f6\'a4\'55\'ad\'5e\'a4\'e5\'aa\'ba\'bc\'d0\'c2\'49\'b2\'c5\'b8\'b9\'a4\'a7\'ab\'e1\'b4\'4e\'a6\'db\'b0\'ca\'c2\'e0\'a6\'a8\'a4\'a4\'a4\'e5\'a5\'fe\'ab\'ac\'bc\'d0\'c2\'49\'a1\'41\'a6\'b3\'a4\'48\'b3\'df\'c5\'77\'ab\'f6 
+\f5 shift+
+\f4 \'ad\'5e\'a4\'e5\'bc\'d0\'c2\'49\'a6\'41\'c5\'dc\'a6\'a8\'a5\'fe\'ab\'ac\'bc\'d0\'c2\'49\'a1\'41\'a6\'b3\'a4\'48\'b0\'be\'a6\'6e\'a8\'cf\'a5\'ce\'a1\'75
+\f5 `
+\f4 \'a1\'76\'a4\'a7\'c3\'fe\'aa\'ba\'ab\'65\'be\'c9\'a6\'72\'a4\'b8\'a1\'41\'a6\'b3\'a4\'48\'b2\'df\'ba\'44\'ab\'f6\'b2\'d5\'a6\'58\'c1\'e4\'b5\'a5\'b5\'a5\'a1\'43\
+\'a5\'d1\'a9\'f3\'a8\'43\'ba\'d8\'bf\'e9\'a4\'4a\'aa\'6b\'ae\'b3\'a8\'d3\'b2\'d5\'a6\'72\'aa\'ba\'a6\'72\'ae\'da\'b9\'ef\'c0\'b3\'a8\'ec\'ad\'5e\'a4\'e5\'c1\'e4\'bd\'4c\'aa\'ba\'a6\'ec\'b8\'6d\'bd\'64\'b3\'f2\'a4\'a3\'ba\'c9\'ac\'db\'a6\'50\'a1\'41\'bc\'d0\'c2\'49\'b2\'c5\'b8\'b9\'aa\'ba\'b3\'42\'b2\'7a\'b4\'4e\'c0\'b3\'b8\'d3\'a6\'db\'a6\'e6\'a9\'77\'b8\'71\'a1\'41\'b3\'cc\'a6\'6e\'af\'e0\'b4\'a3\'a8\'d1\'a8\'cf\'a5\'ce\'aa\'cc\'bf\'ef\'be\'dc\'aa\'ba\'a6\'db\'a5\'d1\'a1\'43\'b0\'f2\'a9\'f3\'b3\'6f\'bc\'cb\'aa\'ba\'ad\'ec\'ab\'68\'a1\'41
+\f5 OV 
+\f4 \'aa\'ba 
+\f5 Xcin 
+\f4 \'bc\'d2\'b2\'d5\'a5\'75\'af\'e0\'a6\'62\'af\'e0\'a4\'4f\'a9\'d2\'a4\'ce\'aa\'ba\'b1\'a1\'aa\'70\'a4\'55\'a1\'41\'b3\'7a\'b9\'4c 
+\f5 cin 
+\f4 \'c0\'c9\'aa\'ba\'b3\'57\'ab\'68\'a8\'d3\'a7\'b9\'a6\'a8\'b3\'6f\'ad\'d3\'a5\'f4\'b0\'c8\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 %endkey 
+\f4 \'b3\'6f\'ad\'d3\'c4\'e6\'a6\'ec\'aa\'ba\'a5\'ce\'b3\'7e\'ac\'4f\'a6\'43\'c1\'7c\'bf\'e9\'a4\'4a\'aa\'6b\'a6\'72\'ae\'da\'a4\'a4\'b7\'7c\'c4\'b2\'b5\'6f\'b2\'d5\'a6\'72\'a8\'c6\'a5\'f3\'aa\'ba\'a6\'72\'a4\'b8\'a1\'43\'c1\'7c\'a8\'d2\'a8\'d3\'bb\'a1\'a1\'41\'aa\'60\'ad\'b5\'aa\'ba\'c1\'6e\'bd\'d5\'b2\'c5\'b8\'b9\'b3\'71\'b1\'60\'b8\'d3\'a5\'58\'b2\'7b\'a6\'62\'a8\'43\'ad\'d3\'aa\'60\'ad\'b5\'a7\'c7\'a6\'43\'aa\'ba\'b3\'cc\'ab\'e1\'a1\'41\'aa\'ed\'a5\'dc\'b3\'6f\'a6\'ea\'aa\'60\'ad\'b5\'a4\'77\'b8\'67\'a5\'b4\'a7\'b9\'a1\'41\'ad\'6e\'ad\'ab\'b2\'d5\'ac\'b0\'a4\'40\'ad\'d3\'a4\'a4\'a4\'e5\'a6\'72\'a1\'43\'a6\'5d\'a6\'b9\'a1\'41\'a6\'62\'a8\'cf\'a5\'ce\'bc\'d0\'b7\'c7\'c1\'e4\'bd\'4c\'b9\'ef\'c0\'b3\'aa\'ba\'b1\'a1\'aa\'70\'a4\'55\'a1\'41\'aa\'60\'ad\'b5\'aa\'ba
+\f5  cin 
+\f4 \'c0\'c9\'b8\'cc\'c0\'b3\'b8\'d3\'a6\'b3\'b3\'6f\'bb\'f2\'a4\'40\'a6\'e6\'a1\'47\
+
+\f5 %endkey 3467\
+3467 
+\f4 \'a4\'c0\'a7\'4f\'ac\'4f\'aa\'60\'ad\'b5\'bc\'d0\'b7\'c7\'c1\'e4\'bd\'4c\'b9\'ef\'c0\'b3\'b8\'cc\'aa\'ba\'a4\'54\'c1\'6e\'a1\'42\'a5\'7c\'c1\'6e\'a1\'42\'a4\'47\'c1\'6e\'bb\'50\'bb\'b4\'c1\'6e\'a1\'43\'b3\'6f\'ad\'d3\'c4\'e6\'a6\'ec\'a5\'69\'a5\'48\'a6\'b3\'ae\'c4\'c0\'b0\'a7\'55\'a7\'da\'ad\'cc\'a6\'db\'ad\'71\'bc\'d0\'c2\'49\'b2\'c5\'b8\'b9\'aa\'ba\'bf\'e9\'a4\'4a\'a4\'e8\'a6\'a1\'a1\'43\'a5\'48\'a8\'cf\'a5\'ce\'ad\'dc\'be\'65\'bf\'e9\'a4\'4a\'aa\'6b\'ac\'b0\'a8\'d2\'a1\'41\'ad\'ba\'a5\'fd\'a1\'41\'a6\'70\'aa\'47\'b3\'df\'c5\'77\'a5\'ce\'a1\'75
+\f5 shift+
+\f4 \'ad\'5e\'a4\'e5\'bc\'d0\'c2\'49\'a1\'76\'b3\'6f\'ba\'d8\'a4\'e8\'a6\'a1\'a8\'d3\'bf\'e9\'a4\'4a\'a5\'fe\'ab\'ac\'bc\'d0\'c2\'49\'a1\'41\'b4\'4e\'c0\'b3\'b8\'d3\'a7\'e2\'b3\'6f\'a8\'c7\'a1\'75
+\f5 shift+
+\f4 \'ad\'5e\'a4\'e5\'bc\'d0\'c2\'49\'a1\'76\'a5\'5b\'b6\'69 
+\f5 cin 
+\f4 \'c0\'c9\'aa\'ba 
+\f5 %keyname 
+\f4 \'a4\'ce 
+\f5 %chardef
+\f4 \'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+
+\f13 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+
+\f5 \cf0  %keyname begin\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+
+\f13 \cf0  < 
+\f4 \'a1\'41\
+
+\f13  > 
+\f4 \'a1\'43\
+
+\f13  ? 
+\f4 \'a1\'48\
+
+\f13  : 
+\f4 \'a1\'47\
+
+\f13  " 
+\f4 \'a1\'42\
+
+\f13  \{ 
+\f4 \'a1\'75\
+
+\f13  \} 
+\f4 \'a1\'76\
+
+\f13  | 
+\f4 \'a1\'55\
+
+\f13  ~ 
+\f14 \'81\'60\
+
+\f13  ! 
+\f14 \'81\'49\
+
+\f13  @ 
+\f14 \'81\'97\
+
+\f13  # 
+\f14 \'81\'94\
+
+\f13  $ 
+\f14 \'81\'90\
+
+\f13  % 
+\f14 \'81\'93\
+
+\f13  ^ 
+\f14 \'eb\'71\
+
+\f13  & 
+\f14 \'81\'95\
+
+\f13  * 
+\f14 \'81\'96\
+
+\f13  ( 
+\f14 \'81\'69\
+
+\f13  ) 
+\f14 \'81\'6a\
+
+\f13  _ \uc0\u8208 \
+ + 
+\f14 \'81\'7b\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+
+\f5 \cf0  ...(
+\f4 \'a5\'48\'a4\'55\'ac\'4f\'ad\'dc\'be\'65\'a5\'bb\'a8\'d3\'aa\'ba\'a6\'72\'ae\'da\'a1\'41\'a7\'4f\'a7\'e2\'b3\'6f\'a6\'e6\'a4\'5d\'a7\'db\'b6\'69\'a5\'68\'b0\'da\'a1\'49
+\f5 )\
+ %keyname end\
+ %chardef begin\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+
+\f13 \cf0  < 
+\f4 \'a1\'41\
+
+\f13  > 
+\f4 \'a1\'43\
+
+\f13  ? 
+\f4 \'a1\'48\
+
+\f13  : 
+\f4 \'a1\'47\
+
+\f13  : 
+\f4 \'a1\'46\
+
+\f13  " 
+\f4 \'a1\'42\
+
+\f13  " \'d3\
+ " \'d5\
+ " \'d4\
+ \{ 
+\f4 \'a1\'75\
+
+\f13  \{ 
+\f4 \'a1\'79\
+
+\f13  \{ 
+\f4 \'a1\'6d\
+
+\f13  \{ 
+\f4 \'a1\'71\
+
+\f13  \{ 
+\f4 \'a1\'65\
+
+\f13  \} 
+\f4 \'a1\'76\
+
+\f13  \} 
+\f4 \'a1\'7a\
+
+\f13  \} 
+\f4 \'a1\'6e\
+
+\f13  \} 
+\f4 \'a1\'72\
+
+\f13  \} 
+\f4 \'a1\'66\
+
+\f13  \} 
+\f4 \'a1\'62\
+
+\f13  | 
+\f4 \'a1\'55\
+
+\f13  | 
+\f4 \'a2\'42\
+
+\f13  ~ 
+\f14 \'81\'60\
+
+\f13  ! 
+\f14 \'81\'49\
+
+\f13  @ 
+\f14 \'81\'97\
+
+\f13  # 
+\f14 \'81\'94\
+
+\f13  $ 
+\f14 \'81\'90\
+
+\f13  % 
+\f14 \'81\'93\
+
+\f13  ^ 
+\f14 \'eb\'71\
+
+\f13  & 
+\f14 \'81\'95\
+
+\f13  * 
+\f14 \'81\'96\
+
+\f13  ( 
+\f14 \'81\'69\
+
+\f13  ) 
+\f14 \'81\'6a\
+
+\f13  _ \uc0\u8208 \
+ _ 
+\f14 \'81\'51\
+
+\f13  _ 
+\f14 \'84\'9f\
+
+\f13  _ \'d0\
+ _ \'d1\
+ + 
+\f14 \'81\'7b\
+
+\f13  + 
+\f14 \'81\'81\
+
+\f13  ...(
+\f14 \'93\'af\'9e\'e9\'81\'43\'88\'c8\'89\'ba\'90\'a5\'91\'71\'e8\'f4\'96\'7b\'98\'d2\'93\'49\'8e\'9a\'8d\'aa\'9b\'94\'9c\'e4
+\f13 )\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+
+\f5 \cf0  %chardef end\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\fs26 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4\fs24 \cf0 \'a4\'57\'ad\'b1\'aa\'ba\'a8\'d2\'a4\'6c\'a1\'41\'a6\'62 
+\f5 %keyname 
+\f4 \'b8\'cc\'a5\'5b\'a4\'4a\'a4\'46\'b7\'7c\'a5\'ce\'a8\'d3\'bf\'e9\'a4\'4a\'bc\'d0\'c2\'49\'b2\'c5\'b8\'b9\'aa\'ba\'ad\'5e\'a4\'e5\'c1\'e4\'a6\'ec\'a1\'41\'a8\'c3\'a6\'62 
+\f5 %chardef 
+\f4 \'b8\'cc\'a5\'5b\'a4\'4a\'a4\'46\'a5\'69\'af\'e0\'b7\'7c\'a5\'ce\'a8\'ec\'aa\'ba\'a5\'fe\'ab\'ac\'bc\'d0\'c2\'49\'b2\'c5\'b8\'b9\'bb\'50\'a6\'72\'ae\'da\'b9\'ef\'c0\'b3\'aa\'ba\'aa\'ac\'aa\'70\'a1\'43\'b9\'b3\'ac\'4f\'a1\'75
+\f5 <
+\f4 \'a1\'76
+\f5 (
+\f4 \'ac\'db\'b7\'ed\'a9\'f3
+\f5 shift+,)
+\f4 \'a5\'75\'b7\'7c\'b9\'ef\'c0\'b3\'a8\'ec\'a1\'75\'a1\'41\'a1\'76\'a1\'41\'a6\'fd\'a1\'75
+\f5 :
+\f4 \'a1\'76
+\f5 (
+\f4 \'ac\'db\'b7\'ed\'a9\'f3 
+\f5 shift+;)
+\f4 \'b4\'4e\'b7\'7c\'b9\'ef\'c0\'b3\'a8\'ec\'a1\'75\'a1\'47\'a1\'76\'a9\'ce\'a1\'75\'a1\'46\'a1\'76\'a1\'43\'b7\'ed 
+\f5 cj.cin 
+\f4 \'a5\'5b\'a4\'4a\'a4\'46\'b3\'6f\'a8\'c7\'b8\'ea\'b0\'54\'a4\'a7\'ab\'e1\'a1\'41\'a1\'75
+\f5 shift+
+\f4 \'ad\'5e\'a4\'e5\'bc\'d0\'c2\'49\'a1\'76\'b4\'4e\'a5\'69\'a5\'48\'a5\'ce\'a8\'d3\'bf\'e9\'a4\'4a\'a5\'fe\'ab\'ac\'bc\'d0\'c2\'49\'a4\'46\'a1\'43\
+\'b0\'b5\'a4\'46\'a5\'48\'a4\'57\'ad\'d7\'a7\'ef\'ab\'e1\'a1\'41\'a5\'d1\'a9\'f3\'ad\'dc\'be\'65\'aa\'ba\'b2\'d5\'a6\'72\'a8\'c6\'a5\'f3\'b3\'71\'b1\'60\'a5\'d1\'aa\'c5\'a5\'d5\'c1\'e4\'a8\'d3\'c4\'b2\'b5\'6f\'a1\'41\'a8\'43\'a6\'b8\'a5\'b4\'bc\'d0\'c2\'49\'b2\'c5\'b8\'b9\'ae\'c9\'a1\'41\'a4\'5d\'b1\'6f\'a6\'68\'ab\'f6\'a4\'40\'ad\'d3\'aa\'c5\'a5\'d5\'c1\'e4\'a4\'7e\'af\'e0\'c5\'fd\'ad\'dc\'be\'65\'bf\'e9\'a4\'4a\'a5\'fe\'a7\'ce\'b2\'c5\'b8\'b9\'a1\'43\'b3\'6f\'ae\'c9\'ad\'d4
+\f5  %endkey 
+\f4 \'b4\'4e\'ac\'a3\'a4\'57\'a5\'ce\'b3\'f5\'a4\'46\'a1\'41\'a6\'5d\'ac\'b0 
+\f5 %endkey 
+\f4 \'aa\'ba\'a5\'ce\'b3\'7e\'ac\'4f\'a1\'75\'a6\'43\'c1\'7c\'bf\'e9\'a4\'4a\'aa\'6b\'a6\'72\'ae\'da\'a4\'a4\'b7\'7c\'c4\'b2\'b5\'6f\'b2\'d5\'a6\'72\'a8\'c6\'a5\'f3\'aa\'ba\'a6\'72\'a4\'b8\'a1\'76\'a1\'41\'a6\'d3\'bf\'e9\'a4\'4a\'a5\'fe\'a7\'ce\'b2\'c5\'b8\'b9\'aa\'ba\'aa\'ac\'aa\'70\'b4\'4e\'ac\'4f\'a1\'41\'a6\'70\'aa\'47\'a6\'b3\'a4\'40\'ba\'d8\'a6\'72\'aa\'ba\'a6\'72\'ae\'da\'a5\'75\'a6\'b3\'a4\'40\'ad\'d3\'a1\'41\'a5\'b4\'a4\'46\'a4\'a7\'ab\'e1\'b4\'4e\'a5\'4e\'aa\'ed\'ad\'6e\'b2\'d5\'a6\'72\'a1\'43\'a6\'5d\'a6\'b9\'a1\'41\'a6\'62
+\f5  cj.cin  
+\f4 \'b8\'cc\'a6\'41\'a5\'5b\'a4\'57\'b3\'6f\'a4\'40\'a6\'e6\'a1\'47\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs26 \cf0 %endkey <>?:"\{\}|~!@#$%^&*()_+\
+ \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f1\fs36 \cf0 9. License\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs24 \cf0 OpenVanilla is a open source software, released with Artistic License.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f1\fs36 \cf0 10. Source Coed\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs24 \cf0 You can use svn or svk to obtain the newest source code of OV from:
+\f4\fs36 \
+
+\f5\fs24 http://svn.openfoundry.org/openvanilla\
+The source code of Chewing module could be obtained from:\
+* libchewing
+\f4 \'a1\'47
+\f5  https://svn.csie.net/chewing/libchewing\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+\cf0 * libchewingpp
+\f4 \'a1\'47
+\f5  https://svn.csie.net/chewing/libchewingpp\
+* charchew
+\f4 \'a1\'47
+\f5  https://opensvn.csie.org/SpaceChewingOSX/branches/carchew\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+
+\f9\fs26 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f1\fs36 \cf0 11. Contact\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f4 \cf0 \
+You can retrieve \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\fs24 \cf0 \'a5\'d8\'ab\'65 
+\f5 OV 
+\f4 \'aa\'ba\'a6\'55\'ba\'d8\'bb\'a1\'a9\'fa\'a4\'e5\'a5\'f3\'a5\'48\'a4\'ce\'ac\'db\'c3\'f6\'b6\'69\'ab\'d7\'a1\'41\'b3\'a3\'ac\'4f\'a6\'62 
+\f5 Wiki 
+\f4 \'a4\'57\'b6\'69\'a6\'e6\'a1\'42\'b5\'6f\'a7\'47\'a1\'41\'b1\'7a\'a5\'69\'a5\'48\'a6\'62\'a5\'48\'a4\'55\'ba\'f4\'a7\'7d\'a1\'41\'a8\'fa\'b1\'6f\'a6\'55\'b6\'b5\'bb\'a1\'a9\'fa\'a4\'e5\'a5\'f3\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 http://openvanilla.org/\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a6\'d3\'a6\'70\'aa\'47\'b1\'7a\'b5\'6f\'b2\'7b 
+\f5 OV 
+\f4 \'a6\'b3\'a5\'f4\'a6\'f3\'b0\'dd\'c3\'44\'a1\'41\'a9\'ce\'a5\'f4\'a6\'f3\'ab\'d8\'c4\'b3\'a1\'41\'a7\'c6\'b1\'e6\'af\'e0\'b0\'f7\'a6\'b3\'ab\'e7\'bc\'cb\'aa\'ba\'a7\'ef\'b6\'69\'a1\'41\'b1\'7a\'a4\'5d\'a5\'69\'a5\'48\'a8\'cf\'a5\'ce\'ab\'65\'ad\'7a\'a1\'75\'a6\'db\'a5\'d1\'b3\'6e\'c5\'e9\'c5\'b1\'b3\'79\'b3\'f5\'a1\'76\'aa\'ba 
+\f5 RT
+\f4 \'a1\'5d
+\f5 RequestTracker
+\f4 \'a1\'5e\'a6\'5e\'b3\'f8\'a8\'74\'b2\'ce\'a4\'cf\'c0\'b3\'a1\'43\
+\'a6\'d3\'a6\'62\'b1\'7a\'a6\'5e\'b3\'f8\'bf\'f9\'bb\'7e\'ae\'c9\'a1\'41\'a7\'c6\'b1\'e6\'b1\'7a\'a5\'69\'a5\'48\'ba\'c9\'a5\'69\'af\'e0\'b4\'79\'ad\'7a\'b1\'7a\'a9\'d2\'b9\'4a\'a8\'ec\'aa\'ba\'aa\'ac\'aa\'70\'a1\'41\'a8\'d2\'a6\'70\'b1\'7a\'a6\'62\'a8\'ba\'ad\'d3\'c0\'b3\'a5\'ce\'b5\'7b\'a6\'a1\'a4\'a4\'a1\'42\'a8\'cf\'a5\'ce\'a8\'ba\'a4\'40\'ae\'4d\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'42\'bf\'e9\'a4\'4a\'a4\'46\'ab\'e7\'bc\'cb\'aa\'ba\'a4\'ba\'ae\'65\'a6\'d3\'b3\'79\'a6\'a8\'b0\'dd\'c3\'44\'a1\'43\'a6\'d3\'a6\'70\'aa\'47
+\f5  OV 
+\f4 \'b3\'79\'a6\'a8\'c0\'b3\'a5\'ce\'b3\'6e\'c5\'e9\'b7\'ed\'be\'f7\'a1\'41
+\f5 Mac OS X 
+\f4 \'b7\'7c\'b4\'a3\'a8\'d1\'c0\'b3\'a5\'ce\'b5\'7b\'a6\'a1\'b7\'ed\'b1\'bc\'ae\'c9\'aa\'ba\'bf\'f9\'bb\'7e\'b0\'54\'ae\'a7\'a1\'41\'b8\'df\'b0\'dd\'b1\'7a\'ac\'4f\'a7\'5f\'ad\'6e\'b7\'ed\'be\'f7\'ac\'f6\'bf\'fd\'a6\'5e\'b3\'f8\'b5\'b9\'c4\'ab\'aa\'47\'a1\'41\'a7\'da\'ad\'cc\'a4\'5d\'a7\'c6\'b1\'e6\'b1\'7a\'af\'e0\'b0\'f7\'ab\'4f\'af\'64\'b3\'6f\'a5\'f7\'ac\'f6\'bf\'fd\'a1\'41\'b4\'a3\'a8\'d1\'b5\'b9\'a7\'da\'ad\'cc\'b0\'d1\'a6\'d2\'a1\'43\
+\'a6\'70\'aa\'47\'b1\'7a\'bc\'f4\'b1\'78\'a8\'cf\'a5\'ce
+\f5 IRC
+\f4 \'ba\'f4\'b8\'f4\'b2\'e1\'a4\'d1\'ab\'c7\'aa\'ba\'b8\'dc\'a1\'41\'b1\'7a\'a4\'5d\'a5\'69\'a5\'48\'a6\'62 
+\f5 IRC 
+\f4 \'a4\'57\'a7\'e4\'a8\'ec 
+\f5 OV 
+\f4 \'aa\'ba\'b5\'6f\'ae\'69\'aa\'cc\'a1\'41\'a7\'da\'ad\'cc\'b8\'67\'b1\'60\'b7\'7c\'a5\'58\'a8\'53\'a6\'62 
+\f5 irc.seed.net.tw (
+\f4 \'a5\'78\'c6\'57\'a5\'48\'a5\'7e\'b3\'73\'bd\'75\'bd\'d0\'b0\'d1\'a6\'d2 
+\f5 http://www.itcnet.com/
+\f4  \'b8\'cc\'a9\'d2\'a6\'43\'a5\'58\'aa\'ba\'a6\'55\'a6\'61\'b0\'cf\'b0\'ec\'aa\'ba 
+\f5 ircnet
+\f4  \'a6\'f8\'aa\'41\'be\'b9\'a8\'d3\'b3\'73\'bd\'75 
+\f5 ) 
+\f4 \'aa\'ba\'a1\'75
+\f5 #osxchat
+\f4 \'a1\'76\'c0\'57\'b9\'44\'b8\'cc\'a1\'43\'a6\'d3\'a6\'55\'b6\'b5\'b3\'cc\'b7\'73\'aa\'ba\'ae\'f8\'ae\'a7\'a1\'41\'a4\'5d\'b7\'7c\'b5\'6f\'aa\'ed\'a6\'62\'a1\'75
+\f5 #osxchat
+\f4 \'a1\'76\'c0\'57\'b9\'44\'aa\'ba\'b1\'4d\'c4\'dd\'ba\'f4\'bb\'78\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 http://osxchat.blogspot.com/
+\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qj
+
+\f1\fs36 \cf0 Appendix
+\f5\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\fs32 \cf0 i. Background of OpenVanilla
+\fs26 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 We blogged something about the background of OpenVanilla in #osxchat blog:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f2\i\fs28 \cf0 OpenVanilla: A New Input Method Framwork\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\i0\fs24 \cf0 * http://osxchat.blogspot.com/2004/10/openvanilla.html\
+* 10/24/2004\
+* zonble\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+\cf0 After lukhnos finished the Vanilla Input Method 0.064, he began to work on  carbonInputMethod project, and it's the first prototype of OpenVanilla.\
+The goal of CarbonInputMethod project is to simplify BasicInputMethod, the sample code of input method offered by Apple Developer Connaction. Most of input methods for Mac OS X such as Vanilla Input Method, SpaceChewingOSX and MacUIM is based on BIM. However, the codes of BIM are fuzzy and hard to be understood, and BIM was written with using old APIs. Lukhnos wanted to simplify BIM and use the new APIs in order to write a clean and better sample code.\
+OpenVanilla project is based on CarbonInputMethod project. The goal of OpenVanilla project is to create a loader to load each input method as dynamic library (.dylib files) and become the bridge between input method modules and the operating system. It can let each input method module share the same interface such the candidate window ,key processing and so on.\
+After OpenVanilla is finished, \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \
+\'a4\'a7\'ab\'e1\'a1\'41\'b5\'7b\'a6\'a1\'b3\'5d\'ad\'70\'aa\'cc\'a6\'70\'aa\'47\'b7\'51\'ad\'6e\'a6\'62 
+\f5 OS X 
+\f4 \'a4\'57\'b6\'7d\'b5\'6f\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'a6\'70\'aa\'47\'ac\'4f\'b3\'7a\'b9\'4c
+\f5  OpenVanilla 
+\f4 \'ae\'d8\'ac\'5b\'a1\'41\'b4\'4e\'a5\'75\'ad\'6e\'b1\'4e\'bf\'e9\'a4\'4a\'aa\'6b\'ae\'d6\'a4\'df\'bc\'67\'a6\'a8\'b2\'c5\'a6\'58\'a4\'40\'a9\'77\'b3\'57\'bd\'64\'aa\'ba 
+\f5 dylib 
+\f4 \'c0\'c9\'ae\'d7\'a7\'59\'a5\'69\'a1\'43\'b3\'5d\'ad\'70\'aa\'cc\'a4\'a3\'a5\'ce\'b1\'4e\'a4\'df\'a4\'4f\'a9\'f1\'a6\'62\'b3\'42\'b2\'7a 
+\f5 OS X 
+\f4 \'aa\'ba\'a4\'b6\'ad\'b1\'b0\'dd\'c3\'44\'a4\'57\'a1\'41\'a5\'75\'bb\'dd\'ad\'6e\'b1\'4d\'a4\'df\'a6\'62\'bf\'e9\'a4\'4a\'aa\'6b\'a5\'bb\'a8\'ad\'a1\'41\'a4\'5d\'b4\'4e\'ac\'4f\'a1\'41\'a6\'62\'a4\'a7\'ab\'65\'a6\'b3\'b3\'5c\'a6\'68\'ad\'d3\'a7\'4f\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'ad\'70\'b5\'65\'a1\'41\'b3\'a3\'a5\'b2\'b6\'b7\'a6\'db\'a4\'76\'b3\'42\'b2\'7a\'b3\'5c\'a6\'68
+\f5  Carbon API 
+\f4 \'a4\'e8\'ad\'b1\'aa\'ba\'b0\'dd\'c3\'44\'a1\'41\'a6\'d3
+\f5  OpenVanilla 
+\f4 \'b4\'4e\'ac\'4f\'ad\'74\'b3\'64\'b1\'4e
+\f5  Carbon API 
+\f4 \'aa\'ba\'b0\'dd\'c3\'44\'b3\'42\'b2\'7a\'a7\'b9\'a6\'a8\'a1\'41\'a8\'c3\'a5\'42\'b1\'4e\'b3\'6f\'a8\'c7\'a4\'a7\'ab\'65\'aa\'ba\'ad\'70\'b5\'65\'a1\'41\'af\'c7\'a4\'4a\'a6\'62\'a4\'40\'ad\'d3\'c2\'b2\'b3\'e6\'aa\'ba\'ae\'d8\'ac\'5b\'a4\'a7\'a4\'55\'a1\'43\
+\'a4\'f1\'a4\'e8\'bb\'a1\'a1\'41\'a5\'bc\'a8\'d3\'a6\'62
+\f5  OS X 
+\f4 \'a4\'57\'aa\'ba\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'a4\'5d\'a4\'a3\'a5\'ce\'a6\'a8\'ac\'b0\'bf\'57\'a5\'df\'aa\'ba\'a4\'c0\'a4\'e4\'a1\'41\'a6\'d3\'a5\'69\'a5\'48\'b1\'4e\'a1\'75\'b7\'73\'bb\'c5\'ad\'b5\'a1\'76\'a1\'5d
+\f5 Qooing
+\f4 \'a1\'5e\'ad\'70\'b5\'65\'a4\'a4\'a1\'41\'a9\'e2\'c2\'f7\'ad\'ec\'a5\'bb\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'a6\'d3\'bf\'57\'a5\'df\'aa\'ba
+\f5  libchewing
+\f4 \'a1\'41\'aa\'bd\'b1\'b5\'c0\'b3\'a5\'ce\'a6\'62
+\f5  OS X 
+\f4 \'a5\'ad\'a5\'78\'a4\'57\'a1\'41\'a6\'d3\'a4\'a3\'a5\'ce\'b9\'b3\'a4\'a7\'ab\'65
+\f5  SpaceChewing 
+\f4 \'ad\'70\'b5\'65\'a8\'ba\'bc\'cb\'a1\'41\'a6\'62 
+\f5 0.6 
+\f4 \'a8\'ec 
+\f5 0.7 
+\f4 \'aa\'a9\'a4\'a7\'b6\'a1\'a1\'41\'b3\'42\'b2\'7a\'a8\'ba\'bb\'f2\'a6\'68
+\f5  Carbon API 
+\f4 \'a4\'e8\'ad\'b1\'aa\'ba\'b0\'dd\'c3\'44\'a1\'5d\'b7\'ed\'b5\'4d\'a1\'41\'a8\'ba\'ae\'c9\'ad\'d4\'aa\'ba\'b1\'60\'c3\'d1\'a1\'41\'a4\'5d\'b2\'d6\'bf\'6e\'a4\'46\'b2\'7b\'a6\'62\'aa\'ba\'b3\'5c\'a6\'68\'b8\'67\'c5\'e7\'a1\'41\'a5\'48\'a4\'ce\'b9\'ef\'a9\'f3
+\f5 OS X 
+\f4 \'b5\'7b\'a6\'a1\'b3\'5d\'ad\'70\'c0\'f4\'b9\'d2\'aa\'ba\'bc\'f4\'b1\'78\'a1\'5e\'a1\'43\'a5\'69\'a5\'48\'c5\'fd
+\f5  SpaceChewing 
+\f4 \'bb\'50\'b7\'73\'bb\'c5\'ad\'b5\'a6\'40\'a6\'50\'ba\'fb\'c5\'40\'a4\'40\'ad\'d3\'bf\'e9\'a4\'4a\'aa\'6b\'ae\'d6\'a4\'df\'a7\'59\'a5\'69\'a1\'41\'c1\'d7\'a7\'4b\'b9\'4c\'a5\'68\'b6\'7d\'b5\'6f\'a4\'48\'a4\'4f\'a4\'c0\'b4\'b2\'aa\'ba\'aa\'ac\'aa\'70\'a1\'41\'a4\'40\'ad\'d3\'a4\'55\'a4\'c8\'aa\'ba\'ae\'c9\'a5\'fa\'a4\'ba\'a1\'41
+\f5 gugod 
+\f4 \'b4\'4e\'a4\'77\'b8\'67\'b6\'b6\'a7\'51\'aa\'ba\'b1\'4e
+\f5  OpenVanilla 
+\f4 \'bb\'50
+\f5  libchewing 
+\f4 \'b3\'73\'b1\'b5\'a6\'a8\'a5\'5c\'a4\'46\'a1\'43\
+\'a6\'62\'a8\'cf\'a5\'ce\'aa\'cc\'a4\'b6\'ad\'b1\'a4\'e8\'ad\'b1\'a1\'41
+\f5 OpenVanilla 
+\f4 \'b7\'7c\'ac\'4f\'a6\'62 
+\f5 OS X 
+\f4 \'a8\'74\'b2\'ce\'b0\'be\'a6\'6e\'b3\'5d\'a9\'77\'b7\'ed\'a4\'a4\'aa\'ba\'a4\'40\'ba\'d8\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'43\'a6\'70\'aa\'47\'b1\'7a\'b7\'51\'ad\'6e\'b1\'71  
+\f5 OS X 
+\f4 \'aa\'ba 
+\f5 component 
+\f4  
+\f5 bundle 
+\f4 \'bc\'68\'a6\'b8\'bc\'b6\'bc\'67\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'aa\'ba\'b8\'dc\'a1\'41\'a8\'ba\'bb\'f2\'a1\'41 
+\f5 CarbonInputMethod 
+\f4 \'a4\'5d\'a5\'69\'a5\'48\'b5\'b9\'b1\'7a\'ac\'db\'b7\'ed\'a4\'6a\'aa\'ba\'c0\'b0\'a7\'55\'a1\'43\
+\'a6\'62\'a6\'b9\'a4\'a7\'ab\'65\'a1\'41
+\f5 #osxchat 
+\f4 \'c0\'57\'b9\'44\'aa\'ba\'aa\'42\'a4\'cd\'b4\'bf\'b8\'67\'b5\'6f\'b0\'5f\'a4\'40\'ad\'d3\'c3\'fe\'a6\'fc\'aa\'ba\'ad\'70\'b5\'65\'a1\'47
+\f5 XCINIX
+\f4 \'a1\'41\'a5\'f8\'b9\'cf\'b1\'4e 
+\f5 xcin 
+\f4 \'a7\'ef\'bc\'67\'a6\'a8 
+\f5 OS X 
+\f4 \'aa\'ba 
+\f5 component
+\f4 \'a1\'41\'b1\'4e 
+\f5 xcin 
+\f4 \'ad\'70\'b9\'ba\'a4\'55\'aa\'ba\'a6\'55\'ba\'d8\'bf\'e9\'a4\'4a\'aa\'6b\'b2\'be\'b4\'d3\'a8\'ec 
+\f5 OS X 
+\f4 \'a5\'ad\'a5\'78\'a4\'57\'a1\'41
+\f5 OpenVanilla 
+\f4 \'a4\'5d\'ac\'4f\'a6\'62\'b0\'b5\'a4\'40\'a5\'f3\'c3\'fe\'a6\'fc\'aa\'ba\'a8\'c6\'b1\'a1\'a1\'41\'a4\'a3\'b9\'4c\'a1\'41\'b1\'c4\'a8\'fa\'aa\'ba\'ac\'4f\'a4\'f1\'b8\'fb\'a4\'a3\'a4\'40\'bc\'cb\'aa\'ba\'a4\'e8\'aa\'6b\'a1\'43\'a6\'d3\'b2\'7b\'a6\'62\'ac\'dd\'b0\'5f\'a8\'d3\'a1\'41
+\f5 OpenVanilla 
+\f4 \'a9\'d2\'b1\'c4\'a5\'ce\'aa\'ba\'a4\'e8\'a6\'a1\'a1\'41\'a6\'fc\'a5\'47\'a7\'f3\'a6\'6e\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs28 \cf0 OpenVanilla 
+\f4 \'b4\'a1\'a6\'b1\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb20\qj
+
+\f5\fs24 \cf0 * http://osxchat.blogspot.com/2004/11/openvanilla.html\
+* 11/15/2004\
+* 
+\f4 \'a7\'40\'aa\'cc\'a1\'47
+\f5 lukhnos\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b6\'e2\'a1\'41\'a8\'e4\'b9\'ea\'b9\'ef\'a7\'da\'a8\'d3\'bb\'a1\'a1\'41\'c4\'7e\'c4\'f2\'b6\'7d\'b5\'6f
+\f5  OpenVanilla 
+\f4 \'a1\'41\'a7\'b9\'a6\'a8\'a4\'6a\'a9\'f6\'bc\'d2\'b2\'d5\'a5\'75\'ac\'4f\'a5\'d8\'aa\'ba\'a4\'a7\'a4\'40\'a1\'43\
+\'b3\'cc\'aa\'ec\'a6\'62\'c4\'c0\'a5\'58\'a1\'75\'ad\'bb\'af\'f3\'aa\'60\'ad\'b5\'a1\'76\'a9\'4d\'a1\'75\'ad\'bb\'af\'f3\'ad\'dc\'be\'65\'a1\'76\'ab\'e1\'a1\'41
+\f5 Autrijus 
+\f4 \'b0\'dd\'a7\'da\'a1\'47\'a8\'ba\'a4\'6a\'a9\'f6\'a6\'b3\'a8\'53\'a6\'b3\'a5\'69\'af\'e0\'b0\'b5\'a1\'48\'a7\'da\'aa\'be\'b9\'44\'a5\'4c\'ac\'4f\'ad\'ab\'ab\'d7\'a4\'6a\'a9\'f6\'a8\'cf\'a5\'ce\'aa\'cc\'a1\'41\'a6\'50\'bc\'cb\'a4\'5d\'a5\'ce\'a4\'54\'c1\'e4\'a1\'41\'a6\'fd\'ac\'4f\'a5\'4c\'b3\'df\'c5\'77\'a5\'ce
+\f5 '[]
+\f4 \'b5\'a5\'bf\'ef\'a6\'72\'c1\'e4\'a1\'41\'a5\'4c\'a6\'db\'a4\'76\'a6\'62
+\f5  FreeBSD 
+\f4 \'a4\'57\'aa\'ba 
+\f5 dayi3.cin 
+\f4 \'a4\'5d\'ac\'4f\'b0\'74\'a6\'58\'a6\'db\'a4\'76\'bb\'dd\'ad\'6e
+\f5  patch 
+\f4 \'b9\'4c\'aa\'ba\'a1\'43\
+\'a6\'70\'aa\'47\'b7\'ed\'ae\'c9\'b7\'d3\'a1\'75\'ad\'bb\'af\'f3\'ad\'dc\'be\'65\'a1\'76\'aa\'ba\'bc\'d2\'a6\'a1\'a1\'41\'a7\'cb\'a4\'40\'ae\'4d\'a4\'6a\'a9\'f6\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'bc\'d2\'b2\'d5\'a1\'41\'b5\'4d\'ab\'e1\'ab\'dc\'a7\'56\'a4\'4f\'a6\'61\'a1\'5d\'b7\'4e\'ab\'e4\'ac\'4f\'a4\'a3\'ba\'de\'b7\'7c\'a7\'e2\'ad\'ec\'a9\'6c\'bd\'58\'b7\'64\'b1\'6f\'a6\'68\'b6\'c3\'a1\'5e\'a6\'41\'a6\'68\'b6\'eb\'a4\'40\'ad\'d3\'bf\'e9\'a4\'4a\'aa\'6b\'a8\'ec\'ad\'bb\'af\'f3\'b8\'cc\'a1\'41\'a7\'de\'b3\'4e\'a4\'57\'b5\'b4\'b9\'ef\'ac\'4f\'b0\'b5\'b1\'6f\'a8\'ec\'aa\'ba\'a1\'43\
+\'a6\'fd\'ac\'4f\'b3\'6f\'bc\'cb\'b0\'b5\'b4\'4e\'a4\'d3\'a4\'a3\'ba\'7d\'ab\'47\'a4\'46\'a1\'43\
+\'a5\'bb\'a8\'d3\'a1\'41\'a7\'da\'b4\'4e\'a4\'40\'aa\'bd\'b7\'51\'a7\'e4\'ae\'c9\'b6\'a1\'a1\'41\'a7\'e2
+\f5  Apple 
+\f4 \'aa\'ba
+\f5  BasicInputMethod/Textservice 
+\f4 \'a7\'cb\'bc\'f4\'a4\'40\'c2\'49\'a1\'41\'b5\'4d\'ab\'e1\'a1\'75\'ad\'bb\'af\'f3\'a1\'76\'a8\'ec\'a4\'46 
+\f5 0.06 
+\f4 \'aa\'a9\'ae\'c9\'a1\'41\'a4\'77\'b8\'67\'a6\'b3\'ac\'59\'a4\'40\'ad\'d3\'b3\'e6\'a4\'40\'bc\'d2\'b2\'d5\'a1\'41\'aa\'f8\'a6\'a8\'a4\'46 
+\f5 1311 
+\f4 \'a6\'e6\'aa\'ba\'a4\'6a\'a9\'c7\'aa\'ab\'a1\'5d
+\f5  vanillaeventhandler.cpp 
+\f4 \'a1\'5e\'a1\'43\'b3\'6f\'bc\'cb\'aa\'ba 
+\f5 code 
+\f4 \'ad\'6e\'a4\'48\'be\'5c\'c5\'aa\'a1\'41\'c2\'b2\'aa\'bd\'ac\'4f\'a4\'a3\'a5\'69\'af\'e0\'aa\'ba\'a1\'43\
+\'a7\'da\'ac\'4f\'b3\'6f\'bc\'cb\'c4\'b1\'b1\'6f\'a1\'41\'a9\'d2\'bf\'d7
+\f5  opensource
+\f4 \'a1\'41\'b4\'4e\'ac\'4f\'b5\'7b\'a6\'a1\'ad\'6e\'a6\'b3\'a6\'db\'a4\'76\'aa\'ba\'a5\'cd\'a9\'52\'a1\'43\'a8\'43\'ad\'d3\'a4\'48\'a5\'69\'a5\'48\'b1\'71\'b5\'7b\'a6\'a1\'bd\'58\'a4\'a4\'a7\'ef\'a5\'58\'a6\'db\'a4\'76\'b7\'51\'ad\'6e\'aa\'ba\'a5\'5c\'af\'e0\'a1\'41\'ac\'c6\'a6\'dc\'a5\'74\'b0\'5f\'c4\'6c\'a8\'5f\'aa\'b1\'a4\'40\'a7\'bd\'b7\'73\'aa\'ba\'a1\'43\'a7\'da\'a6\'db\'a4\'76\'ac\'4f\'b3\'6f\'ad\'d3\'bc\'d2\'a6\'a1\'aa\'ba\'a8\'fc\'af\'71\'aa\'cc\'a1\'41\'a6\'70\'aa\'47\'a8\'53\'a6\'b3\'a1\'75\'bb\'c5\'ad\'b5\'a1\'76\'aa\'ba\'a4\'bd\'b6\'7d\'ad\'ec\'a9\'6c\'bd\'58\'a1\'42
+\f5 xcin 
+\f4 \'aa\'ba\'b6\'7d\'a9\'f1\'b8\'ea\'ae\'c6\'a1\'42
+\f5 Apple 
+\f4 \'aa\'ba\'a4\'a3\'ad\'6e\'bf\'fa\'aa\'ba
+\f5  Xcode 
+\f4 \'b8\'f2
+\f5  BasicInputMethod 
+\f4 \'a1\'41\'a7\'da\'ae\'da\'a5\'bb\'a4\'a3\'a5\'69\'af\'e0\'b8\'d1\'a8\'4d\'a7\'da\'aa\'ba\'a1\'75\'af\'53\'ae\'ed\'a1\'76\'bb\'dd\'ad\'6e\'a1\'5d\'a8\'cf\'a5\'ce\'ad\'ca\'a4\'d1\'b1\'c6\'a6\'43\'aa\'ba\'b6\'c7\'b2\'ce\'aa\'60\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'5e\'a1\'43\'a8\'ba\'bb\'f2\'a1\'41\'a7\'da\'bb\'a1\'a4\'a3\'a9\'77\'a6\'d1\'a6\'ad\'b4\'4e\'a7\'e2\'aa\'e1\'a4\'46\'ab\'dc\'a6\'68\'bf\'fa\'b6\'52\'a8\'d3\'aa\'ba
+\f5  PowerBook 
+\f4 \'bd\'e6\'b1\'bc\'a4\'46\'a1\'43\
+\'ac\'4a\'b5\'4d\'ad\'6e\'b0\'b5\'b7\'73\'aa\'a9\'a1\'41\'b4\'4e\'c0\'b3\'b8\'d3\'b1\'71\'a4\'77\'b8\'67\'be\'c7\'a8\'ec\'aa\'ba\'b8\'67\'c5\'e7\'a5\'58\'b5\'6f\'a1\'41\'ad\'ab\'b7\'73\'b3\'5d\'ad\'70\'a4\'40\'ae\'4d\'b7\'73\'aa\'ba\'ac\'5b\'ba\'63\'a1\'43\'b2\'7a\'b7\'51\'a4\'57\'a1\'41\'ac\'4f\'a7\'c6\'b1\'e6\'af\'e0\'b3\'5d\'ad\'70\'a5\'58\'a4\'40\'ae\'4d\'c2\'b2\'b3\'e6\'a1\'42\'b2\'4d\'b7\'a1\'a1\'41\'a5\'69\'a5\'48\'c5\'fd\'a7\'f3\'a6\'68\'a4\'48\'b0\'d1\'bb\'50\'aa\'ba\'ae\'d8\'ac\'5b\'a1\'43
+\f5 OpenVanilla 
+\f4 \'b4\'4e\'ac\'4f\'b3\'6f\'bc\'cb\'a1\'41\'a9\'4d 
+\f5 b6s
+\f4 \'a1\'42
+\f5 gugod
+\f4 \'a1\'42
+\f5 autrijus 
+\f4 \'b8\'67\'b9\'4c\'b3\'5c\'a6\'68\'b0\'51\'bd\'d7\'a1\'41\'ba\'a5\'ba\'a5\'a7\'ce\'a6\'a8\'aa\'ba\'ac\'5b\'ba\'63\'a1\'43\'b5\'4d\'ab\'e1\'ac\'59\'a4\'40\'a4\'d1\'a1\'41\'a9\'4d
+\f5 gugod
+\f4 \'a1\'42
+\f5 zonble 
+\f4 \'b8\'49\'c0\'59\'a1\'41\'a4\'40\'c3\'e4\'b2\'e1\'a4\'d1\'a4\'40\'c3\'e4\'bc\'67 
+\f5 code
+\f4 \'a1\'41\'ac\'f0\'b5\'4d\'b5\'6f\'b2\'7b
+\f5  OpenVanilla 
+\f4 \'aa\'ba\'b4\'58\'ad\'d3\'ad\'ab\'ad\'6e\'bc\'d2\'b2\'d5\'a1\'41\'ae\'74\'a4\'a3\'a6\'68\'a4\'77\'b8\'67\'a7\'b9\'a6\'a8\'a4\'46\'a1\'43\'a7\'da\'a6\'62\'b7\'51\'a1\'41\'a1\'75\'a6\'6e\'a7\'61\'a1\'41\'a8\'ba\'a8\'d3\'bc\'67\'ad\'d3\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'b4\'fa\'b8\'d5\'a4\'40\'a4\'55\'a1\'41\'ac\'dd\'ac\'dd\'b3\'6f\'ad\'d3\'ac\'5b\'ba\'63\'ac\'4f\'a4\'a3\'ac\'4f\'af\'75\'aa\'ba\'a5\'69\'a6\'e6\'a1\'43\'a1\'76\'bc\'67\'a4\'b0\'bb\'f2\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'a6\'6e\'a9\'4f\'a1\'48\'a7\'da\'b2\'c4\'a4\'40\'ad\'d3\'b7\'51\'a8\'ec\'aa\'ba\'a1\'41\'b7\'ed\'b5\'4d\'c1\'d9\'ac\'4f 
+\f5 Autrijus 
+\f4 \'aa\'ba\'bb\'dd\'ad\'6e\'a1\'43\
+\'a1\'5d\'a5\'74\'a5\'7e\'a4\'40\'a4\'e8\'ad\'b1\'a1\'41
+\f5 gugod 
+\f4 \'a4\'5d\'b0\'ca\'a7\'40\'b6\'57\'a7\'d6\'a1\'41\'a6\'50\'ae\'c9\'b6\'7d\'a9\'6c\'a4\'46\'a1\'75\'bb\'c5\'ad\'b5\'a1\'76\'ae\'d6\'a4\'df\'b5\'7b\'a6\'a1\'ae\'77\'aa\'ba
+\f5  C++ 
+\f4 \'a4\'c6\'a4\'75\'a7\'40\'a1\'41\'a1\'75
+\f5  OV 
+\f4 \'bb\'c5\'ad\'b5\'a1\'76\'b4\'58\'a5\'47\'bb\'50\'a1\'75
+\f5 OV 
+\f4 \'a4\'6a\'a9\'f6\'a1\'76\'a6\'50\'ae\'c9\'b1\'c0\'a5\'58\'b4\'fa\'b8\'d5\'aa\'a9\'a5\'bb\'a1\'41\'b3\'6f\'a4\'5d\'b3\'a3\'b1\'6a\'a4\'c6\'a4\'46\'a7\'da\'ad\'cc\'b9\'ef
+\f5  OV 
+\f4 \'ac\'5b\'ba\'63\'aa\'ba\'ab\'48\'a4\'df\'a1\'43\'a1\'5e\
+\'a6\'fd\'ac\'4f\'b4\'4e\'b9\'b3\'a7\'da\'bb\'a1\'aa\'ba\'a1\'41\'b3\'6f\'ad\'d3\'a6\'5d\'ac\'b0\'b0\'bd\'c3\'69\'a6\'d3\'a5\'ce\'a4\'46
+\f5  Cocoa/Objective-C++
+\f4 \'a1\'42\'a6\'62\'b1\'df\'a4\'57\'a4\'40\'c3\'e4\'b3\'dc\'af\'f9\'a4\'40\'c3\'e4\'bc\'67\'a5\'58\'a8\'d3\'aa\'ba\'a1\'75\'a4\'6a\'a9\'f6\'bc\'d2\'b2\'d5\'a1\'76\'a1\'41\'a8\'e4\'b9\'ea\'ac\'4f\'ad\'d3\'aa\'78\'a5\'ce\'aa\'ba
+\f5  xcin.cin 
+\f4 \'b8\'d1\'c4\'b6\'be\'b9\'a1\'43\'a7\'da\'ad\'cc\'b8\'d5\'b9\'4c\'a4\'46\'ad\'dc\'be\'65\'a1\'42\'a6\'e6\'a6\'43\'a1\'5d\'b7\'ed\'b5\'4d\'c1\'d9\'a6\'b3\'ac\'59\'ad\'d3\'ab\'dc\'ad\'ab\'ad\'6e\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'5e\'a1\'41\'b5\'6f\'b2\'7b\'a5\'5c\'af\'e0\'a4\'57\'a4\'6a\'ad\'50\'bb\'f4\'b3\'c6\'a2\'77\'a2\'77\'b7\'ed\'b5\'4d\'a1\'41\'ae\'4d\'a5\'ce
+\f5  gugod 
+\f4 \'aa\'ba\'bb\'a1\'aa\'6b\'a1\'75
+\f5 90% 
+\f4 \'aa\'ba 
+\f5 code 
+\f4 \'bc\'67\'a7\'b9\'ae\'c9\'a1\'41\'aa\'ed\'a5\'dc\'c1\'d9\'a6\'b3 
+\f5 90% 
+\f4 \'aa\'ba\'a4\'75\'a7\'40\'ab\'dd\'a7\'b9\'a6\'a8\'a1\'76\'a1\'43\'a6\'fd\'b3\'6f\'aa\'ba\'bd\'54\'c3\'d2\'b9\'ea\'a4\'46
+\f5  OpenVanilla 
+\f4 \'aa\'ba\'ac\'5b\'ba\'63\'ac\'4f\'a5\'69\'a6\'e6\'aa\'ba\'a1\'41\'a4\'5d\'b6\'7d\'a9\'6c\'b9\'ea\'b2\'7b\'a4\'46\'b3\'cc\'a6\'ad\'b3\'5d\'ad\'70
+\f5  OV 
+\f4 \'aa\'ba\'aa\'ec\'b0\'4a\'a1\'47\'c5\'fd\'bc\'67\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'a4\'48\'af\'e0\'bb\'b4\'c3\'50\'bc\'b6\'bc\'67\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'a1\'41\'a6\'d3\'a7\'b9\'a5\'fe\'a4\'a3\'a5\'ce\'a6\'62\'a5\'47 
+\f5 OSX
+\f4 \'a1\'5d\'a9\'ce\'a5\'f4\'a6\'f3\'a7\'40\'b7\'7e\'a8\'74\'b2\'ce\'a1\'42
+\f5 UI
+\f4 \'a1\'5e\'ac\'db\'c3\'f6\'aa\'ba\'b2\'d3\'b8\'60\'a1\'43\'c2\'b2\'b3\'e6\'a1\'42\'b2\'4d\'b7\'a1\'a1\'42\'b5\'4c\'a5\'ad\'a5\'78\'ac\'db\'a8\'cc\'a9\'ca\'a1\'42\'a5\'75\'ad\'6e\'a6\'b3\'b0\'f2\'c2\'a6\'aa\'ba
+\f5  C++ 
+\f4 \'af\'e0\'a4\'4f\'b4\'4e\'a5\'69\'a5\'48\'b0\'d1\'bb\'50\'a2\'77\'a2\'77\'b3\'6f\'a4\'40\'aa\'bd\'ac\'4f\'a7\'da\'a7\'c6\'b1\'e6\'b0\'b5\'a8\'ec\'aa\'ba\'a1\'43\'c1\'f6\'b5\'4d\'a6\'62\'b9\'ea\'a7\'40\'a4\'57\'a4\'40\'a9\'77\'b7\'7c\'a6\'b3\'ad\'6e\'a7\'4a\'aa\'41\'aa\'ba\'a6\'61\'a4\'e8\'a1\'41\'a6\'d3\'a5\'f4\'a6\'f3\'ac\'5b\'ba\'63\'a4\'40\'a5\'b9\'aa\'f8\'a4\'6a\'a1\'41\'a4\'b8\'a5\'f3\'bc\'c6\'b6\'71\'a4\'5d\'b7\'7c\'a8\'b3\'b3\'74\'c2\'58\'b1\'69\'a1\'41\'a6\'fd\'b3\'6f\'ad\'d3
+\f5  bottomline 
+\f4 \'ac\'4f\'a7\'da\'a4\'40\'aa\'bd\'a7\'c6\'b1\'e6\'b0\'ed\'ab\'f9\'a6\'ed\'aa\'ba\'a1\'43\
+\'b7\'ed\'b5\'4d\'a1\'41\'a6\'db\'a4\'76\'a5\'cd\'aa\'ba\'ab\'c4\'a4\'6c\'a1\'41\'ab\'e7\'bb\'f2\'ac\'dd\'b3\'a3\'b6\'b6\'b2\'b4\'a1\'43\'b5\'4d\'a6\'d3\'bf\'e9\'a4\'4a\'aa\'6b\'b2\'a6\'b3\'ba\'ac\'4f\'a4\'6a\'ae\'61\'a8\'43\'a4\'d1\'ad\'6e\'a5\'ce\'aa\'ba\'aa\'46\'a6\'e8\'a1\'41\'bf\'e9\'a4\'4a\'aa\'6b\'a8\'cf\'a5\'ce\'aa\'cc\'aa\'ba\'a4\'c1\'a8\'ad\'b8\'67\'c5\'e7\'a4\'7e\'ac\'4f\'b3\'cc\'ad\'ab\'ad\'6e\'aa\'ba\'a1\'43\'a7\'da\'b1\'71\'c6\'5b\'b9\'ee\'a1\'75\'bb\'c5\'ad\'b5\'a1\'76\'aa\'ba\'ad\'d7\'ad\'71\'be\'fa\'b5\'7b\'a1\'41\'a5\'48\'a4\'ce\'a7\'da\'a6\'db\'a4\'76\'a6\'db\'a1\'75\'ad\'bb\'af\'f3\'ad\'dc\'be\'65\'a1\'76\'b1\'c0\'a5\'58\'ab\'e1\'a9\'d2\'b3\'b0\'c4\'f2\'b1\'b5\'a8\'ec\'aa\'ba\'a6\'5e\'c0\'b3\'a1\'41\'a4\'7e\'b5\'6f\'b2\'7b\'ad\'ec\'a8\'d3\'c1\'d9\'a6\'b3\'a8\'ba\'bb\'f2\'a6\'68\'b2\'d3\'b8\'60\'ac\'4f\'a7\'da\'a8\'53\'aa\'60\'ad\'6e\'aa\'ba\'a6\'61\'a4\'e8\'a1\'41\'a8\'ba\'bb\'f2\'a6\'68\'a4\'a3\'a6\'50\'aa\'ba\'a8\'cf\'a5\'ce\'b8\'67\'c5\'e7\'a9\'4d\'bb\'dd\'a8\'44\'a1\'43\
+\'a6\'d3\'b3\'6f\'a8\'e4\'b9\'ea\'a4\'5d\'ac\'4f\'a7\'da\'c6\'5a\'a7\'c6\'b1\'e6
+\f5  OpenVanilla 
+\f4 \'af\'e0\'a6\'ad\'a4\'e9\'a6\'a8\'bc\'f4\'a1\'41\'a8\'c3\'a5\'42\'a6\'b3\'a7\'b9\'be\'e3\'aa\'ba\'a4\'e5\'a5\'f3\'bb\'a1\'a9\'fa\'aa\'ba\'ad\'ec\'a6\'5d\'a1\'47\'a7\'da\'c4\'b1\'b1\'6f\'a1\'41\'b9\'b3\'bf\'e9\'a4\'4a\'aa\'6b\'b3\'6f\'bb\'f2\'ad\'d3\'a4\'48\'a4\'c6\'a1\'42\'b3\'6f\'bb\'f2\'a4\'c1\'a8\'ad\'aa\'ba\'aa\'46\'a6\'e8\'a1\'41\'c1\'d9\'ac\'4f\'c0\'b3\'b8\'d3\'ad\'6e\'af\'e0\'b4\'a3\'a5\'58\'a4\'40\'ae\'4d\'b6\'7d\'a9\'f1\'a1\'42\'a9\'f6\'a9\'f3\'a6\'db\'ad\'71\'a1\'42\'a9\'f6\'a9\'f3\'ad\'d7\'a7\'ef\'a1\'42\'a9\'f6\'a9\'f3\'a1\'75\'b6\'71\'a8\'ad\'ad\'71\'a7\'40\'a1\'76\'aa\'ba\'ac\'5b\'ba\'63\'a1\'41\'a6\'6e\'c5\'fd\'a1\'75\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'76\'af\'e0\'b0\'74\'a6\'58\'a8\'cf\'a5\'ce\'aa\'cc\'aa\'ba\'bb\'dd\'ad\'6e\'a1\'41\'a6\'d3\'a4\'a3\'ac\'4f\'c5\'fd\'a8\'cf\'a5\'ce\'aa\'cc\'b0\'74\'a6\'58\'a1\'75\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'76\'a8\'d3\'a7\'ef\'c5\'dc\'b2\'df\'ba\'44\'a1\'43\
+\'a9\'d2\'a5\'48\'a1\'41\'a1\'75\'a4\'6a\'a9\'f6\'bc\'d2\'b2\'d5\'a1\'76\'b4\'fa\'b8\'d5\'aa\'a9\'aa\'ba\'c4\'c0\'a5\'58\'a5\'75\'ac\'4f\'b6\'7d\'a9\'6c\'aa\'ba\'b6\'7d\'a9\'6c\'a1\'43\'ab\'e1\'ad\'b1\'c1\'d9\'a6\'b3\'ab\'dc\'a6\'68\'ab\'dc\'a6\'68\'b2\'d3\'b8\'60\'aa\'ba\'a4\'75\'a7\'40\'ad\'6e\'b0\'b5\'a1\'41\'ad\'6e\'b0\'6c\'a4\'57\'a1\'43\'af\'e0\'b0\'f7\'af\'75\'aa\'ba\'b0\'b5\'a8\'ec\'a4\'b0\'bb\'f2\'a1\'41\'a7\'da\'c1\'d9\'a4\'a3\'aa\'be\'b9\'44\'a1\'43\'a6\'fd\'b9\'4c\'b5\'7b\'b7\'ed\'a4\'a4\'be\'c7\'a8\'ec\'ab\'dc\'a6\'68\'aa\'46\'a6\'e8\'a1\'41\'ac\'4f\'b3\'66\'af\'75\'bb\'f9\'b9\'ea\'aa\'ba\'a1\'43\'a6\'d3\'a5\'42\'a1\'41\'b8\'f2\'a4\'6a\'ae\'61\'a4\'40\'b0\'5f\'a4\'75\'a7\'40\'a1\'42\'b0\'51\'bd\'d7\'a1\'42\'b7\'64\'af\'ba\'a1\'42\'a6\'52\'ad\'57\'a4\'f4\'aa\'ba\'b7\'50\'c4\'b1\'a4\'5d\'ae\'bc\'a6\'6e\'a1\'43\
+\'c4\'7e\'c4\'f2\'a7\'56\'a4\'4f
+\fs32 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+\cf0 \'aa\'fe\'bf\'fd\'a4\'54 \'a6\'db\'a6\'e6\'bd\'73\'c4\'b6
+\f5  OpenVanilla
+\f4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 \'b0\'a3\'a4\'46\'a8\'cf\'a5\'ce
+\f5  OpenVanilla 
+\f4 \'a9\'d2\'b4\'a3\'a8\'d1\'aa\'ba\'a6\'77\'b8\'cb\'ae\'4d\'a5\'f3\'a6\'77\'b8\'cb\'a5\'7e\'a1\'41\'b1\'7a\'a4\'5d\'a5\'69\'a5\'48\'a8\'cf\'a5\'ce\'ad\'ec\'a9\'6c\'bd\'58\'bd\'73\'c4\'b6\'a6\'77\'b8\'cb\'a1\'41\'a6\'d3\'a6\'70\'aa\'47\'b1\'7a\'a6\'b3\'b5\'7b\'a6\'a1\'b3\'5d\'ad\'70\'aa\'ba\'b0\'f2\'c2\'a6\'a1\'41\'b1\'7a\'a4\'5d\'a5\'69\'a5\'48\'a6\'db\'a6\'e6\'aa\'bd\'b1\'b5\'ad\'d7\'a7\'ef
+\f5  OV 
+\f4 \'aa\'ba\'ad\'ec\'a9\'6c\'b5\'7b\'a6\'a1\'a1\'41\'b2\'c5\'a6\'58\'b1\'7a\'aa\'ba\'bb\'dd\'ad\'6e\'a1\'43\
+\'ad\'ba\'a5\'fd\'a1\'41\'b1\'7a\'bb\'dd\'ad\'6e\'a6\'77\'b8\'cb\'c4\'ab\'aa\'47\'a9\'d2\'b4\'a3\'a8\'d1\'aa\'ba\'b5\'7b\'a6\'a1\'b6\'7d\'b5\'6f\'a4\'75\'a8\'e3 
+\f5 Xcode
+\f4 \'a1\'5d
+\f5 http://www.apple.com/Mac OSx/features/xcode/
+\f4 \'a1\'5e\'a1\'41\'b1\'7a\'a4\'7e\'af\'e0\'b0\'f7\'a6\'62 
+\f5 Mac OS X 
+\f4 \'a4\'57\'bd\'73\'c4\'b6\'b5\'7b\'a6\'a1\'a1\'41\'a6\'70\'aa\'47\'b1\'7a\'a8\'cf\'a5\'ce
+\f5  Mac OS X 10.3 Panther 
+\f4 \'aa\'ba\'b8\'dc\'a1\'41
+\f5 Xcode 
+\f4 \'b7\'7c\'aa\'fe\'a6\'62\'a4\'40\'a6\'50\'a5\'58\'b3\'66\'aa\'ba\'a1\'75\'b3\'6e\'c5\'e9\'ad\'ab\'b7\'73\'a6\'77\'b8\'cb\'a1\'76\'a1\'5d
+\f5 Software Restore
+\f4 \'a1\'5e\'a5\'fa\'ba\'d0\'a4\'a4\'a1\'43\'ad\'6e\'a4\'a3\'b5\'4d\'a1\'41\'b1\'7a\'bb\'dd\'ad\'6e\'a6\'a8\'ac\'b0\'c4\'ab\'aa\'47\'b6\'7d\'b5\'6f\'aa\'cc\'ba\'f4\'af\'b8\'a1\'5d
+\f5 ADC, Apple Developer Connection
+\f4 \'a1\'41
+\f5 http://developer.apple.com/
+\f4 \'a1\'5e\'aa\'ba\'b7\'7c\'ad\'fb\'a1\'41\'ab\'4b\'a5\'69\'a5\'48\'b1\'71\'ba\'f4\'b8\'f4\'a4\'57\'a4\'55\'b8\'fc 
+\f5 Xcode
+\f4 \'a1\'43\'b5\'4d\'ab\'e1\'a1\'41\'bd\'d0\'b1\'71 
+\f5 OpenVanilla 
+\f4 \'aa\'ba
+\f5  subversion 
+\f4 \'c0\'c9\'ae\'d7\'ae\'77\'a8\'fa\'a6\'5e\'b3\'cc\'b7\'73\'aa\'ba\'b5\'7b\'a6\'a1\'ad\'ec\'a9\'6c\'bd\'58\'a1\'43\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qc
+\cf0 {{\NeXTGraphic FinderGo.jpg \width8000 \height1480
+}¬}\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qc
+
+\f5\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qc
+
+\f4 \cf0 \'b3\'73\'b1\'b5\'a8\'ec 
+\f5 OpenVanilla 
+\f4 \'bb\'b7\'ba\'dd\'ba\'cf\'ba\'d0\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+\cf0 \'b3\'cc\'c2\'b2\'b3\'e6\'a8\'fa\'b1\'6f
+\f5  OV 
+\f4 \'ad\'ec\'a9\'6c\'b5\'7b\'a6\'a1\'bd\'58\'aa\'ba\'a4\'e8\'aa\'6b\'a1\'41\'ac\'4f\'a7\'51\'a5\'ce 
+\f5 Mac OS X 
+\f4 \'aa\'ba\'a5\'5c\'af\'e0\'b1\'4e\'ba\'f4\'b8\'f4\'b5\'77\'ba\'d0\'b1\'be\'a4\'57\'b1\'7a\'aa\'ba\'ae\'e0\'ad\'b1\'a1\'41\'b1\'7a\'a5\'75\'ad\'6e\'a5\'ce
+\f5  Finder 
+\f4 \'aa\'ba\'a1\'75\'ab\'65\'a9\'b9\'a1\'76\'a1\'5d
+\f5 Go
+\f4 \'a1\'5e\'bf\'ef\'b3\'e6\'a1\'41\'bf\'ef\'be\'dc
+\f5  
+\f4 \'a1\'75\'b3\'73\'b1\'b5\'a6\'f8\'aa\'41\'be\'b9\'a1\'76\'a1\'5d
+\f5 Connect to Server...
+\f4 \'a1\'5e\'a1\'42\'a6\'62\'a1\'75\'a6\'f8\'aa\'41\'be\'b9\'a6\'ec\'b8\'6d\'a1\'76\'a1\'5d
+\f5 Server Address:
+\f4 \'a1\'5e\'c4\'e6\'a6\'ec\'b6\'f1\'a4\'4a\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 http://svn.openfoundry.org/openvanilla \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b5\'4d\'ab\'e1\'ab\'f6\'a1\'75\'b3\'73\'b1\'b5\'a1\'76\'a1\'5d
+\f5 Connect
+\f4 \'a1\'5e\'a1\'41\'b3\'6f\'ae\'c9\'ad\'d4\'b4\'4e\'af\'e0\'b0\'f7\'a6\'62\'ae\'e0\'ad\'b1\'a4\'57\'ac\'dd\'a8\'ec
+\f5  openvanilla 
+\f4 \'b5\'77\'ba\'d0\'b9\'cf\'a5\'dc\'a1\'41
+\f5 Finder 
+\f4 \'c1\'d9\'b7\'7c\'a6\'db\'b0\'ca\'a5\'b4\'b6\'7d\'a5\'a6\'a1\'41\'b3\'6f\'ae\'c9\'ad\'d4\'a5\'75\'ad\'6e\'a7\'e2
+\f5  trunk 
+\f4 \'c0\'c9\'ae\'d7\'a7\'a8\'a9\'ec\'a6\'b2\'a8\'ec\'b1\'7a\'ad\'6e\'aa\'ba\'a6\'61\'a4\'e8\'a1\'5d\'a9\'ec\'a6\'b2\'aa\'ba\'ae\'c9\'ad\'d4\'b9\'cf\'a5\'dc\'aa\'ba\'a5\'6b\'a4\'55\'c0\'b3\'b8\'d3\'b7\'7c\'a6\'b3\'ba\'f1\'a6\'e2\'aa\'ba\'a4\'51\'a6\'72\'b9\'cf\'bc\'cb\'aa\'ed\'a5\'dc\'ab\'fe\'a8\'a9\'b0\'ca\'a7\'40\'a1\'5e\'a1\'43\'b0\'ca\'a7\'40\'a7\'b9\'a6\'a8\'ab\'e1\'a1\'41\'b1\'7a\'a5\'75\'bb\'dd\'ad\'6e\'a7\'e2\'b3\'6f\'ad\'d3\'ba\'f4\'b8\'f4\'b5\'77\'ba\'d0\'a9\'ec\'a8\'ec\'a9\'55\'a7\'a3\'b1\'ed\'a4\'57\'b4\'4e\'a5\'69\'a5\'48\'b2\'d7\'a4\'ee\'b3\'73\'bd\'75\'a1\'43\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qc
+\cf0 {{\NeXTGraphic FinderConnect.jpg \width2080 \height2700
+}¬}\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qc
+
+\f5\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qc
+
+\f4 \cf0 \'a6\'62\'ae\'e0\'ad\'b1\'a4\'57\'a5\'58\'b2\'7b\'aa\'ba 
+\f5 OpenVanilla 
+\f4 \'bb\'b7\'ba\'dd\'ba\'cf\'ba\'d0\'b9\'cf\'a5\'dc\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+\cf0 \'ad\'59\'b1\'7a\'b7\'51\'a8\'cf\'a5\'ce
+\f5  wget
+\f4 \'a1\'41\'bd\'d0\'a7\'e2\'a4\'55\'ad\'b1\'a8\'ba\'a6\'e6\'b6\'4b\'b6\'69\'b2\'d7\'ba\'dd\'be\'f7\'b0\'f5\'a6\'e6\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 wget -r -nH --cut-dir=2 -P ~/ov http://svn.openfoundry.org/openvanilla/trunk\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b3\'6f\'bc\'cb\'b7\'7c\'a7\'e2\'b3\'cc\'b7\'73\'aa\'ba\'c0\'c9\'ae\'d7\'ae\'77\'a7\'ec\'a8\'ec\'b1\'7a\'ad\'d3\'a4\'48\'a5\'d8\'bf\'fd\'a4\'55\'aa\'ba
+\f5  ov 
+\f4 \'a5\'d8\'bf\'fd\'b8\'cc\'a1\'43\
+\'ad\'59\'b1\'7a\'b7\'51\'a8\'cf\'a5\'ce
+\f5  SVK
+\f4 \'a1\'41\'bd\'d0\'b0\'d1\'be\'5c\'a1\'75\'b3\'7a\'b9\'4c
+\f5  SVK 
+\f4 \'a8\'fa\'b1\'6f
+\f5  Open Vanilla 
+\f4 \'aa\'ba\'b5\'7b\'a6\'a1\'ad\'ec\'a9\'6c\'bd\'58\'a1\'76\'a1\'43\
+\'ad\'6e\'a8\'c6\'a5\'fd\'bb\'a1\'a9\'fa\'aa\'ba\'ac\'4f\'a1\'41\'a9\'d2\'bf\'d7\'a1\'75\'b3\'cc\'b7\'73\'aa\'a9\'a1\'76\'b3\'71\'b1\'60\'b7\'7c\'a9\'f1\'a6\'62\'c0\'c9\'ae\'d7\'ae\'77\'aa\'ba
+\f5  trunk 
+\f4 \'a5\'d8\'bf\'fd\'a4\'55\'a1\'41\'b1\'b5\'a4\'55\'a8\'d3\'b4\'a3\'a8\'ec\'aa\'ba\'b7\'bd\'bd\'58\'a9\'d2\'a6\'62\'a6\'ec\'b8\'6d\'b4\'4e\'ac\'4f\'b1\'71\'b3\'6f\'b8\'cc\'ba\'e2\'b0\'5f\'a1\'41\'a6\'5d\'a6\'b9\'ad\'6e\'ac\'4f\'b1\'7a\'aa\'ba\'b8\'f4\'ae\'7c\'a9\'4d\'b3\'6f\'b8\'cc\'bc\'67\'aa\'ba\'a4\'a3\'a4\'d3\'a4\'40\'ad\'50\'a1\'41\'a8\'ba\'aa\'ed\'a5\'dc\'b1\'7a\'b7\'ed\'ae\'c9\'a8\'fa\'a5\'58\'bb\'b7\'ba\'dd\'c0\'c9\'ae\'d7\'ae\'77\'aa\'ba\'a4\'e8\'a6\'a1\'a9\'4d\'b3\'6f\'b8\'cc\'aa\'ba\'bd\'64\'a8\'d2\'a4\'a3\'a6\'50\'a1\'41\'a6\'70\'bb\'dd\'a7\'f3\'b8\'d4\'b2\'d3\'aa\'ba\'bb\'a1\'a9\'fa\'a1\'41\'bd\'d0\'b0\'d1\'a6\'d2\'a1\'75
+\f5 SVK 
+\f4 \'ab\'fc\'ab\'6e\'a1\'76\'a1\'43\
+\'b1\'b5\'a4\'55\'a8\'d3\'a1\'41\'ad\'59\'b1\'7a\'a7\'b9\'a5\'fe\'a8\'53\'b8\'cb\'b9\'4c
+\f5 OV
+\f4 \'a1\'41\'bd\'d0\'a5\'b4\'b6\'7d\'b2\'d7\'ba\'dd\'be\'f7\'a1\'41\'b6\'69\'a8\'ec\'b7\'bd\'bd\'58\'a9\'d2\'a6\'62\'aa\'ba\'ae\'da\'a5\'d8\'bf\'fd\'a4\'55\'a1\'41\'bd\'73\'c4\'b6
+\f5  OV 
+\f4 \'bf\'e9\'a4\'4a\'aa\'6b\'ae\'d8\'ac\'5b\'a1\'43\'b0\'b2\'b3\'5d\'b7\'bd\'bd\'58\'a9\'d2\'a6\'62\'aa\'ba\'a5\'d8\'bf\'fd\'ac\'4f\'b1\'7a\'ad\'d3\'a4\'48\'a5\'d8\'bf\'fd\'a4\'55\'aa\'ba\'a1\'75
+\f5 ov
+\f4 \'a1\'76\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0  cd ~/ov ; sudo make all install clean\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a8\'cf\'a5\'ce
+\f5  sudo 
+\f4 \'b3\'6f\'ad\'d3\'ab\'fc\'a5\'4f\'ae\'c9\'b3\'71\'b1\'60\'bb\'dd\'ad\'6e\'b1\'4b\'bd\'58\'a1\'41\'a6\'b9\'ae\'c9\'bd\'d0\'bf\'e9\'a4\'4a\'b1\'7a\'ad\'d3\'a4\'48\'aa\'ba\'b1\'4b\'bd\'58\'a7\'59\'a5\'69\'a1\'43\
+\'a6\'41\'a8\'d3\'a1\'41\'bd\'d0\'a8\'ec
+\f5  Loaders 
+\f4 \'a5\'d8\'bf\'fd\'a4\'55\'bd\'73\'c4\'b6
+\f5  OpenVanilla 
+\f4 \'aa\'ba
+\f5  Mac OS X 
+\f4 \'aa\'a9\'bf\'e9\'a4\'4a\'aa\'6b\'b8\'fc\'a4\'4a\'be\'b9\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0  cd ~/ov/Loaders/OSX ; sudo make all install clean\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a6\'70\'aa\'47\'b1\'7a\'a4\'a7\'ab\'65\'a4\'77\'b8\'67\'b8\'cb\'b9\'4c
+\f5  OpenVanilla
+\f4 \'a1\'41\'a8\'ba\'bb\'f2\'b1\'7a\'b3\'71\'b1\'60\'a5\'75\'bb\'dd\'ad\'6e\'a7\'f3\'b7\'73\'a6\'db\'a4\'76\'b1\'60\'a5\'ce\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'a7\'59\'a5\'69\'a1\'43\'a5\'48
+\f5  Xcin 
+\f4 \'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'ac\'b0\'a8\'d2\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 cd ~/ov/InputMethod/OVIMXcin ; sudo make all install clean\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b3\'cc\'ab\'e1\'a1\'41\'ac\'b0\'a4\'46\'c5\'fd\'a7\'f3\'b7\'73\'a7\'b9\'a5\'fe\'a5\'cd\'ae\'c4\'a1\'41\'bd\'d0\'ad\'ab\'b7\'73\'b5\'6e\'a4\'4a\'a1\'43\'ad\'59\'a5\'75\'ac\'4f\'a7\'f3\'b7\'73\'a4\'46\'ac\'59\'ba\'d8\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'a1\'41\'b7\'ed\'b1\'7a\'b6\'7d\'b1\'d2\'a4\'40\'ad\'d3\'b7\'73\'aa\'ba\'c0\'b3\'a5\'ce\'b5\'7b\'a6\'a1\'ae\'c9\'a1\'41\'bf\'e9\'a4\'4a\'aa\'6b\'b8\'fc\'a4\'4a\'be\'b9\'b4\'4e\'b7\'7c\'b8\'fc\'a4\'4a\'b1\'7a\'a4\'77\'bd\'73\'c4\'b6\'a6\'a8\'a5\'5c\'aa\'ba\'b7\'73\'aa\'a9\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'a1\'41\'b5\'4d\'a6\'d3\'a6\'62\'a6\'b9\'a4\'a7\'ab\'65\'a4\'77\'b8\'67\'b6\'7d\'b1\'d2\'aa\'ba\'c0\'b3\'a5\'ce\'b5\'7b\'a6\'a1\'a4\'a4\'a1\'41\'a4\'b4\'b7\'7c\'a8\'cf\'a5\'ce\'c2\'c2\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'a1\'46\'ad\'d5\'ad\'59\'b1\'7a\'c1\'d9\'a7\'f3\'b7\'73\'a4\'46\'bf\'e9\'a4\'4a\'aa\'6b\'b8\'fc\'a4\'4a\'be\'b9\'a9\'ce\'ac\'c6\'a6\'dc\'ac\'4f
+\f5  OpenVanilla 
+\f4 \'bf\'e9\'a4\'4a\'aa\'6b\'ae\'d8\'ac\'5b\'a1\'41\'b4\'4e\'ab\'44\'b1\'6f\'ad\'ab\'b7\'73\'b5\'6e\'a4\'4a\'a4\'a3\'a5\'69\'a4\'46\'a1\'43\
+\'a9\'ce\'ac\'4f\'a1\'41\'b1\'7a\'a4\'5d\'a5\'69\'a5\'48\'b3\'7a\'b9\'4c\'a4\'40\'ad\'d3\'c2\'b2\'b3\'e6\'aa\'ba\'a6\'77\'b8\'cb 
+\f5 script
+\f4 \'a1\'47
+\f5 install.sh 
+\f4 \'a6\'77\'b8\'cb\'a1\'41\'a4\'e8\'aa\'6b\'ac\'4f\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 cd ~/ov ; ./install.sh\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b3\'6f\'ad\'d3 
+\f5 script 
+\f4 \'b7\'7c\'a4\'40\'a6\'b8\'b8\'cb\'a6\'6e 
+\f5 OV 
+\f4 \'bf\'e9\'a4\'4a\'aa\'6b\'b8\'fc\'a4\'4a\'be\'b9\'a1\'42\'b0\'be\'a6\'6e\'b3\'5d\'a9\'77\'a1\'42\'bb\'a1\'a9\'fa\'a4\'e5\'a5\'f3\'bb\'50\'a9\'d2\'a6\'b3\'c0\'c9\'ae\'d7\'ae\'77\'a4\'a4\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'5d\'a5\'69\'af\'e0\'a4\'5d\'b7\'7c\'a5\'5d\'a7\'74\'b1\'7a\'a9\'d2\'a4\'a3\'a7\'c6\'b1\'e6\'a6\'77\'b8\'cb\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'5e\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\fs32 \cf0 \
+\'aa\'fe\'bf\'fd\'a5\'7c \'b3\'7a\'b9\'4c
+\f5  SVK 
+\f4 \'a8\'fa\'b1\'6f
+\f5  OpenVanilla 
+\f4 \'aa\'ba\'b5\'7b\'a6\'a1\'ad\'ec\'a9\'6c\'bd\'58\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 \'c1\'f6\'b5\'4d\'a8\'cf\'a5\'ce\'a4\'57\'ad\'7a\'a4\'e8\'a6\'a1\'a1\'41\'b1\'7a\'ab\'4b\'a5\'69\'a5\'48\'a8\'fa\'b1\'6f
+\f5  OpenVanilla 
+\f4 \'aa\'ba\'ad\'ec\'a9\'6c\'bd\'58\'a1\'41\'a6\'fd\'ac\'4f\'a7\'da\'ad\'cc\'c1\'d9\'ac\'4f\'ab\'d8\'c4\'b3\'b1\'7a\'a8\'cf\'a5\'ce
+\f5  svk 
+\f4 \'b5\'a5\'aa\'a9\'a5\'bb\'ba\'de\'b2\'7a\'a4\'75\'a8\'e3\'a1\'41\'b3\'6f\'bc\'cb\'b7\'ed\'a7\'da\'ad\'cc\'b0\'b5\'a4\'46\'a5\'f4\'a6\'f3\'aa\'ba\'a7\'f3\'b7\'73\'a1\'41\'b1\'7a\'b3\'a3\'a5\'69\'a5\'48\'a5\'75\'ad\'6e\'a4\'55\'a4\'40\'ad\'d3\'ab\'fc\'a5\'4f\'a1\'41\'b4\'4e\'af\'e0\'b0\'f7\'bb\'50\'c0\'c9\'ae\'d7\'ae\'77\'a4\'a4\'b3\'cc\'b7\'73\'aa\'ba\'a7\'f3\'b7\'73\'aa\'ac\'aa\'70\'a6\'50\'a8\'42\'a1\'43
+\f5 svk 
+\f4 \'b4\'a3\'a8\'d1\'a6\'62
+\f5  Mac OS X 
+\f4 \'a4\'57\'a6\'77\'b8\'cb\'aa\'ba
+\f5  dmg 
+\f4 \'c0\'c9\'ae\'d7\'a1\'41\'a5\'75\'ad\'6e\'c2\'49\'bf\'ef\'a6\'77\'b8\'cb\'ae\'4d\'a5\'f3\'a1\'5d
+\f5 Installer Package
+\f4 \'a1\'5e\'a1\'41\'ab\'4b\'a5\'69\'a5\'48\'a7\'d6\'b3\'74\'a7\'b9\'a6\'a8\'a6\'77\'b8\'cb\'a1\'43\'b1\'7a\'a5\'69\'a5\'48\'b1\'71\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 http://rt.openfoundry.org/Foundry/Project/Download/?Queue=82\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a8\'fa\'b1\'6f 
+\f5 svk
+\f4 \'a1\'43\'a6\'77\'b8\'cb\'a7\'b9\'a6\'a8\'ab\'e1\'bd\'d0\'a6\'62\'b2\'d7\'ba\'dd\'be\'f7\'a4\'ba\'bf\'e9\'a4\'4a\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0  svk depotmap --init\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b3\'6f\'b7\'7c\'b0\'dd\'a7\'41\'ad\'6e\'a4\'a3\'ad\'6e\'ab\'d8\'a5\'df
+\f5  depot
+\f4 \'a1\'41\'a5\'b4
+\f5  y
+\f4 \'a1\'41\'b1\'b5\'b5\'db\'bf\'e9\'a4\'4a\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0  svk cp http://svn.openfoundry.org/openvanilla/trunk ov\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b2\'c4\'a4\'40\'ad\'d3\'b0\'dd\'c3\'44\'ab\'f6
+\f5  return 
+\f4 \'ab\'f6\'c1\'e4\'b8\'f5\'b9\'4c\'a1\'41\'aa\'ed\'a5\'dc\'ad\'6e\'ac\'4d\'ae\'67\'a9\'d2\'a6\'b3
+\f5  http://svn.openfoundry.org/openvanilla/trunk 
+\f4 \'b8\'cc\'aa\'ba\'aa\'46\'a6\'e8\'a1\'43\
+\'b2\'c4\'a4\'47\'ad\'d3\'b0\'dd\'c3\'44\'a5\'b4
+\f5  ov
+\f4 \'a1\'41\'aa\'ed\'a5\'dc\'a7\'e2\'ac\'4d\'ae\'67\'a4\'ba\'ae\'65\'a6\'73\'a8\'ec\'a6\'db\'a4\'76\'be\'f7\'be\'b9\'a4\'57
+\f5  svn 
+\f4 \'b8\'ea\'ae\'c6\'ae\'77\'b8\'cc\'aa\'ba
+\f5  //mirror/ov 
+\f4 \'aa\'ba\'a5\'d8\'bf\'fd\'b8\'cc\'a1\'43\
+\'b2\'c4\'a4\'54\'ad\'d3\'b0\'dd\'c3\'44\'a5\'b4
+\f5  a
+\f4 \'a1\'41\'aa\'ed\'a5\'dc\'ad\'6e\'ac\'4d\'ae\'67\'b1\'71\'a5\'6a\'a6\'dc\'a4\'b5\'a9\'d2\'a6\'b3\'aa\'ba\'aa\'a9\'a5\'bb\'a1\'43\
+\'b5\'4d\'ab\'e1\'b7\'7c\'bb\'dd\'ad\'6e\'b5\'a5\'a4\'40\'b0\'7d\'a4\'6c\'a1\'41
+\f5 svk 
+\f4 \'b7\'7c\'a8\'fa\'b1\'6f
+\f5  OV 
+\f4 \'aa\'ba\'a9\'d2\'a6\'b3\'aa\'a9\'a5\'bb\'ac\'f6\'bf\'fd\'a1\'41\'a6\'73\'a9\'f1\'a6\'62\'b1\'7a\'a5\'bb\'be\'f7\'aa\'ba\'b5\'77\'ba\'d0\'a4\'57\'a1\'43\'b5\'a5\'a5\'fe\'b3\'a1
+\f5  copy 
+\f4 \'a7\'b9\'ab\'e1
+\f5 , 
+\f4 \'a4\'53\'b7\'7c\'b0\'dd\'a7\'41\'a4\'40\'ad\'d3\'b0\'dd\'c3\'44\'a1\'41\'ad\'6e\'a7\'e2\'aa\'46\'a6\'e8
+\f5  copy 
+\f4 \'a8\'ec\'ad\'fe\'a5\'68\'a1\'41\'b3\'6f\'ae\'c9\'a7\'41\'c1\'d9\'ac\'4f\'a5\'69\'a5\'48\'a5\'b4
+\f5  ov
+\f4 \'a1\'41\'a5\'75\'ac\'4f\'b3\'6f\'ad\'d3
+\f5  ov 
+\f4 \'b8\'f2\'ab\'65\'ad\'d3
+\f5  ov 
+\f4 \'a1\'75\'a4\'a3\'a1\'76\'a4\'40\'bc\'cb\'a1\'41\'b3\'6f\'ad\'d3
+\f5  ov 
+\f4 \'b7\'7c\'a7\'e2\'aa\'46\'a6\'e8\'bd\'c6\'bb\'73\'a8\'ec
+\f5  //ov 
+\f4 \'a6\'d3\'a4\'a3\'ac\'4f
+\f5  //mirror/ov
+\f4 \'a1\'43\
+\'b5\'4d\'ab\'e1\'b7\'7c\'b6\'5d\'b6\'69\'ac\'59\'bd\'73\'bf\'e8\'be\'b9\'a1\'5d\'b3\'71\'b1\'60\'ac\'4f
+\f5  vi
+\f4 \'a1\'5e\'a1\'41\'c0\'48\'ab\'4b\'a5\'b4\'b4\'58\'ad\'d3\'a6\'72\'a7\'61\'a1\'41\'b9\'b3\'a1\'75
+\f5 I am learning svk now!
+\f4 \'a1\'76\'a9\'ce\'a1\'75
+\f5 clkao is great!
+\f4 \'a1\'76\'a9\'ce\'a1\'75
+\f5 svk++ ; ov++
+\f4 \'a1\'76\'b3\'a3\'a6\'e6
+\f5 ...\
+
+\f4 \'b1\'b5\'b5\'db vi \'a6\'73\'c0\'c9\'a1\'5d
+\f5 ESC :wq!
+\f4 \'a1\'5e\'a1\'43\
+\'a6\'70\'aa\'47\'ad\'6e\'a7\'f3\'a7\'ef\'b9\'77\'b3\'5d\'bd\'73\'bf\'e8\'be\'b9\'a1\'41\'bd\'d0\'a5\'74\'a5\'7e\'b3\'5d\'a9\'77\'c0\'f4\'b9\'d2\'c5\'dc\'bc\'c6
+\f5  EDITOR, 
+\f4 \'a8\'d2\'a6\'70\'a6\'62
+\f5  bash 
+\f4 \'c0\'f4\'b9\'d2\'a4\'55\'a1\'47\'a6\'62
+\f5  svk 
+\f4 \'be\'de\'a7\'40\'a4\'a7\'ab\'65\'a5\'69\'a5\'ce\'a5\'48\'a4\'55\'ab\'fc\'a5\'4f\'b3\'5d\'a9\'77\'bd\'73\'bf\'e8\'be\'b9\'ac\'b0
+\f5  pico ... "export EDITOR=pico"\
+
+\f4 \'b2\'7b\'a6\'62\'a7\'41\'a4\'b0\'bb\'f2\'b3\'a3\'a6\'b3\'a4\'46\'a1\'41\'a6\'62\'a4\'40\'ad\'d3\'a5\'73
+\f5  ov 
+\f4 \'aa\'ba\'a5\'d8\'bf\'fd\'a4\'55\'a1\'41\'b3\'71\'b1\'60\'b3\'6f\'ad\'d3\'a5\'d8\'bf\'fd\'b7\'7c\'a6\'62\'a7\'41\'aa\'ba\'ad\'d3\'a4\'48\'a5\'d8\'bf\'fd\'b8\'cc\'a1\'5d
+\f5 /User/yourname
+\f4 \'a1\'5e\'a1\'41\'b8\'cc\'ad\'b1\'aa\'ba\'b7\'bd\'bd\'58\'b4\'4e\'ac\'4f\'b3\'cc\'b7\'73\'aa\'a9\'a5\'bb\'a4\'46\'a1\'43\
+\'a5\'48\'ab\'e1\'ad\'6e\'a7\'f3\'b7\'73\'a1\'41\'a6\'62
+\f5  ov 
+\f4 \'a5\'d8\'bf\'fd\'a4\'55\'a5\'b4
+\f12  
+\f5 svk pull
+\f12  
+\f4 \'a7\'59\'a5\'69\'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\fs32 \cf0 \
+\'aa\'fe\'bf\'fd\'a4\'ad
+\f5  
+\f4 \'a8\'cf\'a5\'ce
+\f5  SVN 
+\f4 \'a8\'fa\'b1\'6f
+\f5  OpenVanilla 
+\f4 \'ad\'ec\'a9\'6c\'b5\'7b\'a6\'a1\'bd\'58\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\fs24 \cf0 \'a8\'cf\'a5\'ce
+\f5  svn 
+\f4 \'a8\'fa\'b1\'6f
+\f5  OV 
+\f4 \'ad\'ec\'a9\'6c\'b5\'7b\'a6\'a1\'bd\'58\'aa\'ba\'a4\'e8\'aa\'6b\'ac\'4f\'a1\'41\'a6\'62\'b2\'d7\'ba\'dd\'be\'f7\'a4\'a4\'a4\'55\'a5\'48\'a4\'55\'ab\'fc\'a5\'4f\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0  svn co http://svn.openfoundry.org/openvanilla/trunk\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b0\'f2\'a5\'bb\'a4\'57\'a7\'da\'ad\'cc\'a4\'f1\'b8\'fb\'a4\'a3\'b9\'aa\'c0\'79\'a8\'cf\'a5\'ce
+\f5  svn
+\f4 \'a1\'41\'a6\'d3\'ab\'d8\'c4\'b3\'b1\'7a\'a8\'cf\'a5\'ce
+\f5  svk
+\f4 \'a1\'43\'ad\'ec\'a6\'5d\'ac\'4f\'a6\'62
+\f5  svn 
+\f4 \'b7\'7c\'a6\'62\'c0\'c9\'ae\'d7\'ae\'77\'aa\'ba\'a8\'43\'ad\'d3\'a5\'d8\'bf\'fd\'a4\'55\'a1\'41\'a4\'c0\'a7\'4f\'ab\'d8\'a5\'df\'a4\'40\'ad\'d3\'a1\'75
+\f5 .svn
+\f4 \'a1\'76\'a5\'d8\'bf\'fd\'a1\'41\'b0\'4f\'bf\'fd\'aa\'a9\'a5\'bb\'ac\'f6\'bf\'fd\'a1\'41\'a6\'70\'aa\'47\'b3\'6f\'ad\'d3\'a5\'d8\'bf\'fd\'b3\'51\'a7\'52\'b0\'a3\'a1\'41\'b4\'4e\'b7\'7c\'b3\'79\'a6\'a8
+\f5  svn 
+\f4 \'b5\'4c\'aa\'6b\'b9\'42\'a7\'40\'a1\'43\'a6\'d3
+\f5  Mac OS X 
+\f4 \'aa\'ba\'a4\'e5\'a5\'f3\'ae\'e6\'a6\'a1\'b1\'60\'b1\'60\'a8\'cf\'a5\'ce\'a5\'d8\'bf\'fd
+\f5  bundle
+\f4 \'a1\'41\'a6\'d3\'a6\'55\'ba\'d8\'c0\'b3\'a5\'ce\'b5\'7b\'a6\'a1\'a6\'62\'ad\'d7\'a7\'ef\'a5\'d8\'bf\'fd
+\f5  bundle 
+\f4 \'a7\'ce\'a6\'a1\'aa\'ba\'a4\'e5\'a5\'f3\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'a9\'b9\'a9\'b9\'b7\'7c\'a7\'52\'b0\'a3
+\f5  .svn  
+\f4 \'a5\'d8\'bf\'fd\'a6\'d3\'b3\'79\'a6\'a8\'a7\'78\'c2\'5a\'a1\'43\
+\'b1\'7a\'a5\'69\'a5\'48\'a8\'cf\'a5\'ce
+\f5  fink 
+\f4 \'a9\'ce
+\f5  dports 
+\f4 \'a6\'77\'b8\'cb
+\f5  svn
+\f4 \'a1\'41\'a6\'d3\'a1\'41\'a6\'70\'aa\'47\'b1\'7a\'a6\'77\'b8\'cb\'a4\'46
+\f5  svk
+\f4 \'a1\'41\'a8\'e4\'b9\'ea\'b8\'cc\'c0\'59\'b4\'4e\'a4\'77\'b8\'67\'a4\'ba\'ab\'d8\'a4\'46\'a4\'40\'a5\'f7
+\f5  svn
+\f4 \'a1\'43\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\fs32 \cf0 \
+\'aa\'fe\'bf\'fd\'a4\'bb \'bd\'73\'c4\'b6\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b
+\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+\cf0 \'bd\'73\'c4\'b6\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'a4\'e8\'a6\'a1\'b7\'7c\'a4\'f1\'b8\'fb\'bd\'c6\'c2\'f8\'a4\'40\'a8\'c7\'a1\'41\'a6\'5d\'ac\'b0\'a5\'d8\'ab\'65 
+\f5 OV 
+\f4 \'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'ac\'4f\'bb\'50\'a1\'75\'b7\'73\'bb\'c5\'ad\'b5\'a1\'76\'aa\'ba\'b6\'7d\'b5\'6f\'b9\'ce\'b6\'a4\'a6\'40\'a6\'50\'b6\'7d\'b5\'6f\'a1\'41\'a9\'d2\'a5\'48\'b5\'7b\'a6\'a1\'bd\'58\'a4\'c0\'b4\'b2\'a6\'62\'a8\'e2\'ad\'d3\'a4\'a3\'a6\'50\'b9\'ce\'b6\'a4\'aa\'ba\'c0\'c9\'ae\'d7\'ae\'77\'a4\'a4\'a1\'43\
+\'a6\'70\'aa\'47\'b1\'7a\'ad\'6e\'a6\'db\'a6\'e6\'bd\'73\'c4\'b6\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'b1\'7a\'ad\'ba\'a5\'fd\'bb\'dd\'ad\'6e 
+\f5 libchewing
+\f4 \'a1\'41\'b1\'7a\'a5\'69\'a5\'48\'b1\'71\'b7\'73\'bb\'c5\'ad\'b5\'b1\'4d\'ae\'d7\'ba\'f4\'af\'b8\'a4\'57\'a4\'55\'b8\'fc
+\f5  libchewing
+\f4 \'a1\'41\'ba\'f4\'a7\'7d\'ac\'4f\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0  http://chewing.csie.net/download.html\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a8\'d2\'a6\'70\'a1\'41\'a6\'70\'aa\'47\'b1\'7a\'b7\'51\'ad\'6e\'a6\'77\'b8\'cb
+\f5  libchewing 0.2.5 
+\f4 \'aa\'a9\'aa\'ba\'b8\'dc\'a1\'41\'a8\'ba\'bb\'f2\'a1\'41\'b4\'4e\'ac\'4f\'a4\'55\'b8\'fc
+\f5  http://chewing.csie.net/download/libchewing/libchewing-0.2.5.tar.gz 
+\f4 \'b3\'6f\'ad\'d3\'c0\'c9\'ae\'d7\'a1\'43\'a6\'70\'aa\'47\'b1\'7a\'a5\'ce
+\f5  Safari 
+\f4 \'a4\'55\'b8\'fc\'a1\'41\'a6\'62\'a4\'55\'b8\'fc\'a7\'b9\'a6\'a8\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'b4\'4e\'b7\'7c\'a6\'db\'b0\'ca\'b8\'d1\'b6\'7d\'c0\'a3\'c1\'59\'a1\'41\'a8\'c3\'a5\'42\'a6\'62\'b1\'7a\'aa\'ba\'ae\'e0\'ad\'b1\'a4\'57\'a1\'41\'ab\'d8\'a5\'df\'a4\'40\'ad\'d3\'a5\'73\'b0\'b5
+\f5  libchewing-0.2.5 
+\f4 \'aa\'ba\'a5\'d8\'bf\'fd\'a1\'43\
+\'b5\'4d\'ab\'e1\'a1\'41\'bd\'d0\'a5\'b4\'b6\'7d\'b2\'d7\'ba\'dd\'be\'f7\'a1\'41\'a4\'55\'a5\'48\'a4\'55\'aa\'ba\'ab\'fc\'a5\'4f\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+\cf0  cd ~/Desktop/libchewing-0.2.5/\
+ ./configure\
+ make\
+ sudo make install\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b1\'b5\'a4\'55\'a8\'d3\'b1\'7a\'bb\'dd\'ad\'6e\'a6\'77\'b8\'cb
+\f5  libchewingpp
+\f4 \'a1\'41\'b3\'6f\'ad\'d3\'a4\'40\'ad\'d3\'a8\'cf\'a5\'ce
+\f5  C++ 
+\f4 \'bb\'79\'a8\'a5\'b3\'73\'b1\'b5
+\f5  libchewing 
+\f4 \'aa\'ba
+\f5  wrapper
+\f4 \'a1\'43\'b1\'7a\'a5\'69\'a5\'48\'a8\'cf\'a5\'ce
+\f5  svk
+\f4 \'a1\'42
+\f5 svn 
+\f4 \'a9\'ce
+\f5  wget 
+\f4 \'b5\'a5\'a4\'75\'a8\'e3\'a1\'41\'b1\'71\'a5\'48\'a4\'55\'ba\'f4\'a7\'7d\'a8\'fa\'b1\'6f
+\f5  libchewingcpp
+\f4 \'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 https://svn.csie.net/chewing/libchewingpp/trunk/\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a8\'cf\'a5\'ce\'b3\'6f\'a8\'c7\'a4\'75\'a8\'e3\'a7\'ec\'a8\'fa\'b5\'7b\'a6\'a1\'bd\'58\'aa\'ba\'a4\'e8\'aa\'6b\'a1\'41\'bb\'50\'ab\'65\'ad\'b1\'a1\'75\'a6\'db\'a6\'e6\'bd\'73\'c4\'b6
+\f5  OpenVanilla
+\f4 \'a1\'76\'a4\'a4\'a9\'d2\'b4\'a3\'a8\'ec\'a1\'41\'a7\'ec\'a8\'fa
+\f5  OV 
+\f4 \'b5\'7b\'a6\'a1\'bd\'58\'aa\'ba\'a4\'e8\'aa\'6b\'ac\'4f\'ac\'db\'a6\'50\'aa\'ba\'a1\'43\'b5\'4d\'ab\'e1\'a1\'41\'bd\'d0\'a6\'62
+\f5  libchewing 
+\f4 \'a5\'d8\'bf\'fd\'a4\'55\'a8\'cf\'a5\'ce
+\f5  make; make test 
+\f4 \'a6\'77\'b8\'cb\'a1\'43\
+\'b3\'cc\'ab\'e1\'a7\'da\'ad\'cc\'bb\'dd\'ad\'6e\'af\'e0\'b0\'f7\'c5\'fd
+\f5  OV 
+\f4 \'a5\'69\'a5\'48\'b3\'7a\'b9\'4c
+\f5  libchewingcpp 
+\f4 \'a1\'41\'b6\'69\'a4\'40\'a8\'42\'b3\'73\'a8\'ec\'a8\'ec
+\f5  libchewing
+\f4 \'a1\'41\'b4\'4e\'a5\'b2\'b6\'b7\'ad\'6e\'a6\'77\'b8\'cb 
+\f5 carchew
+\f4 \'a1\'5d
+\f5 carchew 
+\f4 \'a4\'5d\'b4\'4e\'ac\'4f 
+\f5 Carbon Chewing 
+\f4 \'aa\'ba\'c1\'59\'bc\'67\'a1\'5e\'a1\'41
+\f5 carchew 
+\f4 \'a5\'69\'a5\'48\'b1\'71\'b3\'6f\'b8\'cc\'a8\'fa\'b1\'6f\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0 https://opensvn.csie.org/SpaceChewingOSX/branches/carchew\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a6\'77\'b8\'cb\'a4\'e8\'aa\'6b\'a4\'5d\'ac\'4f
+\f5  make; make install
+\f4 \'a1\'43\
+\'b3\'cc\'ab\'e1\'ad\'6e\'aa\'60\'b7\'4e\'aa\'ba\'a4\'40\'c2\'49\'ac\'4f\'a1\'41\'b1\'7a\'a5\'b2\'b6\'b7\'ad\'6e\'a4\'e2\'b0\'ca\'ab\'d8\'a5\'df
+\f5  OV 
+\f4 \'bb\'c5\'ad\'b5\'aa\'ba\'a6\'72\'a8\'e5\'c0\'c9\'a5\'d8\'bf\'fd\'a1\'41\'a8\'c3\'a5\'42\'b1\'4e\'a6\'72\'a8\'e5\'c0\'c9\'bd\'c6\'bb\'73\'b9\'4c\'a5\'68\'a1\'43
+\f5 libhcewing 
+\f4 \'b7\'7c\'b1\'4e\'a6\'72\'a8\'e5\'c0\'c9\'ae\'d7\'a6\'77\'b8\'cb\'a6\'62
+\f5  /usr/share/chewing 
+\f4 \'a9\'ce
+\f5  /usr/local/share/chewing 
+\f4 \'a4\'55\'a1\'41\'bd\'d0\'a5\'fd\'a6\'62\'b2\'d7\'ba\'dd\'be\'f7\'a4\'55\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5 \cf0  sudo mkdir -p /Library/OpenVanilla/0.6.3/OVIMChewing\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'b5\'4d\'ab\'e1\'b1\'4e\'a6\'72\'a8\'e5\'c0\'c9\'bd\'c6\'bb\'73\'b9\'4c\'a5\'68\'a1\'47\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\ql\qnatural
+
+\f5 \cf0  cp -r /usr/local/share/chewing/* /Library/OpenVanilla/0.6.3/OVIMChewing/
+\f12 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f4 \cf0 \'a9\'ce\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\ql\qnatural
+
+\f5 \cf0 cp -r /usr/share/chewing/* /Library/OpenVanilla/0.6.3/OVIMChewing/
+\f12 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\f4\fs32 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb240\qj
+
+\f1 \cf0 Acknowledgment\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
+
+\f5\fs24 \cf0 Developing a free software is depending on many helps and devotions of societies. We appreciate the groups and organizations listed below which help us very much:\
+OpenFoundry project of Academia Sinica (http://openfoundry.org/ ; http://rt.openfoundry.org) supplied us project management tools and version control repository.\
+Elixus (http://elixus.org/) supplied us web hosting.\
+The svk project (http://svk.elixus.org) supplied us the best version control tool, and gave use\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
+
+\f4 \cf0 \
+
+\f5 svk 
+\f4 \'ad\'70\'b9\'ba\'a1\'5d
+\f5 http://svk.elixus.org
+\f4 \'a1\'5e\'a6\'a8\'ad\'fb\'ac\'b0
+\f5  OpenVanilla 
+\f4 \'aa\'ba\'aa\'a9\'a5\'bb\'ba\'de\'b2\'7a\'b4\'a3\'a8\'d1\'a4\'46\'b7\'a5\'a8\'ce\'aa\'ba\'a4\'75\'a8\'e3\'a1\'41\'a6\'50\'ae\'c9\'a4\'5d\'a6\'68\'a6\'b8\'a6\'62\'a5\'62\'a9\'5d\'b0\'a3\'bf\'f9\'a8\'ec\'b5\'6f\'b7\'57\'aa\'ba\'ae\'c9\'ad\'d4\'a9\'de\'a4\'4d\'ac\'db\'a7\'55\'a1\'41\'b8\'d1\'b5\'aa\'a4\'46\'a6\'68\'b6\'b5\'aa\'a9\'a5\'bb\'ba\'de\'b2\'7a\'aa\'ba\'ba\'c3\'b4\'62\'a1\'43\
+\
+\'a6\'d1\'a6\'61\'a4\'e8\'a6\'42\'aa\'47\'ab\'c7\'a1\'5d
+\f5 http://www.frostyplace.com/
+\f4 \'a1\'5e\'a1\'42
+\f5 OIKOS
+\f4 \'a5\'cd\'ac\'a1\'ba\'f4\'a1\'5d
+\f5 http://www.oikos.com.tw/
+\f4 \'a1\'5e\'b9\'ef\'a9\'f3
+\f5  OV 
+\f4 \'aa\'ba\'ac\'db\'c3\'f6\'b3\'f8\'be\'c9\'a1\'43\
+\
+\'b7\'73\'bb\'c5\'ad\'b5\'b5\'6f\'ae\'69\'ad\'70\'b5\'65\'a1\'5d
+\f5 http://chewing.csie.net/news.html
+\f4 \'a1\'5e\'a6\'40\'a6\'50\'b5\'6f\'ae\'69\'a6\'55\'a5\'ad\'a5\'78\'aa\'ba\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'43\
+\
+\'a6\'e6\'a6\'43\'ac\'ec\'a7\'de\'a1\'5d
+\f5 http://www.array.com.tw/
+\f4 \'a1\'5e\'b4\'a3\'a8\'d1\'a7\'b9\'be\'e3\'aa\'ba\'a6\'e6\'a6\'43\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ed\'ae\'e6\'a1\'43\
+\
+\'a5\'74\'a5\'7e\'a1\'41
+\f5 OpenVanilla 
+\f4 \'b9\'ce\'b6\'a4\'a6\'a8\'ad\'fb\'b9\'ef\'a9\'f3\'a9\'d2\'a6\'b3\'b0\'d1\'bb\'50\'b4\'fa\'b8\'d5\'a1\'42\'b4\'a3\'a8\'d1\'bf\'e9\'a4\'4a\'aa\'6b\'b8\'ea\'ae\'c6\'aa\'ba\'aa\'42\'a4\'cd\'a1\'41\'aa\'ed\'a5\'dc\'b7\'50\'c1\'c2\'a1\'47
+\f5 IRC #osxchat 
+\f4 \'a4\'57\'aa\'ba\'aa\'42\'a4\'cd\'ad\'cc\'a4\'40\'b8\'f4\'b5\'b9\'a4\'46\'ac\'db\'b7\'ed\'a6\'68\'aa\'ba\'b7\'4e\'a8\'a3\'bb\'50\'a4\'e4\'ab\'f9\'a1\'43
+\f5 momizi 
+\f4 \'b1\'71\'a1\'75\'ad\'bb\'af\'f3\'ad\'dc\'be\'65\'a1\'76\'a5\'48\'a8\'d3\'ab\'4b\'a4\'a3\'c2\'5f\'b4\'a3\'a5\'58\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'a7\'ef\'b6\'69\'b7\'4e\'a8\'a3\'a1\'41\'a8\'c3\'bb\'73\'a7\'40\'a4\'46
+\f5  OV 
+\f4 \'aa\'ba\'a4\'e9\'a4\'e5\'b0\'b2\'a6\'57\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ed\'ae\'e6\'a1\'43
+\f5 Autrijus 
+\f4 \'ac\'4f\'ab\'50\'a6\'a8\'b6\'7d\'b5\'6f
+\f5  OV 
+\f4 \'a4\'6a\'a9\'f6\'a1\'5d\'ab\'e1\'a8\'d3\'aa\'ba
+\f5  OVIMXcin 
+\f4 \'b3\'71\'a5\'ce\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'a1\'5e\'aa\'ba\'b1\'c0\'a4\'e2\'a1\'43
+\f5 ijliao, xeonchen 
+\f4 \'c0\'b0\'a6\'a3\'a4\'6a\'b6\'71\'b4\'fa\'b8\'d5\'a4\'46 
+\f5 OV 
+\f4 \'aa\'ba\'a6\'e6\'a6\'43\'bc\'d2\'b2\'d5\'a1\'41\'b2\'d7\'a9\'f3\'a6\'b3\'a4\'46\'c3\'ad\'a9\'77\'aa\'ba\'aa\'a9\'a5\'bb\'a1\'43
+\f5 gontera 
+\f4 \'a1\'5d\'a6\'d1\'a4\'4d\'a1\'5e\'ab\'68\'b4\'a3\'a8\'d1\'a4\'46 
+\f5 Unicode 
+\f4 \'aa\'a9\'aa\'ba\'a6\'e6\'a6\'43\'b8\'ea\'ae\'c6\'a1\'41\'a6\'50\'ae\'c9\'a4\'5d\'ac\'4f\'a6\'e6\'a6\'43\'bc\'d2\'b2\'d5\'aa\'ba\'b4\'fa\'b8\'d5\'aa\'cc\'a1\'43\'c1\'d9\'a6\'b3\'b3\'5c\'b3\'5c\'a6\'68\'a6\'68\'c3\'f6\'a4\'df
+\f5  OV 
+\f4 \'b5\'6f\'ae\'69\'aa\'ba\'a4\'48\'a1\'41\'c1\'c2\'c1\'c2\'a7\'41\'ad\'cc\'a1\'43
+\f8 \
+}
