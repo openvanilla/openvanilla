@@ -117,9 +117,10 @@ int VXGetCurrentLocale(CFBundleRef bundle, char *str, int maxlen)
 	CFStringRef r=(CFStringRef)CFArrayGetValueAtIndex(pref, 0);
 	if (!r) return deflen;
 		
-	CFStringRef cr=(CFStringRef)
+	
+	CFStringRef cr=r;  /* (CFStringRef)
 		VXSafe(CFLocaleCreateCanonicalLocaleIdentifierFromString(NULL, r));	
-	if (!cr) return deflen;
+	if (!cr) return deflen; */
 	if (!CFStringGetCString(cr, str, maxlen, kCFStringEncodingUTF8))
 		strcpy(str, defvalue);
 
