@@ -212,7 +212,7 @@ void CreateUserConfig()
 	struct stat filestat;
 	
 	// if ~/Lib/OV/0.6.1/OVLoader.plist does not exist, copy from default
-	if (!stat(userpref, &filestat))
+	if (stat(userpref, &filestat))         // any error
 	{
 		VXConfig def(defaultplistfile);
 		def.read();
