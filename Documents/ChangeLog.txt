@@ -11,10 +11,11 @@ http://openvanilla.org/
 * 新增藏文輸入法，支援Sambhota Keymap One、Sambhota Keymap Two、TCC Keyboard
 #1以及TCC Keyboard #2四種鍵盤配置，並提供切換鍵盤配置的偏好設定選項。
 * 修正行列輸入法的選字換頁按鍵問題。
+* 加入了自訂快速鍵組合功能。
 * 酷音輸入法升級至 libchewing 0.2.5。
 * 修正Xcin模組的標點符號問題。
 * 新增Unicode輸入法。
-* 新增客家白話字POJ輸入法。
+* 客家白話字POJ輸入法開發中。
 * 使用手冊完成。
 
 == 0.6.2 ==
