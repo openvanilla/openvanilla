@@ -63,6 +63,11 @@ public:
     int add(char c)
     {   
         if (len == pojMaxSeqLen) return 0;
+        
+        // repleace "q" to "ou"
+        if (c=='q') { if (add('o')) return add('u'); else return 0; }
+        if (c=='Q') { if (add('O')) return add('O'); else return 0; }
+        
         seq[len++]=c;
         seq[len]=0;
         return 1;
@@ -92,8 +97,9 @@ public:
     
     int compose(char *buf)
     {
-        int tone=1;
-    
+        murmur ("composing syllable, internal representation=%s\n", seq);
+        
+        int tone=1;    
         char *b=buf;
 
         if (!len)
@@ -103,22 +109,20 @@ public:
         }
 
         if (seq[len-1] >= '1' && seq[len-1] <= '8') tone=seq[len-1]-'0';
-        murmur ("tone=%d", tone);
 
-
-        char *s=seq;
+        char c, *s=seq;
         int vcomposed=0;        // if the first vowel is composed
         
-        while (*s)
+        while (c=*s)        // C style, very C style
         {
-            if (isCompose(*s)) break;
+            char cnext=*(s+1);
+
+            if (isCompose(c)) break;    // if we encountering tone mark, the end
             
-            int vo=vowelorder(*s);
-            murmur("char=%c, vowelorder=%d", *s, vo);
-            murmur("To compose: %s",s);
-            // vowel ?
-            
-            if (tolower(*s)=='n' && tolower(*(s+1))=='n')
+            int vo=vowelorder(c);
+
+            // nasel? ("nn")
+            if (tolower(c)=='n' && tolower(cnext)=='n')
             {
                 strcat(b, nasel);
                 b+=strlen(nasel);
@@ -126,24 +130,39 @@ public:
                 continue;
             }
             
+            // if vowel already composed, or not vowel,
+            // here we also apply "i" rule (if "i" is followed by a vowel,
+            // the tone mark will never be placed upon "i")
             if (vcomposed || ( vo == -1 ) ||
-                 ( tolower(*s) == 'i' && (vowelorder(*(s+1)) != -1 ) )) 
+                 ( tolower(c) == 'i' && (vowelorder(cnext) != -1 ) )) 
             {
                 *b++=*s++;
-                murmur("Composed: %s",buf);
                 continue;
             }
             
-            char *vstr=vowel2tone(*s, tone);
+            // "ou" and "OU" rule
+            if (c=='o' && cnext=='u')
+            {
+                c='q';
+                s++;    // shift one char
+            }
+            
+            if (c=='O' && cnext=='U')
+            {
+                c='Q';
+                s++;    // shift one char
+            }
+        
+            char *vstr=vowel2tone(c, tone);
             if (vstr)
             {
+                // compose the tone mark
                 murmur("char: %c, tone: %d, vowel2tone: %s", *s, tone, vstr);
                 strcat(b, vstr);
                 b+=strlen(vstr);
                 vcomposed=1;
             }
             s++;
-            murmur("Composed: %s",buf);
         }
         *b=0;
         return strlen(buf);            
@@ -153,8 +172,6 @@ protected:
     int len;
     char seq[pojMaxSeqLen+1];
 };
-
-
 
 class OVIMPOJ;
 
@@ -168,15 +185,12 @@ public:
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar, OVService *srv) 
     {
         char composebuf[256];
-        murmur("I'm in keyEvent, code=%d", key->code());
 //        if (!textbar->onScreen()) textbar->show();
         
         if (key->isCode(2, ovkBackspace, ovkDelete) && buf->length())
         { 
-            murmur("removing!");
             seq.remove();
             seq.compose(composebuf);
-            murmur("Backspace: %c , composed: %s",key->code(),composebuf);
             buf->clear()->append(composebuf)->update();
             return 1;            
         }
@@ -192,12 +206,10 @@ public:
         if (key->isAlpha()) {
             seq.add(key->code());
             seq.compose(composebuf);
-            murmur("isPrintable: %c , composed: %s",key->code(),composebuf);
             buf->clear()->append(composebuf)->update();
             return 1;
         }
         
-        murmur ("charcode=(%c), kicking it back to app)", key->code());
         if (buf->length()) buf->send();
         seq.clear();
         

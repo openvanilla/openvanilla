@@ -340,7 +340,7 @@ int CIMInputBuffer::realpos(int p)
         else pp++;
     }
     
-	fprintf (stderr, "realpos; length=%d, request=%d, actual=%d\n", len, p, i);
+//	fprintf (stderr, "realpos; length=%d, request=%d, actual=%d\n", len, p, i);
 	
     return i;
 }
@@ -470,7 +470,6 @@ OSErr CIMInputBuffer::update(Boolean send, int cursorpos, int hilitefrom,
         if (!updaterangeptr) error=memFullErr;
         else
         {
-            fprintf (stderr, "update region\n");
             updaterangeptr->fNumOfRanges=2;
             updaterangeptr->fRange[0].fStart=0;
             updaterangeptr->fRange[0].fEnd=lastupdate*sizeof(UniChar);
@@ -480,7 +479,6 @@ OSErr CIMInputBuffer::update(Boolean send, int cursorpos, int hilitefrom,
             updaterangeptr->fRange[1].fHiliteStyle=0;
 
             lastupdate=len;
-            fprintf (stderr, "lastupdate len=%d\n", lastupdate);
             error=SetEventParameter(event, kEventParamTextInputSendUpdateRng,
                 typeTextRangeArray, sizeof(short)+sizeof(TextRange)*2,
                 updaterangeptr);
@@ -503,16 +501,12 @@ OSErr CIMInputBuffer::update(Boolean send, int cursorpos, int hilitefrom,
         if(!hiliterangeptr) error=memFullErr;
         else
         {
-            fprintf (stderr, "hilite and cursor\n");
-            
             hiliterangeptr->fNumOfRanges=2;
 			
 			int realcur=len*sizeof(UniChar);
 			// set cursor position
 			if (cursorpos>=0 && cursorpos<=length()) 
                 realcur=realpos(cursorpos)*sizeof(UniChar);
-
-            fprintf (stderr, "realcur=%d\n", realcur);
 
                 
             SETRANGE(0, 0, len*sizeof(UniChar), kConvertedText);
@@ -524,7 +518,6 @@ OSErr CIMInputBuffer::update(Boolean send, int cursorpos, int hilitefrom,
 			if 	((hilitefrom>=0 && hilitefrom<=length()) &&
 				(hiliteto>hilitefrom && hiliteto<=length()))
 			{
-			     fprintf (stderr, "cursor from & to\n");
 				hiliterangeptr->fNumOfRanges++;		// send one more range block
 
 				SETRANGE(1, realpos(hilitefrom)*sizeof(UniChar),
