@@ -1,6 +1,6 @@
 // OVIMDayi.mm
 
-#define OVDEBUG
+#define OVDEBUG 0
 
 #include <Cocoa/Cocoa.h>
 #include "OpenVanilla/OpenVanilla.h"
