@@ -18,5 +18,5 @@ clean:
 	rm -f $(GOALS) *.o
 
 %.o: %.cpp
-	gcc -c $<
+	gcc -c -O3 $<
 	
