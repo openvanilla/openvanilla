@@ -7,7 +7,7 @@
 #include "OpenVanilla/OpenVanilla.h"
 #include "OpenVanilla/OVLoadable.h"
 #include "OpenVanilla/OVUtility.h"
-#include "vanillaphone.h"
+#include "vanillasymbol.h"
 #include "vanillacj.h"
 
 const int vimclMaxCandidate=256;

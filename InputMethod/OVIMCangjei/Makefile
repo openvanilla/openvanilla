@@ -1,5 +1,5 @@
 OBJS=OVIMCangjei.o vanillacj.o vanillasymbol.o vcdata.o vcdata_simplex.o
-GOALS=OVIMPhonetic.dylib
+GOALS=OVIMCangjei.dylib
 INST_PATH=/Library/OpenVanilla/Development
 CONF_PATH=$(INST_PATH)/OVXSimpleLoader.config
 
