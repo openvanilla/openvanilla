@@ -1,3 +1,5 @@
+# Each Inputmethod should define a IMID as it's identifier.
+# It'll be used as a part of data installation path.
 
 ECHO=/bin/echo
 RM=/bin/rm -f
@@ -5,6 +7,7 @@ CP=/bin/cp
 MKDIR=/bin/mkdir -p
 
 INST_PATH=/Library/OpenVanilla/Development
+DATA_INST_PATH?=$(INST_PATH)/$(IMID)
 
 INC=-I../../Headers 
 

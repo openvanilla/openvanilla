@@ -26,21 +26,18 @@ int file_select(struct dirent *entry)
 void CinList::load(char *libpath)
 {
     struct dirent **files;
-    char searchpath[PATH_MAX];
+    strcpy(cinpath, libpath);
+    int l=strlen(cinpath);
+    if (l) if (cinpath[l-1]=='/') cinpath[l-1]=0;
+    strcat(cinpath, "/OVIMXcin");
 
-    strcpy(searchpath, libpath);
-    int l=strlen(searchpath);
-    if (l) if (searchpath[l-1]=='/') searchpath[l-1]=0;
-
-    strcpy(cinpath, searchpath);
-
-    int count=scandir(searchpath, &files, file_select, alphasort); 
+    int count=scandir(cinpath, &files, file_select, alphasort); 
     if (count<=0) return;
     
     for (int i=0; i<count; i++)
     {
         if (index<vxMaxCINFiles)
-            if (preparse(searchpath, files[i]->d_name, index)) index++;
+            if (preparse(cinpath, files[i]->d_name, index)) index++;
         free(files[i]);
     }
     free(files);
