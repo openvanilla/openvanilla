@@ -1,7 +1,7 @@
 #!/bin/sh
 make clean
 
-cd Loaders/OSX ; xcodebuild clean ; cd ..
+cd Loaders/OSX ; xcodebuild clean ; cd ../..
 
 #cd InputMethod ;
 #for directory in `ls -F | grep "\/" | sed -e 's/\///'`
@@ -11,4 +11,4 @@ cd Loaders/OSX ; xcodebuild clean ; cd ..
 #cd ..
 cd InputMethod ; make clean ; cd ..
 
-cd Experiments/OVPrefPane ; xcodebuild clean ; cd ../..
+cd Utilities/OSX/OVPrefPane  ; xcodebuild clean ; cd ../../..

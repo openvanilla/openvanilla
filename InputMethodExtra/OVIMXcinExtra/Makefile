@@ -1,4 +1,4 @@
 install:
-	$(CP) * $(INST_PATH)/OVIMXcin
+	$(CP) *.cin $(INST_PATH)/OVIMXcin
 
 include ../../Mk/ov.vars.mk
