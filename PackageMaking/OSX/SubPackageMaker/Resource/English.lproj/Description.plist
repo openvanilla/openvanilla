@@ -5,7 +5,7 @@
 	<key>IFPkgDescriptionTitle</key>
 	<string>Chewing IM module</string>
 	<key>IFPkgDescriptionDescription</key>
-	<string>Chewing IM module</string>
+	<string>Chewing is a "smart," phrase-based phonetic input method that saves your time picking up characters. It is one of the most widely used input method in open source Chinese environment.</string>
 	<key>IFPkgDescriptionVersion</key>
 	<string>0.63</string>
 </dict>

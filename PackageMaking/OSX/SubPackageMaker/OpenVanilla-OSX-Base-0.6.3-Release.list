@@ -16,6 +16,7 @@ This installs OpenVanilla's loader and two core modules: phonetics (or bopomofo,
 /Library/OpenVanilla/
 /Library/OpenVanilla/0.6.3
 /Library/OpenVanilla/0.6.3/ov.pdf
+/Library/OpenVanilla/0.6.3/license.txt
 /Library/OpenVanilla/0.6.3/OVIMPhonetic
 /Library/OpenVanilla/0.6.3/OVIMPhonetic.dylib
 /Library/OpenVanilla/0.6.3/OVIMXcin
@@ -80,6 +81,10 @@ This installs OpenVanilla's loader and two core modules: phonetics (or bopomofo,
 Array IM module
 @title zh_TW
 行列輸入法
+@description
+This installs Array input method into your system.
+@description zh_TW
+安裝行列輸入法至您的系統中。
 @files
 /Library/OpenVanilla/0.6.3/OVIMArray
 /Library/OpenVanilla/0.6.3/OVIMArray/array30.cin
@@ -91,6 +96,8 @@ Array IM module
 Cangjei and Simplex (Jianyi) IM module
 @title zh_TW
 倉頡及簡易輸入法（香草倉頡、香草簡易）
+@description
+This installs the "traditional," 3rd generation Cangjei (previously mis-spelled as Changjei in the age of Eten Chinese system) input method into your system.
 @description zh_TW
 本套件安裝的是「傳統」的倉頡輸入法，也就是 Big5 字集、與 Windows 等平台相同的第三代倉頡。
 @files
@@ -103,6 +110,10 @@ Cangjei and Simplex (Jianyi) IM module
 Holo POJ IM module
 @title zh_TW
 河洛白話字輸入法
+@description
+This installs Holo pe̍h-ōe-jī (POJ) input method into your system.
+@description zh_TW
+本套件將河洛白話字 (pe̍h-ōe-jī, POJ) 輸入法安裝至您的系統內。
 @files
 /Library/OpenVanilla/0.6.3/OVIMPOJHolo
 /Library/OpenVanilla/0.6.3/OVIMPOJHolo/poj.cin
@@ -114,6 +125,10 @@ Holo POJ IM module
 Tibetan IM module
 @title zh_TW
 藏文輸入法
+@description
+This installs Tibentan input method module into your system. This Tibentan IM module supports a variety of keyboard layouts.
+@description zh_TW
+本套件將支援多種鍵盤配置的藏文輸入法安裝至您的系統內。
 @files
 /Library/OpenVanilla/0.6.3/OVIMTibetan
 /Library/OpenVanilla/0.6.3/OVIMTibetan.dylib
@@ -125,6 +140,8 @@ Tibetan IM module
 Cangjei IM
 @title zh_TW
 倉頡輸入法（Xcin模組版）
+@description
+This installs the "xcin" version of Cangjei input method into your system. The "xcin" version of Cangjei covers HK-extension characters (Big5-HKSCS) and turns on "auto-compose" option by default.
 @description zh_TW
 本套件安裝的是 Xcin 模祖版的倉頡輸入法。這個套件與香草倉頡大致相同，差別在於本套件尚涵蓋了 Big5-HKSCS 的延伸字集，意思是說您可以用這套字型來打出香港用字。另外，本輸入法也預設開啟了「簡拼」功能，在重覆字的場合，可少打一次空白鍵，直接按數字選取就可以了。
 @files
@@ -136,6 +153,8 @@ Cangjei IM
 Dayi IM
 @title zh_TW
 大易輸入法
+@description
+This installs Dayi input method into your system.
 @description zh_TW
 本套件安裝的是由太易公司所同意公開散佈的大易輸入法資料表格。若您需要和 Windows 上相同的符號及標點符號，請您於網路上自行下載修改過的資料表格並另行安裝之。
 @files
@@ -148,6 +167,8 @@ Dayi IM
 EHQ symbol IM
 @title zh_TW
 漁村符號輸入法
+@description
+EHQ is a collection of Unicode symbols.
 @description zh_TW
 漁村符號輸入法是一套範圍廣泛的符號輸入法，可以輸入各類型的常用及特殊符號。
 @files
@@ -172,6 +193,10 @@ This installs a simple Japanese kana (katakana and hiragana) input methods so th
 Chewing IM module
 @title zh_TW
 酷音輸入法
+@description
+Chewing is a "smart," phrase-based phonetic input method that saves your time picking up characters. It is one of the most widely used input method in open source Chinese environment.
+@description zh_TW
+酷音輸入法是一套智慧型「自動選字」的注音輸入法，也是最常用的中文輸入法之一。
 @files
 /Library/OpenVanilla/0.6.3/OVIMChewing
 /Library/OpenVanilla/0.6.3/OVIMChewing/ch_index.dat
