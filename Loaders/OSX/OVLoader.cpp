@@ -360,18 +360,22 @@ void SwitchMenuItemMark(MenuRef mnu,int oldp, int newp)
     SetItemMark(mnu, newp, checkMark);
 }
 
+void StartupPreferenceEditor() 
+{
+    char sbuf[512];
+    murmur("launching application to edit %s", plistfile);
+    sprintf (sbuf, "open %s", plistfile);
+    system(sbuf);   
+}
+
+
 int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu, 
                          CIMInputBuffer *buf)
 {
-    char sbuf[512];
-    switch (command)
-    {
+    switch (command) {
     case 'PREF':
-        murmur("launching application to edit %s", plistfile);
-        sprintf (sbuf, "open %s", plistfile);
-        system(sbuf);
+        StartupPreferenceEditor();
         return 1;
-	
     case 'ABUT':
         ShowAbout();
         return 1;
