@@ -88,7 +88,7 @@ inline int EMUTF16ToUTF8(uint16_t u16, char *u8s)
 	}
 	
 	*u8s++=0xe0 | (high >> 4);
-	*u8s++=0x80 | ((high & 0xf) << 2) | (low & 0xc0 >> 6);
+	*u8s++=0x80 | ((high & 0xf) << 2) | ((low & 0xc0) >> 6);
 	*u8s++=0x80 | (low & 0x3f);
 	return 3;
 }
@@ -162,8 +162,7 @@ public:
 			EMUTF16StringToUTF8((uint16_t*)s, p, len, e);
 			return this;
 		}
-		
-		strcat(str, (char*)s);
+		else strcat(str, (char*)s);
 		return this;
 	}
 	
@@ -345,10 +344,10 @@ public:
 class EMKeyCode : public OVKeyCode
 {
 public:
-	EMKeyCode() { clean(); }
+	EMKeyCode() { clear(); }
 
-	virtual void clean() { c=shift=capslock=ctrl=alt=command=0; }
-	virtual int code() { return c; }
+	virtual void clear() { keycode=shift=capslock=ctrl=alt=command=0; }
+	virtual int code() { return keycode; }
     virtual int isShift() { return shift; }
     virtual int isCapslock() { return capslock; }
     virtual int isCtrl() { return ctrl; }
@@ -356,7 +355,7 @@ public:
     virtual int isOpt() { return alt; }
     virtual int isCommand() { return command; }
     
-	int c, shift, capslock, ctrl, alt, command;
+	int keycode, shift, capslock, ctrl, alt, command;
 };
 
 // #endif  // of #ifndef __OVEmuClasses_h
@@ -378,6 +377,31 @@ int main(int argc, char **argv)
 	OVInputMethod *im=lib.imnew(0);
 	im->identifier(buf);
 	murmur ("OVEmu: loaded input method, identifier=%s", buf);
+	
+	OVIMContext *context=im->newContext();
+	
+	murmur ("\n\nOVEmu console ============");
+	
+	EMKeyCode key;
+	EMTextBar textbar;
+	EMBuffer buffer;
+	EMService service;
+	while (!feof(stdin))
+	{
+		key.clear();
+		char k=fgetc(stdin);
+		switch(k)
+		{
+			case '!': key.keycode=27; break;
+			case '@': key.keycode=13; break;
+			default:
+				if(isprint(k)) key.keycode=k; else continue;
+		}
+		
+		context->keyEvent(&key, &buffer, &textbar, &service);
+		murmur ("hit printable keys, '!'=escape, '@'=enter");
+	}
+	
 	lib.imdelete(im);
 	lib.unload();
 }
