@@ -213,9 +213,9 @@ inline cchar* Lex::nextstring(cchar* bufp, cchar* bufend)
         if ((t == LCend || t == LCendl) && (c != ':')) break;
 
         input->next();
+        if (c == '\"') break;
         if (c == '\\') c = escchar();
-        if (c == '"') break;
-
+        
         *bufp++ = c;
     }
 

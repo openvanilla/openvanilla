@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-const unsigned int ovVersion=0x0000ffff;
+const unsigned int ovVersion=0x00600200;    // for 0.6.2 (0x00,0x06,0x02,0x00)
 
 class OVObject
 {
@@ -26,9 +26,9 @@ typedef int OVException;
 enum
 {
     ovEncodingUTF8=0,
-//  ovEncodingUTF16Auto=1,
+    ovEncodingUTF16Auto=1,	// use this if you have e.g. short x=0xae10;
     ovEncodingUTF16BE=2,     
-//  ovEncodingUTF16LE=3,
+    ovEncodingUTF16LE=4,
     ovEncodingBig5=16,
     ovEncodingBig5HKSCS=16,
     ovEncodingEUC_CN=24,
@@ -64,9 +64,9 @@ public:
     virtual OVTextBar* append(void *s, OVEncoding e=ovEncodingUTF8, int len=0)
         { return this; }
 
-    virtual OVTextBar* hide() { return 0; }
-    virtual OVTextBar* show() { return 0; }
-    virtual OVTextBar* update() { return 0; }
+    virtual OVTextBar* hide() { return this; }
+    virtual OVTextBar* show() { return this; }
+    virtual OVTextBar* update() { return this; }
     virtual int onScreen() { return 0; }
 };
 
@@ -101,11 +101,19 @@ public:
         
     virtual int getInt(const void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
         { return 0; }
+    virtual int getIntDefault(const void *k, int defv, OVEncoding 
+        e=ovEncodingUTF8, int kl=0)
+            { if (!keyExist(k, e, kl)) setInt(k, defv, e, kl); 
+              return getInt(k, e, kl); }
     virtual int setInt(const void *key, int value, OVEncoding e=ovEncodingUTF8,
         int keylen=0) { return 0; }
             	
 	virtual int getString(const void *key, void *str, OVEncoding e=ovEncodingUTF8,
 		int keylen=0, int maxlen=0) { return 0; }
+    virtual int getStringDefault(const void *k, void *s, const void *defv, 
+        OVEncoding e=ovEncodingUTF8, int kl=0, int ml=0)
+            { if (!keyExist(k, e, kl)) setString(k, defv, e, kl);
+              return getString(k, s, e, kl); }
 	virtual int setString(const void *key, const void *value, 
         OVEncoding e=ovEncodingUTF8, int keylen=0, int valuelen=0) { return 0; }
 		

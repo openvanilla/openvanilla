@@ -9,7 +9,21 @@
 #include <string>
 #include <vector>
 
+#include <cctype>
+#include <algorithm>
+
 using namespace std;
+
+OVEncoding OVEncodingMapper(const char *s)
+{
+    if (!strcasecmp(s, "big5")) return ovEncodingBig5HKSCS;
+    if (!strcasecmp(s, "big5e")) return ovEncodingBig5HKSCS;
+    if (!strcasecmp(s, "big5hkscs")) return ovEncodingBig5HKSCS;
+    if (!strcasecmp(s, "big5-hkscs")) return ovEncodingBig5HKSCS;
+    if (!strcasecmp(s, "euc")) return ovEncodingEUC_CN;
+    if (!strcasecmp(s, "euc_cn")) return ovEncodingEUC_CN;
+    return ovEncodingUTF8;
+}
 
 OVCIN::OVCIN(char* fileName)
 {
@@ -21,6 +35,7 @@ OVCIN::OVCIN(char* fileName)
 	ename = getPropertyByName(stringVector, "ename");
 	cname = getPropertyByName(stringVector, "cname");
 	selkey = getPropertyByName(stringVector, "selkey");
+	encoding = getPropertyByName(stringVector, "encoding");	
 	endkey = getPropertyByName(stringVector, "endkey");
 	
 	getMapByName(stringVector, keyMap, "keyname");
@@ -48,6 +63,11 @@ string& OVCIN::getEName()
 	return ename;
 }
 
+string& OVCIN::getEncoding()
+{
+	return encoding;
+}
+
 string& OVCIN::getEndKey()
 {
 	return endkey;
@@ -64,7 +84,7 @@ bool OVCIN::isEndKey(char keyChar)
 
 bool OVCIN::isValidKey(string keyString)
 {
-	if(charMap.count(keyString) > 0)
+	if(keyMap.count(keyString) > 0)
 		return true;
 	else
 		return false;
@@ -95,13 +115,18 @@ string OVCIN::getPropertyByName(vector<string>& inStringVectorRef,
 								 string propertyName)
 {
 	string pattern = "%" + propertyName;
-	int startIndex = pattern.length() + 1;
+	vector<string> delimiters;
+	delimiters.push_back(" ");
+	delimiters.push_back("\t");
 	for(unsigned int i = 0; i < inStringVectorRef.size(); i++)
 	{
 		string currentString = inStringVectorRef[i];
-		if(currentString.find(pattern, 0) == 0)
-			return currentString.substr(startIndex,
-									currentString.length() - startIndex + 1);
+		if(currentString.find(pattern, 0) == 0) {
+			vector<string> tempVectorRef;
+			OVStringToolKit::splitString(currentString, tempVectorRef,
+										 delimiters, false); 
+			return tempVectorRef[1];
+		}
 	}
 	
 	return string("");
@@ -113,10 +138,14 @@ int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 {
 	bool doGet = false;
 	string sectionMark = "begin";
+	vector<string> delimiters;
+	delimiters.push_back(" ");
+	delimiters.push_back("\t");
 	for(unsigned int i = 0; i < inStringVectorRef.size(); i++)
 	{
 		string currentString = inStringVectorRef[i];
-		int foundIndex = currentString.find("%" + mapName, 0);		
+		int foundIndex = currentString.find("%" + mapName, 0);
+		int foundComment = currentString.find("#", 0);
 		if(!doGet) {
 			if(foundIndex == 0) {
 				int foundBegin = currentString.find(sectionMark, foundIndex);
@@ -130,20 +159,25 @@ int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 				int foundEnd = currentString.find(sectionMark, foundIndex);
 				if(foundEnd > -1)	// stop reading pairs
 					break;
-			} else {
+			} else if(foundComment != 0) {
 				vector<string> pairVector;
-				int vectorSize = OVStringToolKit::splitString(currentString,
-															  pairVector, ' ');
+				if(foundComment > 0)
+					currentString = currentString.substr(0, foundComment);
+				int vectorSize =
+					OVStringToolKit::splitString(currentString, pairVector,
+												 delimiters, false);
 				if(vectorSize == 2) {
-					// pairVector[0] is the key,
-					// pairVector[1] is the value.
-					if(outMapRef.find(pairVector[0]) == outMapRef.end()) {
+					string keyString = pairVector[0];
+					string valueString = pairVector[1];
+					transform(keyString.begin(), keyString.end(),
+							  keyString.begin(), (int(*)(int))tolower);
+					if(outMapRef.find(keyString) == outMapRef.end()) {
 						vector<string> currentVector;
-						currentVector.push_back(pairVector[1]);
-						outMapRef.insert(make_pair(pairVector[0],
+						currentVector.push_back(valueString);
+						outMapRef.insert(make_pair(keyString,
 												   currentVector));
 					} else
-						outMapRef[pairVector[0]].push_back(pairVector[1]);
+						outMapRef[keyString].push_back(valueString);
 				}
 			}
 		} // The end of if(!doGet)
@@ -151,4 +185,3 @@ int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 	
 	return outMapRef.size();
 }
-

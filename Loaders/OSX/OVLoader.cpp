@@ -1,9 +1,13 @@
 // OVLoader.cpp
 
-#define OVDEBUG		1		// doesn't seem to work, why?
+// #define OVDEBUG	
 #include <Carbon/Carbon.h>
 #include <dlfcn.h>
+#include <sys/stat.h>
 #include <sys/syslimits.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <pwd.h>
 #include "CIM.h"
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLoadable.h>
@@ -15,6 +19,7 @@
 #include "VXConfig.h"
 #include "VXLoadableIM.h"
 #include "VXUtility.h"
+#include "VXFullWidth.h"
 #include "VXService.h"
 #include "OVAbout.h"
 
@@ -24,6 +29,7 @@ public:
     CIMContext() : ovcontext(NULL), onScreen(0) { add(); }
     ~CIMContext() { remove(); }
     VXTextBar bar;
+    
     OVIMContext *ovcontext;
     int onScreen;
     void add();
@@ -31,11 +37,15 @@ public:
 };
 
 const int vxMaxContext = 256;
-const char *plistfile  = "/Library/OpenVanilla/Development/OVLoader.plist";
-const char *loaddir    = "/Library/OpenVanilla/Development/";
+const char *defaultplistfile  = "/Library/OpenVanilla/0.6.3/OVLoader.plist";
+char userplistfile[PATH_MAX];
+const char *loaddir    = "/Library/OpenVanilla/0.6.3/";
 
-int floatingwindowlock=0, defposx, defposy, textsize=24, conversionfilter=0;
+int floatingwindowlock=0, defposx, defposy, textsize=20, opacity=80, conversionfilter=0, fullwidthfilter=0;
+int fore[3] = {0,0,0};
+int back[3] = {255 * 256 , 255 * 256, 255 * 256};
 int listloaded=0;
+int menuPosFullWidthStart=0, menuPosHanConvertStart=0;
 UInt32 usermenu='USRM';
 
 VXConfig *sysconfig=NULL;
@@ -83,18 +93,53 @@ void LoadEveryDylib() {
 void SetupMenuString(MenuRef mnu, int pos) {
 	VXCFAUTORELEASE;
     CFBundleRef bdl = CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName));
-    CFStringRef str = (CFStringRef)VXSafe
+	CFStringRef str;
+	
+    InsertMenuItemTextWithCFString(mnu, CFSTR("-"), pos++, 0, 0);
+	menuPosFullWidthStart=pos+1;
+		
+    str = (CFStringRef)VXSafe
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Half-width ASCII characters"),NULL,NULL));	
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'FHWC');
+    str = (CFStringRef)VXSafe
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Full-width ASCII characters"),NULL,NULL));	
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'FFWC');
+
+    InsertMenuItemTextWithCFString(mnu, CFSTR("-"), pos++, 0, 0);
+	menuPosHanConvertStart=pos+1;
+	
+    str = (CFStringRef)VXSafe
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Normal Output"),NULL,NULL));	
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'FHCN');
+    str = (CFStringRef)VXSafe
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Traditional to Simplified Chinese"),NULL,NULL));	
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'FHCS');
+    str = (CFStringRef)VXSafe
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Simplified to Traditional Chinese"),NULL,NULL));	
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'FHCT');
+
+
+    InsertMenuItemTextWithCFString(mnu, CFSTR("-"), pos++, 0, 0);
+    str = (CFStringRef)VXSafe
         (CFBundleCopyLocalizedString(bdl,CFSTR("Preferences"),NULL,NULL));	
     InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'PREF');
-    str = (CFStringRef)VXSafe
+    /* str = (CFStringRef)VXSafe
         (CFBundleCopyLocalizedString(bdl,CFSTR("About"),NULL,NULL));
-    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'ABUT');
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'ABUT'); */
+    str = (CFStringRef)VXSafe
+        (CFBundleCopyLocalizedString(bdl,CFSTR("Help"),NULL,NULL));
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'HELP'); 
 }
 
 int SetupMenuList(MenuRef mnu) {
     char locale[256];
     VXGetCurrentLocale(CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName)),
                        locale);
+					   
+	OVDictionary *global=GetGlobalConfig();
+	int keyMask=global->getIntDefault("menuKey", 
+		kMenuOptionModifier | kMenuShiftModifier | kMenuNoCommandModifier);
+
     // for the time being, we use id as menu names
     // (and we initialize everything)
     int i;
@@ -105,11 +150,15 @@ int SetupMenuList(MenuRef mnu) {
         CFStringRef imname=VXCreateCFString(imn, enc);
 		if (!imname) imname=VXCreateCFString(list.impair[i].id);		
         InsertMenuItemTextWithCFString(mnu, imname, i, 0, usermenu+i);
-        SetMenuItemCommandKey(mnu, i+1, FALSE, '1'+i);
-        SetMenuItemModifiers(mnu, i+1, kMenuControlModifier);
+		
+		if (i < 9 && keyMask != -1) {
+			SetMenuItemCommandKey(mnu, i+1, FALSE, '1'+i);
+			SetMenuItemModifiers(mnu, i+1, keyMask);
+		}
         CFRelease(imname);
     }
 
+	delete global;
     return i;
 }
 
@@ -119,10 +168,18 @@ void ClearContextPool() {
 
 void SetupGlobalConfig(OVDictionary *global) {
     floatingwindowlock = global->getIntDefault("floatingWindowLock", 0);
-    textsize = global->getIntDefault("textSize", 24);
+    textsize = global->getIntDefault("textSize", 20);
+    opacity = global->getIntDefault("opacity", 80);
+    fore[0] = 0;
+    fore[1] = 0;
+    fore[2] = 0;
+    back[0] = 255 * 256;
+    back[1] = 255 * 256;
+    back[2] = 255 * 256;
     defposx  = global->getIntDefault("floatingWindowLockPosX", 20);
     defposy  = global->getIntDefault("floatingWindowLockPosY", 760);	
-	conversionfilter=global->getIntDefault("useHanConversionFilter", 0);
+    conversionfilter=global->getIntDefault("useHanConversionFilter", 0);
+    fullwidthfilter=global->getIntDefault("fullWidthCharFilter", 0);
 }
 
 void SwitchToCurrentInputMethod(MenuRef mnu,OVDictionary *global) {
@@ -149,20 +206,63 @@ void SwitchToCurrentInputMethod(MenuRef mnu,OVDictionary *global) {
     }
 }
 
+void CreateUserConfig()
+{	
+	// first we determine if ~/Library/OpenVanilla/0.6.3/ already exists
+	
+	char *ptr;
+    static char userpref[PATH_MAX];
+    
+    if (!(ptr=getenv("HOME")))
+    {
+        struct passwd *pw = getpwuid(getuid());
+        if (pw == NULL) strcpy(userpref, "/tmp");
+        else strcpy(userpref, pw->pw_dir);
+    }
+    else strcpy(userpref, ptr);
+
+    strcat(userpref, "/Library/OpenVanilla") ;
+    mkdir(userpref, S_IRWXU) ;
+    strcat(userpref, "/0.6.3");
+    mkdir(userpref, S_IRWXU) ;
+
+    strcat(userpref, "/OVLoader.plist");
+    sysconfig=new VXConfig(userpref);
+	
+	struct stat filestat;
+	
+	// if ~/Lib/OV/0.6.3/OVLoader.plist does not exist, copy from default
+	if (stat(userpref, &filestat))         // any error
+	{
+		VXConfig def(defaultplistfile);
+		def.read();
+		VXDictionary *userdict=new VXDictionary(def.getDictionaryRoot()->getDictRef(), 1);
+		sysconfig->changeDictionary(userdict);
+		sysconfig->write();
+	}
+
+	strcpy(userplistfile, userpref);
+	murmur ("OVLoader: user preference file at %s", userplistfile);
+}
+
+
 int CIMCustomInitialize(MenuRef mnu)
 {
     murmur ("OVLoader: initializing");
     OVAUTODELETE;
-    sysconfig=new VXConfig(plistfile);
-
+	
+    CreateUserConfig();
     ClearContextPool();
     LoadEveryDylib();
     int pos = SetupMenuList(mnu);
-    InsertMenuItemTextWithCFString(mnu, CFSTR("-"), pos++, 0, 0);
     SetupMenuString(mnu,pos);
     OVDictionary *global=(OVDictionary*)OVSafe(GetGlobalConfig());
     SetupGlobalConfig(global);
     SwitchToCurrentInputMethod(mnu, global);
+	
+    SetItemMark(mnu, menuPosFullWidthStart+fullwidthfilter, checkMark);
+    SetItemMark(mnu, menuPosHanConvertStart+conversionfilter, checkMark);
+	
     sysconfig->write();	
     return 1;
 }
@@ -181,7 +281,7 @@ void *CIMCustomOpen()
 {
     CIMContext *c=new CIMContext;
 
-    c->bar.setFontSize(textsize);
+    c->bar.setFontSize(textsize, opacity, fore, back);
     if (floatingwindowlock) {
         c->bar.unlock();
         c->bar.setPosition(defposx, defposy);
@@ -216,6 +316,7 @@ int RefreshConfig() {
         defposx=global->getInt("floatingWindowLockPosX");
         defposy=global->getInt("floatingWindowLockPosY");
 		conversionfilter=global->getInt("useHanConversionFilter");
+		fullwidthfilter=global->getInt("fullWidthCharFilter");
         
         inputmethod->update(global, local);
 
@@ -226,7 +327,42 @@ int RefreshConfig() {
 
 void RefreshDisplay(CIMContext *c,CIMInputBuffer *buf) {
     OVDictionary *global=GetGlobalConfig();
-    c->bar.setFontSize(global->getInt("textSize"));
+    int forec[3], backc[3];
+    char buffer[80];
+    {
+    if(global->keyExist("forer")){
+	    global->getString("forer", buffer);
+	    forec[0] = (unsigned short)(atof(buffer) * 255 * 256);
+    } else forec[0] = 0;
+
+    if(global->keyExist("foreg")){
+	    global->getString("foreg", buffer);
+	    forec[1] = (unsigned short)(atof(buffer) * 255 * 256);
+    } else forec[1] = 0;
+
+    if(global->keyExist("foreb")){
+	    global->getString("foreb", buffer);
+	    forec[2] = (unsigned short)(atof(buffer) * 255 * 256);
+    } else forec[2] = 0;
+
+    if(global->keyExist("backr")){
+	    global->getString("backr", buffer);
+	    backc[0] = (unsigned short)(atof(buffer) * 255 * 256);
+    } else backc[0] = 255 * 256;
+
+    if(global->keyExist("backg")){
+	    global->getString("backg", buffer);
+	    backc[1] = (unsigned short)(atof(buffer) * 255 * 256);
+    } else backc[1] = 255 * 256;
+
+    if(global->keyExist("backb")){
+	    global->getString("backb", buffer);
+	    backc[2] = (unsigned short)(atof(buffer) * 255 * 256);
+    } else backc[2] = 255 * 256;
+    }
+
+    c->bar.setFontSize(global->getInt("textSize"),
+		    global->getInt("opacity"), forec, backc);
     delete global;
     if (c->onScreen) {
         c->onScreen=0;
@@ -276,7 +412,6 @@ void SetFloatingWindowPosition(CIMContext *c) {
         int newx, newy;
         c->bar.getPosition(&newx, &newy);
         if ((newx != defposx) || (newy != defposy)) {
-            murmur("old: (%d,%d), new: (%d,%d)", defposx, defposy, newx, newy);
             OVDictionary *global=GetGlobalConfig();
             defposx=newx;
             defposy=newy;
@@ -288,6 +423,7 @@ void SetFloatingWindowPosition(CIMContext *c) {
         }
     }
 }
+
 
 int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
 {
@@ -302,6 +438,17 @@ int CIMCustomDeactivate(void *data, CIMInputBuffer *buf)
     SetFloatingWindowPosition(c);
 
     c->ovcontext->deactivate(&srv);
+//  c->ovcontext->clear();
+    
+    return 1;
+}
+
+int CIMCustomSessionFix(void *data, CIMInputBuffer *buf)
+{
+    CIMContext *c=(CIMContext*)data;
+    if (!c->ovcontext) return 0;
+    c->ovcontext->clear();
+    /* if (buf->length()) */ buf->send();
     return 1;
 }
 
@@ -312,20 +459,33 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf,
     CIMContext *c=(CIMContext*)data;    
     if (!c->ovcontext) return 0;
 
-    VXBuffer vxb;
+    VXBuffer vxb;    
     VXKeyCode key;
 
 	vxb.setConversionFilter(conversionfilter);
+	vxb.setFullWidthFilter(fullwidthfilter);
     vxb.bind(buf);
     key.set(charcode, keycode, modifiers);
 
-    murmur("received keycode=%d, buffer position=(%d,%d)\n",
+    murmur("received keycode=%d, buffer position=(%d,%d)",
            charcode, pnt->h, pnt->v);
         
     // textbar pos.y down 5 pt from cursur pos (pnt->v+5) to prevent
     // masking the "composing underline area"
+//    c->otsbar.setPosition(pnt->h, pnt->v+5);
     c->bar.setPosition(pnt->h, pnt->v+5);     
-    return c->ovcontext->keyEvent(&key, &vxb, &c->bar, &srv);
+    
+    if (c->ovcontext->keyEvent(&key, &vxb, &c->bar, &srv)) return 1;
+	 
+	// full-width post filter
+	if (key.isCommand() || key.isOpt() || key.isCtrl()) return 0;
+	if (!key.isPrintable()) return 0;
+	if (!fullwidthfilter) return 0;
+	
+	unsigned short fullwidthc;
+	if ((fullwidthc=VXHalfToFullWidthChar(key.code()))==key.code()) return 0;
+	vxb.append(&fullwidthc, ovEncodingUTF16Auto, 1)->send();
+	return 1;
 }
 
 OVInputMethod* InitInputMethodAtMenuPos(int pos) {
@@ -365,22 +525,68 @@ void SwitchMenuItemMark(MenuRef mnu,int oldp, int newp)
 
 void StartupPreferenceEditor() 
 {
-    char sbuf[512];
-    murmur("launching application to edit %s", plistfile);
-    sprintf (sbuf, "open %s", plistfile);
-    system(sbuf);   
+//  char sbuf[512];
+//  murmur("launching application to edit %s", userplistfile);
+//  sprintf (sbuf, "open %s", userplistfile);
+//  system(sbuf);   
+    system("open /Library/PreferencePanes/OVPrefPane.prefPane");
 }
 
+void ShowHelp() 
+{
+    char sbuf[512];
+    sprintf(sbuf, "open %sov.pdf",  (char*)loaddir);
+    system(sbuf);
+}
+
+void UpdateFilterConfig() {
+    OVDictionary *global=GetGlobalConfig();
+	global->setInt("useHanConversionFilter", conversionfilter);
+	global->setInt("fullWidthCharFilter", fullwidthfilter);
+    delete global;
+	sysconfig->write();
+}
 
 int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu, 
                          CIMInputBuffer *buf)
 {
     switch (command) {
+	case 'FHWC':
+		fullwidthfilter=0;
+		SwitchMenuItemMark(mnu, menuPosFullWidthStart+1, menuPosFullWidthStart);
+		UpdateFilterConfig();
+		return 1;
+	case 'FFWC':
+		fullwidthfilter=1;
+		SwitchMenuItemMark(mnu, menuPosFullWidthStart, menuPosFullWidthStart+1);
+		UpdateFilterConfig();
+		return 1;
+	case 'FHCN':
+		conversionfilter=0;
+		SwitchMenuItemMark(mnu, menuPosHanConvertStart+1, menuPosHanConvertStart);		
+		SwitchMenuItemMark(mnu, menuPosHanConvertStart+2, menuPosHanConvertStart);
+		UpdateFilterConfig();
+		return 1;
+	case 'FHCS':
+		conversionfilter=1;
+		SwitchMenuItemMark(mnu, menuPosHanConvertStart, menuPosHanConvertStart+1);		
+		SwitchMenuItemMark(mnu, menuPosHanConvertStart+2, menuPosHanConvertStart+1);
+		UpdateFilterConfig();
+		return 1;
+	case 'FHCT':
+		conversionfilter=2;
+		SwitchMenuItemMark(mnu, menuPosHanConvertStart, menuPosHanConvertStart+2);		
+		SwitchMenuItemMark(mnu, menuPosHanConvertStart+1, menuPosHanConvertStart+2);
+		UpdateFilterConfig();
+		return 1;		
     case 'PREF':
         StartupPreferenceEditor();
         return 1;
     case 'ABUT':
         ShowAbout();
+        return 1;
+    case 'HELP':
+        ShowHelp();
         return 1;
     }
 

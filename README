@@ -6,6 +6,25 @@ Directory Hierarchy description
              - Platform-dependent Makefile, should have
                "all" "install" and "clean", 3 standard targets.
 
+- clean.sh   - A simple shell script doing global cleaning for you
+               Usage: ./clean.sh
+
+- InputMethod/
+
+- Loaders/
+
+- Experiments/
+
+- Images/
+
+- Documents/
+
+- Mk/
+
+- OVUITest/
+
+- PackageMaking/
+
 - Headers/   - Platform-independent header files
   - OSX/     - OSX-dependent header files
   - Win32/   - Win32-dependent header files

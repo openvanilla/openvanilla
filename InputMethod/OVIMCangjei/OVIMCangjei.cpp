@@ -42,6 +42,13 @@ public:
 		vimInputMethodSimplex=simplex;
 	}
 
+    virtual int deactivate(OVService *srv)
+    {
+        vimCJString.Clean();
+        vimCandidateWindow=0;
+        return 1;
+    }
+    
 	virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
 		OVService *srv);
 
@@ -77,16 +84,20 @@ public:
         if (!simplex)
         {
 	        if (!strcasecmp(locale, "zh_TW"))
-    	        return strlen(strcpy((char*)s, "OpenVanilla 倉頡輸入法"));
-        	else
-            	return strlen(strcpy((char*)s, "OpenVanilla Cangjei IM"));
+    	        return strlen(strcpy((char*)s, "OV 倉頡"));
+        	else if (!strcasecmp(locale, "zh_CN"))
+                return strlen(strcpy((char*)s, "OV 正体仓颉"));
+            else
+            	return strlen(strcpy((char*)s, "OV Cangjei"));
         }
         else
         {
 	        if (!strcasecmp(locale, "zh_TW"))
-    	        return strlen(strcpy((char*)s, "OpenVanilla 簡易輸入法"));
+    	        return strlen(strcpy((char*)s, "OV 簡易"));
+        	else if (!strcasecmp(locale, "zh_CN"))
+                return strlen(strcpy((char*)s, "OV 正体简易"));
         	else
-            	return strlen(strcpy((char*)s, "OpenVanilla Simplex IM"));
+            	return strlen(strcpy((char*)s, "OV Simplex (Jianyi)"));
         }        
     }
 

@@ -1,0 +1,231 @@
+<!-- BEGIN slide -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>目前實作的狀況</title>
+<meta name="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Spork v0.19" />
+<link rel='icon' href='favicon.png' />
+  <link rel="stylesheet" type="text/css" href="" />
+<style type="text/css"><!--
+/* BEGIN index.css */
+hr {
+    color: #202040;
+    height: 0px;
+    border-top: 0px;
+    border-bottom: 3px #202040 ridge;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+a:link {
+    color: #123422;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #123333;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    font-size: 24pt;
+    margin: 6pt;
+}
+
+div p {
+    font-size: 18pt;
+    margin-top: 12pt;
+    margin-bottom: 12pt;
+    margin-left: 6pt;
+    margin-right: 6pt;
+}
+
+small {
+    font-size: 9pt;
+    font-style: italic;
+}
+
+#topbar {
+    background: lightgreen;
+    color: blue;
+    position:absolute;
+    right: 5px;
+    left: 5px;
+    top: 5px;
+    height: 50px;
+}
+
+#bottombar {
+    background: lightgreen;
+    color: blue;
+    position: fixed;
+    right: 5px;
+    left: 5px;
+    bottom: 5px;
+    height: 50px;
+    z-index: 0;
+}
+
+.top_spacer {
+    height: 0px;
+    margin: 0px 0px 0px 0px;
+    padding: 1px 0px 0px 0px;
+}
+
+.spacer {
+    bottom: 5px;
+    height: 50px;
+}
+
+#content {
+    background:#fff;
+    margin-left: 20px;
+    margin-right:20px;
+    margin-top: 80px;
+}
+
+
+#logo {
+    position: fixed;
+    right: 40px;
+    bottom: 51px;
+    width: 130px;
+    height: 150px;
+    z-index:3;
+    background-image: url(/cpan.jpg);
+    background-repeat: no-repeat;
+}
+/* END index.css */
+
+--></style>
+<script type="text/javascript">
+// BEGIN controls.js
+function nextSlide() {
+    window.location = 'slide9h.html#end';
+}
+
+function prevSlide() {
+    window.location = 'slide9f.html#end';
+}
+
+function indexSlide() {
+    window.location = 'index.html';
+}
+
+function startSlide() {
+    window.location = 'start.html';
+}
+
+function closeSlide() {
+    window.close();
+}
+
+function handleKey(e) {
+    var key;
+    if (e == null) {
+        // IE
+        key = event.keyCode
+    } 
+    else {
+        // Mozilla
+        if (e.altKey || e.ctrlKey) {
+            return true
+        }
+        key = e.which
+    }
+    switch(key) {
+        case 8: prevSlide(); break
+        case 13: nextSlide(); break
+        case 32: nextSlide(); break
+        case 81: closeSlide(); break
+        case 105: indexSlide(); break
+        case 110: nextSlide(); break
+        case 112: prevSlide(); break
+        case 115: startSlide(); break
+        default: //xxx(e.which)
+    }
+}
+
+document.onkeypress = handleKey
+// END controls.js
+
+</script>
+</head>
+<body>
+<div id="topbar">
+<table width='100%'>
+<tr>
+<td width="13%">Design of OpenVanilla</td>
+<td align="center" width="73%">
+    <a accesskey="s" href="start.html">OpenVanilla 的設計構想與現況</a>
+</td>
+<td align="right" width="13%">
+    #9
+</td>
+</tr>
+</table>
+</div>
+<!-- END top -->
+
+<div id="content">
+<div class="top_spacer"></div>
+<img name="img" id="img" width="350" src="images/2501144_47694af3ce_d.jpg" align=right>
+<h2>目前實作的狀況</h2>
+<p>
+
+</p>
+<ul>
+<li>OpenVanilla Loader 0.6.3 for OS X 已經完整而穩定</li>
+
+<ul>
+<li>彩色選字窗</li>
+<li>簡繁互轉</li>
+</ul>
+<li>酷音輸入法 for OpenVanilla</li>
+<li>自製的輸入法模組：</li>
+
+<ul>
+<li>注音輸入法</li>
+<li>倉頡輸入法</li>
+<li>&#34;Xcin&#34; 輸入法（使用 .cin 表格，功能模擬 Xcin 框架的模組）</li>
+
+<ul>
+<li>直接讀取 .cin 檔，不透過中間 .tab 檔案</li>
+<li>因此所有 .cin 格式的輸入法都可以進入 OpenVanilla</li>
+<li>目前最大的 .cin 檔：輕鬆輸入法 &#40;4.8M, 40萬詞條&#41;</li>
+</ul></ul></ul>
+<small>continued...</small>
+
+</div>
+<!-- BEGIN bottom -->
+<div id="bottombar">
+<table width="100%">
+<tr>
+<td align="left" valign="middle">
+    <div>
+    <a accesskey='p' href="slide9f.html#end">&lt; &lt; Previous</a> |
+    <a accesskey='i' href="index.html">Index</a> |
+    <a accesskey='n' href="slide9h.html#end">Next &gt;&gt;</a>
+    </div>
+</td>
+<td align="right" valign="middle">
+    Copyright &copy; 2005 Lukhnos
+</td>
+</tr>
+</table>
+</div> 
+<div id="logo"></div>
+<div class="spacer">
+<a name="end"></a>
+</div>
+</body>
+</html>
+
+
+<!-- END slide -->

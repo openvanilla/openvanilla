@@ -23,7 +23,7 @@ public:
     
     virtual int setPosition(int x, int y);
     virtual void getPosition(int *x, int *y);
-	virtual void setFontSize(int s);
+    virtual void setFontSize(int s, int o, int *f, int *b);
 	virtual VXTextBar* lock();
 	virtual VXTextBar* unlock();
 	
@@ -33,6 +33,9 @@ protected:
     CFMutableStringRef text;
     Point pos;
     int fontsize;
+    int opacity;
+    int forecolor[3];
+    int backcolor[3];
         
     int lookupdated;
     int textupdated;

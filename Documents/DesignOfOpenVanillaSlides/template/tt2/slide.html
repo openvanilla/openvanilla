@@ -1,0 +1,12 @@
+<!-- BEGIN slide -->
+[% INCLUDE top.html %]
+<div id="content">
+<div class="top_spacer"></div>
+[% image_html %]
+[% slide_content -%]
+[%- UNLESS last -%]
+<small>continued...</small>
+[% END %]
+</div>
+[% INCLUDE bottom.html %]
+<!-- END slide -->

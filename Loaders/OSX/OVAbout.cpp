@@ -14,6 +14,37 @@ pascal OSStatus AboutWindowEventHandler(EventHandlerCallRef nextHandler, EventRe
 
 int ShowAbout()
 {
+    IBNibRef 		nibRef;
+    WindowRef 		window;
+	CFBundleRef bdl = CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName));
+
+    OSStatus		err;
+	
+	err = CreateNibReferenceWithCFBundle(bdl, CFSTR("OVLoader"), &nibRef);
+    require_noerr( err, CantGetNibRef );
+    
+    // Then create a window. "MainWindow" is the name of the window object. This name is set in 
+    // InterfaceBuilder when the nib is created.
+    err = CreateWindowFromNib(nibRef, CFSTR("AboutWindow"), &window);
+    require_noerr( err, CantCreateWindow );
+
+    // We don't need the nib reference anymore.
+    DisposeNibReference(nibRef);
+    
+    // The window was created hidden so show it.
+    ShowWindow( window );
+    
+CantCreateWindow:
+	fprintf (stderr, "can't create window!\n");
+	return err;
+CantGetNibRef:
+	fprintf (stderr, "can't get nib!\n");
+	return err;
+}
+
+/*
+int ShowAbout()
+{
 	OSStatus err; 
 	ControlRef theLabel;
 	ControlFontStyleRec controlFontStyleStruc;
@@ -42,3 +73,5 @@ int ShowAbout()
 	ShowWindow(about_window); 
 	return err;
 }
+
+*/

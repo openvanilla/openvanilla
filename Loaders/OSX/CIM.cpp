@@ -1,9 +1,7 @@
-
 // CIM.c
 
 #include <Carbon/Carbon.h>
 #include <stdarg.h>
-
 
 #include "CIM.h"
 #include "CIMconst.h"
@@ -166,7 +164,22 @@ ComponentResult CIMSessionDeactivate(CIMSessionHandle hndl)
 			(*hndl)->buffer->bind((*hndl)->instance)))
 				return invalidHandler;
 	#endif
-	
+
+    return noErr;	
+}
+
+ComponentResult CIMSessionFix(CIMSessionHandle hndl)
+{
+    if ((*hndl)->sessionFixLock) return noErr;
+    
+	#ifdef CIMCUSTOM
+		if (!CIMCustomSessionFix((*hndl)->data,
+			(*hndl)->buffer->bind((*hndl)->instance)))
+				return invalidHandler;
+	#else
+        (*hndl)->buffer->bind((*hndl)->instance)->send();
+    #endif
+    
     return noErr;
 }
 
@@ -195,22 +208,22 @@ ComponentResult CIMSessionEvent(CIMSessionHandle hndl, EventRef evnt)
     GetEventParameter(evnt, kEventParamKeyModifiers, typeUInt32, nil,
         sizeof(modifiers), nil, &modifiers);
 
+    (*hndl)->sessionFixLock=1;
+    
 	#ifdef CIMCUSTOM
 		Point p;
 		CIMGetInputPosition(hndl, &p);
 	
-		return CIMCustomHandleInput((*hndl)->data, 
+		int x=CIMCustomHandleInput((*hndl)->data, 
 			(*hndl)->buffer->bind((*hndl)->instance),
 			charcode, keycode, modifiers, &p);
 	#else
-		return CIMHandleInput((*hndl)->buffer->bind((*hndl)->instance),
+		int x=CIMHandleInput((*hndl)->buffer->bind((*hndl)->instance),
 			charcode, keycode, modifiers);
 	#endif
-}
-
-ComponentResult CIMSessionFix(CIMSessionHandle hndl)
-{
-    return (*hndl)->buffer->bind((*hndl)->instance)->send();
+	
+	(*hndl)->sessionFixLock=0;
+	return x;
 }
 
 
@@ -389,7 +402,7 @@ int CIMInputBuffer::put(CFStringRef s)
     int r=1;
     UniChar csbuf[cimIBMaxLen];
 
-    CFRange rng=CFRangeMake(0, l);
+    CFRange rng=CFRangeMake(0, (l > cimIBMaxLen ? cimIBMaxLen : l));
     CFStringGetCharacters(s, rng, csbuf);
     for (int i=0; i<l; i++) if (!(r=put(csbuf[i]))) break;
     return r;

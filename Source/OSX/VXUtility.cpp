@@ -1,6 +1,6 @@
 // VXUtility.cpp
 
-#define OVDEBUG
+// #define OVDEBUG
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVUtility.h>
 #include "VXUtility.h"
@@ -117,6 +117,7 @@ int VXGetCurrentLocale(CFBundleRef bundle, char *str, int maxlen)
 	CFStringRef r=(CFStringRef)CFArrayGetValueAtIndex(pref, 0);
 	if (!r) return deflen;
 		
+	
 	CFStringRef cr=(CFStringRef)
 		VXSafe(CFLocaleCreateCanonicalLocaleIdentifierFromString(NULL, r));	
 	if (!cr) return deflen;

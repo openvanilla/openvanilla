@@ -3,7 +3,6 @@
 #ifndef __OVIMXcin_h
 #define __OVIMXcin_h
 
-//#include <Cocoa/Cocoa.h>                // to be removed after de-Cocoa-ized
 #include <OpenVanilla/OpenVanilla.h>
 #include "OVCIN.h"
 #include "OVKeySequence.h"
@@ -34,8 +33,8 @@ class OVXcinContext : public OVIMContext
 public:
     OVXcinContext(OVIMXcin* p, OVCIN* tab) : parent(p), keyseq(tab), cintab(tab),
         autocomposing(0) {}
-    virtual int activate(OVService *) { return 1; }
-    virtual int deactivate(OVService *) { return 1; }
+    virtual int activate(OVService *);
+    virtual int deactivate(OVService *);
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf,
         OVTextBar *textbar, OVService *srv);
 
@@ -75,7 +74,10 @@ public:
     virtual int isBeep() { return cfgBeep; }
     virtual int isAutoCompose() { return cfgAutoCompose; }
     virtual int isHitMaxAndCompose() { return cfgHitMaxAndCompose; }
+	virtual bool isShiftSelKey() { return doShiftSelKey; };
     
+	virtual OVEncoding getCNameEncoding() { return cnameencoding; };
+
 protected:
     char loadpath[PATH_MAX];
     char cinfile[PATH_MAX];
@@ -89,6 +91,8 @@ protected:
     int cfgBeep;
     int cfgAutoCompose;
     int cfgHitMaxAndCompose;
+	
+	bool doShiftSelKey;
 };
 
 #endif

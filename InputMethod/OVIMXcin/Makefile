@@ -1,11 +1,11 @@
+IMID=OVIMXcin
 
 OBJS=OVCIN.o OVCandidate.o OVFileHandler.o OVIMXcin.o\
      OVStringToolKit.o XcinCinList.o
 
 GOALS=OVIMXcin.dylib 
 
-DATA=array30.cin cj.cin dayi3.cin jtcj_gb.cin jyutping.cin\
-     phonegb2.cin pinyin.cin pinyinbig5.cin simplex.cin
+DATA=cj.cin dayi3.cin iroha.cin ehq.cin
 
 $(GOALS): $(OBJS)
 	$(CPP) -bundle -o $@ $(OBJS)

@@ -16,7 +16,8 @@ public:
 						vector<string>& outStringVectorRef);	
 	static int splitString(string inString,
 						   vector<string>& outStringVectorRef,
-						   char delimiter);	
+						   vector<string> delimiterVector,
+						   bool hasDelimiter);
 };
 
 #endif

@@ -29,7 +29,7 @@ const int cimIBMaxLen=1024;
 class CIMInputBuffer
 {
 public:
-    CIMInputBuffer() { instance=0; lastupdate=0; clear(); }
+    CIMInputBuffer() { clear(); }
     void clear() { len=0; }
     void deletechar(); 
     
@@ -56,9 +56,13 @@ protected:
 struct CIMSessionData
 {
     void init(ComponentInstance inst=nil)
-        { instance=inst; buffer=new CIMInputBuffer; }
+    {
+        sessionFixLock=0;
+        instance=inst; buffer=new CIMInputBuffer; 
+    }
     void kill() { delete buffer; }
     
+    int sessionFixLock;
     ComponentInstance instance;
     CIMInputBuffer *buffer;
     
@@ -75,9 +79,9 @@ void            CIMSessionClose(CIMSessionHandle hndl);
 
 ComponentResult CIMSessionActivate(CIMSessionHandle hndl);
 ComponentResult CIMSessionDeactivate(CIMSessionHandle hndl);
+ComponentResult CIMSessionFix(CIMSessionHandle hndl);
 
 ComponentResult CIMSessionEvent(CIMSessionHandle hndl, EventRef evnt);
-ComponentResult CIMSessionFix(CIMSessionHandle hndl);
 ComponentResult CIMSessionHidePalettes(CIMSessionHandle hndl);
 
 ComponentResult CIMGetInputPosition(CIMSessionHandle hndl, Point *pnt);
@@ -93,6 +97,7 @@ ComponentResult CIMGetInputPosition(CIMSessionHandle hndl, Point *pnt);
 	int CIMCustomClose(void *data);
 	int CIMCustomActivate(void *data, CIMInputBuffer *buf);
 	int CIMCustomDeactivate(void *data, CIMInputBuffer *buf);
+	int CIMCustomSessionFix(void *data, CIMInputBuffer *buf);
 	int CIMCustomHandleInput(void *data, CIMInputBuffer *buf, 
         unsigned char charcode, UInt32 keycode, 
         UInt32 modifiers, Point *pnt);

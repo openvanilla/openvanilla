@@ -1,6 +1,4 @@
-# An IM makefile defines OBJS and GOALS, and the direct rule
-# to build GOALS from your OBJS. Other rules are deal in ov.*.mk
-
+IMID=OVIMezbasic
 OBJS=OVIMezbasic.o ineval.o
 GOALS=OVIMezbasic.dylib
 

@@ -9,15 +9,14 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
-//#include "OVCIN.h"
+#include "OVCIN.h"
 #include "XcinCinList.h"
 
 const int vxPreparseSuppress=100;   // max. lines to be read for preparser
 
-char selectfilter[PATH_MAX];
-    
 int file_select(struct dirent *entry)
 {
+    char *selectfilter = ".cin";
     int p=strlen(entry->d_name)-strlen(selectfilter);
     if (p<0) return 0;
     if (!strcmp(entry->d_name+p, selectfilter)) return 1; 
@@ -26,24 +25,19 @@ int file_select(struct dirent *entry)
 
 void CinList::load(char *libpath)
 {
-	struct dirent **files;
-    char searchpath[PATH_MAX];
+    struct dirent **files;
+    strcpy(cinpath, libpath);
+    int l=strlen(cinpath);
+    if (l) if (cinpath[l-1]=='/') cinpath[l-1]=0;
+    strcat(cinpath, "/OVIMXcin");
 
-    strcpy(selectfilter, ".cin");
-
-    strcpy(searchpath, libpath);
-    int l=strlen(searchpath);
-    if (l) if (searchpath[l-1]=='/') searchpath[l-1]=0;
-
-    strcpy(cinpath, searchpath);
-
-    int count=scandir(searchpath, &files, file_select, alphasort); 
+    int count=scandir(cinpath, &files, file_select, alphasort); 
     if (count<=0) return;
     
     for (int i=0; i<count; i++)
     {
         if (index<vxMaxCINFiles)
-            if (preparse(searchpath, files[i]->d_name, index)) index++;
+            if (preparse(cinpath, files[i]->d_name, index)) index++;
         free(files[i]);
     }
     free(files);
@@ -76,7 +70,8 @@ int CinList::preparse(char *loadpath, char *fname, int i)
         sscanf(buf, "%s %s", key, value);
 
         if (!strcasecmp(key, "%ename")) strcpy(list[i].ename, value);
-        if (!strcasecmp(key, "%encoding")) list[i].encoding=ovEncodingUTF8;
+        if (!strcasecmp(key, "%encoding"))
+			list[i].encoding = OVEncodingMapper(value);
         if (!strcasecmp(key, "%cname")) strcpy(list[i].cname, value);
         
         line++;

@@ -1,4 +1,5 @@
 #include "OVStringToolKit.h"
+#include <iostream>
 
 using namespace std;
 
@@ -9,24 +10,37 @@ OVStringToolKit::~OVStringToolKit() {}
 int OVStringToolKit::getLines(string inString,
 							  vector<string>& outStringVectorRef)
 {
-	return splitString(inString, outStringVectorRef, '\n');
+	vector<string> delimiters;
+	delimiters.push_back("\n");
+	return splitString(inString, outStringVectorRef, delimiters, false);
 }
 
 int OVStringToolKit::splitString(string inString,
 								 vector<string>& outStringVectorRef,
-								 char delimiter)
+								 vector<string> delimiterVector,
+								 bool hasDelimiter)
 {
 	///* string::find()
 	int previousPosition = 0, currentPosition = 0;
 	string currentSubString;
+	string matchedDelimiter;
 	while(currentPosition > -1)
 	{
-		currentPosition = inString.find(delimiter, previousPosition);
+		for(unsigned int i = 0; i < delimiterVector.size(); i++)
+		{
+			currentPosition =
+				inString.find(delimiterVector[i], previousPosition);
+			if(currentPosition > -1) {
+				matchedDelimiter = delimiterVector[i];
+				break;
+			}
+		}
+		
 		if(currentPosition > -1) {
 			currentSubString =
 				inString.substr(previousPosition,
 								currentPosition - previousPosition);
-				
+
 			previousPosition = currentPosition + 1;
 		} else
 			currentSubString =
@@ -34,7 +48,11 @@ int OVStringToolKit::splitString(string inString,
 								inString.length() - previousPosition + 1);
 
 		if(currentSubString.length() > 0) {
-			outStringVectorRef.push_back(currentSubString);
+			if(currentSubString == matchedDelimiter && hasDelimiter)
+				outStringVectorRef.push_back(matchedDelimiter);
+			else
+				outStringVectorRef.push_back(currentSubString);
+
 			currentSubString.clear();
 		}
 	}

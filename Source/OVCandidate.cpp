@@ -16,10 +16,7 @@ void OVCandidate::prepare(vector<string>* l, char* skey, OVTextBar *textbar)
     pos=0;
 	list = l;	
     count=list->size();
-    
-    cerr << "prepare, selkey=" << selkey << ", perpage=" << perpage <<
-		", pos=" << pos << ", count=" << count << endl;
-    
+        
     update(textbar);
     textbar->show();
 }
@@ -71,10 +68,6 @@ bool OVCandidate::select(char inKey, string& outStringRef)
 	{
         if (selkey[i]==inKey && (pos+i < count)) {
             onduty=0;
-			cerr << "list address=" << list << endl;
-			cerr << "pos=" << pos << endl;
-			cerr << "i=" << i << endl;
-			cerr << "list->size()=" << list->size() << endl;
             outStringRef = list->at(pos+i);
 			return true;
         }

@@ -3,11 +3,15 @@
 #ifndef __OVCIN_h
 #define __OVCIN_h
 
+#include <OpenVanilla/OpenVanilla.h>
+
 #include <string>
 #include <vector>
 #include <map>
 
 using namespace std;
+
+OVEncoding OVEncodingMapper(const char *s);
 
 class OVCIN
 {
@@ -27,6 +31,8 @@ public:
 	string& getEName();
 	
 	string& getEndKey();
+	
+	string& getEncoding();
 	
 	// VXCIN::isEndKey()
 	bool isEndKey(char keyChar);
@@ -56,7 +62,8 @@ private:
     string ename;
     string cname;
 	string endkey;
-
+	string encoding;
+	
 	map<string, vector<string> > keyMap;
 	map<string, vector<string> > charMap;
 };

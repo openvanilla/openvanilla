@@ -1,4 +1,8 @@
-"Preferences" = "偏好設定...";
-"About" = "關於OpenVanilla載入器";
-"AboutText" = "OpenVanilla輸入法載入器 0.6版 (OS X)\n\nCopyright (C) 2004 by Lukhnos D. Liu, Kang-Ming Liu, Weizhong Yang, and Pek-tiong Tan\n\nhttp://www.openvanilla.org\n\n本軟體使用Artistic License釋出，詳細的使用及授權條款，請參閱該授權原文。";
-
+"Preferences" = "偏好設定⋯";
+"About" = "關於 OpenVanilla 載入器";
+"Normal Output" = "正常輸出";
+"Traditional to Simplified Chinese" = "打繁出簡";
+"Simplified to Traditional Chinese" = "打簡出繁";
+"Half-width ASCII characters" = "半形英數字";
+"Full-width ASCII characters" = "全形英數字";
+"Help" = "輔助說明";

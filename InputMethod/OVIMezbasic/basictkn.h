@@ -56,6 +56,7 @@ const BToken    BTkeyword = TKkeyword,
                     BTexp       = BTkeyword + 0x84,
                     BTsin       = BTkeyword + 0x85,
                     BTcos       = BTkeyword + 0x86,
+                    BTsystem    = BTkeyword + 0x87,
                     BTendstat   = BTkeyword + 0xff;
 
 
@@ -79,7 +80,7 @@ static KeywordTbl ktbl[] =
     {"MID", BTmid},         {"MID$", BTmid},        {"RIGHT", BTright},
     {"RIGHT$", BTright},    {"LEFT", BTleft},       {"LEFT$", BTleft},
     {"LOG", BTlog},         {"EXP", BTexp},         {"SIN", BTsin},
-    {"COS", BTcos},
+    {"COS", BTcos},         {"SYSTEM", BTsystem},
     {"", BTnull}
 };
 

@@ -1,0 +1,93 @@
+/* BEGIN index.css */
+hr {
+    color: #202040;
+    height: 0px;
+    border-top: 0px;
+    border-bottom: 3px #202040 ridge;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+a:link {
+    color: #123422;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #123333;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    font-size: 24pt;
+    margin: 6pt;
+}
+
+div p {
+    font-size: 18pt;
+    margin-top: 12pt;
+    margin-bottom: 12pt;
+    margin-left: 6pt;
+    margin-right: 6pt;
+}
+
+small {
+    font-size: 9pt;
+    font-style: italic;
+}
+
+#topbar {
+    background: [% banner_bgcolor %];
+    color: blue;
+    position:absolute;
+    right: 5px;
+    left: 5px;
+    top: 5px;
+    height: 50px;
+}
+
+#bottombar {
+    background: [% banner_bgcolor %];
+    color: blue;
+    position: fixed;
+    right: 5px;
+    left: 5px;
+    bottom: 5px;
+    height: 50px;
+    z-index: 0;
+}
+
+.top_spacer {
+    height: 0px;
+    margin: 0px 0px 0px 0px;
+    padding: 1px 0px 0px 0px;
+}
+
+.spacer {
+    bottom: 5px;
+    height: 50px;
+}
+
+#content {
+    background:#fff;
+    margin-left: 20px;
+    margin-right:20px;
+    margin-top: 80px;
+}
+
+
+#logo {
+    position: fixed;
+    right: 40px;
+    bottom: 51px;
+    width: 130px;
+    height: 150px;
+    z-index:3;
+    background-image: url([% images_directory %]/[% logo_image %]);
+    background-repeat: no-repeat;
+}
+/* END index.css */

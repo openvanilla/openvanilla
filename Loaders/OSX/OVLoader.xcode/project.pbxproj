@@ -27,9 +27,11 @@
 			children = (
 				6A2415C3075C284D00A155A6,
 				6A2415C7075C286300A155A6,
+				6A4CA908077A470F001E465F,
 			);
 			isa = PBXVariantGroup;
 			name = InfoPlist.strings;
+			path = "";
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -51,9 +53,11 @@
 			children = (
 				6A2415BA075C283800A155A6,
 				6A2415CA075C286D00A155A6,
+				6A4CA909077A4722001E465F,
 			);
 			isa = PBXVariantGroup;
 			name = Localizable.strings;
+			path = "";
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -241,6 +245,70 @@
 			settings = {
 			};
 		};
+		6A4CA908077A470F001E465F = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = zh_CN;
+			path = zh_CN.lproj/InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A4CA909077A4722001E465F = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = zh_CN;
+			path = zh_CN.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A4CA90A077A4761001E465F = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = zh_CN;
+			path = zh_CN.lproj/OVLoader.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A52846B07780356006DC3AF = {
+			children = (
+				6AA802A207781340002FF0E1,
+				6AD0EAE0075AFC6A005045FE,
+				6A2415C8075C286900A155A6,
+				6A2415C5075C285F00A155A6,
+			);
+			isa = PBXGroup;
+			name = Resources;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A601B97076D6E2000B9CE0D = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			path = VXFullWidth.cpp;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A601B98076D6E2000B9CE0D = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = VXFullWidth.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A601B99076D6E2000B9CE0D = {
+			fileRef = 6A601B97076D6E2000B9CE0D;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A601B9A076D6E2000B9CE0D = {
+			fileRef = 6A601B98076D6E2000B9CE0D;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		6A7D13120765A7B100726228 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -257,6 +325,7 @@
 		};
 		6A8BE8C307544DB1002FBA64 = {
 			children = (
+				6A52846B07780356006DC3AF,
 				6A8BE99207544E75002FBA64,
 				6A8BE99107544E6B002FBA64,
 				6A8BE8D907544E1F002FBA64,
@@ -298,6 +367,7 @@
 				French,
 				German,
 				zh_TW,
+				zh_CN,
 			);
 			mainGroup = 6A8BE8C307544DB1002FBA64;
 			productRefGroup = 6A8BE8D007544DC3002FBA64;
@@ -311,6 +381,7 @@
 			files = (
 				6A2415C9075C286900A155A6,
 				6A2415C6075C285F00A155A6,
+				6AA802A407781340002FF0E1,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,6 +399,7 @@
 				6A4C59990765A06F009458DD,
 				6A4C599A0765A06F009458DD,
 				6A7D13130765A7B100726228,
+				6A601B99076D6E2000B9CE0D,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,6 +433,7 @@
 				OTHER_LDFLAGS = "-framework Carbon";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = OVLoader;
+				REZ_PREPROCESSOR_DEFINITIONS = OVDEBUG;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
 			};
@@ -427,6 +500,7 @@
 				6A241658075C362400A155A6,
 				6A972ED907613CB800619716,
 				6AD3FA4D0765A0CF00C53DC9,
+				6A601B9A076D6E2000B9CE0D,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,6 +515,8 @@
 		};
 		6A8BE8D807544E15002FBA64 = {
 			children = (
+				6A601B97076D6E2000B9CE0D,
+				6A601B98076D6E2000B9CE0D,
 				6A7D13120765A7B100726228,
 				6AD3FA4C0765A0CF00C53DC9,
 				6A4C59970765A06F009458DD,
@@ -516,10 +592,7 @@
 			children = (
 				6A241659075C362F00A155A6,
 				6A241657075C362400A155A6,
-				6A2415C5075C285F00A155A6,
-				6A2415C8075C286900A155A6,
 				6AD0EADF075AFC6A005045FE,
-				6AD0EAE0075AFC6A005045FE,
 			);
 			isa = PBXGroup;
 			name = OVLoader;
@@ -623,6 +696,40 @@
 			isa = PBXBuildFile;
 			settings = {
 			};
+		};
+		6AA802A207781340002FF0E1 = {
+			children = (
+				6AA802A307781340002FF0E1,
+				6AA802A50778134A002FF0E1,
+				6A4CA90A077A4761001E465F,
+			);
+			isa = PBXVariantGroup;
+			name = OVLoader.nib;
+			path = "";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AA802A307781340002FF0E1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = English;
+			path = English.lproj/OVLoader.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AA802A407781340002FF0E1 = {
+			fileRef = 6AA802A207781340002FF0E1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA802A50778134A002FF0E1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = zh_TW;
+			path = zh_TW.lproj/OVLoader.nib;
+			refType = 4;
+			sourceTree = "<group>";
 		};
 		6AD0EADF075AFC6A005045FE = {
 			fileEncoding = 4;

@@ -7,6 +7,7 @@
 #include <OpenVanilla/OpenVanilla.h>
 #include "VXUtility.h"
 #include "VXHanConvert.h"
+#include "VXFullWidth.h"
 
 class VXCIMBufferFilter : public CIMInputBuffer
 {
@@ -28,15 +29,28 @@ public:
 			if (c) buffer[i]=c;
 		}
 	}
+	
+	void halfToFullWidthChar()
+	{
+		for (int i=0; i<len; i++)
+		{
+            unsigned short c=buffer[i];
+            if (c > 0x80) continue;
+            char halfw=c;
+            if ((c = VXHalfToFullWidthChar(halfw)) == halfw) continue;
+            buffer[i]=c;
+		}
+    }	
 };
 
 
 class VXBuffer : public OVBuffer
 {
 public:
-    VXBuffer() : cimbuf(NULL), conversionfilter(0) {}
+    VXBuffer() : cimbuf(NULL), conversionfilter(0), fullwidthfilter(0) {}
     
 	virtual void setConversionFilter(int f) { conversionfilter=f; }
+    virtual void setFullWidthFilter(int f) { fullwidthfilter=f; }
 	
     virtual OVBuffer* clear()
         { if (cimbuf) cimbuf->clear(); return this; }
@@ -55,6 +69,12 @@ public:
 					case 2: f->simpChineseToTradChinese(); break;
 				}
 			}
+
+            if (fullwidthfilter)
+            {
+				VXCIMBufferFilter *f=(VXCIMBufferFilter*)cimbuf;
+                f->halfToFullWidthChar();
+            }              
 			
             cimbuf->update(TRUE, -1, -1, -1, lookupscript(lang), 
                 lookuplang(lang)); 
@@ -86,6 +106,7 @@ public:
 protected:
     CIMInputBuffer *cimbuf;
     int conversionfilter;
+    int fullwidthfilter;
 
     ScriptCode lookupscript(OVLanguage lang)
     {
@@ -93,7 +114,6 @@ protected:
 		if (lang & 0xf0000000)
 		{
 			int c=(lang & 0x0fff0000) >> 16;
-			fprintf (stderr, "script code=%d\n", c);
 			return c;
 		}
 		
@@ -113,7 +133,6 @@ protected:
 		if (lang & 0xf0000000)
 		{
 			int c=lang & 0xffff;
-			fprintf (stderr, "language code=%d\n", c);
 			return c;
 		}
 
@@ -127,5 +146,31 @@ protected:
         return langEnglish;
     }
 };
+
+
+// trying
+class OTSBuffer : public VXBuffer
+{
+public:
+    OTSBuffer(OVTextBar *tb) : textbar(tb) {}
+
+    virtual OTSBuffer* clear()
+    {
+        textbar->clear();
+        return VXBuffer::clear();
+    }
+
+    virtual OVBuffer* append (void *s, OVEncoding e=ovEncodingUTF8, int l=0)
+    {
+        textbar->append(s, e, l)->append("@");
+        return VXBuffer::append(s, e, l);
+    }
+
+
+protected:
+    OVTextBar *textbar;
+};
+
+
 
 #endif

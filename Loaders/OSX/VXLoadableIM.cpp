@@ -1,5 +1,6 @@
 // VXLoadableIM.cpp
 
+// #define OVDEBUG
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVUtility.h>
 #include <sys/param.h>
@@ -53,7 +54,7 @@ void VXLoadableLibrary::load(char *libpath, char *workpath)
     
     if (version < ovVersion)
     {
-    	murmur ("Current OV version=%08x, library too old, loading aborted");
+    	murmur ("Current OV version=%08x, library too old, loading aborted", ovVersion);
     	throw vxExceptionCannotLoad;
     	return;
     }
