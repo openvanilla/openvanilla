@@ -1,4 +1,4 @@
-IM=OVIMCangjei OVIMDayi OVIMExample OVIMHakka OVIMPOJ OVIMPhonetic
+IM=OVIMCangjei OVIMPOJ OVIMPhonetic OVIMXcin
 
 all:
 	for i in $(IM) ; do make -C $$i all ;done
