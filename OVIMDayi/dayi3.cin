@@ -6,7 +6,7 @@
 %gen_inp
 %ename dayi3
 %cname 大易
-%selkey '[]-\67890
+%selkey '[]-\6789
 %keyname begin
 ,   力
 .   點
@@ -48,20 +48,8 @@ W   山
 X   水
 Y   火
 Z   心
-=   符
 %keyname end
 %chardef begin
-=   。
-=   ，
-=   「
-=   」
-=   ！
-=   、
-=   ？
-=   『
-=   』
-=   （
-=   ）
 ,   力
 .   方
 /   竹
@@ -124,6 +112,7 @@ C   鹿
 C   气
 C   虍
 D   曰
+E   彳
 F   士
 F   丰
 H   戶
