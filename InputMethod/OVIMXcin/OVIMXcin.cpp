@@ -121,7 +121,6 @@ int OVIMXcin::initialize(OVDictionary* global, OVDictionary* local, OVService*, 
 //  if (!local->keyExist(encoding)) local->setString(encoding, "big5");
 
     update(global, local);  // run-time configurable settings    
-    int selkeyshift=local->getInt(sk);
     local->getString(encoding, buf);
     //enc=VXEncodingMapper(buf);
 	enc = ovEncodingUTF8;
@@ -379,7 +378,7 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     
     string *output = new string;
     
-    if (output=candi.select(c))
+    if ((output=candi.select(c)))
     {
         buf->clear()->append((void*)output)->send();
         candi.cancel();

@@ -96,7 +96,7 @@ string OVCIN::getPropertyByName(vector<string>& inStringVectorRef,
 {
 	string pattern = "%" + propertyName;
 	int startIndex = pattern.length() + 1;
-	for(int i = 0; i < inStringVectorRef.size(); i++)
+	for(unsigned int i = 0; i < inStringVectorRef.size(); i++)
 	{
 		string currentString = inStringVectorRef[i];
 		if(currentString.find(pattern, 0) == 0)
@@ -113,7 +113,7 @@ int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 {
 	bool doGet = false;
 	string sectionMark = "begin";
-	for(int i = 0; i < inStringVectorRef.size(); i++)
+	for(unsigned int i = 0; i < inStringVectorRef.size(); i++)
 	{
 		string currentString = inStringVectorRef[i];
 		int foundIndex = currentString.find("%" + mapName, 0);		
@@ -152,46 +152,3 @@ int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 	return outMapRef.size();
 }
 
-int main(int argc, char**argv)
-{
-    OVCIN ovcin(argv[1]);
-	
-	cout << "ename:\t" << ovcin.getEName() << endl;
-	cout << "cname:\t" << ovcin.getCName() << endl;
-	cout << "selkey:\t" << ovcin.getSelKey() << endl;
-	cout << "endkey:\t" << ovcin.getEndKey() << endl;
-	
-	char keyChar;
-	cout << "Is an end key or not:";
-	cin >> keyChar;
-	if(ovcin.isEndKey(keyChar))
-		cout << "Yes." << endl;
-	else
-		cout << "No." << endl;
-		
-	string inKey;
-	cout << "Get character(s) by a keystroke:";
-	cin >> inKey;
-	vector<string> charVector;
-	int charVectorSize = ovcin.getCharVectorByKey(inKey, charVector);
-	if(charVectorSize > 0)
-		for(int i = 0; i < charVectorSize; i++)
-			cout << inKey << "->" << charVector[i] << endl;
-	else
-		cout << "Not found." << endl;
-	inKey.clear();
-
-	string inChar;
-	cout << "Get word(s) by a character:";
-	cin >> inChar;
-	vector<string> wordVector;
-	int wordVectorSize = ovcin.getWordVectorByChar(inChar, wordVector);
-	if(wordVectorSize > 0)
-		for(int j = 0; j < wordVectorSize; j++)
-			cout << inChar << "->" << wordVector[j] << endl;
-	else
-		cout << "Not found." << endl;
-	inChar.clear();
-	
-	return 0;
-}
