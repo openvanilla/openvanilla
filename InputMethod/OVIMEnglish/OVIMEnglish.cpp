@@ -10,41 +10,22 @@ class OVEnglishIM;
 class OVEnglishContext : public OVIMContext
 {
 public:
-    OVEnglishContext(OVEnglishIM *p)
-    {
-        parent=p;
-    }
-    
-    virtual ~OVEnglishContext()
-    {
-    }
-    
-    virtual int activate(OVService *)
-    {
-        return 1;
-    }
-    
-    virtual int deactivate(OVService *)
-    {
-        return 1;
-    }
-    
+    OVEnglishContext(OVEnglishIM *p) { parent=p; }
+    virtual ~OVEnglishContext() {}
+    virtual int activate(OVService *) { return 1; }
+    virtual int deactivate(OVService *) { return 1; }
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         OVService *srv)
     {
-	if (key->isOpt() || key->isCommand() || key->isCtrl())
-	{
-	    buf->clear()->update();
-	    return 0;
-	}
+        if (key->isOpt() || key->isCommand() || key->isCtrl())
+    	{
+	       buf->clear()->update();
+	       return 0;
+        }
         
         if (key->isPrintable())
         {
-            char str[2];
-            str[1]=0;
-            str[0]=key->code();
-            buf->append(str)->update();
-	    buf->send();
+            buf->appendChar(key->code())->send();
             return 1;   // key processed
         }
         
@@ -58,14 +39,8 @@ protected:
 class OVEnglishIM : public OVInputMethod
 {
 public:
-    OVEnglishIM()
-    {
-    }
-    
-    virtual ~OVEnglishIM()
-    {
-    }
-        
+    OVEnglishIM() {}
+    virtual ~OVEnglishIM() {}
     virtual int identifier(char* s)
     {
         return strlen(strcpy(s, "OVEnglishIM"));
