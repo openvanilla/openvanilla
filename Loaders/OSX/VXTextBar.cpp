@@ -21,20 +21,22 @@ VXTextBar::VXTextBar(int fsize) : fontsize(fsize)
     SetRect(&windowrect, 100, 100, 200, 40);
     // windowrect=labelrect;
         
-    /* if (CreateNewWindow(kUtilityWindowClass, 
+    if (CreateNewWindow(kUtilityWindowClass, 
         kWindowStandardHandlerAttribute | kWindowMetalAttribute |   
-        kWindowSideTitlebarAttribute, &windowrect, &window) != noErr) */
-    if (CreateNewWindow(kHelpWindowClass, 
-        kWindowStandardHandlerAttribute, &windowrect, &window) != noErr)
+        kWindowSideTitlebarAttribute, &windowrect, &window) != noErr)
+/*  if (CreateNewWindow(kHelpWindowClass, 
+        kWindowStandardHandlerAttribute, &windowrect, &window) != noErr) */
     {
         return;     // should throw exception
     }
 
     ControlFontStyleRec fontstyle;
-    fontstyle.flags = kControlUseSizeMask | kControlUseBackColorMask | kControlUseForeColorMask;
+    fontstyle.flags = kControlUseSizeMask;
+    /* | kControlUseBackColorMask | kControlUseForeColorMask; */
+    
     fontstyle.size = fontsize;
     // It's the way to set background color; however, it seems it doesn't work.
-    RGBColor color;
+/*    RGBColor color;
     color.red = 0x00 * 256;
     color.green = 0x00 * 256;
     color.blue = 0x00 * 256;
@@ -42,10 +44,10 @@ VXTextBar::VXTextBar(int fsize) : fontsize(fsize)
     color.red = 0xFF * 256;
     color.green = 0xFF * 256;
     color.blue = 0xFF * 256;
-    fontstyle.foreColor=color;
+    fontstyle.foreColor=color; */
 
     CreateStaticTextControl(window, &labelrect, text, &fontstyle, &label);
-    SetWindowAlpha(window, 0.7); //zonble
+//  SetWindowAlpha(window, 0.7); //zonble
     MoveWindow(window, windowrect.left, windowrect.top, true);
 
 }
@@ -140,8 +142,9 @@ void VXTextBar::setFontSize(int s)
 	lookupdated=1;
 	
 	ControlFontStyleRec fontstyle;
-	fontstyle.flags = kControlUseSizeMask | kControlUseBackColorMask | kControlUseForeColorMask;
-	RGBColor color;
+	fontstyle.flags = kControlUseSizeMask;
+	/*  | kControlUseBackColorMask | kControlUseForeColorMask; */
+/*	RGBColor color;
 	color.red = 0x00 * 256;
 	color.green = 0x00 * 256;
 	color.blue = 0x00 * 256;
@@ -149,7 +152,7 @@ void VXTextBar::setFontSize(int s)
 	color.red = 0xFF * 256;
 	color.green = 0xFF * 256;
 	color.blue = 0xFF * 256;
-	fontstyle.foreColor=color;
+	fontstyle.foreColor=color; */
 	fontstyle.size=s;
 	SetControlData(label, kControlEntireControl, 
 			kControlFontStyleTag, sizeof(ControlFontStyleRec), 
