@@ -37,7 +37,7 @@ public:
         
 protected:
     int p;
-    OVObject pool[ovMaxPoolSize];
+    OVObject *pool[ovMaxPoolSize];
 };
 
 #endif /* _OVUTILITY_H */
