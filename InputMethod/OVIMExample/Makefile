@@ -1,24 +1,19 @@
 OBJS=OVIMExample.o
 GOALS=OVIMExample.dylib
 INST_PATH=/Library/OpenVanilla/Development
-CONF_PATH=$(INST_PATH)/OVXSimpleLoader.config
 
 all: $(GOALS)
 
 $(GOALS): $(OBJS)
-	g++ -o $@ -bundle $<
+	g++ -O2 -o $@ -bundle $<
 
-install: $(GOALS) generate-config
+install: $(GOALS)
 	mkdir -p $(INST_PATH)
 	cp $(GOALS) $(INST_PATH)
 
-generate-config:
-	echo "# This loads $(GOALS)" >  $(CONF_PATH)
-	echo $(INST_PATH)/$(GOALS)   >> $(CONF_PATH)
-
 clean:
-	rm $(GOALS)
+	rm -f $(GOALS)
 
 %.o: %.cpp
-	gcc -c $<
+	gcc -O2 -c $<
 	

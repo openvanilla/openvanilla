@@ -1,7 +1,6 @@
 OBJS=OVIMPOJ.o VXCIN.o VXUtility.o
 GOALS=OVIMPOJ.dylib 
 INST_PATH=/Library/OpenVanilla/Development
-CONF_PATH=$(INST_PATH)/OVXSimpleLoader.config
 
 all: $(GOALS)
 
@@ -12,8 +11,6 @@ install:
 	mkdir -p $(INST_PATH)
 	cp $(GOALS) $(INST_PATH)
 	cp poj.cin $(INST_PATH)
-	echo "# This loads $(GOALS)" >  $(CONF_PATH)
-	echo $(INST_PATH)/$(GOALS)   >> $(CONF_PATH)
 
 VXCIN.o: ../../Source/OSX/VXCIN.mm
 	gcc -I../../Loaders/OSX -o VXCIN.o -c $<
@@ -25,7 +22,7 @@ clean:
 	rm $(GOALS)
 
 %.o: %.cpp
-	gcc -c $<
+	gcc -O2 -c $<
 
 %.o: %.mm
-	gcc -c -I../../Source/OSX/ -I../../Loaders/OSX $<
+	gcc -O2 -c -I../../Source/OSX/ -I../../Loaders/OSX $<
