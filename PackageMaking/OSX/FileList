@@ -25,7 +25,6 @@
 /Library/Components/OVLoader.bundle/Contents/Resources/zh_TW.lproj
 /Library/Components/OVLoader.bundle/Contents/Resources/zh_TW.lproj/InfoPlist.strings
 /Library/Components/OVLoader.bundle/Contents/Resources/zh_TW.lproj/Localizable.strings
-/Library/Components/OVLoader.bundle/OVLoader.bundle
 /Library/OpenVanilla
 /Library/OpenVanilla/0.6.1/OVIMArray
 /Library/OpenVanilla/0.6.1/OVIMArray/array30.cin
@@ -33,7 +32,6 @@
 /Library/OpenVanilla/0.6.1/OVIMCangjei
 /Library/OpenVanilla/0.6.1/OVIMCangjei.dylib
 /Library/OpenVanilla/0.6.1/OVIMChewing
-/Library/OpenVanilla/0.6.1/OVIMChewing/.DS_Store
 /Library/OpenVanilla/0.6.1/OVIMChewing/ch_index.dat
 /Library/OpenVanilla/0.6.1/OVIMChewing/dict.dat
 /Library/OpenVanilla/0.6.1/OVIMChewing/fonetree.dat
@@ -61,3 +59,21 @@
 /Library/OpenVanilla/0.6.1/OVIMezbasic
 /Library/OpenVanilla/0.6.1/OVIMezbasic.dylib
 /Library/OpenVanilla/0.6.1/OVLoader.plist
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Info.plist
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/MacOS
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/MacOS/OVPrefPane
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources/English.lproj
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources/English.lproj/InfoPlist.strings
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources/English.lproj/OVPrefPane.nib
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources/English.lproj/OVPrefPane.nib/classes.nib
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources/English.lproj/OVPrefPane.nib/info.nib
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources/English.lproj/OVPrefPane.nib/keyedobjects.nib
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources/openvanilla.icns
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources/zh_TW.lproj
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources/zh_TW.lproj/InfoPlist.strings
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources/zh_TW.lproj/OVPrefPane.nib
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources/zh_TW.lproj/OVPrefPane.nib/classes.nib
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources/zh_TW.lproj/OVPrefPane.nib/info.nib
+/Library/PreferencePanes/OVPrefPane.prefPane/Contents/Resources/zh_TW.lproj/OVPrefPane.nib/keyedobjects.nib
