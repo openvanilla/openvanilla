@@ -83,7 +83,7 @@ int CIMCustomInitialize(MenuRef mnu)
 	// load every .dylib; this is to prevent a strange "load twice" bug in iTerm
 	if (!listloaded)
 	{
-		list.addglob(loaddir, ".dylib");
+		list.addglob((char*)loaddir,(char*)".dylib");
 		listloaded=1;
 	}
 	
@@ -110,7 +110,7 @@ int CIMCustomInitialize(MenuRef mnu)
 		char id[256];
 		list.impair[i].im->identifier(id);
 		OVDictionary *local=GetLocalConfig(id);
-		list.impair[i].im->initialize(global, local, &srv, loaddir);
+		list.impair[i].im->initialize(global, local, &srv, (char*)loaddir);
 		delete local;
 	}
 	
@@ -263,7 +263,7 @@ int CIMCustomActivate(void *data, CIMInputBuffer *buf)
 		c->bar.clear();
 		c->bar.show();
 		c->bar.lock();
-		c->bar.append("(選字窗)");
+		c->bar.append((char*)"(選字窗)");
 		c->bar.update();
 	}
 	
@@ -331,7 +331,6 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf, unsigned char charcode
 int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu, 
     CIMInputBuffer *buf)
 {
-    CIMContext *c=(CIMContext*)data;    
 	char sbuf[512];
     switch (command)
     {
