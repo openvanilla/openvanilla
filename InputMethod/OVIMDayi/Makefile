@@ -14,8 +14,6 @@ install: OVIMDayi.dylib
 clean:
 	rm *.o
 	rm *.dylib
-	rm /Library/OpenVanilla/Development/OVIMDayi.dylib
-	rm /Library/OpenVanilla/Development/OVXSimpleLoader.config
 
 %.o: %.cpp
 	gcc -O3 -c $<
