@@ -91,6 +91,7 @@ ComponentResult CIMGetInputPosition(CIMSessionHandle hndl, Point *pnt);
 	void CIMCustomTerminate();
 	void *CIMCustomOpen();
 	int CIMCustomClose(void *data);
+	void CIMCustomFix(void *data);
 	int CIMCustomActivate(void *data, CIMInputBuffer *buf);
 	int CIMCustomDeactivate(void *data, CIMInputBuffer *buf);
 	int CIMCustomHandleInput(void *data, CIMInputBuffer *buf, 

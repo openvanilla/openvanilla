@@ -1,4 +1,3 @@
-
 // CIM.c
 
 #include <Carbon/Carbon.h>
@@ -210,6 +209,9 @@ ComponentResult CIMSessionEvent(CIMSessionHandle hndl, EventRef evnt)
 
 ComponentResult CIMSessionFix(CIMSessionHandle hndl)
 {
+	#ifdef CIMCUSTOM
+	CIMCustomFix((*hndl)->data);
+	#endif
     return (*hndl)->buffer->bind((*hndl)->instance)->send();
 }
 

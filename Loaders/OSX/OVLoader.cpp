@@ -280,6 +280,13 @@ int CIMCustomClose(void *data)
     return 1;
 }
 
+void CIMCustomFix(void *data)
+{	
+	murmur("OVXSimpleLoader: SessionFixing ...");
+	CIMContext *c=(CIMContext*)data;   
+	c->ovcontext->clear();
+}
+
 int RefreshConfig() {
     OVAUTODELETE;
     if (sysconfig->changed()) {
