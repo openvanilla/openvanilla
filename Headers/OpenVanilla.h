@@ -14,7 +14,11 @@
 
 // OpenVanilla does not define anything beyond a pure abstract interface.
 // It does not even define the default encoding to be used. However it is 
-// suggested UTF-8 be used throughout all levels.
+// suggested UTF-8 be used throughout all levels. The only two places that
+// OpenVanilla asks for encoding information are OVBuffer::append() and
+// OVTextBar::append(). This offers a way for IM developers to make use
+// of existing non-UTF-8 data without the need of any encoding convertor.
+// The encoding conversion should be implemented by a Loader.
 
 // OpenVanilla makes a few assumptions about modern GUI and operating system,
 // and makes minimal use of user-defined types and C++ features. For detailed
@@ -54,6 +58,18 @@ public:
     virtual int isCommand() { return isAlt(); }
 };
 
+// Abstract interface for the pre-edit and composing buffer.
+class OVBuffer : public OVBase
+{
+public:
+    virtual OVBuffer* clear()=0;
+    virtual OVBuffer* append(const void *s, OVEncoding e=oveUTF8, int len=0)=0;
+    virtual OVBuffer* send()=0;
+    virtual OVBuffer* update()=0;
+    virtual OVBuffer* update(int cursorPos, int selectFrom=-1, int selectTo=-1)=0;
+    virtual int length()=0;
+};
+
 // Abstract interface for the message bar (called TextBar in OpenVanilla).
 // By default it is a simple horizontal strip, but it is possible, for example,
 // to send marked-up texts through OVTextBar::append(). The implementation
@@ -67,18 +83,6 @@ public:
     virtual OVTextBar* show()=0;
     virtual OVTextBar* update()=0;
     virtual int onScreen()=0;
-};
-
-// Abstract interface for the pre-edit and composing buffer.
-class OVBuffer : public OVBase
-{
-public:
-    virtual OVBuffer* clear()=0;
-    virtual OVBuffer* append(const void *s, OVEncoding e=oveUTF8, int len=0)=0;
-    virtual OVBuffer* send()=0;
-    virtual OVBuffer* update()=0;
-    virtual OVBuffer* update(int cursorPos, int selectFrom=-1, int selectTo=-1)=0;
-    virtual int length()=0;
 };
 
 // Abstract interface for a simple dictionary. It is recommended that this
@@ -139,14 +143,11 @@ public:
     virtual const char *identifier()=0;
     virtual const char *localizedName(const char*) { return identifier(); }
     
-    virtual int initialize(OVDictionary *globalPref, OVDictionary *modulePref,
-        const char *modulePath, const char *userPath, const char *seperator)
-    {
-        return 1;
-    }
-    
-    virtual void terminate(OVDictionary *modulePref) {}
-    virtual void update(OVDictionary *modulePref) {}
+    virtual void initialize(
+        OVDictionary *globalPref, OVDictionary *modulePref, OVService *srv,
+        const char *modulePath, const char *userPath, const char *seperator) {}
+    virtual void terminate(OVDictionary *modulePref, OVService *srv) {}
+    virtual void update(OVDictionary *modulePref, OVService *srv) {}
 };
 
 // The InputMethod module interface
@@ -179,6 +180,5 @@ enum
     ovkHome=1, ovkEnd=4, ovkPageUp=11, ovkPageDown=12,
     ovkTab='\t'
 };
-
 
 #endif
