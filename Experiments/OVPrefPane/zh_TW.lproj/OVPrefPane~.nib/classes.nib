@@ -21,8 +21,10 @@
                 prefFontSizeSlider = id; 
                 prefFontSizeText = id; 
                 prefPOJAsciiOutput = id; 
+                prefPOJFull = id; 
                 prefPOJLayout = id; 
                 prefPhoneticLayout = id; 
+                prefTibetanLayout = id; 
                 prefWarningBeep = id; 
             }; 
             SUPERCLASS = NSPreferencePane; 

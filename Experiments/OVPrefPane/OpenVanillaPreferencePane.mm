@@ -40,15 +40,18 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.2/OVLoader.plist";
 	if (!configroot->keyExist("IM-OVIMPhonetic")) configroot->newDictionary("IM-OVIMPhonetic");
 	if (!configroot->keyExist("IM-OVIMPOJ")) configroot->newDictionary("IM-OVIMPOJ");
 	if (!configroot->keyExist("IM-OVIMChewing")) configroot->newDictionary("IM-OVIMChewing");
+	if (!configroot->keyExist("IM-OVIMTibetan")) configroot->newDictionary("IM-OVIMTibetan");
 	
 	OVDictionary *loader=(OVDictionary*)OVSafe(configroot->getDictionary("OVLoader"));
 	OVDictionary *phonetic=(OVDictionary*)OVSafe(configroot->getDictionary("IM-OVIMPhonetic"));
 	OVDictionary *poj=(OVDictionary*)OVSafe(configroot->getDictionary("IM-OVIMPOJ"));
 	OVDictionary *chewing=(OVDictionary*)OVSafe(configroot->getDictionary("IM-OVIMChewing"));
+	OVDictionary *tibetan=(OVDictionary*)OVSafe(configroot->getDictionary("IM-OVIMTibetan"));
 
 	[prefWarningBeep setState: loader->getIntDefault("warningBeep", 1)];
 	[prefPhoneticLayout selectItemAtIndex: phonetic->getIntDefault("keyboardLayout", 0)];
 	[prefChewingLayout selectItemAtIndex: chewing->getIntDefault("keyboardLayout", 0)];
+	[prefTibetanLayout selectItemAtIndex: tibetan->getIntDefault("keyboardLayout", 0)];
 	[prefPOJLayout selectItemAtIndex: poj->getIntDefault("keyboardLayout", 0)];
 	[prefPOJFull setState: poj->getIntDefault("fullPOJOutput", 0)];
 	[prefPOJAsciiOutput setState: poj->getIntDefault("ASCIIOutput", 0)];
@@ -66,11 +69,13 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.2/OVLoader.plist";
 	OVDictionary *phonetic=(OVDictionary*)OVSafe(configroot->getDictionary("IM-OVIMPhonetic"));
 	OVDictionary *poj=(OVDictionary*)OVSafe(configroot->getDictionary("IM-OVIMPOJ"));
 	OVDictionary *chewing=(OVDictionary*)OVSafe(configroot->getDictionary("IM-OVIMChewing"));
+	OVDictionary *tibetan=(OVDictionary*)OVSafe(configroot->getDictionary("IM-OVIMTibetan"));
 
 	loader->setInt("warningBeep", [prefWarningBeep state]);
 	loader->setInt("textSize", [prefFontSizeText intValue]);
 	phonetic->setInt("keyboardLayout", [prefPhoneticLayout indexOfSelectedItem]);
 	chewing->setInt("keyboardLayout", [prefChewingLayout indexOfSelectedItem]);
+	tibetan->setInt("keyboardLayout", [prefTibetanLayout indexOfSelectedItem]);
 	poj->setInt("keyboardLayout", [prefPOJLayout indexOfSelectedItem]);
 	poj->setInt("ASCIIOutput", [prefPOJAsciiOutput state]);
 	poj->setInt("fullPOJOutput", [prefPOJFull state]);

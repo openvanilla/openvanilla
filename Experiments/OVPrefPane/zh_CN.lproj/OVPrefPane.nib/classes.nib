@@ -24,6 +24,7 @@
                 prefPOJFull = id; 
                 prefPOJLayout = id; 
                 prefPhoneticLayout = id; 
+                prefTibetanLayout = id; 
                 prefWarningBeep = id; 
             }; 
             SUPERCLASS = NSPreferencePane; 

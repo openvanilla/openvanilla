@@ -14,6 +14,7 @@
     IBOutlet id prefPOJAsciiOutput;
     IBOutlet id prefPOJFull;
     IBOutlet id prefPOJLayout;
+    IBOutlet id prefTibetanLayout;
     IBOutlet id prefWarningBeep;
 	
 	char userpref[PATH_MAX];
