@@ -8,8 +8,12 @@
 @interface OpenVanillaPreferencePane : NSPreferencePane
 {
     IBOutlet id prefChewingLayout;
+    IBOutlet id prefColorBackground;
+    IBOutlet id prefColorForeground;
     IBOutlet id prefFontSizeSlider;
     IBOutlet id prefFontSizeText;
+    IBOutlet id prefOpacitySlider;
+    IBOutlet id prefOpacityText;
     IBOutlet id prefPhoneticLayout;
     IBOutlet id prefPOJAsciiOutput;
     IBOutlet id prefPOJFull;

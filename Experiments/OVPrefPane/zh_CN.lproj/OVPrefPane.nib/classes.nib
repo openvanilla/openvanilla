@@ -18,8 +18,12 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 prefChewingLayout = id; 
+                prefColorBackground = id; 
+                prefColorForeground = id; 
                 prefFontSizeSlider = id; 
                 prefFontSizeText = id; 
+                prefOpacitySlider = id; 
+                prefOpacityText = id; 
                 prefPOJAsciiOutput = id; 
                 prefPOJFull = id; 
                 prefPOJLayout = id; 

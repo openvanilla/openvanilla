@@ -57,6 +57,45 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.2/OVLoader.plist";
 	[prefPOJAsciiOutput setState: poj->getIntDefault("ASCIIOutput", 0)];
 	[prefFontSizeSlider setIntValue: loader->getIntDefault("textSize", 20)];
 	[prefFontSizeText setIntValue: loader->getIntDefault("textSize", 20)];
+	[prefOpacitySlider setIntValue: loader->getIntDefault("opacity", 80)];
+	[prefOpacityText setIntValue: loader->getIntDefault("opacity", 80)];
+	
+	float r = 0.0f, g = 0.0f, b = 0.0f;
+	char rc[80], gc[80], bc[80];
+	
+	if(loader->keyExist("forer")){
+		loader->getString("forer", rc);
+		r=atof(rc);
+	}
+	if(loader->keyExist("foreg")){
+		loader->getString("foreg", gc);
+		g=atof(gc);
+	}
+	if(loader->keyExist("foreb")){
+		loader->getString("foreb", bc);
+		b=atof(bc);
+	}
+
+	[prefColorForeground setColor: [NSColor colorWithCalibratedRed: r green: g blue: b alpha: 1.0f]];
+	
+	r = g = b = 1.0f;
+	
+	if(loader->keyExist("backr")){
+		loader->getString("backr", rc);
+		r=atof(rc);
+	}
+	if(loader->keyExist("backg")){
+		loader->getString("backg", gc);
+		g=atof(gc);
+	}
+	if(loader->keyExist("backb")){
+		loader->getString("backb", bc);
+		b=atof(bc);
+	}
+	
+	[prefColorBackground setColor: [NSColor colorWithCalibratedRed: r green: g blue: b alpha: 1.0f]];
+	
+	
 }
 
 - (void)willUnselect
@@ -73,6 +112,7 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.2/OVLoader.plist";
 
 	loader->setInt("warningBeep", [prefWarningBeep state]);
 	loader->setInt("textSize", [prefFontSizeText intValue]);
+	loader->setInt("opacity", [prefOpacityText intValue]);
 	phonetic->setInt("keyboardLayout", [prefPhoneticLayout indexOfSelectedItem]);
 	chewing->setInt("keyboardLayout", [prefChewingLayout indexOfSelectedItem]);
 	tibetan->setInt("keyboardLayout", [prefTibetanLayout indexOfSelectedItem]);
@@ -80,6 +120,26 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.2/OVLoader.plist";
 	poj->setInt("ASCIIOutput", [prefPOJAsciiOutput state]);
 	poj->setInt("fullPOJOutput", [prefPOJFull state]);
 	
+	float r, g, b, a;
+	char rc[3], gc[3], bc[3];
+	
+	NSColor *forecolor=[prefColorForeground color];
+	[forecolor getRed: &r green: &g blue: &b alpha: &a];
+	sprintf(rc, "%2f", r);
+	sprintf(gc, "%2f", g);
+	sprintf(bc, "%2f", b);
+	loader->setString("forer", rc);
+	loader->setString("foreg", gc);
+	loader->setString("foreb", bc);	
+	
+	NSColor *backcolor=[prefColorBackground color];
+	[backcolor getRed: &r green: &g blue: &b alpha: &a];
+	sprintf(rc, "%2f", r);
+	sprintf(gc, "%2f", g);
+	sprintf(bc, "%2f", b);
+	loader->setString("backr", rc);
+	loader->setString("backg", gc);
+	loader->setString("backb", bc);	
 	
 	sysconfig->write();
 }
