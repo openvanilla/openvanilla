@@ -12,13 +12,20 @@ OVLOADABLEOBJCWRAPPER;
 // functions that help load all .cin --------------------------------
 
 CinList cinlist;
-
+#ifdef OVIMARRAY
+	char arraypath[PATH_MAX];
+#endif
 // OpenVanilla Loadable IM interface functions -------------------------------
 
 extern "C" int OVLoadableAvailableIMCount(char* p)
 {
-    cinlist.load(p);
-    return cinlist.index;
+	#ifndef OVIMARRAY
+	    cinlist.load(p);
+    	return cinlist.index;
+    #else
+    	strcpy(arraypath, p);
+    	return 1;
+    #endif
 }
 
 extern "C" unsigned int OVLoadableVersion()
@@ -28,8 +35,12 @@ extern "C" unsigned int OVLoadableVersion()
 
 extern "C" OVInputMethod* OVLoadableNewIM(int x)
 {
-    return new OVIMXcin(cinlist.cinpath, cinlist.list[x].filename,
-        cinlist.list[x].ename, cinlist.list[x].cname, cinlist.list[x].encoding);
+	#ifndef OVIMARRAY
+	    return new OVIMXcin(cinlist.cinpath, cinlist.list[x].filename,
+    	    cinlist.list[x].ename, cinlist.list[x].cname, cinlist.list[x].encoding);
+    #else
+    	return new OVIMXcin(arraypath, "array30.cin", NULL, NULL, ovEncodingUTF8);
+    #endif
 }
 
 extern "C" void OVLoadableDeleteIM(OVInputMethod *im)
@@ -50,7 +61,9 @@ int XcinKeySequence::valid(char c)
     
 int XcinKeySequence::add(char c)
 {
-    if (!cinTable->getKey(c)) return 0;
+//	we're pretty sure that IM will only feed valid chars to this function,
+//  so we ignore the check
+//  if (!cinTable->getKey(c)) return 0;
     return OVKeySequenceSimple::add(c);
 }
     
@@ -72,8 +85,13 @@ OVIMXcin::OVIMXcin(char *lpath, char *cfile, char *en, char *cn,
     cintab=NULL;
    
     cnameencoding=enc;
+#ifndef OVIMARRAY    
     sprintf(ename, "OpenVanilla xcin (%s)", en ? en : cfile);
     sprintf(cname, "OpenVanilla xcin (%s)", cn ? cn : cfile);
+#else
+	strcpy(ename, "OpenVanilla Array30");
+	strcpy(cname, "OpenVanilla 行列輸入法");
+#endif
 }
 
 OVIMXcin::~OVIMXcin()
@@ -84,8 +102,12 @@ OVIMXcin::~OVIMXcin()
 int OVIMXcin::identifier(char *s)
 {
     char idbuf[256];
+#ifndef OVIMARRAY        
     strcpy(idbuf, "OVIMXcin-");
     strcat(idbuf, cinfile);
+#else
+	strcpy(idbuf, "OVIMArray");http://the.taoofmac.com/space/blog/2004-12-04.16%3A24
+#endif
     return strlen(strcpy(s, idbuf));
 }
 
@@ -133,16 +155,27 @@ int OVIMXcin::update(OVDictionary* global, OVDictionary* local)
     const char *autoCompose="autoCompose";
     const char *maxSeqLen="maxKeySequenceLength";
     const char *hitMax="hitMaxAndCompose";
-
+    const char *sendSpaceWhenAutoCompose="sendSpaceWhenAutoCompose";
+#ifndef OVIMARRAY
     if (!global->keyExist(warningBeep)) global->setInt(warningBeep, 1);
     if (!local->keyExist(maxSeqLen)) local->setInt(maxSeqLen, 5);
     if (!local->keyExist(autoCompose)) local->setInt(autoCompose, 0);
     if (!local->keyExist(hitMax)) local->setInt(hitMax, 0);
-
+	if (!local->keyExist(sendSpaceWhenAutoCompose))
+		local->setInt(sendSpaceWhenAutoCompose, 1);
+#else
+    if (!global->keyExist(warningBeep)) global->setInt(warningBeep, 1);
+    if (!local->keyExist(maxSeqLen)) local->setInt(maxSeqLen, 5);
+    if (!local->keyExist(autoCompose)) local->setInt(autoCompose, 1);
+    if (!local->keyExist(hitMax)) local->setInt(hitMax, 0);
+	if (!local->keyExist(sendSpaceWhenAutoCompose))
+		local->setInt(sendSpaceWhenAutoCompose, 0);
+#endif
     cfgMaxSeqLen=local->getInt(maxSeqLen);
     cfgBeep=global->getInt(warningBeep);
     cfgAutoCompose=local->getInt(autoCompose);
     cfgHitMaxAndCompose=local->getInt(hitMax);
+    cfgSendSpaceWhenAutoCompose=local->getInt(sendSpaceWhenAutoCompose);
     return 1;
 }
 
@@ -161,6 +194,32 @@ OVIMContext *OVIMXcin::newContext()
 void OVXcinContext::updateDisplay(OVBuffer *buf)
 {
     buf->clear();
+
+#ifdef OVIMARRAY
+	if (keyseq.length()==1)
+	{
+		if (*(keyseq.getSeq())=='t')
+		{
+			buf->append((char*)"的")->update();
+			return;
+		}
+		if (*(keyseq.getSeq())=='w')
+		{
+			buf->append((char*)"女")->update();
+			return;
+		}		
+	}
+	if (keyseq.length()==2 && *(keyseq.getSeq())=='w')
+	{
+		char c=(keyseq.getSeq())[1];
+		if (c >= '1' && c <= '9')
+		{
+			buf->append(keyseq.getSeq())->update();
+			return;
+		}
+	}
+#endif
+
     if (keyseq.length())
     {
         NSMutableString *ms=[NSMutableString new];
@@ -221,24 +280,41 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
 
     if (keyseq.length() && key->code()==ovkSpace)
     {
-        // there the candiate window has only one page, space key
+#ifdef OVIMARRAY
+		if (keyseq.length()==1 && *(keyseq.getSeq())=='t')
+		{
+			buf->clear()->append((char*)"的")->send();
+        	keyseq.clear();
+        	cancelAutoCompose(textbar);
+        	return 1;
+		}
+#endif
+
+        // if the candiate window has only one page, space key
         // will send out the first candidate
-        if (autocomposing && candi.onDuty())
+        if (autocomposing && candi.onDuty() &&
+        	parent->isSendSpaceWhenAutoCompose())
         {
+	    	autocomposing=0;
             keyseq.clear();
-            autocomposing=0;
             return candidateEvent(key, buf, textbar, srv);
         }
 
-        autocomposing=0;        
+    	autocomposing=0;
         return compose(buf, textbar, srv);
     }
     
-    // shift and capslock processing
+    int validkey=keyseq.valid(key->code());
 
+#ifdef OVIMARRAY
+	if (keyseq.length()==1 && *(keyseq.getSeq())=='w' &&
+	    key->code() >= '1' && key->code() <= '9') validkey=1;
+#endif
+    
+    // shift and capslock processing
     if (key->isPrintable() && 
         (key->isCapslock() || 
-         (key->isShift() && !keyseq.valid(key->code()))
+         (key->isShift() && !validkey)
         ))
     {    
         if (key->isCapslock())
@@ -253,8 +329,8 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         return 1;
     }
     
-    if (key->isPrintable() && keyseq.valid(key->code()) &&
-        !key->isCtrl() && !key->isOpt() && !key->isCommand())
+    if (key->isPrintable() && validkey &&
+        !(key->isCtrl() || key->isOpt() || key->isCommand()))
     {
         if (keyseq.length() == parent->maxSeqLen())
         {
@@ -271,14 +347,26 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         }
            
         updateDisplay(buf);
-        if (cintab->isEndKey(key->code()))
+        
+        
+        
+        if (cintab->isEndKey(key->code())
+#ifdef OVIMARRAY
+            || (keyseq.length()==2 && *(keyseq.getSeq())=='w' &&
+                key->code() >= '1' && key->code() <= '9')
+#endif
+           )
         {
             autocomposing=0;
             return compose(buf, textbar, srv);
         }
         
         // if autocomposing is on
-        if (parent->isAutoCompose())
+        if (parent->isAutoCompose()
+#ifdef OVIMARRAY
+		    && !(keyseq.length()==1 && *(keyseq.getSeq())=='w')
+#endif       
+           )
         {
             if (cintab->find(keyseq.getSeq()))
             {

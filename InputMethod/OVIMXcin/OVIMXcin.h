@@ -69,6 +69,7 @@ public:
     virtual int isBeep() { return cfgBeep; }
     virtual int isAutoCompose() { return cfgAutoCompose; }
     virtual int isHitMaxAndCompose() { return cfgHitMaxAndCompose; }
+    virtual int isSendSpaceWhenAutoCompose() { return cfgSendSpaceWhenAutoCompose; }
     
 protected:
     char loadpath[PATH_MAX];
@@ -83,6 +84,7 @@ protected:
     int cfgBeep;
     int cfgAutoCompose;
     int cfgHitMaxAndCompose;
+    int cfgSendSpaceWhenAutoCompose;
 };
 
 #endif
