@@ -403,7 +403,6 @@ void SetFloatingWindowPosition(CIMContext *c) {
         int newx, newy;
         c->bar.getPosition(&newx, &newy);
         if ((newx != defposx) || (newy != defposy)) {
-            murmur("old: (%d,%d), new: (%d,%d)", defposx, defposy, newx, newy);
             OVDictionary *global=GetGlobalConfig();
             defposx=newx;
             defposy=newy;

@@ -14,7 +14,7 @@ public:
     virtual int isShift()
         { return modifiers & (shiftKey | rightShiftKey); }
     virtual int isCapslock()
-        { return modifiers & alphaLock; }
+        { return modifiers & (alphaLock | kEventKeyModifierNumLockMask); }
     virtual int isCtrl()
         { return modifiers & (controlKey | rightControlKey); }
     virtual int isAlt()
