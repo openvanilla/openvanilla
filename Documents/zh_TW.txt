@@ -759,9 +759,51 @@ http://rt.openfoundry.org/Foundry/Project/Download/?Queue=82
 
 您可以使用 fink 或 dports 安裝 svn，而，如果您安裝了 svk，其實裡頭就已經內建了一份 svn。
 
+=== 編譯酷音輸入法 ===
+
+編譯酷音輸入法的方式會比較複雜一些，因為目前OV 酷音輸入法是與「新酷音」的開發團隊共同開發，所以程式碼分散在兩個不同團隊的檔案庫中。
+
+如果您要自行編譯酷音輸入法，您首先需要libchewing，您可以從新酷音專案網站上下載 libchewing，網址是：
+
+ http://chewing.csie.net/download.html
+
+例如，如果您想要安裝 libchewing 0.2.5 版的話，那麼，就是下載 http://chewing.csie.net/download/libchewing/libchewing-0.2.5.tar.gz 這個檔案。如果您用 Safari 下載，在下載完成的時候，就會自動解開壓縮，並且在您的桌面上，建立一個叫做 libchewing-0.2.5 的目錄。
+
+然後，請打開終端機，下以下的指令：
+
+ cd ~/Desktop/libchewing-0.2.5/
+ ./configure
+ make
+ sudo make install
+
+接下來您需要安裝 libchewingpp，這個一個使用 C++ 語言連接 libchewing 的 wrapper。您可以使用 svk、svn或 wget 等工具，從以下網址取得 libchewingcpp：
+
+https://svn.csie.net/chewing/libchewingpp/trunk/
+
+使用這些工具抓取程式碼的方法，與前面「自行編譯 OpenVanilla」中所提到，抓取 OV 程式碼的方法是相同的。然後，請在 libchewing 目錄下使用 make; make test 安裝。
+
+最後，我們需要能夠讓 OV 可以透過 libchewingcpp ，進一步連到到 libchewing，就必須要安裝carchew（carchew也就是Carbon Chewing的縮寫），carchew可以從這裡取得：
+
+https://opensvn.csie.org/SpaceChewingOSX/branches/carchew
+
+安裝方法也是 make; make install。
+
+最後要注意的一點是，您必須要手動建立 OV 酷音的字典檔目錄，並且將字典檔複製過去。libhcewing會將字典檔案安裝在 /usr/share/chewing 或 /usr/local/share/chewing 下，請先在終端機下：
+
+ sudo mkdir -p /Library/OpenVanilla/版本號/OVIMChewing
+
+然後將字典檔複製過去：
+
+ cp -r /usr/local/share/chewing/* /Library/OpenVanilla/版本號/OVIMChewing/
+
+或
+
+ cp -r /usr/share/chewing/* /Library/OpenVanilla/版本號/OVIMChewing/
+
 === 特別感謝 ===
 
 * 自由軟體鑄造場（ http://openfoundry.org/ ）
+* 藝立協（ http://elixus.org ）提供網頁空間
 * 老地方冰果室（ http://www.frostyplace.com/ ）、OIKOS生活網（ http://www.oikos.com.tw/ ）對於 OV 的相關報導。
 * 新酷音發展計畫（ http://chewing.csie.net/news.html ）共同發展各平台的酷音輸入法。
 * 行列科技（ http://www.array.com.tw/ ）提供完整的行列輸入法表格。

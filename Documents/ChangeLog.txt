@@ -3,6 +3,8 @@ http://openvanilla.org/
 
 版本沿革
 
+== 0.7 ==
+
 == 0.6.3 ==
 
 * 解決 FixtextService 的相關問題
