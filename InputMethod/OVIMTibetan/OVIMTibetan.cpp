@@ -77,9 +77,7 @@ public:
         fprintf (stderr, "New IM context created\n");
     }
     
-    virtual ~OVTibetanContext()
-    {
-    }
+    virtual ~OVTibetanContext(){}
     
     virtual int activate(OVService *)
     {
@@ -95,6 +93,7 @@ public:
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         OVService *srv)
     {
+		unsigned short i;
 		
 		if (key->isOpt() || key->isCommand() || key->isCtrl())
         {
@@ -112,7 +111,8 @@ public:
 		
 		if (key->isCode(1, ovkSpace)) //Space 輸出逗點
         {
-			buf->append((char *)".")->send()->clear();
+			i = 0x0F0B;
+			buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 			keyseq.clear();
 			textbar->hide();
             return 1;   // key processed
@@ -122,13 +122,14 @@ public:
 		{
 			if(!strlen(keyseq.buf)) return 0;
 			keyseq.remove();
+			buf->clear();
 			buf->update();
+			textbar->hide();
 			return 1;
 		}
 		
         if (key->isPrintable())
         {
-			unsigned short i;
 			int isVowel = -1, isConsonant = -1, isConsonantPrev = -1;
 			
 			if(key->code() == '.'){ // 輸入的.，送出空白
@@ -137,8 +138,8 @@ public:
 				return 1;   // key processed
 			}
 			
-			if(key->code() == 'f'){ // 如果是 f
-				if(keyseq.buf[0] == 'f' || keyseq.buf[0] == 'F') {
+			if(key->code() == 'f' || key->code() == 'F'){ // 如果是 f
+				if(keyseq.buf[0] == 'f') {
 					buf->send()->clear();
 					keyseq.clear();
 					textbar->hide();
@@ -173,7 +174,7 @@ public:
 					if(strlen(keyseq.buf) < 4){
 						i = ConsonantChars[isConsonant];
 						if(strlen(keyseq.buf) > 1)
-							i = i + 0x50;
+							i = i + 0x50; // 加了50就會變成sub的字母囉！
 						buf->append(&i, ovEncodingUTF16Auto, 1)->update();
 						keyseq.add(key->code());
 						return 1;
