@@ -1,0 +1,93 @@
+@name OVIMArray-0.6.3.pkg
+@title
+Array IM module
+@title zh_TW
+行列輸入法
+@description
+This installs Array
+@description zh_TW
+這會安裝行列輸入法
+@files
+/Library/OpenVanilla/0.6.3/OVIMArray
+/Library/OpenVanilla/0.6.3/OVIMArray/array30.cin
+/Library/OpenVanilla/0.6.3/OVIMArray.dylib
+@end
+
+@name OVIMCangjei-0.6.3.pkg
+@title
+Cangjei and Simplex (Jianyi) IM module
+@title zh_TW
+倉頡及簡易輸入法（香草倉頡、香草簡易）
+@files
+/Library/OpenVanilla/0.6.3/OVIMCangjei
+/Library/OpenVanilla/0.6.3/OVIMCangjei.dylib
+@end
+
+@name OVIMPOJHolo-0.6.3.pkg
+@title
+Holo POJ IM module
+@title zh_TW
+河洛白話字輸入法
+@files
+/Library/OpenVanilla/0.6.3/OVIMPOJHolo
+/Library/OpenVanilla/0.6.3/OVIMPOJHolo/poj.cin
+/Library/OpenVanilla/0.6.3/OVIMPOJHolo.dylib
+@end
+
+@name OVIMTibetan-0.6.3.pkg
+@title
+Tibetan IM module
+@title zh_TW
+藏文輸入法
+@files
+/Library/OpenVanilla/0.6.3/OVIMTibetan
+/Library/OpenVanilla/0.6.3/OVIMTibetan.dylib
+@end
+
+
+@name OVIMXcin-cj-0.6.3.pkg
+@title
+Cangjei IM
+/Library/OpenVanilla/0.6.3/OVIMXcin/cj.cin
+@title zh_TW
+倉頡輸入法（Xcin模組版）
+@files
+/Library/OpenVanilla/0.6.3/OVIMXcin/dayi3.cin
+@end
+
+@name OVIMXcin-ehq-0.6.3.pkg
+@title
+EHQ symbol IM
+@title zh_TW
+漁村符號輸入法
+@files
+/Library/OpenVanilla/0.6.3/OVIMXcin/ehq.cin
+@end
+
+@name OVIMXcin-iroha-0.6.3.pkg
+@title
+Japanese Kaka IM
+@title zh_TW
+日文假名輸入法
+@files
+/Library/OpenVanilla/0.6.3/OVIMXcin/iroha.cin
+@end
+
+@name OVIMChewing-0.6.3.pkg
+@title 
+Chewing IM module
+@title zh_TW
+酷音輸入法
+@files
+/Library/OpenVanilla/0.6.3/OVIMChewing
+/Library/OpenVanilla/0.6.3/OVIMChewing/ch_index.dat
+/Library/OpenVanilla/0.6.3/OVIMChewing/dict.dat
+/Library/OpenVanilla/0.6.3/OVIMChewing/fonetree.dat
+/Library/OpenVanilla/0.6.3/OVIMChewing/ph_index.dat
+/Library/OpenVanilla/0.6.3/OVIMChewing/us_freq.dat
+/Library/OpenVanilla/0.6.3/OVIMChewing.dylib
+/usr/lib/libchewing.1.dylib
+/Library/Frameworks/ChewingPP.framework/ChewingPP
+/Library/Frameworks/ChewingPP.framework/Headers
+/Library/Frameworks/ChewingPP.framework/Headers/Chewingpp.h
+@end
