@@ -9,3 +9,6 @@ OVEmu.o: OVEmu.cpp
 VXLoadableIM.o: ../OSX/VXLoadableIM.cpp
 	g++ -c -I../OSX/ -o VXLoadableIM.o ../OSX/VXLoadableIM.cpp
 
+clean:
+	rm -f OVEmu *.o 
+
