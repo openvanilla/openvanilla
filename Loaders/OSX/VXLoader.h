@@ -19,6 +19,23 @@
 
 class VXContext;
 
+/*
+class VXLoader
+{
+public:
+    int init(MenuRef m);
+    VXContext *newContext();
+    
+    void setActiveContext(VXContext *c);
+    void menuHandler(unsigned int cmd);
+    
+    void syncConfig(int forced=0);
+    NSArray *assembleModuleArray(NSArray *requirement, NSString *type);
+};
+
+*/
+
+
 class VXLoader
 {
 public:
@@ -40,6 +57,12 @@ public:
         ibc=[[VXInfoBoxController alloc] initWithWindowNibName: @"VXLoader"];
         if (!ibc) return 0;
         ibw=[ibc window];
+        
+        VXInfoBoxController *nc=[[VXInfoBoxController alloc] initWithWindowNibName: @"VXLoader"];
+        NSWindow *ww=[nc window];
+        [nc append: "string!"];
+        [ww orderFront: nc];
+        
         
         VXDictionary gp(pref->getDictionary(@VXLOADERPREFKEY));
         
