@@ -327,7 +327,9 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf,
     murmur("received keycode=%d, buffer position=(%d,%d)\n",
            charcode, pnt->h, pnt->v);
         
-    c->bar.setPosition(pnt->h, pnt->v);
+    // textbar pos.y down 5 pt from cursur pos (pnt->v+5) to prevent
+    // masking the "composing underline area"
+    c->bar.setPosition(pnt->h, pnt->v+5);     
     return c->ovcontext->keyEvent(&key, &vxb, &c->bar, &srv);
 }
 
