@@ -181,7 +181,11 @@ ComponentResult CIMSessionEvent(CIMSessionHandle hndl, EventRef evnt)
     // we only take kEventRawKeyDown and kEventRawKeyRepat
     if (GetEventClass(evnt)!=kEventClassKeyboard ||
         !(eventkind==kEventRawKeyDown || eventkind==kEventRawKeyRepeat))
+    {
+        fprintf (stderr, "non keyboard message received, class=%x, kind=%d\n",
+            GetEventClass(evnt), eventkind);
         return FALSE;
+    }
         
     UInt32 keycode, modifiers;
     unsigned char charcode;
