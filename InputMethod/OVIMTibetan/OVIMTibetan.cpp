@@ -143,7 +143,7 @@ public:
 		    
         if (key->isCode(2, ovkReturn, ovkMacEnter))
         {
-            if (!(strlen(keyseq.buf))) return 0;   // if buffer is empty, don't process
+            if (!keyseq.len) return 0;   // if buffer is empty, don't process
 			buf->send()->clear();
 			keyseq.clear();
 			keyseq.lastisword();
@@ -153,7 +153,7 @@ public:
 		
 		if (key->isCode(4, ovkUp, ovkDown, ovkLeft, ovkRight)) //Lock when composing
 		{ 
-			if(!strlen(keyseq.buf)) return 0;
+			if(!keyseq.len) return 0;
 			keyseq.lastisnotword();
 			return 1;
 		}
@@ -170,7 +170,7 @@ public:
 		
 		if (key->isCode(2, ovkDelete, ovkBackspace))
 		{
-			if(!strlen(keyseq.buf)) return 0;
+			if(!keyseq.len) return 0;
 			keyseq.clear();
 			keyseq.lastisnotword();
 			buf->clear()->update();
@@ -212,7 +212,7 @@ public:
 			
 			if(key->code() == '%' || key->code() == '&')	// 輸入的是 % 或是 &
 			{
-				if(keyseq.last){
+				if(keyseq.last || keyseq.len){
 					i = (key->code() == '%') ? 0x0F82 : 0x0F83;
 					buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
 					keyseq.clear();
@@ -255,10 +255,10 @@ public:
 			{ 
 				if(keyseq.buf[0] == 'f') 
 				{
-					if(strlen(keyseq.buf) < 4)
+					if(keyseq.len < 4)
 					{
 						i = ConsonantChars[isConsonant];
-						if(strlen(keyseq.buf) > 1)
+						if(keyseq.len > 1)
 							i = i + 0x50; // 加了50就會變成sub的字母囉！
 						buf->append(&i, ovEncodingUTF16Auto, 1)->update();
 						keyseq.add(key->code());
