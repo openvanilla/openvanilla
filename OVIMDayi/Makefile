@@ -17,7 +17,7 @@ clean:
 	rm /Library/OpenVanilla/Development/OVXSimpleLoader.config
 
 %.o: %.cpp
-	gcc -c -I../ $<
+	gcc -c $<
 	
 %.o: %.mm
-	gcc -framework Cocoa -c -I../ $<
+	gcc -c $<
