@@ -5,8 +5,9 @@
 
 #include <Cocoa/Cocoa.h>                // to be removed after de-Cocoa-ized
 #include <OpenVanilla/OpenVanilla.h>
-#include "../../Source/OSX/VXCIN.h"
+#include "VXCIN.h"
 #include "OVKeySequence.h"
+#include "VXCandidate.h"
 
 class XcinKeySequence : public OVKeySequenceSimple
 {
@@ -20,32 +21,6 @@ public:
 protected:
     VXCIN *cinTable;
 };
-
-class XcinCandidate : public OVObject
-{
-public:
-    XcinCandidate()
-    {
-        onduty=0;
-    }
-    
-    void prepare(NSArray *l, char *skey, OVTextBar *textbar);
-    int onDuty() { return onduty; }
-    void cancel() { onduty=0; }
-    void update(OVTextBar *textbar);
-    XcinCandidate* pageUp();
-    XcinCandidate* pageDown();
-    NSString* select(char c);
-    
-protected:
-    int onduty;
-    char selkey[32];
-    int count;
-    int perpage;
-    int pos;
-    NSArray *list;
-};
-
 
 class OVIMXcin;
 
@@ -66,7 +41,7 @@ protected:
     
     OVIMXcin *parent;
     XcinKeySequence keyseq;
-    XcinCandidate candi;
+    VXCandidate candi;
     VXCIN *cintab;
 };
 

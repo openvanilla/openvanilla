@@ -1,4 +1,4 @@
-OBJS=OVIMXcin.o VXCIN.o VXUtility.o
+OBJS=OVIMXcin.o VXCIN.o VXUtility.o VXCandidate.o
 GOALS=OVIMXcin.dylib 
 INST_PATH=/Library/OpenVanilla/Development
 
@@ -10,9 +10,6 @@ $(GOALS): $(OBJS)
 install:
 	mkdir -p $(INST_PATH)
 	cp $(GOALS) $(INST_PATH)
-
-VXCIN.o: ../../Source/OSX/VXCIN.mm
-	gcc -I../../Loaders/OSX -o VXCIN.o -c $<
 
 VXUtility.o: ../../Loaders/OSX/VXUtility.cpp
 	gcc -o VXUtility.o -c $<

@@ -1,4 +1,4 @@
-OBJS=OVIMPOJ.o VXCIN.o VXUtility.o
+OBJS=OVIMPOJ.o VXCIN.o VXUtility.o VXCandidate.o
 GOALS=OVIMPOJ.dylib 
 INST_PATH=/Library/OpenVanilla/Development
 
@@ -12,7 +12,10 @@ install:
 	cp $(GOALS) $(INST_PATH)
 	cp poj.cin $(INST_PATH)
 
-VXCIN.o: ../../Source/OSX/VXCIN.mm
+VXCandidate.o: ../OVIMXcin/VXCandidate.mm
+	gcc -I../../Loaders/OSX -o VXCandidate.o -c $<
+
+VXCIN.o: ../OVIMXcin/VXCIN.mm
 	gcc -I../../Loaders/OSX -o VXCIN.o -c $<
 
 VXUtility.o: ../../Loaders/OSX/VXUtility.cpp

@@ -7,7 +7,8 @@
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLoadable.h>
 #include <OpenVanilla/OVUtility.h>
-#include "../../Source/OSX/VXCIN.h"
+#include "../OVIMXcin/VXCIN.h"
+#include "../OVIMXcin/VXCandidate.h"
 #include "../../Loaders/OSX/VXUtility.h"
 
 
