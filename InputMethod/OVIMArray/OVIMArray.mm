@@ -225,14 +225,22 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         
         if (NSString* output=candi.select(key->code()))
         {
-            buf->clear()->append((void*)[output UTF8String])->send();
-            keyseq.clear();
-            cancelAutoCompose(textbar);
+            char *s=[output UTF8String];
+            if (!strcasecmp(s, "!err")) 
+            {
+                candi.backOnDuty();
+                srv->beep();
+                buf->update();
+            }
+            else 
+            {
+                buf->clear()->append((void*)s)->send();
+                keyseq.clear();
+                cancelAutoCompose(textbar);
+            }
             return 1;
         }
     }
-
-
     if (!keyseq.length() && !key->isPrintable()) return 0;
     
     if (key->code()==ovkEscape)
@@ -455,14 +463,15 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
         if (!strcasecmp(s, "!err")) 
         {
             srv->beep();
+            candi.backOnDuty();
         }
         else 
         {
-            buf->clear()->append((void*)[output UTF8String])->send();
+            buf->clear()->append((void*)s)->send();
             candi.cancel();
             textbar->hide()->clear();
-            return 1;
         }
+        return 1;
     }
     
     if ((output=cintab->getKey(c)))

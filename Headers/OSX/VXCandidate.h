@@ -22,6 +22,7 @@ public:
     VXCandidate* pageUp();
     VXCandidate* pageDown();
     NSString* select(char c);
+    void backOnDuty() { onduty=1; }
     
 protected:
     int onduty;

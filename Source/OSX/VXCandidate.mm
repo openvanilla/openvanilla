@@ -31,8 +31,12 @@ void VXCandidate::update(OVTextBar *textbar)
     for (int i=pos, j=0; i<bound; i++, j++)
     {
         sprintf (buf, "%c.", selkey[j]);
-        textbar->append(buf)->append((void*)[[list objectAtIndex: i] UTF8String])->
-            append((void*)" ");
+        
+        char *s=[[list objectAtIndex: i] UTF8String];
+        
+        // tweak for Array
+        if (!strcasecmp(s, "!err")) s="☐";
+        textbar->append(buf)->append((void*)s)->append((void*)" ");
     }
     
     int totalpage=(count % perpage) ? (count/perpage)+1 : (count/perpage);
