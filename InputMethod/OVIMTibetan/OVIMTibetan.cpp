@@ -141,7 +141,7 @@ public:
 		
         if (key->isPrintable())
         {
-			fprintf (stderr, "keysེeq: %s, len: %d, keycode: %c \n", keyseq.buf, keyseq.len, key->code());
+			/* fprintf (stderr, "keysེeq: %s, len: %d, keycode: %c \n", keyseq.buf, keyseq.len, key->code()); */
 
 			if(key->code() >= '0' && key->code() <= '9')	// Numbers
 			{ 
@@ -237,11 +237,11 @@ public:
 									i = htransfromChars[k];
 									buf->append(&i, ovEncodingUTF16Auto, 1);
 								} 
-								else if (isConsonantKey(keyseq.buf[1]) == 0 && 
-										 isConsonantKey(keyseq.buf[2]) == 34) 
+								else if (isConsonantKey(keyseq.buf[1]) == 0 &&  //ka
+										 isConsonantKey(keyseq.buf[2]) == 34)   //ssa
 								{
 									i = 0x0FB9;
-									buf->append(&i, ovEncodingUTF16Auto, 1);
+									buf->append(&i, ovEncodingUTF16Auto, 1);	//kssa
 								} 
 								else 
 								{
@@ -278,11 +278,11 @@ public:
 									i = htransfromChars[l];
 									buf->append(&i, ovEncodingUTF16Auto, 1);
 								} 
-								else if (isConsonantKey(keyseq.buf[1]) == 0 && 
-										 isConsonantKey(keyseq.buf[2]) == 34) 
+								else if (isConsonantKey(keyseq.buf[1]) == 0 &&	//ka
+										 isConsonantKey(keyseq.buf[2]) == 34)	//ssa
 								{
 									i = 0x0FB9;
-									buf->append(&i, ovEncodingUTF16Auto, 1);
+									buf->append(&i, ovEncodingUTF16Auto, 1);	//kssa
 								} 
 								else 
 								{

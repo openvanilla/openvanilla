@@ -1,4 +1,4 @@
-IM=OVIMArray OVIMCangjei OVIMPOJ OVIMPOJHakka OVIMPhonetic \
+IM=OVIMArray OVIMCangjei OVIMPOJHolo OVIMPOJHakka OVIMPhonetic \
    OVIMRoman OVIMSocket OVIMTibetan OVIMUnicode OVIMXcin \
    OVIMezbasic OVIMphp
 

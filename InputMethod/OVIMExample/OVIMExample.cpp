@@ -1,4 +1,7 @@
 // OVIMExample.cpp
+// OpenVanilla Example Input Method
+// OpenVanilla 輸入法設計範例
+// 2005 openavnilla.org
 
 #include <stdio.h>
 #include <string.h>
@@ -10,7 +13,7 @@ class OVIMExample;
 class OVExampleContext : public OVIMContext
 {
 public:
-    OVExampleContext(OVExampleIM *p)
+    OVExampleContext(OVIMExample *p)
     {
         parent=p;
         fprintf (stderr, "New IM context created\n");
@@ -63,25 +66,25 @@ public:
     }
     
 protected:
-    OVExampleIM *parent;
+    OVIMExample *parent;
 };
 
-class OVExampleIM : public OVInputMethod
+class OVIMExample : public OVInputMethod
 {
 public:
-    OVExampleIM()
+    OVIMExample()
     {
         fprintf (stderr, "IM moudle instance created by loadble moudle\n");
     }
     
-    virtual ~OVExampleIM()
+    virtual ~OVIMExample()
     {
         fprintf (stderr, "IM module instance destroyed by loadable module\n");
     }
         
     virtual int identifier(char* s)
     {
-        return strlen(strcpy(s, "OVExampleIM"));
+        return strlen(strcpy(s, "OVIMExample"));
     }
     
     virtual int name(char *locale, void *s, OVEncoding *enc)
@@ -128,5 +131,5 @@ public:
 
 
 // use these two wrappers
-OVLOADABLEWRAPPER(OVExampleIM)
+OVLOADABLEWRAPPER(OVIMExample)
 OVLOADABLECANUNLOAD
