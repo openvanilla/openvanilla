@@ -318,6 +318,17 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf, unsigned char charcode
     return c->ovcontext->keyEvent(&key, &vxb, &c->bar, &srv);
 }
 
+
+void InitInputMethod(OVInputMethod *im) {
+    char imid[256];
+    im->identifier(imid);
+    OVDictionary *global=GetGlobalConfig();
+    OVDictionary *local=GetLocalConfig(imid);
+    im->initialize(global, local, &srv, (char*)loaddir);
+    delete local;
+    delete global;
+}
+
 int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu, 
     CIMInputBuffer *buf)
 {
@@ -347,15 +358,8 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
         OVInputMethod *newim=list.impair[newpos].im;
 		
         if (!list.impair[newpos].inited) {
-            char buf[256];
-            newim->identifier(buf);
-            
-            OVDictionary *global=GetGlobalConfig();
-            OVDictionary *local=GetLocalConfig(buf);
-            newim->initialize(global, local, &srv, (char*)loaddir);
+            InitInputMethod(newim);
             list.impair[newpos].inited=1;
-            delete local;
-            delete global;
         }
 		
     	newim->identifier(buf);
