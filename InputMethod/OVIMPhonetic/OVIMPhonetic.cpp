@@ -102,7 +102,7 @@ public:
         if (!strcasecmp(locale, "zh_TW"))
             return strlen(strcpy((char*)s, "OpenVanilla 注音輸入法"));
         else
-            return strlen(strcpy((char*)s, "OpenVanilla Phone IM"));
+            return strlen(strcpy((char*)s, "OpenVanilla Phonetic IM"));
     }
 
     virtual int initialize(OVDictionary* g, OVDictionary* l, OVService*, char*)
