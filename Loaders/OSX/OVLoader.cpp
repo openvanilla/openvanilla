@@ -78,20 +78,21 @@ void LoadEveryDylib() {
     }
 }
 
-void SetupMenuString(MenuRef mnu) {
+void SetupMenuString(MenuRef mnu, int pos) {
     CFBundleRef bundle=CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName));
     CFStringRef mstr;
     mstr=CFBundleCopyLocalizedString(bundle, CFSTR("Preferences"), NULL, NULL);
-    InsertMenuItemTextWithCFString(mnu, mstr, i++, 0, 'PREF');
+    InsertMenuItemTextWithCFString(mnu, mstr, pos++, 0, 'PREF');
     CFRelease(mstr);
     mstr=CFBundleCopyLocalizedString(bundle, CFSTR("About"), NULL, NULL);
-    InsertMenuItemTextWithCFString(mnu, mstr, i++, 0, 'ABUT');
+    InsertMenuItemTextWithCFString(mnu, mstr, pos++, 0, 'ABUT');
     CFRelease(mstr);
 }
 
 int SetupMenuList(MenuRef mnu) {
     char locale[256];
-    VXGetCurrentLocale(CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName)), locale);
+    VXGetCurrentLocale(CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName)),
+                       locale);
     // for the time being, we use id as menu names
     // (and we initialize everything)
     int i;
@@ -119,50 +120,51 @@ void SetupGlobalConfig(OVDictionary *global) {
         global->setInt("floatingWindowLockPosX", 20);
         global->setInt("floatingWindowLockPosY", 760);
     }
-    if (!global->keyExist("textSize"))
-        global->setInt("textSize", 24);
+    global->keyExist("textSize") || global->setInt("textSize", 24);
     floatingwindowlock = global->getInt("floatingWindowLock");
     textsize = global->getInt("textSize");
     defposx  = global->getInt("floatingWindowLockPosX");
     defposy  = global->getInt("floatingWindowLockPosY");	
 }
 
-int CIMCustomInitialize(MenuRef mnu)
-{
-    murmur ("OVLoader: initializing");
-    ClearContextPool();
-
-    LoadEveryDylib();
-    int i = SetupMenuList(mnu);
-    InsertMenuItemTextWithCFString(mnu, CFSTR("-"), i++, 0, 0);
-    SetupMenuString(mnu);
-    OVDictionary *global=GetGlobalConfig();
-    SetupGlobalSConfig(global);
-    
-    // look for the input method we want to use
+void SwitchToCurrentInputMethod(MenuRef mnu,OVDictionary *global) {
     char currentim[256];
-    if (global->keyExist("currentIM")) {
+    if (global->keyExist("currentIM"))
         global->getString("currentIM", currentim);
-    }
-	
+
     int pos=list.findPos(currentim);
     if (pos==-1) pos=0;
     inputmethod=list.impair[pos].im;
-    
     if (inputmethod) {
         OVDictionary *local=GetLocalConfig(currentim);
         inputmethod->initialize(global, local, &srv, (char*)loaddir);
-        list.impair[pos].inited=1;
         delete local;
+        list.impair[pos].inited=1;
         inputmethod->identifier(currentim);
         global->setString("currentIM", currentim);
         int pos=list.findPos(currentim);
         SetItemMark(mnu, pos+1, checkMark);
     }
+}
 
+int CIMCustomInitialize(MenuRef mnu)
+{
+    murmur ("OVLoader: initializing");
     sysconfig=new VXConfig(plistfile);
-    sysconfig->write();	
+
+    ClearContextPool();
+    LoadEveryDylib();
+
+    int pos = SetupMenuList(mnu);
+    InsertMenuItemTextWithCFString(mnu, CFSTR("-"), pos++, 0, 0);
+    SetupMenuString(mnu,pos);
+
+    OVDictionary *global=GetGlobalConfig();
+    SetupGlobalConfig(global);
+    SwitchToCurrentInputMethod(mnu, global);
     delete global;
+
+    sysconfig->write();	
     return 1;
 }
 
@@ -321,7 +323,7 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
         ShowAbout();
         return 1;
     }
-    
+
     if (command >= usermenu && command <= usermenu+list.imcntr) {
     	int newpos=command-usermenu;
     	
