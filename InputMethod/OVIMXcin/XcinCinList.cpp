@@ -14,10 +14,9 @@
 
 const int vxPreparseSuppress=100;   // max. lines to be read for preparser
 
-char selectfilter[PATH_MAX];
-    
 int file_select(struct dirent *entry)
 {
+    char *selectfilter = ".cin";
     int p=strlen(entry->d_name)-strlen(selectfilter);
     if (p<0) return 0;
     if (!strcmp(entry->d_name+p, selectfilter)) return 1; 
@@ -26,10 +25,8 @@ int file_select(struct dirent *entry)
 
 void CinList::load(char *libpath)
 {
-	struct dirent **files;
+    struct dirent **files;
     char searchpath[PATH_MAX];
-
-    strcpy(selectfilter, ".cin");
 
     strcpy(searchpath, libpath);
     int l=strlen(searchpath);
