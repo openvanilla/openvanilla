@@ -6,8 +6,6 @@
 #include "VXKeyCode.h"
 #include <dlfcn.h>
 
-id pool=nil;
-
 class CustomCounter
 {
 public:
@@ -39,7 +37,7 @@ int CIMCustomInitialize(MenuRef mnu)
         CFSTR("Print total chars typed to stderr"), 0, 0, 'TOTL');
     fprintf (stderr, "custom IM initialized\n");
 	
-    pool=[[NSAutoreleasePool alloc]init];
+//    pool=[[NSAutoreleasePool alloc]init];
 
 	return 1;
 }
@@ -83,6 +81,7 @@ int CIMCustomClose(void *data)
 {
 	if (expsession) if (expim) expim->deletesession(expsession);
 	if (expim) destroy_derived(expim);
+	if (libh) fprintf (stderr, "closing dylib\n");
 	if (libh) dlclose(libh);
 	libh=NULL;
 

@@ -3,7 +3,29 @@
 #include <Cocoa/Cocoa.h>
 #include "openvanilla.h"
 
-// id pool=nil;
+id pool=nil;
+
+extern "C" void _init()
+{
+    pool=[NSAutoreleasePool new];
+    if (pool) fprintf (stderr, "initializing dylib, creating autorelease pool\n");
+}
+
+// this will NEVER be called as Darwin never dlclose() a .dylib
+// see https://svn.r-project.org/R/trunk/src/unix/dlfcn-darwin.c
+// for the source code of Darwin's dlopen() and dlclose()
+extern "C" void _fini()
+{
+/*    fprintf (stderr, "closing dylib\n");
+    if (pool) 
+    {
+        fprintf (stderr, "releasing autorelease pool\n");
+        [pool release];
+    } */
+    FILE *o=fopen("/tmp/fini.log", "w+");
+    fprintf (o, "dylib closed\n");
+    fclose (o);
+}
 
 id MakeNSStr(char *s)
 {
@@ -150,10 +172,10 @@ public:
             }
             
             int i, l=strlen(tab->selkey);
-            fprintf (stderr, "searching selkey=%s, len=%d\n", tab->selkey, l);
+            // fprintf (stderr, "searching selkey=%s, len=%d\n", tab->selkey, l);
 
             for (i=0; i<l; i++) if (key->code()==tab->selkey[i]) break;
-            fprintf (stderr, "index=%d, candistr_length=%d\n", i, [(NSString*)candistr length]);
+            // fprintf (stderr, "index=%d, candistr_length=%d\n", i, [(NSString*)candistr length]);
             if (i==l || i >[(NSString*)candistr length]) 
             {
                 return 1;
