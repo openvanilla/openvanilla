@@ -19,24 +19,9 @@
 			settings = {
 			};
 		};
-		6A8B0F9F072AD6A70070CB01 = {
-			fileEncoding = 4;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = VXKeyCode.h;
-			path = /Users/lukhnos/logiciel/OpenVanilla/OSX/VXKeyCode.h;
-			refType = 0;
-			sourceTree = "<absolute>";
-		};
-		6A8B0FA0072AD6A70070CB01 = {
-			fileRef = 6A8B0F9F072AD6A70070CB01;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		6A942D5C072ABB05003DEA47 = {
 			children = (
-				6A8B0F9F072AD6A70070CB01,
+				AB3D4B44072B909A0032DB12,
 				6A942DB3072AC3D2003DEA47,
 				6A942D5F072ABB3A003DEA47,
 				6A942D60072ABB3A003DEA47,
@@ -319,7 +304,7 @@
 				6A942D64072ABB3A003DEA47,
 				6A942D66072ABB3A003DEA47,
 				6A942DB4072AC3D2003DEA47,
-				6A8B0FA0072AD6A70070CB01,
+				AB3D4B45072B909A0032DB12,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +403,31 @@
 		};
 		6AC4C7A407130F2D0033BDF9 = {
 			fileRef = 6AC4C79F07130F2D0033BDF9;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//6A0
+//6A1
+//6A2
+//6A3
+//6A4
+//AB0
+//AB1
+//AB2
+//AB3
+//AB4
+		AB3D4B44072B909A0032DB12 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = VXKeyCode.h;
+			path = ../OSX/VXKeyCode.h;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		AB3D4B45072B909A0032DB12 = {
+			fileRef = AB3D4B44072B909A0032DB12;
 			isa = PBXBuildFile;
 			settings = {
 			};
