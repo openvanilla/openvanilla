@@ -147,7 +147,7 @@ int OVIMXcin::update(OVDictionary* global, OVDictionary* local)
 	const char *sk="shiftSelectionKey";
 
     if (!global->keyExist(warningBeep)) global->setInt(warningBeep, 1);
-    if (!local->keyExist(maxSeqLen)) local->setInt(maxSeqLen, 5);
+    if (!local->keyExist(maxSeqLen)) local->setInt(maxSeqLen, 10);
     if (!local->keyExist(autoCompose)) local->setInt(autoCompose, 0);
     if (!local->keyExist(hitMax)) local->setInt(hitMax, 0);
 	if (!local->keyExist(sk)) local->setInt(sk, 0);
