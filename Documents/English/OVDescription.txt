@@ -1,3 +1,0 @@
-An input method framework offering many Chinese IM's not found in OS X
-
-OpenVanilla is an open source input method framework that offers many input methods, mainly Chinese ones, that are not found or are not adequate (from the eyes of Windows switchers) in OS X. It offers a better Cangjei IM and many others, including for example Tibetan IM and IM for phonetic symbols. OpenVanilla turns Apple's text service component into an input method "loader" that makes use of dynamically loadable bundles, so that each input method can be a loadable module, and a user can choose from a variety of available modules. This greatly enhances the user experience for people who need to type Chinese or other languages that require an IM.
