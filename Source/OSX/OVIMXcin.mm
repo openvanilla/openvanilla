@@ -1,6 +1,6 @@
 // OVIMXcin.mm
 
-#define OVDEBUG
+// #define OVDEBUG
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLoadable.h>
 #include <stdlib.h>

@@ -1,7 +1,7 @@
 // OVIMArray.mm
 // 2004 openvanilla.org
 
-#define OVDEBUG
+// #define OVDEBUG
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLoadable.h>
 #include <stdlib.h>

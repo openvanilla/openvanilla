@@ -1,7 +1,6 @@
 // VXTextBar.cpp
 
-#define OVDEBUG
-
+// #define OVDEBUG
 
 #include "VXTextBar.h"
 #include "VXUtility.h"

@@ -21,7 +21,7 @@
           <object class="IBCarbonStaticText" id="194">
             <string name="bounds">54 20 108 376 </string>
             <string name="viewFrame">20 54 356 54 </string>
-            <string name="title">Copyright © 2004 by Lukhnos, Kang-ming Liu, Tian-jian Jiang, Pek-tiong Tan, Weizhong Yang and Meng-juei Hsieh. With participation of friends at #osxchat.</string>
+            <string name="title">Copyright © 2004 by Lukhnos, Kang-ming Liu, Tian-jian Jiang, Pek-tiong Tan, Weizhong Yang and Mengjuei Hsieh. With participation of friends at #osxchat.</string>
           </object>
           <object class="IBCarbonStaticText" id="195">
             <string name="bounds">116 20 151 376 </string>

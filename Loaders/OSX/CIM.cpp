@@ -170,10 +170,8 @@ ComponentResult CIMSessionDeactivate(CIMSessionHandle hndl)
 
 ComponentResult CIMSessionFix(CIMSessionHandle hndl)
 {
-    fprintf (stderr, "CIM: SessionFix\n");
     if ((*hndl)->sessionFixLock) return noErr;
     
-    fprintf (stderr, "CIM: SessionFix really entered\n");
 	#ifdef CIMCUSTOM
 		if (!CIMCustomSessionFix((*hndl)->data,
 			(*hndl)->buffer->bind((*hndl)->instance)))

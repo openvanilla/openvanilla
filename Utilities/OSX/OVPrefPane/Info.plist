@@ -17,12 +17,12 @@
 	<key>CFBundleSignature</key>
 	<string>luks</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>0.6.3</string>
 	<key>NSMainNibFile</key>
 	<string>OVPrefPane</string>
-	<key>NSPrincipalClass</key>
-	<string>OpenVanillaPreferencePane</string>
 	<key>NSPrefPaneIconLabel</key>
 	<string>OpenVanilla</string>
+	<key>NSPrincipalClass</key>
+	<string>OpenVanillaPreferencePane</string>
 </dict>
 </plist>

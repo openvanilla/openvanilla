@@ -1,6 +1,6 @@
 // VXLoadableIM.cpp
 
-#define OVDEBUG
+// #define OVDEBUG
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVUtility.h>
 #include <sys/param.h>

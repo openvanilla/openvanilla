@@ -114,7 +114,6 @@ protected:
 		if (lang & 0xf0000000)
 		{
 			int c=(lang & 0x0fff0000) >> 16;
-			fprintf (stderr, "script code=%d\n", c);
 			return c;
 		}
 		
@@ -134,7 +133,6 @@ protected:
 		if (lang & 0xf0000000)
 		{
 			int c=lang & 0xffff;
-			fprintf (stderr, "language code=%d\n", c);
 			return c;
 		}
 

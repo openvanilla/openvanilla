@@ -32,7 +32,6 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.3/OVLoader.plist";
 {
 	OVAUTODELETE;
 	
-	fprintf (stderr, "OVPrefPane: preference panel started\n");	
 	[self createUserConfig];
 	
 	OVDictionary *configroot=sysconfig->getDictionaryRoot();
@@ -96,7 +95,6 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.3/OVLoader.plist";
 {
 	OVAUTODELETE;
 	
-	fprintf (stderr, "OVPrefPane: saving preference data\n");	
 	OVDictionary *configroot=sysconfig->getDictionaryRoot();
 	OVDictionary *loader=(OVDictionary*)OVSafe(configroot->getDictionary("OVLoader"));
 	OVDictionary *phonetic=(OVDictionary*)OVSafe(configroot->getDictionary("IM-OVIMPhonetic"));
@@ -128,7 +126,6 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.3/OVLoader.plist";
 		 !(keyMask & (kMenuOptionModifier | kMenuControlModifier))
 	   )
 	{
-		fprintf (stderr, "only shift!\n");
 		keyMask = kMenuShiftModifier | kMenuOptionModifier | kMenuNoCommandModifier;
 	}
 	else 
@@ -136,7 +133,6 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.3/OVLoader.plist";
 		if (((keyMask & kMenuNoCommandModifier) && 
 		 !(keyMask & (kMenuOptionModifier | kMenuControlModifier))))
 		{
-			fprintf (stderr, "none!\n");
 			keyMask = -1;
 		}
 	}
@@ -200,7 +196,7 @@ const char *defaultplistfile  = "/Library/OpenVanilla/0.6.3/OVLoader.plist";
 		sysconfig->write();
 	}
 
-	fprintf (stderr, "OVLoader: user preference file at %s\n", userpref);
+	fprintf (stderr, "OVPrefPane: user preference file at %s\n", userpref);
 	sysconfig->read();
 }
 

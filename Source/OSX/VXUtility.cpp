@@ -1,6 +1,6 @@
 // VXUtility.cpp
 
-#define OVDEBUG
+// #define OVDEBUG
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVUtility.h>
 #include "VXUtility.h"

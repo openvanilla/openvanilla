@@ -44,31 +44,24 @@ public:
         vimCandidateWindow=0;
         vimCurrentSymbol=0;
         vimKeyboardLayoutEten=1;
-
-        fprintf (stderr, "New IM context created\n");
     }
     
     virtual ~OVPhoneContext()
     {
-        fprintf (stderr, "IM context destroyed\n");
     }
     
     virtual int activate(OVService *)
     {
-        fprintf (stderr, "IM context activated\n");
         return 1;
     }
     
     virtual int deactivate(OVService *)
     {
-        fprintf (stderr, "IM context deactivated\n");
         return 1;
     }
     
     virtual int clear()
     {
-        murmur("OVIMPhonetic: clear buffer\n");
-        
         // textbar will be forced to close anyway, so we can just set them
         // to 0 without extra worries
         vimPunctuationWindow=vimCandidateWindow=0;
@@ -95,13 +88,11 @@ class OVPhoneIM : public OVInputMethod
 public:
     OVPhoneIM()
     {
-        fprintf (stderr, "IM moudle instance created by loadble moudle\n");
         keylayout=0;
     }
     
     virtual ~OVPhoneIM()
     {
-        fprintf (stderr, "IM module instance destroyed by loadable module\n");
     }
         
     virtual int identifier(char* s)
@@ -122,38 +113,30 @@ public:
 
     virtual int initialize(OVDictionary* g, OVDictionary* l, OVService*, char*)
     {
-        fprintf (stderr, "IM module initialized by IM loader\n");
 	    if (!l->keyExist("keyboardLayout")) l->setInt("keyboardLayout", 0);
 	    keylayout=l->getInt("keyboardLayout");
-        murmur ("key layout set to %d\n", keylayout);
-        
         return 1;
     }
     
     virtual int terminate(OVDictionary*, OVDictionary*, OVService*)
     {
-        fprintf (stderr, "IM module terminated by IM loader\n");
         return 1;
     }
 
     virtual int update(OVDictionary* g, OVDictionary* l)
     {
-        fprintf (stderr, "IM loader requested updating module's config\n");
 	    if (!l->keyExist("keyboardLayout")) l->setInt("keyboardLayout", 0);
 	    keylayout=l->getInt("keyboardLayout");
-        murmur ("key layout changed to %d\n", keylayout);        
         return 1;
     }
 
     virtual OVIMContext* newContext() 
     {
-        fprintf (stderr, "IM module creating a new IM context\n"); 
         return new OVPhoneContext(this); 
     }
     
     virtual void deleteContext(OVIMContext* s) 
     {
-        fprintf (stderr, "IM module destroying a new IM context\n");
         delete s; 
     }
     
@@ -467,7 +450,6 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar
 	}
 	else
 	{
-	   fprintf (stderr, "unrecognizable key\n");
 	   return 0;
 /*	    char charbuf[2];
 	    charbuf[1]=0;
