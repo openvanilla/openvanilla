@@ -20,18 +20,13 @@ public:
             else
             {   
                 dict=(CFMutableDictionaryRef)ref;
-				printf ("before retain: %d\n", CFGetRetainCount(dict));
                 CFRetain(dict);
-				printf ("after retain: %d\n", CFGetRetainCount(dict));
-
             }
         }
     }
     
     virtual ~VXDictionary()
     {
-		printf ("before release: %d\n", CFGetRetainCount(dict));
-
         if (dict) CFRelease(dict);
     }
 
@@ -60,8 +55,6 @@ public:
     virtual int setInt(const void *key, int value, OVEncoding e=ovEncodingUTF8,
         int keylen=0)
     {
-		printf ("setting value=%d\n", value);
-		
         CFStringRef keyref=VXCreateCFString(key, e, keylen);
         CFNumberRef numref=CFNumberCreate(NULL, kCFNumberIntType,
             &value);
@@ -140,7 +133,6 @@ public:
         CFRelease(data);
         return status;
     }
-
 
     virtual int readFromURL(CFURLRef url)
     {

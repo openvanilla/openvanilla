@@ -8,11 +8,6 @@
 #include <sys/syslimits.h>
 #include "VXDictionary.h"
 
-enum
-{
-    vxcExceptionFile=1
-};
-
 typedef struct stat CLibStat;
 typedef struct timespec CLibTimeSpec;
 
