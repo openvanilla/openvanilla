@@ -11,6 +11,8 @@
 #ifndef __OVModuleLoader_h
 #define __OVModuleLoader_h
 
+#include "OpenVanilla.h"
+
 class OVLoadableModuleFile;
 
 OVLoadableModuleFile* OVLoadModuleFile(OVDictionary *globalPref, OVService *srv,
@@ -24,7 +26,7 @@ class OVLoadableModuleFile : public OVBase
 public:
     int availableInputMethodCount() { return imcount; }
     int availableOutputFilterCount() { return ofcount; }
-    OVIntputMethod* newInputMethod(int idx);
+    OVInputMethod* newInputMethod(int idx);
     OVOutputFilter* newOutputFilter(int idx);
 
 protected:
@@ -42,35 +44,47 @@ protected:
 
 const int ovMLMaxItem=256;
 
-class OVModuleList<T> : public OVBase
+template<class T> class OVModuleList : public OVBase
 {
 public:
-    OVModuleList<T> ();
-    ~OVModuleList<T> ();
-    int add(T*);
+    OVModuleList ()
+    {
+        counter=0;
+        for (int i=0; i<ovMLMaxItem; i++)
+        {
+            initialized[i]=0;
+            list[i]=0;
+        }
+    }
+    
+    ~OVModuleList ();
+    int add(const T& x)     { list[counter++]=x; }
     int count();
-    int find(const char *identifier);
-    T* getModule(int idx);
-    T* getAndInitialize(int idx, OVDictionary *, OVDictionary *, OVService *,
-        const char *, const char *, const char *);
-    void terminateAndDelete(int idx, OVDictionary *, OVService *);
+    int find(const char *identifier);   // -1 if not found
+    int remove(int idx);
+    T get(int idx);
+    void setInitialized(int idx);
     int isInitialized(int idx);
     
 protected:
     int counter;
     int initialized[ovMLMaxItem];
-    T* list[ovMLMaxItem];    
+    T list[ovMLMaxItem];    
 };
 
 class OVModuleManager : public OVBase
 {
 public:
     void addFile(OVLoadableModuleFile *f);
-    void addInputMethod(OVInputMethod *im);
+    void addInputMethod(OVInputMethod *im)
+    {
+        imlist.add(im);
+    }
+    
     void addOutputFilter(OVOutputFilter *of);
     
-    OVModuleList<OVInputMethod> imlist;
-    OVModuleList<OVOutputFilter> oflist;
+    OVModuleList<OVInputMethod*> imlist;
+    OVModuleList<OVOutputFilter*> oflist;
 };
 
 #endif

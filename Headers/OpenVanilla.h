@@ -102,7 +102,7 @@ public:
         if (!keyExist(key)) setInteger(key, value);
         return getInteger(key);
     }
-    virtual char* getStringWithDefault(const char *key, const char *value)
+    virtual const char* getStringWithDefault(const char *key, const char *value)
     {
         if (!keyExist(key)) setString(key, value);
         return getString(key);
