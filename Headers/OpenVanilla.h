@@ -62,7 +62,7 @@ public:
     virtual OVBuffer* send()=0;
     virtual OVBuffer* update()=0;
     virtual OVBuffer* update(int cursorPos, int selectFrom=-1, int selectTo=-1)=0;
-    virtual int length()=0;
+    virtual int isEmpty()=0;
 };
 
 // Abstract interface for the message bar (called TextBar in OpenVanilla).
@@ -111,8 +111,17 @@ public:
     virtual void beep()=0;
     
     // this returns a pointer to an internal buffer from which the 
-    // caller can copy the converted content
+    // caller can copy the converted content (recommended implementation
+    // is a 1K buffer)
     virtual const char *toUTF8(const char *encoding, const void *src, int len=0)=0;
+    
+    // two utility functions for conversion into user-designated buffer
+    // note fromUTF8 should return the number of unicode characters (not
+    // code points) if the destination encoding is
+    virtual int toUTF8(const char *encoding, const char *src, char *dest,
+        int maxdestlen=0)=0;
+    virtual int fromUTF8(const char *encoding, const char *src, void *dest,
+        int maxdestlen=0)=0;
 };
 
 // The input method context. The context is always created by the IM module
