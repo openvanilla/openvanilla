@@ -8,7 +8,7 @@ http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf for 
 #include "OpenVanilla/OVLoadable.h"
 #include "OVIMTibetan.h"
 
-class OVTibetanIM;
+class OVIMTibetan;
 int keyboardlayout = 0;
 
 short isSymbolKey(int key)
@@ -58,7 +58,7 @@ short isFinalAddKey(int key)
 class OVTibetanContext : public OVIMContext
 {
 public:
-    OVTibetanContext(OVTibetanIM *p)
+    OVTibetanContext(OVIMTibetan *p)
     {
         parent=p;
         fprintf (stderr, "New IM context created\n");
@@ -229,18 +229,18 @@ public:
     }
     
 protected:
-    OVTibetanIM *parent;
+    OVIMTibetan *parent;
 	KeySeq keyseq;
 };
 
-class OVTibetanIM : public OVInputMethod
+class OVIMTibetan : public OVInputMethod
 {
 public:
-    OVTibetanIM(){}
-    virtual ~OVTibetanIM(){}
+    OVIMTibetan(){}
+    virtual ~OVIMTibetan(){}
     virtual int identifier(char* s)
     {
-        return strlen(strcpy(s, "OVTibetanIM"));
+        return strlen(strcpy(s, "OVIMTibetan"));
     }
     
     virtual int name(char *locale, void *s, OVEncoding *enc)
@@ -286,5 +286,5 @@ public:
 
 
 // use these two wrappers
-OVLOADABLEWRAPPER(OVTibetanIM)
+OVLOADABLEWRAPPER(OVIMTibetan)
 OVLOADABLECANUNLOAD
