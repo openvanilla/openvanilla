@@ -5,7 +5,7 @@
 CFStringRef VXCreateCFStringNone8BitEncoding(void *s, 
     OVEncoding e, int l);
 
-CFStringRef VXCreateCFString(void *s, OVEncoding e=ovEncodingUTF8, int l=0)
+CFStringRef VXCreateCFString(void *s, OVEncoding e, int l)
 {
     if (e & ovEncodingNone8BitEncodingMask)
         return VXCreateCFStringNone8BitEncoding(s, e, l);
@@ -16,7 +16,7 @@ CFStringRef VXCreateCFString(void *s, OVEncoding e=ovEncodingUTF8, int l=0)
     switch (e)
     {
         case ovEncodingBig5HKSCS:
-            enc=kCFStringEncodinBig5_HKSCS_1999;
+            enc=kCFStringEncodingBig5_HKSCS_1999;
     }
     
     return CFStringCreateWithCString(NULL, (const char*)s, enc);

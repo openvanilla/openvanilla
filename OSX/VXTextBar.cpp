@@ -3,26 +3,21 @@
 #include "VXTextBar.h"
 #include "VXUtility.h"
 
-const int vxtbDefFontSize=24;
-
-void VXTBSetRect(Rect &r, int fontsize, int textlen)
-{
-    int w=textlen*fontsize;
-    int h=fontsize;
-    SetRect(r, 0, 0, w, h);
-}
-
+void VXTBSetRect(Rect *r, int fontsize, int textlen);
+void VXTBFixPosition(Point *p, int width, int height);
 
 VXTextBar::VXTextBar(int fsize) : fontsize(fsize)
 {
     lookupdated=textupdated=posupdated=displaying=0;
+    pos.h=pos.v=0;
     text=CFStringCreateMutable(NULL, 0);
-    CFStringAppendString(text, " ", kCFStringEncodingMacRoman);
+    CFStringAppendCString(text, " ", kCFStringEncodingMacRoman);
     
     // create window rectanble
 	Rect windowrect, labelrect;
 	SetRect(&labelrect, 0, 0, 24, 10);
-	windowrect=labelrect;
+	SetRect(&windowrect, 100, 100, 200, 40);
+//	windowrect=labelrect;
         
     if (CreateNewWindow(kUtilityWindowClass, 
         kWindowStandardHandlerAttribute | kWindowMetalAttribute |   
@@ -67,8 +62,7 @@ int VXTextBar::hide()
 {
     if (!displaying) return 1;
     if (window) HideWindow(window);
-    displaying=0;
-    return 1;
+    return displaying=0;
 }
 
 int VXTextBar::show()
@@ -76,14 +70,19 @@ int VXTextBar::show()
     update();
     if (displaying) return 1;    
     if (window) ShowWindow(window);
-    displaying=1;
-    return 1;
+    return displaying=1;
 }
 
+int VXTextBar::setposition(int x, int y)
+{
+    pos.h=x;
+    pos.v=y;
+    return posupdated=1;
+}
 
 int VXTextBar::update()
 {
-    if (!(textupdated || lookupdated || postupdated)) return 1;
+    if (!(textupdated || lookupdated || posupdated)) return 1;
     
     Rect windowrect, labelrect;
     
@@ -91,38 +90,76 @@ int VXTextBar::update()
     {
         if (SetControlData(label, kControlEntireControl, 
             kControlStaticTextCFStringTag, sizeof(CFStringRef), &text) != noErr)
-                return 0;
+                return 0;   // should throw exception
         
-        VXTBSetRect(labelrect, fontsize, CFStringGetLength(text));
+        VXTBSetRect(&labelrect, fontsize, CFStringGetLength(text));
         windowrect=labelrect;        
+        printf ("%d,%d,%d,%d\n", labelrect.left, labelrect.top, labelrect.right, labelrect.bottom);
         SetControlBounds(label, &labelrect);
-        SizeWindow(window, windowrect.right, windowrect.bottom);
+        SizeWindow(window, windowrect.right, windowrect.bottom, TRUE);
 
         textupdated=0;    
     }
     
     if (lookupdated)
     {
-        VXTBSetRect(labelrect, fontsize, CFStringGetLength(text));
+        VXTBSetRect(&labelrect, fontsize, CFStringGetLength(text));
         windowrect=labelrect;        
         SetControlBounds(label, &labelrect);
-        SizeWindow(window, windowrect.right, windowrect.bottom);
+        SizeWindow(window, windowrect.right, windowrect.bottom, TRUE);
 
         lookupdated=0;
     }
     
+    
     if (posupdated)
     {
-        // fix position
-        // move window
         posupdated=0;
     }
-    
-    ComponentResult r;
-    r=SetControlData(label, kControlEntireControl, kControlStaticTextCFStringTag,
-        sizeof(CFStringRef), &text);
-    if (r!=noErr) return 0;
-    
+
+    VXTBSetRect(&labelrect, fontsize, CFStringGetLength(text));
+    VXTBFixPosition(&pos, labelrect.right, labelrect.bottom);
+    MoveWindow(window, pos.h, pos.v, TRUE);        
     DrawControls(window);
     return 1;
 }
+
+void VXTBSetRect(Rect *r, int fontsize, int textlen)
+{
+    int w=textlen*fontsize;
+    int h=fontsize;
+    SetRect(r, 0, 0, w, h);
+}
+
+void VXTBFixPosition(Point *p, int width, int height)
+{
+	int heightfixer=height+20;
+	int widthfixer=20;
+	
+	Rect bound, avail;
+	GDHandle nextgd=GetDeviceList();
+	
+	do
+	{
+		if(!TestDeviceAttribute(nextgd, screenDevice)) continue;
+		if(!TestDeviceAttribute(nextgd, screenActive)) continue;
+		bound=(*nextgd)->gdRect;
+		
+		GetAvailableWindowPositioningBounds(nextgd, &avail);
+		
+		if (PtInRect(*p, &bound)) break;
+	} while((nextgd = GetNextDevice(nextgd)) != nil);
+	
+	if (!PtInRect(*p, &bound))
+	{
+		bound=(*GetMainDevice())->gdRect;
+		GetAvailableWindowPositioningBounds(nextgd, &avail);
+	}
+	
+	if (p->v > avail.bottom - heightfixer) p->v = avail.bottom-heightfixer;
+	if (p->h > avail.right - width) p->h = avail.right-width-widthfixer;
+	if (p->v < avail.top+GetMBarHeight()) p->v=avail.top+GetMBarHeight();
+	if (p->h < avail.left) p->h=avail.left+widthfixer;
+}
+
+

@@ -28,9 +28,6 @@ enum
     ovEncodingNone8BitEncodingMask=7
 };
 
-const char *ovDefaultIMID="ovDefaultIM";
-
-
 class OVTextBar : public OVObject
 {
 public:
@@ -113,7 +110,7 @@ class OVInputMethod : public OVObject
 {
 public:
     virtual int identifier(char* p)
-        { strcpy(p, ovDefaultIMID); return strlen(ovDefaultIMID); }
+        { *p=0; return 0; }
 
     virtual int open(OVService*, OVDictionary*, OVDictionary*)
         { return 1; }
@@ -122,7 +119,7 @@ public:
     virtual int update(OVDictionary*, OVDictionary*) { return 1; }
     
     virtual OVIMSession *newsession() { return new OVIMSession; }
-    virtual void deletesession(OVIMSession*) { delete OVIMSession; }
+    virtual void deletesession(OVIMSession* s) { delete s; }
 };
 
 

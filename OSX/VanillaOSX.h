@@ -7,7 +7,7 @@
 #include "OpenVanilla.h"
 #include "VXTextBar.h"
 #include "VXKeyCode.h"
-#include "VXInputBuffer.h"
+#include "VXBuffer.h"
 #include "VXUtility.h"
 
 #endif

@@ -6,6 +6,8 @@
 #include <Carbon/Carbon.h>
 #include "OpenVanilla.h"
 
+const int vxtbDefFontSize=24;
+
 class VXTextBar : public OVTextBar
 {
 public:
@@ -19,10 +21,13 @@ public:
     virtual int show();
     virtual int update();
     
+    virtual int setposition(int x, int y);
+    
 protected:
     WindowRef window;
     ControlRef label;
     CFMutableStringRef text;
+    Point pos;
     int fontsize;
         
     int lookupdated;
