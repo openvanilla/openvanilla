@@ -6,7 +6,7 @@ OBJS=OVCIN.o OVCandidate.o OVFileHandler.o OVIMXcin.o\
 GOALS=OVIMXcin.dylib 
 
 DATA= cj.cin dayi3.cin jyutping.cin\
-      pinyinbig5.cin simplex.cin ukiyoe.cin\
+      pinyinbig5.cin simplex.cin iroha.cin\
       zhcn_jtcj.cin zhcn_phonegb2.cin zhcn_pinyin.cin\
       zhcn_shuangpin.cin zhcn_wubizixing.cin
 
