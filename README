@@ -17,4 +17,5 @@ Directory Hierarchy description
 - build/     - Object files goes here, not under version control
 
 - clean.sh   - A simply shell script doing global cleaning for you
+               Usage: ./clean.sh
 
