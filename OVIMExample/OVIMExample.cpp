@@ -2,8 +2,8 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "OpenVanilla.h"
-#include "OVLoadable.h"
+#include "OpenVanilla/OpenVanilla.h"
+#include "OpenVanilla/OVLoadable.h"
 
 class OVExampleIM;
 
