@@ -103,13 +103,19 @@ public:
 
 class OVIMContext : public OVObject {
 public:
+    virtual int activate(OVInfoBox *infobox) { return 1; }
+    virtual int deactivate(OVBuffer *buf, OVInfoBox *infobox) { clear(); return 1; }
+    virtual void clear() {}
+
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, 
         OVInfoBox *infobox, OVService *srv) {
+        clear();
         return 0;
     }        
 
     virtual int candidateEvent(OVKeyCode *key, OVBuffer *buf, 
         OVInfoBox *infobox, OVService *srv) {
+        clear();
         return 0;
     }        
 };
@@ -119,12 +125,10 @@ public:
     virtual const char *identifier()=0;
     virtual const char *localizedName(const char *locale) { return identifier(); }
     
-    virtual int initialize(OVDictionary *loaderPref, OVDictionary *modulePref,
-        const char *modulePath, const char *userPath, const char *seperator) 
-        { return 1; }
+    virtual int initialize(OVDictionary *modulePref, const char *modulePath, 
+        const char *userPath, const char *seperator) { return 1; }
     virtual void terminate(OVDictionary *modulePref) { return 1; }
-    virtual void update(OVDictionary *loaderPref, OVDictionary *modulePref)
-        { return 1; }
+    virtual void update(OVDictionary *modulePref) { return 1; }
 };
                            
 class OVInputMethod : public OVComponent {
@@ -132,14 +136,12 @@ public:
     virtual OVIMContext *newConext()=0;
 };
 
-class OVKeyMapper : public OVComponent {
-public:
-    virtual int mapKey(int keyCode) { return keyCode; }
-};
-
 class OVBufferFilter : public OVComponent {
 public:
     virtual const char *process(const char *source);
 };
+
+
+
 
 #endif
