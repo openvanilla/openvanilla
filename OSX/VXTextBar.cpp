@@ -43,19 +43,21 @@ VXTextBar::~VXTextBar()
     CFRelease(text);
 }
 
-int VXTextBar::clear()
+OVTextBar* VXTextBar::clear()
 {
     CFRange rng=CFRangeMake(0,CFStringGetLength(text));
     CFStringDelete(text, rng);
-    return textupdated=1;
+    textupdated=1;
+    return this;
 }
 
-int VXTextBar::append(void*s, OVEncoding e, int l)
+OXTextBar* VXTextBar::append(void*s, OVEncoding e, int l)
 {
     CFStringRef newstr=VXCreateCFString(s, e, l);
     CFStringAppend(text, newstr);
     CFRelease(newstr);
-    return textupdated=1;
+    textupdated=1;
+    return this;
 }
 
 int VXTextBar::hide()

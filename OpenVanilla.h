@@ -32,9 +32,9 @@ class OVTextBar : public OVObject
 {
 public:
     // functions that update the content of the text bar
-    virtual int clear() { return 0; }
-    virtual int append(void *s, OVEncoding e=ovEncodingUTF8, int l=0)
-        { return 0; }
+    virtual OVTextBar* clear() { return this; }
+    virtual OVTextBar* append(void *s, OVEncoding e=ovEncodingUTF8, int l=0)
+        { return this; }
     
     // functions that change the display status
     virtual int onscreen() { return 0; }
@@ -47,11 +47,13 @@ public:
 class OVBuffer : public OVObject
 {
 public:
-    virtual int clear() { return 0; }
-    virtual int send() { return 0; }
-    virtual int updatedisplay(int cursorpos=-1, int hilitefrom=-1, int hiliteto=-1);
-    virtual int append (void *s, OVEncoding e=ovEncodingUTF8, int l=0)
-        { return 0; }
+    virtual OVBuffer* clear() { return this; }
+    virtual OVBuffer* send() { return this; }
+    virtual OVBuffer* updatedisplay(int cursorpos=-1, 
+        int hilitefrom=-1, int hiliteto=-1)
+            { return this; }
+    virtual OVBuffer* append (void *s, OVEncoding e=ovEncodingUTF8, int l=0)
+        { return this; }
     virtual int length() { return 0; }    
 };
 

@@ -1,6 +1,6 @@
 // OVIMExample.cpp
 
-// #include <stdio.h>
+#include <stdio.h>
 #include "openvanilla.h"
 
 class OVExampleIM;
@@ -10,36 +10,36 @@ class OVExampleSession : public OVIMSession
 public:
     OVExampleSession(OVExampleIM *p) : parent(p)
     {
-        // fprintf (stderr, "new im session instance created\n");
+        fprintf (stderr, "new im session instance created\n");
     }
     
     virtual ~OVExampleSession()
     {
-        // fprintf (stderr, "im session instance destroyed\n");
+        fprintf (stderr, "im session instance destroyed\n");
     }
     
     virtual int activate(OVService *)
     {
-        // fprintf (stderr, "im session activated\n");
+        fprintf (stderr, "im session activated\n");
     }
     
     virtual int deactivate(OVService *)
     {
-        // fprintf (stderr, "im session deactivated\n");
+        fprintf (stderr, "im session deactivated\n");
     }
     
     virtual int keyevent(OVKeyCode *key, OVBuffer *buf,
         OVTextBar *textbar, OVService *srv)
     {
-        // fprintf (stderr, "recevied key code=%d\n", key->code());
+        fprintf (stderr, "recevied key code=%d\n", key->code());
     
         if (key->iscode(3, 0xa, 0xd, 3))
         {
-            // fprintf (stderr, "enter key\n");
+            fprintf (stderr, "enter key\n");
             if (!buf->length()) return 0;
             buf->send();
             textbar->clear();
-            // fprintf (stderr, "buffer not empty, sending\n");
+            fprintf (stderr, "buffer not empty, sending\n");
             return 1;
         }
         
@@ -49,7 +49,7 @@ public:
             textbar->update();
             buf->append("中");
             buf->updatedisplay();
-            // fprintf (stderr, "a chinese is inputed\n");
+            fprintf (stderr, "a chinese is inputed\n");
         }
         
         if (key->isprintable())
@@ -57,7 +57,7 @@ public:
             char str[2];
             str[1]=0;
             str[0]=key->code();
-            // fprintf (stderr, "key=%s\n", str);
+            fprintf (stderr, "key=%s\n", str);
             textbar->append(str);
             textbar->update();
             buf->append(str);
@@ -76,12 +76,12 @@ class OVExampleIM : public OVInputMethod
 public:
     OVExampleIM()
     {
-        // fprintf (stderr, "new IM instance created\n");
+        fprintf (stderr, "new IM instance created\n");
     }
     
     virtual ~OVExampleIM()
     {
-        // fprintf (stderr, "IM instance destroyed\n");
+        fprintf (stderr, "IM instance destroyed\n");
     }
     
     OVIMSession *newsession() { return new OVExampleSession(this); }
