@@ -49,7 +49,9 @@ char *vowel2tone(char c, int tone)  // tone must be between 1-8
 
 #define pojMaxSeqLen 10
 
+// vcomposed state
 enum {
+    pojVowelNONE=0,
 	pojVowelMN=1,
 	pojVowelAEIOU=2
 };
@@ -152,30 +154,32 @@ public:
                 continue;
             }
 
+#define IRULE ( tolower(c) == 'i' && (vowelorder(cnext) != -1 ) && (tolower(cnext) != 'n' ) && (tolower(cnext) != 'm' ) )
+
 			// If previously we have M or N, and now we have another
 			// vowel right here, we should discard tone on M,N.
 			// (That means re-copy all leading characters.)
-            if (vcomposed == pojVowelMN && ( vo != -1 )) {
+            if (vcomposed == pojVowelMN && ( vo != -1 ) && !IRULE )
+            {
                 murmur("VowelMNRule: char: %c, tone: %d", *s, tone);
             	char *t=seq;
             	b=buf;
             	while(t<s) {*b++=*t++;}
             	murmur("VowelMNRule: seq: %s, buf: %s",seq,buf);
-            	vcomposed = 0;
+            	vcomposed = pojVowelNONE;
             	*b=0;
             }
-            
 
             // if vowel already composed, or not vowel,
             // here we also apply "i" rule (if "i" is followed by a vowel,
             // the tone mark will never be placed upon "i")
-            if (vcomposed || ( vo == -1 ) ||
-                 ( tolower(c) == 'i' && (vowelorder(cnext) != -1 ) )) 
+            if (vcomposed || ( vo == -1 ) || IRULE )
             {
                 *b++=*s++;
                 continue;
             }
-            
+#undef IRULE
+
             // "ou" and "OU" rule
             if (c=='o' && cnext=='u')
             {
