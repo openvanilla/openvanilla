@@ -163,6 +163,11 @@ OVIMContext *OVIMXcin::newContext()
     return new OVXcinContext(this, cintab);
 }
 
+int OVXcinContext::deactivate(OVService *)
+{
+    keyseq.clear();
+}
+
 void OVXcinContext::updateDisplay(OVBuffer *buf)
 {
     buf->clear();
@@ -316,7 +321,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         updateDisplay(buf);
         
         
-        
+        // the w-rule in Array        
         if (cintab->isEndKey(key->code())
             || (keyseq.length()==2 && *(keyseq.getSeq())=='w' &&
                 key->code() >= '0' && key->code() <= '9')
@@ -436,6 +441,20 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
         updateDisplay(buf);
         candi.cancel();
         textbar->hide()->clear();
+
+        // if autocomposing is on
+        if (parent->isAutoCompose()
+		    && !(keyseq.length()==1 && *(keyseq.getSeq())=='w')
+           )
+        {
+            if (cintab->find(keyseq.getSeq()))
+            {
+                autocomposing=1;
+                compose(buf, textbar, srv);
+            }
+            else if (candi.onDuty()) cancelAutoCompose(textbar);
+        }
+
         return 1;
     }    
 
