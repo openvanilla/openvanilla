@@ -22,6 +22,10 @@
                 prefColorForeground = id; 
                 prefFontSizeSlider = id; 
                 prefFontSizeText = id; 
+                prefKeyCommand = id; 
+                prefKeyCtrl = id; 
+                prefKeyOpt = id; 
+                prefKeyShift = id; 
                 prefOpacitySlider = id; 
                 prefOpacityText = id; 
                 prefPOJAsciiOutput = id; 

@@ -12,6 +12,10 @@
     IBOutlet id prefColorForeground;
     IBOutlet id prefFontSizeSlider;
     IBOutlet id prefFontSizeText;
+    IBOutlet id prefKeyCommand;
+    IBOutlet id prefKeyCtrl;
+    IBOutlet id prefKeyOpt;
+    IBOutlet id prefKeyShift;
     IBOutlet id prefOpacitySlider;
     IBOutlet id prefOpacityText;
     IBOutlet id prefPhoneticLayout;
