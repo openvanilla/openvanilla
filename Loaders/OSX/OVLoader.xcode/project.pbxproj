@@ -55,6 +55,7 @@
 				6A401C9F07DE55310001C8C1,
 				6A401CA007DE55310001C8C1,
 				6A8E77E807DE59AA00172258,
+				6AA0B37E07EC473600DCDDFF,
 			);
 			isa = PBXGroup;
 			refType = 4;
@@ -133,6 +134,7 @@
 			buildRules = (
 			);
 			buildSettings = {
+				DSTROOT = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				INFOPLIST_FILE = "OVInit-Info.plist";
@@ -288,11 +290,56 @@
 			settings = {
 			};
 		};
+		6A5532C307EC35B700B3D986 = {
+			children = (
+				6AEE832607E0A6690009C91E,
+				6AEE838E07E0AEBA0009C91E,
+				6A401CA807DE55640001C8C1,
+				6A89D5C807DE661A00CDA735,
+				6A23CB4207DEE9FF005EE6B1,
+				6A23CB4107DEE9FF005EE6B1,
+			);
+			isa = PBXGroup;
+			name = TSBundle;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A6232F007EBE7B60009934E = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = VXPreferenceFile.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A6232F107EBE7B60009934E = {
+			fileRef = 6A6232F007EBE7B60009934E;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A6232F207EBE7C50009934E = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = VXPreferenceFile.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A6232F307EBE7C50009934E = {
+			fileRef = 6A6232F207EBE7C50009934E;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		6A86CCC807E76A160070ABF2 = {
 			buildActionMask = 2147483647;
 			files = (
-				6A86CDAA07E77A3A0070ABF2,
 				6A86CDA407E779D30070ABF2,
+				6A6232F307EBE7C50009934E,
+				6A89FBBE07EBE96000CD5AE6,
+				6A89FBEB07EC326C00CD5AE6,
+				6AA0B36E07EC38D800DCDDFF,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +391,10 @@
 			files = (
 				6AD3485307E7EE9B001CC42D,
 				6AD3486107E7F055001CC42D,
+				6A6232F107EBE7B60009934E,
+				6A89FBDC07EC2FC500CD5AE6,
+				6A89FBE607EC318600CD5AE6,
+				6A89FC8807EC348E00CD5AE6,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,7 +426,7 @@
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
-			path = VXLoaderService.mm;
+			path = VXLoaderUtility.mm;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -399,25 +450,24 @@
 			settings = {
 			};
 		};
-		6A86CDAA07E77A3A0070ABF2 = {
-			fileRef = 6A86CD0807E775A10070ABF2;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		6A89D5C707DE660600CDA735 = {
 			children = (
+				6A89FBDB07EC2FC500CD5AE6,
+				6A89FBBD07EBE96000CD5AE6,
+				6A6232F207EBE7C50009934E,
+				6A6232F007EBE7B60009934E,
+				6A89FBE507EC318600CD5AE6,
+				6A89FBEA07EC326C00CD5AE6,
 				6AD3486007E7F055001CC42D,
 				6AD3485207E7EE9B001CC42D,
-				6A86CD0807E775A10070ABF2,
 				6A86CCF807E772960070ABF2,
-				6AEE838E07E0AEBA0009C91E,
+				6AA0B36D07EC38D800DCDDFF,
+				6A89FC8707EC348E00CD5AE6,
+				6A86CD0807E775A10070ABF2,
+				6AA0B38007EC474B00DCDDFF,
+				6AA0B38107EC474B00DCDDFF,
+				6A5532C307EC35B700B3D986,
 				6A23CBCB07DEEFBA005EE6B1,
-				6AEE832607E0A6690009C91E,
-				6A23CB4107DEE9FF005EE6B1,
-				6A23CB4207DEE9FF005EE6B1,
-				6A89D5C807DE661A00CDA735,
-				6A401CA807DE55640001C8C1,
 			);
 			isa = PBXGroup;
 			name = OVLoader;
@@ -444,9 +494,80 @@
 			settings = {
 			};
 		};
+		6A89FBBD07EBE96000CD5AE6 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = VXUtility.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A89FBBE07EBE96000CD5AE6 = {
+			fileRef = 6A89FBBD07EBE96000CD5AE6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A89FBDB07EC2FC500CD5AE6 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = VXConstants.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A89FBDC07EC2FC500CD5AE6 = {
+			fileRef = 6A89FBDB07EC2FC500CD5AE6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A89FBE507EC318600CD5AE6 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = VXWrappers.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A89FBE607EC318600CD5AE6 = {
+			fileRef = 6A89FBE507EC318600CD5AE6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A89FBEA07EC326C00CD5AE6 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = VXWrappers.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A89FBEB07EC326C00CD5AE6 = {
+			fileRef = 6A89FBEA07EC326C00CD5AE6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A89FC8707EC348E00CD5AE6 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = VXLoaderUtility.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A89FC8807EC348E00CD5AE6 = {
+			fileRef = 6A89FC8707EC348E00CD5AE6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		6A8E77E307DE59AA00172258 = {
 			buildActionMask = 2147483647;
 			files = (
+				6AA0B37F07EC473700DCDDFF,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,10 +575,13 @@
 		6A8E77E407DE59AA00172258 = {
 			buildActionMask = 2147483647;
 			files = (
+				6AA0B3D907EC4E1400DCDDFF,
 				6A23CB7107DEEBD6005EE6B1,
+				6AA0B3D607EC4DE300DCDDFF,
 				6A89D5C907DE661A00CDA735,
 				6AEE838F07E0AEBA0009C91E,
 				6A86CD0907E775A10070ABF2,
+				6AA0B38307EC474B00DCDDFF,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -545,9 +669,77 @@
 				6A23CB4407DEE9FF005EE6B1,
 				6A86CCF907E772960070ABF2,
 				6AD3486207E7F055001CC42D,
+				6AA0B38207EC474B00DCDDFF,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AA0B36D07EC38D800DCDDFF = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = VXLoader.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AA0B36E07EC38D800DCDDFF = {
+			fileRef = 6AA0B36D07EC38D800DCDDFF;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA0B37E07EC473600DCDDFF = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			path = VXLoader.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AA0B37F07EC473700DCDDFF = {
+			fileRef = 6AA0B37E07EC473600DCDDFF;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA0B38007EC474B00DCDDFF = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = VXInfoBoxController.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AA0B38107EC474B00DCDDFF = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = VXInfoBoxController.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AA0B38207EC474B00DCDDFF = {
+			fileRef = 6AA0B38007EC474B00DCDDFF;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA0B38307EC474B00DCDDFF = {
+			fileRef = 6AA0B38107EC474B00DCDDFF;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA0B3D607EC4DE300DCDDFF = {
+			fileRef = 6A89FBEA07EC326C00CD5AE6;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA0B3D907EC4E1400DCDDFF = {
+			fileRef = 6A6232F207EBE7C50009934E;
+			isa = PBXBuildFile;
+			settings = {
+			};
 		};
 		6AC6969D07DE565B006D49F2 = {
 			fileEncoding = 4;
@@ -643,7 +835,7 @@
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
-			path = VXLoader.mm;
+			path = IMInterface.mm;
 			refType = 4;
 			sourceTree = "<group>";
 		};

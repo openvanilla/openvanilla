@@ -3,7 +3,8 @@
 #ifndef __TSBundle_H
 #define __TSBundle_H
 
-#define TSBUNDLEFILENAME    "/Library/OpenVanilla/0.7/Loader/OVLoader.bundle"
+// #define TSBUNDLEFILENAME    "/Library/OpenVanilla/0.7/Loader/OVLoader.bundle"
+#define TSBUNDLEFILENAME    "/Users/lukhnos/logiciels/openvanilla/Loaders/OSX/build/OVLoader.bundle"
 #define TSBUNDLEID          "org.openvanilla.loader"
 
 #ifdef __cplusplus

@@ -1,11 +1,12 @@
 // VXLoaderService.mm
 
-#include "VXLoader.h"
+#include "VXLoaderUtility.h"
 #include <dlfcn.h>
 
 #define OVDEBUG
+#include <OpenVanilla/OpenVanilla.h>
+#include <OpenVanilla/OVLibrary.h>
 #include <OpenVanilla/OVUtility.h>
-
 #include "VXUtility.h"
 
 OVLoadedLibrary *VXLoadLibraryFromBundle(NSString *p)
@@ -108,6 +109,20 @@ NSString *VXGetRealLoadedPath(NSString *libName)
         stringByAppendingString: @"/"];
 }
 
+NSString *VXGetUserDataPath(VXModuleWrapper *w, NSString *userspaceroot)
+{
+    OVModule *mod=[w module];
+    if (!mod) return @"";
+    
+    NSString *up=
+        [[[userspaceroot stringByStandardizingPath]
+            stringByAppendingPathComponent: VXSTR(mod->identifier())]
+                stringByAppendingString: @"/"];
+            
+    system([[NSString stringWithFormat: @"mkdir -p %@", up] UTF8String]);
+    return up;
+}
+
 NSArray *VXMilkModulesFromLibrary(NSString *libName, OVLoadedLibrary *lib, 
     NSMutableDictionary *nameDict)
 {
@@ -181,62 +196,20 @@ NSArray* VXLoadEverything(NSArray *paths, OVDictionary *globalPref, OVService *s
     return modList;
 }
 
-@implementation VXModuleWrapper
--(id)initWithModule:(OVModule*)m libraryPath:(NSString*)p
+VXModuleWrapper *VXFindModule(NSArray *modlist, NSString *identifier, 
+    NSString *type)
 {
-    self=[super init];
-    if (self)
+    NSEnumerator *enm=[modlist objectEnumerator];
+    while (VXModuleWrapper *m=[enm nextObject])
     {
-        inited=FALSE;
-        [self setModule:m libraryPath:p];
+        if ([[m identifier] isEqualToString:identifier])
+        {
+            if (!type) return m;
+            if (type)
+            {
+                if ([[m moduleType] isEqualToString:type]) return m;
+            }
+        }
     }
-    return self;
+    return NULL;
 }
--(void)dealloc
-{
-    if (loadedPath) [loadedPath release];
-    [super dealloc];
-}
--(NSString*)description
-{
-    if (!mod) return @"";
-    return [NSString stringWithFormat: 
-        @"(module id=%@, type=%s, module path=%@, initialized=%s)",
-        VXSTR(mod->identifier()), mod->moduleType(), 
-        loadedPath, inited ? "TRUE" : "FALSE"];
-}
--(NSString*)moduleType
-{
-    return mod ? VXSTR(mod->moduleType()) : @"";
-}
--(NSString*)identifier
-{
-    return mod ? VXSTR(mod->identifier()) : @"";
-}
--(OVModule*)module
-{
-    return mod;
-}
--(OVModule*)setModule:(OVModule*)m libraryPath:(NSString*)p
-{
-    mod=m;
-    if (loadedPath) [loadedPath release];
-    loadedPath=p;
-    [loadedPath retain];
-    return mod;
-}
--(BOOL)initialize:(OVDictionary*)globalPref localPref:(OVDictionary*)pref
- service:(OVService*)s userSpaceRoot:(NSString*)u
-{
-    if (inited) return FALSE;
-    inited=TRUE;
-    
-    // we append the identifer to the userSpaceRoot parameter
-    NSString *up=
-        [[u stringByAppendingPathComponent: VXSTR(mod->identifier())]
-            stringByAppendingString: @"/"];
-    system([[NSString stringWithFormat: @"mkdir %@", up] UTF8String]);
-    return (BOOL)mod->initialize(globalPref, pref, s, [loadedPath UTF8String], 
-        [up UTF8String], "/");
-}
-@end

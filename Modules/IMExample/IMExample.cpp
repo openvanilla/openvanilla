@@ -11,16 +11,22 @@
 class IMExampleContext : public OVInputMethodContext
 {
 public:
-    virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVInfoBox*, OVService*)
+    virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVInfoBox* i, OVService*)
     {
+        murmur("IMExample: key event!");
         if (isprint(k->code()))
         {
             char str[2];
             sprintf(str, "%c", k->code());
-            b->append(str)->send();
+            b->append(str)->update();
+            i->show();
+            i->append(str)->update();
             return 1;
         }
         
+        b->send();
+        i->hide();
+                
         return 0;
     }
 };

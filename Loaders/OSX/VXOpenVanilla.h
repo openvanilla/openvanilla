@@ -7,6 +7,7 @@
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVUtility.h>
 #include "VXUtility.h"
+#include "VXInfoBoxController.h"
 
 class VXDictionary : public OVDictionary
 {
@@ -81,10 +82,6 @@ public:
 };
 
 
-#endif
-
-/*
-
 class VXKeyCode : public OVKeyCode
 {
 public:
@@ -104,7 +101,7 @@ protected:
 class VXBuffer : public OVBuffer
 {
 public:
-    VXBuffer(TSBComposingBuffer *buf) : b(buf);
+    VXBuffer(TSComposingBuffer *buf) : b(buf) {}
     virtual OVBuffer* clear() { b->clear(); return this; } 
     virtual OVBuffer* send() { b->send(); return this; }
     virtual OVBuffer* update() { b->update(FALSE); return this; }
@@ -113,32 +110,29 @@ public:
     virtual int isEmpty() { return b->isEmpty(); }
     virtual OVBuffer* append(const char *s)
     {
-        NSString *ns=[[NSString alloc] initWithUTF8String: s];
-        b->append((CFStringRef)ns);
-        [ns release];
+        b->append([NSString stringWithUTF8String: s]);
+        return this;
     }
 
 protected:
-    TSBComposingBuffer *b;
+    TSComposingBuffer *b;
 };
 
-class VXInfoBox : public OVInfoBox 
+class VXInfoBox : public OVInfoBox
 {
 public:
+    VXInfoBox(VXInfoBoxController *cc, NSWindow *ww) : c(cc), w(ww) {}
     virtual OVInfoBox* clear()  { [c clearContent]; return this; }
     virtual OVInfoBox* append(const char *s) { [c append: s]; return this; }
-    virtual OVInfoBox* hide() { [w orderOut]; return this; }
-    virtual OVInfoBox* show() { [w orderFront]; return this; }
+    virtual OVInfoBox* hide() { [w orderOut: c]; return this; }
+    virtual OVInfoBox* show() { [w orderFront: c]; return this; }
     virtual OVInfoBox* update() { [c update]; return this; }
-    virtual int onScreen() { return [w isOnScreen]; }
+    virtual int onScreen() { return [w isVisible]; }
 protected:
-    CVInfoBoxController *c;
-    CVInfoBoxWindow *w;
+    VXInfoBoxController *c;
+    NSWindow *w;
 };
 
-inline static NSString *VXSTR(const char *s)
-{
-    return [[NSString stringWithUTF8String: s] autorelease];
-}
 
-*/
+#endif
+
