@@ -5,7 +5,7 @@
 #include "OpenVanilla/OpenVanilla.h"
 #include "OpenVanilla/OVLoadable.h"
 
-class OVExampleIM;
+class OVIMExample;
 
 class OVExampleContext : public OVIMContext
 {
@@ -88,9 +88,9 @@ public:
     {
         *enc=ovEncodingUTF8;
         if (!strcasecmp(locale, "zh_TW"))
-            return strlen(strcpy((char*)s, "OV 輸入法範例程式"));
+            return strlen(strcpy((char*)s, "OV 輸入法範例"));
         else if (!strcasecmp(locale, "zh_CN"))
-            return strlen(strcpy((char*)s, "OV 输入法范例程式"));
+            return strlen(strcpy((char*)s, "OV 输入法范例"));
         else
             return strlen(strcpy((char*)s, "OV Example"));
     }

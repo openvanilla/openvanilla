@@ -34,12 +34,9 @@ public:
     OVUnicodeContext(OVIMUnicode *p)
     {
         parent=p;
-        fprintf (stderr, "New IM context created\n");
     }
     
-    virtual ~OVUnicodeContext()
-    {
-    }
+    virtual ~OVUnicodeContext(){}
     
     virtual int activate(OVService *)
     {
@@ -49,14 +46,9 @@ public:
     
     virtual int deactivate(OVService *)
     {
-        return 1;
-    }
-    
-	virtual int clear()
-	{
 		keyseq.clear();
         return 1;
-	}
+    }
 	
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         OVService *srv)

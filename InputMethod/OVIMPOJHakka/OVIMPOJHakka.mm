@@ -24,7 +24,7 @@ int OVIMPOJHakka::name(char *locale, void *s, OVEncoding *enc)
         return strlen(strcpy((char*)s, "OV 白話字(POJHakka)漢羅"));
     if (!strcasecmp(locale, "zh_CN"))
         return strlen(strcpy((char*)s, "OV 白話字(POJHakka)汉罗"));
-    return strlen(strcpy((char*)s, "OV Pe̍h-ōe-jī (POJHakka) IM"));
+    return strlen(strcpy((char*)s, "OV Pe̍h-ōe-jī (POJHakka)"));
 }
 
 int OVIMPOJHakka::initialize(OVDictionary* global, OVDictionary* local,
@@ -88,6 +88,9 @@ OVService *srv)
 
     if (candi.onDuty()) return candidateEvent(key, buf, textbar, srv);
 
+	//Ignore arrow keys.
+    if (key->isCode(4, ovkDown, ovkUp, ovkLeft, ovkRight))
+		return 1;
     
     // if backspace of delete key is hit
     if (key->isCode(2, ovkBackspace, ovkDelete) && buf->length())

@@ -24,7 +24,7 @@ int OVIMPOJ::name(char *locale, void *s, OVEncoding *enc)
         return strlen(strcpy((char*)s, "OV 白話字(POJ)漢羅"));
     if (!strcasecmp(locale, "zh_CN"))
         return strlen(strcpy((char*)s, "OV 白話字(POJ)汉罗"));
-    return strlen(strcpy((char*)s, "OV Pe̍h-ōe-jī (POJ) IM"));
+    return strlen(strcpy((char*)s, "OV Pe̍h-ōe-jī (POJ)"));
 }
 
 int OVIMPOJ::initialize(OVDictionary* global, OVDictionary* local,
