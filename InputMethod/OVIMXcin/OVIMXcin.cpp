@@ -263,6 +263,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         {
             keyseq.clear();
             autocomposing=0;
+            cancelAutoCompose(textbar);
             return candidateEvent(key, buf, textbar, srv);
         }
 
@@ -312,6 +313,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         if (keyseq.length() == parent->maxSeqLen() && parent->isHitMaxAndCompose())
         {
             autocomposing=0;
+            cancelAutoCompose(textbar);
             return compose(buf, textbar, srv);
         }
 		
@@ -319,6 +321,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         if (cintab->isEndKey(static_cast<char>(key->code())))
         {
             autocomposing=0;
+            cancelAutoCompose(textbar);
             return compose(buf, textbar, srv);
         }
         
