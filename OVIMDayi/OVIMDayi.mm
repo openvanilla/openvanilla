@@ -2,10 +2,10 @@
 
 #define OVDEBUG
 
-#include <Cocoa/Cocoa.h>
-#include "OpenVanilla/OpenVanilla.h"
-#include "OpenVanilla/OVLoadable.h"
-#include "OpenVanilla/OVUtility.h"
+#import <Cocoa/Cocoa.h>
+#import <OpenVanilla/OpenVanilla.h>
+#import <OpenVanilla/OVLoadable.h>
+#import <OpenVanilla/OVUtility.h>
 
 id MakeNSStr(char *s)
 {
@@ -238,7 +238,7 @@ SPAGHETTI:
                 if ([(NSString*)v length] > 1)
                 {
                     char bbb[256];
-                    sprintf (bbb, " (%d candidates)    ", [v length]);
+                    sprintf (bbb, " (%d candidates)    ", [(NSString*)v length]);
 
                     candi=1;
                     clearkeyseq();
