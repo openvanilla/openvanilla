@@ -5,7 +5,9 @@ MKDIR=/bin/mkdir -p
 
 INST_PATH=/Library/OpenVanilla/Development
 
-CFLAGS=-O2 -Wall -I../../Headers
+INC=-I../../Headers 
+
+CFLAGS=-O2 -Wall $(INC)
 
 GCC=/usr/bin/gcc
 GPP=/usr/bin/g++

@@ -1,3 +1,4 @@
 
-VPATH+= ../../Source/Shared:../../InputMethod/OVIMXcin
+INC+= -I../../Headers/OSX
+VPATH+= ../../Source/OSX
 
