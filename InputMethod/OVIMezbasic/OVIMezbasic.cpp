@@ -97,7 +97,7 @@ public:
     virtual int name(char *locale, void *s, OVEncoding *enc)
     {
         *enc=ovEncodingUTF8;
-        return strlen(strcpy((char*)s, "OpenVanilla EZBasic"));
+        return strlen(strcpy((char*)s, "OV EZBasic IM"));
     }
 
     virtual int initialize(OVDictionary*, OVDictionary*, OVService*, char*)

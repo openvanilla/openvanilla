@@ -102,9 +102,9 @@ public:
     {
         *enc=ovEncodingUTF8;
         if (!strcasecmp(locale, "zh_TW"))
-            return strlen(strcpy((char*)s, "OpenVanilla 注音輸入法"));
+            return strlen(strcpy((char*)s, "OV 注音"));
         else
-            return strlen(strcpy((char*)s, "OpenVanilla Phonetic IM"));
+            return strlen(strcpy((char*)s, "OV Phonetic IM"));
     }
 
     virtual int initialize(OVDictionary* g, OVDictionary* l, OVService*, char*)

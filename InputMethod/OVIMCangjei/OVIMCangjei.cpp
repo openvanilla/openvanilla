@@ -77,16 +77,16 @@ public:
         if (!simplex)
         {
 	        if (!strcasecmp(locale, "zh_TW"))
-    	        return strlen(strcpy((char*)s, "OpenVanilla 倉頡輸入法"));
+    	        return strlen(strcpy((char*)s, "OV 倉頡"));
         	else
-            	return strlen(strcpy((char*)s, "OpenVanilla Cangjei IM"));
+            	return strlen(strcpy((char*)s, "OV Cangjei IM"));
         }
         else
         {
 	        if (!strcasecmp(locale, "zh_TW"))
-    	        return strlen(strcpy((char*)s, "OpenVanilla 簡易輸入法"));
+    	        return strlen(strcpy((char*)s, "OV 簡易"));
         	else
-            	return strlen(strcpy((char*)s, "OpenVanilla Simplex IM"));
+            	return strlen(strcpy((char*)s, "OV Simplex IM"));
         }        
     }
 

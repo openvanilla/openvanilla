@@ -75,8 +75,8 @@ OVIMXcin::OVIMXcin(char *lpath, char *cfile, char *en, char *cn,
     cintab=NULL;
    
     cnameencoding=enc;
-    strcpy(ename, "OpenVanilla Array30");
-    strcpy(cname, "OpenVanilla 行列輸入法");
+    strcpy(ename, "OV Array30 IM");
+    strcpy(cname, "OV 行列");
 }
 
 OVIMXcin::~OVIMXcin()
