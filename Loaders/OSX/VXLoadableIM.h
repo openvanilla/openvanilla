@@ -37,11 +37,12 @@ public:
 class VXLibraryIMPair
 {
 public:
-	VXLibraryIMPair() : im(NULL), lib(NULL), imid(0) { *id=0; }
+	VXLibraryIMPair() : im(NULL), lib(NULL), imid(0), inited(0) { *id=0; }
 	
 	OVInputMethod *im;
 	VXLoadableLibrary *lib;
 	int imid;
+	int inited;
 	char id[ovMaxIdentifierLength];
 };
 

@@ -107,11 +107,11 @@ int CIMCustomInitialize(MenuRef mnu)
 		
 		CFRelease(imname);
 
-		char id[256];
-		list.impair[i].im->identifier(id);
-		OVDictionary *local=GetLocalConfig(id);
-		list.impair[i].im->initialize(global, local, &srv, (char*)loaddir);
-		delete local;
+//		char id[256];
+//		list.impair[i].im->identifier(id);
+//		OVDictionary *local=GetLocalConfig(id);
+//		list.impair[i].im->initialize(global, local, &srv, (char*)loaddir);
+//		delete local;
 	}
 	
 	InsertMenuItemTextWithCFString(mnu, CFSTR("-"), i++, 0, 0);
@@ -148,11 +148,18 @@ int CIMCustomInitialize(MenuRef mnu)
 		global->getString("currentIM", currentim);
 	}
 	
-	inputmethod=list.find(currentim);
-	if (!inputmethod) inputmethod=list.getFirst();
+	int pos=list.findPos(currentim);
+
+	if (pos==-1) pos=0;
+	inputmethod=list.impair[pos].im;
 	
 	if (inputmethod)
 	{
+		OVDictionary *local=GetLocalConfig(currentim);
+		inputmethod->initialize(global, local, &srv, (char*)loaddir);
+		list.impair[pos].inited=1;
+		delete local;
+
 		inputmethod->identifier(currentim);
 		global->setString("currentIM", currentim);
 		
@@ -356,6 +363,20 @@ int CIMCustomMenuHandler(void *data, UInt32 command, MenuRef mnu,
     	SetItemMark(mnu, newpos+1, checkMark);
     	
 		OVInputMethod *newim=list.impair[newpos].im;
+		
+		if (!list.impair[newpos].inited)
+		{
+			char buf[256];
+			newim->identifier(buf);
+			
+			OVDictionary *global=GetGlobalConfig();
+			OVDictionary *local=GetLocalConfig(buf);
+			newim->initialize(global, local, &srv, (char*)loaddir);
+			list.impair[newpos].inited=1;
+			delete local;
+			delete global;
+		}
+		
     	newim->identifier(buf);
     	murmur ("user wants to switch IM, newimpos=%d, new im id=%s", newpos, buf);
     	

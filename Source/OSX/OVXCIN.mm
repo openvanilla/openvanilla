@@ -5,7 +5,6 @@
 
 #include <fstream>
 #include <iostream>
-#include <string>
 
 using namespace std;
 
@@ -24,18 +23,25 @@ vector<string> OVXCIN::find(string key)
 
 void OVXCIN::read(char *fname, int shiftselkey)
 {
-	ifstream in(fname);
+	ifstream in(fname, ios_base::binary);
 	
 	in.seekg(0, ios_base::end);
 	int length = in.tellg();
 	in.seekg(0);
+
+	cout<<length<<endl;
 	
-	char buffer[length];
-	in.get(buffer, length);
-
-	// <TODO>getline() for buffer</TODO>
-
+	char *buffer = (char*)calloc(1, length);
+	in.get(buffer, length, 0);
+	
+	for (int i=0;i<length;i++) printf("%c", buffer[i]);
+	
+	ofstream out("test.txt", ios_base::binary);
+	out.write(buffer, length);
+	
+	out.close();	
 	in.close();
+	free(buffer);
 }
 
 int main(int argc, char**argv)
