@@ -1,6 +1,6 @@
 // OpenVanilla.h: The OpenVanilla Framework
 // Copyright (c) 2004-2005 The OpenVanilla Project (http://openvanilla.org)
-`
+
 // The OpenVanilla Framework is released under the Artisitc License, that is,
 // it is released under the same term that Perl is.
 
@@ -30,7 +30,7 @@
 #ifndef __OpenVanilla_h
 #define __OpenVanilla_h
 
-#define OV_VERSION   (0x00070000)      // version 0.7.0
+#define OVVERSION   (0x00070000)      // version 0.7.0
 
 // A pure base class that defines the virtual destructor
 class OVBase
@@ -156,9 +156,9 @@ public:
     virtual const char *moduleType()=0;
     virtual const char *identifier()=0;
     virtual const char *localizedName(const char* locale) { return identifier(); }
-    virtual void initialize(OVDictionary *globalPref, OVDictionary *modulePref,
+    virtual int initialize(OVDictionary *globalPref, OVDictionary *modulePref,
         OVService *srv, const char *modulePath, const char *userPath, 
-        const char *seperator) {}
+        const char *seperator) { return 1; }
     virtual void update(OVDictionary *modulePref, OVService *srv) {}
 };
 

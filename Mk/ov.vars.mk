@@ -6,7 +6,7 @@ RM=/bin/rm -f
 CP=/bin/cp
 MKDIR=/bin/mkdir -p
 
-INST_PATH=/Library/OpenVanilla/0.6.3
+INST_PATH=/Library/OpenVanilla/0.7.0-pre/Modules
 DATA_INST_PATH?=$(INST_PATH)/$(IMID)
 
 INC=-I../../Headers 
