@@ -1,0 +1,70 @@
+<?xml version="1.0" standalone="yes"?>
+<object class="NSIBObjectData">
+  <string name="targetFramework">IBCarbonFramework</string>
+  <object name="rootObject" class="NSCustomObject" id="1">
+    <string name="customClass">NSApplication</string>
+  </object>
+  <array count="6" name="allObjects">
+    <object class="IBCarbonWindow" id="186">
+      <string name="windowRect">226 255 423 651 </string>
+      <string name="title">說到 OpenVanilla 0.6.2 ...</string>
+      <object name="rootControl" class="IBCarbonRootControl" id="187">
+        <string name="bounds">0 0 197 396 </string>
+        <string name="viewFrame">0 0 396 197 </string>
+        <array count="4" name="subviews">
+          <object class="IBCarbonStaticText" id="193">
+            <string name="bounds">20 20 36 376 </string>
+            <string name="viewFrame">20 20 356 16 </string>
+            <string name="title">OpenVanilla 輸入法載入器 0.6.2 / Mac OS X</string>
+            <int name="justification">-2</int>
+          </object>
+          <object class="IBCarbonStaticText" id="194">
+            <string name="bounds">54 20 93 376 </string>
+            <string name="viewFrame">20 54 356 39 </string>
+            <string name="title">© 2004 由 Lukhnos, 劉康民、姜天戩、陳柏中、楊維中等人製作。</string>
+          </object>
+          <object class="IBCarbonStaticText" id="195">
+            <string name="bounds">101 20 141 376 </string>
+            <string name="viewFrame">20 101 356 40 </string>
+            <string name="title">本軟體為開放源碼 (open source) 軟體，採用 Artistic License 釋出。相關權利義務，請參閱授權條款原文。</string>
+          </object>
+          <object class="IBCarbonStaticText" id="196">
+            <string name="bounds">149 20 177 376 </string>
+            <string name="viewFrame">20 149 356 28 </string>
+            <string name="title">http://openvanilla.org</string>
+          </object>
+        </array>
+      </object>
+      <boolean name="receiveUpdates">FALSE</boolean>
+      <boolean name="hasCollapseBox">FALSE</boolean>
+      <boolean name="hasHorizontalZoom">FALSE</boolean>
+      <boolean name="isResizable">FALSE</boolean>
+      <boolean name="hasVerticalZoom">FALSE</boolean>
+      <boolean name="liveResize">TRUE</boolean>
+      <boolean name="compositing">TRUE</boolean>
+      <int name="themeBrush">1</int>
+      <int name="windowPosition">7</int>
+      <boolean name="isConstrained">FALSE</boolean>
+    </object>
+    <reference idRef="187"/>
+    <reference idRef="193"/>
+    <reference idRef="194"/>
+    <reference idRef="195"/>
+    <reference idRef="196"/>
+  </array>
+  <array count="6" name="allParents">
+    <reference idRef="1"/>
+    <reference idRef="186"/>
+    <reference idRef="187"/>
+    <reference idRef="187"/>
+    <reference idRef="187"/>
+    <reference idRef="187"/>
+  </array>
+  <dictionary count="2" name="nameTable">
+    <string>AboutWindow</string>
+    <reference idRef="186"/>
+    <string>File&apos;s Owner</string>
+    <reference idRef="1"/>
+  </dictionary>
+  <unsigned_int name="nextObjectID">197</unsigned_int>
+</object>

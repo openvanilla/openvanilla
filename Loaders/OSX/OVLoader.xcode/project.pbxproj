@@ -30,6 +30,7 @@
 			);
 			isa = PBXVariantGroup;
 			name = InfoPlist.strings;
+			path = "";
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -54,6 +55,7 @@
 			);
 			isa = PBXVariantGroup;
 			name = Localizable.strings;
+			path = "";
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -241,6 +243,18 @@
 			settings = {
 			};
 		};
+		6A52846B07780356006DC3AF = {
+			children = (
+				6AA802A207781340002FF0E1,
+				6AD0EAE0075AFC6A005045FE,
+				6A2415C8075C286900A155A6,
+				6A2415C5075C285F00A155A6,
+			);
+			isa = PBXGroup;
+			name = Resources;
+			refType = 4;
+			sourceTree = "<group>";
+		};
 		6A601B97076D6E2000B9CE0D = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -285,6 +299,7 @@
 		};
 		6A8BE8C307544DB1002FBA64 = {
 			children = (
+				6A52846B07780356006DC3AF,
 				6A8BE99207544E75002FBA64,
 				6A8BE99107544E6B002FBA64,
 				6A8BE8D907544E1F002FBA64,
@@ -339,6 +354,7 @@
 			files = (
 				6A2415C9075C286900A155A6,
 				6A2415C6075C285F00A155A6,
+				6AA802A407781340002FF0E1,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -549,10 +565,7 @@
 			children = (
 				6A241659075C362F00A155A6,
 				6A241657075C362400A155A6,
-				6A2415C5075C285F00A155A6,
-				6A2415C8075C286900A155A6,
 				6AD0EADF075AFC6A005045FE,
-				6AD0EAE0075AFC6A005045FE,
 			);
 			isa = PBXGroup;
 			name = OVLoader;
@@ -656,6 +669,39 @@
 			isa = PBXBuildFile;
 			settings = {
 			};
+		};
+		6AA802A207781340002FF0E1 = {
+			children = (
+				6AA802A307781340002FF0E1,
+				6AA802A50778134A002FF0E1,
+			);
+			isa = PBXVariantGroup;
+			name = OVLoader.nib;
+			path = "";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AA802A307781340002FF0E1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = English;
+			path = English.lproj/OVLoader.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AA802A407781340002FF0E1 = {
+			fileRef = 6AA802A207781340002FF0E1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA802A50778134A002FF0E1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = zh_TW;
+			path = zh_TW.lproj/OVLoader.nib;
+			refType = 4;
+			sourceTree = "<group>";
 		};
 		6AD0EADF075AFC6A005045FE = {
 			fileEncoding = 4;
