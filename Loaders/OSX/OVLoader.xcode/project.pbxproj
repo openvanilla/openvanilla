@@ -1,0 +1,303 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 39;
+	objects = {
+		6A2536B507C0F391003C843C = {
+			children = (
+				6A2536CB07C0F40B003C843C,
+				6A2536C907C0F3EC003C843C,
+				6A2536C207C0F3BA003C843C,
+				6A2536C307C0F3BA003C843C,
+			);
+			isa = PBXGroup;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A2536B707C0F391003C843C = {
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			isa = PBXBuildStyle;
+			name = Development;
+		};
+		6A2536B807C0F391003C843C = {
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			isa = PBXBuildStyle;
+			name = Deployment;
+		};
+		6A2536B907C0F391003C843C = {
+			buildSettings = {
+			};
+			buildStyles = (
+				6A2536B707C0F391003C843C,
+				6A2536B807C0F391003C843C,
+			);
+			hasScannedForEncodings = 0;
+			isa = PBXProject;
+			mainGroup = 6A2536B507C0F391003C843C;
+			productRefGroup = 6A2536C207C0F3BA003C843C;
+			projectDirPath = "";
+			targets = (
+				6A2536C007C0F3BA003C843C,
+			);
+		};
+		6A2536BD07C0F3BA003C843C = {
+			buildActionMask = 2147483647;
+			files = (
+				6A2536D507C0F453003C843C,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A2536BE07C0F3BA003C843C = {
+			buildActionMask = 2147483647;
+			files = (
+				6A2536DE07C0F47F003C843C,
+				6A2536E107C0F47F003C843C,
+				6A2536E307C0F47F003C843C,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A2536BF07C0F3BA003C843C = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A2536C007C0F3BA003C843C = {
+			buildPhases = (
+				6A2536BD07C0F3BA003C843C,
+				6A2536BE07C0F3BA003C843C,
+				6A2536BF07C0F3BA003C843C,
+				6A2536C707C0F3DC003C843C,
+				6A2536C807C0F3E4003C843C,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVLoader-0.7-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OPTIMIZATION_CFLAGS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Carbon";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = "OVLoader-0.7";
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = "OVLoader-0.7";
+			productName = "OVLoader-0.7";
+			productReference = 6A2536C107C0F3BA003C843C;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OVLoader-0.7</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.OVLoader_0_7</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CSResourcesFileMapped</key>
+	<string>yes</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		6A2536C107C0F3BA003C843C = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = "OVLoader-0.7.bundle";
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6A2536C207C0F3BA003C843C = {
+			children = (
+				6A2536C107C0F3BA003C843C,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A2536C307C0F3BA003C843C = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "OVLoader-0.7-Info.plist";
+			path = "/Users/lukhnos/logiciel/OV0.7/Loaders/OSX/OVLoader-0.7-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6A2536C707C0F3DC003C843C = {
+			buildActionMask = 2147483647;
+			files = (
+				6A2536DF07C0F47F003C843C,
+				6A2536E207C0F47F003C843C,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A2536C807C0F3E4003C843C = {
+			buildActionMask = 2147483647;
+			files = (
+				6A2536E007C0F47F003C843C,
+			);
+			isa = PBXRezBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A2536C907C0F3EC003C843C = {
+			children = (
+				6A2536D807C0F47F003C843C,
+				6A2536D907C0F47F003C843C,
+				6A2536DA07C0F47F003C843C,
+				6A2536DB07C0F47F003C843C,
+				6A2536DC07C0F47F003C843C,
+				6A2536DD07C0F47F003C843C,
+			);
+			isa = PBXGroup;
+			name = CarbonInputMethod;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A2536CB07C0F40B003C843C = {
+			children = (
+				6A2536D407C0F453003C843C,
+			);
+			isa = PBXGroup;
+			name = Localizables;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A2536CE07C0F436003C843C = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = English;
+			path = English.lproj/InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A2536D407C0F453003C843C = {
+			children = (
+				6A2536CE07C0F436003C843C,
+			);
+			isa = PBXVariantGroup;
+			name = InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A2536D507C0F453003C843C = {
+			fileRef = 6A2536D407C0F453003C843C;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2536D807C0F47F003C843C = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			path = CIM.cpp;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2536D907C0F47F003C843C = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = CIM.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2536DA07C0F47F003C843C = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.rez;
+			path = CIM.r;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2536DB07C0F47F003C843C = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			path = CIMComponent.cpp;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2536DC07C0F47F003C843C = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = CIMConst.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2536DD07C0F47F003C843C = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			path = CIMCustomExample.cpp;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A2536DE07C0F47F003C843C = {
+			fileRef = 6A2536D807C0F47F003C843C;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2536DF07C0F47F003C843C = {
+			fileRef = 6A2536D907C0F47F003C843C;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2536E007C0F47F003C843C = {
+			fileRef = 6A2536DA07C0F47F003C843C;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2536E107C0F47F003C843C = {
+			fileRef = 6A2536DB07C0F47F003C843C;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2536E207C0F47F003C843C = {
+			fileRef = 6A2536DC07C0F47F003C843C;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A2536E307C0F47F003C843C = {
+			fileRef = 6A2536DD07C0F47F003C843C;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+	};
+	rootObject = 6A2536B907C0F391003C843C;
+}
