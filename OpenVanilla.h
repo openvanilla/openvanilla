@@ -1,4 +1,7 @@
 // OpenVanilla.h
+// Copyright (c) 2004 by Lukhnos D. Liu (lukhnos@openvanilla.org)
+// and Kang-ming Liu (gugod@gugod.org)
+
 
 #ifndef __OpenVanilla_h
 #define __OpenVanilla_h
