@@ -6,101 +6,18 @@ http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf for 
 #include <string.h>
 #include "OpenVanilla/OpenVanilla.h"
 #include "OpenVanilla/OVLoadable.h"
+#include "OVIMTibetan.h"
 
 class OVTibetanIM;
 
-#define VOWEL 2
-#define CONSONAT 1
-#define OTHER 0
-
-const int ebMaxKeySeq=10;
-class KeySeq
-{
-public:
-    KeySeq() { len=0; buf[0]=0; }
-    void add(char c)
-{
-	if (len == ebMaxKeySeq) return;
-	buf[len++]=c;
-	buf[len]=0;
-}
-void remove()
-{
-	if (!len) return;
-	buf[--len]=0;
-}
-void clear() { len=0; buf[0]=0; }
-void lastisvowel() {last=VOWEL;}
-void lastisconsonant() {last=CONSONAT;}
-void lastisother() {last=OTHER;}
-char buf[ebMaxKeySeq];
-int len;
-int last;
-};
-
-#define SYMBOL_NUM 10
-#define CONSONAT_NUM 37
-#define VOWEL_NUM 8
-#define FINALADD_NUM 2
-#define MAX_COMPOSE 5
-
-char ComposeKey = 'f';
-char SpaceKey = '.';
-
-char SymbolKeys[SYMBOL_NUM] = 
-{
-	'!', ',', '#', '$', '(', ')', '@', ':', ';','-'
-};
-
-unsigned short SymbolChars[SYMBOL_NUM] =
-{
-	0x0F00,0x0F0D,0x0F04,0x0F05,0x0F3C,0x0F3D,0x0F85,0x0F7F,0x0F14,0x0F11
-};
-
-char ConsonantKeys[CONSONAT_NUM] = 
-{
-	'k','K','g','G','c','C','j','N','n','t',
-	'T','d','D','p','P','b','B','m','x','X',
-	'D','w','z','Z','\'','y','r', 'l', 'S','s',
-	'h','A', 'v', 'q', 'Q', 'B', 'V'
-};
-
-unsigned short ConsonantChars[CONSONAT_NUM] = 
-{
-	0x0F40,0x0F41,0x0F42,0x0F44,0x0F45,0x0F46,0x0F47,0x0F49,0x0F53,0x0F4F,
-	0x0F50,0x0F51,0x0F52,0x0F54,0x0F55,0x0F56,0x0F57,0x0F58,0x0F59,0x0F5A,
-	0x0F5B,0x0F5D,0x0F5F,0x0F5E,0x0F60,0x0F61,0x0F62,0x0F63,0x0F64,0x0F66,
-	0x0F67,0x0F68,0x0F4C,0x0F4A,0x0F4B,0x0F65,0x0F4E
-};
-
-char VowelKeys[VOWEL_NUM] = 
-{
-	'a','i','u','o',
-	'e','E','O','I'
-};
-
-unsigned short VowelChars[VOWEL_NUM] = 
-{
-	0,0x0F72,0x0F74,0x0F7C,
-	0x0F7A,0x0F7B,0x0F7D,0x0F80
-}; 
-
-char FinalAddKeys[VOWEL_NUM] = 
-{
-	'%','&'
-};
-
-unsigned short FinalAddChars[FINALADD_NUM] = 
-{
-	0x0F82,0x0F7E
-};
+int keyboardlayout = 0;
 
 short isSymbolKey(int key)
 {
 	int i;
 	for(i=0; i< SYMBOL_NUM; i++)
 	{
-		if(key == SymbolKeys[i])
+		if(key == SymbolKeys[keyboardlayout][i])
 			return i;
 	}
 	return -1;
@@ -111,7 +28,7 @@ short isConsonantKey(int key)
 	int i;
 	for(i=0; i< CONSONAT_NUM; i++)
 	{
-		if(key == ConsonantKeys[i])
+		if(key == ConsonantKeys[keyboardlayout][i])
 			return i;
 	}
 	return -1;
@@ -122,7 +39,7 @@ short isVowelKey(int key)
 	int i;
 	for(i=0; i< VOWEL_NUM; i++)
 	{
-		if(key == VowelKeys[i])
+		if(key == VowelKeys[keyboardlayout][i])
 			return i;
 	}
 	return -1;
@@ -133,7 +50,7 @@ short isFinalAddKey(int key)
 	int i;
 	for(i=0; i< FINALADD_NUM; i++)
 	{
-		if(key == FinalAddKeys[i])
+		if(key == FinalAddKeys[keyboardlayout][i])
 			return i;
 	}
 	return -1;
@@ -167,7 +84,7 @@ public:
     {
 		unsigned short i;
 		short j = -1;
-		
+				
 		if (key->isOpt() || key->isCommand() || key->isCtrl())
         {
 			return 0;
@@ -185,8 +102,8 @@ public:
 		
 		if (key->isCode(4, ovkUp, ovkDown, ovkLeft, ovkRight)) //Locked when composing
 		{ 
-			if(!keyseq.len) return 0;
 			keyseq.lastisother();
+			if(!keyseq.len) return 0;
 			return 1;	// key processed
 		}
 		
@@ -218,7 +135,7 @@ public:
 				return 1;
 			}
 			
-			if(key->code() == SpaceKey) // Keyin a space.
+			if(key->code() == SpaceKey[keyboardlayout]) // Keyin a space.
 			{ 
 				buf->append((char *)" ")->send();
 				keyseq.clear();
@@ -227,17 +144,18 @@ public:
 				return 1;   // key processed
 			}
 			
-			if(key->code() == ComposeKey)	// Compose key
+			if(key->code() == ComposeKey[keyboardlayout])	// Compose key
 			{ 
 				buf->send()->clear();
-				keyseq.clear();
-				if(keyseq.buf[0] == ComposeKey) //End Composing
+				if(keyseq.buf[0] == ComposeKey[keyboardlayout]) //End Composing
 				{
+					keyseq.clear();
 					keyseq.lastisconsonant();
 					textbar->hide();
 				} else { //Begin Composing
+					keyseq.clear();
 					keyseq.lastisother();
-					keyseq.add(ComposeKey);
+					keyseq.add(key->code());
 					textbar->clear()->append((char *)"Composing...")->show();
 				}
 				return 1;   // key processed
@@ -277,7 +195,7 @@ public:
 
 			if((j = isVowelKey(key->code())) > -1)	// Vowels
 			{ 
-				if(keyseq.last == 1 || (keyseq.buf[0] == ComposeKey && keyseq.len > 3))
+				if(keyseq.last == 1 || (keyseq.buf[0] == ComposeKey[keyboardlayout] && keyseq.len > 3))
 				{
 					i = VowelChars[j];
 					buf->append(&i, ovEncodingUTF16Auto, 1)->send()->clear();
@@ -292,7 +210,7 @@ public:
 			{ 
 				i = ConsonantChars[j];
 				keyseq.lastisconsonant();
-				if(keyseq.buf[0] == ComposeKey && keyseq.len < MAX_COMPOSE) 
+				if(keyseq.buf[0] == ComposeKey[keyboardlayout] && keyseq.len < MAX_COMPOSE) 
 				{
 					if(keyseq.len > 1)
 						i = i + 0x50; // Sub characters.
@@ -329,15 +247,17 @@ public:
     {
         *enc=ovEncodingUTF8;
         if (!strcasecmp(locale, "zh_TW"))
-            return strlen(strcpy((char*)s, "OV 藏文(Sambhota Keymap One)"));
+            return strlen(strcpy((char*)s, "OV 藏文"));
         else if (!strcasecmp(locale, "zh_CN"))
-            return strlen(strcpy((char*)s, "OV 藏文(Sambhota Keymap One)"));
+            return strlen(strcpy((char*)s, "OV 藏文"));
         else
-            return strlen(strcpy((char*)s, "OV Tibetan(Sambhota Keymap One)"));
+            return strlen(strcpy((char*)s, "OV Tibetan IM"));
     }
 
-    virtual int initialize(OVDictionary*, OVDictionary*, OVService*, char*)
+    virtual int initialize(OVDictionary* g, OVDictionary* l, OVService*, char*)
     {
+		if (!l->keyExist("keyboardLayout")) l->setInt("keyboardLayout", 0);
+		keyboardlayout=l->getInt("keyboardLayout");
         return 1;
     }
     
