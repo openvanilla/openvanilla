@@ -175,7 +175,7 @@ enum
     ovkEscape=27, 
     ovkSpace=32,
     ovkReturn=13, ovkMacEnter=3,
-    ovkDelete=8, ovkBackspace=127,
+    ovkDelete=127, ovkBackspace=8,
     ovkUp=30, ovkDown=31, ovkLeft=28, ovkRight=29,
     ovkHome=1, ovkEnd=4,
     ovkPageUp=11, ovkPageDown=12
