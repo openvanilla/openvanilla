@@ -12,20 +12,37 @@ using namespace std;
 class OVCIN
 {
 public:	
-    OVCIN(char* fileName);	// VXCIN::read()
+	// VXCIN::read()
+    OVCIN(char* fileName);
+	
     ~OVCIN();
 
-	string getSelKey();	// VXCIN::selKey()
-	string getCName();	// VXCIN::name()
-	string getEName();	// VXCIN::name()
-	string getEndKey();
-	bool isEndKey(char keyChar);	// VXCIN::isEndKey()
-	vector<string> getCharVectorByKey(string key);	// VXCIN::getKey()
-	vector<string> getWordVectorByChar(string key);	// VXCIN::find()
+	// VXCIN::selKey()
+	string& getSelKey();
+	
+	// VXCIN::name()
+	string& getCName();
+	
+	// VXCIN::name()
+	string& getEName();
+	
+	string& getEndKey();
+	
+	// VXCIN::isEndKey()
+	bool isEndKey(char keyChar);
+	
+	// VXCIN::getKey()
+	int getCharVectorByKey(string inKey,
+						   vector<string>& outStringVectorRef);
+	
+	// VXCIN::find()
+	int getWordVectorByChar(string inKey,
+							vector<string>& outStringVectorRef);
 
 protected:
-	vector<string> getVectorFromMap(map< string, vector<string> >& inMapRef,
-									string key);
+	int getVectorFromMap(map< string, vector<string> >& inMapRef,
+						 string inKey,
+						 vector<string>& outStringVectorRef);
 	string getPropertyByName(vector<string>& inStringVectorRef,
 							 string propertyName);
 	int getMapByName(vector<string>& inStringVectorRef,
