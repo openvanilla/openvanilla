@@ -1,6 +1,6 @@
 // OVIMXcin.cpp
 
-#define OVDEBUG
+#define OVDEBUG 1
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLoadable.h>
 #include <OpenVanilla/OVUtility.h>
@@ -121,7 +121,7 @@ int OVIMXcin::initialize(OVDictionary* global, OVDictionary* local, OVService*, 
     char buf[256];
     OVEncoding enc=ovEncodingUTF8;
     if (!local->keyExist(sk)) local->setInt(sk, 0);
-//  if (!local->keyExist(encoding)) local->setString(encoding, "big5");
+    if (!local->keyExist(encoding)) local->setString(encoding, "big5");
 
     update(global, local);  // run-time configurable settings    
     local->getString(encoding, buf);
@@ -188,11 +188,11 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     {
         if (!autocomposing) return candidateEvent(key, buf, textbar, srv);
         
-		string output;
+        string output;
         if (candi.select(key->code(), output))
         {			
             buf->clear()->
-				append((void*)const_cast<char*>(output.c_str()))->send();
+                append((void*)const_cast<char*>(output.c_str()))->send();
             keyseq.clear();
             cancelAutoCompose(textbar);
             return 1;
@@ -218,7 +218,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         // if autocomposing is on
         if (keyseq.length() && parent->isAutoCompose())
         {
-			string inKey(keyseq.getSeq());
+            string inKey(keyseq.getSeq());
             if (cintab->isValidKey(inKey))
             {
                 autocomposing=1;
@@ -271,7 +271,8 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         }
         
         keyseq.add(key->code());
-        if (keyseq.length() == parent->maxSeqLen() && parent->isHitMaxAndCompose())
+        if (keyseq.length() == parent->maxSeqLen()
+            && parent->isHitMaxAndCompose())
         {
             autocomposing=0;
             return compose(buf, textbar, srv);
@@ -318,8 +319,8 @@ int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar, OVService *srv)
 {
     if (!keyseq.length()) return 0;
 
-	int size =
-		cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
+    int size = cintab->getWordVectorByChar(keyseq.getSeq(),
+                                           candidateStringVector);
 
     if (size == 0)
     {
@@ -329,24 +330,22 @@ int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar, OVService *srv)
 
     if (size ==1 && !autocomposing)
     {
-        buf->clear()->
-			append((void*)
-				const_cast<char*>(candidateStringVector[0].c_str()))->send();
+        buf->clear()->append((void*)const_cast<char*>
+                             (candidateStringVector[0].c_str()))->send();
         keyseq.clear();
         return 1;
     }
 
     if (!autocomposing)
     {    
-        buf->clear()->
-			append((void*)
-				const_cast<char*>(candidateStringVector[0].c_str()))->update();
+        buf->clear()->append((void*)const_cast<char*>
+                             (candidateStringVector[0].c_str()))->update();
         keyseq.clear();
     }
 	
-	cerr << cintab->getSelKey().c_str() << endl;
+    cerr << cintab->getSelKey().c_str() << endl;
     candi.prepare(&candidateStringVector,
-				  const_cast<char*>(cintab->getSelKey().c_str()), textbar);    
+                  const_cast<char*>(cintab->getSelKey().c_str()), textbar);
 
     return 1;
 }
@@ -389,22 +388,22 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
         return 1;
     }
     
-	string inKey;
-	inKey.push_back(c);
-    if (cintab->isValidKey(inKey))
-    {
-		string output;
-		if(candi.select(c, output)) {
-			buf->clear()->
-				append((void*)const_cast<char*>(output.c_str()))->send();
-			keyseq.add(c);
-			updateDisplay(buf);
-			candi.cancel();
-			textbar->hide()->clear();
-			return 1;
-		}
+    string inKey;
+    inKey.push_back(c);
+    if (cintab->isValidKey(inKey)) {
+        string output;
+        if(candi.select(c, output)) {
+            buf->clear()
+                ->append((void*)const_cast<char*>(output.c_str()))
+                ->send();
+            keyseq.add(c);
+            updateDisplay(buf);
+            candi.cancel();
+            textbar->hide()->clear();
+            return 1;
+        }
     }    
-
+    
     if (parent->isBeep()) srv->beep();
 
     return 1;
