@@ -61,7 +61,7 @@ NSString* VXCandidate::select(char c)
 {
     int i;
     for (i=0; i<perpage; i++)
-        if (selkey[i]==c)
+        if (selkey[i]==c && (pos+i < count))
         {
             onduty=0;
             return [list objectAtIndex: pos+i];

@@ -274,7 +274,8 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *text
         return 1;
     }
 
-    if (key->isCode(4, ovkSpace, ovkDown, ovkLeft, '>'))
+    if (key->isCode(3, ovkDown, ovkLeft, '>') ||
+        (!candi.onePage() && key->code()==ovkSpace))
     {
         candi.pageDown()->update(textbar);
         return 1;
@@ -287,8 +288,10 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *text
     }
 
     // enter == first candidate
+    // space (when candidate list has only one page) == first candidate
     char c=key->code();
-    if (key->isCode(2, ovkReturn, ovkMacEnter)) c=*(cintab->selKey());
+    if (key->isCode(2, ovkReturn, ovkMacEnter) || 
+        (candi.onePage() && key->code()==ovkSpace)) c=*(cintab->selKey());
     
     NSString *output;
     
