@@ -88,6 +88,12 @@ public:
         {
 			return 0;
         }
+		
+		if (key->isCapslock()) { //CapLock
+			if (key->isShift()) buf->appendChar(key->upper());
+			else buf->appendChar(key->lower())->send();
+			return 1;
+		}
 		    
         if (key->isCode(2, ovkReturn, ovkMacEnter))
         {
@@ -126,14 +132,9 @@ public:
 			return 1;
 		}
 		
+		
         if (key->isPrintable())
         {
-			if (key->isCapslock()) { //CapLock
-				if (key->isShift()) buf->appendChar(key->upper());
-				else buf->appendChar(key->lower())->send();
-				return 1;
-			}
-			
 			if(key->code() == SpaceKey[keyboardlayout]) // Keyin a space.
 			{ 
 				buf->append((char *)" ")->send();
