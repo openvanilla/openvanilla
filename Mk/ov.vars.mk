@@ -1,5 +1,6 @@
 
 RM=/bin/rm -f
+CP=/bin/cp
 MKDIR=/bin/mkdir -p
 
 INST_PATH=/Library/OpenVanilla/Development
