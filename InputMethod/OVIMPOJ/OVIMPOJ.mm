@@ -7,8 +7,8 @@
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLoadable.h>
 #include <OpenVanilla/OVUtility.h>
-#include "VXCIN.h"
-#include "VXUtility.h"
+#include "../../Source/OSX/VXCIN.h"
+#include "../../Loaders/OSX/VXUtility.h"
 
 
 char *vowel="aeimnoquAEIMNOQU";
