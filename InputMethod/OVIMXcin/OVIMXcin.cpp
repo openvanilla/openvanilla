@@ -185,6 +185,7 @@ int OVXcinContext::activate(OVService *)
 
 int OVXcinContext::deactivate(OVService *)
 {
+    candi.cancel();
     keyseq.clear();
     return 1;
 }
@@ -312,8 +313,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         // if autocomposing is on
         if (parent->isAutoCompose())
         {
-			string inKey(keyseq.getSeq());
-            if (cintab->isValidKey(inKey))
+            if (cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector))
             {
                 autocomposing=1;
                 compose(buf, textbar, srv);
