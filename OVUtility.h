@@ -8,16 +8,17 @@
 
 /**
  * Debugging routine.
- * This function accept the same argument as in fprintf(),
- * but it doesn't print anything unless OVDEBUG is set at compile time.
+ * This function accept the same argument as in printf(),
+ * and print message to stderr. But it doesn't print anything
+ * unless OVDEBUG is set at compile time.
  */
-inline void murmur(FILE *f, const char* format,...) {
+inline void murmur(const char* format,...) {
 #ifdef OVDEBUG
     va_list args;
     va_start (args, format);
-    vfprintf (f,format,args);
+    vfprintf (stderr,format,args);
     va_end (args);
-    fprintf (f,"\n");
+    fprintf (stderr,"\n");
 #endif
 }
 

@@ -51,12 +51,12 @@ int CIMCustomInitialize(MenuRef mnu)
 {
     InsertMenuItemTextWithCFString(mnu, 
         CFSTR("Print total chars typed to stderr"), 0, 0, 'TOTL');
-    murmur (stderr, "custom IM initialized");
+    murmur ("custom IM initialized");
 }
 
 void CIMCustomTerminate()
 {
-    murmur (stderr, "custom IM terminated");
+    murmur ("custom IM terminated");
 }
 
 void *CIMCustomOpen()
@@ -90,13 +90,13 @@ int CIMCustomHandleInput(CIMInputBuffer *buf, unsigned char charcode,
 {
     CustomCounter *cntr=(CustomCounter*)data;
  
-	murmur (stderr, "point=%d,%d", pnt->h, pnt->v);
+	murmur ("point=%d,%d", pnt->h, pnt->v);
 	      
     	// put printable character into the input buffer, update the display,
 	// and returns 1 -- telling app that we have "eaten" that character
 	if (isprint(charcode))
 	{   
-	    murmur (stderr, "input position=(%d,%d)", pnt->h, pnt->v);
+	    murmur ("input position=(%d,%d)", pnt->h, pnt->v);
         cntr->add();
 		buf->put(charcode);
 		buf->update();
