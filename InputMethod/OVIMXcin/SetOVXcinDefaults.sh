@@ -11,7 +11,7 @@
 ./AddPlist /Library/OpenVanilla/0.6.3/OVLoader.plist IM-OVIMXcin-pinyinbig5.cin maxKeySequenceLength integer 10
 ./AddPlist /Library/OpenVanilla/0.6.3/OVLoader.plist IM-OVIMXcin-zhcn_jtcj.cin autoCompose integer 1
 ./AddPlist /Library/OpenVanilla/0.6.3/OVLoader.plist IM-OVIMXcin-zhcn_pinyin.cin maxKeySequenceLength integer 50
-./AddPlist /Library/OpenVanilla/0.6.3/OVLoader.plist IM-OVIMXcin-zhcn_pinyin.cin AutoCompose integer 1
+./AddPlist /Library/OpenVanilla/0.6.3/OVLoader.plist IM-OVIMXcin-zhcn_pinyin.cin autoCompose integer 1
 ./AddPlist /Library/OpenVanilla/0.6.3/OVLoader.plist IM-OVIMXcin-bopomofo.cin maxKeySequenceLength integer 1
 ./AddPlist /Library/OpenVanilla/0.6.3/OVLoader.plist IM-OVIMXcin-bopomofo.cin hitMaxAndCompose integer 1
 ./AddPlist /Library/OpenVanilla/0.6.3/OVLoader.plist IM-OVIMXcin-liu57.cin maxKeySequenceLength integer 4 
