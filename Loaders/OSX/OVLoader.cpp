@@ -1,7 +1,6 @@
 // OVLoader.cpp
 
-#define OVDEBUG
-
+#define OVDEBUG		1		// doesn't seem to work, why?
 #include <Carbon/Carbon.h>
 #include <dlfcn.h>
 #include <sys/syslimits.h>
@@ -82,12 +81,12 @@ void LoadEveryDylib() {
 }
 
 void SetupMenuString(MenuRef mnu, int pos) {
-    VXCFAutoreleasePool p;
+	VXCFAUTORELEASE;
     CFBundleRef bdl = CFBundleGetBundleWithIdentifier(CFSTR(cimBundleName));
-    CFStringRef str = (CFStringRef)p.add
+    CFStringRef str = (CFStringRef)VXSafe
         (CFBundleCopyLocalizedString(bdl,CFSTR("Preferences"),NULL,NULL));	
     InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'PREF');
-    str = (CFStringRef)p.add
+    str = (CFStringRef)VXSafe
         (CFBundleCopyLocalizedString(bdl,CFSTR("About"),NULL,NULL));
     InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'ABUT');
 }
@@ -119,24 +118,15 @@ void ClearContextPool() {
 }
 
 void SetupGlobalConfig(OVDictionary *global) {
-    if (!global->keyExist("floatingWindowLock")) {
-        global->setInt("floatingWindowLock", 0);
-        global->setInt("floatingWindowLockPosX", 20);
-        global->setInt("floatingWindowLockPosY", 760);
-    }
-    if(!global->keyExist("textSize"))
-        global->setInt("textSize", 24);
-	if (!global->keyExist("useHanConversionFilter"))
-		global->setInt("useHanConversionFilter", 0);
-    floatingwindowlock = global->getInt("floatingWindowLock");
-    textsize = global->getInt("textSize");
-    defposx  = global->getInt("floatingWindowLockPosX");
-    defposy  = global->getInt("floatingWindowLockPosY");	
-	conversionfilter=global->getInt("useHanConversionFilter");
+    floatingwindowlock = global->getIntDefault("floatingWindowLock", 0);
+    textsize = global->getIntDefault("textSize", 24);
+    defposx  = global->getIntDefault("floatingWindowLockPosX", 20);
+    defposy  = global->getIntDefault("floatingWindowLockPosY", 760);	
+	conversionfilter=global->getIntDefault("useHanConversionFilter", 0);
 }
 
 void SwitchToCurrentInputMethod(MenuRef mnu,OVDictionary *global) {
-    OVAutoDeletePool p;
+    OVAUTODELETE;
     char currentim[256];
 	int pos=-1;    
 	
@@ -150,7 +140,7 @@ void SwitchToCurrentInputMethod(MenuRef mnu,OVDictionary *global) {
     inputmethod=list.impair[pos].im;
     if (inputmethod) {
         inputmethod->identifier(currentim);
-        OVDictionary *local= (OVDictionary*)p.add(GetLocalConfig(currentim));
+        OVDictionary *local= (OVDictionary*)OVSafe(GetLocalConfig(currentim));
         inputmethod->initialize(global, local, &srv, (char*)loaddir);
         list.impair[pos].inited=1;
         global->setString("currentIM", currentim);
@@ -162,7 +152,7 @@ void SwitchToCurrentInputMethod(MenuRef mnu,OVDictionary *global) {
 int CIMCustomInitialize(MenuRef mnu)
 {
     murmur ("OVLoader: initializing");
-    OVAutoDeletePool p;
+    OVAUTODELETE;
     sysconfig=new VXConfig(plistfile);
 
     ClearContextPool();
@@ -170,7 +160,7 @@ int CIMCustomInitialize(MenuRef mnu)
     int pos = SetupMenuList(mnu);
     InsertMenuItemTextWithCFString(mnu, CFSTR("-"), pos++, 0, 0);
     SetupMenuString(mnu,pos);
-    OVDictionary *global=(OVDictionary*)p.add(GetGlobalConfig());
+    OVDictionary *global=(OVDictionary*)OVSafe(GetGlobalConfig());
     SetupGlobalConfig(global);
     SwitchToCurrentInputMethod(mnu, global);
     sysconfig->write();	
@@ -212,15 +202,15 @@ int CIMCustomClose(void *data)
 }
 
 int RefreshConfig() {
-    OVAutoDeletePool p;
+    OVAUTODELETE;
     if (sysconfig->changed()) {
         sysconfig->read();
 	
         char buf[256];
         inputmethod->identifier(buf);
 
-        OVDictionary *global=(OVDictionary*)p.add(GetGlobalConfig());
-        OVDictionary *local =(OVDictionary*)p.add(GetLocalConfig(buf));
+        OVDictionary *global=(OVDictionary*)OVSafe(GetGlobalConfig());
+        OVDictionary *local =(OVDictionary*)OVSafe(GetLocalConfig(buf));
 
         floatingwindowlock=global->getInt("floatingWindowLock");
         defposx=global->getInt("floatingWindowLockPosX");
@@ -339,13 +329,13 @@ int CIMCustomHandleInput(void *data, CIMInputBuffer *buf,
 }
 
 OVInputMethod* InitInputMethodAtMenuPos(int pos) {
-    OVAutoDeletePool p;
+    OVAUTODELETE;
     OVInputMethod *im=list.impair[pos].im;
     if (!list.impair[pos].inited) {
         char imid[256];
         im->identifier(imid);
-        OVDictionary *global= (OVDictionary*)p.add(GetGlobalConfig());
-        OVDictionary *local = (OVDictionary*)p.add(GetLocalConfig(imid));
+        OVDictionary *global= (OVDictionary*)OVSafe(GetGlobalConfig());
+        OVDictionary *local = (OVDictionary*)OVSafe(GetLocalConfig(imid));
         im->initialize(global, local, &srv, (char*)loaddir);
         list.impair[pos].inited=1;
     }

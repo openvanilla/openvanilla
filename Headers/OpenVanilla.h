@@ -101,11 +101,19 @@ public:
         
     virtual int getInt(const void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
         { return 0; }
+    virtual int getIntDefault(const void *k, int defv, OVEncoding 
+        e=ovEncodingUTF8, int kl=0)
+            { if (!keyExist(k, e, kl)) setInt(k, defv, e, kl); 
+              return getInt(k, e, kl); }
     virtual int setInt(const void *key, int value, OVEncoding e=ovEncodingUTF8,
         int keylen=0) { return 0; }
             	
 	virtual int getString(const void *key, void *str, OVEncoding e=ovEncodingUTF8,
 		int keylen=0, int maxlen=0) { return 0; }
+    virtual int getStringDefault(const void *k, void *s, const void *defv, 
+        OVEncoding e=ovEncodingUTF8, int kl=0, int ml=0)
+            { if (!keyExist(k, e, kl)) setString(k, defv, e, kl);
+              return getString(k, s, e, kl); }
 	virtual int setString(const void *key, const void *value, 
         OVEncoding e=ovEncodingUTF8, int keylen=0, int valuelen=0) { return 0; }
 		

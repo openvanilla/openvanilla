@@ -1,5 +1,8 @@
 // VXUtility.cpp
 
+#define OVDEBUG
+#include <OpenVanilla/OpenVanilla.h>
+#include <OpenVanilla/OVUtility.h>
 #include "VXUtility.h"
 
 const int VXDefMaxLen=1024;
@@ -79,55 +82,46 @@ int VXConvertCFStringNon8BitEncoding(CFStringRef ref, void *s, OVEncoding e,
 
 CFURLRef VXCreateURL(char *localfilename)
 {
-    CFMutableStringRef str=CFStringCreateMutable(NULL, 0);
+	VXCFAUTORELEASE;
+	
+    CFMutableStringRef str=
+    	(CFMutableStringRef)VXSafe(CFStringCreateMutable(NULL, 0));
     if (!str) return NULL;
     
-    CFStringRef filename=VXCreateCFString(localfilename);
+    CFStringRef filename=(CFStringRef)VXSafe(VXCreateCFString(localfilename));
     if (!filename) return NULL;
     
     CFStringAppendCString(str, "file://", kCFStringEncodingUTF8);
     CFStringAppend(str, filename);
     
-    CFURLRef url=CFURLCreateWithString(NULL, str, NULL);
-    
-    CFRelease(filename);
-    CFRelease(str);
-    
-    return url;
+    return CFURLCreateWithString(NULL, str, NULL);
 }
 
 int VXGetCurrentLocale(CFBundleRef bundle, char *str, int maxlen)
 {
+	VXCFAUTORELEASE;
 	char *defvalue="en";
-	strcpy(str, defvalue);
-	
-	if (!bundle) return strlen(defvalue);
+	int deflen=strlen(strcpy(str, defvalue));
 
-	CFArrayRef ar=CFBundleCopyBundleLocalizations(bundle);
-	if (!ar) return strlen(defvalue);
-	
-	CFArrayRef pref=CFBundleCopyPreferredLocalizationsFromArray(ar);
-	CFRelease(ar);
-	if (!pref) 
-		return strlen(defvalue);
-    
-	if (CFArrayGetCount(pref))
-	{
-		CFStringRef r=(CFStringRef)CFArrayGetValueAtIndex(pref, 0);
-		if (r)
-		{
-			CFStringRef cr=CFLocaleCreateCanonicalLocaleIdentifierFromString
-				(NULL, r);			
-			if (cr)
-			{
-				if (!CFStringGetCString(cr, str, maxlen, kCFStringEncodingUTF8))
-					strcpy(str, defvalue);
+	if (!bundle) return deflen;	
 
-				CFRelease(cr);
-			}
-		        CFRelease(r);
-		}
-	}
-	CFRelease(pref);
+	CFArrayRef ar=(CFArrayRef)VXSafe(CFBundleCopyBundleLocalizations(bundle));
+	if (!ar) return deflen;
+	
+	CFArrayRef pref=(CFArrayRef)VXSafe
+		(CFBundleCopyPreferredLocalizationsFromArray(ar));
+	if (!pref) return deflen;
+	if (!CFArrayGetCount(pref)) return deflen;
+	
+	// no VXSafe here, as memory managed by array
+	CFStringRef r=(CFStringRef)CFArrayGetValueAtIndex(pref, 0);
+	if (!r) return deflen;
+		
+	CFStringRef cr=(CFStringRef)
+		VXSafe(CFLocaleCreateCanonicalLocaleIdentifierFromString(NULL, r));	
+	if (!cr) return deflen;
+	if (!CFStringGetCString(cr, str, maxlen, kCFStringEncodingUTF8))
+		strcpy(str, defvalue);
+
 	return strlen(str);
 }

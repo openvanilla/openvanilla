@@ -16,19 +16,19 @@ inline void murmur(const char* format,...) {
 #ifdef OVDEBUG
     va_list args;
     va_start (args, format);
-    vfprintf (stderr,format,args);
+    vfprintf (stderr, format, args);
     va_end (args);
-    fprintf (stderr,"\n");
+    fprintf (stderr, "\n");
 #endif
 }
 
-const int ovMaxPoolSize=256;
+const int ovMaxPoolSize=32;     // if over this, rethink *your* design...
 
 class OVAutoDeletePool
 {
 public:
     OVAutoDeletePool() : p(0) {}
-    ~OVAutoDeletePool() { for (int i=0; i<p; i++) if (pool[i]) delete pool[i]; }
+    ~OVAutoDeletePool() { for (int i=0; i<p; i++) delete pool[i]; }
     OVObject* add(OVObject *o)
     {
         if (!o) return o;
@@ -40,6 +40,9 @@ protected:
     int p;
     OVObject *pool[ovMaxPoolSize];
 };
+
+#define OVAUTODELETE    OVAutoDeletePool _ovPool
+#define OVSafe(exp)     _ovPool.add(exp)
 
 #endif /* _OVUTILITY_H */
 
