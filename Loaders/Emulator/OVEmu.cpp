@@ -243,7 +243,7 @@ const int emMaxDictPair=32;
 const int emMaxDictStrLen=64;
 
 // no subdictionary support!
-class EMDictionary : public OVObject
+class EMDictionary : public OVDictionary
 {
 public:
 	EMDictionary()
@@ -268,7 +268,7 @@ public:
 	
     virtual int keyExist(const void *key, OVEncoding e=ovEncodingUTF8, int keylen=0)
     {
-    	if (find((char*)key)) return 1;
+    	if (find((char*)key)!=-1) return 1;
     	return 0;
     }
         
@@ -373,11 +373,17 @@ int main(int argc, char **argv)
 	
 	char buf[256];
 	EMDictionary globalconfig, localconfig;
+	EMService service;
 	
 	OVInputMethod *im=lib.imnew(0);
 	im->identifier(buf);
 	murmur ("OVEmu: loaded input method, identifier=%s", buf);
-	
+	im->initialize(&globalconfig, &localconfig, &service, (char*)"./");
+	murmur ("OVEmu: dumping global config");
+	globalconfig.dump();
+	murmur ("OVEmu: dumping local config");
+	localconfig.dump();
+		
 	OVIMContext *context=im->newContext();
 	
 	murmur ("\n\nOVEmu console ============");
@@ -385,7 +391,6 @@ int main(int argc, char **argv)
 	EMKeyCode key;
 	EMTextBar textbar;
 	EMBuffer buffer;
-	EMService service;
 	while (!feof(stdin))
 	{
 		key.clear();
