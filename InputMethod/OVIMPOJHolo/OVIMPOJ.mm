@@ -97,8 +97,9 @@ OVService *srv)
     if (candi.onDuty()) return candidateEvent(key, buf, textbar, srv);
  
     //Ignore arrow keys.
-    if (key->isCode(4, ovkDown, ovkUp, ovkLeft, ovkRight))
-	return 1;
+    if (key->isCode(4, ovkDown, ovkUp, ovkLeft, ovkRight)) 
+	if(seq.length()) return 1;
+	else return 0;
     
     // if backspace of delete key is hit
     if (key->isCode(2, ovkBackspace, ovkDelete) && buf->length())
