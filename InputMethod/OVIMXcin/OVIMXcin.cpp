@@ -34,7 +34,6 @@ extern "C" unsigned int OVLoadableVersion()
 
 extern "C" OVInputMethod* OVLoadableNewIM(int x)
 {
-	cerr << "loading..." << endl;
     return new OVIMXcin(cinlist.cinpath, cinlist.list[x].filename,
         cinlist.list[x].ename, cinlist.list[x].cname, cinlist.list[x].encoding);
 }
@@ -107,10 +106,6 @@ int OVIMXcin::name(char *locale, void *s, OVEncoding *enc)
     if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
     {
         *enc=cnameencoding;
-        cerr << "asking ename=" << ename;
-		cerr << ", cname=" << cname;
-		cerr << ", encoding" << *enc;
-		cerr << endl;
         return strlen(strcpy((char*)s, cname));
     }
         
@@ -119,7 +114,6 @@ int OVIMXcin::name(char *locale, void *s, OVEncoding *enc)
 
 int OVIMXcin::initialize(OVDictionary* global, OVDictionary* local, OVService*, char*)
 {
-	cerr << "initializing" << endl;
     if (cintab) return 0;
     
     const char *sk="shiftSelectionKey";
@@ -142,7 +136,6 @@ int OVIMXcin::initialize(OVDictionary* global, OVDictionary* local, OVService*, 
     //cintab->read(cinfilename, enc, selkeyshift);
     cintab=new OVCIN(cinfilename);
 	
-	cerr << "initialized." << endl;
     return 1;
 }
 
@@ -184,9 +177,7 @@ void OVXcinContext::updateDisplay(OVBuffer *buf)
     {
         string *ms= new string;
         keyseq.compose(ms);
-		cerr << "OVXcinContext::updateDisplay:" << ms->data() << endl;
-		char* s = const_cast<char*>(ms->c_str());
-        buf->append((void*)s);
+        buf->append((void*)const_cast<char*>(ms->c_str()));
         delete ms;
     }
     buf->update();
@@ -196,16 +187,14 @@ void OVXcinContext::updateDisplay(OVBuffer *buf)
 int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar, 
     OVService *srv)
 {
-	cerr << "OVXcinContext::keyEvent" << endl;
     if (candi.onDuty())
     {
-		cerr << "OVXcinContext::KeyEvent - if(candi.onDuty())" << endl;
-		
         if (!autocomposing) return candidateEvent(key, buf, textbar, srv);
         
         if (string* output=candi.select(key->code()))
         {
-            buf->clear()->append((void*)output)->send();
+            buf->clear()->
+				append((void*)const_cast<char*>(output->c_str()))->send();
             keyseq.clear();
             cancelAutoCompose(textbar);
             return 1;
@@ -279,9 +268,6 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     if (key->isPrintable() && keyseq.valid(key->code()) &&
         !key->isShift() && !key->isCapslock())
     {
-		cerr << "Show keystroke -> character" << endl;
-		cerr << "length=" << keyseq.length() << endl;
-		cerr << "maxSeqLen=" << parent->maxSeqLen() << endl;
         if (keyseq.length() == parent->maxSeqLen())
         {
             updateDisplay(buf);
@@ -349,15 +335,16 @@ int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar, OVService *srv)
 
     if (size ==1 && !autocomposing)
     {
-        buf->clear()->append((void*)array[0].c_str())->send();
+        buf->clear()->
+			append((void*)const_cast<char*>(array[0].c_str()))->send();
         keyseq.clear();
         return 1;
     }
 
     if (!autocomposing)
     {    
-        buf->clear()->append((void*)array[0].c_str())
-            ->update();
+        buf->clear()->
+			append((void*)const_cast<char*>(array[0].c_str()))->update();
         keyseq.clear();
     }
     
@@ -400,7 +387,7 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     
     if ((output=candi.select(c)))
     {
-        buf->clear()->append((void*)output)->send();
+        buf->clear()->append((void*)const_cast<char*>(output->c_str()))->send();
         candi.cancel();
         textbar->hide()->clear();
         return 1;
@@ -411,7 +398,8 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
 	vector<string> outStringVectorRef;
     if (cintab->getCharVectorByKey(inKey, outStringVectorRef) > 0)
     {
-        buf->clear()->append((void*)candi.select(cintab->getSelKey()[0]))->send();
+        buf->clear()->
+			append((void*)const_cast<char*>(candi.select(c)->c_str()))->send();
         keyseq.add(c);
         updateDisplay(buf);
         candi.cancel();
