@@ -24,12 +24,17 @@ extern "C" OVInputMethod* OVLoadableNewIM(int imid);
 extern "C" void OVLoadbleDeleteIM(OVInputMethod *im);
 extern "C" unsigned int OVLoadableVersion();
 
-typedef OVInputMethod* OVLNewType(int);
-typedef void OVLDeleteType(OVInputMethod*);
 
 // there two are optional
 extern "C" int OVLoadableAvailableIMCount(char *path);
 extern "C" int OVLoadableCanUnload();
+
+typedef OVInputMethod* OVLNewType(int);
+typedef void OVLDeleteType(OVInputMethod*);
+typedef unsigned int OVLVersionType();
+typedef int OVLAvailableType(char*);
+typedef int OVLUnloadType();
+
 
 // We also have an OVLOADABLEWRAPPER ("OpenVanilla loadble IM wrapper").
 // If you only have one IM module, e.g. class MyInputMethod, you can simply

@@ -31,12 +31,12 @@ public:
         fprintf (stderr, "IM context deactivated\n");
     }
     
-    virtual int keyevent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
+    virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
         OVService *srv)
     {
         fprintf (stderr, "Recevied key code=%d\n", key->code());
     
-        if (key->iscode(2, ovkReturn, ovkMacEnter))
+        if (key->isCode(2, ovkReturn, ovkMacEnter))
         {
             if (!buf->length()) return 0;   // if buffer is empty, don't process
             buf->send();
@@ -45,7 +45,7 @@ public:
             return 1;   // key processed
         }
         
-        if (key->isprintable())
+        if (key->isPrintable())
         {
             char str[2];
             str[1]=0;
@@ -108,13 +108,13 @@ public:
         return 1;
     }
 
-    virtual OVIMContext* newcontext() 
+    virtual OVIMContext* newContext() 
     {
         fprintf (stderr, "IM module creating a new IM context\n"); 
         return new OVExampleContext(this); 
     }
     
-    virtual void deletecontext(OVIMContext* s) 
+    virtual void deleteContext(OVIMContext* s) 
     {
         fprintf (stderr, "IM module destroying a new IM context\n");
         delete s; 
