@@ -35,7 +35,7 @@ int OVIMPOJ::initialize(OVDictionary* global, OVDictionary* local,
     if (!local->keyExist(optKeyLayout))
         local->setInt(optKeyLayout, pojToneByNumber);
     if (!local->keyExist(optCinPath))
-        local->setString(optCinPath, "/Library/OpenVanilla/Development/POJ.cin");
+        local->setString(optCinPath, "/Library/OpenVanilla/Development/POJ.oin");
         
     update(global, local);
     
