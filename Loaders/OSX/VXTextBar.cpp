@@ -346,7 +346,7 @@ void VXTBSetRect(Rect *r, int fontsize, CFStringRef inString)
 
   murmur("RawLength=%d, TextLength=%d, NonRomanCount=%d",
     RawLength, TextLength, NonRomanCount);
-  SetRect(r, 0,0, r2.right-r2.left+NonRomanCount*fontsize+10, fontsize+5);
+  SetRect(r, 0,0, r2.right-r2.left+NonRomanCount*fontsize+24, fontsize+5);
 
 
   murmur("VXTBSetRect: done, dispose all objects");
