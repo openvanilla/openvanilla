@@ -16,6 +16,7 @@ while (my $client = $server->accept())
 	
 	while(<$client>)
 	{
+        chomp;
         print STDERR "OVIMSocketServer: from client=", $_, "\n";
         my @cmd=split /\s/;
         print STDERR "Key=$cmd[0], value=$cmd[1]\n";
