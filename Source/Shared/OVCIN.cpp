@@ -33,22 +33,22 @@ OVCIN::~OVCIN()
 	keyMap.clear();
 }
 
-string OVCIN::getSelKey()
+string& OVCIN::getSelKey()
 {
 	return selkey;
 }
 
-string OVCIN::getCName()
+string& OVCIN::getCName()
 {
 	return cname;
 }
 
-string OVCIN::getEName()
+string& OVCIN::getEName()
 {
 	return ename;
 }
 
-string OVCIN::getEndKey()
+string& OVCIN::getEndKey()
 {
 	return endkey;
 }
