@@ -84,10 +84,9 @@ public:
         { cimbuf=buf; }
     
 protected:
-	int conversionfilter;
-
     CIMInputBuffer *cimbuf;
-    
+    int conversionfilter;
+
     ScriptCode lookupscript(OVLanguage lang)
     {
 		// script code hack
