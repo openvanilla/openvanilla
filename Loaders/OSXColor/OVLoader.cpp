@@ -123,9 +123,9 @@ void SetupMenuString(MenuRef mnu, int pos) {
     str = (CFStringRef)VXSafe
         (CFBundleCopyLocalizedString(bdl,CFSTR("Preferences"),NULL,NULL));	
     InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'PREF');
-    str = (CFStringRef)VXSafe
+    /* str = (CFStringRef)VXSafe
         (CFBundleCopyLocalizedString(bdl,CFSTR("About"),NULL,NULL));
-    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'ABUT');
+    InsertMenuItemTextWithCFString(mnu, str, pos++, 0, 'ABUT'); */
 }
 
 int SetupMenuList(MenuRef mnu) {
