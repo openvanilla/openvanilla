@@ -13,7 +13,7 @@ void VXTBFixPosition(Point *p, int width, int height);
 VXTextBar::VXTextBar(int fsize) : fontsize(fsize)
 {
     lookupdated=textupdated=posupdated=displaying=0;
-    pos.h=pos.v=0;
+    pos.h=pos.v=20;
     text=CFStringCreateMutable(NULL, 0);
     CFStringAppendCString(text, " ", kCFStringEncodingMacRoman);
     
