@@ -10,6 +10,7 @@ install: OVIMExample.dylib
 	echo "/Library/OpenVanilla/Development/OVIMExample.dylib" >> /Library/OpenVanilla/Development/OVXSimpleLoader.config
 
 clean:
+	rm OVIMExample.o
 	rm OVIMExample.dylib
 	rm /Library/OpenVanilla/Development/OVIMExample.dylib
 	rm /Library/OpenVanilla/Development/OVXSimpleLoader.config

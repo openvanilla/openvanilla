@@ -1,15 +1,7 @@
-// OVIMExample.mm
+// OVIMDayi.mm
 
 #include <Cocoa/Cocoa.h>
-#include "openvanilla.h"
-
-id pool=nil;
-
-extern "C" void _init()
-{
-    pool=[NSAutoreleasePool new];
-    if (pool) fprintf (stderr, "initializing dylib, creating autorelease pool\n");
-}
+#include "OpenVanilla.h"
 
 id MakeNSStr(char *s)
 {
@@ -29,7 +21,11 @@ DayiTable ReadDayi(char *fname)
 {
     DayiTable tab;
     FILE *in=fopen(fname, "r");
-    if (!in) return tab;
+    if (!in) 
+    {
+        throw ovException;
+        return tab;
+    }
     
     fprintf (stderr, "reading %s\n", fname);
     
@@ -110,34 +106,32 @@ DayiTable ReadDayi(char *fname)
     return tab;
 }
 
+class OVDayiIM;
 
-
-class OVExampleIM;
-
-class OVExampleSession : public OVIMSession
+class OVDayiContext : public OVIMContext
 {
 public:
-    OVExampleSession(OVExampleIM *p, DayiTable *t) : parent(p), tab(t)
+    OVDayiContext(OVDayiIM *p, DayiTable *t) : parent(p), tab(t)
     {
         keyseqlen=0;
         keyseq[0]=0;
         candi=0;
-        fprintf (stderr, "new im session instance created\n");
+        fprintf (stderr, "new im Context instance created\n");
     }
     
-    virtual ~OVExampleSession()
+    virtual ~OVDayiContext()
     {
-        fprintf (stderr, "im session instance destroyed\n");
+        fprintf (stderr, "im Context instance destroyed\n");
     }
     
     virtual int activate(OVService *)
     {
-        fprintf (stderr, "im session activated\n");
+        fprintf (stderr, "im Context activated\n");
     }
     
     virtual int deactivate(OVService *)
     {
-        fprintf (stderr, "im session deactivated\n");
+        fprintf (stderr, "im Context deactivated\n");
     }
     
     virtual int keyevent(OVKeyCode *key, OVBuffer *buf,
@@ -147,14 +141,14 @@ public:
  
         if (candi)
         {
-            int keycode=key->uppercode();
+            int keycode=key->upper();
             if (keycode==ovkReturn) keycode=ovkSpace;
         
             if (keycode==ovkEscape)
             {
                 textbar->hide();
                 delkeyseq();
-                buf->clear()->updatedisplay(ovLangTradChinese);
+                buf->clear()->update(ovLangTradChinese);
                 candi=0;
                 return 1;
             }
@@ -169,7 +163,7 @@ public:
                 // test if char key
                 char bbuf[2];
                 bbuf[1]=0;
-                bbuf[0]=key->uppercode();
+                bbuf[0]=key->upper();
         
                 id ss=[NSString stringWithCString: bbuf];
                 id vvv=[tab->keytable objectForKey: ss];
@@ -189,7 +183,7 @@ public:
             
             if (nextsend)
             {
-                addkeyseq(key->uppercode());
+                addkeyseq(key->upper());
                 updatekeyseqdisplay(buf);
                 if (key->code()=='=') goto SPAGHETTI;
 
@@ -203,12 +197,12 @@ public:
  
         if (key->code()==ovkEscape)
         {
-            buf->clear()->updatedisplay();
+            buf->clear()->update();
             clearkeyseq();
             return 1;
         }
  
-        if (key->iscode(2, ovkDelete, ovkBackspace))
+        if (key->isCode(2, ovkDelete, ovkBackspace))
         {
             if (!keyseqlen) return 0;
             delkeyseq();
@@ -236,7 +230,7 @@ SPAGHETTI:
                     textbar->show();
                     textbar->clear()->append([v UTF8String]);
                     textbar->update();
-                    buf->clear()->append("？")->updatedisplay(ovLangTradChinese);
+                    buf->clear()->append("？")->update(ovLangTradChinese);
                     return 1;
                 }
             
@@ -249,7 +243,7 @@ SPAGHETTI:
             return 1;
         }
         
-        if (key->iscode(2, ovkReturn, ovkMacEnter))
+        if (key->isCode(2, ovkReturn, ovkMacEnter))
         {
             if (!keyseqlen) return 0;
             clearkeyseq();
@@ -271,22 +265,20 @@ SPAGHETTI:
             
             if (key->iscapslock()) return 0;
 
-            addkeyseq(key->uppercode());
+            addkeyseq(key->upper());
             updatekeyseqdisplay(buf);
             
             if (key->code()=='=') goto SPAGHETTI;
             return 1;
         }    
- 
-
-    
+   
         return 0;
     }
 
     
     
 protected:
-    OVExampleIM *parent;
+    OVDayiIM *parent;
     DayiTable *tab;
     int candi;
     id candistr;
@@ -312,7 +304,7 @@ protected:
         }
         
         char *cc=(char*)[ms UTF8String];
-        buf->clear()->append((void*)cc)->updatedisplay();
+        buf->clear()->append((void*)cc)->update();
         fprintf (stderr, "\n");
     }
         
@@ -351,40 +343,56 @@ protected:
     char keyseq[10];
 };
 
-class OVExampleIM : public OVInputMethod
+class OVDayiIM : public OVInputMethod
 {
 public:
-    OVExampleIM()
+    OVDayiIM()
     {
-        fprintf (stderr, "new IM instance created\n");
-        tab=ReadDayi("/tmp/dayi3.cin"); // XXX hard-coded path
+        fprintf (stderr, "Dayi IM instance created\n");
+    }
+    
+    virtual ~OVDayiIM()
+    {
+        fprintf (stderr, "Dayi IM instance destroyed\n");
+    }
 
-        fprintf (stderr, "creating new per-instance autorelease pool\n");
-        pool=[[NSAutoreleasePool alloc] init];
-        if (pool) fprintf (stderr, "per-instance autorelease pool creation succeeded\n");
-    }
-    
-    virtual ~OVExampleIM()
+    virtual int identifier(char *s)
     {
-        fprintf (stderr, "IM instance destroyed\n");
-        fprintf (stderr, "releasing per-instance autorelease pool\n");
-        [pool release];
+        return strlen(strcpy(s, "OVDayiIM"));
     }
     
-    OVIMSession *newsession() { return new OVExampleSession(this, &tab); }
+    virtual int name(char *locale, void *s, OVEncoding *enc)
+    {
+        *enc=ovEncodingUTF8;
+        if (!strcasecmp(locale, "zh_TW"))
+            return strlen(strcpy(s, "OpenVanilla 大易輸入法試作版");
+        return strlen(strcpy(s, "OpenVanilla Dayi Module"));
+    }
+
+    virtual int initialize(OVDictionary*, OVDictionary*, char *path)
+    {
+        char dayipath[256];
+        strcpy(dayipath, path);
+        strcat(dayipath, "dayi3.cin");
+        tab=ReadDayi(dayipath); // XXX hard-coded path
+    }
+    
+    OVIMContext *newContext() { return new OVDayiContext(this, &tab); }
     
     DayiTable tab;
-    id pool;
 };
 
+OVLOADABLEWRAPPER(OV
+OVLOADABLEOBJCWRAPPER
 
-extern "C" OVExampleIM *create()
+
+extern "C" OVDayiIM *create()
 {
 //    if (!pool) pool=[[NSAutoreleasePool alloc] init];
-    return new OVExampleIM;
+    return new OVDayiIM;
 }
 
-extern "C" void destroy(OVExampleIM *o)
+extern "C" void destroy(OVDayiIM *o)
 {
     delete o;
 //    [pool release];

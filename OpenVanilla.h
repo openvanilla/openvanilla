@@ -78,8 +78,6 @@ public:
             { return this; }
     virtual OVBuffer* append (void *s, OVEncoding e=ovEncodingUTF8, int len=0)
         { return this; }
-    virtual OVBuffer* append (char c)
-		{ char buf[2]; buf[0]=c; buf[1]=0; return append(buf); }
 	
     // returns the number of GRAPHEMES (ie. actual chars displayed) in the buffer
     virtual int length() { return 0; }    
