@@ -376,6 +376,7 @@
 				6A2C9FDF075AFDB8005462F0,
 				6A2C9FE1075AFDB8005462F0,
 				6A241658075C362400A155A6,
+				6A972ED907613CB800619716,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,6 +391,7 @@
 		};
 		6A8BE8D807544E15002FBA64 = {
 			children = (
+				6A972ED807613CB800619716,
 				6A2C9FD2075AFDB8005462F0,
 				6A2C9FD3075AFDB8005462F0,
 				6A2C9FD4075AFDB8005462F0,
@@ -550,6 +552,20 @@
 		};
 		6A8BE9A207544E9A002FBA64 = {
 			fileRef = 6A8BE99E07544E9A002FBA64;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A972ED807613CB800619716 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = VXService.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A972ED907613CB800619716 = {
+			fileRef = 6A972ED807613CB800619716;
 			isa = PBXBuildFile;
 			settings = {
 			};

@@ -16,6 +16,7 @@
 #include "VXConfig.h"
 #include "VXLoadableIM.h"
 #include "VXUtility.h"
+#include "VXService.h"
 #include "OVAbout.h"
 
 class CIMContext
@@ -41,7 +42,7 @@ UInt32 usermenu='USRM';
 VXConfig *sysconfig=NULL;
 VXLibraryList list;
 
-OVService srv;
+VXService srv;
 OVInputMethod *inputmethod;
 
 CIMContext* pool[vxMaxContext];

@@ -83,6 +83,12 @@ XcinKeySequence::XcinKeySequence(VXCIN* cintab)
     cinTable=cintab;
 }
     
+int XcinKeySequence::valid(char c)
+{
+    if (!cinTable->getKey(c)) return 0;
+    return 1;
+}
+    
 int XcinKeySequence::add(char c)
 {
     if (!cinTable->getKey(c)) return 0;
@@ -99,11 +105,23 @@ NSString *XcinKeySequence::compose(NSMutableString *s)
     return s;
 }
 
-OVIMXcin::OVIMXcin(char *lpath, char *cfile)
+OVIMXcin::OVIMXcin(char *lpath, char *cfile, char *en, char *cn,
+    OVEncoding enc)
 {
     strcpy(loadpath, lpath);
     strcpy(cinfile, cfile);
     cintab=NULL;
+   
+    cnameencoding=enc;
+    if (en)
+        strcpy(ename, en);
+    else
+        sprintf(ename, "OVIMXcin (%s)", cfile);
+
+    if (cn)
+        strcpy(cname, cn);
+    else 
+        sprintf(cname, "xcin模組 (%s)", cfile);
 }
 
 OVIMXcin::~OVIMXcin()
@@ -124,16 +142,19 @@ int OVIMXcin::name(char *locale, void *s, OVEncoding *enc)
     *enc=ovEncodingUTF8;
     if (!cintab)
     {
-        strcpy((char*)s, "OVIMXCin (");
-        strcat((char*)s, cinfile);
-        strcat((char*)s, ")");
-        return strlen((char*)s);
+        if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
+        {
+            *enc=cnameencoding;
+            return strlen(strcpy((char*)s, cname));
+        }
+        
+        return strlen(strcpy((char*)s, ename));
     }
 
     return cintab->name(locale, s, enc);
 }
 
-int OVIMXcin::initialize(OVDictionary*, OVDictionary* local, OVService*, char*)
+int OVIMXcin::initialize(OVDictionary* global, OVDictionary* local, OVService*, char*)
 {
     if (cintab) return 0;
     
@@ -143,11 +164,14 @@ int OVIMXcin::initialize(OVDictionary*, OVDictionary* local, OVService*, char*)
     OVEncoding enc=ovEncodingUTF8;
     if (!local->keyExist(sk)) local->setInt(sk, 0);
     if (!local->keyExist(encoding)) local->setString(encoding, "big5");
-    
+
+    update(global, local);  // run-time configurable settings    
     int selkeyshift=local->getInt(sk);
     local->getString(encoding, buf);
     
     if (!strcasecmp(buf, "big5")) enc=ovEncodingBig5HKSCS;
+    if (!strcasecmp(buf, "big5e")) enc=ovEncodingBig5HKSCS;
+    if (!strcasecmp(buf, "big5hkscs")) enc=ovEncodingBig5HKSCS;
     if (!strcasecmp(buf, "euc")) enc=ovEncodingEUC_CN;
     if (!strcasecmp(buf, "euc_cn")) enc=ovEncodingEUC_CN;
 
@@ -157,6 +181,25 @@ int OVIMXcin::initialize(OVDictionary*, OVDictionary* local, OVService*, char*)
     strcat(cinfilename, cinfile);
     cintab=new VXCIN;
     cintab->read(cinfilename, enc, selkeyshift);
+    return 1;
+}
+
+int OVIMXcin::update(OVDictionary* global, OVDictionary* local)
+{
+    const char *warningBeep="warningBeep";
+    const char *autoCompose="autoCompose";
+    const char *maxSeqLen="maxKeySequenceLength";
+    const char *hitMax="hitMaxAndCompose";
+
+    if (!global->keyExist(warningBeep)) global->setInt(warningBeep, 1);
+    if (!local->keyExist(maxSeqLen)) local->setInt(maxSeqLen, 5);
+    if (!local->keyExist(autoCompose)) local->setInt(autoCompose, 0);
+    if (!local->keyExist(hitMax)) local->setInt(hitMax, 0);
+
+    cfgMaxSeqLen=local->getInt(maxSeqLen);
+    cfgBeep=global->getInt(warningBeep);
+    cfgAutoCompose=local->getInt(autoCompose);
+    cfgHitMaxAndCompose=local->getInt(hitMax);
     return 1;
 }
 
@@ -189,12 +232,25 @@ void OVXcinContext::updateDisplay(OVBuffer *buf)
 int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar, 
     OVService *srv)
 {
-    if (candi.onDuty()) return candidateEvent(key, buf, textbar);
+    if (candi.onDuty())
+    {
+        if (!autocomposing) return candidateEvent(key, buf, textbar, srv);
+        
+        if (NSString* output=candi.select(key->code()))
+        {
+            buf->clear()->append((void*)[output UTF8String])->send();
+            keyseq.clear();
+            cancelAutoCompose(textbar);
+            return 1;
+        }
+    }
+
 
     if (!keyseq.length() && !key->isPrintable()) return 0;
     
     if (key->code()==ovkEscape)
     {
+        cancelAutoCompose(textbar);
         buf->clear()->update();
         keyseq.clear();
         return 1;
@@ -204,42 +260,95 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar,
     {
         keyseq.remove();
         updateDisplay(buf);
+        if (!keyseq.length() && autocomposing) cancelAutoCompose(textbar);
         return 1;
     }
 
-    if (keyseq.length() && key->code()==ovkSpace) return compose(buf, textbar);
-    
-    if (key->isPrintable())
+    if (keyseq.length() && key->code()==ovkSpace)
     {
-        // process shift/capslock key
-        if (key->isShift() || key->isCapslock())
+        // there the candiate window has only one page, space key
+        // will send out the first candidate
+        if (autocomposing && candi.onDuty())
         {
-            if (keyseq.length()) 
-            {
-                keyseq.clear();
-                buf->clear()->update();
-            }
-            return 0;
+            keyseq.clear();
+            autocomposing=0;
+            return candidateEvent(key, buf, textbar, srv);
         }
-        
-        if (keyseq.add(key->code()))
-        {
-            updateDisplay(buf);
-            if (cintab->isEndKey(key->code())) return compose(buf, textbar);
-            return 1;
-        }
-    }
 
-    if (buf->length()) 
-    {
+        autocomposing=0;        
+        return compose(buf, textbar, srv);
+    }
+    
+    // shift and capslock processing
+
+    if (key->isPrintable() && (key->isCapslock() || key->isShift()))
+    {    
+        if (key->isCapslock())
+        {
+            if (key->isShift()) buf->appendChar(key->upper());
+            else buf->appendChar(key->lower());
+        }
+        else if (key->isShift()) buf->appendChar(key->lower());
+        cancelAutoCompose(textbar);
         keyseq.clear();
         buf->send();
+        return 1;
     }
+    
+    if (key->isPrintable() && keyseq.valid(key->code()) &&
+        !key->isShift() && !key->isCapslock())
+    {
+        if (keyseq.length() == parent->maxSeqLen())
+        {
+            updateDisplay(buf);            
+            if (parent->isBeep()) srv->beep();
+            return 1;
+        }
+        
+        keyseq.add(key->code());
+        if (keyseq.length() == parent->maxSeqLen() && parent->isHitMaxAndCompose())
+        {
+            autocomposing=0;
+            return compose(buf, textbar, srv);
+        }
+           
+        updateDisplay(buf);
+        if (cintab->isEndKey(key->code()))
+        {
+            autocomposing=0;
+            return compose(buf, textbar, srv);
+        }
+        
+        // if autocomposing is on
+        if (parent->isAutoCompose())
+        {
+            if (cintab->find(keyseq.getSeq()))
+            {
+                autocomposing=1;
+                compose(buf, textbar, srv);
+            }
+            else if (candi.onDuty()) cancelAutoCompose(textbar);
+        }
+        
+        return 1;
+    }
+
+    cancelAutoCompose(textbar);
+    keyseq.clear();
+    if (buf->length()) buf->send();
     
     return 0;
 }
+
+void OVXcinContext::cancelAutoCompose(OVTextBar *textbar)
+{
+    autocomposing=0;
+    candi.cancel();
+    textbar->hide()->clear();
+}
+    
         
-int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar)
+int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar, OVService *srv)
 {
     if (!keyseq.length()) return 0;
 
@@ -247,24 +356,31 @@ int OVXcinContext::compose(OVBuffer *buf, OVTextBar *textbar)
     
     if (!array) 
     {
-        // should give a beep
+        if (parent->isBeep()) srv->beep();
         return 1;
     }
 
-    if ([array count]==1)
+    if ([array count]==1 && !autocomposing)
     {
         buf->clear()->append((void*)[[array objectAtIndex: 0] UTF8String])->send();
         keyseq.clear();
         return 1;
     }
 
-    buf->clear()->append((void*)[[array objectAtIndex: 0] UTF8String])->update();
+    if (!autocomposing)
+    {    
+        buf->clear()->append((void*)[[array objectAtIndex: 0] UTF8String])
+            ->update();
+        keyseq.clear();
+    }
+    
     candi.prepare(array, cintab->selKey(), textbar);    
-    keyseq.clear();
+
     return 1;
 }
 
-int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *textbar)
+int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf, 
+    OVTextBar *textbar, OVService *srv)
 {
     if (key->isCode(2, ovkEscape, ovkBackspace))
     {
@@ -313,7 +429,7 @@ int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf, OVTextBar *text
         return 1;
     }    
 
-    // invalid key, let's beep?
+    if (parent->isBeep()) srv->beep();
 
     return 1;
 }
