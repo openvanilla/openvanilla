@@ -8,10 +8,9 @@
 #define __OVUtility_h
 
 // debug routine
-#ifdef OVDEBUG
+#ifdef OVDEBUG    
     #include <stdarg.h>
     #include <stdio.h>
-
     inline static void murmur(const char* format,...)
     {
         va_list args;

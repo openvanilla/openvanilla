@@ -30,7 +30,7 @@
 #ifndef __OpenVanilla_h
 #define __OpenVanilla_h
 
-#define ovVersion (0x00070000)      // version 0.7.0
+#define OV_VERSION   (0x00070000)      // version 0.7.0
 
 // A pure base class that defines the virtual destructor
 class OVBase
@@ -92,7 +92,7 @@ public:
     virtual int getInteger(const char *key)=0;
     virtual int setInteger(const char *key, int value)=0;
     virtual const char* getString(const char *key)=0;
-    virtual const char* setString(const char *key, const char *value=0)=0;
+    virtual const char* setString(const char *key, const char *value)=0;
     virtual int getIntegerWithDefault(const char *key, int value)
     {
         if (!keyExist(key)) setInteger(key, value);
@@ -149,9 +149,11 @@ public:
 // transformation/conversion of output buffer, for example, conversion
 // between Traditional and Simplified Chinese, or convert all kanas into
 // romanized forms, etc.)
+
 class OVModule : public OVBase
 {
 public:
+    virtual const char *moduleType()=0;
     virtual const char *identifier()=0;
     virtual const char *localizedName(const char* locale) { return identifier(); }
     virtual void initialize(OVDictionary *globalPref, OVDictionary *modulePref,
@@ -165,6 +167,7 @@ class OVInputMethod : public OVModule
 {
 public:
     virtual OVInputMethodContext* newContext()=0;
+    virtual const char* moduleType() { return "OVInputMethod"; }
 };
 
 // The OutputFilter module interface. Note we don't care in which encoding
@@ -177,6 +180,7 @@ class OVOutputFilter : public OVModule
 {
 public:
     virtual const char* process(const char *source, OVService *srv)=0;
+    virtual const char* moduleType() { return "OVOutputFilter"; }
 };
 
 // Common key codes. Note these are FIXED DEFINITIONS in OpenVanilla.h; an
