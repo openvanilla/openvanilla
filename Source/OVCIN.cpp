@@ -144,7 +144,8 @@ int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 	for(unsigned int i = 0; i < inStringVectorRef.size(); i++)
 	{
 		string currentString = inStringVectorRef[i];
-		int foundIndex = currentString.find("%" + mapName, 0);		
+		int foundIndex = currentString.find("%" + mapName, 0);
+		int foundComment = currentString.find("#", 0);
 		if(!doGet) {
 			if(foundIndex == 0) {
 				int foundBegin = currentString.find(sectionMark, foundIndex);
@@ -158,8 +159,10 @@ int OVCIN::getMapByName(vector<string>& inStringVectorRef,
 				int foundEnd = currentString.find(sectionMark, foundIndex);
 				if(foundEnd > -1)	// stop reading pairs
 					break;
-			} else {
+			} else if(foundComment != 0) {
 				vector<string> pairVector;
+				if(foundComment > 0)
+					currentString = currentString.substr(0, foundComment);
 				int vectorSize =
 					OVStringToolKit::splitString(currentString, pairVector,
 												 delimiters, false);
