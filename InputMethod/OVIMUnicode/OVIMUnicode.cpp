@@ -121,11 +121,11 @@ public:
     {
         *enc=ovEncodingUTF8;
         if (!strcasecmp(locale, "zh_TW"))
-            return strlen(strcpy((char*)s, "OV Unicode Hex 輸入"));
+            return strlen(strcpy((char*)s, "OV Unicode Hex"));
         else if (!strcasecmp(locale, "zh_CN"))
-            return strlen(strcpy((char*)s, "OV Unicode Hex 输入"));
+            return strlen(strcpy((char*)s, "OV Unicode Hex"));
         else
-            return strlen(strcpy((char*)s, "OV Unicode Hex IM"));
+            return strlen(strcpy((char*)s, "OV Unicode Hex"));
     }
 
     virtual int initialize(OVDictionary*, OVDictionary*, OVService*, char*)
