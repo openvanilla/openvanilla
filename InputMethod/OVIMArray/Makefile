@@ -1,13 +1,10 @@
 IMID=OVIMArray
-OBJS=VXCIN.o VXUtility.o VXCandidate.o XcinCinList.o OVIMArray.o 
+OBJS=VXCIN.o VXUtility.o VXCandidate.o OVIMArray.o 
 GOALS=OVIMArray.dylib 
 DATA=array30.cin
 
 $(GOALS): $(OBJS)
 	$(CPP) -framework Cocoa -o $@ -bundle $(OBJS)
-
-OVIMArray.o: OVIMXcin.mm
-	$(CPP) $(CFLAGS) -DOVIMARRAY -O2 -o OVIMArray.o -c $<
 
 include ../../Mk/ov.im.mk
 include ../../Mk/ov.vars.mk
