@@ -60,6 +60,7 @@ int OVIMPOJ::update(OVDictionary* global, OVDictionary* local)
     asciioutput=local->getInt(optASCIIOutput);
     keylayout=local->getInt(optKeyLayout);
     beep=global->getInt(optBeep);
+    fullPOJoutput=local->getIntDefault("fullPOJoutput", 0);
     return 1;
 }
 
@@ -140,6 +141,13 @@ void OVIMPOJContext::queryAndCompose(char *qstr, char *disp, OVBuffer *buf,
     OVTextBar *textbar, OVService *srv)
 {
     NSArray *result=cintab->find(qstr);
+
+    if (fullPOJoutput)
+    {
+        buf->send();
+    }
+    else
+    {
     
     if (!result)
     {
@@ -152,6 +160,7 @@ void OVIMPOJContext::queryAndCompose(char *qstr, char *disp, OVBuffer *buf,
         [list addObjectsFromArray: result];
         
         candi.prepare(list, cintab->selKey(), textbar);
+    }
     }
 }
 
