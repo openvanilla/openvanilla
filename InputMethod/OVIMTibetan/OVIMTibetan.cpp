@@ -41,11 +41,13 @@ unsigned short ConsonantChars[37] = {
 	0x0F67,0x0F68,0x0F4C,0x0F4A,0x0F4B,0x0F65,0x0F4E
 };
 
-char VowelKeys[7] = {
-	'a','i','u','o','E','O','I'
+char VowelKeys[8] = {
+	'a','i','u','o',
+	'e','E','O','I'
 };
-unsigned short VowelChars[7] = {
-	0,0x0F72,0x0F74,0x0F7c,0x0F7b,0x0F7d,0x0F80
+unsigned short VowelChars[8] = {
+	0,0x0F72,0x0F74,0x0F7C,
+	0x0F7A,0x0F7B,0x0F7D,0x0F80
 }; 
 
 int isConsonantKey(int key){
@@ -59,7 +61,7 @@ int isConsonantKey(int key){
 
 int isVowelKey(int key){
 	int i;
-	for(i=0; i<7; i++){
+	for(i=0; i< 8; i++){
 		if(key == VowelKeys[i])
 			return i;
 	}
