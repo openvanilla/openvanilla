@@ -55,7 +55,7 @@ void *CIMCustomOpen()
     if (!libh)
 	{
 		fprintf (stderr, "dynamic lib load failed\n");
-		return 1;
+		return NULL;
 	}
 	else
 	{
@@ -66,7 +66,7 @@ void *CIMCustomOpen()
     if (!create_derived || !destroy_derived)
 	{
 		fprintf (stderr, "load function failed\n");
-		return 1;
+		return NULL;
 	}
     
 	expim=create_derived();

@@ -32,7 +32,7 @@ class CIMInputBuffer
 public:
     CIMInputBuffer() { instance=0; clear(); }
     void clear() { len=lastupdate=0; }
-    void deletechar() { if (len) len--; }
+    void deletechar(); 
     
     int length();   // returns actual Unicode (UTF-32) chars, not UTF-16 chars
     int put(UniChar c);
@@ -44,6 +44,7 @@ public:
                  LangCode=cimLanguage);
     
 protected:
+    int realpos(int p);     // returns actual position in buffer (with surrogate)
     int len;
     int lastupdate;
     UniChar buffer[cimIBMaxLen];

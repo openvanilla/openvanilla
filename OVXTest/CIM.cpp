@@ -114,7 +114,7 @@ ComponentResult CIMSessionOpen(ComponentInstance inst,
 		{
 			(**hndl)->init(inst);
 			#ifdef CIMCUSTOM
-				if (!((**hndl)->data=CIMCustomOpen())) result=memFullErr;
+				(**hndl)->data=CIMCustomOpen();
 			#endif
 		}
 		else result=memFullErr;
@@ -129,7 +129,7 @@ void CIMSessionClose(CIMSessionHandle hndl)
     {
         (*hndl)->kill();
 		#ifdef CIMCUSTOM
-			CIMCustomClose((*hndl)->data);
+			if ((*hndl)->data) CIMCustomClose((*hndl)->data);
 		#endif
         DisposeHandle((Handle)hndl);
     }
@@ -315,6 +315,40 @@ ComponentResult CIMGetInputPosition(CIMSessionHandle hndl, Point *pnt)
     return status;
 }
 
+int CIMInputBuffer::realpos(int p)
+{
+    int pp=0;
+    int i;
+    
+    for (i=0; i<len; i++)
+    {
+        if (pp==p) break;
+
+        // see if encounters a surrogate pair
+        if (buffer[i] >= 0xd800 && buffer[i] <= 0xdfff)
+        {
+            i++;
+            if (i<len && buffer[i] >= 0xd800 && buffer[i] <= 0xdfff) pp++;
+        }
+        else pp++;
+    }
+    
+	fprintf (stderr, "realpos; length=%d, request=%d, actual=%d\n", len, p, i);
+	
+    return i;
+}
+
+void CIMInputBuffer::deletechar()
+{
+    if (!len) return;
+    
+    len--;
+    if (buffer[len] >= 0xd800 && buffer[len] <= 0xdfff) // surrogate char
+    {
+        if (len) len--;    
+    }
+}
+
 int CIMInputBuffer::length()
 {
     int l=0;
@@ -325,7 +359,6 @@ int CIMInputBuffer::length()
         if (buffer[i] >= 0xd800 && buffer[i] <= 0xdfff)
         {
             i++;
-            
             if (i<len && buffer[i] >= 0xd800 && buffer[i] <= 0xdfff) l++;
         }
         else l++;
@@ -448,50 +481,43 @@ OSErr CIMInputBuffer::update(Boolean send, int cursorpos, int hilitefrom,
     if(error==noErr)
     {
         hiliterangeptr=(TextRangeArrayPtr)NewPtrClear(sizeof(short)+
-            sizeof(TextRange)*2);
+            sizeof(TextRange)*3);
+			
+		// among the four TSM update messages: k(Selected)RawText and
+		// k(Selected)ConvertedText, it seems only the latter pair works,
+		// i.e both kSelectedRawText and kRawText seem to be defunct
+			
+		#define SETRANGE(r, f, e, s) hiliterangeptr->fRange[r].fStart=f; \
+			hiliterangeptr->fRange[r].fEnd=e; \
+			hiliterangeptr->fRange[r].fHiliteStyle=s
+			
         if(!hiliterangeptr) error=memFullErr;
         else
         {
             hiliterangeptr->fNumOfRanges=2;
 			
-			if 	((hilitefrom>=0 && hilitefrom<=len) &&
-				(hiliteto>hilitefrom && hiliteto<=len))
-			{
-				hiliterangeptr->fRange[0].fStart=hilitefrom*sizeof(UniChar);
-				hiliterangeptr->fRange[0].fEnd=hiliteto*sizeof(UniChar);
-				
-				// strange, only kSelectedConvertedText seems to work
-//				if (send)
-					hiliterangeptr->fRange[0].fHiliteStyle=kSelectedConvertedText;
-//				else
-//					hiliterangeptr->fRange[0].fHiliteStyle=kSelectedRawText;
+			int realcur=len*sizeof(UniChar);
+			// set cursor position
+			if (cursorpos>=0 && cursorpos<=length()) realcur=cursorpos*sizeof(UniChar);
+			SETRANGE(0, realcur, realcur, kCaretPosition);
+			
+			// requests app to draw a light gray underline to our text area
+			SETRANGE(1, 0, len*sizeof(UniChar), kConvertedText);
 
-			}
-			else
+			// if hitelitefrom & hiteliteto are set, draw a darker line
+			if 	((hilitefrom>=0 && hilitefrom<=length()) &&
+				(hiliteto>hilitefrom && hiliteto<=length()))
 			{
-				hiliterangeptr->fRange[0].fStart=0;
-				hiliterangeptr->fRange[0].fEnd=len*sizeof(UniChar);
-				if (send)
-					hiliterangeptr->fRange[0].fHiliteStyle=kConvertedText;
-				else
-					hiliterangeptr->fRange[0].fHiliteStyle=kRawText;
+				hiliterangeptr->fNumOfRanges++;		// send one more range block
+
+				SETRANGE(2, realpos(hilitefrom)*sizeof(UniChar),
+					realpos(hiliteto)*sizeof(UniChar), 
+					kSelectedConvertedText);
 			}
             
-            
-			if (cursorpos>=0 && cursorpos<=len)
-			{
-				hiliterangeptr->fRange[1].fStart=cursorpos*sizeof(UniChar);
-				hiliterangeptr->fRange[1].fEnd=cursorpos*sizeof(UniChar);          
-			}
-			else
-			{
-				hiliterangeptr->fRange[1].fStart=len*sizeof(UniChar);
-				hiliterangeptr->fRange[1].fEnd=len*sizeof(UniChar);          
-			}
-			hiliterangeptr->fRange[1].fHiliteStyle=kCaretPosition;
-
             error=SetEventParameter(event, kEventParamTextInputSendHiliteRng,
-                typeTextRangeArray, sizeof(short)+sizeof(TextRange)*2,
+                typeTextRangeArray, 
+				sizeof(short)+sizeof(TextRange)*hiliterangeptr->fNumOfRanges,
                 hiliterangeptr );
         }
     }
