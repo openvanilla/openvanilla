@@ -10,7 +10,6 @@ OVLOADABLEOBJCWRAPPER;
 
 const char *optASCIIOutput="ASCIIOutput";
 const char *optKeyLayout="keyboardLayout";
-const char *optCinPath="POJCinPath";
 const char *optBeep="warningBeep";
 
 int OVIMPOJ::identifier(char* s)
@@ -30,19 +29,21 @@ int OVIMPOJ::name(char *locale, void *s, OVEncoding *enc)
 int OVIMPOJ::initialize(OVDictionary* global, OVDictionary* local,
     OVService* srv, char* path)
 {
+    char cinpath[PATH_MAX];
+    
     if (!local->keyExist(optASCIIOutput))
         local->setInt(optASCIIOutput, 0);
     if (!local->keyExist(optKeyLayout))
         local->setInt(optKeyLayout, pojToneByNumber);
-    if (!local->keyExist(optCinPath))
-        local->setString(optCinPath, "/Library/OpenVanilla/Development/OVIMPOJ/poj.oin");
         
+    strcpy(cinpath, path);
+    strcat(cinpath, "OVIMPOJ/poj.oin");        
+    murmur ("OVIMPOJ: loading poj.oin at %s", cinpath);
+    
     update(global, local);
     
-    char buf[256];
-    local->getString(optCinPath, buf);
     cintab=new VXCIN;
-    cintab->read(buf);    
+    cintab->read(cinpath);
 
     return 1;
 }
