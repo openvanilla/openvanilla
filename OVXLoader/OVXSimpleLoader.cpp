@@ -144,6 +144,9 @@ int CIMCustomInitialize(MenuRef mnu)
 	inputmethod->identifier(buf);
     fprintf (stderr, "loaded input method id=%s\n", buf);
         
+    OVDictionary dict;
+    OVService srv;
+    inputmethod->initialize(&dict, &dict, &srv, workpath);
     // TODO: put OS X locale information here
     OVEncoding e;
     int l=inputmethod->name("zh_TW", buf, &e);

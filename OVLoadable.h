@@ -59,20 +59,24 @@ typedef int OVLUnloadType();
         delete im;  \
     }
     
-// if you use Objective-C/Objective-C++ to write an IM moudle,
-// you MUST call this wrapper
-
-#define OVLOADABLEOBJCWRAPPER   \
-    id autoreleasepool;    \
-    extern "C" void _init() \
-    {   \
-        autoreleasepool=[[NSAutoreleasePool] alloc] init]; \
-    }
-    
+// use this wrapper if your IM module is unloadable    
 #define OVLOADABLECANUNLOAD   \
     extern "C" int OVLoadableCanUnload()    \
     {   \
         return 1;   \
+    }
+
+// if you use Objective-C/Objective-C++ to write an IM moudle,
+// you MUST call this wrapper
+#define OVLOADABLEOBJCWRAPPER   \
+    id autoreleasepool;    \
+    extern "C" void _init() \
+    {   \
+        autoreleasepool=[[NSAutoreleasePool alloc] init]; \
+    }   \
+    extern "C" int OVLoadableCanUnload()    \
+    {   \
+        return 0;   \
     }
 
     

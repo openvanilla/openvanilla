@@ -2,6 +2,7 @@
 
 #include <Cocoa/Cocoa.h>
 #include "OpenVanilla.h"
+#include "OVLoadable.h"
 
 id MakeNSStr(char *s)
 {
@@ -134,7 +135,7 @@ public:
         fprintf (stderr, "im Context deactivated\n");
     }
     
-    virtual int keyevent(OVKeyCode *key, OVBuffer *buf,
+    virtual int keyEvent(OVKeyCode *key, OVBuffer *buf,
         OVTextBar *textbar, OVService *srv)
     {
         fprintf (stderr, "recevied key code=%d\n", key->code());
@@ -251,25 +252,30 @@ SPAGHETTI:
             return 1;
         }
     
-        if (key->isprintable())
+        if (key->isPrintable())
         {
-            if (key->isshift())
+            char bbuf[2];
+            bbuf[1]=0;
+            if (key->isShift())
             {
-                char bbuf[3];
-                bbuf[1]=0;
-                bbuf[0]=key->lowercode();
+                bbuf[0]=key->lower();
                 buf->clear()->append(bbuf)->send();
                 return 1;
             }
             
             
-            if (key->iscapslock()) return 0;
+            if (key->isCapslock()) return 0;
 
-            addkeyseq(key->upper());
-            updatekeyseqdisplay(buf);
+            if (addkeyseq(key->upper()))
+            {
+                updatekeyseqdisplay(buf);        
+                if (key->code()=='=') goto SPAGHETTI;
+                return 1;
+            }
             
-            if (key->code()=='=') goto SPAGHETTI;
-            return 1;
+            bbuf[0]=key->code();
+            buf->clear()->append(bbuf)->send();    
+            return 1;        
         }    
    
         return 0;
@@ -314,7 +320,7 @@ protected:
         keyseq[0]=0;
     }
     
-    void addkeyseq(char c)
+    int addkeyseq(char c)
     {
         char buf[2];
         buf[1]=0;
@@ -322,13 +328,15 @@ protected:
             
         id ss=[NSString stringWithCString: buf];
         id v=[tab->keytable objectForKey: ss];
-        if (!v) return;
+        if (!v) return 0;
     
         if (keyseqlen<9) 
         {
             keyseq[keyseqlen++]=c; 
             keyseq[keyseqlen]=0;
         }
+        
+        return 1;
     }
     
     void delkeyseq()
@@ -365,16 +373,24 @@ public:
     {
         *enc=ovEncodingUTF8;
         if (!strcasecmp(locale, "zh_TW"))
-            return strlen(strcpy(s, "OpenVanilla 大易輸入法試作版");
+            return strlen(strcpy(s, "OpenVanilla 大易輸入法試作版"));
         return strlen(strcpy(s, "OpenVanilla Dayi Module"));
     }
-
-    virtual int initialize(OVDictionary*, OVDictionary*, char *path)
+    
+    virtual int terminate(OVDictionary*, OVDictionary*, OVService*)
     {
+        fprintf (stderr, "Dayi module terminated by IM loader\n");
+        return 1;
+    }
+
+    virtual initialize(OVDictionary*, OVDictionary*, OVService*, char* path)
+    {
+        fprintf (stderr, "begin to initialize Dayi at path %s\n", path);
         char dayipath[256];
         strcpy(dayipath, path);
         strcat(dayipath, "dayi3.cin");
         tab=ReadDayi(dayipath); // XXX hard-coded path
+        return 1;
     }
     
     OVIMContext *newContext() { return new OVDayiContext(this, &tab); }
@@ -382,21 +398,8 @@ public:
     DayiTable tab;
 };
 
-OVLOADABLEWRAPPER(OV
-OVLOADABLEOBJCWRAPPER
-
-
-extern "C" OVDayiIM *create()
-{
-//    if (!pool) pool=[[NSAutoreleasePool alloc] init];
-    return new OVDayiIM;
-}
-
-extern "C" void destroy(OVDayiIM *o)
-{
-    delete o;
-//    [pool release];
-}
+OVLOADABLEWRAPPER(OVDayiIM);
+OVLOADABLEOBJCWRAPPER;
 
 
 
