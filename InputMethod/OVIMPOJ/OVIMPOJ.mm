@@ -5,8 +5,8 @@
 #define OVDEBUG 1
 
 #include <OpenVanilla/OpenVanilla.h>
-#include "OpenVanilla/OVLoadable.h"
-#include "OpenVanilla/OVUtility.h"
+#include <OpenVanilla/OVLoadable.h>
+#include <OpenVanilla/OVUtility.h>
 #include "VXCIN.h"
 #include "VXUtility.h"
 

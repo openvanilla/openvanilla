@@ -15,10 +15,10 @@ install:
 	echo "# This loads $(GOALS)" >  $(CONF_PATH)
 	echo $(INST_PATH)/$(GOALS)   >> $(CONF_PATH)
 
-VXCIN.o: ../OSX/VXCIN.mm
+VXCIN.o: ../../Source/OSX/VXCIN.mm
 	gcc -o VXCIN.o -c $<
 
-VXUtility.o: ../OSX/VXUtility.cpp
+VXUtility.o: ../../Source/OSX/VXUtility.cpp
 	gcc -o VXUtility.o -c $<
 
 clean:
@@ -28,4 +28,4 @@ clean:
 	gcc -c $<
 
 %.o: %.mm
-	gcc -c -I../OSX/ $<
+	gcc -c -I../../Source/OSX/ $<
