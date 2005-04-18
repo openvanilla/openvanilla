@@ -105,27 +105,16 @@ public:
     }
 };
 
-// An abstract service class that for the moment provides only beeping.
+// An abstract service class
 class OVService : public OVBase
 {
 public:
     virtual void beep()=0;
-    
-    // this returns a pointer to an internal buffer from which the 
-    // caller can copy the converted content
     virtual const char *toUTF8(const char *encoding, const void *src, int len=0)=0;
-
-    // as the length of the source is always predictable, OpenVanilla
-    // requires the caller of this function--which converts UTF-8 into
-    // an encoding desired by the caller--to be responsible of the length of dest
     virtual int fromUTF8(const char *encoding, const char *src, void *dest)=0;
-        
-    // an optional message (e.g. "wrong keystroke"), but the Loader is not
-    // required to implement this (i.e. can simply fill in an empty function)
-    virtual void notify(const char *msg)=0;
-    
-    // on big-endian machines it's utf16be, and you know the rest of the story...
+    virtual void notify(const char *msg)=0;    
     virtual const char *nativeUTF16EncodingType();
+    virtual const char *locale();
 };
 
 // The input method context. The context is always created by the IM module
