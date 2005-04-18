@@ -8,11 +8,10 @@
 #define __OVUtility_h
 
 // debug routine
-#ifdef OVDEBUG    
+#ifdef OV_DEBUG 
     #include <stdarg.h>
     #include <stdio.h>
-    inline static void murmur(const char* format,...)
-    {
+    inline static void murmur(const char* format,...) {
         va_list args;
         va_start (args, format);
         vfprintf (stderr, format, args);
@@ -20,8 +19,7 @@
         fprintf (stderr, "\n");
     }
 #else
-    inline static void murmur(const char* format,...)
-    {
+    inline static void murmur(const char* format,...) {
     }
 #endif
 

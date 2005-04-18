@@ -30,19 +30,17 @@
 #ifndef __OpenVanilla_h
 #define __OpenVanilla_h
 
-#define OVVERSION   (0x00070000)      // version 0.7.0
+#define OV_VERSION   (0x00070000)      // version 0.7.0
 
 // A pure base class that defines the virtual destructor
-class OVBase
-{
+class OVBase {
 public:
     virtual ~OVBase() {}
 };
 
 // Abstract interface that accesses key code and key states (e.g. if SHIFT is
 // hit at the time the key code is sent)
-class OVKeyCode : public OVBase 
-{
+class OVKeyCode : public OVBase  {
 public:
     virtual int code()=0;
     virtual int isShift()=0;
@@ -55,8 +53,7 @@ public:
 };
 
 // Abstract interface for the pre-edit and composing buffer.
-class OVBuffer : public OVBase
-{
+class OVBuffer : public OVBase {
 public:
     virtual OVBuffer* clear()=0;
     virtual OVBuffer* append(const char *s)=0;
@@ -66,18 +63,17 @@ public:
     virtual int isEmpty()=0;
 };
 
-// Abstract interface for the message bar (called InfoBox in OpenVanilla).
+// Abstract interface for the message bar (called Candidate in OpenVanilla).
 // By default it is a simple horizontal strip, but it is possible, for example,
-// to send marked-up texts through OVInfoBox::append(). The implementation
+// to send marked-up texts through OVCandidate::append(). The implementation
 // is up to the IM environment (Loader) that provides this interface to the IM.
-class OVInfoBox : public OVBase 
-{
+class OVCandidate : public OVBase  {
 public:
-    virtual OVInfoBox* clear()=0;
-    virtual OVInfoBox* append(const char *s)=0;
-    virtual OVInfoBox* hide()=0;
-    virtual OVInfoBox* show()=0;
-    virtual OVInfoBox* update()=0;
+    virtual OVCandidate* clear()=0;
+    virtual OVCandidate* append(const char *s)=0;
+    virtual OVCandidate* hide()=0;
+    virtual OVCandidate* show()=0;
+    virtual OVCandidate* update()=0;
     virtual int onScreen()=0;
 };
 
@@ -85,36 +81,40 @@ public:
 // dictionary be implemented as a type-free dictionary, i.e. you can replace
 // the key with any value of any type, and type conversion between integer and
 // string is done transparently, like what is done in e.g. sqlite3.
-class OVDictionary : public OVBase
-{
+class OVDictionary : public OVBase {
 public:
     virtual int keyExist(const char *key)=0;
     virtual int getInteger(const char *key)=0;
     virtual int setInteger(const char *key, int value)=0;
     virtual const char* getString(const char *key)=0;
     virtual const char* setString(const char *key, const char *value)=0;
-    virtual int getIntegerWithDefault(const char *key, int value)
-    {
-        if (!keyExist(key)) setInteger(key, value);
-        return getInteger(key);
+    virtual int getIntegerWithDefault(const char *key, int value) {
+        if (!keyExist(key)) setInteger(key, value); return getInteger(key);
     }
-    virtual const char* getStringWithDefault(const char *key, const char *value)
-    {
-        if (!keyExist(key)) setString(key, value);
-        return getString(key);
+    virtual const char* getStringWithDefault(const char *key, const char *value) {
+        if (!keyExist(key)) setString(key, value); return getString(key);
     }
 };
 
-// An abstract service class
-class OVService : public OVBase
-{
+// currently supported char encoding = "big5" (short for big5-hkscs)
+class OVService : public OVBase {
 public:
     virtual void beep()=0;
-    virtual const char *toUTF8(const char *encoding, const void *src, int len=0)=0;
-    virtual int fromUTF8(const char *encoding, const char *src, void *dest)=0;
     virtual void notify(const char *msg)=0;    
-    virtual const char *nativeUTF16EncodingType();
     virtual const char *locale();
+    virtual const char *userSpacePath(const char *modid);
+    virtual const char *pathSeperator();
+
+    // limited support for encoding conversion
+    virtual const char *toUTF8(const char *encoding, const char *src)=0;
+    virtual const char *fromUTF8(const char *encoding, const char *src)=0;
+    
+    // the endian order of these two functions is always that of machine order
+    // (ie. on a big endian machine it's UTF16BE, otherwise UTF16LE)
+    // no byte order mark (0xfffe or 0xfeff) is ever used here) 
+    // also note no boundry check mechanism exists, the Loader take care about it
+    virtual const char *UTF16ToUTF8(unsigned short *src, int len)=0;
+    virtual int UTF8ToUTF16(const char *src, unsigned short **rcvr)=0;
 };
 
 // The input method context. The context is always created by the IM module
@@ -123,12 +123,14 @@ public:
 // Note that the derived OVInputMethodContext::keyEvent() method MUST RETURN
 // either 0 or non-zero. It should return non-zero if the event is "processed"
 // by the IM context, 0 if the event is "rejected" or "not processed."
-class OVInputMethodContext : public OVBase 
-{
+class OVInputMethodContext : public OVBase  {
 public:
-    virtual void start(OVBuffer*, OVInfoBox*, OVService*) {}
+    virtual void start(OVBuffer*, OVCandidate*, OVService*) {}
     virtual void clear() {}
-    virtual int keyEvent(OVKeyCode*, OVBuffer*, OVInfoBox*, OVService*)=0;
+    virtual int keyEvent(OVKeyCode*, OVBuffer*, OVCandidate*, OVService*)=0;
+    
+    // insert is called when the Loader or another IM wants to feed in a character
+    // virtual int insert(const char *str) { return 0; }
 };
 
 // The common OpenVanilla module interface. Currently OpenVanilla has two
@@ -138,16 +140,14 @@ public:
 // between Traditional and Simplified Chinese, or convert all kanas into
 // romanized forms, etc.)
 
-class OVModule : public OVBase
-{
+class OVModule : public OVBase {
 public:
     virtual const char *moduleType()=0;
     virtual const char *identifier()=0;
     virtual const char *localizedName(const char* locale) { return identifier(); }
-    virtual int initialize(OVDictionary *globalPref, OVDictionary *modulePref,
-        OVService *srv, const char *modulePath, const char *userPath, 
-        const char *seperator) { return 1; }
-    virtual void update(OVDictionary *modulePref, OVService *srv) {}
+    virtual int initialize(OVDictionary *moduleCfg, OVService *srv, 
+        const char *modulePath) { return 1; }
+    virtual void update(OVDictionary *moduleCfg, OVService *srv) {}
 };
 
 // The InputMethod module interface
