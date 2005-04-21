@@ -271,7 +271,7 @@ void CVContext::deactivate() {
 
 void CVContext::fix() {
     murmur("context fix");
-    if (buf->isEmpty()) {
+    if (!buf->isEmpty()) {
         murmur("buffer not empty, sending");
         buf->send();
     }
