@@ -1,0 +1,1050 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 39;
+	objects = {
+		6A3AC1C708160F9700FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CVWrappers.h;
+			path = CocoaVanilla/CVWrappers.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A3AC1C808160F9700FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = CVWrappers.mm;
+			path = CocoaVanilla/CVWrappers.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A3AC1C908160F9700FFFF62 = {
+			fileRef = 6A3AC1C708160F9700FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A3AC1CA08160F9700FFFF62 = {
+			fileRef = 6A3AC1C808160F9700FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A3AC28008164F8B00FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CVLoaderConfig.h;
+			path = CocoaVanilla/CVLoaderConfig.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A3AC28108164F8B00FFFF62 = {
+			fileRef = 6A3AC28008164F8B00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A3AC28208164FBE00FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = CVLoaderConfig.mm;
+			path = CocoaVanilla/CVLoaderConfig.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A3AC28308164FBE00FFFF62 = {
+			fileRef = 6A3AC28208164FBE00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A3AC2850816505F00FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CVBuffer.h;
+			path = CocoaVanilla/CVBuffer.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A3AC2860816505F00FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = CVBuffer.mm;
+			path = CocoaVanilla/CVBuffer.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A3AC2870816505F00FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CVConfig.h;
+			path = CocoaVanilla/CVConfig.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A3AC2880816505F00FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = CVConfig.mm;
+			path = CocoaVanilla/CVConfig.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A3AC2890816505F00FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CVDictionary.h;
+			path = CocoaVanilla/CVDictionary.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A3AC28A0816505F00FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = CVDictionary.mm;
+			path = CocoaVanilla/CVDictionary.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A3AC28B0816505F00FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CVLoaderUtility.h;
+			path = CocoaVanilla/CVLoaderUtility.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A3AC28C0816505F00FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = CVLoaderUtility.mm;
+			path = CocoaVanilla/CVLoaderUtility.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A3AC28D0816505F00FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CVService.h;
+			path = CocoaVanilla/CVService.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A3AC28E0816505F00FFFF62 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = CVService.mm;
+			path = CocoaVanilla/CVService.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A3AC2910816505F00FFFF62 = {
+			fileRef = 6A3AC2850816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A3AC2920816505F00FFFF62 = {
+			fileRef = 6A3AC2860816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A3AC2930816505F00FFFF62 = {
+			fileRef = 6A3AC2870816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A3AC2940816505F00FFFF62 = {
+			fileRef = 6A3AC2880816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A3AC2950816505F00FFFF62 = {
+			fileRef = 6A3AC2890816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A3AC2960816505F00FFFF62 = {
+			fileRef = 6A3AC28A0816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A3AC2970816505F00FFFF62 = {
+			fileRef = 6A3AC28B0816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A3AC2980816505F00FFFF62 = {
+			fileRef = 6A3AC28C0816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A3AC2990816505F00FFFF62 = {
+			fileRef = 6A3AC28D0816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A3AC29A0816505F00FFFF62 = {
+			fileRef = 6A3AC28E0816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A5D8E8708173ADB007A527F = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = NSDictionaryExtension.h;
+			path = NSExtensions/NSDictionaryExtension.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A5D8E8808173ADB007A527F = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = NSDictionaryExtension.mm;
+			path = NSExtensions/NSDictionaryExtension.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A5D8E8908173ADB007A527F = {
+			fileRef = 6A5D8E8708173ADB007A527F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A5D8E8A08173ADB007A527F = {
+			fileRef = 6A5D8E8808173ADB007A527F;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A7B8D060815B7930075F8E4 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			isa = PBXShellScriptBuildPhase;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# osascript -e 'tell application \"OVMonitor\" to quit'\n# osascript ~/Desktop/relaunch.scpt\n# osascript -e 'tell application \"OVMonitor\" to activate'\n";
+		};
+		6A8D0DBE0814E727006B922E = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = CoreServices.framework;
+			path = /System/Library/Frameworks/CoreServices.framework;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6A8D0DBF0814E727006B922E = {
+			fileRef = 6A8D0DBE0814E727006B922E;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A8D0DC30814E72E006B922E = {
+			fileRef = 6A975EB20814C47700F40859;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A975E9C0814C41600F40859 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AC170700816962400FE1274,
+				6AC1707C0816967E00FE1274,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A975E9D0814C41600F40859 = {
+			buildActionMask = 2147483647;
+			files = (
+				6A975EAD0814C45F00F40859,
+				6A975EAE0814C45F00F40859,
+				6A975EAF0814C45F00F40859,
+				6A975EF40814C7CA00F40859,
+				6A3AC1CA08160F9700FFFF62,
+				6A3AC28308164FBE00FFFF62,
+				6A3AC2920816505F00FFFF62,
+				6A3AC2940816505F00FFFF62,
+				6A3AC2960816505F00FFFF62,
+				6A3AC2980816505F00FFFF62,
+				6A3AC29A0816505F00FFFF62,
+				6AC170860816969500FE1274,
+				6A5D8E8A08173ADB007A527F,
+				6AA6E80B0817A7F7003C560A,
+				6AA6E8B30817BA60003C560A,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A975E9E0814C41600F40859 = {
+			buildActionMask = 2147483647;
+			files = (
+				6A975EB30814C47700F40859,
+				6A975EB50814C48100F40859,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A975E9F0814C41600F40859 = {
+			buildPhases = (
+				6A975E9C0814C41600F40859,
+				6A975E9D0814C41600F40859,
+				6A975E9E0814C41600F40859,
+				6A975EA90814C44400F40859,
+				6A7B8D060815B7930075F8E4,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVLoader-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/OpenVanilla/0.7.0/OVLoader/";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = OVLoader;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+				6A975ED90814C64600F40859,
+			);
+			isa = PBXNativeTarget;
+			name = OVLoader;
+			productName = OVLoader;
+			productReference = 6A975EA00814C41600F40859;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OVLoader</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.OVLoader</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		6A975EA00814C41600F40859 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = OVLoader.bundle;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6A975EA10814C41600F40859 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "OVLoader-Info.plist";
+			path = "/Users/lukhnos/logiciels/openvanilla/OSX/OVLoader-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6A975EA90814C44400F40859 = {
+			buildActionMask = 2147483647;
+			files = (
+				6A975EAA0814C45900F40859,
+				6A975EAB0814C45900F40859,
+				6A975EAC0814C45900F40859,
+				6A975EF30814C7CA00F40859,
+				6A3AC1C908160F9700FFFF62,
+				6A3AC28108164F8B00FFFF62,
+				6A3AC2910816505F00FFFF62,
+				6A3AC2930816505F00FFFF62,
+				6A3AC2950816505F00FFFF62,
+				6A3AC2970816505F00FFFF62,
+				6A3AC2990816505F00FFFF62,
+				6AC170850816969500FE1274,
+				6A5D8E8908173ADB007A527F,
+				6AA6E7FB0817A1B6003C560A,
+				6AA6E89D0817B9BA003C560A,
+				6AF9423B0817F2F800AE0534,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A975EAA0814C45900F40859 = {
+			fileRef = 6AF110130814BF1500B49D06;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A975EAB0814C45900F40859 = {
+			fileRef = 6AF110150814BF1500B49D06;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A975EAC0814C45900F40859 = {
+			fileRef = 6AF110170814BF1500B49D06;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A975EAD0814C45F00F40859 = {
+			fileRef = 6AF110140814BF1500B49D06;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A975EAE0814C45F00F40859 = {
+			fileRef = 6AF110160814BF1500B49D06;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A975EAF0814C45F00F40859 = {
+			fileRef = 6AF110180814BF1500B49D06;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A975EB10814C46600F40859 = {
+			children = (
+				6A8D0DBE0814E727006B922E,
+				6A975EB40814C48100F40859,
+				6A975EB20814C47700F40859,
+			);
+			isa = PBXGroup;
+			name = Frameworks;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A975EB20814C47700F40859 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = Carbon.framework;
+			path = /System/Library/Frameworks/Carbon.framework;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6A975EB30814C47700F40859 = {
+			fileRef = 6A975EB20814C47700F40859;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A975EB40814C48100F40859 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = Cocoa.framework;
+			path = /System/Library/Frameworks/Cocoa.framework;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6A975EB50814C48100F40859 = {
+			fileRef = 6A975EB40814C48100F40859;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A975ED40814C5F800F40859 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = Localizable.strings;
+			path = OVLoaderResources/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A975ED80814C64600F40859 = {
+			containerPortal = 6AF10FF60814BE3400B49D06;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 6AF10FFD0814BE7A00B49D06;
+			remoteInfo = OVInit;
+		};
+		6A975ED90814C64600F40859 = {
+			isa = PBXTargetDependency;
+			target = 6AF10FFD0814BE7A00B49D06;
+			targetProxy = 6A975ED80814C64600F40859;
+		};
+		6A975EF10814C7CA00F40859 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CVLoader.h;
+			path = CocoaVanilla/CVLoader.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A975EF20814C7CA00F40859 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = CVLoader.mm;
+			path = CocoaVanilla/CVLoader.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A975EF30814C7CA00F40859 = {
+			fileRef = 6A975EF10814C7CA00F40859;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A975EF40814C7CA00F40859 = {
+			fileRef = 6A975EF20814C7CA00F40859;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA6E7FA0817A1B6003C560A = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CVSmartMenu.h;
+			path = CocoaVanilla/CVSmartMenu.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AA6E7FB0817A1B6003C560A = {
+			fileRef = 6AA6E7FA0817A1B6003C560A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA6E80A0817A7F7003C560A = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = CVSmartMenu.mm;
+			path = CocoaVanilla/CVSmartMenu.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AA6E80B0817A7F7003C560A = {
+			fileRef = 6AA6E80A0817A7F7003C560A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA6E89C0817B9BA003C560A = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CVCandidate.h;
+			path = CocoaVanilla/CVCandidate.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AA6E89D0817B9BA003C560A = {
+			fileRef = 6AA6E89C0817B9BA003C560A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AA6E8B20817BA60003C560A = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = CVCandidate.mm;
+			path = CocoaVanilla/CVCandidate.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AA6E8B30817BA60003C560A = {
+			fileRef = 6AA6E8B20817BA60003C560A;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AC170700816962400FE1274 = {
+			fileRef = 6A975ED40814C5F800F40859;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AC1707B0816967E00FE1274 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = CVInfoBox.nib;
+			path = OVLoaderResources/CVInfoBox.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AC1707C0816967E00FE1274 = {
+			fileRef = 6AC1707B0816967E00FE1274;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AC170830816969500FE1274 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CVInfoBox.h;
+			path = OVLoaderResources/CVInfoBox.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AC170840816969500FE1274 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = CVInfoBox.mm;
+			path = OVLoaderResources/CVInfoBox.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AC170850816969500FE1274 = {
+			fileRef = 6AC170830816969500FE1274;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AC170860816969500FE1274 = {
+			fileRef = 6AC170840816969500FE1274;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AD576350814C221001F6AFE = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = English;
+			path = OVInitResources/English.lproj/InfoPlist.strings;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AD576390814C264001F6AFE = {
+			children = (
+				6AD576350814C221001F6AFE,
+			);
+			isa = PBXVariantGroup;
+			name = InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AD576440814C293001F6AFE = {
+			fileRef = 6AD576390814C264001F6AFE;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AF10FF20814BE3400B49D06 = {
+			children = (
+				6AF1100B0814BED000B49D06,
+				6AF110060814BEB800B49D06,
+				6AF1100C0814BEE600B49D06,
+				6AF110040814BEA000B49D06,
+				6AF110070814BEC100B49D06,
+				6AF110050814BEB000B49D06,
+				6A975EB10814C46600F40859,
+				6AF10FFF0814BE7A00B49D06,
+			);
+			isa = PBXGroup;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AF10FF40814BE3400B49D06 = {
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			isa = PBXBuildStyle;
+			name = Development;
+		};
+		6AF10FF50814BE3400B49D06 = {
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			isa = PBXBuildStyle;
+			name = Deployment;
+		};
+		6AF10FF60814BE3400B49D06 = {
+			buildSettings = {
+			};
+			buildStyles = (
+				6AF10FF40814BE3400B49D06,
+				6AF10FF50814BE3400B49D06,
+			);
+			hasScannedForEncodings = 0;
+			isa = PBXProject;
+			mainGroup = 6AF10FF20814BE3400B49D06;
+			productRefGroup = 6AF10FFF0814BE7A00B49D06;
+			projectDirPath = "";
+			targets = (
+				6A975E9F0814C41600F40859,
+				6AF10FFD0814BE7A00B49D06,
+			);
+		};
+		6AF10FFA0814BE7A00B49D06 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AD576440814C293001F6AFE,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AF10FFB0814BE7A00B49D06 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AF110100814BF0300B49D06,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AF10FFC0814BE7A00B49D06 = {
+			buildActionMask = 2147483647;
+			files = (
+				6A8D0DBF0814E727006B922E,
+				6A8D0DC30814E72E006B922E,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AF10FFD0814BE7A00B49D06 = {
+			buildPhases = (
+				6AF10FFA0814BE7A00B49D06,
+				6AF10FFB0814BE7A00B49D06,
+				6AF10FFC0814BE7A00B49D06,
+				6AF110010814BE9000B49D06,
+				6AF110020814BE9900B49D06,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVInit-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Components/";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Carbon";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = OVInit;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = OVInit;
+			productName = OVInit;
+			productReference = 6AF10FFE0814BE7A00B49D06;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OVInit</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.OVInit</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CSResourcesFileMapped</key>
+	<string>yes</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		6AF10FFE0814BE7A00B49D06 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = OVInit.bundle;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6AF10FFF0814BE7A00B49D06 = {
+			children = (
+				6A975EA10814C41600F40859,
+				6AF110000814BE7A00B49D06,
+				6AF10FFE0814BE7A00B49D06,
+				6A975EA00814C41600F40859,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AF110000814BE7A00B49D06 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "OVInit-Info.plist";
+			path = "/Users/lukhnos/logiciels/openvanilla/OSX/OVInit-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6AF110010814BE9000B49D06 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AF1101A0814BF2A00B49D06,
+				6AF110110814BF0300B49D06,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AF110020814BE9900B49D06 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AF110120814BF0300B49D06,
+			);
+			isa = PBXRezBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AF110040814BEA000B49D06 = {
+			children = (
+				6AF1100D0814BF0300B49D06,
+				6AF1100E0814BF0300B49D06,
+				6AF1100F0814BF0300B49D06,
+			);
+			isa = PBXGroup;
+			name = ATSComponent;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AF110050814BEB000B49D06 = {
+			children = (
+				6A5D8E8708173ADB007A527F,
+				6A5D8E8808173ADB007A527F,
+			);
+			isa = PBXGroup;
+			name = NSExtensions;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AF110060814BEB800B49D06 = {
+			children = (
+				6AD576390814C264001F6AFE,
+			);
+			isa = PBXGroup;
+			name = OVInitResources;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AF110070814BEC100B49D06 = {
+			children = (
+				6AF110130814BF1500B49D06,
+				6AF110140814BF1500B49D06,
+				6AF110150814BF1500B49D06,
+				6AF110160814BF1500B49D06,
+				6AF110170814BF1500B49D06,
+				6AF110180814BF1500B49D06,
+			);
+			isa = PBXGroup;
+			name = TSBundle;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AF1100B0814BED000B49D06 = {
+			children = (
+				6AF9423A0817F2F800AE0534,
+				6AA6E8B20817BA60003C560A,
+				6AA6E89C0817B9BA003C560A,
+				6AA6E80A0817A7F7003C560A,
+				6AA6E7FA0817A1B6003C560A,
+				6A3AC2850816505F00FFFF62,
+				6A3AC2860816505F00FFFF62,
+				6A3AC2870816505F00FFFF62,
+				6A3AC2880816505F00FFFF62,
+				6A3AC2890816505F00FFFF62,
+				6A3AC28A0816505F00FFFF62,
+				6A3AC28B0816505F00FFFF62,
+				6A3AC28C0816505F00FFFF62,
+				6A3AC28D0816505F00FFFF62,
+				6A3AC28E0816505F00FFFF62,
+				6A3AC28208164FBE00FFFF62,
+				6A3AC28008164F8B00FFFF62,
+				6A3AC1C708160F9700FFFF62,
+				6A3AC1C808160F9700FFFF62,
+				6A975EF10814C7CA00F40859,
+				6A975EF20814C7CA00F40859,
+			);
+			isa = PBXGroup;
+			name = CocoaVanilla;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AF1100C0814BEE600B49D06 = {
+			children = (
+				6AC170830816969500FE1274,
+				6AC170840816969500FE1274,
+				6AC1707B0816967E00FE1274,
+				6A975ED40814C5F800F40859,
+			);
+			isa = PBXGroup;
+			name = OVLoaderResources;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AF1100D0814BF0300B49D06 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.c;
+			name = ATSComponent.c;
+			path = ATSComponent/ATSComponent.c;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AF1100E0814BF0300B49D06 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = ATSComponent.h;
+			path = ATSComponent/ATSComponent.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AF1100F0814BF0300B49D06 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.rez;
+			name = ATSComponent.r;
+			path = ATSComponent/ATSComponent.r;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AF110100814BF0300B49D06 = {
+			fileRef = 6AF1100D0814BF0300B49D06;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AF110110814BF0300B49D06 = {
+			fileRef = 6AF1100E0814BF0300B49D06;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AF110120814BF0300B49D06 = {
+			fileRef = 6AF1100F0814BF0300B49D06;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AF110130814BF1500B49D06 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = IMInterface.h;
+			path = TSBundle/IMInterface.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AF110140814BF1500B49D06 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = IMInterface.mm;
+			path = TSBundle/IMInterface.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AF110150814BF1500B49D06 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = TSBundle.h;
+			path = TSBundle/TSBundle.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AF110160814BF1500B49D06 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = TSBundle.mm;
+			path = TSBundle/TSBundle.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AF110170814BF1500B49D06 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = TSComposingBuffer.h;
+			path = TSBundle/TSComposingBuffer.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AF110180814BF1500B49D06 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = TSComposingBuffer.mm;
+			path = TSBundle/TSComposingBuffer.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AF1101A0814BF2A00B49D06 = {
+			fileRef = 6AF110150814BF1500B49D06;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AF9423A0817F2F800AE0534 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CVKeyCode.h;
+			path = CocoaVanilla/CVKeyCode.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AF9423B0817F2F800AE0534 = {
+			fileRef = 6AF9423A0817F2F800AE0534;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+	};
+	rootObject = 6AF10FF60814BE3400B49D06;
+}
