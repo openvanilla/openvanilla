@@ -2,6 +2,7 @@
 #include <OpenVanilla/OVLibrary.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 unsigned short zhuyinsymbols[41]=
 {
@@ -22,6 +23,10 @@ class OVOFAntiZhuyinwen : public OVOutputFilter
 {
 public:
     OVOFAntiZhuyinwen() { u16buf=NULL; }
+    int initialize(OVDictionary *cfg, OVService *srv, const char *modpath) {
+        fprintf(stderr, "OVOFAntiZhuyinwen being initialized, module path=%s\n", modpath);
+        return 1;
+    }
     const char *identifier() { return "OVOFAntiZhuyinwen"; }
     virtual const char *localizedName(const char *locale);
     virtual const char *process (const char *src, OVService *srv);
