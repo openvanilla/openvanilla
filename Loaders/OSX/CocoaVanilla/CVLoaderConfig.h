@@ -5,6 +5,8 @@
 
 #include <Cocoa/Cocoa.h>
 
+#define CVLC_SVN                "$Rev$"
+
 NSArray *CVGetModuleLoadPath();
 
 #define CVLC_USERSPACE_PATH     @"/tmp/"
