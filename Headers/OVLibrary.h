@@ -12,7 +12,7 @@
 
 // wrapper macro for libraries that have exactly only one OVModule (IM/OF)
 #define OV_SINGLE_MODULE_WRAPPER(classname) \
-    extern "C" unsigned int OVGetLibraryVersion() { return OVVERSION; } \
+    extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; } \
     extern "C" int OVInitializeLibrary(OVService*, const char*) { return 1; } \
     extern "C" OVModule *OVGetModuleFromLibrary(int idx) {\
         return (idx==0) ? new classname : NULL; \

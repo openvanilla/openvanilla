@@ -1,7 +1,7 @@
 // IMExample.cpp: a simple compose-and-commit input method
 // Copyright (c) 2004-2005 The OpenVanilla Project (http://openvanilla.org)
 
-#define OVDEBUG
+#define OV_DEBUG
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLibrary.h>
 #include <OpenVanilla/OVUtility.h>
@@ -11,7 +11,7 @@
 class IMExampleContext : public OVInputMethodContext
 {
 public:
-    virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVInfoBox* i, OVService*)
+    virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService*)
     {
         murmur("IMExample: key event!");
         if (isprint(k->code()))
@@ -34,11 +34,9 @@ public:
 class IMExample : public OVInputMethod
 {
 public:
-    virtual int initialize(OVDictionary *, OVDictionary *, OVService*,
-        const char *mp, const char *up, const char *s)
+    virtual int initialize(OVDictionary *, OVService*, const char *mp)
     {
-        murmur("IMExample::init, modPath=%s, usrPath=%s, seperator=%s",
-            mp, up, s);
+        murmur("IMExample::init, modPath=%s", mp);
         return 1;
     }
     virtual const char* identifier() { return "OVIMExample-simple"; }
@@ -46,20 +44,7 @@ public:
 };
 
 class IMExample;
-// OVSINGLEMODULEWRAPPER(IMExample);
-
-extern "C" unsigned int OVGetLibraryVersion() { return OVVERSION; } 
-extern "C" int OVInitializeLibrary(OVDictionary*, OVService*, const char* p, 
-        const char* s) 
-{
-    murmur("LIBINIT: path=%s, seperator=%s", p, s);
-    return 1;
-}
-extern "C" OVModule *OVGetModuleFromLibrary(int idx)
-{
-    return (idx==0) ? new IMExample : NULL;
-}
-
+OV_SINGLE_MODULE_WRAPPER(IMExample);
 
 /*
 

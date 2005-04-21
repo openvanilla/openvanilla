@@ -101,9 +101,9 @@ class OVService : public OVBase {
 public:
     virtual void beep()=0;
     virtual void notify(const char *msg)=0;    
-    virtual const char *locale();
-    virtual const char *userSpacePath(const char *modid);
-    virtual const char *pathSeperator();
+    virtual const char *locale()=0;
+    virtual const char *userSpacePath(const char *modid)=0;
+    virtual const char *pathSeparator()=0;
 
     // limited support for encoding conversion
     virtual const char *toUTF8(const char *encoding, const char *src)=0;
