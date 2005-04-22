@@ -58,7 +58,7 @@ const char *OVOFZhWikipidealize::process(const char *src, OVService *srv)
     
     for (int i=0; i<l; i++)
     {
-		u16buf[nl++] = convert(u16p[i];
+		u16buf[nl++] = convert(u16p[i]);
     }
 
     return srv->UTF16ToUTF8(u16buf, nl);    
