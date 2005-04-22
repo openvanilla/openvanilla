@@ -8,12 +8,12 @@
 #include <sys/stat.h>
 #include <sys/syslimits.h>
 
-typedef struct timespec CVTimeStamp;
+typedef struct timespec CVTimeTag;
 
 #ifdef __cplusplus
-    extern "C" BOOL CVTimeStampEqual(const CVTimeStamp *s1, const CVTimeStamp *s2);
-    inline int operator==(const CVTimeStamp &s1, const CVTimeStamp &s2) {
-        return CVTimeStampEqual(&s1, &s2);
+    extern "C" BOOL CVTimeTagEqual(const CVTimeTag *s1, const CVTimeTag *s2);
+    inline int operator==(const CVTimeTag &s1, const CVTimeTag &s2) {
+        return CVTimeTagEqual(&s1, &s2);
     }
 #endif
 
@@ -22,12 +22,12 @@ typedef struct timespec CVTimeStamp;
     NSString *filename;
     NSMutableDictionary *dict;
     NSMutableDictionary *backup;
-    CVTimeStamp stamp;
+    CVTimeTag stamp;
 }
 -(void)dealloc;
 -(CVConfig*)initWithFile:(NSString*)f defaultData:(NSDictionary*)d;
--(CVTimeStamp)timeStamp;
--(CVTimeStamp)sync;
+-(CVTimeTag)timeStamp;
+-(CVTimeTag)sync;
 -(NSMutableDictionary*)dictionary;
 -(BOOL)needSync;
 @end

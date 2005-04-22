@@ -64,7 +64,7 @@ protected:
     CVLoader *loader;
     CVBuffer *buf;
     NSMutableArray *contexts;
-    CVTimeStamp stamp;
+    CVTimeTag stamp;
 };
 
 #endif

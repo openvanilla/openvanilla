@@ -2,14 +2,14 @@
 
 #include "CVConfig.h"
 
-BOOL CVTimeStampEqual(const CVTimeStamp *s1, const CVTimeStamp *s2) {
-    return !memcmp(s1, s2, sizeof(CVTimeStamp));
+BOOL CVTimeTagEqual(const CVTimeTag *s1, const CVTimeTag *s2) {
+    return !memcmp(s1, s2, sizeof(CVTimeTag));
 }
 
-CVTimeStamp CVGetFileTimeStamp(NSString *filename) {
+CVTimeTag CVGetFileTimeStamp(NSString *filename) {
     const char *f=[filename UTF8String];
     struct stat s;
-    CVTimeStamp t;
+    CVTimeTag t;
     bzero(&t, sizeof(t));
     if (f && !stat(f, &s)) t=s.st_mtimespec;
     return t;
@@ -36,7 +36,7 @@ NSMutableDictionary *CVReadPropertyList(NSString *filename) {
     return nil;
 }
 
-CVTimeStamp CVWritePropertyList(NSString *filename, NSDictionary *dict) {
+CVTimeTag CVWritePropertyList(NSString *filename, NSDictionary *dict) {
     NSString *errMsg;
     NSData *d=[NSPropertyListSerialization dataFromPropertyList:dict
         format:NSPropertyListXMLFormat_v1_0 errorDescription:&errMsg];
@@ -70,13 +70,13 @@ CVTimeStamp CVWritePropertyList(NSString *filename, NSDictionary *dict) {
     [backup release];
     [super dealloc];
 }
--(CVTimeStamp)timeStamp {
+-(CVTimeTag)timeStamp {
     return stamp;
 }
--(CVTimeStamp)sync {
+-(CVTimeTag)sync {
     // check timestamp
-    CVTimeStamp newstamp=CVGetFileTimeStamp(filename);
-    if (!CVTimeStampEqual(&newstamp, &stamp)) {
+    CVTimeTag newstamp=CVGetFileTimeStamp(filename);
+    if (!CVTimeTagEqual(&newstamp, &stamp)) {
         NSDictionary *p=CVReadPropertyList(filename);
         if (p) {
             [dict removeAllObjects];
@@ -98,8 +98,8 @@ CVTimeStamp CVWritePropertyList(NSString *filename, NSDictionary *dict) {
 }
 -(BOOL)needSync {
     // first we check if there's any need to read
-    CVTimeStamp newstamp=CVGetFileTimeStamp(filename);
-    if (!CVTimeStampEqual(&newstamp, &stamp)) return YES;
+    CVTimeTag newstamp=CVGetFileTimeStamp(filename);
+    if (!CVTimeTagEqual(&newstamp, &stamp)) return YES;
     
     // now check if there's any need to write
     if (![dict isEqualToDictionary:backup]) return YES;

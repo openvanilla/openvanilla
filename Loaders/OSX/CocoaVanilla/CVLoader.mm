@@ -316,7 +316,7 @@ void CVContext::clearAll() {
 
 void CVContext::syncConfig(int forced) {
     if (forced) murmur("CVContext: forced update");
-    CVTimeStamp loaderst=[loader->cfg timeStamp];
+    CVTimeTag loaderst=[loader->cfg timeStamp];
     if (!(stamp==loaderst)) murmur("config change: update");
     
     if (forced || !(stamp==loaderst)) {
