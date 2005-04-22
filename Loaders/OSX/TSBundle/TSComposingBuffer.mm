@@ -22,6 +22,7 @@ TSComposingBuffer* TSComposingBuffer::clear()
     r.length=[str length];
     r.location=0;    
     [str deleteCharactersInRange: r];
+    
     // lastupdate=0;
     return this;
 }
@@ -30,8 +31,11 @@ TSComposingBuffer* TSComposingBuffer::send()
 {
     if (!isEmpty())
     {
+        update(FALSE);
         lastupdate=0;
         update(TRUE);
+        // lastupdate=20;  // put a big number to clean the OS X-provided composing buffer
+        // update(FALSE);
     }
     return clear();
 }
