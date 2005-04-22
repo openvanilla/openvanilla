@@ -22,13 +22,17 @@ TSComposingBuffer* TSComposingBuffer::clear()
     r.length=[str length];
     r.location=0;    
     [str deleteCharactersInRange: r];
-    lastupdate=0;
+    // lastupdate=0;
     return this;
 }
 
 TSComposingBuffer* TSComposingBuffer::send()
 {
-    if (!isEmpty()) update(TRUE);
+    if (!isEmpty())
+    {
+        lastupdate=0;
+        update(TRUE);
+    }
     return clear();
 }
 
