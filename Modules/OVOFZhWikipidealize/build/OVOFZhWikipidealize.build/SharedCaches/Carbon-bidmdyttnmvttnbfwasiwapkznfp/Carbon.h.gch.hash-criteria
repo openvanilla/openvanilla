@@ -1,0 +1,22 @@
+/System/Library/Frameworks/Carbon.framework/Headers/Carbon.h
+Reading specs from /usr/libexec/gcc/darwin/ppc/3.3/specs
+Thread model: posix
+gcc version 3.3 20030304 (Apple Computer, Inc. build 1666)
+
+-x
+c++
+-arch
+ppc
+-pipe
+-Wno-trigraphs
+-fasm-blocks
+-fpascal-strings
+-g
+-Os
+-mtune=G4
+-Wmost
+-Wno-four-char-constants
+-Wno-unknown-pragmas
+-fmessage-length=0
+-F/Users/zonble/project/openvanilla/trunk/Modules/OVOFZhWikipidealize/build
+-I/Users/zonble/project/openvanilla/trunk/Modules/OVOFZhWikipidealize/build/include
