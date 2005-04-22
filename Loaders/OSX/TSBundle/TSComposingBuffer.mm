@@ -4,6 +4,11 @@
 #include "ATSComponent.h"
 #include "TSComposingBuffer.h"
 
+// we have to define these consts, because they're gone in Tiger... :(
+#define tsbkConvertedText   4
+#define tsbkCaretPosition   1
+#define tsbkSelectedConvertedText 3
+
 TSComposingBuffer::TSComposingBuffer(ComponentInstance i)
 {
     inst=i;
@@ -208,8 +213,8 @@ TSComposingBuffer* TSComposingBuffer::update(Boolean send, int cursor,
         realcur=realPos(cursor)*sizeof(UniChar);
 
     // requests app to draw a light gray underline to our text area                
-    SETRANGE(0, 0, reallen, kConvertedText);
-    SETRANGE(1, realcur, realcur, kCaretPosition);
+    SETRANGE(0, 0, reallen, tsbkConvertedText);
+    SETRANGE(1, realcur, realcur, tsbkCaretPosition);
     
     // if markFrom & markTo are set, draw a darker line underneath the marked area
     if ((markFrom>=0 && realPos(markFrom)<=(int)[str length]) &&
@@ -218,7 +223,7 @@ TSComposingBuffer* TSComposingBuffer::update(Boolean send, int cursor,
         markrange->fNumOfRanges=3;		// send one more range block 
 
         SETRANGE(2, realPos(markFrom)*sizeof(UniChar),
-            realPos(markTo)*sizeof(UniChar), kSelectedConvertedText); 
+            realPos(markTo)*sizeof(UniChar), tsbkSelectedConvertedText); 
     
         fprintf(stderr, "(%d,%d,%d)\n", realPos(markFrom), realPos(markTo), realcur);
     }

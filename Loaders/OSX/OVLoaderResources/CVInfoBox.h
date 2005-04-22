@@ -9,7 +9,7 @@
 {
     IBOutlet id text;
     NSMutableString *str;
-    NSPoint pos;
+    Point pos;
     BOOL onscreen;
 }
 - (void)awakeFromNib;
