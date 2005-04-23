@@ -1,0 +1,191 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 39;
+	objects = {
+		6ABB8C29081A561A00275869 = {
+			children = (
+				6ABB8C73081A5AEF00275869,
+				6ABB8C45081A569600275869,
+				6ABB8C43081A568800275869,
+				6ABB8C3B081A564D00275869,
+				6ABB8C3C081A564D00275869,
+			);
+			isa = PBXGroup;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABB8C2B081A561A00275869 = {
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			isa = PBXBuildStyle;
+			name = Development;
+		};
+		6ABB8C2C081A561A00275869 = {
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			isa = PBXBuildStyle;
+			name = Deployment;
+		};
+		6ABB8C2D081A561A00275869 = {
+			buildSettings = {
+			};
+			buildStyles = (
+				6ABB8C2B081A561A00275869,
+				6ABB8C2C081A561A00275869,
+			);
+			hasScannedForEncodings = 0;
+			isa = PBXProject;
+			mainGroup = 6ABB8C29081A561A00275869;
+			productRefGroup = 6ABB8C3B081A564D00275869;
+			projectDirPath = "";
+			targets = (
+				6ABB8C39081A564D00275869,
+			);
+		};
+		6ABB8C36081A564D00275869 = {
+			buildActionMask = 2147483647;
+			files = (
+				6ABB8C44081A568800275869,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ABB8C37081A564D00275869 = {
+			buildActionMask = 2147483647;
+			files = (
+				6ABB8C46081A569600275869,
+				6ABB8C74081A5AEF00275869,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ABB8C38081A564D00275869 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ABB8C39081A564D00275869 = {
+			buildPhases = (
+				6ABB8C36081A564D00275869,
+				6ABB8C37081A564D00275869,
+				6ABB8C38081A564D00275869,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVSocketModule-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = OVSocketModule;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = OVSocketModule;
+			productName = OVSocketModule;
+			productReference = 6ABB8C3A081A564D00275869;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OVSocketModule</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.OVSocketModule</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		6ABB8C3A081A564D00275869 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = OVSocketModule.bundle;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6ABB8C3B081A564D00275869 = {
+			children = (
+				6ABB8C3A081A564D00275869,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABB8C3C081A564D00275869 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			path = "OVSocketModule-Info.plist";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6ABB8C43081A568800275869 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = NSStringExtension.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABB8C44081A568800275869 = {
+			fileRef = 6ABB8C43081A568800275869;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6ABB8C45081A569600275869 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = NSStringExtension.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABB8C46081A569600275869 = {
+			fileRef = 6ABB8C45081A569600275869;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6ABB8C73081A5AEF00275869 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = OVSocketModule.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ABB8C74081A5AEF00275869 = {
+			fileRef = 6ABB8C73081A5AEF00275869;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+	};
+	rootObject = 6ABB8C2D081A561A00275869;
+}
