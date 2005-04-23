@@ -92,7 +92,24 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
     pos=p;
 }
 - (void)show {
-    if (!onscreen) [[self window] orderFront:self];
+    NSWindow *p=[[self window] parentWindow];
+    NSApplication *a=[NSApplication sharedApplication];
+    NSWindow *kw=[a keyWindow];
+    NSWindow *aw=[a mainWindow];
+    
+    if (p) {
+        NSLog (@"has parent, title=%@, level=%d]\n", [p title], [p level]);
+    }
+    NSLog(@"key window, title=%@, level=%d\n", [kw title], [p level]);
+    NSLog(@"main window, title=%@, level=%d\n", [aw title], [p level]);
+    NSLog(@"my window, title=%@, level=%d\n", [[self window] title], [[self window] level]);
+    
+    // if (!onscreen) [[self window] orderFront:self];
+    [[self window] setLevel:kCGCursorWindowLevel];
+    NSLog(@"after set my window, title=%@, level=%d\n", [[self window] title], [[self window] level]);
+
+    if (!onscreen) [[self window] orderFrontRegardless];
+
     onscreen=TRUE;
 }
 - (void)hide {

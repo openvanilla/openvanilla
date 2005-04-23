@@ -264,6 +264,7 @@ void CVContext::activate(TSComposingBuffer *b) {
 
 void CVContext::deactivate() {
     murmur("context deactivate");
+    clearAll();
     loader->setActiveContext(NULL);
     delete buf;
     buf=NULL;
@@ -275,7 +276,6 @@ void CVContext::fix() {
         murmur("buffer not empty, sending");
         buf->send();
     }
-    clearAll();
 }
 
 int CVContext::event(char charcode, int modifiers) {
