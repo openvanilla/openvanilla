@@ -1,0 +1,163 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 39;
+	objects = {
+		6A0F284A081835F30002AC39 = {
+			children = (
+				6A0F285A081836240002AC39,
+				6A0F2857081836100002AC39,
+				6A0F2858081836100002AC39,
+			);
+			isa = PBXGroup;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A0F284C081835F30002AC39 = {
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			isa = PBXBuildStyle;
+			name = Development;
+		};
+		6A0F284D081835F30002AC39 = {
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			isa = PBXBuildStyle;
+			name = Deployment;
+		};
+		6A0F284E081835F30002AC39 = {
+			buildSettings = {
+			};
+			buildStyles = (
+				6A0F284C081835F30002AC39,
+				6A0F284D081835F30002AC39,
+			);
+			hasScannedForEncodings = 0;
+			isa = PBXProject;
+			mainGroup = 6A0F284A081835F30002AC39;
+			productRefGroup = 6A0F2857081836100002AC39;
+			projectDirPath = "";
+			targets = (
+				6A0F2855081836100002AC39,
+			);
+		};
+		6A0F2852081836100002AC39 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A0F2853081836100002AC39 = {
+			buildActionMask = 2147483647;
+			files = (
+				6A0F285B081836240002AC39,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A0F2854081836100002AC39 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A0F2855081836100002AC39 = {
+			buildPhases = (
+				6A0F2852081836100002AC39,
+				6A0F2853081836100002AC39,
+				6A0F2854081836100002AC39,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVOFAntiZhuyinwen-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Carbon";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = OVOFAntiZhuyinwen;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = OVOFAntiZhuyinwen;
+			productName = OVOFAntiZhuyinwen;
+			productReference = 6A0F2856081836100002AC39;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OVOFAntiZhuyinwen</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.OVOFAntiZhuyinwen</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CSResourcesFileMapped</key>
+	<string>yes</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		6A0F2856081836100002AC39 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			name = OVOFDisUniHex.bundle;
+			path = OVOFAntiZhuyinwen.bundle;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6A0F2857081836100002AC39 = {
+			children = (
+				6A0F2856081836100002AC39,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A0F2858081836100002AC39 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "OVOFDisUniHex-Info.plist";
+			path = "/Users/lukhnos/logiciels/openvanilla/Modules/OVOFAntiZhuyinwen/OVOFAntiZhuyinwen-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6A0F285A081836240002AC39 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			path = OVOFDisUniHex.cpp;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A0F285B081836240002AC39 = {
+			fileRef = 6A0F285A081836240002AC39;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+	};
+	rootObject = 6A0F284E081835F30002AC39;
+}

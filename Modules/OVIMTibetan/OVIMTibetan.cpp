@@ -103,7 +103,8 @@ class OVTibetanContext : public OVInputMethodContext
 		else
 			code = tolower(key->code());
 	    }
-	    sprintf(b, "%c", key->code());
+		// sprintf(b, "%c", key->code());
+		sprintf(b, "%c", code);
 	    buf->append(b)->send()->clear();
 	 } 
 

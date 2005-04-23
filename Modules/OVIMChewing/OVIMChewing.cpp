@@ -24,9 +24,8 @@ class OVIMChewingContext : public OVInputMethodContext
 public:
     OVIMChewingContext(OVIMChewing *p, Chewing* chew) {p=parent; im=chew;}
     virtual ~OVIMChewingContext() {}
-	//~OVIMChewingContext() {}
 	
-	virtual void clear() { im->Enter(); }
+    virtual void clear() { im->Enter(); }
     virtual void end() { im->Enter(); }
      
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar,
@@ -56,15 +55,14 @@ public:
         else if (k == ovkHome)   { im->Home();  }
         else if (k == ovkEnd)    { im->End();   }
         else if (k == ovkDelete || k == ovkBackspace) { im->Backspace() ; }
-        else if (k == ovkReturn  || k == 3)
-            { im->Enter(); im->CommitReady(); }
+        else if (k == ovkReturn  || k == 3) { im->Enter(); im->CommitReady(); }
         else {DefaultKey(key,buf,textbar,srv);}
     }
 
     void DefaultKey(OVKeyCode *key, OVBuffer *buf,
                     OVCandidate *textbar, OVService *srv) {
         if(key->isCtrl()) {
-            if(key->code() >= 0 || key->code() <= 9) {
+            if((key->code() >= 0) || (key->code() <= 9)) {
                 im->CtrlNum(key->code());
             } else if(key->isOpt()) {
                 im->CtrlOption(key->code());
@@ -110,17 +108,17 @@ public:
     void CandidateWindow(OVCandidate *textbar, OVService *srv) {
         if(im->Candidate()) {
             char s[20];
-			char *ch,selkey;
+	    char *ch,selkey;
             textbar->clear();
             for(int i=0; i < im->ChoicePerPage() ; i++) {
                 ch      = im->Selection(i);
                 selkey  = im->SelKey(i);
                 if(ch[0]) {
-					char b[2];
-					sprintf(b, "%c.", selkey);
-					textbar->append((char *)b);
-					const char *cha = srv->toUTF8("big5", ch);
-                    textbar->append(cha)->append(" ");
+		   char b[2];
+		   sprintf(b, "%c.", selkey);
+		   textbar->append((char *)b);
+		   const char *cha = srv->toUTF8("big5", ch);
+		   textbar->append(cha)->append(" ");
                 }
                 free(ch);
             }
@@ -182,8 +180,7 @@ public:
         strcpy (chewingpath, modulePath);
         strcat (chewingpath, "OVIMChewing");
         
-        //murmur ("OVIMChewing: creating ChewingPP instance, chewing data path=%s, whereas userhash data=%s", chewingpath, hashdir);
-        printf("OVIMChewing: creating ChewingPP instance, chewing data path=%s, whereas userhash data=%s", chewingpath, hashdir);
+        murmur ("OVIMChewing: creating ChewingPP instance, chewing data path=%s, whereas userhash data=%s", chewingpath, hashdir);
 		
         chew = new Chewing(chewingpath, hashdir);
 
@@ -202,24 +199,24 @@ public:
     }
 
     virtual const char *identifier()
-	{
+    {
         return "OVIMChewing";
     }
 
     virtual const char *localizedName(const char *locale)
-	{
+    {
         if (!strcasecmp(locale, "zh_TW"))
             return "OV 酷音";
         if (!strcasecmp(locale, "zh_CN"))
             return "OV 酷音";
-		else
-			return "OV Chewing";
+	else
+ 	    return "OV Chewing";
     }
 
-	virtual OVInputMethodContext* newContext()
-	{
-		return new OVIMChewingContext(this, chew); 
-	}
+    virtual OVInputMethodContext* newContext()
+    {
+	    return new OVIMChewingContext(this, chew); 
+    }
 };
 
 // use these two wrappers
