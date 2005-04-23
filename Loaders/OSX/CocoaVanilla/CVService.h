@@ -20,6 +20,7 @@ public:
     virtual int UTF8ToUTF16(const char *src, unsigned short **rcvr);
     
     virtual void closeNotification();
+    virtual void fadeNotification();
     virtual void setNotificationPosition(Point p);
 protected:
     CFStringRef u8buf;

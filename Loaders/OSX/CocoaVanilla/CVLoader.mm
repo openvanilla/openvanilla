@@ -278,6 +278,8 @@ void CVContext::activate(TSComposingBuffer *b) {
             if (c) c->start(buf, loader->candi, loader->srv);
         }
     }
+    
+    showPrimaryIM();
 }
 
 void CVContext::deactivate() {
@@ -376,6 +378,19 @@ void CVContext::syncConfig(int forced) {
             [contexts addObject:cw];
             [cw release];
         }
+        showPrimaryIM();
     }
 }
 
+void CVContext::showPrimaryIM() {
+    NSString *pim=[loader->loaderdict valueForKey:@"primaryInputMethod"];
+    NSEnumerator *e=[loader->imarray objectEnumerator];
+        CVModuleWrapper *mw;
+        while (mw=[e nextObject]) {
+            if ([[mw identifier] isEqualToString:pim]) {
+                OVModule *om=[mw module];
+                loader->srv->notify(om->localizedName(loader->srv->locale()));
+                loader->srv->fadeNotification();
+            }
+        }
+}

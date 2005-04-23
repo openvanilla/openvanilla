@@ -56,6 +56,7 @@ public:
     void fix();
     int event(char charcode, int modifiers);
     
+    void showPrimaryIM();
     void repositionInfoBoxes();
     void clearAll();
     void syncConfig(int forced=0);

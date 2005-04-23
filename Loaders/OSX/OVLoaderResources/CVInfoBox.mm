@@ -3,6 +3,10 @@
 #include <Carbon/Carbon.h>
 #import "CVInfoBox.h"
 
+#define CVIB_FADEWAIT       0.3     // fade after 0.3 sec
+#define CVIB_FADEINTERVAL   0.05    // 0.05 sec/frame
+#define CVIB_FADEVALUE      0.025   // alphaValue-=0.025/frame
+
 CVInfoBoxState::CVInfoBoxState(NSString *s, Point p, BOOL o) {
     str=[[NSString alloc] initWithString:s];
     pos=p;
@@ -61,6 +65,8 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
     onscreen=NO;
     pos=(Point){0, 0};
     str=[NSMutableString new];
+    timer=nil;
+    alpha=1;
     
     // trial code
     [text setTextColor:[NSColor whiteColor]];
@@ -82,6 +88,7 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
     [str deleteCharactersInRange:r];
 }
 - (void)update {
+    if (timer) [self stopTimer];
     [text setStringValue:str];
     [text setFrameOrigin:(NSPoint){0, 0}];
     [text sizeToFit];
@@ -102,6 +109,7 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
     pos=p;
 }
 - (void)show {
+    if (timer) [self stopTimer];
     NSWindow *p=[[self window] parentWindow];
     NSApplication *a=[NSApplication sharedApplication];
     NSWindow *kw=[a keyWindow];
@@ -123,6 +131,9 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
     onscreen=TRUE;
 }
 - (void)hide {
+    // stop the timer
+    if (timer) [self stopTimer];
+    
     if (onscreen) [[self window] orderOut:self];
     onscreen=FALSE;
 }
@@ -142,5 +153,30 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
     [self setPosition:s->pos];
     [self update];
     if (s->onscreen) [self show]; else [self hide];
+}
+- (void)fade {
+    if (timer) [self stopTimer];
+    timer=[NSTimer scheduledTimerWithTimeInterval:CVIB_FADEWAIT target:self selector:@selector(fadeStart) userInfo:nil repeats:NO];
+}
+- (void)fadeStart {
+    [timer invalidate];
+    timer=[NSTimer scheduledTimerWithTimeInterval:CVIB_FADEINTERVAL target:self selector:@selector(fadeWork) userInfo:nil repeats:YES];
+    alpha=1;
+}
+- (void)fadeWork {
+    alpha-=CVIB_FADEVALUE;
+    if (alpha<=0) {
+        [[self window] orderOut:self];
+        onscreen=FALSE;
+        [self stopTimer];
+        return;
+    }
+    [[self window] setAlphaValue:alpha];
+}
+- (void)stopTimer {
+    if (timer) [timer invalidate];
+    timer=nil;
+    [[self window] setAlphaValue:1];
+    alpha=1;
 }
 @end

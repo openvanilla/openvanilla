@@ -68,6 +68,10 @@ void CVService::closeNotification() {
     [infobox hide];
 }
 
+void CVService::fadeNotification() {
+    [infobox fade];
+}
+
 const char *CVService::locale() {
     return [lctag UTF8String];
 }

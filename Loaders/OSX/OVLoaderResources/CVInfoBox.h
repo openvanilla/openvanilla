@@ -19,6 +19,8 @@ struct CVInfoBoxState {
     NSMutableString *str;
     Point pos;
     BOOL onscreen;
+    NSTimer *timer;
+    float alpha;
 }
 - (void)awakeFromNib;
 - (void)dealloc;
@@ -32,6 +34,10 @@ struct CVInfoBoxState {
 - (int)height;
 - (CVInfoBoxState*)saveState;       // return a newed CVInfoBoxState object
 - (void)restoreState:(CVInfoBoxState*)s;
+- (void)fade;
+- (void)stopTimer;
+- (void)fadeStart;
+- (void)fadeWork;
 @end
 
 #endif
