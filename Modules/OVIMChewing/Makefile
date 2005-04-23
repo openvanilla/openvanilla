@@ -13,8 +13,10 @@ INST_PATH=/Library/OpenVanilla/0.7/Modules
 
 all: $(GOALS)
 
+#$(GOALS): $(OBJS)
+#	$(CC) -framework ChewingPP -o $@ -bundle $<
 $(GOALS): $(OBJS)
-	$(CC) -framework ChewingPP -o $@ -bundle $<
+	$(CPP) -framework ChewingPP -bundle -o $@ $(OBJS) 
 
 #install: $(GOALS) 
 #	mkdir -p $(INST_PATH)

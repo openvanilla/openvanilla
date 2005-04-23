@@ -1,6 +1,6 @@
 // -*- mode: c++; c-basic-offset: 4; font-lock-mode: t -*-
 
-// #define OVDEBUG 1
+#define OVDEBUG 1
 
 /*
 #include <sys/types.h>
@@ -193,10 +193,11 @@ public:
         char *hashdir = mkHashDir();
         char chewingpath[PATH_MAX];
         strcpy (chewingpath, modulePath);
-        //strcat (chewingpath, "OVIMChewing");
+        strcat (chewingpath, "OVIMChewing");
         
-        murmur ("OVIMChewing: creating ChewingPP instance, chewing data path=%s, whereas userhash data=%s", chewingpath, hashdir);
-        
+        //murmur ("OVIMChewing: creating ChewingPP instance, chewing data path=%s, whereas userhash data=%s", chewingpath, hashdir);
+        printf("OVIMChewing: creating ChewingPP instance, chewing data path=%s, whereas userhash data=%s", chewingpath, hashdir);
+		
         chew = new Chewing(chewingpath, hashdir);
 
         if(!l->keyExist("keyboardLayout"))
