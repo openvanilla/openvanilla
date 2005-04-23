@@ -2,20 +2,6 @@
 
 #define OVDEBUG 1
 
-/*
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/syslimits.h>
-#include <sys/types.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <pwd.h>
-
-#include "OpenVanilla/OpenVanilla.h"
-#include "OpenVanilla/OVLoadable.h"
-#include "OpenVanilla/OVUtility.h"
-#include "ChewingPP/Chewingpp.h" */
-
 #include <stdio.h> 
 #include <stdlib.h>
 #include <ctype.h>
@@ -104,7 +90,7 @@ public:
             const char *s = im->CommitStr();
 			s = srv->toUTF8("big5", s);
             buf->clear()->append(s)->send();
-            free(s);
+            //free(s);
         }
         
         s1 = srv->toUTF8("big5", im->Buffer(0,im->CursorPos()-1));
@@ -118,27 +104,28 @@ public:
             update(im->CursorPos(),-1,-1);
         
         murmur("==> %s%s%s",s1,s2,s3);
-        free(s1); free(s2); free(s3);
+        //free(s1); free(s2); free(s3);
     }
     
     void CandidateWindow(OVCandidate *textbar, OVService *srv) {
         if(im->Candidate()) {
-            const char *s;
+            char s[20];
 			char *ch,selkey;
             textbar->clear();
             for(int i=0; i < im->ChoicePerPage() ; i++) {
                 ch      = im->Selection(i);
                 selkey  = im->SelKey(i);
                 if(ch[0]) {
-                    sprintf(s,"%c. %s ",selkey,ch);
-					s = srv->toUTF8("big5", s);
-                    textbar->append(s);
+					char b[2];
+					sprintf(b, "%c.", selkey);
+					textbar->append((char *)b);
+					const char *cha = srv->toUTF8("big5", ch);
+                    textbar->append(cha)->append(" ");
                 }
                 free(ch);
             }
             sprintf(s," %d/%d",im->CurrentPage() + 1,im->TotalPage());
-			s = srv->toUTF8("big5", s);
-            textbar->append(s);
+            textbar->append((char *)s);
             textbar->update();
             textbar->show();
         } else {
