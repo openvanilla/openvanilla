@@ -1,0 +1,215 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 39;
+	objects = {
+		6A8FE206081995F600CEE979 = {
+			children = (
+				6A8FE2310819995400CEE979,
+				6A8FE2320819995400CEE979,
+				6A8FE2330819995400CEE979,
+				6A8FE2170819965800CEE979,
+				6A8FE2130819962300CEE979,
+				6A8FE2140819962300CEE979,
+			);
+			isa = PBXGroup;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A8FE208081995F600CEE979 = {
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			isa = PBXBuildStyle;
+			name = Development;
+		};
+		6A8FE209081995F600CEE979 = {
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			isa = PBXBuildStyle;
+			name = Deployment;
+		};
+		6A8FE20A081995F600CEE979 = {
+			buildSettings = {
+			};
+			buildStyles = (
+				6A8FE208081995F600CEE979,
+				6A8FE209081995F600CEE979,
+			);
+			hasScannedForEncodings = 0;
+			isa = PBXProject;
+			mainGroup = 6A8FE206081995F600CEE979;
+			productRefGroup = 6A8FE2130819962300CEE979;
+			projectDirPath = "";
+			targets = (
+				6A8FE2110819962300CEE979,
+			);
+		};
+		6A8FE20E0819962300CEE979 = {
+			buildActionMask = 2147483647;
+			files = (
+				6A8FE2360819995400CEE979,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A8FE20F0819962300CEE979 = {
+			buildActionMask = 2147483647;
+			files = (
+				6A8FE2180819965800CEE979,
+				6A8FE2350819995400CEE979,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A8FE2100819962300CEE979 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A8FE2110819962300CEE979 = {
+			buildPhases = (
+				6A8FE20E0819962300CEE979,
+				6A8FE20F0819962300CEE979,
+				6A8FE2100819962300CEE979,
+				6A8FE2150819964600CEE979,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVIMKeypadExample-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = OVIMKeypadExample;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = OVIMKeypadExample;
+			productName = OVIMKeypadExample;
+			productReference = 6A8FE2120819962300CEE979;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OVIMKeypadExample</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.OVIMKeypadExample</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+		6A8FE2120819962300CEE979 = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = OVIMKeypadExample.bundle;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6A8FE2130819962300CEE979 = {
+			children = (
+				6A8FE2120819962300CEE979,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A8FE2140819962300CEE979 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "OVIMKeypadExample-Info.plist";
+			path = "/Users/lukhnos/logiciels/openvanilla/Modules/OVIMKeypadExample/OVIMKeypadExample-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6A8FE2150819964600CEE979 = {
+			buildActionMask = 2147483647;
+			files = (
+				6A8FE2340819995400CEE979,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A8FE2170819965800CEE979 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = OVIMKeypadExample.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A8FE2180819965800CEE979 = {
+			fileRef = 6A8FE2170819965800CEE979;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A8FE2310819995400CEE979 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = KPController.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A8FE2320819995400CEE979 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = KPController.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A8FE2330819995400CEE979 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			path = OVIMKeypadExample.nib;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A8FE2340819995400CEE979 = {
+			fileRef = 6A8FE2310819995400CEE979;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A8FE2350819995400CEE979 = {
+			fileRef = 6A8FE2320819995400CEE979;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A8FE2360819995400CEE979 = {
+			fileRef = 6A8FE2330819995400CEE979;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+	};
+	rootObject = 6A8FE20A081995F600CEE979;
+}
