@@ -3,6 +3,16 @@
 #include <Carbon/Carbon.h>
 #import "CVInfoBox.h"
 
+CVInfoBoxState::CVInfoBoxState(NSString *s, Point p, BOOL o) {
+    str=[[NSString alloc] initWithString:s];
+    pos=p;
+    onscreen=o;
+}
+
+CVInfoBoxState::~CVInfoBoxState() {
+    [str release];
+}
+
 NSPoint CVPointToNSPoint(Point p, NSWindow *w) {
     NSPoint pos;
     pos.x=p.h;
@@ -122,5 +132,15 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
 - (int)height {
     NSRect r=[[self window] frame];
     return (int)r.size.height;
+}
+- (CVInfoBoxState*)saveState {
+    return new CVInfoBoxState(str, pos, onscreen);
+}
+- (void)restoreState:(CVInfoBoxState*)s {
+    [self clear];
+    [self append:s->str];
+    [self setPosition:s->pos];
+    [self update];
+    if (s->onscreen) [self show]; else [self hide];
 }
 @end

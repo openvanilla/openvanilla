@@ -5,6 +5,14 @@
 
 #import <Cocoa/Cocoa.h>
 
+struct CVInfoBoxState {
+    CVInfoBoxState(NSString *s, Point p, BOOL o);
+    ~CVInfoBoxState();
+    NSString *str;
+    Point pos;
+    BOOL onscreen;
+};
+
 @interface CVInfoBox : NSWindowController
 {
     IBOutlet id text;
@@ -22,6 +30,8 @@
 - (void)hide;
 - (BOOL)onScreen;
 - (int)height;
+- (CVInfoBoxState*)saveState;       // return a newed CVInfoBoxState object
+- (void)restoreState:(CVInfoBoxState*)s;
 @end
 
 #endif

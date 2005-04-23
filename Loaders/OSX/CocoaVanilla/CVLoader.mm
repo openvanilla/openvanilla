@@ -72,8 +72,12 @@ int CVLoader::init(MenuRef m) {
     }
     
     // wakes the two controllers up from .nib file
-    [candiib window];
-    [ntfyib window];
+    NSPanel *cp=(NSPanel*)[candiib window];
+    NSPanel *np=(NSPanel*)[ntfyib window];
+    [cp setFloatingPanel:YES];
+    [np setFloatingPanel:YES];
+    [cp setBecomesKeyOnlyIfNeeded:YES];
+    [np setBecomesKeyOnlyIfNeeded:YES];
 
     srv=new CVService(CVLC_USERSPACE_PATH, ntfyib);
     candi=new CVCandidate(candiib);
@@ -234,7 +238,8 @@ CVContext *CVLoader::newContext() {
 CVContext::CVContext(CVLoader *p) {
     murmur ("context created");
     loader=p;
-    buf=NULL;
+    buf=new CVBuffer(NULL, loader->ofarray, loader->srv);
+    candistate=NULL;
     contexts=[NSMutableArray new];
     stamp=[loader->cfg timeStamp];
     syncConfig(1);
@@ -242,40 +247,66 @@ CVContext::CVContext(CVLoader *p) {
 
 CVContext::~CVContext() {
     murmur ("context deleted");
+    delete buf;
     [contexts release];
 }
 
 void CVContext::activate(TSComposingBuffer *b) {
     murmur ("context activated");
+    buf->setComposingBuffer(b);
     loader->setActiveContext(this);
     syncConfig();
-
-    buf=new CVBuffer(b, loader->ofarray, loader->srv);
-    loader->candi->clear();
+    loader->srv->closeNotification();
     repositionInfoBoxes();
+    loader->candi->hide()->clear()->update();
 
-    NSEnumerator *e=[contexts objectEnumerator];
-    CVContextWrapper *w;
-    while (w=[e nextObject]) {
-        OVInputMethodContext *c=[w context];
-        if (c) c->start(buf, loader->candi, loader->srv);
+    // if we find a saved candistate exists
+    if (candistate) {
+        if (!buf->isEmpty()) {
+            // buffer not empty, we restore the state
+            loader->candi->restoreState(candistate);
+        }
+        delete candistate;
+        candistate=NULL;
+    }
+    else {
+        // the context is actually activated anew
+        NSEnumerator *e=[contexts objectEnumerator];
+        CVContextWrapper *w;
+        while (w=[e nextObject]) {
+            OVInputMethodContext *c=[w context];
+            if (c) c->start(buf, loader->candi, loader->srv);
+        }
     }
 }
 
 void CVContext::deactivate() {
     murmur("context deactivate");
-    clearAll();
+
+    // if the buf is not empty, it means the user just switches away from the
+    // current IM temporarily
+    if (!buf->isEmpty())  {
+        candistate=loader->candi->saveState();
+    }
+    else {
+        // context is not only deactivated but is also switched  off
+        NSEnumerator *e=[contexts objectEnumerator];
+        CVContextWrapper *w;
+        while (w=[e nextObject]) {
+            OVInputMethodContext *c=[w context];
+            if (c) c->end();
+        }        
+    }
+    
+    buf->setComposingBuffer(NULL);
     loader->setActiveContext(NULL);
-    delete buf;
-    buf=NULL;
+    loader->candi->hide()->clear()->update();
+    loader->srv->closeNotification();
 }
 
 void CVContext::fix() {
-    murmur("context fix");
-    if (!buf->isEmpty()) {
-        murmur("buffer not empty, sending");
-        buf->send();
-    }
+    murmur("context session fix, clear all IM context content");
+    clearAll();
 }
 
 int CVContext::event(char charcode, int modifiers) {
@@ -302,9 +333,10 @@ void CVContext::repositionInfoBoxes() {
 }
 
 void CVContext::clearAll() {
+    if (!buf->isEmpty()) buf->clear()->update();
     if (loader->candi->onScreen()) loader->candi->hide();
     loader->candi->clear()->update();
-    loader->srv->closeNotification();    
+    loader->srv->closeNotification();
 
     NSEnumerator *e=[contexts objectEnumerator];
     CVContextWrapper *w;
@@ -320,18 +352,26 @@ void CVContext::syncConfig(int forced) {
     if (!(stamp==loaderst)) murmur("config change: update");
     
     if (forced || !(stamp==loaderst)) {
+        // we have to sync config and switch IM
         stamp=[loader->cfg timeStamp];
         clearAll();
+        NSEnumerator *e=[contexts objectEnumerator];
+        CVContextWrapper *w;
+        while (w=[e nextObject]) {
+            OVInputMethodContext *c=[w context];
+            if (c) c->end();
+        }        
         
         murmur ("reloading contexts array, delete all context objects");
         [contexts removeAllObjects];
         
-        NSEnumerator *e=[loader->imarray objectEnumerator];
-        CVModuleWrapper *w;
-        while (w=[e nextObject]) {
-            OVInputMethod *m=(OVInputMethod*)[w module];
+        e=[loader->imarray objectEnumerator];
+        CVModuleWrapper *mw;
+        while (mw=[e nextObject]) {
+            OVInputMethod *m=(OVInputMethod*)[mw module];
             murmur ("creating context for IM %s", m->identifier());
             OVInputMethodContext *c=m->newContext();
+            c->start(buf, loader->candi, loader->srv);
             CVContextWrapper *cw=[[CVContextWrapper alloc] initWithContext:c];
             [contexts addObject:cw];
             [cw release];

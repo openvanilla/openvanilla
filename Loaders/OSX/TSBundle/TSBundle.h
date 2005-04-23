@@ -4,7 +4,7 @@
 #define __TSBundle_H
 
 #define TSBUNDLEFILENAME    "/Library/OpenVanilla/0.7.0/OVLoader/OVLoader.bundle"
-#define TSBUNDLEID          "org.openvanilla.ovloader.070p1"
+#define TSBUNDLEID          "org.openvanilla.ovloader.070p2"
 
 #ifdef __cplusplus
 extern "C" {

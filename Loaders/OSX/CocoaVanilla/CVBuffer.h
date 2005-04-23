@@ -16,7 +16,8 @@ public:
     virtual OVBuffer* update(int cursorPos, int markFrom=-1, int markTo=-1);
     virtual int isEmpty();
     virtual Point getAppCursorPosition();
-
+    
+    virtual CVBuffer* setComposingBuffer(TSComposingBuffer *cb);
 protected:
     TSComposingBuffer *cbuf;
     NSArray *ofarray;

@@ -30,7 +30,7 @@
 #ifndef __OpenVanilla_h
 #define __OpenVanilla_h
 
-#define OV_VERSION   (0x00070000)      // version 0.7.0
+#define OV_VERSION   (0x00070002)      // version 0.7.0.2 (0.7.0p2)
 
 // A pure base class that defines the virtual destructor
 class OVBase {
@@ -127,10 +127,8 @@ class OVInputMethodContext : public OVBase  {
 public:
     virtual void start(OVBuffer*, OVCandidate*, OVService*) {}
     virtual void clear() {}
+    virtual void end() {}
     virtual int keyEvent(OVKeyCode*, OVBuffer*, OVCandidate*, OVService*)=0;
-    
-    // insert is called when the Loader or another IM wants to feed in a character
-    // virtual int insert(const char *str) { return 0; }
 };
 
 // The common OpenVanilla module interface. Currently OpenVanilla has two

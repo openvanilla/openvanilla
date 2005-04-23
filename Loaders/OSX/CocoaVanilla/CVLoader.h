@@ -65,6 +65,7 @@ protected:
     CVBuffer *buf;
     NSMutableArray *contexts;
     CVTimeTag stamp;
+    CVInfoBoxState *candistate;
 };
 
 #endif

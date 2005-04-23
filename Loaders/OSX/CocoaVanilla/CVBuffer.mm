@@ -10,16 +10,18 @@ CVBuffer::CVBuffer(TSComposingBuffer *cb, NSArray *ofa, OVService *s) {
 }
 
 OVBuffer* CVBuffer::clear() {
-    cbuf->clear();
+    if (cbuf) cbuf->clear();
     return this;
 }
 
 OVBuffer* CVBuffer::append(const char *s) {
-    cbuf->append([NSString stringWithUTF8String:s]);
+    if (cbuf) cbuf->append([NSString stringWithUTF8String:s]);
     return this;
 }
 
 OVBuffer* CVBuffer::send() {
+    if (!cbuf) return this;
+    
     if (![ofarray count]) {
         cbuf->send();
         return this;
@@ -49,19 +51,24 @@ OVBuffer* CVBuffer::send() {
 }
 
 OVBuffer* CVBuffer::update() {
-    cbuf->update();
+    if (cbuf) cbuf->update();
     return this;
 }
 
 OVBuffer* CVBuffer::update(int cursorPos, int markFrom, int markTo) {
-    cbuf->update(FALSE, cursorPos, markFrom, markTo);
+    if (cbuf) cbuf->update(FALSE, cursorPos, markFrom, markTo);
     return this;
 }
 
 int CVBuffer::isEmpty() {
-    return cbuf->isEmpty();
+    return cbuf ? cbuf->isEmpty() : 0;
 }
 
 Point CVBuffer::getAppCursorPosition() {
     return cbuf->getAppCursorPosition();
+}
+
+CVBuffer *CVBuffer::setComposingBuffer(TSComposingBuffer *cb) {
+    cbuf=cb;
+    return this;
 }

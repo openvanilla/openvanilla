@@ -42,3 +42,13 @@ OVCandidate* CVCandidate::setPosition(Point p) {
 int CVCandidate::height() {
     return [infobox height];
 }
+
+CVInfoBoxState* CVCandidate::saveState() {
+    return [infobox saveState];
+}
+
+OVCandidate* CVCandidate::restoreState(CVInfoBoxState *s) {
+    [infobox restoreState:s];
+    return this;
+}
+

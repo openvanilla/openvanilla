@@ -19,6 +19,8 @@ public:
     
     virtual OVCandidate* setPosition(Point p);
     virtual int height();
+    virtual CVInfoBoxState* saveState();
+    virtual OVCandidate* restoreState(CVInfoBoxState *s);
 protected:
     CVInfoBox *infobox;
 };
