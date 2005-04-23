@@ -99,10 +99,9 @@ class OVTibetanContext : public OVInputMethodContext
 	    int code;
 	    char b[2];
 	    if (key->isShift()) {
-	       if((key->code() >= 'a') && (key->code() <= 'z'))
-		  code = key->code() + 'A' - 'a';
-	       else
-		  code = key->code();	
+			code = toupper(key->code();
+		else
+			code = tolower(key->code());
 	    }
 	    sprintf(b, "%c", key->code());
 	    buf->append(b)->send()->clear();
@@ -407,7 +406,7 @@ class OVIMTibetan : public OVInputMethod
 	    return "OV Tibetan";
       }
 
-      virtual int initialize(OVDictionary* l, OVService*, const char*)
+      virtual int initialize(OVDictionary* l, OVService*, const char* modulePath)
       {
 	 if (!l->keyExist("keyboardLayout")) l->setInteger("keyboardLayout", 0);
 	 keyboardlayout=l->getInteger("keyboardLayout");

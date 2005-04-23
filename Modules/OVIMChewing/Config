@@ -1,0 +1,10 @@
+OVIMChewing - (aka CarChew) 所使用的設定
+
+此檔案列出了在 OVIMChewing.cpp 裡面會使用到的設定字彙與其意義。
+
+- SpaceChewingMode: 空白酷音模式
+  - 1: True  (Default)
+  - 0: False
+
+
+
