@@ -37,12 +37,13 @@ TSComposingBuffer* TSComposingBuffer::send()
     if (!isEmpty())
     {
         update(FALSE);
-        lastupdate=0;
+        lastupdate=[str length];
         update(TRUE);
+        lastupdate=0;
         
-        /*
+        
         [str setString:@""];
-        update(FALSE); */
+        // update(FALSE);
     }
     return clear();
 }
