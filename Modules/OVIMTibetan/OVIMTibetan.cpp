@@ -5,6 +5,7 @@
 #define OV_DEBUG
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h> 
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLibrary.h>
 #include <OpenVanilla/OVUtility.h>
@@ -98,14 +99,12 @@ class OVTibetanContext : public OVInputMethodContext
 	 if (key->isCapslock()) { //CapLock
 	    int code;
 	    char b[2];
-	    if (key->isShift()) {
-			code = toupper(key->code();
-		else
-			code = tolower(key->code());
-	    }
+	    if (key->isShift()) { code = toupper(key->code()); }
+	    else { code = tolower(key->code()); }
 		// sprintf(b, "%c", key->code());
-		sprintf(b, "%c", code);
+	    sprintf(b, "%c", code);
 	    buf->append(b)->send()->clear();
+	    return 1;
 	 } 
 
 	 //        if (key->isCode(2, ovkReturn, ovkMacEnter))
