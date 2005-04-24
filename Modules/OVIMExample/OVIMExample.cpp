@@ -11,7 +11,7 @@
 class IMExampleContext : public OVInputMethodContext
 {
 public:
-    virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService*)
+    virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* srv)
     {
         murmur("IMExample: key event!");
         if (isprint(k->code()))
@@ -19,6 +19,7 @@ public:
             char str[2];
             sprintf(str, "%c", k->code());
             b->append(str)->update();
+            srv->notify(str);
             i->show();
             i->append(str)->update();
             return 1;

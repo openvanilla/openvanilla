@@ -1,6 +1,24 @@
 #include "NSStringExtension.h"
 
 @implementation NSString (SplitBySpaceWithQuote) 
+-(NSString*)stringByQuoting {
+    int l=[self length];
+    UniChar *s=(UniChar*)calloc(1, l*sizeof(UniChar));
+    [self getCharacters:s];
+    UniChar *buf=(UniChar*)calloc(1, (l*2+2)*sizeof(UniChar));
+    int i, p=0;
+    
+    buf[p++]='\"';
+    for (i=0; i<l; i++) {
+        if (s[i]=='\"') buf[p++]='\\';
+        buf[p++]=s[i];
+    }
+    buf[p++]='\"';
+    NSString *r=[NSString stringWithCharacters:buf length:p];
+    free(s);
+    free(buf);
+    return r;
+}
 -(NSString*)stringByChomping {
     int i;
     int l=[self length];

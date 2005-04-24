@@ -5,11 +5,35 @@
 	};
 	objectVersion = 39;
 	objects = {
+		6AB71074081B11050011F3F9 = {
+			children = (
+				6AB71075081B11130011F3F9,
+			);
+			isa = PBXGroup;
+			name = Resources;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AB71075081B11130011F3F9 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.script.perl;
+			path = OVSocketServer.pl;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AB71076081B11130011F3F9 = {
+			fileRef = 6AB71075081B11130011F3F9;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		6ABB8C29081A561A00275869 = {
 			children = (
 				6ABB8C73081A5AEF00275869,
 				6ABB8C45081A569600275869,
 				6ABB8C43081A568800275869,
+				6AB71074081B11050011F3F9,
 				6ABB8C3B081A564D00275869,
 				6ABB8C3C081A564D00275869,
 			);
@@ -51,6 +75,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6ABB8C44081A568800275869,
+				6AB71076081B11130011F3F9,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;

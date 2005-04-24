@@ -83,19 +83,19 @@ class OVSocketIMContext : public OVInputMethodContext {
 public:
     OVSocketIMContext(NSDictionary *ad) {
         atomdict=ad;
-        data=[[NSMutableString alloc] initWithString:@"0"];
+        data=[[NSMutableString alloc] initWithString:@""];
     }
     ~OVSocketIMContext() { [data release]; }
     virtual void start(OVBuffer*, OVCandidate*, OVService*) {}
     virtual void clear() {
-        [data setString:@"0"];
+        [data setString:@""];
     }
     virtual void end() {}
     virtual int keyEvent(OVKeyCode* key, OVBuffer* buf, OVCandidate* candi, OVService* srv) {
         OVSocket sk;
         NSArray *a=sk.magic(srv, 
             [NSString stringWithFormat: @"OVIMPerlTest %@ %d %d %d\n",
-                data, key->code(), buf->isEmpty(), candi->onScreen()
+                [data stringByQuoting], key->code(), buf->isEmpty(), candi->onScreen()
             ]);
         NSLog([a description]);
         if (!a) return 0;
@@ -193,17 +193,19 @@ public:
         if (!a) return "";
         NSLog([a description]);
         [data setString:[a objectAtIndex:0]];
-        return [[a objectAtIndex:1] UTF8String];
+        if ([a count]>1)
+            return [[a objectAtIndex:1] UTF8String];
+        return NULL;
     }
 protected:
     NSMutableString *data;
 };
 
 extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }
-extern "C" int OVInitializeLibrary(OVService*, const char*) {
+extern "C" int OVInitializeLibrary(OVService*, const char* path) {
     NSApplicationLoad();
     [NSAutoreleasePool new];
-    sprintf(serverScript, "/Users/lukhnos/logiciels/openvanilla/Modules/ProtocolBased/OVSocketServer.pl &");
+    sprintf(serverScript, "%sOVSocketServer.pl &", path);
     return 1;
 }
 extern "C" OVModule *OVGetModuleFromLibrary(int idx) {

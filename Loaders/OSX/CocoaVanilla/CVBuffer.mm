@@ -35,6 +35,10 @@ OVBuffer* CVBuffer::send() {
         OVOutputFilter *filter=(OVOutputFilter*)[o module];
         if (!filter) continue;
         const char *result=filter->process(u8, srv);
+        if (!result) {
+            src=@"";
+            break;
+        }
         if (result==u8) continue;
         src=[NSString stringWithUTF8String:result];
         u8=[src UTF8String];
