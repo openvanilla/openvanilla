@@ -1,11 +1,11 @@
 // OVOFFullWidthCharacter.cpp
 
-#include "OVOFFullWidthCharacter.h"
+#include <OpenVanilla/OpenVanilla.h>  
 #include <OpenVanilla/OVLibrary.h>
-#include <strings.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 #include <ctype.h>
-
-OVSINGLEMODULEWRAPPER(OVOFFullWidthCharacter);
 
 unsigned short fullWidthChars[95]=
 {
@@ -24,28 +24,50 @@ unsigned short fullWidthChars[95]=
 char *halfWidthChars=" !\"#$%&'()*+,-./0123456789:;<=>?"
                      "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`"
                      "abcdefghijklmnopqrstuvwxyz{|}~";
+
+class OVOFFullWidthCharacter : public OVOutputFilter
+{
+public:
+    OVOFFullWidthCharacter() { u16buf=NULL; }
+    int initialize(OVDictionary *cfg, OVService *srv, const char *modpath) {
+        fprintf(stderr, "OVOFFullWidthCharacter being initialized, module path=%s\n", modpath);
+        return 1;
+    }
+    const char *identifier() { return "OVOFFullWidthCharacter"; }
+    virtual const char *localizedName(const char *locale);
+    virtual const char *process (const char *src, OVService *srv);
+protected:
+	unsigned short *u16buf;
+};
                        
 const char *OVOFFullWidthCharacter::localizedName(const char *locale)
 {
     if (!strcasecmp(locale, "zh_TW")) return "全形英數字";
     if (!strcasecmp(locale, "zh_CN")) return "全角英数字";
-    return "Full width character";
+    return "Full-Width ASCII Character";
 }
 
 const char *OVOFFullWidthCharacter::process(const char *src, OVService *srv)
 {
-    const char *utf16t=srv->nativeUTF16EncodingType();
-    unsigned short *utf16buf=new unsigned short [strlen(src)];
-    int l=srv->fromUTF8(utf16t, src, utf16buf);
-    
-    for (int i=0; i<l; i++)
-    {
-        if (utf16buf[i] > 0x7f) continue; 
-        char *p=strchr(halfWidthChars, (char)utf16buf[i]);
-        if (p) utf16buf[i]=fullWidthChars[(int)(p-halfWidthChars)];
+    if (u16buf) {
+        free(u16buf);
+        u16buf=NULL;
     }
     
-    const char *r=srv->toUTF8(utf16t, utf16buf, l);
-    delete[] utf16buf;
-    return r;
+    unsigned short *u16p;
+    int l=srv->UTF8ToUTF16(src, &u16p);
+    
+    if (!l) return src;
+    u16buf=(unsigned short*)calloc(1,l*sizeof(unsigned short));
+    memcpy(u16buf, u16p, l*sizeof(unsigned short));
+	
+	for (int i=0; i<l; i++)
+    {
+        if (u16buf[i] > 0x7f) continue; 
+        char *p=strchr(halfWidthChars, (char)u16buf[i]);
+        if (p) u16buf[i]=fullWidthChars[(int)(p-halfWidthChars)];
+    }
+	return srv->UTF16ToUTF8(u16buf, l);  
 }
+
+OV_SINGLE_MODULE_WRAPPER(OVOFFullWidthCharacter);
