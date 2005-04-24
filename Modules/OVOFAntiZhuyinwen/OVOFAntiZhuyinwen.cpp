@@ -34,8 +34,6 @@ protected:
     unsigned short *u16buf;
 };
 
-OV_SINGLE_MODULE_WRAPPER(OVOFAntiZhuyinwen);
-
 const char *OVOFAntiZhuyinwen::localizedName(const char *locale)
 {
     if (!strcasecmp(locale, "zh_TW")) return "注音文退散濾嘴";
@@ -77,3 +75,5 @@ const char *OVOFAntiZhuyinwen::process(const char *src, OVService *srv)
 
     return srv->UTF16ToUTF8(u16buf, nl);    
 }
+
+OV_SINGLE_MODULE_WRAPPER(OVOFAntiZhuyinwen);
