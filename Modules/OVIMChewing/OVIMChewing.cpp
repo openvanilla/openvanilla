@@ -17,6 +17,10 @@
 #include <OpenVanilla/OVUtility.h>
 #include <ChewingPP/Chewingpp.h>
 
+char *layouts_zhtw[8] = {"標準排列","許氏","IBM","精業","倚天","倚天 26 鍵", "Dvorak","Dvorak 許氏"};
+char *layouts_zhcn[8] = {"标准排列","许氏","IBM","精业","倚天","倚天 26 键", "Dvorak","Dvorak 许氏"};
+char *layouts_en[8] = {"Standard","Hsu","IBM","Gin-Yeh","Eten","Eten 26", "Dvorak","Dvorak Hsu"};
+
 class OVIMChewing;
 
 class OVIMChewingContext : public OVInputMethodContext 
@@ -25,6 +29,8 @@ public:
     OVIMChewingContext(OVIMChewing *p, Chewing* chew) {p=parent; im=chew;}
     virtual ~OVIMChewingContext() {}
 	
+	virtual void start(OVBuffer *key, OVCandidate *textbar, OVService *srv) {	
+	} 
     virtual void clear() { im->Enter(); }
     virtual void end() { im->Enter(); }
      
@@ -102,23 +108,22 @@ public:
             update(im->CursorPos(),-1,-1);
         
         murmur("==> %s%s%s",s1,s2,s3);
-        //free(s1); free(s2); free(s3);
     }
     
     void CandidateWindow(OVCandidate *textbar, OVService *srv) {
         if(im->Candidate()) {
             char s[20];
-	    char *ch,selkey;
+			char *ch,selkey;
             textbar->clear();
             for(int i=0; i < im->ChoicePerPage() ; i++) {
                 ch      = im->Selection(i);
                 selkey  = im->SelKey(i);
                 if(ch[0]) {
-		   char b[2];
-		   sprintf(b, "%c.", selkey);
-		   textbar->append((char *)b);
-		   const char *cha = srv->toUTF8("big5", ch);
-		   textbar->append(cha)->append(" ");
+						char b[2];
+						sprintf(b, "%c.", selkey);
+						textbar->append((char *)b);
+						const char *cha = srv->toUTF8("big5", ch);
+						textbar->append(cha)->append(" ");
                 }
                 free(ch);
             }
@@ -186,15 +191,13 @@ public:
 
         if(!l->keyExist("keyboardLayout"))
             l->setInteger("keyboardLayout", 0);
-            
-        chew->SetKeyboardLayout( l->getInteger("keyboardLayout") );
+		chew->SetKeyboardLayout(l->getInteger("keyboardLayout"));
         return 1;
     }
 
     virtual int update(OVDictionary*, OVDictionary* localconfig)
     {
-        int layout=localconfig->getInteger("keyboardLayout");
-        chew->SetKeyboardLayout(layout);
+        chew->SetKeyboardLayout(localconfig->getInteger("keyboardLayout"));
         return 1; 
     }
 
@@ -205,11 +208,8 @@ public:
 
     virtual const char *localizedName(const char *locale)
     {
-        if (!strcasecmp(locale, "zh_TW"))
-            return "OV 酷音";
-        if (!strcasecmp(locale, "zh_CN"))
-            return "OV 酷音";
-	else
+        if (!strcasecmp(locale, "zh_TW")) return "OV 酷音";
+        if (!strcasecmp(locale, "zh_CN")) return "OV 酷音";
  	    return "OV Chewing";
     }
 
