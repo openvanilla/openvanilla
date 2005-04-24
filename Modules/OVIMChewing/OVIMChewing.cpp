@@ -62,9 +62,9 @@ public:
     void DefaultKey(OVKeyCode *key, OVBuffer *buf,
                     OVCandidate *textbar, OVService *srv) {
         if(key->isCtrl()) {
-            if((key->code() >= 0) || (key->code() <= 9)) {
+            if((key->code() >= '0') && (key->code() <= '9')) {
                 im->CtrlNum(key->code());
-            } else if(key->isOpt()) {
+            } else if(key->isAlt()) {
                 im->CtrlOption(key->code());
             }
             return;
