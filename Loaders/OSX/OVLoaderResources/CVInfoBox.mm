@@ -61,12 +61,12 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
 
 @implementation CVInfoBox
 - (void)awakeFromNib {
-    fprintf (stderr, "awake from nib!!!\n");
     onscreen=NO;
     pos=(Point){0, 0};
     str=[NSMutableString new];
     timer=nil;
     alpha=1;
+	name=[NSString new];
     
     // trial code
     [text setTextColor:[NSColor whiteColor]];
@@ -80,8 +80,13 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
     [self update];
 }
 - (void)dealloc {
+	[name release];
     [str release];
     [super dealloc];
+}
+- (void)setName:(NSString*)n {
+	if (name) [name release];
+	name=[[NSString alloc] initWithString:n];
 }
 - (void)clear {
     NSRange r=(NSRange){0, [str length]};
@@ -100,6 +105,11 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
     NSPoint nspos=CVPointToNSPoint(realpos, [self window]);
     
     [[self window] setFrameTopLeftPoint:nspos];
+
+	NSString *s=[NSString stringWithFormat:@"%@ update %d %d \"%@\"", name, (int)nspos.x, (int)nspos.y, str];
+	FILE *f=fopen("/tmp/ovib-hack", "a");
+	fprintf(f,"%s\n",[s UTF8String]);
+	fclose(f);
 }
 
 - (void)append:(NSString*)s {
@@ -110,25 +120,12 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
 }
 - (void)show {
     if (timer) [self stopTimer];
-    NSWindow *p=[[self window] parentWindow];
-    NSApplication *a=[NSApplication sharedApplication];
-    NSWindow *kw=[a keyWindow];
-    NSWindow *aw=[a mainWindow];
-    
-    if (p) {
-        NSLog (@"has parent, title=%@, level=%d]\n", [p title], [p level]);
-    }
-    NSLog(@"key window, title=%@, level=%d\n", [kw title], [p level]);
-    NSLog(@"main window, title=%@, level=%d\n", [aw title], [p level]);
-    NSLog(@"my window, title=%@, level=%d\n", [[self window] title], [[self window] level]);
-    
-    // if (!onscreen) [[self window] orderFront:self];
-    [[self window] setLevel:kCGCursorWindowLevel];
-    NSLog(@"after set my window, title=%@, level=%d\n", [[self window] title], [[self window] level]);
-
-    if (!onscreen) [[self window] orderFrontRegardless];
-
+    if (!onscreen) [[self window] orderFront:self];
     onscreen=TRUE;
+	NSString *s=[NSString stringWithFormat:@"%@ %s", name, "show"];
+	FILE *f=fopen("/tmp/ovib-hack", "a");
+	fprintf(f,"%s\n",[s UTF8String]);
+	fclose(f);
 }
 - (void)hide {
     // stop the timer
@@ -136,6 +133,10 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
     
     if (onscreen) [[self window] orderOut:self];
     onscreen=FALSE;
+	NSString *s=[NSString stringWithFormat:@"%@ %s", name, "hide"];
+	FILE *f=fopen("/tmp/ovib-hack", "a");
+	fprintf(f,"%s\n",[s UTF8String]);
+	fclose(f);
 }
 - (BOOL)onScreen {
     return onscreen;

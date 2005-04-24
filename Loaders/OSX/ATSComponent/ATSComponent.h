@@ -6,9 +6,10 @@
 #define __ATSComponent_h
 
 #define ATSCVERSION             0x00010000
-#define ATSCSCRIPT              2           // smTradChinese
+#define ATSCSCRIPT              2           // smTradCinese
 #define ATSCLANGUAGE            19          // langtradChinese
-#define ATSCBASERESOURCEID      16896       // (15872+script_id*512)
+#define ATSCBASERESOURCEID      16896       // (15872+script_id*512) here script_id=smTradChinese
+
 #define ATSCPENCILMENUID        ATSCBASERESOURCEID+1
 #define ATSCBUNDLENAME          "org.openvanilla.ovinit"
 #define ATSCBNLENGTH            $"16"       // in hexadecimal

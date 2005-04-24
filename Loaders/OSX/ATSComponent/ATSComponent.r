@@ -18,7 +18,7 @@ resource 'thng' (128)
     'ICON', ATSCBASERESOURCEID,
     0x00010000,
     componentHasMultiplePlatforms,
-    15872+ATSCSCRIPT*0x200,
+	ATSCBASERESOURCEID,
     {
         0x8000+ATSCSCRIPT*0x100+ATSCLANGUAGE,
         'dlle', ATSCBASERESOURCEID, 1000

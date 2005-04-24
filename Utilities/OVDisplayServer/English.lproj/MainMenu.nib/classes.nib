@@ -1,0 +1,13 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {adjustWindowLevel = id; }; 
+            CLASS = MyDelegate; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {text = id; text2 = id; window = id; window2 = id; }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}

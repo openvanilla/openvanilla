@@ -378,14 +378,6 @@
 			refType = 3;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		6A975EA10814C41600F40859 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.xml;
-			name = "OVLoader-Info.plist";
-			path = "/Users/lukhnos/logiciels/openvanilla/OSX/OVLoader-Info.plist";
-			refType = 0;
-			sourceTree = "<absolute>";
-		};
 		6A975EA90814C44400F40859 = {
 			buildActionMask = 2147483647;
 			files = (
@@ -803,8 +795,6 @@
 		};
 		6AF10FFF0814BE7A00B49D06 = {
 			children = (
-				6A975EA10814C41600F40859,
-				6AF110000814BE7A00B49D06,
 				6AF10FFE0814BE7A00B49D06,
 				6A975EA00814C41600F40859,
 			);
@@ -812,14 +802,6 @@
 			name = Products;
 			refType = 4;
 			sourceTree = "<group>";
-		};
-		6AF110000814BE7A00B49D06 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.xml;
-			name = "OVInit-Info.plist";
-			path = "/Users/lukhnos/logiciels/openvanilla/OSX/OVInit-Info.plist";
-			refType = 0;
-			sourceTree = "<absolute>";
 		};
 		6AF110010814BE9000B49D06 = {
 			buildActionMask = 2147483647;

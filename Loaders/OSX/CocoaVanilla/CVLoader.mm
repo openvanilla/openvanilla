@@ -74,6 +74,8 @@ int CVLoader::init(MenuRef m) {
     // wakes the two controllers up from .nib file
     NSPanel *cp=(NSPanel*)[candiib window];
     NSPanel *np=(NSPanel*)[ntfyib window];
+	[candiib setName:@"candi"];
+	[ntfyib setName:@"notify"];
     [cp setFloatingPanel:YES];
     [np setFloatingPanel:YES];
     [cp setBecomesKeyOnlyIfNeeded:YES];

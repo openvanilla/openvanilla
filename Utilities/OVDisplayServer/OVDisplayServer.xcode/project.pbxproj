@@ -1,0 +1,411 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 39;
+	objects = {
+		089C165CFE840E0CC02AAC07 = {
+			children = (
+				089C165DFE840E0CC02AAC07,
+			);
+			isa = PBXVariantGroup;
+			name = InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		089C165DFE840E0CC02AAC07 = {
+			fileEncoding = 10;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = English;
+			path = English.lproj/InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+//080
+//081
+//082
+//083
+//084
+//100
+//101
+//102
+//103
+//104
+		1058C7A1FEA54F0111CA2CBB = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = Cocoa.framework;
+			path = /System/Library/Frameworks/Cocoa.framework;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+//100
+//101
+//102
+//103
+//104
+//190
+//191
+//192
+//193
+//194
+		19C28FACFE9D520D11CA2CBB = {
+			children = (
+				6AE6035C081BC4F9003575F8,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+//190
+//191
+//192
+//193
+//194
+//290
+//291
+//292
+//293
+//294
+		29B97313FDCFA39411CA2CEA = {
+			buildSettings = {
+			};
+			buildStyles = (
+				4A9504CCFFE6A4B311CA0CBA,
+				4A9504CDFFE6A4B311CA0CBA,
+			);
+			hasScannedForEncodings = 1;
+			isa = PBXProject;
+			mainGroup = 29B97314FDCFA39411CA2CEA;
+			projectDirPath = "";
+			targets = (
+				6AE6035B081BC4F9003575F8,
+			);
+		};
+		29B97314FDCFA39411CA2CEA = {
+			children = (
+				29B97316FDCFA39411CA2CEA,
+				6AEBDEA5081B8E940092BF63,
+				6AEBDEA6081B8E940092BF63,
+				6A39DA86081BC0E30054A366,
+				6A39DA89081BC1040054A366,
+				1058C7A1FEA54F0111CA2CBB,
+				29B97317FDCFA39411CA2CEA,
+				19C28FACFE9D520D11CA2CBB,
+				6AE60357081BC4E3003575F8,
+				6AE6035E081BC4F9003575F8,
+			);
+			isa = PBXGroup;
+			name = WindowLevel;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		29B97316FDCFA39411CA2CEA = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = main.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA = {
+			children = (
+				8D1107310486CEB800E47090,
+				089C165CFE840E0CC02AAC07,
+				29B97318FDCFA39411CA2CEA,
+			);
+			isa = PBXGroup;
+			name = Resources;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		29B97318FDCFA39411CA2CEA = {
+			children = (
+				29B97319FDCFA39411CA2CEA,
+			);
+			isa = PBXVariantGroup;
+			name = MainMenu.nib;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		29B97319FDCFA39411CA2CEA = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = English;
+			path = English.lproj/MainMenu.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+//290
+//291
+//292
+//293
+//294
+//4A0
+//4A1
+//4A2
+//4A3
+//4A4
+		4A9504CCFFE6A4B311CA0CBA = {
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PREBINDING = NO;
+				ZERO_LINK = YES;
+			};
+			isa = PBXBuildStyle;
+			name = Development;
+		};
+		4A9504CDFFE6A4B311CA0CBA = {
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				PREBINDING = NO;
+				ZERO_LINK = NO;
+			};
+			isa = PBXBuildStyle;
+			name = Deployment;
+		};
+//4A0
+//4A1
+//4A2
+//4A3
+//4A4
+//6A0
+//6A1
+//6A2
+//6A3
+//6A4
+		6A39DA86081BC0E30054A366 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = NSStringExtension.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A39DA89081BC1040054A366 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = NSStringExtension.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AE60357081BC4E3003575F8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "OVDisplayServr-Info.plist";
+			path = "/Users/lukhnos/logiciels/openvanilla/Utilities/OVDisplayServer/OVDisplayServr-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6AE60358081BC4F9003575F8 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AE60360081BC527003575F8,
+				6AE60361081BC527003575F8,
+				6AE60362081BC527003575F8,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AE60359081BC4F9003575F8 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AE60676081BC54D003575F8,
+				6AE60677081BC54D003575F8,
+				6AE6067A081BC54D003575F8,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AE6035A081BC4F9003575F8 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AE60675081BC547003575F8,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AE6035B081BC4F9003575F8 = {
+			buildPhases = (
+				6AE60358081BC4F9003575F8,
+				6AE60359081BC4F9003575F8,
+				6AE6035A081BC4F9003575F8,
+				6AE6035F081BC51B003575F8,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVDisplayServer-Info.plist";
+				INSTALL_PATH = "$(USER_APPS_DIR)";
+				OPTIMIZATION_CFLAGS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = OVDisplayServer;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = OVDisplayServer;
+			productName = OVDisplayServer;
+			productReference = 6AE6035C081BC4F9003575F8;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OVDisplayServer</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.OVDisplayServer</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.application";
+		};
+		6AE6035C081BC4F9003575F8 = {
+			explicitFileType = wrapper.application;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = OVDisplayServer.app;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6AE6035E081BC4F9003575F8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = "OVDisplayServer-Info.plist";
+			path = "/Users/lukhnos/logiciels/openvanilla/Utilities/OVDisplayServer/OVDisplayServer-Info.plist";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6AE6035F081BC51B003575F8 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AE60679081BC54D003575F8,
+				6AE60678081BC54D003575F8,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AE60360081BC527003575F8 = {
+			fileRef = 8D1107310486CEB800E47090;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AE60361081BC527003575F8 = {
+			fileRef = 089C165CFE840E0CC02AAC07;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AE60362081BC527003575F8 = {
+			fileRef = 29B97318FDCFA39411CA2CEA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AE60675081BC547003575F8 = {
+			fileRef = 1058C7A1FEA54F0111CA2CBB;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AE60676081BC54D003575F8 = {
+			fileRef = 29B97316FDCFA39411CA2CEA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AE60677081BC54D003575F8 = {
+			fileRef = 6AEBDEA5081B8E940092BF63;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AE60678081BC54D003575F8 = {
+			fileRef = 6AEBDEA6081B8E940092BF63;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AE60679081BC54D003575F8 = {
+			fileRef = 6A39DA86081BC0E30054A366;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AE6067A081BC54D003575F8 = {
+			fileRef = 6A39DA89081BC1040054A366;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AEBDEA5081B8E940092BF63 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = MyDelegate.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AEBDEA6081B8E940092BF63 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = MyDelegate.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+//6A0
+//6A1
+//6A2
+//6A3
+//6A4
+//8D0
+//8D1
+//8D2
+//8D3
+//8D4
+		8D1107310486CEB800E47090 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist;
+			path = Info.plist;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA;
+}

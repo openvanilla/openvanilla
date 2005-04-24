@@ -17,6 +17,7 @@ struct CVInfoBoxState {
 {
     IBOutlet id text;
     NSMutableString *str;
+	NSString *name;
     Point pos;
     BOOL onscreen;
     NSTimer *timer;
@@ -33,6 +34,7 @@ struct CVInfoBoxState {
 - (BOOL)onScreen;
 - (int)height;
 - (CVInfoBoxState*)saveState;       // return a newed CVInfoBoxState object
+- (void)setName:(NSString*)n;
 - (void)restoreState:(CVInfoBoxState*)s;
 - (void)fade;
 - (void)stopTimer;
