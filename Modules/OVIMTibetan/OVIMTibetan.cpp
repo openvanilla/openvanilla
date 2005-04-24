@@ -95,20 +95,25 @@ class OVTibetanContext : public OVInputMethodContext
 	 const char *u8;
 
 	 if (key->isOpt() || key->isCommand() || key->isCtrl()){return 0;}
+	 
+	 if (key->code() == ovkUp || key->code() == ovkDown ||key->code() == ovkLeft ||key->code() == ovkRight ) //Locked when composing
+	 { 
+	    keyseq.lastisother();
+	    if(!keyseq.len || key->isCapslock()) return 0;
+	    return 1;	// key processed
+	 }
 
 	 if (key->isCapslock()) { //CapLock
 	    int code;
 	    char b[2];
 	    if (key->isShift()) { code = toupper(key->code()); }
 	    else { code = tolower(key->code()); }
-		// sprintf(b, "%c", key->code());
 	    sprintf(b, "%c", code);
 	    buf->append(b)->send()->clear();
 	    return 1;
 	 } 
 
-	 //        if (key->isCode(2, ovkReturn, ovkMacEnter))
-	 if (key->code() == ovkReturn)
+	 if (key->code() == ovkReturn || key->code() == 3)
 	 {
 	    if (!keyseq.len) return 0;   // if buffer is empty, don't process
 	    buf->send()->clear();
@@ -116,13 +121,6 @@ class OVTibetanContext : public OVInputMethodContext
 	    keyseq.lastisother();
 	    
 	    return 1;   // key processed
-	 }
-
-	 if (key->code() == ovkUp || key->code() == ovkDown ||key->code() == ovkLeft ||key->code() == ovkRight ) //Locked when composing
-	 { 
-	    keyseq.lastisother();
-	    if(!keyseq.len) return 0;
-	    return 1;	// key processed
 	 }
 
 	 if (key->code() == ovkSpace) //Space to keyin Tibetan seperator.

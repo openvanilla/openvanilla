@@ -1,6 +1,6 @@
 // -*- mode: c++; c-basic-offset: 4; font-lock-mode: t -*-
 
-#define OVDEBUG 1
+#define OVDEBUG 0
 
 #include <stdio.h> 
 #include <stdlib.h>
