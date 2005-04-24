@@ -13,24 +13,6 @@ INST_PATH=/Library/OpenVanilla/0.7/Modules
 
 all: $(GOALS)
 
-#$(GOALS): $(OBJS)
-#	$(CC) -framework ChewingPP -o $@ -bundle $<
 $(GOALS): $(OBJS)
 	$(CPP) -framework ChewingPP -bundle -o $@ $(OBJS) 
-
-#install: $(GOALS) 
-#	mkdir -p $(INST_PATH)
-#	cp $(GOALS) $(INST_PATH)
-
-#clean:
-#	rm -rf $(GOALS) $(OBJS) OVIMChewing.pkg OVIMChewing.pkg.tgz
-#	./mkpackage.sh clean
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $<
-
-package: force
-	./mkpackage.sh
-
-force: ;
 
