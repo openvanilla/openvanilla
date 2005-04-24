@@ -17,8 +17,6 @@ public:
     virtual const char *process (const char *src, OVService *srv);
 };
 
-OV_SINGLE_MODULE_WRAPPER(OVOFDisUniHex);
-
 const char *OVOFDisUniHex::localizedName(const char *locale)
 {
     if (!strcasecmp(locale, "zh_TW")) return "顯示 Unicode 字碼";
@@ -35,8 +33,10 @@ const char *OVOFDisUniHex::process(const char *src, OVService *srv)
     if (l) {
 		unsigned short x = u16p[l-1];
 		char s[200];
-		sprintf(s, "Hex: U+%X\nDec: %d", x, x);
-		srv->notify(s);
-	}
-    return src;    
+		sprintf(s, "Unicode\nHex: U+%X\nDec: %d", x, x);
+		srv->notify((char *)s);
+    }
+    return srv->UTF16ToUTF8(u16p, l);
 }
+
+OV_SINGLE_MODULE_WRAPPER(OVOFDisUniHex);
