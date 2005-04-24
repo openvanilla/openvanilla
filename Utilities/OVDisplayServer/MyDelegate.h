@@ -7,8 +7,9 @@
     IBOutlet id text;
     IBOutlet id text2;
     IBOutlet id window;
-	FILE *o;
     IBOutlet id window2;
+    IBOutlet id web;
+	FILE *o;
 }
 - (void)evil;
 - (void)awakeFromNib;

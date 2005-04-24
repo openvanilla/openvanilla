@@ -39,8 +39,10 @@ TSComposingBuffer* TSComposingBuffer::send()
         update(FALSE);
         lastupdate=0;
         update(TRUE);
-        // lastupdate=20;  // put a big number to clean the OS X-provided composing buffer
-        // update(FALSE);
+        
+        /*
+        [str setString:@""];
+        update(FALSE); */
     }
     return clear();
 }
@@ -160,7 +162,7 @@ TSComposingBuffer* TSComposingBuffer::update(Boolean send, int cursor,
     UASSERT(SetEventParameter(event, kEventParamTextInputSendSLRec,
         typeIntlWritingCode, sizeof(ScriptLanguageRecord), &script));
 
-    buf=new UniChar[[str length]];
+    buf=new UniChar[[str length]+1];
     NSRange bufrange;
     bufrange.location=0;
     bufrange.length=[str length];

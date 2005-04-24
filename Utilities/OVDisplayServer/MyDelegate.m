@@ -1,5 +1,6 @@
 #import "MyDelegate.h"
 #import "NSStringExtension.h"
+#import <WebKit/WebKit.h>
 
 @implementation MyDelegate
 - (void)awakeFromNib {
@@ -77,6 +78,15 @@
 				
 			NSString *msg=[a objectAtIndex:i];
 			[t setStringValue:msg];
+            
+            if (w==window) {
+                WebFrame *wf=[web mainFrame];
+                NSString *html=[NSString stringWithFormat:
+                    @"<html>%@<p><font size=\"+1\">%@</font><p><font size=\"+2\">%@</font><p></html>", msg, msg, msg
+                    ];
+                [wf loadHTMLString: html
+                    baseURL: [NSURL URLWithString: @"http://localhost"]];
+            }
 		} 
 	}
 }

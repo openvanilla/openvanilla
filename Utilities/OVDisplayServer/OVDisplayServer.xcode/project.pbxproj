@@ -87,6 +87,7 @@
 		};
 		29B97314FDCFA39411CA2CEA = {
 			children = (
+				6A1ED9BD081BDB95008276AC,
 				29B97316FDCFA39411CA2CEA,
 				6AEBDEA5081B8E940092BF63,
 				6AEBDEA6081B8E940092BF63,
@@ -186,6 +187,20 @@
 //6A2
 //6A3
 //6A4
+		6A1ED9BD081BDB95008276AC = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = WebKit.framework;
+			path = /System/Library/Frameworks/WebKit.framework;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6A1ED9BE081BDB95008276AC = {
+			fileRef = 6A1ED9BD081BDB95008276AC;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		6A39DA86081BC0E30054A366 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -234,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AE60675081BC547003575F8,
+				6A1ED9BE081BDB95008276AC,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,7 +268,6 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVDisplayServer-Info.plist";
 				INSTALL_PATH = "$(USER_APPS_DIR)";
-				OPTIMIZATION_CFLAGS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
 				OTHER_REZFLAGS = "";
@@ -373,7 +388,7 @@
 			};
 		};
 		6AEBDEA5081B8E940092BF63 = {
-			fileEncoding = 30;
+			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.objc;
 			path = MyDelegate.m;
