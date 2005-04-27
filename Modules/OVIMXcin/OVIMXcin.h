@@ -39,9 +39,8 @@ public:
 protected:
     virtual void updateDisplay(OVBuffer *buf);
     virtual int compose(OVBuffer *buf, OVCandidate *textbar, OVService *srv);
-
-    virtual int candidateEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar,
-        OVService *srv);
+    virtual int candidateEvent(OVKeyCode *key, OVBuffer *buf,
+        OVCandidate*textbar, OVService *srv);
         
     virtual void cancelAutoCompose(OVCandidate *textbar);
     

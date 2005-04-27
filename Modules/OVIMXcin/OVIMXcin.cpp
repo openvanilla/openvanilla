@@ -80,12 +80,15 @@ string *XcinKeySequence::compose(string *s)
 
 OVIMXcin::OVIMXcin(char *lpath, char *cfile, char *en, char *cn)
 {
-    strcpy(loadpath, lpath);
+    char cinfilename[PATH_MAX];
     strcpy(cinfile, cfile);
-    cintab=NULL;
-   
+    strcpy (cinfilename, lpath);
+    if (cinfilename[strlen(cinfilename)-1]!='/') strcat(cinfilename, "/");
+    strcat(cinfilename, cinfile);
+    cintab=new OVCIN(cinfilename);
+
     sprintf(ename, "OV xcin %s", en ? en : cfile);
-    sprintf(cname, "OV xcin %s", cn ? cn : cfile);
+    sprintf(cname, "OV xcin %s", cn ? cn : cfile);    
 }
 
 OVIMXcin::~OVIMXcin()
@@ -95,10 +98,11 @@ OVIMXcin::~OVIMXcin()
 
 const char* OVIMXcin::identifier()
 {
-    return "OVIMXcin";
+    string inputMethodName = "OVIMXcin-" + string(cname);
+    return inputMethodName.c_str();
 }
 
-const char* OVIMXcin::localizedName(const char *locale)
+const char* OVIMXcin::localizedName(const char* locale)
 {
     if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
     {
@@ -111,59 +115,8 @@ const char* OVIMXcin::localizedName(const char *locale)
 int OVIMXcin::initialize(OVDictionary*, OVService*, const char*)
 {
     if (cintab) return 1;
- 
-    /*
-    //const char *sk="shiftSelectionKey";
-	//<comment authur='b6s'>move to OVIMXcin::update()</comment>
-    const char *encoding="encoding";
-    char buf[256];
-    OVEncoding enc=ovEncodingUTF8;
-    //if (!local->keyExist(sk)) local->setInt(sk, 0);
-	//<comment authur='b6s'>move to OVIMXcin::update()</comment>
-//  if (!local->keyExist(encoding)) local->setString(encoding, "big5");
-
-    update(global, local);  // run-time configurable settings    
-    local->getString(encoding, buf);
-    enc=OVEncodingMapper(buf);
-	
-    char cinfilename[PATH_MAX];
-    strcpy (cinfilename, loadpath);
-    if (cinfilename[strlen(cinfilename)-1]!='/') strcat(cinfilename, "/");
-    strcat(cinfilename, cinfile);
-    cintab=new OVCIN(cinfilename);
-    */
-    		
-    return 0;
+    else        return 0;
 }
-
-/*
-int OVIMXcin::update(OVDictionary* global, OVDictionary* local)
-{
-    const char *warningBeep="warningBeep";
-    const char *autoCompose="autoCompose";
-    const char *maxSeqLen="maxKeySequenceLength";
-    const char *hitMax="hitMaxAndCompose";
-	const char *sk="shiftSelectionKey";
-
-    if (!global->keyExist(warningBeep)) global->setInt(warningBeep, 1);
-    if (!local->keyExist(maxSeqLen)) local->setInt(maxSeqLen, 5);
-    if (!local->keyExist(autoCompose)) local->setInt(autoCompose, 0);
-    if (!local->keyExist(hitMax)) local->setInt(hitMax, 0);
-	if (!local->keyExist(sk)) local->setInt(sk, 0);
-
-    cfgMaxSeqLen=local->getInt(maxSeqLen);
-    cfgBeep=global->getInt(warningBeep);
-    cfgAutoCompose=local->getInt(autoCompose);
-    cfgHitMaxAndCompose=local->getInt(hitMax);
-	
-	if(local->getInt(sk) == 0)
-		doShiftSelKey = false;
-	else
-		doShiftSelKey = true;
-
-    return 1;
-}
-*/
 
 OVInputMethodContext *OVIMXcin::newContext()
 {
