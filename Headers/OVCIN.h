@@ -1,0 +1,71 @@
+// OVCIN.h
+
+#ifndef __OVCIN_h
+#define __OVCIN_h
+
+#include <OpenVanilla/OpenVanilla.h>
+
+#include <string>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+//OVEncoding OVEncodingMapper(const char *s);
+
+class OVCIN
+{
+public:	
+	// VXCIN::read()
+    OVCIN(char* fileName);
+	
+    ~OVCIN();
+
+	// VXCIN::selKey()
+	string& getSelKey();
+	
+	// VXCIN::name()
+	string& getCName();
+	
+	// VXCIN::name()
+	string& getEName();
+	
+	string& getEndKey();
+	
+	string& getEncoding();
+	
+	// VXCIN::isEndKey()
+	bool isEndKey(char keyChar);
+	
+	bool isValidKey(string keyString);
+	
+	// VXCIN::getKey()
+	int getCharVectorByKey(string inKey,
+						   vector<string>& outStringVectorRef);
+	
+	// VXCIN::find()
+	int getWordVectorByChar(string inKey,
+							vector<string>& outStringVectorRef);
+
+protected:
+	int getVectorFromMap(map< string, vector<string> >& inMapRef,
+						 string inKey,
+						 vector<string>& outStringVectorRef);
+	string getPropertyByName(vector<string>& inStringVectorRef,
+							 string propertyName);
+	int getMapByName(vector<string>& inStringVectorRef,
+					 map< string, vector<string> >& outMapRef,
+					 string mapName);
+	
+private:
+	string selkey;
+    string ename;
+    string cname;
+	string endkey;
+	string encoding;
+	
+	map<string, vector<string> > keyMap;
+	map<string, vector<string> > charMap;
+};
+
+#endif
