@@ -22,18 +22,31 @@ CinList cinlist;
 
 // OpenVanilla Loadable IM interface functions -------------------------------
 
+extern "C" unsigned int OVGetLibraryVersion() {
+    return OV_VERSION;
+}
+extern "C" int OVInitializeLibrary(OVService*, const char*p) { 
+    cinlist.load((char*)p);
+    return 1; 
+}
+extern "C" OVModule *OVGetModuleFromLibrary(int x) {
+    if (x >= cinlist.index) return NULL;
+    return new OVIMXcin(cinlist.cinpath, cinlist.list[x].filename, cinlist.list[x].ename, cinlist.list[x].cname);
+}
+
+/*
 extern "C" int OVLoadableAvailableIMCount(char* p)
 {
     cinlist.load(p);
     return cinlist.index;
 }
 
-/*
+
 extern "C" unsigned int OVLoadableVersion()
 {
     return ovVersion;
 }
-*/
+
 
 extern "C" OVInputMethod* OVLoadableNewIM(int x)
 {
@@ -45,6 +58,8 @@ extern "C" void OVLoadableDeleteIM(OVInputMethod *im)
 {
     delete im;
 }
+
+*/
 
 XcinKeySequence::XcinKeySequence(OVCIN* cintab)
 {

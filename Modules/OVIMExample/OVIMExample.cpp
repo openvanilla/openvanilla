@@ -25,8 +25,19 @@ public:
             return 1;
         }
         
-        b->send();
-        i->hide();
+        if (k->code()==13) {
+            if (!b->isEmpty()) {
+                b->send();
+                i->hide();
+                return 1;
+            }
+            return 0;
+        }
+        
+        if (!b->isEmpty()) {
+            b->send();
+            i->hide();
+        }
                 
         return 0;
     }
