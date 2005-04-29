@@ -6,6 +6,10 @@
 #include "CIM.h"
 #include "CIMconst.h"
 
+#define tsbkConvertedText   4
+#define tsbkCaretPosition   1
+#define tsbkSelectedConvertedText 3
+
 const short cimMenu_Pencil=cimBaseResourceID+1;
 
 CIMSessionHandle cimActiveSession;
@@ -522,8 +526,8 @@ OSErr CIMInputBuffer::update(Boolean send, int cursorpos, int hilitefrom,
                 realcur=realpos(cursorpos)*sizeof(UniChar);
 
                 
-            SETRANGE(0, 0, len*sizeof(UniChar), kConvertedText);
-			SETRANGE(1, realcur, realcur, kCaretPosition);
+            SETRANGE(0, 0, len*sizeof(UniChar), tsbkConvertedText);
+			SETRANGE(1, realcur, realcur, tsbkCaretPosition);
 			
 			// requests app to draw a light gray underline to our text area
 
@@ -535,8 +539,8 @@ OSErr CIMInputBuffer::update(Boolean send, int cursorpos, int hilitefrom,
 
 				SETRANGE(1, realpos(hilitefrom)*sizeof(UniChar),
 					realpos(hiliteto)*sizeof(UniChar), 
-					kSelectedConvertedText);
-			    SETRANGE(2, realcur, realcur, kCaretPosition);
+					tsbkSelectedConvertedText);
+			    SETRANGE(2, realcur, realcur, tsbkCaretPosition);
 			}
 
             
