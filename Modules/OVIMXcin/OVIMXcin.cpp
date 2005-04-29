@@ -103,7 +103,9 @@ OVIMXcin::OVIMXcin(char *lpath, char *cfile, char *en, char *cn)
     cintab=new OVCIN(cinfilename);
 
     sprintf(ename, "OV xcin %s", en ? en : cfile);
-    sprintf(cname, "OV xcin %s", cn ? cn : cfile);    
+    sprintf(cname, "OV xcin %s", cn ? cn : cfile);
+    
+    
 }
 
 OVIMXcin::~OVIMXcin()
@@ -127,10 +129,39 @@ const char* OVIMXcin::localizedName(const char* locale)
     return ename;
 }
 
-int OVIMXcin::initialize(OVDictionary*, OVService*, const char*)
+int OVIMXcin::initialize(OVDictionary* global, OVService*, const char*)
 {
-    if (cintab) return 1;
-    else        return 0;
+    if (!cintab) return 0;
+    
+    update(global);
+    return 1;
+}
+
+int OVIMXcin::update(OVDictionary* global)
+{
+    const char *warningBeep="warningBeep";
+    const char *autoCompose="autoCompose";
+    const char *maxSeqLen="maxKeySequenceLength";
+    const char *hitMax="hitMaxAndCompose";
+	const char *sk="shiftSelectionKey";
+
+    if (!global->keyExist(warningBeep)) global->setInteger(warningBeep, 1);
+    if (!global->keyExist(maxSeqLen)) global->setInteger(maxSeqLen, 5);
+    if (!global->keyExist(autoCompose)) global->setInteger(autoCompose, 0);
+    if (!global->keyExist(hitMax)) global->setInteger(hitMax, 0);
+	if (!global->keyExist(sk)) global->setInteger(sk, 0);
+
+    cfgMaxSeqLen=global->getInteger(maxSeqLen);
+    cfgBeep=global->getInteger(warningBeep);
+    cfgAutoCompose=global->getInteger(autoCompose);
+    cfgHitMaxAndCompose=global->getInteger(hitMax);
+	
+	if(global->getInteger(sk) == 0)
+		doShiftSelKey = false;
+	else
+		doShiftSelKey = true;
+
+    return 1;
 }
 
 OVInputMethodContext *OVIMXcin::newContext()

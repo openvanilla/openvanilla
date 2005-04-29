@@ -62,7 +62,7 @@ public:
     virtual const char* identifier();
     virtual const char* localizedName(const char* locale);
     virtual int initialize(OVDictionary*, OVService*, const char*);
-    //virtual int update(OVDictionary*, OVDictionary*);
+    virtual int update(OVDictionary*);
     virtual OVInputMethodContext *newContext();
     
     virtual int maxSeqLen() { return cfgMaxSeqLen; }
