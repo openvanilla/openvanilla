@@ -231,10 +231,11 @@ TSComposingBuffer* TSComposingBuffer::update(Boolean send, int cursor,
         fprintf(stderr, "(%d,%d,%d)\n", realPos(markFrom), realPos(markTo), realcur);
     }
 
-            
-    UASSERT(SetEventParameter(event, kEventParamTextInputSendHiliteRng,
-        typeTextRangeArray,
-        sizeof(short)+sizeof(TextRange)*markrange->fNumOfRanges, markrange));
+    if (!send) {
+        UASSERT(SetEventParameter(event, kEventParamTextInputSendHiliteRng,
+            typeTextRangeArray,
+            sizeof(short)+sizeof(TextRange)*markrange->fNumOfRanges, markrange));
+    }
 
     // we don't any "clause" information
     pinrange.fStart=0;
