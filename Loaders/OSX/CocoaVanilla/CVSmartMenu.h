@@ -46,6 +46,7 @@ public:
     void insertItem(NSString *idtag, NSString *displaytag, BOOL bundlelookup=NO);
     void checkItem(NSString *idtag);
     void uncheckItem(NSString *idtag);
+    void uncheckAll();
     void disableItem(NSString *idtag);
     void checkFirstItem();          // works if there's an item in the array
     void checkItemArray(NSArray *idarray);

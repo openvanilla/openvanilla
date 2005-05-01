@@ -121,8 +121,18 @@ void CVSmartMenuGroup::uncheckItem(NSString *idtag) {
     while (i=[e nextObject]) {
         if ([[i idTag] isEqualToString:idtag]) {
             CheckMenuItem(menu, [i menuPosition], FALSE);
+            [i setChecked:NO];
             return;
         }
+    }
+}
+
+void CVSmartMenuGroup::uncheckAll() {
+    NSEnumerator *e=[itemarray objectEnumerator];
+    CVSmartMenuItem *i;
+    while (i=[e nextObject]) {
+        CheckMenuItem(menu, [i menuPosition], FALSE);
+        [i setChecked:NO];
     }
 }
 

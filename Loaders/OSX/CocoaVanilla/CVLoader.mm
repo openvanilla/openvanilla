@@ -32,9 +32,14 @@ CVLoader::~CVLoader() {
 
 void CVLoader::setActiveContext(CVContext *c) {
     activecontext=c;
+    if (!c) return;
     
     if (![cfg needSync]) return;
     [cfg sync];
+    
+    // we have to reload loaderdict as it might have been gone!
+    loaderdict=[[cfg dictionary] valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
+
     
     // now we tell every usable module to update config
     NSMutableDictionary *cfgdict=[cfg dictionary];
@@ -49,6 +54,9 @@ void CVLoader::setActiveContext(CVContext *c) {
         OVModule *om=[m module];
         om->update(&cvd, srv);
     }
+    
+    checkMenuItems();
+    syncMenuAndConfig();
 }
 
 int CVLoader::init(MenuRef m) {
@@ -119,6 +127,9 @@ int CVLoader::init(MenuRef m) {
 
 void CVLoader::checkMenuItems() {
     // check primaryInputMethod first
+    immenugroup->uncheckAll();
+    ofmenugroup->uncheckAll();
+    
     NSString *pIM=[loaderdict valueForKey:@"primaryInputMethod" default:@""];
     immenugroup->checkItem(pIM);
     
@@ -242,7 +253,7 @@ CVContext::CVContext(CVLoader *p) {
     loader=p;
     buf=new CVBuffer(NULL, loader->ofarray, loader->srv);
     candistate=NULL;
-    contexts=[NSMutableArray new];
+    contexts=nil;
     stamp=[loader->cfg timeStamp];
     syncConfig(1);
 }
@@ -257,9 +268,15 @@ void CVContext::activate(TSComposingBuffer *b) {
     murmur ("context activated");
     buf->setComposingBuffer(b);
     loader->setActiveContext(this);
-    syncConfig();
-    loader->srv->closeNotification();
     repositionInfoBoxes();
+    loader->srv->closeNotification();
+    if (!contexts) {
+        contexts=[NSMutableArray new];
+        syncConfig(1);
+    }
+    else {
+        syncConfig();
+    }
     loader->candi->hide()->clear()->update();
 
     // if we find a saved candistate exists
@@ -281,7 +298,7 @@ void CVContext::activate(TSComposingBuffer *b) {
         }
     }
     
-    showPrimaryIM();
+    // showPrimaryIM();
 }
 
 void CVContext::deactivate() {
@@ -357,7 +374,7 @@ void CVContext::syncConfig(int forced) {
     
     if (forced || !(stamp==loaderst)) {
         // we have to sync config and switch IM
-        stamp=[loader->cfg timeStamp];
+        stamp=loaderst;
         clearAll();
         NSEnumerator *e=[contexts objectEnumerator];
         CVContextWrapper *w;
@@ -368,6 +385,7 @@ void CVContext::syncConfig(int forced) {
         
         murmur ("reloading contexts array, delete all context objects");
         [contexts removeAllObjects];
+        NSLog([loader->imarray description]);
         
         e=[loader->imarray objectEnumerator];
         CVModuleWrapper *mw;
@@ -380,19 +398,25 @@ void CVContext::syncConfig(int forced) {
             [contexts addObject:cw];
             [cw release];
         }
+        
         showPrimaryIM();
     }
 }
 
 void CVContext::showPrimaryIM() {
     NSString *pim=[loader->loaderdict valueForKey:@"primaryInputMethod"];
-    NSEnumerator *e=[loader->imarray objectEnumerator];
-        CVModuleWrapper *mw;
-        while (mw=[e nextObject]) {
-            if ([[mw identifier] isEqualToString:pim]) {
-                OVModule *om=[mw module];
-                loader->srv->notify(om->localizedName(loader->srv->locale()));
-                loader->srv->fadeNotification();
-            }
+    
+    murmur("showPrimaryIM debug: %s", loader->imarray ? "imarray exists" : "imarray nil");
+    int c=[loader->imarray count];
+    if (!c) return;
+
+    for (int i=0; i<c; i++) {    
+        CVModuleWrapper *mw=[loader->imarray objectAtIndex:i];
+        if (!mw) continue;
+        if ([[mw identifier] isEqualToString:pim]) {
+            OVModule *om=[mw module];
+            loader->srv->notify(om->localizedName(loader->srv->locale()));
+            loader->srv->fadeNotification();
         }
+    }
 }
