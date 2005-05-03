@@ -1,0 +1,23 @@
+README
+Changes
+MANIFEST
+Makefile.PL
+Wordnet.pm
+Wordnet/Analysis.pm
+t/01.t
+t/02.t
+scripts/10questions.pl
+scripts/domainterms.pl
+scripts/reverse_morph.pl
+scripts/add.pl
+scripts/familarity.pl
+scripts/syn_by_offset.pl
+scripts/convertdb.pl
+scripts/global_distance.pl
+scripts/tree.pl
+scripts/convertdb_win.pl
+scripts/intersect.pl
+scripts/wn.pl
+scripts/domains.pl
+scripts/report.pl
+META.yml                                 Module meta-data (added by MakeMaker)

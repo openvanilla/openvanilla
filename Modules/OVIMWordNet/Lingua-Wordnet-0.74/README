@@ -1,0 +1,107 @@
+  ==================================================================
+  Lingua::Wordnet
+  Copyright 1999,2000,2001,2004 by Dan Brian.
+
+  This program is free software; you can redistribute it and/or modify
+  it under the same terms as Perl itself.
+  ==================================================================  
+
+
+NOTE: If you are upgrading from a previous version, you may need to 
+rebuild your Wordnet database files to accomodate new or changed 
+functions. See Changes for details.
+
+
+DESCRIPTION
+
+Wordnet is a lexical reference system inspired by current 
+psycholinguitics theories of human lexical memory. This module 
+allows access to the Wordnet lexicon from Perl applications, as 
+well as manipulation and extension of the lexicon. 
+Lingua::Wordnet::Analysis provides numerous high-level 
+extensions to the system.
+
+Version 0.1 was a complete rewrite of the module in pure Perl, 
+whereas the old module embedded the Wordnet C API functions. 
+In order to use the module, the database files must first be 
+converted to Berkeley DB files using the 'scripts/convertdb.pl' 
+script.
+
+
+REQUIREMENTS
+
+Perl 5.005, Berkeley DB 1.*, Wordnet 1.6/1.7 are required. The Wordnet 
+distribution does not need to be installed, but the data files 
+must be accessible for creation of the new database files. Wordnet 
+is available from http://www.cogsci.princeton.edu/~wn/.
+
+
+INSTALLATION
+
+To configure and install, type:
+ 
+  perl Makefile.PL
+
+Next, run the script 'scripts/convertdb.pl' to rewrite the data in Berkeley 
+DB format. It will also ask where you want to new data files stored 
+(default is /usr/local/wordnet1.7/lingua-wordnet/). It will write
+the following files, and will take quite a while:
+
+    lingua_wordnet.index      - all indexes of all senses
+    lingua_wordnet.data       - all data files combined
+    lingua_wordnet.morph      - all exception data
+
+The files will be large (about 40MB total), but loading time is nominal, and
+searches are instant, since all data is mapped for lookup rather than scanned.
+The format of the new database is accessible with Berkeley DB, and consists of
+a hash mapping of each synset to a key, using the synset offset with the pos 
+character as the key for a synset. Added synsets increment the synset offsets 
+sequentially, but the original offsets are retained for legacy compatibility. 
+Lingua::Wordnet will look for these files in the directory indicated at the 
+start of the Wordnet.pm file. 
+
+Then:
+
+  make
+  make test
+
+The test will load the new Wordnet data files and run some tests
+on them. If any tests fail, stop and find out why. Then as root:
+
+  make install
+
+This will install the module among your Perl modules and install 
+the new data files. Since these are large, you should do a 
+'make clean' after the install to delete the local copies.
+
+
+DOCUMENTATION
+
+You can access the Lingua::Wordnet documentation with:
+
+  perldoc Lingua::Wordnet
+  perldoc Lingua::Wordnet::Analysis
+
+There is additional documentation in the 'docs/' directory, and 
+the scripts in 'scripts/' are fairly good references for 
+examples.
+
+
+WHAT THEN?
+
+If you are not familiar with Wordnet you should download and read the l
+"Five Papers" document at http://www.cogsci.princeton.edu/~wn/.  An 
+article on this module appeared in the summer 2000 Perl Journal (#18), 
+for the curious.
+
+
+EXTRA FILES
+
+docs/terms.txt            - a brief summary of Wordnet terms
+scripts/LWBrowser.pm      - an Apache/mod_perl module HTML font-end to 
+                            Lingua::Wordnet.
+scripts/report.pl         - generates statistics reports for databases
+scripts/10questions.pl    - demonstrates Analysis.pm with a game of 
+                            "10 Questions"
+
+

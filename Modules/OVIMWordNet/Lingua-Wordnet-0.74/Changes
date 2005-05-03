@@ -1,0 +1,134 @@
+Revision history for Perl extension Lingua::Wordnet.
+
+0.01  Mon May 17 10:58:40 1999
+    - original version; created by h2xs 1.19
+
+0.1   Mon Feb 2 1:28:30 2000
+    - rewrote whole module to convert dbs to Berkeley DB files
+    - took out all Wordnet C API code
+
+0.2   Fri Apr 14 11:24:30 2000
+    - added pointer counting to 'scripts/report.pl'
+    - fixed examples for Lingua::Wordnet::Analysis::intersection() to 
+      use references
+    - added Lingua::Wordnet::Analysis::distance()
+    - changed Wordnet.pm and scripts/convertdb.pl to allow custom data
+      delimiters via the $DELIM and $SUBDELIM globals.
+    - made nested subs in Analysis.pm anonymous, thanks to Josef Meyer
+    - fixed lookup_synsets morphing, thanks to Melissa L. Holcombe
+    - changed morph() to require a POS, and convertdb.pl writes the 
+      morph database with POS labels.
+
+0.3   Sun Apr 16 3:24:12 2000
+    - lots of POD edits
+    - improved (fixed) lots of add/delete pointer functions
+    - fixed Lingua::Wordnet::Analysis::match()
+
+0.4   Thu Aug 24 11:36:14 2000
+    - fixed installation to recommend a 'cd' to convert the dbs
+    - removed plan to automate the synchronization of corrsponding 
+      pointer types
+    - more POD updates and typos
+    - added a small 'wn.pl' script to 'scripts/' to illustrate the 
+      most basic usage
+
+0.5   Thu Aug 31 20:07:54 2000
+    - added 'overview' method due to popular demand
+    - overloaded stringify operators ("") for class 
+      Lingua::Wordnet::Synset; you can print '$synset' directly 
+      and get an overview for the synset; it uses 'overview()'
+    - added test of overloaded behavior
+
+0.6    Tue Oct 17 2000
+    - Changed the overload syntax in Wordnet.pm (line 559) to work 
+      for Perl < 5.6.
+    - Fixed some typos in 'scripts/10questions.pl'
+
+0.65   Wed Feb 21 2001
+
+    - Fixed documentation errors
+    - Added reverse_morph() lookups (don't use them)
+    - Fixed errors in new_synset()
+
+0.7    Wed Mar 7 2001
+
+    * Data file formats have changed in 0.7. This requires new conversion using
+      the 'scripts/convertdb.pl' script. What hasn't changed is the way any of 
+      the indexes are written, so this should not affect most code. What has 
+      changed is the way each word entry is written to the data files. Word 
+      entries are now of the form "lemma%sense_num", where sense_num is the 
+      unique number for the sense of lemma in a POS (rather than unique within 
+      a lexicographer file). This makes the return values for words conform 
+      to what you might expect to see when searching for a given sense.
+  
+    - Added lookup_synset_all()
+    - Added scripts/big_struct.pl
+    - Added scripts/tree.pl
+    - Fixed the lemma% concatenation, which misrepresented the sense numbers
+    - Changed 'scripts/convertdb.pl' to try harder to update paths in 
+      Wordnet.pm
+
+0.71   Mon Aug 13 2001
+
+    * This release is compatible with Wordnet 1.7, but requires a rebuild of 
+      the data files. Wordnet 1.7 changes include new file byte offsets; these 
+      do not map to 1.6 offsets, and this module performs no conversion (no 
+      access to the "Sense Map" package). Additionally, some sense numbers
+      have changed.
+
+      This release should still be compatible with 1.6, but includes no 
+      features that enhance 1.6.
+
+    - 1.7 does not have a "cousin.exc" list; caused the conversion script to 
+      not choke as a result.
+    - Added a script 'scripts/convertdb_win.pl' for Win32 compatibility; thanks 
+      to Ray Schumacher.
+    - Changed test.pl to work with new synset numbers
+
+0.72	Mon Dec 17 2001
+
+    - Fixed test.pl ... again ... to work with new synset numbers
+
+0.73    Tue Dec 18 2001
+
+    - Changes synset write() behaviour to store offsets correctly, and 
+      changed Lingua::Wordnet typos. Thanks Marco Nova.
+
+0.74    Wed Aug 11 2004
+
+    - Fixed tests for Wordnet 2.0
+    - Significant updates thanks to Markus Koppenberger and his group at 
+      Universidad Pompeu Fabra:
+
+      * Wordnet.pm
+        - morph() now returns an array (it's possible that a word has more than 
+          one baseform
+        - reverse_morph() does the same ...
+        - lookup_synset returns the synsets for all forms of morph
+        - the 'functions' are commented now, because WN 2.0 uses the '+' pointer
+          for derivational morphology
+        - added functions for domains and domainterms (all_domains, 
+          category_domains, region_domains, usage_domains and all_domainterms, 
+          category_domainterms, region_domainterms,  usage_domainterms). there
+          are also example 2 scripts for that functions
+      
+      * convertdb.pl
+        - some code-cleanup: added -w and 'use strict', Removed some global 
+          variables and corrected some typos. Added some comments.
+        - loops over all pos-types (index.<pos>, <pos>.exc and data.<pos>
+        - changed structure of lingua_wordnet.morph: if there are more than one 
+          baseform, the value of the morph-hash will contain both seperated by 
+          $DELIM
+
+      * Analysis.pm
+        - added a function 'global_distance', which tries to find the steps 
+          needed from one to another synset. (highly experimental, very slow)
+
+      * scripts/
+        - added scripts to show the new functionalities
+
+TODO:
+    - find someone to maintain the module
+    - methods for XML delivery of data
+
+

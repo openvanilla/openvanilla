@@ -1,0 +1,8 @@
+1. perl OVIMWordNet/Lingua-Wordnet-0.74/scripts/convertdb.pl
+    choose OVIMWordNet/WordNet-2.0/dict
+2. under OVIMWordNet/Lingua-Wordnet-0.74/
+    make
+    make test
+    sudo make install
+3. perl OVIMWordNet/OVSocketServer.pl
+4. use OVSocketInputMethod module to test it.
