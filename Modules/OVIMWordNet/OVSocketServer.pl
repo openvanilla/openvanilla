@@ -108,18 +108,34 @@ sub OVIMPerlTest {
 
             my $orig = $data;
             my $words;
-            my $counter = 1;
+            my %wordHash;
+            my $freq = 1;
             foreach my $synset (@synsetList) {
                 my @synonyms = $synset->synonyms(); 
                 foreach my $word (@synonyms) {
                     $word =~ s/\%\d+$//;
                     $word =~ s/\_/ /g;
-                    $words .= $counter . ". " . $word . " ";
-                    $counter++;
-                }
-                $words .= "\n";
+                    unless (exists $wordHash{$word})
+                    {
+                        $wordHash{$word} = $freq;
+                        $freq++;
+                    }
+                }                
             }
-
+            
+            #simulate sorting by freq for the future.
+            my @wordList =
+                sort {$wordHash{$a} <=> $wordHash{$b}} keys %wordHash;
+            my $counter = 1;
+            foreach my $word (@wordList) {
+                $words .= $counter . "." . $word . " ";
+                $counter++;
+                if($counter > 9) {
+                    $counter = 1;
+                    $words .= "\n";   
+                }                
+            }
+            
             $data = "";            
             if(defined $words) {
                 print $client "\"$data\" bufclear bufappend \"$orig \" bufsend bufclear candiclear candiappend \"$words\" candiupdate candishow keyaccept\n";
