@@ -4,7 +4,6 @@ use IO::Socket;
 use Net::hostent;
 use Encode;
 use utf8;
-# use WordNet::QueryData;
 use Lingua::Wordnet;
 
 # 20310 = 0x4f56 = 'OV'
@@ -12,7 +11,6 @@ my $client;
 my $server = IO::Socket::INET->new (Proto=>'tcp', LocalPort=>20310, Listen=>SOMAXCONN, Reuse=>1);
 
 print "init wordnet...\n";
-# my $wn = WordNet::QueryData->new;
 my $wn = new Lingua::Wordnet;
 print "done!\n";
 
@@ -86,21 +84,43 @@ sub OVIMPerlTest {
             print $client "\"$data\" keyreject\n";
         }
         else {
-            my $synset = $wn->lookup_synset($data, "n", 1);
-            my @nounSynset = $synset->synonyms();            
-            my $head = $nounSynset[0];
-            $head =~ s/\%\d+$//;
-            my $words;
-            if(defined $head) {
-                foreach my $noun (@nounSynset) {
-                    $noun =~ s/\%\d+$//;
-                    $words .= $noun . " ";
-                }
-                $data="";
-                print $client "\"$data\" bufclear bufappend \"$head\" bufsend candiclear candiappend \"$words\" candiupdate candishow srvnotify \"$head\" keyaccept\n";
+            my @synsetList;
+            my $nounSynset = $wn->lookup_synset($data, "n", 1);
+            if(defined $nounSynset) {
+                push @synsetList, $nounSynset;
             }
-            else {
-                print $client "\"$data\" srvnotify \"no match!\" keyaccept\n";
+            my $verbSynset = $wn->lookup_synset($data, "v", 1);
+            if(defined $verbSynset) {
+                push @synsetList, $verbSynset;
+            }
+            my $adjSynset = $wn->lookup_synset($data, "a", 1);
+            if(defined $adjSynset) {
+                push @synsetList, $adjSynset;
+            }
+            my $sSynset = $wn->lookup_synset($data, "s", 1);
+            if(defined $sSynset) {
+                push @synsetList, $sSynset;
+            }
+            my $rSynset = $wn->lookup_synset($data, "r", 1);
+            if(defined $rSynset) {
+                push @synsetList, $rSynset;
+            }
+            foreach my $synset (@synsetList) {
+                my @synonyms = $synset->synonyms();            
+                my $head = $synonyms[0];
+                $head =~ s/\%\d+$//;
+                my $words;
+                if(defined $head) {
+                    foreach my $word (@synonyms) {
+                        $word =~ s/\%\d+$//;
+                        $words .= $word . " ";
+                    }
+                    $data="";
+                    print $client "\"$data\" bufclear bufappend \"$head\" bufsend candiclear candiappend \"$words\" candiupdate candishow srvnotify \"$head\" keyaccept\n";
+                }
+                else {
+                    print $client "\"$data\" srvnotify \"no match!\" keyaccept\n";
+                }                
             }
         }
     }
