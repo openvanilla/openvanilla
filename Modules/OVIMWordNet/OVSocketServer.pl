@@ -81,52 +81,57 @@ sub OVIMPerlTest {
     my $c=chr $code;
     if ($code==32) {
         if (!length($data)) {
-            print $client "\"$data\" keyreject\n";
+            print $client "\"$data\" bufclear candiclear candihide keyreject\n";
         }
         else {
             my @synsetList;
-            my $nounSynset = $wn->lookup_synset($data, "n", 1);
-            if(defined $nounSynset) {
+            my @nounSynsets = $wn->lookup_synset($data, "n");
+            foreach my $nounSynset (@nounSynsets) {
                 push @synsetList, $nounSynset;
             }
-            my $verbSynset = $wn->lookup_synset($data, "v", 1);
-            if(defined $verbSynset) {
+            my @verbSynsets = $wn->lookup_synset($data, "v");
+            foreach my $verbSynset (@verbSynsets) {
                 push @synsetList, $verbSynset;
             }
-            my $adjSynset = $wn->lookup_synset($data, "a", 1);
-            if(defined $adjSynset) {
+            my @adjSynsets = $wn->lookup_synset($data, "a");
+            foreach my $adjSynset (@adjSynsets) {
                 push @synsetList, $adjSynset;
             }
-            my $sSynset = $wn->lookup_synset($data, "s", 1);
-            if(defined $sSynset) {
+            my @sSynsets = $wn->lookup_synset($data, "s");
+            foreach my $sSynset (@sSynsets) {
                 push @synsetList, $sSynset;
             }
-            my $rSynset = $wn->lookup_synset($data, "r", 1);
-            if(defined $rSynset) {
+            my @rSynsets = $wn->lookup_synset($data, "r");
+            foreach my $rSynset (@rSynsets) {
                 push @synsetList, $rSynset;
             }
+
+            my $orig = $data;
+            my $words;
+            my $counter = 1;
             foreach my $synset (@synsetList) {
-                my @synonyms = $synset->synonyms();            
-                my $head = $synonyms[0];
-                $head =~ s/\%\d+$//;
-                my $words;
-                if(defined $head) {
-                    foreach my $word (@synonyms) {
-                        $word =~ s/\%\d+$//;
-                        $words .= $word . " ";
-                    }
-                    $data="";
-                    print $client "\"$data\" bufclear bufappend \"$head\" bufsend candiclear candiappend \"$words\" candiupdate candishow srvnotify \"$head\" keyaccept\n";
+                my @synonyms = $synset->synonyms(); 
+                foreach my $word (@synonyms) {
+                    $word =~ s/\%\d+$//;
+                    $word =~ s/\_/ /g;
+                    $words .= $counter . ". " . $word . " ";
+                    $counter++;
                 }
-                else {
-                    print $client "\"$data\" srvnotify \"no match!\" keyaccept\n";
-                }                
+                $words .= "\n";
             }
+
+            $data = "";            
+            if(defined $words) {
+                print $client "\"$data\" bufclear bufappend \"$orig \" bufsend bufclear candiclear candiappend \"$words\" candiupdate candishow keyaccept\n";
+            }
+            else {
+                print $client "\"$data\" bufclear bufappend \"$orig \" bufsend bufclear candiclear candihide srvnotify \"no match!\" keyaccept\n";
+            }               
         }
     }
     elsif ($c =~ /[[:print:]]/) {
         $data .= $c;
-        print $client "\"$data\" bufappend \"$c\" bufupdate candiappend \"$c\" candiupdate candishow keyaccept\n";
+        print $client "\"$data\" bufappend \"$c\" bufupdate candiclear candihide keyaccept\n";
     }
     elsif ($code==13) {
         if (length $data) {
@@ -147,7 +152,7 @@ sub OVIMPerlTest {
             }
         }
         else {
-            print $client "\"$data\" keyreject\n";
+            print $client "\"$data\" candiclear candihide keyreject\n";
         }
     }
     else {
