@@ -104,8 +104,7 @@ OVIMXcin::OVIMXcin(char *lpath, char *cfile, char *en, char *cn)
 
     sprintf(ename, "OV xcin %s", en ? en : cfile);
     sprintf(cname, "OV xcin %s", cn ? cn : cfile);
-    
-    
+    sprintf(idbuf, "OVIMXcin-%s", en ? en : cfile);
 }
 
 OVIMXcin::~OVIMXcin()
@@ -115,8 +114,7 @@ OVIMXcin::~OVIMXcin()
 
 const char* OVIMXcin::identifier()
 {
-    string inputMethodName = "OVIMXcin-" + string(cname);
-    return inputMethodName.c_str();
+    return idbuf;
 }
 
 const char* OVIMXcin::localizedName(const char* locale)

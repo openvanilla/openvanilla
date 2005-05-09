@@ -76,8 +76,9 @@ protected:
     char cinfile[PATH_MAX];
     OVCIN* cintab;
     
-    char ename[64];
-    char cname[64];
+    char ename[128];
+    char cname[128];
+    char idbuf[128];
     
     int cfgMaxSeqLen;
     int cfgBeep;
