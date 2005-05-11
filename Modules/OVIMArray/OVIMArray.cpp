@@ -51,17 +51,30 @@ int OVIMArrayContext::candidateEvent(OVKeyCode* key, OVBuffer* buf,
 }
 
 void OVIMArrayContext::clearAll(OVBuffer* buf, OVCandidate* candi_bar){
-    cancelAutoCompose(candi_bar);
+    clearCandidate(candi_bar);
     buf->clear()->update();
     keyseq.clear();
 }
 
-void OVIMArrayContext::cancelAutoCompose(OVCandidate *candi_bar){           
+void OVIMArrayContext::clearCandidate(OVCandidate *candi_bar){           
 //    autocomposing=0;
     candi_list.cancel();
     candi_bar->hide()->clear();
 }   
 
+void OVIMArrayContext::backEvent(OVBuffer* buf, OVCandidate* candi_bar, OVService* srv){
+    keyseq.remove();
+    updateDisplay(buf);
+    if( keyseq.length() == 0 ) 
+        clearCandidate(candi_bar);
+    else{   
+        if( cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector) )
+            updateCandidate(buf, candi_bar, srv);
+        else if (candi_list.onDuty()) 
+            clearCandidate(candi_bar);
+    }
+
+}
 
 int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf, 
                                OVCandidate* candi_bar, OVService* srv)
@@ -74,6 +87,12 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         clearAll(buf, candi_bar);
         return 1;
     }
+
+    if (key->code() == ovkDelete || key->code() == ovkBackspace){   
+        backEvent(buf, candi_bar, srv); 
+        return 1;
+    }
+
 
     if (keyseq.length() && keycode == ovkSpace){
         if (keyseq.length()==1 && keyseq.getSeq()[0]=='t'){

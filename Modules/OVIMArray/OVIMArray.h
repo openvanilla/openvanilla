@@ -27,8 +27,9 @@ private:
     virtual void updateDisplay(OVBuffer*);
     int compose(OVBuffer *buf, OVCandidate *textbar, OVService *srv);
     int updateCandidate(OVBuffer *buf, OVCandidate *textbar, OVService *srv);
-    void cancelAutoCompose(OVCandidate *candi_bar);
+    void clearCandidate(OVCandidate *candi_bar);
     void clearAll(OVBuffer* buf, OVCandidate* candi_bar);
+    void backEvent(OVBuffer* buf, OVCandidate* candi_bar, OVService* srv);
 };
 
 class OVIMArray : public OVInputMethod
