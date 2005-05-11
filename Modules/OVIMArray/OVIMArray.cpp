@@ -7,26 +7,6 @@ using namespace std;
 
 void OVIMArrayContext::updateDisplay(OVBuffer* buf){
     buf->clear();
-    if(keyseq.length()==1){
-        if( keyseq.getSeq()[0] == 't' ){
-            buf->append((char*)"的")->update();
-            return;
-        }
-        if(keyseq.getSeq()[0] == 'w'){
-            buf->append((char*)"女")->update();
-            return;
-        }		
-    }
-
-    if(keyseq.length()==2 && *(keyseq.getSeq())=='w') {
-        char c=(keyseq.getSeq())[1];
-        if (c >= '0' && c <= '9'){
-            cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
-            buf->append(candidateStringVector[0].c_str())->update();
-            return;
-        }
-    }
-
     if (keyseq.length()){   
         string str;
         keyseq.compose(str);
@@ -35,36 +15,56 @@ void OVIMArrayContext::updateDisplay(OVBuffer* buf){
     buf->update();
 }
 
-int OVIMArrayContext::updateCandidate(OVBuffer *buf, OVCandidate *textbar, OVService *srv){
-    cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
-    string currentSelKey = cintab->getSelKey();
-
-    candi_list.prepare(&candidateStringVector,
-                          const_cast<char*>(currentSelKey.c_str()), textbar);
+int OVIMArrayContext::updateCandidate(OVCIN *tab,OVBuffer *buf, OVCandidate *candibar){
+    tab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
+    string currentSelKey = tab->getSelKey();
+    if( candidateStringVector.size() == 0 && candi.onDuty() )
+        clearCandidate(candibar);
+    else
+        candi.prepare(&candidateStringVector,
+                          const_cast<char*>(currentSelKey.c_str()), candibar);
     return 1;
 }
 
-int OVIMArrayContext::compose(OVBuffer *buf, OVCandidate *textbar, OVService *srv)
-{
-    if( candidateStringVector.size() == 1 ){
-    
-    }
-    return 1;
+int OVIMArrayContext::WaitKey1(OVKeyCode* key, OVBuffer* buf, 
+                               OVCandidate* candibar, OVService* srv){
+    updateCandidate(short_tab, buf, candibar);
+    if( key->code() == 't' )
+        buf->clear()->append((char*)"的")->update();
+    if( isprint(key->code()) && keyseq.valid(key->code()) )
+        changeState(STATE_WAIT_KEY2);
+    return 1;    
 }
 
-int OVIMArrayContext::candidateEvent(OVKeyCode* key, OVBuffer* buf, 
-                                     OVCandidate* candi_bar, OVService* srv)
-{
+int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf, 
+                               OVCandidate* candibar, OVService* srv){
+    updateCandidate(short_tab, buf, candibar);
+    if( key->code() == ovkBackspace || key->code() == ovkDelete)
+        changeState(STATE_WAIT_KEY1);
+    else
+        changeState(STATE_WAIT_KEY3);
+    return 1;    
+}
+
+int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVBuffer* buf, 
+                               OVCandidate* candibar, OVService* srv){
+    updateCandidate(short_tab, buf, candibar);
+    return 1;    
+}
+
+
+int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVBuffer* buf, 
+                                    OVCandidate* candibar, OVService* srv){
     // enter == first candidate
     // space (when candidate list has only one page) == first candidate
     char c=key->code();
-    if (key->code() == ovkReturn || (candi_list.onePage() && key->code()==ovkSpace)) 
-        c=candi_list.getSelKey()[0];
+    if (c == ovkReturn || (candi.onePage() && c==ovkSpace)) 
+        c=candi.getSelKey()[0];
 
     string output;
-    if (candi_list.select(c, output)) {
+    if (candi.select(c, output)) {
         buf->clear()->append(output.c_str())->send();
-        clearAll(buf, candi_bar);
+        clearAll(buf, candibar);
         return 1;
     }
     return 0;
@@ -77,85 +77,84 @@ void OVIMArrayContext::clearAll(OVBuffer* buf, OVCandidate* candi_bar){
 }
 
 void OVIMArrayContext::clearCandidate(OVCandidate *candi_bar){           
-//    autocomposing=0;
-    candi_list.cancel();
+    candi.cancel();
     candi_bar->hide()->clear();
 }   
 
-void OVIMArrayContext::backEvent(OVBuffer* buf, OVCandidate* candi_bar, OVService* srv){
-    keyseq.remove();
-    updateDisplay(buf);
-    if( keyseq.length() == 0 ) 
-        clearCandidate(candi_bar);
-    else{   
-        if( cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector) )
-            updateCandidate(buf, candi_bar, srv);
-        else if (candi_list.onDuty()) 
-            clearCandidate(candi_bar);
-    }
-
+int OVIMArrayContext::selectCandidate(int num, string& out){
+   char c=candi.getSelKey()[num];
+   return candi.select(c, out);
 }
 
 int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf, 
                                OVCandidate* candi_bar, OVService* srv)
 {
     const char keycode = key->code();
-    const bool validkey = keyseq.valid(keycode) || 
-      ( keyseq.length() == 1 && keyseq.getSeq()[0]=='w' && 
-        keycode >= '0' && keycode <= '9' );
-    
-    if(key->code()==ovkEsc){
+    const bool validkey = keyseq.valid(keycode);
+
+    if(keycode==ovkEsc){
         clearAll(buf, candi_bar);
+        changeState(STATE_WAIT_KEY1);
         return 1;
     }
 
-    if (key->code() == ovkDelete || key->code() == ovkBackspace){   
-        backEvent(buf, candi_bar, srv); 
-        return 1;
-    }
-
-
-    if (keyseq.length() && keycode == ovkSpace){
-        if (keyseq.length()==1 && 
-            keyseq.getSeq()[0] == 't' || keyseq.getSeq()[0] == 'w'){
-            if(keyseq.getSeq()[0] == 't')
-                buf->clear()->append((char*)"的")->send();
+    if( state == STATE_WAIT_CANDIDATE )
+        return WaitCandidate(key, buf, candi_bar, srv);
+    if( candi.onDuty() && keycode >= '0' && keycode <= '9' ){
+        string c;
+        if( candi.select(keycode, c) ){
+            if( c != "□"  ){
+                buf->clear()->append(c.c_str())->send();
+                clearAll(buf, candi_bar);
+                changeState(STATE_WAIT_KEY1);
+            }
             else
-                buf->clear()->append((char*)"女")->send();
-            keyseq.clear();
-            clearCandidate(candi_bar);
-            return 1;
+                srv->beep();
         }
-//        return compose(buf, candi_bar, srv);
     }
-
-    if( candi_list.onDuty() && candidateEvent(key, buf, candi_bar, srv) )
-        return 1;
-    
-    if( isprint(keycode) && validkey &&
-        !(key->isCtrl() || key->isOpt() || key->isCommand()) ){
-        if( keyseq.length() == 4 && tolower(keycode) != 'i' ){
-            return 1;
+    if (keyseq.length() && keycode == ovkSpace){
+        main_tab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
+        if(candidateStringVector.size() == 1){
+            string c;
+            if(selectCandidate(0, c)){
+                buf->clear()->append(c.c_str())->send();
+                clearAll(buf, candi_bar);
+            }
         }
+        else{
+            updateCandidate(main_tab, buf, candi_bar);
+            changeState(STATE_WAIT_CANDIDATE);
+        }
+        return 1;
+    }
+    if( isprint(keycode) && validkey ){
         keyseq.add(keycode);
         updateDisplay(buf);
-
-        if(cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector)){
-            updateCandidate(buf, candi_bar, srv);
-        }
-        else if (candi_list.onDuty()) 
-            clearCandidate(candi_bar);
-
-        if( keyseq.length()==1 && keyseq.getSeq()[0] == 'w')
-            clearCandidate(candi_bar);
-        
     }
-    return 0;
+    else if (key->code() == ovkDelete || key->code() == ovkBackspace){   
+        keyseq.remove();
+        updateDisplay(buf);
+        changeBackState(state);
+    }
+    switch(state){
+        case STATE_WAIT_KEY1:
+            WaitKey1(key, buf, candi_bar, srv);
+            break;
+        case STATE_WAIT_KEY2:
+            WaitKey2(key, buf, candi_bar, srv);
+            break;
+        case STATE_WAIT_KEY3:
+            WaitKey3(key, buf, candi_bar, srv);
+            break;
+        default:
+            break;
+    }
+    return 1;
 }
 
-
 int OVIMArray::initialize(OVDictionary *, OVService*, const char *mp){
-    cintab = new OVCIN("/tmp/array30.cin"); // FIXME: correct the path
+    main_tab = new OVCIN("/tmp/array30.cin"); // FIXME: correct the path
+    short_tab = new OVCIN("/tmp/ArrayShortCode.cin");
     return 1;
 }
 
