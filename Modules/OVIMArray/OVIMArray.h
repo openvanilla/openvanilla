@@ -15,14 +15,20 @@ private:
     ArrayKeySequence keyseq;
     OVCandidateList candi_list;
     std::vector<std::string> candidateStringVector;
+    int autocomposing;
 public:
     OVIMArrayContext(OVIMArray* p, OVCIN* tab) 
         : parent(p), cintab(tab), keyseq(tab) { 
+            autocomposing = 0;
     }
     virtual int keyEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
+private:
     virtual int candidateEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     virtual void updateDisplay(OVBuffer*);
     int compose(OVBuffer *buf, OVCandidate *textbar, OVService *srv);
+    int updateCandidate(OVBuffer *buf, OVCandidate *textbar, OVService *srv);
+    void cancelAutoCompose(OVCandidate *candi_bar);
+    void clearAll(OVBuffer* buf, OVCandidate* candi_bar);
 };
 
 class OVIMArray : public OVInputMethod
