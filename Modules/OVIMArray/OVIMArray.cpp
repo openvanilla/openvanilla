@@ -157,7 +157,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
             }
             changeState(STATE_WAIT_KEY1);
         }
-        else{
+        else if(candidateStringVector.size() > 1){
             updateCandidate(main_tab, buf, candi_bar);
             if(selectCandidate(0, c))
                 buf->clear()->append(c.c_str())->update();
