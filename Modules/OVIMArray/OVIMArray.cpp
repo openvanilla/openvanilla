@@ -220,7 +220,7 @@ void OVIMArrayContext::changeState(ARRAY_STATE s){
     state = s;  
 }
 
-int OVIMArray::initialize(OVDictionary *, OVService*, const char *mp){
+int OVIMArray::initialize(OVDictionary *, OVService*, const char *path){
     char buf[PATH_MAX];
     sprintf(buf, "%sOVIMArray/array30.cin", path);
     murmur("OVIMArray: open cin %s", buf);
@@ -231,15 +231,5 @@ int OVIMArray::initialize(OVDictionary *, OVService*, const char *mp){
     return 1;
 }
 
-const char* PATH;
-extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; } 
-
-extern "C" int OVInitializeLibrary(OVService*, const char* path) { 
-    PATH = path;
-    return 1; 
-} 
-
-extern "C" OVModule *OVGetModuleFromLibrary(int idx) {
-    return (idx==0) ? new OVIMArray(PATH) : NULL; 
-}
+OV_SINGLE_MODULE_WRAPPER(OVIMArray);
 
