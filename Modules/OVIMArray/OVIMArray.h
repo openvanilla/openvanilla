@@ -8,7 +8,7 @@
 
 
 enum ARRAY_STATE {
-    STATE_WAIT_KEY1,
+    STATE_WAIT_KEY1 = 0,
     STATE_WAIT_KEY2,
     STATE_WAIT_KEY3,
     STATE_WAIT_CANDIDATE
@@ -34,15 +34,8 @@ public:
     }
     virtual int keyEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
 private:
-    void changeState(ARRAY_STATE s){    state = s;  }
-    void changeBackState(ARRAY_STATE s){
-        switch(s){
-            case STATE_WAIT_CANDIDATE:
-            case STATE_WAIT_KEY2: changeState(STATE_WAIT_KEY1); break;
-            case STATE_WAIT_KEY3: changeState(STATE_WAIT_KEY2); break;
-            default: break;
-        }
-    }
+    void changeState(ARRAY_STATE s);
+    void changeBackState(ARRAY_STATE s);
     virtual void updateDisplay(OVBuffer*);
     int WaitKey1(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int WaitKey2(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
