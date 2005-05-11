@@ -24,9 +24,6 @@ private:
     ARRAY_STATE state;
     OVCandidateList candi;
     std::vector<std::string> candidateStringVector;
-/*
-    int autocomposing;
-*/
 public:
     OVIMArrayContext(OVIMArray* p, OVCIN* tab, OVCIN* tab2) 
         : parent(p), main_tab(tab), short_tab(tab2), keyseq(tab) { 
@@ -47,11 +44,6 @@ private:
     void clearCandidate(OVCandidate *candi_bar);
     int selectCandidate(int num, string& out);
     bool isWSeq(char a, char b) const {  return a=='w' && isdigit(b);    }
-/*
-    virtual int candidateEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
-    int compose(OVBuffer *buf, OVCandidate *textbar, OVService *srv);
-    void backEvent(OVBuffer* buf, OVCandidate* candi_bar, OVService* srv);
-*/
 };
 
 class OVIMArray : public OVInputMethod

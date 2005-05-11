@@ -223,8 +223,10 @@ void OVIMArrayContext::changeState(ARRAY_STATE s){
 int OVIMArray::initialize(OVDictionary *, OVService*, const char *mp){
     char buf[PATH_MAX];
     sprintf(buf, "%sOVIMArray/array30.cin", path);
+    murmur("OVIMArray: open cin %s", buf);
     main_tab = new OVCIN(buf); 
     sprintf(buf, "%sOVIMArray/ArrayShortCode.cin", path);
+    murmur("OVIMArray: open cin %s", buf);
     short_tab = new OVCIN(buf);
     return 1;
 }
