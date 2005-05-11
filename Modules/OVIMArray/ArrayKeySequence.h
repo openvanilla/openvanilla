@@ -14,7 +14,7 @@ public:
     ArrayKeySequence(OVCIN* tab) : cinTable(tab) {}
     virtual int length() { return len; }
     virtual int add(char c){
-        if (valid(c) == 0) return 0;
+//        if (valid(c) == 0) return 0;
         return OVKeySequenceSimple::add(c);
     }
     virtual int valid(char c){

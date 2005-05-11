@@ -7,6 +7,26 @@ using namespace std;
 
 void OVIMArrayContext::updateDisplay(OVBuffer* buf){
     buf->clear();
+    if(keyseq.length()==1){
+        if( keyseq.getSeq()[0] == 't' ){
+            buf->append((char*)"的")->update();
+            return;
+        }
+        if(keyseq.getSeq()[0] == 'w'){
+            buf->append((char*)"女")->update();
+            return;
+        }		
+    }
+
+    if(keyseq.length()==2 && *(keyseq.getSeq())=='w') {
+        char c=(keyseq.getSeq())[1];
+        if (c >= '0' && c <= '9'){
+            cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
+            buf->append(candidateStringVector[0].c_str())->update();
+            return;
+        }
+    }
+
     if (keyseq.length()){   
         string str;
         keyseq.compose(str);
@@ -80,8 +100,9 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
                                OVCandidate* candi_bar, OVService* srv)
 {
     const char keycode = key->code();
-    if( candi_list.onDuty() && candidateEvent(key, buf, candi_bar, srv) )
-        return 1;
+    const bool validkey = keyseq.valid(keycode) || 
+      ( keyseq.length() == 1 && keyseq.getSeq()[0]=='w' && 
+        keycode >= '0' && keycode <= '9' );
     
     if(key->code()==ovkEsc){
         clearAll(buf, candi_bar);
@@ -95,27 +116,39 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
 
 
     if (keyseq.length() && keycode == ovkSpace){
-        if (keyseq.length()==1 && keyseq.getSeq()[0]=='t'){
-            buf->clear()->append((char*)"的")->send();
+        if (keyseq.length()==1 && 
+            keyseq.getSeq()[0] == 't' || keyseq.getSeq()[0] == 'w'){
+            if(keyseq.getSeq()[0] == 't')
+                buf->clear()->append((char*)"的")->send();
+            else
+                buf->clear()->append((char*)"女")->send();
             keyseq.clear();
-            //cancelAutoCompose(textbar);
+            clearCandidate(candi_bar);
             return 1;
         }
 //        return compose(buf, candi_bar, srv);
     }
+
+    if( candi_list.onDuty() && candidateEvent(key, buf, candi_bar, srv) )
+        return 1;
     
-    if( isprint(keycode) && keyseq.valid(keycode) &&
+    if( isprint(keycode) && validkey &&
         !(key->isCtrl() || key->isOpt() || key->isCommand()) ){
         if( keyseq.length() == 4 && tolower(keycode) != 'i' ){
             return 1;
         }
         keyseq.add(keycode);
         updateDisplay(buf);
+
         if(cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector)){
             updateCandidate(buf, candi_bar, srv);
         }
-//        else if (candi.onDuty()) 
-//            cancelAutoCompose(textbar);
+        else if (candi_list.onDuty()) 
+            clearCandidate(candi_bar);
+
+        if( keyseq.length()==1 && keyseq.getSeq()[0] == 'w')
+            clearCandidate(candi_bar);
+        
     }
     return 0;
 }
