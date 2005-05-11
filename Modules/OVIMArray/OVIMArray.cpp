@@ -17,7 +17,6 @@ void OVIMArrayContext::updateDisplay(OVBuffer* buf){
 
 int OVIMArrayContext::compose(OVBuffer *buf, OVCandidate *textbar, OVService *srv)
 {
-    vector<string> candidateStringVector;
     if (!keyseq.length()) return 0;
 
     int size = cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
@@ -49,12 +48,34 @@ int OVIMArrayContext::compose(OVBuffer *buf, OVCandidate *textbar, OVService *sr
     return 1;
 }
 
-int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf, 
-                               OVCandidate* candi, OVService* srv)
+int OVIMArrayContext::candidateEvent(OVKeyCode* key, OVBuffer* buf, 
+                                     OVCandidate* candi_bar, OVService* srv)
 {
-    murmur("keyevent!\n");
-    const char keycode = key->code();
+    // enter == first candidate
+    // space (when candidate list has only one page) == first candidate
+    char c=key->code();
+    murmur("candidateEvent: %c\n", c);
+    if (key->code() == ovkReturn || (candi_list.onePage() && key->code()==ovkSpace)) 
+        c=candi_list.getSelKey()[0];
+    murmur("candidateEvent2: %c\n", c);
 
+    string output;
+    if (candi_list.select(c, output)) {
+        buf->clear()->append(output.c_str())->send();
+        candi_list.cancel();
+        candi_bar->hide()->clear();
+        return 1;
+    }
+    return 1;
+}
+
+int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf, 
+                               OVCandidate* candi_bar, OVService* srv)
+{
+    const char keycode = key->code();
+    if( candi_list.onDuty() )
+        candidateEvent(key, buf, candi_bar, srv);
+    
     if (keyseq.length() && keycode == ovkSpace){
         if (keyseq.length()==1 && keyseq.getSeq()[0]=='t'){
             buf->clear()->append((char*)"的")->send();
@@ -62,7 +83,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
             //cancelAutoCompose(textbar);
             return 1;
         }
-        return compose(buf, candi, srv);
+        return compose(buf, candi_bar, srv);
     }
     
     if( isprint(keycode) && keyseq.valid(keycode) &&

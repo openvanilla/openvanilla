@@ -14,11 +14,13 @@ private:
     OVCIN* cintab;
     ArrayKeySequence keyseq;
     OVCandidateList candi_list;
+    std::vector<std::string> candidateStringVector;
 public:
     OVIMArrayContext(OVIMArray* p, OVCIN* tab) 
         : parent(p), cintab(tab), keyseq(tab) { 
     }
     virtual int keyEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
+    virtual int candidateEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     virtual void updateDisplay(OVBuffer*);
     int compose(OVBuffer *buf, OVCandidate *textbar, OVService *srv);
 };
