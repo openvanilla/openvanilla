@@ -37,6 +37,7 @@ private:
     void changeState(ARRAY_STATE s);
     void changeBackState(ARRAY_STATE s);
     virtual void updateDisplay(OVBuffer*);
+    void dispatchStateHandler(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int WaitKey1(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int WaitKey2(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int WaitKey3(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
@@ -45,10 +46,10 @@ private:
     void clearAll(OVBuffer* buf, OVCandidate* candi_bar);
     void clearCandidate(OVCandidate *candi_bar);
     int selectCandidate(int num, string& out);
+    bool isWSeq(char a, char b) const {  return a=='w' && isdigit(b);    }
 /*
     virtual int candidateEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int compose(OVBuffer *buf, OVCandidate *textbar, OVService *srv);
-    int updateCandidate(OVBuffer *buf, OVCandidate *textbar, OVService *srv);
     void backEvent(OVBuffer* buf, OVCandidate* candi_bar, OVService* srv);
 */
 };

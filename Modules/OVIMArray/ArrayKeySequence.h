@@ -36,7 +36,6 @@ public:
         return s;
     }
     virtual char* getSeq() { return seq; }
-    
 };
 
 #endif

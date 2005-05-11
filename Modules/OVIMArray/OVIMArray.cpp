@@ -37,9 +37,17 @@ int OVIMArrayContext::WaitKey1(OVKeyCode* key, OVBuffer* buf,
 
 int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf, 
                                OVCandidate* candibar, OVService* srv){
-    updateCandidate(short_tab, buf, candibar);
-    if( isprint(key->code()) && keyseq.valid(key->code()) )
-        changeState(STATE_WAIT_KEY3);
+    if( isWSeq(keyseq.getSeq()[0], keyseq.getSeq()[1]) ){
+        murmur("w-rule!");
+        updateCandidate(main_tab, buf, candibar);
+        buf->clear()->append(candidateStringVector[0].c_str())->update();
+        changeState(STATE_WAIT_CANDIDATE);
+    }
+    else{
+        updateCandidate(short_tab, buf, candibar);
+        if( isprint(key->code()) && keyseq.valid(key->code()) )
+            changeState(STATE_WAIT_KEY3);
+    }
     return 1;    
 }
 
@@ -52,6 +60,25 @@ int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVBuffer* buf,
 
 int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVBuffer* buf, 
                                     OVCandidate* candibar, OVService* srv){
+    const char keycode = key->code();
+    if (keycode == ovkEsc || keycode == ovkBackspace){
+        candibar->hide()->clear();
+        candi.cancel();
+        buf->clear()->update();
+        return 1;
+    }
+
+    if (keycode == ovkDown || keycode == ovkRight ||
+        (!candi.onePage() && keycode==ovkSpace) ){
+        candi.pageDown()->update(candibar);
+        return 1;
+    }
+
+    if (keycode == ovkUp || keycode == ovkLeft){
+        candi.pageUp()->update(candibar);
+        return 1;
+    }
+
     // enter == first candidate
     // space (when candidate list has only one page) == first candidate
     char c=key->code();
@@ -89,7 +116,10 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
 {
     int ret = 0;
     const char keycode = key->code();
-    const bool validkey = keyseq.valid(keycode);
+    const bool validkey = keyseq.valid(keycode) || 
+      ( keyseq.getSeq()[0]=='w' && isdigit(keycode) );
+    
+
     murmur("state: %d\n", state);
     if (!keyseq.length() && !isprint(keycode)) return 0;
 
@@ -101,7 +131,8 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
 
     if( state == STATE_WAIT_CANDIDATE )
         return WaitCandidate(key, buf, candi_bar, srv);
-    if( candi.onDuty() && keycode >= '0' && keycode <= '9' ){
+    if( candi.onDuty() && isdigit(keycode) && 
+        !(keyseq.length() == 1 && isWSeq(keyseq.getSeq()[0],keycode)) ){
         string c;
         if( candi.select(keycode, c) ){
             if( c != "□"  ){
@@ -147,6 +178,13 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         changeBackState(state);
         ret = 1;
     }
+    dispatchStateHandler(key, buf, candi_bar, srv);
+    return ret;
+}
+
+void OVIMArrayContext::dispatchStateHandler(OVKeyCode* key, OVBuffer* buf, 
+                                            OVCandidate* candi_bar, OVService* srv)
+{
     switch(state){
         case STATE_WAIT_KEY1:
             WaitKey1(key, buf, candi_bar, srv);
@@ -160,7 +198,6 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         default:
             break;
     }
-    return ret;
 }
 
 void OVIMArrayContext::changeBackState(ARRAY_STATE s){
