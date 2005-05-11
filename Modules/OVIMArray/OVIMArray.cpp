@@ -149,8 +149,8 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
     }
     if (keyseq.length() && keycode == ovkSpace){
         main_tab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
+        string c;
         if(candidateStringVector.size() == 1){
-            string c;
             if(selectCandidate(0, c)){
                 buf->clear()->append(c.c_str())->send();
                 clearAll(buf, candi_bar);
@@ -159,6 +159,8 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         }
         else{
             updateCandidate(main_tab, buf, candi_bar);
+            if(selectCandidate(0, c))
+                buf->clear()->append(c.c_str())->update();
             changeState(STATE_WAIT_CANDIDATE);
         }
         return 1;
