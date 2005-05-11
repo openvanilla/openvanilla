@@ -57,12 +57,14 @@ private:
 class OVIMArray : public OVInputMethod
 {
 public:
+    OVIMArray(const char* p): path(p) {}
     virtual int initialize(OVDictionary *, OVService*, const char *mp);
     virtual const char* identifier() { return "OVIMArray"; }
     virtual OVInputMethodContext *newContext() { 
         return new OVIMArrayContext(this,main_tab, short_tab); 
     }
 private:
+    const char* path;
     OVCIN *main_tab, *short_tab;;
 };
 

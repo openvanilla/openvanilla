@@ -38,7 +38,6 @@ int OVIMArrayContext::WaitKey1(OVKeyCode* key, OVBuffer* buf,
 int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf, 
                                OVCandidate* candibar, OVService* srv){
     if( isWSeq(keyseq.getSeq()[0], keyseq.getSeq()[1]) ){
-        murmur("w-rule!");
         updateCandidate(main_tab, buf, candibar);
         buf->clear()->append(candidateStringVector[0].c_str())->update();
         changeState(STATE_WAIT_CANDIDATE);
@@ -120,7 +119,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
       ( keyseq.getSeq()[0]=='w' && isdigit(keycode) );
     
 
-    murmur("state: %d\n", state);
+    murmur("OVIMArray state: %d\n", state);
     if (!keyseq.length() && !isprint(keycode)) return 0;
 
     if(keycode==ovkEsc){
@@ -215,14 +214,28 @@ void OVIMArrayContext::changeBackState(ARRAY_STATE s){
 }
 
 void OVIMArrayContext::changeState(ARRAY_STATE s){    
-    murmur("Change state: %d -> %d\n", state, s);
+    murmur("OVIMArray change state: %d -> %d\n", state, s);
     state = s;  
 }
 
 int OVIMArray::initialize(OVDictionary *, OVService*, const char *mp){
-    main_tab = new OVCIN("/tmp/array30.cin"); // FIXME: correct the path
-    short_tab = new OVCIN("/tmp/ArrayShortCode.cin");
+    char buf[PATH_MAX];
+    sprintf(buf, "%sOVIMArray/array30.cin", path);
+    main_tab = new OVCIN(buf); 
+    sprintf(buf, "%sOVIMArray/ArrayShortCode.cin", path);
+    short_tab = new OVCIN(buf);
     return 1;
 }
 
-OV_SINGLE_MODULE_WRAPPER(OVIMArray);
+const char* PATH;
+extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; } 
+
+extern "C" int OVInitializeLibrary(OVService*, const char* path) { 
+    PATH = path;
+    return 1; 
+} 
+
+extern "C" OVModule *OVGetModuleFromLibrary(int idx) {
+    return (idx==0) ? new OVIMArray(PATH) : NULL; 
+}
+

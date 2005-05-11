@@ -3,6 +3,7 @@
 IMID=OVIMArray
 OBJS=OVIMArray.o OVCIN.o OVStringToolKit.o OVFileHandler.o OVCandidateList.o
 GOALS=OVIMArray.dylib
+DATA=ArrayShortCode.cin array30.cin
 
 $(GOALS): $(OBJS)
 	$(CPP) -bundle -o $@ $(OBJS)
