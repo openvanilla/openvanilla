@@ -14,19 +14,25 @@ enum ARRAY_STATE {
     STATE_WAIT_CANDIDATE
 };
 
+enum {
+    ARRAY_MAIN_TAB = 0,
+    ARRAY_SHORT_TAB = 1,
+    ARRAY_SPECIAL_TAB = 2
+};
+
 class OVIMArray;
 class OVIMArrayContext : public OVInputMethodContext
 {
 private:
     OVIMArray* parent;
-    OVCIN *main_tab, *short_tab;
+    OVCIN **tabs;
     ArrayKeySequence keyseq;
     ARRAY_STATE state;
     OVCandidateList candi;
     std::vector<std::string> candidateStringVector;
 public:
-    OVIMArrayContext(OVIMArray* p, OVCIN* tab, OVCIN* tab2) 
-        : parent(p), main_tab(tab), short_tab(tab2), keyseq(tab) { 
+    OVIMArrayContext(OVIMArray* p, OVCIN** t)
+        : parent(p), tabs(t), keyseq(t[ARRAY_MAIN_TAB]) { 
         state = STATE_WAIT_KEY1;
     }
     virtual int keyEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
@@ -52,17 +58,17 @@ public:
     virtual int initialize(OVDictionary *, OVService*, const char *mp);
     virtual const char* identifier() { return "OVIMArray"; }
     virtual OVInputMethodContext *newContext() { 
-        return new OVIMArrayContext(this,main_tab, short_tab); 
+        return new OVIMArrayContext(this,tabs); 
     }
     virtual const char *localizedName(const char *locale){  
-      if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
-          return "OV 行列";
-      else
-          return "OV Array";
+        if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
+            return "OV 行列";
+        else
+            return "OV Array";
     }
 
 private:
-    OVCIN *main_tab, *short_tab;;
+    OVCIN *tabs[3];    // main, short-code, special-code
 };
 
 #endif

@@ -28,7 +28,7 @@ int OVIMArrayContext::updateCandidate(OVCIN *tab,OVBuffer *buf, OVCandidate *can
 
 int OVIMArrayContext::WaitKey1(OVKeyCode* key, OVBuffer* buf, 
                                OVCandidate* candibar, OVService* srv){
-    updateCandidate(short_tab, buf, candibar);
+    updateCandidate(tabs[ARRAY_SHORT_TAB], buf, candibar);
     if( key->code() == 't' )
         buf->clear()->append((char*)"的")->update();
     changeState(STATE_WAIT_KEY2);
@@ -38,12 +38,12 @@ int OVIMArrayContext::WaitKey1(OVKeyCode* key, OVBuffer* buf,
 int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf, 
                                OVCandidate* candibar, OVService* srv){
     if( isWSeq(keyseq.getSeq()[0], keyseq.getSeq()[1]) ){
-        updateCandidate(main_tab, buf, candibar);
+        updateCandidate(tabs[ARRAY_MAIN_TAB], buf, candibar);
         buf->clear()->append(candidateStringVector[0].c_str())->update();
         changeState(STATE_WAIT_CANDIDATE);
     }
     else{
-        updateCandidate(short_tab, buf, candibar);
+        updateCandidate(tabs[ARRAY_SHORT_TAB], buf, candibar);
         if( isprint(key->code()) && keyseq.valid(key->code()) )
             changeState(STATE_WAIT_KEY3);
     }
@@ -52,7 +52,7 @@ int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf,
 
 int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVBuffer* buf, 
                                OVCandidate* candibar, OVService* srv){
-    updateCandidate(main_tab, buf, candibar);
+    updateCandidate(tabs[ARRAY_MAIN_TAB], buf, candibar);
     return 1;    
 }
 
@@ -142,23 +142,24 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
             else{
                 srv->beep();
                 if( state <= STATE_WAIT_KEY3 ) //dirty hack to set duty=1
-                    updateCandidate(short_tab, buf, candi_bar);
+                    updateCandidate(tabs[ARRAY_SHORT_TAB], buf, candi_bar);
             }
         }
         return 1;
     }
     if (keyseq.length() && keycode == ovkSpace){
-        main_tab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
+        tabs[ARRAY_MAIN_TAB]->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
         string c;
         if(candidateStringVector.size() == 1){
             if(selectCandidate(0, c)){
+                srv->notify("TEST");
                 buf->clear()->append(c.c_str())->send();
                 clearAll(buf, candi_bar);
             }
             changeState(STATE_WAIT_KEY1);
         }
         else if(candidateStringVector.size() > 1){
-            updateCandidate(main_tab, buf, candi_bar);
+            updateCandidate(tabs[ARRAY_MAIN_TAB], buf, candi_bar);
             if(selectCandidate(0, c))
                 buf->clear()->append(c.c_str())->update();
             changeState(STATE_WAIT_CANDIDATE);
@@ -224,10 +225,10 @@ int OVIMArray::initialize(OVDictionary *, OVService*, const char *path){
     char buf[PATH_MAX];
     sprintf(buf, "%sOVIMArray/array30.cin", path);
     murmur("OVIMArray: open cin %s", buf);
-    main_tab = new OVCIN(buf); 
+    tabs[0] = new OVCIN(buf); 
     sprintf(buf, "%sOVIMArray/ArrayShortCode.cin", path);
     murmur("OVIMArray: open cin %s", buf);
-    short_tab = new OVCIN(buf);
+    tabs[1] = new OVCIN(buf);
     return 1;
 }
 
