@@ -54,6 +54,13 @@ public:
     virtual OVInputMethodContext *newContext() { 
         return new OVIMArrayContext(this,main_tab, short_tab); 
     }
+    virtual const char *localizedName(const char *locale){  
+      if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
+          return "OV 行列";
+      else
+          return "OV Array";
+    }
+
 private:
     OVCIN *main_tab, *short_tab;;
 };
