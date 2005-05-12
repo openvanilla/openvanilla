@@ -324,7 +324,7 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate
 			VPUTF16 utfstr[256];
 			int usl=vimCandidatelist.updatecontent(utfstr);
             const char *u8=srv->UTF16ToUTF8(utfstr, usl);
-            textbar->clear()->append(u8)->show();
+            textbar->clear()->append(u8)->update()->show();
             
 			// strange, some applications still processes "candidatable"
 			// punctuation marks itself... we have to "eat" these symbols

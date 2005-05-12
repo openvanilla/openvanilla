@@ -390,6 +390,8 @@ extern "C" VPChar VPToLower (VPChar c)
 #define vpPMFWNBVerticalBar		0x2502
 #define vpPMENDash				0x2013
 #define vpPMEMDash				0x2014
+#define vpPMLeftArticleMark     0x3008
+#define vpPMRightArticleMark    0x3009
 
 #define vpPUNCTUATIONWINDOWKEYSIZE  35
 
@@ -439,7 +441,8 @@ extern "C" int VPFindPunctuationCandidate(VPChar c, VPUTF16 *data)
 			*data++=vpPMLeftBookMark;
 			*data++=vpPMFWLeftBlockBracket;
 			*data++=vpPMFWLeftCurveBracket;
-			len=4;
+			*data++=vpPMLeftArticleMark;
+			len=5;
 			return len;
 		
 		case '}':
@@ -447,7 +450,8 @@ extern "C" int VPFindPunctuationCandidate(VPChar c, VPUTF16 *data)
 			*data++=vpPMRightBookMark;
 			*data++=vpPMFWRightBlockBracket;
 			*data++=vpPMFWRightCurveBracket;
-			len=4;
+			*data++=vpPMRightArticleMark;
+			len=5;
 			return len;
 			
 		case '\"':
