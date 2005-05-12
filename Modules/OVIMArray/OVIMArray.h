@@ -6,18 +6,19 @@
 #include "OVCandidateList.h"
 #include "OVCIN.h"
 
+namespace OV_Array {
+    enum STATE {
+        STATE_WAIT_KEY1 = 0,
+        STATE_WAIT_KEY2,
+        STATE_WAIT_KEY3,
+        STATE_WAIT_CANDIDATE
+    };
 
-enum ARRAY_STATE {
-    STATE_WAIT_KEY1 = 0,
-    STATE_WAIT_KEY2,
-    STATE_WAIT_KEY3,
-    STATE_WAIT_CANDIDATE
-};
-
-enum {
-    ARRAY_MAIN_TAB = 0,
-    ARRAY_SHORT_TAB = 1,
-    ARRAY_SPECIAL_TAB = 2
+    enum {
+        MAIN_TAB = 0,
+        SHORT_TAB = 1,
+        SPECIAL_TAB = 2
+    };
 };
 
 class OVIMArray;
@@ -27,18 +28,18 @@ private:
     OVIMArray* parent;
     OVCIN **tabs;
     ArrayKeySequence keyseq;
-    ARRAY_STATE state;
+    OV_Array::STATE state;
     OVCandidateList candi;
     std::vector<std::string> candidateStringVector;
 public:
     OVIMArrayContext(OVIMArray* p, OVCIN** t)
-        : parent(p), tabs(t), keyseq(t[ARRAY_MAIN_TAB]) { 
-        state = STATE_WAIT_KEY1;
+        : parent(p), tabs(t), keyseq(t[OV_Array::MAIN_TAB]) { 
+        state = OV_Array::STATE_WAIT_KEY1;
     }
     virtual int keyEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
 private:
-    void changeState(ARRAY_STATE s);
-    void changeBackState(ARRAY_STATE s);
+    void changeState(OV_Array::STATE s);
+    void changeBackState(OV_Array::STATE s);
     virtual void updateDisplay(OVBuffer*);
     void dispatchStateHandler(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int WaitKey1(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
