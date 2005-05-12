@@ -30,10 +30,14 @@ private:
     ArrayKeySequence keyseq;
     OV_Array::STATE state;
     OVCandidateList candi;
-    std::vector<std::string> candidateStringVector;
+    std::vector<std::string> candidateStringVector, specialCodeVector;
+
+    //OVBuffer* _buf;
+    //OVCandidate* _candibar;
+    //OVService* _srv;
 public:
     OVIMArrayContext(OVIMArray* p, OVCIN** t)
-        : parent(p), tabs(t), keyseq(t[OV_Array::MAIN_TAB]) { 
+        : parent(p), tabs(t), keyseq(t[OV_Array::MAIN_TAB]) {
         state = OV_Array::STATE_WAIT_KEY1;
     }
     virtual int keyEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
@@ -47,10 +51,12 @@ private:
     int WaitKey3(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int WaitCandidate(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int updateCandidate(OVCIN *tab,OVBuffer *buf, OVCandidate *candibar);
+    void sendAndReset(const char *, OVBuffer* , OVCandidate* , OVService* );
     void clearAll(OVBuffer* buf, OVCandidate* candi_bar);
     void clearCandidate(OVCandidate *candi_bar);
     int selectCandidate(int num, string& out);
     bool isWSeq(char a, char b) const {  return a=='w' && isdigit(b);    }
+    void queryKeyName(const char *keys, std::string& outKeyNames);
 };
 
 class OVIMArray : public OVInputMethod
