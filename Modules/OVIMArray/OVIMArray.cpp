@@ -107,9 +107,11 @@ void OVIMArrayContext::queryKeyName(const char *keys, std::string& outKeyNames){
 
 void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf, 
                                     OVCandidate* candibar, OVService* srv){
-    buf->clear()->append(ch)->send();
+    bool notifySP = false;
     // lookup special code
-    if(tabs[SPECIAL_TAB]->getWordVectorByChar(ch, specialCodeVector)>0){
+    if((parent->isAutoSP() || parent->isForceSP()) &&
+       tabs[SPECIAL_TAB]->getWordVectorByChar(ch, specialCodeVector)>0)
+    {
         int splen = specialCodeVector[0].length();
         const char *spcode = specialCodeVector[0].c_str();
         if( !(splen == keyseq.length() && 
@@ -119,8 +121,13 @@ void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf,
             queryKeyName(specialCodeVector[0].c_str(), keynames);
             sprintf(buf, "%s: %s", ch, keynames.c_str());
             srv->notify(buf);
+            notifySP = true;
         }
     }
+    if( !(parent->isForceSP() && notifySP) )
+        buf->clear()->append(ch)->send();
+    else
+        srv->beep();
     clearAll(buf, candibar);
     changeState(STATE_WAIT_KEY1);
 }
@@ -245,7 +252,7 @@ void OVIMArrayContext::changeState(STATE s){
     state = s;  
 }
 
-int OVIMArray::initialize(OVDictionary *, OVService*, const char *path){
+int OVIMArray::initialize(OVDictionary *conf, OVService*, const char *path){
     char buf[PATH_MAX];
     char *cinfiles[] = { 
         "%sOVIMArray/array30.cin",  
@@ -257,6 +264,19 @@ int OVIMArray::initialize(OVDictionary *, OVService*, const char *path){
         murmur("OVIMArray: open cin %s", buf);
         tabs[i] = new OVCIN(buf); 
     }
+    updateConfig(conf);
+    return 1;
+}
+
+int OVIMArray::updateConfig(OVDictionary *conf){
+    const char *AutoSP = "AutoQuerySpecialCode";
+    const char *ForceSP = "ForceSpecialCode";
+
+    if( !conf->keyExist(AutoSP) ) conf->setInteger(AutoSP, 1);
+    if( !conf->keyExist(ForceSP) ) conf->setInteger(ForceSP, 0);
+
+    cfgAutoSP = conf->getInteger(AutoSP);
+    cfgForceSP = conf->getInteger(ForceSP);
 
     return 1;
 }

@@ -61,21 +61,33 @@ private:
 
 class OVIMArray : public OVInputMethod
 {
+private:
+    char cname[128], ename[128];
+    OVCIN *tabs[3];    // main, short-code, special-code
+    int cfgAutoSP, cfgForceSP;
+
 public:
     virtual int initialize(OVDictionary *, OVService*, const char *mp);
     virtual const char* identifier() { return "OVIMArray"; }
     virtual OVInputMethodContext *newContext() { 
         return new OVIMArrayContext(this,tabs); 
     }
+    int updateConfig(OVDictionary *conf);
     virtual const char *localizedName(const char *locale){  
-        if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
-            return "OV 行列";
-        else
-            return "OV Array";
+        if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN")){
+            strcpy(cname,"OV 行列");
+            //if( isForceSP() )   strcat(cname, "(快)");
+            return cname;
+        }
+        else{
+            strcpy(ename,"OV Array");
+            //if( isForceSP() )   strcat(ename, "(Q)");
+            return ename;
+        }
     }
+    virtual int isAutoSP() const    {   return cfgAutoSP;   }
+    virtual int isForceSP() const   {   return cfgForceSP;   }
 
-private:
-    OVCIN *tabs[3];    // main, short-code, special-code
 };
 
 #endif
