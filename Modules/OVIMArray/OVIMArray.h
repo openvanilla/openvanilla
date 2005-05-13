@@ -5,6 +5,7 @@
 #include "ArrayKeySequence.h"
 #include "OVCandidateList.h"
 #include "OVCIN.h"
+#include <cstring>
 
 namespace OV_Array {
     enum STATE {
@@ -56,6 +57,9 @@ private:
     void clearCandidate(OVCandidate *candi_bar);
     int selectCandidate(int num, string& out);
     bool isWSeq(char a, char b) const {  return a=='w' && isdigit(b);    }
+    bool isForceSPSeq() {
+        return keyseq.length() == 4 && !memcmp(keyseq.getSeq(),",,sp",4);
+    }
     void queryKeyName(const char *keys, std::string& outKeyNames);
 };
 
@@ -87,7 +91,9 @@ public:
     }
     virtual int isAutoSP() const    {   return cfgAutoSP;   }
     virtual int isForceSP() const   {   return cfgForceSP;   }
-
+    virtual void setForceSP(bool value) { 
+        cfgForceSP = value; 
+    }
 };
 
 #endif

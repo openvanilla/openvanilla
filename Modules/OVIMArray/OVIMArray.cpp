@@ -108,6 +108,7 @@ void OVIMArrayContext::queryKeyName(const char *keys, std::string& outKeyNames){
 void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf, 
                                     OVCandidate* candibar, OVService* srv){
     bool notifySP = false;
+    
     // lookup special code
     if((parent->isAutoSP() || parent->isForceSP()) &&
        tabs[SPECIAL_TAB]->getWordVectorByChar(ch, specialCodeVector)>0)
@@ -124,10 +125,15 @@ void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf,
             notifySP = true;
         }
     }
-    if( !(parent->isForceSP() && notifySP) )
-        buf->clear()->append(ch)->send();
-    else
-        srv->beep();
+
+    if( isForceSPSeq() )
+        parent->setForceSP( !parent->isForceSP() );
+    else{
+        if( !(parent->isForceSP() && notifySP) )
+            buf->clear()->append(ch)->send();
+        else
+            srv->beep();
+    }
     clearAll(buf, candibar);
     changeState(STATE_WAIT_KEY1);
 }
