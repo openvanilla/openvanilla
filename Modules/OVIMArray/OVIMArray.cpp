@@ -1,4 +1,5 @@
 #define OV_DEBUG
+#include "ctype.h"
 #include"OVIMArray.h"
 #include<OpenVanilla/OVLibrary.h>
 #include<OpenVanilla/OVUtility.h>

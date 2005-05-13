@@ -48,7 +48,6 @@ void CVLoader::setActiveContext(CVContext *c) {
     while (m=[e nextObject]) {
         if (![m usable]) continue;
         NSString *mid=[m identifier];
-        murmur("trying to update module: %s", [mid UTF8String]);
         NSMutableDictionary *mdict=[cfgdict valueForKey:mid default:[[NSMutableDictionary new] autorelease]];
         CVDictionary cvd(mdict);
         OVModule *om=[m module];
@@ -60,8 +59,6 @@ void CVLoader::setActiveContext(CVContext *c) {
 }
 
 int CVLoader::init(MenuRef m) {
-    murmur("OpenVanilla Loader initializing");
-    
     activecontext=NULL;
 
     NSBundle *bundle=[NSBundle bundleWithIdentifier:@ TSBUNDLEID];
@@ -89,10 +86,9 @@ int CVLoader::init(MenuRef m) {
     [cp setBecomesKeyOnlyIfNeeded:YES];
     [np setBecomesKeyOnlyIfNeeded:YES];
 
-    srv=new CVService(CVLC_USERSPACE_PATH, ntfyib);
+    srv=new CVService(CVGetUserSpacePath(), ntfyib);
     candi=new CVCandidate(candiib);
-    cfg=[[CVConfig alloc] initWithFile:CVLC_USERCONFIG defaultData:nil];
-    
+    cfg=[[CVConfig alloc] initWithFile:CVGetUserConfigFilename() defaultData:nil];
     modarray=[NSMutableArray new];
     imarray=[NSMutableArray new];
     ofarray=[NSMutableArray new];
@@ -179,17 +175,14 @@ void CVLoader::initializeModules(NSArray *src, NSMutableArray* dst, CVSmartMenuG
     CVModuleWrapper *m;
     while (m=[e nextObject]) {
         NSString *mid=[m identifier];
-        murmur("trying to init module: %s", [mid UTF8String]);
         NSMutableDictionary *mdict=[cfgdict valueForKey:mid default:[[NSMutableDictionary new] autorelease]];
         CVDictionary cvd(mdict);
         
         if ([m initializeWithConfig:&cvd service:srv]) {
-            murmur("init successful");
             [dst addObject:m];      // added to our target array
         }
         else {
             // module init failed! cross out from our menu!
-            murmur("init failed!");
             fallout->uncheckItem(mid);
             fallout->disableItem(mid);
         }
@@ -213,9 +206,6 @@ void CVLoader::pourModuleArrayIntoMenu(NSArray *a, CVSmartMenuGroup *g) {
 
 void CVLoader::menuHandler(unsigned int cmd) {
     if (immenugroup->clickItem(cmd)) {
-        murmur("im menu grop clicked, checked items=");
-        NSArray *ia=immenugroup->getCheckedItems();
-        murmur([[ia description] UTF8String]);
         syncMenuAndConfig();
         if (activecontext) {
             activecontext->syncConfig();
@@ -224,10 +214,6 @@ void CVLoader::menuHandler(unsigned int cmd) {
     }
 
     if (ofmenugroup->clickItem(cmd)) {
-        murmur("of menu grop clicked, checked items=");
-        NSArray *ia=ofmenugroup->getCheckedItems();
-        murmur([[ia description] UTF8String]);
-        murmur("syncing menu and config");
         syncMenuAndConfig();
         return;
     }
@@ -249,7 +235,6 @@ CVContext *CVLoader::newContext() {
 }
 
 CVContext::CVContext(CVLoader *p) {
-    murmur ("context created");
     loader=p;
     buf=new CVBuffer(NULL, loader->ofarray, loader->srv);
     candistate=NULL;
@@ -259,13 +244,11 @@ CVContext::CVContext(CVLoader *p) {
 }
 
 CVContext::~CVContext() {
-    murmur ("context deleted");
     delete buf;
     [contexts release];
 }
 
 void CVContext::activate(TSComposingBuffer *b) {
-    murmur ("context activated");
     buf->setComposingBuffer(b);
     loader->setActiveContext(this);
     repositionInfoBoxes();
@@ -302,8 +285,6 @@ void CVContext::activate(TSComposingBuffer *b) {
 }
 
 void CVContext::deactivate() {
-    murmur("context deactivate");
-
     // if the buf is not empty, it means the user just switches away from the
     // current IM temporarily
     if (!buf->isEmpty())  {
@@ -326,7 +307,6 @@ void CVContext::deactivate() {
 }
 
 void CVContext::fix() {
-    murmur("context session fix, clear all IM context content");
     clearAll();
 }
 
@@ -368,9 +348,9 @@ void CVContext::clearAll() {
 }
 
 void CVContext::syncConfig(int forced) {
-    if (forced) murmur("CVContext: forced update");
+    // if (forced) murmur("CVContext: forced update");
     CVTimeTag loaderst=[loader->cfg timeStamp];
-    if (!(stamp==loaderst)) murmur("config change: update");
+    // if (!(stamp==loaderst)) murmur("config change: update");
     
     if (forced || !(stamp==loaderst)) {
         // we have to sync config and switch IM
@@ -383,15 +363,14 @@ void CVContext::syncConfig(int forced) {
             if (c) c->end();
         }        
         
-        murmur ("reloading contexts array, delete all context objects");
+//      murmur ("reloading contexts array, delete all context objects");
         [contexts removeAllObjects];
-        NSLog([loader->imarray description]);
         
         e=[loader->imarray objectEnumerator];
         CVModuleWrapper *mw;
         while (mw=[e nextObject]) {
             OVInputMethod *m=(OVInputMethod*)[mw module];
-            murmur ("creating context for IM %s", m->identifier());
+//          murmur ("creating context for IM %s", m->identifier());
             OVInputMethodContext *c=m->newContext();
             c->start(buf, loader->candi, loader->srv);
             CVContextWrapper *cw=[[CVContextWrapper alloc] initWithContext:c];
@@ -405,12 +384,9 @@ void CVContext::syncConfig(int forced) {
 
 void CVContext::showPrimaryIM() {
     NSString *pim=[loader->loaderdict valueForKey:@"primaryInputMethod"];
-    
-    murmur("showPrimaryIM debug: %s", loader->imarray ? "imarray exists" : "imarray nil");
     int c=[loader->imarray count];
     if (!c) return;
-
-    for (int i=0; i<c; i++) {    
+    for (int i=0; i<c; i++) { 
         CVModuleWrapper *mw=[loader->imarray objectAtIndex:i];
         if (!mw) continue;
         if ([[mw identifier] isEqualToString:pim]) {

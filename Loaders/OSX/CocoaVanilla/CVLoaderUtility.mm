@@ -19,7 +19,7 @@ NSString *CVGetRealLoadedPath(NSString *libname);
 NSArray *CVMilkModulesFromLibrary(NSString *libname, OVLoadedLibrary *lib, 
     NSMutableDictionary *namedict);    
 
-NSArray* CVLoadEverything(NSArray *paths, OVService *srv)
+NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *)
 {
     const char *func="CVLoadEveryThing";
     
@@ -95,7 +95,7 @@ NSArray *CVGetModulesByType(NSArray *modlist, NSString *type)
 OVLoadedLibrary *CVLoadLibraryFromBundle(NSString *p)
 {
     const char *func="CVLoadLibraryFromOSXBundle";
-    murmur("%s: loading library (OS X bundle fashion) %s", func, [p UTF8String]);
+    // murmur("%s: loading library (OS X bundle fashion) %s", func, [p UTF8String]);
     
     NSURL *url=[NSURL fileURLWithPath: [p stringByExpandingTildeInPath]];
     if (!url) return NULL;
@@ -137,7 +137,7 @@ OVLoadedLibrary *CVLoadLibraryFromBundle(NSString *p)
 OVLoadedLibrary *CVLoadLibraryFromDylib(NSString *p)
 {
     const char *func="CVLoadLibraryFromDylib";
-    murmur("%s: loading library (.dylib fashion) %s", func, [p UTF8String]);
+    // murmur("%s: loading library (.dylib fashion) %s", func, [p UTF8String]);
     
     void *libh=dlopen([[p stringByExpandingTildeInPath] UTF8String], RTLD_LAZY);
     if (!libh)
@@ -196,13 +196,12 @@ NSArray *CVMilkModulesFromLibrary(NSString *libname, OVLoadedLibrary *lib,
     const char *func="CVMilkModulesFromLibrary";
     NSMutableArray *a=[[NSMutableArray new] autorelease];
     
-    NSString *shortName=[libname lastPathComponent];
+    // NSString *shortName=[libname lastPathComponent];
     NSString *realPath=CVGetRealLoadedPath(libname);
 
     for(int idx=0; OVModule *m=lib->getModule(idx); idx++)
     {
-        murmur("%s: loading module idx %d (module id=%s) from library %s", 
-            func, idx, m->identifier(), [shortName UTF8String]);
+        // murmur("%s: loading module idx %d (module id=%s) from library %s", func, idx, m->identifier(), [shortName UTF8String]);
             
         NSString *i=[NSString stringWithUTF8String:m->identifier()];
         if ([namedict objectForKey: i]) {

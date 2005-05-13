@@ -52,9 +52,9 @@
 }
 -(void)dealloc {
     if (cntx) {
-        fprintf (stderr, "context deleted!\n");
         delete cntx;
     }
+	[super dealloc];
 }
 -(OVInputMethodContext*)context {
     return cntx;

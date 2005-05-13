@@ -27,8 +27,6 @@ NSMutableDictionary *CVReadPropertyList(NSString *filename) {
             format:&fmt errorDescription:&errMsg];
         if (p) {
             if ([p isKindOfClass: [NSMutableDictionary class]]) {
-                fprintf(stderr, "data read! content=%s\n",
-                    [[p description] UTF8String]);
                 return p;
             }
         }

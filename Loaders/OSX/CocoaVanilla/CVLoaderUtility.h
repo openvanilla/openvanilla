@@ -10,7 +10,7 @@
 
 // returns an array of all loaded modules, which are milked from loaded libraries,
 // which are in turn loaded from the paths indicated in the paths array
-NSArray* CVLoadEverything(NSArray *paths, OVService *srv);
+NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *exclude=nil);
 
 CVModuleWrapper *CVFindModule(NSArray *modlist, NSString *identifier, NSString *type=nil);
 NSArray *CVFindModules(NSArray *modlist, NSArray *idlist, NSString *type=nil);
