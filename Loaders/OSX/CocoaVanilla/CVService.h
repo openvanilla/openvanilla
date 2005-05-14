@@ -3,11 +3,10 @@
 #define __CVSerivce_h
 
 #include <OpenVanilla/OpenVanilla.h>
-#include "CVInfoBox.h"
 
 class CVService : public OVService {
 public:
-    CVService(NSString *usrpath, CVInfoBox *b);
+    CVService(NSString *usrpath, id displayserver);
     virtual ~CVService();
     virtual void beep();
     virtual void notify(const char *msg);
@@ -29,7 +28,8 @@ protected:
     
     NSString *lctag;
     NSString *userspace;
-    CVInfoBox *infobox;
+	id dspsrvr;
+	Point notifypos;
 };
 
 #endif

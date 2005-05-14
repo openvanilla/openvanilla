@@ -7,7 +7,10 @@
 - (void)setConfig:(NSDictionary*)cfg;
 - (void)candidateShow;
 - (void)candidateHide;
-- (void)candidateUpdate:(NSString*)s position:(Point)p;
+- (void)candidateUpdate:(bycopy NSString*)s position:(Point)p;
+- (void)notifyMessage:(bycopy NSString*)s position:(Point)p;
+- (void)notifyClose;
+- (void)notifyFade;
 @end
 
 #endif

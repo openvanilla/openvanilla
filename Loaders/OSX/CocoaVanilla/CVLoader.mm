@@ -43,24 +43,24 @@ int CVLoader::init(MenuRef m) {
     
 	connectDisplayServer();
 	
-    CVInfoBox *candiib, *ntfyib;        
+/*    CVInfoBox *candiib, *ntfyib;        
     candiib=[[CVInfoBox alloc] initWithWindowNibName:@"CVInfoBox"];
     ntfyib=[[CVInfoBox alloc] initWithWindowNibName:@"CVInfoBox"];
     if (!candiib || !ntfyib) {
         murmur ("CVLoader: fatal error, failed CVInfoBox.nib loading");
         return 0;
-    }
+    } */
     
     // wakes the two controllers up from .nib file
-    NSPanel *cp=(NSPanel*)[candiib window];
+/*    NSPanel *cp=(NSPanel*)[candiib window];
     NSPanel *np=(NSPanel*)[ntfyib window];
 	[candiib setName:@"candi"];
 	[ntfyib setName:@"notify"];
     [cp setFloatingPanel:YES];
     [np setFloatingPanel:YES];
     [cp setBecomesKeyOnlyIfNeeded:YES];
-    [np setBecomesKeyOnlyIfNeeded:YES];
-    srv=new CVService(CVGetUserSpacePath(), ntfyib);
+    [np setBecomesKeyOnlyIfNeeded:YES]; */
+    srv=new CVService(CVGetUserSpacePath(), dspsrvr);
     candi=new CVCandidate(dspsrvr);
     cfg=[[CVConfig alloc] initWithFile:CVGetUserConfigFilename() defaultData:nil];
     modarray=[NSMutableArray new];
@@ -340,9 +340,10 @@ void CVContext::fix() {
 
 int CVContext::event(char charcode, int modifiers) {
     CVKeyCode key(charcode, modifiers);
-    
+	
     loader->srv->closeNotification();
     repositionInfoBoxes();
+
     NSEnumerator *e=[contexts objectEnumerator];
     CVContextWrapper *w;
     while (w=[e nextObject]) {

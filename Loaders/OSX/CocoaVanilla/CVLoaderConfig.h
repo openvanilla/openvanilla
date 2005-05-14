@@ -9,7 +9,7 @@
 #define CVLC_USERSPACE_PATH		@"~/Library/OpenVanilla/0.7.0/UserSpace/"
 #define CVLC_USERCONFIG_PATH	@"~/Library/OpenVanilla/0.7.0/Preferences/"
 #define CVLC_USERCONFIG_FILE	@"~/Library/OpenVanilla/0.7.0/Preferences/org.openvanilla.070.plist"
-#define CVLC_DISPLAYSERVER		@"/Users/lukhnos/logiciels/openvanilla/Loaders/OSX/build/OVDisplayServer.app"
+#define CVLC_DISPLAYSERVER		@"/Library/OpenVanilla/0.7.0/OVLoader/OVDisplayServer.app"
 
 NSArray *CVGetModuleLoadPath();
 NSString *CVGetUserSpacePath();

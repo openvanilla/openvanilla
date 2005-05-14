@@ -1,6 +1,7 @@
 // CVService.mm
 #include <Carbon/Carbon.h>
 #include "CVService.h"
+#import "OVDisplayServer.h"
 
 CFStringEncoding CVGetCFEncoding(const char *encoding);
 NSString *CVGetAppBundleLocale();
@@ -28,7 +29,7 @@ NSString *CVGetAppBundleLocale() {
     return l;
 }
 
-CVService::CVService(NSString *usrpath, CVInfoBox *ib) {
+CVService::CVService(NSString *usrpath, id displayserver) {
     u8buf=NULL;
     u16buf=NULL;
     userbuf=NULL;
@@ -36,7 +37,8 @@ CVService::CVService(NSString *usrpath, CVInfoBox *ib) {
     lctag=CVGetAppBundleLocale();
     [lctag retain];
     
-    infobox=ib;
+	dspsrvr=displayserver;
+	notifypos=(Point){0, 0};
     userspace=[usrpath stringByStandardizingPath];
     [userspace retain];
 }
@@ -54,22 +56,19 @@ void CVService::beep() {
 }
 
 void CVService::notify(const char* msg) {
-    [infobox clear];
-    [infobox append:[NSString stringWithUTF8String:msg]];
-    [infobox update];
-    [infobox show];
+	[dspsrvr notifyMessage:[NSString stringWithUTF8String:msg] position:notifypos];
 }
 
 void CVService::setNotificationPosition(Point p) {
-    [infobox setPosition:p];
+	notifypos=p;
 }
 
 void CVService::closeNotification() {
-    [infobox hide];
+	[dspsrvr notifyClose];
 }
 
 void CVService::fadeNotification() {
-    [infobox fade];
+	[dspsrvr notifyFade];
 }
 
 const char *CVService::locale() {

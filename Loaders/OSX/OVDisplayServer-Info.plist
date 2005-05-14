@@ -7,20 +7,20 @@
 	<key>CFBundleExecutable</key>
 	<string>OVDisplayServer</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.OVDisplayServer</string>
+	<string>org.openvanilla.OVDisplayServer</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>0.7</string>
+	<key>LSBackgroundOnly</key>
+	<string>1</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>NSUIElement</key>
-	<string>0</string>
 </dict>
 </plist>
