@@ -41,7 +41,13 @@ Point CVFixWindowPosition(Point pp, int width, int height);
     fadetimer=[NSTimer scheduledTimerWithTimeInterval:CVIB_FADEWAIT target:self selector:@selector(fadeStart) userInfo:nil repeats:NO];
 }
 - (void)aboutDialog {
-    [aboutdialog orderFront:self];
+    // [aboutdialog orderFront:self];
+/* [aboutdialog makeKeyAndOrderFront:self];
+    [aboutdialog makeMainWindow];
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+    [[NSApplication sharedApplication] arrangeInFront:self];
+*/
+    [[NSApplication sharedApplication] orderFrontStandardAboutPanel:self];
 }
 - (void)dealloc {
     [defaultbackground release];
@@ -55,12 +61,10 @@ Point CVFixWindowPosition(Point pp, int width, int height);
     if ([c registerName:@"OVDisplayServer"]) NSLog(@"OVDisplayServer registered");
 	else NSLog(@"OVDisplayServer registration failed");
 
-
 	NSRect fr=NSMakeRect(0, 0, 100, 20);
 	candion=NO;
 	candi=[self createWindow:fr];
     defaultbackground=[[candi backgroundColor] retain];
-    fprintf(stderr, "r=%d\n", [defaultbackground retainCount]);
     canditext=[self createTextField:fr];
     [[candi contentView] addSubview:canditext];
 	noti=[self createWindow:fr];

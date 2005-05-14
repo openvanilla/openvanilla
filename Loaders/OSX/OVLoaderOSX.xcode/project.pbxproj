@@ -1000,6 +1000,204 @@
 			settings = {
 			};
 		};
+		6AE4A45D083677B300D6CCD3 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AE4A4A7083678A600D6CCD3,
+				6AE4A4AD083678AC00D6CCD3,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AE4A45E083677B300D6CCD3 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AE4A48A0836787A00D6CCD3,
+				6AE4A4BC08367A2900D6CCD3,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AE4A45F083677B300D6CCD3 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AE4A460083677B300D6CCD3 = {
+			buildPhases = (
+				6AE4A45D083677B300D6CCD3,
+				6AE4A45E083677B300D6CCD3,
+				6AE4A45F083677B300D6CCD3,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVPreferences-Info.plist";
+				INSTALL_PATH = /Library/OpenVanilla/0.7.0/OVLoader/;
+				OPTIMIZATION_CFLAGS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = OVPreferences;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = OVPreferences;
+			productName = OVPreferences;
+			productReference = 6AE4A461083677B300D6CCD3;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OVPreferences</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.OVPreferences</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.application";
+		};
+		6AE4A461083677B300D6CCD3 = {
+			explicitFileType = wrapper.application;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			name = OVPreferences.app;
+			path = build/OVPreferences.app;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AE4A463083677B400D6CCD3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			path = "OVPreferences-Info.plist";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AE4A46C083677E500D6CCD3 = {
+			children = (
+				6AE4A4870836787A00D6CCD3,
+				6AE4A4A6083678A600D6CCD3,
+				6AE4A4AC083678AC00D6CCD3,
+				6AE4A4BA08367A2900D6CCD3,
+				6AE4A4BB08367A2900D6CCD3,
+			);
+			isa = PBXGroup;
+			name = OVPreferences;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AE4A4860836787A00D6CCD3 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = English;
+			path = OVPreferences/English.lproj/InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AE4A4870836787A00D6CCD3 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			name = main.m;
+			path = OVPreferences/main.m;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AE4A4880836787A00D6CCD3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = English;
+			path = OVPreferences/English.lproj/MainMenu.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AE4A48A0836787A00D6CCD3 = {
+			fileRef = 6AE4A4870836787A00D6CCD3;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AE4A4A6083678A600D6CCD3 = {
+			children = (
+				6AE4A4860836787A00D6CCD3,
+			);
+			isa = PBXVariantGroup;
+			name = InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AE4A4A7083678A600D6CCD3 = {
+			fileRef = 6AE4A4A6083678A600D6CCD3;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AE4A4AC083678AC00D6CCD3 = {
+			children = (
+				6AE4A4880836787A00D6CCD3,
+			);
+			isa = PBXVariantGroup;
+			name = MainMenu.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AE4A4AD083678AC00D6CCD3 = {
+			fileRef = 6AE4A4AC083678AC00D6CCD3;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AE4A4BA08367A2900D6CCD3 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = OVPrefDelegate.h;
+			path = OVPreferences/OVPrefDelegate.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AE4A4BB08367A2900D6CCD3 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			name = OVPrefDelegate.m;
+			path = OVPreferences/OVPrefDelegate.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AE4A4BC08367A2900D6CCD3 = {
+			fileRef = 6AE4A4BB08367A2900D6CCD3;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		6AF10FF20814BE3400B49D06 = {
 			children = (
 				6ADD6E9108366E2000CB4339,
@@ -1007,11 +1205,13 @@
 				6AF1100C0814BEE600B49D06,
 				6AF110060814BEB800B49D06,
 				6AD76AB80835845000164A51,
+				6AE4A46C083677E500D6CCD3,
 				6AF110040814BEA000B49D06,
 				6AF110070814BEC100B49D06,
 				6AF110050814BEB000B49D06,
 				6A975EB10814C46600F40859,
 				6AF10FFF0814BE7A00B49D06,
+				6AE4A463083677B400D6CCD3,
 			);
 			isa = PBXGroup;
 			refType = 4;
@@ -1047,6 +1247,7 @@
 				6A975E9F0814C41600F40859,
 				6AF10FFD0814BE7A00B49D06,
 				6AD76AEE08358A5B00164A51,
+				6AE4A460083677B300D6CCD3,
 			);
 		};
 		6AF10FFA0814BE7A00B49D06 = {
@@ -1140,6 +1341,7 @@
 				6AF10FFE0814BE7A00B49D06,
 				6A975EA00814C41600F40859,
 				6AD76AEF08358A5B00164A51,
+				6AE4A461083677B300D6CCD3,
 			);
 			isa = PBXGroup;
 			name = Products;

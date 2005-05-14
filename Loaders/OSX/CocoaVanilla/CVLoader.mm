@@ -154,7 +154,8 @@ void CVLoader::menuHandler(unsigned int cmd) {
 			switchToLastPrimaryIM();
 			return;
         case CVLMI_ABOUT:
-            [dspsrvr aboutDialog];
+            // the effect wasn't very satisfactory; we should launch an About application for this
+            // [dspsrvr aboutDialog];
             return;
         case CVLMI_PREFERENCES:
             murmur ("preferences menu item clicked");
