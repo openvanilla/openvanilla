@@ -3,13 +3,14 @@
 #include "CVWrappers.h"
 
 @implementation CVModuleWrapper
-- (id)initWithModule:(OVModule*)m loadedPath:(NSString*)p {
+- (id)initWithModule:(OVModule*)m loadedPath:(NSString*)p fromLibrary:(NSString*)l {
     self=[super init];
     if (self) {
         inited=NO;
         canuse=NO;
         mod=m;
         loadedpath=[[NSString alloc] initWithString:p];
+        fromlibrary=[[NSString alloc] initWithString:l];
     }
     return self;
 }
@@ -26,6 +27,9 @@
 }
 - (NSString*)moduleType {
     return mod ? [NSString stringWithUTF8String:mod->moduleType()] : @"";
+}
+- (NSString*)fromLibrary {
+    return fromlibrary;
 }
 - (NSString*)identifier {
     return mod ? [NSString stringWithUTF8String:mod->identifier()] : @"";

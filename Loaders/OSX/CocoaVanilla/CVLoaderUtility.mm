@@ -3,6 +3,8 @@
 #define OV_DEBUG
 #include "CVLoaderUtility.h"
 #include <dlfcn.h>
+#include <unistd.h>
+#include <sys/stat.h>
 #include <OpenVanilla/OVUtility.h>
 
 OVLoadedLibrary *CVLoadLibraryFromBundle(NSString *p);
@@ -21,7 +23,7 @@ BOOL CVStringIsInArray(NSString *s, NSArray *a);
 NSString *CVGetRealLoadedPath(NSString *libname);
 NSArray *CVMilkModulesFromLibrary(NSString *libname, OVLoadedLibrary *lib, NSMutableDictionary *namedict, NSMutableArray *history);
 
-NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *libexcludelist, NSArray *modexcludelist, NSMutableDictionary *history)
+NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *libexcludelist, NSArray *modexcludelist, NSMutableDictionary *history, NSString *atomic)
 {
     const char *func="CVLoadEveryThing";
     
@@ -53,6 +55,7 @@ NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *libexcludelis
             continue;
         }
 
+        CVAtomicInitStart(atomic, i);
         OVLoadedLibrary *l;
         NSString *rlp=CVGetRealLoadedPath(i);
         if ([i hasSuffix: @".dylib"]) l=CVLoadLibraryFromDylib(i); else l=CVLoadLibraryFromBundle(i);    
@@ -66,10 +69,26 @@ NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *libexcludelis
         NSMutableArray *ha=[[NSMutableArray new] autorelease];
         [modList addObjectsFromArray: CVMilkModulesFromLibrary(i, l, dict, ha)];
         [histdict setValue:ha forKey:i];
+        CVAtomicInitEnd(atomic);
     }
         
     if (history) [history addEntriesFromDictionary:histdict];
     return modList;
+}
+
+void CVAtomicInitStart(NSString *f, NSString *libname) {
+    if (!f) return;
+    NSError *err;
+    // NSLog(@"writing atomicinit file %@ for lib %@", f, libname);
+    [libname writeToFile:f atomically:NO encoding:NSUTF8StringEncoding error:&err];
+}
+
+void CVAtomicInitEnd(NSString *f) {
+    if (!f) return;
+    if (CVIsPathExist(f)) {
+        // NSLog(@"unlinking existing atomicinit file: %@", f);
+        unlink([f UTF8String]);
+    }
 }
 
 BOOL CVStringIsInArray(NSString *s, NSArray *a) {
@@ -232,10 +251,15 @@ NSArray *CVMilkModulesFromLibrary(NSString *libname, OVLoadedLibrary *lib, NSMut
         }
         else {
             [namedict setObject: @"1" forKey: i];
-            [a addObject: [[[CVModuleWrapper alloc] initWithModule:m loadedPath:realPath] autorelease]];
+            [a addObject: [[[CVModuleWrapper alloc] initWithModule:m loadedPath:realPath fromLibrary:libname] autorelease]];
             if (history) [history addObject:i];
         }
     }
     return a;
 }
 
+BOOL CVIsPathExist(NSString *p) {
+    struct stat st;
+    if (stat([[p stringByStandardizingPath] UTF8String], &st)) return NO;
+    return YES;
+}

@@ -58,14 +58,17 @@ int CVLoader::init(MenuRef m) {
     // load configuration
     loaderdict=[[cfg dictionary] valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
     
+    // check if our last atomic init failed
+    if (checkIfLastAtomicInitFailed()) return 0;
+    
     // get library-exclude list and module-exclude list
     NSArray *libexclude=[loaderdict valueForKey:@"excludeLibraryList" default:[[NSArray new] autorelease]];
     NSArray *modexclude=[loaderdict valueForKey:@"excludeModuleList" default:[[NSArray new] autorelease]];
     NSMutableDictionary *loadhistory=[[NSMutableDictionary new] autorelease];
     
     // load everything!
-    [modarray addObjectsFromArray: CVLoadEverything(CVGetModuleLoadPath(), srv, libexclude, modexclude, loadhistory)];
-    NSLog([loadhistory description]);
+    [modarray addObjectsFromArray: CVLoadEverything(CVGetModuleLoadPath(), srv, libexclude, modexclude, loadhistory, CVGetAtomicInitLockFilename())];
+    // NSLog([loadhistory description]);
 	
     // create menu groups and check all menu items, then sync config
 	menudict=nil;
@@ -84,7 +87,7 @@ void CVLoader::refreshMenu() {
 	}
 	else {
 		if (![menudict isEqualToDictionary:cfgmenukey]) {
-			NSLog(@"OVMenuManager config node changed, rebuilding the menu");
+			// NSLog(@"OVMenuManager config node changed, rebuilding the menu");
 			[menudict removeAllObjects];
 			[menudict addEntriesFromDictionary:cfgmenukey];
 			createMenuGroups();
@@ -173,11 +176,11 @@ id CVLoader::connectDisplayServer() {
 	
 	dspsrvr=[[NSConnection rootProxyForConnectionWithRegisteredName:@"OVDisplayServer" host:nil] retain];
 	if (!dspsrvr) {
-		system([[NSString stringWithFormat:@"open %@", CVLC_DISPLAYSERVER] UTF8String]);
+		system([[NSString stringWithFormat:@"connecting to OVDisplayServer, open %@", CVLC_DISPLAYSERVER] UTF8String]);
 		
 		// a total timeout of 1 sec
 		for (int retry=0; retry<20; retry++) {
-			NSLog([NSString stringWithFormat:@"retry %d", retry]);
+			NSLog([NSString stringWithFormat:@"connecting to OVDisplayServer, retry %d", retry]);
 			usleep(50000);		// wait for the server to be brought up (0.05 sec)
 			dspsrvr=[[NSConnection rootProxyForConnectionWithRegisteredName:@"OVDisplayServer" host:nil] retain];
 			if (dspsrvr) break;
@@ -256,7 +259,7 @@ void CVLoader::syncMenuAndConfig() {
 	// and get OVDisplayServer settings too
 	NSDictionary *dsrvdict=[[cfg dictionary] valueForKey:@"OVDisplayServer" default:CVGetDisplayServerConfig()];
 	if (dspsrvr) {
-		NSLog(@"syncing config with display server");
+		// NSLog(@"syncing config with display server");
 		[dspsrvr setConfig:dsrvdict];
 	}
 	
@@ -276,6 +279,8 @@ void CVLoader::initializeModules(NSArray *src, NSMutableArray* dst, CVSmartMenuG
         NSMutableDictionary *mdict=[cfgdict valueForKey:mid default:[[NSMutableDictionary new] autorelease]];
         CVDictionary cvd(mdict);
         
+        NSString *atomic=CVGetAtomicInitLockFilename();
+        CVAtomicInitStart(atomic, [m fromLibrary]);
         if ([m initializeWithConfig:&cvd service:srv]) {
             [dst addObject:m];      // added to our target array
         }
@@ -284,6 +289,7 @@ void CVLoader::initializeModules(NSArray *src, NSMutableArray* dst, CVSmartMenuG
             fallout->uncheckItem(mid);
             fallout->disableItem(mid);
         }
+        CVAtomicInitEnd(atomic);
     }
 }
 
@@ -313,10 +319,10 @@ void CVLoader::switchToLastPrimaryIM() {
     NSString *pIM=[NSString stringWithString: [loaderdict valueForKey:@"primaryInputMethod" default:@""]];
 	NSString *lIM=[NSString stringWithString: [loaderdict valueForKey:@"lastPrimaryInputMethod" default:@""]];
 	if ([pIM isEqualToString:lIM]) {
-		NSLog(@"lastPIM=PIM, return");
+		// NSLog(@"lastPIM=PIM, return");
 		return;
 	}
-	NSLog(@"lastPIM!=PIM, switching");
+	// NSLog(@"lastPIM!=PIM, switching");
 	[loaderdict setValue:lIM forKey:@"primaryInputMethod"];
 	[loaderdict setValue:pIM forKey:@"lastPrimaryInputMethod"];
 	checkMenuItems();
@@ -324,6 +330,21 @@ void CVLoader::switchToLastPrimaryIM() {
 	if (activecontext) {
 		activecontext->syncConfig();
 	}
+}
+
+BOOL CVLoader::checkIfLastAtomicInitFailed() {
+    NSString *atomic=CVGetAtomicInitLockFilename();
+    if (!CVIsPathExist(atomic)) return NO;    
+    NSError *err;
+    NSString *libname=[NSString stringWithContentsOfFile:atomic encoding:NSUTF8StringEncoding error:&err];
+    NSString *datestr=[[NSDate date] descriptionWithCalendarFormat:nil timeZone:nil locale:nil];
+    NSString *msg=[NSString stringWithFormat:MSG(@"AtomicInitFailed"), libname, atomic, datestr];
+    
+    NSString *msgfile=CVGetAtomicInitErrorMessageFilename();
+    [msg writeToFile:msgfile atomically:YES encoding:NSUTF8StringEncoding error:&err];
+    // unlink([atomic UTF8String]);
+    system([[NSString stringWithFormat:@"open %@", msgfile] UTF8String]);
+    return YES;
 }
 
 NSString *CVLoader::MSG(NSString *m) {

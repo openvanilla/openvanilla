@@ -1,20 +1,19 @@
 // CVLoaderConfig.mm
 
 #include "CVLoaderConfig.h"
+#include "CVLoaderUtility.h"
 #include "NSDictionaryExtension.h"
-#include <sys/stat.h>
 
 void CVPreparePath() {
 	NSString *up=[CVLC_USERSPACE_PATH stringByStandardizingPath];
 	NSString *cp=[CVLC_USERCONFIG_PATH stringByStandardizingPath];
 	
-	struct stat st;
-	if (stat([up UTF8String], &st)) {
-		// NSLog([NSString stringWithFormat:@"path %@ doesn't exist, creating", up]);
+    if (!CVIsPathExist(up)) {
+		NSLog([NSString stringWithFormat:@"path %@ doesn't exist, creating", up]);
 		system([[NSString stringWithFormat:@"mkdir -p %@", up] UTF8String]);
 	}
-	if (stat([cp UTF8String], &st)) {
-		// NSLog([NSString stringWithFormat:@"path %@ doesn't exist, creating", cp]);
+    if (!CVIsPathExist(cp)) {
+		NSLog([NSString stringWithFormat:@"path %@ doesn't exist, creating", cp]);
 		system([[NSString stringWithFormat:@"mkdir -p %@", cp] UTF8String]);
 	}
 }
@@ -30,6 +29,10 @@ NSString *CVGetUserSpacePath() {
 	CVPreparePath();
 	// NSLog([CVLC_USERSPACE_PATH stringByStandardizingPath]);
 	return [CVLC_USERSPACE_PATH stringByStandardizingPath];
+}
+
+NSString *CVGetAtomicInitLockFilename() {
+    return [CVGetUserSpacePath() stringByAppendingPathComponent:CVLC_ATOMIC_INIT_FILE];
 }
 
 NSString *CVGetUserConfigFilename() {
@@ -49,7 +52,6 @@ NSDictionary *CVGetDisplayServerConfig() {
 	return d;
 }
 
-/* void CVCheckDefaultConfiguration(NSMutableDictionary *d) {
-    [d valueForKey:@"primaryInputMethod" default:@""];
-    [d valueForKey:@"outputFilters" default:[[NSMutableArray new] autorelease]];
-} */
+NSString *CVGetAtomicInitErrorMessageFilename() {
+    return CVLC_ATOIMC_ERROR_FILE;
+}

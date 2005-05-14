@@ -10,10 +10,14 @@
 #define CVLC_USERCONFIG_PATH	@"~/Library/OpenVanilla/0.7.0/Preferences/"
 #define CVLC_USERCONFIG_FILE	@"~/Library/OpenVanilla/0.7.0/Preferences/org.openvanilla.070.plist"
 #define CVLC_DISPLAYSERVER		@"/Library/OpenVanilla/0.7.0/OVLoader/OVDisplayServer.app"
+#define CVLC_ATOMIC_INIT_FILE   @"atomic-init-lock"
+#define CVLC_ATOIMC_ERROR_FILE  @"/tmp/_openvanilla-atomicinit-error.html"
 
 NSArray *CVGetModuleLoadPath();
 NSString *CVGetUserSpacePath();
 NSString *CVGetUserConfigFilename();
+NSString *CVGetAtomicInitLockFilename();
+NSString *CVGetAtomicInitErrorMessageFilename();
 NSDictionary *CVGetDisplayServerConfig();
 
 // #define CVLC_USERSPACE_PATH     @"/tmp/"

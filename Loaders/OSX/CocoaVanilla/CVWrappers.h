@@ -10,13 +10,15 @@
 {
     OVModule *mod;
     NSString *loadedpath;
+    NSString *fromlibrary;
     BOOL inited;
     BOOL canuse;
 }
 - (void)dealloc;
-- (id)initWithModule:(OVModule*)m loadedPath:(NSString*)p;
+- (id)initWithModule:(OVModule*)m loadedPath:(NSString*)p fromLibrary:(NSString*)l;
 - (NSString*)description;
 - (NSString*)moduleType;
+- (NSString*)fromLibrary;
 - (NSString*)identifier;
 - (OVModule*)module;
 - (BOOL)usable;

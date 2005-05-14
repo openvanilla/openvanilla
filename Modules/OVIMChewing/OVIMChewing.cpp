@@ -18,6 +18,20 @@ char *layouts_zhtw[8] = {"標準排列","許氏","IBM","精業","倚天","倚天
 char *layouts_zhcn[8] = {"标准排列","许氏","IBM","精业","倚天","倚天 26 键", "Dvorak","Dvorak 许氏"};
 char *layouts_en[8] = {"Standard","Hsu","IBM","Gin-Yeh","Eten","Eten 26", "Dvorak","Dvorak Hsu"};
 
+int ChewingFileExist(const char *path, const char *file) {
+    char buf[PATH_MAX];
+    sprintf(buf, "%s/%s", path, file);
+    struct stat st;
+    if (stat(buf, &st)) return 0;   // doesn't exist
+    return 1;
+}
+
+int ChewingCheckData(const char *path) {
+    char *files[5]={"ch_index.dat", "dict.dat", "fonetree.dat", "ph_index.dat",  "us_freq.dat"};
+    for (int i=0; i<5; i++) if (!ChewingFileExist(path, files[i])) return 0;
+    return 1;
+}
+
 class OVIMChewing;
 
 class OVIMChewingContext : public OVInputMethodContext 
@@ -163,7 +177,11 @@ public:
         sprintf(hashdir, "%sOVIMChewing", s->userSpacePath(identifier()));
         mkdir(hashdir, S_IRWXU);
         sprintf(chewingpath, "%sOVIMChewing", modulePath);
-                
+        if (!ChewingCheckData(chewingpath)) {
+            murmur("OVIMChewing: chewing data missing at %s", modulePath);
+            return 0;
+        }
+        
         murmur ("OVIMChewing: initialize, chewing data=%s, userhash=%s", chewingpath, hashdir);
 		
 		// BECAUSE THE {SACRILEGIOUS WORDS HERE} libchewing HAS NO 
