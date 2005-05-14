@@ -28,6 +28,7 @@ public:
     void setActiveContext(CVContext *c);
     void menuHandler(unsigned int cmd);
 protected:
+	void connectDisplayServer();
     void checkMenuItems();
     void initializeModules(NSArray *src, NSMutableArray *dst, CVSmartMenuGroup *fallout);
     void syncMenuAndConfig();       // sync menu items and config, re-assemble IM and OF arrays
@@ -38,6 +39,7 @@ protected:
     CVContext *activecontext;
     CVConfig *cfg;
     NSMutableDictionary *loaderdict;        // dictionary for loader config
+	id dspsrvr;						// display server (remote object)
 
     NSMutableArray *modarray;              // all loaded moudles
     NSMutableArray *ofarray;        // current in-use OF modules

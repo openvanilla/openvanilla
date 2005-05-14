@@ -38,6 +38,16 @@ NSString *CVGetUserConfigFilename() {
 	return [CVLC_USERCONFIG_FILE stringByStandardizingPath];
 }
 
+NSDictionary *CVGetDisplayServerConfig() {
+	NSMutableDictionary *d=[[[NSMutableDictionary alloc] init] autorelease];
+	[d setValue:@"" forKey:@"backgroundImage"];
+	[d setValue:@"1.0 1.0 1.0" forKey:@"foreground"];
+	[d setValue:@"1.0 1.0 1.0" forKey:@"background"];
+	[d setValue:@"1.0" forKey:@"opacity"];
+	[d setValue:@"Lucida Grande" forKey:@"font"];
+	[d setValue:@"18" forKey:@"size"];
+	return d;
+}
 
 /* void CVCheckDefaultConfiguration(NSMutableDictionary *d) {
     [d valueForKey:@"primaryInputMethod" default:@""];

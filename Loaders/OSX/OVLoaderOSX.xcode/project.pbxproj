@@ -341,6 +341,7 @@
 				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
 			};
 			dependencies = (
+				6AD76B8008358DA900164A51,
 				6A975ED90814C64600F40859,
 			);
 			isa = PBXNativeTarget;
@@ -397,6 +398,7 @@
 				6AA6E7FB0817A1B6003C560A,
 				6AA6E89D0817B9BA003C560A,
 				6AF9423B0817F2F800AE0534,
+				6AD76AF408358A6E00164A51,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -661,10 +663,274 @@
 			settings = {
 			};
 		};
+		6AD76AB80835845000164A51 = {
+			children = (
+				6AD76B6D08358D6600164A51,
+				6AD76AF308358A6E00164A51,
+			);
+			isa = PBXGroup;
+			name = DisplayServer;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AD76AC4083585DD00164A51 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			path = "OVDisplayServer-Info.plist";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AD76AEB08358A5B00164A51 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AD76B0608358BA600164A51,
+				6AD76B0708358BA600164A51,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AD76AEC08358A5B00164A51 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AD76B0008358B6A00164A51,
+				6AD76B0108358B6A00164A51,
+				6AD76B4C08358CC700164A51,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AD76AED08358A5B00164A51 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AD76AEE08358A5B00164A51 = {
+			buildPhases = (
+				6AD76AEB08358A5B00164A51,
+				6AD76AEC08358A5B00164A51,
+				6AD76AED08358A5B00164A51,
+				6AD76B0808358BC100164A51,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVDisplayServer-Info.plist";
+				INSTALL_PATH = "$(USER_APPS_DIR)";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = OVDisplayServer;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = OVDisplayServer;
+			productName = OVDisplayServer;
+			productReference = 6AD76AEF08358A5B00164A51;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OVDisplayServer</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.OVDisplayServer</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.application";
+		};
+		6AD76AEF08358A5B00164A51 = {
+			explicitFileType = wrapper.application;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = OVDisplayServer.app;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6AD76AF308358A6E00164A51 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = OVDisplayServer.h;
+			path = OVDisplayServer/OVDisplayServer.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AD76AF408358A6E00164A51 = {
+			fileRef = 6AD76AF308358A6E00164A51;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AD76AFD08358B6A00164A51 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			name = main.m;
+			path = OVDisplayServer/main.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AD76AFE08358B6A00164A51 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = ServerDelegate.h;
+			path = OVDisplayServer/ServerDelegate.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AD76AFF08358B6A00164A51 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			name = ServerDelegate.m;
+			path = OVDisplayServer/ServerDelegate.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AD76B0008358B6A00164A51 = {
+			fileRef = 6AD76AFD08358B6A00164A51;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AD76B0108358B6A00164A51 = {
+			fileRef = 6AD76AFF08358B6A00164A51;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AD76B0408358BA600164A51 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = InfoPlist.strings;
+			path = OVDisplayServer/InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AD76B0508358BA600164A51 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = MainMenu.nib;
+			path = OVDisplayServer/MainMenu.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AD76B0608358BA600164A51 = {
+			fileRef = 6AD76B0408358BA600164A51;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AD76B0708358BA600164A51 = {
+			fileRef = 6AD76B0508358BA600164A51;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AD76B0808358BC100164A51 = {
+			buildActionMask = 2147483647;
+			files = (
+				6AD76B0C08358BD000164A51,
+				6AD76B4B08358CC700164A51,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AD76B0C08358BD000164A51 = {
+			fileRef = 6AD76AF308358A6E00164A51;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AD76B4908358CC700164A51 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = NSStringExtension.h;
+			path = NSExtensions/NSStringExtension.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AD76B4A08358CC700164A51 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = NSStringExtension.mm;
+			path = NSExtensions/NSStringExtension.mm;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AD76B4B08358CC700164A51 = {
+			fileRef = 6AD76B4908358CC700164A51;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AD76B4C08358CC700164A51 = {
+			fileRef = 6AD76B4A08358CC700164A51;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AD76B6D08358D6600164A51 = {
+			children = (
+				6AD76B0408358BA600164A51,
+				6AD76AC4083585DD00164A51,
+				6AD76B0508358BA600164A51,
+				6AD76AFD08358B6A00164A51,
+				6AD76AFE08358B6A00164A51,
+				6AD76AFF08358B6A00164A51,
+			);
+			isa = PBXGroup;
+			name = OVDisplayServer;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AD76B7F08358DA900164A51 = {
+			containerPortal = 6AF10FF60814BE3400B49D06;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 6AD76AEE08358A5B00164A51;
+			remoteInfo = OVDisplayServer;
+		};
+		6AD76B8008358DA900164A51 = {
+			isa = PBXTargetDependency;
+			target = 6AD76AEE08358A5B00164A51;
+			targetProxy = 6AD76B7F08358DA900164A51;
+		};
 		6AF10FF20814BE3400B49D06 = {
 			children = (
 				6AF1100B0814BED000B49D06,
 				6AF110060814BEB800B49D06,
+				6AD76AB80835845000164A51,
 				6AF1100C0814BEE600B49D06,
 				6AF110040814BEA000B49D06,
 				6AF110070814BEC100B49D06,
@@ -705,6 +971,7 @@
 			targets = (
 				6A975E9F0814C41600F40859,
 				6AF10FFD0814BE7A00B49D06,
+				6AD76AEE08358A5B00164A51,
 			);
 		};
 		6AF10FFA0814BE7A00B49D06 = {
@@ -797,6 +1064,7 @@
 			children = (
 				6AF10FFE0814BE7A00B49D06,
 				6A975EA00814C41600F40859,
+				6AD76AEF08358A5B00164A51,
 			);
 			isa = PBXGroup;
 			name = Products;
@@ -833,6 +1101,8 @@
 		};
 		6AF110050814BEB000B49D06 = {
 			children = (
+				6AD76B4908358CC700164A51,
+				6AD76B4A08358CC700164A51,
 				6A5D8E8708173ADB007A527F,
 				6A5D8E8808173ADB007A527F,
 			);

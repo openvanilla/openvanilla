@@ -1,6 +1,7 @@
 // CVLoader.mm
 #define OV_DEBUG
 #include <ctype.h>
+#include <unistd.h>
 #include "CVLoader.h"
 #include "TSBundle.h"
 #include <OpenVanilla/OVUtility.h>
@@ -9,6 +10,7 @@
 #include "CVDictionary.h"
 #include "CVKeyCode.h"
 #include "NSDictionaryExtension.h"
+#include "OVDisplayServer.h"
 
 // localization facilitator: gather all MSG occuranges into Localizable.strings
 #define MSG(x)      x
@@ -30,34 +32,6 @@ CVLoader::~CVLoader() {
     // everything goes away as the application is closed by OS X
 }
 
-void CVLoader::setActiveContext(CVContext *c) {
-    activecontext=c;
-    if (!c) return;
-    
-    if (![cfg needSync]) return;
-    [cfg sync];
-    
-    // we have to reload loaderdict as it might have been gone!
-    loaderdict=[[cfg dictionary] valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
-
-    
-    // now we tell every usable module to update config
-    NSMutableDictionary *cfgdict=[cfg dictionary];
-    NSEnumerator *e=[modarray objectEnumerator];
-    CVModuleWrapper *m;
-    while (m=[e nextObject]) {
-        if (![m usable]) continue;
-        NSString *mid=[m identifier];
-        NSMutableDictionary *mdict=[cfgdict valueForKey:mid default:[[NSMutableDictionary new] autorelease]];
-        CVDictionary cvd(mdict);
-        OVModule *om=[m module];
-        om->update(&cvd, srv);
-    }
-    
-    checkMenuItems();
-    syncMenuAndConfig();
-}
-
 int CVLoader::init(MenuRef m) {
     activecontext=NULL;
 
@@ -66,8 +40,9 @@ int CVLoader::init(MenuRef m) {
         murmur ("CVLoader: fatal error, bundle %s not found", TSBUNDLEID);
         return 0;
     }
-
     
+	connectDisplayServer();
+	
     CVInfoBox *candiib, *ntfyib;        
     candiib=[[CVInfoBox alloc] initWithWindowNibName:@"CVInfoBox"];
     ntfyib=[[CVInfoBox alloc] initWithWindowNibName:@"CVInfoBox"];
@@ -85,7 +60,7 @@ int CVLoader::init(MenuRef m) {
     [np setFloatingPanel:YES];
     [cp setBecomesKeyOnlyIfNeeded:YES];
     [np setBecomesKeyOnlyIfNeeded:YES];
-
+te
     srv=new CVService(CVGetUserSpacePath(), ntfyib);
     candi=new CVCandidate(candiib);
     cfg=[[CVConfig alloc] initWithFile:CVGetUserConfigFilename() defaultData:nil];
@@ -119,6 +94,83 @@ int CVLoader::init(MenuRef m) {
     syncMenuAndConfig();
 
     return 1;
+}
+
+CVContext *CVLoader::newContext() {
+    return new CVContext(this);
+}
+
+void CVLoader::setActiveContext(CVContext *c) {
+    activecontext=c;
+    if (!c) return;
+    
+    if (![cfg needSync]) return;
+    [cfg sync];
+    
+    // we have to reload loaderdict as it might have been gone!
+    loaderdict=[[cfg dictionary] valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
+
+    
+    // now we tell every usable module to update config
+    NSMutableDictionary *cfgdict=[cfg dictionary];
+    NSEnumerator *e=[modarray objectEnumerator];
+    CVModuleWrapper *m;
+    while (m=[e nextObject]) {
+        if (![m usable]) continue;
+        NSString *mid=[m identifier];
+        NSMutableDictionary *mdict=[cfgdict valueForKey:mid default:[[NSMutableDictionary new] autorelease]];
+        CVDictionary cvd(mdict);
+        OVModule *om=[m module];
+        om->update(&cvd, srv);
+    }
+    
+    checkMenuItems();
+    syncMenuAndConfig();
+}
+
+void CVLoader::menuHandler(unsigned int cmd) {
+    if (immenugroup->clickItem(cmd)) {
+        syncMenuAndConfig();
+        if (activecontext) {
+            activecontext->syncConfig();
+        }
+        return;
+    }
+
+    if (ofmenugroup->clickItem(cmd)) {
+        syncMenuAndConfig();
+        return;
+    }
+
+    switch (cmd) {
+        case CVLMI_ABOUT:
+            murmur ("about menu item clicked");
+            return;
+        case CVLMI_HELP:
+            murmur ("help menu item clicked");
+            return;
+    }
+    
+    murmur("unknown menu item %d clicked", cmd);
+}
+
+void CVLoader::connectDisplayServer() {
+	dspsrvr=nil;
+	
+	dspsrvr=[[NSConnection rootProxyForConnectionWithRegisteredName:@"OVDisplayServer" host:nil] retain];
+	if (!dspsrvr) {
+		system([[NSString stringWithFormat:@"open %@", CVLC_DISPLAYSERVER] UTF8String]);
+		
+		// a total timeout of 1 sec
+		for (int retry=0; retry<20; retry++) {
+			NSLog([NSString stringWithFormat:@"retry %d", retry]);
+			usleep(50000);		// wait for the server to be brought up (0.05 sec)
+			dspsrvr=[[NSConnection rootProxyForConnectionWithRegisteredName:@"OVDisplayServer" host:nil] retain];
+			if (dspsrvr) break;
+		}
+	}
+	
+	if (dspsrvr) [dspsrvr setProtocolForProxy:@protocol(OVDisplayServer)];
 }
 
 void CVLoader::checkMenuItems() {
@@ -162,6 +214,13 @@ void CVLoader::syncMenuAndConfig() {
     else
         [loaderdict setValue:@"" forKey:@"primaryInputMethod"];
 
+	// and get OVDisplayServer settings too
+	NSDictionary *dsrvdict=[[cfg dictionary] valueForKey:@"OVDisplayServer" default:CVGetDisplayServerConfig()];
+	if (dspsrvr) {
+		NSLog(@"syncing config with display server");
+		[dspsrvr setConfig:dsrvdict];
+	}
+	
     [cfg sync];
 }
 
@@ -202,36 +261,6 @@ void CVLoader::pourModuleArrayIntoMenu(NSArray *a, CVSmartMenuGroup *g) {
             [NSString stringWithUTF8String: m->localizedName(lc)]
         );
     }
-}
-
-void CVLoader::menuHandler(unsigned int cmd) {
-    if (immenugroup->clickItem(cmd)) {
-        syncMenuAndConfig();
-        if (activecontext) {
-            activecontext->syncConfig();
-        }
-        return;
-    }
-
-    if (ofmenugroup->clickItem(cmd)) {
-        syncMenuAndConfig();
-        return;
-    }
-
-    switch (cmd) {
-        case CVLMI_ABOUT:
-            murmur ("about menu item clicked");
-            return;
-        case CVLMI_HELP:
-            murmur ("help menu item clicked");
-            return;
-    }
-    
-    murmur("unknown menu item %d clicked", cmd);
-}
-
-CVContext *CVLoader::newContext() {
-    return new CVContext(this);
 }
 
 CVContext::CVContext(CVLoader *p) {
