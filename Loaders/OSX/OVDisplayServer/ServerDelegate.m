@@ -41,6 +41,7 @@ Point CVFixWindowPosition(Point pp, int width, int height);
     fadetimer=[NSTimer scheduledTimerWithTimeInterval:CVIB_FADEWAIT target:self selector:@selector(fadeStart) userInfo:nil repeats:NO];
 }
 - (void)dealloc {
+    [defaultbackground release];
 	[candi release];
 	[super dealloc];
 }
@@ -51,9 +52,12 @@ Point CVFixWindowPosition(Point pp, int width, int height);
     if ([c registerName:@"OVDisplayServer"]) NSLog(@"OVDisplayServer registered");
 	else NSLog(@"OVDisplayServer registration failed");
 
+
 	NSRect fr=NSMakeRect(0, 0, 100, 20);
 	candion=NO;
 	candi=[self createWindow:fr];
+    defaultbackground=[[candi backgroundColor] retain];
+    fprintf(stderr, "r=%d\n", [defaultbackground retainCount]);
     canditext=[self createTextField:fr];
     [[candi contentView] addSubview:canditext];
 	noti=[self createWindow:fr];
@@ -108,7 +112,6 @@ Point CVFixWindowPosition(Point pp, int width, int height);
 
 //	NSWindow *w=[[NSPanel alloc] initWithContentRect:fr styleMask:NSUtilityWindowMask backing:NSBackingStoreBuffered defer:NO];
 //	[(NSPanel*)w setBecomesKeyOnlyIfNeeded:YES]; 
-    [w setHasShadow:YES];
     [w setLevel:NSScreenSaverWindowLevel];
 	[w setMovableByWindowBackground:YES];
 //	[w orderFront:self];
@@ -128,14 +131,14 @@ Point CVFixWindowPosition(Point pp, int width, int height);
 - (void)applyConfig:(NSDictionary*)d window:(NSWindow*)w textField:(NSTextField*)t {
 	float alpha=[[d valueForKey:@"opacity" default:@"1.0"] floatValue];
 	NSColor *fc=[[d valueForKey:@"foreground" default:@"1.0 1.0 1.0"] colorByString];
-	NSColor *bc=[[d valueForKey:@"background" default:@"1.0 1.0 1.0"] colorByString];
 	NSString *img=[d valueForKey:@"backgroundImage" default:@""];
 	NSString *font=[d valueForKey:@"font" default:@"Lucida Grande"];
 	float s=[[d valueForKey:@"size" default:@"18"] floatValue];
 
 	[w setAlphaValue:alpha];
-	[w setBackgroundColor:bc];
-	if ([img length]) {
+    [w setHasShadow:YES];
+    [w setOpaque:YES];
+    if ([img length]) {
 		NSImage *i=[[NSImage alloc] initByReferencingFile:img];
 		if (i && [i isValid]) {
 			[i autorelease];
@@ -143,7 +146,23 @@ Point CVFixWindowPosition(Point pp, int width, int height);
 			[w setBackgroundColor:c];
 		}
 	}
-
+    else {
+        // no image, use color
+        NSString *bcstr=[d valueForKey:@"background" default:@"1.0 1.0 1.0"];
+        if ([bcstr isEqualToString:@"transparent"]) {
+            [w setHasShadow:NO];
+            [w setOpaque:NO];
+            [w setBackgroundColor:[NSColor clearColor]];
+        }
+        else if ([bcstr isEqualToString:@"none"]) {
+            [w setBackgroundColor:defaultbackground];
+        }
+        else {
+            NSColor *bc=[bcstr colorByString];
+            [w setBackgroundColor:bc];
+        }
+    }
+    
     [t setFont:[NSFont fontWithName:font size:s]];
 	[t setTextColor:fc];
 }

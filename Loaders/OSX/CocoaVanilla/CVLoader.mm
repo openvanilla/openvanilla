@@ -53,12 +53,18 @@ int CVLoader::init(MenuRef m) {
     modarray=[NSMutableArray new];
     imarray=[NSMutableArray new];
     ofarray=[NSMutableArray new];
-    
-    // load everything!
-    [modarray addObjectsFromArray: CVLoadEverything(CVGetModuleLoadPath(), srv)];
 
     // load configuration
     loaderdict=[[cfg dictionary] valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
+    
+    // get library-exclude list and module-exclude list
+    NSArray *libexclude=[loaderdict valueForKey:@"excludeLibraryList" default:[[NSArray new] autorelease]];
+    NSArray *modexclude=[loaderdict valueForKey:@"excludeModuleList" default:[[NSArray new] autorelease]];
+    NSMutableDictionary *loadhistory=[[NSMutableDictionary new] autorelease];
+    
+    // load everything!
+    [modarray addObjectsFromArray: CVLoadEverything(CVGetModuleLoadPath(), srv, libexclude, modexclude, loadhistory)];
+    NSLog([loadhistory description]);
 	
     // create menu groups and check all menu items, then sync config
 	menudict=nil;

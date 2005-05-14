@@ -11,15 +11,17 @@ OVLoadedLibrary *CVLoadLibraryFromDylib(NSString *p);
 // this equals "find /path/*.ext", returns a 
 NSArray *CVEnumeratePath(NSString *path, NSString *ext);
 
+// a utility function
+BOOL CVStringIsInArray(NSString *s, NSArray *a);
+
 // we still need the full pathname of the loaded library because we need
 // to extract the loaded path (and then append /Contents for .bundle!)
 // that is required for the loaded modules in the initialization process;
 // we also need to supply a dictionary to prevent module-id conflicts
 NSString *CVGetRealLoadedPath(NSString *libname);
-NSArray *CVMilkModulesFromLibrary(NSString *libname, OVLoadedLibrary *lib, 
-    NSMutableDictionary *namedict);    
+NSArray *CVMilkModulesFromLibrary(NSString *libname, OVLoadedLibrary *lib, NSMutableDictionary *namedict, NSMutableArray *history);
 
-NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *)
+NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *libexcludelist, NSArray *modexcludelist, NSMutableDictionary *history)
 {
     const char *func="CVLoadEveryThing";
     
@@ -27,7 +29,8 @@ NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *)
     NSMutableArray *libList=[[NSMutableArray new] autorelease];
     NSMutableArray *modList=[[NSMutableArray new] autorelease];
     NSMutableDictionary *dict=[[NSMutableDictionary new] autorelease];
-    
+    NSMutableDictionary *histdict=[[NSMutableDictionary new] autorelease];
+
     NSEnumerator *enm=[paths objectEnumerator];
     NSString *i;
     while (i=[enm nextObject]) {
@@ -36,9 +39,18 @@ NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *)
         [libList addObjectsFromArray:CVEnumeratePath(i, @".dylib")];
     }    
 
+    // add module-exclusion list into the named dict
+    int c=[modexcludelist count];
+    for (int i=0; i<c; i++) [dict setValue:@"1" forKey:[modexcludelist objectAtIndex:i]];
+
     // load everything
     enm=[libList objectEnumerator];
     while (i=[enm nextObject]) {
+        if (CVStringIsInArray([i lastPathComponent], libexcludelist)) {
+            NSLog(@"library %@ in exclude list, not loaded", [i lastPathComponent]);
+            continue;
+        }
+
         OVLoadedLibrary *l;
         NSString *rlp=CVGetRealLoadedPath(i);
         if ([i hasSuffix: @".dylib"]) l=CVLoadLibraryFromDylib(i); else l=CVLoadLibraryFromBundle(i);    
@@ -48,11 +60,21 @@ NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *)
             murmur("%s: library initialization failed (%s), module milking ignored", func, [i UTF8String]);
             continue;
         }
-        
-        [modList addObjectsFromArray: CVMilkModulesFromLibrary(i, l, dict)];   
+
+        NSMutableArray *ha=[[NSMutableArray new] autorelease];
+        [modList addObjectsFromArray: CVMilkModulesFromLibrary(i, l, dict, ha)];
+        [histdict setValue:ha forKey:i];
     }
         
+    if (history) [history addEntriesFromDictionary:histdict];
     return modList;
+}
+
+BOOL CVStringIsInArray(NSString *s, NSArray *a) {
+    if (!a) return NO;
+    int c=[a count];
+    for (int i=0; i<c; i++) if ([s isEqualToString:[a objectAtIndex: i]]) return YES;
+    return NO;
 }
 
 CVModuleWrapper *CVFindModule(NSArray *modlist, NSString *identifier, 
@@ -190,8 +212,7 @@ NSString *CVGetRealLoadedPath(NSString *libname)
         stringByAppendingString: @"/"];
 }
 
-NSArray *CVMilkModulesFromLibrary(NSString *libname, OVLoadedLibrary *lib, 
-    NSMutableDictionary *namedict)
+NSArray *CVMilkModulesFromLibrary(NSString *libname, OVLoadedLibrary *lib, NSMutableDictionary *namedict, NSMutableArray *history)
 {
     const char *func="CVMilkModulesFromLibrary";
     NSMutableArray *a=[[NSMutableArray new] autorelease];
@@ -205,12 +226,12 @@ NSArray *CVMilkModulesFromLibrary(NSString *libname, OVLoadedLibrary *lib,
             
         NSString *i=[NSString stringWithUTF8String:m->identifier()];
         if ([namedict objectForKey: i]) {
-            murmur("%s: module '%s' already exists!", func, m->identifier());
+            murmur("%s: module '%s' already exists or in exclude-list!", func, m->identifier());
         }
         else {
             [namedict setObject: @"1" forKey: i];
-            [a addObject: [[[CVModuleWrapper alloc] 
-                initWithModule:m loadedPath:realPath] autorelease]];
+            [a addObject: [[[CVModuleWrapper alloc] initWithModule:m loadedPath:realPath] autorelease]];
+            if (history) [history addObject:i];
         }
     }
     return a;
