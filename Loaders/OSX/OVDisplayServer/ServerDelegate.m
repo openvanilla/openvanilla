@@ -12,7 +12,6 @@ Point CVFixWindowPosition(Point pp, int width, int height);
 
 @implementation ServerDelegate
 - (void)setConfig:(NSDictionary*)cfg {
-	NSLog([cfg description]);
 	[self applyConfig:cfg window:candi textField:canditext];
 	[self applyConfig:cfg window:noti textField:notitext];
 	notialpha=[noti alphaValue];

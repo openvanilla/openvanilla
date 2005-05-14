@@ -5,6 +5,7 @@
 
 #include <Carbon/Carbon.h>
 #include <Cocoa/Cocoa.h>
+#include "CVkeyCode.h"
 
 enum {
     CVSM_EXCLUSIVE=0,
@@ -17,8 +18,8 @@ enum {
 };
 
 void CVDeleteMenu(MenuRef m);
-int CVInsertMenuItem(MenuRef m, int cmdid, NSString *s, int attr=0);
-int CVInsertMenuItem(MenuRef m, int cmdid, NSBundle *b, NSString *s, int attr=0);
+int CVInsertMenuItem(MenuRef m, int cmdid, NSString *s, int attr=0, NSString *k=nil);
+int CVInsertMenuItem(MenuRef m, int cmdid, NSBundle *b, NSString *s, int attr=0, NSString *k=nil);
 
 @interface CVSmartMenuItem : NSObject {
     NSString *idtag;
@@ -44,7 +45,7 @@ public:
     
     void insertSeparator();
     void insertTitle(NSString *t);  // looks up in bundle's localization table
-    void insertItem(NSString *idtag, NSString *displaytag, BOOL bundlelookup=NO);
+    void insertItem(NSString *idtag, NSString *displaytag, NSString *shortcutkey=nil, BOOL bundlelookup=NO);
     void checkItem(NSString *idtag);
     void uncheckItem(NSString *idtag);
     void uncheckAll();
@@ -52,6 +53,7 @@ public:
     void checkFirstItem();          // works if there's an item in the array
     void checkItemArray(NSArray *idarray);
     int clickItem(int cmdid);
+	CVSmartMenuItem* getMenuItem(int cmdid);
     NSArray *getCheckedItems();     // an array of id tags
     
 protected:

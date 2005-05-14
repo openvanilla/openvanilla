@@ -29,17 +29,21 @@ public:
     void menuHandler(unsigned int cmd);
 protected:
 	id connectDisplayServer();
+	void refreshMenu();
 	void createMenuGroups();
 	void checkMenuItems();
     void initializeModules(NSArray *src, NSMutableArray *dst, CVSmartMenuGroup *fallout);
     void syncMenuAndConfig();       // sync menu items and config, re-assemble IM and OF arrays
     void pourModuleArrayIntoMenu(NSArray *a, CVSmartMenuGroup *g);
+	void showOutputFilterStatus(NSString *modid, BOOL s);
+	NSString *MSG(NSString *m);
 
     CVService *srv;
     CVCandidate *candi;
     CVContext *activecontext;
     CVConfig *cfg;
     NSMutableDictionary *loaderdict;        // dictionary for loader config
+	NSMutableDictionary *menudict;					// dictionary for menu keys
 	NSBundle *loaderbundle;
 	MenuRef immenu;
 	id dspsrvr;						// display server (remote object)

@@ -6,18 +6,29 @@
 #include <Carbon/Carbon.h>
 #include <OpenVanilla/OpenVanilla.h>
 
+// the CVSmartMenu extension for CVKeyCode works like this, for example:
+//     CVKeyCode k("k", "MOCS");
+// means CMD+OPT+CTRL+SHIFT+K; m=CMD, o=OPT, c=CTRL, S=SHIFT (case insensitive)
+
 class CVKeyCode : public OVKeyCode
 {
 public:
     CVKeyCode(char charcode, UInt32 modifiers);
     virtual int code()       { return c; }
-    virtual int isShift()    { return m & (shiftKey | rightShiftKey); }
-    virtual int isCtrl()     { return m & (controlKey | rightControlKey); }
-    virtual int isAlt()      { return m & (optionKey | rightOptionKey); }
+    virtual int isShift();
+    virtual int isCtrl();
+    virtual int isAlt();
     virtual int isOpt()      { return isAlt(); }
-    virtual int isCommand()  { return m & cmdKey; }
-    virtual int isCapslock() { return m&(alphaLock|kEventKeyModifierNumLockMask); }
+    virtual int isCommand();
+    virtual int isCapslock();
+	
+	// extensions for CVSmartMenu
+	CVKeyCode(const char *charcode, const char *modifiers);
+	CVKeyCode(NSString *s);
+	virtual BOOL equalToKey(CVKeyCode *k, BOOL ignorecase=YES);
+	virtual UInt8 convertToMenuModifier();
 protected:
+	void init(const char *charcode, const char *modifiers);
     char c;
     UInt32 m;
 };

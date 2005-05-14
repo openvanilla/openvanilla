@@ -12,9 +12,6 @@
 #include "NSDictionaryExtension.h"
 #include "OVDisplayServer.h"
 
-// localization facilitator: gather all MSG occuranges into Localizable.strings
-#define MSG(x)      x
-
 enum {      // CVLMI = CVLoader Menu Item
     CVLMI_IMGROUPSTART=1000,
     CVLMI_OFGROUPSTART=2000,
@@ -27,7 +24,7 @@ CVLoader::CVLoader() {
 }
 
 CVLoader::~CVLoader() {
-    // although this is a VERY BAD habit, but we DO NOT DELETE anything here
+    // although this is a VERY BAD practice, but we DO NOT DELETE anything here
     // the reason: text component is never released once it's loaded,
     // everything goes away as the application is closed by OS X
 }
@@ -61,13 +58,32 @@ int CVLoader::init(MenuRef m) {
 
     // load configuration
     loaderdict=[[cfg dictionary] valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
-
+	
     // create menu groups and check all menu items, then sync config
+	menudict=nil;
 	immenugroup=ofmenugroup=NULL;
-	createMenuGroups();
-    checkMenuItems();
+	refreshMenu();
     syncMenuAndConfig();
     return 1;
+}
+
+void CVLoader::refreshMenu() {
+	NSDictionary *cfgmenukey=[[cfg dictionary] valueForKey:@"OVMenuManager" default:[[NSMutableDictionary new] autorelease]];
+	if (!menudict) {
+		menudict=[NSMutableDictionary new];
+		[menudict addEntriesFromDictionary:cfgmenukey];
+		createMenuGroups();
+	}
+	else {
+		if (![menudict isEqualToDictionary:cfgmenukey]) {
+			NSLog(@"OVMenuManager config node changed, rebuilding the menu");
+			[menudict removeAllObjects];
+			[menudict addEntriesFromDictionary:cfgmenukey];
+			createMenuGroups();
+		}
+	}
+	
+	checkMenuItems();
 }
 
 CVContext *CVLoader::newContext() {
@@ -78,6 +94,7 @@ void CVLoader::setActiveContext(CVContext *c) {
     activecontext=c;
     if (!c) return;
     
+	// check if the config has been changed and thus need reload!
     if (![cfg needSync]) return;
     [cfg sync];
     
@@ -97,7 +114,8 @@ void CVLoader::setActiveContext(CVContext *c) {
         om->update(&cvd, srv);
     }
     
-    checkMenuItems();
+	// now we refresh our menu
+	refreshMenu();
     syncMenuAndConfig();
 }
 
@@ -112,13 +130,16 @@ void CVLoader::menuHandler(unsigned int cmd) {
 
     if (ofmenugroup->clickItem(cmd)) {
         syncMenuAndConfig();
+		if (activecontext) {
+			CVSmartMenuItem *i=ofmenugroup->getMenuItem(cmd);
+			showOutputFilterStatus([i idTag], [i checked]);
+		}
         return;
     }
 
     switch (cmd) {
         case CVLMI_ABOUT:
             murmur ("about menu item clicked");
-			CVDeleteMenu(immenu);
             return;
         case CVLMI_HELP:
             murmur ("help menu item clicked");
@@ -149,6 +170,9 @@ id CVLoader::connectDisplayServer() {
 }
 
 void CVLoader::createMenuGroups() {
+	if (immenugroup) delete immenugroup;
+	if (ofmenugroup) delete ofmenugroup;
+	CVDeleteMenu(immenu);
     immenugroup=new CVSmartMenuGroup(immenu, CVLMI_IMGROUPSTART, loaderbundle, CVSM_EXCLUSIVE);
     ofmenugroup=new CVSmartMenuGroup(immenu, CVLMI_OFGROUPSTART, loaderbundle, CVSM_MULTIPLE);
     immenugroup->insertTitle(MSG(@"input methods"));
@@ -157,8 +181,8 @@ void CVLoader::createMenuGroups() {
     ofmenugroup->insertTitle(MSG(@"output filters"));
     pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVOutputFilter"), ofmenugroup);    
     ofmenugroup->insertSeparator();
-    CVInsertMenuItem(immenu, CVLMI_ABOUT, loaderbundle, @"about");
-    CVInsertMenuItem(immenu, CVLMI_HELP, loaderbundle, @"help");    
+    CVInsertMenuItem(immenu, CVLMI_ABOUT, loaderbundle, @"about", 0);
+    CVInsertMenuItem(immenu, CVLMI_HELP, loaderbundle, @"help", 0);
 }
 
 void CVLoader::checkMenuItems() {
@@ -242,13 +266,24 @@ void CVLoader::pourModuleArrayIntoMenu(NSArray *a, CVSmartMenuGroup *g) {
     const char *lc=srv->locale();
     
     while (w=[e nextObject]) {
-        OVModule *m=[w module];
-        
-        g->insertItem(
-            [NSString stringWithUTF8String: m->identifier()],
-            [NSString stringWithUTF8String: m->localizedName(lc)]
-        );
+        OVModule *m=[w module];        
+        g->insertItem([w identifier], [NSString stringWithUTF8String: m->localizedName(lc)], [menudict valueForKey:[w identifier]]);
     }
+}
+
+void CVLoader::showOutputFilterStatus(NSString *modid, BOOL s) {
+	if (!activecontext) return;
+	
+	CVModuleWrapper *w=CVFindModule(modarray, modid);
+	if (!w) return;
+	OVModule *m=[w module];
+	NSString *display=[NSString stringWithFormat:@"%@ %@", [NSString stringWithUTF8String:m->localizedName(srv->locale())], s ? MSG(@"enabled") : MSG(@"disabled")];
+	srv->notify([display UTF8String]);
+	srv->fadeNotification();
+}
+
+NSString *OVLoader::MSG(NSString *m) {
+    return [loaderbundle localizedStringForKey:m value:nil table:nil];
 }
 
 CVContext::CVContext(CVLoader *p) {
