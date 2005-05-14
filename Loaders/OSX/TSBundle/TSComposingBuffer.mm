@@ -7,7 +7,7 @@
 // we have to define these consts, because they're gone in Tiger... :(
 #define tsbkConvertedText   4
 #define tsbkCaretPosition   1
-#define tsbkSelectedConvertedText 3
+#define tsbkSelectedConvertedText 5
 
 TSComposingBuffer::TSComposingBuffer(ComponentInstance i)
 {
@@ -224,11 +224,8 @@ TSComposingBuffer* TSComposingBuffer::update(Boolean send, int cursor,
         (markTo>markFrom && realPos(markTo)<=(int)[str length]))
     {
         markrange->fNumOfRanges=3;		// send one more range block 
-
         SETRANGE(2, realPos(markFrom)*sizeof(UniChar),
             realPos(markTo)*sizeof(UniChar), tsbkSelectedConvertedText); 
-    
-        fprintf(stderr, "(%d,%d,%d)\n", realPos(markFrom), realPos(markTo), realcur);
     }
 
     if (!send) {

@@ -76,10 +76,7 @@ const char *CVService::locale() {
 }
 
 const char *CVService::userSpacePath(const char *modid) {
-    fprintf (stderr, "CVService: not fully implemented, requesting user space for module %s\n", modid);
-    
     NSString *usp=[userspace stringByAppendingString:@"/"];
-    fprintf (stderr, "CVService: currently returning %s\n", [usp UTF8String]);
     return [usp UTF8String];
 }
 

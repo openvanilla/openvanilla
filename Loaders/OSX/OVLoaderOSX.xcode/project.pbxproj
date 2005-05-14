@@ -1040,7 +1040,6 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVPreferences-Info.plist";
 				INSTALL_PATH = /Library/OpenVanilla/0.7.0/OVLoader/;
-				OPTIMIZATION_CFLAGS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-framework Foundation -framework AppKit";
 				OTHER_REZFLAGS = "";
@@ -1086,10 +1085,9 @@
 			explicitFileType = wrapper.application;
 			includeInIndex = 0;
 			isa = PBXFileReference;
-			name = OVPreferences.app;
-			path = build/OVPreferences.app;
-			refType = 4;
-			sourceTree = "<group>";
+			path = OVPreferences.app;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		6AE4A463083677B400D6CCD3 = {
 			isa = PBXFileReference;
