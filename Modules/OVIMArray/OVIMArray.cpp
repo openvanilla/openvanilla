@@ -65,7 +65,9 @@ int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf,
 
 int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVBuffer* buf, 
                                OVCandidate* candibar, OVService* srv){
-    updateCandidate(tabs[MAIN_TAB], buf, candibar);
+    if( keyseq.length() >= 3){
+        updateCandidate(tabs[MAIN_TAB], buf, candibar);
+    }
     return 1;    
 }
 
@@ -197,6 +199,11 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
                     updateCandidate(tabs[SHORT_TAB], buf, candi_bar);
             }
         }
+        return 1;
+    }
+    if( key->isShift() && isprint(keycode) && keyseq.length()==0 ){
+        char k[2] = { tolower(keycode), 0 };
+        buf->append(k)->send();
         return 1;
     }
     if (keyseq.length() && keycode == ovkSpace){
