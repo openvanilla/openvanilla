@@ -960,7 +960,8 @@
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
-			path = CVKeyCode.mm;
+			name = CVKeyCode.mm;
+			path = CocoaVanilla/CVKeyCode.mm;
 			refType = 4;
 			sourceTree = "<group>";
 		};
