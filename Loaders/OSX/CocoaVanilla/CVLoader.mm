@@ -176,7 +176,7 @@ id CVLoader::connectDisplayServer() {
 	
 	dspsrvr=[[NSConnection rootProxyForConnectionWithRegisteredName:@"OVDisplayServer" host:nil] retain];
 	if (!dspsrvr) {
-		system([[NSString stringWithFormat:@"connecting to OVDisplayServer, open %@", CVLC_DISPLAYSERVER] UTF8String]);
+		system([[NSString stringWithFormat:@"open %@", CVLC_DISPLAYSERVER] UTF8String]);
 		
 		// a total timeout of 1 sec
 		for (int retry=0; retry<20; retry++) {
