@@ -1,7 +1,15 @@
 #import "NSStringExtension.h"
 
-@implementation NSString (SplitBySpaceWithQuote) 
--(NSString*)stringByQuoting {
+@implementation NSString (SplitBySpaceWithQuote)
++ (NSString*)stringByColor:(NSColor*)c {
+	return [NSString stringWithFormat:@"%f %f %f", [c redComponent], [c greenComponent], [c blueComponent]];
+}
+- (NSColor*)colorByString {
+	NSArray *s=[self splitBySpaceWithQuote];
+	if ([s count] < 3) return [NSColor blackColor];	
+	return [NSColor colorWithDeviceRed:[[s objectAtIndex:0] floatValue] green:[[s objectAtIndex:1] floatValue] blue:[[s objectAtIndex:2] floatValue] alpha:1.0];
+}
+- (NSString*)stringByQuoting {
     int l=[self length];
     UniChar *s=(UniChar*)calloc(1, l*sizeof(UniChar));
     [self getCharacters:s];
@@ -19,7 +27,7 @@
     free(buf);
     return r;
 }
--(NSString*)stringByChomping {
+- (NSString*)stringByChomping {
     int i;
     int l=[self length];
     if (!l) return [[NSString new] autorelease];
@@ -32,7 +40,7 @@
     NSRange r=(NSRange){0, i+1};
     return [self substringWithRange:r];
 }
--(NSArray*)splitBySpaceWithQuote {
+- (NSArray*)splitBySpaceWithQuote {
     NSMutableArray *ma=[[NSMutableArray new] autorelease];
     int p=0, q=0;
     int l=[self length];

@@ -1,54 +1,78 @@
 // CVCandidate.mm
 
 #include "CVCandidate.h"
+#include "OVDisplayServer.h"
 
-CVCandidate::CVCandidate(CVInfoBox *ib) {
-    infobox=ib;
+CVCandidateState::CVCandidateState(NSString *s, Point p, BOOL o) {
+    str=[[NSString alloc] initWithString:s];
+    pos=p;
+    onscreen=o;
+}
+
+CVCandidateState::~CVCandidateState() {
+	[str release];
+}
+
+CVCandidate::CVCandidate(id s) {
+	srvr=s;
+	text=[NSMutableString new];
+	pos=(Point){0, 0};
+	onscreen=NO;
+}
+
+CVCandidate::~CVCandidate() {
+	[text release];
 }
 
 OVCandidate* CVCandidate::clear() {
-    [infobox clear];
+	[text setString:@""];
     return this;
 }
 
 OVCandidate* CVCandidate::append(const char *s) {
-    [infobox append:[NSString stringWithUTF8String:s]];
+	[text appendString:[NSString stringWithUTF8String:s]];
     return this;
 }
 
 OVCandidate* CVCandidate::hide() {
-    [infobox hide];    
+	if (onscreen) {
+		[srvr candidateHide];
+		onscreen=NO;
+	}
     return this;
 }
 
 OVCandidate* CVCandidate::show() {
-    [infobox show];
+	if (!onscreen) {
+		[srvr candidateShow];
+		onscreen=YES;
+	}
     return this;
 }
 
 OVCandidate* CVCandidate::update() {
-    [infobox update];
+	[srvr candidateUpdate:text position:pos];
     return this;
 }
 
 int CVCandidate::onScreen() {
-    return [infobox onScreen];
+    return onscreen;
 }
 
 OVCandidate* CVCandidate::setPosition(Point p) {
-    [infobox setPosition:p];
+	pos=p;
     return this;
 }
-int CVCandidate::height() {
-    return [infobox height];
+
+CVCandidateState* CVCandidate::saveState() {
+	return new CVCandidateState(text, pos, onscreen);
 }
 
-CVInfoBoxState* CVCandidate::saveState() {
-    return [infobox saveState];
-}
-
-OVCandidate* CVCandidate::restoreState(CVInfoBoxState *s) {
-    [infobox restoreState:s];
+OVCandidate* CVCandidate::restoreState(CVCandidateState *s) {
+	[text setString:s->str];
+	pos=s->pos;
+	update();
+	if (s->onscreen) show(); else hide();
     return this;
 }
 

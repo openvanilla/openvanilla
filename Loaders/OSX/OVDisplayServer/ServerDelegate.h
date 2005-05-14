@@ -3,16 +3,13 @@
 #import <Cocoa/Cocoa.h>
 #import "OVDisplayServer.h"
 
-@interface ServerDelegate : NSObject <OVDisplayServer>
-{
-    IBOutlet id text;
-    IBOutlet id text2;
-    IBOutlet id window;
-    IBOutlet id window2;
-    IBOutlet id web;
-	FILE *o;
+@interface ServerDelegate : NSObject <OVDisplayServer> {
+	NSWindow *candi;
+	NSTextField *canditext;
+	// NSWindow *noti;
+	// NSTextField *notitext;
 }
-- (void)evil;
-- (void)awakeFromNib;
-- (IBAction)adjustWindowLevel:(id)sender;
+- (void)applyConfig:(NSDictionary*)d window:(NSWindow*)w textField:(NSTextField*)t;
+- (NSTextField*)createTextField:(NSRect)fr;
+- (NSWindow*)createWindow:(NSRect)fr;
 @end

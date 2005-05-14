@@ -5,11 +5,20 @@
 
 #include <Cocoa/Cocoa.h>
 #include <OpenVanilla/OpenVanilla.h>
-#include "CVInfoBox.h"
+
+struct CVCandidateState {
+    CVCandidateState(NSString *s, Point p, BOOL o);
+    ~CVCandidateState();
+    NSString *str;
+    Point pos;
+    BOOL onscreen;
+};
+
 
 class CVCandidate : public OVCandidate  {
 public:
-    CVCandidate(CVInfoBox *ib);
+    CVCandidate(id s);
+	~CVCandidate();
     virtual OVCandidate* clear();
     virtual OVCandidate* append(const char *s);
     virtual OVCandidate* hide();
@@ -18,11 +27,13 @@ public:
     virtual int onScreen();
     
     virtual OVCandidate* setPosition(Point p);
-    virtual int height();
-    virtual CVInfoBoxState* saveState();
-    virtual OVCandidate* restoreState(CVInfoBoxState *s);
+    virtual CVCandidateState* saveState();
+    virtual OVCandidate* restoreState(CVCandidateState *s);
 protected:
-    CVInfoBox *infobox;
+	id srvr;
+	NSMutableString *text;
+	Point pos;
+	BOOL onscreen;
 };
 
 

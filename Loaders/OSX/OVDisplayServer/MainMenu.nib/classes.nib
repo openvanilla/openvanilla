@@ -2,10 +2,10 @@
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
-            ACTIONS = {adjustWindowLevel = id; }; 
+            ACTIONS = {}; 
             CLASS = ServerDelegate; 
             LANGUAGE = ObjC; 
-            OUTLETS = {text = id; text2 = id; web = id; window = id; window2 = id; }; 
+            OUTLETS = {}; 
             SUPERCLASS = NSObject; 
         }
     ); 

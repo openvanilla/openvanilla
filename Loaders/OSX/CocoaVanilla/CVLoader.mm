@@ -60,9 +60,8 @@ int CVLoader::init(MenuRef m) {
     [np setFloatingPanel:YES];
     [cp setBecomesKeyOnlyIfNeeded:YES];
     [np setBecomesKeyOnlyIfNeeded:YES];
-te
     srv=new CVService(CVGetUserSpacePath(), ntfyib);
-    candi=new CVCandidate(candiib);
+    candi=new CVCandidate(dspsrvr);
     cfg=[[CVConfig alloc] initWithFile:CVGetUserConfigFilename() defaultData:nil];
     modarray=[NSMutableArray new];
     imarray=[NSMutableArray new];
@@ -357,8 +356,9 @@ int CVContext::event(char charcode, int modifiers) {
 void CVContext::repositionInfoBoxes() {
     // reposition our two boxes
     Point p=buf->getAppCursorPosition();
+	p.v += 5;	// to make the infoboxes a bit lower, makes 'em look better
     loader->candi->setPosition(p);
-    p.v += loader->candi->height();
+//  p.v += loader->candi->height();				// obsolete
     loader->srv->setNotificationPosition(p);
 }
 
