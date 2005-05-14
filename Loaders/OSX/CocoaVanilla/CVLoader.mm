@@ -15,8 +15,9 @@
 enum {      // CVLMI = CVLoader Menu Item
     CVLMI_IMGROUPSTART=1000,
     CVLMI_OFGROUPSTART=2000,
-    CVLMI_ABOUT=3000,
-    CVLMI_HELP=3001
+	CVLMI_FASTIMSWITCH=3000,
+    CVLMI_ABOUT=3001,
+    CVLMI_HELP=3002,
 };
 
 CVLoader::CVLoader() {
@@ -121,10 +122,14 @@ void CVLoader::setActiveContext(CVContext *c) {
 
 void CVLoader::menuHandler(unsigned int cmd) {
     if (immenugroup->clickItem(cmd)) {
+		NSString *pIM=[NSString stringWithString: [loaderdict valueForKey:@"primaryInputMethod" default:@""]];
         syncMenuAndConfig();
         if (activecontext) {
             activecontext->syncConfig();
         }
+		
+		// overwrite lastPrimaryInputMethod key
+		[loaderdict setValue:pIM forKey:@"lastPrimaryInputMethod"];		
         return;
     }
 
@@ -138,6 +143,9 @@ void CVLoader::menuHandler(unsigned int cmd) {
     }
 
     switch (cmd) {
+		case CVLMI_FASTIMSWITCH:
+			switchToLastPrimaryIM();
+			return;
         case CVLMI_ABOUT:
             murmur ("about menu item clicked");
             return;
@@ -181,8 +189,11 @@ void CVLoader::createMenuGroups() {
     ofmenugroup->insertTitle(MSG(@"output filters"));
     pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVOutputFilter"), ofmenugroup);    
     ofmenugroup->insertSeparator();
-    CVInsertMenuItem(immenu, CVLMI_ABOUT, loaderbundle, @"about", 0);
-    CVInsertMenuItem(immenu, CVLMI_HELP, loaderbundle, @"help", 0);
+	
+	// the fastIMSwitch has a menudict key called "fastIMSwitch"
+    CVInsertMenuItem(immenu, CVLMI_FASTIMSWITCH, MSG(@"fastIMSwitch"), 0, [menudict valueForKey:@"fastIMSwitch"]);
+    CVInsertMenuItem(immenu, CVLMI_ABOUT, MSG(@"about"), 0);
+    CVInsertMenuItem(immenu, CVLMI_HELP, MSG(@"help"), 0);
 }
 
 void CVLoader::checkMenuItems() {
@@ -221,10 +232,14 @@ void CVLoader::syncMenuAndConfig() {
     ofmgitems=ofmenugroup->getCheckedItems();
     immgitems=immenugroup->getCheckedItems();    
     [loaderdict setValue:ofmgitems forKey:@"outputFilterArray"];
-    if ([immgitems count])
+    if ([immgitems count]) {
         [loaderdict setValue:[immgitems objectAtIndex:0] forKey:@"primaryInputMethod"];
-    else
+		// write if lastPrimaryInputMethod doesn't exist yet
+		[loaderdict valueForKey:@"lastPrimaryInputMethod" default:[immgitems objectAtIndex:0]];
+	}
+    else {
         [loaderdict setValue:@"" forKey:@"primaryInputMethod"];
+	}
 
 	// and get OVDisplayServer settings too
 	NSDictionary *dsrvdict=[[cfg dictionary] valueForKey:@"OVDisplayServer" default:CVGetDisplayServerConfig()];
@@ -280,6 +295,23 @@ void CVLoader::showOutputFilterStatus(NSString *modid, BOOL s) {
 	NSString *display=[NSString stringWithFormat:@"%@ %@", [NSString stringWithUTF8String:m->localizedName(srv->locale())], s ? MSG(@"enabled") : MSG(@"disabled")];
 	srv->notify([display UTF8String]);
 	srv->fadeNotification();
+}
+
+void CVLoader::switchToLastPrimaryIM() {
+    NSString *pIM=[NSString stringWithString: [loaderdict valueForKey:@"primaryInputMethod" default:@""]];
+	NSString *lIM=[NSString stringWithString: [loaderdict valueForKey:@"lastPrimaryInputMethod" default:@""]];
+	if ([pIM isEqualToString:lIM]) {
+		NSLog(@"lastPIM=PIM, return");
+		return;
+	}
+	NSLog(@"lastPIM!=PIM, switching");
+	[loaderdict setValue:lIM forKey:@"primaryInputMethod"];
+	[loaderdict setValue:pIM forKey:@"lastPrimaryInputMethod"];
+	checkMenuItems();
+	syncMenuAndConfig();
+	if (activecontext) {
+		activecontext->syncConfig();
+	}
 }
 
 NSString *CVLoader::MSG(NSString *m) {

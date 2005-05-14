@@ -36,6 +36,7 @@ protected:
     void syncMenuAndConfig();       // sync menu items and config, re-assemble IM and OF arrays
     void pourModuleArrayIntoMenu(NSArray *a, CVSmartMenuGroup *g);
 	void showOutputFilterStatus(NSString *modid, BOOL s);
+	void switchToLastPrimaryIM();
 	NSString *MSG(NSString *m);
 
     CVService *srv;
