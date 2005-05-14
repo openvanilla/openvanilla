@@ -17,7 +17,8 @@ enum {      // CVLMI = CVLoader Menu Item
     CVLMI_OFGROUPSTART=2000,
 	CVLMI_FASTIMSWITCH=3000,
     CVLMI_ABOUT=3001,
-    CVLMI_HELP=3002,
+    CVLMI_PREFERENCES=3002,
+    CVLMI_HELP=3003,
 };
 
 CVLoader::CVLoader() {
@@ -153,7 +154,10 @@ void CVLoader::menuHandler(unsigned int cmd) {
 			switchToLastPrimaryIM();
 			return;
         case CVLMI_ABOUT:
-            murmur ("about menu item clicked");
+            [dspsrvr aboutDialog];
+            return;
+        case CVLMI_PREFERENCES:
+            murmur ("preferences menu item clicked");
             return;
         case CVLMI_HELP:
             murmur ("help menu item clicked");
@@ -189,17 +193,18 @@ void CVLoader::createMenuGroups() {
 	CVDeleteMenu(immenu);
     immenugroup=new CVSmartMenuGroup(immenu, CVLMI_IMGROUPSTART, loaderbundle, CVSM_EXCLUSIVE);
     ofmenugroup=new CVSmartMenuGroup(immenu, CVLMI_OFGROUPSTART, loaderbundle, CVSM_MULTIPLE);
-    immenugroup->insertTitle(MSG(@"input methods"));
+    immenugroup->insertTitle(MSG(@"Input methods"));
     pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVInputMethod"), immenugroup);
     immenugroup->insertSeparator();
-    ofmenugroup->insertTitle(MSG(@"output filters"));
+    ofmenugroup->insertTitle(MSG(@"Output filters"));
     pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVOutputFilter"), ofmenugroup);    
     ofmenugroup->insertSeparator();
 	
 	// the fastIMSwitch has a menudict key called "fastIMSwitch"
-    CVInsertMenuItem(immenu, CVLMI_FASTIMSWITCH, MSG(@"fastIMSwitch"), 0, [menudict valueForKey:@"fastIMSwitch"]);
-    CVInsertMenuItem(immenu, CVLMI_ABOUT, MSG(@"about"), 0);
-    CVInsertMenuItem(immenu, CVLMI_HELP, MSG(@"help"), 0);
+    CVInsertMenuItem(immenu, CVLMI_FASTIMSWITCH, MSG(@"Input method toggle"), 0, [menudict valueForKey:@"fastIMSwitch"]);
+    CVInsertMenuItem(immenu, CVLMI_ABOUT, MSG(@"About"), 0);
+    CVInsertMenuItem(immenu, CVLMI_PREFERENCES, MSG(@"Preferences"), 0);
+    CVInsertMenuItem(immenu, CVLMI_HELP, MSG(@"Help"), 0);
 }
 
 void CVLoader::checkMenuItems() {

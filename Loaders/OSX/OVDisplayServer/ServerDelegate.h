@@ -13,6 +13,7 @@
 	float fadealpha;
 	NSTimer *fadetimer;
     NSColor *defaultbackground;
+    IBOutlet id aboutdialog;
 }
 - (void)applyConfig:(NSDictionary*)d window:(NSWindow*)w textField:(NSTextField*)t;
 - (void)updateTextInWindow:(NSWindow*)w textField:(NSTextField*)t text:(NSString*)s position:(Point)p;

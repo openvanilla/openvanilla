@@ -40,8 +40,10 @@ NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *libexcludelis
     }    
 
     // add module-exclusion list into the named dict
-    int c=[modexcludelist count];
-    for (int i=0; i<c; i++) [dict setValue:@"1" forKey:[modexcludelist objectAtIndex:i]];
+    if (modexcludelist) {
+        int c=[modexcludelist count];
+        for (int i=0; i<c; i++) [dict setValue:@"1" forKey:[modexcludelist objectAtIndex:i]];
+    }
 
     // load everything
     enm=[libList objectEnumerator];

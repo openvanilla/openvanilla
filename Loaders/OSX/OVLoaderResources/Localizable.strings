@@ -1,3 +1,11 @@
-"about"="About openvanilla...";
-"help"="Help";
-"fastIMSwitch"="Input method toggle";
+/* on the menu */
+"Input methods"="Input methods";
+"Output filters"="Output filters";
+"Input method toggle"="Input method toggle";
+"About"="About OpenVanilla";
+"Preferences"="Preferences...";
+"Help"="Help";
+
+/* for output filter status */
+"enabled"="enabled";
+"disabled"="disabled";

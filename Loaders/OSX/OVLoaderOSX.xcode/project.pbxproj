@@ -712,6 +712,7 @@
 			files = (
 				6AD76B0608358BA600164A51,
 				6AD76B0708358BA600164A51,
+				6ADD6E9908366E3800CB4339,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -977,12 +978,35 @@
 			settings = {
 			};
 		};
+		6ADD6E9108366E2000CB4339 = {
+			children = (
+				6ADD6E9808366E3800CB4339,
+			);
+			isa = PBXGroup;
+			name = SharedResources;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ADD6E9808366E3800CB4339 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.icns;
+			path = OpenVanillaIcon.icns;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6ADD6E9908366E3800CB4339 = {
+			fileRef = 6ADD6E9808366E3800CB4339;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		6AF10FF20814BE3400B49D06 = {
 			children = (
+				6ADD6E9108366E2000CB4339,
 				6AF1100B0814BED000B49D06,
+				6AF1100C0814BEE600B49D06,
 				6AF110060814BEB800B49D06,
 				6AD76AB80835845000164A51,
-				6AF1100C0814BEE600B49D06,
 				6AF110040814BEA000B49D06,
 				6AF110070814BEC100B49D06,
 				6AF110050814BEB000B49D06,

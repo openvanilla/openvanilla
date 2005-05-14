@@ -4,7 +4,7 @@
         {
             CLASS = ServerDelegate; 
             LANGUAGE = ObjC; 
-            OUTLETS = {aboutwindow = id; }; 
+            OUTLETS = {aboutdialog = id; }; 
             SUPERCLASS = NSObject; 
         }
     ); 

@@ -40,6 +40,9 @@ Point CVFixWindowPosition(Point pp, int width, int height);
     if (fadetimer) [self stopTimer];
     fadetimer=[NSTimer scheduledTimerWithTimeInterval:CVIB_FADEWAIT target:self selector:@selector(fadeStart) userInfo:nil repeats:NO];
 }
+- (void)aboutDialog {
+    [aboutdialog orderFront:self];
+}
 - (void)dealloc {
     [defaultbackground release];
 	[candi release];

@@ -11,6 +11,7 @@
 - (void)notifyMessage:(bycopy NSString*)s position:(Point)p;
 - (void)notifyClose;
 - (void)notifyFade;
+- (void)aboutDialog;
 @end
 
 #endif
