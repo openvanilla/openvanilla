@@ -282,7 +282,7 @@ void CVLoader::showOutputFilterStatus(NSString *modid, BOOL s) {
 	srv->fadeNotification();
 }
 
-NSString *OVLoader::MSG(NSString *m) {
+NSString *CVLoader::MSG(NSString *m) {
     return [loaderbundle localizedStringForKey:m value:nil table:nil];
 }
 
