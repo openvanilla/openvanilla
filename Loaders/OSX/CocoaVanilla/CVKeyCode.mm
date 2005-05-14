@@ -31,7 +31,27 @@ CVKeyCode::CVKeyCode(NSString *s) {
 }
 
 void CVKeyCode::init(const char *charcode, const char *modifiers) {
-	c=toupper(*charcode);
+    c=0;
+    if (strlen(charcode)==1) {
+        c=toupper(*charcode);
+    }
+    else {
+        #define KMAP(x,y)  if(!strcasecmp(charcode, x)) c=y
+        KMAP("esc", ovkEsc);
+        else KMAP("space", ovkSpace);
+        else KMAP("delete", ovkDelete);
+        else KMAP("backspace", ovkBackspace);
+        else KMAP("up", ovkUp);
+        else KMAP("down", ovkDown);
+        else KMAP("left", ovkLeft);
+        else KMAP("right", ovkRight);
+        else KMAP("home", ovkHome);
+        else KMAP("end", ovkEnd);
+        else KMAP("pageup", ovkPageUp);
+        else KMAP("pagedown", ovkPageDown);
+        else KMAP("tab", ovkTab);
+        #undef KMAP
+    }
 	m=0;
 	
 	for (size_t i=0; i<strlen(modifiers); i++) {
