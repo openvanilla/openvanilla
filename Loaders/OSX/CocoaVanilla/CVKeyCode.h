@@ -3,12 +3,13 @@
 #ifndef __CVKeyCode_h
 #define __CVKeyCode_h
 
+#include <Carbon/Carbon.h>
 #include <OpenVanilla/OpenVanilla.h>
 
 class CVKeyCode : public OVKeyCode
 {
 public:
-    CVKeyCode(char charcode, UInt32 modifiers) : c(charcode), m(modifiers) {}
+    CVKeyCode(char charcode, UInt32 modifiers);
     virtual int code()       { return c; }
     virtual int isShift()    { return m & (shiftKey | rightShiftKey); }
     virtual int isCtrl()     { return m & (controlKey | rightControlKey); }

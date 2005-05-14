@@ -33,33 +33,22 @@ CVLoader::~CVLoader() {
 }
 
 int CVLoader::init(MenuRef m) {
-    activecontext=NULL;
-
-    NSBundle *bundle=[NSBundle bundleWithIdentifier:@ TSBUNDLEID];
-    if (!bundle) {
-        murmur ("CVLoader: fatal error, bundle %s not found", TSBUNDLEID);
+	// get CVLoader.bundle
+    loaderbundle=[NSBundle bundleWithIdentifier:@ TSBUNDLEID];
+    if (!loaderbundle) {
+        NSLog (@"CVLoader: fatal error, bundle %s not found", TSBUNDLEID);
         return 0;
     }
-    
-	connectDisplayServer();
+
+	// connect to the display server
+	if (!connectDisplayServer()) {
+		NSLog ([NSString stringWithFormat: @"CVLoader: init failed, cannot start up OVDisplayServer at %@", CVLC_DISPLAYSERVER]);
+		return 0;
+	}
 	
-/*    CVInfoBox *candiib, *ntfyib;        
-    candiib=[[CVInfoBox alloc] initWithWindowNibName:@"CVInfoBox"];
-    ntfyib=[[CVInfoBox alloc] initWithWindowNibName:@"CVInfoBox"];
-    if (!candiib || !ntfyib) {
-        murmur ("CVLoader: fatal error, failed CVInfoBox.nib loading");
-        return 0;
-    } */
-    
-    // wakes the two controllers up from .nib file
-/*    NSPanel *cp=(NSPanel*)[candiib window];
-    NSPanel *np=(NSPanel*)[ntfyib window];
-	[candiib setName:@"candi"];
-	[ntfyib setName:@"notify"];
-    [cp setFloatingPanel:YES];
-    [np setFloatingPanel:YES];
-    [cp setBecomesKeyOnlyIfNeeded:YES];
-    [np setBecomesKeyOnlyIfNeeded:YES]; */
+	// member variables initialization
+    activecontext=NULL;
+	immenu=m;
     srv=new CVService(CVGetUserSpacePath(), dspsrvr);
     candi=new CVCandidate(dspsrvr);
     cfg=[[CVConfig alloc] initWithFile:CVGetUserConfigFilename() defaultData:nil];
@@ -70,28 +59,14 @@ int CVLoader::init(MenuRef m) {
     // load everything!
     [modarray addObjectsFromArray: CVLoadEverything(CVGetModuleLoadPath(), srv)];
 
-    // set up the menus
-    immenugroup=new CVSmartMenuGroup(m, CVLMI_IMGROUPSTART, bundle, CVSM_EXCLUSIVE);
-    ofmenugroup=new CVSmartMenuGroup(m, CVLMI_OFGROUPSTART, bundle, CVSM_MULTIPLE);
-    immenugroup->insertTitle(MSG(@"input methods"));
-    pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVInputMethod"), immenugroup);
-    immenugroup->insertSeparator();
-    ofmenugroup->insertTitle(MSG(@"output filters"));
-    pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVOutputFilter"), ofmenugroup);    
-    ofmenugroup->insertSeparator();
-    CVInsertMenuItem(m, CVLMI_ABOUT, bundle, @"about");
-    CVInsertMenuItem(m, CVLMI_HELP, bundle, @"help");    
+    // load configuration
+    loaderdict=[[cfg dictionary] valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
 
-    // now that we have menus loaded, we now do configuration stuff, whew!
-    NSMutableDictionary *dict=[cfg dictionary];
-    loaderdict=[dict valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
-
-    // and we check menu items according to the config
+    // create menu groups and check all menu items, then sync config
+	immenugroup=ofmenugroup=NULL;
+	createMenuGroups();
     checkMenuItems();
-
-    // now we sync the menu items and config, plus we assemble the IM/OF arrays
     syncMenuAndConfig();
-
     return 1;
 }
 
@@ -108,7 +83,6 @@ void CVLoader::setActiveContext(CVContext *c) {
     
     // we have to reload loaderdict as it might have been gone!
     loaderdict=[[cfg dictionary] valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
-
     
     // now we tell every usable module to update config
     NSMutableDictionary *cfgdict=[cfg dictionary];
@@ -144,6 +118,7 @@ void CVLoader::menuHandler(unsigned int cmd) {
     switch (cmd) {
         case CVLMI_ABOUT:
             murmur ("about menu item clicked");
+			CVDeleteMenu(immenu);
             return;
         case CVLMI_HELP:
             murmur ("help menu item clicked");
@@ -153,7 +128,7 @@ void CVLoader::menuHandler(unsigned int cmd) {
     murmur("unknown menu item %d clicked", cmd);
 }
 
-void CVLoader::connectDisplayServer() {
+id CVLoader::connectDisplayServer() {
 	dspsrvr=nil;
 	
 	dspsrvr=[[NSConnection rootProxyForConnectionWithRegisteredName:@"OVDisplayServer" host:nil] retain];
@@ -170,6 +145,20 @@ void CVLoader::connectDisplayServer() {
 	}
 	
 	if (dspsrvr) [dspsrvr setProtocolForProxy:@protocol(OVDisplayServer)];
+	return dspsrvr;
+}
+
+void CVLoader::createMenuGroups() {
+    immenugroup=new CVSmartMenuGroup(immenu, CVLMI_IMGROUPSTART, loaderbundle, CVSM_EXCLUSIVE);
+    ofmenugroup=new CVSmartMenuGroup(immenu, CVLMI_OFGROUPSTART, loaderbundle, CVSM_MULTIPLE);
+    immenugroup->insertTitle(MSG(@"input methods"));
+    pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVInputMethod"), immenugroup);
+    immenugroup->insertSeparator();
+    ofmenugroup->insertTitle(MSG(@"output filters"));
+    pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVOutputFilter"), ofmenugroup);    
+    ofmenugroup->insertSeparator();
+    CVInsertMenuItem(immenu, CVLMI_ABOUT, loaderbundle, @"about");
+    CVInsertMenuItem(immenu, CVLMI_HELP, loaderbundle, @"help");    
 }
 
 void CVLoader::checkMenuItems() {

@@ -329,6 +329,7 @@
 				6A5D8E8A08173ADB007A527F,
 				6AA6E80B0817A7F7003C560A,
 				6AA6E8B30817BA60003C560A,
+				6ADD1857083617E600B4319D,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -954,6 +955,20 @@
 			target = 6AD76AEE08358A5B00164A51;
 			targetProxy = 6AD76B7F08358DA900164A51;
 		};
+		6ADD1856083617E600B4319D = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = CVKeyCode.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6ADD1857083617E600B4319D = {
+			fileRef = 6ADD1856083617E600B4319D;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		6AF10FF20814BE3400B49D06 = {
 			children = (
 				6AF1100B0814BED000B49D06,
@@ -1166,6 +1181,7 @@
 		6AF1100B0814BED000B49D06 = {
 			children = (
 				6AF9423A0817F2F800AE0534,
+				6ADD1856083617E600B4319D,
 				6AA6E8B20817BA60003C560A,
 				6AA6E89C0817B9BA003C560A,
 				6AA6E80A0817A7F7003C560A,

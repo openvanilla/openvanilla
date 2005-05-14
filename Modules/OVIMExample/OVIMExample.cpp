@@ -13,6 +13,7 @@ class IMExampleContext : public OVInputMethodContext
 public:
     virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* srv)
     {
+        return 0;
         murmur("IMExample: key event!");
         if (isprint(k->code()))
         {

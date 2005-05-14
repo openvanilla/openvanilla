@@ -2,6 +2,11 @@
 
 #include "CVSmartMenu.h"
 
+void CVDeleteMenu(MenuRef m) {
+	int p=CountMenuItems(m);
+	DeleteMenuItems(m, 1, p);
+}
+
 int CVInsertMenuItem(MenuRef m, int cmdid, NSString *s, int attr) {
     int p=CountMenuItems(m);
     if (InsertMenuItemTextWithCFString(m, (CFStringRef)s, p, attr, cmdid)!=noErr) return 0;

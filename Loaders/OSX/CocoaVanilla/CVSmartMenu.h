@@ -16,6 +16,7 @@ enum {
     CVSMATTR_SEPARATOR=kMenuItemAttrSeparator
 };
 
+void CVDeleteMenu(MenuRef m);
 int CVInsertMenuItem(MenuRef m, int cmdid, NSString *s, int attr=0);
 int CVInsertMenuItem(MenuRef m, int cmdid, NSBundle *b, NSString *s, int attr=0);
 
