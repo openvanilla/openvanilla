@@ -31,15 +31,25 @@ int OVIMArrayContext::updateCandidate(OVCIN *tab,OVBuffer *buf, OVCandidate *can
 
 int OVIMArrayContext::WaitKey1(OVKeyCode* key, OVBuffer* buf, 
                                OVCandidate* candibar, OVService* srv){
+    if(keyseq.length() != 1)
+        return 0;
+
     updateCandidate(tabs[SHORT_TAB], buf, candibar);
-    if( key->code() == 't' )
+    char keycode = keyseq.getSeq()[0];
+    if( keycode == 't' )
         buf->clear()->append((char*)"的")->update();
-    changeState(STATE_WAIT_KEY2);
+    if( isprint(keycode) && keyseq.valid(keycode) )
+        changeState(STATE_WAIT_KEY2);
+
     return 1;    
 }
 
 int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf, 
                                OVCandidate* candibar, OVService* srv){
+    if( keyseq.length()!=2 )
+        return 0;
+
+    char keycode = keyseq.getSeq()[1];
     if( isWSeq(keyseq.getSeq()[0], keyseq.getSeq()[1]) ){
         updateCandidate(tabs[MAIN_TAB], buf, candibar);
         buf->clear()->append(candidateStringVector[0].c_str())->update();
@@ -47,7 +57,7 @@ int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf,
     }
     else{
         updateCandidate(tabs[SHORT_TAB], buf, candibar);
-        if( isprint(key->code()) && keyseq.valid(key->code()) )
+        if( isprint(keycode) && keyseq.valid(keycode) )
             changeState(STATE_WAIT_KEY3);
     }
     return 1;    
@@ -163,7 +173,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
     const bool validkey = keyseq.valid(keycode) || 
       ( keyseq.getSeq()[0]=='w' && isdigit(keycode) );
    
-    murmur("OVIMArray state: %d\n", state);
+    murmur("OVIMArray state: %d", state);
     if (!keyseq.length() && !isprint(keycode)) return 0;
 
     if(keycode==ovkEsc){
@@ -208,6 +218,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         if( keyseq.length() >= 5 ||
             (keyseq.length() == 4 && keycode != 'i') )
             return 1;
+        murmur("keyseq add [%c]", keycode);
         keyseq.add(keycode);
         updateDisplay(buf);
         ret = 1;
@@ -215,6 +226,8 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
     else if (key->code() == ovkDelete || key->code() == ovkBackspace){   
         keyseq.remove();
         updateDisplay(buf);
+        if(keyseq.length() == 0 && candi.onDuty())
+            clearCandidate(candi_bar);
         changeBackState(state);
         ret = 1;
     }
@@ -248,14 +261,16 @@ void OVIMArrayContext::changeBackState(STATE s){
             break;
         case STATE_WAIT_KEY3: 
             if( keyseq.length() == 2)
-                changeState(STATE_WAIT_KEY1); 
+                changeState(STATE_WAIT_KEY2); 
+            else if( keyseq.length() == 1)
+                changeState(STATE_WAIT_KEY1);
             break;
         default: break;
     }
 }
 
 void OVIMArrayContext::changeState(STATE s){    
-    murmur("OVIMArray change state: %d -> %d\n", state, s);
+    murmur("OVIMArray change state: %d -> %d", state, s);
     state = s;  
 }
 
