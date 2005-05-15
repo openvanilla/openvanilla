@@ -104,7 +104,7 @@ OVIMXcin::OVIMXcin(char *lpath, char *cfile, char *en, char *cn)
 
     sprintf(ename, "%s", en ? en : cfile);
     sprintf(cname, "%s", cn ? cn : cfile);
-    sprintf(idbuf, "%s", en ? en : cfile);
+    sprintf(idbuf, "OVIMGeneric-%s", en ? en : cfile);
 }
 
 OVIMXcin::~OVIMXcin()
