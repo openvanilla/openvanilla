@@ -35,6 +35,13 @@ public:
     
     virtual const char *identifier() { return "OVOFHTMLCharEntity"; }
 
+    virtual const char *localizedName(const char *locale)
+    {       
+	    if (!strcasecmp(locale, "zh_TW")) return "字碼轉換 HTML Entity";
+	    if (!strcasecmp(locale, "zh_CN")) return "字码转换成 HTML Entity";
+	    return "Convert Characters to HTML Entities";
+    } 
+
     virtual const char *process (const char *src, OVService *srv) {
         int len = strlen(src);
         buf.clear();
