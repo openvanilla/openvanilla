@@ -9,6 +9,8 @@ all:
 clean:
 	$(BUILDER) clean
 	rm -rf build
+	find . -name '*.mode1' -delete
+	find . -name '*.pbxuser' -delete
 
 install:
 	# mkdir -p ~/Library/OpenVanilla/0.7.0/
