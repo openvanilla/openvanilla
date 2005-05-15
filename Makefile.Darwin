@@ -22,3 +22,6 @@ osx-framework:
 	mkdir -p $(OSXFRAMEWORK)/Headers
 	for file in $(HEADERS) ; do cp $(HDRDIR)/$$file $(OSXFRAMEWORK)/Headers; done;
 
+uninstall:
+	echo "Erasing $(OSXFRAMEWORK)"
+	rm -rf /Library/Frameworks/OpenVanilla.framework
