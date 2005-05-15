@@ -7,25 +7,22 @@
 #include <stdio.h>
 #include <ctype.h>
 
-char *morse[26] = {
+char *morse[40] = {
 ".- ","-... ","-.-. ","-.. ",". ","..-. ","--. ",".... ",
 ".. ",".--- ","-.- ",".-.. ","-- ","-. ","--- ",".--. ",
-"--.- ",".-. ","... ","- ","..- ","...- ",".-- ","-..- ",
-"-.-- ","--.. "};
-
-char ascii[26] = {
-'a','b','c','d','e','f','g','h','i','j','k','l','m','n',
-'o','p','q','r','s','t','u','v','w','x','y','z',
+"--.- ",".-. ","... ","- ","..- ","...- ",".-- ","-..- ",`
+"-.-- ","--.. ",
+"----- ", ".---- ", "..--- ", "...-- ", "....- ",
+"..... ", "-.... ", "--... ", "---.. ", "----. ",
+".-.-.- ", "--..-- ", "..--.. "
 };
 
-const char *convert(char code){
-	int i;
-	for(i = 0; i< 26; i ++){
-		if(code == ascii[i])
-			return morse[i];
-	}
-	return "";
-}
+char ascii[40] = {
+'a','b','c','d','e','f','g','h','i','j','k','l','m','n',
+'o','p','q','r','s','t','u','v','w','x','y','z',
+'0','1','2','3','4','5','6','7','8','9',
+'.', ',', '?'
+};
 
 class OVOFMorseCode : public OVOutputFilter
 {
@@ -68,6 +65,16 @@ const char *OVOFMorseCode::process(const char *src, OVService *srv)
         char c=toupper(src[i]);     // it's a UTF-8 string, so always safe
         if (c >= 'A' && c <='Z') {
             strcat(buf, morse[c-'A']);
+        } else if (c >= '0' && c <='9') {
+            strcat(buf, morse[c-'0' + 26]);
+        } else if (c == '.') {
+            strcat(buf, morse[36]);
+        } else if (c == ',') {
+            strcat(buf, morse[37]);
+        } else if (c == '?') {
+            strcat(buf, morse[38]);
+        } else if (c == ' ') {
+            strcat(buf, "/");
         }
         else {
             char nstr[2];
