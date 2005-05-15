@@ -341,7 +341,12 @@ BOOL CVLoader::checkIfLastAtomicInitFailed() {
     NSString *msg=[NSString stringWithFormat:MSG(@"AtomicInitFailed"), libname, atomic, datestr];
     
     NSString *msgfile=CVGetAtomicInitErrorMessageFilename();
-    [msg writeToFile:msgfile atomically:YES encoding:NSUTF8StringEncoding error:&err];
+
+    // this won't work in 10.3
+    // [msg writeToFile:msgfile atomically:YES encoding:NSUTF8StringEncoding error:&err];
+    [msg writeToFile:msgfile atomically:YES];
+
+
     // unlink([atomic UTF8String]);
     system([[NSString stringWithFormat:@"open %@", msgfile] UTF8String]);
     return YES;

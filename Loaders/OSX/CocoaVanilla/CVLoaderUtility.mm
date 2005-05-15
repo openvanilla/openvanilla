@@ -80,7 +80,12 @@ void CVAtomicInitStart(NSString *f, NSString *libname) {
     if (!f) return;
     NSError *err;
     // NSLog(@"writing atomicinit file %@ for lib %@", f, libname);
-    [libname writeToFile:f atomically:NO encoding:NSUTF8StringEncoding error:&err];
+    
+
+    // this won't work in OS X 10.3
+    // [libname writeToFile:f atomically:NO encoding:NSUTF8StringEncoding error:&err];
+
+    [libname writeToFile:f atomically:NO];
 }
 
 void CVAtomicInitEnd(NSString *f) {
