@@ -1,6 +1,6 @@
 %gen_inp
 %ename Iroha
-%cname 日文假名輸入
+%cname 日文假名
 %encoding UTF-8
 %selkey 1234567890
 %keyname begin

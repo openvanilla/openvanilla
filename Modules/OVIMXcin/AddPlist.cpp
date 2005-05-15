@@ -1,7 +1,8 @@
 #define OVDEBUG
 
 #include <OpenVanilla/OpenVanilla.h>
-#include "../../Loaders/OSX/VXConfig.h"
+#include<OpenVanilla/OVLibrary.h>
+#include<OpenVanilla/OVUtility.h>
 
 int main(int argc, char *argv[])
 {

@@ -1,4 +1,4 @@
-OBJS=AddPlist.o VXUtility.o
+OBJS=AddPlist.o OVStringToolKit.o OVFileHandler.o OVCandidateList.o
 GOALS=AddPlist
 
 all: $(GOALS)

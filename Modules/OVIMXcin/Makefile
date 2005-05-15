@@ -1,9 +1,9 @@
-IMID=OVIMXcin
+IMID=OVIMGeneric
 
 OBJS=OVCIN.o OVCandidateList.o OVFileHandler.o OVIMXcin.o\
      OVStringToolKit.o XcinCinList.o
 
-GOALS=OVIMXcin.dylib 
+GOALS=OVIMGeneric.dylib 
 
 DATA=cj.cin dayi3.cin iroha.cin ehq.cin
 
