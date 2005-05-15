@@ -79,12 +79,12 @@ public:
     int updateConfig(OVDictionary *conf);
     virtual const char *localizedName(const char *locale){  
         if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN")){
-            strcpy(cname,"OV 行列");
+            strcpy(cname,"行列");
             //if( isForceSP() )   strcat(cname, "(快)");
             return cname;
         }
         else{
-            strcpy(ename,"OV Array");
+            strcpy(ename,"Array 30");
             //if( isForceSP() )   strcat(ename, "(Q)");
             return ename;
         }

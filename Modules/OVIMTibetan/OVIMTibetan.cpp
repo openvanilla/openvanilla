@@ -397,11 +397,11 @@ class OVIMTibetan : public OVInputMethod
       virtual const char *localizedName(const char *locale)
       {
 	 if (!strcasecmp(locale, "zh_TW"))
-	    return "OV 藏文";
+	    return "藏文";
 	 else if (!strcasecmp(locale, "zh_CN"))
-	    return "OV 藏文";
+	    return "藏文";
 	 else
-	    return "OV Tibetan";
+	    return "Tibetan";
       }
 
       virtual int initialize(OVDictionary* l, OVService*, const char* modulePath)

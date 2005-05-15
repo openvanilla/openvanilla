@@ -89,11 +89,11 @@ public:
     virtual const char *localizedName(const char *locale)
     {
         if (!strcasecmp(locale, "zh_TW"))
-            return "OV 注音";
+            return "注音";
         else if (!strcasecmp(locale, "zh_CN"))
-            return "OV 正体注音";
+            return "正体注音";
         else
-            return "OV Phonetic (Bopomofo)";
+            return "Phonetic (Bopomofo)";
     }
 
     virtual int initialize(OVDictionary* l, OVService*, const char*)

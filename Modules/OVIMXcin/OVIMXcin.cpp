@@ -102,9 +102,9 @@ OVIMXcin::OVIMXcin(char *lpath, char *cfile, char *en, char *cn)
     strcat(cinfilename, cinfile);
     cintab=new OVCIN(cinfilename);
 
-    sprintf(ename, "OV xcin %s", en ? en : cfile);
-    sprintf(cname, "OV xcin %s", cn ? cn : cfile);
-    sprintf(idbuf, "OVIMXcin-%s", en ? en : cfile);
+    sprintf(ename, "%s", en ? en : cfile);
+    sprintf(cname, "%s", cn ? cn : cfile);
+    sprintf(idbuf, "%s", en ? en : cfile);
 }
 
 OVIMXcin::~OVIMXcin()

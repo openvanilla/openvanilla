@@ -33,7 +33,8 @@ public:
         return 1;
     }
     virtual const char* localizedName(const char *locale) {
-        if (!strcasecmp(locale, "zh_TW")) return "英數字輸入";
+        if (!strcasecmp(locale, "zh_TW")) return "英數";
+        if (!strcasecmp(locale, "zh_CN")) return "英数";
         return "Roman (alphanumeric)";
     }
 };
