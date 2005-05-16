@@ -1,6 +1,6 @@
 // OVIMXcin.cpp
 
-// #define OVDEBUG
+#define OV_DEBUG
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLibrary.h>
 #include <OpenVanilla/OVUtility.h>
@@ -130,7 +130,7 @@ const char* OVIMXcin::localizedName(const char* locale)
 int OVIMXcin::initialize(OVDictionary* global, OVService*, const char*)
 {
     if (!cintab) return 0;
-    
+    murmur("OVIMXcin: initializing %s", identifier());
     update(global);
     return 1;
 }
@@ -270,10 +270,13 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar,
     {
         if (key->isCapslock())
         {
+            char cbuf[2];
             if (key->isShift())
-                buf->append((const char*)toupper((char)key->code()));
+                sprintf(cbuf, "%c", toupper(key->code()));
             else
-                buf->append((const char*)tolower((char)key->code()));
+                sprintf(cbuf, "%c", tolower(key->code()));
+
+            buf->append(cbuf);
         }
         //else if (key->isShift()) buf->appendChar(key->lower());
         cancelAutoCompose(textbar);
