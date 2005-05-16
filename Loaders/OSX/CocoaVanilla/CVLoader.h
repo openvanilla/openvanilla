@@ -37,7 +37,7 @@ protected:
     void pourModuleArrayIntoMenu(NSArray *a, CVSmartMenuGroup *g);
 	void showOutputFilterStatus(NSString *modid, BOOL s);
 	void switchToLastPrimaryIM();
-    BOOL checkIfLastAtomicInitFailed();
+    BOOL checkIfLastAtomicInitFailed(int timeout);  // unit in 1/100 second
 	NSString *MSG(NSString *m);
 
     CVService *srv;

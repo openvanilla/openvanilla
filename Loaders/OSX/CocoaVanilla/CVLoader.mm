@@ -58,8 +58,9 @@ int CVLoader::init(MenuRef m) {
     // load configuration
     loaderdict=[[cfg dictionary] valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
     
+    NSString *timeout=[loaderdict valueForKey:@"atomicInitLockTimeout" default:@"500"];
     // check if our last atomic init failed
-    if (checkIfLastAtomicInitFailed()) return 0;
+    if (checkIfLastAtomicInitFailed([timeout intValue])) return 0;
     
     // get library-exclude list and module-exclude list
     NSArray *libexclude=[loaderdict valueForKey:@"excludeLibraryList" default:[[NSArray new] autorelease]];
@@ -236,12 +237,15 @@ void CVLoader::syncMenuAndConfig() {
     NSArray *immgitems=immenugroup->getCheckedItems();
     NSArray *ofmgitems=ofmenugroup->getCheckedItems();
 
+    NSLog([ofmgitems description]);
+
     // remember the result object from CVFindModules is autoreleased
     NSArray *imsrc=CVFindModules(modarray, immgitems, @"OVInputMethod");
     NSArray *ofsrc=CVFindModules(modarray, ofmgitems, @"OVOutputFilter");
     
     initializeModules(ofsrc, ofarray, ofmenugroup);
     initializeModules(imsrc, imarray, immenugroup);
+    NSLog([ofarray description]);
     
     // after so much work, we write these back to config
     ofmgitems=ofmenugroup->getCheckedItems();
@@ -338,20 +342,32 @@ void CVLoader::switchToLastPrimaryIM() {
 	}
 }
 
-BOOL CVLoader::checkIfLastAtomicInitFailed() {
+BOOL CVLoader::checkIfLastAtomicInitFailed(int timeout) {
     NSString *atomic=CVGetAtomicInitLockFilename();
     if (!CVIsPathExist(atomic)) return NO;    
+    
+    NSLog(@"CVLoader: found atomic lock file, wait to see if it's a failure or a lock in another process.");
+    int tick=0;
+    while (tick < timeout) {
+        if (!CVIsPathExist(atomic)) return NO;
+        usleep(10000);      // sleep for 1/100 second
+        tick++;
+        if (!(tick % 10)) NSLog(@"CVLoader: still waiting for the unlock (tick=%d, timeout=%d)", tick, timeout);
+    }
+    
     NSError *err;
     NSString *libname=[NSString stringWithContentsOfFile:atomic encoding:NSUTF8StringEncoding error:&err];
     NSString *datestr=[[NSDate date] descriptionWithCalendarFormat:nil timeZone:nil locale:nil];
     NSString *msg=[NSString stringWithFormat:MSG(@"AtomicInitFailed"), libname, atomic, datestr];
-    
-    NSString *msgfile=CVGetAtomicInitErrorMessageFilename();
+
+    char *username=getenv("USER");
+    NSString *msgfile=[NSString stringWithFormat:@"%@-%s",
+        CVGetAtomicInitErrorMessageFilename(),
+        username ? username : "unknown-user"];
 
     // this won't work in 10.3
     // [msg writeToFile:msgfile atomically:YES encoding:NSUTF8StringEncoding error:&err];
-    [msg writeToFile:msgfile atomically:YES];
-
+    [msg writeToFile:msgfile atomically:NO];
 
     // unlink([atomic UTF8String]);
     system([[NSString stringWithFormat:@"open %@", msgfile] UTF8String]);
