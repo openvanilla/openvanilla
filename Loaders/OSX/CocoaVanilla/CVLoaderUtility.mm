@@ -78,9 +78,8 @@ NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *libexcludelis
 
 void CVAtomicInitStart(NSString *f, NSString *libname) {
     if (!f) return;
-    NSError *err;
+    // NSError *err;
     // NSLog(@"writing atomicinit file %@ for lib %@", f, libname);
-    
 
     // this won't work in OS X 10.3
     // [libname writeToFile:f atomically:NO encoding:NSUTF8StringEncoding error:&err];

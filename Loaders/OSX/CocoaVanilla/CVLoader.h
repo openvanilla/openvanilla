@@ -34,7 +34,7 @@ protected:
 	void checkMenuItems();
     void initializeModules(NSArray *src, NSMutableArray *dst, CVSmartMenuGroup *fallout);
     void syncMenuAndConfig();       // sync menu items and config, re-assemble IM and OF arrays
-    void pourModuleArrayIntoMenu(NSArray *a, CVSmartMenuGroup *g);
+    void pourModuleArrayIntoMenu(NSArray *ma, CVSmartMenuGroup *g, NSArray *orderedby=nil);
 	void showOutputFilterStatus(NSString *modid, BOOL s);
 	void switchToLastPrimaryIM();
     BOOL checkIfLastAtomicInitFailed(int timeout);  // unit in 1/100 second

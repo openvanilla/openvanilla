@@ -202,7 +202,13 @@ void CVLoader::createMenuGroups() {
     pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVInputMethod"), immenugroup);
     immenugroup->insertSeparator();
     ofmenugroup->insertTitle(MSG(@"Output filters"));
-    pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVOutputFilter"), ofmenugroup);    
+
+    // we get the "sorted-by" key to make our menu ordered by user's settings
+    // we read our own cfgmenukey because we want to force sync the config file
+    // if the key hasn't existed yet
+	NSDictionary *cfgmenukey=[[cfg dictionary] valueForKey:@"OVMenuManager" default:[[NSMutableDictionary new] autorelease]];
+    NSArray *oforderedby=[cfgmenukey valueForKey:@"outputFilterOrder" default:[[NSArray new] autorelease]];
+    pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVOutputFilter"), ofmenugroup, oforderedby);
     ofmenugroup->insertSeparator();
 	
 	// the fastIMSwitch has a menudict key called "fastIMSwitch"
@@ -237,15 +243,12 @@ void CVLoader::syncMenuAndConfig() {
     NSArray *immgitems=immenugroup->getCheckedItems();
     NSArray *ofmgitems=ofmenugroup->getCheckedItems();
 
-    NSLog([ofmgitems description]);
-
     // remember the result object from CVFindModules is autoreleased
     NSArray *imsrc=CVFindModules(modarray, immgitems, @"OVInputMethod");
     NSArray *ofsrc=CVFindModules(modarray, ofmgitems, @"OVOutputFilter");
     
     initializeModules(ofsrc, ofarray, ofmenugroup);
     initializeModules(imsrc, imarray, immenugroup);
-    NSLog([ofarray description]);
     
     // after so much work, we write these back to config
     ofmgitems=ofmenugroup->getCheckedItems();
@@ -303,10 +306,26 @@ void CVLoader::initializeModules(NSArray *src, NSMutableArray* dst, CVSmartMenuG
     }
 }
 
-void CVLoader::pourModuleArrayIntoMenu(NSArray *a, CVSmartMenuGroup *g) {
-    NSEnumerator *e=[a objectEnumerator];
-    CVModuleWrapper *w;
+void CVLoader::pourModuleArrayIntoMenu(NSArray *ma, CVSmartMenuGroup *g, NSArray *orderedby) {
+    NSMutableArray *a=[NSMutableArray arrayWithArray:ma];
+    NSEnumerator *e;
     const char *lc=srv->locale();
+
+    if (orderedby) {
+        e=[orderedby objectEnumerator];
+        NSString *mid;
+        while (mid=[e nextObject]) {
+            CVModuleWrapper *w=CVFindModule(a, mid);
+            if (!w) continue;
+            OVModule *m=[w module];        
+            g->insertItem([w identifier], [NSString stringWithUTF8String: m->localizedName(lc)], [menudict valueForKey:[w identifier]]);
+            [a removeObject:w];
+        }
+    }
+
+    // pour in the remaining items
+    e=[a objectEnumerator];
+    CVModuleWrapper *w;
     
     while (w=[e nextObject]) {
         OVModule *m=[w module];        

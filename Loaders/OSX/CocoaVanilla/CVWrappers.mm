@@ -18,6 +18,9 @@
     [loadedpath release];
     [super dealloc];
 }
+- (BOOL)isEqual:(id)obj {
+    return [[self identifier] isEqualToString:[obj identifier]];
+}
 - (NSString*)description {
     if (!mod) return @"";
     return [NSString stringWithFormat: 

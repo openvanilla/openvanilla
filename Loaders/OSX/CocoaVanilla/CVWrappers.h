@@ -15,6 +15,7 @@
     BOOL canuse;
 }
 - (void)dealloc;
+- (BOOL)isEqual:(id)obj;
 - (id)initWithModule:(OVModule*)m loadedPath:(NSString*)p fromLibrary:(NSString*)l;
 - (NSString*)description;
 - (NSString*)moduleType;
