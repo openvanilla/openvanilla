@@ -5,6 +5,14 @@
 	};
 	objectVersion = 39;
 	objects = {
+		6A15976808389BBA00518693 = {
+			children = (
+			);
+			isa = PBXGroup;
+			name = EmbeddedLoader;
+			refType = 4;
+			sourceTree = "<group>";
+		};
 		6A3AC1C708160F9700FFFF62 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -1198,6 +1206,7 @@
 		};
 		6AF10FF20814BE3400B49D06 = {
 			children = (
+				6A15976808389BBA00518693,
 				6ADD6E9108366E2000CB4339,
 				6AF1100B0814BED000B49D06,
 				6AF1100C0814BEE600B49D06,
