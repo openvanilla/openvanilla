@@ -169,7 +169,8 @@ public:
     }
     
     void uimCandidateShiftPage(int direction) {
-        // this never seems to be called
+        // this is called when PgUp/PgDown is entered,
+        // we have to do our own page flipping though
         murmur("uim candidate shift page! direction=%d", direction);
         char buf[256];
         sprintf(buf, "page shift, direction=%d", direction);

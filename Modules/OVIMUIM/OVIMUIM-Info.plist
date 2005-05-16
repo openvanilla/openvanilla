@@ -7,14 +7,14 @@
 	<key>CFBundleExecutable</key>
 	<string>OVIMUIM</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.OVIMUIM</string>
+	<string>org.openvanilla.modules.OVIMUIM</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>0.7</string>
 </dict>
 </plist>

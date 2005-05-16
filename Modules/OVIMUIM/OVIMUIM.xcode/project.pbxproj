@@ -87,7 +87,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVIMUIM-Info.plist";
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				INSTALL_PATH = /Library/OpenVanilla/0.7.0/Modules;
 				LIBRARY_SEARCH_PATHS = "\"$(LOCAL_LIBRARY_DIR)/Frameworks/UIM.framework/Versions/0.4.7/lib\"";
 				LIBRARY_STYLE = BUNDLE;
 				OTHER_CFLAGS = "";
