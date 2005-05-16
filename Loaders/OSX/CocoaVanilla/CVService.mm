@@ -41,6 +41,9 @@ CVService::CVService(NSString *usrpath, id displayserver) {
 	notifypos=(Point){0, 0};
     userspace=[usrpath stringByStandardizingPath];
     [userspace retain];
+    
+    shouldbeep=1;
+    beepsound=[[NSString alloc] initWithString:@""];
 }
 
 CVService::~CVService() {
@@ -49,10 +52,33 @@ CVService::~CVService() {
     if (userbuf) free(userbuf);
     [lctag release];
     [userspace release];
+    [beepsound release];
 }
 
 void CVService::beep() {
-    SysBeep(30);
+    if (!shouldbeep) return;
+    
+    if (![beepsound length]) {
+        SysBeep(30);
+    }
+    else {
+        NSSound *s=[NSSound soundNamed:beepsound];
+        if (s) [s retain]; else s=[[NSSound alloc] initWithContentsOfFile:beepsound byReference:YES];        
+        if (s) {
+            [s play];
+            [s release];
+        }
+        else SysBeep(30);
+    }
+}
+
+void CVService::setShouldBeep(int s) {
+    shouldbeep=s;
+}
+
+void CVService::setBeepSound(NSString *s) {
+    [beepsound release];
+    beepsound=[[NSString alloc] initWithString:s];
 }
 
 void CVService::notify(const char* msg) {

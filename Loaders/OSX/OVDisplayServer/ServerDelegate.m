@@ -7,6 +7,11 @@
 #define CVIB_FADEINTERVAL   0.05    // 0.05 sec/frame
 #define CVIB_FADEVALUE      0.025   // alphaValue-=0.025/frame
 
+enum {
+    OVDPS_NOTIFY_DEFAULT=0,
+    OVDPS_NOTIFY_SILENT=1
+};
+
 NSPoint CVPointToNSPoint(Point p, NSWindow *w);
 Point CVFixWindowPosition(Point pp, int width, int height);
 
@@ -15,6 +20,10 @@ Point CVFixWindowPosition(Point pp, int width, int height);
 	[self applyConfig:cfg window:candi textField:canditext];
 	[self applyConfig:cfg window:noti textField:notitext];
 	notialpha=[noti alphaValue];
+
+    notistyle=OVDPS_NOTIFY_DEFAULT;    
+    NSString *ns=[cfg valueForKey:@"notificationStyle" default:@"default"];
+    if ([ns isEqualToString:@"silent"]) notistyle=OVDPS_NOTIFY_SILENT;
 }
 - (void)candidateShow {
 	candion=YES;
@@ -31,13 +40,17 @@ Point CVFixWindowPosition(Point pp, int width, int height);
 - (void)notifyMessage:(bycopy NSString*)s position:(Point)p {
 	[self updateTextInWindow:noti textField:notitext text:s position:p];
 	[self solveConflict];
-	[noti orderFront:self];
+    
+    if (notistyle!=OVDPS_NOTIFY_DEFAULT) return;
+    [noti orderFront:self];
 }
 - (void)notifyClose {
 	[noti orderOut:self];
 }
 - (void)notifyFade {
     if (fadetimer) [self stopTimer];
+    
+    if (notistyle!=OVDPS_NOTIFY_DEFAULT) return;
     fadetimer=[NSTimer scheduledTimerWithTimeInterval:CVIB_FADEWAIT target:self selector:@selector(fadeStart) userInfo:nil repeats:NO];
 }
 - (void)aboutDialog {

@@ -21,6 +21,9 @@ public:
     virtual void closeNotification();
     virtual void fadeNotification();
     virtual void setNotificationPosition(Point p);
+    
+    virtual void setShouldBeep(int s);
+    virtual void setBeepSound(NSString *s);
 protected:
     CFStringRef u8buf;
     char *userbuf;
@@ -30,6 +33,9 @@ protected:
     NSString *userspace;
 	id dspsrvr;
 	Point notifypos;
+    
+    int shouldbeep;
+    NSString *beepsound;
 };
 
 #endif

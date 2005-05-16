@@ -49,6 +49,7 @@ NSDictionary *CVGetDisplayServerConfig() {
 	[d setValue:@"0.9" forKey:@"opacity"];
 	[d setValue:@"Lucida Grande" forKey:@"font"];
 	[d setValue:@"20" forKey:@"size"];
+    [d setValue:@"default" forKey:@"notificationStyle"];
 	return d;
 }
 

@@ -257,12 +257,18 @@ void CVLoader::syncMenuAndConfig() {
 	}
 
 	// and get OVDisplayServer settings too
-	NSDictionary *dsrvdict=[[cfg dictionary] valueForKey:@"OVDisplayServer" default:CVGetDisplayServerConfig()];
+ 	NSDictionary *dsrvdict=[[cfg dictionary] valueForKey:@"OVDisplayServer" default:CVGetDisplayServerConfig()];
 	if (dspsrvr) {
 		// NSLog(@"syncing config with display server");
 		[dspsrvr setConfig:dsrvdict];
 	}
 	
+    // sound and notification style settings
+    NSString *shouldbeep=[loaderdict valueForKey:@"shouldBeep" default:@"1"];
+    NSString *beepsound=[loaderdict valueForKey:@"beepSound" default:@""];
+    srv->setShouldBeep([shouldbeep intValue]);
+    srv->setBeepSound(beepsound);
+    
     [cfg sync];
 }
 

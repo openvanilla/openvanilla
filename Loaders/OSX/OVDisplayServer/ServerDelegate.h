@@ -11,6 +11,7 @@
 	NSTextField *notitext;
 	float notialpha;
 	float fadealpha;
+    int notistyle;
 	NSTimer *fadetimer;
     NSColor *defaultbackground;
     IBOutlet id aboutdialog;

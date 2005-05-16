@@ -55,6 +55,8 @@ CVTimeTag CVWritePropertyList(NSString *filename, NSDictionary *dict) {
         if (!p) p=d;
         
         if (p) {
+            // read default value first, then overwrite
+            // if (d) [dict addEntriesFromDictionary:d];            
             [dict addEntriesFromDictionary:p];
             [backup release];
             backup=[[NSMutableDictionary alloc] initWithDictionary:dict copyItems:YES];
