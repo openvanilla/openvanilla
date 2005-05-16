@@ -56,8 +56,6 @@ public:
         uc = c;
     }
     virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* c, OVService* srv) {
-        murmur("keyEvent, keycode=%d", k->code());
-        
         // retain objects for the uim callbacks
         ovbuf=b;
         ovcandi=c;
@@ -68,42 +66,49 @@ public:
 
         // convert keycode to UIM keycode
         switch (k->code()) {
-            case ovkReturn: 
-                murmur("return!");
-                keycode=UKey_Return; break;
+            case ovkLeft:   keycode=UKey_Left; break;
+            case ovkRight:  keycode=UKey_Right; break;
+            case ovkReturn: keycode=UKey_Return; break;
         }
 
         int r=uim_press_key(uc, keycode, 0);
         uim_release_key(uc, keycode, 0);
         
-        if (!r) {
-            murmur("uim consumed the key!");
-            return 1;
-        }
+        if (!r) return 1;
         return 0;
     }
     
 // UIM callbacks
     void uimClear() {
-        murmur("uimClear");
-        murmur("ovbuf=%x", ovbuf);
-
-        if (ovbuf) ovbuf->clear()->update();
+        if (!ovbuf) return;
+        ovbuf->clear()->update();
+        upos=0;
+        uhighlightstart=uhighlightend=0;
+        ucountpos=1;
     }
     
     void uimPush(int state, const char *s) {
-        murmur("uimPush");
-        if (s)
-            murmur("uimPush, state=%d, string=%d, strlen=%s", state, strlen(s), s);
-            
-        if (state==4) return;
-        if (!state) return;
-        if (ovbuf) ovbuf->append(s)->update();
+        if (s) murmur("uimPush, state=%d, string=%d, strlen=%s", state, s ? strlen(s): 0, s ? s :0);
+        
+        int charcount=0;
+        if (s) {
+            NSString *ns=[NSString stringWithUTF8String:s];
+            charcount=[ns length];
+        }
+        if (ucountpos) upos+=charcount;
+        if (state==4) ucountpos=0;      // stop counting for cursor pos
+        murmur("upos=%d, ucountpos=%d", upos, ucountpos);
+        if (ovbuf) {
+            if (s) ovbuf->append(s);
+//            ovbuf->update(upos, uhighlightstart, uhighlightend);
+        }
     }
     
     void uimUpdate() {
         murmur("uimUpdate");
-        if (ovbuf) ovbuf->update();
+        if (ovbuf) ovbuf->update(upos, uhighlightstart, uhighlightend);
+        upos=uhighlightstart=uhighlightend=0;
+        ucountpos=1;
     }
     void uimCommit(const char *s) {
         murmur("uimCommit, string=%s", s);
@@ -115,6 +120,11 @@ protected:
     OVCandidate *ovcandi;
     OVService *ovsrv;
     uim_context uc;
+    
+    int upos;
+    int ucountpos;
+    int uhighlightstart;
+    int uhighlightend;
 };
 
 
