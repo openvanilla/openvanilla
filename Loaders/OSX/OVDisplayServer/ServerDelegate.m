@@ -111,9 +111,8 @@ Point CVFixWindowPosition(Point pp, int width, int height);
 	NSRect cfr, nfr;
 	cfr=[candi frame];
 	nfr=[noti frame];
-	
-	if (cfr.origin.y == nfr.origin.y) {
-		nfr.origin.y -= (nfr.size.height + 5);
+	if (cfr.origin.y+cfr.size.height == nfr.origin.y+nfr.size.height) {
+		nfr.origin.y = cfr.origin.y - (nfr.size.height + 5);
 		[noti setFrameOrigin:nfr.origin];
 	}
 }
