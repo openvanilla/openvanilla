@@ -20,6 +20,8 @@ NSArray *CVGetModulesByType(NSArray *modlist, NSString *type);
 void CVAtomicInitStart(NSString *f, NSString *libname);
 void CVAtomicInitEnd(NSString *f);
 
+// utility functions
 BOOL CVIsPathExist(NSString *p);
+BOOL CVStringIsInArray(NSString *s, NSArray *a);
 
 #endif

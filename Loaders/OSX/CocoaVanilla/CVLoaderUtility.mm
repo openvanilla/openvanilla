@@ -13,9 +13,6 @@ OVLoadedLibrary *CVLoadLibraryFromDylib(NSString *p);
 // this equals "find /path/*.ext", returns a 
 NSArray *CVEnumeratePath(NSString *path, NSString *ext);
 
-// a utility function
-BOOL CVStringIsInArray(NSString *s, NSArray *a);
-
 // we still need the full pathname of the loaded library because we need
 // to extract the loaded path (and then append /Contents for .bundle!)
 // that is required for the loaded modules in the initialization process;

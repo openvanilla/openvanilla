@@ -3,6 +3,14 @@
 #import <Cocoa/Cocoa.h>
 #import "CVEmbeddedLoader.h"
 
+@interface CVPrefArray : NSObject {
+    BOOL draggable;
+    NSMutableArray *array;
+}
+- (id)initWithDragDropSetting:(BOOL)d;
+- (NSMutableArray*)array;
+@end
+
 @interface OVPrefDelegate : NSObject
 {
     IBOutlet id modtab_box_cmd;
@@ -20,6 +28,9 @@
     IBOutlet id oftab_oforderlist;
     IBOutlet id otab_outputtext;
     CVEmbeddedLoader *loader;
+    NSMutableDictionary *config;
+    CVPrefArray *modlist;
+    CVPrefArray *oflist;
 }
 - (IBAction)modtab_shortcutKeyChange:(id)sender;
 - (IBAction)pref_dumpConfigToConsole:(id)sender;
