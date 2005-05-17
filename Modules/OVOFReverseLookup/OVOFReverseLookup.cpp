@@ -100,12 +100,14 @@ const char *OVOFReverseLookup::process(const char *src, OVService *srv) {
         
         if(strcmp(code.c_str(),"")) { 
             sprintf(buf, "%s=(%s) ", u8, code.c_str());
+	    string bstr(buf);
+	    result += bstr;
 	}
-	string bstr(buf);
-	result += bstr;
     }
     
-    srv->notify(result.c_str());
+    if(strcmp(result.c_str(),"")) { 
+        srv->notify(result.c_str());
+    }
     return src;
 }
     
