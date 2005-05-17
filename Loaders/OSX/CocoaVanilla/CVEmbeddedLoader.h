@@ -20,6 +20,7 @@
 - (CVService*)service;
 - (NSArray*)moduleList;
 - (NSDictionary*)loadHistory;
+- (NSString*)notifyMessage;
 @end
 
 

@@ -196,14 +196,6 @@
 			settings = {
 			};
 		};
-		6A21F9840839C5A60081CC84 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.nib;
-			name = zh_TW;
-			path = OVPreferences/zh_TW.lproj/MainMenu.nib;
-			refType = 4;
-			sourceTree = "<group>";
-		};
 		6A3AC1C708160F9700FFFF62 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -1372,7 +1364,6 @@
 		6AE4A4AC083678AC00D6CCD3 = {
 			children = (
 				6AE4A4880836787A00D6CCD3,
-				6A21F9840839C5A60081CC84,
 			);
 			isa = PBXVariantGroup;
 			name = MainMenu.nib;

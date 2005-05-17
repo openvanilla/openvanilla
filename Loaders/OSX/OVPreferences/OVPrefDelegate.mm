@@ -58,6 +58,8 @@
     }
     NSLog(@"exclude list=%@", [excludelist description]);
 
+    NSMutableArray *oforderlist=[[NSMutableArray new] autorelease];
+
     // we have everything now, let's do the business
     e=[ldmodlist objectEnumerator];
     CVModuleWrapper *w;
@@ -82,9 +84,8 @@
         
         CVModuleItem *i=[[CVModuleItem alloc] initWithModuleID:mid name:name shortcut:shortcut enabled:enabled];
         [[modlist array] addObject:i];
-        if ([[w moduleType] isEqualToString:@"OVOutputFilter"]) [[oflist array] addObject:i];
+        if ([[w moduleType] isEqualToString:@"OVOutputFilter"]) [oforderlist addObject:i];
     }
-
 
     [oftab_convertfilter removeAllItems];
     int i, c=[outputfilters count];
@@ -92,7 +93,24 @@
         OVModule *ovm=[[outputfilters objectAtIndex:i] module];
         [oftab_convertfilter addItemWithTitle:[NSString stringWithUTF8String:ovm->localizedName(lc)]];
     }
-    
+
+    NSArray *cfgoforder=[menudict valueForKey:@"outputFilterOrder" default:[[NSArray new] autorelease]];
+    NSLog(@"CFG OF ORDER=%@", [cfgoforder description]);
+    e=[cfgoforder objectEnumerator];
+    NSString *cs;
+    while (cs=[e nextObject]) {
+        int c=[oforderlist count];
+        NSLog(@"cs=%@, oforderlist count=%d", cs, c);
+        for (int i=0; i<c; i++) {
+            CVModuleItem *cvmi=[oforderlist objectAtIndex:i];
+            if ([[cvmi identifier] isEqualToString:cs]) {
+                [[oflist array] addObject:cvmi];
+                [oforderlist removeObjectAtIndex:i];
+                break;
+            }
+        }
+    }
+    [[oflist array] addObjectsFromArray:oforderlist];
 
     // register pasteboard for drag-and-drop functionality
     [oftab_oforderlist registerForDraggedTypes:[NSArray arrayWithObject:NSStringPboardType]];
@@ -120,6 +138,7 @@
         [loader service])];
         
     [oftab_outputtext setString:output];
+    [oftab_notifymessage setString:[loader notifyMessage]];
 }
 - (IBAction)pref_dumpConfigToConsole:(id)sender {
     NSLog(@"dumping output filter order");

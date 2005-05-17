@@ -25,6 +25,7 @@
     IBOutlet id oftab_convertbutton;
     IBOutlet id oftab_convertfilter;
     IBOutlet id oftab_inputtext;
+    IBOutlet id oftab_notifymessage;
     IBOutlet id oftab_oforderlist;
     IBOutlet id oftab_outputtext;
     CVEmbeddedLoader *loader;
