@@ -1,9 +1,12 @@
 {
     IBClasses = (
+        {CLASS = CVPrefArray; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             ACTIONS = {
                 "modtab_shortcutKeyChange" = id; 
+                myAction = id; 
+                "oftab_convert" = id; 
                 "pref_dumpConfigToConsole" = id; 
                 "pref_writeConfig" = id; 
             }; 
@@ -19,11 +22,12 @@
                 "modtab_modlist" = id; 
                 "modtab_selectedmodule" = id; 
                 "modtab_shortcutkey" = id; 
+                myOutlet = id; 
                 "oftab_convertbutton" = id; 
                 "oftab_convertfilter" = id; 
                 "oftab_inputtext" = id; 
                 "oftab_oforderlist" = id; 
-                "otab_outputtext" = id; 
+                "oftab_outputtext" = id; 
             }; 
             SUPERCLASS = NSObject; 
         }

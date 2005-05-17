@@ -23,9 +23,9 @@
     loader=[[CVEmbeddedLoader alloc] init];
     if (loader) {
         NSLog(@"embedded loader inited");
-        NSLog([[loader config] description]);
-        NSLog([[loader moduleList] description]);
-        NSLog([[loader loadHistory] description]);
+//        NSLog([[loader config] description]);
+//        NSLog([[loader moduleList] description]);
+//        NSLog([[loader loadHistory] description]);
     }
     else {
         // what if not...? how to abort?
@@ -37,6 +37,9 @@
     // create the lists...
     modlist=[[CVPrefArray alloc] initWithDragDropSetting:FALSE];
     oflist=[[CVPrefArray alloc] initWithDragDropSetting:TRUE];
+
+    // we retain an output filter list
+    outputfilters=[NSMutableArray new];
 
     NSArray *ldmodlist=[loader moduleList];
     NSDictionary *loaderdict=[config valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
@@ -65,11 +68,12 @@
         if (CVStringIsInArray(mid, excludelist)) enabled=NO;
         
         // if it's an OF, init it
-        if ([[w moduleType] isEqualToString:@"OVOuputFilter"]) {
+        if ([[w moduleType] isEqualToString:@"OVOutputFilter"]) {
             NSLog(@"init OF %@", mid);
             NSMutableDictionary *modcfgdict=[config valueForKey:mid default:[[NSMutableDictionary new] autorelease]];
             CVDictionary mcd(modcfgdict);
             [w initializeWithConfig:&mcd service:[loader service]];
+            [outputfilters addObject: w];
         }
         
         OVModule *ovm=[w module];
@@ -78,16 +82,43 @@
         
         CVModuleItem *i=[[CVModuleItem alloc] initWithModuleID:mid name:name shortcut:shortcut enabled:enabled];
         [[modlist array] addObject:i];
-        [[oflist array] addObject:i];
-
     }
+
+
+    [oftab_convertfilter removeAllItems];
+    int i, c=[outputfilters count];
+    for (i=0; i<c; i++) {
+        OVModule *ovm=[[outputfilters objectAtIndex:i] module];
+        [oftab_convertfilter addItemWithTitle:[NSString stringWithUTF8String:ovm->localizedName(lc)]];
+    }
+    
 
     // register pasteboard for drag-and-drop functionality
     [oftab_oforderlist registerForDraggedTypes:[NSArray arrayWithObject:NSStringPboardType]];
     [oftab_oforderlist setDataSource:oflist];
     [modtab_modlist setDataSource:modlist];
 }
+- (void)dealloc {
+    [outputfilters release];
+    [modlist release];
+    [oflist release];
+    [loader release];
+    [config release];
+    [super dealloc];
+}
 - (IBAction)modtab_shortcutKeyChange:(id)sender {
+}
+- (IBAction)oftab_convert:(id)sender {
+    CVModuleWrapper *w=[outputfilters objectAtIndex:[oftab_convertfilter indexOfSelectedItem]];
+    NSLog(@"using %@", [w identifier]);
+    
+    OVOutputFilter *of=(OVOutputFilter*)[w module];
+    
+    NSString *output=[NSString stringWithUTF8String:of->process(
+        [[oftab_inputtext string] UTF8String],
+        [loader service])];
+        
+    [oftab_outputtext setString:output];
 }
 - (IBAction)pref_dumpConfigToConsole:(id)sender {
     NSLog(@"dumping output filter order");

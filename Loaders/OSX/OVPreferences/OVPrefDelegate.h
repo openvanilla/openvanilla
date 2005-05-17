@@ -26,13 +26,15 @@
     IBOutlet id oftab_convertfilter;
     IBOutlet id oftab_inputtext;
     IBOutlet id oftab_oforderlist;
-    IBOutlet id otab_outputtext;
+    IBOutlet id oftab_outputtext;
     CVEmbeddedLoader *loader;
     NSMutableDictionary *config;
     CVPrefArray *modlist;
     CVPrefArray *oflist;
+    NSMutableArray *outputfilters;
 }
 - (IBAction)modtab_shortcutKeyChange:(id)sender;
+- (IBAction)oftab_convert:(id)sender;
 - (IBAction)pref_dumpConfigToConsole:(id)sender;
 - (IBAction)pref_writeConfig:(id)sender;
 @end
