@@ -19,7 +19,8 @@
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			path = CVEmbeddedLoader.h;
+			name = CVEmbeddedLoader.h;
+			path = CocoaVanilla/CVEmbeddedLoader.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -27,7 +28,8 @@
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
-			path = CVEmbeddedLoader.mm;
+			name = CVEmbeddedLoader.mm;
+			path = CocoaVanilla/CVEmbeddedLoader.mm;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1324,9 +1326,9 @@
 		6AE4A4870836787A00D6CCD3 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.objcpp;
-			name = main.mm;
-			path = OVPreferences/main.mm;
+			lastKnownFileType = sourcecode.c.objc;
+			name = main.m;
+			path = OVPreferences/main.m;
 			refType = 4;
 			sourceTree = "<group>";
 		};
