@@ -40,7 +40,7 @@ OVOFReverseLookup::OVOFReverseLookup(char *lpath, char *cfile, char *en, char *c
     cintab=new OVCIN(cinfilename);
 
     sprintf(ename, "%s lookup", en ? en : cfile);
-    sprintf(cname, "反查%s", cn ? cn : cfile);
+    sprintf(cname, "查詢%s字根", cn ? cn : cfile);
     sprintf(idbuf, "OVOFReverseLookup-%s", en ? en : cfile);
 }
 
@@ -76,20 +76,23 @@ const char *OVOFReverseLookup::process(const char *src, OVService *srv) {
         const char *u8=srv->UTF16ToUTF8(&(u16[i]), 1);
         char buf[256];
         
-        vector<string> lookupvector;
+        vector<string> lookupvector, key;
         string code;
         string seperator(" ");
 
         int size=cintab->getWordVectorByChar(u8, lookupvector);
         for (int j=0; j<size; j++) {
             code += lookupvector[j];
+	    cintab->getCharVectorByKey((const char*)lookupvector[j].c_str(), key);
+            code += key[0];
             if (j!=size-1) code += seperator;
         }
         
-    
-        sprintf(buf, "%s=(%s) ", u8, code.c_str());
-        string bstr(buf);
-        result += bstr;
+        if(strcmp(code.c_str(),"")) { 
+            sprintf(buf, "%s=(%s) ", u8, code.c_str());
+	}
+	string bstr(buf);
+	result += bstr;
     }
     
     srv->notify(result.c_str());
