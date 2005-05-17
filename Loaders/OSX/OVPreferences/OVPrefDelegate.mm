@@ -82,6 +82,7 @@
         
         CVModuleItem *i=[[CVModuleItem alloc] initWithModuleID:mid name:name shortcut:shortcut enabled:enabled];
         [[modlist array] addObject:i];
+        if ([[w moduleType] isEqualToString:@"OVOutputFilter"]) [[oflist array] addObject:i];
     }
 
 

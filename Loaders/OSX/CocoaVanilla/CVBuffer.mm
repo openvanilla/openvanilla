@@ -39,7 +39,7 @@ OVBuffer* CVBuffer::send() {
             src=@"";
             break;
         }
-        if (result==u8) continue;
+        // if (result==u8) continue;
         src=[NSString stringWithUTF8String:result];
         u8=[src UTF8String];
     }
