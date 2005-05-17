@@ -8,6 +8,7 @@
                 "oftab_convert" = id; 
                 "pref_dumpConfigToConsole" = id; 
                 "pref_writeConfig" = id; 
+                "sharetab_shortcutKeyChange" = id; 
             }; 
             CLASS = OVPrefDelegate; 
             LANGUAGE = ObjC; 
@@ -19,14 +20,17 @@
                 "modtab_box_shift" = id; 
                 "modtab_loadedfrom" = id; 
                 "modtab_modlist" = id; 
-                "modtab_selectedmodule" = id; 
-                "modtab_shortcutkey" = id; 
                 "oftab_convertbutton" = id; 
                 "oftab_convertfilter" = id; 
                 "oftab_inputtext" = id; 
                 "oftab_notifymessage" = id; 
                 "oftab_oforderlist" = id; 
                 "oftab_outputtext" = id; 
+                "sharetab_cmd" = id; 
+                "sharetab_control" = id; 
+                "sharetab_keylist" = id; 
+                "sharetab_option" = id; 
+                "sharetab_shift" = id; 
             }; 
             SUPERCLASS = NSObject; 
         }

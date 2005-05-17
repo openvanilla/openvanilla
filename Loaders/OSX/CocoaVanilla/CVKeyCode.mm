@@ -165,7 +165,7 @@ NSString *CVKeyCode::getKeyCodeString() {
     return [NSString stringWithUTF8String:buf];
 }
 
-NSString *CVKeyCode::getModifierString() {    
+NSString *CVKeyCode::getModifierIconString() {    
     char func[32];
     bzero(func, 32);
     if (isCommand()) strcat(func, "⌘");
@@ -175,7 +175,7 @@ NSString *CVKeyCode::getModifierString() {
     return [NSString stringWithUTF8String:func];
 }
 
-NSString *CVKeyCode::getModifierIconString() {
+NSString *CVKeyCode::getModifierString() {
     char func[32];
     bzero(func, 32);
     if (isCommand()) strcat(func, "m");

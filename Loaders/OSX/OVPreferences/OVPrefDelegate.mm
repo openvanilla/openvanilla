@@ -2,6 +2,7 @@
 #import "CVWrappers.h"
 #import "CVLoaderUtility.h"
 #import "CVDictionary.h"
+#import "CVKeyCode.h"
 #import "NSDictionaryExtension.h"
 #import "NSStringExtension.h"
 
@@ -17,12 +18,14 @@
 - (NSString*)shortcut;
 - (BOOL)loaded;
 - (void)setLoaded:(BOOL)e;
+- (void)setShortcut:(NSString*)s;
 @end
 
 @implementation OVPrefDelegate
 - (void)awakeFromNib {
     // set user interface state defaults
     modtab_modlist_currentrow=-1;
+    fastimswitchkey=[[NSString alloc] initWithString:@""];
 
     loader=[[CVEmbeddedLoader alloc] init];
     if (loader) {
@@ -51,6 +54,24 @@
     NSArray *libexclude=[loaderdict valueForKey:@"excludeLibraryList" default:[[NSArray new] autorelease]];
     NSArray *modexclude=[loaderdict valueForKey:@"excludeModuleList" default:[[NSArray new] autorelease]];
     NSDictionary *history=[loader loadHistory];
+    
+    // shared tab settings
+    NSString *shortcut=[menudict valueForKey:@"fastIMSwitch" default:@""];
+    CVKeyCode cvkc(shortcut);
+    if (cvkc.isCommand()) [sharetab_cmd setIntValue:1];
+    if (cvkc.isOpt()) [sharetab_option setIntValue:1];
+    if (cvkc.isCtrl()) [sharetab_control setIntValue:1];
+    if (cvkc.isShift()) [sharetab_shift setIntValue:1];
+    [sharetab_keylist removeAllItems];
+    [sharetab_keylist addItemsWithTitles:cvkc.getKeyList()];
+    [sharetab_keylist selectItemWithTitle:cvkc.getKeyCodeString()];
+    [self sharetab_shortcutKeyChange:self];
+
+    // set user interface defaults
+    [modtab_box_keylist removeAllItems];
+    [modtab_box_keylist addItemsWithTitles:cvkc.getKeyList()];
+    [modtab_box_keylist selectItemWithTitle:@""];
+    
     
     // get the comprehensive exclude list
     NSMutableArray *excludelist=[NSMutableArray arrayWithArray:modexclude];
@@ -138,10 +159,53 @@
         NSLog(@"modlist row %d selected, shortcut=%@", r, [[[modlist array] objectAtIndex:r] shortcut]);
         modtab_modlist_currentrow=r;
         
+        NSString *mid=[[[modlist array] objectAtIndex:r] identifier];
+        CVModuleWrapper *w=CVFindModule([loader moduleList], mid);
+        if (w) {
+            [modtab_loadedfrom setStringValue:[w fromLibrary]];
+        }
+        
+        NSString *shortcut=[[[modlist array] objectAtIndex:r] shortcut];
+        CVKeyCode cvkc(shortcut);
+        [modtab_box_cmd setIntValue:0];
+        [modtab_box_option setIntValue:0];
+        [modtab_box_control setIntValue:0];
+        [modtab_box_shift setIntValue:0];
+        if (cvkc.isCommand()) [modtab_box_cmd setIntValue:1];
+        if (cvkc.isOpt()) [modtab_box_option setIntValue:1];
+        if (cvkc.isCtrl()) [modtab_box_control setIntValue:1];
+        if (cvkc.isShift()) [modtab_box_shift setIntValue:1];
+        [modtab_box_keylist selectItemWithTitle:cvkc.getKeyCodeString()];
     }
     return TRUE;
 }
+- (IBAction)sharetab_shortcutKeyChange:(id)sender {
+    char buf[32];
+    bzero(buf, 32);
+    if ([sharetab_cmd intValue]) strcat(buf, "m");
+    if ([sharetab_option intValue]) strcat(buf, "o");
+    if ([sharetab_control intValue]) strcat(buf, "c");
+    if ([sharetab_shift intValue]) strcat(buf, "s");
+    NSString *key=[sharetab_keylist titleOfSelectedItem];
+    if ([key length] && strlen(buf)) {
+        [fastimswitchkey release];
+        fastimswitchkey=[[NSString stringWithFormat:@"%@ %s", key, buf] retain];
+    }
+}
 - (IBAction)modtab_shortcutKeyChange:(id)sender {
+    if (modtab_modlist_currentrow==-1) return;
+    char buf[32];
+    bzero(buf, 32);
+    if ([modtab_box_cmd intValue]) strcat(buf, "m");
+    if ([modtab_box_option intValue]) strcat(buf, "o");
+    if ([modtab_box_control intValue]) strcat(buf, "c");
+    if ([modtab_box_shift intValue]) strcat(buf, "s");
+    NSString *key=[modtab_box_keylist titleOfSelectedItem];
+    if ([key length] && strlen(buf)) {
+        [[[modlist array] objectAtIndex:modtab_modlist_currentrow]
+            setShortcut:[NSString stringWithFormat:@"%@ %s", key, buf]];
+        [modtab_modlist reloadData];
+    }
 }
 - (IBAction)oftab_convert:(id)sender {
     CVModuleWrapper *w=[outputfilters objectAtIndex:[oftab_convertfilter indexOfSelectedItem]];
@@ -165,6 +229,34 @@
 }
 - (IBAction)pref_writeConfig:(id)sender {
     NSLog(@"gathering and writing config");
+
+    // write shortcut menu settings
+    NSMutableArray *ma=[modlist array];
+    NSMutableDictionary *md=[[NSMutableDictionary new] autorelease];
+    NSEnumerator *e=[ma objectEnumerator];
+    CVModuleItem *cvmi;
+    while (cvmi=[e nextObject]) {
+        NSString *shortcut=[cvmi shortcut];
+        if ([shortcut length]) [md setValue:shortcut forKey:[cvmi identifier]];
+    }
+    
+    // ... with fastIMSwitch settings
+    [md setValue:fastimswitchkey forKey:@"fastIMSwitch"];
+    
+    // ... and outputFilterOrder, too
+    NSMutableArray *ofo=[[NSMutableArray new] autorelease];
+    e=[[oflist array] objectEnumerator];
+    while (cvmi=[e nextObject]) [ofo addObject:[cvmi identifier]];
+    [md setValue:ofo forKey:@"outputFilterOrder"];
+    
+    [config setValue:md forKey:@"OVMenuManager"];
+
+    // we sync loader config first, then overwrite with ours
+    [[loader config] sync];
+    [[[loader config] dictionary] removeAllObjects];
+    [[[loader config] dictionary] addEntriesFromDictionary:config];
+    [[loader config] sync];
+
     [[NSApplication sharedApplication] terminate:self];
 }
 @end
@@ -188,8 +280,13 @@
     if ([[c identifier] isEqualToString:@"loaded"])
         return [NSNumber numberWithBool:[[[self array] objectAtIndex:r] loaded]];
 
-    if ([[c identifier] isEqualToString:@"shortcut"])
-        return [[[self array] objectAtIndex:r] shortcut];
+    if ([[c identifier] isEqualToString:@"shortcut"]) {
+        NSString *sc=[[[self array] objectAtIndex:r] shortcut];
+        CVKeyCode kc(sc);
+        NSString *ics=kc.getModifierIconString();
+        NSString *ks=[NSString stringWithFormat:@"%@ %@", ics, kc.getKeyCodeString()];
+        return ks;
+    }
 
     // the other column identifier will always be "modulename"
     return [[[self array] objectAtIndex:r] name];
@@ -270,5 +367,9 @@
 }
 - (void)setLoaded:(BOOL)e {
     loaded=e;
+}
+- (void)setShortcut:(NSString*)s {
+    [shortcut release];
+    shortcut=[[NSString alloc] initWithString:s];
 }
 @end
