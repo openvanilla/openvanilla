@@ -114,3 +114,73 @@ int CVKeyCode::isCapslock() {
     if (m&(alphaLock|kEventKeyModifierNumLockMask)) return 1; 
     return 0;
 }
+
+NSArray *CVKeyCode::getKeyList() {
+    NSMutableArray *ma=[[NSMutableArray new] autorelease];
+    #define KMAP(x)     [ma addObject:x]
+    KMAP(@"esc");
+    KMAP(@"space");
+    KMAP(@"delete");
+    KMAP(@"backspace");
+    KMAP(@"up");
+    KMAP(@"down");
+    KMAP(@"left");
+    KMAP(@"right");
+    KMAP(@"home");
+    KMAP(@"end");
+    KMAP(@"pageup");
+    KMAP(@"pagedown");
+    KMAP(@"tab");
+    #undef KMAP
+    char *s="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`a";
+    char buf[2];
+    buf[1]=0;
+    for (size_t i=0; i<strlen(s); i++) {
+        buf[0]=s[i];
+        [ma addObject:[NSString stringWithUTF8String:buf]];
+    }
+
+    return ma;
+}
+
+NSString *CVKeyCode::getKeyCodeString() {
+    char buf[32];
+    bzero(buf, 32);
+    buf[0]=code();
+    #define KMAP(x,y)  if(c==y) strcpy(buf, x)
+    KMAP("esc", ovkEsc);
+    else KMAP("space", ovkSpace);
+    else KMAP("delete", ovkDelete);
+    else KMAP("backspace", ovkBackspace);
+    else KMAP("up", ovkUp);
+    else KMAP("down", ovkDown);
+    else KMAP("left", ovkLeft);
+    else KMAP("right", ovkRight);
+    else KMAP("home", ovkHome);
+    else KMAP("end", ovkEnd);
+    else KMAP("pageup", ovkPageUp);
+    else KMAP("pagedown", ovkPageDown);
+    else KMAP("tab", ovkTab);
+    #undef KMAP
+    return [NSString stringWithUTF8String:buf];
+}
+
+NSString *CVKeyCode::getModifierString() {    
+    char func[32];
+    bzero(func, 32);
+    if (isCommand()) strcat(func, "⌘");
+    if (isOpt()) strcat(func, "⌥");
+    if (isCtrl()) strcat(func, "^");
+    if (isShift()) strcat(func, "⇧");
+    return [NSString stringWithUTF8String:func];
+}
+
+NSString *CVKeyCode::getModifierIconString() {
+    char func[32];
+    bzero(func, 32);
+    if (isCommand()) strcat(func, "m");
+    if (isOpt()) strcat(func, "o");
+    if (isCtrl()) strcat(func, "c");
+    if (isShift()) strcat(func, "s");
+    return [NSString stringWithUTF8String:func];
+}

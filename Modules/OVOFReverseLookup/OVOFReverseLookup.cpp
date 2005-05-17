@@ -82,9 +82,19 @@ const char *OVOFReverseLookup::process(const char *src, OVService *srv) {
 
         int size=cintab->getWordVectorByChar(u8, lookupvector);
         for (int j=0; j<size; j++) {
-            code += lookupvector[j];
-	    cintab->getCharVectorByKey((const char*)lookupvector[j].c_str(), key);
-            code += key[0];
+            const char *lvstr=lookupvector[j].c_str();
+            for (size_t k=0; k<strlen(lvstr); k++) {
+                char kbuf[2];
+                sprintf(kbuf, "%c", tolower(lvstr[k]));
+                string kstr(kbuf);
+    
+                vector<string> outStringVectorRef;
+                if(cintab->getCharVectorByKey(kstr, outStringVectorRef) > 0)
+                    code+=outStringVectorRef[0];
+                else
+                    code+=kstr;
+            }
+        
             if (j!=size-1) code += seperator;
         }
         

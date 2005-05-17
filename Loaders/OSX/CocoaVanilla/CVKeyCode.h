@@ -27,6 +27,12 @@ public:
 	CVKeyCode(NSString *s);
 	virtual BOOL equalToKey(CVKeyCode *k, BOOL ignorecase=YES);
 	virtual UInt8 convertToMenuModifier();
+    
+    // facility functions for OVPreference
+    virtual NSArray *getKeyList();
+    virtual NSString *getKeyCodeString();
+    virtual NSString *getModifierString();
+    virtual NSString *getModifierIconString();
 protected:
 	void init(const char *charcode, const char *modifiers);
     char c;

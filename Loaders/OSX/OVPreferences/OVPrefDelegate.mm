@@ -9,13 +9,14 @@
     NSString *modid;
     NSString *modname;
     NSString *shortcut;
-    BOOL enabled;
+    BOOL loaded;
 }
-- (id)initWithModuleID:(NSString*)i name:(NSString*)n shortcut:(NSString*)s enabled:(BOOL)e;
+- (id)initWithModuleID:(NSString*)i name:(NSString*)n shortcut:(NSString*)s loaded:(BOOL)e;
 - (NSString*)name;
 - (NSString*)identifier;
 - (NSString*)shortcut;
-- (BOOL)enabled;
+- (BOOL)loaded;
+- (void)setLoaded:(BOOL)e;
 @end
 
 @implementation OVPrefDelegate
@@ -66,8 +67,8 @@
     const char *lc=[loader service]->locale();
     while (w=[e nextObject]) {
         NSString *mid=[w identifier];
-        BOOL enabled=YES;
-        if (CVStringIsInArray(mid, excludelist)) enabled=NO;
+        BOOL loaded=YES;
+        if (CVStringIsInArray(mid, excludelist)) loaded=NO;
         
         // if it's an OF, init it
         if ([[w moduleType] isEqualToString:@"OVOutputFilter"]) {
@@ -82,7 +83,7 @@
         NSString *name=[NSString stringWithUTF8String:ovm->localizedName(lc)];        
         NSString *shortcut=[menudict valueForKey:mid default:@""];
         
-        CVModuleItem *i=[[CVModuleItem alloc] initWithModuleID:mid name:name shortcut:shortcut enabled:enabled];
+        CVModuleItem *i=[[CVModuleItem alloc] initWithModuleID:mid name:name shortcut:shortcut loaded:loaded];
         [[modlist array] addObject:i];
         if ([[w moduleType] isEqualToString:@"OVOutputFilter"]) [oforderlist addObject:i];
     }
@@ -125,6 +126,12 @@
     [config release];
     [super dealloc];
 }
+- (void)windowWillClose:(NSNotification *)aNotification {
+    [self pref_writeConfig:self];
+}
+- (BOOL)tableView:(NSTableView *)t shouldSelectRow:(int)r {
+    return TRUE;
+}
 - (IBAction)modtab_shortcutKeyChange:(id)sender {
 }
 - (IBAction)oftab_convert:(id)sender {
@@ -148,6 +155,8 @@
     NSLog([[modlist array] description]);
 }
 - (IBAction)pref_writeConfig:(id)sender {
+    NSLog(@"gathering and writing config");
+    [[NSApplication sharedApplication] terminate:self];
 }
 @end
 
@@ -167,8 +176,8 @@
     return array;
 }
 - (id) tableView:(NSTableView*)t objectValueForTableColumn:(NSTableColumn*)c row:(int)r {
-    if ([[c identifier] isEqualToString:@"enabled"])
-        return [NSNumber numberWithBool:[[[self array] objectAtIndex:r] enabled]];
+    if ([[c identifier] isEqualToString:@"loaded"])
+        return [NSNumber numberWithBool:[[[self array] objectAtIndex:r] loaded]];
 
     if ([[c identifier] isEqualToString:@"shortcut"])
         return [[[self array] objectAtIndex:r] shortcut];
@@ -176,6 +185,11 @@
     // the other column identifier will always be "modulename"
     return [[[self array] objectAtIndex:r] name];
 }
+- (void)tableView:(NSTableView *)t setObjectValue:(id)v forTableColumn:(NSTableColumn *)c row:(int)r {
+    if ([[c identifier] isEqualToString:@"loaded"])
+        [[[self array] objectAtIndex:r] setLoaded:[v boolValue]];
+}
+
 - (int)numberOfRowsInTableView:(NSTableView*)t {
 	return [[self array] count];  
 }
@@ -215,12 +229,12 @@
 @end
 
 @implementation CVModuleItem
-- (id)initWithModuleID:(NSString*)i name:(NSString*)n shortcut:(NSString*)s enabled:(BOOL)e {
+- (id)initWithModuleID:(NSString*)i name:(NSString*)n shortcut:(NSString*)s loaded:(BOOL)e {
     if (self=[super init]) {
         modid=[[NSString alloc] initWithString:i];
         modname=[[NSString alloc] initWithString:n];
         shortcut=[[NSString alloc] initWithString:(s ? s : @"")];
-        enabled=e;
+        loaded=e;
     }
     return self;
 }
@@ -231,7 +245,7 @@
     [super dealloc];
 }
 - (NSString*)description {
-    return [NSString stringWithFormat:@"%@ (%@) [%@] %@", modid, modname, shortcut, enabled ? @"ENABLED" : @"DISABLED"];
+    return [NSString stringWithFormat:@"%@ (%@) [%@] %@", modid, modname, shortcut, loaded ? @"ENABLED" : @"DISABLED"];
 }
 - (NSString*)name {
     return modname;
@@ -242,7 +256,10 @@
 - (NSString*)shortcut {
     return shortcut;
 }
-- (BOOL)enabled {
-    return enabled;
+- (BOOL)loaded {
+    return loaded;
+}
+- (void)setLoaded:(BOOL)e {
+    loaded=e;
 }
 @end
