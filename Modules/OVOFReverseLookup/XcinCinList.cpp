@@ -1,6 +1,6 @@
 // XcinCinList.cpp
 
-#define OVDEBUG
+#define OV_DEBUG
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVUtility.h>
 #include <sys/param.h>
