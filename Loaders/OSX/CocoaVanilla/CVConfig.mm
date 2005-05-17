@@ -70,6 +70,9 @@ CVTimeTag CVWritePropertyList(NSString *filename, NSDictionary *dict) {
     [backup release];
     [super dealloc];
 }
+- (NSString*)description {
+    return [dict description];
+}
 -(CVTimeTag)timeStamp {
     return stamp;
 }

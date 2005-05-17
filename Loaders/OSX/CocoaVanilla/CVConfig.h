@@ -24,12 +24,13 @@ typedef struct timespec CVTimeTag;
     NSMutableDictionary *backup;
     CVTimeTag stamp;
 }
--(void)dealloc;
--(CVConfig*)initWithFile:(NSString*)f defaultData:(NSDictionary*)d;
--(CVTimeTag)timeStamp;
--(CVTimeTag)sync;
--(NSMutableDictionary*)dictionary;
--(BOOL)needSync;
+- (void)dealloc;
+- (NSString*)description;
+- (CVConfig*)initWithFile:(NSString*)f defaultData:(NSDictionary*)d;
+- (CVTimeTag)timeStamp;
+- (CVTimeTag)sync;
+- (NSMutableDictionary*)dictionary;
+- (BOOL)needSync;
 @end
 
 #endif

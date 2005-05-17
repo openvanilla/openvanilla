@@ -7,11 +7,140 @@
 	objects = {
 		6A15976808389BBA00518693 = {
 			children = (
+				6A21F6180839789B0081CC84,
+				6A21F61B083979960081CC84,
 			);
 			isa = PBXGroup;
 			name = EmbeddedLoader;
 			refType = 4;
 			sourceTree = "<group>";
+		};
+		6A21F6180839789B0081CC84 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = CVEmbeddedLoader.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A21F61B083979960081CC84 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = CVEmbeddedLoader.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A21F61C083979960081CC84 = {
+			fileRef = 6A21F61B083979960081CC84;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F64108397C780081CC84 = {
+			buildActionMask = 2147483647;
+			files = (
+				6A21F64508397C910081CC84,
+				6A21F65408397CAA0081CC84,
+				6A21F65508397CB40081CC84,
+				6A21F65608397CD30081CC84,
+				6A21F65A08397D020081CC84,
+				6A21F65C08397D020081CC84,
+				6A21F65808397CD30081CC84,
+				6A21F66C08397D5B0081CC84,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A21F64508397C910081CC84 = {
+			fileRef = 6AE4A4BA08367A2900D6CCD3;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F65408397CAA0081CC84 = {
+			fileRef = 6A21F6180839789B0081CC84;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F65508397CB40081CC84 = {
+			fileRef = 6AD76AF308358A6E00164A51;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F65608397CD30081CC84 = {
+			fileRef = 6A3AC2870816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F65708397CD30081CC84 = {
+			fileRef = 6A3AC2880816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F65808397CD30081CC84 = {
+			fileRef = 6A3AC28D0816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F65908397CD30081CC84 = {
+			fileRef = 6A3AC28E0816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F65A08397D020081CC84 = {
+			fileRef = 6A3AC28008164F8B00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F65B08397D020081CC84 = {
+			fileRef = 6A3AC28208164FBE00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F65C08397D020081CC84 = {
+			fileRef = 6A3AC28B0816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F65D08397D020081CC84 = {
+			fileRef = 6A3AC28C0816505F00FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F66C08397D5B0081CC84 = {
+			fileRef = 6A3AC1C708160F9700FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F66D08397D5B0081CC84 = {
+			fileRef = 6A3AC1C808160F9700FFFF62;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F66E08397D7C0081CC84 = {
+			fileRef = 6A975EB20814C47700F40859;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A21F70408397D800081CC84 = {
+			fileRef = 6A975EB40814C48100F40859;
+			isa = PBXBuildFile;
+			settings = {
+			};
 		};
 		6A3AC1C708160F9700FFFF62 = {
 			fileEncoding = 4;
@@ -1020,8 +1149,14 @@
 		6AE4A45E083677B300D6CCD3 = {
 			buildActionMask = 2147483647;
 			files = (
-				6AE4A48A0836787A00D6CCD3,
 				6AE4A4BC08367A2900D6CCD3,
+				6A21F65B08397D020081CC84,
+				6A21F65D08397D020081CC84,
+				6AE4A48A0836787A00D6CCD3,
+				6A21F65708397CD30081CC84,
+				6A21F65908397CD30081CC84,
+				6A21F61C083979960081CC84,
+				6A21F66D08397D5B0081CC84,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1029,14 +1164,17 @@
 		6AE4A45F083677B300D6CCD3 = {
 			buildActionMask = 2147483647;
 			files = (
+				6A21F70408397D800081CC84,
+				6A21F66E08397D7C0081CC84,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6AE4A460083677B300D6CCD3 = {
 			buildPhases = (
-				6AE4A45D083677B300D6CCD3,
+				6A21F64108397C780081CC84,
 				6AE4A45E083677B300D6CCD3,
+				6AE4A45D083677B300D6CCD3,
 				6AE4A45F083677B300D6CCD3,
 			);
 			buildRules = (
@@ -1192,9 +1330,9 @@
 		6AE4A4BB08367A2900D6CCD3 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			name = OVPrefDelegate.m;
-			path = OVPreferences/OVPrefDelegate.m;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = OVPrefDelegate.mm;
+			path = OVPreferences/OVPrefDelegate.mm;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1433,12 +1571,12 @@
 				6A3AC2880816505F00FFFF62,
 				6A3AC2890816505F00FFFF62,
 				6A3AC28A0816505F00FFFF62,
+				6A3AC28008164F8B00FFFF62,
+				6A3AC28208164FBE00FFFF62,
 				6A3AC28B0816505F00FFFF62,
 				6A3AC28C0816505F00FFFF62,
 				6A3AC28D0816505F00FFFF62,
 				6A3AC28E0816505F00FFFF62,
-				6A3AC28208164FBE00FFFF62,
-				6A3AC28008164F8B00FFFF62,
 				6A3AC1C708160F9700FFFF62,
 				6A3AC1C808160F9700FFFF62,
 				6A975EF10814C7CA00F40859,

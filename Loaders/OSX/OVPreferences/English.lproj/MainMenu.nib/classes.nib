@@ -2,9 +2,29 @@
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
+            ACTIONS = {
+                "modtab_shortcutKeyChange" = id; 
+                "pref_dumpConfigToConsole" = id; 
+                "pref_writeConfig" = id; 
+            }; 
             CLASS = OVPrefDelegate; 
             LANGUAGE = ObjC; 
-            OUTLETS = {loading = id; progress = id; }; 
+            OUTLETS = {
+                "modtab_box_cmd" = id; 
+                "modtab_box_control" = id; 
+                "modtab_box_keylist" = id; 
+                "modtab_box_option" = id; 
+                "modtab_box_shift" = id; 
+                "modtab_loadedfrom" = id; 
+                "modtab_modlist" = id; 
+                "modtab_selectedmodule" = id; 
+                "modtab_shortcutkey" = id; 
+                "oftab_convertbutton" = id; 
+                "oftab_convertfilter" = id; 
+                "oftab_inputtext" = id; 
+                "oftab_oforderlist" = id; 
+                "otab_outputtext" = id; 
+            }; 
             SUPERCLASS = NSObject; 
         }
     ); 
