@@ -33,6 +33,9 @@
     CVPrefArray *modlist;
     CVPrefArray *oflist;
     NSMutableArray *outputfilters;
+    
+    // user interface states
+    int modtab_modlist_currentrow;
 }
 - (IBAction)modtab_shortcutKeyChange:(id)sender;
 - (IBAction)oftab_convert:(id)sender;

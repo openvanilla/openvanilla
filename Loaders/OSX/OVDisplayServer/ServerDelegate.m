@@ -224,6 +224,7 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
 	if (p.v > avail.bottom - height) p.v = avail.bottom-height;
 	if (p.h > avail.right - width) p.h = avail.right-width;
 	if (p.v < avail.top+GetMBarHeight()) p.v=avail.top+GetMBarHeight();
-	if (p.h < avail.left) p.h=avail.left+width;
+	if (p.h < avail.left) p.h=avail.left;
+    
     return p;
 }

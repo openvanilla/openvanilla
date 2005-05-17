@@ -21,6 +21,9 @@
 
 @implementation OVPrefDelegate
 - (void)awakeFromNib {
+    // set user interface state defaults
+    modtab_modlist_currentrow=-1;
+
     loader=[[CVEmbeddedLoader alloc] init];
     if (loader) {
         NSLog(@"embedded loader inited");
@@ -117,6 +120,7 @@
     [oftab_oforderlist registerForDraggedTypes:[NSArray arrayWithObject:NSStringPboardType]];
     [oftab_oforderlist setDataSource:oflist];
     [modtab_modlist setDataSource:modlist];
+    [modtab_modlist setDelegate:self];
 }
 - (void)dealloc {
     [outputfilters release];
@@ -130,6 +134,11 @@
     [self pref_writeConfig:self];
 }
 - (BOOL)tableView:(NSTableView *)t shouldSelectRow:(int)r {
+    if (t==modtab_modlist) {
+        NSLog(@"modlist row %d selected, shortcut=%@", r, [[[modlist array] objectAtIndex:r] shortcut]);
+        modtab_modlist_currentrow=r;
+        
+    }
     return TRUE;
 }
 - (IBAction)modtab_shortcutKeyChange:(id)sender {
