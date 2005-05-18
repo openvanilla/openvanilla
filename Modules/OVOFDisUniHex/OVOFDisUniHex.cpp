@@ -31,11 +31,19 @@ const char *OVOFDisUniHex::process(const char *src, OVService *srv)
     l=srv->UTF8ToUTF16(src, &u16p);
     
     if (l) {
-		unsigned short x = u16p[l-1];
-		char s[200];
-		sprintf(s, "Unicode\nHex: U+%X\nDec: %d", x, x);
-		srv->notify((char *)s);
+	char hex[1024], dec[1024], buf[1024], s[2048];
+	for(int j =0; j < l; j++){
+	   unsigned short x = u16p[j];
+	   const char *u8 = srv->UTF16ToUTF8(&(u16p[j]), 1);
+	   sprintf(buf, "%s=(U+%X) ", u8, x);
+	   strcat(hex, buf);
+	   sprintf(buf, "%s=(%d) ", u8, x);
+	   strcat(dec, buf);
+	}
+	sprintf(s, "Hex: %s\nDec: %s", hex, dec);
+	srv->notify((char *)s);
     }
+    //return src;
     return srv->UTF16ToUTF8(u16p, l);
 }
 
