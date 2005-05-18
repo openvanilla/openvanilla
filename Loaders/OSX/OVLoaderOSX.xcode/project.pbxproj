@@ -54,6 +54,7 @@
 				6A21F66C08397D5B0081CC84,
 				6A21F79908398DBB0081CC84,
 				6A21F79B08398DBB0081CC84,
+				6AD1D500083AB903002EBF34,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -856,6 +857,36 @@
 			settings = {
 			};
 		};
+		6AD1D4FE083AB903002EBF34 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CVPreviewView.h;
+			path = OVPreferences/CVPreviewView.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AD1D4FF083AB903002EBF34 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = CVPreviewView.mm;
+			path = OVPreferences/CVPreviewView.mm;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AD1D500083AB903002EBF34 = {
+			fileRef = 6AD1D4FE083AB903002EBF34;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AD1D501083AB903002EBF34 = {
+			fileRef = 6AD1D4FF083AB903002EBF34;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		6AD576350814C221001F6AFE = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -1215,6 +1246,7 @@
 				6A21F66D08397D5B0081CC84,
 				6A21F79A08398DBB0081CC84,
 				6A21F79C08398DBB0081CC84,
+				6AD1D501083AB903002EBF34,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1307,6 +1339,8 @@
 				6AE4A4AC083678AC00D6CCD3,
 				6AE4A4BA08367A2900D6CCD3,
 				6AE4A4BB08367A2900D6CCD3,
+				6AD1D4FE083AB903002EBF34,
+				6AD1D4FF083AB903002EBF34,
 			);
 			isa = PBXGroup;
 			name = OVPreferences;

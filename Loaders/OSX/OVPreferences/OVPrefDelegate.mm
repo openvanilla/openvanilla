@@ -5,6 +5,7 @@
 #import "CVKeyCode.h"
 #import "NSDictionaryExtension.h"
 #import "NSStringExtension.h"
+#import "CVPreviewView.h"
 
 @interface CVModuleItem : NSObject {
     NSString *modid;
@@ -29,10 +30,10 @@
 
     loader=[[CVEmbeddedLoader alloc] init];
     if (loader) {
-        NSLog(@"embedded loader inited");
+//        NSLog(@"embedded loader inited");
 //        NSLog([[loader config] description]);
 //        NSLog([[loader moduleList] description]);
-//        NSLog([[loader loadHistory] description]);
+          NSLog([[loader loadHistory] description]);
     }
     else {
         // what if not...? how to abort?
@@ -48,12 +49,12 @@
     // we retain an output filter list
     outputfilters=[NSMutableArray new];
 
+    NSEnumerator *e;
     NSArray *ldmodlist=[loader moduleList];
     NSDictionary *loaderdict=[config valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
     NSDictionary *menudict=[config valueForKey:@"OVMenuManager" default:[[NSMutableDictionary new] autorelease]];
     NSArray *libexclude=[loaderdict valueForKey:@"excludeLibraryList" default:[[NSArray new] autorelease]];
     NSArray *modexclude=[loaderdict valueForKey:@"excludeModuleList" default:[[NSArray new] autorelease]];
-    NSDictionary *history=[loader loadHistory];
     
     // shared tab settings
     NSString *shortcut=[menudict valueForKey:@"fastIMSwitch" default:@""];
@@ -73,15 +74,61 @@
     [modtab_box_keylist selectItemWithTitle:@""];
     
     
-    // get the comprehensive exclude list
+    // shared tab
+    NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
+	float opacity=[[dsp valueForKey:@"opacity" default:@"1.0"] floatValue];
+	NSColor *fc=[[dsp valueForKey:@"foreground" default:@"1.0 1.0 1.0"] colorByString];
+	NSString *img=[dsp valueForKey:@"backgroundImage" default:@""];
+    NSString *bcstr=[dsp valueForKey:@"background" default:@"1.0 1.0 1.0"];
+	NSString *fontname=[dsp valueForKey:@"font" default:@"Lucida Grande"];
+	float fontsize=[[dsp valueForKey:@"size" default:@"18"] floatValue];
+    
+    NSFont *font=[NSFont fontWithName:fontname size:fontsize];
+    [sharetab_forecolor setColor:fc];
+    [sharetab_transparencyslider setFloatValue:opacity*100];
+    
+    if ([img length]) {
+        [sharetab_backimage setStringValue:img];
+    }
+    else {
+        [sharetab_backimage setStringValue:@"(none)"];
+        [sharetab_backcolor setColor:[NSColor whiteColor]];
+        if ([bcstr isEqualToString:@"none"]) [sharetab_backimage setStringValue:@"(aqua)"];
+        else if ([bcstr isEqualToString:@"transparent"]) [sharetab_backimage setStringValue:@"(transparent)"];
+        else [sharetab_backcolor setColor:[bcstr colorByString]];
+    }
+    
+    // set font manager too
+    [fontmanager setDelegate:self];
+    [fontmanager setSelectedFont:[fontmanager convertFont:font] isMultiple:NO];
+    [self changeFont:fontmanager];
+    [self sharetab_changeTransparency:sharetab_transparencyslider];
+    
+    // get the comprehensive exclude list, first of all we
+    // rebuild the tree of load history
+    loadhistory=[NSMutableDictionary new];
+    NSDictionary *history=[loader loadHistory];
+    NSArray *lhiskeys=[history allKeys];
+    e=[lhiskeys objectEnumerator];
+    NSString *lk;
+    while (lk=[e nextObject]) {
+        NSArray *lhnode=[history valueForKey:lk];
+        NSMutableDictionary *newnode=[[NSMutableDictionary new] autorelease];
+        NSEnumerator *lhe=[lhnode objectEnumerator];
+        NSString *s;
+        while (s=[lhe nextObject]) [newnode setValue:[NSNumber numberWithBool:TRUE] forKey:s];
+        [loadhistory setValue:newnode forKey:[lk lastPathComponent]];        
+    }
+//    NSLog(@"load history=%@", [loadhistory description]);
+    
     NSMutableArray *excludelist=[NSMutableArray arrayWithArray:modexclude];
-    NSEnumerator *e=[libexclude objectEnumerator];
+    e=[libexclude objectEnumerator];
     NSString *s;
     while (s=[e nextObject]) {
-        NSArray *libmods=[history valueForKey:s];
-        if (libmods) [excludelist addObjectsFromArray:libmods];
+        NSDictionary *libmods=[loadhistory valueForKey:s];
+        if (libmods) [excludelist addObjectsFromArray:[libmods allKeys]];
     }
-    NSLog(@"exclude list=%@", [excludelist description]);
+//    NSLog(@"exclude list=%@", [excludelist description]);
 
     NSMutableArray *oforderlist=[[NSMutableArray new] autorelease];
 
@@ -96,7 +143,6 @@
         
         // if it's an OF, init it
         if ([[w moduleType] isEqualToString:@"OVOutputFilter"]) {
-            NSLog(@"init OF %@", mid);
             NSMutableDictionary *modcfgdict=[config valueForKey:mid default:[[NSMutableDictionary new] autorelease]];
             CVDictionary mcd(modcfgdict);
             [w initializeWithConfig:&mcd service:[loader service]];
@@ -120,12 +166,10 @@
     }
 
     NSArray *cfgoforder=[menudict valueForKey:@"outputFilterOrder" default:[[NSArray new] autorelease]];
-    NSLog(@"CFG OF ORDER=%@", [cfgoforder description]);
     e=[cfgoforder objectEnumerator];
     NSString *cs;
     while (cs=[e nextObject]) {
         int c=[oforderlist count];
-        NSLog(@"cs=%@, oforderlist count=%d", cs, c);
         for (int i=0; i<c; i++) {
             CVModuleItem *cvmi=[oforderlist objectAtIndex:i];
             if ([[cvmi identifier] isEqualToString:cs]) {
@@ -142,21 +186,28 @@
     [oftab_oforderlist setDataSource:oflist];
     [modtab_modlist setDataSource:modlist];
     [modtab_modlist setDelegate:self];
+    
+    [[NSApplication sharedApplication] setDelegate:self];
 }
+ 
 - (void)dealloc {
     [outputfilters release];
     [modlist release];
     [oflist release];
     [loader release];
     [config release];
+    [loadhistory release];
+    [fastimswitchkey release];
     [super dealloc];
 }
 - (void)windowWillClose:(NSNotification *)aNotification {
+    [[NSApplication sharedApplication] terminate:self];
+}
+- (void)applicationWillTerminate:(NSNotification *)aNotification {
     [self pref_writeConfig:self];
 }
 - (BOOL)tableView:(NSTableView *)t shouldSelectRow:(int)r {
     if (t==modtab_modlist) {
-        NSLog(@"modlist row %d selected, shortcut=%@", r, [[[modlist array] objectAtIndex:r] shortcut]);
         modtab_modlist_currentrow=r;
         
         NSString *mid=[[[modlist array] objectAtIndex:r] identifier];
@@ -220,6 +271,37 @@
     [oftab_outputtext setString:output];
     [oftab_notifymessage setString:[loader notifyMessage]];
 }
+- (IBAction)sharetab_changeColor:(id)sender {
+    if (sender==sharetab_forecolor)
+        NSLog(@"fore %@", [sender description]);
+    else
+        NSLog(@"back %@", [sender description]);
+    NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
+    [sharetab_previewview changeConfig:dsp];
+}
+- (IBAction)sharetab_changeImage:(id)sender {
+    NSLog([sender alternateTitle]);
+    [sharetab_backimage setStringValue:[sender alternateTitle]];
+    NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
+    [sharetab_previewview changeConfig:dsp];
+}
+- (IBAction)sharetab_changeTransparency:(id)sender {
+    NSLog(@"%f", [sender intValue]/100.0);
+    [sharetab_transparencytag setStringValue:[NSString stringWithFormat:@"%d%%", [sender intValue]]];
+    NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
+    [sharetab_previewview changeConfig:dsp];
+}
+- (IBAction)sharetab_setFont:(id)sender {
+    NSFontPanel *fp=[fontmanager fontPanel:YES];
+    [fp orderFront:self];    
+}
+- (void)changeFont:(id)sender {
+    NSFont *newfont=[fontmanager convertFont:[fontmanager selectedFont]];
+    [sharetab_fonttag setStringValue:[NSString stringWithFormat:@"%@, %d pt", [newfont fontName], (int)[newfont pointSize]]];
+
+    NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
+    [sharetab_previewview changeConfig:dsp];
+}
 - (IBAction)pref_dumpConfigToConsole:(id)sender {
     NSLog(@"dumping output filter order");
     NSLog([[oflist array] description]);
@@ -249,15 +331,48 @@
     while (cvmi=[e nextObject]) [ofo addObject:[cvmi identifier]];
     [md setValue:ofo forKey:@"outputFilterOrder"];
     
+    // write OVMenuManager node
     [config setValue:md forKey:@"OVMenuManager"];
+
+    // begin the writing of OVLoader node
+    NSMutableDictionary *loadernode=[config valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
+
+    // gather the exclude list
+    e=[[modlist array] objectEnumerator];
+    while (cvmi=[e nextObject]) {
+        CVModuleWrapper *w=CVFindModule([loader moduleList], [cvmi identifier]);
+        if (!w) continue;
+        NSString *fromlib=[[w fromLibrary] lastPathComponent];
+        NSDictionary *node=[loadhistory valueForKey:fromlib];
+        if (!node) continue;
+        [node setValue:[NSNumber numberWithBool:[cvmi loaded]] forKey:[cvmi identifier]];
+    }
+    
+    // now we can write the exclude list
+    NSMutableArray *newlibexclude=[[NSMutableArray new] autorelease];
+    NSMutableArray *newmodexclude=[[NSMutableArray new] autorelease];
+    e=[[loadhistory allKeys] objectEnumerator];
+    NSString *libname;
+    while (libname=[e nextObject]) {
+        NSDictionary *node=[loadhistory valueForKey:libname];
+        NSArray *nkeys=[node allKeys];
+        NSArray *disabledkeys=[node allKeysForObject:[NSNumber numberWithBool:FALSE]];
+        if ([nkeys count]==[disabledkeys count])
+            [newlibexclude addObject:libname];
+        else {
+            if ([disabledkeys count]) [newmodexclude addObjectsFromArray:disabledkeys];
+        }
+    }
+    [loadernode setValue:newlibexclude forKey:@"excludeLibraryList"];
+    [loadernode setValue:newmodexclude forKey:@"excludeModuleList"];
+
+    NSLog(@"new dictionary=%@", [config description]);
 
     // we sync loader config first, then overwrite with ours
     [[loader config] sync];
-    [[[loader config] dictionary] removeAllObjects];
+    // [[[loader config] dictionary] removeAllObjects];
     [[[loader config] dictionary] addEntriesFromDictionary:config];
     [[loader config] sync];
-
-    [[NSApplication sharedApplication] terminate:self];
 }
 @end
 

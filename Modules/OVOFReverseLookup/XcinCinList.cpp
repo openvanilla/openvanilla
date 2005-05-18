@@ -23,13 +23,19 @@ int file_select(struct dirent *entry)
     return 0;
 }
 
+CinList::CinList() {
+    index=0;
+}
+
 void CinList::load(char *libpath)
 {
+    if (index)  return;     // already loaded by another binary instance!
+
     struct dirent **files;
     strcpy(cinpath, libpath);
     int l=strlen(cinpath);
     if (l) if (cinpath[l-1]=='/') cinpath[l-1]=0;
-    strcat(cinpath, "/OVOFReverseLookup");
+    strcat(cinpath, "/OVIMGeneric");
 
     int count=scandir(cinpath, &files, file_select, alphasort); 
     if (count<=0) return;
@@ -41,6 +47,7 @@ void CinList::load(char *libpath)
         free(files[i]);
     }
     free(files);
+    // murmur("CinList::load called, index=%d", index);
 }
 
 
