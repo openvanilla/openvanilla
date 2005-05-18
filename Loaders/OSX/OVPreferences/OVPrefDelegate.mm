@@ -7,6 +7,8 @@
 #import "NSStringExtension.h"
 #import "CVPreviewView.h"
 
+#define MSG(x)      x
+
 @interface CVModuleItem : NSObject {
     NSString *modid;
     NSString *modname;
@@ -27,6 +29,7 @@
     // set user interface state defaults
     modtab_modlist_currentrow=-1;
     fastimswitchkey=[[NSString alloc] initWithString:@""];
+    sound=nil;
 
     loader=[[CVEmbeddedLoader alloc] init];
     if (loader) {
@@ -42,6 +45,12 @@
     // copy our own dictionary
     config=[[NSMutableDictionary dictionaryWithDictionary:[[loader config] dictionary]] retain];
     
+    // get different nodes
+    loadercfg=[config valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
+    dsrvrcfg=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
+    menucfg=[config valueForKey:@"OVMenuManager" default:[[NSMutableDictionary new] autorelease]];
+
+    
     // create the lists...
     modlist=[[CVPrefArray alloc] initWithDragDropSetting:FALSE];
     oflist=[[CVPrefArray alloc] initWithDragDropSetting:TRUE];
@@ -51,13 +60,11 @@
 
     NSEnumerator *e;
     NSArray *ldmodlist=[loader moduleList];
-    NSDictionary *loaderdict=[config valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
-    NSDictionary *menudict=[config valueForKey:@"OVMenuManager" default:[[NSMutableDictionary new] autorelease]];
-    NSArray *libexclude=[loaderdict valueForKey:@"excludeLibraryList" default:[[NSArray new] autorelease]];
-    NSArray *modexclude=[loaderdict valueForKey:@"excludeModuleList" default:[[NSArray new] autorelease]];
+    NSArray *libexclude=[loadercfg valueForKey:@"excludeLibraryList" default:[[NSArray new] autorelease]];
+    NSArray *modexclude=[loadercfg valueForKey:@"excludeModuleList" default:[[NSArray new] autorelease]];
     
     // shared tab settings
-    NSString *shortcut=[menudict valueForKey:@"fastIMSwitch" default:@""];
+    NSString *shortcut=[menucfg valueForKey:@"fastIMSwitch" default:@""];
     CVKeyCode cvkc(shortcut);
     if (cvkc.isCommand()) [sharetab_cmd setIntValue:1];
     if (cvkc.isOpt()) [sharetab_option setIntValue:1];
@@ -75,13 +82,18 @@
     
     
     // shared tab
-    NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
-	float opacity=[[dsp valueForKey:@"opacity" default:@"1.0"] floatValue];
-	NSColor *fc=[[dsp valueForKey:@"foreground" default:@"1.0 1.0 1.0"] colorByString];
-	NSString *img=[dsp valueForKey:@"backgroundImage" default:@""];
-    NSString *bcstr=[dsp valueForKey:@"background" default:@"1.0 1.0 1.0"];
-	NSString *fontname=[dsp valueForKey:@"font" default:@"Lucida Grande"];
-	float fontsize=[[dsp valueForKey:@"size" default:@"18"] floatValue];
+    NSString *notifystyle=[dsrvrcfg valueForKey:@"notificationStyle" default:@"default"];
+    if ([notifystyle isEqualToString:@"default"])
+        [sharetab_shownotify setIntValue:1];
+    else
+        [sharetab_shownotify setIntValue:0];
+    
+	float opacity=[[dsrvrcfg valueForKey:@"opacity" default:@"1.0"] floatValue];
+	NSColor *fc=[[dsrvrcfg valueForKey:@"foreground" default:@"1.0 1.0 1.0"] colorByString];
+	NSString *img=[dsrvrcfg valueForKey:@"backgroundImage" default:@""];
+    NSString *bcstr=[dsrvrcfg valueForKey:@"background" default:@"1.0 1.0 1.0"];
+	NSString *fontname=[dsrvrcfg valueForKey:@"font" default:@"Lucida Grande"];
+	float fontsize=[[dsrvrcfg valueForKey:@"size" default:@"18"] floatValue];
     
     NSFont *font=[NSFont fontWithName:fontname size:fontsize];
     [sharetab_forecolor setColor:fc];
@@ -89,13 +101,13 @@
     
     if ([img length]) {
         // NEED TO USE SHORTENED FORM, OTHERWISE IT'S TOO LONG
-        [sharetab_backimage setStringValue:img];
+        [sharetab_backimage setStringValue:[self shortenedFilename:img maxLength:26]];
     }
     else {
-        [sharetab_backimage setStringValue:@"(none)"];
+        [sharetab_backimage setStringValue:MSG(@"(none)")];
         [sharetab_backcolor setColor:[NSColor whiteColor]];
-        if ([bcstr isEqualToString:@"none"]) [sharetab_backimage setStringValue:@"(aqua)"];
-        else if ([bcstr isEqualToString:@"transparent"]) [sharetab_backimage setStringValue:@"(transparent)"];
+        if ([bcstr isEqualToString:@"none"]) [sharetab_backimage setStringValue:MSG(@"(aqua)")];
+        else if ([bcstr isEqualToString:@"transparent"]) [sharetab_backimage setStringValue:MSG(@"(transparent)")];
         else [sharetab_backcolor setColor:[bcstr colorByString]];
     }
     
@@ -104,6 +116,11 @@
     [fontmanager setSelectedFont:[fontmanager convertFont:font] isMultiple:NO];
     [self changeFont:fontmanager];
     [self sharetab_changeTransparency:sharetab_transparencyslider];
+    [sharetab_previewview changeConfig:dsrvrcfg];
+    
+    
+    // setup sound
+    [self setupSound];
     
     // get the comprehensive exclude list, first of all we
     // rebuild the tree of load history
@@ -152,7 +169,7 @@
         
         OVModule *ovm=[w module];
         NSString *name=[NSString stringWithUTF8String:ovm->localizedName(lc)];        
-        NSString *shortcut=[menudict valueForKey:mid default:@""];
+        NSString *shortcut=[menucfg valueForKey:mid default:@""];
         
         CVModuleItem *i=[[CVModuleItem alloc] initWithModuleID:mid name:name shortcut:shortcut loaded:loaded];
         [[modlist array] addObject:i];
@@ -166,7 +183,7 @@
         [oftab_convertfilter addItemWithTitle:[NSString stringWithUTF8String:ovm->localizedName(lc)]];
     }
 
-    NSArray *cfgoforder=[menudict valueForKey:@"outputFilterOrder" default:[[NSArray new] autorelease]];
+    NSArray *cfgoforder=[menucfg valueForKey:@"outputFilterOrder" default:[[NSArray new] autorelease]];
     e=[cfgoforder objectEnumerator];
     NSString *cs;
     while (cs=[e nextObject]) {
@@ -192,6 +209,7 @@
 }
  
 - (void)dealloc {
+    if (sound) [sound release];
     [outputfilters release];
     [modlist release];
     [oflist release];
@@ -239,9 +257,13 @@
     if ([sharetab_control intValue]) strcat(buf, "c");
     if ([sharetab_shift intValue]) strcat(buf, "s");
     NSString *key=[sharetab_keylist titleOfSelectedItem];
+    
+    [fastimswitchkey release];
     if ([key length] && strlen(buf)) {
-        [fastimswitchkey release];
         fastimswitchkey=[[NSString stringWithFormat:@"%@ %s", key, buf] retain];
+    }
+    else {
+        fastimswitchkey=[[NSString stringWithString:@""] retain];
     }
 }
 - (IBAction)modtab_shortcutKeyChange:(id)sender {
@@ -271,65 +293,53 @@
         
     [oftab_outputtext setString:output];
     [oftab_notifymessage setString:[loader notifyMessage]];
+    [loader clearNotification];
 }
 - (IBAction)sharetab_changeColor:(id)sender {
-    NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
     if (sender==sharetab_forecolor) {
-        [dsp setValue:[NSString stringByColor:[sharetab_forecolor color]] forKey:@"foreground"];
+        [dsrvrcfg setValue:[NSString stringByColor:[sharetab_forecolor color]] forKey:@"foreground"];
     }
     else {
         NSString *img=[sharetab_backimage stringValue];
-        if ([img isEqualToString:@"(none)"]) {
-            [dsp setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
+        if ([img isEqualToString:MSG(@"(none)")]) {
+            [dsrvrcfg setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
         }
     }
 
-    [sharetab_previewview changeConfig:dsp];
+    [sharetab_previewview changeConfig:dsrvrcfg];
 }
 - (IBAction)sharetab_changeImage:(id)sender {
     // we use this trick to tell which button is which
     NSString *button=[sender alternateTitle];
-    NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
     
     if ([button isEqualToString:@"set"]) {
         NSOpenPanel *op=[NSOpenPanel openPanel];
         [op setAllowsMultipleSelection:FALSE];
         if ([op runModalForDirectory:nil file:nil]==NSFileHandlingPanelOKButton) {
             NSString *f=[[op filenames] objectAtIndex:0];
-            NSString *display=f;            
-            if ([f length] > 24) {
-                NSArray *pc=[f pathComponents];
-                if ([pc count] > 2) {
-                    display=[NSString stringWithFormat:@"%@%@/.../%@",
-                        [pc objectAtIndex:0],
-                        [pc objectAtIndex:1],
-                        [pc objectAtIndex:[pc count]-1]];
-                }
-            }
-            [sharetab_backimage setStringValue:display];
-            [dsp setValue:f forKey:@"backgroundImage"];
-            [dsp setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
+            [sharetab_backimage setStringValue:[self shortenedFilename:f maxLength:26]];
+            [dsrvrcfg setValue:f forKey:@"backgroundImage"];
+            [dsrvrcfg setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
         }
     }
     else if ([button isEqualToString:@"none"]) {
-        [dsp setValue:@"" forKey:@"backgroundImage"];
-        [dsp setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
-        [sharetab_backimage setStringValue:@"(none)"];
+        [dsrvrcfg setValue:@"" forKey:@"backgroundImage"];
+        [dsrvrcfg setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
+        [sharetab_backimage setStringValue:MSG(@"(none)")];
     }
     else if ([button isEqualToString:@"transparent"]) {
-        [dsp setValue:@"" forKey:@"backgroundImage"];
-        [dsp setValue:@"transparent" forKey:@"background"];
-        [sharetab_backimage setStringValue:@"(transparent)"];
+        [dsrvrcfg setValue:@"" forKey:@"backgroundImage"];
+        [dsrvrcfg setValue:@"transparent" forKey:@"background"];
+        [sharetab_backimage setStringValue:MSG(@"(transparent)")];
     }
     
-    [sharetab_previewview changeConfig:dsp];
+    [sharetab_previewview changeConfig:dsrvrcfg];
 }
 - (IBAction)sharetab_changeTransparency:(id)sender {
     NSLog(@"%f", [sender intValue]/100.0);
     [sharetab_transparencytag setStringValue:[NSString stringWithFormat:@"%d%%", [sender intValue]]];
-    NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
-    [dsp setValue:[NSNumber numberWithFloat:[sender intValue]/100.0] forKey:@"opacity"];
-    [sharetab_previewview changeConfig:dsp];
+    [dsrvrcfg setValue:[NSNumber numberWithFloat:[sender intValue]/100.0] forKey:@"opacity"];
+    [sharetab_previewview changeConfig:dsrvrcfg];
 }
 - (IBAction)sharetab_setFont:(id)sender {
     NSFontPanel *fp=[fontmanager fontPanel:YES];
@@ -339,16 +349,80 @@
     NSFont *newfont=[fontmanager convertFont:[fontmanager selectedFont]];
     [sharetab_fonttag setStringValue:[NSString stringWithFormat:@"%@, %d pt", [newfont fontName], (int)[newfont pointSize]]];
 
-    NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
-    [dsp setValue:[newfont fontName] forKey:@"font"];
-    [dsp setValue:[NSNumber numberWithFloat:[newfont pointSize]] forKey:@"size"];
-    [sharetab_previewview changeConfig:dsp];
+    [dsrvrcfg setValue:[newfont fontName] forKey:@"font"];
+    [dsrvrcfg setValue:[NSNumber numberWithFloat:[newfont pointSize]] forKey:@"size"];
+    [sharetab_previewview changeConfig:dsrvrcfg];
 }
 - (IBAction)sharetab_changeSound:(id)sender {
+    if (sound) {
+        if ([sound isPlaying]) [sound stop];
+    }
+
+    [loadercfg setValue:@"" forKey:@"beepSound"];
+    [sharetab_soundfile setStringValue:@""];
+    
+    NSLog(@"change sound!");
+    NSString *t=[sender titleOfSelectedItem];
+    if ([t isEqualToString:MSG(@"(none)")]) {
+        [loadercfg setValue:@"0" forKey:@"shouldBeep"];
+        return;
+    }
+
+    [loadercfg setValue:@"1" forKey:@"shouldBeep"];
+
+    if ([t isEqualToString:MSG(@"(default)")]) {
+        [loadercfg setValue:@"" forKey:@"beepSound"];
+        return;
+    }
+
+    if ([t isEqualToString:MSG(@"customized...")]) {
+        NSOpenPanel *op=[NSOpenPanel openPanel];
+        [op setAllowsMultipleSelection:FALSE];
+        if ([op runModalForDirectory:nil file:nil]==NSFileHandlingPanelOKButton) {
+            NSString *f=[[op filenames] objectAtIndex:0];
+            [sharetab_soundfile setStringValue:[self shortenedFilename:f maxLength:30]];
+            [loadercfg setValue:f forKey:@"beepSound"];
+        }
+        else {
+            [sender selectItemWithTitle:MSG(@"(default)")];
+        }
+    }
+    else {
+        [loadercfg setValue:t forKey:@"beepSound"];
+    }
 }
 - (IBAction)sharetab_changeNotify:(id)sender {
+    if ([sender intValue])
+        [dsrvrcfg setValue:@"default" forKey:@"notificationStyle"];
+    else
+        [dsrvrcfg setValue:@"silent" forKey:@"notificationStyle"];
 }
 - (IBAction)sharetab_testSound:(id)sender {
+    if (sound) {
+        if ([sound isPlaying]) [sound stop];
+    }
+
+    NSString *t=[sharetab_soundlist titleOfSelectedItem];
+    if ([t isEqualToString:MSG(@"(none)")]) return;
+    if ([t isEqualToString:MSG(@"(default)")]) {
+        SysBeep(30);
+        return;
+    }
+
+    if (sound) {
+        [sound release];
+        sound=nil;
+    }
+    if ([t isEqualToString:MSG(@"customized...")]) {
+        NSString *f=[sharetab_soundfile stringValue];
+        if ([f length]) sound=[[NSSound alloc] initWithContentsOfFile:f byReference:YES];
+    }
+    else {
+        sound=[NSSound soundNamed:t];
+        [sound retain];
+    }
+    
+    if (sound) [sound play];    
 }
 - (IBAction)pref_dumpConfigToConsole:(id)sender {
     NSLog(@"dumping output filter order");
@@ -360,7 +434,7 @@
 - (IBAction)pref_writeConfig:(id)sender {
     NSLog(@"gathering and writing config");
 
-    // write shortcut menu settings
+    // write shortcut menu settings (have to erase the entire node first)
     NSMutableArray *ma=[modlist array];
     NSMutableDictionary *md=[[NSMutableDictionary new] autorelease];
     NSEnumerator *e=[ma objectEnumerator];
@@ -371,7 +445,7 @@
     }
     
     // ... with fastIMSwitch settings
-    [md setValue:fastimswitchkey forKey:@"fastIMSwitch"];
+    if ([fastimswitchkey length]) [md setValue:fastimswitchkey forKey:@"fastIMSwitch"];
     
     // ... and outputFilterOrder, too
     NSMutableArray *ofo=[[NSMutableArray new] autorelease];
@@ -381,9 +455,6 @@
     
     // write OVMenuManager node
     [config setValue:md forKey:@"OVMenuManager"];
-
-    // begin the writing of OVLoader node
-    NSMutableDictionary *loadernode=[config valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
 
     // gather the exclude list
     e=[[modlist array] objectEnumerator];
@@ -411,16 +482,54 @@
             if ([disabledkeys count]) [newmodexclude addObjectsFromArray:disabledkeys];
         }
     }
-    [loadernode setValue:newlibexclude forKey:@"excludeLibraryList"];
-    [loadernode setValue:newmodexclude forKey:@"excludeModuleList"];
+    [loadercfg setValue:newlibexclude forKey:@"excludeLibraryList"];
+    [loadercfg setValue:newmodexclude forKey:@"excludeModuleList"];
 
     NSLog(@"new dictionary=%@", [config description]);
 
     // we sync loader config first, then overwrite with ours
     [[loader config] sync];
-    // [[[loader config] dictionary] removeAllObjects];
+    [[[loader config] dictionary] removeAllObjects];
     [[[loader config] dictionary] addEntriesFromDictionary:config];
     [[loader config] sync];
+}
+- (NSString*)shortenedFilename:(NSString*)f maxLength:(int)m {
+    NSString *display=f;
+    if ([f length] > (size_t)m) {
+        NSArray *pc=[f pathComponents];
+        if ([pc count] > 2) {
+            display=[NSString stringWithFormat:@"%@%@/.../%@",
+                [pc objectAtIndex:0],
+                [pc objectAtIndex:1],
+                [pc objectAtIndex:[pc count]-1]];
+        }
+    }
+    return display;
+}
+- (void)setupSound {
+    NSArray *aiff=CVEnumeratePath(@"/System/Library/Sounds", @".aiff");
+    
+    [sharetab_soundlist removeAllItems];
+    [sharetab_soundlist addItemWithTitle:MSG(@"(default)")];
+    [sharetab_soundlist addItemWithTitle:MSG(@"(none)")];
+    int c=[aiff count];
+    for (int i=0; i<c; i++) {
+        [sharetab_soundlist addItemWithTitle:[[[[aiff objectAtIndex: i] lastPathComponent] componentsSeparatedByString:@"."] objectAtIndex:0]];
+    }
+    [sharetab_soundlist addItemWithTitle:MSG(@"customized...")];
+    
+    NSString *soundfile=[loadercfg valueForKey:@"beepSound" default:@""];
+    if ([soundfile length]) {
+        [sharetab_soundlist selectItemWithTitle:soundfile];
+        [sharetab_soundfile setStringValue:@""];
+        if (![sharetab_soundlist selectedItem]) {
+            [sharetab_soundlist selectItemWithTitle:MSG(@"customized...")];
+            [sharetab_soundfile setStringValue:[self shortenedFilename:soundfile maxLength:30]];
+        }
+    }
+    else {
+        [sharetab_soundfile setStringValue:@""];
+    }
 }
 @end
 

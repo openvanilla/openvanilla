@@ -22,6 +22,14 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 fontmanager = id; 
+                "gim_autocompose" = id; 
+                "gim_errorbeep" = id; 
+                "gim_hitmaxcompose" = id; 
+                "gim_imlist" = id; 
+                "gim_maxkeylen" = id; 
+                "gim_shiftselection" = id; 
+                "imset_modlist" = id; 
+                "imset_propedit" = id; 
                 "modtab_box_cmd" = id; 
                 "modtab_box_control" = id; 
                 "modtab_box_keylist" = id; 
@@ -35,6 +43,12 @@
                 "oftab_notifymessage" = id; 
                 "oftab_oforderlist" = id; 
                 "oftab_outputtext" = id; 
+                "settab_chewinglayout" = id; 
+                "settab_phoneticslayout" = id; 
+                "settab_pojascii" = id; 
+                "settab_pojlayout" = id; 
+                "settab_pojpojonly" = id; 
+                "settab_tibetanlayout" = id; 
                 "sharetab_backcolor" = id; 
                 "sharetab_backimage" = id; 
                 "sharetab_cmd" = id; 
@@ -47,6 +61,7 @@
                 "sharetab_shift" = id; 
                 "sharetab_shownotify" = id; 
                 "sharetab_soundfile" = id; 
+                "sharetab_soundlist" = id; 
                 "sharetab_transparencyslider" = id; 
                 "sharetab_transparencytag" = id; 
             }; 

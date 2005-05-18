@@ -14,6 +14,14 @@
 @interface OVPrefDelegate : NSObject
 {
     IBOutlet id fontmanager;
+    IBOutlet id gim_autocompose;
+    IBOutlet id gim_errorbeep;
+    IBOutlet id gim_hitmaxcompose;
+    IBOutlet id gim_imlist;
+    IBOutlet id gim_maxkeylen;
+    IBOutlet id gim_shiftselection;
+    IBOutlet id imset_modlist;
+    IBOutlet id imset_propedit;
     IBOutlet id modtab_box_cmd;
     IBOutlet id modtab_box_control;
     IBOutlet id modtab_box_keylist;
@@ -27,6 +35,12 @@
     IBOutlet id oftab_notifymessage;
     IBOutlet id oftab_oforderlist;
     IBOutlet id oftab_outputtext;
+    IBOutlet id settab_chewinglayout;
+    IBOutlet id settab_phoneticslayout;
+    IBOutlet id settab_pojascii;
+    IBOutlet id settab_pojlayout;
+    IBOutlet id settab_pojpojonly;
+    IBOutlet id settab_tibetanlayout;
     IBOutlet id sharetab_backcolor;
     IBOutlet id sharetab_backimage;
     IBOutlet id sharetab_cmd;
@@ -39,14 +53,19 @@
     IBOutlet id sharetab_shift;
     IBOutlet id sharetab_shownotify;
     IBOutlet id sharetab_soundfile;
+    IBOutlet id sharetab_soundlist;
     IBOutlet id sharetab_transparencyslider;
     IBOutlet id sharetab_transparencytag;
 
     // user interface states
     int modtab_modlist_currentrow;
+    NSSound *sound;
 
     CVEmbeddedLoader *loader;
     NSMutableDictionary *config;
+    NSMutableDictionary *loadercfg;
+    NSMutableDictionary *dsrvrcfg;
+    NSMutableDictionary *menucfg;
     CVPrefArray *modlist;
     CVPrefArray *oflist;
     NSMutableArray *outputfilters;
@@ -65,4 +84,6 @@
 - (IBAction)sharetab_setFont:(id)sender;
 - (IBAction)sharetab_shortcutKeyChange:(id)sender;
 - (IBAction)sharetab_testSound:(id)sender;
+- (NSString*)shortenedFilename:(NSString*)f maxLength:(int)m;
+- (void)setupSound;
 @end

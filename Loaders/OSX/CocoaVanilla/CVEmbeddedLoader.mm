@@ -50,6 +50,9 @@
 - (NSString*)notifyMessage {
     return [dpsrv notifyMessage];
 }
+- (void)clearNotification {
+    [dpsrv notifyClose];
+}
 @end
 
 @implementation CVDumpDisplayServer
@@ -73,7 +76,9 @@
 - (void)notifyMessage:(bycopy NSString*)s position:(Point)p {
     [msg setString:s];
 }
-- (void)notifyClose {}
+- (void)notifyClose {
+    [msg setString:@""];
+}
 - (void)notifyFade {}
 - (void)aboutDialog {}
 @end

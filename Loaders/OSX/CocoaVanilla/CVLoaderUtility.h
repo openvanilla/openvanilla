@@ -23,5 +23,7 @@ void CVAtomicInitEnd(NSString *f);
 // utility functions
 BOOL CVIsPathExist(NSString *p);
 BOOL CVStringIsInArray(NSString *s, NSArray *a);
+NSArray *CVEnumeratePath(NSString *path, NSString *ext);
+
 
 #endif

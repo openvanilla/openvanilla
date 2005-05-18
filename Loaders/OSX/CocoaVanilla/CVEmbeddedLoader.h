@@ -21,6 +21,7 @@
 - (NSArray*)moduleList;
 - (NSDictionary*)loadHistory;
 - (NSString*)notifyMessage;
+- (void)clearNotification;
 @end
 
 
