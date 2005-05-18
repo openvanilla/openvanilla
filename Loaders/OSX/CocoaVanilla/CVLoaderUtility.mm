@@ -96,6 +96,16 @@ BOOL CVStringIsInArray(NSString *s, NSArray *a) {
     return NO;
 }
 
+void CVRemoveStringFromArray(NSString *s, NSMutableArray *ma) {
+    int c=[ma count];
+    for (int i=0; i<c; i++) {
+        if ([[ma objectAtIndex:i] isEqualToString:s]) {
+            [ma removeObjectAtIndex:i];
+            return;
+        }
+    }
+}
+
 CVModuleWrapper *CVFindModule(NSArray *modlist, NSString *identifier, 
     NSString *type)
 {

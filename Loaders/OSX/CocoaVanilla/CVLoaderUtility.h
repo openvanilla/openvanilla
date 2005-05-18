@@ -24,6 +24,6 @@ void CVAtomicInitEnd(NSString *f);
 BOOL CVIsPathExist(NSString *p);
 BOOL CVStringIsInArray(NSString *s, NSArray *a);
 NSArray *CVEnumeratePath(NSString *path, NSString *ext);
-
+void CVRemoveStringFromArray(NSString *s, NSMutableArray *ma);
 
 #endif

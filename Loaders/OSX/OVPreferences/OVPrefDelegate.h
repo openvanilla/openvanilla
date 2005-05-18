@@ -60,6 +60,10 @@
     // user interface states
     int modtab_modlist_currentrow;
     NSSound *sound;
+    NSMutableArray *gimmodlist;        // module list for Generic IM sub-panel
+    int gimcurrentindex;               // currently "used" Generic IM index
+    NSMutableArray *propeditmodlist;
+    int propeditcurrentindex;
 
     CVEmbeddedLoader *loader;
     NSMutableDictionary *config;
@@ -86,4 +90,10 @@
 - (IBAction)sharetab_testSound:(id)sender;
 - (NSString*)shortenedFilename:(NSString*)f maxLength:(int)m;
 - (void)setupSound;
+// methods for IM settings
+- (void)setupGenericIMSettings;
+- (void)setupIMSettings;
+- (void)gatherIMSettings;
+- (BOOL)identifierExists:(NSString*)mid;
+- (NSDictionary*)getConfigNode:(NSString*)mid;
 @end

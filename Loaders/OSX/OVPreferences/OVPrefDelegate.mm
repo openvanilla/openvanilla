@@ -30,6 +30,9 @@
     modtab_modlist_currentrow=-1;
     fastimswitchkey=[[NSString alloc] initWithString:@""];
     sound=nil;
+    gimcurrentindex=propeditcurrentindex=-1;
+    gimmodlist=[NSMutableArray new];
+    propeditmodlist=[NSMutableArray new];
 
     loader=[[CVEmbeddedLoader alloc] init];
     if (loader) {
@@ -158,14 +161,17 @@
         NSString *mid=[w identifier];
         BOOL loaded=YES;
         if (CVStringIsInArray(mid, excludelist)) loaded=NO;
-        
-        // if it's an OF, init it
-        if ([[w moduleType] isEqualToString:@"OVOutputFilter"]) {
-            NSMutableDictionary *modcfgdict=[config valueForKey:mid default:[[NSMutableDictionary new] autorelease]];
-            CVDictionary mcd(modcfgdict);
-            [w initializeWithConfig:&mcd service:[loader service]];
-            [outputfilters addObject: w];
+
+        // if it begins with OVIMGeneric...
+        if ([[w identifier] hasPrefix:@"OVIMGeneric-"] && [[w moduleType] isEqualToString:@"OVInputMethod"]) {
+            [gimmodlist addObject:mid];
         }
+        else {      // otherwise put in our propedit's modlist
+            [propeditmodlist addObject:mid];
+        }
+        
+        // if it's OF, add to our "trial for fun" list
+        if ([[w moduleType] isEqualToString:@"OVOutputFilter"]) [outputfilters addObject: w];
         
         OVModule *ovm=[w module];
         NSString *name=[NSString stringWithUTF8String:ovm->localizedName(lc)];        
@@ -199,6 +205,14 @@
     }
     [[oflist array] addObjectsFromArray:oforderlist];
 
+    // setup IM settings (OVIMPhonetics, OVIMChewing, OVIMPOJ-Holo, OVIMTibetan)
+    [self setupIMSettings];
+    [self setupGenericIMSettings];
+
+    // we can finally set up propedit!
+    
+
+
     // register pasteboard for drag-and-drop functionality
     [oftab_oforderlist registerForDraggedTypes:[NSArray arrayWithObject:NSStringPboardType]];
     [oftab_oforderlist setDataSource:oflist];
@@ -210,6 +224,8 @@
  
 - (void)dealloc {
     if (sound) [sound release];
+    [gimmodlist release];
+    [propeditmodlist release];
     [outputfilters release];
     [modlist release];
     [oflist release];
@@ -285,8 +301,10 @@
     CVModuleWrapper *w=[outputfilters objectAtIndex:[oftab_convertfilter indexOfSelectedItem]];
     NSLog(@"using %@", [w identifier]);
     
+    // initialize it first
+    CVDictionary mcd([self getConfigNode:[w identifier]]);
+    [w initializeWithConfig:&mcd service:[loader service]];
     OVOutputFilter *of=(OVOutputFilter*)[w module];
-    
     NSString *output=[NSString stringWithUTF8String:of->process(
         [[oftab_inputtext string] UTF8String],
         [loader service])];
@@ -434,6 +452,9 @@
 - (IBAction)pref_writeConfig:(id)sender {
     NSLog(@"gathering and writing config");
 
+    // gathr IM configs
+    [self gatherIMSettings];
+
     // write shortcut menu settings (have to erase the entire node first)
     NSMutableArray *ma=[modlist array];
     NSMutableDictionary *md=[[NSMutableDictionary new] autorelease];
@@ -530,6 +551,83 @@
     else {
         [sharetab_soundfile setStringValue:@""];
     }
+}
+- (void)setupIMSettings {
+    NSDictionary *d;
+    if ([self identifierExists:@"OVIMPhonetic"]) {
+        d=[self getConfigNode:@"OVIMPhonetic"];
+        [settab_phoneticslayout selectItemAtIndex:[[d valueForKey:@"keyboardLayout" default:@"0"] intValue]];
+        [settab_phoneticslayout setEnabled:YES];
+        CVRemoveStringFromArray(@"OVIMPhonetic", propeditmodlist);
+    }
+    if ([self identifierExists:@"OVIMChewing"]) {
+        d=[self getConfigNode:@"OVIMChewing"];
+        [settab_chewinglayout selectItemAtIndex:[[d valueForKey:@"keyboardLayout" default:@"0"] intValue]];
+        [settab_chewinglayout setEnabled:YES];
+        CVRemoveStringFromArray(@"OVIMChewing", propeditmodlist);
+    }
+
+    if ([self identifierExists:@"OVIMTibetan"]) {
+        d=[self getConfigNode:@"OVIMTibetan"];
+        [settab_tibetanlayout selectItemAtIndex:[[d valueForKey:@"keyboardLayout" default:@"0"] intValue]];
+        [settab_tibetanlayout setEnabled:YES];
+        CVRemoveStringFromArray(@"OVIMTibetan", propeditmodlist);
+    }
+
+    if ([self identifierExists:@"OVIMPOJ-Holo"]) {
+        d=[self getConfigNode:@"OVIMPOJ-Holo"];
+        [settab_pojlayout selectItemAtIndex:[[d valueForKey:@"keyboardLayout" default:@"0"] intValue]];
+        [settab_pojlayout setEnabled:YES];
+
+        [settab_pojascii setIntValue:[[d valueForKey:@"ASCIIOutput" default:@"0"] intValue]];
+        [settab_pojascii setEnabled:YES];
+
+        [settab_pojpojonly setIntValue:[[d valueForKey:@"fullPOJOutput" default:@"0"] intValue]];
+        [settab_pojpojonly setEnabled:YES];
+        CVRemoveStringFromArray(@"OVIMPOJ-Holo", propeditmodlist);
+    }
+}
+- (void)setupGenericIMSettings {
+    [gim_imlist removeAllItems];
+    if (![gimmodlist count]) return;
+    
+    int c=[gimmodlist count];
+    for (int i=0; i<c; i++) {
+        
+    }
+}
+- (void)gatherIMSettings {
+    #define NUM(x)  [NSString stringWithFormat:@"%d", x] 
+    NSDictionary *d;
+    if ([self identifierExists:@"OVIMPhonetic"]) {
+        d=[self getConfigNode:@"OVIMPhonetic"];
+        [d setValue:NUM([settab_phoneticslayout indexOfSelectedItem]) forKey:@"keyboardLayout"];
+    }
+    if ([self identifierExists:@"OVIMChewing"]) {
+        d=[self getConfigNode:@"OVIMChewing"];
+        [d setValue:NUM([settab_chewinglayout indexOfSelectedItem]) forKey:@"keyboardLayout"];
+    }
+
+    if ([self identifierExists:@"OVIMTibetan"]) {
+        d=[self getConfigNode:@"OVIMTibetan"];
+        [d setValue:NUM([settab_tibetanlayout indexOfSelectedItem]) forKey:@"keyboardLayout"];
+    }
+
+    if ([self identifierExists:@"OVIMPOJ-Holo"]) {
+        d=[self getConfigNode:@"OVIMPOJ-Holo"];
+        [d setValue:NUM([settab_pojlayout indexOfSelectedItem]) forKey:@"keyboardLayout"];
+        [d setValue:NUM([settab_pojascii intValue]) forKey:@"ASCIIOutput"];
+        [d setValue:NUM([settab_pojpojonly intValue]) forKey:@"fullPOJOutput"];
+        [d setValue:@"1" forKey:@"warningBeep"];
+    }
+    #undef NUM
+}
+- (BOOL)identifierExists:(NSString*)mid {
+    if (CVFindModule([loader moduleList], mid)) return YES;
+    return NO;
+}
+- (NSDictionary*)getConfigNode:(NSString*)mid {
+    return [config valueForKey:mid default:[[NSMutableDictionary new] autorelease]];
 }
 @end
 
