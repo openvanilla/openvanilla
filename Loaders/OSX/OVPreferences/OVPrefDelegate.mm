@@ -1,5 +1,4 @@
 #import "OVPrefDelegate.h"
-#import "CVWrappers.h"
 #import "CVLoaderUtility.h"
 #import "CVDictionary.h"
 #import "CVKeyCode.h"
@@ -33,6 +32,8 @@
     gimcurrentindex=propeditcurrentindex=-1;
     gimmodlist=[NSMutableArray new];
     propeditmodlist=[NSMutableArray new];
+    propeditproplist=[NSMutableArray new];
+    propeditdict=nil;
 
     loader=[[CVEmbeddedLoader alloc] init];
     if (loader) {
@@ -210,8 +211,7 @@
     [self setupGenericIMSettings];
 
     // we can finally set up propedit!
-    
-
+    [self setupPropEditSettings];
 
     // register pasteboard for drag-and-drop functionality
     [oftab_oforderlist registerForDraggedTypes:[NSArray arrayWithObject:NSStringPboardType]];
@@ -300,7 +300,7 @@
 - (IBAction)oftab_convert:(id)sender {
     CVModuleWrapper *w=[outputfilters objectAtIndex:[oftab_convertfilter indexOfSelectedItem]];
     NSLog(@"using %@", [w identifier]);
-    
+
     // initialize it first
     CVDictionary mcd([self getConfigNode:[w identifier]]);
     [w initializeWithConfig:&mcd service:[loader service]];
@@ -318,10 +318,9 @@
         [dsrvrcfg setValue:[NSString stringByColor:[sharetab_forecolor color]] forKey:@"foreground"];
     }
     else {
-        NSString *img=[sharetab_backimage stringValue];
-        if ([img isEqualToString:MSG(@"(none)")]) {
-            [dsrvrcfg setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
-        }
+        [dsrvrcfg setValue:@"" forKey:@"backgroundImage"];
+        [sharetab_backimage setStringValue:MSG(@"(none)")];
+        [dsrvrcfg setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
     }
 
     [sharetab_previewview changeConfig:dsrvrcfg];
@@ -610,8 +609,10 @@
 - (IBAction)gim_changeIM:(id)sender {
     int i=[sender indexOfSelectedItem];
     if (i < 0) return;
-    
-    NSDictionary *d=[self getConfigNode:[gimmodlist objectAtIndex:i]];
+
+    NSString *mid=[gimmodlist objectAtIndex:i];
+    [self initModule:mid];    
+    NSDictionary *d=[self getConfigNode:mid];
     #define NUM(x,y)  [[d valueForKey:x default:y] intValue]
     [gim_autocompose setIntValue:NUM(@"autoCompose", @"0")];
     [gim_hitmaxcompose setIntValue:NUM(@"hitMaxAndCompose", @"0")];
@@ -660,12 +661,64 @@
     }
     #undef NUM
 }
+- (void)setupPropEditSettings {
+    [imset_modlist removeAllItems];
+    int c;
+    if (!(c=[propeditmodlist count])) return;    
+    const char *lc=[loader service]->locale();
+    for (int i=0; i<c; i++) {
+        CVModuleWrapper *w=CVFindModule([loader moduleList], [propeditmodlist objectAtIndex:i]);
+        OVModule *ovm=[w module];
+        [imset_modlist addItemWithTitle:[NSString stringWithUTF8String:ovm->localizedName(lc)]];
+    }
+    [imset_modlist setEnabled:YES];
+    [imset_propedit setDataSource:self];
+    [self pedit_changeModule:imset_modlist];
+}
+- (IBAction)pedit_changeModule:(id)sender {
+    propeditcurrentindex=[sender indexOfSelectedItem];
+    if (propeditcurrentindex < 0) return;
+
+    NSString *mid=[propeditmodlist objectAtIndex:propeditcurrentindex];
+    [self initModule:mid];
+    propeditdict=[self getConfigNode:mid];
+    [propeditproplist removeAllObjects];
+    NSArray *sortedkeys=[[propeditdict allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    [propeditproplist addObjectsFromArray:sortedkeys];
+    [imset_propedit reloadData];
+}
+- (CVModuleWrapper*)initModule:(NSString*)mid {
+    CVModuleWrapper *w=CVFindModule([loader moduleList], mid);
+    if (!w) return nil;
+    if ([w usable]) return nil;
+
+    NSMutableDictionary *md=[self getConfigNode:[w identifier]];
+    NSLog(@"before init, node=%@", [md description]);
+    CVDictionary mcd([self getConfigNode:[w identifier]]);
+    [w initializeWithConfig:&mcd service:[loader service]];
+    NSLog(@"after init, node=%@", [md description]);    
+    return w;
+}
 - (BOOL)identifierExists:(NSString*)mid {
     if (CVFindModule([loader moduleList], mid)) return YES;
     return NO;
 }
 - (NSDictionary*)getConfigNode:(NSString*)mid {
     return [config valueForKey:mid default:[[NSMutableDictionary new] autorelease]];
+}
+// NSTableViewDataSource delegated methods, for property list editor
+- (id) tableView:(NSTableView*)t objectValueForTableColumn:(NSTableColumn*)c row:(int)r {
+    if ([[c identifier] isEqualToString:@"key"])
+        return [propeditproplist objectAtIndex:r];
+        
+    return [propeditdict valueForKey:[propeditproplist objectAtIndex:r] default:@""];
+}
+- (void)tableView:(NSTableView *)t setObjectValue:(id)v forTableColumn:(NSTableColumn *)c row:(int)r {
+    [propeditdict setValue:v forKey:[propeditproplist objectAtIndex:r]];
+}
+
+- (int)numberOfRowsInTableView:(NSTableView*)t {
+    return [propeditproplist count];
 }
 @end
 

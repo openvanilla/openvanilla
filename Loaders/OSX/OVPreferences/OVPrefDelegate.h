@@ -2,6 +2,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "CVEmbeddedLoader.h"
+#import "CVWrappers.h"
 
 @interface CVPrefArray : NSObject {
     BOOL draggable;
@@ -64,6 +65,8 @@
     int gimcurrentindex;               // currently "used" Generic IM index
     NSMutableArray *propeditmodlist;
     int propeditcurrentindex;
+    NSMutableArray *propeditproplist;
+    NSMutableDictionary *propeditdict;
 
     CVEmbeddedLoader *loader;
     NSMutableDictionary *config;
@@ -80,6 +83,7 @@
 - (IBAction)gim_settingsTrigger:(id)sender;
 - (IBAction)modtab_shortcutKeyChange:(id)sender;
 - (IBAction)oftab_convert:(id)sender;
+- (IBAction)pedit_changeModule:(id)sender;
 - (IBAction)pref_dumpConfigToConsole:(id)sender;
 - (IBAction)pref_writeConfig:(id)sender;
 - (IBAction)sharetab_changeColor:(id)sender;
@@ -96,6 +100,8 @@
 - (void)setupGenericIMSettings;
 - (void)setupIMSettings;
 - (void)gatherIMSettings;
+- (void)setupPropEditSettings;
+- (CVModuleWrapper*)initModule:(NSString*)mid;
 - (BOOL)identifierExists:(NSString*)mid;
 - (NSDictionary*)getConfigNode:(NSString*)mid;
 @end

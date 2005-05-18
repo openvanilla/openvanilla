@@ -47,9 +47,16 @@ public:
 class IMExample : public OVInputMethod
 {
 public:
-    virtual int initialize(OVDictionary *, OVService*, const char *mp)
+    virtual int initialize(OVDictionary *d, OVService*, const char *mp)
     {
         murmur("IMExample::init, modPath=%s", mp);
+        murmur("setting 1=%d",
+            d->getIntegerWithDefault("key1", 1));
+        murmur("setting 2=%d",
+            d->getIntegerWithDefault("key2", 2));
+        murmur("setting 3=%s",
+            d->getStringWithDefault("key3", "test"));
+        
         return 1;
     }
     virtual const char* identifier() { return "OVIMExample-simple"; }

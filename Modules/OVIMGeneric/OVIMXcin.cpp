@@ -127,17 +127,16 @@ const char* OVIMXcin::localizedName(const char* locale)
     return ename;
 }
 
-int OVIMXcin::initialize(OVDictionary* global, OVService*, const char*)
+int OVIMXcin::initialize(OVDictionary* global, OVService* srv, const char*)
 {
     if (!cintab) return 0;
     murmur("OVIMXcin: initializing %s", identifier());
-    update(global);
+    update(global, srv);
     return 1;
 }
 
-int OVIMXcin::update(OVDictionary* global)
+void OVIMXcin::update(OVDictionary* global, OVService*)
 {
-    fprintf (stderr, "updating %s\n", identifier());
     const char *warningBeep="warningBeep";
     const char *autoCompose="autoCompose";
     const char *maxSeqLen="maxKeySequenceLength";
@@ -159,8 +158,6 @@ int OVIMXcin::update(OVDictionary* global)
 		doShiftSelKey = false;
 	else
 		doShiftSelKey = true;
-
-    return 1;
 }
 
 OVInputMethodContext *OVIMXcin::newContext()
