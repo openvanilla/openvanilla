@@ -4,20 +4,19 @@
 @implementation CVPreviewView
 - (void)awakeFromNib {
     NSLog(@"view awake from nib!");
-	text=[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 100, 50)];
-    [text setEditable:NO];
-    [text setSelectable:NO];
-    [text setBordered:NO];
-    [text setDrawsBackground:YES];
-    [text setFrameOrigin:NSMakePoint(0,0)];
-    [text setStringValue:@"OpenVanilla"];
-    [self addSubview:text];
 }
 
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
-		// Add initialization code here
+        text=[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 100, 50)];
+        [text setEditable:NO];
+        [text setSelectable:NO];
+        [text setBordered:NO];
+        [text setDrawsBackground:YES];
+        [text setFrameOrigin:NSMakePoint(0,0)];
+        [text setStringValue:@"OpenVanilla"];
+        [self addSubview:text];
 	}
 	return self;
 }

@@ -121,6 +121,7 @@
     [self changeFont:fontmanager];
     [self sharetab_changeTransparency:sharetab_transparencyslider];
     [sharetab_previewview changeConfig:dsrvrcfg];
+    [sharetab_previewview setNeedsDisplay:YES];
     
     
     // setup sound
