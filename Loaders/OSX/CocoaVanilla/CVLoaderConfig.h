@@ -12,6 +12,7 @@
 #define CVLC_DISPLAYSERVER		@"/Library/OpenVanilla/0.7.0/OVLoader/OVDisplayServer.app"
 #define CVLC_ATOMIC_INIT_FILE   @"atomic-init-lock"
 #define CVLC_ATOIMC_ERROR_FILE  @"/tmp/_openvanilla-atomicinit-error.html"
+#define CVLC_FACTORY_DEFAULTS   @"/Library/OpenVanilla/0.7.0/OVLoader/OVLoader.bundle/Contents/Resources/org.openvanilla.OVLoader.FactorySettings.plist"
 
 NSArray *CVGetModuleLoadPath();
 NSString *CVGetUserSpacePath();

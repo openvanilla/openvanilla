@@ -45,12 +45,17 @@ int CVLoader::init(MenuRef m) {
 		return 0;
 	}
 	
+    // gets factory (default) settings
+    CVConfig *factorydef=[[CVConfig alloc] initWithFile:CVLC_FACTORY_DEFAULTS defaultData:nil];
+    [factorydef autorelease];
+    NSLog([[factorydef dictionary] description]);
+    
 	// member variables initialization
     activecontext=NULL;
 	immenu=m;
     srv=new CVService(CVGetUserSpacePath(), dspsrvr);
     candi=new CVCandidate(dspsrvr);
-    cfg=[[CVConfig alloc] initWithFile:CVGetUserConfigFilename() defaultData:nil];
+    cfg=[[CVConfig alloc] initWithFile:CVGetUserConfigFilename() defaultData:[factorydef dictionary]];
     modarray=[NSMutableArray new];
     imarray=[NSMutableArray new];
     ofarray=[NSMutableArray new];

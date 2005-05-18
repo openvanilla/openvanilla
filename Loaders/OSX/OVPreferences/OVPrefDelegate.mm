@@ -592,9 +592,13 @@
     if (![gimmodlist count]) return;
     
     int c=[gimmodlist count];
+    const char *lc=[loader service]->locale();
     for (int i=0; i<c; i++) {
-        CVMoudleWrapper 
+        CVModuleWrapper *w=CVFindModule([loader moduleList], [gimmodlist objectAtIndex:i]);
+        OVModule *ovm=[w module];
+        [gim_imlist addItemWithTitle:[NSString stringWithUTF8String:ovm->localizedName(lc)]];
     }
+    [gim_imlist setEnabled:YES];
 }
 - (void)gatherIMSettings {
     #define NUM(x)  [NSString stringWithFormat:@"%d", x] 

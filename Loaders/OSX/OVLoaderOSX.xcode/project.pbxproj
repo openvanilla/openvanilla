@@ -197,6 +197,21 @@
 			settings = {
 			};
 		};
+		6A323EC1083B736C00791C9C = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			name = org.openvanilla.OVLoader.FactorySettings.plist;
+			path = OVLoaderResources/org.openvanilla.OVLoader.FactorySettings.plist;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A323EC2083B736C00791C9C = {
+			fileRef = 6A323EC1083B736C00791C9C;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		6A3AC1C708160F9700FFFF62 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -499,6 +514,7 @@
 			files = (
 				6AC170700816962400FE1274,
 				6AC1707C0816967E00FE1274,
+				6A323EC2083B736C00791C9C,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1692,6 +1708,7 @@
 				6AC170840816969500FE1274,
 				6AC1707B0816967E00FE1274,
 				6A975ED40814C5F800F40859,
+				6A323EC1083B736C00791C9C,
 			);
 			isa = PBXGroup;
 			name = OVLoaderResources;

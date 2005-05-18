@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OVIMGeneric-Dayi3</key>
+	<dict>
+		<key>shiftSelectionKey</key>
+		<integer>1</integer>
+	</dict>
+	<key>OVIMGeneric-Iroha</key>
+	<dict>
+		<key>hitMaxAndCompose</key>
+		<integer>1</integer>
+		<key>maxKeySequenceLength</key>
+		<integer>5</integer>
+	</dict>
+	<key>OVIMGeneric-EHQ-Symbols</key>
+	<dict>
+		<key>maxKeySequenceLength</key>
+		<string>6</string>
+    </dict>
+</dict>
+</plist>
