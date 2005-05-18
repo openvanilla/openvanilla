@@ -35,7 +35,7 @@ void CinList::load(char *libpath)
     strcpy(cinpath, libpath);
     int l=strlen(cinpath);
     if (l) if (cinpath[l-1]=='/') cinpath[l-1]=0;
-    strcat(cinpath, "/OVIMGeneric");
+    strcat(cinpath, "/OVOFReverseLookup");
 
     int count=scandir(cinpath, &files, file_select, alphasort); 
     if (count<=0) return;

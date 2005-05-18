@@ -73,16 +73,20 @@ const char *OVOFReverseLookup::process(const char *src, OVService *srv) {
     
     // WE HAVE TO DO SURROGATE CHECK, REMEMBER!
     for (int i=0; i<u16len; i++) {
+        // get each codepoint
         const char *u8=srv->UTF16ToUTF8(&(u16[i]), 1);
-        char buf[256];
+        char buf[512];
         
         vector<string> lookupvector, key;
         string code;
         string seperator(" ");
 
+        // look up each "candidate"
         int size=cintab->getWordVectorByChar(u8, lookupvector);
         for (int j=0; j<size; j++) {
             const char *lvstr=lookupvector[j].c_str();
+            
+            // compose the "character parts"
             for (size_t k=0; k<strlen(lvstr); k++) {
                 char kbuf[2];
                 sprintf(kbuf, "%c", tolower(lvstr[k]));
@@ -97,17 +101,15 @@ const char *OVOFReverseLookup::process(const char *src, OVService *srv) {
         
             if (j!=size-1) code += seperator;
         }
-        
-        if(strcmp(code.c_str(),"")) { 
-            sprintf(buf, "%s=(%s) ", u8, code.c_str());
-	    string bstr(buf);
-	    result += bstr;
-	}
+    
+        if (size) {
+            sprintf(buf, "%s(%s) ", u8, code.c_str());
+            string bstr(buf);
+            result += bstr;
+    	}
     }
     
-    if(strcmp(result.c_str(),"")) { 
-        srv->notify(result.c_str());
-    }
+    if(strlen(result.c_str())) srv->notify(result.c_str());
     return src;
 }
     
