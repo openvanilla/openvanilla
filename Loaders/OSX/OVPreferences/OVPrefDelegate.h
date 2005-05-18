@@ -76,6 +76,8 @@
     NSString *fastimswitchkey;
     NSMutableDictionary *loadhistory;
 }
+- (IBAction)gim_changeIM:(id)sender;
+- (IBAction)gim_settingsTrigger:(id)sender;
 - (IBAction)modtab_shortcutKeyChange:(id)sender;
 - (IBAction)oftab_convert:(id)sender;
 - (IBAction)pref_dumpConfigToConsole:(id)sender;

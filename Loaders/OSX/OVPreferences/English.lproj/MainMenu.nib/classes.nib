@@ -5,6 +5,8 @@
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             ACTIONS = {
+                "gim_changeIM" = id; 
+                "gim_settingsTrigger" = id; 
                 "modtab_shortcutKeyChange" = id; 
                 "oftab_convert" = id; 
                 "pref_dumpConfigToConsole" = id; 

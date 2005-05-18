@@ -599,6 +599,40 @@
         [gim_imlist addItemWithTitle:[NSString stringWithUTF8String:ovm->localizedName(lc)]];
     }
     [gim_imlist setEnabled:YES];
+    [gim_imlist selectItemAtIndex:0];
+    [gim_autocompose setEnabled:YES];
+    [gim_errorbeep setEnabled:YES];
+    [gim_hitmaxcompose setEnabled:YES];
+    [gim_maxkeylen setEnabled:YES];
+    [gim_shiftselection setEnabled:YES];
+    [self gim_changeIM:gim_imlist];
+}
+- (IBAction)gim_changeIM:(id)sender {
+    int i=[sender indexOfSelectedItem];
+    if (i < 0) return;
+    
+    NSDictionary *d=[self getConfigNode:[gimmodlist objectAtIndex:i]];
+    #define NUM(x,y)  [[d valueForKey:x default:y] intValue]
+    [gim_autocompose setIntValue:NUM(@"autoCompose", @"0")];
+    [gim_hitmaxcompose setIntValue:NUM(@"hitMaxAndCompose", @"0")];
+    [gim_shiftselection setIntValue:NUM(@"shiftSelectionKey", @"0")];
+    [gim_errorbeep setIntValue:NUM(@"warningBeep", @"1")];
+    #undef NUM
+    
+    NSString *maxkeylen=[d valueForKey:@"maxKeySequenceLength" default:@"5"];
+    [gim_maxkeylen selectItemWithTitle:maxkeylen];
+    if ([gim_maxkeylen indexOfSelectedItem]==-1) [gim_maxkeylen selectItemWithTitle:@"5"];
+}
+- (IBAction)gim_settingsTrigger:(id)sender {
+    int i=[gim_imlist indexOfSelectedItem];
+    NSDictionary *d=[self getConfigNode:[gimmodlist objectAtIndex:i]];    
+    #define SET(x,y) [d setValue:[NSString stringWithFormat:@"%d", [y intValue]] forKey:x];
+    SET(@"autoCompose", gim_autocompose);
+    SET(@"hitMaxAndCompose", gim_hitmaxcompose);
+    SET(@"shiftSelectionKey", gim_shiftselection);
+    SET(@"warningBeep", gim_errorbeep);
+    [d setValue:[gim_maxkeylen titleOfSelectedItem] forKey:@"maxKeySequenceLength"];
+    #undef SET
 }
 - (void)gatherIMSettings {
     #define NUM(x)  [NSString stringWithFormat:@"%d", x] 

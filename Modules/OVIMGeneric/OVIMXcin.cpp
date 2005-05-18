@@ -137,6 +137,7 @@ int OVIMXcin::initialize(OVDictionary* global, OVService*, const char*)
 
 int OVIMXcin::update(OVDictionary* global)
 {
+    fprintf (stderr, "updating %s\n", identifier());
     const char *warningBeep="warningBeep";
     const char *autoCompose="autoCompose";
     const char *maxSeqLen="maxKeySequenceLength";

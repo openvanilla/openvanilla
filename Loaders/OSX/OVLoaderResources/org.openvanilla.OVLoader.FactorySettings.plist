@@ -5,14 +5,14 @@
 	<key>OVIMGeneric-Dayi3</key>
 	<dict>
 		<key>shiftSelectionKey</key>
-		<integer>1</integer>
+		<string>1</string>
 	</dict>
 	<key>OVIMGeneric-Iroha</key>
 	<dict>
 		<key>hitMaxAndCompose</key>
-		<integer>1</integer>
+		<string>1</string>
 		<key>maxKeySequenceLength</key>
-		<integer>5</integer>
+		<string>5</string>
 	</dict>
 	<key>OVIMGeneric-EHQ-Symbols</key>
 	<dict>
