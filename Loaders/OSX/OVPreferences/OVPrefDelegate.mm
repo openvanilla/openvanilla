@@ -88,6 +88,7 @@
     [sharetab_transparencyslider setFloatValue:opacity*100];
     
     if ([img length]) {
+        // NEED TO USE SHORTENED FORM, OTHERWISE IT'S TOO LONG
         [sharetab_backimage setStringValue:img];
     }
     else {
@@ -272,23 +273,62 @@
     [oftab_notifymessage setString:[loader notifyMessage]];
 }
 - (IBAction)sharetab_changeColor:(id)sender {
-    if (sender==sharetab_forecolor)
-        NSLog(@"fore %@", [sender description]);
-    else
-        NSLog(@"back %@", [sender description]);
     NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
+    if (sender==sharetab_forecolor) {
+        [dsp setValue:[NSString stringByColor:[sharetab_forecolor color]] forKey:@"foreground"];
+    }
+    else {
+        NSString *img=[sharetab_backimage stringValue];
+        if ([img isEqualToString:@"(none)"]) {
+            [dsp setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
+        }
+    }
+
     [sharetab_previewview changeConfig:dsp];
 }
 - (IBAction)sharetab_changeImage:(id)sender {
-    NSLog([sender alternateTitle]);
-    [sharetab_backimage setStringValue:[sender alternateTitle]];
+    // we use this trick to tell which button is which
+    NSString *button=[sender alternateTitle];
     NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
+    
+    if ([button isEqualToString:@"set"]) {
+        NSOpenPanel *op=[NSOpenPanel openPanel];
+        [op setAllowsMultipleSelection:FALSE];
+        if ([op runModalForDirectory:nil file:nil]==NSFileHandlingPanelOKButton) {
+            NSString *f=[[op filenames] objectAtIndex:0];
+            NSString *display=f;            
+            if ([f length] > 24) {
+                NSArray *pc=[f pathComponents];
+                if ([pc count] > 2) {
+                    display=[NSString stringWithFormat:@"%@%@/.../%@",
+                        [pc objectAtIndex:0],
+                        [pc objectAtIndex:1],
+                        [pc objectAtIndex:[pc count]-1]];
+                }
+            }
+            [sharetab_backimage setStringValue:display];
+            [dsp setValue:f forKey:@"backgroundImage"];
+            [dsp setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
+        }
+    }
+    else if ([button isEqualToString:@"none"]) {
+        [dsp setValue:@"" forKey:@"backgroundImage"];
+        [dsp setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
+        [sharetab_backimage setStringValue:@"(none)"];
+    }
+    else if ([button isEqualToString:@"transparent"]) {
+        [dsp setValue:@"" forKey:@"backgroundImage"];
+        [dsp setValue:@"transparent" forKey:@"background"];
+        [sharetab_backimage setStringValue:@"(transparent)"];
+    }
+    
     [sharetab_previewview changeConfig:dsp];
 }
 - (IBAction)sharetab_changeTransparency:(id)sender {
     NSLog(@"%f", [sender intValue]/100.0);
     [sharetab_transparencytag setStringValue:[NSString stringWithFormat:@"%d%%", [sender intValue]]];
     NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
+    [dsp setValue:[NSNumber numberWithFloat:[sender intValue]/100.0] forKey:@"opacity"];
     [sharetab_previewview changeConfig:dsp];
 }
 - (IBAction)sharetab_setFont:(id)sender {
@@ -300,7 +340,15 @@
     [sharetab_fonttag setStringValue:[NSString stringWithFormat:@"%@, %d pt", [newfont fontName], (int)[newfont pointSize]]];
 
     NSMutableDictionary *dsp=[config valueForKey:@"OVDisplayServer" default:[[NSMutableDictionary new] autorelease]];
+    [dsp setValue:[newfont fontName] forKey:@"font"];
+    [dsp setValue:[NSNumber numberWithFloat:[newfont pointSize]] forKey:@"size"];
     [sharetab_previewview changeConfig:dsp];
+}
+- (IBAction)sharetab_changeSound:(id)sender {
+}
+- (IBAction)sharetab_changeNotify:(id)sender {
+}
+- (IBAction)sharetab_testSound:(id)sender {
 }
 - (IBAction)pref_dumpConfigToConsole:(id)sender {
     NSLog(@"dumping output filter order");

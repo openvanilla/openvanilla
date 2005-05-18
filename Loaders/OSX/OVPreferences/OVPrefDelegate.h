@@ -37,6 +37,8 @@
     IBOutlet id sharetab_option;
     IBOutlet id sharetab_previewview;
     IBOutlet id sharetab_shift;
+    IBOutlet id sharetab_shownotify;
+    IBOutlet id sharetab_soundfile;
     IBOutlet id sharetab_transparencyslider;
     IBOutlet id sharetab_transparencytag;
 
@@ -57,7 +59,10 @@
 - (IBAction)pref_writeConfig:(id)sender;
 - (IBAction)sharetab_changeColor:(id)sender;
 - (IBAction)sharetab_changeImage:(id)sender;
+- (IBAction)sharetab_changeNotify:(id)sender;
+- (IBAction)sharetab_changeSound:(id)sender;
 - (IBAction)sharetab_changeTransparency:(id)sender;
 - (IBAction)sharetab_setFont:(id)sender;
 - (IBAction)sharetab_shortcutKeyChange:(id)sender;
+- (IBAction)sharetab_testSound:(id)sender;
 @end

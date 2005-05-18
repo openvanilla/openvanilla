@@ -11,9 +11,12 @@
                 "pref_writeConfig" = id; 
                 "sharetab_changeColor" = id; 
                 "sharetab_changeImage" = id; 
+                "sharetab_changeNotify" = id; 
+                "sharetab_changeSound" = id; 
                 "sharetab_changeTransparency" = id; 
                 "sharetab_setFont" = id; 
                 "sharetab_shortcutKeyChange" = id; 
+                "sharetab_testSound" = id; 
             }; 
             CLASS = OVPrefDelegate; 
             LANGUAGE = ObjC; 
@@ -42,6 +45,8 @@
                 "sharetab_option" = id; 
                 "sharetab_previewview" = id; 
                 "sharetab_shift" = id; 
+                "sharetab_shownotify" = id; 
+                "sharetab_soundfile" = id; 
                 "sharetab_transparencyslider" = id; 
                 "sharetab_transparencytag" = id; 
             }; 
