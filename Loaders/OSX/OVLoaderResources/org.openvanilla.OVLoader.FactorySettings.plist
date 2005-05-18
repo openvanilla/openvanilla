@@ -19,5 +19,10 @@
 		<key>maxKeySequenceLength</key>
 		<string>6</string>
     </dict>
+	<key>OVLoader</key>
+	<dict>
+		<key>primaryInputMethod</key>
+		<string>OVIMPhonetic</string>
+	</dict>
 </dict>
 </plist>
