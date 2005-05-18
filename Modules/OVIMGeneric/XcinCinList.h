@@ -20,6 +20,7 @@ const int vxMaxCINFiles=64;
 class CinList : public OVBase
 {
 public:
+    CinList();
     void load(char *libpath);    
     int preparse(char *loadpath, char *fname, int i);
     int index;

@@ -1,6 +1,6 @@
 // XcinCinList.cpp
 
-#define OVDEBUG
+#define OV_DEBUG
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVUtility.h>
 #include <sys/param.h>
@@ -23,8 +23,14 @@ int file_select(struct dirent *entry)
     return 0;
 }
 
+CinList::CinList() {
+    index=0;
+}
+
 void CinList::load(char *libpath)
 {
+    if (index)  return;     // already loaded by another binary instance!
+
     struct dirent **files;
     strcpy(cinpath, libpath);
     int l=strlen(cinpath);
@@ -41,6 +47,7 @@ void CinList::load(char *libpath)
         free(files[i]);
     }
     free(files);
+    // murmur("CinList::load called, index=%d", index);
 }
 
 
