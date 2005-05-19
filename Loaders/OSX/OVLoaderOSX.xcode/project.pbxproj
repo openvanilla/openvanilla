@@ -1293,6 +1293,7 @@
 			files = (
 				6AE4A4A7083678A600D6CCD3,
 				6AC96A1F083BA4B900BD0AD2,
+				D4406D8B083CE139004B59A8,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1400,6 +1401,7 @@
 		};
 		6AE4A46C083677E500D6CCD3 = {
 			children = (
+				D4406D8A083CE139004B59A8,
 				6AE4A4870836787A00D6CCD3,
 				6AE4A4A6083678A600D6CCD3,
 				6AC96A1E083BA4B900BD0AD2,
@@ -1868,6 +1870,29 @@
 		};
 		6AF9423B0817F2F800AE0534 = {
 			fileRef = 6AF9423A0817F2F800AE0534;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//6A0
+//6A1
+//6A2
+//6A3
+//6A4
+//D40
+//D41
+//D42
+//D43
+//D44
+		D4406D8A083CE139004B59A8 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.icns;
+			path = OVPref.icns;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		D4406D8B083CE139004B59A8 = {
+			fileRef = D4406D8A083CE139004B59A8;
 			isa = PBXBuildFile;
 			settings = {
 			};

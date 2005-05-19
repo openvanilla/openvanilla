@@ -2,7 +2,12 @@
     IBClasses = (
         {CLASS = CVPrefArray; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = CVPreviewView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {"" = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
         {
             ACTIONS = {
                 "gim_changeIM" = id; 

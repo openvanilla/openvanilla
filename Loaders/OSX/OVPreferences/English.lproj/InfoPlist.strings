@@ -1,4 +1,6 @@
 /* Localized versions of Info.plist keys */
 
-CFBundleName = "OVPreferences";
+CFBundleName = "OpenVanilla Preferences";
+CFBundleDisplayName = "OpenVanilla Preferences";
 NSHumanReadableCopyright = "© openvanilla.org, 2005";
+CFBundleHelpBookName = "OpenVanilla Help";

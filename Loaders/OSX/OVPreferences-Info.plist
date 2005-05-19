@@ -6,6 +6,8 @@
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>OVPreferences</string>
+	<key>CFBundleIconFile</key>
+	<string>OVPref.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.openvanilla.OVPreferences</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -20,5 +22,7 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSHelpFile</key>
+	<string>ov.pdf</string>
 </dict>
 </plist>
