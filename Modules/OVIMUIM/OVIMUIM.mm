@@ -162,7 +162,7 @@ public:
         const char *str=uim_candidate_get_cand_str(c);
 
         char buf[256];
-        sprintf(buf, "↑↓ candididate = %s (%d)", str, index);
+        sprintf(buf, "↑↓ candidate = %s (%d)", str, index);
         ovsrv->notify(buf);
 
         uim_candidate_free(c);
@@ -244,7 +244,7 @@ public:
         return 1;
     }
     virtual const char* localizedName(const char *locale) {
-        if (!strcasecmp(locale, "zh_TW")) return "日文輸入法 (UIM-anthy) - 片假名模式";
+        if (!strcasecmp(locale, "zh_TW")) return "日文輸入法 (UIM-anthy)";
         return "UIM (anthy) - Hiragana";
     }
     
