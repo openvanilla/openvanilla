@@ -5,7 +5,7 @@ OBJS=OVCIN.o OVCandidateList.o OVFileHandler.o OVOFReverseLookup.o \
 
 GOALS=OVOFReverseLookup.dylib 
 
-DATA=cj-lookup.cin phonetic-lookup.cin poj-lookup.cin
+DATA=cj-lookup.cin phonetic-lookup.cin poj-lookup.cin array-lookup.cin
 
 $(GOALS): $(OBJS)
 	$(CPP) -bundle -o $@ $(OBJS)
