@@ -2,6 +2,7 @@
 #define OV_DEBUG
 #include <ctype.h>
 #include <unistd.h>
+#include <sys/time.h>
 #include "CVLoader.h"
 #include "TSBundle.h"
 #include <OpenVanilla/OVUtility.h>
@@ -32,6 +33,9 @@ CVLoader::~CVLoader() {
 }
 
 int CVLoader::init(MenuRef m) {
+    UInt32 beginTime;
+    beginTime = TickCount();
+    murmur("CVLoader::init begin");
 	// get CVLoader.bundle
     loaderbundle=[NSBundle bundleWithIdentifier:@ TSBUNDLEID];
     if (!loaderbundle) {
@@ -81,6 +85,7 @@ int CVLoader::init(MenuRef m) {
 	immenugroup=ofmenugroup=NULL;
 	refreshMenu();
     syncMenuAndConfig();
+    murmur("CVLoader::init ticks: %d", TickCount() - beginTime );
     return 1;
 }
 
