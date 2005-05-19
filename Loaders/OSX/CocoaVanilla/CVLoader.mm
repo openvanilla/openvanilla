@@ -210,10 +210,10 @@ void CVLoader::createMenuGroups() {
 	CVDeleteMenu(immenu);
     immenugroup=new CVSmartMenuGroup(immenu, CVLMI_IMGROUPSTART, loaderbundle, CVSM_EXCLUSIVE);
     ofmenugroup=new CVSmartMenuGroup(immenu, CVLMI_OFGROUPSTART, loaderbundle, CVSM_MULTIPLE);
-    immenugroup->insertTitle(MSG(@"Input methods"));
+    immenugroup->insertTitle(MSG(@"Input Methods"));
     pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVInputMethod"), immenugroup);
     immenugroup->insertSeparator();
-    ofmenugroup->insertTitle(MSG(@"Output filters"));
+    ofmenugroup->insertTitle(MSG(@"Output Filters"));
 
     // we get the "sorted-by" key to make our menu ordered by user's settings
     // we read our own cfgmenukey because we want to force sync the config file
@@ -225,9 +225,9 @@ void CVLoader::createMenuGroups() {
 	
 	// the fastIMSwitch has a menudict key called "fastIMSwitch"
     CVInsertMenuItem(immenu, CVLMI_FASTIMSWITCH, MSG(@"Input method toggle"), 0, [menudict valueForKey:@"fastIMSwitch"]);
-    CVInsertMenuItem(immenu, CVLMI_ABOUT, MSG(@"About"), 0);
     CVInsertMenuItem(immenu, CVLMI_PREFERENCES, MSG(@"Preferences"), 0);
     CVInsertMenuItem(immenu, CVLMI_HELP, MSG(@"Help"), 0);
+	CVInsertMenuItem(immenu, CVLMI_ABOUT, MSG(@"About"), 0);
 }
 
 void CVLoader::checkMenuItems() {
