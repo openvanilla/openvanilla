@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>OVPreferences</string>
 	<key>CFBundleIconFile</key>
-	<string>OVPref.icns</string>
+	<string>OVPref</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.openvanilla.OVPreferences</string>
 	<key>CFBundleInfoDictionaryVersion</key>
