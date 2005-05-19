@@ -1365,7 +1365,6 @@
 				6AE4A4A7083678A600D6CCD3,
 				6AC63034083CD49500B560B1,
 				6AAC5441083CF65200591732,
-				D4406D8B083CE139004B59A8,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1941,29 +1940,6 @@
 		};
 		6AF9423B0817F2F800AE0534 = {
 			fileRef = 6AF9423A0817F2F800AE0534;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-//6A0
-//6A1
-//6A2
-//6A3
-//6A4
-//D40
-//D41
-//D42
-//D43
-//D44
-		D4406D8A083CE139004B59A8 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.icns;
-			path = OVPref.icns;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		D4406D8B083CE139004B59A8 = {
-			fileRef = D4406D8A083CE139004B59A8;
 			isa = PBXBuildFile;
 			settings = {
 			};
