@@ -3,7 +3,7 @@ all: build ;
 
 build: $(GOALS) ;
 
-install: install-mkdir install-goal install-data ;
+install: all install-mkdir install-goal install-data ;
 
 install-mkdir:
 	$(MKDIR) $(INST_PATH)
