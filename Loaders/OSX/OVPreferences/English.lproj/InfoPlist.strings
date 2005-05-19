@@ -3,4 +3,7 @@
 CFBundleName = "OpenVanilla Preferences";
 CFBundleDisplayName = "OpenVanilla Preferences";
 NSHumanReadableCopyright = "© openvanilla.org, 2005";
-CFBundleHelpBookName = "OpenVanilla Help";
+CFBundleHelpBookName = "OpenVanilla Help";==== ORIGINAL VERSION Loaders/OSX/OVPreferences/English.lproj/InfoPlist.strings 111652156271656
+CFBundleName = "OVPreferences";
+NSHumanReadableCopyright = "© openvanilla.org, 2005";==== THEIR VERSION Loaders/OSX/OVPreferences/English.lproj/InfoPlist.strings 111652156271656
+CFBundleName = "OpenVanilla Preferences";

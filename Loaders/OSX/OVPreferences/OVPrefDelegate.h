@@ -81,6 +81,7 @@
 }
 - (IBAction)gim_changeIM:(id)sender;
 - (IBAction)gim_settingsTrigger:(id)sender;
+- (IBAction)modtab_clearShortcut:(id)sender;
 - (IBAction)modtab_shortcutKeyChange:(id)sender;
 - (IBAction)oftab_convert:(id)sender;
 - (IBAction)pedit_changeModule:(id)sender;
@@ -91,6 +92,7 @@
 - (IBAction)sharetab_changeNotify:(id)sender;
 - (IBAction)sharetab_changeSound:(id)sender;
 - (IBAction)sharetab_changeTransparency:(id)sender;
+- (IBAction)sharetab_clearShortcutKey:(id)sender;
 - (IBAction)sharetab_setFont:(id)sender;
 - (IBAction)sharetab_shortcutKeyChange:(id)sender;
 - (IBAction)sharetab_testSound:(id)sender;

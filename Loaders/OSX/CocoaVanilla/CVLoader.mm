@@ -169,15 +169,15 @@ void CVLoader::menuHandler(unsigned int cmd) {
 			return;
         case CVLMI_ABOUT:
             // the effect wasn't very satisfactory; we should launch an About application for this
-            // [dspsrvr aboutDialog];
-            system("open http://openvanilla.org/index.cgi?OV070rc3");
+            [dspsrvr aboutDialog];
+            // system("open http://openvanilla.org/index.cgi?OV070rc3");
             return;
         case CVLMI_PREFERENCES:
             system([[NSString stringWithFormat:@"open %@", CVLC_PREFERENCEUTIL] UTF8String]);
             return;
         case CVLMI_HELP:
             // murmur ("help menu item clicked");
-            system("open http://openvanilla.org/index.cgi?OV070rc3");
+            system("open http://openvanilla.org/index.cgi?OV070rc4");
             return;
     }
     
@@ -482,6 +482,9 @@ void CVContext::deactivate() {
 }
 
 void CVContext::fix() {
+    // we can be 100% sure this is only called when an IM is actually
+    // being deactivated, so we send out the remaining characters in the buffer
+    if (!buf->isEmpty()) buf->send();
     clearAll();
 }
 

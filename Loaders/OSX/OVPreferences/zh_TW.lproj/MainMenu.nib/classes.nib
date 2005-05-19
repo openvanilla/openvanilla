@@ -7,6 +7,7 @@
             ACTIONS = {
                 "gim_changeIM" = id; 
                 "gim_settingsTrigger" = id; 
+                "modtab_clearShortcut" = id; 
                 "modtab_shortcutKeyChange" = id; 
                 "oftab_convert" = id; 
                 "pedit_changeModule" = id; 
@@ -17,6 +18,7 @@
                 "sharetab_changeNotify" = id; 
                 "sharetab_changeSound" = id; 
                 "sharetab_changeTransparency" = id; 
+                "sharetab_clearShortcutKey" = id; 
                 "sharetab_setFont" = id; 
                 "sharetab_shortcutKeyChange" = id; 
                 "sharetab_testSound" = id; 

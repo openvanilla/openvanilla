@@ -863,6 +863,32 @@
 			settings = {
 			};
 		};
+		6AAC5440083CF65200591732 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.icns;
+			name = OVPref.icns;
+			path = OVPreferences/OVPref.icns;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AAC5441083CF65200591732 = {
+			fileRef = 6AAC5440083CF65200591732;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AAC5442083CF65700591732 = {
+			children = (
+				6AAC5440083CF65200591732,
+				6AC63033083CD49500B560B1,
+				6AE4A4A6083678A600D6CCD3,
+				6AC63029083CD3FE00B560B1,
+			);
+			isa = PBXGroup;
+			name = Resources;
+			refType = 4;
+			sourceTree = "<group>";
+		};
 		6AC1707B0816967E00FE1274 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.nib;
@@ -907,20 +933,64 @@
 			settings = {
 			};
 		};
-		6AC96A1E083BA4B900BD0AD2 = {
-			children = (
-				6AE4A4880836787A00D6CCD3,
-			);
-			isa = PBXVariantGroup;
-			name = MainMenu.nib;
+		6AC62FFE083CD06F00B560B1 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = English;
+			path = OVPreferences/English.lproj/Localizable.strings;
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		6AC96A1F083BA4B900BD0AD2 = {
-			fileRef = 6AC96A1E083BA4B900BD0AD2;
+		6AC63029083CD3FE00B560B1 = {
+			children = (
+				6AC62FFE083CD06F00B560B1,
+				6AC6302B083CD40300B560B1,
+			);
+			isa = PBXVariantGroup;
+			name = Localizable.strings;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AC6302A083CD3FE00B560B1 = {
+			fileRef = 6AC63029083CD3FE00B560B1;
 			isa = PBXBuildFile;
 			settings = {
 			};
+		};
+		6AC6302B083CD40300B560B1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = zh_TW;
+			path = OVPreferences/zh_TW.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AC63033083CD49500B560B1 = {
+			children = (
+				6AE4A4880836787A00D6CCD3,
+				6AC63037083CD4A300B560B1,
+			);
+			isa = PBXVariantGroup;
+			name = MainMenu.nib;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6AC63034083CD49500B560B1 = {
+			fileRef = 6AC63033083CD49500B560B1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AC63037083CD4A300B560B1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = zh_TW;
+			path = OVPreferences/zh_TW.lproj/MainMenu.nib;
+			refType = 4;
+			sourceTree = "<group>";
 		};
 		6AD1D4FE083AB903002EBF34 = {
 			fileEncoding = 4;
@@ -1291,8 +1361,10 @@
 		6AE4A45D083677B300D6CCD3 = {
 			buildActionMask = 2147483647;
 			files = (
+				6AC6302A083CD3FE00B560B1,
 				6AE4A4A7083678A600D6CCD3,
-				6AC96A1F083BA4B900BD0AD2,
+				6AC63034083CD49500B560B1,
+				6AAC5441083CF65200591732,
 				D4406D8B083CE139004B59A8,
 			);
 			isa = PBXResourcesBuildPhase;
@@ -1403,8 +1475,6 @@
 			children = (
 				D4406D8A083CE139004B59A8,
 				6AE4A4870836787A00D6CCD3,
-				6AE4A4A6083678A600D6CCD3,
-				6AC96A1E083BA4B900BD0AD2,
 				6AE4A4BA08367A2900D6CCD3,
 				6AE4A4BB08367A2900D6CCD3,
 				6AD1D4FE083AB903002EBF34,
@@ -1455,6 +1525,7 @@
 			);
 			isa = PBXVariantGroup;
 			name = InfoPlist.strings;
+			path = "";
 			refType = 4;
 			sourceTree = "<group>";
 		};

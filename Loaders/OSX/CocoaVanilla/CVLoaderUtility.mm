@@ -7,6 +7,9 @@
 #include <sys/stat.h>
 #include <OpenVanilla/OVUtility.h>
 
+// #define CVLOADER_USE_ATOMIC_LOCK
+
+
 OVLoadedLibrary *CVLoadLibraryFromBundle(NSString *p);
 OVLoadedLibrary *CVLoadLibraryFromDylib(NSString *p);
 
@@ -78,15 +81,19 @@ void CVAtomicInitStart(NSString *f, NSString *libname) {
     // this won't work in OS X 10.3
     // [libname writeToFile:f atomically:NO encoding:NSUTF8StringEncoding error:&err];
 
+#ifdef CVLOADER_USE_ATOMIC_LOCK
     [libname writeToFile:f atomically:NO];
+#endif
 }
 
 void CVAtomicInitEnd(NSString *f) {
     if (!f) return;
+#ifdef CVLOADER_USE_ATOMIC_LOCK
     if (CVIsPathExist(f)) {
         // NSLog(@"unlinking existing atomicinit file: %@", f);
         unlink([f UTF8String]);
     }
+#endif
 }
 
 BOOL CVStringIsInArray(NSString *s, NSArray *a) {

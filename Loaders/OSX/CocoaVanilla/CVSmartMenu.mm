@@ -173,9 +173,10 @@ void CVSmartMenuGroup::checkItemArray(NSArray *idarray) {
 }
 
 int CVSmartMenuGroup::clickItem(int cmdid) {
-    NSEnumerator *e=[itemarray objectEnumerator];
+    int c=[itemarray count];
     CVSmartMenuItem *i;
-    while (i=[e nextObject]) {
+    for (int j=0; j<c; j++) {
+        i=[itemarray objectAtIndex:j];
         if (cmdid == [i commandID]) {
             checkItem([i idTag]);
             return 1;

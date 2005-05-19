@@ -6,7 +6,7 @@
 #import "NSStringExtension.h"
 #import "CVPreviewView.h"
 
-#define MSG(x)      x
+#define MSG(x)      [[NSBundle mainBundle] localizedStringForKey:x value:nil table:nil]
 
 @interface CVModuleItem : NSObject {
     NSString *modid;
@@ -219,6 +219,7 @@
     [oftab_oforderlist setDataSource:oflist];
     [modtab_modlist setDataSource:modlist];
     [modtab_modlist setDelegate:self];
+    [modtab_loadedfrom setStringValue:@""];
     
     [[NSApplication sharedApplication] setDelegate:self];
 }
@@ -266,6 +267,14 @@
     }
     return TRUE;
 }
+- (IBAction)sharetab_clearShortcutKey:(id)sender {
+    [sharetab_cmd setIntValue:0];
+    [sharetab_option setIntValue:0];
+    [sharetab_control setIntValue:0];
+    [sharetab_shift setIntValue:0];
+    [sharetab_keylist selectItemWithTitle:@""];
+    fastimswitchkey=[[NSString stringWithString:@""] retain];
+}
 - (IBAction)sharetab_shortcutKeyChange:(id)sender {
     char buf[32];
     bzero(buf, 32);
@@ -283,6 +292,14 @@
         fastimswitchkey=[[NSString stringWithString:@""] retain];
     }
 }
+- (IBAction)modtab_clearShortcut:(id)sender {
+    [modtab_box_cmd setIntValue:0]; 
+    [modtab_box_option setIntValue:0]; 
+    [modtab_box_control setIntValue:0]; 
+    [modtab_box_shift setIntValue:0]; 
+    [modtab_box_keylist selectItemWithTitle:@""];
+    [self modtab_shortcutKeyChange:sender];
+}
 - (IBAction)modtab_shortcutKeyChange:(id)sender {
     if (modtab_modlist_currentrow==-1) return;
     char buf[32];
@@ -297,6 +314,11 @@
             setShortcut:[NSString stringWithFormat:@"%@ %s", key, buf]];
         [modtab_modlist reloadData];
     }
+    else {
+        [[[modlist array] objectAtIndex:modtab_modlist_currentrow]
+            setShortcut:@""];
+    }
+    [modtab_modlist reloadData];
 }
 - (IBAction)oftab_convert:(id)sender {
     CVModuleWrapper *w=[outputfilters objectAtIndex:[oftab_convertfilter indexOfSelectedItem]];

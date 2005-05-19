@@ -1,4 +1,4 @@
 /* Localized versions of Info.plist keys */
 
-CFBundleName = "OVPreferences";
-NSHumanReadableCopyright = "© openvanilla.org, 2005";
+CFBundleName = "OpenVanilla偏好設定";
+NSHumanReadableCopyright = "© openvanilla.org, 2004-2005";
