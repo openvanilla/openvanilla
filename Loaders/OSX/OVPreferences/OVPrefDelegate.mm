@@ -109,7 +109,7 @@
     }
     else {
         [sharetab_backimage setStringValue:MSG(@"(none)")];
-        [sharetab_backcolor setColor:[NSColor whiteColor]];
+        [sharetab_backcolor setColor:[NSColor colorWithDeviceRed:1.0 green:1.0 blue:1.0 alpha:1.0]];
         if ([bcstr isEqualToString:@"none"]) [sharetab_backimage setStringValue:MSG(@"(aqua)")];
         else if ([bcstr isEqualToString:@"transparent"]) [sharetab_backimage setStringValue:MSG(@"(transparent)")];
         else [sharetab_backcolor setColor:[bcstr colorByString]];
@@ -366,6 +366,11 @@
         [dsrvrcfg setValue:@"" forKey:@"backgroundImage"];
         [dsrvrcfg setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
         [sharetab_backimage setStringValue:MSG(@"(none)")];
+
+        [dsrvrcfg setValue:@"" forKey:@"backgroundImage"];
+        [sharetab_backimage setStringValue:MSG(@"(none)")];
+        [dsrvrcfg setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
+
     }
     else if ([button isEqualToString:@"transparent"]) {
         [dsrvrcfg setValue:@"" forKey:@"backgroundImage"];

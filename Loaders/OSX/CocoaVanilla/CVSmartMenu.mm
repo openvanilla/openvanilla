@@ -13,9 +13,37 @@ int CVInsertMenuItem(MenuRef m, int cmdid, NSString *s, int attr, NSString *k) {
     if (InsertMenuItemTextWithCFString(m, (CFStringRef)s, p, attr, cmdid)!=noErr) return 0;
 	
 	if (k) {
-		CVKeyCode kc(k);
-		SetMenuItemCommandKey(m, p+1, FALSE, toupper(kc.code()));
-		SetMenuItemModifiers(m, p+1, kc.convertToMenuModifier());
+        if ([k length]) {
+            CVKeyCode kc(k);
+            
+            // I CANNOT BELIEVE IT, BUT WE HAVE TO TRANSLATE THESE KEYCODES
+            // INTO APPLE'S VIRTUAL KEYCODES, OTHERWISE THIS PART WON'T
+            // WORK IN OS X 10.3 !
+            UInt16 vcode=0;
+            #define VKC(x,y)    case x: vcode=y; break
+            switch (kc.code()) {
+                VKC(ovkSpace, 0x31);
+                VKC(ovkEsc, 0x35);
+                VKC(ovkReturn, 0x24);
+                VKC(ovkDelete, 0x75);
+                VKC(ovkBackspace, 0x33);
+                VKC(ovkUp, 0x7e);
+                VKC(ovkDown, 0x7d);
+                VKC(ovkLeft, 0x7b);
+                VKC(ovkRight, 0x7c);
+                VKC(ovkHome, 0x73);
+                VKC(ovkEnd, 0x77);
+                VKC(ovkPageUp, 0x74);
+                VKC(ovkPageDown, 0x79);
+                VKC(ovkTab, 0x30);
+            }
+            if (vcode)
+                SetMenuItemCommandKey(m, p+1, TRUE, vcode);
+            else
+                SetMenuItemCommandKey(m, p+1, FALSE, toupper(kc.code()));
+            
+            SetMenuItemModifiers(m, p+1, kc.convertToMenuModifier());
+        }
 	}
 	
     return p+1;
@@ -95,9 +123,9 @@ void CVSmartMenuGroup::insertItem(NSString *idtag, NSString *displaytag, NSStrin
 }
 
 void CVSmartMenuGroup::checkItem(NSString *idtag) {
-    NSEnumerator *e=[itemarray objectEnumerator];
-    CVSmartMenuItem *i;
-    while (i=[e nextObject]) {
+    int c=[itemarray count];
+    for (int j=0; j<c; j++) {
+        CVSmartMenuItem *i=[itemarray objectAtIndex:j];
         // found checked item
         if ([[i idTag] isEqualToString:idtag]) {
             if (type==CVSM_EXCLUSIVE) {
@@ -129,9 +157,9 @@ void CVSmartMenuGroup::checkItem(NSString *idtag) {
 }
 
 void CVSmartMenuGroup::uncheckItem(NSString *idtag) {
-    NSEnumerator *e=[itemarray objectEnumerator];
-    CVSmartMenuItem *i;
-    while (i=[e nextObject]) {
+    int c=[itemarray count];
+    for (int j=0; j<c; j++) {
+        CVSmartMenuItem *i=[itemarray objectAtIndex:j];
         if ([[i idTag] isEqualToString:idtag]) {
             CheckMenuItem(menu, [i menuPosition], FALSE);
             [i setChecked:NO];
@@ -141,18 +169,18 @@ void CVSmartMenuGroup::uncheckItem(NSString *idtag) {
 }
 
 void CVSmartMenuGroup::uncheckAll() {
-    NSEnumerator *e=[itemarray objectEnumerator];
-    CVSmartMenuItem *i;
-    while (i=[e nextObject]) {
+    int c=[itemarray count];
+    for (int j=0; j<c; j++) {
+        CVSmartMenuItem *i=[itemarray objectAtIndex:j];
         CheckMenuItem(menu, [i menuPosition], FALSE);
         [i setChecked:NO];
     }
 }
 
 void CVSmartMenuGroup::disableItem(NSString *idtag) {
-    NSEnumerator *e=[itemarray objectEnumerator];
-    CVSmartMenuItem *i;
-    while (i=[e nextObject]) {
+    int c=[itemarray count];
+    for (int j=0; j<c; j++) {
+        CVSmartMenuItem *i=[itemarray objectAtIndex:j];
         if ([[i idTag] isEqualToString:idtag]) {
             DisableMenuItem(menu, [i menuPosition]);
             return;
@@ -167,9 +195,8 @@ void CVSmartMenuGroup::checkFirstItem() {
 }
 
 void CVSmartMenuGroup::checkItemArray(NSArray *idarray) {
-    NSEnumerator *e=[idarray objectEnumerator];
-    NSString *s;
-    while (s=[e nextObject]) checkItem(s);
+    int c=[idarray count];
+    for (int j=0; j<c; j++) checkItem([idarray objectAtIndex:j]);
 }
 
 int CVSmartMenuGroup::clickItem(int cmdid) {
@@ -186,17 +213,19 @@ int CVSmartMenuGroup::clickItem(int cmdid) {
 }
 
 CVSmartMenuItem *CVSmartMenuGroup::getMenuItem(int cmdid) {
-    NSEnumerator *e=[itemarray objectEnumerator];
-    CVSmartMenuItem *i;
-    while (i=[e nextObject]) if (cmdid == [i commandID]) return i;
+    int c=[itemarray count];
+    for (int j=0; j<c; j++) {
+        CVSmartMenuItem *i=[itemarray objectAtIndex:j];
+        if (cmdid == [i commandID]) return i;
+    }
 	return nil;
 }
 
 NSArray *CVSmartMenuGroup::getCheckedItems() {
     NSMutableArray *m=[[NSMutableArray new] autorelease];
-    NSEnumerator *e=[itemarray objectEnumerator];
-    CVSmartMenuItem *i;
-    while (i=[e nextObject]) {
+    int c=[itemarray count];
+    for (int j=0; j<c; j++) {
+        CVSmartMenuItem *i=[itemarray objectAtIndex:j];
         if ([i checked]) [m addObject:[i idTag]];
     }
     return m;
