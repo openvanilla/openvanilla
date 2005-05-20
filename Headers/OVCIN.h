@@ -86,15 +86,10 @@ private:
     _OVCIN::State state;
     string delimiters;
     string properties[_OVCIN::NUM_PROPERTY];
+    vector< pair<string, string > > block_buf;
     CinMap maps[_OVCIN::NUM_MAP];
     int curMapIndex;
-    vector< pair<string, string > > block_buf;
 
-	string selkey;
-    string ename;
-    string cname;
-	string endkey;
-	string encoding;
 	
 };
 

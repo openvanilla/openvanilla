@@ -4,6 +4,7 @@
 #include "OVCIN.h"
 #include "OVFileHandler.h"
 #include "OVUtility.h"
+#include<ext/algorithm>
 
 using namespace std;
 using namespace _OVCIN;
@@ -93,7 +94,7 @@ void OVCIN::parseCinVector(const vector<string>& cinVector){
 
 void OVCIN::lowerStr(string& str){
     for(int i=str.length()-1;i>=0;i--)
-        if( !isalpha(str[i]) )
+        if( !isprint(str[i]) )
             return;
     transform( str.begin(), str.end(), str.begin(),(int(*)(int)) tolower );
 }
@@ -165,8 +166,15 @@ int OVCIN::getVectorFromMap(CinMap& inMapRef,
     vector<string> v;
     CinMap::iterator it;
     murmur("getVectorFromMap: %s", inKey.c_str());
-    it = upper_bound( inMapRef.begin(), inMapRef.end(), 
+    murmur("sorted: %d", is_sorted(inMapRef.begin(), inMapRef.end()) );
+    /*
+    it = lower_bound( inMapRef.begin(), inMapRef.end(), 
                       make_pair(inKey,v), cmpMapEntry());
+    */
+    // FIXME: use binary search!
+    for(it=inMapRef.begin(); it != inMapRef.end(); ++it)
+        if( it->first == inKey )
+            break;
     if(it != inMapRef.end() ){
         murmur("it: %s", it->first.c_str());
         outStringVectorRef = it->second;
