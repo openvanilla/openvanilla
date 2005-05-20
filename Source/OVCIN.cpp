@@ -4,7 +4,6 @@
 #include "OVCIN.h"
 #include "OVFileHandler.h"
 #include "OVUtility.h"
-#include<ext/algorithm>
 
 using namespace std;
 using namespace _OVCIN;
@@ -20,10 +19,10 @@ static const char *mapNames[NUM_MAP] = {
 
 OVCIN::OVCIN(char* fileName)
 {
-	OVFileHandler* fileHandler = new OVFileHandler(fileName);
-	vector<string> stringVector;
-	fileHandler->getLines(stringVector);
-	delete fileHandler;
+    OVFileHandler* fileHandler = new OVFileHandler(fileName);
+    vector<string> stringVector;
+    fileHandler->getLines(stringVector);
+    delete fileHandler;
     
     state = PARSE_LINE;
     delimiters = " \t";
@@ -106,8 +105,8 @@ void OVCIN::lowerStr(string& str){
 
 
 int OVCIN::getVectorFromMap(const CinMap& inMapRef,
-							const string& inKey,
-							vector<string>& outStringVectorRef)
+                            const string& inKey,
+                            vector<string>& outStringVectorRef)
 {
     int pos;
     murmur("getVectorFromMap: %s", inKey.c_str());
@@ -119,7 +118,7 @@ int OVCIN::getVectorFromMap(const CinMap& inMapRef,
     }
     else
         outStringVectorRef.clear();
-    return 0;	
+    return 0;    
 }
  
 int OVCIN::searchCinMap(const CinMap& m, const string& key) const{
