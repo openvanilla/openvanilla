@@ -4,6 +4,10 @@ cd ..
 # build framework
 make install clean
 
+# build Loader
+cd Loaders/OSX
+make install clean
+
 # build bundled modules
 cd ../../Modules/OVIMArray
 make install clean
