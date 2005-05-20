@@ -219,5 +219,213 @@ protected:
     Chewing *chew;
 };
 
+/* ---- */
+
+class OVIMChewingPinYin;
+
+class OVIMChewingPinYinContext : public OVInputMethodContext 
+{
+public:
+    OVIMChewingPinYinContext(OVIMChewingPinYin *p, Chewing* chew) {
+        p=parent;
+        im=chew;
+    }
+	
+	virtual void start(OVBuffer *key, OVCandidate *textbar, OVService *srv) {	
+	} 
+    virtual void clear() { im->Enter(); }
+    virtual void end() { im->Enter(); }
+	
+    virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, OVService *srv) {
+        if(key->isCommand()) return 0;
+        KeyPress(key,buf,textbar,srv);
+        if(im->KeystrokeIgnore()) return 0;
+        CandidateWindow(textbar, srv);
+        Redraw(buf, srv);
+        return 1;
+    }
+	
+protected:
+    void KeyPress(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, OVService *srv) {
+        int k = key->code();
+        Capslock(key,buf,textbar,srv);
+        if(k == ovkSpace) {
+            key->isShift() ? im->ShiftSpace() : im->Space();
+        }
+        else if (k == ovkLeft)   {
+            key->isShift() ? im->ShiftLeft()  : im->Left();
+        }
+        else if (k == ovkRight)  {
+            key->isShift() ? im->ShiftRight() : im->Right(); 
+        }
+        else if (k == ovkDown) { im->Down(); }
+        else if (k == ovkEsc)  { im->Esc();  }
+        else if (k == ovkTab)  { im->Tab();  }
+        else if (k == ovkHome) { im->Home(); }
+        else if (k == ovkEnd)  { im->End();  }
+        else if (k == ovkDelete || k == ovkBackspace) { im->Backspace() ; }
+        else if (k == ovkReturn) { im->Enter(); im->CommitReady(); }
+        else { 
+            DefaultKey(key,buf,textbar,srv);
+        }
+    }
+	
+    void DefaultKey(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, OVService *srv) {
+        if(key->isCtrl()) {
+            if((key->code() >= '0') && (key->code() <= '9')) {
+                im->CtrlNum(key->code());
+            }
+            else if(key->isAlt()) {
+                im->CtrlOption(key->code());
+            }
+            return;
+        }
+        im->Key((key->isShift())?toupper(key->code()):tolower(key->code()));
+    }
+	
+    void Capslock(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, OVService *srv) {
+        if(key->isCapslock()) {
+            if(im->ChineseMode()) im->Capslock();
+        }
+        else if (!im->ChineseMode()) {
+            im->Capslock();
+        }
+    }
+    
+    void Redraw(OVBuffer *buf, OVService *srv) {
+        const char *s1,*s2,*s3;
+        
+        if(im->CommitReady()) {
+            const char *s = im->CommitStr();
+            buf->clear()->append(srv->toUTF8("big5", s))->send();
+        }
+        
+        s1 = srv->toUTF8("big5", im->Buffer(0,im->CursorPos()-1));
+        s2 = srv->toUTF8("big5", im->ZuinStr());
+        s3 = srv->toUTF8("big5", im->Buffer(im->CursorPos()));
+        
+        int ps=-1, pe=-1, ips=im->PointStart(), ipe=im->PointEnd();
+        if (ips > -1 && ipe !=0) {
+            if (ipe > 0) { ps=ips; pe=ps+ipe; }
+            else { ps=ips+ipe; pe=ips; }
+        }        
+        
+        // murmur("ips=%d, ipe=%d, ps=%d, pe=%d\n", ips, ipe, ps, pe);
+        buf->clear()->append(s1)->append(s2)->append(s3)->update(im->CursorPos(), ps, pe);
+        // murmur("==> %s%s%s",s1,s2,s3);
+    }
+    
+    void CandidateWindow(OVCandidate *textbar, OVService *srv) {
+        if(im->Candidate()) {
+            char s[64];
+			char *ch, selkey;
+            textbar->clear();
+            for(int i=0; i < im->ChoicePerPage() ; i++) {
+                ch      = im->Selection(i);
+                selkey  = im->SelKey(i);
+                if(ch[0]) {
+                    char b[2];
+                    sprintf(b, "%c.", selkey);
+                    textbar->append((char *)b);
+                    const char *cha = srv->toUTF8("big5", ch);
+                    textbar->append(cha)->append(" ");
+                }
+                free(ch);
+            }
+            sprintf(s," %d/%d",im->CurrentPage() + 1,im->TotalPage());
+            textbar->append((char*)s);
+            textbar->update();
+            textbar->show();
+        }
+        else {
+            textbar->hide();
+        }
+    }
+	
+protected:
+    OVIMChewingPinYin *parent;
+    Chewing *im;
+};
+
+
+class OVIMChewingPinYin : public OVInputMethod {
+public:
+    OVIMChewingPinYin() {
+        chew=NULL;
+    }
+	
+    virtual ~OVIMChewingPinYin() {
+        delete chew;
+    }
+	
+    virtual int initialize(OVDictionary* l, OVService* s, const char* modulePath) {
+        char chewingpath[PATH_MAX];
+        char hashdir[PATH_MAX];
+        
+        // we can always be sure that an ending seperator '/' is given to us
+        sprintf(hashdir, "%sOVIMChewingStatic", s->userSpacePath(identifier()));
+        mkdir(hashdir, S_IRWXU);
+        sprintf(chewingpath, "%sOVIMChewing", modulePath);
+        if (!ChewingCheckData(chewingpath)) {
+            murmur("OVIMChewingPinYin: chewing data missing at %s", modulePath);
+            return 0;
+        }
+        
+        murmur ("OVIMChewingPinYin: initialize, chewing data=%s, userhash=%s", chewingpath, hashdir);
+		
+		// BECAUSE THE {SACRILEGIOUS WORDS HERE} libchewing HAS NO 
+		// EXCEPTION HANDLING HERE (BLAME OLD C-style assert() !!)
+		// WE HAVE TO DO ERROR CHECKING OURSELVES, OTHERWISE WE ARE
+        // DOOMED IF CHEWING DATA DOESN'T EXIST. THIS MAKES OUR LIFE
+        // HARD BUT WE SHOULD TRY NOT TO COMPLAIN
+        chew = new Chewing(chewingpath, hashdir);
+		
+        //if(!l->keyExist("keyboardLayout")) l->setInteger("keyboardLayout", 0);
+		chew->SetKeyboardLayout(8);
+        return 1;
+    }
+	
+    virtual void update(OVDictionary* localconfig, OVService*) {
+        //chew->SetKeyboardLayout(localconfig->getInteger("keyboardLayout"));
+    }
+	
+    virtual const char *identifier() {
+        return "OVIMChewingPinYin";
+    }
+	
+    virtual const char *localizedName(const char *locale) {
+        if (!strcasecmp(locale, "zh_TW")) return "酷拼音 (靜態連結版)";
+        if (!strcasecmp(locale, "zh_CN")) return "酷拼音 (静态连结版)";
+ 	    return "Chewing PinYin (smart phonetics, static build)";
+    }
+	
+    virtual OVInputMethodContext* newContext() {
+	    return new OVIMChewingPinYinContext(this, chew); 
+    }
+    
+protected:
+    Chewing *chew;
+};
+
+/* ---- */
+
+
 // the module wrapper
-OV_SINGLE_MODULE_WRAPPER(OVIMChewing);
+//OV_SINGLE_MODULE_WRAPPER(OVIMChewing);
+extern "C" unsigned int OVGetLibraryVersion() {
+    return OV_VERSION;
+}
+
+extern "C" int OVInitializeLibrary(OVService* s, const char* p) {
+    return 1;
+}
+
+extern "C" OVModule *OVGetModuleFromLibrary(int idx) {
+        switch (idx) {
+                case 0: return new OVIMChewing;
+                case 1: return new OVIMChewingPinYin;
+        }
+        return NULL;
+}
+
+
