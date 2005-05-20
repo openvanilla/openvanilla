@@ -298,8 +298,8 @@ int OVIMArray::initialize(OVDictionary *conf, OVService*, const char *path){
 }
 
 int OVIMArray::updateConfig(OVDictionary *conf){
-    const char *AutoSP = "AutoQuerySpecialCode";
-    const char *ForceSP = "ForceSpecialCode";
+    const char *AutoSP = "特別碼提示";
+    const char *ForceSP = "快打模式";
 
     if( !conf->keyExist(AutoSP) ) conf->setInteger(AutoSP, 1);
     if( !conf->keyExist(ForceSP) ) conf->setInteger(ForceSP, 0);
