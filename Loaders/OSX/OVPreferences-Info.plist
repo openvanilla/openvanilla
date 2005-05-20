@@ -18,11 +18,11 @@
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
 	<string>0.7.0rc4</string>
+	<key>NSHelpFile</key>
+	<string>ov.pdf</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>NSHelpFile</key>
-	<string>ov.pdf</string>
 </dict>
 </plist>

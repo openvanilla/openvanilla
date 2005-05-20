@@ -446,6 +446,30 @@
 			settings = {
 			};
 		};
+		6A5C52F1083D523D0053E321 = {
+			children = (
+				6AD76B0508358BA600164A51,
+				6A5C52F3083D52430053E321,
+			);
+			isa = PBXVariantGroup;
+			name = MainMenu.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		6A5C52F2083D523D0053E321 = {
+			fileRef = 6A5C52F1083D523D0053E321;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6A5C52F3083D52430053E321 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = zh_TW;
+			path = OVDisplayServer/zh_TW.lproj/MainMenu.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
 		6A5D8E8708173ADB007A527F = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -1069,7 +1093,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AD76B0608358BA600164A51,
-				6AD76B0708358BA600164A51,
+				6A5C52F2083D523D0053E321,
 				6ADD6E9908366E3800CB4339,
 			);
 			isa = PBXResourcesBuildPhase;
@@ -1226,19 +1250,13 @@
 		6AD76B0508358BA600164A51 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.nib;
-			name = MainMenu.nib;
-			path = OVDisplayServer/MainMenu.nib;
+			name = English;
+			path = OVDisplayServer/English.lproj/MainMenu.nib;
 			refType = 4;
 			sourceTree = "<group>";
 		};
 		6AD76B0608358BA600164A51 = {
 			fileRef = 6AD76B0408358BA600164A51;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		6AD76B0708358BA600164A51 = {
-			fileRef = 6AD76B0508358BA600164A51;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -1293,7 +1311,7 @@
 			children = (
 				6AD76B0408358BA600164A51,
 				6AD76AC4083585DD00164A51,
-				6AD76B0508358BA600164A51,
+				6A5C52F1083D523D0053E321,
 				6AD76AFD08358B6A00164A51,
 				6AD76AFE08358B6A00164A51,
 				6AD76AFF08358B6A00164A51,

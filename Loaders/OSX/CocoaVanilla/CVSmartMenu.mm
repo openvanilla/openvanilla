@@ -37,11 +37,18 @@ int CVInsertMenuItem(MenuRef m, int cmdid, NSString *s, int attr, NSString *k) {
                 VKC(ovkPageDown, 0x79);
                 VKC(ovkTab, 0x30);
             }
-            if (vcode)
-                SetMenuItemCommandKey(m, p+1, TRUE, vcode);
-            else
-                SetMenuItemCommandKey(m, p+1, FALSE, toupper(kc.code()));
             
+            // determine if is OS X 10.4 or above
+            if ([NSString instancesRespondToSelector:@selector(writeToFile:atomically:encoding:error:)]) {
+                SetMenuItemCommandKey(m, p+1, FALSE, toupper(kc.code()));
+            }
+            else {
+                if (vcode)
+                    SetMenuItemCommandKey(m, p+1, TRUE, vcode);
+                else
+                    SetMenuItemCommandKey(m, p+1, FALSE, toupper(kc.code()));
+            }
+
             SetMenuItemModifiers(m, p+1, kc.convertToMenuModifier());
         }
 	}

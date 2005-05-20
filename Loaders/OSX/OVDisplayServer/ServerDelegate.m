@@ -3,7 +3,7 @@
 #import "NSStringExtension.h"
 #import <Carbon/Carbon.h>
 
-#define CVIB_FADEWAIT       0.3     // fade after 0.3 sec
+#define CVIB_FADEWAIT       0.5     // fade after 0.5 sec
 #define CVIB_FADEINTERVAL   0.05    // 0.05 sec/frame
 #define CVIB_FADEVALUE      0.025   // alphaValue-=0.025/frame
 
@@ -54,13 +54,8 @@ Point CVFixWindowPosition(Point pp, int width, int height);
     fadetimer=[NSTimer scheduledTimerWithTimeInterval:CVIB_FADEWAIT target:self selector:@selector(fadeStart) userInfo:nil repeats:NO];
 }
 - (void)aboutDialog {
-    // [aboutdialog orderFront:self];
-/* [aboutdialog makeKeyAndOrderFront:self];
-    [aboutdialog makeMainWindow];
-    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-    [[NSApplication sharedApplication] arrangeInFront:self];
-*/
-    [[NSApplication sharedApplication] orderFrontStandardAboutPanel:self];
+    [aboutdialog setLevel:NSScreenSaverWindowLevel];
+    [aboutdialog orderFront:self];
 }
 - (void)dealloc {
     [defaultbackground release];
