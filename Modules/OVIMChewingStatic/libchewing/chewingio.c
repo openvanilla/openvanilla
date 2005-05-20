@@ -235,7 +235,7 @@ int OnKeySpace( void *iccf, ChewingOutput *pgo )
 	int rtn;
 
 	/* check if Old Chewing style */
-	if ( ! pgdata->config.bSpaceAsSelection ) {
+	if (0) {						// lukhnos: ALWAYS USE SPACE
 		return OnKeyDefault( pgdata, ' ', pgo );
 	}
 
