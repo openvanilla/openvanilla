@@ -38,51 +38,8 @@ namespace _OVCIN{
 
 class OVCIN
 {
-public:	
-	// VXCIN::read()
-    OVCIN(char* fileName);
-	
-    ~OVCIN();
-
-	// VXCIN::selKey()
-	string& getSelKey();
-	
-	// VXCIN::name()
-	string& getCName();
-	
-	// VXCIN::name()
-	string& getEName();
-	
-	string& getEndKey();
-	
-	string& getEncoding();
-	
-	// VXCIN::isEndKey()
-	bool isEndKey(char keyChar);
-	
-	bool isValidKey(const string& keyString) const;
-	
-	// VXCIN::getKey()
-	int getCharVectorByKey(string inKey,
-						   vector<string>& outStringVectorRef);
-	
-	// VXCIN::find()
-	int getWordVectorByChar(string inKey,
-							vector<string>& outStringVectorRef);
-
-protected:
-    typedef vector< pair<string, vector<string> > > CinMap;
-	int getVectorFromMap(CinMap& inMapRef,
-						 string inKey,
-						 vector<string>& outStringVectorRef);
-	
 private:
-    void lowerStr(string& str);
-    void setBlockMap();
-    void parseCinVector(const vector<string>& cinVector);
-    int setProperty(const string& key, const string& value);
-    void insertMap(const string& line);
-
+    typedef vector< pair<string, vector<string> > > CinMap;
     _OVCIN::State state;
     string delimiters;
     string properties[_OVCIN::NUM_PROPERTY];
@@ -90,8 +47,102 @@ private:
     CinMap maps[_OVCIN::NUM_MAP];
     int curMapIndex;
 
+public:	
+	// VXCIN::read()
+    OVCIN(char* fileName);
+	
+	// VXCIN::selKey()
+	inline string& getSelKey();
+	
+	// VXCIN::name()
+	inline string& getCName();
+	
+	// VXCIN::name()
+	inline string& getEName();
+	
+	inline string& getEndKey();
+	
+	inline string& getEncoding();
+	
+	// VXCIN::isEndKey()
+	inline bool isEndKey(char keyChar);
+	
+	inline bool isValidKey(const string& keyString) const;
+	
+	// VXCIN::getKey()
+	inline int getCharVectorByKey(const string& inKey,
+						   vector<string>& outStringVectorRef);
+	
+	// VXCIN::find()
+	inline int getWordVectorByChar(const string& inKey,
+							vector<string>& outStringVectorRef);
+
+protected:
+	int getVectorFromMap(const CinMap& inMapRef,
+						 const string& inKey,
+						 vector<string>& outStringVectorRef);
+    void lowerStr(string& str);
+    void parseCinVector(const vector<string>& cinVector);
+    void setBlockMap();
+    int setProperty(const string& key, const string& value);
+    void insertMap(const string& line);
+    int searchCinMap(const CinMap& m, const string& key) const;
+
 	
 };
 
 
+string& OVCIN::getSelKey()
+{
+	return properties[_OVCIN::P_SELKEY];
+}
+
+string& OVCIN::getCName()
+{
+	return properties[_OVCIN::P_CNAME];
+}
+
+string& OVCIN::getEName()
+{
+	return properties[_OVCIN::P_ENAME];
+}
+
+string& OVCIN::getEncoding()
+{
+	return properties[_OVCIN::P_ENCODING];
+}
+
+string& OVCIN::getEndKey()
+{
+	return properties[_OVCIN::P_ENDKEY];
+}
+
+bool OVCIN::isEndKey(char keyChar)
+{
+	int foundIndex = getEndKey().find(keyChar, 0);
+	if(foundIndex > -1)
+		return true;
+	else
+		return false;
+}
+
+bool OVCIN::isValidKey(const string& keyString) const
+{
+    if( searchCinMap( maps[_OVCIN::M_KEY], keyString ) != -1 )
+		return true;
+	else
+		return false;
+}
+
+int OVCIN::getCharVectorByKey(const string& inKey,
+							  vector<string>& outStringVectorRef)
+{
+	return getVectorFromMap(maps[_OVCIN::M_KEY], inKey, outStringVectorRef);
+}
+
+int OVCIN::getWordVectorByChar(const string& inKey,
+							   vector<string>& outStringVectorRef)
+{
+	return getVectorFromMap(maps[_OVCIN::M_CHAR], inKey, outStringVectorRef);
+}
 #endif

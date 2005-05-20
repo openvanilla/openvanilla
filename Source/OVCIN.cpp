@@ -1,6 +1,6 @@
 // OVCIN.cpp
 
-#define  OV_DEBUG
+//#define  OV_DEBUG
 #include "OVCIN.h"
 #include "OVFileHandler.h"
 #include "OVUtility.h"
@@ -80,6 +80,8 @@ void OVCIN::parseCinVector(const vector<string>& cinVector){
         if( (del_pos=line.find_first_of(delimiters)) != string::npos ){
             string key = line.substr(0, del_pos);
             unsigned int value_pos=line.find_first_not_of(delimiters, del_pos);
+            if( value_pos == string::npos )
+                continue;
             string value = line.substr( value_pos, line.length() - value_pos );
             int isBlockBegin = 0;
             if(key.find("%") == 0)
@@ -99,87 +101,35 @@ void OVCIN::lowerStr(string& str){
     transform( str.begin(), str.end(), str.begin(),(int(*)(int)) tolower );
 }
 
-OVCIN::~OVCIN()
-{
-}
 
-string& OVCIN::getSelKey()
-{
-	return properties[P_SELKEY];
-}
 
-string& OVCIN::getCName()
-{
-	return properties[P_CNAME];
-}
 
-string& OVCIN::getEName()
-{
-	return properties[P_ENAME];
-}
 
-string& OVCIN::getEncoding()
-{
-	return properties[P_ENCODING];
-}
-
-string& OVCIN::getEndKey()
-{
-	return properties[P_ENDKEY];
-}
-
-bool OVCIN::isEndKey(char keyChar)
-{
-	int foundIndex = getEndKey().find(keyChar, 0);
-	if(foundIndex > -1)
-		return true;
-	else
-		return false;
-}
-
-bool OVCIN::isValidKey(const string& keyString) const
-{
-    vector<string> v;
-    if( binary_search( maps[M_KEY].begin(), maps[M_KEY].end(), 
-                       make_pair(keyString,v), cmpMapEntry()) )
-		return true;
-	else
-		return false;
-}
-
-int OVCIN::getCharVectorByKey(string inKey,
-							  vector<string>& outStringVectorRef)
-{
-	return getVectorFromMap(maps[M_KEY], inKey, outStringVectorRef);
-}
-
-int OVCIN::getWordVectorByChar(string inKey,
-							   vector<string>& outStringVectorRef)
-{
-	return getVectorFromMap(maps[M_CHAR], inKey, outStringVectorRef);
-}
-
-int OVCIN::getVectorFromMap(CinMap& inMapRef,
-							string inKey,
+int OVCIN::getVectorFromMap(const CinMap& inMapRef,
+							const string& inKey,
 							vector<string>& outStringVectorRef)
 {
-    vector<string> v;
-    CinMap::iterator it;
+    int pos;
     murmur("getVectorFromMap: %s", inKey.c_str());
-    murmur("sorted: %d", is_sorted(inMapRef.begin(), inMapRef.end()) );
-    /*
-    it = lower_bound( inMapRef.begin(), inMapRef.end(), 
-                      make_pair(inKey,v), cmpMapEntry());
-    */
-    // FIXME: use binary search!
-    for(it=inMapRef.begin(); it != inMapRef.end(); ++it)
-        if( it->first == inKey )
-            break;
-    if(it != inMapRef.end() ){
-        murmur("it: %s", it->first.c_str());
-        outStringVectorRef = it->second;
+
+    if( (pos=searchCinMap( inMapRef, inKey )) != -1) {
+        murmur("search ret: %s", inMapRef[pos].first.c_str());
+        outStringVectorRef = inMapRef[pos].second;
         return outStringVectorRef.size();
     }
     return 0;	
 }
  
+int OVCIN::searchCinMap(const CinMap& m, const string& key) const{
+    int mid, low = 0, high = m.size() - 1;
+    while(low <= high){
+        mid = (low + high) / 2;
+        if( key == m[mid].first )
+          return mid;
+        else if( key < m[mid].first )
+            high = mid -1;
+        else
+            low = mid + 1;
+    }
+    return -1;
+}
