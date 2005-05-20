@@ -117,6 +117,8 @@ int OVCIN::getVectorFromMap(const CinMap& inMapRef,
         outStringVectorRef = inMapRef[pos].second;
         return outStringVectorRef.size();
     }
+    else
+        outStringVectorRef.clear();
     return 0;	
 }
  
