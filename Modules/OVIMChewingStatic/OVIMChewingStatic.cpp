@@ -177,7 +177,7 @@ public:
         // we can always be sure that an ending seperator '/' is given to us
         sprintf(hashdir, "%sOVIMChewingStatic", s->userSpacePath(identifier()));
         mkdir(hashdir, S_IRWXU);
-        sprintf(chewingpath, "%sOVIMChewingStatic", modulePath);
+        sprintf(chewingpath, "%sOVIMChewing", modulePath);
         if (!ChewingCheckData(chewingpath)) {
             murmur("OVIMChewing: chewing data missing at %s", modulePath);
             return 0;
@@ -206,9 +206,9 @@ public:
     }
 
     virtual const char *localizedName(const char *locale) {
-        if (!strcasecmp(locale, "zh_TW")) return "酷音 (static)";
-        if (!strcasecmp(locale, "zh_CN")) return "酷音 (static)";
- 	    return "Chewing (smart phonetics, static)";
+        if (!strcasecmp(locale, "zh_TW")) return "酷音 (靜態連結版)";
+        if (!strcasecmp(locale, "zh_CN")) return "酷音 (静态连结版)";
+ 	    return "Chewing (smart phonetics, static build)";
     }
 
     virtual OVInputMethodContext* newContext() {
