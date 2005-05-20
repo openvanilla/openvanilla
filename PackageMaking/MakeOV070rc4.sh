@@ -4,10 +4,6 @@ cd ..
 # build framework
 make install clean
 
-# build Loader
-cd Loaders/OSX
-make install clean
-
 # build bundled modules
 cd ../../Modules/OVIMArray
 make install clean
@@ -37,8 +33,8 @@ cd ../../
 PKGROOT=/tmp/OV070rc4PackageRoot
 mkdir -p $PKGROOT/usr/local/lib
 mkdir -p $PKGROOT/Library/Components
-mkdir -p $PKGROOT/Library/OpenVanilla/
-mkdir -p $PKGROOT/Library/Frameworks/
-cp -r /Library/Components/OVInit.bundle $PKGROOT/Library/Components
-cp -r /Library/OpenVanilla/0.7.0 $PKGROOT/Library/OpenVanilla/
-cp -r /Library/Frameworks/OpenVanilla.framework $PKGROOT/Library/Frameworks/
+mkdir -p $PKGROOT/Library/OpenVanilla/0.7.0
+cp -r /usr/local/lib/libchewing.2.dylib $PKGROOT/usr/local/lib
+cp -r /Library/Components/OVInit.bundle $PKGROOT/usr/Library/Components
+cp -r /Library/OpenVanilla/0.7.0 $PKGROOT/Library/OpenVanilla/0.7.0
+

@@ -289,9 +289,9 @@ int OVPhoneContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate
 			charbuf[1]=0;
 			charbuf[0]=inCharCode;
 			if (key->isShift()) 
-			     charbuf[0]=VPToUpper(inCharCode);
+			     charbuf[0]=VPToLower(inCharCode);
 			else
-	             charbuf[0]=VPToLower(inCharCode);
+	             charbuf[0]=VPToUpper(inCharCode);
             buf->append(charbuf)->send();				
 			return 1;
 		}
