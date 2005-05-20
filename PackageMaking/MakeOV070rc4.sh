@@ -38,7 +38,7 @@ PKGROOT=/tmp/OV070rc4PackageRoot
 mkdir -p $PKGROOT/usr/local/lib
 mkdir -p $PKGROOT/Library/Components
 mkdir -p $PKGROOT/Library/OpenVanilla/0.7.0
-cp -r /usr/local/lib/libchewing.2.dylib $PKGROOT/usr/local/lib
+mkdir -p $PKGROOT/Library/Frameworks/
 cp -r /Library/Components/OVInit.bundle $PKGROOT/usr/Library/Components
 cp -r /Library/OpenVanilla/0.7.0 $PKGROOT/Library/OpenVanilla/0.7.0
-
+cp -r /Library/Frameworks/OpenVanilla.framework $PKGROOT/Library/Frameworks/
