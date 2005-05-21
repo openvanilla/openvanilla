@@ -6,7 +6,7 @@ while(<>) {
     if (/%chardef/) {
         parse_chardef();
     }
-    if (/%keyname/) {
+    elsif (/%keyname/) {
         parse_keyname();
     }
     else {
@@ -17,7 +17,7 @@ print "commit;\n";
 
 sub parse_property {
     my @a=split;
-    exit if (!scalar(@a));
+    return if (!scalar(@a));
     if ($a[0] =~ /^%.+/) { $a[0]=substr($a[0], 1, length($a[0])-1);  }
     $a[0] =~ s/\'/\'\'/g;
     if ($a[1]) { $a[1] =~ s/\'/\'\'/g; } else { $a[1]="" };
