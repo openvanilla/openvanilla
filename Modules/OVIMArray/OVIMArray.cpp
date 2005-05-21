@@ -76,9 +76,8 @@ int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVBuffer* buf,
                                     OVCandidate* candibar, OVService* srv){
     const char keycode = key->code();
     if (keycode == ovkEsc || keycode == ovkBackspace){
-        candibar->hide()->clear();
-        candi.cancel();
-        buf->clear()->update();
+        clearAll(buf, candibar);
+        changeState(STATE_WAIT_KEY1);
         return RET_DONE;
     }
 
@@ -96,15 +95,17 @@ int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVBuffer* buf,
     // enter == first candidate
     // space (when candidate list has only one page) == first candidate
     char c=key->code();
-    bool notSelkey = tabs[MAIN_TAB]->getSelKey().find(key->code()) == string::npos;
+    bool notSelkey = 
+        tabs[MAIN_TAB]->getSelKey().find(key->code()) == string::npos;
+    bool defaultSelKey = c == ovkReturn || (candi.onePage() && c==ovkSpace);
     murmur("notSelkey: %d", notSelkey);
-    if (c == ovkReturn || (candi.onePage() && c==ovkSpace) || notSelkey) 
+    if ( defaultSelKey || notSelkey) 
         c=candi.getSelKey()[0];
 
     string output;
     if (candi.select(c, output)) {
         sendAndReset(output.c_str(), buf, candibar, srv);
-        if( notSelkey )
+        if( notSelkey && !defaultSelKey )
             return RET_CONTINUE;
         return RET_DONE;
     }
