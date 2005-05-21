@@ -5,6 +5,7 @@
 #import <OpenVanilla/OVUtility.h>
 #import <unistd.h>
 #import "NSStringExtension.h"
+#import <Foundation/NSProcessinfo.h>
 
 enum {
     ovbufclear=1,
@@ -37,16 +38,25 @@ public:
         [os close];
     }
     
-    void loadAndOpen(OVService *srv) {
+    int loadAndOpen(OVService *srv, int uid) {
+		NSLog(@"already has a uid? [%d]", uid);
         open();
         writeString(@"ping\n");
-        if (!readString()) {
+		NSString *r = readString();
+        if (!r) {
             srv->notify("server not loaded, loading");
             system(serverScript);
             sleep(1);
             srv->notify("server loaded");            
             open();
         }
+		else if(uid == -1) {
+			writeString(@"getuid\n");
+			uid = [readString() intValue];
+			NSLog(@"uid got:%d", uid);
+		}
+		
+		return uid;
     }
 
     void writeString(NSString *s) {
@@ -55,7 +65,7 @@ public:
     }
 
     NSArray *magic(OVService *srv, NSString *s) {
-        loadAndOpen(srv);
+        //loadAndOpen(srv);
         writeString(s);
         NSString *r=readString();
         if (!r) {
@@ -82,20 +92,24 @@ protected:
 class OVSocketIMContext : public OVInputMethodContext {
 public:
     OVSocketIMContext(NSDictionary *ad) {
+		uid = -1;
         atomdict=ad;
         data=[[NSMutableString alloc] initWithString:@""];
     }
     ~OVSocketIMContext() { [data release]; }
     virtual void start(OVBuffer*, OVCandidate*, OVService*) {}
+	
     virtual void clear() {
         [data setString:@""];
     }
     virtual void end() {}
     virtual int keyEvent(OVKeyCode* key, OVBuffer* buf, OVCandidate* candi, OVService* srv) {
-        OVSocket sk;
+		OVSocket sk;
+		uid = sk.loadAndOpen(srv, uid);
+		NSLog(@"current uid=%d", uid);
         NSArray *a=sk.magic(srv, 
-            [NSString stringWithFormat: @"OVIMPerlTest %@ %d %d %d\n",
-                [data stringByQuoting], key->code(), buf->isEmpty(), candi->onScreen()
+            [NSString stringWithFormat: @"OVIMPerlTest %@ %d %d %d %d\n",
+                [data stringByQuoting], key->code(), buf->isEmpty(), candi->onScreen(), uid
             ]);
         NSLog([a description]);
         if (!a) return 0;
@@ -150,10 +164,11 @@ public:
     
         return 0;
     }
-    
+
 protected:
     NSDictionary *atomdict;
     NSMutableString *data;
+	int uid;
 };
 
 class OVSocketInputMethod : public OVInputMethod {
@@ -172,12 +187,12 @@ public:
         [atomdict setValue:[NSNumber numberWithInt:ovcandiupdate        ]   forKey:@"candiupdate"];
         [atomdict setValue:[NSNumber numberWithInt:ovsrvnotify          ]   forKey:@"srvnotify"];
         [atomdict setValue:[NSNumber numberWithInt:ovkeyreject          ]   forKey:@"keyreject"];
-        [atomdict setValue:[NSNumber numberWithInt:ovkeyaccept          ]   forKey:@"keyaccept"];        
+        [atomdict setValue:[NSNumber numberWithInt:ovkeyaccept          ]   forKey:@"keyaccept"];
     }
     
     virtual const char *identifier() { return "OVSocketInputMethod"; }
     virtual OVInputMethodContext *newContext() { return new OVSocketIMContext(atomdict); }
-    
+
 protected:
     NSMutableDictionary *atomdict;
 };

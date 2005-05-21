@@ -1,4 +1,4 @@
-#!/usr/bin/Perl -w -Tw
+j#!/usr/bin/Perl -w -Tw
 use strict;
 use IO::Socket;
 use Net::hostent;
@@ -12,16 +12,17 @@ my $server = IO::Socket::INET->new (Proto=>'tcp', LocalPort=>20310, Listen=>SOMA
 
 die "cannot setup server" unless $server;
 
-# print STDERR "loading cj.cin.data\n";
-# open (CJ, "<:utf8", "cj.cin.data");
-# while (<CJ>) {
-#    my @d=split;
-#    # print "$d[0] => $d[1]\n";
-#    $cjdata{$d[0]}.=encode("utf8", $d[1]);
-# }
-# close CJ;
-# print STDERR "cj.cin.data loaded\n";
+print STDERR "loading cj.cin.data\n";
+open (CJ, "<:utf8", "cj.cin.data");
+while (<CJ>) {
+    my @d=split;
+    print "$d[0] => $d[1]\n";
+    $cjdata{$d[0]}.=encode("utf8", $d[1]);
+}
+close CJ;
+print STDERR "cj.cin.data loaded\n";
 
+my $uidCounter = 1;
 while ($client = $server->accept()) {
 	print STDERR "OVSocketServer: Connected!\n";
 	$client->autoflush(1);
@@ -34,6 +35,11 @@ while ($client = $server->accept()) {
         my $mod=shift @cmd;
         if ($mod =~ /ping/) {
             print $client "pong\n";
+        }
+        elsif ($mod =~ /getuid/) {
+            print STDERR "set uid=[$uidCounter]\n";
+            print $client "$uidCounter";
+            $uidCounter++;
         }
         elsif  ($mod =~ /OVOFPerlTest/) {
             OVOFPerlTest(@cmd);
@@ -72,7 +78,7 @@ sub OVIMPerlTest {
     
     $data =~ s/\\\"/\"/g;
 
-    print STDERR "data=$data, code=$code, bufempty=$bufempty, onscreen=$onscreen\n";
+    print STDERR "data=$data, code=$code, bufempty=$bufempty, onscreen=$onscreen, uid=$uid\n";
     
     my $c=chr $code;
     if ($code==32) {
