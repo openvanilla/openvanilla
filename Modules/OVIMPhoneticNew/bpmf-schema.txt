@@ -1,0 +1,2 @@
+CREATE TABLE bpmf(bpmf text, chr text, ord integer);
+CREATE INDEX bpmf_index_bpmf on bpmf(bpmf);

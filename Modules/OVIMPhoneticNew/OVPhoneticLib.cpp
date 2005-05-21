@@ -49,9 +49,6 @@ int OVPhoneticData::find(unsigned short code, unsigned short *str)
     return l;
 }
 
-extern unsigned short ovPhoneticData[];
-OVPhoneticData ovpData(ovPhoneticData);
-
 // VP stands for Vanilla Phonetics library, it's really from the old, old
 // VanillaInput...
 
@@ -86,12 +83,33 @@ void OVPhoneticSyllable::setLayout(int layout)
 
 int OVPhoneticSyllable::empty()
 {
-    return syllable;
+    if (syllable) return 0;
+    return 1;
+}
+
+int OVPhoneticSyllable::isComposeKey(char c) {
+    if (c==32) return 1;
+    
+    if (keylayout==OVPStandardLayout) {
+        if (c=='3' || c=='4' || c=='6' || c=='7') return 1;
+    }
+    else {
+        if (c=='1' || c=='2' || c=='3' || c=='4') return 1;
+    }
+    return 0;
+}
+
+int OVPhoneticSyllable::isValidKey(char c)
+{
+    unsigned short s=(keylayout==OVPStandardLayout) ? 
+        VPStandardKeyToSymbol(c) : VPEtenKeyToSymbol(c);
+    if (s) return 1;
+    return 0;    
 }
 
 int OVPhoneticSyllable::addKey(char c)
 {
-    unsigned short s= (keylayout==OVPStandardLayout) ? 
+    unsigned short s=(keylayout==OVPStandardLayout) ? 
         VPStandardKeyToSymbol(c) : VPEtenKeyToSymbol(c);
     if (!s) return 0;
     return syllable=VPCombineSymbol(syllable, s);
@@ -120,7 +138,6 @@ const char *OVPhoneticSyllable::standardLayoutCode()
     return VPSymbolToStandardLayoutString(syllable);
 }
 
-
 OVPCandidate::OVPCandidate()
 {
     count=0;
@@ -134,8 +151,12 @@ OVPCandidate::~OVPCandidate()
     delete[] candidates;
 }
 
-OVPCandidate *OVPFindCandidate(OVPhoneticSyllable *syl)
+// extern unsigned short ovPhoneticData[];
+// OVPhoneticData ovpData(ovPhoneticData);
+
+OVPCandidate *OVPFindCandidate(unsigned short *data, OVPhoneticSyllable *syl)
 {
+    OVPhoneticData ovpData(data);
     unsigned short *s=new unsigned short[ovpData.maxCandidiateStringLength()];
     int l=ovpData.find(syl->syllable, s);
     int c=0, i;
@@ -284,7 +305,7 @@ char vpComposeBuffer[32];
 
 char VPSymbolToStandardLayoutChar(unsigned short s)
 {
-	unsigned short o=VPSymbolToOrdinal(o);
+	unsigned short o=VPSymbolToOrdinal(s);
 	if (!o) return 0;
     return vpStandardLayoutCode[o];
 }
@@ -293,13 +314,13 @@ const char *VPSymbolToStandardLayoutString(unsigned short s)
 {
     char *b=vpComposeBuffer;
 	if (s & vpConsonantMask) 
-	   *b++ = VPSymbolToStandardLayoutChar(VPSymbolToOrdinal(s&vpConsonantMask));
+	   *b++ = VPSymbolToStandardLayoutChar(s&vpConsonantMask);
 	if (s & vpMiddleVowelMask) 
-	   *b++ = VPSymbolToStandardLayoutChar(VPSymbolToOrdinal(s&vpMiddleVowelMask));
+	   *b++ = VPSymbolToStandardLayoutChar(s&vpMiddleVowelMask);
 	if (s & vpVowelMask)
-	   *b++ = VPSymbolToStandardLayoutChar(VPSymbolToOrdinal(s&vpVowelMask));
+	   *b++ = VPSymbolToStandardLayoutChar(s&vpVowelMask);
 	if (s & vpToneMask)
-	   *b++ = VPSymbolToStandardLayoutChar(VPSymbolToOrdinal(s&vpToneMask));
+	   *b++ = VPSymbolToStandardLayoutChar(s&vpToneMask);
 	*b=0;
     return vpComposeBuffer;
 }
@@ -345,14 +366,14 @@ unsigned short VPStandardKeyToSymbol (char c)
 {
 	char cc=toupper(c);
 	if (cc > 96) return 0;
-	return vpStandardKeyTable[cc];
+	return vpStandardKeyTable[(int)cc];
 }
 
 unsigned short VPEtenKeyToSymbol (char c)
 {
 	char cc=toupper(c);
 	if (cc > 96) return 0;
-	return vpEtenKeyTable[cc];
+	return vpEtenKeyTable[(int)cc];
 }
 
 // persumes that ONLY ONE SYMBOL is converted AND there ARE NO OTHER MASKED SYMBOLS

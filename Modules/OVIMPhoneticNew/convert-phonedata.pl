@@ -1,4 +1,7 @@
 #!/usr/bin/perl -w
+
+# this Perl program converts phone.cin into OVPhoneData-compliant data table
+
 use strict;
 use Encode;
 use Getopt::Long;

@@ -19,7 +19,9 @@ public:
     void setLayout(int layout);
     
     int empty();
+    int isComposeKey(char c);
     int addKey(char c);
+    int isValidKey(char c);
     int removeLast();
     void clear();
     
@@ -29,7 +31,7 @@ public:
 protected:
     unsigned short syllable;
     int keylayout;
-    friend OVPCandidate* OVPFindCandidate(OVPhoneticSyllable *s);
+    friend OVPCandidate* OVPFindCandidate(unsigned short *data, OVPhoneticSyllable *s);
 };
 
 struct OVPCandidate
@@ -41,7 +43,7 @@ struct OVPCandidate
 };
 
 // you're responsible to delete the object returned
-OVPCandidate *OVPFindCandidate(OVPhoneticSyllable *syl);
+OVPCandidate *OVPFindCandidate(unsigned short *data, OVPhoneticSyllable *syl);
 
 #endif
 
