@@ -149,7 +149,16 @@ int OVIMPhoneticContext::keyBackspace() {
 }
 
 int OVIMPhoneticContext::keyPrintable() {
-    if (!syl.addKey(k->code())) return keyNonBPMF(); // not a BPMF keycode
+    if (isalpha(k->code()) && k->isShift() && b->isEmpty()) {
+        char keystr[2];
+        sprintf(keystr, "%c", tolower(k->code()));
+        b->clear()->append(keystr)->send();
+        return 1;
+    }
+    if (!syl.addKey(k->code())) {
+        if (b->isEmpty()) return keyNonBPMF(); // not a BPMF keycode
+        s->beep();
+    }
     b->clear()->append(syl.compose())->update();
     return 1;
 }
