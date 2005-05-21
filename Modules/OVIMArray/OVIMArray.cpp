@@ -79,32 +79,37 @@ int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVBuffer* buf,
         candibar->hide()->clear();
         candi.cancel();
         buf->clear()->update();
-        return 1;
+        return RET_DONE;
     }
 
     if (keycode == ovkDown || keycode == ovkRight ||
         (!candi.onePage() && keycode==ovkSpace) ){
         candi.pageDown()->update(candibar);
-        return 1;
+        return RET_DONE;
     }
 
     if (keycode == ovkUp || keycode == ovkLeft){
         candi.pageUp()->update(candibar);
-        return 1;
+        return RET_DONE;
     }
 
     // enter == first candidate
     // space (when candidate list has only one page) == first candidate
     char c=key->code();
-    if (c == ovkReturn || (candi.onePage() && c==ovkSpace)) 
+    bool notSelkey = tabs[MAIN_TAB]->getSelKey().find(key->code()) == string::npos;
+    murmur("notSelkey: %d", notSelkey);
+    if (c == ovkReturn || (candi.onePage() && c==ovkSpace) || notSelkey) 
         c=candi.getSelKey()[0];
 
     string output;
     if (candi.select(c, output)) {
         sendAndReset(output.c_str(), buf, candibar, srv);
-        return 1;
+        if( notSelkey )
+            return RET_CONTINUE;
+        return RET_DONE;
     }
-    return 0;
+    
+    return RET_PASS;
 }
 
 
@@ -184,8 +189,10 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         return 1;
     }
 
-    if( state == STATE_WAIT_CANDIDATE )
-        return WaitCandidate(key, buf, candi_bar, srv);
+    if( state == STATE_WAIT_CANDIDATE ){
+        int r = WaitCandidate(key, buf, candi_bar, srv);
+        if( r != RET_CONTINUE ) return r;
+    }
     if( candi.onDuty() && isdigit(keycode) && 
         !(keyseq.length() == 1 && isWSeq(keyseq.getSeq()[0],keycode)) ){
         string c;

@@ -20,7 +20,11 @@ namespace OV_Array {
         SHORT_TAB = 1,
         SPECIAL_TAB = 2
     };
+    const int RET_PASS = 0;
+    const int RET_DONE = 1;
+    const int RET_CONTINUE = 2;
 };
+
 
 class OVIMArray;
 class OVIMArrayContext : public OVInputMethodContext
