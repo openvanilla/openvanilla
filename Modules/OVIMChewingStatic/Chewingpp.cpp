@@ -44,6 +44,9 @@ void Chewing::SetKeyboardLayout(int kb)
     } else if (kb==KB_DVORAK_HSU) SelKey("aoeuhtn789");
     else SelKey("1234567890");
     cd->zuinData.kbtype=kb;
+    
+    cd->config.bSpaceAsSelection=1;      // lukhnos
+
     SetConfig(cd, &config);
 }
 
