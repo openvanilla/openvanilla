@@ -1,4 +1,4 @@
-j#!/usr/bin/Perl -w -Tw
+#!/usr/bin/Perl -w -Tw
 use strict;
 use IO::Socket;
 use Net::hostent;
@@ -75,7 +75,8 @@ sub OVIMPerlTest {
     my $code=shift;
     my $bufempty=shift;
     my $onscreen=shift;
-    
+    my $uid=shift;
+ 
     $data =~ s/\\\"/\"/g;
 
     print STDERR "data=$data, code=$code, bufempty=$bufempty, onscreen=$onscreen, uid=$uid\n";
