@@ -99,7 +99,9 @@ class OVTibetanContext : public OVInputMethodContext
 	 if (key->code() == ovkUp || key->code() == ovkDown ||key->code() == ovkLeft ||key->code() == ovkRight ) //Locked when composing
 	 { 
 	    keyseq.lastisother();
-	    if(!keyseq.len || key->isCapslock()) return 0;
+	    if(!keyseq.len || key->isCapslock()) {
+	        buf->send()->clear(); 
+	    }
 	    return 1;	// key processed
 	 }
 
