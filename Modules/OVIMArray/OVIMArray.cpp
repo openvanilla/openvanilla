@@ -197,7 +197,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         !(keyseq.length() == 1 && isWSeq(keyseq.getSeq()[0],keycode)) ){
         string c;
         if( candi.select(keycode, c) ){
-            if( c != "□"  ){
+            if( c != "⎔"  ){
                 sendAndReset(c.c_str(), buf, candi_bar, srv);
             }
             else{
