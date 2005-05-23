@@ -99,7 +99,94 @@ protected:
     SQLite3 *db;
 };
 
-OV_SINGLE_MODULE_WRAPPER(OVIMGenericSQLite);
+class OVOFReverseLookupSQLite : public OVOutputFilter
+{
+public:
+    OVOFReverseLookupSQLite();
+    virtual const char* identifier();
+    virtual const char* localizedName(const char* locale);
+    virtual int initialize(OVDictionary*, OVService*, const char*);
+    virtual const char* process(const char *src, OVService *srv);
+protected:
+    SQLite3 *db;
+    char table[256];
+    char idstr[256];
+    char composebuffer[1024];
+};
+
+
+// OV_SINGLE_MODULE_WRAPPER(OVIMGenericSQLite);
+
+extern "C" unsigned int OVGetLibraryVersion() {
+    return OV_VERSION;
+}
+extern "C" int OVInitializeLibrary(OVService*, const char*p) { 
+    return 1; 
+}
+extern "C" OVModule *OVGetModuleFromLibrary(int x) {
+    switch (x) {
+        case 0: return new OVIMGenericSQLite;
+        case 1: return new OVOFReverseLookupSQLite;
+    }
+    return NULL;
+}
+
+OVOFReverseLookupSQLite::OVOFReverseLookupSQLite() {
+    strcpy(table, "cj");
+    strcpy(idstr, "OVOFReverseLookupSQLite-cj");
+}
+
+const char* OVOFReverseLookupSQLite::identifier() {
+    return idstr;
+}
+
+const char* OVOFReverseLookupSQLite::localizedName(const char* lc) {
+    if (!strcasecmp(lc, "zh_TW")) return "反查倉頡字根（SQLite 版）";
+    return "Cangjei lookup (SQLite version)";
+}
+
+int OVOFReverseLookupSQLite::initialize(OVDictionary *cfg, OVService * s, const char *p) {
+    db=new SQLite3;             // this never gets deleted, but so do we
+    char dbfile[PATH_MAX];
+    sprintf(dbfile, "%s/OVIMGenericSQLite/imtables.db", p);
+    murmur("OVOFReverseLookupSQLite: database file is %s", dbfile);
+    
+    if (int err=db->open(dbfile)) {
+        s->notify("SQLite3 error");
+        murmur("SQLite3 error! code=%d", err);
+        return 0;
+    }
+    return 1;
+}
+
+const char* OVOFReverseLookupSQLite::process(const char *src, OVService *srv)
+{
+    unsigned short *u16;
+    int u16len=srv->UTF8ToUTF16(src, &u16);
+    strcpy(composebuffer, "");
+    
+    // WE HAVE TO DO SURROGATE CHECK, REMEMBER!
+    for (int i=0; i<u16len; i++) {
+        // get each codepoint
+        const char *u8=srv->UTF16ToUTF8(&(u16[i]), 1);
+        
+        char buf[256];
+        sprintf(buf, "%s=(", u8);
+        strcat(composebuffer, buf);
+        
+        SQLite3Statement *sth=db->prepare("select key from cj where value=?1;");
+        sth->bind_text(1, u8);
+        while (sth->step()==SQLITE_ROW) {
+            sprintf(buf, "%s, ", sth->column_text(0));
+            strcat(composebuffer, buf);
+        }
+        strcat(composebuffer, ")\n");        
+    }
+    
+    if(strlen(composebuffer)) srv->notify(composebuffer);
+    return src;
+}
+
 
 OVIMGenericSQLite::OVIMGenericSQLite() {
     strcpy(table, "cj");
@@ -148,7 +235,7 @@ const char *OVIMGenericSQLite::identifier() {
 
 const char *OVIMGenericSQLite::localizedName(const char *lc) {
     if (!strcasecmp(lc, "zh_TW")) return "倉頡輸入法（SQLite 版）";
-    return "Cangjei (SQLite3 version)";
+    return "Cangjei (SQLite version)";
 }
 
 int OVIMGenericSQLite::isEndKey(char c) {
