@@ -132,7 +132,7 @@ NSArray *CVKeyCode::getKeyList() {
     KMAP(@"pagedown");
     KMAP(@"tab");
     #undef KMAP
-    char *s="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`a";
+    char *s="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`";
     char buf[2];
     buf[1]=0;
     for (size_t i=0; i<strlen(s); i++) {
