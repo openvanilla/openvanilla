@@ -122,7 +122,7 @@ void OVIMPhoneticContext::end() {
 int OVIMPhoneticContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, OVService* ps) {
     k=pk; b=pb; c=pc; s=ps;
     if (candi) return candidateEvent();
-    if (isPunctuationCombination()) return punctuationKey();
+    if (isPunctuationCombination() && b->isEmpty()) return punctuationKey();
     if (k->isFunctionKey() && b->isEmpty()) return 0;
     if (k->isCapslock() && b->isEmpty()) keyCapslock();
     if (k->code()==ovkEsc) return keyEsc();
