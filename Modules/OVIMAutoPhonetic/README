@@ -1,0 +1,8 @@
+
+This is an experiment on "automatic candidate selection," with the
+emphasis on the OO-design and the use of GUI's "sub-view event
+dispatching model."
+
+Please retrieve tsi.src from https://svn.csie.net/chewing/libchewing/trunk/data/tsi.src
+
+Enjoy
