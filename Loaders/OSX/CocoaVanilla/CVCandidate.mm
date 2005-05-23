@@ -30,7 +30,8 @@ OVCandidate* CVCandidate::clear() {
 }
 
 OVCandidate* CVCandidate::append(const char *s) {
-	[text appendString:[NSString stringWithUTF8String:s]];
+    NSString *u8s=[NSString stringWithUTF8String:s];
+	if (u8s) [text appendString:u8s];
     return this;
 }
 

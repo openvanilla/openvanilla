@@ -15,7 +15,8 @@ OVBuffer* CVBuffer::clear() {
 }
 
 OVBuffer* CVBuffer::append(const char *s) {
-    if (cbuf) cbuf->append([NSString stringWithUTF8String:s]);
+    NSString *u8s=[NSString stringWithUTF8String:s];
+    if (cbuf && u8s) cbuf->append(u8s);
     return this;
 }
 
