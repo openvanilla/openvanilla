@@ -294,8 +294,9 @@ int OVIMPhoneticContext::candidateEvent() {
         b->clear()->append(candi->candidates[i + page*perpage])->send();
         closeCandidateWindow();
         if (nextsyl) {
+            syl.clear();
             syl.addKey(kc);
-            b->append(syl.compose())->update();
+            b->clear()->append(syl.compose())->update();
         }
     }    
     return 1;
