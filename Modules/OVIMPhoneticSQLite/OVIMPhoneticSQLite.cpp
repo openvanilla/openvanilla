@@ -172,6 +172,10 @@ int OVIMPhoneticContext::keyNonBPMF() {
         return 1;
     }
     if (count==1) return commitFirstCandidate();
+    
+    // we need to put the first candidate onto the composing buffer
+    // to make some application (e.g. iTerm.app) happy
+    b->clear()->append(candi->candidates[0])->update();
     return updateCandidateWindow();
 }
 
@@ -196,6 +200,10 @@ int OVIMPhoneticContext::punctuationKey() {
     }
     if (!count) return 0;       // we send back the combination key
     if (count==1) return commitFirstCandidate();
+    
+    // we need to put the first candidate onto the composing buffer
+    // to make some application (e.g. iTerm.app) happy
+    b->clear()->append(candi->candidates[0])->update();
     return updateCandidateWindow();    
 }
 
