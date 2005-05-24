@@ -213,15 +213,22 @@ int OVIMPhoneticContext::keyCapslock() {
 
 int OVIMPhoneticContext::keyCompose() {
     if (k->code()!=ovkSpace && k->code()!=ovkReturn) syl.addKey(k->code());
-    b->clear()->append(syl.compose())->update();
+    
+    // we don't update the compose key (tone key) at this stage,
+    // because it often causes display nauseousness
+    // b->clear()->append(syl.compose())->update();
     
     int count=fetchCandidate(syl.standardLayoutCode());
     if (!count) {
+        b->clear()->append(syl.compose())->update();      // update here
         s->beep();
         return 1;
     }
 
     if (count==1) return commitFirstCandidate();
+    
+    // we display first candidate instead
+    b->clear()->append(candi->candidates[0])->update();
     return updateCandidateWindow();
 }
 
