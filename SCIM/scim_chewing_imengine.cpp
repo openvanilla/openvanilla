@@ -162,6 +162,8 @@ bool OVSCIMInstance::process_key_event(const KeyEvent& key) {
     }
     
     if (buf.state==1) {
+		update_preedit_string(WideString());
+		hide_preedit_string();
         WideString bs=utf8_mbstowcs(buf.buf);
         commit_string(bs);              
         buf.clear();
