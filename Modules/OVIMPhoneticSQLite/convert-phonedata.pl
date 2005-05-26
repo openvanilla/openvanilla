@@ -11,6 +11,8 @@ my $LFcntr=0;
 
 GetOptions("tablename=s" => \$tableName);
 
+my ($punctuation, $ctrlopt, $punctlist)=(0xff00, 0xfe00, 0xff80);
+
 my ($consonant, $middleVowel, $vowel, $tone)=(0x1f, 0x60, 0x780, 0x3800);
 
 our %stdKeyTable=(
@@ -29,11 +31,6 @@ our %stdKeyTable=(
 );
 
 
-# skip until %chardef begin
-while (<>) {
-    last if (/^%chardef/);
-}
-
 my @entries;
 my $charstr="";
 my $charstrlen=0;
@@ -42,23 +39,27 @@ my $entryStr;
 my $maxEntryStrLen=0;
 my $maxEntry;
 while (<>) {
-    last if (/^%chardef/);
-    my @pair=split;
-    
-    if ($pair[0] eq $lastEntry) {
-        $entryStr .= decode("utf8", $pair[1]);
-    }
-    else {
-        if ($entryStr) {
-            my $len=length($entryStr);
+    if (/^%chardef/) {
+        while (<>) {
+            last if /^%chardef/;        
+            my @pair=split;
             
-            # printf ("%s => %s\n", $lastEntry, encode("utf8", $entryStr));            
-            push @entries, [stdKeyToCode($lastEntry), $len, $entryStr];
-            $maxEntryStrLen=$len if ($len > $maxEntryStrLen);
-            $charstrlen+=$len;
+            if ($pair[0] eq $lastEntry) {
+                $entryStr .= decode("utf8", $pair[1]);
+            }
+            else {
+                if ($entryStr) {
+                    my $len=length($entryStr);
+                    
+                    # printf ("%s => %s\n", $lastEntry, encode("utf8", $entryStr));            
+                    push @entries, [stdKeyToCode($lastEntry), $len, $entryStr];
+                    $maxEntryStrLen=$len if ($len > $maxEntryStrLen);
+                    $charstrlen+=$len;
+                }
+                $lastEntry=$pair[0];
+                $entryStr = decode("utf8", $pair[1]);
+            }
         }
-        $lastEntry=$pair[0];
-        $entryStr = decode("utf8", $pair[1]);
     }
 }
 
@@ -120,8 +121,21 @@ sub output {
 
 sub stdKeyToCode {
     my ($s, $r)=(shift, 0);
-    for my $i (0..length($s)-1) {
-        $r |= $stdKeyTable{substr($s, $i, 1)};
+
+    if ($s =~ /_punctuation_list/) {
+        $r=$punctlist;
+    }    
+    elsif ($s =~ /_punctuation_(.+)/) {
+        $r=$punctuation | ord(uc $1);
     }
+    elsif ($s =~ /_ctrl_opt_(.+)/) {
+        $r=$ctrlopt | ord(uc $1);
+    }
+    else { 
+        for my $i (0..length($s)-1) {
+            $r |= $stdKeyTable{substr($s, $i, 1)};
+        }
+    }    
+    # printf "stdkey %s = code 0x%04x\n", $s, $r;
     $r;
 }

@@ -1,0 +1,20 @@
+IMID=OVIMPhoneticStatic
+
+OBJS=OVIMPhoneticStatic.o OVPhoneticLib.o OVPhoneticData.o
+GOALS=OVIMPhoneticStatic.dylib
+$(GOALS): $(OBJS) $(DB)
+	$(CPP) -bundle -o $@ $(OBJS) 
+
+CINS=bpmf.cin punctuation.cin
+
+OVPhoneticData.c: ${CINS}
+	perl convert-phonedata.pl ${CINS} > OVPhoneticData.c
+
+include ../../Mk/ov.im.mk
+include ../../Mk/ov.vars.mk
+include ../../Mk/ov.general.mk
+include ../../Mk/ov.osx.mk
+
+
+
+
