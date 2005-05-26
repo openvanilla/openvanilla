@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include "SCIMOV.h"
 #include "OVPhoneticLib.cpp"
+#include "OVIMTibetan-SCIM.cpp"
+#include "OVIMPhoneticStatic-SCIM.cpp"
 
 extern "C" {
     #include "OVPhoneticData.c"
@@ -19,7 +21,6 @@ extern "C" {
 
 using namespace scim;
 
-static IMEngineFactoryPointer _scim_ov_factory(0);
 static ConfigPointer _scim_config(0);
 
 extern "C" void scim_module_init() {
@@ -31,36 +32,49 @@ extern "C" void scim_module_exit() {
 
 extern "C" unsigned int scim_imengine_module_init(const ConfigPointer& c) {
     _scim_config=c;
-    return 1;
+    return 2;
 }
 
 extern "C" IMEngineFactoryPointer scim_imengine_module_create_factory(uint32 e)
 {
     // we have only one engine
-    if (e!=0) return IMEngineFactoryPointer(0);
-    if (_scim_ov_factory.null()) {
-        OVSCIMFactory *f=new OVSCIMFactory(_scim_config);
-        if (f) _scim_ov_factory = f; else delete f;
+    switch (e) {
+        case 0: return new OVSCIMFactory(new OVIMPhoneticStatic, _scim_config);
+        case 1: return new OVSCIMFactory(new OVIMTibetan, _scim_config);
     }
-    return _scim_ov_factory;
+    
+    return IMEngineFactoryPointer(0);
 }
 
 // OVSCIMFactory
 
-OVSCIMFactory::OVSCIMFactory(const ConfigPointer& config) {
-    fprintf(stderr, "SCIM-OpenVanilla IMFactory init!\n");
+OVSCIMFactory::OVSCIMFactory(OVInputMethod *i, const ConfigPointer& config) {
+    fprintf(stderr, "SCIM-OpenVanilla IMFactory init! id=%s\n", i->identifier());
 	set_languages("zh_TW,zh_HK,zh_SG");
+	
+	im=i;
+	DummyDictionary dict;
+	DummyService srv;
+    im->initialize(&dict, &srv, "/tmp/");
 }
 
 OVSCIMFactory::~OVSCIMFactory() {
+    delete im;
 }
 
 WideString OVSCIMFactory::get_name() const {
-	return utf8_mbstowcs("OpenVanilla-Phonetic");
+    char idbuf[256];
+    sprintf(idbuf, "OpenVanilla-%s", im->localizedName("en"));
+	return utf8_mbstowcs(idbuf);
 }
 
 String OVSCIMFactory::get_uuid() const {
-	return String("d1f40e24-cdb7-11d9-9359-02061b0179cb");
+    char hash[256];
+    // we just generate some random stuff
+    sprintf(hash, "d1f40e24-cdb7-11d9-9359-02061b%02x%02x%02x",
+        strlen(im->identifier()), strlen(im->localizedName("en")),
+        strlen(im->localizedName("zh_TW")));
+	return String(hash);
 }
 
 String OVSCIMFactory::get_icon_file() const {
@@ -80,14 +94,13 @@ WideString OVSCIMFactory::get_help() const {
 }
 
 IMEngineInstancePointer OVSCIMFactory::create_instance(const String& encoding, int id) {
-    return new OVSCIMInstance(this, encoding, id);
+    return new OVSCIMInstance(im->newContext(), this, encoding, id);
 }
 
 
-OVSCIMInstance::OVSCIMInstance(OVSCIMFactory *factory, const String& encoding, int id ) : DIMEInstance(factory,encoding, id), buf(this), candi(this)
+OVSCIMInstance::OVSCIMInstance(OVInputMethodContext *c, OVSCIMFactory *factory, const String& encoding, int id ) : DIMEInstance(factory,encoding, id), buf(this), candi(this)
 {
-    imp.initialize(&dict, &srv, "/tmp/");
-    cxt=imp.newContext();
+    cxt=c;
     cxt->start(&buf, &candi, &srv);
 }
 
@@ -102,13 +115,11 @@ bool OVSCIMInstance::process_key_event(const KeyEvent& key) {
     DummyKeyCode kc;
     
     int c=key.get_ascii_code();
-    
-    switch(key.mask) {
-        case SCIM_KEY_ShiftMask: kc.setShift(1); break;
-        case SCIM_KEY_CapsLockMask: kc.setCapslock(1); break;
-        case SCIM_KEY_ControlMask: kc.setCtrl(1); break;
-        case SCIM_KEY_AltMask: kc.setAlt(1); break;
-    }
+
+    if (key.mask & SCIM_KEY_ShiftMask) kc.setShift(1); 
+    if (key.mask & SCIM_KEY_CapsLockMask) kc.setCapslock(1);
+    if (key.mask & SCIM_KEY_ControlMask) kc.setCtrl(1);
+    if (key.mask & SCIM_KEY_AltMask) kc.setAlt(1);
     
     switch (key.code) {
         case SCIM_KEY_Shift_L:

@@ -8,11 +8,10 @@ using namespace scim;
 
 #include "OpenVanilla.h"
 #include "DummyLoader.h"
-#include "OVIMPhoneticStatic.cpp"
 
 class OVSCIMFactory : public IMEngineFactoryBase {
 public:
-    OVSCIMFactory(const ConfigPointer& config);
+    OVSCIMFactory(OVInputMethod *i, const ConfigPointer& config);
     virtual ~OVSCIMFactory();
 
 	virtual WideString get_name() const;
@@ -24,12 +23,15 @@ public:
 
 	virtual IMEngineInstancePointer create_instance (const String& encoding, int id=-1);
 	friend class OVSCIMInstance;
+
+protected:
+    OVInputMethod *im;
 };
 
 class OVSCIMInstance : public DIMEInstance
 {
 public:
-	OVSCIMInstance(OVSCIMFactory *factory, const String& encoding, int id=-1);
+	OVSCIMInstance(OVInputMethodContext *c, OVSCIMFactory *factory, const String& encoding, int id=-1);
 	virtual ~OVSCIMInstance();
 
 	virtual bool process_key_event( const KeyEvent& key );
@@ -47,7 +49,6 @@ public:
     DummyCandidate candi;
     DummyService srv;
     DummyDictionary dict;
-    OVIMPhoneticStatic imp;
 };
 
 #endif

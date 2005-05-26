@@ -153,6 +153,9 @@ public:
     }
 };
 
+// we borrow this function from OVPhoneticLib.cpp to help us do UTF-16->UTF-8
+const char *VPUTF16ToUTF8(unsigned short *s, int l);
+
 class DummyService : public OVService {
 public:
     virtual void beep() {}
@@ -165,7 +168,8 @@ public:
     virtual const char *fromUTF8(const char *encoding, const char *src)
         { return src; }
     virtual const char *UTF16ToUTF8(unsigned short *src, int len) {
-        return "UTF16"; }
+        return VPUTF16ToUTF8(src, len);
+    }
     virtual int UTF8ToUTF16(const char *src, unsigned short **rcvr) {
         return 0;
     }
