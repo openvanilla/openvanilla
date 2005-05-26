@@ -1,3 +1,5 @@
+// DummyLoader.h: the SCIM-OV Bridge
+
 #ifndef __DummyLoader_h
 #define __DummyLoader_h
 
@@ -6,28 +8,53 @@
 #include <stdio.h>
 #include "OpenVanilla.h"
 
+using namespace scim;
+class DummyBuffer;
+class DummyCandidate;
+
+class DIMEInstance : public IMEngineInstanceBase
+{
+public:
+	DIMEInstance(IMEngineFactoryBase *factory, const String& encoding, 
+	   int id=-1) : IMEngineInstanceBase(factory, encoding, id) {}
+    virtual ~DIMEInstance() {}
+
+protected:	
+    friend class DummyBuffer;
+    friend class DummyCandidate;
+};
+
+
 class DummyKeyCode : public OVKeyCode  {
 public:
-    DummyKeyCode (int p=0) : c(p) {}
-    virtual int code() { return c; }
-    virtual int isShift() { return 0; }
-    virtual int isCapslock() { return 0; }
-    virtual int isCtrl() { return 0; }
-    virtual int isAlt()  { return 0; }
+    DummyKeyCode (int p=0)          { chr=p; shift=capslock=ctrl=alt=0; }
+    virtual int code()              { return chr; }
+    virtual int isShift()           { return shift; }
+    virtual int isCapslock()        { return capslock; }
+    virtual int isCtrl()            { return ctrl; }
+    virtual int isAlt()             { return alt; }
+    
+    virtual void setCode(int x)     { chr=x; }
+    virtual void setShift(int x)    { shift=x; }
+    virtual void setCapslock(int x) { capslock=x; }
+    virtual void setCtrl(int x)     { ctrl=x; }
+    virtual void setAlt(int x)      { alt=x; }
 protected:
-    int c;
+    int chr;
+    int shift, capslock, ctrl, alt;
 };
 
 // Abstract interface for the pre-edit and composing buffer.
 class DummyBuffer : public OVBuffer {
 public:
-    DummyBuffer() {
+    DummyBuffer(DIMEInstance *i) {
+        im=i;
         strcpy(buf, "");
-        state=0;
     }
     virtual OVBuffer* clear() {
-        state=0;
         strcpy(buf, "");
+        im->update_preedit_string(WideString());
+        im->hide_preedit_string();
         return this;
     }
     virtual OVBuffer* append(const char *s) {
@@ -35,11 +62,15 @@ public:
         return this;
     }
     virtual OVBuffer* send() {
-        state=1;
+        WideString bs=utf8_mbstowcs(buf);
+        clear();
+        im->commit_string(bs);
         return this;
     }
     virtual OVBuffer* update() {
-        state=0;
+        im->update_preedit_string(utf8_mbstowcs(buf));
+        if (strlen(buf)) im->show_preedit_string();
+        else im->hide_preedit_string();     
         return this;
     }
     virtual OVBuffer* update(int cursorPos, int markFrom=-1, int markTo=-1) {
@@ -49,14 +80,16 @@ public:
         if (!strlen(buf)) return 1;
         return 0;
     }
-    
-    int state;
+
+protected:
     char buf[512];
+    DIMEInstance *im;
 };
 
 class DummyCandidate : public OVCandidate  {
 public:
-    DummyCandidate() {
+    DummyCandidate(DIMEInstance *i) {
+        im=i;
         onscreen=0;
         strcpy(buf, "");
     }
@@ -70,21 +103,29 @@ public:
         return this;
     }
     virtual OVCandidate* hide() {
-        onscreen=0;
+        if (onscreen) {
+            im->hide_aux_string();
+            onscreen=0;
+        }
         return this;
     }
     virtual OVCandidate* show() {
-        onscreen=1;
+        if (!onscreen) {
+            im->show_aux_string();
+            onscreen=1;
+        }
         return this;
     }
     virtual OVCandidate* update() {
+        im->update_aux_string(utf8_mbstowcs(buf));
         return this;
     }
     virtual int onScreen() {
         return onscreen;
     }
 
-
+protected:
+    DIMEInstance *im;
     char buf[512];
     int onscreen;
 };
@@ -108,14 +149,14 @@ public:
         return "123456789";
     }
     virtual const char* setString(const char *key, const char *value) {
-        return "123456789";
+        return value;
     }
 };
 
 class DummyService : public OVService {
 public:
     virtual void beep() {}
-    virtual void notify(const char *msg) {}
+    virtual void notify(const char *msg) { fprintf(stderr, "%s\n", msg); }
     virtual const char *locale() { return "zh_TW"; }
     virtual const char *userSpacePath(const char *modid) { return "/tmp"; }
     virtual const char *pathSeparator() { return "/"; }
@@ -129,7 +170,6 @@ public:
         return 0;
     }
 };
-
 
 #endif
 

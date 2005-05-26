@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <sys/syslimits.h>
 #include "OVPhoneticLib.h"
 
 extern unsigned short ovPhoneticData[];
@@ -70,9 +69,9 @@ int OVIMPhoneticStatic::initialize(OVDictionary *cfg, OVService * s, const char 
 }
 
 void OVIMPhoneticStatic::update(OVDictionary *cfg, OVService *) {
-    layout=0;       // we use standard layout here
-//    layout=cfg->getIntegerWithDefault("keyboardLayout", 1);  
-//    if (layout !=0 && layout !=1) layout=0;
+    layout=1;       // ETen layout
+    // layout=cfg->getIntegerWithDefault("keyboardLayout", 0);
+    // if (layout !=0 && layout !=1) layout=0;
     strcpy(selkey, cfg->getStringWithDefault("selectKey", "123456789"));    
 }
 
@@ -108,7 +107,7 @@ int OVIMPhoneticContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, 
     if (candi) return candidateEvent();
     if (isPunctuationCombination() && b->isEmpty()) return punctuationKey();
     if (k->isFunctionKey() && b->isEmpty()) return 0;
-    if (k->isCapslock() && b->isEmpty()) keyCapslock();
+    if (k->isCapslock() && b->isEmpty()) return keyCapslock();
     if (k->code()==ovkEsc) return keyEsc();
     if (k->code()==ovkBackspace || k->code()==ovkDelete) return keyBackspace();
     if (!b->isEmpty() && (syl.isComposeKey(k->code()) || k->code()==ovkReturn)) return keyCompose();
