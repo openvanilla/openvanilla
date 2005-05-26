@@ -69,7 +69,7 @@ int OVIMPhoneticStatic::initialize(OVDictionary *cfg, OVService * s, const char 
 }
 
 void OVIMPhoneticStatic::update(OVDictionary *cfg, OVService *) {
-    layout=1;       // ETen layout
+    layout=0;       // 0=Standard, 1=ETen layout
     // layout=cfg->getIntegerWithDefault("keyboardLayout", 0);
     // if (layout !=0 && layout !=1) layout=0;
     strcpy(selkey, cfg->getStringWithDefault("selectKey", "123456789"));    
