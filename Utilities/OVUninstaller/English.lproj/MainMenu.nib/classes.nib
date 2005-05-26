@@ -1,0 +1,25 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                previewScript = id; 
+                removeHIToolBoxPlist = id; 
+                setArchiveFile = id; 
+                uninstall = id; 
+            }; 
+            CLASS = OVUninstaller; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                archivefiletag = id; 
+                confirmwindow = id; 
+                filelistview = id; 
+                restartwindow = id; 
+                scriptwindow = id; 
+                uninstallscript = id; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
