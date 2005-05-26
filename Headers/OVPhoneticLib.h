@@ -45,5 +45,12 @@ struct OVPCandidate
 // you're responsible to delete the object returned
 OVPCandidate *OVPFindCandidate(unsigned short *data, OVPhoneticSyllable *syl);
 
+enum {
+    OVP_PUNCTUATION_MASK = 0xff00,
+    OVP_CTRL_OPT_MASK = 0xfe00,
+    OVP_PUNCTUATION_LIST = 0xff80
+};
+OVPCandidate *OVPFindCandidateWithCode(unsigned short *data, unsigned short k);
+
 #endif
 

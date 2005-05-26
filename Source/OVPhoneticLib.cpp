@@ -14,7 +14,9 @@ struct OVPhoneticDataNode {
 int _OVPDNCompare(const void *p, const void *q)
 {
     OVPhoneticDataNode *x=(OVPhoneticDataNode*)p, *y=(OVPhoneticDataNode*)q;
-    return (short)(x->code - y->code);
+    if (x->code > y->code) return 1;
+    if (x->code < y->code) return -1;
+    return 0;
 }
 
 struct OVPhoneticData {
@@ -154,11 +156,21 @@ OVPCandidate::~OVPCandidate()
 // extern unsigned short ovPhoneticData[];
 // OVPhoneticData ovpData(ovPhoneticData);
 
-OVPCandidate *OVPFindCandidate(unsigned short *data, OVPhoneticSyllable *syl)
+OVPCandidate *OVPFindCandidate(unsigned short *data, OVPhoneticSyllable *syl) {
+    return OVPFindCandidateWithCode(data, syl->syllable);
+}
+
+OVPCandidate *OVPFindCandidateWithCode(unsigned short *data, unsigned short k)
 {
+    fprintf(stderr, "searching for code 0x%x\n", k);
     OVPhoneticData ovpData(data);
     unsigned short *s=new unsigned short[ovpData.maxCandidiateStringLength()];
-    int l=ovpData.find(syl->syllable, s);
+    int l=ovpData.find(k, s);
+    if (!l) {
+        delete s;
+        return NULL;
+    }
+    
     int c=0, i;
     
     // scan the candidate string
