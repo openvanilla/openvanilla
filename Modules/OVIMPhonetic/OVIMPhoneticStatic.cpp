@@ -81,7 +81,7 @@ void OVIMPhoneticStatic::update(OVDictionary *cfg, OVService *) {
 }
 
 const char *OVIMPhoneticStatic::identifier() {
-    return "OVIMPhoneticStatic";
+    return "OVIMPhonetic";
 }
 
 const char *OVIMPhoneticStatic::localizedName(const char *lc) {
