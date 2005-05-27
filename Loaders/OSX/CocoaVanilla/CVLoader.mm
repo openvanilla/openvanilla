@@ -557,7 +557,7 @@ void CVContext::syncConfig(int forced) {
             [cw release];
         }
         
-        showPrimaryIM();
+        if (!forced) showPrimaryIM();
     }
 }
 
