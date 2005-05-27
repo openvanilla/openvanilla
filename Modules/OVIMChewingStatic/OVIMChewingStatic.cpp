@@ -206,9 +206,9 @@ public:
     }
 
     virtual const char *localizedName(const char *locale) {
-        if (!strcasecmp(locale, "zh_TW")) return "酷音 (靜態連結版 gcc4 -O2)";
-        if (!strcasecmp(locale, "zh_CN")) return "酷音 (静态连结版 gcc4 -O2)";
- 	    return "Chewing (smart phonetics, static build, gcc4 -O2)";
+        if (!strcasecmp(locale, "zh_TW")) return "酷音";
+        if (!strcasecmp(locale, "zh_CN")) return "酷音";
+ 	    return "Chewing (smart phonetics)";
     }
 
     virtual OVInputMethodContext* newContext() {

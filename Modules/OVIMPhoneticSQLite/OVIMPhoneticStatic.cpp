@@ -85,8 +85,9 @@ const char *OVIMPhoneticStatic::identifier() {
 }
 
 const char *OVIMPhoneticStatic::localizedName(const char *lc) {
-    if (!strcasecmp(lc, "zh_TW")) return "注音輸入法（Static 版）";
-    return "Phonetic (Bopomofo, Static version)";
+    if (!strcasecmp(lc, "zh_TW")) return "注音";
+    if (!strcasecmp(lc, "zh_CN")) return "注音";
+    return "Phonetic (Bopomofo)";
 }
 
 

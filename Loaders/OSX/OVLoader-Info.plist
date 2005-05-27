@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>OVLoader</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.ovloader.070rc4</string>
+	<string>org.openvanilla.ovloader.070rc5</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>

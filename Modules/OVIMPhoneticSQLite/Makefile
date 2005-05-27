@@ -1,18 +1,14 @@
-IMID=OVIMPhoneticSQLite
+IMID=OVIMPhonetic
 
-DB=bpmf.db
-OBJS=OVIMPhoneticSQLite.o OVPhoneticLib.o 
-GOALS=OVIMPhoneticSQLite.dylib
-DATA=bpmf.db
+OBJS=OVIMPhoneticStatic.o OVPhoneticLib.o OVPhoneticData.o
+GOALS=OVIMPhonetic.dylib
 $(GOALS): $(OBJS) $(DB)
-	$(CPP) -bundle -o $@ $(OBJS) -lsqlite3
+	$(CPP) -bundle -o $@ $(OBJS) 
 
 CINS=bpmf.cin punctuation.cin
 
-bpmf.db: bpmf-schema.txt ${CINS} bpmf-sqlconvert.pl
-	rm -f bpmf.db
-	sqlite3 bpmf.db < bpmf-schema.txt
-	cat ${CINS} | perl bpmf-sqlconvert.pl | sqlite3 bpmf.db
+OVPhoneticData.c: ${CINS}
+	perl convert-phonedata.pl ${CINS} > OVPhoneticData.c
 
 include ../../Mk/ov.im.mk
 include ../../Mk/ov.vars.mk
