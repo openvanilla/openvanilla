@@ -15,7 +15,7 @@
 @SET_MAKE@
 
 
-SOURCES = $(chewing_imengine_setup_la_SOURCES) $(chewing_la_SOURCES)
+SOURCES = $(chewing_la_SOURCES)
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -23,7 +23,7 @@ VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
-top_builddir = ..
+top_builddir = .
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = @INSTALL@
 install_sh_DATA = $(install_sh) -c -m 644
@@ -39,15 +39,18 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = src
-DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.am \
-	$(srcdir)/Makefile.in
+DIST_COMMON = $(am__configure_deps) $(noinst_HEADERS) \
+	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
+	$(top_srcdir)/configure config.guess config.sub depcomp \
+	install-sh ltmain.sh missing
+subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-CONFIG_HEADER = $(top_builddir)/config.h
+am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
+ configure.lineno configure.status.lineno
+mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -55,22 +58,13 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(moduledir)" \
-	"$(DESTDIR)$(setupmoduledir)"
+am__installdirs = "$(DESTDIR)$(moduledir)"
 moduleLTLIBRARIES_INSTALL = $(INSTALL)
-setupmoduleLTLIBRARIES_INSTALL = $(INSTALL)
-LTLIBRARIES = $(module_LTLIBRARIES) $(setupmodule_LTLIBRARIES)
-chewing_imengine_setup_la_LIBADD =
-am_chewing_imengine_setup_la_OBJECTS =  \
-	chewing_imengine_setup_la-scim_chewing_imengine_setup.lo
-chewing_imengine_setup_la_OBJECTS =  \
-	$(am_chewing_imengine_setup_la_OBJECTS)
-@SCIM_BUILD_SETUP_TRUE@am_chewing_imengine_setup_la_rpath = -rpath \
-@SCIM_BUILD_SETUP_TRUE@	$(setupmoduledir)
+LTLIBRARIES = $(module_LTLIBRARIES)
 chewing_la_LIBADD =
 am_chewing_la_OBJECTS = chewing_la-scim_chewing_imengine.lo
 chewing_la_OBJECTS = $(am_chewing_la_OBJECTS)
-DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
+DEFAULT_INCLUDES = -I. -I$(srcdir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
@@ -81,13 +75,22 @@ LTCXXCOMPILE = $(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) \
 CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --tag=CXX --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(chewing_imengine_setup_la_SOURCES) $(chewing_la_SOURCES)
-DIST_SOURCES = $(chewing_imengine_setup_la_SOURCES) \
-	$(chewing_la_SOURCES)
+SOURCES = $(chewing_la_SOURCES)
+DIST_SOURCES = $(chewing_la_SOURCES)
 HEADERS = $(noinst_HEADERS)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+distdir = $(PACKAGE)-$(VERSION)
+top_distdir = $(distdir)
+am__remove_distdir = \
+  { test ! -d $(distdir) \
+    || { find $(distdir) -type d ! -perm -200 -exec chmod u+w {} ';' \
+         && rm -fr $(distdir); }; }
+DIST_ARCHIVES = $(distdir).tar.gz
+GZIP_ENV = --best
+distuninstallcheck_listfiles = find . -type f -print
+distcleancheck_listfiles = find . -type f -print
 ACLOCAL = @ACLOCAL@
 AMDEP_FALSE = @AMDEP_FALSE@
 AMDEP_TRUE = @AMDEP_TRUE@
@@ -97,17 +100,9 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
-CATALOGS = @CATALOGS@
-CATOBJEXT = @CATOBJEXT@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
-CHEWING_CFLAGS = @CHEWING_CFLAGS@
-CHEWING_DATADIR = @CHEWING_DATADIR@
-CHEWING_LIBS = @CHEWING_LIBS@
-CHEWING_VERSION = @CHEWING_VERSION@
-CONVENIENCE_LTDL_FALSE = @CONVENIENCE_LTDL_FALSE@
-CONVENIENCE_LTDL_TRUE = @CONVENIENCE_LTDL_TRUE@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CXX = @CXX@
@@ -115,7 +110,6 @@ CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
-DATADIRNAME = @DATADIRNAME@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 ECHO = @ECHO@
@@ -126,33 +120,17 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
-GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
-GMOFILES = @GMOFILES@
-GMSGFMT = @GMSGFMT@
 INSTALL_DATA = @INSTALL_DATA@
-INSTALL_LTDL_FALSE = @INSTALL_LTDL_FALSE@
-INSTALL_LTDL_TRUE = @INSTALL_LTDL_TRUE@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
-INSTOBJEXT = @INSTOBJEXT@
-INTLLIBS = @INTLLIBS@
 LDFLAGS = @LDFLAGS@
-LIBADD_DL = @LIBADD_DL@
-LIBICONV = @LIBICONV@
-LIBINTL = @LIBINTL@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LIBTOOL_DEPS = @LIBTOOL_DEPS@
 LN_S = @LN_S@
-LTLIBICONV = @LTLIBICONV@
-LTLIBINTL = @LTLIBINTL@
 LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
-MKINSTALLDIRS = @MKINSTALLDIRS@
-MSGFMT = @MSGFMT@
-MSGMERGE = @MSGMERGE@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
@@ -162,36 +140,24 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
-POFILES = @POFILES@
-POSUB = @POSUB@
-PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
-PO_IN_DATADIR_TRUE = @PO_IN_DATADIR_TRUE@
 RANLIB = @RANLIB@
-SCIM_BUILD_SETUP = @SCIM_BUILD_SETUP@
-SCIM_BUILD_SETUP_FALSE = @SCIM_BUILD_SETUP_FALSE@
-SCIM_BUILD_SETUP_TRUE = @SCIM_BUILD_SETUP_TRUE@
 SCIM_CFLAGS = @SCIM_CFLAGS@
 SCIM_DATADIR = @SCIM_DATADIR@
 SCIM_DEBUG_FLAGS = @SCIM_DEBUG_FLAGS@
-SCIM_GTKUTILS_CFLAGS = @SCIM_GTKUTILS_CFLAGS@
-SCIM_GTKUTILS_LIBS = @SCIM_GTKUTILS_LIBS@
 SCIM_ICONDIR = @SCIM_ICONDIR@
 SCIM_LIBS = @SCIM_LIBS@
 SCIM_MODULEDIR = @SCIM_MODULEDIR@
-SCIM_VERSION = @SCIM_VERSION@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
-USE_NLS = @USE_NLS@
 VERSION = @VERSION@
-XGETTEXT = @XGETTEXT@
-ac_aux_dir = @ac_aux_dir@
 ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_F77 = @ac_ct_F77@
 ac_ct_RANLIB = @ac_ct_RANLIB@
 ac_ct_STRIP = @ac_ct_STRIP@
+ac_pt_PKG_CONFIG = @ac_pt_PKG_CONFIG@
 am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
 am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
 am__fastdepCXX_FALSE = @am__fastdepCXX_FALSE@
@@ -251,58 +217,43 @@ chewing_la_LDFLAGS = \
 	@INTLLIBS@ @SCIM_LIBS@ \
 	@CHEWING_LIBS@
 
-@SCIM_BUILD_SETUP_TRUE@SETUP_MODULE = chewing-imengine-setup.la
-setupmoduledir = @SCIM_MODULEDIR@/SetupUI
-setupmodule_LTLIBRARIES = $(SETUP_MODULE)
-chewing_imengine_setup_la_SOURCES = scim_chewing_imengine_setup.cpp
-chewing_imengine_setup_la_CFLAGS = \
-	@SCIM_GTKUTILS_CFLAGS@ @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
-
-chewing_imengine_setup_la_CXXFLAGS = \
-	@SCIM_GTKUTILS_CFLAGS@ @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
-
-chewing_imengine_setup_la_LDFLAGS = \
-	-avoid-version \
-	-rpath $(setupmoduledir) \
-	-module \
-	@LIBTOOL_EXPORT_OPTIONS@ \
-	@SCIM_GTKUTILS_LIBS@ \
-	@INTLLIBS@ \
-	@SCIM_LIBS@
-
 all: all-am
 
 .SUFFIXES:
 .SUFFIXES: .cpp .lo .o .obj
+am--refresh:
+	@:
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
-	      cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh \
+	      echo ' cd $(srcdir) && $(AUTOMAKE) --foreign '; \
+	      cd $(srcdir) && $(AUTOMAKE) --foreign  \
 		&& exit 0; \
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  src/Makefile
+	  $(AUTOMAKE) --foreign  Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
-	    cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh;; \
+	    echo ' $(SHELL) ./config.status'; \
+	    $(SHELL) ./config.status;; \
 	  *) \
-	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)'; \
-	    cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe);; \
+	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
+	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
 	esac;
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
-	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
+	$(SHELL) ./config.status --recheck
 
 $(top_srcdir)/configure:  $(am__configure_deps)
-	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
+	cd $(srcdir) && $(AUTOCONF)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
-	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
+	cd $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
 install-moduleLTLIBRARIES: $(module_LTLIBRARIES)
 	@$(NORMAL_INSTALL)
 	test -z "$(moduledir)" || $(mkdir_p) "$(DESTDIR)$(moduledir)"
@@ -330,35 +281,6 @@ clean-moduleLTLIBRARIES:
 	  echo "rm -f \"$${dir}/so_locations\""; \
 	  rm -f "$${dir}/so_locations"; \
 	done
-install-setupmoduleLTLIBRARIES: $(setupmodule_LTLIBRARIES)
-	@$(NORMAL_INSTALL)
-	test -z "$(setupmoduledir)" || $(mkdir_p) "$(DESTDIR)$(setupmoduledir)"
-	@list='$(setupmodule_LTLIBRARIES)'; for p in $$list; do \
-	  if test -f $$p; then \
-	    f=$(am__strip_dir) \
-	    echo " $(LIBTOOL) --mode=install $(setupmoduleLTLIBRARIES_INSTALL) $(INSTALL_STRIP_FLAG) '$$p' '$(DESTDIR)$(setupmoduledir)/$$f'"; \
-	    $(LIBTOOL) --mode=install $(setupmoduleLTLIBRARIES_INSTALL) $(INSTALL_STRIP_FLAG) "$$p" "$(DESTDIR)$(setupmoduledir)/$$f"; \
-	  else :; fi; \
-	done
-
-uninstall-setupmoduleLTLIBRARIES:
-	@$(NORMAL_UNINSTALL)
-	@set -x; list='$(setupmodule_LTLIBRARIES)'; for p in $$list; do \
-	  p=$(am__strip_dir) \
-	  echo " $(LIBTOOL) --mode=uninstall rm -f '$(DESTDIR)$(setupmoduledir)/$$p'"; \
-	  $(LIBTOOL) --mode=uninstall rm -f "$(DESTDIR)$(setupmoduledir)/$$p"; \
-	done
-
-clean-setupmoduleLTLIBRARIES:
-	-test -z "$(setupmodule_LTLIBRARIES)" || rm -f $(setupmodule_LTLIBRARIES)
-	@list='$(setupmodule_LTLIBRARIES)'; for p in $$list; do \
-	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
-	  test "$$dir" != "$$p" || dir=.; \
-	  echo "rm -f \"$${dir}/so_locations\""; \
-	  rm -f "$${dir}/so_locations"; \
-	done
-chewing-imengine-setup.la: $(chewing_imengine_setup_la_OBJECTS) $(chewing_imengine_setup_la_DEPENDENCIES) 
-	$(CXXLINK) $(am_chewing_imengine_setup_la_rpath) $(chewing_imengine_setup_la_LDFLAGS) $(chewing_imengine_setup_la_OBJECTS) $(chewing_imengine_setup_la_LIBADD) $(LIBS)
 chewing.la: $(chewing_la_OBJECTS) $(chewing_la_DEPENDENCIES) 
 	$(CXXLINK) -rpath $(moduledir) $(chewing_la_LDFLAGS) $(chewing_la_OBJECTS) $(chewing_la_LIBADD) $(LIBS)
 
@@ -368,7 +290,6 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chewing_imengine_setup_la-scim_chewing_imengine_setup.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chewing_la-scim_chewing_imengine.Plo@am__quote@
 
 .cpp.o:
@@ -391,13 +312,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ $<
-
-chewing_imengine_setup_la-scim_chewing_imengine_setup.lo: scim_chewing_imengine_setup.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(chewing_imengine_setup_la_CXXFLAGS) $(CXXFLAGS) -MT chewing_imengine_setup_la-scim_chewing_imengine_setup.lo -MD -MP -MF "$(DEPDIR)/chewing_imengine_setup_la-scim_chewing_imengine_setup.Tpo" -c -o chewing_imengine_setup_la-scim_chewing_imengine_setup.lo `test -f 'scim_chewing_imengine_setup.cpp' || echo '$(srcdir)/'`scim_chewing_imengine_setup.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/chewing_imengine_setup_la-scim_chewing_imengine_setup.Tpo" "$(DEPDIR)/chewing_imengine_setup_la-scim_chewing_imengine_setup.Plo"; else rm -f "$(DEPDIR)/chewing_imengine_setup_la-scim_chewing_imengine_setup.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='scim_chewing_imengine_setup.cpp' object='chewing_imengine_setup_la-scim_chewing_imengine_setup.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(chewing_imengine_setup_la_CXXFLAGS) $(CXXFLAGS) -c -o chewing_imengine_setup_la-scim_chewing_imengine_setup.lo `test -f 'scim_chewing_imengine_setup.cpp' || echo '$(srcdir)/'`scim_chewing_imengine_setup.cpp
 
 chewing_la-scim_chewing_imengine.lo: scim_chewing_imengine.cpp
 @am__fastdepCXX_TRUE@	if $(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(chewing_la_CXXFLAGS) $(CXXFLAGS) -MT chewing_la-scim_chewing_imengine.lo -MD -MP -MF "$(DEPDIR)/chewing_la-scim_chewing_imengine.Tpo" -c -o chewing_la-scim_chewing_imengine.lo `test -f 'scim_chewing_imengine.cpp' || echo '$(srcdir)/'`scim_chewing_imengine.cpp; \
@@ -465,6 +379,8 @@ distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
 
 distdir: $(DISTFILES)
+	$(am__remove_distdir)
+	mkdir $(distdir)
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
@@ -491,11 +407,108 @@ distdir: $(DISTFILES)
 	    || exit 1; \
 	  fi; \
 	done
+	-find $(distdir) -type d ! -perm -777 -exec chmod a+rwx {} \; -o \
+	  ! -type d ! -perm -444 -links 1 -exec chmod a+r {} \; -o \
+	  ! -type d ! -perm -400 -exec chmod a+r {} \; -o \
+	  ! -type d ! -perm -444 -exec $(SHELL) $(install_sh) -c -m a+r {} {} \; \
+	|| chmod -R a+r $(distdir)
+dist-gzip: distdir
+	tardir=$(distdir) && $(am__tar) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
+	$(am__remove_distdir)
+
+dist-bzip2: distdir
+	tardir=$(distdir) && $(am__tar) | bzip2 -9 -c >$(distdir).tar.bz2
+	$(am__remove_distdir)
+
+dist-tarZ: distdir
+	tardir=$(distdir) && $(am__tar) | compress -c >$(distdir).tar.Z
+	$(am__remove_distdir)
+
+dist-shar: distdir
+	shar $(distdir) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).shar.gz
+	$(am__remove_distdir)
+
+dist-zip: distdir
+	-rm -f $(distdir).zip
+	zip -rq $(distdir).zip $(distdir)
+	$(am__remove_distdir)
+
+dist dist-all: distdir
+	tardir=$(distdir) && $(am__tar) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
+	$(am__remove_distdir)
+
+# This target untars the dist file and tries a VPATH configuration.  Then
+# it guarantees that the distribution is self-contained by making another
+# tarfile.
+distcheck: dist
+	case '$(DIST_ARCHIVES)' in \
+	*.tar.gz*) \
+	  GZIP=$(GZIP_ENV) gunzip -c $(distdir).tar.gz | $(am__untar) ;;\
+	*.tar.bz2*) \
+	  bunzip2 -c $(distdir).tar.bz2 | $(am__untar) ;;\
+	*.tar.Z*) \
+	  uncompress -c $(distdir).tar.Z | $(am__untar) ;;\
+	*.shar.gz*) \
+	  GZIP=$(GZIP_ENV) gunzip -c $(distdir).shar.gz | unshar ;;\
+	*.zip*) \
+	  unzip $(distdir).zip ;;\
+	esac
+	chmod -R a-w $(distdir); chmod a+w $(distdir)
+	mkdir $(distdir)/_build
+	mkdir $(distdir)/_inst
+	chmod a-w $(distdir)
+	dc_install_base=`$(am__cd) $(distdir)/_inst && pwd | sed -e 's,^[^:\\/]:[\\/],/,'` \
+	  && dc_destdir="$${TMPDIR-/tmp}/am-dc-$$$$/" \
+	  && cd $(distdir)/_build \
+	  && ../configure --srcdir=.. --prefix="$$dc_install_base" \
+	    $(DISTCHECK_CONFIGURE_FLAGS) \
+	  && $(MAKE) $(AM_MAKEFLAGS) \
+	  && $(MAKE) $(AM_MAKEFLAGS) dvi \
+	  && $(MAKE) $(AM_MAKEFLAGS) check \
+	  && $(MAKE) $(AM_MAKEFLAGS) install \
+	  && $(MAKE) $(AM_MAKEFLAGS) installcheck \
+	  && $(MAKE) $(AM_MAKEFLAGS) uninstall \
+	  && $(MAKE) $(AM_MAKEFLAGS) distuninstallcheck_dir="$$dc_install_base" \
+	        distuninstallcheck \
+	  && chmod -R a-w "$$dc_install_base" \
+	  && ({ \
+	       (cd ../.. && umask 077 && mkdir "$$dc_destdir") \
+	       && $(MAKE) $(AM_MAKEFLAGS) DESTDIR="$$dc_destdir" install \
+	       && $(MAKE) $(AM_MAKEFLAGS) DESTDIR="$$dc_destdir" uninstall \
+	       && $(MAKE) $(AM_MAKEFLAGS) DESTDIR="$$dc_destdir" \
+	            distuninstallcheck_dir="$$dc_destdir" distuninstallcheck; \
+	      } || { rm -rf "$$dc_destdir"; exit 1; }) \
+	  && rm -rf "$$dc_destdir" \
+	  && $(MAKE) $(AM_MAKEFLAGS) dist \
+	  && rm -rf $(DIST_ARCHIVES) \
+	  && $(MAKE) $(AM_MAKEFLAGS) distcleancheck
+	$(am__remove_distdir)
+	@(echo "$(distdir) archives ready for distribution: "; \
+	  list='$(DIST_ARCHIVES)'; for i in $$list; do echo $$i; done) | \
+	  sed -e '1{h;s/./=/g;p;x;}' -e '$${p;x;}'
+distuninstallcheck:
+	@cd $(distuninstallcheck_dir) \
+	&& test `$(distuninstallcheck_listfiles) | wc -l` -le 1 \
+	   || { echo "ERROR: files left after uninstall:" ; \
+	        if test -n "$(DESTDIR)"; then \
+	          echo "  (check DESTDIR support)"; \
+	        fi ; \
+	        $(distuninstallcheck_listfiles) ; \
+	        exit 1; } >&2
+distcleancheck: distclean
+	@if test '$(srcdir)' = . ; then \
+	  echo "ERROR: distcleancheck can only run from a VPATH build" ; \
+	  exit 1 ; \
+	fi
+	@test `$(distcleancheck_listfiles) | wc -l` -eq 0 \
+	  || { echo "ERROR: files left in build directory after distclean:" ; \
+	       $(distcleancheck_listfiles) ; \
+	       exit 1; } >&2
 check-am: all-am
 check: check-am
 all-am: Makefile $(LTLIBRARIES) $(HEADERS)
 installdirs:
-	for dir in "$(DESTDIR)$(moduledir)" "$(DESTDIR)$(setupmoduledir)"; do \
+	for dir in "$(DESTDIR)$(moduledir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-am
@@ -526,9 +539,10 @@ maintainer-clean-generic:
 clean: clean-am
 
 clean-am: clean-generic clean-libtool clean-moduleLTLIBRARIES \
-	clean-setupmoduleLTLIBRARIES mostlyclean-am
+	mostlyclean-am
 
 distclean: distclean-am
+	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
@@ -544,8 +558,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-moduleLTLIBRARIES \
-	install-setupmoduleLTLIBRARIES
+install-data-am: install-moduleLTLIBRARIES
 
 install-exec-am:
 
@@ -556,6 +569,8 @@ install-man:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
+	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
+	-rm -rf $(top_srcdir)/autom4te.cache
 	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
@@ -573,24 +588,47 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-info-am uninstall-moduleLTLIBRARIES \
-	uninstall-setupmoduleLTLIBRARIES
+uninstall-am: uninstall-info-am uninstall-moduleLTLIBRARIES
 
-.PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
-	clean-libtool clean-moduleLTLIBRARIES \
-	clean-setupmoduleLTLIBRARIES ctags distclean distclean-compile \
-	distclean-generic distclean-libtool distclean-tags distdir dvi \
-	dvi-am html html-am info info-am install install-am \
-	install-data install-data-am install-exec install-exec-am \
-	install-info install-info-am install-man \
-	install-moduleLTLIBRARIES install-setupmoduleLTLIBRARIES \
-	install-strip installcheck installcheck-am installdirs \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
-	pdf pdf-am ps ps-am tags uninstall uninstall-am \
-	uninstall-info-am uninstall-moduleLTLIBRARIES \
-	uninstall-setupmoduleLTLIBRARIES
+.PHONY: CTAGS GTAGS all all-am am--refresh check check-am clean \
+	clean-generic clean-libtool clean-moduleLTLIBRARIES ctags dist \
+	dist-all dist-bzip2 dist-gzip dist-shar dist-tarZ dist-zip \
+	distcheck distclean distclean-compile distclean-generic \
+	distclean-libtool distclean-tags distcleancheck distdir \
+	distuninstallcheck dvi dvi-am html html-am info info-am \
+	install install-am install-data install-data-am install-exec \
+	install-exec-am install-info install-info-am install-man \
+	install-moduleLTLIBRARIES install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags uninstall uninstall-am uninstall-info-am \
+	uninstall-moduleLTLIBRARIES
 
+
+#if SCIM_BUILD_SETUP
+#SETUP_MODULE = chewing-imengine-setup.la
+#endif
+
+#setupmoduledir = @SCIM_MODULEDIR@/SetupUI
+#setupmodule_LTLIBRARIES = $(SETUP_MODULE)
+
+#chewing_imengine_setup_la_SOURCES = scim_chewing_imengine_setup.cpp
+
+#chewing_imengine_setup_la_CFLAGS = \
+#	@SCIM_GTKUTILS_CFLAGS@ @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
+
+#chewing_imengine_setup_la_CXXFLAGS = \
+#	@SCIM_GTKUTILS_CFLAGS@ @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
+
+#chewing_imengine_setup_la_LDFLAGS = \
+#	-avoid-version \
+#	-rpath $(setupmoduledir) \
+#	-module \
+#	@LIBTOOL_EXPORT_OPTIONS@ \
+#	@SCIM_GTKUTILS_LIBS@ \
+#	@INTLLIBS@ \
+#	@SCIM_LIBS@
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
