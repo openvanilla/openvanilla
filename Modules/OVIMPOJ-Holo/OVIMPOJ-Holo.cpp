@@ -19,9 +19,9 @@ const char* OVIMPOJHolo::identifier() {
 }
 
 const char* OVIMPOJHolo::localizedName(const char *cfge) {
-    if (!strcasecmp(cfge, "zh_TW")) return "河洛白話字漢羅 (POJ) new";
-    if (!strcasecmp(cfge, "zh_CN")) return "河洛白話字汉罗 (POJ) new";    
-    return "OV Holo Pe̍h-ōe-jī (POJ) new";
+    if (!strcasecmp(cfge, "zh_TW")) return "河洛白話字漢羅 (POJ)";
+    if (!strcasecmp(cfge, "zh_CN")) return "河洛白話字汉罗 (POJ)";    
+    return "OV Holo Pe̍h-ōe-jī (POJ)";
 }
 
 int OVIMPOJHolo::initialize(OVDictionary* cfg, OVService* s, const char* lp) {    
