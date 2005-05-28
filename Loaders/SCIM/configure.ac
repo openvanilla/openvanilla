@@ -1,6 +1,6 @@
 AC_INIT(scim-openvanilla, 0.1.0, openvanilla.org)
 AM_INIT_AUTOMAKE
-AC_CONFIG_SRCDIR([SCIMOV.cpp])
+AC_CONFIG_SRCDIR([src/SCIMOV.cpp])
 
 cflags_set=${CFLAGS+set}
 cppflags_set=${CPPFLAGS+set}
@@ -51,5 +51,5 @@ AC_SUBST(SCIM_MODULEDIR)
 AC_SUBST(SCIM_DATADIR)
 
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile])
 AC_OUTPUT
