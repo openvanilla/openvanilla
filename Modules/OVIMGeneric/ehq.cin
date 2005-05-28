@@ -644,6 +644,11 @@ erase ⌫
 eject ⏏
 enter ⏎
 return ⏎
+shift ⇧
+esc ⎋
+ctrl ⌤
+cap ⇪
+caplock ⇪
 time ⌛
 sun ☀
 sun ☼
@@ -1167,7 +1172,6 @@ age ㍾
 " ❞
 ++ ‡
 ? ¿
-
 a` à
 a` À
 a' á
@@ -1229,5 +1233,6 @@ y' Ý
 thorn þ
 thorn Þ
 s ß
+ss ß
 y: ÿ
 %chardef end
