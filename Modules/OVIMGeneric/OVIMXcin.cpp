@@ -255,9 +255,11 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar,
     // pre-IM key filters</comment>
     if (key->isOpt() || key->isCommand() || key->isCtrl())
     {
-        cancelAutoCompose(textbar);
-        buf->clear()->update();
-        keyseq.clear();
+        if (!buf->isEmpty()) {
+            cancelAutoCompose(textbar);
+            buf->clear()->update();
+            keyseq.clear();
+        }
         return 0;
     }
     
