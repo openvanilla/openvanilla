@@ -1,1 +1,0 @@
-// scim_chewing_imengine.h: a stub header file

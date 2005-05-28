@@ -14,8 +14,7 @@
 
 @SET_MAKE@
 
-
-SOURCES = $(chewing_la_SOURCES)
+SOURCES = $(scim_ov_la_SOURCES)
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -39,10 +38,9 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-DIST_COMMON = $(am__configure_deps) $(noinst_HEADERS) \
-	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(top_srcdir)/configure config.guess config.sub depcomp \
-	install-sh ltmain.sh missing
+DIST_COMMON = $(am__configure_deps) $(srcdir)/Makefile.am \
+	$(srcdir)/Makefile.in $(top_srcdir)/configure config.guess \
+	config.sub depcomp install-sh ltmain.sh missing
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -61,9 +59,9 @@ am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
 am__installdirs = "$(DESTDIR)$(moduledir)"
 moduleLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(module_LTLIBRARIES)
-chewing_la_LIBADD =
-am_chewing_la_OBJECTS = chewing_la-scim_chewing_imengine.lo
-chewing_la_OBJECTS = $(am_chewing_la_OBJECTS)
+scim_ov_la_LIBADD =
+am_scim_ov_la_OBJECTS = scim_ov_la-SCIMOV.lo
+scim_ov_la_OBJECTS = $(am_scim_ov_la_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -75,9 +73,8 @@ LTCXXCOMPILE = $(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) \
 CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --tag=CXX --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(chewing_la_SOURCES)
-DIST_SOURCES = $(chewing_la_SOURCES)
-HEADERS = $(noinst_HEADERS)
+SOURCES = $(scim_ov_la_SOURCES)
+DIST_SOURCES = $(scim_ov_la_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -203,13 +200,14 @@ INCLUDES = \
 	-DSCIM_ICONDIR=\"@SCIM_ICONDIR@\" \
 	-DSCIM_CHEWING_ICON_FILE=\"@SCIM_ICONDIR@/scim-chewing.png\"
 
-noinst_HEADERS = scim_chewing_imengine.h scim_chewing_config_entry.h
+
+#noinst_HEADERS = scim_chewing_imengine.h scim_chewing_config_entry.h
 moduledir = @SCIM_MODULEDIR@/IMEngine
-module_LTLIBRARIES = chewing.la
-chewing_la_SOURCES = scim_chewing_imengine.cpp
-chewing_la_CFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
-chewing_la_CXXFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
-chewing_la_LDFLAGS = \
+module_LTLIBRARIES = scim_ov.la
+scim_ov_la_SOURCES = SCIMOV.cpp
+scim_ov_la_CFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
+scim_ov_la_CXXFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
+scim_ov_la_LDFLAGS = \
 	-avoid-version \
 	-rpath $(moduledir) \
 	-module \
@@ -281,8 +279,8 @@ clean-moduleLTLIBRARIES:
 	  echo "rm -f \"$${dir}/so_locations\""; \
 	  rm -f "$${dir}/so_locations"; \
 	done
-chewing.la: $(chewing_la_OBJECTS) $(chewing_la_DEPENDENCIES) 
-	$(CXXLINK) -rpath $(moduledir) $(chewing_la_LDFLAGS) $(chewing_la_OBJECTS) $(chewing_la_LIBADD) $(LIBS)
+scim_ov.la: $(scim_ov_la_OBJECTS) $(scim_ov_la_DEPENDENCIES) 
+	$(CXXLINK) -rpath $(moduledir) $(scim_ov_la_LDFLAGS) $(scim_ov_la_OBJECTS) $(scim_ov_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -290,7 +288,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chewing_la-scim_chewing_imengine.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/scim_ov_la-SCIMOV.Plo@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
@@ -313,12 +311,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ $<
 
-chewing_la-scim_chewing_imengine.lo: scim_chewing_imengine.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(chewing_la_CXXFLAGS) $(CXXFLAGS) -MT chewing_la-scim_chewing_imengine.lo -MD -MP -MF "$(DEPDIR)/chewing_la-scim_chewing_imengine.Tpo" -c -o chewing_la-scim_chewing_imengine.lo `test -f 'scim_chewing_imengine.cpp' || echo '$(srcdir)/'`scim_chewing_imengine.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/chewing_la-scim_chewing_imengine.Tpo" "$(DEPDIR)/chewing_la-scim_chewing_imengine.Plo"; else rm -f "$(DEPDIR)/chewing_la-scim_chewing_imengine.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='scim_chewing_imengine.cpp' object='chewing_la-scim_chewing_imengine.lo' libtool=yes @AMDEPBACKSLASH@
+scim_ov_la-SCIMOV.lo: SCIMOV.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(scim_ov_la_CXXFLAGS) $(CXXFLAGS) -MT scim_ov_la-SCIMOV.lo -MD -MP -MF "$(DEPDIR)/scim_ov_la-SCIMOV.Tpo" -c -o scim_ov_la-SCIMOV.lo `test -f 'SCIMOV.cpp' || echo '$(srcdir)/'`SCIMOV.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/scim_ov_la-SCIMOV.Tpo" "$(DEPDIR)/scim_ov_la-SCIMOV.Plo"; else rm -f "$(DEPDIR)/scim_ov_la-SCIMOV.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='SCIMOV.cpp' object='scim_ov_la-SCIMOV.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(chewing_la_CXXFLAGS) $(CXXFLAGS) -c -o chewing_la-scim_chewing_imengine.lo `test -f 'scim_chewing_imengine.cpp' || echo '$(srcdir)/'`scim_chewing_imengine.cpp
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(scim_ov_la_CXXFLAGS) $(CXXFLAGS) -c -o scim_ov_la-SCIMOV.lo `test -f 'SCIMOV.cpp' || echo '$(srcdir)/'`SCIMOV.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -506,7 +504,7 @@ distcleancheck: distclean
 	       exit 1; } >&2
 check-am: all-am
 check: check-am
-all-am: Makefile $(LTLIBRARIES) $(HEADERS)
+all-am: Makefile $(LTLIBRARIES)
 installdirs:
 	for dir in "$(DESTDIR)$(moduledir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
@@ -605,30 +603,6 @@ uninstall-am: uninstall-info-am uninstall-moduleLTLIBRARIES
 	tags uninstall uninstall-am uninstall-info-am \
 	uninstall-moduleLTLIBRARIES
 
-
-#if SCIM_BUILD_SETUP
-#SETUP_MODULE = chewing-imengine-setup.la
-#endif
-
-#setupmoduledir = @SCIM_MODULEDIR@/SetupUI
-#setupmodule_LTLIBRARIES = $(SETUP_MODULE)
-
-#chewing_imengine_setup_la_SOURCES = scim_chewing_imengine_setup.cpp
-
-#chewing_imengine_setup_la_CFLAGS = \
-#	@SCIM_GTKUTILS_CFLAGS@ @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
-
-#chewing_imengine_setup_la_CXXFLAGS = \
-#	@SCIM_GTKUTILS_CFLAGS@ @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
-
-#chewing_imengine_setup_la_LDFLAGS = \
-#	-avoid-version \
-#	-rpath $(setupmoduledir) \
-#	-module \
-#	@LIBTOOL_EXPORT_OPTIONS@ \
-#	@SCIM_GTKUTILS_LIBS@ \
-#	@INTLLIBS@ \
-#	@SCIM_LIBS@
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
