@@ -150,7 +150,9 @@ void CVLoader::menuHandler(unsigned int cmd) {
         }
 		
 		// overwrite lastPrimaryInputMethod key
-		[loaderdict setValue:pIM forKey:@"lastPrimaryInputMethod"];		
+        NSString *npIM=[NSString stringWithString: [loaderdict valueForKey:@"primaryInputMethod" default:@""]];
+        if (![npIM isEqualToString:pIM])
+            [loaderdict setValue:pIM forKey:@"lastPrimaryInputMethod"];		
         return;
     }
 
