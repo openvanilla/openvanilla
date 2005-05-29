@@ -7,7 +7,7 @@ INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(top_srcdir)/src \
 	-I../../../Headers/ \
-	-DSCIMOV_MODULEDIR=\"@SCIMOV_MODULEDIR@\" \
+	-DOV_MODULEDIR=\"@OV_MODULEDIR@\" \
 	-DSCIM_ICONDIR=\"@SCIM_ICONDIR@\" \
 	-DSCIM_CHEWING_ICON_FILE=\"@SCIM_ICONDIR@/scim-chewing.png\" 
 	
@@ -15,15 +15,15 @@ INCLUDES = \
 #noinst_HEADERS = scim_chewing_imengine.h scim_chewing_config_entry.h
 
 moduledir = @SCIM_MODULEDIR@/IMEngine
-module_LTLIBRARIES = scim_ov.la
+module_LTLIBRARIES = OVLoader-SCIM.la
 
-scim_ov_la_SOURCES  = SCIMOV.cpp
+OVLoader_SCIM_la_SOURCES  = OVLoader-SCIM.cpp
 
-scim_ov_la_CFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
-scim_ov_la_CXXFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
+OVLoader_SCIM_la_CFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
+OVLoader_SCIM_la_CXXFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
 
-scim_ov_la_LIBADD = -lltdl
-scim_ov_la_LDFLAGS = \
+OVLoader_SCIM_la_LIBADD = -lltdl
+OVLoader_SCIM_la_LDFLAGS = \
 	-avoid-version \
 	-rpath $(moduledir) \
 	-module \

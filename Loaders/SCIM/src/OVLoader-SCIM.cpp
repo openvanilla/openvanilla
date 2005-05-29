@@ -9,8 +9,8 @@
 #define Uses_SCIM_DEBUG
 #define Uses_SCIM_C_STRING
 
+#include "OVLoader-SCIM.h"
 #include <stdio.h>
-#include "SCIMOV.h"
 #include <sys/types.h>
 #include <dirent.h>
 
@@ -21,7 +21,7 @@ static int scan_ov_modules();
 
 extern "C" void scim_module_init() {
    lt_dlinit();
-   lt_dlsetsearchpath(SCIMOV_MODULEDIR);
+   lt_dlsetsearchpath(OV_MODULEDIR);
 }
 
 extern "C" void scim_module_exit() {
@@ -64,7 +64,7 @@ static OVModuleEntry* open_module(const char* modname){
 }
 
 static int scan_ov_modules(){
-   DIR* dir = opendir(SCIMOV_MODULEDIR);
+   DIR* dir = opendir(OV_MODULEDIR);
    if(dir){
       struct dirent *d_ent;
       while( (d_ent = readdir(dir)) != NULL ){

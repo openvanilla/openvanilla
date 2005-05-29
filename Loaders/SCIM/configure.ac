@@ -1,6 +1,6 @@
 AC_INIT(scim-openvanilla, 0.1.0, openvanilla.org)
 AM_INIT_AUTOMAKE
-AC_CONFIG_SRCDIR([src/SCIMOV.cpp])
+AC_CONFIG_SRCDIR([src/OVLoader-SCIM.cpp])
 
 cflags_set=${CFLAGS+set}
 cppflags_set=${CPPFLAGS+set}
@@ -50,12 +50,12 @@ if test "x$SCIM_MODULEDIR" = "x"; then
    SCIM_MODULEDIR=${libdir}/scim-1.0
 fi
 
-SCIMOV_MODULEDIR="$SCIM_MODULEDIR/scim-ov"
+OV_MODULEDIR="/usr/local/lib/openvanilla"
     
 AC_SUBST(SCIM_ICONDIR)
 AC_SUBST(SCIM_MODULEDIR)
 AC_SUBST(SCIM_DATADIR)
-AC_SUBST(SCIMOV_MODULEDIR)
+AC_SUBST(OV_MODULEDIR)
 
 
 AC_CONFIG_FILES([Makefile src/Makefile])
