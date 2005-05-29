@@ -50,7 +50,7 @@ if test "x$SCIM_MODULEDIR" = "x"; then
    SCIM_MODULEDIR=${libdir}/scim-1.0
 fi
 
-OV_MODULEDIR="/usr/local/lib/openvanilla"
+OV_MODULEDIR="/usr/local/lib/openvanilla/"
     
 AC_SUBST(SCIM_ICONDIR)
 AC_SUBST(SCIM_MODULEDIR)

@@ -91,7 +91,7 @@ OVSCIMFactory::OVSCIMFactory(OVModule *i, const ConfigPointer& config) {
        fprintf(stderr, "dynamic_cast OVInputMethod* failed\n");
 	DummyDictionary dict;
 	DummyService srv;
-    im->initialize(&dict, &srv, "/tmp/");
+    im->initialize(&dict, &srv, OV_MODULEDIR);
 }
 
 OVSCIMFactory::~OVSCIMFactory() {
