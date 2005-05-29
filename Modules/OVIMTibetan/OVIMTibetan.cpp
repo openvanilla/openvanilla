@@ -188,12 +188,13 @@ class OVTibetanContext : public OVInputMethodContext
 		  else
 			  srv->notify("Stacking characters..");
 	       }
+	       buf->update();
 	       return 1;   // key processed
 	    }
 
 	    if((j = isFinalAddKey(keycode)) > -1)	// Final M or N
 	    {
-	       if(keyseq.buf[0]=='f' && keyseq.len == 1) return 1;
+	       if(keyseq.buf[0]== ComposeKey[keyboardlayout] && keyseq.len == 1) return 1;
 	       if(keyseq.last || keyseq.len){
 		  i = FinalAddChars[j];
 		  u8=srv->UTF16ToUTF8(&i, 1);
