@@ -6,6 +6,7 @@ INCLUDES = \
 	-I$(top_builddir) \
 	-I$(top_srcdir) \
 	-I$(top_srcdir)/src \
+	-I../../../Headers/ \
 	-DSCIM_ICONDIR=\"@SCIM_ICONDIR@\" \
 	-DSCIM_CHEWING_ICON_FILE=\"@SCIM_ICONDIR@/scim-chewing.png\"
 
