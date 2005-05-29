@@ -20,6 +20,7 @@ scim_ov_la_SOURCES  = SCIMOV.cpp
 scim_ov_la_CFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
 scim_ov_la_CXXFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
 
+scim_ov_la_LIBADD = -lltdl
 scim_ov_la_LDFLAGS = \
 	-avoid-version \
 	-rpath $(moduledir) \

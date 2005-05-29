@@ -11,48 +11,61 @@
 
 #include <stdio.h>
 #include "SCIMOV.h"
-#include "OVPhoneticLib.cpp"
-#include "OVIMTibetan-SCIM.cpp"
-#include "OVIMPhoneticStatic-SCIM.cpp"
-
-extern "C" {
-    #include "OVPhoneticData.c"
-};
+#include <ltdl.h>
 
 using namespace scim;
 
 static ConfigPointer _scim_config(0);
 
 extern "C" void scim_module_init() {
+   lt_dlinit();
+   lt_dlsetsearchpath("/tmp");
 }
 
 extern "C" void scim_module_exit() {
     _scim_config.reset();
+    lt_dlexit();
 }
 
 extern "C" unsigned int scim_imengine_module_init(const ConfigPointer& c) {
     _scim_config=c;
-    return 2;
+    return 1;
 }
 
+typedef OVModule* (*TypeCreateModule)(int) ;
 extern "C" IMEngineFactoryPointer scim_imengine_module_create_factory(uint32 e)
 {
+    lt_dlhandle mod = lt_dlopenext("OVIMArray");
+    if(mod != NULL){
+      lt_ptr createModule = lt_dlsym( mod, "OVGetModuleFromLibrary" );
+      TypeCreateModule f = (TypeCreateModule)(createModule);
+
+      if( createModule != NULL)
+         return new OVSCIMFactory((*f)(0), _scim_config);
+      else
+         fprintf(stderr, "dlsym failed\n");
+    }
+    else
+       fprintf(stderr, "dlopen failed\n");
+    /*
     // we have only one engine
     switch (e) {
         case 0: return new OVSCIMFactory(new OVIMPhoneticStatic, _scim_config);
         case 1: return new OVSCIMFactory(new OVIMTibetan, _scim_config);
     }
-    
+    */
     return IMEngineFactoryPointer(0);
 }
 
 // OVSCIMFactory
 
-OVSCIMFactory::OVSCIMFactory(OVInputMethod *i, const ConfigPointer& config) {
+OVSCIMFactory::OVSCIMFactory(OVModule *i, const ConfigPointer& config) {
     fprintf(stderr, "SCIM-OpenVanilla IMFactory init! id=%s\n", i->identifier());
 	set_languages("zh_TW,zh_HK,zh_SG");
 	
-	im=i;
+	im = dynamic_cast<OVInputMethod*>(i);
+    if(!im)
+       fprintf(stderr, "dynamic_cast OVInputMethod* failed\n");
 	DummyDictionary dict;
 	DummyService srv;
     im->initialize(&dict, &srv, "/tmp/");

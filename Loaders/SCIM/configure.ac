@@ -6,8 +6,12 @@ cflags_set=${CFLAGS+set}
 cppflags_set=${CPPFLAGS+set}
 
 AC_PROG_CXX
-AC_PROG_LIBTOOL
 AC_LANG(C++)
+
+AC_LIBTOOL_DLOPEN
+AC_PROG_LIBTOOL
+AC_LIB_LTDL
+AC_SUBST(LIBTOOL_DEPS)
 
 # SCIM variables
 

@@ -11,7 +11,7 @@ using namespace scim;
 
 class OVSCIMFactory : public IMEngineFactoryBase {
 public:
-    OVSCIMFactory(OVInputMethod *i, const ConfigPointer& config);
+    OVSCIMFactory(OVModule *i, const ConfigPointer& config);
     virtual ~OVSCIMFactory();
 
 	virtual WideString get_name() const;
