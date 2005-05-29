@@ -1,6 +1,7 @@
 OS=`uname`
 
-ifeq ($(OS), Darwin)
+ifeq ("$(shell uname)", "Darwin")
+
 	INST_PATH=/Library/OpenVanilla/0.7.0/Modules/
 	OBJS=$(patsubst %, %.o, $(SOURCES))
 	GOALS=$(IMID).dylib
@@ -11,7 +12,10 @@ $(GOALS): $(OBJS)
 install-goal:
 	$(CP) $(GOALS) $(INST_PATH)
 
+
 else
+
+
 	INST_PATH=/usr/local/lib/openvanilla/
 	OBJS=$(patsubst %, %.lo, $(SOURCES))
 	GOALS=$(IMID).la
@@ -23,4 +27,5 @@ $(GOALS): $(OBJS)
 install-goal:
 	$(MKDIR) $(INST_PATH)
 	$(LIBTOOL) --mode=install install $(GOALS) $(INST_PATH)
+
 endif
