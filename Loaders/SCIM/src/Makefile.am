@@ -7,8 +7,10 @@ INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(top_srcdir)/src \
 	-I../../../Headers/ \
+	-DSCIMOV_MODULEDIR=\"@SCIMOV_MODULEDIR@\" \
 	-DSCIM_ICONDIR=\"@SCIM_ICONDIR@\" \
-	-DSCIM_CHEWING_ICON_FILE=\"@SCIM_ICONDIR@/scim-chewing.png\"
+	-DSCIM_CHEWING_ICON_FILE=\"@SCIM_ICONDIR@/scim-chewing.png\" 
+	
 
 #noinst_HEADERS = scim_chewing_imengine.h scim_chewing_config_entry.h
 

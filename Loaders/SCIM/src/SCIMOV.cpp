@@ -11,15 +11,17 @@
 
 #include <stdio.h>
 #include "SCIMOV.h"
-#include <ltdl.h>
+#include <sys/types.h>
+#include <dirent.h>
 
 using namespace scim;
 
 static ConfigPointer _scim_config(0);
+static int scan_ov_modules();
 
 extern "C" void scim_module_init() {
    lt_dlinit();
-   lt_dlsetsearchpath("/tmp");
+   lt_dlsetsearchpath(SCIMOV_MODULEDIR);
 }
 
 extern "C" void scim_module_exit() {
@@ -29,32 +31,53 @@ extern "C" void scim_module_exit() {
 
 extern "C" unsigned int scim_imengine_module_init(const ConfigPointer& c) {
     _scim_config=c;
-    return 1;
+    return scan_ov_modules();
 }
 
-typedef OVModule* (*TypeCreateModule)(int) ;
 extern "C" IMEngineFactoryPointer scim_imengine_module_create_factory(uint32 e)
 {
-    lt_dlhandle mod = lt_dlopenext("OVIMArray");
-    if(mod != NULL){
-      lt_ptr createModule = lt_dlsym( mod, "OVGetModuleFromLibrary" );
-      TypeCreateModule f = (TypeCreateModule)(createModule);
-
-      if( createModule != NULL)
-         return new OVSCIMFactory((*f)(0), _scim_config);
-      else
-         fprintf(stderr, "dlsym failed\n");
-    }
-    else
-       fprintf(stderr, "dlopen failed\n");
-    /*
-    // we have only one engine
-    switch (e) {
-        case 0: return new OVSCIMFactory(new OVIMPhoneticStatic, _scim_config);
-        case 1: return new OVSCIMFactory(new OVIMTibetan, _scim_config);
-    }
-    */
+    if( e < mod_vector.size() )
+       return new OVSCIMFactory( mod_vector[e]->getModule(0), _scim_config );
     return IMEngineFactoryPointer(0);
+}
+
+static OVModuleEntry* open_module(const char* modname){
+   OVModuleEntry* mod = new OVModuleEntry();
+   mod->handle = lt_dlopen(modname);
+   if(mod->handle == NULL){
+      fprintf(stderr, "dlopen %s failed\n", modname);
+      delete mod;
+      return NULL;
+   }
+   mod->getModule = (TypeGetModule)lt_dlsym( mod->handle, 
+                                             "OVGetModuleFromLibrary" );
+   mod->getLibVersion = (TypeGetLibVersion)lt_dlsym( mod->handle, 
+                                             "OVGetLibraryVersion" );
+   mod->initLibrary = (TypeInitLibrary)lt_dlsym( mod->handle,
+                                             "OVInitializeLibrary" );
+   if( !mod->getModule || !mod->getLibVersion || !mod->initLibrary ){
+      fprintf(stderr, "dlsym %s failed\n", modname);
+      delete mod;
+      return NULL;
+   }
+   return mod;
+}
+
+static int scan_ov_modules(){
+   DIR* dir = opendir(SCIMOV_MODULEDIR);
+   if(dir){
+      struct dirent *d_ent;
+      while( (d_ent = readdir(dir)) != NULL ){
+         if( strstr( d_ent->d_name, ".la" ) ){
+            fprintf(stderr,  "Load OV module: %s\n", d_ent->d_name);
+            OVModuleEntry* mod = open_module(d_ent->d_name);
+            if(mod)
+               mod_vector.push_back(mod);
+         }
+      }
+      closedir(dir);
+   }
+   return mod_vector.size();
 }
 
 // OVSCIMFactory

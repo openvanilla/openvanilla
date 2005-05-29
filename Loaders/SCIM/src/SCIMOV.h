@@ -8,6 +8,20 @@ using namespace scim;
 
 #include "OpenVanilla.h"
 #include "DummyLoader.h"
+#include <ltdl.h>
+#include <vector>
+
+typedef OVModule* (*TypeGetModule)(int);
+typedef int (*TypeInitLibrary)(OVService*, const char*);
+typedef unsigned int (*TypeGetLibVersion)();
+struct OVModuleEntry {
+   lt_dlhandle handle;
+   TypeGetModule getModule;
+   TypeInitLibrary initLibrary;
+   TypeGetLibVersion getLibVersion;
+};
+
+std::vector<OVModuleEntry*> mod_vector;
 
 class OVSCIMFactory : public IMEngineFactoryBase {
 public:
