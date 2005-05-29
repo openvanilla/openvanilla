@@ -2,7 +2,7 @@ OS=`uname`
 
 ifeq ($(OS), Darwin)
 	INST_PATH=/Library/OpenVanilla/0.7.0/Modules/
-	OBJS=$(SOURCES:.cpp=.o)
+	OBJS=$(patsubst %, %.o, $(SOURCES))
 	GOALS=$(IMID).dylib
 
 $(GOALS): $(OBJS)
@@ -13,7 +13,7 @@ install-goal:
 
 else
 	INST_PATH=/usr/local/lib/openvanilla/
-	OBJS=$(SOURCES:.cpp=.lo)
+	OBJS=$(patsubst %, %.lo, $(SOURCES))
 	GOALS=$(IMID).la
 	#CFLAGS=-I/usr/local/include/ -I../../Headers/
 

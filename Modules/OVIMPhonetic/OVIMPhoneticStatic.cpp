@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <sys/syslimits.h>
+//#include <sys/syslimits.h>
 #include "OVPhoneticLib.h"
 
 extern unsigned short ovPhoneticData[];
