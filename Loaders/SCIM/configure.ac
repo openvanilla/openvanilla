@@ -1,4 +1,6 @@
-AC_INIT(scim-openvanilla, 0.1.0, openvanilla.org)
+AC_PREREQ(2.59)
+
+AC_INIT(OVLoader-SCIM, 0.1.0, openvanilla.org)
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/OVLoader-SCIM.cpp])
 
@@ -12,12 +14,17 @@ AC_LIBTOOL_DLOPEN
 AC_PROG_LIBTOOL
 AC_LIB_LTDL
 AC_SUBST(LIBTOOL_DEPS)
+#AC_CHECK_HEADERS(ltdl.h)
+#AC_CHECK_LIB(ltdl, lt_dlopen, [LTDL_LIBS="-lltdl"])
+#AC_SUBST(INCLTDL)
+#AC_SUBST(LIBLTDL)
 
 # SCIM variables
 
-SCIM_VERSION=1.0.0
+SCIM_VERSION=1.2.0
 PKG_CHECK_MODULES(SCIM, [scim >= $SCIM_VERSION])
 
+AC_SUBST(SCIM_VERSION)
 
 # Extra args.
 AC_ARG_ENABLE(debug,
@@ -36,6 +43,16 @@ else
   SCIM_DEBUG_FLAGS=""
 fi
 AC_SUBST(SCIM_DEBUG_FLAGS)
+
+# Checks for header files.
+AC_HEADER_STDC
+
+# Checks for library functions.
+AC_SUBST(ac_aux_dir)
+
+# libtool option to control which symbols are exported
+# right now, symbols starting with _ are not exported
+LIBTOOL_EXPORT_OPTIONS='-export-symbols-regex "^[[^_]].*"'
 
 
 SCIM_ICONDIR=`pkg-config --variable=icondir scim`

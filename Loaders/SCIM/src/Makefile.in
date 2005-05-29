@@ -137,10 +137,12 @@ SCIM_DEBUG_FLAGS = @SCIM_DEBUG_FLAGS@
 SCIM_ICONDIR = @SCIM_ICONDIR@
 SCIM_LIBS = @SCIM_LIBS@
 SCIM_MODULEDIR = @SCIM_MODULEDIR@
+SCIM_VERSION = @SCIM_VERSION@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 VERSION = @VERSION@
+ac_aux_dir = @ac_aux_dir@
 ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
@@ -200,16 +202,16 @@ INCLUDES = \
 moduledir = @SCIM_MODULEDIR@/IMEngine
 module_LTLIBRARIES = OVLoader-SCIM.la
 OVLoader_SCIM_la_SOURCES = OVLoader-SCIM.cpp
-OVLoader_SCIM_la_CFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
-OVLoader_SCIM_la_CXXFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
+OVLoader_SCIM_la_CFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@ -I/usr/local/include
+OVLoader_SCIM_la_CXXFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@ -I/usr/local/include
 OVLoader_SCIM_la_LIBADD = -lltdl
 OVLoader_SCIM_la_LDFLAGS = \
+	-L/usr/local/lib \
 	-avoid-version \
 	-rpath $(moduledir) \
 	-module \
 	@LIBTOOL_EXPORT_OPTIONS@ \
-	@INTLLIBS@ @SCIM_LIBS@ \
-	@CHEWING_LIBS@
+	@INTLLIBS@ @SCIM_LIBS@ 
 
 all: all-am
 

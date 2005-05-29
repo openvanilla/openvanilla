@@ -19,15 +19,15 @@ module_LTLIBRARIES = OVLoader-SCIM.la
 
 OVLoader_SCIM_la_SOURCES  = OVLoader-SCIM.cpp
 
-OVLoader_SCIM_la_CFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
-OVLoader_SCIM_la_CXXFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@
+OVLoader_SCIM_la_CFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@ -I/usr/local/include
+OVLoader_SCIM_la_CXXFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@ -I/usr/local/include
 
 OVLoader_SCIM_la_LIBADD = -lltdl
 OVLoader_SCIM_la_LDFLAGS = \
+	-L/usr/local/lib \
 	-avoid-version \
 	-rpath $(moduledir) \
 	-module \
 	@LIBTOOL_EXPORT_OPTIONS@ \
-	@INTLLIBS@ @SCIM_LIBS@ \
-	@CHEWING_LIBS@
+	@INTLLIBS@ @SCIM_LIBS@ 
 
