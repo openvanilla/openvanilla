@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "OpenVanilla.h"
+#include "DummyDictionary.h"
 
 using namespace scim;
 class DummyBuffer;
@@ -130,28 +131,6 @@ protected:
     int onscreen;
 };
 
-// Abstract interface for a simple dictionary. It is recommended that this
-// dictionary be implemented as a type-free dictionary, i.e. you can replace
-// the key with any value of any type, and type conversion between integer and
-// string is done transparently, like what is done in e.g. sqlite3.
-class DummyDictionary : public OVDictionary {
-public:
-    virtual int keyExist(const char *key) {
-        return 0;
-    }
-    virtual int getInteger(const char *key) {
-        return 0;
-    }
-    virtual int setInteger(const char *key, int value) {
-        return value;
-    }
-    virtual const char* getString(const char *key) {
-        return "123456789";
-    }
-    virtual const char* setString(const char *key, const char *value) {
-        return value;
-    }
-};
 
 // we borrow this function from OVPhoneticLib.cpp to help us do UTF-16->UTF-8
 const char *VPUTF16ToUTF8(unsigned short *s, int l);

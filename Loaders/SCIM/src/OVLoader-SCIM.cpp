@@ -101,7 +101,6 @@ OVSCIMFactory::OVSCIMFactory(OVModule *i, const ConfigPointer& config) {
     im = dynamic_cast<OVInputMethod*>(i);
     if(!im)
        fprintf(stderr, "dynamic_cast OVInputMethod* failed\n");
-    DummyDictionary dict;
     DummyService srv;
     im->initialize(&dict, &srv, OV_MODULEDIR);
 }

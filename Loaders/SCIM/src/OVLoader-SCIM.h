@@ -40,6 +40,7 @@ public:
 
 protected:
     OVInputMethod *im;
+    DummyDictionary dict;
 };
 
 class OVSCIMInstance : public DIMEInstance
