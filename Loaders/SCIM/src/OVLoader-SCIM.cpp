@@ -37,17 +37,16 @@ extern "C" unsigned int scim_imengine_module_init(const ConfigPointer& c) {
 extern "C" IMEngineFactoryPointer scim_imengine_module_create_factory(uint32 e)
 {
     if( e < mod_vector.size() )
-       return new OVSCIMFactory( mod_vector[e]->getModule(0), _scim_config );
+       return new OVSCIMFactory( mod_vector[e], _scim_config );
     return IMEngineFactoryPointer(0);
 }
 
-static OVModuleEntry* open_module(const char* modname){
-   OVModuleEntry* mod = new OVModuleEntry();
+static OVLibrary* open_module(const char* modname){
+   OVLibrary* mod = new OVLibrary();
    mod->handle = lt_dlopen(modname);
    if(mod->handle == NULL){
       fprintf(stderr, "dlopen %s failed\n", modname);
-      delete mod;
-      return NULL;
+      goto OPEN_FAILED;
    }
    mod->getModule = (TypeGetModule)lt_dlsym( mod->handle, 
                                              "OVGetModuleFromLibrary" );
@@ -57,22 +56,35 @@ static OVModuleEntry* open_module(const char* modname){
                                              "OVInitializeLibrary" );
    if( !mod->getModule || !mod->getLibVersion || !mod->initLibrary ){
       fprintf(stderr, "dlsym %s failed\n", modname);
-      delete mod;
-      return NULL;
+      goto OPEN_FAILED;
+   }
+   if( mod->getLibVersion() < OV_VERSION ){
+      fprintf(stderr, "%s %d is too old\n", modname, mod->getLibVersion());
+      goto OPEN_FAILED;
    }
    return mod;
+
+OPEN_FAILED:
+   delete mod;
+   return NULL;
 }
 
 static int scan_ov_modules(){
    DIR* dir = opendir(OV_MODULEDIR);
+   DummyService srv;
    if(dir){
       struct dirent *d_ent;
       while( (d_ent = readdir(dir)) != NULL ){
          if( strstr( d_ent->d_name, ".la" ) ){
             fprintf(stderr,  "Load OV module: %s\n", d_ent->d_name);
-            OVModuleEntry* mod = open_module(d_ent->d_name);
-            if(mod)
-               mod_vector.push_back(mod);
+            OVLibrary* mod = open_module(d_ent->d_name);
+            if(mod){
+               OVModule* m;
+               mod->initLibrary(&srv, OV_MODULEDIR);
+               for(int i=0; m = mod->getModule(i); i++)
+                  mod_vector.push_back(m);
+               delete mod;
+            }
          }
       }
       closedir(dir);
@@ -84,13 +96,13 @@ static int scan_ov_modules(){
 
 OVSCIMFactory::OVSCIMFactory(OVModule *i, const ConfigPointer& config) {
     fprintf(stderr, "SCIM-OpenVanilla IMFactory init! id=%s\n", i->identifier());
-	set_languages("zh_TW,zh_HK,zh_SG");
-	
-	im = dynamic_cast<OVInputMethod*>(i);
+    set_languages("zh_TW,zh_HK,zh_SG");
+    
+    im = dynamic_cast<OVInputMethod*>(i);
     if(!im)
        fprintf(stderr, "dynamic_cast OVInputMethod* failed\n");
-	DummyDictionary dict;
-	DummyService srv;
+    DummyDictionary dict;
+    DummyService srv;
     im->initialize(&dict, &srv, OV_MODULEDIR);
 }
 
@@ -101,32 +113,33 @@ OVSCIMFactory::~OVSCIMFactory() {
 WideString OVSCIMFactory::get_name() const {
     char idbuf[256];
     sprintf(idbuf, "OpenVanilla-%s", im->localizedName("en"));
-	return utf8_mbstowcs(idbuf);
+    return utf8_mbstowcs(idbuf);
 }
 
 String OVSCIMFactory::get_uuid() const {
     char hash[256];
     // we just generate some random stuff
     sprintf(hash, "d1f40e24-cdb7-11d9-9359-02061b%02x%02x%02x",
-        strlen(im->identifier()), strlen(im->localizedName("en")),
-        strlen(im->localizedName("zh_TW")));
-	return String(hash);
+             strlen(im->identifier()), strlen(im->localizedName("en")),
+             strlen(im->localizedName("zh_TW"))
+    );
+    return String(hash);
 }
 
 String OVSCIMFactory::get_icon_file() const {
-	return String("/usr/X11R6/share/scim/icons/rawcode.png");
+    return String("/usr/X11R6/share/scim/icons/rawcode.png");
 }
 
 WideString OVSCIMFactory::get_authors() const {
-	return utf8_mbstowcs("The OpenVanilla Project <http://openvanilla.org>");
+    return utf8_mbstowcs("The OpenVanilla Project <http://openvanilla.org>");
 }
 
 WideString OVSCIMFactory::get_credits() const {
-	return WideString();
+    return WideString();
 }
 
 WideString OVSCIMFactory::get_help() const {
-	return utf8_mbstowcs("Help unavailable");
+    return utf8_mbstowcs("Help unavailable");
 }
 
 IMEngineInstancePointer OVSCIMFactory::create_instance(const String& encoding, int id) {
@@ -146,7 +159,7 @@ OVSCIMInstance::~OVSCIMInstance() {
 
 bool OVSCIMInstance::process_key_event(const KeyEvent& key) {
     // an OpenOffice workaround, code from SCIM-chewing
-	if (key.is_key_release()) return true;
+    if (key.is_key_release()) return true;
 
     DummyKeyCode kc;
     
@@ -180,7 +193,7 @@ bool OVSCIMInstance::process_key_event(const KeyEvent& key) {
     
     kc.setCode(c);
     if (!cxt->keyEvent(&kc, &buf, &candi, &srv)) return false;
-	return true;
+    return true;
 }
 
 void OVSCIMInstance::select_candidate (unsigned int index) {

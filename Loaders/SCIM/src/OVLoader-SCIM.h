@@ -14,14 +14,14 @@ using namespace scim;
 typedef OVModule* (*TypeGetModule)(int);
 typedef int (*TypeInitLibrary)(OVService*, const char*);
 typedef unsigned int (*TypeGetLibVersion)();
-struct OVModuleEntry {
+struct OVLibrary {
    lt_dlhandle handle;
    TypeGetModule getModule;
    TypeInitLibrary initLibrary;
    TypeGetLibVersion getLibVersion;
 };
 
-std::vector<OVModuleEntry*> mod_vector;
+std::vector<OVModule*> mod_vector;
 
 class OVSCIMFactory : public IMEngineFactoryBase {
 public:
@@ -66,4 +66,3 @@ public:
 };
 
 #endif
-
