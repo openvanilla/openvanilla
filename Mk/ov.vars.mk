@@ -8,7 +8,7 @@ MKDIR=/bin/mkdir -p
 
 DATA_INST_PATH?=$(INST_PATH)/$(IMID)
 
-INC=-I../../Headers 
+INC=-I../../Headers -I/usr/local/include
 
 CFLAGS=-O2 -Wall $(INC)
 
