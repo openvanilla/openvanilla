@@ -30,13 +30,13 @@ protected:
     int candidatePageUp();
     int candidatePageDown();
 
-    PhoneticPhrase *ps;
+    PhoneticSyllable ps;
     OVKeyCode *k;
     OVBuffer *b;
     OVCandidate *c;
     OVService *s;
     OVIMAutoPhonetic *parent;
-    CandidateList *candi;
+    CandidateList candi;
     int page;
 };
 
@@ -54,7 +54,7 @@ protected:
     int layout;
     char selkey[96];
     SQLite3 *db;
-    OVServiceWrapper *srv;
+    PhoneticService *srv;
 };
 
 OV_SINGLE_MODULE_WRAPPER(OVIMAutoPhonetic);
@@ -68,8 +68,6 @@ const char *OVIMAutoPhonetic::selectKey() {
 }
 
 int OVIMAutoPhonetic::initialize(OVDictionary *cfg, OVService * s, const char *p) {
-    srv=new OVServiceWrapper(s);
-    
     db=new SQLite3;
     char dbfile[PATH_MAX];
     sprintf(dbfile, "%s/OVIMAutoPhonetic/tsi.db", p);
@@ -81,6 +79,8 @@ int OVIMAutoPhonetic::initialize(OVDictionary *cfg, OVService * s, const char *p
         return 0;
     }
     update(cfg, s);
+    
+    srv=new PhoneticService(db, s);
     return 1;
 }
 
@@ -101,29 +101,29 @@ const char *OVIMAutoPhonetic::localizedName(const char *lc) {
 }
 
 
-OVIMAutoPhoneticContext::OVIMAutoPhoneticContext(OVIMAutoPhonetic *p) {
-    parent=p;
-    ps=new PhoneticPhrase(parent->srv, parent->layout, parent->db);
+OVIMAutoPhoneticContext::OVIMAutoPhoneticContext(OVIMAutoPhonetic *p) :
+    ps(p->srv, p->layout), parent(p) 
+{
 }
 
 OVIMAutoPhoneticContext::~OVIMAutoPhoneticContext() {
-    delete ps;
 }
 
 void OVIMAutoPhoneticContext::start(OVBuffer*, OVCandidate*, OVService* s) {
-    ps->clear();
-    ps->setKeyboardLayout(parent->layout);
-    candi=NULL;
+    ps.reset();
+    // ps->setKeyboardLayout(parent->layout);
+    candi.clear();
 }
 
 void OVIMAutoPhoneticContext::clear() {
-    ps->clear();
+    ps.reset();
+    candi.clear();
 }
 
 
 int OVIMAutoPhoneticContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, OVService* params) {
     k=pk; b=pb; c=pc; s=params;
-    if (candi) {
+    if (candi.size()) {
         // if candidateEvent() returns 0, it means key processed,
         // but nothing happens to the sentence, so we ignore it
         if (!candidateEvent()) return 1;    
@@ -133,29 +133,21 @@ int OVIMAutoPhoneticContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* 
        
     if (k->isFunctionKey() && b->isEmpty()) return 0;
 
-    TEvent t;
-    switch (k->code()) {
-        case ovkEsc:        t=ps->keyEsc();         break;
-        case ovkBackspace:  t=ps->keyBackspace();   break;
-        case ovkDelete:     t=ps->keyBackspace();   break;
-        case ovkRight:      t=ps->keyRight();       break;
-        case ovkLeft:       t=ps->keyLeft();        break;
-        case ovkUp:         t=ps->keyUp();          break;
-        case ovkDown:       t=ps->keyDown();        break;
-        case ovkHome:       t=ps->keyHome();        break;
-        case ovkEnd:        t=ps->keyEnd();         break;
-        case ovkReturn:     t=ps->keyEnter();       break;
-        case ovkSpace:      t=ps->keySpace();       break;
-        default:
-            t=ps->key(k->code(), 0);
-    }
-    
-    return processEvent(t);
+    KeyCode kc=k->code();
+    KeyModifier km=0;
+    if (k->isCtrl()) km |= K_CTRL;
+    if (k->isOpt()) km |= K_OPT;
+    if (k->isCommand()) km |= K_COMMAND;
+    if (k->isShift()) km |= K_SHIFT;
+    if (k->isCapslock()) km |= K_CAPSLOCK;
+        
+    return processEvent(ps.keyEvent(kc, km));        
 }
 
 int OVIMAutoPhoneticContext::processEvent(const TEvent &e) {
+    murmur("event type=%d, dump=%s", e.type, ps.dump().c_str());
     int cursor, hstart, hend;
-    const char *str;
+    string str;
     switch(e.type) {
         case T_IGNORE:
             if (b->isEmpty()) return 0;
@@ -163,28 +155,35 @@ int OVIMAutoPhoneticContext::processEvent(const TEvent &e) {
             return 1;
         case T_CLEAR:
             b->clear()->update();
+            ps.reset();
             return 1;
         case T_UPDATE:
-            str=ps->composeDisplay();
-            cursor=ps->cursor();
-            hstart=ps->hiliteStart();
-            hend=hstart+ps->hiliteLength();
+            str=ps.presentation();
+            cursor=ps.cursor();
+            hstart=ps.markFrom();
+            hend=hstart+ps.markLength();
             if (hstart==hend) hstart=hend=-1;
             b->clear();
-            if (str) b->append(str);
+            if (str.length()) b->append(str.c_str());
             b->update(cursor, hstart, hend);
             return 1;
         case T_COMMIT:
-            str=ps->composeDisplay();
+            str=ps.presentation();
             b->clear();
-            if (str) b->append(str);
+            if (str.length()) b->append(str.c_str());
             b->send();
-            ps->clear();
+            ps.reset();
             return 1;
         case T_CANDIDATE:
+            str=ps.presentation();
+            b->clear();
+            if (str.length()) b->append(str.c_str());
+            b->update();
+            candi=ps.fetchCandidateList();
             page=0;
-            candi=ps->getCandidateList();
             return updateCandidateWindow();
+        default:
+            break;
     }
     murmur ("AutoPhoneticContext: wrong event type %d passed here", e.type);
     return 0;
@@ -193,7 +192,9 @@ int OVIMAutoPhoneticContext::processEvent(const TEvent &e) {
 int OVIMAutoPhoneticContext::candidateEvent() {
     char kc=k->code();
     if (kc==ovkEsc || kc==ovkBackspace || kc==ovkDelete) {
-        return processEvent(ps->cancelCandidate());
+        processEvent(ps.cancelCandidate());
+        closeCandidateWindow();
+        return 1;
     }
     
     if (kc==ovkSpace || kc==ovkRight || kc==ovkDown || kc==ovkPageDown) {
@@ -216,16 +217,16 @@ int OVIMAutoPhoneticContext::candidateEvent() {
         return 0;
     }
     else {
-        processEvent(ps->chooseCandidate(i+page*perpage,
-            candi->item(i+page*perpage)));
+        processEvent(ps.chooseCandidate(i+page*perpage,
+            candi[i+page*perpage]));
         closeCandidateWindow();
     }    
     return 1;
 }
 
 int OVIMAutoPhoneticContext::updateCandidateWindow() {
-    if (!candi) return 1;
-    int candicount=candi->count();
+    int candicount=candi.size();
+    if (!candicount) return 1;
     int perpage=strlen(parent->selectKey());
     int pgstart=page*perpage;
         
@@ -235,7 +236,7 @@ int OVIMAutoPhoneticContext::updateCandidateWindow() {
     for (int i=0; i<perpage; i++) {
         if (pgstart+i >= candicount) break;     // stop if idx exceeds candi counts
         sprintf(dispstr, "%c.", parent->selkey[i]);
-        c->append(dispstr)->append(candi->item(page*perpage+i)->dataString())
+        c->append(dispstr)->append(candi[page*perpage+i].c_str())
             ->append(" ");
     }
     // add current page number
@@ -248,15 +249,14 @@ int OVIMAutoPhoneticContext::updateCandidateWindow() {
 
 int OVIMAutoPhoneticContext::closeCandidateWindow() {
     if (c->onScreen()) c->hide()->clear()->update();
-    if (candi) {
-        // delete candi;
-        candi=NULL;
+    if (candi.size()) {
+        candi.clear();
     }
     return 1;        
 }
 
 int OVIMAutoPhoneticContext::candidatePageUp() {
-    int maxpage=(candi->count()-1) / strlen(parent->selectKey());
+    int maxpage=(candi.size()-1) / strlen(parent->selectKey());
     if (!maxpage) s->beep();
     else {
         if (!page) page=maxpage; else page--;
@@ -266,7 +266,7 @@ int OVIMAutoPhoneticContext::candidatePageUp() {
 }
 
 int OVIMAutoPhoneticContext::candidatePageDown() {
-    int maxpage=(candi->count()-1) / strlen(parent->selectKey());
+    int maxpage=(candi.size()-1) / strlen(parent->selectKey());
     if (!maxpage) s->beep();
     else {
         if (page==maxpage) page=0; else page++;

@@ -3,121 +3,72 @@
 #ifndef __GrammarUnit_h
 #define __GrammarUnit_h
 
-class AutoPhraseObject {
-public:
-    virtual ~AutoPhraseObject() {}
-};
+#include <string>
+#include <vector>
 
-class Service : public AutoPhraseObject {
-public:
-    virtual void notify (const char *msg)=0;
-    virtual void beep()=0;
-    
-    // returns the number of codepoints
-    virtual int u8strlen(const char *str)=0;   
-};
+using namespace std;
 
-typedef int TextEventType;
-
-enum {
-    T_IGNORE    = 0,
-    T_CLEAR     = 1,
+enum EventType {
+    T_IGNORE    = 0,        // the event is ignored
+    T_CLEAR     = 1,        // the unit becomes empty
     T_UPDATE    = 2,        // update display
     T_COMMIT    = 3,        // a unit is composed
-    T_CANDIDATE = 4,
-    T_NEXT      = 5,        // cursor focus movement
-    T_PREVIOUS  = 6,
+    T_CANDIDATE = 4,        // candidate must be fetched
+    T_NEXT      = 5,        // cursor focus moved out to next unit
+    T_PREVIOUS  = 6,        // cursor focus moved out to previous unit
     T_SPLIT     = 7         // a sibling unit is created
-};
+};                          // no merge (we can add to sibling & clear self)
 
-typedef int KeyModifier;
+typedef unsigned int KeyModifier;
 enum {
-    K_SHIFT     = 1,
-    K_CTRL      = 2,
-    K_ALT       = 4,
-    K_OPT       = 4,
-    K_COMMAND   = 8
+    K_CTRL              = 1,
+    K_ALT               = 2,
+    K_OPT               = 2,
+    K_COMMAND           = 4,
+    K_FUNCTIONKEYMASK   = 7,
+    K_SHIFT             = 8,
+    K_CAPSLOCK          = 16
 };
 
-class TextBlock : public AutoPhraseObject {
-public:
-    TextBlock(Service *s) { srv=s; }
-    virtual int empty()     { return !strlen(codeString()); }
-    virtual int length()    { return srv->u8strlen(composeDisplay()); }
-    virtual int cursor()    { return length(); }
-    virtual int hiliteStart()   { return 0; }
-    virtual int hiliteLength()  { return 0 ; }
-    virtual const char *composeDisplay()=0;
-    virtual const char *codeString()=0;
-protected:
-    Service *srv;
+typedef int KeyCode;
+enum {
+    K_ESC=27, K_SPACE=32, K_RETURN=13, K_TAB=9, K_DELETE=127, K_BACKSPACE=8,
+    K_UP=30, K_DOWN=31, K_LEFT=28, K_RIGHT=29,
+    K_HOME=1, K_END=4, K_PAGEUP=11, K_PAGEDOWN=12,
 };
 
-class CandidateItem : public AutoPhraseObject { 
-public:
-    CandidateItem(const char *s) {
-        if (!s) str=NULL;
-        str=(char*)calloc(1, strlen(s)+1);
-        strcpy(str, s);
-    }
-    virtual ~CandidateItem() { if (str) free(str); }
-    const char *dataString() { return str; }
-    char *str;
-};
-
-class CandidateList {
-public:
-    CandidateList(int c=0) {
-        ct=c;
-        items = ct ? new CandidateItem*[ct] : NULL;
-    }
-    ~CandidateList() {
-        if (ct) { for (int i=0;i<ct;i++) if (items[i]) delete items[i]; }
-        if (items) delete[] items;
-    }
-    CandidateItem *setItem(int i, CandidateItem *o) {
-        if (i<0 || i>=ct) return NULL;
-        return items[i]=o;
-    }
-    CandidateItem *item(int i) { 
-        if (i<0 || i>=ct) return NULL; 
-        return items[i];
-    }
-    int count() { return ct; }
-    
-    int ct;
-    CandidateItem **items;
-};
+typedef vector<string> CandidateList;
 
 class GrammarUnit;
 
-class TEvent : public AutoPhraseObject {
+// if you pass data with TEvent, you have to manage ownership/casting yourself
+class TEvent {
 public:
-    TEvent(TextEventType t=T_IGNORE) { type=t; data=NULL; }
-    TextEventType   type;
-    GrammarUnit     *data;
+    TEvent(EventType t=T_IGNORE) { type=t; data=NULL; }
+    EventType type;
+    void *data;
 };
 
-class GrammarUnit : public TextBlock {
+class GrammarUnit {
 public:
-    GrammarUnit(Service *s) : TextBlock(s) {}
-    virtual const TEvent enterRightBound()=0;    // enter the bound
-    virtual const TEvent enterLeftBound()=0;
-    virtual const TEvent clear()=0;
-    virtual const TEvent key(char c, KeyModifier m)=0;
-    virtual const TEvent keyBackspace()=0;
-    virtual const TEvent keySpace()=0;
-    virtual const TEvent keyEnter()=0;
-    virtual const TEvent keyEsc()=0;
-    virtual const TEvent keyLeft()=0;
-    virtual const TEvent keyRight()=0;
-    virtual const TEvent keyUp()=0;
-    virtual const TEvent keyDown()=0;
-    virtual const TEvent keyHome()=0;
-    virtual const TEvent keyEnd()=0;
-    virtual const TEvent chooseCandidate(int idx, CandidateItem *item)=0;
+    virtual ~GrammarUnit() {}
+
+    // data storage and representation ("Document" and "View")
+    virtual const string& code()=0;                 // code stiring
+    virtual const string& presentation()=0;         // displayed "presentation"
+    virtual bool vacant()=0;                        // if no code() available
+    virtual size_t width()=0;                       // measured in code points
+    virtual size_t cursor()     { return width(); } // cursor position
+    virtual size_t markFrom()   { return 0; }       // highlight startlo
+    virtual size_t markLength() { return 0; }       // highlight length
+    
+    // event dispatching ("Controller")
+    virtual const TEvent enterRightBound()=0;       // enter the right bound
+    virtual const TEvent enterLeftBound()=0;        // enter the left bound
+    virtual const TEvent keyEvent(KeyCode k, KeyModifier m)=0;
+    virtual const CandidateList fetchCandidateList()=0;
     virtual const TEvent cancelCandidate()=0;
-    virtual CandidateList *getCandidateList()=0;
+    virtual const TEvent chooseCandidate(size_t index, const string &item)=0;
 };
 
 #endif
