@@ -12,6 +12,7 @@
 #include <string>
 #include <iostream>
 
+
 using namespace std;
 
 //OVLOADABLEOBJCWRAPPER;
@@ -288,6 +289,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar,
     if (isprint(key->code()) && keyseq.valid(static_cast<char>(key->code())) &&
 		/*!key->isShift() &&*/ !key->isCapslock())
     {
+
         if (keyseq.length() == parent->maxSeqLen())
         {
             updateDisplay(buf);
