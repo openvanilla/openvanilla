@@ -246,8 +246,8 @@ int OVIMPhoneticContext::candidateEvent() {
         return candidatePageUp();
 
     int perpage=strlen(parent->selkey);
-    int i=0, l=perpage, nextsyl=0;
-    for (i=0; i<perpage; i++) if(parent->selkey[i]==kc) break;
+    int i=0, l=(candi->count >= perpage) ? perpage : candi->count, nextsyl=0;
+    for (i=0; i<l; i++) if(parent->selkey[i]==kc) break;
     if (i==l) {         // not a valid candidate key
         if (kc==ovkReturn) i=0;
         if (syl.isValidKey(kc)) { i=0; nextsyl=1; }
