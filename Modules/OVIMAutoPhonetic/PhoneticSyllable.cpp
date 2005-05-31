@@ -3,9 +3,17 @@
 #include "AutoPhonetic.h"
 
 
-PhoneticSyllable::PhoneticSyllable(PhoneticService *s, int l) : bpmf(l) {
+PhoneticSyllable::PhoneticSyllable(PhoneticService *s, const PhoneticConfig &c)
+{
+    cfg=c;
+    bpmf.setLayout(c.layout);
     srv=s;
     reset();
+}
+
+void PhoneticSyllable::updateConfig(const PhoneticConfig &c) {
+    cfg=c;
+    bpmf.setLayout(c.layout);
 }
 
 void PhoneticSyllable::reset() {
@@ -15,6 +23,33 @@ void PhoneticSyllable::reset() {
     cur=-1;
     seq="";
     chr="";
+}
+
+const PhoneticConfig& PhoneticSyllable::getConfig() {
+    return cfg;
+}
+
+const string PhoneticSyllable::bpmfString() {
+    const string &codestr=code();
+    int l=codestr.length();
+    if (!l) return string();
+    char lc=codestr.c_str()[l-1];
+    if (lc=='3' || lc=='4' || lc=='6' || lc=='7') l--;
+    return codestr.substr(0, l);
+}
+
+const string PhoneticSyllable::toneString() {
+    const string &codestr=code();
+    int l=codestr.length();
+    if (!l) return string();
+    char lc=codestr.c_str()[l-1];
+    switch (lc) {
+        case '3': return string("3");
+        case '4': return string("4");
+        case '6': return string("2");
+        case '7': return string("5");
+    }
+    return string("0");
 }
 
 const string& PhoneticSyllable::code() {
@@ -103,7 +138,7 @@ const string PhoneticSyllable::dump() {
 
 const CandidateList PhoneticSyllable::fetchCandidateList() {
     if (!han) return CandidateList();
-    return srv->fetchBPMFCandidate(code());    
+    return srv->fetchBPMFCandidate(*this);    
 }
 
 bool PhoneticSyllable::isPunctuationCombination(KeyCode k, KeyModifier m) {
@@ -173,6 +208,7 @@ const TEvent PhoneticSyllable::keyRight(){
 }
 
 const TEvent PhoneticSyllable::keyBackspace(){
+    // backspace hanlding, we delete a character from the standard layout code
     if (vacant()) return TEvent();
     if (!cur) {
         srv->beep();
@@ -189,7 +225,9 @@ const TEvent PhoneticSyllable::keyBackspace(){
         for (i=cur-1; i<l-1; i++) buf[i]=buf[i+1];
         buf[--l]=0;
         bpmf.clear();
+        bpmf.setLayout(OVPStandardLayout);
         for (i=0; i<l; i++) bpmf.addKey(buf[i]);
+        bpmf.setLayout(cfg.layout);
         cur--;
     }
         
@@ -210,9 +248,9 @@ const TEvent PhoneticSyllable::keyDelete(){
     for (i=cur; i<l-1; i++) buf[i]=buf[i+1];
     buf[--l]=0;
     bpmf.clear();
-    // TO DO: KEYBOARD LAYOUT
-
-    for (i=0; i<l; i++) bpmf.addKey(buf[i], ); 
+    bpmf.setLayout(OVPStandardLayout);
+    for (i=0; i<l; i++) bpmf.addKey(buf[i]); 
+    bpmf.setLayout(cfg.layout);
     if (bpmf.empty()) return TEvent(T_CLEAR);
     return TEvent(T_UPDATE);
 }
@@ -222,7 +260,7 @@ const TEvent PhoneticSyllable::keyCompose(KeyCode k){
 
     string first;
     string newseq=string(bpmf.standardLayoutCode());
-    size_t c=srv->queryBPMF(newseq, first);
+    size_t c=srv->queryBPMF(*this, first);
         
     cur=-1;
     if (!c) {

@@ -61,7 +61,7 @@ sub splittone {
         }
     }
 
-    (join(" ", @reals), join(" ", @realt));
+    (join("", @reals), join("", @realt));
 }
 
 # this makes the product of homophones (e.g. [A,B] x [C,D] x [E,F])

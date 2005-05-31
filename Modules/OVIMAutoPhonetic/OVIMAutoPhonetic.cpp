@@ -51,10 +51,10 @@ public:
     
 protected:
     friend class OVIMAutoPhoneticContext;
-    int layout;
     char selkey[96];
     SQLite3 *db;
     PhoneticService *srv;
+    PhoneticConfig cfg;
 };
 
 OV_SINGLE_MODULE_WRAPPER(OVIMAutoPhonetic);
@@ -84,11 +84,14 @@ int OVIMAutoPhonetic::initialize(OVDictionary *cfg, OVService * s, const char *p
     return 1;
 }
 
-void OVIMAutoPhonetic::update(OVDictionary *cfg, OVService *) {
-    layout=cfg->getIntegerWithDefault("keyboardLayout", 0);
-    if (layout !=0 && layout !=1) layout=0;
-    strcpy(selkey, cfg->getStringWithDefault("selectKey", "123456789"));
-    murmur("OVIMAutoPhonetic: config update! keyboard layout=%d, select key=%s", layout, selkey);
+void OVIMAutoPhonetic::update(OVDictionary *c, OVService *) {
+    cfg.layout=c->getIntegerWithDefault("keyboardLayout", 0);
+    cfg.tonetolerance=c->getIntegerWithDefault("toneTolerance", 0);
+    if (cfg.layout !=0 && cfg.layout !=1) cfg.layout=0;
+    if (cfg.tonetolerance !=0 && cfg.tonetolerance !=1) cfg.tonetolerance=0;
+    
+    strcpy(selkey, c->getStringWithDefault("selectKey", "123456789"));
+    murmur("OVIMAutoPhonetic: config update! keyboard layout=%d, tone tolerance=%d, select key=%s", cfg.layout, cfg.tonetolerance, selkey);
 }
 
 const char *OVIMAutoPhonetic::identifier() {
@@ -102,7 +105,7 @@ const char *OVIMAutoPhonetic::localizedName(const char *lc) {
 
 
 OVIMAutoPhoneticContext::OVIMAutoPhoneticContext(OVIMAutoPhonetic *p) :
-    ps(p->srv, p->layout), parent(p) 
+    ps(p->srv, p->cfg), parent(p) 
 {
 }
 
@@ -111,7 +114,7 @@ OVIMAutoPhoneticContext::~OVIMAutoPhoneticContext() {
 
 void OVIMAutoPhoneticContext::start(OVBuffer*, OVCandidate*, OVService* s) {
     ps.reset();
-    // ps->setKeyboardLayout(parent->layout);
+    ps.updateConfig(parent->cfg);
     candi.clear();
 }
 
