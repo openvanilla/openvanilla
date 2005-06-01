@@ -34,8 +34,10 @@ protected:
 
 class PhoneticSyllable : public GrammarUnit {
 protected:
-    bool fixed;                 // already has Han character representation
-    bool han;                   // if the fixed chr is a han character
+    bool fixedusrchr;           // user has designated a fixed candidate
+    bool hascandi;              // has more than 1 candidate
+    bool committed;             // already has usedb character representation
+    bool usedb;                 // if the committed chr is a usedb character
     string seq;                 // "standard layout" string, or "query key"  
     string chr;                 // choosen Han character
     int cur;                    // cursor position
@@ -46,6 +48,10 @@ public:
     PhoneticSyllable(PhoneticService *s, const PhoneticConfig &c);
     virtual void updateConfig(const PhoneticConfig &c);
     virtual void reset();
+
+    virtual bool hasCandidate();    
+    virtual bool fixedUserChar();
+    virtual void changeChar(const string& c, bool fixusrchr=true);
     
     virtual const PhoneticConfig& getConfig();
     virtual const string bpmfString();
@@ -57,8 +63,6 @@ public:
     virtual size_t width();
     virtual size_t cursor();
     
-    virtual const TEvent enterRightBound();
-    virtual const TEvent enterLeftBound();
     virtual const TEvent keyEvent(KeyCode k, KeyModifier m);
     virtual const CandidateList fetchCandidateList();
     virtual const TEvent cancelCandidate();

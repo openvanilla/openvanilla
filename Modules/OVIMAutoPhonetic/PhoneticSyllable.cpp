@@ -18,12 +18,29 @@ void PhoneticSyllable::updateConfig(const PhoneticConfig &c) {
 
 void PhoneticSyllable::reset() {
     bpmf.clear();
-    fixed=false;
-    han=true;
+    fixedusrchr=false;
+    hascandi=false;
+    committed=false;
+    usedb=true;
     cur=-1;
     seq="";
     chr="";
 }
+
+bool PhoneticSyllable::hasCandidate() {
+    return hascandi;
+}
+
+bool PhoneticSyllable::fixedUserChar() {
+    return fixedusrchr;
+}
+
+void PhoneticSyllable::changeChar(const string& c, bool fixusrchr) {
+    if (!c.length()) return;
+    chr=c;
+    fixedusrchr=fixusrchr;
+}
+
 
 const PhoneticConfig& PhoneticSyllable::getConfig() {
     return cfg;
@@ -53,18 +70,18 @@ const string PhoneticSyllable::toneString() {
 }
 
 const string& PhoneticSyllable::code() {
-    if (!fixed) seq=bpmf.standardLayoutCode();
+    if (!committed) seq=bpmf.standardLayoutCode();
     return seq;
 }
 
 const string& PhoneticSyllable::presentation() {
-    if (!fixed) chr=bpmf.compose();     // compose BPMF syllable
+    if (!committed) chr=bpmf.compose();     // compose BPMF syllable
     return chr;
 }
 
 bool PhoneticSyllable::vacant() {
-    // if fixed and either is empty, then it is vacant
-    if (fixed) {
+    // if committed and either is empty, then it is vacant
+    if (committed) {
         if (!chr.length() || !seq.length()) return true; else return false;
     }
     
@@ -84,16 +101,8 @@ size_t PhoneticSyllable::cursor() {
     return cur;
 }
 
-const TEvent PhoneticSyllable::enterRightBound() {
-    return TEvent(T_UPDATE);
-}
-
-const TEvent PhoneticSyllable::enterLeftBound() {
-    return TEvent(T_UPDATE);
-}
-
 const TEvent PhoneticSyllable::keyEvent(KeyCode k, KeyModifier m) {
-    if (fixed) return TEvent();     // if fixed, no more key response
+    if (committed) return TEvent();     // if committed, no more key response
 
     // if it's CTRL-0/CTRL-1/CTRL-OPT-[a-z], do punctuation
     if (isPunctuationCombination(k, m) && vacant()) return keyPunctuation(k, m);
@@ -119,25 +128,27 @@ const TEvent PhoneticSyllable::keyEvent(KeyCode k, KeyModifier m) {
 }
 
 const TEvent PhoneticSyllable::cancelCandidate() {
+    reset();
     return TEvent(T_CLEAR);
 }
 
 const TEvent PhoneticSyllable::chooseCandidate(size_t, const string &item) {
-    fixed=true;
+    committed=true;
     chr=item;
     return TEvent(T_COMMIT);
 }
 
 const string PhoneticSyllable::dump() {
     char d[256];
-    sprintf(d, "syllable fixed=%s, han=%s, bpmf='%s', seq='%s', chr='%s'",
-        fixed ? "TRUE" : "FALSE", han ? "TRUE" : "FALSE",
+    sprintf(d, "syllable fixedusrchr=%s, hascandi=%s, committed=%s, usedb=%s, bpmf='%s', seq='%s', chr='%s'",
+        fixedusrchr ? "TRUE" : "FALSE", hascandi ? "TRUE" : "FALSE",
+        committed ? "TRUE" : "FALSE", usedb ? "TRUE" : "FALSE",
         bpmf.standardLayoutCode(), seq.c_str(), chr.c_str());
     return string(d);
 }
 
 const CandidateList PhoneticSyllable::fetchCandidateList() {
-    if (!han) return CandidateList();
+    if (!usedb) return CandidateList();
     return srv->fetchBPMFCandidate(*this);    
 }
 
@@ -164,16 +175,19 @@ const TEvent PhoneticSyllable::keyPunctuation(KeyCode k, KeyModifier m){
     
     if (!c) return TEvent();
     chr=first;
-    fixed=true;
+    committed=true;
     if (c==1) return TEvent(T_COMMIT);    
+    
+    // has more than one candidate, hascandi set to true
+    hascandi=true;
     return TEvent(T_CANDIDATE);
 }
 
 const TEvent PhoneticSyllable::keyCapslock(KeyCode k, KeyModifier m){
     cur=-1;
     if (!isprint(k)) return TEvent();
-    fixed=true;
-    han=false;
+    committed=true;
+    usedb=false;
     chr=(m & K_SHIFT) ? string(1, toupper(k)) : string(1, tolower(k));
     seq=chr;
     return TEvent(T_COMMIT);
@@ -181,7 +195,7 @@ const TEvent PhoneticSyllable::keyCapslock(KeyCode k, KeyModifier m){
 
 const TEvent PhoneticSyllable::keyEsc(){
     cur=-1;
-    if (vacant() || fixed) return TEvent();
+    if (vacant() || committed) return TEvent();
     reset();
     return TEvent(T_CLEAR);
 }
@@ -208,7 +222,7 @@ const TEvent PhoneticSyllable::keyRight(){
 }
 
 const TEvent PhoneticSyllable::keyBackspace(){
-    // backspace hanlding, we delete a character from the standard layout code
+    // backspace handling, we delete a character from the standard layout code
     if (vacant()) return TEvent();
     if (!cur) {
         srv->beep();
@@ -231,7 +245,10 @@ const TEvent PhoneticSyllable::keyBackspace(){
         cur--;
     }
         
-    if (bpmf.empty()) return TEvent(T_CLEAR);
+    if (bpmf.empty()) {
+        reset();
+        return TEvent(T_CLEAR);
+    }
     return TEvent(T_UPDATE);
 }
 
@@ -251,7 +268,10 @@ const TEvent PhoneticSyllable::keyDelete(){
     bpmf.setLayout(OVPStandardLayout);
     for (i=0; i<l; i++) bpmf.addKey(buf[i]); 
     bpmf.setLayout(cfg.layout);
-    if (bpmf.empty()) return TEvent(T_CLEAR);
+    if (bpmf.empty()) {
+        reset();
+        return TEvent(T_CLEAR);
+    }
     return TEvent(T_UPDATE);
 }
 
@@ -270,16 +290,18 @@ const TEvent PhoneticSyllable::keyCompose(KeyCode k){
 
     chr=first;
     seq=newseq;
-    fixed=true;
+    committed=true;
     if (c==1) return TEvent(T_COMMIT);
+    
+    hascandi=true;
     return TEvent(T_CANDIDATE);
 }
 
 const TEvent PhoneticSyllable::keyPrintable(KeyCode k, KeyModifier m) {
     cur=-1;
     if (isalpha(k) && (m&K_SHIFT) && vacant()) {
-        fixed=true;
-        han=false;
+        committed=true;
+        usedb=false;
         seq=chr=string(1, k);
         return TEvent(T_COMMIT);
     }
@@ -297,15 +319,17 @@ const TEvent PhoneticSyllable::keyNonBPMF(KeyCode k){
 
     cur=-1;
     if (!c) {          // not a punctuation mark
-        fixed=true;
-        han=false;
+        committed=true;
+        usedb=false;
         seq=chr=string(1, k);
         return TEvent(T_COMMIT);
     }
     
-    fixed=true;
+    committed=true;
     seq=newseq;
     chr=first;
     if (c==1) return TEvent(T_COMMIT);
+    
+    hascandi=true;
     return TEvent(T_CANDIDATE);
 }

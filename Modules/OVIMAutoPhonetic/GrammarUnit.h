@@ -63,8 +63,6 @@ public:
     virtual size_t markLength() { return 0; }       // highlight length
     
     // event dispatching ("Controller")
-    virtual const TEvent enterRightBound()=0;       // enter the right bound
-    virtual const TEvent enterLeftBound()=0;        // enter the left bound
     virtual const TEvent keyEvent(KeyCode k, KeyModifier m)=0;
     virtual const CandidateList fetchCandidateList()=0;
     virtual const TEvent cancelCandidate()=0;
