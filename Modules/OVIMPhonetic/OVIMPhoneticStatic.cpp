@@ -1,13 +1,13 @@
 // OVIMPhoneticStatic.cpp
-#define OV_DEBUG
+// #define OV_DEBUG
 
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLibrary.h>
 #include <OpenVanilla/OVUtility.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-//#include <sys/syslimits.h>
 #include "OVPhoneticLib.h"
 
 extern unsigned short ovPhoneticData[];

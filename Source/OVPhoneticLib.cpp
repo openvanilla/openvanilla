@@ -162,7 +162,6 @@ OVPCandidate *OVPFindCandidate(unsigned short *data, OVPhoneticSyllable *syl) {
 
 OVPCandidate *OVPFindCandidateWithCode(unsigned short *data, unsigned short k)
 {
-    fprintf(stderr, "searching for code 0x%x\n", k);
     OVPhoneticData ovpData(data);
     unsigned short *s=new unsigned short[ovpData.maxCandidiateStringLength()];
     int l=ovpData.find(k, s);
