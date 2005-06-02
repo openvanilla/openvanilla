@@ -48,7 +48,7 @@ NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *libexcludelis
     enm=[libList objectEnumerator];
     while (i=[enm nextObject]) {
         if (CVStringIsInArray([i lastPathComponent], libexcludelist)) {
-            NSLog(@"library %@ in exclude list, not loaded", [i lastPathComponent]);
+            murmur("%s: library %s not loaded (by exclude-list)", func, [[i lastPathComponent] UTF8String]);
             continue;
         }
 

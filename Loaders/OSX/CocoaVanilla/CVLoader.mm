@@ -33,9 +33,9 @@ CVLoader::~CVLoader() {
 }
 
 int CVLoader::init(MenuRef m) {
-    UInt32 beginTime;
-    beginTime = TickCount();
-    murmur("CVLoader::init begin");
+    // UInt32 beginTime;
+    // beginTime = TickCount();
+    // murmur("CVLoader::init begin");
 	// get CVLoader.bundle
     loaderbundle=[NSBundle bundleWithIdentifier:@ TSBUNDLEID];
     if (!loaderbundle) {
@@ -52,7 +52,7 @@ int CVLoader::init(MenuRef m) {
     // gets factory (default) settings
     CVConfig *factorydef=[[CVConfig alloc] initWithFile:CVLC_FACTORY_DEFAULTS defaultData:nil];
     [factorydef autorelease];
-    NSLog([[factorydef dictionary] description]);
+    // NSLog([[factorydef dictionary] description]);
     
 	// member variables initialization
     activecontext=NULL;
@@ -85,7 +85,7 @@ int CVLoader::init(MenuRef m) {
 	immenugroup=ofmenugroup=NULL;
 	refreshMenu();
     syncMenuAndConfig();
-    murmur("CVLoader::init ticks: %d", TickCount() - beginTime );
+    // murmur("CVLoader::init ticks: %d", TickCount() - beginTime );
     return 1;
 }
 
