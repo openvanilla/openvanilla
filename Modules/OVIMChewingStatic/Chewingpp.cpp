@@ -3,9 +3,9 @@
 #include "Chewingpp.h"
 
 Chewing::Chewing(char *dataDir, char *hashDir, int keyLayout) {
-    cf = (ChewingConf *) malloc( sizeof( ChewingConf ) );
-    cd = (ChewingData *) malloc( sizeof( ChewingData ) );
-    co = (ChewingOutput *) malloc( sizeof( ChewingOutput ) );
+    cf = (ChewingConf *) calloc(1, sizeof( ChewingConf ) );
+    cd = (ChewingData *) calloc(1, sizeof( ChewingData ) );
+    co = (ChewingOutput *) calloc(1, sizeof( ChewingOutput ) );
     kbLayout = keyLayout;
 
     cf->inp_cname = "Chewing";
