@@ -111,20 +111,24 @@ protected:
             const char *s = im->CommitStr();
             buf->clear()->append(srv->toUTF8("big5", s))->send();
         }
-        
-        s1 = srv->toUTF8("big5", im->Buffer(0,im->CursorPos()-1));
-        s2 = srv->toUTF8("big5", im->ZuinStr());
-        s3 = srv->toUTF8("big5", im->Buffer(im->CursorPos()));
-        
-        int ps=-1, pe=-1, ips=im->PointStart(), ipe=im->PointEnd();
+
+	int ps=-1, pe=-1, ips=im->PointStart(), ipe=im->PointEnd();
         if (ips > -1 && ipe !=0) {
             if (ipe > 0) { ps=ips; pe=ps+ipe; }
             else { ps=ips+ipe; pe=ips; }
-        }        
-        
+        }  
+
         // murmur("ips=%d, ipe=%d, ps=%d, pe=%d\n", ips, ipe, ps, pe);
-        buf->clear()->append(s1)->append(s2)->append(s3)->update(im->CursorPos(), ps, pe);
-        // murmur("==> %s%s%s",s1,s2,s3);
+
+        s1 = srv->toUTF8("big5", im->Buffer(0,im->CursorPos()-1));
+        buf->clear()->append(s1);
+
+        s2 = srv->toUTF8("big5", im->ZuinStr());
+        buf->append(s2);
+
+        s3 = srv->toUTF8("big5", im->Buffer(im->CursorPos()));
+        buf->append(s3)->update(im->CursorPos(), ps, pe);
+        // murmur("==> %s%s%s",s1,s2,s3);    
     }
     
     void CandidateWindow(OVCandidate *textbar, OVService *srv) {
