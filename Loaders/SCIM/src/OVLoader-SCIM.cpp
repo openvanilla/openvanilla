@@ -75,7 +75,7 @@ static int scan_ov_modules(){
    if(dir){
       struct dirent *d_ent;
       while( (d_ent = readdir(dir)) != NULL ){
-         if( strstr( d_ent->d_name, ".la" ) ){
+         if( strstr( d_ent->d_name, ".so" ) ){
             fprintf(stderr,  "Load OV module: %s\n", d_ent->d_name);
             OVLibrary* mod = open_module(d_ent->d_name);
             if(mod){
