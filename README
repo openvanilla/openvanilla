@@ -1,0 +1,202 @@
+OpenVanilla Framework 0.7.0rc5
+
+Copyright (c) 2004-2005 by Lukhnos D. Liu, Kang-ming Liu, Weizhong Yang,
+Tian-jian Jiang, Meng-juei Hshieh, Pek-tiong Tan and Tsung-hsiang Chang.
+http://openvanilla.org
+
+
+ABOUT OPENVANILLA
+
+This is the source directory of OpenVanilla Framework. OpenVanilla (OV) is 
+an input method (IM)/output filter (OF) framework designed for better 
+end-use text processing experiences. For example, OpenVanilla provides a
+comprehensive set of Traditional Chinese input methods that are lacking
+or functionally deficient/unsatisfactory in Apple's Mac OS X. Many
+Simplified Chinese users also find this framework useful. A Tibetan IM
+module is also available. Cross-platform efforts, including a now functional
+Linux/FreeBSD port of OVLoader (with a bridge to the SCIM framework that
+provides X11 IM functionalities) is also on the way to maturity.
+
+
+STRUCTURE OF THE SOURCE TRUNK
+
+You can obtain this source directory either by downloading a source tarball
+or by checking out from OV's subversion repository. The trunk is divided
+into the following sub-directories:
+
+    Headers/    Where the source of the OV framework (three header files)
+                resides. There are also a number of non-framework 
+                header files, mainly used by IM/OF modules, that reside
+                here. NOTE: Non-framework modules will not be copied
+                into the Framework directory in the build process.         
+    Makefile*   Makefile of the OV framework
+    Mk/         Shared makefile includes for IM/OF modules
+    
+    Loaders/    The OpenVanilla Loaders (OVLoader). A Loader is a
+                platform-dependent program that "loads" mostly platform-
+                independent IM/OF modules and makes them work.
+                Currently there are two subdirectories, OSX/ and SCIM/.
+                OSX/ is OV's Loader on Mac OS X, whereas SCIM/ is
+                OV's Loader-SCIM that works on any FreeBSD/Linux
+                distribution that runs SCIM framework.
+                
+    Modules/    All of OV's core team modules reside here. The modules
+                are identified by their names, e.g. OVIM* means
+                input method moudles, OVOF* means output filters.
+                Some of them can be mixed (e.g. ProtocolBased) and
+                are therefore not called that way.
+    Source/     Shared module sources. Most of them serve as utilities.
+                For design reasons, they are not part of the framework.
+                
+    Documents/  OpenVanilla's document. Each subdirectory corresponds
+                to a platform. Currently there is only OSX/
+                
+    Distributions/  "port" files or package files required by many
+                *nix package management systems. Currently there is
+                DarwinPorts/
+    PackageMaking/  scripts that prepare distributions packages,
+                e.g. OS X binary installer, source tar ball, or
+                corresponding tar files needed by Portfiles.
+                
+    Utilities/  Non-OpenVanilla or development utilities. Many of them
+                serve as language or diagnostic tools.
+    Experiments/    On-going or immature experiments
+    
+
+BUILDING OPENVANILLA
+
+It is fairly easy to build OpenVanilla because of its low dependency and
+standaloneness. To build a fully-functional OpenVanilla, you have to go
+through three major steps:
+
+    1. Build the OpenVanilla framework
+    2. Build the OpenVanilla Loader for your working platform
+    3. Build the modules that you need
+    
+The following sections describe the building process on each respective
+platform.
+
+
+BUILDING OPENVANILLA ON MAC OS X
+
+To build OpenVanilla on Mac OS X, start from where you are now. This builds
+the OpenVanilla Framework and copies the built files into
+/Library/Frameworks/OpenVanilla.framework :
+
+    make ; sudo make install
+    
+After the framework is built, you can build the Loader for OS X now:
+
+    cd Loaders/OSX/
+    make ; sudo make install
+        
+The files are installed in /Library/Components and /Library/OpenVanillla.
+Then go to the Modules directory to build the modules you need. For example,
+if you need Tibetan IM, Generic IM, Tradtional-to-Simplifed Chiense filter,
+follow these steps (the orders are not important):
+
+    cd ../../Modules/OVIMTibetan
+    make ; sudo make install
+    cd ../../Modules/OVIMGeneric
+    make ; sudo make install        # this also installs four .cin-based IM's
+    cd ../../Modules/OVOFConvTC2SC
+    make ; sudo make install
+    
+Note: if you want to build SQLite-based modules, you'll have to install
+SQLite3 first if you're running Panther (OS X 10.3). SQLite3 is part of
+Tiger (OS X 10.4). If you want to build OVIMUIM, you'll have to install
+MacUIM (0.4.0 or later) first, as OVIMUIM relies on UIM.framework prepared
+by MacUIM.
+    
+Built modules are copied into /Library/OpenVanilla/[version number]/Modules
+where the [version number] is the current version number of OpenVanilla.
+
+Now all is set. If this is your first time installing OpenVanilla, you
+have to reboot (due to OS X design limits). After that, you'll only have
+to re-login if you rebuild OVLoader. Changes in modules only require you
+quit currently running application and relaunch it for the changes to take
+effect.
+
+
+BUILDING OPENVANILLA ON FREEBSD/LINUX (note: this is still a work-in-progess)
+
+To build OpenVanilla on FreeBSD/Linux, you'll have to resolve (satisfy) the
+following dependencies first:
+
+    SCIM (> 1.2.2, which in turns depends on gtk2, pango, and many more)
+    libltdl
+    
+Please consult the documentation of your *nix platform to find out how
+to resolve those dependencies.
+
+Once dependencies are solved, it is fairly easy to build OpenVanilla. Start
+from where you are:
+
+    sudo make
+    
+This builds and installs both the OpenVanilla framework and the OpenVanilla
+Loader. It takes some time to run the *nix-ish configure script. If you
+want to rebuild OVLoader-SCIM later, you can go directly into 
+Loaders/SCIM and type "sudo make install" instead.
+
+The above command installs OpenVanilla framework in 
+/usr/local/include/OpenVanilla. The Loader is installed where your SCIM
+plug-ins are. Usually it's /usr/X11R6/lib/scim-[version number]/IMEngine
+or /usr/X11R6/lib/scim-[version number]/[version number]/IMEngine.
+
+After this, you can build the modules you like. For example,
+if you need Tibetan IM, Generic IM, Tradtional-to-Simplifed Chiense filter,
+follow these steps (the orders are not important):
+
+    cd ../../Modules/OVIMTibetan
+    make ; sudo make install
+    cd ../../Modules/OVIMGeneric
+    make ; sudo make install        # this also installs four .cin-based IM's
+    cd ../../Modules/OVOFConvTC2SC
+    make ; sudo make install
+    
+Note: if you want to build SQLite-based modules, you'll have to install
+SQLite3 first.
+
+Built modules are copied into /usr/local/lib/openvanilla/ (note the
+case difference with /usr/local/include/OpenVanilla).
+
+If all is set, you can test if OpenVanilla works with SCIM now.
+You may want to kill your running SCIM processes first:
+
+    killall scim-launcher
+    
+Then launch SCIM:
+
+    scim -d
+
+If all goes well, you'll note the SCIM's initialization messages are now
+longer, as there are also OpenVanilla initialization messages.
+
+OpenVanilla uses an independent configuration management scheme that is
+different from SCIM's scim-setup panel. There is no need to run scim-setup.
+Please refer to OV's SCIM port-related documentation for this.
+
+
+LICENSE, BUG REPORTS, CONTACTS ETC.
+
+The OpenVanilla Project is released under the Artistic License, the License
+adopted by the Perl project.
+
+If you have encounterd any problem, or if you have suggestions or patches--
+which are all the more heartily welcome--please find the contact address
+or bug tracker links at:
+
+    http://openvanilla.org
+    
+If you can'r read Chinese, the English version of the site should usually be:
+
+    http://openvanilla.org/index.cgi?English
+    
+That's all there is now. Enjoy!
+
+lukhnos (lukhnos at gmail dot com),
+OpenVanilla Core Team
+
+Last updated: 2005-06-03
+
