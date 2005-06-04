@@ -12,4 +12,4 @@ framework:
 	for file in $(HEADERS) ; do cp $(HDRDIR)/$$file $(TARGET_DIR)/; done;
 
 loader:
-	cd  $(LOADER_DIR); ./autogen.sh; ./configure; make install
+	cd  $(LOADER_DIR); ./configure; make install
