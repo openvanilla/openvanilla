@@ -16,9 +16,13 @@ class DummyCandidate;
 class DIMEInstance : public IMEngineInstanceBase
 {
 public:
-	DIMEInstance(IMEngineFactoryBase *factory, const String& encoding, 
-	   int id=-1) : IMEngineInstanceBase(factory, encoding, id) {}
+   DIMEInstance(IMEngineFactoryBase *factory, const String& encoding, 
+     int id=-1) : IMEngineInstanceBase(factory, encoding, id) {}
     virtual ~DIMEInstance() {}
+
+    // for compatiblity with scim-1.0
+    void move_preedit_caret(unsigned int){}
+    void trigger_property (const String &property){}
 
 protected:	
     friend class DummyBuffer;

@@ -22095,7 +22095,7 @@ fi
 
 # SCIM variables
 
-SCIM_VERSION=1.2.0
+SCIM_VERSION=1.0.0
 
   succeeded=no
 
