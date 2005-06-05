@@ -14,7 +14,7 @@ CFLAGS=-O2 -Wall $(INC)
 
 GCC=/usr/bin/gcc
 GPP=/usr/bin/g++
-LIBTOOL=libtool
+LIBTOOL=$(shell ../../Utilities/find-libtool.pl)
 
 CCACHE=ccache
 ifdef USE_CCACHE
