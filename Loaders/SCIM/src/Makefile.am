@@ -6,8 +6,9 @@ INCLUDES = \
 	-I$(top_builddir) \
 	-I$(top_srcdir) \
 	-I$(top_srcdir)/src \
-	-I../../../Headers/ \
-        -D__STDC_ISO_10646__ \
+	-I/usr/local/include \
+	-I/usr/include \
+	-D__STDC_ISO_10646__ \
 	-DOV_MODULEDIR=\"@OV_MODULEDIR@\" \
 	-DSCIM_ICONDIR=\"@SCIM_ICONDIR@\" \
 	-DSCIM_CHEWING_ICON_FILE=\"@SCIM_ICONDIR@/scim-chewing.png\" 
@@ -20,8 +21,8 @@ module_LTLIBRARIES = OVLoader-SCIM.la
 
 OVLoader_SCIM_la_SOURCES  = OVLoader-SCIM.cpp
 
-OVLoader_SCIM_la_CFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@ -I/usr/local/include
-OVLoader_SCIM_la_CXXFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@ -I/usr/local/include
+OVLoader_SCIM_la_CFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@ 
+OVLoader_SCIM_la_CXXFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@ 
 
 OVLoader_SCIM_la_LIBADD = -lltdl
 OVLoader_SCIM_la_LDFLAGS = \
