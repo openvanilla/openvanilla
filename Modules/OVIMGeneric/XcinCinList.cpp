@@ -14,7 +14,11 @@
 
 const int vxPreparseSuppress=100;   // max. lines to be read for preparser
 
-int file_select(struct dirent *entry)
+#ifdef __linux__
+   int file_select(const struct dirent *entry)
+#else
+   int file_select(struct dirent *entry)
+#endif
 {
     char *selectfilter = ".cin";
     int p=strlen(entry->d_name)-strlen(selectfilter);
