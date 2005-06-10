@@ -110,6 +110,10 @@ void OVIMPhoneticContext::end() {
 
 int OVIMPhoneticContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, OVService* ps) {
     k=pk; b=pb; c=pc; s=ps;
+    murmur("key code=%d, shift=%d, opt=%d, ctrl=%d, cmd=%d, capslock=%d",
+        k->code(), k->isShift(), k->isOpt(), k->isCtrl(), k->isCommand(),
+        k->isCapslock());
+
     if (candi) return candidateEvent();
     if (isPunctuationCombination() && b->isEmpty()) return punctuationKey();
     if (k->isFunctionKey() && b->isEmpty()) return 0;

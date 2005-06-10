@@ -111,7 +111,7 @@ int CVKeyCode::isCommand() {
 }
 
 int CVKeyCode::isCapslock() {
-    if (m&(alphaLock|kEventKeyModifierNumLockMask)) return 1; 
+    if (m & alphaLock) return 1; 
     return 0;
 }
 

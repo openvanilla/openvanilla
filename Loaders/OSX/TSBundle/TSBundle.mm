@@ -94,12 +94,13 @@ extern "C" ComponentResult TSBContextEvent(TSBDataPtr ptr, EventRef evnt)
         return FALSE;
 
     // extract charcode (ASCII) and modifiers
-    UInt32 modifiers;
-    char charcode;
+    UInt32 modifiers=0;
+    char charcode=0;
     GetEventParameter(evnt, kEventParamKeyMacCharCodes, typeChar, nil,
         sizeof(charcode), nil, &charcode);
     GetEventParameter(evnt, kEventParamKeyModifiers, typeUInt32, nil,
         sizeof(modifiers), nil, &modifiers);
+    // fprintf(stderr, "charcode=%d, modifiers=%d\n", charcode, modifiers);
 
     IMContext *c=(IMContext*)ptr;
     c->sessionlock=1;
