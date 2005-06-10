@@ -11,11 +11,12 @@ This is the source directory of OpenVanilla Framework. OpenVanilla (OV) is
 an input method (IM)/output filter (OF) framework designed for better 
 end-use text processing experiences. For example, OpenVanilla provides a
 comprehensive set of Traditional Chinese input methods that are lacking
-or functionally deficient/unsatisfactory in Apple's Mac OS X. Many
-Simplified Chinese users also find this framework useful. A Tibetan IM
-module is also available. Cross-platform efforts, including a now functional
-Linux/FreeBSD port of OVLoader (with a bridge to the SCIM framework that
-provides X11 IM functionalities) is also on the way to maturity.
+or of which counterparts are functionally deficient/unsatisfactory in 
+Apple's Mac OS X. Many Simplified Chinese users also find this framework 
+useful. A Tibetan IM module is also available. Cross-platform efforts, 
+including a now functional Linux/FreeBSD port of OVLoader (with a bridge 
+to the SCIM framework that provides X11 IM functionalities) is also on the 
+way to maturity.
 
 
 STRUCTURE OF THE SOURCE TRUNK
