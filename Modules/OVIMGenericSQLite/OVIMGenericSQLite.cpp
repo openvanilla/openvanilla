@@ -108,7 +108,7 @@ protected:
 class OVOFReverseLookupSQLite : public OVOutputFilter
 {
 public:
-    OVOFReverseLookupSQLite();
+    OVOFReverseLookupSQLite(char *);
     virtual const char* identifier();
     virtual const char* localizedName(const char* locale);
     virtual int initialize(OVDictionary*, OVService*, const char*);
@@ -147,20 +147,21 @@ extern "C" int OVInitializeLibrary(OVService*, const char*p) {
 	n++;
     }
     IM_TABLES = n;
-    return 1; 
+    return 1;
 }
 extern "C" OVModule *OVGetModuleFromLibrary(int x) {
     if(x < IM_TABLES) {
 	return new OVIMGenericSQLite(IM_TABLE_NAMES[x]);
-// Temporarily ignore ReverseLookup modules for now.
-//        case 1: return new OVOFReverseLookupSQLite;
+    } else if (x < IM_TABLES * 2) {
+	int n = x - IM_TABLES;
+	return new OVOFReverseLookupSQLite(IM_TABLE_NAMES[n]);
     }
     return NULL;
 }
 
-OVOFReverseLookupSQLite::OVOFReverseLookupSQLite() {
-    strcpy(table, "cj");
-    strcpy(idstr, "OVOFReverseLookupSQLite-cj");
+OVOFReverseLookupSQLite::OVOFReverseLookupSQLite(char *name) {
+    strcpy(table, name);
+    sprintf(idstr,"OVOFReverseLookupSQLite-%s",name);
 }
 
 const char* OVOFReverseLookupSQLite::identifier() {
@@ -168,17 +169,16 @@ const char* OVOFReverseLookupSQLite::identifier() {
 }
 
 const char* OVOFReverseLookupSQLite::localizedName(const char* lc) {
-    return table;
+    static char buf[256];
+    sprintf(buf,"%s Lookup(SQLite ver.)",table);
+    return buf;
+
+//    return table;
 //    if (!strcasecmp(lc, "zh_TW")) return "反查倉頡字根（SQLite 版）";
 //    return "Cangjei lookup (SQLite version)";
 }
 
 int OVOFReverseLookupSQLite::initialize(OVDictionary *cfg, OVService * s, const char *p) {
-    SQLite3Statement *sth=db->prepare("select name from tablelist;");
-    if(sth->step()==SQLITE_ROW) {
-	sprintf(table,"%s",sth->column_text(0));
-	sprintf(idstr,"OVOFReverseLookupSQLite-%s",sth->column_text(0));
-    }
     return 1;
 }
 
