@@ -13,12 +13,21 @@
 #include "../../Headers/OVKeySequence.h"
 #include "OVSQLite3.h"
 
+// Some dirty public secrets goes here
+SQLite3 *db;
+//// Number of names in "tablelist" table
+int  IM_TABLES;
+//// The values of those names in "tablelist"... with some assumed limitations.
+//// Please, not extreme sports here.
+char *IM_TABLE_NAMES[32]; 
+// End of secrets
+
 const char *QueryForCommand(SQLite3 *db, const char *command);
 const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key);
 
 class IMGKeySequence : public OVKeySequenceSimple {
 public:
-    IMGKeySequence(SQLite3 *d, const char *t) : db(d) { strcpy(table, t); }
+    IMGKeySequence(const char *t) { strcpy(table, t); }
     virtual int isValidKey(char c);
     virtual int add(char c);
     virtual int isEmpty();
@@ -26,7 +35,6 @@ public:
     virtual const char *sequence() { return seq; }
 protected:
     virtual const char *query(char c);
-    SQLite3 *db;
     char composebuf[256];
     char table[256];
 };
@@ -79,7 +87,7 @@ protected:
 
 class OVIMGenericSQLite : public OVInputMethod {
 public:
-    OVIMGenericSQLite();
+    OVIMGenericSQLite(char *);
     virtual OVInputMethodContext *newContext();
     virtual int initialize(OVDictionary *, OVService *, const char *);
     virtual void update(OVDictionary *, OVService *);
@@ -95,7 +103,6 @@ protected:
     char endkey[96];
     char table[256];
     char idstr[256];
-    SQLite3 *db;
 };
 
 class OVOFReverseLookupSQLite : public OVOutputFilter
@@ -107,7 +114,6 @@ public:
     virtual int initialize(OVDictionary*, OVService*, const char*);
     virtual const char* process(const char *src, OVService *srv);
 protected:
-    SQLite3 *db;
     char table[256];
     char idstr[256];
     char composebuffer[1024];
@@ -120,12 +126,34 @@ extern "C" unsigned int OVGetLibraryVersion() {
     return OV_VERSION;
 }
 extern "C" int OVInitializeLibrary(OVService*, const char*p) { 
+    db=new SQLite3;  // this never gets deleted, but so do we
+
+    char dbfile[PATH_MAX];
+    char buf[256];
+    int n = 0;
+
+    sprintf(dbfile, "%s/OVIMGenericSQLite/imtables.db", p);
+    if (int err=db->open(dbfile)) {
+        murmur("SQLite3 error! code=%d", err);
+        return 0;
+    }
+    SQLite3Statement *sth=db->prepare("select name from tablelist;");
+    while(sth->step()==SQLITE_ROW) {
+	int len;
+	sprintf(buf,"%s",sth->column_text(0));
+	len = strlen(buf);
+	IM_TABLE_NAMES[n] = (char*)calloc(1,len);
+	strcpy(IM_TABLE_NAMES[n],buf);
+	n++;
+    }
+    IM_TABLES = n;
     return 1; 
 }
 extern "C" OVModule *OVGetModuleFromLibrary(int x) {
-    switch (x) {
-        case 0: return new OVIMGenericSQLite;
-        case 1: return new OVOFReverseLookupSQLite;
+    if(x < IM_TABLES) {
+	return new OVIMGenericSQLite(IM_TABLE_NAMES[x]);
+// Temporarily ignore ReverseLookup modules for now.
+//        case 1: return new OVOFReverseLookupSQLite;
     }
     return NULL;
 }
@@ -140,22 +168,12 @@ const char* OVOFReverseLookupSQLite::identifier() {
 }
 
 const char* OVOFReverseLookupSQLite::localizedName(const char* lc) {
-    if (!strcasecmp(lc, "zh_TW")) return "反查倉頡字根（SQLite 版）";
-    return "Cangjei lookup (SQLite version)";
+    return table;
+//    if (!strcasecmp(lc, "zh_TW")) return "反查倉頡字根（SQLite 版）";
+//    return "Cangjei lookup (SQLite version)";
 }
 
 int OVOFReverseLookupSQLite::initialize(OVDictionary *cfg, OVService * s, const char *p) {
-    db=new SQLite3;             // this never gets deleted, but so do we
-    char dbfile[PATH_MAX];
-    sprintf(dbfile, "%s/OVIMGenericSQLite/imtables.db", p);
-    murmur("OVOFReverseLookupSQLite: database file is %s", dbfile);
-    
-    if (int err=db->open(dbfile)) {
-        s->notify("SQLite3 error");
-        murmur("SQLite3 error! code=%d", err);
-        return 0;
-    }
-
     SQLite3Statement *sth=db->prepare("select name from tablelist;");
     if(sth->step()==SQLITE_ROW) {
 	sprintf(table,"%s",sth->column_text(0));
@@ -195,9 +213,9 @@ const char* OVOFReverseLookupSQLite::process(const char *src, OVService *srv)
 }
 
 
-OVIMGenericSQLite::OVIMGenericSQLite() {
-    strcpy(table, "cj");
-    strcpy(idstr, "OVIMGenericSQLite-cj");
+OVIMGenericSQLite::OVIMGenericSQLite(char *name) {
+    strcpy(table, name);
+    sprintf(idstr,"OVIMGenericSQLite-%s",name);
 }
 
 OVInputMethodContext *OVIMGenericSQLite::newContext() {
@@ -205,22 +223,7 @@ OVInputMethodContext *OVIMGenericSQLite::newContext() {
 }
 
 int OVIMGenericSQLite::initialize(OVDictionary *cfg, OVService * s, const char *p) {
-    db=new SQLite3;             // this never gets deleted, but so do we
-    char dbfile[PATH_MAX];
-    sprintf(dbfile, "%s/OVIMGenericSQLite/imtables.db", p);
-    murmur("OVIMGenericSQLite: database file is %s", dbfile);
-    
-    if (int err=db->open(dbfile)) {
-        s->notify("SQLite3 error");
-        murmur("SQLite3 error! code=%d", err);
-        return 0;
-    }
     update(cfg, s);
-    SQLite3Statement *sth=db->prepare("select name from tablelist;");
-    if(sth->step()==SQLITE_ROW) {
-	sprintf(table,"%s",sth->column_text(0));
-	sprintf(idstr,"OVIMGenericSQLite-%s",sth->column_text(0));
-    }
     return 1;
 }
 
@@ -245,8 +248,11 @@ const char *OVIMGenericSQLite::identifier() {
 }
 
 const char *OVIMGenericSQLite::localizedName(const char *lc) {
-    if (!strcasecmp(lc, "zh_TW")) return "倉頡輸入法（SQLite 版）";
-    return "Cangjei (SQLite version)";
+    static char buf[256];
+    sprintf(buf,"%s (SQLite ver.)",table);
+    return buf;
+//    if (!strcasecmp(lc, "zh_TW")) return "倉頡輸入法（SQLite 版）";
+//    return "Cangjei (SQLite version)";
 }
 
 int OVIMGenericSQLite::isEndKey(char c) {
@@ -254,8 +260,7 @@ int OVIMGenericSQLite::isEndKey(char c) {
     return 0;
 }
 
-OVIMGenericContext::OVIMGenericContext(OVIMGenericSQLite *p) 
-    : seq(p->db, p->table) {
+OVIMGenericContext::OVIMGenericContext(OVIMGenericSQLite *p) : seq(p->table) {
     parent=p;
 }
 
@@ -417,7 +422,7 @@ int OVIMGenericContext::fetchCandidate(const char *qs) {
         sprintf(cmd, "select value from %s where key like ?1;", parent->table);
     murmur("executing command=%s", cmd);
 
-    SQLite3Statement *sth=parent->db->prepare(cmd);
+    SQLite3Statement *sth=db->prepare(cmd);
     if (!sth) return 0;
     sth->bind_text(1, realqs);
     
