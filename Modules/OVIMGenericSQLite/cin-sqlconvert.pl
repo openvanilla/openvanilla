@@ -57,6 +57,7 @@ sub parse_chardef {
     my ($lastkey, $lastorder)=("", 0);
     while (<$hndl>) {
         chomp;
+	next unless $_;
         last if /%chardef/;
         my @a=split;
         if ($a[0] eq $lastkey) {
