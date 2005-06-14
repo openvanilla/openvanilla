@@ -13,7 +13,6 @@
 #include "../../Headers/OVKeySequence.h"
 #include "OVSQLite3.h"
 
-char valuebuffer[256];
 const char *QueryForCommand(SQLite3 *db, const char *command);
 const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key);
 
@@ -584,6 +583,8 @@ IMGCandidate::~IMGCandidate()
 
 const char *QueryForCommand(SQLite3 *db, const char *command) {
     char *r=NULL;
+    static char valuebuffer[256];
+
     murmur("executing SQL command: %s", command);
 
     SQLite3Statement *sth=db->prepare(command);
