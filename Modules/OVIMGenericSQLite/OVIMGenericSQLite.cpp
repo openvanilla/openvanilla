@@ -156,6 +156,12 @@ int OVOFReverseLookupSQLite::initialize(OVDictionary *cfg, OVService * s, const 
         murmur("SQLite3 error! code=%d", err);
         return 0;
     }
+
+    SQLite3Statement *sth=db->prepare("select name from tablelist;");
+    if(sth->step()==SQLITE_ROW) {
+	sprintf(table,"%s",sth->column_text(0));
+	sprintf(idstr,"OVOFReverseLookupSQLite-%s",sth->column_text(0));
+    }
     return 1;
 }
 
@@ -164,7 +170,9 @@ const char* OVOFReverseLookupSQLite::process(const char *src, OVService *srv)
     unsigned short *u16;
     int u16len=srv->UTF8ToUTF16(src, &u16);
     strcpy(composebuffer, "");
-    
+    char sqlbuf[256];
+    sprintf(sqlbuf,"select key from %s where value=?1;",table);
+
     // WE HAVE TO DO SURROGATE CHECK, REMEMBER!
     for (int i=0; i<u16len; i++) {
         // get each codepoint
@@ -174,7 +182,7 @@ const char* OVOFReverseLookupSQLite::process(const char *src, OVService *srv)
         sprintf(buf, "%s=(", u8);
         strcat(composebuffer, buf);
         
-        SQLite3Statement *sth=db->prepare("select key from cj where value=?1;");
+        SQLite3Statement *sth=db->prepare(sqlbuf);
         sth->bind_text(1, u8);
         while (sth->step()==SQLITE_ROW) {
             sprintf(buf, "%s, ", sth->column_text(0));
@@ -193,7 +201,6 @@ OVIMGenericSQLite::OVIMGenericSQLite() {
     strcpy(idstr, "OVIMGenericSQLite-cj");
 }
 
-
 OVInputMethodContext *OVIMGenericSQLite::newContext() {
     return new OVIMGenericContext(this);
 }
@@ -210,6 +217,11 @@ int OVIMGenericSQLite::initialize(OVDictionary *cfg, OVService * s, const char *
         return 0;
     }
     update(cfg, s);
+    SQLite3Statement *sth=db->prepare("select name from tablelist;");
+    if(sth->step()==SQLITE_ROW) {
+	sprintf(table,"%s",sth->column_text(0));
+	sprintf(idstr,"OVIMGenericSQLite-%s",sth->column_text(0));
+    }
     return 1;
 }
 
