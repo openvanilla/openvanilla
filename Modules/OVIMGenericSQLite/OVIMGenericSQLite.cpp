@@ -276,7 +276,7 @@ int OVIMGenericContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
     if (candi) return candidateEvent();
     if (isPunctuationCombination()) return punctuationKey();
     if (k->isFunctionKey() && b->isEmpty()) return 0;
-    if (k->isCapslock() && b->isEmpty()) keyCapslock();
+    if (k->isCapslock() && b->isEmpty()) return keyCapslock();
     if (k->code()==ovkEsc) return keyEsc();
     if (k->code()==ovkBackspace || k->code()==ovkDelete) return keyBackspace();
     if (!b->isEmpty() && 
