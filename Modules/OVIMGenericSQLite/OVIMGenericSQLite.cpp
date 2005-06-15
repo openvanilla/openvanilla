@@ -43,7 +43,7 @@ struct IMGCandidate
 {
     IMGCandidate();
     ~IMGCandidate();
-    int count;
+    unsigned int count;
     char **candidates;
 };
 
@@ -74,7 +74,7 @@ protected:
     int candidateEvent();
     int candidatePageUp();
     int candidatePageDown();
-    
+
     OVKeyCode *k;
     OVBuffer *b;
     OVCandidate *c;
@@ -98,6 +98,7 @@ public:
     virtual int isBeep() { return cfgBeep; }
     virtual int isAutoCompose() { return cfgAutoCompose; }
     virtual int isHitMaxAndCompose() { return cfgHitMaxAndCompose; }
+    virtual bool isShiftSelKey() { return doShiftSelKey; };
 
 protected:
     int isEndKey(char c);
@@ -113,6 +114,8 @@ protected:
     int cfgBeep;
     int cfgAutoCompose;
     int cfgHitMaxAndCompose;
+
+    bool doShiftSelKey;
 };
 
 class OVOFReverseLookupSQLite : public OVOutputFilter
@@ -257,11 +260,12 @@ void OVIMGenericSQLite::update(OVDictionary *cfg, OVService *) {
         strcpy(endkey, "");
     }
 
-    cfgMaxSeqLen=cfg->getInteger(maxSeqLen);
-    cfgBeep=cfg->getInteger(warningBeep);
-    cfgAutoCompose=cfg->getInteger(autoCompose);
-    cfgHitMaxAndCompose=cfg->getInteger(hitMax);
-    
+    cfgAutoCompose      = cfg->getInteger(autoCompose);
+    cfgBeep             = cfg->getInteger(warningBeep);
+    cfgHitMaxAndCompose = cfg->getInteger(hitMax);
+    cfgMaxSeqLen        = cfg->getInteger(maxSeqLen);
+    doShiftSelKey       = cfg->getInteger("shiftSelectionKey") == 0 ? false : true;
+
     murmur("OVIMGenericSQLite: config update! select key=%s, endkey=%s", selkey, endkey);
 }
 
@@ -476,24 +480,30 @@ int OVIMGenericContext::fetchCandidate(const char *qs) {
 
 int OVIMGenericContext::candidateEvent() {
     char kc=k->code();
+    char *localSelKey;
+
     if (kc==ovkEsc || kc==ovkBackspace || kc==ovkDelete) {  //ESC/BKSP/DELETE cancels candi window
         clear();
         b->clear()->update();
         return closeCandidateWindow();
     }
-    
-    if (kc==ovkSpace && parent->isAutoCompose()) {
-	if(candi->count < strlen(parent->selkey))
-	    return commitFirstCandidate();
+
+    if (parent->isShiftSelKey()) {
+	localSelKey = (char*)calloc(1,strlen(parent->selkey) + 2);
+	sprintf(localSelKey," %s",parent->selkey);
+    } else {
+	localSelKey = parent->selkey;
     }
-    if (kc==ovkSpace || kc==ovkRight || kc==ovkDown || kc==ovkPageDown || kc =='>')
+
+    if ((kc==ovkSpace && !parent->isShiftSelKey())
+	|| kc==ovkRight || kc==ovkDown || kc==ovkPageDown || kc =='>')
         return candidatePageDown(); 
     if (kc==ovkLeft || kc==ovkUp || kc==ovkPageUp || kc=='<')
         return candidatePageUp();
 
-    int perpage=strlen(parent->selkey);
+    int perpage=strlen(localSelKey);
     int i=0, l=perpage, nextsyl=0;
-    for (i=0; i<perpage; i++) if(parent->selkey[i]==kc) break;
+    for (i=0; i<perpage; i++) if(localSelKey[i]==kc) break;
     if (i==l) {         // not a valid candidate key
         if (kc==ovkReturn) i=0;
         if (seq.isValidKey(kc)) { i=0; nextsyl=1; }
@@ -612,7 +622,7 @@ IMGCandidate::IMGCandidate()
 IMGCandidate::~IMGCandidate()
 {
     if (!count) return;
-    for (int i=0; i<count; i++) delete candidates[i];
+    for (unsigned int i=0; i<count; i++) delete candidates[i];
     delete[] candidates;
 }
 
