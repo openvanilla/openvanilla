@@ -30,7 +30,9 @@ into the following sub-directories:
                 header files, mainly used by IM/OF modules, that reside
                 here. NOTE: Non-framework modules will not be copied
                 into the Framework directory in the build process.         
+
     Makefile*   Makefile of the OV framework
+
     Mk/         Shared makefile includes for IM/OF modules
     
     Loaders/    The OpenVanilla Loaders (OVLoader). A Loader is a
@@ -55,12 +57,14 @@ into the following sub-directories:
     Distributions/  "port" files or package files required by many
                 *nix package management systems. Currently there is
                 DarwinPorts/
+
     PackageMaking/  scripts that prepare distributions packages,
                 e.g. OS X binary installer, source tar ball, or
                 corresponding tar files needed by Portfiles.
                 
     Utilities/  Non-OpenVanilla or development utilities. Many of them
                 serve as language or diagnostic tools.
+
     Experiments/    On-going or immature experiments
     
 
