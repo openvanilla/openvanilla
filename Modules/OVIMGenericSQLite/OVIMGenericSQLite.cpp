@@ -143,7 +143,6 @@ extern "C" int OVInitializeLibrary(OVService*, const char*p) {
 
     char dbfile[PATH_MAX];
     char buf[256];
-    int n = 0;
 
     sprintf(dbfile, "%s/OVIMGenericSQLite/imtables.db", p);
     if (int err=db->open(dbfile)) {
@@ -152,14 +151,11 @@ extern "C" int OVInitializeLibrary(OVService*, const char*p) {
     }
     SQLite3Statement *sth=db->prepare("select name from tablelist;");
     while(sth->step()==SQLITE_ROW) {
-	int len;
 	sprintf(buf,"%s",sth->column_text(0));
-	len = strlen(buf);
-	IM_TABLE_NAMES[n] = (char*)calloc(1,len);
-	strcpy(IM_TABLE_NAMES[n],buf);
-	n++;
+	IM_TABLE_NAMES[IM_TABLES] = (char*)calloc(1,strlen(buf));
+	strcpy(IM_TABLE_NAMES[IM_TABLES],buf);
+	IM_TABLES++;
     }
-    IM_TABLES = n;
     return 1;
 }
 extern "C" OVModule *OVGetModuleFromLibrary(int x) {
