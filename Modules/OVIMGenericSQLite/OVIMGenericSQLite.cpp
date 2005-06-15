@@ -93,7 +93,12 @@ public:
     virtual void update(OVDictionary *, OVService *);
     virtual const char *identifier();
     virtual const char *localizedName(const char *);
-    
+        
+    virtual int maxSeqLen() { return cfgMaxSeqLen; }
+    virtual int isBeep() { return cfgBeep; }
+    virtual int isAutoCompose() { return cfgAutoCompose; }
+    virtual int isHitMaxAndCompose() { return cfgHitMaxAndCompose; }
+
 protected:
     int isEndKey(char c);
     
@@ -103,6 +108,11 @@ protected:
     char endkey[96];
     char table[256];
     char idstr[256];
+
+    int cfgMaxSeqLen;
+    int cfgBeep;
+    int cfgAutoCompose;
+    int cfgHitMaxAndCompose;
 };
 
 class OVOFReverseLookupSQLite : public OVOutputFilter
@@ -230,6 +240,11 @@ int OVIMGenericSQLite::initialize(OVDictionary *cfg, OVService * s, const char *
 }
 
 void OVIMGenericSQLite::update(OVDictionary *cfg, OVService *) {
+    const char *warningBeep="warningBeep";
+    const char *autoCompose="autoCompose";
+    const char *maxSeqLen="maxKeySequenceLength";
+    const char *hitMax="hitMaxAndCompose";
+
     strcpy(selkey, cfg->getStringWithDefault("selectKey", "123456789"));    
     allowwildcard=cfg->getIntegerWithDefault("wildcard", 1);
     if (allowwildcard !=0 && allowwildcard !=1) allowwildcard=1;
@@ -241,6 +256,11 @@ void OVIMGenericSQLite::update(OVDictionary *cfg, OVService *) {
     else {
         strcpy(endkey, "");
     }
+
+    cfgMaxSeqLen=cfg->getInteger(maxSeqLen);
+    cfgBeep=cfg->getInteger(warningBeep);
+    cfgAutoCompose=cfg->getInteger(autoCompose);
+    cfgHitMaxAndCompose=cfg->getInteger(hitMax);
     
     murmur("OVIMGenericSQLite: config update! select key=%s, endkey=%s", selkey, endkey);
 }
