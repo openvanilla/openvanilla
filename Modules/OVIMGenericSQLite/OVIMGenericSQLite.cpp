@@ -343,7 +343,7 @@ int OVIMGenericContext::keyPrintable() {
     // wildcard hack: currently we don't allow ? * as the first character
     if (parent->allowwildcard && b->isEmpty() && 
         (k->code()=='?' || k->code()=='*')) return keyNonRadical();
-        
+ 
     if (!seq.add(k->code())) {
         if (b->isEmpty()) return keyNonRadical(); // not a Radical keycode
         s->beep();
@@ -482,6 +482,10 @@ int OVIMGenericContext::candidateEvent() {
         return closeCandidateWindow();
     }
     
+    if (kc==ovkSpace && parent->isAutoCompose()) {
+	if(candi->count < strlen(parent->selkey))
+	    return commitFirstCandidate();
+    }
     if (kc==ovkSpace || kc==ovkRight || kc==ovkDown || kc==ovkPageDown || kc =='>')
         return candidatePageDown(); 
     if (kc==ovkLeft || kc==ovkUp || kc==ovkPageUp || kc=='<')
@@ -582,6 +586,7 @@ int IMGKeySequence::isEmpty() {
     if (len) return 0;
     return 1;
 }
+
 const char *IMGKeySequence::query(char c) {
     char keystr[32];
     sprintf(keystr, "_key_%c", tolower(c));
