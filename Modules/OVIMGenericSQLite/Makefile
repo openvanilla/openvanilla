@@ -2,7 +2,7 @@
 IMID=OVIMGenericSQLite
 SOURCES=OVIMGenericSQLite
 DATA=imtables.db
-CINS=cj.cin
+CINS=cj.cin ehq.cin iroha.cin
 LDFLAGS+=-lsqlite3
 
 include ../../Mk/ov.os.mk
