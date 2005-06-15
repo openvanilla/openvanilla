@@ -140,10 +140,7 @@ extern "C" unsigned int OVGetLibraryVersion() {
 }
 extern "C" int OVInitializeLibrary(OVService*, const char*p) { 
     db=new SQLite3;  // this never gets deleted, but so do we
-
     char dbfile[PATH_MAX];
-    char buf[256];
-
     sprintf(dbfile, "%s/OVIMGenericSQLite/imtables.db", p);
     if (int err=db->open(dbfile)) {
         murmur("SQLite3 error! code=%d", err);
@@ -151,7 +148,7 @@ extern "C" int OVInitializeLibrary(OVService*, const char*p) {
     }
     SQLite3Statement *sth=db->prepare("select name from tablelist;");
     while(sth->step()==SQLITE_ROW) {
-	sprintf(buf,"%s",sth->column_text(0));
+	const char *buf = (char*)sth->column_text(0);
 	IM_TABLE_NAMES[IM_TABLES] = (char*)calloc(1,strlen(buf));
 	strcpy(IM_TABLE_NAMES[IM_TABLES],buf);
 	IM_TABLES++;
