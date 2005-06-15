@@ -170,12 +170,14 @@ const char* OVOFReverseLookupSQLite::identifier() {
 
 const char* OVOFReverseLookupSQLite::localizedName(const char* lc) {
     static char buf[256];
-    sprintf(buf,"%s Lookup(SQLite ver.)",table);
+    const char *name;
+    if(!strcasecmp(lc,"zh_TW")) {
+	name=QueryForKey(db, table, "_property_cname");
+    } else {
+	name=QueryForKey(db, table, "_property_ename");
+    }
+    sprintf(buf,"%s Lookup (SQLite)",name);
     return buf;
-
-//    return table;
-//    if (!strcasecmp(lc, "zh_TW")) return "反查倉頡字根（SQLite 版）";
-//    return "Cangjei lookup (SQLite version)";
 }
 
 int OVOFReverseLookupSQLite::initialize(OVDictionary *cfg, OVService * s, const char *p) {
@@ -249,10 +251,14 @@ const char *OVIMGenericSQLite::identifier() {
 
 const char *OVIMGenericSQLite::localizedName(const char *lc) {
     static char buf[256];
-    sprintf(buf,"%s (SQLite ver.)",table);
+    const char *name;
+    if(!strcasecmp(lc,"zh_TW")) {
+	name=QueryForKey(db, table, "_property_cname");
+    } else {
+	name=QueryForKey(db, table, "_property_ename");
+    }
+    sprintf(buf,"%s (SQLite)",name);
     return buf;
-//    if (!strcasecmp(lc, "zh_TW")) return "倉頡輸入法（SQLite 版）";
-//    return "Cangjei (SQLite version)";
 }
 
 int OVIMGenericSQLite::isEndKey(char c) {
