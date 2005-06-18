@@ -201,7 +201,7 @@ int GetChiEngMode( void *iccf )
 
 static void CheckAndResetRange( ChewingData *pgdata )
 {
-	if ( pgdata->PointStart > -1 ) {
+	if ( pgdata->PointStart > -1 && !pgdata->bSelect) {
 		pgdata->PointStart = -1;
 		pgdata->PointEnd = 0;
 	}
@@ -337,7 +337,9 @@ int OnKeyEnter( void *iccf, ChewingOutput *pgo )
 	if ( ! ChewingIsEntering( pgdata ) ) {
 		keystrokeRtn = KEYSTROKE_IGNORE;
 	} else if ( pgdata->bSelect ) {
-		keystrokeRtn = KEYSTROKE_ABSORB | KEYSTROKE_BELL;
+		//	keystrokeRtn = KEYSTROKE_ABSORB | KEYSTROKE_BELL;
+		/* zonble: use ENTER to cancel candidate window */
+		return OnKeyEsc(iccf, pgo );
 	} else if ( pgdata->PointStart > -1) {
 		int buf = pgdata->cursor;
 		int key;
@@ -497,7 +499,7 @@ int OnKeyShiftLeft( void *iccf, ChewingOutput *pgo )
 			&& pgdata->PointEnd > -9 ) {
 			pgdata->chiSymbolCursor--;
 			if ( pgdata->PointStart == -1 )
-				pgdata->PointStart = pgdata->cursor;
+				pgdata->PointStart = pgdata->chiSymbolCursor + 1;
 			if (
 				pgdata->cursor > 0 && 
 				ChewingIsChiAt( pgdata->chiSymbolCursor, pgdata ) ) {
@@ -561,7 +563,7 @@ int OnKeyShiftRight(void *iccf, ChewingOutput *pgo)
 			pgdata->chiSymbolCursor < pgdata->chiSymbolBufLen && 
 			pgdata->PointEnd < 9 ) {
 			if ( pgdata->PointStart == -1 )
-				pgdata->PointStart = pgdata->cursor;
+				pgdata->PointStart = pgdata->chiSymbolCursor;
 			if (
 				pgdata->cursor < pgdata->nPhoneSeq && 
 				ChewingIsChiAt( pgdata->chiSymbolCursor, pgdata ) ) {

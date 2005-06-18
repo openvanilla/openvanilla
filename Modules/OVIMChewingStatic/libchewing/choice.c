@@ -222,6 +222,10 @@ int ChoiceFirstAvail( ChewingData *pgdata )
 		pgdata->cursor, 
 		pgdata->bSymbolArrBrkpt );
 	pgdata->availInfo.currentAvail = pgdata->availInfo.nAvail - 1;
+	/* zonble */	
+	pgdata->PointStart = pgdata->chiSymbolCursor;
+	pgdata->PointEnd = pgdata->availInfo.currentAvail + 1;
+	
 	SetChoiceInfo(
 		&( pgdata->choiceInfo ), 
 		&( pgdata->availInfo ), 
@@ -235,6 +239,9 @@ int ChoicePrevAvail( ChewingData *pgdata )
 {
 	if ( ++( pgdata->availInfo.currentAvail ) >= pgdata->availInfo.nAvail )
 		pgdata->availInfo.currentAvail = 0;
+	/* zonble */
+	pgdata->PointStart = pgdata->cursor;
+	pgdata->PointEnd = pgdata->availInfo.currentAvail + 1;
 	SetChoiceInfo( 
 		&( pgdata->choiceInfo ), 
 		&( pgdata->availInfo ), 
@@ -249,6 +256,9 @@ int ChoiceNextAvail( ChewingData *pgdata )
 {
 	if ( --( pgdata->availInfo.currentAvail ) < 0 )
 		pgdata->availInfo.currentAvail = pgdata->availInfo.nAvail - 1;
+	/* zonble */
+	pgdata->PointStart = pgdata->cursor;
+	pgdata->PointEnd = pgdata->availInfo.currentAvail + 1;
 	SetChoiceInfo(
 		&( pgdata->choiceInfo ), 
 		&( pgdata->availInfo ), 
@@ -270,6 +280,8 @@ int ChoiceEndChoice( ChewingData *pgdata )
 	} else {
 		pgdata->choiceInfo.isSymbol = 0;
 	}
+	pgdata->PointStart = -1;
+	pgdata->PointEnd = 0;
 	return 0;
 }
 
