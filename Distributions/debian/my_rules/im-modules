@@ -1,0 +1,14 @@
+MODULES=OVIMArray
+MODULE_DIR=Modules/
+DESTDIR=$(CURDIR)/debian/openvanilla-im-modules
+export DESTDIR
+
+configure:
+
+build:
+	for m in $(MODULES);do cd $(MODULE_DIR)/$$m; make; done
+
+clean:
+
+install:
+	for m in $(MODULES);do cd $(MODULE_DIR)/$$m; make install; done

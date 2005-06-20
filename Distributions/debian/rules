@@ -8,7 +8,7 @@
 include /usr/share/dpatch/dpatch.make
 
 
-RULES=loader framework
+RULES=loader framework im-modules
 
 
 
@@ -23,8 +23,8 @@ ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
 	INSTALL_PROGRAM += -s
 endif
 
-configure: patch configure-stamp
-configure-stamp:
+configure: configure-stamp
+configure-stamp: patch
 	dh_testdir
 	# Add here commands to configure the package.
 	for rule in $(RULES); do $(MAKE) -f debian/my_rules/$$rule configure;  done

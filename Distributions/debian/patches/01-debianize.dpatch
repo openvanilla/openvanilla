@@ -1,0 +1,19 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 01-debianize.dpatch by  <vgod@vgod.info>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad openvanilla-0.7.0/Mk/ov.os.mk /tmp/dpep.eadvD5/openvanilla-0.7.0/Mk/ov.os.mk
+--- openvanilla-0.7.0/Mk/ov.os.mk	2005-06-21 00:57:09.000000000 +0800
++++ /tmp/dpep.eadvD5/openvanilla-0.7.0/Mk/ov.os.mk	2005-06-21 01:07:18.000000000 +0800
+@@ -16,7 +16,7 @@
+ else
+ 
+ 
+-	INST_PATH=/usr/local/lib/openvanilla/
++	INST_PATH=$(DESTDIR)/usr/lib/openvanilla/
+ 	OBJS=$(patsubst %, %.lo, $(SOURCES))
+ 	GOALS=$(IMID).la
+ 	#CFLAGS=-I/usr/local/include/ -I../../Headers/
