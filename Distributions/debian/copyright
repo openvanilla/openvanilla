@@ -1,10 +1,12 @@
-This package was debianized by vgod <vgod@vgod.info> on
+This package was debianized by Tsung-Hsiang Chang <vgod@vgod.info> on
 Mon, 20 Jun 2005 17:53:17 +0800.
 
-It was downloaded from <fill in ftp site>
+It was downloaded from http://svn.openfoundry.org/openvanilla/trunk
 
-Upstream Author(s): <put author(s) name and email here>
 
-Copyright:
+Copyright (c) 2004-2005 by Lukhnos D. Liu, Kang-ming Liu, Weizhong Yang,
+Tian-jian Jiang, Meng-juei Hsieh, Pek-tiong Tan and Tsung-hsiang Chang.
+http://openvanilla.org
 
-<Must follow here>
+The OpenVanilla Project is released under the Artistic License, the License
+adopted by the Perl project.

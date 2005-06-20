@@ -1,18 +1,27 @@
 Source: openvanilla
-Section: unknown
+Section: utils
 Priority: optional
 Maintainer: Tsung-Hsiang Chang <vgod@vgod.info>
-Build-Depends: debhelper (>= 4.0.0) scim-dev (>= 1.0.0)
+Build-Depends: debhelper (>= 4.0.0) scim-dev (>= 1.0.0) libtool (>= 1.5.6) openvanilla-dev(>= 0.7.0)
 Standards-Version: 3.6.0
 
 Package: scim-openvanilla
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: openvanilla
+Suggests: openvanilla-im-modules
+Description: OpenVanilla loader for SCIM
  openvanilla's long descrition.
 
 Package: openvanilla-dev
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: openvanilla
+Description: openvanilla framework
  openvanilla's long descrition.
+
+
+Package: openvanilla-im-modules
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends} scim-openvanilla
+Description: openvanilla input method modules
+ openvanilla's long descrition.
+

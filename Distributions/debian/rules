@@ -5,7 +5,7 @@
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
-
+include /usr/share/dpatch/dpatch.make
 
 
 RULES=loader framework
@@ -23,7 +23,7 @@ ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
 	INSTALL_PROGRAM += -s
 endif
 
-configure: configure-stamp
+configure: patch configure-stamp
 configure-stamp:
 	dh_testdir
 	# Add here commands to configure the package.
@@ -42,7 +42,9 @@ build-stamp: configure-stamp
 
 	touch build-stamp
 
-clean:
+clean: clean-patched unpatch
+
+clean-patched:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
