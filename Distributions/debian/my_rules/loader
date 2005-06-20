@@ -9,3 +9,5 @@ configure:
 install: 
 	cd  $(LOADER_DIR); $(MAKE) install DESTDIR=$(CURDIR)/debian/scim-openvanilla
 
+clean: 
+	cd  $(LOADER_DIR); $(MAKE) clean

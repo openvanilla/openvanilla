@@ -48,7 +48,7 @@ clean:
 	rm -f build-stamp configure-stamp
 
 	# Add here commands to clean up after the build process.
-	-$(MAKE) clean
+	for rule in $(RULES); do $(MAKE) -f debian/my_rules/$$rule clean;  done
 
 	dh_clean 
 

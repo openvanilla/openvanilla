@@ -6,6 +6,8 @@ configure:
 
 build:
 
+clean:
+
 install:
 	for file in $(HEADERS) ; do cp $(HDRDIR)/$$file $(TARGET_DIR) ; done;
 
