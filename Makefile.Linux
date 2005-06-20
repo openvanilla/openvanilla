@@ -13,3 +13,7 @@ framework:
 
 loader:
 	cd  $(LOADER_DIR); ./configure; make install
+
+debian:
+	ln -sf Distributions/debian/ .
+	debian/rules binary
