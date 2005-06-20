@@ -7,7 +7,7 @@ Standards-Version: 3.6.0
 
 Package: scim-openvanilla
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends} scim (>= 1.0.0)
 Suggests: openvanilla-im-modules
 Description: OpenVanilla loader for SCIM
  openvanilla's long descrition.

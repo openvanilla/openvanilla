@@ -1,4 +1,5 @@
 LOADER_DIR=Loaders/SCIM/
+export OV_MODULEDIR=/usr/lib/openvanilla/
 
 build: 
 	cd  $(LOADER_DIR); $(MAKE) 
