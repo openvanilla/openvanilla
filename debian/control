@@ -1,0 +1,18 @@
+Source: openvanilla
+Section: unknown
+Priority: optional
+Maintainer: Tsung-Hsiang Chang <vgod@vgod.info>
+Build-Depends: debhelper (>= 4.0.0) scim-dev (>= 1.0.0)
+Standards-Version: 3.6.0
+
+Package: scim-openvanilla
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: openvanilla
+ openvanilla's long descrition.
+
+Package: openvanilla-dev
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: openvanilla
+ openvanilla's long descrition.

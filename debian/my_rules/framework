@@ -1,0 +1,11 @@
+HDRDIR=Headers
+HEADERS=OpenVanilla.h OVLibrary.h OVUtility.h
+TARGET_DIR=$(CURDIR)/debian/openvanilla-dev/usr/include/OpenVanilla
+
+configure:
+
+build:
+
+install:
+	for file in $(HEADERS) ; do cp $(HDRDIR)/$$file $(TARGET_DIR) ; done;
+
