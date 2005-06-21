@@ -75,7 +75,7 @@ void OVCIN::parseCinVector(const vector<string>& cinVector){
     for(it = cinVector.begin(); it != cinVector.end(); ++it){
         if( it->find("#") == 0 )    continue;
         const string& line = *it;
-        unsigned int del_pos;
+        string::size_type del_pos;
         if( (del_pos=line.find_first_of(delimiters)) != string::npos ){
             string key = line.substr(0, del_pos);
             unsigned int value_pos=line.find_first_not_of(delimiters, del_pos);
