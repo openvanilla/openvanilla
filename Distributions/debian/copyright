@@ -9,4 +9,5 @@ Tian-jian Jiang, Meng-juei Hsieh, Pek-tiong Tan and Tsung-hsiang Chang.
 http://openvanilla.org
 
 The OpenVanilla Project is released under the Artistic License, the License
-adopted by the Perl project.
+adopted by the Perl project. On Debian GNU/Linux systems, the complete text
+of the Artistic License can be found in '/usr/share/common-licenses/Artistic'.

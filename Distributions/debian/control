@@ -7,21 +7,50 @@ Standards-Version: 3.6.0
 
 Package: scim-openvanilla
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends} scim (>= 1.0.0)
+Depends: ${shlibs:Depends}, ${misc:Depends} 
 Suggests: openvanilla-im-modules
 Description: OpenVanilla loader for SCIM
- openvanilla's long descrition.
+ SCIM (Smart Common Input Method) is an input method platform on X11.  
+ OpenVanilla (OV) is an input method (IM)/output filter (OF) framework 
+ designed for better end-use text processing experiences.  It is divided
+ into two major components: loader and modules.  This package is the loader
+ that bridges OpenVanilla modules to the SCIM platform.
+ .
+ For development on OpenVanilla modules, please see the descrition of 
+ package openvanilla-dev.
+ .
+ Homepage: http://openvanilla.org/
+
 
 Package: openvanilla-dev
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: openvanilla framework
- openvanilla's long descrition.
+Description: OpenVanilla framework(development files)
+ OpenVanilla (OV) is an input method (IM)/output filter (OF) framework 
+ designed for better end-use text processing experiences.  It is divided
+ into two major components: loader and modules.  
+ .
+ This package is the framework for development on OpenVanilla modules.
+ .
+ For more information about OpenVanilla, please see http://openvanilla.org/.
 
 
 Package: openvanilla-im-modules
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends} scim-openvanilla
-Description: openvanilla input method modules
- openvanilla's long descrition.
+Description: OpenVanilla input method modules
+ OpenVanilla (OV) is an input method (IM)/output filter (OF) framework 
+ designed for better end-use text processing experiences.  It is divided
+ into two major components: loader and modules.  
+ .
+ This package contains the following input method modules:
+   Array 30
+   ChangJei
+   Dayi3
+   EHQ-Symbols
+   Iroha
+   Phoentic (Bopomofo)
+   POJ-Holo
+   Tibetan
+ 
 
