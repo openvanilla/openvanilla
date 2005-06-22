@@ -2,12 +2,12 @@ Source: openvanilla
 Section: utils
 Priority: optional
 Maintainer: Tsung-Hsiang Chang <vgod@vgod.info>
-Build-Depends: debhelper (>= 4.0.0) scim-dev (>= 1.0.0) libtool (>= 1.5.6) openvanilla-dev(>= 0.7.0) libltdl3-dev(>= 1.5.6)
+Build-Depends: debhelper (>= 4.0.0) scim-dev (>= 1.0.0) libtool (>= 1.5.6) openvanilla-dev(>= 0.7.0) libltdl3-dev(>= 1.5.6) dpatch(>= 2.0.10)
 Standards-Version: 3.6.0
 
 Package: scim-openvanilla
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends} 
+Depends: ${shlibs:Depends}, ${misc:Depends} libscim6 (>= 1.2.2)
 Suggests: openvanilla-im-modules
 Description: OpenVanilla loader for SCIM
  SCIM (Smart Common Input Method) is an input method platform on X11.  
@@ -24,7 +24,6 @@ Description: OpenVanilla loader for SCIM
 
 Package: openvanilla-dev
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: OpenVanilla framework(development files)
  OpenVanilla (OV) is an input method (IM)/output filter (OF) framework 
  designed for better end-use text processing experiences.  It is divided
