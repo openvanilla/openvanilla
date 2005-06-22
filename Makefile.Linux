@@ -16,4 +16,4 @@ loader:
 
 debian:
 	ln -sf Distributions/debian/ .
-	debian/rules binary
+	fakeroot debian/rules binary
