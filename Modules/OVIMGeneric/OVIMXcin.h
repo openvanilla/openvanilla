@@ -35,6 +35,7 @@ public:
         autocomposing(0) {}
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf,
         OVCandidate *textbar, OVService *srv);
+    virtual void clear();
 
 protected:
     virtual void updateDisplay(OVBuffer *buf);

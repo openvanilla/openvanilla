@@ -179,6 +179,11 @@ void OVXcinContext::updateDisplay(OVBuffer *buf)
     buf->update();
 }
 
+void OVXcinContext::clear() {
+    keyseq.clear();
+    autocomposing=0;
+    candi.cancel();
+}
 
 int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, 
     OVService *srv)
