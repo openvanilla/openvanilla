@@ -1,18 +1,11 @@
 IMID=OVOFReverseLookup
 
-OBJS=OVCIN.o OVCandidateList.o OVFileHandler.o OVOFReverseLookup.o \
-     OVStringToolKit.o XcinCinList.o
-
-GOALS=OVOFReverseLookup.dylib 
+SOURCES=OVCIN OVCandidateList OVFileHandler OVOFReverseLookup\
+     	OVStringToolKit XcinCinList
 
 DATA=cj-lookup.cin phonetic-lookup.cin poj-lookup.cin array-lookup.cin
 
-$(GOALS): $(OBJS)
-	$(CPP) -bundle -o $@ $(OBJS)
-
+include ../../Mk/ov.os.mk
 include ../../Mk/ov.im.mk
 include ../../Mk/ov.vars.mk
 include ../../Mk/ov.general.mk
-include ../../Mk/ov.osx.mk
-
-
