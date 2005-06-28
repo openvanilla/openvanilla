@@ -408,13 +408,14 @@ int OVIMGenericContext::keyCompose() {
 
     int count=fetchCandidate(q);
     if (!count) {
-        count = fetchCandidateSuffixRule(q,'v');
-        if(count <= 1) {
-            s->beep();
-            return 1;
-        } else {
+        if(fetchCandidateSuffixRule(q,'v') > 1) 
             return commitNthCandidate(1);
-        }
+        if(fetchCandidateSuffixRule(q,'r') > 2) 
+            return commitNthCandidate(2);
+        if(fetchCandidateSuffixRule(q,'s') > 3) 
+            return commitNthCandidate(3);
+        s->beep();
+        return 1;
     }
 
     if (count==1) return commitFirstCandidate();
