@@ -65,6 +65,9 @@ protected:
     int keyNonRadical();
     int keyCapslock();
     int fetchCandidate(const char *);
+    int fetchCandidateVRule(const char *);
+    int fetchCandidateRRule(const char *);
+    int fetchCandidateSRule(const char *);
     int fetchCandidateWithPrefix(const char *prefix, char c);
     int isPunctuationCombination();
     int punctuationKey();
@@ -402,25 +405,12 @@ int OVIMGenericContext::keyCapslock() {
 
 int OVIMGenericContext::keyCompose() {
     const char *q = seq.sequence();
-    char newseq[6];
 
     b->clear()->append(seq.compose())->update();
 
     int count=fetchCandidate(q);
     if (!count) {
-        int numV = 0;
-        int len  = strlen(q);
-        for(int i = len - 1; i >= 0 ; i--) {
-            if(q[i] == 'v') 
-                numV++;
-        }
-        if(numV == 0) {
-            s->beep();
-            return 1;
-        }
-        strcpy(newseq,q);
-        newseq[len - 1] = 0;
-        count = fetchCandidate(newseq);
+        count = fetchCandidateVRule(q);
         if(count <= 1) {
             s->beep();
             return 1;
@@ -431,6 +421,31 @@ int OVIMGenericContext::keyCompose() {
 
     if (count==1) return commitFirstCandidate();
     return updateCandidateWindow();
+}
+
+int OVIMGenericContext::fetchCandidateVRule(const char *q) {
+    char newseq[6];
+    int numV = 0;
+    int len  = strlen(q);
+    for(int i = len - 1; i >= 0 ; i--) {
+        if(q[i] == 'v') 
+            numV++;
+    }
+    if(numV == 0) {
+        s->beep();
+        return 1;
+    }
+    strcpy(newseq,q);
+    newseq[len - 1] = 0;
+    return fetchCandidate(newseq);
+}
+
+int OVIMGenericContext::fetchCandidateRRule(const char *q) {
+    return 0;
+}
+
+int OVIMGenericContext::fetchCandidateSRule(const char *q) {
+    return 0;
 }
 
 
@@ -447,7 +462,7 @@ int OVIMGenericContext::fetchCandidate(const char *qs) {
         delete candi;
         candi=NULL;
     }
-    
+
     int wildcard=0;
     char realqs[256];
     strcpy(realqs, qs);
@@ -458,7 +473,7 @@ int OVIMGenericContext::fetchCandidate(const char *qs) {
             if (realqs[qi]=='*') { realqs[qi]='%'; wildcard=1; }
         }
     }
-    
+
     // note in wildcard we don't use order by
     char cmd[256];
     if (!wildcard)
@@ -470,7 +485,7 @@ int OVIMGenericContext::fetchCandidate(const char *qs) {
     SQLite3Statement *sth=db->prepare(cmd);
     if (!sth) return 0;
     sth->bind_text(1, realqs);
-    
+
     int rows=0;
     while (sth->step()==SQLITE_ROW) rows++;
     murmur("query string=%s, number of candidates=%d", realqs, rows);
@@ -478,7 +493,7 @@ int OVIMGenericContext::fetchCandidate(const char *qs) {
         delete sth;
         return 0;
     }
-    
+
     candi=new IMGCandidate;
     candi->count=0;
     candi->candidates=new char* [rows];
@@ -535,10 +550,10 @@ int OVIMGenericContext::updateCandidateWindow() {
     int candicount=candi->count;
     int perpage=strlen(parent->selkey);
     int pgstart=page*perpage;
-        
+
     c->clear();
     char dispstr[32];
-    
+
     for (int i=0; i<perpage; i++) {
         if (pgstart+i >= candicount) break;     // stop if idx exceeds candi counts
         sprintf(dispstr, "%c.", parent->selkey[i]);
