@@ -141,7 +141,7 @@ extern "C" unsigned int OVGetLibraryVersion() {
 extern "C" int OVInitializeLibrary(OVService*, const char*p) { 
     db=new SQLite3;  // this never gets deleted, but so do we
     char dbfile[PATH_MAX];
-    sprintf(dbfile, "%s/OVIMGenericSQLite/imtables.db", p);
+    sprintf(dbfile, "%s/OVIMBoshiamy/imtables.db", p);
     if (int err=db->open(dbfile)) {
         murmur("SQLite3 error! code=%d", err);
         return 0;
@@ -182,7 +182,7 @@ const char* OVOFReverseLookupSQLite::localizedName(const char* lc) {
     } else {
 	name=QueryForKey(db, table, "_property_ename");
     }
-    sprintf(buf,"%s Lookup (SQLite)",name);
+    sprintf(buf,"%s Lookup",name);
     return buf;
 }
 
@@ -274,7 +274,7 @@ const char *OVIMGenericSQLite::localizedName(const char *lc) {
     } else {
 	name=QueryForKey(db, table, "_property_ename");
     }
-    sprintf(buf,"%s (SQLite)",name);
+    sprintf(buf,"%s",name);
     return buf;
 }
 
