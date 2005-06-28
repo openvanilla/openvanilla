@@ -71,6 +71,7 @@ protected:
     int updateCandidateWindow();
     int closeCandidateWindow();
     int commitFirstCandidate();
+    int commitNthCandidate(int n);
     int candidateEvent();
     int candidatePageUp();
     int candidatePageDown();
@@ -400,12 +401,32 @@ int OVIMGenericContext::keyCapslock() {
 }
 
 int OVIMGenericContext::keyCompose() {
+    const char *q = seq.sequence();
+    char newseq[6];
+
     b->clear()->append(seq.compose())->update();
-    
-    int count=fetchCandidate(seq.sequence());
+
+    int count=fetchCandidate(q);
     if (!count) {
-        s->beep();
-        return 1;
+        int numV = 0;
+        int len  = strlen(q);
+        for(int i = len - 1; i >= 0 ; i--) {
+            if(q[i] == 'v') 
+                numV++;
+        }
+        if(numV == 0) {
+            s->beep();
+            return 1;
+        }
+        strcpy(newseq,q);
+        newseq[len - 1] = 0;
+        count = fetchCandidate(newseq);
+        if(count <= 1) {
+            s->beep();
+            return 1;
+        } else {
+            return commitNthCandidate(1);
+        }
     }
 
     if (count==1) return commitFirstCandidate();
@@ -545,6 +566,12 @@ int OVIMGenericContext::closeCandidateWindow() {
 int OVIMGenericContext::commitFirstCandidate() {
     if (!candi) return 1;
     b->clear()->append(candi->candidates[0])->send();
+    return closeCandidateWindow();        
+}
+
+int OVIMGenericContext::commitNthCandidate(int n) {
+    if (!candi) return 1;
+    b->clear()->append(candi->candidates[n])->send();
     return closeCandidateWindow();        
 }
 
