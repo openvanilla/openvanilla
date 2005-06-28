@@ -1,0 +1,12 @@
+
+OVIMBoshiamy is a implementation of Boshiamy input method 
+for OpenVanilla framework. Since Boshiamy table is propietory,
+it should not be included in the release of this module, nor
+be included in the source code repository.
+
+Please deal with license issue very carefully. We are only
+allowed to write code that can process.
+
+Cheers,
+Kang-min Liu
+
