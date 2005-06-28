@@ -241,7 +241,8 @@ void OVIMGenericSQLite::update(OVDictionary *cfg, OVService *) {
     const char *maxSeqLen="maxKeySequenceLength";
     const char *hitMax="hitMaxAndCompose";
 
-    strcpy(selkey, cfg->getStringWithDefault("selectKey", "123456789"));    
+//    strcpy(selkey, cfg->getStringWithDefault("selectKey", "123456789")); 
+    strcpy(selkey, " 1234567890");
     allowwildcard=cfg->getIntegerWithDefault("wildcard", 1);
     if (allowwildcard !=0 && allowwildcard !=1) allowwildcard=1;
     
@@ -473,7 +474,7 @@ int OVIMGenericContext::fetchCandidate(const char *qs) {
 
 int OVIMGenericContext::candidateEvent() {
     char kc=k->code();
-    char *localSelKey;
+    char *localSelKey = parent->selkey;
 
     if (kc==ovkEsc || kc==ovkBackspace || kc==ovkDelete) {  //ESC/BKSP/DELETE cancels candi window
         clear();
@@ -481,15 +482,7 @@ int OVIMGenericContext::candidateEvent() {
         return closeCandidateWindow();
     }
 
-    if (parent->isShiftSelKey()) {
-	localSelKey = (char*)calloc(1,strlen(parent->selkey) + 2);
-	sprintf(localSelKey," %s",parent->selkey);
-    } else {
-	localSelKey = parent->selkey;
-    }
-
-    if ((kc==ovkSpace && !parent->isShiftSelKey())
-	|| kc==ovkRight || kc==ovkDown || kc==ovkPageDown || kc =='>')
+    if (kc==ovkRight || kc==ovkDown || kc==ovkPageDown || kc =='>')
         return candidatePageDown(); 
     if (kc==ovkLeft || kc==ovkUp || kc==ovkPageUp || kc=='<')
         return candidatePageUp();
