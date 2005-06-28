@@ -65,9 +65,7 @@ protected:
     int keyNonRadical();
     int keyCapslock();
     int fetchCandidate(const char *);
-    int fetchCandidateVRule(const char *);
-    int fetchCandidateRRule(const char *);
-    int fetchCandidateSRule(const char *);
+    int fetchCandidateSuffixRule(const char *,char);
     int fetchCandidateWithPrefix(const char *prefix, char c);
     int isPunctuationCombination();
     int punctuationKey();
@@ -410,7 +408,7 @@ int OVIMGenericContext::keyCompose() {
 
     int count=fetchCandidate(q);
     if (!count) {
-        count = fetchCandidateVRule(q);
+        count = fetchCandidateSuffixRule(q,'v');
         if(count <= 1) {
             s->beep();
             return 1;
@@ -423,15 +421,15 @@ int OVIMGenericContext::keyCompose() {
     return updateCandidateWindow();
 }
 
-int OVIMGenericContext::fetchCandidateVRule(const char *q) {
+int OVIMGenericContext::fetchCandidateSuffixRule(const char *q,char suffix) {
     char newseq[6];
-    int numV = 0;
+    int num = 0;
     int len  = strlen(q);
     for(int i = len - 1; i >= 0 ; i--) {
-        if(q[i] == 'v') 
-            numV++;
+        if(q[i] == suffix) 
+            num++;
     }
-    if(numV == 0) {
+    if(num == 0) {
         s->beep();
         return 1;
     }
@@ -439,15 +437,6 @@ int OVIMGenericContext::fetchCandidateVRule(const char *q) {
     newseq[len - 1] = 0;
     return fetchCandidate(newseq);
 }
-
-int OVIMGenericContext::fetchCandidateRRule(const char *q) {
-    return 0;
-}
-
-int OVIMGenericContext::fetchCandidateSRule(const char *q) {
-    return 0;
-}
-
 
 int OVIMGenericContext::fetchCandidateWithPrefix(const char *prefix, char c) {
     char keystr[64];
