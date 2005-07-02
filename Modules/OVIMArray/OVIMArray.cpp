@@ -8,6 +8,12 @@
 using namespace std;
 using namespace OV_Array;
 
+
+void OVIMArrayContext::clear(){
+    keyseq.clear();
+    changeState(STATE_WAIT_KEY1);
+}
+
 void OVIMArrayContext::updateDisplay(OVBuffer* buf){
     buf->clear();
     if (keyseq.length()){   
@@ -180,7 +186,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
     const char keycode = key->code();
     const bool validkey = keyseq.valid(keycode) || 
       ( keyseq.getSeq()[0]=='w' && isdigit(keycode) );
-   
+
     murmur("OVIMArray state: %d", state);
     if (!keyseq.length() && !isprint(keycode)) return 0;
 

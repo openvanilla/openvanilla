@@ -46,6 +46,7 @@ public:
         state = OV_Array::STATE_WAIT_KEY1;
     }
     virtual int keyEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
+    virtual void clear();
 private:
     void changeState(OV_Array::STATE s);
     void changeBackState(OV_Array::STATE s);
