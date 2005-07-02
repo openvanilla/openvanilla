@@ -65,7 +65,7 @@ const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key);
 int showcandi(char* buf, OVCandidate* i) { //Show candidate list
     char cmd[256];
     char realqs[256];
-    sprintf(cmd, "select value from %s where key like ?1;", buf);
+    sprintf(cmd, "select value from %s where key like ?1 limit 20;", buf);
     murmur("executing command=%s", cmd);
 
     SQLite3Statement *sth=db->prepare(cmd);
