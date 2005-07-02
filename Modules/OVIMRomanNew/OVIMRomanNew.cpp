@@ -25,6 +25,11 @@ int is_punc(char i){
 	return 0;
 }
 
+int is_selkey(char i){
+	if(i >= '0' && i <= '9'){ return 1; }
+	return 0;
+}
+
 const size_t ebMaxKeySeq=40;
 class KeySeq {
 public:
@@ -61,36 +66,51 @@ SQLite3 *db;
 const char *QueryForCommand(SQLite3 *db, const char *command);
 const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key);
 
-
-
 class OVIMRomanNewContext : public OVInputMethodContext
 {
 public:
-    virtual void start(OVBuffer*, OVCandidate*, OVService*) {
-        clear();
-    }
-    virtual void clear() {
-		keyseq.clear();
-    } 
+    virtual void start(OVBuffer*, OVCandidate*, OVService*) { clear(); }
+    virtual void clear() { keyseq.clear();} 
     
     virtual int initialize(OVDictionary* l, OVService* s, const char* modulePath) {
 		keyseq.clear();
         return 1;
     }
+        int closeCandidateWindow(OVCandidate* c) {        if (c->onScreen()) c->hide()->clear()->update();        if (candi) {            delete candi;            candi=NULL;        }        return 1;            }
+
     int showcandi(char* buf, OVCandidate* i);
+
     virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* srv) {
         
         // we only send printable characters so that they can pass thru 
         // full-width character filter (if enabled)
-		
+		/*
+		if (k->code()==ovkLeft) {
+		  if(pagenumber > 0) {pagenumber--;}
+		  if(keyseq.buf) { showcandi(keyseq.buf, i); }
+		}
+		if (k->code()==ovkRight) {
+		  if(pagenumber < pagetotal) {pagenumber++;}
+		  if(keyseq.buf) { showcandi(keyseq.buf, i); }
+		}*/
+
+		if(is_selkey(k->code())){
+		    murmur("SelectKey Pressed: %c",k->code());
+            int n = (k->code() - '1' + 10) % 10;
+            b->clear()->append(candi->candidates[n])->send();
+			if (i->onScreen()) i->hide();
+			keyseq.clear();
+			return closeCandidateWindow(i);
+		}
+
 		if (k->code()==ovkSpace || k->code()==ovkReturn || is_punc(k->code())) {
             if (!(strlen(keyseq.buf))) return 0;   // empty buffer, do nothing
 			if(k->code()!=ovkReturn) keyseq.add(k->code());
 			b->clear()->append(keyseq.buf)->send();
 			keyseq.clear();
-			if (i->onScreen()) i->hide();
-            return 1;   // key processed
+			return closeCandidateWindow(i);
 		}
+
 		if (k->code()==ovkDelete || k->code()==ovkBackspace) {
 			if(!strlen(keyseq.buf)) return 0;
 			keyseq.remove();
@@ -110,7 +130,9 @@ public:
 			if(keyseq.buf) {
                 showcandi(keyseq.buf, i);
 			}
+            murmur("FOO A");
 			b->clear()->append(keyseq.buf)->update();
+            murmur("FOO B");
 			return 1;
 		}
 		return 0;
@@ -120,23 +142,29 @@ public:
 protected:
 	KeySeq keyseq;
     IMGCandidate *candi;
+    int pagenumber;
+    int pagetotal;
 };
 
 int OVIMRomanNewContext::showcandi(char* buf, OVCandidate* i) { //Show candidate list
     char cmd[256];
-    sprintf(cmd, "select key from dict where key like '%s%%' limit 20;", buf);
+    // sprintf(cmd, "select key from dict where key like '%s%%' limit %d,10;",buf, pagenumber*10 );
+    sprintf(cmd, "select key from dict where key like '%s%%' limit 0,10;",buf);
     murmur("executing command=%s", cmd);
 
     SQLite3Statement *sth=db->prepare(cmd);
     if (!sth) return 0;
     int rows=0;
+    while (sth->step()==SQLITE_ROW) {
+        rows++;
+    }
+    if(!rows) { delete sth; return 0;}
 
     candi = new IMGCandidate;
     candi->count=0;
     candi->candidates=new char* [rows];
-
+    sth->reset();
     while (sth->step()==SQLITE_ROW) {
-        rows++;
         const char *v=sth->column_text(0);
         char *s=(char*)calloc(1, strlen(v)+1);
         strcpy(s, v);
@@ -146,23 +174,20 @@ int OVIMRomanNewContext::showcandi(char* buf, OVCandidate* i) { //Show candidate
     if (!rows) { return 0; }
 
     if (candi){
+        char selkey[11] = "1234567890";
         int candicount=candi->count;
         char dispstr[32];
         i->clear();
         for (int j=0; j< 10; j++) {
             if (j >= candicount) break;     // stop if idx exceeds candi counts
-            sprintf(dispstr, "%d.", j+1);
+            sprintf(dispstr, "%c.", selkey[j]);
             i->append(dispstr)->append(candi->candidates[j])->append("\n");
         }
         i->update();
         if (!i->onScreen()) i->show();
-        return 1;
     }
-
-    return 0;
+    return 1;
 }
-
-
 
 class OVIMRomanNew : public OVInputMethod
 {
