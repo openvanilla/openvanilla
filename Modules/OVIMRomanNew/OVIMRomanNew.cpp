@@ -54,56 +54,13 @@ struct IMGCandidate
     unsigned int count;
     char **candidates;
 };
+IMGCandidate::IMGCandidate(){    count=0;    candidates=NULL;}IMGCandidate::~IMGCandidate(){    if (!count) return;    for (unsigned int i=0; i<count; i++) delete candidates[i];    delete[] candidates;}
 
 SQLite3 *db;
-IMGCandidate *candi;
 
 const char *QueryForCommand(SQLite3 *db, const char *command);
 const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key);
 
-
-int showcandi(char* buf, OVCandidate* i) { //Show candidate list
-    char cmd[256];
-    char realqs[256];
-    sprintf(cmd, "select value from %s where key like ?1 limit 20;", buf);
-    murmur("executing command=%s", cmd);
-
-    SQLite3Statement *sth=db->prepare(cmd);
-    if (!sth) return 0;
-    sth->bind_text(1, realqs);
-    int rows=0;
-    while (sth->step()==SQLITE_ROW) rows++;
-    murmur("query string=%s, number of candidates=%d", realqs, rows);
-    if (!rows) {
-        delete sth;
-        return 0;
-    }
-
-    candi->count=0;
-    candi->candidates=new char* [rows];
-    sth->reset();
-    while (sth->step()==SQLITE_ROW) {
-        const char *v=sth->column_text(0);
-        char *s=(char*)calloc(1, strlen(v)+1);
-        strcpy(s, v);
-        candi->candidates[candi->count++]=s;
-    }
-    delete sth;
-    
-    if (candi){
-        int candicount=candi->count;
-        char dispstr[32];
-        for (int j=0; j< 10; j++) {
-            if (j >= candicount) break;     // stop if idx exceeds candi counts
-            sprintf(dispstr, "%d.", j+1);
-            i->append(dispstr)->append(candi->candidates[j])->append("\n");
-        }
-        i->update();
-        if (!i->onScreen()) i->show();
-        return 1;
-    }
-    return 0;
-}
 
 
 class OVIMRomanNewContext : public OVInputMethodContext
@@ -118,16 +75,9 @@ public:
     
     virtual int initialize(OVDictionary* l, OVService* s, const char* modulePath) {
 		keyseq.clear();
-        db=new SQLite3;  // this never gets deleted, but so do we
-        char dbfile[128];
-        sprintf(dbfile, "%s/OVIM/dict.db", modulePath);
-        if (int err=db->open(dbfile)) {
-            murmur("SQLite3 error! code=%d", err);
-            return 0;
-        }
         return 1;
     }
-
+    int showcandi(char* buf, OVCandidate* i);
     virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* srv) {
         
         // we only send printable characters so that they can pass thru 
@@ -138,11 +88,13 @@ public:
 			if(k->code()!=ovkReturn) keyseq.add(k->code());
 			b->clear()->append(keyseq.buf)->send();
 			keyseq.clear();
+			if (i->onScreen()) i->hide();
             return 1;   // key processed
 		}
 		if (k->code()==ovkDelete || k->code()==ovkBackspace) {
 			if(!strlen(keyseq.buf)) return 0;
 			keyseq.remove();
+            if(keyseq.buf) { showcandi(keyseq.buf, i); }
 			b->clear()->append(keyseq.buf)->update();
 			return 1;
 		}
@@ -163,9 +115,54 @@ public:
 		}
 		return 0;
     }
+
+
 protected:
 	KeySeq keyseq;
+    IMGCandidate *candi;
 };
+
+int OVIMRomanNewContext::showcandi(char* buf, OVCandidate* i) { //Show candidate list
+    char cmd[256];
+    sprintf(cmd, "select key from dict where key like '%s%%' limit 20;", buf);
+    murmur("executing command=%s", cmd);
+
+    SQLite3Statement *sth=db->prepare(cmd);
+    if (!sth) return 0;
+    int rows=0;
+
+    candi = new IMGCandidate;
+    candi->count=0;
+    candi->candidates=new char* [rows];
+
+    while (sth->step()==SQLITE_ROW) {
+        rows++;
+        const char *v=sth->column_text(0);
+        char *s=(char*)calloc(1, strlen(v)+1);
+        strcpy(s, v);
+        candi->candidates[candi->count++]=s;
+    }
+    delete sth;
+    if (!rows) { return 0; }
+
+    if (candi){
+        int candicount=candi->count;
+        char dispstr[32];
+        i->clear();
+        for (int j=0; j< 10; j++) {
+            if (j >= candicount) break;     // stop if idx exceeds candi counts
+            sprintf(dispstr, "%d.", j+1);
+            i->append(dispstr)->append(candi->candidates[j])->append("\n");
+        }
+        i->update();
+        if (!i->onScreen()) i->show();
+        return 1;
+    }
+
+    return 0;
+}
+
+
 
 class OVIMRomanNew : public OVInputMethod
 {
@@ -182,5 +179,14 @@ public:
     }
 };
 
-OV_SINGLE_MODULE_WRAPPER(OVIMRomanNew);
-
+extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }extern "C" int OVInitializeLibrary(OVService*, const char* p) {
+    db=new SQLite3;  // this never gets deleted, but so do we
+    char dbfile[128];
+    sprintf(dbfile, "%sOVIMRomanNew/dict.db", p);
+    murmur("DBPath: %s",dbfile);
+    if (int err=db->open(dbfile)) {
+        murmur("SQLite3 error! code=%d", err);
+        return 0;
+    }
+    return 1;
+}extern "C" OVModule *OVGetModuleFromLibrary(int idx) {    return (idx==0) ? new OVIMRomanNew : NULL;}
