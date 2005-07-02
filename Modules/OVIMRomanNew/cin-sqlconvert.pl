@@ -8,7 +8,6 @@ for my $fn (@ARGV) {
     my @a=($fn=~/(\w+)\..+/);
     my $tblname=lc $a[0];
     
-    print "insert into tablelist values ('$tblname');\n";
     print "create table $tblname (key);\n";
     printf "create index %s_index_key on %s (key);\n", $tblname, $tblname;
     print "begin;\n";

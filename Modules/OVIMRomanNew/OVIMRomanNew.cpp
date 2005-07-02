@@ -145,9 +145,6 @@ public:
                 updatepagetotal(keyseq.buf);
                 showcandi(keyseq.buf, i);
 			}
-            murmur("FOO A");
-			b->clear()->append(keyseq.buf)->update();
-            murmur("FOO B");
 			return 1;
 		}
 		return 0;
