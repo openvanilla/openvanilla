@@ -79,25 +79,30 @@ public:
         int closeCandidateWindow(OVCandidate* c) {        if (c->onScreen()) c->hide()->clear()->update();        if (candi) {            delete candi;            candi=NULL;        }        return 1;            }
 
     int showcandi(char* buf, OVCandidate* i);
+    int updatepagetotal(char* buf);
 
     virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* srv) {
         
         // we only send printable characters so that they can pass thru 
         // full-width character filter (if enabled)
-		/*
-		if (k->code()==ovkLeft) {
-		  if(pagenumber > 0) {pagenumber--;}
-		  if(keyseq.buf) { showcandi(keyseq.buf, i); }
+
+        if(candi){
+    		if (k->code()==ovkLeft) {
+    		  if(pagenumber > 0) {pagenumber--;}
+    		  if(keyseq.buf) { showcandi(keyseq.buf, i); }
+    		  return 1;
+    		}
+    		if (k->code()==ovkRight) {
+    		  if(pagenumber < pagetotal + 1) {pagenumber++;}
+    		  if(keyseq.buf) { showcandi(keyseq.buf, i); }
+    		  return 1;
+    		}
 		}
-		if (k->code()==ovkRight) {
-		  if(pagenumber < pagetotal) {pagenumber++;}
-		  if(keyseq.buf) { showcandi(keyseq.buf, i); }
-		}*/
 
 		if(is_selkey(k->code())){
 		    murmur("SelectKey Pressed: %c",k->code());
             int n = (k->code() - '1' + 10) % 10;
-            b->clear()->append(candi->candidates[n])->send();
+            b->clear()->append(candi->candidates[n])->append(" ")->send();
 			if (i->onScreen()) i->hide();
 			keyseq.clear();
 			return closeCandidateWindow(i);
@@ -112,14 +117,22 @@ public:
 		}
 
 		if (k->code()==ovkDelete || k->code()==ovkBackspace) {
-			if(!strlen(keyseq.buf)) return 0;
+			if(!strlen(keyseq.buf)) { closeCandidateWindow(i); return 0;}
 			keyseq.remove();
-            if(keyseq.buf) { showcandi(keyseq.buf, i); }
+            if(keyseq.len) { 
+                showcandi(keyseq.buf, i); 
+                updatepagetotal(keyseq.buf);
+            } else {
+                closeCandidateWindow(i);
+            }
 			b->clear()->append(keyseq.buf)->update();
 			return 1;
 		}
 		
-		if (!isprint(k->code()) || k->isFunctionKey()) return 0;
+		if (!isprint(k->code()) || k->isFunctionKey()) {
+		   closeCandidateWindow(i);
+		   return 0;
+        }
 		
 		if(strlen(keyseq.buf) >= ebMaxKeySeq) return 1;
 		
@@ -128,6 +141,8 @@ public:
 			sprintf(s, "%c", k->code());
 			keyseq.add(k->code());
 			if(keyseq.buf) {
+                pagenumber = 0;
+                updatepagetotal(keyseq.buf);
                 showcandi(keyseq.buf, i);
 			}
             murmur("FOO A");
@@ -146,17 +161,38 @@ protected:
     int pagetotal;
 };
 
-int OVIMRomanNewContext::showcandi(char* buf, OVCandidate* i) { //Show candidate list
+int OVIMRomanNewContext:: updatepagetotal(char* buf){
     char cmd[256];
-    // sprintf(cmd, "select key from dict where key like '%s%%' limit %d,10;",buf, pagenumber*10 );
-    sprintf(cmd, "select key from dict where key like '%s%%' limit 0,10;",buf);
+    sprintf(cmd, "select count(*) from dict where key like '%s%%';", buf);
+    SQLite3Statement *sth=db->prepare(cmd);
+    if (!sth) {
+        pagetotal = 0;
+        return 0;
+    }
+    while (sth->step()==SQLITE_ROW) {
+        const char *v=sth->column_text(0);
+        char *s=(char*)calloc(1, strlen(v)+1);
+        strcpy(s, v);
+        pagetotal= atoi(s) / 10;
+    }
+    return 1;
+}
+
+int OVIMRomanNewContext::showcandi(char* buf, OVCandidate* i) { //Show candidate list
+    if(!buf) { //Check Again!
+        if (i->onScreen()) i->clear()->hide();
+        return 0;
+    }
+    char cmd[256];
+    sprintf(cmd, "select key from dict where key like '%s%%' limit %d,10;",buf, pagenumber*10 );
+    // sprintf(cmd, "select key from dict where key like '%s%%' limit 0,10;",buf);
     murmur("executing command=%s", cmd);
 
     SQLite3Statement *sth=db->prepare(cmd);
     if (!sth) return 0;
     int rows=0;
     while (sth->step()==SQLITE_ROW) {
-        rows++;
+        rows++; 
     }
     if(!rows) { delete sth; return 0;}
 
@@ -183,8 +219,11 @@ int OVIMRomanNewContext::showcandi(char* buf, OVCandidate* i) { //Show candidate
             sprintf(dispstr, "%c.", selkey[j]);
             i->append(dispstr)->append(candi->candidates[j])->append("\n");
         }
-        i->update();
+        sprintf(dispstr, "(%d/%d)", pagenumber + 1, pagetotal + 1);
+        i->append(dispstr)->update();
         if (!i->onScreen()) i->show();
+    } else {
+        if (i->onScreen()) i->clear()->hide();
     }
     return 1;
 }
