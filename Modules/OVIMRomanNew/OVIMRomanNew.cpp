@@ -87,12 +87,12 @@ public:
         // full-width character filter (if enabled)
 
         if(candi){
-    		if (k->code()==ovkLeft) {
+    		if (k->code()==ovkLeft || k->code()==ovkUp) {
     		  if(pagenumber > 0) {pagenumber--;}
     		  if(keyseq.buf) { showcandi(keyseq.buf, i); }
     		  return 1;
     		}
-    		if (k->code()==ovkRight) {
+    		if (k->code()==ovkRight || k->code()==ovkDown) {
     		  if(pagenumber < pagetotal + 1) {pagenumber++;}
     		  if(keyseq.buf) { showcandi(keyseq.buf, i); }
     		  return 1;
@@ -102,7 +102,7 @@ public:
 		if(is_selkey(k->code())){
 		    murmur("SelectKey Pressed: %c",k->code());
             int n = (k->code() - '1' + 10) % 10;
-            b->clear()->append(candi->candidates[n])->append(" ")->send();
+            b->clear()->append(keyseq.buf)->append(candi->candidates[n] + keyseq.len)->append(" ")->send();
 			if (i->onScreen()) i->hide();
 			keyseq.clear();
 			return closeCandidateWindow(i);
@@ -145,6 +145,7 @@ public:
                 updatepagetotal(keyseq.buf);
                 showcandi(keyseq.buf, i);
 			}
+			b->clear()->append(keyseq.buf)->update();
 			return 1;
 		}
 		return 0;
