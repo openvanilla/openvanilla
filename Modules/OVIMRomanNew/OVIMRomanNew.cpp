@@ -86,10 +86,9 @@ public:
                 return showcandi(i);
     		}
             if(k->code()==ovkTab){
-                b->clear()->append(keyseq.buf)->append(candi.item(pagenumber*10) + keyseq.len)->append(" ")->send();
-			    if (i->onScreen()) i->hide();
-			    keyseq.clear();
-			    return closeCandidateWindow(i);
+                b->clear()->append(keyseq.buf)->append(candi.item(temp+pagenumber*10) + keyseq.len)->append(" ")->update();
+                if(temp++ > 9) temp = 0;
+                return 1;
             }
 		}
 
@@ -105,7 +104,8 @@ public:
 		if (k->code()==ovkSpace || k->code()==ovkReturn || is_punc(k->code())) {
             if (!(strlen(keyseq.buf))) return 0;   // empty buffer, do nothing
 			if(k->code()!=ovkReturn) keyseq.add(k->code());
-			b->clear()->append(keyseq.buf)->send();
+			//b->clear()->append(keyseq.buf)->send();
+			b->send();
 			keyseq.clear();
 			return closeCandidateWindow(i);
 		}
@@ -147,6 +147,7 @@ public:
 			keyseq.add(k->code());
             if(keyseq.buf && i->onScreen()) {
                 pagenumber = 0;
+                temp = 0;
                 updatepagetotal(keyseq.buf);
                 showcandi(i);
 			}
@@ -171,6 +172,7 @@ protected:
     IMGCandidate candi;
     int pagenumber;
     int pagetotal;
+    int temp;
 };
 
 int OVIMRomanNewContext:: updatepagetotal(char* buf){
