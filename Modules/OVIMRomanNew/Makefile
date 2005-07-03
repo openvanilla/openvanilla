@@ -11,7 +11,7 @@ include ../../Mk/ov.vars.mk
 include ../../Mk/ov.general.mk
 
 
-dict.db: imtables-schema.txt ${CINS} cin-sqlconvert.pl
+dict.db: ${CINS} cin-sqlconvert.pl
 	rm -f dict.db
 	perl cin-sqlconvert.pl dict.txt | sqlite3 dict.db
 
