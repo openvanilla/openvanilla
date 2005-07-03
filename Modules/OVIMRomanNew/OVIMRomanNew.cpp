@@ -9,24 +9,21 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <string>
+#include <vector>
 #include "OVSQLite3.h"
 
+using namespace std;
 
 int is_punc(char i){
-	if(i >= '!' && i <= '@'){
-		return 1;
-	}
-	if(i >= '[' && i <= '\''){
-		return 1;
-	}
-	if(i >= '{' && i <= '~'){
-		return 1;
-	}
+	if(i >= '!' && i <= '@')  return 1;
+	if(i >= '[' && i <= '\'') return 1;
+	if(i >= '{' && i <= '~') return 1;
 	return 0;
 }
 
 int is_selkey(char i){
-	if(i >= '0' && i <= '9'){ return 1; }
+	if(i >= '0' && i <= '9') return 1;
 	return 0;
 }
 
@@ -52,14 +49,16 @@ public:
     size_t len;
 };
 
-struct IMGCandidate
+class IMGCandidate
 {
-    IMGCandidate();
-    ~IMGCandidate();
-    unsigned int count;
-    char **candidates;
+public:
+    int count() { return candidates.size(); }
+    void clear() { candidates.clear(); }
+    void add(const string& s) { candidates.push_back(s); }
+    const char *item(size_t i) { return candidates[i].c_str(); }
+protected:    
+    vector<string> candidates;
 };
-IMGCandidate::IMGCandidate(){    count=0;    candidates=NULL;}IMGCandidate::~IMGCandidate(){    if (!count) return;    for (unsigned int i=0; i<count; i++) delete candidates[i];    delete[] candidates;}
 
 SQLite3 *db;
 
@@ -72,37 +71,26 @@ public:
     virtual void start(OVBuffer*, OVCandidate*, OVService*) { clear(); }
     virtual void clear() { keyseq.clear();} 
     
-    virtual int initialize(OVDictionary* l, OVService* s, const char* modulePath) {
-		keyseq.clear();
-        return 1;
-    }
-        int closeCandidateWindow(OVCandidate* c) {        if (c->onScreen()) c->hide()->clear()->update();        if (candi) {            delete candi;            candi=NULL;        }        return 1;            }
-
-    int showcandi(char* buf, OVCandidate* i);
-    int updatepagetotal(char* buf);
-
-    virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* srv) {
-        
-        // we only send printable characters so that they can pass thru 
-        // full-width character filter (if enabled)
-
-        if(candi){
-    		if (k->code()==ovkLeft || k->code()==ovkUp) {
-    		  if(pagenumber > 0) {pagenumber--;}
-    		  if(keyseq.buf) { showcandi(keyseq.buf, i); }
-    		  return 1;
+    virtual int initialize(OVDictionary* l, OVService* s, 
+        const char* modulePath) { return 1; }
+    
+    virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService*)    
+    {
+        if(candi.count()) {
+            if (k->code()==ovkLeft || k->code()==ovkUp) {
+                if(pagenumber > 0) pagenumber--;
+                return showcandi(i);
     		}
     		if (k->code()==ovkRight || k->code()==ovkDown) {
-    		  if(pagenumber < pagetotal + 1) {pagenumber++;}
-    		  if(keyseq.buf) { showcandi(keyseq.buf, i); }
-    		  return 1;
+                if(pagenumber < pagetotal + 1) pagenumber++;
+                return showcandi(i);
     		}
 		}
 
 		if(is_selkey(k->code())){
 		    murmur("SelectKey Pressed: %c",k->code());
             int n = (k->code() - '1' + 10) % 10;
-            b->clear()->append(keyseq.buf)->append(candi->candidates[n] + keyseq.len)->append(" ")->send();
+            b->clear()->append(keyseq.buf)->append(candi.item(n+pagenumber*10) + keyseq.len)->append(" ")->send();
 			if (i->onScreen()) i->hide();
 			keyseq.clear();
 			return closeCandidateWindow(i);
@@ -120,8 +108,8 @@ public:
 			if(!strlen(keyseq.buf)) { closeCandidateWindow(i); return 0;}
 			keyseq.remove();
             if(keyseq.len) { 
-                showcandi(keyseq.buf, i); 
                 updatepagetotal(keyseq.buf);
+                showcandi(i);
             } else {
                 closeCandidateWindow(i);
             }
@@ -143,7 +131,7 @@ public:
 			if(keyseq.buf) {
                 pagenumber = 0;
                 updatepagetotal(keyseq.buf);
-                showcandi(keyseq.buf, i);
+                showcandi(i);
 			}
 			b->clear()->append(keyseq.buf)->update();
 			return 1;
@@ -151,78 +139,60 @@ public:
 		return 0;
     }
 
+protected:
+    int closeCandidateWindow(OVCandidate* c) {
+        if (c->onScreen()) c->hide()->clear()->update();
+        candi.clear();
+        return 1;        
+    }
+
+    int showcandi(OVCandidate* i);
+    int updatepagetotal(char* buf);
 
 protected:
 	KeySeq keyseq;
-    IMGCandidate *candi;
+    IMGCandidate candi;
     int pagenumber;
     int pagetotal;
 };
 
 int OVIMRomanNewContext:: updatepagetotal(char* buf){
+    pagenumber=0;
+    pagetotal=0;
+    candi.clear();
+    if (strlen(buf) < 3) return 0;
+
     char cmd[256];
-    sprintf(cmd, "select count(*) from dict where key like '%s%%';", buf);
+    sprintf(cmd, "select * from dict where key like '%s%%';", buf);
     SQLite3Statement *sth=db->prepare(cmd);
-    if (!sth) {
-        pagetotal = 0;
-        return 0;
-    }
+    if (!sth) return 0;
+
     while (sth->step()==SQLITE_ROW) {
-        const char *v=sth->column_text(0);
-        char *s=(char*)calloc(1, strlen(v)+1);
-        strcpy(s, v);
-        pagetotal= atoi(s) / 10;
+        candi.add(string(sth->column_text(0)));
     }
+    pagetotal=candi.count()/10;
     return 1;
 }
 
-int OVIMRomanNewContext::showcandi(char* buf, OVCandidate* i) { //Show candidate list
-    if(!buf) { //Check Again!
-        if (i->onScreen()) i->clear()->hide();
-        return 0;
+int OVIMRomanNewContext::showcandi(OVCandidate* i) {
+    if (!candi.count()) {
+        if (i->onScreen()) i->hide();
+        return 1;
     }
-    char cmd[256];
-    sprintf(cmd, "select key from dict where key like '%s%%' limit %d,10;",buf, pagenumber*10 );
-    // sprintf(cmd, "select key from dict where key like '%s%%' limit 0,10;",buf);
-    murmur("executing command=%s", cmd);
 
-    SQLite3Statement *sth=db->prepare(cmd);
-    if (!sth) return 0;
-    int rows=0;
-    while (sth->step()==SQLITE_ROW) {
-        rows++; 
+    char dispstr[32];    
+    const char *selkey="1234567890";
+    i->clear();
+    
+    int total=candi.count();
+    for (int j=0; j<10; j++) {
+        if (j+pagenumber*10 >= total) break;
+        sprintf(dispstr, "%c.", selkey[j]);
+        i->append(dispstr)->append(candi.item(j+pagenumber*10))->append("\n");
     }
-    if(!rows) { delete sth; return 0;}
-
-    candi = new IMGCandidate;
-    candi->count=0;
-    candi->candidates=new char* [rows];
-    sth->reset();
-    while (sth->step()==SQLITE_ROW) {
-        const char *v=sth->column_text(0);
-        char *s=(char*)calloc(1, strlen(v)+1);
-        strcpy(s, v);
-        candi->candidates[candi->count++]=s;
-    }
-    delete sth;
-    if (!rows) { return 0; }
-
-    if (candi){
-        char selkey[11] = "1234567890";
-        int candicount=candi->count;
-        char dispstr[32];
-        i->clear();
-        for (int j=0; j< 10; j++) {
-            if (j >= candicount) break;     // stop if idx exceeds candi counts
-            sprintf(dispstr, "%c.", selkey[j]);
-            i->append(dispstr)->append(candi->candidates[j])->append("\n");
-        }
-        sprintf(dispstr, "(%d/%d)", pagenumber + 1, pagetotal + 1);
-        i->append(dispstr)->update();
-        if (!i->onScreen()) i->show();
-    } else {
-        if (i->onScreen()) i->clear()->hide();
-    }
+    
+    sprintf(dispstr, "(%d/%d)", pagenumber + 1, pagetotal + 1);
+    i->append(dispstr)->update()->show();    
     return 1;
 }
 
@@ -241,7 +211,8 @@ public:
     }
 };
 
-extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }extern "C" int OVInitializeLibrary(OVService*, const char* p) {
+extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }
+extern "C" int OVInitializeLibrary(OVService*, const char* p) {
     db=new SQLite3;  // this never gets deleted, but so do we
     char dbfile[128];
     sprintf(dbfile, "%sOVIMRomanNew/dict.db", p);
@@ -251,4 +222,7 @@ extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }extern "C" 
         return 0;
     }
     return 1;
-}extern "C" OVModule *OVGetModuleFromLibrary(int idx) {    return (idx==0) ? new OVIMRomanNew : NULL;}
+}
+extern "C" OVModule *OVGetModuleFromLibrary(int idx) {
+    return (idx==0) ? new OVIMRomanNew : NULL;
+}
