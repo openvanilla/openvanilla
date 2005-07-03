@@ -82,9 +82,15 @@ public:
                 return showcandi(i);
     		}
     		if (k->code()==ovkRight || k->code()==ovkDown) {
-                if(pagenumber < pagetotal + 1) pagenumber++;
+                if(pagenumber < pagetotal) pagenumber++;
                 return showcandi(i);
     		}
+            if(k->code()==ovkTab){
+                b->clear()->append(keyseq.buf)->append(candi.item(pagenumber*10) + keyseq.len)->append(" ")->send();
+			    if (i->onScreen()) i->hide();
+			    keyseq.clear();
+			    return closeCandidateWindow(i);
+            }
 		}
 
 		if(is_selkey(k->code())){
@@ -117,6 +123,17 @@ public:
 			return 1;
 		}
 		
+		if(k->code()==ovkTab){
+            if(keyseq.buf) {
+                pagenumber = 0;
+                updatepagetotal(keyseq.buf);
+                showcandi(i);
+                return 1;
+			} else {
+                return 0;
+			}
+		}
+		
 		if (!isprint(k->code()) || k->isFunctionKey()) {
 		   closeCandidateWindow(i);
 		   return 0;
@@ -128,7 +145,7 @@ public:
 			char s[2];
 			sprintf(s, "%c", k->code());
 			keyseq.add(k->code());
-			if(keyseq.buf) {
+            if(keyseq.buf && i->onScreen()) {
                 pagenumber = 0;
                 updatepagetotal(keyseq.buf);
                 showcandi(i);
