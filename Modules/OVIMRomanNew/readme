@@ -1,0 +1,5 @@
+Install:
+
+make dict.db
+make
+sudo make install

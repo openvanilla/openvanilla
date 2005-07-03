@@ -86,26 +86,26 @@ public:
                 return showcandi(i);
     		}
             if(k->code()==ovkTab){
-                b->clear()->append(keyseq.buf)->append(candi.item(temp+pagenumber*10) + keyseq.len)->append(" ")->update();
-                if(temp++ > 9) temp = 0;
+                if(!candi.item(temp+pagenumber*10)) return 0;
+                b->clear()->append(keyseq.buf)->append(candi.item(temp+pagenumber*10) + keyseq.len)->update();
+                if(temp++ > 8) temp = 0;
+                if(temp+pagenumber*10 > candi.count()) temp = 0;
                 return 1;
             }
-		}
-
-		if(is_selkey(k->code())){
-		    murmur("SelectKey Pressed: %c",k->code());
-            int n = (k->code() - '1' + 10) % 10;
-            b->clear()->append(keyseq.buf)->append(candi.item(n+pagenumber*10) + keyseq.len)->append(" ")->send();
-			if (i->onScreen()) i->hide();
-			keyseq.clear();
-			return closeCandidateWindow(i);
+            if(is_selkey(k->code())){
+		        murmur("SelectKey Pressed: %c",k->code());
+                int n = (k->code() - '1' + 10) % 10;
+                if(n+pagenumber*10 >= candi.count()) return 0;
+                b->clear()->append(keyseq.buf)->append(candi.item(n+pagenumber*10) + keyseq.len)->append(" ")->send();
+		    	if (i->onScreen()) i->hide();
+		    	keyseq.clear();
+		    	return closeCandidateWindow(i);
+		    }
 		}
 
 		if (k->code()==ovkSpace || k->code()==ovkReturn || is_punc(k->code())) {
             if (!(strlen(keyseq.buf))) return 0;   // empty buffer, do nothing
-			if(k->code()!=ovkReturn) keyseq.add(k->code());
-			//b->clear()->append(keyseq.buf)->send();
-			b->send();
+			b->append(" ")->send();
 			keyseq.clear();
 			return closeCandidateWindow(i);
 		}
@@ -179,7 +179,7 @@ int OVIMRomanNewContext:: updatepagetotal(char* buf){
     pagenumber=0;
     pagetotal=0;
     candi.clear();
-    if (strlen(buf) < 3) return 0;
+    if (strlen(buf) < 2) return 0;
 
     char cmd[256];
     sprintf(cmd, "select * from dict where key like '%s%%';", buf);
@@ -189,7 +189,7 @@ int OVIMRomanNewContext:: updatepagetotal(char* buf){
     while (sth->step()==SQLITE_ROW) {
         candi.add(string(sth->column_text(0)));
     }
-    pagetotal=candi.count()/10;
+    pagetotal=(candi.count() - 1)/10;
     return 1;
 }
 
