@@ -427,7 +427,7 @@ CVContext::~CVContext() {
 void CVContext::activate(TSComposingBuffer *b) {
     buf->setComposingBuffer(b);
     loader->setActiveContext(this);
-    repositionInfoBoxes();
+//  repositionInfoBoxes();
     loader->srv->closeNotification();
     if (!contexts) {
         contexts=[NSMutableArray new];
