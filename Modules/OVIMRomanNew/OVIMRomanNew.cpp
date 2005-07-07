@@ -82,7 +82,7 @@ public:
                 return showcandi(i);
     		}
     		if (k->code()==ovkRight || k->code()==ovkDown) {
-                if(pagenumber < pagetotal) pagenumber++;
+                if(pagenumber < pagetotal + 1) pagenumber++;
                 return showcandi(i);
     		}
             if(k->code()==ovkTab){
@@ -101,6 +101,15 @@ public:
 		    	keyseq.clear();
 		    	return closeCandidateWindow(i);
 		    }
+		}
+
+		if(is_selkey(k->code())){
+		    murmur("SelectKey Pressed: %c",k->code());
+            int n = (k->code() - '1' + 10) % 10;
+            b->clear()->append(keyseq.buf)->append(candi.item(n+pagenumber*10) + keyseq.len)->append(" ")->send();
+			if (i->onScreen()) i->hide();
+			keyseq.clear();
+			return closeCandidateWindow(i);
 		}
 
 		if (k->code()==ovkSpace || k->code()==ovkReturn || is_punc(k->code())) {
@@ -179,7 +188,7 @@ int OVIMRomanNewContext:: updatepagetotal(char* buf){
     pagenumber=0;
     pagetotal=0;
     candi.clear();
-    if (strlen(buf) < 2) return 0;
+    if (strlen(buf) < 3) return 0;
 
     char cmd[256];
     sprintf(cmd, "select * from dict where key like '%s%%';", buf);
@@ -189,7 +198,7 @@ int OVIMRomanNewContext:: updatepagetotal(char* buf){
     while (sth->step()==SQLITE_ROW) {
         candi.add(string(sth->column_text(0)));
     }
-    pagetotal=(candi.count() - 1)/10;
+    pagetotal=candi.count()/10;
     return 1;
 }
 
