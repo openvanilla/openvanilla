@@ -13,7 +13,7 @@ using namespace lucene::util;
 using namespace lucene::store;
 using namespace lucene::document;
 
-static void run()
+int main()
 {
 	lucene::analysis::standard::StandardAnalyzer analyzer;
 	IndexWriter* writer = new IndexWriter("./index", analyzer, false);
@@ -33,4 +33,6 @@ static void run()
 
 	writer->optimize();
 	writer->close();
+
+	return amount;
 }
