@@ -26,8 +26,6 @@ public:
 
 	bool getVocabularyVectorByCharacters(string characters,
 	   vector<Vocabulary>& vocabularyVectorRef);
-	bool getCharacterByKeystroke(string keystroke, string& characterRef);
-	bool getCharacterByWord(string word, string& characterRef);
 
 protected:
 	DictionarySingleton();

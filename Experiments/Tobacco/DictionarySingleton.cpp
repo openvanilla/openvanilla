@@ -31,14 +31,24 @@ void DictionarySingleton::lostInstance()
 bool getVocabularyVectorByCharacters(string characters,
     vector<Vocabulary>& vocabularyVectorRef)
 {
-}
-
-bool getCharacterByKeystroke(string keystroke, string& characterRef)
-{
-}
-
-bool getCharacterByWord(string word, string& characterRef)
-{
+    /// characters-word table schema:    |characters|wordID|
+    /// word table schema:               |wordID|word|
+    /// frequency table schema:          |wordID|freq|
+    ///
+    /// The reasons why to separate into 3 tables are:
+    /// 1. Characters can be different by different input methods.
+    /// 2. Different frequency table represents different "context" or
+    ///    "user profile".
+    ///
+    /// SQL statement for example:
+    /// SELECT wordID, word, freq
+    /// FROM cj-word_table, word_table, generic_freq_table
+    /// WHERE cj-word_table.characters = ?
+    /// ON cj-word_table.wordID = word_table.wordID AND
+    ///     cj-word_table.wordID = generic_freq_table.wordID
+    ///
+    /// Since there're two inner joins,
+    /// it might be better to create a temporary table first.
 }
 
 const char *QueryForCommand(SQLite3 *db, const char *command) {
