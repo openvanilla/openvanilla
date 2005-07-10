@@ -14,10 +14,10 @@ using namespace std;
 class DictionarySingleton
 {
 public:
-	static DictionarySingleton* getInstance()
+	static DictionarySingleton* getInstance(const char* dbFilePath)
 	{
 		if(itsInstance == NULL)
-			itsInstance = new DictionarySingleton();
+			itsInstance = new DictionarySingleton(dbFilePath);
 
 		return itsInstance;
 	}
@@ -28,7 +28,7 @@ public:
 	   vector<Vocabulary>& vocabularyVectorRef);
 
 protected:
-	DictionarySingleton();
+	DictionarySingleton(const char* dbFilePath);
 	~DictionarySingleton();
 	
 private:

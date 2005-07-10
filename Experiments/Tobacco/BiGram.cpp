@@ -1,21 +1,19 @@
 #include <algorithm>
 
-#include "DictionarySingleton.h"
 #include "BiGram.h"
 
-BiGram::BiGram(void)
+BiGram::BiGram(const char* dbFilePath)
 {
+    BiGram::dictionary = DictionarySingleton::getInstance(dbFilePath);
 }
 
-BiGram::~BiGram(void)
+BiGram::~BiGram()
 {
 }
 
 int BiGram::maximumMatching(vector<Token>& tokenVectorRef,
     int index, int stop, bool doBackward)
 {
-	DictionarySingleton* dictionary = DictionarySingleton::getInstance();
-
 	vector<int> boundaryVector;
 	vector< vector<Vocabulary> > vectorOfVocabularyVector;
 	int begin = index;
@@ -71,8 +69,8 @@ int BiGram::maximumMatching(vector<Token>& tokenVectorRef,
 			{
 				string tokenSequence = currentCharacterStringVector[i];
 				vector<Vocabulary> tempVocabularies;
-				if(dictionary->getVocabularyVectorByCharacters(tokenSequence,
-				    tempVocabularies))
+				if(BiGram::dictionary->getVocabularyVectorByCharacters
+				    (tokenSequence, tempVocabularies))
 				{
 					foundFlag = true;
 					foundCharacterStringVector.push_back(tokenSequence);
@@ -140,8 +138,8 @@ int BiGram::maximumMatching(vector<Token>& tokenVectorRef,
 		{
 			string tokenSequence = foundCharacterStringVector[j];
 			vector<Vocabulary> vocabularies;
-			dictionary->getVocabularyVectorByCharacters(tokenSequence,
-			     vocabularies);
+			BiGram::dictionary->getVocabularyVectorByCharacters(
+			    tokenSequence, vocabularies);
 
             for(int k = 0; k < vocabularies.size(); k++)
 				currentVocabularyVector.push_back(vocabularies[k]);

@@ -7,9 +7,11 @@ using namespace std;
 
 PredictorSingleton* PredictorSingleton::itsInstance = NULL;
 
-PredictorSingleton::PredictorSingleton()
+PredictorSingleton::PredictorSingleton(const char* setDbFilePath)
 {
-	PredictorSingleton::dictionary = DictionarySingleton::getInstance();
+    PredictorSingleton::dbFilePath = setDbFilePath;
+	PredictorSingleton::dictionary =
+	   DictionarySingleton::getInstance(setDbFilePath);
 }
 
 PredictorSingleton::~PredictorSingleton()
@@ -103,7 +105,7 @@ void PredictorSingleton::setCandidateVector(int position)
 		PredictorSingleton::addCandidates(currentCharacterString, position);
 	}
 
-	BiGram biGram;
+	BiGram biGram(PredictorSingleton::dbFilePath);
 	vector<string> currentCharacterCombinationVector =
 		PredictorSingleton::tokenVector[position].characterStringVector;
 
@@ -149,7 +151,7 @@ void PredictorSingleton::setSelectedCandidate(
 
 void PredictorSingleton::setTokenVectorByBigram()
 {
-	BiGram biGram;
+	BiGram biGram(PredictorSingleton::dbFilePath);
 	int begin = 0;
 	int end = 0;
 	while(end <= PredictorSingleton::tokenVector.size())

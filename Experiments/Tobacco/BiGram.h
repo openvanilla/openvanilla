@@ -5,11 +5,12 @@
 
 #include "Token.h"
 #include "Vocabulary.h"
+#include "DictionarySingleton.h"
 
 class BiGram
 {
 public:
-	BiGram(void);
+	BiGram(const char* dbFilePath);
 	~BiGram(void);
 
 	int maximumMatching(
@@ -20,6 +21,9 @@ public:
 	void getVocabularyCombination(
 	   vector<Vocabulary>& leftRef, vector<Vocabulary>& rightRef,
 	   vector<Vocabulary>& combinedRef);
+	   
+private:
+    DictionarySingleton* dictionary;
 };
 
 #endif

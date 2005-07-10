@@ -7,11 +7,10 @@ using namespace std;
 DictionarySingleton* DictionarySingleton::itsInstance = NULL;
 SQLite3* DictionarySingleton::dictionaryDB = NULL;
 
-DictionarySingleton::DictionarySingleton()
+DictionarySingleton::DictionarySingleton(const char* dbFilePath)
 {
     DictionarySingleton::dictionaryDB = new SQLite3;
-    const char* dbfile = "db path here";
-    if (int err = DictionarySingleton::dictionaryDB->open(dbfile)) {
+    if (int err = DictionarySingleton::dictionaryDB->open(dbFilePath)) {
         murmur("SQLite3 error! code=%d", err);
     }
 }
