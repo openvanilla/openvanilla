@@ -5,6 +5,7 @@
 using namespace std;
 
 DictionarySingleton* DictionarySingleton::itsInstance = NULL;
+SQLite3* DictionarySingleton::dictionaryDB = NULL;
 
 DictionarySingleton::DictionarySingleton()
 {
@@ -28,7 +29,7 @@ void DictionarySingleton::lostInstance()
 	}
 }
 
-bool getVocabularyVectorByCharacters(string characters,
+bool DictionarySingleton::getVocabularyVectorByCharacters(string characters,
     vector<Vocabulary>& vocabularyVectorRef)
 {
     /// characters-word table schema:    |characters|wordID|
@@ -49,37 +50,33 @@ bool getVocabularyVectorByCharacters(string characters,
     ///
     /// Since there're two inner joins,
     /// it might be better to create a temporary table first.
-}
-
-const char *QueryForCommand(SQLite3 *db, const char *command) {
-    char *r=NULL;
-    static char valuebuffer[256];
-
-    murmur("executing SQL command: %s", command);
-
-    SQLite3Statement *sth=db->prepare(command);
-    if (sth) {
-        if (sth->step()==SQLITE_ROW) {
-            strcpy(valuebuffer, sth->column_text(0));
-            murmur("return value=%s", valuebuffer);
-            r=valuebuffer;
-        }
+    
+    string commandString("SELECT wordID, word, freq FROM cj-word_table, word_table, generic_freq_table WHERE cj-word_table.characters = ? ON cj-word_table.wordID = word_table.wordID AND cj-word_table.wordID = generic_freq_table.wordID");
+    SQLite3Statement *sth =
+        DictionarySingleton::dictionaryDB->prepare(commandString.c_str());
+    if (!sth) return false;
+    
+    const char* key = characters.c_str();
+    sth->bind_text(0, key);
+    
+    int rows = 0;
+    while (sth->step() == SQLITE_ROW) rows++;
+    murmur("query string=%s, number of candidates=%d", key, rows);
+    if (!rows) {
         delete sth;
+        return false;
     }
-    return r;
-}
 
-const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key) {
-    char cmd[256];
-    char keyescaped[128];
-    const char *kp=key;
-    char *ep=keyescaped;
-    while (*kp) {
-        if (*kp=='\'') { *ep++='\''; *ep++='\''; }
-        else *ep++=*kp;
-        kp++;
+    sth->reset();
+    while (sth->step() == SQLITE_ROW) {
+        const char* word = sth->column_text(1);
+        int freq = sth->column_int(2);
+        Vocabulary currentVocabulary;
+        currentVocabulary.word = string(word);
+        currentVocabulary.freq = freq;
+        
+        vocabularyVectorRef.push_back(currentVocabulary);
     }
-    *ep=0;
-    sprintf(cmd, "select value from %s where key='%s';", tbl, keyescaped);
-    return QueryForCommand(db, cmd);
+    delete sth;
+    return true;
 }

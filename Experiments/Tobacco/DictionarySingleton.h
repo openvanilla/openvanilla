@@ -30,12 +30,10 @@ public:
 protected:
 	DictionarySingleton();
 	~DictionarySingleton();
-
+	
 private:
 	static DictionarySingleton* itsInstance;
-	SQLite3 *dictionaryDB;
-    const char *QueryForCommand(SQLite3 *db, const char *command);
-    const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key);	
+    static SQLite3 *dictionaryDB;
 };
 
 #endif
