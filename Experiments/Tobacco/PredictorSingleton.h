@@ -13,6 +13,7 @@ using namespace std;
 class PredictorSingleton
 {
 public:
+    string composedString;
 	vector< vector<string> > vectorOfCharacterVector;
 	vector<Token> tokenVector;
 	vector<Candidate> candidateVector;
@@ -27,16 +28,18 @@ public:
 	}
 
 	void lostInstance();
-
-	void setCompositionString(string currentSequence, int position);
+    
+	void setTokenVector(string currentSequence, int position);
 	void setCandidateVector(int position);
+	void setSelectedCandidate(int position, int selectedCandidateIndex);
+
 	void removeWord(int position, bool delFlag);
 	void clearAll();
-	void setSelectedCandidate(int position, int selectedCandidateIndex);
-    void setTokenVectorByBigram();
 
 protected:
 	void addCandidates(string characters, int head);
+    void setTokenVectorByBigram();
+    void setComposedString();
 
 	PredictorSingleton();
 	~PredictorSingleton();

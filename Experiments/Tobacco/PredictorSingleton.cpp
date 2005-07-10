@@ -28,6 +28,7 @@ void PredictorSingleton::lostInstance()
 
 void PredictorSingleton::clearAll()
 {
+    PredictorSingleton::composedString.clear();
 	PredictorSingleton::vectorOfCharacterVector.clear();
 	PredictorSingleton::tokenVector.clear();
 	PredictorSingleton::candidateVector.clear();
@@ -58,7 +59,7 @@ void PredictorSingleton::removeWord(int position, bool delFlag)
 	PredictorSingleton::setTokenVectorByBigram();
 }
 
-void PredictorSingleton::setCompositionString(
+void PredictorSingleton::setTokenVector(
     string currentSequence, int position)
 {
 	Token currentToken;
@@ -142,6 +143,8 @@ void PredictorSingleton::setSelectedCandidate(
 		PredictorSingleton::tokenVector[i].word =
 			selectedCandidateWordString.substr(offset, 1);
 	}
+	
+	PredictorSingleton::setComposedString();
 }
 
 void PredictorSingleton::setTokenVectorByBigram()
@@ -182,4 +185,14 @@ void PredictorSingleton::setTokenVectorByBigram()
 
 		++end;
 	}
+	
+	PredictorSingleton::setComposedString();
+}
+
+void PredictorSingleton::setComposedString()
+{
+    PredictorSingleton::composedString.clear();
+    for(int i = 0; i < PredictorSingleton::tokenVector.size(); i++)
+        PredictorSingleton::composedString +=
+            PredictorSingleton::tokenVector[i].word;
 }
