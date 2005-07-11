@@ -1,0 +1,4 @@
+CREATE TABLE word_table(wordID INTEGER PRIMARY KEY, word TEXT);
+CREATE TABLE generic_freq_table(wordID INTEGER PRIMARY KEY, freq INTEGER);
+CREATE TABLE phone_char2word_table(characters TEXT, wordID INTEGER);
+CREATE INDEX phone_index_characters ON phone_char2word_table(characters);
