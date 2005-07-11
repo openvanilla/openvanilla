@@ -1,5 +1,9 @@
+#define OV_DEBUG
+
 #include "BiGram.h"
 #include "PredictorSingleton.h"
+
+#include <OpenVanilla/OVUtility.h>
 
 using namespace std;
 
@@ -8,6 +12,7 @@ PredictorSingleton* PredictorSingleton::itsInstance = NULL;
 PredictorSingleton::PredictorSingleton(
     const char* dbFilePath, const char* inputMethodId)
 {
+    murmur("new PredictorSingleton");
 	PredictorSingleton::dictionary =
 	   DictionarySingleton::getInstance(dbFilePath, inputMethodId);
 }
@@ -62,6 +67,9 @@ void PredictorSingleton::removeWord(int position, bool delFlag)
 void PredictorSingleton::setTokenVector(
     string currentSequence, int position)
 {
+    murmur("currentSequence[%s], position(%d)",
+        currentSequence.c_str(), position);
+
 	Token currentToken;
 	currentToken.withPrefix = false;
 	currentToken.withSuffix = false;
@@ -206,6 +214,7 @@ void PredictorSingleton::setTokenVectorByBigram()
 void PredictorSingleton::setComposedString()
 {
     PredictorSingleton::composedString.clear();
+    murmur("found?[%s]", PredictorSingleton::tokenVector[0].word.c_str());
     for(size_t i = 0; i < PredictorSingleton::tokenVector.size(); i++)
         PredictorSingleton::composedString +=
             PredictorSingleton::tokenVector[i].word;

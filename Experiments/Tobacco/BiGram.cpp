@@ -1,6 +1,10 @@
+#define OV_DEBUG
+
 #include <algorithm>
 
 #include "BiGram.h"
+
+#include <OpenVanilla/OVUtility.h>
 
 BiGram::BiGram()
 {
@@ -146,6 +150,7 @@ int BiGram::maximumMatching(
             for(size_t k = 0; k < vocabularies.size(); k++)
 				currentVocabularyVector.push_back(vocabularies[k]);
 		}
+		murmur("one[%s]", currentVocabularyVector[0].word.c_str());
 
 		if(currentVocabularyVector[0].word.length() == 1 &&
             currentVocabularyVector[0].freq > 99) {
@@ -163,7 +168,7 @@ int BiGram::maximumMatching(
                     currentVocabularyVector.begin() + thrashold,
                     currentVocabularyVector.end());
 		}
-
+		murmur("two[%s]", currentVocabularyVector[0].word.c_str());
 		vectorOfVocabularyVector.push_back(currentVocabularyVector);
 
 		index = currentIndex + 1;
@@ -188,6 +193,7 @@ int BiGram::maximumMatching(
 	}
 
 	Vocabulary bestVocabularyCombination = combinedVocabularyVector.front();
+    murmur("three[%s]", bestVocabularyCombination.word.c_str());
 
 	int from = begin;
 	int to = end;
@@ -198,9 +204,18 @@ int BiGram::maximumMatching(
 		from = tokenVectorRef.size() - end;
 	}
 	for(int pos = from; pos < to; ++pos)
+	{
+        int next = bestVocabularyCombination.word.find("\t", pos);
+        if(next < 0)
+            next = bestVocabularyCombination.word.length();
+            
+        murmur("pos=%d, next=%d", pos, next);
 		tokenVectorRef[pos].word =
-		  bestVocabularyCombination.word.at(pos - from);
+            bestVocabularyCombination.word.substr(pos - from, next);
+        pos = next;
+    }
 
+    murmur("four[%s]", tokenVectorRef[0].word.c_str());
 	return bestVocabularyCombination.freq;
 }
 
@@ -231,7 +246,7 @@ void BiGram::getVocabularyCombination(
 		for(int j = 0; j < rightBound; ++j)
 		{
 			Vocabulary combinedVocabulary;
-			combinedVocabulary.word = leftRef[i].word + rightRef[j].word;
+			combinedVocabulary.word = leftRef[i].word + "\t" + rightRef[j].word;
 
 			int leftFreq = leftRef[i].freq;
 			int rightFreq = rightRef[j].freq;

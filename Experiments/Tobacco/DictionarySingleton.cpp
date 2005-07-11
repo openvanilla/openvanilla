@@ -1,6 +1,10 @@
+#define OV_DEBUG
+
 #include <vector>
 
 #include "DictionarySingleton.h"
+
+#include <OpenVanilla/OVUtility.h>
 
 using namespace std;
 
@@ -10,6 +14,8 @@ SQLite3* DictionarySingleton::dictionaryDB = NULL;
 DictionarySingleton::DictionarySingleton(
     const char* dbFilePath, const char* inputMethodId)
 {
+    murmur("new DictionarySingleton");
+
     DictionarySingleton::dictionaryDB = new SQLite3;
     DictionarySingleton::inputMethodId = inputMethodId;
     if (int err = DictionarySingleton::dictionaryDB->open(dbFilePath)) {
@@ -42,38 +48,41 @@ bool DictionarySingleton::getVocabularyVectorByCharacters(string characters,
     /// 2. Different frequency table represents different "context" or
     ///    "user profile".
     ///
-    /// SQL statement for example:
-    /// SELECT word_table.wordID, word_table.word, generic_freq_table.freq
-    /// FROM word_table
-    /// INNER JOIN cj_char2word_table
-    ///     ON word_table.wordID = cj_char2word_table.wordID
-    /// INNER JOIN generic_freq
-    ///     ON word_table.wordID = generic_freq.wordID
-    /// WHERE cj_char2word_table.characters = 'hda taj'
-    /// ORDER BY generic_freq.freq DESC"
+    /// A SQL statement for example:
+    /// SELECT word_table.word, generic_freq_table.freq
+    /// FROM phone_char2word_table, word_table, generic_freq_table
+    /// WHERE phone_char2word_table.characters = 'ㄅㄚˋ'
+    ///     AND word_table.wordID = phone_char2word_table.wordID
+    ///     AND word_table.wordID = generic_freq_table.wordID
+    /// ORDER BY generic_freq_table.freq DESC"
     ///
     /// Since there're two inner joins,
-    /// it might be better to create a temporary table first.
-    
-    string commandString("SELECT word_table.wordID, word_table.word, generic_freq_table.freq FROM word_table INNER JOIN $char2wordTable ON word_table.wordID = $charactersColumn INNER JOIN generic_freq ON word_table.wordID = generic_freq.wordID WHERE $charactersColumn = '$key' ORDER BY generic_freq.freq DESC");
+    /// the order of tables and columns are very very important.
+
+    string strTableName(DictionarySingleton::inputMethodId);
+    strTableName += "_char2word_table";
+    string strWordIDColumn = strTableName + ".wordID";    
+    string strCharactersColumn = strTableName + ".characters";
+      
+    /// bind_foo seems not work on table/column name, so use stupid concat...
+    string selectString("SELECT word_table.word, generic_freq_table.freq");
+    string fromString(" FROM phone_char2word_table, word_table, generic_freq_table");
+    string whereString(" WHERE phone_char2word_table.characters='");
+    whereString += characters +
+        "' AND word_table.wordID = phone_char2word_table.wordID AND word_table.wordID = generic_freq_table.wordID ORDER BY generic_freq_table.freq DESC";
+    string commandString = selectString + fromString + whereString;
+
     SQLite3Statement *sth =
         DictionarySingleton::dictionaryDB->prepare(commandString.c_str());
-    if (!sth) return false;
-        
-    string strTableName(DictionarySingleton::inputMethodId);
-    strTableName += "-char2word_table";
-    sth->bind_text(1, strTableName.c_str());
-    /// e.g. "cj-char2word_table"
-    
-    string strCharactersColumn = strTableName + ".characters";
-    sth->bind_text(2, strCharactersColumn.c_str());
-    /// e.g. "cj-char2word_table.characters"
-
-    const char* key = characters.c_str();
-    sth->bind_text(3, key);
+    if (!sth) {
+        murmur("illegal SQL statement[%s]?", commandString.c_str());
+        return false;
+    }
     
     int rows = 0;
     while (sth->step() == SQLITE_ROW) rows++;
+    
+    const char* key = characters.c_str();
     murmur("query string=%s, number of candidates=%d", key, rows);
     if (!rows) {
         delete sth;
@@ -82,8 +91,9 @@ bool DictionarySingleton::getVocabularyVectorByCharacters(string characters,
 
     sth->reset();
     while (sth->step() == SQLITE_ROW) {
-        const char* word = sth->column_text(1);
-        int freq = sth->column_int(2);
+        const char* word = sth->column_text(0);
+        murmur("found[%s]", word);
+        int freq = sth->column_int(1);
         Vocabulary currentVocabulary;
         currentVocabulary.word = string(word);
         currentVocabulary.freq = freq;
