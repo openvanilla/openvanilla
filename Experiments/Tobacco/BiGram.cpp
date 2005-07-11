@@ -210,7 +210,7 @@ void BiGram::getCharacterCombination(
 {
 	for(int i = 0; i < leftRef.size(); ++i)
 		for(int j = 0; j < rightRef.size(); ++j)
-			combinedRef.push_back(leftRef[i] + " " + rightRef[j]);
+			combinedRef.push_back(leftRef[i] + "\t" + rightRef[j]);
 }
 
 void BiGram::getVocabularyCombination(
