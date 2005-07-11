@@ -147,9 +147,6 @@ int BiGram::maximumMatching(
 				currentVocabularyVector.push_back(vocabularies[k]);
 		}
 
-		stable_sort(
-            currentVocabularyVector.begin(), currentVocabularyVector.end(),
-            Vocabulary::isFreqGreater);
 		if(currentVocabularyVector[0].word.length() == 1 &&
             currentVocabularyVector[0].freq > 99) {
 			int thrashold = 0;
@@ -175,15 +172,8 @@ int BiGram::maximumMatching(
 	vector<Vocabulary> combinedVocabularyVector = vectorOfVocabularyVector[0];
 	for(int step = 1; step < vectorOfVocabularyVector.size(); ++step)
 	{
-		stable_sort(
-            combinedVocabularyVector.begin(), combinedVocabularyVector.end(),
-			Vocabulary::isFreqGreater);
-
 		vector<Vocabulary> rightVocabularyVector =
             vectorOfVocabularyVector[step];
-		stable_sort(
-            rightVocabularyVector.begin(), rightVocabularyVector.end(),
-			Vocabulary::isFreqGreater);
 
         vector<Vocabulary> leftVocabularyVector =
 		  combinedVocabularyVector;
@@ -196,10 +186,6 @@ int BiGram::maximumMatching(
                 leftVocabularyVector, rightVocabularyVector,
                 combinedVocabularyVector);
 	}
-
-	stable_sort(
-        combinedVocabularyVector.begin(), combinedVocabularyVector.end(),
-		Vocabulary::isFreqGreater);
 
 	Vocabulary bestVocabularyCombination = combinedVocabularyVector.front();
 

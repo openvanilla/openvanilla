@@ -1,5 +1,3 @@
-#include <algorithm>	// stable_sort()
-
 #include "BiGram.h"
 #include "PredictorSingleton.h"
 
@@ -123,13 +121,6 @@ void PredictorSingleton::setCandidateVector(int position)
 		for(int backwardStep = 0; backwardStep < currentCharacterCombinationVector.size(); ++backwardStep)
 			PredictorSingleton::addCandidates(currentCharacterCombinationVector[backwardStep], backwardPosition);
 	}
-
-	stable_sort(PredictorSingleton::candidateVector.begin(),
-	   PredictorSingleton::candidateVector.end(),
-	   Vocabulary::isFreqGreater);
-	stable_sort(PredictorSingleton::candidateVector.begin(),
-	   PredictorSingleton::candidateVector.end(),
-	   Vocabulary::isWordLonger);
 }
 
 void PredictorSingleton::setSelectedCandidate(
