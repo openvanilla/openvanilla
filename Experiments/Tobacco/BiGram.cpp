@@ -2,16 +2,16 @@
 
 #include "BiGram.h"
 
-BiGram::BiGram(const char* dbFilePath)
+BiGram::BiGram()
 {
-    BiGram::dictionary = DictionarySingleton::getInstance(dbFilePath);
 }
 
 BiGram::~BiGram()
 {
 }
 
-int BiGram::maximumMatching(vector<Token>& tokenVectorRef,
+int BiGram::maximumMatching(
+    DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
     int index, int stop, bool doBackward)
 {
 	vector<int> boundaryVector;
@@ -33,14 +33,16 @@ int BiGram::maximumMatching(vector<Token>& tokenVectorRef,
 		if(offsetBound > 7)
 			offsetBound = 7;
 		bool foundFlag = false;
-		vector<string> initialCharacterStringVector = tokenVectorRef[index].characterStringVector;
+		vector<string> initialCharacterStringVector =
+            tokenVectorRef[index].characterStringVector;
 		vector<string> foundCharacterStringVector;
 		int currentIndex = index;
 
 		while(!foundFlag)
 		{
 			int bound = 1;
-			vector<string> currentCharacterStringVector = initialCharacterStringVector;
+			vector<string> currentCharacterStringVector = 
+                initialCharacterStringVector;
 
 			for(int offset = 1; offset < offsetBound; ++offset)
 			{
@@ -69,7 +71,7 @@ int BiGram::maximumMatching(vector<Token>& tokenVectorRef,
 			{
 				string tokenSequence = currentCharacterStringVector[i];
 				vector<Vocabulary> tempVocabularies;
-				if(BiGram::dictionary->getVocabularyVectorByCharacters
+				if(dictionary->getVocabularyVectorByCharacters
 				    (tokenSequence, tempVocabularies))
 				{
 					foundFlag = true;
@@ -138,15 +140,18 @@ int BiGram::maximumMatching(vector<Token>& tokenVectorRef,
 		{
 			string tokenSequence = foundCharacterStringVector[j];
 			vector<Vocabulary> vocabularies;
-			BiGram::dictionary->getVocabularyVectorByCharacters(
+			dictionary->getVocabularyVectorByCharacters(
 			    tokenSequence, vocabularies);
 
             for(int k = 0; k < vocabularies.size(); k++)
 				currentVocabularyVector.push_back(vocabularies[k]);
 		}
 
-		stable_sort(currentVocabularyVector.begin(), currentVocabularyVector.end(), Vocabulary::isFreqGreater);
-		if(currentVocabularyVector[0].word.length() == 1 && currentVocabularyVector[0].freq > 99) {
+		stable_sort(
+            currentVocabularyVector.begin(), currentVocabularyVector.end(),
+            Vocabulary::isFreqGreater);
+		if(currentVocabularyVector[0].word.length() == 1 &&
+            currentVocabularyVector[0].freq > 99) {
 			int thrashold = 0;
 			for(int step = 0; step < currentVocabularyVector.size(); step++)
 			{
@@ -157,8 +162,9 @@ int BiGram::maximumMatching(vector<Token>& tokenVectorRef,
 			}
 			
 			if(thrashold > 0)
-				currentVocabularyVector.erase(currentVocabularyVector.begin() + thrashold,
-												currentVocabularyVector.end());
+				currentVocabularyVector.erase(
+                    currentVocabularyVector.begin() + thrashold,
+                    currentVocabularyVector.end());
 		}
 
 		vectorOfVocabularyVector.push_back(currentVocabularyVector);
@@ -169,11 +175,14 @@ int BiGram::maximumMatching(vector<Token>& tokenVectorRef,
 	vector<Vocabulary> combinedVocabularyVector = vectorOfVocabularyVector[0];
 	for(int step = 1; step < vectorOfVocabularyVector.size(); ++step)
 	{
-		stable_sort(combinedVocabularyVector.begin(), combinedVocabularyVector.end(),
+		stable_sort(
+            combinedVocabularyVector.begin(), combinedVocabularyVector.end(),
 			Vocabulary::isFreqGreater);
 
-		vector<Vocabulary> rightVocabularyVector = vectorOfVocabularyVector[step];
-		stable_sort(rightVocabularyVector.begin(), rightVocabularyVector.end(),
+		vector<Vocabulary> rightVocabularyVector =
+            vectorOfVocabularyVector[step];
+		stable_sort(
+            rightVocabularyVector.begin(), rightVocabularyVector.end(),
 			Vocabulary::isFreqGreater);
 
         vector<Vocabulary> leftVocabularyVector =
@@ -188,7 +197,8 @@ int BiGram::maximumMatching(vector<Token>& tokenVectorRef,
                 combinedVocabularyVector);
 	}
 
-	stable_sort(combinedVocabularyVector.begin(), combinedVocabularyVector.end(),
+	stable_sort(
+        combinedVocabularyVector.begin(), combinedVocabularyVector.end(),
 		Vocabulary::isFreqGreater);
 
 	Vocabulary bestVocabularyCombination = combinedVocabularyVector.front();
@@ -202,7 +212,8 @@ int BiGram::maximumMatching(vector<Token>& tokenVectorRef,
 		from = tokenVectorRef.size() - end;
 	}
 	for(int pos = from; pos < to; ++pos)
-		tokenVectorRef[pos].word = bestVocabularyCombination.word.at(pos - from);
+		tokenVectorRef[pos].word =
+		  bestVocabularyCombination.word.at(pos - from);
 
 	return bestVocabularyCombination.freq;
 }
@@ -242,8 +253,12 @@ void BiGram::getVocabularyCombination(
 			matrix = leftFreq + rightFreq;
 			if(matrix == 0)
 				break;
-			combinedVocabulary.freq = ((leftFreq * rightFreq) / (matrix * wordCount)) +
-										(matrix / wordCount);
+            /*
+			combinedVocabulary.freq =
+                ((leftFreq * rightFreq) /
+                    (matrix * wordCount)) + (matrix / wordCount);
+            */
+            combinedVocabulary.freq =  matrix;
 			combinedVocabularyVector.push_back(combinedVocabulary);
 		}
 

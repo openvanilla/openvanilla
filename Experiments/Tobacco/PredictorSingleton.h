@@ -19,10 +19,11 @@ public:
 	vector<Candidate> candidateVector;
 	vector<int> candidatePositionVector;
 
-	static PredictorSingleton* getInstance(const char* dbFilePath)
+	static PredictorSingleton* getInstance(
+	   const char* dbFilePath, const char* inputMethodId)
 	{
 		if(itsInstance == NULL)
-			itsInstance = new PredictorSingleton(dbFilePath);
+			itsInstance = new PredictorSingleton(dbFilePath, inputMethodId);
 
 		return itsInstance;
 	}
@@ -41,11 +42,10 @@ protected:
     void setTokenVectorByBigram();
     void setComposedString();
 
-	PredictorSingleton(const char* dbFilePath);
+	PredictorSingleton(const char* dbFilePath, const char* inputMethodId);
 	~PredictorSingleton();
 
 private:
-    const char* dbFilePath;
 	static PredictorSingleton* itsInstance;
 	DictionarySingleton* dictionary;
 };

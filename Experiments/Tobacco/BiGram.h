@@ -10,20 +10,18 @@
 class BiGram
 {
 public:
-	BiGram(const char* dbFilePath);
-	~BiGram(void);
+	BiGram();
+	~BiGram();
 
 	int maximumMatching(
-	   vector<Token>& tokenVectorRef, int index, int length, bool doBackward);
+	   DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
+	   int index, int length, bool doBackward);
 	void getCharacterCombination(
 	   vector<string>& leftRef, vector<string>& rightRef,
 	   vector<string>& combinedRef);
 	void getVocabularyCombination(
 	   vector<Vocabulary>& leftRef, vector<Vocabulary>& rightRef,
-	   vector<Vocabulary>& combinedRef);
-	   
-private:
-    DictionarySingleton* dictionary;
+	   vector<Vocabulary>& combinedRef);	   
 };
 
 #endif

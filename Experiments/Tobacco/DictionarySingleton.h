@@ -14,10 +14,11 @@ using namespace std;
 class DictionarySingleton
 {
 public:
-	static DictionarySingleton* getInstance(const char* dbFilePath)
+	static DictionarySingleton* getInstance(
+	   const char* dbFilePath, const char* inputMethodId)
 	{
 		if(itsInstance == NULL)
-			itsInstance = new DictionarySingleton(dbFilePath);
+			itsInstance = new DictionarySingleton(dbFilePath, inputMethodId);
 
 		return itsInstance;
 	}
@@ -28,12 +29,13 @@ public:
 	   vector<Vocabulary>& vocabularyVectorRef);
 
 protected:
-	DictionarySingleton(const char* dbFilePath);
+	DictionarySingleton(const char* dbFilePath, const char* inputMethodId);
 	~DictionarySingleton();
 	
 private:
 	static DictionarySingleton* itsInstance;
     static SQLite3 *dictionaryDB;
+    const char* inputMethodId;
 };
 
 #endif

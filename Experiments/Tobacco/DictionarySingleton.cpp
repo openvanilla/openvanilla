@@ -7,9 +7,11 @@ using namespace std;
 DictionarySingleton* DictionarySingleton::itsInstance = NULL;
 SQLite3* DictionarySingleton::dictionaryDB = NULL;
 
-DictionarySingleton::DictionarySingleton(const char* dbFilePath)
+DictionarySingleton::DictionarySingleton(
+    const char* dbFilePath, const char* inputMethodId)
 {
     DictionarySingleton::dictionaryDB = new SQLite3;
+    DictionarySingleton::inputMethodId = inputMethodId;
     if (int err = DictionarySingleton::dictionaryDB->open(dbFilePath)) {
         murmur("SQLite3 error! code=%d", err);
     }
@@ -50,13 +52,18 @@ bool DictionarySingleton::getVocabularyVectorByCharacters(string characters,
     /// Since there're two inner joins,
     /// it might be better to create a temporary table first.
     
-    string commandString("SELECT wordID, word, freq FROM cj-word_table, word_table, generic_freq_table WHERE cj-word_table.characters = ? ON cj-word_table.wordID = word_table.wordID AND cj-word_table.wordID = generic_freq_table.wordID");
+    string commandString("SELECT wordID, word, freq FROM $tableName, word_table, generic_freq_table WHERE $tableName.characters = $key ON $tableName.wordID = word_table.wordID AND $tableName.wordID = generic_freq_table.wordID");
     SQLite3Statement *sth =
         DictionarySingleton::dictionaryDB->prepare(commandString.c_str());
     if (!sth) return false;
     
     const char* key = characters.c_str();
-    sth->bind_text(0, key);
+    sth->bind_text(3, key);
+    
+    sth->bind_text(1, DictionarySingleton::inputMethodId);
+    sth->bind_text(2, DictionarySingleton::inputMethodId);
+    sth->bind_text(4, DictionarySingleton::inputMethodId);
+    sth->bind_text(5, DictionarySingleton::inputMethodId);
     
     int rows = 0;
     while (sth->step() == SQLITE_ROW) rows++;
