@@ -67,7 +67,7 @@ int BiGram::maximumMatching(
 				bound = offset + 1;
 			}
 
-			for(int i = 0; i < currentCharacterStringVector.size(); ++i)
+			for(size_t i = 0; i < currentCharacterStringVector.size(); ++i)
 			{
 				string tokenSequence = currentCharacterStringVector[i];
 				vector<Vocabulary> tempVocabularies;
@@ -136,21 +136,21 @@ int BiGram::maximumMatching(
 		}
 
 		vector<Vocabulary> currentVocabularyVector;
-		for(int j = 0; j < foundCharacterStringVector.size(); ++j)
+		for(size_t j = 0; j < foundCharacterStringVector.size(); ++j)
 		{
 			string tokenSequence = foundCharacterStringVector[j];
 			vector<Vocabulary> vocabularies;
 			dictionary->getVocabularyVectorByCharacters(
 			    tokenSequence, vocabularies);
 
-            for(int k = 0; k < vocabularies.size(); k++)
+            for(size_t k = 0; k < vocabularies.size(); k++)
 				currentVocabularyVector.push_back(vocabularies[k]);
 		}
 
 		if(currentVocabularyVector[0].word.length() == 1 &&
             currentVocabularyVector[0].freq > 99) {
 			int thrashold = 0;
-			for(int step = 0; step < currentVocabularyVector.size(); step++)
+			for(size_t step = 0; step < currentVocabularyVector.size(); step++)
 			{
 				if(currentVocabularyVector[step].freq < 100) {
 					thrashold = step;
@@ -170,7 +170,7 @@ int BiGram::maximumMatching(
 	}
 
 	vector<Vocabulary> combinedVocabularyVector = vectorOfVocabularyVector[0];
-	for(int step = 1; step < vectorOfVocabularyVector.size(); ++step)
+	for(size_t step = 1; step < vectorOfVocabularyVector.size(); ++step)
 	{
 		vector<Vocabulary> rightVocabularyVector =
             vectorOfVocabularyVector[step];
@@ -208,8 +208,8 @@ void BiGram::getCharacterCombination(
     vector<string>& leftRef, vector<string>& rightRef,
     vector<string>& combinedRef)
 {
-	for(int i = 0; i < leftRef.size(); ++i)
-		for(int j = 0; j < rightRef.size(); ++j)
+	for(size_t i = 0; i < leftRef.size(); ++i)
+		for(size_t j = 0; j < rightRef.size(); ++j)
 			combinedRef.push_back(leftRef[i] + "\t" + rightRef[j]);
 }
 
@@ -235,16 +235,16 @@ void BiGram::getVocabularyCombination(
 
 			int leftFreq = leftRef[i].freq;
 			int rightFreq = rightRef[j].freq;
-			int wordCount = combinedVocabulary.word.length();
 			matrix = leftFreq + rightFreq;
 			if(matrix == 0)
 				break;
             /*
+			int wordCount = combinedVocabulary.word.length();
 			combinedVocabulary.freq =
                 ((leftFreq * rightFreq) /
                     (matrix * wordCount)) + (matrix / wordCount);
             */
-            combinedVocabulary.freq =  matrix;
+            combinedVocabulary.freq = matrix;
 			combinedVocabularyVector.push_back(combinedVocabulary);
 		}
 

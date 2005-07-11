@@ -37,7 +37,7 @@ void PredictorSingleton::clearAll()
 
 void PredictorSingleton::removeWord(int position, bool delFlag)
 {
-	int tokenIndex = -1;
+	size_t tokenIndex;
 	if(delFlag)	// true	: DEL
 		tokenIndex = position;
 	else		// false: BackSpace
@@ -79,7 +79,7 @@ void PredictorSingleton::addCandidates(string characters, int head)
 	if(PredictorSingleton::dictionary->getVocabularyVectorByCharacters(
 	   characters, vocabularies))
 	{
-		for(int i = 0; i < vocabularies.size(); i++)
+		for(size_t i = 0; i < vocabularies.size(); i++)
 		{
 			Candidate currentCandidate(vocabularies[i]);
 			currentCandidate.position = head;
@@ -118,7 +118,7 @@ void PredictorSingleton::setCandidateVector(int position)
 			newCharacterCombinationVector);
 		currentCharacterCombinationVector = newCharacterCombinationVector;
 
-		for(int backwardStep = 0; backwardStep < currentCharacterCombinationVector.size(); ++backwardStep)
+		for(size_t backwardStep = 0; backwardStep < currentCharacterCombinationVector.size(); ++backwardStep)
 			PredictorSingleton::addCandidates(currentCharacterCombinationVector[backwardStep], backwardPosition);
 	}
 }
@@ -143,8 +143,8 @@ void PredictorSingleton::setSelectedCandidate(
 void PredictorSingleton::setTokenVectorByBigram()
 {
 	BiGram biGram;
-	int begin = 0;
-	int end = 0;
+	size_t begin = 0;
+	size_t end = 0;
 	while(end <= PredictorSingleton::tokenVector.size())
 	{
 		if(end == PredictorSingleton::tokenVector.size() && end > begin)
@@ -168,7 +168,7 @@ void PredictorSingleton::setTokenVectorByBigram()
 		else if(PredictorSingleton::tokenVector[end].isFixed ||
 				PredictorSingleton::tokenVector[end].isBoundary)
 		{
-			int length = -1;
+			size_t length;
 			if(PredictorSingleton::tokenVector[end].isFixed)
 				length = end;
 			else
@@ -206,7 +206,7 @@ void PredictorSingleton::setTokenVectorByBigram()
 void PredictorSingleton::setComposedString()
 {
     PredictorSingleton::composedString.clear();
-    for(int i = 0; i < PredictorSingleton::tokenVector.size(); i++)
+    for(size_t i = 0; i < PredictorSingleton::tokenVector.size(); i++)
         PredictorSingleton::composedString +=
             PredictorSingleton::tokenVector[i].word;
 }
