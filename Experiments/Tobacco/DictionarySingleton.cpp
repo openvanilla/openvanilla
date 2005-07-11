@@ -43,27 +43,34 @@ bool DictionarySingleton::getVocabularyVectorByCharacters(string characters,
     ///    "user profile".
     ///
     /// SQL statement for example:
-    /// SELECT wordID, word, freq
-    /// FROM cj-word_table, word_table, generic_freq_table
-    /// WHERE cj-word_table.characters = ?
-    /// ON cj-word_table.wordID = word_table.wordID AND
-    ///     cj-word_table.wordID = generic_freq_table.wordID
+    /// SELECT word_table.wordID, word_table.word, generic_freq_table.freq
+    /// FROM word_table
+    /// INNER JOIN cj_char2word_table
+    ///     ON word_table.wordID = cj_char2word_table.wordID
+    /// INNER JOIN generic_freq
+    ///     ON word_table.wordID = generic_freq.wordID
+    /// WHERE cj_char2word_table.characters = 'hda taj'
+    /// ORDER BY generic_freq.freq DESC"
     ///
     /// Since there're two inner joins,
     /// it might be better to create a temporary table first.
     
-    string commandString("SELECT wordID, word, freq FROM $tableName, word_table, generic_freq_table WHERE $tableName.characters = $key ON $tableName.wordID = word_table.wordID AND $tableName.wordID = generic_freq_table.wordID");
+    string commandString("SELECT word_table.wordID, word_table.word, generic_freq_table.freq FROM word_table INNER JOIN $char2wordTable ON word_table.wordID = $charactersColumn INNER JOIN generic_freq ON word_table.wordID = generic_freq.wordID WHERE $charactersColumn = '$key' ORDER BY generic_freq.freq DESC");
     SQLite3Statement *sth =
         DictionarySingleton::dictionaryDB->prepare(commandString.c_str());
     if (!sth) return false;
+        
+    string strTableName(DictionarySingleton::inputMethodId);
+    strTableName += "-char2word_table";
+    sth->bind_text(1, strTableName.c_str());
+    /// e.g. "cj-char2word_table"
     
+    string strCharactersColumn = strTableName + ".characters";
+    sth->bind_text(2, strCharactersColumn.c_str());
+    /// e.g. "cj-char2word_table.characters"
+
     const char* key = characters.c_str();
     sth->bind_text(3, key);
-    
-    sth->bind_text(1, DictionarySingleton::inputMethodId);
-    sth->bind_text(2, DictionarySingleton::inputMethodId);
-    sth->bind_text(4, DictionarySingleton::inputMethodId);
-    sth->bind_text(5, DictionarySingleton::inputMethodId);
     
     int rows = 0;
     while (sth->step() == SQLITE_ROW) rows++;
