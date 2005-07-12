@@ -426,6 +426,8 @@ int OVIMTobaccoContext::keyCapslock() {
 }
 
 int OVIMTobaccoContext::keyCompose() {
+    int count=fetchCandidate(seq.sequence());
+    
     std::string characterString(seq.compose());
     murmur("characterString[%s], position(%d)",
        characterString.c_str(), position);
@@ -434,7 +436,12 @@ int OVIMTobaccoContext::keyCompose() {
     position++;
     seq.clear();
 
-    return 1;
+    if(count > 0)
+        return updateCandidateWindow();
+    else {
+        s->beep();
+        return 1;
+    }
 }
 
 
@@ -532,7 +539,7 @@ int OVIMTobaccoContext::candidateEvent() {
         b->update();    // we do this to make some applications happy
     }
     else {
-        b->clear()->append(candi->candidates[i + page*perpage])->send();
+        //b->clear()->append(candi->candidates[i + page*perpage])->send();
         closeCandidateWindow();
         if (nextsyl) {
             seq.add(kc);
