@@ -350,6 +350,7 @@ int OVIMTobaccoContext::keyCommit() {
     if (b->isEmpty()) return 0;
     b->send();
     position = 0;
+    predictor->clearAll();
     return 1;
 }
 
