@@ -20,7 +20,7 @@ public:
 	vector<int> candidatePositionVector;
 
 	static PredictorSingleton* getInstance(
-	   const char* dbFilePath, const char* inputMethodId)
+	   const char* dbFilePath, string inputMethodId)
 	{
 		if(itsInstance == NULL)
 			itsInstance = new PredictorSingleton(dbFilePath, inputMethodId);
@@ -42,7 +42,7 @@ protected:
     void setTokenVectorByBigram();
     void setComposedString();
 
-	PredictorSingleton(const char* dbFilePath, const char* inputMethodId);
+	PredictorSingleton(const char* dbFilePath, string inputMethodId);
 	~PredictorSingleton();
 
 private:

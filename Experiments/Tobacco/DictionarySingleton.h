@@ -15,7 +15,7 @@ class DictionarySingleton
 {
 public:
 	static DictionarySingleton* getInstance(
-	   const char* dbFilePath, const char* inputMethodId)
+	   const char* dbFilePath, string inputMethodId)
 	{
 		if(itsInstance == NULL)
 			itsInstance = new DictionarySingleton(dbFilePath, inputMethodId);
@@ -29,13 +29,13 @@ public:
 	   vector<Vocabulary>& vocabularyVectorRef);
 
 protected:
-	DictionarySingleton(const char* dbFilePath, const char* inputMethodId);
+	DictionarySingleton(const char* dbFilePath, string inputMethodId);
 	~DictionarySingleton();
 	
 private:
 	static DictionarySingleton* itsInstance;
     static SQLite3 *dictionaryDB;
-    const char* inputMethodId;
+    string inputMethodId;
 };
 
 #endif

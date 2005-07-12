@@ -12,7 +12,7 @@ DictionarySingleton* DictionarySingleton::itsInstance = NULL;
 SQLite3* DictionarySingleton::dictionaryDB = NULL;
 
 DictionarySingleton::DictionarySingleton(
-    const char* dbFilePath, const char* inputMethodId)
+    const char* dbFilePath, string inputMethodId)
 {
     murmur("new DictionarySingleton");
 
@@ -59,17 +59,21 @@ bool DictionarySingleton::getVocabularyVectorByCharacters(string characters,
     /// Since there're two inner joins,
     /// the order of tables and columns are very very important.
 
-    string strTableName(DictionarySingleton::inputMethodId);
+    string strTableName = DictionarySingleton::inputMethodId;
     strTableName += "_char2word_table";
-    string strWordIDColumn = strTableName + ".wordID";    
-    string strCharactersColumn = strTableName + ".characters";
+    string strColumnWordID = strTableName + ".wordID";    
+    string strColumnCharacters = strTableName + ".characters";
       
-    /// bind_foo seems not work on table/column name, so use stupid concat...
+    /// bind_foo seems not work on table/column name (sure it can't!),
+    /// so use stupid concat...
     string selectString("SELECT word_table.word, generic_freq_table.freq");
-    string fromString(" FROM phone_char2word_table, word_table, generic_freq_table");
-    string whereString(" WHERE phone_char2word_table.characters='");
-    whereString += characters +
-        "' AND word_table.wordID = phone_char2word_table.wordID AND word_table.wordID = generic_freq_table.wordID ORDER BY generic_freq_table.freq DESC";
+    string fromString(" FROM ");
+    fromString += strTableName + ", word_table, generic_freq_table";
+    string whereString(" WHERE ");
+    whereString += strColumnCharacters + " = '" + characters + "'";
+    whereString += " AND word_table.wordID = " + strColumnWordID +
+        " AND word_table.wordID = generic_freq_table.wordID";
+    whereString += " ORDER BY generic_freq_table.freq DESC";
     string commandString = selectString + fromString + whereString;
 
     SQLite3Statement *sth =
@@ -81,9 +85,9 @@ bool DictionarySingleton::getVocabularyVectorByCharacters(string characters,
     
     int rows = 0;
     while (sth->step() == SQLITE_ROW) rows++;
-    
-    const char* key = characters.c_str();
-    murmur("query string=%s, number of candidates=%d", key, rows);
+
+    murmur("query string=%s, number of candidates=%d",
+        characters.c_str(), rows);
     if (!rows) {
         delete sth;
         return false;
