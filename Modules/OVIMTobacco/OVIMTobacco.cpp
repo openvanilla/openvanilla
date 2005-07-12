@@ -241,10 +241,10 @@ int OVIMTobacco::initialize(OVDictionary *cfg, OVService * s, const char *p) {
     char tsiDbFilePath[PATH_MAX];
     sprintf(tsiDbFilePath, "%sOVIMTobacco/tsi.db", p);
     const char* ename = QueryForKey(db, table, "_property_ename");
-    char inputMethodId[64];
-    strcpy(inputMethodId, ename);
+    string inputMethodId(ename);
 
-    murmur("initializing the predictor(%s, %s)", tsiDbFilePath, inputMethodId);
+    murmur("initializing the predictor(%s, %s)",
+        tsiDbFilePath, inputMethodId.c_str());
     predictor = PredictorSingleton::getInstance(tsiDbFilePath, inputMethodId);
 
     update(cfg, s);
