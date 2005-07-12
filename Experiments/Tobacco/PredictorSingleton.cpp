@@ -91,6 +91,11 @@ void PredictorSingleton::addCandidates(string characters, int head)
 			PredictorSingleton::candidatePositionVector.push_back(head);
 		}
 	}
+	
+	stable_sort(
+	   PredictorSingleton::candidateVector.begin(),
+	   PredictorSingleton::candidateVector.end(),
+	   Vocabulary::isWordLonger);
 }
 
 void PredictorSingleton::setCandidateVector(int position)
@@ -134,11 +139,11 @@ void PredictorSingleton::setSelectedCandidate(
 		PredictorSingleton::candidateVector[selectedCandidateIndex].word;
 	int head =
 	   PredictorSingleton::candidateVector[selectedCandidateIndex].position;
-	for(int i = head, offset = 0; i <= index; ++i, ++offset)
+	for(int i = head, offset = 0; i <= index; i++, offset+=3)
 	{
 		PredictorSingleton::tokenVector[i].isFixed = true;
 		PredictorSingleton::tokenVector[i].word =
-			selectedCandidateWordString.substr(offset, 1);
+			selectedCandidateWordString.substr(offset, 3);
 	}
 	
 	PredictorSingleton::setComposedString();

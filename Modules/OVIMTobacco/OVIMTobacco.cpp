@@ -66,11 +66,12 @@ public:
 protected:
     int keyCommit();
     int keyEsc();
-    int keyBackspace();
+    int keyRemove();
     int keyCompose();
     int keyPrintable();
     int keyNonRadical();
     int keyCapslock();
+    int setCandidate(int position);
     int fetchCandidate(const char *);
     int fetchCandidateWithPrefix(const char *prefix, char c);
     int isPunctuationCombination();
@@ -323,8 +324,9 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
     if (k->isFunctionKey() && b->isEmpty()) return 0;
     if (k->isCapslock() && b->isEmpty()) return keyCapslock();
     if (k->code()==ovkEsc) return keyEsc();
-    if (k->code()==ovkBackspace || k->code()==ovkDelete) return keyBackspace();
-    if (!b->isEmpty() && k->code()==ovkSpace) return keyCompose();
+    if (k->code()==ovkBackspace || k->code()==ovkDelete) return keyRemove();
+    if (k->code()==ovkSpace && !seq.isEmpty()) return keyCompose();
+    if (k->code()==ovkSpace && seq.isEmpty()) return setCandidate(position);
     if (k->code()==ovkReturn) return keyCommit();
     if (isprint(k->code())) return keyPrintable();
     return 0;
@@ -338,18 +340,28 @@ int OVIMTobaccoContext::keyCommit() {
 }
 
 int OVIMTobaccoContext::keyEsc() {
-    if (b->isEmpty()) return 0;     // if buffer is empty, do nothing
+    if (seq.isEmpty()) return 0;     // if buffer is empty, do nothing
     seq.clear();                    // otherwise we clear the syllable
-    b->clear()->update();
+    b->clear()->append(predictor->composedString.c_str())->update();
     return 1;
 }
 
-int OVIMTobaccoContext::keyBackspace() {
+int OVIMTobaccoContext::keyRemove() {
     if (b->isEmpty()) return 0;
-    seq.remove();
-    b->clear();
-    if (!seq.isEmpty()) b->append(seq.compose());
+    if (seq.isEmpty()) {
+        if (k->code() == ovkBackspace)
+            predictor->removeWord(position, true);
+        else
+            predictor->removeWord(position, false);            
+    }
+    else
+        seq.remove();
+        
+    b->clear()->append(predictor->composedString.c_str());
+    if (!seq.isEmpty())
+        b->append(seq.compose());
     b->update();
+    
     return 1;
 }
 
@@ -426,22 +438,13 @@ int OVIMTobaccoContext::keyCapslock() {
 }
 
 int OVIMTobaccoContext::keyCompose() {
-    int count=fetchCandidate(seq.sequence());
-    
     std::string characterString(seq.compose());
-    murmur("characterString[%s], position(%d)",
-       characterString.c_str(), position);
     predictor->setTokenVector(characterString, position);
     b->clear()->append(predictor->composedString.c_str())->update();
     position++;
     seq.clear();
-
-    if(count > 0)
-        return updateCandidateWindow();
-    else {
-        s->beep();
-        return 1;
-    }
+    
+    return 1;
 }
 
 
@@ -504,13 +507,37 @@ int OVIMTobaccoContext::fetchCandidate(const char *qs) {
     return rows;
 }
 
+int OVIMTobaccoContext::setCandidate(int position) {
+    murmur("start to set candidate at (%d)", position);
+    page=0;
+    if (candi) {
+        delete candi;
+        candi=NULL;
+    }
+
+    if(position == 0)
+        return 0;
+
+    predictor->setCandidateVector(position - 1);
+    int rows = predictor->candidateVector.size();
+    murmur("got %d rows", rows);
+    candi=new IMGCandidate;
+    candi->count=0;
+    candi->candidates=new char* [rows];
+    for(int i = 0; i < rows; i++)
+        candi->candidates[candi->count++] =
+            const_cast<char*>(predictor->candidateVector[i].word.c_str());
+
+    return updateCandidateWindow();
+}
+
 int OVIMTobaccoContext::candidateEvent() {
     char kc=k->code();
     char *localSelKey;
 
-    if (kc==ovkEsc || kc==ovkBackspace || kc==ovkDelete) {  //ESC/BKSP/DELETE cancels candi window
-        clear();
-        b->clear()->update();
+    if (kc==ovkEsc || kc==ovkBackspace || kc==ovkDelete) {
+    /// ESC/BKSP/DELETE cancels candi window
+        seq.clear();
         return closeCandidateWindow();
     }
 
@@ -539,12 +566,16 @@ int OVIMTobaccoContext::candidateEvent() {
         b->update();    // we do this to make some applications happy
     }
     else {
-        //b->clear()->append(candi->candidates[i + page*perpage])->send();
+        murmur("set selected candidate(%d, %d)",
+            position - 1, i + page*perpage);
+        predictor->setSelectedCandidate(position - 1, i + page*perpage);
+        b->clear()->append(predictor->composedString.c_str()); 
         closeCandidateWindow();
         if (nextsyl) {
             seq.add(kc);
-            b->append(seq.compose())->update();
+            b->append(seq.compose());
         }
+        b->update();
     }    
     return 1;
 }
