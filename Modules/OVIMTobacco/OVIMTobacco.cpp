@@ -371,7 +371,9 @@ int OVIMTobaccoContext::keyPrintable() {
     }
     if (parent->isEndKey(k->code())) return keyCompose();
     
-    b->clear()->append(seq.compose())->update();
+    b->clear()
+        ->append(predictor->composedString.c_str())
+        ->append(seq.compose())->update();
     return 1;
 }
 
@@ -430,7 +432,6 @@ int OVIMTobaccoContext::keyCompose() {
     predictor->setTokenVector(characterString, position);
     b->clear()->append(predictor->composedString.c_str())->update();
     position++;
-    characterString.clear();
     seq.clear();
 
     return 1;
