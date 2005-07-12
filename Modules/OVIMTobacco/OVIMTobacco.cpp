@@ -67,6 +67,7 @@ protected:
     int keyCommit();
     int keyEsc();
     int keyRemove();
+    int keyMove();
     int keyCompose();
     int keyPrintable();
     int keyNonRadical();
@@ -328,8 +329,21 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
     if (k->code()==ovkSpace && !seq.isEmpty()) return keyCompose();
     if (k->code()==ovkSpace && seq.isEmpty()) return setCandidate(position);
     if (k->code()==ovkReturn) return keyCommit();
+    if (k->code()==ovkLeft || k->code()==ovkRight) return keyMove();
     if (isprint(k->code())) return keyPrintable();
     return 0;
+}
+
+int OVIMTobaccoContext::keyMove() {
+    if(seq.isEmpty() && !b->isEmpty()) {
+        if(k->code()==ovkLeft)  position--;
+        else                    position++;
+        
+        b->update(position, position, position+1);
+        return 1;
+    }
+    else
+        return 0;
 }
 
 int OVIMTobaccoContext::keyCommit() {
@@ -342,20 +356,24 @@ int OVIMTobaccoContext::keyCommit() {
 int OVIMTobaccoContext::keyEsc() {
     if (seq.isEmpty()) return 0;     // if buffer is empty, do nothing
     seq.clear();                    // otherwise we clear the syllable
-    b->clear()->append(predictor->composedString.c_str())->update();
+    b->clear()->append(predictor->composedString.c_str())
+        ->update(position, position, position+1);
     return 1;
 }
 
 int OVIMTobaccoContext::keyRemove() {
+    murmur("previous position(%d)", position);
     if (b->isEmpty()) return 0;
     if (seq.isEmpty()) {
         if (k->code() == ovkBackspace)
             predictor->removeWord(position, true);
         else
-            predictor->removeWord(position, false);            
+            predictor->removeWord(position, false);
     }
     else
         seq.remove();
+
+    murmur("current position(%d)", position);
         
     b->clear()->append(predictor->composedString.c_str());
     if (!seq.isEmpty())
@@ -383,9 +401,24 @@ int OVIMTobaccoContext::keyPrintable() {
     }
     if (parent->isEndKey(k->code())) return keyCompose();
     
+    int len = predictor->composedString.length();
+    string leftString, rightString;
+    if(len > 0) {
+        leftString = 
+            predictor->composedString.substr(0, (position)*3);
+        rightString = 
+            predictor->
+                composedString.substr((position)*3, len-(position)*3);
+    }
+    else
+        leftString = rightString = "";
+    murmur("left[%s], right[%s]", leftString.c_str(), rightString.c_str());
+    
     b->clear()
-        ->append(predictor->composedString.c_str())
-        ->append(seq.compose())->update();
+        ->append(leftString.c_str())
+        ->append(seq.compose())
+        ->append(rightString.c_str())
+        ->update(position, position, position+1);
     return 1;
 }
 
@@ -440,7 +473,8 @@ int OVIMTobaccoContext::keyCapslock() {
 int OVIMTobaccoContext::keyCompose() {
     std::string characterString(seq.compose());
     predictor->setTokenVector(characterString, position);
-    b->clear()->append(predictor->composedString.c_str())->update();
+    b->clear()->append(predictor->composedString.c_str())
+        ->update(position, position, position+1);
     position++;
     seq.clear();
     
@@ -575,7 +609,7 @@ int OVIMTobaccoContext::candidateEvent() {
             seq.add(kc);
             b->append(seq.compose());
         }
-        b->update();
+        b->update(position, position, position+1);
     }    
     return 1;
 }
@@ -599,7 +633,8 @@ int OVIMTobaccoContext::updateCandidateWindow() {
     c->append(dispstr);
     c->update();
     if (!c->onScreen()) c->show();
-    b->update();        // we do this to make some application happy
+    b->update(position, position, position+1);
+    
     return 1;
 }
 
@@ -610,13 +645,13 @@ int OVIMTobaccoContext::closeCandidateWindow() {
         delete candi;
         candi=NULL;
     }
-    return 1;        
+    return 1;
 }
 
 int OVIMTobaccoContext::commitFirstCandidate() {
     if (!candi) return 1;
     b->clear()->append(candi->candidates[0])->send();
-    return closeCandidateWindow();        
+    return closeCandidateWindow();
 }
 
 int OVIMTobaccoContext::candidatePageUp() {
