@@ -549,25 +549,16 @@ int OVIMTobaccoContext::keyCapslock() {
 int OVIMTobaccoContext::keyCompose() {
     std::string characterString(seq.compose());
     if(predictor->setTokenVector(characterString, position))
-    {
         position++;
-        b->clear()->append(predictor->composedString.c_str())
-            ->update(position, position-1, position);
-
-        seq.clear();
-                
-        return 1;
-    }
     else
-    {
         s->beep();
-        b->clear()->append(predictor->composedString.c_str())
-            ->update(position, position-1, position);
+        
+    b->clear()->append(predictor->composedString.c_str())
+        ->update(position, position-1, position);
 
-        seq.clear();
-
-        return 0;
-    }
+    seq.clear();                
+    
+    return 1;
 }
 
 
