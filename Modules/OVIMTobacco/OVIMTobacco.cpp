@@ -365,10 +365,23 @@ int OVIMTobaccoContext::keyMove() {
 
 int OVIMTobaccoContext::keyCommit() {
     if (b->isEmpty()) return 0;
-    b->send();
-    position = 0;
-    predictor->clearAll();
-    return 1;
+    if (!seq.isEmpty()) {
+        if (keyCompose()) {
+            b->send();
+            position = 0;
+            predictor->clearAll();
+            return 1;        
+        }
+        else
+            return 0;
+    }
+    else
+    {
+        b->send();
+        position = 0;
+        predictor->clearAll();
+        return 1;
+    }
 }
 
 int OVIMTobaccoContext::keyEsc() {
@@ -412,13 +425,13 @@ int OVIMTobaccoContext::keyRemove() {
     else
         b->clear()
             ->append(predictor->composedString.c_str())
-            ->update(position, position-1, position);;
+            ->update(position, position-1, position);
     
     return 1;
 }
 
 int OVIMTobaccoContext::keyPrintable() {
-    if (isalpha(k->code()) && k->isShift() && b->isEmpty()) {
+    if (isalpha(k->code()) && k->isShift() && b->isEmpty() && seq.isEmpty()) {
         char keystr[2];
         sprintf(keystr, "%c", tolower(k->code()));
         b->clear()->append(keystr)->send();
@@ -433,7 +446,7 @@ int OVIMTobaccoContext::keyPrintable() {
         if (b->isEmpty()) return keyNonRadical(); // not a Radical keycode
         s->beep();
     }
-    if (parent->isEndKey(k->code())) {
+    if (parent->isEndKey(k->code()) && !seq.isEmpty()) {
         freshSequenceAndWordBoth();
         return keyCompose();
     }
