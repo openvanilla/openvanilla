@@ -72,7 +72,7 @@ protected:
     int keyPrintable();
     int keyNonRadical();
     int keyCapslock();
-    int setCandidate();
+    int setCandidate(bool doSelectionInFrontOfCursor);
     int fetchCandidate(const char *);
     int fetchCandidateWithPrefix(const char *prefix, char c);
     int isPunctuationCombination();
@@ -334,7 +334,7 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
     if (k->code()==ovkEsc) return keyEsc();
     if (k->code()==ovkBackspace || k->code()==ovkDelete) return keyRemove();
     if (k->code()==ovkSpace && !seq.isEmpty()) return keyCompose();
-    if (k->code()==ovkSpace && seq.isEmpty()) return setCandidate();
+    if (k->code()==ovkSpace && seq.isEmpty()) return setCandidate(true);
     if (k->code()==ovkReturn) return keyCommit();
     if (k->code()==ovkLeft || k->code()==ovkRight) return keyMove();
     if (isprint(k->code())) return keyPrintable();
@@ -612,7 +612,7 @@ int OVIMTobaccoContext::fetchCandidate(const char *qs) {
     return rows;
 }
 
-int OVIMTobaccoContext::setCandidate() {
+int OVIMTobaccoContext::setCandidate(bool doSelectionInFrontOfCursor) {
     murmur("start to set candidate at (%d)", position);
     page=0;
     if (candi) {
@@ -620,10 +620,23 @@ int OVIMTobaccoContext::setCandidate() {
         candi=NULL;
     }
 
-    if(position == 0)
-        return 0;
-
-    predictor->setCandidateVector(position - 1);
+    int choosingIndex = -1;
+    if(doSelectionInFrontOfCursor) {
+        if(position == 0)
+            choosingIndex = 0;
+        else
+            choosingIndex = position - 1;
+    }
+    else
+    {
+        if(position == predictor->tokenVector.size())
+            choosingIndex = position - 1;
+        else
+            choosingIndex = position;
+    }
+        
+    predictor->setCandidateVector(choosingIndex);
+    /// Currently use "post" choosing mode only
     int rows = predictor->candidateVector.size();
     murmur("got %d rows", rows);
     candi=new IMGCandidate;
