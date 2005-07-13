@@ -84,6 +84,8 @@ protected:
     int candidateEvent();
     int candidatePageUp();
     int candidatePageDown();
+    
+    void freshSequenceAndWordBoth();
 
     OVKeyCode *k;
     OVBuffer *b;
@@ -308,11 +310,15 @@ OVIMTobaccoContext::OVIMTobaccoContext(OVIMTobacco *p) : seq(p->table) {
 void OVIMTobaccoContext::start(OVBuffer*, OVCandidate*, OVService* s) {
     seq.clear();
     candi=NULL;
+    
+    predictor->clearAll();
     position = 0;
 }
 
 void OVIMTobaccoContext::clear() {
     seq.clear();
+    
+    predictor->clearAll();
     position = 0;
 }
 
@@ -402,26 +408,7 @@ int OVIMTobaccoContext::keyRemove() {
     murmur("current position(%d)", position);
         
     if (!seq.isEmpty())
-    {
-        int len = predictor->composedString.length();
-        string leftString, rightString;
-        if(len > 0) {
-            leftString = 
-                predictor->composedString.substr(0, (position)*3);
-            rightString = 
-                predictor->
-                    composedString.substr((position)*3, len-(position)*3);
-        }
-        else
-            leftString = rightString = "";
-        murmur("left[%s], right[%s]", leftString.c_str(), rightString.c_str());
-    
-        b->clear()
-            ->append(leftString.c_str())
-            ->append(seq.compose())
-            ->append(rightString.c_str())
-            ->update(position, position, position+1);
-    }
+        freshSequenceAndWordBoth();
     else
         b->clear()
             ->append(predictor->composedString.c_str())
@@ -446,8 +433,18 @@ int OVIMTobaccoContext::keyPrintable() {
         if (b->isEmpty()) return keyNonRadical(); // not a Radical keycode
         s->beep();
     }
-    if (parent->isEndKey(k->code())) return keyCompose();
+    if (parent->isEndKey(k->code())) {
+        freshSequenceAndWordBoth();
+        return keyCompose();
+    }
     
+    freshSequenceAndWordBoth();
+    return 1;
+}
+
+void OVIMTobaccoContext::freshSequenceAndWordBoth() {
+/// BAD UTF-8 Chinese character processing here, again...
+
     int len = predictor->composedString.length();
     string leftString, rightString;
     if(len > 0) {
@@ -466,7 +463,6 @@ int OVIMTobaccoContext::keyPrintable() {
         ->append(seq.compose())
         ->append(rightString.c_str())
         ->update(position, position, position+1);
-    return 1;
 }
 
 int OVIMTobaccoContext::keyNonRadical() {
@@ -539,13 +535,21 @@ int OVIMTobaccoContext::keyCapslock() {
 
 int OVIMTobaccoContext::keyCompose() {
     std::string characterString(seq.compose());
-    predictor->setTokenVector(characterString, position);
-    b->clear()->append(predictor->composedString.c_str())
-        ->update(position, position, position+1);
-    position++;
-    seq.clear();
-    
-    return 1;
+    if(predictor->setTokenVector(characterString, position))
+    {
+        b->clear()->append(predictor->composedString.c_str())
+            ->update(position, position, position+1);
+        position++;
+        seq.clear();
+                
+        return 1;
+    }
+    else
+    {
+        s->beep();
+
+        return 0;
+    }
 }
 
 
