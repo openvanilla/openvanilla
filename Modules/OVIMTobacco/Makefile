@@ -22,6 +22,7 @@ imtables.db: imtables-schema.txt ${CINS} cin-sqlconvert.pl
 	perl cin-sqlconvert.pl ${CINS} | sqlite3 imtables.db
 	
 tsi.db: tobacco-schema.txt tsi.src tobacco-sqlconvert.pl
+	curl -k https://svn.csie.net/chewing/libchewing/trunk/data/tsi.src -o tsi.src
 	rm -f tsi.db
 	sqlite3 tsi.db < tobacco-schema.txt
 	cat tsi.src | perl -w -CO tobacco-sqlconvert.pl | sqlite3 tsi.db
