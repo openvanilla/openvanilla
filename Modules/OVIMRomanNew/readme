@@ -1,5 +1,4 @@
 Install:
 
-make dict.db
-make
+make all
 sudo make install

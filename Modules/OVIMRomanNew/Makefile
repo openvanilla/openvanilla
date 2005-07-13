@@ -10,6 +10,7 @@ include ../../Mk/ov.im.mk
 include ../../Mk/ov.vars.mk
 include ../../Mk/ov.general.mk
 
+all:	OVIMRomanNew.dylib $(DATA)
 
 dict.db: cin-sqlconvert.pl
 	rm -f dict.db

@@ -101,6 +101,17 @@ public:
 		    	keyseq.clear();
 		    	return closeCandidateWindow(i);
 		    }
+		    
+            if (k->code()==ovkSpace ||
+                k->code()==ovkReturn ||
+                is_punc(k->code()))
+            {
+                if (!(strlen(keyseq.buf))) return 0; // empty buffer, do nothing            
+
+    			b->append(" ")->send();
+                keyseq.clear();
+	       		return closeCandidateWindow(i);
+    		}
 		}
 
 		if(is_selkey(k->code())){
@@ -113,10 +124,25 @@ public:
 		}
 
 		if (k->code()==ovkSpace || k->code()==ovkReturn || is_punc(k->code())) {
-            if (!(strlen(keyseq.buf))) return 0;   // empty buffer, do nothing
-			b->append(" ")->send();
-			keyseq.clear();
-			return closeCandidateWindow(i);
+            if (!(strlen(keyseq.buf))) return 0;   // empty buffer, do nothing            
+
+            if(keyseq.buf) {
+                pagenumber = 0;
+                if(spellChecker(keyseq.buf)) {
+                    showcandi(i);
+                    return 1;
+                }
+                else
+                {
+                    if (!(strlen(keyseq.buf))) return 0;
+        			b->append(" ")->send();
+                    keyseq.clear();
+	          		return closeCandidateWindow(i);
+                }
+			} else {
+    			b->send();
+                return 0;
+			}
 		}
 
 		if (k->code()==ovkDelete || k->code()==ovkBackspace) {
@@ -175,6 +201,7 @@ protected:
 
     int showcandi(OVCandidate* i);
     int updatepagetotal(char* buf);
+    int spellChecker(char* buf);
 
 protected:
 	KeySeq keyseq;
@@ -183,6 +210,39 @@ protected:
     int pagetotal;
     int temp;
 };
+
+int OVIMRomanNewContext:: spellChecker(char* buf){
+    pagenumber=0;
+    pagetotal=0;
+    candi.clear();
+
+    char cmd[256];
+    sprintf(cmd, "select * from dict where soundex(key) == soundex(%s);", buf);
+    murmur("run [%s]", cmd);
+    SQLite3Statement *sth=db->prepare(cmd);
+    if (!sth) {
+        murmur("SQL syntax error!");
+        return 0;
+    }
+
+    int row = 0;
+    while (sth->step()==SQLITE_ROW) row++;
+    
+    if(row > 0) {
+        sth->reset();
+        while (sth->step()==SQLITE_ROW) {
+            candi.add(string(sth->column_text(0)));
+        }
+        delete sth;
+        pagetotal=candi.count()/10;
+        murmur("got %d soundex words", candi.count());
+        return 1;
+    }
+    else {
+        delete sth;
+        return 0;
+    }
+}
 
 int OVIMRomanNewContext:: updatepagetotal(char* buf){
     pagenumber=0;
