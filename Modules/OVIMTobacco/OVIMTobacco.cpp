@@ -72,11 +72,12 @@ protected:
     int keyPrintable();
     int keyNonRadical();
     int keyCapslock();
-    int setCandidate(int position);
+    int setCandidate();
     int fetchCandidate(const char *);
     int fetchCandidateWithPrefix(const char *prefix, char c);
     int isPunctuationCombination();
     int punctuationKey();
+    int setPunctuation(string punctuationCharacters);
     int updateCandidateWindow();
     int closeCandidateWindow();
     int commitFirstCandidate();
@@ -327,7 +328,7 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
     if (k->code()==ovkEsc) return keyEsc();
     if (k->code()==ovkBackspace || k->code()==ovkDelete) return keyRemove();
     if (k->code()==ovkSpace && !seq.isEmpty()) return keyCompose();
-    if (k->code()==ovkSpace && seq.isEmpty()) return setCandidate(position);
+    if (k->code()==ovkSpace && seq.isEmpty()) return setCandidate();
     if (k->code()==ovkReturn) return keyCommit();
     if (k->code()==ovkLeft || k->code()==ovkRight) return keyMove();
     if (isprint(k->code())) return keyPrintable();
@@ -367,7 +368,10 @@ int OVIMTobaccoContext::keyRemove() {
     if (b->isEmpty()) return 0;
     if (seq.isEmpty()) {
         if (k->code() == ovkBackspace)
+        {
             predictor->removeWord(position, true);
+            position--;
+        }
         else
             predictor->removeWord(position, false);
     }
@@ -376,10 +380,31 @@ int OVIMTobaccoContext::keyRemove() {
 
     murmur("current position(%d)", position);
         
-    b->clear()->append(predictor->composedString.c_str());
     if (!seq.isEmpty())
-        b->append(seq.compose());
-    b->update();
+    {
+        int len = predictor->composedString.length();
+        string leftString, rightString;
+        if(len > 0) {
+            leftString = 
+                predictor->composedString.substr(0, (position)*3);
+            rightString = 
+                predictor->
+                    composedString.substr((position)*3, len-(position)*3);
+        }
+        else
+            leftString = rightString = "";
+        murmur("left[%s], right[%s]", leftString.c_str(), rightString.c_str());
+    
+        b->clear()
+            ->append(leftString.c_str())
+            ->append(seq.compose())
+            ->append(rightString.c_str())
+            ->update(position, position, position+1);
+    }
+    else
+        b->clear()
+            ->append(predictor->composedString.c_str())
+            ->update(position, position, position + 1);;
     
     return 1;
 }
@@ -455,8 +480,24 @@ int OVIMTobaccoContext::punctuationKey() {
         count=fetchCandidateWithPrefix("_ctrl_opt_", kc);
     }
     if (!count) return 0;       // we send back the combination key
-    if (count==1) return commitFirstCandidate();
-    return updateCandidateWindow();    
+    string punctuationCharacters("_ctrl_opt_" + kc);
+    if (count > 0) return setPunctuation(punctuationCharacters);
+    
+    return 0;
+}
+
+int OVIMTobaccoContext::setPunctuation(string punctuationCharacters) {
+    if (!candi) return 0;
+    
+    string punctuationString(candi->candidates[0]);
+    predictor->setFixedToken(
+        punctuationCharacters, punctuationString, position);
+    b->clear()->append(predictor->composedString.c_str())
+        ->update(position, position, position+1);
+    position++;
+    seq.clear();
+
+    return 1;
 }
 
 int OVIMTobaccoContext::keyCapslock() {
@@ -542,7 +583,7 @@ int OVIMTobaccoContext::fetchCandidate(const char *qs) {
     return rows;
 }
 
-int OVIMTobaccoContext::setCandidate(int position) {
+int OVIMTobaccoContext::setCandidate() {
     murmur("start to set candidate at (%d)", position);
     page=0;
     if (candi) {

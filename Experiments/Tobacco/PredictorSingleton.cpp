@@ -63,9 +63,12 @@ void PredictorSingleton::removeWord(int position, bool delFlag)
 	PredictorSingleton::setTokenVectorByBigram();
 }
 
-void PredictorSingleton::setTokenVector(
+bool PredictorSingleton::setTokenVector(
     string currentSequence, int position)
 {
+    if(!PredictorSingleton::dictionary->isVocabulary(currentSequence))
+        return false;
+
 	Token currentToken;
 	currentToken.withPrefix = false;
 	currentToken.withSuffix = false;
@@ -74,7 +77,26 @@ void PredictorSingleton::setTokenVector(
     PredictorSingleton::tokenVector.insert(
         PredictorSingleton::tokenVector.begin() + position, currentToken);
 
-    PredictorSingleton::setTokenVectorByBigram();    
+    PredictorSingleton::setTokenVectorByBigram();
+    
+    return true;
+}
+
+void PredictorSingleton::setFixedToken(
+    string currentSequence, string currentWord, int position)
+{
+	Token currentToken;
+	currentToken.withPrefix = false;
+	currentToken.withSuffix = false;
+	currentToken.isFixed = true;
+	currentToken.isBoundary = true;
+	currentToken.characterStringVector.push_back(currentSequence);
+	currentToken.word = currentWord;
+
+    PredictorSingleton::tokenVector.insert(
+        PredictorSingleton::tokenVector.begin() + position, currentToken);
+
+    PredictorSingleton::setTokenVectorByBigram();
 }
 
 void PredictorSingleton::addCandidates(string characters, int head)

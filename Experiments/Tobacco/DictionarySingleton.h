@@ -25,6 +25,7 @@ public:
 
 	void lostInstance();
 
+    bool isVocabulary(string characters);
 	bool getVocabularyVectorByCharacters(string characters,
 	   vector<Vocabulary>& vocabularyVectorRef);
 

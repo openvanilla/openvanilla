@@ -75,8 +75,7 @@ int BiGram::maximumMatching(
 			{
 				string tokenSequence = currentCharacterStringVector[i];
 				vector<Vocabulary> tempVocabularies;
-				if(dictionary->getVocabularyVectorByCharacters
-				    (tokenSequence, tempVocabularies))
+				if(dictionary->isVocabulary(tokenSequence))
 				{
 					foundFlag = true;
 					foundCharacterStringVector.push_back(tokenSequence);

@@ -36,6 +36,43 @@ void DictionarySingleton::lostInstance()
 	}
 }
 
+bool DictionarySingleton::isVocabulary(string characters)
+{
+    string strTableName = DictionarySingleton::inputMethodId;
+    strTableName += "_char2word_table";
+    string strColumnWordID = strTableName + ".wordID";    
+    string strColumnCharacters = strTableName + ".characters";
+      
+    string selectString("SELECT count(" + strColumnWordID + ")");
+    string fromString(" FROM ");
+    fromString += strTableName;
+    string whereString(" WHERE ");
+    whereString += strColumnCharacters + " = '" + characters + "'";
+    string commandString = selectString + fromString + whereString;
+
+    SQLite3Statement *sth =
+        DictionarySingleton::dictionaryDB->prepare(commandString.c_str());
+    if (!sth) {
+        murmur("illegal SQL statement[%s]?", commandString.c_str());
+        return false;
+    }
+
+    if (sth->step() == SQLITE_ROW) {
+        int count = sth->column_int(0);
+        murmur("found[%d]", count);
+        delete sth;
+        
+        if (count > 0)  return true;
+        else            return false;
+    }
+    else
+    {
+        delete sth;
+        murmur("found count but encountered error?");
+        return false;
+    }
+}
+
 bool DictionarySingleton::getVocabularyVectorByCharacters(string characters,
     vector<Vocabulary>& vocabularyVectorRef)
 {
