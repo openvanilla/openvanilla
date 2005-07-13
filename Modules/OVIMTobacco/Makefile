@@ -14,15 +14,15 @@ INC+=-I../../Experiments/Tobacco
 VPATH+= ../../Experiments/Tobacco
 CFLAGS=-g $(INC)
 
-all: OVIMTobacco.dylib imtables.db tsi.db
+all: OVIMTobacco.dylib $(DATA)
 
 imtables.db: imtables-schema.txt ${CINS} cin-sqlconvert.pl
 	rm -f imtables.db
 	sqlite3 imtables.db < imtables-schema.txt
 	perl cin-sqlconvert.pl ${CINS} | sqlite3 imtables.db
 	
-tsi.db: tobacco-schema.txt tsi.src tobacco-sqlconvert.pl
-	curl -k https://svn.csie.net/chewing/libchewing/trunk/data/tsi.src -o tsi.src
+tsi.db: tobacco-schema.txt tobacco-sqlconvert.pl
 	rm -f tsi.db
 	sqlite3 tsi.db < tobacco-schema.txt
+	if [ !tsi.src ]; then curl -k https://svn.csie.net/chewing/libchewing/trunk/data/tsi.src -o tsi.src ; fi
 	cat tsi.src | perl -w -CO tobacco-sqlconvert.pl | sqlite3 tsi.db
