@@ -356,7 +356,7 @@ int OVIMTobaccoContext::keyMove() {
                 return 0;
         }
         
-        b->update(position, position, position+1);
+        b->update(position, position-1, position);
         return 1;
     }
     else
@@ -375,7 +375,7 @@ int OVIMTobaccoContext::keyEsc() {
     if (seq.isEmpty()) return 0;     // if buffer is empty, do nothing
     seq.clear();                    // otherwise we clear the syllable
     b->clear()->append(predictor->composedString.c_str())
-        ->update(position, position, position+1);
+        ->update(position, position-1, position);
     return 1;
 }
 
@@ -412,7 +412,7 @@ int OVIMTobaccoContext::keyRemove() {
     else
         b->clear()
             ->append(predictor->composedString.c_str())
-            ->update(position, position, position + 1);;
+            ->update(position, position-1, position);;
     
     return 1;
 }
@@ -462,7 +462,7 @@ void OVIMTobaccoContext::freshSequenceAndWordBoth() {
         ->append(leftString.c_str())
         ->append(seq.compose())
         ->append(rightString.c_str())
-        ->update(position, position, position+1);
+        ->update(position, position-1, position);
 }
 
 int OVIMTobaccoContext::keyNonRadical() {
@@ -510,7 +510,7 @@ int OVIMTobaccoContext::setPunctuation(string punctuationCharacters) {
     predictor->setFixedToken(
         punctuationCharacters, punctuationString, position);
     b->clear()->append(predictor->composedString.c_str())
-        ->update(position, position, position+1);
+        ->update(position, position-1, position);
     position++;
     seq.clear();
 
@@ -538,7 +538,7 @@ int OVIMTobaccoContext::keyCompose() {
     if(predictor->setTokenVector(characterString, position))
     {
         b->clear()->append(predictor->composedString.c_str())
-            ->update(position, position, position+1);
+            ->update(position, position-1, position);
         position++;
         seq.clear();
                 
@@ -680,7 +680,7 @@ int OVIMTobaccoContext::candidateEvent() {
             seq.add(kc);
             b->append(seq.compose());
         }
-        b->update(position, position, position+1);
+        b->update(position, position-1, position);
     }    
     return 1;
 }
@@ -704,7 +704,7 @@ int OVIMTobaccoContext::updateCandidateWindow() {
     c->append(dispstr);
     c->update();
     if (!c->onScreen()) c->show();
-    b->update(position, position, position+1);
+    b->update(position, position-1, position);
     
     return 1;
 }
