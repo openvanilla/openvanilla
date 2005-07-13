@@ -337,8 +337,18 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
 
 int OVIMTobaccoContext::keyMove() {
     if(seq.isEmpty() && !b->isEmpty()) {
-        if(k->code()==ovkLeft)  position--;
-        else                    position++;
+        if(k->code()==ovkLeft) {
+            if(position > 0)
+                position--;
+            else
+                return 0;
+        }
+        else {
+            if(position < predictor->tokenVector.size())
+                position++;
+            else
+                return 0;
+        }
         
         b->update(position, position, position+1);
         return 1;
@@ -367,13 +377,24 @@ int OVIMTobaccoContext::keyRemove() {
     murmur("previous position(%d)", position);
     if (b->isEmpty()) return 0;
     if (seq.isEmpty()) {
-        if (k->code() == ovkBackspace)
+        if (k->code() == ovkDelete)
         {
-            predictor->removeWord(position, true);
-            position--;
+            murmur("do delete");
+            if (position < predictor->tokenVector.size())
+                predictor->removeWord(position, true);
+            else
+                return 0;
         }
         else
-            predictor->removeWord(position, false);
+        {
+            murmur("do backspace");
+            if (position > 0) {
+                predictor->removeWord(position, false);
+                position--;
+            }
+            else
+                return 0;
+        }
     }
     else
         seq.remove();
@@ -497,6 +518,10 @@ int OVIMTobaccoContext::setPunctuation(string punctuationCharacters) {
     position++;
     seq.clear();
 
+    delete candi;
+    candi=NULL;
+    /// candidate selecting does not work for punctuations currently...
+    
     return 1;
 }
 

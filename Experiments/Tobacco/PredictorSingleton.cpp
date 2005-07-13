@@ -196,6 +196,10 @@ void PredictorSingleton::setTokenVectorByBigram()
             else
                 forwardTokenVector.clear();
 		}
+		else if(end == PredictorSingleton::tokenVector.size())
+		{
+            break;
+		}
 		else if(PredictorSingleton::tokenVector[end].isFixed ||
 				PredictorSingleton::tokenVector[end].isBoundary)
 		{

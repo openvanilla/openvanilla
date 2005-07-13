@@ -2,7 +2,7 @@ IMID=OVIMTobacco
 SOURCES=OVIMTobacco PredictorSingleton DictionarySingleton\
     Token Vocabulary Candidate BiGram
 DATA=imtables.db tsi.db
-CINS=bpmf.cin
+CINS=bpmf_punctuation.cin
 LDFLAGS+=-lsqlite3
 
 include ../../Mk/ov.os.mk
@@ -12,6 +12,7 @@ include ../../Mk/ov.general.mk
 
 INC+=-I../../Experiments/Tobacco
 VPATH+= ../../Experiments/Tobacco
+CFLAGS=-g $(INC)
 
 all: OVIMTobacco.dylib imtables.db tsi.db
 
