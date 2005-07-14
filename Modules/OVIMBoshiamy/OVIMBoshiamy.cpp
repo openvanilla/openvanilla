@@ -232,6 +232,7 @@ OVInputMethodContext *OVIMGenericSQLite::newContext() {
 
 int OVIMGenericSQLite::initialize(OVDictionary *cfg, OVService * s, const char *p) {
     update(cfg, s);
+    strcpy(selkey," 1234567890");
     return 1;
 }
 
@@ -240,8 +241,6 @@ void OVIMGenericSQLite::update(OVDictionary *cfg, OVService *) {
     const char *autoCompose="autoCompose";
     const char *maxSeqLen="maxKeySequenceLength";
 
-//    strcpy(selkey, cfg->getStringWithDefault("selectKey", "123456789")); 
-    strcpy(selkey, " 1234567890");
     allowwildcard=cfg->getIntegerWithDefault("wildcard", 1);
     if (allowwildcard !=0 && allowwildcard !=1) allowwildcard=1;
     
