@@ -292,6 +292,7 @@ void OVIMGenericContext::start(OVBuffer*, OVCandidate*, OVService* s) {
 
 void OVIMGenericContext::clear() {
     seq.clear();
+    commitFirstCandidate();
 }
 
 void OVIMGenericContext::end() {
@@ -399,8 +400,6 @@ int OVIMGenericContext::keyCapslock() {
 int OVIMGenericContext::keyCompose() {
     const char *q = seq.sequence();
 
-    b->clear()->append(seq.compose())->update();
-
     int count=fetchCandidate(q);
     if (!count) {
         if(fetchCandidateSuffixRule(q,'v') > 1) 
@@ -414,6 +413,7 @@ int OVIMGenericContext::keyCompose() {
     }
 
     if (count==1) return commitFirstCandidate();
+    b->clear()->append(candi->candidates[0])->update();
     return updateCandidateWindow();
 }
 
