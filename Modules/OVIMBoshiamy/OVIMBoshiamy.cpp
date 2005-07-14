@@ -99,7 +99,6 @@ public:
     virtual int maxSeqLen() { return cfgMaxSeqLen; }
     virtual int isBeep() { return cfgBeep; }
     virtual int isAutoCompose() { return cfgAutoCompose; }
-    virtual int isHitMaxAndCompose() { return cfgHitMaxAndCompose; }
     virtual bool isShiftSelKey() { return doShiftSelKey; };
 
 protected:
@@ -115,7 +114,6 @@ protected:
     int cfgMaxSeqLen;
     int cfgBeep;
     int cfgAutoCompose;
-    int cfgHitMaxAndCompose;
 
     bool doShiftSelKey;
 };
@@ -241,7 +239,6 @@ void OVIMGenericSQLite::update(OVDictionary *cfg, OVService *) {
     const char *warningBeep="warningBeep";
     const char *autoCompose="autoCompose";
     const char *maxSeqLen="maxKeySequenceLength";
-    const char *hitMax="hitMaxAndCompose";
 
 //    strcpy(selkey, cfg->getStringWithDefault("selectKey", "123456789")); 
     strcpy(selkey, " 1234567890");
@@ -258,7 +255,6 @@ void OVIMGenericSQLite::update(OVDictionary *cfg, OVService *) {
 
     cfgAutoCompose      = cfg->getInteger(autoCompose);
     cfgBeep             = cfg->getInteger(warningBeep);
-    cfgHitMaxAndCompose = cfg->getInteger(hitMax);
     cfgMaxSeqLen        = cfg->getInteger(maxSeqLen);
     doShiftSelKey       = cfg->getInteger("shiftSelectionKey") == 0 ? false : true;
 
