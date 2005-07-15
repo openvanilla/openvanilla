@@ -76,7 +76,8 @@ public:
     virtual void start(OVBuffer*, OVCandidate*, OVService*) { clear(); }
     virtual void clear() { keyseq.clear();} 
     
-    virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService*)    
+    virtual int keyEvent(
+        OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* s)    
     {
         if(candi.count()) {
             if (k->code()==ovkLeft || k->code()==ovkUp) {
@@ -130,10 +131,18 @@ public:
 
             if(keyseq.buf) {
                 pagenumber = 0;
-                if(spellCheckerByLuceneFuzzySearch(keyseq.buf))
+                if(!isEnglish(keyseq.buf))
                 {
-                    showcandi(i);
-                    return 1;
+                    if(spellCheckerByLuceneFuzzySearch(keyseq.buf))
+                    {
+                        showcandi(i);
+                        return 1;
+                    }
+                    else
+                    {
+                        s->beep();
+                        return closeCandidateWindow(i);
+                    }
                 }
                 else
                 {
@@ -206,6 +215,7 @@ protected:
     int updatepagetotal(char* buf);
     int spellCheckerBySQLiteSoundex(char* buf);
     int spellCheckerByLuceneFuzzySearch(char* buf);
+    bool isEnglish(char* buf);
 
 protected:
 	KeySeq keyseq;
@@ -215,7 +225,22 @@ protected:
     int temp;    
 };
 
-int OVIMRomanNewContext:: spellCheckerByLuceneFuzzySearch(char* buf)
+bool OVIMRomanNewContext::isEnglish(char* buf) {
+    char cmd[256];
+    sprintf(cmd, "select count(key) from dict where key = '%s';", buf);
+    SQLite3Statement *sth=db->prepare(cmd);
+    if (!sth) return false;
+
+    int amount = 0;
+    if(sth->step()==SQLITE_ROW)
+        amount = sth->column_int(0);
+    delete sth;
+    
+    if(amount > 0)  return true;
+    else            return false;
+}
+
+int OVIMRomanNewContext::spellCheckerByLuceneFuzzySearch(char* buf)
 {
     pagenumber=0;
     pagetotal=0;
@@ -228,7 +253,7 @@ int OVIMRomanNewContext:: spellCheckerByLuceneFuzzySearch(char* buf)
     return candi.count();
 }
 
-int OVIMRomanNewContext:: spellCheckerBySQLiteSoundex(char* buf){
+int OVIMRomanNewContext::spellCheckerBySQLiteSoundex(char* buf){
     pagenumber=0;
     pagetotal=0;
     candi.clear();
