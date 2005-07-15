@@ -217,7 +217,7 @@ int OVIMRomanNewContext:: spellChecker(char* buf){
     candi.clear();
 
     char cmd[256];
-    sprintf(cmd, "select * from dict where soundex(key) == soundex(%s);", buf);
+    sprintf(cmd, "select key from dict where soundex(key) = soundex('%s');", buf);
     murmur("run [%s]", cmd);
     SQLite3Statement *sth=db->prepare(cmd);
     if (!sth) {
