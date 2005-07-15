@@ -72,7 +72,7 @@ protected:
     int keyPrintable();
     int keyNonRadical();
     int keyCapslock();
-    int setCandidate(bool doSelectionInFrontOfCursor);
+    int setCandidate();
     int fetchCandidate(const char *);
     int fetchCandidateWithPrefix(const char *prefix, char c);
     int isPunctuationCombination();
@@ -85,7 +85,7 @@ protected:
     int candidatePageUp();
     int candidatePageDown();
     
-    void freshSequenceAndWordBoth();
+    void freshBuffer();
 
     OVKeyCode *k;
     OVBuffer *b;
@@ -112,7 +112,12 @@ public:
     virtual int isBeep() { return cfgBeep; }
     virtual int isAutoCompose() { return cfgAutoCompose; }
     virtual int isHitMaxAndCompose() { return cfgHitMaxAndCompose; }
-    virtual bool isShiftSelKey() { return doShiftSelKey; };
+    virtual bool doShiftSelKey() { return cfgDoShiftSelKey; };
+    virtual bool doClearSequenceOnError() { return cfgDoClearSequenceOnError; };
+    virtual bool doChooseInFrontOfCursor()
+    {
+        return cfgDoChooseInFrontOfCursor;
+    };
 
 protected:
     int isEndKey(char c);
@@ -129,7 +134,10 @@ protected:
     int cfgAutoCompose;
     int cfgHitMaxAndCompose;
 
-    bool doShiftSelKey;    
+    bool cfgDoShiftSelKey;
+    
+    bool cfgDoChooseInFrontOfCursor;
+    bool cfgDoClearSequenceOnError;
 };
 
 class OVOFReverseLookupSQLite : public OVOutputFilter
@@ -279,7 +287,14 @@ void OVIMTobacco::update(OVDictionary *cfg, OVService *) {
     cfgBeep             = cfg->getInteger(warningBeep);
     cfgHitMaxAndCompose = cfg->getInteger(hitMax);
     cfgMaxSeqLen        = cfg->getInteger(maxSeqLen);
-    doShiftSelKey       = cfg->getInteger("shiftSelectionKey") == 0 ? false : true;
+    cfgDoShiftSelKey       = cfg->getInteger("shiftSelectionKey") == 0 ? false : true;
+    
+    cfgDoChooseInFrontOfCursor =
+        cfg->getIntegerWithDefault("chooseInFrontOfCursor", 1)
+            == 0 ? false : true;
+    cfgDoClearSequenceOnError =
+        cfg->getIntegerWithDefault("clearSequenceOnError", 1)
+            == 0 ? false : true;
 }
 
 const char *OVIMTobacco::identifier() {
@@ -334,7 +349,7 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
     if (k->code()==ovkEsc) return keyEsc();
     if (k->code()==ovkBackspace || k->code()==ovkDelete) return keyRemove();
     if (k->code()==ovkSpace && !seq.isEmpty()) return keyCompose();
-    if (k->code()==ovkSpace && seq.isEmpty()) return setCandidate(true);
+    if (k->code()==ovkSpace && seq.isEmpty()) return setCandidate();
     if (k->code()==ovkReturn) return keyCommit();
     if (k->code()==ovkLeft || k->code()==ovkRight) return keyMove();
     if (isprint(k->code())) return keyPrintable();
@@ -387,8 +402,7 @@ int OVIMTobaccoContext::keyCommit() {
 int OVIMTobaccoContext::keyEsc() {
     if (seq.isEmpty()) return 0;     // if buffer is empty, do nothing
     seq.clear();                    // otherwise we clear the syllable
-    b->clear()->append(predictor->composedString.c_str())
-        ->update(position, position-1, position);
+    freshBuffer();
     return 1;
 }
 
@@ -419,14 +433,8 @@ int OVIMTobaccoContext::keyRemove() {
         seq.remove();
 
     murmur("current position(%d)", position);
+    freshBuffer();
         
-    if (!seq.isEmpty())
-        freshSequenceAndWordBoth();
-    else
-        b->clear()
-            ->append(predictor->composedString.c_str())
-            ->update(position, position-1, position);
-    
     return 1;
 }
 
@@ -447,35 +455,42 @@ int OVIMTobaccoContext::keyPrintable() {
         s->beep();
     }
     if (parent->isEndKey(k->code()) && !seq.isEmpty()) {
-        freshSequenceAndWordBoth();
+        freshBuffer();
         return keyCompose();
     }
     
-    freshSequenceAndWordBoth();
+    freshBuffer();
     return 1;
 }
 
-void OVIMTobaccoContext::freshSequenceAndWordBoth() {
+void OVIMTobaccoContext::freshBuffer() {
 /// BAD UTF-8 Chinese character processing here, again...
 
-    int len = predictor->composedString.length();
-    string leftString, rightString;
-    if(len > 0) {
-        leftString = 
-            predictor->composedString.substr(0, (position)*3);
-        rightString = 
-            predictor->
-                composedString.substr((position)*3, len-(position)*3);
+    if(strlen(seq.sequence()) > 0)
+    {
+        int len = predictor->composedString.length();
+        string leftString, rightString;
+        if(len > 0) {
+            leftString = 
+                predictor->composedString.substr(0, (position)*3);
+            rightString = 
+                predictor->
+                    composedString.substr((position)*3, len-(position)*3);
+        }
+        else
+            leftString = rightString = "";
+        murmur("left[%s], right[%s]", leftString.c_str(), rightString.c_str());
+    
+        b->clear()
+            ->append(leftString.c_str())
+            ->append(seq.compose())
+            ->append(rightString.c_str())
+            ->update(position, position-1, position);
     }
     else
-        leftString = rightString = "";
-    murmur("left[%s], right[%s]", leftString.c_str(), rightString.c_str());
-    
-    b->clear()
-        ->append(leftString.c_str())
-        ->append(seq.compose())
-        ->append(rightString.c_str())
-        ->update(position, position-1, position);
+        b->clear()
+            ->append(predictor->composedString.c_str())
+            ->update(position, position-1, position);
 }
 
 int OVIMTobaccoContext::keyNonRadical() {
@@ -522,10 +537,9 @@ int OVIMTobaccoContext::setPunctuation(string punctuationCharacters) {
     string punctuationString(candi->candidates[0]);
     predictor->setFixedToken(
         punctuationCharacters, punctuationString, position);
-    b->clear()->append(predictor->composedString.c_str())
-        ->update(position, position-1, position);
-    position++;
     seq.clear();
+    position++;
+    freshBuffer();
 
     delete candi;
     candi=NULL;
@@ -548,15 +562,16 @@ int OVIMTobaccoContext::keyCapslock() {
 
 int OVIMTobaccoContext::keyCompose() {
     std::string characterString(seq.compose());
-    if(predictor->setTokenVector(characterString, position))
+    if(predictor->setTokenVector(characterString, position)) {
         position++;
-    else
+        seq.clear();
+    }
+    else {
         s->beep();
-        
-    b->clear()->append(predictor->composedString.c_str())
-        ->update(position, position-1, position);
-
-    seq.clear();                
+        if(parent->doClearSequenceOnError())
+            seq.clear();
+    }    
+    freshBuffer();
     
     return 1;
 }
@@ -621,7 +636,7 @@ int OVIMTobaccoContext::fetchCandidate(const char *qs) {
     return rows;
 }
 
-int OVIMTobaccoContext::setCandidate(bool doSelectionInFrontOfCursor) {
+int OVIMTobaccoContext::setCandidate() {
     murmur("start to set candidate at (%d)", position);
     page=0;
     if (candi) {
@@ -630,7 +645,7 @@ int OVIMTobaccoContext::setCandidate(bool doSelectionInFrontOfCursor) {
     }
 
     int choosingIndex = -1;
-    if(doSelectionInFrontOfCursor) {
+    if(parent->doChooseInFrontOfCursor()) {
         if(position == 0)
             choosingIndex = 0;
         else
@@ -668,14 +683,14 @@ int OVIMTobaccoContext::candidateEvent() {
         return closeCandidateWindow();
     }
 
-    if (parent->isShiftSelKey()) {
+    if (parent->doShiftSelKey()) {
 	localSelKey = (char*)calloc(1,strlen(parent->selkey) + 2);
 	sprintf(localSelKey," %s",parent->selkey);
     } else {
 	localSelKey = parent->selkey;
     }
 
-    if ((kc==ovkSpace && !parent->isShiftSelKey())
+    if ((kc==ovkSpace && !parent->doShiftSelKey())
 	|| kc==ovkRight || kc==ovkDown || kc==ovkPageDown || kc =='>')
         return candidatePageDown(); 
     if (kc==ovkLeft || kc==ovkUp || kc==ovkPageUp || kc=='<')
@@ -693,9 +708,23 @@ int OVIMTobaccoContext::candidateEvent() {
         b->update();    // we do this to make some applications happy
     }
     else {
+        int choosingIndex = -1;
+        if(parent->doChooseInFrontOfCursor()) {
+            if(position == 0)
+                choosingIndex = 0;
+            else
+                choosingIndex = position - 1;
+        }
+        else
+        {
+            if(position == predictor->tokenVector.size())
+                choosingIndex = position - 1;
+            else
+                choosingIndex = position;
+        }
         murmur("set selected candidate(%d, %d)",
-            position - 1, i + page*perpage);
-        predictor->setSelectedCandidate(position - 1, i + page*perpage);
+            choosingIndex, i + page*perpage);
+        predictor->setSelectedCandidate(choosingIndex, i + page*perpage);
         b->clear()->append(predictor->composedString.c_str()); 
         closeCandidateWindow();
         if (nextsyl) {
