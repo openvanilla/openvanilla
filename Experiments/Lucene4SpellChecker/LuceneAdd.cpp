@@ -1,5 +1,4 @@
 #include "CLucene.h"
-#include "CLucene/util/Reader.h"
 
 #include "OVFileHandler.h"
 #include "OVStringToolKit.h"
@@ -9,14 +8,13 @@ using namespace std;
 
 using namespace lucene::index;
 using namespace lucene::analysis;
-using namespace lucene::util;
-using namespace lucene::store;
 using namespace lucene::document;
 
 int main()
 {
 	lucene::analysis::standard::StandardAnalyzer analyzer;
-	IndexWriter* writer = new IndexWriter("./index", analyzer, false);
+	const char* indexDirPath = "./indexDir";
+	IndexWriter* writer = new IndexWriter(indexDirPath, analyzer, true);
 
 	OVFileHandler* fileHandler = new OVFileHandler("./dict.txt");
 	vector<string> lineVector;

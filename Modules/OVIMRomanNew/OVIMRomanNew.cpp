@@ -13,6 +13,8 @@
 #include <vector>
 #include "OVSQLite3.h"
 
+#include "LuceneSearch.h"
+
 using namespace std;
 
 int is_punc(char i){
@@ -56,6 +58,7 @@ public:
     void clear() { candidates.clear(); }
     void add(const string& s) { candidates.push_back(s); }
     const char *item(size_t i) { return candidates[i].c_str(); }
+    vector<string>& vectorInstance() { return candidates; }
 protected:    
     vector<string> candidates;
 };
@@ -65,14 +68,13 @@ SQLite3 *db;
 const char *QueryForCommand(SQLite3 *db, const char *command);
 const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key);
 
+string modulePath;
+
 class OVIMRomanNewContext : public OVInputMethodContext
 {
 public:
     virtual void start(OVBuffer*, OVCandidate*, OVService*) { clear(); }
     virtual void clear() { keyseq.clear();} 
-    
-    virtual int initialize(OVDictionary* l, OVService* s, 
-        const char* modulePath) { return 1; }
     
     virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService*)    
     {
@@ -128,7 +130,8 @@ public:
 
             if(keyseq.buf) {
                 pagenumber = 0;
-                if(spellChecker(keyseq.buf)) {
+                if(spellCheckerByLuceneFuzzySearch(keyseq.buf))
+                {
                     showcandi(i);
                     return 1;
                 }
@@ -201,29 +204,39 @@ protected:
 
     int showcandi(OVCandidate* i);
     int updatepagetotal(char* buf);
-    int spellChecker(char* buf);
+    int spellCheckerBySQLiteSoundex(char* buf);
+    int spellCheckerByLuceneFuzzySearch(char* buf);
 
 protected:
 	KeySeq keyseq;
     IMGCandidate candi;
     int pagenumber;
     int pagetotal;
-    int temp;
+    int temp;    
 };
 
-int OVIMRomanNewContext:: spellChecker(char* buf){
+int OVIMRomanNewContext:: spellCheckerByLuceneFuzzySearch(char* buf)
+{
+    pagenumber=0;
+    pagetotal=0;
+    candi.clear();
+    
+    std::string query(buf);
+    query += "~";
+    LuceneSearch::run(query, modulePath, candi.vectorInstance());
+    
+    return candi.count();
+}
+
+int OVIMRomanNewContext:: spellCheckerBySQLiteSoundex(char* buf){
     pagenumber=0;
     pagetotal=0;
     candi.clear();
 
     char cmd[256];
     sprintf(cmd, "select key from dict where soundex(key) = soundex('%s');", buf);
-    murmur("run [%s]", cmd);
     SQLite3Statement *sth=db->prepare(cmd);
-    if (!sth) {
-        murmur("SQL syntax error!");
-        return 0;
-    }
+    if (!sth) return 0;
 
     int row = 0;
     while (sth->step()==SQLITE_ROW) row++;
@@ -235,7 +248,6 @@ int OVIMRomanNewContext:: spellChecker(char* buf){
         }
         delete sth;
         pagetotal=candi.count()/10;
-        murmur("got %d soundex words", candi.count());
         return 1;
     }
     else {
@@ -289,14 +301,18 @@ class OVIMRomanNew : public OVInputMethod
 public:
     virtual const char* identifier() { return "OVIMRomanNew"; }
     virtual OVInputMethodContext *newContext() { return new OVIMRomanNewContext; }
-    virtual int initialize(OVDictionary *, OVService*, const char *mp) {
-        return 1;
+    virtual int initialize(OVDictionary* l, OVService* s, const char* mp)
+    {
+        string idString(identifier());
+        modulePath = mp + idString + "/";
+        return 1; 
     }
+
     virtual const char* localizedName(const char *locale) {
         if (!strcasecmp(locale, "zh_TW")) return "新英數";
         if (!strcasecmp(locale, "zh_CN")) return "新英数";
         return "New Roman (alphanumeric)";
-    }
+    }    
 };
 
 extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }

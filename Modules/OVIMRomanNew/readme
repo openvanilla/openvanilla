@@ -1,4 +1,5 @@
 Install:
+    Follow the instructions in README4SpellChecker first, and then
 
 make all
 sudo make install

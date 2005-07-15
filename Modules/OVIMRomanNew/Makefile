@@ -3,18 +3,19 @@
 IMID=OVIMRomanNew
 SOURCES=OVIMRomanNew
 DATA=dict.db
-LDFLAGS+=-lsqlite3
 
 include ../../Mk/ov.os.mk
 include ../../Mk/ov.im.mk
 include ../../Mk/ov.vars.mk
 include ../../Mk/ov.general.mk
 
+LDFLAGS+=-lsqlite3 -L/usr/local/lib -lclucene
+INC+=-I/usr/local/include -I../../Experiments/Lucene4SpellChecker
+CFLAGS=-g $(INC)
+
 all:	OVIMRomanNew.dylib $(DATA)
 
 dict.db: cin-sqlconvert.pl
 	rm -f dict.db
 	perl cin-sqlconvert.pl dict.txt | sqlite3 dict.db
-
-
 
