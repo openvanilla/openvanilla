@@ -1383,6 +1383,7 @@
 				6AE4A4A7083678A600D6CCD3,
 				6AC63034083CD49500B560B1,
 				6AAC5441083CF65200591732,
+				D4F6531E08895D77009C44B3,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1490,6 +1491,7 @@
 		};
 		6AE4A46C083677E500D6CCD3 = {
 			children = (
+				D4F6531D08895D77009C44B3,
 				6AAC5442083CF65700591732,
 				6AE4A4870836787A00D6CCD3,
 				6AE4A4BA08367A2900D6CCD3,
@@ -1958,6 +1960,29 @@
 		};
 		6AF9423B0817F2F800AE0534 = {
 			fileRef = 6AF9423A0817F2F800AE0534;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//6A0
+//6A1
+//6A2
+//6A3
+//6A4
+//D40
+//D41
+//D42
+//D43
+//D44
+		D4F6531D08895D77009C44B3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.pdf;
+			path = ov.pdf;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		D4F6531E08895D77009C44B3 = {
+			fileRef = D4F6531D08895D77009C44B3;
 			isa = PBXBuildFile;
 			settings = {
 			};
