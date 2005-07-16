@@ -450,6 +450,7 @@
 			children = (
 				6AD76B0508358BA600164A51,
 				6A5C52F3083D52430053E321,
+				D404F4C1088969F0003BEB00,
 			);
 			isa = PBXVariantGroup;
 			name = MainMenu.nib;
@@ -799,6 +800,7 @@
 			children = (
 				6A975ED40814C5F800F40859,
 				6A9835D1083B9C4300E0C3F3,
+				D404F48208896124003BEB00,
 			);
 			isa = PBXVariantGroup;
 			name = Localizable.strings;
@@ -970,6 +972,7 @@
 			children = (
 				6AC62FFE083CD06F00B560B1,
 				6AC6302B083CD40300B560B1,
+				D404F4940889683A003BEB00,
 			);
 			isa = PBXVariantGroup;
 			name = Localizable.strings;
@@ -995,6 +998,7 @@
 			children = (
 				6AE4A4880836787A00D6CCD3,
 				6AC63037083CD4A300B560B1,
+				D404F48D08896219003BEB00,
 			);
 			isa = PBXVariantGroup;
 			name = MainMenu.nib;
@@ -1059,6 +1063,7 @@
 			children = (
 				6AD576350814C221001F6AFE,
 				6A9835C8083B9C2800E0C3F3,
+				D404F4A3088968D6003BEB00,
 			);
 			isa = PBXVariantGroup;
 			name = InfoPlist.strings;
@@ -1541,6 +1546,7 @@
 			children = (
 				6AE4A4860836787A00D6CCD3,
 				6A9835D4083B9C5300E0C3F3,
+				D404F4910889682F003BEB00,
 			);
 			isa = PBXVariantGroup;
 			name = InfoPlist.strings;
@@ -1627,6 +1633,7 @@
 				French,
 				German,
 				zh_TW,
+				zh_CN,
 			);
 			mainGroup = 6AF10FF20814BE3400B49D06;
 			productRefGroup = 6AF10FFF0814BE7A00B49D06;
@@ -1974,6 +1981,54 @@
 //D42
 //D43
 //D44
+		D404F48208896124003BEB00 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = zh_CN;
+			path = OVLoaderResources/zh_CN.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		D404F48D08896219003BEB00 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = zh_CN;
+			path = OVPreferences/zh_CN.lproj/MainMenu.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		D404F4910889682F003BEB00 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = zh_CN;
+			path = OVPreferences/zh_CN.lproj/InfoPlist.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		D404F4940889683A003BEB00 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = zh_CN;
+			path = OVPreferences/zh_CN.lproj/Localizable.strings;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		D404F4A3088968D6003BEB00 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
+			name = zh_CN;
+			path = OVInitResources/zh_CN.lproj/InfoPlist.strings;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		D404F4C1088969F0003BEB00 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
+			name = zh_CN;
+			path = OVDisplayServer/zh_CN.lproj/MainMenu.nib;
+			refType = 4;
+			sourceTree = "<group>";
+		};
 		D4F6531D08895D77009C44B3 = {
 			isa = PBXFileReference;
 			lastKnownFileType = image.pdf;
