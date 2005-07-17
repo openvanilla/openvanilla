@@ -64,7 +64,7 @@ void PredictorSingleton::removeWord(int position, bool delFlag)
 }
 
 bool PredictorSingleton::setTokenVector(
-    string currentSequence, int position)
+    string currentSequence, int position, bool doReplace)
 {
     if(!PredictorSingleton::dictionary->isVocabulary(currentSequence))
         return false;
@@ -74,8 +74,20 @@ bool PredictorSingleton::setTokenVector(
 	currentToken.withSuffix = false;
 	currentToken.characterStringVector.push_back(currentSequence);
 
-    PredictorSingleton::tokenVector.insert(
-        PredictorSingleton::tokenVector.begin() + position, currentToken);
+    if(doReplace)
+    {
+        if(PredictorSingleton::tokenVector.size() > position)
+            PredictorSingleton::tokenVector[position] = currentToken;
+        else if(PredictorSingleton::tokenVector.size() == position)
+            PredictorSingleton::tokenVector.insert(
+                PredictorSingleton::tokenVector.begin() + position,
+                currentToken);            
+        else
+            return false;
+    }
+    else
+        PredictorSingleton::tokenVector.insert(
+            PredictorSingleton::tokenVector.begin() + position, currentToken);
 
     PredictorSingleton::setTokenVectorByBigram();
     

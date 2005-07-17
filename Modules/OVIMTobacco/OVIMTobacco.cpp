@@ -97,6 +97,8 @@ protected:
     int page;
     
     int position;
+    bool canNewSequence;
+    bool doInsert;
 };
 
 class OVIMTobacco : public OVInputMethod {
@@ -109,9 +111,9 @@ public:
     virtual const char *localizedName(const char *);
         
     virtual int maxSeqLen() { return cfgMaxSeqLen; }
-    virtual int isBeep() { return cfgBeep; }
-    virtual int isAutoCompose() { return cfgAutoCompose; }
-    virtual int isHitMaxAndCompose() { return cfgHitMaxAndCompose; }
+    virtual bool doBeep() { return cfgBeep; }
+    virtual bool doAutoCompose() { return cfgAutoCompose; }
+    virtual bool doHitMaxAndCompose() { return cfgHitMaxAndCompose; }
     virtual bool doShiftSelKey() { return cfgDoShiftSelKey; };
     virtual bool doClearSequenceOnError() { return cfgDoClearSequenceOnError; };
     virtual bool doChooseInFrontOfCursor()
@@ -130,10 +132,9 @@ protected:
     char idstr[256];
 
     int cfgMaxSeqLen;
-    int cfgBeep;
-    int cfgAutoCompose;
-    int cfgHitMaxAndCompose;
-
+    bool cfgBeep;
+    bool cfgAutoCompose;
+    bool cfgHitMaxAndCompose;
     bool cfgDoShiftSelKey;
     
     bool cfgDoChooseInFrontOfCursor;
@@ -283,11 +284,16 @@ void OVIMTobacco::update(OVDictionary *cfg, OVService *) {
         strcpy(endkey, "");
     }
 
-    cfgAutoCompose      = cfg->getInteger(autoCompose);
-    cfgBeep             = cfg->getInteger(warningBeep);
-    cfgHitMaxAndCompose = cfg->getInteger(hitMax);
-    cfgMaxSeqLen        = cfg->getInteger(maxSeqLen);
-    cfgDoShiftSelKey       = cfg->getInteger("shiftSelectionKey") == 0 ? false : true;
+    cfgMaxSeqLen = cfg->getInteger(maxSeqLen);
+
+    cfgBeep =
+        cfg->getIntegerWithDefault(warningBeep, 1) == 0 ? false : true;
+    cfgAutoCompose =
+        cfg->getIntegerWithDefault(autoCompose, 0) == 0 ? false : true;
+    cfgHitMaxAndCompose =
+        cfg->getIntegerWithDefault(hitMax, 0) == 0 ? false : true;
+    cfgDoShiftSelKey =
+        cfg->getIntegerWithDefault("shiftSelectionKey", 0) == 0 ? false : true;
     
     cfgDoChooseInFrontOfCursor =
         cfg->getIntegerWithDefault("chooseInFrontOfCursor", 1)
@@ -328,6 +334,8 @@ void OVIMTobaccoContext::start(OVBuffer*, OVCandidate*, OVService* s) {
     
     predictor->clearAll();
     position = 0;
+    canNewSequence = false;
+    doInsert = false;
 }
 
 void OVIMTobaccoContext::clear() {
@@ -335,6 +343,8 @@ void OVIMTobaccoContext::clear() {
     
     predictor->clearAll();
     position = 0;
+    canNewSequence = false;
+    doInsert = false;
 }
 
 void OVIMTobaccoContext::end() {
@@ -357,7 +367,15 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
 }
 
 int OVIMTobaccoContext::keyMove() {
-    if(seq.isEmpty() && !b->isEmpty()) {
+    if((seq.isEmpty() || parent->doAutoCompose()) && !b->isEmpty()) {
+        /// dirty hack for autoCompose mode... orz
+        if(parent->doAutoCompose()) {
+            if(!seq.isEmpty()) {
+                seq.clear();
+                position++;
+            }
+        }
+    
         if(k->code()==ovkLeft) {
             if(position > 0)
                 position--;
@@ -372,6 +390,8 @@ int OVIMTobaccoContext::keyMove() {
         }
         
         b->update(position, position-1, position);
+        doInsert = true;
+
         return 1;
     }
     else
@@ -407,9 +427,16 @@ int OVIMTobaccoContext::keyEsc() {
 }
 
 int OVIMTobaccoContext::keyRemove() {
-    murmur("previous position(%d)", position);
     if (b->isEmpty()) return 0;
-    if (seq.isEmpty()) {
+    if (seq.isEmpty() || parent->doAutoCompose()) {
+        /// dirty hack for autoCompose mode... orz
+        if(parent->doAutoCompose()) {
+            if(!seq.isEmpty()) {
+                seq.clear();
+                position++;
+            }
+        }
+        
         if (k->code() == ovkDelete)
         {
             murmur("do delete");
@@ -432,9 +459,9 @@ int OVIMTobaccoContext::keyRemove() {
     else
         seq.remove();
 
-    murmur("current position(%d)", position);
+    doInsert = true;
     freshBuffer();
-        
+
     return 1;
 }
 
@@ -451,14 +478,18 @@ int OVIMTobaccoContext::keyPrintable() {
         (k->code()=='?' || k->code()=='*')) return keyNonRadical();
  
     if (!seq.add(k->code())) {
-        if (b->isEmpty()) return keyNonRadical(); // not a Radical keycode
+        if (b->isEmpty()) return keyNonRadical();
         s->beep();
     }
-    if (parent->isEndKey(k->code()) && !seq.isEmpty()) {
-        freshBuffer();
-        return keyCompose();
+    if (!seq.isEmpty()) {
+        if (parent->isEndKey(k->code())) {
+            freshBuffer();
+            return keyCompose();
+        }
+        else if (parent->doAutoCompose()) {
+            return keyCompose();
+        }
     }
-    
     freshBuffer();
     return 1;
 }
@@ -466,8 +497,10 @@ int OVIMTobaccoContext::keyPrintable() {
 void OVIMTobaccoContext::freshBuffer() {
 /// BAD UTF-8 Chinese character processing here, again...
 
-    if(strlen(seq.sequence()) > 0)
+    if(strlen(seq.sequence()) > 0 && doInsert)
     {
+        murmur("should be here with [%s], [%s], (%d)",
+            seq.compose(), predictor->composedString.c_str(), position);
         int len = predictor->composedString.length();
         string leftString, rightString;
         if(len > 0) {
@@ -561,19 +594,42 @@ int OVIMTobaccoContext::keyCapslock() {
 }
 
 int OVIMTobaccoContext::keyCompose() {
+    murmur("key composing... [%s], (%d)", seq.compose(), position);
     std::string characterString(seq.compose());
-    if(predictor->setTokenVector(characterString, position)) {
-        position++;
-        seq.clear();
+    if(predictor->setTokenVector(
+        characterString, position, parent->doAutoCompose()))
+    {
+        if(!parent->doAutoCompose()) {
+            position++;
+            doInsert = true;
+            seq.clear();
+        }
+        canNewSequence = true;
+        doInsert = false;
+        freshBuffer();
+        
+        return 1;
+    }
+    else if(parent->doAutoCompose()) {
+        if(strlen(seq.sequence()) > 1 && canNewSequence) {
+            canNewSequence = false;
+            seq.clear();
+            seq.add(k->code());
+            murmur("test here[%s]", seq.sequence());
+            position++;
+            doInsert = true;
+        }
+        freshBuffer();
+
+        return 0;
     }
     else {
         s->beep();
-        if(parent->doClearSequenceOnError())
-            seq.clear();
-    }    
-    freshBuffer();
-    
-    return 1;
+        if(parent->doClearSequenceOnError()) seq.clear();
+        freshBuffer();
+
+        return 1;
+    }
 }
 
 

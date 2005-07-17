@@ -30,7 +30,7 @@ public:
 
 	void lostInstance();
     
-	bool setTokenVector(string currentSequence, int position);
+	bool setTokenVector(string currentSequence, int position, bool doReplace);
 	void setFixedToken(
 	   string currentSequence, string currentWord, int position);
 	void setCandidateVector(int position);
