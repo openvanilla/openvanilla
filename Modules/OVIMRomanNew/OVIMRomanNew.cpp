@@ -160,7 +160,7 @@ public:
 		if (k->code()==ovkDelete || k->code()==ovkBackspace) {
 			if(!strlen(keyseq.buf)) { closeCandidateWindow(i); return 0;}
 			keyseq.remove();
-            if(keyseq.len) { 
+            if(keyseq.len && i->onScreen()) { 
                 updatepagetotal(keyseq.buf);
                 showcandi(i);
             } else {

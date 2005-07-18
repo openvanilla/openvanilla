@@ -1,4 +1,5 @@
 /* OVIMTibetan.cpp 2004 by Weizhong Yang 
+ * http://openvanilla.org/
  * OpenVanilla Tibetan Input Method is based on the Sambhota Keyboard,
  * please check http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf for detail. */
 
@@ -11,10 +12,12 @@
 #include <OpenVanilla/OVUtility.h>
 #include "OVIMTibetan.h"
 
-int keyboardlayout = 0;
+int keyboardlayout = 0; 
+// The Deafault keyboard layout is Sambhota Keymap #1
 char *imlocale;
 
 short isSymbolKey(int key)
+// Check if the keycode is mapping to a punctuation or a symbol
 {
    int i;
    for(i=0; i< SYMBOL_NUM; i++)
@@ -146,13 +149,11 @@ class OVTibetanContext : public OVInputMethodContext
 	    return 1;
 	 }
 
-
-	 //if (key->isPrintable())
 	 {
-	    /* fprintf (stderr, "keysེeq: %s, len: %d, keycode: %c \n", keyseq.buf, keyseq.len, key->code()); */
 	    char keycode = key->code();
 
 	    if(keycode >= '0' && keycode <= '9')	// Numbers
+	      // The numbric keys are always to input tibetan numbers 
 	    { 
 	       i = 0x0F20 + (keycode - '0');
 	       u8=srv->UTF16ToUTF8(&i, 1);
