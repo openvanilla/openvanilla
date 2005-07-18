@@ -17,7 +17,7 @@
 	<key>CFBundleSignature</key>
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>0.7.0rc5</string>
+	<string>0.7.0</string>
 	<key>NSHelpFile</key>
 	<string>ov.pdf</string>
 	<key>NSMainNibFile</key>
