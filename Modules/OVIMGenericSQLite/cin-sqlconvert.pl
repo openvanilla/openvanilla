@@ -54,22 +54,25 @@ sub parse_keyname {
 sub parse_chardef {
     my $hndl=shift;
     my $t=shift;
-    my ($lastkey, $lastorder)=("", 0);
+    my %key2orderHash;
     while (<$hndl>) {
         chomp;
 	next unless $_;
         last if /%chardef/;
         my @a=split;
-        if ($a[0] eq $lastkey) {
-            $lastorder++;
+        my $currentOrder = 0;
+        if (exists $key2orderHash{$a[0]})
+        {
+            $currentOrder = $key2orderHash{$a[0]};
+            $currentOrder = $currentOrder + 1;
+            $key2orderHash{$a[0]} = $currentOrder;
         }
         else
         {
-            $lastorder=0;
-            $lastkey=$a[0];
+            $key2orderHash{$a[0]} = $currentOrder;
         }
         $a[0] =~ s/\'/\'\'/g;
         $a[1] =~ s/\'/\'\'/g;
-        printf "insert into %s values('%s', '%s', %s);\n", $t, lc sprintf("%s", $a[0]), $a[1], $lastorder;
+        printf "insert into %s values('%s', '%s', %s);\n", $t, lc sprintf("%s", $a[0]), $a[1], $currentOrder;
     }
 }
