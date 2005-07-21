@@ -358,10 +358,10 @@ int OVIMGenericContext::keyPrintable() {
         s->beep();
     }
     if (parent->isEndKey(k->code())) return keyCommit();
-    if (parent->doAutoCompose()) return keyCompose();
     if (parent->doHitMaxAndCompose() &&
         parent->maxSeqLen() == (int)strlen(seq.sequence()))
         return keyCommit();
+    if (parent->doAutoCompose()) return keyCompose();
     b->clear()->append(seq.compose())->update();
     return 1;
 }
@@ -436,8 +436,12 @@ int OVIMGenericContext::keyCompose() {
             b->clear()->update();
         }
     }
-    else if(count > 0)
-        composeFirstCandidate();
+    else if(count > 0) {
+        if(parent->doAutoCompose())
+            updateCandidateWindow();
+        else
+            composeFirstCandidate();
+    }
     
     return count;
 }
@@ -445,6 +449,7 @@ int OVIMGenericContext::keyCompose() {
 int OVIMGenericContext::keyCommit() {
     int count = keyCompose();
     if(count == 1) {
+        composeFirstCandidate();
         b->send();
         return closeCandidateWindow();
     }
@@ -539,6 +544,12 @@ int OVIMGenericContext::candidateEvent() {
 	localSelKey = parent->selkey;
     }
 
+    if(parent->doAutoCompose() && (kc==ovkReturn || kc==ovkSpace)) {
+            composeFirstCandidate();
+            b->send();
+            return closeCandidateWindow();
+    }
+
     if ((kc==ovkSpace && !parent->doShiftSelKey())
 	|| kc==ovkRight || kc==ovkDown || kc==ovkPageDown || kc =='>')
         return candidatePageDown(); 
@@ -549,6 +560,13 @@ int OVIMGenericContext::candidateEvent() {
     int i=0, l=perpage, nextsyl=0;
     for (i=0; i<perpage; i++) if(localSelKey[i]==kc) break;
     if (i==l) {         // not a valid candidate key
+        if(parent->doAutoCompose() && isprint(kc)) {
+            if (candi) {
+            delete candi;
+            candi=NULL;
+            }
+            return keyPrintable();
+        }
         if (kc==ovkReturn) i=0;
         if (seq.isValidKey(kc)) { i=0; nextsyl=1; }
     }
@@ -563,7 +581,8 @@ int OVIMGenericContext::candidateEvent() {
             seq.add(kc);
             b->append(seq.compose())->update();
         }
-    }    
+    }
+    
     return 1;
 }
 
