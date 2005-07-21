@@ -61,6 +61,7 @@ protected:
     int keyEsc();
     int keyBackspace();
     int keyCompose();
+    int keyCommit();
     int keyPrintable();
     int keyNonRadical();
     int keyCapslock();
@@ -70,7 +71,7 @@ protected:
     int punctuationKey();
     int updateCandidateWindow();
     int closeCandidateWindow();
-    int commitFirstCandidate();
+    int composeFirstCandidate();
     int candidateEvent();
     int candidatePageUp();
     int candidatePageDown();
@@ -255,7 +256,7 @@ void OVIMGenericSQLite::update(OVDictionary *cfg, OVService *) {
         strcpy(endkey, "");
     }
 
-    cfgMaxSeqLen = cfg->getInteger(maxSeqLen);
+    cfgMaxSeqLen = cfg->getIntegerWithDefault(maxSeqLen, -1);
 
     cfgBeep =
         cfg->getIntegerWithDefault(warningBeep, 1) == 0 ? false : true;
@@ -319,7 +320,7 @@ int OVIMGenericContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
     if (k->code()==ovkEsc) return keyEsc();
     if (k->code()==ovkBackspace || k->code()==ovkDelete) return keyBackspace();
     if (!b->isEmpty() && 
-        (k->code()==ovkSpace || k->code()==ovkReturn)) return keyCompose();
+        (k->code()==ovkSpace || k->code()==ovkReturn)) return keyCommit();
     if (isprint(k->code())) return keyPrintable();
     return 0;
 }
@@ -356,11 +357,11 @@ int OVIMGenericContext::keyPrintable() {
         if (b->isEmpty()) return keyNonRadical(); // not a Radical keycode
         s->beep();
     }
-    if (parent->isEndKey(k->code())) return keyCompose();
+    if (parent->isEndKey(k->code())) return keyCommit();
     if (parent->doAutoCompose()) return keyCompose();
     if (parent->doHitMaxAndCompose() &&
         parent->maxSeqLen() == (int)strlen(seq.sequence()))
-        return keyCompose();
+        return keyCommit();
     b->clear()->append(seq.compose())->update();
     return 1;
 }
@@ -369,12 +370,17 @@ int OVIMGenericContext::keyNonRadical() {
     char keystr[2];
     keystr[0]=k->code(); keystr[1]=0;
     int count=fetchCandidateWithPrefix("_punctuation_", k->code());
-    if (!count) {          // not a punctuation mark
+    if (count == 0) {          // not a punctuation mark
         b->clear()->append(keystr)->send();
         return 1;
     }
-    if (count==1) return commitFirstCandidate();
-    return updateCandidateWindow();
+    else if (count == 1) {
+        composeFirstCandidate();
+        b->send();
+        return closeCandidateWindow();
+    }
+    else
+        return updateCandidateWindow();
 }
 
 int OVIMGenericContext::isPunctuationCombination() {
@@ -396,9 +402,14 @@ int OVIMGenericContext::punctuationKey() {
         if (kc >= 1 && kc <= 26) kc+='a'-1;
         count=fetchCandidateWithPrefix("_ctrl_opt_", kc);
     }
-    if (!count) return 0;       // we send back the combination key
-    if (count==1) return commitFirstCandidate();
-    return updateCandidateWindow();    
+    if (count == 0) return 0;       // we send back the combination key
+    else if (count == 1) {
+        composeFirstCandidate();
+        b->send();
+        return closeCandidateWindow();
+    }
+    else
+        return updateCandidateWindow();    
 }
 
 int OVIMGenericContext::keyCapslock() {
@@ -417,20 +428,40 @@ int OVIMGenericContext::keyCompose() {
     b->clear()->append(seq.compose())->update();
     
     int count=fetchCandidate(seq.sequence());
-    if (!count) {
+    if (count == 0 && !parent->doAutoCompose()) {
         s->beep();
         if(parent->doClearSequenceOnError())
         {
             seq.clear();
             b->clear()->update();
         }
-        return 1;
     }
-
-    if (count==1) return commitFirstCandidate();
-    return updateCandidateWindow();
+    else if(count > 0)
+        composeFirstCandidate();
+    
+    return count;
 }
 
+int OVIMGenericContext::keyCommit() {
+    int count = keyCompose();
+    if(count == 1) {
+        b->send();
+        return closeCandidateWindow();
+    }
+    else if(count > 1)
+        return updateCandidateWindow();
+    else
+    {
+        s->beep();
+        if(parent->doClearSequenceOnError())
+        {
+            seq.clear();
+            b->clear()->update();
+        }
+    
+        return 1;
+    }
+}
 
 int OVIMGenericContext::fetchCandidateWithPrefix(const char *prefix, char c) {
     char keystr[64];
@@ -569,10 +600,11 @@ int OVIMGenericContext::closeCandidateWindow() {
     return 1;        
 }
 
-int OVIMGenericContext::commitFirstCandidate() {
-    if (!candi) return 1;
-    b->clear()->append(candi->candidates[0])->send();
-    return closeCandidateWindow();        
+int OVIMGenericContext::composeFirstCandidate() {
+    if (!candi) return 0;
+    b->clear()->append(candi->candidates[0])->update();//->send();
+    return 1;
+    //return closeCandidateWindow();
 }
 
 int OVIMGenericContext::candidatePageUp() {
