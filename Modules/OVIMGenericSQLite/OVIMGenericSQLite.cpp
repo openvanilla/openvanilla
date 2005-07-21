@@ -95,10 +95,11 @@ public:
     virtual const char *localizedName(const char *);
         
     virtual int maxSeqLen() { return cfgMaxSeqLen; }
-    virtual int isBeep() { return cfgBeep; }
-    virtual int isAutoCompose() { return cfgAutoCompose; }
-    virtual int isHitMaxAndCompose() { return cfgHitMaxAndCompose; }
-    virtual bool isShiftSelKey() { return doShiftSelKey; };
+    virtual bool doBeep() { return cfgBeep; }
+    virtual bool doAutoCompose() { return cfgAutoCompose; }
+    virtual bool doHitMaxAndCompose() { return cfgHitMaxAndCompose; }
+    virtual bool doShiftSelKey() { return cfgDoShiftSelKey; }
+    virtual bool doClearSequenceOnError() { return cfgDoClearSequenceOnError; }
 
 protected:
     int isEndKey(char c);
@@ -111,11 +112,12 @@ protected:
     char idstr[256];
 
     int cfgMaxSeqLen;
-    int cfgBeep;
-    int cfgAutoCompose;
-    int cfgHitMaxAndCompose;
-
-    bool doShiftSelKey;
+    bool cfgBeep;
+    bool cfgAutoCompose;
+    bool cfgHitMaxAndCompose;
+    bool cfgDoShiftSelKey;
+    
+    bool cfgDoClearSequenceOnError;
 };
 
 class OVOFReverseLookupSQLite : public OVOutputFilter
@@ -253,11 +255,20 @@ void OVIMGenericSQLite::update(OVDictionary *cfg, OVService *) {
         strcpy(endkey, "");
     }
 
-    cfgAutoCompose      = cfg->getInteger(autoCompose);
-    cfgBeep             = cfg->getInteger(warningBeep);
-    cfgHitMaxAndCompose = cfg->getInteger(hitMax);
-    cfgMaxSeqLen        = cfg->getInteger(maxSeqLen);
-    doShiftSelKey       = cfg->getInteger("shiftSelectionKey") == 0 ? false : true;
+    cfgMaxSeqLen = cfg->getInteger(maxSeqLen);
+
+    cfgBeep =
+        cfg->getIntegerWithDefault(warningBeep, 1) == 0 ? false : true;
+    cfgAutoCompose =
+        cfg->getIntegerWithDefault(autoCompose, 0) == 0 ? false : true;
+    cfgHitMaxAndCompose =
+        cfg->getIntegerWithDefault(hitMax, 0) == 0 ? false : true;
+    cfgDoShiftSelKey =
+        cfg->getIntegerWithDefault("shiftSelectionKey", 0) == 0 ? false : true;
+    
+    cfgDoClearSequenceOnError =
+        cfg->getIntegerWithDefault("clearSequenceOnError", 1)
+            == 0 ? false : true;
 
     murmur("OVIMGenericSQLite: config update! select key=%s, endkey=%s", selkey, endkey);
 }
@@ -346,6 +357,10 @@ int OVIMGenericContext::keyPrintable() {
         s->beep();
     }
     if (parent->isEndKey(k->code())) return keyCompose();
+    if (parent->doAutoCompose()) return keyCompose();
+    if (parent->doHitMaxAndCompose() &&
+        parent->maxSeqLen() == (int)strlen(seq.sequence()))
+        return keyCompose();
     b->clear()->append(seq.compose())->update();
     return 1;
 }
@@ -404,6 +419,11 @@ int OVIMGenericContext::keyCompose() {
     int count=fetchCandidate(seq.sequence());
     if (!count) {
         s->beep();
+        if(parent->doClearSequenceOnError())
+        {
+            seq.clear();
+            b->clear()->update();
+        }
         return 1;
     }
 
@@ -481,14 +501,14 @@ int OVIMGenericContext::candidateEvent() {
         return closeCandidateWindow();
     }
 
-    if (parent->isShiftSelKey()) {
+    if (parent->doShiftSelKey()) {
 	localSelKey = (char*)calloc(1,strlen(parent->selkey) + 2);
 	sprintf(localSelKey," %s",parent->selkey);
     } else {
 	localSelKey = parent->selkey;
     }
 
-    if ((kc==ovkSpace && !parent->isShiftSelKey())
+    if ((kc==ovkSpace && !parent->doShiftSelKey())
 	|| kc==ovkRight || kc==ovkDown || kc==ovkPageDown || kc =='>')
         return candidatePageDown(); 
     if (kc==ovkLeft || kc==ovkUp || kc==ovkPageUp || kc=='<')
@@ -652,5 +672,3 @@ const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key) {
     sprintf(cmd, "select value from %s where key='%s';", tbl, keyescaped);
     return QueryForCommand(db, cmd);
 }
-
-
