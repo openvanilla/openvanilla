@@ -1,0 +1,1 @@
+Please go to trunk/Experiment/VisualBasic/OVIMPOJ-Holo/ and then run the make.bat to build OVIMPOJ-Holo.dll.
