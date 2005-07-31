@@ -5,6 +5,8 @@
 #include "OVFileHandler.h"
 #include "OVUtility.h"
 
+#include <algorithm>	//for stable_sort() and transform()
+
 using namespace std;
 using namespace _OVCIN;
 

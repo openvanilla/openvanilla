@@ -1,7 +1,10 @@
 // OVCandidateList.cpp
 
-#include <OpenVanilla/OpenVanilla.h>
-#include <OpenVanilla/OVUtility.h>
+//#include <OpenVanilla/OpenVanilla.h>
+//#include <OpenVanilla/OVUtility.h>
+#include "OpenVanilla.h"
+#include "OVUtility.h"
+
 #include "OVCandidateList.h"
 #include "OVCIN.h"
 #include <iostream>
