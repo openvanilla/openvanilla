@@ -4,5 +4,6 @@
 4. 到 Modules 目錄下依照 README.txt 的指示編出對應的 DLL，在此以 OVIMPOJ-Holo 為例
 5. 把 OVIMPOJ-Holo.DLL 放到 C:\OpenVanilla\ 底下，這是 kanru 暫時指定的 module 目錄
 6. 把 poj-holo.cin 放到 C:\OpenVanilla\OVIMPOJ-Holo 裡
-7. 用 IMEInstaller.exe 把 OVIME.dll 裝到系統裡 (需要 .NET framework)
+7. 把 OVIME.dll 更名為 OVIME.ime，複製到 C:\Windows\system32 下
+8. 執行 OVIME.reg
 8. 開啟輸入法設定視窗, 新增剛剛裝入的輸入法
