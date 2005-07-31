@@ -4,12 +4,14 @@
 #include <string>
 #include <vector>
 #include <fstream>
+/*
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
+*/
 
 using namespace std;
 
@@ -26,7 +28,7 @@ private:
 	int filePtr;
 	int getSize();
 	string getFileStringBySTL();
-	string getFileStringByMMAP();	
+//	string getFileStringByMMAP();	
 };
 	
 #endif

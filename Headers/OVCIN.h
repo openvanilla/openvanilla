@@ -3,7 +3,8 @@
 #ifndef __OVCIN_h
 #define __OVCIN_h
 
-#include <OpenVanilla/OpenVanilla.h>
+//#include <OpenVanilla/OpenVanilla.h>
+#include "OpenVanilla.h"
 
 #include <string>
 #include <vector>

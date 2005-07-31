@@ -6,7 +6,7 @@ using namespace std;
 OVFileHandler::OVFileHandler(char* fileName)
 {
 	inFile.open(fileName, ios_base::binary);
-	filePtr = open(fileName, O_RDONLY);
+	//filePtr = open(fileName, O_RDONLY);
 }
 
 OVFileHandler::~OVFileHandler()
@@ -37,6 +37,7 @@ string OVFileHandler::getFileStringBySTL()
 	return fileString;
 }
 
+/*
 string OVFileHandler::getFileStringByMMAP()
 {
 	void* mmap_ptr;
@@ -51,10 +52,11 @@ string OVFileHandler::getFileStringByMMAP()
 
 	return fileString;
 }
+*/
 
 int OVFileHandler::getLines(vector<string>& outStringVectorRef)
 {
-	//string fileString = getFileStringBySTL();
-	string fileString = getFileStringByMMAP();	
+	string fileString = getFileStringBySTL();
+	//string fileString = getFileStringByMMAP();	
 	return OVStringToolKit::getLines(fileString, outStringVectorRef);
 }

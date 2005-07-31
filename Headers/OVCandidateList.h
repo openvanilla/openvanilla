@@ -4,7 +4,8 @@
 #define __OVCandidateList_h
 
 //#include <Cocoa/Cocoa.h>
-#include <OpenVanilla/OpenVanilla.h>
+//#include <OpenVanilla/OpenVanilla.h>
+#include "OpenVanilla.h"
 #include <string>
 #include <vector>
 

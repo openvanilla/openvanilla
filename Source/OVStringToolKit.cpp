@@ -53,7 +53,8 @@ int OVStringToolKit::splitString(string inString,
 			else
 				outStringVectorRef.push_back(currentSubString);
 
-			currentSubString.clear();
+			currentSubString.erase();
+			//.clear() -> .erase() makes VC++ happy...
 		}
 	}
 	//*/
