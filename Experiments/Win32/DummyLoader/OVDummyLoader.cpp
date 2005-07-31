@@ -10,7 +10,7 @@ extern "C" {
 #include "ltdl.h"
 }
 
-#define OV_MODULEDIR "F:\\OV\\"
+#define OV_MODULEDIR "C:\\OpenVanilla\\"
 enum { bit7=0x80, bit6=0x40, bit5=0x20, bit4=0x10, bit3=8, bit2=4, bit1=2, bit0=1 };
 
 const char* hexstr(unsigned char x) {
@@ -248,7 +248,7 @@ static int scan_ov_modules(){
       FindClose(hList);
    }
    */
-   OVLibrary* mod = open_module("F:\\OV\\OVIMPOJ-Holo.dll");
+   OVLibrary* mod = open_module("C:\\OpenVanilla\\OVIMPOJ-Holo.dll");
    OVModule* m;
    mod->initLibrary(&srv, OV_MODULEDIR);
    m = mod->getModule(0);
