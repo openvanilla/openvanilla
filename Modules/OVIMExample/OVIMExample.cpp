@@ -2,9 +2,15 @@
 // Copyright (c) 2004-2005 The OpenVanilla Project (http://openvanilla.org)
 
 #define OV_DEBUG
+/*
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLibrary.h>
 #include <OpenVanilla/OVUtility.h>
+*/
+#include "OpenVanilla.h"
+#include "OVLibrary.h"
+#include "OVUtility.h"
+
 #include <ctype.h>
 #include <stdio.h>
 
