@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\;..\OVIMEUI\Headers;..\..\..\Headers"
+				AdditionalIncludeDirectories=".\;..\OVDummyLoader\;..\OVIMEUI\Headers;..\..\..\Headers"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -32,7 +32,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="IMM32.LIB"
+				AdditionalDependencies="IMM32.LIB ..\OVDummyLoader\libltdl.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="2"
 				ModuleDefinitionFile="OVIME.def"
@@ -73,7 +73,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories=".\;..\OVIMEUI\Headers;..\..\..\Headers"
+				AdditionalIncludeDirectories=".\;..\OVDummyLoader\;..\OVIMEUI\Headers;..\..\..\Headers"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
@@ -86,7 +86,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="IMM32.LIB"
+				AdditionalDependencies="IMM32.LIB ..\OVDummyLoader\libltdl.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="1"
 				ModuleDefinitionFile="OVIME.def"
@@ -137,6 +137,9 @@
 				RelativePath="NotifyHandle.cpp">
 			</File>
 			<File
+				RelativePath="..\OVDummyLoader\OVDummyLoader.cpp">
+			</File>
+			<File
 				RelativePath="OVIME.cpp">
 			</File>
 			<File
@@ -157,6 +160,9 @@
 			Filter="h;hpp;hxx;hm;inl;inc">
 			<File
 				RelativePath="ExtraStructs.h">
+			</File>
+			<File
+				RelativePath="..\OVDummyLoader\ltdl.h">
 			</File>
 			<File
 				RelativePath="OVIME.h">

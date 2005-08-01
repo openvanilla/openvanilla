@@ -1,3 +1,10 @@
+#ifdef _UNICODE
+	#undef _UNICODE
+#endif
+#ifdef UNICODE
+	#undef UNICODE
+#endif
+
 #include <string>
 #include <sys/types.h>
 #include <windows.h>
@@ -10,7 +17,7 @@ extern "C" {
 #include "ltdl.h"
 }
 
-char OV_MODULEDIR[MAX_PATH];
+TCHAR OV_MODULEDIR[MAX_PATH];
 enum { bit7=0x80, bit6=0x40, bit5=0x20, bit4=0x10, bit3=8, bit2=4, bit1=2, bit0=1 };
 
 const char* hexstr(unsigned char x) {
@@ -229,9 +236,9 @@ static int scan_ov_modules(){
 	HANDLE hList;
 	WIN32_FIND_DATA FileData;
 	DummyService srv;
+
 	string path = OV_MODULEDIR;
 	hList = FindFirstFile((path + "*").c_str(), &FileData);
-
 	if(hList == INVALID_HANDLE_VALUE)
 	{
 		printf("No files found\n");
@@ -326,3 +333,10 @@ extern "C" {
 		return static_cast<int>(ac.length());
 	}
 }
+
+#ifndef _UNICODE
+	#define _UNICODE
+#endif
+#ifndef UNICODE
+	#define UNICODE
+#endif
