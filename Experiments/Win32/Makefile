@@ -11,6 +11,7 @@ LINK32_OBJS = \
 	      $(OUTDIR)\OVIME.obj \
 	      $(OUTDIR)\UIWnd.obj \
 	      $(OUTDIR)\Utils.obj \
+              $(OUTDIR)\OVStringToolKit.obj \
 	      $(OUTDIR)\OVDummyLoader.obj
 
 $(OUTDIR):
@@ -50,6 +51,9 @@ $(OUTDIR)\$(FILE).obj: OVIME\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVIME\$(FILE).cpp
 
 cflags = /O2 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP /GR
+FILE=OVStringToolKit
+$(OUTDIR)\$(FILE).obj: ..\..\Source\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" ..\..\Source\$(FILE).cpp
 FILE=OVDummyLoader
 $(OUTDIR)\$(FILE).obj: OVDummyLoader\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVDummyLoader\$(FILE).cpp
