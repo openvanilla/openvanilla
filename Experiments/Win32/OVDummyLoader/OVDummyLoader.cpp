@@ -230,7 +230,7 @@ static int scan_ov_modules(){
 	WIN32_FIND_DATA FileData;
 	DummyService srv;
 	string path = OV_MODULEDIR;
-	hList = FindFirstFile(reinterpret_cast<LPCWSTR>((path + "*").c_str()), &FileData);
+	hList = FindFirstFile((path + "*").c_str(), &FileData);
 
 	if(hList == INVALID_HANDLE_VALUE)
 	{
@@ -241,12 +241,10 @@ static int scan_ov_modules(){
 		fFinished = FALSE;
 		while (!fFinished)
 		{
-			if(strstr(reinterpret_cast<const char*>(FileData.cFileName), ".dll") ||
-				       	strstr(reinterpret_cast<const char*>(FileData.cFileName), ".DLL"))
+			if(strstr(FileData.cFileName, ".dll") || strstr(FileData.cFileName, ".DLL"))
 			{
 				fprintf(stderr,  "Load OV module: %s\n", FileData.cFileName);
-				OVLibrary* mod = open_module(
-					(path + reinterpret_cast<const char*>(FileData.cFileName)).c_str());
+				OVLibrary* mod = open_module((path + FileData.cFileName).c_str());
 				if(mod){
 					OVModule* m;
 					mod->initLibrary(&srv, OV_MODULEDIR);
