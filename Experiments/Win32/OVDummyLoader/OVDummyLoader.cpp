@@ -10,7 +10,7 @@ extern "C" {
 #include "ltdl.h"
 }
 
-const char* OV_MODULEDIR="C:\\OpenVanilla\\";
+char OV_MODULEDIR[MAX_PATH];
 enum { bit7=0x80, bit6=0x40, bit5=0x20, bit4=0x10, bit3=8, bit2=4, bit1=2, bit0=1 };
 
 const char* hexstr(unsigned char x) {
@@ -294,7 +294,8 @@ int main() {
 
 void init() {    
     if (inited) return;
-
+    GetWindowsDirectory(OV_MODULEDIR, MAX_PATH - 14);
+    sprintf(OV_MODULEDIR, "%s\\%s", OV_MODULEDIR, "\\OpenVanilla\\");
     lt_dlinit();
     lt_dlsetsearchpath(OV_MODULEDIR);
 
