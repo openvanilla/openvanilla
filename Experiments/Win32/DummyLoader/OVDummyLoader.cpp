@@ -299,18 +299,18 @@ void exit() {
 	lt_dlexit();
 }
 
-extern "C"
-int _stdcall keyevent(int c, char *s) {
-    if (!inited) init();
-    
-    DummyKeyCode kc(c);
-    int st=ctx->keyEvent(&kc, &buf, &candi, &srv);
+extern "C" {
+	int  keyevent(int c, char *s) {
+		if (!inited) init();
 
-    string ac=candi.action+buf.action;
-    if (st) ac += "processed"; else ac+="unprocessed";
-    strcpy(s, ac.c_str());
-    candi.action="";
-    buf.action="";
-    return ac.length();
+		DummyKeyCode kc(c);
+		int st=ctx->keyEvent(&kc, &buf, &candi, &srv);
+
+		string ac=candi.action+buf.action;
+		if (st) ac += "processed"; else ac+="unprocessed";
+		strcpy(s, ac.c_str());
+		candi.action="";
+		buf.action="";
+		return ac.length();
+	}
 }
-

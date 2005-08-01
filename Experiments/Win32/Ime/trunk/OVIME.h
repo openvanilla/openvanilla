@@ -56,5 +56,5 @@ extern "C" {
 
 	
 	// OVVBPOJ
-	int _stdcall keyevent(int c, char *s);
+	int keyevent(int c, char *s);
 }

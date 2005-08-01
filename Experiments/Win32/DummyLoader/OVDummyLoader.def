@@ -1,2 +1,2 @@
 EXPORTS
-  _keyevent@8
+  keyevent
