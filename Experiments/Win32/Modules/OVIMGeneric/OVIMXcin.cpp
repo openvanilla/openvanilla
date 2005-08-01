@@ -295,14 +295,20 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar,
     if (isprint(key->code()) && keyseq.valid(static_cast<char>(key->code())) &&
 		/*!key->isShift() &&*/ !key->isCapslock())
     {
-
+    	if (keyseq.length() > 0 &&
+    		// prevent to the exception of parent->maxSeqLen() == 0
+    		keyseq.length() == parent->maxSeqLen())
+    	{
+            updateDisplay(buf);
+            if (parent->isBeep()) srv->beep();
+            return 1;
+    	}
+    	
         keyseq.add(key->code());
-	murmur("add %d", key->code());
+		murmur("add %d", key->code());
         if (keyseq.length() == parent->maxSeqLen() &&
         parent->isHitMaxAndCompose())
         {
-            updateDisplay(buf);
-            if (parent->isBeep()) srv->beep();
             autocomposing=0;
             cancelAutoCompose(textbar);
             return compose(buf, textbar, srv);
