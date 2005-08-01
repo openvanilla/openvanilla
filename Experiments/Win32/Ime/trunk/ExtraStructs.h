@@ -9,18 +9,6 @@ typedef struct _tagTRANSMSG {
 	LPARAM lParam;
 } TRANSMSG, FAR *LPTRANSMSG;
 
-typedef struct _tagUICHILD{
-    HWND    hWnd;
-	POINT   pt;
-	SIZE    sz;
-} UICHILD, NEAR *PUICHILD, FAR *LPUICHILD;
-
-typedef struct _tagUIEXTRA{
-    UICHILD  uiStatus;
-    UICHILD  uiCand;
-	UICHILD  uiComp;
-} UIEXTRA, NEAR *PUIEXTRA, FAR *LPUIEXTRA;
-
 // IMPORTANT
 typedef struct _tagMYPRIVATE {
 	// This private is used for exchanging data between
@@ -31,7 +19,7 @@ typedef struct _tagMYPRIVATE {
 	// Then every IMC generated will share this private, access
 	// through IMC->hPrivate field
 	_TCHAR PreEditStr[MAXSTRSIZE];
-	_TCHAR CompStr[MAXSTRSIZE];
+	_TCHAR CandStr[MAXSTRSIZE];
 } MYPRIVATE, NEAR *PMYPRIVATE, FAR *LPMYPRIVATE;
 
 typedef struct _tagMYCOMPSTR{

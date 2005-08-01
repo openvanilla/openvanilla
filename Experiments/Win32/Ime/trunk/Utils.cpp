@@ -4,15 +4,7 @@
 void MakeCompStr(LPMYPRIVATE lpMyPrivate, LPCOMPOSITIONSTRING lpCompStr)
 {
 	_tcscpy(GETLPCOMPSTR(lpCompStr), _T(""));
-	if(_tcslen(lpMyPrivate->CompStr) != 0)
-	{
-		_stprintf(GETLPCOMPSTR(lpCompStr), _T("%s %s"), lpMyPrivate->PreEditStr,
-			lpMyPrivate->CompStr);
-	}
-	else
-	{
-		_stprintf(GETLPCOMPSTR(lpCompStr), lpMyPrivate->PreEditStr);
-	}
+	_stprintf(GETLPCOMPSTR(lpCompStr), lpMyPrivate->PreEditStr);
 	lpCompStr->dwCompStrLen = _tcslen(GETLPCOMPSTR(lpCompStr));
 }
 

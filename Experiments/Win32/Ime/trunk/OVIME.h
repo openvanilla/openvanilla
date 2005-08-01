@@ -3,6 +3,7 @@
 #include "imm.h"
 #include "ExtraStructs.h"
 #include "Vk.h"
+#include "OVIMEUI.h"
 
 
 // Extern
@@ -34,30 +35,13 @@ extern HGLOBAL hUIExtra;
 extern "C" {
 	// OVIME.cpp
 	BOOL APIENTRY DllMain(HANDLE, DWORD, LPVOID);
-	BOOL IMERegisterClass( HINSTANCE );
-	BOOL IMEUnRegisterClass( HINSTANCE );
 	// UIWnd.cpp
 	LRESULT APIENTRY UIWndProc(HWND, UINT, WPARAM, LPARAM);
-	void DrawUIBorder(LPRECT);
-	void DragUI(HWND ,HWND, UINT, WPARAM, LPARAM, BOOL);
-	// UIComp.cpp
-	LRESULT APIENTRY CompWndProc(HWND, UINT, WPARAM, LPARAM);
-	void CreateCompWindow(HWND, LPUIEXTRA);
-	void MoveCompWindow(HWND, LPUIEXTRA, LPINPUTCONTEXT);
-	void PaintCompWindow(HWND);
-	void HideCompWindow(LPUIEXTRA);
-	// UICand.cpp
-	LRESULT APIENTRY CandWndProc(HWND, UINT, WPARAM, LPARAM);
-	void CreateCandWindow(HWND, LPUIEXTRA);
-	void MoveCandWindow(HWND, LPUIEXTRA, LPINPUTCONTEXT);
-	void PaintCandWindow(HWND);
-	void HideCandWindow(LPUIEXTRA);
 	// ControlHandle.cpp
 	LONG ControlHandle(HIMC, HWND, UINT, WPARAM, LPARAM);
 	// NotifyHandel.cpp
 	LONG NotifyHandle(HIMC, HWND, UINT, WPARAM, LPARAM);
 	// IME.cpp
-	BOOL MyIsIMEMessage(UINT);
 	void MyGenerateMessage(HIMC, UINT, WPARAM, LPARAM);
 	BOOL MyGenerateMessageToTransKey(LPDWORD, UINT*, UINT, WPARAM, LPARAM);
 	// Utils.cpp
@@ -66,7 +50,6 @@ extern "C" {
 	void InitCandInfo(LPCANDIDATEINFO);
 	void UpdateCandidate(LPINPUTCONTEXT, LPTSTR);
 	void ClearCandidate(LPCANDIDATEINFO);
-	LPTSTR UTF16toWCHAR(char *);
 
 	void DebugLog(char *, void*);
 	void DebugLogW(LPTSTR format, void *p);

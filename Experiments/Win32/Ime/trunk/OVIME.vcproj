@@ -67,7 +67,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories=".\"
+				AdditionalIncludeDirectories=".\;..\OVIMEUI\Headers"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
@@ -80,7 +80,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies=".\IMM32.LIB .\OVDummyLoader.lib"
+				AdditionalDependencies=".\IMM32.LIB .\OVDummyLoader.lib .\OVIMEUI.lib"
 				OutputFile="$(OutDir)/OVIME.dll"
 				LinkIncremental="1"
 				ModuleDefinitionFile="OVIME.def"
@@ -127,12 +127,6 @@
 			</File>
 			<File
 				RelativePath="OVIME.def">
-			</File>
-			<File
-				RelativePath="UICand.cpp">
-			</File>
-			<File
-				RelativePath="UIComp.cpp">
 			</File>
 			<File
 				RelativePath="UIWnd.cpp">

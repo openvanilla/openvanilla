@@ -1,24 +1,5 @@
 #include "OVIME.h"
 
-BOOL MyIsIMEMessage(UINT msg)
-{
-    switch(msg)
-    {
-            case WM_IME_STARTCOMPOSITION:
-            case WM_IME_ENDCOMPOSITION:
-            case WM_IME_COMPOSITION:
-            case WM_IME_NOTIFY:
-            case WM_IME_SETCONTEXT:
-            case WM_IME_CONTROL:
-            case WM_IME_COMPOSITIONFULL:
-            case WM_IME_SELECT:
-            case WM_IME_CHAR:
-                return TRUE;
-    }
-
-    return FALSE;
-}
-
 void
 MyGenerateMessage(HIMC hIMC, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -172,7 +153,7 @@ ImeSelect(HIMC hIMC, BOOL fSelect)
 			for(int i = 0; i < MAXSTRSIZE; i++)
 				lpMyPrivate->PreEditStr[i]='\0';
 			for(int i = 0; i < MAXSTRSIZE; i++)
-				lpMyPrivate->CompStr[i]='\0';
+				lpMyPrivate->CandStr[i]='\0';
 			ImmUnlockIMCC(lpIMC->hPrivate);	
 		}
 		ImmUnlockIMC(hIMC);
@@ -311,6 +292,8 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 	}
 
 	LPTSTR decoded = NULL;
+	_tcscpy(lpMyPrivate->CandStr, _T(""));
+	_tcscpy(lpMyPrivate->PreEditStr, _T(""));
 	for( int j = 0; j < n; j++ )
 	{
 		char *x = result[j];
@@ -355,6 +338,7 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 		{
 			j++;
 			decoded = UTF16toWCHAR(result[j]);
+			_tcscpy(lpMyPrivate->CandStr,decoded);
 			UpdateCandidate(lpIMC, decoded);
 			MyGenerateMessageToTransKey(lpdwTransKey, &uNumTranKey,
 				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
@@ -364,6 +348,7 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 		}
 		else if(!strcmp(x, "candihide"))
 		{
+			HideCandWindow();
 		}
 		else if(!strcmp(x, "unprocessed"))
 		{
