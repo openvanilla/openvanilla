@@ -1,5 +1,10 @@
 #include "OVIME.h"
 
+#include <vector>
+#include <string>
+#include "OVStringToolKit.h"
+using namespace std;
+
 void
 MyGenerateMessage(HIMC hIMC, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -277,6 +282,12 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 	int n = 0;
 	int ln = 0;
 	DebugLog("str: %s\n", str);
+	string command(str);
+	vector<string> commandVector;
+	vector<string> delimiterVector;
+	delimiterVector.push_back(" ");
+	OVStringToolKit::splitString(command, commandVector, delimiterVector, false);
+	/*
 	for( int i = 0; i < rlen; i++ )
 	{
 		if(str[i] == ' ' || i == rlen - 1)
@@ -290,13 +301,18 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 			n++;
 		}
 	}
+	*/
 
 	LPTSTR decoded = NULL;
 	_tcscpy(lpMyPrivate->CandStr, _T(""));
 	_tcscpy(lpMyPrivate->PreEditStr, _T(""));
-	for( int j = 0; j < n; j++ )
+	//for( int j = 0; j < n; j++ )
+	for(vector<string>::iterator j = commandVector.begin();
+		j != commandVector.end();
+		++j)
 	{
-		char *x = result[j];
+		//char *x = result[j];
+		const char* x = j->c_str();
 		if(!strcmp(x, "bufclear"))
 		{
 			_tcscpy(lpMyPrivate->PreEditStr, _T(""));
@@ -307,7 +323,8 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 		else if(!strcmp(x, "bufupdate"))
 		{
 			j++;
-			decoded = UTF16toWCHAR(result[j]);
+			//decoded = UTF16toWCHAR(result[j]);
+			decoded = UTF16toWCHAR(const_cast<char *>(j->c_str()));
 
 			_tcscpy(lpMyPrivate->PreEditStr, decoded);
 			MakeCompStr(lpMyPrivate, lpCompStr);
@@ -317,7 +334,8 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 		else if(!strcmp(x, "bufsend"))
 		{
 			j++;
-			decoded = UTF16toWCHAR(result[j]);
+			//decoded = UTF16toWCHAR(result[j]);
+			decoded = UTF16toWCHAR(const_cast<char *>(j->c_str()));
 
 			_tcscpy(GETLPRESULTSTR(lpCompStr),decoded);
 			lpCompStr->dwResultStrLen = _tcslen(decoded);
@@ -337,7 +355,8 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 		else if(!strcmp(x, "candiupdate"))
 		{
 			j++;
-			decoded = UTF16toWCHAR(result[j]);
+			//decoded = UTF16toWCHAR(result[j]);
+			decoded = UTF16toWCHAR(const_cast<char *>(j->c_str()));
 			_tcscpy(lpMyPrivate->CandStr,decoded);
 			UpdateCandidate(lpIMC, decoded);
 			MyGenerateMessageToTransKey(lpdwTransKey, &uNumTranKey,

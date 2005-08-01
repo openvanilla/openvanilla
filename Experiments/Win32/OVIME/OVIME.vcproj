@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\;..\OVIMEUI\Headers"
+				AdditionalIncludeDirectories=".\;..\OVIMEUI\Headers;..\..\..\Headers"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -73,7 +73,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories=".\;..\OVIMEUI\Headers"
+				AdditionalIncludeDirectories=".\;..\OVIMEUI\Headers;..\..\..\Headers"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
@@ -143,6 +143,9 @@
 				RelativePath="OVIME.def">
 			</File>
 			<File
+				RelativePath="..\..\..\Source\OVStringToolKit.cpp">
+			</File>
+			<File
 				RelativePath="UIWnd.cpp">
 			</File>
 			<File
@@ -157,6 +160,9 @@
 			</File>
 			<File
 				RelativePath="OVIME.h">
+			</File>
+			<File
+				RelativePath="..\..\..\Headers\OVStringToolKit.h">
 			</File>
 			<File
 				RelativePath="resource.h">
