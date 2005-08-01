@@ -225,34 +225,46 @@ OPEN_FAILED:
 }
 
 static int scan_ov_modules(){
-   WIN32_FIND_DATA FileData;
-   HANDLE          hList;
-   hList = FindFirstFile(OV_MODULEDIR, &FileData);
-   DummyService srv;
-   /*
-   if(hList){
-      do{
-      fprintf(stderr,  "file: %s\n", FileData.cFileName);
-         if( strstr( FileData.cFileName, ".dll" ) ){
-            fprintf(stderr,  "Load OV module: %s\n", FileData.cFileName);
-            OVLibrary* mod = open_module(FileData.cFileName);
-            if(mod){
-               OVModule* m;
-               mod->initLibrary(&srv, OV_MODULEDIR);
-               for(int i=0; m = mod->getModule(i); i++)
-                  mod_vector.push_back(m);
-               delete mod;
-            }
-         }
-      }while(FindNextFile(hList, &FileData));
-      FindClose(hList);
-   }
-   */
-   OVLibrary* mod = open_module("C:\\OpenVanilla\\OVIMPOJ-Holo.dll");
-   OVModule* m;
-   mod->initLibrary(&srv, OV_MODULEDIR);
-   m = mod->getModule(0);
-   mod_vector.push_back(m);
+	BOOL fFinished;
+	HANDLE hList;
+	WIN32_FIND_DATA FileData;
+	DummyService srv;
+	string path = OV_MODULEDIR;
+	hList = FindFirstFile((path + "*").c_str(), &FileData);
+
+	if(hList == INVALID_HANDLE_VALUE)
+	{
+		printf("No files found\n");
+	}
+	else
+	{
+		fFinished = FALSE;
+		while (!fFinished)
+		{
+			if(strstr(FileData.cFileName, ".dll") ||
+				       	strstr(FileData.cFileName, ".DLL"))
+			{
+				fprintf(stderr,  "Load OV module: %s\n", FileData.cFileName);
+				OVLibrary* mod = open_module((path + FileData.cFileName).c_str());
+				if(mod){
+					OVModule* m;
+					mod->initLibrary(&srv, OV_MODULEDIR);
+					for(int i=0; m = mod->getModule(i); i++)
+						mod_vector.push_back(m);
+					delete mod;
+				}
+			}
+			if (!FindNextFile(hList, &FileData))
+			{
+				if (GetLastError() == ERROR_NO_MORE_FILES)
+				{
+					fFinished = TRUE;
+				}
+			}
+		}
+	}
+	FindClose(hList);
+		
    return mod_vector.size();
 }
 /*
