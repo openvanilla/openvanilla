@@ -1,0 +1,10 @@
+EXPORTS
+	SetLPUIExtra
+	IMERegisterClass
+	IMEUnRegisterClass
+	CreateCompWindow
+	MoveCompWindow
+	HideCompWindow
+	CreateCandWindow
+	MoveCandWindow
+	HideCandWindow
