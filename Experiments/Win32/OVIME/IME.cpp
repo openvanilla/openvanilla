@@ -278,7 +278,7 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 	}
 	
 	memset(str, 0, 1024);
-	rlen = keyevent(tolower(k), str);
+	rlen = keyevent(0, tolower(k), str);
 	int n = 0;
 	int ln = 0;
 	DebugLog("str: %s", str);

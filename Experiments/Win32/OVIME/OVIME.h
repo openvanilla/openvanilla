@@ -52,7 +52,8 @@ extern "C" {
 	void ClearCandidate(LPCANDIDATEINFO);
 	LPTSTR UTF16toWCHAR(char *str);
 	// OVVBPOJ
-	int keyevent(int c, char *s);
+	// Param: 1 -> Context number, 2 -> KeyCode, 3 -> Output
+	int keyevent(int n, int c, char *s);
 }
 #ifdef DEBUG 
     #include <stdarg.h>

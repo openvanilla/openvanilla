@@ -189,7 +189,7 @@ DummyService srv;
 DummyCandidate candi;
 DummyBuffer buf;
 DummyDictionary dict;
-OVInputMethodContext *ctx;
+std::vector<OVInputMethodContext*> ctx_vector;
 int inited=0;
 std::vector<OVModule*> mod_vector;
 
@@ -306,12 +306,16 @@ void init() {
     lt_dlinit();
     lt_dlsetsearchpath(OV_MODULEDIR);
 
-    scan_ov_modules();
-    OVInputMethod *im = reinterpret_cast<OVInputMethod*>(mod_vector[0]);
-    im->initialize(&dict, &srv, OV_MODULEDIR);
+    int size = scan_ov_modules();
+    ctx_vector.assign(size, NULL);
     fprintf(stderr, "INIT\n");
-    ctx = im->newContext();
     inited=1;
+}
+
+void initContext(int n) {
+    OVInputMethod *im = reinterpret_cast<OVInputMethod*>(mod_vector[n]);
+    im->initialize(&dict, &srv, OV_MODULEDIR);
+    ctx_vector.at(n) = im->newContext();
 }
 
 void exit() {
@@ -319,11 +323,14 @@ void exit() {
 }
 
 extern "C" {
-	int  keyevent(int c, char *s) {
+	int  keyevent(int n, int c, char *s) {
 		if (!inited) init();
 
 		DummyKeyCode kc(c);
-		int st=ctx->keyEvent(&kc, &buf, &candi, &srv);
+		if( n > ctx_vector.size() ) n = ctx_vector.size();
+		if(ctx_vector.at(n) == NULL)
+			initContext(n);
+		int st=ctx_vector.at(n)->keyEvent(&kc, &buf, &candi, &srv);
 
 		string ac=candi.action+buf.action;
 		if (st) ac += "processed"; else ac+="unprocessed";
