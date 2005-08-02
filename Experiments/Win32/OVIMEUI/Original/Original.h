@@ -16,8 +16,6 @@
 // OVIMEUI.cpp
 void DrawUIBorder(LPRECT);
 void DragUI(HWND ,HWND, UINT, WPARAM, LPARAM, BOOL);
-LPTSTR UTF16toWCHAR(char *);
-BOOL MyIsIMEMessage(UINT);
 // UIComp.cpp
 LRESULT APIENTRY CompWndProc(HWND, UINT, WPARAM, LPARAM);
 void PaintCompWindow(HWND);
@@ -30,3 +28,5 @@ extern HFONT hUIFont;
 extern HINSTANCE hInst;
 extern LPTSTR lpCandStr;
 extern LPTSTR lpCompStr;
+extern UICHILD uiCand;
+extern UICHILD uiComp;

@@ -33,34 +33,34 @@ LRESULT APIENTRY CompWndProc(HWND hWnd,
 
 void CreateCompWindow(HWND hUIWnd)
 {
-	if (!IsWindow(lpUIExtra->uiComp.hWnd))
+	if (!IsWindow(uiComp.hWnd))
 	{
 		HDC hDC;
 		HFONT oldFont;
 		SIZE sz;
 		TCHAR szStr[100];
 
-		lpUIExtra->uiComp.hWnd = 
+		uiComp.hWnd = 
 			CreateWindowEx(WS_EX_WINDOWEDGE, UICOMPCLASSNAME, NULL,
 					WS_DISABLED | WS_POPUP | WS_DLGFRAME,
 					0, 0, 1, 1, hUIWnd, NULL, hInst, NULL);
-		SetWindowLong(lpUIExtra->uiComp.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
+		SetWindowLong(uiComp.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
 
 		_stprintf(szStr, _T("AAAAAAAAAAAAA"));
-		hDC = GetDC(lpUIExtra->uiComp. hWnd);
+		hDC = GetDC(uiComp. hWnd);
 		oldFont = (HFONT)SelectObject(hDC, hUIFont);
 		GetTextExtentPoint(hDC, szStr, _tcslen(szStr), &sz);
 		SelectObject(hDC, oldFont);
-		ReleaseDC(lpUIExtra->uiComp.hWnd,hDC);
+		ReleaseDC(uiComp.hWnd,hDC);
 
-		lpUIExtra->uiComp.sz.cx = sz.cx;
-		lpUIExtra->uiComp.sz.cy = sz.cy+4;
+		uiComp.sz.cx = sz.cx;
+		uiComp.sz.cy = sz.cy+4;
 	}
 	HideCompWindow();
 	return;
 }
 
-void MoveCompWindow(HWND hUIWnd, LPTSTR lpStr)
+void MoveCompWindow(HWND hUIWnd, int X, int Y, LPTSTR lpStr)
 {
 	free(lpCompStr);
 	lpCompStr = _tcsdup(lpStr);
@@ -70,10 +70,10 @@ void MoveCompWindow(HWND hUIWnd, LPTSTR lpStr)
 		return;
 	}
 
-	if (!IsWindow(lpUIExtra->uiComp.hWnd))
+	if (!IsWindow(uiComp.hWnd))
 		CreateCompWindow(hUIWnd);
 
-	if (IsWindow(lpUIExtra->uiComp.hWnd))
+	if (IsWindow(uiComp.hWnd))
 	{
 		HDC hDC;
 		HFONT oldFont;
@@ -83,14 +83,16 @@ void MoveCompWindow(HWND hUIWnd, LPTSTR lpStr)
 
 		sz.cx = 0;
 		sz.cy = 0;
+		uiComp.pt.x = X;
+		uiComp.pt.y = Y;
 
 		if(lpCompStr)
 		{
-			hDC = GetDC(lpUIExtra->uiComp.hWnd);
+			hDC = GetDC(uiComp.hWnd);
 			oldFont = (HFONT)SelectObject(hDC, hUIFont);
 			GetTextExtentPoint(hDC, lpCompStr, _tcslen(lpCompStr), &sz);
 			SelectObject(hDC, oldFont);
-			ReleaseDC(lpUIExtra->uiComp.hWnd, hDC);
+			ReleaseDC(uiComp.hWnd, hDC);
 			if(_tcslen(lpCompStr))
 				sz.cx += 2 * sz.cx / _tcslen(lpCompStr);
 		}
@@ -100,15 +102,15 @@ void MoveCompWindow(HWND hUIWnd, LPTSTR lpStr)
 			return;
 		}
 
-		if(sz.cx < lpUIExtra->uiComp.sz.cx)
-			sz.cx = lpUIExtra->uiComp.sz.cx;
+		if(sz.cx < uiComp.sz.cx)
+			sz.cx = uiComp.sz.cx;
 
-		sz.cy = lpUIExtra->uiComp.sz.cy;
+		sz.cy = uiComp.sz.cy;
 		sz.cx += 4 * GetSystemMetrics(SM_CXEDGE);
 		sz.cy += 4 * GetSystemMetrics(SM_CYEDGE);
 
-		pt.x = lpUIExtra->uiComp.pt.x;
-		pt.y = lpUIExtra->uiComp.pt.y;
+		pt.x = uiComp.pt.x;
+		pt.y = uiComp.pt.y;
 
 		SystemParametersInfo(SPI_GETWORKAREA,
 				0,
@@ -120,14 +122,14 @@ void MoveCompWindow(HWND hUIWnd, LPTSTR lpStr)
 		if( (pt.y + sz.cy) > screenrc.bottom )
 			pt.y = screenrc.bottom - sz.cy;
 
-		MoveWindow(lpUIExtra->uiComp.hWnd,
+		MoveWindow(uiComp.hWnd,
 				pt.x,
 				pt.y,
 				sz.cx,
 				sz.cy,
 				TRUE);
-		ShowWindow(lpUIExtra->uiComp.hWnd, SW_SHOWNOACTIVATE);
-		InvalidateRect(lpUIExtra->uiComp.hWnd,NULL, FALSE);
+		ShowWindow(uiComp.hWnd, SW_SHOWNOACTIVATE);
+		InvalidateRect(uiComp.hWnd,NULL, FALSE);
 	}
 }
 
@@ -187,8 +189,8 @@ void PaintCompWindow(HWND hCompWnd)
 
 void HideCompWindow()
 {
-	if (IsWindow(lpUIExtra->uiComp.hWnd))
+	if (IsWindow(uiComp.hWnd))
 	{
-		ShowWindow(lpUIExtra->uiComp.hWnd, SW_HIDE);
+		ShowWindow(uiComp.hWnd, SW_HIDE);
 	}
 }

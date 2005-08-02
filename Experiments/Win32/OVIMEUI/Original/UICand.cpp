@@ -36,43 +36,43 @@ LRESULT APIENTRY CandWndProc(HWND hWnd,
 
 void CreateCandWindow(HWND hUIWnd)
 {
-	if (!IsWindow(lpUIExtra->uiCand.hWnd))
+	if (!IsWindow(uiCand.hWnd))
 	{
 		HDC hDC;
 		HFONT oldFont;
 		TCHAR szStr[100];
 		SIZE sz;
 
-		lpUIExtra->uiCand.hWnd = 
+		uiCand.hWnd = 
 			CreateWindowEx(WS_EX_WINDOWEDGE, UICANDCLASSNAME ,NULL,
 					WS_DISABLED | WS_POPUP | WS_DLGFRAME,
 					0, 0, 1, 1, hUIWnd,NULL,hInst,NULL);
-		SetWindowLong(lpUIExtra->uiCand.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
+		SetWindowLong(uiCand.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
 
-		hDC = GetDC(lpUIExtra->uiCand.hWnd);
+		hDC = GetDC(uiCand.hWnd);
 		oldFont = (HFONT)SelectObject(hDC, hUIFont);
 
 		_stprintf(szStr,_T("<< 1代琌 2代琌 3代琌 4代琌 5代琌 6代琌 7代琌 8代琌 9代琌 0代琌 >>"));
 		GetTextExtentPoint(hDC, szStr, _tcslen(szStr), &sz);
 
 		SelectObject(hDC, oldFont);
-		ReleaseDC(lpUIExtra->uiCand.hWnd,hDC);
+		ReleaseDC(uiCand.hWnd,hDC);
 
-		lpUIExtra->uiCand.sz.cx = sz.cx;
-		lpUIExtra->uiCand.sz.cy = sz.cy + 15;
+		uiCand.sz.cx = sz.cx;
+		uiCand.sz.cy = sz.cy + 15;
 	}
-	ShowWindow(lpUIExtra->uiCand.hWnd, SW_HIDE);
+	ShowWindow(uiCand.hWnd, SW_HIDE);
 	return;
 }
 
 BOOL GetCandPosFromCompWnd(LPSIZE lpsz)
 {
-	if (IsWindow(lpUIExtra->uiComp.hWnd))
+	if (IsWindow(uiComp.hWnd))
 	{
 		RECT rc, screenrc;
 		POINT pt;
 
-		GetWindowRect(lpUIExtra->uiComp.hWnd, &rc);
+		GetWindowRect(uiComp.hWnd, &rc);
 
 		pt.x = rc.left;
 		pt.y = rc.bottom + 2;
@@ -86,8 +86,8 @@ BOOL GetCandPosFromCompWnd(LPSIZE lpsz)
 		if( (pt.y + lpsz->cy) > screenrc.bottom)
 			pt.y = screenrc.bottom - lpsz->cy;
 
-		lpUIExtra->uiCand.pt.x = pt.x;
-		lpUIExtra->uiCand.pt.y = pt.y;
+		uiCand.pt.x = pt.x;
+		uiCand.pt.y = pt.y;
 		return TRUE;
 	}
 	return FALSE;
@@ -103,10 +103,10 @@ void MoveCandWindow(HWND hUIWnd, LPTSTR lpStr)
 		return;
 	}
 
-	if (!IsWindow(lpUIExtra->uiCand.hWnd))
+	if (!IsWindow(uiCand.hWnd))
 		CreateCandWindow(hUIWnd);
 
-	if (IsWindow(lpUIExtra->uiCand.hWnd))
+	if (IsWindow(uiCand.hWnd))
 	{
 		HDC hDC;
 		HFONT oldFont;
@@ -117,30 +117,30 @@ void MoveCandWindow(HWND hUIWnd, LPTSTR lpStr)
 
 		// ⊿Τ Cand
 		if(lpStr == NULL) {
-			ShowWindow(lpUIExtra->uiCand.hWnd, SW_HIDE);
+			ShowWindow(uiCand.hWnd, SW_HIDE);
 			return;
 		}
-		hDC = GetDC(lpUIExtra->uiCand.hWnd);
+		hDC = GetDC(uiCand.hWnd);
 		oldFont = (HFONT)SelectObject(hDC, hUIFont);
 		GetTextExtentPoint(hDC, lpStr, _tcslen(lpStr), &sz);
 		SelectObject(hDC, oldFont);
-		ReleaseDC(lpUIExtra->uiCand.hWnd,hDC);
+		ReleaseDC(uiCand.hWnd,hDC);
 		if(_tcslen(lpStr))
 			sz.cx += 3 * sz.cx / _tcslen(lpStr);
-		if(sz.cx < lpUIExtra->uiCand.sz.cx)
-			sz.cx = lpUIExtra->uiCand.sz.cx;
-		sz.cy = lpUIExtra->uiCand.sz.cy;
+		if(sz.cx < uiCand.sz.cx)
+			sz.cx = uiCand.sz.cx;
+		sz.cy = uiCand.sz.cy;
 
 		GetCandPosFromCompWnd(&sz);
 
-		MoveWindow(lpUIExtra->uiCand.hWnd,
-				lpUIExtra->uiCand.pt.x,
-				lpUIExtra->uiCand.pt.y,
+		MoveWindow(uiCand.hWnd,
+				uiCand.pt.x,
+				uiCand.pt.y,
 				sz.cx,
 				sz.cy,
 				TRUE);
-		ShowWindow(lpUIExtra->uiCand.hWnd, SW_SHOWNOACTIVATE);
-		InvalidateRect(lpUIExtra->uiCand.hWnd, NULL, FALSE);
+		ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
+		InvalidateRect(uiCand.hWnd, NULL, FALSE);
 	}
 }
 
@@ -200,8 +200,8 @@ void PaintCandWindow(HWND hCandWnd)
 
 void HideCandWindow()
 {
-	if (IsWindow(lpUIExtra->uiCand.hWnd))
+	if (IsWindow(uiCand.hWnd))
 	{
-		ShowWindow(lpUIExtra->uiCand.hWnd, SW_HIDE);
+		ShowWindow(uiCand.hWnd, SW_HIDE);
 	}
 }

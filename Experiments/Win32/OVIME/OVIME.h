@@ -7,9 +7,9 @@
 
 
 // Extern
-extern HFONT hUIFont;
 extern HINSTANCE hInst;
-extern HGLOBAL hUIExtra;
+extern int CompX;
+extern int CompY;
 
 // Constant
 #define CS_OVIME (CS_VREDRAW | CS_HREDRAW | CS_DBLCLKS)
@@ -50,11 +50,56 @@ extern "C" {
 	void InitCandInfo(LPCANDIDATEINFO);
 	void UpdateCandidate(LPINPUTCONTEXT, LPTSTR);
 	void ClearCandidate(LPCANDIDATEINFO);
-
-	void DebugLog(char *, void*);
-	void DebugLogW(LPTSTR format, void *p);
-
-	
+	LPTSTR UTF16toWCHAR(char *str);
 	// OVVBPOJ
 	int keyevent(int c, char *s);
 }
+#ifdef DEBUG 
+    #include <stdarg.h>
+    #include <stdio.h>
+    inline static void DebugLog(const char* format,...) {
+	static char first_time=1;
+	FILE *fp;
+
+	if (first_time) {
+		first_time=0;
+		if (fp=fopen("f:\\orz.txt", "w")) {
+			fclose(fp);
+		}
+	}
+
+	if (fp=fopen("f:\\orz.txt", "a")) {
+		va_list args;
+		va_start (args, format);
+		vfprintf (fp, format, args);
+		va_end (args);
+		fprintf (fp, "\n");
+		fclose(fp);
+	}
+    }
+    inline static void DebugLogW(const TCHAR* format,...) {
+	static char first_time=1;
+	FILE *fp;
+
+	if (first_time) {
+		first_time=0;
+		if (fp=fopen("f:\\orz.txt", "w")) {
+			fclose(fp);
+		}
+	}
+
+	if (fp=fopen("f:\\orz.txt", "a")) {
+		va_list args;
+		va_start (args, format);
+		_vftprintf(fp, format, args);
+		va_end (args);
+		_vftprintf(fp, _T("\n"), NULL);
+		fclose(fp);
+	}
+    }
+#else
+    inline static void DebugLog(const char* format,...) {
+    }
+    inline static void DebugLogW(const TCHAR* format,...) {
+    }
+#endif

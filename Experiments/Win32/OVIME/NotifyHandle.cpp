@@ -8,14 +8,9 @@ LONG NotifyHandle(HIMC hUICurIMC,
 {
 	LONG lRet = 0L;
     LPINPUTCONTEXT lpIMC;
-    HGLOBAL hUIExtra;
-    LPUIEXTRA lpUIExtra;
 
     if (!(lpIMC = ImmLockIMC(hUICurIMC)))
         return 0L;
-
-    hUIExtra = (HGLOBAL)GetWindowLong(hWnd, IMMGWL_PRIVATE);
-    lpUIExtra = (LPUIEXTRA)GlobalLock(hUIExtra);
 
     switch (wParam)
     {
@@ -54,21 +49,20 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			POINT ptSrc;
 			SIZE szOffset;
 			HDC hDC;
-			HFONT oldFont;
 
 			ptSrc = lpIMC->cfCompForm.ptCurrentPos;
 			ClientToScreen(lpIMC->hWnd, &ptSrc);
 			hDC = GetDC(lpIMC->hWnd);
-			oldFont = (HFONT)SelectObject(hDC, hUIFont);
 			GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
-			SelectObject(hDC, oldFont);
 			ReleaseDC(lpIMC->hWnd,hDC);
 
-			lpUIExtra->uiComp.pt.x = ptSrc.x + szOffset.cx;
-			lpUIExtra->uiComp.pt.y = ptSrc.y + szOffset.cy;
+			CompX = ptSrc.x + szOffset.cx;
+			CompY = ptSrc.y + szOffset.cy;
 		}
-	    if (IsWindow(lpUIExtra->uiComp.hWnd))
+		/*
+		if (IsWindow(lpUIExtra->uiComp.hWnd))
 			InvalidateRect(lpUIExtra->uiComp.hWnd,NULL,FALSE);
+		*/
 
 		break;
 		
@@ -84,7 +78,6 @@ LONG NotifyHandle(HIMC hUICurIMC,
 	default:
 		break;
     }
-    GlobalUnlock(hUIExtra);
     ImmUnlockIMC(hUICurIMC);
 
     return lRet;

@@ -1,5 +1,4 @@
 EXPORTS
-	SetLPUIExtra
 	IMERegisterClass
 	IMEUnRegisterClass
 	CreateCompWindow

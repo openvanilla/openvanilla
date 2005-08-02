@@ -55,7 +55,6 @@ BOOL IMERegisterClass( HINSTANCE hInstance )
 
 BOOL IMEUnRegisterClass( HINSTANCE hInstance )
 {
-	UnregisterClass(UICLASSNAME, hInstance);
 	UnregisterClass(UICOMPCLASSNAME, hInstance);
 	UnregisterClass(UICANDCLASSNAME, hInstance);
 	return TRUE;

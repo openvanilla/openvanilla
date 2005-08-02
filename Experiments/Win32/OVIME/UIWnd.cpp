@@ -7,7 +7,6 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 {
 	HIMC			hUICurIMC;
 	LPINPUTCONTEXT	lpIMC;
-	LPUIEXTRA		lpUIExtra;
 	LONG			lRet = 0L;
 	LPMYPRIVATE lpMyPrivate;
 
@@ -38,35 +37,22 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	switch (msg)
 	{
 	case WM_CREATE:
-		//
-		// Allocate UI's extra memory block.
-		//
-		hUIExtra = GlobalAlloc(GHND, sizeof(UIEXTRA));
-		lpUIExtra = (LPUIEXTRA)GlobalLock(hUIExtra);
-
-		lpUIExtra->uiComp.pt.x = -1;
-		lpUIExtra->uiComp.pt.y = -1;
-
-		SetLPUIExtra(lpUIExtra);
+		CompX = CompY = -1;
 		CreateCompWindow(hWnd);
 		CreateCandWindow(hWnd);
-
-		GlobalUnlock(hUIExtra);
-		SetWindowLong(hWnd, IMMGWL_PRIVATE, (DWORD)hUIExtra);
 		break;
 		
 	case WM_IME_SETCONTEXT:
 		if (wParam)
 		{
-			hUIExtra = (HGLOBAL)GetWindowLong(hWnd,IMMGWL_PRIVATE);
 			if (hUICurIMC)
 			{
 				lpIMC = ImmLockIMC(hUICurIMC);
 				if (lpIMC)
 				{
 					lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
+					MoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 					MoveCandWindow(hWnd, lpMyPrivate->CandStr);
-					MoveCompWindow(hWnd, lpMyPrivate->PreEditStr);
 					ImmUnlockIMCC(lpIMC->hPrivate);
 				}
 				else
@@ -89,9 +75,17 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		
 	case WM_IME_COMPOSITION:
 		lpIMC = ImmLockIMC(hUICurIMC);
+		POINT pt;
+		if(CompX < 0) {
+			pt.x = 15;
+			pt.y = 15;
+			ClientToScreen(lpIMC->hWnd, &pt);
+			CompX = pt.x;
+			CompY = pt.y;
+		}
 		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
+		MoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 		MoveCandWindow(hWnd, lpMyPrivate->CandStr);
-		MoveCompWindow(hWnd, lpMyPrivate->PreEditStr);
 		ImmUnlockIMCC(lpIMC->hPrivate);
 		ImmUnlockIMC(hUICurIMC);
 		break;

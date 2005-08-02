@@ -281,12 +281,13 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 	rlen = keyevent(tolower(k), str);
 	int n = 0;
 	int ln = 0;
-	DebugLog("str: %s\n", str);
+	DebugLog("str: %s", str);
 	string command(str);
 	vector<string> commandVector;
 	vector<string> delimiterVector;
 	delimiterVector.push_back(" ");
-	OVStringToolKit::splitString(command, commandVector, delimiterVector, false);
+	int orz = OVStringToolKit::splitString(command, commandVector, delimiterVector, false);
+	DebugLog("orz: %d", orz);
 	/*
 	for( int i = 0; i < rlen; i++ )
 	{
@@ -313,6 +314,7 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 	{
 		//char *x = result[j];
 		const char* x = j->c_str();
+		DebugLog("X: %s", x);
 		if(!strcmp(x, "bufclear"))
 		{
 			_tcscpy(lpMyPrivate->PreEditStr, _T(""));
@@ -342,6 +344,7 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 			_tcscpy(lpMyPrivate->PreEditStr, _T(""));
 			MakeCompStr(lpMyPrivate, lpCompStr);
 			
+			DebugLogW(_T("decoded: %s"), decoded);
 			MyGenerateMessageToTransKey(lpdwTransKey, &uNumTranKey,
 				WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
 			MyGenerateMessageToTransKey(lpdwTransKey, &uNumTranKey,
