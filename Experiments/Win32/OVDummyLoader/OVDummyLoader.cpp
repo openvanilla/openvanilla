@@ -323,7 +323,10 @@ void exit() {
 }
 
 extern "C" {
-	int  keyevent(int n, int c, char *s) {
+	void LoaderInit() {
+		if (!inited) init();
+	}
+	int KeyEvent(int n, int c, char *s) {
 		if (!inited) init();
 
 		DummyKeyCode kc(c);
