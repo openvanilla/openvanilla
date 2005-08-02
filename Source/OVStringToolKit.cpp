@@ -21,7 +21,7 @@ int OVStringToolKit::splitString(string inString,
 								 bool hasDelimiter)
 {
 	///* string::find()
-	size_t previousPosition = 0, currentPosition = 0;
+	int previousPosition = 0, currentPosition = 0;
 	string currentSubString;
 	string matchedDelimiter;
 	while(currentPosition > -1)
@@ -29,7 +29,7 @@ int OVStringToolKit::splitString(string inString,
 		for(size_t i = 0; i < delimiterVector.size(); i++)
 		{
 			currentPosition =
-				inString.find(delimiterVector[i], previousPosition);
+				static_cast<int>(inString.find(delimiterVector[i], previousPosition));
 			if(currentPosition > -1) {
 				matchedDelimiter = delimiterVector[i];
 				break;
