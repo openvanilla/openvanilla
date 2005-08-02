@@ -2,14 +2,20 @@
 
 #define OV_DEBUG
 
+/*
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLibrary.h>
 #include <OpenVanilla/OVUtility.h>
+*/
+#include "OpenVanilla.h"
+#include "OVLibrary.h"
+#include "OVUtility.h"
+
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <sys/syslimits.h>
-#include "../../Headers/OVKeySequence.h"
+//#include <sys/syslimits.h>	for PATH_MAX
+#include "OVKeySequence.h"
 #include "OVSQLite3.h"
 
 #include <string>
@@ -161,7 +167,7 @@ extern "C" unsigned int OVGetLibraryVersion() {
 }
 extern "C" int OVInitializeLibrary(OVService*, const char*p) { 
     db=new SQLite3;  // this never gets deleted, but so do we
-    char dbfile[PATH_MAX];
+    char dbfile[256];
     sprintf(dbfile, "%s/OVIMTobacco/imtables.db", p);
     if (int err=db->open(dbfile)) {
         murmur("SQLite3 error! code=%d", err);
@@ -198,7 +204,7 @@ const char* OVOFReverseLookupSQLite::identifier() {
 const char* OVOFReverseLookupSQLite::localizedName(const char* lc) {
     static char buf[256];
     const char *name;
-    if(!strcasecmp(lc,"zh_TW")) {
+    if(!strcmp(lc,"zh_TW")) {
 	name=QueryForKey(db, table, "_property_cname");
     } else {
 	name=QueryForKey(db, table, "_property_ename");
@@ -252,7 +258,7 @@ OVInputMethodContext *OVIMTobacco::newContext() {
 }
 
 int OVIMTobacco::initialize(OVDictionary *cfg, OVService * s, const char *p) {
-    char tsiDbFilePath[PATH_MAX];
+    char tsiDbFilePath[256];
     sprintf(tsiDbFilePath, "%sOVIMTobacco/tsi.db", p);
     const char* ename = QueryForKey(db, table, "_property_ename");
     string inputMethodId(ename);
@@ -310,7 +316,7 @@ const char *OVIMTobacco::identifier() {
 const char *OVIMTobacco::localizedName(const char *lc) {
     static char buf[256];
     const char *name;
-    if(!strcasecmp(lc,"zh_TW")) {
+    if(!strcmp(lc,"zh_TW")) {
 	name=QueryForKey(db, table, "_property_cname");
     } else {
 	name=QueryForKey(db, table, "_property_ename");

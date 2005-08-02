@@ -3,7 +3,9 @@
 #include "BiGram.h"
 #include "PredictorSingleton.h"
 
-#include <OpenVanilla/OVUtility.h>
+#include "OVUtility.h"
+
+#include <algorithm>
 
 using namespace std;
 
@@ -32,7 +34,7 @@ void PredictorSingleton::lostInstance()
 
 void PredictorSingleton::clearAll()
 {
-    PredictorSingleton::composedString.clear();
+    PredictorSingleton::composedString.erase();
 	PredictorSingleton::vectorOfCharacterVector.clear();
 	PredictorSingleton::tokenVector.clear();
 	PredictorSingleton::candidateVector.clear();
@@ -252,7 +254,7 @@ void PredictorSingleton::setTokenVectorByBigram()
 
 void PredictorSingleton::setComposedString()
 {
-    PredictorSingleton::composedString.clear();
+    PredictorSingleton::composedString.erase();
     for(size_t i = 0; i < PredictorSingleton::tokenVector.size(); i++)
         PredictorSingleton::composedString +=
             PredictorSingleton::tokenVector[i].word;

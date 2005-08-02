@@ -4,7 +4,7 @@
 
 #include "BiGram.h"
 
-#include <OpenVanilla/OVUtility.h>
+#include "OVUtility.h"
 
 BiGram::BiGram()
 {

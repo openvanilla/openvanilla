@@ -13,5 +13,5 @@ Token::Token()
 Token::~Token()
 {
     Token::characterStringVector.clear();
-    Token::word.clear();
+    Token::word.erase();
 }
