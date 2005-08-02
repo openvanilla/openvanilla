@@ -339,6 +339,20 @@ extern "C" {
 		buf.action="";
 		return static_cast<int>(ac.length());
 	}
+
+	int ModuleNames(char *s)
+	{
+		int i;
+		string names;
+		for(i = 0; i < mod_vector.size(); i++)
+		{
+			names += utf8toutf16(mod_vector.at(i)->localizedName("zh_TW"));
+			names += " ";
+		}
+		//names += mod_vector.at(i)->localizedName("zh_TW");
+		strcpy(s, names.c_str());
+		return i;
+	}
 }
 
 #ifndef _UNICODE

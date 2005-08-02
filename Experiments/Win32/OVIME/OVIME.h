@@ -53,7 +53,11 @@ extern "C" {
 	LPTSTR UTF16toWCHAR(char *str);
 	// OVVBPOJ
 	// Param: 1 -> Context number, 2 -> KeyCode, 3 -> Output
+	// Return: Length of returned string.
 	int keyevent(int n, int c, char *s);
+	// Param: 1 -> Output
+	// Return: Number of names.
+	int ModuleNames(char *s);
 }
 #ifdef DEBUG 
     #include <stdarg.h>

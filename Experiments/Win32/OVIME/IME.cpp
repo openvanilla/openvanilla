@@ -286,8 +286,7 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 	vector<string> commandVector;
 	vector<string> delimiterVector;
 	delimiterVector.push_back(" ");
-	int orz = OVStringToolKit::splitString(command, commandVector, delimiterVector, false);
-	DebugLog("orz: %d", orz);
+	OVStringToolKit::splitString(command, commandVector, delimiterVector, false);
 	/*
 	for( int i = 0; i < rlen; i++ )
 	{
@@ -332,6 +331,7 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 			MakeCompStr(lpMyPrivate, lpCompStr);
 			MyGenerateMessageToTransKey(lpdwTransKey, &uNumTranKey,
 				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
+			free(decoded);
 		}
 		else if(!strcmp(x, "bufsend"))
 		{
@@ -349,6 +349,7 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 				WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
 			MyGenerateMessageToTransKey(lpdwTransKey, &uNumTranKey,
 				WM_IME_ENDCOMPOSITION, 0, 0);
+			free(decoded);
 		}
 		else if(!strcmp(x, "candiclear"))
 		{
@@ -364,6 +365,7 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 			UpdateCandidate(lpIMC, decoded);
 			MyGenerateMessageToTransKey(lpdwTransKey, &uNumTranKey,
 				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
+			free(decoded);
 		}
 		else if(!strcmp(x, "candishow"))
 		{
@@ -389,8 +391,6 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 		{
 
 		}
-		//if(decoded)
-		//	free(decoded);
 	}
 
 	ImmUnlockIMCC(lpIMC->hPrivate);
