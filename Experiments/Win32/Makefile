@@ -17,14 +17,14 @@ LINK32_OBJS = \
 $(OUTDIR):
 	if not exist "$(OUTDIR)/$(NULL)" mkdir $(OUTDIR)
 
-LINK_LIBS = kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib OVIME\IMM32.LIB OVIME\OVIMEUI.lib OVDummyLoader\libltdl.lib
+LINK_LIBS = kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib OVIME\IMM32.LIB OVIME\OVIMEUI.lib OVDummyLoader\libltdl.lib OVDummyLoader\libiconv.lib
 
 dllllflags = /INCREMENTAL:NO /NOLOGO /DLL /PDB:$(OUTDIR)/vc70.pdb /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /MACHINE:IX86
 
 $(OUTDIR)\$(Proj).dll: $(OUTDIR) $(LINK32_OBJS) $(OUTDIR)\$(Proj).res
 	link $(dllllflags) \
 	$(LINK32_OBJS) $(OUTDIR)\$(Proj).res $(LINK_LIBS) \
-	-out:$(OUTDIR)\$(Proj).dll\
+	-out:$(OUTDIR)\$(Proj).ime\
 	-def:OVIME\$(Proj).def
 
 cflags = /O2 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_UNICODE" /D "UNICODE" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP 

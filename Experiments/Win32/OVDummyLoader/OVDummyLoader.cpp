@@ -13,6 +13,7 @@
 #include "OVUtility.h"
 #include "OVLibrary.h"
 #include "OVCandidateList.h"
+#include "iconv.h"
 extern "C" {
 #include "ltdl.h"
 }
@@ -171,10 +172,21 @@ public:
     virtual void beep() {}
     virtual void notify(const char *msg) { fprintf(stderr, "%s\n", msg); }
     virtual const char *locale() { return "zh_TW"; }
-    virtual const char *userSpacePath(const char *modid) { return "/tmp"; }
-    virtual const char *pathSeparator() { return "/"; }
+    virtual const char *userSpacePath(const char *modid) { return OV_MODULEDIR; }
+    virtual const char *pathSeparator() { return "\\"; }
     virtual const char *toUTF8(const char *encoding, const char *src) 
-        { return src; }
+    { 
+	    char *out = NULL;
+	    size_t inbytesleft = strlen(src) + 1;
+	    size_t outbytesleft = 1024;
+	    iconv_t cd;
+	    memset(internal, 0, 1024);
+	    out = internal;
+	    cd = iconv_open("UTF-8", encoding);
+	    iconv (cd, &src, &inbytesleft, &out, &outbytesleft);
+	    iconv_close(cd);
+	    return internal;
+    }
     virtual const char *fromUTF8(const char *encoding, const char *src)
         { return src; }
     virtual const char *UTF16ToUTF8(unsigned short *src, int len) {
@@ -183,6 +195,8 @@ public:
     virtual int UTF8ToUTF16(const char *src, unsigned short **rcvr) {
         return 0;
     }
+private:
+    char internal[1024];
 };
 
 DummyService srv;
@@ -256,7 +270,10 @@ static int scan_ov_modules(){
 					OVModule* m;
 					mod->initLibrary(&srv, OV_MODULEDIR);
 					for(int i=0; m = mod->getModule(i); i++)
+					{
 						mod_vector.push_back(m);
+						fprintf(stderr, "Load OVModule: %s\n", m->localizedName("zh_TW"));
+					}
 					delete mod;
 				}
 			}
@@ -307,7 +324,7 @@ void init() {
     lt_dlsetsearchpath(OV_MODULEDIR);
 
     int size = scan_ov_modules();
-    ctx_vector.assign(size, NULL);
+    ctx_vector.assign(size, static_cast<OVInputMethodContext*>(NULL));
     fprintf(stderr, "INIT\n");
     inited=1;
 }
@@ -315,6 +332,7 @@ void init() {
 void initContext(int n) {
     OVInputMethod *im = reinterpret_cast<OVInputMethod*>(mod_vector[n]);
     im->initialize(&dict, &srv, OV_MODULEDIR);
+    murmur("InitContext %s", im->localizedName("zh_TW"));
     ctx_vector.at(n) = im->newContext();
 }
 
@@ -330,7 +348,7 @@ extern "C" {
 		if (!inited) init();
 
 		DummyKeyCode kc(c);
-		if( n > ctx_vector.size() ) n = ctx_vector.size();
+		if( n > ctx_vector.size() - 1) n = ctx_vector.size() - 1;
 		if(ctx_vector.at(n) == NULL)
 			initContext(n);
 		int st=ctx_vector.at(n)->keyEvent(&kc, &buf, &candi, &srv);
