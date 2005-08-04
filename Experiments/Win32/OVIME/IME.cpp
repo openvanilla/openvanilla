@@ -110,18 +110,263 @@ BOOL APIENTRY
 ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 {
 	LPINPUTCONTEXT lpIMC;
-	/* Note IMC's private is used for exchange info between UI and Conversion
-	   Interface */
+	LPCOMPOSITIONSTRING lpCompStr;
 
+//	UINT uNumTranKey;
+	LPMYPRIVATE lpMyPrivate;
+	BOOL RetVal = TRUE;
+	BOOL fOpen;
+	static BOOL fPressOther = FALSE;
+	static BOOL fFirst = TRUE;
+	int k;
+	char str[1024];
+	int rlen;
+	char result[100][1024];
+	if ((lKeyData & 0x80000000) && uVKey != VK_CONTROL)
+		return FALSE;
+
+	if (!(lKeyData & 0x80000000) && uVKey == VK_CONTROL)
+		return FALSE;
+
+	if (lpbKeyState[VK_MENU] & 0x80 ) return FALSE;
+
+	if(uVKey != VK_CONTROL && lpbKeyState[VK_CONTROL] & 0x80 ) {
+		fPressOther = TRUE;
+		return FALSE;
+	}
+		
 	if (!hIMC)
 		return 0;
 
 	if (!(lpIMC = ImmLockIMC(hIMC)))
 		return 0;
+	fOpen = lpIMC->fOpen;
 
+	if(uVKey == VK_CONTROL && (lKeyData & 0x80000000) && !fPressOther && !fFirst){
+		fPressOther = FALSE;
+
+		if(fOpen) {
+			lpIMC->fOpen=FALSE;
+			//MakeResultString(hIMC,FALSE);
+		}
+		else lpIMC->fOpen=TRUE;
+
+		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_SETOPENSTATUS, 0);
+		return FALSE;
+	}
+
+	fPressOther = FALSE;
+
+	if(fFirst) fFirst = FALSE;
+
+	// 暫時不理會 KeyUP
+//	if (lpbKeyState[uVKey] & 0x8000)
+//		return 0;
+//	if (lKeyData & 0x80000000)
+//		return FALSE;
+
+	lpCompStr = (LPCOMPOSITIONSTRING)ImmLockIMCC(lpIMC->hCompStr);
+	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
+
+//	uNumTranKey = 0;
+
+	if (_tcslen(GETLPCOMPSTR(lpCompStr)) == 0)
+		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);
+	k = LOWORD(uVKey);
+	if( k >= 65 && k <= 90)
+		k = k + 32;
+	switch(LOWORD(uVKey))
+	{
+	case VK_PRIOR: // pageup
+		k = 11;
+		break;
+	case VK_NEXT: // pagedown
+		k = 12;
+		break;
+	case VK_END:
+		k = 4;
+		break;
+	case VK_HOME:
+		k = 1;
+		break;
+	case VK_LEFT:
+		k = 28;
+		break;
+	case VK_UP:
+		k = 30;
+		break;
+	case VK_RIGHT:
+		k = 29;
+		break;
+	case VK_DOWN:
+		k = 31;
+		break;
+	case VK_DELETE:
+		k = 127;
+		break;
+	case 189: // -
+		k = 45;
+		break;
+	case 0xba: // ;
+		k = ';';
+		break;
+	case 0xc0: // `
+		k = '`';
+		break;
+	case 0xbc: // ,
+		k = ',';
+		break;
+	case 0xbe: // .
+		k = '.';
+		break;
+	case 0xbf: // /
+		k = '/';
+		break;
+	case 0xdc:
+		k = '\\';
+		break;
+	case 0xde: // '
+		k = '\'';
+		break;
+	case 0xdb: // [
+		k = '[';
+		break;
+	case 0xdd: // ]
+		k = ']';
+		break;
+	case 0xbb: // =
+		k = '=';
+		break;
+	case 'Q':
+		k = 'q';
+	default:
+		DebugLog("uVKey: %x\n", (void*)LOWORD(uVKey));
+	}
+	
+	memset(str, 0, 1024);
+	rlen = KeyEvent(0, tolower(k), str);
+	int n = 0;
+	int ln = 0;
+	DebugLog("str: %s", str);
+	string command(str);
+	vector<string> commandVector;
+	vector<string> delimiterVector;
+	delimiterVector.push_back(" ");
+	OVStringToolKit::splitString(command, commandVector, delimiterVector, false);
+	/*
+	for( int i = 0; i < rlen; i++ )
+	{
+		if(str[i] == ' ' || i == rlen - 1)
+		{
+			int dst = i - 1;
+			if( i == rlen - 1)
+				dst = i + 1;
+			memset(result[n], 0, 100);
+			strncpy(result[n], str+ln, dst - ln + 1);
+			ln = i + 1;
+			n++;
+		}
+	}
+	*/
+
+	LPTSTR decoded = NULL;
+	_tcscpy(lpMyPrivate->CandStr, _T(""));
+	_tcscpy(lpMyPrivate->PreEditStr, _T(""));
+	//for( int j = 0; j < n; j++ )
+	for(vector<string>::iterator j = commandVector.begin();
+		j != commandVector.end();
+		++j)
+	{
+		//char *x = result[j];
+		const char* x = j->c_str();
+		DebugLog("X: %s", x);
+		if(!strcmp(x, "bufclear"))
+		{
+			_tcscpy(lpMyPrivate->PreEditStr, _T(""));
+			MakeCompStr(lpMyPrivate, lpCompStr);
+			MyGenerateMessage(hIMC,
+				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
+		}
+		else if(!strcmp(x, "bufupdate"))
+		{
+			j++;
+			//decoded = UTF16toWCHAR(result[j]);
+			decoded = UTF16toWCHAR(const_cast<char *>(j->c_str()));
+
+			_tcscpy(lpMyPrivate->PreEditStr, decoded);
+			MakeCompStr(lpMyPrivate, lpCompStr);
+			MyGenerateMessage(hIMC,
+				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
+			free(decoded);
+		}
+		else if(!strcmp(x, "bufsend"))
+		{
+			j++;
+			//decoded = UTF16toWCHAR(result[j]);
+			decoded = UTF16toWCHAR(const_cast<char *>(j->c_str()));
+
+			_tcscpy(GETLPRESULTSTR(lpCompStr),decoded);
+			lpCompStr->dwResultStrLen = _tcslen(decoded);
+			_tcscpy(lpMyPrivate->PreEditStr, _T(""));
+			MakeCompStr(lpMyPrivate, lpCompStr);
+			
+			DebugLogW(_T("decoded: %s"), decoded);
+			MyGenerateMessage(hIMC,
+				WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
+			MyGenerateMessage(hIMC,
+				WM_IME_ENDCOMPOSITION, 0, 0);
+			free(decoded);
+		}
+		else if(!strcmp(x, "candiclear"))
+		{
+			ClearCandidate((LPCANDIDATEINFO)ImmLockIMCC(lpIMC->hCandInfo));
+			ImmUnlockIMCC(lpIMC->hCandInfo);
+		}
+		else if(!strcmp(x, "candiupdate"))
+		{
+			j++;
+			//decoded = UTF16toWCHAR(result[j]);
+			decoded = UTF16toWCHAR(const_cast<char *>(j->c_str()));
+			_tcscpy(lpMyPrivate->CandStr,decoded);
+			UpdateCandidate(lpIMC, decoded);
+			MyGenerateMessage(hIMC,
+				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
+			free(decoded);
+		}
+		else if(!strcmp(x, "candishow"))
+		{
+		}
+		else if(!strcmp(x, "candihide"))
+		{
+			HideCandWindow();
+		}
+		else if(!strcmp(x, "unprocessed"))
+		{
+			RetVal = FALSE;
+			/*
+			LPTSTR s = _tcsdup(_T("ORZ"));
+			_stprintf(s, _T("%c"), k);
+			_tcscpy(GETLPRESULTSTR(lpCompStr), s);
+			lpCompStr->dwResultStrLen = _tcslen(s);
+			
+			MyGenerateMessageToTransKey(lpdwTransKey, &uNumTranKey,
+				WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
+			MyGenerateMessageToTransKey(lpdwTransKey, &uNumTranKey,
+				WM_IME_ENDCOMPOSITION, 0, 0);
+			free(s);
+			*/
+		}
+		else if(!strcmp(x, "processed"))
+		{
+
+		}
+	}
+
+	ImmUnlockIMCC(lpIMC->hPrivate);
+	ImmUnlockIMCC(lpIMC->hCompStr);
 	ImmUnlockIMC(hIMC);
 
-	return TRUE; 
+	return RetVal; 
 }
 
 BOOL APIENTRY 
@@ -177,6 +422,7 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 			  CONST LPBYTE lpbKeyState,
 			  LPDWORD lpdwTransKey, UINT fuState,HIMC hIMC)
 {
+#if 0
 	LPINPUTCONTEXT lpIMC;
 	LPCOMPOSITIONSTRING lpCompStr;
 
@@ -398,6 +644,8 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 	ImmUnlockIMC(hIMC);
 	
 	return uNumTranKey;
+#endif
+	return 0;
 }
 
 BOOL APIENTRY
