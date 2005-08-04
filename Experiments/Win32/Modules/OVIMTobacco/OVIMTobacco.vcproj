@@ -15,7 +15,7 @@
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
 			ConfigurationType="2"
-			CharacterSet="1">
+			CharacterSet="0">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
@@ -36,6 +36,7 @@
 				AdditionalDependencies="sqlite3.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\SQLite3"
+				ModuleDefinitionFile="..\..\OVModule.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				TargetMachine="1"/>
@@ -69,7 +70,7 @@
 			OutputDirectory="Release"
 			IntermediateDirectory="Release"
 			ConfigurationType="2"
-			CharacterSet="1">
+			CharacterSet="0">
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Headers;..\..\..\..\Experiments\Tobacco"
@@ -87,6 +88,7 @@
 				AdditionalDependencies="sqlite3.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="..\..\SQLite3"
+				ModuleDefinitionFile="..\..\OVModule.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
