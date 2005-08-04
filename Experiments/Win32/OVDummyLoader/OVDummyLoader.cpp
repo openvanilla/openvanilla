@@ -361,18 +361,16 @@ extern "C" {
 		return static_cast<int>(ac.length());
 	}
 
-	int ModuleNames(char *s)
+	int ModuleName(int i, char *str)
 	{
-		int i;
-		string names;
-		for(i = 0; i < mod_vector.size(); i++)
-		{
-			names += utf8toutf16(mod_vector.at(i)->localizedName("zh_TW"));
-			names += " ";
+		string s;
+		if( i > mod_vector.size() - 1) {
+			strcpy(str, "");
+			return 0;
 		}
-		//names += mod_vector.at(i)->localizedName("zh_TW");
-		strcpy(s, names.c_str());
-		return i;
+		s = utf8toutf16(mod_vector.at(i)->localizedName("zh_TW"));
+		strcpy(str, s.c_str());
+		return 1;
 	}
 }
 

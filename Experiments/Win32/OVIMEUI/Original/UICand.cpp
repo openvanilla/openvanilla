@@ -198,10 +198,14 @@ void PaintCandWindow(HWND hCandWnd)
 	EndPaint(hCandWnd,&ps);
 }
 
+void ShowCandWindow()
+{
+	if (IsWindow(uiCand.hWnd))
+		ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
+}
+
 void HideCandWindow()
 {
 	if (IsWindow(uiCand.hWnd))
-	{
 		ShowWindow(uiCand.hWnd, SW_HIDE);
-	}
 }

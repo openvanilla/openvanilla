@@ -11,6 +11,18 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 	{
 	case DLL_PROCESS_ATTACH:
 		// load UI library
+		char str[1024];
+		LPTSTR decoded;
+		LoaderInit();
+		for(int i = 0;; ++i) {
+			if(ModuleName(i, str)) {
+				decoded = UTF16toWCHAR(str);
+				UIPushInputMethod(decoded);
+				free(decoded);
+			} else {
+				break;
+			}
+		}
 		
 		WNDCLASSEX wc;
 		wc.cbSize			= sizeof(WNDCLASSEX);

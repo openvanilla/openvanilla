@@ -15,9 +15,12 @@ LONG NotifyHandle(HIMC hUICurIMC,
     switch (wParam)
     {
 	case IMN_CLOSESTATUSWINDOW:
+		HideStatusWindow();
 		break;
 		
 	case IMN_OPENSTATUSWINDOW:
+		CreateStatusWindow(hWnd);
+		MoveStatusWindow(hWnd, 500, 100);
 		break;
 		
 	case IMN_OPENCANDIDATE:
@@ -36,6 +39,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 		
 	case IMN_SETOPENSTATUS:
+		ShowStatusWindow();
 		break;
 		
 	case IMN_SETCANDIDATEPOS:
@@ -70,6 +74,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 		
 	case IMN_SETSTATUSWINDOWPOS:
+//		MoveStatusWindow(hWnd, );
 		break;
 		
 	case IMN_PRIVATE:

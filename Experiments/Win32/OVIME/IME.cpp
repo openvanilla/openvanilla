@@ -244,7 +244,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	}
 	
 	memset(str, 0, 1024);
-	rlen = KeyEvent(0, tolower(k), str);
+	rlen = KeyEvent(UICurrentInputMethod(), tolower(k), str);
 	int n = 0;
 	int ln = 0;
 	DebugLog("str: %s", str);

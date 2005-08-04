@@ -1,9 +1,17 @@
 EXPORTS
 	IMERegisterClass
 	IMEUnRegisterClass
+	UIPushInputMethod
+	UICurrentInputMethod
+	CreateStatusWindow
+	MoveStatusWindow
+	ShowStatusWindow
+	HideStatusWindow
 	CreateCompWindow
 	MoveCompWindow
+	ShowCompWindow
 	HideCompWindow
 	CreateCandWindow
 	MoveCandWindow
+	ShowCandWindow
 	HideCandWindow

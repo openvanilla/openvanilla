@@ -40,7 +40,6 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		CompX = CompY = -1;
 		CreateCompWindow(hWnd);
 		CreateCandWindow(hWnd);
-		LoaderInit();
 		break;
 		
 	case WM_IME_SETCONTEXT:

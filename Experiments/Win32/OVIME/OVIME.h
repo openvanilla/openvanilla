@@ -57,7 +57,7 @@ extern "C" {
 	int KeyEvent(int n, int c, char *s);
 	// Param: 1 -> Output
 	// Return: Number of names.
-	int ModuleNames(char *s);
+	int ModuleName(int , char *);
 	void LoaderInit();
 }
 #ifdef DEBUG 

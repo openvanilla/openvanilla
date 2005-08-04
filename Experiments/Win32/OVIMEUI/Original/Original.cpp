@@ -13,6 +13,24 @@ BOOL IMERegisterClass( HINSTANCE hInstance )
 			OUT_TT_PRECIS, CLIP_TT_ALWAYS, ANTIALIASED_QUALITY,
 			DEFAULT_PITCH, _T("·s²Ó©úÅé"));
 	//
+	// register class of status window.
+	//
+	wc.cbSize         = sizeof(WNDCLASSEX);
+	wc.style          = CS_OVIME | CS_IME;
+	wc.lpfnWndProc    = StatusWndProc;
+	wc.cbClsExtra     = 0;
+	wc.cbWndExtra     = UICHILDEXTRASIZE;
+	wc.hInstance      = hInstance;
+	wc.hCursor        = LoadCursor( NULL, IDC_ARROW );
+	wc.hIcon          = NULL;
+	wc.lpszMenuName   = (LPTSTR)NULL;
+	wc.lpszClassName  = UISTATUSCLASSNAME;
+	wc.hbrBackground  = NULL;
+	wc.hIconSm        = NULL;
+
+	if( !RegisterClassEx( (LPWNDCLASSEX)&wc ) )
+		return FALSE;
+	//
 	// register class of composition window.
 	//
 	wc.cbSize         = sizeof(WNDCLASSEX);
@@ -55,9 +73,23 @@ BOOL IMERegisterClass( HINSTANCE hInstance )
 
 BOOL IMEUnRegisterClass( HINSTANCE hInstance )
 {
+	UnregisterClass(UISTATUSCLASSNAME, hInstance);
 	UnregisterClass(UICOMPCLASSNAME, hInstance);
 	UnregisterClass(UICANDCLASSNAME, hInstance);
+	for(int i = 0; i < IC.size(); i++)
+		free(IC.at(i));
+	CurrentIC = 0;
 	return TRUE;
+}
+
+void UIPushInputMethod( LPTSTR lpStr )
+{
+	IC.push_back(_tcsdup(lpStr));
+}
+
+int UICurrentInputMethod()
+{
+	return CurrentIC;
 }
 
 void DrawUIBorder( LPRECT lprc )
