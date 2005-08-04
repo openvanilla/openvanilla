@@ -22,7 +22,7 @@
 				AdditionalIncludeDirectories=".\;..\OVDummyLoader\;..\OVIMEUI\Headers;..\..\..\Headers"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="FALSE"
-				MinimalRebuild="FALSE"
+				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				BufferSecurityCheck="FALSE"

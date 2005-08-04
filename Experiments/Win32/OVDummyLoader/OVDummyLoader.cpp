@@ -14,6 +14,9 @@
 #include "OVLibrary.h"
 #include "OVCandidateList.h"
 #include "iconv.h"
+
+#include <exception>
+
 extern "C" {
 #include "ltdl.h"
 }
@@ -206,6 +209,7 @@ DummyDictionary dict;
 std::vector<OVInputMethodContext*> ctx_vector;
 int inited=0;
 std::vector<OVModule*> mod_vector;
+std::vector<bool> startedCtxVector;	// 這是很浪費的作法 orz
 
 typedef OVModule* (*TypeGetModule)(int);
 typedef int (*TypeInitLibrary)(OVService*, const char*);
@@ -324,17 +328,39 @@ void init() {
     lt_dlsetsearchpath(OV_MODULEDIR);
 
     int size = scan_ov_modules();
-    ctx_vector.assign(size, static_cast<OVInputMethodContext*>(NULL));
+    //ctx_vector.assign(size, static_cast<OVInputMethodContext*>(NULL));
     fprintf(stderr, "INIT\n");
+	vector<OVModule*>::iterator iter;
+	for(iter = mod_vector.begin(); iter != mod_vector.end(); ++iter) {
+	    OVInputMethod *im = reinterpret_cast<OVInputMethod*>((*iter));
+		im->initialize(&dict, &srv, OV_MODULEDIR);
+
+		bool isOVInputMethod = true;
+		OVInputMethodContext* ctx;
+		try {
+			ctx = im->newContext();
+		}
+		catch(...) {
+			isOVInputMethod = false;
+		}
+		if(isOVInputMethod)
+			ctx_vector.push_back(ctx);
+		else
+			ctx_vector.push_back(static_cast<OVInputMethodContext*>(NULL));
+		startedCtxVector.push_back(false);
+	}
+
     inited=1;
 }
 
+/*
 void initContext(int n) {
     OVInputMethod *im = reinterpret_cast<OVInputMethod*>(mod_vector[n]);
     im->initialize(&dict, &srv, OV_MODULEDIR);
     murmur("InitContext %s", im->localizedName("zh_TW"));
     ctx_vector.at(n) = im->newContext();
 }
+*/
 
 void exit() {
 	lt_dlexit();
@@ -347,12 +373,23 @@ extern "C" {
 	int KeyEvent(int n, int c, char *s) {
 		if (!inited) init();
 
-		DummyKeyCode kc(c);
-		if( n > ctx_vector.size() - 1) n = ctx_vector.size() - 1;
+		DummyKeyCode kc(c);		
+		//if( n > ctx_vector.size() - 1) n = ctx_vector.size() - 1;
+		int ctxVectorNum = static_cast<int>(ctx_vector.size()) - 1;
+		if(n > ctxVectorNum) return 0;
+		/*
 		if(ctx_vector.at(n) == NULL)
 			initContext(n);
-		int st=ctx_vector.at(n)->keyEvent(&kc, &buf, &candi, &srv);
-
+		*/
+		int st = 1;
+		if(!startedCtxVector[n]) {
+			ctx_vector[n]->start(&buf, &candi, &srv);
+			startedCtxVector[n] = true;
+		}
+		try {
+			st =ctx_vector[n]->keyEvent(&kc, &buf, &candi, &srv);
+		}
+		catch (...) {}
 		string ac=candi.action+buf.action;
 		if (st) ac += "processed"; else ac+="unprocessed";
 		strcpy(s, ac.c_str());
@@ -364,7 +401,8 @@ extern "C" {
 	int ModuleName(int i, char *str)
 	{
 		string s;
-		if( i > mod_vector.size() - 1) {
+		int modVectorNum = static_cast<int>(mod_vector.size()) - 1;
+		if(i > modVectorNum) {
 			strcpy(str, "");
 			return 0;
 		}
