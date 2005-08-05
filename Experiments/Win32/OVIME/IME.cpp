@@ -116,6 +116,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	LPMYPRIVATE lpMyPrivate;
 	BOOL RetVal = TRUE;
 	BOOL fOpen;
+	int spec;
 	static BOOL fPressOther = FALSE;
 	static BOOL fFirst = TRUE;
 	int k;
@@ -159,22 +160,17 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 
 	if(fFirst) fFirst = FALSE;
 
-	// 暫時不理會 KeyUP
-//	if (lpbKeyState[uVKey] & 0x8000)
-//		return 0;
-//	if (lKeyData & 0x80000000)
-//		return FALSE;
-
 	lpCompStr = (LPCOMPOSITIONSTRING)ImmLockIMCC(lpIMC->hCompStr);
 	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-
-//	uNumTranKey = 0;
 
 	if (_tcslen(GETLPCOMPSTR(lpCompStr)) == 0)
 		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);
 	k = LOWORD(uVKey);
 	if( k >= 65 && k <= 90)
 		k = k + 32;
+	WORD out[2];
+	spec = ToAscii(uVKey, MapVirtualKey(uVKey, 0), lpbKeyState, (LPWORD)&out, 0);
+	DebugLog("KEY: %c\n", out[0]);
 	switch(LOWORD(uVKey))
 	{
 	case VK_PRIOR: // pageup
@@ -204,47 +200,14 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	case VK_DELETE:
 		k = 127;
 		break;
-	case 189: // -
-		k = 45;
-		break;
-	case 0xba: // ;
-		k = ';';
-		break;
-	case 0xc0: // `
-		k = '`';
-		break;
-	case 0xbc: // ,
-		k = ',';
-		break;
-	case 0xbe: // .
-		k = '.';
-		break;
-	case 0xbf: // /
-		k = '/';
-		break;
-	case 0xdc:
-		k = '\\';
-		break;
-	case 0xde: // '
-		k = '\'';
-		break;
-	case 0xdb: // [
-		k = '[';
-		break;
-	case 0xdd: // ]
-		k = ']';
-		break;
-	case 0xbb: // =
-		k = '=';
-		break;
-	case 'Q':
-		k = 'q';
 	default:
-		DebugLog("uVKey: %x\n", (void*)LOWORD(uVKey));
+		DebugLog("uVKey: %x, %c\n", LOWORD(uVKey), LOWORD(uVKey));
 	}
 	
 	memset(str, 0, 1024);
-	rlen = KeyEvent(UICurrentInputMethod(), tolower(k), str);
+	if(spec == 1)
+		k = (char)out[0];
+	rlen = KeyEvent(UICurrentInputMethod(), k, str);
 	int n = 0;
 	int ln = 0;
 	DebugLog("str: %s", str);

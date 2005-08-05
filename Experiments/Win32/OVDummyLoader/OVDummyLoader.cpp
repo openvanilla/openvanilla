@@ -9,6 +9,7 @@
 #include <sys/types.h>
 #include <windows.h>
 #include <vector>
+#include <algorithm>
 #include "OpenVanilla.h"
 #include "OVUtility.h"
 #include "OVLibrary.h"
@@ -73,7 +74,7 @@ class DummyKeyCode : public OVKeyCode  {
 public:
     DummyKeyCode (int p=0)          { chr=p; shift=capslock=ctrl=alt=0; }
     virtual int code()              { return chr; }
-    virtual int isShift()           { return shift; }
+    virtual int isShift()           { return chr < 0; }
     virtual int isCapslock()        { return capslock; }
     virtual int isCtrl()            { return ctrl; }
     virtual int isAlt()             { return alt; }
@@ -366,9 +367,32 @@ void exit() {
 	lt_dlexit();
 }
 
+struct DeleteObject {
+	template<typename T>
+		void operator()(const T* ptr) const
+		{
+			if(ptr != static_cast<T*>(NULL))
+				delete ptr;
+		}
+};
+/*
+template<typename T>
+void DeleteObject(const T* ptr)
+{
+	if(ptr != static_cast<T*>(NULL))
+		delete ptr;
+}
+*/
+
 extern "C" {
-	void LoaderInit() {
+	void InitLoader() {
 		if (!inited) init();
+	}
+	void ShutdownLoader() {
+		for_each(ctx_vector.begin(), ctx_vector.end(), DeleteObject);
+		ctx_vector.clear();
+		for_each(mod_vector.begin(), mod_vector.end(), DeleteObject);
+		mod_vector.clear();
 	}
 	int KeyEvent(int n, int c, char *s) {
 		if (!inited) init();

@@ -58,7 +58,8 @@ extern "C" {
 	// Param: 1 -> Output
 	// Return: Number of names.
 	int ModuleName(int , char *);
-	void LoaderInit();
+	void InitLoader();
+	void ShutdownLoader();
 }
 #ifdef DEBUG 
     #include <stdarg.h>

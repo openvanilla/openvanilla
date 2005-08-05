@@ -13,7 +13,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		// load UI library
 		char str[1024];
 		LPTSTR decoded;
-		LoaderInit();
+		InitLoader();
 		for(int i = 0;; ++i) {
 			if(ModuleName(i, str)) {
 				decoded = UTF16toWCHAR(str);
@@ -46,6 +46,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		// free UI library
 		UnregisterClass(UICLASSNAME, (HINSTANCE)hModule);
 		IMEUnRegisterClass( (HINSTANCE)hModule );
+		ShutdownLoader();
 		break;
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:
