@@ -93,7 +93,7 @@ void UpdateCandidate(LPINPUTCONTEXT lpIMC, LPTSTR candis)
 
 LPTSTR UTF16toWCHAR(char *str)
 {
-	LPTSTR r = (LPTSTR)malloc(1024 * sizeof(TCHAR));
+	LPTSTR r = (LPTSTR)calloc(1024, sizeof(TCHAR));
 	char tmp[5];
 	int out;
 

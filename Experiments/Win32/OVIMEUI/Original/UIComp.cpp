@@ -64,7 +64,7 @@ void MoveCompWindow(HWND hUIWnd, int X, int Y, LPTSTR lpStr)
 {
 	free(lpCompStr);
 	lpCompStr = _tcsdup(lpStr);
-	if(!_tcscmp(lpStr, _T("")))
+	if(_tcslen(lpStr) <= 0)
 	{
 		HideCompWindow();
 		return;

@@ -112,18 +112,19 @@ public:
 	char tmp[100];
         action += "bufupdate "; 
         action += utf8toutf16(bufstr.c_str());
-        action += " cursprpos ";
+        action += " cursorpos ";
 	sprintf(tmp, "%d", cursorPos);
 	action += string(tmp);
 	action += " markfrom ";
 	sprintf(tmp, "%d", markFrom);
 	action += string(tmp);
-	action += " markTo ";
+	action += " markto ";
 	sprintf(tmp, "%d", markTo);
 	action += string(tmp);
+	action += " ";
         return this;
     }
-    virtual OVBuffer* update(int cursorPos, int markFrom=-1, int markTo=-1) {
+    virtual OVBuffer* update(int cursorPos, int markFrom, int markTo) {
 	    this->cursorPos = cursorPos;
 	    this->markFrom = markFrom;
 	    this->markTo = markTo;

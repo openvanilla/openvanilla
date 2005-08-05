@@ -216,50 +216,35 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	vector<string> delimiterVector;
 	delimiterVector.push_back(" ");
 	OVStringToolKit::splitString(command, commandVector, delimiterVector, false);
-	/*
-	for( int i = 0; i < rlen; i++ )
-	{
-		if(str[i] == ' ' || i == rlen - 1)
-		{
-			int dst = i - 1;
-			if( i == rlen - 1)
-				dst = i + 1;
-			memset(result[n], 0, 100);
-			strncpy(result[n], str+ln, dst - ln + 1);
-			ln = i + 1;
-			n++;
-		}
-	}
-	*/
 
 	LPTSTR decoded = NULL;
 	_tcscpy(lpMyPrivate->CandStr, _T(""));
 	_tcscpy(lpMyPrivate->PreEditStr, _T(""));
-	//for( int j = 0; j < n; j++ )
 	for(vector<string>::iterator j = commandVector.begin();
 		j != commandVector.end();
 		++j)
 	{
-		//char *x = result[j];
 		const char* x = j->c_str();
 		DebugLog("X: %s", x);
 		if(!strcmp(x, "bufclear"))
 		{
 			_tcscpy(lpMyPrivate->PreEditStr, _T(""));
 			MakeCompStr(lpMyPrivate, lpCompStr);
-			MyGenerateMessage(hIMC,
-				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
 		}
 		else if(!strcmp(x, "bufupdate"))
 		{
 			j++;
-			//decoded = UTF16toWCHAR(result[j]);
-			decoded = UTF16toWCHAR(const_cast<char *>(j->c_str()));
+			if(!strcmp(const_cast<char *>(j->c_str()), "cursorpos")) {
+				j--;
+				DebugLog("s: %s", const_cast<char *>(j->c_str()));
+				decoded = _T("");
+			} else {
+				decoded = UTF16toWCHAR(const_cast<char *>(j->c_str()));
+			}
+			DebugLog("sss: %s", const_cast<char *>(j->c_str()));
 
 			_tcscpy(lpMyPrivate->PreEditStr, decoded);
 			MakeCompStr(lpMyPrivate, lpCompStr);
-			MyGenerateMessage(hIMC,
-				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
 			free(decoded);
 		}
 		else if(!strcmp(x, "cursorpos"))
@@ -280,7 +265,6 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		else if(!strcmp(x, "bufsend"))
 		{
 			j++;
-			//decoded = UTF16toWCHAR(result[j]);
 			decoded = UTF16toWCHAR(const_cast<char *>(j->c_str()));
 
 			_tcscpy(GETLPRESULTSTR(lpCompStr),decoded);
@@ -303,7 +287,6 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		else if(!strcmp(x, "candiupdate"))
 		{
 			j++;
-			//decoded = UTF16toWCHAR(result[j]);
 			decoded = UTF16toWCHAR(const_cast<char *>(j->c_str()));
 			_tcscpy(lpMyPrivate->CandStr,decoded);
 			UpdateCandidate(lpIMC, decoded);
@@ -321,22 +304,12 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		else if(!strcmp(x, "unprocessed"))
 		{
 			RetVal = FALSE;
-			/*
-			LPTSTR s = _tcsdup(_T("ORZ"));
-			_stprintf(s, _T("%c"), k);
-			_tcscpy(GETLPRESULTSTR(lpCompStr), s);
-			lpCompStr->dwResultStrLen = _tcslen(s);
-			
-			MyGenerateMessageToTransKey(lpdwTransKey, &uNumTranKey,
-				WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
-			MyGenerateMessageToTransKey(lpdwTransKey, &uNumTranKey,
-				WM_IME_ENDCOMPOSITION, 0, 0);
-			free(s);
-			*/
 		}
 		else if(!strcmp(x, "processed"))
 		{
-
+			RetVal = TRUE;
+			MyGenerateMessage(hIMC,
+				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
 		}
 	}
 
