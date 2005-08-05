@@ -262,6 +262,21 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
 			free(decoded);
 		}
+		else if(!strcmp(x, "cursorpos"))
+		{
+			j++;
+			UISetCursorPos(atoi(const_cast<char*>(j->c_str())));
+		}
+		else if(!strcmp(x, "markfrom"))
+		{
+			j++;
+			UISetMarkFrom(atoi(const_cast<char*>(j->c_str())));
+		}
+		else if(!strcmp(x, "markto"))
+		{
+			j++;
+			UISetMarkTo(atoi(const_cast<char*>(j->c_str())));
+		}
 		else if(!strcmp(x, "bufsend"))
 		{
 			j++;

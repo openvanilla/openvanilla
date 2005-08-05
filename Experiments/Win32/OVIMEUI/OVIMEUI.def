@@ -7,6 +7,9 @@ EXPORTS
 	MoveStatusWindow
 	ShowStatusWindow
 	HideStatusWindow
+	UISetCursorPos
+	UISetMarkFrom
+	UISetMarkTo
 	CreateCompWindow
 	MoveCompWindow
 	ShowCompWindow

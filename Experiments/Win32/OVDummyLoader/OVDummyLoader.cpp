@@ -109,12 +109,24 @@ public:
         return this;
     }
     virtual OVBuffer* update() { 
+	char tmp[100];
         action += "bufupdate "; 
         action += utf8toutf16(bufstr.c_str());
-        action += " ";
+        action += " cursprpos ";
+	sprintf(tmp, "%d", cursorPos);
+	action += string(tmp);
+	action += " markfrom ";
+	sprintf(tmp, "%d", markFrom);
+	action += string(tmp);
+	action += " markTo ";
+	sprintf(tmp, "%d", markTo);
+	action += string(tmp);
         return this;
     }
     virtual OVBuffer* update(int cursorPos, int markFrom=-1, int markTo=-1) {
+	    this->cursorPos = cursorPos;
+	    this->markFrom = markFrom;
+	    this->markTo = markTo;
         return update();
     }
     virtual int isEmpty() {
@@ -123,6 +135,9 @@ public:
 
     string action;
     string bufstr;
+    int cursorPos;
+    int markFrom;
+    int markTo;
 };
 
 class DummyCandidate : public OVCandidate  {

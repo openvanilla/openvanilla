@@ -176,3 +176,15 @@ void HideStatusWindow()
 	if (IsWindow(uiStatus.hWnd))
 		ShowWindow(uiStatus.hWnd, SW_HIDE);
 }
+
+void UISetCursorPos(int i)
+{
+}
+
+void UISetMarkFrom(int i)
+{
+}
+
+void UISetMarkTo(int i)
+{
+}

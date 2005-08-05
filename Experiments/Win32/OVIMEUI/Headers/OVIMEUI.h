@@ -20,6 +20,9 @@ void CreateStatusWindow(HWND);
 void MoveStatusWindow(HWND, int, int);
 void ShowStatusWindow();
 void HideStatusWindow();
+void UISetCursorPos(int);
+void UISetMarkFrom(int);
+void UISetMarkTo(int);
 // UIComp.cpp
 void CreateCompWindow(HWND);
 void MoveCompWindow(HWND, int, int, LPTSTR);
