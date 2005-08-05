@@ -349,21 +349,21 @@ void init() {
     fprintf(stderr, "INIT\n");
 	vector<OVModule*>::iterator iter;
 	for(iter = mod_vector.begin(); iter != mod_vector.end(); ++iter) {
-	    OVInputMethod *im = reinterpret_cast<OVInputMethod*>((*iter));
-		im->initialize(&dict, &srv, OV_MODULEDIR);
-
-		bool isOVInputMethod = true;
-		OVInputMethodContext* ctx;
-		try {
+		if((*iter)->moduleType() == "OVInputMethod")
+		{
+		    OVInputMethod *im = reinterpret_cast<OVInputMethod*>((*iter));
+			im->initialize(&dict, &srv, OV_MODULEDIR);
+			OVInputMethodContext* ctx;
 			ctx = im->newContext();
-		}
-		catch(...) {
-			isOVInputMethod = false;
-		}
-		if(isOVInputMethod)
 			ctx_vector.push_back(ctx);
+		}
 		else
+		{
+			// 以後可以不用浪費空間擺不是 OVInputMethod 的東西，
+			// 取而代之的是加入 OVOutputFilter 的處理。
 			ctx_vector.push_back(static_cast<OVInputMethodContext*>(NULL));
+		}
+
 		startedCtxVector.push_back(false);
 	}
 
