@@ -349,7 +349,7 @@ void init() {
     fprintf(stderr, "INIT\n");
 	vector<OVModule*>::iterator iter;
 	for(iter = mod_vector.begin(); iter != mod_vector.end(); ++iter) {
-		if((*iter)->moduleType() == "OVInputMethod")
+		if(!strcmp((*iter)->moduleType(), "OVInputMethod"))
 		{
 		    OVInputMethod *im = reinterpret_cast<OVInputMethod*>((*iter));
 			im->initialize(&dict, &srv, OV_MODULEDIR);
@@ -422,7 +422,7 @@ extern "C" {
 			initContext(n);
 		*/
 		int st = 1;
-		if(!startedCtxVector[n]) {
+		if(ctx_vector[n] && !startedCtxVector[n]) {
 			ctx_vector[n]->start(&buf, &candi, &srv);
 			startedCtxVector[n] = true;
 		}
