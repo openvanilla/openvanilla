@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "PCMan.h"
 
+#define		ITEMS_PER_ROW	4
+
 LRESULT APIENTRY CandWndProc(HWND hWnd, 
 		UINT msg, 
 		WPARAM wParam, 
@@ -38,10 +40,7 @@ void UICreateCandWindow(HWND hUIWnd)
 {
 	if (!IsWindow(uiCand.hWnd))
 	{
-		HDC hDC;
-		HFONT oldFont;
-		TCHAR szStr[100];
-		SIZE sz;
+		SIZE sz;	sz.cx = sz.cy = 0;
 
 		uiCand.hWnd = 
 			CreateWindowEx(0, UICANDCLASSNAME ,NULL,
@@ -49,21 +48,14 @@ void UICreateCandWindow(HWND hUIWnd)
 					0, 0, 1, 1, hUIWnd,NULL,hInst,NULL);
 		SetWindowLong(uiCand.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
 
-		hDC = GetDC(uiCand.hWnd);
-		oldFont = (HFONT)SelectObject(hDC, hUIFont);
-
-		_stprintf(szStr,_T("<< 1代琌 2代琌 3代琌 4代琌 5代琌 6代琌 7代琌 8代琌 9代琌 0代琌 >>"));
-		GetTextExtentPoint32(hDC, szStr, _tcslen(szStr), &sz);
-
-		SelectObject(hDC, oldFont);
-		ReleaseDC(uiCand.hWnd,hDC);
-
 		uiCand.sz.cx = sz.cx + 2;
 		uiCand.sz.cy = sz.cy + 4;
 	}
 	ShowWindow(uiCand.hWnd, SW_HIDE);
 	return;
 }
+
+int CompIndexToXPos( int i );
 
 BOOL GetCandPosFromCompWnd(LPSIZE lpsz)
 {
@@ -76,6 +68,12 @@ BOOL GetCandPosFromCompWnd(LPSIZE lpsz)
 
 		pt.x = rc.left;
 		pt.y = rc.bottom + 2;
+
+		pt.x += CompIndexToXPos( CompCursorPos );
+		GetWindowRect(uiCand.hWnd, &rc);
+		pt.x -= 16;
+		if( pt.x < 0 )
+			pt.x = 0;
 
 		SystemParametersInfo(SPI_GETWORKAREA,
 				0,
@@ -96,8 +94,9 @@ BOOL GetCandPosFromCompWnd(LPSIZE lpsz)
 void UIMoveCandWindow(HWND hUIWnd, LPTSTR lpStr)
 {
 	free(lpCandStr);
+	numCand = 0;
 	lpCandStr = _tcsdup(lpStr);
-	if(!_tcscmp(lpStr, _T("")))
+	if( !*lpStr )
 	{
 		UIHideCandWindow();
 		return;
@@ -106,41 +105,77 @@ void UIMoveCandWindow(HWND hUIWnd, LPTSTR lpStr)
 	if (!IsWindow(uiCand.hWnd))
 		UICreateCandWindow(hUIWnd);
 
+	// FIXME: UIMoveCandWindow will be called twice almost at the same time.
+	// The first call cause some problems.
+	// This should be fixed in the future.
+	// It's impossible to have lpStr != NULL and lpCompStr ==NULL.
+	// Since there is no composition string, is candidate window needed?
+	if( !lpCompStr || !*lpCompStr )
+		return;
+
 	if (IsWindow(uiCand.hWnd))
 	{
 		HDC hDC;
 		HFONT oldFont;
 		SIZE sz;
+		SIZE candsz;
 
 		sz.cx = 0;
 		sz.cy = 0;
 
-		// ⊿Τ Cand
+		// No Cand
 		if(lpStr == NULL) {
 			ShowWindow(uiCand.hWnd, SW_HIDE);
 			return;
 		}
 		hDC = GetDC(uiCand.hWnd);
 		oldFont = (HFONT)SelectObject(hDC, hUIFont);
-		GetTextExtentPoint32(hDC, lpStr, _tcslen(lpStr), &sz);
+
+		LPCTSTR cand = _tcstok( lpCandStr, _T(" "));	// strtok, delimited by space
+
+		int num = 0;
+		int width = 0;
+		while( cand )
+		{
+			++numCand;
+			int len = _tcslen( cand );
+			GetTextExtentPoint32(hDC, cand, len, &candsz);
+			candsz.cx += 4;
+			candsz.cy += 2;
+			width += candsz.cx;
+			++num;
+			if( num >= ITEMS_PER_ROW )
+			{
+				sz.cy += candsz.cy;
+				if( width > sz.cx )
+					sz.cx = width;
+				width = 0;
+				num = 0;
+			}
+			cand = _tcstok( NULL, _T(" ") );
+		}
+		if( width > sz.cx )
+			sz.cx = width;
+		if( num > 0 && num < ITEMS_PER_ROW )
+			sz.cy += candsz.cy;
+
+		sz.cy += 2;
+		sz.cx += 2;
+
 		SelectObject(hDC, oldFont);
 		ReleaseDC(uiCand.hWnd,hDC);
-		if(_tcslen(lpStr))
-			sz.cx += 3 * sz.cx / _tcslen(lpStr);
-		if(sz.cx < uiCand.sz.cx)
-			sz.cx = uiCand.sz.cx;
-		sz.cy = uiCand.sz.cy;
 
-		GetCandPosFromCompWnd(&sz);
-
-		MoveWindow(uiCand.hWnd,
+		if( GetCandPosFromCompWnd(&sz) )
+		{
+			MoveWindow(uiCand.hWnd,
 				uiCand.pt.x,
 				uiCand.pt.y,
 				sz.cx,
 				sz.cy,
 				TRUE);
-		ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
-		InvalidateRect(uiCand.hWnd, NULL, FALSE);
+			ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
+			InvalidateRect(uiCand.hWnd, NULL, FALSE);
+		}
 	}
 }
 
@@ -161,10 +196,43 @@ void PaintCandWindow(HWND hCandWnd)
 	{
 		SetTextColor( hDC, GetSysColor( COLOR_WINDOWTEXT ) );
 		SetBkColor( hDC, GetSysColor( COLOR_WINDOW ) );
-		ExtTextOut( hDC, 1, 1, ETO_OPAQUE, &rc, lpCandStr, 
-			lstrlen(lpCandStr), NULL);
+
+		RECT cand_rc;	cand_rc.left = 1;	cand_rc.top = 1;
+		LPCTSTR cand = lpCandStr;
+		int num = 0;
+		for( int i = 0; i < numCand; ++i )
+		{
+			++num;
+			int len = _tcslen( cand );
+			SIZE candsz;
+			GetTextExtentPoint32(hDC, cand, len, &candsz);
+			candsz.cx += 4;
+			candsz.cy += 2;
+
+			cand_rc.right = cand_rc.left + candsz.cx;
+			cand_rc.bottom = cand_rc.top + candsz.cy;
+
+			if( (i + 1) == numCand )
+				SetTextColor( hDC, RGB(0, 0, 192) );
+
+			ExtTextOut( hDC, cand_rc.left + 2, cand_rc.top, ETO_OPAQUE, &cand_rc, cand, 
+				len, NULL);
+
+			if( num >= ITEMS_PER_ROW && (i + 1) < numCand )
+			{
+				cand_rc.left = 1;
+				cand_rc.top += candsz.cy;
+				num = 0;
+			}
+			else
+				cand_rc.left = cand_rc.right;
+			cand = cand + _tcslen(cand) + 1;
+		}
+		cand_rc.left = cand_rc.right;
+		cand_rc.right = rc.right;
+		ExtTextOut( hDC, cand_rc.left, cand_rc.top, ETO_OPAQUE, &cand_rc, NULL, 0, NULL);
 	}
-	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_3DFACE), GetSysColor(COLOR_3DDKSHADOW));
+	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_3DFACE), 0/*GetSysColor(COLOR_3DDKSHADOW)*/);
 	SelectObject(hDC, oldFont);
 	EndPaint(hCandWnd,&ps);
 }

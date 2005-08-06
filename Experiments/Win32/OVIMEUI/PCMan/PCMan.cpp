@@ -2,6 +2,10 @@
 #include "PCMan.h"
 #include "resource.h"
 
+#ifndef	CS_DROPSHADOW
+	#define	CS_DROPSHADOW	0x00020000
+#endif
+
 BOOL IMEUIRegisterClass( HINSTANCE hInstance )
 {
 	WNDCLASSEX wc;
@@ -20,7 +24,7 @@ BOOL IMEUIRegisterClass( HINSTANCE hInstance )
 	// register class of status window.
 	//
 	wc.cbSize         = sizeof(WNDCLASSEX);
-	wc.style          = CS_OVIME | CS_IME;
+	wc.style          = CS_OVIME | CS_IME | CS_DROPSHADOW;
 	wc.lpfnWndProc    = StatusWndProc;
 	wc.cbClsExtra     = 0;
 	wc.cbWndExtra     = UICHILDEXTRASIZE;
@@ -38,7 +42,7 @@ BOOL IMEUIRegisterClass( HINSTANCE hInstance )
 	// register class of composition window.
 	//
 	wc.cbSize         = sizeof(WNDCLASSEX);
-	wc.style          = CS_OVIME | CS_IME;
+	wc.style          = CS_OVIME | CS_IME | CS_DROPSHADOW;
 	wc.lpfnWndProc    = CompWndProc;
 	wc.cbClsExtra     = 0;
 	wc.cbWndExtra     = UICHILDEXTRASIZE;
@@ -57,7 +61,7 @@ BOOL IMEUIRegisterClass( HINSTANCE hInstance )
 	// register class of candadate window.
 	//
 	wc.cbSize         = sizeof(WNDCLASSEX);
-	wc.style          = CS_OVIME | CS_IME;
+	wc.style          = CS_OVIME | CS_IME | CS_DROPSHADOW;
 	wc.lpfnWndProc    = CandWndProc;
 	wc.cbClsExtra     = 0;
 	wc.cbWndExtra     = UICHILDEXTRASIZE;

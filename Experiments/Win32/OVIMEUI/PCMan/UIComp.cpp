@@ -96,8 +96,9 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, LPTSTR lpStr)
 			GetTextExtentPoint(hDC, lpCompStr, _tcslen(lpCompStr), &sz);
 			SelectObject(hDC, oldFont);
 			ReleaseDC(uiComp.hWnd, hDC);
-			if(_tcslen(lpCompStr))
-				sz.cx += 2 * sz.cx / _tcslen(lpCompStr);
+			if( *lpCompStr )
+				sz.cx += 4;
+//				sz.cx += 2 * sz.cx / _tcslen(lpCompStr);
 		}
 		else
 		{
@@ -105,8 +106,8 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, LPTSTR lpStr)
 			return;
 		}
 
-		if(sz.cx < uiComp.sz.cx)
-			sz.cx = uiComp.sz.cx;
+//		if(sz.cx < uiComp.sz.cx)
+//			sz.cx = uiComp.sz.cx;
 
 		sz.cy = uiComp.sz.cy;
 		sz.cx += 2;
@@ -191,7 +192,7 @@ void PaintCompWindow(HWND hCompWnd)
 	}
 
 	InflateRect( &rc, 1, 1 );
-	Draw3DBorder( memdc, &rc, GetSysColor(COLOR_3DFACE), GetSysColor(COLOR_3DDKSHADOW));
+	Draw3DBorder( memdc, &rc, GetSysColor(COLOR_3DFACE), 0/*GetSysColor(COLOR_3DDKSHADOW)*/);
 
 	BitBlt( hDC, ps.rcPaint.left, ps.rcPaint.top, 
 		(ps.rcPaint.right-ps.rcPaint.left), 

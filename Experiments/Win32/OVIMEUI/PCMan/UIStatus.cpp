@@ -2,6 +2,24 @@
 #include "PCMan.h"
 #include "resource.h"
 
+//	SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
+//  This standard toolbar message provided by Windows has some known bugs.
+//  So I implemented a new function myself to prevent the problem.
+void GetToolbarSize(HWND toolbar, SIZE *sz)
+{
+	sz->cx = sz->cy = 0;
+	int c = SendMessage( toolbar, TB_BUTTONCOUNT, 0, 0);
+	for( int i = 0; i < c ; ++i )
+	{
+		RECT itemrc;
+		SendMessage( toolbar, TB_GETITEMRECT, i, LPARAM(&itemrc));
+		sz->cx += (itemrc.right - itemrc.left);
+		itemrc.bottom -= itemrc.top;
+		if( itemrc.bottom > sz->cy )
+			sz->cy = itemrc.bottom;
+	}
+}
+
 LRESULT APIENTRY StatusWndProc(HWND hWnd,
 		UINT msg,
 		WPARAM wParam,
@@ -61,7 +79,7 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 			{
 				int cx = LOWORD(lParam);
 				int cy = HIWORD(lParam);
-				MoveWindow( hToolbar, 12, 1, cx-13, cy-2, TRUE);
+				MoveWindow( hToolbar, 12, 2, cx-13, cy-4, TRUE);
 			}
 			break;
 		case WM_COMMAND:
@@ -71,7 +89,7 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 			case ID_CHANGE_IME:
 				{
 					RECT rc;
-					SendMessage( hToolbar, TB_GETRECT, ID_CHANGE_IME, LPARAM(&rc) );
+					SendMessage( hToolbar, TB_GETITEMRECT, 0, LPARAM(&rc) );
 					MapWindowPoints( hToolbar, HWND_DESKTOP, LPPOINT(&rc), 2 );
 					CheckMenuItem( hIMESelMenu, ID_IME_LIST_FIRST + CurrentIC, MF_CHECKED );
 					TrackPopupMenu( hIMESelMenu, TPM_LEFTALIGN, rc.left, rc.bottom, 0, hWnd, NULL);
@@ -112,7 +130,9 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 					SendMessage( hToolbar, TB_SETBUTTONINFO, ID_CHANGE_IME, LPARAM(&tbi));
 
 					SIZE sz;
-					SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
+//					SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
+					GetToolbarSize( hToolbar, &sz );
+
 					uiStatus.sz.cx = sz.cx + 14;
 					uiStatus.sz.cy = sz.cy + 4;
 					RECT rc;
@@ -152,7 +172,7 @@ void UICreateStatusWindow(HWND hUIWnd)
 		SetWindowLong(uiStatus.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
 
 		hToolbar = CreateToolbarEx( uiStatus.hWnd, 
-			TBSTYLE_TOOLTIPS|TBSTYLE_LIST|CCS_NODIVIDER|CCS_NORESIZE|
+			TBSTYLE_FLAT|TBSTYLE_TOOLTIPS|TBSTYLE_LIST|CCS_NODIVIDER|CCS_NORESIZE|
 			WS_CHILD|WS_VISIBLE|CCS_NOPARENTALIGN, 
 			10, 3, hInstDLL, IDB_STATUS_TB, 
 			toolbar_btns, sizeof(toolbar_btns)/sizeof(TBBUTTON), 
@@ -165,7 +185,8 @@ void UICreateStatusWindow(HWND hUIWnd)
 		tbi.dwMask = TBIF_TEXT;		tbi.pszText = IC.at(CurrentIC);
 
 		SendMessage( hToolbar, TB_SETBUTTONINFO, ID_CHANGE_IME, LPARAM(&tbi));
-		SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
+//		SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
+		GetToolbarSize( hToolbar, &sz );
 
 		uiStatus.sz.cx = sz.cx + 14;
 		uiStatus.sz.cy = sz.cy + 4;
@@ -235,9 +256,9 @@ void PaintStatusWindow(HWND hStatusWnd)
 
 	FillSolidRect( hDC, &rc, GetSysColor(COLOR_BTNFACE));
 
-	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_BTNHILIGHT), GetSysColor(COLOR_BTNSHADOW));
+	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_BTNHILIGHT), 0/*GetSysColor(COLOR_BTNSHADOW)*/);
 
-	InflateRect( &rc, -2, -2 );
+	InflateRect( &rc, -3, -3 );
 	rc.left++;
 	rc.right = rc.left + 3;
 	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_BTNHILIGHT), GetSysColor(COLOR_BTNSHADOW));

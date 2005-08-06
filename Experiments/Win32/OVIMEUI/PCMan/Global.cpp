@@ -4,6 +4,7 @@ HFONT hUIFont;
 HINSTANCE hInst;
 HINSTANCE hInstDLL;
 LPTSTR lpCandStr;
+int numCand;
 LPTSTR lpCompStr;
 int CompCursorPos;
 int CompSelStart;

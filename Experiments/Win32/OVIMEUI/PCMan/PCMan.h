@@ -41,6 +41,7 @@ extern HMENU hIMESelMenu;
 extern HINSTANCE hInst;
 extern HINSTANCE hInstDLL;
 extern LPTSTR lpCandStr;
+extern int numCand;
 extern LPTSTR lpCompStr;
 extern int CompCursorPos;
 extern int CompSelStart;

@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by OVIMEUI.rc
+// Used by PCMan.rc
 //
 #define ID_STATUS_TOOLBAR               4
 #define IDI_MAINICON                    6
