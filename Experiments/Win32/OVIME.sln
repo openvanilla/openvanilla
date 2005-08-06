@@ -16,6 +16,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMGenericSQLite", "Module
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMGeneric", "Modules\OVIMGeneric\OVIMGeneric.vcproj", "{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -38,6 +42,10 @@ Global
 		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Debug.Build.0 = Debug|Win32
 		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Release.ActiveCfg = Release|Win32
 		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Release.Build.0 = Release|Win32
+		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Debug.ActiveCfg = Debug|Win32
+		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Debug.Build.0 = Debug|Win32
+		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Release.ActiveCfg = Release|Win32
+		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
