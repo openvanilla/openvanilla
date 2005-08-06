@@ -96,7 +96,7 @@
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ResourceOnlyDLL="TRUE"
+				ResourceOnlyDLL="FALSE"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"
