@@ -16,6 +16,8 @@
 #include "OVCandidateList.h"
 #include "iconv.h"
 
+#include "DOVDictionary.h"
+
 #include <exception>
 
 extern "C" {
@@ -124,7 +126,7 @@ public:
 	action += " ";
         return this;
     }
-    virtual OVBuffer* update(int cursorPos, int markFrom, int markTo) {
+    virtual OVBuffer* update(int cursorPos, int markFrom=-1, int markTo=-1) {
 	    this->cursorPos = cursorPos;
 	    this->markFrom = markFrom;
 	    this->markTo = markTo;
@@ -176,17 +178,6 @@ protected:
     int onscreen;
 };
 
-class DummyDictionary : public OVDictionary {
-public:
-    virtual int keyExist(const char *key) { return 0; }
-    virtual int getInteger(const char *key) { return 0; }
-    virtual int setInteger(const char *key, int value) { return value; }
-    virtual const char* getString(const char *key) { return "123456789"; }
-    virtual const char* setString(const char *key, const char *value) {
-        return value;
-    }
-};
-
 class DummyService : public OVService {
 public:
     virtual void beep() {}
@@ -222,7 +213,6 @@ private:
 DummyService srv;
 DummyCandidate candi;
 DummyBuffer buf;
-DummyDictionary dict;
 std::vector<OVInputMethodContext*> ctx_vector;
 int inited=0;
 std::vector<OVModule*> mod_vector;
@@ -351,8 +341,8 @@ void init() {
 	for(iter = mod_vector.begin(); iter != mod_vector.end(); ++iter) {
 		if(!strcmp((*iter)->moduleType(), "OVInputMethod"))
 		{
-		    OVInputMethod *im = reinterpret_cast<OVInputMethod*>((*iter));
-			im->initialize(&dict, &srv, OV_MODULEDIR);
+			OVInputMethod *im = reinterpret_cast<OVInputMethod*>((*iter));
+			im->initialize(new DummyDictionary(OV_MODULEDIR, im->identifier()), &srv, OV_MODULEDIR);
 			OVInputMethodContext* ctx;
 			ctx = im->newContext();
 			ctx_vector.push_back(ctx);
