@@ -34,7 +34,7 @@ LRESULT APIENTRY CandWndProc(HWND hWnd,
 	return 0L;
 }
 
-void CreateCandWindow(HWND hUIWnd)
+void UICreateCandWindow(HWND hUIWnd)
 {
 	if (!IsWindow(uiCand.hWnd))
 	{
@@ -93,18 +93,18 @@ BOOL GetCandPosFromCompWnd(LPSIZE lpsz)
 	return FALSE;
 }
 
-void MoveCandWindow(HWND hUIWnd, LPTSTR lpStr)
+void UIMoveCandWindow(HWND hUIWnd, LPTSTR lpStr)
 {
 	free(lpCandStr);
 	lpCandStr = _tcsdup(lpStr);
 	if(!_tcscmp(lpStr, _T("")))
 	{
-		HideCandWindow();
+		UIHideCandWindow();
 		return;
 	}
 
 	if (!IsWindow(uiCand.hWnd))
-		CreateCandWindow(hUIWnd);
+		UICreateCandWindow(hUIWnd);
 
 	if (IsWindow(uiCand.hWnd))
 	{
@@ -198,13 +198,13 @@ void PaintCandWindow(HWND hCandWnd)
 	EndPaint(hCandWnd,&ps);
 }
 
-void ShowCandWindow()
+void UIShowCandWindow()
 {
 	if (IsWindow(uiCand.hWnd))
 		ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
 }
 
-void HideCandWindow()
+void UIHideCandWindow()
 {
 	if (IsWindow(uiCand.hWnd))
 		ShowWindow(uiCand.hWnd, SW_HIDE);

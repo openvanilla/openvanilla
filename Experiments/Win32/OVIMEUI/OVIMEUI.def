@@ -1,20 +1,20 @@
 EXPORTS
-	IMERegisterClass
-	IMEUnRegisterClass
+	IMEUIRegisterClass
+	IMEUIUnRegisterClass
 	UIPushInputMethod
 	UICurrentInputMethod
-	CreateStatusWindow
-	MoveStatusWindow
-	ShowStatusWindow
-	HideStatusWindow
+	UICreateStatusWindow
+	UIMoveStatusWindow
+	UIShowStatusWindow
+	UIHideStatusWindow
 	UISetCursorPos
 	UISetMarkFrom
 	UISetMarkTo
-	CreateCompWindow
-	MoveCompWindow
-	ShowCompWindow
-	HideCompWindow
-	CreateCandWindow
-	MoveCandWindow
-	ShowCandWindow
-	HideCandWindow
+	UICreateCompWindow
+	UIMoveCompWindow
+	UIShowCompWindow
+	UIHideCompWindow
+	UICreateCandWindow
+	UIMoveCandWindow
+	UIShowCandWindow
+	UIHideCandWindow

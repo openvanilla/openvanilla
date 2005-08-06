@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "Original.h"
 
-BOOL IMERegisterClass( HINSTANCE hInstance )
+BOOL IMEUIRegisterClass( HINSTANCE hInstance )
 {
 	WNDCLASSEX wc;
 	//
@@ -71,7 +71,7 @@ BOOL IMERegisterClass( HINSTANCE hInstance )
 	return TRUE;
 }
 
-BOOL IMEUnRegisterClass( HINSTANCE hInstance )
+BOOL IMEUIUnRegisterClass( HINSTANCE hInstance )
 {
 	UnregisterClass(UISTATUSCLASSNAME, hInstance);
 	UnregisterClass(UICOMPCLASSNAME, hInstance);

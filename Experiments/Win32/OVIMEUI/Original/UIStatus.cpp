@@ -39,7 +39,7 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 	return 0;
 }
 
-void CreateStatusWindow(HWND hUIWnd)
+void UICreateStatusWindow(HWND hUIWnd)
 {
 	if (!IsWindow(uiStatus.hWnd))
 	{
@@ -64,14 +64,14 @@ void CreateStatusWindow(HWND hUIWnd)
 		uiStatus.sz.cx = sz.cx;
 		uiStatus.sz.cy = sz.cy+4;
 	}
-	HideStatusWindow();
+	UIHideStatusWindow();
 	return;
 }
 
-void MoveStatusWindow(HWND hUIWnd, int X, int Y)
+void UIMoveStatusWindow(HWND hUIWnd, int X, int Y)
 {
 	if (!IsWindow(uiStatus.hWnd))
-		CreateStatusWindow(hUIWnd);
+		UICreateStatusWindow(hUIWnd);
 
 	if (IsWindow(uiStatus.hWnd))
 	{
@@ -165,13 +165,13 @@ void PaintStatusWindow(HWND hStatusWnd)
 	EndPaint(hStatusWnd,&ps);
 }
 
-void ShowStatusWindow()
+void UIShowStatusWindow()
 {
 	if (IsWindow(uiStatus.hWnd))
 		ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
 }
 
-void HideStatusWindow()
+void UIHideStatusWindow()
 {
 	if (IsWindow(uiStatus.hWnd))
 		ShowWindow(uiStatus.hWnd, SW_HIDE);

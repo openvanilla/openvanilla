@@ -37,7 +37,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		wc.lpszClassName	= UICLASSNAME;
 		wc.hbrBackground	= NULL;
 		wc.hIconSm			= NULL;
-		IMERegisterClass( (HINSTANCE)hInst );
+		IMEUIRegisterClass( (HINSTANCE)hInst );
 		if( !RegisterClassEx( (LPWNDCLASSEX)&wc ) )
 		  return FALSE;
 
@@ -45,7 +45,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 	case DLL_PROCESS_DETACH:
 		// free UI library
 		UnregisterClass(UICLASSNAME, (HINSTANCE)hModule);
-		IMEUnRegisterClass( (HINSTANCE)hModule );
+		IMEUIUnRegisterClass( (HINSTANCE)hModule );
 		ShutdownLoader();
 		break;
 	case DLL_THREAD_ATTACH:

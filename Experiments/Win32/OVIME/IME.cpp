@@ -236,12 +236,10 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 			j++;
 			if(!strcmp(const_cast<char *>(j->c_str()), "cursorpos")) {
 				j--;
-				DebugLog("s: %s", const_cast<char *>(j->c_str()));
 				decoded = _T("");
 			} else {
 				decoded = UTF16toWCHAR(const_cast<char *>(j->c_str()));
 			}
-			DebugLog("sss: %s", const_cast<char *>(j->c_str()));
 
 			_tcscpy(lpMyPrivate->PreEditStr, decoded);
 			MakeCompStr(lpMyPrivate, lpCompStr);
@@ -251,6 +249,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		{
 			j++;
 			UISetCursorPos(atoi(const_cast<char*>(j->c_str())));
+			DebugLog("Pos %d", atoi(const_cast<char*>(j->c_str())));
 		}
 		else if(!strcmp(x, "markfrom"))
 		{
@@ -299,7 +298,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		}
 		else if(!strcmp(x, "candihide"))
 		{
-			HideCandWindow();
+			UIHideCandWindow();
 		}
 		else if(!strcmp(x, "unprocessed"))
 		{
@@ -569,7 +568,7 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 		}
 		else if(!strcmp(x, "candihide"))
 		{
-			HideCandWindow();
+			UIHideCandWindow();
 		}
 		else if(!strcmp(x, "unprocessed"))
 		{

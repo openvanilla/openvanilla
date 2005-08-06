@@ -38,8 +38,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	{
 	case WM_CREATE:
 		CompX = CompY = -1;
-		CreateCompWindow(hWnd);
-		CreateCandWindow(hWnd);
+		UICreateCompWindow(hWnd);
+		UICreateCandWindow(hWnd);
 		break;
 		
 	case WM_IME_SETCONTEXT:
@@ -51,21 +51,21 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 				if (lpIMC)
 				{
 					lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-					MoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
-					MoveCandWindow(hWnd, lpMyPrivate->CandStr);
+					UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
+					UIMoveCandWindow(hWnd, lpMyPrivate->CandStr);
 					ImmUnlockIMCC(lpIMC->hPrivate);
 				}
 				else
 				{
-					HideCandWindow();
-					HideCompWindow();
+					UIHideCandWindow();
+					UIHideCompWindow();
 				}
 				ImmUnlockIMC(hUICurIMC);
 			}
 			else   // it is NULL input context.
 			{
-				HideCandWindow();
-				HideCompWindow();
+				UIHideCandWindow();
+				UIHideCompWindow();
 			}
 		}
 		break;
@@ -84,15 +84,15 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			CompY = pt.y;
 		}
 		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-		MoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
-		MoveCandWindow(hWnd, lpMyPrivate->CandStr);
+		UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
+		UIMoveCandWindow(hWnd, lpMyPrivate->CandStr);
 		ImmUnlockIMCC(lpIMC->hPrivate);
 		ImmUnlockIMC(hUICurIMC);
 		break;
 		
 	case WM_IME_ENDCOMPOSITION:
-		HideCompWindow();
-		HideCandWindow();
+		UIHideCompWindow();
+		UIHideCandWindow();
 		break;
 		
 	case WM_IME_COMPOSITIONFULL:

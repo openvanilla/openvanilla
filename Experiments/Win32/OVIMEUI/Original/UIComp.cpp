@@ -31,7 +31,7 @@ LRESULT APIENTRY CompWndProc(HWND hWnd,
 	return 0;
 }
 
-void CreateCompWindow(HWND hUIWnd)
+void UICreateCompWindow(HWND hUIWnd)
 {
 	if (!IsWindow(uiComp.hWnd))
 	{
@@ -56,22 +56,22 @@ void CreateCompWindow(HWND hUIWnd)
 		uiComp.sz.cx = sz.cx;
 		uiComp.sz.cy = sz.cy+4;
 	}
-	HideCompWindow();
+	UIHideCompWindow();
 	return;
 }
 
-void MoveCompWindow(HWND hUIWnd, int X, int Y, LPTSTR lpStr)
+void UIMoveCompWindow(HWND hUIWnd, int X, int Y, LPTSTR lpStr)
 {
 	free(lpCompStr);
 	lpCompStr = _tcsdup(lpStr);
 	if(_tcslen(lpStr) <= 0)
 	{
-		HideCompWindow();
+		UIHideCompWindow();
 		return;
 	}
 
 	if (!IsWindow(uiComp.hWnd))
-		CreateCompWindow(hUIWnd);
+		UICreateCompWindow(hUIWnd);
 
 	if (IsWindow(uiComp.hWnd))
 	{
@@ -98,7 +98,7 @@ void MoveCompWindow(HWND hUIWnd, int X, int Y, LPTSTR lpStr)
 		}
 		else
 		{
-			HideCompWindow();
+			UIHideCompWindow();
 			return;
 		}
 
@@ -187,13 +187,13 @@ void PaintCompWindow(HWND hCompWnd)
 	EndPaint(hCompWnd,&ps);
 }
 
-void ShowCompWindow()
+void UIShowCompWindow()
 {
 	if (IsWindow(uiComp.hWnd))
 		ShowWindow(uiComp.hWnd, SW_SHOWNOACTIVATE);
 }
 
-void HideCompWindow()
+void UIHideCompWindow()
 {
 	if (IsWindow(uiComp.hWnd))
 		ShowWindow(uiComp.hWnd, SW_HIDE);

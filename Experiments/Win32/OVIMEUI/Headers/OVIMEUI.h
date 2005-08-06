@@ -10,27 +10,27 @@ typedef struct _tagUICHILD{
 extern "C" {
 // Interfaces
 // OVIMEUI.cpp
-BOOL IMERegisterClass( HINSTANCE );
-BOOL IMEUnRegisterClass( HINSTANCE );
+BOOL IMEUIRegisterClass( HINSTANCE );
+BOOL IMEUIUnRegisterClass( HINSTANCE );
 BOOL MyIsIMEMessage(UINT);
 void UIPushInputMethod(LPTSTR);
 int UICurrentInputMethod();
 // UIStatus.cpp
-void CreateStatusWindow(HWND);
-void MoveStatusWindow(HWND, int, int);
-void ShowStatusWindow();
-void HideStatusWindow();
+void UICreateStatusWindow(HWND);
+void UIMoveStatusWindow(HWND, int, int);
+void UIShowStatusWindow();
+void UIHideStatusWindow();
 void UISetCursorPos(int);
 void UISetMarkFrom(int);
 void UISetMarkTo(int);
 // UIComp.cpp
-void CreateCompWindow(HWND);
-void MoveCompWindow(HWND, int, int, LPTSTR);
-void ShowCompWindow();
-void HideCompWindow();
+void UICreateCompWindow(HWND);
+void UIMoveCompWindow(HWND, int, int, LPTSTR);
+void UIShowCompWindow();
+void UIHideCompWindow();
 // UICand.cpp
-void CreateCandWindow(HWND);
-void MoveCandWindow(HWND, LPTSTR);
-void ShowCandWindow();
-void HideCandWindow();
+void UICreateCandWindow(HWND);
+void UIMoveCandWindow(HWND, LPTSTR);
+void UIShowCandWindow();
+void UIHideCandWindow();
 }

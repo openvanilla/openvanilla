@@ -15,12 +15,12 @@ LONG NotifyHandle(HIMC hUICurIMC,
     switch (wParam)
     {
 	case IMN_CLOSESTATUSWINDOW:
-		HideStatusWindow();
+		UIHideStatusWindow();
 		break;
 		
 	case IMN_OPENSTATUSWINDOW:
-		CreateStatusWindow(hWnd);
-		MoveStatusWindow(hWnd, 500, 100);
+		UICreateStatusWindow(hWnd);
+		UIMoveStatusWindow(hWnd, 500, 100);
 		break;
 		
 	case IMN_OPENCANDIDATE:
@@ -39,7 +39,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 		
 	case IMN_SETOPENSTATUS:
-		ShowStatusWindow();
+		UIShowStatusWindow();
 		break;
 		
 	case IMN_SETCANDIDATEPOS:
