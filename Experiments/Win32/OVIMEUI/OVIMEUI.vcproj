@@ -38,7 +38,7 @@
 				ModuleDefinitionFile="OVIMEUI.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
-				ResourceOnlyDLL="TRUE"
+				ResourceOnlyDLL="FALSE"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"

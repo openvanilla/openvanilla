@@ -243,7 +243,8 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 
 			_tcscpy(lpMyPrivate->PreEditStr, decoded);
 			MakeCompStr(lpMyPrivate, lpCompStr);
-			free(decoded);
+			if(_tcscmp(decoded, _T("")))
+				free(decoded);
 		}
 		else if(!strcmp(x, "cursorpos"))
 		{
