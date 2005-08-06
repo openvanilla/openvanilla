@@ -33,6 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="comctl32.lib"
 				LinkIncremental="2"
 				ModuleDefinitionFile="OVIMEUI.def"
 				GenerateDebugInformation="TRUE"
@@ -88,6 +89,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="comctl32.lib"
 				LinkIncremental="1"
 				ModuleDefinitionFile="OVIMEUI.def"
 				GenerateDebugInformation="FALSE"
@@ -130,42 +132,56 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath=".\Original\Global.cpp">
-			</File>
-			<File
-				RelativePath=".\Original\Original.cpp">
-			</File>
-			<File
 				RelativePath=".\OVIMEUI.def">
-			</File>
-			<File
-				RelativePath=".\Original\UICand.cpp">
-			</File>
-			<File
-				RelativePath=".\Original\UIComp.cpp">
-			</File>
-			<File
-				RelativePath=".\Original\UIStatus.cpp">
 			</File>
 			<File
 				RelativePath=".\Source\Utils.cpp">
 			</File>
+			<Filter
+				Name="PCMan"
+				Filter="">
+				<File
+					RelativePath=".\PCMan\Global.cpp">
+				</File>
+				<File
+					RelativePath=".\PCMan\PCMan.cpp">
+				</File>
+				<File
+					RelativePath=".\PCMan\UICand.cpp">
+				</File>
+				<File
+					RelativePath=".\PCMan\UIComp.cpp">
+				</File>
+				<File
+					RelativePath=".\PCMan\UIStatus.cpp">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="¼ÐÀYÀÉ"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath=".\Original\Original.h">
-			</File>
-			<File
 				RelativePath=".\Headers\OVIMEUI.h">
 			</File>
+			<Filter
+				Name="PCMan"
+				Filter="">
+				<File
+					RelativePath=".\PCMan\PCMan.h">
+				</File>
+				<File
+					RelativePath=".\PCMan\resource.h">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="¸ê·½ÀÉ"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+			<File
+				RelativePath=".\PCMan\PCMan.rc">
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\README.txt">
