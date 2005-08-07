@@ -214,7 +214,8 @@ const char* OVOFReverseLookupSQLite::process(const char *src, OVService *srv)
             strcat(composebuffer, buf);
             count++;
         }
-        strcat(composebuffer, ")\n");        
+        strcat(composebuffer, ")\n");     
+	sth->reset();
     }
     
     if(count) srv->notify(composebuffer);
