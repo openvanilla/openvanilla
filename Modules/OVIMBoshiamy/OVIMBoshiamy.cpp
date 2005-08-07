@@ -196,7 +196,7 @@ const char* OVOFReverseLookupSQLite::process(const char *src, OVService *srv)
     int u16len=srv->UTF8ToUTF16(src, &u16);
     strcpy(composebuffer, "");
     char sqlbuf[256];
-    sprintf(sqlbuf,"select key from %s where value=?1;",table);
+    sprintf(sqlbuf,"select key from %s where not (key like '_key_%%') and value=?1;",table);
     SQLite3Statement *sth=db->prepare(sqlbuf);
 
     // WE HAVE TO DO SURROGATE CHECK, REMEMBER!
