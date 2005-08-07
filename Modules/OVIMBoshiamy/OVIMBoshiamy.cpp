@@ -292,7 +292,6 @@ void OVIMGenericContext::start(OVBuffer*, OVCandidate*, OVService* s) {
 }
 
 void OVIMGenericContext::clear() {
-    commitFirstCandidate();
 }
 
 void OVIMGenericContext::end() {
