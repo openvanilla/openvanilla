@@ -18,12 +18,14 @@ LINK32_OBJS = \
 $(OUTDIR):
 	if not exist "$(OUTDIR)/$(NULL)" mkdir $(OUTDIR)
 
-LINK_LIBS = kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib OVIME\IMM32.LIB OVIME\OVIMEUI.lib OVDummyLoader\libltdl.lib OVDummyLoader\libiconv.lib OVDummyLoader\expat\libexpat.lib
+LINK_LIBS = kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib OVIME\IMM32.LIB OVIME\OVIMEUI.lib OVDummyLoader\libltdl.lib OVDummyLoader\libiconv.lib OVDummyLoader\expat\libexpat.lib scew.lib
 
 dllllflags = /INCREMENTAL:NO /NOLOGO /DLL /PDB:$(OUTDIR)/vc70.pdb /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /MACHINE:IX86
 
 $(OUTDIR)\$(Proj).dll: $(OUTDIR) $(LINK32_OBJS) $(OUTDIR)\$(Proj).res
 	link $(dllllflags) \
+	/NODEFAULTLIB:scew_.lib \
+	/LIBPATH:OVDummyLoader\scew \
 	$(LINK32_OBJS) $(OUTDIR)\$(Proj).res $(LINK_LIBS) \
 	-out:$(OUTDIR)\$(Proj).ime\
 	-def:OVIME\$(Proj).def
