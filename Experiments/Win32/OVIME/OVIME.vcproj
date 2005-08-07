@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\;..\OVDummyLoader\;..\OVIMEUI\Headers;..\..\..\Headers"
+				AdditionalIncludeDirectories=".\;..\OVDummyLoader\;..\OVDummyLoader\expat;..\OVDummyLoader\scew;..\OVIMEUI\Headers;..\..\..\Headers"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="FALSE"
 				MinimalRebuild="TRUE"
@@ -36,10 +36,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib"
+				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib libexpat.lib scew.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\OVDummyLoader"
+				AdditionalLibraryDirectories="..\OVDummyLoader;..\OVDummyLoader\expat;..\OVDummyLoader\scew"
 				ModuleDefinitionFile="OVIME.def"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/OVIME.pdb"
@@ -78,7 +78,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories=".\;..\OVDummyLoader\;..\OVIMEUI\Headers;..\..\..\Headers"
+				AdditionalIncludeDirectories=".\;..\OVDummyLoader\;..\OVDummyLoader\expat;..\OVDummyLoader\scew;..\OVIMEUI\Headers;..\..\..\Headers"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="TRUE"
 				MinimalRebuild="FALSE"
@@ -93,10 +93,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib"
+				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib libexpat.lib scew.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\OVDummyLoader"
+				AdditionalLibraryDirectories="..\OVDummyLoader;..\OVDummyLoader\expat;..\OVDummyLoader\scew"
 				ModuleDefinitionFile="OVIME.def"
 				GenerateDebugInformation="FALSE"
 				SubSystem="2"
@@ -136,6 +136,9 @@
 				RelativePath="ControlHandle.cpp">
 			</File>
 			<File
+				RelativePath="..\OVDummyLoader\DOVDictionary.cpp">
+			</File>
+			<File
 				RelativePath="Global.cpp">
 			</File>
 			<File
@@ -166,6 +169,9 @@
 		<Filter
 			Name="¼ÐÀYÀÉ"
 			Filter="h;hpp;hxx;hm;inl;inc">
+			<File
+				RelativePath="..\OVDummyLoader\DOVDictionary.h">
+			</File>
 			<File
 				RelativePath="ExtraStructs.h">
 			</File>
