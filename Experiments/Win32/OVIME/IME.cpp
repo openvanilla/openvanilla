@@ -218,8 +218,8 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	OVStringToolKit::splitString(command, commandVector, delimiterVector, false);
 
 	LPTSTR decoded = NULL;
-	_tcscpy(lpMyPrivate->CandStr, _T(""));
-	_tcscpy(lpMyPrivate->PreEditStr, _T(""));
+//	_tcscpy(lpMyPrivate->CandStr, _T(""));
+//	_tcscpy(lpMyPrivate->PreEditStr, _T(""));
 	for(vector<string>::iterator j = commandVector.begin();
 		j != commandVector.end();
 		++j)
@@ -281,6 +281,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		}
 		else if(!strcmp(x, "candiclear"))
 		{
+			_tcscpy(lpMyPrivate->CandStr, _T(""));
 			ClearCandidate((LPCANDIDATEINFO)ImmLockIMCC(lpIMC->hCandInfo));
 			ImmUnlockIMCC(lpIMC->hCandInfo);
 		}
