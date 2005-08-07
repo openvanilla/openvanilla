@@ -197,23 +197,24 @@ const char* OVOFReverseLookupSQLite::process(const char *src, OVService *srv)
     strcpy(composebuffer, "");
     char sqlbuf[256];
     sprintf(sqlbuf,"select key from %s where value=?1;",table);
+    SQLite3Statement *sth=db->prepare(sqlbuf);
 
     // WE HAVE TO DO SURROGATE CHECK, REMEMBER!
     for (int i=0; i<u16len; i++) {
         // get each codepoint
+	int count = 0;
         const char *u8=srv->UTF16ToUTF8(&(u16[i]), 1);
-        
-        char buf[256];
+        char buf[256],lbuf[256];
         sprintf(buf, "%s=(", u8);
-        strcat(composebuffer, buf);
-        
-        SQLite3Statement *sth=db->prepare(sqlbuf);
+	strcat(lbuf,buf);
         sth->bind_text(1, u8);
         while (sth->step()==SQLITE_ROW) {
             sprintf(buf, "%s, ", sth->column_text(0));
-            strcat(composebuffer, buf);
+            strcat(lbuf, buf);
+	    count++;
         }
-        strcat(composebuffer, ")\n");        
+        strcat(lbuf, ")\n");
+	if(count) strcat(composebuffer, lbuf);
     }
     
     if(strlen(composebuffer)) srv->notify(composebuffer);
