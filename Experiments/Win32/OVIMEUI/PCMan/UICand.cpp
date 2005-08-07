@@ -110,8 +110,8 @@ void UIMoveCandWindow(HWND hUIWnd, LPTSTR lpStr)
 	// This should be fixed in the future.
 	// It's impossible to have lpStr != NULL and lpCompStr ==NULL.
 	// Since there is no composition string, is candidate window needed?
-	if( !lpCompStr || !*lpCompStr )
-		return;
+	//if( !lpCompStr || !*lpCompStr )
+	//	return;
 
 	if (IsWindow(uiCand.hWnd))
 	{
