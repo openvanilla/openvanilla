@@ -200,24 +200,24 @@ const char* OVOFReverseLookupSQLite::process(const char *src, OVService *srv)
     SQLite3Statement *sth=db->prepare(sqlbuf);
 
     // WE HAVE TO DO SURROGATE CHECK, REMEMBER!
+    int count = 0;
     for (int i=0; i<u16len; i++) {
         // get each codepoint
-	int count = 0;
         const char *u8=srv->UTF16ToUTF8(&(u16[i]), 1);
-        char buf[256],lbuf[256];
+        char buf[256];
         sprintf(buf, "%s=(", u8);
-	strcat(lbuf,buf);
+        strcat(composebuffer, buf);
+        
         sth->bind_text(1, u8);
         while (sth->step()==SQLITE_ROW) {
             sprintf(buf, "%s, ", sth->column_text(0));
-            strcat(lbuf, buf);
-	    count++;
+            strcat(composebuffer, buf);
+            count++;
         }
-        strcat(lbuf, ")\n");
-	if(count) strcat(composebuffer, lbuf);
+        strcat(composebuffer, ")\n");        
     }
     
-    if(strlen(composebuffer)) srv->notify(composebuffer);
+    if(count) srv->notify(composebuffer);
     return src;
 }
 
