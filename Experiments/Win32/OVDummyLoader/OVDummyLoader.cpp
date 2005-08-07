@@ -199,9 +199,20 @@ public:
 	    return internal;
     }
     virtual const char *fromUTF8(const char *encoding, const char *src)
-        { return src; }
+    {
+	    char *out = NULL;
+	    size_t inbytesleft = strlen(src) + 1;
+	    size_t outbytesleft = 1024;
+	    iconv_t cd;
+	    memset(internal, 0, 1024);
+	    out = internal;
+	    cd = iconv_open(encoding, "UTF-8");
+	    iconv (cd, &src, &inbytesleft, &out, &outbytesleft);
+	    iconv_close(cd);
+	    return internal;
+    }
     virtual const char *UTF16ToUTF8(unsigned short *src, int len) {
-        return "blahblah";
+	    return "blabla";
     }
     virtual int UTF8ToUTF16(const char *src, unsigned short **rcvr) {
         return 0;
