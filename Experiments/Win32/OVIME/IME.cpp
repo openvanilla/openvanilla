@@ -270,6 +270,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 			_tcscpy(GETLPRESULTSTR(lpCompStr),decoded);
 			lpCompStr->dwResultStrLen = _tcslen(decoded);
 			_tcscpy(lpMyPrivate->PreEditStr, _T(""));
+			_tcscpy(lpMyPrivate->CandStr, _T(""));
 			MakeCompStr(lpMyPrivate, lpCompStr);
 			
 			DebugLogW(_T("decoded: %s"), decoded);

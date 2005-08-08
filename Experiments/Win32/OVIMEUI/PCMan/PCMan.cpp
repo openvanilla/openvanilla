@@ -290,7 +290,6 @@ BOOL WINAPI DllMain( HINSTANCE hInst,  DWORD fdwReason,  LPVOID lpvReserved )
 
 		hInstDLL = hInst;
 		DisableThreadLibraryCalls( HMODULE(hInstDLL) );
-		hMainIcon = (HICON)LoadImage( hInstDLL, LPCTSTR(IDI_MAINICON), IMAGE_ICON, 16, 16, LR_DEFAULTCOLOR|LR_LOADTRANSPARENT );
 		hIMESelMenu = CreatePopupMenu();
 		return TRUE;
 		}

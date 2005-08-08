@@ -69,8 +69,8 @@ END
 // Bitmap
 //
 
-ID_STATUS_TOOLBAR       BITMAP                  "status_toolbar.bmp"
-IDB_STATUS_TB           BITMAP                  "bitmap1.bmp"
+//ID_STATUS_TOOLBAR       BITMAP                  "status_toolbar.bmp"
+IDB_STATUS_TB           BITMAP                  "status_toolbar.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -79,7 +79,7 @@ IDB_STATUS_TB           BITMAP                  "bitmap1.bmp"
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_MAINICON            ICON                    "icon.ico"
+//IDI_MAINICON            ICON                    "..\\..\\OVIME\\ov.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
