@@ -346,8 +346,10 @@ void init() {
     lt_dlsetsearchpath(OV_MODULEDIR);
 
     int size = scan_ov_modules();
-    //ctx_vector.assign(size, static_cast<OVInputMethodContext*>(NULL));
+    ctx_vector.assign(size, static_cast<OVInputMethodContext*>(NULL));
+    startedCtxVector.assign(size, false);
     fprintf(stderr, "INIT\n");
+    /*
 	vector<OVModule*>::iterator iter;
 	for(iter = mod_vector.begin(); iter != mod_vector.end(); ++iter) {
 		if(!strcmp((*iter)->moduleType(), "OVInputMethod"))
@@ -367,18 +369,26 @@ void init() {
 
 		startedCtxVector.push_back(false);
 	}
+    */
 
     inited=1;
 }
 
-/*
 void initContext(int n) {
+/*
     OVInputMethod *im = reinterpret_cast<OVInputMethod*>(mod_vector[n]);
     im->initialize(&dict, &srv, OV_MODULEDIR);
     murmur("InitContext %s", im->localizedName("zh_TW"));
     ctx_vector.at(n) = im->newContext();
-}
 */
+	if(!strcmp(mod_vector[n]->moduleType(), "OVInputMethod"))
+	{
+		OVInputMethod *im = reinterpret_cast<OVInputMethod*>((mod_vector[n]));
+		im->initialize(new DummyDictionary(OV_MODULEDIR, im->identifier()), &srv, OV_MODULEDIR);
+		murmur("InitContext %s", im->localizedName("zh_TW"));
+		ctx_vector.at(n) = im->newContext();
+	}
+}
 
 void exit() {
 	lt_dlexit();
@@ -418,10 +428,8 @@ extern "C" {
 		//if( n > ctx_vector.size() - 1) n = ctx_vector.size() - 1;
 		int ctxVectorNum = static_cast<int>(ctx_vector.size()) - 1;
 		if(n > ctxVectorNum) return 0;
-		/*
 		if(ctx_vector.at(n) == NULL)
 			initContext(n);
-		*/
 		int st = 1;
 		if(ctx_vector[n] && !startedCtxVector[n]) {
 			ctx_vector[n]->start(&buf, &candi, &srv);
