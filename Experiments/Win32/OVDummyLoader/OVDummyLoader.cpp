@@ -103,7 +103,7 @@ public:
         return this;
     }
     virtual OVBuffer* send() { 
-//        dumpu8string(bufstr.c_str());
+        //dumpu8string(bufstr.c_str());
 	if(bufstr!="") {
 		action += "bufsend "; 
 		action += utf8toutf16(bufstr.c_str());
@@ -113,19 +113,21 @@ public:
         return this;
     }
     virtual OVBuffer* update() { 
-	char tmp[100];
-        action += "bufupdate "; 
-        action += utf8toutf16(bufstr.c_str());
-        action += " cursorpos ";
-	sprintf(tmp, "%d", cursorPos);
-	action += string(tmp);
-	action += " markfrom ";
-	sprintf(tmp, "%d", markFrom);
-	action += string(tmp);
-	action += " markto ";
-	sprintf(tmp, "%d", markTo);
-	action += string(tmp);
-	action += " ";
+	if(bufstr!="") {
+		char tmp[100];
+		action += "bufupdate "; 
+		action += utf8toutf16(bufstr.c_str());
+		action += " cursorpos ";
+		sprintf(tmp, "%d", cursorPos);
+		action += string(tmp);
+		action += " markfrom ";
+		sprintf(tmp, "%d", markFrom);
+		action += string(tmp);
+		action += " markto ";
+		sprintf(tmp, "%d", markTo);
+		action += string(tmp);
+		action += " ";
+	}
         return this;
     }
     virtual OVBuffer* update(int cursorPos, int markFrom=-1, int markTo=-1) {
