@@ -104,10 +104,12 @@ public:
     }
     virtual OVBuffer* send() { 
 //        dumpu8string(bufstr.c_str());
-        action += "bufsend "; 
-        action += utf8toutf16(bufstr.c_str());
-        action += " ";
-        bufstr="";
+	if(bufstr!="") {
+		action += "bufsend "; 
+		action += utf8toutf16(bufstr.c_str());
+		action += " ";
+		bufstr="";
+	}
         return this;
     }
     virtual OVBuffer* update() { 
