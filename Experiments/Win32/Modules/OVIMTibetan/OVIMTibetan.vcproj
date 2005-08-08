@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="OVIMGeneric"
-	ProjectGUID="{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}"
+	Name="OVIMTibetan"
+	ProjectGUID="{A4D507A2-19F0-43CE-B1F4-A019974B9EE0}"
 	Keyword="ExtStoredProcProj">
 	<Platforms>
 		<Platform
@@ -15,11 +15,11 @@
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
 			ConfigurationType="2"
-			CharacterSet="0">
+			CharacterSet="1">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\Headers"
+				AdditionalIncludeDirectories="..\..\..\..\Headers;..\..\..\..\Modules\OVIMTibetan"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -68,10 +68,10 @@
 			OutputDirectory="Release"
 			IntermediateDirectory="Release"
 			ConfigurationType="2"
-			CharacterSet="0">
+			CharacterSet="1">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\..\Headers"
+				AdditionalIncludeDirectories="..\..\..\..\Headers;..\..\..\..\Modules\OVIMTibetan"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="TRUE"
@@ -124,22 +124,7 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath="..\..\..\..\Source\OVCandidateList.cpp">
-			</File>
-			<File
-				RelativePath="..\..\..\..\Source\OVCIN.cpp">
-			</File>
-			<File
-				RelativePath="..\..\..\..\Source\OVFileHandler.cpp">
-			</File>
-			<File
-				RelativePath=".\OVIMXcin.cpp">
-			</File>
-			<File
-				RelativePath="..\..\..\..\Source\OVStringToolKit.cpp">
-			</File>
-			<File
-				RelativePath=".\XcinCinList.cpp">
+				RelativePath=".\OVIMTibetan.cpp">
 			</File>
 		</Filter>
 		<Filter
@@ -147,10 +132,7 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath=".\OVIMXcin.h">
-			</File>
-			<File
-				RelativePath=".\XcinCinList.h">
+				RelativePath="..\..\..\..\Modules\OVIMTibetan\OVIMTibetan.h">
 			</File>
 		</Filter>
 		<Filter
