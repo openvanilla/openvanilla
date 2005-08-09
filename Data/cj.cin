@@ -1,8 +1,9 @@
-#  ChangJei input method table for UTF-8 encoding.
+# ChangJei input method table tweaked by b6s for OVIMGeneric(SQLite) in UTF-8 encoding.
 #
-#  This table also extended to include HKSCS encodings. For details, see
+# This table also extended to include HKSCS encodings. For details, see
 #	http://www.info.gov.hk/digital21/chi/hkscs/index.html
 #
+# 
 %gen_inp
 %ename Changjei
 %cname 倉頡
@@ -11209,8 +11210,9 @@ tvfu  蕝
 tvfy  蔠
 tvhl  薌
 tvi   戡
-tvid  孳
 tvid  藥
+tvid  孳
+tvid  孶
 tvif  鶿
 tvii  茲
 tvio  苡
@@ -17087,7 +17089,6 @@ vyrn  㜲
 vhi   𡚸
 ii    広
 ntks  勐
-tvid  孶
 yknd  斈
 ujnd  孼
 yrjmu 𧨎
