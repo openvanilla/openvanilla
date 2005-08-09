@@ -74,8 +74,9 @@ void OVCIN::setBlockMap(){
 
 void OVCIN::parseCinVector(const vector<string>& cinVector){
     vector<string>::const_iterator it;
+	int isBlockBegin = 0;
     for(it = cinVector.begin(); it != cinVector.end(); ++it){
-        if( it->find("#") == 0 )    continue;
+        if( it->find("#") == 0 && isBlockBegin == 0)    continue;
         const string& line = *it;
         string::size_type del_pos;
         if( (del_pos=line.find_first_of(delimiters)) != string::npos ){
@@ -84,7 +85,6 @@ void OVCIN::parseCinVector(const vector<string>& cinVector){
             if( value_pos == string::npos )
                 continue;
             string value = line.substr( value_pos, line.length() - value_pos );
-            int isBlockBegin = 0;
             if(key.find("%") == 0)
                 isBlockBegin = setProperty(key, value);
             if(state == PARSE_BLOCK && !isBlockBegin){
