@@ -13,7 +13,7 @@
 #define ATSCPENCILMENUID        ATSCBASERESOURCEID+1
 #define ATSCBUNDLENAME          "org.openvanilla.ovinit"
 #define ATSCBNLENGTH            $"16"       // in hexadecimal
-#define ATSCIMNAME              "OpenVanilla Loader 0.7.0"
+#define ATSCIMNAME              "OpenVanilla Loader 0.7.1"
 #define ATSCIMNLENGTH           $"18"       // in hexadecimal
 #define ATSCVENDORCODE          'opvn'
 

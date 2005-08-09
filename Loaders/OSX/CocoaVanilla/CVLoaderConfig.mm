@@ -20,8 +20,17 @@ void CVPreparePath() {
 
 NSArray *CVGetModuleLoadPath() {
     NSMutableArray *a=[[NSMutableArray new] autorelease];
-    [a addObject:@"/Library/OpenVanilla/0.7.0/Modules/"];
-    [a addObject:@"~/Library/OpenVanilla/0.7.0/Modules/"];
+    
+    // put in CVLC_SYSMODULE_PATH (/Library/OpenVanilla/[version_no]/Modules)
+    [a addObject:CVLC_SYSMODULE_PATH];
+
+    // put in CVLC_USERMODULE_PATH (~/Library/OpenVanilla/[version_no]/Modules)    
+    NSString *um=[CVLC_USERMODULE_PATH stringByStandardizingPath];
+    if (!CVIsPathExist(um)) {
+		NSLog([NSString stringWithFormat:@"path %@ doesn't exist, creating", um]);
+		system([[NSString stringWithFormat:@"mkdir -p %@", um] UTF8String]);
+	}
+    [a addObject:um];
     return a;
 }
 
@@ -45,10 +54,10 @@ NSDictionary *CVGetDisplayServerConfig() {
 	NSMutableDictionary *d=[[[NSMutableDictionary alloc] init] autorelease];
 	[d setValue:@"" forKey:@"backgroundImage"];
 	[d setValue:@"1.0 1.0 1.0" forKey:@"foreground"];
-	[d setValue:@"0.0 0.0 1.0" forKey:@"background"];
+	[d setValue:@"0.402768 0.493667 0.844114" forKey:@"background"];
 	[d setValue:@"0.9" forKey:@"opacity"];
 	[d setValue:@"Lucida Grande" forKey:@"font"];
-	[d setValue:@"20" forKey:@"size"];
+	[d setValue:@"24" forKey:@"size"];
     [d setValue:@"default" forKey:@"notificationStyle"];
 	return d;
 }

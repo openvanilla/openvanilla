@@ -179,7 +179,7 @@ void CVLoader::menuHandler(unsigned int cmd) {
         case CVLMI_HELP:
             // murmur ("help menu item clicked");
             // system("open http://openvanilla.org/index.cgi?OV070rc5");
-	    system("open /Library/OpenVanilla/0.7.0/OVLoader/OVPreferences.app/Contents/Resources/ov.pdf");
+	    system("open /Library/OpenVanilla/0.7.1/OVLoader/OVPreferences.app/Contents/Resources/ov.pdf");
             return;
     }
     
