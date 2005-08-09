@@ -1,7 +1,10 @@
-MOD= OVIMArray OVIMChewing OVIMGeneric OVIMKeypadExample \
-     OVIMPhoneticOld OVIMRoman OVIMTibetan OVIMUIM OVOFAntiZhuyinwen \
-     OVOFConvSC2TC OVOFConvTC2SC OVOFDisUniHex OVOFFullWidthCharacter \
-     OVOFHTMLCharEntity OVOFMorseCode OVOFReverseLookup OVOFZhWikipidealize
+MOD= OVIMArray OVIMAutoPhonetic OVIMBig5 OVIMBoshiamy OVIMChewing \
+     OVIMGeneric OVIMGenericSQLite OVIMKeypadExample OVIMPOJ-Holo \
+     OVIMPhonetic OVIMRoman OVIMRomanNew OVIMSpaceChewing OVIMTibetan \
+     OVIMUnicode OVOFAntiZhuyinwen OVOFConvSC2TC OVOFConvTC2SC \
+     OVOFDisUniHex OVOFExample OVOFFullWidthCharacter OVOFHTMLCharEntity \
+     OVOFQuotationmark OVOFReverseLookup OVOFSpeak
+
 
 all:
 	for i in $(MOD) ; do make -C $$i all ;done
@@ -11,4 +14,3 @@ install: all
 
 clean:
 	for i in $(MOD) ; do make -C $$i clean ;done
-

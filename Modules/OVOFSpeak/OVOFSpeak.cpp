@@ -14,23 +14,37 @@ public:
     
     virtual int initialize(OVDictionary *moduleCfg, OVService *srv, 
         const char *modulePath) {
-            murmur ("basic filter init: module path=%s", modulePath);
-            moduleCfg->setInteger("hello", 100);
-        return 1;
+	    murmur ("basic filter init: module path=%s", modulePath);
+            moduleCfg->setString("Voice", "Default");
+	    if(!moduleCfg->keyExist("Voice")) moduleCfg->setString("Voice", "Default");
+		     
+	    cfgVoice = moduleCfg->getString("Voice");
+	    return 1;
     }
-
+    
+    virtual const char *localizedName(const char *locale)
+	{
+		if (!strcasecmp(locale, "zh_TW")) return "系統語音模組";
+		if (!strcasecmp(locale, "zh_CN")) return "系统语音模组";
+		return "Speak as you type";
+	}
     
     virtual const char *identifier() { return "OVOFSpeak"; }
     virtual const char *process (const char *src, OVService *srv) {
-	char command[4096];
-	sprintf(command, "/usr/bin/say %s &" , src);
+	char command[4096], v[256]; 
+	/*
+	if(strcmp(cfgVoice, "Default")) {
+		sprintf(v, " -v %s ", cfgVoice);
+	} */
+	sprintf(command, "/usr/bin/say %s %s &" , v, src);
 	system(command);
         return src;
     }
     
 protected:
     char *buf;
-	char *command;
+    char *command;
+    const char *cfgVoice;
 };
 
 // OV_SINGLE_MODULE_WRAPPER(OVOFSpeak);
