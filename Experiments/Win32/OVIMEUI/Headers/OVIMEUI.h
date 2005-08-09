@@ -30,7 +30,7 @@ void UIShowCompWindow();
 void UIHideCompWindow();
 // UICand.cpp
 void UICreateCandWindow(HWND);
-void UIMoveCandWindow(HWND, LPTSTR);
+void UIMoveCandWindow(HWND, int, int, LPTSTR);
 void UIShowCandWindow();
 void UIHideCandWindow();
 }

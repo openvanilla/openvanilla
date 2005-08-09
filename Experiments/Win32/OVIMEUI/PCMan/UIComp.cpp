@@ -59,7 +59,7 @@ void UICreateCompWindow(HWND hUIWnd)
 		uiComp.sz.cx = sz.cx;
 		uiComp.sz.cy = sz.cy + 4;
 	}
-	UIHideCompWindow();
+	ShowWindow(uiComp.hWnd, SW_HIDE);
 	return;
 }
 

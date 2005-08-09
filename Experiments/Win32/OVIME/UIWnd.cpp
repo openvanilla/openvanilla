@@ -36,6 +36,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	switch (msg)
 	{
+		DebugLog("UIMSG");
 	case WM_CREATE:
 		CompX = CompY = -1;
 		UICreateCompWindow(hWnd);
@@ -52,7 +53,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 				{
 					lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 					UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
-					UIMoveCandWindow(hWnd, lpMyPrivate->CandStr);
+					UIMoveCandWindow(hWnd, -1, -1, lpMyPrivate->CandStr);
 					ImmUnlockIMCC(lpIMC->hPrivate);
 				}
 				else
@@ -85,7 +86,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		}
 		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 		UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
-		UIMoveCandWindow(hWnd, lpMyPrivate->CandStr);
+		UIMoveCandWindow(hWnd, -1, -1, lpMyPrivate->CandStr);
 		ImmUnlockIMCC(lpIMC->hPrivate);
 		ImmUnlockIMC(hUICurIMC);
 		break;
@@ -102,11 +103,13 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 		
 	case WM_IME_CONTROL:
+		DebugLog("WM_IME_CONTROL");
 		lRet = ControlHandle(hUICurIMC, hWnd, msg, wParam, lParam);
 		break;
 		
 		
 	case WM_IME_NOTIFY:
+		DebugLog("WM_IME_NOTIFY");
 		lRet = NotifyHandle(hUICurIMC, hWnd, msg, wParam, lParam);
 		break;
 		

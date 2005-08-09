@@ -257,7 +257,8 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		else if(!strcmp(x, "cursorpos"))
 		{
 			j++;
-			UISetCursorPos(atoi(const_cast<char*>(j->c_str())));
+			lpCompStr->dwCursorPos = atoi(const_cast<char*>(j->c_str()));
+			UISetCursorPos(lpCompStr->dwCursorPos);
 			DebugLog("Pos %d", atoi(const_cast<char*>(j->c_str())));
 		}
 		else if(!strcmp(x, "markfrom"))

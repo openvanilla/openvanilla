@@ -91,7 +91,7 @@ BOOL GetCandPosFromCompWnd(LPSIZE lpsz)
 	return FALSE;
 }
 
-void UIMoveCandWindow(HWND hUIWnd, LPTSTR lpStr)
+void UIMoveCandWindow(HWND hUIWnd, int X, int Y, LPTSTR lpStr)
 {
 	free(lpCandStr);
 	numCand = 0;
@@ -110,8 +110,8 @@ void UIMoveCandWindow(HWND hUIWnd, LPTSTR lpStr)
 	// This should be fixed in the future.
 	// It's impossible to have lpStr != NULL and lpCompStr ==NULL.
 	// Since there is no composition string, is candidate window needed?
-	if( !lpCompStr || !*lpCompStr )
-		return;
+//	if( !lpCompStr || !*lpCompStr )
+//		return;
 
 	if (IsWindow(uiCand.hWnd))
 	{
@@ -165,7 +165,20 @@ void UIMoveCandWindow(HWND hUIWnd, LPTSTR lpStr)
 		SelectObject(hDC, oldFont);
 		ReleaseDC(uiCand.hWnd,hDC);
 
-		if( GetCandPosFromCompWnd(&sz) )
+		if( X > 0 && Y > 0)
+		{
+			uiCand.pt.x = X;
+			uiCand.pt.y = Y;
+			MoveWindow(uiCand.hWnd,
+				uiCand.pt.x,
+				uiCand.pt.y,
+				sz.cx,
+				sz.cy,
+				TRUE);
+			ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
+			InvalidateRect(uiCand.hWnd, NULL, FALSE);
+		}
+		else if( GetCandPosFromCompWnd(&sz) )
 		{
 			MoveWindow(uiCand.hWnd,
 				uiCand.pt.x,

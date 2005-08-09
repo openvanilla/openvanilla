@@ -24,12 +24,14 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 		
 	case IMN_OPENCANDIDATE:
+		UIShowCandWindow();
 		break;
 		
 	case IMN_CHANGECANDIDATE:
 		break;
 		
 	case IMN_CLOSECANDIDATE:
+		UIHideCandWindow();
 		break;
 		
 	case IMN_SETCONVERSIONMODE:
@@ -43,6 +45,20 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 		
 	case IMN_SETCANDIDATEPOS:
+		{
+			POINT ptSrc;
+			SIZE szOffset;
+			HDC hDC;
+
+			ptSrc = lpIMC->cfCandForm[0].ptCurrentPos;
+			ClientToScreen(lpIMC->hWnd, &ptSrc);
+			hDC = GetDC(lpIMC->hWnd);
+			GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
+			ReleaseDC(lpIMC->hWnd,hDC);
+			LPMYPRIVATE lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
+			UIMoveCandWindow(lpIMC->hWnd, ptSrc.x +szOffset.cx, ptSrc.y + szOffset.cy, lpMyPrivate->CandStr);
+			ImmUnlockIMCC(lpIMC->hPrivate);
+		}
 		break;
 		
 	case IMN_SETCOMPOSITIONFONT:
@@ -63,6 +79,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			CompX = ptSrc.x + szOffset.cx;
 			CompY = ptSrc.y + szOffset.cy;
 		}
+		DebugLog("IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
 		/*
 		if (IsWindow(lpUIExtra->uiComp.hWnd))
 			InvalidateRect(lpUIExtra->uiComp.hWnd,NULL,FALSE);
