@@ -207,6 +207,14 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	memset(str, 0, 1024);
 	if(spec == 1)
 		k = (char)out[0];
+	if(lpbKeyState[VK_SHIFT] & 0x80)
+		k = k + 0x0100;
+	else
+		k = k + 0x0000;
+	if(LOWORD(lpbKeyState[VK_CAPITAL]))
+		k = k + 0x0400;
+	else
+		k = k + 0x0000;
 	rlen = KeyEvent(UICurrentInputMethod(), k, str);
 	int n = 0;
 	int ln = 0;
@@ -218,7 +226,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	OVStringToolKit::splitString(command, commandVector, delimiterVector, false);
 
 	LPTSTR decoded = NULL;
-//	_tcscpy(lpMyPrivate->CandStr, _T(""));
+	_tcscpy(lpMyPrivate->CandStr, _T(""));
 //	_tcscpy(lpMyPrivate->PreEditStr, _T(""));
 	for(vector<string>::iterator j = commandVector.begin();
 		j != commandVector.end();
@@ -282,7 +290,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		}
 		else if(!strcmp(x, "candiclear"))
 		{
-			_tcscpy(lpMyPrivate->CandStr, _T(""));
+//			_tcscpy(lpMyPrivate->CandStr, _T(""));
 			ClearCandidate((LPCANDIDATEINFO)ImmLockIMCC(lpIMC->hCandInfo));
 			ImmUnlockIMCC(lpIMC->hCandInfo);
 		}

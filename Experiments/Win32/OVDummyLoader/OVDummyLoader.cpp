@@ -75,9 +75,9 @@ void dumpu8string(const char *s) {
 class DummyKeyCode : public OVKeyCode  {
 public:
     DummyKeyCode (int p=0)          { chr=p; shift=capslock=ctrl=alt=0; }
-    virtual int code()              { return chr; }
-    virtual int isShift()           { return chr < 0; }
-    virtual int isCapslock()        { return capslock; }
+    virtual int code()              { return chr & 0x00FF; }
+    virtual int isShift()           { return chr & 0x0100; }
+    virtual int isCapslock()        { return chr & 0x0400; }
     virtual int isCtrl()            { return ctrl; }
     virtual int isAlt()             { return alt; }
     
