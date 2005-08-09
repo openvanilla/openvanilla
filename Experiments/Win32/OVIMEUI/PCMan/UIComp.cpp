@@ -180,7 +180,7 @@ void PaintCompWindow(HWND hCompWnd)
 		int selstart = CompIndexToXPos( CompSelStart );
 		int selend = CompIndexToXPos( CompSelEnd );
 		int cursor = CompIndexToXPos( CompCursorPos );
-		BitBlt( memdc, selstart, 0, selend-selstart, rc.bottom, memdc, selstart, 0, SRCINVERT );
+		BitBlt( memdc, selstart, 0, selend-selstart, rc.bottom, memdc, selstart, 0, NOTSRCCOPY );
 		BitBlt( memdc, cursor, 0, 1, rc.bottom, memdc, cursor, 0, SRCINVERT );
 
 /*		HDC tmpdc = GetDC(NULL);
