@@ -82,10 +82,11 @@ int DummyDictionary::setInteger(const char *key, int value)
 
 const char* DummyDictionary::getString(const char *key)
 {
+	int i;
 	unsigned int count;
 	if(!module) return "";
 	scew_element** list = scew_element_list(module, "key", &count);
-	for(int i = 0; i < count; i++) {
+	for(i = 0; i < count; i++) {
 		scew_attribute* at = scew_attribute_by_name(list[i], "name");
 		if(at && !strcmp(scew_attribute_value(at), key))
 			break;
@@ -105,12 +106,13 @@ const char* DummyDictionary::getString(const char *key)
 
 const char* DummyDictionary::setString(const char *key, const char *value)
 {
+	int i;
 	unsigned int count;
 	scew_element *cur;
 	if(!module)
 		newDict();
 	scew_element** list = scew_element_list(module, "key", &count);
-	for(int i = 0; i < count; i++) {
+	for(i = 0; i < count; i++) {
 		scew_attribute* at = scew_attribute_by_name(list[i], "name");
 		if(at && !strcmp(scew_attribute_value(at), key))
 			break;
