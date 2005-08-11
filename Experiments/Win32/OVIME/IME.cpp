@@ -123,6 +123,12 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	char str[1024];
 	int rlen;
 	char result[100][1024];
+	if ((lKeyData & 0x80000000) && uVKey != VK_SHIFT)
+		return FALSE;
+
+	if (!(lKeyData & 0x80000000) && uVKey == VK_SHIFT)
+		return FALSE;
+
 	if ((lKeyData & 0x80000000) && uVKey != VK_CONTROL)
 		return FALSE;
 
