@@ -22,10 +22,10 @@ const CandidateList PhoneticService::fetchBPMFCandidate(PhoneticSyllable &q) {
     SQLite3Statement *sth;
 
     fprintf(stderr, "queryBPMF codestr=%s, qstr=%s\n", q.code().c_str(),
-            (q.bpmfString()).c_str());
+            (q.BPMFString()).c_str());
     if ((q.getConfig()).tonetolerance) {
         sth=db->prepare("select tsi from tsi where bpmf=?1 group by tsi order by freq desc;");
-        if (sth) sth->bind_text(1, (q.bpmfString()).c_str());
+        if (sth) sth->bind_text(1, (q.BPMFString()).c_str());
     }
     else {
         sth=db->prepare("select chr from bpmf where bpmf=?1 order by ord;");
@@ -42,11 +42,11 @@ size_t PhoneticService::queryBPMF(PhoneticSyllable &q, string& first) {
     SQLite3Statement *sth;
 
     fprintf(stderr, "queryBPMF codestr=%s, qstr=%s\n", q.code().c_str(),
-            (q.bpmfString()).c_str());
+            (q.BPMFString()).c_str());
     
     if ((q.getConfig()).tonetolerance) {
         sth=db->prepare("select tsi from tsi where bpmf=?1 group by tsi order by freq desc;");
-        if (sth) sth->bind_text(1, (q.bpmfString()).c_str());
+        if (sth) sth->bind_text(1, (q.BPMFString()).c_str());
     }
     else {
         sth=db->prepare("select chr from bpmf where bpmf=?1 order by ord;");

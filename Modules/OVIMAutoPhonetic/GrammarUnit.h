@@ -15,8 +15,9 @@ enum EventType {
     T_COMMIT    = 3,        // a unit is composed
     T_CANDIDATE = 4,        // candidate must be fetched
     T_NEXT      = 5,        // cursor focus moved out to next unit
-    T_PREVIOUS  = 6,        // cursor focus moved out to previous unit
-    T_SPLIT     = 7         // a sibling unit is created
+    T_NEXTSUBFWD= 6,        // move to the end of next unit's first sub-unit
+    T_PREVIOUS  = 7,        // cursor focus moved out to previous unit
+    T_SPLIT     = 8         // a sibling unit is created
 };                          // no merge (we can add to sibling & clear self)
 
 typedef unsigned int KeyModifier;

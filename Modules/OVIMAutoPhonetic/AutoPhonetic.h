@@ -18,6 +18,10 @@ struct PhoneticConfig {
 };
 
 class PhoneticSyllable;
+class PhoneticPhrase;
+
+typedef Pair<string, int> TsiFreqPair;
+typedef vector<TsiFreqPair> TsiList;
 
 class PhoneticService {
 public:
@@ -25,8 +29,10 @@ public:
     void beep();
     size_t codePointCount(const string &s);
     const CandidateList fetchBPMFCandidate(PhoneticSyllable &q);
+    const CandidateList fetchTsiCandidate(PhoneticPhrase &q);
     size_t queryBPMF(PhoneticSyllable &q, string& first);
     size_t queryBPMF(const string &q, string& first);
+    size_t queryTsi(PhoneticPhrase &q, TsiFreqPair& first);
 protected:
     SQLite3 *db;
     OVService *srv;
@@ -54,7 +60,7 @@ public:
     virtual void changeChar(const string& c, bool fixusrchr=true);
     
     virtual const PhoneticConfig& getConfig();
-    virtual const string bpmfString();
+    virtual const string BPMFString();
     virtual const string toneString();
     
     virtual const string& code();
@@ -83,6 +89,46 @@ protected:
     virtual const TEvent keyPrintable(KeyCode k, KeyModifier m);
     virtual const TEvent keyNonBPMF(KeyCode k);
 };
+
+
+class PhoneticSentence : public GrammarUnit {
+protected:
+    vector<PhoneticSyllable> syllist;
+    int focus;
+    
+    PhoneticService *srv;
+    PhoneticConfig cfg;
+public:
+    PhoneticSentence(PhoneticService *s, const PhoneticConfig& c);
+    virtual void updateConfig(const PhoneticConfig &c);
+    virtual void reset();
+    
+    virtual const PhoneticConfig& getConfg();
+    virtual const string BPMFString();
+    virtual const string toneString();
+    virtual const string matchMaskString();
+
+    virtual const string& code();
+    virtual const string& presentation();
+    virtual bool vacant();
+    virtual size_t width();
+    virtual size_t cursor();
+    virtual size_t markFrom();
+    virtual size_t markLength();
+    
+    virtual const TEvent keyEvent(KeyCode k, KeyModifier m);
+    virtual const CandidateList fetchCandidateList();
+    virtual const TEvent cancelCandidate();
+    virtual const TEvent chooseCandidate(size_t index, const string &item);
+
+    virtual const TEvent keyEvent(KeyCode k, KeyModifier m, PhoneticPhrase *prev, PhoneticPhrase *next);
+    
+    virtual const TEvent addSyllable(const PhoneticPhrase* prev,
+        const PhoneticPhrase* next);
+protected:
+    
+};
+
 
 #endif
 

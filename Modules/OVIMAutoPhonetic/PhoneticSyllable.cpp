@@ -46,7 +46,7 @@ const PhoneticConfig& PhoneticSyllable::getConfig() {
     return cfg;
 }
 
-const string PhoneticSyllable::bpmfString() {
+const string PhoneticSyllable::BPMFString() {
     const string &codestr=code();
     int l=codestr.length();
     if (!l) return string();
