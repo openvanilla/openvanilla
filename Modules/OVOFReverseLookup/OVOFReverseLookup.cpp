@@ -79,7 +79,7 @@ const char *OVOFReverseLookup::process(const char *src, OVService *srv) {
         
         vector<string> lookupvector, key;
         string code;
-        string seperator(" \n");
+        string seperator(" ");
 
         // look up each "candidate"
         int size=cintab->getWordVectorByChar(u8, lookupvector);
@@ -103,9 +103,10 @@ const char *OVOFReverseLookup::process(const char *src, OVService *srv) {
         }
     
         if (size) {
-            if( size > 1 ) code = "\n" + code;
+            // if( size > 1 ) code = "\n" + code;
             sprintf(buf, "%s: %s", u8, code.c_str());
             string bstr(buf);
+            if (result.size()) result += "\n";
             result += bstr;
     	}
     }

@@ -1,15 +1,11 @@
 # An IM makefile defines OBJS and GOALS, and the direct rule
 # to build GOALS from your OBJS. Other rules are deal in ov.*.mk
 IMID=OVOFFullWidthCharacter
-OBJS=OVOFFullWidthCharacter.o
-GOALS=OVOFFullWidthCharacter.dylib
+SOURCES=OVOFFullWidthCharacter
 
-$(GOALS): $(OBJS)
-	$(CPP) -bundle -o $@ $(OBJS)
-
+include ../../Mk/ov.os.mk
 include ../../Mk/ov.im.mk
 include ../../Mk/ov.vars.mk
 include ../../Mk/ov.general.mk
-include ../../Mk/ov.osx.mk
 
 

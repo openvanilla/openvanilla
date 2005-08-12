@@ -179,7 +179,7 @@ public:
         char hashdir[PATH_MAX];
         
         // we can always be sure that an ending seperator '/' is given to us
-        sprintf(hashdir, "%sOVIMChewing-OV0.7.0rc5", s->userSpacePath(identifier()));
+        sprintf(hashdir, "%sOVIMSpaceChewing-OV0.7.1", s->userSpacePath(identifier()));
         mkdir(hashdir, S_IRWXU);
         sprintf(chewingpath, "%sOVIMChewing", modulePath);
         if (!ChewingCheckData(chewingpath)) {
