@@ -99,17 +99,13 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 			case ID_CHI_ENG:
 				{
 					isChinese = !isChinese;
-					TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
-					tbi.dwMask = TBIF_IMAGE;		tbi.iImage = isChinese ? 2 : 3;
-					SendMessage( hToolbar, TB_SETBUTTONINFO, ID_CHI_ENG, LPARAM(&tbi));
+					SendMessage( hToolbar, TB_CHANGEBITMAP, ID_CHI_ENG, MAKELPARAM(isChinese ? 2 : 3, 0));
 				}
 				break;
 			case ID_FULL_HALF:
 				{
 					isFull = !isFull;
-					TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
-					tbi.dwMask = TBIF_IMAGE;		tbi.iImage = isFull ? 4 : 5;
-					SendMessage( hToolbar, TB_SETBUTTONINFO, ID_FULL_HALF, LPARAM(&tbi));
+					SendMessage( hToolbar, TB_CHANGEBITMAP, ID_FULL_HALF, MAKELPARAM(isFull ? 4 : 5, 0));
 				}
 				break;
 			case ID_CONFIG:
@@ -174,17 +170,26 @@ void UICreateStatusWindow(HWND hUIWnd)
 		hToolbar = CreateToolbarEx( uiStatus.hWnd, 
 			TBSTYLE_FLAT|TBSTYLE_TOOLTIPS|TBSTYLE_LIST|CCS_NODIVIDER|CCS_NORESIZE|
 			WS_CHILD|WS_VISIBLE|CCS_NOPARENTALIGN, 
-			10, 3, hInstDLL, IDB_STATUS_TB, 
+			10, 3, hInstDLL, 0, 
 			toolbar_btns, sizeof(toolbar_btns)/sizeof(TBBUTTON), 
 			16, 16, 16, 16, sizeof(TBBUTTON));
 
 //		hToolbar = CreateWindowEx( 0, TOOLBARCLASSNAME, NULL, CCS_NOPARENTALIGN|WS_CHILD|WS_VISIBLE, 
 //			100, 1, 20, 24, uiStatus.hWnd, NULL, hInstDLL, NULL);
 
+		HIMAGELIST himl = ImageList_Create( 16, 16, ILC_COLOR24|ILC_MASK, 7, 0);
+		HBITMAP htbbmp = LoadBitmap( hInstDLL, LPCTSTR(IDB_STATUS_TB) );
+		ImageList_RemoveAll(himl);
+		ImageList_AddMasked( himl, htbbmp, RGB(192, 192, 192) );
+		DeleteObject(htbbmp);
+		himl = (HIMAGELIST)SendMessage( hToolbar, TB_SETIMAGELIST, 0, LPARAM(himl));
+		if( himl )
+			ImageList_Destroy( himl );
+
 		TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
 		tbi.dwMask = TBIF_TEXT;		tbi.pszText = IC.at(CurrentIC);
-
 		SendMessage( hToolbar, TB_SETBUTTONINFO, ID_CHANGE_IME, LPARAM(&tbi));
+
 //		SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
 		GetToolbarSize( hToolbar, &sz );
 
