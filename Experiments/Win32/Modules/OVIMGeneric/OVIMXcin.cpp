@@ -130,7 +130,11 @@ const char* OVIMXcin::localizedName(const char* locale)
 
 int OVIMXcin::initialize(OVDictionary* global, OVService* srv, const char*)
 {
-    if (!cintab) return 0;
+    if (!cintab)
+		return 0;
+	else
+		cintab->delayedLoad();
+
     murmur("OVIMXcin: initializing %s", identifier());
     update(global, srv);
     return 1;

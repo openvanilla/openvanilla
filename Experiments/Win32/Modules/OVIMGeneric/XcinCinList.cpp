@@ -130,7 +130,7 @@ int CinList::preparse(char *loadpath, char *fname, int i)
     FILE *in=fopen(filename, "r");
     if (!in) return 0;
 
-    strcpy(list[i].filename, fname);
+	strcpy(list[i].filename, fname);
     strcpy(list[i].cname, fname);
     strcpy(list[i].ename, fname);
 
@@ -146,13 +146,12 @@ int CinList::preparse(char *loadpath, char *fname, int i)
         
         sscanf(buf, "%s %s", key, value);
 
-        if (!strcmp(key, "%ename")) strcpy(list[i].ename, value);
-        if (!strcmp(key, "%cname")) strcpy(list[i].cname, value);
-        
+		if (!strcmp(key, "%ename")) strcpy(list[i].ename, value);
+		if (!strcmp(key, "%cname")) strcpy(list[i].cname, value);
         line++;
         if (line >= vxPreparseSuppress) break;
     }
-    
+   
     fclose(in);
 	
     return 1;
