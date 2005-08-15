@@ -96,7 +96,11 @@ string *XcinKeySequence::compose(string *s)
 
 OVIMXcin::OVIMXcin(char *lpath, char *cfile, char *en, char *cn)
 {
-    strcpy(cinfile, cfile);
+    strcpy (cinfile, lpath);
+    if (cinfile[strlen(cinfile)-1]!='/')
+        strcat(cinfile, "/");
+    strcat(cinfile, cfile);
+
     cintab = NULL;
 
     sprintf(ename, "%s", en ? en : cfile);
@@ -128,12 +132,7 @@ int OVIMXcin::initialize(OVDictionary* global, OVService* srv, const char*)
 {
     if (!cintab)
      {
-        char cinfilename[PATH_MAX];
-        strcpy (cinfilename, lpath);
-        if (cinfilename[strlen(cinfilename)-1]!='/')
-            strcat(cinfilename, "/");
-        strcat(cinfilename, cinfile);
-        cintab=new OVCIN(cinfilename);
+        cintab=new OVCIN(cinfile);
      }
     murmur("OVIMXcin: initializing %s", identifier());
     update(global, srv);
