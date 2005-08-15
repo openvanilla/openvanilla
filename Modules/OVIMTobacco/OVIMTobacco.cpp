@@ -2,21 +2,33 @@
 
 #define OV_DEBUG
 
-/*
-#include <OpenVanilla/OpenVanilla.h>
-#include <OpenVanilla/OVLibrary.h>
-#include <OpenVanilla/OVUtility.h>
-*/
-#include "OpenVanilla.h"
-#include "OVLibrary.h"
-#include "OVUtility.h"
+#ifndef WIN32
+	#include <OpenVanilla/OpenVanilla.h>
+	#include <OpenVanilla/OVLibrary.h>
+	#include <OpenVanilla/OVUtility.h>
+#else
+	#include "OpenVanilla.h"
+	#include "OVLibrary.h"
+	#include "OVUtility.h"
+#endif
 
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-//#include <sys/syslimits.h>	for PATH_MAX
+
+#ifdef WIN32
+	#define strcasecmp stricmp
+#endif
+
 #include "OVKeySequence.h"
 #include "OVSQLite3.h"
+
+#ifndef WIN32
+	#include <sys/syslimits.h>	//for PATH_MAX
+#else
+	#include <windows.h>
+	#define PATH_MAX MAX_PATH
+#endif
 
 #include <string>
 
@@ -167,7 +179,7 @@ extern "C" unsigned int OVGetLibraryVersion() {
 }
 extern "C" int OVInitializeLibrary(OVService*, const char*p) { 
     db=new SQLite3;  // this never gets deleted, but so do we
-    char dbfile[256];
+    char dbfile[PATH_MAX];
     sprintf(dbfile, "%s/OVIMTobacco/imtables.db", p);
     if (int err=db->open(dbfile)) {
         murmur("SQLite3 error! code=%d", err);
@@ -204,7 +216,7 @@ const char* OVOFReverseLookupSQLite::identifier() {
 const char* OVOFReverseLookupSQLite::localizedName(const char* lc) {
     static char buf[256];
     const char *name;
-    if(!strcmp(lc,"zh_TW")) {
+    if(!strcasecmp(lc,"zh_TW")) {
 	name=QueryForKey(db, table, "_property_cname");
     } else {
 	name=QueryForKey(db, table, "_property_ename");
@@ -316,7 +328,7 @@ const char *OVIMTobacco::identifier() {
 const char *OVIMTobacco::localizedName(const char *lc) {
     static char buf[256];
     const char *name;
-    if(!strcmp(lc,"zh_TW")) {
+    if(!strcasecmp(lc,"zh_TW")) {
 	name=QueryForKey(db, table, "_property_cname");
     } else {
 	name=QueryForKey(db, table, "_property_ename");
