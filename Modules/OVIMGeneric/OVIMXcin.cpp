@@ -1,9 +1,17 @@
 // OVIMXcin.cpp
 
 #define OV_DEBUG
-#include <OpenVanilla/OpenVanilla.h>
-#include <OpenVanilla/OVLibrary.h>
-#include <OpenVanilla/OVUtility.h>
+
+#ifndef WIN32
+	#include <OpenVanilla/OpenVanilla.h>
+	#include <OpenVanilla/OVLibrary.h>
+	#include <OpenVanilla/OVUtility.h>
+#else
+	#include "OpenVanilla.h"
+	#include "OVLibrary.h"
+	#include "OVUtility.h"
+#endif
+
 #include <stdlib.h>
 #include "OVCandidateList.h"
 #include "OVIMXcin.h"
@@ -12,6 +20,16 @@
 #include <string>
 #include <iostream>
 
+#ifdef WIN32
+	#define strcasecmp stricmp
+#endif
+
+#ifndef WIN32
+	#include <sys/syslimits.h>	//for PATH_MAX
+#else
+	#include <windows.h>
+	#define PATH_MAX MAX_PATH
+#endif
 
 using namespace std;
 
@@ -96,12 +114,12 @@ string *XcinKeySequence::compose(string *s)
 
 OVIMXcin::OVIMXcin(char *lpath, char *cfile, char *en, char *cn)
 {
-    char cinfilename[PATH_MAX];
-    strcpy(cinfile, cfile);
-    strcpy (cinfilename, lpath);
-    if (cinfilename[strlen(cinfilename)-1]!='/') strcat(cinfilename, "/");
-    strcat(cinfilename, cinfile);
-    cintab=new OVCIN(cinfilename);
+    strcpy (cinfile, lpath);
+    if (cinfile[strlen(cinfile)-1]!='/')
+        strcat(cinfile, "/");
+    strcat(cinfile, cfile);
+
+    cintab = NULL;
 
     sprintf(ename, "%s", en ? en : cfile);
     sprintf(cname, "%s", cn ? cn : cfile);
@@ -130,7 +148,10 @@ const char* OVIMXcin::localizedName(const char* locale)
 
 int OVIMXcin::initialize(OVDictionary* global, OVService* srv, const char*)
 {
-    if (!cintab) return 0;
+    if (!cintab)
+     {
+        cintab=new OVCIN(cinfile);
+     }
     murmur("OVIMXcin: initializing %s", identifier());
     update(global, srv);
     return 1;
@@ -169,6 +190,7 @@ OVInputMethodContext *OVIMXcin::newContext()
 void OVXcinContext::updateDisplay(OVBuffer *buf)
 {
     buf->clear();
+    murmur("UpdateDisplay");
     if (keyseq.length())
     {
         string *ms= new string;
@@ -294,15 +316,17 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar,
     if (isprint(key->code()) && keyseq.valid(static_cast<char>(key->code())) &&
 		/*!key->isShift() &&*/ !key->isCapslock())
     {
-
-        if (keyseq.length() == parent->maxSeqLen())
-        {
+    	if (keyseq.length() > 0 &&
+    		// prevent to the exception of parent->maxSeqLen() == 0
+    		keyseq.length() == parent->maxSeqLen())
+    	{
             updateDisplay(buf);
             if (parent->isBeep()) srv->beep();
             return 1;
-        }
-        
+    	}
+    	
         keyseq.add(key->code());
+		murmur("add %d", key->code());
         if (keyseq.length() == parent->maxSeqLen() &&
         parent->isHitMaxAndCompose())
         {

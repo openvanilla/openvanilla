@@ -4,11 +4,16 @@
 #define __OVIMXcin_h
 
 //#include <Cocoa/Cocoa.h>                // to be removed after de-Cocoa-ized
-#include <OpenVanilla/OpenVanilla.h>
+#include "OpenVanilla.h"
 #include "OVCIN.h"
 #include "OVKeySequence.h"
 #include "OVCandidateList.h"
 #include <string>
+
+#ifdef WIN32
+#include <windows.h>
+#define PATH_MAX MAX_PATH
+#endif
 
 using namespace std;
 

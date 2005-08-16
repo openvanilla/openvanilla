@@ -2,6 +2,10 @@
 
 #ifndef __XcinCinList_h
 #define __XcinCinList_h
+#ifdef WIN32
+#include <windows.h>
+#define PATH_MAX MAX_PATH
+#endif
 
 struct CinPair
 {
