@@ -1,9 +1,17 @@
 // OVIMXcin.cpp
 
 #define OV_DEBUG
-#include "OpenVanilla.h"
-#include "OVLibrary.h"
-#include "OVUtility.h"
+
+#ifndef WIN32
+	#include <OpenVanilla/OpenVanilla.h>
+	#include <OpenVanilla/OVLibrary.h>
+	#include <OpenVanilla/OVUtility.h>
+#else
+	#include "OpenVanilla.h"
+	#include "OVLibrary.h"
+	#include "OVUtility.h"
+#endif
+
 #include <stdlib.h>
 #include "OVCandidateList.h"
 #include "OVIMXcin.h"
@@ -12,6 +20,16 @@
 #include <string>
 #include <iostream>
 
+#ifdef WIN32
+	#define strcasecmp stricmp
+#endif
+
+#ifndef WIN32
+	#include <sys/syslimits.h>	//for PATH_MAX
+#else
+	#include <windows.h>
+	#define PATH_MAX MAX_PATH
+#endif
 
 using namespace std;
 
@@ -120,7 +138,7 @@ const char* OVIMXcin::identifier()
 
 const char* OVIMXcin::localizedName(const char* locale)
 {
-    if (!strcmp(locale, "zh_TW") || !strcmp(locale, "zh_CN"))
+    if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
     {
         return cname;
     }

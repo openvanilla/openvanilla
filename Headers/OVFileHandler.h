@@ -4,14 +4,15 @@
 #include <string>
 #include <vector>
 #include <fstream>
-/*
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-*/
+
+#ifndef WIN32
+	#include <sys/mman.h>
+	#include <sys/stat.h>
+	#include <sys/types.h>
+	#include <stdio.h>
+	#include <fcntl.h>
+	#include <unistd.h>
+#endif
 
 using namespace std;
 
@@ -28,7 +29,10 @@ private:
 	int filePtr;
 	int getSize();
 	string getFileStringBySTL();
-//	string getFileStringByMMAP();	
+
+#ifndef WIN32
+	string getFileStringByMMAP();	
+#endif
 };
 	
 #endif
