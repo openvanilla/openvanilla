@@ -133,13 +133,13 @@
 				RelativePath="..\..\..\..\Source\OVFileHandler.cpp">
 			</File>
 			<File
-				RelativePath=".\OVIMXcin.cpp">
+				RelativePath="..\..\..\..\Modules\OVIMGeneric\OVIMXcin.cpp">
 			</File>
 			<File
 				RelativePath="..\..\..\..\Source\OVStringToolKit.cpp">
 			</File>
 			<File
-				RelativePath=".\XcinCinList.cpp">
+				RelativePath="..\..\..\..\Modules\OVIMGeneric\XcinCinList.cpp">
 			</File>
 		</Filter>
 		<Filter
@@ -153,10 +153,10 @@
 				RelativePath="..\..\..\..\Headers\OVFileHandler.h">
 			</File>
 			<File
-				RelativePath=".\OVIMXcin.h">
+				RelativePath="..\..\..\..\Modules\OVIMGeneric\OVIMXcin.h">
 			</File>
 			<File
-				RelativePath=".\XcinCinList.h">
+				RelativePath="..\..\..\..\Modules\OVIMGeneric\XcinCinList.h">
 			</File>
 		</Filter>
 		<Filter
