@@ -30,7 +30,7 @@ $(OUTDIR)\$(Proj).dll: $(OUTDIR) $(LINK32_OBJS) $(OUTDIR)\$(Proj).res
 	-out:$(OUTDIR)\$(Proj).ime\
 	-def:OVIME\$(Proj).def
 
-cflags = /O2 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_UNICODE" /D "UNICODE" /D "_WINDLL" /GF /EHsc /MD /GS /Gy /W3 /c /Wp64 /Zi /TP 
+cflags = /O2 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_UNICODE" /D "UNICODE" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP 
 FILE=ControlHandle
 $(OUTDIR)\$(FILE).obj: OVIME\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVIME\$(FILE).cpp
@@ -53,7 +53,7 @@ FILE=Utils
 $(OUTDIR)\$(FILE).obj: OVIME\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVIME\$(FILE).cpp
 
-cflags = /O2 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I "OVDummyLoader/expat" /I "OVDummyLoader/scew" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_WINDLL" /GF /EHsc /MD /GS /Gy /W3 /c /Wp64 /Zi /TP /GR
+cflags = /O2 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I "OVDummyLoader/expat" /I "OVDummyLoader/scew" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP /GR
 FILE=OVStringToolKit
 $(OUTDIR)\$(FILE).obj: ..\..\Source\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" ..\..\Source\$(FILE).cpp

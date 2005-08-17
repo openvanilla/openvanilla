@@ -48,7 +48,6 @@ void Chewing::SetKeyboardLayout(int kb)
     cd->config.bSpaceAsSelection=1;
     SetConfig(cd, &config);
 }
-
 /*
  * Return i-th selection-key. i starts from 0.
  */
