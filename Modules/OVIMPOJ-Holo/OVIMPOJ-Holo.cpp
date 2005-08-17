@@ -7,6 +7,17 @@
 #include "OVIMPOJ-Holo.h"
 #include <ctype.h>
 
+#ifdef WIN32
+	#define strcasecmp stricmp
+#endif
+
+#ifndef WIN32
+	#include <sys/syslimits.h>	//for PATH_MAX
+#else
+	#include <windows.h>
+	#define PATH_MAX MAX_PATH
+#endif
+
 OV_SINGLE_MODULE_WRAPPER(OVIMPOJHolo);
 
 OVIMPOJHolo::OVIMPOJHolo() {

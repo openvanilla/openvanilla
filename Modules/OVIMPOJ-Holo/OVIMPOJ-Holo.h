@@ -5,9 +5,16 @@
 #ifndef __OVIMPOJHoloHolo_h
 #define __OVIMPOJHoloHolo_h
 
-#include <OpenVanilla/OpenVanilla.h>
-#include <OpenVanilla/OVUtility.h>
-#include <OpenVanilla/OVLibrary.h>
+#ifndef WIN32
+	#include <OpenVanilla/OpenVanilla.h>
+	#include <OpenVanilla/OVUtility.h>
+	#include <OpenVanilla/OVLibrary.h>
+#else
+	#include "OpenVanilla.h"
+	#include "OVUtility.h"
+	#include "OVLibrary.h"
+#endif
+
 #include "OVCIN.h"
 #include "OVCandidateList.h"
 #include "POJ-Holo.h"
