@@ -63,15 +63,15 @@ FunctionEnd
 Section "MainSection" SEC01
   SetOutPath "$SYSDIR"
   SetOverwrite ifnewer
-  File "..\Result\OVIME.ime"
-  File "..\OVIMEUI\PCMan\OVIMEUI.DLL"
-  File "..\SQLite3\sqlite3.dll"
-  File "..\OVDummyLoader\libiconv-2.dll"
-  File "..\OVDummyLoader\libltdl3.dll"
-  File "..\OVDummyLoader\expat\libexpat.dll"
+  File "System32\OVIME.ime"
+  File "System32\*.dll"
 SectionEnd
 
 Section "Modules" SEC02
+  SetOutPath "$WINDIR\OpenVanilla"
+  SetOVerwrite ifnewer
+  File /r "Modules"
+  CreateDirectory "$WINDIR\OpenVanilla\User"
 SectionEnd
 
 Section -AdditionalIcons
@@ -118,6 +118,8 @@ Section Uninstall
   Delete "$SYSDIR\sqlite3.dll"
   Delete "$SYSDIR\OVIMEUI.DLL"
   Delete "$SYSDIR\OVIME.ime"
+  Delete "$SYSDIR\libchewing.dll"
+  RMDir /r "$WINDIR\OpenVanilla\Modules"
 
   Delete "$SMPROGRAMS\OpenVanilla\Uninstall.lnk"
 
