@@ -4362,29 +4362,19 @@ Unicode Hex
 \f2 \cf0 In OV 0.7 we have two versions of Chewing input method modules, a dynamic-linked one and a static-linked Chewing. We could stick on the dynamic-linked version of (\'a5\'48\'a4\'55\'bb\'79\'b7\'4e\'a4\'a3\'b2\'4d\'a1\'48) \'b1\'7a\'a5\'69\'a5\'48\'a8\'cf\'a5\'ce\'b0\'ca\'ba\'41\'b3\'73\'b5\'b2\'aa\'a9\'a5\'bb\'a1\'41\'a8\'cf\'a5\'ce\'a1\'75\'b7\'73\'bb\'c5\'ad\'b5\'a1\'76\'bf\'e9\'a4\'4a\'aa\'6b\'b1\'4d\'ae\'d7\'a9\'d2\'b6\'7d\'b5\'6f\'a5\'58\'aa\'ba\'bb\'c5\'ad\'b5\'ab\'e1\'ba\'dd\'a5\'48\'a4\'ce\'b8\'fb\'b7\'73\'aa\'ba\'b5\'fc\'ae\'77\'a1\'41\'a6\'fd\'ac\'4f\'b0\'ca\'ba\'41\'b3\'73\'b5\'b2\'aa\'a9\'a5\'bb\'a6\'62
 \f4  Mac OS X 10.4 
 \f2 \'a4\'57\'a6\'b3\'b5\'db\'a4\'40\'a8\'c7\'b0\'dd\'c3\'44\'a1\'41\'a9\'d2\'a5\'48\'a6\'62\'b3\'cc\'ab\'e1\'c4\'c0\'a5\'58\'b5\'6f\'a6\'e6\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'ac\'4f\'c4\'c0\'a5\'58\'c0\'52\'ba\'41\'b3\'73\'b5\'b2\'aa\'a9\'a5\'bb\'a1\'43\
-\'a6\'70\'aa\'47\'ad\'6e\'bd\'73\'c4\'b6\'c0\'52\'ba\'41\'b3\'73\'b5\'b2\'aa\'a9\'a5\'bb\'aa\'ba\'bb\'c5\'ad\'b5\'a1\'41\'aa\'bd\'b1\'b5\'bd\'73\'c4\'b6
-\f4  Modules/OVIMSpaceChewing/ 
-\f2 \'a7\'59\'a5\'69\'a1\'41\'bd\'73\'c4\'b6\'b0\'ca\'ba\'41\'b3\'73\'b5\'b2\'aa\'ba\'bb\'c5\'ad\'b5\'b7\'7c\'a4\'f1\'b8\'fb\'bd\'c6\'c2\'f8\'a4\'40\'a8\'c7\'a1\'41\'a6\'5d\'ac\'b0\'a5\'d8\'ab\'65
-\f4  OV 
-\f2 \'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'ac\'4f\'bb\'50\'a1\'75\'b7\'73\'bb\'c5\'ad\'b5\'a1\'76\'aa\'ba\'b6\'7d\'b5\'6f\'b9\'ce\'b6\'a4\'a6\'40\'a6\'50\'b6\'7d\'b5\'6f\'a1\'41\'a9\'d2\'a5\'48\'b5\'7b\'a6\'a1\'bd\'58\'a4\'c0\'b4\'b2\'a6\'62\'a8\'e2\'ad\'d3\'a4\'a3\'a6\'50\'b9\'ce\'b6\'a4\'aa\'ba\'c0\'c9\'ae\'d7\'ae\'77\'a4\'a4\'a1\'43\
-\'a6\'70\'aa\'47\'b1\'7a\'ad\'6e\'a6\'db\'a6\'e6\'bd\'73\'c4\'b6\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'b1\'7a\'ad\'ba\'a5\'fd\'bb\'dd\'ad\'6e
-\f4  libchewing
-\f2 \'a1\'41\'b1\'7a\'a5\'69\'a5\'48\'b1\'71\'b7\'73\'bb\'c5\'ad\'b5\'b1\'4d\'ae\'d7\'ba\'f4\'af\'b8\'a4\'57\'a4\'55\'b8\'fc
-\f4  libchewing
-\f2 \'a1\'41\'ba\'f4\'a7\'7d\'ac\'4f\'a1\'47\
+To compile static-linked Chewing, you just need to compile
+\f4  Modules/OVIMSpaceChewing/.
+\f2  However, building dynamic-linked Chewing would be more complicated; the source codes are actually from different repositories of Openvanilla and New Chewing Project since OV Chewing is under the collaboration of these two teams.\
+If you want to compile Chewing input method by yourself, you need to have libchewing first. Libchewing is available for downloaad from the New Chewing Project website:\
 
 \f4  http://chewing.csie.net/download.html\
 
-\f2 \'a8\'d2\'a6\'70\'a1\'41\'a6\'70\'aa\'47\'b1\'7a\'b7\'51\'ad\'6e\'a6\'77\'b8\'cb
-\f4  libchewing 0.2.5 
-\f2 \'aa\'a9\'aa\'ba\'b8\'dc\'a1\'41\'a8\'ba\'bb\'f2\'a1\'41\'b4\'4e\'ac\'4f\'a4\'55\'b8\'fc
-\f4  http://chewing.csie.net/download/libchewing/libchewing-0.2.5.tar.gz 
-\f2 \'b3\'6f\'ad\'d3\'c0\'c9\'ae\'d7\'a1\'43\'a6\'70\'aa\'47\'b1\'7a\'a5\'ce
-\f4  Safari 
-\f2 \'a4\'55\'b8\'fc\'a1\'41\'a6\'62\'a4\'55\'b8\'fc\'a7\'b9\'a6\'a8\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'b4\'4e\'b7\'7c\'a6\'db\'b0\'ca\'b8\'d1\'b6\'7d\'c0\'a3\'c1\'59\'a1\'41\'a8\'c3\'a5\'42\'a6\'62\'b1\'7a\'aa\'ba\'ae\'e0\'ad\'b1\'a4\'57\'a1\'41\'ab\'d8\'a5\'df\'a4\'40\'ad\'d3\'a5\'73\'b0\'b5
-\f4  libchewing-0.2.5 
-\f2 \'aa\'ba\'a5\'d8\'bf\'fd\'a1\'43\
-\'b5\'4d\'ab\'e1\'a1\'41\'bd\'d0\'a5\'b4\'b6\'7d\'b2\'d7\'ba\'dd\'be\'f7\'a1\'41\'a4\'55\'a5\'48\'a4\'55\'aa\'ba\'ab\'fc\'a5\'4f\'a1\'47\
+\f2 For instance, if you want to install
+\f4  libchewing 0.2.5, 
+\f2 you need to download the file at this URL
+\f4  http://chewing.csie.net/download/libchewing/libchewing-0.2.5.tar.gz. When you use the Safari 
+\f2 to download this, it's likely going to be uncompressed and extracted automatically after finishing the download. A folder called libchewing-0.2.5 would be on the desktop.\
+Then you need to launch Terminal program and issue following commands:\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
 
@@ -4394,50 +4384,26 @@ Unicode Hex
  sudo make install\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
 
-\f2 \cf0 \'b1\'b5\'a4\'55\'a8\'d3\'b1\'7a\'bb\'dd\'ad\'6e\'a6\'77\'b8\'cb
+\f2 \cf0 After that you need to compile
 \f4  libchewingpp
-\f2 \'a1\'41\'b3\'6f\'ac\'4f\'a4\'40\'ad\'d3\'a8\'cf\'a5\'ce
-\f4  C++ 
-\f2 \'bb\'79\'a8\'a5\'b3\'73\'b1\'b5
-\f4  libchewing 
-\f2 \'aa\'ba
-\f4  wrapper
-\f2 \'a1\'43\'b1\'7a\'a5\'69\'a5\'48\'a8\'cf\'a5\'ce
-\f4  svk
-\f2 \'a1\'42
+\f2 , which is a
+\f4  C++ wrapper for  libchewing. You can use tool like svk
+\f2 , 
 \f4 svn 
-\f2 \'a9\'ce
-\f4  wget 
-\f2 \'b5\'a5\'a4\'75\'a8\'e3\'a1\'41\'b1\'71\'a5\'48\'a4\'55\'ba\'f4\'a7\'7d\'a8\'fa\'b1\'6f
-\f4  libchewingcpp
-\f2 \'a1\'47\
+\f2 or
+\f4  wget etc.
+\f2  to download 
+\f4 libchewingcpp
+\f2  from following URL.\
 
 \f4 https://svn.csie.net/chewing/libchewingpp/trunk/\
 
-\f2 \'a8\'cf\'a5\'ce\'b3\'6f\'a8\'c7\'a4\'75\'a8\'e3\'a7\'ec\'a8\'fa\'b5\'7b\'a6\'a1\'bd\'58\'aa\'ba\'a4\'e8\'aa\'6b\'a1\'41\'bb\'50\'ab\'65\'ad\'b1\'a1\'75\'a6\'db\'a6\'e6\'bd\'73\'c4\'b6
-\f4  OpenVanilla
-\f2 \'a1\'76\'a4\'a4\'a9\'d2\'b4\'a3\'a8\'ec\'a1\'41\'a7\'ec\'a8\'fa
-\f4  OV 
-\f2 \'b5\'7b\'a6\'a1\'bd\'58\'aa\'ba\'a4\'e8\'aa\'6b\'ac\'4f\'ac\'db\'a6\'50\'aa\'ba\'a1\'43\'b5\'4d\'ab\'e1\'a1\'41\'bd\'d0\'a6\'62
-\f4  libchewing 
-\f2 \'a5\'d8\'bf\'fd\'a4\'55\'a8\'cf\'a5\'ce
-\f4  make; make test 
-\f2 \'a6\'77\'b8\'cb\'a1\'43\
-\'b3\'cc\'ab\'e1\'a7\'da\'ad\'cc\'bb\'dd\'ad\'6e\'af\'e0\'b0\'f7\'c5\'fd
-\f4  OV 
-\f2 \'a5\'69\'a5\'48\'b3\'7a\'b9\'4c
-\f4  libchewingcpp 
-\f2 \'a1\'41\'b6\'69\'a4\'40\'a8\'42\'b3\'73\'a8\'ec\'a8\'ec
-\f4  libchewing
-\f2 \'a1\'41\'b4\'4e\'a5\'b2\'b6\'b7\'ad\'6e\'a6\'77\'b8\'cb
-\f4  carchew
-\f2 \'a1\'5d
-\f4 carchew 
-\f2 \'a4\'5d\'b4\'4e\'ac\'4f
-\f4  Carbon Chewing 
-\f2 \'aa\'ba\'c1\'59\'bc\'67\'a1\'5e\'a1\'41
-\f4 carchew 
-\f2 \'a5\'69\'a5\'48\'b1\'71\'b3\'6f\'b8\'cc\'a8\'fa\'b1\'6f\'a1\'47\
+\f2 You check the same procedures we mentioned in the chapter "Compiling OpenVanilla by Yourself" using those tools to obtain the source codes. The next step is to issue "make; make test" commands under 
+\f4 libchewing directory.
+\f2 \
+Finally we need to enable OV to connect libchewing through libchewingcpp. In order to do this, you need to install carchew (
+\f4 Carbon Chewing), carchew can be obtained from here:
+\f2 \
 
 \f4 https://opensvn.csie.org/SpaceChewingOSX/branches/carchew\
 
