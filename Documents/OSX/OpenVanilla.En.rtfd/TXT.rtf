@@ -4269,9 +4269,7 @@ You can use porting system like fink or dports to build and install subversion. 
 \fs24 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
 
-\f2 \cf0 In OV 0.7 we have two versions of Chewing input method modules, a dynamic-linked one and a static-linked Chewing. We could stick on the dynamic-linked version of (\'a5\'48\'a4\'55\'bb\'79\'b7\'4e\'a4\'a3\'b2\'4d\'a1\'48) \'b1\'7a\'a5\'69\'a5\'48\'a8\'cf\'a5\'ce\'b0\'ca\'ba\'41\'b3\'73\'b5\'b2\'aa\'a9\'a5\'bb\'a1\'41\'a8\'cf\'a5\'ce\'a1\'75\'b7\'73\'bb\'c5\'ad\'b5\'a1\'76\'bf\'e9\'a4\'4a\'aa\'6b\'b1\'4d\'ae\'d7\'a9\'d2\'b6\'7d\'b5\'6f\'a5\'58\'aa\'ba\'bb\'c5\'ad\'b5\'ab\'e1\'ba\'dd\'a5\'48\'a4\'ce\'b8\'fb\'b7\'73\'aa\'ba\'b5\'fc\'ae\'77\'a1\'41\'a6\'fd\'ac\'4f\'b0\'ca\'ba\'41\'b3\'73\'b5\'b2\'aa\'a9\'a5\'bb\'a6\'62
-\f4  Mac OS X 10.4 
-\f2 \'a4\'57\'a6\'b3\'b5\'db\'a4\'40\'a8\'c7\'b0\'dd\'c3\'44\'a1\'41\'a9\'d2\'a5\'48\'a6\'62\'b3\'cc\'ab\'e1\'c4\'c0\'a5\'58\'b5\'6f\'a6\'e6\'aa\'ba\'ae\'c9\'ad\'d4\'a1\'41\'ac\'4f\'c4\'c0\'a5\'58\'c0\'52\'ba\'41\'b3\'73\'b5\'b2\'aa\'a9\'a5\'bb\'a1\'43\
+\f2 \cf0 In OV 0.7 we have two versions of Chewing input method modules, a dynamic-linked one and a static-linked Chewing. We could stick on the dynamic-linked version, which uses the Chewing back-end from new Chewing Project and also uses newer lexicon (\'b5\'fc\'ae\'77\'a1\'48). However there are some stability related issues on this dynamic-linked version under Mac OS X 10.4. Therefore we still release static build in the end.\
 To compile static-linked Chewing, you just need to compile
 \f4  Modules/OVIMSpaceChewing/.
 \f2  However, building dynamic-linked Chewing would be more complicated; the source codes are actually from different repositories of Openvanilla and New Chewing Project since OV Chewing is under the collaboration of these two teams.\
