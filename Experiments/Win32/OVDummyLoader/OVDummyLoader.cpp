@@ -24,6 +24,8 @@ extern "C" {
 #include "ltdl.h"
 }
 
+TCHAR OV_BASEDIR[MAX_PATH];
+TCHAR OV_USERDIR[MAX_PATH];
 TCHAR OV_MODULEDIR[MAX_PATH];
 enum { bit7=0x80, bit6=0x40, bit5=0x20, bit4=0x10, bit3=8, bit2=4, bit1=2, bit0=1 };
 
@@ -187,7 +189,7 @@ public:
     virtual void beep() {}
     virtual void notify(const char *msg) { fprintf(stderr, "%s\n", msg); }
     virtual const char *locale() { return "zh_TW"; }
-    virtual const char *userSpacePath(const char *modid) { return OV_MODULEDIR; }
+    virtual const char *userSpacePath(const char *modid) { return OV_USERDIR; }
     virtual const char *pathSeparator() { return "\\"; }
     virtual const char *toUTF8(const char *encoding, const char *src) 
     { 
@@ -378,8 +380,10 @@ int main() {
 
 void init() {    
     if (inited) return;
-    GetWindowsDirectory(OV_MODULEDIR, MAX_PATH - 14);
-    sprintf(OV_MODULEDIR, "%s\\%s", OV_MODULEDIR, "\\OpenVanilla\\");
+    GetWindowsDirectory(OV_BASEDIR, MAX_PATH - 14);
+    sprintf(OV_BASEDIR, "%s\\%s", OV_BASEDIR, "\\OpenVanilla\\");
+    sprintf(OV_USERDIR, "%s\\%s", OV_BASEDIR, "\\User\\");
+    sprintf(OV_MODULEDIR, "%s\\%s", OV_BASEDIR, "\\Modules\\");
     lt_dlinit();
     lt_dlsetsearchpath(OV_MODULEDIR);
 
@@ -422,7 +426,7 @@ void initContext(int n) {
 	if(!strcmp(mod_vector[n]->moduleType(), "OVInputMethod"))
 	{
 		OVInputMethod *im = reinterpret_cast<OVInputMethod*>((mod_vector[n]));
-		im->initialize(new DummyDictionary(OV_MODULEDIR, im->identifier()), &srv, OV_MODULEDIR);
+		im->initialize(new DummyDictionary(OV_BASEDIR, im->identifier()), &srv, OV_MODULEDIR);
 		murmur("InitContext %s", im->localizedName("zh_TW"));
 		ctx_vector.at(n) = im->newContext();
 	}
