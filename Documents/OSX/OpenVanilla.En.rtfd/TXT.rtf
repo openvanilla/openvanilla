@@ -1,4 +1,4 @@
-{\rtf1\mac\ansicpg10000\cocoartf824\cocoasubrtf100
+{\rtf1\mac\ansicpg10000\cocoartf824\cocoasubrtf110
 {\fonttbl\f0\fswiss\fcharset77 Helvetica;\f1\froman\fcharset77 Palatino-BoldItalic;\f2\fnil\fcharset79 LiHeiPro;
 \f3\fnil\fcharset77 TrebuchetMS-Italic;\f4\fnil\fcharset77 TrebuchetMS;\f5\fnil\fcharset77 LucidaGrande;
 \f6\fnil\fcharset78 HiraKakuPro-W3;\f7\fnil\fcharset77 AppleSymbols;\f8\fnil\fcharset102 STXihei;
@@ -44,11 +44,7 @@ Tian-jian Jiang,  Lukhnos D. Liu, Kang-min "gugod" Liu, Pek-tiong Tan,\
 and Wei-zhong "zonble" Yang
 \fs26 \
 
-\f2 \'b1\'69\'da\'7a\'b5\'be\'a1\'42\'b3\'af\'a8\'d4\'a6\'70\'a1\'42\'c1\'c2\'a9\'73\'e8\'fb\'a1\'42\'ab\'b8\'a4\'d1\'e1\'d6\'a1\'42
-\f4 Lukhnos
-\f2 \'a1\'42\'bc\'42\'b1\'64\'a5\'c1\
-\'b3\'af\'ac\'66\'a4\'a4\'a1\'42\'b7\'a8\'ba\'fb\'a4\'a4  \'aa\'a9\'c5\'76\'a9\'d2\'a6\'b3
-\f4\fs24 \
+\fs24 \
 
 \f2\fs26 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\qc
@@ -59,19 +55,19 @@ and Wei-zhong "zonble" Yang
 \fs24 \cf2 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi2252\sl287\slmult1\sb20\ql\qnatural
 \cf2 1. Introduction\
-2. New features\
+2. New Features\
 3. Requirements\
 4. Installation\
 5. Uninstalling\
-6. \'b0\'f2\'a5\'bb\'a8\'cf\'a5\'ce\'a4\'e8\'aa\'6b\
-7. \'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\
-8. \'a4\'e5\'a6\'72\'bf\'e9\'a5\'58\'b3\'42\'b2\'7a\'bc\'d2\'b2\'d5\
+6. Using OpenVanilla\
+7. Input Method Modules\
+8. Text Output Processing Modules\
 9. Preferences\
-10. Manual settings\
-11. \'a7\'52\'b0\'a3\'a1\'42\'ad\'d7\'a7\'ef\'bb\'50\'b3\'5d\'ad\'70\'a6\'db\'a4\'76\'aa\'ba\'bf\'e9\'a4\'4a\'aa\'6b\
-12. \'a8\'cf\'a5\'ce\'b1\'c2\'c5\'76\
-13. Source codes\
-14. \'bd\'75\'a4\'57\'ac\'db\'c3\'f6\'a4\'e5\'a5\'f3\'a5\'48\'a4\'ce\'c1\'70\'b5\'b8\'a4\'e8\'a6\'a1
+10. Manual Settings\
+11. Removing, Editing and Creating Input Methods\
+12. Licensing\
+13. Source Codes\
+14. Online Resources and Contacting Us
 \f4 \cf0  
 \f2\fs26 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\sl287\slmult1\sb20\ql\qnatural
@@ -4547,139 +4543,119 @@ Unicode Hex
 
 \f2 \cf0 \'aa\'fe\'bf\'fd\'a4\'45
 \f4  
-\f2 \'af\'53\'a7\'4f\'b7\'50\'c1\'c2
+\f2 Acknowledgments 
 \f4\fs24 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
 \cf0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\qj
 
-\f2 \cf0 \'a6\'db\'a5\'d1\'b3\'6e\'c5\'e9
-\f4  (free software) 
-\f2 \'aa\'ba\'b6\'7d\'b5\'6f\'a5\'f5\'bf\'e0\'b3\'6e\'c5\'e9\'aa\'c0\'b8\'73\'b8\'cc\'aa\'ba\'b2\'b3\'a4\'48\'a7\'eb\'a4\'4a\'a1\'43\'a5\'48\'a4\'55\'aa\'ba\'be\'f7\'ba\'63\'a9\'4d\'b9\'ce\'c5\'e9\'a6\'62
-\f4  OpenVanilla 
-\f2 \'b6\'7d\'b5\'6f\'b9\'4c\'b5\'7b\'a4\'a4\'a1\'41\'b5\'b9\'a4\'a9\'a4\'46\'b3\'5c\'a6\'68\'c0\'b0\'a7\'55\'a1\'47\
+\f2 \cf0 Developing 
+\f4 free software is highly dependent on the contributions from the community. We truly appreciate those precious efforts helping us developing OpenVanilla from following institutions or organizations
+\f2 :\
 \
 \pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\sl287\slmult1\sb20\qj
 \ls11\ilvl0\cf0 {\listtext	
-\f5 \uc0\u8259 	}
-\f2 \'a4\'a4\'ac\'e3\'b0\'7c\'a6\'db\'a5\'d1\'b3\'6e\'c5\'e9\'c5\'b1\'b3\'79\'b3\'f5\'a1\'5d
+\f5 \uc0\u8259 	}Opensource Foundry, Academia
+\f2  (
 \f4 http://openfoundry.org/;http://rt.openfoundry.org
-\f2 \'a1\'5e\'b4\'a3\'a8\'d1\'b1\'4d\'ae\'d7\'ba\'de\'b2\'7a\'a4\'75\'a8\'e3\'a4\'ce\'c0\'c9\'ae\'d7\'ad\'dc\'c0\'78\'a1\'43\
+\f2 ) we thank you for providing us wonderful project management tools and project files storage.\
 {\listtext	
 \f5 \uc0\u8259 	}
-\f2 \'c3\'c0\'a5\'df\'a8\'f3\'a1\'5d
-\f4 http://elixus.org
-\f2 \'a1\'5e\'b4\'a3\'a8\'d1\'ad\'70\'b9\'ba\'ba\'f4\'ad\'b6\'aa\'c5\'b6\'a1\'a1\'43\
+\f2 Elixus (
+\f4 http://elixus.org)
+\f2 , we thank you for providing website hosting.\
 \pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\sl287\slmult1\sb20\qj
 \ls11\ilvl0
 \f4 \cf0 {\listtext	
 \f5 \uc0\u8259 	}
 \f4 svk 
-\f2 \'ad\'70\'b9\'ba\'a1\'5d
+\f2 project (
 \f4 http://svk.elixus.org
-\f2 \'a1\'5e\'a6\'a8\'ad\'fb\'ac\'b0
-\f4  OpenVanilla 
-\f2 \'aa\'ba\'aa\'a9\'a5\'bb\'ba\'de\'b2\'7a\'b4\'a3\'a8\'d1\'a4\'46\'b7\'a5\'a8\'ce\'aa\'ba\'a4\'75\'a8\'e3\'a1\'41\'a6\'50\'ae\'c9\'a4\'5d\'a6\'68\'a6\'b8\'a6\'62\'a5\'62\'a9\'5d\'b0\'a3\'bf\'f9\'a8\'ec\'b5\'6f\'b7\'57\'aa\'ba\'ae\'c9\'ad\'d4\'a9\'de\'a4\'4d\'ac\'db\'a7\'55\'a1\'41\'b8\'d1\'b5\'aa\'a4\'46\'a6\'68\'b6\'b5\'aa\'a9\'a5\'bb\'ba\'de\'b2\'7a\'aa\'ba\'ba\'c3\'b4\'62\'a1\'43\
+\f2 ) members, we thank you for your wonderful version management tool and you guys' kindly educating us working with version control systems.\
 {\listtext	
-\f5 \uc0\u8259 	}
-\f2 \'a6\'d1\'a6\'61\'a4\'e8\'a6\'42\'aa\'47\'ab\'c7\'a1\'5d
+\f5 \uc0\u8259 	}We deeply appreciate the report from these lovely mac community websites: 
+\f2 Frostyplace (
 \f4 http://www.frostyplace.com/
-\f2 \'a1\'5e\'a1\'42
+\f2 ), 
 \f4 OIKOS
-\f2 \'a5\'cd\'ac\'a1\'ba\'f4\'a1\'5d
+\f2  (
 \f4 http://www.oikos.com.tw/
-\f2 \'a1\'5e\'a1\'42\'b4\'f1\'b3\'c1\'b0\'f3\'a1\'5d
+\f2 ), SinoMac (
 \f4 http://www.sinomac.com/
-\f2 \'a1\'5e\'a1\'42
-\f4 Chinese Mac
-\f2 \'a1\'5d
+\f2 )\'a1\'42
+\f4 Chinese Mac 
+\f2 (
 \f4 http://www.yale.edu/chinesemac/
-\f2 \'a1\'5e\'b5\'a5\'c4\'ab\'aa\'47\'aa\'c0\'b8\'73\'ba\'f4\'af\'b8\'b9\'ef\'a9\'f3
-\f4  OV 
-\f2 \'aa\'ba\'ac\'db\'c3\'f6\'b3\'f8\'be\'c9\'a1\'43\
+\f2 ) and more.\
 {\listtext	
-\f5 \uc0\u8259 	}
-\f2 \'b7\'73\'bb\'c5\'ad\'b5\'b5\'6f\'ae\'69\'ad\'70\'b5\'65\'a1\'5d
+\f5 \uc0\u8259 	}New Chewing Project
+\f2  (
 \f4 http://chewing.csie.net/news.html
-\f2 \'a1\'5e\'a6\'40\'a6\'50\'b5\'6f\'ae\'69\'a6\'55\'a5\'ad\'a5\'78\'aa\'ba\'bb\'c5\'ad\'b5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'43\
+\f2 ) for their sharing chewing code base and wonderful collaboration.\
 {\listtext	
 \f5 \uc0\u8259 	}
 \f2 \'a6\'e6\'a6\'43\'ac\'ec\'a7\'de\'a1\'5d
 \f4 http://www.array.com.tw/
-\f2 \'a1\'5e\'b4\'a3\'a8\'d1\'a7\'b9\'be\'e3\'aa\'ba\'a6\'e6\'a6\'43\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ed\'ae\'e6\'a1\'43\
+\f2 \'a1\'5efor providing \'a6\'e6\'a6\'43 input method table\
 {\listtext	
-\f5 \uc0\u8259 	}
-\f2 Christopher Walker \'a5\'fd\'a5\'cd\'b1\'4e
-\f4  OV 
-\f2 \'c2\'c3\'a4\'e5\'bf\'e9\'a4\'4a\'aa\'6b\'a1\'41\'a9\'f1\'b8\'6d\'a6\'62\'c2\'c3\'a4\'e5\'a4\'4a\'a4\'66\'ba\'f4\'af\'b8\'a1\'5d
-\f4 The Tibetan Portal
-\f2 \'a1\'41
-\f4 http://www.tibetanportal.com/
-\f2 \'a1\'5e\'a4\'a4\'a5\'5b\'a5\'48\'a4\'b6\'b2\'d0\'a1\'43\
+\f5 \uc0\u8259 	}Mr. 
+\f2 Christopher Walker for putting the Tibetan input method in the Tibetan Portal
+\f4  (http://www.tibetanportal.com/
+\f2 ) also with a short review.\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
-\cf0 \'a5\'74\'a5\'7e\'a1\'41
+\cf0 Meanwhile, we 
 \f4 OpenVanilla 
-\f2 \'b9\'ce\'b6\'a4\'a6\'a8\'ad\'fb\'b9\'ef\'a9\'f3\'a9\'d2\'a6\'b3\'b0\'d1\'bb\'50\'b4\'fa\'b8\'d5\'a1\'42\'b4\'a3\'a8\'d1\'bf\'e9\'a4\'4a\'aa\'6b\'b8\'ea\'ae\'c6\'aa\'ba\'aa\'42\'a4\'cd\'a1\'41\'aa\'ed\'a5\'dc\'b7\'50\'c1\'c2\'a1\'47\
+\f2 members appreciate these friends for testing input methods or tipping us the specification of input methods:\
 \pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\sl287\slmult1\sb20\qj
 \ls12\ilvl0
 \f4 \cf0 \AppleTypeServicesU0 {\listtext	
 \f5 \uc0\u8259 	}
-\f4 guoweiok 
-\f2 \'b4\'a3\'a8\'d1\'a4\'46\'b8\'d4\'ba\'c9\'aa\'ba\'c2\'b2\'c5\'e9\'a4\'a4\'a4\'e5\'b5\'fc\'b2\'d5\'aa\'ed\'ae\'e6\'a1\'43\AppleTypeServicesU1 \
+\f4 guoweiok for providing a detail table of simplified Chinese phrase sets
+\f2 .\AppleTypeServicesU1 \
 \pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\sl287\slmult1\sb20\qj
 \ls12\ilvl0
 \f4 \cf0 {\listtext	
-\f5 \uc0\u8259 	}
-\f4 IRCNet #osxchat 
-\f2 \'a4\'57\'aa\'ba\'aa\'42\'a4\'cd\'ad\'cc\'a6\'70
-\f4  autrijus
-\f2 \'a1\'42
+\f5 \uc0\u8259 	}Friends from 
+\f4 channel #osxchat of IRCNet (we are now moving to FreeNode), autrijus
+\f2 , 
 \f4 hcchien
-\f2 \'a1\'42
+\f2 , 
 \f4 whiteg
-\f2 \'a1\'42
-\f4 momizi
-\f2 \'a4\'40\'b8\'f4\'b5\'b9\'a4\'46\'ac\'db\'b7\'ed\'a6\'68\'aa\'ba\'b7\'4e\'a8\'a3\'bb\'50\'a4\'e4\'ab\'f9\'a1\'43
+\f2 , 
+\f4 momizi, etc. for a lot of nice advices and supports all the way
+\f2 .
 \f4  \
 {\listtext	
 \f5 \uc0\u8259 	}
-\f4 momizi 
-\f2 \'b1\'71\'a1\'75\'ad\'bb\'af\'f3\'ad\'dc\'be\'65\'a1\'76\'a5\'48\'a8\'d3\'ab\'4b\'a4\'a3\'c2\'5f\'b4\'a3\'a5\'58\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ba\'a7\'ef\'b6\'69\'b7\'4e\'a8\'a3\'a1\'41\'a8\'c3\'bb\'73\'a7\'40\'a4\'46
-\f4  OV 
-\f2 \'aa\'ba\'a4\'e9\'a4\'e5\'b0\'b2\'a6\'57\'bf\'e9\'a4\'4a\'aa\'6b\'aa\'ed\'ae\'e6\'a1\'43\
+\f4 momizi for advices from the day one and helping working out the table for Japanese Kana characters.
+\f2 \
 {\listtext	
 \f5 \uc0\u8259 	}
-\f4 Autrijus 
-\f2 \'ac\'4f\'ab\'50\'a6\'a8\'b6\'7d\'b5\'6f
-\f4  OV 
-\f2 \'a4\'6a\'a9\'f6\'a1\'5d\'ab\'e1\'a8\'d3\'aa\'ba
-\f4  OVIMXcin 
-\f2 \'aa\'78\'a5\'ce\'bf\'e9\'a4\'4a\'aa\'6b\'bc\'d2\'b2\'d5\'a1\'5e\'aa\'ba\'b1\'c0\'a4\'e2\'a1\'43\
+\f4 Autrijus for kicking start the development of OV 
+\f2 \'a4\'6a\'a9\'f6 input methods and later it became
+\f4  OVIMXcin generic input method module
+\f2 .\
 {\listtext	
 \f5 \uc0\u8259 	}
 \f4 ijliao 
-\f2 \'a9\'4d
-\f4  xeonchen 
-\f2 \'c0\'b0\'a6\'a3\'a4\'6a\'b6\'71\'b4\'fa\'b8\'d5\'a4\'46
-\f4  OV 
-\f2 \'aa\'ba\'a6\'e6\'a6\'43\'bc\'d2\'b2\'d5\'a1\'41\'b2\'d7\'a9\'f3\'a6\'b3\'a4\'46\'c3\'ad\'a9\'77\'aa\'ba\'aa\'a9\'a5\'bb\'a1\'43
+\f2 and
+\f4  xeonchen for helping intensively testing OV's 
+\f2 \'a6\'e6\'a6\'43 input method therefore we have a stable version of this input method module. 
 \f4 gontera
-\f2 \'a1\'5d\'a6\'d1\'a4\'4d\'a1\'5e\'b4\'a3\'a8\'d1\'a4\'46
+\f2 \'a1\'5d\'a6\'d1\'a4\'4d\'a1\'5efor providing
 \f4  Unicode 
-\f2 \'aa\'a9\'aa\'ba\'a6\'e6\'a6\'43\'b8\'ea\'ae\'c6\'a1\'41\'a6\'50\'ae\'c9\'a4\'5d\'ac\'4f\'a6\'e6\'a6\'43\'bc\'d2\'b2\'d5\'aa\'ba\'b4\'fa\'b8\'d5\'aa\'cc\'a1\'43\
+\f2 version of \'a6\'e6\'a6\'43 data and also testing the \'a6\'e6\'a6\'43 module.\
 \ls12\ilvl0
 \f4 {\listtext	
 \f5 \uc0\u8259 	}
-\f4 crossbone 
-\f2 \'ab\'68\'b7\'4a\'be\'e3\'a4\'46\'a6\'68\'ba\'d8\'aa\'a9\'a5\'bb\'aa\'ba\'ad\'dc\'be\'65\'a4\'ce\'b3\'74\'a6\'a8\'bf\'e9\'a4\'4a\'aa\'6b\'b8\'ea\'ae\'c6\'aa\'ed\'ae\'e6\'a1\'5d\'a5\'5d\'ac\'41\'a6\'b3\'ad\'dc\'be\'65\'a4\'ad\'a5\'4e\'a1\'42\'a7\'d6\'ad\'dc\'a4\'43\'a5\'4e\'a1\'42\'bc\'d0\'c2\'49\'b2\'c5\'b8\'b9\'b8\'67\'b9\'4c\'ad\'d7\'ad\'71\'aa\'ba\'a4\'54\'a5\'4e\'ad\'dc\'be\'65\'a1\'41\'a5\'48\'a4\'ce\'b6\'b6\'a7\'c7\'b3\'74\'a6\'a8\'a1\'5e\'a1\'43\
+\f4 crossbone for merging multiple versions of 
+\f2 \'ad\'dc\'be\'65 and \'b3\'74\'a6\'a8 input method data table (including 5th generation of \'ad\'dc\'be\'65, 7th generation of \'a7\'d6\'ad\'dc, 3rd generation of \'ad\'dc\'be\'65 with revised bopomofo and \'b6\'b6\'a7\'c7\'b3\'74\'a6\'a8).\
 \ls12\ilvl0
 \f4 {\listtext	
 \f5 \uc0\u8259 	}
-\f4 vgod and gontera for complete 
+\f4 vgod and gontera for completing 
 \f2 \'a6\'e6\'a6\'43
 \f4  specification implement\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi300\sl287\slmult1\sb240\qj
 
-\f2 \cf0 \'c1\'d9\'a6\'b3\'b3\'5c\'b3\'5c\'a6\'68\'a6\'68\'c3\'f6\'a4\'df
-\f4  OV 
-\f2 \'b5\'6f\'ae\'69\'aa\'ba\'a4\'48\'a1\'41\'c1\'c2\'c1\'c2\'a7\'41\'ad\'cc\'a1\'43}
+\f2 \cf0 Thank you for your supports!}
