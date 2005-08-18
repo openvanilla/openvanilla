@@ -8,6 +8,13 @@
 
 BOOL IMEUIRegisterClass( HINSTANCE hInstance )
 {
+	UINT cs_dropshadow = 0;
+	OSVERSIONINFO vi;
+	vi.dwOSVersionInfoSize = sizeof(vi);
+	if( GetVersionEx(&vi) && vi.dwMajorVersion >= 5 
+		&& vi.dwMinorVersion != 0 )	// version >= Windows XP
+		cs_dropshadow = CS_DROPSHADOW;
+
 	WNDCLASSEX wc;
 	//
 	// register class of UI window.
@@ -24,7 +31,7 @@ BOOL IMEUIRegisterClass( HINSTANCE hInstance )
 	// register class of status window.
 	//
 	wc.cbSize         = sizeof(WNDCLASSEX);
-	wc.style          = CS_OVIME | CS_IME | CS_DROPSHADOW;
+	wc.style          = CS_OVIME | CS_IME | cs_dropshadow;
 	wc.lpfnWndProc    = StatusWndProc;
 	wc.cbClsExtra     = 0;
 	wc.cbWndExtra     = UICHILDEXTRASIZE;
@@ -42,7 +49,7 @@ BOOL IMEUIRegisterClass( HINSTANCE hInstance )
 	// register class of composition window.
 	//
 	wc.cbSize         = sizeof(WNDCLASSEX);
-	wc.style          = CS_OVIME | CS_IME | CS_DROPSHADOW;
+	wc.style          = CS_OVIME | CS_IME | cs_dropshadow;
 	wc.lpfnWndProc    = CompWndProc;
 	wc.cbClsExtra     = 0;
 	wc.cbWndExtra     = UICHILDEXTRASIZE;
@@ -61,7 +68,7 @@ BOOL IMEUIRegisterClass( HINSTANCE hInstance )
 	// register class of candadate window.
 	//
 	wc.cbSize         = sizeof(WNDCLASSEX);
-	wc.style          = CS_OVIME | CS_IME | CS_DROPSHADOW;
+	wc.style          = CS_OVIME | CS_IME | cs_dropshadow;
 	wc.lpfnWndProc    = CandWndProc;
 	wc.cbClsExtra     = 0;
 	wc.cbWndExtra     = UICHILDEXTRASIZE;
