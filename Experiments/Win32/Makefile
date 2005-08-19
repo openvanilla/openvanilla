@@ -13,19 +13,20 @@ LINK32_OBJS = \
 	      $(OUTDIR)\Utils.obj \
               $(OUTDIR)\OVStringToolKit.obj \
 	      $(OUTDIR)\OVDummyLoader.obj \
-	      $(OUTDIR)\DOVDictionary.obj
+	      $(OUTDIR)\DOVDictionary.obj \
+	      $(OUTDIR)\tinyxml.obj \
+	      $(OUTDIR)\tinyxmlerror.obj \
+	      $(OUTDIR)\tinyxmlparser.obj
 
 $(OUTDIR):
 	if not exist "$(OUTDIR)/$(NULL)" mkdir $(OUTDIR)
 
-LINK_LIBS = kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib OVIME\IMM32.LIB OVIME\OVIMEUI.lib OVDummyLoader\libltdl.lib OVDummyLoader\libiconv.lib OVDummyLoader\expat\libexpat.lib scew.lib
+LINK_LIBS = kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib OVIME\IMM32.LIB OVIME\OVIMEUI.lib OVDummyLoader\libltdl.lib OVDummyLoader\libiconv.lib
 
 dllllflags = /INCREMENTAL:NO /NOLOGO /DLL /PDB:$(OUTDIR)/vc70.pdb /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /MACHINE:IX86
 
 $(OUTDIR)\$(Proj).dll: $(OUTDIR) $(LINK32_OBJS) $(OUTDIR)\$(Proj).res
 	link $(dllllflags) \
-	/NODEFAULTLIB:scew_.lib \
-	/LIBPATH:OVDummyLoader\scew \
 	$(LINK32_OBJS) $(OUTDIR)\$(Proj).res $(LINK_LIBS) \
 	-out:$(OUTDIR)\$(Proj).ime\
 	-def:OVIME\$(Proj).def
@@ -53,7 +54,7 @@ FILE=Utils
 $(OUTDIR)\$(FILE).obj: OVIME\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVIME\$(FILE).cpp
 
-cflags = /O2 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I "OVDummyLoader/expat" /I "OVDummyLoader/scew" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP /GR
+cflags = /O2 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I "OVDummyLoader/expat" /I "OVDummyLoader/tinyxml" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP /GR
 FILE=OVStringToolKit
 $(OUTDIR)\$(FILE).obj: ..\..\Source\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" ..\..\Source\$(FILE).cpp
@@ -63,6 +64,16 @@ $(OUTDIR)\$(FILE).obj: OVDummyLoader\$(FILE).cpp $(OUTDIR)
 FILE=DOVDictionary
 $(OUTDIR)\$(FILE).obj: OVDummyLoader\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVDummyLoader\$(FILE).cpp
+FILE=tinyxml
+$(OUTDIR)\$(FILE).obj: OVDummyLoader\tinyxml\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVDummyLoader\tinyxml\$(FILE).cpp
+FILE=tinyxmlerror
+$(OUTDIR)\$(FILE).obj: OVDummyLoader\tinyxml\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVDummyLoader\tinyxml\$(FILE).cpp
+FILE=tinyxmlparser
+$(OUTDIR)\$(FILE).obj: OVDummyLoader\tinyxml\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVDummyLoader\tinyxml\$(FILE).cpp
+
 
 FILE=OVIME
 $(OUTDIR)\$(FILE).res: OVIME\$(FILE).rc $(OUTDIR)

@@ -1,8 +1,6 @@
 #include <string>
 #include "OpenVanilla.h"
-extern "C" {
-#include "scew/scew.h"
-}
+#include "tinyxml.h"
 
 class DummyDictionary : public OVDictionary {
 	public:
@@ -13,13 +11,12 @@ class DummyDictionary : public OVDictionary {
 		virtual int setInteger(const char *key, int value);
 		virtual const char* getString(const char *key);
 		virtual const char* setString(const char *key, const char *value);
-		bool createNewConfig(const char *path);
+		bool createNewConfig(std::string path);
 	private:
 		std::string name;
 		std::string file;
 		void newDict();
-		scew_parser* parser;
-		scew_tree* tree;
-		scew_element* root;
-		scew_element* module;
+		TiXmlNode *findChild(TiXmlNode *parent, const char *node, const char *name);
+		TiXmlDocument doc;
+		TiXmlNode *module;
 };
