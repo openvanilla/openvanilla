@@ -112,7 +112,6 @@ FunctionEnd
 
 Section Uninstall
   Delete "$INSTDIR\uninst.exe"
-  Delete "$SYSDIR\libexpat.dll"
   Delete "$SYSDIR\libltdl3.dll"
   Delete "$SYSDIR\libiconv-2.dll"
   Delete "$SYSDIR\sqlite3.dll"
