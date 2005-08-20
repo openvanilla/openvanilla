@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OVPreferences\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2005-08-20 22:07+0800\n"
+"PO-Revision-Date: 2005-08-20 23:45+0800\n"
 "Last-Translator: \n"
 "Language-Team: OV\n"
 "MIME-Version: 1.0\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../OVPreferences.cpp:24
-#: ../OVPrefDlg.cpp:127
+#: ../OVPrefDlg.cpp:131
 msgid "Open Vanilla Preferences"
 msgstr "香草輸入法偏好設定"
 
@@ -23,96 +23,112 @@ msgid "Other settings"
 msgstr "其他設定"
 
 #: ../OVPrefDlg.cpp:26
-msgid "Hotkey of selected module"
-msgstr "目前選取模組的熱鍵"
+msgid "Available modules:"
+msgstr "可用的模組清單"
 
 #: ../OVPrefDlg.cpp:27
-msgid "Available modules"
-msgstr "可用的模組清單"
+msgid "Set the shortcut key to:"
+msgstr "目前選取模組的快速鍵設定為："
 
 #: ../OVPrefDlg.cpp:28
 msgid "Phonetic, Chewing, POJ, and Tibetan IME"
 msgstr "傳統注音、酷音、白話字、藏文輸入法設定"
 
 #: ../OVPrefDlg.cpp:29
-msgid "Generic IME"
-msgstr "泛用輸入法設定"
+msgid "Generic (data table-based) input method"
+msgstr "汎用輸入法 (使用資料表格的輸入法) 設定"
 
 #: ../OVPrefDlg.cpp:30
 msgid "Other modules"
 msgstr "其他模組"
 
 #: ../OVPrefDlg.cpp:31
-msgid "Candidate Window"
-msgstr "候選字視窗"
+msgid "Candidate and notification window"
+msgstr "候選字及訊息視窗"
 
 #: ../OVPrefDlg.cpp:32
 msgid "Font"
 msgstr "字型"
 
 #: ../OVPrefDlg.cpp:33
-msgid "Background color"
-msgstr "背景色彩"
+msgid "Font: "
+msgstr "字型"
 
 #: ../OVPrefDlg.cpp:34
-msgid "Picture"
-msgstr "圖片"
+msgid "Background Color"
+msgstr "背景色彩"
 
 #: ../OVPrefDlg.cpp:35
-msgid "File Path:"
-msgstr "檔案路徑："
+msgid "Image"
+msgstr "圖檔"
 
 #: ../OVPrefDlg.cpp:36
+msgid "Image Path: "
+msgstr "圖片路徑："
+
+#: ../OVPrefDlg.cpp:37
 msgid "Opacity"
 msgstr "不透明度"
 
-#: ../OVPrefDlg.cpp:38
-msgid "File"
-msgstr "檔案"
+#: ../OVPrefDlg.cpp:39
+msgid "Preview"
+msgstr "設定預覽"
 
 #: ../OVPrefDlg.cpp:40
+msgid "OpenVanilla"
+msgstr "香草輸入法"
+
+#: ../OVPrefDlg.cpp:41
+msgid "(Opacity not in effect)"
+msgstr "(不透明度在此不起作用)"
+
+#: ../OVPrefDlg.cpp:42
+msgid "Warning sound: "
+msgstr "聲音檔："
+
+#: ../OVPrefDlg.cpp:44
 msgid "&Test"
 msgstr "測試 (&T)"
 
-#: ../OVPrefDlg.cpp:41
-msgid "Switch between IMEs"
-msgstr "快速切換輸入法"
+#: ../OVPrefDlg.cpp:45
+msgid "IM toggle key: "
+msgstr "切換最近使用的兩個輸入法："
 
-#: ../OVPrefDlg.cpp:42
-#: ../OVPrefDlg.cpp:55
+#: ../OVPrefDlg.cpp:46
+#: ../OVPrefDlg.cpp:59
 msgid "Alt"
 msgstr ""
 
-#: ../OVPrefDlg.cpp:43
-#: ../OVPrefDlg.cpp:57
+#: ../OVPrefDlg.cpp:47
+#: ../OVPrefDlg.cpp:61
 msgid "Ctrl"
 msgstr ""
 
-#: ../OVPrefDlg.cpp:44
-#: ../OVPrefDlg.cpp:56
+#: ../OVPrefDlg.cpp:48
+#: ../OVPrefDlg.cpp:60
 msgid "Shift"
 msgstr ""
 
-#: ../OVPrefDlg.cpp:45
+#: ../OVPrefDlg.cpp:49
 msgid " + "
 msgstr ""
 
-#: ../OVPrefDlg.cpp:50
-#: ../OVPrefDlg.cpp:58
+#: ../OVPrefDlg.cpp:54
+#: ../OVPrefDlg.cpp:67
 msgid "Clear"
 msgstr "清除"
 
-#: ../OVPrefDlg.cpp:59
+#: ../OVPrefDlg.cpp:62
 msgid "+"
 msgstr ""
 
-#: ../OVPrefDlg.cpp:61
-#: ../OVPrefDlg.cpp:90
-#: ../OVPrefDlg.cpp:104
+#: ../OVPrefDlg.cpp:64
+#: ../OVPrefDlg.cpp:94
+#: ../OVPrefDlg.cpp:108
 msgid "None"
 msgstr "無"
 
-#: ../OVPrefDlg.cpp:64
+#: ../OVPrefDlg.cpp:68
 msgid ""
 "The selected module is loaded \n"
 "from the following library:\n"
@@ -120,7 +136,7 @@ msgstr ""
 "選取的模組是從下列\n"
 "程式庫載入：\n"
 
-#: ../OVPrefDlg.cpp:65
+#: ../OVPrefDlg.cpp:69
 msgid ""
 "Remove unused modules \n"
 "can speed up loading.\n"
@@ -135,104 +151,101 @@ msgstr ""
 "所有正在使用Open Vanilla 的\n"
 "程式，才能生效。"
 
-#: ../OVPrefDlg.cpp:66
-msgid "Keyboard layout of traditional Phonetic IME: "
+#: ../OVPrefDlg.cpp:70
+msgid "Keyboard layout for Phonetics: "
 msgstr "傳統注音輸入法鍵盤配置："
 
-#: ../OVPrefDlg.cpp:68
-#: ../OVPrefDlg.cpp:73
+#: ../OVPrefDlg.cpp:72
+#: ../OVPrefDlg.cpp:77
 msgid "Standard Layout"
 msgstr "標準排列"
 
-#: ../OVPrefDlg.cpp:71
-msgid "Keyboard layout of Chewing IME: "
+#: ../OVPrefDlg.cpp:75
+msgid "Keyboard layout of Chewing: "
 msgstr "酷音輸入法鍵盤配置："
 
-#: ../OVPrefDlg.cpp:76
-msgid "Input mode of POJ: "
+#: ../OVPrefDlg.cpp:80
+msgid "Keyboard layout for POJ-Holo: "
 msgstr "白話字 (POJ) 調號輸入方式："
 
-#: ../OVPrefDlg.cpp:78
-msgid "Default (2, 3, 5, 7, 8)"
-msgstr ""
-
-#: ../OVPrefDlg.cpp:81
-msgid "Don't output unicode characters but use ASCII instead"
-msgstr "不要輸出 Unicode 字元，全部使用 ASCII 輸出"
-
 #: ../OVPrefDlg.cpp:82
-msgid "Use POJ directly"
-msgstr "不選漢字，直接出 POJ"
-
-#: ../OVPrefDlg.cpp:83
-msgid "Tibetan IME"
-msgstr "藏文輸入法"
+msgid "Use tone numbers (2, 3, 5, 7, 8) only"
+msgstr "輸入完音節後再輸入調號 (2, 3, 5, 7, 8)"
 
 #: ../OVPrefDlg.cpp:85
+msgid "Do not output unicode characters but pure ASCII instead"
+msgstr "不要輸出 Unicode 字元，全部使用 ASCII 輸出"
+
+#: ../OVPrefDlg.cpp:86
+msgid "Do not show Han character candidates. (POJ-only output)"
+msgstr "不選漢字，直接輸出 POJ"
+
+#: ../OVPrefDlg.cpp:87
+msgid "Keyboard layout for Tibetan: "
+msgstr "藏文輸入法鍵盤配置："
+
+#: ../OVPrefDlg.cpp:89
 msgid "Sambhota Keymap One"
 msgstr ""
 
-#: ../OVPrefDlg.cpp:88
-msgid "IME: "
-msgstr "輸入法："
-
-#: ../OVPrefDlg.cpp:93
-msgid "Max length: "
-msgstr "最大組字鍵碼長度"
-
-#: ../OVPrefDlg.cpp:95
-msgid "5"
-msgstr ""
-
-#: ../OVPrefDlg.cpp:98
-msgid "checkbox_10"
-msgstr ""
-
-#: ../OVPrefDlg.cpp:99
-msgid "checkbox_11"
-msgstr ""
-
-#: ../OVPrefDlg.cpp:100
-msgid "checkbox_12"
-msgstr ""
-
-#: ../OVPrefDlg.cpp:101
-msgid "Beep on error"
-msgstr "錯誤時發出嗶聲"
-
-#: ../OVPrefDlg.cpp:102
+#: ../OVPrefDlg.cpp:92
+#: ../OVPrefDlg.cpp:106
 msgid "Module: "
 msgstr "模組："
 
-#: ../OVPrefDlg.cpp:109
+#: ../OVPrefDlg.cpp:97
+msgid "Maximal radical length: "
+msgstr "最大組字鍵碼長度："
+
+#: ../OVPrefDlg.cpp:99
+msgid "5"
+msgstr ""
+
+#: ../OVPrefDlg.cpp:102
+msgid "Space key choose the 1st candidate"
+msgstr "空白鍵選第一字，第一選字鍵選第二字"
+
+#: ../OVPrefDlg.cpp:103
+msgid "Show candidates as you type"
+msgstr "一邊打字同時一邊組字出選字窗"
+
+#: ../OVPrefDlg.cpp:104
+msgid "Commit at maximal radical length"
+msgstr "打到最大長度便自動出字"
+
+#: ../OVPrefDlg.cpp:105
+msgid "Warning beep"
+msgstr "錯誤時發出嗶聲"
+
+#: ../OVPrefDlg.cpp:113
 msgid "&OK"
 msgstr "確定 (&O)"
 
-#: ../OVPrefDlg.cpp:110
+#: ../OVPrefDlg.cpp:114
 msgid "&Cancel"
 msgstr "取消 (&C)"
 
-#: ../OVPrefDlg.cpp:116
-msgid "Config Item"
+#: ../OVPrefDlg.cpp:120
+msgid "Property key"
 msgstr "設定項目"
 
-#: ../OVPrefDlg.cpp:117
+#: ../OVPrefDlg.cpp:121
 msgid "Value"
 msgstr "數值"
 
-#: ../OVPrefDlg.cpp:255
+#: ../OVPrefDlg.cpp:273
 msgid "Common"
 msgstr "共用設定"
 
-#: ../OVPrefDlg.cpp:256
+#: ../OVPrefDlg.cpp:274
 msgid "Modules List && Hotkeys"
 msgstr "模組列表和熱鍵"
 
-#: ../OVPrefDlg.cpp:257
+#: ../OVPrefDlg.cpp:275
 msgid "Module Settings"
 msgstr "個別模組設定"
 
-#: ../OVPrefDlg.cpp:258
+#: ../OVPrefDlg.cpp:276
 msgid "Output Filters"
 msgstr "文字輸出處理模組"
 

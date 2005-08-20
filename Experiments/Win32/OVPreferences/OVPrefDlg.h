@@ -16,13 +16,13 @@ class OVPrefDlg: public wxDialog {
 public:
     // begin wxGlade: OVPrefDlg::ids
     enum {
-        ID_FONT = 1022,
-        ID_BGCOLOR = 1023,
-        ID_BGPICTURE = 1024,
-        ID_SOUNDTEST = 1025,
-        ID_COMMON_CLEAR = 1026,
-        ID_MODLIST = 1027,
-        ID_MODLIST_CLEAR = 1028
+        ID_FONT = 1000,
+        ID_BGCOLOR = 1001,
+        ID_BGPICTURE = 1002,
+        ID_SOUNDTEST = 1003,
+        ID_COMMON_CLEAR = 1004,
+        ID_MODLIST = 1005,
+        ID_MODLIST_CLEAR = 1006
     };
     // end wxGlade
 
@@ -39,20 +39,24 @@ protected:
     wxStaticBox* sizer_25_staticbox;
     wxStaticBox* sizer_24_staticbox;
     wxStaticBox* sizer_22_staticbox;
-    wxStaticBox* sizer_16_staticbox;
-    wxStaticBox* sizer_19_staticbox;
+    wxStaticBox* sizer_7_staticbox;
+    wxStaticBox* sizer_1_staticbox;
     wxStaticBox* sizer_15_staticbox;
     wxStaticBox* sizer_13_staticbox;
-    wxStaticBox* candidate_window_sizer_staticbox;
-    wxButton* font_btn;
-    wxButton* bgcolor_btn;
-    wxButton* bg_picture_btn;
-    wxStaticText* filePath;
+    wxStaticBox* sizer_3_staticbox;
+    wxButton* fontBtn;
     wxStaticText* label_1;
+    wxButton* bgColorBtn;
+    wxButton* imageBtn;
+    wxStaticText* filePath_copy_copy;
+    wxStaticText* label_1_copy;
     wxSlider* opacitySlider;
+    wxStaticText* label_2;
+    wxTextCtrl* previewText;
+    wxStaticText* label_5;
     wxStaticText* label_3;
     wxTextCtrl* soundFile;
-    wxButton* button_6;
+    wxButton* soundTest;
     wxStaticText* label_4;
     wxCheckBox* switchAlt;
     wxCheckBox* switchCtrl;
@@ -65,9 +69,9 @@ protected:
     wxCheckBox* modlistAlt;
     wxCheckBox* modlistShift;
     wxCheckBox* modlistCtrl;
-    wxButton* modlist_clear;
-    wxStaticText* label_8;
+    wxStaticText* label_8_copy;
     wxComboBox* modlistKey;
+    wxButton* modlistClear;
     wxStaticText* label_7;
     wxStaticText* label_6;
     wxPanel* module_list_page;
@@ -76,22 +80,22 @@ protected:
     wxStaticText* label_9_copy;
     wxComboBox* chewingKeyboardLayout;
     wxStaticText* label_10;
-    wxComboBox* pojInputMode;
+    wxComboBox* pojKeyboardLayout;
     wxCheckBox* pojNoUnicode;
-    wxCheckBox* pojDirect;
+    wxCheckBox* pojNoHanChars;
     wxStaticText* label_11;
-    wxComboBox* tibetanIME;
+    wxComboBox* tibetanKeyboardLayout;
     wxStaticText* label_12;
     wxComboBox* genericCombo;
     wxStaticText* label_13;
-    wxComboBox* genericMaxLength;
-    wxCheckBox* checkbox_10;
-    wxCheckBox* checkbox_11;
-    wxCheckBox* checkbox_12;
-    wxCheckBox* genericBeepOnError;
+    wxComboBox* genericMaxRadLength;
+    wxCheckBox* spaceChoose1stCand;
+    wxCheckBox* showCandOnType;
+    wxCheckBox* commitAtMaxRad;
+    wxCheckBox* warningBeep;
     wxStaticText* label_14;
     wxComboBox* otherModCombo;
-    wxListCtrl* otherModList;
+    wxListCtrl* otherModPropList;
     wxPanel* module_settings_page;
     wxPanel* output_filter_page;
     wxNotebook* notebook;
