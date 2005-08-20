@@ -79,7 +79,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories=".\;..\OVDummyLoader\;..\OVDummyLoader\expat;..\OVDummyLoader\scew;..\OVIMEUI\Headers;..\..\..\Headers"
+				AdditionalIncludeDirectories=".\;..\OVDummyLoader\;..\OVDummyLoader\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="TRUE"
 				MinimalRebuild="FALSE"
@@ -94,11 +94,11 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib libexpat.lib scew.lib"
+				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\OVDummyLoader;..\OVDummyLoader\expat;..\OVDummyLoader\scew"
-				IgnoreDefaultLibraryNames="scew_.lib"
+				AdditionalLibraryDirectories="..\OVDummyLoader;..\OVDummyLoader\expat;..\OVDummyLoader\tinyxml"
+				IgnoreDefaultLibraryNames=""
 				ModuleDefinitionFile="OVIME.def"
 				GenerateDebugInformation="FALSE"
 				SubSystem="2"
@@ -162,6 +162,15 @@
 				RelativePath="..\..\..\Source\OVStringToolKit.cpp">
 			</File>
 			<File
+				RelativePath="..\OVDummyLoader\tinyxml\tinyxml.cpp">
+			</File>
+			<File
+				RelativePath="..\OVDummyLoader\tinyxml\tinyxmlerror.cpp">
+			</File>
+			<File
+				RelativePath="..\OVDummyLoader\tinyxml\tinyxmlparser.cpp">
+			</File>
+			<File
 				RelativePath="UIWnd.cpp">
 			</File>
 			<File
@@ -200,6 +209,9 @@
 			</File>
 			<File
 				RelativePath="resource.h">
+			</File>
+			<File
+				RelativePath="..\OVDummyLoader\tinyxml\tinyxml.h">
 			</File>
 			<File
 				RelativePath="Vk.h">
