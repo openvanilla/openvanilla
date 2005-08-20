@@ -16,15 +16,18 @@ LONG NotifyHandle(HIMC hUICurIMC,
     {
 	case IMN_CLOSESTATUSWINDOW:
 		UIHideStatusWindow();
+		dsvr.showStatus(false)->notify();
 		break;
 		
 	case IMN_OPENSTATUSWINDOW:
 		UICreateStatusWindow(hWnd);
 		UIMoveStatusWindow(hWnd, 500, 100);
+		dsvr.showStatus(true)->notify();
 		break;
 		
 	case IMN_OPENCANDIDATE:
 		UIShowCandWindow();
+		dsvr.showCandi(true)->notify();
 		break;
 		
 	case IMN_CHANGECANDIDATE:
@@ -32,6 +35,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		
 	case IMN_CLOSECANDIDATE:
 		UIHideCandWindow();
+		dsvr.showCandi(false)->notify();
 		break;
 		
 	case IMN_SETCONVERSIONMODE:
@@ -42,6 +46,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		
 	case IMN_SETOPENSTATUS:
 		UIShowStatusWindow();
+		dsvr.showStatus(false)->notify();
 		break;
 		
 	case IMN_SETCANDIDATEPOS:
@@ -57,6 +62,8 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			ReleaseDC(lpIMC->hWnd,hDC);
 			LPMYPRIVATE lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 			UIMoveCandWindow(lpIMC->hWnd, ptSrc.x +szOffset.cx, ptSrc.y + szOffset.cy, lpMyPrivate->CandStr);
+
+			dsvr.setCandiPos(ptSrc.x +szOffset.cx, ptSrc.y + szOffset.cy)->notify();
 			ImmUnlockIMCC(lpIMC->hPrivate);
 		}
 		break;
@@ -78,6 +85,8 @@ LONG NotifyHandle(HIMC hUICurIMC,
 
 			CompX = ptSrc.x + szOffset.cx;
 			CompY = ptSrc.y + szOffset.cy;
+
+			dsvr.setBufPos(CompX, CompY)->notify();
 		}
 		DebugLog("IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
 		/*

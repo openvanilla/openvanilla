@@ -222,6 +222,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	else
 		k = k + 0x0000;
 	rlen = KeyEvent(UICurrentInputMethod(), k, str);
+	//rlen = KeyEvent(dsvr.getInputMethod(), k, str);
 	int n = 0;
 	int ln = 0;
 	DebugLog("str: %s", str);

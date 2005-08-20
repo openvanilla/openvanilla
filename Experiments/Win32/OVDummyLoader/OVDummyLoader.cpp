@@ -17,6 +17,7 @@
 #include "iconv.h"
 
 #include "DOVDictionary.h"
+#include "OVDisplayServer.h"
 
 #include <exception>
 
@@ -93,11 +94,14 @@ protected:
     int shift, capslock, ctrl, alt;
 };
 
+MyOVDisplayServer dsvr;
+
 class DummyBuffer : public OVBuffer {
 public:
     virtual OVBuffer* clear() { 
         action += "bufclear ";
         bufstr="";
+		dsvr.showBuf(false);
         return this;
     }
     virtual OVBuffer* append(const char *s) {
@@ -111,12 +115,14 @@ public:
 		action += utf8toutf16(bufstr.c_str());
 		action += " ";
 		bufstr="";
+		dsvr.showBuf(false);
 	}
         return this;
     }
     virtual OVBuffer* update() { 
 	if(bufstr!="") {
 		char tmp[100];
+		wchar_t *decoded;
 		action += "bufupdate "; 
 		action += utf8toutf16(bufstr.c_str());
 		action += " cursorpos ";
@@ -129,6 +135,7 @@ public:
 		sprintf(tmp, "%d", markTo);
 		action += string(tmp);
 		action += " ";
+		dsvr.setBufString(utf8toutf16(bufstr.c_str()))->setCursorPos(cursorPos)->setMarkFrom(markFrom)->setMarkTo(markTo)->notify();
 	}
         return this;
     }
@@ -155,23 +162,25 @@ public:
     virtual OVCandidate* clear() {
         candistr="";
         action += "candiclear "; return this;
+		dsvr.showCandi(false);
     }
     virtual OVCandidate* append(const char *s) {
         candistr+=s;
         return this;
     }
     virtual OVCandidate* hide() {
-        if (onscreen) { onscreen=0; action += "candihide "; }
+        if (onscreen) { onscreen=0; action += "candihide "; dsvr.showCandi(false);}
         return this;
     }
     virtual OVCandidate* show() {
-        if (!onscreen) { onscreen=1; action += "candishow "; }
+        if (!onscreen) { onscreen=1; action += "candishow "; dsvr.showCandi(true)->notify();}
         return this;
     }
     virtual OVCandidate* update() {
         action += "candiupdate "; 
         action += utf8toutf16(candistr.c_str());
         action += " ";
+		dsvr.setCandiString(utf8toutf16(candistr.c_str()));
         return this; 
     }
     virtual int onScreen() {
@@ -332,9 +341,17 @@ static int scan_ov_modules(){
 					OVModule* m;
 					mod->initLibrary(&srv, OV_MODULEDIR);
 					for(int i=0; m = mod->getModule(i); i++)
-					{
+					{	
+						if(!strcmp(m->moduleType(), "OVDisplayComponent"))
+						{
+							OVDisplayComponent *dc = reinterpret_cast<OVDisplayComponent*>(m);
+							dc->regDisplayServer(&dsvr);
+							murmur("InitDisplayComponent: %s", dc->localizedName("zh_TW"));
+							continue;
+						}
 						mod_vector.push_back(m);
 						fprintf(stderr, "Load OVModule: %s\n", m->localizedName("zh_TW"));
+
 					}
 					delete mod;
 				}
@@ -412,7 +429,7 @@ void init() {
 		startedCtxVector.push_back(false);
 	}
     */
-
+	
     inited=1;
 }
 
@@ -425,7 +442,7 @@ void initContext(int n) {
 */
 	if(!strcmp(mod_vector[n]->moduleType(), "OVInputMethod"))
 	{
-		OVInputMethod *im = reinterpret_cast<OVInputMethod*>((mod_vector[n]));
+		OVInputMethod *im = reinterpret_cast<OVInputMethod*>(mod_vector[n]);
 		im->initialize(new DummyDictionary(OV_BASEDIR, im->identifier()), &srv, OV_MODULEDIR);
 		murmur("InitContext %s", im->localizedName("zh_TW"));
 		ctx_vector.at(n) = im->newContext();
@@ -458,10 +475,10 @@ extern "C" {
 		if (!inited) init();
 	}
 	void ShutdownLoader() {
-		for_each(ctx_vector.begin(), ctx_vector.end(), DeleteObject);
-		ctx_vector.clear();
-		for_each(mod_vector.begin(), mod_vector.end(), DeleteObject);
-		mod_vector.clear();
+//		for_each(ctx_vector.begin(), ctx_vector.end(), DeleteObject);
+//		ctx_vector.clear();
+//		for_each(mod_vector.begin(), mod_vector.end(), DeleteObject);
+//		mod_vector.clear();
 	}
 	int KeyEvent(int n, int c, char *s) {
 		if (!inited) init();

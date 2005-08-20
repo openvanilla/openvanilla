@@ -16,6 +16,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		InitLoader();
 		for(int i = 0;; ++i) {
 			if(ModuleName(i, str)) {
+				dsvr.pushInputMethod(str);
 				decoded = UTF16toWCHAR(str);
 				UIPushInputMethod(decoded);
 				free(decoded);
@@ -23,6 +24,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 				break;
 			}
 		}
+
 		
 		WNDCLASSEX wc;
 		wc.cbSize			= sizeof(WNDCLASSEX);
@@ -38,6 +40,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		wc.hbrBackground	= NULL;
 		wc.hIconSm			= NULL;
 		IMEUIRegisterClass( (HINSTANCE)hInst );
+		dsvr.setHInst( (HINSTANCE)hInst );
 		if( !RegisterClassEx( (LPWNDCLASSEX)&wc ) )
 		  return FALSE;
 

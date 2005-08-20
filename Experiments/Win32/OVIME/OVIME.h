@@ -4,12 +4,14 @@
 #include "ExtraStructs.h"
 #include "Vk.h"
 #include "OVIMEUI.h"
+#include "OVDisplayServer.h"
 
 
 // Extern
 extern HINSTANCE hInst;
 extern int CompX;
 extern int CompY;
+extern MyOVDisplayServer dsvr;
 
 // Constant
 #define CS_OVIME (CS_VREDRAW | CS_HREDRAW | CS_DBLCLKS)
