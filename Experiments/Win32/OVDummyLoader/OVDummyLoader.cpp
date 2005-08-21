@@ -122,7 +122,7 @@ public:
     virtual OVBuffer* update() { 
 	if(bufstr!="") {
 		char tmp[100];
-		wchar_t *decoded;
+		dsvr.setBufString(utf8toutf16(bufstr.c_str()))->setCursorPos(cursorPos)->setMarkFrom(markFrom)->setMarkTo(markTo)->notify();
 		action += "bufupdate "; 
 		action += utf8toutf16(bufstr.c_str());
 		action += " cursorpos ";
@@ -135,7 +135,7 @@ public:
 		sprintf(tmp, "%d", markTo);
 		action += string(tmp);
 		action += " ";
-		dsvr.setBufString(utf8toutf16(bufstr.c_str()))->setCursorPos(cursorPos)->setMarkFrom(markFrom)->setMarkTo(markTo)->notify();
+		
 	}
         return this;
     }
@@ -345,6 +345,7 @@ static int scan_ov_modules(){
 						if(!strcmp(m->moduleType(), "OVDisplayComponent"))
 						{
 							OVDisplayComponent *dc = reinterpret_cast<OVDisplayComponent*>(m);
+							dc->initialize(new DummyDictionary(OV_BASEDIR, dc->identifier()), &srv, OV_MODULEDIR);
 							dc->regDisplayServer(&dsvr);
 							murmur("InitDisplayComponent: %s", dc->localizedName("zh_TW"));
 							continue;

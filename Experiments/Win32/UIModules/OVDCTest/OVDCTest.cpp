@@ -12,13 +12,12 @@ class OVDCTest : public OVDisplayComponent
 {
 public:
 	virtual void update() {
-		//if(!svr->isCandiShow()) return;
-		/*
-		wchar_t* dec = UTF16toWCHAR(svr->getCandiString().c_str());
+		if(!svr->isBufShow() && svr->getBufString() == "") return;
+
+		wchar_t* dec = UTF16toWCHAR(svr->getBufString().c_str());
 		if(dec[0])
 			MessageBoxW(NULL, dec, L"Update", MB_OK);
 		free(dec);
-		*/
 	}
 	virtual const char *identifier() { return "OVDCTest"; }
 };

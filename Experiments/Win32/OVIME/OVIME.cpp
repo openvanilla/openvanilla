@@ -13,6 +13,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		// load UI library
 		char str[1024];
 		LPTSTR decoded;
+		dsvr.setHInst( (HINSTANCE)hModule );
 		InitLoader();
 		for(int i = 0;; ++i) {
 			if(ModuleName(i, str)) {
@@ -39,8 +40,8 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		wc.lpszClassName	= UICLASSNAME;
 		wc.hbrBackground	= NULL;
 		wc.hIconSm			= NULL;
-		IMEUIRegisterClass( (HINSTANCE)hInst );
-		dsvr.setHInst( (HINSTANCE)hInst );
+		IMEUIRegisterClass( (HINSTANCE)hModule );
+		hInst = (HINSTANCE)hModule;
 		if( !RegisterClassEx( (LPWNDCLASSEX)&wc ) )
 		  return FALSE;
 
