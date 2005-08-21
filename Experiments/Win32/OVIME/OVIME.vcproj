@@ -150,6 +150,12 @@
 				RelativePath="NotifyHandle.cpp">
 			</File>
 			<File
+				RelativePath="..\OVDummyLoader\OVDisplayComponent.cpp">
+			</File>
+			<File
+				RelativePath="..\OVDummyLoader\OVDisplayServer.cpp">
+			</File>
+			<File
 				RelativePath="..\OVDummyLoader\OVDummyLoader.cpp">
 			</File>
 			<File
@@ -194,6 +200,12 @@
 			</File>
 			<File
 				RelativePath="..\..\..\Headers\OVCandidateList.h">
+			</File>
+			<File
+				RelativePath="..\OVDummyLoader\OVDisplayComponent.h">
+			</File>
+			<File
+				RelativePath="..\OVDummyLoader\OVDisplayServer.h">
 			</File>
 			<File
 				RelativePath="OVIME.h">
