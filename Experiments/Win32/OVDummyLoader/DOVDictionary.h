@@ -1,6 +1,8 @@
 #include <string>
 #include "OpenVanilla.h"
 #include "tinyxml.h"
+#include <sys/types.h>
+#include <sys/stat.h>
 
 class DummyDictionary : public OVDictionary {
 	public:
@@ -12,6 +14,8 @@ class DummyDictionary : public OVDictionary {
 		virtual const char* getString(const char *key);
 		virtual const char* setString(const char *key, const char *value);
 		bool createNewConfig(std::string path);
+		void update();
+		void save();
 	private:
 		std::string name;
 		std::string file;
@@ -19,4 +23,5 @@ class DummyDictionary : public OVDictionary {
 		TiXmlNode *findChild(TiXmlNode *parent, const char *node, const char *name);
 		TiXmlDocument doc;
 		TiXmlNode *module;
+		struct _stat filestat;
 };

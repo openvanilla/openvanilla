@@ -1,4 +1,6 @@
 #include <string>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include "DOVDictionary.h"
 #include "OVUtility.h"
 
@@ -12,6 +14,7 @@ DummyDictionary::DummyDictionary(const char *f, const char *dict)
 	}
 
 	module = findChild(doc.RootElement(), "dict", dict);
+	_stat(file.c_str(), &filestat);
 	name = dict;
 }
 
@@ -28,7 +31,7 @@ void DummyDictionary::newDict()
 	TiXmlElement tmp("dict");
 	tmp.SetAttribute("name", name.c_str());
 	module = doc.RootElement()->InsertEndChild(tmp);
-	doc.SaveFile();
+	save();
 }
 
 TiXmlNode *DummyDictionary::findChild(TiXmlNode *parent, const char *node, const char *name)
@@ -42,12 +45,30 @@ TiXmlNode *DummyDictionary::findChild(TiXmlNode *parent, const char *node, const
 	return child;
 }
 
+void DummyDictionary::update()
+{
+	struct _stat tmp;
+	_stat(file.c_str(), &tmp);
+	if(tmp.st_mtime > filestat.st_mtime) {
+		filestat = tmp;
+		doc.LoadFile();
+		module = findChild(doc.RootElement(), "dict", name.c_str());
+	}
+}
+
+void DummyDictionary::save()
+{
+	doc.SaveFile();
+	_stat(file.c_str(), &filestat);
+}
+
 DummyDictionary::~DummyDictionary()
 {
 }
 
 int DummyDictionary::keyExist(const char *key)
 {
+	update();
 	if(module && findChild(module, "key", key))
 		return 1;
 	else
@@ -69,6 +90,7 @@ int DummyDictionary::setInteger(const char *key, int value)
 
 const char* DummyDictionary::getString(const char *key)
 {
+	update();
 	if(!module) return "";
 	TiXmlNode *child = findChild(module, "key", key);
 	if(child)
@@ -79,6 +101,7 @@ const char* DummyDictionary::getString(const char *key)
 
 const char* DummyDictionary::setString(const char *key, const char *value)
 {
+	update();
 	if(!module)
 		newDict();
 	TiXmlNode *child;
@@ -89,7 +112,7 @@ const char* DummyDictionary::setString(const char *key, const char *value)
 		child = module->ToElement()->InsertEndChild(tmp);
 	}
 	child->ToElement()->SetAttribute("value", value);
-	doc.SaveFile();
+	save();
 	return value;
 }
 
