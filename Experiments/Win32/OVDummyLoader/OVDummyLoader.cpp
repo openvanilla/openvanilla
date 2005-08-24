@@ -505,8 +505,15 @@ extern "C" {
 		if (st) ac += "processed"; else ac+="unprocessed";
 #ifdef WIN32
 		MultiByteToWideChar(CP_UTF8, 0, ac.c_str(), ac.size(), s, 1024);
-#else
-		strcpy(s, ac.c_str());
+#else	    
+		iconv_t cd;
+	    char *out = (char*)s;
+	    cd = iconv_open("WCHAR_T", "UTF-8");
+		const char *src = ac.c_str();
+		size_t inbytesleft = ac.size();
+		size_t outbytesleft = 1024;
+	    iconv (cd, &src, &inbytesleft, &out, &outbytesleft);
+	    iconv_close(cd);
 #endif
 		candi.action="";
 		buf.action="";
@@ -525,7 +532,14 @@ extern "C" {
 #ifdef WIN32
 		MultiByteToWideChar(CP_UTF8, 0, s.c_str(), s.size(), str, 1024);
 #else
-		strcpy(str, ac.c_str());
+		iconv_t cd;
+	    char *out = (char*)str;
+	    cd = iconv_open("WCHAR_T", "UTF-8");
+		const char *src = s.c_str();
+		size_t inbytesleft = s.size();
+		size_t outbytesleft = 1024;
+	    iconv (cd, &src, &inbytesleft, &out, &outbytesleft);
+	    iconv_close(cd);
 #endif
 		return 1;
 	}
