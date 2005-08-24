@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <fstream>
 using namespace std;
 
 void
@@ -12,8 +13,8 @@ MyGenerateMessage(HIMC hIMC, UINT msg, WPARAM wParam, LPARAM lParam)
     LPINPUTCONTEXT lpIMC;
 
 	if((lpIMC = ImmLockIMC(hIMC)) == NULL)
-		return;    
-    
+		return;
+
     if (IsWindow(lpIMC->hWnd))
     {
         LPTRANSMSG lpTransMsg;
@@ -34,7 +35,7 @@ MyGenerateMessage(HIMC hIMC, UINT msg, WPARAM wParam, LPARAM lParam)
 		
         ImmGenerateMessage(hIMC);
     }
-	ImmUnlockIMC(hIMC); 
+	ImmUnlockIMC(hIMC);
 }
 
 BOOL
@@ -172,6 +173,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 
 	if (wcslen(GETLPCOMPSTR(lpCompStr)) == 0)
 		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);
+	
 	k = LOWORD(uVKey);
 	if( k >= 65 && k <= 90)
 		k = k + 32;
@@ -222,7 +224,9 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		k = k + 0x0400;
 	else
 		k = k + 0x0000;
+	
 	rlen = KeyEvent(UICurrentInputMethod(), k, str);
+	
 	//rlen = KeyEvent(dsvr.getInputMethod(), k, str);
 	int n = 0;
 	int ln = 0;
@@ -232,16 +236,16 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	wstring temp;
 	while(os >> temp)
 		commandVector.push_back(temp);
-
 	wchar_t *decoded = NULL;
-	wcscpy(lpMyPrivate->CandStr, _T(""));
+	wcscpy(lpMyPrivate->CandStr, L"");
+	
 	for(vector<wstring>::iterator j = commandVector.begin();
 		j != commandVector.end();
 		++j)
 	{
 		if(*j == L"bufclear")
 		{
-			wcscpy(lpMyPrivate->PreEditStr, _T(""));
+			wcscpy(lpMyPrivate->PreEditStr, L"");
 			MakeCompStr(lpMyPrivate, lpCompStr);
 		}
 		else if(*j == L"bufupdate")
@@ -278,8 +282,8 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 
 			wcscpy(GETLPRESULTSTR(lpCompStr), j->c_str());
 			lpCompStr->dwResultStrLen = j->size();
-			wcscpy(lpMyPrivate->PreEditStr, _T(""));
-			wcscpy(lpMyPrivate->CandStr, _T(""));
+			wcscpy(lpMyPrivate->PreEditStr, L"");
+			wcscpy(lpMyPrivate->CandStr, L"");
 			MakeCompStr(lpMyPrivate, lpCompStr);
 			
 			MyGenerateMessage(hIMC,
@@ -323,7 +327,6 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
 		}
 	}
-
 	ImmUnlockIMCC(lpIMC->hPrivate);
 	ImmUnlockIMCC(lpIMC->hCompStr);
 	ImmUnlockIMC(hIMC);
@@ -407,7 +410,7 @@ NotifyIME(HIMC hIMC,DWORD dwAction,DWORD dwIndex,DWORD dwValue)
 		break;
 	case NI_SETCANDIDATE_PAGESIZE:
 		break;
-	case NI_CONTEXTUPDATED:
+/*	case NI_CONTEXTUPDATED:
 		switch (dwValue)
 		{
 		case IMC_SETCOMPOSITIONWINDOW:
@@ -433,7 +436,7 @@ NotifyIME(HIMC hIMC,DWORD dwAction,DWORD dwIndex,DWORD dwValue)
 			break;
 		}
 		break;
-		
+*/		
 	case NI_COMPOSITIONSTR:
 		switch (dwIndex)
 		{

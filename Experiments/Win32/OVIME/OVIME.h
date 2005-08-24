@@ -85,10 +85,7 @@ extern "C" {
 		fclose(fp);
 	}
     }
-	#include <fstream>
-	#include <iostream>
-	std::ofstream debug("f:\\ime.log", std::ios::app);
-	std::wofstream debug("f:\\imew.log", std::ios::app);
+
 #else
     inline static void DebugLog(const char* format,...) {
     }

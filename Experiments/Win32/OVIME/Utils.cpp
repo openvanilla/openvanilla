@@ -3,8 +3,8 @@
 
 void MakeCompStr(LPMYPRIVATE lpMyPrivate, LPCOMPOSITIONSTRING lpCompStr)
 {
-	wcscpy(GETLPCOMPSTR(lpCompStr), _T(""));
-	_stprintf(GETLPCOMPSTR(lpCompStr), lpMyPrivate->PreEditStr);
+	wcscpy(GETLPCOMPSTR(lpCompStr), L"");
+	swprintf(GETLPCOMPSTR(lpCompStr), lpMyPrivate->PreEditStr);
 	lpCompStr->dwCompStrLen = wcslen(GETLPCOMPSTR(lpCompStr));
 }
 
