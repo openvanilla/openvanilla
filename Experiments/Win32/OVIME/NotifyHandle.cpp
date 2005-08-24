@@ -8,6 +8,8 @@ LONG NotifyHandle(HIMC hUICurIMC,
 {
 	LONG lRet = 0L;
     LPINPUTCONTEXT lpIMC;
+	static BOOL first = false;
+	RECT rec;
 
     if (!(lpIMC = ImmLockIMC(hUICurIMC)))
         return 0L;
@@ -21,7 +23,15 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		
 	case IMN_OPENSTATUSWINDOW:
 		UICreateStatusWindow(hWnd);
-		UIMoveStatusWindow(hWnd, 500, 100);
+		if(!first) {
+		SystemParametersInfo(SPI_GETWORKAREA,
+				0,
+				&rec,
+				0);
+			UIMoveStatusWindow(hWnd, rec.right - 50, rec.bottom - 50);
+			first = true;
+		}
+		UIShowStatusWindow();	
 		dsvr.showStatus(true)->notify();
 		break;
 		
@@ -44,7 +54,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 	case IMN_SETSENTENCEMODE:
 		break;
 		
-	case IMN_SETOPENSTATUS:
+	case IMN_SETOPENSTATUS: // toggle status open or close
 		UIShowStatusWindow();
 		dsvr.showStatus(false)->notify();
 		break;

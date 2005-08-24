@@ -27,6 +27,8 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 {
 	POINT pt;
 	UINT id;
+	RECT drc;
+	DWORD        dwT;
 	switch (msg)
 	{
 		case WM_PAINT:
@@ -42,10 +44,19 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 				return DefWindowProc(hWnd, msg, wParam, lParam);
 
 			DragUI(hWnd, NULL, msg, wParam, lParam, FALSE);
+			
+			if(msg == WM_LBUTTONUP || msg == WM_RBUTTONUP) {
+				dwT = GetWindowLong(hWnd,FIGWL_MOUSE);
+				if (dwT & FIM_MOVED) {
+					GetWindowRect(uiStatus.hWnd, &drc);
+					UIMoveStatusWindow(hWnd, drc.left, drc.top);
+				}
+			}
 			if ((msg == WM_SETCURSOR) &&
-					(HIWORD(lParam) != WM_LBUTTONDOWN) &&
-					(HIWORD(lParam) != WM_RBUTTONDOWN))
+				(HIWORD(lParam) != WM_LBUTTONDOWN) &&
+				(HIWORD(lParam) != WM_RBUTTONDOWN))
 				return DefWindowProc(hWnd, msg, wParam, lParam);
+
 			if ((msg == WM_LBUTTONUP) || (msg == WM_RBUTTONUP))
 			{
 				SetWindowLong(hWnd, FIGWL_MOUSE, 0L);
@@ -140,7 +151,7 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 					uiStatus.sz.cy = sz.cy + 4;
 					RECT rc;
 					GetWindowRect(uiStatus.hWnd, &rc);
-					UIMoveStatusWindow( uiStatus.hWnd, rc.left, rc.top );
+					UIMoveStatusWindow(hWnd, rc.left, rc.top );
 				}
 			}
 			break;
@@ -204,6 +215,13 @@ void UICreateStatusWindow(HWND hUIWnd)
 		uiStatus.sz.cy = sz.cy + 4;
 		if( uiStatus.sz.cy < 26 )
 			uiStatus.sz.cy = 26;
+		MoveWindow(uiStatus.hWnd,
+				uiStatus.pt.x,
+				uiStatus.pt.y,
+				uiStatus.sz.cx,
+				uiStatus.sz.cy,
+				TRUE);
+		ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
 	}
 	UIHideStatusWindow();
 	return;
