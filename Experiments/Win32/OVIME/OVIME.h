@@ -29,9 +29,9 @@ extern MyOVDisplayServer dsvr;
 #define WM_UI_COMPMOVE (WM_USER+601)
 
 // Macro
-#define GETLPCOMPSTR(lpcs) (LPTSTR)((LPBYTE)(lpcs) + (lpcs)->dwCompStrOffset)
-#define GETLPRESULTSTR(lpcs) (LPTSTR)((LPBYTE)(lpcs) + (lpcs)->dwResultStrOffset)
-#define GETLPCANDSTR(lpcs,i) (LPTSTR)((LPBYTE)(lpcs) + (lpcs)->dwOffset[i])
+#define GETLPCOMPSTR(lpcs) (wchar_t*)((LPBYTE)(lpcs) + (lpcs)->dwCompStrOffset)
+#define GETLPRESULTSTR(lpcs) (wchar_t*)((LPBYTE)(lpcs) + (lpcs)->dwResultStrOffset)
+#define GETLPCANDSTR(lpcs,i) (wchar_t*)((LPBYTE)(lpcs) + (lpcs)->dwOffset[i])
 
 // Functions
 extern "C" {
@@ -50,16 +50,15 @@ extern "C" {
 	void MakeCompStr(LPMYPRIVATE, LPCOMPOSITIONSTRING);
 	void InitCompStr(LPCOMPOSITIONSTRING);
 	void InitCandInfo(LPCANDIDATEINFO);
-	void UpdateCandidate(LPINPUTCONTEXT, LPTSTR);
+	void UpdateCandidate(LPINPUTCONTEXT, const wchar_t*);
 	void ClearCandidate(LPCANDIDATEINFO);
-	LPTSTR UTF16toWCHAR(char *str);
 	// OVVBPOJ
 	// Param: 1 -> Context number, 2 -> KeyCode, 3 -> Output
 	// Return: Length of returned string.
-	int KeyEvent(int n, int c, char *s);
+	int KeyEvent(int n, int c, wchar_t *s);
 	// Param: 1 -> Output
 	// Return: Number of names.
-	int ModuleName(int , char *);
+	int ModuleName(int , wchar_t *);
 	void InitLoader();
 	void ShutdownLoader();
 }
@@ -86,29 +85,11 @@ extern "C" {
 		fclose(fp);
 	}
     }
-    inline static void DebugLogW(const TCHAR* format,...) {
-	static char first_time=1;
-	FILE *fp;
-
-	if (first_time) {
-		first_time=0;
-		if (fp=fopen("f:\\orz.txt", "w")) {
-			fclose(fp);
-		}
-	}
-
-	if (fp=fopen("f:\\orz.txt", "a")) {
-		va_list args;
-		va_start (args, format);
-		_vftprintf(fp, format, args);
-		va_end (args);
-		_vftprintf(fp, _T("\n"), NULL);
-		fclose(fp);
-	}
-    }
+	#include <fstream>
+	#include <iostream>
+	std::ofstream debug("f:\\ime.log", std::ios::app);
+	std::wofstream debug("f:\\imew.log", std::ios::app);
 #else
     inline static void DebugLog(const char* format,...) {
-    }
-    inline static void DebugLogW(const TCHAR* format,...) {
     }
 #endif

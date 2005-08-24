@@ -10,6 +10,8 @@
 #include <windows.h>
 #include <vector>
 #include <algorithm>
+#include <iostream>
+#include <fstream>
 #include "OpenVanilla.h"
 #include "OVUtility.h"
 #include "OVLibrary.h"
@@ -20,7 +22,7 @@
 #include "OVDisplayServer.h"
 
 #include <exception>
-
+using namespace std;
 extern "C" {
 #include "ltdl.h"
 }
@@ -35,7 +37,7 @@ const char* hexstr(unsigned char x) {
     sprintf(buf, "%02x", (unsigned short)x);
     return buf;
 }
-
+/*
 const string &utf8toutf16(const char* src)
 {
     char *s1=(char*)src;
@@ -73,7 +75,7 @@ void dumpu8string(const char *s) {
     string us=utf8toutf16((char*)s);
     printf("u8str=%s, dump=%s\n", s, us.c_str());
 }
-
+*/
 
 class DummyKeyCode : public OVKeyCode  {
 public:
@@ -112,7 +114,7 @@ public:
         //dumpu8string(bufstr.c_str());
 	if(bufstr!="") {
 		action += "bufsend "; 
-		action += utf8toutf16(bufstr.c_str());
+		action += bufstr;
 		action += " ";
 		bufstr="";
 		dsvr.showBuf(false);
@@ -122,9 +124,9 @@ public:
     virtual OVBuffer* update() { 
 	if(bufstr!="") {
 		char tmp[100];
-		dsvr.setBufString(utf8toutf16(bufstr.c_str()))->setCursorPos(cursorPos)->setMarkFrom(markFrom)->setMarkTo(markTo)->notify();
+		//dsvr.setBufString(utf8toutf16(bufstr.c_str()))->setCursorPos(cursorPos)->setMarkFrom(markFrom)->setMarkTo(markTo)->notify();
 		action += "bufupdate "; 
-		action += utf8toutf16(bufstr.c_str());
+		action += bufstr;
 		action += " cursorpos ";
 		sprintf(tmp, "%d", cursorPos);
 		action += string(tmp);
@@ -178,9 +180,9 @@ public:
     }
     virtual OVCandidate* update() {
         action += "candiupdate "; 
-        action += utf8toutf16(candistr.c_str());
-        action += " ";
-		dsvr.setCandiString(utf8toutf16(candistr.c_str()));
+        action += candistr;
+        action += " candiend ";
+		//dsvr.setCandiString(utf8toutf16(candistr.c_str()));
         return this; 
     }
     virtual int onScreen() {
@@ -481,7 +483,7 @@ extern "C" {
 //		for_each(mod_vector.begin(), mod_vector.end(), DeleteObject);
 //		mod_vector.clear();
 	}
-	int KeyEvent(int n, int c, char *s) {
+	int KeyEvent(int n, int c, wchar_t *s) {
 		if (!inited) init();
 
 		DummyKeyCode kc(c);		
@@ -501,22 +503,30 @@ extern "C" {
 		catch (...) {}
 		string ac=candi.action+buf.action;
 		if (st) ac += "processed"; else ac+="unprocessed";
+#ifdef WIN32
+		MultiByteToWideChar(CP_UTF8, 0, ac.c_str(), ac.size(), s, 1024);
+#else
 		strcpy(s, ac.c_str());
+#endif
 		candi.action="";
 		buf.action="";
 		return static_cast<int>(ac.length());
 	}
 
-	int ModuleName(int i, char *str)
+	int ModuleName(int i, wchar_t *str)
 	{
 		string s;
 		int modVectorNum = static_cast<int>(mod_vector.size()) - 1;
 		if(i > modVectorNum) {
-			strcpy(str, "");
+			wcscpy(str, L"");
 			return 0;
 		}
-		s = utf8toutf16(mod_vector.at(i)->localizedName("zh_TW"));
-		strcpy(str, s.c_str());
+		s = mod_vector.at(i)->localizedName("zh_TW");
+#ifdef WIN32
+		MultiByteToWideChar(CP_UTF8, 0, s.c_str(), s.size(), str, 1024);
+#else
+		strcpy(str, ac.c_str());
+#endif
 		return 1;
 	}
 }

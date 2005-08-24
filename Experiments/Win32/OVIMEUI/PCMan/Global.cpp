@@ -3,9 +3,9 @@
 HFONT hUIFont;
 HINSTANCE hInst;
 HINSTANCE hInstDLL;
-LPTSTR lpCandStr;
+wchar_t* lpCandStr;
 int numCand;
-LPTSTR lpCompStr;
+wchar_t* lpCompStr;
 int CompCursorPos;
 int CompSelStart;
 int CompSelEnd;
@@ -19,5 +19,5 @@ bool isChinese = true;
 bool isFull = false;
 
 // InputContext
-std::vector<LPTSTR> IC;
+std::vector<wchar_t*> IC;
 int CurrentIC;

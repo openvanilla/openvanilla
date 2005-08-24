@@ -97,9 +97,9 @@ BOOL IMEUIUnRegisterClass( HINSTANCE hInstance )
 	return TRUE;
 }
 
-void UIPushInputMethod( LPTSTR lpStr )
+void UIPushInputMethod( wchar_t *lpStr )
 {
-	IC.push_back(_tcsdup(lpStr));
+	IC.push_back(wcsdup(lpStr));
 	AppendMenu( hIMESelMenu, MF_STRING, ID_IME_LIST_FIRST + IC.size() -1, lpStr );
 }
 

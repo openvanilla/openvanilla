@@ -13,7 +13,7 @@ extern "C" {
 BOOL IMEUIRegisterClass( HINSTANCE );
 BOOL IMEUIUnRegisterClass( HINSTANCE );
 BOOL MyIsIMEMessage(UINT);
-void UIPushInputMethod(LPTSTR);
+void UIPushInputMethod(wchar_t*);
 int UICurrentInputMethod();
 // UIStatus.cpp
 void UICreateStatusWindow(HWND);
@@ -25,12 +25,12 @@ void UISetMarkFrom(int);
 void UISetMarkTo(int);
 // UIComp.cpp
 void UICreateCompWindow(HWND);
-void UIMoveCompWindow(HWND, int, int, LPTSTR);
+void UIMoveCompWindow(HWND, int, int, wchar_t*);
 void UIShowCompWindow();
 void UIHideCompWindow();
 // UICand.cpp
 void UICreateCandWindow(HWND);
-void UIMoveCandWindow(HWND, int, int, LPTSTR);
+void UIMoveCandWindow(HWND, int, int, wchar_t*);
 void UIShowCandWindow();
 void UIHideCandWindow();
 }

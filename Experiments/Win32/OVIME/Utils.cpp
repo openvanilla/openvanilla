@@ -3,9 +3,9 @@
 
 void MakeCompStr(LPMYPRIVATE lpMyPrivate, LPCOMPOSITIONSTRING lpCompStr)
 {
-	_tcscpy(GETLPCOMPSTR(lpCompStr), _T(""));
+	wcscpy(GETLPCOMPSTR(lpCompStr), _T(""));
 	_stprintf(GETLPCOMPSTR(lpCompStr), lpMyPrivate->PreEditStr);
-	lpCompStr->dwCompStrLen = _tcslen(GETLPCOMPSTR(lpCompStr));
+	lpCompStr->dwCompStrLen = wcslen(GETLPCOMPSTR(lpCompStr));
 }
 
 void InitCompStr(LPCOMPOSITIONSTRING lpCompStr)
@@ -14,12 +14,12 @@ void InitCompStr(LPCOMPOSITIONSTRING lpCompStr)
 	lpCompStr->dwCompStrOffset =
 		(DWORD)((LPMYCOMPSTR)lpCompStr)->szCompStr - (DWORD)lpCompStr;
 	lpCompStr->dwCompStrLen = 0;
-	*GETLPCOMPSTR(lpCompStr) = _T('\0');
+	*GETLPCOMPSTR(lpCompStr) = L'\0';
 
 	lpCompStr->dwResultStrOffset = 
 		(DWORD)((LPMYCOMPSTR)lpCompStr)->szResultStr - (DWORD)lpCompStr;
 	lpCompStr->dwResultStrLen = 0;
-	*GETLPRESULTSTR(lpCompStr) = _T('\0');
+	*GETLPRESULTSTR(lpCompStr) = L'\0';
 	
 	lpCompStr->dwCursorPos = 0;
 }
@@ -56,29 +56,29 @@ void ClearCandidate(LPCANDIDATEINFO lpCandInfo)
     ((LPMYCAND)lpCandInfo)->cl.dwPageSize =0L;
 }
 
-void UpdateCandidate(LPINPUTCONTEXT lpIMC, LPTSTR candis)
+void UpdateCandidate(LPINPUTCONTEXT lpIMC, const wchar_t* candis)
 {
 	LPCANDIDATEINFO lpCandInfo;
 	LPCANDIDATELIST lpCandList;
 	if (lpCandInfo = (LPCANDIDATEINFO)ImmLockIMCC(lpIMC->hCandInfo))
 	{
-		LPTSTR lpStr;
+		wchar_t* lpStr;
 		lpCandList = (LPCANDIDATELIST)((LPSTR)lpCandInfo
 			+ lpCandInfo->dwOffset[0]);
-		int rlen = _tcslen(candis);
+		int rlen = wcslen(candis);
 		int n = 0;
 		int ln = 0;
 		for( int i = 0; i < rlen; i++ )
 		{
-			if(candis[i] == _T(' ') || i == rlen - 1)
+			if(candis[i] == L' ' || i == rlen - 1)
 			{
 				DebugLog("UPDATE\n", NULL);
 				int dst = i - 1;
 				if( i == rlen - 1)
 					dst = i + 1;
 				lpStr = GETLPCANDSTR(lpCandList, n);
-				memset(lpStr, 0, 100*sizeof(TCHAR));
-				_tcsncpy(lpStr, candis+ln, dst - ln + 1);
+				memset(lpStr, 0, 100*sizeof(wchar_t));
+				wcsncpy(lpStr, candis+ln, dst - ln + 1);
 				ln = i + 1;
 				n++;
 			}
@@ -89,22 +89,4 @@ void UpdateCandidate(LPINPUTCONTEXT lpIMC, LPTSTR candis)
 
 		ImmUnlockIMCC(lpIMC->hCandInfo);
 	}
-}
-
-LPTSTR UTF16toWCHAR(char *str)
-{
-	LPTSTR r = (LPTSTR)calloc(1024, sizeof(TCHAR));
-	char tmp[5];
-	int out;
-
-	int len = strlen(str);
-	for(int i = 0; i*4 < len; i++)
-	{
-		if(i*4 < len)
-			strncpy(tmp, str + i*4, 4);
-		sscanf(tmp, "%x", &out);
-		r[i] = out;
-	}
-	r[len/4] = NULL;
-	return r;
 }

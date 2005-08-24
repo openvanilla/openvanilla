@@ -7,7 +7,7 @@ typedef struct _tagTRANSMSG {
 	UINT uMsg;
 	WPARAM wParam;
 	LPARAM lParam;
-} TRANSMSG, FAR *LPTRANSMSG;
+} TRANSMSG, *LPTRANSMSG;
 
 // IMPORTANT
 typedef struct _tagMYPRIVATE {
@@ -18,19 +18,19 @@ typedef struct _tagMYPRIVATE {
 	// set lpIMEInfo->dwPrivateDataSize = sizeof(MYPRIVATE);
 	// Then every IMC generated will share this private, access
 	// through IMC->hPrivate field
-	_TCHAR PreEditStr[MAXSTRSIZE];
-	_TCHAR CandStr[MAXSTRSIZE];
-} MYPRIVATE, NEAR *PMYPRIVATE, FAR *LPMYPRIVATE;
+	wchar_t PreEditStr[MAXSTRSIZE];
+	wchar_t CandStr[MAXSTRSIZE];
+} MYPRIVATE, *LPMYPRIVATE;
 
 typedef struct _tagMYCOMPSTR{
     COMPOSITIONSTRING cs;
-    _TCHAR szCompStr[MAXCOMPSIZE];
-    _TCHAR szResultStr[MAXCOMPSIZE];	
-} MYCOMPSTR, NEAR *PMYCOMPSTR, FAR *LPMYCOMPSTR;
+    wchar_t szCompStr[MAXCOMPSIZE];
+    wchar_t szResultStr[MAXCOMPSIZE];	
+} MYCOMPSTR, *LPMYCOMPSTR;
 
 typedef struct _tagMYCAND{
     CANDIDATEINFO  ci;
     CANDIDATELIST  cl;
     DWORD          offset[MAXCANDSTRNUM];
-    TCHAR          szCandStr[MAXCANDSTRNUM][MAXCANDSTRSIZE];
-} MYCAND, NEAR *PMYCAND, FAR *LPMYCAND;
+    wchar_t          szCandStr[MAXCANDSTRNUM][MAXCANDSTRSIZE];
+} MYCAND, *LPMYCAND;

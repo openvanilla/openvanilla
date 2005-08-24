@@ -91,11 +91,11 @@ BOOL GetCandPosFromCompWnd(LPSIZE lpsz)
 	return FALSE;
 }
 
-void UIMoveCandWindow(HWND hUIWnd, int X, int Y, LPTSTR lpStr)
+void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 {
 	free(lpCandStr);
 	numCand = 0;
-	lpCandStr = _tcsdup(lpStr);
+	lpCandStr = wcsdup(lpStr);
 	if( !*lpStr )
 	{
 		UIHideCandWindow();
@@ -131,14 +131,14 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, LPTSTR lpStr)
 		hDC = GetDC(uiCand.hWnd);
 		oldFont = (HFONT)SelectObject(hDC, hUIFont);
 
-		LPCTSTR cand = _tcstok( lpCandStr, _T(" "));	// strtok, delimited by space
+		LPCTSTR cand = wcstok( lpCandStr, L" ");	// strtok, delimited by space
 
 		int num = 0;
 		int width = 0;
 		while( cand )
 		{
 			++numCand;
-			int len = _tcslen( cand );
+			int len = wcslen( cand );
 			GetTextExtentPoint32(hDC, cand, len, &candsz);
 			candsz.cx += 4;
 			candsz.cy += 2;
@@ -152,7 +152,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, LPTSTR lpStr)
 				width = 0;
 				num = 0;
 			}
-			cand = _tcstok( NULL, _T(" ") );
+			cand = wcstok( NULL, L" " );
 		}
 		if( width > sz.cx )
 			sz.cx = width;
@@ -216,7 +216,7 @@ void PaintCandWindow(HWND hCandWnd)
 		for( int i = 0; i < numCand; ++i )
 		{
 			++num;
-			int len = _tcslen( cand );
+			int len = wcslen( cand );
 			SIZE candsz;
 			GetTextExtentPoint32(hDC, cand, len, &candsz);
 			candsz.cx += 4;
@@ -239,7 +239,7 @@ void PaintCandWindow(HWND hCandWnd)
 			}
 			else
 				cand_rc.left = cand_rc.right;
-			cand = cand + _tcslen(cand) + 1;
+			cand = cand + wcslen(cand) + 1;
 		}
 		cand_rc.left = cand_rc.right;
 		cand_rc.right = rc.right;
