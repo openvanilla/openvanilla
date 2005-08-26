@@ -530,13 +530,15 @@ extern "C" {
 		}
 		s = mod_vector.at(i)->localizedName("zh_TW");
 #ifdef WIN32
-		MultiByteToWideChar(CP_UTF8, 0, s.c_str(), s.size(), str, 1024);
+		// s.size()+1 is used to include the NULL character at the 
+		// end of the string.
+		MultiByteToWideChar(CP_UTF8, 0, s.c_str(), s.size()+1, str, 1024);
 #else
 		iconv_t cd;
 	    char *out = (char*)str;
 	    cd = iconv_open("WCHAR_T", "UTF-8");
 		const char *src = s.c_str();
-		size_t inbytesleft = s.size();
+		size_t inbytesleft = s.size()+1;
 		size_t outbytesleft = 1024;
 	    iconv (cd, &src, &inbytesleft, &out, &outbytesleft);
 	    iconv_close(cd);
