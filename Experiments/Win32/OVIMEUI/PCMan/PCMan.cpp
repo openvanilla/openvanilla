@@ -100,7 +100,16 @@ BOOL IMEUIUnRegisterClass( HINSTANCE hInstance )
 void UIPushInputMethod( wchar_t *lpStr )
 {
 	IC.push_back(wcsdup(lpStr));
-	AppendMenu( hIMESelMenu, MF_STRING, ID_IME_LIST_FIRST + IC.size() -1, lpStr );
+	LPCTSTR name;
+#ifdef	_UNICODE
+	name = lpStr;
+#else
+	int len = wcslen(lpStr);
+	char buf[1024];
+	WideCharToMultiByte( CP_ACP, 0, lpStr, len + 1, buf, 1024, NULL, NULL );
+	name = buf;
+#endif
+	AppendMenu( hIMESelMenu, MF_STRING, ID_IME_LIST_FIRST + IC.size() -1, name );
 }
 
 int UICurrentInputMethod()

@@ -269,6 +269,10 @@ void UIMoveStatusWindow(HWND hUIWnd, int X, int Y)
 				sz.cx,
 				sz.cy,
 				TRUE);
+
+		uiStatus.pt.x = pt.x;
+		uiStatus.pt.y = pt.y;
+
 		ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
 
 		InvalidateRect(uiStatus.hWnd,NULL, FALSE);
