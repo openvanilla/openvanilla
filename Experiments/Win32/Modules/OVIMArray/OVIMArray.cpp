@@ -42,9 +42,8 @@ int OVIMArrayContext::WaitKey1(OVKeyCode* key, OVBuffer* buf,
 
     updateCandidate(tabs[SHORT_TAB], buf, candibar);
     char keycode = keyseq.getSeq()[0];
-	if( keycode == 't' ){
-		char tcode[]={0xe7, 0x9a, 0x84,0};    
-		buf->clear()->append(tcode)->update();
+	if( keycode == 't' ){    
+		buf->clear()->append("\xe7\x9a\x84")->update(); // send "的"
 	}
 	if( isprint(keycode) && keyseq.valid(keycode) )
         changeState(STATE_WAIT_KEY2);
@@ -207,7 +206,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         string c;
 		char space_code[] = {0xe2, 0x8e, 0x94,0};
         if( candi.select(keycode, c) ){
-            if( c != space_code  ){
+            if( c != "\xe2\x8e\x94"  ){ // "⎔"
                 sendAndReset(c.c_str(), buf, candi_bar, srv);
             }
             else{
@@ -315,8 +314,8 @@ int OVIMArray::initialize(OVDictionary *conf, OVService*, const char *path){
 }
 
 int OVIMArray::updateConfig(OVDictionary *conf){
-	const char AutoSP[] = {0xe7, 0x89, 0xb9, 0xe5, 0x88, 0xa5, 0xe7,0xa2, 0xbc, 0xe6, 0x8f, 0x90, 0xe7, 0xa4, 0xba,0};
-	const char ForceSP[] = {0xe5, 0xbf, 0xab, 0xe6, 0x89, 0x93, 0xe6, 0xa8, 0xa1, 0xe5, 0xbc, 0x8f,0};
+	const char AutoSP[] = {0xe7, 0x89, 0xb9, 0xe5, 0x88, 0xa5, 0xe7,0xa2, 0xbc, 0xe6, 0x8f, 0x90, 0xe7, 0xa4, 0xba,0}; // 特別碼提示
+	const char ForceSP[] = {0xe5, 0xbf, 0xab, 0xe6, 0x89, 0x93, 0xe6, 0xa8, 0xa1, 0xe5, 0xbc, 0x8f,0}; // 快打模式
 
     if( !conf->keyExist(AutoSP) ) conf->setInteger(AutoSP, 1);
     if( !conf->keyExist(ForceSP) ) conf->setInteger(ForceSP, 0);
