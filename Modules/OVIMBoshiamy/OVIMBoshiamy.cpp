@@ -279,7 +279,6 @@ const char *OVIMGenericSQLite::localizedName(const char *lc) {
 }
 
 int OVIMGenericSQLite::isEndKey(char c) {
-    if (strchr(endkey, c)) return 1;
     return 0;
 }
 
@@ -335,7 +334,7 @@ int OVIMGenericContext::keyPrintable() {
         b->clear()->append(keystr)->send();
         return 1;
     }
-    
+
     // wildcard hack: currently we don't allow ? * as the first character
     if (parent->allowwildcard && b->isEmpty() && 
         (k->code()=='?' || k->code()=='*')) return keyNonRadical();
@@ -344,8 +343,14 @@ int OVIMGenericContext::keyPrintable() {
         if (b->isEmpty()) return keyNonRadical(); // not a Radical keycode
         s->beep();
     }
+
     if (parent->isEndKey(k->code())) return keyCompose();
     b->clear()->append(seq.compose())->update();
+
+    const char *q = seq.sequence();
+    if(fetchCandidate(q))
+        updateCandidateWindow();
+
     return 1;
 }
 
@@ -512,12 +517,11 @@ int OVIMGenericContext::candidateEvent() {
     int i=0, l=perpage, nextsyl=0;
     for (i=0; i<perpage; i++) if(localSelKey[i]==kc) break;
     if (i==l) {         // not a valid candidate key
-        if (kc==ovkReturn) i=0;
-        if (seq.isValidKey(kc)) { i=0; nextsyl=1; }
-    }
-    if (i==l) {
-        s->beep();
-        b->update();    // we do this to make some applications happy
+      if (candi) {
+	delete candi;
+	candi=NULL;
+      }
+      return keyPrintable();
     }
     else {
         b->clear()->append(candi->candidates[i + page*perpage])->send();
