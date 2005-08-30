@@ -279,6 +279,10 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		else if(*j == L"bufsend")
 		{
 			j++;
+			if(*j == L"bufclear") { // if IM sending space
+				j--;
+				*j = L" ";
+			}
 
 			wcscpy(GETLPRESULTSTR(lpCompStr), j->c_str());
 			lpCompStr->dwResultStrLen = j->size();

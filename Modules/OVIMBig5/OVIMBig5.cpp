@@ -5,8 +5,14 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
-#include <OpenVanilla/OpenVanilla.h>
-#include <OpenVanilla/OVLibrary.h>
+#ifndef WIN32
+	#include <OpenVanilla/OpenVanilla.h>
+	#include <OpenVanilla/OVLibrary.h>
+#else
+	#include "OpenVanilla.h"
+	#include "OVLibrary.h"
+	#define strcasecmp stricmp
+#endif
 #include "OVIMBig5.h"
 
 unsigned int convert(unsigned int in){ //Convert Big5 to Unicode
@@ -61,7 +67,7 @@ public:
 			//unsigned short i = strtol(keyseq.buf, (char **) NULL, 16);
 			unsigned short i = convert(strtol(keyseq.buf, (char **) NULL, 16));
 			
-			buf->clear()->append(srv->UTF16ToUTF8(&i, 1))->send()->clean();
+			buf->clear()->append(srv->UTF16ToUTF8(&i, 1))->send()->clear();
             textbar->clear()->hide();
 			keyseq.clear();
             return 1;   // key processed

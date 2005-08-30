@@ -10,6 +10,7 @@
 #include <windows.h>
 #include <vector>
 #include <algorithm>
+#include <map>
 #include <iostream>
 #include <fstream>
 #include "OpenVanilla.h"
@@ -278,6 +279,8 @@ DummyBuffer buf;
 std::vector<OVInputMethodContext*> ctx_vector;
 int inited=0;
 std::vector<OVModule*> mod_vector;
+typedef map<OVModule*, int> mymap;
+mymap priority_map;
 std::vector<bool> startedCtxVector;	// 這是很浪費的作法 orz
 
 typedef OVModule* (*TypeGetModule)(int);
@@ -318,6 +321,17 @@ OPEN_FAILED:
    return NULL;
 }
 
+static bool sort_im(OVModule* a, OVModule* b) {
+/*	int pa = 0, pb = 0;
+	DummyDictionary dic_a(OV_BASEDIR, a->identifier());
+	DummyDictionary dic_b(OV_BASEDIR, b->identifier());
+	pa = dic_a.getInteger("priority");
+	pb = dic_b.getInteger("priority");
+	return ( pa >= pb );
+*/
+	return (priority_map[a] >= priority_map[b]);
+}
+
 static int scan_ov_modules(){
 	BOOL fFinished;
 	HANDLE hList;
@@ -352,13 +366,20 @@ static int scan_ov_modules(){
 							murmur("InitDisplayComponent: %s", dc->localizedName("zh_TW"));
 							continue;
 						}
-						mod_vector.push_back(m);
-						fprintf(stderr, "Load OVModule: %s\n", m->localizedName("zh_TW"));
+						DummyDictionary dic(OV_BASEDIR, m->identifier());
+						if(!dic.keyExist("enable"))
+							dic.setInteger("enable", 1);
+						if(dic.getInteger("enable") == 1) {
+							mod_vector.push_back(m);
+							priority_map.insert( mymap::value_type(m, dic.getInteger("priority")) );
+							fprintf(stderr, "Load OVModule: %s\n", m->localizedName("zh_TW"));
+						}
 
 					}
 					delete mod;
 				}
 			}
+			sort(mod_vector.begin(), mod_vector.end(), sort_im);
 			if (!FindNextFile(hList, &FileData))
 			{
 				if (GetLastError() == ERROR_NO_MORE_FILES)

@@ -2,33 +2,8 @@
 #include "OVUtility.h"
 #include "OVDisplayServer.h"
 #include "OVLibrary.h"
-#include "Utility.h"
 
 #include <windows.h>
-
-
-    #include <stdarg.h>
-    #include <stdio.h>
-    inline static void DebugLog(const char* format,...) {
-	static char first_time=1;
-	FILE *fp;
-
-	if (first_time) {
-		first_time=0;
-		if (fp=fopen("f:\\opq.txt", "w")) {
-			fclose(fp);
-		}
-	}
-
-	if (fp=fopen("f:\\opq.txt", "a")) {
-		va_list args;
-		va_start (args, format);
-		vfprintf (fp, format, args);
-		va_end (args);
-		fprintf (fp, "\n");
-		fclose(fp);
-	}
-	}
 
 #define OV_DEBUG
 #define CS_OVIME (CS_VREDRAW | CS_HREDRAW | CS_DBLCLKS)
@@ -55,14 +30,11 @@ static OVDCPCMan* self;
 OVDCPCMan::OVDCPCMan()
 {
 	self = this;
-	DebugLog("PCMAN: %s", moduleType());	
 }
 
 void OVDCPCMan::update()
 {
-	DebugLog("PCMAN: %s", "Update");
 	if(svr->isCandiShow() || svr->getCandiString() != "") {
-		DebugLog("PCMAN: %s", svr->getCandiString().c_str());
 		CreateCompWindow();
 		MoveWindow(hCompWnd,
 				400,
@@ -72,9 +44,7 @@ void OVDCPCMan::update()
 				TRUE);
 		InvalidateRect(hCompWnd,NULL, FALSE);
 		ShowWindow(hCompWnd, SW_SHOWNOACTIVATE);
-		//wchar_t *decoded = UTF16toWCHAR(svr->getBufString().c_str());
 		//MessageBoxW(NULL, decoded, L"Orz", MB_OK);
-		//free(decoded);
 	} else {
 		ShowWindow(hCompWnd, SW_HIDE);
 	}
@@ -82,8 +52,6 @@ void OVDCPCMan::update()
 
 int OVDCPCMan::initialize(OVDictionary *moduleCfg, OVService *srv, const char *modulePath)
 {
-	DebugLog("PCMAN: %s", "Initialize");
-	//DebugLog("PCMAN: hinst %x", svr->getHInst());
 	UINT cs_dropshadow = 0;
 	/*
 	OSVERSIONINFO vi;
@@ -106,7 +74,6 @@ int OVDCPCMan::initialize(OVDictionary *moduleCfg, OVService *srv, const char *m
 	wc.lpszClassName  = "COMPWND";
 	wc.hbrBackground  = NULL;
 	wc.hIconSm        = NULL;
-	DebugLog("PCMAN: %s", "IntEnd");
 	if( !RegisterClassEx( (LPWNDCLASSEX)&wc ) )
 		return 0;
 	
@@ -163,7 +130,6 @@ void OVDCPCMan::CreateCompWindow()
 			CreateWindowEx(0, "COMPWND", NULL,
 					WS_DISABLED | WS_POPUP,
 					0, 0, 1, 1, svr->getHWnd(), NULL, NULL, NULL);
-		DebugLog("PCMAN: %s %x", "CreateWindow", hCompWnd);
 		//SetWindowLong(hCompWnd, FIGWL_SVRWND, (DWORD)svr->getHWnd());
 
 		wprintf(szStr, L"AAAAAAAAAAAAA");
@@ -198,9 +164,7 @@ void OVDCPCMan::PaintCompWindow()
 
 	if(svr->getCandiString() != "")
 	{
-		DebugLog("Str: %s", svr->getCandiString().c_str());
 		wchar_t *decoded = UTF16toWCHAR(svr->getCandiString().c_str());
-		DebugLog("Str END");
 		SetTextColor( memdc, GetSysColor( COLOR_WINDOW ) );
 		SetBkColor( memdc, GetSysColor( COLOR_WINDOWTEXT ) );
 		

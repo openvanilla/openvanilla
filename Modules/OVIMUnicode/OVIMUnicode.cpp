@@ -5,8 +5,14 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
-#include <OpenVanilla/OpenVanilla.h>
-#include <OpenVanilla/OVLibrary.h>
+#ifndef WIN32
+	#include <OpenVanilla/OpenVanilla.h>
+	#include <OpenVanilla/OVLibrary.h>
+#else
+	#include "OpenVanilla.h"
+	#include "OVLibrary.h"
+	#define strcasecmp stricmp
+#endif
 
 class OVIMUnicode;
 
