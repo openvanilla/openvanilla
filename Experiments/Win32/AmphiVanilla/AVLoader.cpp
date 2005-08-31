@@ -28,12 +28,6 @@
 #include <exception>
 using namespace std;
 
-/*
-char OV_BASEDIR[PATH_MAX];
-char OV_USERDIR[PATH_MAX];
-char OV_MODULEDIR[PATH_MAX];
-*/
-
 class AVKeyCode : public OVKeyCode  {
 public:
     AVKeyCode (int p=0)          { chr=p; shift=capslock=ctrl=alt=0; }
@@ -174,12 +168,6 @@ bool sort_im(OVModule *a, OVModule *b)
 
 void init() {    
     if (inited) return;
-    /*
-    GetWindowsDirectory(OV_BASEDIR, MAX_PATH - 14);
-    sprintf(OV_BASEDIR, "%s\\%s", OV_BASEDIR, "\\OpenVanilla\\");
-    sprintf(OV_USERDIR, "%s\\%s", OV_BASEDIR, "\\User\\");
-    sprintf(OV_MODULEDIR, "%s\\%s", OV_BASEDIR, "\\Modules\\");
-    */
     dict.setPath(cfg.getBaseDir());
     mod_vector = AVLoadEverything(cfg.getModuleDir(), &srv);
     // delete unused im
