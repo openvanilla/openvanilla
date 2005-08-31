@@ -39,7 +39,7 @@
 				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\AmphiVanilla;"
+				AdditionalLibraryDirectories="..\AmphiVanilla;..\AmphiVanilla\Debug;"
 				IgnoreDefaultLibraryNames="scew_d.lib"
 				ModuleDefinitionFile="OVIME.def"
 				GenerateDebugInformation="TRUE"
@@ -94,10 +94,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib"
+				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib AmphiVanilla.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\AmphiVanilla;..\AmphiVanilla\tinyxml"
+				AdditionalLibraryDirectories="..\AmphiVanilla;..\AmphiVanilla\Release;"
 				IgnoreDefaultLibraryNames=""
 				ModuleDefinitionFile="OVIME.def"
 				GenerateDebugInformation="FALSE"
@@ -138,9 +138,6 @@
 				RelativePath="ControlHandle.cpp">
 			</File>
 			<File
-				RelativePath="..\AmphiVanilla\AVDictionary.cpp">
-			</File>
-			<File
 				RelativePath="Global.cpp">
 			</File>
 			<File
@@ -150,15 +147,6 @@
 				RelativePath="NotifyHandle.cpp">
 			</File>
 			<File
-				RelativePath="..\AmphiVanilla\AVDisplayComponent.cpp">
-			</File>
-			<File
-				RelativePath="..\AmphiVanilla\AVDisplayServer.cpp">
-			</File>
-			<File
-				RelativePath="..\AmphiVanilla\AVLoader.cpp">
-			</File>
-			<File
 				RelativePath="OVIME.cpp">
 			</File>
 			<File
@@ -166,15 +154,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\Source\OVStringToolKit.cpp">
-			</File>
-			<File
-				RelativePath="..\AmphiVanilla\tinyxml\tinyxml.cpp">
-			</File>
-			<File
-				RelativePath="..\AmphiVanilla\tinyxml\tinyxmlerror.cpp">
-			</File>
-			<File
-				RelativePath="..\AmphiVanilla\tinyxml\tinyxmlparser.cpp">
 			</File>
 			<File
 				RelativePath="UIWnd.cpp">
@@ -187,25 +166,13 @@
 			Name="¼ÐÀYÀÉ"
 			Filter="h;hpp;hxx;hm;inl;inc">
 			<File
-				RelativePath="..\AmphiVanilla\AVDictionary.h">
-			</File>
-			<File
 				RelativePath="ExtraStructs.h">
-			</File>
-			<File
-				RelativePath="..\AmphiVanilla\ltdl.h">
 			</File>
 			<File
 				RelativePath="..\..\..\Headers\OpenVanilla.h">
 			</File>
 			<File
 				RelativePath="..\..\..\Headers\OVCandidateList.h">
-			</File>
-			<File
-				RelativePath="..\AmphiVanilla\AVDisplayComponent.h">
-			</File>
-			<File
-				RelativePath="..\AmphiVanilla\AVDisplayServer.h">
 			</File>
 			<File
 				RelativePath="OVIME.h">
@@ -221,9 +188,6 @@
 			</File>
 			<File
 				RelativePath="resource.h">
-			</File>
-			<File
-				RelativePath="..\AmphiVanilla\tinyxml\tinyxml.h">
 			</File>
 			<File
 				RelativePath="Vk.h">
