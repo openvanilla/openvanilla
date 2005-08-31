@@ -263,7 +263,7 @@ extern "C" {
 		string ac=candi.action+buf.action;
 		if (st) ac += "processed"; else ac+="unprocessed";
 #ifdef WIN32
-		MultiByteToWideChar(CP_UTF8, 0, ac.c_str(), ac.size(), s, 1024);
+		MultiByteToWideChar(CP_UTF8, 0, ac.c_str(), ac.size()+1, s, 1024);
 #else	    
 		iconv_t cd;
 	    char *out = (char*)s;
