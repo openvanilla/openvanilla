@@ -1,6 +1,5 @@
 #include <string>
 #include <sys/types.h>
-#include <sys/stat.h>
 #include "AVDictionary.h"
 #include "OVUtility.h"
 
@@ -35,7 +34,6 @@ void AVDictionary::setPath(const char *path)
 		createNewConfig(file);
 		doc.LoadFile();
 	}
-	_stat(file.c_str(), &filestat);
 }
 
 void AVDictionary::setDict(const char *dict)
@@ -65,19 +63,12 @@ TiXmlNode *AVDictionary::findChild(TiXmlNode *parent, const char *node, const ch
 
 void AVDictionary::update()
 {
-	struct _stat tmp;
-	_stat(file.c_str(), &tmp);
-	if(tmp.st_mtime > filestat.st_mtime) {
-		filestat = tmp;
-		doc.LoadFile();
-		module = findChild(doc.RootElement(), "dict", name.c_str());
-	}
+	doc.LoadFile();
 }
 
 void AVDictionary::save()
 {
 	doc.SaveFile();
-	_stat(file.c_str(), &filestat);
 }
 
 AVDictionary::~AVDictionary()
@@ -86,7 +77,6 @@ AVDictionary::~AVDictionary()
 
 int AVDictionary::keyExist(const char *key)
 {
-	//update();
 	if(module && findChild(module, "key", key))
 		return 1;
 	else
@@ -108,7 +98,6 @@ int AVDictionary::setInteger(const char *key, int value)
 
 const char* AVDictionary::getString(const char *key)
 {
-	//update();
 	if(!module) return "";
 	TiXmlNode *child = findChild(module, "key", key);
 	if(child)
@@ -119,7 +108,6 @@ const char* AVDictionary::getString(const char *key)
 
 const char* AVDictionary::setString(const char *key, const char *value)
 {
-	//update();
 	if(!module)
 		newDict();
 	TiXmlNode *child;

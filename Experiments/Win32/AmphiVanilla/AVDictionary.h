@@ -2,7 +2,6 @@
 #include "OpenVanilla.h"
 #include "tinyxml.h"
 #include <sys/types.h>
-#include <sys/stat.h>
 
 class AVDictionary : public OVDictionary {
 	public:
@@ -28,5 +27,4 @@ class AVDictionary : public OVDictionary {
 		TiXmlNode *findChild(TiXmlNode *parent, const char *node, const char *name);
 		TiXmlDocument doc;
 		TiXmlNode *module;
-		struct _stat filestat;
 };

@@ -12,11 +12,13 @@ LINK32_OBJS = \
 	      $(OUTDIR)\UIWnd.obj \
 	      $(OUTDIR)\Utils.obj \
               $(OUTDIR)\OVStringToolKit.obj \
+	      $(OUTDIR)\AVConfig.obj \
 	      $(OUTDIR)\AVLoader.obj \
 	      $(OUTDIR)\AVLoaderUtility.obj \
 	      $(OUTDIR)\AVDisplayServer.obj \
 	      $(OUTDIR)\AVDisplayComponent.obj \
 	      $(OUTDIR)\AVDictionary.obj \
+	      $(OUTDIR)\AVService.obj \
 	      $(OUTDIR)\tinyxml.obj \
 	      $(OUTDIR)\tinyxmlerror.obj \
 	      $(OUTDIR)\tinyxmlparser.obj
@@ -61,6 +63,9 @@ cflags = /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I "Amp
 FILE=OVStringToolKit
 $(OUTDIR)\$(FILE).obj: ..\..\Source\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" ..\..\Source\$(FILE).cpp
+FILE=AVConfig
+$(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
 FILE=AVLoader
 $(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
@@ -74,6 +79,9 @@ FILE=AVDisplayServer
 $(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
 FILE=AVDisplayComponent
+$(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
+FILE=AVService
 $(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
 FILE=tinyxml
