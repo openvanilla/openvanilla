@@ -4,21 +4,22 @@
 #include "AVDictionary.h"
 #include "OVUtility.h"
 
-DummyDictionary::DummyDictionary(const char *f, const char *dict)
+AVDictionary::AVDictionary() : file(""), name("")
 {
-	file = f;
-	file += "config.xml";
-	if(!doc.LoadFile(file)) {
-		createNewConfig(file);
-		doc.LoadFile();
-	}
-
-	module = findChild(doc.RootElement(), "dict", dict);
-	_stat(file.c_str(), &filestat);
-	name = dict;
 }
 
-bool DummyDictionary::createNewConfig(std::string file)
+AVDictionary::AVDictionary(const char *f)
+{
+	setPath(f);
+}
+
+AVDictionary::AVDictionary(const char *f, const char *dict)
+{
+	setPath(f);
+	setDict(dict);
+}
+
+bool AVDictionary::createNewConfig(std::string file)
 {
 	TiXmlDocument tmp(file);
 	tmp.Parse("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><OpenVanilla></OpenVanilla>");
@@ -26,7 +27,24 @@ bool DummyDictionary::createNewConfig(std::string file)
 	return true;
 }
 
-void DummyDictionary::newDict()
+void AVDictionary::setPath(const char *path)
+{
+	file = path;
+	file += "config.xml";
+	if(!doc.LoadFile(file)) {
+		createNewConfig(file);
+		doc.LoadFile();
+	}
+	_stat(file.c_str(), &filestat);
+}
+
+void AVDictionary::setDict(const char *dict)
+{
+	module = findChild(doc.RootElement(), "dict", dict);
+	name = dict;
+}
+
+void AVDictionary::newDict()
 {
 	TiXmlElement tmp("dict");
 	tmp.SetAttribute("name", name.c_str());
@@ -34,18 +52,18 @@ void DummyDictionary::newDict()
 	save();
 }
 
-TiXmlNode *DummyDictionary::findChild(TiXmlNode *parent, const char *node, const char *name)
+TiXmlNode *AVDictionary::findChild(TiXmlNode *parent, const char *node, const char *key)
 {
 	TiXmlNode *child = 0;
 	while( child = parent->ToElement()->IterateChildren( child ) ) {
 		if(!strcmp(child->Value(), node))
-			if(!strcmp(child->ToElement()->Attribute("name"), name))
+			if(!strcmp(child->ToElement()->Attribute("name"), key))
 				break;
 	}
 	return child;
 }
 
-void DummyDictionary::update()
+void AVDictionary::update()
 {
 	struct _stat tmp;
 	_stat(file.c_str(), &tmp);
@@ -56,31 +74,31 @@ void DummyDictionary::update()
 	}
 }
 
-void DummyDictionary::save()
+void AVDictionary::save()
 {
 	doc.SaveFile();
 	_stat(file.c_str(), &filestat);
 }
 
-DummyDictionary::~DummyDictionary()
+AVDictionary::~AVDictionary()
 {
 }
 
-int DummyDictionary::keyExist(const char *key)
+int AVDictionary::keyExist(const char *key)
 {
-	update();
+	//update();
 	if(module && findChild(module, "key", key))
 		return 1;
 	else
 		return 0;
 }
 
-int DummyDictionary::getInteger(const char *key)
+int AVDictionary::getInteger(const char *key)
 {
 	return atoi(getString(key));
 }
 
-int DummyDictionary::setInteger(const char *key, int value)
+int AVDictionary::setInteger(const char *key, int value)
 {
 	char tmp[1024];
 	sprintf(tmp, "%d", value);
@@ -88,9 +106,9 @@ int DummyDictionary::setInteger(const char *key, int value)
 	return value;
 }
 
-const char* DummyDictionary::getString(const char *key)
+const char* AVDictionary::getString(const char *key)
 {
-	update();
+	//update();
 	if(!module) return "";
 	TiXmlNode *child = findChild(module, "key", key);
 	if(child)
@@ -99,9 +117,9 @@ const char* DummyDictionary::getString(const char *key)
 		return "";
 }
 
-const char* DummyDictionary::setString(const char *key, const char *value)
+const char* AVDictionary::setString(const char *key, const char *value)
 {
-	update();
+	//update();
 	if(!module)
 		newDict();
 	TiXmlNode *child;
@@ -119,7 +137,7 @@ const char* DummyDictionary::setString(const char *key, const char *value)
 /*
 int main()
 {
-	DummyDictionary d(".\\", "Orz");
+	AVDictionary d(".\\", "Orz");
 	if(d.keyExist("ccc"))
 		std::cout << "Ya!" << d.getString("ccc") << std::endl;
 	d.setInteger("ccc", 456);

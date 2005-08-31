@@ -4,6 +4,9 @@
 #ifdef UNICODE
 	#undef UNICODE
 #endif
+#ifdef WIN32
+#define PATH_MAX MAX_PATH
+#endif
 
 #include <string>
 #include <sys/types.h>
@@ -11,8 +14,6 @@
 #include <vector>
 #include <algorithm>
 #include <map>
-#include <iostream>
-#include <fstream>
 #include "OpenVanilla.h"
 #include "OVUtility.h"
 #include "OVLibrary.h"
@@ -21,62 +22,14 @@
 
 #include "AVDictionary.h"
 #include "AVDisplayServer.h"
+#include "AVLoaderUtility.h"
 
 #include <exception>
 using namespace std;
-extern "C" {
-#include "ltdl.h"
-}
 
-TCHAR OV_BASEDIR[MAX_PATH];
-TCHAR OV_USERDIR[MAX_PATH];
-TCHAR OV_MODULEDIR[MAX_PATH];
-enum { bit7=0x80, bit6=0x40, bit5=0x20, bit4=0x10, bit3=8, bit2=4, bit1=2, bit0=1 };
-
-const char* hexstr(unsigned char x) {
-    static char buf[4];
-    sprintf(buf, "%02x", (unsigned short)x);
-    return buf;
-}
-/*
-const string &utf8toutf16(const char* src)
-{
-    char *s1=(char*)src;
-    static string s;
-    s="";
-	int len=0;
-    char a, b, c;
-    while (*s1)
-    {
-        a=*s1++;
-        if ((a & (bit7|bit6|bit5))==(bit7|bit6)) { // 0x000080-0x0007ff
-            b=*s1++;
-            
-            s += hexstr((a & (bit4|bit3|bit2)) >> 2);
-            s += hexstr(((a & (bit1|bit0)) << 6) | (b & (bit5|bit4|bit3|bit2|bit1|bit0)));
-        }
-        else if ((a & (bit7|bit6|bit5|bit4))==(bit7|bit6|bit5)) // 0x000800-0x00ffff
-        {
-		    b=*s1++;
-			c=*s1++;
-			
-            s += hexstr (((a & (bit3|bit2|bit1|bit0)) << 4) | ((b & (bit5|bit4|bit3|bit2)) >> 2));
-            s += hexstr (((b & (bit1|bit0)) << 6) | (c & (bit5|bit4|bit3|bit2|bit1|bit0)));
-		}
-		else 
-		{
-            s+=hexstr(0);
-            s+=hexstr(a);
-		}
-    }
-	return (s);
-}
-
-void dumpu8string(const char *s) {
-    string us=utf8toutf16((char*)s);
-    printf("u8str=%s, dump=%s\n", s, us.c_str());
-}
-*/
+char OV_BASEDIR[PATH_MAX];
+char OV_USERDIR[PATH_MAX];
+char OV_MODULEDIR[PATH_MAX];
 
 class DummyKeyCode : public OVKeyCode  {
 public:
@@ -276,148 +229,21 @@ private:
 DummyService srv;
 DummyCandidate candi;
 DummyBuffer buf;
+AVDictionary dict;
 std::vector<OVInputMethodContext*> ctx_vector;
 int inited=0;
 std::vector<OVModule*> mod_vector;
-typedef map<OVModule*, int> mymap;
-mymap priority_map;
 std::vector<bool> startedCtxVector;	// 這是很浪費的作法 orz
 
-typedef OVModule* (*TypeGetModule)(int);
-typedef int (*TypeInitLibrary)(OVService*, const char*);
-typedef unsigned int (*TypeGetLibVersion)();
-struct OVLibrary {
-   lt_dlhandle handle;
-   TypeGetModule getModule;
-   TypeInitLibrary initLibrary;
-   TypeGetLibVersion getLibVersion;
-};
-
-static OVLibrary* open_module(const char* modname){
-   OVLibrary* mod = new OVLibrary();
-   mod->handle = lt_dlopen(modname);
-   if(mod->handle == NULL){
-      fprintf(stderr, "dlopen %s failed\n", modname);
-      goto OPEN_FAILED;
-   }
-   mod->getModule = (TypeGetModule)lt_dlsym( mod->handle, 
-                                             "OVGetModuleFromLibrary" );
-   mod->getLibVersion = (TypeGetLibVersion)lt_dlsym( mod->handle, 
-                                             "OVGetLibraryVersion" );
-   mod->initLibrary = (TypeInitLibrary)lt_dlsym( mod->handle,
-                                             "OVInitializeLibrary" );
-   if( !mod->getModule || !mod->getLibVersion || !mod->initLibrary ){
-      fprintf(stderr, "dlsym %s failed\n", modname);
-      goto OPEN_FAILED;
-   }
-   if( mod->getLibVersion() < OV_VERSION ){
-      fprintf(stderr, "%s %d is too old\n", modname, mod->getLibVersion());
-      goto OPEN_FAILED;
-   }
-   return mod;
-
-OPEN_FAILED:
-   delete mod;
-   return NULL;
+bool sort_im(OVModule *a, OVModule *b)
+{
+	int pa = 0, pb = 0;
+	dict.setDict(a->identifier());
+	pa = dict.getInteger("priority");
+	dict.setDict(b->identifier());
+	pb = dict.getInteger("priority");
+	return (pa >= pb);
 }
-
-static bool sort_im(OVModule* a, OVModule* b) {
-/*	int pa = 0, pb = 0;
-	DummyDictionary dic_a(OV_BASEDIR, a->identifier());
-	DummyDictionary dic_b(OV_BASEDIR, b->identifier());
-	pa = dic_a.getInteger("priority");
-	pb = dic_b.getInteger("priority");
-	return ( pa >= pb );
-*/
-	return (priority_map[a] >= priority_map[b]);
-}
-
-static int scan_ov_modules(){
-	BOOL fFinished;
-	HANDLE hList;
-	WIN32_FIND_DATA FileData;
-	DummyService srv;
-
-	string path = OV_MODULEDIR;
-	hList = FindFirstFile((path + "*").c_str(), &FileData);
-	if(hList == INVALID_HANDLE_VALUE)
-	{
-		printf("No files found\n");
-	}
-	else
-	{
-		fFinished = FALSE;
-		while (!fFinished)
-		{
-			if(strstr(FileData.cFileName, ".dll") || strstr(FileData.cFileName, ".DLL"))
-			{
-				fprintf(stderr,  "Load OV module: %s\n", FileData.cFileName);
-				OVLibrary* mod = open_module((path + FileData.cFileName).c_str());
-				if(mod){
-					OVModule* m;
-					mod->initLibrary(&srv, OV_MODULEDIR);
-					for(int i=0; m = mod->getModule(i); i++)
-					{	
-						if(!strcmp(m->moduleType(), "OVDisplayComponent"))
-						{
-							OVDisplayComponent *dc = reinterpret_cast<OVDisplayComponent*>(m);
-							dc->initialize(new DummyDictionary(OV_BASEDIR, dc->identifier()), &srv, OV_MODULEDIR);
-							dc->regDisplayServer(&dsvr);
-							murmur("InitDisplayComponent: %s", dc->localizedName("zh_TW"));
-							continue;
-						}
-						DummyDictionary dic(OV_BASEDIR, m->identifier());
-						if(!dic.keyExist("enable"))
-							dic.setInteger("enable", 1);
-						if(dic.getInteger("enable") == 1) {
-							mod_vector.push_back(m);
-							priority_map.insert( mymap::value_type(m, dic.getInteger("priority")) );
-							fprintf(stderr, "Load OVModule: %s\n", m->localizedName("zh_TW"));
-						}
-
-					}
-					delete mod;
-				}
-			}
-			sort(mod_vector.begin(), mod_vector.end(), sort_im);
-			if (!FindNextFile(hList, &FileData))
-			{
-				if (GetLastError() == ERROR_NO_MORE_FILES)
-				{
-					fFinished = TRUE;
-				}
-			}
-		}
-	}
-	FindClose(hList);
-		
-   return static_cast<int>(mod_vector.size());
-}
-/*
-int main() {
-    DummyService srv;
-    DummyCandidate candi;
-    DummyBuffer buf;
-    DummyDictionary dict;
-
-    OVIMPOJHolo pojholo;
-    pojholo.initialize(&dict, &srv, "c:\\OVVBPOJ\\");
-    OVInputMethodContext *im=pojholo.newContext();
-    
-    while (!feof(stdin)) {
-        char c=getchar();
-        if (c==10) c=13;
-        DummyKeyCode kc(c);
-
-        int st=im->keyEvent(&kc, &buf, &candi, &srv);
-        
-        printf ("key=%d status=%d action='%s'\n",
-            c, st, (candi.action + buf.action).c_str());
-        buf.action="";
-        candi.action="";
-    }
-}
-*/
 
 void init() {    
     if (inited) return;
@@ -425,10 +251,21 @@ void init() {
     sprintf(OV_BASEDIR, "%s\\%s", OV_BASEDIR, "\\OpenVanilla\\");
     sprintf(OV_USERDIR, "%s\\%s", OV_BASEDIR, "\\User\\");
     sprintf(OV_MODULEDIR, "%s\\%s", OV_BASEDIR, "\\Modules\\");
-    lt_dlinit();
-    lt_dlsetsearchpath(OV_MODULEDIR);
-
-    int size = scan_ov_modules();
+    dict.setPath(OV_BASEDIR);
+    mod_vector = AVLoadEverything(OV_MODULEDIR, &srv);
+    // delete unused im
+    vector<OVModule*>::iterator m;
+    for(m = mod_vector.begin(); m != mod_vector.end(); m++) {
+	    dict.setDict((*m)->identifier());
+	    if(!dict.keyExist("enable")) {
+		    dict.setInteger("enable", 1);
+	    } else {
+		    if(!dict.getInteger("enable"))
+			    mod_vector.erase(m);
+	    }
+    }
+    sort(mod_vector.begin(), mod_vector.end(), sort_im);
+    int size = mod_vector.size();
     ctx_vector.assign(size, static_cast<OVInputMethodContext*>(NULL));
     startedCtxVector.assign(size, false);
     fprintf(stderr, "INIT\n");
@@ -458,23 +295,14 @@ void init() {
 }
 
 void initContext(int n) {
-/*
-    OVInputMethod *im = reinterpret_cast<OVInputMethod*>(mod_vector[n]);
-    im->initialize(&dict, &srv, OV_MODULEDIR);
-    murmur("InitContext %s", im->localizedName("zh_TW"));
-    ctx_vector.at(n) = im->newContext();
-*/
 	if(!strcmp(mod_vector[n]->moduleType(), "OVInputMethod"))
 	{
 		OVInputMethod *im = reinterpret_cast<OVInputMethod*>(mod_vector[n]);
-		im->initialize(new DummyDictionary(OV_BASEDIR, im->identifier()), &srv, OV_MODULEDIR);
+		dict.setDict(im->identifier());
+		im->initialize(&dict, &srv, OV_MODULEDIR);
 		murmur("InitContext %s", im->localizedName("zh_TW"));
 		ctx_vector.at(n) = im->newContext();
 	}
-}
-
-void exit() {
-	lt_dlexit();
 }
 
 struct DeleteObject {
@@ -485,24 +313,16 @@ struct DeleteObject {
 				delete ptr;
 		}
 };
-/*
-template<typename T>
-void DeleteObject(const T* ptr)
-{
-	if(ptr != static_cast<T*>(NULL))
-		delete ptr;
-}
-*/
 
 extern "C" {
 	void InitLoader() {
 		if (!inited) init();
 	}
 	void ShutdownLoader() {
-//		for_each(ctx_vector.begin(), ctx_vector.end(), DeleteObject);
-//		ctx_vector.clear();
-//		for_each(mod_vector.begin(), mod_vector.end(), DeleteObject);
-//		mod_vector.clear();
+		//for_each(ctx_vector.begin(), ctx_vector.end(), DeleteObject);
+		//ctx_vector.clear();
+		//for_each(mod_vector.begin(), mod_vector.end(), DeleteObject);
+		//mod_vector.clear();
 	}
 	int KeyEvent(int n, int c, wchar_t *s) {
 		if (!inited) init();

@@ -4,15 +4,20 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-class DummyDictionary : public OVDictionary {
+class AVDictionary : public OVDictionary {
 	public:
-		DummyDictionary(const char *f, const char *path);
-		virtual ~DummyDictionary();
+		AVDictionary();
+		AVDictionary(const char *f);
+		AVDictionary(const char *f, const char *dict);
+		virtual ~AVDictionary();
 		virtual int keyExist(const char *key);
 		virtual int getInteger(const char *key);
 		virtual int setInteger(const char *key, int value);
 		virtual const char* getString(const char *key);
 		virtual const char* setString(const char *key, const char *value);
+		
+		void setPath(const char *path);
+		void setDict(const char *dict);
 		bool createNewConfig(std::string path);
 		void update();
 		void save();
