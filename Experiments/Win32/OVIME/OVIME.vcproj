@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\;..\OVDummyLoader\;..\OVDummyLoader\expat;..\OVDummyLoader\scew;..\OVIMEUI\Headers;..\..\..\Headers"
+				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\AmphiVanilla\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="FALSE"
 				MinimalRebuild="TRUE"
@@ -36,10 +36,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib libexpat.lib scew.lib"
+				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\OVDummyLoader;..\OVDummyLoader\expat;..\OVDummyLoader\scew"
+				AdditionalLibraryDirectories="..\AmphiVanilla;"
 				IgnoreDefaultLibraryNames="scew_d.lib"
 				ModuleDefinitionFile="OVIME.def"
 				GenerateDebugInformation="TRUE"
@@ -79,7 +79,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories=".\;..\OVDummyLoader\;..\OVDummyLoader\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers"
+				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\AmphiVanilla\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="TRUE"
 				MinimalRebuild="FALSE"
@@ -97,7 +97,7 @@
 				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\OVDummyLoader;..\OVDummyLoader\expat;..\OVDummyLoader\tinyxml"
+				AdditionalLibraryDirectories="..\AmphiVanilla;..\AmphiVanilla\tinyxml"
 				IgnoreDefaultLibraryNames=""
 				ModuleDefinitionFile="OVIME.def"
 				GenerateDebugInformation="FALSE"
@@ -138,7 +138,7 @@
 				RelativePath="ControlHandle.cpp">
 			</File>
 			<File
-				RelativePath="..\OVDummyLoader\DOVDictionary.cpp">
+				RelativePath="..\AmphiVanilla\AVDictionary.cpp">
 			</File>
 			<File
 				RelativePath="Global.cpp">
@@ -150,13 +150,13 @@
 				RelativePath="NotifyHandle.cpp">
 			</File>
 			<File
-				RelativePath="..\OVDummyLoader\OVDisplayComponent.cpp">
+				RelativePath="..\AmphiVanilla\AVDisplayComponent.cpp">
 			</File>
 			<File
-				RelativePath="..\OVDummyLoader\OVDisplayServer.cpp">
+				RelativePath="..\AmphiVanilla\AVDisplayServer.cpp">
 			</File>
 			<File
-				RelativePath="..\OVDummyLoader\OVDummyLoader.cpp">
+				RelativePath="..\AmphiVanilla\AVLoader.cpp">
 			</File>
 			<File
 				RelativePath="OVIME.cpp">
@@ -168,13 +168,13 @@
 				RelativePath="..\..\..\Source\OVStringToolKit.cpp">
 			</File>
 			<File
-				RelativePath="..\OVDummyLoader\tinyxml\tinyxml.cpp">
+				RelativePath="..\AmphiVanilla\tinyxml\tinyxml.cpp">
 			</File>
 			<File
-				RelativePath="..\OVDummyLoader\tinyxml\tinyxmlerror.cpp">
+				RelativePath="..\AmphiVanilla\tinyxml\tinyxmlerror.cpp">
 			</File>
 			<File
-				RelativePath="..\OVDummyLoader\tinyxml\tinyxmlparser.cpp">
+				RelativePath="..\AmphiVanilla\tinyxml\tinyxmlparser.cpp">
 			</File>
 			<File
 				RelativePath="UIWnd.cpp">
@@ -187,13 +187,13 @@
 			Name="¼ÐÀYÀÉ"
 			Filter="h;hpp;hxx;hm;inl;inc">
 			<File
-				RelativePath="..\OVDummyLoader\DOVDictionary.h">
+				RelativePath="..\AmphiVanilla\AVDictionary.h">
 			</File>
 			<File
 				RelativePath="ExtraStructs.h">
 			</File>
 			<File
-				RelativePath="..\OVDummyLoader\ltdl.h">
+				RelativePath="..\AmphiVanilla\ltdl.h">
 			</File>
 			<File
 				RelativePath="..\..\..\Headers\OpenVanilla.h">
@@ -202,10 +202,10 @@
 				RelativePath="..\..\..\Headers\OVCandidateList.h">
 			</File>
 			<File
-				RelativePath="..\OVDummyLoader\OVDisplayComponent.h">
+				RelativePath="..\AmphiVanilla\AVDisplayComponent.h">
 			</File>
 			<File
-				RelativePath="..\OVDummyLoader\OVDisplayServer.h">
+				RelativePath="..\AmphiVanilla\AVDisplayServer.h">
 			</File>
 			<File
 				RelativePath="OVIME.h">
@@ -223,7 +223,7 @@
 				RelativePath="resource.h">
 			</File>
 			<File
-				RelativePath="..\OVDummyLoader\tinyxml\tinyxml.h">
+				RelativePath="..\AmphiVanilla\tinyxml\tinyxml.h">
 			</File>
 			<File
 				RelativePath="Vk.h">
