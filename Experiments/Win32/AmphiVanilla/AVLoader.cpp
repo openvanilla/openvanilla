@@ -319,10 +319,11 @@ extern "C" {
 		if (!inited) init();
 	}
 	void ShutdownLoader() {
-		//for_each(ctx_vector.begin(), ctx_vector.end(), DeleteObject);
-		//ctx_vector.clear();
-		//for_each(mod_vector.begin(), mod_vector.end(), DeleteObject);
-		//mod_vector.clear();
+		for_each(ctx_vector.begin(), ctx_vector.end(), DeleteObject);
+		ctx_vector.clear();
+		for_each(mod_vector.begin(), mod_vector.end(), DeleteObject);
+		mod_vector.clear();
+		lt_dlexit();
 	}
 	int KeyEvent(int n, int c, wchar_t *s) {
 		if (!inited) init();
