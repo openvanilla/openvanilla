@@ -1,4 +1,4 @@
-#include "OVDisplayServer.h"
+#include "AVDisplayServer.h"
 
 OVDisplayServer *MyOVDisplayServer::setBufString(const string str) { bufstr = str; return this;}
 

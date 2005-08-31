@@ -12,10 +12,10 @@ LINK32_OBJS = \
 	      $(OUTDIR)\UIWnd.obj \
 	      $(OUTDIR)\Utils.obj \
               $(OUTDIR)\OVStringToolKit.obj \
-	      $(OUTDIR)\OVDummyLoader.obj \
-	      $(OUTDIR)\OVDisplayServer.obj \
-	      $(OUTDIR)\OVDisplayComponent.obj \
-	      $(OUTDIR)\DOVDictionary.obj \
+	      $(OUTDIR)\AVLoader.obj \
+	      $(OUTDIR)\AVDisplayServer.obj \
+	      $(OUTDIR)\AVDisplayComponent.obj \
+	      $(OUTDIR)\AVDictionary.obj \
 	      $(OUTDIR)\tinyxml.obj \
 	      $(OUTDIR)\tinyxmlerror.obj \
 	      $(OUTDIR)\tinyxmlparser.obj
@@ -23,7 +23,7 @@ LINK32_OBJS = \
 $(OUTDIR):
 	if not exist "$(OUTDIR)/$(NULL)" mkdir $(OUTDIR)
 
-LINK_LIBS = kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib imm32.lib OVIME\OVIMEUI.lib OVDummyLoader\libltdl.lib OVDummyLoader\libiconv.lib
+LINK_LIBS = kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib imm32.lib OVIME\OVIMEUI.lib AmphiVanilla\libltdl.lib AmphiVanilla\libiconv.lib
 
 dllllflags = /INCREMENTAL:NO /NOLOGO /DLL /PDB:$(OUTDIR)/vc70.pdb /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /MACHINE:IX86
 
@@ -33,7 +33,7 @@ $(OUTDIR)\$(Proj).dll: $(OUTDIR) $(LINK32_OBJS) $(OUTDIR)\$(Proj).res
 	-out:$(OUTDIR)\$(Proj).ime\
 	-def:OVIME\$(Proj).def
 
-cflags = /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I"OVDummyLoader" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_UNICODE" /D "UNICODE" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP 
+cflags = /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I"AmphiVanilla" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_UNICODE" /D "UNICODE" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP 
 FILE=ControlHandle
 $(OUTDIR)\$(FILE).obj: OVIME\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVIME\$(FILE).cpp
@@ -56,31 +56,31 @@ FILE=Utils
 $(OUTDIR)\$(FILE).obj: OVIME\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVIME\$(FILE).cpp
 
-cflags = /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I "OVDummyLoader/expat" /I "OVDummyLoader/tinyxml" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP /GR
+cflags = /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I "AmphiVanilla/tinyxml" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP /GR
 FILE=OVStringToolKit
 $(OUTDIR)\$(FILE).obj: ..\..\Source\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" ..\..\Source\$(FILE).cpp
-FILE=OVDummyLoader
-$(OUTDIR)\$(FILE).obj: OVDummyLoader\$(FILE).cpp $(OUTDIR)
-	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVDummyLoader\$(FILE).cpp
-FILE=DOVDictionary
-$(OUTDIR)\$(FILE).obj: OVDummyLoader\$(FILE).cpp $(OUTDIR)
-	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVDummyLoader\$(FILE).cpp
-FILE=OVDisplayServer
-$(OUTDIR)\$(FILE).obj: OVDummyLoader\$(FILE).cpp $(OUTDIR)
-	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVDummyLoader\$(FILE).cpp
-FILE=OVDisplayComponent
-$(OUTDIR)\$(FILE).obj: OVDummyLoader\$(FILE).cpp $(OUTDIR)
-	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVDummyLoader\$(FILE).cpp
+FILE=AVLoader
+$(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
+FILE=AVDictionary
+$(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
+FILE=AVDisplayServer
+$(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
+FILE=AVDisplayComponent
+$(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
 FILE=tinyxml
-$(OUTDIR)\$(FILE).obj: OVDummyLoader\tinyxml\$(FILE).cpp $(OUTDIR)
-	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVDummyLoader\tinyxml\$(FILE).cpp
+$(OUTDIR)\$(FILE).obj: AmphiVanilla\tinyxml\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\tinyxml\$(FILE).cpp
 FILE=tinyxmlerror
-$(OUTDIR)\$(FILE).obj: OVDummyLoader\tinyxml\$(FILE).cpp $(OUTDIR)
-	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVDummyLoader\tinyxml\$(FILE).cpp
+$(OUTDIR)\$(FILE).obj: AmphiVanilla\tinyxml\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\tinyxml\$(FILE).cpp
 FILE=tinyxmlparser
-$(OUTDIR)\$(FILE).obj: OVDummyLoader\tinyxml\$(FILE).cpp $(OUTDIR)
-	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVDummyLoader\tinyxml\$(FILE).cpp
+$(OUTDIR)\$(FILE).obj: AmphiVanilla\tinyxml\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\tinyxml\$(FILE).cpp
 
 
 FILE=OVIME

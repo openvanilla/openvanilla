@@ -1,7 +1,7 @@
 #include <string>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include "DOVDictionary.h"
+#include "AVDictionary.h"
 #include "OVUtility.h"
 
 DummyDictionary::DummyDictionary(const char *f, const char *dict)

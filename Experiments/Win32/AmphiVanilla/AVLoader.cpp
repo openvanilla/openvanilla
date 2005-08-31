@@ -19,8 +19,8 @@
 #include "OVCandidateList.h"
 #include "iconv.h"
 
-#include "DOVDictionary.h"
-#include "OVDisplayServer.h"
+#include "AVDictionary.h"
+#include "AVDisplayServer.h"
 
 #include <exception>
 using namespace std;

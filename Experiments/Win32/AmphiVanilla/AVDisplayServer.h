@@ -5,7 +5,7 @@
 
 #include "OpenVanilla.h"
 #include "OVUtility.h"
-#include "OVDisplayComponent.h"
+#include "AVDisplayComponent.h"
 
 #include <string>
 #include <algorithm>
