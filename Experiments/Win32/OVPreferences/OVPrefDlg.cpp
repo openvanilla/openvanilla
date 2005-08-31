@@ -2,6 +2,8 @@
 
 #include "OVPrefDlg.h"
 
+#include "AVEmbeddedLoader.h"
+
 BEGIN_EVENT_TABLE( OVPrefDlg, wxDialog )
 	EVT_BUTTON( ID_FONT, OVPrefDlg::OnFont )
 	EVT_BUTTON( ID_BGCOLOR, OVPrefDlg::OnBgColor )
@@ -10,6 +12,9 @@ BEGIN_EVENT_TABLE( OVPrefDlg, wxDialog )
 	EVT_BUTTON( ID_COMMON_CLEAR, OVPrefDlg::OnCommonClear )
 	EVT_BUTTON( ID_MODLIST_CLEAR, OVPrefDlg::OnModListClear )
 	EVT_LIST_ITEM_SELECTED(ID_MODLIST, OVPrefDlg::OnModListItemSelected )
+	EVT_COMBOBOX( ID_GENERIC_COMBO, OVPrefDlg::OnGenericComboSelChange )
+	EVT_COMBOBOX( ID_OTHER_MOD_COMBO, OVPrefDlg::OnOtherModComboSelChange )
+	EVT_LIST_ITEM_SELECTED(ID_OTHER_MOD_PROP_LIST, OVPrefDlg::OnOtherModPropListItemSelected )
 END_EVENT_TABLE()
 
 
@@ -93,7 +98,7 @@ OVPrefDlg::OVPrefDlg(wxWindow* parent, int id, const wxString& title, const wxPo
     const wxString genericCombo_choices[] = {
         _("None")
     };
-    genericCombo = new wxComboBox(module_settings_page, -1, wxT(""), wxDefaultPosition, wxDefaultSize, 1, genericCombo_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
+    genericCombo = new wxComboBox(module_settings_page, ID_GENERIC_COMBO, wxT(""), wxDefaultPosition, wxDefaultSize, 1, genericCombo_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
     label_13 = new wxStaticText(module_settings_page, -1, _("Maximal radical length: "));
     const wxString genericMaxRadLength_choices[] = {
         _("5")
@@ -107,8 +112,8 @@ OVPrefDlg::OVPrefDlg(wxWindow* parent, int id, const wxString& title, const wxPo
     const wxString otherModCombo_choices[] = {
         _("None")
     };
-    otherModCombo = new wxComboBox(module_settings_page, -1, wxT(""), wxDefaultPosition, wxDefaultSize, 1, otherModCombo_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
-    otherModPropList = new wxListCtrl(module_settings_page, -1, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxSUNKEN_BORDER);
+    otherModCombo = new wxComboBox(module_settings_page, ID_OTHER_MOD_COMBO, wxT(""), wxDefaultPosition, wxDefaultSize, 1, otherModCombo_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
+    otherModPropList = new wxListCtrl(module_settings_page, ID_OTHER_MOD_PROP_LIST, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxSUNKEN_BORDER);
     output_filter_page = new wxPanel(notebook, -1);
     ok_btn = new wxButton(this, wxID_OK, _("&OK"));
     cancel_btn = new wxButton(this, wxID_CANCEL, _("&Cancel"));
@@ -119,10 +124,16 @@ OVPrefDlg::OVPrefDlg(wxWindow* parent, int id, const wxString& title, const wxPo
 
 	otherModPropList->InsertColumn( 0, _("Property key") );
 	otherModPropList->InsertColumn( 1, _("Value") );
+
+	InitModuleList();
+	InitGenericModules();
+	InitOtherModPropList();
+
 }
 
 #if !defined(__WXMSW__)
 	#include "ovpref.xpm"
+#include ".\ovprefdlg.h"
 #endif
 
 void OVPrefDlg::set_properties()
@@ -323,3 +334,106 @@ void OVPrefDlg::OnModListItemSelected(wxListEvent& evt)
 {
 }
 
+
+void OVPrefDlg::InitModuleList(void)
+{
+	int n = loader.modlist().size();
+	int i;
+	modList->Clear();
+	for( i = 0; i < n; ++i )
+	{
+		OVModule* mod = loader.modlist()[i];
+		const char* utf8name = mod->localizedName("zh_TW");
+		wxWCharBuffer uname = wxConvUTF8.cMB2WC( utf8name );
+#ifdef	UNICODE
+		wxString name(uname);
+#else
+		wxCharBuffer name = wxConvLocal.cWC2MB(uname);
+#endif
+		modList->Append( name );
+
+		if( 0 == strncmp( mod->identifier(), "OVIMGeneric", 11 ) )
+			genericMods.push_back( mod );
+	}
+
+	for( i = 0; i < n; ++i )
+	{
+		OVModule* mod = loader.modlist()[i];
+		AVDictionary* dict = loader.dict( mod->identifier() );
+		if( dict->getInteger("enable") )
+			modList->Check(i, true);
+	}
+}
+
+void OVPrefDlg::InitGenericModules(void)
+{
+	int n = genericMods.size();
+	int i;
+	genericCombo->Clear();
+	for( i = 0; i < n; ++i )
+	{
+		OVModule* mod = genericMods[i];
+
+		const char* utf8name = mod->localizedName("zh_TW");
+		wxWCharBuffer uname = wxConvUTF8.cMB2WC( utf8name );
+#ifdef	UNICODE
+		wxString name(uname);
+#else
+		wxCharBuffer name = wxConvLocal.cWC2MB(uname);
+#endif
+		genericCombo->Append( name );
+	}
+
+	genericMaxRadLength->Clear();
+	for( i = 1; i <= 5; ++i )
+		genericMaxRadLength->Append( wxString::Format("%d", i) );
+
+	if( !genericMods.empty() )
+	{
+		genericCombo->SetSelection(0);
+		GenericComboSelChange(0);
+	}
+
+}
+
+void OVPrefDlg::OnGenericComboSelChange(wxCommandEvent& evt)
+{
+	GenericComboSelChange(evt.GetSelection());
+}
+
+void OVPrefDlg::GenericComboSelChange(int idx)
+{
+	OVModule* mod = genericMods[idx];
+	AVDictionary* dict = loader.dict( mod->identifier() );
+	spaceChoose1stCand->SetValue( !!dict->getInteger("shiftSelectionKey") );
+	showCandOnType->SetValue( !!dict->getInteger("autoCompose") );
+	commitAtMaxRad->SetValue( !!dict->getInteger("hitMaxAndCompose") );
+	warningBeep->SetValue( !!dict->getInteger("warningBeep") );
+}
+
+void OVPrefDlg::InitOtherModPropList(void)
+{
+	otherModCombo->Clear();
+	int n = loader.modlist().size();
+	for( int i = 0; i < n; ++i )
+	{
+		OVModule* mod = loader.modlist()[i];
+		const char* utf8name = mod->localizedName("zh_TW");
+		wxWCharBuffer uname = wxConvUTF8.cMB2WC( utf8name );
+#ifdef	UNICODE
+		wxString name(uname);
+#else
+		wxCharBuffer name = wxConvLocal.cWC2MB(uname);
+#endif
+		otherModCombo->Append( name );		
+	}
+	otherModCombo->SetSelection(0);
+}
+
+void OVPrefDlg::OnOtherModComboSelChange(wxCommandEvent& evt)
+{
+}
+
+void OVPrefDlg::OnOtherModPropListItemSelected(wxListEvent& evt)
+{
+}

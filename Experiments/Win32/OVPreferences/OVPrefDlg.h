@@ -11,6 +11,8 @@
 #include <wx/notebook.h>
 // end wxGlade
 
+#include "AVEmbeddedLoader.h"
+
 class OVCheckListCtrl;
 class OVPrefDlg: public wxDialog {
 public:
@@ -22,7 +24,10 @@ public:
         ID_SOUNDTEST = 1003,
         ID_COMMON_CLEAR = 1004,
         ID_MODLIST = 1005,
-        ID_MODLIST_CLEAR = 1006
+        ID_MODLIST_CLEAR = 1006,
+		ID_GENERIC_COMBO = 1007,
+		ID_OTHER_MOD_COMBO=1008,
+		ID_OTHER_MOD_PROP_LIST=1009
     };
     // end wxGlade
 
@@ -35,6 +40,8 @@ private:
     // end wxGlade
 
 protected:
+	AVEmbeddedLoader loader;
+
     // begin wxGlade: OVPrefDlg::attributes
     wxStaticBox* sizer_25_staticbox;
     wxStaticBox* sizer_24_staticbox;
@@ -112,6 +119,15 @@ public:
 	void OnCommonClear(wxCommandEvent& evt);
 	void OnModListClear(wxCommandEvent& evt);
 	void OnModListItemSelected(wxListEvent& evt);
+protected:
+	void InitModuleList(void);
+	void InitGenericModules(void);
+	vector<OVModule*> genericMods;
+	void OnGenericComboSelChange(wxCommandEvent& evt);
+	void GenericComboSelChange(int idx);
+	void InitOtherModPropList(void);
+	void OnOtherModComboSelChange(wxCommandEvent& evt);
+	void OnOtherModPropListItemSelected(wxListEvent& evt);
 };
 
 
