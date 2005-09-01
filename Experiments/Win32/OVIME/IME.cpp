@@ -178,7 +178,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	lpCompStr = (LPCOMPOSITIONSTRING)ImmLockIMCC(lpIMC->hCompStr);
 	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 
-	if (wcslen(GETLPCOMPSTR(lpCompStr)) == 0)
+	if(wcslen(GETLPCOMPSTR(lpCompStr)) == 0)
 		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);
 	
 	k = LOWORD(uVKey);
@@ -233,7 +233,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		k = k + 0x0000;
 	
 	rlen = KeyEvent(UICurrentInputMethod(), k, str);
-	
+
 	//rlen = KeyEvent(dsvr.getInputMethod(), k, str);
 	int n = 0;
 	int ln = 0;
@@ -330,6 +330,8 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		else if(*j == L"unprocessed")
 		{
 			RetVal = FALSE;
+			MyGenerateMessage(hIMC,
+				WM_IME_ENDCOMPOSITION, 0, 0);
 		}
 		else if(*j == L"processed")
 		{
