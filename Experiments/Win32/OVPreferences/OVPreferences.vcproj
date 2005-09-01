@@ -23,8 +23,9 @@
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="5"
-				UsePrecompiledHeader="3"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
 				DebugInformationFormat="4"/>
@@ -32,10 +33,11 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib wxmsw.lib AmphiVanilla.lib libiconv.lib libltdl.lib"
+				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib wxmswd.lib AmphiVanilla.lib libiconv.lib libltdl.lib"
 				OutputFile="$(OutDir)/OVPreferences.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;D:\Program\wxWidgets-2.6.1\lib&quot;;..\AmphiVanilla;..\AmphiVanilla\Debug"
+				IgnoreAllDefaultLibraries="FALSE"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/OVPreferences.pdb"
 				SubSystem="2"
@@ -87,6 +89,59 @@
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;D:\Program\wxWidgets-2.6.1\lib&quot;;..\AmphiVanilla;..\AmphiVanilla\Release"
 				IgnoreAllDefaultLibraries="FALSE"
+				GenerateDebugInformation="TRUE"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Release-Unicode|Win32"
+			OutputDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="1">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="&quot;D:\Program\wxWidgets-2.6.1\include&quot;;&quot;D:\Program\wxWidgets-2.6.1\lib\msw&quot;;..\..\..\Headers;.\;..\AmphiVanilla\;..\AmphiVanilla\tinyxml"
+				PreprocessorDefinitions="WIN32;UNICODE;NDEBUG;_WINDOWS;WINVER=0x0400;wxUSE_GUI=1"
+				RuntimeLibrary="0"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="FALSE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				RegisterOutput="FALSE"
+				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib wxmswu.lib AmphiVanilla.lib libiconv.lib libltdl.lib"
+				OutputFile="$(OutDir)/OVPreferences.exe"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;D:\Program\wxWidgets-2.6.1\lib&quot;;..\AmphiVanilla;..\AmphiVanilla\Release"
+				IgnoreAllDefaultLibraries="FALSE"
+				IgnoreDefaultLibraryNames="LIBCMT.lib"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"

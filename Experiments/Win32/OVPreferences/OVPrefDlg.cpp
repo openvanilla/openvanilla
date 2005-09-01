@@ -15,12 +15,14 @@ BEGIN_EVENT_TABLE( OVPrefDlg, wxDialog )
 	EVT_COMBOBOX( ID_GENERIC_COMBO, OVPrefDlg::OnGenericComboSelChange )
 	EVT_COMBOBOX( ID_OTHER_MOD_COMBO, OVPrefDlg::OnOtherModComboSelChange )
 	EVT_LIST_ITEM_SELECTED(ID_OTHER_MOD_PROP_LIST, OVPrefDlg::OnOtherModPropListItemSelected )
+	EVT_BUTTON( wxID_CANCEL,  OVPrefDlg::OnCancel )
 END_EVENT_TABLE()
 
 
 OVPrefDlg::OVPrefDlg(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long style):
     wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE|wxCLIP_CHILDREN)
-{
+		, curGenericMod(NULL)
+	{
     // begin wxGlade: OVPrefDlg::OVPrefDlg
     notebook = new wxNotebook(this, -1, wxDefaultPosition, wxDefaultSize, 0);
     module_settings_page = new wxPanel(notebook, -1);
@@ -104,28 +106,30 @@ OVPrefDlg::OVPrefDlg(wxWindow* parent, int id, const wxString& title, const wxPo
         _("5")
     };
     genericMaxRadLength = new wxComboBox(module_settings_page, -1, wxT(""), wxDefaultPosition, wxDefaultSize, 1, genericMaxRadLength_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
-    spaceChoose1stCand = new wxCheckBox(module_settings_page, -1, _("Space key choose the 1st candidate"));
-    showCandOnType = new wxCheckBox(module_settings_page, -1, _("Show candidates as you type"));
-    commitAtMaxRad = new wxCheckBox(module_settings_page, -1, _("Commit at maximal radical length"));
-    warningBeep = new wxCheckBox(module_settings_page, -1, _("Warning beep"));
+    shiftSelectionKey = new wxCheckBox(module_settings_page, ID_SHIFT_SELECTION_KEY, _("Space key choose the 1st candidate"));
+    autoCompose = new wxCheckBox(module_settings_page, ID_AUTOCOMPOSE, _("Show candidates as you type"));
+    hitMaxAndCompose = new wxCheckBox(module_settings_page, ID_HIT_MAX_AND_COMPOSE, _("Commit at maximal radical length"));
+    warningBeep = new wxCheckBox(module_settings_page, ID_WARNING_BEEP, _("Warning beep"));
     label_14 = new wxStaticText(module_settings_page, -1, _("Module: "));
     const wxString otherModCombo_choices[] = {
         _("None")
     };
     otherModCombo = new wxComboBox(module_settings_page, ID_OTHER_MOD_COMBO, wxT(""), wxDefaultPosition, wxDefaultSize, 1, otherModCombo_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
     otherModPropList = new wxListCtrl(module_settings_page, ID_OTHER_MOD_PROP_LIST, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxSUNKEN_BORDER);
+    label_8 = new wxStaticText(module_settings_page, -1, _("Value"));
+    modPropEdit = new wxTextCtrl(module_settings_page, -1, wxT(""));
+    setBtn = new wxButton(module_settings_page, ID_SET_MOD_PROP_VALUE, _("&Set"));
     output_filter_page = new wxPanel(notebook, -1);
-    ok_btn = new wxButton(this, wxID_OK, _("&OK"));
-    cancel_btn = new wxButton(this, wxID_CANCEL, _("&Cancel"));
+    label_18 = new wxStaticText(this, -1, _("Changes are saved when you close OpenVanilla Preferences"));
+    exitBtn = new wxButton(this, wxID_CANCEL, _("E&xit"));
 
     set_properties();
     do_layout();
     // end wxGlade
-
-	otherModPropList->InsertColumn( 0, _("Property key") );
-	otherModPropList->InsertColumn( 1, _("Value") );
+	Center();
 
 	InitModuleList();
+	InitPOJ();
 	InitGenericModules();
 	InitOtherModPropList();
 
@@ -151,7 +155,7 @@ void OVPrefDlg::set_properties()
     genericCombo->SetSelection(-1);
     genericMaxRadLength->SetSelection(-1);
     otherModCombo->SetSelection(-1);
-    ok_btn->SetDefault();
+    otherModPropList->SetSize(wxSize(220,100));
     // end wxGlade
 	SetIcon(wxICON(ovpref_icon));
 }
@@ -161,10 +165,11 @@ void OVPrefDlg::do_layout()
 {
     // begin wxGlade: OVPrefDlg::do_layout
     wxBoxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
-    wxBoxSizer* bottom_sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* sizer_11 = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer* module_settings_sizer = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer* sizer_23 = new wxBoxSizer(wxHORIZONTAL);
     wxStaticBoxSizer* sizer_25 = new wxStaticBoxSizer(sizer_25_staticbox, wxVERTICAL);
+    wxBoxSizer* sizer_5 = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer* sizer_33 = new wxBoxSizer(wxHORIZONTAL);
     wxStaticBoxSizer* sizer_24 = new wxStaticBoxSizer(sizer_24_staticbox, wxVERTICAL);
     wxBoxSizer* sizer_32 = new wxBoxSizer(wxHORIZONTAL);
@@ -260,21 +265,25 @@ void OVPrefDlg::do_layout()
     sizer_30->Add(tibetanKeyboardLayout, 0, wxALL|wxFIXED_MINSIZE, 2);
     sizer_22->Add(sizer_30, 1, wxEXPAND, 0);
     module_settings_sizer->Add(sizer_22, 1, wxALL|wxEXPAND, 2);
-    sizer_31->Add(label_12, 0, wxALL|wxFIXED_MINSIZE, 2);
+    sizer_31->Add(label_12, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxFIXED_MINSIZE, 2);
     sizer_31->Add(genericCombo, 1, wxALL|wxFIXED_MINSIZE, 2);
     sizer_24->Add(sizer_31, 0, wxEXPAND, 0);
     sizer_32->Add(label_13, 0, wxALL|wxFIXED_MINSIZE, 2);
     sizer_32->Add(genericMaxRadLength, 0, wxALL|wxFIXED_MINSIZE, 2);
     sizer_24->Add(sizer_32, 0, wxEXPAND, 0);
-    sizer_24->Add(spaceChoose1stCand, 0, wxALL|wxFIXED_MINSIZE, 2);
-    sizer_24->Add(showCandOnType, 0, wxALL|wxFIXED_MINSIZE, 2);
-    sizer_24->Add(commitAtMaxRad, 0, wxALL|wxFIXED_MINSIZE, 2);
+    sizer_24->Add(shiftSelectionKey, 0, wxALL|wxFIXED_MINSIZE, 2);
+    sizer_24->Add(autoCompose, 0, wxALL|wxFIXED_MINSIZE, 2);
+    sizer_24->Add(hitMaxAndCompose, 0, wxALL|wxFIXED_MINSIZE, 2);
     sizer_24->Add(warningBeep, 0, wxALL|wxFIXED_MINSIZE, 2);
     sizer_23->Add(sizer_24, 1, wxALL|wxEXPAND, 2);
-    sizer_33->Add(label_14, 0, wxALL|wxFIXED_MINSIZE, 2);
+    sizer_33->Add(label_14, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxFIXED_MINSIZE, 2);
     sizer_33->Add(otherModCombo, 1, wxALL|wxFIXED_MINSIZE, 2);
     sizer_25->Add(sizer_33, 0, wxEXPAND, 0);
     sizer_25->Add(otherModPropList, 1, wxALL|wxEXPAND, 2);
+    sizer_5->Add(label_8, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxFIXED_MINSIZE, 2);
+    sizer_5->Add(modPropEdit, 1, wxFIXED_MINSIZE, 0);
+    sizer_5->Add(setBtn, 0, wxLEFT|wxFIXED_MINSIZE, 2);
+    sizer_25->Add(sizer_5, 0, wxEXPAND, 0);
     sizer_23->Add(sizer_25, 1, wxALL|wxEXPAND, 2);
     module_settings_sizer->Add(sizer_23, 1, wxEXPAND, 0);
     module_settings_page->SetAutoLayout(true);
@@ -286,10 +295,9 @@ void OVPrefDlg::do_layout()
     notebook->AddPage(module_settings_page, _("Module Settings"));
     notebook->AddPage(output_filter_page, _("Output Filters"));
     top_sizer->Add(new wxNotebookSizer(notebook), 1, wxALL|wxEXPAND, 4);
-    bottom_sizer->Add(ok_btn, 0, wxFIXED_MINSIZE, 0);
-    bottom_sizer->Add(4, 0, 0, wxFIXED_MINSIZE, 0);
-    bottom_sizer->Add(cancel_btn, 0, wxFIXED_MINSIZE, 2);
-    top_sizer->Add(bottom_sizer, 0, wxALL|wxALIGN_RIGHT, 4);
+    sizer_11->Add(label_18, 0, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL|wxFIXED_MINSIZE, 2);
+    sizer_11->Add(exitBtn, 0, wxALL|wxFIXED_MINSIZE, 2);
+    top_sizer->Add(sizer_11, 0, wxALIGN_RIGHT, 0);
     SetAutoLayout(true);
     SetSizer(top_sizer);
     top_sizer->Fit(this);
@@ -354,6 +362,15 @@ void OVPrefDlg::InitModuleList(void)
 
 		if( 0 == strncmp( mod->identifier(), "OVIMGeneric", 11 ) )
 			genericMods.push_back( mod );
+		else
+		{
+			if( strcmp( mod->identifier(), "OVIMPhonetic" ) 
+				&& strcmp( mod->identifier(), "OVIMChewing" ) 
+				&& strcmp( mod->identifier(), "OVIMPOJ-Holo" ) 
+				&& strcmp( mod->identifier(), "OVIMTibetan" ) 
+				)
+				otherMods.push_back( mod );
+		}
 	}
 
 	for( i = 0; i < n; ++i )
@@ -386,7 +403,7 @@ void OVPrefDlg::InitGenericModules(void)
 
 	genericMaxRadLength->Clear();
 	for( i = 1; i <= 5; ++i )
-		genericMaxRadLength->Append( wxString::Format("%d", i) );
+		genericMaxRadLength->Append( wxString::Format( wxT("%d"), i) );
 
 	if( !genericMods.empty() )
 	{
@@ -398,27 +415,30 @@ void OVPrefDlg::InitGenericModules(void)
 
 void OVPrefDlg::OnGenericComboSelChange(wxCommandEvent& evt)
 {
+	SaveGenericConfig();
 	GenericComboSelChange(evt.GetSelection());
 }
 
 void OVPrefDlg::GenericComboSelChange(int idx)
 {
-	OVModule* mod = genericMods[idx];
-	AVDictionary* dict = loader.dict( mod->identifier() );
-	spaceChoose1stCand->SetValue( !!dict->getInteger("shiftSelectionKey") );
-	showCandOnType->SetValue( !!dict->getInteger("autoCompose") );
-	commitAtMaxRad->SetValue( !!dict->getInteger("hitMaxAndCompose") );
+	curGenericMod = genericMods[idx];
+	AVDictionary* dict = loader.dict( curGenericMod->identifier() );
+	shiftSelectionKey->SetValue( !!dict->getInteger("shiftSelectionKey") );
+	autoCompose->SetValue( !!dict->getInteger("autoCompose") );
+	hitMaxAndCompose->SetValue( !!dict->getInteger("hitMaxAndCompose") );
 	warningBeep->SetValue( !!dict->getInteger("warningBeep") );
+
+	int maxKeySequenceLength = dict->getIntegerWithDefault("maxKeySequenceLength", 5);
+	genericMaxRadLength->SetSelection( maxKeySequenceLength - 1 );
 }
 
 void OVPrefDlg::InitOtherModPropList(void)
 {
 	otherModCombo->Clear();
-	int n = loader.modlist().size();
+	int n = otherMods.size();
 	for( int i = 0; i < n; ++i )
 	{
-		OVModule* mod = loader.modlist()[i];
-		const char* utf8name = mod->localizedName("zh_TW");
+		const char* utf8name = otherMods[i]->localizedName("zh_TW");
 		wxWCharBuffer uname = wxConvUTF8.cMB2WC( utf8name );
 #ifdef	UNICODE
 		wxString name(uname);
@@ -427,13 +447,106 @@ void OVPrefDlg::InitOtherModPropList(void)
 #endif
 		otherModCombo->Append( name );		
 	}
+
+	otherModPropList->InsertColumn( 0, _("Property key") );
+	otherModPropList->InsertColumn( 1, _("Value") );
+
 	otherModCombo->SetSelection(0);
+	OtherModComboSelChange(0);
 }
 
 void OVPrefDlg::OnOtherModComboSelChange(wxCommandEvent& evt)
 {
+	OtherModComboSelChange(evt.GetSelection());
 }
 
 void OVPrefDlg::OnOtherModPropListItemSelected(wxListEvent& evt)
 {
+	wxListItem item;
+	item.m_mask = wxLIST_MASK_TEXT;
+	item.m_col = 1;
+	item.m_itemId = evt.GetIndex();
+	otherModPropList->GetItem(item);
+/*	wxRect brc, lrc;
+	otherModPropList->GetItemRect(evt.GetIndex(), brc, wxLIST_RECT_BOUNDS);
+	otherModPropList->GetItemRect(evt.GetIndex(), lrc, wxLIST_RECT_LABEL);
+	brc.SetLeft( lrc.GetRight() );
+	static wxTextCtrl* value = new wxTextCtrl(otherModPropList, -1, item.m_text);
+	value->Move(brc.GetLeft(), brc.GetTop() );
+	value->SetSize(brc.GetWidth(), brc.GetHeight());
+	value->SetFocus();
+*/
+	modPropEdit->SetValue(item.m_text);
+}
+
+void OVPrefDlg::OtherModComboSelChange(int idx)
+{
+	otherModPropList->DeleteAllItems();
+	AVDictionary* dict = loader.dict( otherMods[idx]->identifier() );
+	for(AVDictIter *it = dict->firstIter(); it; it = dict->nextIter(it) )
+	{
+//		if( strcmp( "enable", it->getName() ) )
+		{
+		#ifdef UNICODE
+			wxString name = wxConvUTF8.cMB2WC( it->getName() );
+			wxString value = wxConvUTF8.cMB2WC( it->getValue() );
+		#else
+			wxString name = it->getName();
+			wxString value = it->getValue();
+		#endif
+			long i = otherModPropList->InsertItem( otherModPropList->GetItemCount(), name );
+			otherModPropList->SetItem( i, 1, value );
+		}
+	}
+	otherModPropList->SetColumnWidth(0, wxLIST_AUTOSIZE );
+	otherModPropList->SetColumnWidth(1, wxLIST_AUTOSIZE );
+	int w, h;
+	otherModPropList->GetClientSize(&w, &h);
+	w -= otherModPropList->GetColumnWidth(0);
+	if( otherModPropList->GetColumnWidth(1) < w )
+		otherModPropList->SetColumnWidth(1, w);
+}
+
+
+void OVPrefDlg::OnCancel(wxCommandEvent& evt)
+{
+	// Save config
+	int i, n = loader.modlist().size();
+	for( i = 0; i < n; ++i )
+	{
+		OVModule* mod = loader.modlist()[i];
+		AVDictionary* dict = loader.dict( mod->identifier() );
+		dict->setString( "enable", modList->IsChecked(i) ? "1" : "0" );
+	}
+
+	// POJ
+	AVDictionary* dict = loader.dict("OVIMPOJ-Holo");
+	dict->setInteger( "ASCIIOutput", pojNoUnicode->GetValue() );
+	dict->setInteger( "fullPOJOutput", pojNoHanChars->GetValue() );
+
+	// Generic
+	SaveGenericConfig();
+
+	wxDialog::OnCancel(evt);
+}
+
+void OVPrefDlg::SaveGenericConfig(void)
+{
+	AVDictionary* dict = loader.dict( curGenericMod->identifier() );
+	dict->setInteger("shiftSelectionKey", shiftSelectionKey->GetValue());
+	dict->setInteger("autoCompose", autoCompose->GetValue());
+	dict->setInteger("hitMaxAndCompose", hitMaxAndCompose->GetValue());
+	dict->setInteger("warningBeep", warningBeep->GetValue());
+
+	int maxKeySequenceLength = genericMaxRadLength->GetSelection() + 1;
+	dict->setInteger( "maxKeySequenceLength", maxKeySequenceLength );
+}
+
+
+void OVPrefDlg::InitPOJ(void)
+{
+	AVDictionary* dict = loader.dict("OVIMPOJ-Holo");
+	int v = dict->getInteger( "ASCIIOutput");
+	pojNoUnicode->SetValue( !!dict->getInteger( "ASCIIOutput") );
+	pojNoHanChars->SetValue( !!dict->getInteger( "fullPOJOutput") );
 }

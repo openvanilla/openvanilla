@@ -18,16 +18,21 @@ class OVPrefDlg: public wxDialog {
 public:
     // begin wxGlade: OVPrefDlg::ids
     enum {
-        ID_FONT = 1000,
-        ID_BGCOLOR = 1001,
-        ID_BGPICTURE = 1002,
-        ID_SOUNDTEST = 1003,
-        ID_COMMON_CLEAR = 1004,
-        ID_MODLIST = 1005,
-        ID_MODLIST_CLEAR = 1006,
-		ID_GENERIC_COMBO = 1007,
-		ID_OTHER_MOD_COMBO=1008,
-		ID_OTHER_MOD_PROP_LIST=1009
+        ID_FONT = 1047,
+        ID_BGCOLOR = 1048,
+        ID_BGPICTURE = 1049,
+        ID_SOUNDTEST = 1050,
+        ID_COMMON_CLEAR = 1051,
+        ID_MODLIST = 1052,
+        ID_MODLIST_CLEAR = 1053,
+        ID_GENERIC_COMBO = 1054,
+        ID_SHIFT_SELECTION_KEY = 1055,
+        ID_AUTOCOMPOSE = 1056,
+        ID_HIT_MAX_AND_COMPOSE = 1057,
+        ID_WARNING_BEEP = 1058,
+        ID_OTHER_MOD_COMBO = 1059,
+        ID_OTHER_MOD_PROP_LIST = 1060,
+        ID_SET_MOD_PROP_VALUE = 1061
     };
     // end wxGlade
 
@@ -96,22 +101,26 @@ protected:
     wxComboBox* genericCombo;
     wxStaticText* label_13;
     wxComboBox* genericMaxRadLength;
-    wxCheckBox* spaceChoose1stCand;
-    wxCheckBox* showCandOnType;
-    wxCheckBox* commitAtMaxRad;
+    wxCheckBox* shiftSelectionKey;
+    wxCheckBox* autoCompose;
+    wxCheckBox* hitMaxAndCompose;
     wxCheckBox* warningBeep;
     wxStaticText* label_14;
     wxComboBox* otherModCombo;
     wxListCtrl* otherModPropList;
+    wxStaticText* label_8;
+    wxTextCtrl* modPropEdit;
+    wxButton* setBtn;
     wxPanel* module_settings_page;
     wxPanel* output_filter_page;
     wxNotebook* notebook;
-    wxButton* ok_btn;
-    wxButton* cancel_btn;
+    wxStaticText* label_18;
+    wxButton* exitBtn;
     // end wxGlade
 
 	DECLARE_EVENT_TABLE()
-public:
+
+protected:
 	void OnFont(wxCommandEvent& evt);
 	void OnBgColor(wxCommandEvent& evt);
 	void OnBgPicture(wxCommandEvent& evt);
@@ -119,15 +128,20 @@ public:
 	void OnCommonClear(wxCommandEvent& evt);
 	void OnModListClear(wxCommandEvent& evt);
 	void OnModListItemSelected(wxListEvent& evt);
-protected:
 	void InitModuleList(void);
 	void InitGenericModules(void);
-	vector<OVModule*> genericMods;
 	void OnGenericComboSelChange(wxCommandEvent& evt);
 	void GenericComboSelChange(int idx);
 	void InitOtherModPropList(void);
 	void OnOtherModComboSelChange(wxCommandEvent& evt);
 	void OnOtherModPropListItemSelected(wxListEvent& evt);
+	void OtherModComboSelChange(int idx);
+	void OnCancel(wxCommandEvent& evt);
+	vector<OVModule*> genericMods;
+	vector<OVModule*> otherMods;
+	OVModule* curGenericMod;
+	void SaveGenericConfig(void);
+	void InitPOJ(void);
 };
 
 
