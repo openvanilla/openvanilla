@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OVPreferences\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2005-09-01 18:19+0800\n"
+"PO-Revision-Date: 2005-09-01 21:33+0800\n"
 "Last-Translator: \n"
 "Language-Team: OV\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=big5\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../OVPreferences.cpp:24
-#: ../OVPrefDlg.cpp:146
+#: ../OVPreferences.cpp:38
+#: ../OVPrefDlg.cpp:160
 msgid "Open Vanilla Preferences"
 msgstr "香草輸入法偏好設定"
 
@@ -123,8 +123,8 @@ msgid "+"
 msgstr ""
 
 #: ../OVPrefDlg.cpp:71
-#: ../OVPrefDlg.cpp:101
-#: ../OVPrefDlg.cpp:115
+#: ../OVPrefDlg.cpp:114
+#: ../OVPrefDlg.cpp:128
 msgid "None"
 msgstr "無"
 
@@ -156,101 +156,150 @@ msgid "Keyboard layout for Phonetics: "
 msgstr "傳統注音輸入法鍵盤配置："
 
 #: ../OVPrefDlg.cpp:79
-#: ../OVPrefDlg.cpp:84
-msgid "Standard Layout"
-msgstr "標準排列"
+#: ../OVPrefDlg.cpp:85
+msgid "Standard"
+msgstr "標準"
 
-#: ../OVPrefDlg.cpp:82
+#: ../OVPrefDlg.cpp:80
+#: ../OVPrefDlg.cpp:89
+msgid "Eten"
+msgstr "倚天"
+
+#: ../OVPrefDlg.cpp:83
 msgid "Keyboard layout of Chewing: "
 msgstr "酷音輸入法鍵盤配置："
 
+#: ../OVPrefDlg.cpp:86
+msgid "Hsu"
+msgstr "許氏鍵盤"
+
 #: ../OVPrefDlg.cpp:87
+msgid "IBM"
+msgstr ""
+
+#: ../OVPrefDlg.cpp:88
+msgid "Gin-yieh"
+msgstr "精業"
+
+#: ../OVPrefDlg.cpp:90
+msgid "Eten 26-key"
+msgstr "倚天 26  鍵"
+
+#: ../OVPrefDlg.cpp:91
+msgid "Dvorak"
+msgstr ""
+
+#: ../OVPrefDlg.cpp:92
+msgid "Dvorak-Hsu"
+msgstr "Dvorak 許氏"
+
+#: ../OVPrefDlg.cpp:95
 msgid "Keyboard layout for POJ-Holo: "
 msgstr "白話字 (POJ) 調號輸入方式："
 
-#: ../OVPrefDlg.cpp:89
+#: ../OVPrefDlg.cpp:97
 msgid "Use tone numbers (2, 3, 5, 7, 8) only"
 msgstr "輸入完音節後再輸入調號 (2, 3, 5, 7, 8)"
 
-#: ../OVPrefDlg.cpp:92
+#: ../OVPrefDlg.cpp:98
+msgid "Type tone mark (', `, ^, =, |) first, then vowel"
+msgstr "輸入完聲調符號後 (', `, ^, =, |) 再打母音"
+
+#: ../OVPrefDlg.cpp:99
+msgid "Type vowel first, then tone mark (', `, ^, =, |)"
+msgstr "先打母音再打聲調符號 (', `, ^, =, |)"
+
+#: ../OVPrefDlg.cpp:102
 msgid "Do not output unicode characters but pure ASCII instead"
 msgstr "不要輸出 Unicode 字元，全部使用 ASCII 輸出"
 
-#: ../OVPrefDlg.cpp:93
+#: ../OVPrefDlg.cpp:103
 msgid "Do not show Han character candidates. (POJ-only output)"
 msgstr "不選漢字，直接輸出 POJ"
 
-#: ../OVPrefDlg.cpp:94
+#: ../OVPrefDlg.cpp:104
 msgid "Keyboard layout for Tibetan: "
 msgstr "藏文輸入法鍵盤配置："
 
-#: ../OVPrefDlg.cpp:96
+#: ../OVPrefDlg.cpp:106
 msgid "Sambhota Keymap One"
 msgstr ""
 
-#: ../OVPrefDlg.cpp:99
-#: ../OVPrefDlg.cpp:113
-msgid "Module: "
-msgstr "模組："
+#: ../OVPrefDlg.cpp:107
+msgid "Sambhota Keymap Two"
+msgstr ""
 
-#: ../OVPrefDlg.cpp:104
-msgid "Maximal radical length: "
-msgstr "最大組字鍵碼長度："
-
-#: ../OVPrefDlg.cpp:106
-msgid "5"
+#: ../OVPrefDlg.cpp:108
+msgid "TCC Keyboard #1"
 msgstr ""
 
 #: ../OVPrefDlg.cpp:109
+msgid "TCC Keyboard #2"
+msgstr ""
+
+#: ../OVPrefDlg.cpp:112
+#: ../OVPrefDlg.cpp:126
+msgid "Module: "
+msgstr "模組："
+
+#: ../OVPrefDlg.cpp:117
+msgid "Maximal radical length: "
+msgstr "最大組字鍵碼長度："
+
+#: ../OVPrefDlg.cpp:119
+msgid "5"
+msgstr ""
+
+#: ../OVPrefDlg.cpp:122
 msgid "Space key choose the 1st candidate"
 msgstr "空白鍵選第一字，第一選字鍵選第二字"
 
-#: ../OVPrefDlg.cpp:110
+#: ../OVPrefDlg.cpp:123
 msgid "Show candidates as you type"
 msgstr "一邊打字同時一邊組字出選字窗"
 
-#: ../OVPrefDlg.cpp:111
+#: ../OVPrefDlg.cpp:124
 msgid "Commit at maximal radical length"
 msgstr "打到最大長度便自動出字"
 
-#: ../OVPrefDlg.cpp:112
+#: ../OVPrefDlg.cpp:125
 msgid "Warning beep"
 msgstr "錯誤時發出嗶聲"
 
-#: ../OVPrefDlg.cpp:119
-#: ../OVPrefDlg.cpp:452
+#: ../OVPrefDlg.cpp:132
+#: ../OVPrefDlg.cpp:467
 msgid "Value"
 msgstr "數值"
 
-#: ../OVPrefDlg.cpp:121
+#: ../OVPrefDlg.cpp:134
 msgid "&Set"
 msgstr "設定 (&S)"
 
-#: ../OVPrefDlg.cpp:123
+#: ../OVPrefDlg.cpp:136
 msgid "Changes are saved when you close OpenVanilla Preferences"
 msgstr "設定值將會在你離開香草輸入法偏好設定時儲存"
 
-#: ../OVPrefDlg.cpp:124
+#: ../OVPrefDlg.cpp:137
 msgid "E&xit"
 msgstr "離開 (&X)"
 
-#: ../OVPrefDlg.cpp:293
+#: ../OVPrefDlg.cpp:308
 msgid "Common"
 msgstr "共用設定"
 
-#: ../OVPrefDlg.cpp:294
+#: ../OVPrefDlg.cpp:309
 msgid "Modules List && Hotkeys"
 msgstr "模組列表和熱鍵"
 
-#: ../OVPrefDlg.cpp:295
+#: ../OVPrefDlg.cpp:310
 msgid "Module Settings"
 msgstr "個別模組設定"
 
-#: ../OVPrefDlg.cpp:296
+#: ../OVPrefDlg.cpp:311
 msgid "Output Filters"
 msgstr "文字輸出處理模組"
 
-#: ../OVPrefDlg.cpp:451
+#: ../OVPrefDlg.cpp:466
 msgid "Property key"
 msgstr "設定項目"
 

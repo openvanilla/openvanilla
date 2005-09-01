@@ -76,26 +76,39 @@ OVPrefDlg::OVPrefDlg(wxWindow* parent, int id, const wxString& title, const wxPo
     label_6 = new wxStaticText(module_list_page, -1, _("Remove unused modules \ncan speed up loading.\nYou have to exit and restart \nexisting applications using \nOpenVanilla or this won't \ntake effect."));
     label_9 = new wxStaticText(module_settings_page, -1, _("Keyboard layout for Phonetics: "));
     const wxString phoneticKeyboardLayout_choices[] = {
-        _("Standard Layout")
+        _("Standard"),
+        _("Eten")
     };
-    phoneticKeyboardLayout = new wxComboBox(module_settings_page, -1, wxT(""), wxDefaultPosition, wxDefaultSize, 1, phoneticKeyboardLayout_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
+    phoneticKeyboardLayout = new wxComboBox(module_settings_page, -1, wxT(""), wxDefaultPosition, wxDefaultSize, 2, phoneticKeyboardLayout_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
     label_9_copy = new wxStaticText(module_settings_page, -1, _("Keyboard layout of Chewing: "));
     const wxString chewingKeyboardLayout_choices[] = {
-        _("Standard Layout")
+        _("Standard"),
+        _("Hsu"),
+        _("IBM"),
+        _("Gin-yieh"),
+        _("Eten"),
+        _("Eten 26-key"),
+        _("Dvorak"),
+        _("Dvorak-Hsu")
     };
-    chewingKeyboardLayout = new wxComboBox(module_settings_page, -1, wxT(""), wxDefaultPosition, wxDefaultSize, 1, chewingKeyboardLayout_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
+    chewingKeyboardLayout = new wxComboBox(module_settings_page, -1, wxT(""), wxDefaultPosition, wxDefaultSize, 8, chewingKeyboardLayout_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
     label_10 = new wxStaticText(module_settings_page, -1, _("Keyboard layout for POJ-Holo: "));
     const wxString pojKeyboardLayout_choices[] = {
-        _("Use tone numbers (2, 3, 5, 7, 8) only")
+        _("Use tone numbers (2, 3, 5, 7, 8) only"),
+        _("Type tone mark (', `, ^, =, |) first, then vowel"),
+        _("Type vowel first, then tone mark (', `, ^, =, |)")
     };
-    pojKeyboardLayout = new wxComboBox(module_settings_page, -1, wxT(""), wxDefaultPosition, wxDefaultSize, 1, pojKeyboardLayout_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
+    pojKeyboardLayout = new wxComboBox(module_settings_page, -1, wxT(""), wxDefaultPosition, wxDefaultSize, 3, pojKeyboardLayout_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
     pojNoUnicode = new wxCheckBox(module_settings_page, -1, _("Do not output unicode characters but pure ASCII instead"));
     pojNoHanChars = new wxCheckBox(module_settings_page, -1, _("Do not show Han character candidates. (POJ-only output)"));
     label_11 = new wxStaticText(module_settings_page, -1, _("Keyboard layout for Tibetan: "));
     const wxString tibetanKeyboardLayout_choices[] = {
-        _("Sambhota Keymap One")
+        _("Sambhota Keymap One"),
+        _("Sambhota Keymap Two"),
+        _("TCC Keyboard #1"),
+        _("TCC Keyboard #2")
     };
-    tibetanKeyboardLayout = new wxComboBox(module_settings_page, -1, wxT(""), wxDefaultPosition, wxDefaultSize, 1, tibetanKeyboardLayout_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
+    tibetanKeyboardLayout = new wxComboBox(module_settings_page, -1, wxT(""), wxDefaultPosition, wxDefaultSize, 4, tibetanKeyboardLayout_choices, wxCB_DROPDOWN|wxCB_SIMPLE|wxCB_READONLY);
     label_12 = new wxStaticText(module_settings_page, -1, _("Module: "));
     const wxString genericCombo_choices[] = {
         _("None")
@@ -487,7 +500,7 @@ void OVPrefDlg::OtherModComboSelChange(int idx)
 	AVDictionary* dict = loader.dict( otherMods[idx]->identifier() );
 	for(AVDictIter *it = dict->firstIter(); it; it = dict->nextIter(it) )
 	{
-//		if( strcmp( "enable", it->getName() ) )
+		if( strcmp( "enable", it->getName() ) )
 		{
 		#ifdef UNICODE
 			wxString name = wxConvUTF8.cMB2WC( it->getName() );
@@ -522,13 +535,21 @@ void OVPrefDlg::OnCancel(wxCommandEvent& evt)
 	}
 
 	// Phonetic
+	AVDictionary* dict = loader.dict("OVIMPhonetic");
+	dict->setInteger("keyboardLayout", phoneticKeyboardLayout->GetSelection() );
 
 	// Chewing
+	dict = loader.dict("OVIMChewing");
+	dict->setInteger("keyboardLayout", chewingKeyboardLayout->GetSelection());
+
+	// Tibetan
+	dict = loader.dict("OVIMTibetan");
+	dict->setInteger("keyboardLayout", tibetanKeyboardLayout->GetSelection());
 
 	// POJ
-	AVDictionary* dict = loader.dict("OVIMPOJ-Holo");
+	dict = loader.dict("OVIMPOJ-Holo");
 	// Keyboard layout
-//	dict->setInteger();
+	dict->setInteger("keyboardLayout", pojKeyboardLayout->GetSelection());
 	dict->setInteger( "ASCIIOutput", pojNoUnicode->GetValue() );
 	dict->setInteger( "fullPOJOutput", pojNoHanChars->GetValue() );
 
@@ -556,16 +577,23 @@ void OVPrefDlg::SaveGenericConfig(void)
 void OVPrefDlg::InitPOJ(void)
 {
 	AVDictionary* dict = loader.dict("OVIMPOJ-Holo");
-	int v = dict->getInteger( "ASCIIOutput");
 	pojNoUnicode->SetValue( !!dict->getInteger( "ASCIIOutput") );
 	pojNoHanChars->SetValue( !!dict->getInteger( "fullPOJOutput") );
+	pojKeyboardLayout->SetSelection( dict->getInteger("keyboardLayout") );
+
 }
 
 void OVPrefDlg::InitKeyboardLayouts(void)
 {
 	// Phonetic
+	AVDictionary* dict = loader.dict("OVIMPhonetic");
+	phoneticKeyboardLayout->SetSelection( dict->getInteger("keyboardLayout") );
 
 	// Chewing
+	dict = loader.dict("OVIMChewing");
+	chewingKeyboardLayout->SetSelection( dict->getInteger("keyboardLayout") );
 
 	// Tibetan
+	dict = loader.dict("OVIMTibetan");
+	tibetanKeyboardLayout->SetSelection( dict->getInteger("keyboardLayout") );
 }
