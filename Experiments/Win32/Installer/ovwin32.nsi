@@ -2,15 +2,14 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "OpenVanilla"
-!define PRODUCT_VERSION "0.1"
+!define PRODUCT_VERSION "0.7.1pre0"
 !define PRODUCT_PUBLISHER "openvanilla.org"
 !define PRODUCT_WEB_SITE "http://openvanilla.org"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define IME_ROOT_KEY "HKLM"
-!define IME_KEY "SYSTEM\CurrentControlSet\Control\Keyboard Layouts\E0990404"
-!define IME_KEY1 "SYSTEM\ControlSet001\Control\Keyboard Layouts\E0990404"
-!define IME_KEY3 "SYSTEM\ControlSet003\Control\Keyboard Layouts\E0990404"
+!define IME_KEY "SYSTEM\CurrentControlSet\Control\Keyboard Layouts\"
+!define IME_KEY_USER "Keyboard Layout\Preload"
 
 SetCompressor lzma
 
@@ -71,6 +70,11 @@ Section "Modules" SEC02
   SetOutPath "$WINDIR\OpenVanilla"
   SetOVerwrite ifnewer
   File /r "Modules"
+  File /r "zh_TW"
+  File "OVPreferences.exe"
+  File "OVPreferences.exe.manifest"
+  SetOVerwrite off
+  File "config.xml"
   CreateDirectory "$WINDIR\OpenVanilla\User"
 SectionEnd
 
@@ -78,6 +82,7 @@ Section -AdditionalIcons
   SetOutPath $INSTDIR
   CreateDirectory "$SMPROGRAMS\OpenVanilla"
   CreateShortCut "$SMPROGRAMS\OpenVanilla\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  CreateShortCut "$SMPROGRAMS\OpenVanilla\OVPreferences.lnk" "$WINDIR\OpenVanilla\OVPreferences.exe"
 SectionEnd
 
 Section -Post
@@ -87,15 +92,14 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
-  WriteRegStr ${IME_ROOT_KEY} "${IME_KEY}" "layout text" "中文 (繁體) - OpenVanilla"
-  WriteRegStr ${IME_ROOT_KEY} "${IME_KEY}" "layout file" "kbdus.dll"
-  WriteRegStr ${IME_ROOT_KEY} "${IME_KEY}" "IME file" "OVIME.ime"
-  WriteRegStr ${IME_ROOT_KEY} "${IME_KEY1}" "layout text" "中文 (繁體) - OpenVanilla"
-  WriteRegStr ${IME_ROOT_KEY} "${IME_KEY1}" "layout file" "kbdus.dll"
-  WriteRegStr ${IME_ROOT_KEY} "${IME_KEY1}" "IME file" "OVIME.ime"
-  WriteRegStr ${IME_ROOT_KEY} "${IME_KEY3}" "layout text" "中文 (繁體) - OpenVanilla"
-  WriteRegStr ${IME_ROOT_KEY} "${IME_KEY3}" "layout file" "kbdus.dll"
-  WriteRegStr ${IME_ROOT_KEY} "${IME_KEY3}" "IME file" "OVIME.ime"
+  System::Call 'imm32::ImmInstallIME(t "$SYSDIR\OVIME.ime", t "中文 (繁體) - OpenVanilla")'
+  registry::Open /NOUNLOAD "${IME_ROOT_KEY}\${IME_KEY}" /N="OVIME.ime" /G=1 /T=REG_SZ .r0
+  registry::Find /NOUNLOAD .r1 .r2 .r3 .r4
+  StrLen $5 "${IME_KEY}"
+  StrCpy $6 $1 "" $5
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key" "$6"
+  System::Call "user32::LoadKeyboardLayout(t $6, i 1)"
+  Exec "$WINDIR\OpenVanilla\OVPreferences.exe"
 SectionEnd
 
 
@@ -118,15 +122,19 @@ Section Uninstall
   Delete "$SYSDIR\OVIMEUI.DLL"
   Delete "$SYSDIR\OVIME.ime"
   Delete "$SYSDIR\libchewing.dll"
+  Delete "$WINDIR\OpenVanilla\OVPreferences.exe"
+  Delete "$WINDIR\OpenVanilla\OVPreferences.exe.manifest"
+  RMDir /r "$WINDIR\OpenVanilla\zh_TW"
   RMDir /r "$WINDIR\OpenVanilla\Modules"
 
   Delete "$SMPROGRAMS\OpenVanilla\Uninstall.lnk"
+  Delete "$SMPROGRAMS\OpenVanilla\OVPreferences.lnk"
 
   RMDir "$SMPROGRAMS\OpenVanilla"
 
+  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
+  DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}$0"
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
-  DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}"
-  DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY1}"
-  DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY3}"
+ 
   SetAutoClose true
 SectionEnd
