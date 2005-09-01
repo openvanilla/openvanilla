@@ -1,11 +1,22 @@
 #include "AVEmbeddedLoader.h"
 
+bool sort_im(OVModule *a, OVModule *b)
+{
+	int pa = 0, pb = 0;
+	dict.setDict(a->identifier());
+	pa = dict.getInteger("priority");
+	dict.setDict(b->identifier());
+	pb = dict.getInteger("priority");
+	return (pa >= pb);
+}
+
 AVEmbeddedLoader::AVEmbeddedLoader()
 {
 	m_srv = new AVService();
 	m_cfg = new AVConfig();
 	m_dict = new AVDictionary(m_cfg->getBaseDir());
 	m_modlist = AVLoadEverything(m_cfg->getModuleDir(), m_srv);
+	sort(m_modlist.begin(), m_modlist.end(), sort_im);
 }
 
 AVEmbeddedLoader::~AVEmbeddedLoader()
