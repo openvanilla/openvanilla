@@ -2,15 +2,21 @@
 #include <algorithm>
 using namespace std;
 
-bool AVEmbeddedLoader::sort_im(OVModule *a, OVModule *b)
+struct sort_im : public binary_function< OVModule*, OVModule*, bool >
 {
-	int pa = 0, pb = 0;
-	m_dict.setDict(a->identifier());
-	pa = m_dict.getInteger("priority");
-	m_dict.setDict(b->identifier());
-	pb = m_dict.getInteger("priority");
-	return (pa >= pb);
-}
+	sort_im(AVDictionary* dict) : m_dict(dict) {}
+	operator ()(OVModule *a, OVModule *b)
+	{
+		int pa = 0, pb = 0;
+		m_dict->setDict(a->identifier());
+		pa = m_dict->getInteger("priority");
+		m_dict->setDict(b->identifier());
+		pb = m_dict->getInteger("priority");
+		return (pa > pb);
+	}
+	AVDictionary* m_dict;
+};
+
 
 AVEmbeddedLoader::AVEmbeddedLoader()
 {
@@ -18,7 +24,7 @@ AVEmbeddedLoader::AVEmbeddedLoader()
 	m_cfg = new AVConfig();
 	m_dict = new AVDictionary(m_cfg->getBaseDir());
 	m_modlist = AVLoadEverything(m_cfg->getModuleDir(), m_srv);
-	sort(m_modlist.begin(), m_modlist.end(), sort_im);
+	sort(m_modlist.begin(), m_modlist.end(), sort_im(m_dict));
 }
 
 AVEmbeddedLoader::~AVEmbeddedLoader()
