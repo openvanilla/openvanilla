@@ -3,6 +3,13 @@
 #include "tinyxml.h"
 #include <sys/types.h>
 
+class AVDictIter : protected TiXmlNode
+{
+public:
+	const char* getName() const {	return ToElement()->Attribute("name");	}
+	const char* getValue() const {	return ToElement()->Attribute("value");	}
+};
+
 class AVDictionary : public OVDictionary {
 	public:
 		AVDictionary();
@@ -20,6 +27,15 @@ class AVDictionary : public OVDictionary {
 		bool createNewConfig(std::string path);
 		void update();
 		void save();
+
+		// Used for iteration	2005.09.01 Added by Hong Jen Yee (PCMan)
+		AVDictIter* firstIter(){	return (AVDictIter*)module->FirstChild();	}
+		AVDictIter* nextIter(AVDictIter* key)
+		{
+			TiXmlNode* node = (TiXmlNode*)key;
+			return (AVDictIter*)node->NextSibling();
+		}
+
 	private:
 		std::string name;
 		std::string file;

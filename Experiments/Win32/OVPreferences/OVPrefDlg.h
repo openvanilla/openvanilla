@@ -18,21 +18,21 @@ class OVPrefDlg: public wxDialog {
 public:
     // begin wxGlade: OVPrefDlg::ids
     enum {
-        ID_FONT = 1047,
-        ID_BGCOLOR = 1048,
-        ID_BGPICTURE = 1049,
-        ID_SOUNDTEST = 1050,
-        ID_COMMON_CLEAR = 1051,
-        ID_MODLIST = 1052,
-        ID_MODLIST_CLEAR = 1053,
-        ID_GENERIC_COMBO = 1054,
-        ID_SHIFT_SELECTION_KEY = 1055,
-        ID_AUTOCOMPOSE = 1056,
-        ID_HIT_MAX_AND_COMPOSE = 1057,
-        ID_WARNING_BEEP = 1058,
-        ID_OTHER_MOD_COMBO = 1059,
-        ID_OTHER_MOD_PROP_LIST = 1060,
-        ID_SET_MOD_PROP_VALUE = 1061
+        ID_FONT = 1000,
+        ID_BGCOLOR = 1001,
+        ID_BGPICTURE = 1002,
+        ID_SOUNDTEST = 1003,
+        ID_COMMON_CLEAR = 1004,
+        ID_MODLIST = 1005,
+        ID_MODLIST_CLEAR = 1006,
+        ID_GENERIC_COMBO = 1007,
+        ID_SHIFT_SELECTION_KEY = 1008,
+        ID_AUTOCOMPOSE = 1009,
+        ID_HIT_MAX_AND_COMPOSE = 1010,
+        ID_WARNING_BEEP = 1011,
+        ID_OTHER_MOD_COMBO = 1012,
+        ID_OTHER_MOD_PROP_LIST = 1013,
+        ID_SET_MOD_PROP_VALUE = 1014
     };
     // end wxGlade
 
@@ -142,6 +142,7 @@ protected:
 	OVModule* curGenericMod;
 	void SaveGenericConfig(void);
 	void InitPOJ(void);
+	void InitKeyboardLayouts(void);
 };
 
 

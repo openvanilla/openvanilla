@@ -27,6 +27,7 @@ extern MyOVDisplayServer dsvr;
 #define FIM_MOVED 0x02
 
 #define WM_UI_COMPMOVE (WM_USER+601)
+#define WM_IME_RELOADCONFIG (WM_APP+601)
 
 // Macro
 #define GETLPCOMPSTR(lpcs) (wchar_t*)((LPBYTE)(lpcs) + (lpcs)->dwCompStrOffset)

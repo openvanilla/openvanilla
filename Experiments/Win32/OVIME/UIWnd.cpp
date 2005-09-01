@@ -122,6 +122,12 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	case WM_DESTROY:
 		break;
 
+	case WM_IME_RELOADCONFIG:
+		{
+
+		}
+		break;
+
 	default:
 		return DefWindowProc(hWnd,msg,wParam,lParam);
     }

@@ -129,6 +129,7 @@ OVPrefDlg::OVPrefDlg(wxWindow* parent, int id, const wxString& title, const wxPo
 	Center();
 
 	InitModuleList();
+	InitKeyboardLayouts();
 	InitPOJ();
 	InitGenericModules();
 	InitOtherModPropList();
@@ -146,6 +147,7 @@ void OVPrefDlg::set_properties()
     SetTitle(_("Open Vanilla Preferences"));
     opacitySlider->SetSize(wxSize(176, 20));
     switchKey->SetSelection(-1);
+    modList->SetFocus();
     modList->SetSelection(0);
     modlistKey->SetSelection(-1);
     phoneticKeyboardLayout->SetSelection(0);
@@ -510,7 +512,7 @@ void OVPrefDlg::OtherModComboSelChange(int idx)
 
 void OVPrefDlg::OnCancel(wxCommandEvent& evt)
 {
-	// Save config
+	// Save module list config
 	int i, n = loader.modlist().size();
 	for( i = 0; i < n; ++i )
 	{
@@ -519,10 +521,18 @@ void OVPrefDlg::OnCancel(wxCommandEvent& evt)
 		dict->setString( "enable", modList->IsChecked(i) ? "1" : "0" );
 	}
 
+	// Phonetic
+
+	// Chewing
+
 	// POJ
 	AVDictionary* dict = loader.dict("OVIMPOJ-Holo");
+	// Keyboard layout
+//	dict->setInteger();
 	dict->setInteger( "ASCIIOutput", pojNoUnicode->GetValue() );
 	dict->setInteger( "fullPOJOutput", pojNoHanChars->GetValue() );
+
+	// Tibetan
 
 	// Generic
 	SaveGenericConfig();
@@ -549,4 +559,13 @@ void OVPrefDlg::InitPOJ(void)
 	int v = dict->getInteger( "ASCIIOutput");
 	pojNoUnicode->SetValue( !!dict->getInteger( "ASCIIOutput") );
 	pojNoHanChars->SetValue( !!dict->getInteger( "fullPOJOutput") );
+}
+
+void OVPrefDlg::InitKeyboardLayouts(void)
+{
+	// Phonetic
+
+	// Chewing
+
+	// Tibetan
 }
