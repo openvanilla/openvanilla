@@ -24,15 +24,17 @@ public:
         ID_SOUNDTEST = 1003,
         ID_COMMON_CLEAR = 1004,
         ID_MODLIST = 1005,
-        ID_MODLIST_CLEAR = 1006,
-        ID_GENERIC_COMBO = 1007,
-        ID_SHIFT_SELECTION_KEY = 1008,
-        ID_AUTOCOMPOSE = 1009,
-        ID_HIT_MAX_AND_COMPOSE = 1010,
-        ID_WARNING_BEEP = 1011,
-        ID_OTHER_MOD_COMBO = 1012,
-        ID_OTHER_MOD_PROP_LIST = 1013,
-        ID_SET_MOD_PROP_VALUE = 1014
+        ID_MODLIST_MOVE_UP = 1006,
+        ID_MODLIST_MOVE_DOWN = 1007,
+        ID_MODLIST_CLEAR = 1008,
+        ID_GENERIC_COMBO = 1009,
+        ID_SHIFT_SELECTION_KEY = 1010,
+        ID_AUTOCOMPOSE = 1011,
+        ID_HIT_MAX_AND_COMPOSE = 1012,
+        ID_WARNING_BEEP = 1013,
+        ID_OTHER_MOD_COMBO = 1014,
+        ID_OTHER_MOD_PROP_LIST = 1015,
+        ID_SET_MOD_PROP_VALUE = 1016
     };
     // end wxGlade
 
@@ -78,6 +80,9 @@ protected:
     wxButton* common_clear;
     wxPanel* common_page;
     wxCheckListBox* modList;
+    wxStaticText* label_16;
+    wxButton* moveUpBtn;
+    wxButton* moveDownBtn;
     wxCheckBox* modlistAlt;
     wxCheckBox* modlistShift;
     wxCheckBox* modlistCtrl;
@@ -143,6 +148,9 @@ protected:
 	void SaveGenericConfig(void);
 	void InitPOJ(void);
 	void InitKeyboardLayouts(void);
+	void OnModListMoveUp(wxCommandEvent& evt);
+	void OnModListMoveDown(wxCommandEvent& evt);
+	void SaveModList(void);
 };
 
 

@@ -11,6 +11,8 @@ BEGIN_EVENT_TABLE( OVPrefDlg, wxDialog )
 	EVT_BUTTON( ID_SOUNDTEST, OVPrefDlg::OnSoundTest )
 	EVT_BUTTON( ID_COMMON_CLEAR, OVPrefDlg::OnCommonClear )
 	EVT_BUTTON( ID_MODLIST_CLEAR, OVPrefDlg::OnModListClear )
+	EVT_BUTTON( ID_MODLIST_MOVE_UP, OVPrefDlg::OnModListMoveUp )
+	EVT_BUTTON( ID_MODLIST_MOVE_DOWN, OVPrefDlg::OnModListMoveDown )
 	EVT_LIST_ITEM_SELECTED(ID_MODLIST, OVPrefDlg::OnModListItemSelected )
 	EVT_COMBOBOX( ID_GENERIC_COMBO, OVPrefDlg::OnGenericComboSelChange )
 	EVT_COMBOBOX( ID_OTHER_MOD_COMBO, OVPrefDlg::OnOtherModComboSelChange )
@@ -63,6 +65,9 @@ OVPrefDlg::OVPrefDlg(wxWindow* parent, int id, const wxString& title, const wxPo
         wxT("")
     };
     modList = new wxCheckListBox(module_list_page, ID_MODLIST, wxDefaultPosition, wxDefaultSize, 1, modList_choices, wxLB_SINGLE|wxLB_HSCROLL);
+    label_16 = new wxStaticText(module_list_page, -1, _("Change priority of selected module"));
+    moveUpBtn = new wxButton(module_list_page, ID_MODLIST_MOVE_UP, _("Move &Up"));
+    moveDownBtn = new wxButton(module_list_page, ID_MODLIST_MOVE_DOWN, _("Move &Down"));
     modlistAlt = new wxCheckBox(module_list_page, -1, _("Alt"));
     modlistShift = new wxCheckBox(module_list_page, -1, _("Shift"));
     modlistCtrl = new wxCheckBox(module_list_page, -1, _("Ctrl"));
@@ -202,6 +207,7 @@ void OVPrefDlg::do_layout()
     wxBoxSizer* sizer_8 = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer* sizer_20_copy = new wxBoxSizer(wxVERTICAL);
     wxStaticBoxSizer* sizer_1 = new wxStaticBoxSizer(sizer_1_staticbox, wxVERTICAL);
+    wxBoxSizer* sizer_6 = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer* common_page_sizer = new wxBoxSizer(wxVERTICAL);
     wxStaticBoxSizer* sizer_15 = new wxStaticBoxSizer(sizer_15_staticbox, wxHORIZONTAL);
     wxStaticBoxSizer* sizer_13 = new wxStaticBoxSizer(sizer_13_staticbox, wxHORIZONTAL);
@@ -244,6 +250,10 @@ void OVPrefDlg::do_layout()
     common_page_sizer->Fit(common_page);
     common_page_sizer->SetSizeHints(common_page);
     sizer_1->Add(modList, 1, wxALL|wxEXPAND, 1);
+    sizer_6->Add(label_16, 1, wxALL|wxALIGN_CENTER_VERTICAL|wxFIXED_MINSIZE, 2);
+    sizer_6->Add(moveUpBtn, 0, wxALL|wxFIXED_MINSIZE, 2);
+    sizer_6->Add(moveDownBtn, 0, wxALL|wxFIXED_MINSIZE, 2);
+    sizer_1->Add(sizer_6, 0, wxEXPAND, 0);
     sizer_16->Add(sizer_1, 1, wxALL|wxEXPAND, 2);
     sizer_20_copy->Add(modlistAlt, 0, wxALL|wxFIXED_MINSIZE, 2);
     sizer_20_copy->Add(modlistShift, 0, wxALL|wxFIXED_MINSIZE, 2);
@@ -395,6 +405,7 @@ void OVPrefDlg::InitModuleList(void)
 		if( dict->getInteger("enable") )
 			modList->Check(i, true);
 	}
+	modList->SetSelection(0);
 }
 
 void OVPrefDlg::InitGenericModules(void)
@@ -526,13 +537,7 @@ void OVPrefDlg::OtherModComboSelChange(int idx)
 void OVPrefDlg::OnCancel(wxCommandEvent& evt)
 {
 	// Save module list config
-	int i, n = loader.modlist().size();
-	for( i = 0; i < n; ++i )
-	{
-		OVModule* mod = loader.modlist()[i];
-		AVDictionary* dict = loader.dict( mod->identifier() );
-		dict->setString( "enable", modList->IsChecked(i) ? "1" : "0" );
-	}
+	SaveModList();
 
 	// Phonetic
 	AVDictionary* dict = loader.dict("OVIMPhonetic");
@@ -596,4 +601,48 @@ void OVPrefDlg::InitKeyboardLayouts(void)
 	// Tibetan
 	dict = loader.dict("OVIMTibetan");
 	tibetanKeyboardLayout->SetSelection( dict->getInteger("keyboardLayout") );
+}
+
+void OVPrefDlg::OnModListMoveUp(wxCommandEvent& evt)
+{
+	int sel = modList->GetSelection();
+	if( sel < 1 )
+		return;
+
+	wxString text = modList->GetString(sel-1);
+	bool checked = modList->IsChecked(sel-1);
+	modList->Delete(sel-1);
+	modList->Insert(text, sel);
+	modList->Check(sel, checked);
+	OVModule* mod = loader.modlist()[sel-1];
+	loader.modlist()[sel-1] = loader.modlist()[sel];
+	loader.modlist()[sel] = mod;
+}
+
+void OVPrefDlg::OnModListMoveDown(wxCommandEvent& evt)
+{
+	int sel = modList->GetSelection();
+	if( sel < 0 || (sel+1) >= modList->GetCount() )
+		return;
+	wxString text = modList->GetString(sel+1);
+	bool checked = modList->IsChecked(sel+1);
+	modList->Delete(sel+1);
+	modList->Insert(text, sel);
+	modList->Check(sel, checked);
+	OVModule* mod = loader.modlist()[sel+1];
+	loader.modlist()[sel+1] = loader.modlist()[sel];
+	loader.modlist()[sel] = mod;
+}
+
+
+void OVPrefDlg::SaveModList(void)
+{
+	int i, n = loader.modlist().size();
+	for( i = 0; i < n; ++i )
+	{
+		OVModule* mod = loader.modlist()[i];
+		AVDictionary* dict = loader.dict( mod->identifier() );
+		dict->setString( "enable", modList->IsChecked(i) ? "1" : "0" );
+		dict->setInteger( "priority", (n - i) );
+	}
 }
