@@ -26,7 +26,7 @@ extern MyOVDisplayServer dsvr;
 #define FIM_CAPUTURED 0x01
 #define FIM_MOVED 0x02
 
-#define WM_UI_COMPMOVE (WM_USER+601)
+#define WM_UI_COMPMOVE (WM_APP+600)
 #define WM_IME_RELOADCONFIG (WM_APP+601)
 
 // Macro

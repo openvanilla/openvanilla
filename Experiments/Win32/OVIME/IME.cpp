@@ -86,6 +86,13 @@ ImeInquire(LPIMEINFO lpIMEInfo, LPTSTR lpszUIClass, LPCTSTR lpszOption)
 BOOL APIENTRY 
 ImeConfigure(HKL hKL,HWND hWnd, DWORD dwMode, LPVOID lpData)
 {
+	if( IME_CONFIG_GENERAL == dwMode )
+	{
+		TCHAR buf[MAX_PATH];
+		GetWindowsDirectory( buf, MAX_PATH );
+		_tcscat( buf, _T("\\OpenVanilla\\OVPreferences.exe"));
+		ShellExecute( hWnd, _T("open"), buf, NULL, NULL, SW_SHOWNORMAL );
+	}
 	InvalidateRect(hWnd,NULL,FALSE);
 	return TRUE;
 }
