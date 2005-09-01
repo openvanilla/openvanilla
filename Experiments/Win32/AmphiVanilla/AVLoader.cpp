@@ -246,9 +246,13 @@ extern "C" {
 	}
 	void ReloadConfig() {
 		dict.update();
-		vector<OVModule*>::iterator m;
-		for(m = mod_vector.begin(); m != mod_vector.end(); m++)
-			(*m)->update(&dict, &srv);
+		for(int i = 0; i < mod_vector.size(); i++) {
+			if(ctx_vector.at(i) != NULL) {
+				murmur("Reload: %s", mod_vector.at(i)->identifier());
+				dict.setDict(mod_vector.at(i)->identifier());
+				mod_vector.at(i)->update(&dict, &srv);
+			}
+		}
 	}
 	int KeyEvent(int n, int c, wchar_t *s) {
 		if (!inited) init();
