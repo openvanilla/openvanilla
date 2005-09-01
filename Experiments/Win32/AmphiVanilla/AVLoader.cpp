@@ -1,9 +1,3 @@
-#ifdef _UNICODE
-	#undef _UNICODE
-#endif
-#ifdef UNICODE
-	#undef UNICODE
-#endif
 #ifdef WIN32
 #define PATH_MAX MAX_PATH
 #endif
@@ -317,10 +311,3 @@ extern "C" {
 		return 1;
 	}
 }
-
-#ifndef _UNICODE
-	#define _UNICODE
-#endif
-#ifndef UNICODE
-	#define UNICODE
-#endif
