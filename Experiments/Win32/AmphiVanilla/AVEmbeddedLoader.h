@@ -19,6 +19,7 @@ public:
 	AVDictionary *dict(const char *);
 	std::vector<OVModule*> &modlist();
 private:
+	bool sort_im(OVModule *a, OVModule *b);
 	AVService *m_srv;
 	AVConfig *m_cfg;
 	AVDictionary *m_dict;

@@ -1,12 +1,14 @@
 #include "AVEmbeddedLoader.h"
+#include <algorithm>
+using namespace std;
 
-bool sort_im(OVModule *a, OVModule *b)
+bool AVEmbeddedLoader::sort_im(OVModule *a, OVModule *b)
 {
 	int pa = 0, pb = 0;
-	dict.setDict(a->identifier());
-	pa = dict.getInteger("priority");
-	dict.setDict(b->identifier());
-	pb = dict.getInteger("priority");
+	m_dict.setDict(a->identifier());
+	pa = m_dict.getInteger("priority");
+	m_dict.setDict(b->identifier());
+	pb = m_dict.getInteger("priority");
 	return (pa >= pb);
 }
 
