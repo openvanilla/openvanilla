@@ -150,12 +150,12 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		fPressOther = TRUE;
 		return FALSE;
 	}
-		
 	if (!hIMC)
 		return 0;
 
 	if (!(lpIMC = ImmLockIMC(hIMC)))
 		return 0;
+
 	fOpen = lpIMC->fOpen;
 
 	if(uVKey == VK_CONTROL && (lKeyData & 0x80000000) && !fPressOther && !fFirst){
@@ -360,7 +360,9 @@ ImeSelect(HIMC hIMC, BOOL fSelect)
 		LPCOMPOSITIONSTRING lpCompStr;
 		LPCANDIDATEINFO lpCandInfo;
 		LPMYPRIVATE lpMyPrivate;
-		
+
+		lpIMC->fOpen = TRUE;
+
 		// Resize of compsiting string of IMC
 		lpIMC->hCompStr = ImmReSizeIMCC(lpIMC->hCompStr,sizeof(MYCOMPSTR));
 		if (lpCompStr = (LPCOMPOSITIONSTRING)ImmLockIMCC(lpIMC->hCompStr))
