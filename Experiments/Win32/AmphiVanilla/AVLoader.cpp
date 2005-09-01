@@ -169,16 +169,18 @@ bool sort_im(OVModule *a, OVModule *b)
 void init() {    
     if (inited) return;
     dict.setPath(cfg.getBaseDir());
-    mod_vector = AVLoadEverything(cfg.getModuleDir(), &srv);
+    vector<OVModule*> tmpmod_vector = AVLoadEverything(cfg.getModuleDir(), &srv);
     // delete unused im
     vector<OVModule*>::iterator m;
-    for(m = mod_vector.begin(); m != mod_vector.end(); m++) {
+    for(m = tmpmod_vector.begin(); m != tmpmod_vector.end(); m++) {
 	    dict.setDict((*m)->identifier());
 	    if(!dict.keyExist("enable")) {
 		    dict.setInteger("enable", 1);
+		    mod_vector.push_back(*m);
 	    } else {
-		    if(!dict.getInteger("enable"))
-			    mod_vector.erase(m);
+		    if(dict.getInteger("enable")) {
+			    mod_vector.push_back(*m);
+		    }
 	    }
     }
     sort(mod_vector.begin(), mod_vector.end(), sort_im);
@@ -236,10 +238,10 @@ extern "C" {
 		if (!inited) init();
 	}
 	void ShutdownLoader() {
-		for_each(ctx_vector.begin(), ctx_vector.end(), DeleteObject);
-		ctx_vector.clear();
-		for_each(mod_vector.begin(), mod_vector.end(), DeleteObject);
-		mod_vector.clear();
+		//for_each(ctx_vector.begin(), ctx_vector.end(), DeleteObject);
+		//ctx_vector.clear();
+		//for_each(mod_vector.begin(), mod_vector.end(), DeleteObject);
+		//mod_vector.clear();
 		lt_dlexit();
 	}
 	int KeyEvent(int n, int c, wchar_t *s) {
