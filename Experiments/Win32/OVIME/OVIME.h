@@ -62,6 +62,7 @@ extern "C" {
 	int ModuleName(int , wchar_t *);
 	void InitLoader();
 	void ShutdownLoader();
+	void ReloadConfig();
 }
 #ifdef DEBUG 
     #include <stdarg.h>

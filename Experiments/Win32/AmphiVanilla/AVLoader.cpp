@@ -244,6 +244,12 @@ extern "C" {
 		mod_vector.clear();
 		lt_dlexit();
 	}
+	void ReloadConfig() {
+		dict.update();
+		vector<OVModule*>::iterator m;
+		for(m = mod_vector.begin(); m != mod_vector.end(); m++)
+			(*m)->update(&dict, &srv);
+	}
 	int KeyEvent(int n, int c, wchar_t *s) {
 		if (!inited) init();
 
