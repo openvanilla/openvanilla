@@ -111,12 +111,34 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 				{
 					isChinese = !isChinese;
 					SendMessage( hToolbar, TB_CHANGEBITMAP, ID_CHI_ENG, MAKELPARAM(isChinese ? 2 : 3, 0));
+					HIMC imc = ImmGetContext( hIMEWnd );
+					if( imc )
+					{
+						DWORD conv, sentence;
+						ImmGetConversionStatus( imc, &conv, &sentence);
+						if( isChinese )
+							conv |= IME_CMODE_NATIVE;
+						else
+							conv &= ~IME_CMODE_NATIVE;
+						ImmSetConversionStatus( imc, conv, sentence);
+					}
 				}
 				break;
 			case ID_FULL_HALF:
 				{
 					isFull = !isFull;
 					SendMessage( hToolbar, TB_CHANGEBITMAP, ID_FULL_HALF, MAKELPARAM(isFull ? 4 : 5, 0));
+					HIMC imc = ImmGetContext( hIMEWnd );
+					if( imc )
+					{
+						DWORD conv, sentence;
+						ImmGetConversionStatus( imc, &conv, &sentence);
+						if( isFull )
+							conv |= IME_CMODE_FULLSHAPE;
+						else
+							conv &= ~IME_CMODE_FULLSHAPE;
+						ImmSetConversionStatus( imc, conv, sentence);
+					}
 				}
 				break;
 			case ID_CONFIG:
@@ -178,6 +200,8 @@ void UICreateStatusWindow(HWND hUIWnd)
 	if (!IsWindow(uiStatus.hWnd))
 	{
 		SIZE sz;
+
+		hIMEWnd = hUIWnd;
 
 		uiStatus.hWnd = 
 			CreateWindowEx(WS_EX_CONTROLPARENT|WS_EX_TOPMOST, UISTATUSCLASSNAME, NULL,

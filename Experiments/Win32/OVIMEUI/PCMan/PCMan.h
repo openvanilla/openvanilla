@@ -36,6 +36,7 @@ void PaintCandWindow(HWND);
 // Private variable
 extern HFONT hUIFont;
 extern HICON hMainIcon;
+extern HWND hIMEWnd;
 extern HWND hToolbar;
 extern HMENU hIMESelMenu;
 extern HINSTANCE hInst;

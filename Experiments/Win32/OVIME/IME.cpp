@@ -223,14 +223,28 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	memset(str, 0, 1024*sizeof(wchar_t));
 	if(spec == 1)
 		k = (char)out[0];
-	if(lpbKeyState[VK_SHIFT] & 0x80)
-		k = k + 0x0100;
-	else
-		k = k + 0x0000;
-	if(LOWORD(lpbKeyState[VK_CAPITAL]))
-		k = k + 0x0400;
-	else
-		k = k + 0x0000;
+
+	DWORD conv, sentence;
+	ImmGetConversionStatus( hIMC, &conv, &sentence);
+	if( !(conv & IME_CMODE_NATIVE) )	// AlphaNumaric mode
+	{
+			k = k + 0x0400;
+		if( lpbKeyState[VK_CAPITAL] || (lpbKeyState[VK_SHIFT] & 0x80) )
+			k = k + 0x0100;
+	}
+	else	// Chinese mode
+	{
+		if(lpbKeyState[VK_SHIFT] & 0x80)
+			k = k + 0x0100;
+		else
+			k = k + 0x0000;
+	
+		if(LOWORD(lpbKeyState[VK_CAPITAL]) )
+			k = k + 0x0400;
+		else
+			k = k + 0x0000;
+	}
+
 	
 	rlen = KeyEvent(UICurrentInputMethod(), k, str);
 
@@ -351,12 +365,20 @@ BOOL APIENTRY
 ImeSelect(HIMC hIMC, BOOL fSelect)
 {
     LPINPUTCONTEXT lpIMC;
-    
+
     if (!hIMC)
         return TRUE;
 
 	if (!fSelect)
 		return TRUE;
+
+	DWORD conv, sentence;
+	ImmGetConversionStatus( hIMC, &conv, &sentence);
+	if( isChinese )
+		conv |= IME_CMODE_NATIVE;
+	else
+		conv &= ~IME_CMODE_NATIVE;
+	ImmSetConversionStatus( hIMC, conv, sentence);
 
     if (lpIMC = ImmLockIMC(hIMC)) {		
 		LPCOMPOSITIONSTRING lpCompStr;

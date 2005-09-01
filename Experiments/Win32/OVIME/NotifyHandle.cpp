@@ -49,8 +49,14 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 		
 	case IMN_SETCONVERSIONMODE:
+		{
+			DWORD conv, sentence;
+			ImmGetConversionStatus( ImmGetContext(hWnd), &conv, &sentence);
+			isChinese = !!(conv & IME_CMODE_NATIVE);
+			isFullShape = !!(conv & IME_CMODE_FULLSHAPE);
+		}
 		break;
-		
+
 	case IMN_SETSENTENCEMODE:
 		break;
 		

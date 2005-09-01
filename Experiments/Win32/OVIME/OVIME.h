@@ -11,6 +11,8 @@
 extern HINSTANCE hInst;
 extern int CompX;
 extern int CompY;
+extern bool isChinese;
+extern bool isFullShape;
 extern MyOVDisplayServer dsvr;
 
 // Constant

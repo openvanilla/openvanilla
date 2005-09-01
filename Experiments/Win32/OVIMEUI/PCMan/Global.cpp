@@ -13,6 +13,7 @@ UICHILD uiStatus;
 UICHILD uiComp;
 UICHILD uiCand;
 HICON hMainIcon;
+HWND hIMEWnd;
 HWND hToolbar;
 HMENU hIMESelMenu;
 bool isChinese = true;
