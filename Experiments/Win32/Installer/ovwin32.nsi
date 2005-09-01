@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "OpenVanilla"
-!define PRODUCT_VERSION "0.7.1pre0"
+!define PRODUCT_VERSION "0.7.1rc0"
 !define PRODUCT_PUBLISHER "openvanilla.org"
 !define PRODUCT_WEB_SITE "http://openvanilla.org"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
