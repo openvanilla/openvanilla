@@ -559,12 +559,14 @@ int OVIMGenericContext::updateCandidateWindow() {
 
     for (int i=0; i<perpage; i++) {
         if (pgstart+i >= candicount) break;     // stop if idx exceeds candi counts
-        sprintf(dispstr, "%c.", parent->selkey[i]);
+	if(i>0) sprintf(dispstr, "%c.", parent->selkey[i]);
         c->append(dispstr)->append(candi->candidates[page*perpage+i])->append(" ");
     }
-    // add current page number
-    sprintf(dispstr, "(%d/%d)", page+1, (candicount-1)/perpage +1);
-    c->append(dispstr);
+    if(int pages = (candicount-1)/perpage ) {
+      // add current page number
+      sprintf(dispstr, "(%d/%d)", page+1, pages+1);
+      c->append(dispstr);
+    }
     c->update();
     if (!c->onScreen()) c->show();
     b->update();        // we do this to make some application happy
