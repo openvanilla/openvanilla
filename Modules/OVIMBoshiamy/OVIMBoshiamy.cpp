@@ -71,7 +71,7 @@ protected:
     int updateCandidateWindow();
     int closeCandidateWindow();
     int commitFirstCandidate();
-    int commitNthCandidate(int n);
+    int commitCandidate(int n);
     int candidateEvent();
     int candidatePageUp();
     int candidatePageDown();
@@ -415,11 +415,11 @@ int OVIMGenericContext::keyCompose() {
     int count=fetchCandidate(q);
     if (!count) {
         if(fetchCandidateSuffixRule(q,'v') > 1) 
-            return commitNthCandidate(1);
+            return commitCandidate(1);
         if(fetchCandidateSuffixRule(q,'r') > 2) 
-            return commitNthCandidate(2);
+            return commitCandidate(2);
         if(fetchCandidateSuffixRule(q,'s') > 3) 
-            return commitNthCandidate(3);
+            return commitCandidate(3);
         s->beep();
         return 1;
     }
@@ -535,8 +535,7 @@ int OVIMGenericContext::candidateEvent() {
       return keyPrintable();
     }
     else {
-        b->clear()->append(candi->candidates[i + page*perpage])->send();
-        closeCandidateWindow();
+        commitCandidate(i + page*perpage - 1);
     }    
     return 1;
 }
@@ -580,10 +579,13 @@ int OVIMGenericContext::closeCandidateWindow() {
 }
 
 int OVIMGenericContext::commitFirstCandidate() {
-    return commitNthCandidate(0);
+    return commitCandidate(0);
 }
 
-int OVIMGenericContext::commitNthCandidate(int n) {
+/* commitCandidate(n) : commit candi->candidates[n] if there's one.
+ *   n starts from zero.
+ */
+int OVIMGenericContext::commitCandidate(int n) {
     if (!candi) return 1;
     b->clear()->append(candi->candidates[n])->send();
     return closeCandidateWindow();        
