@@ -527,13 +527,7 @@ int OVIMGenericContext::candidateEvent() {
     int perpage=strlen(localSelKey);
     int i=0, l=perpage;
     for (i=0; i<perpage; i++) if(localSelKey[i]==kc) break;
-    if (i==l) {         // not a valid candidate key
-      if (candi) {
-	delete candi;
-	candi=NULL;
-      }
-      return keyPrintable();
-    }
+    if (i==l) return keyPrintable(); // not a selection key
     return commitCandidate(i + page*perpage);
 }
 
