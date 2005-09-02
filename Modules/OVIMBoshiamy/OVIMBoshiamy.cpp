@@ -525,7 +525,7 @@ int OVIMGenericContext::candidateEvent() {
         return candidatePageUp();
 
     int perpage=strlen(localSelKey);
-    int i=0, l=perpage, nextsyl=0;
+    int i=0, l=perpage;
     for (i=0; i<perpage; i++) if(localSelKey[i]==kc) break;
     if (i==l) {         // not a valid candidate key
       if (candi) {
@@ -537,10 +537,6 @@ int OVIMGenericContext::candidateEvent() {
     else {
         b->clear()->append(candi->candidates[i + page*perpage])->send();
         closeCandidateWindow();
-        if (nextsyl) {
-            seq.add(kc);
-            b->append(seq.compose())->update();
-        }
     }    
     return 1;
 }
