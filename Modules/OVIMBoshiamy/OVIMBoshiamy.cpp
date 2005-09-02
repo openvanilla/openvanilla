@@ -534,10 +534,7 @@ int OVIMGenericContext::candidateEvent() {
       }
       return keyPrintable();
     }
-    else {
-        commitCandidate(i + page*perpage - 1);
-    }    
-    return 1;
+    return commitCandidate(i + page*perpage);
 }
 
 int OVIMGenericContext::updateCandidateWindow() {
@@ -587,6 +584,7 @@ int OVIMGenericContext::commitFirstCandidate() {
  */
 int OVIMGenericContext::commitCandidate(int n) {
     if (!candi) return 1;
+    if (n < 0) return 1;
     b->clear()->append(candi->candidates[n])->send();
     return closeCandidateWindow();        
 }
