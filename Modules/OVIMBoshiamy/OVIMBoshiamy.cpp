@@ -1,5 +1,4 @@
-// OVIMGenericSQLite.cpp
-// currently we only do the table "cj"
+// OVIMBoshiamy.cpp
 
 #define OV_DEBUG
 
@@ -76,6 +75,7 @@ protected:
     int candidateEvent();
     int candidatePageUp();
     int candidatePageDown();
+    int updateScreen();
 
     OVKeyCode *k;
     OVBuffer *b;
@@ -324,7 +324,8 @@ int OVIMGenericContext::keyBackspace() {
     b->clear();
     if (!seq.isEmpty()) b->append(seq.compose());
     b->update();
-    return 1;
+
+    return updateScreen();
 }
 
 int OVIMGenericContext::keyPrintable() {
@@ -345,13 +346,8 @@ int OVIMGenericContext::keyPrintable() {
     }
 
     if (parent->isEndKey(k->code())) return keyCompose();
-    b->clear()->append(seq.compose())->update();
 
-    const char *q = seq.sequence();
-    if(fetchCandidate(q))
-        updateCandidateWindow();
-
-    return 1;
+    return updateScreen();
 }
 
 int OVIMGenericContext::keyNonRadical() {
@@ -400,6 +396,17 @@ int OVIMGenericContext::keyCapslock() {
         return 1;
     }
     return 0;
+}
+
+/* updateScreen()
+ *   Read current key sequence, fetch candidates, and update candidate window.
+ *   Doesn't commit anything.
+ */
+int OVIMGenericContext::updateScreen() {
+    const char *q = seq.sequence();
+    fetchCandidate(q);
+    b->clear()->append(q)->update();
+    return updateCandidateWindow();
 }
 
 int OVIMGenericContext::keyCompose() {
@@ -502,7 +509,11 @@ int OVIMGenericContext::candidateEvent() {
     char kc=k->code();
     char *localSelKey = parent->selkey;
 
-    if (kc==ovkEsc || kc==ovkBackspace || kc==ovkDelete) {  //ESC/BKSP/DELETE cancels candi window
+    if (kc==ovkBackspace || kc==ovkDelete)
+      return keyBackspace();
+
+    if (kc==ovkEsc) {
+        //ESC cancels candi window
         clear();
         b->clear()->update();
         return closeCandidateWindow();
@@ -535,7 +546,10 @@ int OVIMGenericContext::candidateEvent() {
 }
 
 int OVIMGenericContext::updateCandidateWindow() {
-    if (!candi) return 1;
+    if (!candi) { 
+      if (c->onScreen()) c->hide()->clear()->update();
+      return 1;
+    }
     int candicount=candi->count;
     int perpage=strlen(parent->selkey);
     int pgstart=page*perpage;
@@ -568,9 +582,7 @@ int OVIMGenericContext::closeCandidateWindow() {
 }
 
 int OVIMGenericContext::commitFirstCandidate() {
-    if (!candi) return 1;
-    b->clear()->append(candi->candidates[0])->send();
-    return closeCandidateWindow();        
+    return commitNthCandidate(0);
 }
 
 int OVIMGenericContext::commitNthCandidate(int n) {
