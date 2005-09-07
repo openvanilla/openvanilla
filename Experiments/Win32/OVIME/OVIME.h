@@ -5,6 +5,7 @@
 #include "Vk.h"
 #include "OVIMEUI.h"
 #include "AVDisplayServer.h"
+#include "DisplayServer.h"
 
 
 // Extern
@@ -13,7 +14,8 @@ extern int CompX;
 extern int CompY;
 extern bool isChinese;
 extern bool isFullShape;
-extern MyOVDisplayServer dsvr;
+extern DisplayServer *dsvr;
+//extern MyOVDisplayServer dsvr;
 
 // Constant
 #define CS_OVIME (CS_VREDRAW | CS_HREDRAW | CS_DBLCLKS)
@@ -58,10 +60,11 @@ extern "C" {
 	// OVVBPOJ
 	// Param: 1 -> Context number, 2 -> KeyCode, 3 -> Output
 	// Return: Length of returned string.
-	int KeyEvent(int n, int c, wchar_t *s);
+	int KeyEvent(int n, int c);
 	// Param: 1 -> Output
 	// Return: Number of names.
-	int ModuleName(int , wchar_t *);
+	int ModuleName(int , char *);
+	void SetDisplayServer(AVDisplayServer*);
 	void InitLoader();
 	void ShutdownLoader();
 	void ReloadConfig();

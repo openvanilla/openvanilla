@@ -1,5 +1,6 @@
 #include "AVEmbeddedLoader.h"
 #include <algorithm>
+#include <functional>
 using namespace std;
 
 struct sort_im : public binary_function< OVModule*, OVModule*, bool >

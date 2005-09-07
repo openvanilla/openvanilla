@@ -129,9 +129,6 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	static BOOL fPressOther = FALSE;
 	static BOOL fFirst = TRUE;
 	int k;
-	wchar_t str[1024];
-	int rlen;
-	char result[100][1024];
 
 	if ((lKeyData & 0x80000000) && uVKey != VK_SHIFT)
 		return FALSE;
@@ -221,7 +218,6 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		DebugLog("uVKey: %x, %c\n", LOWORD(uVKey), LOWORD(uVKey));
 	}
 	
-	memset(str, 0, 1024*sizeof(wchar_t));
 	if(spec == 1)
 		k = (char)out[0];
 
@@ -247,113 +243,18 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	}
 
 	
-	rlen = KeyEvent(UICurrentInputMethod(), k, str);
-
-	//rlen = KeyEvent(dsvr.getInputMethod(), k, str);
-	int n = 0;
-	int ln = 0;
-	wstring command(str);
-	wstringstream os(command);
-	vector<wstring> commandVector;
-	wstring temp;
-	while(os >> temp)
-		commandVector.push_back(temp);
-	wchar_t *decoded = NULL;
-	wcscpy(lpMyPrivate->CandStr, L"");
-	
-	for(vector<wstring>::iterator j = commandVector.begin();
-		j != commandVector.end();
-		++j)
+	dsvr->setHIMC(hIMC);
+	if(KeyEvent(UICurrentInputMethod(), k))
 	{
-		if(*j == L"bufclear")
-		{
-			wcscpy(lpMyPrivate->PreEditStr, L"");
-			MakeCompStr(lpMyPrivate, lpCompStr);
-		}
-		else if(*j == L"bufupdate")
-		{
-			j++;
-			if(*j == L"cursorpos") {
-				j--;
-				wcscpy(lpMyPrivate->PreEditStr, L"");
-			} else {
-				wcscpy(lpMyPrivate->PreEditStr, j->c_str());
-			}
-
-			MakeCompStr(lpMyPrivate, lpCompStr);
-		}
-		else if(*j == L"cursorpos")
-		{
-			j++;
-			lpCompStr->dwCursorPos = _wtoi(j->c_str());
-			UISetCursorPos(lpCompStr->dwCursorPos);
-		}
-		else if(*j == L"markfrom")
-		{
-			j++;
-			UISetMarkFrom(_wtoi(j->c_str()));
-		}
-		else if(*j == L"markto")
-		{
-			j++;
-			UISetMarkTo(_wtoi(j->c_str()));
-		}
-		else if(*j == L"bufsend")
-		{
-			j++;
-			if(*j == L"bufclear"|| *j == L"processed") { // if IM sending space
-				j--;
-				*j = L" ";
-			}
-
-			wcscpy(GETLPRESULTSTR(lpCompStr), j->c_str());
-			lpCompStr->dwResultStrLen = j->size();
-			wcscpy(lpMyPrivate->PreEditStr, L"");
-			wcscpy(lpMyPrivate->CandStr, L"");
-			MakeCompStr(lpMyPrivate, lpCompStr);
-			
-			MyGenerateMessage(hIMC,
-				WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
-			MyGenerateMessage(hIMC,
-				WM_IME_ENDCOMPOSITION, 0, 0);
-		}
-		else if(*j == L"candiclear")
-		{
-			ClearCandidate((LPCANDIDATEINFO)ImmLockIMCC(lpIMC->hCandInfo));
-			ImmUnlockIMCC(lpIMC->hCandInfo);
-		}
-		else if(*j == L"candiupdate")
-		{
-			j++;
-			wstring tmp;
-			while(*j != L"candiend") {
-				tmp += *j + L" ";
-				j++;
-			}
-			wcscpy(lpMyPrivate->CandStr, tmp.c_str());
-			UpdateCandidate(lpIMC, tmp.c_str());
-			MyGenerateMessage(hIMC,
+		RetVal = TRUE;
+		MyGenerateMessage(hIMC,
 				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
-		}
-		else if(*j == L"candishow")
-		{
-		}
-		else if(*j == L"candihide")
-		{
-			UIHideCandWindow();
-		}
-		else if(*j == L"unprocessed")
-		{
-			RetVal = FALSE;
-			MyGenerateMessage(hIMC,
+	}
+	else
+	{
+		RetVal = FALSE;
+		MyGenerateMessage(hIMC,
 				WM_IME_ENDCOMPOSITION, 0, 0);
-		}
-		else if(*j == L"processed")
-		{
-			RetVal = TRUE;
-			MyGenerateMessage(hIMC,
-				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
-		}
 	}
 	ImmUnlockIMCC(lpIMC->hPrivate);
 	ImmUnlockIMCC(lpIMC->hCompStr);

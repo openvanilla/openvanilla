@@ -41,7 +41,6 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		CompX = CompY = -1;
 		UICreateCompWindow(hWnd);
 		UICreateCandWindow(hWnd);
-		dsvr.setHWnd(hWnd);
 		break;
 		
 	case WM_IME_SETCONTEXT:
@@ -55,14 +54,12 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 					lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 					UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 					UIMoveCandWindow(hWnd, -1, -1, lpMyPrivate->CandStr);
-					dsvr.setBufPos(CompX, CompY)->setCandiPos(-1, -1);
 					ImmUnlockIMCC(lpIMC->hPrivate);
 				}
 				else
 				{
 					UIHideCandWindow();
 					UIHideCompWindow();
-					dsvr.showBuf(false)->showCandi(false);
 				}
 				ImmUnlockIMC(hUICurIMC);
 			}
@@ -70,7 +67,6 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			{
 				UIHideCandWindow();
 				UIHideCompWindow();
-				dsvr.showBuf(false)->showCandi(false);
 			}
 		}
 		break;
@@ -91,7 +87,6 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 		UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 		UIMoveCandWindow(hWnd, -1, -1, lpMyPrivate->CandStr);
-		dsvr.setBufPos(CompX, CompY)->setCandiPos(-1, -1)->notify();
 		ImmUnlockIMCC(lpIMC->hPrivate);
 		ImmUnlockIMC(hUICurIMC);
 		break;
@@ -99,7 +94,6 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	case WM_IME_ENDCOMPOSITION:
 		UIHideCompWindow();
 		UIHideCandWindow();
-		dsvr.showBuf(false)->showCandi(false)->notify();
 		break;
 		
 	case WM_IME_COMPOSITIONFULL:

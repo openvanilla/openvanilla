@@ -11,13 +11,14 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 	{
 	case DLL_PROCESS_ATTACH:
 		// load UI library
-		wchar_t str[1024];
-		dsvr.setHInst( (HINSTANCE)hModule );
+		char str[1024];
+		wchar_t wstr[1024];
+		SetDisplayServer(dsvr);
 		InitLoader();
 		for(int i = 0;; ++i) {
 			if(ModuleName(i, str)) {
-				//dsvr.pushInputMethod(str);
-				UIPushInputMethod(str);
+				MultiByteToWideChar(CP_UTF8, 0, str, strlen(str)+1, wstr, 1024);
+				UIPushInputMethod(wstr);
 			} else {
 				break;
 			}
