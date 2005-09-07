@@ -53,6 +53,7 @@ static void load_module(string path, string file)
 }
 typedef void (*loadfunc)(string path, string file);
 
+// scan_dir is platform dependent, each platform must have it's own implement
 static void scan_dir(string path, loadfunc func)
 {
 #ifdef WIN32
