@@ -25,10 +25,8 @@ public:
         return this;
     }
     virtual OVBuffer* update() { 
-	if(bufstr!="") {
-		dsvr->setBufString(bufstr.c_str());
-	}
-        return this;
+	    dsvr->setBufString(bufstr.c_str());
+	    return this;
     }
     virtual OVBuffer* update(int cursorPos, int markFrom=-1, int markTo=-1) {
 	    dsvr->setCursorPos(cursorPos);

@@ -75,6 +75,10 @@ AVDisplayServer *DisplayServer::setCandiString(const char *str)
 }
 AVDisplayServer *DisplayServer::showBuf(bool t)
 {
+	if(t)
+		UIShowCompWindow();
+	else
+		UIHideCompWindow();
 	return this;
 }
 AVDisplayServer *DisplayServer::showCandi(bool t)

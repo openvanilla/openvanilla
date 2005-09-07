@@ -48,8 +48,8 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		{
 			DWORD conv, sentence;
 			ImmGetConversionStatus( ImmGetContext(hWnd), &conv, &sentence);
-			isChinese = !!(conv & IME_CMODE_NATIVE);
-			isFullShape = !!(conv & IME_CMODE_FULLSHAPE);
+			isChinese = (conv & IME_CMODE_NATIVE);
+			isFullShape = (conv & IME_CMODE_FULLSHAPE);
 		}
 		break;
 
@@ -73,9 +73,6 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			ReleaseDC(lpIMC->hWnd,hDC);
 			LPMYPRIVATE lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 			UIMoveCandWindow(lpIMC->hWnd, ptSrc.x +szOffset.cx, ptSrc.y + szOffset.cy, lpMyPrivate->CandStr);
-			dsvr->showCandi(false);
-
-			//dsvr.setCandiPos(ptSrc.x +szOffset.cx, ptSrc.y + szOffset.cy)->notify();
 			ImmUnlockIMCC(lpIMC->hPrivate);
 		}
 		break;
