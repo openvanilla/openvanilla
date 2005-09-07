@@ -11,10 +11,14 @@ public:
 };
 
 class AVDictionary : public OVDictionary {
-	public:
+	private:
 		AVDictionary();
 		AVDictionary(const char *f);
 		AVDictionary(const char *f, const char *dict);
+	public:
+		static AVDictionary *getDict();
+		static AVDictionary *getDict(const char *f);
+		static AVDictionary *getDict(const char *f, const char *dict);
 		virtual ~AVDictionary();
 		virtual int keyExist(const char *key);
 		virtual int getInteger(const char *key);
@@ -38,6 +42,7 @@ class AVDictionary : public OVDictionary {
 		}
 
 	private:
+		static AVDictionary* globalDict;
 		std::string name;
 		std::string file;
 		bool autoflush;

@@ -143,7 +143,7 @@ protected:
 AVService srv;
 AVCandidate candi;
 AVBuffer buf;
-AVDictionary dict;
+AVDictionary *dict;
 AVConfig cfg;
 std::vector<OVInputMethodContext*> ctx_vector;
 int inited=0;
@@ -153,27 +153,28 @@ std::vector<bool> startedCtxVector;	// 這是很浪費的作法 orz
 bool sort_im(OVModule *a, OVModule *b)
 {
 	int pa = 0, pb = 0;
-	dict.setDict(a->identifier());
-	pa = dict.getInteger("priority");
-	dict.setDict(b->identifier());
-	pb = dict.getInteger("priority");
+	dict->setDict(a->identifier());
+	pa = dict->getInteger("priority");
+	dict->setDict(b->identifier());
+	pb = dict->getInteger("priority");
 	return (pa >= pb);
 }
 
 void init() {    
     if (inited) return;
-    dict.setPath(cfg.getBaseDir());
+    dict = AVDictionary::getDict(cfg.getBaseDir());
+    // dict->setPath(cfg.getBaseDir());
     // dict.setAutoFlush(true);
     vector<OVModule*> tmpmod_vector = AVLoadEverything(cfg.getModuleDir(), &srv);
     // delete unused im
     vector<OVModule*>::iterator m;
     for(m = tmpmod_vector.begin(); m != tmpmod_vector.end(); m++) {
-	    dict.setDict((*m)->identifier());
-	    if(!dict.keyExist("enable")) {
-		    dict.setInteger("enable", 1);
+	    dict->setDict((*m)->identifier());
+	    if(!dict->keyExist("enable")) {
+		    dict->setInteger("enable", 1);
 		    mod_vector.push_back(*m);
 	    } else {
-		    if(dict.getInteger("enable")) {
+		    if(dict->getInteger("enable")) {
 			    mod_vector.push_back(*m);
 		    }
 	    }
@@ -212,8 +213,8 @@ void initContext(int n) {
 	if(!strcmp(mod_vector[n]->moduleType(), "OVInputMethod"))
 	{
 		OVInputMethod *im = reinterpret_cast<OVInputMethod*>(mod_vector[n]);
-		dict.setDict(im->identifier());
-		im->initialize(&dict, &srv, cfg.getModuleDir());
+		dict->setDict(im->identifier());
+		im->initialize(dict, &srv, cfg.getModuleDir());
 		murmur("InitContext %s", im->localizedName("zh_TW"));
 		ctx_vector.at(n) = im->newContext();
 	}
@@ -237,15 +238,16 @@ extern "C" {
 		ctx_vector.clear();
 		for_each(mod_vector.begin(), mod_vector.end(), DeleteObject);
 		mod_vector.clear();
+		delete dict;
 		lt_dlexit();
 	}
 	void ReloadConfig() {
-		dict.update();
+		dict->update();
 		for(int i = 0; i < mod_vector.size(); i++) {
 			if(ctx_vector.at(i) != NULL) {
 				murmur("Reload: %s", mod_vector.at(i)->identifier());
-				dict.setDict(mod_vector.at(i)->identifier());
-				mod_vector.at(i)->update(&dict, &srv);
+				dict->setDict(mod_vector.at(i)->identifier());
+				mod_vector.at(i)->update(dict, &srv);
 			}
 		}
 	}

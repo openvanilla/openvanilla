@@ -22,7 +22,7 @@ AVEmbeddedLoader::AVEmbeddedLoader()
 {
 	m_srv = new AVService();
 	m_cfg = new AVConfig();
-	m_dict = new AVDictionary(m_cfg->getBaseDir());
+	m_dict = AVDictionary::getDict(m_cfg->getBaseDir());
 	m_modlist = AVLoadEverything(m_cfg->getModuleDir(), m_srv);
 	sort(m_modlist.begin(), m_modlist.end(), sort_im(m_dict));
 }

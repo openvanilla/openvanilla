@@ -3,6 +3,8 @@
 #include "AVDictionary.h"
 #include "OVUtility.h"
 
+AVDictionary *AVDictionary::globalDict = 0;
+
 AVDictionary::AVDictionary() : file(""), name(""), autoflush(false)
 {
 }
@@ -22,6 +24,27 @@ AVDictionary::~AVDictionary()
 {
 	if(!autoflush)
 		save();
+}
+
+AVDictionary* AVDictionary::getDict()
+{
+	if(!globalDict)
+		globalDict = new AVDictionary();
+	return globalDict;
+}
+
+AVDictionary* AVDictionary::getDict(const char *f)
+{
+	if(!globalDict)
+		globalDict = new AVDictionary(f);
+	return globalDict;
+}
+
+AVDictionary* AVDictionary::getDict(const char *f, const char *dict)
+{
+	if(!globalDict)
+		globalDict = new AVDictionary(f, dict);
+	return globalDict;
 }
 
 bool AVDictionary::createNewConfig(std::string file)
