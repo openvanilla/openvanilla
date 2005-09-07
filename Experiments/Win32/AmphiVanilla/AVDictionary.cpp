@@ -3,19 +3,25 @@
 #include "AVDictionary.h"
 #include "OVUtility.h"
 
-AVDictionary::AVDictionary() : file(""), name("")
+AVDictionary::AVDictionary() : file(""), name(""), autoflush(false)
 {
 }
 
-AVDictionary::AVDictionary(const char *f)
+AVDictionary::AVDictionary(const char *f) : autoflush(false)
 {
 	setPath(f);
 }
 
-AVDictionary::AVDictionary(const char *f, const char *dict)
+AVDictionary::AVDictionary(const char *f, const char *dict) : autoflush(false)
 {
 	setPath(f);
 	setDict(dict);
+}
+
+AVDictionary::~AVDictionary()
+{
+	if(!autoflush)
+		save();
 }
 
 bool AVDictionary::createNewConfig(std::string file)
@@ -24,6 +30,11 @@ bool AVDictionary::createNewConfig(std::string file)
 	tmp.Parse("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><OpenVanilla></OpenVanilla>");
 	tmp.SaveFile();
 	return true;
+}
+
+void AVDictionary::setAutoFlush(bool b)
+{
+	autoflush = b;
 }
 
 void AVDictionary::setPath(const char *path)
@@ -47,7 +58,8 @@ void AVDictionary::newDict()
 	TiXmlElement tmp("dict");
 	tmp.SetAttribute("name", name.c_str());
 	module = doc.RootElement()->InsertEndChild(tmp);
-	save();
+	if(autoflush)
+		save();
 }
 
 TiXmlNode *AVDictionary::findChild(TiXmlNode *parent, const char *node, const char *key)
@@ -69,10 +81,6 @@ void AVDictionary::update()
 void AVDictionary::save()
 {
 	doc.SaveFile();
-}
-
-AVDictionary::~AVDictionary()
-{
 }
 
 int AVDictionary::keyExist(const char *key)
@@ -118,7 +126,8 @@ const char* AVDictionary::setString(const char *key, const char *value)
 		child = module->ToElement()->InsertEndChild(tmp);
 	}
 	child->ToElement()->SetAttribute("value", value);
-	save();
+	if(autoflush)
+		save();
 	return value;
 }
 

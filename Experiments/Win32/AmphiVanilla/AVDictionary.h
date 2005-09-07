@@ -22,6 +22,7 @@ class AVDictionary : public OVDictionary {
 		virtual const char* getString(const char *key);
 		virtual const char* setString(const char *key, const char *value);
 		
+		void setAutoFlush(bool b);
 		void setPath(const char *path);
 		void setDict(const char *dict);
 		bool createNewConfig(std::string path);
@@ -39,6 +40,7 @@ class AVDictionary : public OVDictionary {
 	private:
 		std::string name;
 		std::string file;
+		bool autoflush;
 		void newDict();
 		TiXmlNode *findChild(TiXmlNode *parent, const char *node, const char *name);
 		TiXmlDocument doc;

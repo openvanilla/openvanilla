@@ -163,6 +163,7 @@ bool sort_im(OVModule *a, OVModule *b)
 void init() {    
     if (inited) return;
     dict.setPath(cfg.getBaseDir());
+    // dict.setAutoFlush(true);
     vector<OVModule*> tmpmod_vector = AVLoadEverything(cfg.getModuleDir(), &srv);
     // delete unused im
     vector<OVModule*>::iterator m;
