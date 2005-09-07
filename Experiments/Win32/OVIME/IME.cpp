@@ -132,6 +132,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	wchar_t str[1024];
 	int rlen;
 	char result[100][1024];
+
 	if ((lKeyData & 0x80000000) && uVKey != VK_SHIFT)
 		return FALSE;
 
@@ -300,7 +301,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		else if(*j == L"bufsend")
 		{
 			j++;
-			if(*j == L"bufclear") { // if IM sending space
+			if(*j == L"bufclear"|| *j == L"processed") { // if IM sending space
 				j--;
 				*j = L" ";
 			}
