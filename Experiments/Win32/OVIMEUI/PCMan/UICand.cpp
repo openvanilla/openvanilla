@@ -175,7 +175,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 				sz.cx,
 				sz.cy,
 				TRUE);
-			ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
+			//ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
 			InvalidateRect(uiCand.hWnd, NULL, FALSE);
 		}
 		else if( GetCandPosFromCompWnd(&sz) )
@@ -186,7 +186,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 				sz.cx,
 				sz.cy,
 				TRUE);
-			ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
+			//ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
 			InvalidateRect(uiCand.hWnd, NULL, FALSE);
 		}
 	}
