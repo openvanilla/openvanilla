@@ -129,7 +129,7 @@ protected:
         
         if(im->CommitReady()) {
             const char *s = im->CommitStr();
-            buf->clear()->append(srv->toUTF8("big5", s))->send();
+            buf->clear()->append(srv->toUTF8("big5-hkscs", s))->send();
         }
 
         int ps=-1, pe=-1, ips=im->PointStart(), ipe=im->PointEnd();
@@ -140,13 +140,13 @@ protected:
 
         // murmur("ips=%d, ipe=%d, ps=%d, pe=%d\n", ips, ipe, ps, pe);
 
-        s1 = srv->toUTF8("big5", im->Buffer(0,im->CursorPos()-1));
+        s1 = srv->toUTF8("big5-hkscs", im->Buffer(0,im->CursorPos()-1));
         buf->clear()->append(s1);
 
-        s2 = srv->toUTF8("big5", im->ZuinStr());
+        s2 = srv->toUTF8("big5-hkscs", im->ZuinStr());
         buf->append(s2);
 
-        s3 = srv->toUTF8("big5", im->Buffer(im->CursorPos()));
+        s3 = srv->toUTF8("big5-hkscs", im->Buffer(im->CursorPos()));
         buf->append(s3)->update(im->CursorPos(), ps, pe);
         // murmur("==> %s%s%s",s1,s2,s3);
     }
@@ -163,7 +163,7 @@ protected:
                     char b[2];
                     sprintf(b, "%c.", selkey);
                     textbar->append((char *)b);
-                    const char *cha = srv->toUTF8("big5", ch);
+                    const char *cha = srv->toUTF8("big5-hkscs", ch);
                     textbar->append(cha)->append(" ");
                 }
                 free(ch);
