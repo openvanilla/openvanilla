@@ -50,6 +50,14 @@ distribution.
 #define TIXML_LOG printf
 #endif
 
+#ifdef TINYXMLDLL_EXPORTS
+#define EXPORT_TINYXML __declspec(dllexport)
+#elif TINYXMLDLL_IMPORTS
+#define EXPORT_TINYXML __declspec(dllimport)
+#else
+#define EXPORT_TINYXML
+#endif
+
 #ifdef TIXML_USE_STL
 	#include <string>
  	#include <iostream>
@@ -129,7 +137,7 @@ const TiXmlEncoding TIXML_DEFAULT_ENCODING = TIXML_ENCODING_UNKNOWN;
 	A Decleration contains: Attributes (not on tree)
 	@endverbatim
 */
-class TiXmlBase
+class EXPORT_TINYXML TiXmlBase
 {
 	friend class TiXmlNode;
 	friend class TiXmlElement;
@@ -214,7 +222,7 @@ protected:
 
 	// See STL_STRING_BUG
 	// Utility class to overcome a bug.
-	class StringToBuffer
+	class EXPORT_TINYXML StringToBuffer
 	{
 	  public:
 		StringToBuffer( const TIXML_STRING& str );
@@ -354,7 +362,7 @@ private:
 	in a document, or stand on its own. The type of a TiXmlNode
 	can be queried, and it can be cast to its more defined type.
 */
-class TiXmlNode : public TiXmlBase
+class EXPORT_TINYXML TiXmlNode : public TiXmlBase
 {
 	friend class TiXmlDocument;
 	friend class TiXmlElement;
@@ -661,7 +669,7 @@ private:
 		  part of the tinyXML document object model. There are other
 		  suggested ways to look at this problem.
 */
-class TiXmlAttribute : public TiXmlBase
+class EXPORT_TINYXML TiXmlAttribute : public TiXmlBase
 {
 	friend class TiXmlAttributeSet;
 
@@ -780,7 +788,7 @@ private:
 		- I like circular lists
 		- it demonstrates some independence from the (typical) doubly linked list.
 */
-class TiXmlAttributeSet
+class EXPORT_TINYXML TiXmlAttributeSet
 {
 public:
 	TiXmlAttributeSet();
@@ -811,7 +819,7 @@ private:
 	and can contain other elements, text, comments, and unknowns.
 	Elements also contain an arbitrary number of attributes.
 */
-class TiXmlElement : public TiXmlNode
+class EXPORT_TINYXML TiXmlElement : public TiXmlNode
 {
 public:
 	/// Construct an element.
@@ -953,7 +961,7 @@ private:
 
 /**	An XML comment.
 */
-class TiXmlComment : public TiXmlNode
+class EXPORT_TINYXML TiXmlComment : public TiXmlNode
 {
 public:
 	/// Constructs an empty comment.
@@ -989,7 +997,7 @@ private:
 
 /** XML text. Contained in an element.
 */
-class TiXmlText : public TiXmlNode
+class EXPORT_TINYXML TiXmlText : public TiXmlNode
 {
 	friend class TiXmlElement;
 public:
@@ -1045,7 +1053,7 @@ private:
 	handled as special cases, not generic attributes, simply
 	because there can only be at most 3 and they are always the same.
 */
-class TiXmlDeclaration : public TiXmlNode
+class EXPORT_TINYXML TiXmlDeclaration : public TiXmlNode
 {
 public:
 	/// Construct an empty declaration.
@@ -1105,7 +1113,7 @@ private:
 
 	DTD tags get thrown into TiXmlUnknowns.
 */
-class TiXmlUnknown : public TiXmlNode
+class EXPORT_TINYXML TiXmlUnknown : public TiXmlNode
 {
 public:
 	TiXmlUnknown() : TiXmlNode( TiXmlNode::UNKNOWN )	{}
@@ -1138,7 +1146,7 @@ private:
 	XML pieces. It can be saved, loaded, and printed to the screen.
 	The 'value' of a document node is the xml file name.
 */
-class TiXmlDocument : public TiXmlNode
+class EXPORT_TINYXML TiXmlDocument : public TiXmlNode
 {
 public:
 	/// Create an empty document, that has no name.
@@ -1360,7 +1368,7 @@ private:
 	}
 	@endverbatim
 */
-class TiXmlHandle
+class EXPORT_TINYXML TiXmlHandle
 {
 public:
 	/// Create a handle from any node (at any depth of the tree.) This can be a null pointer.
