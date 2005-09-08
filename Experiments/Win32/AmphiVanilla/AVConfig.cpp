@@ -11,10 +11,13 @@ AVConfig::AVConfig()
 	char OV_BASEDIR[PATH_MAX];
 	char OV_USERDIR[PATH_MAX];
 	char OV_MODULEDIR[PATH_MAX];
+#ifdef WIN32
 	GetWindowsDirectory(OV_BASEDIR, MAX_PATH - 14);
 	sprintf(OV_BASEDIR, "%s\\%s", OV_BASEDIR, "\\OpenVanilla\\");
 	sprintf(OV_USERDIR, "%s\\%s", OV_BASEDIR, "\\User\\");
 	sprintf(OV_MODULEDIR, "%s\\%s", OV_BASEDIR, "\\Modules\\");
+#else
+#endif
 
 	setBaseDir(OV_BASEDIR);
 	setUserDir(OV_USERDIR);

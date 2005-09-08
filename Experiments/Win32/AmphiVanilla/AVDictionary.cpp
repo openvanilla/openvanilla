@@ -154,20 +154,21 @@ const char* AVDictionary::setString(const char *key, const char *value)
 	return value;
 }
 
-/*
+#ifdef TEST_DICT
 int main()
 {
-	AVDictionary d(".\\", "Orz");
-	if(d.keyExist("ccc"))
-		std::cout << "Ya!" << d.getString("ccc") << std::endl;
-	d.setInteger("ccc", 456);
-	d.setString("bbb", "hahaha");
-	if(d.keyExist("ccc"))
+	AVDictionary *d = AVDictionary::getDict(".\\", "Orz");
+	d->setAutoFlush(true);
+	if(d->keyExist("ccc"))
+		std::cout << "Ya!" << d->getString("ccc") << std::endl;
+	d->setInteger("ccc", 456);
+	d->setString("bbb", "hahaha");
+	if(d->keyExist("ccc"))
 	{
-		printf("orz/aaa: %d\n", d.getInteger("aaa"));
-		printf("orz/aaa: %s\n", d.getString("ccc"));
-		printf("orz/bbb: %s\n", d.getString("bbb"));
+		printf("orz/aaa: %d\n", d->getInteger("aaa"));
+		printf("orz/aaa: %s\n", d->getString("ccc"));
+		printf("orz/bbb: %s\n", d->getString("bbb"));
 	}
 	return 0;
 }
-*/
+#endif

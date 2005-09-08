@@ -84,6 +84,7 @@ static void scan_dir(string path, loadfunc func)
 	}
     }
     FindClose(hList);
+#else
 #endif
 }
 
