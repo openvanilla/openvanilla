@@ -1,3 +1,6 @@
+#ifndef OVIME_h
+#define OVIME_h
+
 #include <windows.h>
 #include <tchar.h>
 #include "imm.h"
@@ -97,3 +100,5 @@ extern "C" {
     inline static void DebugLog(const char* format,...) {
     }
 #endif
+
+#endif // OVIME_h

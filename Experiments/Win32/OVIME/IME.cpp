@@ -122,7 +122,6 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	LPCOMPOSITIONSTRING lpCompStr;
 
 //	UINT uNumTranKey;
-	LPMYPRIVATE lpMyPrivate;
 	BOOL RetVal = TRUE;
 	BOOL fOpen;
 	int spec;
@@ -174,7 +173,6 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	if(fFirst) fFirst = FALSE;
 
 	lpCompStr = (LPCOMPOSITIONSTRING)ImmLockIMCC(lpIMC->hCompStr);
-	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 
 	if(wcslen(GETLPCOMPSTR(lpCompStr)) == 0)
 		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);
@@ -243,7 +241,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	}
 
 	
-	dsvr->setHIMC(hIMC);
+	dsvr->lockIMC(hIMC);
 	if(KeyEvent(UICurrentInputMethod(), k))
 	{
 		RetVal = TRUE;
@@ -256,7 +254,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		MyGenerateMessage(hIMC,
 				WM_IME_ENDCOMPOSITION, 0, 0);
 	}
-	ImmUnlockIMCC(lpIMC->hPrivate);
+	dsvr->releaseIMC();
 	ImmUnlockIMCC(lpIMC->hCompStr);
 	ImmUnlockIMC(hIMC);
 

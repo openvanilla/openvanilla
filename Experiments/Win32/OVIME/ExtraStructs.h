@@ -1,3 +1,6 @@
+#ifndef ExtraStructs_h
+#define ExtraStructs_h
+
 #define MAXSTRSIZE (1024)
 #define MAXCOMPSIZE (1024)
 #define MAXCANDSTRNUM (40)
@@ -34,3 +37,5 @@ typedef struct _tagMYCAND{
     DWORD          offset[MAXCANDSTRNUM];
     wchar_t          szCandStr[MAXCANDSTRNUM][MAXCANDSTRSIZE];
 } MYCAND, *LPMYCAND;
+
+#endif // ExtraStructs_h
