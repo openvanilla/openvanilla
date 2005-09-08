@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "PCMan.h"
+#include "AVDictionary.h"
+#include "AVConfig.h"
 
 #define		ITEMS_PER_ROW	4
 
@@ -123,6 +125,10 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		sz.cx = 0;
 		sz.cy = 0;
 
+		AVConfig cfg;
+		AVDictionary *dict = AVDictionary::getDict(cfg.getBaseDir(), "OVIMEUI");
+		int items_per_row = dict->keyExist("items_per_row") ? dict->getInteger("items_per_row") : ITEMS_PER_ROW;
+
 		// No Cand
 		if(lpStr == NULL) {
 			ShowWindow(uiCand.hWnd, SW_HIDE);
@@ -144,7 +150,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			candsz.cy += 2;
 			width += candsz.cx;
 			++num;
-			if( num >= ITEMS_PER_ROW )
+			if( num >= items_per_row )
 			{
 				sz.cy += candsz.cy;
 				if( width > sz.cx )
@@ -156,7 +162,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		}
 		if( width > sz.cx )
 			sz.cx = width;
-		if( num > 0 && num < ITEMS_PER_ROW )
+		if( num > 0 && num < items_per_row )
 			sz.cy += candsz.cy;
 
 		sz.cy += 2;
@@ -210,6 +216,10 @@ void PaintCandWindow(HWND hCandWnd)
 		SetTextColor( hDC, GetSysColor( COLOR_WINDOWTEXT ) );
 		SetBkColor( hDC, GetSysColor( COLOR_WINDOW ) );
 
+		AVConfig cfg;
+		AVDictionary *dict = AVDictionary::getDict(cfg.getBaseDir(), "OVIMEUI");
+		int items_per_row = dict->keyExist("items_per_row") ? dict->getInteger("items_per_row") : ITEMS_PER_ROW;
+
 		RECT cand_rc;	cand_rc.left = 1;	cand_rc.top = 1;
 		LPCTSTR cand = lpCandStr;
 		int num = 0;
@@ -231,7 +241,7 @@ void PaintCandWindow(HWND hCandWnd)
 			ExtTextOut( hDC, cand_rc.left + 2, cand_rc.top, ETO_OPAQUE, &cand_rc, cand, 
 				len, NULL);
 
-			if( num >= ITEMS_PER_ROW && (i + 1) < numCand )
+			if( num >= items_per_row && (i + 1) < numCand )
 			{
 				cand_rc.left = 1;
 				cand_rc.top += candsz.cy;
