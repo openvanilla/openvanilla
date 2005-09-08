@@ -14,6 +14,8 @@ LINK32_OBJS = \
 	      $(OUTDIR)\DisplayServer.obj \
               $(OUTDIR)\OVStringToolKit.obj \
 	      $(OUTDIR)\AVConfig.obj \
+	      $(OUTDIR)\AVBuffer.obj \
+	      $(OUTDIR)\AVCandidate.obj \
 	      $(OUTDIR)\AVLoader.obj \
 	      $(OUTDIR)\AVLoaderUtility.obj \
 	      $(OUTDIR)\AVDictionary.obj \
@@ -66,6 +68,12 @@ FILE=OVStringToolKit
 $(OUTDIR)\$(FILE).obj: ..\..\Source\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" ..\..\Source\$(FILE).cpp
 FILE=AVConfig
+$(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
+FILE=AVBuffer
+$(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
+FILE=AVCandidate
 $(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
 FILE=AVLoader
