@@ -9,6 +9,7 @@
 #include "OVIMEUI.h"
 #include "AVDisplayServer.h"
 #include "DisplayServer.h"
+#include "AVLoader.h"
 
 
 // Extern
@@ -18,6 +19,7 @@ extern int CompY;
 extern bool isChinese;
 extern bool isFullShape;
 extern DisplayServer *dsvr;
+extern AVLoader *loader;
 //extern MyOVDisplayServer dsvr;
 
 // Constant
@@ -63,6 +65,7 @@ extern "C" {
 	// OVVBPOJ
 	// Param: 1 -> Context number, 2 -> KeyCode, 3 -> Output
 	// Return: Length of returned string.
+	/*
 	int KeyEvent(int n, int c);
 	// Param: 1 -> Output
 	// Return: Number of names.
@@ -71,6 +74,7 @@ extern "C" {
 	void InitLoader();
 	void ShutdownLoader();
 	void ReloadConfig();
+	*/
 }
 #ifdef DEBUG 
     #include <stdarg.h>

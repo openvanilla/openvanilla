@@ -8,7 +8,9 @@ using namespace std;
 
 class AVBuffer : public OVBuffer {
 public:
+    AVBuffer();
     AVBuffer(AVDisplayServer* svr);
+    void setDisplayServer(AVDisplayServer* svr);
     virtual OVBuffer* clear();
     virtual OVBuffer* append(const char *s);
     virtual OVBuffer* send();

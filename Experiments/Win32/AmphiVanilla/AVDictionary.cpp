@@ -47,6 +47,13 @@ AVDictionary* AVDictionary::getDict(const char *f, const char *dict)
 	return globalDict;
 }
 
+void AVDictionary::shutdown()
+{
+	if(globalDict)
+		delete globalDict;
+	globalDict = 0;
+}
+
 bool AVDictionary::createNewConfig(std::string file)
 {
 	TiXmlDocument tmp(file);

@@ -21,7 +21,8 @@ struct OVLibrary {
    TypeGetLibVersion getLibVersion;
 };
 
-vector<OVModule*> AVLoadEverything(string path, OVService *srv);
+void AVLoadEverything(string path, OVService *srv, vector<OVModule*> &vector);
+void AVUnloadLibrary(vector<OVModule*> &vector);
 
 
 #endif // AVLoaderUtility_h

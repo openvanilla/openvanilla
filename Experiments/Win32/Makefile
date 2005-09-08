@@ -16,6 +16,7 @@ LINK32_OBJS = \
 	      $(OUTDIR)\AVConfig.obj \
 	      $(OUTDIR)\AVBuffer.obj \
 	      $(OUTDIR)\AVCandidate.obj \
+	      $(OUTDIR)\AVEmbeddedLoader.obj \
 	      $(OUTDIR)\AVLoader.obj \
 	      $(OUTDIR)\AVLoaderUtility.obj \
 	      $(OUTDIR)\AVDictionary.obj \
@@ -37,7 +38,7 @@ $(OUTDIR)\$(Proj).dll: $(OUTDIR) $(LINK32_OBJS) $(OUTDIR)\$(Proj).res
 	-out:$(OUTDIR)\$(Proj).ime\
 	-def:OVIME\$(Proj).def
 
-cflags = /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I"AmphiVanilla" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_UNICODE" /D "UNICODE" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP 
+cflags = /wd4005 /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I"AmphiVanilla" /I "AmphiVanilla/tinyxml" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_UNICODE" /D "UNICODE" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP 
 FILE=ControlHandle
 $(OUTDIR)\$(FILE).obj: OVIME\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVIME\$(FILE).cpp
@@ -63,7 +64,7 @@ FILE=DisplayServer
 $(OUTDIR)\$(FILE).obj: OVIME\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVIME\$(FILE).cpp
 
-cflags = /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I "AmphiVanilla/tinyxml" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP /GR
+cflags = /wd4005 /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I "AmphiVanilla/tinyxml" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP /GR
 FILE=OVStringToolKit
 $(OUTDIR)\$(FILE).obj: ..\..\Source\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" ..\..\Source\$(FILE).cpp
@@ -74,6 +75,9 @@ FILE=AVBuffer
 $(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
 FILE=AVCandidate
+$(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
+FILE=AVEmbeddedLoader
 $(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
 FILE=AVLoader

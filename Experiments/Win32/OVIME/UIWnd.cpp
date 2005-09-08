@@ -117,7 +117,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 
 	case WM_IME_RELOADCONFIG:
-		ReloadConfig();
+		loader = AVLoader::getLoader();
+		loader->reloadConfig();
 		break;
 
 	default:

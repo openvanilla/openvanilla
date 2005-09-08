@@ -242,7 +242,8 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 
 	
 	dsvr->lockIMC(hIMC);
-	if(KeyEvent(UICurrentInputMethod(), k))
+	loader = AVLoader::getLoader();
+	if(loader->keyEvent(UICurrentInputMethod(), k))
 	{
 		RetVal = TRUE;
 		MyGenerateMessage(hIMC,

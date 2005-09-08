@@ -24,7 +24,7 @@ AVEmbeddedLoader::AVEmbeddedLoader()
 	m_srv = new AVService();
 	m_cfg = new AVConfig();
 	m_dict = AVDictionary::getDict(m_cfg->getBaseDir());
-	m_modlist = AVLoadEverything(m_cfg->getModuleDir(), m_srv);
+	AVLoadEverything(m_cfg->getModuleDir(), m_srv, m_modlist);
 	sort(m_modlist.begin(), m_modlist.end(), sort_im(m_dict));
 }
 
@@ -32,7 +32,8 @@ AVEmbeddedLoader::~AVEmbeddedLoader()
 {
 	delete m_srv;
 	delete m_cfg;
-	delete m_dict;
+	AVDictionary::shutdown();
+	AVUnloadLibrary(m_modlist);
 }
 
 AVService *AVEmbeddedLoader::srv() { return m_srv; }

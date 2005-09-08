@@ -1,6 +1,12 @@
 #include "AVBuffer.h"
 
+AVBuffer::AVBuffer(){};
 AVBuffer::AVBuffer(AVDisplayServer* svr) : dsvr(svr) {};
+
+void AVBuffer::setDisplayServer(AVDisplayServer *svr)
+{
+	dsvr = svr;
+}
 
 OVBuffer* AVBuffer::clear()
 {

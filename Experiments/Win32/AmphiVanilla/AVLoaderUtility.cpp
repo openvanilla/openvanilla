@@ -5,7 +5,7 @@
 #endif
 using namespace std;
 
-static vector<OVModule*> mod_vector;
+vector<OVModule*> *mod_vector;
 static OVService *lsrv;
 
 static OVLibrary* open_module(const char* modname){
@@ -45,7 +45,7 @@ static void load_module(string path, string file)
 	mod->initLibrary(lsrv, path.c_str());
 	for(int i=0; m = mod->getModule(i); i++)
 	{	
-	    mod_vector.push_back(m);
+	    mod_vector->push_back(m);
 	    murmur("Load OVModule: %s\n", m->localizedName("zh_TW"));
 	}
 	delete mod;
@@ -88,12 +88,21 @@ static void scan_dir(string path, loadfunc func)
 #endif
 }
 
-vector<OVModule*> AVLoadEverything(string path, OVService *srv)
-{
+void AVLoadEverything(string path, OVService *srv, vector<OVModule*> &vector)
+{   
+    mod_vector = &vector;
     lt_dlinit();
     lt_dlsetsearchpath(path.c_str());
     lsrv = srv;
     scan_dir(path, load_module);
-//    lt_dlexit();
-    return mod_vector;
+}
+
+void AVUnloadLibrary(vector<OVModule*> &vec)
+{
+	/* FIXME: uncomment this will cause segfault in ime.
+	for(int i = 0; i < vec.size(); i++)
+		if(vec.at(i) != NULL)
+			delete vec.at(i);
+	*/
+	lt_dlexit();
 }

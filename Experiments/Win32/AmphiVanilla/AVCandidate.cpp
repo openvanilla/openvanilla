@@ -1,7 +1,12 @@
 #include "AVCandidate.h"
 
+AVCandidate::AVCandidate() : onscreen(0) {}
 AVCandidate::AVCandidate(AVDisplayServer* svr) : dsvr(svr), onscreen(0) {}
 
+void AVCandidate::setDisplayServer(AVDisplayServer *svr)
+{
+	dsvr = svr;
+}
 OVCandidate* AVCandidate::clear() {
 	candistr = "";
 	return this;

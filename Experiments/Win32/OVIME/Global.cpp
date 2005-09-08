@@ -7,3 +7,4 @@ int CompY;
 bool isChinese = true;
 bool isFullShape = false;
 DisplayServer *dsvr = new DisplayServer();
+AVLoader* loader;

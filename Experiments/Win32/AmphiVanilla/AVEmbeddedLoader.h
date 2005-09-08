@@ -8,7 +8,7 @@
 #include "AVLoaderUtility.h"
 #include "AVService.h"
 
-class AVEmbeddedLoader
+class AVEmbeddedLoader : public OVBase
 {
 public:
 	AVEmbeddedLoader();

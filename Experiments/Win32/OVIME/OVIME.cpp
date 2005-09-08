@@ -13,10 +13,10 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		// load UI library
 		char str[1024];
 		wchar_t wstr[1024];
-		SetDisplayServer(dsvr);
-		InitLoader();
+		loader = AVLoader::getLoader();
+		loader->connectDisplayServer(dsvr);
 		for(int i = 0;; ++i) {
-			if(ModuleName(i, str)) {
+			if(loader->moduleName(i, str)) {
 				MultiByteToWideChar(CP_UTF8, 0, str, strlen(str)+1, wstr, 1024);
 				UIPushInputMethod(wstr);
 			} else {
@@ -46,9 +46,9 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		break;
 	case DLL_PROCESS_DETACH:
 		// free UI library
+		AVLoader::shutdown();
 		UnregisterClass(UICLASSNAME, (HINSTANCE)hModule);
 		IMEUIUnRegisterClass( (HINSTANCE)hModule );
-		ShutdownLoader();
 		break;
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:

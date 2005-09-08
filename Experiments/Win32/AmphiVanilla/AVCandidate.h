@@ -7,7 +7,9 @@ using std::string;
 
 class AVCandidate : public OVCandidate  {
 public:
+    AVCandidate();
     AVCandidate(AVDisplayServer* svr);
+    void setDisplayServer(AVDisplayServer *svr);
     virtual OVCandidate* clear();
     virtual OVCandidate* append(const char *s);
     virtual OVCandidate* hide();

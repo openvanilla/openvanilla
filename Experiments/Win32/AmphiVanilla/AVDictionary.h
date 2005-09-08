@@ -19,6 +19,7 @@ class AVDictionary : public OVDictionary {
 		static AVDictionary *getDict();
 		static AVDictionary *getDict(const char *f);
 		static AVDictionary *getDict(const char *f, const char *dict);
+		static void shutdown();
 		virtual ~AVDictionary();
 		virtual int keyExist(const char *key);
 		virtual int getInteger(const char *key);
