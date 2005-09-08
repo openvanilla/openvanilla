@@ -15,7 +15,6 @@ OVBuffer* AVBuffer::append(const char *s)
 OVBuffer* AVBuffer::send()
 {
 	dsvr->sendBuf(bufstr.c_str());
-	bufstr="";
 	return this;
 }
 OVBuffer* AVBuffer::update()
