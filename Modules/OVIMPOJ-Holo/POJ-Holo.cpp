@@ -7,24 +7,24 @@
 
 const char *pojHoloToneComposeKey=" 12345678";
 const char *pojHoloVowel="aeimnoquAEIMNOQU";
-const char *pojHoloNasel="ⁿ";
+const char *pojHoloNasel="\xe2\x81\xbf";
 const char *pojHoloToneTable[]= {
-    "a", "á", "à", "a", "â", "á", "ā", "a̍",
-    "e", "é", "è", "e", "ê", "é", "ē", "e̍",
-    "i", "í", "ì", "i", "î", "í", "ī", "i̍",
-    "m", "ḿ", "m̀", "m", "m̂", "ḿ", "m̄", "m̍",
-    "n", "ń", "ǹ", "n", "n̂", "ń", "n̄", "n̍",
-    "o", "ó", "ò", "o", "ô", "ó", "ō", "o̍",
-    "o·","ó·","ò·","o·","ô·","o·","ō·","o̍·",
-    "u", "ú", "ù", "u", "û", "ú", "ū", "u̍",
-    "A", "Á", "À", "a", "Â", "Á", "Ā", "A̍",
-    "E", "É", "È", "E", "Ê", "É", "Ē", "E̍",
-    "I", "Í", "Ì", "I", "Î", "Í", "Ī", "I̍",
-    "M", "Ḿ", "M̀", "M", "M̂", "Ḿ", "M̄", "M̍",
-    "N", "Ń", "Ǹ", "N", "N̂", "Ń", "N̄", "N̍",
-    "O", "Ó", "Ò", "O", "Ô", "Ó", "Ō", "O̍",
-    "O·","Ó·","Ò·","O·","Ô·","Ó·","Ō·","O̍·",
-    "U", "Ú", "Ù", "U", "Û", "Ú", "Ū", "U̍"
+    "a", "\xc3\xa1", "\xc3\xa0", "a", "\xc3\xa2", "\xc3\xa1", "\xc4\x81", "a\xcc\x8d",
+    "e", "\xc3\xa9", "\xc3\xa8", "e", "\xc3\xaa", "\xc3\xa9", "\xc4\x93", "e\xcc\x8d",
+    "i", "\xc3\xad", "\xc3\xac", "i", "\xc3\xae", "\xc3\xad", "\xc4\xab", "i\xcc\x8d",
+    "m", "\xe1\xb8\xbf", "m\xcc\x80", "m", "m\xcc\x82", "\xe1\xb8\xbf", "m\xcc\x84", "m\xcc\x8d",
+    "n", "\xc5\x84", "\xc7\xb9", "n", "n\xcc\x82", "\xc5\x84", "n\xcc\x84", "n\xcc\x8d",
+    "o", "\xc3\xb3", "\xc3\xb2", "o", "\xc3\xb4", "\xc3\xb3", "\xc5\x8d", "o\xcc\x8d",
+    "o\xc2\xb7","\xc3\xb3\xc2\xb7","\xc3\xb2\xc2\xb7","o\xc2\xb7","\xc3\xb4\xc2\xb7","o\xc2\xb7","\xc5\x8d\xc2\xb7","o\xcc\x8d\xc2\xb7",
+    "u", "\xc3\xba", "\xc3\xb9", "u", "\xc3\xbb", "\xc3\xba", "\xc5\xab", "u\xcc\x8d",
+    "A", "\xc3\x81", "\xc3\x80", "a", "\xc3\x82", "\xc3\x81", "\xc4\x80", "A\xcc\x8d",
+    "E", "\xc3\x89", "\xc3\x88", "E", "\xc3\x8a", "\xc3\x89", "\xc4\x92", "E\xcc\x8d",
+    "I", "\xc3\x8d", "\xc3\x8c", "I", "\xc3\x8e", "\xc3\x8d", "\xc4\xaa", "I\xcc\x8d",
+    "M", "\xe1\xb8\xbe", "M\xcc\x80", "M", "M\xcc\x82", "\xe1\xb8\xbe", "M\xcc\x84", "M\xcc\x8d",
+    "N", "\xc5\x83", "\xc7\xb8", "N", "N\xcc\x82", "\xc5\x83", "N\xcc\x84", "N\xcc\x8d",
+    "O", "\xc3\x93", "\xc3\x92", "O", "\xc3\x94", "\xc3\x93", "\xc5\x8c", "O\xcc\x8d",
+    "O\xc2\xb7","\xc3\x93\xc2\xb7","\xc3\x92\xc2\xb7","O\xc2\xb7","\xc3\x94\xc2\xb7","\xc3\x93\xc2\xb7","\xc5\x8c\xc2\xb7","O\xcc\x8d\xc2\xb7",
+    "U", "\xc3\x9a", "\xc3\x99", "U", "\xc3\x9b", "\xc3\x9a", "\xc5\xaa", "U\xcc\x8d"
 };
 
 // vcomposed state
@@ -48,8 +48,8 @@ void POJHoloKeySequence::clear() {
     prebindwait=0;
     presettone=0;
     bindvowel=0;
-    bzero(seq, POJ_Holo_MaxSeqLen);
-    bzero(composebuf, POJ_Holo_MaxBufLen);
+    memset(seq, 0, POJ_Holo_MaxSeqLen);
+    memset(composebuf, 0, POJ_Holo_MaxBufLen);
 }
 
 bool POJHoloKeySequence::isComposeKey(char c) {
@@ -187,7 +187,9 @@ const char *POJHoloKeySequence::compose(bool pureascii)
     // if asciioutput is on, directly copy the internal representation
     // presumes normailization
     if (pureascii) {
-        b=stpcpy(composebuf, seq);
+        b=composebuf;
+        strcpy(composebuf, seq);
+        while (*b++) ;
         if (presettone) *b++ = presettone+'0';
         *b=0;
         return composebuf;
