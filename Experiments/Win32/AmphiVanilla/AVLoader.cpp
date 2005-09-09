@@ -89,9 +89,8 @@ void AVLoader::connectDisplayServer(AVDisplayServer *svr)
 	buf->setDisplayServer(dsvr);
 }
 
-bool AVLoader::keyEvent(int n, int c)
+bool AVLoader::keyEvent(int n, AVKeyCode c)
 {
-	AVKeyCode kc(c);		
 	//if( n > ctx_vector.size() - 1) n = ctx_vector.size() - 1;
 	int ctxVectorNum = static_cast<int>(ctx_vector.size()) - 1;
 	if(n > ctxVectorNum) return 0;
@@ -103,7 +102,7 @@ bool AVLoader::keyEvent(int n, int c)
 		startedCtxVector[n] = true;
 	}
 	try {
-		if(!ctx_vector[n]->keyEvent(&kc, buf, candi, em->srv()))
+		if(!ctx_vector[n]->keyEvent(&c, buf, candi, em->srv()))
 			st = false;
 	}
 	catch (...) {}

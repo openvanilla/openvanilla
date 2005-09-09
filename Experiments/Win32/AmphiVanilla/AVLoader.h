@@ -17,7 +17,7 @@ public:
 	void initContext(int n);
 	void reloadConfig();
 	void connectDisplayServer(AVDisplayServer *svr);
-	bool keyEvent(int n, int c);
+	bool keyEvent(int n, AVKeyCode c);
 	bool moduleName(int i, char *str);
 private:
 	AVLoader();

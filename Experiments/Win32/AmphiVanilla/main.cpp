@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "AVLoader.h"
+#include "AVKeyCode.h"
 #include "AVDisplayServer.h"
 #include "DummyDisplayServer.h"
 
@@ -20,7 +21,9 @@ int main(int argc, char *argv[])
 			break;
 		if(c == '\n')
 			continue;
-		loader->keyEvent(0, c);
+		AVKeyCode kc(c);
+		kc.setCapslock(1);
+		loader->keyEvent(0, kc);
 	}
 	loader->reloadConfig();
 	AVLoader::shutdown();

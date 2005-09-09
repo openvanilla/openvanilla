@@ -1,4 +1,5 @@
 #include "OVIME.h"
+#include "AVKeyCode.h"
 
 #include <vector>
 #include <string>
@@ -129,16 +130,16 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	static BOOL fFirst = TRUE;
 	int k;
 
-	if ((lKeyData & 0x80000000) && uVKey != VK_SHIFT)
+	if ((lKeyData & 0x80000000) && (uVKey != VK_SHIFT || uVKey != VK_CONTROL || uVKey != VK_CAPITAL))
 		return FALSE;
 
 	if (!(lKeyData & 0x80000000) && uVKey == VK_SHIFT)
 		return FALSE;
 
-	if ((lKeyData & 0x80000000) && uVKey != VK_CONTROL)
+	if (!(lKeyData & 0x80000000) && uVKey == VK_CONTROL)
 		return FALSE;
 
-	if (!(lKeyData & 0x80000000) && uVKey == VK_CONTROL)
+	if (!(lKeyData & 0x80000000) && uVKey == VK_CAPITAL)
 		return FALSE;
 
 	if (lpbKeyState[VK_MENU] & 0x80 ) return FALSE;
@@ -219,31 +220,18 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	if(spec == 1)
 		k = (char)out[0];
 
+	AVKeyCode keycode(k);
 	DWORD conv, sentence;
 	ImmGetConversionStatus( hIMC, &conv, &sentence);
 	if( !(conv & IME_CMODE_NATIVE) )	// AlphaNumaric mode
-	{
-			k = k + 0x0400;
-		if( lpbKeyState[VK_CAPITAL] || (lpbKeyState[VK_SHIFT] & 0x80) )
-			k = k + 0x0100;
-	}
-	else	// Chinese mode
-	{
-		if(lpbKeyState[VK_SHIFT] & 0x80)
-			k = k + 0x0100;
-		else
-			k = k + 0x0000;
-	
-		if(LOWORD(lpbKeyState[VK_CAPITAL]) )
-			k = k + 0x0400;
-		else
-			k = k + 0x0000;
-	}
-
-	
+		keycode.setCapslock(1);
+	if(lpbKeyState[VK_SHIFT] & 0x80)
+		keycode.setShift(1);
+	if(LOWORD(lpbKeyState[VK_CAPITAL]) )
+		keycode.setCapslock(1);
 	dsvr->lockIMC(hIMC);
 	loader = AVLoader::getLoader();
-	if(loader->keyEvent(UICurrentInputMethod(), k))
+	if(loader->keyEvent(UICurrentInputMethod(), keycode))
 	{
 		RetVal = TRUE;
 		MyGenerateMessage(hIMC,

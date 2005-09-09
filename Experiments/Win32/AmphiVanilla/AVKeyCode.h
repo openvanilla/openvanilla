@@ -1,17 +1,18 @@
 #ifndef AVKeyCode_h
 #define AVKeyCode_h
 #include "OpenVanilla.h"
+#include <ctype.h>
 
 class AVKeyCode : public OVKeyCode  {
 public:
-    AVKeyCode (int p=0)          { chr=p; shift=capslock=ctrl=alt=0; }
-    virtual int code()              { return chr & 0x00FF; }
-    virtual int isShift()           { return chr & 0x0100; }
-    virtual int isCapslock()        { return chr & 0x0400; }
+    AVKeyCode (int p=0)          { chr=toupper(p); shift=capslock=ctrl=alt=0; }
+    virtual int code()              { return (shift||capslock||ctrl||alt) ? chr : tolower(chr); }
+    virtual int isShift()           { return shift; }
+    virtual int isCapslock()        { return capslock; }
     virtual int isCtrl()            { return ctrl; }
     virtual int isAlt()             { return alt; }
     
-    virtual void setCode(int x)     { chr=x; }
+    virtual void setCode(int x)     { chr=toupper(x); }
     virtual void setShift(int x)    { shift=x; }
     virtual void setCapslock(int x) { capslock=x; }
     virtual void setCtrl(int x)     { ctrl=x; }
