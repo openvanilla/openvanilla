@@ -126,7 +126,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		sz.cy = 0;
 
 		AVConfig cfg;
-		AVDictionary *dict = AVDictionary::getDict(cfg.getBaseDir(), "OVIMEUI");
+		AVDictionary *dict = AVDictionary::getDict(cfg.getUserDir(), "OVIMEUI");
 		int items_per_row = dict->keyExist("items_per_row") ? dict->getInteger("items_per_row") : ITEMS_PER_ROW;
 
 		// No Cand
