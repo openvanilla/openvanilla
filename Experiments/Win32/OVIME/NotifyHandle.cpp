@@ -30,7 +30,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			UIMoveStatusWindow(hWnd, rec.right - 50, rec.bottom - 50);
 			first = true;
 		}
-		UIShowStatusWindow();	
+		UIShowStatusWindow();
 		break;
 		
 	case IMN_OPENCANDIDATE:
