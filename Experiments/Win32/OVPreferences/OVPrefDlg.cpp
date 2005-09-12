@@ -563,6 +563,7 @@ void OVPrefDlg::OnCancel(wxCommandEvent& evt)
 	// Generic
 	SaveGenericConfig();
 
+	dict->save();
 	wxDialog::OnCancel(evt);
 }
 
