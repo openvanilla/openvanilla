@@ -1,7 +1,12 @@
+#include "OVUtility.h"
 #include "AVBuffer.h"
 
-AVBuffer::AVBuffer(){};
-AVBuffer::AVBuffer(AVDisplayServer* svr) : dsvr(svr) {};
+AVBuffer::AVBuffer(vector<OVOutputFilter*> *ovof, OVService *s)
+	: ovof_vector(ovof), srv(s)
+{};
+AVBuffer::AVBuffer(AVDisplayServer* svr, vector<OVOutputFilter*> *ovof, OVService *s)
+       	: dsvr(svr), ovof_vector(ovof), srv(s)
+{};
 
 void AVBuffer::setDisplayServer(AVDisplayServer *svr)
 {
@@ -20,6 +25,11 @@ OVBuffer* AVBuffer::append(const char *s)
 }
 OVBuffer* AVBuffer::send()
 {
+	vector<OVOutputFilter*>::iterator of;
+	for(of = ovof_vector->begin(); of != ovof_vector->end(); of++) {
+		murmur("Pass filter %s", (*of)->identifier());
+		bufstr = (*of)->process(bufstr.c_str(), srv);
+	}
 	dsvr->sendBuf(bufstr.c_str());
 	bufstr="";
 	return this;

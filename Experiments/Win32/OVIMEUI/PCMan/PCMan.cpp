@@ -83,6 +83,24 @@ BOOL IMEUIRegisterClass( HINSTANCE hInstance )
 
 	if( !RegisterClassEx( (LPWNDCLASSEX)&wc ) )
 		return FALSE;
+	//
+	// register class of notify window.
+	//
+	wc.cbSize         = sizeof(WNDCLASSEX);
+	wc.style          = CS_OVIME | CS_IME | cs_dropshadow;
+	wc.lpfnWndProc    = NotifyWndProc;
+	wc.cbClsExtra     = 0;
+	wc.cbWndExtra     = UICHILDEXTRASIZE;
+	wc.hInstance      = hInstance;
+	wc.hCursor        = LoadCursor( NULL, IDC_ARROW );
+	wc.hIcon          = NULL;
+	wc.lpszMenuName   = (LPTSTR)NULL;
+	wc.lpszClassName  = UINOTIFYCLASSNAME;
+	wc.hbrBackground  = NULL;
+	wc.hIconSm        = NULL;
+
+	if( !RegisterClassEx( (LPWNDCLASSEX)&wc ) )
+		return FALSE;
 
 	return TRUE;
 }
@@ -92,6 +110,7 @@ BOOL IMEUIUnRegisterClass( HINSTANCE hInstance )
 	UnregisterClass(UISTATUSCLASSNAME, hInstance);
 	UnregisterClass(UICOMPCLASSNAME, hInstance);
 	UnregisterClass(UICANDCLASSNAME, hInstance);
+	UnregisterClass(UINOTIFYCLASSNAME, hInstance);
 	for(int i = 0; i < IC.size(); i++)
 		free(IC.at(i));
 	CurrentIC = 0;

@@ -1,4 +1,5 @@
 #include "AVService.h"
+#include "AVDisplayServer.h"
 #include "iconv.h"
 #include <cstring>
 
@@ -11,6 +12,10 @@ const char *AVService::pathSeparator()
 #endif
 }
 
+void AVService::notify(const char *msg)
+{
+	dsvr->showNotify(msg);
+}
 const char *AVService::toUTF8(const char *encoding, const char *src)
 {
 	char *out = NULL;
@@ -74,4 +79,39 @@ const char *AVService::UTF16ToUTF8(unsigned short *s, int l)
 
 	    *b=0;
 	    return internal;
+}
+
+enum { bit7=0x80, bit6=0x40, bit5=0x20, bit4=0x10, bit3=8, bit2=4, bit1=2, bit0=1 };
+
+int AVService::UTF8ToUTF16(const char *src, unsigned short **rcvr)
+{
+	char *s1=(char*)src;
+	int len=0;
+	char a, b, c;
+	while (*s1)
+	{
+		a=*s1++;
+		if ((a & (bit7|bit6|bit5))==(bit7|bit6)) { // 0x000080-0x0007ff
+			b=*s1++;
+
+			u_internal[len] = ((a & (bit4|bit3|bit2)) >> 2) * 0x100;
+			u_internal[len] += (((a & (bit1|bit0)) << 6) | (b & (bit5|bit4|bit3|bit2|bit1|bit0)));
+		}
+		else if ((a & (bit7|bit6|bit5|bit4))==(bit7|bit6|bit5)) // 0x000800-0x00ffff
+		{
+			b=*s1++;
+			c=*s1++;
+
+			u_internal[len] = (((a & (bit3|bit2|bit1|bit0)) << 4) | ((b & (bit5|bit4|bit3|bit2)) >> 2)) * 0x100;
+			u_internal[len] += (((b & (bit1|bit0)) << 6) | (c & (bit5|bit4|bit3|bit2|bit1|bit0)));
+		}
+		else 
+		{
+			u_internal[len] =(0);
+			u_internal[len] +=(a);
+		}
+		len++;
+	}
+	*rcvr = u_internal;
+	return len;
 }

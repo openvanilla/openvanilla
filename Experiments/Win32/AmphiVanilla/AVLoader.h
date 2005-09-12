@@ -29,5 +29,6 @@ protected:
 	AVBuffer *buf;
 
 	vector<OVInputMethodContext*> ctx_vector;
+	vector<OVOutputFilter*> ovof_vector;
 	vector<bool> startedCtxVector;	// 這是很浪費的作法 orz
 };

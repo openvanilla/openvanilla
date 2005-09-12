@@ -49,6 +49,18 @@ AVDisplayServer *DisplayServer::setCandiString(const char *str)
 //			WM_IME_COMPOSITION, 0, GCS_COMPSTR);
 	return this;
 }
+AVDisplayServer *DisplayServer::showNotify(const char *str)
+{
+	wchar_t wstr[1024];
+	MultiByteToWideChar(CP_UTF8, 0, str, strlen(str)+1, wstr, 1024);
+	UIShowNotifyWindow(wstr);
+	return this;
+}
+AVDisplayServer *DisplayServer::hideNotify()
+{
+	UIHideNotifyWindow();
+	return this;
+}
 AVDisplayServer *DisplayServer::showBuf(bool t)
 {
 	if(t)

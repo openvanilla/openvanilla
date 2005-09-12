@@ -1,5 +1,11 @@
+#ifndef WIN32
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLibrary.h>
+#else
+#include "OpenVanilla.h"
+#include "OVLibrary.h"
+#define strcasecmp stricmp
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -32,6 +38,8 @@ const char *OVOFDisUniHex::process(const char *src, OVService *srv)
     
     if (l) {
 	char hex[1024], dec[1024], buf[1024], s[2048];
+	memset(hex, 0, 1024);
+	memset(dec, 0, 1024);
 	for(int j =0; j < l; j++){
 	   unsigned short x = u16p[j];
 	   const char *u8 = srv->UTF16ToUTF8(&(u16p[j]), 1);

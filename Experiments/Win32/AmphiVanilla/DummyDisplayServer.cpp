@@ -27,6 +27,16 @@ AVDisplayServer *DummyDisplayServer::showCandi(bool t)
 	cout << "showCandi " << t << endl;
 	return this;
 }
+AVDisplayServer *DummyDisplayServer::showNotify(const char *str)
+{
+	cout << "showNotify " << str << endl;
+	return this;
+}
+AVDisplayServer *DummyDisplayServer::hideNotify()
+{
+	cout << "hideNotify" << endl;
+	return this;
+}
 AVDisplayServer *DummyDisplayServer::setCursorPos(int i)
 {
 	cout << "setCursorPos " << i << endl;

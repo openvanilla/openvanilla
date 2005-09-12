@@ -41,6 +41,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		CompX = CompY = -1;
 		UICreateCompWindow(hWnd);
 		UICreateCandWindow(hWnd);
+		UICreateNotifyWindow(hWnd);
 		break;
 		
 	case WM_IME_SETCONTEXT:

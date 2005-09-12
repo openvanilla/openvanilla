@@ -24,19 +24,28 @@ void AVLoader::shutdown()
 AVLoader::AVLoader() : dsvr(0)
 {
 	em = new AVEmbeddedLoader();
-	candi = new AVCandidate();
-	buf = new AVBuffer();
 
 	vector<OVModule*> tmpmod_vector;
 	vector<OVModule*>::iterator m;
 	for(m = em->modlist().begin(); m != em->modlist().end(); m++) {
 		em->dict()->setDict((*m)->identifier());
-		if(!em->dict()->keyExist("enable")) {
-			em->dict()->setInteger("enable", 1);
-			tmpmod_vector.push_back(*m);
-		} else {
-			if(em->dict()->getInteger("enable")) {
+		if(!strcmp((*m)->moduleType(), "OVInputMethod")) {
+			if(!em->dict()->keyExist("enable")) {
+				em->dict()->setInteger("enable", 1);
 				tmpmod_vector.push_back(*m);
+			} else {
+				if(em->dict()->getInteger("enable")) {
+					tmpmod_vector.push_back(*m);
+				}
+			}
+		} else if(!strcmp((*m)->moduleType(), "OVOutputFilter")) {
+			if(em->dict()->getInteger("enable")) {
+				OVOutputFilter *of = dynamic_cast<OVOutputFilter*>(*m);
+				murmur("load output filter %s", of->identifier());
+				of->initialize(em->dict(), em->srv(), em->cfg()->getModuleDir());
+				ovof_vector.push_back(of);
+			} else {
+				em->dict()->setInteger("enable", 0);
 			}
 		}
 	}
@@ -44,6 +53,9 @@ AVLoader::AVLoader() : dsvr(0)
 	int size = em->modlist().size();
 	ctx_vector.assign(size, static_cast<OVInputMethodContext*>(NULL));
 	startedCtxVector.assign(size, false);
+
+	candi = new AVCandidate();
+	buf = new AVBuffer(&ovof_vector, em->srv());
 }
 
 AVLoader::~AVLoader()
@@ -87,6 +99,7 @@ void AVLoader::connectDisplayServer(AVDisplayServer *svr)
 	dsvr = svr;
 	candi->setDisplayServer(dsvr);
 	buf->setDisplayServer(dsvr);
+	em->srv()->setDisplayServer(dsvr);
 }
 
 bool AVLoader::keyEvent(int n, AVKeyCode c)
@@ -102,6 +115,7 @@ bool AVLoader::keyEvent(int n, AVKeyCode c)
 		startedCtxVector[n] = true;
 	}
 	try {
+		dsvr->hideNotify();
 		if(!ctx_vector[n]->keyEvent(&c, buf, candi, em->srv()))
 			st = false;
 	}

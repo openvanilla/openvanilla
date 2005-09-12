@@ -9,6 +9,7 @@
 #define UISTATUSCLASSNAME _T("OVIMESTATUS")
 #define UICOMPCLASSNAME _T("OVIMECOMP")
 #define UICANDCLASSNAME _T("OVIMECAND")
+#define UINOTIFYCLASSNAME _T("OVIMENOTIFY")
 #define UICHILDEXTRASIZE 12
 #define FIGWL_MOUSE 4
 #define FIGWL_SVRWND 8
@@ -32,6 +33,9 @@ void PaintCompWindow(HWND);
 // UICand.cpp
 LRESULT APIENTRY CandWndProc(HWND, UINT, WPARAM, LPARAM);
 void PaintCandWindow(HWND);
+// UINotify.cpp
+LRESULT APIENTRY NotifyWndProc(HWND, UINT, WPARAM, LPARAM);
+void PaintNotifyWindow(HWND);
 
 // Private variable
 extern HFONT hUIFont;
@@ -44,12 +48,14 @@ extern HINSTANCE hInstDLL;
 extern wchar_t* lpCandStr;
 extern int numCand;
 extern wchar_t* lpCompStr;
+extern wchar_t* lpNotifyStr;
 extern int CompCursorPos;
 extern int CompSelStart;
 extern int CompSelEnd;
 extern UICHILD uiCand;
 extern UICHILD uiComp;
 extern UICHILD uiStatus;
+extern UICHILD uiNotify;
 extern std::vector<wchar_t*> IC;
 extern int CurrentIC;
 extern bool isChinese;

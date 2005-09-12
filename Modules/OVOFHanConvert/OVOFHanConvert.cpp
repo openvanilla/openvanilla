@@ -1,7 +1,13 @@
 // OVOFHanConvert.cpp: Traditional<->Simplified Chinese Output Filter
 
+#ifndef WIN32
 #include <OpenVanilla/OpenVanilla.h>  
 #include <OpenVanilla/OVLibrary.h>
+#else
+#include "OpenVanilla.h"
+#include "OVLibrary.h"
+#define strcasecmp stricmp
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -58,8 +64,8 @@ protected:
                        
 const char *OVOFConvSC2TC::localizedName(const char *locale)
 {
-    if (!strcasecmp(locale, "zh_TW")) return "簡體中文轉正體";
-    if (!strcasecmp(locale, "zh_CN")) return "简体中文转繁体";
+    if (!strcasecmp(locale, "zh_TW")) return "\xE7\xB0\xA1\xE9\xAB\x94\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\x89\xE6\xAD\xA3\xE9\xAB\x94";//"簡體中文轉正體";
+    if (!strcasecmp(locale, "zh_CN")) return "\xE7\xAE\x80\xE4\xBD\x93\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\xAC\xE7\xB9\x81\xE4\xBD\x93";//"简体中文转繁体";
     return "Simplified Chinese to Traditional Chinese";
 }
 
@@ -103,8 +109,8 @@ protected:
                        
 const char *OVOFConvTC2SC::localizedName(const char *locale)
 {
-    if (!strcasecmp(locale, "zh_TW")) return "正體中文轉簡體";
-    if (!strcasecmp(locale, "zh_CN")) return "繁体中文转简体";
+    if (!strcasecmp(locale, "zh_TW")) return "\xE6\xAD\xA3\xE9\xAB\x94\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\x89\xE7\xB0\xA1\xE9\xAB\x94";//"正體中文轉簡體";
+    if (!strcasecmp(locale, "zh_CN")) return "\xE7\xB9\x81\xE4\xBD\x93\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\xAC\xE7\xAE\x80\xE4\xBD\x93";//"繁体中文转简体";
     return "Traditional Chinese to Simpified Chinese";
 }
 

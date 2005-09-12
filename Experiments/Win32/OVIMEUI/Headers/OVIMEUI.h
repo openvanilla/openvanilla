@@ -33,4 +33,8 @@ void UICreateCandWindow(HWND);
 void UIMoveCandWindow(HWND, int, int, wchar_t*);
 void UIShowCandWindow();
 void UIHideCandWindow();
+// UINotify.cpp
+void UICreateNotifyWindow(HWND);
+void UIShowNotifyWindow(wchar_t*);
+void UIHideNotifyWindow();
 }

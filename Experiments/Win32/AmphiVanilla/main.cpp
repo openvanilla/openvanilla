@@ -22,7 +22,6 @@ int main(int argc, char *argv[])
 		if(c == '\n')
 			continue;
 		AVKeyCode kc(c);
-		kc.setCapslock(1);
 		loader->keyEvent(0, kc);
 	}
 	loader->reloadConfig();

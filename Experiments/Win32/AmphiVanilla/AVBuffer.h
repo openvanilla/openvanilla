@@ -8,8 +8,8 @@ using namespace std;
 
 class AVBuffer : public OVBuffer {
 public:
-    AVBuffer();
-    AVBuffer(AVDisplayServer* svr);
+    AVBuffer(vector<OVOutputFilter*> *ovof, OVService *s);
+    AVBuffer(AVDisplayServer* svr, vector<OVOutputFilter*> *ovof, OVService *s);
     void setDisplayServer(AVDisplayServer* svr);
     virtual OVBuffer* clear();
     virtual OVBuffer* append(const char *s);
@@ -21,5 +21,7 @@ public:
 private:
     string bufstr;
     AVDisplayServer *dsvr;
+    vector<OVOutputFilter*> *ovof_vector;
+    OVService *srv;
 };
 #endif // AVBuffer_h
