@@ -3,7 +3,11 @@
 #ifndef __OVOFReverseLookup_h
 #define __OVOFReverseLookup_h
 
+#ifndef WIN32
 #include <OpenVanilla/OpenVanilla.h>
+#else
+#include "OpenVanilla.h"
+#endif
 #include "OVCIN.h"
 #include "OVKeySequence.h"
 #include "OVCandidateList.h"

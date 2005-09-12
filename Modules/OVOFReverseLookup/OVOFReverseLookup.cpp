@@ -1,9 +1,16 @@
 // OVOFReverseLookup.cpp 
 
 #define OV_DEBUG
+#ifndef WIN32
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLibrary.h>
 #include <OpenVanilla/OVUtility.h>
+#else
+#include "OpenVanilla.h"
+#include "OVLibrary.h"
+#include "OVUtility.h"
+#define strcasecmp stricmp
+#endif
 #include <stdlib.h>
 #include "OVCandidateList.h"
 #include "OVOFReverseLookup.h"

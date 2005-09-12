@@ -1,5 +1,11 @@
+#ifndef WIN32
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLibrary.h>
+#else
+#include "OpenVanilla.h"
+#include "OVLibrary.h"
+#define strcasecmp stricmp
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -34,8 +40,8 @@ OV_SINGLE_MODULE_WRAPPER(OVOFZhWikipidealize);
 
 const char *OVOFZhWikipidealize::localizedName(const char *locale)
 {
-    if (!strcasecmp(locale, "zh_TW")) return "中文 Wikipedia 文字格式過濾器";
-    if (!strcasecmp(locale, "zh_CN")) return "中文 Wikipedia 文字格式过滤器";
+    if (!strcasecmp(locale, "zh_TW")) return "\xE4\xB8\xAD\xE6\x96\x87 Wikipedia \xE6\x96\x87\xE5\xAD\x97\xE6\xA0\xBC\xE5\xBC\x8F\xE9\x81\x8E\xE6\xBF\xBE\xE5\x99\xA8";//"中文 Wikipedia 文字格式過濾器";
+    if (!strcasecmp(locale, "zh_CN")) return "\xE4\xB8\xAD\xE6\x96\x87 Wikipedia \xE6\x96\x87\xE5\xAD\x97\xE6\xA0\xBC\xE5\xBC\x8F\xE8\xBF\x87\xE6\xBB\xA4\xE5\x99\xA8";//"中文 Wikipedia 文字格式过滤器";
     return "Zh-Wikipedia Text Format filter";
 }
 

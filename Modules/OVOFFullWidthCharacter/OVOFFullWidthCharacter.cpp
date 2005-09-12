@@ -1,7 +1,13 @@
 // OVOFFullWidthCharacter.cpp
 
+#ifndef WIN32
 #include <OpenVanilla/OpenVanilla.h>  
 #include <OpenVanilla/OVLibrary.h>
+#else
+#include "OpenVanilla.h"
+#include "OVLibrary.h"
+#define strcasecmp stricmp
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -42,8 +48,8 @@ protected:
                        
 const char *OVOFFullWidthCharacter::localizedName(const char *locale)
 {
-    if (!strcasecmp(locale, "zh_TW")) return "全形英數字";
-    if (!strcasecmp(locale, "zh_CN")) return "全角英数字";
+    if (!strcasecmp(locale, "zh_TW")) return "\xE5\x85\xAB\xE5\xBD\xA2\xE8\x8B\xB1\xE6\x95\xB8\xE5\xAD\x97";//"全形英數字";
+    if (!strcasecmp(locale, "zh_CN")) return "\xE5\x85\xAB\xE8\xA7\x92\xE8\x8B\xB1\xE6\x95\xB8\xE5\xAD\x97";//"全角英数字";
     return "Full-Width ASCII Character";
 }
 

@@ -1,5 +1,11 @@
+#ifndef WIN32
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLibrary.h>
+#else
+#include "OpenVanilla.h"
+#include "OVLibrary.h"
+#define strcasecmp stricmp
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -36,8 +42,8 @@ protected:
 
 const char *OVOFAntiZhuyinwen::localizedName(const char *locale)
 {
-    if (!strcasecmp(locale, "zh_TW")) return "注音文退散濾嘴";
-    if (!strcasecmp(locale, "zh_CN")) return "注音文退散滤嘴";
+    if (!strcasecmp(locale, "zh_TW")) return "\xE6\xB3\xA8\xE9\x9F\xB3\xE6\x96\x87\xE9\x80\x80\xE6\x95\xA3\xE6\xBF\xBE\xE5\x98\xB4\x0A";//"注音文退散濾嘴";
+    if (!strcasecmp(locale, "zh_CN")) return "\xE6\xB3\xA8\xE9\x9F\xB3\xE6\x96\x87\xE9\x80\x80\xE6\x95\xA3\xE6\xBB\xA4\xE5\x98\xB4\x0A";//"注音文退散滤嘴";
     return "Anti-Zhuyinwen filter";
 }
 
@@ -68,7 +74,7 @@ const char *OVOFAntiZhuyinwen::process(const char *src, OVService *srv)
     {
         if (!strcasecmp(srv->locale(), "zh_TW") || 
             !strcasecmp(srv->locale(), "zh_CN"))
-            srv->notify("注音文退散！注音文退散！");
+            srv->notify("\xE6\xB3\xA8\xE9\x9F\xB3\xE6\x96\x87\xE9\x80\x80\xE6\x95\xA3\xEF\xBC\x81\xE6\xB3\xA8\xE9\x9F\xB3\xE6\x96\x87\xE9\x80\x80\xE6\x95\xA3\xEF\xBC\x81\x0A");//"注音文退散！注音文退散！");
         else
             srv->notify("'Zhuyinwen' found and filtered");
     }

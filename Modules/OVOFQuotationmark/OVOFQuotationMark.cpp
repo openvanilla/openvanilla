@@ -3,10 +3,17 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <unistd.h>
+//#include <unistd.h>
+#ifndef WIN32
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLibrary.h>
 #include <OpenVanilla/OVUtility.h>
+#else
+#include "OpenVanilla.h"
+#include "OVLibrary.h"
+#include "OVUtility.h"
+#define strcasecmp stricmp
+#endif
 
 /*
 English: “ ” 
@@ -57,8 +64,8 @@ public:
     virtual const char *identifier() { return "OVOFSmartQuote"; }
     virtual const char *localizedName(const char *locale)
 	{
-		if (!strcasecmp(locale, "zh_TW")) return "智慧型英文引號";
-		if (!strcasecmp(locale, "zh_CN")) return "智慧型英文引号";
+		if (!strcasecmp(locale, "zh_TW")) return "\xE6\x99\xBA\xE6\x85\xA7\xE5\x9E\x8B\xE8\x8B\xB1\xE6\x96\x87\xE5\xBC\x95\xE8\x99\x9F\x0A";//"智慧型英文引號";
+		if (!strcasecmp(locale, "zh_CN")) return "\xE6\x99\xBA\xE6\x85\xA7\xE5\x9E\x8B\xE8\x8B\xB1\xE6\x96\x87\xE5\xBC\x95\xE5\x8F\xB7\x0A";//"智慧型英文引号";
 		return "Smart Quote - English";
 	}
     virtual const char *process (const char *src, OVService *srv) {
@@ -113,8 +120,8 @@ public:
     virtual const char *identifier() { return "OVOFSmartQuoteGerman"; }
     virtual const char *localizedName(const char *locale)
 	{
-		if (!strcasecmp(locale, "zh_TW")) return "智慧型德文引號";
-		if (!strcasecmp(locale, "zh_CN")) return "智慧型德文引号";
+		if (!strcasecmp(locale, "zh_TW")) return "\xE6\x99\xBA\xE6\x85\xA7\xE5\x9E\x8B\xE5\xBE\xB7\xE6\x96\x87\xE5\xBC\x95\xE8\x99\x9F\x0A";//"智慧型德文引號";
+		if (!strcasecmp(locale, "zh_CN")) return "\xE6\x99\xBA\xE6\x85\xA7\xE5\x9E\x8B\xE5\xBE\xB7\xE6\x96\x87\xE5\xBC\x95\xE5\x8F\xB7\x0A";//"智慧型德文引号";
 		return "Smart Quote - German";
 	}
     virtual const char *process (const char *src, OVService *srv) {
@@ -169,8 +176,8 @@ public:
     virtual const char *identifier() { return "OVOFSmartQuoteFrance"; }
     virtual const char *localizedName(const char *locale)
 	{
-		if (!strcasecmp(locale, "zh_TW")) return "智慧型法文引號";
-		if (!strcasecmp(locale, "zh_CN")) return "智慧型法文引号";
+		if (!strcasecmp(locale, "zh_TW")) return "\xE6\x99\xBA\xE6\x85\xA7\xE5\x9E\x8B\xE6\xB3\x95\xE6\x96\x87\xE5\xBC\x95\xE8\x99\x9F\x0A";//"智慧型法文引號";
+		if (!strcasecmp(locale, "zh_CN")) return "\xE6\x99\xBA\xE6\x85\xA7\xE5\x9E\x8B\xE6\xB3\x95\xE6\x96\x87\xE5\xBC\x95\xE5\x8F\xB7\x0A";//"智慧型法文引号";
 		return "Smart Quote - France";
 	}
     virtual const char *process (const char *src, OVService *srv) {
