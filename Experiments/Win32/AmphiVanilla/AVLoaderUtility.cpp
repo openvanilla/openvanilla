@@ -1,3 +1,9 @@
+#ifdef UNICODE
+#undef UNICODE
+#endif
+#ifdef _UNICODE
+#undef _UNICODE
+#endif
 #include "AVLoaderUtility.h"
 #include <string>
 #ifdef WIN32
