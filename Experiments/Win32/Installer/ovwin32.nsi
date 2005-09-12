@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "OpenVanilla"
-!define PRODUCT_VERSION "0.7.1rc0"
+!define PRODUCT_VERSION "0.7.1rc0+r1482"
 !define PRODUCT_PUBLISHER "openvanilla.org"
 !define PRODUCT_WEB_SITE "http://openvanilla.org"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -56,6 +56,10 @@ ShowInstDetails show
 ShowUnInstDetails show
 
 Function .onInit
+  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
+  StrCmp $0 "" +3 0
+	  MessageBox MB_ICONINFORMATION|MB_OK "偵測到已安裝 OpenVanilla ，請移除後重新安裝。"
+	  Abort
   !insertmacro MUI_LANGDLL_DISPLAY
 FunctionEnd
 
@@ -73,9 +77,6 @@ Section "Modules" SEC02
   File /r "zh_TW"
   File "OVPreferences.exe"
   File "OVPreferences.exe.manifest"
-  SetOVerwrite off
-  File "config.xml"
-  CreateDirectory "$WINDIR\OpenVanilla\User"
 SectionEnd
 
 Section -AdditionalIcons
@@ -99,7 +100,7 @@ Section -Post
   StrCpy $6 $1 "" $5
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key" "$6"
   System::Call "user32::LoadKeyboardLayout(t $6, i 1)"
-  Exec "$WINDIR\OpenVanilla\OVPreferences.exe"
+#  Exec "$WINDIR\OpenVanilla\OVPreferences.exe"
 SectionEnd
 
 
@@ -119,6 +120,7 @@ Section Uninstall
   Delete "$SYSDIR\libltdl3.dll"
   Delete "$SYSDIR\libiconv-2.dll"
   Delete "$SYSDIR\sqlite3.dll"
+  Delete "$SYSDIR\tinyxml.dll"
   Delete "$SYSDIR\OVIMEUI.DLL"
   Delete "$SYSDIR\OVIME.ime"
   Delete "$SYSDIR\libchewing.dll"
