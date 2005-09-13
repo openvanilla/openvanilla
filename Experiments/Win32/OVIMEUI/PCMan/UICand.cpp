@@ -173,7 +173,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 
 		if( X > 0 && Y > 0)
 		{
-			RECT rc, screenrc;
+			RECT screenrc;
 			SystemParametersInfo(SPI_GETWORKAREA,
 					0,
 					&screenrc,
