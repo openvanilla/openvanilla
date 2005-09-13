@@ -173,6 +173,15 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 
 		if( X > 0 && Y > 0)
 		{
+			RECT rc, screenrc;
+			SystemParametersInfo(SPI_GETWORKAREA,
+					0,
+					&screenrc,
+					0);
+			if( (X + sz.cx) > screenrc.right)
+				X = screenrc.right - sz.cx - 5;//rc.left - lpsz->cx - 5;
+			if( (Y + sz.cy) > screenrc.bottom)
+				Y = screenrc.bottom - sz.cy;
 			uiCand.pt.x = X;
 			uiCand.pt.y = Y;
 			MoveWindow(uiCand.hWnd,
