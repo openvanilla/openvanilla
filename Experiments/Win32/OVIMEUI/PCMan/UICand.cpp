@@ -82,7 +82,7 @@ BOOL GetCandPosFromCompWnd(LPSIZE lpsz)
 				&screenrc,
 				0);
 		if( (pt.x + lpsz->cx) > screenrc.right)
-			pt.x = rc.left - lpsz->cx - 5;
+			pt.x = screenrc.right - lpsz->cx - 5;//rc.left - lpsz->cx - 5;
 		if( (pt.y + lpsz->cy) > screenrc.bottom)
 			pt.y = screenrc.bottom - lpsz->cy;
 
