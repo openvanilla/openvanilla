@@ -1,10 +1,10 @@
 BUILDER=xcodebuild
 BUILDSTYLE?=Deployment
-PROJECT=OVIMUIM.xcode
+PROJECT=OVIMUIM.xcodeproj
 DSTROOT=/
 
 all:
-	$(BUILDER) -project $(PROJECT) -buildstyle $(BUILDSTYLE)
+	$(BUILDER) -project $(PROJECT) -configuration $(BUILDSTYLE)
 
 clean:
 	$(BUILDER) clean
@@ -13,5 +13,5 @@ clean:
 #	find . -name '*.pbxuser' -delete
 
 install:
-	$(BUILDER) -project $(PROJECT) -buildstyle $(BUILDSTYLE) install DSTROOT=$(DSTROOT)
+	$(BUILDER) -project $(PROJECT) -configuration $(BUILDSTYLE) install DSTROOT=$(DSTROOT)
 

@@ -1,0 +1,323 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6A159AE10838FA7000518693 /* OVIMUIM.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A159AE00838FA7000518693 /* OVIMUIM.mm */; };
+		6A159AEC0838FA8E00518693 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A159AEB0838FA8E00518693 /* Cocoa.framework */; };
+		6A159AF10838FAA300518693 /* UIM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A159AF00838FAA300518693 /* UIM.framework */; };
+		6A159AF60838FAC300518693 /* libintl.3.4.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A159AF50838FAC300518693 /* libintl.3.4.1.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		6A159ACE0838FA5600518693 /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Development;
+		};
+		6A159ACF0838FA5600518693 /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXFileReference section */
+		6A159ADA0838FA6300518693 /* OVIMUIM.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMUIM.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A159ADC0838FA6300518693 /* OVIMUIM-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVIMUIM-Info.plist"; sourceTree = "<group>"; };
+		6A159AE00838FA7000518693 /* OVIMUIM.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVIMUIM.mm; sourceTree = SOURCE_ROOT; };
+		6A159AEB0838FA8E00518693 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		6A159AF00838FAA300518693 /* UIM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIM.framework; path = /Library/Frameworks/UIM.framework; sourceTree = "<absolute>"; };
+		6A159AF50838FAC300518693 /* libintl.3.4.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libintl.3.4.1.dylib; path = /Library/Frameworks/UIM.framework/Versions/0.4.7/lib/libintl.3.4.1.dylib; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6A159AD80838FA6300518693 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A159AEC0838FA8E00518693 /* Cocoa.framework in Frameworks */,
+				6A159AF10838FAA300518693 /* UIM.framework in Frameworks */,
+				6A159AF60838FAC300518693 /* libintl.3.4.1.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6A159ACC0838FA5600518693 = {
+			isa = PBXGroup;
+			children = (
+				6A159AF50838FAC300518693 /* libintl.3.4.1.dylib */,
+				6A159AF00838FAA300518693 /* UIM.framework */,
+				6A159AEB0838FA8E00518693 /* Cocoa.framework */,
+				6A159AE00838FA7000518693 /* OVIMUIM.mm */,
+				6A159ADB0838FA6300518693 /* Products */,
+				6A159ADC0838FA6300518693 /* OVIMUIM-Info.plist */,
+			);
+			sourceTree = "<group>";
+		};
+		6A159ADB0838FA6300518693 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A159ADA0838FA6300518693 /* OVIMUIM.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6A159AD90838FA6300518693 /* OVIMUIM */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A522ABE08DF520F00CE4547 /* Build configuration list for PBXNativeTarget "OVIMUIM" */;
+			buildPhases = (
+				6A159AD60838FA6300518693 /* Resources */,
+				6A159AD70838FA6300518693 /* Sources */,
+				6A159AD80838FA6300518693 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVIMUIM-Info.plist";
+				INSTALL_PATH = /Library/OpenVanilla/0.7.0/Modules;
+				LIBRARY_SEARCH_PATHS = "\"$(LOCAL_LIBRARY_DIR)/Frameworks/UIM.framework/Versions/0.4.7/lib\"";
+				LIBRARY_STYLE = BUNDLE;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMUIM;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			dependencies = (
+			);
+			name = OVIMUIM;
+			productName = OVIMUIM;
+			productReference = 6A159ADA0838FA6300518693 /* OVIMUIM.bundle */;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OVIMUIM</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.OVIMUIM</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6A159AD00838FA5600518693 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 6A522AC208DF520F00CE4547 /* Build configuration list for PBXProject "OVIMUIM" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				6A159ACE0838FA5600518693 /* Development */,
+				6A159ACF0838FA5600518693 /* Deployment */,
+			);
+			hasScannedForEncodings = 0;
+			mainGroup = 6A159ACC0838FA5600518693;
+			productRefGroup = 6A159ADB0838FA6300518693 /* Products */;
+			projectDirPath = "";
+			targets = (
+				6A159AD90838FA6300518693 /* OVIMUIM */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6A159AD60838FA6300518693 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6A159AD70838FA6300518693 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A159AE10838FA7000518693 /* OVIMUIM.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6A522ABF08DF520F00CE4547 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVIMUIM-Info.plist";
+				INSTALL_PATH = /Library/OpenVanilla/0.7.1/Modules;
+				LIBRARY_SEARCH_PATHS = "\"$(LOCAL_LIBRARY_DIR)/Frameworks/UIM.framework/Versions/0.4.7/lib\"";
+				LIBRARY_STYLE = BUNDLE;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMUIM;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Development;
+		};
+		6A522AC008DF520F00CE4547 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVIMUIM-Info.plist";
+				INSTALL_PATH = /Library/OpenVanilla/0.7.1/Modules;
+				LIBRARY_SEARCH_PATHS = "\"$(LOCAL_LIBRARY_DIR)/Frameworks/UIM.framework/Versions/0.4.7/lib\"";
+				LIBRARY_STYLE = BUNDLE;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMUIM;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Deployment;
+		};
+		6A522AC108DF520F00CE4547 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVIMUIM-Info.plist";
+				INSTALL_PATH = /Library/OpenVanilla/0.7.1/Modules;
+				LIBRARY_SEARCH_PATHS = "\"$(LOCAL_LIBRARY_DIR)/Frameworks/UIM.framework/Versions/0.4.7/lib\"";
+				LIBRARY_STYLE = BUNDLE;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMUIM;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Default;
+		};
+		6A522AC308DF520F00CE4547 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		6A522AC408DF520F00CE4547 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Deployment;
+		};
+		6A522AC508DF520F00CE4547 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6A522ABE08DF520F00CE4547 /* Build configuration list for PBXNativeTarget "OVIMUIM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A522ABF08DF520F00CE4547 /* Development */,
+				6A522AC008DF520F00CE4547 /* Deployment */,
+				6A522AC108DF520F00CE4547 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		6A522AC208DF520F00CE4547 /* Build configuration list for PBXProject "OVIMUIM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A522AC308DF520F00CE4547 /* Development */,
+				6A522AC408DF520F00CE4547 /* Deployment */,
+				6A522AC508DF520F00CE4547 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6A159AD00838FA5600518693 /* Project object */;
+}
