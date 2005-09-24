@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\AmphiVanilla\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers"
+				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="FALSE"
 				MinimalRebuild="TRUE"
@@ -79,7 +79,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\AmphiVanilla\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers"
+				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="TRUE"
 				MinimalRebuild="FALSE"
@@ -138,7 +138,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\AmphiVanilla\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers"
+				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="TRUE"
 				MinimalRebuild="FALSE"
@@ -197,6 +197,9 @@
 				RelativePath="ControlHandle.cpp">
 			</File>
 			<File
+				RelativePath=".\DisplayServer.cpp">
+			</File>
+			<File
 				RelativePath="Global.cpp">
 			</File>
 			<File
@@ -224,6 +227,9 @@
 		<Filter
 			Name="¼ÐÀYÀÉ"
 			Filter="h;hpp;hxx;hm;inl;inc">
+			<File
+				RelativePath=".\DisplayServer.h">
+			</File>
 			<File
 				RelativePath="ExtraStructs.h">
 			</File>
