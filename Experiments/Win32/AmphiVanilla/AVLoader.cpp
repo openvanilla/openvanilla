@@ -1,4 +1,24 @@
-#include "AVLoader.h"
+#ifdef WIN32
+#define PATH_MAX MAX_PATH
+#endif
+
+#include <string>
+#include <sys/types.h>
+#include <windows.h>
+#include <vector>
+#include <algorithm>
+#include <map>
+#include "OpenVanilla.h"
+#include "OVUtility.h"
+#include "OVLibrary.h"
+#include "OVCandidateList.h"
+
+#include "AVConfig.h"
+#include "AVDictionary.h"
+#include "AVDisplayServer.h"
+#include "AVLoaderUtility.h"
+#include "AVService.h"
+
 #include <exception>
 #include <algorithm>
 #include <functional>
@@ -114,24 +134,4 @@ bool AVLoader::keyEvent(int n, AVKeyCode c)
 		ctx_vector[n]->start(buf, candi, em->srv());
 		startedCtxVector[n] = true;
 	}
-	try {
-		dsvr->hideNotify();
-		if(!ctx_vector[n]->keyEvent(&c, buf, candi, em->srv()))
-			st = false;
-	}
-	catch (...) {}
-	return st;
-}
-
-bool AVLoader::moduleName(int i, char *str)
-{
-	string s;
-	int modVectorNum = static_cast<int>(em->modlist().size()) - 1;
-	if(i > modVectorNum) {
-		strcpy(str, "");
-		return false;
-	}
-	s = em->modlist().at(i)->localizedName("zh_TW");
-	strcpy(str, s.c_str());
-	return true;
 }
