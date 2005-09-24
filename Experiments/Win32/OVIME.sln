@@ -9,26 +9,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMEUI", "OVIMEUI\OVIMEUI.
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMTobacco", "Modules\OVIMTobacco\OVIMTobacco.vcproj", "{06DD6384-CF74-4115-AFC9-E6BA2D818E12}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMGenericSQLite", "Modules\OVIMGenericSQLite\OVIMGenericSQLite.vcproj", "{030D6D55-545E-43DD-9DF5-E99A06EFFD38}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMGeneric", "Modules\OVIMGeneric\OVIMGeneric.vcproj", "{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMTibetan", "Modules\OVIMTibetan\OVIMTibetan.vcproj", "{A4D507A2-19F0-43CE-B1F4-A019974B9EE0}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMPOJ-Holo", "Modules\OVIMPOJ-Holo\OVIMPOJ-Holo.vcproj", "{575E02A0-8236-471D-AF56-9CB6D60B6C82}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVPreferences", "OVPreferences\OVPreferences.vcproj", "{93C590F7-2E9C-4703-B853-E8711F03733E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{21FC3D4F-8918-4C03-8881-EC6C54DB3504} = {21FC3D4F-8918-4C03-8881-EC6C54DB3504}
@@ -55,26 +35,6 @@ Global
 		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}.Release.ActiveCfg = Release|Win32
 		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}.Release.Build.0 = Release|Win32
 		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}.Release-Unicode.ActiveCfg = Release-Unicode|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug.ActiveCfg = Debug|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release.ActiveCfg = Release|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release.Build.0 = Release|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release-Unicode.ActiveCfg = Release-Unicode|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Debug.ActiveCfg = Debug|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Release.ActiveCfg = Release|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Release.Build.0 = Release|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Release-Unicode.ActiveCfg = Release-Unicode|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Debug.ActiveCfg = Debug|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Release.ActiveCfg = Release|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Release.Build.0 = Release|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Release-Unicode.ActiveCfg = Release-Unicode|Win32
-		{A4D507A2-19F0-43CE-B1F4-A019974B9EE0}.Debug.ActiveCfg = Debug|Win32
-		{A4D507A2-19F0-43CE-B1F4-A019974B9EE0}.Release.ActiveCfg = Release|Win32
-		{A4D507A2-19F0-43CE-B1F4-A019974B9EE0}.Release.Build.0 = Release|Win32
-		{A4D507A2-19F0-43CE-B1F4-A019974B9EE0}.Release-Unicode.ActiveCfg = Release-Unicode|Win32
-		{575E02A0-8236-471D-AF56-9CB6D60B6C82}.Debug.ActiveCfg = Debug|Win32
-		{575E02A0-8236-471D-AF56-9CB6D60B6C82}.Release.ActiveCfg = Release|Win32
-		{575E02A0-8236-471D-AF56-9CB6D60B6C82}.Release.Build.0 = Release|Win32
-		{575E02A0-8236-471D-AF56-9CB6D60B6C82}.Release-Unicode.ActiveCfg = Release-Unicode|Win32
 		{93C590F7-2E9C-4703-B853-E8711F03733E}.Debug.ActiveCfg = Debug|Win32
 		{93C590F7-2E9C-4703-B853-E8711F03733E}.Release.ActiveCfg = Release-Unicode|Win32
 		{93C590F7-2E9C-4703-B853-E8711F03733E}.Release.Build.0 = Release-Unicode|Win32
