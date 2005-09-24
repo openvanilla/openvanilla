@@ -1,16 +1,19 @@
 // OVIME.cpp : 定義 DLL 應用程式的進入點。
 //
 #include "OVIME.h"
+#include "NetIO.h"
 
 BOOL APIENTRY DllMain( HANDLE hModule, 
                        DWORD  dwReason, 
                        LPVOID lpReserved
 					 )
 {
+	UDPSocket sock;
 	switch(dwReason)
 	{
 	case DLL_PROCESS_ATTACH:
 		// load UI library
+		/*
 		char str[1024];
 		wchar_t wstr[1024];
 		loader = AVLoader::getLoader();
@@ -23,7 +26,21 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 				break;
 			}
 		}
-
+		*/
+		char pos[2];
+		wchar_t wstr[1024];
+		cmd_in rtn;
+		for(int i = 0;; ++i) {
+			pos[0] = i;
+			sock.send("127.0.0.1", 5100, GETNAME, pos);
+			sock.recv(&rtn);
+			if(rtn.buf[0]) {
+				MultiByteToWideChar(CP_UTF8, 0, rtn.buf, strlen(rtn.buf)+1, wstr, 1024);
+				UIPushInputMethod(wstr);
+			} else {
+				break;
+			}
+		}
 		
 		WNDCLASSEX wc;
 		wc.cbSize			= sizeof(WNDCLASSEX);
@@ -46,7 +63,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		break;
 	case DLL_PROCESS_DETACH:
 		// free UI library
-		AVLoader::shutdown();
+		//AVLoader::shutdown();
 		UnregisterClass(UICLASSNAME, (HINSTANCE)hModule);
 		IMEUIUnRegisterClass( (HINSTANCE)hModule );
 		break;

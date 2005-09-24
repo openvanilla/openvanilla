@@ -1,4 +1,5 @@
 #include "OVIME.h"
+#include "NetIO.h"
 
 LRESULT APIENTRY UIWndProc(HWND hWnd,
 						   UINT msg,
@@ -118,8 +119,29 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 
 	case WM_IME_RELOADCONFIG:
-		loader = AVLoader::getLoader();
-		loader->reloadConfig();
+		/*
+		   loader = AVLoader::getLoader();
+		   loader->reloadConfig();
+		   */
+		{
+			UDPSocket sock;
+			//sock.send("127.0.0.1", 5100, RELOADCONFIG, "");
+			UIClearInputMethodList();
+			char pos[2];
+			wchar_t wstr[1024];
+			cmd_in rtn;
+			for(int i = 0;; ++i) {
+				pos[0] = i;
+				sock.send("127.0.0.1", 5100, GETNAME, pos);
+				sock.recv(&rtn);
+				if(rtn.buf[0]) {
+					MultiByteToWideChar(CP_UTF8, 0, rtn.buf, strlen(rtn.buf)+1, wstr, 1024);
+					UIPushInputMethod(wstr);
+				} else {
+					break;
+				}
+			}
+		}
 		break;
 
 	default:

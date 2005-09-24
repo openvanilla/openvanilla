@@ -1,6 +1,7 @@
 EXPORTS
 	IMEUIRegisterClass
 	IMEUIUnRegisterClass
+	UIClearInputMethodList
 	UIPushInputMethod
 	UICurrentInputMethod
 	UICreateStatusWindow

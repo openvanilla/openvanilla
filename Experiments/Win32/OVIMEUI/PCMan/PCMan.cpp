@@ -117,6 +117,15 @@ BOOL IMEUIUnRegisterClass( HINSTANCE hInstance )
 	return TRUE;
 }
 
+void UIClearInputMethodList()
+{
+	IC.clear();
+	CurrentIC = 0;
+	DestroyMenu(hIMESelMenu);
+	hIMESelMenu = CreatePopupMenu();
+	InvalidateRect(uiStatus.hWnd,NULL, FALSE);
+}
+
 void UIPushInputMethod( wchar_t *lpStr )
 {
 	IC.push_back(wcsdup(lpStr));

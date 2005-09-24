@@ -13,6 +13,7 @@ extern "C" {
 BOOL IMEUIRegisterClass( HINSTANCE );
 BOOL IMEUIUnRegisterClass( HINSTANCE );
 BOOL MyIsIMEMessage(UINT);
+void UIClearInputMethodList();
 void UIPushInputMethod(wchar_t*);
 int UICurrentInputMethod();
 // UIStatus.cpp

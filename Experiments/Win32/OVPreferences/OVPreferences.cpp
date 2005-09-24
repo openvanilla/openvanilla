@@ -3,6 +3,7 @@
 
 #include "ovprefdlg.h"
 #include "OVIME.h"
+#include "NetIO.h"
 
 #if defined(WIN32)
 	#include <windows.h>
@@ -53,6 +54,8 @@ bool OVPreferencesApp::OnInit()
 	dlg->ShowModal();
 	dlg->Destroy();
 
+	UDPSocket sock;
+	sock.send("127.0.0.1", 5100, RELOADCONFIG, "");
 #if defined(WIN32)
 	// Force all OVIMEs to reload
 	EnumChildWindows( GetDesktopWindow(), EnumAllOVIMEWindows, NULL);

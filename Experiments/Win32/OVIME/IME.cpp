@@ -1,5 +1,6 @@
 #include "OVIME.h"
 #include "AVKeyCode.h"
+#include "NetIO.h"
 
 #include <vector>
 #include <string>
@@ -220,17 +221,11 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	if(spec == 1)
 		k = (char)out[0];
 
+	/*
 	AVKeyCode keycode(k);
-	DWORD conv, sentence;
-	ImmGetConversionStatus( hIMC, &conv, &sentence);
-	if( !(conv & IME_CMODE_NATIVE) )	// AlphaNumaric mode
-		keycode.setCapslock(1);
-	if(lpbKeyState[VK_SHIFT] & 0x80)
-		keycode.setShift(1);
-	if(LOWORD(lpbKeyState[VK_CAPITAL]) )
-		keycode.setCapslock(1);
-	dsvr->lockIMC(hIMC);
 	loader = AVLoader::getLoader();
+	*/
+	/*
 	if(loader->keyEvent(UICurrentInputMethod(), keycode))
 	{
 		RetVal = TRUE;
@@ -242,6 +237,72 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		RetVal = FALSE;
 		MyGenerateMessage(hIMC,
 				WM_IME_ENDCOMPOSITION, 0, 0);
+	}
+	*/
+	UDPSocket sock;
+	char c[] = {UICurrentInputMethod()+1, k, -1, -1, 0};
+	DWORD conv, sentence;
+	ImmGetConversionStatus( hIMC, &conv, &sentence);
+	if( !(conv & IME_CMODE_NATIVE) )	// AlphaNumaric mode
+		c[2] = 1;
+	if(lpbKeyState[VK_SHIFT] & 0x80)
+		c[3] = 1;
+	if(LOWORD(lpbKeyState[VK_CAPITAL]) )
+		c[2] = 1;
+	dsvr->lockIMC(hIMC);
+	cmd_in cmd;
+	sock.send("127.0.0.1", 5100, KEYCODE, c);
+	while(cmd.cmd != END){
+		sock.recv(&cmd);
+		switch(cmd.cmd) {
+			case SETBUFSTRING:
+				dsvr->setBufString(cmd.buf);
+				break;
+			case SENDBUF:
+				dsvr->sendBuf(cmd.buf);
+				break;
+			case SETCANDISTRING:
+				dsvr->setCandiString(cmd.buf);
+				break;
+			case SHOWBUF:
+				if(!strcmp(cmd.buf, "true"))
+					dsvr->showBuf(true);
+				else
+					dsvr->showBuf(false);
+				break;
+			case SHOWCANDI:
+				if(!strcmp(cmd.buf, "true"))
+					dsvr->showCandi(true);
+				else
+					dsvr->showCandi(false);
+				break;
+			case SHOWNOTIFY: 
+				dsvr->showNotify(cmd.buf);
+				break;
+			case HIDENOTIFY:
+				dsvr->hideNotify();
+				break;
+			case SETCURSORPOS:
+				dsvr->setCursorPos(atoi(cmd.buf));
+				break;
+			case SETMARKFROM:
+				dsvr->setMarkFrom(atoi(cmd.buf));
+				break;
+			case SETMARKTO:
+				dsvr->setMarkTo(atoi(cmd.buf));
+				break;
+			case PROCESS:
+				RetVal = TRUE;
+				MyGenerateMessage(hIMC,
+						WM_IME_COMPOSITION, 0, GCS_COMPSTR);
+				break;
+			case PASS:
+				RetVal = FALSE;
+				MyGenerateMessage(hIMC,
+						WM_IME_ENDCOMPOSITION, 0, 0);
+				break;
+
+		}
 	}
 	dsvr->releaseIMC();
 	ImmUnlockIMCC(lpIMC->hCompStr);
