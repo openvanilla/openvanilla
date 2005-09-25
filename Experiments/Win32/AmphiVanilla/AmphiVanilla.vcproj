@@ -44,7 +44,8 @@
 				AdditionalDependencies="Ws2_32.lib SHFolder.lib libltdl.lib libiconv.lib"
 				OutputFile="$(OutDir)/OVServer.exe"
 				SubSystem="2"
-				EntryPointSymbol="mainCRTStartup"/>
+				EntryPointSymbol="mainCRTStartup"
+				ImportLibrary=""/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -99,7 +100,8 @@
 				AdditionalDependencies="Ws2_32.lib SHFolder.lib libltdl.lib libiconv.lib"
 				OutputFile="$(OutDir)/OVServer.exe"
 				SubSystem="2"
-				EntryPointSymbol="mainCRTStartup"/>
+				EntryPointSymbol="mainCRTStartup"
+				ImportLibrary=""/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -156,7 +158,8 @@
 				AdditionalDependencies="Ws2_32.lib SHFolder.lib libltdl.lib libiconv.lib"
 				OutputFile="$(OutDir)/OVServer.exe"
 				SubSystem="2"
-				EntryPointSymbol="mainCRTStartup"/>
+				EntryPointSymbol="mainCRTStartup"
+				ImportLibrary=""/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -227,19 +230,10 @@
 				RelativePath="..\..\..\Source\OVFileHandler.cpp">
 			</File>
 			<File
-				RelativePath="..\..\..\Source\OVPhoneticLib.cpp">
+				RelativePath=".\OVServer.cpp">
 			</File>
 			<File
 				RelativePath="..\..\..\Source\OVStringToolKit.cpp">
-			</File>
-			<File
-				RelativePath="..\tinyxml\tinyxml.cpp">
-			</File>
-			<File
-				RelativePath="..\tinyxml\tinyxmlerror.cpp">
-			</File>
-			<File
-				RelativePath="..\tinyxml\tinyxmlparser.cpp">
 			</File>
 		</Filter>
 		<Filter
@@ -286,9 +280,6 @@
 			</File>
 			<File
 				RelativePath=".\NetIO.h">
-			</File>
-			<File
-				RelativePath="tinyxml\tinyxml.h">
 			</File>
 		</Filter>
 	</Files>

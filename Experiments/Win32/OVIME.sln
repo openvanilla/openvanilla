@@ -1,12 +1,14 @@
 Microsoft Visual Studio Solution File, Format Version 8.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIME", "OVIME\OVIME.vcproj", "{684B2F15-E8EE-4032-B4A3-89732F32C12D}"
 	ProjectSection(ProjectDependencies) = postProject
+		{3DDDCF0D-3F45-480A-9918-100A639BC5D1} = {3DDDCF0D-3F45-480A-9918-100A639BC5D1}
 		{21FC3D4F-8918-4C03-8881-EC6C54DB3504} = {21FC3D4F-8918-4C03-8881-EC6C54DB3504}
 		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B} = {E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMEUI", "OVIMEUI\OVIMEUI.vcproj", "{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}"
 	ProjectSection(ProjectDependencies) = postProject
+		{3DDDCF0D-3F45-480A-9918-100A639BC5D1} = {3DDDCF0D-3F45-480A-9918-100A639BC5D1}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVPreferences", "OVPreferences\OVPreferences.vcproj", "{93C590F7-2E9C-4703-B853-E8711F03733E}"
@@ -15,6 +17,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVPreferences", "OVPreferen
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AmphiVanilla", "AmphiVanilla\AmphiVanilla.vcproj", "{21FC3D4F-8918-4C03-8881-EC6C54DB3504}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3DDDCF0D-3F45-480A-9918-100A639BC5D1} = {3DDDCF0D-3F45-480A-9918-100A639BC5D1}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxml", "tinyxml\tinyxml.vcproj", "{3DDDCF0D-3F45-480A-9918-100A639BC5D1}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -45,6 +52,12 @@ Global
 		{21FC3D4F-8918-4C03-8881-EC6C54DB3504}.Release.ActiveCfg = Release|Win32
 		{21FC3D4F-8918-4C03-8881-EC6C54DB3504}.Release.Build.0 = Release|Win32
 		{21FC3D4F-8918-4C03-8881-EC6C54DB3504}.Release-Unicode.ActiveCfg = Release-Unicode|Win32
+		{3DDDCF0D-3F45-480A-9918-100A639BC5D1}.Debug.ActiveCfg = Debug|Win32
+		{3DDDCF0D-3F45-480A-9918-100A639BC5D1}.Debug.Build.0 = Debug|Win32
+		{3DDDCF0D-3F45-480A-9918-100A639BC5D1}.Release.ActiveCfg = Release|Win32
+		{3DDDCF0D-3F45-480A-9918-100A639BC5D1}.Release.Build.0 = Release|Win32
+		{3DDDCF0D-3F45-480A-9918-100A639BC5D1}.Release-Unicode.ActiveCfg = Release|Win32
+		{3DDDCF0D-3F45-480A-9918-100A639BC5D1}.Release-Unicode.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

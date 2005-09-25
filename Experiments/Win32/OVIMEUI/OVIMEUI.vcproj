@@ -90,7 +90,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="comctl32.lib  imm32.lib"
+				AdditionalDependencies="comctl32.lib imm32.lib"
 				LinkIncremental="1"
 				ModuleDefinitionFile="OVIMEUI.def"
 				GenerateDebugInformation="FALSE"
@@ -149,7 +149,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="comctl32.lib"
+				AdditionalDependencies="comctl32.lib imm32.lib"
 				LinkIncremental="1"
 				ModuleDefinitionFile="OVIMEUI.def"
 				GenerateDebugInformation="FALSE"
@@ -192,6 +192,12 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
+				RelativePath="..\AmphiVanilla\AVConfig.cpp">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVDictionary.cpp">
+			</File>
+			<File
 				RelativePath=".\OVIMEUI.def">
 			</File>
 			<File
@@ -213,6 +219,9 @@
 					RelativePath=".\PCMan\UIComp.cpp">
 				</File>
 				<File
+					RelativePath=".\PCMan\UINotify.cpp">
+				</File>
+				<File
 					RelativePath=".\PCMan\UIStatus.cpp">
 				</File>
 			</Filter>
@@ -221,6 +230,12 @@
 			Name="¼ÐÀYÀÉ"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			<File
+				RelativePath="..\AmphiVanilla\AVConfig.h">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVDictionary.h">
+			</File>
 			<File
 				RelativePath=".\Headers\OVIMEUI.h">
 			</File>

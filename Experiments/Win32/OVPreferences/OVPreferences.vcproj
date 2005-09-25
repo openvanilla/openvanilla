@@ -20,7 +20,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;c:\wxWidgets-2.6.2\include&quot;;&quot;c:\wxWidgets-2.6.2\lib\msw&quot;;..\..\..\Headers;.\;..\AmphiVanilla\;..\tinyxml;..\OVIME;..\OVIMEUI\Headers"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;WINVER=0x0400;wxUSE_GUI=1;_WINSOCKAPI_"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -33,7 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib wxmswd.lib AmphiVanilla.lib libiconv.lib libltdl.lib"
+				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib libiconv.lib libltdl.lib Ws2_32.lib"
 				OutputFile="$(OutDir)/OVPreferences.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;c:\wxWidgets-2.6.2\lib&quot;;..\AmphiVanilla;..\AmphiVanilla\Debug"
@@ -72,7 +72,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="&quot;c:\wxWidgets-2.6.2\include&quot;;&quot;c:\wxWidgets-2.6.2\lib\msw&quot;;..\..\..\Headers;.\;..\AmphiVanilla\;..\tinyxml;..\OVIME;..\OVIMEUI\Headers"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;WINVER=0x0400;wxUSE_GUI=1"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;WINVER=0x0400;wxUSE_GUI=1;_WINSOCKAPI_"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough=""
@@ -84,7 +84,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				RegisterOutput="FALSE"
-				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib wxmsw.lib AmphiVanilla.lib libiconv.lib libltdl.lib"
+				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib libiconv.lib libltdl.lib Ws2_32.lib"
 				OutputFile="$(OutDir)/OVPreferences.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;c:\wxWidgets-2.6.2\lib&quot;;..\AmphiVanilla;..\AmphiVanilla\Release"
@@ -124,7 +124,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="c:\wxWidgets-2.6.2\include;c:\wxWidgets-2.6.2\lib\mswu;..\..\..\Headers;.\;..\AmphiVanilla\;..\tinyxml;..\OVIME;..\OVIMEUI\Headers"
-				PreprocessorDefinitions="WIN32;UNICODE;NDEBUG;_WINDOWS;WINVER=0x0400;wxUSE_GUI=1"
+				PreprocessorDefinitions="WIN32;UNICODE;NDEBUG;_WINDOWS;WINVER=0x0400;wxUSE_GUI=1;_WINSOCKAPI_"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough=""
@@ -136,7 +136,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				RegisterOutput="FALSE"
-				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib wxmswu.lib AmphiVanilla.lib libiconv.lib libltdl.lib"
+				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib libiconv.lib libltdl.lib Ws2_32.lib"
 				OutputFile="$(OutDir)/OVPreferences.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="c:\wxWidgets-2.6.2\lib;..\AmphiVanilla;..\AmphiVanilla\Release"

@@ -20,7 +20,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS;_WINSOCKAPI_"
 				StringPooling="FALSE"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -36,11 +36,11 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib"
+				AdditionalDependencies="IMM32.LIB libiconv.lib libltdl.lib Ws2_32.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\AmphiVanilla;..\AmphiVanilla\Debug;"
-				IgnoreDefaultLibraryNames="scew_d.lib"
+				AdditionalLibraryDirectories="..\AmphiVanilla"
+				IgnoreDefaultLibraryNames=""
 				ModuleDefinitionFile="OVIME.def"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/OVIME.pdb"
@@ -80,7 +80,7 @@
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
 				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS;_WINSOCKAPI_"
 				StringPooling="TRUE"
 				MinimalRebuild="FALSE"
 				RuntimeLibrary="0"
@@ -94,10 +94,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib AmphiVanilla.lib"
+				AdditionalDependencies="IMM32.LIB libiconv.lib libltdl.lib Ws2_32.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\AmphiVanilla;..\AmphiVanilla\Release;"
+				AdditionalLibraryDirectories="..\AmphiVanilla"
 				IgnoreDefaultLibraryNames=""
 				ModuleDefinitionFile="OVIME.def"
 				GenerateDebugInformation="FALSE"
@@ -139,7 +139,7 @@
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
 				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS;_WINSOCKAPI_"
 				StringPooling="TRUE"
 				MinimalRebuild="FALSE"
 				RuntimeLibrary="0"
@@ -153,10 +153,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib AmphiVanilla.lib"
+				AdditionalDependencies="IMM32.LIB libiconv.lib libltdl.lib Ws2_32.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\AmphiVanilla;..\AmphiVanilla\Release;"
+				AdditionalLibraryDirectories="..\AmphiVanilla"
 				IgnoreDefaultLibraryNames=""
 				ModuleDefinitionFile="OVIME.def"
 				GenerateDebugInformation="FALSE"
@@ -223,6 +223,37 @@
 			<File
 				RelativePath="Utils.cpp">
 			</File>
+			<Filter
+				Name="AmphiVanilla"
+				Filter="">
+				<File
+					RelativePath="..\AmphiVanilla\AVBuffer.cpp">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVCandidate.cpp">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVConfig.cpp">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVDictionary.cpp">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVEmbeddedLoader.cpp">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVLoader.cpp">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVLoaderUtility.cpp">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVService.cpp">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\NetIO.cpp">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="¼ÐÀYÀÉ"
@@ -257,6 +288,43 @@
 			<File
 				RelativePath="Vk.h">
 			</File>
+			<Filter
+				Name="AmphiVanilla"
+				Filter="">
+				<File
+					RelativePath="..\AmphiVanilla\AVBuffer.h">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVCandidate.h">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVConfig.h">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVDictionary.h">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVDisplayServer.h">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVEmbeddedLoader.h">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVKeyCode.h">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVLoader.h">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVLoaderUtility.h">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\AVService.h">
+				</File>
+				<File
+					RelativePath="..\AmphiVanilla\NetIO.h">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="¸ê·½ÀÉ"
