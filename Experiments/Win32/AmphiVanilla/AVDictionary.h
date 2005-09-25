@@ -1,3 +1,5 @@
+#ifndef AVDictionary_h
+#define AVDictionary_h
 #include <string>
 #include "OpenVanilla.h"
 #include "tinyxml.h"
@@ -52,3 +54,4 @@ class AVDictionary : public OVDictionary {
 		TiXmlDocument doc;
 		TiXmlNode *module;
 };
+#endif // AVDictionary_h

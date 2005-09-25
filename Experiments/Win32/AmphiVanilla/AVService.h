@@ -1,3 +1,5 @@
+#ifndef AVService_h
+#define AVService_h
 #include "OpenVanilla.h"
 #include "AVConfig.h"
 #include "AVDisplayServer.h"
@@ -21,3 +23,4 @@ private:
     AVConfig cfg;
     AVDisplayServer *dsvr;
 };
+#endif // AVService_h

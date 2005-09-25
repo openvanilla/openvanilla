@@ -18,6 +18,7 @@
 #include "AVDisplayServer.h"
 #include "AVLoaderUtility.h"
 #include "AVService.h"
+#include "AVLoader.h"
 
 #include <exception>
 #include <algorithm>
