@@ -1,6 +1,6 @@
 TESTER_GEN=$(TESTER_HOME)/cxxtestgen.pl
 TEST_CASES=./t/*.h
-INC+= -I$(TESTER_HOME)
+INC+= -I$(TESTER_HOME) -I./
 
 test:
 	$(TESTER_GEN) --error-printer -o runner.cpp $(TEST_CASES)
