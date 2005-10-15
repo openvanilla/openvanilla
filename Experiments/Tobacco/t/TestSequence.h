@@ -11,30 +11,41 @@ public:
 	void setUp(void)
 	{
 		string keystroke("a");
-		TS_ASSERT(element.set(keystroke));
+		element.set(keystroke);
+
+		string word("apple");
+		chunk.set(word);
 	}
 
-	void tearDown(void)
+	void testGet(void)
 	{
+		TS_ASSERT_SAME_DATA(element.get()->c_str(), "a", 1);
+
+		TS_ASSERT_SAME_DATA(chunk.get()->c_str(), "apple", 5);
 	}
 
         void testAdd(void)
         {
-		TS_ASSERT(clause.add(element));
+		TS_ASSERT(!element.add(&chunk));
+
+		TS_ASSERT(chunk.add(&element));
         }
 
 	void testGetChild(void)	
 	{
-		Element tempElement;
-		TS_ASSERT(clause.getChild(0, tempElement));
+		TS_ASSERT(!element.getChild(0));
+
+		TS_ASSERT_SAME_DATA(chunk.getChild(0)->get()->c_str(), "a", 1);
 	}
 
         void testRemove(void)
         {
-                TS_ASSERT(clause.remove(0));
+		TS_ASSERT(!element.remove(0));
+
+                TS_ASSERT(chunk.remove(0));
         }
 
 private:
-        Clause clause;
+        Chunk chunk;
         Element element;
 };

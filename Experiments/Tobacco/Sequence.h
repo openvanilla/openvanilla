@@ -6,50 +6,60 @@
 
 using namespace std;
 
+struct DeleteObject
+{
+	template<typename T>
+	void operator()(const T* ptr) const { delete ptr; }
+};
+
 class Sequence
 {
 public:
-	virtual bool add(Sequence&) { return false; } 
-	virtual bool remove(int) { return false; }
-	virtual bool getChild(int, Sequence&) { return false; }
-};
+	virtual bool add(Sequence*) = 0;
+	virtual bool remove(int) = 0;
+	virtual Sequence* getChild(int) = 0; 
+
+	string* get(void) { return &sequence_; }
+	void set(string& str) { sequence_ = str; }
+private:
+        string sequence_;
+};                    
 
 class Element : public Sequence
 {
 public:
-	bool set(string& str)
-	{
-		element_ = str;
-		return true;
-	}
-
-private:
-	string element_;
+	virtual bool add(Sequence*) { return false; }
+	virtual bool remove(int) { return false; }
+	virtual Sequence* getChild(int) { return NULL; }
 };
 
-class Clause : public Sequence
+class Chunk : public Sequence
 {
 public:
-	bool add(Sequence& seq)
+	~Chunk(void)
 	{
-		clause_.push_back(seq);
+		for_each(chunk_.begin(), chunk_.end(), DeleteObject());
+	}
+
+	bool add(Sequence* seq)
+	{
+		chunk_.push_back(seq);
 		return true;
 	}
 
 	bool remove(int index)
 	{
-		clause_.erase(clause_.begin() + index);
+		chunk_.erase(chunk_.begin() + index);
 		return true;
 	}
 
-	bool getChild(int index, Sequence& seq)
+	Sequence* getChild(int index)
 	{
-		seq = clause_[index];
-		return true;
+		return chunk_[index];
 	}
 
 private:
-	vector<Sequence> clause_;
+	vector<Sequence*> chunk_;
 };
 
 #endif
