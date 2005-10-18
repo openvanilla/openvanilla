@@ -1,6 +1,7 @@
 #include "WordSegmenter.h"
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -13,10 +14,9 @@ bool WordSegmenter::loadModel(map<string, int>& lm)
 
 bool WordSegmenter::segment(string& inputString, string& outputString)
 {
-	int length = inputString.length();
-	
-	int scores[length + 1];
-	int tracks[length + 1];
+	size_t length = inputString.length();
+	vector<int> scores(length + 1);
+	vector<int> tracks(length + 1);
 	for(int i = 0; i < length + 1; i++)
 	{
 		scores[i] = 0;
@@ -70,6 +70,7 @@ bool WordSegmenter::segment(string& inputString, string& outputString)
 			" " + outputString;
 		suffix = boundary;
 	}
+	cerr<<endl;
 	outputString = outputString.substr(0, outputString.length() - 1);
 
 	return true;
