@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool WordSegmenter::loadModel(map<string, int>& lm)
+bool WordSegmenter::loadModel(map<string, Bin*>& lm)
 {
 	lm_ = lm;
 	
@@ -15,12 +15,12 @@ bool WordSegmenter::loadModel(map<string, int>& lm)
 bool WordSegmenter::segment(string& inputString, string& outputString)
 {
 	size_t length = inputString.length();
-	vector<int> scores(length + 1);
+	vector<double> scores(length + 1);
 	vector<int> tracks(length + 1);
 	for(int i = 0; i < length + 1; i++)
 	{
-		scores[i] = 0;
-		tracks[i] = 0;
+		scores[i] = 0.0;
+		tracks[i] = -1;
 	}
 		
 	for(int index = 1; index <= length; index++)
@@ -32,22 +32,33 @@ bool WordSegmenter::segment(string& inputString, string& outputString)
 			cerr << rightGram.c_str() << "=";
 			
 			if(lm_.count(rightGram) > 0) {
-				int tempScore = scores[prefix];
+				double tempScore = scores[prefix];
 				cerr << scores[prefix] << " + ";
-				for(int left = prefix - 1; left >= 0; left--)
+
+				int left = tracks[prefix];
+				if(left >= 0 && left != prefix)
 				{
 					string leftGram = inputString.substr(left, prefix - left);
-					string biGram = leftGram + " " + rightGram;
-					if(lm_.count(biGram) > 0) {
-						cerr << lm_[biGram] << "*3 + ";
-						tempScore += lm_[biGram]*3;
+					string bigram = leftGram + " " + rightGram;
+					cerr << "(test bigram:" << bigram << ")";
+					if(lm_.count(bigram) > 0) {
+						double bigramScore = lm_[bigram]->logprob;
+						cerr << bigramScore << " + ";
+						tempScore += bigramScore;
+					}
+					else if(lm_.count(leftGram) > 0) {
+						double bigramBackOff =
+							lm_[leftGram]->backoff + lm_[rightGram]->backoff;
+						cerr << bigramBackOff << " + ";
+						tempScore += bigramBackOff;
 					}
 				}
 
-				cerr << lm_[rightGram];
-				tempScore += lm_[rightGram];
+				double unigramScore = lm_[rightGram]->logprob;
+				cerr << unigramScore;
+				tempScore += unigramScore;
 				cerr << " = " << tempScore << endl;
-				if(tempScore > scores[index]) {
+				if(scores[index] == 0.0f || tempScore > scores[index]) {
 					cerr << "argmax=" << prefix << "," << tempScore << endl;
 					scores[index] = tempScore;
 					tracks[index] = prefix;
@@ -56,6 +67,7 @@ bool WordSegmenter::segment(string& inputString, string& outputString)
 			else
 				cerr << "none" << endl;
 		}
+		if(tracks[index] == -1)	tracks[index] = index - 1;
 		cerr << "----" << endl;
 	}
 	

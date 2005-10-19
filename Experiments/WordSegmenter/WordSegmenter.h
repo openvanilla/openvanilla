@@ -6,14 +6,22 @@
 
 using namespace std;
 
+class Bin
+{
+public:	
+	string gram;
+	double logprob;
+	double backoff;
+};
+
 class WordSegmenter
 {
 public:
-	bool loadModel(map<string, int>& lm);
+	bool loadModel(map<string, Bin*>& lm);
 	bool segment(string& inputString, string& outputString);
 
 private:
-	map<string, int> lm_;
+	map<string, Bin*> lm_;
 };
 
 #endif
