@@ -1,10 +1,10 @@
 BUILDER=xcodebuild
 BUILDSTYLE?=Deployment
-PROJECT=OVLoaderOSX.xcode
+PROJECT=OVLoaderOSX.xcodeproj
 DSTROOT=/
 
 all:
-	$(BUILDER) -project $(PROJECT) -buildstyle $(BUILDSTYLE)
+	$(BUILDER) -project $(PROJECT) -configuration $(BUILDSTYLE)
 
 clean:
 	$(BUILDER) clean
