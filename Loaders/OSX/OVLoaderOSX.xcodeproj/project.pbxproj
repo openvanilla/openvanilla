@@ -158,14 +158,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 6AF10FF60814BE3400B49D06 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6AFFDF0E090B7E4400299DDD /* ovfilter */;
+			remoteGlobalIDString = 6AFFDF0E090B7E4400299DDD;
 			remoteInfo = ovfilter;
 		};
 		6AFFDF5F090B809900299DDD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6AF10FF60814BE3400B49D06 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6AE4A460083677B300D6CCD3 /* OVPreferences */;
+			remoteGlobalIDString = 6AE4A460083677B300D6CCD3;
 			remoteInfo = OVPreferences;
 		};
 /* End PBXContainerItemProxy section */
@@ -1512,7 +1512,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
-				OPTIMIZATION_CFLAGS = "";
+				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1541,7 +1541,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
-				OPTIMIZATION_CFLAGS = "";
+				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1569,7 +1569,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = /usr/local/bin;
-				OPTIMIZATION_CFLAGS = "";
+				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",

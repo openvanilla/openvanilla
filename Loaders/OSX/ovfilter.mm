@@ -52,8 +52,9 @@ int main(int argc, char** argv) {
 	OVOutputFilter *of=(OVOutputFilter*)[m module];
 
 	while (!feof(stdin)) {
-		char buf[256];
-		fgets(buf, 255, stdin);
+        [loader clearNotification];
+		char buf[5121];
+		fgets(buf, 5120, stdin);
 		const char *result=of->process(buf, [loader service]);
 		fprintf(stdout, "%s", result);
 		NSString *nf=[loader notifyMessage];
