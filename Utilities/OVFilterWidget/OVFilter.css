@@ -1,5 +1,7 @@
 body {
     margin: 0;
+    font-family: "Lucida Grande", sans-serif;
+    font-size: 10pt;
 }
 
 .backgroundImage {
@@ -44,4 +46,21 @@ body {
 
 #back {
     display: none;
+}
+
+textarea {
+    background: #CCC;
+    padding: 1px;
+    margin: 3px 0 3px 0;
+    font-size: 8pt;
+    color: #666;
+}
+
+div p {
+    margin: 5px 0;
+    font-size: 10px;
+}
+a {
+    font-weight: bold;
+    color: #333;
 }

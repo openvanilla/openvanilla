@@ -1,6 +1,6 @@
 <html>
 <head>
-<!-- The style sheet should be kept in a separate file; it contains the design for the widget -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
  @import "OVFilter.css";
 </style>
@@ -13,10 +13,11 @@
     <div id="front" onmouseover='mousemove(event);' onmouseout='mouseexit(event);'>
      <img span="backgroundImage" src="Default.png">
      <form style="position: absolute; top: 60px; left: 20px;">
-     <textarea name="input" id="input" style="width: 180px; height: 80px;"></textarea>
-     <div id="filters"><select><option>Loading Filter Modules..</option></select></div>
-     <input type="button" value="Convert" onclick="convert();"/>
+     <textarea name="input" id="input" style="width: 180px; height: 80px;" onfocus="check();" onblur="check2();"></textarea>
+     <div id="filters"><select style="width:180px;"><option>Loading Filter Modules..</option></select></div>
      <textarea name="output" id="output" style="width: 180px; height: 80px;"></textarea>
+     <div class="widgetButton" id="convertButton" onclick="convert();"></div>
+     <div id="status" style="position: absolute; left: 100px; "></div>
      </form>
      <!-- Put your front html here -->
       <div class='flip' id='fliprollie'></div>
@@ -25,6 +26,11 @@
 
     <div id="back">
     <!-- Put your back prefs html here -->
+    <div style="position: absolute; top: 60px; left: 25px; width: 170px;">
+    <h3>OpenVanilla Output Filter Widget</h3>
+    <p>2005 © <a href="http://openvanilla.org" onclick="gotourl('http://openvanilla.org');">OpenVanilla.org</a></p>
+    <p><strong>OpenVanilla</strong> is an Input Method Framework, it contains not only input method modules but also output filter modules.</p><p>For further information, please visit http://openvanilla.org/ .</p>
+    </div>
 	<img span="backgroundImage" src="Default_reverse.png">
 	<div class="widgetButton" id="donePrefsButton" style='position: absolute;bottom: 24px; right: 30px;'></div>
     </div>

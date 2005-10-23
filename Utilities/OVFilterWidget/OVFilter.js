@@ -1,24 +1,54 @@
+function createkey(key) {
+	return widget.identifier + "-" + key;
+}
+
+function gotourl(url){
+	if (window.widget){
+		widget.openURL(url);
+    }
+}
+
 function checklist() {
     var output = widget.system("/usr/local/bin/ovfilter -l",null).outputString;
     startPos = output.search("available:");
-    output = output.replace(/available:/gi, "<select id=\"myfilter\" style=\"width:180px;\">");
+    output = output.replace(/available:/gi, "<select id=\"myfilter\" style=\"width:180px;\" onchange=\"convert();\">");
     output = output.substring(startPos);
     output = output.replace(/OVOF(\w+)\n/gi, "<option value=\"OVOF$1\">OVOF$1</option>\n");
     output = output + "</select>"
     document.getElementById("filters").innerHTML= output;
 }
 
+function check(){
+   var myinput = document.getElementById("input").value;
+   if(myinput == "Please input text here..."){
+    document.getElementById("input").value=""
+   }
+}
+
+function check2(){
+   var myinput = document.getElementById("input").value;
+   if(myinput == ""){
+    document.getElementById("input").value="Please input text here..."
+   }
+}
+
+
 function convert(){
+    document.getElementById("status").innerHTML= "<p>Converting..</p>";
     var myinput = "\"" + document.getElementById("input").value + "\n\"";
     /* myinput = myinput.replace(/\n/g, "\\n"); */  
     var myfilter = document.getElementById("myfilter").value;
     var mycmd ="echo " + myinput +"| /usr/local/bin/ovfilter " + myfilter;
     var myoutput = widget.system(mycmd,null).outputString;
     document.getElementById("output").value = myoutput;
+    document.getElementById("status").innerHTML= "<p>Done!</p>";
 }
 
 function setup() {
     createGenericButton(document.getElementById("donePrefsButton"),"OK",hidePrefs,60);
+    createGenericButton(document.getElementById("convertButton"),"Convert",hidePrefs,180);
+    document.getElementById("input").value = "Please input text here...";
+    document.getElementById("output").value = "Your result goes here...";
     document.getElementById("donePrefsButton").display = "none";
 
     checklist();
