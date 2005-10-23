@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+}
+
+.backgroundImage {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.flip {
+    position:absolute;
+    bottom: 18px;
+    right: 15.93181800842285px;
+    width:13px;
+    height:13px;
+}
+
+#flip {
+    opacity:0.5;
+    background: url(file:///System/Library/WidgetResources/ibutton/black_i.png) no-repeat top left;
+    z-index:8000;
+}
+
+#fliprollie {
+    display:none;
+    opacity:0.25;
+    background: url(file:///System/Library/WidgetResources/ibutton/black_rollie.png) no-repeat top left;
+    z-index:7999;
+
+}
+
+.donePrefsButton {
+    position: absolute;
+    bottom: 24px;
+    right: 30px;
+    display: none;
+}
+
+#widgetButton {
+    font: 10px "Lucida Grande";
+    font-weight: bold;
+}
+
+#back {
+    display: none;
+}

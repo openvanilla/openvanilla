@@ -1,0 +1,33 @@
+<html>
+<head>
+<!-- The style sheet should be kept in a separate file; it contains the design for the widget -->
+<style type="text/css">
+ @import "OVFilter.css";
+</style>
+    <script type='text/javascript' src="/System/Library/WidgetResources/button/genericButton.js"></script>
+    <script type='text/javascript' src="OVFilter.js"></script>
+
+<title>OVFilter</title>
+</head>
+<body onload='setup();'>
+    <div id="front" onmouseover='mousemove(event);' onmouseout='mouseexit(event);'>
+     <img span="backgroundImage" src="Default.png">
+     <form style="position: absolute; top: 60px; left: 20px;">
+     <textarea name="input" id="input" style="width: 180px; height: 80px;"></textarea>
+     <div id="filters"><select><option>Loading Filter Modules..</option></select></div>
+     <input type="button" value="Convert" onclick="convert();"/>
+     <textarea name="output" id="output" style="width: 180px; height: 80px;"></textarea>
+     </form>
+     <!-- Put your front html here -->
+      <div class='flip' id='fliprollie'></div>
+      <div class='flip' id='flip' onclick='showPrefs(event);' onmouseover='enterflip(event);' onmouseout='exitflip(event)';></div>
+    </div>
+
+    <div id="back">
+    <!-- Put your back prefs html here -->
+	<img span="backgroundImage" src="Default_reverse.png">
+	<div class="widgetButton" id="donePrefsButton" style='position: absolute;bottom: 24px; right: 30px;'></div>
+    </div>
+
+</body>
+</html>
