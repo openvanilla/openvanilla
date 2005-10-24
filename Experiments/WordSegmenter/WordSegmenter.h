@@ -4,6 +4,8 @@
 #include <map>
 #include <string>
 
+#include "Token.h"
+
 using namespace std;
 
 class Bin
@@ -18,7 +20,7 @@ class WordSegmenter
 {
 public:
 	bool loadModel(map<string, Bin*>& lm);
-	bool segment(string& inputString, string& outputString);
+	bool segment(vector<Token*>& inputTokens, vector<Token*>& outputTokens);
 
 private:
 	map<string, Bin*> lm_;
