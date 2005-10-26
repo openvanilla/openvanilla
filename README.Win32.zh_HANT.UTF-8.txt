@@ -1,4 +1,5 @@
-﻿Windows 版現在仍在 trunk/Experiments/Win32/ 中，未來會盡快移出 Experiemtns。
+﻿== 編譯 ==
+Windows 版現在仍在 trunk/Experiments/Win32/ 中，未來會盡快移出 Experiemtns。
 
 首先需要安裝 wxWidgets (http://www.wxwidgets.org/dl_msw2.htm#stable)，
 裝完之後 *必須* 自行編譯，通常直接用 VC++ 開啟 wxWidgets 附的 .dsw 再編譯即可。
@@ -22,3 +23,11 @@ nmake
 
 操作上述步驟時若遇到問題，請透過 IRC，到 FreeNote 的 #im-dev 找 kanru 或 pcman
 或 b6s。
+
+== 製作安裝檔 ==
+* 安裝 NSIS (http://nsis.sourceforge.net/download/)
+* 安裝 NSIS 的 Registry plugin (http://nsis.sourceforge.net/wiki/Registry_plugin)
+* 把編譯好的檔案放在 trunk/Experiments/Win32/Installer/ 底下
+** 要安裝到 %WINDIR%\system32 的檔案就放在 trunk/Experiments/Win32/Installer/System32/ 裡
+** 要安裝到 %WINDIR%\OpenVanilla 的檔案就放在 trunk/Experiments/Win32/Installer/ 裡
+* 在對應的 .nsi 檔上按右鍵選 Compile NSIS Script
