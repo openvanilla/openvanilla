@@ -1,13 +1,23 @@
-// OVIMRomanNew.cpp
+﻿// OVIMRomanNew.cpp
 // Copyright (c) 2004-2005 The OpenVanilla Project (http://openvanilla.org)
 
 #define OV_DEBUG
-#include <OpenVanilla/OpenVanilla.h>
-#include <OpenVanilla/OVLibrary.h>
-#include <OpenVanilla/OVUtility.h>
+#ifndef WIN32
+	#include <OpenVanilla/OpenVanilla.h>
+	#include <OpenVanilla/OVLibrary.h>
+	#include <OpenVanilla/OVUtility.h>
+#else
+	#include "OpenVanilla.h"
+	#include "OVLibrary.h"
+	#include "OVUtility.h"
+#endif
+	
+#ifdef WIN32
+	#define strcasecmp stricmp
+#endif
+
 #include <ctype.h>
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <string>
 #include <vector>

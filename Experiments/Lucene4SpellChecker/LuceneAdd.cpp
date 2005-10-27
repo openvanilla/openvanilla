@@ -14,17 +14,16 @@ int main()
 {
 	lucene::analysis::standard::StandardAnalyzer analyzer;
 	const char* indexDirPath = "./indexDir";
-	IndexWriter* writer = new IndexWriter(indexDirPath, analyzer, true);
+	IndexWriter* writer = new IndexWriter(indexDirPath, &analyzer, true);
 
 	OVFileHandler* fileHandler = new OVFileHandler("./dict.txt");
 	vector<string> lineVector;
 	int amount = fileHandler->getLines(lineVector);
 	for(int i = 0; i < amount; i++)
 	{
-		char* name = "word";
 		const char* word = lineVector[i].c_str();
-		Document& doc = *new Document();
-		doc.add( Field::Keyword(name, word) );
+		Document* doc = new Document();
+		doc->add( *Field::Keyword(_T("word"), (const TCHAR*)word) );
 		writer->addDocument(doc);
 		delete &doc;
 	}
