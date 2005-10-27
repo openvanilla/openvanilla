@@ -4,12 +4,12 @@ IMID=OVIMChewing
 OBJS=OVIMChewing.o
 GOALS=OVIMChewing.dylib
 
-$(GOALS): $(OBJS)
-	$(CPP) -framework ChewingPP -bundle -o $@ $(OBJS)
+SOURCES=OVIMChewing
 
+include ../../Mk/ov.os.mk
 include ../../Mk/ov.im.mk
 include ../../Mk/ov.vars.mk
 include ../../Mk/ov.general.mk
-include ../../Mk/ov.osx.mk
 
+LIBS+=-framework ChewingPP
 
