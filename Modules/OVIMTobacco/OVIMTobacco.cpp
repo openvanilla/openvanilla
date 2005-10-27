@@ -377,7 +377,8 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
     if (k->code()==ovkEsc) return keyEsc();
     if (k->code()==ovkBackspace || k->code()==ovkDelete) return keyRemove();
     if (k->code()==ovkSpace && !seq.isEmpty()) return keyCompose();
-    if (k->code()==ovkSpace && seq.isEmpty()) return setCandidate();
+    if ((k->code()==ovkSpace || k->code()==ovkDown) && seq.isEmpty())
+		return setCandidate();
     if (k->code()==ovkReturn) return keyCommit();
     if (k->code()==ovkLeft || k->code()==ovkRight) return keyMove();
     if (isprint(k->code())) return keyPrintable();
@@ -539,9 +540,15 @@ void OVIMTobaccoContext::freshBuffer() {
             ->update(position, position-1, position);
     }
     else
-        b->clear()
-            ->append(predictor->composedString.c_str())
-            ->update(position, position-1, position);
+	{
+		b->clear();
+		if(predictor->composedString.length() > 0)
+			b->append(predictor->composedString.c_str());
+		if(strlen(seq.sequence()) > 0)
+			b->append(seq.compose());
+
+		b->update(position, position-1, position);
+	}
 }
 
 int OVIMTobaccoContext::keyNonRadical() {
