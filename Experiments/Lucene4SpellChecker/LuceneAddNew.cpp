@@ -4,6 +4,8 @@
 #include "OVStringToolKit.h"
 #include <vector>
 
+#include <windows.h>
+
 using namespace std;
 
 using namespace lucene::index;
@@ -32,9 +34,11 @@ int main()
 
 		if(outStringVector.size() > 0)
 		{
-			const char* word = outStringVector[0].c_str();
+			TCHAR wordT[100];
+			_tcsset(wordT, _T('\0'));
+			MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, outStringVector[0].c_str(), outStringVector[0].length(), wordT, 100);
 			Document* doc = new Document();
-			doc->add( *Field::Keyword(_T("word"), (const TCHAR*)word) );
+			doc->add( *Field::Keyword(_T("word"), wordT) );
 			writer->addDocument(doc);
 			delete &doc;
 		}
