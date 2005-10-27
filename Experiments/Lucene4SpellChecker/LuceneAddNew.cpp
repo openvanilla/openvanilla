@@ -18,14 +18,27 @@ int main()
 
 	OVFileHandler* fileHandler = new OVFileHandler("./dict.txt");
 	vector<string> lineVector;
+	vector<string> outStringVector;
+	vector<string> delimiterVector;
+	delimiterVector.push_back("\t");
+	delimiterVector.push_back(" ");
 	int amount = fileHandler->getLines(lineVector);
 	for(int i = 0; i < amount; i++)
 	{
-		const TCHAR* word = reinterpret_cast<const TCHAR*>(lineVector[i].c_str());
-		Document* doc = new Document();
-		doc->add( *Field::Keyword(_T("word"), word) );
-		writer->addDocument(doc);
-		delete &doc;
+		OVStringToolKit::splitString(lineVector[i],
+			outStringVector,
+			delimiterVector,
+			false);
+
+		if(outStringVector.size() > 0)
+		{
+			const char* word = outStringVector[0].c_str();
+			Document* doc = new Document();
+			doc->add( *Field::Keyword(_T("word"), (const TCHAR*)word) );
+			writer->addDocument(doc);
+			delete &doc;
+		}
+		outStringVector.clear();
 	}
 
 	writer->optimize();

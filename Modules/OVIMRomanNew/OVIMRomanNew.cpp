@@ -298,7 +298,7 @@ int OVIMRomanNewContext:: updatepagetotal(char* buf){
     if (strlen(buf) < 3) return 0;
 
     char cmd[256];
-    sprintf(cmd, "select * from dict where key like '%s%%';", buf);
+    sprintf(cmd, "select * from dict where key like '%s%%' order by freq desc;", buf);
     SQLite3Statement *sth=db->prepare(cmd);
     if (!sth) return 0;
 
