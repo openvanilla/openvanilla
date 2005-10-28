@@ -109,7 +109,8 @@ public:
 		        murmur("SelectKey Pressed: %c",k->code());
                 int n = (k->code() - '1' + 10) % 10;
                 if(n+pagenumber*10 >= candi.count()) return 0;
-                b->clear()->append(keyseq.buf)->append(candi.item(n+pagenumber*10) + keyseq.len)->append(" ")->send();
+				const char* correctedWord = candi.item(n+pagenumber*10);
+                b->clear()->append(correctedWord)->append(" ")->send();
 		    	if (i->onScreen()) i->hide();
 		    	keyseq.clear();
 		    	return closeCandidateWindow(i);
@@ -259,6 +260,8 @@ int OVIMRomanNewContext::spellCheckerByLuceneFuzzySearch(char* buf)
     std::string query(buf);
     query += "~";
     LuceneSearch::run(query, modulePath, candi.vectorInstance());
+
+	pagetotal=candi.count()/10;
     
     return candi.count();
 }
