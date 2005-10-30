@@ -27,5 +27,6 @@ tsi.db: tobacco-schema.txt tobacco-sqlconvert.pl
 	rm -f tsi.db
 	sqlite3 tsi.db < tobacco-schema.txt
 	if [ !tsi.src ]; then curl -k https://svn.csie.net/chewing/libchewing/trunk/data/tsi.src -o tsi.src ; fi
-	cat tsi.src | perl -w -CO tobacco-sqlconvert.pl | sqlite3 tsi.db
-	perl -w -CO tobacco-sqlconvert_general.pl tsi.src ${CINS} | sqlite3 tsi.db
+	cat tsi.src punctuation.txt > tsi_punctuation.src
+	cat tsi_punctuation.src | perl -w -CO tobacco-sqlconvert.pl | sqlite3 tsi.db
+	perl -w -CO tobacco-sqlconvert_general.pl tsi_punctuation.src ${CINS} | sqlite3 tsi.db

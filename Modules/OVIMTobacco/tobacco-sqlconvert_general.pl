@@ -55,7 +55,7 @@ for my $fn_cin (@ARGV) {
 	    $keymap{$1} = $2;
 	}
 	if ($chardef_sec and $_ =~ m/^(\S+)\s+(\S+)/) {
-	    $charmap{$2} = $1; # NOTE: reverse...
+	    push @{$charmap{$2}}, $1; # NOTE: reverse...
 	}
     }
     close HNDL;
@@ -64,7 +64,7 @@ for my $fn_cin (@ARGV) {
     @words = sort @words;
     for(@words) {
 	my $word = $_;
-#	my $freq = $word2freqHash{$word};
+	my $freq = $word2freqHash{$word};
 #	printf "insert into word_table values(%d, '%s') ON CONFLICT IGNORE;\n",
 #	    $idCounter, sprintf("%s", $word);
 #	printf "insert into generic_freq_table values(%d, %d) ON CONFLICT IGNORE;\n",
@@ -72,18 +72,51 @@ for my $fn_cin (@ARGV) {
 
 	my $currentCharsRef = $word2charHash{$word};
 	my $currentKeyCode = "";
+	my @temp;
 	for(@{$currentCharsRef}) {
-	    if (defined($charmap{$_})) {
-		my @currentCharCodes = split //,$charmap{$_};
+	    my $k;
+	    if (defined(@{$charmap{$_}})) {
+		$k = join ",", @{$charmap{$_}};
+	    }
+	    push @temp, $k if defined($k);
+	}
+	if (@temp) {
+	    $currentKeyCode = "[".join ("] [",@temp). "]";
+	    my @syl=produce($currentKeyCode);
+	    foreach (@syl) {
+		my @currentCharCodes = split //,$_;
+		$currentKeyCode = "";
 		for (@currentCharCodes) {
-		    $currentKeyCode .= $keymap{$_};
+		    $currentKeyCode .= $keymap{$_} if defined($keymap{$_});
+		    $currentKeyCode .= $_ if $_ eq "\t";
 		}
-		$currentKeyCode .= "\t";
+		$currentKeyCode =~ s/\s*$//g;
+		$currentKeyCode =~ s/'/''/g;
+		printf "insert into %s_char2word_table values('%s', %d);\n",
+		    $table_prefix, sprintf("%s", $currentKeyCode), $idCounter;
 	    }
 	}
-	$currentKeyCode =~ s/\s*$//g;
-	printf "insert into %s_char2word_table values('%s', %d);\n",
-	    $table_prefix, sprintf("%s", $currentKeyCode), $idCounter;
+#		foreach (@charmaps) { # "abcd", then "defc"
+#		    my @currentCharCodes = split //,$_; # a, b, c, d ..
+#		    for (@currentCharCodes) {
+##			$currentKeyCode .= $keymap{$_};
+#		    }
+#		    $currentKeyCode .= "\t";
+#		}
+#	    if (defined(@{$charmap{$_}})) {
+#		my @charmaps = @{$charmap{$_}}; # {abcd, defc}
+#		foreach (@charmaps) { # "abcd", then "defc"
+#		    my @currentCharCodes = split //,$charmap{$_}; 
+#		    for (@currentCharCodes) {
+#			$currentKeyCode .= $keymap{$_};
+#		    }
+#		    $currentKeyCode .= "\t";
+#		}
+#	    }
+#	}
+#	$currentKeyCode =~ s/\s*$//g;
+#	printf "insert into %s_char2word_table values('%s', %d);\n",
+#	    $table_prefix, sprintf("%s", $currentKeyCode), $idCounter;
 	    
 	$idCounter = $idCounter + 1;
     }
