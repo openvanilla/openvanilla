@@ -3,7 +3,7 @@ SOURCES=OVIMTobacco PredictorSingleton DictionarySingleton\
     Token Vocabulary Candidate BiGram
 DATA=imtables.db tsi.db
 BPMF=bpmf_punctuation.cin
-CINS=cj.cin dayi3.cin poj-holo.cin
+CINS=cj.cin
 
 LDFLAGS+=-lsqlite3
 
