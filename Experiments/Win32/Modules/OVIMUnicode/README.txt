@@ -1,0 +1,1 @@
+Go to trunk/Modules/OVIMUnicode/ and then run the make.bat to get the DLL.
