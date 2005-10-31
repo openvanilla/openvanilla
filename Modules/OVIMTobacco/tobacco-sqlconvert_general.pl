@@ -91,7 +91,7 @@ for my $fn_cin (@ARGV) {
 		    $currentKeyCode .= $_ if $_ eq "\t";
 		}
 		$currentKeyCode =~ s/\s*$//g;
-		$currentKeyCode =~ s/'/''/g;
+		$currentKeyCode =~ s/\'/\'\'/g;
 		printf "insert into %s_char2word_table values('%s', %d);\n",
 		    $table_prefix, sprintf("%s", $currentKeyCode), $idCounter;
 	    }

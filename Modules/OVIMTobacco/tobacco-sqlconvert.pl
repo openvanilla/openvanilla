@@ -55,7 +55,7 @@ for(@words) {
     my $currentCharsRef = $char2wordHash{$word};
     for(@{$currentCharsRef}) {
         my $currentChar = $_;
-	$currentChar =~ s/'/''/g;
+	$currentChar =~ s/\'/\'\'/g;
         printf "insert into Phonetic_char2word_table values('%s', %d);\n",
             sprintf("%s", $currentChar), $idCounter;
     }   
