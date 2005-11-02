@@ -1,5 +1,5 @@
 %gen_inp
-%ename [TW]Pinyin
+%ename PinyinTW
 %cname 正體漢語拼音
 %encoding UTF-8
 %selkey 1234567890

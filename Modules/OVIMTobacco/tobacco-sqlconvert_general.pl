@@ -76,13 +76,12 @@ for my $fn_cin (@ARGV) {
 	for(@{$currentCharsRef}) {
 	    my $k;
 	    if (defined(@{$charmap{$_}})) {
-		$k = join "\t", @{$charmap{$_}};
+		$k = join "，", @{$charmap{$_}};
 	    }
 	    push @temp, $k if defined($k);
 	}
 	if (@temp) {
 	    $currentKeyCode = "[".join ("] [",@temp). "]";
-	    #    print $currentKeyCode."\n";;
 	    my @syl=produce($currentKeyCode);
 	    foreach (@syl) {
 		my @currentCharCodes = split //,$_;
@@ -92,6 +91,7 @@ for my $fn_cin (@ARGV) {
 		    $currentKeyCode .= $_ if $_ eq "\t";
 		}
 		$currentKeyCode =~ s/\s*$//g;
+		$currentKeyCode =~ s/'/''/g;
 		printf "insert into %s_char2word_table values('%s', %d);\n",
 		    $table_prefix, sprintf("%s", $currentKeyCode), $idCounter;
 	    }
@@ -131,7 +131,7 @@ sub produce {
     my $x;
     for $x (@s) {
         if ($x =~ /\[(\S+)\]/) {
-            push @p, [split(/\t/, $1)];
+            push @p, [split(/，/, $1)];
         }
         else {
             push @p, [$x];
