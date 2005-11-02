@@ -1,4 +1,5 @@
-# ChangJei input method table tweaked by b6s for OVIMGeneric(SQLite) in UTF-8 encoding.
+# Cangjie (often mis-Romanized as Changjei) input method table
+# tweaked by b6s for OVIMGeneric(SQLite) in UTF-8 encoding.
 #
 # This table also extended to include HKSCS encodings. For details, see
 #	http://www.info.gov.hk/digital21/chi/hkscs/index.html
