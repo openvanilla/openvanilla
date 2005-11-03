@@ -1,4 +1,4 @@
 CREATE TABLE word_table(wordID INTEGER PRIMARY KEY, word TEXT);
 CREATE TABLE generic_freq_table(wordID INTEGER PRIMARY KEY, freq INTEGER);
-CREATE TABLE Phonetic_char2word_table(characters TEXT, wordID INTEGER);
-CREATE INDEX Phonetic_index_characters ON Phonetic_char2word_table(characters);
+CREATE TABLE BoPoMoFo_char2word_table(characters TEXT, wordID INTEGER);
+CREATE INDEX BoPoMoFo_index_characters ON BoPoMoFo_char2word_table(characters);

@@ -4,45 +4,22 @@ use utf8;
 use Encode;
 print "begin;\n";
 
-my %char2wordHash;
+my %word2charsHash;
 my %word2freqHash;
 while(<>) {
     chomp;
     if (/#?\s*(\S+)\s+(\d+)\s+(.+)/) {
         my ($p, $f, $s)=(decode("big5-hkscs", $1), $2, decode("big5-hkscs", $3));
 
-        # deal with irregularities in tsi.src first
-        my @syl;
-        if (length $p==1 && $s=~/\s+/) {
-            $s =~ s/ /,/g;
-            @syl=produce("[$s]");
-        }
-        else 
-        {
-            @syl=produce($s);
-        }
-
         $word2freqHash{$p} = $f unless exists $word2freqHash{$p};
 
-        for my $x (@syl) {
-            $x =~ s/ /\t/g;
-            if (exists $char2wordHash{$p})
-            {
-                my $charsRef = $char2wordHash{$p};
-                push @{$charsRef}, $x;
-                $char2wordHash{$p} = $charsRef;
-            }
-            else
-            {
-                my @chars = ($x);
-                $char2wordHash{$p} = \@chars;
-            }
-        }
+	$s =~ s/ /\t/g;
+	push @{$word2charsHash{$p}}, $s;
     }
 }
 
 my $idCounter = 0;
-my @words = keys(%word2freqHash);
+my @words = keys(%word2charsHash);
 @words = sort @words;
 for(@words) {
     my $word = $_;
@@ -52,13 +29,11 @@ for(@words) {
     printf "insert into generic_freq_table values(%d, %d);\n",
         $idCounter, $freq;
 
-    my $currentCharsRef = $char2wordHash{$word};
+    my $currentCharsRef = $word2charsHash{$word};
     for(@{$currentCharsRef}) {
         my $currentChar = $_;
 	$currentChar =~ s/\'/\'\'/g;
-	$currentChar =~ s/\[//g;
-	$currentChar =~ s/\]//g;
-        printf "insert into Phonetic_char2word_table values('%s', %d);\n",
+        printf "insert into BoPoMoFo_char2word_table values('%s', %d);\n",
             sprintf("%s", $currentChar), $idCounter;
     }   
         
@@ -66,38 +41,3 @@ for(@words) {
 }
 
 print "commit;\n";
-
-# this makes the product of homophones (e.g. [A,B] x [C,D] x [E,F])
-sub produce {
-    my @s = split / /, shift;
-    my @p;    
-    my $x;
-    for $x (@s) {
-        if ($x =~ /\[(\S+)\]/) {
-            push @p, [split(/,/, $1)];
-        }
-        else {
-            push @p, [$x];
-        }
-    }
-    
-    my @r;
-    for $x (reverse @p) {
-        if (!@r) {
-            for my $y (@$x) {
-                push @r, $y;
-            }
-        }
-        else {
-            my @rr;
-            for my $y (@$x) {
-                for my $z (@r) {
-                    push @rr, "$y\t$z";
-                }
-            }
-            @r=@rr;
-        }
-    }
-    
-    @r;
-}
