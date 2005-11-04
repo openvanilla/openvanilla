@@ -15,16 +15,16 @@
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
 			ConfigurationType="1"
-			CharacterSet="2">
+			CharacterSet="1">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;D:\Program\wxWidgets-2.6.1\include&quot;;&quot;D:\Program\wxWidgets-2.6.1\lib\msw&quot;;..\..\..\Headers;.\;..\AmphiVanilla\;..\AmphiVanilla\tinyxml;..\OVIME;..\OVIMEUI\Headers"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				AdditionalIncludeDirectories="&quot;c:\wxWidgets-2.6.2\include&quot;;&quot;c:\wxWidgets-2.6.2\lib\vc_lib\mswud&quot;;..\..\..\Headers;.\;..\AmphiVanilla\;..\tinyxml;..\OVIME;..\OVIMEUI\Headers"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;WINVER=0x0400;wxUSE_GUI=1;__WXDEBUG__;__WXMSW__;NOPCH"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="1"
-				UsePrecompiledHeader="2"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
 				PrecompiledHeaderThrough=""
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -33,10 +33,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib wxmswd.lib AmphiVanilla.lib libiconv.lib libltdl.lib"
+				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib libiconv.lib libltdl.lib wxbase26ud.lib wxmsw26ud_core.lib"
 				OutputFile="$(OutDir)/OVPreferences.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;D:\Program\wxWidgets-2.6.1\lib&quot;;..\AmphiVanilla;..\AmphiVanilla\Debug"
+				AdditionalLibraryDirectories="c:\wxWidgets-2.6.2\lib\vc_lib;..\AmphiVanilla"
 				IgnoreAllDefaultLibraries="FALSE"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/OVPreferences.pdb"
@@ -68,13 +68,13 @@
 			OutputDirectory="Release"
 			IntermediateDirectory="Release"
 			ConfigurationType="1"
-			CharacterSet="2">
+			CharacterSet="1">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;D:\Program\wxWidgets-2.6.1\include&quot;;&quot;D:\Program\wxWidgets-2.6.1\lib\msw&quot;;..\..\..\Headers;.\;..\AmphiVanilla\;..\AmphiVanilla\tinyxml;..\OVIME;..\OVIMEUI\Headers"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;WINVER=0x0400;wxUSE_GUI=1"
-				RuntimeLibrary="0"
-				UsePrecompiledHeader="2"
+				AdditionalIncludeDirectories="&quot;c:\wxWidgets-2.6.2\include&quot;;&quot;c:\wxWidgets-2.6.2\lib\vc_lib\mswu&quot;;..\..\..\Headers;.\;..\AmphiVanilla\;..\tinyxml;..\OVIME;..\OVIMEUI\Headers"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;WINVER=0x0400;wxUSE_GUI=1;__WXMSW__;NOPCH"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
 				PrecompiledHeaderThrough=""
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="FALSE"
@@ -84,10 +84,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				RegisterOutput="FALSE"
-				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib wxmsw.lib AmphiVanilla.lib libiconv.lib libltdl.lib"
+				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib libiconv.lib libltdl.lib wxbase26u.lib wxmsw26u_core.lib"
 				OutputFile="$(OutDir)/OVPreferences.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;D:\Program\wxWidgets-2.6.1\lib&quot;;..\AmphiVanilla;..\AmphiVanilla\Release"
+				AdditionalLibraryDirectories="c:\wxWidgets-2.6.2\lib\vc_lib;..\AmphiVanilla"
 				IgnoreAllDefaultLibraries="FALSE"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
@@ -123,10 +123,10 @@
 			CharacterSet="1">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;D:\Program\wxWidgets-2.6.1\include&quot;;&quot;D:\Program\wxWidgets-2.6.1\lib\msw&quot;;..\..\..\Headers;.\;..\AmphiVanilla\;..\AmphiVanilla\tinyxml;..\OVIME;..\OVIMEUI\Headers"
-				PreprocessorDefinitions="WIN32;UNICODE;NDEBUG;_WINDOWS;WINVER=0x0400;wxUSE_GUI=1"
-				RuntimeLibrary="0"
-				UsePrecompiledHeader="2"
+				AdditionalIncludeDirectories="c:\wxWidgets-2.6.2\include;c:\wxWidgets-2.6.2\lib\vc_lib\mswu;..\..\..\Headers;.\;..\AmphiVanilla\;..\tinyxml;..\OVIME;..\OVIMEUI\Headers"
+				PreprocessorDefinitions="WIN32;UNICODE;NDEBUG;_WINDOWS;_WINSOCKAPI_;__WXMSW__;NOPCH"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
 				PrecompiledHeaderThrough=""
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="FALSE"
@@ -136,10 +136,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				RegisterOutput="FALSE"
-				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib wxmswu.lib AmphiVanilla.lib libiconv.lib libltdl.lib"
+				AdditionalDependencies="comctl32.lib rpcrt4.lib winmm.lib advapi32.lib wsock32.lib libiconv.lib libltdl.lib Ws2_32.lib  wxbase26u.lib  wxmsw26u_core.lib"
 				OutputFile="$(OutDir)/OVPreferences.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;D:\Program\wxWidgets-2.6.1\lib&quot;;..\AmphiVanilla;..\AmphiVanilla\Release"
+				AdditionalLibraryDirectories="c:\wxWidgets-2.6.2\lib\vc_lib;..\AmphiVanilla"
 				IgnoreAllDefaultLibraries="FALSE"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="TRUE"
@@ -177,16 +177,91 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
+				RelativePath="..\AmphiVanilla\AVBuffer.cpp">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVCandidate.cpp">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVConfig.cpp">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVDictionary.cpp">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVEmbeddedLoader.cpp">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVLoader.cpp">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVLoaderUtility.cpp">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVService.cpp">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\DummyDisplayServer.cpp">
+			</File>
+			<File
 				RelativePath=".\ovprefdlg.cpp">
 			</File>
 			<File
 				RelativePath=".\OVPreferences.cpp">
+			</File>
+			<File
+				RelativePath="..\tinyxml\tinyxml.cpp">
+			</File>
+			<File
+				RelativePath="..\tinyxml\tinyxmlerror.cpp">
+			</File>
+			<File
+				RelativePath="..\tinyxml\tinyxmlparser.cpp">
 			</File>
 		</Filter>
 		<Filter
 			Name="¼ÐÀYÀÉ"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			<File
+				RelativePath="..\AmphiVanilla\AVBuffer.h">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVCandidate.h">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVConfig.h">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVDictionary.h">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVDisplayServer.h">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVEmbeddedLoader.h">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVKeyCode.h">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVLoader.h">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVLoaderUtility.h">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\AVService.h">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\DummyDisplayServer.h">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\iconv.h">
+			</File>
+			<File
+				RelativePath="..\AmphiVanilla\ltdl.h">
+			</File>
 			<File
 				RelativePath=".\ovprefdlg.h">
 			</File>
@@ -195,6 +270,9 @@
 			</File>
 			<File
 				RelativePath=".\resource.h">
+			</File>
+			<File
+				RelativePath="..\tinyxml\tinyxml.h">
 			</File>
 		</Filter>
 		<Filter
