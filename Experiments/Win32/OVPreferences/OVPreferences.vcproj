@@ -209,15 +209,6 @@
 			<File
 				RelativePath=".\OVPreferences.cpp">
 			</File>
-			<File
-				RelativePath="..\tinyxml\tinyxml.cpp">
-			</File>
-			<File
-				RelativePath="..\tinyxml\tinyxmlerror.cpp">
-			</File>
-			<File
-				RelativePath="..\tinyxml\tinyxmlparser.cpp">
-			</File>
 		</Filter>
 		<Filter
 			Name="¼ÐÀYÀÉ"
@@ -270,9 +261,6 @@
 			</File>
 			<File
 				RelativePath=".\resource.h">
-			</File>
-			<File
-				RelativePath="..\tinyxml\tinyxml.h">
 			</File>
 		</Filter>
 		<Filter

@@ -1,6 +1,11 @@
 Microsoft Visual Studio Solution File, Format Version 8.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVPreferences", "OVPreferences\OVPreferences.vcproj", "{93C590F7-2E9C-4703-B853-E8711F03733E}"
 	ProjectSection(ProjectDependencies) = postProject
+		{397B67D1-91E7-4227-93E3-930960EAE240} = {397B67D1-91E7-4227-93E3-930960EAE240}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxml", "tinyxml\tinyxml.vcproj", "{397B67D1-91E7-4227-93E3-930960EAE240}"
+	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
 Global
@@ -13,6 +18,10 @@ Global
 		{93C590F7-2E9C-4703-B853-E8711F03733E}.Debug.Build.0 = Debug|Win32
 		{93C590F7-2E9C-4703-B853-E8711F03733E}.Release.ActiveCfg = Release|Win32
 		{93C590F7-2E9C-4703-B853-E8711F03733E}.Release.Build.0 = Release|Win32
+		{397B67D1-91E7-4227-93E3-930960EAE240}.Debug.ActiveCfg = Debug|Win32
+		{397B67D1-91E7-4227-93E3-930960EAE240}.Debug.Build.0 = Debug|Win32
+		{397B67D1-91E7-4227-93E3-930960EAE240}.Release.ActiveCfg = Release|Win32
+		{397B67D1-91E7-4227-93E3-930960EAE240}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
