@@ -11,11 +11,10 @@ using namespace std;
 
 PredictorSingleton* PredictorSingleton::itsInstance = NULL;
 
-PredictorSingleton::PredictorSingleton(
-    const char* dbFilePath, string inputMethodId)
+PredictorSingleton::PredictorSingleton(const char* dbFilePath)
 {
 	PredictorSingleton::dictionary =
-	   DictionarySingleton::getInstance(dbFilePath, inputMethodId);
+	   DictionarySingleton::getInstance(dbFilePath);
 }
 
 PredictorSingleton::~PredictorSingleton()

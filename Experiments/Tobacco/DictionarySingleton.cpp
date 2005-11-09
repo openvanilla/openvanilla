@@ -13,12 +13,11 @@ DictionarySingleton* DictionarySingleton::itsInstance = NULL;
 SQLite3* DictionarySingleton::dictionaryDB = NULL;
 
 DictionarySingleton::DictionarySingleton(
-    const char* dbFilePath, string inputMethodId)
+    const char* dbFilePath)
 {
     murmur("new DictionarySingleton");
 
     DictionarySingleton::dictionaryDB = new SQLite3;
-    DictionarySingleton::inputMethodId = inputMethodId;
     if (int err = DictionarySingleton::dictionaryDB->open(dbFilePath)) {
         murmur("SQLite3 error! code=%d", err);
     }
@@ -89,7 +88,7 @@ bool DictionarySingleton::getVocabularyVectorByCharacters(string characters,
     /// A SQL statement for example:
     /// SELECT word_table.word, generic_freq_table.freq
     /// FROM phone_char2word_table, word_table, generic_freq_table
-    /// WHERE phone_char2word_table.characters = 'ã„…ã„šË‹'
+    /// WHERE phone_char2word_table.characters = '£t£«£¿'
     ///     AND word_table.wordID = phone_char2word_table.wordID
     ///     AND word_table.wordID = generic_freq_table.wordID
     /// ORDER BY generic_freq_table.freq DESC"

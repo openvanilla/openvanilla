@@ -148,6 +148,7 @@ protected:
     char endkey[96];
     char table[256];
     char idstr[256];
+    char tsiDbFilePath[256];
 
     int cfgMaxSeqLen;
     bool cfgBeep;
@@ -275,14 +276,10 @@ OVInputMethodContext *OVIMTobacco::newContext() {
 }
 
 int OVIMTobacco::initialize(OVDictionary *cfg, OVService * s, const char *p) {
-    char tsiDbFilePath[256];
     sprintf(tsiDbFilePath, "%sOVIMTobacco/tsi.db", p);
-    const char* ename = QueryForKey(db, table, "_property_ename");
-    string inputMethodId(ename);
 
-    murmur("initializing the predictor(%s, %s)",
-        tsiDbFilePath, inputMethodId.c_str());
-    predictor = PredictorSingleton::getInstance(tsiDbFilePath, inputMethodId);
+	murmur("initial predictor(%s)", tsiDbFilePath);
+    predictor = PredictorSingleton::getInstance(tsiDbFilePath);
 
     update(cfg, s);
     
@@ -352,22 +349,24 @@ OVIMTobaccoContext::OVIMTobaccoContext(OVIMTobacco *p) : seq(p->table) {
 }
 
 void OVIMTobaccoContext::start(OVBuffer*, OVCandidate*, OVService* s) {
-    seq.clear();
-    candi=NULL;
-    
-    predictor->clearAll();
-    position = 0;
-    canNewSequence = false;
-    doInsert = false;
+	clear();
+
+	const char* ename = QueryForKey(db, parent->table, "_property_ename");
+    string inputMethodId(ename);
+
+	murmur("set predictor input method: %s", inputMethodId.c_str());
+	predictor->setInputMethodId(inputMethodId);
 }
 
 void OVIMTobaccoContext::clear() {
     seq.clear();
+    candi=NULL;
     
-    predictor->clearAll();
     position = 0;
     canNewSequence = false;
     doInsert = false;
+
+	predictor->clearAll();
 }
 
 void OVIMTobaccoContext::end() {
@@ -498,8 +497,10 @@ int OVIMTobaccoContext::keyPrintable() {
     }
     
     // wildcard hack: currently we don't allow ? * as the first character
+	/* Conflict to punctuation.
     if (parent->allowwildcard && b->isEmpty() && 
         (k->code()=='?' || k->code()=='*')) return keyNonRadical();
+	*/
  
     if (!seq.add(k->code())) {
         if (b->isEmpty()) return keyNonRadical();
@@ -573,7 +574,7 @@ int OVIMTobaccoContext::isPunctuationCombination() {
     if (k->isCtrl() && !k->isOpt() && !k->isCommand() &&
         (k->code()=='1' || k->code()=='0')) return 1;
     // only accept CTRL-OPT(ALT)-[printable]
-    if (k->isCtrl() && (k->isOpt() || k->isAlt()) && !k->isCommand() && !k->isShift() && 
+    if (k->isCtrl() && (k->isOpt() || k->isAlt()) && !k->isShift() && 
         ((k->code() >=1 && k->code() <=26) || isprint(k->code()))) return 1;
     return 0;
 }

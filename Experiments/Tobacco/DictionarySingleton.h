@@ -15,22 +15,23 @@ class DictionarySingleton
 {
 public:
 	static DictionarySingleton* getInstance(
-	   const char* dbFilePath, string inputMethodId)
+	   const char* dbFilePath)
 	{
 		if(itsInstance == NULL)
-			itsInstance = new DictionarySingleton(dbFilePath, inputMethodId);
+			itsInstance = new DictionarySingleton(dbFilePath);
 
 		return itsInstance;
 	}
 
-	void lostInstance();
+	static void lostInstance();
 
+	void setInputMethodId(string id) { inputMethodId = id; }
     bool isVocabulary(string characters);
 	bool getVocabularyVectorByCharacters(string characters,
 	   vector<Vocabulary>& vocabularyVectorRef);
 
 protected:
-	DictionarySingleton(const char* dbFilePath, string inputMethodId);
+	DictionarySingleton(const char* dbFilePath);
 	~DictionarySingleton();
 	
 private:
