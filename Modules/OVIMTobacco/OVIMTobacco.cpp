@@ -54,6 +54,7 @@ public:
     virtual int isValidKey(char c);
     virtual int add(char c);
     virtual int isEmpty();
+	virtual int length() { return len; }
     virtual const char *compose();
     virtual const char *sequence() { return seq; }
 
@@ -370,6 +371,8 @@ void OVIMTobaccoContext::clear() {
 }
 
 void OVIMTobaccoContext::end() {
+	if(b)	b->send();
+	clear();
 }
 
 int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, OVService* ps) {
@@ -390,7 +393,9 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
 }
 
 int OVIMTobaccoContext::keyMove() {
-    if((seq.isEmpty() || parent->doAutoCompose()) && !b->isEmpty()) {
+	int currentBufferLength = predictor->tokenVector.size();
+    if((seq.isEmpty() || parent->doAutoCompose()) && !b->isEmpty()
+		&& position >= 0 && position <= currentBufferLength) {
         /// dirty hack for autoCompose mode... orz
         if(parent->doAutoCompose()) {
             if(!seq.isEmpty()) {
@@ -412,7 +417,7 @@ int OVIMTobaccoContext::keyMove() {
                 return 0;
         }
         
-        b->update();
+        b->update(position, position, position);
         doInsert = true;
 
         return 1;
@@ -522,7 +527,8 @@ int OVIMTobaccoContext::keyPrintable() {
 void OVIMTobaccoContext::freshBuffer() {
 /// BAD UTF-8 Chinese character processing here, again...
 
-    if(strlen(seq.sequence()) > 0 && doInsert)
+	int currentBufferLength = predictor->tokenVector.size();
+	if(strlen(seq.sequence()) > 0 && position < currentBufferLength)
     {
         murmur("should be here with [%s], [%s], (%d)",
             seq.compose(), predictor->composedString.c_str(), position);
@@ -535,15 +541,16 @@ void OVIMTobaccoContext::freshBuffer() {
                 predictor->
                     composedString.substr((position)*3, len-(position)*3);
         }
-        else
+		else {
             leftString = rightString = "";
-        murmur("left[%s], right[%s]", leftString.c_str(), rightString.c_str());
-    
-        b->clear()
-            ->append(leftString.c_str())
-            ->append(seq.compose())
-            ->append(rightString.c_str())
-            ->update();
+			murmur("left[%s], right[%s]", leftString.c_str(), rightString.c_str());
+		}
+
+		b->clear()
+			->append(leftString.c_str())
+			->append(seq.compose())
+			->append(rightString.c_str())
+			->update(position, position, position + seq.length());
     }
     else
 	{
@@ -552,8 +559,7 @@ void OVIMTobaccoContext::freshBuffer() {
 			b->append(predictor->composedString.c_str());
 		if(strlen(seq.sequence()) > 0)
 			b->append(seq.compose());
-
-		b->update();
+		b->update(position, position, position + seq.length());
 	}
 }
 
@@ -792,7 +798,7 @@ int OVIMTobaccoContext::candidateEvent() {
     }
     if (i==l) {
         s->beep();
-        b->update();    // we do this to make some applications happy
+        b->update(position, position, position);    // we do this to make some applications happy
     }
     else {
         int choosingIndex = -1;
@@ -817,8 +823,11 @@ int OVIMTobaccoContext::candidateEvent() {
         if (nextsyl) {
             seq.add(kc);
             b->append(seq.compose());
+			b->update(position, position - 1, position);
         }
-        b->update();
+		else
+			b->update(position, position, position);
+        
     }    
     return 1;
 }
@@ -842,7 +851,7 @@ int OVIMTobaccoContext::updateCandidateWindow() {
     c->append(dispstr);
     c->update();
     if (!c->onScreen()) c->show();
-    b->update();
+    b->update(position, position, position);
     
     return 1;
 }
