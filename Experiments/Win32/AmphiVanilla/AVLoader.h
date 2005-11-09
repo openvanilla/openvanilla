@@ -19,6 +19,7 @@ public:
 	void connectDisplayServer(AVDisplayServer *svr);
 	bool keyEvent(int n, AVKeyCode c);
 	bool moduleName(int i, char *str);
+	void closeModule();
 private:
 	AVLoader();
 	static AVLoader *globalLoader;
@@ -31,4 +32,6 @@ protected:
 	vector<OVInputMethodContext*> ctx_vector;
 	vector<OVOutputFilter*> ovof_vector;
 	vector<bool> startedCtxVector;	// 這是很浪費的作法 orz
+
+	int activatedIm;
 };

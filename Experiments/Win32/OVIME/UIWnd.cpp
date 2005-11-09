@@ -115,6 +115,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 		
 	case WM_DESTROY:
+		loader->closeModule();
 		break;
 
 	case WM_IME_RELOADCONFIG:

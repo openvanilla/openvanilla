@@ -22,7 +22,7 @@
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL;TINYXMLDLL_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -33,8 +33,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				SubSystem="2"
-				OptimizeReferences="1"
-				EnableCOMDATFolding="1"
+				OptimizeReferences="0"
+				EnableCOMDATFolding="0"
 				ImportLibrary="$(OutDir)/$(TargetName).lib"
 				TargetMachine="1"/>
 			<Tool
@@ -71,7 +71,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL;TINYXMLDLL_EXPORTS"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -82,6 +82,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
 				ImportLibrary="$(OutDir)/$(TargetName).lib"
 				TargetMachine="1"/>
 			<Tool

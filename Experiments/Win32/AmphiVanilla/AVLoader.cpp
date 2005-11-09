@@ -53,6 +53,7 @@ AVLoader::AVLoader() : dsvr(0)
 	int size = em->modlist().size();
 	ctx_vector.assign(size, static_cast<OVInputMethodContext*>(NULL));
 	startedCtxVector.assign(size, false);
+	activatedIm = -1;
 
 	candi = new AVCandidate();
 	buf = new AVBuffer(&ovof_vector, em->srv());
@@ -110,9 +111,10 @@ bool AVLoader::keyEvent(int n, AVKeyCode c)
 	if(ctx_vector.at(n) == NULL)
 		initContext(n);
 	bool st = true;
-	if(ctx_vector[n] && !startedCtxVector[n]) {
+	if(ctx_vector[n] && !startedCtxVector[n] && activatedIm != n) {
 		ctx_vector[n]->start(buf, candi, em->srv());
 		startedCtxVector[n] = true;
+		activatedIm = n;
 	}
 	try {
 		dsvr->hideNotify();
@@ -134,4 +136,14 @@ bool AVLoader::moduleName(int i, char *str)
 	s = em->modlist().at(i)->localizedName("zh_TW");
 	strcpy(str, s.c_str());
 	return true;
+}
+
+void AVLoader::closeModule()
+{
+	if(activatedIm > -1)
+	{
+		ctx_vector[activatedIm]->end();
+		startedCtxVector[activatedIm] = false;
+		activatedIm = -1;
+	}
 }
