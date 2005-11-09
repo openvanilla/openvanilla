@@ -412,7 +412,7 @@ int OVIMTobaccoContext::keyMove() {
                 return 0;
         }
         
-        b->update(position, position-1, position);
+        b->update();
         doInsert = true;
 
         return 1;
@@ -543,7 +543,7 @@ void OVIMTobaccoContext::freshBuffer() {
             ->append(leftString.c_str())
             ->append(seq.compose())
             ->append(rightString.c_str())
-            ->update(position, position-1, position);
+            ->update();
     }
     else
 	{
@@ -553,7 +553,7 @@ void OVIMTobaccoContext::freshBuffer() {
 		if(strlen(seq.sequence()) > 0)
 			b->append(seq.compose());
 
-		b->update(position, position-1, position);
+		b->update();
 	}
 }
 
@@ -818,7 +818,7 @@ int OVIMTobaccoContext::candidateEvent() {
             seq.add(kc);
             b->append(seq.compose());
         }
-        b->update(position, position-1, position);
+        b->update();
     }    
     return 1;
 }
@@ -842,7 +842,7 @@ int OVIMTobaccoContext::updateCandidateWindow() {
     c->append(dispstr);
     c->update();
     if (!c->onScreen()) c->show();
-    b->update(position, position-1, position);
+    b->update();
     
     return 1;
 }
