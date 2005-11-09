@@ -158,7 +158,9 @@ public:
                 else
                 {
                     if (!(strlen(keyseq.buf))) return 0;
-        			b->append(" ")->send();
+					keyseq.clear();
+					keyseq.add(k->code());
+					b->append(keyseq.buf)->send();
                     keyseq.clear();
 	          		return closeCandidateWindow(i);
                 }
@@ -238,7 +240,12 @@ protected:
 
 bool OVIMRomanNewContext::isEnglish(char* buf) {
     char cmd[256];
-    sprintf(cmd, "select count(key) from dict where key = '%s';", buf);
+
+	string word(buf);
+	for(int i = 0; i < word.length(); i++)
+		word[i] = tolower(word[i]);
+
+	sprintf(cmd, "select count(key) from dict where key = '%s';", word.c_str());
     SQLite3Statement *sth=db->prepare(cmd);
     if (!sth) return false;
 
