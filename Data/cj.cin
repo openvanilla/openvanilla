@@ -1,11 +1,13 @@
-﻿# ChangJei input method table tweaked by b6s for OVIMGeneric(SQLite) in UTF-8 encoding.
+﻿# Cangjie (often mis-Romanized as Changjei) input method table
+# tweaked by b6s for OVIMGeneric(SQLite) in UTF-8 encoding.
 #
 # This table also extended to include HKSCS encodings. For details, see
 #	http://www.info.gov.hk/digital21/chi/hkscs/index.html
 #
-# 
+# Now this table is supplied by CNS11643 to have around 70,000 Chinese characters.
+#
 %gen_inp
-%ename Changjei
+%ename Cangjie
 %cname 倉頡
 %encoding UTF-8
 %selkey 1234567890
@@ -94,9 +96,8 @@ $ ＄
 , ，
 , 、
 . 。
-. ．
-. ．
 . ・
+. ．
 . …
 / ／
 : ：
