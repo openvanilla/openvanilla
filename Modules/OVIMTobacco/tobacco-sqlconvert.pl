@@ -2,21 +2,29 @@
 use strict;
 use utf8;
 use Encode;
-print "begin;\n";
 
 my %word2charsHash;
 my %word2freqHash;
-while(<>) {
+my $fn_tsi;
+
+$fn_tsi = $ARGV[0] if defined($ARGV[0]);
+$fn_tsi = "tsi_punctuation.src" unless defined($ARGV[0]);
+print "begin;\n";
+
+# reading tsi_punctuation.src
+open (HNDL, $fn_tsi) or die $!;
+while(<HNDL>) {
     chomp;
     if (/#?\s*(\S+)\s+(\d+)\s+(.+)/) {
-        my ($p, $f, $s)=(decode("big5-hkscs", $1), $2, decode("big5-hkscs", $3));
+        my ($w, $f, $c)=(decode("utf8", $1), $2, decode("utf8", $3));
 
-        $word2freqHash{$p} = $f unless exists $word2freqHash{$p};
+        $word2freqHash{$w} = $f unless exists $word2freqHash{$w};
 
-	$s =~ s/ /\t/g;
-	push @{$word2charsHash{$p}}, $s;
+	$c =~ s/ /\t/g;
+	push @{$word2charsHash{$w}}, $c;
     }
 }
+close HNDL;
 
 my $idCounter = 0;
 my @words = keys(%word2charsHash);

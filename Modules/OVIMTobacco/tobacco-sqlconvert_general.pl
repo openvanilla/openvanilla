@@ -8,17 +8,17 @@ my %word2IdHash;
 my $fn_tsi;
 
 $fn_tsi = $ARGV[0] if defined($ARGV[0]);
-$fn_tsi = "tsi.src" unless defined($ARGV[0]);
+$fn_tsi = "tsi_punctuation.src" unless defined($ARGV[0]);
 shift @ARGV;
-die "USAGE: $0 tsi.src 1.cin 2.cin ..." if (!@ARGV);
+die "USAGE: $0 tsi_punctuation.src 1.cin 2.cin ..." if (!@ARGV);
 print "begin;\n";
 
-# reading tsi.src
+# reading tsi_punctuation.src
 open (HNDL, $fn_tsi) or die $!;
 while(<HNDL>) {
     chomp;
     if (/#?\s*(\S+)\s+(\d+)\s+(.+)/) {
-        my $w=decode("big5-hkscs", $1);
+        my $w=decode("utf8", $1);
 
         $wordMap{$w} = 1 unless exists $wordMap{$w};
     }
