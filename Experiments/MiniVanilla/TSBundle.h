@@ -3,8 +3,8 @@
 #ifndef __TSBundle_H
 #define __TSBundle_H
 
-#define TSBUNDLEFILENAME    "/Library/OpenVanilla/0.7.1/OVLoader/OVLoader.bundle"
-#define TSBUNDLEID          "org.openvanilla.ovloader.071"
+#define TSBUNDLEFILENAME    "/Library/Components/mvinit.bundle/Contents/Resources/mvloader.bundle"
+#define TSBUNDLEID          "org.openvanilla.mvloader.010"
 
 #ifdef __cplusplus
 extern "C" {

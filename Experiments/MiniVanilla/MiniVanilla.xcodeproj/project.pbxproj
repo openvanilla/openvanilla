@@ -10,6 +10,14 @@
 		6A6F292009249F320042D5FF /* ATSComponent.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A6F291D09249F320042D5FF /* ATSComponent.c */; };
 		6A6F292109249F320042D5FF /* ATSComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6F291E09249F320042D5FF /* ATSComponent.h */; };
 		6A6F292209249F320042D5FF /* ATSComponent.r in Rez */ = {isa = PBXBuildFile; fileRef = 6A6F291F09249F320042D5FF /* ATSComponent.r */; };
+		6ABE78D50924A3FB0041BF73 /* IMInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6F292309249F600042D5FF /* IMInterface.h */; };
+		6ABE78D60924A3FB0041BF73 /* IMInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A6F292409249F600042D5FF /* IMInterface.mm */; };
+		6ABE78D70924A3FB0041BF73 /* TSBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6F292509249F600042D5FF /* TSBundle.h */; };
+		6ABE78D80924A3FB0041BF73 /* TSBundle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A6F292609249F600042D5FF /* TSBundle.mm */; };
+		6ABE78D90924A3FB0041BF73 /* TSComposingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6F292709249F600042D5FF /* TSComposingBuffer.h */; };
+		6ABE78DA0924A3FB0041BF73 /* TSComposingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A6F292809249F600042D5FF /* TSComposingBuffer.mm */; };
+		6ABE78E20924A4290041BF73 /* mvloader.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6ABE78C90924A3AF0041BF73 /* mvloader.bundle */; };
+		6ABE78F00924A45E0041BF73 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABE78EF0924A45E0041BF73 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildStyle section */
@@ -29,6 +37,16 @@
 		};
 /* End PBXBuildStyle section */
 
+/* Begin PBXContainerItemProxy section */
+		6ABE78E00924A4240041BF73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6F28E909249E120042D5FF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6ABE78C80924A3AF0041BF73 /* mvloader */;
+			remoteInfo = mvloader;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		6A6F28F609249E390042D5FF /* mvinit.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mvinit.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A6F28F809249E390042D5FF /* mvinit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "mvinit-Info.plist"; sourceTree = "<group>"; };
@@ -41,6 +59,9 @@
 		6A6F292609249F600042D5FF /* TSBundle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TSBundle.mm; sourceTree = "<group>"; };
 		6A6F292709249F600042D5FF /* TSComposingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSComposingBuffer.h; sourceTree = "<group>"; };
 		6A6F292809249F600042D5FF /* TSComposingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TSComposingBuffer.mm; sourceTree = "<group>"; };
+		6ABE78C90924A3AF0041BF73 /* mvloader.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = mvloader.bundle; path = build/Release/mvloader.bundle; sourceTree = "<group>"; };
+		6ABE78CA0924A3AF0041BF73 /* mvloader-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "mvloader-Info.plist"; sourceTree = "<group>"; };
+		6ABE78EF0924A45E0041BF73 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,16 +72,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6ABE78C70924A3AF0041BF73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6ABE78F00924A45E0041BF73 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		6A6F28E709249E120042D5FF = {
 			isa = PBXGroup;
 			children = (
+				6ABE78EF0924A45E0041BF73 /* Carbon.framework */,
 				6A6F290309249EC50042D5FF /* TSBundle */,
 				6A6F290209249EBA0042D5FF /* ATSComponent */,
 				6A6F28F709249E390042D5FF /* Products */,
 				6A6F28F809249E390042D5FF /* mvinit-Info.plist */,
+				6ABE78CA0924A3AF0041BF73 /* mvloader-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				6A6F28F609249E390042D5FF /* mvinit.bundle */,
+				6ABE78C90924A3AF0041BF73 /* mvloader.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,6 +138,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6ABE78D10924A3DA0041BF73 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6ABE78D50924A3FB0041BF73 /* IMInterface.h in Headers */,
+				6ABE78D70924A3FB0041BF73 /* TSBundle.h in Headers */,
+				6ABE78D90924A3FB0041BF73 /* TSComposingBuffer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -138,6 +180,7 @@
 				ZERO_LINK = YES;
 			};
 			dependencies = (
+				6ABE78E10924A4240041BF73 /* PBXTargetDependency */,
 			);
 			name = mvinit;
 			productName = mvinit;
@@ -167,6 +210,63 @@
 ";
 			productType = "com.apple.product-type.bundle";
 		};
+		6ABE78C80924A3AF0041BF73 /* mvloader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6ABE78CB0924A3B00041BF73 /* Build configuration list for PBXNativeTarget "mvloader" */;
+			buildPhases = (
+				6ABE78C50924A3AF0041BF73 /* Resources */,
+				6ABE78C60924A3AF0041BF73 /* Sources */,
+				6ABE78C70924A3AF0041BF73 /* Frameworks */,
+				6ABE78D10924A3DA0041BF73 /* Headers */,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "mvloader-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = mvloader;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			dependencies = (
+			);
+			name = mvloader;
+			productName = mvloader;
+			productReference = 6ABE78C90924A3AF0041BF73 /* mvloader.bundle */;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.mvloader</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -185,12 +285,21 @@
 			projectDirPath = "";
 			targets = (
 				6A6F28F509249E390042D5FF /* mvinit */,
+				6ABE78C80924A3AF0041BF73 /* mvloader */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6A6F28F209249E390042D5FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6ABE78E20924A4290041BF73 /* mvloader.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ABE78C50924A3AF0041BF73 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -219,7 +328,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6ABE78C60924A3AF0041BF73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6ABE78D60924A3FB0041BF73 /* IMInterface.mm in Sources */,
+				6ABE78D80924A3FB0041BF73 /* TSBundle.mm in Sources */,
+				6ABE78DA0924A3FB0041BF73 /* TSComposingBuffer.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6ABE78E10924A4240041BF73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6ABE78C80924A3AF0041BF73 /* mvloader */;
+			targetProxy = 6ABE78E00924A4240041BF73 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		6A6F28EB09249E120042D5FF /* Debug */ = {
@@ -271,13 +398,63 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				INFOPLIST_FILE = "mvinit-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Components";
+				INSTALL_PATH = /Library/Components;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Carbon,
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = mvinit;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		6ABE78CC0924A3B00041BF73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "mvloader-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = mvloader;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		6ABE78CD0924A3B00041BF73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "mvloader-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = mvloader;
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = NO;
 			};
@@ -300,6 +477,15 @@
 			buildConfigurations = (
 				6A6F28FA09249E3A0042D5FF /* Debug */,
 				6A6F28FB09249E3A0042D5FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6ABE78CB0924A3B00041BF73 /* Build configuration list for PBXNativeTarget "mvloader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6ABE78CC0924A3B00041BF73 /* Debug */,
+				6ABE78CD0924A3B00041BF73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
