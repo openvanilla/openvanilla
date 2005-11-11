@@ -389,7 +389,7 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
     if (k->code()==ovkEsc) return keyEsc();
     if (k->code()==ovkBackspace || k->code()==ovkDelete) return keyRemove();
     if (k->code()==ovkSpace && !seq.isEmpty()) return keyCompose();
-    if ((k->code()==ovkSpace || k->code()==ovkDown) && seq.isEmpty())
+    if ((k->code()==ovkSpace || (k->code()==ovkDown && !b->isEmpty())) && seq.isEmpty())
 		return setCandidate();
     if (k->code()==ovkReturn) return keyCommit();
     if (k->code()==ovkLeft || k->code()==ovkRight) return keyMove();
