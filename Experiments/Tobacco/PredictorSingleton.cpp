@@ -230,12 +230,12 @@ void PredictorSingleton::setTokenVectorByBigram()
                     biGram.maximumMatching(
                         PredictorSingleton::dictionary,
                         PredictorSingleton::tokenVector,
-                        begin, end, true);
+                        begin, length, true);
     			int forwardScore =
                     biGram.maximumMatching(
                         PredictorSingleton::dictionary,
                         forwardTokenVector,
-                        begin, end, false);
+                        begin, length, false);
     			if(forwardScore > backwardScore)
 	       			PredictorSingleton::tokenVector = forwardTokenVector;
                 else
