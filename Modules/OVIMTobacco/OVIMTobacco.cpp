@@ -380,7 +380,12 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
     if (candi) return candidateEvent();
     if (isPunctuationCombination()) return punctuationKey();
     if (k->isFunctionKey() && b->isEmpty()) return 0;
-    if (k->isCapslock() && b->isEmpty()) return keyCapslock();
+    if (k->isCapslock()) {
+		if(!b->isEmpty())
+			keyCommit();
+
+		return keyCapslock();
+	}
     if (k->code()==ovkEsc) return keyEsc();
     if (k->code()==ovkBackspace || k->code()==ovkDelete) return keyRemove();
     if (k->code()==ovkSpace && !seq.isEmpty()) return keyCompose();
@@ -431,8 +436,7 @@ int OVIMTobaccoContext::keyCommit() {
     if (!seq.isEmpty()) {
         if (keyCompose()) {
             b->send();
-            position = 0;
-            predictor->clearAll();
+			clear();
             return 1;        
         }
         else
@@ -441,8 +445,7 @@ int OVIMTobaccoContext::keyCommit() {
     else
     {
         b->send();
-        position = 0;
-        predictor->clearAll();
+		clear();
         return 1;
     }
 }
