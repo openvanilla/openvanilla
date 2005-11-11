@@ -35,10 +35,10 @@ bool OVPreferencesApp::OnInit()
 	g_Locale.Init();
 	g_Locale.AddCatalog( wxT("OVPreferences") );
 
-	const wxChar* title = _("Open Vanilla Preferences");
+	const wxString title(wxT("OpenVanilla Preferences"));
 #if defined(WIN32)
 	HWND hwnd;
-	if( ( hwnd = FindWindow( wxT("#32770"), title) ) )
+	if( ( hwnd = FindWindow( wxT("#32770"), title) ) )		
 	{
 		BringWindowToTop(hwnd);
 		SetForegroundWindow(hwnd);
@@ -52,6 +52,7 @@ bool OVPreferencesApp::OnInit()
 	OVPrefDlg* dlg = new OVPrefDlg(NULL, -1, title);
 	dlg->ShowModal();
 	dlg->Destroy();
+	delete dlg;
 
 #if defined(WIN32)
 	// Force all OVIMEs to reload
