@@ -7,7 +7,7 @@
 
 #define ATSCVERSION             0x00010000
 #define ATSCSCRIPT              0x7e          // 2 = smTradCinese
-#define ATSCLANGUAGE            19          // 19 = langtradChinese, 0x4a=tamil
+#define ATSCLANGUAGE            0          // 19 = langtradChinese, 0x4a=tamil
 
 
 // #define ATSCBASERESOURCEID      16896       // (15872+script_id*512) here script_id=smTradChinese
