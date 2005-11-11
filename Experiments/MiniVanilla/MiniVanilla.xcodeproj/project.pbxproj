@@ -88,10 +88,10 @@
 		6A6F28E709249E120042D5FF = {
 			isa = PBXGroup;
 			children = (
-				6A2D639E0924A9A5008C3935 /* minivanilla.tif */,
-				6ABE78EF0924A45E0041BF73 /* Carbon.framework */,
 				6A6F290309249EC50042D5FF /* TSBundle */,
 				6A6F290209249EBA0042D5FF /* ATSComponent */,
+				6A2D639E0924A9A5008C3935 /* minivanilla.tif */,
+				6ABE78EF0924A45E0041BF73 /* Carbon.framework */,
 				6A6F28F709249E390042D5FF /* Products */,
 				6A6F28F809249E390042D5FF /* mvinit-Info.plist */,
 				6ABE78CA0924A3AF0041BF73 /* mvloader-Info.plist */,
@@ -363,6 +363,7 @@
 		6A6F28EC09249E120042D5FF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
 				COPY_PHASE_STRIP = YES;
 			};
 			name = Release;
@@ -395,6 +396,7 @@
 		6A6F28FB09249E3A0042D5FF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -443,6 +445,7 @@
 		6ABE78CD0924A3B00041BF73 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
