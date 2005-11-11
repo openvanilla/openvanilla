@@ -6,8 +6,14 @@
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>mvinit</string>
+	<key>CFBundleGetInfoString</key>
+	<string>MiniVanilla Input Method Experiment 0.1</string>
+	<key>CFBundleIconFile</key>
+	<string>minivanilla.tif</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.openvanilla.mvinit</string>
+	<key>CFBundleName</key>
+	<string>MiniVanilla 0.1</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -17,6 +23,8 @@
 	<key>CFBundleVersion</key>
 	<string>0.1</string>
 	<key>CSResourcesFileMapped</key>
-	<string>yes</string>
+	<true/>
+	<key>tsInputMethodIconFileKey</key>
+	<string>minivanilla.tif</string>
 </dict>
 </plist>
