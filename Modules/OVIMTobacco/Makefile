@@ -3,7 +3,7 @@ SOURCES=OVIMTobacco PredictorSingleton DictionarySingleton\
     Token Vocabulary Candidate BiGram
 DATA=imtables.db tsi.db
 BPMF=bpmf_punctuation.cin
-CINS=cj.cin dayi3.cin pinyinbig5.cin
+CINS=cj.cin
 
 LDFLAGS+=-lsqlite3
 
@@ -27,7 +27,6 @@ tsi.db: tobacco-schema.txt tobacco-sqlconvert.pl
 	rm -f tsi.db
 	sqlite3 tsi.db < tobacco-schema.txt
 	svn cat https://svn.csie.net/chewing/libchewing/branches/utf8/data/tsi.src > tsi.src
-	svn cat http://going04.iis.sinica.edu.tw/repos/going/trunk/dictCNS/hit.txt > patch-tsi.src
-	cat tsi.src patch-tsi.src punctuation.src > tsi_punctuation.src
+	cat tsi.src punctuation.src > tsi_punctuation.src
 	perl -w -CO tobacco-sqlconvert.pl tsi_punctuation.src | sqlite3 tsi.db
 	perl -w -CO tobacco-sqlconvert_general.pl tsi_punctuation.src ${CINS} | sqlite3 tsi.db
