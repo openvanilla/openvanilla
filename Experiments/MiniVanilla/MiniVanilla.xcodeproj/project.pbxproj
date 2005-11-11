@@ -1,0 +1,310 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6A6F292009249F320042D5FF /* ATSComponent.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A6F291D09249F320042D5FF /* ATSComponent.c */; };
+		6A6F292109249F320042D5FF /* ATSComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6F291E09249F320042D5FF /* ATSComponent.h */; };
+		6A6F292209249F320042D5FF /* ATSComponent.r in Rez */ = {isa = PBXBuildFile; fileRef = 6A6F291F09249F320042D5FF /* ATSComponent.r */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		6A6F291709249F200042D5FF /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Development;
+		};
+		6A6F291809249F200042D5FF /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXFileReference section */
+		6A6F28F609249E390042D5FF /* mvinit.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mvinit.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A6F28F809249E390042D5FF /* mvinit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "mvinit-Info.plist"; sourceTree = "<group>"; };
+		6A6F291D09249F320042D5FF /* ATSComponent.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ATSComponent.c; sourceTree = "<group>"; };
+		6A6F291E09249F320042D5FF /* ATSComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSComponent.h; sourceTree = "<group>"; };
+		6A6F291F09249F320042D5FF /* ATSComponent.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = ATSComponent.r; sourceTree = "<group>"; };
+		6A6F292309249F600042D5FF /* IMInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMInterface.h; sourceTree = "<group>"; };
+		6A6F292409249F600042D5FF /* IMInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IMInterface.mm; sourceTree = "<group>"; };
+		6A6F292509249F600042D5FF /* TSBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSBundle.h; sourceTree = "<group>"; };
+		6A6F292609249F600042D5FF /* TSBundle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TSBundle.mm; sourceTree = "<group>"; };
+		6A6F292709249F600042D5FF /* TSComposingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSComposingBuffer.h; sourceTree = "<group>"; };
+		6A6F292809249F600042D5FF /* TSComposingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TSComposingBuffer.mm; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6A6F28F409249E390042D5FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6A6F28E709249E120042D5FF = {
+			isa = PBXGroup;
+			children = (
+				6A6F290309249EC50042D5FF /* TSBundle */,
+				6A6F290209249EBA0042D5FF /* ATSComponent */,
+				6A6F28F709249E390042D5FF /* Products */,
+				6A6F28F809249E390042D5FF /* mvinit-Info.plist */,
+			);
+			sourceTree = "<group>";
+		};
+		6A6F28F709249E390042D5FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A6F28F609249E390042D5FF /* mvinit.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6A6F290209249EBA0042D5FF /* ATSComponent */ = {
+			isa = PBXGroup;
+			children = (
+				6A6F291D09249F320042D5FF /* ATSComponent.c */,
+				6A6F291E09249F320042D5FF /* ATSComponent.h */,
+				6A6F291F09249F320042D5FF /* ATSComponent.r */,
+			);
+			name = ATSComponent;
+			sourceTree = "<group>";
+		};
+		6A6F290309249EC50042D5FF /* TSBundle */ = {
+			isa = PBXGroup;
+			children = (
+				6A6F292309249F600042D5FF /* IMInterface.h */,
+				6A6F292409249F600042D5FF /* IMInterface.mm */,
+				6A6F292509249F600042D5FF /* TSBundle.h */,
+				6A6F292609249F600042D5FF /* TSBundle.mm */,
+				6A6F292709249F600042D5FF /* TSComposingBuffer.h */,
+				6A6F292809249F600042D5FF /* TSComposingBuffer.mm */,
+			);
+			name = TSBundle;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6A6F290409249ECF0042D5FF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A6F292109249F320042D5FF /* ATSComponent.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6A6F28F509249E390042D5FF /* mvinit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A6F28F909249E3A0042D5FF /* Build configuration list for PBXNativeTarget "mvinit" */;
+			buildPhases = (
+				6A6F28F209249E390042D5FF /* Resources */,
+				6A6F28F309249E390042D5FF /* Sources */,
+				6A6F28F409249E390042D5FF /* Frameworks */,
+				6A6F290409249ECF0042D5FF /* Headers */,
+				6A6F290809249ED50042D5FF /* Rez */,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "mvinit-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = mvinit;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			dependencies = (
+			);
+			name = mvinit;
+			productName = mvinit;
+			productReference = 6A6F28F609249E390042D5FF /* mvinit.bundle */;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>mvinit</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.mvinit</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CSResourcesFileMapped</key>
+	<string>yes</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6A6F28E909249E120042D5FF /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 6A6F28EA09249E120042D5FF /* Build configuration list for PBXProject "MiniVanilla" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				6A6F291709249F200042D5FF /* Development */,
+				6A6F291809249F200042D5FF /* Deployment */,
+			);
+			hasScannedForEncodings = 0;
+			mainGroup = 6A6F28E709249E120042D5FF;
+			productRefGroup = 6A6F28F709249E390042D5FF /* Products */;
+			projectDirPath = "";
+			targets = (
+				6A6F28F509249E390042D5FF /* mvinit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6A6F28F209249E390042D5FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		6A6F290809249ED50042D5FF /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A6F292209249F320042D5FF /* ATSComponent.r in Rez */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6A6F28F309249E390042D5FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A6F292009249F320042D5FF /* ATSComponent.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6A6F28EB09249E120042D5FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		6A6F28EC09249E120042D5FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Release;
+		};
+		6A6F28FA09249E3A0042D5FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = "/tmp/$(PROJECT_NAME).dst";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "mvinit-Info.plist";
+				INSTALL_PATH = /Library/Components/;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = mvinit;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		6A6F28FB09249E3A0042D5FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "mvinit-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Components";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = mvinit;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6A6F28EA09249E120042D5FF /* Build configuration list for PBXProject "MiniVanilla" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A6F28EB09249E120042D5FF /* Debug */,
+				6A6F28EC09249E120042D5FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A6F28F909249E3A0042D5FF /* Build configuration list for PBXNativeTarget "mvinit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A6F28FA09249E3A0042D5FF /* Debug */,
+				6A6F28FB09249E3A0042D5FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6A6F28E909249E120042D5FF /* Project object */;
+}
