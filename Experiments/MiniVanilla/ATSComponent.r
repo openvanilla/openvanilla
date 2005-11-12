@@ -7,24 +7,32 @@
 
 resource 'thng' (ATSCBASERESOURCEID, "MiniVanilla")
 {
-    'tsvc',
-    'inpm',
-	ATSCVENDORCODE,
-	/* 0x8000+ATSCSCRIPT*0x100+ATSCLANGUAGE, */
-	0xfe4a,			/* Unicode script + langTradChinese (0xfe19) 4a  =tamil*/
-    kAnyComponentFlagsMask,
+    'tsvc',                     // Type
+    'inpm',                     // Subtype
+    ATSCVENDORCODE,             // Manufacturer
+	0x00000000,                 // use componentHasMultiplePlatorms
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    'STR ',                     // Name Type
+    ATSCBASERESOURCEID,         // Name ID
+    'STR ',                     // Info ID
+    ATSCBASERESOURCEID+1,       // Info ID
+    'ICON',                     // Icon Type
+    ATSCBASERESOURCEID,         // Icon ID
+    0x00040000,                 // Version
+    0x00000008,                 // componentHasMultiplePlatforms+myComponentRegistrationFlags,    
+	0xa600,                     // Resource ID
+	{
+	   0x0000fe4a,              // kMyComponentFlags
+	   'dlle',
+	   0xa600,                  // Resource ID
+	   /* platformIA32NativeEntryPoint */
+	   0x0005,
+    0x0000fe4a,
     'dlle', ATSCBASERESOURCEID,
-    'STR ', ATSCBASERESOURCEID,
-    'STR ', ATSCBASERESOURCEID,
-    'ICON', ATSCBASERESOURCEID,
-    0x00010000,
-    componentHasMultiplePlatforms,
-	ATSCBASERESOURCEID,
-    {
-		0xfe4a,		/* Unicode script + langTradChinese */
-        /* 0x8000+ATSCSCRIPT*0x100+ATSCLANGUAGE, */
-        'dlle', ATSCBASERESOURCEID, 1000
-    }
+    0x0006
+    };
 };
 
 resource 'dlle' (ATSCBASERESOURCEID)

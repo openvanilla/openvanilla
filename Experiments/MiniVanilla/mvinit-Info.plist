@@ -13,7 +13,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>org.openvanilla.mvinit</string>
 	<key>CFBundleName</key>
-	<string>MiniVanilla 0.1</string>
+	<string>MiniVanilla 0.2</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
