@@ -5,6 +5,40 @@
 #include <Carbon/Carbon.r>
 #include "ATSComponent.h"
 
+
+/* TRYING THIS */
+resource 'thng' (ATSCBASERESOURCEID, "MiniVanilla")
+{
+    'tsvc',                     // Type
+    'inpm',                     // Subtype
+    ATSCVENDORCODE,             // Manufacturer
+	0x00008213,                 // script code
+    0x00000000,
+    'dlle', ATSCBASERESOURCEID,
+    'STR ',                     // Name Type
+    ATSCBASERESOURCEID,         // Name ID
+    'STR ',                     // Info ID
+    ATSCBASERESOURCEID,         // Info ID
+    'ICON',                     // Icon Type
+    ATSCBASERESOURCEID,         // Icon ID
+    0x00010000,                 // Version
+    0x00000008,                 // componentHasMultiplePlatforms+myComponentRegistrationFlags,    
+	ATSCBASERESOURCEID,         // Resource ID
+	{
+	   // 0x0000fe4a,              // kMyComponentFlags = script code
+	   0x00008213,             //  kMyComponentFlags = script code = smTradChinese
+	   'dlle',
+	   ATSCBASERESOURCEID,                  // Resource ID
+	   0x0005,  	   // platformIA32NativeEntryPoint = 0x0006
+    0x00008213,                 // script code again
+    'dlle', ATSCBASERESOURCEID,
+    0x0006
+    };
+};
+
+
+/* THIS WORKS FOR PPC Mac now */
+/*
 resource 'thng' (ATSCBASERESOURCEID, "MiniVanilla")
 {
     'tsvc',                     // Type
@@ -27,13 +61,14 @@ resource 'thng' (ATSCBASERESOURCEID, "MiniVanilla")
 	   0x0000fe4a,              // kMyComponentFlags
 	   'dlle',
 	   0xa600,                  // Resource ID
-	   /* platformIA32NativeEntryPoint */
-	   0x0005,
+	   0x0005,  	   // platformIA32NativeEntryPoint = 0x0006
     0x0000fe4a,
     'dlle', ATSCBASERESOURCEID,
     0x0006
     };
 };
+*/
+
 
 resource 'dlle' (ATSCBASERESOURCEID)
 {
