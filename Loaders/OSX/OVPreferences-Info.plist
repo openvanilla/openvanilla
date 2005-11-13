@@ -4,6 +4,10 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
+	<key>CFBundleName</key>
+	<string>OVPreferences</string>
+	<key>CFBundleDisplayName</key>
+	<string>OpenVanilla Preferences</string>
 	<key>CFBundleExecutable</key>
 	<string>OVPreferences</string>
 	<key>CFBundleIconFile</key>
@@ -18,11 +22,19 @@
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
 	<string>0.7.1</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.7.1</string>
 	<key>NSHelpFile</key>
 	<string>ov.pdf</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>© 2004-2005, openvanilla.org.</string>
+	<key>CFBundleVersion</key>
+	<string>220</string>
+	<key>NSAppleScriptEnabled</key>
+	<string>YES</string>
 </dict>
 </plist>

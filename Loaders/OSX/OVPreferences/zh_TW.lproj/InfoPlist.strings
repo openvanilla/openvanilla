@@ -1,4 +1,5 @@
 /* Localized versions of Info.plist keys */
 
 CFBundleName = "OpenVanilla 偏好設定";
+CFBundleDisplayName = "OpenVanilla 偏好設定";
 NSHumanReadableCopyright = "© openvanilla.org, 2004-2005";
