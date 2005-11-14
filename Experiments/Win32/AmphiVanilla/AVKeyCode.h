@@ -5,12 +5,13 @@
 
 class AVKeyCode : public OVKeyCode  {
 public:
-    AVKeyCode (int p=0)          { chr=toupper(p); shift=capslock=ctrl=alt=0; }
+    AVKeyCode (int p=0)				{ chr=toupper(p); shift=capslock=ctrl=alt=0; }
     virtual int code()              { return (shift||capslock||ctrl||alt) ? chr : tolower(chr); }
     virtual int isShift()           { return shift; }
     virtual int isCapslock()        { return capslock; }
     virtual int isCtrl()            { return ctrl; }
     virtual int isAlt()             { return alt; }
+	virtual int isNum()				{ return 0; }
     
     virtual void setCode(int x)     { chr=toupper(x); }
     virtual void setShift(int x)    { shift=x; }
