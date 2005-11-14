@@ -9,9 +9,9 @@
 	<key>CFBundleExecutable</key>
 	<string>OVUninstaller</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>uninstov</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.apple.myCocoaApplication</string>
+	<string>org.openvanilla.OVUninstaller</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -20,11 +20,11 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>LSHasLocalizedDisplayName</key>
+	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>LSHasLocalizedDisplayName</key>
-	<true/>
 </dict>
 </plist>
