@@ -392,7 +392,7 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
     if (k->code()==ovkEsc) return keyEsc();
     if (k->code()==ovkBackspace || k->code()==ovkDelete) return keyRemove();
     if (k->code()==ovkSpace && !seq.isEmpty()) return keyCompose();
-    if ((k->code()==ovkSpace || (k->code()==ovkDown && !b->isEmpty())) && seq.isEmpty())
+    if ((k->code()==ovkSpace || k->code()==ovkDown) && !b->isEmpty() && seq.isEmpty())
 		return setCandidate();
     if (k->code()==ovkReturn) return keyCommit();
     if (k->code()==ovkLeft || k->code()==ovkRight) return keyMove();
@@ -762,6 +762,7 @@ int OVIMTobaccoContext::setCandidate() {
     /// Currently use "post" choosing mode only
     int rows = predictor->candidateVector.size();
     murmur("got %d rows", rows);
+    if(!rows) return 1; //zonble
     candi=new IMGCandidate;
     candi->count=0;
     candi->candidates=new char* [rows];
