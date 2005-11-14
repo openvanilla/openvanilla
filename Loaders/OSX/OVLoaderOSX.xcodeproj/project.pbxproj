@@ -95,28 +95,6 @@
 		6AF110120814BF0300B49D06 /* ATSComponent.r in Rez */ = {isa = PBXBuildFile; fileRef = 6AF1100F0814BF0300B49D06 /* ATSComponent.r */; };
 		6AF1101A0814BF2A00B49D06 /* TSBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF110150814BF1500B49D06 /* TSBundle.h */; };
 		6AF9423B0817F2F800AE0534 /* CVKeyCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF9423A0817F2F800AE0534 /* CVKeyCode.h */; };
-		6AFFDF17090B7E9100299DDD /* CVEmbeddedLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21F6180839789B0081CC84 /* CVEmbeddedLoader.h */; };
-		6AFFDF18090B7E9100299DDD /* CVEmbeddedLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A21F61B083979960081CC84 /* CVEmbeddedLoader.mm */; };
-		6AFFDF1D090B7EB600299DDD /* CVKeyCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF9423A0817F2F800AE0534 /* CVKeyCode.h */; };
-		6AFFDF1E090B7EB600299DDD /* CVKeyCode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ADD1856083617E600B4319D /* CVKeyCode.mm */; };
-		6AFFDF1F090B7ED100299DDD /* NSStringExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AD76B4908358CC700164A51 /* NSStringExtension.h */; };
-		6AFFDF20090B7ED100299DDD /* NSStringExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AD76B4A08358CC700164A51 /* NSStringExtension.mm */; };
-		6AFFDF21090B7ED100299DDD /* NSDictionaryExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5D8E8708173ADB007A527F /* NSDictionaryExtension.h */; };
-		6AFFDF22090B7ED100299DDD /* NSDictionaryExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D8E8808173ADB007A527F /* NSDictionaryExtension.mm */; };
-		6AFFDF23090B7EEF00299DDD /* CVLoaderConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A3AC28008164F8B00FFFF62 /* CVLoaderConfig.h */; };
-		6AFFDF24090B7EEF00299DDD /* CVLoaderConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AC28208164FBE00FFFF62 /* CVLoaderConfig.mm */; };
-		6AFFDF25090B7EEF00299DDD /* CVLoaderUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A3AC28B0816505F00FFFF62 /* CVLoaderUtility.h */; };
-		6AFFDF26090B7EEF00299DDD /* CVLoaderUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AC28C0816505F00FFFF62 /* CVLoaderUtility.mm */; };
-		6AFFDF27090B7EEF00299DDD /* CVService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A3AC28D0816505F00FFFF62 /* CVService.h */; };
-		6AFFDF28090B7EEF00299DDD /* CVService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AC28E0816505F00FFFF62 /* CVService.mm */; };
-		6AFFDF29090B7EEF00299DDD /* CVWrappers.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A3AC1C708160F9700FFFF62 /* CVWrappers.h */; };
-		6AFFDF2A090B7EEF00299DDD /* CVWrappers.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AC1C808160F9700FFFF62 /* CVWrappers.mm */; };
-		6AFFDF2B090B7EF700299DDD /* CVConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A3AC2870816505F00FFFF62 /* CVConfig.h */; };
-		6AFFDF2C090B7EF700299DDD /* CVConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AC2880816505F00FFFF62 /* CVConfig.mm */; };
-		6AFFDF33090B7F3000299DDD /* ovfilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AFFDF32090B7F3000299DDD /* ovfilter.mm */; };
-		6AFFDF61090B80EE00299DDD /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A975EB20814C47700F40859 /* Carbon.framework */; };
-		6AFFE0C1090B84C300299DDD /* CVDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A3AC2890816505F00FFFF62 /* CVDictionary.h */; };
-		6AFFE0C2090B84C300299DDD /* CVDictionary.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AC28A0816505F00FFFF62 /* CVDictionary.mm */; };
 		D402A4E00927862E00D3194E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D402A4DF0927862E00D3194E /* InfoPlist.strings */; };
 		D4F6531E08895D77009C44B3 /* ov.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D4F6531D08895D77009C44B3 /* ov.pdf */; };
 /* End PBXBuildFile section */
@@ -152,13 +130,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6AD76AEE08358A5B00164A51;
 			remoteInfo = OVDisplayServer;
-		};
-		6AFFDF5D090B809600299DDD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6AF10FF60814BE3400B49D06 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6AFFDF0E090B7E4400299DDD;
-			remoteInfo = ovfilter;
 		};
 		6AFFDF5F090B809900299DDD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -244,7 +215,6 @@
 		6AF110180814BF1500B49D06 /* TSComposingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TSComposingBuffer.mm; path = TSBundle/TSComposingBuffer.mm; sourceTree = SOURCE_ROOT; };
 		6AF9423A0817F2F800AE0534 /* CVKeyCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVKeyCode.h; path = CocoaVanilla/CVKeyCode.h; sourceTree = "<group>"; };
 		6AFFDEF7090B7E0900299DDD /* OVPreferences-Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OVPreferences-Info copy.plist"; path = "/Users/lukhnos/logiciels/openvanilla/trunk/Loaders/OSX/OVPreferences-Info copy.plist"; sourceTree = "<absolute>"; };
-		6AFFDF0F090B7E4400299DDD /* ovfilter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ovfilter; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AFFDF32090B7F3000299DDD /* ovfilter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ovfilter.mm; sourceTree = "<group>"; };
 		D402A4E30927863600D3194E /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = OVDisplayServer/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D402A4E40927863B00D3194E /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = OVDisplayServer/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -291,14 +261,6 @@
 			files = (
 				6A8D0DBF0814E727006B922E /* CoreServices.framework in Frameworks */,
 				6A8D0DC30814E72E006B922E /* Carbon.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6AFFDF0D090B7E4400299DDD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6AFFDF61090B80EE00299DDD /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,7 +368,6 @@
 				6A975EA00814C41600F40859 /* OVLoader.bundle */,
 				6AD76AEF08358A5B00164A51 /* OVDisplayServer.app */,
 				6AE4A461083677B300D6CCD3 /* OVPreferences.app */,
-				6AFFDF0F090B7E4400299DDD /* ovfilter */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -568,23 +529,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6AFFDF13090B7E7100299DDD /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6AFFE0C1090B84C300299DDD /* CVDictionary.h in Headers */,
-				6AFFDF2B090B7EF700299DDD /* CVConfig.h in Headers */,
-				6AFFDF23090B7EEF00299DDD /* CVLoaderConfig.h in Headers */,
-				6AFFDF25090B7EEF00299DDD /* CVLoaderUtility.h in Headers */,
-				6AFFDF27090B7EEF00299DDD /* CVService.h in Headers */,
-				6AFFDF29090B7EEF00299DDD /* CVWrappers.h in Headers */,
-				6AFFDF1D090B7EB600299DDD /* CVKeyCode.h in Headers */,
-				6AFFDF1F090B7ED100299DDD /* NSStringExtension.h in Headers */,
-				6AFFDF21090B7ED100299DDD /* NSDictionaryExtension.h in Headers */,
-				6AFFDF17090B7E9100299DDD /* CVEmbeddedLoader.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -624,7 +568,6 @@
 			dependencies = (
 				6AD76B8008358DA900164A51 /* PBXTargetDependency */,
 				6A975ED90814C64600F40859 /* PBXTargetDependency */,
-				6AFFDF5E090B809600299DDD /* PBXTargetDependency */,
 				6AFFDF60090B809900299DDD /* PBXTargetDependency */,
 			);
 			name = OVLoader;
@@ -848,47 +791,6 @@
 ";
 			productType = "com.apple.product-type.bundle";
 		};
-		6AFFDF0E090B7E4400299DDD /* ovfilter */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6AFFDF19090B7EB600299DDD /* Build configuration list for PBXNativeTarget "ovfilter" */;
-			buildPhases = (
-				6AFFDF0C090B7E4400299DDD /* Sources */,
-				6AFFDF0D090B7E4400299DDD /* Frameworks */,
-				6AFFDF13090B7E7100299DDD /* Headers */,
-			);
-			buildRules = (
-			);
-			buildSettings = {
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INSTALL_PATH = /usr/local/bin;
-				OPTIMIZATION_CFLAGS = "";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
-				PRODUCT_NAME = ovfilter;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			dependencies = (
-			);
-			name = ovfilter;
-			productName = ovfilter;
-			productReference = 6AFFDF0F090B7E4400299DDD /* ovfilter */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -918,7 +820,6 @@
 				6AF10FFD0814BE7A00B49D06 /* OVInit */,
 				6AD76AEE08358A5B00164A51 /* OVDisplayServer */,
 				6AE4A460083677B300D6CCD3 /* OVPreferences */,
-				6AFFDF0E090B7E4400299DDD /* ovfilter */,
 			);
 		};
 /* End PBXProject section */
@@ -1056,24 +957,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6AFFDF0C090B7E4400299DDD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6AFFE0C2090B84C300299DDD /* CVDictionary.mm in Sources */,
-				6AFFDF2C090B7EF700299DDD /* CVConfig.mm in Sources */,
-				6AFFDF24090B7EEF00299DDD /* CVLoaderConfig.mm in Sources */,
-				6AFFDF26090B7EEF00299DDD /* CVLoaderUtility.mm in Sources */,
-				6AFFDF28090B7EEF00299DDD /* CVService.mm in Sources */,
-				6AFFDF2A090B7EEF00299DDD /* CVWrappers.mm in Sources */,
-				6AFFDF1E090B7EB600299DDD /* CVKeyCode.mm in Sources */,
-				6AFFDF20090B7ED100299DDD /* NSStringExtension.mm in Sources */,
-				6AFFDF22090B7ED100299DDD /* NSDictionaryExtension.mm in Sources */,
-				6AFFDF18090B7E9100299DDD /* CVEmbeddedLoader.mm in Sources */,
-				6AFFDF33090B7F3000299DDD /* ovfilter.mm in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1086,11 +969,6 @@
 			isa = PBXTargetDependency;
 			target = 6AD76AEE08358A5B00164A51 /* OVDisplayServer */;
 			targetProxy = 6AD76B7F08358DA900164A51 /* PBXContainerItemProxy */;
-		};
-		6AFFDF5E090B809600299DDD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6AFFDF0E090B7E4400299DDD /* ovfilter */;
-			targetProxy = 6AFFDF5D090B809600299DDD /* PBXContainerItemProxy */;
 		};
 		6AFFDF60090B809900299DDD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1496,104 +1374,37 @@
 		6AFFDF05090B7E0A00299DDD /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Development;
 		};
 		6AFFDF06090B7E0A00299DDD /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Deployment;
 		};
 		6AFFDF07090B7E0A00299DDD /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-			};
-			name = Default;
-		};
-		6AFFDF1A090B7EB600299DDD /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INSTALL_PATH = /usr/local/bin;
-				OPTIMIZATION_CFLAGS = "-O0";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
+				ARCHS = (
+					ppc,
+					i386,
 				);
-				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
-				PRODUCT_NAME = ovfilter;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Development;
-		};
-		6AFFDF1B090B7EB600299DDD /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INSTALL_PATH = /usr/local/bin;
-				OPTIMIZATION_CFLAGS = "-O0";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
-				PRODUCT_NAME = ovfilter;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Deployment;
-		};
-		6AFFDF1C090B7EB600299DDD /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INSTALL_PATH = /usr/local/bin;
-				OPTIMIZATION_CFLAGS = "-O0";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
-				PRODUCT_NAME = ovfilter;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Default;
 		};
@@ -1649,15 +1460,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
-		};
-		6AFFDF19090B7EB600299DDD /* Build configuration list for PBXNativeTarget "ovfilter" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6AFFDF1A090B7EB600299DDD /* Development */,
-				6AFFDF1B090B7EB600299DDD /* Deployment */,
-				6AFFDF1C090B7EB600299DDD /* Default */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

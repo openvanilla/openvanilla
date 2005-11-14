@@ -4,7 +4,7 @@
 #define __OVDisplayServer_h
 
 @protocol OVDisplayServer
-- (void)setConfig:(NSDictionary*)cfg;
+- (void)setConfig:(bycopy NSDictionary*)cfg;
 - (void)candidateShow;
 - (void)candidateHide;
 - (void)candidateUpdate:(bycopy NSString*)s position:(Point)p;
