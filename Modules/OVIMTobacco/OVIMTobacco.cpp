@@ -350,24 +350,18 @@ OVIMTobaccoContext::OVIMTobaccoContext(OVIMTobacco *p) : seq(p->table) {
     parent=p;
 }
 
-void OVIMTobaccoContext::start(OVBuffer* b, OVCandidate*, OVService* s) {
-	murmur("buffer address:%d", b);
+void OVIMTobaccoContext::start(OVBuffer* buf, OVCandidate*, OVService* s) {
 	clear();
+	b = buf;
 
 	const char* ename = QueryForKey(db, parent->table, "_property_ename");
     	string inputMethodId(ename);
-
-	murmur("predictor address:%d", predictor);
-	if(predictor) {
-		murmur("set predictor input method: %s", inputMethodId.c_str());
-		predictor->setInputMethodId(inputMethodId);
-		murmur("input method is set");
-	}
+	predictor->setInputMethodId(inputMethodId);
 }
 
 void OVIMTobaccoContext::clear() {
-	murmur("do clear");
 	seq.clear();
+	b=NULL;
 	candi=NULL;
     
 	position = 0;
@@ -375,21 +369,16 @@ void OVIMTobaccoContext::clear() {
 	doInsert = false;
 
 	predictor->clearAll();
-	murmur("cleared");
 }
 
 void OVIMTobaccoContext::end() {
-	murmur("in the end, the buffer:%d", b);
 	if(b) {
-		murmur("should be safe to flush buffer.");
 		if(!b->isEmpty()) b->send();
-		clear();
 	}
-	b=NULL;
+	clear();
 }
 
 int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, OVService* ps) {
-	murmur("key event received");
     k=pk; b=pb; c=pc; s=ps;
     if (candi) return candidateEvent();
     if (isPunctuationCombination()) return punctuationKey();
