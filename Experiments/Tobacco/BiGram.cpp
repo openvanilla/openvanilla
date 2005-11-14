@@ -244,8 +244,11 @@ void BiGram::getVocabularyCombination(
 			int leftFreq = leftRef[i].freq;
 			int rightFreq = rightRef[j].freq;
 			matrix = leftFreq + rightFreq;
+			/* Since there are many symbols and words that have zero count in tsi.src...
 			if(matrix == 0)
 				break;
+			*/
+
             /*
 			int wordCount = combinedVocabulary.word.length();
 			combinedVocabulary.freq =
@@ -256,8 +259,9 @@ void BiGram::getVocabularyCombination(
 			combinedVocabularyVector.push_back(combinedVocabulary);
 		}
 
-		if(matrix == 0)
-			break;
+		// Zero count still has to be considered...
+		//if(matrix == 0)
+		//	break;
 	}
 	
 	combinedRef = combinedVocabularyVector;

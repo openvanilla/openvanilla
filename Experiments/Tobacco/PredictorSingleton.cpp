@@ -127,10 +127,16 @@ void PredictorSingleton::addCandidates(string characters, int head)
 		}
 	}
 	
-	stable_sort(
+	sort(
 	   PredictorSingleton::candidateVector.begin(),
 	   PredictorSingleton::candidateVector.end(),
 	   Vocabulary::isFreqGreater);
+
+	stable_sort(
+	   PredictorSingleton::candidateVector.begin(),
+	   PredictorSingleton::candidateVector.end(),
+	   Vocabulary::isWordLonger);
+
 }
 
 void PredictorSingleton::setCandidateVector(int position)
