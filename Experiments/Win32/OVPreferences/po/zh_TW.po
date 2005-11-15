@@ -2,97 +2,102 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OVPreferences\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2005-09-01 23:45+0800\n"
+"PO-Revision-Date: 2005-11-13 07:33+0800\n"
 "Last-Translator: \n"
 "Language-Team: OV\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=big5\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: TAIWAN\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
 
 #: ../OVPreferences.cpp:38
 #: ../OVPrefDlg.cpp:165
 msgid "Open Vanilla Preferences"
-msgstr "­»¯ó¿é¤Jªk°¾¦n³]©w"
+msgstr "é¦™è‰è¼¸å…¥æ³•åå¥½è¨­å®š"
 
 #: ../OVPrefDlg.cpp:33
 msgid "Sound"
-msgstr "­µ®Ä"
+msgstr "éŸ³æ•ˆ"
 
 #: ../OVPrefDlg.cpp:34
 msgid "Other settings"
-msgstr "¨ä¥L³]©w"
+msgstr "å…¶ä»–è¨­å®š"
 
 #: ../OVPrefDlg.cpp:35
 msgid "Available modules:"
-msgstr "¥i¥Îªº¼Ò²Õ²M³æ"
+msgstr "å¯ç”¨çš„æ¨¡çµ„æ¸…å–®"
 
 #: ../OVPrefDlg.cpp:36
 msgid "Set the shortcut key to:"
-msgstr "¥Ø«e¿ï¨ú¼Ò²Õªº§Ö³tÁä³]©w¬°¡G"
+msgstr "ç›®å‰é¸å–æ¨¡çµ„çš„å¿«é€Ÿéµè¨­å®šç‚ºï¼š"
 
 #: ../OVPrefDlg.cpp:37
 msgid "Phonetic, Chewing, POJ, and Tibetan IME"
-msgstr "¶Ç²Îª`­µ¡B»Å­µ¡B¥Õ¸Ü¦r¡BÂÃ¤å¿é¤Jªk³]©w"
+msgstr "å‚³çµ±æ³¨éŸ³ã€é…·éŸ³ã€ç™½è©±å­—ã€è—æ–‡è¼¸å…¥æ³•è¨­å®š"
 
 #: ../OVPrefDlg.cpp:38
 msgid "Generic (data table-based) input method"
-msgstr "¦Æ¥Î¿é¤Jªk (¨Ï¥Î¸ê®Æªí®æªº¿é¤Jªk) ³]©w"
+msgstr "æ±ç”¨è¼¸å…¥æ³• (ä½¿ç”¨è³‡æ–™è¡¨æ ¼çš„è¼¸å…¥æ³•) è¨­å®š"
 
 #: ../OVPrefDlg.cpp:39
 msgid "Other modules"
-msgstr "¨ä¥L¼Ò²Õ"
+msgstr "å…¶ä»–æ¨¡çµ„"
 
 #: ../OVPrefDlg.cpp:40
 msgid "Candidate and notification window"
-msgstr "­Ô¿ï¦r¤Î°T®§µøµ¡"
+msgstr "å€™é¸å­—åŠè¨Šæ¯è¦–çª—"
 
 #: ../OVPrefDlg.cpp:41
 msgid "Font"
-msgstr "¦r«¬"
+msgstr "å­—å‹"
 
 #: ../OVPrefDlg.cpp:42
 msgid "Font: "
-msgstr "¦r«¬"
+msgstr "å­—å‹"
 
 #: ../OVPrefDlg.cpp:43
 msgid "Background Color"
-msgstr "­I´º¦â±m"
+msgstr "èƒŒæ™¯è‰²å½©"
 
 #: ../OVPrefDlg.cpp:44
 msgid "Image"
-msgstr "¹ÏÀÉ"
+msgstr "åœ–æª”"
 
 #: ../OVPrefDlg.cpp:45
 msgid "Image Path: "
-msgstr "¹Ï¤ù¸ô®|¡G"
+msgstr "åœ–ç‰‡è·¯å¾‘ï¼š"
 
 #: ../OVPrefDlg.cpp:46
 msgid "Opacity"
-msgstr "¤£³z©ú«×"
+msgstr "ä¸é€æ˜åº¦"
 
 #: ../OVPrefDlg.cpp:48
 msgid "Preview"
-msgstr "³]©w¹wÄı"
+msgstr "è¨­å®šé è¦½"
 
 #: ../OVPrefDlg.cpp:49
 msgid "OpenVanilla"
-msgstr "­»¯ó¿é¤Jªk"
+msgstr "é¦™è‰è¼¸å…¥æ³•"
 
 #: ../OVPrefDlg.cpp:50
 msgid "(Opacity not in effect)"
-msgstr "(¤£³z©ú«×¦b¦¹¤£°_§@¥Î)"
+msgstr "(ä¸é€æ˜åº¦åœ¨æ­¤ä¸èµ·ä½œç”¨)"
 
 #: ../OVPrefDlg.cpp:51
 msgid "Warning sound: "
-msgstr "Án­µÀÉ¡G"
+msgstr "è²éŸ³æª”ï¼š"
 
 #: ../OVPrefDlg.cpp:53
 msgid "&Test"
-msgstr "´ú¸Õ (&T)"
+msgstr "æ¸¬è©¦ (&T)"
 
 #: ../OVPrefDlg.cpp:54
 msgid "IM toggle key: "
-msgstr "¤Á´«³Ìªñ¨Ï¥Îªº¨â­Ó¿é¤Jªk¡G"
+msgstr "åˆ‡æ›æœ€è¿‘ä½¿ç”¨çš„å…©å€‹è¼¸å…¥æ³•ï¼š"
 
 #: ../OVPrefDlg.cpp:55
 #: ../OVPrefDlg.cpp:71
@@ -116,19 +121,19 @@ msgstr ""
 #: ../OVPrefDlg.cpp:63
 #: ../OVPrefDlg.cpp:79
 msgid "Clear"
-msgstr "²M°£"
+msgstr "æ¸…é™¤"
 
 #: ../OVPrefDlg.cpp:68
 msgid "Change priority of selected module"
-msgstr "§ïÅÜ¥Ø«e¿ï¨ú¼Ò²ÕªºÀu¥ı¶¶§Ç"
+msgstr "æ”¹è®Šç›®å‰é¸å–æ¨¡çµ„çš„å„ªå…ˆé †åº"
 
 #: ../OVPrefDlg.cpp:69
 msgid "Move &Up"
-msgstr "¤W²¾ (&U)"
+msgstr "ä¸Šç§» (&U)"
 
 #: ../OVPrefDlg.cpp:70
 msgid "Move &Down"
-msgstr "¤U²¾ (&D)"
+msgstr "ä¸‹ç§» (&D)"
 
 #: ../OVPrefDlg.cpp:74
 msgid "+"
@@ -138,15 +143,15 @@ msgstr ""
 #: ../OVPrefDlg.cpp:119
 #: ../OVPrefDlg.cpp:133
 msgid "None"
-msgstr "µL"
+msgstr "ç„¡"
 
 #: ../OVPrefDlg.cpp:80
 msgid ""
 "The selected module is loaded \n"
 "from the following library:\n"
 msgstr ""
-"¿ï¨úªº¼Ò²Õ¬O±q¤U¦C\n"
-"µ{¦¡®w¸ü¤J¡G\n"
+"é¸å–çš„æ¨¡çµ„æ˜¯å¾ä¸‹åˆ—\n"
+"ç¨‹å¼åº«è¼‰å…¥ï¼š\n"
 
 #: ../OVPrefDlg.cpp:81
 msgid ""
@@ -157,33 +162,33 @@ msgid ""
 "OpenVanilla or this won't \n"
 "take effect."
 msgstr ""
-"²¾°£¨S¦³¦b¨Ï¥Îªº¼Ò²Õ¥i¥H\n"
-"¥[§Ö¸ü¤J³t«×¡C\n"
-"ª`·N¡G§A¥²¶·µ²§ô¨Ã­«·s±Ò°Ê\n"
-"©Ò¦³¥¿¦b¨Ï¥ÎOpen Vanilla ªº\n"
-"µ{¦¡¡A¤~¯à¥Í®Ä¡C"
+"ç§»é™¤æ²’æœ‰åœ¨ä½¿ç”¨çš„æ¨¡çµ„å¯ä»¥\n"
+"åŠ å¿«è¼‰å…¥é€Ÿåº¦ã€‚\n"
+"æ³¨æ„ï¼šä½ å¿…é ˆçµæŸä¸¦é‡æ–°å•Ÿå‹•\n"
+"æ‰€æœ‰æ­£åœ¨ä½¿ç”¨Open Vanilla çš„\n"
+"ç¨‹å¼ï¼Œæ‰èƒ½ç”Ÿæ•ˆã€‚"
 
 #: ../OVPrefDlg.cpp:82
 msgid "Keyboard layout for Phonetics: "
-msgstr "¶Ç²Îª`­µ¿é¤JªkÁä½L°t¸m¡G"
+msgstr "å‚³çµ±æ³¨éŸ³è¼¸å…¥æ³•éµç›¤é…ç½®ï¼š"
 
 #: ../OVPrefDlg.cpp:84
 #: ../OVPrefDlg.cpp:90
 msgid "Standard"
-msgstr "¼Ğ·Ç"
+msgstr "æ¨™æº–"
 
 #: ../OVPrefDlg.cpp:85
 #: ../OVPrefDlg.cpp:94
 msgid "Eten"
-msgstr "­Ê¤Ñ"
+msgstr "å€šå¤©"
 
 #: ../OVPrefDlg.cpp:88
 msgid "Keyboard layout of Chewing: "
-msgstr "»Å­µ¿é¤JªkÁä½L°t¸m¡G"
+msgstr "é…·éŸ³è¼¸å…¥æ³•éµç›¤é…ç½®ï¼š"
 
 #: ../OVPrefDlg.cpp:91
 msgid "Hsu"
-msgstr "³\¤óÁä½L"
+msgstr "è¨±æ°éµç›¤"
 
 #: ../OVPrefDlg.cpp:92
 msgid "IBM"
@@ -191,11 +196,11 @@ msgstr ""
 
 #: ../OVPrefDlg.cpp:93
 msgid "Gin-yieh"
-msgstr "ºë·~"
+msgstr "ç²¾æ¥­"
 
 #: ../OVPrefDlg.cpp:95
 msgid "Eten 26-key"
-msgstr "­Ê¤Ñ 26  Áä"
+msgstr "å€šå¤© 26  éµ"
 
 #: ../OVPrefDlg.cpp:96
 msgid "Dvorak"
@@ -203,35 +208,35 @@ msgstr ""
 
 #: ../OVPrefDlg.cpp:97
 msgid "Dvorak-Hsu"
-msgstr "Dvorak ³\¤ó"
+msgstr "Dvorak è¨±æ°"
 
 #: ../OVPrefDlg.cpp:100
 msgid "Keyboard layout for POJ-Holo: "
-msgstr "¥Õ¸Ü¦r (POJ) ½Õ¸¹¿é¤J¤è¦¡¡G"
+msgstr "ç™½è©±å­— (POJ) èª¿è™Ÿè¼¸å…¥æ–¹å¼ï¼š"
 
 #: ../OVPrefDlg.cpp:102
 msgid "Use tone numbers (2, 3, 5, 7, 8) only"
-msgstr "¿é¤J§¹­µ¸`«á¦A¿é¤J½Õ¸¹ (2, 3, 5, 7, 8)"
+msgstr "è¼¸å…¥å®ŒéŸ³ç¯€å¾Œå†è¼¸å…¥èª¿è™Ÿ (2, 3, 5, 7, 8)"
 
 #: ../OVPrefDlg.cpp:103
 msgid "Type tone mark (', `, ^, =, |) first, then vowel"
-msgstr "¿é¤J§¹Án½Õ²Å¸¹«á (', `, ^, =, |) ¦A¥´¥À­µ"
+msgstr "è¼¸å…¥å®Œè²èª¿ç¬¦è™Ÿå¾Œ (', `, ^, =, |) å†æ‰“æ¯éŸ³"
 
 #: ../OVPrefDlg.cpp:104
 msgid "Type vowel first, then tone mark (', `, ^, =, |)"
-msgstr "¥ı¥´¥À­µ¦A¥´Án½Õ²Å¸¹ (', `, ^, =, |)"
+msgstr "å…ˆæ‰“æ¯éŸ³å†æ‰“è²èª¿ç¬¦è™Ÿ (', `, ^, =, |)"
 
 #: ../OVPrefDlg.cpp:107
 msgid "Do not output unicode characters but pure ASCII instead"
-msgstr "¤£­n¿é¥X Unicode ¦r¤¸¡A¥ş³¡¨Ï¥Î ASCII ¿é¥X"
+msgstr "ä¸è¦è¼¸å‡º Unicode å­—å…ƒï¼Œå…¨éƒ¨ä½¿ç”¨ ASCII è¼¸å‡º"
 
 #: ../OVPrefDlg.cpp:108
 msgid "Do not show Han character candidates. (POJ-only output)"
-msgstr "¤£¿ïº~¦r¡Aª½±µ¿é¥X POJ"
+msgstr "ä¸é¸æ¼¢å­—ï¼Œç›´æ¥è¼¸å‡º POJ"
 
 #: ../OVPrefDlg.cpp:109
 msgid "Keyboard layout for Tibetan: "
-msgstr "ÂÃ¤å¿é¤JªkÁä½L°t¸m¡G"
+msgstr "è—æ–‡è¼¸å…¥æ³•éµç›¤é…ç½®ï¼š"
 
 #: ../OVPrefDlg.cpp:111
 msgid "Sambhota Keymap One"
@@ -252,11 +257,11 @@ msgstr ""
 #: ../OVPrefDlg.cpp:117
 #: ../OVPrefDlg.cpp:131
 msgid "Module: "
-msgstr "¼Ò²Õ¡G"
+msgstr "æ¨¡çµ„ï¼š"
 
 #: ../OVPrefDlg.cpp:122
 msgid "Maximal radical length: "
-msgstr "³Ì¤j²Õ¦rÁä½Xªø«×¡G"
+msgstr "æœ€å¤§çµ„å­—éµç¢¼é•·åº¦ï¼š"
 
 #: ../OVPrefDlg.cpp:124
 msgid "5"
@@ -264,54 +269,54 @@ msgstr ""
 
 #: ../OVPrefDlg.cpp:127
 msgid "Space key choose the 1st candidate"
-msgstr "ªÅ¥ÕÁä¿ï²Ä¤@¦r¡A²Ä¤@¿ï¦rÁä¿ï²Ä¤G¦r"
+msgstr "ç©ºç™½éµé¸ç¬¬ä¸€å­—ï¼Œç¬¬ä¸€é¸å­—éµé¸ç¬¬äºŒå­—"
 
 #: ../OVPrefDlg.cpp:128
 msgid "Show candidates as you type"
-msgstr "¤@Ãä¥´¦r¦P®É¤@Ãä²Õ¦r¥X¿ï¦rµ¡"
+msgstr "ä¸€é‚Šæ‰“å­—åŒæ™‚ä¸€é‚Šçµ„å­—å‡ºé¸å­—çª—"
 
 #: ../OVPrefDlg.cpp:129
 msgid "Commit at maximal radical length"
-msgstr "¥´¨ì³Ì¤jªø«×«K¦Û°Ê¥X¦r"
+msgstr "æ‰“åˆ°æœ€å¤§é•·åº¦ä¾¿è‡ªå‹•å‡ºå­—"
 
 #: ../OVPrefDlg.cpp:130
 msgid "Warning beep"
-msgstr "¿ù»~®Éµo¥X¹ÍÁn"
+msgstr "éŒ¯èª¤æ™‚ç™¼å‡ºå—¶è²"
 
 #: ../OVPrefDlg.cpp:137
 #: ../OVPrefDlg.cpp:477
 msgid "Value"
-msgstr "¼Æ­È"
+msgstr "æ•¸å€¼"
 
 #: ../OVPrefDlg.cpp:139
 msgid "&Set"
-msgstr "³]©w (&S)"
+msgstr "è¨­å®š (&S)"
 
 #: ../OVPrefDlg.cpp:141
 msgid "Changes are saved when you close OpenVanilla Preferences"
-msgstr "³]©w­È±N·|¦b§AÂ÷¶}­»¯ó¿é¤Jªk°¾¦n³]©w®ÉÀx¦s"
+msgstr "è¨­å®šå€¼å°‡æœƒåœ¨ä½ é›¢é–‹é¦™è‰è¼¸å…¥æ³•åå¥½è¨­å®šæ™‚å„²å­˜"
 
 #: ../OVPrefDlg.cpp:142
 msgid "E&xit"
-msgstr "Â÷¶} (&X)"
+msgstr "é›¢é–‹ (&X)"
 
 #: ../OVPrefDlg.cpp:318
 msgid "Common"
-msgstr "¦@¥Î³]©w"
+msgstr "å…±ç”¨è¨­å®š"
 
 #: ../OVPrefDlg.cpp:319
 msgid "Modules List && Hotkeys"
-msgstr "¼Ò²Õ¦Cªí©M¼öÁä"
+msgstr "æ¨¡çµ„åˆ—è¡¨å’Œç†±éµ"
 
 #: ../OVPrefDlg.cpp:320
 msgid "Module Settings"
-msgstr "­Ó§O¼Ò²Õ³]©w"
+msgstr "å€‹åˆ¥æ¨¡çµ„è¨­å®š"
 
 #: ../OVPrefDlg.cpp:321
 msgid "Output Filters"
-msgstr "¤å¦r¿é¥X³B²z¼Ò²Õ"
+msgstr "æ–‡å­—è¼¸å‡ºè™•ç†æ¨¡çµ„"
 
 #: ../OVPrefDlg.cpp:476
 msgid "Property key"
-msgstr "³]©w¶µ¥Ø"
+msgstr "è¨­å®šé …ç›®"
 
