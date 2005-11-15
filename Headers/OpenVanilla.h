@@ -49,8 +49,8 @@ public:
     virtual int isAlt()=0;
     virtual int isOpt() { return isAlt(); }
     virtual int isCommand() { return isAlt(); }
-    virtual int isNum()=0;
-    virtual int isFunctionKey() { return isCtrl()||isAlt()||isOpt()||isCommand()||isNum(); }
+//    virtual int isNum()=0;
+    virtual int isFunctionKey() { return isCtrl()||isAlt()||isOpt()||isCommand()/*||isNum()*/; }
 };
 
 // Abstract interface for the pre-edit and composing buffer.
