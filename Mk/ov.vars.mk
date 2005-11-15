@@ -10,11 +10,14 @@ DATA_INST_PATH?=$(INST_PATH)/$(IMID)
 
 INC=-I../../Headers -I/usr/local/include
 
-CFLAGS=-O2 -Wall $(INC)
 
-GCC=/usr/bin/gcc
+GCC=/usr/bin/gcc 
 GPP=/usr/bin/g++
 LIBTOOL=$(shell ../../Utilities/find-libtool.pl)
+ARCH=-arch i386 -arch ppc 
+SDK= /Developer/SDKs/MacOSX10.4u.sdk
+CFLAGS= $(ARCH) -O2 -Wall $(INC) -isysroot ${SDK} -F/Library/Frameworks/ 
+LDFLAGS= $(ARCH) -isysroot ${SDK} -Wl,-syslibroot,${SDK}
 
 CCACHE=ccache
 ifdef USE_CCACHE
