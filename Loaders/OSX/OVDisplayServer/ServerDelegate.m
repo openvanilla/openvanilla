@@ -249,8 +249,7 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
     return p;
 }
 
+// nop function for OSX86
 void nop(){
-    int i,j;
-    for(i=0;i<10000;i++) j+=i;
-    return;
+    volatile a=10;
 }
