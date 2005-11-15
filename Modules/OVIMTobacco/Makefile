@@ -14,7 +14,7 @@ include ../../Mk/ov.general.mk
 
 INC+=-I../../Experiments/Tobacco
 VPATH+= ../../Experiments/Tobacco
-CFLAGS=-g $(INC)
+CFLAGS+=$(INC) -g
 
 all: OVIMTobacco.dylib $(DATA)
 
