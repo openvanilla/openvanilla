@@ -126,6 +126,14 @@ public:
                 keyseq.clear();
 	       		return closeCandidateWindow(i);
     		}
+
+			if(!b->isEmpty() && isprint(k->code())) {
+				b->append(" ")->send();
+				keyseq.clear();
+				keyseq.add(k->code());
+				b->clear()->append(keyseq.buf)->update();
+				return closeCandidateWindow(i);
+			}
 		}
 
 		if(is_selkey(k->code())){
@@ -142,28 +150,18 @@ public:
 
             if(keyseq.buf) {
                 pagenumber = 0;
-                if(!isEnglish(keyseq.buf))
+                if(!isEnglish(keyseq.buf) && spellCheckerByLuceneFuzzySearch(keyseq.buf))
                 {
-                    if(spellCheckerByLuceneFuzzySearch(keyseq.buf))
-                    {
-                        showcandi(i);
-                        return 1;
-                    }
-                    else
-                    {
-                        s->beep();
-                        return closeCandidateWindow(i);
-                    }
+					showcandi(i);
+					return 1;
                 }
-                else
-                {
-                    if (!(strlen(keyseq.buf))) return 0;
-					keyseq.clear();
-					keyseq.add(k->code());
-					b->append(keyseq.buf)->send();
-                    keyseq.clear();
-	          		return closeCandidateWindow(i);
-                }
+
+				if (!(strlen(keyseq.buf))) return 0;
+				keyseq.clear();
+				keyseq.add(k->code());
+				b->append(keyseq.buf)->send();
+				keyseq.clear();
+          		return closeCandidateWindow(i);
 			} else {
     			b->send();
                 return 0;
