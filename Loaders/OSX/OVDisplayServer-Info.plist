@@ -11,7 +11,7 @@
 	<key>CFBundleExecutable</key>
 	<string>OVDisplayServer</string>
 	<key>CFBundleIconFile</key>
-	<string>OpenVanillaIcon</string>
+	<string>OpenVanillaLoaderIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.openvanilla.OVDisplayServer</string>
 	<key>CFBundleInfoDictionaryVersion</key>

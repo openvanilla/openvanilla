@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>OVLoader</string>
 	<key>CFBundleIconFile</key>
-	<string>OpenVanillaIcon</string>
+	<string>OpenVanillaLoaderIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.openvanilla.ovloader.071</string>
 	<key>CFBundleInfoDictionaryVersion</key>

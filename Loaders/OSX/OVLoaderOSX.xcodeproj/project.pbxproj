@@ -53,6 +53,9 @@
 		6A5C52F2083D523D0053E321 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5C52F1083D523D0053E321 /* MainMenu.nib */; };
 		6A5D8E8908173ADB007A527F /* NSDictionaryExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5D8E8708173ADB007A527F /* NSDictionaryExtension.h */; };
 		6A5D8E8A08173ADB007A527F /* NSDictionaryExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D8E8808173ADB007A527F /* NSDictionaryExtension.mm */; };
+		6A6A3B28092B09C500F30B0D /* OpenVanillaLoaderIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A6A3B27092B09C500F30B0D /* OpenVanillaLoaderIcon.icns */; };
+		6A6A3B2A092B09DF00F30B0D /* OpenVanillaMenuIcon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6A6A3B29092B09DF00F30B0D /* OpenVanillaMenuIcon.tif */; };
+		6A6A3B2F092B09FA00F30B0D /* OpenVanillaLoaderIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A6A3B27092B09C500F30B0D /* OpenVanillaLoaderIcon.icns */; };
 		6A8D0DBF0814E727006B922E /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8D0DBE0814E727006B922E /* CoreServices.framework */; };
 		6A8D0DC30814E72E006B922E /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A975EB20814C47700F40859 /* Carbon.framework */; };
 		6A975EAA0814C45900F40859 /* IMInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF110130814BF1500B49D06 /* IMInterface.h */; };
@@ -86,7 +89,6 @@
 		6AD76B4C08358CC700164A51 /* NSStringExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AD76B4A08358CC700164A51 /* NSStringExtension.mm */; };
 		6ADD1857083617E600B4319D /* CVKeyCode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ADD1856083617E600B4319D /* CVKeyCode.mm */; };
 		6ADD1916083627D900B4319D /* NSStringExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AD76B4A08358CC700164A51 /* NSStringExtension.mm */; };
-		6ADD6E9908366E3800CB4339 /* OpenVanillaIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6ADD6E9808366E3800CB4339 /* OpenVanillaIcon.icns */; };
 		6AE4A48A0836787A00D6CCD3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE4A4870836787A00D6CCD3 /* main.m */; };
 		6AE4A4A7083678A600D6CCD3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AE4A4A6083678A600D6CCD3 /* InfoPlist.strings */; };
 		6AE4A4BC08367A2900D6CCD3 /* OVPrefDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AE4A4BB08367A2900D6CCD3 /* OVPrefDelegate.mm */; };
@@ -95,7 +97,6 @@
 		6AF110120814BF0300B49D06 /* ATSComponent.r in Rez */ = {isa = PBXBuildFile; fileRef = 6AF1100F0814BF0300B49D06 /* ATSComponent.r */; };
 		6AF1101A0814BF2A00B49D06 /* TSBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF110150814BF1500B49D06 /* TSBundle.h */; };
 		6AF9423B0817F2F800AE0534 /* CVKeyCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF9423A0817F2F800AE0534 /* CVKeyCode.h */; };
-		6C8A5DE2092A4E5F004D98EE /* OpenVanillaMenuIcon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6C8A5DE1092A4E5F004D98EE /* OpenVanillaMenuIcon.tif */; };
 		D402A4E00927862E00D3194E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D402A4DF0927862E00D3194E /* InfoPlist.strings */; };
 		D4F6531E08895D77009C44B3 /* ov.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D4F6531D08895D77009C44B3 /* ov.pdf */; };
 /* End PBXBuildFile section */
@@ -162,6 +163,8 @@
 		6A5C52F3083D52430053E321 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = OVDisplayServer/zh_TW.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		6A5D8E8708173ADB007A527F /* NSDictionaryExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDictionaryExtension.h; path = NSExtensions/NSDictionaryExtension.h; sourceTree = SOURCE_ROOT; };
 		6A5D8E8808173ADB007A527F /* NSDictionaryExtension.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NSDictionaryExtension.mm; path = NSExtensions/NSDictionaryExtension.mm; sourceTree = SOURCE_ROOT; };
+		6A6A3B27092B09C500F30B0D /* OpenVanillaLoaderIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaLoaderIcon.icns; path = OVLoaderResources/OpenVanillaLoaderIcon.icns; sourceTree = "<group>"; };
+		6A6A3B29092B09DF00F30B0D /* OpenVanillaMenuIcon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = OpenVanillaMenuIcon.tif; path = OVInitResources/OpenVanillaMenuIcon.tif; sourceTree = "<group>"; };
 		6A8D0DBE0814E727006B922E /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		6A975EA00814C41600F40859 /* OVLoader.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVLoader.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A975EB20814C47700F40859 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
@@ -196,7 +199,6 @@
 		6AD76B4908358CC700164A51 /* NSStringExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSStringExtension.h; path = NSExtensions/NSStringExtension.h; sourceTree = SOURCE_ROOT; };
 		6AD76B4A08358CC700164A51 /* NSStringExtension.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NSStringExtension.mm; path = NSExtensions/NSStringExtension.mm; sourceTree = SOURCE_ROOT; };
 		6ADD1856083617E600B4319D /* CVKeyCode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVKeyCode.mm; path = CocoaVanilla/CVKeyCode.mm; sourceTree = "<group>"; };
-		6ADD6E9808366E3800CB4339 /* OpenVanillaIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OpenVanillaIcon.icns; sourceTree = SOURCE_ROOT; };
 		6AE4A461083677B300D6CCD3 /* OVPreferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE4A463083677B400D6CCD3 /* OVPreferences-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVPreferences-Info.plist"; sourceTree = "<group>"; };
 		6AE4A4860836787A00D6CCD3 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = OVPreferences/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -216,7 +218,6 @@
 		6AF110180814BF1500B49D06 /* TSComposingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TSComposingBuffer.mm; path = TSBundle/TSComposingBuffer.mm; sourceTree = SOURCE_ROOT; };
 		6AF9423A0817F2F800AE0534 /* CVKeyCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVKeyCode.h; path = CocoaVanilla/CVKeyCode.h; sourceTree = "<group>"; };
 		6AFFDF32090B7F3000299DDD /* ovfilter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ovfilter.mm; sourceTree = "<group>"; };
-		6C8A5DE1092A4E5F004D98EE /* OpenVanillaMenuIcon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = OpenVanillaMenuIcon.tif; sourceTree = "<group>"; };
 		D402A4E30927863600D3194E /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = OVDisplayServer/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D402A4E40927863B00D3194E /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = OVDisplayServer/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D404F48208896124003BEB00 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = OVLoaderResources/zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -322,7 +323,6 @@
 		6ADD6E9108366E2000CB4339 /* SharedResources */ = {
 			isa = PBXGroup;
 			children = (
-				6ADD6E9808366E3800CB4339 /* OpenVanillaIcon.icns */,
 			);
 			name = SharedResources;
 			sourceTree = "<group>";
@@ -344,7 +344,6 @@
 		6AF10FF20814BE3400B49D06 = {
 			isa = PBXGroup;
 			children = (
-				6C8A5DE1092A4E5F004D98EE /* OpenVanillaMenuIcon.tif */,
 				6AFFDF2F090B7F1A00299DDD /* ovfilter */,
 				6A15976808389BBA00518693 /* EmbeddedLoader */,
 				6ADD6E9108366E2000CB4339 /* SharedResources */,
@@ -397,6 +396,7 @@
 		6AF110060814BEB800B49D06 /* OVInitResources */ = {
 			isa = PBXGroup;
 			children = (
+				6A6A3B29092B09DF00F30B0D /* OpenVanillaMenuIcon.tif */,
 				6AD576390814C264001F6AFE /* InfoPlist.strings */,
 			);
 			name = OVInitResources;
@@ -447,6 +447,7 @@
 		6AF1100C0814BEE600B49D06 /* OVLoaderResources */ = {
 			isa = PBXGroup;
 			children = (
+				6A6A3B27092B09C500F30B0D /* OpenVanillaLoaderIcon.icns */,
 				6AC170830816969500FE1274 /* CVInfoBox.h */,
 				6AC170840816969500FE1274 /* CVInfoBox.mm */,
 				6AC1707B0816967E00FE1274 /* CVInfoBox.nib */,
@@ -833,6 +834,7 @@
 				6A9835CC083B9C3400E0C3F3 /* Localizable.strings in Resources */,
 				6AC1707C0816967E00FE1274 /* CVInfoBox.nib in Resources */,
 				6A323EC2083B736C00791C9C /* org.openvanilla.OVLoader.FactorySettings.plist in Resources */,
+				6A6A3B28092B09C500F30B0D /* OpenVanillaLoaderIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -840,9 +842,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A6A3B2F092B09FA00F30B0D /* OpenVanillaLoaderIcon.icns in Resources */,
 				D402A4E00927862E00D3194E /* InfoPlist.strings in Resources */,
 				6A5C52F2083D523D0053E321 /* MainMenu.nib in Resources */,
-				6ADD6E9908366E3800CB4339 /* OpenVanillaIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,7 +864,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AD576440814C293001F6AFE /* InfoPlist.strings in Resources */,
-				6C8A5DE2092A4E5F004D98EE /* OpenVanillaMenuIcon.tif in Resources */,
+				6A6A3B2A092B09DF00F30B0D /* OpenVanillaMenuIcon.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
