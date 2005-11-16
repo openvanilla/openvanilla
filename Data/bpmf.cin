@@ -1,4 +1,9 @@
-﻿%gen_inp
+# Revise by opendesktop.org.tw's phone.cin to include CNS11643 and Unicode
+# compatible characters.
+# Also adjust some punctuations.
+# Those works have been done by yylin and b6s.
+
+%gen_inp
 %ename  Phonetic
 %cname  注音
 %selkey  123456789
@@ -35334,6 +35339,7 @@ ru03 銭
 ru03 䉍
 ru03 𥳑
 ru03 謭
+ru03 彅
 ru03 瀽
 ru03 蠒
 ru03 鹻

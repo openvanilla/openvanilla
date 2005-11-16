@@ -1,4 +1,8 @@
-﻿%gen_inp
+# This file includes CNS11643 and Unicode compatible characters based on
+# opendesktop.org.tw's simplex.cin.
+# This work has been done by yylin and b6s.
+#
+%gen_inp
 %ename simplex
 %cname 簡易
 %encoding UTF-8

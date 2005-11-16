@@ -4,7 +4,9 @@
 # This table also extended to include HKSCS encodings. For details, see
 #	http://www.info.gov.hk/digital21/chi/hkscs/index.html
 #
-# Now this table is supplied by CNS11643 to have around 70,000 Chinese characters.
+# Now this table is supplied by CNS11643 to have around 70,000 Chinese
+# characters. This work is based on opendesktop.org.tw's cj.cin file and
+# merged by yylin and b6s.
 #
 %gen_inp
 %ename Cangjie
