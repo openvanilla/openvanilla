@@ -54,7 +54,6 @@
 		6A5D8E8908173ADB007A527F /* NSDictionaryExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5D8E8708173ADB007A527F /* NSDictionaryExtension.h */; };
 		6A5D8E8A08173ADB007A527F /* NSDictionaryExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D8E8808173ADB007A527F /* NSDictionaryExtension.mm */; };
 		6A6A3B28092B09C500F30B0D /* OpenVanillaLoaderIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A6A3B27092B09C500F30B0D /* OpenVanillaLoaderIcon.icns */; };
-		6A6A3B2A092B09DF00F30B0D /* OpenVanillaMenuIcon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6A6A3B29092B09DF00F30B0D /* OpenVanillaMenuIcon.tif */; };
 		6A6A3B2F092B09FA00F30B0D /* OpenVanillaLoaderIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A6A3B27092B09C500F30B0D /* OpenVanillaLoaderIcon.icns */; };
 		6A8D0DBF0814E727006B922E /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8D0DBE0814E727006B922E /* CoreServices.framework */; };
 		6A8D0DC30814E72E006B922E /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A975EB20814C47700F40859 /* Carbon.framework */; };
@@ -98,6 +97,7 @@
 		6AF1101A0814BF2A00B49D06 /* TSBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF110150814BF1500B49D06 /* TSBundle.h */; };
 		6AF9423B0817F2F800AE0534 /* CVKeyCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF9423A0817F2F800AE0534 /* CVKeyCode.h */; };
 		D402A4E00927862E00D3194E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D402A4DF0927862E00D3194E /* InfoPlist.strings */; };
+		D406A574092B32F900C4449E /* OpenVanillaMenuIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D406A573092B32F900C4449E /* OpenVanillaMenuIcon.icns */; };
 		D4F6531E08895D77009C44B3 /* ov.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D4F6531D08895D77009C44B3 /* ov.pdf */; };
 /* End PBXBuildFile section */
 
@@ -164,7 +164,6 @@
 		6A5D8E8708173ADB007A527F /* NSDictionaryExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDictionaryExtension.h; path = NSExtensions/NSDictionaryExtension.h; sourceTree = SOURCE_ROOT; };
 		6A5D8E8808173ADB007A527F /* NSDictionaryExtension.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NSDictionaryExtension.mm; path = NSExtensions/NSDictionaryExtension.mm; sourceTree = SOURCE_ROOT; };
 		6A6A3B27092B09C500F30B0D /* OpenVanillaLoaderIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaLoaderIcon.icns; path = OVLoaderResources/OpenVanillaLoaderIcon.icns; sourceTree = "<group>"; };
-		6A6A3B29092B09DF00F30B0D /* OpenVanillaMenuIcon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = OpenVanillaMenuIcon.tif; path = OVInitResources/OpenVanillaMenuIcon.tif; sourceTree = "<group>"; };
 		6A8D0DBE0814E727006B922E /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		6A975EA00814C41600F40859 /* OVLoader.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVLoader.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A975EB20814C47700F40859 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
@@ -226,6 +225,7 @@
 		D404F4940889683A003BEB00 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = OVPreferences/zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D404F4A3088968D6003BEB00 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = OVInitResources/zh_CN.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		D404F4C1088969F0003BEB00 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = OVDisplayServer/zh_CN.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		D406A573092B32F900C4449E /* OpenVanillaMenuIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaMenuIcon.icns; path = OVInitResources/OpenVanillaMenuIcon.icns; sourceTree = "<group>"; };
 		D4F6531D08895D77009C44B3 /* ov.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ov.pdf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -396,7 +396,7 @@
 		6AF110060814BEB800B49D06 /* OVInitResources */ = {
 			isa = PBXGroup;
 			children = (
-				6A6A3B29092B09DF00F30B0D /* OpenVanillaMenuIcon.tif */,
+				D406A573092B32F900C4449E /* OpenVanillaMenuIcon.icns */,
 				6AD576390814C264001F6AFE /* InfoPlist.strings */,
 			);
 			name = OVInitResources;
@@ -864,7 +864,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AD576440814C293001F6AFE /* InfoPlist.strings in Resources */,
-				6A6A3B2A092B09DF00F30B0D /* OpenVanillaMenuIcon.tif in Resources */,
+				D406A574092B32F900C4449E /* OpenVanillaMenuIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

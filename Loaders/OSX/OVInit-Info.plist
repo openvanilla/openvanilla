@@ -25,6 +25,6 @@
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	<key>tsInputMethodIconFileKey</key>
-	<string>OpenVanillaMenuIcon.tif</string>
+	<string>OpenVanillaMenuIcon.icns</string>
 </dict>
 </plist>
