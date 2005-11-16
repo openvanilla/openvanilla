@@ -24,7 +24,7 @@
 	<string>0.7.1</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
-        <key>tsInputMethodIconFileKey</key>
-        <string>openvanilla.tif</string>
+	<key>tsInputMethodIconFileKey</key>
+	<string>OpenVanillaMenuIcon.tif</string>
 </dict>
 </plist>
