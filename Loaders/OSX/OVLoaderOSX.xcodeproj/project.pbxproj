@@ -1267,7 +1267,7 @@
 					"-framework",
 					Carbon,
 				);
-				OTHER_REZFLAGS = "";
+				OTHER_REZFLAGS = "-rd -d ppc_$(ppc) -d i386_$(i386)";
 				PRODUCT_NAME = OVInit;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (

@@ -18,4 +18,18 @@
 #define ATSCIMNLENGTH           $"18"       // in hexadecimal
 #define ATSCVENDORCODE          'opvn'
 
+#if defined(ppc_YES)
+    // PPC architecture
+    #define TARGET_REZ_MAC_PPC 1
+#else
+    #define TARGET_REZ_MAC_PPC 0
+#endif
+
+#if defined(i386_YES)
+    // x86 architecture
+    #define TARGET_REZ_MAC_X86 1
+#else
+    #define TARGET_REZ_MAC_X86 0
+#endif
+
 #endif
