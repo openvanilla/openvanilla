@@ -95,6 +95,7 @@
 		6AF110120814BF0300B49D06 /* ATSComponent.r in Rez */ = {isa = PBXBuildFile; fileRef = 6AF1100F0814BF0300B49D06 /* ATSComponent.r */; };
 		6AF1101A0814BF2A00B49D06 /* TSBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF110150814BF1500B49D06 /* TSBundle.h */; };
 		6AF9423B0817F2F800AE0534 /* CVKeyCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF9423A0817F2F800AE0534 /* CVKeyCode.h */; };
+		6C8A5DE2092A4E5F004D98EE /* openvanilla.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6C8A5DE1092A4E5F004D98EE /* openvanilla.tif */; };
 		D402A4E00927862E00D3194E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D402A4DF0927862E00D3194E /* InfoPlist.strings */; };
 		D4F6531E08895D77009C44B3 /* ov.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D4F6531D08895D77009C44B3 /* ov.pdf */; };
 /* End PBXBuildFile section */
@@ -216,6 +217,7 @@
 		6AF9423A0817F2F800AE0534 /* CVKeyCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVKeyCode.h; path = CocoaVanilla/CVKeyCode.h; sourceTree = "<group>"; };
 		6AFFDEF7090B7E0900299DDD /* OVPreferences-Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OVPreferences-Info copy.plist"; path = "/Users/lukhnos/logiciels/openvanilla/trunk/Loaders/OSX/OVPreferences-Info copy.plist"; sourceTree = "<absolute>"; };
 		6AFFDF32090B7F3000299DDD /* ovfilter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ovfilter.mm; sourceTree = "<group>"; };
+		6C8A5DE1092A4E5F004D98EE /* openvanilla.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = openvanilla.tif; sourceTree = SOURCE_ROOT; };
 		D402A4E30927863600D3194E /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = OVDisplayServer/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D402A4E40927863B00D3194E /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = OVDisplayServer/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D404F48208896124003BEB00 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = OVLoaderResources/zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		6AF10FF20814BE3400B49D06 = {
 			isa = PBXGroup;
 			children = (
+				6C8A5DE1092A4E5F004D98EE /* openvanilla.tif */,
 				6AFFDF2F090B7F1A00299DDD /* ovfilter */,
 				6A15976808389BBA00518693 /* EmbeddedLoader */,
 				6ADD6E9108366E2000CB4339 /* SharedResources */,
@@ -861,6 +864,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AD576440814C293001F6AFE /* InfoPlist.strings in Resources */,
+				6C8A5DE2092A4E5F004D98EE /* openvanilla.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

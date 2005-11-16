@@ -6,10 +6,14 @@
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>OVInit</string>
+        <key>CFBundleGetInfoString</key>
+        <string>OpenVanilla 0.7.1</string>
 	<key>CFBundleIconFile</key>
-	<string>OpenVanillaIcon</string>
+	<string>openvanilla.tif</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.openvanilla.ovinit</string>
+        <key>CFBundleName</key>
+        <string>OpenVanilla 0.7.1</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -19,6 +23,8 @@
 	<key>CFBundleVersion</key>
 	<string>0.7.1</string>
 	<key>CSResourcesFileMapped</key>
-	<string>yes</string>
+	<true/>
+        <key>tsInputMethodIconFileKey</key>
+        <string>openvanilla.tif</string>
 </dict>
 </plist>
