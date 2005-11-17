@@ -169,8 +169,8 @@ void CVLoader::menuHandler(unsigned int cmd) {
     if (kpmenugroup->clickItem(cmd)) {
         syncMenuAndConfig();
 		if (activecontext) {
+            activecontext->syncConfig();
 			CVSmartMenuItem *i=kpmenugroup->getMenuItem(cmd);
-			
             // we re-use the function to display the enable/disable status
 			showOutputFilterStatus([i idTag], [i checked]);
 		}
