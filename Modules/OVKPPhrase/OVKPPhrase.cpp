@@ -111,13 +111,11 @@ int OVKPPhraseToolContext::keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, O
         clear();
         return 0;
     }
-    
+
+    // repeated work key is sent back    
     if (working && !seq.length() && c==workkey) {
-        char buf[2];
-        sprintf(buf, "%c", c);
-        b->clear()->append(buf)->send();
         clear();
-        return 1;
+        return 0;
     }
 
     if (!working) {
