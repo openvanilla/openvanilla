@@ -116,6 +116,7 @@ int OVKPPhraseToolContext::keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, O
         char buf[2];
         sprintf(buf, "%c", c);
         b->clear()->append(buf)->send();
+        clear();
         return 1;
     }
 
