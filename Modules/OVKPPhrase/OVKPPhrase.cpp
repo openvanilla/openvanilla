@@ -217,7 +217,7 @@ extern "C" int OVInitializeLibrary(OVService* s, const char* mp) {
     murmur("OVKPPhrase library initialized, module path=%s, user path=%s, path separator=%s, local=%s", mp, s->userSpacePath("OVKPPhrase"), s->pathSeparator(), s->locale());
     
     murmur("OVKPPhrase: opening database");
-    char *p=sqlite3_mprintf("%s%s", s->userSpacePath("OVKPPhrase"), "ovakphrase.db");
+    char *p=sqlite3_mprintf("%s%s", s->userSpacePath("OVKPPhrase"), "ovkpphrase.db");
     phdb=new SQLite3;
     if (phdb->open(p) != SQLITE_OK) {
         murmur("OVKPPhrase: database open failed");
