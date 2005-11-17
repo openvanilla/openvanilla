@@ -17,27 +17,32 @@ class OVKeySequenceSimple : public OVKeySequence
 {
 public:
     OVKeySequenceSimple(int m=ovMaxSeqSimpLen) : len(0), max(m) { seq[0]=0; }
-    virtual int add(char c)
-    {
+    virtual int add(char c) {
         if (len==max) return 0;
         seq[len++]=tolower(c);
         seq[len]=0;
         return 1;
     }
     
-    virtual OVKeySequence* remove()
-    {
+    virtual OVKeySequence* remove() {
         if (len) seq[--len]=0;
         return this;
     }
     
-    virtual OVKeySequence* clear()
-    {
+    virtual OVKeySequence* clear() {
         len=0;
         seq[0]=0;
         return this;
     }
     
+	virtual int length() {
+        return len;
+	}
+	
+	virtual const char *content() {
+        return seq;
+	}
+	
 protected:    
     int len;
     int max;

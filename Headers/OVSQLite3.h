@@ -30,13 +30,32 @@ public:
     int open(const char *f)     { return sqlite3_open(f, &handle); }
     int close()                 { return sqlite3_close(handle); }
     int errcode()               { return sqlite3_errcode(handle); }
-    SQLite3Statement *prepare(const char *sqlcmd)   
-    {
+    const char *errmsg()        { return sqlite3_errmsg(handle); }
+
+    int execute(const char *sqlcmd, ...) {
+        va_list l;
+        va_start(l, sqlcmd);
+        char *cmd=sqlite3_vmprintf(sqlcmd, l);
+        va_end(l);
+        int r=sqlite3_exec(handle, cmd, NULL, NULL, NULL);
+        free(cmd);
+        return r;
+    }
+    
+    SQLite3Statement *prepare(const char *sqlcmd, ...) {
+        va_list l;
+        va_start(l, sqlcmd);
+        char *cmd=sqlite3_vmprintf(sqlcmd, l);
+        va_end(l);
+        
         sqlite3_stmt *s;
         const char *rms;
-        if (sqlite3_prepare(handle, sqlcmd, -1, &s, &rms)) return NULL;
-        return new SQLite3Statement(s);
+        SQLite3Statement *r=NULL;       
+        if (!sqlite3_prepare(handle, cmd, -1, &s, &rms)) r=new SQLite3Statement(s);
+        free(cmd);
+        return r;
     }
+    
 protected:
     sqlite3 *handle;
 };
