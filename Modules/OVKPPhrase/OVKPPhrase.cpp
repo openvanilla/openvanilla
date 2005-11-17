@@ -122,6 +122,9 @@ int OVKPPhraseToolContext::keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, O
         // if not workkey, returns
         if ((k->code() != workkey) || k->isCommand()) return 0;
         
+        // if something is in buffer (put by some other IM's), returns
+        if (!b->isEmpty()) return 0;
+        
         // workkey hitted
         working=true;
         s->notify("you're in phrase tool mode");
