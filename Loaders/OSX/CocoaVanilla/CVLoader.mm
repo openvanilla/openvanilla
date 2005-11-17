@@ -14,12 +14,13 @@
 #include "OVDisplayServer.h"
 
 enum {      // CVLMI = CVLoader Menu Item
-    CVLMI_IMGROUPSTART=1000,
-    CVLMI_OFGROUPSTART=2000,
-	CVLMI_FASTIMSWITCH=3000,
-    CVLMI_ABOUT=3001,
-    CVLMI_PREFERENCES=3002,
-    CVLMI_HELP=3003,
+    CVLMI_KPGROUPSTART=1000,
+    CVLMI_IMGROUPSTART=2000,
+    CVLMI_OFGROUPSTART=3000,
+	CVLMI_FASTIMSWITCH=4000,
+    CVLMI_ABOUT=4001,
+    CVLMI_PREFERENCES=4002,
+    CVLMI_HELP=4003,
 };
 
 CVLoader::CVLoader() {
@@ -33,6 +34,8 @@ CVLoader::~CVLoader() {
 }
 
 int CVLoader::init(MenuRef m) {
+    // Carbon-app-friendly addition
+    NSAutoreleasePool *pool=[NSAutoreleasePool new];
     // UInt32 beginTime;
     // beginTime = TickCount();
     // murmur("CVLoader::init begin");
@@ -59,7 +62,6 @@ int CVLoader::init(MenuRef m) {
 	immenu=m;
     srv=new CVService(CVGetUserSpacePath(), dspsrvr);
     candi=new CVCandidate(dspsrvr);
-    fprintf(stderr,"cfg = %x\n", cfg);
     cfg=[[CVConfig alloc] initWithFile:CVGetUserConfigFilename() defaultData:[factorydef dictionary]];
     modarray=[NSMutableArray new];
     imarray=[NSMutableArray new];
@@ -83,14 +85,19 @@ int CVLoader::init(MenuRef m) {
 	
     // create menu groups and check all menu items, then sync config
 	menudict=nil;
-	immenugroup=ofmenugroup=NULL;
+	kpmenugroup=immenugroup=ofmenugroup=NULL;
 	refreshMenu();
     syncMenuAndConfig();
     // murmur("CVLoader::init ticks: %d", TickCount() - beginTime );
+    
+    [pool release];
     return 1;
 }
 
 void CVLoader::refreshMenu() {
+    // Carbon-app-friendly addition
+    NSAutoreleasePool *pool=[NSAutoreleasePool new];
+
 	NSDictionary *cfgmenukey=[[cfg dictionary] valueForKey:@"OVMenuManager" default:[[NSMutableDictionary new] autorelease]];
 	if (!menudict) {
 		menudict=[NSMutableDictionary new];
@@ -107,6 +114,7 @@ void CVLoader::refreshMenu() {
 	}
 	
 	checkMenuItems();
+	[pool release];
 }
 
 CVContext *CVLoader::newContext() {
@@ -157,6 +165,19 @@ void CVLoader::menuHandler(unsigned int cmd) {
         return;
     }
 
+    // if the item falls in key preprocessor group
+    if (kpmenugroup->clickItem(cmd)) {
+        syncMenuAndConfig();
+		if (activecontext) {
+			CVSmartMenuItem *i=kpmenugroup->getMenuItem(cmd);
+			
+            // we re-use the function to display the enable/disable status
+			showOutputFilterStatus([i idTag], [i checked]);
+		}
+        return;        
+    }
+
+    // if the item falls in output filter group
     if (ofmenugroup->clickItem(cmd)) {
         syncMenuAndConfig();
 		if (activecontext) {
@@ -208,11 +229,27 @@ id CVLoader::connectDisplayServer() {
 }
 
 void CVLoader::createMenuGroups() {
+	NSDictionary *cfgmenukey=[[cfg dictionary] valueForKey:@"OVMenuManager" default:[[NSMutableDictionary new] autorelease]];
+
+    if (kpmenugroup) delete kpmenugroup;
 	if (immenugroup) delete immenugroup;
 	if (ofmenugroup) delete ofmenugroup;
 	CVDeleteMenu(immenu);
+	kpmenugroup=new CVSmartMenuGroup(immenu, CVLMI_KPGROUPSTART, loaderbundle, CVSM_MULTIPLE);
     immenugroup=new CVSmartMenuGroup(immenu, CVLMI_IMGROUPSTART, loaderbundle, CVSM_EXCLUSIVE);
     ofmenugroup=new CVSmartMenuGroup(immenu, CVLMI_OFGROUPSTART, loaderbundle, CVSM_MULTIPLE);
+    
+    NSArray *kpa=CVGetModulesByType(modarray, @"OVKeyPreprocessor");
+    if ([kpa count]) {
+        kpmenugroup->insertTitle(MSG(@"Key Preprocessors"));
+        
+        // get the "sorted-by" key to make KP submenu ordered by user settings
+        NSArray *kporderedby=[cfgmenukey valueForKey:@"keyPreprocessorOrder" default:[[NSArray new] autorelease]];
+        
+        pourModuleArrayIntoMenu(kpa, kpmenugroup, kporderedby);
+        kpmenugroup->insertSeparator();
+    }
+    
     immenugroup->insertTitle(MSG(@"Input Methods"));
     pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVInputMethod"), immenugroup);
     immenugroup->insertSeparator();
@@ -221,7 +258,6 @@ void CVLoader::createMenuGroups() {
     // we get the "sorted-by" key to make our menu ordered by user's settings
     // we read our own cfgmenukey because we want to force sync the config file
     // if the key hasn't existed yet
-	NSDictionary *cfgmenukey=[[cfg dictionary] valueForKey:@"OVMenuManager" default:[[NSMutableDictionary new] autorelease]];
     NSArray *oforderedby=[cfgmenukey valueForKey:@"outputFilterOrder" default:[[NSArray new] autorelease]];
     pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVOutputFilter"), ofmenugroup, oforderedby);
     ofmenugroup->insertSeparator();
@@ -234,13 +270,20 @@ void CVLoader::createMenuGroups() {
 }
 
 void CVLoader::checkMenuItems() {
-    // check primaryInputMethod first
+    // uncheck everything
+    kpmenugroup->uncheckAll();
     immenugroup->uncheckAll();
     ofmenugroup->uncheckAll();
     
+    // check keyPreprocessors
+    NSArray *kpa=[loaderdict valueForKey:@"keyPreprocessorArray" default:[[NSMutableArray new] autorelease]];
+    kpmenugroup->checkItemArray(kpa);
+    
+    // check primaryInputMethod
     NSString *pIM=[loaderdict valueForKey:@"primaryInputMethod" default:@""];
     immenugroup->checkItem(pIM);
     
+    // fall back when there is no input method selected
     NSArray *imchk=immenugroup->getCheckedItems();
     if (![imchk count]) {
         murmur ("no IM checked, using the first item on the menu");
@@ -253,21 +296,44 @@ void CVLoader::checkMenuItems() {
 }
 
 void CVLoader::syncMenuAndConfig() {
+    // Carbon-app-friendly addition
+    NSAutoreleasePool *pool=[NSAutoreleasePool new];
+
     // anyway, are both groups are created according to module array,
     // we can be very sure that every checked item is in the module array
+    // (they are autoreleased, so there's no memory management problem)
+    NSArray *kpmgitems=kpmenugroup->getCheckedItems();
     NSArray *immgitems=immenugroup->getCheckedItems();
     NSArray *ofmgitems=ofmenugroup->getCheckedItems();
 
     // remember the result object from CVFindModules is autoreleased
+    NSArray *kpsrc=CVFindModules(modarray, kpmgitems, @"OVKeyPreprocessor");
     NSArray *imsrc=CVFindModules(modarray, immgitems, @"OVInputMethod");
     NSArray *ofsrc=CVFindModules(modarray, ofmgitems, @"OVOutputFilter");
+
+    // NOTA BENE: there is no "kparray" in CVLoader. Instead all loaded
+    // key preprocessors are put into "imarray"--since key preprocessors
+    // are themselves (derived) input methods. By doing this we also
+    // put everything in order, i.e. all modules are put according to
+    // the menu order into the imarray
+    NSMutableArray *tmp=[[NSMutableArray new] autorelease];
+    [imarray removeAllObjects];
     
+    // since initializeModules() deletes everything in dst, we need this
+    initializeModules(kpsrc, tmp, kpmenugroup);    
+    [imarray addObjectsFromArray:tmp];
+    
+    initializeModules(imsrc, tmp, immenugroup);
+    [imarray addObjectsFromArray:tmp];
+
     initializeModules(ofsrc, ofarray, ofmenugroup);
-    initializeModules(imsrc, imarray, immenugroup);
     
     // after so much work, we write these back to config
+
+    kpmgitems=kpmenugroup->getCheckedItems();
+    immgitems=immenugroup->getCheckedItems();        
     ofmgitems=ofmenugroup->getCheckedItems();
-    immgitems=immenugroup->getCheckedItems();    
+    [loaderdict setValue:kpmgitems forKey:@"keyPreprocessorArray"];
     [loaderdict setValue:ofmgitems forKey:@"outputFilterArray"];
     if ([immgitems count]) {
         [loaderdict setValue:[immgitems objectAtIndex:0] forKey:@"primaryInputMethod"];
@@ -292,6 +358,7 @@ void CVLoader::syncMenuAndConfig() {
     srv->setBeepSound(beepsound);
     
     [cfg sync];
+    [pool release];
 }
 
 void CVLoader::initializeModules(NSArray *src, NSMutableArray* dst, CVSmartMenuGroup *fallout) {
@@ -503,7 +570,12 @@ int CVContext::event(char charcode, int modifiers) {
     CVContextWrapper *w;
     while (w=[e nextObject]) {
         OVInputMethodContext *c=[w context];
-        if (c) if (c->keyEvent(&key, buf, loader->candi, loader->srv)) return 1;
+        if (c) {
+            if (c->keyEvent(&key, buf, loader->candi, loader->srv)) {
+                NSLog(@"key handled");
+                return 1;
+            }
+        }
     }
 
     return 0;
@@ -548,14 +620,16 @@ void CVContext::syncConfig(int forced) {
             if (c) c->end();
         }        
         
-//      murmur ("reloading contexts array, delete all context objects");
+        // murmur ("reloading contexts array, delete all context objects");
+        // NSLog([loader->imarray description]);
+        
         [contexts removeAllObjects];
         
         e=[loader->imarray objectEnumerator];
         CVModuleWrapper *mw;
         while (mw=[e nextObject]) {
             OVInputMethod *m=(OVInputMethod*)[mw module];
-//          murmur ("creating context for IM %s", m->identifier());
+            // murmur ("creating context for IM %s", m->identifier());
             OVInputMethodContext *c=m->newContext();
             c->start(buf, loader->candi, loader->srv);
             CVContextWrapper *cw=[[CVContextWrapper alloc] initWithContext:c];

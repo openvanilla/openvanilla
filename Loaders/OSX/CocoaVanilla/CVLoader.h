@@ -33,7 +33,7 @@ protected:
 	void createMenuGroups();
 	void checkMenuItems();
     void initializeModules(NSArray *src, NSMutableArray *dst, CVSmartMenuGroup *fallout);
-    void syncMenuAndConfig();       // sync menu items and config, re-assemble IM and OF arrays
+    void syncMenuAndConfig(); // sync menu items&config, reassemble IM/OF arrays
     void pourModuleArrayIntoMenu(NSArray *ma, CVSmartMenuGroup *g, NSArray *orderedby=nil);
 	void showOutputFilterStatus(NSString *modid, BOOL s);
 	void switchToLastPrimaryIM();
@@ -45,16 +45,17 @@ protected:
     CVContext *activecontext;
     CVConfig *cfg;
     NSMutableDictionary *loaderdict;        // dictionary for loader config
-	NSMutableDictionary *menudict;					// dictionary for menu keys
+	NSMutableDictionary *menudict;		   // dictionary for menu keys
 	NSBundle *loaderbundle;
 	MenuRef immenu;
-	id dspsrvr;						// display server (remote object)
+	id dspsrvr;						// display server (ObjC remote object)
 
-    NSMutableArray *modarray;              // all loaded moudles
+    NSMutableArray *modarray;       // all loaded moudles
+    NSMutableArray *imarray;        // current in-use KP & IM modules
     NSMutableArray *ofarray;        // current in-use OF modules
-    NSMutableArray *imarray;        // current in-use IM modules
-    CVSmartMenuGroup *immenugroup;
-    CVSmartMenuGroup *ofmenugroup;
+    CVSmartMenuGroup *kpmenugroup;  // key preprocessor menu group
+    CVSmartMenuGroup *immenugroup;  // input method menu group
+    CVSmartMenuGroup *ofmenugroup;  // output filter menu group
     friend class CVContext;
 };
 
