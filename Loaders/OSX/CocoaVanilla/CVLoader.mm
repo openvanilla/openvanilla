@@ -281,7 +281,7 @@ void CVLoader::syncMenuAndConfig() {
 	// and get OVDisplayServer settings too
  	NSDictionary *dsrvdict=[[cfg dictionary] valueForKey:@"OVDisplayServer" default:CVGetDisplayServerConfig()];
 	if (dspsrvr) {
-		 NSLog(@"syncing config with display server");
+        // NSLog(@"syncing config with display server");
 		[dspsrvr setConfig:dsrvdict];
 	}
 	
@@ -417,7 +417,8 @@ CVContext::CVContext(CVLoader *p) {
     buf=new CVBuffer(NULL, loader->ofarray, loader->srv);
     candistate=NULL;
     contexts=nil;
-    NSLog(@"dumping cfg"); NSLog([loader->cfg description]);
+    // NSLog(@"dumping cfg");
+    // NSLog([loader->cfg description]);
     stamp=[loader->cfg timeStamp];
     syncConfig(1);
 }

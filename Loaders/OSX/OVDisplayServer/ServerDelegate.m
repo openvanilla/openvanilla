@@ -12,12 +12,18 @@ enum {
     OVDPS_NOTIFY_SILENT=1
 };
 
+// nop function to prevent Objective-C remote object failure
+// in some architectures--DO NOT REMOVE THIS WITHOUT EXTENSIVE TESTING!
+
+void nop() {
+    volatile a=10;
+}
+
 NSPoint CVPointToNSPoint(Point p, NSWindow *w);
 Point CVFixWindowPosition(Point pp, int width, int height);
 
 @implementation ServerDelegate
 - (void)setConfig:(NSDictionary*)cfg {
-   NSLog(@" (void)setConfig:(NSDictionary*)cfg ");
 	[self applyConfig:cfg window:candi textField:canditext];
 	[self applyConfig:cfg window:noti textField:notitext];
 	notialpha=[noti alphaValue];
@@ -27,62 +33,52 @@ Point CVFixWindowPosition(Point pp, int width, int height);
     if ([ns isEqualToString:@"silent"]) notistyle=OVDPS_NOTIFY_SILENT;
 }
 - (void)candidateShow {
-   NSLog(@" (void)candidateShow ");
 	candion=YES;
 	[self solveConflict];
 	[candi orderFront:self];
-        nop();
+    nop();
 }
 - (void)candidateHide {
-   NSLog(@" (void)candidateHide ");
 	candion=NO;
 	[candi orderOut:self];
-        nop();
+    nop();
 }
 - (void)candidateUpdate:(bycopy NSString*)s position:(Point)p {
-   NSLog(@" (void)candidateUpdate:(bycopy NSString*)s position:(Point)p ");
 	[self updateTextInWindow:candi textField:canditext text:s position:p];
 }
 - (void)notifyMessage:(bycopy NSString*)s position:(Point)p {
-   NSLog(@" (void)notifyMessage:(bycopy NSString*)s position:(Point)p ");
 	[self updateTextInWindow:noti textField:notitext text:s position:p];
 	[self solveConflict];
     
     if (notistyle!=OVDPS_NOTIFY_DEFAULT) return;
     [noti orderFront:self];
-        nop();
+    nop();
 }
 - (void)notifyClose {
-   NSLog(@" (void)notifyClose ");
 	[noti orderOut:self];
-        nop();
+    nop();
 }
 - (void)notifyFade {
-   NSLog(@" (void)notifyFade ");
     if (fadetimer) [self stopTimer];
     
     if (notistyle!=OVDPS_NOTIFY_DEFAULT) return;
     fadetimer=[NSTimer scheduledTimerWithTimeInterval:CVIB_FADEWAIT target:self selector:@selector(fadeStart) userInfo:nil repeats:NO];
 }
 - (void)aboutDialog {
-   NSLog(@" (void)aboutDialog ");
     [aboutdialog setLevel:NSScreenSaverWindowLevel];
     [aboutdialog orderFront:self];
     nop();
-//    NSLog(@"after aboutdialog orderFront");
 }
 - (void)dealloc {
-   NSLog(@" (void)dealloc ");
     [defaultbackground release];
 	[candi release];
 	[super dealloc];
 }
 - (void)awakeFromNib {
-   NSLog(@" (void)awakeFromNib ");
-	NSLog(@"setting up OVDisplayServer");
+	// NSLog(@"OVDisplayServer started");
 	NSConnection *c=[NSConnection defaultConnection];
 	[c setRootObject:self];
-    if ([c registerName:@"OVDisplayServer"]) NSLog(@"OVDisplayServer registered");
+    if ([c registerName:@"OVDisplayServer"]) ; // NSLog(@"OVDisplayServer registered");
 	else NSLog(@"OVDisplayServer registration failed");
 
 	NSRect fr=NSMakeRect(0, 0, 100, 20);
@@ -98,19 +94,16 @@ Point CVFixWindowPosition(Point pp, int width, int height);
 	fadetimer=nil;
 }
 - (void)stopTimer {
-   NSLog(@" (void)stopTimer ");
     if (fadetimer) [fadetimer invalidate];
     fadetimer=nil;
 	[noti setAlphaValue:notialpha];
 }
 - (void)fadeStart {
-   NSLog(@" (void)fadeStart ");
     [fadetimer invalidate];
     fadetimer=[NSTimer scheduledTimerWithTimeInterval:CVIB_FADEINTERVAL target:self selector:@selector(fadeWork) userInfo:nil repeats:YES];
     fadealpha=notialpha;
 }
 - (void)fadeWork {
-   NSLog(@" (void)fadeWork ");
     fadealpha-=CVIB_FADEVALUE;
     if (fadealpha<=0) {
         [noti orderOut:self];
@@ -122,7 +115,6 @@ Point CVFixWindowPosition(Point pp, int width, int height);
 
 }
 - (void)solveConflict {
-   NSLog(@" (void)solveConflict ");
 	if (!candion) return;
 	NSRect cfr, nfr;
 	cfr=[candi frame];
@@ -133,7 +125,6 @@ Point CVFixWindowPosition(Point pp, int width, int height);
 	}
 }
 - (void)updateTextInWindow:(NSWindow*)w textField:(NSTextField*)t text:(NSString*)s position:(Point)p {
-   NSLog(@" (void)updateTextInWindow:(NSWindow*)w textField:(NSTextField*)t text:(NSString*)s position:(Point)p ");
 	[t setStringValue:s];
     [t sizeToFit];
     NSRect r=[t frame];
@@ -144,20 +135,13 @@ Point CVFixWindowPosition(Point pp, int width, int height);
     [w setFrameTopLeftPoint:nspos];
 }
 - (NSWindow*)createWindow:(NSRect)fr {
-   NSLog(@" (NSWindow*)createWindow:(NSRect)fr ");
 	NSWindow *w=[[NSWindow alloc] initWithContentRect:fr styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
-
-//	NSWindow *w=[[NSPanel alloc] initWithContentRect:fr styleMask:NSUtilityWindowMask backing:NSBackingStoreBuffered defer:NO];
-//	[(NSPanel*)w setBecomesKeyOnlyIfNeeded:YES]; 
     [w setLevel:NSScreenSaverWindowLevel];
 	[w setMovableByWindowBackground:YES];
-//	[w orderFront:self];
-	[w setContentView:[[NSView alloc] initWithFrame:[w contentRectForFrameRect:fr]]];
-	
+	[w setContentView:[[NSView alloc] initWithFrame:[w contentRectForFrameRect:fr]]];	
 	return w;
 }
 - (NSTextField*)createTextField:(NSRect)fr {
-   NSLog(@" (NSTextField*)createTextField:(NSRect)fr ");
 	NSTextField *t=[[NSTextField alloc] initWithFrame:fr];
     [t setEditable:NO];
     [t setSelectable:NO];
@@ -167,7 +151,6 @@ Point CVFixWindowPosition(Point pp, int width, int height);
 	return t;
 }
 - (void)applyConfig:(NSDictionary*)d window:(NSWindow*)w textField:(NSTextField*)t {
-   NSLog(@" (void)applyConfig:(NSDictionary*)d window:(NSWindow*)w textField:(NSTextField*)t ");
 	float alpha=[[d valueForKey:@"opacity" default:@"1.0"] floatValue];
 	NSColor *fc=[[d valueForKey:@"foreground" default:@"1.0 1.0 1.0"] colorByString];
 	NSString *img=[d valueForKey:@"backgroundImage" default:@""];
@@ -247,9 +230,4 @@ Point CVFixWindowPosition(Point pp, int width, int height) {
 	if (p.h < avail.left) p.h=avail.left;
     
     return p;
-}
-
-// nop function for OSX86
-void nop(){
-    volatile a=10;
 }
