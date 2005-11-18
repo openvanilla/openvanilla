@@ -1,4 +1,4 @@
-﻿== 編譯 ==
+== 編譯 ==
 Windows 版現在仍在 trunk/Experiments/Win32/ 中，未來會盡快移出 Experiemtns。
 
 首先需要安裝 wxWidgets (http://www.wxwidgets.org/dl_msw2.htm#stable)，
@@ -9,10 +9,11 @@ Windows 版現在仍在 trunk/Experiments/Win32/ 中，未來會盡快移出 Exp
 	http://wiki.wxwidgets.org/wiki.pl?MSVC_.NET_Setup_Guide
 	http://wiki.wxwidgets.org/wiki.pl?MSVC_Setup_Guide
 
-如果使用 wxwidgets-2.6.2 又安裝在預設目錄，那麼幾乎可以直接用 OVIMEUI.vcproj 裡
+如果使用 wxwidgets-2.6.1 又安裝在預設目錄，那麼幾乎可以直接用 OVIMEUI.vcproj 裡
 預先寫好的路徑。
 
 如果有 VC.NET 2003 IDE，開啟 trunk/Experments/Win32/OVIME.sln，應該能直接編譯。
+另外，也請開啟 trunk/Experiments/Win32/OVPreferences.sln 以編譯設定選單。
 如果只裝了 VC++ ToolKit (http://msdn.microsoft.com/visualc/vctoolkit2003/)，則
 必須在 trunk/Experiments/Win32 底下，按照順序進行：
 
@@ -20,6 +21,7 @@ tinyxml\make.bat
 AmphiVanilla\make_server.bat
 Win32OVIMEUI\PCMan\make.bat
 nmake
+OVPreferences\make.bat
 
 操作上述步驟時若遇到問題，請透過 IRC，到 FreeNote 的 #im-dev 找 kanru 或 pcman
 或 b6s。
