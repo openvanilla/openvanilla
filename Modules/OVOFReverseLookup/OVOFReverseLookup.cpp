@@ -78,10 +78,31 @@ const char *OVOFReverseLookup::process(const char *src, OVService *srv) {
     
     string result;
     
-    // WE HAVE TO DO SURROGATE CHECK, REMEMBER!
     for (int i=0; i<u16len; i++) {
-        // get each codepoint
-        const char *u8=srv->UTF16ToUTF8(&(u16[i]), 1);
+        // get each codepoint -- and do surrogate check
+        
+        const char *u8;
+        if (u16[i] >= 0xd800 && u16[i] <= 0xdbff) {
+            u8=srv->UTF16ToUTF8(&(u16[i]), 2);
+            i++;
+        }
+        else {
+            u8=srv->UTF16ToUTF8(&(u16[i]), 1);
+        }
+        
+        if (u8==NULL) {
+            if (!strcasecmp(srv->locale(), "zh_TW")) {
+                srv->notify("反查失敗：Unicode字碼錯誤");
+            }
+            else if (!strcasecmp(srv->locale(), "zh_CN")) {
+                srv->notify("反查失败：Unicode字码错误");
+            }
+            else {
+                srv->notify("Look-up failed: Bad Unicode codepoint");
+            }
+            return src;
+        }
+        
         char buf[512];
         
         vector<string> lookupvector, key;
@@ -121,101 +142,4 @@ const char *OVOFReverseLookup::process(const char *src, OVService *srv) {
     if(strlen(result.c_str())) srv->notify(result.c_str());
     return src;
 }
-    
-/*        
-int OVXcinContext::compose(OVBuffer *buf, OVCandidate *textbar, OVService *srv)
-{
-    if (!keyseq.length()) return 0;
 
-	int size =
-		cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
-
-    if (size == 0)
-    {
-        if (parent->isBeep()) srv->beep();
-        return 1;
-    }
-
-    if (size ==1 && !autocomposing)
-    {
-        buf->clear()->append(candidateStringVector[0].c_str())->send();
-        keyseq.clear();
-        return 1;
-    }
-
-    if (!autocomposing)
-    {    
-        buf->clear()->append(candidateStringVector[0].c_str())->update();
-        keyseq.clear();
-    }
-	
-	string currentSelKey = cintab->getSelKey();
-	if(parent->isShiftSelKey())
-		currentSelKey = " " + currentSelKey;
-
-    candi.prepare(&candidateStringVector,
-				  const_cast<char*>(currentSelKey.c_str()), textbar);
-
-    return 1;
-}
-
-int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf, 
-    OVCandidate *textbar, OVService *srv)
-{
-    if (key->code() == ovkEsc || key->code() == ovkBackspace)
-    {
-        textbar->hide()->clear();
-        candi.cancel();
-        buf->clear()->update();
-        return 1;
-    }
-
-    if (key->code() == ovkDown || key->code() == ovkRight ||
-        (!candi.onePage() && key->code()==ovkSpace))
-    {
-        candi.pageDown()->update(textbar);
-        return 1;
-    }
-
-    if (key->code() == ovkUp || key->code() == ovkLeft)
-    {
-        candi.pageUp()->update(textbar);
-        return 1;
-    }
-
-    // enter == first candidate
-    // space (when candidate list has only one page) == first candidate
-    char c=key->code();
-    if (key->code() == ovkReturn || 
-        (candi.onePage() && key->code()==ovkSpace)) c=candi.getSelKey()[0];
-
-    string output;
-    if (candi.select(c, output)) {
-        buf->clear()->append(output.c_str())->send();
-        candi.cancel();
-        textbar->hide()->clear();
-        return 1;
-    }
-
-	string inKey;
-	inKey.push_back(c);
-    if (cintab->isValidKey(inKey) || cintab->isEndKey(c)) {
-        string output;
-        candi.select(candi.getSelKey()[0], output);
-
-        buf->clear()->append(output.c_str())->send();
-		keyseq.add(c);
-		updateDisplay(buf);
-		candi.cancel();
-		textbar->hide()->clear();
-		if(cintab->isEndKey(c))
-			compose(buf, textbar, srv);
-		
-		return 1;			
-    }
-
-    if (parent->isBeep()) srv->beep();
-
-    return 1;
-}
-*/
