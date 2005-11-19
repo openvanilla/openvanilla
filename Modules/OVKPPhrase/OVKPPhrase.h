@@ -12,6 +12,10 @@
 #include "OVSQLite3.h"
 #include "OVKeySequence.h"
 
+// shared data
+SQLite3 *phdb=NULL;
+char *last=NULL;
+
 class OVKPPhraseToolContext;
 
 class OVKPPhraseTool : public OVInputMethod {
@@ -71,13 +75,5 @@ protected:
 OVInputMethodContext* OVKPPhraseTool::newContext() {
     return new OVKPPhraseToolContext(this);
 }
-
-// OpenVanilla Library Wrappers
-
-extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }
-
-extern "C" int OVInitializeLibrary(OVService* s, const char* mp);
-
-extern "C" OVModule *OVGetModuleFromLibrary(int idx);
 
 #endif
