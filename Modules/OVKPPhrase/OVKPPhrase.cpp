@@ -94,15 +94,15 @@ int OVKPPhraseToolContext::keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, O
                 int r;
                 time_t t;
                 time(&t);
-                r=phdb->execute("insert into phrase values('%q', '%q', '%d');", c+2, last, t);
-                murmur("OVKPPhrase: sqlite3 returns %d, errmsg=%s", r, phdb->errmsg());
+                r=parent->phdb_->execute("insert into phrase values('%q', '%q', '%d');", c+2, parent->last_, t);
+                murmur("OVKPPhrase: sqlite3 returns %d, errmsg=%s", r, parent->phdb_->errmsg());
 
                 b->clear()->update();
                 clear();
                 
                 const char *mt="new phrase added, key=%s, value=%s";
-                char *msg=(char*)calloc(1, strlen(c+2)+strlen(mt)+strlen(last)+1);
-                sprintf(msg, mt, c+2, last);
+                char *msg=(char*)calloc(1, strlen(c+2)+strlen(mt)+strlen(parent->last_)+1);
+                sprintf(msg, mt, c+2, parent->last_);
                 s->notify(msg);
                 free(msg);
                 return 1;
@@ -111,7 +111,7 @@ int OVKPPhraseToolContext::keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, O
             // otherwise we're in search mode
 
             b->clear()->update();                                
-            SQLite3Statement *st=phdb->prepare("select value from phrase where key='%q';", c);
+            SQLite3Statement *st=parent->phdb_->prepare("select value from phrase where key='%q';", c);
             if (st) {
                 if (st->step() == SQLITE_ROW) {
                     s->notify("Phrase found and committed");
@@ -168,9 +168,9 @@ const char* OVOFPhraseCatcher::process (const char *src, OVService *srv)
         if (display) srv->notify(b);
         free(b);
         
-        if (last) free(last);
-        last=(char*)calloc(1, strlen(src)+1);
-        strcpy(last, src);
+        if (last_) free(last_);
+        last_=(char*)calloc(1, strlen(src)+1);
+        strcpy(last_, src);
         
         return src;
-}    
+}

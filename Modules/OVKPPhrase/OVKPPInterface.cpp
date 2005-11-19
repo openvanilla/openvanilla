@@ -2,6 +2,10 @@
 
 #include "OVKPPhrase.h"
 
+// shared data
+SQLite3 *phdb=NULL;
+char *last=NULL;
+
 extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }
 
 extern "C" int OVInitializeLibrary(OVService* s, const char* mp) {
@@ -31,7 +35,7 @@ extern "C" int OVInitializeLibrary(OVService* s, const char* mp) {
 }
 
 extern "C" OVModule *OVGetModuleFromLibrary(int idx) {
-    if (idx==0) return new OVOFPhraseCatcher;
-    if (idx==1) return new OVKPPhraseTool;
+    if (idx==0) return new OVOFPhraseCatcher(last);
+    if (idx==1) return new OVKPPhraseTool(phdb, last);
     return NULL;
 }

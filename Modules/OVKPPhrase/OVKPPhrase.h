@@ -12,14 +12,12 @@
 #include "OVSQLite3.h"
 #include "OVKeySequence.h"
 
-// shared data
-SQLite3 *phdb=NULL;
-char *last=NULL;
 
 class OVKPPhraseToolContext;
 
 class OVKPPhraseTool : public OVInputMethod {
 public:
+	OVKPPhraseTool(SQLite3* db, char* last) { phdb_ = db; last_ = last; }
     // we "override" this module and changes its module type    
 	virtual const char *moduleType();
     virtual const char *identifier();
@@ -34,6 +32,10 @@ public:
 
 protected:
     char wk;
+    SQLite3* phdb_;
+    char* last_;
+    
+	friend class OVKPPhraseToolContext;
 };
 
 class OVKPPhraseToolContext : public OVInputMethodContext {    
@@ -52,6 +54,7 @@ protected:
 
 class OVOFPhraseCatcher : public OVOutputFilter {
 public:
+	OVOFPhraseCatcher(char* last) { last_ = last; }
     virtual int initialize(OVDictionary *moduleCfg, OVService *srv, 
 							const char *modulePath);
 
@@ -62,6 +65,7 @@ public:
 
 protected:
     bool display;
+    char* last_;
 };
 
 #endif
