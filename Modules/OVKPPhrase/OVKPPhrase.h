@@ -30,12 +30,13 @@ public:
 
     char getActivateKey();
 
+	virtual SQLite3* getDb() { return phdb_; }
+	virtual char* getLast() { return last_; }
+	
 protected:
     char wk;
     SQLite3* phdb_;
     char* last_;
-    
-	friend class OVKPPhraseToolContext;
 };
 
 class OVKPPhraseToolContext : public OVInputMethodContext {    

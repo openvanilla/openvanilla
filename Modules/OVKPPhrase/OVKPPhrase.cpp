@@ -94,15 +94,15 @@ int OVKPPhraseToolContext::keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, O
                 int r;
                 time_t t;
                 time(&t);
-                r=parent->phdb_->execute("insert into phrase values('%q', '%q', '%d');", c+2, parent->last_, t);
-                murmur("OVKPPhrase: sqlite3 returns %d, errmsg=%s", r, parent->phdb_->errmsg());
+                r=parent->getDb()->execute("insert into phrase values('%q', '%q', '%d');", c+2, parent->getLast(), t);
+                murmur("OVKPPhrase: sqlite3 returns %d, errmsg=%s", r, parent->getDb()->errmsg());
 
                 b->clear()->update();
                 clear();
                 
                 const char *mt="new phrase added, key=%s, value=%s";
-                char *msg=(char*)calloc(1, strlen(c+2)+strlen(mt)+strlen(parent->last_)+1);
-                sprintf(msg, mt, c+2, parent->last_);
+                char *msg=(char*)calloc(1, strlen(c+2)+strlen(mt)+strlen(parent->getLast())+1);
+                sprintf(msg, mt, c+2, parent->getLast());
                 s->notify(msg);
                 free(msg);
                 return 1;
@@ -111,7 +111,7 @@ int OVKPPhraseToolContext::keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, O
             // otherwise we're in search mode
 
             b->clear()->update();                                
-            SQLite3Statement *st=parent->phdb_->prepare("select value from phrase where key='%q';", c);
+            SQLite3Statement *st=parent->getDb()->prepare("select value from phrase where key='%q';", c);
             if (st) {
                 if (st->step() == SQLITE_ROW) {
                     s->notify("Phrase found and committed");
