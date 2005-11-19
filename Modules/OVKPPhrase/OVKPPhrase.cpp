@@ -5,22 +5,18 @@
 // [license]
 
 #include "OVKPPhrase.h"
-#include "OVKPPInterface.h"
-    
-const char* OVOFPhraseCatcher::process (const char *src, OVService *srv) {
-        const char *p="caught phrase: ";
-        char *b=(char*)calloc(1, strlen(p)+strlen(src)+1);
-        strcpy(b, p);
-        strcat(b, src);
-        if (display) srv->notify(b);
-        free(b);
-        
-        if (last) free(last);
-        last=(char*)calloc(1, strlen(src)+1);
-        strcpy(last, src);
-        
-        return src;
-}    
+
+const char* OVKPPhraseTool::moduleType() { return "OVKeyPreprocessor"; }
+const char* OVKPPhraseTool::identifier() { return "OVKPPhraseTool"; }
+const char* OVKPPhraseTool::localizedName(const char* locale) {
+	if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
+		return "詞彙管理工具";
+	return "Phrase tools";
+}
+
+OVInputMethodContext* OVKPPhraseTool::newContext() {
+    return new OVKPPhraseToolContext(this);
+}
 
 int OVKPPhraseTool::initialize(OVDictionary *moduleCfg, OVService *srv, const char *modulePath) {
     update(moduleCfg, srv);
@@ -31,6 +27,13 @@ void OVKPPhraseTool::update(OVDictionary *moduleCfg, OVService *srv) {
     const char *s=moduleCfg->getStringWithDefault("activateKey", "@");
     wk=s[0];
 }
+
+char OVKPPhraseTool::getActivateKey() { return wk; }
+
+void OVKPPhraseToolContext::start(OVBuffer*, OVCandidate*, OVService*)
+{ clear(); }
+
+void OVKPPhraseToolContext::clear() { working=false; seq.clear(); }
 
 int OVKPPhraseToolContext::keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* s) 
 {
@@ -140,3 +143,34 @@ int OVKPPhraseToolContext::keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, O
     
     return 1;
 }
+
+
+int OVOFPhraseCatcher::initialize(OVDictionary *moduleCfg, OVService *srv, 
+        const char *modulePath) {
+        display=moduleCfg->getIntegerWithDefault("displayCaughtPhrase", 0);
+        return true;
+}
+
+const char* OVOFPhraseCatcher::identifier() { return "OVOFPhraseCatcher"; }
+
+const char* OVOFPhraseCatcher::localizedName(const char* locale) {
+        if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
+        	return "詞彙攔截模組";
+        return "Phrase catcher";
+}
+
+const char* OVOFPhraseCatcher::process (const char *src, OVService *srv)
+{
+        const char *p="caught phrase: ";
+        char *b=(char*)calloc(1, strlen(p)+strlen(src)+1);
+        strcpy(b, p);
+        strcat(b, src);
+        if (display) srv->notify(b);
+        free(b);
+        
+        if (last) free(last);
+        last=(char*)calloc(1, strlen(src)+1);
+        strcpy(last, src);
+        
+        return src;
+}    

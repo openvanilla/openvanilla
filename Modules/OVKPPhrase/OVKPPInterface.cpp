@@ -1,6 +1,5 @@
-#ifndef OVKPPINTERFACE_H
-#define OVKPPINTERFACE_H
 // OpenVanilla Library Wrappers
+
 #include "OVKPPhrase.h"
 
 extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }
@@ -36,5 +35,3 @@ extern "C" OVModule *OVGetModuleFromLibrary(int idx) {
     if (idx==1) return new OVKPPhraseTool;
     return NULL;
 }
-
-#endif
