@@ -572,7 +572,7 @@ int CVContext::event(char charcode, int modifiers) {
         OVInputMethodContext *c=[w context];
         if (c) {
             if (c->keyEvent(&key, buf, loader->candi, loader->srv)) {
-                NSLog(@"key handled");
+                // NSLog(@"key handled");
                 return 1;
             }
         }
