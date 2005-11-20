@@ -111,9 +111,8 @@ int CVKeyCode::isCommand() {
 }
 
 int CVKeyCode::isCapslock() {
-//  the commented code cannot run on PB's internal keyboard
-//  if (m & (alphaLock | kEventKeyModifierNumLockMask)) return 1; 
-    if (m & alphaLock) return 1; 
+    if (m & (alphaLock | kEventKeyModifierNumLockMask)) return 1; 
+//  if (m & alphaLock) return 1; 
     return 0;
 }
 

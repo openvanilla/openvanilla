@@ -86,11 +86,12 @@ extern "C" ComponentResult TSBContextFix(TSBDataPtr ptr)
 extern "C" ComponentResult TSBContextEvent(TSBDataPtr ptr, EventRef evnt)
 {
     MURMUR("TSBContextEvent");
-    UInt32 eventkind=GetEventKind(evnt);
 
     // we only take kEventRawKeyDown and kEventRawKeyRepat
-    if (GetEventClass(evnt)!=kEventClassKeyboard ||
-        !(eventkind==kEventRawKeyDown || eventkind==kEventRawKeyRepeat))
+    if (GetEventClass(evnt)!=kEventClassKeyboard) return FALSE;
+
+    UInt32 eventkind=GetEventKind(evnt);
+    if (eventkind!=kEventRawKeyDown && eventkind!=kEventRawKeyRepeat)
         return FALSE;
 
     // extract charcode (ASCII) and modifiers
