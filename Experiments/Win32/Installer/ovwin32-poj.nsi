@@ -7,6 +7,9 @@
 !define PRODUCT_WEB_SITE "http://openvanilla.org"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
+!define IME_ROOT_KEY "HKLM"
+!define IME_KEY "SYSTEM\CurrentControlSet\Control\Keyboard Layouts\"
+!define IME_KEY_USER "Keyboard Layout\Preload"
 
 SetCompressor lzma
 
@@ -47,36 +50,54 @@ SetCompressor lzma
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "OpenVanilla-Win32-POJ-0.7.2rc1-20051125.exe"
+OutFile "OV-Win32-POJ-0.7.2rc1-20051125.exe"
 InstallDir "$WINDIR\OpenVanilla"
 ShowInstDetails show
 ShowUnInstDetails show
 
 Function .onInit
+  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
+  StrCmp $0 "" +3 0
+	  MessageBox MB_ICONINFORMATION|MB_OK "偵測到已安裝 OpenVanilla-Win32-POJ，請移除後重新安裝。"
+	  Abort
   !insertmacro MUI_LANGDLL_DISPLAY
 FunctionEnd
 
 Section "MainSection" SEC01
-  SetOutPath "$WINDIR\OpenVanilla"
-  SetOVerwrite ifnewer
-  File /r "Modules"
   SetOutPath "$SYSDIR"
-  File "System32\sqlite3.dll"
+  SetOverwrite ifnewer
+  File "System32\OVIME.ime"
+  File "System32\*.dll"
+SectionEnd
+
+Section "Modules" SEC02
+  SetOutPath "$WINDIR"
+  SetOVerwrite ifnewer
+  File /r "OpenVanilla"
 SectionEnd
 
 Section -AdditionalIcons
   SetOutPath $INSTDIR
   CreateDirectory "$SMPROGRAMS\OpenVanilla"
-  CreateShortCut "$SMPROGRAMS\OpenVanilla\Uninstall-OVPOJ.lnk" "$INSTDIR\uninst-ovpoj.exe"
+  CreateShortCut "$SMPROGRAMS\OpenVanilla\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  CreateShortCut "$SMPROGRAMS\OpenVanilla\OVPreferences.lnk" "$WINDIR\OpenVanilla\OVPreferences.exe"
 SectionEnd
 
 Section -Post
-WriteUninstaller "$INSTDIR\uninst-tobacco.exe"
+  WriteUninstaller "$INSTDIR\uninst.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
-  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst-ovpoj.exe"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
+  System::Call 'imm32::ImmInstallIME(t "$SYSDIR\OVIME.ime", t "中文 (繁體) - 開放香草輸入法架構")'
+  registry::Open /NOUNLOAD "${IME_ROOT_KEY}\${IME_KEY}" /N="OVIME.ime" /G=1 /T=REG_SZ .r0
+  registry::Find /NOUNLOAD .r1 .r2 .r3 .r4
+  StrLen $5 "${IME_KEY}"
+  StrCpy $6 $1 "" $5
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key" "$6"
+  System::Call "user32::LoadKeyboardLayout(t $6, i 1)"
+#  Exec "$WINDIR\OpenVanilla\OVPreferences.exe"
 SectionEnd
 
 
@@ -87,17 +108,23 @@ FunctionEnd
 
 Function un.onInit
 !insertmacro MUI_UNGETLANGUAGE
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "你確定要完全移除 OpenVanilla-Win32-POJ，其及所有的元件？" IDYES +2
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "你確定要完全移除 OpenVanilla-Win32-POJ ，其及所有的元件？" IDYES +2
   Abort
 FunctionEnd
 
 Section Uninstall
-  Delete "$INSTDIR\uninst-poj.exe"
-  
-  RMDir /r "$WINDIR\OpenVanilla\Modules"
+  Delete "$INSTDIR\uninst.exe"
+  Delete "$SYSDIR\libltdl3.dll"
+  Delete "$SYSDIR\libiconv-2.dll"
+  Delete "$SYSDIR\sqlite3.dll"
+  Delete "$SYSDIR\tinyxml.dll"
+  Delete "$SYSDIR\OVIMEUI.DLL"
+  Delete "$SYSDIR\OVIME.ime"
+  RMDir /r "$WINDIR\OpenVanilla"
+  RMDir "$SMPROGRAMS\OpenVanilla"
 
-  Delete "$SMPROGRAMS\OpenVanilla\Uninstall-OVPOJ.lnk"
-
+  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
+  DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}$0"
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
  
   SetAutoClose true
