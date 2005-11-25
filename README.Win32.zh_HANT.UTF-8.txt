@@ -1,3 +1,10 @@
+== 注意事項 ==
+現在 trunk/Experiments/Win32/ 底下的是 socket-based loader，可能還不適合用在
+beta production 上。
+請改用 branches/ 底下的版本。:)
+
+遇到任何問題，請透過 IRC，到 FreeNote 的 #im-dev 找 kanru 或 pcman 或 b6s。
+
 == 編譯 ==
 Windows 版現在仍在 trunk/Experiments/Win32/ 中，未來會盡快移出 Experiemtns。
 
@@ -22,9 +29,6 @@ AmphiVanilla\make_server.bat
 Win32OVIMEUI\PCMan\make.bat
 nmake
 OVPreferences\make.bat
-
-操作上述步驟時若遇到問題，請透過 IRC，到 FreeNote 的 #im-dev 找 kanru 或 pcman
-或 b6s。
 
 == 製作安裝檔 ==
 * 安裝 NSIS (http://nsis.sourceforge.net/download/)
