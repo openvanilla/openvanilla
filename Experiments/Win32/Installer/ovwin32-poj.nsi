@@ -98,6 +98,9 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key" "$6"
   System::Call "user32::LoadKeyboardLayout(t $6, i 1)"
 #  Exec "$WINDIR\OpenVanilla\OVPreferences.exe"
+  MessageBox MB_YESNO "若您是初次安裝，則須重新開機。是否要立刻重開機？" IDNO noreboot
+    Reboot
+noreboot:
 SectionEnd
 
 
