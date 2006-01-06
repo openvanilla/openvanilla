@@ -1,36 +1,37 @@
-// OpenVanilla.h: The OpenVanilla Framework
-// Copyright (c) 2004-2005 The OpenVanilla Project (http://openvanilla.org)
-
-// The OpenVanilla Framework is released under the Artisitc License, that is,
-// it is released under the same term that Perl is.
-
-// The OpenVanilla Framework provides interface definitions for both input
-// method (IM) developers and IM environments. An IM usually requires three
-// inputs: the key code, a pre-editing/output buffer (for composing phonemes or 
-// character parts and committing the composed output), and a "message bar"
-// that displays extra information like "candidate" characters. A platform-
-// dependent IM environemnt (called "Loader" in OV's own term) offers these
-// objects to the loaded IM modules.
-
-// OpenVanilla does not define anything beyond a pure abstract interface.
-// It does not even define the default encoding to be used. However it is 
-// recommended UTF-8 be used throughout all levels. A simple, one-way 
-// conversion utility is provided as OVService::toUTF8(), and this must be
-// implemented by a Loader.
-
-// OpenVanilla makes a few assumptions about modern GUI and operating system,
-// and makes minimal use of user-defined types and C++ features. For detailed
-// design and its rationale, please refer to the OpenVanilla document.
-
-// Also note that OpenVanilla recommends lazy design and fault-tolerance
-// ("DWIM," or Do What I Mean, captures what is intended here, cf. Jargon File).
-// Exception is not really needed here. The system should hold even if something
-// is broken or comes up with unexpected output.
+// OpenVanilla.h: The Framework
+//
+// Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. Neither the name of OpenVanilla nor the names of its contributors
+//    may be used to endorse or promote products derived from this software
+//    without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
 
 #ifndef __OpenVanilla_h
 #define __OpenVanilla_h
 
-#define OV_VERSION   (0x00070100)      // version 0.7.1
+#define OV_VERSION   (0x00070200)      // version 0.7.2 (00_07_02_00)
 
 // A pure base class that defines the virtual destructor
 class OVBase {
@@ -49,8 +50,10 @@ public:
     virtual int isAlt()=0;
     virtual int isOpt() { return isAlt(); }
     virtual int isCommand() { return isAlt(); }
-//    virtual int isNum()=0;
-    virtual int isFunctionKey() { return isCtrl()||isAlt()||isOpt()||isCommand()/*||isNum()*/; }
+    virtual int isNum()=0;
+    virtual int isFunctionKey() {
+        return isCtrl() || isAlt() || isOpt() || isCommand() || isNum();
+    }
 };
 
 // Abstract interface for the pre-edit and composing buffer.
@@ -92,7 +95,8 @@ public:
     virtual int getIntegerWithDefault(const char *key, int value) {
         if (!keyExist(key)) setInteger(key, value); return getInteger(key);
     }
-    virtual const char* getStringWithDefault(const char *key, const char *value) {
+    virtual const char* getStringWithDefault(const char *key, const char *value) 
+    {
         if (!keyExist(key)) setString(key, value); return getString(key);
     }
 };
@@ -113,7 +117,8 @@ public:
     // the endian order of these two functions is always that of machine order
     // (ie. on a big endian machine it's UTF16BE, otherwise UTF16LE)
     // no byte order mark (0xfffe or 0xfeff) is ever used here) 
-    // also note no boundry check mechanism exists, the Loader take care about it
+    // also note no boundry check mechanism exists, the Loader takes care 
+    // about it
     virtual const char *UTF16ToUTF8(unsigned short *src, int len)=0;
     virtual int UTF8ToUTF16(const char *src, unsigned short **rcvr)=0;
 };
@@ -138,7 +143,6 @@ public:
 // transformation/conversion of output buffer, for example, conversion
 // between Traditional and Simplified Chinese, or convert all kanas into
 // romanized forms, etc.)
-
 class OVModule : public OVBase {
 public:
     virtual const char *moduleType()=0;
