@@ -1,27 +1,47 @@
-# Makefile.Darwin
-# first written by gugod for OV 0.6.x; edited for OV 0.7
+# Makefile.Darwin: Makefile for OpenVanilla Framework and Loader for Mac OS X
+# Copyright (c) 2004-2006 The OpenVanilla Project
+# Please see License/license.txt for the terms of use
 
-HDRDIR=Headers
-HEADERS=OpenVanilla.h OVLibrary.h OVUtility.h
-BUILDDIR=build/OSX
-OSXFRAMEWORK=$(BUILDDIR)/OpenVanilla.framework
+LIBFW=/Library/Frameworks/OpenVanilla.framework
+FW=Framework/OpenVanillaFramework.xcodeproj
+CFG=Release
 
-all: osx-framework
+all: osxframework
 
-install: install-osx-framework
+osxframework:
+	xcodebuild -project $(FW) -configuration $(CFG) build
+
+install:
+	xcodebuild -project $(FW) -configuration $(CFG) install 
 
 clean:
-	rm -rf $(BUILDDIR)
-
-# OSX-Specific targets
-
-install-osx-framework: osx-framework
-	cp -rf $(OSXFRAMEWORK) /Library/Frameworks/
-
-osx-framework:
-	mkdir -p $(OSXFRAMEWORK)/Headers
-	for file in $(HEADERS) ; do cp $(HDRDIR)/$$file $(OSXFRAMEWORK)/Headers; done;
-
+	xcodebuild -project $(FW) -configuration $(CFG) clean
+        
 uninstall:
-	echo "Erasing $(OSXFRAMEWORK)"
-	rm -rf /Library/Frameworks/OpenVanilla.framework
+	rm -rf $(LIBFW)
+    
+
+# HDRDIR=Headers
+# HEADERS=OpenVanilla.h OVLibrary.h OVUtility.h
+# BUILDDIR=build/OSX
+# OSXFRAMEWORK=$(BUILDDIR)/OpenVanilla.framework
+# 
+# all: osx-framework
+# 
+# install: install-osx-framework
+# 
+# clean:
+# 	rm -rf $(BUILDDIR)
+# 
+# # OSX-Specific targets
+# 
+# install-osx-framework: osx-framework
+# 	cp -rf $(OSXFRAMEWORK) /Library/Frameworks/
+# 
+# osx-framework:
+# 	mkdir -p $(OSXFRAMEWORK)/Headers
+# 	for file in $(HEADERS) ; do cp $(HDRDIR)/$$file $(OSXFRAMEWORK)/Headers; done;
+# 
+# uninstall:
+# 	echo "Erasing $(OSXFRAMEWORK)"
+# 	rm -rf /Library/Frameworks/OpenVanilla.framework
