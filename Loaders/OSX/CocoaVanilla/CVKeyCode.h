@@ -18,6 +18,7 @@ public:
     virtual int isShift();
     virtual int isCtrl();
     virtual int isAlt();
+    virtual int isNum()      { return 0; }  // always so in OS X
     virtual int isOpt()      { return isAlt(); }
     virtual int isCommand();
     virtual int isCapslock();
