@@ -4,39 +4,35 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
-	<key>CFBundleName</key>
-	<string>OVPreferences</string>
 	<key>CFBundleDisplayName</key>
 	<string>OVPreferences</string>
 	<key>CFBundleExecutable</key>
 	<string>OVPreferences</string>
+	<key>CFBundleGetInfoString</key>
+	<string>OpenVanilla Preferences</string>
 	<key>CFBundleIconFile</key>
-	<string>OVPref</string>
+	<string>OVPreferencesIcon</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.OVPreferences</string>
+	<string>org.openvanilla.ovpreferences.072</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>OVPreferences</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>0.7.1</string>
-	<key>CFBundleShortVersionString</key>
-	<string>0.7.1</string>
+	<string>0.7.2</string>
+	<key>NSAppleScriptEnabled</key>
+	<string>YES</string>
 	<key>NSHelpFile</key>
-	<string>ov.pdf</string>
+	<string>OpenVanillaManual.pdf</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>© The OpenVanilla Project, 2004-2006</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>CFBundleGetInfoString</key>
-	<string>OpenVanilla Preferences</string>
-	<key>NSHumanReadableCopyright</key>
-	<string>© 2004-2005, openvanilla.org.</string>
-	<key>CFBundleVersion</key>
-	<string>220</string>
-	<key>NSAppleScriptEnabled</key>
-	<string>YES</string>
 </dict>
 </plist>

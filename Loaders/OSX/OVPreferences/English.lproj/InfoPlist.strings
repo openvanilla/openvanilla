@@ -2,5 +2,5 @@
 
 CFBundleName = "OpenVanilla Preference";
 CFBundleDisplayName = "OpenVanilla Preference";
-NSHumanReadableCopyright = "© openvanilla.org, 2004-2005";
+NSHumanReadableCopyright = "© The OpenVanilla Project, 2004-2006";
 /* CFBundleHelpBookName = "OpenVanilla Help"; */

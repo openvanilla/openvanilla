@@ -5,25 +5,19 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>OVInit</string>
-        <key>CFBundleGetInfoString</key>
-        <string>OpenVanilla 0.7.1</string>
-	<key>CFBundleIconFile</key>
-	<string>openvanilla.tif</string>
+	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.ovinit</string>
-        <key>CFBundleName</key>
-        <string>OpenVanilla 0.7.1</string>
+	<string>org.openvanilla.tscomponent.072</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
-	<string>thng</string>
+	<string>THNG</string>
 	<key>CFBundleSignature</key>
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>0.7.1</string>
+	<string>0.7.2</string>
 	<key>CSResourcesFileMapped</key>
-	<true/>
+	<string>yes</string>
 	<key>tsInputMethodIconFileKey</key>
 	<string>OpenVanillaMenuIcon.icns</string>
 </dict>

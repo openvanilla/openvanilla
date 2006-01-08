@@ -4,39 +4,37 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
-	<key>CFBundleName</key>
-	<string>OVDisplayServer</string>
 	<key>CFBundleDisplayName</key>
 	<string>OVDisplayServer</string>
 	<key>CFBundleExecutable</key>
-	<string>OVDisplayServer</string>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleGetInfoString</key>
+	<string>OpenVanilla Display Server</string>
 	<key>CFBundleIconFile</key>
-	<string>OpenVanillaLoaderIcon</string>
+	<string>DisplayServerIcon</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.OVDisplayServer</string>
+	<string>org.openvanilla.ovdisplayserver.072</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>OVDisplayServer</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.7.1</string>
 	<key>CFBundleSignature</key>
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>0.7.1</string>
-	<key>CFBundleShortVersionString</key>
-	<string>0.7.1</string>
+	<string>0.7.2</string>
 	<key>LSBackgroundOnly</key>
 	<string>1</string>
+	<key>NSAppleScriptEnabled</key>
+	<string>YES</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>(c) The OpenVanilla Project, 2004-2006</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>CFBundleGetInfoString</key>
-	<string>OpenVanilla Display Server</string>
-	<key>NSHumanReadableCopyright</key>
-	<string>© 2004-2005, openvanilla.org.</string>
-	<key>CFBundleVersion</key>
-	<string>220</string>
-	<key>NSAppleScriptEnabled</key>
-	<string>YES</string>
 </dict>
 </plist>

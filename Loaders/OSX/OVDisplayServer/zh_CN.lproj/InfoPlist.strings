@@ -2,4 +2,4 @@
 
 CFBundleName = "OpenVanilla 显示服务器";
 CFBundleDisplayName = "OpenVanilla 显示服务器";
-NSHumanReadableCopyright = "© openvanilla.org, 2004-2005";
+NSHumanReadableCopyright = "© The OpenVanilla Project, 2004-2006";

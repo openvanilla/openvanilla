@@ -1,6 +1,7 @@
 /* on the menu */
-"Input Methods"="输入法模组";
-"Output Filters"="输出文字转换模组";
+"Key Preprocessors"="输入前置处理模块";
+"Input Methods"="输入法模块";
+"Output Filters"="输出文字转换模块";
 "Input method toggle"="切换最近使用的输入法";
 "About"="关于 OpenVanilla";
 "Preferences"="设置…";

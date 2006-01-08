@@ -1,4 +1,5 @@
 /* on the menu */
+"Key Preprocessors"="輸入前置處理模組";
 "Input Methods"="輸入法模組";
 "Output Filters"="輸出文字轉換模組";
 "Input method toggle"="切換最近使用的輸入法";

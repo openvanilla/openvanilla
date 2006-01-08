@@ -5,11 +5,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>OVLoader</string>
+	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
 	<string>OpenVanillaLoaderIcon</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.ovloader.071</string>
+	<string>org.openvanilla.ovloader.072</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -17,6 +17,6 @@
 	<key>CFBundleSignature</key>
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>0.7.1</string>
+	<string>0.7.2</string>
 </dict>
 </plist>
