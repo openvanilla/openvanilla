@@ -2,46 +2,33 @@
 # Copyright (c) 2004-2006 The OpenVanilla Project
 # Please see License/license.txt for the terms of use
 
-LIBFW=/Library/Frameworks/OpenVanilla.framework
+# global variables
+CONFIG?=Release
+DSTROOT?=/
+CMDLINETOOLROOT?=/opt/local
+
+# Xcode project files
 FW=Framework/OpenVanillaFramework.xcodeproj
-CFG=Release
+LD=Loaders/OSX/OpenVanillaLoader.xcodeproj
 
-all: osxframework
+# These are the built products to be cleaned up
+LIBFW=$(DSTROOT)/Library/Frameworks/OpenVanilla.framework
+LIBLDR=$(DSTROOT)/Library/Components/OpenVanilla-TSComponent-0.7.2.bundle \
+	$(DSTROOT)/Library/OpenVanilla/0.7.2/Loader
+USRTOOL=$(DSTROOT)/$(CMDLINETOOLROOT)/bin/ovfilter
 
-osxframework:
-	xcodebuild -project $(FW) -configuration $(CFG) build
+all:
+	xcodebuild -project $(FW) -configuration $(CONFIG) build $(MAKEFLAGS)
+	xcodebuild -project $(LD) -configuration $(CONFIG) build $(MAKEFLAGS)
 
 install:
-	xcodebuild -project $(FW) -configuration $(CFG) install 
+	xcodebuild -project $(FW) -configuration $(CONFIG) install $(MAKEFLAGS)
+	xcodebuild -project $(LD) -configuration $(CONFIG) install $(MAKEFLAGS) 
 
 clean:
-	xcodebuild -project $(FW) -configuration $(CFG) clean
+	xcodebuild -project $(FW) -configuration $(CONFIG) clean $(MAKEFLAGS)
+	xcodebuild -project $(LD) -configuration $(CONFIG) clean $(MAKEFLAGS)
         
 uninstall:
-	rm -rf $(LIBFW)
-    
+	rm -rf $(LIBFW) $(LIBLDR) $(USRTOOL)
 
-# HDRDIR=Headers
-# HEADERS=OpenVanilla.h OVLibrary.h OVUtility.h
-# BUILDDIR=build/OSX
-# OSXFRAMEWORK=$(BUILDDIR)/OpenVanilla.framework
-# 
-# all: osx-framework
-# 
-# install: install-osx-framework
-# 
-# clean:
-# 	rm -rf $(BUILDDIR)
-# 
-# # OSX-Specific targets
-# 
-# install-osx-framework: osx-framework
-# 	cp -rf $(OSXFRAMEWORK) /Library/Frameworks/
-# 
-# osx-framework:
-# 	mkdir -p $(OSXFRAMEWORK)/Headers
-# 	for file in $(HEADERS) ; do cp $(HDRDIR)/$$file $(OSXFRAMEWORK)/Headers; done;
-# 
-# uninstall:
-# 	echo "Erasing $(OSXFRAMEWORK)"
-# 	rm -rf /Library/Frameworks/OpenVanilla.framework

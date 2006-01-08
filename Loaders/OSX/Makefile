@@ -1,21 +1,27 @@
+# Makefile: xcodebuild wrapper for OpenVanilla Loader for Mac OS X
+# Copyright (c) 2004-2006 The OpenVanilla Project
+# Please see trunk/License/license.txt for the terms of use
+
 BUILDER=xcodebuild
-BUILDSTYLE?=Deployment
-PROJECT=OVLoaderOSX.xcodeproj
-DSTROOT=/
+CONFIG?=Release
+DSTROOT?=/
+CMDLINETOOLROOT?=/opt/local
+
+PROJECT=OpenVanillaLoader.xcodeproj
+
+PRODUCTS=$(DSTROOT)//Library/Components/OpenVanilla-TSComponent-0.7.2.bundle \
+	$(DSTROOT)/Library/OpenVanilla/0.7.2/Loader \
+	$(DSTROOT)/$(CMDLINETOOLROOT)/bin/ovfilter
 
 all:
-	$(BUILDER) -project $(PROJECT) -configuration $(BUILDSTYLE)
-
-clean:
-	$(BUILDER) clean
-	rm -rf build
-#	find . -name '*.mode1' -delete
-#	find . -name '*.pbxuser' -delete
+	xcodebuild -project $(PROJECT) -configuration $(CONFIG) build $(MAKEFLAGS)
 
 install:
-	# mkdir -p ~/Library/OpenVanilla/0.7.1/
-	$(BUILDER) -project $(PROJECT) -target OVInit -buildstyle $(BUILDSTYLE) install DSTROOT=$(DSTROOT) 
-	$(BUILDER) -project $(PROJECT) -target OVLoader -buildstyle $(BUILDSTYLE) install DSTROOT=$(DSTROOT) 
-	$(BUILDER) -project $(PROJECT) -target OVPreferences -buildstyle $(BUILDSTYLE) install DSTROOT=$(DSTROOT) 
-	$(BUILDER) -project $(PROJECT) -target OVDisplayServer -buildstyle $(BUILDSTYLE) install DSTROOT=$(DSTROOT) 
+	xcodebuild -project $(PROJECT) -configuration $(CONFIG) install $(MAKEFLAGS)
 
+clean:
+	xcodebuild -project $(PROJECT) -configuration $(CONFIG) clean $(MAKEFLAGS)
+
+uninstall:
+	rm -rf $(PRODUCTS)
+	

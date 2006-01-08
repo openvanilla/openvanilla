@@ -9,16 +9,31 @@
 /* Begin PBXBuildFile section */
 		6A83D9BD097064A7006F8E81 /* OpenVanilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A83D9B9097064A7006F8E81 /* OpenVanilla.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A83D9BE097064A7006F8E81 /* OVLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A83D9BA097064A7006F8E81 /* OVLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6A83D9BF097064A7006F8E81 /* OVSQLite3.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A83D9BB097064A7006F8E81 /* OVSQLite3.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A83D9C0097064A7006F8E81 /* OVUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A83D9BC097064A7006F8E81 /* OVUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		6A62A7A2097150F200834FB9 /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Development;
+		};
+		6A62A7A3097150F200834FB9 /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
 
 /* Begin PBXFileReference section */
 		6A83D9AE09706437006F8E81 /* OpenVanilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenVanilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A83D9B009706437006F8E81 /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-Info.plist"; sourceTree = "<group>"; };
 		6A83D9B9097064A7006F8E81 /* OpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenVanilla.h; path = ../Headers/OpenVanilla.h; sourceTree = SOURCE_ROOT; };
 		6A83D9BA097064A7006F8E81 /* OVLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVLibrary.h; path = ../Headers/OVLibrary.h; sourceTree = SOURCE_ROOT; };
-		6A83D9BB097064A7006F8E81 /* OVSQLite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVSQLite3.h; path = ../Headers/OVSQLite3.h; sourceTree = SOURCE_ROOT; };
 		6A83D9BC097064A7006F8E81 /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVUtility.h; path = ../Headers/OVUtility.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -55,7 +70,6 @@
 			children = (
 				6A83D9B9097064A7006F8E81 /* OpenVanilla.h */,
 				6A83D9BA097064A7006F8E81 /* OVLibrary.h */,
-				6A83D9BB097064A7006F8E81 /* OVSQLite3.h */,
 				6A83D9BC097064A7006F8E81 /* OVUtility.h */,
 			);
 			name = Headers;
@@ -70,7 +84,6 @@
 			files = (
 				6A83D9BD097064A7006F8E81 /* OpenVanilla.h in Headers */,
 				6A83D9BE097064A7006F8E81 /* OVLibrary.h in Headers */,
-				6A83D9BF097064A7006F8E81 /* OVSQLite3.h in Headers */,
 				6A83D9C0097064A7006F8E81 /* OVUtility.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,7 +154,11 @@
 		6A83D99E0970640A006F8E81 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 6A83D99F0970640A006F8E81 /* Build configuration list for PBXProject "OpenVanillaFramework" */;
+			buildSettings = {
+			};
 			buildStyles = (
+				6A62A7A2097150F200834FB9 /* Development */,
+				6A62A7A3097150F200834FB9 /* Deployment */,
 			);
 			hasScannedForEncodings = 0;
 			mainGroup = 6A83D99C0970640A006F8E81;

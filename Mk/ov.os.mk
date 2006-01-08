@@ -2,7 +2,7 @@ OS=`uname`
 
 ifeq ("$(shell uname)", "Darwin")
 
-	INST_PATH=/Library/OpenVanilla/0.7.1/Modules/
+	INST_PATH=/Library/OpenVanilla/0.7.2/Modules/
 	OBJS=$(patsubst %, %.o, $(SOURCES))
 	GOALS=$(IMID).dylib
 

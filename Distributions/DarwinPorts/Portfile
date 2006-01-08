@@ -1,20 +1,20 @@
 # $Id: $
-PortSystem        1.0
-name              openvanilla-framework
-version           0.7.0rc5
-categories        textproc
-maintainers       lukhnos@openvanilla.org
-description       an input method/output filter framework
-long_description  OpenVanilla is a minimalistic yet flexible framework \
-                  designed for accomodating various input methods (IMs) \
-                  and output filters (OFs). This port installs the \
-                  OpenVanilla.framework required by openvanilla-loader \
-                  and other OpenVanilla modules.
-homepage          http://openvanilla.org
-master_sites      http://lukhnos.org/openvanilla/
-checksums         md5 6e2eacc21febfecdcbfe2ca9cfe10e4a
-destroot {
-        set appPath ${destroot}/Library/Frameworks
-        file mkdir ${appPath}
-        file copy "${worksrcpath}/build/OSX/OpenVanilla.framework" ${appPath}
-}
+PortSystem          1.0
+name                openvanilla
+version             0.7.2
+categories          textproc
+maintainers         lukhnos@openvanilla.org
+description         a text entry (input method) and processing architecture
+long_description    OpenVanilla is a flexible architecture that provides an \
+                    easy way to write text entry (input method) and other \
+                    text processing modules on Mac OS X. This port installs \
+                    the OpenVanilla Framework, the OpenVanilla Loader for \
+                    OS X and a set of standard modules, including a number of \
+                    popular Traditional and Simplified Chinese input methods.
+homepage            http://openvanilla.org
+master_sites        http://localhost/~lukhnos/
+distname            openvanilla-osx-src-${version}
+extract.suffix      .tgz
+checksums           md5 1514b92e41fd422350cd5029d39dff3d
+configure           {}
+destroot.destdir    DSTROOT=${destroot}
