@@ -1,4 +1,4 @@
-OS=`uname`
+OS?=$(shell uname)
 
 ifeq ("$(shell uname)", "Darwin")
 

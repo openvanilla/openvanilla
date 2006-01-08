@@ -14,10 +14,17 @@ INC=-I../../Headers -I/usr/local/include
 GCC=/usr/bin/gcc 
 GPP=/usr/bin/g++
 LIBTOOL=$(shell ../../Utilities/find-libtool.pl)
-ARCH=-arch i386 -arch ppc 
-SDK= /Developer/SDKs/MacOSX10.4u.sdk
-CFLAGS+= $(ARCH) -O2 -Wall $(INC) -isysroot ${SDK} -F/Library/Frameworks/ 
-LDFLAGS+= $(ARCH) -isysroot ${SDK}
+
+
+ifeq ("$(OS)", "Darwin")
+    ARCH=-arch i386 -arch ppc 
+    SDK= /Developer/SDKs/MacOSX10.4u.sdk
+    CFLAGS+= $(ARCH) -O2 -Wall $(INC) -isysroot ${SDK} -F/Library/Frameworks/ 
+    LDFLAGS+= $(ARCH) -isysroot ${SDK}
+else
+    CFLAGS+=-O2 -Wall $(INC)
+endif
+
 
 CCACHE=ccache
 ifdef USE_CCACHE
