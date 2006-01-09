@@ -1,4 +1,4 @@
--- bpmf-schema.txt: database schema for bpmf.db
+-- [FILENAME]: [DESCRIPTION]
 --
 -- Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
 -- All rights reserved.
@@ -28,5 +28,3 @@
 -- ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 -- POSSIBILITY OF SUCH DAMAGE.
 
-CREATE TABLE bpmf(bpmf text, chr text, ord integer);
-CREATE INDEX bpmf_index_bpmf on bpmf(bpmf);
