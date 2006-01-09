@@ -1,5 +1,9 @@
-// OVIMUnicode.cpp 2004 by Weizhong Yang
-// http://openvanilla.org
+// OVIMUnicode.cpp: Unicode Input Method
+// By Weizhong Yang
+//
+// This program is Zonble-ware and adopts Zonble's "License": 
+// "How are you going to adopt any license if you don't even believe in law?"
+//
 
 #include <stdio.h>
 #include <ctype.h>
