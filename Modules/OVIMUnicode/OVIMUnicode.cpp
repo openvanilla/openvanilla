@@ -16,7 +16,7 @@
 
 class OVIMUnicode;
 
-const size_t ebMaxKeySeq=4; 
+const size_t ebMaxKeySeq=5;
 class KeySeq {
 public:
     KeySeq() {
@@ -54,9 +54,8 @@ public:
 
         if (key->code()==ovkReturn || key->code()==ovkSpace) {
             if (!(strlen(keyseq.buf))) return 0;   // empty buffer, do nothing
-			unsigned short i = strtol(keyseq.buf, (char **) NULL, 16);
-			
-			buf->clear()->append(srv->UTF16ToUTF8(&i, 1))->send();
+			unsigned u = strtol(keyseq.buf, (char **) NULL, 16);
+			commitUTF16(u, buf, srv);
             textbar->clear()->hide();
 			keyseq.clear();
             return 1;   // key processed
@@ -94,6 +93,20 @@ public:
         return 0;   // key not processed
     }
     
+    void commitUTF16(unsigned u, OVBuffer *buf, OVService *srv) {
+        buf->clear();
+        if (u <= 0xffff) {
+            unsigned short s=u;
+            buf->append(srv->UTF16ToUTF8((unsigned short*)&s, 1))->send();
+        }
+        else if (u <= 0xfffff) {
+            unsigned short sur[2];
+            sur[0]=(0xd800 - (0x10000 >> 10))+(u >> 10);
+            sur[1]=0xdc00 + (u & 0x3ff);
+            buf->append(srv->UTF16ToUTF8(sur, 2))->send();
+        }
+    }
+    
 protected:
 	KeySeq keyseq;
 };
@@ -108,7 +121,7 @@ public:
             return "Unicode 內碼";
         else if (!strcasecmp(locale, "zh_CN"))
             return "Unicode 内码";
-        return "Unicode hexadecimal";        
+        return "Unicode Hexadecimal";        
     }
 
     virtual OVInputMethodContext* newContext()  {
