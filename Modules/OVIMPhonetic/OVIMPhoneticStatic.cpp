@@ -302,7 +302,7 @@ int OVIMPhoneticContext::candidateEvent() {
         b->update();    // we do this to make some applications happy
     }
     else {
-        c->hide()->clear->update();     // hide and clear candi before commit
+        c->hide()->clear()->update();     // hide and clear candi before commit
         b->clear()->append(candi->candidates[i + page*perpage])->send();
         closeCandidateWindow();
         if (nextsyl) {
@@ -349,7 +349,7 @@ int OVIMPhoneticContext::closeCandidateWindow() {
 
 int OVIMPhoneticContext::commitFirstCandidate() {
     if (!candi) return 1;
-    c->hide()->clear->update();     // hide and clear candi before commit
+    c->hide()->clear()->update();     // hide and clear candi before commit
     b->clear()->append(candi->candidates[0])->send();
     return closeCandidateWindow();        
 }
