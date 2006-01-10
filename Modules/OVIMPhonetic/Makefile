@@ -49,7 +49,7 @@ ifneq (, $(findstring bpmf-extended, $(VARIANT)))
     endif
 endif
 
-CINS=$(BPMF) punctuation.cin
+CINS=$(BPMF) punctuations.cin
 
 
 # like wise, this also means "if we find 'sqlite' in VARIANT, to replace this:
