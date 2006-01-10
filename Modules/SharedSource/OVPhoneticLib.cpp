@@ -1,4 +1,4 @@
-// OVPhoneticLib.cpp: Library for phonetic (BPMF) syllables
+// OVPhoneticLib.cpp: BPMF syllable toolkit
 //
 // Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
@@ -25,7 +25,8 @@
 // SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
 // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-// ARISING IN ANY WAY OUT OF THE 
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
 
 #include <stdio.h>
 #include <stdlib.h>

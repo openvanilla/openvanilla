@@ -1,0 +1,65 @@
+== Criteria for refactoring for 0.7.2-release ==
+
+* Must have license header
+* Makefile complies to the new convention:
+** Uses shared data from ../SharedData
+** Uses shared headers and source from ../SharedHeaders and ../SharedSource
+** Uses "../Mk/ov.module.mk"
+** Changes variable IMID to MODULEID
+** Offers HAS_VARIANTS if there is any variant
+** Makes with "build, install, clean, help" targets
+
+== Not Yet Refactored Modules ==
+
+* OVIMBig5
+* OVIMBoshiamy
+* OVIMChewing
+* OVIMExample
+* OVIMGeneric
+* OVIMGenericSQLite
+* OVIMPOJ-Holo
+* OVIMRoman
+* OVIMRomanNew
+* OVIMSpaceChewing
+* OVIMTibetan
+* OVIMTobacco
+* OVIMUIM
+* OVIMUnicode
+* OVKPAbbreviator
+* OVKPPhraseTools
+* OVOFDisUniHex
+* OVOFExample
+* OVOFFullWidthCharacter
+* OVOFHTMLCharEntity
+* OVOFMorseCode
+* OVOFPHP
+* OVOFQuotationmark
+* OVOFReverseLookup
+* OVOFSpeak
+* OVOFZhWikipidealize
+
+== Refactoring in Progress ==
+
+* OVOFAntiZhuyinwen (its xcodeproj variant needs to be re-created)
+* SharedData (more to be moved from trunk/Data)
+* SharedHeaders (more to be moved from trunk/Headers)
+* SharedSource (more to be moved from trunk/Source)
+
+== Refactored Modules ==
+
+* OVIMArray
+* OVIMPhonetic (variants: sqlite bpmf-extended)
+* OVOFHanConvert
+* Mk/ (not counted as module, but the build system also needs refactoring)
+
+== Scraped/Must-Be-Rewritten Modules ==
+
+Many of these are out-of-date, not well maintained, or discarded. To
+refactor/clean up these modules will require some efforts (e.g. the
+rewriting of Makefile's)
+
+* Experiments/OVIMAutoPhonetic
+* Experiments/OVIMKeypadExample
+* Experiments/OVKPPhrase
+* Experiments/ProtocolBased
+

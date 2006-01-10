@@ -93,7 +93,12 @@ clean:
 	$(RM) $(GOALS) $(EXTRA_CLEAN) $(EXTRA_GOALS) $(OBJS)
 
 help:
-	@echo "This is the Makefile for $(MODULEID). Some parameters:"
+	@echo "This is the Makefile for $(MODULEID). Available targets:"
+	@echo "    build              Builds the module"
+	@echo "    install            Install the module (may require sudo)"
+	@echo "    clean              Clean up built files"
+	@echo "    help               What you're reading"
+	@echo "Customizable Makefile variables:"
 	@echo "    DESTROOT           Install root for Darwin/Mac OS X (default=/)"
 	@echo "    INSTALL_PREFIX     Install prefix for other platforms (default=/usr/local/)"
 	@echo "    INSTALL_LIBPREFIX  Library prefix (default=/lib/)"
