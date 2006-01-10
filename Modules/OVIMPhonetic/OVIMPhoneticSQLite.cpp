@@ -40,6 +40,18 @@
 #include "OVSQLite3.h"
 #include "OVPhoneticLib.h"
 
+#ifndef OVIMPHONETIC_EXT
+    #define OVIMP_MODID         "OVIMPhoneticSQLite"
+    #define OVIMP_NAME_ZH_TW    "注音（SQLite版）"
+    #define OVIMP_NAME_ZH_CN    "繁体注音（SQLite版）"
+    #define OVIMP_NAME_EN       "Phonetic (Bopomofo) Using SQLite"
+#else
+    #define OVIMP_MODID         "OVIMPhoneticSQLite"
+    #define OVIMP_NAME_ZH_TW    "注音（大字集，SQLite版）"
+    #define OVIMP_NAME_ZH_CN    "繁体注音（大字集，SQLite版）"
+    #define OVIMP_NAME_EN       "Phonetic (Bopomofo) Large Set Using SQLite"
+#endif
+
 class OVIMPhoneticSQLite;
 
 class OVIMPhoneticContext : public OVInputMethodContext {
@@ -122,14 +134,14 @@ void OVIMPhoneticSQLite::update(OVDictionary *cfg, OVService *) {
 }
 
 const char *OVIMPhoneticSQLite::identifier() {
-    return "OVIMPhoneticSQLite";
+    return OVIMP_MODID;
 }
 
 const char *OVIMPhoneticSQLite::localizedName(const char *lc) {
-    if (!strcasecmp(lc, "zh_TW")) return "注音輸入法（SQLite 版）";
-    return "Phonetic (Bopomofo, SQLite3 version)";
+    if (!strcasecmp(lc, "zh_TW")) return OVIMP_NAME_ZH_TW;
+    if (!strcasecmp(lc, "zh_CN")) return OVIMP_NAME_ZH_CN;
+    return OVIMP_NAME_EN;
 }
-
 
 OVIMPhoneticContext::OVIMPhoneticContext(OVIMPhoneticSQLite *p) {
     parent=p;

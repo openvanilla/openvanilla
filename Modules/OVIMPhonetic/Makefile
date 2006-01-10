@@ -28,15 +28,39 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-HAS_VARIANTS=sqlite
+HAS_VARIANTS=sqlite bpmf-extended
+BPMF?=bpmf.cin
+
+# this reads bizarre, but it means "if we find 'bpmf-extended' in VARIANT"
+# (rationale: findstring returns empty string if not found,
+# and returns a substring if found, hence the use if ifneq)
+ifneq (, $(findstring bpmf-extended, $(VARIANT)))
+    BPMF=bpmf-ext.cin
+	CFLAGS+=-DOVIMPHONETIC_EXT
+
+	# we won't build if it's not an sqlite variant
+	# (the static version uses data table encoded in UCS2)
+	# this ifeq means "if 'sqlite' is not found in VARIANT"
+    ifeq (, $(findstring sqlite, $(VARIANT)))
+        # note this line does not begun with two tabs (8 spaces)
+		# but actually with 8 spaces. the reason? you can try using
+		# tabs if you want to know :)
+        $(error Extended BPMF table only builds with sqlite variant)
+    endif
+endif
+
+CINS=$(BPMF) punctuation.cin
 
 
-ifeq ("$(VARIANT)", "sqlite")
+# like wise, this also means "if we find 'sqlite' in VARIANT, to replace this:
+#     ifeq ("$(VARIANT)", "sqlite")
+#
+ifneq (, $(findstring sqlite, $(VARIANT)))
+
 	MODULEID=OVIMPhoneticSQLite
     SOURCES=OVIMPhoneticSQLite OVPhoneticLib
     LDFLAGS+=-lsqlite3
     DATA=bpmf.db
-    CINS=bpmf.cin punctuation.cin
     EXTRA_GOALS=bpmf.db
 
     include ../Mk/ov.module.mk
@@ -49,7 +73,6 @@ bpmf.db: bpmf-schema.txt ${CINS} bpmf-sqlconvert.pl
 else
     MODULEID=OVIMPhonetic
     SOURCES=OVIMPhoneticStatic OVPhoneticLib OVPhoneticData
-    CINS=bpmf.cin punctuation.cin
     EXTRA_CLEAN=OVPhoneticData.c
 
     include ../Mk/ov.module.mk

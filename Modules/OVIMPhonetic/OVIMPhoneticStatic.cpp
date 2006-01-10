@@ -39,6 +39,19 @@
 #include <ctype.h>
 #include "OVPhoneticLib.h"
 
+#ifndef OVIMPHONETIC_EXT
+    #define OVIMP_MODID         "OVIMPhonetic"
+    #define OVIMP_NAME_ZH_TW    "注音"
+    #define OVIMP_NAME_ZH_CN    "繁体注音"
+    #define OVIMP_NAME_EN       "Phonetic (Bopomofo)"
+#else
+    #define OVIMP_MODID         "OVIMPhonetic"
+    #define OVIMP_NAME_ZH_TW    "注音（大字集）"
+    #define OVIMP_NAME_ZH_CN    "繁体注音（大字集）"
+    #define OVIMP_NAME_EN       "Phonetic (Bopomofo) Large Set"
+#endif
+    
+
 extern unsigned short ovPhoneticData[];
 
 class OVIMPhoneticStatic;
@@ -110,15 +123,14 @@ void OVIMPhoneticStatic::update(OVDictionary *cfg, OVService *) {
 }
 
 const char *OVIMPhoneticStatic::identifier() {
-    return "OVIMPhonetic";
+    return OVIMP_MODID;
 }
 
 const char *OVIMPhoneticStatic::localizedName(const char *lc) {
-    if (!strcasecmp(lc, "zh_TW")) return "注音";
-    if (!strcasecmp(lc, "zh_CN")) return "注音";
-    return "Phonetic (Bopomofo)";
+    if (!strcasecmp(lc, "zh_TW")) return OVIMP_NAME_ZH_TW;
+    if (!strcasecmp(lc, "zh_CN")) return OVIMP_NAME_ZH_CN;
+    return OVIMP_NAME_EN;
 }
-
 
 OVIMPhoneticContext::OVIMPhoneticContext(OVIMPhoneticStatic *p) {
     parent=p;
