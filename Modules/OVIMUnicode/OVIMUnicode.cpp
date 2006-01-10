@@ -1,9 +1,8 @@
 // OVIMUnicode.cpp: Unicode Input Method
-// By Weizhong Yang
+// 2004-2006 By Weizhong Yang
 //
-// This program is Zonble-ware and adopts Zonble's "License": 
-// "How are you going to adopt any license if you don't even believe in law?"
-//
+// This program is Zonble-ware and adopts Zonble's License
+// -- "How could a person who doesn't even believe in law adopt any license?"
 
 #include <stdio.h>
 #include <ctype.h>
