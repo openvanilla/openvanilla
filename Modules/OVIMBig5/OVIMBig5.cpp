@@ -1,10 +1,14 @@
-// OVIMBig5.cpp 2004 by Weizhong Yang
-// http://openvanilla.org
+// OVIMBig5.cpp: Big-5 Code Input Method
+// 2005-2006 By Weizhong Yang
+//
+// This program is Zonble-ware and adopts Zonble's License
+// -- "How could a person who doesn't even believe in law adopt any license?"
 
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
+
 #ifndef WIN32
 	#include <OpenVanilla/OpenVanilla.h>
 	#include <OpenVanilla/OVLibrary.h>
@@ -13,13 +17,13 @@
 	#include "OVLibrary.h"
 	#define strcasecmp stricmp
 #endif
-#include "OVIMBig5.h"
 
-unsigned int convert(unsigned int in){ //Convert Big5 to Unicode
+extern unsigned short OVIMBig5Table[19582][2];
+
+unsigned int convert(unsigned int in) { //Convert Big5 to Unicode
 	int i;
-	for (i =0; i< 19582 ; i++){
-		if(map[i][0] == in)
-			return map[i][1];
+	for (i =0; i< 19582 ; i++) {
+		if(OVIMBig5Table[i][0] == in) return OVIMBig5Table[i][1];
 	}
 	return 0;
 }
@@ -119,7 +123,7 @@ public:
             return "Big5 內碼";
         else if (!strcasecmp(locale, "zh_CN"))
             return "Big5 内码";
-        return "Big5 hexadecimal";        
+        return "Big5 Hexadecimal";        
     }
 
     virtual OVInputMethodContext* newContext()  {
