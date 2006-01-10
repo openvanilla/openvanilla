@@ -46,10 +46,10 @@
 using namespace std;
 
 namespace _OVCIN{
-    const int NUM_PROPERTY = 5;
+    const int NUM_PROPERTY = 7;
     const int NUM_MAP = 2;
     enum EnumProperty{
-        P_SELKEY=0, P_ENAME, P_CNAME, P_ENDKEY, P_ENCODING
+        P_SELKEY=0, P_ENAME, P_CNAME, P_TCNAME, P_SCNAME, P_ENDKEY, P_ENCODING
     };
     enum EnumMap {
         M_KEY, M_CHAR
@@ -83,7 +83,7 @@ private:
 
 public:    
     // VXCIN::read()
-    OVCIN(char* fileName);
+    OVCIN(const char* fileName);
     
     // VXCIN::selKey()
     inline string& getSelKey();

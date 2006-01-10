@@ -34,7 +34,7 @@
 class OVKeySequence : public OVBase
 {
 public:
-    virtual int add(char) { return 0; }
+    virtual bool add(char) { return false; }
     virtual OVKeySequence* remove() { return this; }
     virtual OVKeySequence* clear() { return this; }
 };
@@ -45,11 +45,11 @@ class OVKeySequenceSimple : public OVKeySequence
 {
 public:
     OVKeySequenceSimple(int m=ovMaxSeqSimpLen) : len(0), max(m) { seq[0]=0; }
-    virtual int add(char c) {
-        if (len==max) return 0;
+    virtual bool add(char c) {
+        if (len==max) return false;
         seq[len++]=tolower(c);
         seq[len]=0;
-        return 1;
+        return true;
     }
     
     virtual OVKeySequence* remove() {

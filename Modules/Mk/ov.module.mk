@@ -28,6 +28,22 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
+#
+#
+# What to put in your own Makefile:
+#
+# MODULEID=name_of_the_library (e.g. MODULEID=OVIMExample => OVIMExample.dylib)
+# DATA=data_files_to_be_copied
+# SOURCES=source_files      (without .c .cpp .m .mm extensions)
+# EXTRA_GOALS=extra_goals   (put the extra target names here)
+# EXTRA_CLEAN=other_files_to_be_cleaned
+# HAS_VARIANTS=variant_names
+#
+# Then, in the end, insert a line "include ../Mk/ov.module.mk", and
+# this will do the magic for you!
+#
+#
+
 ###### Per-Version Settings
 
 # Use DESTROOT on Darwin (Mac OS X), 

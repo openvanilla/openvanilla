@@ -1,105 +1,104 @@
-// OVIMXcin.cpp
+// OVIMGeneric.cpp: Generic Input Method, reads .cin
+//
+// Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. Neither the name of OpenVanilla nor the names of its contributors
+//    may be used to endorse or promote products derived from this software
+//    without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
 
 #define OV_DEBUG
 
-#ifndef WIN32
-	#include <OpenVanilla/OpenVanilla.h>
-	#include <OpenVanilla/OVLibrary.h>
-	#include <OpenVanilla/OVUtility.h>
-#else
-	#include "OpenVanilla.h"
-	#include "OVLibrary.h"
-	#include "OVUtility.h"
-#endif
-
-#include <stdlib.h>
-#include "OVCandidateList.h"
-#include "OVIMXcin.h"
-#include "OVCIN.h"
-#include "XcinCinList.h"
-#include <string>
-#include <iostream>
-
-#ifdef WIN32
-	#define strcasecmp stricmp
-#endif
-
-#ifndef WIN32
-	#include <sys/syslimits.h>	//for PATH_MAX
-#else
-	#include <windows.h>
-	#define PATH_MAX MAX_PATH
-#endif
+#include "OVIMGeneric.h"
 
 using namespace std;
 
-//OVLOADABLEOBJCWRAPPER;
-
-// functions that help load all .cin --------------------------------
-
-CinList cinlist;
-
-// OpenVanilla Loadable IM interface functions -------------------------------
+CinList *cinlist=NULL;
 
 extern "C" unsigned int OVGetLibraryVersion() {
     return OV_VERSION;
 }
-extern "C" int OVInitializeLibrary(OVService*, const char*p) { 
-    cinlist.load((char*)p);
-    return 1; 
+
+extern "C" int OVInitializeLibrary(OVService *s, const char *libpath) {
+    if (cinlist) {
+        // already initializde
+        return false;
+    }
+
+    const char *pathsep=s->pathSeparator();
+        
+    cinlist = new CinList(pathsep);
+    if (!cinlist) return false;
+
+    // will be something like this on OS X:
+    //     ~/Library/OpenVanilla/version/UserSpace/OVIMGeneric/
+    string userpath=s->userSpacePath("OVIMGeneric");
+
+    // will be something like this on OS X:
+    //     /Library/OpenVanilla/version/Modules/OVIMGeneric/
+    string datapath=string(libpath) + string(pathsep) + string("OVIMGeneric");
+        
+    murmur("OVIMGeneric initializing");
+    
+    int loaded=0;
+    murmur("Loading modules from %s", userpath.c_str());
+    loaded += cinlist->load(userpath.c_str(), ".cin");
+
+    murmur("Loading modules from %s", datapath.c_str());
+    loaded += cinlist->load(datapath.c_str(), ".cin");
+    
+
+    if (!loaded) {
+        murmur ("OVIMGeneric: nothing loaded, init failed");
+        return false;
+    }
+
+    return true;
 }
 extern "C" OVModule *OVGetModuleFromLibrary(int x) {
-    if (x >= cinlist.index) return NULL;
-    return new OVIMXcin(cinlist.cinpath, cinlist.list[x].filename, cinlist.list[x].ename, cinlist.list[x].cname);
+    if ((size_t)x >= cinlist->count()) return NULL;
+       
+    return new OVIMGeneric(cinlist->cinInfo((size_t)x));
 }
 
-/*
-extern "C" int OVLoadableAvailableIMCount(char* p)
-{
-    cinlist.load(p);
-    return cinlist.index;
-}
-
-
-extern "C" unsigned int OVLoadableVersion()
-{
-    return ovVersion;
-}
-
-
-extern "C" OVInputMethod* OVLoadableNewIM(int x)
-{
-    return new OVIMXcin(cinlist.cinpath, cinlist.list[x].filename,
-        cinlist.list[x].ename, cinlist.list[x].cname);
-}
-
-extern "C" void OVLoadableDeleteIM(OVInputMethod *im)
-{
-    delete im;
-}
-
-*/
-
-XcinKeySequence::XcinKeySequence(OVCIN* cintab)
-{
+GenericKeySequence::GenericKeySequence(OVCIN* cintab) {
     cinTable=cintab;
 }
     
-int XcinKeySequence::valid(char c)
-{
+bool GenericKeySequence::valid(char c) {
 	string inKey;
 	inKey.push_back(c);
-    if (!cinTable->isValidKey(inKey)) return 0;
-    return 1;
+    if (!cinTable->isValidKey(inKey)) return false;
+    return true;
 }
     
-int XcinKeySequence::add(char c)
-{
-    if (valid(c) == 0) return 0;
+bool GenericKeySequence::add(char c) {
+    if (valid(c) == 0) return false;
     return OVKeySequenceSimple::add(c);
 }
     
-string *XcinKeySequence::compose(string *s)
+string *GenericKeySequence::compose(string *s)
 {
     for (int i=0; i<len; i++)
     {
@@ -112,52 +111,37 @@ string *XcinKeySequence::compose(string *s)
     return s;
 }
 
-OVIMXcin::OVIMXcin(char *lpath, char *cfile, char *en, char *cn)
-{
-    strcpy (cinfile, lpath);
-    if (cinfile[strlen(cinfile)-1]!='/')
-        strcat(cinfile, "/");
-    strcat(cinfile, cfile);
-
-    cintab = NULL;
-
-    sprintf(ename, "%s", en ? en : cfile);
-    sprintf(cname, "%s", cn ? cn : cfile);
-    sprintf(idbuf, "OVIMGeneric-%s", en ? en : cfile);
+OVIMGeneric::OVIMGeneric(const CinInfo& ci) : cininfo(ci), cintab(NULL) {
+    idstr = "OVIMGeneric-" + cininfo.shortfilename;
 }
 
-OVIMXcin::~OVIMXcin()
-{
+OVIMGeneric::~OVIMGeneric() {
     if (cintab) delete cintab;
 }
 
-const char* OVIMXcin::identifier()
+const char* OVIMGeneric::identifier()
 {
-    return idbuf;
+    return idstr.c_str();
 }
 
-const char* OVIMXcin::localizedName(const char* locale)
+const char* OVIMGeneric::localizedName(const char* locale)
 {
-    if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
-    {
-        return cname;
-    }
-        
-    return ename;
+    if (!strcasecmp(locale, "zh_TW")) return cininfo.tcname.c_str();
+    if (!strcasecmp(locale, "zh_CN")) return cininfo.scname.c_str();
+    return cininfo.ename.c_str();
 }
 
-int OVIMXcin::initialize(OVDictionary* global, OVService* srv, const char*)
+int OVIMGeneric::initialize(OVDictionary* global, OVService* srv, const char*)
 {
-    if (!cintab)
-     {
-        cintab=new OVCIN(cinfile);
+    if (!cintab) {
+        cintab=new OVCIN(cininfo.longfilename.c_str());
      }
-    murmur("OVIMXcin: initializing %s", identifier());
+    murmur("OVIMGeneric: initializing %s", identifier());
     update(global, srv);
     return 1;
 }
 
-void OVIMXcin::update(OVDictionary* global, OVService*)
+void OVIMGeneric::update(OVDictionary* global, OVService*)
 {
     const char *warningBeep="warningBeep";
     const char *autoCompose="autoCompose";
@@ -182,12 +166,12 @@ void OVIMXcin::update(OVDictionary* global, OVService*)
 		doShiftSelKey = true;
 }
 
-OVInputMethodContext *OVIMXcin::newContext()
+OVInputMethodContext *OVIMGeneric::newContext()
 {
-    return new OVXcinContext(this, cintab);
+    return new OVGenericContext(this, cintab);
 }
 
-void OVXcinContext::updateDisplay(OVBuffer *buf)
+void OVGenericContext::updateDisplay(OVBuffer *buf)
 {
     buf->clear();
     murmur("UpdateDisplay");
@@ -201,13 +185,13 @@ void OVXcinContext::updateDisplay(OVBuffer *buf)
     buf->update();
 }
 
-void OVXcinContext::clear() {
+void OVGenericContext::clear() {
     keyseq.clear();
-    autocomposing=0;
+    autocomposing=false;
     candi.cancel();
 }
 
-int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, 
+int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, 
     OVService *srv)
 {
     if (candi.onDuty())
@@ -253,7 +237,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar,
 			if (cintab->getWordVectorByChar(keyseq.getSeq(),
 			candidateStringVector))
             {
-                autocomposing=1;
+                autocomposing=true;
                 compose(buf, textbar, srv);
             }
             else if (candi.onDuty()) cancelAutoCompose(textbar);
@@ -269,12 +253,12 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar,
         if (autocomposing && candi.onDuty())
         {
             keyseq.clear();
-            autocomposing=0;
+            autocomposing=false;
             cancelAutoCompose(textbar);
             return candidateEvent(key, buf, textbar, srv);
         }
 
-        autocomposing=0;        
+        autocomposing=false;        
         return compose(buf, textbar, srv);
     }
     
@@ -330,7 +314,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar,
         if (keyseq.length() == parent->maxSeqLen() &&
         parent->isHitMaxAndCompose())
         {
-            autocomposing=0;
+            autocomposing=false;
             cancelAutoCompose(textbar);
             return compose(buf, textbar, srv);
         }
@@ -338,7 +322,7 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar,
         updateDisplay(buf);
         if (cintab->isEndKey(static_cast<char>(key->code())))
         {
-            autocomposing=0;
+            autocomposing=false;
             cancelAutoCompose(textbar);
             return compose(buf, textbar, srv);
         }
@@ -370,15 +354,15 @@ int OVXcinContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar,
 	// </comment>	
 }
 
-void OVXcinContext::cancelAutoCompose(OVCandidate *textbar)
+void OVGenericContext::cancelAutoCompose(OVCandidate *textbar)
 {
-    autocomposing=0;
+    autocomposing=false;
     candi.cancel();
     textbar->hide()->clear();
 }
     
         
-int OVXcinContext::compose(OVBuffer *buf, OVCandidate *textbar, OVService *srv)
+int OVGenericContext::compose(OVBuffer *buf, OVCandidate *textbar, OVService *srv)
 {
     if (!keyseq.length()) return 0;
 
@@ -414,7 +398,7 @@ int OVXcinContext::compose(OVBuffer *buf, OVCandidate *textbar, OVService *srv)
     return 1;
 }
 
-int OVXcinContext::candidateEvent(OVKeyCode *key, OVBuffer *buf, 
+int OVGenericContext::candidateEvent(OVKeyCode *key, OVBuffer *buf, 
     OVCandidate *textbar, OVService *srv)
 {
     if (key->code() == ovkEsc || key->code() == ovkBackspace)

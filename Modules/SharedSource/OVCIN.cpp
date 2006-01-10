@@ -39,14 +39,14 @@ using namespace _OVCIN;
 
 
 static const char *propertyNames[NUM_PROPERTY] = {
-    "selkey", "ename", "cname", "endkey", "encoding" 
+    "selkey", "ename", "cname", "tcname", "scname", "endkey", "encoding" 
 };
 
 static const char *mapNames[NUM_MAP] = {
     "keyname", "chardef"
 };
 
-OVCIN::OVCIN(char* fileName)
+OVCIN::OVCIN(const char* fileName)
 {
     OVFileHandler* fileHandler = new OVFileHandler(fileName);
     vector<string> stringVector;

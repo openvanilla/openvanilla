@@ -49,7 +49,7 @@ using namespace std;
 class OVFileHandler
 {
 public:
-	OVFileHandler(char* fileName);
+	OVFileHandler(const char* fileName);
 	~OVFileHandler();
 	
 	int getLines(vector<string>& outStringVectorRef);

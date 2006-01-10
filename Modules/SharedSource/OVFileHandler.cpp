@@ -33,7 +33,7 @@
 
 using namespace std;
 
-OVFileHandler::OVFileHandler(char* fileName)
+OVFileHandler::OVFileHandler(const char* fileName)
 {
 	inFile.open(fileName, ios_base::binary);
 #ifndef WIN32
