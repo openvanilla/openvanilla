@@ -49,7 +49,7 @@ void CVAtomicInitStart(NSString *f, NSString *libname);
 void CVAtomicInitEnd(NSString *f);
 
 // utility functions
-BOOL CVIsPathExist(NSString *p);
+BOOL CVIfPathExists(NSString *p);
 BOOL CVStringIsInArray(NSString *s, NSArray *a);
 NSArray *CVEnumeratePath(NSString *path, NSString *ext);
 void CVRemoveStringFromArray(NSString *s, NSMutableArray *ma);

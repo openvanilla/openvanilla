@@ -117,7 +117,7 @@ void CVAtomicInitStart(NSString *f, NSString *libname) {
 void CVAtomicInitEnd(NSString *f) {
     if (!f) return;
 #ifdef CVLOADER_USE_ATOMIC_LOCK
-    if (CVIsPathExist(f)) {
+    if (CVIfPathExists(f)) {
         // NSLog(@"unlinking existing atomicinit file: %@", f);
         unlink([f UTF8String]);
     }
@@ -301,7 +301,7 @@ NSArray *CVMilkModulesFromLibrary(NSString *libname, OVLoadedLibrary *lib, NSMut
     return a;
 }
 
-BOOL CVIsPathExist(NSString *p) {
+BOOL CVIfPathExists(NSString *p) {
     struct stat st;
     if (stat([[p stringByStandardizingPath] UTF8String], &st)) return NO;
     return YES;

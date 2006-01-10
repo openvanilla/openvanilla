@@ -480,12 +480,12 @@ void CVLoader::switchToLastPrimaryIM() {
 
 BOOL CVLoader::checkIfLastAtomicInitFailed(int timeout) {
     NSString *atomic=CVGetAtomicInitLockFilename();
-    if (!CVIsPathExist(atomic)) return NO;    
+    if (!CVIfPathExists(atomic)) return NO;    
     
     NSLog(@"CVLoader: found atomic lock file, wait to see if it's a failure or a lock in another process.");
     int tick=0;
     while (tick < timeout) {
-        if (!CVIsPathExist(atomic)) return NO;
+        if (!CVIfPathExists(atomic)) return NO;
         usleep(10000);      // sleep for 1/100 second
         tick++;
         if (!(tick % 10)) NSLog(@"CVLoader: still waiting for the unlock (tick=%d, timeout=%d)", tick, timeout);

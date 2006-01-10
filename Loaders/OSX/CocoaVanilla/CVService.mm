@@ -29,6 +29,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #include <Carbon/Carbon.h>
+#include "CVLoaderUtility.h"
 #include "CVService.h"
 #import "OVDisplayServer.h"
 
@@ -138,7 +139,14 @@ const char *CVService::locale() {
 }
 
 const char *CVService::userSpacePath(const char *modid) {
-    NSString *usp=[userspace stringByAppendingString:@"/"];
+	NSString *usp=[NSString stringWithFormat:@"%@/%@/",
+		userspace, [NSString stringWithUTF8String:modid]];
+
+    if (!CVIfPathExists(usp)) {
+		NSLog([NSString stringWithFormat:@"path %@ doesn't exist, creating", usp]);
+		system([[NSString stringWithFormat:@"mkdir -p %@", usp] UTF8String]);
+	}
+
     return [usp UTF8String];
 }
 
