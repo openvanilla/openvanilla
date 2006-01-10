@@ -48,7 +48,7 @@ OS_INSTALL?=$(OS)
 ifeq ("$(OS_INSTALL)", "Darwin")
     INST_PATH=$(DESTROOT)/Library/OpenVanilla/0.7.2/Modules/
 	OBJS=$(patsubst %, %.o, $(SOURCES))
-	GOALS=$(MODULEID).bundle
+	GOALS=$(MODULEID).dylib
 
 $(GOALS): $(OBJS) $(EXTRA_GOALS)
 	$(CPP) -bundle $(LDFLAGS) $(LIBS) -o $@ $(OBJS)
