@@ -180,16 +180,17 @@ public:
         char chewingpath[PATH_MAX];
         char hashdir[PATH_MAX];
         
-        // we can always be sure that an ending seperator '/' is given to us
-        sprintf(hashdir, "%sOVIMSpaceChewing-OV0.7.2", s->userSpacePath(identifier()));
-        mkdir(hashdir, S_IRWXU);
-        sprintf(chewingpath, "%sOVIMChewing", modulePath);
+        // no more need to create hash dir ourselves
+        sprintf(hashdir, "%s%s", s->userSpacePath(identifier()),
+            s->pathSeparator());
+        
+        sprintf(chewingpath, "%sOVIMSpaceChewing", modulePath);
         if (!ChewingCheckData(chewingpath)) {
-            murmur("OVIMChewing: chewing data missing at %s", modulePath);
+            murmur("OVIMSpaceChewing: chewing data missing at %s", modulePath);
             return 0;
         }
         
-        murmur ("OVIMChewing: initialize, chewing data=%s, userhash=%s", chewingpath, hashdir);
+        murmur ("OVIMSpaceChewing: initialize, chewing data=%s, userhash=%s", chewingpath, hashdir);
 		
 		// BECAUSE THE {SACRILEGIOUS WORDS HERE} libchewing HAS NO 
 		// EXCEPTION HANDLING HERE (BLAME OLD C-style assert() !!)
@@ -208,13 +209,13 @@ public:
     }
 
     virtual const char *identifier() {
-        return "OVIMChewing";
+        return "OVIMSpaceChewing";
     }
 
     virtual const char *localizedName(const char *locale) {
         if (!strcasecmp(locale, "zh_TW")) return "酷音";
-        if (!strcasecmp(locale, "zh_CN")) return "酷音";
- 	    return "Chewing (smart phonetics)";
+        if (!strcasecmp(locale, "zh_CN")) return "繁体酷音";
+ 	    return "Chewing (Smart Phonetics)";
     }
 
     virtual OVInputMethodContext* newContext() {

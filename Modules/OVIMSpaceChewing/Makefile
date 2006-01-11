@@ -2,7 +2,7 @@
 
 MODULEID=OVIMSpaceChewing
 
-SOURCES=OVIMChewingStatic Chewingpp \
+SOURCES=OVIMSpaceChewing Chewingpp \
 	char chewingio chewingutil choice dict hanyupinying \
 	hash key2pho tree userphrase zuin
 
