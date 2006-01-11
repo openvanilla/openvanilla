@@ -1,7 +1,5 @@
 // OVOFFullWidthCharacter.cpp: Full-width character output filter
 //
-// [FILENAME]: [DESCRIPTION]
-//
 // Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 

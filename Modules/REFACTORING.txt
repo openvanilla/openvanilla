@@ -20,11 +20,8 @@ Otherwise it's guaranteed to break!
 * OVIMChewing
 * OVIMExample
 * OVIMGenericSQLite
-* OVIMPOJ-Holo
 * OVIMRoman
 * OVIMRomanNew
-* OVIMSpaceChewing
-* OVIMTibetan
 * OVIMTobacco
 * OVIMUIM
 * OVIMUnicode
@@ -32,7 +29,6 @@ Otherwise it's guaranteed to break!
 * OVKPPhraseTools
 * OVOFDisUniHex
 * OVOFExample
-* OVOFFullWidthCharacter
 * OVOFHTMLCharEntity
 * OVOFMorseCode
 * OVOFPHP
@@ -52,6 +48,10 @@ Otherwise it's guaranteed to break!
 * OVIMArray
 * OVIMPhonetic (variants: sqlite bpmf-extended)
 * OVIMGeneric
+* OVIMPOJ-Holo
+* OVIMSpaceChewing
+* OVIMTibetan
+* OVOFFullWidthCharacter
 * OVOFHanConvert
 * Mk/ (not counted as module, but the build system also needs refactoring)
 * SharedHeaders/
@@ -79,6 +79,7 @@ ehq-symbols.cin
 cj.cin
 dayi3.cin
 pinyin.cin (zh_CN)
+poj-holo.cin
 punctuations.cin
 simplex.cin
 simplex-ext.cin

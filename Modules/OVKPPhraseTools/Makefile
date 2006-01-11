@@ -1,4 +1,4 @@
-# Makefile for OVOFFullWidthCharacter
+# Makefile for OVKPPhraseTools
 #
 # Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
 # All rights reserved.
@@ -28,6 +28,9 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-MODULEID=OVOFFullWidthCharacter
-SOURCES=OVOFFullWidthCharacter
+MODULEID=OVKPPhraseTools
+SOURCES=OVKPPhraseTools OVCandidateList
+LDFLAGS+=-lsqlite3
+
 include ../Mk/ov.module.mk
+

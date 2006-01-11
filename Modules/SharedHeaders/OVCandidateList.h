@@ -52,17 +52,17 @@ public:
         onduty=0;
     }
     
-    void prepare(vector<string>* l, char* skey, OVCandidate *textbar);
-    int onDuty() { return onduty; }
-    int onePage() { return (count <= perpage); }
-    void cancel() { onduty=0; }
-    void update(OVCandidate *textbar);
-    OVCandidateList* pageUp();
-    OVCandidateList* pageDown();
-    bool select(char inKey, string& outStringRef);
-	const char* getSelKey() { return selkey; }
+    virtual void prepare(vector<string>* l, char* skey, OVCandidate *textbar);
+    virtual bool onDuty() { return onduty; }
+    virtual bool onePage() { return (count <= perpage); }
+    virtual void cancel() { onduty=0; }
+    virtual void update(OVCandidate *textbar);
+    virtual OVCandidateList* pageUp();
+    virtual OVCandidateList* pageDown();
+    virtual bool select(char inKey, string& outStringRef);
+	virtual const char* getSelKey() { return selkey; }
 protected:
-    int onduty;
+    bool onduty;
     char selkey[32];
     int count;
     int perpage;

@@ -81,7 +81,7 @@ public:
         const char *rms;
         SQLite3Statement *r=NULL;       
         if (!sqlite3_prepare(handle, cmd, -1, &s, &rms)) r=new SQLite3Statement(s);
-        free(cmd);
+        sqlite3_free(cmd);
         return r;
     }
     
