@@ -1,3 +1,7 @@
+// Chewingpp.cpp
+// This package is released under the Artistic License,
+// please refer to LICENSE.txt for the terms of use and distribution
+
 #include <string.h>
 
 #include "Chewingpp.h"

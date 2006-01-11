@@ -1,13 +1,18 @@
 /* @(#)Chewingpp.h
  */
+ 
+/*
+ * This package is released under the Artistic License,
+ * please refer to LICENSE.txt for the terms of use and distribution
+ */
+
 
 #ifndef _CHEWINGPP_H
-#define _CHEWINGPP_H 1
+#define _CHEWINGPP_H
 
-// #include "chewing/chewing.h"             // lukhnos
-extern "C" {                                // lukhnos
-    #include "chewing.h"                    // lukhnos
-}                                           // lukhnos
+extern "C" {
+    #include "chewing.h"
+}
 
 class Chewing
 {

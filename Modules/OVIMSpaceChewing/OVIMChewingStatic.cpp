@@ -1,4 +1,6 @@
 // OVIMChewing.cpp
+// This package is released under the Artistic License,
+// please refer to LICENSE.txt for the terms of use and distribution
 
 #define OV_DEBUG
 
@@ -12,8 +14,8 @@
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLibrary.h>
 #include <OpenVanilla/OVUtility.h>
-// #include <ChewingPP/Chewingpp.h>         // lukhnos
-#include "Chewingpp.h"                      // lukhnos
+// #include <ChewingPP/Chewingpp.h>
+#include "Chewingpp.h"
 
 char *layouts_zhtw[8] = {"標準排列","許氏","IBM","精業","倚天","倚天 26 鍵", "Dvorak","Dvorak 許氏"};
 char *layouts_zhcn[8] = {"标准排列","许氏","IBM","精业","倚天","倚天 26 键", "Dvorak","Dvorak 许氏"};
