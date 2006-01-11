@@ -1,6 +1,8 @@
 %gen_inp
-%ename [CN]Wubizixing
+%ename Wubi (Wubizixing)
 %cname 简体五笔字形 
+%tcname 簡體五筆字形
+%scname 五笔字形
 %selkey 1234567890
 %keyname begin
 a a

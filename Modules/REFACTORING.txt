@@ -19,7 +19,6 @@ Otherwise it's guaranteed to break!
 * OVIMBoshiamy
 * OVIMChewing
 * OVIMExample
-* OVIMGeneric
 * OVIMGenericSQLite
 * OVIMPOJ-Holo
 * OVIMRoman
@@ -52,6 +51,7 @@ Otherwise it's guaranteed to break!
 * OVIMBig5
 * OVIMArray
 * OVIMPhonetic (variants: sqlite bpmf-extended)
+* OVIMGeneric
 * OVOFHanConvert
 * Mk/ (not counted as module, but the build system also needs refactoring)
 * SharedHeaders/
@@ -68,3 +68,41 @@ rewriting of Makefile's)
 * Experiments/OVKPPhrase
 * Experiments/ProtocolBased
 
+== Reviewed .cin Files ==
+
+array-shortcode.cin
+array-special.cin
+array30.cin
+bpmf-ext.cin
+bpmf.cin
+ehq-symbols.cin
+cj.cin
+dayi3.cin
+pinyin.cin (zh_CN)
+punctuations.cin
+simplex.cin
+simplex-ext.cin
+wubizixing.cin (zh_CN)
+
+
+== Not Reviewed .cin Files ==
+
+biaoyin.cin
+cj-ext.cin
+cj-j.cin
+cj5.cin
+corner.cin
+daibuun.cin
+dict-en.txt
+jinjin.cin
+jyutping.cin
+pictograph.cin
+pinyinbig5.cin
+qcj.cin
+scj7.cin
+shuangpin.cin
+tcj.cin
+telecode.cin
+wu.cin
+wus.cin
+wut.cin

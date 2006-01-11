@@ -1,6 +1,8 @@
 %gen_inp
-%ename [CN]Pinyin
+%ename Pinyin (Simplified Chinese)
 %cname 简体汉語拼音
+%tcname 簡體漢語拼音
+%scname 汉语拼音
 %encoding UTF-8
 %selkey 1234567890
 %endkey <>?:"{}|~!@#$%^&*()_+

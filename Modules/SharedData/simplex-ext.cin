@@ -3,8 +3,10 @@
 # This work has been done by yylin and b6s.
 #
 %gen_inp
-%ename simplex
-%cname 簡易
+%ename Simplex (Large Character Set)
+%cname 簡易（大字集）
+%tcname 簡易（大字集）
+%scname 简易（大字集）
 %encoding UTF-8
 %selkey 1234567890
 %keyname begin
