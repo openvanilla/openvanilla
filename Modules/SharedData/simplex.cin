@@ -1,6 +1,8 @@
 %gen_inp
-%ename simplex
-%cname 簡易
+%ename Simplex
+%cname 簡易（速成）
+%tcname 簡易（速成）
+%scname 繁体简易
 %encoding UTF-8
 %selkey 1234567890
 %keyname begin

@@ -6,6 +6,8 @@
 %gen_inp
 %ename Dayi3
 %cname 大易
+%tcname 大易
+%scname 繁体大易
 %encoding UTF-8
 %selkey '[]-\6789
 %keyname begin

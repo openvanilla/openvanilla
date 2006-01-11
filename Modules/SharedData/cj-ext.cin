@@ -9,8 +9,10 @@
 # merged by yylin and b6s.
 #
 %gen_inp
-%ename Cangjie
-%cname 倉頡
+%ename Cangjie (Large Character Set)
+%cname 倉頡（大字集）
+%tcname 倉頡（大字集）
+%scname 仓颉（大字集）
 %encoding UTF-8
 %selkey 1234567890
 %endkey ,./;'[]\`-=<>?:"{}|~!@#$%^&*()_+

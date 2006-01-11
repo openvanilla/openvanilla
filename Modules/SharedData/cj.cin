@@ -7,6 +7,8 @@
 %gen_inp
 %ename Cangjei
 %cname 倉頡
+%tcname 倉頡
+%scname 繁体仓颉
 %encoding UTF-8
 %selkey 1234567890
 %endkey ,./;'[]\`-=<>?:"{}|~!@#$%^&*()_+
