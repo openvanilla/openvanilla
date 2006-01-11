@@ -10,6 +10,124 @@
 #include <string.h>
 #include <Cocoa/Cocoa.h>
 #include <UIM/uim.h>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class OUCandidate {
+public:
+    OUCandidate() {
+        clear(); perpage=10;
+    }
+    
+    void clear() { list.clear(); count=pos=pagefrom=0; }
+    
+    void add(const char *s) {
+        list.push_back(string(s));
+        count=list.size();
+    }
+    void setPerPageItems(int l) { perpage=l; }
+    
+    void pageUp() {
+        pagefrom-=perpage;
+        checkBound();
+    }
+    
+    void pageDown() {
+        pagefrom+=perpage;
+        checkBound();
+    }
+
+    bool canPageDown() {
+        if (pagefrom+perpage >= count) return false;
+        return true;
+    }
+
+    void checkBound() {
+        if (pagefrom >= count) pagefrom=count-perpage;
+        if (pagefrom < 0) pagefrom=0;
+    }
+
+    void set(int p) {
+        int pageto=pagefrom+perpage;          // pageto = lowerbound +1
+        if (pageto >= count) pageto=count;
+
+        if (p >= pageto) {  // next page
+            pagefrom=p;
+            checkBound();
+        }
+        if (p < pagefrom) { // previous page
+            pagefrom=p-perpage+1;
+            checkBound();
+        }
+        if (!pos && p==count-1) {    // back from 0, special case
+            pagefrom=p-perpage+1;
+            checkBound();                            
+        }
+        
+        pos=p;
+    }
+    
+    int digits(int x) {
+        int d=0;
+        do {
+            x=x/10;
+            d++;
+        } while(x);
+        
+        return d;
+    }
+    
+    void update(OVCandidate *c) {
+        int pageto=pagefrom+perpage;          // pageto = lowerbound +1
+        if (pageto >= count) pageto=count;
+        
+        int pagecount=(pageto-pagefrom);
+        
+        c->clear();
+        
+        // get the formatting string right
+        int ptd=digits(pageto-1);
+        char formatstr[256];
+        // char ds[256];
+        sprintf(formatstr, "%%0%dd.\t%%s", ptd);
+        
+/*        sprintf(ds, "%d", ptd);
+        strcpy(formatstr, "%0");
+        strcat(formatstr, ds);
+        strcat(formatstr, "d. \t%s"); */
+        
+        // test run, get the longest line
+        const char *d;
+        char buf[256];
+        size_t lgst=0;
+        for (int i=pagefrom; i < pageto; i++) {
+            d=list[i].c_str();
+            sprintf(buf, formatstr, i, d);
+            if (strlen(buf) > lgst) lgst=strlen(buf);
+        }
+        
+        
+        for (int i=pagefrom; i < pageto; i++) {
+            d=list[i].c_str();
+            sprintf(buf, formatstr, i, d);
+            while(strlen(buf) < lgst) strcat(buf, " ");
+            
+            if (i==pos) strcat (buf, " «« ");
+            if (i!=pageto-1 && pagecount>1) strcat(buf, "\n");
+            c->append(buf);
+        }
+        c->update();
+    }
+    
+    
+protected:
+    int count, pos, perpage;
+    int pagefrom;
+
+    vector<string> list;
+};
 
 class OUEncodingConvertor {
 public:
@@ -111,7 +229,7 @@ public:
             charcount=[ns length];
         }
         if (state & UPreeditAttr_Reverse) {
-            if (!ovcandi->onScreen()) ovsrv->notify("漢字変換モード, ←/→ to move, ↑↓ for candidates");
+            // if (!ovcandi->onScreen()) ovsrv->notify("漢字変換モード, ←/→ to move, ↑↓ for candidates");
             uhighlightstart=upos;
             uhighlightend=upos+charcount;
         }
@@ -138,23 +256,40 @@ public:
     
     void uimCandidateActivate(int nr, int display_limit) {
         murmur("candidate activate, nr=%d, limit=%d", nr, display_limit);
+        ccount=0;
+        cindex=0;
+        cperpage=display_limit;
+        ccount=nr;
         
         ovcandi->clear();
+        cdi.clear();
+        cdi.setPerPageItems(display_limit);
+
         for (int i=0; i<nr; i++) {
             uim_candidate c;
             c=uim_get_candidate(uc, i, 0);  // the "acclerator hint" (0) doesn't seem to work
             const char *str=uim_candidate_get_cand_str(c);
-            char buf[256];
+            
+            cdi.add(str);
+            
+            /* char buf[256];
             sprintf(buf, "%d.\t%s", i, str);
             ovcandi->append(buf);
-            if (i != nr-1) ovcandi->append("\n");
+            if (i != nr-1) ovcandi->append("\n"); */
+            
             uim_candidate_free(c);
         }
-        ovcandi->update()->show();
-        ovsrv->notify("candidate mode,  ↑↓ to move or ESC");
+        
+        cdi.update(ovcandi);
+        ovcandi->show();
+        
+        // ovcandi->update()->show();
+        // ovsrv->notify("candidate mode,  ↑↓ to move or ESC");
     }
     
     void uimCandidateSelect(int index) {
+        cindex=index;
+    
         murmur("candidate select! index=%d", index);
 
         uim_candidate c;
@@ -163,7 +298,10 @@ public:
 
         char buf[256];
         sprintf(buf, "↑↓ candidate = %s (%d)", str, index);
-        ovsrv->notify(buf);
+        // ovsrv->notify(buf);
+
+        cdi.set(index);
+        cdi.update(ovcandi);
 
         uim_candidate_free(c);
     }
@@ -174,7 +312,32 @@ public:
         murmur("uim candidate shift page! direction=%d", direction);
         char buf[256];
         sprintf(buf, "page shift, direction=%d", direction);
-        ovsrv->notify(buf);
+        // ovsrv->notify(buf);
+        
+        murmur ("set index");
+        if (direction) {
+            if (!cdi.canPageDown()) {
+                ovsrv->beep();
+            }
+            else {
+                cdi.pageDown();
+                cindex += cperpage;
+                if (cindex >= ccount) cindex=ccount-1;
+            }
+        }
+        else {
+            cindex-=cperpage;
+            if (cindex < 0) {
+                cindex=0;
+                ovsrv->beep();
+            }
+            cdi.pageUp();
+        }
+        uim_set_candidate_index(uc, cindex);
+        cdi.set(cindex);
+        cdi.update(ovcandi);
+        
+        // uimCandidateSelect will be called, so we do nothing
     }
     
     void uimCandidateDeactivate() {
@@ -188,10 +351,16 @@ protected:
     OVService *ovsrv;
     uim_context uc;
     
+    OUCandidate cdi;
+    
     int upos;
     int ucountpos;
     int uhighlightstart;
     int uhighlightend;
+    
+    int ccount;
+    int cindex;
+    int cperpage;
 };
 
 // UIM callback functions
