@@ -1,9 +1,15 @@
-/* OVIMTibetan.cpp 2004 by Weizhong Yang 
- * http://openvanilla.org/
- * OpenVanilla Tibetan Input Method is based on the Sambhota Keyboard,
- * please check http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf for detail. */
+// OVIMTibetan.cpp: The Tibetan Input Method
+// 2004-2006 by Weizhong Yang 
+//
+// http://openvanilla.org
+//
+//  OpenVanilla Tibetan Input Method is based on the Sambhota Keyboard,
+// please check http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf for detail.
+//
+// This program is Zonble-ware and adopts Zonble's License
+// -- "How could a person who doesn't even believe in law adopt any license?"
 
-#define OV_DEBUG
+// #define OV_DEBUG
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h> 
