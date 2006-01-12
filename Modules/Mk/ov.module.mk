@@ -46,9 +46,9 @@
 
 ###### Per-Version Settings
 
-# Use DESTROOT on Darwin (Mac OS X), 
+# Use DSTROOT on Darwin (Mac OS X), 
 # INSTALL_PREFIX and INSTALL_LIBPREFIX on everything else
-DESTROOT?=/
+DSTROOT?=/
 INSTALL_PREFIX?=/usr/local/
 INSTALL_LIBPREFIX?=/lib/
 OV_INCLUDE=/usr/local/include
@@ -62,7 +62,7 @@ OS_INSTALL?=$(OS)
 
 # install rules for Darwin (Mac OS X)
 ifeq ("$(OS_INSTALL)", "Darwin")
-    INST_PATH=$(DESTROOT)/Library/OpenVanilla/0.7.2/Modules/
+    INST_PATH=$(DSTROOT)/Library/OpenVanilla/0.7.2/Modules/
 	OBJS=$(patsubst %, %.o, $(SOURCES))
 	GOALS=$(MODULEID).dylib
 
@@ -115,7 +115,7 @@ help:
 	@echo "    clean              Clean up built files"
 	@echo "    help               What you're reading"
 	@echo "Customizable Makefile variables:"
-	@echo "    DESTROOT           Install root for Darwin/Mac OS X (default=/)"
+	@echo "    DSTROOT            Install root for Darwin/Mac OS X (default=/)"
 	@echo "    INSTALL_PREFIX     Install prefix for other platforms (default=/usr/local/)"
 	@echo "    INSTALL_LIBPREFIX  Library prefix (default=/lib/)"
 	@echo "    OV_INCLUDE         Search path for OV framework (default=/usr/local/include)"

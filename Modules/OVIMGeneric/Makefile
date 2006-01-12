@@ -31,8 +31,7 @@
 MODULEID=OVIMGeneric
 
 SOURCES=OVCIN OVCandidateList OVFileHandler OVStringToolKit OVIMGeneric CinList
-
-DATA=cj.cin
-# DATA=cj.cin dayi3.cin iroha.cin ehq.cin zhcn_pinyin.cin zhcn_wubizixing.cin
+DATA=cj.cin dayi3.cin ehq-symbols.cin pinyin.cin simplex.cin wubizixing.cin
 
 include ../Mk/ov.module.mk
+
