@@ -3,6 +3,7 @@
 # Please see License/license.txt for the terms of use
 
 # global variables
+VERSION?=0.7.2
 CONFIG?=Release
 DSTROOT?=/
 CMDLINETOOLROOT?=/opt/local
@@ -13,8 +14,8 @@ LD=Loaders/OSX/OpenVanillaLoader.xcodeproj
 
 # These are the built products to be cleaned up
 LIBFW=$(DSTROOT)/Library/Frameworks/OpenVanilla.framework
-LIBLDR=$(DSTROOT)/Library/Components/OpenVanilla-TSComponent-0.7.2.bundle \
-	$(DSTROOT)/Library/OpenVanilla/0.7.2/Loader
+LIBLDR=$(DSTROOT)/Library/Components/OpenVanilla-TSComponent-$(VERSION).bundle \
+	$(DSTROOT)/Library/OpenVanilla/$(VERSION)/Loader
 USRTOOL=$(DSTROOT)/$(CMDLINETOOLROOT)/bin/ovfilter
 
 all:

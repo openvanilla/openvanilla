@@ -23,10 +23,7 @@ Otherwise it's guaranteed to break!
 * OVIMRoman
 * OVIMRomanNew
 * OVIMTobacco
-* OVIMUIM
-* OVIMUnicode
 * OVKPAbbreviator
-* OVKPPhraseTools
 * OVOFDisUniHex
 * OVOFExample
 * OVOFHTMLCharEntity
@@ -40,7 +37,7 @@ Otherwise it's guaranteed to break!
 == Refactoring in Progress ==
 
 * OVOFAntiZhuyinwen (its xcodeproj variant needs to be re-created)
-* SharedData (more to be moved from trunk/Data)
+* OVIMUIM
 
 == Refactored Modules ==
 
@@ -51,9 +48,12 @@ Otherwise it's guaranteed to break!
 * OVIMPOJ-Holo
 * OVIMSpaceChewing
 * OVIMTibetan
+* OVIMUnicode
+* OVKPPhraseTools
 * OVOFFullWidthCharacter
 * OVOFHanConvert
 * Mk/ (not counted as module, but the build system also needs refactoring)
+* SharedData/
 * SharedHeaders/
 * SharedSource/
 

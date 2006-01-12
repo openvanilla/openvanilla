@@ -656,6 +656,16 @@
         OVModule *ovm=[w module];
         [gim_imlist addItemWithTitle:[NSString stringWithUTF8String:ovm->localizedName(lc)]];
     }
+	
+	[gim_maxkeylen removeAllItems];
+	for (int z=0; z<=20; z++) {
+		[gim_maxkeylen addItemWithTitle:[NSString stringWithFormat:@"%d", z]];
+	}
+	[gim_maxkeylen addItemWithTitle:@"30"];
+	[gim_maxkeylen addItemWithTitle:@"40"];
+	[gim_maxkeylen addItemWithTitle:@"50"];
+	[gim_maxkeylen addItemWithTitle:@"60"];
+	
     [gim_imlist setEnabled:YES];
     [gim_imlist selectItemAtIndex:0];
     [gim_autocompose setEnabled:YES];

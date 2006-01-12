@@ -28,9 +28,10 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#define OV_DEBUG
+// #define OV_DEBUG
 
 #include "OVIMGeneric.h"
+#include "CIN-Defaults.h"
 
 using namespace std;
 
@@ -143,25 +144,15 @@ int OVIMGeneric::initialize(OVDictionary* global, OVService* srv, const char*)
 
 void OVIMGeneric::update(OVDictionary* global, OVService*)
 {
-    const char *warningBeep="warningBeep";
-    const char *autoCompose="autoCompose";
-    const char *maxSeqLen="maxKeySequenceLength";
-    const char *hitMax="hitMaxAndCompose";
-	const char *sk="shiftSelectionKey";
-
-    if (!global->keyExist(warningBeep)) global->setInteger(warningBeep, 1);
-    if (!global->keyExist(maxSeqLen)) global->setInteger(maxSeqLen, 5);
-    if (!global->keyExist(autoCompose)) global->setInteger(autoCompose, 0);
-    if (!global->keyExist(hitMax)) global->setInteger(hitMax, 0);
-	if (!global->keyExist(sk)) global->setInteger(sk, 0);
-
-    cfgMaxSeqLen=global->getInteger(maxSeqLen);
-    cfgBeep=global->getInteger(warningBeep);
-    cfgAutoCompose=global->getInteger(autoCompose);
-    cfgHitMaxAndCompose=global->getInteger(hitMax);
+    CINSetDefaults(cininfo.shortfilename.c_str(), global);
+    
+    cfgMaxSeqLen=global->getInteger(CIN_MAXSEQLEN);
+    cfgBeep=global->getInteger(CIN_WARNINGBEEP);
+    cfgAutoCompose=global->getInteger(CIN_AUTOCOMPOSE);
+    cfgHitMaxAndCompose=global->getInteger(CIN_HITMAX);
 	
-	if(global->getInteger(sk) == 0)
-		doShiftSelKey = false;
+	if(!global->getInteger(CIN_SHIFTSELECTIONKEY))
+	   doShiftSelKey = false;
 	else
 		doShiftSelKey = true;
 }
@@ -174,7 +165,7 @@ OVInputMethodContext *OVIMGeneric::newContext()
 void OVGenericContext::updateDisplay(OVBuffer *buf)
 {
     buf->clear();
-    murmur("UpdateDisplay");
+    // murmur("UpdateDisplay");
     if (keyseq.length())
     {
         string *ms= new string;
@@ -310,7 +301,7 @@ int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textb
     	}
     	
         keyseq.add(key->code());
-		murmur("add %d", key->code());
+		// murmur("add %d", key->code());
         if (keyseq.length() == parent->maxSeqLen() &&
         parent->isHitMaxAndCompose())
         {
@@ -341,17 +332,13 @@ int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textb
 		        
         return 1;
     }
-	// <comment author='b6s'>For undefined key events, do nothing.
-	else {
-		/*
-		cancelAutoCompose(textbar);
-		keyseq.clear();
-		if (buf->length()) buf->send();
-		*/
-		
-		return 0;
-	}
-	// </comment>	
+    
+    if (!buf->isEmpty()) {
+        if (parent->isBeep()) srv->beep();
+        return 1;
+    }
+    
+    return 0;
 }
 
 void OVGenericContext::cancelAutoCompose(OVCandidate *textbar)

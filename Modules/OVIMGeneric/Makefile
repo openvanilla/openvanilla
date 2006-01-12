@@ -30,7 +30,8 @@
 
 MODULEID=OVIMGeneric
 
-SOURCES=OVCIN OVCandidateList OVFileHandler OVStringToolKit OVIMGeneric CinList
+SOURCES=OVCIN OVCandidateList OVFileHandler OVStringToolKit OVIMGeneric \
+    CinList CIN-Defaults
 DATA=cj.cin dayi3.cin ehq-symbols.cin pinyin.cin simplex.cin wubizixing.cin
 
 include ../Mk/ov.module.mk
