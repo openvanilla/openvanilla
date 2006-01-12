@@ -31,7 +31,7 @@
 #ifndef __OVKPPhraseTool_h
 #define __OVKPPhraseTool_h
 
-#define OV_DEBUG
+// #define OV_DEBUG
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>

@@ -71,7 +71,7 @@
 //        NSLog(@"embedded loader inited");
 //        NSLog([[loader config] description]);
 //        NSLog([[loader moduleList] description]);
-          NSLog([[loader loadHistory] description]);
+//        NSLog([[loader loadHistory] description]);
     }
     else {
         // what if not...? how to abort?
@@ -238,7 +238,7 @@
     }
     [[oflist array] addObjectsFromArray:oforderlist];
 
-    // setup IM settings (OVIMPhonetics, OVIMChewing, OVIMPOJ-Holo, OVIMTibetan)
+    // setup IM settings (OVIMPhonetics, OVIMSpaceChewing, OVIMPOJ-Holo, OVIMTibetan)
     [self setupIMSettings];
     [self setupGenericIMSettings];
 
@@ -353,7 +353,7 @@
 }
 - (IBAction)oftab_convert:(id)sender {
     CVModuleWrapper *w=[outputfilters objectAtIndex:[oftab_convertfilter indexOfSelectedItem]];
-    NSLog(@"using %@", [w identifier]);
+    // NSLog(@"using %@", [w identifier]);
 
     // initialize it first
     CVDictionary mcd([self getConfigNode:[w identifier]]);
@@ -412,7 +412,7 @@
     [sharetab_previewview changeConfig:dsrvrcfg];
 }
 - (IBAction)sharetab_changeTransparency:(id)sender {
-    NSLog(@"%f", [sender intValue]/100.0);
+    // NSLog(@"%f", [sender intValue]/100.0);
     [sharetab_transparencytag setStringValue:[NSString stringWithFormat:@"%d%%", [sender intValue]]];
     [dsrvrcfg setValue:[NSNumber numberWithFloat:[sender intValue]/100.0] forKey:@"opacity"];
     [sharetab_previewview changeConfig:dsrvrcfg];
@@ -437,7 +437,7 @@
     [loadercfg setValue:@"" forKey:@"beepSound"];
     [sharetab_soundfile setStringValue:@""];
     
-    NSLog(@"change sound!");
+    // NSLog(@"change sound!");
     NSString *t=[sender titleOfSelectedItem];
     if ([t isEqualToString:MSG(@"(none)")]) {
         [loadercfg setValue:@"0" forKey:@"shouldBeep"];
@@ -508,7 +508,7 @@
     NSLog([[modlist array] description]);
 }
 - (IBAction)pref_writeConfig:(id)sender {
-    NSLog(@"gathering and writing config");
+    // NSLog(@"gathering and writing config");
 
     // gathr IM configs
     [self gatherIMSettings];
@@ -564,7 +564,7 @@
     [loadercfg setValue:newlibexclude forKey:@"excludeLibraryList"];
     [loadercfg setValue:newmodexclude forKey:@"excludeModuleList"];
 
-    NSLog(@"new dictionary=%@", [config description]);
+    // NSLog(@"new dictionary=%@", [config description]);
 
     // we sync loader config first, then overwrite with ours
     [[loader config] sync];
@@ -618,11 +618,11 @@
         [settab_phoneticslayout setEnabled:YES];
         CVRemoveStringFromArray(@"OVIMPhonetic", propeditmodlist);
     }
-    if ([self identifierExists:@"OVIMChewing"]) {
-        d=[self getConfigNode:@"OVIMChewing"];
+    if ([self identifierExists:@"OVIMSpaceChewing"]) {
+        d=[self getConfigNode:@"OVIMSpaceChewing"];
         [settab_chewinglayout selectItemAtIndex:[[d valueForKey:@"keyboardLayout" default:@"0"] intValue]];
         [settab_chewinglayout setEnabled:YES];
-        CVRemoveStringFromArray(@"OVIMChewing", propeditmodlist);
+        CVRemoveStringFromArray(@"OVIMSpaceChewing", propeditmodlist);
     }
 
     if ([self identifierExists:@"OVIMTibetan"]) {
@@ -711,8 +711,8 @@
         d=[self getConfigNode:@"OVIMPhonetic"];
         [d setValue:NUM([settab_phoneticslayout indexOfSelectedItem]) forKey:@"keyboardLayout"];
     }
-    if ([self identifierExists:@"OVIMChewing"]) {
-        d=[self getConfigNode:@"OVIMChewing"];
+    if ([self identifierExists:@"OVIMSpaceChewing"]) {
+        d=[self getConfigNode:@"OVIMSpaceChewing"];
         [d setValue:NUM([settab_chewinglayout indexOfSelectedItem]) forKey:@"keyboardLayout"];
     }
 
@@ -762,10 +762,10 @@
     if ([w usable]) return nil;
 
     NSDictionary *md=[self getConfigNode:[w identifier]];
-    NSLog(@"before init, node=%@", [md description]);
+    // NSLog(@"before init, node=%@", [md description]);
     CVDictionary mcd([self getConfigNode:[w identifier]]);
     [w initializeWithConfig:&mcd service:[loader service]];
-    NSLog(@"after init, node=%@", [md description]);    
+    // NSLog(@"after init, node=%@", [md description]);    
     return w;
 }
 - (BOOL)identifierExists:(NSString*)mid {
@@ -847,7 +847,7 @@
     id pb=[info draggingPasteboard];
     
     int srcrow=[[pb stringForType:NSStringPboardType] intValue];
-    NSLog(@"moving item from row %d to %d", srcrow, r);
+    // NSLog(@"moving item from row %d to %d", srcrow, r);
     
     id obj=[[self array] objectAtIndex:srcrow];
     [[self array] insertObject:obj atIndex:r];
