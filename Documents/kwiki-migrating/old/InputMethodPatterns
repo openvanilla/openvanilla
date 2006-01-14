@@ -1,0 +1,30 @@
+* GoF《Design Pattern》的第二章〈個案研究：文書處理器設計〉，對於輸入法設計相當具有參考價值。
+* 在實際應用上，很少個別地使用單一 pattern，因此在 patterns 間協調合作上，可參考 [composite design patterns http://www.riehle.org/computer-science/research/1997/oopsla-1997.html] 或 [compound pattern http://www.tenlong.com.tw/Read/readForm.php?i=5] 的技巧，以及底下兩個不錯的 sample codes:
+** http://home.earthlink.net/~huston2/dp/cbimvCpp
+** http://home.earthlink.net/~huston2/dp/FileDecoratorAnsCpp
+* 以 Command 及 Strategy patterns 包裝 SQL commands
+**  http://140.109.17.94/Jyemii/patternscolumn/articles/UsingPatternsforSQLCodeGeneration.htm
+* 輸入法到處都用得到 State (及 Strategy) pattern
+** http://140.109.17.94/Patterns/caterpillar.onlyfun/PmWiki/StatePattern.htm
+* 由鍵碼組成字符再組成詞語再組成句子的過程，可以用 Composite pattern 來理解，另外也應該參考 Iterator、Visitor 和 Interpreter patterns (雖然不必搞那麼複雜，但是這對抽象化 output filter 的介面也有幫助)。GoF《Design Pattern》第二章第八節〈拼字檢查與斷字〉，主要就是在講 Iterator 與 Visitor
+** http://www.dotspace.idv.tw/Patterns/Jdon_Composite.htm
+** http://home.earthlink.net/~huston2/dp/CompositeDemos.txt
+* 如果把鍵碼序列想成串流，再類比一下 Java 處理 I/O 串流的方式，那麼其實自動選字的轉換過程就像是在套用 Decorator pattern。
+ StreamDecoratorInterface words =
+     new WordStream(    // 轉成詞語
+         new CharacterStream(    // 轉成漢字
+             new PhoneticInputMethodStream(    // 轉成注音
+                 //new ET26LayoutStream(    // 有必要的話才經過這一手
+                 OVKeyCode.sequence
+                 //)
+             )
+         )
+     );
+** 不過這種看法有個問題：Decorator 應該要是透明的。對於自動選字流程來說，有些地方的輸入輸出可能相依於特定類別，於是想用 Decorator 時，必須把用來交換資訊的類別定義得夠中性。然而就算類別相依性沒問題，流程本身還是會有先後順序，實際上恐怕還是得把轉換過程放進 Template Method pattern。話又說回來了，有這種限制，就要考慮別直接用 Decorator。
+*** 這麼說來反倒應該用 Adapter 去想。
+* Output filter 的過程其實也可以用 Decorator pattern 來理解。
+** http://home.earthlink.net/~huston2/dp/decorator.html
+** http://home.earthlink.net/~huston2/dp/DecoratorDemo.txt
+* 自動選字演算法常會用到 dynamic programming，可參考 [Design Patterns in Dynamic Programming http://norvig.com/design-patterns/]
+* UI 在傳遞鍵盤事件時，應參考 Chain of Responsibility pattern。事實上，組字的過程也用得到。舉例來說，如果組字時會先查看使用者自訂辭典和自動學習的結果，找不到才去預設辭典查，這樣的流程就可以套用之。
+** http://www.dotspace.idv.tw/Patterns/Jdon_CoR.htm

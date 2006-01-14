@@ -1,0 +1,34 @@
+透過 SVK 取得 OpenVanilla 的程式源碼
+雖然使用上述方式，您便可以取得 OpenVanilla 的源碼，但是我們還是建議您使用 svk 等版本管理工具，這樣當我們做了任何的更新，您都可以只要下一個指令，就能夠與檔案庫中最新的更新狀況同步。svk 提供在 Mac OS X 上安裝的 dmg 檔案，只要點選安裝套件（Installer Package），便可以快速完成安裝。您可以從
+
+http://rt.openfoundry.org/Foundry/Project/Download/?Queue=82
+
+取得 svk。安裝完成後請在終端機內輸入：
+
+ svk depotmap --init
+
+這會問你要不要建立 depot，打 y，接著輸入：
+
+ svk cp http://svn.openfoundry.org/openvanilla/trunk ov
+
+第一個問題按 return 按鍵跳過，表示要映射所有 http://svn.openfoundry.org/openvanilla/trunk 裡的東西。
+
+第二個問題打 ov，表示把映射內容存到自己機器上 svn 資料庫裡的 //mirror/ov 的目錄裡。
+
+第三個問題打 a，表示要映射從古至今所有的版本。
+
+然後會需要等一陣子，svk 會取得 OV 的所有版本紀錄，存放在您本機的硬碟上。等全部 copy 完後, 又會問你一個問題，要把東西 copy 到哪去，這時你還是可以打 ov，只是這個 ov 跟前個 ov 「不」一樣，這個 ov 會把東西複製到 //ov 而不是 //mirror/ov。
+
+然後會跑進某編輯器（通常是 vi），隨便打幾個字吧，像「I am learning svk now!」或「clkao is great!」或「svk++ ; ov++」都行...
+
+接著 vi 存檔（ESC :wq!）。
+
+如果要更改預設編輯器，請另外設定 EDITOR 環境變數，例如在 bash 環境下：在 svk 操作之前可用以下指令設定編輯器為 pico: "export EDITOR=pico"。
+
+現在你什麼都有了，在一個叫 ov 的目錄下，通常這個目錄會在你的個人目錄裡（/User/yourname），裡面的源碼就是最新版本了。
+
+以後要更新，在 ov 目錄下打 svk pull 即可。
+
+.infoblock
+{include: OVManualIndex}
+.infoblock

@@ -1,0 +1,17 @@
+== 程式源碼
+
+您可以使用 svk 或 svn，取得最新版本的 OV 程式源碼。OV 的源碼位在：
+
+http://svn.openfoundry.org/openvanilla
+
+如果您需要酷音輸入法的程式源碼，您需要：
+
+* libchewing： https://svn.csie.net/chewing/libchewing
+* libchewingpp： https://svn.csie.net/chewing/libchewingpp
+* charchew： https://opensvn.csie.org/SpaceChewingOSX/branches/carchew
+
+以上酷音輸入法的程式碼，也是透過 svn 或 svk 方式取得。
+
+.infoblock
+{include: OVManualIndex}
+.infoblock

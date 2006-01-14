@@ -1,0 +1,37 @@
+WWDC 摘要
+
+Apple 已經<a href="http://www.apple.com/pr/library/2005/jun/06intel.html 
+">正式發佈新聞稿</a>，宣佈要在 2006 年開始進行公司史上繼 68k 轉移到 PPC，OS 9 轉移到 OS X 之後的「第三個轉移計劃」：使用 Intel 的 CPU。
+
+根據 Steve Jobs 在 WWDC 2005 Keynote Speech 上的說法，今年之內還不會出現 x86 的 Mac 機器，目前只有 ADC (Apple Developer Connection) 的付費開發者能有 USD 999 的價錢取得開發者專用的套件。
+
+這是否意味著以後光華牌的 x86 機器也能跑 OS X ？這話可相當難說。目前大多數人的猜測是，這會是「Intel 的晶片，Apple 的主機板／硬體設計」，也就是說光華牌的 PC 要跑 OS X ，恐怕需要能人志士的大力 hack 才有可能。
+
+幾個 #osxchat 關注的 WWDC 2005 焦點如下：
+
+<ul>
+<li>將在 iTMS 上直接可瀏覽 Podcast 分類目錄。</li>
+<li>下個 OSX 版本的代號：Leopard。預計於 2006 年底釋出。</li>
+<li>第三個轉型期：從 PowerPC 走向 Intel──相<當注重效能提昇的一個決策。</li>
+<li>i386 版本的 MacOSX 長久以來一直有進行測試，<每一個釋出的 OSX 都有對應的 i386 版本，Steve Jobs 並現場 Demo 了在 Pentium4 3.6G 上執行的 OSX。可執行 Spotlight, Dashboard,iCal,iPhoto, 並以 QuickTime 7 播放 H.264 (mpeg4) 電影。</li>
+<li>更注重在 Cocoa 方面的開發環境，且有完全取代 Carbon 環境之勢。</li>
+<li>在 i386 CPU 上的 OSX 版 Mathemat<ica 展示。</li>
+<li>此一轉型期將長達數年，已經備妥的 "rosetta" 技<術（Rosetta Stone是埃及考古學的重要里程碑，上面有埃及文及希臘文的對譯，猜想此技術之名與對譯的概念有關），讓程式設計師，可以不用考慮到不同 CPU 的議題，所編好的 Binary 環境可以在 Intel 與 PowerPC 架構上轉換。所編出來的程式稱為 'Universal Binary'。</li>
+<li>也展示了 Photoship CS 在 Pentium4 OSX 上面的執行情況</li>
+</ul>
+
+（感謝 irc.arstechnica.com 提供絕對 realtime 的記錄）
+
+__贊曰__（以下請填寫個人評論，不管想幹憔，罵人，比中指還是流口水都行）
+
+gugod: Steve Jobs 這一步在幾天前許多新聞網實在是炒得火熱，但長久看來對於Apple公司本身而言實為有力的部署。雖然說看起來像是有向 IBM 揮手再見的訊息，但在這數年的轉型過渡期當中，能夠有甚麼樣的變化著實難料。短期來看是個提昇效能之奇襲，長久來看是是給 IBM 一個壓力，隱含了寄望 IBM 在其他方面（如 grid computing、大型系統）方面的能力。或許Apple以後的產品之中，來自IBM的技術不會直接是在 CPU ，而是整合性的分散式計算的軟體架構之類。
+
+lukhnos：對於很晚近才使用Mac的我，這實在是個不錯的消息。意思是說以後在x86上面也可以享受Cocoa這種優秀的開發環境和框架。另外，Apple似乎真的撞到PPC的玻璃天花板了，PowerBook G5的傳言已經一年半之久還沒有下文，以競爭激烈的筆記型電腦市場（現在已經比桌上型重要）來說，是很不可原諒的產品線缺口。從這個觀點來說，選擇x86，對於Apple的投資人來說，應該是個正確的長期策略──PPC的機器也許短期內會受到影響，但是Apple如果不能為自家機器提供三年以上的發展願景，下場可能會更慘。至於，對開發者來說，我認為衝擊主要會在於「舊軟體」的開發者（例如Microsoft這類仍在仰賴Carbon程式庫的開發者）。如果程式全用Cocoa寫，並且沒有任何組合語言及Endian-dependent code（例如用差勁的方法做UTF-8/UTF-16 conversion），那麼就算是重新編譯程式，應該也不算太難。當然，如果Apple的Rosetta能提供無縫轉換，那要花的力氣就更小了。當然，今天的宣佈，也都再再證明，先前OpenDarwin一直有x86版，以及Apple前陣子發表可以在 x86 的 Cygwin 及 Linux 上編譯的 CF-lite (Core Foundation Lite)，都是別有用心的......
+
+yllan: finally I could use rdtsc (Read The Timestamp instruction for x86, that's good for benchmark) instruction. 每次為了寫一個程式要放到兩個平台上跑要弄最佳化實在是有夠不爽的啊，現在Intel佔了大多數，要做底層的 optimization 也有比較多的資源，這樣子對於要搞 Performance 的人來說算是個好消息吧。在 mac 上好多東西都不好做，要量 Cycle 只能用 mach_absolute_time() 抓了以後，在按照不同的 CPU 形態去乘以一個 Constant 喔！否則必須用 mfspr 去讀一些 PMC ... 這個好像要進 kernel mode 又是 private API，我一直找不到好的解決方式（資源太少？）。但是最後，我還是要罵一句，按你老師哩！早不說晚不說，在這個節骨眼上才講，害我賠了多少青春歲月在一個數年後就掰掰的東西上
+
+(按:以上段落未經加密技術，乃原汁原文也) # flee
+
+whiteg：PPC散熱的問題大概一直很難解決吧，Apple這個作法，感覺上仍然是向一般使用者靠攏的決定。對於長期的Appler使用者來說，影響應該不大。隨著OS X轉換到Apple的使用者，程式工作者佔了不少，這些人對效能的需求或許也促使Apple必須下決定。這樣的話，希望我可以拋棄笨重的iBook/PowerBook，投向Toshiba的懷抱（心）。 
+
+yuwei:我隨著MacOSX的出現一起轉換到Mac的。從那之後，Mac在CPU上的表現一直都有些差強人意，直到G5的出現（個人認為），才稍微有點能與intel或AMD競爭的感覺，但是PPC的瓶頸再現，老實說這樣的過程就像在烏雲密佈的天空，好不容易看到一道小小的曙光，結果沒多久，又沒了...。這次將CPU換成了intel，蘋果應該多少在bios上下了許多工夫，我反而比較好奇OpenFirmWare

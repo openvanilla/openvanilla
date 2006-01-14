@@ -1,0 +1,56 @@
+= This is the official English webpage of !OpenVanilla
+
+== Status
+=== Projects
+* [OpenVanilla 0.7.1 http://rt.openfoundry.org/Foundry/Project/Download/?Queue=209] Released. (Aug 16, 2005)
+* [OV-Win32 Project Win32Issues] Started. (Aug 3, 2005)
+* [OpenVanilla for Debian GNU/Linux Project OVDebian] Started (June 29, 2005)
+=== Input Methods
+* Array
+* AutoPhonetic
+* Big5
+* Chewing
+* Generic
+* Phonetic
+* [New Roman Input Method http://zonble.twbbs.org/archives/2005_07/783.php]
+* Tibetan
+* XCIN
+** Cangjie
+** Bopomofo
+** Dayi3
+** Easy
+** EHQ
+** Four Corners
+** Iroha
+** Jyutping
+** KK
+** Pingying
+** Simplified Chinese Phonetic
+** Telecode
+* etc.
+=== Filters
+* etc.
+
+----
+
+== !OpenVanilla English Documentation
+* [OVManualEnUS]: !OpenVanilla Manual
+* [OpenVanillaStoryInEnglish]: Written by lukhnos for ["Share A Story" at Localisation Sprint http://wiki.localisationdev.org/cgi-bin/wiki.pl?ShareAStory]
+* [Testimonial]: If !OpenVanilla is one of your favorite or you are actually using !OpenVanilla for your work, please tell us your story. Let's spread the words of !OpenVanilla!
+
+----
+
+== !OpenVanilla Team
+OV Developers: [lukhnos http://lukhnos.idv.tw/], [gugod http://gugod.org/], [b6s http://b6s.blogspot.com/], [zonble http://zonble.twbbs.org/], [mjhsieh http://apple.sysbio.info/~mjhsieh/], [pektiong http://weblog.holopedia.net/pektiong/], [vgod http://blog.vgod.info], [kanru http://kanru.info/~kanru/blog/], WebMaster: [gugod http://gugod.org/], logo Design: [zonble http://zonble.twbbs.org/]，[Acknowledgements AcknowledgementsListEnUS]
+
+----
+
+!OpenVanilla is an open source software, you are free to download, compile, modify, distribute or use all !OpenVanilla programs, documents as you want. For detail terms and conditions of !OpenVanilla, please visit  [Artistic License http://creativecommons.org/licenses/by/2.0/tw/legalcode] page.
+
+http://photos2.flickr.com/2652540_0beecbb259_m.jpg
+http://photos1.flickr.com/2652537_fab564276c_m.jpg
+http://photos2.flickr.com/2652533_a1c0473923_m.jpg
+
+.infoblock
+{include: SideBar}
+.infoblock

@@ -1,0 +1,59 @@
+= !OpenVanilla 新增功能及bug修正紀錄（重點） =
+
+詳細的源碼修正歷程請參考 svn repository
+
+註記： + 新增;  = 調整;  - 修正;  ? 嘗試修正; ! 實驗計劃
+
+=== 0.7.0rc5 ===
+
+* = 提高 !OVLoader 穩定度（增加內部錯誤檢查）
+* = 修正酷音輸入法模組在某些機器上無法用空白鍵選字的問題
+* = 調整酷音輸入法模組的 build 方式，不再依賴 [=/usr/local/lib/libchewing.2.dylib]
+* = 修正行列輸入法在某些情況下無法打出字根組字的問題
+* = 傳統注音輸入法加入酷音式的標點符號輸入功能 (CTRL-1/CTRL-0 叫出符號列表，另外可用 CTRL-OPT-(key) 來輸入標點符號
+* - 修正第一次啟用輸入法時，訊息窗會「鬼閃」的情形
+
+=== 0.7.0rc4 ===
+
+* + 模組載入效能加速：全部回到 OS X 10.3.8 + gcc 3.3 編譯。vgod 重寫了 !OVIMGeneric, !OVIMArray, !OVOFReverseLookup 三個模組所共用的 CIN (.cin file parser)。
+* + 增加行列反查資料表
+* + 偏好設定增加快速鍵「清除」功能
+* + 增加偏好設定程式的icon
+* + 0.7.0rc4 初步網站文件
+* + 偏好設定程式中文化完成
+* + 顯示 About !OpenVanilla 對話盒
+* + POJ-Holo （河洛／閩南／台語／Holo話）輸入法移植完成
+* = 調整偏好設定介面
+* = 為酷音輸入法模組使用者提供[與 OpenVanilla 0.6.3 併存的解決方案 http://openvanilla.org/index.cgi?OVIMChewingUpgradeForOV063]
+* = 調整注音輸入法在 Caps Lock 按下時的行為：原來預設是出大寫英數字，現在則出小寫字（與其他輸入法行為一致化）
+* - 修正切換輸入法或滑鼠點擊其他地方時，編輯區的殘留字消失不見的問題
+* - 修正輸入法選單（雖然對 OV 不只是「輸入法選單」，但為了和系統名詞一致，還是叫「輸入法選單」或 "pencil menu）反應遲頓，常常要多選幾次才會切換輸入法的問題
+* - 修正在 OS X 10.3 裡無法使用模組快速鍵的問題
+* ? 修正訊息窗在 Finder 及 Safari 「亂閃」的問題
+* ? 取消 "atomic init lock" 的功能（原先也只有酷音會遇到 init failure ；如果您需要同時使用 !OpenVanilla 0.6.3 及 0.7.0rc4 ，請參考[這份文件 http://openvanilla.org/index.cgi?OVIMChewingUpgradeForOV063]的說明）
+
+=== 0.7.0rc3 ===
+
+* + 完整的使用者偏好設定
+* + vgod 重新撰寫了行列30模組，增加了「二級簡碼」的功能！
+* + 增加反查 output filter 可以查詢倉頡、注音及 POJ 組字字根（可拿來當 POJ 發音字典使用）
+* + 酷音
+* = !OVIMXcin 正式更名為 !OVIMGeneric
+* - 修正無法在 OS X 10.3 上編譯的問題
+* ! 初步完成[使用 UIM 的日文輸入法 http://www.flickr.com/photos/lukhnos/14197582/]
+* (待補)
+
+=== 0.7.0p2 (technical preview release 2) ===
+
+* + 酷音輸入法移植到 0.7.0 上
+* + !OVIMXcin 移植到  0.7.0 上
+* + 完成 !OVDisplayServer （使用 Objective-C distributed object model），解決在 Dashboard 上無法顯示選字窗的問題
+* + zonble 完成了第一批 output filters ：全形半形轉換、簡繁轉換，試作版有 Unicode查詢、摩斯電碼、Wikipedia 符號轉換等，vgod 寫了 HTML entitiy 轉換
+* + !OpenVanilla.h (!OpenVanilla Framework) feature freeze
+* - 修正自 OpenVanilla 0.6.0 以來在 Carbon Vim, FireFox, NeoOffice/J 等軟體上的輸入問題
+* ! 開始實驗 client/server 架構
+
+=== 0.7.0p1 (technical preview release 1) ===
+
+* + 初步完成 OV 0.7.0 架構，OV 核心部份全部改由 Cocoa/Objective-C++ 重寫："!CocoaVanilla" 程式庫
+* + 將 Apple text service component 分離由 C/Carbon 寫的 !OVInit.bundle ，由 !OVInit.bundle 載入由 Objective-C++ 寫的 !OVLoader.bundle ，增加輸入法穩定度、加快 !OVLoader 開發及除錯流程

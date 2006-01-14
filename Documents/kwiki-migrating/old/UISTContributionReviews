@@ -1,0 +1,253 @@
+== Poster (2 pages)
+------------------------ Paper 168, Review 1 ------------------------
+
+Title: OpenVanilla  A Non-Intrusive Plug-In Framework of Text Services
+
+Reviewer:           external
+
+Overall Rating
+
+   2  (Probably reject: I would argue for rejecting this paper.)
+
+Expertise
+
+   1  (No Knowledge)
+
+The Review
+
+   This paper proposes extending Input Method techniques beyond Asian
+   language character sets, and propose they could be useful for services
+   such as a "check as you type" spell checker. It's not clear how this
+   differs from predictive text-entry techniques such as T9, which is used
+   for text entry in English on mobile phones. The description of
+   OpenVanilla, the authors' Input Method platform, is not very detailed,
+   and so it is unclear how OpenVanilla differs from and improves upon
+   existing Input Method API's such as the Java Input Method Framework or
+   the Microsoft Global Input Method Editors.  The abstract mentions that
+   OpenVanilla enabled creating a Tibetan IM module using only 300 lines of
+   code, but offers no comparison as to how many lines of code it takes to
+   create that module with other IM APIs, so I can't tell how much of an
+   improvement their system offers. I would suggest that the authors clarify
+   the distinguishing factors between their platform and existing platforms,
+   and that the authors clarify the distinction between their application
+   vision and existing predictive text-entry applications. 
+
+------------------------ Paper 168, Review 2 ------------------------
+
+Title: OpenVanilla  A Non-Intrusive Plug-In Framework of Text Services
+
+Reviewer:           external
+
+Overall Rating
+
+   3  (Borderline: Overall I would not argue for accepting this paper.)
+
+Expertise
+
+   2  (Passing Knowledge)
+
+The Review
+
+   This work considers a problem often forgotten by the Western world: how
+   to handle input for languages not based on the Roman alphabet. I applaud
+   the researchers' efforts to make it easier to experiment with new
+   keyboard-based input methods, and would really like to see this work get
+   broader exposure in the West.
+
+   As the authors point out, given a simplified interface to developing new
+   input methods, one could more easily experiment with alternative keyboard
+   layouts, new methods for inputting text in any language (including Asian
+   and script-based languages), and offer other, interesting services prior
+   to the inputted text arriving at the application. There are a couple of
+   really compelling examples in the paper: the Klingon module is great, and
+   the synonym candidate list would be really useful in some situations.
+   Combined with a customizable keyboard, like the new LED-based keyboard
+   (http://www.artlebedev.com/portfolio/optimus), this system could provide
+   a useful vehicle for research in input methods.
+
+   The ideas in this paper are great, but for this audience, it would be
+   helpful to have a bit more detail regarding the actual implementation of
+   the system. For example, how does one create a new module, or how does it
+   tie into the operating system.
+
+   While my knowledge of this domain is scant, the authors may nonetheless
+   wish to look at Jen Mankoff's OOPS system that helped interpret user
+   input (http://doi.acm.org/10.1145/633292.633339 and
+   http://www.cc.gatech.edu/fce/people/jmankoff/thesis.pdf).
+
+------------------------ Paper 168, Review 3 ------------------------
+
+Title: OpenVanilla  A Non-Intrusive Plug-In Framework of Text Services
+
+Reviewer:           external
+
+Overall Rating
+
+   3  (Borderline: Overall I would not argue for accepting this paper.)
+
+Expertise
+
+   1  (No Knowledge)
+
+The Review
+
+   OpenVanilla aims at simplifying the creation of input methods for
+   ideograph-based languages. The authors propose to also use the framework
+   to develop other text services, such as a dictionary, which makes
+   OpenVanilla a possible candidate for various developers and end-users.
+   However, it is not clear how this framework compares to already existing
+   frameworks, and it should be further investigated how well OpenVanilla is
+   received by the developer community.
+
+   The OpenVanilla icon on the left side of the poster makes the overlaid
+   text difficult to read, and the thin red dotted lines on the right side
+   are barely noticed.
+
+
+== Doctoral Symposium (4 pages)
+------------------------ Paper 150, Review 1 ------------------------
+
+Title: Reintroducing Input Method  A Non-Intrusive Plug-In Framework of Text Services
+
+Reviewer:           external
+Overall rating:     3  (scale is 1..5; 5 is best)
+
+Overall Rating
+
+   3  (Borderline: Overall I would not argue for accepting this paper.)
+
+Expertise
+
+   4  (Expert)
+
+The Review
+
+   This paper describes the OpenVanilla text input method framework and
+   makes a case for using input frameworks of this sort for a larger set of
+   useful tasks than they were envisioned for. 
+
+   I found the notion of transparently pluggable input transformation or
+   filtering modules of the sort being proposed here an interesting idea. 
+   It seems to have some potential to be developed into a sort of loosely
+   coupled set of input-oriented services that could be mixed and matched by
+   the user to compose new functionality.  
+
+   However, I didnt feel like the ideas were developed quite far enough to
+   see if the concept would really offer significant advantages or suffer
+   from significant drawbacks.  It also seemed that the OpenVanilla system
+   as described doesnt really appear to live up to the more general promise
+   of the concept  it seems like a great system for managing a flexible set
+   of text input methods, but has limitations that keep it from going much
+   outside that.  Most notably, the paper points out that for simplicity in
+   its primary function (an important goal) it explicitly rules out dealing
+   with pointing (mouse) input, more sophisticated candidate window
+   interfaces, or generally GUI interfaces of any sort.  Yet it would seem
+   like many of the more interesting and innovative possibilities raised by
+   this approach would need exactly those things to work well. 
+
+   One concern I have about the overall concept, which I think probably
+   needs to be addressed as this work goes forward, is whether the strong
+   separation (and hence easy and transparent plugability, which seems to
+   offer the main advantage of this approach) also represents too much of a
+   drawback.  In particular, it would seem to preclude the input modules
+   from making use of any information about the state of the interface it is
+   working with.  This seems like a significant general limitation.  I think
+   the interesting part of this work might be in demonstrating clever ways
+   to get around this limitation without loosing the inherent benefits.
+
+   Detailed comments.
+
+   Note: for Doctoral Symposium submissions there should really just be one
+   author (the Ph.D. student). 
+
+   There are a number of grammatical problems with the paper.  This is not
+   surprising since the author is likely not a native English speaker.  This
+   is not a big problem and shouldnt interfere with publication of this
+   work.  However, before publication, a little editing help from a native
+   speaker would probably be needed.  One place where this does have a
+   noticeable impact is in the title and first sentence (both rather
+   critical to the reception of the paper).  In both cases, I believe input
+   method should really be input methods.  Because of this had trouble
+   understanding what this paper was really going to be about until I got to
+   the last sentence in the first paragraph of the introduction.
+
+   p.2 dead-key problems Its not clear to me what this is referring to.
+
+   
+ spelling checker will be born.  It would seem like interesting
+   functionality such as this is not always going to be a simple input
+   filtering, transformation, or interface generation process.  Its
+   probably going to need to interact with the user in fairly arbitrary
+   ways, and in a lot of cases will really need to make use of at least some
+   simple state information from the application it is attached to.  For
+   example, I could imagine an input filter in this framework which provided
+   a macro capability (it would record some inputs, and play them back in
+   response to shortcut key presses).  This can be done at some level
+   without knowing anything about the application, but to be really
+   effective it might really be well served by being able to tell simple
+   things like whether particular menu items it was invoking were currently
+   disabled.
+
+   
+ given that problems of keyboard is still 
+ I wasnt able to work out
+   what this sentence was saying.
+
+   Introducing OpenVanilla  At this point you are almost half way through
+   the text.  You might be better served by introducing your tool and a
+   short description of why its interesting considerably earlier.
+
+   p.3 Because there was an issue 
+  This does not bode well for claims of
+   platform independence for your tool.
+
+   p.4 References  There arent many references here, and overall this
+   work has not really been tied back to prior work on input models (more
+   typically associated with GUI toolkits), which I think may be quite
+   relevant to this work.
+
+------------------------ Paper 150, Review 2 ------------------------
+
+Title: Reintroducing Input Method  A Non-Intrusive Plug-In Framework of Text Services
+
+Reviewer:           external
+Overall rating:     2  (scale is 1..5; 5 is best)
+
+Overall Rating
+
+   2  (Probably reject: I would argue for rejecting this paper.)
+
+Expertise
+
+   2  (Passing Knowledge)
+
+The Review
+
+   A good overview of the text input method field, and of the OpenVanilla
+   framework. The idea of using support for input methods to implement text
+   services like spellcheck, dictionary lookup, etc, is intriguing, but
+   merely mentioned in the paper. Otherwise the paper describes a sound and
+   seemingly complete engineering project. However it does not have a strong
+   research contribution.
+
+------------------------ Paper 150, Review 3 ------------------------
+
+Title: Reintroducing Input Method  A Non-Intrusive Plug-In Framework of Text Services
+
+Reviewer:           external
+Overall rating:     2  (scale is 1..5; 5 is best)
+
+Overall Rating
+
+   2  (Probably reject: I would argue for rejecting this paper.)
+
+Expertise
+
+   3  (Knowledgeable)
+
+The Review
+
+   I found the paper difficult to read.  For example, the shorthand IM
+   generally refers to Instant Message and Instant Messaging.  My greatest
+   concern is that I do not understand the research contribution of this
+   work in comparision to the engineering effort.

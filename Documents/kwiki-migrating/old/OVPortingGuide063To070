@@ -1,0 +1,46 @@
+= 如何把移植 0.6.3 的輸入法移植到 0.7.0 上 =
+
+== OVInputMethod class 部份 ==
+
+* 原來 int identifier(char *s) 要改成 const char* identifier() ，程式內容請直接回傳一個字串，例如 { return "OVIMExample" }
+* 原來 int name(char *locale, void *s, OVEncoding *enc) 取消，改成 const char *localizedName(const char *locale) ，內容也請依 locale 的標籤回傳一個字串
+* int initialize() 方式改變，現在的形式為 int initialize(OVDictionary *moduleCfg, OVService *srv, const char *modulePath)，如果需要另外寫入檔案，請呼叫 srv->userSpacePath() 取得可寫入的空間 (0.7.0p2 暫定為 /tmp）
+* 取消 terminate()
+* 取消 deleteContext()
+
+== OVInputMethodContext 部份 ==
+
+* 原來名字叫 OVIMContext ，已改名
+* 取消 activate 跟 deactivate 兩個函數
+* 增加 void start(OVBuffer*, OVCandidate*, OVService*), void clear(), void end() ，定義為：start 為輸入法 context 一開始的初始設定（輸入法可以在此時顯示訊息或丟一些東西進 composing buffer 裡），clear 為強迫清除輸入法狀態，與 0.6.3 的 clear() 功能同，end() 表示輸入法結束，例如使用者切換了輸入法
+
+== OVService 部份 ==
+
+* 增加 notify 可以顯示訊息（例如「注音文退散！」等）
+* 增加 userSpacePath() 傳回一個有寫入權限的 path name，該 path 末尾已聽添加了 path separator (/) ，因此只要直接 strcat 或 sprintf 黏上自己需要的檔名即可存取
+* 增加 pathSeparator() 回傳目前 OS 的 path separator
+* 增加 toUTF8 及 fromUTF8 兩個轉碼函式，前者是將某內碼轉成 UTF-8，後者是將 UTF-8 轉成需要的內碼。回傳的字串記憶體都為 OVLoader 所擁有，請不要任意 free 掉
+* 增加 UTF16ToUTF8 及 UTF8ToUTF16 兩個轉碼函式，此處的 UTF-16 byte order 為 machine order，亦即在 Big Endian 機器上即為 Big Endian
+
+== OVCandidate 部份 ==
+
+* 原名 OVTextBar，已改名
+* 原來 OVTextrBar::append() 可以在加入字串時指定編碼，已取消，請先利用 OVService 之轉碼功能轉成 UTF-8 再丟進 append 裡
+
+== OVBuffer 部份 ==
+
+* 原來 OVTextrBar::append() 可以在加入字串時指定編碼，已取消，請先利用 OVService 之轉碼功能轉成 UTF-8 再丟進 append 裡
+
+== OVDictionary 部份 ==
+
+* setInt, getInt 改名為 setInteger, getInteger
+* getIntDefault 改名為 getIntegerDefault
+
+== OVKeyCode 部份 ==
+
+* 取消 upper(), lower(), isPtintable(), isAlpha(), isNumeric() 等可用 C 函式替代的 member methods
+* 取消 isCode
+* 增加 isFunctionKey
+
+
+ 

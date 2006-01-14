@@ -1,0 +1,18 @@
+Developing free software mainly depends on the contributions from the community. We truly appreciate those precious efforts helping us developing OpenVanilla from following institutions or organizations:
+
+* Opensource Foundry, Academia ( http://openfoundry.org/; http://rt.openfoundry.org ) we thank you for providing us wonderful project management tools and project files storage.
+* Elixus ( http://elixus.org ), we thank you for providing website hosting.
+* svk project ( http://svk.elixus.org ) members, we thank you for your wonderful version management tool and you guys' kindly educating us working with version control systems.
+* We deeply appreciate the news coverages from these lovely mac community websites: Frostyplace (http://www.frostyplace.com/), OIKOS (http://www.oikos.com.tw/), SinoMac (http://www.sinomac.com/)、Chinese Mac (http://www.yale.edu/chinesemac/) and more.
+* New Chewing Project (http://chewing.csie.net/news.html) for their sharing chewing code base and wonderful collaboration.
+* 行列科技（http://www.array.com.tw/）for providing 行列 input method table
+* Mr. Christopher Walker for putting the Tibetan input method in the Tibetan Portal ( http://www.tibetanportal.com/ ) also with a short review.
+Meanwhile, we OpenVanilla members appreciate these friends for testing input methods or tipping us the specification of input methods:
+* guoweiok for providing a detail table of simplified Chinese phrase sets.
+* Friends from channel #osxchat of !IRCNet (we are now moving to !FreeNode), autrijus, hcchien, whiteg, momizi, etc. for a lot of nice advices and supports all the way. 
+* momizi for advices from the day one and helping working out the table for Japanese Kana characters.
+* Autrijus for kicking start the development of OV 大易 input methods and later it became OVIMXcin generic input method module.
+* ijliao and xeonchen for helping intensively testing OV's 行列 input method therefore we have a stable version of this input method module. gontera（老刀）for providing Unicode version of 行列 data and also testing the 行列 module.
+* crossbone for merging multiple versions of 倉頡 and 速成 input method data table (including 5th generation of 倉頡, 7th generation of 快倉, 3rd generation of 倉頡 with revised bopomofo and 順序速成).
+* vgod and gontera for completing 行列 specification implement
+Thank you for your supports!

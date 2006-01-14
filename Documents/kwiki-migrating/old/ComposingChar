@@ -1,0 +1,18 @@
+組合字問題：
+* 會面對組合字問題的OV輸入法
+** [OV-Tibetan OVIMTibetan]、[OV-POJ http:?OVIMPOJ]、[OV-POJHakka http:?OVIMPOJ]
+
+== 甚麼時候會有組合字問題 ==
+* 當你想要使用 UNICODE 來表示某種文字，而這種文字被 UNICODE 標準認為需要用構字式 (combining sequence) 表示，就會遇到這個問題。為甚麼不所有的字都用 Pre-compose 的方式？因為這樣可能會面臨組合爆炸的問題，因為可能性太多了。
+
+* 有偷懶的方式嗎？有，可使用 UNICODE PUA (Private Use Area) 來放你要的字，但是這樣跟不用 UNIOCDE 的差別在那裡？
+
+* 或者你可以寫一個特別的程式，然後這個程式在遇到這種語言的時候，可以去作正確的處理。（累）
+
+* 比較可行的作法是使用一個 Smart font 加上會正確 render smart font 的文字處理引擎，然後所有軟體使用這個引擎和這字型，這中間漏一個都不行。
+
+* 在 Mac OS X 上面有 AAT 這種字型技術，但是大部份的軟體都沒有使用這個引擎，所以就算你有支援 AAT 的字型，可能只在 Textedit 上面有用。
+
+* 在 Windows 上常用的有 opentype 字型技術，引擎叫做 uniscribe。所以如果你有支援藏文的 opentype 字型，然後你的 uniscribe 夠新 (>office2003 or XP SP2) 你大概可以在office 和 IE 內正確顯示。還有，如果你要用的文字系統 uniscribe 還沒有，或是沒有完全支援，那，請慢慢等，看 MS 的良心。
+
+* 另有一個 opensource 的 graphite 字型技術，可用的軟體還不多，但是其實很強，又開放。有一些 beta 版支援 graphite 的 mozilla@windows,linux，現在有支援 graphite 的openoffice(alpha)，然後我們可以依自己的需求經由高階語言把不聰明的字型加上 graphite 支援。也有 integrate graphite into pango 的計畫。總之，自由開放軟體的好處。

@@ -1,0 +1,10 @@
+== Report A Bug 問題回報
+
+如果您發現 OV 有任何問題，或任何建議，希望能夠有怎樣的改進，您可以使用「自由軟體鑄造場」的 [RT（RequestTracker） http://rt.openfoundry.org/Foundry/Project/Tracker/?Type=defect&Queue=209]回報系統反應：
+
+* [如何記錄 crash report HowToSaveCrashReport]
+* [如何使用 OpenFoundry 的 RT 系統 FilingTicketsAtOpenFoundry]
+
+而在您回報錯誤時，希望您可以盡可能描述您所遇到的狀況，例如您在那個應用程式中、使用OV輸入法輸入了怎樣的內容出現了問題，而如果酷音輸入法造成應用軟體當機，OS X 會提供應用程式當掉時的錯誤訊息，詢問您是否要當機紀錄回報給蘋果，我們也希望您能夠保留這份紀錄，提供給我們參考。
+
+如果您熟悉使用IRC網路聊天室的話，您也可以在IRC上找到 OV 的發展者，我們經常會出沒在 irc.seed.net.tw 的「#osxchat」頻道裡。而各項最新的消息，也會發表在「#osxchat」頻道的專屬網誌：http://osxchat.blogspot.com/

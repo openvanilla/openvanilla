@@ -1,0 +1,100 @@
+* Welcome to !OpenVanilla
+** What is !OpenVanilla?
+** Design Philisophy
+
+* Current Status of OpenVanilla
+** Loaders of different platforms
+** A Wide Range of Input Methods and Output Filters
+** Development Roadmap
+
+* Reasons to Become a Developer
+** Customization possibilities
+** When to Scratch Your Back
+** Before you start
+
+* How to build !OpenVanilla from source code
+** OS X
+** Linux/FreeBSD
+** Windows (limited single-IM support for MS Word)
+
+* Becoming a Developer 
+** File places and deployment concerns
+*** File structure on OS X
+*** File structure on FreeBSD/Linux
+** Anatomy of an OV Module: loadable library vs. modules
+** How to write an input method
+** How to write an output filter
+** Dynamically loaded library with more than one module
+** Packaging issues
+*** Table-based or database-based?
+*** Is your data table distributable?
+*** OS X concerns
+**** For OS X: .bundle or .dylib?
+**** gcc 3.3 or gcc 4.0?
+**** Using PackageMaker on OS X
+
+* Do's and Don't's in the Development of OV Modules
+
+* Other development possilities
+
+* API guide
+** Header files
+** OVObject
+** OVKeyCode
+** OVBuffer
+** OVCandidate
+** OVService
+** OVDictionary
+** OVModule
+** OVInputMethod
+** OVInputMethodContext
+** OVOutputFilter
+** Macros and constants
+** Naming conventions
+** API Deisng Principles
+** C++ Caveats
+*** Memory management/object ownership issues
+
+* Other reusable codes
+** OVSQLite3, a SQLite3 wrapper
+** OVCIN, a .cin table look-up class
+** OVCandidateList, a candidate event handler
+** OVPhoneticLib, syllable class for BPMF processing
+** CVEmbeddedLoader, a lightweight loader for OS X
+
+* OpenVanilla Loaders
+** OVLoaderOSX
+*** The initialization process
+*** Configuration management
+*** Menu/hotkey management
+*** System stability designs
+** OVLoader-SCIM
+*** How the bridging is done
+*** Configuration management issues
+** If You Want to Write a New Loader
+
+* Core Team Members' Modules
+** OVIMPhonetic
+** OVIMPhoneticSQLite
+** OVIMGeneric
+** OVIMGenericSQLite
+** OVIMArray
+** OVIMChewing
+** OVIMTibetan
+** OVIMPOJ-Holo
+** OVIMUIM (experimental)
+** OVOFFullWidthCharacter
+** OVOFTC2SC, OVOFSC2TC
+** OVOFAntiZhuyinWen
+
+* Other Applications
+** OVDisplayServer.app
+** OVPreferences.app
+
+* Documentation Concerns
+
+* Appendix 1: Design Philosophy
+* Appendix 2: A Plain-Vanilla Version Control Primer
+* Appendix 3: The Minimal C++ You Need to Know
+* Appendix 4: The Minimal Objective-C You Need to Know (for OS X)
+* Appendix 5: Glossary and Terminologies

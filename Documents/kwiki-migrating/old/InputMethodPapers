@@ -1,0 +1,82 @@
+&CFID貼這個實在很累，不知道能不能有什麼 !BibTeX Kwiki plugin 之類的？（好像也不會比較方便）
+
+== 已產品化的智慧型輸入法
+* /[Chinese parsing in a phoneme-to-character conversion system based on semantic pattern matching http://iasl.iis.sinica.edu.tw/webpdf/paper-1995-Chinese_Parsing_in_a_Phoneme-to-Character_.pdf]/ : 自然輸入法
+* /[Mining Pinyin-to-Character Conversion Rules From Large-Scale Corpus: A Rough Set Approach http://ieeexplore.ieee.org/iel5/3477/28545/01275519.pdf]/ : 微軟拼音（及不知道那一版的 Mac 注音）。作者是哈爾濱工大[ITNLP Lab http://www.insun.hit.edu.cn/]的[王曉龍 http://cs.hitsz.edu.cn/wangxiaolonghomepage.htm]。
+* /[Bringing text input beyond the desktop http://portal.acm.org/citation.cfm?id=633324&coll=Portal&dl=ACM&CFID=46660646&CFTOKEN=50330120]/ : T9
+
+== Language Model (n-gram)
+=== Roni Rosenfeld
+* http://www.cs.cmu.edu/~roni/publication_list.html 的 Statistical/Machine Learning Methods in Speech and Language Processing 部分。
+** [Two decades of Statistical Language Modeling: Where Do We Go From Here? http://www.cs.cmu.edu/~roni/papers/survey-slm-IEEE-PROC-0004.pdf]
+* 延伸閱讀
+** [Maximum Entropy http://www.cs.cmu.edu/~aberger/maxent.html]
+** [Conditional Random Fields http://www.inference.phy.cam.ac.uk/hmw26/crf/]
+
+=== Microsoft Research
+* [2005 Linear Discriminant Model for Information Retrieval http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=1463]
+* [2005 Sentence-Level MT evaluation without reference translations: beyond language modeling http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=1426]
+* [2004 Capturing long distance dependency for language modeling: an empirical study http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=1316]
+* [2004 Dependence language model for information retrieval http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=1332]
+* [2003 Improved Source-Channel Models for Chinese Word Segmentation http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=1294]
+* [2002 Using Headword Dependency and Predictive Clustering for Language Modeling http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=1015]
+* [2000 Structure and Performance of a Dependency Language Model http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=683]: ME language model! (Roni Rosenfeld 是共同作者之一)
+* [2000 A unified approach to statistical language modeling for Chinese http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=947]: 這裡面也有 pinyin-to-character 的實驗數據。
+* [2000 A new statistical approach to Chinese pinyin input http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=948]
+* [2000 Putting it all Together: Language Model Combination http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=757]
+** [2000 State of the Art in Language Modelling http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=671]: slides，作為 language model 入門教材相當不錯。
+* [2000 Discriminative training on language model http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=951]
+* [2000 N-gram distribution based language model adaptation http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=952]
+* [2000 Distribution-based pruning of backoff language models http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=942]
+* [2000 A Structured Language Model http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=682]
+* [2000 Exploiting Syntactic Structure for Language Modeling http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=684]
+* [2000 Exploiting Syntactic Structure for Natural Language Modeling http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=669]
+* [2000 Language model compression by predictive clustering http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=953]
+* [2000 Lexicon optimization for Chinese language modeling http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=954]
+* [1999 Spelling correction in pinyin input http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=944]
+* [1999 Structured Language Modeling for Speech Recognition http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=686]
+* [1999 Recognition Performance of a Structured Language Model http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=688]
+* [1999 Refinement of a Structured Language Model http://research.microsoft.com/research/pubs/view.aspx?type=Publication&id=685]
+
+== Misc
+* /[Twiddler typing: one-handed chording text entry for mobile phones http://portal.acm.org/citation.cfm?id=985777&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]/ : 手機的追音 =_=
+* [A New Statistical Approach to Chinese Pinyin Input http://www.cs.mu.oz.au/acl/P/P00/P00-1031.pdf]
+* [A Phoneme-based Chinese Input Method with Low Conflict Code Rate http://ejournals.wspc.com.sg/ijcpol/13/preserved-docs/1304/S0219427900000211.pdf]
+* [An Intellectual Chinese Input System for Mobile Phones Based Upon Chinese Phonetic Symbols http://ejournals.wspc.com.sg/ijcpol/15/preserved-docs/1504/S0219427902000741.pdf]
+* [Design of a Chinese Search Engine Based on Homophonic Chinese Character Encoding http://ejournals.wspc.com.sg/ijcpol/15/preserved-docs/1504/S021942790200073X.pdf]
+* [A stochastic finite-state word-segmentation algorithm for Chinese http://portal.acm.org/citation.cfm?id=239900&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [A flexible Chinese character input scheme http://portal.acm.org/citation.cfm?id=120803&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [An IBM-PC environment for Chinese corpus analysis http://portal.acm.org/citation.cfm?id=991989&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Towards linguistic knowledge discovery assistants: application to learning lexical properties of Chinese characters http://portal.acm.org/citation.cfm?id=991935&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [A self-learning system for the Chinese characters http://portal.acm.org/citation.cfm?id=991216&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [An efficient accessing technique of Chinese characters using Boshiamy Chinese input system http://portal.acm.org/citation.cfm?id=355223&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [An iterative algorithm to build Chinese language models http://portal.acm.org/citation.cfm?id=981882&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [An evaluation of mobile phone text input methods http://portal.acm.org/citation.cfm?id=563993&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [TNT: a numeric keypad based text input method http://portal.acm.org/citation.cfm?id=985773&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Text input for mobile devices: comparing model prediction to actual performance http://portal.acm.org/citation.cfm?id=365300&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Device independent text input: a rationale and an example http://portal.acm.org/citation.cfm?id=345262&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Predicting text entry speed on mobile phones http://portal.acm.org/citation.cfm?id=332044&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Comparison of elderly and younger users on keyboard and voice input computer-based composition tasks http://portal.acm.org/citation.cfm?id=22372&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [A comparison of two input methods for keypads on mobile devices http://portal.acm.org/citation.cfm?id=1028030&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [An assignment of key-codes for a Japanese character keyboard http://portal.acm.org/citation.cfm?id=990219&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Two-handed input using a PDA and a mouse http://portal.acm.org/citation.cfm?id=332405&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Model for non-expert text entry speed on 12-button phone keypads http://portal.acm.org/citation.cfm?id=985737&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Metrics for text entry research: an evaluation of MSD and KSPC, and a new unified error metric http://portal.acm.org/citation.cfm?id=642632&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Kana-kanji conversion system with input support based on prediction http://portal.acm.org/citation.cfm?id=990870&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Chinese input with keyboard and eye-tracking: an anatomical study http://portal.acm.org/citation.cfm?id=365298&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Reassessing current cell phone designs: using thumb input effectively http://portal.acm.org/citation.cfm?id=766081&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Human-computer interaction research and practice in China http://portal.acm.org/citation.cfm?id=637867&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Bringing text input beyond the desktop http://portal.acm.org/citation.cfm?id=633324&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [A model for input and output of multilingual text in a windowing environment http://portal.acm.org/citation.cfm?id=120801&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Relaxing stylus typing precision by geometric pattern matching http://portal.acm.org/citation.cfm?id=1040867&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Large scale collocation data and their application to Japanese word processor technology http://portal.acm.org/citation.cfm?id=980961&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Bring socio-cultural contexts into activities: a localization study of mobile text messaging use http://portal.acm.org/citation.cfm?id=976269&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Cultural usability: a localization study of mobile text messaging use http://portal.acm.org/citation.cfm?id=765921&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Performance of menu-augmented soft keyboards http://portal.acm.org/citation.cfm?id=985746&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Alphabetically constrained keypad designs for text entry on mobile devices http://portal.acm.org/citation.cfm?id=1055002&coll=Portal&dl=ACM=41484562&CFTOKEN=53848066]
+* [Human factors and linguistic considerations: keys to high-speed Chinese character input http://portal.acm.org/citation.cfm?id=990225&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Six-digit coding method http://portal.acm.org/citation.cfm?id=78609&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [TreePredict: improving text entry on PDA's http://portal.acm.org/citation.cfm?id=634323&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [Abbreviated text input http://portal.acm.org/citation.cfm?id=604103&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [TiltType: accelerometer-supported text entry for very small devices http://portal.acm.org/citation.cfm?id=572013&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]
+* [LetterWise: prefix-based disambiguation for mobile text input http://portal.acm.org/citation.cfm?id=502365&coll=Portal&dl=ACM&CFID=41484562&CFTOKEN=53848066]

@@ -1,0 +1,77 @@
+* Server.cpp
+ #include <iostream>
+ #include <fstream>
+ #include <string>
+ 
+ // for umask() and mkfifo()
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ 
+ using namespace std;
+ 
+ int main()
+ {
+         umask(0);
+         int returnValue = mkfifo("/tmp/pipe.0", 0666);
+ 
+         if(returnValue == 0)
+         {
+                 ifstream in("/tmp/pipe.0");
+                 ofstream out("/tmp/pipe.1");
+                 string outputString("");
+                 while(in >> outputString)
+                 {
+                         cout << "> " + outputString << endl;
+                         out << "echo_from_server:" + outputString << endl;
+                         if(outputString == "/quit")
+                                 break;
+                 }
+                 in.close();
+                 out.close();
+         }
+         else
+                 cout << "mkfifo failed." << endl;
+ 
+         return 0;
+ }
+
+----
+
+* Client.cpp
+ #include <iostream>
+ #include <fstream>
+ #include <string>
+ 
+ #include <sys/types.h>
+ #include <sys/stat.h>
+
+ using namespace std;
+ 
+ int main()
+ {
+         umask(0);
+         int returnValue = mkfifo("/tmp/pipe.1", 0666);
+ 
+         if(returnValue == 0)
+         {
+                  string inputString("");
+                  string echoString("");
+ 
+                  ofstream out("/tmp/pipe.0");
+                  ifstream in("/tmp/pipe.1");
+                  while(cin >> inputString)
+                  {
+                          out << inputString << endl;
+                          in >> echoString;
+                          out << echoString << endl;
+                          if(inputString == "/quit")
+                                  break;
+                  }
+                  out.close();
+                  in.close();
+         }
+         else
+                 cout << "mkfifo failed." << endl;
+ 
+         return 0;
+ }

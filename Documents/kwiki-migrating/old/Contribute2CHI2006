@@ -1,0 +1,104 @@
+== Abbreviations
+* ADA: Apple Design Award
+* SIGCHI: ACM's Special Interest Group on Computer-Human Interaction
+* CHI: Annual SIGCHI Conference: Human Factors in Computing Systems
+* IIIMF:  Internet Intranet Input Method Framework
+* Java IMF: Java Input Method Framework
+* MVC: Model-View-Controller Design Pattern
+* MS DDK: Microsoft® Windows® Driver Development Kit
+* MS TSF: Text Services Framework
+* OV: !OpenVanilla
+* UIST: Annual ACM Symposium on User Interface Software and Technology
+
+== Motivation
+* 如同 Contribute2UIST 裡提過的，希望藉由論文來提昇輸入法在英語系社會的能見度，進一步使其成為國際化的領域。
+** mjhsieh: Through publication and presentation, we want to raise the awareness of text entry methods/framewroks/architectures from English speaking audiences. Further more, we'd like to see the field of text entry application can be a part of international academic society.
+* 作為 OV 本身文件的一部分。
+* 有助於釐清參加 Apple Design Award (ADA) 所需的規格。
+
+== Target
+* 草稿會放在 Draft4CHI2006 裡。
+* 承襲 Contribute2UIST 的經驗，將 PosterProposal4UIST 的內容修改得更加完備，同時可作為 !OpenVanilla 文件的一部分。
+* -目標放在 CHI Notes，請參考 http://www.chi2006.org/call/notes.php#examplenotes ，應該不難看出選擇這個文體的原因。-
+** -而且 CHI Notes 的 co-chairs 一個是日本人，一個是 Microsoft 的，好像比較有利？-
+** 如果時間不允許，2005/10/14 和 2006/1/13 還有機會，但重要性就不如 2005/9/23 這一類來得高 (最直接的影響是會比較不容易申請到旅費和註冊費)。
+** 看來時間是太趕了，改為以 2005/10/14 那一波為目標。這個梯次屬於 /community/ 性質，格式是 [conference extended abstract http://www.chi2006.org/ceaf.php]。
+*** http://www.chi2006.org/call/panels.php
+*** http://www.chi2006.org/call/experience.php
+*** http://www.chi2006.org/call/hcioverviews.php
+*** http://www.chi2006.org/call/interactivity.php
+
+== Plan
+* -以英語相關的實作範例證明 OV 的 l10n 能力不限於亞洲語言。- （既然 mjhsieh 指出這說法有問題，就改掉吧！）
+** mjhsieh: I'm kind of lost in the definition of localization of a text entry framework. If we are talking about the UI between the framework and the users, then yes, we have l10n issues. However if we are talking about the issues of the text entry frameworks, I think we only need to worry about internationalization.
+** b6s: you're right, this should be discrimitated to i18n.
+* 寫出「還沒做但是做得到的事」，而不是寫「已經做完的事」
+** *加強 !OVOutputFilter 的部分*。
+*** 摩斯電碼、簡繁轉換的易用性與系統支援能力。（這個理由好像還不夠 sexy）
+**** mjhsieh: The problem would probably rather be how we are going to access the full ability of users operation. For instance, how are we going to estimate the theoretical average speed of an input method.
+**** [Theoretical and Architectural Support for Input Device Adaptation http://guir.cs.berkeley.edu/pubs/cuu2003/iat-cuu2003.pdf] could be one of references for estimation and evaluation. And [Fitts' Law http://en.wikipedia.org/wiki/Fitts_Law] is about usability. But I'm afraid OV actually does not touch these areas yet.
+*** 現在還有智慧型歐語引號 filter。
+**** mjhsieh: We probably need to ask clkao to ask his friends writing a testimonial.
+**** b6s: That would be great!
+*** 多想一點有趣的，未來能做的東西。
+**** b6s: 我個人想要有 HTML anchor tag 自動標記功能，遇到 named entity（使用者標過的或是自動判斷出來的）就想辦法加上去。唔，應該要不限 HTML anchor tag，也可以讓使用者自訂成 wiki syntax 之類的。
+**** b6s: 另外做個 Google suggest/Yahoo Instant Search 也不錯。
+** 這應該也對參加 ADA 有幫助。
+** 很多 HCI 領域做 Text-Entry 的論文都會引用 [Fitts' Law http://en.wikipedia.org/wiki/Fitts_Law]，不過好像用不上...
+* 闡述使用 OV 幫助 Text Entry 研究的方式。 (mjhsieh: Describe how OV can be helpful for the research on text entry.)
+** [Architecture for Personal Text Entry Methods http://www.se-hci.org/bridging/interact/p1-8.pdf] 對於說明 !OpenVanilla /*Framework*/ 很有參考價值，在論文標題上也有啟發，用 /*Architecture*/ 或許能跟其他的 input method framework 有所區隔。
+*** 摘要裡就提到「重新學輸入法成本太高，所以使用者會希望在任何環境下都能用同樣的輸入法」，是個不錯的說法。
+**** mjhsieh; How about this? "Normally the users want a familiar text entry environment, not a poor input method from some contractors hired by the Operation System developers just to make a point that we also have some input method that users can switch to LEARN."
+**** b6s: Generally agree with it but wording. :p
+**** mjhsieh: I am also curious about how the culture factor affect the user experiences.
+*** 尤其是第三節：
+ 3 Features of the Architecture
+ 3.1 Use Case: User with Several Devices
+ 3.2 Support for different input devices
+ 3.3 Multi-language support
+ 3.4 Emerging text entry methods
+ 3.5 Personalized text entry methods
+ 3.6 Lower overall implementation effort
+ 3.7 Coexisting with other systems
+*** 而第四節則是與其他 framework 的比較，嗯，有 Java IMF, MS TSF 和 IIIMF，甚至還寫了一小段叫 Theoretical Frameworks，提到了 MVC。總之這很接近我理想中的樣子。:)
+** [Theoretical and Architectural Support for Input Device Adaptation http://guir.cs.berkeley.edu/pubs/cuu2003/iat-cuu2003.pdf] 的寫法也值得參考；那個數學方法或許沒什麼，但卻是 sexy phrasing 的良好示範。
+*** mjhsieh: I love mathematics! Can we write something about it?
+*** b6s: Yes we can! But... please read the following discussions about "買櫝還珠".
+** [Language Modeling for Soft Keyboards http://research.microsoft.com/~joshuago/fuzzy-techreport.pdf] 可以看一看。
+** 相關的想法是，將 OV 包裝成 Text Entry「實驗平台」，讓研究者有共通的環境與比較基準。 (mjhsieh translation: basically the idea would be to use and describe OV as an experimental platform of text entry research. Scientist can use this platform as a common ground and the base of benchmark study.)
+*** 沒有輸入法的 log，很難收集鍵碼轉換為字的條件機率 P(words|keystrokes)，因為一般的 text corpus 不會有這種資訊。
+*** 而像 [Recent Developments in Text-Entry Error Rate Measurement http://dynamicnetservices.com/~will/academic/2004chi.pdf] 就在最後一段發表了他們自己寫的測試工具。
+*** mjhsieh: perhaps this is already in the list, we could do the benchmark of different input methods if OV can be a good experimental platform of text entry.
+** 觀摩手機輸入法的論文，用 http://scholar.google.com/scholar?hl=en&lr=&q=t9+input&btnG=Search 可以找到不錯的列表。
+*** 透過 !OpenVanilla 來實作一個 T9 或許是個不錯的示範，但是如果太偏重這一點又有買櫝還珠的可能。
+**** mjhsieh: T9 or Morse code module shouldn't be used only as a proof of concept, it should be also used for the experiment of the mathematical theory we want to play with.
+**** b6s: That's why I'm saying there's a concern about "買櫝還珠". The mathematical theory itself is a good research topic and making OV to be not that important. In my lab there's an unpublished work about this (considering we have many rules of phonetics and syllables, meanwhile we would like to improve usability/accessability by some principles such as [Fitts' Law http://en.wikipedia.org/wiki/Fitts_Law], and someone might need to customize for specific devices, etc. Put all these issues together, it might be NP-hard to determine a best keyboard layout for existed input methods. So we could build a model related to encoding problems and then use evolution algorithms like GA to find the approximative solution...), and I'm considering how to cooperate with it to show OV's importance. But it's hard. orz
+**** 可能可以作為 ADA 參賽賣點之一。
+* 也許應該加強一下 client-server 架構的部分（目前的 prototype 是 Perl server-Cocoa client），因為 [Architecture for Personal Text Entry Methods http://www.se-hci.org/bridging/interact/p1-8.pdf] 通篇的重點其實是靠 client-server 來跨 device，然而它用 Java 來做 server，client 的實作則限於某些 handheld devices。對 OV 來說，desktop 已經沒問題了，而因為現在有 Win32 實作，要以 WinCE 為例來說已經支援 handheld device 似乎也沒什麼不可以。於是我們有了現成的比較對象，而且沒道理比人家差。
+* 按照上述想法，改寫 PosterProposal4UIST，篇幅仍為四頁，針對 [UIST reviewers 的意見 http:?UISTContributionReviews]與 CHI Notes 的標準加強，然後才將下面 Old Plan 寫的事項整合進來。
+** 題目要下得更容易讓沒有背景知識的人理解。
+** 換一個說辭來強調 OV 現在不支援滑鼠與複雜候選字詞列表只是沒有實作，不代表架構本身不能支援。
+*** Key event 可以抽象化為 encoding/decoding 的過程，而候選字詞列表也能抽象化為單純的 table 概念。
+*** 甚至是 stylus keyboard 或 pen-based text entry 都能轉換為「方向（鍵）事件」而在 OV 中實作。
+** 以數據與事例證明使用 OV 能省下的開發成本。
+*** OV 整合了各作業系統平台撰寫輸入法時重疊的概念，讓開發者不必每次都從頭寫起。
+**** MS DDK sample, skkime, freepy, ylam, realfun 等，有著大量用途相同的程式碼，但每一份都是不同的實作。用 OV 只要寫真正不同的輸入法邏輯部分，大約是 /10/ 餘個 cpp 檔和 /1/ 個的差別。
+*** 透過支援 CIN 檔或 !SQLite database，使用者可以自訂輸入法，而且跨平台。
+**** 不像每個作業系統各自提供的自訂輸入法表格，既陽春又互不相容。
+**** 不必具備高深程式設計能力即可創作，參與門檻低有利於社群成長，如各自出現的輕鬆輸入法 Mac OS X 版、古希臘文、五筆等等。
+** mjhsieh: I really want to see a chapter of the document/publication draft that talks about the influence of open source community involvement on the development of this kind of highly user oriented framework. This chapter is not necessary for a publication, but this might be a very important selling point when we are writing the documentation for the software design contest. Also we need to somehow point out that the input method itself can evolve and the users do have a lot of interaction with the development of the input method. A good and well designed framework can reduce the cost of evolution and also can make users happy.
+*** I suggest we can try to start a collaborative writing of a book that includes all of these. Currently we have members who are experienced on IM development of different platforms (and hope someday we will have someone who has knowledge of different /devices/.) This book could talk about community, software engineering, and maybe stories surrounding OV.
+*** mjhsieh: who will be the PM? ha...bye~
+*** b6s: maybe we could consult hcchien for his experiences about the book "獨當一面", and also we could use RT-Foundry and Kwiki to cooperate for this I think. Well it would be a long-term job, I would like to ask OV members for advices.
+
+----
+== Old Plan
+首先，在 !OpenVanilla 的架構方面，預計透過 Design Pattern 的觀點來闡述，並盡可能地將程式碼依照相關 patterns 重構：InputMethodPatterns
+
+再者，實例的部分考慮採用更多英文的應用，像是 zonble 最近剛做好，支援英文單字 auto-complete 的 OVIMRomanNew。
+* -Spelling Checker-: OVIMSpellCheckerPlan
+** 已有使用 CLucene 的 demo 了。
+* Stenography (英文速記鍵盤輸入法): http://slrsj.nease.net/sjyd14.htm
+** 再接上 zonble 做的邊打邊念 filter... XD
+
+然後，應該會把自動選字功能做完，希望能慢慢地累積成[自動選字函式庫 http:?Tobacco]。 

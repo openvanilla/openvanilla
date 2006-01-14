@@ -1,0 +1,79 @@
+= class !OVBuffer (!OpenVanilla.h)
+
+[=OVBuffer] is the interface class of a desktop environment's "composing buffer" (called "pre-edit buffer" in the terminology of some platforms, it's a sorry term that is never able to be clear from the words itself). For input method developers, they will always access to an [=OVBuffer] instance provided from the Loader to IM content's [=keyEvent()] function. For Loader developers, this is a class that must be fully implemented.
+
+== Synopsis
+
+* to put some text onto the composing buffer and update display:
+ buf->clear()->append("foo")->update();
+
+* to send the text (along with cleaning the buffer):
+ buf->send();
+ 
+* to update the display along with cursor position:
+ buf->update(0);  // put the cursor onto beginning of the composing buffer
+ buf->update(1);  // put the cursor after the first codepoint
+** b6s: shall we have a enum of names for these 0 and 1?
+*** lukhnos: ain't quite sure what you meant. mind for some examples?
+*** b6s:
+ enum {
+    POSITION_BEGIN,
+    POSITION_NEXT,
+    POSITION_CURRENT,
+    POSITION_END
+ };
+* to know if the buffer is empty
+ if (!buf->isEmpty()) foo();
+ 
+* to update the cursor position along with highlighting area:
+ buf->update(4, 0, 2); // put the cursor after the 4th codepoint, the highlighting area begins from before the 1st codepoint to after the 2nd codepoint (therefore three codepoints in total)
+ 
+== Discussion for Input Method Develoepers
+
+!OVBuffer is the single most important class for an IM developer. In class !OVInputMethodContext there is a member function [=keyEvent(OVKeyCode*, OVBuffer*, OVCandidate*, OVService*);] The [=OVBuffer*] pointer is passed to the IM context from the Loader. It is the Loader that implements the derived [=OVBuffer] class. From IM developer's point of view, what's inside the Loader's implementation is irrelevant. !OpenVanilla.h defines [=OVBuffer] as a pure abstract class, that is, a pure "interface class."
+
+The instance object of !OVBuffer is also passed to IM content's [=start(OVBuffer*, OVCandidate*, OVService*)] function, so that at the beginning of an IM session, the input method can put some characters onto the composing buffer or even send some characters beforehand.
+
+The cursor and hightlight control part of the [=update(int cursorPos, int markFrom, int markTo)] is somewhat tricky. For detailed discussion, see the section "Design and Redesign Considerations" below.
+
+For a very plain input method, the member functions [=clear()], [=append(const char*)], [=update()], [=send()] and [=isEmpty()] are all that an IM needs. For a more sophisticated IM, such as one with "intelligent character pickup," as in the Japanese Anthy of "smart" Pinyin Chinese, the input method will always need to have control over cursor position and highlighting features. !OpenVanilla only offers a minimal set for such controls: the input method developers will have to keep the count of characters in the buffer and other details. Note that the cursor position and highlighting region are both counted in /Unicode codepoints/, i.e. the distictive number of "ideograms." If your IM is UTF-16-based, /be sure to count in the "surrogate" factor/, do not just rely on the number of 16-bit words to count the characters: it would fail on >U+10000 characters!
+
+The reason why it's called [=append()] but not [=setText()] or some other name--and hence the idom of [=buf->clear()->append()]--is explained in the design discussions below.
+
+You can pass this [=OVBuffer*] instance to other functions called by and from [=keyEvent()] within the function's life cycle. /You should never retain this object./ Therefore this idiom is strongly discouraged:
+
+ void OVMyIMContext::start(OVBuffer* buf, OVCandidate*, OVService*) {
+     mybuf = buf;        // no!
+ }
+ void OVMyIMContext::clear() {
+     mybuf->clear()->append("send some text before I die!")->send(); // no!
+ }
+ 
+From Loader's point of view, there is nothing that an IM should do in the [=clear()] and [=end()] stage /except cleaning up IM context's own internal state/. There is nothing an IM context can do (and should do) to the composing buffer when the session is forced to be cleared or ended.
+
+== Discussion for Loader Developers
+
+This is a class that has to be implemented fully. If you're on the early stage of implementing a Loader, the [=update(int cursorPos, int markFrom, int markTo)] function can be spared later, though: many basic !OpenVanilla IM modules (e.g. !OVIMGeneric) only uses the plain-vanilla [=update()] as it does not involve cursor control. Please note that this update function measures in codepoints, therefore if your platform is UTF-16-based, you /must/ take into consideration the surrogate issue. 
+
+== Design and Redesign Considerations
+
+There is no [=length()] function in [=OVBuffer] because there is no gurantee that such function is performble on every platform/desktop environment. Therefore when !OpenVanilla is designed, it is decided that only [=isEmpty()] is provied.
+
+That [=OVBuffer] has [=clear()] and [=append()] instead of [=setText()] is inspired by functional programming: that [=setText()] is actually two operations [=clear()] and [=append()]. Had !OpenVanilla provided [=setText()], it would be hard for many simple !IMs to do an operation as simple as appending a text onto the buffer, as the IM itself would have to keep a string of its own and to perform strcat-like operations. It is true that [=setText()] can be provided or even implenented in !OpenVanilla.h as virtual [=OVBuffer* setText(const char* s) { clear(); append(s); };] but it would be lame and redudant and breaks OV's minimal-and-integral design.
+
+The [=append(const char*)] function itself, as always, takes a UTF-8 string. The worry that "[=const char*]" is too much C-idiom and no good for Unicode-style string operation is an over-worry. UTF-8 is designed /exactly for C inter-operability/ (think about the legacy Unix code! Unicode would never be what it is today without Ken Thompson's insight). Not to use the elegance of C and instead to introduce lame typedef's or even uglier uint8_* stuff equals shooting oneself in the foot.
+
+The cursor position and highlighting position must be counted in codepoints for apparent reasons. Anyone who relies on UTF-16 "word" counts does not know the existence of the notorious surrogate. On the other hand, this puts the ornus of doing math to the IM developers. But actually they should. IM libraries like UIM have its own internal bookkeeping for such issues and they do a great job.
+
+*Arguable design aspects*: the [=update(int cursorPos, int markFrom, int markTo)] is an unfortunate compromise of design elegance and reality. Some argue cursor control and highlighting should be separated into two functions. This would bring us two [=update()]'s and messy overloading semantics. Another point is somewhat platform-dependant: as !OpenVanilla was first designed on Mac OS X, the highlighting is only limited to one region (worse, when there is highlighting, cursor disappears). On other platforms, however, it is possible to do multi-region highlighting. It might be necessary to introduce a function like [=update(int cursorPos, int regionCount, int* regions)] to solve this problem. This design argument will be a key point in the designing of !OpenVanilla 0.8.
+
+As for the name of the game, [=OVBuffer] is named as it is for elegance reasons. Calling it [=OVComposingBuffer] is lame. Calling it [=OVPreeditBuffer] is worse (such a horror for the word pre-edit without hyphen). The term "composing buffer" or "pre-edit area" is never clear /per se/ anyway. So we made no effort to clearify it in the naming of the class. It'd be futile.
+
+** b6s: Is it possible to decouple the highlighting functionality to another interface? And then we can have OS related versions of !OVBuffer, such as !OVMacBuffer and !OVWin32Buffer with Mac compatible highlighten and Win32 compatible one, respectively.
+*** lukhnos: How about the idea of [=update(int cursorPos, int regionCount, int* regions)] and of warning IM developers that different platform may interprete the regions differently and the most important highlight should be put into the first region block? Need a list of possible alternatives and p-codes maybe.
+*** b6s: OS related implementations might be expected since !AmphiVanilla exists, so I think the interface of /update()/ might be able to be overrided in different platforms. For example, if the interfaces of /update()/ for !OVBuffer are only /update(void)/ and /update(int)/, and then !OVMacBuffer extends it with /update(int, int, int)/, meanwhile !OVWin32Buffer extends it with /update(int, int, int*)/. Evenmore, it can be done by tripping highlight actions from /update()/ to /hilite()/ and then inheriting from it. Well, it's only MHO, to make the API and ABI get away from ambiguities. *But it does complicate programming*. This issue also reminds me that shall we clarify OV library by GUI related class, event-handling class, and so on?
+*** 18:48 < lukhnos> b6s: 如果繼承出 OVMacBuffer, OVWinBuffer, 是不是意味著 IM-developer 要自己做 type casting?
+*** 18:48 < lukhnos> if (service->isMac()) (OVMacBuffer*)buf->update(1,2,3); ?
+*** 18:52 < kanru> IM-developer 有需要知道是針對什麼平台寫嗎 @@
+*** b6s: You're right, we got problems here. Overrided /update()/ violates Liskov Substitution Principle if we have to use it with type casting. But precisely what I mean about it is to use *default* /update(int, int, int)/ in general, and some developer who needs more has to extend !OVBuffer. For this usage, it's better to migrate the default function to *generic* /update(int, int, int*)/. However, since Win32 IME API that uses *on-the-spot* mode also reactives with exactly one highlighten area, I personaly think the default /update(int, int, int)/ is OK. For !IMs those need generic one, actually they are asking for underlines within customized GUI. Is it too far to OV? On event-handling level, !OVBuffer might have to provide behaviors of /!setCursor()/ and /!setHilite()/ (and currently they are embedded in /update()/). But uderlines or multiple highlighten areas that are requested by !OVIMChewing or !OVIMTobacco seem not duties of OV.
+*To do in !OpenVanilla 0.8*: change the return type of [=isEmpty()] to [=bool].

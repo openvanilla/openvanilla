@@ -1,0 +1,7 @@
+== 安裝環境
+
+您需要安裝 Mac OS X 作業系統的麥金塔電腦。OV 是在 Mac OS X 10.3 Panther 下開發的，在 Mac OS X 10.2 Jaguar 以前的環境下無法運作，不過，我們會努力嘗試進行向下移植的工作。
+
+.infoblock
+{include: OVManualIndex}
+.infoblock

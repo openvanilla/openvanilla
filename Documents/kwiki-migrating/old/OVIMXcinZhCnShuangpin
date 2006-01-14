@@ -1,0 +1,27 @@
+= 雙拼輸入法
+說明文件尚未謄寫，請期待！
+
+.infoblock
+= 現有輸入法：
+=== [行列 OVIMArray]、[酷音 OVIMChewing]
+=== [香草倉頡 OVIMCangjei]、[香草注音 OVIMPhonetic]
+=== [白話字漢羅 POJ Han-Lo http:?OVIMPOJ]
+----
+== XCIN 模組：
+=== [倉頡 OVIMXcinCj]、[大易 OVIMXcinDayi3]
+=== [漁村符號 OVIMXcinEHQ]、[日文假名 OVIMUkiyoe]
+=== [粵語拼音 OVIMJyutping]、[K.K.音標 OVIMXcinKK]
+=== [正體漢語拼音 OVIMPingyinBig5]
+=== [簡體漢語拼音 OVIMXcinZhCnPinyin]
+=== [簡體倉頡 OVIMXcinZhCnJtcj]、[簡體注音 OVIMXcinZhCnPhonetic]
+=== 雙拼、[五筆字形 OVIMXcinZhCnWubizixing]
+=== [克林貢文 OVIMXcinKlingon]
+----
+=== [內碼 - Unicode Hex OVIMUnicode]
+=== [英數 OVIMEnglish]、[藏文 OVIMTibetan]
+----
+== 輸入法實驗：
+=== [EZbasic OVIMezbasic]
+=== [PHP 輸入法 OVIMphp]
+=== [Socket/perl OVIMsocket]
+.infoblock

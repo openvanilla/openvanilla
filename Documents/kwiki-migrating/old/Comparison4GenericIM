@@ -1,0 +1,47 @@
+= CIN 與 SCIM-tables 選項的比較
+== cin, scim-tables 共通參數對照
+* Name: cin 用 %ename，scim-tables 的對應是 NAME。
+* Localized name: cin 只有「一個」%cname，scim-tables 通常會有 NAME.zh_TW、NAME.zh_CN、NAME.zh_HK。
+* Selection key: cin 用 %selkey = 1234567890，scim-tables 用 SELECT_KEYS = 1,2,3,4,5,6,7,8,9,0
+* Valid key: cin 用 %keyname 區塊中的左值來表示，scim-tables 用 VALID_INPUT_CHARS = abcdefghijklmnopqrstuvwxyz 這種格式。
+* Keystroke-to-character table: cin 用 %keyname 區塊中以空白或 tab 隔開的 keystroke-character pair 表示，scim-tables 也用同樣的方式放在 CHAR_PROMPTS_DEFINITION 區塊中。
+== cin, scim-tables 相異參數比較
+* ID: cin 用 %ename，scim-table 則細分為 UUID、SERIAL_NUMBER （用日期當作版本號碼：YYYYMMDD）和 NAME。
+* Locale: cin 沒有明確指出的方式，scim-tables 用 LANGUAGE = zh_TW,zh_HK,zh_CN,zh_SG  這樣的格式。
+* Encoding: cin 沒有規定，OV 強迫都用 UTF-8 （本來多加了一個 %encoding，但現在幾乎用不到），scim-tables 也必須都用 UTF-8。
+* Trigger key: cin 有 %endkey，scim-tables 的概念不太一樣，有 SPLIT_KEYS 和 COMMIT_KEYS。
+== scim-tables 才有的選項：
+* SPLIT_KEYS: 依照拼音和注音的習慣來說，通常是 ' 和 space。
+* COMMIT_KEYS: 一般來說是 space 和 return。
+* FORWARD_KEYS: 代表跳過組字流程直接送出 keystrokes 的按鍵。舉例來說，在倉頡輸入法開啟的狀況下打了 mai，接著按下 return，輸入法會不作任何處理，直接送出 mai 給應用程式。因此這個設定不應該與 COMMIT_KEYS 重疊。
+* AUTO_FILL: scim 的 buffer 分為兩部分，一部分稱為 pre-edit 區，一部分則是 keystroke sequence 區。AUTO_FILL 用來決定要不要動態更新 pre-edit 區，效果比較請見 http://flickr.com/photos/b6s/28444067/ 和 http://flickr.com/photos/b6s/28444068/。
+* AUTO_SELECT: 「若使用者沒有 commit 或選字就繼續打」（應該是這個條件使本選項與 AUTO_FILL 有所區別。），預設將候選字詞列表裡的第一筆送到 pre-edit 區。
+* AUTO_COMMIT: 預設將 pre-edit 區裡的字送到應用程式上。（沒有自動選字功能的輸入法通常都需要這個選項）
+* AUTO_SPLIT: SCIM 會想辦法猜測整串 keystrokes 最有可能的詞界。舉例來說，在拼音輸入法裡輸入 tian，應該是 ti an 還是 tian？請參考 http://flickr.com/photos/b6s/28444067/, http://flickr.com/photos/b6s/28444069/, http://flickr.com/photos/b6s/28444070/, http://flickr.com/photos/b6s/28444071/ 並特別注意 ti -> tia 時的變化。
+* AUTO_WILDCARD: 在候選字詞列表裡也列出以目前 keystroke「開頭」的字詞。相當於自動的首碼輸入法。
+* DYNAMIC_ADJUST: 動態調整候選字詞列表裡的順序。
+* DISCARD_INVALID_KEY: 是否在輸入錯誤鍵碼後清除之。
+* ALWAYS_SHOW_LOOKUP: 總是顯示候選字詞列表。
+* DEF_FULL_WIDTH_PUNCT
+* DEF_FULL_WIDTH_LETTER
+* MAX_KEY_LENGTH
+* SINGLE_WILDCARD_CHAR
+* MULTI_WILDCARD_CHAR
+* PAGE_UP_KEYS
+* PAGE_DOWN_KEYS
+* STATUS_PROMPT: 顯示「中」或「英」或其他可能表示 locale 的字。
+* ICON
+
+= OV 現行可用選項
+* cin 全部的參數（除了 gcin 新增的 %space_style 之外）
+* scim-tables 的 DISCARD_INVALID_KEY, MAX_KEY_LENGTH, ALWAYS_SHOW_LOOKUP（相當於 autoCompose）
+* hitMaxAndCompose, shiftSelectionKey, warningBeep, wildcard, chooseInFrontOfCursor (設定在游標前還是在游標後選字，OVIMTobacco only)
+
+= 討論
+* 在已經有 maximum keystroke sequence length 選項的情況下，hitMaxAndCompose 是否多餘？
+* SCIM 的選項雖然彈性夠但是太複雜，OV 的 preference pane 如果要支援，可以考慮由 XCIN 與 SCIM 裡找出合適的一般性選項放在「一般設定」，其餘的則放到「進階設定」裡。
+* OVBuffer 和 OVKeySequence 的互動要更明確，否則在支援某些來自智能拼音輸入法的習慣時會寫出有些彆扭的程式。
+* 習慣無聲調的拼音輸入法可視為 single char wildcard 的特殊情況。
+* 使用音素來輸入的方法，應該要多做一種可以容忍聲符順序錯誤的選項。這種選項的特例會變成類似英文速記或追音輸入法的使用方式。實作上來說，如果不想特別寫規則，可以用 permutation 來解決。
+* 某些 scim-table 選項有相依性。以微軟拼音輸入法 3.0 的選項來說，"incomplete pinyin" 的效果相當於 AUTO_WILDCARD 加上 ALWAYS_SHOW_LOOKUP；"modeless input" 則有 AUTO_SPLIT、AUTO_SELECT 與 AUTO_COMMIT 的行為。不過有件事值得一提：微軟拼音輸入法 2003 裡選項變少了，"incomplete pinyin" 變成不能改的內定值，而 "modeless input" 則取消了。 
+* 承接上一點，scim-table 幾乎涵蓋了所有已知的選項，除了某個漢音有特別分離出來的設定："Delete Hanji or Reduce Pinyin"，這應該值得做成選項。

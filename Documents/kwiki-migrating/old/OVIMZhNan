@@ -1,0 +1,37 @@
+== zh-nan 類別的輸入法模組
+zh-nan 閩南語的 language-tag，雖然以下這些輸入法主要以支援台灣閩南語為目標，暫時還是以zh-nan來代表。
+
+* OVIMPOJHolo
+* OVIMTLPAHolo
+* OVIMTOJHolo 
+* OVIMBPMFHolo ( http://www.freedesktop.org/wiki/Software_2fCJKUnifonts_2fMinnan_5fIM )
+
+== 如何共享語料
+(都還是很出初步的想法)
+* Conversion table
+* 可能性一：大家共用一個 table，維護不同欄位
+** zh-nan.src
+  Hanji POJ TLPA TOJ BMFP
+  悔 hoe2 hue2 hue2 xaaaobf
+
+* 可能性二：大家共用一個中介的 index number，維護不同的 table。中界的 index number 可考慮選用漢字的 unicode 編碼。
+** zh-nan-hant.src
+  123 悔
+**  poj.src
+  123 hoe2
+** tlpa.src
+  123 hue2 
+== 要有甚麼功能
+* 基本功能
+** 輸入 KeySequence，輸出 單音節漢字
+*** POJ: hoe2 --> 悔,賄,瘣,燘,...
+*** TLPA: hue2 --> 悔,賄,瘣,燘,...
+* 進階功能
+** 輸入 KeySequence，輸出 多音節漢字
+** 顯現下一個可能漢字
+* 夢幻功能
+** 自動選字
+== 台語漢字
+* http://www.freedesktop.org/wiki/Software_2fCJKUnifonts
+* http://linux.taigi.idv.tw/nngthe/unicode/taigi_unicode.html
+* list of taigi 漢字 which is NOT in unicode yet

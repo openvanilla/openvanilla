@@ -1,0 +1,28 @@
+若需要「[SVK http://svk.elixus.org/]」的新手入門說明，請參考「[SVK 指南 http://svk.elixus.org/index.cgi?ZHSVKTutorial]」。
+
+== 如何透過 SVK 取得 Open Vanilla 的源碼 ==
+請在終端機內輸入：
+
+ svk depotmap --init
+
+這會問你要不要建立 depot，打 y，接著輸入：
+
+ svk cp http://svn.openfoundry.org/openvanilla/trunk ov
+
+第一個問題按 enter 跳過，表示要映射所有 http://svn.openfoundry.org/openvanilla/trunk 裡的東西。
+
+第二個問題打 ov，表示把映射內容存到自己機器上 svn 資料庫裡的 //mirror/ov 的目錄裡。
+
+第三個問題打 a，表示要映射從古至今所有的版本。
+
+然後等很久很久...（茶）
+
+等全部 copy 完後, 又會問你一個問題，要把東西 copy 到哪去，這時你還是可以打 ov，只是這個 ov 跟前個 ov 「不」一樣，這個 ov 會把東西複製到 [=//ov] 而不是 [=//mirror/ov]（如果這部分看不太懂，請參考「[SVK 綜覽 http://wagner.elixus.org/~autrijus/svk/svk-overview-zh.png]」）。
+
+然後會跑進某編輯器（通常是 vi 啦），隨便打幾個字吧，像「I learn svk now!」或「clkao is great!」或「svk++ ; ov++」都行...
+
+接著存檔（ESC :wq!）。
+
+現在你什麼都有了，在一個叫 ov 的目錄下，通常這個目錄會在你的個人目錄裡（[=/User/yourname]），裡面的源碼就是最新版本了。
+
+以後要更新，在 ov 目錄下打 svk pull 即可。

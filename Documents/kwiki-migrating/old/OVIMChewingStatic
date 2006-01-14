@@ -1,0 +1,35 @@
+= 靜態連結版的酷音輸入法模組 =
+
+_最新消息：_ 請儘可能換用靜態連結版。由於先前 0.7.0rc4 在 build 酷音時沒有設某一個選項，造成「空白字選字」的行為無法預測，有的人可以用，有的人不行，同時跟 OV 0.6.3 仍然有相容性的問題。下一版 OV （如果某人還沒因此被打敗的話）應該會直接使用靜態連結版的酷音模組做為預設。
+
+如果你已經試過了我們建議的酷音升級套件，卻還是無法讓 OV 0.6.3 與 OV 0.7.0rc4 並存，甚至即使 OV 0.6.3 已經移除了，OV 0.7.0rc4 運作仍然不正常，例如：按空白鍵無法正常選字，或者仍然會把某些應用程式搞當──而且偏偏只有酷音會這樣。
+
+請下載「靜態聯結版」的酷音修正這個問題。
+
+== 安裝說明 ==
+
+0 請從[這個連結下載 OVIMChewingStatic.dylib.zip http://rt.openfoundry.org/Foundry/Project/Download/Attachment/33598/23728/OVIMChewingStatic.dylib.zip]，解開之後會有一個 OVIMChewingStatic.dylib
+0 接著請進 [=/Library] (如果是在 Finder 下用中文介面，叫「資源庫」) ，往下找 [=/Library/OpenVanilla/0.7.0/Modules]
+0 這個目錄裡有兩個跟酷音有關的檔案，一個是 OVIMChewing.dylib ，一個是 OVIMChewing/ ，後面這個目錄請不要動，酷音詞庫都在裡面
+0 把 OVIMChewing.dylib 砍掉（這時 Finder 會跟你要系統管理員密碼）
+0 把剛剛下載解開的 OVIMChewingStatic.dylib 放進目錄裡（可能還會再要一次密碼）
+0 為保險起見，請關掉所有現行的程式，重新 login
+
+安裝完成之後，切進 OV 0.7.0rc4 時，看到的應該像是這樣：
+
+http://photos9.flickr.com/14794527_1be08f4cae_o.png
+
+如果你用的是英文選單：
+
+http://photos12.flickr.com/14794528_7f22b49584_o.png
+
+簡單地說，如果看到酷音後面有「靜態連結版」字樣，就代表成功了
+
+
+== 技術背景說明 ==
+
+* 由於 OVIMChewingStatic.dylib 和 OVIMChewing.dylib 用的是同一個 OV 模組 id ，因此兩個檔案不能裝在一起。
+
+* OVIMChewingStatic.dylib 會去使用 [=OVIMChewing/] 裡面的詞庫
+
+* 為了避免 hash.dat 出問題，OVIMChewingStatic 會把使用者詞庫放在 [=~/Library/OpenVanilla/0.7.0/UserSpace/OVIMChewingStatic] 裡而非 [=~/Library/OpenVanilla/0.7.0/UserSpace/OVIMCheewing]

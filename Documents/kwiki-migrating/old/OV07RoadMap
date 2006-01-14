@@ -1,0 +1,67 @@
+= OpenVanilla 0.7 Roadmap
+
+== OpenVanilla Framework and Loader
+
+* Loader for OS X
+** *IMPLEMENTED (0.7.0p2)* Dynamically loadable loader (saves relogin/testing time)
+
+* Loader-IM seperation policy -- must stick to it
+** We will not develop IM on our own, nor can we afford to _-- the situation is better now as OS X .bundle version of IM/OF is now possible, thus facilitating the deployment and packaging process for other potetinal IM/OF developers_
+
+* Better documentation policy -- better terminology management
+** *CORRECTED (0.7.0p2)* In the design process of OV 0.7, we observe an overflowing of ambiguous terms. E.g. OVInit vs. OVLoader, Library vs. module, input buffer vs. composing buffer vs. pre-edit buffer, IM seesion vs. IM context
+
+* *PLANNING* Different types of packages, e.g. DarwinPorts
+
+* *PLAINNING* Overrhaul of the build system -- "make ; make install" should do everything
+
+* OpenVanilla for different platform?
+** Lack of proper resources and input -- low motiviation
+** Still, a targeting for FreeBSD, at least for the framework and "command line mode" loader is workable
+** It is possible that we install OpenVanilla framework /au style FreeBSDienne/, i.e. /usr/local/OpenVanilla/ and /usr/local/include/OpenVanilla symbol-links to /usr/local/OpenVanilla/include and so on
+
+* Packaging policy for OS X
+** Should we still include some standard, "recommended" IM's and OF's ?
+
+* IM/OF submission policy
+** That's when the project becomes mature enough and when we have other IM committers... although that doesn't seem very likely. *Many wheels get reinvented in this field, but practical work is dead water.*
+
+== Input Methods and Output Filters
+
+* "Own-brand" IM/OF (output filter) implementation plans:
+** *WORKING* "Traditional Phonetics/Bopomofo" IM -- lukhnos will always need it anyway
+** *PORTING* Simplified<->Traditional Chinese OutputFilter  (OFHanConvert)
+
+* /SQLitize/ our IM's -- we have been talking about this for a while, but nothing substantial has been out yet
+** *IMPLEMENTED* OVSQLite3.h is your good friend
+** We may even come up with a third module-class (in addition to IM and OF) in OpenVanilla.h: OVDataBackend (IM, OF, DB) ?!
+** Using a proper database backend solves many, many problems--it is quite possible that Chewing will be rewritten /fast/ in this mannger, although I wouldn't like to predict anything.
+
+* For tradtional Phonetics IM: a "committ mode" must be added.
+** *WORKING* Some "OVIMAutoPhonetic" does that
+** Currently there is only "single-character mode." We will need to have the "committ mode" (the entire compsing buffer is not sent until ENTER key is received, like the behavior of Apple's TCIM) if we'd like to see more interesting OF applications.
+
+== UI is always a problem
+
+The new design of layered IM's and OF's makes the design of a good configuration panel difficult. _-- may not be so if, as zonble suggested, we make Panels plug-ins too_
+
+== Other long-term plans
+
+Many of these may never see the light of the day, though...
+
+* Interface with SCIM
+** *SITUATION CHANGING* MacUIM's yatsu is working on an SCIM.framework.
+** Very difficult. Although SCIM has a better (way better) and simplified design than that of IIIMF, it still puts an onus on IM implementations. Much of it still relies upon SCIM's own framework, which is in turn a dependency hell. This may not make a big problem on Linux, but still poses a challenge to Mac OS X.
+** For those in urgent need, bridging some of OV's existing (and functioning) IM's to SCIM may be a way to make better TC IM's available to SCIM.
+** (As for frameworks other than SCIM, my only comment: I refuse to do any practical work on any framework that is over-designed, design philosophy out-of-dated, designed on many premises no longer existing or now irrelevant, and most important of all, buggy because of its inherent design "leaks" -- structural problem that is no longer surmountable)
+
+* OVLoader.exe for Win32?
+** *SURVEYING* b6s is surveying the possibility of "plumbing" SKK to our own use
+** Very difficult, although on a horizon different from SCIM. 
+** Unless someone comes with a clean-and-clear-cut code much like CarbonInputMethod, Windows IM development can be very, very difficult
+** Another difficulty lies in the "manoeuvering" of code on Windows. Have to learn a bunch of other things in order to survive on Win32 (e.g. Unicode handling, etc.), much of which is much ado about nothing.
+
+== Some after-thoughts
+
+* Leveraging as many existing libraries as possible is a good thing for application development and prototyping, but may often be bad for system programming (system utilities/tools) because it causes deployment difficulty and dependency hell
+* You don't stockpile a bunch of old paragraphes you've written to get a great essay. The result is usually junk. To work out a good essay, you rewrite and rewrite. I think the same thing must be said for some certain kinds of programming.

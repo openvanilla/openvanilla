@@ -1,0 +1,36 @@
+lukhnos 今天下午（2005/7/28）跟 Apple Asia 的夏鵬（開發技術及合作伙伴經理，屬於 Apple WWDR 一環）及宋振軒（開發技術支持工程師，DTP，亦屬於 WWDR 一部份）兩位先生見到了面，會面進行約一個半小時。
+
+會面討論的重點如下：
+
+=== 開場 ===
+
+Apple Asia:
+
+* Text service 的 API 是最大的問題。針對輸入法 API 的問題，已經跟 Apple 總部反映了兩年，但進行緩慢。夏先生和宋先生同意我對 OS X text service API 的抱怨。
+* Apple 會繼續改進自家的內建輸入法，但是希望透過 API 的更加透明化（例如增加 Cocoa 或是讓 Carbon 層更易用、增加說明文件），能引起更多 3rd party 開發者的興趣。
+
+lukhnos:
+
+* Apple 應該瞭解到「輸入法」的特殊性：商業市場有限，OSS community熱情不高，但輸入法好壞直接影響 Apple 在亞洲市場的表現（在此稍稍談及 Apple 總部對中文市場看法，在此略過；夏先生──他先前曾在微軟工作過──的回應是 Apple 在輸入法的投入上，相較於微軟，的確是欠缺許多）。Apple 應該以實際行動支持 OSS community 開發輸入法。
+* 介紹 OpenVanilla 的簡史，目前裝機數量，在台灣、港澳及中國的使用狀況，以及其所解決的問題或填補的空缺（夏先生問及 OV 框架是否能用來開發「智能型」的輸入法，對此我回答框架可以容納此類輸入法，實作則有人在正在努力中）
+* 示範 OpenVanilla 0.7.0rc5 的功能，包括藏文輸入法（夏先生說藏文輸入的需求在中國確實存在）、新英數、filters、新的 preference panel 等等
+
+=== 一些 Apple Asia 即將要舉行的活動 ===
+
+0 8/13-14 這段期間，Apple Taiwan 會在台灣舉行開發者講座，會由 Apple Asia 的夏先生、宋先生來台灣與台灣開發者見面接觸。講題除了介紹 OS X Tiger 的技術、PPC->Intel 的 transition 大要，也包括了 3rd party 開發者怎麼取得 Apple 開發者資源（ADC會員、直接和 DTP 聯絡等等）。亦考慮介紹 IOKit 等台灣硬體及驅動程式開發者在意的問題。（輸入法或許亦可以提及）。
+0 Apple Asia 已經計劃在 11 月於中國舉辦一個輸入法的 workshop，Apple 那邊會由美國派出負責 text service 的部門主管及工程師親自前來做 coding 交流。目前預計有來自新疆（維吾爾文，其輸入一直沒有在 Mac 有好的解決方案）、泰國等地的輸入法開發者一同參與。OpenVanilla 開發團隊亦在受邀之列，另外也可能邀請 QIM 開發者參加。目前預定舉行地點為北京，但我建議能否在廣州或香港舉行，對台灣及香港開發者較為方便。對此夏先生回應是會傾向考慮廣州。我提議 Apple Asia 應該贊助 OpenVanilla 團隊一組兩人機票及旅費來參加這次活動，夏先生對此說會去爭取預算。
+
+=== 一些可能的方向 ===
+
+* Apple Asia 考慮做一張配給亞洲區（不含日本）使用者的 shareware/OSS software CD-ROM，裝載 3rd party 軟體，輸入法會是考慮之列
+* lukhnos 建議 Apple Asia 於 2006 年實際贊助輸入法開發者 WWDC 門票及機票，例如贊助五組開發團隊等等。夏先生表示會去爭取預算，他也同意輸入法的地位需要靠類似這樣的特殊方式來提高，同時如果能有輸入法開發展參與 WWDC ，對於提高輸入法的問題意識及關注程度，一定有所助益。
+* 夏先生強烈建議 OpenVanilla 朝 WWDC 2006 的 design award 努力。我問及輸入法的重要性，是否不被評審所認知，他們說已經在努力提高對輸入法的關注及意識。他們會去和 text service team 提及 OV 這一類 OSS 軟體的存在。
+
+=== 總結 ===
+
+0 不管對 Apple 內建輸入法有任何問題，或是 OV 在開發上遇到任何 OS X 的障礙，都可以直接透過宋先生這邊反應到 text service 的 radar 上（這點和上次 gugod 拜訪 Apple Asia 時一致）。宋先生會直接向 Apple 負責 text service 的部份聯繫。
+0 Apple Asia 希望聽到開發者對目前 Apple 的 IM framework 的看法及需求，包括哪些該改進、有哪些東西得修正，甚至對於未來 OS X 的 IM framework 怎麼走都可以提出（我想到的是 Cocoa 尚未被利用到的 NSText IM framework 等等）
+0 8月的台灣開發者工作坊，希望台灣這邊有更多人參與
+0 11月的輸入法工作坊，OV 團隊在受邀之列，Apple Asia 會爭取旅費預算
+0 WWDC 2006 的部份，夏先生說會盡力爭取邀請 OSS 輸入法開發者參與。
+0 夏先生建議 OV 朝 WWDC 2006 Design Award 努力，實際成為參賽者。

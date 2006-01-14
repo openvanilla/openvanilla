@@ -1,0 +1,36 @@
+= 如何取得並編譯最新的 Open Vanilla 源碼
+首先，請從「[OpenVanilla 的 subversion 檔案庫 http://svn.openfoundry.org/openvanilla/trunk/]」取回最新的源碼。
+
+最簡單的方法是利用 !MacOS X 的功能將網路硬碟掛上您的桌面，您只要用 Finder 的 Go 選單，選擇 Connect to Server... 、在 Server Address: 欄位填入 !http://svn.openfoundry.org/openvanilla 然後按 Connect ，這時候就能夠在桌面上看到 openvanilla 硬碟圖示，Finder 還會自動打開它，這時候只要把 trunk 檔案夾拖曳到您要的地方（拖曳的時候圖示的右下應該會有綠色的十字圖樣表示拷貝動作），等到動作完成後，您只需要把這個網路硬碟拖到垃圾桶上就可以終止連線。
+
+若您想使用 wget，請把下面那行貼進終端機執行：
+
+ wget -r -nH --cut-dir=2 -P ~/ov http://svn.openfoundry.org/openvanilla/trunk
+
+這樣會把最新的檔案庫抓到您個人目錄下的 ov 目錄裡。
+
+若您想使用 [SVK http://svk.elixus.org/]，請參閱「[如何透過 SVK 取得 Open Vanilla 的源碼 SVKGuide4OpenVanilla]」。
+
+要事先說明的是，所謂「最新版」通常會放在檔案庫的 trunk 目錄下，接下來提到的源碼所在位置就是從這裡算起，因此要是您的路徑和這裡寫的不太一致，那表示您當時取出遠端檔案庫的方式和這裡的範例不同，如需更詳細的說明，請參考「[SVK 指南 http://svk.elixus.org/index.cgi?ZHSVKTutorial]」。
+
+----
+
+接下來，若您完全沒裝過 !OpenVanilla，請打開終端機，進到源碼所在的根目錄下，編譯 !OpenVanilla 輸入法框架。假設源碼所在的目錄是您個人目錄下的 "ov"：
+
+ cd ~/ov ; sudo make all install clean
+
+使用 sudo 這個指令時通常需要密碼，此時請輸入您個人的密碼即可。
+
+再來，請到 Loaders 目錄下編譯 !OpenVanilla 的 Mac OS X 版輸入法載入器：
+
+ cd ~/ov/Loaders/OSX ; sudo make all install clean
+
+如果您之前已經裝過 !OpenVanilla，那麼您通常只需要更新自己常用的輸入法模組即可。以 Xcin 輸入法模組為例：
+
+ cd ~/ov/InputMethod/OVIMXcin ; sudo make all install clean
+
+最後，為了讓更新完全生效，請重新登入。若只是更新了某種輸入法模組，當您開啟一個新的應用程式時，輸入法載入器就會載入您已編譯成功的新版輸入法模組，然而在此之前已經開啟的應用程式中，仍會使用舊的輸入法模組；倘若您還更新了輸入法載入器或甚至是 !OpenVanilla 輸入法框架，就非得重新登入不可了。
+
+.infoblock
+{include: OVManualIndex}
+.infoblock

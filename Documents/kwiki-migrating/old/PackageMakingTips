@@ -1,0 +1,5 @@
+* 建立 data root
+* 權限的問題
+** /Library 以下都是 admin group
+** /usr 以下都是 wheel group
+* Resource

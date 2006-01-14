@@ -1,0 +1,33 @@
+= 克林貢文輸入法
+* 相關文章：
+** [::#osxchat blog: 克林貢文輸入法:: http://osxchat.blogspot.com/2004/12/blog-post_21.html] -- 12/21/2004 by [zonble http://zonble.twbbs.org/]
+使用 !OpenVanilla 的自訂輸入法功能，您也可以產生像克林貢文這種在地球上很少人使用的語言的輸入法，快速輸入克林貢文。要使用克林貢文的話，您大概會需要像 [Code2000 http://home.att.net/~jameskass/] 這類的字體，Code2000 是售價五美元的shareware（雖然我想不太出來字體做成 Shareware，跟 Freeware 的差別到底在哪？），不過，您在輸入克林貢文的時候務必小心，您可能會被外星人抓走...
+
+http://photos2.flickr.com/2370390_50b15c9d7c.jpg
+
+Code2000 Font [下載 http://home.att.net/~jameskass/CODE2000.ZIP]、Code2001 Font [下載 http://home.att.net/~jameskass/CODE2001.ZIP]
+
+.infoblock
+= 現有輸入法：
+=== [行列 OVIMArray]、[酷音 OVIMChewing]
+=== [香草倉頡 OVIMCangjei]、[香草注音 OVIMPhonetic]
+=== [白話字漢羅 POJ Han-Lo http:?OVIMPOJ]
+----
+== XCIN 模組：
+=== [倉頡 OVIMXcinCj]、[大易 OVIMXcinDayi3]
+=== [漁村符號 OVIMXcinEHQ]、[日文假名 OVIMUkiyoe]
+=== [粵語拼音 OVIMJyutping]、[K.K.音標 OVIMXcinKK]
+=== [正體漢語拼音 OVIMPingyinBig5]
+=== [簡體漢語拼音 OVIMXcinZhCnPinyin]
+=== [簡體倉頡 OVIMXcinZhCnJtcj]、[簡體注音 OVIMXcinZhCnPhonetic]
+=== [雙拼 OVIMXcinZhCnShuangpin]、[五筆字形 OVIMXcinZhCnWubizixing]
+=== [克林貢文 OVIMXcinKlingon]
+----
+=== [內碼 - Unicode Hex OVIMUnicode]
+=== [英數 OVIMEnglish]、[藏文 OVIMTibetan]
+----
+== 輸入法實驗：
+=== [EZbasic OVIMezbasic]
+=== [PHP 輸入法 OVIMphp]
+=== [Socket/perl OVIMsocket]
+.infoblock

@@ -1,0 +1,25 @@
+沒上，審查結果請見 UISTContributionReviews。稿件收藏於 http://arxiv.org/list/cs.HC/0508 。轉進 Contribute2CHI2006。
+
+----
+投稿目的在於讓輸入法走出亞洲語言及特定用途，讓大家知道這是個適用於所有語言的文字服務框架，而且是一種「非侵入式」的外掛模組環境（這是由 lukhnos 提出的重要觀點，我相信應該還沒有別人提過），最好能讓 OpenVanilla 有更高的國際知名度。
+
+[http://www.acm.org/uist/ UIST] 是 User Interface Software and Technology 的會議。這是 SIGCHI 贊助的會議，最近有不少手機或 PDA 輸入法的文章，大概是在輸入法軟體工程方面比較適合的領域。
+
+為了讓 OpenVanilla 成員都能有 credit，若無異議，poster 作者群會與 OpenVanilla 文件上寫的相同，並會在 acknowledgement 裡盡量列出所有幫過忙的朋友。而 doctoral symposium （如果來得及寫完...），礙於資格限制，作者只會列出寫文章的那個人，其他人都放在 acknowledgement。
+
+由於資訊相關領域會議的註冊費都很貴，若有幸入選，將有兩種方案：
+* Doctoral symposium 如果有上，將可獲得車馬費補助，且註冊免費。補助與省下的註冊費就私下平均分配給想去的人，而不是只給作者。（這個... 大約只入選 8 個人，機會渺茫。）
+* Doctoral symposium 沒上但 poster 有上，某人會嘗試向清大申請補助再平均分給想去的人，不足的部分希望能進行一次專款專用的贊助活動。
+
+要是來不及投稿或是沒入選（現在就寫退路好像不太好...），9/23 17:00 PDT 之前可以投 [http://www.chi2006.org/ CHI2006]。
+* 投稿至 CHI2006 的計畫：Contribute2CHI2006
+
+期刊方面，有點數的 [http://www.ieeesmc.org/publications/index.html IEEE Transaction on System, Man, Cybernetics, Part B: Cybernetics] 適合，沒點數的 [http://www.acm.org/sigchi/ SIGCHI] 的 [http://www.acm.org/pubs/tochi/ TOCHI] 也不錯。（亞洲地區的會議和期刊，以及計算語言學領域的，就不列在這裡了。）
+
+* PosterOutlines4UIST: 裡面以項目表示的部分會用於 poster，內文則會用於 poster proposal 和 doctoral symposium。Poster proposal PosterShortProposal4UIST 要有兩頁，doctoral symposium PosterProposal4UIST 要有四頁。
+* Reference candidates:  InputMethodPapers
+* UIST poster samples: PosterSamplesOfUIST
+* [Making an Academic Poster Display http://student.dcu.ie/~mcmahon4/posteradvice.html]
+* UIST doctoral symposium samples
+** http://www-2.cs.cmu.edu/~afass/papers/Fass_UIST_DoctoralSymposium.pdf
+** http://www.edgelab.ca/publications/scott_uist2003.pdf

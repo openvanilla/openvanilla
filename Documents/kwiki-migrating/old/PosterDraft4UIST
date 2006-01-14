@@ -1,0 +1,102 @@
+Deadline 是 6/28 14:59 (6/27 23:59 PDT)
+
+請參考 PosterSamplesOfUIST 的文體，幫忙把中文譯為英文，也歡迎增刪潤飾，大感謝！目前還缺乏「定義問題 -> 解決問題」的感覺，賣點可能不夠強。因此我加上了一些 Problem/Solution 的標記，括號裡那些就是，如果能夠把這些突顯出來是最好的了。
+
+
+= Reintroducing Input Methods - A Non-Intrusive Plug-In Framework of Text Services =
+
+Tian-Jian Jiang, Deng Liu, Wei-Zhong Yang, Meng-Juei Hsieh, Kang-Min Liu, Pek-Tiong Tan, Zhong-Hsiang Chang, Wen-Lien Hsu
+
+June, 26, 2005.
+
+== Abstract ==
+Input method (IM) is a /sine qua non/ for text entry of many Asian languages, but its potential applications on other languages remain under-explored. This paper proposes a philosophy of input method design by seeing it as a /non-intrusive/ plug-in text service framework. Such design allows new functionalities of text processing to be attached onto a running application without any tweaking of code. We also introduce OpenVanilla, a cross-platform framework that is designed with the above-mentioned model in mind. Frameworks like OpenVanilla have shown that an input method can be more than just a text entry tool: it offers a convenient way for developing various text service and language tools.
+
+== Introduction ==
+包含上萬個複雜字元的亞洲語言，無法直接使用美式鍵盤輸入，於是作業系統通常內建能將鍵碼轉換為中日韓越字元的工具，稱之為輸入法。而作為一種由作業系統提供的服務，輸入法必須滿足所有文字處理的需求。換言之，輸入法實際上是文字服務的基礎，且個別應用程式毋需為此進行修改，開發者也能在既定規範下實作不同的輸入法，因此可視為「非侵入式」的外掛服務。在語音、手寫或光學辨識技術仍不盡理想的今天，鍵盤依舊是最有效率的輸入裝置之一，而輸入法也就理所當然地扮演著重要角色。
+
+
+== Human Factor, Usability and UI Design Issues ==
+=== Keyboard Layout ===
+就算是英文也有鍵盤對應的問題，例如使用 QWERTY 鍵盤或 DVORAK 鍵盤的選擇。然而，在目前常見的作業環境下，這類鍵盤對應都依附於特定語言之下。輸入法則可進一步負責各種格式間的轉換，讓使用者可透過一般規格的鍵盤輸入文字，不必侷限於特定語言鍵盤之類的客製化裝置，反之亦然（用特定語言的鍵盤也能透過切換輸入法來處理各種語言）。客製化裝置也包含手機常用的九宮鍵盤，經過人因工程及語言模型的研究，產生了 T9 或 Multi-Tap 之類的輸入法以在輸入所需鍵數和鍵碼衝突率的利害關係之間取得平衡。又像採用許氏鍵盤的注音輸入法，依照中文拼音規則及其相似的英文字母，將注音符號平均配置於 26 鍵之中，相較於傳統的注音鍵盤配置佔用了 40 鍵更有效率。事實上，扼殺某些鍵位用途的不良設計不僅見於亞洲語言，通行於歐美語言之間，以組合鍵輸入帶重音符號字母的方法也是一例。改用輸入法來處理這些字母，不僅能讓被佔用的鍵位起死回生，毋需同時按下數鍵的操作方式，對使用者手指的負擔也較小。若將鍵盤事件的概念抽象化，便不必拘泥於鍵盤的長相，其他類型的裝置也能夠以輸入法的模式來理解，例如只要控制方向就能使用的 Dasher 輸入法。
+
+=== Text Service ===
+作為文字服務，輸入法可以有更廣的應用範圍。像是 MS Word 內建的拼字檢查功能，好則好矣，無奈只能在其中使用。然而只要針對這個需求設計一套輸入法，便等於有了隨處可用的拼字檢查器。
+
+=== Candidate List ===
+更進一步，輸入法不但內涵與文字服務相通，使用介面上也異曲同工。所謂「候選字詞列表」這樣的介面，並非針對輸入法或拼字檢查程式量身訂作，而可視之為 context menu 的原型。從這一點出發，許多 shell 支援的「字串自動補齊」、整合開發環境中提示 API 的 "IntelliSense" 乃至於 QuickSilver 或 TotalCommander 之類充分延伸鍵盤操作的應用，其實皆能以輸入法的方式呈現，一方面打破應用程式之間的藩籬，一方面活用 context menu 讓使用者「自行選擇」的彈性。
+
+
+== History of Input Method ==
+(Optional section)
+
+* Text mode, single-task.
+* Graphic mode, multi-task.
+
+== How Input Method Works ==
+在作業系統及桌面環境的層次，多半具備了低階的 API，開發者必須自行處理大部分的介面呈現與事件處理工作，才能寫出一個完整的輸入法。值得一提的是，Microsoft Windows 2000 以上版本，及 Apple Mac OS X，皆已將輸入法升格為文字服務層次，將語音或手寫辨識整合至同一框架內。另一方面，泛 UNIX 作業系統上支援 X Window 環境的 XIM 也行之有年，提供基本的輸入法需求。
+
+由於低階 API 使用不易，近年來各式輸入法框架紛紛如雨後春筍般出現。截至目前為止，已有支援 X Window 的 IIIMF、SCIM，同時支援 Mac OS X 與 X Window 的 UIM 及 OpenVanilla 先後發表。一般而言，輸入法框架旨在提供抽象的 API，替輸入法開發者預先安排好 dynamic-loaded library based 或 client-server based 架構，集中處理作業系統、輸入法與應用程式三者之間的訊息交換，並實作預設的使用介面及其背後之事件處理機制，希望開發者不再需要觸及低階 API，而能專注於各種輸入法設計工作本身。
+
+若想像力不受名稱所限，輸入輸出實為一體兩面。將原始鍵碼轉換為使用者所需的形式，讓輸入法有時更像是輸出過濾器。事實上，就算是用同樣的輸入法，也有可能依照用途，套用不同的輸出過濾器，透過後處理來改變結果，應用於中文書寫系統的繁簡轉換即是一例。
+
+簡言之，在鍵盤輸入仍不可或缺、人因工程方面還有改進空間、各式文字處理需求尚待滿足，而輸入法開發的難度並未降低的情況下，本文以「非侵入式文字服務外掛框架」的角度，重新詮釋輸入法，嘗試提出解決方案。
+
+== Introducing OpenVanilla ==
+OpenVanilla 是延續 VanillaInput 以及 SpaceChewing 兩套成功 Mac 開放源碼專案的計劃。原先為了解決 Mac 上沒有良好中文輸入法而設計，而後在兩次主要版本 (0.6, 0.7) 的演進下，逐漸成為一套一般性的文字輸入／輸入處理框架。
+
+在設計上，OpenVanilla 採取了幾個方向：
+
+0 Deployment 要相當簡單，最好是用簡單的 Makefile 甚或是單行 gcc 指令就可以編譯相關模組
+0 考慮到許多輸入法的開發者並不一定有時間、有空搞懂複雜的平台相關知識，因此 OV 框架要設計得相當簡單直觀，最好是只需要少量的 C/C++ 知識就可以撰寫模組
+
+在上述原則下，OpenVanilla 實際上僅僅只有「一個」header file，整個框架設計得相當地薄。然而這一個統整而簡單的介面，被證實具有相當大的彈性，同時對其他模組的相依性也相當地，在 deployment 上相當簡單。
+
+由 XCIN 團隊發明的 .cin 格式，以簡單的兩欄對照方式記錄鍵碼轉換的表格，同時也能設定五種幾乎為所有輸入法共有的參數，如下表所示：
+
+〈表〉
+
+MS Windows 與 Mac OS 的輸入法也有採取類似方式來讓使用者自訂輸入法，可惜欠缺了配置預設值的功能。而 .cin 格式檔案在這一點上更具有一般性，允許 .cin 提供者將預設值納入檔案。OpenVanilla 便以此為基礎，設計出一套通用輸入法模組，並成功地實際應用於幾種常見的中文輸入法上。
+
+為使通用輸入法模組朝通用輸入法引擎的方向演化，原先需要檔案讀寫、資料結構與演算法配合的部分，產生了以資料庫實作的分枝。藉著 SQLite 的幫助，開發者一方面可盡情應用 SQL 語法，不再需要特地為萬用字元檢索或排序等功能撰寫演算法，一方面也不再需要煩惱存取資料流時的效率或可靠度問題。
+
+（這裡提一下 OpenVanilla-UIM）
+
+
+參考 UIM 與 SCIM 橋接的方式，OpenVanilla 也實作了 SCIM-OpenVanilla 介面，由 Mac OS X 跨足至 Linux 與 FreeBSD 的 X Window，驗證了 OpenVanilla 框架的普遍性。
+
+由於開發過程中碰上 Mac OS X Tiger 的 Dashboard 環境無法順利顯示候選字詞列表的問題，OpenVanilla 開始發展出 Display Server，統一處理繪圖事件，使得前端 GUI 設計工作能與後端控制邏輯更加分離，更為貼近 MVC 的精神。
+
+值得一提的是，支援網路功能的輸入法機制也已有實驗性的原型。個別輸入法程序可視為用戶端，通過 TCP socket 向同一個伺服端請求處理所需的文字服務。如此一來，文字服務便可與使用介面脫勾，繼 Display Server 之後，進一步實現軟體工程上的理想架構。同時這也意味著異質系統結合的可能性，例如文字服務伺服端所使用的開發語言便能有更多的選擇，不再受到作業系統層次輸入法 API 支援及 Inter-Process Communication 相容性的限制。加上對連線的支援，更提供了網際網路服務的想像空間。像是輸入法後端常需要的辭典資料，便可改由查詢線上辭典甚至是使用搜尋引擎來取得。
+
+
+== Customization, Simulation and Personalization ==
+透過修改 .cin 交換格式或 SQLite 資料表中的欄位，使用者要自訂鍵碼代表的字元可說是易如反掌，對於工作上有特定需求的人來說，無需仰賴程式設計師，即可輕鬆地產生最簡單的輸入法 plug-in。而輸入法設計者在進行實驗分析時，也能以此方式快速產生不同的輸入法。尤其在進行手持裝置的輸入法研究時，便能以極低的工作量建構出各式模擬環境。
+
+為了改善使用經驗，有些新式的輸入法會嘗試「學習」使用者的習慣，動態調整候選字詞的優先順序。本文引用 Cache Management Pattern 的概念，作為輸入法學習功能的程式設計原則，如下圖所示：
+
+〈圖〉
+
+
+== Showcases ==
+利用 .cin 格式，OpenVanilla 已能支援一般中文作業系統皆有的輸入法，如注音、倉頡等。另一方面，透過 OpenVanilla 簡單易懂的 API，支援四種鍵盤配置與字母 stacking，功能相當完整的藏文輸入法，只花 n 行程式碼就實作出來了。（這裡提一下以 OpenVanilla-UIM 支援日文輸入法和以 SCIM-OpenVanilla 支援簡體拼音輸入法的事。）而以拉丁字母發展書寫系統的台語，也有了能打聲調符號的輸入法。基於這樣的特性，要改寫為能打重音記號的歐語或非洲語輸入法，也不會太過困難。由於和 Unicode 相容，不僅能使用複雜字元，只要字型齊備，還能支援各種符號或甚至是人造語言，如漁村輸入法和克林貢語輸入法。在不考慮構詞律及語法的情況下，Unicode 符號輸入法也能支援非洲語言的字元。
+
+由輸出過濾器的角度來看，只需簡單的程式，即可將來自輸入法的結果，再次轉換為另一種形式。OpenVanilla 提供的中文繁簡轉換，不同於其他相同用途程式採取的整句整篇處理策略，而是隨打隨轉立即生效，便是過濾器最佳的應用之一。另外還有將文字即時轉換為摩斯電碼的過濾器，讓原先需要專業知識的工作變得老嫗可解。事實上，從這個例子看來，也可用同樣的原理實作點字專用的輸出過濾器。
+
+除了基本文字輸入輸出之外，還能將單行直譯器納入這個服務框架，實作成果已能執行 BASIC 及 PHP 的單行指令了。
+
+對 CJKV 的使用者來說，智慧型輸入法內建辭典已是理所當然的事。這樣的設計，其實也可應用於英文寫作上。在進行 socket based 輸入法機制實驗時，便以 WordNet 為基礎，試作出一個能提示同義詞於候選字詞列表的輸入法，將辭典查詢的使用介面改以輸入法呈現。實際上在日本已有商業公司 (http://www.atok.com/) 朝此方向發展多年，以輸入法搭配多種辭典及語意資源，幫助文字工作者提升創作效率與品質。
+
+
+== Summary ==
+輸入法不再只為亞洲語言工作，它既能取代傳統的組合鍵以支援拉丁字母書寫系統，也是任何語言的手持裝置的必要工具。將格局放大至文字服務，輸入法也不再只是「輸入」法：拼字檢查、字串轉換、辭典應用乃至於簡易直譯器，其潛力不言可喻。為了使這些目標更容易實現，本文提出了「非侵入式文字服務外掛框架」的觀點，並於 OpenVanilla 框架中實作驗證。透過框架的延展性及候選列表介面的彈性，開發者與使用者獲得了更多施展創意的空間，而能將潛力化為實例。
+
+
+== Future Works ==
+MS Windows 目前是最多人使用的平台，但還沒有任何輸入法框架層次的實作出現。實作 OpenVanilla 與 Windows IME API 的橋接，是接下來最重要的工作之一。
+
+為了讓這個文字服務框架盡善盡美，未來將引入更多自然語言處理的技術，使文字服務更加貼近人性，同時讓此框架成為自然語言處理的實驗平台，在研究與應用之間形成正向回饋的橋樑。
+
+
+== References ==
+預計由 InputMethodPapers 中挑選

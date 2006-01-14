@@ -1,0 +1,45 @@
+= !OpenVanilla Holo / POJ
+
+== 簡介
+
+!OpenVanilla 是一套輸入法架構（framework）。目前 OV 的 POJ 輸入法是各家當中支援最完整 POJ 拼字（orthography）及 Unicode 輸出者。同時因為 !OpenVanilla 是一套多平台（cross-platform）的輸入法架構，因此 POJ 輸入法已經可以在 Mac OS X、Linux/!FreeBSD 以及 Windows 等平台上使用。
+
+== 特色
+* 利用 (標轉化的) ASCII POJ 輸入
+* 可輸出 萬國碼全羅(Unicode POJ)，或是漢羅(全漢)
+
+** 發展中的功能
+* 支援標準化的 POJ 輸出 (拼寫方式，標調位置等等) (發展中)
+* 輸出 CJK Ext-A/B 中的漢字 (發展中)
+* 輸出 POJ/漢字 並列，如輸出『(góa我)』或『(我góa)』(發展中) 
+* 輸出 HTML Ruby tag
+
+== Án-choáⁿ tàu chi̍t-ê nńg-thé | How to install | 怎麼裝
+* Windows 使用者
+** Kàu [chit-ia̍h http://rt.openfoundry.org/Foundry/Project/Download/?Queue=209]  lia̍h  [OV-Win32-POJ-0.7.2rc1-20051125.exe http://rt.openfoundry.org/Foundry/Project/Download/Attachment/49418/34395/OV-Win32-POJ-0.7.2rc1-20051125.exe] chi̍t-ê nńg-thé.
+**  Lia̍h lo̍h--lâi liáu, "double click" OV-Win32-POJ-0.7.2rc1-20051125.exe
+* Mac OS X 使用者
+* Linux/!FreeBSD 使用者
+== Preference | 偏好設定
+* OVPref 
+== 怎麼打 POJ
+
+* 打聲調的三種方法
+
+== 有問題找誰
+* !EMail hō· pektiong@gamil.com ia̍h-sī lâu-ōe tī [Pektiong] hia.
+== Án-choáⁿ pó·-chhiong jī/sû | 怎麼參與增加字目／詞條
+* [Pó·-jī PouJi]
+== 相關連結
+
+* !OpenVanilla official site: http://openvanilla.org
+* !OpenVanilla in Mandarin: http://openvanilla.org/kwiki/zh
+* !OpenVanilla in English: http://openvanilla.org/kwiki/en
+
+== Kī-su̍t-sèng ê bûn-kiāⁿ | Technical Notes | 技術性ê文件
+* [Jī-hêng JiHeng] | Font | 字型
+* Encoding
+* [Chiàⁿ-jī-hoat ChiannJiHoat] | Orthography | 正字法
+== 其他計劃
+
+* !LibHolo

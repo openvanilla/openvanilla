@@ -1,0 +1,10 @@
+== !OpenVanilla Wiki in English
+
+We have just been moved and are now building the new contents. If you need the data on the old wiki, please visit http://openvanilla.org/kwiki/old/ (partially in English)
+
+== Quick Links
+
+* To download [OpenVanilla 0.7.1 OS X http://rt.openfoundry.org/Foundry/Project/Download/Attachment/40262/28100/OpenVanilla-OSX-Base-0.7.1-Installer.pkg.zip] (along with the [OVIMGeneric fix http://rt.openfoundry.org/Foundry/Project/Download/Attachment/40314/28144/OVIMGeneric-OSX-enhancement-OV0.7.1.zip])
+* If you find a bug or like to request a feature, you can post it on [the issue tracker http://rt.openfoundry.org/Foundry/Project/Tracker/?Queue=209] (please register as a user at !OpenFoundry first)
+* If you would like to build from the source, please use svn/svk to check out the source from: http://svn.openfoundry.org/openvanilla/trunk (please register as an OpenFoundry user first).
+* For those interested in our Windows version (OV-IME): please refer to [the note on the old wiki (in Chinese) http://openvanilla.org/kwiki/old/index.cgi?Win32Issues]

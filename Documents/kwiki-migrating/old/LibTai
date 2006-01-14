@@ -1,0 +1,24 @@
+LibTai: 處理Holo/Hakka的程式庫
+
+class & function name begin with LT
+
+example:
+bool LTIsValidHoloSyllable(const string& s);  
+
+== 應該包含的功能 ==
+* ASCII POJ <-> UTF-8 POJ
+* Normalization
+** UTF-8 POJ Normalization,  tone mark position, composing/precomposed diacritics
+** ASCII POJ Normallization
+** [[ConversionTable]]
+
+== Proposed Class and Function ==
+* bool LTIsValidHoloSyllable(const string& s);  
+
+== Tone mark position ==
+* Use sonority to decide the position of the tone mark
+** 出現一個以上的母音的時候，調號標在sonority最高的母音上面
+* Use following sonority hierarchy 
+** a=ann>ou=ounn>e=enn>o=onn>i=inn>u=unn>ng>m=n
+* 例
+** oa2-->oá, oe2->óe, iu2->íu, iap8->ia̍p, 

@@ -1,0 +1,78 @@
+* (talk) 請勿超過五頁 -- mjhsieh
+** (talk) 五頁怎麼定義？ -- mjhsieh
+*** (talk) 丟到 PDF 上 reformat 過後不超過五頁 -- lukhnos
+
+* (talk) 共用的也許可以用 kwiki 的 include 功能來做 -- lukhnos
+
+= !OpenVanilla 使用指南精簡版 (for Mac OS X users)
+
+* [talk] 有一些共用的 element，但我先以 Mac OS X 為主。儘可能以大標（簡介、安裝）來寫 shared blocks，這樣簡介可以 copy 到 Windows 版──Windows 版安裝一定和  Mac OS X 不同，所以不宜塞在同一網頁裡。 -- lukhnos
+
+== 簡介
+
+!OpenVanilla 簡稱 OV ，是一套輸入法及文字輸出的「架構」（framework），可以安裝在 Mac OS X, Windows 及 Linux/FreeBSD 的桌面環境上。!OpenVanilla 負責管理符合特定規格的各種輸入法 (IM; input method) 及文字輸出模組 (OF; output filter)。對使用者來說，!OpenVanilla 提供了數量眾多的輸入法，以及文字輸出的轉換（例如打繁體中文出簡體中文）。對軟體開發者來說，!OpenVanilla 則讓開發輸入法及文字轉換工具變得更為容易。
+
+!OpenVanilla 最早是在 Mac OS X 上開發出來。經過團隊及社群朋友的協力，如今也有 Linux/FreeBSD 以及 Windows 上可使用的初步版本。
+
+目前 !OpenVanilla 支援超過二十種的中文輸入法，以及諸如藏文、古希臘文、特殊符號、Holo POJ（台灣閩南語的白話字）、日文等輸入法。這些輸入法都是以外掛 (plug-in) 的方式提供，使用者可任意安裝取用。同時透過一套名為「泛用輸入法模組」 (generic IM module) 的程式，使用者也可輕易自創新的輸入法，或修改既有的輸入法表格。
+
+!OpenVanilla 是一套進行中的計劃，程式碼採開放源碼 (open source) 的授權公開，同時 !OpenVanilla 也在文字輸入（不僅是「中文」輸入法）及輸出轉換的應用上，做各種學術性或實用性的嘗試。這個計劃的目的，除了提供穩定、可靠且易用的輸入法及文字處理模組，也在瞭解輸入法這個與我們日常生活攸關的工具，能夠有哪些繼續開發研究的可能。
+
+在中文名字上，有人稱 !OpenVanilla 為「開放香草輸入法」。嚴格說來 OV 是一套「軟體架構」而不是特定的某個輸入法。我們並不介意這樣的通稱，但 OV 實際上是沒有中文名字的。我們通篇以 !OpenVanilla 或 OV 稱呼它。
+
+== 安裝（Mac OS X 版）
+
+目前最新版本為 0.7.2 。
+
+!OpenVanilla 從 0.7.2 開始，不再支援 OS X 10.3 (Panther)。請務必使用 OS X 10.4 (Tiger) 以上的版本。
+
+0 下載 !OpenVanila 最新版本，並執行安裝
+0 安裝會要求登出後再登入。這是 OS X 的系統限制，必須要經過這一步才能使輸入法模組生效。
+0 重新登入後，在「國際設定」的「輸入法選單」中應該就會看到 !OpenVanilla （一種 Unicode 輸入法），請勾選起來，這樣螢幕頂端輸入法選單中就會出現 !OpenVanilla。
+0 以下疑難雜症，必須要手動修護或使用還沒寫完的 !OVUninstaller.app 處理：
+00 如果沒看到 !OpenVanilla 出現在「國際設定」的「輸入法選單」中
+00 有看到，但是無法切換至 !OpenVanilla
+00 切換至 !OpenVanilla 後無法打字，或只能打英數字（亦即輸入法沒生效）
+
+== 使用
+
+* 第一次使用
+* 切換模組
+* 進入 OVPreference.app 修改模組設定
+** 移除自己用不到的模組
+* 利用快速鍵加快使用速度
+
+== 擴充 OV 的功能：泛用輸入法模組
+
+
+== 其他常見模組一覽及簡介
+
+* 倉頡／簡易
+* 傳統注音
+* 酷音
+* 行列
+* 大易
+* POJ
+* 漁村符號
+* 日文假名
+* UIM
+
+* 全形英數字輸出模組
+* 繁簡轉換模組
+* 注音文退散模組
+
+== 常見疑難雜症排解
+
+== 取得原始碼及從原始碼建立
+
+== 問題回報
+
+== 加入 !OpenVanilla 團隊
+
+== 捐款贊助
+
+
+* 第一層
+** 第二層
+00 第二層
+0 第一層

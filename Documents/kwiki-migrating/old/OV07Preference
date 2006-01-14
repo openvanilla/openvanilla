@@ -1,0 +1,39 @@
+== 0V 0.7 偏好設定
+
+=== 通用選項
+* 選字窗字體
+** String CadidateFontName
+* 選字窗字體大小
+** float CadidateFontSize
+* 選字窗背景顏色/圖片
+** CadidateBackground
+* 選字窗透明度
+** CadidateAlpha
+* 入力娘服裝（噗）
+* 遇錯字是否發警示聲／系統預設警示聲列表（/System/Library/Sounds）及使用者自訂音效
+** BeepOnError
+** BeepSounf
+
+=== 輸入法
+
+==== POJ
+* 全羅輸出
+** 意思是全羅和漢羅切換嗎？
+* POJ 樣式
+** 意思是要不要附加聲調符號嗎？
+
+==== 注音
+* KeyboardLayout
+
+==== 酷音
+* KeyboardLayout
+
+==== 藏文
+* KeyboardLayout
+
+==== 通用
+* KeyboardLayout
+** QWERTY
+** DVORAK
+
+=== Filter

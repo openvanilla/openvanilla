@@ -1,0 +1,17 @@
+簡單說明如何產生漢語系語言（方言）的漢羅輸入法。使用一般的英文鍵盤輸入，輸出全羅（拉丁化漢字）或漢羅混寫，或全漢字。
+
+0 Unicode 羅馬字和 ASCII 羅馬字的轉換規則，如調號及有 diacritics 的字母等標調位置的規則。
+ goa2->góa
+ o·->ou
+ ...
+
+0 製造 .cin 檔，也就是 ASCII 羅馬字和漢字的對應表
+ goa2 我
+ li2 你
+ ...
+
+== !OpenVanilla 內已有的此類模組
+* OVIMPOJ-Holo 河洛話白話字輸入法
+* OVIMPOJ-Hakka 客家話白話字輸入法（還未正式發行）
+
+似乎應該跟 Arne 溝通一下不要做[可能重覆的事 http://blog.linux.org.tw/~jserv/archives/001233.html]？

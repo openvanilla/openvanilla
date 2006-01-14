@@ -1,0 +1,75 @@
+= 如何移除 OpenVanilla =
+
+共通程序：
+
+*  進系統偏好設定→國際設定→輸入法選單，勾除 OpenVanilla
+*  依照版本不同移除檔案（請參考以下清單）
+* 重新 login （建議重新開機）
+
+== 移除 OpenVanilla 0.6.3 ==
+
+請從 Finder 移除以下檔案及目錄：
+
+* /Library/Components/OVLoader.bundle
+* /Library/OpenVanilla/0.6.3
+* /Library/PreferencePanes/OVPrefPane.prefPane
+* 您家目錄裡的 ~/Library/OpenVanilla/0.6.3 及~/Library/OpenVanilla/OVIMChewing （如果您使用酷音輸入法）
+
+== 移除 OpenVanilla 0.7.x ==
+
+請從 Finder 移除以下檔案及目錄
+
+* /Library/Components/OVInit.bundle
+* /Library/OpenVanilla/0.7.0/
+* ~/Library/OpenVanilla/0.7.0
+
+== 萬一輸入法選單壞掉了，或是國際設定爛掉了 ==
+
+請從 Finder 移除以下檔案
+
+* ~/Library/Preferences/com.apple.HIToolBox.plist
+* ~/Library/Preferences/ByHost/com.apple.HIToolBox.* （後面檔名隨機器不同而不同，請將以此開頭的檔案全數刪除）
+
+然後重新登入，國際設定應該就可以修復
+
+== 從 shell 下移除（進階使用者） ==
+
+注意！如果您要以下列方式清除 OpenVanilla ，請務必了解 "sudo" 指令所代表的意義！
+
+移除 OpenVanilla 0.6.3 ：
+
+ # this removes 0.6.3
+ sudo rm -rf /Library/Components/OVLoader*
+ sudo rm -rf /Library/OpenVanilla/0.6.3/*
+ sudo rm -rf /Library/PreferencePanes/OVPrefPane.prefPane
+ sudo rm -rf /usr/lib/libchewing*
+ sudo rm -rm ~/Library/OpenVanilla/0.6.3
+ sudo rm -rm ~/Library/OpenVanilla/OVIMChewing
+
+移除 OpenVanilla 0.7.0 (rc3, rc4) ：
+
+ # this removes 0.7.0 (rc3, rc4)
+ rm -rf /Library/Components/OVInit*
+ rm -rf /Library/OpenVanilla/0.7.0/*
+ rm -rf ~/Library/OpenVanilla/0.7.0
+
+移除共用程式庫：
+
+ # this cleans up shared libraries
+ sudo rm -rf /Library/Frameworks/Chewing*
+ sudo rm -rf /Library/Frameworks/OpenVanilla
+ sudo rm -rf /usr/local/lib/libchewing*
+
+如果您生氣了，想通通拿掉：
+
+ # if you get mad and want to get all over with
+ sudo rm -rf /Library/Components/OV*
+ sudo rm -rf /Library/OpenVanilla
+ sudo rm -rf /Library/PreferencePanes/OVPrefPane.prePane
+ sudo rm -rf /usr/lib/libchewing*
+ sudo rm -rf /usr/local/lib/libchewing*
+ sudo rm -rf /Library/Frameworks/Chewing*
+ sudo rm -rf /Library/Frameworks/OpenVanilla
+ rm -rf ~/Library/OpenVanilla
+ rm ~/Library/Preferences/com.apple.HIToolBox*
+ rm ~/Library/Preferences/ByHost/com.apple.HIToolBox*

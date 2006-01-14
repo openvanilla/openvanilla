@@ -1,0 +1,965 @@
+= Skkime's page =
+
+== [ up-to-date information ] ==
+
+=== [ 2005/02/19 ] ===
+
+Snap20050215 was put in place. The modification from snap20041208 is as follows.
+
+* When the `` [ the '' and the `` ] the '' is included in Annotation, correction of the bug where when it does, after of the candidacy cannot select dictionary search. (Sabimaru and the bug report thank
+you)
+* In Annotation the `` [ the case where the '' is included the modification of rule of nonpoisonous conversion. Being to be piled up with the problem above, it does, but when the `` [ the candidacy which
+includes the '' is registered to annotation, (concat...) Being registered, register contents are broken. This bug fix was done.
+* Way Text Service Framework side annotation is indicated, correction.
+* Changing to plural candidacy from single candidacy indication, when
+
+you pushed ``x'' and resetting to single candidacy indication, the correction of bug which is not just indicated in the case where exactly there is annotation in that candidacy.
+
+=== [ 2004/12/08 ] ===
+
+Snap20041208 was put in place. The modification from snap20040929 is as follows.
+
+* When process which suspend is done exists in Windows2000 environment correction of the bug which the whole system stops. Thanks to Max Burmistrov for reporting the bug report about suspended
+process.
+
+=== [ 2004/09/29 ] ===
+
+Snap20040929 was put in place. The modification from snap20040317 is as follows.
+
+* It tried to use tooltip in the indication of annotation.
+* It tried to attach the lapel to minibuffer indication.
+
+=== [ 2004/03/17 ] ===
+
+Snap20040317 was put in place. The modification from snap20040223 is as follows.
+
+* Compile it did again to do with the setting of the Text Service Framework which with Windows2000 has been made invalid for the second time as effective.
+* When X-Mouse is utilized, Window having made whichever setting, automatically, the bug which appears in the foremost aspect fix was done. (TOYAMA Sumio and the bug report, thank you)
+* The bug where color setting "in the character string which is in the midst of converting" is not reflected fix was done with application which utilizes Text Service Framework.
+
+=== [ 2004/02/23 ] ===
+
+Snap20040223 was put in place. The modification from snap20040218 is "error occurring when the logging on to Windows2000, correction of the bug which is stopped". (KOMURA Kazuhiro and association in debugging, it was grateful)
+
+=== [ 2004/02/18 ] ===
+
+Snap20040218 was put in place. As for the modification from snap20040214, uistate.C was rewound to the point in time of snap20040203, is. As for this vis-a-vis the bug that "error occurs immediately after the logging on to Windows, stops there" uistate.Because you thought whether c problem is. (KOMURA Kazuhiro and the report thank you) Taking Ae you do not obtain, it is intention of the
+circumstances seeing with this. In addition "when IME of the picture of Winlogon is designated as
+skkime, because it cannot cause skkiserv, you became aware in the bug that but every time of conversion (that by all means fails) means long haul to be made wait", remaining. As expected, the fact that IME over there is changed the male be completed, being not to be possible, it does, but something it is the intention of coping. (It became easy to test with the shade of virtualpc)
+
+=== [ 2004/02/14 ] ===
+
+Snap20040214 was put in place. The modification from snap20040203 is only delicate adjustment.
+
+* Renewal frequency of the language bar, timing was adjusted.
+* As status window was white the fact that the period when it is indicated is long at the place of WM_ERASEBKGND the to sesame was converted by the fact that "the invalid time bitmap" is stuck. Is. If with adjustment of the language bar of former, you can hold down the phenomenon where the language bar becomes the non reaction, with you have expected.
+
+=== [ 2004/02/04 ] ===
+Snap20040203 was put in place. As for the modification point
+from snap20031212,
+* When combining with application or shell of specification
+such as LiteStep, status window becomes the non reaction, (NAKAMURA
+Toshikazu and the bug report thank you),
+* [ TSF ] Directly, the case where selects candidacy with 2nd
+menu of code input mode the key is not just indicated,
+It is correction of bug.
+== [ past news ] ==
+=== [ the introduction of software ] ===
+SKKIME is one kind of Input Method Editor which operates on
+Microsoft Windows. It is distributed as free software which you follow
+GNU General Public License. Thing and Windows2000 which presently
+operate with Windows'98 (Professional?) 2 Tsugas of those which operate at on it exists.
+As for SKKIME, Nemacs, Mule, Imitating to the system, SKK which offers the Japanese input
+environment which operates on Demacs it mounts in the form of IME of
+Windows being something which does.
+== [ table of contents ] ==
+* Skkime for Windows9x
+* Skkime for Windows2000/XP
+* Link
+=== [ SKKIME for Windows'98 ] ===
+Customization
+ReadMe. which is attached to the packageIt meaning that the fact that TXT is read is most, it does, extracting
+just the place, but you take and may become Ae not obtaining problem
+here, you write.
+Problem coping method
+We would like to make the carriage return key the decision
+return (setq skk-egg-like-new-line t)
+Date entering with the ``@'' is troubled (define-key
+skkinput-map "@" 'j-self-insert)
+As for appointment of Large dictionary? (Pass of setq
+skk-aux-large-jisyo dictionary)
+The `` っ ほ it is with ``ohhon'' the '' we would like to
+input, (setq skk-rom-kana-rule-list (cons ' ("oh" "h" (nil. Nil) ) Skk-rom-kana-rule-list)
+Default.Being compiled el directly, you are not concerned, is, but it deletes.
+Default.When el is gone... only kana input it becomes impossible.
+Installation method
+SKKIME98. which is included in the distribution fileThe right please click INF. If the item, installation which is
+included in the menu is chosen, the necessary file is copied and
+installation is completion.
+When using SKKIME98, "setting" -> the "control panel" -> "the
+keyboard" -> please add SKKIME98 with "language".
+Usually with ALT + SHIFT changing IME, the fact that you use probably
+is good fortune. The application and the like which uses IME FUNCTION
+is the expectation which does not move. (Reading was obtained from
+Chinese character to be, as for such being not to be possible)
+When execute form is made from the source code
+1. Http: /Www.Microsoft.Com/Windows'98 DDK is picked up from ddk. When Windows'98 DDK is installed
+already, this job is unnecessary.
+2. Windows'98 DDK is installed. You think that with default it is
+installed to /98DDK.
+3. /98DDK/Src/Ime/The change of jpn of jpn it makes move with the name which
+comparatively calls the source tree of SKKIME98 jpn.
+4. /98DDK/Lib/I386/[ Free,Checked ] From library of Visual C++ ws2_32.Lib is copied.
+Preparation was prepared with this.
+1. /98DDK/Src/Ime/Jpn/Skkiserv/[ A,M ] Moving, nmake.Exe is executed. Skkiserv.Exe and skkisrvm.Exe is made. Please correct Makefile appropriately according to need.
+E.g., compiling option is modified....
+2. /98DDK/Src/Ime/When build -Z is executed with jpn, SKKIME98 to be done build,
+/98DDK/Lib/I386/[ Free,Checked ] The file is copied below. This is the same as the build
+method of the other sample of DDK. This time, skkiserv.Exe, Skkisrvm.Because it copies also exe together, the necessity make to do first
+just is.
+==== renewal past record and download ====
+* SKKIME98-1.0beta9 (the source code (Lost it did...)/Execute form lzh, Tar+gz)
+* In lisp interpretation part in interpretation in character
+string "/When "with the letter which escape is done continues, second letters
+the bug where escape is not cancelled was corrected.
+* SKKIME98-1.0beta8 (source code/Execute form lzh, Tar+gz)
+* In order to call DebugPrintf by way of the DEBUGPRINTF macro,
+it corrected.
+* Execute form was not made with freebuild environment, because
+(beta07), build it did again to do.
+* SKKIME98-1.0beta7 (source code/Execute form lzh, Tar+gz)
+* When registering the conversion result, "/"Quote the way you must be done, the bug where the letter is not done
+and is that way registered quote was corrected.
+* SKKIME98-1.0beta6 (source code/Execute form)
+* The bug which with Mixed Unicode Version cannot input
+FullWidth Tilder well was corrected.
+* The bug where the ``_'' is not well input during conversion
+operating was corrected.
+The people bug reporting, thank you truly.
+AlphaXX deleted for the Web Page restriction of Nifty. Because it is
+kept in labor assistant, there is a bug of former times and that we
+want version, the one which is said please does the mail in my
+address.
+From alpha version the renewal past record to beta this is.
+==== the trouble which presently is known ====
+The trouble which presently is known (the problematical point)
+it is as follows.
+* Uninstall it is not possible. "C:WindowsSystemskkime98.Ime ","C:WindowsSystemskkim98m.Ime ", "C:If WindowsImeSkkime98 "it deletes, you take and Ae not obtaining
+Uninstall are possible. In that case beforehand please delete SKKIME98
+from the property of the keyboard. Registry please deletes under
+softwaremiscwindowscurrentversion of CURRENT_USER and LOCAL_MACHINE.
+* When communicating with skkserv, because it waits for TimeOut
+accurately, the reaction becomes sluggish. There is no either function
+that, skkserv it reads the auxiliary dictionary when skkserv does not
+exist either a function that it goes to causing.
+* The cord/code of the user dictionary is made Japanese EUC deciding
+striking.
+* Appointing the skk-aux-large dictionary, it seems that is the times
+when it cannot be good and read the dictionary. Wskkserv.If exe is utilized, kana Chinese character conversion in possibility
+being a certain way, it does, but....
+==== operation verification the application which does ====
+* NiftyManager 5.00
+* FrontPage Express Version 2.0.2 11118
+* IBM home page builder 2001
+* Notepad
+* WordPad
+* Word'98
+* Internet Explorer 5.0
+* MS-DOS prompt
+* Windows logon
+=== [ SKKIME for Windows2000 ] ===
+==== circumstance of development ====
+Skkiserv was rewritten extensively. In addition the setting
+part of dialog was renovated.
+The difference with the Windows'98 edition is as follows.
+* As for IME skkiserv.It exchanges message making use of exe and Named Pipe. As for actually
+managing the dictionary skkiserv.It has become the work of exe.
+* Is only Unicode edition from the restriction of Windows2000.
+* It was not to make setting the file, in order to place in registry,
+it corrected.
+* Skkiserv. of the time beforeDifferent from exe, skkiserv.Those where exe reads have become just dictionary setting. (What it
+does that parse it does lisp inside DLL had the excessiveness, but
+being to try to write on registry)
+==== known problematical point ====
+* Insufficiency of setting dialogue: As for color setting
+dialogue such as the color setting dialogue which is in the midst of
+inputting mounting (2003/01/10)
+* Defectiveness of setting dialogue: Some buttons do not
+operate ("renewal")
+* LISP: Because j-num-list has not been renewed, times does not
+operate.
+* User dictionary: State decision of the user dictionary at the time
+of skkiserv start is sweet.
+* UI Window RootWindow Style? When being, it becomes strange. When
+(letter input is tried in the desktop, it can reproduce simply)
+* When it re-converts when IME has closed it becomes strange.
+(2003/01/02)
+* There are times when it fails in okuri-ari search of the sort
+being completed dictionary. That it will make reappear with labor
+assistant, while the test, still concrete reappearance method does not
+understand. At the time of Release Build, being caught to
+optimization, it seems that occurs. Because it corrected the part
+where problem arises due to optimization, the test with Release Build
+in the midst of continuation. (2003/01/04) The pattern which fix it is
+possible. (2003/01/10)
+* Meaning is indicated in the case of candidacy indication.
+However, because this relates to also the design of conversion
+candidacy indication Window, how it solves, you have not happened to
+think yet. The display function of Annotation addition (2003/01/13)
+* There is no cooperation with the Text Service Framework. As
+for Text Service Framework OfficeXP, It is the substitute which administers around Toolbar where WindowsXP
+extends. It does not go to the correspondence of Text Service
+Framework, but adding the cord/code for the language bar. (2003/01/27)
+Correcting the bug of stage of 2003/01/27. (2003/01/30) When it makes
+IME of default, correction of the bug which falls lively? (2003/02/01)
+Initialization/Adjustment of non initialization position. (2003/02/02) Furthermore
+adjustment. (2003/02/13)
+* Logoff becomes slow? (2003/04/28) It is in the midst of
+correcting & the test.
+* The warning UserEnv appears in the application of the event log.
+(2003/05/28) It is in the midst of investigating. Whether doing that
+some operation is bad concretely... (of course registry operation
+problem is reason, but).
+==== unsolved bug list ====
+| phenomenon | taking Ae not obtaining coping method |
+environment | report day | the circumstance which occur |
+| there are times when the idea contest of the language bar
+becomes strange. (Example. After) | putting away the language bar in the task bar, if it
+reconstructs, it seems that the excessive idea contest goes out once
+e.g., the tool button enters two. |WindowsXP (with WindowsUpdate SP1)
+during + OfficeXP SP2|2003/03/12| investigating |
+Becomes just the blue idea contest, | the idea contest of the
+language bar JP | during unclear |Windows2000Pro + Office2000 +
+MS-Project2002|2003/03/10| environmental constructing |
+When | in the folder of specification it tries to delete the
+file with Shift+Delete, Exprorer becomes "there is no response" |
+during unclear |Windows2000Pro + Office2000 +
+MS-Project2002|2003/03/10| environmental constructing |
+| with application of specification kana enters with only half
+angle katakana? | obscurity |WindowsXP + CHOCOA/PuTTY? (Lack of confirmation) |2002/? /?|investigating|
+After all, the language bar (Text Service Framework) turning is
+difficult, don't you think? is.... If there is a sample in DDK, being
+to be good, it does, but. (It is in PlatformSDK, but there probably
+will make COM becomes)
+==== it has entered into the mounted list, but function of not
+yet mounting ====
+* The mounting Reconversion. The cooperation with kakasi of
+Reconversion.
+* Reverse Conversion. With respect to structure of the dictionary, the
+fact that adverse change exchanging is done it is very difficult,
+but... it adds to the list once. Perhaps only the extent which
+cooperates with kakasi there is the hand.
+* Correspondence of associative dictionary and edict dictionary....
+* Actualization of Text Service Framework. For example, with Outlook
+Express the language bar is not renewed securely, but because this is
+called by way of Text Service Framework, is. With next term Windows as
+for IME expecting, that certainly it becomes COM, if now it does not
+do the sushi and this correspondence.... Temporary mounting (while
+test) (2003/05/28)
+* Control of recurrent register mode. Playing with PSO, when...
+it enters into recurrent register mode in the kyat, because it is sad,
+for example that "the candidacy indicatory window the own expense (IME
+side) with when it cannot have, it does not enter into recurrent
+register mode", that, it tries to be able to control with Property
+setting you think. Once, mounting..., securely does not indicate
+composition window on IME, that is not conveyed questions sows from
+application, it does not operate is. Indicating the window in outside
+the picture, in the type which we assume that sesame conversion so, it
+does not operate well. In addition... there is no this operation on
+Text Service Framework side, is. Whether being able to obtain what
+information from application...? (2003/05/28)
+* T-Code input.
+* It corresponds to DVORAK arrangement.
+* #4, of numerical conversion Mounting the #5. (After 1.0 releases ending this, it should do or)
+Because at WINDDK2600 development is done, as for source itself
+WindowsXP/2000 being both, it is the expectation which can draw up the
+binary which moves, but you do not verify still securely.
+==== renewal past record and download ====
+Still, it is something of the development stage which is not
+tested sufficiently, but you place in here.
+* SNAPSHOT 2005/02/15 (Windows2000 binary/ WindowsXP binary/ Source)
+* When the `` [ the '' exists in Annotation, the bug to which
+after of the candidacy cannot be indicated and cannot select was
+corrected.
+* The `` [ ] problem of the dictionary register when the '' exists was
+corrected in Annotation. The `` in Annotation [ ] the '' is not
+replaced to concat. In addition, ``/ in annotationThe '' is replaced to the ``/the ''.
+* When Annotation last single candidacy it depended on the word which
+is indicated, when returning being previous-candidate from plural
+candidacy indicatory states, the bug where annotation is not indicated
+fix was done.
+* [ TSF ] the display function of Annotation was added.
+* SNAPSHOT 2004/12/08 (Windows2000 binary/ WindowsXP binary/ Source)
+* Fix: ``suspended'' application problem (Windows2000 environment)
+* SNAPSHOT 2004/09/29 (Windows2000 binary/ WindowsXP binary/ Source)
+* It tried to use tooltip in the indication of annotation.
+* It tried to attach the lapel to minibuffer indication.
+* SNAPSHOT 2004/03/17 (Windows2000 binary/ WindowsXP binary/ Source)
+* Cmnsrc.NO_TSF=1 was shaved from inc.
+* Uinotify.SetWindowPos ShowWindow (SW_NOACTIVATE) being to have utilized in
+substituting with c, it does, but this it seemed like the cause
+X-Mouse and affinity becoming bad. You reset to the origin.
+* [ TSF ] dai.Guid of target converted side was not set just in h. Because of that
+it had failed with enum.
+* SNAPSHOT 2004/02/23 (Windows2000 binary/ WindowsXP binary/ Source)
+* Tsf.You rewound to snap20040203 of cpp.
+* Cmnsrc.In order at the time of Windows2000 build of inc for NO_TSF to become
+effective, it corrected. As for problem, passing with Windows2000,
+tsf. of the expectation which is not goodThe cord/code of cpp NO_TSF it does not become effective, but it is to
+have passed for the sake of. That and tsf.It was decided that with aftereffect of the correction (spinlock oven
+kana which slips) of cpp trouble comes out with Windows2000.
+* SNAPSHOT 2004/02/18 (Windows2000 binary/ WindowsXP binary)
+* Uistate.C was rewound up to 2004/0/03.
+* SNAPSHOT 2004/02/14 (Windows2000 binary/ WindowsXP binary/ Source)
+* The separating UpdateIndicIcon and UpdateLanguageBar.
+* Way at the stage of ImeSelect only ActivateLanguageBar,
+UpdateLangugaeBar is not called, correction.
+* Way remove it does button of TSF side at the stage of
+ActivateLanguageBar, correction. (Perhaps this operation) by mistake
+it is,
+* Way bitmap of the invalid time is stuck to Window with
+WM_ERASEBKGND of status window, correction.
+* SNAPSHOT 2004/02/03 (Windows2000 binary/ WindowsXP binary/ Source)
+* When combining with application or shell of specification
+such as LiteStep, status window becomes the non reaction, (NAKAMURA
+Toshikazu and the bug report thank you),
+* [ TSF ] the case where directly selects candidacy with 2nd
+menu of code input mode the key is not just indicated,
+* SNAPSHOT 2003/12/12 (Windows2000 binary/ WindowsXP binary/ Source)
+* It reached the point where you can use unicode in the user
+dictionary. At the time of the word register when the letter which
+cannot be converted with wcs2mbs exists, it handles that way as
+unicode. When, one time does in unicode, the air where the phenomenon
+(bug) where coding system of that way expectation returns to multibyte
+exists does. It is in the midst of investigating.
+* When the STATE window is JISX0201 mode, press/ of the buttonCorrection of the bug which is not the change of release.
+* SNAPSHOT 2003/11/22 (Windows2000 binary/ WindowsXP binary/ Source)
+* "When half angle カナ is included in the response from the
+dictionary server, patch of Fumihiko MACHIDA which corrects the bug
+where the part of that becomes w" was applied. (Patch thank you)
+* Game private mode was added.
+* SNAPSHOT 2003/10/31 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ TSF ] "with ▽ mode key-in becomes strange. As chattering
+occurred, "the solution of the phenomenon which is visible. (Dropping
+during composition text compiling with exception, the stripe it seems
+that uninformed, like this is visible)
+* When [ TSF ] composition text does "j-input-by-code-or-menu"
+in state of the sky, cancels Window correction of the bug where
+minibuffer window remains
+* When [ TSF ] making window move, way minibuffer window
+follows, correction.
+* Way [ TSF ] clear it does document with the timing of keyboard
+close, correction.
+* Version.Because the renewal of h was forgotten, in 20031031 correction.
+* SNAPSHOT 2003/10/24 (Windows2000 binary/ WindowsXP binary/ Source)
+* The solution of the phenomenon where mozilla falls,
+concretely the place where 8 is set to ClauseLen modification, is in
+0. As the cord/code of Fakeime is inserting 8, because it was visible,
+being to have adjusted to 8, it does, but as for mozilla when
+ClauseLen is set, without referring to AttributeLen trying, that equal
+to ClauseLen minute will set Attribute, it seems that puts out access
+violation (with 1.5b verification)
+* SNAPSHOT 2003/10/22 (Windows2000 binary/ WindowsXP binary/ Source)
+* Although [ TSF ] keyboard open is not done, "kana" enters.
+Correction of the bug which cannot be corrected in direct input mode.
+* [ TSF ] with backspace it goes out to letter immediately before,
+when backspace is inserted, correction of the bug which fixed time
+sticks.
+* SNAPSHOT 2003/10/18 (unstable) (Windows2000 binary/ WindowsXP binary/ Source)
+* [ TSF ] the cord/code of Display Attribute was rewritten.
+Securely CDisplayAttributeInfoInput, Have tried to guarantee CDisplayAttributeInfoConverted in Heap.
+* Skkui.C was corrected. In order for specification not to be correct, it is
+correction of the point where reading the point and the result which
+can be thought is not inserted.
+* SNAPSHOT 2003/10/14 (WindowsXP binary)
+* Those which make Display Attribute Provider invalid, the
+other than of that is the same as snap2003/10/12. With this Yahoo! There are no times when such as Messenger application which Text
+Service Framework falls suddenly utilizes or, it is in the midst of
+the test.
+* SNAPSHOT 2003/10/12 (Windows2000 binary/ WindowsXP binary/ Source)
+* When executing "re-conversion", way Open it does IME when IME
+is not Open, correction.
+* SNAPSHOT 2003/10/07 (Windows2000 binary/ WindowsXP binary/ Source)
+* When modifying input mode from the language bar or the IME
+bar, correction of the bug where the rubbish enters.
+* [ TSF ] "open doing IME when, correction of the bug where the
+setting which is made kana mode" has stopped being effective.
+* SNAPSHOT 2003/09/21 (Windows2000 binary/ WindowsXP binary/ Source)
+* Setting of reading kana,
+* [ TSF ] input/Way color of the text which is in the midst of converting, setting of
+the background and underline is reflected correction.
+* [ TSF ] it appears in context menu of IE, "IME is opened", "IME is
+closed", it corresponds.
+* [ TSF ] (it is selected with re-conversion in spite) correction of
+the bug which extracts the text of blank.
+* [ TSF ] adding the word register menu.
+* Way [ TSF ] input change is executed with preserved-key, correction.
+* SNAPSHOT 2003/09/03 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ TSF ] with correction of the bug where carriage return does
+not enter "ASCII mode" or "all the English modes".
+* SNAPSHOT 2003/09/01 (Windows2000 binary/ WindowsXP binary/ Source)
+* With to j-newline with of "ASCII mode" or "all the English
+modes" correction of the bug which returns "kana mode".
+* In combination with Text Service Framework side on IME side,
+correction (#4 conversion and the correction of C-return and the
+like).
+* When with WindowsXP + Word2000 the proofreading engine is installed,
+adding the coping cord/code to the phenomenon where exception occurs
+when the ending of Word2000. (In the midst of test)
+* SNAPSHOT 2003/08/27 (Windows2000 binary/ WindowsXP binary/ Source)
+* "ASCII mode" or with "all the English mode" empty "C-j" it
+tried to return to "kana mode". (To now "カナ" "jisx0201" remained)
+* The bug where "C-return" does not become effective was
+corrected. If (there is bind in C-return, if there is no C-return, it
+becomes C-j).
+* J-zenkaku-henkan was mounted.
+* SNAPSHOT 2003/08/24 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Add ] adding #4 conversion to numerical conversion.
+Concerning what #4 conversion, you prepared in "up-to-date
+information". Simply #4 conversion still is in the midst of checking.
+When after, the #4 plural is written, you say that equal to the number
+of the combinations candidacy explodes... it becomes situation.
+* [ Fix ] version. which by mistake isH was corrected. This time it is the expectation which appears with
+snap20030824.
+* SNAPSHOT 2003/08/15 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Add ] "when the text which is in the midst of inputting
+when conversion has not been active exists, that text is cleared" adds
+to the operation of j-keyboard-quit
+* [ Fix ] [ skimic ] adding the processing of annotation. Now
+the け which means shaving the indication of annotation, is done.
+* SNAPSHOT 2003/08/09 (Windows2000 binary/ WindowsXP binary/ Source)
+* When [ fix ] with candidacy selective mode
+(j-henkan-show-candidates-mode), numerical conversion is done,
+originally the place where it should you be replaced by numerical
+value just, while it is the # the bug which is indicated.
+* [ Fix ] it had stopped operating, show-annotation was reconstructed.
+With simultaneously with j-henkan-show-candidates-mode it tried trying
+to indicate making use of TOOLTIP.
+* SNAPSHOT 2003/08/08 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] the bug which fails with timing was corrected in
+dictionary search.
+* [ Fix ] ToggleIME the text even while inputting was made effective.
+* [ New ] it tried to put out the date which build is done in the part
+"of Property for" of config dialog.
+* [ Fix ] the bug where the guide window becomes effective also during
+word selection window indicating was corrected.
+* SNAPSHOT 2003/08/04 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] [ skkiserv ] the bug which fails in search of the not
+yet sort file dictionary was corrected.
+* [ Fix ] [ skimic ] the key bind of ToggleIME was made effective.
+* SNAPSHOT 2003/08/03 (Windows2000 binary/ WindowsXP binary/ Source)
+* When [ fix ] browsing the file is opened in the dictionary
+setting dialogue, the bug where setting of part becomes selfishly
+disable was corrected
+* [ Specification modification ] prohibiting the transition of
+ASCII mode and half angle kana mode, it made the toggle "of kana"
+"katakana" mode.
+* SNAPSHOT 2003/07/27 (Windows2000 binary/ WindowsXP binary/ Source)
+* Because [ fix ] the pipe connection waiting at the stage
+where skkiserv is not started was, there is no all wait, way it
+checks, whether executes Sleep (100) pipe is made every, modification.
+* [ Fix ] it meaning that the bug where on Text Service Framework side
+``a'' enters with ``ca'' remains, it corrects.
+* SNAPSHOT 2003/07/25 (Windows2000 binary/ WindowsXP binary/ Source)
+* When the word register is done [ fix ] entering the word
+register from j-henkan-show-candidates-mode, it could not sneak away
+from j-henkan-show-candidates-mode and it corrected the bug which
+falls with the next key-in.
+* [ Fix ] the bug which does not transfer the hypothetical key
+cord/code to WPARAM of WM_IME_KEYDOWN just was corrected.
+* [ Fix ] processing when there was no entry of the alphabetical
+character kana table which corresponds with j-insert being for
+"infinite loop evasion" to have made j-self-insert, it does, but when
+that it is, because it becomes impossible, "once more to pull the
+table, with prefix as invalid" you reset to unprocess-char.
+* [ Fix ] with ImeDoc the occasion where keyfilter it does you look at
+unread-event to only above fixed frequency, the sea urchin doing, when
+it exceeds that frequency, it tried to clear unread-event.
+* SNAPSHOT 2003/07/24 (Windows2000 binary/ WindowsXP binary/ Source)
+* When [ fix ] entering into j-input-by-code-or-menu, the bug
+which becomes "kana" mode.
+* [ Fix ] j-assoc-rule functioning the bug which has been stopped
+doing.
+* [ Fix ] the skkiserv starting part of skkiserv and IME side to
+snap20030715 at that time rollback. Because of that INF is corrected
+in order to shave "skkiserv" from
+"HKLMSoftwareMicrosoftWindowsCurrentVersionRun".
+* SNAPSHOT 2003/07/21 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] making a mistake you turned off, "when turning IME to
+ON, always you reset to kana mode", checkbox was reconstructed.
+* You prepared in place of the function which [ add ] calls is not
+used the function of toggle-ime vc-toggle-eggnl and. When this
+function pushes the key which bind is done, "not to be in the midst of
+conversion operating" when "nothing has been input" the ON of IMEIt is possible to change OFF.
+* [ Fix?Immediately after ] trying to do Chinese character conversion with
+Windows2000 hangup the bug which is done.... It seems like problem of
+the timing dependence of skkiserv and DLL client which are pipe
+server. When the timing which pipe create is done and the timing which
+executes WaitNamedPipe are unpalatable, until timeout it does, it
+seems that is the times when control does not return. When (it is the
+infinity waiting, hangup) setting timeout that way, finely (100ms 10
+retry) to try it tried trying taking a second look frequently.
+* SNAPSHOT 2003/07/20 (Windows2000 binary/ WindowsXP binary/ Source)
+* When [ fix ] nothing setting is written in registry,
+correcting the bug which is included in the initialization processing
+of default.
+* [ Fix ] in keymap setting correction of the bug which j-completion
+of the expectation which is impossible has blended.
+* [ Fix ] ASCII, Adding newline which administers the carriage return function in full
+size mode.
+* Way [ fix ] you look at the indication setting of the guideline,
+correction. (IMC_SHOWGUIDELINE)
+* When [ fix ] context is set, if the guide exists, way the
+guide is indicated, correction.
+* [ Fix ] "-" correcting the bug which is input with half angle
+カナモード.
+* [ Fix ] composition window of default resize it does in only the
+direction which size expands, correcting the bug where in addition the
+rubbish is indicated in the margin.
+* When [ fix ] roma-kana-table does not exist, when j-insert is
+called, correcting the bug which falls to the infinite loop.
+* When [ fix ] -startup is appointed to the argument of skkiserv, when
+keymap of default is SKKIME just, way it starts, modification. With
+this in Run of HLKM skkiserv designated possibility.
+* [ Fix ] skk-process-okuri-early, Skk-delete-okuri-when-quit, The setting of skk-kakutei-early possibly. In addition deleting the
+control of recurrence conversion. Being to be unnecessary at the stage
+which utilizes the guide.
+* SNAPSHOT 2003/07/15 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] correction of the cooperation part of IME and Text
+Service Framework. Perhaps, with this as for job of IME side end. As
+for the unpalatable point "the button of IME and the button of TSF
+with the same GUID it is not good", "CLSID unless keyboard (button)
+same ones are utilized, is not good", it had torn.
+* [ Fix ] correcting the fact that unnatural message is issued with
+skkFlushTextSub.
+* [ Fix ] restoring the setting dialogue of the language bar which has
+stopped moving.
+* [ Skimic ] [ add ] adding the cord/code of DisplayAttributeProvider.
+* SNAPSHOT 2003/07/13 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] correcting the bug which drops application with stack
+overflow. The fact that GenerateMessage is called from ContextUpdated
+in NotifyIME seems that is not correct operation.
+* [ Fix ] CPS_COMPLETE, If CPS_CANCEL does not have Composition String, way WM_IME_XXX is not
+issued, correction. When it issues in the non darkness, region the
+text which is selected goes out.
+* SNAPSHOT 2003/07/11 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] with ▽ mode special character (>,<,?Furthermore the ▽ mark remains) the bug which it decides (that) it
+inputs, was corrected.
+* When [ fix ] key allotment dialogue is indicated, the bug which
+falls was corrected.
+* When [ fix ] the key allotment of C-@ is modified, the bug where the
+line of C-@ becomes two was corrected. In addition, similar bug being
+to exist even in other dialogue, it corrected.
+* [ Fix ] with half angle kana conversion the bug which cannot convert
+"the わ" was corrected.
+* When [ fix ] the key where j-keyboard-quit is allotted directly with
+letter input mode and conversion candidacy indicatory mode is pushed,
+in order to pass through processing, it corrected. (In the past to
+decide in 0x07, to strike)
+* SNAPSHOT 2003/07/10 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] hiragana conversion and katakana conversion do not
+operate, the bug which cannot convert "ぁ" "ァ" was corrected.
+* In order [ fix ] for IMC_SETSTATUSWINDOWPOS to operate, it
+corrected.
+* When [ fix ] IMN_SETCOMPOSITIONWINDOW reaches, in order also the
+position of Guide to make move, it corrected.
+* [ Skimic ] Reconversion that tried operates on Text Service
+Framework side.
+* Being to have the bug that [ skimic ] hiragana conversion and
+katakana conversion do not operate even on Text Service Framework
+side, it corrected.
+* SNAPSHOT 2003/07/07 (Windows2000 binary/ WindowsXP binary/ Source)
+* The conversion engine port was done from skimic side.
+* [ Add ] ImeConversionList was mounted.
+* In order [ add ] minibuffer window to mount as guide, it modified.
+* As looked to at IME_SETOPENSTATUS from IMC_SETCANDIDATEPOS [ fix ]
+in NI_CONTEXTUPDATED of NotifyIME, it corrected. With says, the
+cord/code which throws WM_IME_NOTIFY is the majority. Whether (it is
+mounting where this is correct it is unclear)
+* In order [ fix ] the conversion engine same period to do the
+Candidate List operation of NotifyIME, it corrected.
+* [ Fix ] the skkiserv waiting (WaitNamedPipe) with the infinity
+waiting being to be times when it does not return, it modified in
+300ms.
+* [ Fix ] the processing to CPS_REVERT was mounted from CPS_COMPLETE
+of NI_COMPOSITIONSTR of NotifyIME.
+* [ Fix ] the timing which reads the setting file from registry was
+modified in the point in time of ImmSetActiveContext.
+* Until dictionary search modified (summary of the candidacy list
+comes out one by one). When hit it does with local, rather than
+looking at skkserv the network crossing over, it is light expectation.
+* SNAPSHOT 2003/06/24 (Windows2000 binary/ WindowsXP binary/ Source)
+If * [ fix ] with j-start-henkan it is not in conversion mode,
+way you look at j-input-vector, modification.
+* When [ add ] IME Open is done, to adding the functional + setting
+which returns "kana mode".
+* [ Fix ] [ TSF ] with katakana conversion correcting the bug which
+cannot convert "the ぁ".
+* SNAPSHOT 2003/06/18 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] [ TSF ] correcting the bug which does not search
+other than the server dictionary with inflectional kana conversion.
+* [ Fix ] [ TSF ] detailed text service is made effective, unless it
+checks, correcting the bug which does not become effective. (While
+verifying)
+* [ Fix ] correcting the bug where directly indication slips
+between the first menu and the following menu of code input.
+* SNAPSHOT 2003/06/15 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] [ TSF ] the result of dictionary search, first
+candidacy correcting the bug where becomes "just blank".
+* When [ fix ] [ TSF ] prefix remains, correcting the bug where
+unused-event does not return. Concretely "" it is correction of the
+bug where following backspace and cursor are not effective.
+* [ Fix ] [ TSF ] keyboard icon was turned off. The transverse
+keyboard of standard is used.
+* SNAPSHOT 2003/06/04 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] skimic.Correction of the bug where dll fails with regsvr32. Build it did
+again to do with vc6.
+* [ Fix ] in inf file of XP edition skimic.You forgot that the line of dll is added.
+* [ Fix ] the auxiliary dictionary is sorted, the fact that operation
+of check is strange was corrected.
+* SNAPSHOT 2003/06/01 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] application of specification (at the time of file
+name modification of example and explorer) with correcting the bug
+where the carriage return key does not enter.
+* [ Add ] in skimic beginning-of-line, End-of-line, Yank, Kill-region, Adding kill-line.
+* SNAPSHOT 2003/05/29 (Windows2000 binary/ WindowsXP binary/ Source)
+* When [ fix ] the key with IME such as j-newline processing,
+the solution of the phenomenon where the mask of SHIFT and CONTROL
+falls.
+* [ Add ] adding lisp conversion and the modification of Conversion
+Mode which is due to Menu operation to skimic.
+* SNAPSHOT 2003/05/28 (Windows2000 binary/ WindowsXP binary/ Source)
+* When [ fix ] it returns to the candidacy before
+instantaneously enters into j-input-by-code-or-menu-jump1 with x key,
+it transforms and becomes candidacy, indicating another candidacy, it
+corrected the bug that it cannot input the candidacy which it selects.
+* [ Fix ] conf*.KEY_READ in c, In order with KEY_WRITE open to do the registry key which open has
+been done with just KEY_READ, it corrected.
+* [ Fix ] the place where pipe name in order to communicate with
+skkiserv is drawn up was modified in DLL load point in time. (It is
+fixing being because necessity each time to draw up it was not, is)
+* In order [ fix ] with NULL security attribute to draw up
+named pipe in order to communicate with skkiserv, it modified. (To now
+public)
+* [ Add ] skimic.Dll (only XP added). It is for Text Service Framework.
+* SNAPSHOT 2003/05/13 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix?] The START of skkiserv was modified when failing in skkimeOpenPipe.
+The taking Ae not obtaining test (circumstances to see) it is in.
+* SNAPSHOT 2003/05/04 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] bug where that "it failed in the starting
+application", dialogbox appears in the time of logoff fix was done.
+* SNAPSHOT 2003/04/28 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] the phenomenon where time is required for logoff very
+with Windows2000 was solved.
+* [ Fix ] indication of the circumstance where you cannot push the
+button with the language bar of WindowsXP/2000 was corrected in order
+to utilize TF_STATUS_DISABLE.
+* SNAPSHOT 2003/04/23 (Windows2000 binary/ WindowsXP binary/ Source)
+* When [ fix ] inputting first 1 letter (consonant) with
+Excel2000, 2 letters correction of the bug which enters
+* SNAPSHOT 2003/04/21 (Windows2000 binary/ WindowsXP binary/ Source)
+* When [ fix ] the language bar is effective, Status Window is
+not drawn up.
+* [ Fix ] general setting (confgene.C) So after RegOpenKey, correcting the bug which does not do
+RegCloseKey. (TOYAMA Sumio and forward of information thank you. The
+one 2ch pointing out, thank you)
+* When addition of the server dictionary after the selecting,
+it adds the server [ fix ] at the time of dictionary setting, adds and
+it deletes after the OK selecting the server dictionary is not added.
+* Present conversion mode had stopped being renewed [ fix ] in command
+prompt.
+* SNAPSHOT 2003/04/16 (Windows2000 binary/ WindowsXP binary/ Source)
+* When [ fix ] adding the indication setting of the idea
+contest of the language bar, the failure that was done you forget the
+initialization of the variable which returns the failure of the
+success of UPDATE of that setting. Because of this modification of
+setting had stopped being notified on skkiserv side.
+* When [ fix ] "addition of the dictionary" doing with search order
+setting of the dictionary, actual search order and correction of the
+bug where display position slips.
+* SNAPSHOT 2003/04/12 (Windows2000 binary/ WindowsXP binary/ Source)
+* Indication of the idea contest which is indicated in the
+language bar/It tried to be able to do non indication setting. In addition, it
+tried to utilize the keyboard idea contest.
+* The dialog box for customization of idea contest indication of
+language bar was drawn up. It meaning that the operation with
+Windows2000 is not good enough, it is necessary to test as single unit
+application quarrying out, (TODO)
+* When input vector is compiled, the bug where candidacy of the
+time before remains was corrected.
+* In order ImmSetConversionStatus functioning to do, it corrected. To
+the problem where the change "of JISX0201" empty "kana" is rotted, you
+think with setting from the language bar that it is corrected with
+this.
+* SNAPSHOT 2003/03/24 (Windows2000 binary/ WindowsXP binary/ Source)
+* That [ fix ] the text will be input with WindowsXP
+environment, the instant correcting the bug which falls.
+* [ Fix?] Priority was set to the idea contest of the language bar securely.
+If the phenomenon where the idea contest occurs doubly with this stops
+coming out, being to be good, it does, but. (During labor assistant
+testing)
+* When [ fix ] minimizing the language bar, in "indicates the
+additional idea contest" check not to have entered, the idea contest
+tried also the て, that is indicated in the task bar.
+* SNAPSHOT 2003/03/19 (unstable)
+* When deleting the folder and the like, it coped with the bug
+which becomes firm. TIMEOUT has been added to control of exclusion of
+processing of the language bar.
+* It is coping medical therapy in the bug where the idea contest
+occurs doubly in the language bar but it corresponded. Modifying the
+order of register deletion of the idea contest simply, just it tried
+not to operate the side which comes out doubly... is, but. The fact
+that there is many a thing which in addition occurs when changing with
+the Text Service Framework Aware Application is in the midst of
+verifying whether MSIME has done some kind of job really, whether it
+is correct.
+* SNAPSHOT 2003/03/08 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] ``set-mark-command which has not been repaired with
+snap20030307 (C-SPC, C-@) And j-prefix-char (C-c) correcting the bug '' which was eaten in
+the circumstance which Composition String does not enter.
+* [ Add ] letter color of the idea contest of the input mode which is
+indicated in the language bar black/Way white, it distinguishes automatically, correction.
+* SNAPSHOT 2003/03/07 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] set-mark-command (C-SPC, C-@) And j-prefix-char (C-c) correcting the bug which was eaten in the
+circumstance which Composition String does not enter.
+* [ Fix ] modifying composition form of default at the point in time
+of INIT_COMPFORM. When setting to IME of default, when with emacs (VC
+build of element) using IME, it stopped appearing in the position
+where UICOMP Window is strange.
+* [ Add ] it tried to be able to stop recursive-edit with the setting
+of configuration dialog.
+* SNAPSHOT 2003/03/04 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] non initialization processing as for ImeDestroy
+mistake. It moves in DllMain. However, when LanguageBarItemMgr is
+obtained, because it reaches the point where application puts out
+exception when ending, you remove just the part of that.
+* [ Fix ] moving initialization processing in ImeSelect. However, non
+initialization processing to insert in ImeSelect, there is no れ,
+because (Mozilla falls), when being TRUE, way just first one time
+initializes, after the that does only ActivateLanguageBar, correction.
+* SNAPSHOT 2003/03/03 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] initialization processing of Text Service Framework
+skki1_0.In c, non initialization processing was made to move in ImeDestroy. It
+is about to want moving just with this but.
+* [ Fix ] directly code input was corrected in order to use similar to
+usual conversion CANDLIST.
+* [ Fix ] letter input with SKK mode was corrected in order to use
+GCS_RESULT.
+* SNAPSHOT 2003/02/13 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] imm.LpIMC in c!In = NULL initialization of Text Service Framework/Moving non initialization processing. With previous snapshot being to
+have put out outside that, it does, but this the some instability as
+called, you think.
+* SNAPSHOT 2003/02/02 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] with snap20030201 completely being fix not to do, for
+the second time, initialization of Text Service Framework/You adjusted non initialization position. It is in the midst of the
+continuation test.
+* When [ fix ] correcting the order of completion, the tip which is
+made to move by mistake being to be, it corrects.
+* SNAPSHOT 2003/02/01 - Unstable (Windows2000 binary/ WindowsXP binary/ Source)
+* When it makes IME of default [ fix ] in Windows2000 or
+WindowsXP where OfficeXP is installed, correcting the bug which
+reaches the point where "read error" occurs when the ending of
+process. (Fix it to be possible completely, it is high in the midst of
+verification)
+* [ Fix ] the order of completion "deciding,", correcting the
+bug which does not change.
+* SNAPSHOT 2003/01/30 - Unstable (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] it is small correction of bug of mounting the
+language bar. For example, when resetting IME to MS-IME with thing,
+cannot choose direct input thing and the equality process whose
+position of check of the menu is random, ICON remaining in the
+language bar and without being the tool button, is.
+* Being to be the useless making that [ fix ] search of the server
+dictionary of skkiserv only 512 bytes receives from skkserv, it does,
+but thought), Machida sending patch that (it is enough with that.
+Thank you. M (_ _) m
+* SNAPSHOT 2003/01/27 - Unstable (WindowsXP binary/ Source)
+* [ Add ] correspondence of language bar. However, tsf.Rotting rather, it increases cpp. If you do not rewrite. In addition,
+MSVCRT link has been done because of correspondence of the language
+bar. The side effect is unclear.
+* SNAPSHOT 2003/01/16 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] Annotation Window frequently Show/Controlling the phenomenon which repeats Hide.
+* [ Fix ] Annotation Window following to Candidate Window, way it
+moves, correction.
+* [ Fix ] easing the phenomenon where Composition Window flickers.
+(WM_ERASEBKGND just was taken)
+* SNAPSHOT 2003/01/13 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Add ] adding the display function of annotation. Also the L
+dictionary of the annotation attachment became available. However,
+this function (extreme) is in the midst of the test.
+* SNAPSHOT 2003/01/11 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix?] It copes with the bug which has the fact that "the search result
+immediately before" is pulled when searching the server dictionary.
+* SNAPSHOT 2003/01/10 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Add ] mounting color setting dialogue. There is only two in
+the not yet conversion character string and the conversion character
+strings, but....
+* SNAPSHOT 2003/01/03 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] the bug which cannot search the sort being completed
+dictionary correction (in the midst of operation verification).
+Release Build skkiserv. which is doneBecause it is the bug which occurs in exe, it continued to use with
+Debug Build, (the test is sweet) for the sake of, verification &
+reappearance were late.
+* [ Fix ] correcting the bug where first 1st letter transforms with
+shogi conversion.
+* When [ fix ] renewing the value of registry such as renewal of
+dictionary setting, being to eliminate the setting to the last time,
+it does, but with RegEnumValue + RegDeleteValue it cannot enumerate,
+because (the problem kana of Flush) you became aware especially, way
+every key it eliminates with RegDeleteKey, modification.
+* SNAPSHOT 2003/01/02 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix ] "deletion doing the dictionary" with the search list
+of the dictionary of Config, Dialog correcting the bug where "renewal"
+does not become effective.
+* [ Fix ] pushing "renewal" "OK" with Config, Dialog when notifying
+the modification of the search dictionary to skkiserv, skkiserv to
+now, not throwing away the information of the search dictionary which
+it had correcting the bug which is.
+* SNAPSHOT 2003/01/01 (Windows2000 binary/ WindowsXP binary/ Source)
+* When [ fix ] "re-conversion" when doing, when IME is not done
+Open, Open to do, it is not kana mode, to a kana mode after, way
+Composition String is set, correction.
+* When [ fix ] it inputs into the order "of s" space with Outlook
+Express, the phenomenon where "s" remains does not go out detection
+(kana prefix). With Notepad it does not reappear however. Because
+Result String space is with something seems a certain way, when Result
+String is only space, way it returns, as the key modification.
+* SNAPSHOT 2002/12/25 (Windows2000 binary/ WindowsXP binary/ Source)
+* Way [ change ] skkiserv maintains connection of skkserv,
+correction.
+* [ Fix ] correcting the fact that setting of the auxiliary dictionary
+for the server dictionary has become invalid.
+* SNAPSHOT 2002/12/15b (Windows2000 binary/ WindowsXP binary/ Source)
+* As [ fix ] indicated with WM_IME_SETCONTEXT, the bug which
+Window which is not set is indicated.
+* SNAPSHOT 2002/12/15 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Fix?When input is discontinued ] with with word register mode [ ALT-
+Chinese character ], the bug (in the midst of test) where application
+falls when starting the input with IME next
+* [ Fix ] the right click menu had stopped being effective in
+the setting dialogue.
+* [ Fix ] in dictionary setting dialogue [ deletion ] button
+effectively.
+* [ Fix ]/ Completion does not work vis-a-vis the candidacy which has entered.
+* SNAPSHOT 2002/12/01 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Add ] adding the performance of re-conversion. However,
+MAKEREAD or CPS_REVERT do not move yet. In addition there is no either
+function of adverse change exchanging.
+* SNAPSHOT 2002/11/30 (Windows2000 binary/ WindowsXP binary/ Source)
+* [ Add ] adding "whole" to the setting of Ime. Egg-like-newline, The setting of delete-implies-kakutei and the like became possible.
+Also "color setting" is added, but this does not move yet.
+* SNAPSHOT 2002/11/29 (Windows2000 binary/ WindowsXP binary/ Source)
+* When [ fix ] with Excel (office2000) it utilizes, when it has
+set to Ime of Default, the bug which Default Window is indicated.
+* When [ fix ] with Visual Studio it utilizes with Emacs which build
+is done, the bug which the text which is in the midst of inputting
+stops being indicated.
+* When [ fix ] skkime has become active, the key of Escape and the
+like is not the text while inputting in spite to application the bug
+which is stopped crossing over.
+* [ Fix ].When making skk-jisyo read, the bug which designates the item of the
+feed regulation and conversion of feed reversing of skk as conversion
+result candidacy.
+* SNAPSHOT 2002/11/06 (execute form/ Source)
+* [ Fix ] with system user skkiserv.The bug which starts exe. When setting to ime of standard, it appears
+as the phenomenon which search of the dictionary becomes impossible
+altogether.
+* SNAPSHOT 2002/11/01 (execute form/ Source)
+* When [ fix ] now is converted, (current-time-string) with
+skkiserv.The bug where exe falls.
+* When [ fix ] it strikes "▽ あ" empty TAB with completion, the bug
+which becomes like the "あ ▽".
+* [ Fix ] with setting dialog browse button effectively.
+* SNAPSHOT 2002/10/31b (execute form/ Source)
+* When [ fix ] connection to the server dictionary does
+timeout, skkiserv.Exe ends abnormally.
+* [ Fix ] the pass which is registered to registry by mistake was.
+* [ Fix ] code input had stopped operating directly.
+* SNAPSHOT 2002/10/31 (execute form/ Source)
+* It is not completed. Snapshot of yesterday is the rubbish.
+Please throw away directly. In order to move more or less and
+honestly, those which were corrected 2002/10/31 are this.
+* Code of lisp-eval was made to move from skkinput3 with charge
+construction.
+* SNAPSHOT 2002/10/30 (execute form/ Source)
+* As for saving the dictionary way at the time of logout it
+makes automatic, modification. (Is not verified still operation
+securely)
+* This snapshot considerably is dangerous. That it is thought
+whether it becomes human pillar preparedness.
+==== the method of adding to Text Service Framework ====
+When install is done making use of inf, below IME/ WINDOWS directoryUnder SKKIM10 skimic.You think that dll is copied.
+    Cd %windir%IMESKKIM10
+    Regsvr32 skimic.Dll
+With install is possible by the fact that it does.
+Doing, one time install the stripe uninformed it meaning that deletion
+is difficult, please note. In order uninstall to do, it is necessary
+to compile registry.
+Making use of the registry editor,
+   HKEY_LOCAL_MACHINESOFTWAREMicrosoftCTFTIP
+{830DE831-E04D-40BB-8683-1E179A5F1A4F}
+Please delete below the key. Cooperation with Text Service
+Framework edition and IME is cut off with this.
+Or,
+   Regsvr32/U skimic.dll
+It executes.
+The advantage of integrating with Text Service Framework is as
+follows.
+* Moving the setting tab of security of Internet Explorer, after
+pushing application or OK, the reaction is light.
+* Indicatory order of the language bar becomes just. (Originally
+unless the idea contest of input mode and the like occurs to the left
+side of help, it is not good)
+Text Service Framework edition still is in the midst of drawing
+up and in the midst of the test. The following function has missed
+concretely.
+* LISP conversion and date input
+* Operation from language bar menu
+* Reconversion (mounting = ITfReconversion)
+* The test (verifying in a general way operation, the several
+trying writing the mail, you tried, to is)
+==== operation verification the application which does ====
+* OfficeXP personal (just, with it becomes in a general way
+but)
+* Outlook Express 6.0sp1
+* Internet Explorer 6.0sp1
+==== Undocumented information ====
+Securely unless you must collect, while thinking, that,
+(furthermore it is difficult to understand) you write the function
+which is not stated everywhere.
+* There is an order in the list box of dictionary setting dialogue.
+From above the dictionary is searched in order, also the conversion
+result is produced to that order. To replace the search order of the
+dictionary, Drag & Drop doing the element of the list, please make
+move.
+* From kana mode JISX0201-1976-KATAKANA input mode (generally known
+half angle カナ input mode) to with it changes with Control-q,
+(toggle operation).
+* It is possible as for the number, to insert roundly once directly
+from code input.
+When execute form is made from the source code
+WINDDK is procured. Simply, download it has become impossible
+or order which it does it is necessary to become MSDN Subscriber it
+would like to see from Microsoft, or, is. With labor assistant Windows
+DDK 2600.1106 is utilized.
+Installer runs the installation itself of Windows DDK and, following
+to the message which comes out, if [ it selects Next ], it completes.
+(It must select the file which is installed and must set ahead
+installing, but. )
+Successfully if installation completes, it is the expectation
+where Development Kits is added to START Menu. START - PROGRAM -
+Development Kits - Windows DDK 2600.1106 - Build Environments - with
+Windows2000 Checked Build Environments or WindowsXP 32bit Checed Build
+Environments is selected.
+The source archive which has been downloaded first is developed with
+the suitable directory. For example, C:	It probably is mp?
+=== [ SKKIME for WindowsNT4.0 ] ===
+==== circumstance of development ====
+It has stopped completely. Taking Ae not obtaining code because
+salvage it was possible, as for execution environment inserting in
+VirtualPC, it is the schedule which it develops.
+=== [ link ] ===
+It introduces concerning skkime, explanation etc. of
+installation it is link to the page which is doing.
+* The installation page of Tomohiko's Yoshida skkime
+Takashi SAKAMOTO (PXG01715@nifty.Ne.Jp)

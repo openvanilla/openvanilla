@@ -1,0 +1,55 @@
+==  zh-nan-Latn: Pe̍h-ōe-jī Hō-ló-ōe Hàn-lô su-ji̍p-hoat
+
+== zh-cmn-Hant: 白話字Holo話漢羅輸入法
+=== 簡介
+「白話字Holo話漢羅輸入法」是一套用來輸入台語白話字的輸入法。目前在各種作業系統中，要輸入羅馬拼音的台語符號字、以白話字進行寫作，都缺少一套方便的輸入法。而 OV 的 POJ 輸入法正可以補足這樣的需要。功能如下：
+
+1. 打羅馬字母和聲符，可以出現配上調號的音節，例如打 chan2 會出現 chán ，打 peh8 會出現 pe̍h 等等。
+
+2. 打 q 和 ou 都會出現 o·。
+
+3. 在 OV 偏好設定中的修改選項後，若選擇「不要輸入 Unicode 字元，全部改用 ASCII 輸出」，則 POJ 輸入法不會產生 Unicode 輸出，而是直接出 ASCII 字母，例如打「chan2」就出現「chan2」，適合在沒有 Unicode 支援的環境使用。
+
+4. OV 的 POJ 模組會對音節進行「文法檢查」，例如 h、k、p、t 字尾的音節，僅可能有四聲與八聲兩種可能，因此若出現例如 peh5 或 kap3 這樣的音節，便會正規化（normailize）成 peh 和 kap。
+
+5. 漢字輸入：您可以直接使用 POJ 輸入法，輸入與拼音對應的漢字，讓您可以方便的以閩南語的讀音輸入漢字。
+
+POJ 輸入法使用的詞庫位在 poj.cin 這個檔案中，原始檔案是由劉傑岳（Lâu Kiatgak、 kiatgak@yahoo.com.tw）利用甘為霖的《廈門音新字典》（Kam Ûi-lîm ê "Ē-mn̄g im ê jī-tián"（A dictionary of the Amoy vernacury by Willian Campbell））校對、補充後的作品；這個檔案依據GPL（GNU General Public License）第二版或新版公開授權，歡迎各界散佈及使用。在您使用時，o 以ou表示、鼻音用 nn 表示、而入聲鼻音則是用 nnh 表示。
+
+此外，目前已知使用時，有以下問題：在 Microsoft Word 打出有聲調的符號，會配上錯誤的字型（例如，原先使用 Times  New Roman，打出調號字母後，字型卻會變成新細明體），造成打出來的音節很
+
+=== 設定
+        <dict>
+                <key>ASCIIOutput</key>
+                <string>0</string>
+                <key>fullPOJOutput</key>
+                <string>0</string>
+                <key>keyboardLayout</key>
+                <string>0</string>
+                <key>warningBeep</key>
+                <string>1</string>
+        </dict>                               
+
+== Iōng-chiá ê kiàn-gī | 用者ê建議
+* A-giâu
+** Te̍k-sû hoat-im & hùn-tho̍k-jī:  phah "e5" bô 「個」 téng-téng.
+** Hong-giân-chha: "語" phah "gú" chiah ē chhut-lâi, "gí" bē chhut-lâi.
+** OV sponsor = 河洛歌仔戲團 chàn-chō· ê :)
+** Navigation: Chìⁿ-thâu (arrows) bē tín-tāng ê khoán. Ū sî-chūn su-iàu tò-thòe-lu, lia̍h mouse khah mâ-hoân, khòaⁿ ē-tàng iōng chìⁿ-thâu a̍h bē.
+** Án-choáⁿ phah hàn-jī-sek ê phiau-tiám-hû-hō?
+* Dr. Kaihsu Tai 
+** 進入候選字模式後，如果敲入標點符號字元，應該選擇全羅（第一個候選詞），然後出標點符號
+** 在全羅模式開啟時，如果敲 space，不但應該組字（直接輸出全羅），也應該輸出一個 space，以符合全羅打字的習慣──或者應考慮列為選項（例如 outputAnotherSpaceWhenInFullPOJMode 之類的）
+
+== Sū-kang | 事工 | TODO
+* Update poj.cin
+** Kái-iōng U+0358 tāi-piáu Hō-ló-tiám
+** Hong-giân-chha
+** Àn hàn-jī chhut-hiān ê pîn-lu̍t pâi sóan-jī-thang (選字窗) lāi hàn-jī ê sūn-sū.
+* SQLitize Holo漢羅輸入法，可參考 OV07RoadMap 這頁，另外 OVIMGenericSQLite  已經可以利用 poj.cin 來產生一個 SQLite based 的 Holo漢羅輸入法。 
+
+== Liân-kiat
+* [http://www.freedesktop.org/wiki/Software_2fCJKUnifonts_2fMinnan_5fIM Minnan IM (台式閩南語輸入法)] 高盛華 Arne Götje (Project leader)
+
+== Misc
+** POJImChiatPio

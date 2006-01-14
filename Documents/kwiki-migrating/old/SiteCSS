@@ -1,0 +1,12 @@
+a:visited, a:link {
+    color: #cc9900;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffcc00;
+}
+
+.container {
+    width: 500px;
+}

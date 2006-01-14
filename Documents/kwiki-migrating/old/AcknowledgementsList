@@ -1,0 +1,51 @@
+== OV 贊助者
+
+luke (2005/10/20)
+
+== 香草倉頡（傳統倉頡）
+
+* 原始構想：mjhsieh (that's where everything started, my personal acknowledgement--lukhnos)
+* 改進意見提供及測試：momizi
+
+傳統倉頡模已於 OV 0.7.0 除役，由彈性更高的 !OVIMGeneric 泛用輸入法模組取代
+
+== 0.6.0, 0.7.0 除錯義勇隊
+
+* 了不起的 Perl PM hcchien 及勇敢的 whiteg
+
+== 大易輸入法
+
+* 先期測試：autrijus (thank you the Tangs!)
+
+== Iroha 日文假名輸入法
+
+* 資料提供及大幅修正：momizi
+
+== 行列輸入法
+
+* 行列輸入法先期測試：ijliao, xeonchen
+* 行列輸入法 Unicode 表格、後續測試、修正意見：Knife
+
+== svk support
+
+* 台灣時間的半夜三點解答 svk 使用問題：[The SVK Project http://svk.elixus.org]
+
+== 網站內容
+
+* Ruyi 為 !OpenVanilla kwiki 建立了最早的內容
+
+== Windows 版本
+
+* fautzy 以 Experiments/ 的 Visual Basic 試作版為基礎，做了一個以 message hook 方式的 OV Windows 版實驗。他的實驗證實了 OV port 到 Windows 的可行性。
+
+== 網站空間及報導
+
+* !OpenVanilla project hosting: [中研院資訊所自由軟體鑄造場OpenFoundry http://rt.openfoundry.org]
+* !OpenVanilla 計劃首頁: [藝立協 http://www.elixus.org/], hcchien
+* !OpenVanilla 相關報導： [老地方冰果室 http://www.frostyplace.com]、[Oikos http://www.oikos.com.tw]
+* 耶魯大學的 [Chinese Mac http://www.yale.edu/chinesemac/pages/input_methods.html#OpenVanilla] 網頁對 !OpenVanilla 也有介紹
+* [渤麥堂 http://www.sinomac.com/modules/mydownloads/singlefile.php?cid=7&lid=662] 則是許多簡體使用者討論 !OpenVanilla 使用的地方
+
+以及所有 [#osxchat http://osxchat.blogspot.com] 共同參與的朋友們
+
+== 捐款支持的大德

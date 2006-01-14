@@ -1,0 +1,77 @@
+=== 新英數輸入法
+July 8, 2005
+
+zonble 與 gugod 合力完成了一套支援 "auto-complete" 的新英數輸入法，詳見 [http://zonble.twbbs.org/archives/2005_07/783.php zonble blog: Asian Input Method Technology for Non-Asian Languages]
+
+=== !OpenVanilla for Debian GNU/Linux
+June 29, 2005
+
+!OpenVanilla 是一個和平台無關的輸入法框架。從 0.7.0 開始，!OpenVanilla 將會透過
+[SCIM http://www.scim-im.org/] 正式移殖到其它UNIX平台上，包括Linux和!FreeBSD。
+
+我們已經將!OpenVanilla 0.7.0rc5 包裝成Debian套件，可供Debian GNU/Linux使用者直接使用apt-get來安裝。
+詳細安裝說明請參考[OpenVanilla for Debian http://openvanilla.org/index.cgi?OVDebian]。
+
+=== 請大家幫 zonble 一個忙
+May 30, 2005
+!OpenVanilla 計劃成員 zonble 的 iBook 被偷了，我們希望能幫 zonble 湊到一台新機器。詳情請參閱 [#osxchat的文章 http://osxchat.blogspot.com/2005/05/osxchatopenvanilla-zonble.html]。
+
+更新 (June 12 2005)：經過兩週的籌款，我們已經幫 zonble 募得了兩萬多塊，zonble 已經購得了新的 iBook 。在此謝謝大家的熱心幫助！
+
+
+=== !OpenVanilla 0.7.0rc5 發表
+May 28, 2005
+
+!OpenVanilla 0.7.0rc4 在效能上顯著提升，但是在穩定性以及酷音輸入法模組上仍然有一些問題。這些問題都已經在 0.7.0rc5 中修正。
+
+由於中研院 !OpenFoundry 設定的問題，許多朋友在使用 OS X 10.4 的 Safari 下載時，會發現檔案被莫名其妙增加了一個 .exe 結尾。請將這個 .exe 結尾移除就可以得到原本安裝套件的 .zip 檔了。
+
+[OpenVanilla 0.7.0rc5 版本說明及下載連結 http://openvanilla.org/index.cgi?OV070rc5]
+
+=== !OpenVanilla 0.7.0rc4 推出
+
+May 20, 2005
+
+前一天推出 0.7.0rc3 後，立刻得到了許多朋友的迴響，我們也陸續修正了 rc3 在安裝、效能、系統穩定上的問題。rc4 除了設定介面已完全中文化外，在載入模組的效能上也有顯著提升。同時，針對仍希望同時安裝 OV 0.6.3 、使用酷音輸入法的朋友，我們也提出了 [0.6.3 版的酷音升級套件 http://openvanilla.org/index.cgi?OVIMChewingUpgradeForOV063]，可以讓 OV 0.6.3 和 0.7.0rc4 可以並存。
+
+[OpenVanilla 0.7.0rc4 版本說明及下載連結 http://openvanilla.org/index.cgi?OV070rc4]
+
+=== !OpenVanilla 0.7.0rc3 誕生
+
+May 19, 2005
+
+今天距離 !OpenVanilla 0.6.3 推出，正好整整四個月的時間。經過四個月的努力，OpenVanilla !0.7.0rc3 誕生了。[版本新功能及下載連結請點選這裡 OV070rc3Release]
+
+=== !OpenVanilla 英文文件
+
+April 27, 2005
+
+!OpenVanilla 的英文首頁文件初稿已經完成了： http://openvanilla.org/index.cgi?English
+
+另外， http://openvanilla.org/index.cgi?AppleIMAlternativeEnglish 則是針對 Apple 相關的中文工具網頁所撰寫的。
+
+=== !OpenVanilla 與 Tiger
+
+April 26, 2005
+
+不少朋友很關心 !OpenVanilla 是否在 OS X 10.4 Tiger 上能順利安裝。目前初步測試結果，0.6.3 在 Tiger 上運作正常。不過，在 Dashboard 上輸入中文時，會有選字窗無法出現的情況。目前我們已經瞭解原因在哪裡，會針對此問題進行修正。
+
+=== !OpenVanilla 農曆新年計劃
+
+February 9, 2005
+
+先跟大家恭賀農曆新年！有傳言說 !OpeVanilla 將於農曆新年發表新版本，不過 !OpenVanilla 0.6.x 的 source tree 除了小部份的修正和 bug fix 外，倒是沒有太大幅度的變動。0.7 的設計藍圖（主要是新版的 !OpenVanilla.h ）還躺在某個 team member 的桌上。至於，要與其他輸入法框架整合的研究，目前初步的結果是：比想像中困難很多...... 可以做的事情總是很多，OV 也歡迎大家持續提供意見和想法。如果有 patch 或 code contribution 當然就更好啦。總之，祝大家有個亮麗的傳統新年！
+
+=== !OpenVanilla 0.6.3 正式發表
+January 19, 2005
+
+!OpenVanilla 0.6.3 正式版 (0.6.3-release) 則是於今天正式發表。這一版除了修正 0.6.2 版的 "dirty buffer" 缺陷外，最大的新增功能，要屬由 zonble 所加入的「彩色選字窗」功能。如今 OV 的選字窗不但可以調整顏色，也可以調整透明度。雖然 OV 不是第一個提供在選字窗玩花樣的輸入法框架──據朋友說法，自然輸入法的選字窗不但可以改顏色，甚至還能貼圖──但這個使用者介面上的新功能，相信可以創造更好的輸入感，讓中文輸入法終於能搭配上 OS X 的 Aqua 介面...... [（全文） http://osxchat.blogspot.com/2005/01/openvanilla-063_19.html]
+
+=== !OpenVanilla 0.6.3 搶先報
+January 16, 2005, by [zonble http://zonble.twbbs.org]
+
+（按：!OpenVanilla 0.6.3 正式版已經發表）
+
+!OpenVanilla 0.6.3 版的開發已經到了緊鑼密鼓的階段（而其實您現在就可以先下載0.6.3的嘗鮮版）；大概來說，應該在非常短的時間內，就可以正式釋出。在這邊先簡短介紹一下 0.6.3 版。
+
+在安裝程式方面，OV 0.6.3 提供在安裝過程中，自訂要安裝那些您所需要的輸入法，因為OV目前所能夠使用的輸入法其實相當多，而您應該不需要每一套都安裝。自訂安裝輸入法的方法，是在安裝過程中的第五步「安裝類型」，按下在畫面左下角的「自訂」按鈕...... [（全文） http://osxchat.blogspot.com/2005/01/openvanilla-063.html]

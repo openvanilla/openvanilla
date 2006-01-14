@@ -1,0 +1,14 @@
+== OS X
+* 基礎安裝套件
+* 其他模組取得
+* 說明文件
+* 臭蟲回報／建議新增功能／參與討論／留言
+
+== Windows
+* [如何參與目前開發進度，如何取得測試套件 http:?Win32Issues]
+
+== Linux/!FreeBSD
+* 從原始碼編譯
+* 使用 Debian apt-get
+* （port）
+* （RPM）

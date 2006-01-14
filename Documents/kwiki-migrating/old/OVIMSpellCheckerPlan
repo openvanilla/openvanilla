@@ -1,0 +1,46 @@
+== Algorithm ==
+* Calculate edit distances (like [String::Approx http://search.cpan.org/~jhi/String-Approx-3.25/Approx.pm]) of similar strings (like  [String::Trigram http://search.cpan.org/~tareka/String-Trigram-0.1/Trigram.pm]).
+* Approximate string-matching: http://secondstring.sourceforge.net/
+* -Use Soundex encoding to get similar English lexicons-.
+** 在 OVIMRomanNew 裡實際測試過之後發現，*這個編碼的結果不適合用於拼字檢查*。
+** References:
+*** SQLite's soundex function (from http://www.sqlite.org/lang_expr.html) :
+ soundex(X) 	Compute the soundex encoding of the string X.
+ The string "?000" is returned if the argument is NULL.
+ This function is omitted from SQLite by default.
+ It is only available the -DSQLITE_SOUNDEX=1 compiler option
+ is used when SQLite is built.
+*** [Text::Soundex http://search.cpan.org/~abergman/ponie-2/perl/lib/Text/Soundex.pm]
+* See also (These are string similarity algorithms):
+** [String::Similarity http://search.cpan.org/~mlehmann/String-Similarity-1.02/Similarity.pm]
+
+== Implementation ==
+* Use fuzzy searching (edit distance) of full-text search engines [CLucene http://sourceforge.net/projects/clucene/]
+** 需要有 autoconf/automake/libtool 才能編。
+** *現在有 prototype 可以玩了。按照 trunk/Modules/OVIMRomanNew/README4SpellChecker 的說明把 CLucene library 編好之後，再依照一般方式安裝 OVIMRomanNew 即可。*
+* Or use handcraft edit distance codes with SQLite
+** Character based n-gram table (There are some CPAN modules that can generate these: [Text::Ngrams http://search.cpan.org/~vlado/Text-Ngrams-1.7/Ngrams.pm], [Text::Ngram http://search.cpan.org/~cog/Text-Ngram-0.07/Ngram.pm])
+|unigram|lexicon|
+|a|apple|
+|a|blah|
+|a|mac|
+|a|jabbot|
+|a|vanilla|
+|...|...|
+|b|blah|
+|b|jabbot|
+|b|book|
+|...|...|
+|c|mac|
+|...|...|
+
+|bigram|lexicon|
+|ab|jabbot|
+|ac|mac|
+|ah|blah|
+|an|vanilla|
+|ap|apple|
+|...|...|
+** If "appel" typed...
+*** Find similar words (that have the same alphabet and approximate length). 
+*** Calculate edit distance between the typed word and similar words.

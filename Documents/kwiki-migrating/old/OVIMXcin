@@ -1,0 +1,33 @@
+== 開放香草 Xcin 模組
+
+Xcin 的故事說來話長，以現況來說，Xcin 是個提供 X Windows 上中文輸入的完整方案，
+其首頁在 http://xcin.linux.org.tw/ 。 開放香草直接利用了其所提出的 CIN 表格格式，撰寫開放香草 Xcin 模組（嗯，嚴格說來應該是「開放香草 CIN 模組」，畢竟只讀 CIN 表格）；也因此，在 Xcin 計畫曾經努力建構的許多輸入法表格可以重複被利用；目前開放香草 Xcin 模組所提共的輸入法是整個開放香草架構當中最多的。
+
+.infoblock
+= 現有輸入法：
+=== [行列 OVIMArray]、[酷音 OVIMChewing]
+=== [香草倉頡 OVIMCangjei]、[香草注音 OVIMPhonetic]
+=== [白話字漢羅 POJ Han-Lo http:?OVIMPOJ]
+----
+== XCIN 模組
+=== [倉頡 OVIMXcinCj]、[大易 OVIMXcinDayi3]
+=== [漁村符號 OVIMXcinEHQ]、[日文假名 OVIMUkiyoe]
+=== [粵語拼音 OVIMJyutping]、[K.K.音標 OVIMXcinKK]
+=== [正體漢語拼音 OVIMPingyinBig5]
+=== [簡體漢語拼音 OVIMXcinZhCnPinyin]
+=== [簡體倉頡 OVIMXcinZhCnJtcj]、[簡體注音 OVIMXcinZhCnPhonetic]
+=== [雙拼 OVIMXcinZhCnShuangpin]、[五筆字形 OVIMXcinZhCnWubizixing]
+=== [克林貢文 OVIMXcinKlingon]
+----
+=== [內碼 - Unicode Hex OVIMUnicode]
+=== [英數 OVIMEnglish]、[藏文 OVIMTibetan]
+----
+== 輸入法實驗：
+=== [EZbasic OVIMezbasic]
+=== [PHP 輸入法 OVIMphp]
+=== [Socket/perl OVIMsocket]
+----
+----
+= 相關連結：
+[Xcin 計畫網站 http://xcin.linux.org.tw/]
+.infoblock

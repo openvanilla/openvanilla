@@ -1,0 +1,131 @@
+== How to Write an Unit Test with [CxxTest http://cxxtest.sourceforge.net/guide.html]?
+Read [CxxTest http://cxxtest.sourceforge.net/guide.html] :p
+
+== How to Run Test Cases in OV?
+r3212:  b6s | 2005-10-14 18:11:11 +0800
+
+Support [http://cxxtest.sourceforge.net/guide.html CxxTest] for Unit Test procedures.
+The developers only need to follow these simple steps:
+
+* Set an environment variable "TESTER_HOME" of [http://cxxtest.sourceforge.net/guide.html CxxTest] path, for example:
+ export TESTER_HOME=~/Projects/cxxtest
+* Modify your Makefile to include
+ Mk/ov.test.mk
+* Write your own test cases and put them under the folder "./t" such as
+ Modules/OVIMExample/t
+* Just type
+ make test
+
+== Real Case
+* First, write a test case "*[=TestSequence.h]*" for the *[=Seqeunce]* related classes in the manner of /Composite pattern/.
+ #include <cxxtest/TestSuite.h>
+ #include "Sequence.h"
+
+ class TestSequence : public CxxTest::TestSuite
+ {
+ public:
+         void setUp(void)
+         {
+                 TS_ASSERT(element.set("a"));
+         }
+
+         void tearDown(void)
+         {
+                 //do nothing currently.
+         }
+
+         void testAdd(void)
+         {
+                 TS_ASSERT(clause.add(element));
+         }
+
+         void testRemove(void)
+         {
+                 TS_ASSERT(clause.remove(0));
+         }
+
+         void testGetChild(void)
+         {
+                 TS_ASSERT_EQUALS(clause.getChild(0), element);
+         }
+
+ private:
+         Clause clause;
+         Element element;
+ };
+
+* Second, implement the *[=Sequence]* class.
+ #ifndef SEQUENCE_H
+ #define SEQUENCE_H
+
+ #include <vector>
+ #include <string>
+
+ using namespace std;
+
+ class Sequence
+ {
+ public:
+         virtual bool add(Sequence&) { return false; }
+         virtual bool remove(int) { return false; }
+         virtual bool getChild(int, Sequence&) { return false; }
+ };
+
+ class Element : public Sequence
+ {
+ public:
+         bool set(string& str) { element_ = str; }
+
+ private:
+         string element_;
+ };
+
+ class Clause : public Sequence
+ {
+ public:
+         bool add(Sequence& seq)
+         {
+                       clause_.push_back(seq);
+                       return true;
+         }
+
+         bool remove(int index)
+         {
+                       clause_.erase(clause_.begin() + index);
+                       return true;
+         }
+
+         bool getChild(int index, Sequence& seq)
+         {
+                       seq = clause_[index];
+                       return true;
+         }
+
+ private:
+         vector<Sequence> clause_;
+ };
+
+ #endif
+
+* Why does it use STL vector and string? Roughly speaking, the vector is for indexing, whereas the string is for UTF-8 characters.
+
+* And I realized there're several problems 
+** Consider /passing by reference/ for objects, the interface of the method [=getChild] should be changed, then it is tweaked from
+                 TS_ASSERT_EQUALS(clause.getChild(0), element);
+to
+                 Element tempElement;
+                 TS_ASSERT(clause.getChild(0, tempElement));
+** Also, the setter of [=Element] is not behaved,
+                 TS_ASSERT(element.set("a"));
+should be
+                 std::string keystroke("a");  // That needs #include <string>
+                 TS_ASSERT(element.set(keystroke));
+** Is the return values of boolean necessary?
+** The virtual functions are /not pure/.
+** There should be more interfaces for the operations of the vector.
+
+== References
+* http://www4.ncsu.edu/~cho/dloop/
+* [A comparison of C++ unit testing tools http://www.gamesfromwithin.com/articles/0412/000061.html]
+* [C/C++/ObjC unit testing tool list http://opensourcetesting.org/unit_c.php]
+* [Unit testing softwares http://c2.com/cgi/wiki?TestingFramework]
