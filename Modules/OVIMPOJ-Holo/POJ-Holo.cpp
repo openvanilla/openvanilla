@@ -36,7 +36,27 @@
 const char *pojHoloToneComposeKey=" 12345678";
 const char *pojHoloVowel="aeimnoquAEIMNOQU";
 const char *pojHoloNasel="\xe2\x81\xbf";
+// USE U+0358 (DEFAULT)
 const char *pojHoloToneTable[]= {
+    "a", "\xc3\xa1", "\xc3\xa0", "a", "\xc3\xa2", "\xc3\xa1", "\xc4\x81", "a\xcc\x8d",
+    "e", "\xc3\xa9", "\xc3\xa8", "e", "\xc3\xaa", "\xc3\xa9", "\xc4\x93", "e\xcc\x8d",
+    "i", "\xc3\xad", "\xc3\xac", "i", "\xc3\xae", "\xc3\xad", "\xc4\xab", "i\xcc\x8d",
+    "m", "\xe1\xb8\xbf", "m\xcc\x80", "m", "m\xcc\x82", "\xe1\xb8\xbf", "m\xcc\x84", "m\xcc\x8d",
+    "n", "\xc5\x84", "\xc7\xb9", "n", "n\xcc\x82", "\xc5\x84", "n\xcc\x84", "n\xcc\x8d",
+    "o", "\xc3\xb3", "\xc3\xb2", "o", "\xc3\xb4", "\xc3\xb3", "\xc5\x8d", "o\xcc\x8d",
+    "o\xcd\x98","\xc3\xb3\xcd\x98","\xc3\xb2\xcd\x98","o\xcd\x98","\xc3\xb4\xcd\x98","o\xcd\x98","\xc5\x8d\xcd\x98","o\xcc\x8d\xcd\x98",
+    "u", "\xc3\xba", "\xc3\xb9", "u", "\xc3\xbb", "\xc3\xba", "\xc5\xab", "u\xcc\x8d",
+    "A", "\xc3\x81", "\xc3\x80", "a", "\xc3\x82", "\xc3\x81", "\xc4\x80", "A\xcc\x8d",
+    "E", "\xc3\x89", "\xc3\x88", "E", "\xc3\x8a", "\xc3\x89", "\xc4\x92", "E\xcc\x8d",
+    "I", "\xc3\x8d", "\xc3\x8c", "I", "\xc3\x8e", "\xc3\x8d", "\xc4\xaa", "I\xcc\x8d",
+    "M", "\xe1\xb8\xbe", "M\xcc\x80", "M", "M\xcc\x82", "\xe1\xb8\xbe", "M\xcc\x84", "M\xcc\x8d",
+    "N", "\xc5\x83", "\xc7\xb8", "N", "N\xcc\x82", "\xc5\x83", "N\xcc\x84", "N\xcc\x8d",
+    "O", "\xc3\x93", "\xc3\x92", "O", "\xc3\x94", "\xc3\x93", "\xc5\x8c", "O\xcc\x8d",
+    "O\xcd\x98","\xc3\x93\xcd\x98","\xc3\x92\xcd\x98","O\xcd\x98","\xc3\x94\xcd\x98","\xc3\x93\xcd\x98","\xc5\x8c\xcd\x98","O\xcc\x8d\xcd\x98",
+    "U", "\xc3\x9a", "\xc3\x99", "U", "\xc3\x9b", "\xc3\x9a", "\xc5\xaa", "U\xcc\x8d"
+};
+// USE MIDDLE DOT (OPTIONAL, FALLBACK)
+const char *pojHoloToneTableMiddleDot[]= {
     "a", "\xc3\xa1", "\xc3\xa0", "a", "\xc3\xa2", "\xc3\xa1", "\xc4\x81", "a\xcc\x8d",
     "e", "\xc3\xa9", "\xc3\xa8", "e", "\xc3\xaa", "\xc3\xa9", "\xc4\x93", "e\xcc\x8d",
     "i", "\xc3\xad", "\xc3\xac", "i", "\xc3\xae", "\xc3\xad", "\xc4\xab", "i\xcc\x8d",
@@ -206,7 +226,7 @@ const char *POJHoloKeySequence::finalize() {
     return seq;
 }
 
-const char *POJHoloKeySequence::compose(bool pureascii)
+const char *POJHoloKeySequence::compose(bool pureascii, bool ou_encoding)
 {
     strcpy(composebuf, "");
     if (!len) return composebuf;
@@ -281,7 +301,7 @@ const char *POJHoloKeySequence::compose(bool pureascii)
             s++;    // shift one char
         }
     
-        char *vstr=(char*)vowel2tone(c, tone);
+        char *vstr=(char*)vowel2tone(c, tone, ou_encoding);
         if (vstr) {
             // compose the tone mark
             strcat(b, vstr);
@@ -303,11 +323,14 @@ int POJHoloKeySequence::vowelorder(char c)
 }
 
 // tone must be between 1-8
-const char *POJHoloKeySequence::vowel2tone(char c, int tone)  {
+const char *POJHoloKeySequence::vowel2tone(char c, int tone, bool ou_encoding)  {
     if (tone < 1 || tone > 8) return NULL;
     int o=vowelorder(c);
     if (o==-1) return NULL;
-    return pojHoloToneTable[o*8+(tone-1)];
+    if (ou_encoding==OU_EncodedBy_CDRA)
+        return pojHoloToneTable[o*8+(tone-1)];
+    else
+        return pojHoloToneTableMiddleDot[o*8+(tone-1)];
 }
 
 int POJHoloKeySequence::toneMark(char c)

@@ -38,6 +38,11 @@ enum {
     POJ_Holo_ToneBySucceedingSymbol=2
 };
 
+// OU encoding
+enum {
+    OU_EncodedBy_CDRA=true
+};
+
 const int POJ_Holo_MaxSeqLen=16, POJ_Holo_MaxBufLen=64;
 
 class POJHoloKeySequence
@@ -55,7 +60,7 @@ public:
     void normalize();           // normalize before finalize
     const char *sequence();
     const char *finalize();     // return finalized sequence (+ tone)
-    const char *compose(bool pureascii=false);
+    const char *compose(bool pureascii, bool useDotComposing);
 
     int toneMark(char c);
     
@@ -70,7 +75,7 @@ protected:
     
     // service functions
     int vowelorder(char c);
-    const char *vowel2tone(char c, int tone);
+    const char *vowel2tone(char c, int tone, bool ou_encoding);
 };
 
 #endif

@@ -82,11 +82,14 @@ public:
     virtual int isAsciiOutput() { return asciioutput; }
     virtual int getKeyLayout() { return keylayout; }
     virtual int isFullPOJ() { return fullPOJOutput; }
+    virtual int isUseDotComposing () { return useDotComposing; }
+
     
 protected:
     int fullPOJOutput;
     int asciioutput;
     int keylayout;
+    int useDotComposing;
     OVCIN *cintab;
 };
 

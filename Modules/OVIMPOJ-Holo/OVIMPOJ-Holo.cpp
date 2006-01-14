@@ -75,6 +75,7 @@ void OVIMPOJHolo::update(OVDictionary* cfg, OVService*) {
     asciioutput=cfg->getIntegerWithDefault("ASCIIOutput", 0);
     keylayout=cfg->getIntegerWithDefault("keyboardLayout", 0);
     fullPOJOutput=cfg->getIntegerWithDefault("fullPOJOutput", 0);
+    useDotComposing=cfg->getIntegerWithDefault("useDotComposing", 1);
 }
 
 OVInputMethodContext *OVIMPOJHolo::newContext() {
@@ -110,7 +111,7 @@ int OVIMPOJHoloContext::keyEvent(OVKeyCode *key, OVBuffer *buf,
     // if backspace of delete key is pressed
     if ((c==ovkBackspace || c==ovkDelete) && !buf->isEmpty()) { 
         seq.remove();
-        buf->clear()->append(seq.compose(false))->update();
+        buf->clear()->append(seq.compose(false, parent->isUseDotComposing()))->update();
         return 1;            
     }
 
@@ -118,9 +119,9 @@ int OVIMPOJHoloContext::keyEvent(OVKeyCode *key, OVBuffer *buf,
     if ((c==ovkReturn || seq.isComposeKey(c)) && !buf->isEmpty()) {
         if (key->code()!=ovkReturn) seq.add(c);
         seq.finalize();     // normalize & finalize the key
-        buf->clear()->append(seq.compose(ascii))->update();
+        buf->clear()->append(seq.compose(false, parent->isUseDotComposing()))->update();
     
-        queryAndCompose(seq.sequence(), seq.compose(ascii), buf, textbar, srv);
+        queryAndCompose(seq.sequence(), seq.compose(ascii, parent->isUseDotComposing()), buf, textbar, srv);
         seq.clear();        
         return 1;
     }
@@ -128,7 +129,7 @@ int OVIMPOJHoloContext::keyEvent(OVKeyCode *key, OVBuffer *buf,
     // key=[a-z][A-Z], so add to our key sequence
     if (isalpha(c) || (parent->getKeyLayout() && seq.toneMark(c))) {
         seq.add(c, parent->getKeyLayout());
-        buf->clear()->append(seq.compose())->update();
+        buf->clear()->append(seq.compose(false, parent->isUseDotComposing()))->update();
         return 1;
     }
 
@@ -136,7 +137,7 @@ int OVIMPOJHoloContext::keyEvent(OVKeyCode *key, OVBuffer *buf,
     // then tell the app the process the character itself    
     if (!buf->isEmpty()) {
         seq.normalize();
-        buf->clear()->append(seq.compose(ascii))->send();
+        buf->clear()->append(seq.compose(ascii, parent->isUseDotComposing()))->send();
     }
 
     seq.clear();        
