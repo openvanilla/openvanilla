@@ -13,6 +13,16 @@ everything with the following commands:
 * make DSTROOT=/tmp/foobar install
 * sudo cp -r /tmp/foobar/* /
 
+If you encounter problem "overwriting" this directory:
+
+    /Library/Frameworks/OpenVanilla.framework
+    
+You might as well do the following before you "sudo cp" the files:
+
+    sudo rm -rf /Library/Frameworks/OpenVanilla.framework
+    
+Make sure you "sudo rm" the the right directory, you have been warned.
+
 This extra step allows you to examine the built files or even set
 appropriate ownership before you "sudo cp" and overwrite everything.
 
