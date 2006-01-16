@@ -2,23 +2,23 @@
 PortSystem          1.0
 name                openvanilla
 version             0.7.2-alpha
-categories          textproc
-maintainers         lukhnos@openvanilla.org
+categories          aqua textproc
+maintainers         ovadmin@openvanilla.org
 description         an input method editor (IME) package
-long_description    OpenVanilla is a lightweight text entry (input method \
-                    editor; IME) and output processing architecture. It's \
-                    very popular among Chinese-speaking OS X users as it \
-                    provides many IMEs not found or not as well implemented \
-                    in Apple's built-in modules. This installs the base \
-                    package, including the Framework, the Loader and a set \
-                    of popular modules for Traditional and Simplified \
-                    Chinese. Note this will install bundles under /Library , \
-                    as it must work as a text service component under \
-                    OS X.
+long_description    \
+    OpenVanilla is a lightweight text entry (input method \
+    editor, or IME) and output processing architecture. It is \
+    very popular among Chinese-speaking OS X users as it \
+    provides many IMEs not found or not satisfactorily \
+    implemented in Apple\'s built-in modules. This installs \
+    the base package, including the Framework, the Loader \
+    and a set of popular modules for Traditional and \
+    Simplified Chinese. Note this will install bundles into \
+    your Library directory, as such is required for any text \
+    service (input method) components.
 homepage            http://openvanilla.org
-master_sites        http://openvanilla.org/packages/
+master_sites        http://openvanilla.org/releases/
 distname            openvanilla-base-${version}
-extract.suffix      .tgz
-checksums           md5 1514b92e41fd422350cd5029d39dff3d
+checksums           md5 dde4161d20c4960e0386430ebacbdd84
 configure           {}
 destroot.destdir    DSTROOT=${destroot}
