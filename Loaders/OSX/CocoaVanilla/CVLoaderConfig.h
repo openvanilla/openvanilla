@@ -44,9 +44,9 @@
 #define CVLC_ATOIMC_ERROR_FILE  @"/tmp/_openvanilla-atomicinit-error.html"
 #define CVLC_FACTORY_DEFAULTS   @"/Library/OpenVanilla/0.7.2/Loader/OVLoader.bundle/Contents/Resources/org.openvanilla.OVLoader.DefaultSettings.plist"
 #define CVLC_PREFERENCEUTIL     @"/Library/OpenVanilla/0.7.2/Loader/OVPreferences.app"
-#define CVLC_DOCUMENT_EN		"/Library/OpenVanilla/0.7.2/Loader/OVPreferences.app/Contents/Resources/English.lproj/OpenVanillaManual.pdf"
-#define CVLC_DOCUMENT_ZH_TW		"/Library/OpenVanilla/0.7.2/Loader/OVPreferences.app/Contents/Resources/ZH_TW.lproj/OpenVanillaManual.pdf"
-#define CVLC_DOCUMENT_ZH_CN		"/Library/OpenVanilla/0.7.2/Loader/OVPreferences.app/Contents/Resources/ZH_CN.lproj/OpenVanillaManual.pdf"
+#define CVLC_DOCUMENT_EN		"open http://en.openvanilla.org"
+#define CVLC_DOCUMENT_ZH_TW		"open /Library/OpenVanilla/0.7.2/Loader/OVPreferences.app/Contents/Resources/ZH_TW.lproj/OpenVanillaManual.pdf"
+#define CVLC_DOCUMENT_ZH_CN		"open http://zh.openvanilla.org"
 
 NSArray *CVGetModuleLoadPath();
 NSString *CVGetUserSpacePath();

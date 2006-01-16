@@ -6,6 +6,27 @@
 	objectVersion = 42;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		6A7C22F3097BE15F003EE29A /* OpenVanillaLoader */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6A7C230A097BE1A1003EE29A /* Build configuration list for PBXAggregateTarget "OpenVanillaLoader" */;
+			buildPhases = (
+			);
+			buildSettings = {
+				PRODUCT_NAME = OpenVanillaLoader;
+			};
+			dependencies = (
+				6A7C22F9097BE19E003EE29A /* PBXTargetDependency */,
+				6A7C22FB097BE19E003EE29A /* PBXTargetDependency */,
+				6A7C22FD097BE19E003EE29A /* PBXTargetDependency */,
+				6A7C22FF097BE19E003EE29A /* PBXTargetDependency */,
+				6A7C2301097BE19E003EE29A /* PBXTargetDependency */,
+			);
+			name = OpenVanillaLoader;
+			productName = OpenVanillaLoader;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		6A074FA109712A3500CA4201 /* OVPreferencesIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A074F6D097127D800CA4201 /* OVPreferencesIcon.icns */; };
 		6A074FA409712AA400CA4201 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A9651C10970E3C4004BCC4D /* InfoPlist.strings */; };
@@ -96,33 +117,40 @@
 /* End PBXBuildStyle section */
 
 /* Begin PBXContainerItemProxy section */
-		6A074FB709712B5B00CA4201 /* PBXContainerItemProxy */ = {
+		6A7C22F8097BE19E003EE29A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A9651350970DFEE004BCC4D /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6A074F710971284800CA4201;
-			remoteInfo = OVPreferences;
+			remoteGlobalIDString = 6A9652120970E7C9004BCC4D;
+			remoteInfo = "OpenVanilla-TSComponent";
 		};
-		6A07512409712FB300CA4201 /* PBXContainerItemProxy */ = {
+		6A7C22FA097BE19E003EE29A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A9651350970DFEE004BCC4D /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6A0750FB09712DAC00CA4201;
-			remoteInfo = ovfilter;
+			remoteGlobalIDString = 6AA687C1097109EB002080DE;
+			remoteInfo = OVLoader;
 		};
-		6A77AC830971149700F5417F /* PBXContainerItemProxy */ = {
+		6A7C22FC097BE19E003EE29A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A9651350970DFEE004BCC4D /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6A77ABAE097112C300F5417F;
 			remoteInfo = OVDisplayServer;
 		};
-		6AA6880309710B14002080DE /* PBXContainerItemProxy */ = {
+		6A7C22FE097BE19E003EE29A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A9651350970DFEE004BCC4D /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6AA687C1097109EB002080DE;
-			remoteInfo = OVLoader;
+			remoteGlobalIDString = 6A074F710971284800CA4201;
+			remoteInfo = OVPreferences;
+		};
+		6A7C2300097BE19E003EE29A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A9651350970DFEE004BCC4D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A0750FB09712DAC00CA4201;
+			remoteInfo = ovfilter;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -131,9 +159,7 @@
 		6A074F720971284800CA4201 /* OVPreferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A0750FC09712DAC00CA4201 /* ovfilter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ovfilter; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A0751C409713E2800CA4201 /* OVPreferences-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "OVPreferences-Info.plist"; sourceTree = "<group>"; };
-		6A0751D409713F9000CA4201 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = English; path = PDFManuals/English.lproj/OpenVanillaManual.pdf; sourceTree = "<group>"; };
 		6A0751DC09713FB000CA4201 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = zh_TW; path = PDFManuals/zh_TW.lproj/OpenVanillaManual.pdf; sourceTree = "<group>"; };
-		6A0751DD09713FB200CA4201 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = zh_CN; path = PDFManuals/zh_CN.lproj/OpenVanillaManual.pdf; sourceTree = "<group>"; };
 		6A77AB8C0971122300F5417F /* DisplayServerIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = DisplayServerIcon.icns; path = OVDisplayServer/DisplayServerIcon.icns; sourceTree = "<group>"; };
 		6A77ABAF097112C300F5417F /* OVDisplayServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVDisplayServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A77ABB1097112C300F5417F /* OVDisplayServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVDisplayServer-Info.plist"; sourceTree = "<group>"; };
@@ -711,8 +737,6 @@
 				ZERO_LINK = YES;
 			};
 			dependencies = (
-				6AA6880409710B14002080DE /* PBXTargetDependency */,
-				6A07512509712FB300CA4201 /* PBXTargetDependency */,
 			);
 			name = "OpenVanilla-TSComponent";
 			productName = "OpenVanilla-TSComponent";
@@ -771,8 +795,6 @@
 				ZERO_LINK = YES;
 			};
 			dependencies = (
-				6A77AC840971149700F5417F /* PBXTargetDependency */,
-				6A074FB809712B5B00CA4201 /* PBXTargetDependency */,
 			);
 			name = OVLoader;
 			productName = OVLoader;
@@ -824,6 +846,7 @@
 			mainGroup = 6A9651330970DFEE004BCC4D;
 			projectDirPath = "";
 			targets = (
+				6A7C22F3097BE15F003EE29A /* OpenVanillaLoader */,
 				6A9652120970E7C9004BCC4D /* OpenVanilla-TSComponent */,
 				6AA687C1097109EB002080DE /* OVLoader */,
 				6A77ABAE097112C300F5417F /* OVDisplayServer */,
@@ -972,25 +995,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6A074FB809712B5B00CA4201 /* PBXTargetDependency */ = {
+		6A7C22F9097BE19E003EE29A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6A074F710971284800CA4201 /* OVPreferences */;
-			targetProxy = 6A074FB709712B5B00CA4201 /* PBXContainerItemProxy */;
+			target = 6A9652120970E7C9004BCC4D /* OpenVanilla-TSComponent */;
+			targetProxy = 6A7C22F8097BE19E003EE29A /* PBXContainerItemProxy */;
 		};
-		6A07512509712FB300CA4201 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6A0750FB09712DAC00CA4201 /* ovfilter */;
-			targetProxy = 6A07512409712FB300CA4201 /* PBXContainerItemProxy */;
-		};
-		6A77AC840971149700F5417F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6A77ABAE097112C300F5417F /* OVDisplayServer */;
-			targetProxy = 6A77AC830971149700F5417F /* PBXContainerItemProxy */;
-		};
-		6AA6880409710B14002080DE /* PBXTargetDependency */ = {
+		6A7C22FB097BE19E003EE29A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6AA687C1097109EB002080DE /* OVLoader */;
-			targetProxy = 6AA6880309710B14002080DE /* PBXContainerItemProxy */;
+			targetProxy = 6A7C22FA097BE19E003EE29A /* PBXContainerItemProxy */;
+		};
+		6A7C22FD097BE19E003EE29A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A77ABAE097112C300F5417F /* OVDisplayServer */;
+			targetProxy = 6A7C22FC097BE19E003EE29A /* PBXContainerItemProxy */;
+		};
+		6A7C22FF097BE19E003EE29A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A074F710971284800CA4201 /* OVPreferences */;
+			targetProxy = 6A7C22FE097BE19E003EE29A /* PBXContainerItemProxy */;
+		};
+		6A7C2301097BE19E003EE29A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A0750FB09712DAC00CA4201 /* ovfilter */;
+			targetProxy = 6A7C2300097BE19E003EE29A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -998,9 +1026,7 @@
 		6A0751D809713F9600CA4201 /* OpenVanillaManual.pdf */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6A0751D409713F9000CA4201 /* English */,
 				6A0751DC09713FB000CA4201 /* zh_TW */,
-				6A0751DD09713FB200CA4201 /* zh_CN */,
 			);
 			name = OpenVanillaManual.pdf;
 			sourceTree = "<group>";
@@ -1232,6 +1258,28 @@
 			};
 			name = Release;
 		};
+		6A7C230B097BE1A1003EE29A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = OpenVanillaLoader;
+			};
+			name = Debug;
+		};
+		6A7C230C097BE1A1003EE29A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				PRODUCT_NAME = OpenVanillaLoader;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		6A9651370970DFEE004BCC4D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1388,6 +1436,15 @@
 			buildConfigurations = (
 				6A77ABB3097112C400F5417F /* Debug */,
 				6A77ABB4097112C400F5417F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A7C230A097BE1A1003EE29A /* Build configuration list for PBXAggregateTarget "OpenVanillaLoader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A7C230B097BE1A1003EE29A /* Debug */,
+				6A7C230C097BE1A1003EE29A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

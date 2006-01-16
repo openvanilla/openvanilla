@@ -5,7 +5,7 @@
 "Input method toggle"="切换最近使用的输入法";
 "About"="关于 OpenVanilla";
 "Preferences"="设置…";
-"Help"="帮助";
+"Help"="帮助（openvanilla.org）";
 
 /* for output filter status */
 "enabled"="已开启";

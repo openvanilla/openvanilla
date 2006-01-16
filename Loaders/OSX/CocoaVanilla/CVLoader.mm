@@ -229,13 +229,13 @@ void CVLoader::menuHandler(unsigned int cmd) {
             return;
         case CVLMI_HELP:
 			if (!strcasecmp(srv->locale(), "zh_TW")) {
-				system("open " CVLC_DOCUMENT_ZH_TW);
+				system(CVLC_DOCUMENT_ZH_TW);
 			}
 			else if (!strcasecmp(srv->locale(), "zh_CN")) {
-				system("open " CVLC_DOCUMENT_ZH_CN);
+				system(CVLC_DOCUMENT_ZH_CN);
 			}
 			else {
-				system("open " CVLC_DOCUMENT_EN);
+				system(CVLC_DOCUMENT_EN);
 			}
             return;
     }

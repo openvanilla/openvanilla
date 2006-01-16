@@ -1,19 +1,23 @@
 # $Id: $
 PortSystem          1.0
 name                openvanilla
-version             0.7.2
+version             0.7.2-alpha
 categories          textproc
 maintainers         lukhnos@openvanilla.org
-description         a text entry (input method) and processing architecture
-long_description    OpenVanilla is a flexible architecture that provides an \
-                    easy way to write text entry (input method) and other \
-                    text processing modules on Mac OS X. This port installs \
-                    the OpenVanilla Framework, the OpenVanilla Loader for \
-                    OS X and a set of standard modules, including a number of \
-                    popular Traditional and Simplified Chinese input methods.
+description         an input method editor (IME) package
+long_description    OpenVanilla is a lightweight text entry (input method \
+                    editor; IME) and output processing architecture. It's \
+                    very popular among Chinese-speaking OS X users as it \
+                    provides many IMEs not found or not as well implemented \
+                    in Apple's built-in modules. This installs the base \
+                    package, including the Framework, the Loader and a set \
+                    of popular modules for Traditional and Simplified \
+                    Chinese. Note this will install bundles under /Library , \
+                    as it must work as a text service component under \
+                    OS X.
 homepage            http://openvanilla.org
-master_sites        http://localhost/~lukhnos/
-distname            openvanilla-osx-src-${version}
+master_sites        http://openvanilla.org/packages/
+distname            openvanilla-base-${version}
 extract.suffix      .tgz
 checksums           md5 1514b92e41fd422350cd5029d39dff3d
 configure           {}
