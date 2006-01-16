@@ -21,15 +21,19 @@ USRTOOL=$(DSTROOT)/$(CMDLINETOOLROOT)/bin/ovfilter
 all:
 	xcodebuild -project $(FW) -configuration $(CONFIG) build $(MAKEFLAGS)
 	xcodebuild -project $(LD) -configuration $(CONFIG) build $(MAKEFLAGS)
+	make -C Modules all
 
 install:
 	xcodebuild -project $(FW) -configuration $(CONFIG) install $(MAKEFLAGS)
 	xcodebuild -project $(LD) -configuration $(CONFIG) install $(MAKEFLAGS) 
+	make -C Modules install
 
 clean:
 	xcodebuild -project $(FW) -configuration $(CONFIG) clean $(MAKEFLAGS)
 	xcodebuild -project $(LD) -configuration $(CONFIG) clean $(MAKEFLAGS)
+	make -C Modules clean
         
 uninstall:
 	rm -rf $(LIBFW) $(LIBLDR) $(USRTOOL)
+	make -C Modules uninstall
 

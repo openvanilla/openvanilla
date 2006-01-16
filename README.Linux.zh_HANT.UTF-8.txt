@@ -1,4 +1,7 @@
-﻿編譯前需具備以下幾種工具：
+OpenVanilla 0.7.1 / 0.7.2: Framework, Loaders and Modules 
+Copyright (c) 2004-2006 The OpenVanilla Project
+
+編譯前需具備以下幾種工具：
 
 g++ 3.x 以上
 make

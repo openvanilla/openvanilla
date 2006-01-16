@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6A83D9BD097064A7006F8E81 /* OpenVanilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A83D9B9097064A7006F8E81 /* OpenVanilla.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6A83D9BE097064A7006F8E81 /* OVLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A83D9BA097064A7006F8E81 /* OVLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6A83D9C0097064A7006F8E81 /* OVUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A83D9BC097064A7006F8E81 /* OVUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A91C645097BD5040034BD92 /* OpenVanilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A91C642097BD5040034BD92 /* OpenVanilla.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A91C646097BD5040034BD92 /* OVLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A91C643097BD5040034BD92 /* OVLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A91C647097BD5040034BD92 /* OVUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A91C644097BD5040034BD92 /* OVUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildStyle section */
@@ -32,9 +32,9 @@
 /* Begin PBXFileReference section */
 		6A83D9AE09706437006F8E81 /* OpenVanilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenVanilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A83D9B009706437006F8E81 /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-Info.plist"; sourceTree = "<group>"; };
-		6A83D9B9097064A7006F8E81 /* OpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenVanilla.h; path = ../Headers/OpenVanilla.h; sourceTree = SOURCE_ROOT; };
-		6A83D9BA097064A7006F8E81 /* OVLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVLibrary.h; path = ../Headers/OVLibrary.h; sourceTree = SOURCE_ROOT; };
-		6A83D9BC097064A7006F8E81 /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVUtility.h; path = ../Headers/OVUtility.h; sourceTree = SOURCE_ROOT; };
+		6A91C642097BD5040034BD92 /* OpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenVanilla.h; path = Headers/OpenVanilla.h; sourceTree = "<group>"; };
+		6A91C643097BD5040034BD92 /* OVLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVLibrary.h; path = Headers/OVLibrary.h; sourceTree = "<group>"; };
+		6A91C644097BD5040034BD92 /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVUtility.h; path = Headers/OVUtility.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +68,9 @@
 		6A83D9B50970646A006F8E81 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				6A83D9B9097064A7006F8E81 /* OpenVanilla.h */,
-				6A83D9BA097064A7006F8E81 /* OVLibrary.h */,
-				6A83D9BC097064A7006F8E81 /* OVUtility.h */,
+				6A91C642097BD5040034BD92 /* OpenVanilla.h */,
+				6A91C643097BD5040034BD92 /* OVLibrary.h */,
+				6A91C644097BD5040034BD92 /* OVUtility.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -82,9 +82,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A83D9BD097064A7006F8E81 /* OpenVanilla.h in Headers */,
-				6A83D9BE097064A7006F8E81 /* OVLibrary.h in Headers */,
-				6A83D9C0097064A7006F8E81 /* OVUtility.h in Headers */,
+				6A91C645097BD5040034BD92 /* OpenVanilla.h in Headers */,
+				6A91C646097BD5040034BD92 /* OVLibrary.h in Headers */,
+				6A91C647097BD5040034BD92 /* OVUtility.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,14 +194,24 @@
 		6A83D9A00970640A006F8E81 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
 				COPY_PHASE_STRIP = NO;
+				DSTROOT = /;
 			};
 			name = Debug;
 		};
 		6A83D9A10970640A006F8E81 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
 				COPY_PHASE_STRIP = YES;
+				DSTROOT = /;
 			};
 			name = Release;
 		};

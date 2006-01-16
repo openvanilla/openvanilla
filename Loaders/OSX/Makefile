@@ -9,7 +9,7 @@ CMDLINETOOLROOT?=/opt/local
 
 PROJECT=OpenVanillaLoader.xcodeproj
 
-PRODUCTS=$(DSTROOT)//Library/Components/OpenVanilla-TSComponent-0.7.2.bundle \
+PRODUCTS=$(DSTROOT)/Library/Components/OpenVanilla-TSComponent-0.7.2.bundle \
 	$(DSTROOT)/Library/OpenVanilla/0.7.2/Loader \
 	$(DSTROOT)/$(CMDLINETOOLROOT)/bin/ovfilter
 

@@ -1,3 +1,16 @@
+OpenVanilla 0.7.1 / 0.7.2: Framework, Loaders and Modules 
+Copyright (c) 2004-2006 The OpenVanilla Project
+
+== 警告！警告！警告！ ==
+
+自 r1588 開始，OpenVanilla 推進至 0.7.2 ，由於有大量目錄經過了搬動，
+目前 Linux/FreeBSD/Windows 的程式碼是無法 make 的。請改用以下目錄
+的程式碼：
+
+    http://svn.openfoundry.org/openvanilla/branches/0.7.1
+
+或是改拿 r1588 （含）之前的trunk source來編譯。
+
 == 注意事項 ==
 現在 trunk/Experiments/Win32/ 底下的是 socket-based loader，可能還不適合用在
 beta production 上。
