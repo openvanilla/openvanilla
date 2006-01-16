@@ -10,8 +10,10 @@
 # o· 用ou 鼻音用 nn 入聲鼻音用 nnh 表示
 #######################################################################
 %gen_inp
-%ename POJ
-%cname 白話字漢羅
+%ename POJ Reverse Lookup
+%cname 閩南語白話字（POJ）反查
+%tcname 閩南語白話字（POJ）反查
+%scname 闽南语白话字（POJ）反查
 %selkey asdfghjkl;
 %keyname begin
 a a

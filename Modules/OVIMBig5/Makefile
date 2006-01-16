@@ -1,4 +1,4 @@
-# Makefile for OVIMUnicode
+# Makefile for OVIMBig5
 #
 # Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
 # All rights reserved.

@@ -35,7 +35,7 @@
 
 using namespace std;
 
-CinList *cinlist=NULL;
+OVCINList *cinlist=NULL;
 
 extern "C" unsigned int OVGetLibraryVersion() {
     return OV_VERSION;
@@ -49,7 +49,7 @@ extern "C" int OVInitializeLibrary(OVService *s, const char *libpath) {
 
     const char *pathsep=s->pathSeparator();
         
-    cinlist = new CinList(pathsep);
+    cinlist = new OVCINList(pathsep);
     if (!cinlist) return false;
 
     // will be something like this on OS X:
@@ -112,7 +112,7 @@ string *GenericKeySequence::compose(string *s)
     return s;
 }
 
-OVIMGeneric::OVIMGeneric(const CinInfo& ci) : cininfo(ci), cintab(NULL) {
+OVIMGeneric::OVIMGeneric(const OVCINInfo& ci) : cininfo(ci), cintab(NULL) {
     idstr = "OVIMGeneric-" + cininfo.shortfilename;
 }
 

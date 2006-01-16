@@ -1,4 +1,4 @@
-// CinList.h: a list of .cin information
+// OVCINInfo.h: a list of .cin information
 //
 // Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
@@ -28,8 +28,8 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef __CinList_h
-#define __CinList_h
+#ifndef __OVCINList_h
+#define __OVCINList_h
 
 #include <string>
 #include <vector>
@@ -38,12 +38,12 @@ using namespace std;
 
 const int CL_PREPARSELIMIT=32;      // preparse won't exceed first 64 lines
 
-struct CinInfo {
-    CinInfo() {}
-    CinInfo(const CinInfo &c) : 
+struct OVCINInfo {
+    OVCINInfo() {}
+    OVCINInfo(const OVCINInfo &c) : 
         longfilename(c.longfilename), shortfilename(c.shortfilename),
         ename(c.ename), cname(c.cname), tcname(c.tcname), scname(c.scname) {}
-    const CinInfo& operator=(const CinInfo& c) {
+    const OVCINInfo& operator=(const OVCINInfo& c) {
         longfilename=c.longfilename;
         shortfilename=c.shortfilename;
         ename=c.ename;
@@ -61,20 +61,20 @@ struct CinInfo {
     string scname;
 };
 
-class CinList
+class OVCINList
 {
 public:
-    CinList(const char *pathseparator);
+    OVCINList(const char *pathseparator);
     int load(const char *loadpath, const char *extension=".cin");
 
     size_t count() { return list.size(); }
-    const CinInfo& cinInfo(size_t i) { return list[i]; }
+    const OVCINInfo& cinInfo(size_t i) { return list[i]; }
     
 protected:
     bool preparse(const char *loadpath, const char *filename);
 
     string pathsep;
-    vector<CinInfo> list;
+    vector<OVCINInfo> list;
 };
 
 #endif

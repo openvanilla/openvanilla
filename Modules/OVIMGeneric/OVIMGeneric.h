@@ -96,7 +96,7 @@ protected:
 class OVIMGeneric : public OVInputMethod
 {
 public:
-    OVIMGeneric(const CinInfo& ci);
+    OVIMGeneric(const OVCINInfo& ci);
     virtual ~OVIMGeneric();
     virtual const char* identifier();
     virtual const char* localizedName(const char* locale);
@@ -111,7 +111,7 @@ public:
     virtual bool isShiftSelKey() { return doShiftSelKey; };
     
 protected:
-    CinInfo cininfo;
+    OVCINInfo cininfo;
     OVCIN* cintab;
 
     string idstr;    

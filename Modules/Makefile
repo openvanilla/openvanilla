@@ -28,31 +28,18 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-MOD= OVIMArray OVIMAutoPhonetic OVIMBig5 OVIMBoshiamy OVIMChewing \
-     OVIMGeneric OVIMGenericSQLite OVIMKeypadExample OVIMPOJ-Holo \
-     OVIMPhonetic OVIMRoman OVIMRomanNew OVIMSpaceChewing OVIMTibetan \
-     OVIMUnicode OVOFAntiZhuyinwen OVOFHanConvert \
-     OVOFDisUniHex OVOFExample OVOFFullWidthCharacter OVOFHTMLCharEntity \
-     OVOFQuotationmark OVOFReverseLookup OVOFSpeak
+MODULES=OVIMArray OVIMGeneric OVIMPOJ-Holo OVIMPhonetic OVIMSpaceChewing \
+    OVKPPhraseTools OVOFFullWidthCharacter OVOFHanConvert OVOFReverseLookup
 
 all:
-	for i in $(MOD) ; do make -C $$i all ;done
+	for i in $(MODULES) ; do make -C $$i all ;done
 
 install: all
-	for i in $(MOD) ; do make -C $$i install ;done
+	for i in $(MODULES) ; do make -C $$i install ;done
 
 uninstall:
-	for i in $(MOD) ; do make -C $$i uninstall ;done
+	for i in $(MODULES) ; do make -C $$i uninstall ;done
 
 clean:
-	for i in $(MOD) ; do make -C $$i clean ;done
+	for i in $(MODULES) ; do make -C $$i clean ;done
 
-MOD=OVIMArray OVIMGeneric OVIMPOJ-Holo OVIMPhonetic OVIMSpaceChewing \
-    OVKPPhraseTools OVOFFullWidthCharacter OVOFHanConvert \
-OVOFReverseLookup
-OVOFSpeak
-OVOFZhWikipidealize
-REFACTORING.txt
-SharedData
-SharedHeaders
-SharedSource

@@ -4,8 +4,10 @@
 #	http://www.info.gov.hk/digital21/chi/hkscs/index.html
 #
 %gen_inp
-%ename Changjei
-%cname 倉頡
+%ename Cangjei Reverse Lookup
+%cname 倉頡反查
+%tcname 倉頡字根反查
+%scname 繁体仓颉字根反查
 %encoding UTF-8
 %selkey 1234567890
 %endkey <>?:"{}|~!@#$%^&*()_+

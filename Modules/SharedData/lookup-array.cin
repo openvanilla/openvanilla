@@ -23,8 +23,8 @@
 #  2005-05-11 vgod配合OpenVanilla 0.7將一級簡碼自本檔移除，另獨立至   #
 #  ArrayShortCode.cin中。                                             #
 #######################################################################
-%ename array30
-%cname 行列30
+%ename Array30 Reverse Lookup
+%cname 行列30反查
 %encoding UTF-8
 %selkey 1234567890
 %keyname begin

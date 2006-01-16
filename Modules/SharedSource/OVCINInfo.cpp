@@ -1,4 +1,4 @@
-// CinList.cpp: a list of .cin information
+// OVCINInfo.cpp: a list of .cin information
 //
 // Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
@@ -44,7 +44,7 @@
 #endif
 
 #include <string.h>
-#include "CinList.h"
+#include "OVCINInfo.h"
 
 const char *clExtension=NULL;
 
@@ -91,12 +91,12 @@ void CLSplitString(const char *s, string& k, string& v) {
 #endif
 
 
-CinList::CinList(const char *pathseparator) {
+OVCINList::OVCINList(const char *pathseparator) {
     pathsep=pathseparator;
 }
 
 #ifndef WIN32
-    int CinList::load(const char *loadpath, const char *extension) {
+    int OVCINList::load(const char *loadpath, const char *extension) {
         clExtension=extension;
     
         struct dirent **files;
@@ -113,7 +113,7 @@ CinList::CinList(const char *pathseparator) {
 #else
     #error This part of code won't run--needs refactoring
     
-    void CinList::load(char *libpath)
+    void OVCINList::load(char *libpath)
     {
         if (index)  return;     // already loaded by another binary instance!
     
@@ -152,16 +152,16 @@ CinList::CinList(const char *pathseparator) {
             }
         }
         FindClose(hList);
-        // murmur("CinList::load called, index=%d", index);
+        // murmur("OVCINList::load called, index=%d", index);
     }
 #endif
 
-bool CinList::preparse(const char *loadpath, const char *filename) {
+bool OVCINList::preparse(const char *loadpath, const char *filename) {
     // check if a file of the same short name has been alread loaded
     for (size_t i=0; i<list.size(); i++) {
-        CinInfo &x=list[i];
+        OVCINInfo &x=list[i];
         if (x.shortfilename==filename) {
-            murmur("CinList: file %s not loaded, short name '%s' already exists", loadpath, filename);
+            murmur("OVCINList: file %s not loaded, short name '%s' already exists", loadpath, filename);
             return false;
         }
     }
@@ -171,11 +171,11 @@ bool CinList::preparse(const char *loadpath, const char *filename) {
 
     FILE *in=fopen(longname.c_str(), "r");
     if (!in) {
-        murmur("CinList: opening %s failed", longname.c_str());
+        murmur("OVCINList: opening %s failed", longname.c_str());
         return false;
     }
 
-    CinInfo i;
+    OVCINInfo i;
     i.shortfilename=filename;
     i.longfilename=longname;
 

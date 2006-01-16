@@ -1,54 +1,97 @@
-// OVOFReverseLookup.cpp 
+// OVOFReverseLookup.cpp: Reverse lookup module for .cin files
+//
+// Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. Neither the name of OpenVanilla nor the names of its contributors
+//    may be used to endorse or promote products derived from this software
+//    without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
 
-#define OV_DEBUG
+#include "OVOFReverseLookup.h"
 #ifndef WIN32
-#include <OpenVanilla/OpenVanilla.h>
-#include <OpenVanilla/OVLibrary.h>
-#include <OpenVanilla/OVUtility.h>
+    #include <OpenVanilla/OVLibrary.h>
+    #include <OpenVanilla/OVUtility.h>
 #else
-#include "OpenVanilla.h"
-#include "OVLibrary.h"
-#include "OVUtility.h"
-#define strcasecmp stricmp
+    #include "OVLibrary.h"
+    #include "OVUtility.h"
+    #define strcasecmp stricmp
 #endif
 #include <stdlib.h>
-#include "OVCandidateList.h"
-#include "OVOFReverseLookup.h"
-#include "OVCIN.h"
-#include <string>
-#include <iostream>
 
 using namespace std;
 
-// functions that help load all .cin --------------------------------
-CinList cinlist;
-
-// OpenVanilla Loadable IM interface functions -------------------------------
+OVCINList *cinlist=NULL;
 
 extern "C" unsigned int OVGetLibraryVersion() {
     return OV_VERSION;
 }
-extern "C" int OVInitializeLibrary(OVService*, const char*p) { 
-    cinlist.load((char*)p);
-    return 1; 
+
+extern "C" int OVInitializeLibrary(OVService *s, const char *libpath) {
+    if (cinlist) {
+        // already initializde
+        return false;
+    }
+
+    const char *pathsep=s->pathSeparator();
+        
+    cinlist = new OVCINList(pathsep);
+    if (!cinlist) return false;
+
+    // will be something like this on OS X:
+    //     ~/Library/OpenVanilla/version/UserSpace/OVIMGeneric/
+    string userpath=s->userSpacePath("OVOFReverseLookup");
+
+    // will be something like this on OS X:
+    //     /Library/OpenVanilla/version/Modules/OVIMGeneric/
+    string datapath=string(libpath) + string(pathsep) + 
+        string("OVOFReverseLookup");
+        
+    murmur("OVOFReverseLookup initializing");
+    
+    int loaded=0;
+    murmur("Loading modules from %s", userpath.c_str());
+    loaded += cinlist->load(userpath.c_str(), ".cin");
+
+    murmur("Loading modules from %s", datapath.c_str());
+    loaded += cinlist->load(datapath.c_str(), ".cin");
+    
+
+    if (!loaded) {
+        murmur ("OVOFReverseLookup: nothing loaded, init failed");
+        return false;
+    }
+
+    return true;
 }
 extern "C" OVModule *OVGetModuleFromLibrary(int x) {
-    if (x >= cinlist.index) return NULL;
-    return new OVOFReverseLookup(cinlist.cinpath, cinlist.list[x].filename, cinlist.list[x].ename, cinlist.list[x].cname);
+    if ((size_t)x >= cinlist->count()) return NULL;
+       
+    return new OVOFReverseLookup(cinlist->cinInfo((size_t)x));
 }
 
-
-OVOFReverseLookup::OVOFReverseLookup(char *lpath, char *cfile, char *en, char *cn) {
-    char cinfilename[PATH_MAX];
-    strcpy(cinfile, cfile);
-    strcpy (cinfilename, lpath);
-    if (cinfilename[strlen(cinfilename)-1]!='/') strcat(cinfilename, "/");
-    strcat(cinfilename, cinfile);
-    cintab=new OVCIN(cinfilename);
-
-    sprintf(ename, "%s lookup", en ? en : cfile);
-    sprintf(cname, "查詢%s字根", cn ? cn : cfile);
-    sprintf(idbuf, "OVOFReverseLookup-%s", en ? en : cfile);
+OVOFReverseLookup::OVOFReverseLookup(const OVCINInfo &ci) : cininfo(ci) {
+    idstr = "OVOFReverseLookup-" + cininfo.shortfilename;
 }
 
 OVOFReverseLookup::~OVOFReverseLookup() {
@@ -56,19 +99,20 @@ OVOFReverseLookup::~OVOFReverseLookup() {
 }
 
 const char* OVOFReverseLookup::identifier() {
-    return idbuf;
+    return idstr.c_str();
 }
 
 const char* OVOFReverseLookup::localizedName(const char* locale) {
-    if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN")) {
-        return cname;
-    }        
-    return ename;
+    if (!strcasecmp(locale, "zh_TW")) return cininfo.tcname.c_str();
+    if (!strcasecmp(locale, "zh_CN")) return cininfo.scname.c_str();
+    return cininfo.ename.c_str();
 }
 
 int OVOFReverseLookup::initialize(OVDictionary* global, OVService*, const char*) {
-    if (!cintab) return 0;
-    murmur("OVOFReverseLookup: initializing %s", identifier());
+    if (!cintab) {
+        cintab=new OVCIN(cininfo.longfilename.c_str());
+     }
+    murmur("OVOFRevereseLookup: initializing %s", identifier());
     return 1;
 }
 

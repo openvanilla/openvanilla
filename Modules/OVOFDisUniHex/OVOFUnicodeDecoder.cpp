@@ -46,24 +46,26 @@ const char *OVOFDisUniHex::process(const char *src, OVService *srv)
 	for(int j=0; j<l; j++) {
 	   char msg[512];
 	   const char *u8;
-	   unsigned short h=u16p[j], l=0;
+	   unsigned short h=u16p[j];
 	   
 	   if (h >= 0xd800 && h <= 0xdc00) {
-	       l=u16p[++j];
+	       int lo;
 	       u8=srv->UTF16ToUTF8(u16p+j, 2);
+	       lo=u16p[++j];
 	       
 	       unsigned int u32=0xffff0000;
-	       sprintf(msg, "%s=U+%X (%d)=%X %X", u8, u32, u32, h, l);
+	       sprintf(msg, "%s=U+%X (%d)=%X %X", u8, u32, u32, h, lo);
 	   }
 	   else {
 	       u8=srv->UTF16ToUTF8(u16p+j, 1);
-	       sprintf(msg, "%s=U+%X (%d)", u8, h, h));
+	       sprintf(msg, "%s=U+%X (%d)", u8, h, h);
 	   }
 	   
-        if (j != l-1) strcat(msg, "\n");
+        if (j < l-1) strcat(msg, "\n");
         display+=msg;
 	}
 	srv->notify(display.c_str());
+	return src;
 }
 
 OV_SINGLE_MODULE_WRAPPER(OVOFDisUniHex);
