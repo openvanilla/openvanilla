@@ -72,6 +72,9 @@ $(GOALS): $(OBJS) $(EXTRA_GOALS)
 install-goal:
 	$(CP) $(GOALS) $(INST_PATH)
 
+uninstall-goal:
+	for i in $(GOALS) ; do rm -rf $(INST_PATH)/$$i ; done
+
 # install rules for everthing else
 else
     # default for INST_PATH is /usr/local/lib/openvanilla
@@ -87,6 +90,9 @@ install-goal:
 	$(MKDIR) $(INST_PATH)
 	$(LIBTOOL) --mode=install install $(GOALS) $(INST_PATH)
 
+uninstall-goal:
+    $(error Target uninstall-goal is not yet implemented)
+
 endif
 
 
@@ -98,12 +104,20 @@ build: $(GOALS) ;
 
 install: all install-mkdir install-goal install-data ;
 
+uninstall: uninstall-goal uninstall-data uninstall-rmdir;
+
 install-mkdir:
 	$(MKDIR) $(INST_PATH)
 	$(MKDIR) $(DATA_INST_PATH)
 
 install-data:
 	if [ "$(DATA)" ]; then for i in $(DATA); do $(CP) $$i $(DATA_INST_PATH); done; fi
+
+uninstall-rmdir:
+	$(RMDIR) $(DATA_INST_PATH)
+    
+uninstall-data:
+	if [ "$(DATA)" ]; then for i in $(DATA); do rm -rf $(DATA_INST_PATH)/$$i; done; fi
 
 clean:
 	$(RM) $(GOALS) $(EXTRA_CLEAN) $(EXTRA_GOALS) $(OBJS)
@@ -138,6 +152,7 @@ endif
 
 ECHO=/bin/echo
 RM=/bin/rm -f
+RMDIR=/bin/rm -rf
 CP=/bin/cp
 MKDIR=/bin/mkdir -p
 

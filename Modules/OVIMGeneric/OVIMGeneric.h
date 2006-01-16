@@ -46,7 +46,7 @@
 #include "OVCIN.h"
 #include "OVKeySequence.h"
 #include "OVCandidateList.h"
-#include "CinList.h"
+#include "OVCINInfo.h"
 #include <stdlib.h>
 #include <string>
 #include <vector>
