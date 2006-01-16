@@ -1,7 +1,5 @@
 // OVOFHanConvert.cpp: Traditional<->Simplified Chinese Output Filter
 //
-// [FILENAME]: [DESCRIPTION]
-//
 // Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 

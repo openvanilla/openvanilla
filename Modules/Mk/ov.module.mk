@@ -164,11 +164,12 @@ LIBTOOL=$(shell ../../Utilities/find-libtool.pl)
 
 
 ifeq ("$(OS_COMPILE)", "Darwin")
-    INC+=-I../SharedHeaders
+    override INC+=-I../SharedHeaders
     ARCH=-arch i386 -arch ppc 
-    SDK= /Developer/SDKs/MacOSX10.4u.sdk
-    CFLAGS+= $(ARCH) -O2 -Wall $(INC) -isysroot ${SDK} -F/Library/Frameworks/ 
-    LDFLAGS+= $(ARCH) -isysroot ${SDK}
+    SDK=/Developer/SDKs/MacOSX10.4u.sdk
+    override CFLAGS+=$(ARCH) -O2 -Wall $(INC) -isysroot ${SDK} \
+        -F/Library/Frameworks/
+    override LDFLAGS+= $(ARCH) -isysroot ${SDK}
 else
     INC+=-I../SharedHeaders -I$(OV_INCLUDE)
     CFLAGS+=-O2 -Wall $(INC)
