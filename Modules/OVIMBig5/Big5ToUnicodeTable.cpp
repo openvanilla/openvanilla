@@ -1,3 +1,9 @@
+// Big5ToUnicodeTable.cpp: Big5 to UTF-16 conversion table 
+// 2005-2006 By Weizhong Yang
+//
+// This program is Zonble-ware and adopts Zonble's License
+// -- "How could a person who doesn't even believe in law adopt any license?"
+
 unsigned short OVIMBig5Table[19582][2]={
 {0x8140,0xEEB8}, {0x8141,0xEEB9}, {0x8142,0xEEBA}, {0x8143,0xEEBB},
 {0x8144,0xEEBC}, {0x8145,0xEEBD}, {0x8146,0xEEBE}, {0x8147,0xEEBF},
