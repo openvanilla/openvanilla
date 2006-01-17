@@ -44,23 +44,32 @@ const char *OVOFDisUniHex::process(const char *src, OVService *srv)
     string display;
 
 	for(int j=0; j<l; j++) {
-	   char msg[512];
-	   const char *u8;
-	   unsigned short h=u16p[j];
-	   
-	   if (h >= 0xd800 && h <= 0xdc00) {
-	       int lo;
-	       u8=srv->UTF16ToUTF8(u16p+j, 2);
-	       lo=u16p[++j];
-	       
-	       unsigned int u32=0xffff0000;
-	       sprintf(msg, "%s=U+%X (%d)=%X %X", u8, u32, u32, h, lo);
+       char msg[512];
+       const char *u8;
+       unsigned int h=u16p[j];
+       
+       if (h >= 0xd800 && h <= 0xdc00) {
+            int lo;
+            u8=srv->UTF16ToUTF8(u16p+j, 2);
+            lo=u16p[++j];
+
+            const unsigned int suroff = 0x10000 - (0xD800 << 10) - 0xDC00;
+            unsigned int u32= (h << 10) + lo + suroff;
+            sprintf(msg, "%s=U+%X (%d)=UTF-16 %X %X", u8, u32, u32, h, lo);
 	   }
-	   else {
-	       u8=srv->UTF16ToUTF8(u16p+j, 1);
-	       sprintf(msg, "%s=U+%X (%d)", u8, h, h);
-	   }
-	   
+        else {
+           u8=srv->UTF16ToUTF8(u16p+j, 1);
+           sprintf(msg, "%s=U+%X (%d)", u8, h, h);
+        }
+
+        strcat(msg, "=");
+        for (size_t k=0; k<strlen(u8); k++) {
+            char u8code[16];
+            sprintf(u8code, "%X", (unsigned char)u8[k]);
+            strcat(msg, u8code);
+            if (k<strlen(u8)-1) strcat(msg, " ");
+        }
+
         if (j < l-1) strcat(msg, "\n");
         display+=msg;
 	}
