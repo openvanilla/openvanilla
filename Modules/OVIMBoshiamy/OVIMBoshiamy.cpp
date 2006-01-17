@@ -9,7 +9,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <sys/syslimits.h>
-#include "../../Headers/OVKeySequence.h"
+#include "OVKeySequence.h"
 #include "OVSQLite3.h"
 
 // Some dirty public secrets goes here
@@ -28,7 +28,7 @@ class IMGKeySequence : public OVKeySequenceSimple {
 public:
     IMGKeySequence(const char *t) { strcpy(table, t); }
     virtual int isValidKey(char c);
-    virtual int add(char c);
+    virtual bool add(char c);
     virtual int isEmpty();
     virtual const char *compose();
     virtual const char *sequence() { return seq; }
@@ -608,9 +608,9 @@ int IMGKeySequence::isValidKey(char c) {
     return 0;
 }
 
-int IMGKeySequence::add(char c) {
+bool IMGKeySequence::add(char c) {
     if (query(c)) return OVKeySequenceSimple::add(tolower(c));
-    return 0;
+    return false;
 }
 
 int IMGKeySequence::isEmpty() {

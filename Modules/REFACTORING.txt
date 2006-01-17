@@ -7,7 +7,7 @@
 ** Uses "../Mk/ov.module.mk"
 ** Changes variable IMID to MODULEID
 ** Offers HAS_VARIANTS if there is any variant
-** Makes with "build, install, clean, help" targets
+** Makes with "build, install, uninstall, clean, help" targets
 
 == What MUST Be Refactored ==
 
@@ -16,11 +16,9 @@ Otherwise it's guaranteed to break!
 
 == Not Yet Refactored Modules ==
 
-* OVIMBoshiamy
-* OVIMChewing
+* OVIMChewing (moved to Deserted/)
 * OVIMExample
 * OVIMGenericSQLite
-* OVIMRoman
 * OVIMRomanNew
 * OVIMTobacco
 * OVKPAbbreviator
@@ -31,18 +29,20 @@ Otherwise it's guaranteed to break!
 
 == Refactoring in Progress ==
 
-* OVIMUIM
 
 == Refactored Modules ==
 
 * OVIMBig5
+* OVIMBoshiamy (but no license header added)
 * OVOFAntiZhuyinwen (its xcodeproj variant removed))
 * OVIMArray
 * OVIMPhonetic (variants: sqlite bpmf-extended)
 * OVIMGeneric
 * OVIMPOJ-Holo
+* OVIMRoman
 * OVIMSpaceChewing
 * OVIMTibetan
+* OVIMUIM
 * OVIMUnicode
 * OVKPPhraseTools
 * OVOFFullWidthCharacter
