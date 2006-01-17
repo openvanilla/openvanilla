@@ -24,24 +24,19 @@ Otherwise it's guaranteed to break!
 * OVIMRomanNew
 * OVIMTobacco
 * OVKPAbbreviator
-* OVOFDisUniHex
 * OVOFExample
-* OVOFHTMLCharEntity
 * OVOFMorseCode
 * OVOFPHP
-* OVOFQuotationmark
-* OVOFReverseLookup
 * OVOFSpeak
-* OVOFZhWikipidealize
 
 == Refactoring in Progress ==
 
-* OVOFAntiZhuyinwen (its xcodeproj variant needs to be re-created)
 * OVIMUIM
 
 == Refactored Modules ==
 
 * OVIMBig5
+* OVOFAntiZhuyinwen (its xcodeproj variant removed))
 * OVIMArray
 * OVIMPhonetic (variants: sqlite bpmf-extended)
 * OVIMGeneric
@@ -52,6 +47,11 @@ Otherwise it's guaranteed to break!
 * OVKPPhraseTools
 * OVOFFullWidthCharacter
 * OVOFHanConvert
+* OVOFHTMLCharEntity
+* OVOFDisUniHex (renamed to OVOFUnicodeDecoder)
+* OVOFQuotationmark (renamed to OVOFSmartQuotations)
+* OVOFReverseLookup
+* OVOFZhWikipidealize
 * Mk/ (not counted as module, but the build system also needs refactoring)
 * SharedData/
 * SharedHeaders/

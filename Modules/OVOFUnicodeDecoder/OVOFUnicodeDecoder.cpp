@@ -1,4 +1,4 @@
-// OVOFDisUniHex.cpp: Decode Unicode
+// OVOFUnicodeDecoder.cpp: Decodes Unicode
 // 2004-2006 By Weizhong Yang
 //
 // This program is Zonble-ware and adopts Zonble's License

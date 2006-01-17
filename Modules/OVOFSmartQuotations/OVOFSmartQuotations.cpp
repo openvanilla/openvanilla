@@ -1,18 +1,22 @@
-#define OV_DEBUG
+// OVOFSmartQuotations.cpp: Smart Quotations Filter
+// 2004-2006 By Weizhong Yang
+//
+// This program is Zonble-ware and adopts Zonble's License
+// -- "How could a person who doesn't even believe in law adopt any license?"
+
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-//#include <unistd.h>
 #ifndef WIN32
-#include <OpenVanilla/OpenVanilla.h>
-#include <OpenVanilla/OVLibrary.h>
-#include <OpenVanilla/OVUtility.h>
+    #include <OpenVanilla/OpenVanilla.h>
+    #include <OpenVanilla/OVLibrary.h>
+    #include <OpenVanilla/OVUtility.h>
 #else
-#include "OpenVanilla.h"
-#include "OVLibrary.h"
-#include "OVUtility.h"
-#define strcasecmp stricmp
+    #include "OpenVanilla.h"
+    #include "OVLibrary.h"
+    #include "OVUtility.h"
+    #define strcasecmp stricmp
 #endif
 
 /*
@@ -20,7 +24,7 @@ English: “ ”
 German: „ “
 Netherland: ””
 Netherland Alternative: „ ”
-France: « »
+French: « »
 Danemark: » «
 Sweden: » »
 
@@ -28,19 +32,19 @@ English: ‘’
 German: ‚‛
 Netherlan: ’’
 Netherland Alternative: ‚ ’
-France: ‹ ›
+French: ‹ ›
 Danemark: › ‹
 Sweden: › ›
 */
 
 unsigned short the_double[7][2] = {
-	{0x201C, 0x201D,}, 
-	{0x201E, 0x201C,},
-	{0x201D, 0x201D,},
-	{0x201E, 0x201D,},
-	{0x00AB, 0x00BB,},
-	{0x00BB, 0x00AB,},
-	{0x00BB, 0x00BB,},
+	{0x201C, 0x201D}, 
+	{0x201E, 0x201C},
+	{0x201D, 0x201D},
+	{0x201E, 0x201D},
+	{0x00AB, 0x00BB},
+	{0x00BB, 0x00AB},
+	{0x00BB, 0x00BB},
 };
 
 unsigned short the_single[7][2] = {
@@ -66,7 +70,7 @@ public:
 	{
 		if (!strcasecmp(locale, "zh_TW")) return "\xE6\x99\xBA\xE6\x85\xA7\xE5\x9E\x8B\xE8\x8B\xB1\xE6\x96\x87\xE5\xBC\x95\xE8\x99\x9F\x0A";//"智慧型英文引號";
 		if (!strcasecmp(locale, "zh_CN")) return "\xE6\x99\xBA\xE6\x85\xA7\xE5\x9E\x8B\xE8\x8B\xB1\xE6\x96\x87\xE5\xBC\x95\xE5\x8F\xB7\x0A";//"智慧型英文引号";
-		return "Smart Quote - English";
+		return "Smart Quotations - English";
 	}
     virtual const char *process (const char *src, OVService *srv) {
 		if (u16buf) {
@@ -122,7 +126,7 @@ public:
 	{
 		if (!strcasecmp(locale, "zh_TW")) return "\xE6\x99\xBA\xE6\x85\xA7\xE5\x9E\x8B\xE5\xBE\xB7\xE6\x96\x87\xE5\xBC\x95\xE8\x99\x9F\x0A";//"智慧型德文引號";
 		if (!strcasecmp(locale, "zh_CN")) return "\xE6\x99\xBA\xE6\x85\xA7\xE5\x9E\x8B\xE5\xBE\xB7\xE6\x96\x87\xE5\xBC\x95\xE5\x8F\xB7\x0A";//"智慧型德文引号";
-		return "Smart Quote - German";
+		return "Smart Quotations - German";
 	}
     virtual const char *process (const char *src, OVService *srv) {
 		if (u16buf) {
@@ -165,20 +169,20 @@ protected:
 
 //----
 
-class OVOFSmartQuoteFrance : public OVOutputFilter {
+class OVOFSmartQuoteFrench : public OVOutputFilter {
 public:
-    OVOFSmartQuoteFrance() {u16buf=NULL;dp=0;sp=0;}
+    OVOFSmartQuoteFrench() {u16buf=NULL;dp=0;sp=0;}
     
     virtual int initialize(OVDictionary *moduleCfg, OVService *srv, 
 						   const char *modulePath) {
         return 1;}
     
-    virtual const char *identifier() { return "OVOFSmartQuoteFrance"; }
+    virtual const char *identifier() { return "OVOFSmartQuoteFrench"; }
     virtual const char *localizedName(const char *locale)
 	{
 		if (!strcasecmp(locale, "zh_TW")) return "\xE6\x99\xBA\xE6\x85\xA7\xE5\x9E\x8B\xE6\xB3\x95\xE6\x96\x87\xE5\xBC\x95\xE8\x99\x9F\x0A";//"智慧型法文引號";
 		if (!strcasecmp(locale, "zh_CN")) return "\xE6\x99\xBA\xE6\x85\xA7\xE5\x9E\x8B\xE6\xB3\x95\xE6\x96\x87\xE5\xBC\x95\xE5\x8F\xB7\x0A";//"智慧型法文引号";
-		return "Smart Quote - France";
+		return "Smart Quotations - French";
 	}
     virtual const char *process (const char *src, OVService *srv) {
 		if (u16buf) {
@@ -232,7 +236,7 @@ extern "C" OVModule *OVGetModuleFromLibrary(int idx) {
 	switch (idx) {
 		case 0: return new OVOFSmartQuote;
 		case 1: return new OVOFSmartQuoteGerman;
-		case 2: return new OVOFSmartQuoteFrance;
+		case 2: return new OVOFSmartQuoteFrench;
 	}
 	return NULL;
 }
