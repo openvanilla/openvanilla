@@ -1,10 +1,10 @@
 # $Id: $
 PortSystem          1.0
 name                openvanilla
-version             0.7.2-alpha
+version             0.7.2-beta
 categories          aqua textproc
 maintainers         ovadmin@openvanilla.org
-description         an input method editor (IME) package
+description         package of popular Chinese input methods
 long_description    \
     OpenVanilla is a lightweight text entry (input method \
     editor, or IME) and output processing architecture. It is \
@@ -17,9 +17,9 @@ long_description    \
     your Library directory, as such is required for any text \
     service (input method) components. RESTART REQUIRED.
 homepage            http://openvanilla.org
-master_sites        sourceforge
-distname            openvanilla-base-${version}
+master_sites        http://localhost/~lukhnos/
+distname            OpenVanilla-OSX-Source-${version}
 build.args          CFLAGS+=-F../../Loaders/OSX/
-checksums           md5 3c73102ecfcc29bb85a424891e150ef6
+checksums           md5 0d6bddcb159df64e5702c9d53cb58b83
 configure           {}
 destroot.destdir    DSTROOT=${destroot}

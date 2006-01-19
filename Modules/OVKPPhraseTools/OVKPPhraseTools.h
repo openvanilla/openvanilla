@@ -46,8 +46,8 @@
 
 using namespace std;
 
-#define PT_DEFKEY       '~'
-#define PT_CATCHKEY     '['
+#define PT_DEFKEY       "~"
+#define PT_CATCHKEY     "["
 #define PT_DBNAME       "userphrase-0.7.2.0.db"
 #define PT_DBTBLCREATE  "create table phrase(key, value, context, time, freq);"
 #define PT_DBIDXCREATE  "create index phrase_index_key on phrase(key);"

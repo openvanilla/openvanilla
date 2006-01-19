@@ -298,16 +298,20 @@ bool OVKPPhraseToolsContext::command_search(const string& k, bool wcard) {
         while (st->step()==SQLITE_ROW) {
             string k(st->column_text(0));
             string v(st->column_text(1));
-            string x(st->column_text(2));
+            string x(st->column_text(2));   // context information
             
             valuelist.push_back(v);
             
             string d;
             if (wildcard) d=k + string(" => ");
             d+=v;
-            d+=string(" (");
-            d+=x;
-            d+=string(")");
+            
+            if (x.length()) {
+                d+=string(" (");
+                d+=x;
+                d+=string(")");
+            }
+            
             candilist.push_back(d);
         }
     
@@ -370,7 +374,7 @@ OVKPPhraseTools::OVKPPhraseTools(bool &cflag, PTKeySequence &wseq,
 }
 
 const char *OVKPPhraseTools::localizedName(const char *lc) {
-    return PTMsg(lc, "Phase Management", "詞彙管理工具", 
+    return PTMsg(lc, "Phrase Management", "詞彙管理工具", 
         "词汇管理工具");
 }
 
@@ -380,8 +384,19 @@ int OVKPPhraseTools::initialize(OVDictionary *c, OVService* s, const char*) {
 }
 
 void OVKPPhraseTools::update(OVDictionary *cfg, OVService*) {
-    actkey=cfg->getIntegerWithDefault("activationKey", PT_DEFKEY);
-    catchkey=cfg->getIntegerWithDefault("textRecordingKey", PT_CATCHKEY);
+    // this overwrites and fixes a bug
+    const char *ak=cfg->getStringWithDefault("activationKey", PT_DEFKEY);
+    const char *ck=cfg->getStringWithDefault("textRecordingKey", PT_CATCHKEY);
+    
+    if (strlen(ak) > 1) {   // wrong default
+        cfg->setString("activationKey", PT_DEFKEY);
+    }
+    if (strlen(ck) > 1) {
+        cfg->setString("textRecordingKey", PT_CATCHKEY);
+    }
+
+    actkey=*(cfg->getStringWithDefault("activationKey", PT_DEFKEY));
+    catchkey=*(cfg->getStringWithDefault("textRecordingKey", PT_CATCHKEY));
     selkey=cfg->getStringWithDefault("selectionKey", "1234567890");
 }
 
