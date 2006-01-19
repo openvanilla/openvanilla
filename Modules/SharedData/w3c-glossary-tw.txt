@@ -1,0 +1,3006 @@
+abstract module
+抽象模組
+
+access
+存取、訪問
+
+access control
+存取控制
+
+access control information
+存取控制資訊
+
+access mechanism
+存取機制
+
+access right
+存取權限
+
+accessibility information
+親和力資訊
+
+accessibility problem
+親和力問題、無障礙網頁問題
+
+accessible
+無障礙的、可訪問的
+
+accessible authoring practice
+實踐無障礙創作
+
+accessiblity
+親和力
+
+ACSS (Audio cascading style sheets)
+ACSS (Audio CSS ，音訊階層樣規。這是個古早的講法，目前已改用 Aural CSS 這個詞彙，即聽覺階層樣規，縮寫仍然是 ACSS)
+
+activate
+啟用
+
+active grammar
+可用文法
+
+activity
+活動
+
+actor
+角色
+
+adaptation
+適應、調節
+
+adaptation preferences
+適配偏好 (http://www.w3.org/TR/2003/WD-di-gloss-20030825/#def-adaptation-preferences)
+
+additional characters
+附加字符
+
+advisory board
+顧問團、諮詢委員會
+
+advisory committee
+諮詢委員會
+
+age
+壽命
+
+agent
+代理人
+
+alert
+警告
+
+alpha
+alpha
+
+alpha compaction
+alpha 壓縮
+
+alpha separation
+alpha 分色
+
+alpha table
+alpha 索引表
+
+alternative information
+替代資訊
+
+amaya
+amaya (http://www.w3.org/Amaya/)
+
+ancestor
+祖先、前輩結點
+
+anchor
+錨點
+
+ancillary chunk
+輔助資訊
+
+animation
+動畫
+
+annotation
+評註、註釋、標注
+
+anonymity
+匿名
+
+antecedent
+推論、前提
+
+apache
+apache
+
+applet
+applet
+
+application
+應用程式、應用
+
+application personalization
+應用程式個人化
+
+application programming interface (API), conventional input/output/device API
+應用程式介面 (API)、常見輸入/輸出/裝置 API
+
+arc
+弧
+
+architecture
+架構、結構、體系
+
+argument
+參數
+
+artifact
+工藝品、物件
+
+ASCII art
+ASCII 藝術
+
+ASR (Automatic speech recognition)
+ASR (自動語音辨識)
+
+assertion
+宣稱、斷言、恆真句
+
+assistive technology
+輔助技術
+
+asynchronous
+非同步
+
+asynchronous exchange
+非同步交換
+
+at user option
+用戶可選擇的
+
+atomic
+單子
+
+atomic test
+單子測試
+
+attribute
+屬性
+
+attribute name
+屬性名稱
+
+attribute specification
+屬性規格、屬性明細
+
+attribute value
+屬性值
+
+attribute, or CC/PP attribute
+CC/PP 屬性
+
+attribute-list declarations
+屬性列表宣告
+
+audio
+音訊
+
+audio description
+音訊描述
+
+audio track
+音軌
+
+audio-only representation
+僅呈現音訊
+
+audit guard
+稽核防護機制
+
+auditory description
+聽覺描述
+
+authentication
+身份驗證
+
+author
+作者
+
+author styles
+作者樣式
+
+authoring
+創作
+
+authoring tool
+創作工具
+
+authorization
+授權
+
+axis
+座標軸
+
+back link
+返回鏈結
+
+background image interference
+背景圖像干擾
+
+backward compatible
+向下相容
+
+base text
+基礎文本
+
+baseline
+基線
+
+binding
+繫結
+
+binding expression
+繫結表達式
+
+bit depth
+色彩深度
+
+black box
+黑箱
+
+bopomofo
+注音符號
+
+bot
+機器人
+
+bounding box
+邊界框、區域框
+
+box
+框
+
+braille
+點字
+
+bridge
+橋接器
+
+browser
+瀏覽器
+
+button
+按鈕
+
+byte
+位元組
+
+byte order
+位元組順序
+
+cache
+快取、cache
+
+cacheable
+可快取的、可緩衝的
+
+Candidate Recommendation (CR)
+候選推薦標準 (CR)
+
+capability
+性能、容量
+
+captions
+標題、說明、字幕
+
+card
+卡片
+
+cascading style sheet
+階層樣規(CSS)、階層樣式表(CSS)
+
+catch element
+catch 元素
+
+CC/PP processor
+CC/PP 處理器
+
+CC/PP Repository
+CC/PP 資料倉儲
+
+CDATA sections
+CDATA 區段
+
+CERN
+歐洲粒子物理研究所
+
+certification
+憑證
+
+chair
+主持、(小組的) 主席
+
+chairman
+主席
+
+channel
+通道
+
+character
+字符、字元
+
+character data
+字符資料
+
+character data (CDATA)
+字符資料 (CDATA)
+
+character encoding
+字符編碼
+
+character or expression depth
+字符或表達式深度
+
+character or expression width
+字符或表達式寬度
+
+character reference
+字符參照、字元參照
+
+check for
+檢查
+
+child
+子 (元素)
+
+child
+子 (節點)
+
+choreography
+(web service) 流程設計
+
+chromaticity (CIE)
+色度 (CIE)
+
+chunk
+區塊
+
+class
+類別
+
+class definition
+類別定義
+
+class description
+類別描述
+
+class name
+類別名稱
+
+class of product
+產品類別
+
+click-stream
+點選串流
+
+client
+客戶端
+
+collapse
+折疊
+
+collated text transcript
+逐字稿
+
+colour type
+色彩類別
+
+comm
+通訊
+
+comments
+註解
+
+complete
+完備的
+
+complex ruby markup
+複雜旁註 (ruby) 標記
+
+compliance
+一致性 (Conformance now)
+
+component
+組件
+
+composite (verb)
+複合 (動詞)
+
+concept
+概念
+
+condition
+條件
+
+conditional content
+條件內容
+
+conditional sections
+條件區段
+
+confidentiality
+機密性
+
+confidentiality
+機密性、保密性
+
+configuration
+配置
+
+configure, control
+配置，控制
+
+conformance
+一致性
+
+conformance clause
+一致性條款
+
+conformance level
+一致性級別
+
+conformance testing
+一致性測試
+
+conforming document
+一致性文件
+
+connection
+連結
+
+consequent
+結果
+
+consistent
+一致的
+
+constraint
+限制
+
+contained (element A is contained in B)
+包含於 (元素A包含於元素B)
+
+container (Constructor)
+容器 (建構子)
+
+containing document
+容器文件
+
+content
+內容
+
+content developer
+內容開發者
+
+content elements
+內容元素
+
+content generation
+內容生成
+
+content model
+內容模型
+
+content negotiation
+內容協商
+
+content provider
+內容供應者
+
+content selection
+內容選擇
+
+content set
+內容集
+
+content token element
+內容記號元素
+
+context (of a given mathML expression)
+(給定 mathML 表達式的) 上下文
+
+context node
+取義結點 (這個詞彙乃用於 XML Path Language (XPath), 請勿與前面用於 mathML 的 context 搞混)
+
+context position
+取義位置 (這個詞彙乃用於 XML Path Language (XPath), 請勿與前面用於 mathML 的 context 搞混)
+
+context size
+取義範圍 (這個詞彙乃用於 XML Path Language (XPath), 請勿與前面用於 mathML 的 context 搞混)
+
+contradictory behaviors
+矛盾行為
+
+control
+控制
+
+control item
+控制項
+
+convenience
+便利
+
+conversation
+會話
+
+conversion tool
+轉換工具
+
+COO
+營運長
+
+cookie
+cookie
+
+correct
+正確的
+
+credentials
+憑據
+
+critical chunk
+關鍵區塊
+
+CSS (Cascading style sheets)
+CSS (階層樣規, 層疊樣式表)
+
+CSS W3C cascading style sheet specification.
+CSS W3C 階層樣規規格書, 層疊樣式表規範標準
+
+cyberspace
+網際空間、電馭空間
+
+cyc
+cyc 計劃 ( [[http://www.cyc.com/]] )
+
+daemon
+daemon
+
+data category
+資料類型
+
+data element
+資料元素
+
+data model
+資料模型
+
+data resource
+資源
+
+data schema
+資料綱目
+
+data set
+資料集
+
+data structure
+資料結構
+
+data-valued property
+資料型別屬性
+
+database
+資料庫
+
+datastream
+資料流
+
+datatype
+資料型別
+
+datatype property
+資料型別屬性
+
+date space
+網站編年區
+
+decideable
+可判定的
+
+declaration
+宣告
+
+declared
+已宣告的
+
+decomposition
+分解
+
+deepest
+最深的
+
+default
+預設
+
+default
+預設的
+
+default namespace
+預設命名空間
+
+deferred request authentication
+依據請求驗證
+
+defining required attributes
+定義必要屬性
+
+defining the type of attribute values
+定義屬性值類型
+
+deflate
+deflate (一種壓縮算法)
+
+delivered image
+傳輸完成的圖像
+
+delivery context
+傳送上下文
+
+delivery policy
+傳送政策
+
+delivery unit
+傳送單位
+
+deprecated
+棄用
+
+depth
+深度
+
+descendant
+子節點
+
+descendants
+子節點
+
+device
+設備
+
+device independent
+與裝置無關的
+
+device-independence
+與裝置無關
+
+dialog
+對話
+
+digital rights management
+數位權利管理
+
+digital signature
+數位簽章
+
+dimensions of variability
+變異維度
+
+direct sub-expression (of a mathML expression of)
+(mathML 表達式的) 直接子表達式
+
+directly contained (element A in B)
+(A) 直接包含於 (B)
+
+director
+領導人、總監
+
+discovery
+探索
+
+discovery service
+探索服務
+
+discretionary choices
+給定選擇
+
+discretionary items
+給定項目
+
+document
+文件
+
+document character set
+文件字符集
+
+document content, structure, and presentation
+文件內容、結構、表示
+
+document entity
+文件實體
+
+document language
+文件語言
+
+document model
+文件模型
+
+document object model
+文件物件模型
+
+document object, document
+文件物件、文件
+
+document order
+文件順序
+
+document profile
+文件設置文件
+
+document source, text source,
+文件來源、文本來源
+
+document style semantics and specification language (DSSSL)
+文件風格語義和規範語言 (DSSSL)
+
+document tree
+文件樹
+
+document type
+文件類型
+
+document type declaration
+文件類型宣告
+
+document type definition (DTD)
+文件類型定義 (DTD)
+
+documentation
+參考文件
+
+DOM (Document object model, see http://www.w3.org/DOM/)
+DOM (文件物件模型)
+
+DOM level 0
+DOM level 0
+
+domain
+網域
+
+domain name
+域名
+
+driver
+DTD 驅動檔
+
+DTD
+DTD
+
+DTD
+文件類型定義 (DTD)
+
+DTD-determined ID
+DTD 確定 ID
+
+DTMF (Dual tone multi-Frequency)
+DTMF (雙音多頻)
+
+dublin core
+都柏林核心集
+
+dynamic content
+動態內容
+
+dynamic HTML (DHTML)
+動態 HTML (DHTML)
+
+early normalization
+事前正規化
+
+ease of parsing and serializing:
+剖析和序列化的簡化
+
+EBT (Electronic book technology)
+電子圖書技術
+
+eCMAScript
+eCMAScript
+
+EDI (Electronic data interchange)
+電子資料交換
+
+editing view
+編輯閱覽模式
+
+electronic data interchange (EDI)
+電子資料交換
+
+element
+元素
+
+element content
+元素內容
+
+element name
+元素名稱
+
+element type
+元素類型
+
+element type declaration
+元素類型宣告
+
+element, element type
+元素、元素類型
+
+elements
+元素
+
+embed
+嵌入
+
+embedded object
+嵌入式物件
+
+Embedded Web request
+嵌入式網路聲請
+
+embellished operator
+修飾操作符
+
+empty
+空
+
+empty-element tag
+空元素標籤
+
+enabled element, disabled element,
+啟用的元素、停用的元素
+
+encryption
+加密
+
+end point
+終點
+
+end-tag
+結束標籤
+
+ending resource
+結束資源
+
+enquire
+enquire (程序名)
+
+entail
+推導
+
+entities
+實體
+
+entity
+實體
+
+entity reference
+實體參照
+
+enumerated attributes
+列舉屬性、枚舉屬性
+
+episode
+情節
+
+equable practice
+等同常規 [http://www.w3.org/TR/1998/WD-P3P10-harmonization#Definitions]
+
+equivalent
+等價的
+
+equivalent (for content)
+(內容上) 等價
+
+error
+錯誤
+
+escape
+跳脫、逸出
+
+event
+事件
+
+events and scripting, event handler, eventhandler
+事件和腳本、事件處理器、事件處理器
+
+executable content
+可執行內容
+
+expanded name
+擴充名稱
+
+expanded-name
+擴充名稱
+
+explicit expiration time
+顯式過期時間
+
+explicit user request
+顯式用戶請求
+
+Explicit Web request
+顯式Web請求
+
+explicitly undefined behaviors
+顯式未定義行為
+
+extended link
+延伸鏈結
+
+extended links
+延伸鏈結
+
+extending pre-defined elements
+延伸預先定義的元素
+
+extensible markup language (XML)
+可擴展標記語言 (XML)
+
+extensible style language (XSL)
+可擴展樣式語言 (XSL)
+
+extensional
+外延的
+
+external
+外部的
+
+external entity
+外部實體
+
+external markup declaration
+外部標記宣告
+
+externally-determined ID
+外部可確定 ID
+
+facet
+分面
+
+facilities
+設施
+
+fatal error
+致命錯誤
+
+feature
+功能、特徵、特性
+
+fellow
+研究員
+
+fences
+括號
+
+FIA (Form interpretation algorithm)
+FIA (表格直譯式演算法)
+
+filter
+過濾器
+
+filtering
+過濾
+
+first node rule
+首節點定律
+
+first-hand
+第一手的
+
+focus of attention
+關注焦點
+
+focus, content focus, user interface focus,user
+焦點、內容焦點、使用者界面焦點、使用者
+
+following element
+後繼元素
+
+font
+字體 (例如蘋果儷中黑, Time New Roman; 請一併參照 glyph 和 typeface)
+
+for compatibility
+為了相容性
+
+for interoperability
+為了互用性
+
+form
+表格
+
+form control
+表格控制
+
+form item
+表格項目
+
+gamma
+gamma
+
+gateway
+閘道
+
+general entities
+通用實體
+
+generic identifier
+通用識別符
+
+GIF (Graphics interchange format)
+GIF (圖形交換格式)
+
+GILC (Global internet liberty campaign)
+GILC (全球網際網路自由化運動)
+
+glossary of terms for device independence (version used for Device)
+與裝置無關的術語表 (用於裝置版本)
+
+glyph
+字形 (例如粗體, 斜體; 請一併參照 font 和 typeface)
+
+graphical
+圖像的
+
+graphics
+圖像
+
+greyscale
+灰階、灰度
+
+group ruby
+旁註 (ruby) 群集
+
+harmonized adaptation
+協調適應
+
+harmonized user experience
+協調使用者體驗
+
+height
+高度
+
+heuristic expiration time
+預設過期時間
+
+highlight
+凸顯
+
+hint
+提示
+
+hiragana
+平假名
+
+host
+主機
+
+host
+主辦者
+
+host language
+主語言
+
+host page
+主網頁、主頁
+
+HTML
+HTML
+
+HTML (Hypertext markup language)
+HTML (超文本標記語言)
+
+HTTP (Hypertext transfer protocol)
+HTTP (超文本傳輸協定)
+
+HTTP client
+HTTP 客戶端
+
+HTTP gateway
+HTTP 閘道
+
+HTTP payload entity
+HTTP 負載實體
+
+HTTP proxy
+HTTP 代理
+
+HTTP representation
+HTTP 表示
+
+HTTP request
+HTTP 聲請
+
+HTTP response
+HTTP 回應
+
+HTTP server
+HTTP 伺服器
+
+hybrid document
+混合文件
+
+hyperlink
+超鏈結
+
+hypertext
+超文本
+
+idempotent
+恆效性質
+
+identical
+等同的
+
+identified data
+已識別資料
+
+identifier
+識別符
+
+ideograph
+表意符號
+
+iff
+若且唯若
+
+image
+圖形
+
+image data
+圖形資料
+
+image map
+影像地圖
+
+implementation
+實作
+
+implementation conformance statement (ICS)
+實作一致性聲明 (ICS)
+
+implementation dependent values (or features)
+實作相關數值 (或特徵)
+
+implementation platform
+實作平臺
+
+Implicit Web request
+隱式網路聲請
+
+important
+重要的
+
+imports closure
+加入的封閉性
+
+inbound
+流入
+
+inbound/outbound
+流入/流出
+
+included
+包含的
+
+inconsistent
+不一致的
+
+independent web
+獨立網
+
+index
+索引
+
+indexed-colour
+索引色
+
+indexical
+索引的
+
+indexing
+索引
+
+indirectly contained
+間接包含
+
+individual
+個體
+
+individual-valued property
+個體價值屬性
+
+infer
+推理
+
+inferred mrow
+按推理所得的 mrow (請參考 MathML 中的 mrow 組件)
+
+inform
+通知
+
+information space
+資訊空間
+
+informative text
+參考文本
+
+initial SOAP sender
+初始 SOAP 發送者
+
+input configuration
+輸入配置
+
+input item
+輸入項目
+
+INRIA (Institut national de recherche en infomatique et automatique)
+INRIA (法國國家信息與自動化研究所)
+
+instance
+實體
+
+instance data
+實體資料
+
+instance data node
+實體資料節點
+
+instance of
+(某類別的) 實體
+
+instance of mathML
+mathML的實體
+
+instantiate
+示例
+
+integrity
+完整性
+
+intensional
+內涵的
+
+interaction
+互動
+
+interactive element, non-interactive element,non-interactive
+互動式的元素、非互動式的元素、非互動式的
+
+interlaced PNG image
+交錯的 PNG 圖形
+
+internal
+內部的
+
+internal entity
+內部實體
+
+internationalized resource identifier
+國際化資源識別符
+
+internet
+網際網路
+
+interoperability
+互用性
+
+interpretation
+直譯、解釋、理解
+
+intranet
+內部網路
+
+intrinsic dimensions
+固有維度
+
+inverse function
+反函數
+
+IP (Internet protocol)
+IP (網際網路協定)
+
+IPR (Intellectual property rights)
+IPR (知識產權)、(智慧財產權)
+
+IRC
+IRC (網際網路轉播聊天)
+
+IRI reference
+IRI 引用
+
+ISO (International standards organization)
+ISO (國際標準化組織)
+
+ISP (Internet service provider)
+ISP (網際網路服務供應者)
+
+java
+java (程式語言)
+
+jigsaw
+jigsaw (用Java寫成的Web Server [[http://www.w3.org/Jigsaw/]])
+
+JPEG (Joint photographic experts group)
+JPEG (聯合圖片專家組：一種圖片編碼格式)
+
+JSGF
+JSGF (java API 語音語法格式)
+
+kana
+&lt;日&gt; 假名
+
+kanji
+&lt;日&gt; 日本漢字
+
+katakana
+&lt;日&gt; (日本字母) 片假名
+
+keio university
+慶應大學 (日本)
+
+key
+鍵、金鑰、關鍵
+
+key binding
+金鑰繫結
+
+key location
+金鑰定位
+
+key management
+金鑰管理
+
+key name
+金鑰名稱
+
+key validation
+金鑰驗證
+
+lambda expression
+Lambda 表達式
+
+language binding
+語言繫結
+
+language identifier
+語言識別符
+
+late normalization
+延後正規化
+
+layout schema (plural: schemata)
+佈局綱目
+
+LCS (Laboratory for computer science)
+LCS (計算機科學實驗室)
+
+LEAD (Live early adoption and demonstration)
+LEAD (提前採用與展示政策)
+
+level
+級、層
+
+lexical space
+詞法空間
+
+libwww
+libwww (WWW函式庫)
+
+line-mode
+(命令) 列模式
+
+line-mode browser
+(命令) 列模式瀏覽器
+
+linearized table
+線性化表格
+
+link
+鏈結
+
+link text
+鏈結文字
+
+linkbases
+鏈結基準
+
+linking element
+鏈結元素
+
+list
+列表
+
+literal
+字面
+
+literal entity value
+字面實體值
+
+live
+使用中的
+
+local name
+本地名稱
+
+local part
+本地部分
+
+local resource
+本地資源
+
+logic
+邏輯
+
+longfellow
+longfellow (W3C 電話會議的 24 線連接器)
+
+loose coupling
+鬆散耦合
+
+lossless compression
+無失真壓縮
+
+lossy compression
+失真壓縮
+
+luminance
+輝度
+
+LZ77
+LZ77 (資料壓縮演算法)
+
+machine understandable
+機器可理解的
+
+manageable service
+可管理的服務
+
+management
+管理
+
+management capability
+管理能力
+
+management interface
+管理界面
+
+management policy
+管理政策
+
+management semantics
+管理中的語義
+
+MARC record
+機讀目錄記錄 (MAchine Readable Cataloging record)
+
+markup
+標記
+
+markup declaration
+標記宣告
+
+markup language
+標記語言
+
+markup model
+標記模型
+
+match
+匹配
+
+mathematical markup language (MathML)
+數學標記語言 (MathML)
+
+mathML element
+mathML 元素
+
+mathML expression (within some valid mathML
+mathML 表達式
+
+may
+可以
+
+member
+會員
+
+menu
+選單
+
+message
+訊息
+
+message correlation
+訊息相關性
+
+message exchange pattern (MEP)
+訊息交換模式 (MEP)
+
+message receiver
+訊息接收者
+
+message reliability
+訊息可靠度
+
+message sender
+訊息發送者
+
+message transport
+訊息傳輸
+
+meta-
+元的 (前綴、表示一個事物應用於其自身)、後設的
+
+metadata
+詮釋資料、後設資料(用於描述數據的數據)
+
+metaphysical
+形而上的
+
+micropayments
+小額付款
+
+minimal constraint, principle of
+最小約束原則
+
+MIT (Massachusetts institute of technology)
+MIT (麻省理工學院)
+
+mixed content
+混合內容
+
+mixed initiative
+混合式驅動
+
+modality
+模態
+
+model binding expression
+模型繫結表達式
+
+model item
+模型項目
+
+model item property
+模型項目屬性
+
+model theory
+模型理論
+
+modularization
+模組化
+
+modularization model
+模組化模型
+
+module
+模組
+
+monoruby
+單一旁註 (monoruby)
+
+monotonic
+單調性
+
+mosaic
+mosaic (最早出現在 Internet 上的 Web 瀏覽器)
+
+multi-purpose internet mail extensions (MIME)
+多用途網際網路郵件延伸協定 (MIME)
+
+must
+必須
+
+mystic
+mystic (W3C 電話會議的 6 線連接器)
+
+name
+名稱、名字
+
+named class
+具名類別
+
+namespace
+命名空間
+
+namespace name
+命名空間名稱
+
+namespace prefix
+命名空間前綴
+
+namespace-valid
+命名空間有效的
+
+namespace-validating
+命名空間驗證
+
+namespace-well-formed
+命名空間良構的
+
+natural language
+自然語言
+
+navigation
+導覽
+
+navigation bars
+導覽欄
+
+navigation mechanism
+導覽機制
+
+NCSA (National center for supercomputing applications)
+NCSA (美國國家超級應用計算中心)
+
+negotiate content
+協商內容
+
+negotiation metadata
+協商詮釋資料
+
+nelson, ted
+泰德•尼爾森
+
+net
+網路
+
+network byte order
+網路位元組順序
+
+new
+新的
+
+neXT
+neXT (公司名稱)
+
+NNTP (Network news transfer protocol)
+NNTP (網路新聞傳輸協定)
+
+node
+節點
+
+non-repudiation
+不可否認性
+
+non-variant content
+無變異內容
+
+none
+無
+
+nonmonotonic
+非單調的
+
+normative text
+標準的文本
+
+normative, informative
+規範性的、參考性的
+
+notation declarations
+符號宣告
+
+notations
+符號、記法
+
+note
+筆記
+
+object
+物件、對象
+
+object property
+物件屬性
+
+obligation
+義務
+
+occurs as attribute value
+作為屬性值出現
+
+office
+辦事處
+
+onLoad
+onLoad
+
+onRequest
+onRequest
+
+ontological
+本體論的、知識本體的
+
+ontology
+本體論、知識本體
+
+ontology document
+本體文件、知識本體文件
+
+open source
+開放源碼
+
+openMath
+openMatch
+
+operating environment
+作業環境
+
+operation
+操作
+
+operator, an mo element
+操作符，某個 mo 元素
+
+operator, content element
+操作符，內容元素
+
+optional
+可選擇的
+
+optional behaviors
+可選擇行為
+
+optional features
+可選擇特徵
+
+orchestration
+編排
+
+origin server
+原始伺服器
+
+other
+其他
+
+otherwise
+否則
+
+outbound
+流出
+
+output modalities
+輸出模態
+
+override
+重載、改寫
+
+OWL class
+OWL 類別
+
+OWL Web Ontology Language Guide
+OWL 網路本體語言指南
+
+packet
+封包
+
+page view
+頁面閱覽模式
+
+palette
+調色板
+
+parameter entity
+參數實體
+
+parameter-entity references
+參數實體參照
+ 
+parent
+親代(節點)、父(節點)、母(節點)
+
+parent document type
+父文件類別
+
+parsed character data (PCDATA)
+已剖析字符資料  (PCDATA)
+
+parsed entity
+已剖析實體
+
+parsing
+剖析
+
+partial understanding
+部分理解
+
+participate
+參與
+
+pass extraction
+（一或多) 階段擷取
+
+pass phrase key
+通關密語
+
+path
+路徑
+
+payload security
+負載安全性
+
+perceivable unit
+可感知單元
+
+permission
+許可
+
+permission guard
+許可保護機制
+
+person or organization
+個人或組織
+
+personal digital assistant (PDA)
+個人數位助理 (PDA)
+
+PGP (Pretty good privacy)
+PGP (良好隱私系統)
+
+PICS (Platform for Internet Content Selection)
+PICS (網路內容篩選平台)
+
+pixel
+像素
+
+PKC (public key cryptography)
+PKC (公開金鑰密碼學)
+
+PKI (Public key infrastructure)
+PKI (公開金鑰基礎建設)
+
+placeholder
+佔位符
+
+plug-in
+外掛
+
+PNG (Portable network graphics)
+PNG (可攜式網路圖像格式)
+
+PNG datastream
+PNG 資料流
+
+PNG decoder
+PNG 解碼器
+
+PNG editor
+PNG 編輯器
+
+PNG encoder
+PNG 編碼器
+
+PNG file
+PNG 檔案
+
+PNG four-byte signed integer
+PNG 四位元組有號整數
+
+PNG four-byte unsigned integer
+PNG 四位元組無號整數
+
+PNG image
+PNG 圖形
+
+PNG signature
+PNG 簽章
+
+point
+點
+
+point of regard
+注視點、視點
+
+pointer
+指標
+
+pointer part
+指標部分
+
+policy
+政策
+
+policy guard
+政策保護機制
+
+practice
+實踐、常規
+
+pre-defined function
+預先定義函數
+
+preceding element
+前序元素
+
+preference
+偏好、偏愛
+
+presentation elements
+表達元素
+
+presentation layout schema
+表達佈局綱目
+
+presentation markup
+表達標記
+
+presentation token element
+表達標記元素
+
+preserve
+保持
+
+principal
+基本原則
+
+principal node type
+首要節點類型
+
+priority 1 (P1)
+第 1 優先
+
+priority 2 (P2)
+第 2 優先
+
+priority 3 (P3)
+第 3 優先
+
+privacy
+隱私
+
+privacy policy
+隱私政策
+
+process
+行程
+
+processing instructions
+處理指令(PIs)
+
+profile
+profile、個人設定、設置文件
+
+profiling
+設置文件
+
+promptx
+提示、提示輸入
+
+proof of possession (POP)
+證明所有權 (POP)
+
+properties, values, and defaults
+屬性、數值和預設
+
+property
+屬性
+
+property definition
+屬性定義
+
+Proposed Edited Recommendation
+已編輯提案推薦標準
+
+Proposed Recommendation (PR)
+提案推薦標準 (PR)
+
+proposition
+命題
+
+protection
+保護
+
+protocol
+協定
+
+provider agent
+供應者代理
+
+provider entity
+供應者實體
+
+proximity position
+節點距離
+
+proxy
+代理、代理伺服器
+
+public identifier
+公開識別碼、公開識別符
+
+publish
+發表、發佈
+
+publisher
+發表人、發佈者
+
+purpose
+目的、意圖
+
+qualified name
+合宜名稱
+
+qualifier
+限定符
+
+quality assurance, QA
+品質保證、QA
+
+quality of service
+服務品質、QoS
+
+RDF (Resource description framework)
+RDF (資源描述框架)
+
+RDF resource
+RDF 資源
+
+reader
+讀者
+
+reading
+讀法、讀音
+
+REC
+REC（Recommendation縮寫）
+
+receiver
+接收者
+
+recognize
+辨識
+
+recommendation
+推薦標準、推薦
+
+reduced image
+簡化過的圖形
+
+reference architecture
+參考架構
+
+reference image
+參考圖形
+
+reference in attribute value
+屬性值參考
+
+reference in content
+內容參考
+
+reference in DTD
+DTD 參考
+
+reference in entity value
+實體值參考
+
+registry
+註冊、登記
+
+reify
+具體化
+
+relation
+關係
+
+remote resource
+遠端資源
+
+render
+顯示
+
+rendered content
+顯示的內容
+
+rendered content, rendered text
+顯示的內容, 顯示的文字
+
+rendering
+顯示
+
+rendering preferences
+顯示的偏好設定
+
+repair content, repair text
+修復內容，修復文本
+
+replace
+代替
+
+replaced element
+被替代的元素
+
+replacement text
+替代文字
+
+repository
+資料倉儲
+
+representation
+表現、表現形式
+
+request
+聲請、請求
+
+requester agent
+聲請者代理
+
+requester entity
+聲請者實體
+
+Rescinded Recommendation
+作廢的推薦標準
+
+reserved
+保留的
+
+resource
+資源
+
+resource Manifestation
+資源表徵
+
+response
+回應
+
+restriction
+約束
+
+restriction, global
+全域約束
+
+restriction, local
+局域約束、本地約束
+
+results verification
+結果確認
+
+reverse document order
+反向文件順序
+
+RFC (Request for comments)
+RFC (徵求評論)
+
+RGB merging
+RGB 合併
+
+root
+根
+
+RPC (remote procedure call)
+RFC (遠端程序呼叫)
+
+RSA
+RSA (加密演算法)
+
+ruby text
+旁註 (ruby) 文字
+
+safe
+安全的
+
+safe zone
+安全區域
+
+sample
+取樣樣本
+
+sample depth
+取樣深度
+
+sample depth scaling
+樣本深度映射
+
+satisfy
+滿足
+
+scanline
+掃描線
+
+schema
+綱目
+
+schema (pl., schemata)
+綱目 (複數，schemata)
+
+schema constraint
+綱目約束
+
+schema representation constraint
+綱目表示約束
+
+schema, RDF schema
+RDF 綱目
+
+schema-determined ID
+由綱目決定的標識
+
+scheme
+綱目
+
+scope of a declaration
+宣告範圍
+
+screen magnifier
+螢幕放大鏡
+
+screen reader
+螢幕朗讀器
+
+scribe
+會議記錄員
+
+script
+腳本語言、腳本
+
+security
+安全性
+
+security administration
+安全管理
+
+security architecture
+安全架構
+
+security auditing
+安全議題追蹤（服務）
+
+security domain
+安全領域
+
+security mechanism
+安全機制
+
+security model
+安全模型
+
+security policy
+安全性政策
+
+security policy expression
+安全性政策表達式
+
+security service
+安全服務
+
+selected sub-expression (of an maction element)
+（maction 元素裡）被選上的子式
+
+selection, current selection
+選擇、目前選擇
+
+semantic
+語意的
+
+semantic requirement
+語意需求 (同“測試斷言”)
+
+semantic web
+語意網
+
+semantically transparent
+語意透明的
+
+sender
+發送者
+
+separation of form from content
+內容形式相分離
+
+serial access, sequential navigation
+循序存取、循序導航
+
+server
+伺服器
+
+server
+伺服器端程序
+
+server
+服務提供者、伺服器端程序
+
+server session
+伺服器 session
+
+service
+服務
+
+service description
+服務描述
+
+service interface
+服務界面
+
+service intermediary
+服務中介
+
+service provider
+服務提供者
+
+service provider (Data controller, legal entity)
+服務提供者 (資料管理員、法人實體)
+
+service requester
+服務聲請者
+
+service role
+服務角色
+
+service semantics
+服務語意
+
+service-oriented architecture
+服務導向架構
+
+session
+session
+
+SGML (Standard generalized markup language)
+SGML (標準通用標記語言)
+
+shall
+必須
+
+should
+應該
+
+sibling
+兄弟
+
+simple link
+簡單鏈結
+
+simple links
+簡單鏈結 (複數)
+
+simple ruby markup
+簡單旁註 (ruby) 標記
+
+site maps
+網站地圖
+
+size and color of non-text content
+非文本內容的字體和顏色
+
+SMIL (Synchronized multimedia integration language)
+SMIL (同步多媒體整合語言)
+
+SOAP application
+SOAP 應用軟體
+
+SOAP binding
+SOAP 繫結
+
+SOAP body
+SOAP 主體
+
+SOAP envelope
+SOAP 信封
+
+SOAP fault
+SOAP 錯誤
+
+SOAP feature
+SOAP 特徵
+
+SOAP header
+SOAP 標頭
+
+SOAP header block
+SOAP 標頭區塊
+
+SOAP intermediary
+SOAP 中介
+
+SOAP message
+SOAP 訊息
+
+SOAP message exchange pattern (MEP)
+SOAP 訊息交換模式 (MEP)
+
+SOAP message path
+SOAP 訊息路徑
+
+SOAP module
+SOAP 模組
+
+SOAP node
+SOAP 節點
+
+SOAP receiver
+SOAP 接收者
+
+SOAP role
+SOAP 角色
+
+SOAP sender
+SOAP 發送者
+
+SOAP(Simple Object Access Protocol)
+SOAP (簡單物件存取協定)
+
+sophia
+sophia (地名: Sophia-Antipolis)
+
+source document
+原始文件、源文件
+
+source image
+原始圖形、源圖形
+
+space-like (MathML expression)
+類空 (MathML 表達式)
+
+speech
+語音
+
+SRGS (Speech recognition grammar specification)
+SRGS (語音辨識語法規格)
+
+SSML (Speech synthesis markup language)
+SSML (語音合成標記語言)
+
+stale
+陳舊的、過時的
+
+standard
+標準
+
+standard generalized markup language (SGML)
+標準通用標記語言
+
+start-tag
+起始標記
+
+starting resource
+起始資源
+
+state
+狀態
+
+statement
+聲明
+
+strict conformance
+嚴格一致
+
+string identity matching
+(字符) 串匹配
+
+string indexing
+字串索引
+
+string-value
+字串值
+
+structural markup
+結構化標記
+
+style sheet
+樣式表
+
+sub-expression (of a mathML expression)
+(mathML 表達式的) 子表達式
+
+subdialog
+子對話
+
+submission
+提交的文件
+
+subsite
+子站
+
+suggested rendering rules for mathML presentation elements
+推薦的 mathML 表示元素渲染規則
+
+supersite
+父站（母站）
+
+support, implement, conform
+支援、實作、符合
+
+supported
+支援的
+
+SVG (Scalable vector graphics)
+SVG (可縮放向量圖)
+
+synchronize
+同步
+
+synchronous
+同步的
+
+system entity
+系統實體
+
+system identifier
+系統識別符
+
+sysWeb
+sysWeb (W3C 系統網絡組)
+
+tables of contents
+目錄
+
+tabular information
+表格式資訊
+
+tag
+標籤
+
+TAG (Technical Architechture Group)
+TAG (W3C 技術架構組)
+
+tangle
+tangle (程式名)
+
+tapered prompts
+漸縮式提示
+
+TCP (Transmission control protocol)
+TCP (傳輸控制協定)
+
+team
+團隊
+
+technical architecture group
+技術架構組
+
+technical report
+技術報告
+
+term taken verbatim from another source
+自其他來源逐字沿用的術語
+
+test area
+測試區
+
+test assertion
+測試斷言
+
+test case
+測試案例
+
+test framework
+測試框架
+
+test purpose
+測試目的
+
+test requirement
+測試需求、測試斷言
+
+test suite
+測試集
+
+TEX
+TEX
+
+text
+文本
+
+text content, non-text content,non-text
+文本內容、非文本內容、非文本
+
+text decoration
+文本修飾
+
+text transcript
+文本抄本
+
+the empty string
+空字串
+
+third-party
+第三方
+
+throw
+拋出
+
+time parameters
+時間參數
+
+TLS(Transport Layer Security)
+TLS (傳輸層安全性)
+
+tobin
+tobin (人名: MauriceJ.Tobin)
+
+token
+標記、記號
+
+token element
+標記元素
+
+tokenized
+標記化的
+
+top-level element (of mathML)
+(mathML 的) 最高層元素
+
+topology
+拓撲結構
+
+tracing
+追蹤
+
+transaction
+交易
+
+transcript
+抄本
+
+transformation
+轉化、轉換
+
+traversal
+尋訪
+
+triple
+三元組
+
+truecolour
+全彩
+
+trust service
+信任服務
+
+TTS
+TTS (Text-To-Speech, 將文字轉換為語音的語音合成技術)
+
+tunnel
+隧道、通道
+
+type
+類別
+
+typeface
+字型 (例如長一, 平三這類的變化; 請一併參照 font 和 glyph)
+
+UCS(Universal Character Set)
+UCS (通用¦r符集)
+
+UI or action binding expression
+使用者界面或動作的繫結表達式
+
+ultimate SOAP receiver
+最終 SOAP 接收者
+
+unconditional conformance
+無條件符合
+
+uniform resource identifier
+統一資源識別符
+
+union
+聯合、合併
+
+universe
+全球的、通用的
+
+unnamed class
+未命名類別
+
+unparsed entity
+未剖析實體
+
+unspecified
+未指定的
+
+upstream/downstream
+上游/下游
+
+URI
+統一資源識別符
+
+URI (Universal resource identifier)
+URI (統一資源識別符)
+
+URI reference
+URI 參照
+
+URI(Uniform Resource Indicator)
+URI (統一資源指示器、一致資源定址器、統一資源指示器)
+
+URIs
+URIs
+
+URL
+一致資源定址器、統一資源定位器
+
+URL (Uniform resource locator)
+URL (一致資源定址器、統一資源定位器)
+
+usage auditing
+訪客行為追蹤(服務)
+
+usage scenario
+使用場景
+
+use
+使用、採用
+
+use case
+使用案例、用例
+
+user
+使用者、用戶
+
+user agent
+使用者代理人，useragent
+
+user agent (UA)
+使用者代理人，UA
+
+user agent default styles
+使用者代理人預設樣式
+
+user agent profile
+使用者代理人個人設定
+
+user control of every user interface component
+每個使用者界面元件的使用者控制
+
+user experience
+使用者體驗
+
+user experience preferences
+使用者體驗偏好
+
+user interface, user interface,
+使用者介面
+
+user session
+使用者 session
+
+user styles
+使用者樣式
+
+User-input Web request
+使用者輸入式網路聲請
+
+valid
+有效的
+
+valid mathML data
+有效的 mathML 資料
+
+valid style sheet
+有效的樣式表
+
+validating processors
+驗證處理器
+
+validation
+(有效性) 驗證
+
+validation rule
+驗證規則
+
+validation, validate, validating
+正確性確認、驗證: (名詞) 驗證、(動詞) 驗證、(動名詞) 驗證
+
+validator
+驗證器
+
+validity constraint
+有效性約束
+
+value space
+數值空間
+
+variant
+變體
+
+variant content
+變體內容
+
+versioning
+版本化
+
+video
+視訊
+
+view
+閱覽模式
+
+view, viewport
+閱覽範圍
+
+viola
+viola 語言 (一種程式語言，不翻譯)
+
+virtual hypertext
+虛擬超文本
+
+visual track
+視覺追蹤
+
+visual-only presentation
+純視覺表示
+
+visualText
+視覺化文本
+
+vocabulary
+詞彙
+
+voice
+語音
+
+voice browser
+語音瀏覽器
+
+voiceXML document
+voiceXML 文件
+
+voiceXML interpreter
+voiceXML 直譯器
+
+voiceXML interpreter context
+voiceXML 直譯器語境
+
+VRML
+虛擬實境建模語言
+
+VRML (Virtual reality modeling language)
+VRML (虛擬實境建模語言)
+
+W3C
+W3C
+
+W3C (World wide web consortium)
+W3C (全球資訊網聯盟)
+
+W3C recommendation
+W3C 推薦標準
+
+W3C Recommendation (REC)
+W3C 推薦標準 (REC)
+
+WAI (Web accessibility initiative)
+網頁親和力帶頭組織
+
+WAIS (Wide area information servers)
+廣域資訊伺服器
+
+web
+Web (全球資訊網)
+
+web client
+Web 客戶端
+
+web collection
+Web 集合
+
+web core
+Web 核心
+
+web neighborhood
+Web 鄰居
+
+web page
+網頁
+
+web page identifier
+網頁識別符
+
+web periphery
+Web 外層 (http://www.w3.org/1999/05/WCA-terms/01)
+
+web request
+Web 聲請
+
+web request body
+Web 聲請主體
+
+web request header
+Web 聲請標頭
+
+web resource
+Web 資源
+
+web response
+Web 回應
+
+web response body
+Web 回應主體
+
+web response header
+Web 回應標頭
+
+web server
+Web 伺服器
+
+web service
+web service
+
+web site
+網站
+
+web site publisher
+網站發佈者
+
+well-formed
+良構的
+
+well-formedness constraint
+良構性約束(限制、規範)、形式合法性約束(限制、規範)
+
+white point
+白點
+
+width (of a box)
+(圖文框的) 寬度
+
+Working Draft (WD)
+工作草案
+
+Working Group Note
+工作群組筆記
+
+world
+世界、領域
+
+world wide web
+全球資訊網
+
+WorldWideWeb (one word; no spaces)
+WorldWideWeb (世界上第一個瀏覽器, http://www.w3.org/People/Berners-Lee/WorldWideWeb.html )
+
+WWW
+WWW (全球資訊網、萬維網)
+
+xForms model
+xForms 模式
+
+xForms processor
+xForms 處理器
+
+XLL (eXtensible linking language)
+XLL (可擴展鏈結語言)
+
+XML (Extensible markup language)
+XML (可擴展標記語言)
+
+XML declaration
+XML 宣告
+
+XML document
+XML 文件
+
+XML name
+XML 名稱
+
+XML namespace
+XML 命名空間
+
+XML processor
+XML 處理器
+
+xPointer processor
+xPointer 處理器
+
+XSL (Extensible style sheet language)
+可擴展樣式表語言
+
+XSL formatting objects (XSL FO)
+XSL 格式物件
+
+XSL transformation (XSLT)
+XSL 轉換
+
+zakim
+zakim (W3C 視頻會議)
+
+zlib
+zlib 壓縮格式
+
