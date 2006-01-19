@@ -12,6 +12,23 @@
 		6AFA609A097C8BF500976C01 /* libintl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFA6099097C8BF500976C01 /* libintl.dylib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildStyle section */
+		6AFA609E097C93B200976C01 /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Development;
+		};
+		6AFA609F097C93B200976C01 /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
 /* Begin PBXFileReference section */
 		6AFA6072097C8ACB00976C01 /* OVIMUIM.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVIMUIM.mm; sourceTree = "<group>"; };
 		6AFA6077097C8ADA00976C01 /* OVIMUIM.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMUIM.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,7 +134,11 @@
 		6AFA6069097C8ABD00976C01 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 6AFA606A097C8ABD00976C01 /* Build configuration list for PBXProject "OVIMUIM" */;
+			buildSettings = {
+			};
 			buildStyles = (
+				6AFA609E097C93B200976C01 /* Development */,
+				6AFA609F097C93B200976C01 /* Deployment */,
 			);
 			hasScannedForEncodings = 0;
 			mainGroup = 6AFA6067097C8ABD00976C01;

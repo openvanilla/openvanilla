@@ -28,9 +28,9 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# MODULES=OVIMBig5 OVIMTibetan OVIMUIM OVIMUnicode OVOFAntiZhuyinwen \
-#     OVOFHTMLCharEntity OVOFSmartQuotation OVOFUnicodeDecoder \
-#     OVOFZhWikipidealize
+MODULES=OVIMBig5 OVIMRoman OVIMTibetan OVIMUIM OVIMUnicode OVOFAntiZhuyinwen \
+    OVOFHTMLCharEntity OVOFSmartQuotations OVOFUnicodeDecoder \
+    OVOFZhWikipidealize
 
 all:
 	make -C OVIMPhonetic VARIANT+="sqlite bpmf-extended" all
