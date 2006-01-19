@@ -1,9 +1,0 @@
-== 注音輸入法
-
-OV 提供的注音輸入法，源自於開發團隊先前的作品—「香草注音輸入法」計畫，是一套傳統的、必須手動選字的注音輸入法。與 TCIM 內建的注音輸入法比較，OV 注音輸入法提供了倚天鍵盤配置，選字的順序也和 Windows、Linux/!FreeBSD 上的 XCIN 一致，而長久以來，Mac OS 的中文環境欠缺倚天鍵盤的注音輸入法，也是造成了許多使用者對於麥金塔電腦卻步的原因。
-
-您可以在 !OpenVanilla 偏好設定中，切換注音鍵盤配置。
-
-.infoblock
-{include: OVInputStandaloneIndex}
-.infoblock
