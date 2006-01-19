@@ -1,5 +1,0 @@
-暫時用來放一些有待驗證的想法，同時也請參考 InputMethodPatterns。
-
-* [http://www.objectmentor.com/resources/listArticles?key=topic&topic=Design%20Principles Design Principles]: Refactoring 的方向。
-* 前陣子在念 agile，發現有一個案例在 OV 裡確實發生了：
-** !OVInputMethod 和 !OVOutputFilter 的 ABI 是 !OVModule，但實際上沒有繼承關係，dynamic_cast 完畢想使用時，要透過 moduleName() 來分辨，可能違反了 [Liskov Substitution Principle http://www.objectmentor.com/resources/articles/lsp.pdf] 和 [Open-Closed Principle http://www.objectmentor.com/resources/articles/ocp.pdf]。不過呢，[Liskov Substitutino Principle http://www.objectmentor.com/resources/articles/lsp.pdf] 牽涉到要繼承還是 delegate 的爭議，實務上不容易判斷與改善。

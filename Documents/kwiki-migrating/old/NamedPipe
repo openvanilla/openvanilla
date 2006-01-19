@@ -1,4 +1,0 @@
-Apple 內建的 gcc 3.3 處理 named pipe 時有問題，請用 gcc 3.4 來編譯下列程式。這個問題的討論請見我發表於 darwin-dev mailing-list 的討論串：http://lists.apple.com/archives/darwin-dev/2005/Mar/msg00100.html .
-
-* [NamedPipeForUnidirection]
-* [NamedPipeForBidirection]
