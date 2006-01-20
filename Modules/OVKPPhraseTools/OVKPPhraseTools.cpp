@@ -410,7 +410,7 @@ OVOFTextRecorder::OVOFTextRecorder(bool &cflag, PTKeySequence &wseq)
 }
 
 const char *OVOFTextRecorder::localizedName(const char *lc) {
-    return PTMsg(lc, "Phase Tools: Text Recorder", "詞彙管理─文字輸出記錄器", 
+    return PTMsg(lc, "Phrase Tools: Text Recorder", "詞彙管理─文字輸出記錄器", 
         "词汇管理─文字输出记录器");
 }
 
