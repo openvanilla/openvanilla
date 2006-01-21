@@ -1,8 +1,9 @@
 /* on the menu */
 "Key Preprocessors"="輸入前置處理模組";
 "Input Methods"="輸入法模組";
+"No Input Method Available"="沒有輸入法可用";
 "Output Filters"="輸出文字轉換模組";
-"Input method toggle"="切換最近使用的輸入法";
+"Input method toggle"="切換最近使用過的輸入法";
 "About"="關於 OpenVanilla";
 "Preferences"="偏好設定…";
 "Help"="輔助說明";

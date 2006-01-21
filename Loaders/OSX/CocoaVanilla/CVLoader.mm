@@ -285,20 +285,37 @@ void CVLoader::createMenuGroups() {
         kpmenugroup->insertSeparator();
     }
     
-    immenugroup->insertTitle(MSG(@"Input Methods"));
-    pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVInputMethod"), immenugroup);
+    NSArray *ima=CVGetModulesByType(modarray, @"OVInputMethod");
+    
+    if ([ima count]) {
+        immenugroup->insertTitle(MSG(@"Input Methods"));
+    }
+    else {
+        immenugroup->insertTitle(MSG(@"No Input Method Available"));
+    }
+    
+    pourModuleArrayIntoMenu(ima, immenugroup);
     immenugroup->insertSeparator();
-    ofmenugroup->insertTitle(MSG(@"Output Filters"));
 
     // we get the "sorted-by" key to make our menu ordered by user's settings
     // we read our own cfgmenukey because we want to force sync the config file
     // if the key hasn't existed yet
     NSArray *oforderedby=[cfgmenukey valueForKey:@"outputFilterOrder" default:[[NSArray new] autorelease]];
-    pourModuleArrayIntoMenu(CVGetModulesByType(modarray, @"OVOutputFilter"), ofmenugroup, oforderedby);
-    ofmenugroup->insertSeparator();
+    
+    NSArray *ofa=CVGetModulesByType(modarray, @"OVOutputFilter");
+    if ([ofa count]) {
+        ofmenugroup->insertTitle(MSG(@"Output Filters"));
+    }
+
+    pourModuleArrayIntoMenu(ofa, ofmenugroup, oforderedby);
+    if ([ofa count]) ofmenugroup->insertSeparator();
 	
 	// the fastIMSwitch has a menudict key called "fastIMSwitch"
-    CVInsertMenuItem(immenu, CVLMI_FASTIMSWITCH, MSG(@"Input method toggle"), 0, [menudict valueForKey:@"fastIMSwitch"]);
+	
+	if ([ima count]) {
+        CVInsertMenuItem(immenu, CVLMI_FASTIMSWITCH, MSG(@"Input method toggle"), 0, [menudict valueForKey:@"fastIMSwitch"]);
+    }
+
     CVInsertMenuItem(immenu, CVLMI_PREFERENCES, MSG(@"Preferences"), 0);
     CVInsertMenuItem(immenu, CVLMI_HELP, MSG(@"Help"), 0);
 	CVInsertMenuItem(immenu, CVLMI_ABOUT, MSG(@"About"), 0);
