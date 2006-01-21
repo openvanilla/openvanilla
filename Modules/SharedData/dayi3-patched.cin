@@ -7,9 +7,9 @@
 # 改變二鍵輸入時的一些常用字選字順序：
 # 也道爸就像身假流遠應漢蘭動崗亂病碗獅據遊眾萬灣愈淨管舒陽制夢
 %gen_inp
-%ename dayi3
+%ename Dayi3
 %encoding utf-8
-%cname 大易
+%cname 大易（標點符號版）
 %selkey '[]-\67890
 %endkey ='
 %keyname begin
