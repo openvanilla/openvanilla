@@ -1,0 +1,360 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6A9652560970EC0B004BCC4D /* OpenVanillaMenuIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A9652550970EC0B004BCC4D /* OpenVanillaMenuIcon.icns */; };
+		6A96525F0970EC2E004BCC4D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A96525D0970EC2E004BCC4D /* InfoPlist.strings */; };
+		6A96527C0970F016004BCC4D /* ATSComponent.r in Rez */ = {isa = PBXBuildFile; fileRef = 6A96518B0970E2C3004BCC4D /* ATSComponent.r */; };
+		6A96527D0970F018004BCC4D /* ATSComponent.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651890970E2C3004BCC4D /* ATSComponent.c */; };
+		6AA6887109710DB7002080DE /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A96516A0970E1D9004BCC4D /* CoreServices.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		6A9651AC0970E345004BCC4D /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Development;
+		};
+		6A9651AD0970E345004BCC4D /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXFileReference section */
+		6A96516A0970E1D9004BCC4D /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
+		6A9651890970E2C3004BCC4D /* ATSComponent.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ATSComponent.c; path = ATSComponent/ATSComponent.c; sourceTree = "<group>"; };
+		6A96518A0970E2C3004BCC4D /* ATSComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATSComponent.h; path = ATSComponent/ATSComponent.h; sourceTree = "<group>"; };
+		6A96518B0970E2C3004BCC4D /* ATSComponent.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; name = ATSComponent.r; path = ATSComponent/ATSComponent.r; sourceTree = "<group>"; };
+		6A96518E0970E2D9004BCC4D /* TSBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSBundle.h; path = TSBundle/TSBundle.h; sourceTree = "<group>"; };
+		6A9652130970E7C9004BCC4D /* OpenVanilla-TSComponent-0.7.2-TC.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.7.2-TC.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A9652140970E7C9004BCC4D /* OpenVanilla-TSComponent-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-TSComponent-Info.plist"; sourceTree = "<group>"; };
+		6A9652550970EC0B004BCC4D /* OpenVanillaMenuIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaMenuIcon.icns; path = TSComponentResources/OpenVanillaMenuIcon.icns; sourceTree = "<group>"; };
+		6A96525E0970EC2E004BCC4D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = TSComponentResources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6A9652620970EC33004BCC4D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = TSComponentResources/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6A9652630970EC35004BCC4D /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = TSComponentResources/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6A9652110970E7C9004BCC4D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AA6887109710DB7002080DE /* CoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6A9651330970DFEE004BCC4D = {
+			isa = PBXGroup;
+			children = (
+				6A9652140970E7C9004BCC4D /* OpenVanilla-TSComponent-Info.plist */,
+				6A9651420970E035004BCC4D /* OpenVanillaTSComponent */,
+				6AA687DA09710A91002080DE /* TSBundleInterface */,
+				6A96516A0970E1D9004BCC4D /* CoreServices.framework */,
+				6A96514E0970E0B2004BCC4D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6A9651420970E035004BCC4D /* OpenVanillaTSComponent */ = {
+			isa = PBXGroup;
+			children = (
+				6A9651920970E2F1004BCC4D /* Resources */,
+				6A9651430970E04B004BCC4D /* ATSComponent */,
+			);
+			name = OpenVanillaTSComponent;
+			sourceTree = "<group>";
+		};
+		6A9651430970E04B004BCC4D /* ATSComponent */ = {
+			isa = PBXGroup;
+			children = (
+				6A9651890970E2C3004BCC4D /* ATSComponent.c */,
+				6A96518A0970E2C3004BCC4D /* ATSComponent.h */,
+				6A96518B0970E2C3004BCC4D /* ATSComponent.r */,
+			);
+			name = ATSComponent;
+			sourceTree = "<group>";
+		};
+		6A96514E0970E0B2004BCC4D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A9652130970E7C9004BCC4D /* OpenVanilla-TSComponent-0.7.2-TC.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6A9651920970E2F1004BCC4D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6A96525D0970EC2E004BCC4D /* InfoPlist.strings */,
+				6A9652550970EC0B004BCC4D /* OpenVanillaMenuIcon.icns */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		6AA687DA09710A91002080DE /* TSBundleInterface */ = {
+			isa = PBXGroup;
+			children = (
+				6A96518E0970E2D9004BCC4D /* TSBundle.h */,
+			);
+			name = TSBundleInterface;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6A9652120970E7C9004BCC4D /* OpenVanilla-TSComponent-TC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A9652150970E7CA004BCC4D /* Build configuration list for PBXNativeTarget "OpenVanilla-TSComponent-TC" */;
+			buildPhases = (
+				6A96520F0970E7C9004BCC4D /* Resources */,
+				6A9652100970E7C9004BCC4D /* Sources */,
+				6A9652110970E7C9004BCC4D /* Frameworks */,
+				6A96527A0970F007004BCC4D /* Rez */,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OpenVanilla-TSComponent-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "OpenVanilla-TSComponent";
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			dependencies = (
+			);
+			name = "OpenVanilla-TSComponent-TC";
+			productName = "OpenVanilla-TSComponent";
+			productReference = 6A9652130970E7C9004BCC4D /* OpenVanilla-TSComponent-0.7.2-TC.bundle */;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>OpenVanilla-TSComponent</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.OpenVanilla-TSComponent</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CSResourcesFileMapped</key>
+	<string>yes</string>
+</dict>
+</plist>
+";
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6A9651350970DFEE004BCC4D /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 6A9651360970DFEE004BCC4D /* Build configuration list for PBXProject "OpenVanillaLoader-TC" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				6A9651AC0970E345004BCC4D /* Development */,
+				6A9651AD0970E345004BCC4D /* Deployment */,
+			);
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				zh_TW,
+				zh_CN,
+			);
+			mainGroup = 6A9651330970DFEE004BCC4D;
+			projectDirPath = "";
+			targets = (
+				6A9652120970E7C9004BCC4D /* OpenVanilla-TSComponent-TC */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6A96520F0970E7C9004BCC4D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A9652560970EC0B004BCC4D /* OpenVanillaMenuIcon.icns in Resources */,
+				6A96525F0970EC2E004BCC4D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		6A96527A0970F007004BCC4D /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A96527C0970F016004BCC4D /* ATSComponent.r in Rez */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6A9652100970E7C9004BCC4D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A96527D0970F018004BCC4D /* ATSComponent.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6A96525D0970EC2E004BCC4D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A96525E0970EC2E004BCC4D /* English */,
+				6A9652620970EC33004BCC4D /* zh_TW */,
+				6A9652630970EC35004BCC4D /* zh_CN */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6A9651370970DFEE004BCC4D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks,
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Debug;
+		};
+		6A9651380970DFEE004BCC4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks,
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Release;
+		};
+		6A9652160970E7CA004BCC4D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OpenVanilla-TSComponent-Info.plist";
+				INSTALL_PATH = /Library/Components;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
+				PREBINDING = NO;
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2-TC";
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		6A9652170970E7CA004BCC4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OpenVanilla-TSComponent-Info.plist";
+				INSTALL_PATH = /Library/Components;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
+				PREBINDING = NO;
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2-TC";
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6A9651360970DFEE004BCC4D /* Build configuration list for PBXProject "OpenVanillaLoader-TC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A9651370970DFEE004BCC4D /* Debug */,
+				6A9651380970DFEE004BCC4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A9652150970E7CA004BCC4D /* Build configuration list for PBXNativeTarget "OpenVanilla-TSComponent-TC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A9652160970E7CA004BCC4D /* Debug */,
+				6A9652170970E7CA004BCC4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6A9651350970DFEE004BCC4D /* Project object */;
+}
