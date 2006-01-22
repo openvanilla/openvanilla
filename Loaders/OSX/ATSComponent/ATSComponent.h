@@ -34,8 +34,8 @@
 #define ATSCVERSION             0x00070200  // OpenVanilla 0.7.2
 #define ATSCSCRIPT              0x7e        // smUnicodeScript
 #define ATSCLANGUAGE            0           // langEnglish
-
 #define ATSCBASERESOURCEID      0xa600      // Unicode component ID
+#define ATSCCOMPONENTFLAGS      0x0000fe4a  // Unicode component flags
 
 #define ATSCPENCILMENUID        ATSCBASERESOURCEID+1
 #define ATSCBUNDLENAME          "org.openvanilla.tscomponent.072"

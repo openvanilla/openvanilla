@@ -50,19 +50,19 @@ resource 'thng' (ATSCBASERESOURCEID, "OpenVanilla")
     0x00040000,                 // Version
     // componentHasMultiplePlatforms+myComponentRegistrationFlags,        
     0x00000008,                 
-	0xa600,                     // Resource ID
+	ATSCBASERESOURCEID,         // Resource ID
 	{
 #if TARGET_REZ_MAC_PPC
-        0x0000fe4a,              // kMyComponentFlags
+        ATSCCOMPONENTFLAGS,      // kMyComponentFlags
         'dlle',
-        0xa600,                  // Resource ID
+        ATSCBASERESOURCEID,      // Resource ID
         // PowerPC-based Macintosh
         platformPowerPCNativeEntryPoint,  
 #endif
 #if TARGET_REZ_MAC_X86
-        0x0000fe4a,              // kMyComponentFlags
+        ATSCCOMPONENTFLAGS,      // kMyComponentFlags
         'dlle',
-        0xa600,                  // Resource ID
+        ATSCBASERESOURCEID,      // Resource ID
         // Intel-based Macintosh        
         platformIA32NativeEntryPoint,     
 #endif
