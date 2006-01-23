@@ -245,6 +245,19 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         }
         return 1;
     }
+    
+    if (isprint(key->code()) && key->isCapslock() && keyseq.length()==0)
+    {
+        char cbuf[2];
+        if (key->isShift())
+            sprintf(cbuf, "%c", toupper(key->code()));
+        else
+            sprintf(cbuf, "%c", tolower(key->code()));
+
+        buf->append(cbuf)->send();
+        return 1;
+    }
+    
     if( key->isShift() && isprint(keycode) && keyseq.length()==0 ){
         char k[2] = { tolower(keycode), 0 };
         buf->append(k)->send();
