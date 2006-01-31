@@ -1,4 +1,4 @@
-# OpenVanilla Makefile for FreeBSD 
+# OpenVanilla Makefile (for common *nix platforms using X11)
 #
 # Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
 # All rights reserved.
@@ -28,5 +28,18 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-include Makefile.Generic
+# Makefile.Linux by vgod for OV 0.7
 
+LOADER_DIR=Loaders/SCIM/
+HDRDIR=Framework/Headers
+HEADERS=OpenVanilla.h OVLibrary.h OVUtility.h
+TARGET_DIR=/usr/local/include/OpenVanilla
+
+all: framework loader
+
+framework:
+	mkdir -p $(TARGET_DIR)
+	for file in $(HEADERS) ; do cp $(HDRDIR)/$$file $(TARGET_DIR)/; done;
+
+loader:
+	cd $(LOADER_DIR); ./configure; make install
