@@ -29,6 +29,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #include "CIN-Defaults.h"
+#include <stdlib.h>
 #include <strings.h>
 
 #ifndef WIN32

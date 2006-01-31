@@ -75,6 +75,18 @@ install-goal:
 uninstall-goal:
 	for i in $(GOALS) ; do rm -rf $(INST_PATH)/$$i ; done
 
+%.o: %.cpp
+	$(CPP) $(CFLAGS) -c $<
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $<
+
+%.o: %.m
+	$(CC) $(CFLAGS) -c $<
+
+%.o: %.mm
+	$(CPP) $(CFLAGS) -c $<
+
 # install rules for everthing else
 else
     # default for INST_PATH is /usr/local/lib/openvanilla
@@ -91,7 +103,13 @@ install-goal:
 	$(LIBTOOL) --mode=install install $(GOALS) $(INST_PATH)
 
 uninstall-goal:
-    $(error Target uninstall-goal is not yet implemented)
+	rm -rf $(INST_PATH)/$(MODULE_ID)*
+
+%.lo: %.cpp
+	$(LIBTOOL) --mode=compile --tag=CXX $(CPP) $(CFLAGS) -c $<
+
+%.lo: %.c
+	$(LIBTOOL) --mode=compile --tag=CC $(CC) $(CFLAGS) -c $<
 
 endif
 
@@ -160,7 +178,7 @@ DATA_INST_PATH?=$(INST_PATH)/$(MODULEID)
 
 GCC=/usr/bin/gcc 
 GPP=/usr/bin/g++
-LIBTOOL=$(shell ../../Utilities/find-libtool.pl)
+LIBTOOL=$(shell ../Mk/find-libtool.pl)
 
 
 ifeq ("$(OS_COMPILE)", "Darwin")
@@ -188,24 +206,3 @@ endif
 VPATH+=../SharedSource/
 DATA?=
 
-###### General Rules (.c, .m, .cpp, .mm -> .o; .c, .cpp -> .lo)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $<
-
-%.o: %.m
-	$(CC) $(CFLAGS) -c $<
-
-%.o: %.cpp
-	$(CPP) $(CFLAGS) -c $<
-
-%.o: %.mm
-	$(CPP) $(CFLAGS) -c $<
-
-%.lo: %.cpp
-	$(LIBTOOL) --mode=compile --tag=CXX $(CPP) $(CFLAGS) -c $<
-
-%.lo: %.c
-	$(LIBTOOL) --mode=compile --tag=CC $(CC) $(CFLAGS) -c $<
-
-###### End
