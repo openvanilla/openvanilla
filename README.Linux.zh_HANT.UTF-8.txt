@@ -4,8 +4,9 @@ Copyright (c) 2004-2006 The OpenVanilla Project
 編譯前需具備以下幾種工具：
 
 g++ 3.x 以上
-make
+gmake (gnu make)
 libtool
+depends on ltdl，請事先安裝
 
 某些模組還需要 libsqlite3。
 
