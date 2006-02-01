@@ -49,8 +49,8 @@ void nop() {
     volatile a=10;
 }
 
-NSPoint CVPointToNSPoint(Point p, NSWindow *w);
-Point CVFixWindowPosition(Point pp, int width, int height);
+
+void CVFixWindowOrigin(NSWindow *w, Point p);
 
 @implementation ServerDelegate
 - (void)setConfig:(NSDictionary*)cfg {
@@ -160,9 +160,7 @@ Point CVFixWindowPosition(Point pp, int width, int height);
     NSRect r=[t frame];
     [w setContentSize:r.size];
     
-    Point realpos=CVFixWindowPosition(p, (int)r.size.width, (int)r.size.height);
-    NSPoint nspos=CVPointToNSPoint(realpos, w);    
-    [w setFrameTopLeftPoint:nspos];
+	CVFixWindowOrigin(w, p);
 }
 - (NSWindow*)createWindow:(NSRect)fr {
 	NSWindow *w=[[NSWindow alloc] initWithContentRect:fr styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
@@ -220,44 +218,46 @@ Point CVFixWindowPosition(Point pp, int width, int height);
 }
 @end
 
-NSPoint CVPointToNSPoint(Point p, NSWindow *w) {
-    NSPoint pos;
-    pos.x=p.h;
-
-    // get the screen the window is on and calculate the device coordination
-    // if no screen, it's offscreen anyway, position is not important...
-    NSScreen *screen=[w screen];
-    if (screen) {
-        NSRect screenrect=[screen frame];
-        pos.y=NSMaxY(screenrect)-p.v;
-    }
-    else pos.y=p.v;
-    return pos;
-}
-
-// this is copied from VXTextBar.cpp of OVLoader 0.6.3 :)
-Point CVFixWindowPosition(Point pp, int width, int height) {
-    Point p=pp;
-	Rect bound, avail;
-	GDHandle nextgd=GetDeviceList();
+void CVFixWindowOrigin(NSWindow *w, Point p) {
+	// first of all, we do a y-coordiate transformation (mirroring)
+	NSPoint np=NSMakePoint((float)p.h, (float)p.v);
 	
-	do {
-		if(!TestDeviceAttribute(nextgd, screenDevice)) continue;
-		if(!TestDeviceAttribute(nextgd, screenActive)) continue;
-		bound=(*nextgd)->gdRect;
-		GetAvailableWindowPositioningBounds(nextgd, &avail);
-		if (PtInRect(p, &bound)) break;
-	} while((nextgd = GetNextDevice(nextgd)) != nil);
-	
-	if (!PtInRect(p, &bound)) {
-		bound=(*GetMainDevice())->gdRect;
-		GetAvailableWindowPositioningBounds(nextgd, &avail);
+	float maxh=480;		// a silly default, but anyway the below loop always runs
+	NSArray *sa=[NSScreen screens];
+	int i, c=[sa count];
+	for (i=0; i<c; i++) {
+		float h=[[sa objectAtIndex:i] frame].size.height;
+		if (h > maxh) maxh=h;
 	}
 	
-	if (p.v > avail.bottom - height) p.v = avail.bottom-height;
-	if (p.h > avail.right - width) p.h = avail.right-width;
-	if (p.v < avail.top+GetMBarHeight()) p.v=avail.top+GetMBarHeight();
-	if (p.h < avail.left) p.h=avail.left;
-    
-    return p;
+	np.y=maxh-np.y;
+
+	NSSize s=[w frame].size;
+	
+	// now we determine the window frame
+	NSRect f=[[NSScreen mainScreen] frame];
+	BOOL found=NO;
+
+	for (i=0; i<c; i++) {
+		NSRect sf=[[sa objectAtIndex:i] frame];
+		if (NSPointInRect(np, sf)) {
+			f=sf;
+			found=YES;
+		}
+	}
+
+	// if the origin is out of bound, we place the origin in the center of the main screen
+	if (found) {
+		np.y-=s.height;		// must offset the height of the window
+		if (np.y > f.origin.y+f.size.height-s.height) np.y=f.origin.y+f.size.height-s.height;
+		if (np.x > f.origin.x+f.size.width-s.width) np.x=f.origin.x+f.size.width-s.width;
+		if (np.y < f.origin.y) np.y=f.origin.y;
+		if (np.x < f.origin.x) np.x=f.origin.x;
+	}
+	else {
+		np.x = f.origin.x + (f.size.width-s.width)/2;
+		np.y = f.origin.y + (f.size.height-s.height)/2;
+	}
+	
+	[w setFrameOrigin:np];
 }
