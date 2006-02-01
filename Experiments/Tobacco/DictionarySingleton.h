@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "OVUtility.h"
+#include <OpenVanilla/OVUtility.h>
 #include "OVSQLite3.h"
 
 #include "Vocabulary.h"

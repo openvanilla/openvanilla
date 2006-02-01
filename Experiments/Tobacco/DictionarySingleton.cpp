@@ -4,8 +4,7 @@
 
 #include "DictionarySingleton.h"
 
-//#include <OpenVanilla/OVUtility.h>
-#include "OVUtility.h"
+#include <OpenVanilla/OVUtility.h>
 
 using namespace std;
 

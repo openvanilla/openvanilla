@@ -1,22 +1,20 @@
-IMID=OVIMTobacco
+MODULEID=OVIMTTobacco
 SOURCES=OVIMTobacco PredictorSingleton DictionarySingleton\
     Token Vocabulary Candidate BiGram
 DATA=imtables.db tsi.db
 BPMF=bpmf_punctuation.cin
-CINS=cj.cin
+CINS= ../SharedData/cj.cin
 
 LDFLAGS+=-lsqlite3
 
-include ../../Mk/ov.os.mk
-include ../../Mk/ov.im.mk
-include ../../Mk/ov.vars.mk
-include ../../Mk/ov.general.mk
-
 INC+=-I../../Experiments/Tobacco
-VPATH+= ../../Experiments/Tobacco
+VPATH+= ../../Experiments/Tobacco/
+
+include ../Mk/ov.module.mk
+
 CFLAGS+=$(INC) -g
 
-all: OVIMTobacco.dylib $(DATA)
+#all: OVIMTobacco.dylib $(DATA)
 
 imtables.db: imtables-schema.txt ${BPMF} ${CINS} cin-sqlconvert.pl
 	rm -f imtables.db

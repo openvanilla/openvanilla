@@ -3,8 +3,7 @@
 #include "BiGram.h"
 #include "PredictorSingleton.h"
 
-#include "OVUtility.h"
-
+#include <OpenVanilla/OVUtility.h>
 #include <algorithm>
 
 using namespace std;
