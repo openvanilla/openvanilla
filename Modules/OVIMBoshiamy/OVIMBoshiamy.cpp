@@ -182,7 +182,11 @@ const char* OVOFReverseLookupSQLite::localizedName(const char* lc) {
     } else {
 	name=QueryForKey(db, table, "_property_ename");
     }
-    sprintf(buf,"%s Lookup",name);
+    if(!strcasecmp(lc,"zh_TW")) {
+       sprintf(buf,"%s反查",name);
+    } else {
+       sprintf(buf,"%s Lookup",name);
+    }
     return buf;
 }
 
@@ -577,11 +581,14 @@ int OVIMGenericContext::commitFirstCandidate() {
  *   n starts from zero.
  */
 int OVIMGenericContext::commitCandidate(int n) {
+    int count = candi->count;
     if (!candi) return 1;
     if (n < 0) return 1;
+    // zonble
+    if (n >= count )  { s->beep(); return 1; }
     b->clear()->append(candi->candidates[n])->send();
     return closeCandidateWindow();        
-}
+} 
 
 int OVIMGenericContext::candidatePageUp() {
     int maxpage=(candi->count-1) / strlen(parent->selkey);
@@ -609,6 +616,7 @@ int IMGKeySequence::isValidKey(char c) {
 }
 
 bool IMGKeySequence::add(char c) {
+    if (len > 4) return 0; // The characters must be less than 4
     if (query(c)) return OVKeySequenceSimple::add(tolower(c));
     return false;
 }
