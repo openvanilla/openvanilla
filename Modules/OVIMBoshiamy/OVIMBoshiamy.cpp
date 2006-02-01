@@ -199,26 +199,48 @@ const char* OVOFReverseLookupSQLite::process(const char *src, OVService *srv)
     unsigned short *u16;
     int u16len=srv->UTF8ToUTF16(src, &u16);
     strcpy(composebuffer, "");
-    char sqlbuf[256];
-    sprintf(sqlbuf,"select key from %s where not (key like '_key_%%') and value=?1;",table);
+    char sqlbuf[512];
+    //sprintf(sqlbuf,"select key from %s where not (key like '_key_%%') and value=?1;",table);
+    sprintf(sqlbuf,"select key from %s where value=?1 and key not like '_key_%%';",table);
     SQLite3Statement *sth=db->prepare(sqlbuf);
 
     // WE HAVE TO DO SURROGATE CHECK, REMEMBER!
     int count = 0;
     for (int i=0; i<u16len; i++) {
         // get each codepoint
-        const char *u8=srv->UTF16ToUTF8(&(u16[i]), 1);
-        char buf[256];
+        const char *u8;
+        if (u16[i] >= 0xd800 && u16[i] <= 0xdbff) {
+            u8=srv->UTF16ToUTF8(&(u16[i]), 2);
+            i++;
+        }
+        else {
+            u8=srv->UTF16ToUTF8(&(u16[i]), 1);
+        }
+
+        if (u8==NULL) {
+            if (!strcasecmp(srv->locale(), "zh_TW")) {
+                srv->notify("反查失敗：Unicode字碼錯誤");
+            }
+            else if (!strcasecmp(srv->locale(), "zh_CN")) {
+                srv->notify("反查失败：Unicode字码错误");
+            }
+            else {
+                srv->notify("Look-up failed: Bad Unicode codepoint");
+            }
+            return src;
+        }
+        char buf[512];
         sprintf(buf, "%s=(", u8);
         strcat(composebuffer, buf);
         
         sth->bind_text(1, u8);
         while (sth->step()==SQLITE_ROW) {
-            sprintf(buf, "%s, ", sth->column_text(0));
+            sprintf(buf, "%s ", sth->column_text(0));
             strcat(composebuffer, buf);
             count++;
         }
-        strcat(composebuffer, ")\n");     
+        strcat(composebuffer, ")");
+ 	if(i!=u16len-1) strcat(composebuffer, "\n");     
 	sth->reset();
     }
     
