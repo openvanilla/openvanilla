@@ -219,6 +219,18 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
 
     murmur("OVIMArray state: %d", state);
     if (!keyseq.length() && !isprint(keycode)) return 0;
+    if (!keyseq.length() && key->isFunctionKey()) return 0;
+    if( key->isShift() && isprint(keycode) && keyseq.length()==0 ){
+        char k[2] = { tolower(keycode), 0 };
+        buf->append(k)->send();
+        return 1;
+    }
+
+    if (!keyseq.length() && !validkey) {
+        char k[2] = { tolower(keycode), 0 };
+        buf->append(k)->send();
+        return 1;
+    }
 
     if(keycode==ovkEsc){
         clearAll(buf, candi_bar);
@@ -258,11 +270,6 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         return 1;
     }
     
-    if( key->isShift() && isprint(keycode) && keyseq.length()==0 ){
-        char k[2] = { tolower(keycode), 0 };
-        buf->append(k)->send();
-        return 1;
-    }
     if (keyseq.length() && keycode == ovkSpace){
         tabs[MAIN_TAB]->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
         string c;

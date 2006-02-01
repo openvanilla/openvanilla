@@ -338,6 +338,13 @@ int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textb
         return 1;
     }
     
+    if (isprint(key->code())) {
+        char sb[2];
+        sprintf(sb, "%c", key->code());
+        buf->append(sb)->send();
+        return 1;
+    }
+    
     return 0;
 }
 
