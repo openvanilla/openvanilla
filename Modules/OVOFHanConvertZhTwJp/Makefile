@@ -30,7 +30,7 @@
 
 MODULEID=OVOFHanConvertZhTwJp
 SOURCES=OVOFHanConvertZhTwJp ZhTwToJpKanji
-EXTRA_GOLS=ZhTwToJpKanji.c
+EXTRA_GOALS=ZhTwToJpKanji.c
 
 include ../Mk/ov.module.mk
 
