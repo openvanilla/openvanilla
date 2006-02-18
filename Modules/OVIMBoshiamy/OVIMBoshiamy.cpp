@@ -447,6 +447,12 @@ int OVIMGenericContext::keyCompose() {
         if(fetchCandidateSuffixRule(q,'s') > 3) 
             return commitCandidate(3);
         s->beep();
+        // srv->notify("Composition failed.");
+        // XXX: option: Composition failed -> reset or not
+        if (1) {
+            b->clear()->update();
+            seq.clear();
+            }
         return 1;
     }
 
