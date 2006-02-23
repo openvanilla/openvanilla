@@ -1,0 +1,11 @@
+These are the package-making stuffs.
+
+Steps:
+
+ 0. Edit FileList
+ 1. Run ./cp-files.sh
+ 2. Open .pmproj and Build it.
+
+Cheers,
+Kang-min Liu
+
