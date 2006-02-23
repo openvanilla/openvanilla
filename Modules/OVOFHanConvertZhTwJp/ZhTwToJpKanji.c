@@ -1,3 +1,5 @@
+#include <stdlib.h>
+const size_t ZhTwToJpKanjiTableSize = 363*2;
 unsigned short ZhTwToJpKanjiTable[363*2]={
 20056, 20055,
 20098, 20081,
