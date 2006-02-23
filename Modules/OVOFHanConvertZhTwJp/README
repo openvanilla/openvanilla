@@ -4,11 +4,28 @@ It doen'st work very good because
 (1) It is not a one-to-one mapping
 (2) There are some false mapping in the current table.
 
-THe current table is a derivative work from "Unihan Variant Dictionary"
-<http://www.ideographer.com/article/uvd.php>.  The script "gentable.pl"
-pick-up code points from the file "UniVariants" and find those used in big5
-and shiftjis, and make a big5->shitjis search to see if such mapping could be
-applied for each records.
+Currently used table is a derivative work from
+http://kanji.zinbun.kyoto-u.ac.jp/~yasuoka/ftp/CJKtable/DailyUse.Z , which
+collets only commonly used characters and it has more exact mapping
+information. (That file is encoded with ISO-2022-7bit, which is not easily
+handled because it use cns11643-1. I have to use Encode::HanExtra perl module
+to fully read it.) Based on this table I created another table called
+"tw2jp.txt" in the module directory. Which is now the main table of this
+output filter module. Users may directly edit that text file (utf8 encoding)
+and re-run
+
+  make table
+  make
+  make install
+
+to install the new table. The "gentable.pl" script is used to get the job
+done.
+
+Previously used table is a derivative work from "Unihan Variant Dictionary"
+<http://www.ideographer.com/article/uvd.php>.  The script
+"gen-variant-table.pl" pick-up code points from the file "UniVariants" and
+find those used in big5 and shiftjis, and make a big5->shitjis search to see
+if such mapping could be applied for each records.
 
 However, such conversion may still be wrong because:
 

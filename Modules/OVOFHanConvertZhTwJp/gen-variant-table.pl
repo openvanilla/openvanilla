@@ -3,25 +3,29 @@
 use strict;
 use IO::All;
 
-my $uv = io("tw2jp.txt")->utf8;
+my $uv = io("UniVariants");
 
 my $output;
-my $size = 0;
+my $size;
 while ($_ = $uv->getline) {
     next if /#/;
-    my ($tw, $jp) = map { ord $_ } split(" ", $_);
-    $output .= "$tw, $jp,\n";
-    $size++;
+    my ($char, @vars) = split(" ", $_);
+
+    my $charvar = choose_jp_kanji_char(@vars);
+    if ($charvar && ($charvar ne $char)) {
+        $output .= "0x${char}, 0x${charvar},\n";
+        $size++;
+    }
 }
 $output =~ s/,\n$/\n/s;
 
 my $o = io "ZhTwToJpKanji.c";
+
 $o->print("unsigned short ZhTwToJpKanjiTable[$size*2]={\n");
 $o->print($output);
 $o->print("};\n");
 
 print "$o generated\n";
-__END__
 
 use Encode;
 sub choose_jp_kanji_char {
