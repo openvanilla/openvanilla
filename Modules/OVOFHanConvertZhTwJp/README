@@ -1,0 +1,23 @@
+This Output filter convers kanji character used in zh_tw to its jp variant.
+It doen'st work very good because
+
+(1) It is not a one-to-one mapping
+(2) There are some false mapping in the current table.
+
+THe current table is a derivative work from "Unihan Variant Dictionary"
+<http://www.ideographer.com/article/uvd.php>.  The script "gentable.pl"
+pick-up code points from the file "UniVariants" and find those used in big5
+and shiftjis, and make a big5->shitjis search to see if such mapping could be
+applied for each records.
+
+However, such conversion may still be wrong because:
+
+(1) Just because they are variants to each other doesn't mean
+    it should be converted.
+(2) The conversion may end up in the range of rare characters
+    in Japanese, which might not be good enough.
+
+So please give it a try, and try to make the table better.
+
+Cheers,
+Kang-min Liu
