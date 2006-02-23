@@ -21,18 +21,3 @@ $o->print($output);
 $o->print("};\n");
 
 print "$o generated\n";
-__END__
-
-use Encode;
-sub choose_jp_kanji_char {
-    my @chars = @_;
-    for my $codepoint (@chars) {
-        my $char = chr(hex($codepoint));
-        my $jis  = Encode::encode("shiftjis", $char, Encode::FB_QUIET);
-        if ($jis) {
-            ## This char is inside the range of shiftjis
-            return $codepoint;
-        }
-    }
-    return "";
-}
