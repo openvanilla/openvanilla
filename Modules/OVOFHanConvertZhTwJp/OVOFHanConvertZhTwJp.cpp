@@ -35,6 +35,11 @@ public:
     }
     
     virtual const char *identifier() { return "OVOFHanConvertZhTwJp"; }
+    virtual const char *localizedName(const char *locale) {
+        if (!strcasecmp(locale, "zh_TW")) return "繁體中文轉日文漢字";
+        if (!strcasecmp(locale, "zh_CN")) return "繁体中文转日文汉字";
+        return "Traditional Chinese to Japanese Kanji";
+    }
     virtual const char *process (const char *src, OVService *srv) {
         if (u16buf) {
             free(u16buf);
