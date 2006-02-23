@@ -5,33 +5,21 @@
 #include <OpenVanilla/OVLibrary.h>
 #include <OpenVanilla/OVUtility.h>
 
-// Size copied from ZhTwToJpKanji.c
-const size_t ZhTwToJpKanjiTableSize = 8195;
+// externally defined in ZhTwToJpKanji.c
+extern size_t ZhTwToJpKanjiTableSize;
 extern unsigned short ZhTwToJpKanjiTable[];
 
-// VXHC* copied from OVOFHanConvert.cpp
-struct VXHCData {
-	unsigned short key, value;
-};
-
-int VXHCCompare(const void *a, const void *b) {
-	unsigned short x=((const struct VXHCData*)a)->key, y=((const struct VXHCData*)b)->key;
-	if (x==y) return 0;
-	if (x<y) return -1;
-	return 1;
-}
-
-unsigned short VXHCFind(unsigned key, unsigned short *table, size_t size) {
-	struct VXHCData k;
-	k.key=key;
-	struct VXHCData *d=(struct VXHCData*)bsearch(&k, table, size, sizeof(struct VXHCData), VXHCCompare);
-	if (!d) return 0;
-	return d->value;
-}
-
-// Convert between utf16
+// Linear search.
 unsigned short ZhTwToJpKanji(unsigned short c) {
-    return VXHCFind(c, ZhTwToJpKanjiTable, ZhTwToJpKanjiTableSize);
+    extern size_t ZhTwToJpKanjiTableSize;
+    extern unsigned short ZhTwToJpKanjiTable[];
+    unsigned int i;
+    for ( i = 0; i < ZhTwToJpKanjiTableSize; i += 2 ) {
+        if(ZhTwToJpKanjiTable[i] == c) {
+            return ZhTwToJpKanjiTable[i+1];
+        }
+    }
+    return c;
 }
 
 // OVOF interface

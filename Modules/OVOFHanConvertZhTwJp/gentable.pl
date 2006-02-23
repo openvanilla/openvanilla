@@ -16,8 +16,10 @@ while ($_ = $uv->getline) {
 $output =~ s/,\n$/\n/s;
 
 my $o = io "ZhTwToJpKanji.c";
-$o->print("unsigned short ZhTwToJpKanjiTable[$size*2]={\n");
+$o->println("#include <stdlib.h>");
+$o->println("const size_t ZhTwToJpKanjiTableSize = $size*2;");
+$o->println("unsigned short ZhTwToJpKanjiTable[$size*2]={");
 $o->print($output);
-$o->print("};\n");
+$o->println("};");
 
 print "$o generated\n";
