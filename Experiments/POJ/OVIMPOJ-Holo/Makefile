@@ -38,5 +38,5 @@ include ../Mk/ov.module.mk
 
 
 test: build
-	gcc -o test POJ-Holo.o
+	g++ -o test POJ-Holo.o
 	./test
