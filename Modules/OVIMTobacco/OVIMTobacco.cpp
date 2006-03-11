@@ -401,7 +401,7 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
 }
 
 int OVIMTobaccoContext::keyMove() {
-	int currentBufferLength = predictor->tokenVector.size();
+	size_t currentBufferLength = predictor->tokenVector.size();
     if((seq.isEmpty() || parent->doAutoCompose()) && !b->isEmpty()
 		&& position >= 0 && position <= currentBufferLength) {
         /// dirty hack for autoCompose mode... orz
@@ -533,12 +533,12 @@ int OVIMTobaccoContext::keyPrintable() {
 void OVIMTobaccoContext::freshBuffer() {
 /// BAD UTF-8 Chinese character processing here, again...
 
-	int currentBufferLength = predictor->tokenVector.size();
+	size_t currentBufferLength = predictor->tokenVector.size();
 	if(strlen(seq.sequence()) > 0 && position < currentBufferLength)
     {
         murmur("should be here with [%s], [%s], (%d)",
             seq.compose(), predictor->composedString.c_str(), position);
-        int len = predictor->composedString.length();
+        size_t len = predictor->composedString.length();
         string leftString, rightString;
         if(len > 0) {
             leftString = 
@@ -694,8 +694,8 @@ int OVIMTobaccoContext::fetchCandidate(const char *qs) {
     char realqs[256];
     strcpy(realqs, qs);
     if (parent->allowwildcard && strlen(seq.sequence())>1) {
-        int ql=strlen(realqs);
-        for (int qi=0; qi<ql; qi++) {
+        size_t ql=strlen(realqs);
+        for (size_t qi=0; qi<ql; qi++) {
             if (realqs[qi]=='?') { realqs[qi]='_'; wildcard=1; }
             if (realqs[qi]=='*') { realqs[qi]='%'; wildcard=1; }
         }
@@ -760,13 +760,13 @@ int OVIMTobaccoContext::setCandidate() {
         
     predictor->setCandidateVector(choosingIndex);
     /// Currently use "post" choosing mode only
-    int rows = predictor->candidateVector.size();
+    size_t rows = predictor->candidateVector.size();
     murmur("got %d rows", rows);
     if(!rows) return 1; //zonble
     candi=new IMGCandidate;
     candi->count=0;
     candi->candidates=new char* [rows];
-    for(int i = 0; i < rows; i++)
+    for(size_t i = 0; i < rows; i++)
         candi->candidates[candi->count++] =
             const_cast<char*>(predictor->candidateVector[i].word.c_str());
 
@@ -796,8 +796,8 @@ int OVIMTobaccoContext::candidateEvent() {
     if (kc==ovkLeft || kc==ovkUp || kc==ovkPageUp || kc=='<')
         return candidatePageUp();
 
-    int perpage=strlen(localSelKey);
-    int i=0, l=perpage, nextsyl=0;
+    size_t perpage=strlen(localSelKey);
+    size_t i=0, l=perpage, nextsyl=0;
     for (i=0; i<perpage; i++) if(localSelKey[i]==kc) break;
     if (i==l) {         // not a valid candidate key
         if (kc==ovkReturn) i=0;
@@ -841,14 +841,14 @@ int OVIMTobaccoContext::candidateEvent() {
 
 int OVIMTobaccoContext::updateCandidateWindow() {
     if (!candi) return 1;
-    int candicount=candi->count;
-    int perpage=strlen(parent->selkey);
-    int pgstart=page*perpage;
+    size_t candicount=candi->count;
+    size_t perpage=strlen(parent->selkey);
+    size_t pgstart=page*perpage;
         
     c->clear();
     char dispstr[32];
     
-    for (int i=0; i<perpage; i++) {
+    for (size_t i=0; i<perpage; i++) {
         if (pgstart+i >= candicount) break;     // stop if idx exceeds candi counts
         sprintf(dispstr, "%c.", parent->selkey[i]);
         c->append(dispstr)->append(candi->candidates[page*perpage+i])->append(" ");

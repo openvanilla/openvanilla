@@ -4,7 +4,12 @@
 #include <string>
 #include <vector>
 
-#include <OpenVanilla/OVUtility.h>
+#ifndef WIN32
+	#include <OpenVanilla/OVUtility.h>
+#else
+	#include "OVUtility.h"
+#endif
+
 #include "OVSQLite3.h"
 
 #include "Vocabulary.h"

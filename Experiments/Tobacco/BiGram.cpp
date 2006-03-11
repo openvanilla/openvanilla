@@ -4,7 +4,11 @@
 
 #include "BiGram.h"
 
-#include <OpenVanilla/OVUtility.h>
+#ifndef WIN32
+	#include <OpenVanilla/OVUtility.h>
+#else
+	#include "OVUtility.h"
+#endif
 
 BiGram::BiGram()
 {
@@ -20,8 +24,8 @@ int BiGram::maximumMatching(
 {
 	vector<int> boundaryVector;
 	vector< vector<Vocabulary> > vectorOfVocabularyVector;
-	int begin = index;
-	int end = stop;
+	size_t begin = index;
+	size_t end = stop;
 	if(doBackward)
 	{
 		reverse(tokenVectorRef.begin(), tokenVectorRef.end());
@@ -152,7 +156,7 @@ int BiGram::maximumMatching(
 
 		if(currentVocabularyVector[0].word.length() == 1 &&
             currentVocabularyVector[0].freq > 99) {
-			int thrashold = 0;
+			size_t thrashold = 0;
 			for(size_t step = 0; step < currentVocabularyVector.size(); step++)
 			{
 				if(currentVocabularyVector[step].freq < 100) {
@@ -191,8 +195,8 @@ int BiGram::maximumMatching(
 
 	Vocabulary bestVocabularyCombination = combinedVocabularyVector.front();
 
-	int from = begin;
-	int to = end;
+	size_t from = begin;
+	size_t to = end;
 	if(doBackward)
 	{
 		reverse(tokenVectorRef.begin(), tokenVectorRef.end());
@@ -226,10 +230,10 @@ void BiGram::getVocabularyCombination(
     vector<Vocabulary>& combinedRef)
 {
     vector<Vocabulary> combinedVocabularyVector;
-	int leftBound = leftRef.size();
+	size_t leftBound = leftRef.size();
 	if(leftBound > 5)
 		leftBound = 5;
-	int rightBound = rightRef.size();
+	size_t rightBound = rightRef.size();
 	if(rightBound > 5)
 		rightBound = 5;
 

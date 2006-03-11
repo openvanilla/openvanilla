@@ -3,7 +3,12 @@
 #include "BiGram.h"
 #include "PredictorSingleton.h"
 
-#include <OpenVanilla/OVUtility.h>
+#ifndef WIN32
+	#include <OpenVanilla/OVUtility.h>
+#else
+	#include "OpenVanilla.h"
+#endif
+
 #include <algorithm>
 
 using namespace std;

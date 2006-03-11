@@ -4,7 +4,11 @@
 
 #include "DictionarySingleton.h"
 
-#include <OpenVanilla/OVUtility.h>
+#ifndef WIN32
+	#include <OpenVanilla/OVUtility.h>
+#else
+	#include "OVUtility.h"
+#endif
 
 using namespace std;
 

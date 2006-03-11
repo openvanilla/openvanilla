@@ -506,8 +506,8 @@ int OVIMGenericContext::fetchCandidate(const char *qs) {
     char realqs[256];
     strcpy(realqs, qs);
     if (parent->allowwildcard && strlen(seq.sequence())>1) {
-        int ql=strlen(realqs);
-        for (int qi=0; qi<ql; qi++) {
+        size_t ql=strlen(realqs);
+        for (size_t qi=0; qi<ql; qi++) {
             if (realqs[qi]=='?') { realqs[qi]='_'; wildcard=1; }
             if (realqs[qi]=='*') { realqs[qi]='%'; wildcard=1; }
         }
@@ -576,8 +576,8 @@ int OVIMGenericContext::candidateEvent() {
     if (kc==ovkLeft || kc==ovkUp || kc==ovkPageUp || kc=='<')
         return candidatePageUp();
 
-    int perpage=strlen(localSelKey);
-    int i=0, l=perpage, nextsyl=0;
+    size_t perpage=strlen(localSelKey);
+    size_t i=0, l=perpage, nextsyl=0;
     for (i=0; i<perpage; i++) if(localSelKey[i]==kc) break;
     if (i==l) {         // not a valid candidate key
         if(parent->doAutoCompose() && isprint(kc)) {
@@ -608,14 +608,14 @@ int OVIMGenericContext::candidateEvent() {
 
 int OVIMGenericContext::updateCandidateWindow() {
     if (!candi) return 1;
-    int candicount=candi->count;
-    int perpage=strlen(parent->selkey);
-    int pgstart=page*perpage;
+    size_t candicount=candi->count;
+    size_t perpage=strlen(parent->selkey);
+    size_t pgstart=page*perpage;
         
     c->clear();
     char dispstr[32];
     
-    for (int i=0; i<perpage; i++) {
+    for (size_t i=0; i<perpage; i++) {
         if (pgstart+i >= candicount) break;     // stop if idx exceeds candi counts
         sprintf(dispstr, "%c.", parent->selkey[i]);
         c->append(dispstr)->append(candi->candidates[page*perpage+i])->append(" ");
