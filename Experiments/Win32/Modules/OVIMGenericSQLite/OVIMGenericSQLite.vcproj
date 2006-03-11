@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Headers"
+				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Framework\Headers;..\..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -73,7 +73,7 @@
 			CharacterSet="0">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Headers"
+				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Framework\Headers;..\..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
@@ -127,7 +127,7 @@
 			CharacterSet="0">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Headers"
+				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Framework\Headers;..\..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
@@ -189,6 +189,9 @@
 			Name="¼ÐÀYÀÉ"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			<File
+				RelativePath="..\..\..\..\Modules\SharedHeaders\OVKeySequence.h">
+			</File>
 		</Filter>
 		<Filter
 			Name="¸ê·½ÀÉ"

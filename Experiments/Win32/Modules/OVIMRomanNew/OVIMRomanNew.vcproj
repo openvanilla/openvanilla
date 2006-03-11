@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Headers;..\..\..\Lucene4SpellChecker\clucene-0.9.8\src;..\..\..\Lucene4SpellChecker"
+				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Framework\Headers;..\..\..\..\Modules\SharedHeaders;..\..\..\Lucene4SpellChecker\clucene-0.9.8\src;..\..\..\Lucene4SpellChecker"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -73,7 +73,7 @@
 			CharacterSet="1">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Headers;..\..\..\Lucene4SpellChecker\clucene-0.9.8\src;..\..\..\Lucene4SpellChecker"
+				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Framework\Headers;..\..\..\..\Modules\SharedHeaders;..\..\..\Lucene4SpellChecker\clucene-0.9.8\src;..\..\..\Lucene4SpellChecker"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="4"
 				RuntimeTypeInfo="TRUE"

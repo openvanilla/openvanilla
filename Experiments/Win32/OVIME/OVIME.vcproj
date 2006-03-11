@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\AmphiVanilla\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers;..\tinyxml"
+				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\AmphiVanilla\tinyxml;..\OVIMEUI\Headers;..\..\..\Framework\Headers;..\..\..\Modules\SharedHeaders;..\tinyxml"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="FALSE"
 				MinimalRebuild="TRUE"
@@ -79,7 +79,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\AmphiVanilla\tinyxml;..\OVIMEUI\Headers;..\..\..\Headers;..\tinyxml"
+				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\AmphiVanilla\tinyxml;..\OVIMEUI\Headers;..\..\..\Framework\Headers;..\..\..\Modules\SharedHeaders;..\tinyxml"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="TRUE"
 				MinimalRebuild="FALSE"
@@ -156,7 +156,7 @@
 				RelativePath="OVIME.def">
 			</File>
 			<File
-				RelativePath="..\..\..\Source\OVStringToolKit.cpp">
+				RelativePath="..\..\..\Modules\SharedSource\OVStringToolKit.cpp">
 			</File>
 			<File
 				RelativePath="UIWnd.cpp">
@@ -175,22 +175,22 @@
 				RelativePath="ExtraStructs.h">
 			</File>
 			<File
-				RelativePath="..\..\..\Headers\OpenVanilla.h">
+				RelativePath="..\..\..\Framework\Headers\OpenVanilla.h">
 			</File>
 			<File
-				RelativePath="..\..\..\Headers\OVCandidateList.h">
+				RelativePath="..\..\..\Modules\SharedHeaders\OVCandidateList.h">
 			</File>
 			<File
 				RelativePath="OVIME.h">
 			</File>
 			<File
-				RelativePath="..\..\..\Headers\OVLibrary.h">
+				RelativePath="..\..\..\Framework\Headers\OVLibrary.h">
 			</File>
 			<File
-				RelativePath="..\..\..\Headers\OVStringToolKit.h">
+				RelativePath="..\..\..\Modules\SharedHeaders\OVStringToolKit.h">
 			</File>
 			<File
-				RelativePath="..\..\..\Headers\OVUtility.h">
+				RelativePath="..\..\..\Framework\Headers\OVUtility.h">
 			</File>
 			<File
 				RelativePath="resource.h">

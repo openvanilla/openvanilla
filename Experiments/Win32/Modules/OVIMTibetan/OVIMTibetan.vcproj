@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\Headers;..\..\..\..\Modules\OVIMTibetan"
+				AdditionalIncludeDirectories="..\..\..\..\Framework\Headers;..\..\..\..\Modules\OVIMTibetan"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -71,7 +71,7 @@
 			CharacterSet="1">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\..\Headers;..\..\..\..\Modules\OVIMTibetan"
+				AdditionalIncludeDirectories="..\..\..\..\Framework\Headers;..\..\..\..\Modules\OVIMTibetan"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
@@ -123,7 +123,7 @@
 			CharacterSet="1">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\..\Headers;..\..\..\..\Modules\OVIMTibetan"
+				AdditionalIncludeDirectories="..\..\..\..\Framework\Headers;..\..\..\..\Modules\OVIMTibetan"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"

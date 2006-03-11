@@ -51,7 +51,7 @@ const char *AVService::UTF16ToUTF8(unsigned short *s, int l)
 	    {
 		    if (s[i] < 0x80)
 		    {
-			    *b++=s[i];
+			    *b++=static_cast<char>(s[i]);
 		    }
 		    else if (s[i] < 0x800)
 		    {

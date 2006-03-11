@@ -86,7 +86,7 @@ void AVLoader::initContext(int i)
 void AVLoader::reloadConfig()
 {
 	em->dict()->update();
-	for(int i = 0; i < em->modlist().size(); i++) {
+	for(size_t i = 0; i < em->modlist().size(); i++) {
 		if(ctx_vector.at(i) != NULL) {
 			murmur("Reload: %s", em->modlist().at(i)->identifier());
 			em->dict()->setDict(em->modlist().at(i)->identifier());
