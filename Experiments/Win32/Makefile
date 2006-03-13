@@ -35,7 +35,7 @@ $(OUTDIR)\$(Proj).dll: $(OUTDIR) $(LINK32_OBJS) $(OUTDIR)\$(Proj).res
 	-out:$(OUTDIR)\$(Proj).ime\
 	-def:OVIME\$(Proj).def
 
-cflags = /wd4005 /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I"AmphiVanilla" /I "tinyxml" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_UNICODE" /D "UNICODE" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP 
+cflags = /wd4005 /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Framework/Headers" /I"AmphiVanilla" /I "tinyxml" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_UNICODE" /D "UNICODE" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP 
 FILE=ControlHandle
 $(OUTDIR)\$(FILE).obj: OVIME\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVIME\$(FILE).cpp
@@ -61,10 +61,10 @@ FILE=DisplayServer
 $(OUTDIR)\$(FILE).obj: OVIME\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVIME\$(FILE).cpp
 
-cflags = /wd4005 /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Headers" /I "tinyxml" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP /GR
+cflags = /wd4005 /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Framework/Headers" /I "../../Modules/SharedHeaders" /I "tinyxml" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP /GR
 FILE=OVStringToolKit
-$(OUTDIR)\$(FILE).obj: ..\..\Source\$(FILE).cpp $(OUTDIR)
-	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" ..\..\Source\$(FILE).cpp
+$(OUTDIR)\$(FILE).obj: ..\..\Modules\SharedSource\$(FILE).cpp $(OUTDIR)
+	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" ..\..\Modules\SharedSource\$(FILE).cpp
 FILE=AVConfig
 $(OUTDIR)\$(FILE).obj: AmphiVanilla\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" AmphiVanilla\$(FILE).cpp
