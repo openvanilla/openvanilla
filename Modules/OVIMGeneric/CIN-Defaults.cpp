@@ -30,10 +30,11 @@
 
 #include "CIN-Defaults.h"
 #include <stdlib.h>
-#include <strings.h>
 
 #ifndef WIN32
+	#include <strings.h> //for strcasecmp
 #else
+	#include <string.h> //for stricmp
 	#define strcasecmp stricmp
 #endif
 
@@ -100,4 +101,3 @@ bool CINSetDefaults(const char *shortname, OVDictionary *dict) {
     #undef S
     #undef R
 }
-

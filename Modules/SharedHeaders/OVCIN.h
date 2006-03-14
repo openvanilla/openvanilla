@@ -151,8 +151,8 @@ string& OVCIN::getEndKey()
 
 bool OVCIN::isEndKey(char keyChar)
 {
-    int foundIndex = getEndKey().find(keyChar, 0);
-    if(foundIndex > -1)
+    size_t foundIndex = getEndKey().find(keyChar, 0);
+    if(foundIndex >= 0)
         return true;
     else
         return false;
