@@ -44,9 +44,11 @@ const int ovMaxSeqSimpLen=32;
 class OVKeySequenceSimple : public OVKeySequence
 {
 public:
-    OVKeySequenceSimple(int m=ovMaxSeqSimpLen) : len(0), max(m) { seq[0]=0; }
+    inline OVKeySequenceSimple(int m=ovMaxSeqSimpLen)
+				: len(0), maxLen(m)
+			{ seq[0]=0; }
     virtual bool add(char c) {
-        if (len==max) return false;
+        if (len==maxLen) return false;
         seq[len++]=tolower(c);
         seq[len]=0;
         return true;
@@ -71,9 +73,9 @@ public:
         return seq;
 	}
 	
-protected:    
+protected:
     int len;
-    int max;
+    int maxLen;
     char seq[ovMaxSeqSimpLen];
 };
 
