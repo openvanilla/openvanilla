@@ -3,18 +3,26 @@ Copyright (c) 2004-2006 The OpenVanilla Project
 
 == 警告！警告！警告！ ==
 
-自 r1588 開始，OpenVanilla 推進至 0.7.2 ，由於有大量目錄經過了搬動，
-目前 Linux/FreeBSD/Windows 的程式碼是無法 make 的。請改用以下目錄
-的程式碼：
+自 r1588 開始，OpenVanilla 推進至 0.7.2 ，由於有大量目錄經過了搬動，目前
+Windows 的程式碼中，泛用輸入法模組 (Modules/OVIMGeneric) 仍無法編譯。若要測試
+完全可用的版本，請改用以下目錄的程式碼：
 
     http://svn.openfoundry.org/openvanilla/branches/0.7.1
 
 或是改拿 r1588 （含）之前的trunk source來編譯。
 
+若不需要編譯 OVIMGeneric，則可直接使用 trunk 的最新版，但仍請注意以下事項。
+
 == 注意事項 ==
 現在 trunk/Experiments/Win32/ 底下的是 socket-based loader，可能還不適合用在
 beta production 上。
-請改用 branches/ 底下的版本。:)
+請改用 branches/Non-client-server Win32 Loader/ 底下的版本。:)
+也就是說，請以 branches/Non-client-server Win32 Loader/ 搭配 trunk/ 的其它目錄
+一起進行編譯。
+建議的方式是 svn co branches/Non-client-server Win32 Loader/ 到你本機錄裡的
+trunk/Experiments/Win32-nonsocket/，假裝這個目錄是 trunk 的一部分，比較容易處理
+編譯時的相對路徑設定。請放心，這不會把 trunk 搞亂，因為 commit 回去時仍會存進
+branches/Non-client-server Win32 Loader/。
 
 遇到任何問題，請透過 IRC，到 FreeNote 的 #im-dev 找 kanru 或 pcman 或 b6s。
 
