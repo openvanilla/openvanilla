@@ -41,6 +41,8 @@
     #include <windows.h>
     #include "OpenVanilla.h"
     #include "OVUtility.h"
+	#define strcasecmp stricmp
+	#define bzero(addr, num) memset(addr, 0, num)
 #endif
 
 #include <string.h>
@@ -78,12 +80,12 @@ void CLSplitString(const char *s, string& k, string& v) {
         return 0;
     }
 #else
-    #error This part of code won't run--needs refactoring
+    //#error This part of code won't run--needs refactoring
 
     int file_select(WIN32_FIND_DATA entry)
     {
         char *selectfilter = ".cin";
-        int p=strlen(entry.cFileName)-strlen(selectfilter);
+        size_t p=strlen(entry.cFileName)-strlen(selectfilter);
         if (p<0) return 0;
         if (!strcmp(entry.cFileName+p, selectfilter)) return 1; 
         return 0;
@@ -110,48 +112,40 @@ OVCINList::OVCINList(const char *pathseparator) {
         free(files);
         return loaded;
     }
-#else
-    #error This part of code won't run--needs refactoring
-    
-    void OVCINList::load(char *libpath)
-    {
-        if (index)  return;     // already loaded by another binary instance!
-    
-        WIN32_FIND_DATA FileData;
-        BOOL fFinished;
-        HANDLE hList;
-        char findpath[MAX_PATH];
-    
-        strcpy(cinpath, libpath);
-        strcpy(findpath, libpath);
-        int l=strlen(cinpath);
-        if (l) if (cinpath[l-1]=='\\') cinpath[l-1]=0;
-        strcat(cinpath, "\\OVIMGeneric");
-        strcat(findpath, "\\OVIMGeneric\\*");
-        hList = FindFirstFile(findpath, &FileData);
-    
-        if(hList == INVALID_HANDLE_VALUE)
-        {
-            printf("No files found\n");
-            return;
-        }
-        else
-        {
-            fFinished = FALSE;
-            while (!fFinished)
-            {
-                if (index<vxMaxCINFiles)
-                    if (preparse(cinpath, FileData.cFileName, index)) index++;
-                if (!FindNextFile(hList, &FileData))
-                {
-                    if (GetLastError() == ERROR_NO_MORE_FILES)
-                    {
-                        fFinished = TRUE;
-                    }
-                }
-            }
-        }
-        FindClose(hList);
+#else   
+    int OVCINList::load(const char *loadpath, const char *extension) {
+		int loaded=0;
+		BOOL fFinished;
+		HANDLE hList;
+		WIN32_FIND_DATA FileData;
+		string pathString(loadpath);
+		pathString += "\\OVIMGeneric\\*";
+		const char* findpath = pathString.c_str();
+		hList = FindFirstFile(findpath, &FileData);
+		if(hList == INVALID_HANDLE_VALUE)
+		{
+			murmur("No files found\n");
+		}
+		else
+		{
+			fFinished = FALSE;
+			while (!fFinished)
+			{
+				if(strstr(FileData.cFileName, extension))
+				{
+					if (preparse(findpath, FileData.cFileName)) loaded++;
+				}
+				if (!FindNextFile(hList, &FileData))
+				{
+					if (GetLastError() == ERROR_NO_MORE_FILES)
+					{
+						fFinished = TRUE;
+					}
+				}
+			}
+		}
+		FindClose(hList);
+		return loaded;
         // murmur("OVCINList::load called, index=%d", index);
     }
 #endif
@@ -175,14 +169,14 @@ bool OVCINList::preparse(const char *loadpath, const char *filename) {
         return false;
     }
 
-    OVCINInfo i;
-    i.shortfilename=filename;
-    i.longfilename=longname;
+    OVCINInfo info;
+    info.shortfilename=filename;
+    info.longfilename=longname;
 
     int line=0;
     const size_t bs=2049;
     char buf[bs];
-    bzero(buf, bs);
+    bzero(buf, bs);	
     
     string k, v;
     
@@ -194,10 +188,10 @@ bool OVCINList::preparse(const char *loadpath, const char *filename) {
         CLSplitString(buf, k, v);        
         const char *key=k.c_str();
             
-		if (!strcasecmp(key, "%ename")) i.ename=v;
-		else if (!strcasecmp(key, "%cname")) i.cname=v;
-		else if (!strcasecmp(key, "%tcname")) i.tcname=v;
-		else if (!strcasecmp(key, "%scname")) i.scname=v;
+		if (!strcasecmp(key, "%ename")) info.ename=v;
+		else if (!strcasecmp(key, "%cname")) info.cname=v;
+		else if (!strcasecmp(key, "%tcname")) info.tcname=v;
+		else if (!strcasecmp(key, "%scname")) info.scname=v;
 
         line++;
         if (line >= CL_PREPARSELIMIT) break;
@@ -206,15 +200,15 @@ bool OVCINList::preparse(const char *loadpath, const char *filename) {
     fclose(in);
 
     // some fallbacks..
-    if (!i.ename.length()) i.ename=filename;
-    if (!i.cname.length()) i.cname=i.ename;
-    if (!i.tcname.length()) i.tcname=i.cname;
-    if (!i.scname.length()) i.scname=i.cname;
-    list.push_back(i);
+    if (!info.ename.length()) info.ename=filename;
+    if (!info.cname.length()) info.cname=info.ename;
+    if (!info.tcname.length()) info.tcname=info.cname;
+    if (!info.scname.length()) info.scname=info.cname;
+    list.push_back(info);
 	
 	murmur("Loaded: longfilename=%s, shortfilename=%s, ename=%s, cname=%s, tcname=%s, scname=%s",
-	   i.longfilename.c_str(), i.shortfilename.c_str(), i.ename.c_str(), 
-	   i.cname.c_str(), i.tcname.c_str(), i.scname.c_str());
+	   info.longfilename.c_str(), info.shortfilename.c_str(), info.ename.c_str(), 
+	   info.cname.c_str(), info.tcname.c_str(), info.scname.c_str());
 	
     return 1;
 }
