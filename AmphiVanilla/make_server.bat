@@ -1,0 +1,1 @@
+cl /I.\ /I..\..\..\Framework\Headers -I..\tinyxml /I..\..\..\Modules\SharedHeaders /GR /EHsc /MT /D OV_DEBUG /D WIN32 *.cpp ..\..\..\Modules\SharedSource\*.cpp /link Ws2_32.lib SHFolder.lib  .\libltdl.lib .\libiconv.lib ..\tinyxml\tinyxml.lib /out:OVServer.exe /SUBSYSTEM:windows /entry:mainCRTStartup
