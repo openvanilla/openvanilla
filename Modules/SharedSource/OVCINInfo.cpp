@@ -119,12 +119,13 @@ OVCINList::OVCINList(const char *pathseparator) {
 		HANDLE hList;
 		WIN32_FIND_DATA FileData;
 		string pathString(loadpath);
-		pathString += "\\OVIMGeneric\\*";
+		pathString += "\\*";
+		pathString += extension;
 		const char* findpath = pathString.c_str();
 		hList = FindFirstFile(findpath, &FileData);
 		if(hList == INVALID_HANDLE_VALUE)
 		{
-			murmur("No files found\n");
+			murmur("No files found in %s\n", pathString.c_str());
 		}
 		else
 		{
@@ -133,7 +134,7 @@ OVCINList::OVCINList(const char *pathseparator) {
 			{
 				if(strstr(FileData.cFileName, extension))
 				{
-					if (preparse(findpath, FileData.cFileName)) loaded++;
+					if (preparse(loadpath, FileData.cFileName)) loaded++;
 				}
 				if (!FindNextFile(hList, &FileData))
 				{
