@@ -538,9 +538,9 @@ void OVIMTobaccoContext::freshBuffer() {
     {
         murmur("should be here with [%s], [%s], (%d)",
             seq.compose(), predictor->composedString.c_str(), position);
-        size_t len = predictor->composedString.length();
+		string::size_type len = predictor->composedString.length();
         string leftString, rightString;
-        if(len > 0) {
+		if(!predictor->composedString.empty()) {
             leftString = 
                 predictor->composedString.substr(0, (position)*3);
             rightString = 
