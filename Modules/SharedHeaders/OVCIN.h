@@ -151,11 +151,11 @@ string& OVCIN::getEndKey()
 
 bool OVCIN::isEndKey(char keyChar)
 {
-    size_t foundIndex = getEndKey().find(keyChar, 0);
-    if(foundIndex >= 0)
-        return true;
-    else
+	string::size_type pos = getEndKey().find(keyChar, 0);
+	if(pos == string::npos)
         return false;
+    else
+        return true;
 }
 
 bool OVCIN::isValidKey(const string& keyString) const
