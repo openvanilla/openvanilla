@@ -41,9 +41,10 @@ trunk/Loaders/Win32/。
 如果使用 wxwidgets-2.6.1 又安裝在預設目錄，那麼幾乎可以直接用 OVIMEUI.vcproj 裡
 預先寫好的路徑。
 
-3. 如果有 VC.NET 2003 IDE，開啟 trunk/Experments/Win32/OVIME.sln 應能直接編譯。
-另外，也請開啟 trunk/Experiments/Win32/OVPreferences.sln 以編譯設定選單。
-如果只裝了 VC++ ToolKit (http://msdn.microsoft.com/visualc/vctoolkit2003/)，則
+3.1. 如果有 VC.NET 2003 IDE，開啟 trunk/Experments/Win32/OVIME.sln 應能直接編譯。
+另外，也請開啟 trunk/Experiments/Win32/OVPreferences.sln 以編譯設定選單。用 Visual Studio .NET 2003 開啟 OVIME.sln，按需求選擇 Debug 或 Release 模式，執行「建置方案」。
+
+3.2. 如果只裝了 VC++ ToolKit (http://msdn.microsoft.com/visualc/vctoolkit2003/)，則
 必須在 trunk/Experiments/Win32 底下，按照順序進行：
 
 tinyxml\make.bat
@@ -51,6 +52,14 @@ AmphiVanilla\make_server.bat
 Win32OVIMEUI\PCMan\make.bat
 nmake
 OVPreferences\make.bat
+
+== 測試 ==
+在此以 OVIMPOJ-Holo 為例
+0. 若未曾安裝過 OV，請執行 OVIME.reg。
+1. 按需求修改 deploy-debug.bat 然後執行 。
+2. 把 poj-holo.cin 放到 %WINDIR%\OpenVanilla\OVIMPOJ-Holo 裡
+3. 開啟輸入法設定視窗, 新增剛剛裝入的輸入法
+4. 使用 VC.NET 2003 的 debug 模式，開啟 OV，讓 OV attach 到某文字編輯器上即可。
 
 == 製作安裝檔 ==
 * 安裝 NSIS (http://nsis.sourceforge.net/download/)
