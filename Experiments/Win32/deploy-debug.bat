@@ -6,6 +6,10 @@ copy .\OVIMEUI\Debug\OVIMEUI.dll %WINDIR%\system32\
 copy .\OVIME\Debug\ovime.ime %WINDIR%\system32\
 copy .\OVPreferences\Debug\OVPreferences.exe %WINDIR%\OpenVanilla\
 copy .\OVPreferences\Release\OVPreferences.exe.manifest %WINDIR%\OpenVanilla\
-copy .\Modules\OVIMTobacco\Debug\OVIMTobacco.dll %WINDIR%\OpenVanilla\Modules\
+copy .\Modules\OVIMGeneric\Debug\OVIMGeneric.dll %WINDIR%\OpenVanilla\Modules\
+copy .\Modules\OVIMGenericSQLite\Debug\OVIMGenericSQLite.dll %WINDIR%\OpenVanilla\Modules\
+copy .\Modules\OVIMPOJ-Holo\Debug\OVIMPOJ-Holo.dll %WINDIR%\OpenVanilla\Modules\
 copy .\Modules\OVIMRomanNew\Debug\OVIMRomanNew.dll %WINDIR%\OpenVanilla\Modules\
+copy .\Modules\OVIMTibetan\Debug\OVIMTibetan.dll %WINDIR%\OpenVanilla\Modules\
+copy .\Modules\OVIMTobacco\Debug\OVIMTobacco.dll %WINDIR%\OpenVanilla\Modules\
 pause
