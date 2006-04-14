@@ -110,15 +110,17 @@ void CompStr::beforeGenerateMsg(void)
 {
 	wchar_t* sinsert = compStr + cs.dwCursorPos;
 
-	memmove( sinsert + cs.dwCompReadStrLen, 
-		sinsert, cs.dwCompStrLen - cs.dwCursorPos );
+	if(cs.dwCompStrLen > cs.dwCursorPos)
+		memmove( sinsert + cs.dwCompReadStrLen, 
+			sinsert, cs.dwCompStrLen - cs.dwCursorPos );
 	wcsncpy( sinsert, readStr, cs.dwCompReadStrLen );
 	cs.dwCompStrLen += cs.dwCompReadStrLen;
 	compStr[cs.dwCompStrLen] = '\0';
 
 	BYTE* ainsert = compAttr + cs.dwCursorPos;
-	memmove( ainsert + cs.dwCompReadAttrLen, 
-		ainsert, cs.dwCompAttrLen - cs.dwCursorPos);
+	if(cs.dwCompAttrLen > cs.dwCursorPos)
+		memmove( ainsert + cs.dwCompReadAttrLen, 
+			ainsert, cs.dwCompAttrLen - cs.dwCursorPos);
 	memcpy( ainsert, readAttr, cs.dwCompReadAttrLen );
 	cs.dwCompAttrLen += cs.dwCompReadAttrLen;
 

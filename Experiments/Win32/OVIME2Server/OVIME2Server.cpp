@@ -221,7 +221,7 @@ LRESULT OVIME2Server::keyEvent( WPARAM wp, OVIME2Instance* client )
 		code.setAlt(1);
 	if( state & isCapsLock )
 		code.setCapslock(1);
-	if( state & isNum )
+	if( (state & isNum) && (key > 45 && key < 58))	//<comment author='b6s'>46 is "./Del" and 48~57 are [0-9] of NumPad, but what is 47?</comment>
 		code.setNum(1);
 
 	return LRESULT( client->keyEvent( code ) );
