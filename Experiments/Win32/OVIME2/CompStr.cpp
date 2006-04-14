@@ -112,7 +112,10 @@ void CompStr::beforeGenerateMsg(void)
 
 	if(cs.dwCompStrLen > cs.dwCursorPos)
 		memmove( sinsert + cs.dwCompReadStrLen, 
-			sinsert, cs.dwCompStrLen - cs.dwCursorPos );
+			sinsert, cs.dwCompStrLen - cs.dwCursorPos );		
+	else
+		memmove( sinsert + cs.dwCompReadStrLen,
+			sinsert, cs.dwResultStrLen);
 	wcsncpy( sinsert, readStr, cs.dwCompReadStrLen );
 	cs.dwCompStrLen += cs.dwCompReadStrLen;
 	compStr[cs.dwCompStrLen] = '\0';
@@ -121,6 +124,9 @@ void CompStr::beforeGenerateMsg(void)
 	if(cs.dwCompAttrLen > cs.dwCursorPos)
 		memmove( ainsert + cs.dwCompReadAttrLen, 
 			ainsert, cs.dwCompAttrLen - cs.dwCursorPos);
+	else
+		memmove( ainsert + cs.dwCompReadAttrLen, 
+			ainsert, cs.dwCompReadAttrLen);
 	memcpy( ainsert, readAttr, cs.dwCompReadAttrLen );
 	cs.dwCompAttrLen += cs.dwCompReadAttrLen;
 

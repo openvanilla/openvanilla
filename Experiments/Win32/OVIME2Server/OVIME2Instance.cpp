@@ -98,6 +98,7 @@ AVDisplayServer *OVIME2Instance::setBufString(const char *str)
 {
 	wchar_t* wstr = NULL;
 	int len;
+	if(resultStr.length() > 0)	resultStr.clear();	//<comment author='b6s'>Clear resultStr before new buffer appending. But this step deserves a better place...</comment>
 	if( str && (len = svr->srv()->UTF8ToUTF16( str, &wstr )) > 0 ) {
 		compStr.assign( wstr, len );
 	}
@@ -115,11 +116,12 @@ AVDisplayServer *OVIME2Instance::sendBuf(const char *str)
 		resultStr.assign( wstr, len );
 	}
 	else {
-		resultStr.clear();
+		murmur("are you sending empty result?");
 	}
 	compStr.clear();
 	return this;
 }
+
 
 AVDisplayServer *OVIME2Instance::setCandiString(const char *str)
 {
