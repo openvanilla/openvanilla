@@ -3,7 +3,8 @@ copy .\AmphiVanilla\libiconv-2.dll %WINDIR%\system32\
 copy .\SQLite3\sqlite3.dll %WINDIR%\system32\
 copy .\tinyxml\Debug\tinyxml.dll %WINDIR%\system32\
 copy .\OVIMEUI\Debug\OVIMEUI.dll %WINDIR%\system32\
-copy .\OVIME\Debug\ovime.ime %WINDIR%\system32\
+copy .\OVIME2\Debug\ovime.ime %WINDIR%\system32\
+copy .\OVIME2Server\Debug\OVIME2Server.exe %WINDIR%\OpenVanilla\
 copy .\OVPreferences\Debug\OVPreferences.exe %WINDIR%\OpenVanilla\
 copy .\OVPreferences\Release\OVPreferences.exe.manifest %WINDIR%\OpenVanilla\
 copy .\Modules\OVIMGeneric\Debug\OVIMGeneric.dll %WINDIR%\OpenVanilla\Modules\
