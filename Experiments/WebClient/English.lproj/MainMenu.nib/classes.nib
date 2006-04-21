@@ -1,0 +1,13 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {query = id; }; 
+            CLASS = QueryDelegate; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {progressIndicator = id; queryButton = id; textField = id; webView = id; }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
