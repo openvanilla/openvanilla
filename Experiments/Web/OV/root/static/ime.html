@@ -23,11 +23,10 @@
   <body>
     <h1>Web Liu5 IME</h1>
     <p class="description">
-      範例: 這(iwn)是(jn)網(snbf)頁(tmb)香(hd)草(rdj)無(vf)蝦(cofu)米(mn)
+      範例: 這(iwn)是(jn)網(snbf)頁(tmb)香(hdo)草(rdj)無(vf)蝦(cofu)米(mn)
     </p>
     <form action="#" onsubmit="ime_commit(this); return false;">
-      <input id="ime_buffer" type="text"
-             onkeydown="ime_check_key(event); return false;"/>
+      <input id="ime_buffer" type="text" />
     </form>
 
     <div id="ime_target"> </div>
@@ -48,6 +47,7 @@ var ov_ime = new OpenVanilla.IM.Web("/im", "liu5");
 var ov_target = document.getElementById("ime_target").childNodes[0];
 var ov_buffer = document.getElementById("ime_buffer");
 ov_buffer.focus();
+
 
 var ime_commit = function(form) {
     if ( ov_buffer.value ) {
@@ -73,7 +73,11 @@ var ime_check_key = function(event) {
             ov_target.nodeValue = ov_target.nodeValue.replace(/.$/,"");
         }
     }
+    return false;
 }
+
+ov_buffer.addEventListener('keydown', ime_check_key, true);
+
     </script>
     
 
