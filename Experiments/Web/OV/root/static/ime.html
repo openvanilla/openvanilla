@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="author" content="Liu Kang-min"/>
+    <title>ime</title>
+    <script type="text/javascript" src="/static/js/HTTP/Request.js"></script>
+    <script type="text/javascript" src="/static/js/OV.js"></script>
+    <style type="text/css" media="screen">
+      #ime_target {
+          width:80%;
+          min-height:10em;
+          background:#ff7;
+          margin:11px;
+          border:1px solid #111;
+          padding:11px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Web Liu5 IME</h1>
+    <p class="description">
+      範例: 這(iwn)是(jn)網(snbf)頁(tmb)香(hd)草(rdj)無(vf)蝦(cofu)米(mn)
+    </p>
+    <form action="#" onsubmit="ime_commit(this); return false;">
+      <input id="ime_buffer" type="text"
+             onkeydown="ime_check_key(event); return false;"/>
+    </form>
+
+    <div id="ime_target"> </div>
+
+    <h2>說明</h2>
+    <ul>
+      <li>空白鍵送字</li>
+      <li>Backspace/Delete 刪字</li>
+      <li>無法選字</li>
+      <li>無法打標點</li>
+      <li>Capslock 無用</li>
+    </ul>
+
+    
+    <script type="text/javascript"> 
+
+var ov_ime = new OpenVanilla.IM.Web("/im", "liu5");
+var ov_target = document.getElementById("ime_target").childNodes[0];
+var ov_buffer = document.getElementById("ime_buffer");
+ov_buffer.focus();
+
+var ime_commit = function(form) {
+    if ( ov_buffer.value ) {
+        var chars = ov_ime.query(ov_buffer.value.replace(/ /g,""));
+        if( chars[0] ) {
+            ov_target.nodeValue += chars[0];
+// Weird, without setTimeout, this failed to work someitmes
+            setTimeout(function(){
+                ov_buffer.value = "";
+            }, 1);
+        }
+    }
+    ov_buffer.focus();
+}
+
+var ime_check_key = function(event) {
+    if(event.keyCode == 32) {
+        event.preventDefault();
+        event.stopPropagation();
+        ime_commit();
+    } else if (event.keyCode == 8) {
+        if ( !ov_buffer.value ) {
+            ov_target.nodeValue = ov_target.nodeValue.replace(/.$/,"");
+        }
+    }
+}
+    </script>
+    
+
+  </body>
+</html>

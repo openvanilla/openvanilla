@@ -10,13 +10,15 @@ use warnings;
 # Static::Simple: will serve static files from the application's root 
 # directory
 #
-use Catalyst qw/-Debug Static::Simple/;
+use Catalyst qw/-Debug Static::Simple Config::YAML/;
 
 our $VERSION = '0.01';
 
 #
 # Start the application
 #
+
+__PACKAGE__->config(config_file => 'ov.yml');
 __PACKAGE__->setup;
 
 =head1 NAME
