@@ -68,18 +68,24 @@ public:
 
         if (key->code()==ovkReturn || key->code()==ovkSpace) {
             if (!(strlen(keyseq.buf))) return 0;   // empty buffer, do nothing
-			//unsigned short i = strtol(keyseq.buf, (char **) NULL, 16);
 			unsigned short i = convert(strtol(keyseq.buf, (char **) NULL, 16));
-			
-			buf->clear()->append(srv->UTF16ToUTF8(&i, 1))->send()->clear();
-            textbar->clear()->hide();
-			keyseq.clear();
+            keyseq.clear();
+			if(i) {
+                buf->clear()->append(srv->UTF16ToUTF8(&i, 1))->send()->clear();
+                textbar->clear()->hide();
+            } else {
+                buf->clear()->update();
+                textbar->clear()->hide();
+                srv->notify("Sorry. No such code!");
+                srv->beep();
+            }
             return 1;   // key processed
         }
 
 		if (key->code()==ovkEsc) {
-			textbar->clear()->hide();
 			keyseq.clear();
+            buf->clear()->update();;
+			textbar->clear()->hide();
 			return 1;
 		}
 		
@@ -103,6 +109,8 @@ public:
 				keyseq.add(key->code());
 				buf->clear()->append(keyseq.buf)->update();
 				textbar->clear()->append((char *)"[Big5 Hex] ")->append(keyseq.buf)->update()->show();
+			} else {
+			    srv->beep();
 			}
 			return 1;   // key processed
         }        
