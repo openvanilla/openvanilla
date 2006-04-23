@@ -52,7 +52,7 @@ public:
     size_t len;
 };
 
-class OVUnicodeContext : public OVInputMethodContext {
+class OVBig5Context : public OVInputMethodContext {
 public:
     virtual void start(OVBuffer*, OVCandidate*, OVService*) {
         clear();
@@ -135,7 +135,7 @@ public:
     }
 
     virtual OVInputMethodContext* newContext()  {
-        return new OVUnicodeContext; 
+        return new OVBig5Context; 
     }
 };
 
