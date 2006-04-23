@@ -88,6 +88,7 @@ int OVKPPhraseToolsContext::keyEvent(OVKeyCode *pk, OVBuffer *pb,
             parent->recSeq.pop();
             if (!parent->recSeq.count()) {
                 parent->recordingMode=false;
+                return(cancelmsg(PTS_WAIT, false));
             }
             else {
                 PTRecordingMessage(parent->recSeq.compose(), s);

@@ -12,7 +12,7 @@ class PTKeySequence {
 public:
     void clear() { list.clear(); }
     void add(const string &x) { list.push_back(string(x)); }
-    void pop() { list.pop_back(); }
+    void pop() { if (list.size()) list.pop_back(); }
     int count() { return list.size(); }
     const string compose() {
         string c;
