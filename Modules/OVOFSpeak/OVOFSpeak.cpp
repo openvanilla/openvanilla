@@ -1,3 +1,11 @@
+// OVOVSpeak.cpp: The Tibetan Input Method
+// 2004-2006 by Weizhong Yang 
+//
+// http://openvanilla.org
+//
+// This program is Zonble-ware and adopts Zonble's License
+// -- "How could a person who doesn't even believe in law adopt any license?"
+
 #define OV_DEBUG
 #include <stdlib.h>
 #include <string.h>
