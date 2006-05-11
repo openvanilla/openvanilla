@@ -28,6 +28,7 @@ trunk/Loaders/Win32/。
 
 1.1. 開啟命令提示字元，然後執行
 "C:\Program Files\Microsoft Visual Studio .NET 2003\Common7\Tools\vsvars32.bat"
+每次進入命令列模式進行一連串編譯前，請先確定是否做了這一步。
 1.2. 到 C:\wxWidgets-2.6.3\build\msw 底下執行
 nmake -f makefile.vc BUILD=release UNICODE=1 SHARED=0 RUNTIME_LIBS=static
 和
@@ -44,7 +45,7 @@ tinyxml\make.bat
 AmphiVanilla\make_server.bat
 OVIMEUI\PCMan\make.bat
 nmake
-OVPreferences\make.bat
+OVPreferences\make.bat （使用前可能必須手動修改 make.bat 中 wxWidgets 的路徑）
 
 3. 最後，選擇想要使用的模組，到該目錄下開啟 .vcproj 檔編譯，或執行裡面的
 make.bat 即可。
