@@ -1,4 +1,4 @@
-OpenVanilla 0.7.1 / 0.7.2: Framework, Loaders and Modules 
+﻿OpenVanilla 0.7.1 / 0.7.2: Framework, Loaders and Modules
 Copyright (c) 2004-2006 The OpenVanilla Project
 
 
@@ -22,8 +22,9 @@ beta 版上。
 Windows 版現在仍在 trunk/Experiments/Win32/ 中，穩定之後才會移進
 trunk/Loaders/Win32/。
 
-1. 首先，為了編譯 OVPreferences，必須安裝 wxWidgets Win32 版 (http://www.wxwidgets.org/dl_msw2.htm#stable)，
-裝完之後 *必須* 自行編譯出 OVPreferences 所需的靜態函式庫。目前 wxWidgets 版本
+1. 首先，為了編譯 OVPreferences，必須安裝 wxWidgets Win32 版
+(http://www.wxwidgets.org/dl_msw2.htm#stable)，裝完之後 *必須* 自行編譯出
+OVPreferences 所需的靜態函式庫。目前 wxWidgets 版本
 是 2.6.3，為避免經歷與 OV 無關的痛苦，請按以下步驟進行：
 
 1.1. 開啟命令提示字元，然後執行
@@ -39,7 +40,7 @@ nmake -f makefile.vc BUILD=debug UNICODE=1 SHARED=0 RUNTIME_LIBS=static
 2.1. 如果有 VS.NET 2003 IDE，開啟 OVIME.sln 應能直接編譯。接著請開啟
 trunk/Experiments/Win32/OVPreferences.sln 以編譯設定選單。欲編譯時，可按需求選
 擇 Debug 或 Release 模式，再執行「建置方案」即可。
-2.2. 喜歡命令列模式的，請先設定環境變數 WXWIN=C:\wxWidgets-2.6.3\ ，然後在執行
+2.2. 喜歡命令列模式的，請先確定有環境變數 WXWIN=C:\wxWidgets-2.6.3\ ，再執行
 make.bat ，編譯成果會放在 Result 目錄下。
 
 3. 最後，選擇想要使用的模組，到該目錄下開啟 .vcproj 檔編譯，或執行裡面的
@@ -49,8 +50,9 @@ make.bat 即可。
 == 測試 ==
 在此以 OVIMPOJ-Holo 為例
 0. 若未曾安裝過 OV，請執行 OVIME.reg。
-1. 「按需求修改」deploy-debug.bat 然後執行（不知道怎麼改的話請上 IRC 詢問）。
-1.1. 之前用命令列模式編譯者，請「按需求修改」 make_install.bat。
+1. 手動建立 %WINDIR%\OpenVanilla 及 %WINDIR%\OpenVanilla\Modules
+1.1.「按需求修改」deploy-debug.bat 然後執行（不知道怎麼改的話請上 IRC 詢問）。
+1.2. 之前用命令列模式編譯者，請「按需求修改」make_install.bat。
 2. 把 poj-holo.cin 放到 %WINDIR%\OpenVanilla\OVIMPOJ-Holo 裡
 3. 開啟輸入法設定視窗, 新增剛剛裝入的輸入法
 4. 使用 VC.NET 2003 的 debug 模式，開啟 OV，讓 OV attach 到某文字編輯器上即可。
