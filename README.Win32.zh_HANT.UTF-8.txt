@@ -39,13 +39,8 @@ nmake -f makefile.vc BUILD=debug UNICODE=1 SHARED=0 RUNTIME_LIBS=static
 2.1. 如果有 VS.NET 2003 IDE，開啟 OVIME.sln 應能直接編譯。接著請開啟
 trunk/Experiments/Win32/OVPreferences.sln 以編譯設定選單。欲編譯時，可按需求選
 擇 Debug 或 Release 模式，再執行「建置方案」即可。
-2.2. 喜歡命令列模式的，則必須按照以下順序進行：
-
-tinyxml\make.bat
-AmphiVanilla\make_server.bat
-OVIMEUI\PCMan\make.bat
-nmake
-OVPreferences\make.bat （使用前可能必須手動修改 make.bat 中 wxWidgets 的路徑）
+2.2. 喜歡命令列模式的，請先設定環境變數 WXWIN=C:\wxWidgets-2.6.3\ ，然後在執行
+make.bat ，編譯成果會放在 Result 目錄下。
 
 3. 最後，選擇想要使用的模組，到該目錄下開啟 .vcproj 檔編譯，或執行裡面的
 make.bat 即可。
