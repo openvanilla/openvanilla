@@ -49,7 +49,8 @@ make.bat 即可。
 == 測試 ==
 在此以 OVIMPOJ-Holo 為例
 0. 若未曾安裝過 OV，請執行 OVIME.reg。
-1. 按需求修改 deploy-debug.bat 然後執行 。
+1. 「按需求修改」deploy-debug.bat 然後執行（不知道怎麼改的話請上 IRC 詢問）。
+1.1. 之前用命令列模式編譯者，請「按需求修改」 make_install.bat。
 2. 把 poj-holo.cin 放到 %WINDIR%\OpenVanilla\OVIMPOJ-Holo 裡
 3. 開啟輸入法設定視窗, 新增剛剛裝入的輸入法
 4. 使用 VC.NET 2003 的 debug 模式，開啟 OV，讓 OV attach 到某文字編輯器上即可。
