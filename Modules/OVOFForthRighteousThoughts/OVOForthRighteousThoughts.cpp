@@ -5,9 +5,9 @@
 #include <OpenVanilla/OVLibrary.h>
 #include <OpenVanilla/OVUtility.h>
 
-class OVOFZhengnaeng : public OVOutputFilter {
+class OVOFForthRighteousThoughts : public OVOutputFilter {
 public:
-    OVOFZhengnaeng() {
+    OVOFForthRighteousThoughts() {
         buf=NULL;
     }
     
@@ -18,12 +18,12 @@ public:
 
     virtual const char *localizedName(const char *locale)
 	{
-		if (!strcasecmp(locale, "zh_TW")) return "發正念濾嘴";
-		if (!strcasecmp(locale, "zh_CN")) return "发正念滤嘴";
-		return "Release Zheng Naeng as You Type";
+		if (!strcasecmp(locale, "zh_TW")) return "即時發正念濾嘴";
+		if (!strcasecmp(locale, "zh_CN")) return "即时发正念滤嘴";
+		return "Release Forth Righteous Thoughts as You Type";
 	}
 
-    virtual const char *identifier() { return "OVOFZhengnaeng"; }
+    virtual const char *identifier() { return "OVOFForthRighteousThoughts"; }
     virtual const char *process (const char *src, OVService *srv) {
 		srv->notify("輸入大法好！");
 		return src;
@@ -33,7 +33,7 @@ protected:
     char *buf;
 };
 
-// OV_SINGLE_MODULE_WRAPPER(OVOFZhengnaeng);
+// OV_SINGLE_MODULE_WRAPPER(OVOFForthRighteousThoughts);
 
 extern "C" unsigned int OVGetLibraryVersion() {
     murmur("ovversion");
@@ -41,12 +41,12 @@ extern "C" unsigned int OVGetLibraryVersion() {
 }
 
 extern "C" int OVInitializeLibrary(OVService* s, const char* p) { 
-    murmur("library init, locale=%s, path=%s, userspace=%s, seperator=%s", s->locale(), p, s->userSpacePath("OVOFZhengnaeng"), s->pathSeparator());
+    murmur("library init, locale=%s, path=%s, userspace=%s, seperator=%s", s->locale(), p, s->userSpacePath("OVOFForthRighteousThoughts"), s->pathSeparator());
     return 1; 
 }
 
 extern "C" OVModule *OVGetModuleFromLibrary(int idx) {
     murmur ("get module");
-    return (idx==0) ? new OVOFZhengnaeng : NULL;
+    return (idx==0) ? new OVOFForthRighteousThoughts : NULL;
 }
 
