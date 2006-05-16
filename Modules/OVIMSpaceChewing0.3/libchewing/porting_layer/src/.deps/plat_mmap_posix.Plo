@@ -1,0 +1,91 @@
+plat_mmap_posix.lo plat_mmap_posix.o: plat_mmap_posix.c \
+  ../../../include/config.h /usr/include/sys/types.h \
+  /usr/include/sys/appleapiopts.h /usr/include/sys/cdefs.h \
+  /usr/include/machine/types.h /usr/include/ppc/types.h \
+  /usr/include/ppc/_types.h /usr/include/sys/_types.h \
+  /usr/include/machine/_types.h /usr/include/machine/endian.h \
+  /usr/include/ppc/endian.h /usr/include/sys/_endian.h \
+  /usr/lib/gcc/powerpc-apple-darwin8/4.0.1/include/stdint.h \
+  /usr/include/libkern/OSByteOrder.h \
+  /usr/include/libkern/ppc/OSByteOrder.h /usr/include/sys/mman.h \
+  /usr/include/sys/stat.h /usr/include/unistd.h /usr/include/_types.h \
+  /usr/include/sys/unistd.h /usr/include/sys/select.h \
+  /usr/include/signal.h /usr/include/sys/signal.h \
+  /usr/include/machine/signal.h /usr/include/ppc/signal.h \
+  /usr/include/sys/time.h /usr/include/time.h \
+  /usr/include/machine/_limits.h /usr/include/ppc/_limits.h \
+  /usr/include/fcntl.h /usr/include/sys/fcntl.h \
+  ../../../src/porting_layer/include/plat_mmap.h \
+  ../../../src/porting_layer/include/plat_types.h \
+  ../../../src/porting_layer/include/sys/plat_posix.h \
+  ../../../src/porting_layer/include/sys/plat_win32.h
+
+../../../include/config.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/sys/appleapiopts.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/machine/types.h:
+
+/usr/include/ppc/types.h:
+
+/usr/include/ppc/_types.h:
+
+/usr/include/sys/_types.h:
+
+/usr/include/machine/_types.h:
+
+/usr/include/machine/endian.h:
+
+/usr/include/ppc/endian.h:
+
+/usr/include/sys/_endian.h:
+
+/usr/lib/gcc/powerpc-apple-darwin8/4.0.1/include/stdint.h:
+
+/usr/include/libkern/OSByteOrder.h:
+
+/usr/include/libkern/ppc/OSByteOrder.h:
+
+/usr/include/sys/mman.h:
+
+/usr/include/sys/stat.h:
+
+/usr/include/unistd.h:
+
+/usr/include/_types.h:
+
+/usr/include/sys/unistd.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/signal.h:
+
+/usr/include/sys/signal.h:
+
+/usr/include/machine/signal.h:
+
+/usr/include/ppc/signal.h:
+
+/usr/include/sys/time.h:
+
+/usr/include/time.h:
+
+/usr/include/machine/_limits.h:
+
+/usr/include/ppc/_limits.h:
+
+/usr/include/fcntl.h:
+
+/usr/include/sys/fcntl.h:
+
+../../../src/porting_layer/include/plat_mmap.h:
+
+../../../src/porting_layer/include/plat_types.h:
+
+../../../src/porting_layer/include/sys/plat_posix.h:
+
+../../../src/porting_layer/include/sys/plat_win32.h:

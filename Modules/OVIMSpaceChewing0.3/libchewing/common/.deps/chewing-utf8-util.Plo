@@ -1,0 +1,21 @@
+chewing-utf8-util.lo chewing-utf8-util.o: chewing-utf8-util.c \
+  /usr/include/stdio.h /usr/include/_types.h /usr/include/sys/_types.h \
+  /usr/include/sys/cdefs.h /usr/include/machine/_types.h \
+  /usr/include/ppc/_types.h /usr/include/string.h \
+  ../../include/chewing-utf8-util.h
+
+/usr/include/stdio.h:
+
+/usr/include/_types.h:
+
+/usr/include/sys/_types.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/machine/_types.h:
+
+/usr/include/ppc/_types.h:
+
+/usr/include/string.h:
+
+../../include/chewing-utf8-util.h:
