@@ -6,4 +6,5 @@ copy .\Result\OVIMEUI.dll %WINDIR%\system32\
 copy .\Result\ovime.ime %WINDIR%\system32\
 copy .\Result\OVPreferences.exe %WINDIR%\OpenVanilla\
 copy .\Result\OVPreferences.exe.manifest %WINDIR%\OpenVanilla\
+copy .\Result\CSharpFormLibrary.dll %WINDIR%\OpenVanilla\
 pause

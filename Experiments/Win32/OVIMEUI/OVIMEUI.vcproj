@@ -4,6 +4,7 @@
 	Version="7.10"
 	Name="OVIMEUI"
 	ProjectGUID="{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}"
+	RootNamespace="OVIMEUI"
 	Keyword="ExtStoredProcProj">
 	<Platforms>
 		<Platform
@@ -15,31 +16,37 @@
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
 			ConfigurationType="2"
-			CharacterSet="1">
+			CharacterSet="1"
+			ManagedExtensions="TRUE">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;..\tinyxml"
+				AdditionalUsingDirectories=""
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
-				MinimalRebuild="TRUE"
-				BasicRuntimeChecks="3"
+				MinimalRebuild="FALSE"
+				BasicRuntimeChecks="0"
 				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
+				DebugInformationFormat="3"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				IgnoreImportLibrary="FALSE"
 				AdditionalDependencies="comctl32.lib imm32.lib"
+				OutputFile="$(OutDir)/$(ProjectName).dll"
 				LinkIncremental="2"
 				ModuleDefinitionFile="OVIMEUI.def"
 				GenerateDebugInformation="TRUE"
+				AssemblyDebug="1"
 				SubSystem="2"
 				ResourceOnlyDLL="FALSE"
-				TargetMachine="1"/>
+				TargetMachine="1"
+				FixedBaseAddress="0"/>
 			<Tool
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="_DEBUG"
@@ -71,10 +78,12 @@
 			IntermediateDirectory="Release"
 			ConfigurationType="2"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
-			CharacterSet="1">
+			CharacterSet="1"
+			ManagedExtensions="TRUE">
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;..\tinyxml"
+				AdditionalUsingDirectories=""
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				StringPooling="TRUE"
 				MinimalRebuild="FALSE"
@@ -90,7 +99,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="comctl32.lib  imm32.lib"
+				AdditionalDependencies="comctl32.lib imm32.lib"
 				LinkIncremental="1"
 				ModuleDefinitionFile="OVIMEUI.def"
 				GenerateDebugInformation="FALSE"

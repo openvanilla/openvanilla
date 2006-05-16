@@ -36,10 +36,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib"
+				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib ..\OVIMEUI\Debug\OVIMEUI.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\AmphiVanilla;..\AmphiVanilla\Debug;"
+				AdditionalLibraryDirectories="..\AmphiVanilla;..\AmphiVanilla\Debug"
 				IgnoreDefaultLibraryNames="scew_d.lib"
 				ModuleDefinitionFile="OVIME.def"
 				GenerateDebugInformation="TRUE"
@@ -94,7 +94,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib AmphiVanilla.lib"
+				AdditionalDependencies="IMM32.LIB libltdl.lib libiconv.lib AmphiVanilla.lib ..\OVIMEUI\Release\OVIMEUI.lib"
 				OutputFile="$(OutDir)/OVIME.ime"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="..\AmphiVanilla;..\AmphiVanilla\Release;"

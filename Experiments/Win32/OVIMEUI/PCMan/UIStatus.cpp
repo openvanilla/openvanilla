@@ -2,6 +2,31 @@
 #include "PCMan.h"
 #include "resource.h"
 
+#pragma managed
+#using <mscorlib.dll>
+#using <System.dll>
+#using <System.Windows.Forms.dll>
+using namespace System;
+using namespace System::Reflection;
+using namespace System::Windows::Forms;
+
+void CSharpWidgetDemo() {	
+	try {
+		Assembly* exAsm
+			= Reflection::Assembly::LoadFile("C:\\WINDOWS\\OpenVanilla\\CSharpFormLibrary.dll");
+		Form* exForm
+			= dynamic_cast<Form*>(exAsm->CreateInstance("CSharpFormLibrary.DemoForm", true));
+		exForm->ShowDialog();
+		/*
+		DemoForm __gc *bar = __gc new DemoForm();
+		bar->ShowDialog();
+		*/
+	} catch (Exception* e) {
+		Console::WriteLine(e->Message);
+	}
+}
+
+#pragma unmanaged
 //	SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
 //  This standard toolbar message provided by Windows has some known bugs.
 //  So I implemented a new function myself to prevent the problem.
@@ -152,7 +177,7 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 				}
 				break;
 			case ID_IME_HELP:
-				
+				CSharpWidgetDemo();				
 				break;
 			default:
 				if( id >= ID_IME_LIST_FIRST && id < ID_IME_LIST_LAST )
