@@ -136,18 +136,18 @@ extern "C" ComponentResult TSBContextEvent(TSBDataPtr ptr, EventRef evnt)
     GetEventParameter(evnt, kEventParamKeyModifiers, typeUInt32, nil,
         sizeof(modifiers), nil, &modifiers);
     
-    UInt32 numkeys[15]={    // keycode (not charcode) for numkeys
+    UInt32 numkeys[16]={    // keycode (not charcode) for numkeys
         // 0,1,2,3,4,5
-        // 6,7,8,9,.,+,-,*,/
+        // 6,7,8,9,.,+,-,*,/,=
         0x52, 0x53, 0x54, 0x55, 0x56, 0x57,
-        0x58, 0x59, 0x5b, 0x5c, 0x41, 0x45, 0x4e, 0x43, 0x4b
+        0x58, 0x59, 0x5b, 0x5c, 0x41, 0x45, 0x4e, 0x43, 0x4b, 0x51
     };
     
     // there is some mysterious OS X numlock key issue, we need
     // this workaround to tackle it
     
     modifiers &= 0xfffeffff;    // first, we remove the numlock mask
-    for (int i=0; i<15; i++) {
+    for (int i=0; i<16; i++) {
         if (kcode==numkeys[i]) {
             modifiers |= 0x10000;   // only if it's numback we put mask back
             break;
