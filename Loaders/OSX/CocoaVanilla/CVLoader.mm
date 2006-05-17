@@ -42,6 +42,26 @@
 #include "NSDictionaryExtension.h"
 #include "OVDisplayServer.h"
 
+// A experiment to make CocoaVanilla safer
+class CVAutorelease {
+public:
+    CVAutorelease() {
+        // NSLog(@"CVAutorelease()");
+        ap=[NSAutoreleasePool new];
+    }
+    ~CVAutorelease() {
+        // NSLog(@"~CVAutorelease()");
+        [ap release];
+    }
+    
+protected:
+    NSAutoreleasePool *ap;
+};
+
+#define CVSAFETY CVAutorelease _cvar;
+
+#define CV_INTERNAL_VERSION @"0.7.3 beta (r1904)"
+
 enum {      // CVLMI = CVLoader Menu Item
     CVLMI_KPGROUPSTART=1000,
     CVLMI_IMGROUPSTART=2000,
@@ -63,8 +83,9 @@ CVLoader::~CVLoader() {
 }
 
 int CVLoader::init(MenuRef m) {
-    // Carbon-app-friendly addition
-    NSAutoreleasePool *pool=[NSAutoreleasePool new];
+    CVSAFETY;
+    NSLog(@"An instance of CocoaVanilla version %@ created", CV_INTERNAL_VERSION);
+
     // UInt32 beginTime;
     // beginTime = TickCount();
     // murmur("CVLoader::init begin");
@@ -119,14 +140,10 @@ int CVLoader::init(MenuRef m) {
     syncMenuAndConfig();
     // murmur("CVLoader::init ticks: %d", TickCount() - beginTime );
     
-    [pool release];
     return 1;
 }
 
 void CVLoader::refreshMenu() {
-    // Carbon-app-friendly addition
-    NSAutoreleasePool *pool=[NSAutoreleasePool new];
-
 	NSDictionary *cfgmenukey=[[cfg dictionary] valueForKey:@"OVMenuManager" default:[[NSMutableDictionary new] autorelease]];
 	if (!menudict) {
 		menudict=[NSMutableDictionary new];
@@ -143,10 +160,10 @@ void CVLoader::refreshMenu() {
 	}
 	
 	checkMenuItems();
-	[pool release];
 }
 
 CVContext *CVLoader::newContext() {
+    CVSAFETY;
     return new CVContext(this);
 }
 
@@ -180,6 +197,7 @@ void CVLoader::setActiveContext(CVContext *c) {
 }
 
 void CVLoader::menuHandler(unsigned int cmd) {
+    CVSAFETY;
     if (immenugroup->clickItem(cmd)) {
 		NSString *pIM=[NSString stringWithString: [loaderdict valueForKey:@"primaryInputMethod" default:@""]];
         syncMenuAndConfig();
@@ -543,11 +561,13 @@ CVContext::CVContext(CVLoader *p) {
 }
 
 CVContext::~CVContext() {
+    CVSAFETY;
     delete buf;
     [contexts release];
 }
 
 void CVContext::activate(TSComposingBuffer *b) {
+    CVSAFETY;
     buf->setComposingBuffer(b);
     loader->setActiveContext(this);
 //  repositionInfoBoxes();
@@ -584,6 +604,7 @@ void CVContext::activate(TSComposingBuffer *b) {
 }
 
 void CVContext::deactivate() {
+    CVSAFETY;
     // if the buf is not empty, it means the user just switches away from the
     // current IM temporarily
     if (!buf->isEmpty())  {
@@ -606,6 +627,7 @@ void CVContext::deactivate() {
 }
 
 void CVContext::fix() {
+    CVSAFETY;
     // we can be 100% sure this is only called when an IM is actually
     // being deactivated, so we send out the remaining characters in the buffer
     if (!buf->isEmpty()) buf->send();
@@ -613,6 +635,7 @@ void CVContext::fix() {
 }
 
 int CVContext::event(char charcode, int modifiers) {
+    CVSAFETY;
     CVKeyCode key(charcode, modifiers);
 	
     loader->srv->closeNotification();

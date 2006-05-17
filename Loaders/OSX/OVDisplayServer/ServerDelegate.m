@@ -66,12 +66,12 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 	candion=YES;
 	[self solveConflict];
 	[candi orderFront:self];
-    nop();
+    // nop();
 }
 - (void)candidateHide {
 	candion=NO;
 	[candi orderOut:self];
-    nop();
+    // nop();
 }
 - (void)candidateUpdate:(bycopy NSString*)s position:(Point)p {
 	[self updateTextInWindow:candi textField:canditext text:s position:p];
@@ -82,11 +82,11 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
     
     if (notistyle!=OVDPS_NOTIFY_DEFAULT) return;
     [noti orderFront:self];
-    nop();
+    // nop();
 }
 - (void)notifyClose {
 	[noti orderOut:self];
-    nop();
+    // nop();
 }
 - (void)notifyFade {
     if (fadetimer) [self stopTimer];
@@ -97,7 +97,7 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 - (void)aboutDialog {
     [aboutdialog setLevel:NSScreenSaverWindowLevel];
     [aboutdialog orderFront:self];
-    nop();
+    // nop();
 }
 - (void)dealloc {
     [defaultbackground release];
@@ -138,7 +138,7 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
     if (fadealpha<=0) {
         [noti orderOut:self];
         [self stopTimer];
-        nop();
+        // nop();
         return;
     }
 	[noti setAlphaValue:fadealpha];
