@@ -125,13 +125,36 @@ extern "C" ComponentResult TSBContextEvent(TSBDataPtr ptr, EventRef evnt)
         return FALSE;
 
     // extract charcode (ASCII) and modifiers
-    UInt32 modifiers=0;
     char charcode=0;
+    UInt32 modifiers=0;    
+    UInt32 kcode=0;
+
+    GetEventParameter(evnt, kEventParamKeyCode, typeUInt32, nil,
+        sizeof(kcode), nil, &kcode);
     GetEventParameter(evnt, kEventParamKeyMacCharCodes, typeChar, nil,
         sizeof(charcode), nil, &charcode);
     GetEventParameter(evnt, kEventParamKeyModifiers, typeUInt32, nil,
         sizeof(modifiers), nil, &modifiers);
-    // fprintf(stderr, "charcode=%d, modifiers=%d\n", charcode, modifiers);
+    
+    UInt32 numkeys[15]={    // keycode (not charcode) for numkeys
+        // 0,1,2,3,4,5
+        // 6,7,8,9,.,+,-,*,/
+        0x52, 0x53, 0x54, 0x55, 0x56, 0x57,
+        0x58, 0x59, 0x5b, 0x5c, 0x41, 0x45, 0x4e, 0x43, 0x4b
+    };
+    
+    // there is some mysterious OS X numlock key issue, we need
+    // this workaround to tackle it
+    
+    modifiers &= 0xfffeffff;    // first, we remove the numlock mask
+    for (int i=0; i<15; i++) {
+        if (kcode==numkeys[i]) {
+            modifiers |= 0x10000;   // only if it's numback we put mask back
+            break;
+        }
+    }
+
+    // fprintf(stderr, "charcode=%x, modifiers=%x, keycode=%x\n", charcode, modifiers, kcode);
 
     IMContext *c=(IMContext*)ptr;
     c->sessionlock=1;
@@ -139,6 +162,37 @@ extern "C" ComponentResult TSBContextEvent(TSBDataPtr ptr, EventRef evnt)
     c->sessionlock=0;    
 
     return r;
+ 
+    // old code snippet from VanillaInput
+    /*
+        Boolean handled;
+        UInt32 eventClass;
+        UInt32 eventKind;
+    
+        handled = FALSE;
+        eventClass = GetEventClass(inEventRef);
+        eventKind = GetEventKind(inEventRef);
+        if(eventClass==kEventClassKeyboard && 
+           (eventKind == kEventRawKeyDown || eventKind == kEventRawKeyRepeat )) {
+            UInt32 keyCode;
+            unsigned char charCode;
+            UInt32 modifiers;
+            GetEventParameter( inEventRef, kEventParamKeyCode, typeUInt32, nil, sizeof (keyCode), nil, &keyCode );
+            GetEventParameter( inEventRef, kEventParamKeyMacCharCodes, typeChar, nil, sizeof( charCode ), nil, &charCode );
+            GetEventParameter( inEventRef, kEventParamKeyModifiers, typeUInt32, nil,
+    sizeof( modifiers ), nil, &modifiers );
+    
+            fprintf(stderr, "charcode=%d, modifiers=%d, keyCode=%x\n", charCode, modifiers, keyCode);
+    
+            IMContext *c=(IMContext*)ptr;
+            c->sessionlock=1;
+            handled=IMContextEvent((IMContext*)ptr, charCode, modifiers);
+            c->sessionlock=0;    
+                               
+        }
+        return handled;
+    */
+   
 }
 
 extern "C" ComponentResult TSBMenuHandler(UInt32 cmd)
