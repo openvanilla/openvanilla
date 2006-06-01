@@ -4,7 +4,7 @@ MODULEID=OVIMChewing03
 SOURCES=OVIMChewing
 OBJS=OVIMChewing.o
 CFLAGS+=-I/usr/include/chewing
-LDFLAGS+=-lchewing
+LDFLAGS+=-L/usr/lib -llibchewing
 
 include ../Mk/ov.module.mk
 
