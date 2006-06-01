@@ -1,16 +1,44 @@
-#ifndef __PLAT_MMAP_H__
-#define __PLAT_MMAP_H__
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/types.h>
 
-#include "plat_types.h"
+#define PLAT_SEPARATOR "/"
+#define PLAT_TMPDIR "/tmp"
+#define PLAT_MKDIR(dir) \
+	mkdir(dir, S_IRWXU)
+#define PLAT_RENAME(oldpath, newpath) \
+	rename(oldpath, newpath)
+#define PLAT_UNLINK(path) \
+	unlink(path)
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif /* __cplusplus */
+//#ifdef __cplusplus
+//extern "C"
+//{
+//#endif /* __cplusplus */
 
-/* flags */
+/* plat_mmap.h */
+typedef struct plat_mmap {
+	int fd;
+	void *address;
+	size_t sizet;
+	int fAccessAttr;
+} plat_mmap;
+
+//#ifdef __cplusplus
+//}
+//#endif /* __cplusplus */
+
+//#endif /* UNDER_POSIX */
+//#endif /* PLAT_POSIX_H */
+
 #define FLAG_ATTRIBUTE_READ	0x00000001
 #define FLAG_ATTRIBUTE_WRITE	0x00000002
+
+//extern "C"
+//{
+/* flags */
 
 /* Set the mmap handle to be invalid */
 void plat_mmap_set_invalid( plat_mmap *handle );
@@ -36,9 +64,4 @@ unsigned int plat_mmap_get_alloc_granularity();
 /* Unmap the mmap handle */
 void plat_mmap_unmap( plat_mmap *handle );
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
-#endif /* __PLAT_MMAP_H__ */
-
+//}

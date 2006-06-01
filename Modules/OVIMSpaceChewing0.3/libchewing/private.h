@@ -6,7 +6,7 @@
 #endif
 
 /* Platform-dependent declaration */
-#include "plat_posix.h"
+//#include "plat_posix.h"
 
 #ifdef ENABLE_DEBUG
 #include <stdarg.h>

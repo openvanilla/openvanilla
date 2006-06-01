@@ -16,9 +16,10 @@
 #include "hanyupinyin.h"
 #include "hash.h"
 #include "private.h"
+#include "plat_mmap.h"
 
 #define PINYIN_TAB_NAME "pinyin.tab"
-
+#define CHEWING_DATADIR "/Library/OpenVanilla/0.7.2/Modules/OVIMSpaceChewing03"
 /*
   according to XCIN bims_pinyin.cin
  */
@@ -32,7 +33,7 @@ static void FreeMap()
 		free(keytable);
 }
 
-static void InitMap()
+void InitMap( const char *prefix )
 {
 	int i;
 	FILE *fd;
@@ -88,8 +89,8 @@ static int compkey( const void *k1, const void *k2 )
  */
 int HanyuPinYinToZuin( char *pinyinKeySeq, char *zuinKeySeq )
 {
-	if ( ! INIT_FLAG )
-		InitMap();
+	//if ( ! INIT_FLAG )
+	//	InitMap();
 	/*
 	 * pinyinKeySeq[] should have at most 6 letters (Shuang)
 	 * zuinKeySeq[] has at most 3 letters.

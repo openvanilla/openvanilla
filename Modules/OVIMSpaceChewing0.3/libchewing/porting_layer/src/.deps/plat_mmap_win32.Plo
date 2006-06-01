@@ -1,4 +1,0 @@
-plat_mmap_win32.lo plat_mmap_win32.o: plat_mmap_win32.c \
-  ../../../include/config.h
-
-../../../include/config.h:

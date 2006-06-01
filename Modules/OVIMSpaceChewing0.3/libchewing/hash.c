@@ -19,6 +19,7 @@
 #include "hash.h"
 #include "private.h"
 #include "global.h"
+#include "plat_mmap.h"
 
 int chewing_lifetime;
 
