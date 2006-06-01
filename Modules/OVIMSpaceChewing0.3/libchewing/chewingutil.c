@@ -121,8 +121,9 @@ int HaninSymbolInput(
 		"α","β","γ","δ","ε","ζ","η","θ",
 		"ι","κ","λ","μ","ν","ξ","ο","π",
 		"ρ","σ","τ","υ","φ","χ","ψ","ω"};
-	int i, all = 216;
+	int i, all = 216, len;
 
+	len = pai->avail[ pai->currentAvail ].len;
 	pci->nTotalChoice = 0;
 	for ( i = 0; i< all; i++ ) {
 		ueStrNCpy( pci->totalChoiceStr[ pci->nTotalChoice ],
@@ -133,7 +134,8 @@ int HaninSymbolInput(
 	pai->avail[ 0 ].id = -1;  
 	pai->nAvail = 1;
 	pai->currentAvail = 0;
-	pci->nChoicePerPage = (selectAreaLen - 5) / ( 2 + 3) ;
+	//pci->nChoicePerPage = (selectAreaLen - 5) / ( 2 + 3) ;
+	pci->nChoicePerPage = selectAreaLen / (len + 1);
 	if ( pci->nChoicePerPage > MAX_SELKEY ) {
 		pci->nChoicePerPage = MAX_SELKEY;
 	}
@@ -982,7 +984,7 @@ int OpenSymbolChoice( ChewingData *pgdata )
 		pci->nTotalChoice++; 
 	}
 
-	pci->nChoicePerPage = (pgdata->config.selectAreaLen - 5) / ( 2 + 3) ;
+	pci->nChoicePerPage = 8 ;
 	if ( pci->nChoicePerPage > MAX_SELKEY )
 		pci->nChoicePerPage = MAX_SELKEY ;
 	pci->nPage = CEIL_DIV( pci->nTotalChoice, pci->nChoicePerPage );

@@ -127,7 +127,6 @@ protected:
         if(chewing_cand_TotalPage(im) > 0) {
 
             char s[64];
-	/*		char *ch, selkey; */
 	    int i=1;
 	    char str[ 20 ];
 	    char *cand_string;
@@ -136,7 +135,7 @@ protected:
 	    while ( chewing_cand_hasNext( im ) ) {
 	       if ( i == chewing_cand_ChoicePerPage( im ) )
 		  break;
-	       sprintf( str, "%d.", i );
+	       sprintf( str, "%c.", im->data->config.selKey[i - 1]);
 	       textbar->append( str );
 	       cand_string = chewing_cand_String( im );
 	       sprintf( str, " %s ", cand_string );
@@ -200,7 +199,7 @@ class OVIMChewing03 : public OVInputMethod {
 	 if(!l->keyExist("keyboardLayout")) l->setInteger("keyboardLayout", 0);
 	 chewing_set_KBType( ctx, l->getInteger("keyboardLayout"));
 
-	 config.selectAreaLen = 20;
+	 config.selectAreaLen = 16;
 	 config.maxChiSymbolLen = 16;
 	 int i;
 	 for ( i = 0; i < 10; i++ )
