@@ -52,16 +52,22 @@ CHEWING_API int chewing_buffer_Check( ChewingContext *ctx )
 	return (ctx->output->chiSymbolBufLen != 0);
 }
 
-CHEWING_API char *chewing_buffer_String( ChewingContext *ctx )
+CHEWING_API char *chewing_buffer_String( ChewingContext *ctx, int from, int to )
 {
 	int i;
 	char *s = (char *) calloc(
 		1 + ctx->output->chiSymbolBufLen,
 		sizeof(char) * MAX_UTF8_SIZE );
-	for ( i = 0; i < ctx->output->chiSymbolBufLen; i++ ) {
-		strcat( s, (char *) (ctx->output->chiSymbolBuf[ i ].s) );
+	if(from >= 0 && to < ctx->output->chiSymbolBufLen ) {
+	   for ( i = from; i <= to; i++ ) {
+	      strcat( s, (char *) (ctx->output->chiSymbolBuf[ i ].s) );
+	   }
 	}
 	return s;
+}
+
+CHEWING_API char *chewing_buffer_String_End( ChewingContext *ctx, int from) {
+	return chewing_buffer_String(ctx, from, ctx->output->chiSymbolBufLen -1 );
 }
 
 /**
@@ -99,6 +105,17 @@ CHEWING_API int chewing_cursor_Current( ChewingContext *ctx )
 {
 	return (ctx->output->chiSymbolCursor);
 }
+
+CHEWING_API int chewing_point_Start( ChewingContext *ctx )
+{
+	return (ctx->output->PointStart);
+}
+
+CHEWING_API int chewing_point_End( ChewingContext *ctx )
+{
+	return (ctx->output->PointEnd);
+}
+
 
 CHEWING_API int chewing_cand_CheckDone( ChewingContext *ctx )
 {

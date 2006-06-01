@@ -32,7 +32,8 @@ int chewing_commit_Check( ChewingContext *ctx );
  */
 char *chewing_commit_String( ChewingContext *ctx );
 
-char *chewing_buffer_String( ChewingContext *ctx );
+char *chewing_buffer_String( ChewingContext *ctx , int from, int to);
+char *chewing_buffer_String_End( ChewingContext *ctx , int from);
 int chewing_buffer_Check( ChewingContext *ctx );
 
 /**
@@ -46,7 +47,9 @@ char *chewing_zuin_String( ChewingContext *ctx, int *zuin_count );
 int chewing_zuin_Check( ChewingContext *ctx );
 
 
-char *chewing_cursor_Current( ChewingContext *ctx );
+int chewing_cursor_Current( ChewingContext *ctx );
+int chewing_point_Start( ChewingContext *ctx );
+int chewing_point_End( ChewingContext *ctx );
 
 
 int chewing_cand_CheckDone( ChewingContext *ctx );
