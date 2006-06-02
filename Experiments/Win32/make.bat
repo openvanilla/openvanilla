@@ -18,7 +18,7 @@ copy OVPreferences\OVPreferences.exe.manifest Result\
 copy AmphiVanilla\libltdl3.dll Result\
 copy AmphiVanilla\libiconv-2.dll Result\
 copy SQLite3\sqlite3.dll Result\
-copy tinyxml\Debug\tinyxml.dll Result\
+copy tinyxml\tinyxml.dll Result\
 del Result\*.obj
 del Result\*.exp
 del Result\*.lib
