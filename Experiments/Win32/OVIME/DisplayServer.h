@@ -2,7 +2,7 @@
 #define DISPLAYSERVER_H
 
 #include <windows.h>
-#include "imm.h"
+#include <immdev.h>
 #include "ExtraStructs.h"
 #include "AVDisplayServer.h"
 

@@ -19,7 +19,7 @@ AVDisplayServer *DisplayServer::releaseIMC()
 AVDisplayServer *DisplayServer::setBufString(const char *str)
 {
 	wchar_t wstr[1024];
-	MultiByteToWideChar(CP_UTF8, 0, str, strlen(str)+1, wstr, 1024);
+	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
 	wcscpy(lpMyPrivate->PreEditStr, wstr);
 	MakeCompStr(lpMyPrivate, lpCompStr);
 	return this;
@@ -27,9 +27,9 @@ AVDisplayServer *DisplayServer::setBufString(const char *str)
 AVDisplayServer *DisplayServer::sendBuf(const char *str)
 {
 	wchar_t wstr[1024];
-	MultiByteToWideChar(CP_UTF8, 0, str, strlen(str)+1, wstr, 1024);
+	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
 	wcscpy(GETLPRESULTSTR(lpCompStr), wstr);
-	lpCompStr->dwResultStrLen = wcslen(wstr);
+	lpCompStr->dwResultStrLen = (int)wcslen(wstr);
 	wcscpy(lpMyPrivate->PreEditStr, L"");
 	MakeCompStr(lpMyPrivate, lpCompStr);
 	
@@ -42,7 +42,7 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 AVDisplayServer *DisplayServer::setCandiString(const char *str)
 {
 	wchar_t wstr[1024];
-	MultiByteToWideChar(CP_UTF8, 0, str, strlen(str)+1, wstr, 1024);
+	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
 	wcscpy(lpMyPrivate->CandStr, wstr);
 	UpdateCandidate(lpIMC, wstr);
 //	MyGenerateMessage(hIMC,
@@ -52,7 +52,7 @@ AVDisplayServer *DisplayServer::setCandiString(const char *str)
 AVDisplayServer *DisplayServer::showNotify(const char *str)
 {
 	wchar_t wstr[1024];
-	MultiByteToWideChar(CP_UTF8, 0, str, strlen(str)+1, wstr, 1024);
+	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
 	UIShowNotifyWindow(wstr);
 	return this;
 }

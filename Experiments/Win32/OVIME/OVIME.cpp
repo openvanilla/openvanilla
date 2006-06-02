@@ -17,7 +17,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		loader->connectDisplayServer(dsvr);
 		for(int i = 0;; ++i) {
 			if(loader->moduleName(i, str)) {
-				MultiByteToWideChar(CP_UTF8, 0, str, strlen(str)+1, wstr, 1024);
+				MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
 				UIPushInputMethod(wstr);
 			} else {
 				break;

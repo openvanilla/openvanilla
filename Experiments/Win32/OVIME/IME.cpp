@@ -27,7 +27,8 @@ MyGenerateMessage(HIMC hIMC, UINT msg, WPARAM wParam, LPARAM lParam)
             return;
 		
         lpTransMsg += (lpIMC->dwNumMsgBuf);
-        lpTransMsg->uMsg = msg;
+        //lpTransMsg->uMsg = msg;
+		lpTransMsg->uMsg = msg;
 		lpTransMsg->wParam=wParam;
 		lpTransMsg->lParam=lParam;
 
@@ -52,8 +53,8 @@ MyGenerateMessageToTransKey(LPDWORD lpdwTransKey, UINT *uNumTranMsgs,
 	
 	lpdwTemp = (LPDWORD)lpdwTransKey+1+(*uNumTranMsgs)*3;
 	*(lpdwTemp++) = msg;
-	*(lpdwTemp++) = wParam;
-	*(lpdwTemp++) = lParam;
+	*(lpdwTemp++) = (DWORD)wParam;
+	*(lpdwTemp++) = (DWORD)lParam;
 
 	(*uNumTranMsgs)++;
 
@@ -284,7 +285,7 @@ BOOL APIENTRY
 NotifyIME(HIMC hIMC,DWORD dwAction,DWORD dwIndex,DWORD dwValue)
 {
     BOOL bRet = FALSE;
-	LPINPUTCONTEXT lpIMC;
+	//LPINPUTCONTEXT lpIMC;
 	
     switch(dwAction)
     {

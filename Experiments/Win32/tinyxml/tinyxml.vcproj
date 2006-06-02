@@ -33,8 +33,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				SubSystem="2"
-				OptimizeReferences="0"
-				EnableCOMDATFolding="0"
+				OptimizeReferences="1"
+				EnableCOMDATFolding="1"
 				ImportLibrary="$(OutDir)/$(TargetName).lib"
 				TargetMachine="1"/>
 			<Tool

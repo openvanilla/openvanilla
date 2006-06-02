@@ -3,7 +3,8 @@
 
 #include <windows.h>
 #include <tchar.h>
-#include "imm.h"
+#include <immdev.h>
+
 #include "ExtraStructs.h"
 #include "Vk.h"
 #include "OVIMEUI.h"

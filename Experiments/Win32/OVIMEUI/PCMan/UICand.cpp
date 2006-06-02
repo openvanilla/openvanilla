@@ -144,7 +144,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		while( cand )
 		{
 			++numCand;
-			int len = wcslen( cand );
+			int len = (int)wcslen( cand );
 			GetTextExtentPoint32(hDC, cand, len, &candsz);
 			candsz.cx += 4;
 			candsz.cy += 2;
@@ -213,7 +213,7 @@ void PaintCandWindow(HWND hCandWnd)
 	HDC hDC;
 	HFONT oldFont;
 	RECT rc;
-	DWORD i;
+	//DWORD i;
 
 	hDC = BeginPaint(hCandWnd,&ps);
 	oldFont = (HFONT)SelectObject(hDC, hUIFont);
@@ -235,7 +235,7 @@ void PaintCandWindow(HWND hCandWnd)
 		for( int i = 0; i < numCand; ++i )
 		{
 			++num;
-			int len = wcslen( cand );
+			int len = (int)wcslen( cand );
 			SIZE candsz;
 			GetTextExtentPoint32(hDC, cand, len, &candsz);
 			candsz.cx += 4;

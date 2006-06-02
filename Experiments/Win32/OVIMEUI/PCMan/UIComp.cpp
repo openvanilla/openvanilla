@@ -52,7 +52,7 @@ void UICreateCompWindow(HWND hUIWnd)
 		_stprintf(szStr, _T("AAAAAAAAAAAAA"));
 		hDC = GetDC(uiComp. hWnd);
 		oldFont = (HFONT)SelectObject(hDC, hUIFont);
-		GetTextExtentPoint(hDC, szStr, _tcslen(szStr), &sz);
+		GetTextExtentPoint(hDC, szStr, (int)_tcslen(szStr), &sz);
 		SelectObject(hDC, oldFont);
 		ReleaseDC(uiComp.hWnd,hDC);
 
@@ -93,7 +93,7 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		{
 			hDC = GetDC(uiComp.hWnd);
 			oldFont = (HFONT)SelectObject(hDC, hUIFont);
-			GetTextExtentPoint(hDC, lpCompStr, wcslen(lpCompStr), &sz);
+			GetTextExtentPoint(hDC, lpCompStr, (int)wcslen(lpCompStr), &sz);
 			SelectObject(hDC, oldFont);
 			ReleaseDC(uiComp.hWnd, hDC);
 			if( *lpCompStr )

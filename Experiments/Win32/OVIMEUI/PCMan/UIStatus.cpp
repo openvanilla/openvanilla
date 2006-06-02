@@ -33,7 +33,7 @@ void CSharpWidgetDemo() {
 void GetToolbarSize(HWND toolbar, SIZE *sz)
 {
 	sz->cx = sz->cy = 0;
-	int c = SendMessage( toolbar, TB_BUTTONCOUNT, 0, 0);
+	int c = (int)SendMessage( toolbar, TB_BUTTONCOUNT, 0, 0);
 	for( int i = 0; i < c ; ++i )
 	{
 		RECT itemrc;
@@ -87,7 +87,7 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 				SetWindowLong(hWnd, FIGWL_MOUSE, 0L);
 				if(msg == WM_RBUTTONUP) {
 					CurrentIC++;
-					if(CurrentIC > IC.size() - 1)
+					if(CurrentIC > (int)IC.size() - 1)
 						CurrentIC = 0;
 					InvalidateRect(uiStatus.hWnd,NULL, FALSE);
 				}
@@ -170,7 +170,7 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 				{
 					TCHAR exe_path[MAX_PATH];
 					TCHAR file_name[] = _T("\\OpenVanilla\\OVPreferences.exe");
-				    GetWindowsDirectory(exe_path, MAX_PATH - _tcslen( file_name ) );
+				    GetWindowsDirectory(exe_path, MAX_PATH - (int)_tcslen( file_name ) );
 				    _stprintf(exe_path, _T("%s\\%s"), exe_path, file_name);
 
 					ShellExecute( NULL, _T("open"), exe_path, NULL, NULL, SW_SHOWNORMAL );
@@ -283,8 +283,8 @@ void UIMoveStatusWindow(HWND hUIWnd, int X, int Y)
 
 	if (IsWindow(uiStatus.hWnd))
 	{
-		HDC hDC;
-		HFONT oldFont;
+		//HDC hDC;
+		//HFONT oldFont;
 		POINT pt;
 		RECT screenrc;
 		SIZE sz;

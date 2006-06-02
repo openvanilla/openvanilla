@@ -111,7 +111,7 @@ BOOL IMEUIUnRegisterClass( HINSTANCE hInstance )
 	UnregisterClass(UICOMPCLASSNAME, hInstance);
 	UnregisterClass(UICANDCLASSNAME, hInstance);
 	UnregisterClass(UINOTIFYCLASSNAME, hInstance);
-	for(int i = 0; i < IC.size(); i++)
+	for(int i = 0; i < (int)IC.size(); i++)
 		free(IC.at(i));
 	CurrentIC = 0;
 	return TRUE;

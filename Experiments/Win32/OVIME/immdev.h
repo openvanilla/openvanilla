@@ -22,8 +22,14 @@ Unless otherwise stated in individual source files,
     DISCLAIMED.  This includes but is not limited to warranties of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
-#ifndef _IMM_H
-#define _IMM_H
+
+//<comment author='b6s'> DDK has chaned this header's name to IMMDEV.h
+//#ifndef _IMM_H
+//#define _IMM_H
+//</comment>
+#ifndef _IMMDEV_
+#define _IMMDEV_
+
 #if __GNUC__ >=3
 #pragma GCC system_header
 #endif
@@ -31,6 +37,11 @@ Unless otherwise stated in individual source files,
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+//<comment author='b6s'> To avoid macro redefinition
+#ifndef _IMM_SDK_DEFINED_
+#define _IMM_SDK_DEFINED_
+
 #define WM_CONVERTREQUESTEX 0x108
 #define WM_IME_STARTCOMPOSITION 0x10D
 #define WM_IME_ENDCOMPOSITION 0x10E
@@ -268,12 +279,7 @@ extern "C" {
 #define VK_PROCESSKEY 0x0E5
 #endif
 #define STYLE_DESCRIPTION_SIZE 32
-// kanru
-#define IME_PROP_KBD_CHAR_FIRST 2
-// http://earlsoft.co.uk/api/constant.php?name=IME_PROP_UNICODE
 #define IME_PROP_UNICODE 0x80000
-#define IMMGWL_IMC 0
-typedef const void *PCVOID, *LPCVOID;
 
 typedef DWORD HIMC;
 typedef DWORD HIMCC;
@@ -337,6 +343,21 @@ typedef struct tagIMEMENUITEMINFOW {
 	HBITMAP hbmpItem;
 } IMEMENUITEMINFOW,*PIMEMENUITEMINFOW,*LPIMEMENUITEMINFOW;
 // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/wceinternational5/html/wce50lrfCOMPOSITIONSTR.asp
+
+#endif // _IMM_SDK_DEFINED_
+
+#ifndef _IMM_DDK_DEFINED_
+#define _IMM_DDK_DEFINED_
+
+//<comment author='b6s'> These two are not in imm.h
+typedef const void *PCVOID, *LPCVOID;
+#define IMMGWL_IMC 0
+//</comment>
+
+// kanru
+#define IME_PROP_KBD_CHAR_FIRST 2
+// http://earlsoft.co.uk/api/constant.php?name=IME_PROP_UNICODE
+
 typedef struct tagCOMPOSITIONSTR {
   DWORD dwSize;
   DWORD dwCompReadAttrLen;
@@ -436,8 +457,8 @@ BOOL WINAPI ImmReleaseContext(HWND,HIMC);
 HIMC WINAPI ImmAssociateContext(HWND,HIMC);
 LONG WINAPI ImmGetCompositionStringA(HIMC,DWORD,PVOID,DWORD);
 LONG WINAPI ImmGetCompositionStringW(HIMC,DWORD,PVOID,DWORD);
-BOOL WINAPI ImmSetCompositionStringA(HIMC,DWORD,PCVOID,DWORD,PCVOID,DWORD);
-BOOL WINAPI ImmSetCompositionStringW(HIMC,DWORD,PCVOID,DWORD,PCVOID,DWORD);
+//BOOL WINAPI ImmSetCompositionStringA(HIMC,DWORD,PCVOID,DWORD,PCVOID,DWORD);
+//BOOL WINAPI ImmSetCompositionStringW(HIMC,DWORD,PCVOID,DWORD,PCVOID,DWORD);
 DWORD WINAPI ImmGetCandidateListCountA(HIMC,PDWORD);
 DWORD WINAPI ImmGetCandidateListCountW(HIMC,PDWORD);
 DWORD WINAPI ImmGetCandidateListA(HIMC,DWORD,PCANDIDATELIST,DWORD);
@@ -542,4 +563,6 @@ BOOL WINAPI ImmGenerateMessage(HIMC hIMC);
 #ifdef __cplusplus
 }
 #endif
-#endif
+
+#endif //_IMM_DDK_DEFINED_
+#endif // _IMMDEV_

@@ -52,7 +52,7 @@ void UICreateNotifyWindow(HWND hUIWnd)
 		_stprintf(szStr, _T("A"));
 		hDC = GetDC(uiNotify. hWnd);
 		oldFont = (HFONT)SelectObject(hDC, hUIFont);
-		GetTextExtentPoint(hDC, szStr, _tcslen(szStr), &sz);
+		GetTextExtentPoint(hDC, szStr, (int)_tcslen(szStr), &sz);
 		SelectObject(hDC, oldFont);
 		ReleaseDC(uiNotify.hWnd,hDC);
 
@@ -125,7 +125,7 @@ void UIShowNotifyWindow(wchar_t* lpStr)
 
 		hDC = GetDC(uiNotify.hWnd);
 		oldFont = (HFONT)SelectObject(hDC, hUIFont);
-		GetTextExtentPoint(hDC, lpNotifyStr, wcslen(lpNotifyStr), &sz);
+		GetTextExtentPoint(hDC, lpNotifyStr, (int)wcslen(lpNotifyStr), &sz);
 		SelectObject(hDC, oldFont);
 
 		sz.cy = uiNotify.sz.cy;
@@ -154,7 +154,7 @@ void PaintNotifyWindow(HWND hNotifyWnd)
 	HDC hDC;
 	HFONT oldFont;
 	RECT rc;
-	DWORD i;
+	//DWORD i;
 
 	hDC = BeginPaint(hNotifyWnd,&ps);
 	oldFont = (HFONT)SelectObject(hDC, hUIFont);
@@ -163,7 +163,7 @@ void PaintNotifyWindow(HWND hNotifyWnd)
 
 	if(lpNotifyStr)
 	{
-		ExtTextOut( hDC, 1, 1, ETO_OPAQUE, &rc, lpNotifyStr, wcslen(lpNotifyStr), NULL);
+		ExtTextOut( hDC, 1, 1, ETO_OPAQUE, &rc, lpNotifyStr, (int)wcslen(lpNotifyStr), NULL);
 	}
 	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_3DFACE), 0/*GetSysColor(COLOR_3DDKSHADOW)*/);
 	SelectObject(hDC, oldFont);

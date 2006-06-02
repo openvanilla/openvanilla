@@ -5,7 +5,7 @@ void MakeCompStr(LPMYPRIVATE lpMyPrivate, LPCOMPOSITIONSTRING lpCompStr)
 {
 	wcscpy(GETLPCOMPSTR(lpCompStr), L"");
 	swprintf(GETLPCOMPSTR(lpCompStr), lpMyPrivate->PreEditStr);
-	lpCompStr->dwCompStrLen = wcslen(GETLPCOMPSTR(lpCompStr));
+	lpCompStr->dwCompStrLen = (DWORD)wcslen(GETLPCOMPSTR(lpCompStr));
 }
 
 void InitCompStr(LPCOMPOSITIONSTRING lpCompStr)
@@ -65,7 +65,7 @@ void UpdateCandidate(LPINPUTCONTEXT lpIMC, const wchar_t* candis)
 		wchar_t* lpStr;
 		lpCandList = (LPCANDIDATELIST)((LPSTR)lpCandInfo
 			+ lpCandInfo->dwOffset[0]);
-		int rlen = wcslen(candis);
+		int rlen = (int)wcslen(candis);
 		int n = 0;
 		int ln = 0;
 		for( int i = 0; i < rlen; i++ )
