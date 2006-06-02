@@ -130,8 +130,8 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	if (lKeyData & 0x80000000)	return FALSE;
 	if (uVKey == VK_SHIFT || uVKey == VK_CONTROL || uVKey == VK_MENU) return FALSE;
 
-    if( LOWORD(uVKey) == VK_SPACE &&
-		(lpbKeyState[VK_CONTROL] & 0x80) || (lpbKeyState[VK_SHIFT] & 0x80))
+    if(LOWORD(uVKey) == VK_SPACE &&
+		((lpbKeyState[VK_CONTROL] & 0x80) || (lpbKeyState[VK_SHIFT] & 0x80)))
 		return TRUE;
 
 	lpCompStr = (LPCOMPOSITIONSTRING)ImmLockIMCC(lpIMC->hCompStr);
