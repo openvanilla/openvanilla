@@ -122,59 +122,19 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	LPINPUTCONTEXT lpIMC;
 	LPCOMPOSITIONSTRING lpCompStr;
 
-//	UINT uNumTranKey;
-	BOOL RetVal = TRUE;
-	BOOL fOpen;
 	int spec;
-	static BOOL fPressOther = FALSE;
-	static BOOL fFirst = TRUE;
 	int k;
 
-	if ((lKeyData & 0x80000000) && (uVKey != VK_SHIFT || uVKey != VK_CONTROL || uVKey != VK_CAPITAL))
-		return FALSE;
+	if (!hIMC) return FALSE;
+	if (!(lpIMC = ImmLockIMC(hIMC))) return FALSE;
+	if (lKeyData & 0x80000000)	return FALSE;
+	if (uVKey == VK_SHIFT || uVKey == VK_CONTROL || uVKey == VK_MENU) return FALSE;
 
-	if (!(lKeyData & 0x80000000) && uVKey == VK_SHIFT)
-		return FALSE;
-
-	if (!(lKeyData & 0x80000000) && uVKey == VK_CONTROL)
-		return FALSE;
-
-	if (!(lKeyData & 0x80000000) && uVKey == VK_CAPITAL)
-		return FALSE;
-
-	if (lpbKeyState[VK_MENU] & 0x80 ) return FALSE;
-
-	if(uVKey != VK_CONTROL && lpbKeyState[VK_CONTROL] & 0x80 ) {
-		fPressOther = TRUE;
-		return FALSE;
-	}
-	if (!hIMC)
-		return 0;
-
-	if (!(lpIMC = ImmLockIMC(hIMC)))
-		return 0;
-
-	fOpen = lpIMC->fOpen;
-
-	if(uVKey == VK_CONTROL && (lKeyData & 0x80000000) && !fPressOther && !fFirst){
-		fPressOther = FALSE;
-
-		if(fOpen) {
-			lpIMC->fOpen=FALSE;
-			//MakeResultString(hIMC,FALSE);
-		}
-		else lpIMC->fOpen=TRUE;
-
-		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_SETOPENSTATUS, 0);
-		return FALSE;
-	}
-
-	fPressOther = FALSE;
-
-	if(fFirst) fFirst = FALSE;
+    if( LOWORD(uVKey) == VK_SPACE &&
+		(lpbKeyState[VK_CONTROL] & 0x80) || (lpbKeyState[VK_SHIFT] & 0x80))
+		return TRUE;
 
 	lpCompStr = (LPCOMPOSITIONSTRING)ImmLockIMCC(lpIMC->hCompStr);
-
 	if(wcslen(GETLPCOMPSTR(lpCompStr)) == 0)
 		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);
 	
@@ -184,8 +144,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	WORD out[2];
 	spec = ToAscii(uVKey, MapVirtualKey(uVKey, 0), lpbKeyState, (LPWORD)&out, 0);
 	DebugLog("KEY: %c\n", out[0]);
-	switch(LOWORD(uVKey))
-	{
+	switch(LOWORD(uVKey))	{
 	case VK_PRIOR: // pageup
 		k = 11;
 		break;
@@ -214,7 +173,8 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		k = 127;
 		break;
 	default:
-		DebugLog("uVKey: %x, %c\n", LOWORD(uVKey), LOWORD(uVKey));
+		//DebugLog("uVKey: %x, %c\n", LOWORD(uVKey), LOWORD(uVKey));
+		break;
 	}
 	
 	if(spec == 1)
@@ -223,23 +183,27 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	AVKeyCode keycode(k);
 	DWORD conv, sentence;
 	ImmGetConversionStatus( hIMC, &conv, &sentence);
+
 	if( !(conv & IME_CMODE_NATIVE) )	// AlphaNumaric mode
+		keycode.setCapslock(1);
+	if(LOWORD(lpbKeyState[VK_CAPITAL]))
 		keycode.setCapslock(1);
 	if(lpbKeyState[VK_SHIFT] & 0x80)
 		keycode.setShift(1);
-	if(LOWORD(lpbKeyState[VK_CAPITAL]) )
-		keycode.setCapslock(1);
+	if(lpbKeyState[VK_CONTROL] & 0x80)
+		keycode.setCtrl(1);
+	if(lpbKeyState[VK_MENU] & 0x80)
+		keycode.setAlt(1);
+
 	dsvr->lockIMC(hIMC);
 	loader = AVLoader::getLoader();
-	if(loader->keyEvent(UICurrentInputMethod(), keycode))
-	{
-		RetVal = TRUE;
+	BOOL retVal = FALSE;
+	if(loader->keyEvent(UICurrentInputMethod(), keycode)) {
+		retVal = TRUE;
 		MyGenerateMessage(hIMC,
 				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
-	}
-	else
-	{
-		RetVal = FALSE;
+	} else {
+		retVal = FALSE;
 		MyGenerateMessage(hIMC,
 				WM_IME_ENDCOMPOSITION, 0, 0);
 	}
@@ -247,7 +211,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	ImmUnlockIMCC(lpIMC->hCompStr);
 	ImmUnlockIMC(hIMC);
 
-	return RetVal; 
+	return retVal; 
 }
 
 BOOL APIENTRY 
