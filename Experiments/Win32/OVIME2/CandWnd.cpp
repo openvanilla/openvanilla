@@ -3,7 +3,6 @@
 #include "OVIME2.h"
 #include "DrawUtil.h"
 #include "CandList.h"
-#include "imm.h"
 #include "IMCLock.h"
 #include "IMEUI.h"
 #include "IMEUILock.h"
@@ -12,7 +11,7 @@
 
 #include <tchar.h>
 #include <windows.h>
-
+#include <immdev.h>
 
 void CandWnd::UpdateFont()
 {

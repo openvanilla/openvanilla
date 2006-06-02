@@ -15,8 +15,12 @@ CompStr::CompStr(void)
 	cs.dwCompReadAttrLen = 0;
 	memset( readAttr, 0, sizeof(readAttr) );
 
-	cs.dwCompReadClauseOffset = DWORD( (BYTE*)&readClause[0] - (BYTE*)this);
-	cs.dwCompReadClauseLen = 0;
+	//<comment author='b6s'> Change to MinGW imm header's attribute names
+	//cs.dwCompReadClauseOffset = DWORD( (BYTE*)&readClause[0] - (BYTE*)this);
+	//cs.dwCompReadClauseLen = 0;
+	cs.dwCompReadClsOffset = DWORD( (BYTE*)&readClause[0] - (BYTE*)this);
+	cs.dwCompReadClsLen = 0;
+	//</comment>
 	memset( readClause, 0, sizeof(readClause) );
 
 
@@ -28,8 +32,12 @@ CompStr::CompStr(void)
 	cs.dwCompAttrLen = 0;
 	memset( compAttr, 0, sizeof(compAttr) );
 
-	cs.dwCompClauseOffset = DWORD( (BYTE*) &compClause[0] - (BYTE*)this);
-	cs.dwCompClauseLen = 0;
+	//<comment author='b6s'> Change to MinGW imm header's attribute names
+	//cs.dwCompClauseOffset = DWORD( (BYTE*) &compClause[0] - (BYTE*)this);
+	//cs.dwCompClauseLen = 0;
+	cs.dwCompClsOffset = DWORD( (BYTE*) &compClause[0] - (BYTE*)this);
+	cs.dwCompClsLen = 0;
+	//</comment>
 	memset( compClause, 0, sizeof(compClause) );
 
 
@@ -37,16 +45,24 @@ CompStr::CompStr(void)
 	cs.dwResultReadStrLen = 0;
 	memset( resultReadStr, 0, sizeof(resultReadStr) );
 
-	cs.dwResultClauseOffset = DWORD( (BYTE*)&resultClause[0] - (BYTE*)this);
-	cs.dwResultClauseLen = 0;
+	//<comment author='b6s'> Change to MinGW imm header's attribute names
+	//cs.dwResultClauseOffset = DWORD( (BYTE*)&resultClause[0] - (BYTE*)this);
+	//cs.dwResultClauseLen = 0;
+	cs.dwResultClsOffset = DWORD( (BYTE*)&resultClause[0] - (BYTE*)this);
+	cs.dwResultClsLen = 0;
+	//</comment>
 	memset( resultClause, 0, sizeof(resultClause) );
 
 	cs.dwResultStrOffset = (BYTE*)&resultStr[0] - (BYTE*)this;
 	cs.dwResultStrLen = 0;
 	memset( resultStr, 0, sizeof(resultStr) );
 
-	cs.dwResultClauseOffset = DWORD( (BYTE*)&resultClause[0] - (BYTE*)this);
-	cs.dwResultClauseLen = 0;
+	//<comment author='b6s'> Change to MinGW imm header's attribute names
+	//cs.dwResultClauseOffset = DWORD( (BYTE*)&resultClause[0] - (BYTE*)this);
+	//cs.dwResultClauseLen = 0;
+	cs.dwResultClsOffset = DWORD( (BYTE*)&resultClause[0] - (BYTE*)this);
+	cs.dwResultClsLen = 0;
+	//</comment>
 	memset( resultClause, 0, sizeof(resultClause) );
 
 
@@ -76,7 +92,10 @@ void CompStr::setResultStr(LPCWSTR result_str)
 {
 	wcscpy( resultStr, result_str );
 	cs.dwResultStrLen = wcslen( resultStr );
-	cs.dwResultClauseLen = sizeof(resultClause);
+	//<comment author='b6s'> Change to MinGW imm header's attribute name
+	//cs.dwResultClauseLen = sizeof(resultClause);
+	cs.dwResultClsLen = sizeof(resultClause);
+	//</comment>
 	resultClause[0] = 0;
 	resultClause[1] = cs.dwResultStrLen;
 	cs.dwResultReadStrLen = 0;
@@ -134,23 +153,40 @@ void CompStr::beforeGenerateMsg(void)
 
 	compClause[0] = 0;
 	compClause[1] = cs.dwCompStrLen;
-	cs.dwCompClauseLen = 0;//sizeof(compClause);
+	//<comment author='b6s'> Change to MinGW imm header's attribute names
+	//cs.dwCompClauseLen = 0;//sizeof(compClause);
+	cs.dwCompClsLen = 0;
+	//</comment>
 
 	resultClause[0] = 0;
 	resultClause[1] = cs.dwResultStrLen;
-	cs.dwResultClauseLen = 0;//sizeof(resultClause);
+	//<comment author='b6s'> Change to MinGW imm header's attribute names
+	//cs.dwResultClauseLen = 0;//sizeof(resultClause);
+	cs.dwResultClsLen = 0;
+	//</comment>
 
 	readClause[0] = 0;
 	readClause[1] = cs.dwCompReadStrLen;
-	cs.dwCompReadClauseLen = 0;//sizeof(readClause);
+	//<comment author='b6s'> Change to MinGW imm header's attribute names
+	//cs.dwCompReadClauseLen = 0;//sizeof(readClause);
+	cs.dwCompReadClsLen = 0;
+	//</comment>
 
 	resultReadClause[0] = 0;
-	resultReadClause[1] = cs.dwResultReadClauseLen = 0;
-	cs.dwResultReadClauseLen = 0;//sizeof(resultReadClause);
+	//<comment author='b6s'> Change to MinGW imm header's attribute names
+	//resultReadClause[1] = cs.dwResultReadClauseLen = 0;
+	//cs.dwResultReadClauseLen = 0;//sizeof(resultReadClause);
+	resultReadClause[1] = cs.dwResultReadClsLen = 0;
+	cs.dwResultReadClsLen = 0;
+	//</comment>
+	
 
 	if( g_useUnicode )	{
 		if( compStr[0] == 0 )	// If quick commit
-			cs.dwCompClauseLen = 0;	// No clause info
+			//<comment author='b6s'> Change to MinGW imm header's attribute names
+			//cs.dwCompClauseLen = 0;	// No clause info
+			cs.dwCompClsLen = 0;
+			//</comment>
 		else	{	// This composition string contains Chinese characters
 			int i;
 			wchar_t* pstr = compStr;
@@ -161,11 +197,17 @@ void CompStr::beforeGenerateMsg(void)
 					break;
 			}
 			compClause[++i] = cs.dwCompStrLen;
-			cs.dwCompClauseLen = (i+1) * sizeof(DWORD);
+			//<comment author='b6s'> Change to MinGW imm header's attribute names
+			//cs.dwCompClauseLen = (i+1) * sizeof(DWORD);
+			cs.dwCompClsLen = (i+1) * sizeof(DWORD);
+			//</comment>
 		}
 
 		if( resultStr[0] == 0 )	// If no result string
-			cs.dwResultClauseLen = 0;	// No clause info
+			//<comment author='b6s'> Change to MinGW imm header's attribute names
+			//cs.dwResultClauseLen = 0;	// No clause info
+			cs.dwResultClsLen = 0;
+			//</comment>
 		else	{	// This result string contains Chinese characters
 			int i;
 			wchar_t* pstr = resultStr;
@@ -176,7 +218,10 @@ void CompStr::beforeGenerateMsg(void)
 					break;
 			}
 			resultClause[++i] = cs.dwResultStrLen;
-			cs.dwResultClauseLen = (i+1) * sizeof(DWORD);
+			//<comment author='b6s'> Change to MinGW imm header's attribute names
+			//cs.dwResultClauseLen = (i+1) * sizeof(DWORD);
+			cs.dwResultClsLen = (i+1) * sizeof(DWORD);
+			//</comment>
 		}
 	}
 	else	// ANSI version

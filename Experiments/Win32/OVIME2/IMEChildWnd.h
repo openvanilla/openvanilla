@@ -1,7 +1,7 @@
 #pragma once
 
 #include <windows.h>
-#include "imm.h"
+#include <immdev.h>
 #include "window.h"
 
 class IMEChildWnd : virtual public Window

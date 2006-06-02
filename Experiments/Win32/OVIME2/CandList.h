@@ -2,7 +2,7 @@
 
 #include <windows.h>
 #include <tchar.h>
-#include "imm.h"
+#include <immdev.h>
 
 class CandList
 {

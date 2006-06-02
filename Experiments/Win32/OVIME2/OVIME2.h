@@ -3,7 +3,7 @@
 
 #include <windows.h>
 #include <tchar.h>
-#include "imm.h"
+#include <immdev.h>
 #include "OVIME2Client.h"
 
 extern HINSTANCE g_dllInst;

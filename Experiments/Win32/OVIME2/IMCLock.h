@@ -1,7 +1,7 @@
 #pragma once
 
 #include <windows.h>
-#include "imm.h"
+#include <immdev.h>
 
 class CompStr;
 class CandList;
