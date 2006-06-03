@@ -1,4 +1,4 @@
 install GNU Aspell library first, and then
 
-make all
+make -ARCH=""
 sudo make install
