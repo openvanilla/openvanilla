@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Framework\Headers;..\..\..\..\Modules\SharedHeaders;..\..\..\Lucene4SpellChecker\clucene-0.9.8\src;..\..\..\Lucene4SpellChecker"
+				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Framework\Headers;..\..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -33,9 +33,9 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="sqlite3.lib CLuceneUDLib.lib"
+				AdditionalDependencies="sqlite3.lib aspell.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\SQLite3;..\..\..\Lucene4SpellChecker\clucene-0.9.8\build\lib"
+				AdditionalLibraryDirectories="..\..\SQLite3"
 				ModuleDefinitionFile="..\..\OVModule.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
@@ -73,7 +73,7 @@
 			CharacterSet="1">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Framework\Headers;..\..\..\..\Modules\SharedHeaders;..\..\..\Lucene4SpellChecker\clucene-0.9.8\src;..\..\..\Lucene4SpellChecker"
+				AdditionalIncludeDirectories="..\..\SQLite3;..\..\..\..\Framework\Headers;..\..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="4"
 				RuntimeTypeInfo="TRUE"
@@ -85,9 +85,9 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="sqlite3.lib CLuceneULib.lib"
+				AdditionalDependencies="sqlite3.lib aspell.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\SQLite3;..\..\..\Lucene4SpellChecker\clucene-0.9.8\build\lib"
+				AdditionalLibraryDirectories="..\..\SQLite3"
 				ModuleDefinitionFile="..\..\OVModule.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
@@ -136,7 +136,7 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath="..\..\..\Lucene4SpellChecker\LuceneSearch.h">
+				RelativePath="..\..\..\..\Modules\OVIMRomanNew\aspell.h">
 			</File>
 		</Filter>
 		<Filter
