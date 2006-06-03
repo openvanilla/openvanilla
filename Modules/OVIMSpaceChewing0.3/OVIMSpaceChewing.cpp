@@ -2,7 +2,7 @@
 // This package is released under the Artistic License,
 // please refer to LICENSE.txt for the terms of use and distribution
 
-#define OV_DEBUG
+// #define OV_DEBUG
 
 #include <stdio.h> 
 #include <stdlib.h>
@@ -51,13 +51,13 @@ public:
         if(chewing_keystroke_CheckIgnore(im)) return 0;
         CandidateWindow(textbar, srv);
         Redraw(buf, srv);
+	Notify(srv);
         return 1;
     }
   
 protected:
     void KeyPress(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, OVService *srv) {
         int k = key->code();
-        Capslock(key,buf,textbar,srv);
         if(k == ovkSpace) {
 	   key->isShift() ? chewing_handle_ShiftSpace(im):chewing_handle_Space(im);
         }
@@ -68,6 +68,7 @@ protected:
            key->isShift() ?chewing_handle_ShiftRight(im):chewing_handle_Right(im);
         }
         else if (k == ovkDown) { chewing_handle_Down(im); }
+        else if (k == ovkUp)   { chewing_handle_Up(im);   }
         else if (k == ovkEsc)  { chewing_handle_Esc(im);  }
         else if (k == ovkTab)  { chewing_handle_Tab(im);  }
         else if (k == ovkHome) { chewing_handle_Home(im); }
@@ -92,12 +93,6 @@ protected:
         chewing_handle_Default(im ,(key->isShift())?toupper(key->code()):tolower(key->code()));
     }
 
-    void Capslock(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, OVService *srv) { 
-        if(key->isCapslock()) {
-            chewing_handle_Capslock( im );
-        } 
-    }
-    
     void Redraw(OVBuffer *buf, OVService *srv) {
         if ( chewing_commit_Check( im ) ) {
                 const char *s = chewing_commit_String( im );
@@ -121,6 +116,13 @@ protected:
 	s3= chewing_buffer_String_End( im, pos);
 	buf->append(s3)->update(pos, ps, pe);
         murmur("==> %s%s%s",s1,s2,s3);
+    }
+
+    void Notify(OVService *srv) {
+       if(chewing_aux_Length(im) != 0) {
+	  char *msg = chewing_aux_String(im);
+	  srv->notify(msg);
+       }
     }
     
     void CandidateWindow(OVCandidate *textbar, OVService *srv) {

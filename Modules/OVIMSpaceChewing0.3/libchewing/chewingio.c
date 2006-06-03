@@ -932,6 +932,7 @@ CHEWING_API int chewing_handle_Default( ChewingContext *ctx, int key )
 		DEBUG_OUT(
 			"\t\tchecking paging key, got '%c'\n",
 			key );
+		/*
 		switch ( key ) {
 			case 'j':
 			case 'J':
@@ -969,7 +970,7 @@ CHEWING_API int chewing_handle_Default( ChewingContext *ctx, int key )
 				goto End_Paging;
 			default:
 				break;
-		}
+		} */
 	}
 	/* editing */
 	else {
@@ -1112,7 +1113,7 @@ CHEWING_API int chewing_handle_CtrlNum( ChewingContext *ctx, int key )
 			&( pgdata->availInfo ), 
 			pgdata->phoneSeq, 
 			pgdata->config.selectAreaLen ); 
-		SemiSymbolInput( '1', pgdata );
+		SemiSymbolInput(pgdata );
                 CallPhrasing( pgdata );
                 MakeOutputWithRtn( pgo, pgdata, keystrokeRtn );
                 return 0;
@@ -1206,12 +1207,12 @@ CHEWING_API int chewing_handle_ShiftSpace( ChewingContext *ctx )
 {
 	ChewingData *pgdata = ctx->data;
 	ChewingOutput *pgo = ctx->output;
-	int rtn, key = ' ';
+	int rtn;
 	int keystrokeRtn = KEYSTROKE_ABSORB;
 
 	if ( ! pgdata->bSelect ) {
 		CheckAndResetRange( pgdata );
-		rtn = SemiSymbolInput( key, pgdata );
+		rtn = FullShapeSymbolInput( ' ', pgdata );
 	}
 	CallPhrasing( pgdata );
 	MakeOutputWithRtn( pgo, pgdata, keystrokeRtn );

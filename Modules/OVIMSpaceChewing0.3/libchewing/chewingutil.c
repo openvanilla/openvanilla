@@ -275,12 +275,12 @@ int SymbolChoice( ChewingData *pgdata, int sel_i )
 	return ZUIN_ABSORB;
 }
 
-int SemiSymbolInput(int key, ChewingData *pgdata)
+int SemiSymbolInput(ChewingData *pgdata)
 {
-    static char keybuf[] = {' ', '1'} ;
-    static char *chibuf[] = {"　", "符"} ;
-    static int nSpecial = 2 ;
-    return InternalSpecialSymbol( key, pgdata, nSpecial, keybuf, chibuf );
+    static char keybuf[] = {'1'} ;
+    static char *chibuf[] = {"符"} ;
+    static int nSpecial = 1 ;
+    return InternalSpecialSymbol( '1', pgdata, nSpecial, keybuf, chibuf );
 }
 
 int SymbolInput( int key, ChewingData *pgdata )
@@ -898,19 +898,19 @@ int OpenSymbolChoice( ChewingData *pgdata )
 		{ "]", "」", "』", "》", "〉", "】", "〕", 0 },
 		{ "{", "｛", 0 },
 		{ "}", "｝", 0 },
-		{ "<", "，", "←", 0 },
-		{ ">", "。", "→", "．", 0 },
+		{ "<", "，", "＜", "←", 0 },
+		{ ">", "。", "＞", "→", "．", "…", 0 },
 		{ "?", "？","¿", 0 },
-		{ "!", "！", "①", "➀", "Ⅰ","¡", 0 },
-		{ "@", "＠", "②", "➁", "Ⅱ", "⊕", "⊙", "㊣", "﹫", 0 },
-		{ "#", "＃", "③", "➂", "Ⅲ", "﹟", 0 },
-		{ "$", "＄", "④", "➃", "Ⅳ", "€", "﹩", "￠", "∮","￡", "￥", 0 },
-		{ "%", "％", "⑤", "➄", "Ⅴ", 0 },
-		{ "^", "︿", "⑥", "➅", "Ⅵ", "﹀", "︽", "︾", 0 },
-		{ "&", "＆", "⑦", "➆", "Ⅶ", "﹠", 0 },
-		{ "*", "＊", "⑧", "➇", "Ⅷ", "×", "※", "╳", "﹡", "☯","☆", "★", 0 },
-		{ "(", "（", "⑨", "➈", "Ⅸ", 0 },
-		{ ")", "）", "⑩", "➉", "Ⅹ", 0 },
+		{ "!", "！", "１", "①", "➀", "Ⅰ","¡", 0 },
+		{ "@", "＠", "２", "②", "➁", "Ⅱ", "⊕", "⊙", "㊣", "﹫", 0 },
+		{ "#", "＃", "３", "③", "➂", "Ⅲ", "﹟", 0 },
+		{ "$", "＄", "４", "④", "➃", "Ⅳ", "€", "﹩", "￠", "∮","￡", "￥", 0 },
+		{ "%", "％", "５", "⑤", "➄", "Ⅴ", 0 },
+		{ "^", "︿", "６", "⑥", "➅", "Ⅵ", "﹀", "︽", "︾", 0 },
+		{ "&", "＆", "７", "⑦", "➆", "Ⅶ", "﹠", 0 },
+		{ "*", "＊", "８", "⑧", "➇", "Ⅷ", "×", "※", "╳", "﹡", "☯","☆", "★", 0 },
+		{ "(", "（", "９", "⑨", "➈", "Ⅸ", 0 },
+		{ ")", "）", "０", "⑩", "➉", "Ⅹ", 0 },
 		{ "_", "＿", "…", "‥", "←", "→", "﹍", "﹉", "ˍ", "￣", "–", "—", "¯", "﹊", "﹎", "﹏", "﹣", "－", 0 },
 		{ "+", "＋", "±", "﹢", "✙", "✚", "✛", "✜", "✝", "✞", "✟", 0 },
 		{ "=", "＝", "≒", "≠", "≡", "≦", "≧", "﹦", 0},
@@ -995,7 +995,7 @@ int OpenSymbolChoice( ChewingData *pgdata )
 	pgdata->availInfo.nAvail = 1;
 	pgdata->availInfo.currentAvail = 0;
 	pgdata->availInfo.avail[ 0 ].id = -1;
-	pgdata->availInfo.avail[ 0 ].len = 1;     
+	pgdata->availInfo.avail[ 0 ].len = 1; 
 	return 0;
 }
 

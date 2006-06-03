@@ -25,7 +25,7 @@ void SetUpdatePhraseMsg( ChewingData *pgdata, char *addWordSeq, int len, int sta
 int NoSymbolBetween( ChewingData *pgdata, int begin, int end );
 int ChewingIsEntering( ChewingData *pgdata );
 void CleanAllBuf( ChewingData * );
-int SemiSymbolInput(int key, ChewingData *pgdata);
+int SemiSymbolInput(ChewingData *pgdata);
 int SpecialEtenSymbolInput( int key, ChewingData *pgdata );
 int SpecialSymbolInput( int key, ChewingData *pgdata );
 int FullShapeSymbolInput( int key, ChewingData *pgdata );

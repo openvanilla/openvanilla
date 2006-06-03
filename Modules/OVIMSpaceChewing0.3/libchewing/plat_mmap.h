@@ -4,6 +4,8 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
+/* All these settings are for Mac Os X */
+/* zonble */
 #define PLAT_SEPARATOR "/"
 #define PLAT_TMPDIR "/tmp"
 #define PLAT_MKDIR(dir) \
@@ -13,12 +15,6 @@
 #define PLAT_UNLINK(path) \
 	unlink(path)
 
-//#ifdef __cplusplus
-//extern "C"
-//{
-//#endif /* __cplusplus */
-
-/* plat_mmap.h */
 typedef struct plat_mmap {
 	int fd;
 	void *address;
@@ -26,19 +22,8 @@ typedef struct plat_mmap {
 	int fAccessAttr;
 } plat_mmap;
 
-//#ifdef __cplusplus
-//}
-//#endif /* __cplusplus */
-
-//#endif /* UNDER_POSIX */
-//#endif /* PLAT_POSIX_H */
-
 #define FLAG_ATTRIBUTE_READ	0x00000001
 #define FLAG_ATTRIBUTE_WRITE	0x00000002
-
-//extern "C"
-//{
-/* flags */
 
 /* Set the mmap handle to be invalid */
 void plat_mmap_set_invalid( plat_mmap *handle );
@@ -63,5 +48,3 @@ unsigned int plat_mmap_get_alloc_granularity();
 
 /* Unmap the mmap handle */
 void plat_mmap_unmap( plat_mmap *handle );
-
-//}

@@ -52,6 +52,8 @@ CHEWING_API int chewing_buffer_Check( ChewingContext *ctx )
 	return (ctx->output->chiSymbolBufLen != 0);
 }
 
+/* Hacked by zonble */
+
 CHEWING_API char *chewing_buffer_String( ChewingContext *ctx, int from, int to )
 {
 	int i;
@@ -195,5 +197,3 @@ CHEWING_API int Chewing_keystroke_CheckAbsorb( ChewingContext *ctx )
 { 
 	  return (ctx->output->keystrokeRtn & KEYSTROKE_ABSORB);
 }
-
-
