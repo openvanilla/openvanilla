@@ -20,7 +20,7 @@ BiGram::~BiGram()
 
 int BiGram::maximumMatching(
     DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
-    int index, int stop, bool doBackward)
+    size_t index, size_t stop, bool doBackward)
 {
 	vector<int> boundaryVector;
 	vector< vector<Vocabulary> > vectorOfVocabularyVector;
@@ -37,22 +37,22 @@ int BiGram::maximumMatching(
 
 	while(index < stop)
 	{
-		int offsetBound = stop - index;
+		size_t offsetBound = stop - index;
 		if(offsetBound > 7)
 			offsetBound = 7;
 		bool foundFlag = false;
 		vector<string> initialCharacterStringVector =
             tokenVectorRef[index].characterStringVector;
 		vector<string> foundCharacterStringVector;
-		int currentIndex = index;
+		size_t currentIndex = index;
 
 		while(!foundFlag)
 		{
-			int bound = 1;
+			size_t bound = 1;
 			vector<string> currentCharacterStringVector = 
                 initialCharacterStringVector;
 
-			for(int offset = 1; offset < offsetBound; ++offset)
+			for(size_t offset = 1; offset < offsetBound; ++offset)
 			{
 				vector<string> newCharacterStringVector;
 				currentIndex = index + offset;
@@ -90,9 +90,9 @@ int BiGram::maximumMatching(
 			{
 				if(bound < 5)
 				{
-					for(int round = 0; round < bound; ++round)
+					for(size_t round = 0; round < bound; ++round)
 					{
-						int tokenIndex = currentIndex - round;
+						size_t tokenIndex = currentIndex - round;
 						if(round == bound - 1)
 						{
 							if(doBackward)
@@ -203,8 +203,8 @@ int BiGram::maximumMatching(
 		to = tokenVectorRef.size() - begin;
 		from = tokenVectorRef.size() - end;
 	}
-	int shift = 0;
-	for(int pos = from; pos < to; ++pos)
+	size_t shift = 0;
+	for(size_t pos = from; pos < to; ++pos)
 	{
 		tokenVectorRef[pos].word =
             bestVocabularyCombination.word.substr(shift, 3);
@@ -237,10 +237,10 @@ void BiGram::getVocabularyCombination(
 	if(rightBound > 5)
 		rightBound = 5;
 
-	for(int i = 0; i < leftBound; ++i)
+	for(size_t i = 0; i < leftBound; ++i)
 	{
 		int matrix = 0;
-		for(int j = 0; j < rightBound; ++j)
+		for(size_t j = 0; j < rightBound; ++j)
 		{
 			Vocabulary combinedVocabulary;
 			combinedVocabulary.word = leftRef[i].word + rightRef[j].word;

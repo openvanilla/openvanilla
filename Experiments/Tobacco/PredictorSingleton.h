@@ -17,7 +17,7 @@ public:
 	vector< vector<string> > vectorOfCharacterVector;
 	vector<Token> tokenVector;
 	vector<Candidate> candidateVector;
-	vector<int> candidatePositionVector;
+	vector<size_t> candidatePositionVector;
 
 	static PredictorSingleton* getInstance(const char* dbFilePath)
 	{
@@ -30,17 +30,17 @@ public:
 	static void lostInstance();
     
 	void setInputMethodId(string id) { dictionary->setInputMethodId(id); }
-	bool setTokenVector(string currentSequence, int position, bool doReplace);
+	bool setTokenVector(string currentSequence, size_t position, bool doReplace);
 	void setFixedToken(
-	   string currentSequence, string currentWord, int position);
-	void setCandidateVector(int position);
-	void setSelectedCandidate(int position, int selectedCandidateIndex);
+	   string currentSequence, string currentWord, size_t position);
+	void setCandidateVector(size_t position);
+	void setSelectedCandidate(size_t position, size_t selectedCandidateIndex);
 
-	void removeWord(int position, bool delFlag);
+	void removeWord(size_t position, bool delFlag);
 	void clearAll();
 
 protected:
-	void addCandidates(string characters, int head);
+	void addCandidates(string characters, size_t head);
     void setTokenVectorByBigram();
     void setComposedString();
 

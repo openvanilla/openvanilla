@@ -15,7 +15,7 @@ public:
 
 	int maximumMatching(
 	   DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
-	   int index, int length, bool doBackward);
+	   size_t index, size_t length, bool doBackward);
 	void getCharacterCombination(
 	   vector<string>& leftRef, vector<string>& rightRef,
 	   vector<string>& combinedRef);

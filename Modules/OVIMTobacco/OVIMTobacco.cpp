@@ -115,7 +115,7 @@ protected:
     IMGCandidate *candi;
     int page;
     
-    int position;
+    size_t position;
     bool canNewSequence;
     bool doInsert;
 };
@@ -425,7 +425,7 @@ int OVIMTobaccoContext::keyMove() {
                 return 0;
         }
         
-        b->update(position, position, position);
+        b->update((int)position, (int)position, (int)position);
         doInsert = true;
 
         return 1;
@@ -556,7 +556,7 @@ void OVIMTobaccoContext::freshBuffer() {
 			->append(leftString.c_str())
 			->append(seq.compose())
 			->append(rightString.c_str())
-			->update(position, position, position + seq.length());
+			->update((int)position, (int)position, (int)position + (int)seq.length());
     }
     else
 	{
@@ -565,7 +565,7 @@ void OVIMTobaccoContext::freshBuffer() {
 			b->append(predictor->composedString.c_str());
 		if(strlen(seq.sequence()) > 0)
 			b->append(seq.compose());
-		b->update(position, position, position + seq.length());
+		b->update((int)position, (int)position, (int)position + (int)seq.length());
 	}
 }
 
@@ -743,7 +743,7 @@ int OVIMTobaccoContext::setCandidate() {
         candi=NULL;
     }
 
-    int choosingIndex = -1;
+    size_t choosingIndex = -1;
     if(parent->doChooseInFrontOfCursor()) {
         if(position == 0)
             choosingIndex = 0;
@@ -805,10 +805,10 @@ int OVIMTobaccoContext::candidateEvent() {
     }
     if (i==l) {
         s->beep();
-        b->update(position, position, position);    // we do this to make some applications happy
+        b->update((int)position, (int)position, (int)position);    // we do this to make some applications happy
     }
     else {
-        int choosingIndex = -1;
+        size_t choosingIndex;
         if(parent->doChooseInFrontOfCursor()) {
             if(position == 0)
                 choosingIndex = 0;
@@ -830,10 +830,10 @@ int OVIMTobaccoContext::candidateEvent() {
         if (nextsyl) {
             seq.add(kc);
             b->append(seq.compose());
-			b->update(position, position - 1, position);
+			b->update((int)position, (int)position - 1, (int)position);
         }
 		else
-			b->update(position, position, position);
+			b->update((int)position, (int)position, (int)position);
         
     }    
     return 1;
@@ -858,7 +858,7 @@ int OVIMTobaccoContext::updateCandidateWindow() {
     c->append(dispstr);
     c->update();
     if (!c->onScreen()) c->show();
-    b->update(position, position, position);
+    b->update((int)position, (int)position, (int)position);
     
     return 1;
 }

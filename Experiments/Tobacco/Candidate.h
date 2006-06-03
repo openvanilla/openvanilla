@@ -10,7 +10,7 @@ public:
 	Candidate(Vocabulary& voc);
 	~Candidate();
 
-	int position;
+	size_t position;
 };
 
 #endif

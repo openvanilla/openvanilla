@@ -44,7 +44,7 @@ void PredictorSingleton::clearAll()
 	PredictorSingleton::candidatePositionVector.clear();
 }
 
-void PredictorSingleton::removeWord(int position, bool delFlag)
+void PredictorSingleton::removeWord(size_t position, bool delFlag)
 {
 	size_t tokenIndex;
 	if(delFlag)	// true	: DEL
@@ -69,7 +69,7 @@ void PredictorSingleton::removeWord(int position, bool delFlag)
 }
 
 bool PredictorSingleton::setTokenVector(
-    string currentSequence, int position, bool doReplace)
+    string currentSequence, size_t position, bool doReplace)
 {
     if(!PredictorSingleton::dictionary->isVocabulary(currentSequence))
         return false;
@@ -100,7 +100,7 @@ bool PredictorSingleton::setTokenVector(
 }
 
 void PredictorSingleton::setFixedToken(
-    string currentSequence, string currentWord, int position)
+    string currentSequence, string currentWord, size_t position)
 {
 	Token currentToken;
 	currentToken.withPrefix = false;
@@ -116,7 +116,7 @@ void PredictorSingleton::setFixedToken(
     PredictorSingleton::setTokenVectorByBigram();
 }
 
-void PredictorSingleton::addCandidates(string characters, int head)
+void PredictorSingleton::addCandidates(string characters, size_t head)
 {
     vector<Vocabulary> vocabularies;
 	if(PredictorSingleton::dictionary->getVocabularyVectorByCharacters(
@@ -143,14 +143,14 @@ void PredictorSingleton::addCandidates(string characters, int head)
 
 }
 
-void PredictorSingleton::setCandidateVector(int position)
+void PredictorSingleton::setCandidateVector(size_t position)
 {	
 	PredictorSingleton::candidateVector.clear();
 	PredictorSingleton::candidatePositionVector.clear();
 
-	int candidateKeyCount =
+	size_t candidateKeyCount =
 	   PredictorSingleton::tokenVector[position].characterStringVector.size();
-	for(int candidateKeyIndex = 0; candidateKeyIndex < candidateKeyCount; ++candidateKeyIndex)
+	for(size_t candidateKeyIndex = 0; candidateKeyIndex < candidateKeyCount; ++candidateKeyIndex)
 	{
 		string currentCharacterString =
 		  PredictorSingleton::tokenVector[position].characterStringVector[candidateKeyIndex];
@@ -161,8 +161,8 @@ void PredictorSingleton::setCandidateVector(int position)
 	vector<string> currentCharacterCombinationVector =
 		PredictorSingleton::tokenVector[position].characterStringVector;
 
-	int backwardPosition = position;
-	int bound = position - 4 > 0 ? position - 4 : 0;
+	size_t backwardPosition = position;
+	size_t bound = position - 4 > 0 ? position - 4 : 0;
 	while(backwardPosition > bound) //&& !PredictorSingleton::tokenVector[backwardPosition - 1].isBoundary) //&& PredictorSingleton::tokenVector[backwardPosition].withPrefix)
 	{
 		vector<string> newCharacterCombinationVector;
@@ -178,13 +178,13 @@ void PredictorSingleton::setCandidateVector(int position)
 }
 
 void PredictorSingleton::setSelectedCandidate(
-    int index, int selectedCandidateIndex)
+    size_t index, size_t selectedCandidateIndex)
 {
 	string selectedCandidateWordString =
 		PredictorSingleton::candidateVector[selectedCandidateIndex].word;
-	int head =
+	size_t head =
 	   PredictorSingleton::candidateVector[selectedCandidateIndex].position;
-	for(int i = head, offset = 0; i <= index; i++, offset+=3)
+	for(size_t i = head, offset = 0; i <= index; i++, offset+=3)
 	{
 		PredictorSingleton::tokenVector[i].isFixed = true;
 		PredictorSingleton::tokenVector[i].word =
