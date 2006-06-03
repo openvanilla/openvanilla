@@ -1,2 +1,2 @@
-cl /I..\..\Headers /I..\..\Experiments\Win32\SQLite3 /I..\..\Experiments\Lucene4SpellChecker /I..\..\Experiments\Lucene4SpellChecker\clucene-0.9.8\src /GR /EHsc /ML /D"WIN32" /D"UNICODE" /D"_UNICODE" /FeOVIMRomanNew.DLL /LD OVIMRomanNew.cpp /link /DEF:..\..\Experiments\Win32\OVModule.DEF ..\..\Experiments\Win32\SQLite3\sqlite3.lib ..\..\Experiments\Lucene4SpellChecker\clucene-0.9.8\build\lib\CLuceneULib.lib
+cl /I..\..\Framework\Headers /I..\..\Modules\SharedHeaders /I..\..\Experiments\Win32\SQLite3 /GR /EHsc /ML /D"WIN32" /D"UNICODE" /D"_UNICODE" /FeOVIMRomanNew.DLL /LD OVIMRomanNew.cpp /link /DEF:..\..\Experiments\Win32\OVModule.DEF ..\..\Experiments\Win32\SQLite3\sqlite3.lib aspell.lib
 pause

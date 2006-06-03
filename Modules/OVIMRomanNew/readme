@@ -1,5 +1,4 @@
-Install:
-    Follow the instructions in README4SpellChecker first, and then
+install GNU Aspell library first, and then
 
 make all
 sudo make install

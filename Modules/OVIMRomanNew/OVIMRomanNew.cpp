@@ -23,7 +23,8 @@
 #include <vector>
 #include "OVSQLite3.h"
 
-#include "LuceneSearch.h"
+//#include "LuceneSearch.h"
+#include "aspell.h"
 
 using namespace std;
 
@@ -64,7 +65,7 @@ public:
 class IMGCandidate
 {
 public:
-    int count() { return candidates.size(); }
+    size_t count() { return candidates.size(); }
     void clear() { candidates.clear(); }
     void add(const string& s) { candidates.push_back(s); }
     const char *item(size_t i) { return candidates[i].c_str(); }
@@ -80,12 +81,29 @@ const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key);
 
 string modulePath;
 
+AspellCanHaveError* aspell_possible_err = 0;
+AspellSpeller* aspell_checker = 0;
+AspellConfig* aspell_config = 0;
+
 class OVIMRomanNewContext : public OVInputMethodContext
 {
 public:
-    virtual void start(OVBuffer*, OVCandidate*, OVService*) { clear(); }
+    virtual void start(OVBuffer*, OVCandidate*, OVService*)
+	{
+		clear();
+
+		aspell_config = new_aspell_config();
+		aspell_config_replace(aspell_config, "lang", "en_US");		
+
+		aspell_possible_err = new_aspell_speller(aspell_config);
+		if (aspell_error_number(aspell_possible_err) != 0)
+			puts(aspell_error_message(aspell_possible_err));
+		else
+			aspell_checker = to_aspell_speller(aspell_possible_err);
+	}
     virtual void clear() { keyseq.clear();} 
-    
+
+	virtual void end() { delete_aspell_speller(aspell_checker); }
     virtual int keyEvent(
         OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* s)    
     {
@@ -110,6 +128,10 @@ public:
                 int n = (k->code() - '1' + 10) % 10;
                 if(n+pagenumber*10 >= candi.count()) return 0;
 				const char* correctedWord = candi.item(n+pagenumber*10);
+
+				aspell_speller_store_replacement(
+					aspell_checker, static_cast<const char*>(keyseq.buf), -1, correctedWord, -1);
+
                 b->clear()->append(correctedWord)->append(" ")->send();
 		    	if (i->onScreen()) i->hide();
 		    	keyseq.clear();
@@ -139,7 +161,13 @@ public:
 		if(is_selkey(k->code())){
 		    murmur("SelectKey Pressed: %c",k->code());
             int n = (k->code() - '1' + 10) % 10;
-            b->clear()->append(keyseq.buf)->append(candi.item(n+pagenumber*10) + keyseq.len)->append(" ")->send();
+			const char* correctedWord = candi.item(n+pagenumber*10) + keyseq.len;
+
+			aspell_speller_store_replacement(
+				aspell_checker, static_cast<const char*>(keyseq.buf), -1, correctedWord, -1);
+
+            b->clear()->append(keyseq.buf)->append(correctedWord)->append(" ")->send();
+
 			if (i->onScreen()) i->hide();
 			keyseq.clear();
 			return closeCandidateWindow(i);
@@ -150,7 +178,9 @@ public:
 
             if(keyseq.buf) {
                 pagenumber = 0;
-                if(!isEnglish(keyseq.buf) && spellCheckerByLuceneFuzzySearch(keyseq.buf))
+                if(!isEnglish(keyseq.buf) &&
+					//spellCheckerByLuceneFuzzySearch(keyseq.buf))
+					spellCheckerByAspell(keyseq.buf))
                 {
 					showcandi(i);
 					return 1;
@@ -225,17 +255,19 @@ protected:
     int showcandi(OVCandidate* i);
     int updatepagetotal(char* buf);
     int spellCheckerBySQLiteSoundex(char* buf);
-    int spellCheckerByLuceneFuzzySearch(char* buf);
+    //int spellCheckerByLuceneFuzzySearch(char* buf);
+	size_t spellCheckerByAspell(char* buf);
     bool isEnglish(char* buf);
 
 protected:
 	KeySeq keyseq;
     IMGCandidate candi;
-    int pagenumber;
-    int pagetotal;
-    int temp;    
+    size_t pagenumber;
+    size_t pagetotal;
+    size_t temp;    
 };
 
+/*
 bool OVIMRomanNewContext::isEnglish(char* buf) {
     char cmd[256];
 
@@ -255,7 +287,33 @@ bool OVIMRomanNewContext::isEnglish(char* buf) {
     if(amount > 0)  return true;
     else            return false;
 }
+*/
 
+bool OVIMRomanNewContext::isEnglish(char* buf) {
+	return aspell_speller_check(aspell_checker, static_cast<const char*>(buf), -1) != 0 ? true : false;
+}
+
+size_t OVIMRomanNewContext::spellCheckerByAspell(char* buf)
+{
+    pagenumber=0;
+    pagetotal=0;
+    candi.clear();
+
+     const AspellWordList * suggestions =
+		 aspell_speller_suggest(aspell_checker, static_cast<const char*>(buf), -1);
+     AspellStringEnumeration * aspell_elements = aspell_word_list_elements(suggestions);
+     const char * word;
+     while ( (word = aspell_string_enumeration_next(aspell_elements)) != NULL )
+		 candi.add(string(word));
+
+     delete_aspell_string_enumeration(aspell_elements);
+
+	 pagetotal=candi.count()/10;
+
+	 return candi.count();
+}
+
+/*
 int OVIMRomanNewContext::spellCheckerByLuceneFuzzySearch(char* buf)
 {
     pagenumber=0;
@@ -270,6 +328,7 @@ int OVIMRomanNewContext::spellCheckerByLuceneFuzzySearch(char* buf)
     
     return candi.count();
 }
+*/
 
 int OVIMRomanNewContext::spellCheckerBySQLiteSoundex(char* buf){
     pagenumber=0;
@@ -327,8 +386,8 @@ int OVIMRomanNewContext::showcandi(OVCandidate* i) {
     const char *selkey="1234567890";
     i->clear();
     
-    int total=candi.count();
-    for (int j=0; j<10; j++) {
+    size_t total=candi.count();
+    for (size_t j=0; j<10; j++) {
         if (j+pagenumber*10 >= total) break;
         sprintf(dispstr, "%c.", selkey[j]);
         i->append(dispstr)->append(candi.item(j+pagenumber*10))->append("\n");

@@ -9,8 +9,8 @@ include ../../Mk/ov.im.mk
 include ../../Mk/ov.vars.mk
 include ../../Mk/ov.general.mk
 
-LDFLAGS+=-lsqlite3 -L/usr/local/lib -lclucene
-INC+=-I/usr/local/include -I../../Experiments/Lucene4SpellChecker
+LDFLAGS+=-lsqlite3 -L/usr/local/lib -laspell
+INC+=-I/usr/local/include
 CFLAGS=-g $(INC)
 
 all:	OVIMRomanNew.dylib $(DATA)
