@@ -1,4 +1,4 @@
-// OVIMRomanNew.cpp
+﻿// OVIMRomanNew.cpp
 // Copyright (c) 2004-2005 The OpenVanilla Project (http://openvanilla.org)
 
 #define OV_DEBUG
@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <string>
 #include <vector>
-#include "OVSQLite3.h"
+//#include "OVSQLite3.h"
 
 //#include "LuceneSearch.h"
 #include "aspell.h"
@@ -74,10 +74,12 @@ protected:
     vector<string> candidates;
 };
 
+/*
 SQLite3 *db;
 
 const char *QueryForCommand(SQLite3 *db, const char *command);
 const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key);
+*/
 
 string modulePath;
 
@@ -201,9 +203,17 @@ public:
 		if (k->code()==ovkDelete || k->code()==ovkBackspace) {
 			if(!strlen(keyseq.buf)) { closeCandidateWindow(i); return 0;}
 			keyseq.remove();
-            if(keyseq.len && i->onScreen()) { 
-                updatepagetotal(keyseq.buf);
-                showcandi(i);
+            if(keyseq.len && i->onScreen()) {
+                pagenumber = 0;
+                if(!isEnglish(keyseq.buf) &&
+					spellCheckerByAspell(keyseq.buf))
+				{
+					showcandi(i);
+					return 1;
+                }
+				else {
+					closeCandidateWindow(i);
+				}
             } else {
                 closeCandidateWindow(i);
             }
@@ -214,9 +224,15 @@ public:
 		if(k->code()==ovkTab){
             if(keyseq.buf) {
                 pagenumber = 0;
-                updatepagetotal(keyseq.buf);
-                showcandi(i);
-                return 1;
+                if(!isEnglish(keyseq.buf) &&
+					spellCheckerByAspell(keyseq.buf))
+				{
+					showcandi(i);
+					return 1;
+                }
+				else {
+					closeCandidateWindow(i);
+				}
 			} else {
                 return 0;
 			}
@@ -236,8 +252,15 @@ public:
             if(keyseq.buf && i->onScreen()) {
                 pagenumber = 0;
                 temp = 0;
-                updatepagetotal(keyseq.buf);
-                showcandi(i);
+                if(!isEnglish(keyseq.buf) &&
+					spellCheckerByAspell(keyseq.buf))
+				{
+					showcandi(i);
+					return 1;
+                }
+				else {
+					closeCandidateWindow(i);
+				}
 			}
 			b->clear()->append(keyseq.buf)->update();
 			return 1;
@@ -253,8 +276,8 @@ protected:
     }
 
     int showcandi(OVCandidate* i);
-    int updatepagetotal(char* buf);
-    int spellCheckerBySQLiteSoundex(char* buf);
+    //int updatepagetotal(char* buf);
+    //int spellCheckerBySQLiteSoundex(char* buf);
     //int spellCheckerByLuceneFuzzySearch(char* buf);
 	size_t spellCheckerByAspell(char* buf);
     bool isEnglish(char* buf);
@@ -266,28 +289,6 @@ protected:
     size_t pagetotal;
     size_t temp;    
 };
-
-/*
-bool OVIMRomanNewContext::isEnglish(char* buf) {
-    char cmd[256];
-
-	string word(buf);
-	for(int i = 0; i < word.length(); i++)
-		word[i] = tolower(word[i]);
-
-	sprintf(cmd, "select count(key) from dict where key = '%s';", word.c_str());
-    SQLite3Statement *sth=db->prepare(cmd);
-    if (!sth) return false;
-
-    int amount = 0;
-    if(sth->step()==SQLITE_ROW)
-        amount = sth->column_int(0);
-    delete sth;
-    
-    if(amount > 0)  return true;
-    else            return false;
-}
-*/
 
 bool OVIMRomanNewContext::isEnglish(char* buf) {
 	return aspell_speller_check(aspell_checker, static_cast<const char*>(buf), -1) != 0 ? true : false;
@@ -314,6 +315,26 @@ size_t OVIMRomanNewContext::spellCheckerByAspell(char* buf)
 }
 
 /*
+bool OVIMRomanNewContext::isEnglish(char* buf) {
+    char cmd[256];
+
+	string word(buf);
+	for(int i = 0; i < word.length(); i++)
+		word[i] = tolower(word[i]);
+
+	sprintf(cmd, "select count(key) from dict where key = '%s';", word.c_str());
+    SQLite3Statement *sth=db->prepare(cmd);
+    if (!sth) return false;
+
+    int amount = 0;
+    if(sth->step()==SQLITE_ROW)
+        amount = sth->column_int(0);
+    delete sth;
+    
+    if(amount > 0)  return true;
+    else            return false;
+}
+
 int OVIMRomanNewContext::spellCheckerByLuceneFuzzySearch(char* buf)
 {
     pagenumber=0;
@@ -328,7 +349,6 @@ int OVIMRomanNewContext::spellCheckerByLuceneFuzzySearch(char* buf)
     
     return candi.count();
 }
-*/
 
 int OVIMRomanNewContext::spellCheckerBySQLiteSoundex(char* buf){
     pagenumber=0;
@@ -375,6 +395,7 @@ int OVIMRomanNewContext:: updatepagetotal(char* buf){
     pagetotal=candi.count()/10;
     return 1;
 }
+*/
 
 int OVIMRomanNewContext::showcandi(OVCandidate* i) {
     if (!candi.count()) {
@@ -419,6 +440,7 @@ public:
 
 extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }
 extern "C" int OVInitializeLibrary(OVService*, const char* p) {
+	/*
     db=new SQLite3;  // this never gets deleted, but so do we
     char dbfile[128];
     sprintf(dbfile, "%sOVIMRomanNew/dict.db", p);
@@ -427,6 +449,8 @@ extern "C" int OVInitializeLibrary(OVService*, const char* p) {
         murmur("SQLite3 error! code=%d", err);
         return 0;
     }
+	*/
+
     return 1;
 }
 extern "C" OVModule *OVGetModuleFromLibrary(int idx) {

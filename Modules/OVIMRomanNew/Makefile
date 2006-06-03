@@ -30,13 +30,7 @@
 
 MODULEID=OVIMRomanNew
 SOURCES=OVIMRomanNew
-LDFLAGS+=-lsqlite3 -L/opt/local/lib -L/usr/local/lib -laspell
+LDFLAGS+=-L/opt/local/lib -L/usr/local/lib -laspell
 INC+=-I/usr/local/include -I/opt/local/include
-DATA=dict.db
-EXTRA_GOALS=dict.db
 
 include ../Mk/ov.module.mk
-
-dict.db: cin-sqlconvert.pl
-	rm -f dict.db
-	perl cin-sqlconvert.pl dict.txt | sqlite3 dict.db

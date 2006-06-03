@@ -1,1 +1,0 @@
-../SharedData/dict-en.txt
