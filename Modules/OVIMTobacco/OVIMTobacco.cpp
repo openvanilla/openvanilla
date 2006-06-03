@@ -758,9 +758,12 @@ int OVIMTobaccoContext::setCandidate() {
             choosingIndex = position;
     }
         
-    predictor->setCandidateVector(choosingIndex);
+	predictor->candidateVector.clear();
+	predictor->candidatePositionVector.clear();
+    predictor->setMultiCharacterWordCandidateVector(choosingIndex);
+    predictor->setSingleCharacterWordCandidateVector(choosingIndex);
     /// Currently use "post" choosing mode only
-    size_t rows = predictor->candidateVector.size();
+    int rows = predictor->candidateVector.size();    		
     murmur("got %d rows", rows);
     if(!rows) return 1; //zonble
     candi=new IMGCandidate;

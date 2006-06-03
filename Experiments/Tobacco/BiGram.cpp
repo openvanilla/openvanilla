@@ -147,7 +147,7 @@ int BiGram::maximumMatching(
 		{
 			string tokenSequence = foundCharacterStringVector[j];
 			vector<Vocabulary> vocabularies;
-			dictionary->getVocabularyVectorByCharacters(
+			dictionary->getVocabulariesByKeystrokes(
 			    tokenSequence, vocabularies);
 
             for(size_t k = 0; k < vocabularies.size(); k++)

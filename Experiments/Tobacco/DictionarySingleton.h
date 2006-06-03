@@ -32,8 +32,8 @@ public:
 
 	void setInputMethodId(string id) { inputMethodId = id; }
     bool isVocabulary(string characters);
-	bool getVocabularyVectorByCharacters(string characters,
-	   vector<Vocabulary>& vocabularyVectorRef);
+	bool getVocabulariesByKeystrokes(
+		string keystrokes, vector<Vocabulary>& vocabularyVectorRef);
 
 protected:
 	DictionarySingleton(const char* dbFilePath);

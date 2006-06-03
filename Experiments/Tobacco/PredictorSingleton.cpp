@@ -116,10 +116,10 @@ void PredictorSingleton::setFixedToken(
     PredictorSingleton::setTokenVectorByBigram();
 }
 
-void PredictorSingleton::addCandidates(string characters, size_t head)
+void PredictorSingleton::addCandidates(string characters, int head, int length)
 {
     vector<Vocabulary> vocabularies;
-	if(PredictorSingleton::dictionary->getVocabularyVectorByCharacters(
+	if(PredictorSingleton::dictionary->getVocabulariesByKeystrokes(
 	   characters, vocabularies))
 	{
 		for(size_t i = 0; i < vocabularies.size(); i++)
@@ -131,32 +131,20 @@ void PredictorSingleton::addCandidates(string characters, size_t head)
 		}
 	}
 	
-	sort(
-	   PredictorSingleton::candidateVector.begin(),
-	   PredictorSingleton::candidateVector.end(),
-	   Vocabulary::isFreqGreater);
-
-	stable_sort(
-	   PredictorSingleton::candidateVector.begin(),
-	   PredictorSingleton::candidateVector.end(),
-	   Vocabulary::isWordLonger);
-
+	if(length > 1)
+		sort(
+		   PredictorSingleton::candidateVector.begin(),
+		   PredictorSingleton::candidateVector.end(),
+		   Vocabulary::isFreqGreater);
+	else
+		sort(
+		   PredictorSingleton::candidateVector.begin(),
+		   PredictorSingleton::candidateVector.end(),
+		   Vocabulary::isOrderHigher);
 }
 
-void PredictorSingleton::setCandidateVector(size_t position)
-{	
-	PredictorSingleton::candidateVector.clear();
-	PredictorSingleton::candidatePositionVector.clear();
-
-	size_t candidateKeyCount =
-	   PredictorSingleton::tokenVector[position].characterStringVector.size();
-	for(size_t candidateKeyIndex = 0; candidateKeyIndex < candidateKeyCount; ++candidateKeyIndex)
-	{
-		string currentCharacterString =
-		  PredictorSingleton::tokenVector[position].characterStringVector[candidateKeyIndex];
-		PredictorSingleton::addCandidates(currentCharacterString, position);
-	}
-
+void PredictorSingleton::setMultiCharacterWordCandidateVector(int position)
+{
 	BiGram biGram;
 	vector<string> currentCharacterCombinationVector =
 		PredictorSingleton::tokenVector[position].characterStringVector;
@@ -173,7 +161,22 @@ void PredictorSingleton::setCandidateVector(size_t position)
 		currentCharacterCombinationVector = newCharacterCombinationVector;
 
 		for(size_t backwardStep = 0; backwardStep < currentCharacterCombinationVector.size(); ++backwardStep)
-			PredictorSingleton::addCandidates(currentCharacterCombinationVector[backwardStep], backwardPosition);
+			PredictorSingleton::addCandidates(
+				currentCharacterCombinationVector[backwardStep],
+				backwardPosition,
+				position - backwardPosition);
+	}
+}
+
+void PredictorSingleton::setSingleCharacterWordCandidateVector(int position)
+{
+	int candidateKeyCount =
+	   PredictorSingleton::tokenVector[position].characterStringVector.size();
+	for(int candidateKeyIndex = 0; candidateKeyIndex < candidateKeyCount; ++candidateKeyIndex)
+	{
+		string currentCharacterString =
+		  PredictorSingleton::tokenVector[position].characterStringVector[candidateKeyIndex];
+		PredictorSingleton::addCandidates(currentCharacterString, position, 1);
 	}
 }
 

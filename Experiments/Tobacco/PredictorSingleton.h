@@ -32,15 +32,16 @@ public:
 	void setInputMethodId(string id) { dictionary->setInputMethodId(id); }
 	bool setTokenVector(string currentSequence, size_t position, bool doReplace);
 	void setFixedToken(
-	   string currentSequence, string currentWord, size_t position);
-	void setCandidateVector(size_t position);
-	void setSelectedCandidate(size_t position, size_t selectedCandidateIndex);
+	   string currentSequence, string currentWord, int position);
+	void setSingleCharacterWordCandidateVector(int position);
+	void setMultiCharacterWordCandidateVector(int position);
+	void setSelectedCandidate(int position, int selectedCandidateIndex);
 
 	void removeWord(size_t position, bool delFlag);
 	void clearAll();
 
 protected:
-	void addCandidates(string characters, size_t head);
+	void addCandidates(string characters, int head, int length = 1);
     void setTokenVectorByBigram();
     void setComposedString();
 
