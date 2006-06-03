@@ -1,4 +1,4 @@
-﻿// OVIMRomanNew.cpp
+// OVIMRomanNew.cpp
 // Copyright (c) 2004-2005 The OpenVanilla Project (http://openvanilla.org)
 
 #define OV_DEBUG
