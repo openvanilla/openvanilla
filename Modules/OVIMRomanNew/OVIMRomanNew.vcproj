@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\Loaders\Win32\SQLite3;..\..\Framework\Headers;..\SharedHeaders"
+				AdditionalIncludeDirectories="..\..\Framework\Headers;..\SharedHeaders"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -35,7 +35,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="sqlite3.lib aspell.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\Loaders\Win32\SQLite3"
+				AdditionalLibraryDirectories=""
 				ModuleDefinitionFile="..\OVModule.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
@@ -73,7 +73,7 @@
 			CharacterSet="1">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\Loaders\Win32\SQLite3;..\..\Framework\Headers;..\SharedHeaders"
+				AdditionalIncludeDirectories="..\..\Framework\Headers;..\SharedHeaders"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="4"
 				RuntimeTypeInfo="TRUE"
@@ -87,7 +87,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="sqlite3.lib aspell.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\Loaders\Win32\SQLite3"
+				AdditionalLibraryDirectories=""
 				ModuleDefinitionFile="..\OVModule.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
