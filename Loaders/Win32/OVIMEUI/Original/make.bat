@@ -1,0 +1,2 @@
+del *.*~
+cl /I.\ /I..\Headers /EHsc /GR /D "_UNICODE" /D "UNICODE" /FeOVIMEUI.DLL /LD *.cpp ..\Source\*.cpp /link /DEF:..\OVIMEUI.DEF /SUBSYSTEM:WINDOWS kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib
