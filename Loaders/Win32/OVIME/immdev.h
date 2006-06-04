@@ -329,11 +329,6 @@ typedef struct tagSTYLEBUFW {
 	WCHAR szDescription[STYLE_DESCRIPTION_SIZE];
 } STYLEBUFW,*PSTYLEBUFW,*LPSTYLEBUFW;
 
-#endif // _IMM_SDK_DEFINED_
-
-#ifndef _IMM_DDK_DEFINED_
-#define _IMM_DDK_DEFINED_
-
 #define IMEMENUITEM_STRING_SIZE 80
 
 typedef struct tagIMEMENUITEMINFOA {
@@ -359,6 +354,11 @@ typedef struct tagIMEMENUITEMINFOW {
 	HBITMAP hbmpItem;
 } IMEMENUITEMINFOW,*PIMEMENUITEMINFOW,*LPIMEMENUITEMINFOW;
 // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/wceinternational5/html/wce50lrfCOMPOSITIONSTR.asp
+
+#endif // _IMM_SDK_DEFINED_
+
+#ifndef _IMM_DDK_DEFINED_
+#define _IMM_DDK_DEFINED_
 
 //<comment author='b6s'> These two are not in imm.h
 typedef const void *PCVOID, *LPCVOID;
