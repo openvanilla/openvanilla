@@ -1,0 +1,1 @@
+請參考 ..\..\README.Win32.zh_HANT.UTF-8.txt
