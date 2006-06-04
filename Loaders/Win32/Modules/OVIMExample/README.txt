@@ -1,1 +1,0 @@
-Go to trunk/Modules/OVIMExample/ and then run the make.bat to get the DLL.
