@@ -58,6 +58,7 @@ public:
 protected:
     void KeyPress(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, OVService *srv) {
         int k = key->code();
+		Capslock(key,buf,textbar,srv);
         if(k == ovkSpace) {
 	   key->isShift() ? chewing_handle_ShiftSpace(im):chewing_handle_Space(im);
         }
@@ -91,6 +92,15 @@ protected:
             return;
         }
         chewing_handle_Default(im ,(key->isShift())?toupper(key->code()):tolower(key->code()));
+    }
+	
+	void Capslock(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, OVService *srv) {
+        if(key->isCapslock()) {
+            if(chewing_chinesemode(im)) chewing_handle_Capslock(im);
+        }
+        else if (!chewing_chinesemode(im)) {
+            chewing_handle_Capslock(im);
+        }
     }
 
     void Redraw(OVBuffer *buf, OVService *srv) {
