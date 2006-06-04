@@ -4,24 +4,16 @@ Copyright (c) 2004-2006 The OpenVanilla Project
 
 == 注意事項 ==
 1. 目前只能用 Microsoft Visual C++ 編譯。最好使用 VC 7.1 (VS.NET 2003)。
-
-2. 現在 trunk/Experiments/Win32/ 底下的是 socket-based loader，可能還不適合用在
-beta 版上。
-請改用 branches/Non-client-server Win32 Loader/ 底下的版本。:)
-也就是說，請以 branches/Non-client-server Win32 Loader/ 搭配 trunk/ 的其它目錄
-一起進行編譯。
-建議的方式是 svn co "branches/Non-client-server Win32 Loader/" 到你本機目錄裡的
-"trunk/Experiments/Win32-nonsocket/"，假裝這個目錄是 trunk 的一部分，比較容易處
-理編譯時的相對路徑設定。請放心，這不會把 trunk 搞亂，因為 commit 回去時仍會存進
-"branches/Non-client-server Win32 Loader/"。
-
+2. 請使用 trunk/Loaders/Win32/ 底下的 OVIME.sln 和 OVPreferences.sln 及
+trunk/Modules/Modules.sln 來編譯。
+3. 原先在 repository 裡的 SQLite3, ltdl, iconv, tinyxml 皆已移除，請下載
+http://taipedia.info/OV-deps.zip ，解壓縮後置於某處，再按照
+http://www.flickr.com/photos/b6s/159926134/ 示範的方式讓 VS.NET 2003 知道要去那
+裡找這些函式庫。
 3. 若遇到任何問題，請透過 IRC 到 FreeNote 的 #im-dev 找 kanru 或 pcman 或 b6s。
 
 
 == 編譯 ==
-Windows 版現在仍在 trunk/Experiments/Win32/ 中，穩定之後才會移進
-trunk/Loaders/Win32/。
-
 1. 首先，為了編譯 OVPreferences，必須安裝 wxWidgets Win32 版
 (http://www.wxwidgets.org/dl_msw2.htm#stable)，裝完之後 *必須* 自行編譯出
 OVPreferences 所需的靜態函式庫。目前 wxWidgets 版本
@@ -35,27 +27,29 @@ nmake -f makefile.vc BUILD=release UNICODE=1 SHARED=0 RUNTIME_LIBS=static
 和
 nmake -f makefile.vc BUILD=debug UNICODE=1 SHARED=0 RUNTIME_LIBS=static
 
-2. 接下來有兩個選擇：用 VS.NET 2003 IDE 編譯，或在命令列環境底下用 nmake 編譯。
+2. 如果有 VS.NET 2003 IDE，開啟 OVIME.sln 應能直接編譯。
 
-2.1. 如果有 VS.NET 2003 IDE，開啟 OVIME.sln 應能直接編譯。接著請開啟
-trunk/Experiments/Win32/OVPreferences.sln 以編譯設定選單。欲編譯時，可按需求選
-擇 Debug 或 Release 模式，再執行「建置方案」即可。
-2.2. 喜歡命令列模式的，請先確定有環境變數 WXWIN=C:\wxWidgets-2.6.3\ ，再執行
-make.bat ，編譯成果會放在 Result 目錄下。
+3. 接著請開啟 OVPreferences.sln 以編譯設定選單。
 
-3. 最後，選擇想要使用的模組，到該目錄下開啟 .vcproj 檔編譯，或執行裡面的
-make.bat 即可。
+4. 最後，開啟 Modules.sln 以編譯目前支援的模組。
 
 
 == 測試 ==
 在此以 OVIMPOJ-Holo 為例
-0. 若未曾安裝過 OV，請執行 OVIME.reg。
-1. 手動建立 %WINDIR%\OpenVanilla 及 %WINDIR%\OpenVanilla\Modules
-1.1.「按需求修改」deploy-debug.bat 然後執行（不知道怎麼改的話請上 IRC 詢問）。
-1.2. 之前用命令列模式編譯者，請「按需求修改」make_install.bat。
-2. 把 poj-holo.cin 放到 %WINDIR%\OpenVanilla\OVIMPOJ-Holo 裡
-3. 開啟輸入法設定視窗, 新增剛剛裝入的輸入法
-4. 使用 VC.NET 2003 的 debug 模式，開啟 OV，讓 OV attach 到某文字編輯器上即可。
+1.  按照上一節所述，完成 OVIME.sln 與 OVPreferences.sln 的編譯，然後在
+Modules.sln 裡編譯 OVIMPOJ-Holo 模組。
+2.  手動建立 %WINDIR%\OpenVanilla 及 %WINDIR%\OpenVanilla\Modules
+3.  把 OVIME.sln 編譯出來的 OVIME.ime 及 OVIMEUI.dll 放進 %SYSTEM32%
+4.  把「注意事項 2」提到的 DLLs 放進 %SYSTEM32%
+5.  把 OVPreferences.sln 編譯出來的 OVPreferences.exe 放進 %WINDIR%\OpenVanilla
+6.  把 OVIMPOJ-Holo.dll 放進 %WINDIR%\OpenVanilla\Modules
+7.  把 poj-holo.cin 放到 %WINDIR%\OpenVanilla\OVIMPOJ-Holo 裡；當然，這個目錄必
+須先手動建立。
+8.  若未曾安裝過 OV，請執行 OVIME.reg。
+9.  開啟輸入法設定視窗, 新增剛剛裝入的輸入法
+10. 使用 VC.NET 2003 的 debug 模式，開啟 OV，依照下列網址中的圖解操作：
+http://openvanilla.org/wiki/zh/index.php?title=%E8%88%8Awiki%E9%A0%81%E9%9D%A2%E5%BD%99%E6%95%B4:Win32%E7%AD%86%E8%A8%98#Debugging_Instructions
+
 
 == 製作安裝檔 ==
 * 安裝 NSIS (http://nsis.sourceforge.net/download/)
