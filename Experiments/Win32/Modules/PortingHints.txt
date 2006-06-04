@@ -1,4 +1,0 @@
-1. <OpenVanilla/foo.h> 請暫時換成 "foo.h"
-2. std::string::clear() 請換成 std::string::erase() // blame VC++
-3. <sys/bar> 之類的 U*IX functions 請找替代品。	//若有空引入 LibGw32c 就不用遷就 Win32 API 了
-4. Makefile 尚未修改，請仿照修改過的模組目錄裡 make.bat 的方式編譯 DLL。
