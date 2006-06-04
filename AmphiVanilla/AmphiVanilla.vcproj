@@ -276,12 +276,6 @@
 			<File
 				RelativePath=".\DummyDisplayServer.h">
 			</File>
-			<File
-				RelativePath="iconv.h">
-			</File>
-			<File
-				RelativePath="ltdl.h">
-			</File>
 		</Filter>
 	</Files>
 	<Globals>
