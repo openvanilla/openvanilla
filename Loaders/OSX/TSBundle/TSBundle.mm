@@ -51,6 +51,19 @@
 // global data (active context and menu reference)
 static TSBDataPtr tsbActiveContext=NULL;
 
+@interface TSThreadFoo : NSObject
+- (void)run;
+@end;
+
+@implementation TSThreadFoo
+- (void)run {
+    NSLog(@"Getting Cocoa into multithreaded mode");
+    [NSThread exit];
+    // NSLog(@"thread ended");
+}
+@end;
+
+
 extern "C" ComponentResult TSBInitialize(MenuRef mnu)
 {
     MURMUR("TSBInitialize");
@@ -63,7 +76,10 @@ extern "C" ComponentResult TSBInitialize(MenuRef mnu)
 	
     // this is sine-qua-non for every Cocoa bundle... as we will 
     // (and cannot) release this pool, we won't have assign anything to it
-	[NSAutoreleasePool new];
+	[[NSAutoreleasePool alloc] init];
+
+    id ttf=[[[TSThreadFoo alloc] init] autorelease];
+    [NSThread detachNewThreadSelector:@selector(run) toTarget:ttf withObject:nil];
     
     // initilize the real IM code
     return IMInitialize(mnu) ? noErr : -1;

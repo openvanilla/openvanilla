@@ -47,11 +47,13 @@ class CVAutorelease {
 public:
     CVAutorelease() {
         // NSLog(@"CVAutorelease()");
-        ap=[NSAutoreleasePool new];
+        ap=[[NSAutoreleasePool alloc] init];
+        // NSLog(@"%d, multi=%d", [ap retainCount], [NSThread isMultiThreaded]);
     }
     ~CVAutorelease() {
+        // NSLog(@"~%d", [ap retainCount]);
         // NSLog(@"~CVAutorelease()");
-        [ap release];
+        // [ap release];
     }
     
 protected:
@@ -60,7 +62,7 @@ protected:
 
 #define CVSAFETY CVAutorelease _cvar;
 
-#define CV_INTERNAL_VERSION @"0.7.3 beta (r1905)"
+#define CV_INTERNAL_VERSION @"0.7.2 beta (r1907)"
 
 enum {      // CVLMI = CVLoader Menu Item
     CVLMI_KPGROUPSTART=1000,
