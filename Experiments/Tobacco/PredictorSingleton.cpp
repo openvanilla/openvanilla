@@ -116,7 +116,7 @@ void PredictorSingleton::setFixedToken(
     PredictorSingleton::setTokenVectorByBigram();
 }
 
-void PredictorSingleton::addCandidates(string characters, int head, int length)
+void PredictorSingleton::addCandidates(string characters, size_t head, size_t length)
 {
     vector<Vocabulary> vocabularies;
 	if(PredictorSingleton::dictionary->getVocabulariesByKeystrokes(
@@ -143,7 +143,7 @@ void PredictorSingleton::addCandidates(string characters, int head, int length)
 		   Vocabulary::isOrderHigher);
 }
 
-void PredictorSingleton::setMultiCharacterWordCandidateVector(int position)
+void PredictorSingleton::setMultiCharacterWordCandidateVector(size_t position)
 {
 	BiGram biGram;
 	vector<string> currentCharacterCombinationVector =
@@ -168,11 +168,11 @@ void PredictorSingleton::setMultiCharacterWordCandidateVector(int position)
 	}
 }
 
-void PredictorSingleton::setSingleCharacterWordCandidateVector(int position)
+void PredictorSingleton::setSingleCharacterWordCandidateVector(size_t position)
 {
-	int candidateKeyCount =
+	size_t candidateKeyCount =
 	   PredictorSingleton::tokenVector[position].characterStringVector.size();
-	for(int candidateKeyIndex = 0; candidateKeyIndex < candidateKeyCount; ++candidateKeyIndex)
+	for(size_t candidateKeyIndex = 0; candidateKeyIndex < candidateKeyCount; ++candidateKeyIndex)
 	{
 		string currentCharacterString =
 		  PredictorSingleton::tokenVector[position].characterStringVector[candidateKeyIndex];
