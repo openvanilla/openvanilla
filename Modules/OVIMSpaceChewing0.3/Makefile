@@ -14,3 +14,10 @@ INC+=-I./libchewing -I./libchewing/common/
 VPATH+=./libchewing/
 
 include ../Mk/ov.module.mk
+
+data:
+	cd libchewing/tool/; make;
+	svn cat http://svn.openfoundry.org/libchewingdata/utf-8/tsi.src > chewingdata/tsi.src
+	cd chewingdata/; ../libchewing/tool/sort_word;
+	cd chewingdata/; ../libchewing/tool/sort_dic tsi.src;
+	cd chewingdata/; ../libchewing/tool/maketree;
