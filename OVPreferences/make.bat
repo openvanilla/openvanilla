@@ -1,3 +1,0 @@
-del *.*~
-rc /fo OVPreferences.res OVPreferences.rc
-cl /FeOVPreferences.exe /O1 /I.\ /I..\tinyxml /I..\AmphiVanilla /I..\OVIME /I..\OVIMEUI\Headers /I..\..\..\Headers /I"F:\wxWidgets-2.6.1\include" /I"F:\wxWidgets-2.6.1\include\msvc" /EHsc /MT /D "_UNICODE" /D "_WINSOCKAPI_" /D "UNICODE" /D "WIN32" ..\AmphiVanilla\*.cpp OVPreferences.cpp OVPrefDlg.cpp /link OVPreferences.res /LIBPATH:"F:\wxWidgets-2.6.1\lib\vc_lib" /SUBSYSTEM:WINDOWS kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comctl32.lib Ws2_32.lib ..\tinyxml\tinyxml.lib ..\AmphiVanilla\libltdl.lib ..\AmphiVanilla\libiconv.lib
