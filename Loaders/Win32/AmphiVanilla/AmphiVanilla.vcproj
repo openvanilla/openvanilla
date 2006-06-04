@@ -24,7 +24,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="..\tinyxml;..\..\..\Framework\Headers;.\"
+				AdditionalIncludeDirectories="..\..\..\Framework\Headers"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
@@ -40,6 +40,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="tinyxml.lib"
 				OutputFile=".\Release\AmphiVanilla.lib"
 				SuppressStartupBanner="TRUE"/>
 			<Tool
@@ -74,7 +75,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\tinyxml;..\..\..\Framework\Headers;.\"
+				AdditionalIncludeDirectories="..\..\..\Framework\Headers"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -90,6 +91,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="tinyxml.lib"
 				OutputFile=".\Debug\AmphiVanilla.lib"
 				SuppressStartupBanner="TRUE"/>
 			<Tool

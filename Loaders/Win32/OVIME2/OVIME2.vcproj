@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\;..\OVIME2Server;..\..\..\..\trunk\Framework\Headers;..\tinyxml"
+				AdditionalIncludeDirectories=".\;..\OVIME2Server;..\..\..\Framework\Headers"
 				PreprocessorDefinitions="COMPILE_MULTIMON_STUBS;NOIME;WIN32;_WINDOWS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -86,7 +86,7 @@ copy .\Debug\OVIME.ime C:\Windows\System32\*
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories=".\;..\OVIME2Server;..\..\..\..\trunk\Framework\Headers;..\tinyxml"
+				AdditionalIncludeDirectories=".\;..\OVIME2Server;..\..\..\Framework\Headers"
 				PreprocessorDefinitions="COMPILE_MULTIMON_STUBS;NOIME;WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
