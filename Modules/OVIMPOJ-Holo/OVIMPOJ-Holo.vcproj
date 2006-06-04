@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\Framework\Headers;..\..\..\..\Modules\SharedHeaders"
+				AdditionalIncludeDirectories="..\..\Framework\Headers;..\SharedHeaders"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -34,7 +34,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="2"
-				ModuleDefinitionFile="..\..\OVModule.def"
+				ModuleDefinitionFile="..\OVModule.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				TargetMachine="1"/>
@@ -71,7 +71,7 @@
 			CharacterSet="1">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\..\Framework\Headers;..\..\..\..\Modules\SharedHeaders"
+				AdditionalIncludeDirectories="..\..\Framework\Headers;..\SharedHeaders"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
@@ -84,7 +84,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="1"
-				ModuleDefinitionFile="..\..\OVModule.def"
+				ModuleDefinitionFile="..\OVModule.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -176,94 +176,22 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath="..\..\..\..\Modules\SharedSource\OVCandidateList.cpp">
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release-Unicode|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
+				RelativePath="..\SharedSource\OVCandidateList.cpp">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedSource\OVCIN.cpp">
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release-Unicode|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
+				RelativePath="..\SharedSource\OVCIN.cpp">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedSource\OVFileHandler.cpp">
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release-Unicode|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
+				RelativePath="..\SharedSource\OVFileHandler.cpp">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\OVIMPOJ-Holo\OVIMPOJ-Holo.cpp">
+				RelativePath=".\OVIMPOJ-Holo.cpp">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedSource\OVStringToolKit.cpp">
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release-Unicode|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
+				RelativePath="..\SharedSource\OVStringToolKit.cpp">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\OVIMPOJ-Holo\POJ-Holo.cpp">
+				RelativePath=".\POJ-Holo.cpp">
 			</File>
 		</Filter>
 		<Filter
@@ -271,22 +199,22 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath="..\..\..\..\Modules\SharedHeaders\OVCandidateList.h">
+				RelativePath="..\SharedHeaders\OVCandidateList.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedHeaders\OVCIN.h">
+				RelativePath="..\SharedHeaders\OVCIN.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedHeaders\OVFileHandler.h">
+				RelativePath="..\SharedHeaders\OVFileHandler.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\OVIMPOJ-Holo\OVIMPOJ-Holo.h">
+				RelativePath=".\OVIMPOJ-Holo.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedHeaders\OVStringToolKit.h">
+				RelativePath="..\SharedHeaders\OVStringToolKit.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\OVIMPOJ-Holo\POJ-Holo.h">
+				RelativePath=".\POJ-Holo.h">
 			</File>
 		</Filter>
 		<Filter

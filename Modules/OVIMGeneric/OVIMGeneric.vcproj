@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\Framework\Headers;..\..\..\..\Modules\SharedHeaders"
+				AdditionalIncludeDirectories="..\..\Framework\Headers;..\SharedHeaders"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -34,7 +34,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="2"
-				ModuleDefinitionFile="..\..\OVModule.def"
+				ModuleDefinitionFile="..\OVModule.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				TargetMachine="1"/>
@@ -71,7 +71,7 @@
 			CharacterSet="0">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\..\Framework\Headers;..\..\..\..\Modules\SharedHeaders"
+				AdditionalIncludeDirectories="..\..\Framework\Headers;..\SharedHeaders"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
@@ -84,7 +84,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="1"
-				ModuleDefinitionFile="..\..\OVModule.def"
+				ModuleDefinitionFile="..\OVModule.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -176,10 +176,16 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath="..\..\..\..\Modules\OVIMGeneric\CIN-Defaults.cpp">
+				RelativePath=".\CIN-Defaults.cpp">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedSource\OVCandidateList.cpp">
+				RelativePath="..\SharedSource\OVCandidateList.cpp">
+			</File>
+			<File
+				RelativePath="..\SharedSource\OVCIN.cpp">
+			</File>
+			<File
+				RelativePath="..\SharedSource\OVCINInfo.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
@@ -200,7 +206,10 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedSource\OVCIN.cpp">
+				RelativePath="..\SharedSource\OVFileHandler.cpp">
+			</File>
+			<File
+				RelativePath=".\OVIMGeneric.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
@@ -221,52 +230,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedSource\OVCINInfo.cpp">
-			</File>
-			<File
-				RelativePath="..\..\..\..\Modules\SharedSource\OVFileHandler.cpp">
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release-Unicode|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\..\..\..\Modules\OVIMGeneric\OVIMGeneric.cpp">
-			</File>
-			<File
-				RelativePath="..\..\..\..\Modules\SharedSource\OVStringToolKit.cpp">
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release-Unicode|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-				</FileConfiguration>
+				RelativePath="..\SharedSource\OVStringToolKit.cpp">
 			</File>
 		</Filter>
 		<Filter
@@ -274,28 +238,28 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath="..\..\..\..\Modules\OVIMGeneric\CIN-Defaults.h">
+				RelativePath=".\CIN-Defaults.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedHeaders\OVCandidateList.h">
+				RelativePath="..\SharedHeaders\OVCandidateList.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedHeaders\OVCIN.h">
+				RelativePath="..\SharedHeaders\OVCIN.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedHeaders\OVCINInfo.h">
+				RelativePath="..\SharedHeaders\OVCINInfo.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedHeaders\OVFileHandler.h">
+				RelativePath="..\SharedHeaders\OVFileHandler.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\OVIMGeneric\OVIMGeneric.h">
+				RelativePath=".\OVIMGeneric.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedHeaders\OVKeySequence.h">
+				RelativePath="..\SharedHeaders\OVKeySequence.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\Modules\SharedHeaders\OVStringToolKit.h">
+				RelativePath="..\SharedHeaders\OVStringToolKit.h">
 			</File>
 		</Filter>
 		<Filter
