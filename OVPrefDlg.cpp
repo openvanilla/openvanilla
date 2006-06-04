@@ -23,7 +23,7 @@ END_EVENT_TABLE()
 
 OVPrefDlg::OVPrefDlg(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long style):
     wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE|wxCLIP_CHILDREN)
-		, curGenericMod(NULL)
+	, curGenericMod(NULL)
 	{
     // begin wxGlade: OVPrefDlg::OVPrefDlg
     notebook = new wxNotebook(this, -1, wxDefaultPosition, wxDefaultSize, 0);
@@ -162,7 +162,7 @@ OVPrefDlg::OVPrefDlg(wxWindow* parent, int id, const wxString& title, const wxPo
 void OVPrefDlg::set_properties()
 {
     // begin wxGlade: OVPrefDlg::set_properties
-    SetTitle(_("Open Vanilla Preferences"));
+    SetTitle(_("OpenVanilla Preferences"));
     opacitySlider->SetSize(wxSize(176, 20));
     switchKey->SetSelection(-1);
     modList->SetFocus();
@@ -406,6 +406,7 @@ void OVPrefDlg::InitModuleList(void)
 			modList->Check(i, true);
 	}
 	modList->SetSelection(0);
+	SaveModList();
 }
 
 void OVPrefDlg::InitGenericModules(void)
@@ -569,6 +570,7 @@ void OVPrefDlg::OnCancel(wxCommandEvent& evt)
 
 void OVPrefDlg::SaveGenericConfig(void)
 {
+	if(curGenericMod) {
 	AVDictionary* dict = loader.dict( curGenericMod->identifier() );
 	dict->setInteger("shiftSelectionKey", shiftSelectionKey->GetValue());
 	dict->setInteger("autoCompose", autoCompose->GetValue());
@@ -577,6 +579,7 @@ void OVPrefDlg::SaveGenericConfig(void)
 
 	int maxKeySequenceLength = genericMaxRadLength->GetSelection() + 1;
 	dict->setInteger( "maxKeySequenceLength", maxKeySequenceLength );
+	}
 }
 
 
