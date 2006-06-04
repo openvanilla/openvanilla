@@ -257,7 +257,6 @@ extern "C" {
 #define IME_REGWORD_STYLE_USER_LAST 0xFFFFFFFF
 #define SOFTKEYBOARD_TYPE_T1 1
 #define SOFTKEYBOARD_TYPE_C1 2
-#define IMEMENUITEM_STRING_SIZE 80
 #define MOD_IGNORE_ALL_MODIFIER 1024
 #define MOD_ON_KEYUP  2048
 #define MOD_RIGHT 16384
@@ -329,6 +328,14 @@ typedef struct tagSTYLEBUFW {
 	DWORD dwStyle;
 	WCHAR szDescription[STYLE_DESCRIPTION_SIZE];
 } STYLEBUFW,*PSTYLEBUFW,*LPSTYLEBUFW;
+
+#endif // _IMM_SDK_DEFINED_
+
+#ifndef _IMM_DDK_DEFINED_
+#define _IMM_DDK_DEFINED_
+
+#define IMEMENUITEM_STRING_SIZE 80
+
 typedef struct tagIMEMENUITEMINFOA {
 	UINT cbSize;
 	UINT fType;
@@ -352,11 +359,6 @@ typedef struct tagIMEMENUITEMINFOW {
 	HBITMAP hbmpItem;
 } IMEMENUITEMINFOW,*PIMEMENUITEMINFOW,*LPIMEMENUITEMINFOW;
 // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/wceinternational5/html/wce50lrfCOMPOSITIONSTR.asp
-
-#endif // _IMM_SDK_DEFINED_
-
-#ifndef _IMM_DDK_DEFINED_
-#define _IMM_DDK_DEFINED_
 
 //<comment author='b6s'> These two are not in imm.h
 typedef const void *PCVOID, *LPCVOID;
