@@ -31,15 +31,18 @@ int ChewingCheckData(const char *path) {
 }
 
 class OVIMChewing03;
+class OVIMChewingPinyin03;
 
 class OVIMChewing03Context : public OVInputMethodContext 
 {
 public:
-    OVIMChewing03Context(OVIMChewing03 *p, ChewingContext *ctx) {
+    /* OVIMChewing03Context(OVIMChewing03 *p, ChewingContext *ctx) {
         p=parent;
         im=ctx;
-    }
-	
+    } */
+    OVIMChewing03Context(ChewingContext *ctx) {
+        im=ctx;
+    }	
     virtual void start(OVBuffer *key, OVCandidate *textbar, OVService *srv) {	
 	} 
     virtual void clear() { chewing_handle_Enter(im); }
@@ -94,13 +97,18 @@ protected:
         chewing_handle_Default(im ,(key->isShift())?toupper(key->code()):tolower(key->code()));
     }
 	
-	void Capslock(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, OVService *srv) {
-        if(key->isCapslock()) {
-            if(chewing_chinesemode(im)) chewing_handle_Capslock(im);
-        }
-        else if (!chewing_chinesemode(im)) {
+    void Capslock(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, OVService *srv) {
+       if(key->isCapslock()) {
+	  if(chewing_get_ChiEngMode(im) == CHINESE_MODE) {
+	     chewing_handle_Capslock(im);
+	  }
+	  //if(chewing_chinesemode(im)) chewing_handle_Capslock(im);
+       } else if(chewing_get_ChiEngMode(im) != CHINESE_MODE) {
+	  chewing_handle_Capslock(im);
+       }
+       /* else if (!chewing_chinesemode(im)) {
             chewing_handle_Capslock(im);
-        }
+        } */
     }
 
     void Redraw(OVBuffer *buf, OVService *srv) {
@@ -170,8 +178,6 @@ protected:
     ChewingContext *im;
 };
 
-char selKey_define[11] = "1234567890"; /* Default */
-
 class OVIMChewing03 : public OVInputMethod {
    public:
       OVIMChewing03() {
@@ -209,13 +215,17 @@ class OVIMChewing03 : public OVInputMethod {
 	 ctx = chewing_new();
 
 	 if(!l->keyExist("keyboardLayout")) l->setInteger("keyboardLayout", 0);
-	 chewing_set_KBType( ctx, l->getInteger("keyboardLayout"));
-
-	 config.selectAreaLen = 16;
-	 config.maxChiSymbolLen = 16;
+	 int kb = l->getInteger("keyboardLayout");
+	 chewing_set_KBType( ctx, kb);
+	 char selKey_define[11] = "1234567890";
+	 if (kb==KB_HSU) strcpy(selKey_define, "asdfjkl789"); 
+	 else if (kb==KB_DVORAK_HSU) strcpy(selKey_define, "aoeuhtn789");
 	 int i;
 	 for ( i = 0; i < 10; i++ )
 	    config.selKey[ i ] = selKey_define[ i ];
+	 config.selectAreaLen = 16;
+	 config.maxChiSymbolLen = 16;
+	 config.bAddPhraseForward = 0;
 	 /* Enable configurations */
 	 chewing_Configure( ctx, &config );
 
@@ -237,7 +247,81 @@ class OVIMChewing03 : public OVInputMethod {
     }
 
     virtual OVInputMethodContext* newContext() {
-	    return new OVIMChewing03Context(this, ctx); 
+//	    return new OVIMChewing03Context(this, ctx); 
+	    return new OVIMChewing03Context(ctx);
+    }
+    
+protected:
+    ChewingContext *ctx;
+};
+
+class OVIMChewingPinyin03 : public OVInputMethod {
+   public:
+      OVIMChewingPinyin03() {
+	 ctx=NULL;
+      }
+
+      virtual ~OVIMChewingPinyin03() {
+	 delete ctx;
+      }
+
+      virtual int initialize(OVDictionary* l, OVService* s, const char* modulePath) {
+	 char chewingpath[PATH_MAX];
+	 char hashdir[PATH_MAX];
+	 ChewingConfigData config;
+
+	 // no more need to create hash dir ourselves
+	 sprintf(hashdir, "%s%s", s->userSpacePath(identifier()),
+	       s->pathSeparator());
+
+	 sprintf(chewingpath, "%sOVIMSpaceChewing03", modulePath);
+	 if (!ChewingCheckData(chewingpath)) {
+	    murmur("OVIMSpaceChewing: chewing data missing at %s", modulePath);
+	    return 0;
+	 }
+
+	 murmur ("OVIMSpaceChewing: initialize, chewing data=%s, userhash=%s", chewingpath, hashdir);
+
+	 // BECAUSE THE {SACRILEGIOUS WORDS HERE} libchewing HAS NO 
+	 // EXCEPTION HANDLING HERE (BLAME OLD C-style assert() !!)
+	 // WE HAVE TO DO ERROR CHECKING OURSELVES, OTHERWISE WE ARE
+	 // DOOMED IF CHEWING DATA DOESN'T EXIST. THIS MAKES OUR LIFE
+	 // HARD BUT WE SHOULD TRY NOT TO COMPLAIN
+	 // chew = new Chewing(chewingpath, hashdir);
+	 chewing_Init(chewingpath, hashdir);
+	 ctx = chewing_new();
+
+	 chewing_set_KBType( ctx, 8);
+	 char selKey_define[11] = "1234567890";
+	 int i;
+	 for ( i = 0; i < 10; i++ )
+	    config.selKey[ i ] = selKey_define[ i ];
+	 config.selectAreaLen = 16;
+	 config.maxChiSymbolLen = 16;
+	 config.bAddPhraseForward = 0;
+	 /* Enable configurations */
+	 chewing_Configure( ctx, &config );
+
+	 return 1;
+      }
+
+    virtual void update(OVDictionary* localconfig, OVService*) {
+        chewing_set_KBType( ctx, localconfig->getInteger("keyboardLayout"));
+    }
+
+    virtual const char *identifier() {
+        return "OVIMSpaceChewingPinyin03";
+    }
+
+    virtual const char *localizedName(const char *locale) {
+        if (!strcasecmp(locale, "zh_TW")) return "酷音拼音 0.3";
+        if (!strcasecmp(locale, "zh_CN")) return "繁体酷音拼音 0.3";
+ 	    return "Chewing Pinyin 0.3";
+    }
+
+    virtual OVInputMethodContext* newContext() {
+//	    return new OVIMChewing03Context(this, ctx); 
+	    return new OVIMChewing03Context(ctx); 
     }
     
 protected:
@@ -245,4 +329,13 @@ protected:
 };
 
 // the module wrapper
-OV_SINGLE_MODULE_WRAPPER(OVIMChewing03);
+//OV_SINGLE_MODULE_WRAPPER(OVIMChewing03);
+extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }
+extern "C" int OVInitializeLibrary(OVService*, const char*) { return 1; }
+extern "C" OVModule *OVGetModuleFromLibrary(int idx) {
+    switch (idx) {
+       case 0: return new OVIMChewing03;
+       case 1: return new OVIMChewingPinyin03;
+    }
+    return NULL;
+}

@@ -20,10 +20,6 @@
 #include "chewingio.h"
 #include "private.h"
 
-CHEWING_API int chewing_chinesemode( ChewingContext *ctx ) {
-  return (ctx->output->bChiSym == CHINESE_MODE);
-}
-
 /**
  * @param ctx handle to Chewing IM context
  * @retval TRUE if it currnet input state is at the "end-of-a-char"

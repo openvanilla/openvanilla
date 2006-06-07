@@ -18,8 +18,6 @@
 
 #include "global.h"
 
-int chewing_chinesemode( ChewingContext *ctx );
-
 /**
  * @param ctx handle to Chewing IM context
  * @retval TRUE if it currnet input state is at the "end-of-a-char"
