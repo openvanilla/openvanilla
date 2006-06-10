@@ -111,6 +111,10 @@ public:
     inline int getWordVectorByChar(const string& inKey,
                             vector<string>& outStringVectorRef);
 
+    void show(const CinMap &m, int x);
+    void runtest(const string &s);
+    void test();
+
 protected:
     int getVectorFromMap(const CinMap& inMapRef,
                          const string& inKey,
@@ -121,6 +125,12 @@ protected:
     int setProperty(const string& key, const string& value);
     void insertMap(const string& line);
     int searchCinMap(const CinMap& m, const string& key) const;
+    
+    
+    const pair<int, int> findRangeStartingWith(const CinMap& m,
+        const string& key) const;
+    int findClosestUpperBound(const CinMap& m, const string& key) const;
+    int findClosestLowerBound(const CinMap& m, const string& key) const;
 };
 
 

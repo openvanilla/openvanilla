@@ -130,9 +130,6 @@ void OVCIN::lowerStr(string& str){
 }
 
 
-
-
-
 int OVCIN::getVectorFromMap(const CinMap& inMapRef,
                             const string& inKey,
                             vector<string>& outStringVectorRef)
@@ -163,3 +160,114 @@ int OVCIN::searchCinMap(const CinMap& m, const string& key) const{
     }
     return -1;
 }
+
+
+const pair<int, int> OVCIN::findRangeStartingWith(const CinMap& m,
+    const string& key) const
+{
+    pair<int, int> r;
+    r.second=-1;
+    
+    r.first = findClosestUpperBound(m, key);
+    if (r.first == -1) return r;
+    
+    r.second = findClosestLowerBound(m, key);
+    if (r.second == -1) r.second=m.size();
+    r.second--;
+    
+    if (r.first > r.second) r.first=r.second=-1;
+    return r;
+}
+
+
+int OVCIN::findClosestUpperBound(const CinMap& m, const string& key) const{
+    int mid, low = 0, high = m.size()-1;
+
+    while(low <= high){
+        mid = (low + high) / 2;
+
+        if( key == m[mid].first )
+          return mid;
+          
+        if (mid > 0) {
+            if (key > m[mid-1].first && key <= m[mid].first) return mid;
+        }
+
+        if( key < m[mid].first )
+            high = mid -1;
+        else
+            low = mid + 1;
+    }
+    return -1;
+}
+
+int OVCIN::findClosestLowerBound(const CinMap& m, const string& key) const{
+    string newkey=key;
+    size_t l=newkey.length();
+    if (l) {
+        if ((unsigned char)newkey[l-1] != 0xff)
+            newkey[l-1] = (unsigned char)newkey[l-1] +1;
+    }
+    
+    return findClosestUpperBound(m, newkey);
+}
+
+
+
+
+// discarded test routines
+
+void OVCIN::show(const CinMap &m, int x) {
+    if (x==-1) {
+        printf ("    not found\n");
+        return;
+    }
+    
+    int size=m.size();
+    printf ("    %d: ", x);
+    if (x > 0) {
+        printf ("[%d: %s >>> (%d: %s)", x-1, m[x-1].first.c_str(), x, m[x].first.c_str());
+    }
+    else {
+        printf ("(%d: %s)", x, m[x].first.c_str());
+    }
+
+    if (x < size-1) {
+        printf (" <<< %d: %s]\n", x+1, m[x+1].first.c_str());
+    }    
+    else {
+        printf ("\n");
+    }
+}
+
+void OVCIN::runtest(const string &s) {
+    CinMap &m=maps[_OVCIN::M_CHAR];
+
+    pair<int, int> p=findRangeStartingWith(m, s);
+    
+    printf ("key=%s, range=(%d, %d)", s.c_str(), p.first, p.second);
+    if (p.first==-1) printf (": NOT FOUND\n"); 
+    else {
+        printf("\n");
+        show(m, p.first);
+        show(m, p.second);
+    }
+}
+void OVCIN::test() {
+    runtest("");
+    runtest("0");
+    runtest("9");
+    runtest("a");
+    runtest("az");
+    runtest("b");
+    runtest("yv");
+    runtest("yvvv");
+    runtest("yw");
+    runtest("yz");
+    runtest("zxc");
+    runtest("zxcy");
+    runtest("zxcz");
+    runtest("zzzz");    
+}
+
+
