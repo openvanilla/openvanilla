@@ -200,7 +200,7 @@ static void SetChoiceInfo(
 
 	/* magic number */
 	//pci->nChoicePerPage = ( selectAreaLen - 5 ) / ( len * 2 + 3 );
-	pci->nChoicePerPage = selectAreaLen / (len + 1);
+	pci->nChoicePerPage = selectAreaLen / (len + 1) ;
 	if ( pci->nChoicePerPage > MAX_SELKEY )
 		pci->nChoicePerPage = MAX_SELKEY;
 	pci->nPage = CEIL_DIV( pci->nTotalChoice, pci->nChoicePerPage );

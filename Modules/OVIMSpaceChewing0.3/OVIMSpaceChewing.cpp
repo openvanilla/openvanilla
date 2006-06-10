@@ -36,10 +36,6 @@ class OVIMChewingPinyin03;
 class OVIMChewing03Context : public OVInputMethodContext 
 {
 public:
-    /* OVIMChewing03Context(OVIMChewing03 *p, ChewingContext *ctx) {
-        p=parent;
-        im=ctx;
-    } */
     OVIMChewing03Context(ChewingContext *ctx) {
         im=ctx;
     }	
@@ -102,13 +98,9 @@ protected:
 	  if(chewing_get_ChiEngMode(im) == CHINESE_MODE) {
 	     chewing_handle_Capslock(im);
 	  }
-	  //if(chewing_chinesemode(im)) chewing_handle_Capslock(im);
        } else if(chewing_get_ChiEngMode(im) != CHINESE_MODE) {
 	  chewing_handle_Capslock(im);
        }
-       /* else if (!chewing_chinesemode(im)) {
-            chewing_handle_Capslock(im);
-        } */
     }
 
     void Redraw(OVBuffer *buf, OVService *srv) {
@@ -153,7 +145,7 @@ protected:
             textbar->clear();
             chewing_cand_Enumerate( im );
 	    while ( chewing_cand_hasNext( im ) ) {
-	       if ( i == chewing_cand_ChoicePerPage( im ) )
+	       if ( i > chewing_cand_ChoicePerPage( im ) )
 		  break;
 	       sprintf( str, "%c.", im->data->config.selKey[i - 1]);
 	       textbar->append( str );
@@ -162,6 +154,7 @@ protected:
 	       textbar->append( str );
 	       free( cand_string );
 	       i++;
+	       if( i == 5) textbar->append("\n");
 	    }
 	    sprintf(s," %d/%d", chewing_cand_CurrentPage(im) + 1, chewing_cand_TotalPage(im));
 	    textbar->append((char*)s); 
@@ -223,8 +216,8 @@ class OVIMChewing03 : public OVInputMethod {
 	 int i;
 	 for ( i = 0; i < 10; i++ )
 	    config.selKey[ i ] = selKey_define[ i ];
-	 config.selectAreaLen = 16;
-	 config.maxChiSymbolLen = 16;
+	 config.selectAreaLen = 14;
+	 config.maxChiSymbolLen = 20;
 	 config.bAddPhraseForward = 0;
 	 /* Enable configurations */
 	 chewing_Configure( ctx, &config );
@@ -247,7 +240,6 @@ class OVIMChewing03 : public OVInputMethod {
     }
 
     virtual OVInputMethodContext* newContext() {
-//	    return new OVIMChewing03Context(this, ctx); 
 	    return new OVIMChewing03Context(ctx);
     }
     
@@ -296,8 +288,8 @@ class OVIMChewingPinyin03 : public OVInputMethod {
 	 int i;
 	 for ( i = 0; i < 10; i++ )
 	    config.selKey[ i ] = selKey_define[ i ];
-	 config.selectAreaLen = 16;
-	 config.maxChiSymbolLen = 16;
+	 config.selectAreaLen = 14;
+	 config.maxChiSymbolLen = 20;
 	 config.bAddPhraseForward = 0;
 	 /* Enable configurations */
 	 chewing_Configure( ctx, &config );
@@ -320,7 +312,6 @@ class OVIMChewingPinyin03 : public OVInputMethod {
     }
 
     virtual OVInputMethodContext* newContext() {
-//	    return new OVIMChewing03Context(this, ctx); 
 	    return new OVIMChewing03Context(ctx); 
     }
     
@@ -329,7 +320,7 @@ protected:
 };
 
 // the module wrapper
-//OV_SINGLE_MODULE_WRAPPER(OVIMChewing03);
+// OV_SINGLE_MODULE_WRAPPER(OVIMChewing03);
 extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }
 extern "C" int OVInitializeLibrary(OVService*, const char*) { return 1; }
 extern "C" OVModule *OVGetModuleFromLibrary(int idx) {

@@ -135,7 +135,7 @@ int HaninSymbolInput(
 	pai->nAvail = 1;
 	pai->currentAvail = 0;
 	//pci->nChoicePerPage = (selectAreaLen - 5) / ( 2 + 3) ;
-	pci->nChoicePerPage = selectAreaLen / (len + 1);
+	pci->nChoicePerPage = selectAreaLen / (len + 1) ;
 	if ( pci->nChoicePerPage > MAX_SELKEY ) {
 		pci->nChoicePerPage = MAX_SELKEY;
 	}
