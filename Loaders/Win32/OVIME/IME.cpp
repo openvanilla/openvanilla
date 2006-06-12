@@ -195,6 +195,10 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		keycode.setCtrl(1);
 	if(lpbKeyState[VK_MENU] & 0x80)
 		keycode.setAlt(1);
+	if((lpbKeyState[VK_NUMLOCK])
+		&& (uVKey >= VK_NUMPAD0)
+		&& (uVKey <= VK_DIVIDE))
+		keycode.setNum(1);
 
 	dsvr->lockIMC(hIMC);
 	loader = AVLoader::getLoader();
