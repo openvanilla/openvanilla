@@ -6,7 +6,7 @@ using namespace std;
 struct sort_im : public binary_function< OVModule*, OVModule*, bool >
 {
 	sort_im(AVDictionary* dict) : m_dict(dict) {}
-	operator ()(OVModule *a, OVModule *b)
+	int operator ()(OVModule *a, OVModule *b)
 	{
 		int pa = 0, pb = 0;
 		m_dict->setDict(a->identifier());
