@@ -1,4 +1,4 @@
-﻿// OVIMPOJHolo.cpp: prototype for POJ IM
+// OVIMPOJHolo.cpp: prototype for POJ IM
 //
 // Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
