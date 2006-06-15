@@ -1,4 +1,3 @@
-#pragma unmanaged
 #include <vector>
 #include <windows.h>
 #include <commctrl.h>
