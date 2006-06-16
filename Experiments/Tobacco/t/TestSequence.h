@@ -11,41 +11,36 @@ public:
 	void setUp(void)
 	{
 		string keystroke("a");
-		element.set(keystroke);
+		element.setView(keystroke);
 
-		string word("apple");
-		chunk.set(word);
+		chunk.add(&element, chunk.getIterator());
+
+		string word("apple");		
+		chunk.setView(word);
 	}
 
-	void testGet(void)
+	void testGetView(void)
 	{
-		TS_ASSERT_SAME_DATA(element.get()->c_str(), "a", 1);
+		TS_ASSERT_SAME_DATA(element.getView().c_str(), "a", 1);
 
-		TS_ASSERT_SAME_DATA(chunk.get()->c_str(), "apple", 5);
+		TS_ASSERT_SAME_DATA(chunk.getView().c_str(), "apple", 5);
 	}
 
-        void testAdd(void)
-        {
-		TS_ASSERT(!element.add(&chunk));
-
-		TS_ASSERT(chunk.add(&element));
-        }
-
-	void testGetChild(void)	
+	void testAdd(void)
 	{
-		TS_ASSERT(!element.getChild(0));
+		TS_ASSERT(!element.add(&chunk, NULL));
 
-		TS_ASSERT_SAME_DATA(chunk.getChild(0)->get()->c_str(), "a", 1);
+		TS_ASSERT(chunk.add(&element, ++chunk.getIterator()));
 	}
 
-        void testRemove(void)
-        {
-		TS_ASSERT(!element.remove(0));
+	void testRemove(void)
+	{
+		TS_ASSERT(!element.remove(NULL));
 
-                TS_ASSERT(chunk.remove(0));
-        }
+		TS_ASSERT(chunk.remove(--chunk.getIterator()));
+	}
 
 private:
-        Chunk chunk;
-        Element element;
+	Chunk chunk;
+	Element element;
 };

@@ -6,60 +6,77 @@
 
 using namespace std;
 
-struct DeleteObject
-{
-	template<typename T>
-	void operator()(const T* ptr) const { delete ptr; }
-};
+class SequenceVisitor;
 
 class Sequence
 {
 public:
-	virtual bool add(Sequence*) = 0;
-	virtual bool remove(int) = 0;
-	virtual Sequence* getChild(int) = 0; 
-
-	string* get(void) { return &sequence_; }
-	void set(string& str) { sequence_ = str; }
-private:
-        string sequence_;
-};                    
+	virtual bool add(Sequence*, vector<Sequence*>::iterator) = 0;
+	virtual bool remove(vector<Sequence*>::iterator) = 0;
+	virtual vector<Sequence*>::iterator getIterator(void) = 0;
+	virtual void accept(SequenceVisitor& visitor) = 0;
+	
+	virtual string& getView(void) = 0;
+	virtual void setView(string& str) = 0;
+	virtual size_t getLength(void) = 0;
+	
+	virtual bool isElement(void) = 0;
+};
 
 class Element : public Sequence
 {
 public:
-	virtual bool add(Sequence*) { return false; }
-	virtual bool remove(int) { return false; }
-	virtual Sequence* getChild(int) { return NULL; }
+	virtual bool add(Sequence*, vector<Sequence*>::iterator) = 0;
+	virtual bool remove(vector<Sequence*>::iterator) = 0;
+	virtual vector<Sequence*>::iterator getIterator(void) = 0;
+	virtual void accept(SequenceVisitor& visitor) = 0;
+	
+	virtual string& getView(void) = 0;
+	virtual void setView(string& str) = 0;
+	virtual size_t getLength(void) = 0;
+	
+	virtual bool isElement(void) = 0;
+
+protected:
+
+private:
+	string m_view;
 };
 
 class Chunk : public Sequence
 {
 public:
-	~Chunk(void)
-	{
-		for_each(chunk_.begin(), chunk_.end(), DeleteObject());
-	}
+	~Chunk(void);
 
-	bool add(Sequence* seq)
-	{
-		chunk_.push_back(seq);
-		return true;
-	}
-
-	bool remove(int index)
-	{
-		chunk_.erase(chunk_.begin() + index);
-		return true;
-	}
-
-	Sequence* getChild(int index)
-	{
-		return chunk_[index];
-	}
+	virtual bool add(Sequence*, vector<Sequence*>::iterator) = 0;
+	virtual bool remove(vector<Sequence*>::iterator) = 0;
+	virtual vector<Sequence*>::iterator getIterator(void) = 0;
+	virtual void accept(SequenceVisitor& visitor) = 0;
+	
+	virtual string& getView(void) = 0;
+	virtual void setView(string& str) = 0;
+	virtual size_t getLength(void) = 0;
+	
+	virtual bool isElement(void) = 0;
 
 private:
-	vector<Sequence*> chunk_;
+	string m_view;
+	vector<Sequence*> m_seqVector;
+};
+
+class SequenceVisitor
+{
+public:
+	virtual void visit(Sequence*) = 0;
+	virtual void visit(Element*) = 0;
+	virtual void visit(Chunk*) = 0;
+
+	virtual string& getElementViews(void) = 0;
+	virtual string& getChunkViews(void) = 0;
+
+private:
+	string m_elementViews;
+	string m_chunkViews;
 };
 
 #endif
