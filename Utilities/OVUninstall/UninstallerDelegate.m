@@ -5,6 +5,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#define MSG(x)      [[NSBundle mainBundle] localizedStringForKey:x value:nil table:nil]
+
 #define LCP			"/Library/Components"
 #define OV063		"/OVLoader.bundle"
 #define OV07x		"/OVInit.bundle"
@@ -54,17 +56,17 @@
 - (void)awakeFromNib  {
 	versions = [NSMutableArray new];
 	
-	NSString *item=@"OpenVanilla (version unknown)";
+	NSString *item=MSG(@"OpenVanilla (version unknown)");
 	
 	// detects version 0.7.2 (Unicode script): stable and beta
 	if ([self pathExists:LCP OV072]) {
-		item=@"OpenVanilla 0.7.2 (unknown branch)";
+		item=MSG(@"OpenVanilla 0.7.2 (unknown branch)");
 		
 		if ([self resource:LCP OV072 INFOP contains:@"OpenVanilla 0.7.2"]) {
-			item=@"OpenVanilla 0.7.2 stable";
+			item=MSG(@"OpenVanilla 0.7.2 stable");
 		}
 		else if ([self resource:LCP OV072 INFOP contains:@"OpenVanilla 0.7.2 (beta)"]) {
-			item=@"OpenVanilla 0.7.2 beta";
+			item=MSG(@"OpenVanilla 0.7.2 beta");
 		}
 		
 		[self addItem:item path:LCP OV072 checked:YES];
@@ -73,13 +75,13 @@
 
 	// detects version 0.7.2 (Traditional Chinese script): stable and beta	
 	if ([self pathExists:LCP OV072TC]) {
-		item=@"OpenVanilla 0.7.2 (unknown branch, Traditional Chinese script)";
+		item=MSG(@"OpenVanilla 0.7.2 (unknown branch, Traditional Chinese script)");
 
 		if ([self resource:LCP OV072TC INFOP contains:@"OpenVanilla 0.7.2 (TC Script)"]) {
-			item=@"OpenVanilla 0.7.2 stable (Traditional Chinese script)";
+			item=MSG(@"OpenVanilla 0.7.2 stable (Traditional Chinese script)");
 		}
 		else if ([self resource:LCP OV072TC INFOP contains:@"OpenVanilla 0.7.2 (TC)"]) {
-			item=@"OpenVanilla 0.7.2 beta (Traditional Chinese script)";
+			item=MSG(@"OpenVanilla 0.7.2 beta (Traditional Chinese script)");
 		}
 		
 		[self addItem:item path:LCP OV072TC checked:YES];
@@ -87,10 +89,10 @@
 
 	// detects version 0.7.2 (Simplified Chinese script): stable and else
 	if ([self pathExists:LCP OV072SC]) {
-		item=@"OpenVanilla 0.7.2 (unknown branch, Simplified Chinese script)";
+		item=MSG(@"OpenVanilla 0.7.2 (unknown branch, Simplified Chinese script)");
 		
 		if ([self resource:LCP OV072SC INFOP contains:@"OpenVanilla 0.7.2 (SC Script)"]) {
-			item=@"OpenVanilla 0.7.2 stable (Simplified Chinese script)";
+			item=MSG(@"OpenVanilla 0.7.2 stable (Simplified Chinese script)");
 		}
 		
 		[self addItem:item path:LCP OV072SC checked:YES];
@@ -99,19 +101,19 @@
 
 	// detects version 0.7.1 and 0.7.0
 	if ([self pathExists:LCP OV07x]) {
-		item=@"OpenVanilla 0.7.x (anything pre-0.7.2)";
+		item=MSG(@"OpenVanilla 0.7.x (anything pre-0.7.2)");
 
 		if ([self resource:LCP OV07x INFOP contains:@"OpenVanilla 0.7.1"]) {
-			item=@"OpenVanilla 0.7.1";
+			item=MSG(@"OpenVanilla 0.7.1");
 		}
 		else if ([self resource:LCP OV07x INFOP contains:@"OpenVanilla 0.7.0rc5"]) { 
-			item=@"OpenVanilla 0.7.0rc5";
+			item=MSG(@"OpenVanilla 0.7.0rc5");
 		}
 		else if ([self resource:LCP OV07x INFOP contains:@"OpenVanilla 0.7.0rc4"]) { 
-			item=@"OpenVanilla 0.7.0rc4";
+			item=MSG(@"OpenVanilla 0.7.0rc4");
 		}
 		else if ([self resource:LCP OV07x INFOP contains:@"OpenVanilla 0.7.0rc3"]) {
-			item=@"OpenVanilla 0.7.0rc3";
+			item=MSG(@"OpenVanilla 0.7.0rc3");
 		}
 		
 		[self addItem:item path:LCP OV07x checked:YES];
@@ -119,20 +121,20 @@
 	
 	// detects version 0.6.3
 	if ([self pathExists:LCP OV063]) {
-		item=@"OpenVanilla 0.6.3";
+		item=MSG(@"OpenVanilla 0.6.3");
 		[self addItem:item path:LCP OV063 checked:YES];
 	}
 
 	// detects version 0.6.3 Prefernce Pane
 	if ([self pathExists:OV063Pref]) {
-		item=@"OpenVanilla 0.6.3 Preference Pane";
+		item=MSG(@"OpenVanilla 0.6.3 Preference Pane");
 		[self addItem:item path:OV063Pref checked:YES];
 	}
 
 	
 	// detects VanillaInput 0.06x
 	if ([self pathExists:LCP VInput]) {
-		item=@"VanillaInput 0.064 (or earlier)";
+		item=MSG(@"VanillaInput 0.064 (or earlier)");
 		[self addItem:item path:LCP VInput checked:YES];
 	}
 
@@ -144,11 +146,11 @@
 - (IBAction)uninstall:(id)sender
 {
 	NSAlert *beginbox=[NSAlert
-		alertWithMessageText:@"Uninstalling OpenVanilla"
-		defaultButton:@"Proceed"
-		alternateButton:@"Cancel"
+		alertWithMessageText:MSG(@"Uninstalling OpenVanilla")
+		defaultButton:MSG(@"Proceed")
+		alternateButton:MSG(@"Cancel")
 		otherButton:nil
-		informativeTextWithFormat:@"Be sure?"];	
+		informativeTextWithFormat:MSG(@"Confirm to uninstall")];	
 	
 	if ([beginbox runModal]==0) return;
 		
@@ -239,11 +241,11 @@
 	
 	
 	NSAlert *endbox=[NSAlert
-		alertWithMessageText:@"System Restart Required"
-		defaultButton:@"Restart"
+		alertWithMessageText:MSG(@"System Restart Required")
+		defaultButton:MSG(@"Restart")
 		alternateButton:nil
 		otherButton:nil
-		informativeTextWithFormat:@"Because of OS X's design, we have to restart the system to complete the uninstallation process."];	
+		informativeTextWithFormat:MSG(@"Restart Explanation")];	
 	
 	[endbox runModal];
 
