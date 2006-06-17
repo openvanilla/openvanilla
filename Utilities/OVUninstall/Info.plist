@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>OVUninstall</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.OVUninstall</string>
+	<string>org.openvanilla.uninstall</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -17,12 +17,14 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>opvn</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>LSHasLocalizedDisplayName</key>
+	<true/>
 </dict>
 </plist>

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6A5A63FE0A446F33002EB517 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A5A63FD0A446F33002EB517 /* Localizable.strings */; };
 		6A9C831C0A43FB9D0061AC3A /* UninstallerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9C831B0A43FB9D0061AC3A /* UninstallerDelegate.m */; };
+		6AD9F3450A4471F7008FE580 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AD9F3440A4471F7008FE580 /* Security.framework */; };
 		6AEA59710A446D9E008193D7 /* OVUninstall.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6AEA59700A446D9E008193D7 /* OVUninstall.icns */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -25,12 +26,14 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* OVUninstall_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUninstall_Prefix.pch; sourceTree = "<group>"; };
+		6A5223A20A4472D7005BDFED /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A5A63F70A446EA6002EB517 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6A9C831A0A43FB9D0061AC3A /* UninstallerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UninstallerDelegate.h; sourceTree = "<group>"; };
 		6A9C831B0A43FB9D0061AC3A /* UninstallerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UninstallerDelegate.m; sourceTree = "<group>"; };
+		6AD9F3440A4471F7008FE580 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		6AEA59700A446D9E008193D7 /* OVUninstall.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OVUninstall.icns; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* OVUninstall.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OVUninstall.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* Uninstalling OpenVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uninstalling OpenVanilla.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				6AD9F3450A4471F7008FE580 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,7 +52,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* OVUninstall.app */,
+				8D1107320486CEB800E47090 /* Uninstalling OpenVanilla.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +86,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6AD9F3440A4471F7008FE580 /* Security.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
@@ -108,7 +113,7 @@
 			name = OVUninstall;
 			productInstallPath = "$(HOME)/Applications";
 			productName = OVUninstall;
-			productReference = 8D1107320486CEB800E47090 /* OVUninstall.app */;
+			productReference = 8D1107320486CEB800E47090 /* Uninstalling OpenVanilla.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -118,6 +123,13 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "OVUninstall" */;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				zh_TW,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* OVUninstall */;
 			projectDirPath = "";
 			targets = (
@@ -157,6 +169,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				089C165DFE840E0CC02AAC07 /* English */,
+				6A5223A20A4472D7005BDFED /* zh_TW */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -190,7 +203,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = OVUninstall;
+				PRODUCT_NAME = "Uninstalling OpenVanilla";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
@@ -207,7 +220,7 @@
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = OVUninstall;
+				PRODUCT_NAME = "Uninstalling OpenVanilla";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
