@@ -12,11 +12,10 @@
 			buildConfigurationList = 6A7C230A097BE1A1003EE29A /* Build configuration list for PBXAggregateTarget "OpenVanillaLoader" */;
 			buildPhases = (
 			);
-			buildSettings = {
-				PRODUCT_NAME = OpenVanillaLoader;
-			};
 			dependencies = (
 				6A7C22F9097BE19E003EE29A /* PBXTargetDependency */,
+				6AA435380A38C1620028130A /* PBXTargetDependency */,
+				6AA4353A0A38C1650028130A /* PBXTargetDependency */,
 				6A7C22FB097BE19E003EE29A /* PBXTargetDependency */,
 				6A7C22FD097BE19E003EE29A /* PBXTargetDependency */,
 				6A7C22FF097BE19E003EE29A /* PBXTargetDependency */,
@@ -61,6 +60,8 @@
 		6A07511B09712EDF00CA4201 /* NSStringExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651670970E118004BCC4D /* NSStringExtension.mm */; };
 		6A07511D09712F0300CA4201 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9651680970E1D9004BCC4D /* Carbon.framework */; };
 		6A0751D909713F9600CA4201 /* OpenVanillaManual.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6A0751D809713F9600CA4201 /* OpenVanillaManual.pdf */; };
+		6A20C4010A38C85900A364CA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A20C3CD0A38C72700A364CA /* InfoPlist.strings */; };
+		6A20C4020A38C85F00A364CA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A20C3BE0A38C6FD00A364CA /* InfoPlist.strings */; };
 		6A77ABC00971131C00F5417F /* DisplayServerIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A77AB8C0971122300F5417F /* DisplayServerIcon.icns */; };
 		6A77ABC10971131F00F5417F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A9651E30970E4AE004BCC4D /* InfoPlist.strings */; };
 		6A77ABC20971132200F5417F /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6A9651F20970E4DD004BCC4D /* MainMenu.nib */; };
@@ -74,6 +75,14 @@
 		6A96525F0970EC2E004BCC4D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A96525D0970EC2E004BCC4D /* InfoPlist.strings */; };
 		6A96527C0970F016004BCC4D /* ATSComponent.r in Rez */ = {isa = PBXBuildFile; fileRef = 6A96518B0970E2C3004BCC4D /* ATSComponent.r */; };
 		6A96527D0970F018004BCC4D /* ATSComponent.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651890970E2C3004BCC4D /* ATSComponent.c */; };
+		6AA434DC0A38BF9E0028130A /* OpenVanillaMenuIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A9652550970EC0B004BCC4D /* OpenVanillaMenuIcon.icns */; };
+		6AA434DF0A38BF9E0028130A /* ATSComponent.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651890970E2C3004BCC4D /* ATSComponent.c */; };
+		6AA434E10A38BF9E0028130A /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A96516A0970E1D9004BCC4D /* CoreServices.framework */; };
+		6AA434E30A38BF9E0028130A /* ATSComponent.r in Rez */ = {isa = PBXBuildFile; fileRef = 6A96518B0970E2C3004BCC4D /* ATSComponent.r */; };
+		6AA435240A38C1230028130A /* OpenVanillaMenuIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A9652550970EC0B004BCC4D /* OpenVanillaMenuIcon.icns */; };
+		6AA435270A38C1230028130A /* ATSComponent.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651890970E2C3004BCC4D /* ATSComponent.c */; };
+		6AA435290A38C1230028130A /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A96516A0970E1D9004BCC4D /* CoreServices.framework */; };
+		6AA4352B0A38C1230028130A /* ATSComponent.r in Rez */ = {isa = PBXBuildFile; fileRef = 6A96518B0970E2C3004BCC4D /* ATSComponent.r */; };
 		6AA6880C09710B99002080DE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6880A09710B99002080DE /* Localizable.strings */; };
 		6AA6881A09710C14002080DE /* OpenVanillaLoaderIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A96520D0970E77B004BCC4D /* OpenVanillaLoaderIcon.icns */; };
 		6AA6881B09710C18002080DE /* org.openvanilla.OVLoader.DefaultSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A96520E0970E77B004BCC4D /* org.openvanilla.OVLoader.DefaultSettings.plist */; };
@@ -98,23 +107,6 @@
 		6AA6899B09710DD6002080DE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9651690970E1D9004BCC4D /* Cocoa.framework */; };
 		6AA6899C09710DD6002080DE /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A96516A0970E1D9004BCC4D /* CoreServices.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXBuildStyle section */
-		6A9651AC0970E345004BCC4D /* Development */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-			};
-			name = Development;
-		};
-		6A9651AD0970E345004BCC4D /* Deployment */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-			};
-			name = Deployment;
-		};
-/* End PBXBuildStyle section */
 
 /* Begin PBXContainerItemProxy section */
 		6A7C22F8097BE19E003EE29A /* PBXContainerItemProxy */ = {
@@ -152,6 +144,20 @@
 			remoteGlobalIDString = 6A0750FB09712DAC00CA4201;
 			remoteInfo = ovfilter;
 		};
+		6AA435370A38C1620028130A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A9651350970DFEE004BCC4D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6AA434DA0A38BF9E0028130A;
+			remoteInfo = "OpenVanilla-TSComponent-TraditionalChineseScript";
+		};
+		6AA435390A38C1650028130A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A9651350970DFEE004BCC4D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6AA435220A38C1230028130A;
+			remoteInfo = "OpenVanilla-TSComponent-SimplifiedChineseScript";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -160,6 +166,12 @@
 		6A0750FC09712DAC00CA4201 /* ovfilter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ovfilter; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A0751C409713E2800CA4201 /* OVPreferences-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "OVPreferences-Info.plist"; sourceTree = "<group>"; };
 		6A0751DC09713FB000CA4201 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = zh_TW; path = PDFManuals/zh_TW.lproj/OpenVanillaManual.pdf; sourceTree = "<group>"; };
+		6A20C3BF0A38C6FD00A364CA /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = "TSComponentResources-TradtionalChineseScript/English.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6A20C3C20A38C70900A364CA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = "TSComponentResources-TradtionalChineseScript/zh_TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6A20C3C30A38C70D00A364CA /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = "TSComponentResources-TradtionalChineseScript/zh_CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6A20C3CE0A38C72700A364CA /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = "TSComponentResources-SimplifiedChineseScript/English.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6A20C3D10A38C72F00A364CA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = "TSComponentResources-SimplifiedChineseScript/zh_TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6A20C3D20A38C73300A364CA /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = "TSComponentResources-SimplifiedChineseScript/zh_CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6A77AB8C0971122300F5417F /* DisplayServerIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = DisplayServerIcon.icns; path = OVDisplayServer/DisplayServerIcon.icns; sourceTree = "<group>"; };
 		6A77ABAF097112C300F5417F /* OVDisplayServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVDisplayServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A77ABB1097112C300F5417F /* OVDisplayServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVDisplayServer-Info.plist"; sourceTree = "<group>"; };
@@ -231,11 +243,15 @@
 		6A96520D0970E77B004BCC4D /* OpenVanillaLoaderIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaLoaderIcon.icns; path = OVLoaderResources/OpenVanillaLoaderIcon.icns; sourceTree = "<group>"; };
 		6A96520E0970E77B004BCC4D /* org.openvanilla.OVLoader.DefaultSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = org.openvanilla.OVLoader.DefaultSettings.plist; path = OVLoaderResources/org.openvanilla.OVLoader.DefaultSettings.plist; sourceTree = "<group>"; };
 		6A9652130970E7C9004BCC4D /* OpenVanilla-TSComponent-0.7.2.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.7.2.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A9652140970E7C9004BCC4D /* OpenVanilla-TSComponent-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-TSComponent-Info.plist"; sourceTree = "<group>"; };
+		6A9652140970E7C9004BCC4D /* OpenVanilla-TSComponent-UnicodeScript-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-TSComponent-UnicodeScript-Info.plist"; sourceTree = "<group>"; };
 		6A9652550970EC0B004BCC4D /* OpenVanillaMenuIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaMenuIcon.icns; path = TSComponentResources/OpenVanillaMenuIcon.icns; sourceTree = "<group>"; };
 		6A96525E0970EC2E004BCC4D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = TSComponentResources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A9652620970EC33004BCC4D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = TSComponentResources/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A9652630970EC35004BCC4D /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = TSComponentResources/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6AA434E70A38BF9E0028130A /* OpenVanilla-TSComponent-0.7.2-TC.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.7.2-TC.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AA434E80A38BF9E0028130A /* OpenVanilla-TSComponent-TraditionalChineseScript.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-TSComponent-TraditionalChineseScript.plist"; sourceTree = "<group>"; };
+		6AA4352F0A38C1230028130A /* OpenVanilla-TSComponent-0.7.2-SC.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.7.2-SC.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AA435300A38C1230028130A /* OpenVanilla-TSComponent-SimplifiedChineseScript.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-TSComponent-SimplifiedChineseScript.plist"; sourceTree = "<group>"; };
 		6AA687C2097109EB002080DE /* OVLoader.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVLoader.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA687C3097109EB002080DE /* OVLoader-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVLoader-Info.plist"; sourceTree = "<group>"; };
 		6AA6880B09710B99002080DE /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = OVLoaderResources/English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -282,6 +298,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6AA434E00A38BF9E0028130A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AA434E10A38BF9E0028130A /* CoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AA435280A38C1230028130A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AA435290A38C1230028130A /* CoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6AA687C0097109EB002080DE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -295,17 +327,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A20C3BA0A38C62E00A364CA /* Resources-SimplifiedChineseScript */ = {
+			isa = PBXGroup;
+			children = (
+				6A20C3CD0A38C72700A364CA /* InfoPlist.strings */,
+			);
+			name = "Resources-SimplifiedChineseScript";
+			sourceTree = "<group>";
+		};
+		6A20C3BB0A38C63100A364CA /* Resources-TraditionalChineseScript */ = {
+			isa = PBXGroup;
+			children = (
+				6A20C3BE0A38C6FD00A364CA /* InfoPlist.strings */,
+			);
+			name = "Resources-TraditionalChineseScript";
+			sourceTree = "<group>";
+		};
+		6A20C3BD0A38C6C700A364CA /* Resources-Shared */ = {
+			isa = PBXGroup;
+			children = (
+				6A9652550970EC0B004BCC4D /* OpenVanillaMenuIcon.icns */,
+			);
+			name = "Resources-Shared";
+			sourceTree = "<group>";
+		};
 		6A9651330970DFEE004BCC4D = {
 			isa = PBXGroup;
 			children = (
-				6AA9CFA8097C04E6008EDA95 /* OpenVanilla.framework_(symlinked) */,
+				6AD7AFCB0970F9350000BF7C /* Components */,
 				6A96513E0970DFFE004BCC4D /* CocoaVanilla */,
-				6A9651DE0970E46F004BCC4D /* DisplayServerInterface */,
+				6AA434AF0A38BB7B0028130A /* Interfaces */,
 				6A9651460970E05E004BCC4D /* Frameworks */,
-				6A96534C0970F882004BCC4D /* InfoPlists */,
-				6AD7AFCB0970F9350000BF7C /* MajorPlayers */,
-				6A9651450970E059004BCC4D /* NSExtenstions */,
-				6AA687DA09710A91002080DE /* TSBundleInterface */,
+				6A96534C0970F882004BCC4D /* PropertyLists */,
 				6A96514E0970E0B2004BCC4D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -368,7 +421,10 @@
 		6A9651420970E035004BCC4D /* OpenVanillaTSComponent */ = {
 			isa = PBXGroup;
 			children = (
-				6A9651920970E2F1004BCC4D /* Resources */,
+				6A20C3BD0A38C6C700A364CA /* Resources-Shared */,
+				6A9651920970E2F1004BCC4D /* Resources-UnicodeScript */,
+				6A20C3BB0A38C63100A364CA /* Resources-TraditionalChineseScript */,
+				6A20C3BA0A38C62E00A364CA /* Resources-SimplifiedChineseScript */,
 				6A9651430970E04B004BCC4D /* ATSComponent */,
 			);
 			name = OpenVanillaTSComponent;
@@ -410,6 +466,8 @@
 		6A9651460970E05E004BCC4D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6A9651450970E059004BCC4D /* NSExtenstions */,
+				6AA9CFA8097C04E6008EDA95 /* OpenVanilla.framework_(symlinked) */,
 				6A9651680970E1D9004BCC4D /* Carbon.framework */,
 				6A9651690970E1D9004BCC4D /* Cocoa.framework */,
 				6A96516A0970E1D9004BCC4D /* CoreServices.framework */,
@@ -497,17 +555,18 @@
 				6A77ABAF097112C300F5417F /* OVDisplayServer.app */,
 				6A074F720971284800CA4201 /* OVPreferences.app */,
 				6A0750FC09712DAC00CA4201 /* ovfilter */,
+				6AA434E70A38BF9E0028130A /* OpenVanilla-TSComponent-0.7.2-TC.bundle */,
+				6AA4352F0A38C1230028130A /* OpenVanilla-TSComponent-0.7.2-SC.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6A9651920970E2F1004BCC4D /* Resources */ = {
+		6A9651920970E2F1004BCC4D /* Resources-UnicodeScript */ = {
 			isa = PBXGroup;
 			children = (
 				6A96525D0970EC2E004BCC4D /* InfoPlist.strings */,
-				6A9652550970EC0B004BCC4D /* OpenVanillaMenuIcon.icns */,
 			);
-			name = Resources;
+			name = "Resources-UnicodeScript";
 			sourceTree = "<group>";
 		};
 		6A9651B20970E367004BCC4D /* PDFManuals */ = {
@@ -526,15 +585,26 @@
 			name = DisplayServerInterface;
 			sourceTree = "<group>";
 		};
-		6A96534C0970F882004BCC4D /* InfoPlists */ = {
+		6A96534C0970F882004BCC4D /* PropertyLists */ = {
 			isa = PBXGroup;
 			children = (
 				6A77ABB1097112C300F5417F /* OVDisplayServer-Info.plist */,
 				6AA687C3097109EB002080DE /* OVLoader-Info.plist */,
 				6A0751C409713E2800CA4201 /* OVPreferences-Info.plist */,
-				6A9652140970E7C9004BCC4D /* OpenVanilla-TSComponent-Info.plist */,
+				6A9652140970E7C9004BCC4D /* OpenVanilla-TSComponent-UnicodeScript-Info.plist */,
+				6AA434E80A38BF9E0028130A /* OpenVanilla-TSComponent-TraditionalChineseScript.plist */,
+				6AA435300A38C1230028130A /* OpenVanilla-TSComponent-SimplifiedChineseScript.plist */,
 			);
-			name = InfoPlists;
+			name = PropertyLists;
+			sourceTree = "<group>";
+		};
+		6AA434AF0A38BB7B0028130A /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				6A9651DE0970E46F004BCC4D /* DisplayServerInterface */,
+				6AA687DA09710A91002080DE /* TSBundleInterface */,
+			);
+			name = Interfaces;
 			sourceTree = "<group>";
 		};
 		6AA687DA09710A91002080DE /* TSBundleInterface */ = {
@@ -555,7 +625,7 @@
 			name = "OpenVanilla.framework_(symlinked)";
 			sourceTree = "<group>";
 		};
-		6AD7AFCB0970F9350000BF7C /* MajorPlayers */ = {
+		6AD7AFCB0970F9350000BF7C /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				6A9651480970E077004BCC4D /* OVLoader */,
@@ -565,7 +635,7 @@
 				6A9651B20970E367004BCC4D /* PDFManuals */,
 				6A96514A0970E08A004BCC4D /* ovfilter */,
 			);
-			name = MajorPlayers;
+			name = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -581,54 +651,11 @@
 			);
 			buildRules = (
 			);
-			buildSettings = {
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "OVPreference-Info.plist";
-				INSTALL_PATH = "$(HOME)/Applications";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = OVPreference;
-				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
-			};
 			dependencies = (
 			);
 			name = OVPreferences;
 			productName = OVPreference;
 			productReference = 6A074F720971284800CA4201 /* OVPreferences.app */;
-			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
-<plist version=\"1.0\">
-<dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
-	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.OVPreference</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
-</dict>
-</plist>
-";
 			productType = "com.apple.product-type.application";
 		};
 		6A0750FB09712DAC00CA4201 /* ovfilter */ = {
@@ -640,22 +667,6 @@
 			);
 			buildRules = (
 			);
-			buildSettings = {
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INSTALL_PATH = "$(HOME)/bin";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = ovfilter;
-				ZERO_LINK = YES;
-			};
 			dependencies = (
 			);
 			name = ovfilter;
@@ -673,59 +684,16 @@
 			);
 			buildRules = (
 			);
-			buildSettings = {
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "OVDisplayServer-Info.plist";
-				INSTALL_PATH = "$(HOME)/Applications";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = OVDisplayServer;
-				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
-			};
 			dependencies = (
 			);
 			name = OVDisplayServer;
 			productName = OVDisplayServer;
 			productReference = 6A77ABAF097112C300F5417F /* OVDisplayServer.app */;
-			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
-<plist version=\"1.0\">
-<dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
-	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.OVDisplayServer</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
-</dict>
-</plist>
-";
 			productType = "com.apple.product-type.application";
 		};
-		6A9652120970E7C9004BCC4D /* OpenVanilla-TSComponent */ = {
+		6A9652120970E7C9004BCC4D /* OpenVanilla-TSComponent-UnicodeScript */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6A9652150970E7CA004BCC4D /* Build configuration list for PBXNativeTarget "OpenVanilla-TSComponent" */;
+			buildConfigurationList = 6A9652150970E7CA004BCC4D /* Build configuration list for PBXNativeTarget "OpenVanilla-TSComponent-UnicodeScript" */;
 			buildPhases = (
 				6A96520F0970E7C9004BCC4D /* Resources */,
 				6A9652100970E7C9004BCC4D /* Sources */,
@@ -734,50 +702,47 @@
 			);
 			buildRules = (
 			);
-			buildSettings = {
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				INFOPLIST_FILE = "OpenVanilla-TSComponent-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Carbon,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = "OpenVanilla-TSComponent";
-				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = YES;
-			};
 			dependencies = (
 			);
-			name = "OpenVanilla-TSComponent";
+			name = "OpenVanilla-TSComponent-UnicodeScript";
 			productName = "OpenVanilla-TSComponent";
 			productReference = 6A9652130970E7C9004BCC4D /* OpenVanilla-TSComponent-0.7.2.bundle */;
-			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
-<plist version=\"1.0\">
-<dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
-	<key>CFBundleExecutable</key>
-	<string>OpenVanilla-TSComponent</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.OpenVanilla-TSComponent</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundlePackageType</key>
-	<string>BNDL</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
-	<key>CSResourcesFileMapped</key>
-	<string>yes</string>
-</dict>
-</plist>
-";
+			productType = "com.apple.product-type.bundle";
+		};
+		6AA434DA0A38BF9E0028130A /* OpenVanilla-TSComponent-TraditionalChineseScript */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AA434E40A38BF9E0028130A /* Build configuration list for PBXNativeTarget "OpenVanilla-TSComponent-TraditionalChineseScript" */;
+			buildPhases = (
+				6AA434DB0A38BF9E0028130A /* Resources */,
+				6AA434DE0A38BF9E0028130A /* Sources */,
+				6AA434E00A38BF9E0028130A /* Frameworks */,
+				6AA434E20A38BF9E0028130A /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenVanilla-TSComponent-TraditionalChineseScript";
+			productName = "OpenVanilla-TSComponent";
+			productReference = 6AA434E70A38BF9E0028130A /* OpenVanilla-TSComponent-0.7.2-TC.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		6AA435220A38C1230028130A /* OpenVanilla-TSComponent-SimplifiedChineseScript */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AA4352C0A38C1230028130A /* Build configuration list for PBXNativeTarget "OpenVanilla-TSComponent-SimplifiedChineseScript" */;
+			buildPhases = (
+				6AA435230A38C1230028130A /* Resources */,
+				6AA435260A38C1230028130A /* Sources */,
+				6AA435280A38C1230028130A /* Frameworks */,
+				6AA4352A0A38C1230028130A /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenVanilla-TSComponent-SimplifiedChineseScript";
+			productName = "OpenVanilla-TSComponent";
+			productReference = 6AA4352F0A38C1230028130A /* OpenVanilla-TSComponent-0.7.2-SC.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		6AA687C1097109EB002080DE /* OVLoader */ = {
@@ -790,50 +755,11 @@
 			);
 			buildRules = (
 			);
-			buildSettings = {
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "OVLoader-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = OVLoader;
-				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = YES;
-			};
 			dependencies = (
 			);
 			name = OVLoader;
 			productName = OVLoader;
 			productReference = 6AA687C2097109EB002080DE /* OVLoader.bundle */;
-			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
-<plist version=\"1.0\">
-<dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
-	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.OVLoader</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundlePackageType</key>
-	<string>BNDL</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
-</dict>
-</plist>
-";
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -842,12 +768,6 @@
 		6A9651350970DFEE004BCC4D /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 6A9651360970DFEE004BCC4D /* Build configuration list for PBXProject "OpenVanillaLoader" */;
-			buildSettings = {
-			};
-			buildStyles = (
-				6A9651AC0970E345004BCC4D /* Development */,
-				6A9651AD0970E345004BCC4D /* Deployment */,
-			);
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				English,
@@ -861,7 +781,9 @@
 			projectDirPath = "";
 			targets = (
 				6A7C22F3097BE15F003EE29A /* OpenVanillaLoader */,
-				6A9652120970E7C9004BCC4D /* OpenVanilla-TSComponent */,
+				6A9652120970E7C9004BCC4D /* OpenVanilla-TSComponent-UnicodeScript */,
+				6AA434DA0A38BF9E0028130A /* OpenVanilla-TSComponent-TraditionalChineseScript */,
+				6AA435220A38C1230028130A /* OpenVanilla-TSComponent-SimplifiedChineseScript */,
 				6AA687C1097109EB002080DE /* OVLoader */,
 				6A77ABAE097112C300F5417F /* OVDisplayServer */,
 				6A074F710971284800CA4201 /* OVPreferences */,
@@ -902,6 +824,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6AA434DB0A38BF9E0028130A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A20C4020A38C85F00A364CA /* InfoPlist.strings in Resources */,
+				6AA434DC0A38BF9E0028130A /* OpenVanillaMenuIcon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AA435230A38C1230028130A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A20C4010A38C85900A364CA /* InfoPlist.strings in Resources */,
+				6AA435240A38C1230028130A /* OpenVanillaMenuIcon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6AA687BE097109EB002080DE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -920,6 +860,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A96527C0970F016004BCC4D /* ATSComponent.r in Rez */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AA434E20A38BF9E0028130A /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AA434E30A38BF9E0028130A /* ATSComponent.r in Rez */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AA4352A0A38C1230028130A /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AA4352B0A38C1230028130A /* ATSComponent.r in Rez */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -983,6 +939,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6AA434DE0A38BF9E0028130A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AA434DF0A38BF9E0028130A /* ATSComponent.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AA435260A38C1230028130A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AA435270A38C1230028130A /* ATSComponent.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6AA687BF097109EB002080DE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1011,7 +983,7 @@
 /* Begin PBXTargetDependency section */
 		6A7C22F9097BE19E003EE29A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6A9652120970E7C9004BCC4D /* OpenVanilla-TSComponent */;
+			target = 6A9652120970E7C9004BCC4D /* OpenVanilla-TSComponent-UnicodeScript */;
 			targetProxy = 6A7C22F8097BE19E003EE29A /* PBXContainerItemProxy */;
 		};
 		6A7C22FB097BE19E003EE29A /* PBXTargetDependency */ = {
@@ -1034,6 +1006,16 @@
 			target = 6A0750FB09712DAC00CA4201 /* ovfilter */;
 			targetProxy = 6A7C2300097BE19E003EE29A /* PBXContainerItemProxy */;
 		};
+		6AA435380A38C1620028130A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6AA434DA0A38BF9E0028130A /* OpenVanilla-TSComponent-TraditionalChineseScript */;
+			targetProxy = 6AA435370A38C1620028130A /* PBXContainerItemProxy */;
+		};
+		6AA4353A0A38C1650028130A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6AA435220A38C1230028130A /* OpenVanilla-TSComponent-SimplifiedChineseScript */;
+			targetProxy = 6AA435390A38C1650028130A /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1043,6 +1025,26 @@
 				6A0751DC09713FB000CA4201 /* zh_TW */,
 			);
 			name = OpenVanillaManual.pdf;
+			sourceTree = "<group>";
+		};
+		6A20C3BE0A38C6FD00A364CA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A20C3BF0A38C6FD00A364CA /* English */,
+				6A20C3C20A38C70900A364CA /* zh_TW */,
+				6A20C3C30A38C70D00A364CA /* zh_CN */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6A20C3CD0A38C72700A364CA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A20C3CE0A38C72700A364CA /* English */,
+				6A20C3D10A38C72F00A364CA /* zh_TW */,
+				6A20C3D20A38C73300A364CA /* zh_CN */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		6A9651C10970E3C4004BCC4D /* InfoPlist.strings */ = {
@@ -1340,7 +1342,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				INFOPLIST_FILE = "OpenVanilla-TSComponent-Info.plist";
+				INFOPLIST_FILE = "OpenVanilla-TSComponent-UnicodeScript-Info.plist";
 				INSTALL_PATH = /Library/Components;
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1364,7 +1366,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				INFOPLIST_FILE = "OpenVanilla-TSComponent-Info.plist";
+				INFOPLIST_FILE = "OpenVanilla-TSComponent-UnicodeScript-Info.plist";
 				INSTALL_PATH = /Library/Components;
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1373,6 +1375,110 @@
 				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
 				PREBINDING = NO;
 				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2";
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		6AA434E50A38BF9E0028130A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OpenVanilla-TSComponent-TraditionalChineseScript.plist";
+				INSTALL_PATH = /Library/Components;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
+				PREBINDING = NO;
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2-TC";
+				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_TRADITIONAL_CHINESE=1";
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		6AA434E60A38BF9E0028130A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OpenVanilla-TSComponent-TraditionalChineseScript.plist";
+				INSTALL_PATH = /Library/Components;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
+				PREBINDING = NO;
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2-TC";
+				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_TRADITIONAL_CHINESE=1";
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		6AA4352D0A38C1230028130A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OpenVanilla-TSComponent-SimplifiedChineseScript.plist";
+				INSTALL_PATH = /Library/Components;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
+				PREBINDING = NO;
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2-SC";
+				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_SIMPLIFIED_CHINESE=1";
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		6AA4352E0A38C1230028130A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OpenVanilla-TSComponent-SimplifiedChineseScript.plist";
+				INSTALL_PATH = /Library/Components;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
+				PREBINDING = NO;
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2-SC";
+				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_SIMPLIFIED_CHINESE=1";
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = NO;
 			};
@@ -1478,11 +1584,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6A9652150970E7CA004BCC4D /* Build configuration list for PBXNativeTarget "OpenVanilla-TSComponent" */ = {
+		6A9652150970E7CA004BCC4D /* Build configuration list for PBXNativeTarget "OpenVanilla-TSComponent-UnicodeScript" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6A9652160970E7CA004BCC4D /* Debug */,
 				6A9652170970E7CA004BCC4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6AA434E40A38BF9E0028130A /* Build configuration list for PBXNativeTarget "OpenVanilla-TSComponent-TraditionalChineseScript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AA434E50A38BF9E0028130A /* Debug */,
+				6AA434E60A38BF9E0028130A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6AA4352C0A38C1230028130A /* Build configuration list for PBXNativeTarget "OpenVanilla-TSComponent-SimplifiedChineseScript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AA4352D0A38C1230028130A /* Debug */,
+				6AA4352E0A38C1230028130A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

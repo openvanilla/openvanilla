@@ -57,7 +57,7 @@ static TSBDataPtr tsbActiveContext=NULL;
 
 @implementation TSThreadFoo
 - (void)run {
-    NSLog(@"Getting Cocoa into multithreaded mode");
+    NSLog(@"OpenVanilla gets Cocoa into multithreaded mode");
     [NSThread exit];
     // NSLog(@"thread ended");
 }

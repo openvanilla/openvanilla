@@ -62,7 +62,7 @@ protected:
 
 #define CVSAFETY CVAutorelease _cvar;
 
-#define CV_INTERNAL_VERSION @"0.7.2 beta (r1907)"
+#define CV_INTERNAL_VERSION @"0.7.2 stable (r1964)"
 
 enum {      // CVLMI = CVLoader Menu Item
     CVLMI_KPGROUPSTART=1000,
@@ -272,7 +272,7 @@ id CVLoader::connectDisplayServer() {
 		
 		// a total timeout of 1 sec
 		for (int retry=0; retry<20; retry++) {
-			NSLog([NSString stringWithFormat:@"connecting to OVDisplayServer, retry %d", retry]);
+			NSLog([NSString stringWithFormat:@"OpenVanilla connects to OVDisplayServer, tick %d", retry]);
 			usleep(50000);		// wait for the server to be brought up (0.05 sec)
 			dspsrvr=[[NSConnection rootProxyForConnectionWithRegisteredName:OVDSPSRVR_NAME host:nil] retain];
 			if (dspsrvr) break;
