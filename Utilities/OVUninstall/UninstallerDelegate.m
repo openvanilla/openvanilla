@@ -20,8 +20,15 @@
 @implementation UninstallerDelegate
 
 - (BOOL)resource:(const char *)p contains:(NSString*)v {
-	NSString *f=[NSString stringWithContentsOfFile:[NSString stringWithUTF8String:p]
-				encoding:NSUTF8StringEncoding error:NULL];
+	NSString *f;
+	
+	// determine if is OS X 10.4 or above
+	if ([NSString instancesRespondToSelector:@selector(writeToFile:atomically:encoding:error:)]) {
+		f=[NSString stringWithContentsOfFile:[NSString stringWithUTF8String:p] encoding:NSUTF8StringEncoding error:NULL];
+	}
+	else {
+		f=[NSString stringWithContentsOfFile:[NSString stringWithUTF8String:p]];
+	}
 	if (!f) return NO;
 	
 	NSDictionary *d=[f propertyListFromStringsFileFormat];
@@ -67,6 +74,9 @@
 		}
 		else if ([self resource:LCP OV072 INFOP contains:@"OpenVanilla 0.7.2 (beta)"]) {
 			item=MSG(@"OpenVanilla 0.7.2 beta");
+		}
+		else if ([self resource:LCP OV072 INFOP contains:@"OpenVanilla 0.7.2 (for Panther)"]) {
+			item=MSG(@"OpenVanilla 0.7.2 stable (built for OS X 10.3.9)");
 		}
 		
 		[self addItem:item path:LCP OV072 checked:YES];
@@ -191,7 +201,16 @@
 
 	NSLog(@"Generated script:\n=== BEGIN OF SCRIPT ===\n%@=== END OF SCRIPT ===", script);
 
-	if (![script writeToFile:[NSString stringWithUTF8String:tmpfn] atomically:YES encoding:NSUTF8StringEncoding error:NULL]) {
+	// OS X version check
+	BOOL result=NO;
+	if ([NSString instancesRespondToSelector:@selector(writeToFile:atomically:encoding:error:)]) {
+		result=[script writeToFile:[NSString stringWithUTF8String:tmpfn] atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+	}
+	else {
+		result=[script writeToFile:[NSString stringWithUTF8String:tmpfn] atomically:YES];
+	}
+
+	if (!result) {
 		NSLog(@"Uninstallation: Failed to create script file");
 		return;
 		

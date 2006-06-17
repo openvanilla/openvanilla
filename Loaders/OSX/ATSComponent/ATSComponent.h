@@ -34,11 +34,11 @@
 // shared constants
 #define ATSCVERSION             0x00070200  // OpenVanilla 0.7.2
 #define ATSCPENCILMENUID        ATSCBASERESOURCEID+1
-#define ATSCIMNAME              "OpenVanilla Loader 0.7.2"
-#define ATSCIMNLENGTH           $"18"       // in hexadecimal
 #define ATSCVENDORCODE          'opvn'
 
-#if !defined(ATSC_TRADITIONAL_CHINESE) && !defined(ATSC_SIMPLIFIED_CHINESE)
+#if !defined(ATSC_TRADITIONAL_CHINESE) && !defined(ATSC_SIMPLIFIED_CHINESE) && !defined(ATSC_OSX_10_3_9)
+	#define ATSCIMNAME              "OpenVanilla Loader 0.7.2"
+	#define ATSCIMNLENGTH           $"18"       // in hexadecimal
 	#define ATSCSCRIPT              0x7e        // smUnicodeScript
 	#define ATSCLANGUAGE            0           // langEnglish
 	#define ATSCBASERESOURCEID      0xa600      // Unicode component ID
@@ -48,6 +48,8 @@
 #endif
 
 #if defined(ATSC_TRADITIONAL_CHINESE)
+	#define ATSCIMNAME              "OpenVanilla Loader 0.7.2"
+	#define ATSCIMNLENGTH           $"18"       // in hexadecimal
 	#define ATSCSCRIPT              2           // smTradCinese
 	#define ATSCLANGUAGE            19          // langtradChinese
 	#define ATSCBASERESOURCEID      16896       // (15872+script_id*512) here script_id=smTradChinese
@@ -56,14 +58,26 @@
 	#define ATSCBNLENGTH            $"22"       // in hexadecimal
 #endif
 
-
 #if defined(ATSC_SIMPLIFIED_CHINESE)
+	#define ATSCIMNAME              "OpenVanilla Loader 0.7.2"
+	#define ATSCIMNLENGTH           $"18"       // in hexadecimal
 	#define ATSCSCRIPT              25           // smSimpCinese
 	#define ATSCLANGUAGE            33          // langsimpChinese
 	#define ATSCBASERESOURCEID      28672       // (15872+script_id*512) here script_id=smSimpChinese
 	#define ATSCCOMPONENTFLAGS		0x8000+ATSCSCRIPT*0x100+ATSCLANGUAGE
 	#define ATSCBUNDLENAME          "org.openvanilla.tscomponent-sc.072"
 	#define ATSCBNLENGTH            $"22"       // in hexadecimal
+#endif
+
+#if defined(ATSC_OSX_10_3_9)
+	#define ATSCIMNAME              "OpenVanilla Loader 0.7.2 (Panther)"
+	#define ATSCIMNLENGTH           $"22"       // in hexadecimal
+	#define ATSCSCRIPT              2           // smTradCinese
+	#define ATSCLANGUAGE            19          // langtradChinese
+	#define ATSCBASERESOURCEID      16896       // (15872+script_id*512) here script_id=smTradChinese
+	#define ATSCCOMPONENTFLAGS		0x8000+ATSCSCRIPT*0x100+ATSCLANGUAGE
+	#define ATSCBUNDLENAME          "org.openvanilla.tscomponent.072"
+	#define ATSCBNLENGTH            $"1f"       // in hexadecimal
 #endif
 
 

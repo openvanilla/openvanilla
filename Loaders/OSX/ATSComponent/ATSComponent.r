@@ -32,48 +32,106 @@
 #include <Carbon/Carbon.r>
 #include "ATSComponent.h"
 
-resource 'thng' (ATSCBASERESOURCEID, "OpenVanilla")
-{
-    'tsvc',                     // Type
-    'inpm',                     // Subtype
-    ATSCVENDORCODE,             // Manufacturer
-	0x00000000,                 // use componentHasMultiplePlatorms
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    'STR ',                     // Name Type
-    ATSCBASERESOURCEID,         // Name ID
-    'STR ',                     // Info ID
-    ATSCBASERESOURCEID+1,       // Info ID
-    'ICON',                     // Icon Type
-    ATSCBASERESOURCEID,         // Icon ID
-    0x00040000,                 // Version
-    // componentHasMultiplePlatforms+myComponentRegistrationFlags,        
-    0x00000008,                 
-	ATSCBASERESOURCEID,         // Resource ID
+#ifndef ATSC_OSX_10_3_9
+	resource 'thng' (ATSCBASERESOURCEID, "OpenVanilla")
 	{
-#if TARGET_REZ_MAC_PPC
-        ATSCCOMPONENTFLAGS,      // kMyComponentFlags
-        'dlle',
-        ATSCBASERESOURCEID,      // Resource ID
-        // PowerPC-based Macintosh
-        platformPowerPCNativeEntryPoint,  
+		'tsvc',                     // Type
+		'inpm',                     // Subtype
+		ATSCVENDORCODE,             // Manufacturer
+		0x00000000,                 // use componentHasMultiplePlatorms
+		0x00000000,
+		0x00000000,
+		0x00000000,
+		'STR ',                     // Name Type
+		ATSCBASERESOURCEID,         // Name ID
+		'STR ',                     // Info ID
+		ATSCBASERESOURCEID+1,       // Info ID
+		'ICON',                     // Icon Type
+		ATSCBASERESOURCEID,         // Icon ID
+		0x00040000,                 // Version
+		// componentHasMultiplePlatforms+myComponentRegistrationFlags,        
+		0x00000008,                 
+		ATSCBASERESOURCEID,         // Resource ID
+		{
+	#if TARGET_REZ_MAC_PPC
+			ATSCCOMPONENTFLAGS,      // kMyComponentFlags
+			'dlle',
+			ATSCBASERESOURCEID,      // Resource ID
+			// PowerPC-based Macintosh
+			platformPowerPCNativeEntryPoint,  
+	#endif
+	#if TARGET_REZ_MAC_X86
+			ATSCCOMPONENTFLAGS,      // kMyComponentFlags
+			'dlle',
+			ATSCBASERESOURCEID,      // Resource ID
+			// Intel-based Macintosh        
+			platformIA32NativeEntryPoint,     
+	#endif
+		};
+	};
 #endif
-#if TARGET_REZ_MAC_X86
-        ATSCCOMPONENTFLAGS,      // kMyComponentFlags
-        'dlle',
-        ATSCBASERESOURCEID,      // Resource ID
-        // Intel-based Macintosh        
-        platformIA32NativeEntryPoint,     
+
+#ifdef ATSC_OSX_10_3_9
+	resource 'thng' (128)
+	{
+		'tsvc',
+		'inpm',
+		ATSCVENDORCODE,
+		0x8000+ATSCSCRIPT*0x100+ATSCLANGUAGE,
+		kAnyComponentFlagsMask,
+		'dlle', ATSCBASERESOURCEID,
+		'STR ', ATSCBASERESOURCEID,
+		'STR ', ATSCBASERESOURCEID,
+		'ICON', ATSCBASERESOURCEID,
+		0x00010000,
+		componentHasMultiplePlatforms,
+		ATSCBASERESOURCEID,
+		{
+			0x8000+ATSCSCRIPT*0x100+ATSCLANGUAGE,
+			'dlle', ATSCBASERESOURCEID, 1000
+		}
+	};
 #endif
-    };
-};
 
 /* component entry point */
 resource 'dlle' (ATSCBASERESOURCEID)
 {
 	"ATSCDispatch"
 };
+
+#ifndef ATSC_OSX_10_3_9
+	/* carbon bundle data */
+	data 'cbnm' (0, "OpenVanilla", sysheap, purgeable) {
+		ATSCBNLENGTH ATSCBUNDLENAME
+	};
+
+	/* default text service component name */
+	data 'STR ' (ATSCBASERESOURCEID) {
+		ATSCIMNLENGTH ATSCIMNAME
+	};
+#endif
+
+#ifdef ATSC_OSX_10_3_9
+	data 'cbnm' (0, "Component Bundle Name") {
+		ATSCBNLENGTH ATSCBUNDLENAME
+	};
+
+	data 'STR ' (ATSCBASERESOURCEID, "IM Component Name") {
+		ATSCIMNLENGTH ATSCIMNAME
+	};
+#endif
+
+/* menu resource: (empty) */
+resource 'MENU' (ATSCBASERESOURCEID + 1)
+{
+    ATSCBASERESOURCEID,
+    textMenuProc,
+    allEnabled,
+    enabled,
+    "00000",
+    { }
+};
+
 
 
 /* keyboard icon resource (1-, 4-, 8-bit): obsolete, but is still required */
@@ -118,28 +176,8 @@ data 'kcs8' (ATSCBASERESOURCEID)
 	$"0000 0000 0000 0000 0000 0000 0000 0000"
 };
 
-/* carbon bundle data */
-data 'cbnm' (0, "OpenVanilla", sysheap, purgeable) {
-	ATSCBNLENGTH ATSCBUNDLENAME
-};
-
-/* default text service component name */
-data 'STR ' (ATSCBASERESOURCEID) {
-	ATSCIMNLENGTH ATSCIMNAME
-};
-
-/* menu resource: (empty) */
-resource 'MENU' (ATSCBASERESOURCEID + 1)
-{
-    ATSCBASERESOURCEID,
-    textMenuProc,
-    allEnabled,
-    enabled,
-    "00000",
-    { }
-};
-
 /* the vanilla icon; this is put back for 10.3.9 compatibility */
+#ifdef ATSC_OSX_10_3_9
 data 'kcns' (ATSCBASERESOURCEID) {
 	$"6963 6E73 0000 2FAC 6963 7323 0000 0048"            
 	$"CFFF E3FF E7FF F3F7 E35F F32F FC1F F84F"            
@@ -905,3 +943,5 @@ data 'kcns' (ATSCBASERESOURCEID) {
 	$"0000 0000 0000 0000 0000 0000 0000 0000"            
 	$"0000 0000 0000 0000 0000 0000"                      
 };
+#endif
+
