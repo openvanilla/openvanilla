@@ -1,0 +1,13 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {uninstall = id; }; 
+            CLASS = UninstallerDelegate; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {listview = id; resetCheckbox = id; }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
