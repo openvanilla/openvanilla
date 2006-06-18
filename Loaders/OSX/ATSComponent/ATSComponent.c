@@ -32,7 +32,7 @@
 #include "ATSComponent.h"
 #include "TSBundle.h"
 
-#define DEBUG
+// #define DEBUG
 
 #ifdef DEBUG
     #define MURMUR(x)       fprintf (stderr, "%s\n", x);
