@@ -26,6 +26,11 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* OVUninstall_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUninstall_Prefix.pch; sourceTree = "<group>"; };
+		6A1BDD560A45524C0012EECF /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6A1BDD6A0A4552AD0012EECF /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		6A1BDD6B0A4552AF0012EECF /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = zh_CN.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		6A1BDDAF0A4555EF0012EECF /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6A1BDDBF0A45576F0012EECF /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6A5223A20A4472D7005BDFED /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A5A63F70A446EA6002EB517 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6A9C831A0A43FB9D0061AC3A /* UninstallerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UninstallerDelegate.h; sourceTree = "<group>"; };
@@ -129,6 +134,7 @@
 				French,
 				German,
 				zh_TW,
+				zh_CN,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* OVUninstall */;
 			projectDirPath = "";
@@ -170,6 +176,7 @@
 			children = (
 				089C165DFE840E0CC02AAC07 /* English */,
 				6A5223A20A4472D7005BDFED /* zh_TW */,
+				6A1BDD560A45524C0012EECF /* zh_CN */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -178,6 +185,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				29B97319FDCFA39411CA2CEA /* English */,
+				6A1BDD6A0A4552AD0012EECF /* zh_TW */,
+				6A1BDD6B0A4552AF0012EECF /* zh_CN */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
@@ -186,6 +195,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				6A5A63F70A446EA6002EB517 /* English */,
+				6A1BDDAF0A4555EF0012EECF /* zh_TW */,
+				6A1BDDBF0A45576F0012EECF /* zh_CN */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

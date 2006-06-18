@@ -295,5 +295,7 @@
 	NSLog([versions description]);
 }
 
-
+- (void)windowWillClose:(NSNotification*)n {
+	[[NSApplication sharedApplication] terminate:self];
+}
 @end
