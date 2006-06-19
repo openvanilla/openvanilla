@@ -1,12 +1,24 @@
 #include "Sequence.h"
 
-bool Element::add(Sequence*, vector<Sequence*>::iterator)	{ return false; }
-bool Element::remove(vector<Sequence*>::iterator)			{ return false; }
-vector<Sequence*>::iterator Element::getIterator(void)		{ return NULL; }
-void Element::accept(SequenceVisitor& visitor)				{ visitor.visit(this); }
+#include <stdexcept>
 
-string& Element::getView(void)							{ return m_view; }
-void Element::setView(string& view)						{ m_view = view; }
-size_t Element::getLength(void)							{ return 1; }
+void Element::add(Sequence*, vector<Sequence*>::iterator)
+{ throw domain_error("Element does not support this operation."); }
+
+void Element::remove(vector<Sequence*>::iterator)
+{ throw domain_error("Element does not support this operation."); }
+
+vector<Sequence*>::iterator Element::getIterator(void)
+{ return NULL; }
+
+void Element::accept(SequenceVisitor& visitor)
+{ visitor.visit(this); }
+
+string& Element::getView(void)	
+{ return m_view; }
+
+void Element::setView(string& view)
+{ m_view = view; }
 	
-bool Element::isElement(void)								{ return true; }
+bool Element::isElement(void)
+{ return true; }

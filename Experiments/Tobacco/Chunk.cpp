@@ -14,7 +14,7 @@ Chunk::~Chunk(void)
 
 bool Chunk::add(Sequence* seq, vector<Sequence*>::iterator pos)
 {
-	m_seqVector.insert(pos, seq->getLength(), seq);
+	m_seqVector.insert(pos, 1, seq);
 	return true;
 }
 
@@ -25,9 +25,7 @@ bool Chunk::remove(vector<Sequence*>::iterator pos)
 }
 
 vector<Sequence*>::iterator Chunk::getIterator(void)
-{
-	return m_seqVector.begin();
-}
+{ return m_seqVector.begin(); }
 
 void Chunk::accept(SequenceVisitor& visitor)
 {
@@ -38,9 +36,11 @@ void Chunk::accept(SequenceVisitor& visitor)
 	visitor.visit(this);
 }
 
-string& Chunk::getView(void)			{ return m_view; }
-void Chunk::setView(string& view)		{ m_view = view; }
+string& Chunk::getView(void)
+{ return m_view; }
 
-size_t Chunk::getLength(void)			{ return m_seqVector.size(); }
+void Chunk::setView(string& view)
+{ m_view = view; }
 
-bool Chunk::isElement(void)			{ return false; }
+bool Chunk::isElement(void)	
+{ return false; }

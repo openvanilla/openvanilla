@@ -11,31 +11,25 @@ class SequenceVisitor;
 class Sequence
 {
 public:
-	virtual bool add(Sequence*, vector<Sequence*>::iterator) = 0;
-	virtual bool remove(vector<Sequence*>::iterator) = 0;
+	virtual void add(Sequence*, vector<Sequence*>::iterator) = 0;
+	virtual void remove(vector<Sequence*>::iterator) = 0;
 	virtual vector<Sequence*>::iterator getIterator(void) = 0;
 	virtual void accept(SequenceVisitor& visitor) = 0;
 	
 	virtual string& getView(void) = 0;
 	virtual void setView(string& str) = 0;
-	virtual size_t getLength(void) = 0;
-	
-	virtual bool isElement(void) = 0;
 };
 
 class Element : public Sequence
 {
 public:
-	virtual bool add(Sequence*, vector<Sequence*>::iterator) = 0;
-	virtual bool remove(vector<Sequence*>::iterator) = 0;
+	virtual void add(Sequence*, vector<Sequence*>::iterator) = 0;
+	virtual void remove(vector<Sequence*>::iterator) = 0;
 	virtual vector<Sequence*>::iterator getIterator(void) = 0;
 	virtual void accept(SequenceVisitor& visitor) = 0;
 	
 	virtual string& getView(void) = 0;
 	virtual void setView(string& str) = 0;
-	virtual size_t getLength(void) = 0;
-	
-	virtual bool isElement(void) = 0;
 
 protected:
 
@@ -48,16 +42,13 @@ class Chunk : public Sequence
 public:
 	~Chunk(void);
 
-	virtual bool add(Sequence*, vector<Sequence*>::iterator) = 0;
-	virtual bool remove(vector<Sequence*>::iterator) = 0;
+	virtual void add(Sequence*, vector<Sequence*>::iterator) = 0;
+	virtual void remove(vector<Sequence*>::iterator) = 0;
 	virtual vector<Sequence*>::iterator getIterator(void) = 0;
 	virtual void accept(SequenceVisitor& visitor) = 0;
 	
 	virtual string& getView(void) = 0;
 	virtual void setView(string& str) = 0;
-	virtual size_t getLength(void) = 0;
-	
-	virtual bool isElement(void) = 0;
 
 private:
 	string m_view;
