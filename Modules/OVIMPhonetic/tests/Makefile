@@ -7,4 +7,4 @@ clean:
 	@rm -f OVTester *~ *.o
 
 OVTester: OVTester.cpp
-	g++ $(CPPFLAGS) -ltap -lpthread -o $@ $<
+	@g++ $(CPPFLAGS) -ltap -o $@ $<
