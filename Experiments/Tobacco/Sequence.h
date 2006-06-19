@@ -23,13 +23,13 @@ public:
 class Element : public Sequence
 {
 public:
-	virtual void add(Sequence*, vector<Sequence*>::iterator) = 0;
-	virtual void remove(vector<Sequence*>::iterator) = 0;
-	virtual vector<Sequence*>::iterator getIterator(void) = 0;
-	virtual void accept(SequenceVisitor& visitor) = 0;
+	void add(Sequence*, vector<Sequence*>::iterator);
+	void remove(vector<Sequence*>::iterator);
+	vector<Sequence*>::iterator getIterator(void);
+	void accept(SequenceVisitor& visitor);
 	
-	virtual string& getView(void) = 0;
-	virtual void setView(string& str) = 0;
+	string& getView(void);
+	void setView(string& str);
 
 protected:
 
@@ -42,13 +42,13 @@ class Chunk : public Sequence
 public:
 	~Chunk(void);
 
-	virtual void add(Sequence*, vector<Sequence*>::iterator) = 0;
-	virtual void remove(vector<Sequence*>::iterator) = 0;
-	virtual vector<Sequence*>::iterator getIterator(void) = 0;
-	virtual void accept(SequenceVisitor& visitor) = 0;
+	void add(Sequence*, vector<Sequence*>::iterator);
+	void remove(vector<Sequence*>::iterator);
+	vector<Sequence*>::iterator getIterator(void);
+	void accept(SequenceVisitor& visitor);
 	
-	virtual string& getView(void) = 0;
-	virtual void setView(string& str) = 0;
+	string& getView(void);
+	void setView(string& str);
 
 private:
 	string m_view;
@@ -58,12 +58,12 @@ private:
 class SequenceVisitor
 {
 public:
-	virtual void visit(Sequence*) = 0;
-	virtual void visit(Element*) = 0;
-	virtual void visit(Chunk*) = 0;
+	void visit(Sequence*);
+	void visit(Element*);
+	void visit(Chunk*);
 
-	virtual string& getElementViews(void) = 0;
-	virtual string& getChunkViews(void) = 0;
+	string& getElementViews(void);
+	string& getChunkViews(void);
 
 private:
 	string m_elementViews;

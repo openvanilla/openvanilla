@@ -9,7 +9,7 @@ void Element::remove(vector<Sequence*>::iterator)
 { throw domain_error("Element does not support this operation."); }
 
 vector<Sequence*>::iterator Element::getIterator(void)
-{ return NULL; }
+{ throw domain_error("Element does not support this operation."); }
 
 void Element::accept(SequenceVisitor& visitor)
 { visitor.visit(this); }
@@ -19,6 +19,3 @@ string& Element::getView(void)
 
 void Element::setView(string& view)
 { m_view = view; }
-	
-bool Element::isElement(void)
-{ return true; }

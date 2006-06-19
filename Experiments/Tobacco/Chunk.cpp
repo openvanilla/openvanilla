@@ -8,21 +8,15 @@ struct DeleteObject
 };
 
 Chunk::~Chunk(void)
-{
-	for_each(m_seqVector.begin(), m_seqVector.end(), DeleteObject());
-}
+{ for_each(m_seqVector.begin(), m_seqVector.end(), DeleteObject()); }
 
-bool Chunk::add(Sequence* seq, vector<Sequence*>::iterator pos)
+void Chunk::add(Sequence* seq, vector<Sequence*>::iterator pos)
 {
 	m_seqVector.insert(pos, 1, seq);
-	return true;
 }
 
-bool Chunk::remove(vector<Sequence*>::iterator pos)
-{
-	m_seqVector.erase(pos);
-	return true;
-}
+void Chunk::remove(vector<Sequence*>::iterator pos)
+{ m_seqVector.erase(pos); }
 
 vector<Sequence*>::iterator Chunk::getIterator(void)
 { return m_seqVector.begin(); }
@@ -41,6 +35,3 @@ string& Chunk::getView(void)
 
 void Chunk::setView(string& view)
 { m_view = view; }
-
-bool Chunk::isElement(void)	
-{ return false; }
