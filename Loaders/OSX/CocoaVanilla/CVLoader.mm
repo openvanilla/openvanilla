@@ -62,7 +62,7 @@ protected:
 
 #define CVSAFETY CVAutorelease _cvar;
 
-#define CV_INTERNAL_VERSION @"0.7.2 stable (r1984)"
+#define CV_INTERNAL_VERSION @"0.7.2 stable (r1988)"
 
 enum {      // CVLMI = CVLoader Menu Item
     CVLMI_KPGROUPSTART=1000,
