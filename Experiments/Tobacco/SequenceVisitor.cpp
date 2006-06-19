@@ -2,12 +2,12 @@
 
 void SequenceVisitor::visit(Element* element)
 {
-	m_elementViews+= element->getView();
+	m_elementViews += element->getView();
 }
 
 void SequenceVisitor::visit(Chunk* chunk)
 {
-	m_chunkViews+= chunk->getView();
+	m_chunkViews += chunk->getView();
 }
 
 string& SequenceVisitor::getElementViews(void)
