@@ -81,11 +81,6 @@ OVPhoneticData.c: ${CINS}
 	perl convert-phonedata.pl ${CINS} > OVPhoneticData.c
 
 endif
- 
 
-
-
-
-
-
-
+test: $(GOALS)
+	make -C tests/ all
