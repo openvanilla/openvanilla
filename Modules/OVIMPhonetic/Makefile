@@ -33,7 +33,7 @@ BPMF?=bpmf.cin
 
 # this reads bizarre, but it means "if we find 'bpmf-extended' in VARIANT"
 # (rationale: findstring returns empty string if not found,
-# and returns a substring if found, hence the use if ifneq)
+# and returns a substring if found, hence the use of ifneq)
 ifneq (, $(findstring bpmf-extended, $(VARIANT)))
     BPMF=bpmf-ext.cin
 	CFLAGS+=-DOVIMPHONETIC_EXT
@@ -52,7 +52,7 @@ endif
 CINS=$(BPMF) punctuations.cin
 
 
-# like wise, this also means "if we find 'sqlite' in VARIANT, to replace this:
+# likewise, this also means "if we find 'sqlite' in VARIANT, to replace this:
 #     ifeq ("$(VARIANT)", "sqlite")
 #
 ifneq (, $(findstring sqlite, $(VARIANT)))
