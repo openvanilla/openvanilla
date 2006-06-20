@@ -65,7 +65,7 @@ class OVOFFullWidthCharacter : public OVOutputFilter
 public:
     OVOFFullWidthCharacter() { u16buf=NULL; }
     int initialize(OVDictionary *cfg, OVService *srv, const char *modpath) {
-        fprintf(stderr, "OVOFFullWidthCharacter being initialized, module path=%s\n", modpath);
+        // fprintf(stderr, "OVOFFullWidthCharacter being initialized, module path=%s\n", modpath);
         return 1;
     }
     const char *identifier() { return "OVOFFullWidthCharacter"; }
