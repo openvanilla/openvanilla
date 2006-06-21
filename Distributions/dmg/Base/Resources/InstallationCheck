@@ -1,0 +1,74 @@
+#!/usr/bin/perl -w
+
+# returns 112 (InstallationCheck.strings key 16) if not allowed to install
+# otherwise returns 0
+
+use strict;
+use utf8;
+
+my $LCP="/Library/Components";
+my $OV07x="/OVInit.bundle";
+my $OV072="/OpenVanilla-TSComponent-0.7.2.bundle";
+my $OV072TC="/OpenVanilla-TSComponent-0.7.2-TC.bundle";
+my $OV072SC="/OpenVanilla-TSComponent-0.7.2-SC.bundle";
+my $INFOP="/Contents/Resources/English.lproj/InfoPlist.strings";
+
+# OS version check
+# for 0.7.2 Unicode Script: no-go on OS X 10.3.9
+my $OSV=`uname -a`;
+if ($OSV =~ /Darwin Kernal Version 7/) {
+    result(113, "OS X 10.3.9");
+}
+
+# if OV 0.7.2
+if (-d $LCP.$OV072) {
+    run (0, "OV 0.7.2 stable", $LCP.$OV072.$INFOP, '\"OpenVanilla 0.7.2\"');
+    run (0, "OV 0.7.2 stable (for OS X 10.3.9)",
+        $LCP.$OV072.$INFOP, '\"OpenVanilla 0.7.2 \(for Panther\)\"');
+    run (0, "OV 0.7.2 beta", $LCP.$OV072.$INFOP, '\"OpenVanilla 0.7.2 \(beta\)\"');
+}
+
+# no-go if 0.7.2 TC is installed
+if (-d $LCP.$OV072TC) {
+    run (112, "OpenVanilla 0.7.2 stable (Traditional Chinese script)",
+        $LCP.$OV072TC.$INFOP, '\"OpenVanilla 0.7.2 \(TC Script\)\"');
+    run (112, "OpenVanilla 0.7.2 beta (Traditional Chinese script)",
+        $LCP.$OV072TC.$INFOP, '\"OpenVanilla 0.7.2 \(TC\)\"');
+}
+
+# no-go if 0.7.2 SC is installed
+if (-d $LCP.$OV072SC) {
+    run (112, "OpenVanilla 0.7.2 stable (Simplified Chinese script)",
+        $LCP.$OV072TC.$INFOP, '\"OpenVanilla 0.7.2 \(SC Script\)\"');
+    run (112, "OpenVanilla 0.7.2 beta (Simplified Chinese script)",
+        $LCP.$OV072TC.$INFOP, '\"OpenVanilla 0.7.2 \(SC\)\"');
+}
+
+# no-go if anything 0.7.x is installed
+if (-d $LCP.$OV07x) {
+    result(112, "OpenVanilla 0.7.x (anything pre-0.7.2)");
+}
+
+exit 0;
+
+sub run {
+    my ($p, $q, $r, $s) = @_;
+    if ($p) {
+        result($p, $q) if check($r, $s);
+    }
+}
+
+sub result {
+    my ($c, $m)=@_;
+    # print "$m, returns $c\n";
+    exit $c;
+}
+
+sub check {
+    my ($p, $s)=@_;    
+    local( $/, *FH);
+    open(FH, $p) or die "cannot open $p\n";
+    my $text = <FH>;
+    return $text =~ /$s/;
+}
+

@@ -1,0 +1,2 @@
+"16"="Installer found you have installed a variant of OpenVanilla. It can be either OpenVanilla's Traditional Chinese Script version or Simplified Chinese Script version. This package installs the Unicode Script version and will not function properly if other variants exist. Please run \"Uninstalling OpenVanilla\" application that comes with this disk image to uninstall older versions or variants.";
+"17"="This version of OpenVanilla cannot be installed on OS X 10.3.9";
