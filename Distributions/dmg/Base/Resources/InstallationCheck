@@ -16,7 +16,7 @@ my $INFOP="/Contents/Resources/English.lproj/InfoPlist.strings";
 # OS version check
 # for 0.7.2 Unicode Script: no-go on OS X 10.3.9
 my $OSV=`uname -a`;
-if ($OSV =~ /Darwin Kernal Version 7/) {
+if ($OSV =~ /Darwin Kernel Version 7/) {
     result(113, "OS X 10.3.9");
 }
 

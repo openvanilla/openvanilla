@@ -250,14 +250,15 @@
 			write (fileno(stderr), buf, b);
 		}
 		fclose(fpipe);
+        AuthorizationFree (authref, kAuthorizationFlagDefaults);
 	}
-	
+
 
     AuthorizationFree (authref, kAuthorizationFlagDefaults);
- 
+
 	NSLog(@"deleting tmp file: %s", tmpfn);
 	unlink(tmpfn);
-	
+    if (s != errAuthorizationSuccess) return;
 	
 	NSAlert *endbox=[NSAlert
 		alertWithMessageText:MSG(@"System Restart Required")
