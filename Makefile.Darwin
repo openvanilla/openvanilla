@@ -18,15 +18,17 @@ LIBLDR=$(DSTROOT)/Library/Components/OpenVanilla-TSComponent-$(VERSION).bundle \
 	$(DSTROOT)/Library/OpenVanilla/$(VERSION)/Loader
 USRTOOL=$(DSTROOT)/$(CMDLINETOOLROOT)/bin/ovfilter
 
+CF=../../Framework/build/Release/
+
 all:
 	xcodebuild -project $(FW) -configuration $(CONFIG) build $(MAKEFLAGS)
 	xcodebuild -project $(LD) -configuration $(CONFIG) build $(MAKEFLAGS)
-	make -C Modules all
+	make CFLAGS+=-F$(CF) -C Modules all
 
 install:
 	xcodebuild -project $(FW) -configuration $(CONFIG) install $(MAKEFLAGS)
 	xcodebuild -project $(LD) -configuration $(CONFIG) install $(MAKEFLAGS) 
-	make -C Modules install
+	make CFLAGS+=-F$(CF) -C Modules install
 
 clean:
 	xcodebuild -project $(FW) -configuration $(CONFIG) clean $(MAKEFLAGS)
