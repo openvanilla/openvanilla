@@ -1,13 +1,17 @@
 #!/usr/bin/perl -w
 use strict;
 
-die "USAGE: cin-sqlconvert file1 file2 ..." if (!@ARGV);
+die "Please cp UNIX/xcin2.5/liu5.cin from LIU57 CDROM to here\n"
+    unless -f $ARGV[0];
 
+binmode(STDOUT, ":utf8");
+
+# Official liu5.cin is in big5
 for my $fn (@ARGV) {
-    open HNDL, "<$fn";
+    open HNDL, "<:encoding(big5)", $fn;
+
     my @a=($fn=~/(\w+)\..+/);
     my $tblname=lc $a[0];
-    
     print "insert into tablelist values ('$tblname');\n";
     print "create table $tblname (key, value, ord);\n";
     printf "create index %s_index_key on %s (key);\n", $tblname, $tblname;
@@ -15,7 +19,7 @@ for my $fn (@ARGV) {
     print "begin;\n";
     while(<HNDL>) {
         chomp;
-        next if (/^# /);
+        next if (/^#/);
         if (/%chardef/) {
             parse_chardef(*HNDL, $tblname);
         }
@@ -24,7 +28,7 @@ for my $fn (@ARGV) {
         }
         else {
             parse_property($tblname);
-        }    
+        }
     }
     print "commit;\n";
 }
