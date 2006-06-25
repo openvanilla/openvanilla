@@ -38,7 +38,7 @@
 		6AD9F3440A4471F7008FE580 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		6AEA59700A446D9E008193D7 /* OVUninstall.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OVUninstall.icns; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* Uninstalling OpenVanilla.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Uninstalling OpenVanilla.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* Uninstall OpenVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uninstall OpenVanilla.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +57,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* Uninstalling OpenVanilla.app */,
+				8D1107320486CEB800E47090 /* Uninstall OpenVanilla.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,7 +118,7 @@
 			name = OVUninstall;
 			productInstallPath = "$(HOME)/Applications";
 			productName = OVUninstall;
-			productReference = 8D1107320486CEB800E47090 /* Uninstalling OpenVanilla.app */;
+			productReference = 8D1107320486CEB800E47090 /* Uninstall OpenVanilla.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -214,7 +214,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = "Uninstalling OpenVanilla";
+				PRODUCT_NAME = "Uninstall OpenVanilla";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
@@ -231,7 +231,7 @@
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = "Uninstalling OpenVanilla";
+				PRODUCT_NAME = "Uninstall OpenVanilla";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

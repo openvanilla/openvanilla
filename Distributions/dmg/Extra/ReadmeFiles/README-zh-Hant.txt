@@ -1,4 +1,4 @@
-OpenVanilla 0.7.2 (beta) for OS X
+OpenVanilla 0.7.2 for OS X
 選用模組及輸入法資料表套件
 
 Copyright (c) 2004-2006 The OpenVanilla Project

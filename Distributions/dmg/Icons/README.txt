@@ -1,4 +1,4 @@
-OpenVanilla 0.7.2 (beta) for OS X
+OpenVanilla 0.7.2 for OS X
 Icons Pack
 
 Copyright (c) 2004-2006 The OpenVanilla Project

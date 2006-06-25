@@ -220,6 +220,19 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
     murmur("OVIMArray state: %d", state);
     if (!keyseq.length() && !isprint(keycode)) return 0;
     if (!keyseq.length() && key->isFunctionKey()) return 0;
+    
+    if (isprint(key->code()) && key->isCapslock() && keyseq.length()==0)
+    {
+        char cbuf[2];
+        if (key->isShift())
+            sprintf(cbuf, "%c", toupper(key->code()));
+        else
+            sprintf(cbuf, "%c", tolower(key->code()));
+
+        buf->append(cbuf)->send();
+        return 1;
+    }
+
     if( key->isShift() && isprint(keycode) && keyseq.length()==0 ){
         char k[2] = { tolower(keycode), 0 };
         buf->append(k)->send();
@@ -255,18 +268,6 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
                     updateCandidate(tabs[SHORT_TAB], buf, candi_bar);
             }
         }
-        return 1;
-    }
-    
-    if (isprint(key->code()) && key->isCapslock() && keyseq.length()==0)
-    {
-        char cbuf[2];
-        if (key->isShift())
-            sprintf(cbuf, "%c", toupper(key->code()));
-        else
-            sprintf(cbuf, "%c", tolower(key->code()));
-
-        buf->append(cbuf)->send();
         return 1;
     }
     
