@@ -3,17 +3,22 @@ use strict;
 use warnings;
 use base 'OpenVanilla::Utility::Generator';
 use Template;
-use File::Spec;
+use File::Spec::Functions;;
+use File::Path;
 
 sub generate {
-    my ($self, $outdir, $module_id) = @_;
+    my ($self, $module_id) = @_;
+    return $self->usage unless $module_id;
+
+    my $outdir = catdir($ENV{OV_ROOT}, "Modules", $module_id, "tests");
+    mkpath([$outdir]);
+
     my $vars = { module_id => $module_id };
     my $tt = Template->new;
-    my %output;
     my %files = $self->files;
 
     for (keys %files) {
-        my $outfile = File::Spec->catfile($outdir, $_);
+        my $outfile = catfile($outdir, $_);
         $tt->process(\$files{$_}, $vars, $outfile );
         print "$outfile generated\n";
     }
@@ -27,6 +32,16 @@ sub files {
     delete $files{''};
     return %files
 }
+
+sub usage {
+    my $self = shift;
+    print <<E;
+
+Usage: ov-generate test ModuleId
+
+E
+}
+
 
 1;
 

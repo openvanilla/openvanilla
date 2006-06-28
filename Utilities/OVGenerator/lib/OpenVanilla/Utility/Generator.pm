@@ -3,18 +3,13 @@ package OpenVanilla::Utility::Generator;
 use strict;
 use warnings;
 
+use base 'OpenVanilla::Utility';
+
 =head1 NAME
 
 OpenVanilla::Utility::Generator - Generator base class
 
 =cut
-
-sub new {
-    my ($class) = @_;
-    my $self = {};
-    bless $self, $class;
-    return $self;
-}
 
 sub load {
     my ($self, $class) = @_;

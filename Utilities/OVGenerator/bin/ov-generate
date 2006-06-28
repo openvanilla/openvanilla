@@ -21,5 +21,7 @@ my ($generator, @args) = @ARGV;
 
 my $g = OpenVanilla::Utility::Generator->new;
 
+$g->check_env;
+
 $g->load($generator)->generate(@args);
 
