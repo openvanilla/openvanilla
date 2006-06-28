@@ -15,7 +15,7 @@ Then your OV_ROOT should be ~/dev/ov-trunk.
 
 After that, please run
 
-  perl bin/ov-generator test ModuleId
+  perl bin/ov-generate test ModuleId
 
 Where ModuleId is a necessary argument. For example:
 
