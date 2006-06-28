@@ -15,13 +15,14 @@ extern   "C"   {
 // http://jc.ngo.org.uk/trac-bin/trac.cgi/wiki/LibTap
 #include <tap.h>
 
+#define OVIMlib "../OVIMPhonetic.dylib"
+
 #define OV_DEBUG
 #undef HAVE_LIBPTHREAD
 
 int
 main(void) {
   void *libh;
-  char *OVIMlib = "../OVIMPhonetic.dylib";
   _OVGetLibraryVersion_t *g;
   _OVInitializeLibrary_t *i;
   _OVGetModuleFromLibrary_t *m;
