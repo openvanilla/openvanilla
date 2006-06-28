@@ -1,0 +1,46 @@
+
+This is the OpenVanilla Generator script for generating
+virtually everything. Now we could generate tests very easily.
+
+You should have perl5 to run this generator. The built-in perl of Mac
+is enough.
+
+Before run this generator, please setup an OV_ROOT environment
+variable. Telling the script the root of your checkout path.
+For example if you checkout ov with svn like this:
+
+  svn co http://svn.openfoundry.org/openvanilla/trunk ~/dev/ov-trunk
+
+Then your OV_ROOT should be ~/dev/ov-trunk.
+
+After that, please run
+
+  perl bin/ov-generator test ModuleId
+
+Where ModuleId is a necessary argument. For example:
+
+  perl bin/ov-generator test OVIMArray
+
+And tests would be generated under ${OV_ROOT}/Modules/OVIMArray/tests/.
+cd to OVIMArray dir and compile the moudle, and then cd to the 'tests/'
+dir and execute 'make'. You could see a screen like this:
+
+  > make
+  g++ -Wall -I/usr/local/include -L/usr/local/lib -ltap  -o OVTester OVTester.cpp
+  1..5
+  ok 1 - Module loaded
+  ok 2 - symbol OVGetLibraryVersion is there
+  ok 3 - symbol OVInitializeLibrary is there
+  ok 4 - symbol OVGetModuleFromLibrary is there
+  ok 5 - Version is up-to-date
+
+Please notice that this generated test require libtap to be installed first.
+
+Feel free to write more general tests and make those tests program to
+be templates depends on some variables. So that we could generate
+more tests. :)
+
+
+Cheers,
+Kang-min Liu
+
