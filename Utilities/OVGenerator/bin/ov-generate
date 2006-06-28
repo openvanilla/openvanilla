@@ -1,0 +1,25 @@
+#!/usr/bin/env perl
+
+=head1 NAME
+
+ov-generate - An generator that helps you to write ov modules.
+
+=head1 USAGE
+
+  ov-generate [entity] [options...]
+
+  # Generate a basic test for OVIMPhonetic module
+  ov-generate test OVIMPhonetic
+
+=cut
+
+use lib 'lib';
+
+use OpenVanilla::Utility::Generator;
+
+my ($generator, @args) = @ARGV;
+
+my $g = OpenVanilla::Utility::Generator->new;
+
+$g->load($generator)->generate(@args);
+
