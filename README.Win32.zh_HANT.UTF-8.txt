@@ -9,7 +9,9 @@ Copyright (c) 2004-2006 The OpenVanilla Project
 trunk/Modules/Modules.sln 來編譯。
 
 3. 原先在 repository 裡的 SQLite3, ltdl, iconv, tinyxml 皆已移除，請下載
-http://taipedia.info/OV-deps.zip ，解壓縮後置於某處，再按照
+http://taipedia.info/OV-deps.zip 或
+http://rt.openfoundry.org/Foundry/Project/Download/Attachment/65269/46252/OV-deps.zip
+（兩個是一樣的），解壓縮後置於某處，再按照
 http://www.flickr.com/photos/b6s/159926134/ 示範的方式讓 VS.NET 2003 知道要去那
 裡找這些函式庫。
 3.1. 為了之後布署方便，請設定環境變數 %OV_DEPS% 到這些函式庫所在的目錄，
