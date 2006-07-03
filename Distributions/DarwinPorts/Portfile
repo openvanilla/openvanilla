@@ -7,7 +7,7 @@ maintainers         ovadmin@openvanilla.org
 description         package of popular Chinese input methods
 long_description    \
     OpenVanilla is a lightweight text entry (input method \
-    editor; IME for short) and output processing platform. It \
+    editor, or IME for short) and output processing platform. It \
     is very popular among Chinese-speaking OS X users as it \
     provides many IMEs not found or not satisfactorily \
     implemented in Apple\'s built-in modules. This installs \
