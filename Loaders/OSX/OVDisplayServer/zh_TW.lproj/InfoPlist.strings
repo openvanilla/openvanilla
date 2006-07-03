@@ -1,0 +1,5 @@
+/* Localized versions of Info.plist keys */
+
+CFBundleName = "OpenVanilla 顯示伺服器";
+CFBundleDisplayName = "OpenVanilla 顯示伺服器";
+NSHumanReadableCopyright = "© The OpenVanilla Project, 2004-2006";

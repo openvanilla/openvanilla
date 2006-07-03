@@ -1,0 +1,41 @@
+# Makefile.Darwin: Makefile for OpenVanilla Framework and Loader for Mac OS X
+# Copyright (c) 2004-2006 The OpenVanilla Project
+# Please see License/license.txt for the terms of use
+
+# global variables
+VERSION?=0.7.2
+CONFIG?=Release
+DSTROOT?=/
+CMDLINETOOLROOT?=/opt/local
+
+# Xcode project files
+FW=Framework/OpenVanillaFramework.xcodeproj
+LD=Loaders/OSX/OpenVanillaLoader.xcodeproj
+
+# These are the built products to be cleaned up
+LIBFW=$(DSTROOT)/Library/Frameworks/OpenVanilla.framework
+LIBLDR=$(DSTROOT)/Library/Components/OpenVanilla-TSComponent-$(VERSION).bundle \
+	$(DSTROOT)/Library/OpenVanilla/$(VERSION)/Loader
+USRTOOL=$(DSTROOT)/$(CMDLINETOOLROOT)/bin/ovfilter
+
+CF=../../Framework/build/Release/
+
+all:
+	xcodebuild -project $(FW) -configuration $(CONFIG) build $(MAKEFLAGS)
+	xcodebuild -project $(LD) -configuration $(CONFIG) build $(MAKEFLAGS)
+	make CFLAGS+=-F$(CF) -C Modules all
+
+install:
+	xcodebuild -project $(FW) -configuration $(CONFIG) install $(MAKEFLAGS)
+	xcodebuild -project $(LD) -configuration $(CONFIG) install $(MAKEFLAGS) 
+	make CFLAGS+=-F$(CF) -C Modules install
+
+clean:
+	xcodebuild -project $(FW) -configuration $(CONFIG) clean $(MAKEFLAGS)
+	xcodebuild -project $(LD) -configuration $(CONFIG) clean $(MAKEFLAGS)
+	make -C Modules clean
+        
+uninstall:
+	rm -rf $(LIBFW) $(LIBLDR) $(USRTOOL)
+	make -C Modules uninstall
+

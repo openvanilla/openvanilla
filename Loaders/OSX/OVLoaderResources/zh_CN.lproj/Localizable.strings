@@ -1,0 +1,19 @@
+/* on the menu */
+"Key Preprocessors"="输入前置处理模块";
+"Input Methods"="输入法模块";
+"No Input Method Available"="没有输入法可用";
+"Output Filters"="输出文字转换模块";
+"Input method toggle"="切换最近使用过的输入法";
+"About"="关于 OpenVanilla";
+"Preferences"="设置…";
+"Help"="帮助（openvanilla.org）";
+
+/* for output filter status */
+"enabled"="已开启";
+"disabled"="已关闭";
+
+/* HTML message for atomic init failed */
+/* NOTE: this string has three 'paramters', first is the
+   failed library name, second is the path for the atmoic file 
+   lock, and the third is time */
+"AtomicInitFailed"="<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><title>OpenVanilla 启动失败</title></head><body><h1>OpenVanilla 启动失败</h1><p>If you are seeing this page, this is because one of your loadable modules failed its initialization process. The faulty library is <TT>%@</TT>. OpenVanilla stopped loading at this stage. If you have no idea what went wrong, it is recommended that you remove this faulty library file (administrator privilege may be required).</p><p>OpenVanilla will stop loading further. To get OpenVanilla back to work, you have to manually remove this file: <TT>%@</TT></p><hr /><p>OpenVanilla 0.7.1 (OVLoader) %@</p></body></html>";

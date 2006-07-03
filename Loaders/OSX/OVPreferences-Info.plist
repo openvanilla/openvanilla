@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>OVPreferences</string>
+	<key>CFBundleExecutable</key>
+	<string>OVPreferences</string>
+	<key>CFBundleGetInfoString</key>
+	<string>OpenVanilla Preferences</string>
+	<key>CFBundleIconFile</key>
+	<string>OVPreferencesIcon</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.openvanilla.ovpreferences.072</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>OVPreferences</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>opvn</string>
+	<key>CFBundleVersion</key>
+	<string>0.7.2</string>
+	<key>NSAppleScriptEnabled</key>
+	<string>YES</string>
+	<key>NSHelpFile</key>
+	<string>OpenVanillaManual.pdf</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>© The OpenVanilla Project, 2004-2006</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+</dict>
+</plist>

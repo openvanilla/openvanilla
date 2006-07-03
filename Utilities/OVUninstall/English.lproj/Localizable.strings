@@ -1,0 +1,30 @@
+/* version information */
+"OpenVanilla (version unknown)";
+"OpenVanilla 0.7.2 (unknown branch)";
+"OpenVanilla 0.7.2 stable";
+"OpenVanilla 0.7.2 stable (built for OS X 10.3.9)";
+"OpenVanilla 0.7.2 beta";
+"OpenVanilla 0.7.2 (unknown branch, Traditional Chinese script)";
+"OpenVanilla 0.7.2 stable (Traditional Chinese script)";
+"OpenVanilla 0.7.2 beta (Traditional Chinese script)";
+"OpenVanilla 0.7.2 (unknown branch, Simplified Chinese script)";
+"OpenVanilla 0.7.2 stable (Simplified Chinese script)";
+"OpenVanilla 0.7.x (anything pre-0.7.2)";
+"OpenVanilla 0.7.1";
+"OpenVanilla 0.7.0rc5";
+"OpenVanilla 0.7.0rc4";
+"OpenVanilla 0.7.0rc3";
+"OpenVanilla 0.6.3";
+"OpenVanilla 0.6.3 Preference Pane";
+"VanillaInput 0.064 (or earlier)";
+
+/* for method uninstall */
+"Uninstalling OpenVanilla";
+"Proceed";
+"Cancel";
+"Confirm to uninstall" = "If you click on proceed, Uninstalling OpenVanilla will prompt you for the Administrator's password and begin to uninstall the checked items.";
+
+"System Restart Required";
+"Restart";
+"Restart Explanation" = "Because of OS X's design, we have to restart the system to complete the uninstallation process.";
+
