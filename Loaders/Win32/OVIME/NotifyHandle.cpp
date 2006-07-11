@@ -113,6 +113,9 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 		
 	case IMN_PRIVATE:
+		UIChangeModule(hWnd);
+
+		//CompX = 5;
 		break;
 		
 	default:

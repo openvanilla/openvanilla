@@ -1,5 +1,9 @@
 #include "OVIME.h"
 #include "AVKeyCode.h"
+#include "ExtraStructs.h"
+#include <commctrl.h>
+
+
 
 #include <vector>
 #include <string>
@@ -127,12 +131,19 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	int k;
 
 	if (!hIMC) return FALSE;
-	if (!(lpIMC = ImmLockIMC(hIMC))) return FALSE;
-	if (lKeyData & 0x80000000)	return FALSE;
-	if (uVKey == VK_SHIFT || uVKey == VK_CONTROL || uVKey == VK_MENU) return FALSE;
-
+	if (!(lpIMC = ImmLockIMC(hIMC))) 
+		return FALSE;
+	if (lKeyData & 0x80000000)	
+		return FALSE;
+	if (/*uVKey == VK_SHIFT ||*/ uVKey == VK_CONTROL || uVKey == VK_MENU) 
+		return FALSE;
+	
     if(LOWORD(uVKey) == VK_SPACE &&
 		((lpbKeyState[VK_CONTROL] & 0x80) || (lpbKeyState[VK_SHIFT] & 0x80)))
+		return TRUE;  //ctrl+space
+
+	//Change the module by Ctrl+"\"
+	if(LOWORD(uVKey) == VK_OEM_5 && ((lpbKeyState[VK_CONTROL] & 0x80)))
 		return TRUE;
 
 	lpCompStr = (LPCOMPOSITIONSTRING)ImmLockIMCC(lpIMC->hCompStr);
@@ -199,6 +210,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		&& (uVKey >= VK_NUMPAD0)
 		&& (uVKey <= VK_DIVIDE))
 		keycode.setNum(1);
+
 
 	dsvr->lockIMC(hIMC);
 	loader = AVLoader::getLoader();
@@ -282,6 +294,10 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 			  CONST LPBYTE lpbKeyState,
 			  LPDWORD lpdwTransKey, UINT fuState,HIMC hIMC)
 {
+	//Change the module by Ctrl+"\"
+	if(LOWORD(uVKey) == VK_OEM_5 && ((lpbKeyState[VK_CONTROL] & 0x80)))
+		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 0);
+
 	return 0;
 }
 

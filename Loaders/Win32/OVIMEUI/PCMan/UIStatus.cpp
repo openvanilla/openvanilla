@@ -331,6 +331,28 @@ void UIShowStatusWindow()
 		ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
 }
 
+void UIChangeModule(HWND hWnd)
+{
+    TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
+	
+	CurrentIC++;
+	if(CurrentIC > (int)IC.size() - 1)
+			CurrentIC = 0;
+	
+	tbi.dwMask = TBIF_TEXT;		tbi.pszText = IC.at(CurrentIC);
+
+	SendMessage( hToolbar, TB_SETBUTTONINFO, ID_CHANGE_IME, LPARAM(&tbi));
+
+	SIZE sz;
+//	SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
+	GetToolbarSize( hToolbar, &sz );
+
+	uiStatus.sz.cx = sz.cx + 14;
+	uiStatus.sz.cy = sz.cy + 4;
+	RECT rc;
+	GetWindowRect(uiStatus.hWnd, &rc);
+	UIMoveStatusWindow(hWnd, rc.left, rc.top );
+}
 void UIHideStatusWindow()
 {
 	if (IsWindow(uiStatus.hWnd))
@@ -372,3 +394,4 @@ void UISetMarkTo(int i)
 */
 	CompSelEnd = i;
 }
+
