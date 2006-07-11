@@ -137,6 +137,7 @@ int UICurrentInputMethod()
 	return CurrentIC;
 }
 
+
 void DrawUIBorder( LPRECT lprc )
 {
 	HDC hDC;

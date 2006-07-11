@@ -21,3 +21,5 @@ EXPORTS
 	UICreateNotifyWindow
 	UIShowNotifyWindow
 	UIHideNotifyWindow
+	UIChangeModule
+	

@@ -19,6 +19,7 @@ int UICurrentInputMethod();
 void UICreateStatusWindow(HWND);
 void UIMoveStatusWindow(HWND, int, int);
 void UIShowStatusWindow();
+void UIChangeModule(HWND);
 void UIHideStatusWindow();
 void UISetCursorPos(int);
 void UISetMarkFrom(int);
