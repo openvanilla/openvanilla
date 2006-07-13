@@ -54,7 +54,16 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 	NSConnection *c=[NSConnection defaultConnection];
 	[c setRootObject:self];
     if ([c registerName:OVDSPSRVR_NAME]) ; // NSLog(@"OVDisplayServer registered");
-	else NSLog(@"WebkitServer registration failed");
+	else {
+		NSLog(@"WebkitServer registration failed");
+		NSAlert *a=[NSAlert alertWithMessageText:@"WebKitServer registration failed" 
+			defaultButton:nil
+			alternateButton:nil
+			otherButton:nil
+			informativeTextWithFormat:@"Make sure you have killed the process of OVDisplayServer"];
+		[a runModal];
+		[[NSApplication sharedApplication] terminate:self];
+	}
 
 	candion=NO;
     defaultbackground=[[candi backgroundColor] retain];
