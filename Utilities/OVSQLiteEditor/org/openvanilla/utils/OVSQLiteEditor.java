@@ -1,4 +1,4 @@
-package org.ov.utils;
+package org.openvanilla.utils;
 
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Combo;
 
 public class OVSQLiteEditor {
 
@@ -22,6 +23,16 @@ public class OVSQLiteEditor {
 	private Button editButton = null;
 	private Button cancelButton = null;
 	private Table table = null;
+	private Combo dbCombo = null;
+	/**
+	 * This method initializes dbCombo	
+	 *
+	 */
+	private void createDbCombo() {
+		dbCombo = new Combo(sShell, SWT.NONE);
+		dbCombo.setBounds(new Rectangle(7, 7, 114, 32));
+	}
+
 	/**
 	 * @param args
 	 */
@@ -54,7 +65,7 @@ public class OVSQLiteEditor {
 		sShell.setSize(new Point(562, 273));
 		sShell.setLayout(null);
 		importButton = new Button(sShell, SWT.NONE);
-		importButton.setBounds(new Rectangle(7, 5, 75, 34));
+		importButton.setBounds(new Rectangle(4, 46, 75, 34));
 		importButton
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
@@ -67,9 +78,9 @@ public class OVSQLiteEditor {
 					}
 				});
 		imList = new List(sShell, SWT.NONE);
-		imList.setBounds(new Rectangle(6, 45, 114, 130));
+		imList.setBounds(new Rectangle(5, 85, 114, 97));
 		exportButton = new Button(sShell, SWT.NONE);
-		exportButton.setBounds(new Rectangle(39, 182, 78, 34));
+		exportButton.setBounds(new Rectangle(44, 186, 78, 34));
 		exportButton
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
@@ -83,7 +94,7 @@ public class OVSQLiteEditor {
 		progressBar = new ProgressBar(sShell, SWT.NONE);
 		progressBar.setBounds(new Rectangle(3, 223, 283, 21));
 		editButton = new Button(sShell, SWT.NONE);
-		editButton.setBounds(new Rectangle(128, 77, 75, 36));
+		editButton.setBounds(new Rectangle(129, 86, 75, 36));
 		editButton.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 				table.removeAll();
@@ -100,6 +111,7 @@ public class OVSQLiteEditor {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		table.setBounds(new Rectangle(213, 5, 336, 199));
+		createDbCombo();
 	}
 
 }
