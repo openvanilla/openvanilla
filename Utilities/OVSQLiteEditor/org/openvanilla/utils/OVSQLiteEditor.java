@@ -1,5 +1,8 @@
 package org.openvanilla.utils;
 
+import java.sql.*;
+import java.util.*;
+
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Display;
@@ -9,28 +12,42 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.custom.SashForm;
 
 public class OVSQLiteEditor {
 
-	private Shell sShell = null;  //  @jve:decl-index=0:visual-constraint="1,-9"
+	private Shell sShell = null;  //  @jve:decl-index=0:visual-constraint="99,10"
 	private Button importButton = null;
-	private List imList = null;
 	private Button exportButton = null;
 	private ProgressBar progressBar = null;
-	private Button editButton = null;
 	private Button cancelButton = null;
+	private SashForm sashForm = null;
+	private List imList = null;
 	private Table table = null;
-	private Combo dbCombo = null;
 	/**
-	 * This method initializes dbCombo	
+	 * This method initializes sashForm	
 	 *
 	 */
-	private void createDbCombo() {
-		dbCombo = new Combo(sShell, SWT.NONE);
-		dbCombo.setBounds(new Rectangle(7, 7, 114, 32));
+	private void createSashForm() {
+		sashForm = new SashForm(sShell, SWT.HORIZONTAL);
+		sashForm.setBounds(new Rectangle(6, 9, 542, 169));
+		
+		imList = new List(sashForm, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		imList.setBounds(new Rectangle(0, 0, 150, 150));
+		imList.setSize(150, 150);
+		imList.setLocation(6, 9);
+		
+		table = new Table(sashForm, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		table.setHeaderVisible(true);
+		table.setVisible(true);
+		table.setLocation(160, 9);
+		table.setLinesVisible(true);
+		table.setSize(380, 150);
+		for(String tableName: getTableNames()) {
+			System.out.println(tableName);
+			imList.add(tableName);
+		}
 	}
 
 	/**
@@ -65,7 +82,7 @@ public class OVSQLiteEditor {
 		sShell.setSize(new Point(562, 273));
 		sShell.setLayout(null);
 		importButton = new Button(sShell, SWT.NONE);
-		importButton.setBounds(new Rectangle(4, 46, 75, 34));
+		importButton.setBounds(new Rectangle(4, 186, 51, 34));
 		importButton
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
@@ -73,14 +90,12 @@ public class OVSQLiteEditor {
 				        fd.setText("Open");
 				        String[] filterExt = { "*.cin", "*.*" };
 				        fd.setFilterExtensions(filterExt);
-				        fd.open();				        
+				        fd.open();
 				        imList.add(fd.getFileName());
 					}
 				});
-		imList = new List(sShell, SWT.NONE);
-		imList.setBounds(new Rectangle(5, 85, 114, 97));
 		exportButton = new Button(sShell, SWT.NONE);
-		exportButton.setBounds(new Rectangle(44, 186, 78, 34));
+		exportButton.setBounds(new Rectangle(63, 186, 52, 34));
 		exportButton
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
@@ -93,25 +108,41 @@ public class OVSQLiteEditor {
 				});
 		progressBar = new ProgressBar(sShell, SWT.NONE);
 		progressBar.setBounds(new Rectangle(3, 223, 283, 21));
-		editButton = new Button(sShell, SWT.NONE);
-		editButton.setBounds(new Rectangle(129, 86, 75, 36));
-		editButton.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-				table.removeAll();
-				TableItem item = new TableItem(table, SWT.NONE);
-				int selectedItemIndex = imList.getSelectionIndex();
-				if(selectedItemIndex > -1)
-				item.setText(imList.getItem(selectedItemIndex));
-				table.setData(item);
-			}
-		});
 		cancelButton = new Button(sShell, SWT.NONE);
 		cancelButton.setBounds(new Rectangle(469, 210, 77, 35));
-		table = new Table(sShell, SWT.NONE);
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-		table.setBounds(new Rectangle(213, 5, 336, 199));
-		createDbCombo();
+		createSashForm();
 	}
 
+	private String[] getTableNames() {
+		ArrayList<String> nameList = new ArrayList<String>();
+		
+		Connection c = null;
+		try {
+			Class.forName("SQLite.JDBCDriver");
+			c = DriverManager.getConnection("jdbc:sqlite:/D:/TobaccoPack/IASL/imtables.db","","");
+
+			Statement st = c.createStatement();
+			ResultSet rs = st.executeQuery("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;");
+			while ( rs.next() )
+	    	  nameList.add(rs.getString(1));
+
+			rs.close();
+			st.close();
+			c.close();
+		} catch ( java.lang.Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+		}
+	    
+	    /*
+		Database db = new Database();
+		try {
+			db.open("D:\\TobaccoPack\\IASL\\imtables.db", 0755);
+			TableResult tr = db.get_table("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;");
+		} catch (java.lang.Exception e) {
+			e.printStackTrace();
+		}
+		*/
+	    
+		return (String[])nameList.toArray(new String[0]);
+	}
 }
