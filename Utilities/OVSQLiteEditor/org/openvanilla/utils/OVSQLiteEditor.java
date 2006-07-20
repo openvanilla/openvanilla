@@ -14,10 +14,12 @@ import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.layout.FillLayout;
 
 public class OVSQLiteEditor {
 
-	private Shell sShell = null;  //  @jve:decl-index=0:visual-constraint="99,10"
+	private Shell sShell = null;  //  @jve:decl-index=0:visual-constraint="100,27"
 	private Button importButton = null;
 	private Button exportButton = null;
 	private ProgressBar progressBar = null;
@@ -25,31 +27,97 @@ public class OVSQLiteEditor {
 	private SashForm sashForm = null;
 	private List imList = null;
 	private Table table = null;
+	private SashForm sashFormVertical = null;
+	private Composite controlComposite = null;
 	/**
 	 * This method initializes sashForm	
 	 *
 	 */
 	private void createSashForm() {
-		sashForm = new SashForm(sShell, SWT.HORIZONTAL);
-		sashForm.setBounds(new Rectangle(6, 9, 542, 169));
+		sashForm = new SashForm(sashFormVertical, SWT.HORIZONTAL);
 		
 		imList = new List(sashForm, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		imList.setBounds(new Rectangle(0, 0, 150, 150));
-		imList.setSize(150, 150);
-		imList.setLocation(6, 9);
 		
 		table = new Table(sashForm, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		table.setHeaderVisible(true);
 		table.setVisible(true);
-		table.setLocation(160, 9);
 		table.setLinesVisible(true);
-		table.setSize(380, 150);
+		
 		for(String tableName: getTableNames()) {
 			System.out.println(tableName);
 			imList.add(tableName);
 		}
+		
+		sashForm.setWeights(new int [] {3, 7});
 	}
 
+	/**
+	 * This method initializes controlComposite	
+	 *
+	 */
+	private void createControlComposite() {
+		controlComposite = new Composite(sashFormVertical, SWT.NONE);
+		controlComposite.setLayout(null);
+		controlComposite.setSize(150, 400);
+
+		exportButton = new Button(controlComposite, SWT.NONE);
+		exportButton.setBounds(new Rectangle(0, 0, 72, 30));
+		importButton = new Button(controlComposite, SWT.NONE);
+		importButton.setLocation(new Point(90, 0));
+		importButton.setSize(new Point(72, 30));
+		progressBar = new ProgressBar(controlComposite, SWT.NONE);
+		progressBar.setLocation(new Point(165, 45));
+		progressBar.setSize(new Point(320, 16));
+		cancelButton = new Button(controlComposite, SWT.NONE);
+		cancelButton.setLocation(new Point(510, 30));
+		cancelButton.setSize(new Point(72, 30));
+		
+		importButton
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+						FileDialog fd = new FileDialog(sShell, SWT.OPEN);
+				        fd.setText("Open");
+				        String[] filterExt = { "*.cin", "*.*" };
+				        fd.setFilterExtensions(filterExt);
+				        fd.open();
+				        imList.add(fd.getFileName());
+					}
+				});
+		exportButton
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+						FileDialog fd = new FileDialog(sShell, SWT.SAVE);
+				        fd.setText("Save");
+				        String[] filterExt = { "*.cin", "*.*" };
+				        fd.setFilterExtensions(filterExt);
+				        String savedCinFile = fd.open();				        
+					}
+				});		
+	}
+
+	/**
+	 * This method initializes sashFormVertical	
+	 *
+	 */
+	private void createSashFormVertical() {
+		sashFormVertical = new SashForm(sShell, SWT.VERTICAL);
+	
+		createSashForm();
+		createControlComposite();
+		sashFormVertical.setWeights(new int[]{85,15});
+	}
+	
+	/**
+	 * This method initializes sShell
+	 */
+	private void createSShell() {
+		sShell = new Shell();
+		sShell.setText("Shell");
+		sShell.setLayout(new FillLayout());
+		sShell.setSize(new Point(600, 450));
+		createSashFormVertical();
+	}
+	
 	/**
 	 * @param args
 	 */
@@ -71,46 +139,6 @@ public class OVSQLiteEditor {
 				display.sleep();
 		}
 		display.dispose();
-	}
-
-	/**
-	 * This method initializes sShell
-	 */
-	private void createSShell() {
-		sShell = new Shell();
-		sShell.setText("Shell");
-		sShell.setSize(new Point(562, 273));
-		sShell.setLayout(null);
-		importButton = new Button(sShell, SWT.NONE);
-		importButton.setBounds(new Rectangle(4, 186, 51, 34));
-		importButton
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-						FileDialog fd = new FileDialog(sShell, SWT.OPEN);
-				        fd.setText("Open");
-				        String[] filterExt = { "*.cin", "*.*" };
-				        fd.setFilterExtensions(filterExt);
-				        fd.open();
-				        imList.add(fd.getFileName());
-					}
-				});
-		exportButton = new Button(sShell, SWT.NONE);
-		exportButton.setBounds(new Rectangle(63, 186, 52, 34));
-		exportButton
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-						FileDialog fd = new FileDialog(sShell, SWT.SAVE);
-				        fd.setText("Save");
-				        String[] filterExt = { "*.cin", "*.*" };
-				        fd.setFilterExtensions(filterExt);
-				        String savedCinFile = fd.open();				        
-					}
-				});
-		progressBar = new ProgressBar(sShell, SWT.NONE);
-		progressBar.setBounds(new Rectangle(3, 223, 283, 21));
-		cancelButton = new Button(sShell, SWT.NONE);
-		cancelButton.setBounds(new Rectangle(469, 210, 77, 35));
-		createSashForm();
 	}
 
 	private String[] getTableNames() {
