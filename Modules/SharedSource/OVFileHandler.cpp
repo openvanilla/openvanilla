@@ -49,6 +49,14 @@ OVFileHandler::~OVFileHandler()
 #endif
 }
 
+bool OVFileHandler::isOpened()
+{
+	return inFile != 0 ? true : false;
+#ifndef WIN32
+	return filePtr != 0 ? true : false;
+#endif
+}
+
 int OVFileHandler::getSize()
 {
 	int length = 0;

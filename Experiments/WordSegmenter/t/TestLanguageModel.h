@@ -6,6 +6,12 @@ using namespace std;
 class TestLanguageModel : public CxxTest::TestSuite 
 {
 public:
+	void setUp(void)
+	{
+		string lmFilePath("./as_large-kn-2.lm");
+		lm_ = new LanguageModel(lmFilePath);
+	}
+	
 	void testGetLogProb(void)
 	{
 		string gram = "¤U«B ¤Ñ";
@@ -55,5 +61,5 @@ public:
 	}
 	
 private:
-	LanguageModel lm_;
+	LanguageModel* lm_;
 };

@@ -52,6 +52,7 @@ public:
 	OVFileHandler(const char* fileName);
 	~OVFileHandler();
 	
+	bool isOpened();
 	int getLines(vector<string>& outStringVectorRef);
 	
 private:

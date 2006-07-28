@@ -1,29 +1,21 @@
 #ifndef WORDSEGMENTER_H
 #define WORDSEGMENTER_H
 
-#include <map>
 #include <string>
 
+#include "LanguageModel.h"
 #include "Token.h"
 
 using namespace std;
 
-class Bin
-{
-public:	
-	string gram;
-	double logprob;
-	double backoff;
-};
-
 class WordSegmenter
 {
 public:
-	bool loadModel(map<string, Bin*>& lm);
+	bool loadModel(string& lmFilePath);
 	bool segment(vector<Token*>& inputTokens, vector<Token*>& outputTokens);
 
 private:
-	map<string, Bin*> lm_;
+	LanguageModel* lm_;
 };
 
 #endif
