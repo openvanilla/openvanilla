@@ -9,7 +9,7 @@ public:
 	void setUp(void)
 	{
 		string lmFilePath("./as_large-kn-2.lm");
-		lm_->= new LanguageModel(lmFilePath);
+		lm_ = new LanguageModel(lmFilePath);
 	}
 	
 	void testGetLogProb(void)
@@ -59,7 +59,12 @@ public:
 		gram = "天";
 		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 	}
+
+	void tearDown (void)
+	{
+		delete lm_;
+	}
 	
 private:
-	LanguageModel* lm_->
+	LanguageModel* lm_;
 };

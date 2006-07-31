@@ -11,6 +11,7 @@ using namespace std;
 
 LanguageModel::LanguageModel (string& lmFilePath)
 {
+	cerr << "Loading the language model file: " << lmFilePath << endl;
 	LanguageModel::unknownWordLabel = "<unk>";
 	OVFileHandler *fh = new OVFileHandler(lmFilePath.c_str());
 	vector<string> fileStringVector;
@@ -19,7 +20,8 @@ LanguageModel::LanguageModel (string& lmFilePath)
 	delimiters.push_back(delimiter);
 	bool readGramFlag = false;
 	if(!fh->isOpened()) {
-		cerr << "language model file not found." << endl;
+		cerr << "The language model file " << lmFilePath;
+		cerr << " not found." << endl;
 		exit(-1);
 	}
 
@@ -63,7 +65,17 @@ LanguageModel::LanguageModel (string& lmFilePath)
 		}	
 	}
 
+	cerr << "The language model file " << lmFilePath << " loaded." << endl;
 	delete fh;
+}
+
+LanguageModel::~LanguageModel()
+{
+	for(map<string, Gram*>::iterator iter = lm_.begin();
+		iter != lm_.end();
+		++iter)
+		delete iter->second;
+	lm_.clear();
 }
 
 double LanguageModel::getLogProb(string& gram)
