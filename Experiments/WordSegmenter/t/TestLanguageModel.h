@@ -9,57 +9,57 @@ public:
 	void setUp(void)
 	{
 		string lmFilePath("./as_large-kn-2.lm");
-		lm_ = new LanguageModel(lmFilePath);
+		lm_->= new LanguageModel(lmFilePath);
 	}
 	
 	void testGetLogProb(void)
 	{
-		string gram = "¤U«B ¤Ñ";
-		cerr << gram << " logprob: " << lm_.getLogProb(gram) << endl;
+		string gram = "ä¸‹é›¨ å¤©";
+		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 		
-		gram = "¤U«B¤Ñ";
-		cerr << gram << " logprob: " << lm_.getLogProb(gram) << endl;
+		gram = "ä¸‹é›¨å¤©";
+		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 		
-		gram = "¤U«B";
-		cerr << gram << " logprob: " << lm_.getLogProb(gram) << endl;
+		gram = "ä¸‹é›¨";
+		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 		
-		gram = "«B¤Ñ";
-		cerr << gram << " logprob: " << lm_.getLogProb(gram) << endl;
+		gram = "é›¨å¤©";
+		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 		
-		gram = "¤U";
-		cerr << gram << " logprob: " << lm_.getLogProb(gram) << endl;
+		gram = "ä¸‹";
+		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 		
-		gram = "«B";
-		cerr << gram << " logprob: " << lm_.getLogProb(gram) << endl;
+		gram = "é›¨";
+		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 		
-		gram = "¤Ñ";
-		cerr << gram << " logprob: " << lm_.getLogProb(gram) << endl;
+		gram = "å¤©";
+		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 	}
 	
 	void testGetBackOff(void)
 	{
-		string gram = "¤U«B ¤Ñ";
-		cerr << gram << " back-off: " << lm_.getBackOff(gram) << endl;
+		string gram = "ä¸‹é›¨ å¤©";
+		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 		
-		gram = "¤U«B¤Ñ";
-		cerr << gram << " back-off: " << lm_.getBackOff(gram) << endl;
+		gram = "ä¸‹é›¨å¤©";
+		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 		
-		gram = "¤U«B";
-		cerr << gram << " back-off: " << lm_.getBackOff(gram) << endl;
+		gram = "ä¸‹é›¨";
+		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 		
-		gram = "«B¤Ñ";
-		cerr << gram << " back-off: " << lm_.getBackOff(gram) << endl;
+		gram = "é›¨å¤©";
+		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 		
-		gram = "¤U";
-		cerr << gram << " back-off: " << lm_.getBackOff(gram) << endl;
+		gram = "ä¸‹";
+		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 		
-		gram = "«B";
-		cerr << gram << " back-off: " << lm_.getBackOff(gram) << endl;
+		gram = "é›¨";
+		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 		
-		gram = "¤Ñ";
-		cerr << gram << " back-off: " << lm_.getBackOff(gram) << endl;
+		gram = "å¤©";
+		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 	}
 	
 private:
-	LanguageModel* lm_;
+	LanguageModel* lm_->
 };
