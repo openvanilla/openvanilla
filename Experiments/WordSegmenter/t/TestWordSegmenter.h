@@ -22,23 +22,23 @@ public:
 		//string outputString;
 		vector<Token*> inputTokens;
 		Token* tokenA = new Token();
-		tokenA->word = "¤U";
+		tokenA->word = "ä¸‹";
 		inputTokens.push_back(tokenA);
 		
 		Token* tokenB = new Token();
-		tokenB->word = "«B";
+		tokenB->word = "é›¨";
 		inputTokens.push_back(tokenB);
 		
 		Token* tokenC = new Token();
-		tokenC->word = "¤Ñ";
+		tokenC->word = "å¤©";
 		inputTokens.push_back(tokenC);
 		
 		Token* tokenD = new Token();
-		tokenD->word = "¯d";
+		tokenD->word = "ç•™";
 		inputTokens.push_back(tokenD);
 		
 		Token* tokenE = new Token();
-		tokenE->word = "«È";
+		tokenE->word = "å®¢";
 		inputTokens.push_back(tokenE);
 		
 		///TS_ASSERT(seg.segment(inputString, outputString));
