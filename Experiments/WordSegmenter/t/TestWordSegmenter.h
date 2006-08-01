@@ -45,11 +45,11 @@ public:
 		vector<Token*> outputTokens;
 		TS_ASSERT(seg.segment(inputTokens, outputTokens));
 		
-		string outputString;
+		string outputString("");
 		for(int i = 0; i < outputTokens.size(); i++)
 			outputString += outputTokens[i]->word + " ";
 		//TS_WARN(outputString);
-		cerr<<outputString;
+		cerr << outputString;
 	}
 	
 private:

@@ -33,11 +33,11 @@ bool WordSegmenter::segment(vector<Token*>& inputTokens, vector<Token*>& outputT
 	{
 		double bestScore = 0.0f;
 		int bestPrefix = -1;
-		for(size_t prefix = index - 1; prefix >= 0; prefix--)
+		for(int prefix = index - 1; prefix >= 0; prefix--)
 		{
 			cerr << endl << "(" << prefix << "," << index << "):";
 			//string rightGram = inputString.substr(prefix, index - prefix);
-			string rightGram;
+			string rightGram("");
 			for(size_t shift = prefix, count = 0; count < index - prefix; count++, shift++)
 				rightGram += inputTokens[shift]->word;
 			cerr << rightGram.c_str() << "=";
@@ -50,7 +50,7 @@ bool WordSegmenter::segment(vector<Token*>& inputTokens, vector<Token*>& outputT
 				if(left >= 0 && left != prefix)
 				{
 					//string leftGram = inputString.substr(left, prefix - left);
-					string leftGram;
+					string leftGram("");
 					for(size_t count = 0, shift = left; count < prefix - left; count++, shift++)
 						leftGram += inputTokens[shift]->word;
 					string bigram = leftGram + " " + rightGram;
