@@ -1,1 +1,1 @@
-g++ -I../ -I../../Tobacco -I../../../Modules/SharedHeaders -I$CXXTEST_HOME lmRunner.cpp ../*.cpp ../../Tobacco/Token.cpp ../../../Modules/SharedSource/OVFileHandler.cpp ../../../Modules/SharedSource/OVStringToolKit.cpp -o lmRunner
+g++ -I../ -I../../Tobacco -I../../../Modules/SharedHeaders -I$CXXTEST_HOME lmRunner.cpp ../LanguageModel.cpp ../../Tobacco/Token.cpp ../../../Modules/SharedSource/OVFileHandler.cpp ../../../Modules/SharedSource/OVStringToolKit.cpp -o lmRunner
