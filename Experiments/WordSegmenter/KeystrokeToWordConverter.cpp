@@ -48,24 +48,24 @@ bool KeystrokeToWordConverter::convert(vector<Token*>& inputTokens, vector<Token
 		{
 			cerr << endl << "(" << prefix << "," << index << "):";
 			string rightKey("");
-			for(size_t shift = prefix, count = 0;
-				count < index - prefix; count++, shift++)
+			for(size_t shift = prefix; shift < index; shift++)
 				rightKey += inputTokens[shift]->word + " ";
 			rightKey = rightKey.substr(0, rightKey.length() - 1);
+			cerr << "{" << rightKey << "}";
 			vector<string> rightGrams;
-			size_t rightGramCount = dic_->getValueVector(rightKey, rightGrams);			
+			size_t rightGramCount = dic_->getValueVector(rightKey, rightGrams);
+			cerr << "[" << rightGramCount << "]" << endl;
 			for(size_t i = 0; i < rightGramCount; i++)
 			{
 				string rightGram = rightGrams[i];
-				cerr << rightGram.c_str() << "=";
+				cerr << i << "." << rightGram.c_str() << ":";
 			
 				if(lm_->has(rightGram)) {
 					int left = tracks[prefix];
 					if(left >= 0 && left != prefix)
 					{
 						string leftKey("");
-						for(size_t count = 0, shift = left;
-							count < prefix - left; count++, shift++)
+						for(size_t shift = left; shift < prefix; shift++)
 							leftKey += inputTokens[shift]->word + " ";
 						leftKey = leftKey.substr(0, leftKey.length() - 1);
 						vector<string> leftGrams;
@@ -79,50 +79,73 @@ bool KeystrokeToWordConverter::convert(vector<Token*>& inputTokens, vector<Token
 							cerr << "(test bigram:" << bigram << ")";
 							if(lm_->has(bigram)) {
 								double bigramScore = lm_->getLogProb(bigram);
-								cerr << bigramScore << " + ";
+								cerr << bigramScore << "(bigram) + ";
 								tempScore += bigramScore;
 							}
 							else if(dic_->has(leftGram)) {
 								double bigramBackOff =
 									lm_->getLogProb(leftGram) +
 									lm_->getBackOff(rightGram);
-								cerr << bigramBackOff << " + ";
+								cerr << bigramBackOff << "(backoff) + ";
 								tempScore += bigramBackOff;
 							}
-							else
+							else {
 								tempScore +=
 									lm_->getUnkLogProb() +
 									lm_->getBackOff(rightGram);
+								cerr << (lm_->getUnkLogProb() + lm_->getBackOff(rightGram));
+								cerr << "(unknown) + ";
+							}
 							
 							tempScore += scores[prefix];
+							cerr << scores[prefix] << "(scores[prefix])" << endl;
 							if(bestScore == 0.0f || tempScore > bestScore)
 							{
 								bestScore = tempScore;
 								bestPrefix = prefix;
 								bestWord = rightGram;
-								cerr << "argmax=" << prefix << "," << tempScore << endl;
+								cerr << "argmax=" << prefix;
+								cerr << "," << bestScore;
+								cerr <<" ," << bestWord << endl;
 							}
 						}
 					}
+					else {
+						double tempScore = lm_->getLogProb(rightGram);
+						cerr << tempScore << "(init)" << endl;
+						if(bestScore == 0.0f || tempScore > bestScore)
+						{
+							bestScore = tempScore;
+							bestPrefix = prefix;
+							bestWord = rightGram;
+							cerr << "argmax=" << prefix;
+							cerr << "," << bestScore;
+							cerr <<" ," << bestWord << endl;
+						}				
+					}
 				}
-				else if(rightGram.length() == 1) {
-					double tempScore = lm_->getUnkLogProb() + scores[prefix];				
+				else
+				{
+					double tempScore = lm_->getUnkLogProb() + scores[prefix];
+					cerr << "unknown single char word:" << tempScore << endl;
 					if(bestScore == 0.0f || tempScore > bestScore)
 					{
 						bestScore = tempScore;
 						bestPrefix = prefix;
 						bestWord = rightGram;
-						cerr << "argmax=" << prefix << "," << tempScore << endl;
+						cerr << "argmax=" << prefix;
+						cerr << "," << bestScore;
+						cerr << "," << bestWord << endl;
 					}
 				}
-				else
-					cerr << "none" << endl;
 			}
 		}
 		scores[index] = bestScore;
 		tracks[index] = bestPrefix;
 		words[index] = bestWord;
-		cerr << endl << "best:" << bestPrefix << ", score=" << bestScore << endl;
+		cerr << endl << "bestPrefix:" << bestPrefix;
+		cerr << ", score=" << bestScore;
+		cerr << ", word=" << bestWord << endl;
 
 		if(tracks[index] == -1)	tracks[index] = index - 1;
 		
