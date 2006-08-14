@@ -20,7 +20,7 @@
 /* Begin PBXFileReference section */
 		6A9907260A66C771007272EB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		6A9907270A66C771007272EB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
-		6A9907310A66C77F007272EB /* WebKitServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = WebKitServer.app; path = build/Debug/WebKitServer.app; sourceTree = "<group>"; };
+		6A9907310A66C77F007272EB /* WebKitServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebKitServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A9907340A66C77F007272EB /* WebKitServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "WebKitServer-Info.plist"; sourceTree = "<group>"; };
 		6A9907700A66C7A9007272EB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6A9907710A66C7A9007272EB /* NSDictionaryExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryExtension.h; sourceTree = "<group>"; };

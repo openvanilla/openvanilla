@@ -30,6 +30,7 @@
     NSColor *defaultbackground;
 	NSURL *urlbase;
 }
+- (IBAction)sendKeyTest:(id)sender;
 - (void)applyConfig:(NSDictionary*)d window:(NSWindow*)w;
 - (void)solveConflict;
 - (void)stopTimer;

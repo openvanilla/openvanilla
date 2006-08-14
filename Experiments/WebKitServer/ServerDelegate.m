@@ -48,7 +48,32 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 #define CVWS_EXAMPLE	@"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /><head><title></title><link rel=\"stylesheet\" href=\"%@\" type=\"text/css\" media=\"screen\" /></head><body><p>%@</p></body></html>"
 #define CVWS_URLBASE    @"~/Sites/WebKitServer/style.css"
 
+@protocol OVKeyReceiver
+- (void)sendKey:(char)c;
+@end
+
+
 @implementation ServerDelegate
+- (IBAction)sendKeyTest:(id)sender {
+	NSLog(@"getting remote object");
+	id keyrcvr=[[NSConnection rootProxyForConnectionWithRegisteredName:@"OVKeyReceiverTest" host:nil] retain];
+	if (keyrcvr) {
+		NSLog(@"setting protocol");
+		[keyrcvr setProtocolForProxy:@protocol(OVKeyReceiver)];
+		
+		NSLog(@"sending keys");
+		[keyrcvr sendKey:'e'];
+		[keyrcvr sendKey:' '];
+		[keyrcvr sendKey:'2'];
+		NSLog(@"releasing remote object");
+		[keyrcvr release];
+		NSLog(@"session ended");
+	}
+	else {
+		NSLog(@"cannot connect to remote object");
+	}
+}
+
 - (void)awakeFromNib {
 	NSLog(@"WebkitServer started");
 	NSConnection *c=[NSConnection defaultConnection];
