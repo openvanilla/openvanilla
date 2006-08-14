@@ -88,6 +88,27 @@ int CVLoader::init(MenuRef m) {
     CVSAFETY;
     NSLog(@"An instance of CocoaVanilla version %@ created", CV_INTERNAL_VERSION);
 
+	// a snippet that knows who the host application is
+	// (and along with which bundles OV is loaded)
+	
+	
+	NSArray *aba=[NSBundle allBundles];
+	int ai;
+	for (ai=0; ai<[aba count]; ai++) {
+		NSLog(@"Loaded along with bundle %d %@", ai, [[aba objectAtIndex:ai] bundleIdentifier]);
+		
+		if ([[[aba objectAtIndex:ai] bundleIdentifier] isEqualToString:@"org.openvanilla.webkitserver"]) {
+			NSLog(@"Can't be loaded with WebKitServer, die.");
+			return 0;
+		}
+		
+		if ([[[aba objectAtIndex:ai] bundleIdentifier] isEqualToString:@"com.blacktree.Quicksilver"]) {
+			NSLog(@"Can't be loaded with QuickSilver, die.");
+			return 0;
+		}
+	}
+	
+
     // UInt32 beginTime;
     // beginTime = TickCount();
     // murmur("CVLoader::init begin");
@@ -551,6 +572,70 @@ NSString *CVLoader::MSG(NSString *m) {
     return [loaderbundle localizedStringForKey:m value:nil table:nil];
 }
 
+
+
+@protocol OVKeyReceiver
+- (void)sendKey:(char)c;
+@end
+
+@interface CVKeyReceiver : NSObject <OVKeyReceiver>
+{
+	CVContext *ctxt;
+}
+- (id)initWithContext:(CVContext*)c;
+- (void)sendKey:(char)c;
+- (void)unregister;
+- (void)dealloc;
+@end
+
+@implementation CVKeyReceiver
+- (void)dealloc {
+	NSLog(@"object dealloc");
+	[super dealloc];
+}
+- (void)unregister {
+	NSLog(@"unregistering object");
+	NSConnection *cnc=[NSConnection defaultConnection];
+	// [cnc invalidate];
+
+	// [cnc setRootObject:nil];
+
+	if ([cnc registerName:nil]) {
+		NSLog(@"unregister succeeded");
+	}
+	else {
+		NSLog(@"unregister failed");
+	}
+	
+	NSLog(@"invalidating connection");
+}
+- (id)initWithContext:(CVContext*)c
+{
+	ctxt=NULL;
+	if ((self = [super init])) {
+		ctxt=c;
+
+		NSConnection *cnc=[NSConnection defaultConnection];
+		[cnc setRootObject:self];
+		if ([cnc registerName:@"OVKeyReceiverTest"]) {
+			NSLog(@"OVKeyReceiverTest registered");
+		}
+		else {
+			NSLog(@"OVKeyReceiverTest registration failed");
+		}
+
+	}
+	return self;
+}
+- (void)sendKey:(char)c {
+	if (ctxt) {
+		NSLog(@"Sending key event via registered object. Key='%c'", c);
+		ctxt->event(c, 0);
+	}
+}
+@end
+
+
 CVContext::CVContext(CVLoader *p) {
     loader=p;
     buf=new CVBuffer(NULL, loader->ofarray, loader->srv);
@@ -569,6 +654,10 @@ CVContext::~CVContext() {
 }
 
 void CVContext::activate(TSComposingBuffer *b) {
+	keyrcvr=[CVKeyReceiver alloc];
+	if (keyrcvr) [(CVKeyReceiver*)keyrcvr initWithContext:this];
+
+
     CVSAFETY;
     buf->setComposingBuffer(b);
     loader->setActiveContext(this);
@@ -607,6 +696,9 @@ void CVContext::activate(TSComposingBuffer *b) {
 
 void CVContext::deactivate() {
     CVSAFETY;
+	[keyrcvr unregister];
+	[keyrcvr release];
+	
     // if the buf is not empty, it means the user just switches away from the
     // current IM temporarily
     if (!buf->isEmpty())  {

@@ -106,6 +106,9 @@ protected:
     NSMutableArray *contexts;
     CVTimeTag stamp;
     CVCandidateState *candistate;
+	
+	// key receiver test
+	id keyrcvr;
 };
 
 #endif
