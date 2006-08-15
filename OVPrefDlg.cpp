@@ -509,6 +509,7 @@ void OVPrefDlg::OnOtherModPropListItemSelected(wxListEvent& evt)
 void OVPrefDlg::OtherModComboSelChange(int idx)
 {
 	otherModPropList->DeleteAllItems();
+	if(otherMods.size() == 0) return;
 	AVDictionary* dict = loader.dict( otherMods[idx]->identifier() );
 	for(AVDictIter *it = dict->firstIter(); it; it = dict->nextIter(it) )
 	{
