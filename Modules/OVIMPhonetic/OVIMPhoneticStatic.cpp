@@ -30,9 +30,20 @@
 
 // #define OV_DEBUG
 
-#include <OpenVanilla/OpenVanilla.h>
-#include <OpenVanilla/OVLibrary.h>
-#include <OpenVanilla/OVUtility.h>
+#ifndef WIN32
+	#include <OpenVanilla/OpenVanilla.h>
+	#include <OpenVanilla/OVLibrary.h>
+	#include <OpenVanilla/OVUtility.h>
+#else
+	#include "OpenVanilla.h"
+	#include "OVLibrary.h"
+	#include "OVUtility.h"
+#endif
+
+#ifdef WIN32
+	#define strcasecmp stricmp
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -52,7 +63,7 @@
 #endif
     
 
-extern unsigned short ovPhoneticData[];
+extern "C" unsigned short ovPhoneticData[];
 
 class OVIMPhoneticStatic;
 
