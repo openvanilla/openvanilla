@@ -4,20 +4,26 @@
 
 ov-generate - An generator that helps you to write ov modules.
 
-=head1 USAGE
+=head1 SYNOPSIS
 
-  ov-generate [entity] [options...]
+  ov-generate generator [options...]
 
   # Generate a basic test for OVIMPhonetic module
   ov-generate test OVIMPhonetic
 
 =cut
 
+use strict;
+use warnings;
 use lib 'lib';
-
+use Pod::Usage;
 use OpenVanilla::Utility::Generator;
 
 my ($generator, @args) = @ARGV;
+
+unless ( $generator ) {
+    pod2usage(2);
+}
 
 my $g = OpenVanilla::Utility::Generator->new;
 
