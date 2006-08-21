@@ -12,6 +12,37 @@
 #include <fstream>
 using namespace std;
 
+long g_shiftPressedTime = -1;
+#define DEBUG_LOGFILE "c:\\jime.log"
+FILE *fp = fopen (DEBUG_LOGFILE, "w");
+void DEBUG_LOG(char* string)
+{
+	static int i = 1;
+	fprintf(fp, "%d", i);
+	fprintf(fp, "_ _");
+	fprintf(fp, string);
+	fprintf(fp, "\n");
+	fflush(fp);
+	i++;
+}
+
+
+struct KeyInfo
+{
+	UINT repeatCount:16;
+	UINT scanCode:8;
+	UINT isExtended:1;
+	UINT reserved:4;
+	UINT contextCode:1;
+	UINT prevKeyState:1;
+	UINT isKeyUp:1;	// transition state
+};
+
+inline KeyInfo GetKeyInfo(LPARAM lparam)
+{	return *(KeyInfo*)&lparam;	}
+
+inline bool IsKeyDown(BYTE keystate){ return !!(keystate & 0xF0); }
+
 void
 MyGenerateMessage(HIMC hIMC, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -127,20 +158,78 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	LPINPUTCONTEXT lpIMC;
 	LPCOMPOSITIONSTRING lpCompStr;
 
+	DEBUG_LOG("Enter the ImeProcessKey");
+	KeyInfo ki = GetKeyInfo(lKeyData);
 	int spec;
 	int k;
 
 	if (!hIMC) return FALSE;
 	if (!(lpIMC = ImmLockIMC(hIMC))) 
 		return FALSE;
-	if (lKeyData & 0x80000000)	
-		return FALSE;
+	//if (lKeyData & 0x80000000)	
+	//	return FALSE;
+
+	//if(LOWORD(uVKey) == VK_SPACE && (lpbKeyState[VK_SHIFT] & 0x80))
+	if(LOWORD(uVKey) == VK_SPACE && IsKeyDown(lpbKeyState[VK_SHIFT]))
+	{
+		DEBUG_LOG("VK_SHIFT && VK_SPACE");
+		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 1);	
+		return TRUE;  //shift+space
+	}
+
+	//if( (uVKey == VK_SHIFT)&&((GetKeyState(uVKey)& 0xF0) != 0xF0) )	
+	if ( GetKeyInfo(lKeyData).isKeyUp )
+	{	// Key up      
+		if( g_shiftPressedTime > 0 )	
+		{
+        	DWORD time = (GetTickCount() - g_shiftPressedTime);
+			if( uVKey == VK_SHIFT &&  time <= 20000 )
+            {
+				// Toggle Chinese/English mode.
+                //ToggleChiEngMode(hIMC);
+				MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
+				//g_shiftPressedTime = -1;
+				DEBUG_LOG("SHIFT PRESS AND UP");
+				//DEBUG_LOG("TEST");
+				return TRUE;
+            }
+            
+			//return FALSE;
+        }         
+        //return TRUE;
+    }
+	short i = GetKeyState(uVKey);
+	if( uVKey == VK_SHIFT  )	
+	{
+    	//if( ! IsKeyDown( lpbKeyState[VK_CONTROL] ) && g_shiftPressedTime < 0 )
+		DEBUG_LOG("VK_SHIFT ONLY");
+		if( g_shiftPressedTime < 0 )
+		{
+			//MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
+			g_shiftPressedTime = GetTickCount();
+			DEBUG_LOG("VK_SHIFT ONLY && PressedTime < 0");
+		}
+    }
+    //else if( g_shiftPressedTime > 0 )
+	//{
+	//	g_shiftPressedTime = -1;
+	//	DEBUG_LOG("VK_SHIFT ONLY && PressedTime > 0");
+	//}
+
 	if (/*uVKey == VK_SHIFT ||*/ uVKey == VK_CONTROL || uVKey == VK_MENU) 
 		return FALSE;
 	
-    if(LOWORD(uVKey) == VK_SPACE &&
-		((lpbKeyState[VK_CONTROL] & 0x80) || (lpbKeyState[VK_SHIFT] & 0x80)))
+	if(LOWORD(uVKey) == VK_SPACE && (lpbKeyState[VK_CONTROL] & 0x80))
 		return TRUE;  //ctrl+space
+#if 0
+    if(LOWORD(uVKey) == VK_SPACE && IsKeyDown(lpbKeyState[VK_SHIFT]))
+	{
+		DEBUG_LOG("VK_SHIFT && VK_SPACE");
+		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 1);	
+		return TRUE;  //shift+space
+	}
+#endif	
+
 
 	//Change the module by Ctrl+"\"
 	if(LOWORD(uVKey) == VK_OEM_5 && ((lpbKeyState[VK_CONTROL] & 0x80)))
@@ -297,6 +386,9 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 	//Change the module by Ctrl+"\"
 	if(LOWORD(uVKey) == VK_OEM_5 && ((lpbKeyState[VK_CONTROL] & 0x80)))
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 0);
+
+	if(LOWORD(uVKey) == VK_SHIFT)
+		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
 
 	return 0;
 }
