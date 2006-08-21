@@ -113,7 +113,12 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 		
 	case IMN_PRIVATE:
-		UIChangeModule(hWnd);
+		if(lParam == 0)
+			UIChangeModule(hWnd);
+		if(lParam == 1)
+			UIChangeHalfFull(hWnd);
+		if(lParam == 2)
+			UIChangeChiEng(hWnd);
 
 		//CompX = 5;
 		break;
