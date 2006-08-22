@@ -25,7 +25,7 @@ LINK32_OBJS = \
 $(OUTDIR):
 	if not exist "$(OUTDIR)/$(NULL)" mkdir $(OUTDIR)
 
-LINK_LIBS = kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib imm32.lib OVIME\OVIMEUI.lib AmphiVanilla\libltdl.lib AmphiVanilla\libiconv.lib tinyxml\tinyxml.lib
+LINK_LIBS = kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib imm32.lib OVIME\OVIMEUI.lib $(OV_DEPS)\libltdl.lib $(OV_DEPS)\libiconv.lib $(OV_DEPS)\tinyxml.lib
 
 dllllflags = /INCREMENTAL:NO /NOLOGO /DLL /PDB:$(OUTDIR)/vc70.pdb /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /MACHINE:IX86
 
@@ -35,7 +35,7 @@ $(OUTDIR)\$(Proj).dll: $(OUTDIR) $(LINK32_OBJS) $(OUTDIR)\$(Proj).res
 	-out:$(OUTDIR)\$(Proj).ime\
 	-def:OVIME\$(Proj).def
 
-cflags = /wd4005 /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Framework/Headers" /I"AmphiVanilla" /I "tinyxml" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_UNICODE" /D "UNICODE" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP 
+cflags = /wd4005 /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUIManaged\Headers" /I "../../Framework/Headers" /I"AmphiVanilla" /I$(OV_DEPS) /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_UNICODE" /D "UNICODE" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP 
 FILE=ControlHandle
 $(OUTDIR)\$(FILE).obj: OVIME\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVIME\$(FILE).cpp
@@ -61,7 +61,7 @@ FILE=DisplayServer
 $(OUTDIR)\$(FILE).obj: OVIME\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" OVIME\$(FILE).cpp
 
-cflags = /wd4005 /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUI\Headers" /I "../../Framework/Headers" /I "../../Modules/SharedHeaders" /I "tinyxml" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP /GR
+cflags = /wd4005 /O1 /Ob1 /Oy /I "OVIME" /I "OVIMEUIManaged\Headers" /I "../../Framework/Headers" /I "../../Modules/SharedHeaders" /I$(OV_DEPS) /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OVIME_EXPORTS" /D "_WINDLL" /GF /EHsc /MT /GS /Gy /W3 /c /Wp64 /Zi /TP /GR
 FILE=OVStringToolKit
 $(OUTDIR)\$(FILE).obj: ..\..\Modules\SharedSource\$(FILE).cpp $(OUTDIR)
 	$(CXX) $(cflags) /Fo"$(OUTDIR)\\" /Fd"$(OUTDIR)\\" ..\..\Modules\SharedSource\$(FILE).cpp
