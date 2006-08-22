@@ -21,7 +21,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;..\OVIMEUI\PCMan"
+				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;.\PCMan"
 				AdditionalUsingDirectories=""
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
 				MinimalRebuild="FALSE"
@@ -82,7 +82,7 @@
 			ManagedExtensions="TRUE">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;..\OVIMEUI\PCMan"
+				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;.\PCMan"
 				AdditionalUsingDirectories=""
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				StringPooling="TRUE"
@@ -183,9 +183,6 @@
 			<File
 				RelativePath=".\headers\OVIMEUI.h">
 			</File>
-			<File
-				RelativePath=".\resource.h">
-			</File>
 			<Filter
 				Name="PCMan"
 				Filter="">
@@ -197,9 +194,6 @@
 				</File>
 			</Filter>
 		</Filter>
-		<File
-			RelativePath=".\OVIMEUIManaged.rc">
-		</File>
 		<File
 			RelativePath=".\PCMan\PCMan.rc">
 		</File>

@@ -421,3 +421,37 @@ void UIChangeModule(HWND hWnd)
 	GetWindowRect(uiStatus.hWnd, &rc);
 	UIMoveStatusWindow(hWnd, rc.left, rc.top );
 }
+
+void UIChangeHalfFull(HWND hWnd)
+{
+	isFull = !isFull;
+	SendMessage( hToolbar, TB_CHANGEBITMAP, ID_FULL_HALF, MAKELPARAM(isFull ? 4 : 5, 0));
+	HIMC imc = ImmGetContext( hIMEWnd );
+	if( imc )
+	{
+		DWORD conv, sentence;
+		ImmGetConversionStatus( imc, &conv, &sentence);
+		if( isFull )
+			conv |= IME_CMODE_FULLSHAPE;
+		else
+			conv &= ~IME_CMODE_FULLSHAPE;
+			ImmSetConversionStatus( imc, conv, sentence);
+	}
+}
+
+void UIChangeChiEng(HWND hWnd)
+{
+	isChinese = !isChinese;
+	SendMessage( hToolbar, TB_CHANGEBITMAP, ID_CHI_ENG, MAKELPARAM(isChinese ? 2 : 3, 0));
+	HIMC imc = ImmGetContext( hIMEWnd );
+	if( imc )
+	{
+		DWORD conv, sentence;
+		ImmGetConversionStatus( imc, &conv, &sentence);
+		if( isChinese )
+			conv |= IME_CMODE_NATIVE;
+		else
+			conv &= ~IME_CMODE_NATIVE;
+		ImmSetConversionStatus( imc, conv, sentence);
+	}
+}

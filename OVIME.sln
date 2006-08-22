@@ -2,23 +2,10 @@ Microsoft Visual Studio Solution File, Format Version 8.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIME", "OVIME\OVIME.vcproj", "{684B2F15-E8EE-4032-B4A3-89732F32C12D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{21FC3D4F-8918-4C03-8881-EC6C54DB3504} = {21FC3D4F-8918-4C03-8881-EC6C54DB3504}
-		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B} = {E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMEUI", "OVIMEUI\OVIMEUI.vcproj", "{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{21FC3D4F-8918-4C03-8881-EC6C54DB3504} = {21FC3D4F-8918-4C03-8881-EC6C54DB3504}
+		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3C} = {E57C7D8A-31EC-4839-BBB1-91D54A0BEF3C}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AmphiVanilla", "AmphiVanilla\AmphiVanilla.vcproj", "{21FC3D4F-8918-4C03-8881-EC6C54DB3504}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIME2Server", "OVIME2Server\OVIME2Server.vcproj", "{FF074876-659D-4BFD-9361-6E22C99BABE2}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIME2", "OVIME2\OVIME2.vcproj", "{517658CE-EFFE-4C17-BF82-55F743CB3123}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -42,22 +29,16 @@ Global
 		{684B2F15-E8EE-4032-B4A3-89732F32C12D}.Debug.Build.0 = Debug|Win32
 		{684B2F15-E8EE-4032-B4A3-89732F32C12D}.Release.ActiveCfg = Release|Win32
 		{684B2F15-E8EE-4032-B4A3-89732F32C12D}.Release.Build.0 = Release|Win32
-		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}.Debug.ActiveCfg = Debug|Win32
-		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}.Debug.Build.0 = Debug|Win32
-		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}.Release.ActiveCfg = Release|Win32
-		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}.Release.Build.0 = Release|Win32
 		{21FC3D4F-8918-4C03-8881-EC6C54DB3504}.Debug.ActiveCfg = Debug|Win32
 		{21FC3D4F-8918-4C03-8881-EC6C54DB3504}.Debug.Build.0 = Debug|Win32
 		{21FC3D4F-8918-4C03-8881-EC6C54DB3504}.Release.ActiveCfg = Release|Win32
 		{21FC3D4F-8918-4C03-8881-EC6C54DB3504}.Release.Build.0 = Release|Win32
-		{FF074876-659D-4BFD-9361-6E22C99BABE2}.Debug.ActiveCfg = Debug|Win32
-		{FF074876-659D-4BFD-9361-6E22C99BABE2}.Release.ActiveCfg = Release|Win32
-		{517658CE-EFFE-4C17-BF82-55F743CB3123}.Debug.ActiveCfg = Debug|Win32
-		{517658CE-EFFE-4C17-BF82-55F743CB3123}.Release.ActiveCfg = Release|Win32
 		{1610A612-3EC5-4FA8-8559-A7FE48802057}.Debug.ActiveCfg = Debug|.NET
 		{1610A612-3EC5-4FA8-8559-A7FE48802057}.Release.ActiveCfg = Release|.NET
-		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}.Debug.ActiveCfg = Debug|Win32
-		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3B}.Release.ActiveCfg = Release|Win32
+		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3C}.Debug.ActiveCfg = Debug|Win32
+		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3C}.Debug.Build.0 = Debug|Win32
+		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3C}.Release.ActiveCfg = Release|Win32
+		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3C}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

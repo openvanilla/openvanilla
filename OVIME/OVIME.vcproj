@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\OVIMEUI\Headers;..\..\..\Framework\Headers;..\..\..\Modules\SharedHeaders"
+				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\OVIMEUIManaged\Headers;..\..\..\Framework\Headers;..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="FALSE"
 				MinimalRebuild="TRUE"
@@ -79,7 +79,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\OVIMEUI\Headers;..\..\..\Framework\Headers;..\..\..\Modules\SharedHeaders"
+				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\OVIMEUIManaged\Headers;..\..\..\Framework\Headers;..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
 				StringPooling="TRUE"
 				MinimalRebuild="FALSE"
