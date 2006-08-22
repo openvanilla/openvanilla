@@ -24,6 +24,7 @@ void UIHideStatusWindow();
 void UISetCursorPos(int);
 void UISetMarkFrom(int);
 void UISetMarkTo(int);
+void UIChangeModule(HWND);
 // UIComp.cpp
 void UICreateCompWindow(HWND);
 void UIMoveCompWindow(HWND, int, int, wchar_t*);
