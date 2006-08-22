@@ -38,7 +38,7 @@
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="FALSE"
 				AdditionalDependencies="comctl32.lib imm32.lib tinyxml.lib"
-				OutputFile="$(OutDir)/$(ProjectName).dll"
+				OutputFile="$(OutDir)/OVIMEUI.dll"
 				LinkIncremental="2"
 				ModuleDefinitionFile="OVIMEUI.def"
 				GenerateDebugInformation="TRUE"
@@ -100,6 +100,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="comctl32.lib imm32.lib tinyxml.lib"
+				OutputFile="$(OutDir)/OVIMEUI.dll"
 				LinkIncremental="1"
 				ModuleDefinitionFile="OVIMEUI.def"
 				GenerateDebugInformation="FALSE"
