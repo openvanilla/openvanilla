@@ -16,6 +16,7 @@ BOOL IMEUIUnRegisterClass( HINSTANCE );
 BOOL MyIsIMEMessage(UINT);
 void UIPushInputMethod(wchar_t*);
 int UICurrentInputMethod();
+
 // UIStatus.cpp
 void UICreateStatusWindow(HWND);
 void UIMoveStatusWindow(HWND, int, int);
@@ -25,6 +26,8 @@ void UISetCursorPos(int);
 void UISetMarkFrom(int);
 void UISetMarkTo(int);
 void UIChangeModule(HWND);
+void UIChangeHalfFull(HWND);
+void UIChangeChiEng(HWND);
 // UIComp.cpp
 void UICreateCompWindow(HWND);
 void UIMoveCompWindow(HWND, int, int, wchar_t*);

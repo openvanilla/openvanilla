@@ -148,7 +148,7 @@
 				RelativePath="..\AmphiVanilla\AVDictionary.cpp">
 			</File>
 			<File
-				RelativePath="..\Ovimeui\OVIMEUI.def">
+				RelativePath=".\OVIMEUI.def">
 			</File>
 			<File
 				RelativePath="..\Ovimeui\Source\Utils.cpp">
@@ -157,19 +157,19 @@
 				Name="PCMan"
 				Filter="">
 				<File
-					RelativePath="..\Ovimeui\PCMan\Global.cpp">
+					RelativePath=".\PCMan\Global.cpp">
 				</File>
 				<File
-					RelativePath="..\Ovimeui\PCMan\PCMan.cpp">
+					RelativePath=".\PCMan\PCMan.cpp">
 				</File>
 				<File
-					RelativePath="..\Ovimeui\PCMan\UICand.cpp">
+					RelativePath=".\PCMan\UICand.cpp">
 				</File>
 				<File
-					RelativePath="..\Ovimeui\PCMan\UIComp.cpp">
+					RelativePath=".\PCMan\UIComp.cpp">
 				</File>
 				<File
-					RelativePath="..\Ovimeui\PCMan\UINotify.cpp">
+					RelativePath=".\PCMan\UINotify.cpp">
 				</File>
 				<File
 					RelativePath=".\PCMan\UIStatus.cpp">
@@ -183,6 +183,9 @@
 			<File
 				RelativePath=".\headers\OVIMEUI.h">
 			</File>
+			<File
+				RelativePath=".\resource.h">
+			</File>
 			<Filter
 				Name="PCMan"
 				Filter="">
@@ -190,21 +193,19 @@
 					RelativePath=".\PCMan\PCMan.h">
 				</File>
 				<File
-					RelativePath="..\Ovimeui\PCMan\resource.h">
+					RelativePath=".\PCMan\resource.h">
 				</File>
 			</Filter>
 		</Filter>
-		<Filter
-			Name="¸ê·½ÀÉ"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
-			<File
-				RelativePath="..\Ovimeui\PCMan\PCMan.rc">
-			</File>
-			<File
-				RelativePath="..\Ovimeui\PCMan\status_toolbar.bmp">
-			</File>
-		</Filter>
+		<File
+			RelativePath=".\OVIMEUIManaged.rc">
+		</File>
+		<File
+			RelativePath=".\PCMan\PCMan.rc">
+		</File>
+		<File
+			RelativePath=".\PCMan\status_toolbar.bmp">
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

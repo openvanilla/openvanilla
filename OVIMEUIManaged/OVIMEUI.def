@@ -22,4 +22,5 @@ EXPORTS
 	UIShowNotifyWindow
 	UIHideNotifyWindow
 	UIChangeModule
-	
+	UIChangeHalfFull
+	UIChangeChiEng
