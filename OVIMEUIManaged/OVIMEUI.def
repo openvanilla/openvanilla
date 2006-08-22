@@ -1,0 +1,25 @@
+EXPORTS
+	IMEUIRegisterClass
+	IMEUIUnRegisterClass
+	UIPushInputMethod
+	UICurrentInputMethod
+	UICreateStatusWindow
+	UIMoveStatusWindow
+	UIShowStatusWindow
+	UIHideStatusWindow
+	UISetCursorPos
+	UISetMarkFrom
+	UISetMarkTo
+	UICreateCompWindow
+	UIMoveCompWindow
+	UIShowCompWindow
+	UIHideCompWindow
+	UICreateCandWindow
+	UIMoveCandWindow
+	UIShowCandWindow
+	UIHideCandWindow
+	UICreateNotifyWindow
+	UIShowNotifyWindow
+	UIHideNotifyWindow
+	UIChangeModule
+	
