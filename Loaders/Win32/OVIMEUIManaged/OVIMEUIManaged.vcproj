@@ -40,7 +40,7 @@
 				AdditionalDependencies="comctl32.lib imm32.lib tinyxml.lib"
 				OutputFile="$(OutDir)/$(ProjectName).dll"
 				LinkIncremental="2"
-				ModuleDefinitionFile="..\OVIMEUI\OVIMEUI.def"
+				ModuleDefinitionFile="OVIMEUI.def"
 				GenerateDebugInformation="TRUE"
 				AssemblyDebug="1"
 				SubSystem="2"
@@ -101,7 +101,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="comctl32.lib imm32.lib tinyxml.lib"
 				LinkIncremental="1"
-				ModuleDefinitionFile="..\OVIMEUI\OVIMEUI.def"
+				ModuleDefinitionFile="OVIMEUI.def"
 				GenerateDebugInformation="FALSE"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -151,7 +151,7 @@
 				RelativePath=".\OVIMEUI.def">
 			</File>
 			<File
-				RelativePath="..\Ovimeui\Source\Utils.cpp">
+				RelativePath=".\Source\Utils.cpp">
 			</File>
 			<Filter
 				Name="PCMan"
