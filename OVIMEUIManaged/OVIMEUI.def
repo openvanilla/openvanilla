@@ -24,3 +24,11 @@ EXPORTS
 	UIChangeModule
 	UIChangeHalfFull
 	UIChangeChiEng
+	_ShowCandPageArray
+	_SetCandString
+	_EndCandPage
+	_GetCandidateValue
+	_CreateCandPage
+	_HideCandPage
+	_ShowCandPage
+	

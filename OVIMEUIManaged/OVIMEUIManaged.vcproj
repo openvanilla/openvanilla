@@ -21,7 +21,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;.\PCMan"
+				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;.\James"
 				AdditionalUsingDirectories=""
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
 				MinimalRebuild="FALSE"
@@ -155,25 +155,100 @@
 				RelativePath=".\Source\Utils.cpp">
 			</File>
 			<Filter
-				Name="PCMan"
+				Name="James"
 				Filter="">
 				<File
-					RelativePath=".\PCMan\Global.cpp">
+					RelativePath=".\James\Global.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\PCMan\PCMan.cpp">
+					RelativePath=".\James\NewUICand.cpp">
 				</File>
 				<File
-					RelativePath=".\PCMan\UICand.cpp">
+					RelativePath=".\James\PCMan.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\PCMan\UIComp.cpp">
+					RelativePath=".\James\UICand.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\PCMan\UINotify.cpp">
+					RelativePath=".\James\UIComp.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\PCMan\UIStatus.cpp">
+					RelativePath=".\James\UINotify.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\James\UIStatus.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
 				</File>
 			</Filter>
 		</Filter>
@@ -182,10 +257,13 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
+				RelativePath=".\James\DotNETHeader.h">
+			</File>
+			<File
 				RelativePath=".\headers\OVIMEUI.h">
 			</File>
 			<Filter
-				Name="PCMan"
+				Name="James"
 				Filter="">
 				<File
 					RelativePath=".\PCMan\PCMan.h">
