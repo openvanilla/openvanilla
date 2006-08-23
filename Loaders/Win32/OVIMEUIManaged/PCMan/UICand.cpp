@@ -231,6 +231,7 @@ void PaintCandWindow(HWND hCandWnd)
 
 		RECT cand_rc;	cand_rc.left = 1;	cand_rc.top = 1;
 		LPCTSTR cand = lpCandStr;
+		//Array foo = cand.split(new char[]{' '});
 		int num = 0;
 		for( int i = 0; i < numCand; ++i )
 		{
