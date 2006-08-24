@@ -196,7 +196,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
             
 			//return FALSE;
         }         
-        //return TRUE;
+        return FALSE;
     }
 	short i = GetKeyState(uVKey);
 	if( uVKey == VK_SHIFT  )	
