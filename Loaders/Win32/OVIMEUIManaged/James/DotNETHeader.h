@@ -8,3 +8,4 @@ int _GetCandValue();
 void _CreateCandPage();
 void _HideCandPage();
 void _ShowCandPage();
+void _MoveCandPage(int x,int y);

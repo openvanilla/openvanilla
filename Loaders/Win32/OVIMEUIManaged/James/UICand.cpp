@@ -41,22 +41,36 @@ LRESULT APIENTRY CandWndProc(HWND hWnd,
 
 void UICreateCandWindow(HWND hUIWnd)
 {
-	/*if (!IsWindow(uiCand.hWnd))
+	if (!IsWindow(uiCand.hWnd))
 	{
 		SIZE sz;	sz.cx = sz.cy = 0;
-
+/*
 		uiCand.hWnd = 
 			CreateWindowEx(0, UICANDCLASSNAME ,NULL,
 					WS_DISABLED | WS_POPUP,
-					0, 0, 1, 1, hUIWnd,NULL,hInst,NULL);
-		SetWindowLong(uiCand.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
+					0, 0, 1, 1, hUIWnd,NULL,hInst,NULL);					*/
+		
+		SetWindowLong(uiCand.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);//changes an attribute of the specified  window.The function also sets the 32-bit (long) value at the specified offset into the extra window memory.
 
 		uiCand.sz.cx = sz.cx + 2;
 		uiCand.sz.cy = sz.cy + 4;
+		//_CreateCandPage(uiCand.sz.cx,uiCand.sz.cy);
+		_CreateCandPage();
+		//_MoveCandPage(uiCand.sz.cx,uiCand.sz.cy);
 	}
-	ShowWindow(uiCand.hWnd, SW_HIDE);
-	return;*/
-	_CreateCandPage();
+	//ShowWindow(uiCand.hWnd, SW_HIDE);
+	UIHideCandWindow();
+	
+	
+
+	//if (!IsWindow(uiCand.hWnd))
+	{
+		
+		//_SetCandString((std::wstring)lpCandStr);
+		//SetWindowLong(uiCand.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
+		
+	}
+	return;
 }
 
 int CompIndexToXPos( int i );
@@ -218,18 +232,18 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		return;
 	}
 
-	///if (!IsWindow(uiCand.hWnd))
-	///	UICreateCandWindow(hUIWnd);
+	if (!IsWindow(uiCand.hWnd))
+		UICreateCandWindow(hUIWnd);
 
 	// FIXME: UIMoveCandWindow will be called twice almost at the same time.
 	// The first call cause some problems.
 	// This should be fixed in the future.
 	// It's impossible to have lpStr != NULL and lpCompStr ==NULL.
 	// Since there is no composition string, is candidate window needed?
-//	if( !lpCompStr || !*lpCompStr )
-//		return;
-/*
-	if (IsWindow(uiCand.hWnd))
+	if( !lpCompStr || !*lpCompStr )
+		return;
+
+//	if (IsWindow(uiCand.hWnd))
 	{
 		HDC hDC;
 		HFONT oldFont;
@@ -242,7 +256,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		AVConfig cfg;
 		AVDictionary *dict = AVDictionary::getDict(cfg.getUserDir(), "OVIMEUI");
 		int items_per_row = dict->keyExist("items_per_row") ? dict->getInteger("items_per_row") : ITEMS_PER_ROW;
-*/
+
 		// No Cand
 		if(lpStr == NULL) {
 			//ShowWindow(uiCand.hWnd, SW_HIDE);
@@ -251,13 +265,14 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		}
 		else
 		{
-			_SetCandString((std::wstring)lpCandStr);
+			_SetCandString((std::wstring)lpCandStr);			
+			UIShowCandWindow();
 		}
 		//hDC = GetDC(uiCand.hWnd);
-		//oldFont = (HFONT)SelectObject(hDC, hUIFont);
+		oldFont = (HFONT)SelectObject(hDC, hUIFont);
 		
-		//LPCTSTR cand = wcstok( lpCandStr, L" ");	// strtok, delimited by space
-/*
+		LPCTSTR cand = wcstok( lpCandStr, L" ");	// strtok, delimited by space
+
 		int num = 0;
 		int width = 0;
 		while( cand )
@@ -288,7 +303,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		sz.cx += 2;
 
 		SelectObject(hDC, oldFont);
-		ReleaseDC(uiCand.hWnd,hDC);
+		//ReleaseDC(uiCand.hWnd,hDC);
 
 		if( X > 0 && Y > 0)
 		{
@@ -303,27 +318,30 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 				Y = screenrc.bottom - sz.cy;
 			uiCand.pt.x = X;
 			uiCand.pt.y = Y;
-			MoveWindow(uiCand.hWnd,
+			/*MoveWindow(uiCand.hWnd,
 				uiCand.pt.x,
 				uiCand.pt.y,
 				sz.cx,
 				sz.cy,
-				TRUE);
-			//ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
-			InvalidateRect(uiCand.hWnd, NULL, FALSE);
+				TRUE);*/
+			_MoveCandPage(uiCand.pt.x,uiCand.pt.y);
+			UIShowCandWindow();			
+			//InvalidateRect(uiCand.hWnd, NULL, FALSE);
 		}
 		else if( GetCandPosFromCompWnd(&sz) )
 		{
-			MoveWindow(uiCand.hWnd,
+			/*MoveWindow(uiCand.hWnd,
 				uiCand.pt.x,
 				uiCand.pt.y,
 				sz.cx,
 				sz.cy,
-				TRUE);
-			//ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
-			InvalidateRect(uiCand.hWnd, NULL, FALSE);
+				TRUE);*/
+			
+			_MoveCandPage(uiCand.pt.x,uiCand.pt.y);
+			UIShowCandWindow();	
+			//InvalidateRect(uiCand.hWnd, NULL, FALSE);
 		}
-	}*/
+	}
 	
 }
 
@@ -389,8 +407,18 @@ void PaintCandWindow(HWND hCandWnd)
 //	SelectObject(hDC, oldFont);
 //	EndPaint(hCandWnd,&ps);
 //	
-
-	_SetCandString(L"1.®ð 2.¦º 3.he");
+		if(lpCandStr)
+		{
+			std::wstring wsCandStr(lpCandStr);
+			_SetCandString(wsCandStr);
+			UIShowCandWindow();
+			return;
+		}
+		else
+		{
+			return;
+		}
+	
 }
 
 void UIShowCandWindow()

@@ -86,12 +86,12 @@ extern "C" {
 
 	if (first_time) {
 		first_time=0;
-		if (fp=fopen("f:\\orz.txt", "w")) {
+		if (fp=fopen("orz.txt", "w")) {
 			fclose(fp);
 		}
 	}
 
-	if (fp=fopen("f:\\orz.txt", "a")) {
+	if (fp=fopen("orz.txt", "a")) {
 		va_list args;
 		va_start (args, format);
 		vfprintf (fp, format, args);
