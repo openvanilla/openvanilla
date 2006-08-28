@@ -110,6 +110,7 @@ namespace CSharpFormLibrary
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Location = new System.Drawing.Point(199, 199);
 			this.Name = "IMECandidateForm";
+			this.ShowInTaskbar = false;
 			this.Text = "Form1";
 			this.ResumeLayout(false);
 
