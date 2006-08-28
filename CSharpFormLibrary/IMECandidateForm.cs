@@ -4,6 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
+using System.Runtime.InteropServices;
 
 namespace CSharpFormLibrary
 {
@@ -29,7 +30,13 @@ namespace CSharpFormLibrary
 			InitializeComponent();
 			baseSize = this.lbCandidates.Location.Y;
 		}
-
+/*
+		public IMECandidateForm(int x , int y)
+		{
+			InitializeComponent();
+			baseSize = this.lbCandidates.Location.Y;
+			this.SetLocation(x,y);
+		}*/
 		public IMECandidateForm(string[] candidates)
 		{
 			//
@@ -101,6 +108,7 @@ namespace CSharpFormLibrary
 			this.Controls.Add(this.tbHeadLine);
 			this.Controls.Add(this.lbCandidates);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.Location = new System.Drawing.Point(199, 199);
 			this.Name = "IMECandidateForm";
 			this.Text = "Form1";
 			this.ResumeLayout(false);
@@ -127,8 +135,8 @@ namespace CSharpFormLibrary
 			if(a_inputs==null) return;
 			this.ShowListView(a_inputs);
 			this.baseSize = this.lbCandidates.Location.Y;
-			this.ShowDialog();
-			
+			//this.ShowDialog();			
+			this.ShowNoActive();
 		}
 
 		public void SetLocation(int x, int y)
@@ -172,6 +180,7 @@ namespace CSharpFormLibrary
 
 		#endregion
 
+		/*
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
@@ -181,10 +190,52 @@ namespace CSharpFormLibrary
 			CSharpFormLibrary.IMECandidateForm form = new CSharpFormLibrary.IMECandidateForm();
 			Application.Run(form);
 		}
+		*/
 
 		private void lbCandidates_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
 		{
-			
+		
 		}	
+		public int GetWidth()
+		{
+			return this.Width;
+		}
+		public int GetHeight()
+		{
+			return this.Height;
+		}
+		public void ShowNoActive()
+		{
+			UtilFuncs.SetVisibleNoActivate(this, true ); // true to show. 
+		}
+		public void HideNoActive()
+		{
+			UtilFuncs.SetVisibleNoActivate(this, false ); // false to hide.  
+		}
 	}
+}
+class UtilFuncs 
+{ 
+	[ DllImport( "user32.dll" ) ] 
+	extern public static bool SetWindowPos( IntPtr hWnd, 
+		IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags );
+ 
+	public const int HWND_TOPMOST = -1; // 0xffff 
+	public const int SWP_NOSIZE = 1; // 0x0001 
+	public const int SWP_NOMOVE = 2; // 0x0002 
+	public const int SWP_NOACTIVATE = 16; // 0x0010 
+	public const int SWP_SHOWWINDOW = 64; // 0x0040 
+  
+	public static void ShowWindowTopMost( IntPtr handle ) 
+	{ 
+		SetWindowPos( handle, (IntPtr) HWND_TOPMOST, 0, 0, 0, 0, 
+			SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE | SWP_SHOWWINDOW ); 
+	}
+ 
+	public static void SetVisibleNoActivate( Control control, bool visible ) 
+	{ 
+		if ( visible ) 
+			ShowWindowTopMost( control.Handle ); 
+		control.Visible = visible; 
+	} 
 }

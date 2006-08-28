@@ -31,4 +31,5 @@ EXPORTS
 	_CreateCandPage
 	_HideCandPage
 	_ShowCandPage
+	_MoveCandPage
 	
