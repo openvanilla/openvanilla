@@ -44,11 +44,11 @@ void UICreateCandWindow(HWND hUIWnd)
 	if (!IsWindow(uiCand.hWnd))
 	{
 		SIZE sz;	sz.cx = sz.cy = 0;
-/*
+
 		uiCand.hWnd = 
 			CreateWindowEx(0, UICANDCLASSNAME ,NULL,
 					WS_DISABLED | WS_POPUP,
-					0, 0, 1, 1, hUIWnd,NULL,hInst,NULL);					*/
+					0, 0, 1, 1, hUIWnd,NULL,hInst,NULL);
 		
 		SetWindowLong(uiCand.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);//changes an attribute of the specified  window.The function also sets the 32-bit (long) value at the specified offset into the extra window memory.
 
@@ -59,17 +59,8 @@ void UICreateCandWindow(HWND hUIWnd)
 		//_MoveCandPage(uiCand.sz.cx,uiCand.sz.cy);
 	}
 	//ShowWindow(uiCand.hWnd, SW_HIDE);
-	UIHideCandWindow();
+	//UIHideCandWindow();	// by b6s
 	
-	
-
-	//if (!IsWindow(uiCand.hWnd))
-	{
-		
-		//_SetCandString((std::wstring)lpCandStr);
-		//SetWindowLong(uiCand.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
-		
-	}
 	return;
 }
 
@@ -224,16 +215,14 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 //	}
 	//James
 	free(lpCandStr);
-	numCand = 0;
 	lpCandStr = wcsdup(lpStr);
-	if( !*lpStr )
-	{
-		UIHideCandWindow();
-		return;
+	if(lpStr) {
+		if( !*lpStr )
+		{
+			UIHideCandWindow();
+			return;
+		}
 	}
-
-	if (!IsWindow(uiCand.hWnd))
-		UICreateCandWindow(hUIWnd);
 
 	// FIXME: UIMoveCandWindow will be called twice almost at the same time.
 	// The first call cause some problems.
@@ -243,7 +232,10 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 	if( !lpCompStr || !*lpCompStr )
 		return;
 
-//	if (IsWindow(uiCand.hWnd))
+	if (!IsWindow(uiCand.hWnd))
+		UICreateCandWindow(hUIWnd);
+
+	if (IsWindow(uiCand.hWnd))
 	{
 		HDC hDC;
 		HFONT oldFont;
@@ -263,18 +255,21 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			UIHideCandWindow();
 			return;
 		}
-		else
-		{
-			_SetCandString((std::wstring)lpCandStr);			
-			UIShowCandWindow();
-		}
-		//hDC = GetDC(uiCand.hWnd);
+
+		std::wstring wsCandStr(lpCandStr);
+		_SetCandString(wsCandStr);
+		//<comment author='b6s'>
+		//UIShowCandWindow();
+		//</comment>
+
+		hDC = GetDC(uiCand.hWnd);
 		oldFont = (HFONT)SelectObject(hDC, hUIFont);
 		
 		LPCTSTR cand = wcstok( lpCandStr, L" ");	// strtok, delimited by space
 
 		int num = 0;
 		int width = 0;
+		numCand = 0;
 		while( cand )
 		{
 			++numCand;
@@ -303,7 +298,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		sz.cx += 2;
 
 		SelectObject(hDC, oldFont);
-		//ReleaseDC(uiCand.hWnd,hDC);
+		ReleaseDC(uiCand.hWnd,hDC);
 
 		if( X > 0 && Y > 0)
 		{
@@ -325,8 +320,11 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 				sz.cy,
 				TRUE);*/
 			_MoveCandPage(uiCand.pt.x,uiCand.pt.y);
-			UIShowCandWindow();			
-			//InvalidateRect(uiCand.hWnd, NULL, FALSE);
+			//<comment author='b6s'>
+			// Test
+			//UIShowCandWindow();
+			//</comment>
+			InvalidateRect(uiCand.hWnd, NULL, FALSE);
 		}
 		else if( GetCandPosFromCompWnd(&sz) )
 		{
@@ -338,8 +336,11 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 				TRUE);*/
 			
 			_MoveCandPage(uiCand.pt.x,uiCand.pt.y);
-			UIShowCandWindow();	
-			//InvalidateRect(uiCand.hWnd, NULL, FALSE);
+			//<comment author='b6s'>
+			// Test
+			//UIShowCandWindow();
+			//</comment>
+			InvalidateRect(uiCand.hWnd, NULL, FALSE);
 		}
 	}
 	
@@ -407,18 +408,11 @@ void PaintCandWindow(HWND hCandWnd)
 //	SelectObject(hDC, oldFont);
 //	EndPaint(hCandWnd,&ps);
 //	
-		if(lpCandStr)
-		{
-			std::wstring wsCandStr(lpCandStr);
-			_SetCandString(wsCandStr);
-			UIShowCandWindow();
-			return;
-		}
-		else
-		{
-			return;
-		}
-	
+	if(lpCandStr)
+	{
+		UIShowCandWindow();
+		return;
+	}
 }
 
 void UIShowCandWindow()
@@ -433,4 +427,5 @@ void UIHideCandWindow()
 	/*if (IsWindow(uiCand.hWnd))
 		ShowWindow(uiCand.hWnd, SW_HIDE);*/
 	_HideCandPage();
+	_ClearCandPage();
 }

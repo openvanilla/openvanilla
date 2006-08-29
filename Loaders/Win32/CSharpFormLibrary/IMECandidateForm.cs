@@ -130,14 +130,12 @@ namespace CSharpFormLibrary
 		}
 		*/
 
-		public void ShowCandidates(string inputs)
+		public void SetCandidates(string inputs)
 		{
 			string[] a_inputs = inputs.Split(' ');
 			if(a_inputs==null) return;
 			this.ShowListView(a_inputs);
 			this.baseSize = this.lbCandidates.Location.Y;
-			//this.ShowDialog();			
-			this.ShowNoActive();
 		}
 
 		public void SetLocation(int x, int y)
@@ -172,7 +170,11 @@ namespace CSharpFormLibrary
 			this.lbCandidates.SelectedItem= this.lbCandidates.Items[0];
 			DepthOfList(pageCandidates.Length);
 		}
-
+		public void ClearCandidates()
+		{
+			this.lbCandidates.Items.Clear();	
+			this.Size = new Size(this.Size.Width,baseSize);
+		}
 		public void DepthOfList(int number)
 		{
 			//14 = lbCandidate.Size.Height/9 ¶i¦ì - Height%9
