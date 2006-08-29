@@ -54,7 +54,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 				{
 					lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 					UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
-					UIMoveCandWindow(hWnd, -1, -1, lpMyPrivate->CandStr);
+					UIMoveCandWindow(hWnd, -1, -1, NULL);	//lpMyPrivate->CandStr); by b6s
 					ImmUnlockIMCC(lpIMC->hPrivate);
 				}
 				else

@@ -48,11 +48,6 @@ public:
 		{
 			pasm = Reflection::Assembly::LoadFile("C:\\WINDOWS\\OpenVanilla\\CSharpFormLibrary.dll");	
 			hasPasm = true;
-			System::Diagnostics::Debug::WriteLine("new pasm:");			
-		}
-		else
-		{
-			System::Diagnostics::Debug::WriteLine("old pasm:");
 		}
 		return pasm;
 	}
@@ -61,14 +56,10 @@ public:
 	{
 		if(!hasObjCandidateForm)
 		{
-			System::Diagnostics::Debug::WriteLine("inital candidate form");
 			objCandidateForm =
 				pasm->CreateInstance("CSharpFormLibrary.IMECandidateForm",true);
 			hasObjCandidateForm = true;
 		}
-		else
-			System::Diagnostics::Debug::WriteLine("retain candidate form");
-
 		return objCandidateForm;
 	}
 
@@ -90,11 +81,11 @@ void _ShowCandPageArray(const std::vector<std::wstring>& candidates)
 
 void _SetCandString(const std::wstring& candidate)
 {
-	System::Diagnostics::Debug::WriteLine("SetStrubg");
+	System::Diagnostics::Debug::WriteLine("SetString");
 	ArrayList* arrayCandidates = __gc new ArrayList();
 	ArrayList* argCollection = __gc new ArrayList();
 	argCollection->Add(dynamic_cast<Object*>((__gc new System::String(candidate.c_str()))));
-	MethodInfo* methodShowWindow = FormAssembly::Instance()->GetType("CSharpFormLibrary.IMECandidateForm")->GetMethod("ShowCandidates");	
+	MethodInfo* methodShowWindow = FormAssembly::Instance()->GetType("CSharpFormLibrary.IMECandidateForm")->GetMethod("SetCandidates");	
 	Object* tmp[] = (Object*[])argCollection->ToArray(System::Type::GetType("System.Object"));
 	methodShowWindow->Invoke(FormAssembly::CandidateForm(),tmp);
 }
@@ -138,13 +129,18 @@ void _HideCandPage()
 	MethodInfo* methodHideWindow = FormAssembly::Instance()->GetType("CSharpFormLibrary.IMECandidateForm")->	GetMethod("HideNoActive");
 	methodHideWindow->Invoke(FormAssembly::CandidateForm(),NULL);
 }
+void _ClearCandPage()
+{
+	System::Diagnostics::Debug::WriteLine("Clear");
+	MethodInfo* methodClearWindow = FormAssembly::Instance()->GetType("CSharpFormLibrary.IMECandidateForm")->GetMethod("ClearCandidates");
+	methodClearWindow->Invoke(FormAssembly::CandidateForm(),NULL);
+}
 void _ShowCandPage()
 {	
 	System::Diagnostics::Debug::WriteLine("Show");
 	try 
 	{
 		System::Reflection::Assembly* foo = FormAssembly::Instance();	
-		System::Diagnostics::Debug::WriteLine(foo);
 		System::Type* bar = foo->GetType("CSharpFormLibrary.IMECandidateForm");
 		MethodInfo* methodShowWindow = bar->GetMethod("ShowNoActive");
 		methodShowWindow->Invoke(FormAssembly::CandidateForm(), NULL);
@@ -166,8 +162,6 @@ void _MoveCandPage(int x,int y)
 	ArrayList* argCollection = __gc new ArrayList();
 	argCollection->Add(dynamic_cast<Object*>(__box(x)));
 	argCollection->Add(dynamic_cast<Object*>(__box(y)));	
-	System::Diagnostics::Debug::WriteLine(x.ToString());
-	System::Diagnostics::Debug::WriteLine(y.ToString());	
 
 	MethodInfo* methodMoveWindow = FormAssembly::Instance()->GetType("CSharpFormLibrary.IMECandidateForm")->	GetMethod("SetLocation");
 	Object* tmp[] = (Object*[])argCollection->ToArray(System::Type::GetType("System.Object"));
