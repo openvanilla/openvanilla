@@ -29,6 +29,7 @@ namespace CSharpFormLibrary
 		{
 			InitializeComponent();
 			baseSize = this.lbCandidates.Location.Y;
+			this.Opacity = 0.75;
 		}
 /*
 		public IMECandidateForm(int x , int y)
