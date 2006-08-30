@@ -81,7 +81,7 @@ void _ShowCandPageArray(const std::vector<std::wstring>& candidates)
 
 void _SetCandString(const std::wstring& candidate)
 {
-	System::Diagnostics::Debug::WriteLine("SetString");
+	System::Diagnostics::Debug::WriteLine("Candi SetString");
 	ArrayList* arrayCandidates = __gc new ArrayList();
 	ArrayList* argCollection = __gc new ArrayList();
 	argCollection->Add(dynamic_cast<Object*>((__gc new System::String(candidate.c_str()))));
@@ -91,7 +91,7 @@ void _SetCandString(const std::wstring& candidate)
 }
 void _CreateCandPage()//create
 {	
-	System::Diagnostics::Debug::WriteLine("Create");
+	System::Diagnostics::Debug::WriteLine("Candi Create");
 	MethodInfo* methodCreateWindow = FormAssembly::Instance()->GetType("CSharpFormLibrary.IMECandidateForm")->GetMethod("IMECandidateForm");
 	
 	//methodCreateWindow->Invoke(FormAssembly::CandidateForm(),NULL);
@@ -111,7 +111,7 @@ void _CreateCandAndSetLocation(int x ,int y) //create and init as (x,y)
 void _EndCandPage()
 {
 	//°õ¦æDisposeForm
-	System::Diagnostics::Debug::WriteLine("End");
+	System::Diagnostics::Debug::WriteLine("Candi End");
 	MethodInfo* methodDisposeWindow = FormAssembly::Instance()->GetType("CSharpFormLibrary.IMECandidateForm")->GetMethod("DisposeForm");
 	methodDisposeWindow->Invoke(FormAssembly::CandidateForm(),NULL);
 }
@@ -125,19 +125,19 @@ int _GetCandidateValue()
 
 void _HideCandPage()
 {
-	System::Diagnostics::Debug::WriteLine("Hide");
+	System::Diagnostics::Debug::WriteLine("Candi Hide");
 	MethodInfo* methodHideWindow = FormAssembly::Instance()->GetType("CSharpFormLibrary.IMECandidateForm")->	GetMethod("HideNoActive");
 	methodHideWindow->Invoke(FormAssembly::CandidateForm(),NULL);
 }
 void _ClearCandPage()
 {
-	System::Diagnostics::Debug::WriteLine("Clear");
+	System::Diagnostics::Debug::WriteLine("Candi Clear");
 	MethodInfo* methodClearWindow = FormAssembly::Instance()->GetType("CSharpFormLibrary.IMECandidateForm")->GetMethod("ClearCandidates");
 	methodClearWindow->Invoke(FormAssembly::CandidateForm(),NULL);
 }
 void _ShowCandPage()
 {	
-	System::Diagnostics::Debug::WriteLine("Show");
+	System::Diagnostics::Debug::WriteLine("Candi Show");
 	try 
 	{
 		System::Reflection::Assembly* foo = FormAssembly::Instance();	
@@ -158,7 +158,7 @@ void _ShowCandPage()
 
 void _MoveCandPage(int x,int y)
 {	
-	System::Diagnostics::Debug::WriteLine("Move");
+	System::Diagnostics::Debug::WriteLine("Candi Move");
 	ArrayList* argCollection = __gc new ArrayList();
 	argCollection->Add(dynamic_cast<Object*>(__box(x)));
 	argCollection->Add(dynamic_cast<Object*>(__box(y)));	
