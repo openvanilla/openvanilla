@@ -28,7 +28,7 @@ namespace CSharpFormLibrary
 		public IMECandidateForm()
 		{
 			InitializeComponent();
-			baseSize = this.lbCandidates.Location.Y;
+			baseSize = this.lbCandidates.Location.Y+100;
 			this.Opacity = 0.75;
 		}
 /*
@@ -86,7 +86,7 @@ namespace CSharpFormLibrary
 			this.lbCandidates.ItemHeight = 15;
 			this.lbCandidates.Location = new System.Drawing.Point(0, 29);
 			this.lbCandidates.Name = "lbCandidates";
-			this.lbCandidates.Size = new System.Drawing.Size(125, 135);
+			this.lbCandidates.Size = new System.Drawing.Size(83, 135);
 			this.lbCandidates.TabIndex = 0;
 			this.lbCandidates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lbCandidates_KeyPress);
 			// 
@@ -97,7 +97,7 @@ namespace CSharpFormLibrary
 			this.tbHeadLine.Location = new System.Drawing.Point(0, 0);
 			this.tbHeadLine.Name = "tbHeadLine";
 			this.tbHeadLine.ReadOnly = true;
-			this.tbHeadLine.Size = new System.Drawing.Size(124, 25);
+			this.tbHeadLine.Size = new System.Drawing.Size(82, 25);
 			this.tbHeadLine.TabIndex = 1;
 			this.tbHeadLine.Text = "Candidates";
 			// 
@@ -105,7 +105,7 @@ namespace CSharpFormLibrary
 			// 
 			this.AllowDrop = true;
 			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
-			this.ClientSize = new System.Drawing.Size(124, 163);
+			this.ClientSize = new System.Drawing.Size(82, 163);
 			this.Controls.Add(this.tbHeadLine);
 			this.Controls.Add(this.lbCandidates);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -114,29 +114,17 @@ namespace CSharpFormLibrary
 			this.ShowInTaskbar = false;
 			this.Text = "Form1";
 			this.ResumeLayout(false);
-
 		}
-
 
 		#endregion
 
 		#region public methods
-		/*
-		public void ShowCandidates(string[] inputs)
-		{
-			//this.Size = new Size(200,100);
-			if(inputs==null) return;
-			this.ShowListView(inputs);
-			this.ShowDialog();
-		}
-		*/
 
 		public void SetCandidates(string inputs)
 		{
 			string[] a_inputs = inputs.Split(' ');
 			if(a_inputs==null) return;
-			this.ShowListView(a_inputs);
-			this.baseSize = this.lbCandidates.Location.Y;
+			this.ShowListView(a_inputs);		
 		}
 
 		public void SetLocation(int x, int y)
@@ -160,8 +148,7 @@ namespace CSharpFormLibrary
 
 		private void ShowListView(string[] pageCandidates)
 		{
-			this.lbCandidates.Items.Clear();
-			//this.lbCandidates.Items.AddRange(pageCandidates);
+			this.lbCandidates.Items.Clear();			
 			int order =1;
 			foreach(string pageCandidate in pageCandidates)
 			{
@@ -173,8 +160,7 @@ namespace CSharpFormLibrary
 		}
 		public void ClearCandidates()
 		{
-			this.lbCandidates.Items.Clear();	
-			this.Size = new Size(this.Size.Width,baseSize);
+			this.lbCandidates.Items.Clear();				
 		}
 		public void DepthOfList(int number)
 		{

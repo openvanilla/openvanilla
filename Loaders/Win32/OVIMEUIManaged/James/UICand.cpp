@@ -410,7 +410,7 @@ void PaintCandWindow(HWND hCandWnd)
 //	
 	if(lpCandStr)
 	{
-		UIShowCandWindow();
+		UIShowCandWindow(); //James comments
 		return;
 	}
 }
