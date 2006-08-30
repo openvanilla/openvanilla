@@ -89,15 +89,23 @@ void _SetCandString(const std::wstring& candidate)
 	Object* tmp[] = (Object*[])argCollection->ToArray(System::Type::GetType("System.Object"));
 	methodShowWindow->Invoke(FormAssembly::CandidateForm(),tmp);
 }
-void _CreateCandPage()//create
+
+HWND _CreateCandPage()//create
 {	
 	System::Diagnostics::Debug::WriteLine("Candi Create");
-	MethodInfo* methodCreateWindow = FormAssembly::Instance()->GetType("CSharpFormLibrary.IMECandidateForm")->GetMethod("IMECandidateForm");
-	
+	System::Type* candidateForm =
+		FormAssembly::Instance()->GetType("CSharpFormLibrary.IMECandidateForm");
+	MethodInfo* methodCreateWindow = candidateForm->GetMethod("IMECandidateForm");
 	//methodCreateWindow->Invoke(FormAssembly::CandidateForm(),NULL);
 
-	
+	PropertyInfo* propertyHandle = candidateForm->GetProperty("Handle");
+	return
+		(HWND)(
+			dynamic_cast<IntPtr*>(
+				propertyHandle->GetValue(FormAssembly::CandidateForm(), NULL))
+		)->ToPointer();
 }
+
 void _CreateCandAndSetLocation(int x ,int y) //create and init as (x,y)
 {	/*
 	MethodInfo* methodCreateWindow = FormAssembly::Instance()->GetType("CSharpFormLibrary.IMECandidateForm")->GetMethod("IMECandidateForm");

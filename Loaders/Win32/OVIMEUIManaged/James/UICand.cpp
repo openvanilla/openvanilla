@@ -45,18 +45,22 @@ void UICreateCandWindow(HWND hUIWnd)
 	{
 		SIZE sz;	sz.cx = sz.cy = 0;
 
+		//<comment author='b6s'> Use IntPtr of C# form instead		
+		/* 
 		uiCand.hWnd = 
 			CreateWindowEx(0, UICANDCLASSNAME ,NULL,
 					WS_DISABLED | WS_POPUP,
 					0, 0, 1, 1, hUIWnd,NULL,hInst,NULL);
 		
-		SetWindowLong(uiCand.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);//changes an attribute of the specified  window.The function also sets the 32-bit (long) value at the specified offset into the extra window memory.
+		SetWindowLong(uiCand.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
+		//changes an attribute of the specified window.The function also sets the 32-bit (long) value at the specified offset into the extra window memory.
+		*/
+		uiCand.hWnd = _CreateCandPage();
+		//HWND previousParent = SetParent(uiCand.hWnd, hUIWnd);
+		//</comment>	
 
 		uiCand.sz.cx = sz.cx + 2;
 		uiCand.sz.cy = sz.cy + 4;
-		//_CreateCandPage(uiCand.sz.cx,uiCand.sz.cy);
-		_CreateCandPage();
-		//_MoveCandPage(uiCand.sz.cx,uiCand.sz.cy);
 	}
 	//ShowWindow(uiCand.hWnd, SW_HIDE);
 	//UIHideCandWindow();	// by b6s
