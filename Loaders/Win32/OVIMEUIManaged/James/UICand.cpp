@@ -417,15 +417,14 @@ void PaintCandWindow(HWND hCandWnd)
 
 void UIShowCandWindow()
 {
-	/*if (IsWindow(uiCand.hWnd))
-		ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);*/
-	_ShowCandPage();
+	if (IsWindow(uiCand.hWnd))
+		_ShowCandPage();
 }
 
 void UIHideCandWindow()
 {
-	/*if (IsWindow(uiCand.hWnd))
-		ShowWindow(uiCand.hWnd, SW_HIDE);*/
-	_HideCandPage();
-	_ClearCandPage();
+	if (IsWindow(uiCand.hWnd)) {
+		_HideCandPage();
+		_ClearCandPage();
+	}
 }
