@@ -145,7 +145,6 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	LPINPUTCONTEXT lpIMC;
 	LPCOMPOSITIONSTRING lpCompStr;
 
-	KeyInfo ki = GetKeyInfo(lKeyData);
 	int spec;
 	int k;
 
@@ -164,6 +163,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 			if( uVKey == VK_SHIFT &&  time <= 20000 )
             {
 				// Toggle Chinese/English mode.
+				//Only Shift: lParam == 2
 				MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
 				//return TRUE;
             }
@@ -193,6 +193,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 
     if(LOWORD(uVKey) == VK_SPACE && IsKeyDown(lpbKeyState[VK_SHIFT]))
 	{
+		//shift+space: lParam == 1
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 1);	
 		return FALSE;  //shift+space
 	}
@@ -349,7 +350,7 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 			  CONST LPBYTE lpbKeyState,
 			  LPDWORD lpdwTransKey, UINT fuState,HIMC hIMC)
 {
-	//Change the module by Ctrl+"\"
+	//Change the module by Ctrl+"\": lParam == 0
 	if(LOWORD(uVKey) == VK_OEM_5 && ((lpbKeyState[VK_CONTROL] & 0x80)))
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 0);
 
