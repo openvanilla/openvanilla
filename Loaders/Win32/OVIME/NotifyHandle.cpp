@@ -116,11 +116,10 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		if(lParam == 0)
 			UIChangeModule(hWnd);
 		if(lParam == 1)
-			UIChangeHalfFull(hWnd);
+			UIChangeHalfFull(hWnd); //Change UI Half/Full
 		if(lParam == 2)
-			UIChangeChiEng(hWnd);
+			UIChangeChiEng(hWnd);  //Chnage UI CHI/ENG
 
-		//CompX = 5;
 		break;
 		
 	default:
