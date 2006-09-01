@@ -202,6 +202,10 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	if(LOWORD(uVKey) == VK_OEM_5 && ((lpbKeyState[VK_CONTROL] & 0x80)))
 		return TRUE;
 
+	//Change CHI/ENG by CAPS
+	//if(LOWORD(uVkey) == VK_CAPS)
+	//	return TRUE;
+
 	lpCompStr = (LPCOMPOSITIONSTRING)ImmLockIMCC(lpIMC->hCompStr);
 	if(wcslen(GETLPCOMPSTR(lpCompStr)) == 0)
 		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);
@@ -353,6 +357,10 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 	//Change the module by Ctrl+"\": lParam == 0
 	if(LOWORD(uVKey) == VK_OEM_5 && ((lpbKeyState[VK_CONTROL] & 0x80)))
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 0);
+
+	//Change CHI/END by CAPS
+	//if(LOWORD(uVKey) == VK_CAPS)
+	//	MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
 
 	return 0;
 }
