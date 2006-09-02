@@ -6,7 +6,7 @@ body {
     color: #333;
     font-family: Lucida Grande, Verdana, Arial, sans-serif;
     width: 434px;
-    height: 97px;
+    height: 82px;
     overflow: hidden;
 }
 
@@ -14,7 +14,7 @@ div#wrapper {
     padding:0;
     margin:0;
     width:432px;
-    height:95px;
+    height:80px;
     background: url(ovbg.png) no-repeat;
     border:1px solid transparent;
 }
