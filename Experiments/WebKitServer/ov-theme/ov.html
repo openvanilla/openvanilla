@@ -3,7 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title></title>
-<style type="text/css" media="screen">   @import url(ov.css);</style>
+<style type="text/css" media="screen">
+@import url(ov.css);
+</style>
+<script type="text/javascript" src="ov-lib.js"></script>
 <script type="text/javascript" src="ov.js"></script>
 </head>
 <body onload="ov_init();">
@@ -11,7 +14,9 @@
 <div id="header"></div>
 <div id="content"></div>
 <div id="debug"></div>
-<div id="footer"></div>
+<div id="footer">
+<marquee loop="-1" scrollamount="2" onmouseout="this.start();" onmouseover="this.stop();" ><span id="marquee-content"></span></marquee>
+</div>
 </div>
 </body>
 </html>

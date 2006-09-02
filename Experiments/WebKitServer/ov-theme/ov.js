@@ -32,6 +32,11 @@ OV.CandidateController.prototype.refresh = function() {
     this.elem.innerHTML = this.string;
 }
 
+OV.CandidateController.prototype.show_marquee = function() {
+    var footer = document.getElementById("footer");
+    (new RSS).createReader('marquee-content', 'http://lukhnos.org/blog/zh/feed/','');
+}
+
 var ovc = {};
 // The external API.
 function ov_update (str) {
@@ -45,6 +50,7 @@ function ov_clear() {
 function ov_init() {
     ovc = new OV.CandidateController({});
     ov_update("OLA");
+    ovc.show_marquee();
 }
 
 function test(str) {
