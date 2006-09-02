@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 12pt;
+    background: transparent url(ovbg.png) no-repeat;
+    color: #333;
+    font-family: Lucida Grande, Verdana, Arial, sans-serif;
+    width: 434px;
+    height: 97px;
+    overflow: hidden;
+}
+
+div#content {
+    padding: 10px;
+    margin-top: 25px;
+    margin-left: 70px;
+    width: 320px;
+}

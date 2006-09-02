@@ -45,9 +45,7 @@ enum {
 
 void CVFixWindowOrigin(NSWindow *w, Point p);
 
-#define CVWS_EXAMPLE		@"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /><head><title></title><link rel=\"stylesheet\" href=\"%@\" type=\"text/css\" media=\"screen\" /></head><body><p>%@</p></body></html>"
-#define CVWS_URLBASE		@"~/Sites/WebKitServer/style.css"
-#define CVWS_DEFAULTFILE	@"~/Sites/DefaultCandidate.html"
+#define CVWS_DEFAULTFILE	@"~/Sites/ov-theme/ov.html"
 
 
 @protocol OVKeyReceiver
@@ -96,8 +94,8 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
     defaultbackground=[[candi backgroundColor] retain];
 	fadetimer=nil;
 
-	NSLog([CVWS_URLBASE stringByExpandingTildeInPath]);
-	urlbase=[[NSURL alloc] initFileURLWithPath:[CVWS_URLBASE stringByExpandingTildeInPath]];
+//	NSLog([CVWS_URLBASE stringByExpandingTildeInPath]);
+//	urlbase=[[NSURL alloc] initFileURLWithPath:[CVWS_URLBASE stringByExpandingTildeInPath]];
 	NSLog([urlbase absoluteString]);
 	
 	[candi setLevel:NSScreenSaverWindowLevel];
@@ -110,52 +108,6 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 	NSLog([loadurl description]);
 		
 	[[candiweb mainFrame] loadRequest:[NSURLRequest requestWithURL:loadurl]];
-	
-	WebScriptObject *scrobj = [candiweb windowScriptObject];
-	id y;
-	
-	// NSString *href = [scrobj evaluateWebScript:@"location.href"];
-	// NSLog(@"href=%@", href);
-	
-	
-//	y=[scrobj callWebScriptMethod:@"ov_init()" withArguments:[NSArray array]];
-  
-
-/*
-	y=[scrobj evaluateWebScript:@"window.document.body"];
-	if (y) {
-	   NSLog(@"window.document.body = %@", [y description]);
-	}
-	*/
-/*
-	y=[scrobj evaluateWebScript:@"1+1"];
-	if (y) {
-	   NSLog(@"1+1 = %@", [y description]);
-	}
-*/
-/*	
-	
-	y=[scrobj evaluateWebScript:@"ov_init();"];
-	if (y) {
-	   NSLog(@"after ov_init = %@", [y description]);
-	}
-	
-	y=[scrobj evaluateWebScript:@"(typeof test == \"undefined\")"];
-	if (y) {
-	   NSLog(@"after test = %@", [y description]);
-	}
-	
-	
-	y=[scrobj evaluateWebScript:@"ov_update(\"hello, world! alert!!\")"];
-	if (y) {
-	   NSLog([y description]);
-	}
-	y=[scrobj evaluateWebScript:@"window.alert('hello, world!')"];
-	
-	if (y) {
-	   NSLog([y description]);
-	}
-*/
 }
 - (void)setConfig:(NSDictionary*)cfg {
 	[self applyConfig:cfg window:candi];
@@ -197,8 +149,8 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 - (void)notifyMessage:(bycopy NSString*)s position:(Point)p {
 	NSLog(@"notiupdate");
 
-	NSString *ws=[NSString stringWithFormat:CVWS_EXAMPLE, [urlbase absoluteString], s];
-	[[notiweb mainFrame] loadHTMLString:ws baseURL:[NSURL URLWithString:@"http://localhost"]];
+//	NSString *ws=[NSString stringWithFormat:CVWS_EXAMPLE, [urlbase absoluteString], s];
+//	[[notiweb mainFrame] loadHTMLString:ws baseURL:[NSURL URLWithString:@"http://localhost"]];
 
 	CVFixWindowOrigin(noti, p);
 	[self solveConflict];
