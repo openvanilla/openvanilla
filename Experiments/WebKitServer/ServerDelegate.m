@@ -108,6 +108,11 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 	NSLog([loadurl description]);
 		
 	[[candiweb mainFrame] loadRequest:[NSURLRequest requestWithURL:loadurl]];
+
+            // [candi setHasShadow:NO];
+            [candi setOpaque:NO];	
+    [candi setBackgroundColor:[NSColor clearColor]];
+    [candiweb setDrawsBackground:NO];
 }
 - (void)setConfig:(NSDictionary*)cfg {
 	[self applyConfig:cfg window:candi];
@@ -126,7 +131,7 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 }
 - (void)candidateHide {
 	candion=NO;
-	[candi orderOut:self];
+	// [candi orderOut:self];
 }
 - (void)candidateUpdate:(bycopy NSString*)s position:(Point)p {
 	NSLog(@"candiupdate");
@@ -144,7 +149,7 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 	// NSString *ws=[NSString stringWithFormat:CVWS_EXAMPLE, [urlbase absoluteString], s];
 	// [[candiweb mainFrame] loadHTMLString:ws baseURL:[NSURL URLWithString:@"http://localhost"]];
 
-	CVFixWindowOrigin(candi, p);
+	// CVFixWindowOrigin(candi, p);
 }
 - (void)notifyMessage:(bycopy NSString*)s position:(Point)p {
 	NSLog(@"notiupdate");
