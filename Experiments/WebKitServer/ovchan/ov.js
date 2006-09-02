@@ -50,6 +50,14 @@ function ov_clear() {
 function ov_init() {
     ovc = new OV.CandidateController({});
     ov_update("OLA");
+
+    var e = document.getElementById("wrapper");
+    setInterval(function() {
+    	e.style.backgroundImage="url(ovbg2.png)";
+    }, 10000);
+    setInterval(function() {
+    	e.style.backgroundImage="url(ovbg.png)";
+    }, 10500);
 }
 
 function test(str) {
