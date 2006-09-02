@@ -47,11 +47,9 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 
 #define CVWS_DEFAULTFILE	@"~/Sites/ov-theme/ov.html"
 
-
 @protocol OVKeyReceiver
 - (void)sendKey:(char)c;
 @end
-
 
 @implementation ServerDelegate
 - (IBAction)sendKeyTest:(id)sender {
@@ -113,6 +111,7 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
             [candi setOpaque:NO];	
     [candi setBackgroundColor:[NSColor clearColor]];
     [candiweb setDrawsBackground:NO];
+	// [candi changStyleMask:0];
 }
 - (void)setConfig:(NSDictionary*)cfg {
 	[self applyConfig:cfg window:candi];
