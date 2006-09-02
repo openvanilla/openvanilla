@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+<style type="text/css">
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 12pt;
+    background: #FFF;
+    color: #333;
+    font-family: Lucida Grande, Verdana, Arial, sans-serif;
+}
+
+div#content {
+    padding: 10px;
+}
+</style>
+<script type="text/javascript">
+// Internals.
+OV = {};
+
+OV.CandidateController = function (params) {
+    // Parameter checking, setup default values
+    if (typeof params == "undefined") {
+        params = {};
+    }
+    if (typeof params["elementId"] == "undefined") {
+        params["elementId"] = "content";
+    }
+
+    // The candidate window content.
+    this.string = "";
+
+    // The HTML element that shows candidates
+    this.elem = document.getElementById(params["elementId"]);
+    // Give a welcome
+    this.elem.innerHTML = "歡迎、歡迎，熱烈歡迎"; 
+}
+
+OV.CandidateController.prototype.update = function(str) {
+    this.string = str;
+    this.refresh();
+}
+
+OV.CandidateController.prototype.clear = function() {
+    this.string = "";
+    this.refresh();
+}
+
+OV.CandidateController.prototype.refresh = function() {
+    this.elem.innerHTML = this.string;
+}
+
+var ovc = {};
+// The external API.
+function ov_update (str) {
+    ovc.update(str);
+}
+
+function ov_clear() {
+    ovc.clear();
+}
+
+function ov_init() {
+    ovc = new OV.CandidateController({});
+    ov_update("OLA");
+}
+
+function test(str) {
+    return str;
+}
+
+</script>
+</head>
+<body onload="ov_init();">
+<div id="header"></div>
+<div id="content">
+
+<p>Hello, world! blah blah yadda</p>
+
+</div>
+<div id="debug"></div>
+<div id="footer"></div>
+</body>

@@ -21,7 +21,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>LSBackgroundOnly</key>
-	<string>1</string>
+	<string>0</string>
 
 </dict>
 </plist>
