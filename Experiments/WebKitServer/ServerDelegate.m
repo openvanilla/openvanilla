@@ -107,7 +107,7 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 		
 	[[candiweb mainFrame] loadRequest:[NSURLRequest requestWithURL:loadurl]];
 
-            // [candi setHasShadow:NO];
+	[candi setHasShadow:YES];
             [candi setOpaque:NO];	
     [candi setBackgroundColor:[NSColor clearColor]];
     [candiweb setDrawsBackground:NO];
