@@ -19,19 +19,24 @@
 	
 	return [super initWithServer:server delegate:delegate client:inputClient];
 }
+
 -(void)dealloc
 {
 	[composed release];
 	[super dealloc];
 }
+
 -(id)composedString:(id)sender
 {
 	return composed;
 }
--(BOOL)inputText:(NSString*)string client:(id)sender
+
+-(BOOL)inputText:(NSString*)string key:(NSInteger)keyCode modifiers:(NSUInteger)flags client:(id)sender
 {
 	NSDictionary*		attributes;
 	NSAttributedString* attributedString;
+
+	NSLog(@"received string %@, keycode=%d, modifiers=%d", string, keyCode, flags);
 
 	[composed appendString:string];
 	NSLog(@"received %@, now composed=%@", string, composed);
@@ -48,10 +53,12 @@
 
 	return YES;
 }
+
 -(BOOL)didCommandBySelector:(SEL)aSelector client:(id)sender
 {
     return (BOOL)[self performSelector:aSelector withObject:sender];
 }
+
 - (BOOL)insertNewline:(id)sender
 {
 	if ([composed length] == 0) return NO;
@@ -61,14 +68,12 @@
 }
 
 /*
-
--(BOOL)inputText:(NSString*)string key:(NSInteger)keyCode modifiers:(NSUInteger)flags client:(id)sender;
- */
 -(BOOL)inputText:(NSString*)string key:(NSInteger)keyCode modifiers:(NSUInteger)flags client:(id)sender
 {
-	NSLog(@"received string %@, keycode=%d, modifiers=%d", string, keyCode, flags);
-	return NO;
+	return YES;
 }
+*/
+
 /*
 Implement one of the three ways to receive input from the client. 
 Here are the three approaches:
