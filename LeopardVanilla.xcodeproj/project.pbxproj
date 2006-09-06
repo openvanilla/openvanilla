@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		187379FB0AAE657700DD23E2 /* CVSmartMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 187379FA0AAE657700DD23E2 /* CVSmartMenu.mm */; };
+		188B605B0AAE585B00FC418D /* NSDictionaryExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 188B60580AAE585B00FC418D /* NSDictionaryExtension.mm */; };
+		188B605C0AAE585B00FC418D /* NSStringExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 188B605A0AAE585B00FC418D /* NSStringExtension.mm */; };
+		188B608B0AAE598D00FC418D /* CVBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 188B60740AAE598D00FC418D /* CVBuffer.mm */; };
+		188B608C0AAE598D00FC418D /* CVCandidate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 188B60760AAE598D00FC418D /* CVCandidate.mm */; };
+		188B608D0AAE598D00FC418D /* CVConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 188B60780AAE598D00FC418D /* CVConfig.mm */; };
+		188B608E0AAE598D00FC418D /* CVDictionary.mm in Sources */ = {isa = PBXBuildFile; fileRef = 188B607A0AAE598D00FC418D /* CVDictionary.mm */; };
+		188B60900AAE598D00FC418D /* CVKeyCode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 188B607E0AAE598D00FC418D /* CVKeyCode.mm */; };
+		188B60910AAE598D00FC418D /* CVLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 188B60800AAE598D00FC418D /* CVLoader.mm */; };
+		188B60920AAE598D00FC418D /* CVLoaderConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 188B60820AAE598D00FC418D /* CVLoaderConfig.mm */; };
+		188B60930AAE598D00FC418D /* CVLoaderUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = 188B60840AAE598D00FC418D /* CVLoaderUtility.mm */; };
+		188B60940AAE598D00FC418D /* CVService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 188B60860AAE598D00FC418D /* CVService.mm */; };
+		188B60960AAE598D00FC418D /* CVWrappers.mm in Sources */ = {isa = PBXBuildFile; fileRef = 188B608A0AAE598D00FC418D /* CVWrappers.mm */; };
+		188B609D0AAE59AD00FC418D /* IMInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 188B60980AAE59AD00FC418D /* IMInterface.mm */; };
 		18B117E50AAD09E400ACA814 /* icon-Bopomofo.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 18B117E20AAD09E400ACA814 /* icon-Bopomofo.tiff */; };
 		18B117E60AAD09E400ACA814 /* icon-LeopardVanilla.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 18B117E30AAD09E400ACA814 /* icon-LeopardVanilla.tiff */; };
 		18B117E70AAD09E400ACA814 /* icon-OpenVanilla.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 18B117E40AAD09E400ACA814 /* icon-OpenVanilla.tiff */; };
@@ -15,13 +29,44 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		E93074B70A5C264700470842 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93074B60A5C264700470842 /* InputMethodKit.framework */; };
-		E93074E20A5C2F1200470842 /* LVIMSessionController.m in Sources */ = {isa = PBXBuildFile; fileRef = E93074E10A5C2F1200470842 /* LVIMSessionController.m */; };
+		E93074E20A5C2F1200470842 /* LVIMSessionController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E93074E10A5C2F1200470842 /* LVIMSessionController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		187379FA0AAE657700DD23E2 /* CVSmartMenu.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; name = CVSmartMenu.mm; path = CocoaVanilla/CVSmartMenu.mm; sourceTree = "<group>"; };
+		188B60570AAE585B00FC418D /* NSDictionaryExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDictionaryExtension.h; path = NSExtensions/NSDictionaryExtension.h; sourceTree = "<group>"; };
+		188B60580AAE585B00FC418D /* NSDictionaryExtension.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NSDictionaryExtension.mm; path = NSExtensions/NSDictionaryExtension.mm; sourceTree = "<group>"; };
+		188B60590AAE585B00FC418D /* NSStringExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSStringExtension.h; path = NSExtensions/NSStringExtension.h; sourceTree = "<group>"; };
+		188B605A0AAE585B00FC418D /* NSStringExtension.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NSStringExtension.mm; path = NSExtensions/NSStringExtension.mm; sourceTree = "<group>"; };
+		188B60730AAE598D00FC418D /* CVBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVBuffer.h; path = CocoaVanilla/CVBuffer.h; sourceTree = "<group>"; };
+		188B60740AAE598D00FC418D /* CVBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVBuffer.mm; path = CocoaVanilla/CVBuffer.mm; sourceTree = "<group>"; };
+		188B60750AAE598D00FC418D /* CVCandidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVCandidate.h; path = CocoaVanilla/CVCandidate.h; sourceTree = "<group>"; };
+		188B60760AAE598D00FC418D /* CVCandidate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVCandidate.mm; path = CocoaVanilla/CVCandidate.mm; sourceTree = "<group>"; };
+		188B60770AAE598D00FC418D /* CVConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVConfig.h; path = CocoaVanilla/CVConfig.h; sourceTree = "<group>"; };
+		188B60780AAE598D00FC418D /* CVConfig.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVConfig.mm; path = CocoaVanilla/CVConfig.mm; sourceTree = "<group>"; };
+		188B60790AAE598D00FC418D /* CVDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVDictionary.h; path = CocoaVanilla/CVDictionary.h; sourceTree = "<group>"; };
+		188B607A0AAE598D00FC418D /* CVDictionary.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVDictionary.mm; path = CocoaVanilla/CVDictionary.mm; sourceTree = "<group>"; };
+		188B607D0AAE598D00FC418D /* CVKeyCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVKeyCode.h; path = CocoaVanilla/CVKeyCode.h; sourceTree = "<group>"; };
+		188B607E0AAE598D00FC418D /* CVKeyCode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVKeyCode.mm; path = CocoaVanilla/CVKeyCode.mm; sourceTree = "<group>"; };
+		188B607F0AAE598D00FC418D /* CVLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVLoader.h; path = CocoaVanilla/CVLoader.h; sourceTree = "<group>"; };
+		188B60800AAE598D00FC418D /* CVLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVLoader.mm; path = CocoaVanilla/CVLoader.mm; sourceTree = "<group>"; };
+		188B60810AAE598D00FC418D /* CVLoaderConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVLoaderConfig.h; path = CocoaVanilla/CVLoaderConfig.h; sourceTree = "<group>"; };
+		188B60820AAE598D00FC418D /* CVLoaderConfig.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVLoaderConfig.mm; path = CocoaVanilla/CVLoaderConfig.mm; sourceTree = "<group>"; };
+		188B60830AAE598D00FC418D /* CVLoaderUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVLoaderUtility.h; path = CocoaVanilla/CVLoaderUtility.h; sourceTree = "<group>"; };
+		188B60840AAE598D00FC418D /* CVLoaderUtility.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVLoaderUtility.mm; path = CocoaVanilla/CVLoaderUtility.mm; sourceTree = "<group>"; };
+		188B60850AAE598D00FC418D /* CVService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVService.h; path = CocoaVanilla/CVService.h; sourceTree = "<group>"; };
+		188B60860AAE598D00FC418D /* CVService.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVService.mm; path = CocoaVanilla/CVService.mm; sourceTree = "<group>"; };
+		188B60870AAE598D00FC418D /* CVSmartMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVSmartMenu.h; path = CocoaVanilla/CVSmartMenu.h; sourceTree = "<group>"; };
+		188B60890AAE598D00FC418D /* CVWrappers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVWrappers.h; path = CocoaVanilla/CVWrappers.h; sourceTree = "<group>"; };
+		188B608A0AAE598D00FC418D /* CVWrappers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVWrappers.mm; path = CocoaVanilla/CVWrappers.mm; sourceTree = "<group>"; };
+		188B60970AAE59AD00FC418D /* IMInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMInterface.h; path = TSBundle/IMInterface.h; sourceTree = "<group>"; };
+		188B60980AAE59AD00FC418D /* IMInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = IMInterface.mm; path = TSBundle/IMInterface.mm; sourceTree = "<group>"; };
+		188B60990AAE59AD00FC418D /* TSBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSBundle.h; path = TSBundle/TSBundle.h; sourceTree = "<group>"; };
+		188B609B0AAE59AD00FC418D /* TSComposingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSComposingBuffer.h; path = TSBundle/TSComposingBuffer.h; sourceTree = "<group>"; };
+		188B60C00AAE5ABF00FC418D /* OVDisplayServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVDisplayServer.h; path = OVDisplayServer/OVDisplayServer.h; sourceTree = "<group>"; };
 		18B117E20AAD09E400ACA814 /* icon-Bopomofo.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "icon-Bopomofo.tiff"; sourceTree = "<group>"; };
 		18B117E30AAD09E400ACA814 /* icon-LeopardVanilla.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "icon-LeopardVanilla.tiff"; sourceTree = "<group>"; };
 		18B117E40AAD09E400ACA814 /* icon-OpenVanilla.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "icon-OpenVanilla.tiff"; sourceTree = "<group>"; };
@@ -34,7 +79,7 @@
 		8D1107320486CEB800E47090 /* LeopardVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeopardVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E93074B60A5C264700470842 /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = /System/Library/Frameworks/InputMethodKit.framework; sourceTree = "<absolute>"; };
 		E93074E00A5C2F1200470842 /* LVIMSessionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVIMSessionController.h; sourceTree = "<group>"; };
-		E93074E10A5C2F1200470842 /* LVIMSessionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVIMSessionController.m; sourceTree = "<group>"; };
+		E93074E10A5C2F1200470842 /* LVIMSessionController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LVIMSessionController.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +95,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		188B60520AAE583300FC418D /* CocoaVanilla */ = {
+			isa = PBXGroup;
+			children = (
+				187379FA0AAE657700DD23E2 /* CVSmartMenu.mm */,
+				188B60730AAE598D00FC418D /* CVBuffer.h */,
+				188B60740AAE598D00FC418D /* CVBuffer.mm */,
+				188B60750AAE598D00FC418D /* CVCandidate.h */,
+				188B60760AAE598D00FC418D /* CVCandidate.mm */,
+				188B60770AAE598D00FC418D /* CVConfig.h */,
+				188B60780AAE598D00FC418D /* CVConfig.mm */,
+				188B60790AAE598D00FC418D /* CVDictionary.h */,
+				188B607A0AAE598D00FC418D /* CVDictionary.mm */,
+				188B607D0AAE598D00FC418D /* CVKeyCode.h */,
+				188B607E0AAE598D00FC418D /* CVKeyCode.mm */,
+				188B607F0AAE598D00FC418D /* CVLoader.h */,
+				188B60800AAE598D00FC418D /* CVLoader.mm */,
+				188B60810AAE598D00FC418D /* CVLoaderConfig.h */,
+				188B60820AAE598D00FC418D /* CVLoaderConfig.mm */,
+				188B60830AAE598D00FC418D /* CVLoaderUtility.h */,
+				188B60840AAE598D00FC418D /* CVLoaderUtility.mm */,
+				188B60860AAE598D00FC418D /* CVService.mm */,
+				188B60850AAE598D00FC418D /* CVService.h */,
+				188B60870AAE598D00FC418D /* CVSmartMenu.h */,
+				188B60890AAE598D00FC418D /* CVWrappers.h */,
+				188B608A0AAE598D00FC418D /* CVWrappers.mm */,
+			);
+			name = CocoaVanilla;
+			sourceTree = "<group>";
+		};
+		188B60530AAE583A00FC418D /* TSBundle */ = {
+			isa = PBXGroup;
+			children = (
+				188B60970AAE59AD00FC418D /* IMInterface.h */,
+				188B60980AAE59AD00FC418D /* IMInterface.mm */,
+				188B60990AAE59AD00FC418D /* TSBundle.h */,
+				188B609B0AAE59AD00FC418D /* TSComposingBuffer.h */,
+			);
+			name = TSBundle;
+			sourceTree = "<group>";
+		};
+		188B60540AAE584300FC418D /* NSExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				188B60570AAE585B00FC418D /* NSDictionaryExtension.h */,
+				188B60580AAE585B00FC418D /* NSDictionaryExtension.mm */,
+				188B60590AAE585B00FC418D /* NSStringExtension.h */,
+				188B605A0AAE585B00FC418D /* NSStringExtension.mm */,
+			);
+			name = NSExtensions;
+			sourceTree = "<group>";
+		};
+		188B60BF0AAE5AAF00FC418D /* OVDisplayServer_interface */ = {
+			isa = PBXGroup;
+			children = (
+				188B60C00AAE5ABF00FC418D /* OVDisplayServer.h */,
+			);
+			name = OVDisplayServer_interface;
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -61,8 +165,12 @@
 		29B97314FDCFA39411CA2CEA /* LeopardVanilla */ = {
 			isa = PBXGroup;
 			children = (
+				188B60BF0AAE5AAF00FC418D /* OVDisplayServer_interface */,
+				188B60540AAE584300FC418D /* NSExtensions */,
+				188B60530AAE583A00FC418D /* TSBundle */,
+				188B60520AAE583300FC418D /* CocoaVanilla */,
 				E93074E00A5C2F1200470842 /* LVIMSessionController.h */,
-				E93074E10A5C2F1200470842 /* LVIMSessionController.m */,
+				E93074E10A5C2F1200470842 /* LVIMSessionController.mm */,
 				32CA4F630368D1EE00C91783 /* LeopardVanilla_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -157,7 +265,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
-				E93074E20A5C2F1200470842 /* LVIMSessionController.m in Sources */,
+				E93074E20A5C2F1200470842 /* LVIMSessionController.mm in Sources */,
+				188B605B0AAE585B00FC418D /* NSDictionaryExtension.mm in Sources */,
+				188B605C0AAE585B00FC418D /* NSStringExtension.mm in Sources */,
+				188B608B0AAE598D00FC418D /* CVBuffer.mm in Sources */,
+				188B608C0AAE598D00FC418D /* CVCandidate.mm in Sources */,
+				188B608D0AAE598D00FC418D /* CVConfig.mm in Sources */,
+				188B608E0AAE598D00FC418D /* CVDictionary.mm in Sources */,
+				188B60900AAE598D00FC418D /* CVKeyCode.mm in Sources */,
+				188B60910AAE598D00FC418D /* CVLoader.mm in Sources */,
+				188B60920AAE598D00FC418D /* CVLoaderConfig.mm in Sources */,
+				188B60930AAE598D00FC418D /* CVLoaderUtility.mm in Sources */,
+				188B60940AAE598D00FC418D /* CVService.mm in Sources */,
+				188B60960AAE598D00FC418D /* CVWrappers.mm in Sources */,
+				188B609D0AAE59AD00FC418D /* IMInterface.mm in Sources */,
+				187379FB0AAE657700DD23E2 /* CVSmartMenu.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
