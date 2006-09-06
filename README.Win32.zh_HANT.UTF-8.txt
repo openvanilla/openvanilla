@@ -70,6 +70,6 @@ http://openvanilla.org/wiki/zh/index.php?title=%E8%88%8Awiki%E9%A0%81%E9%9D%A2%E
 * 安裝 NSIS (http://nsis.sourceforge.net/download/)
 * 安裝 NSIS 的 Registry plugin (http://nsis.sourceforge.net/wiki/Registry_plugin)
 * 把編譯好的檔案放在 trunk/Experiments/Win32/Installer/ 底下
-** 要安裝到 %WINDIR%\system32 的檔案就放在 trunk/Experiments/Win32/Installer/System32/ 裡
-** 要安裝到 %WINDIR%\OpenVanilla 的檔案就放在 trunk/Experiments/Win32/Installer/ 裡
+** 要安裝到 %WINDIR%\system32 的檔案就放在 trunk/Loaders/Win32/Installer/System32/ 裡
+** 要安裝到 %WINDIR%\OpenVanilla 的檔案就放在 trunk/Loaders/Win32/Installer/ 裡
 * 在對應的 .nsi 檔上按右鍵選 Compile NSIS Script
