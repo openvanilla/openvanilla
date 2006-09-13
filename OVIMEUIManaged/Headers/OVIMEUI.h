@@ -2,6 +2,8 @@
 #include <windows.h>
 #include <tchar.h>
 
+#include "OVUtility.h"
+
 typedef struct _tagUICHILD{
 	HWND    hWnd;
 	POINT   pt;
