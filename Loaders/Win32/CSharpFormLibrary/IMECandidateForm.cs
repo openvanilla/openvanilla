@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
@@ -124,7 +125,7 @@ namespace CSharpFormLibrary
 		{
 			string[] a_inputs = inputs.Split(' ');
 			if(a_inputs==null) return;
-			this.ShowListView(a_inputs);		
+			this.ShowListView(a_inputs);
 		}
 
 		public void SetLocation(int x, int y)
@@ -148,15 +149,11 @@ namespace CSharpFormLibrary
 
 		private void ShowListView(string[] pageCandidates)
 		{
-			this.lbCandidates.Items.Clear();			
-			int order =1;
-			foreach(string pageCandidate in pageCandidates)
-			{
-				this.lbCandidates.Items.Add(pageCandidate);
-				order++;
-			}
+			this.lbCandidates.Items.Clear();
+			this.lbCandidates.Items.AddRange(pageCandidates);
 			this.lbCandidates.SelectedItem= this.lbCandidates.Items[0];
-			DepthOfList(pageCandidates.Length);
+
+			//DepthOfList(pageCandidates.Length);
 		}
 		public void ClearCandidates()
 		{
