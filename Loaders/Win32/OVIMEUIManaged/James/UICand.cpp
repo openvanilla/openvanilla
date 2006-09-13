@@ -1,3 +1,5 @@
+#define OV_DEBUG
+
 #include <stdio.h>
 #include "PCMan.h"
 #include "AVDictionary.h"
@@ -55,7 +57,11 @@ void UICreateCandWindow(HWND hUIWnd)
 		SetWindowLong(uiCand.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
 		//changes an attribute of the specified window.The function also sets the 32-bit (long) value at the specified offset into the extra window memory.
 		*/
+		Watch watch;
+		watch.start();
 		uiCand.hWnd = _CreateCandPage();
+		watch.stop();
+		murmur("C# candidate window, create: %1.3f sec", watch.getSec());
 		//HWND previousParent = SetParent(uiCand.hWnd, hUIWnd);
 		//</comment>	
 
@@ -260,8 +266,13 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			return;
 		}
 
+		Watch watch;
+		watch.start();
 		std::wstring wsCandStr(lpCandStr);
 		_SetCandString(wsCandStr);
+		watch.stop();
+		murmur("C# candidate window, set string: %1.3f sec", watch.getSec());
+
 		//<comment author='b6s'>
 		//UIShowCandWindow();
 		//</comment>
@@ -323,12 +334,16 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 				sz.cx,
 				sz.cy,
 				TRUE);*/
+			Watch watch;
+			watch.start();
 			_MoveCandPage(uiCand.pt.x,uiCand.pt.y);
+			watch.stop();
+			murmur("C# candidate window, move: %1.3f sec", watch.getSec());
 			//<comment author='b6s'>
 			// Test
 			//UIShowCandWindow();
 			//</comment>
-			InvalidateRect(uiCand.hWnd, NULL, FALSE);
+			//InvalidateRect(uiCand.hWnd, NULL, FALSE);
 		}
 		else if( GetCandPosFromCompWnd(&sz) )
 		{
@@ -338,13 +353,18 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 				sz.cx,
 				sz.cy,
 				TRUE);*/
-			
+
+			Watch watch;
+			watch.start();		
 			_MoveCandPage(uiCand.pt.x,uiCand.pt.y);
+			watch.stop();
+			murmur("C# candidate window, move: %1.3f sec", watch.getSec());
+
 			//<comment author='b6s'>
 			// Test
 			//UIShowCandWindow();
 			//</comment>
-			InvalidateRect(uiCand.hWnd, NULL, FALSE);
+			//InvalidateRect(uiCand.hWnd, NULL, FALSE);
 		}
 	}
 	
@@ -421,14 +441,27 @@ void PaintCandWindow(HWND hCandWnd)
 
 void UIShowCandWindow()
 {
-	if (IsWindow(uiCand.hWnd))
+	if (IsWindow(uiCand.hWnd)) {
+		Watch watch;
+		watch.start();
 		_ShowCandPage();
+		watch.stop();
+		murmur("C# candidate window, show: %1.3f sec", watch.getSec());
+	}
 }
 
 void UIHideCandWindow()
 {
 	if (IsWindow(uiCand.hWnd)) {
+		Watch watch;
+		watch.start();
 		_HideCandPage();
+		watch.stop();
+		murmur("C# candidate window, hide: %1.3f sec", watch.getSec());
+
+		watch.start();
 		_ClearCandPage();
+		watch.stop();
+		murmur("C# candidate window, clear: %1.3f sec", watch.getSec());
 	}
 }
