@@ -31,6 +31,34 @@
 #ifndef __OVUtility_h
 #define __OVUtility_h
 
+#include <ctime>
+using namespace std;
+
+class Watch
+{
+public:
+	void start()
+	{
+		tick_ = 0;
+		sec_ = 0.0;		
+		from_ = clock();
+	}
+
+	void stop()
+	{
+		tick_ = clock()-from_;		
+		sec_ = double(tick_)/CLOCKS_PER_SEC;
+	}
+
+	clock_t getTick() { return tick_; }
+	double getSec() { return sec_; }
+
+private:
+	clock_t from_;
+	clock_t tick_;
+	double sec_;
+};
+
 // debug routine
 #ifdef OV_DEBUG 
     #include <stdarg.h>
@@ -40,11 +68,30 @@
     // No extra compiling/library making/linking is even needed!
 
     inline static void murmur(const char* format,...) {
+#ifdef WIN32
+		static char first_time=1;
+		FILE *fp;
+
+		if (first_time) {
+			first_time=0;
+			if (fp=fopen("C:\\WINDOWS\\OpenVanilla\\orz.txt", "w"))	fclose(fp);
+		}
+
+		if (fp=fopen("C:\\WINDOWS\\OpenVanilla\\orz.txt", "a")) {
+			va_list args;
+			va_start (args, format);
+			vfprintf (fp, format, args);
+			va_end (args);
+			fprintf (fp, "\n");
+			fclose(fp);
+		}
+#else
         va_list args;
         va_start (args, format);
         vfprintf (stderr, format, args);
         va_end (args);
         fprintf (stderr, "\n");
+#endif
     }
 #else
     inline static void murmur(const char* format,...) {
