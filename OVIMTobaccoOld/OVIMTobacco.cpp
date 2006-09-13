@@ -1,6 +1,6 @@
 // OVIMTobacco.cpp
 
-#define OV_DEBUG
+//#define OV_DEBUG
 
 #ifndef WIN32
 	#include <OpenVanilla/OpenVanilla.h>
