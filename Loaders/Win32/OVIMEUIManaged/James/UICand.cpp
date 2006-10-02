@@ -63,9 +63,10 @@ void UICreateCandWindow(HWND hUIWnd)
 		watch.stop();
 		murmur("%1.3f sec:\tC# candidate window, create", watch.getSec());
 		murmur("uiCand.hWnd:\t%p", uiCand.hWnd);
+		murmur("Parent Handle:\t%p", hUIWnd);
 		//HWND previousParent = SetParent(uiCand.hWnd, hUIWnd);
 		//murmur("previousParent:\t%p", previousParent);
-		//</comment>	
+		//</comment>
 
 		//uiCand.sz.cx = sz.cx + 2;
 		//uiCand.sz.cy = sz.cy + 4;
@@ -342,6 +343,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			watch.stop();
 			murmur("%1.3f sec:\tC# candidate window, move", watch.getSec());
 			murmur("uiCand.pt.x:%i, uiCand.pt.y:%i", uiCand.pt.x,uiCand.pt.y);
+			murmur("Parent Handle:\t%p", hUIWnd);
 			//<comment author='b6s'>
 			// Test
 			//UIShowCandWindow();
@@ -362,8 +364,9 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			_MoveCandPage(uiCand.pt.x,uiCand.pt.y);
 			watch.stop();
 			murmur("%1.3f sec:\tC# candidate window, move", watch.getSec());
-			murmur("uiCand.pt.x:%i, uiCand.pt.y:%i", uiCand.pt.x,uiCand.pt.y);
-
+			murmur("From CompWnd, uiCand.pt.x:%i, uiCand.pt.y:%i", uiCand.pt.x,uiCand.pt.y);
+			murmur("uiCand.hWnd:\t%p", uiCand.hWnd);
+			murmur("Parent Handle:\t%p", hUIWnd);
 			//<comment author='b6s'>
 			// Test
 			//UIShowCandWindow();
