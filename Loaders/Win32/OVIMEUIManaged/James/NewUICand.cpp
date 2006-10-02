@@ -184,9 +184,9 @@ void _ShowCandPage()
 		//System::Type* bar = foo->GetType("CSharpFormLibrary.IMECandidateForm");
 		//MethodInfo* methodShowWindow = bar->GetMethod("ShowNoActive");
 		//methodShowWindow->Invoke(FormAssembly::CandidateForm(), NULL);
-		Object* ret = FormAssembly::CandiShowNoActive()
+		//Object* ret = FormAssembly::CandiShowNoActive()
+	Object* ret = FormAssembly::CandiShowNoActive()
 			->Invoke(FormAssembly::CandidateForm(), NULL);
-		Debug::WriteLine(ret, (String*)"show");
 	//}
 	/*
 	catch(System::Exception* e)
@@ -213,7 +213,6 @@ void _MoveCandPage(int x,int y)
 			->ToArray(System::Type::GetType("System.Object")));
 	Object* ret =
 		FormAssembly::CandiMove()->Invoke(FormAssembly::CandidateForm(), param);
-	Debug::WriteLine(ret, (String*)"move");
 }
 
 void _HideCandPage()
