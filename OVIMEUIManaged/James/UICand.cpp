@@ -62,8 +62,24 @@ void UICreateCandWindow(HWND hUIWnd)
 		murmur("%1.3f sec:\tC# candidate window, create", watch.getSec());
 		murmur("uiCand.hWnd:\t%p", uiCand.hWnd);
 		murmur("Parent Handle:\t%p", hUIWnd);
+		/*
+		//HWND previousParent = SetParent(uiCand.hWnd, hUIWnd);
 		HWND previousParent = SetParent(hUIWnd, uiCand.hWnd);
 		murmur("previousParent:\t%p", previousParent);
+
+		SendMessage(
+			uiCand.hWnd,
+			0x0128, //WM_UPDATEUISTATE
+			1, //UIS_SET
+			NULL);
+		UpdateWindow(uiCand.hWnd);
+		SendMessage(
+			hUIWnd,
+			0x0127, //WM_CHANGEUISTATE
+			1, //UIS_SET
+			NULL);
+		UpdateWindow(hUIWnd);
+		*/
 		//</comment>
 
 		//uiCand.sz.cx = sz.cx + 2;
