@@ -215,7 +215,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		k = k + 32;
 	WORD out[2];
 	spec = ToAscii(uVKey, MapVirtualKey(uVKey, 0), lpbKeyState, (LPWORD)&out, 0);
-	DebugLog("KEY: %c\n", out[0]);
+	murmur("KEY: %c\n", out[0]);
 	switch(LOWORD(uVKey))	{
 	case VK_PRIOR: // pageup
 		k = 11;

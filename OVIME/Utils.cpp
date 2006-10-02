@@ -72,7 +72,7 @@ void UpdateCandidate(LPINPUTCONTEXT lpIMC, const wchar_t* candis)
 		{
 			if(candis[i] == L' ' || i == rlen - 1)
 			{
-				DebugLog("UPDATE\n", NULL);
+				murmur("UPDATE\n", NULL);
 				int dst = i - 1;
 				if( i == rlen - 1)
 					dst = i + 1;

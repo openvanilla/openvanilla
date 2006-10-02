@@ -97,7 +97,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 
 			//dsvr.setBufPos(CompX, CompY)->notify();
 		}
-		DebugLog("IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
+		murmur("IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
 		/*
 		if (IsWindow(lpUIExtra->uiComp.hWnd))
 			InvalidateRect(lpUIExtra->uiComp.hWnd,NULL,FALSE);
