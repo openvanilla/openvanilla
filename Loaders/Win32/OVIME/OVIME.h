@@ -77,6 +77,7 @@ extern "C" {
 	void ReloadConfig();
 	*/
 }
+/*
 #ifdef DEBUG 
     #include <stdarg.h>
     #include <stdio.h>
@@ -105,5 +106,5 @@ extern "C" {
     inline static void DebugLog(const char* format,...) {
     }
 #endif
-
+*/
 #endif // OVIME_h

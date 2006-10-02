@@ -36,7 +36,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	switch (msg)
 	{
-		DebugLog("UIMSG");
+		murmur("UIMSG");
 	case WM_CREATE:
 		CompX = CompY = -1;
 		UICreateCompWindow(hWnd);
@@ -104,13 +104,13 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 		
 	case WM_IME_CONTROL:
-		DebugLog("WM_IME_CONTROL");
+		murmur("WM_IME_CONTROL");
 		lRet = ControlHandle(hUICurIMC, hWnd, msg, wParam, lParam);
 		break;
 		
 		
 	case WM_IME_NOTIFY:
-		DebugLog("WM_IME_NOTIFY");
+		murmur("WM_IME_NOTIFY");
 		lRet = NotifyHandle(hUICurIMC, hWnd, msg, wParam, lParam);
 		break;
 		

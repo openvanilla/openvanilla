@@ -69,14 +69,7 @@ private:
 
     inline static void murmur(const char* format,...) {
 #ifdef WIN32
-		static char first_time=1;
 		FILE *fp;
-
-		if (first_time) {
-			first_time=0;
-			if (fp=fopen("C:\\WINDOWS\\OpenVanilla\\orz.txt", "w"))	fclose(fp);
-		}
-
 		if (fp=fopen("C:\\WINDOWS\\OpenVanilla\\orz.txt", "a")) {
 			va_list args;
 			va_start (args, format);
