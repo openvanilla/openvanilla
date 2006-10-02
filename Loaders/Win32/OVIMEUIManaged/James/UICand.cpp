@@ -61,12 +61,14 @@ void UICreateCandWindow(HWND hUIWnd)
 		watch.start();
 		uiCand.hWnd = _CreateCandPage();
 		watch.stop();
-		murmur("C# candidate window, create: %1.3f sec", watch.getSec());
+		murmur("%1.3f sec:\tC# candidate window, create", watch.getSec());
+		murmur("uiCand.hWnd:\t%p", uiCand.hWnd);
 		//HWND previousParent = SetParent(uiCand.hWnd, hUIWnd);
+		//murmur("previousParent:\t%p", previousParent);
 		//</comment>	
 
-		uiCand.sz.cx = sz.cx + 2;
-		uiCand.sz.cy = sz.cy + 4;
+		//uiCand.sz.cx = sz.cx + 2;
+		//uiCand.sz.cy = sz.cy + 4;
 	}
 	//ShowWindow(uiCand.hWnd, SW_HIDE);
 	//UIHideCandWindow();	// by b6s
@@ -271,8 +273,8 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		std::wstring wsCandStr(lpCandStr);
 		_SetCandString(wsCandStr);
 		watch.stop();
-		murmur("C# candidate window, set string: %1.3f sec", watch.getSec());
-
+		murmur("%1.3f sec:\tC# candidate window, set string", watch.getSec());
+		murmur("set candidate string:%s", lpCandStr);
 		//<comment author='b6s'>
 		//UIShowCandWindow();
 		//</comment>
@@ -338,7 +340,8 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			watch.start();
 			_MoveCandPage(uiCand.pt.x,uiCand.pt.y);
 			watch.stop();
-			murmur("C# candidate window, move: %1.3f sec", watch.getSec());
+			murmur("%1.3f sec:\tC# candidate window, move", watch.getSec());
+			murmur("uiCand.pt.x:%i, uiCand.pt.y:%i", uiCand.pt.x,uiCand.pt.y);
 			//<comment author='b6s'>
 			// Test
 			//UIShowCandWindow();
@@ -358,7 +361,8 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			watch.start();		
 			_MoveCandPage(uiCand.pt.x,uiCand.pt.y);
 			watch.stop();
-			murmur("C# candidate window, move: %1.3f sec", watch.getSec());
+			murmur("%1.3f sec:\tC# candidate window, move", watch.getSec());
+			murmur("uiCand.pt.x:%i, uiCand.pt.y:%i", uiCand.pt.x,uiCand.pt.y);
 
 			//<comment author='b6s'>
 			// Test
@@ -446,7 +450,7 @@ void UIShowCandWindow()
 		watch.start();
 		_ShowCandPage();
 		watch.stop();
-		murmur("C# candidate window, show: %1.3f sec", watch.getSec());
+		murmur("%1.3f sec:\tC# candidate window, show", watch.getSec());
 	}
 }
 
@@ -457,11 +461,11 @@ void UIHideCandWindow()
 		watch.start();
 		_HideCandPage();
 		watch.stop();
-		murmur("C# candidate window, hide: %1.3f sec", watch.getSec());
+		murmur("%1.3f sec:\tC# candidate window, hide", watch.getSec());
 
 		watch.start();
 		_ClearCandPage();
 		watch.stop();
-		murmur("C# candidate window, clear: %1.3f sec", watch.getSec());
+		murmur("%1.3f sec:\tC# candidate window, clear", watch.getSec());
 	}
 }
