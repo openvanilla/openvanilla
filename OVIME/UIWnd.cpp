@@ -1,3 +1,5 @@
+#define OV_DEBUG
+
 #include "OVIME.h"
 
 LRESULT APIENTRY UIWndProc(HWND hWnd,

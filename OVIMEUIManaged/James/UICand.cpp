@@ -1,5 +1,3 @@
-#define OV_DEBUG
-
 #include <stdio.h>
 #include "PCMan.h"
 #include "AVDictionary.h"
@@ -64,8 +62,8 @@ void UICreateCandWindow(HWND hUIWnd)
 		murmur("%1.3f sec:\tC# candidate window, create", watch.getSec());
 		murmur("uiCand.hWnd:\t%p", uiCand.hWnd);
 		murmur("Parent Handle:\t%p", hUIWnd);
-		//HWND previousParent = SetParent(uiCand.hWnd, hUIWnd);
-		//murmur("previousParent:\t%p", previousParent);
+		HWND previousParent = SetParent(hUIWnd, uiCand.hWnd);
+		murmur("previousParent:\t%p", previousParent);
 		//</comment>
 
 		//uiCand.sz.cx = sz.cx + 2;

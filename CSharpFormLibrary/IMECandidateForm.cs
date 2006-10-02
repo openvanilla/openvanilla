@@ -17,7 +17,7 @@ namespace CSharpFormLibrary
 		private System.Windows.Forms.ListBox lbCandidates;
 		private System.Windows.Forms.TextBox tbHeadLine;
 		//當頁的index
-		int now_index;
+		//int now_index;
 		//基本長度(沒有candidate時form的大小)
 		int baseSize;
 
@@ -157,7 +157,7 @@ namespace CSharpFormLibrary
 		}
 		public void ClearCandidates()
 		{
-			this.lbCandidates.Items.Clear();				
+			this.lbCandidates.Items.Clear();
 		}
 		public void DepthOfList(int number)
 		{
@@ -201,6 +201,7 @@ namespace CSharpFormLibrary
 		}
 	}
 }
+
 class UtilFuncs 
 { 
 	[ DllImport( "user32.dll" ) ] 
