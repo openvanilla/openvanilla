@@ -193,11 +193,11 @@ namespace CSharpFormLibrary
 		}
 		public void ShowNoActive()
 		{
-			UtilFuncs.SetVisibleNoActivate(this, true ); // true to show. 
+			UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
 		}
 		public void HideNoActive()
 		{
-			UtilFuncs.SetVisibleNoActivate(this, false ); // false to hide.  
+			UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
 		}
 	}
 }
@@ -213,16 +213,16 @@ class UtilFuncs
 	public const int SWP_NOACTIVATE = 16; // 0x0010 
 	public const int SWP_SHOWWINDOW = 64; // 0x0040 
   
-	public static void ShowWindowTopMost( IntPtr handle ) 
+	public static void ShowWindowTopMost(IntPtr handle) 
 	{ 
 		SetWindowPos( handle, (IntPtr) HWND_TOPMOST, 0, 0, 0, 0, 
 			SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE | SWP_SHOWWINDOW ); 
 	}
  
-	public static void SetVisibleNoActivate( Control control, bool visible ) 
+	public static void SetVisibleNoActivate(Form form, bool visible) 
 	{ 
 		if ( visible ) 
-			ShowWindowTopMost( control.Handle ); 
-		control.Visible = visible; 
+			ShowWindowTopMost(form.Handle);
+		form.Visible = visible;
 	} 
 }
