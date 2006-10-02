@@ -1,6 +1,6 @@
 // OVIMTobacco.cpp
 
-//#define OV_DEBUG
+#define OV_DEBUG
 
 #ifndef WIN32
 	#include <OpenVanilla/OpenVanilla.h>
@@ -185,6 +185,9 @@ extern "C" unsigned int OVGetLibraryVersion() {
     return OV_VERSION;
 }
 extern "C" int OVInitializeLibrary(OVService*, const char*p) { 
+	Watch watch;
+	watch.start();
+
     db=new SQLite3;  // this never gets deleted, but so do we
     char dbfile[PATH_MAX];
     sprintf(dbfile, "%s/OVIMTobacco/imtables.db", p);
@@ -199,6 +202,10 @@ extern "C" int OVInitializeLibrary(OVService*, const char*p) {
 	strcpy(IM_TABLE_NAMES[IM_TABLES],buf);
 	IM_TABLES++;
     }
+
+	watch.stop();
+	murmur("%1.3f sec:\tOVInitializeLibrary", watch.getSec());
+
     return 1;
 }
 extern "C" OVModule *OVGetModuleFromLibrary(int x) {
@@ -284,9 +291,14 @@ int OVIMTobacco::initialize(OVDictionary *cfg, OVService * s, const char *p) {
     sprintf(tsiDbFilePath, "%sOVIMTobacco/tsi.db", p);
 
 	murmur("initial predictor(%s)", tsiDbFilePath);
+
+	Watch watch;
+	watch.start();
     predictor = PredictorSingleton::getInstance(tsiDbFilePath);
 
     update(cfg, s);
+	watch.stop();
+	murmur("%1.3f sec:\tPredictorSingleton::getInstance(tsiDbFilePath)", watch.getSec());
 
 	murmur("initialized");    
     return 1;        
