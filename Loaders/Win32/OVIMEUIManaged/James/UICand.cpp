@@ -1,3 +1,5 @@
+#define OV_DEBUG
+
 #include <stdio.h>
 #include "PCMan.h"
 #include "AVDictionary.h"
@@ -43,7 +45,7 @@ void UICreateCandWindow(HWND hUIWnd)
 {
 	if (!IsWindow(uiCand.hWnd))
 	{
-		SIZE sz;	sz.cx = sz.cy = 0;
+		//SIZE sz;	sz.cx = sz.cy = 0;
 
 		//<comment author='b6s'> Use IntPtr of C# form instead		
 		/* 
@@ -55,32 +57,43 @@ void UICreateCandWindow(HWND hUIWnd)
 		SetWindowLong(uiCand.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
 		//changes an attribute of the specified window.The function also sets the 32-bit (long) value at the specified offset into the extra window memory.
 		*/
+		//</comment>
+
 		Watch watch;
 		watch.start();
 		uiCand.hWnd = _CreateCandPage();
 		watch.stop();
 		murmur("%1.3f sec:\tC# candidate window, create", watch.getSec());
-		murmur("uiCand.hWnd:\t%p", uiCand.hWnd);
-		murmur("Parent Handle:\t%p", hUIWnd);
-		/*
-		//HWND previousParent = SetParent(uiCand.hWnd, hUIWnd);
-		HWND previousParent = SetParent(hUIWnd, uiCand.hWnd);
-		murmur("previousParent:\t%p", previousParent);
 
+		/*
+		murmur("uiCand.hWnd:\t%p", uiCand.hWnd);
+		murmur("Parent Handle:\t%p", uiComp.hWnd);
+		//<comment author='b6s'>
+		// From MSDN:
+		// Conversely, if hWndNewParent is not NULL and the window
+		// was previously a child of the desktop, you should clear the
+		// WS_POPUP style and set the WS_CHILD style before calling SetParent.
+		DWORD styleOrig = GetWindowLong(uiCand.hWnd, GWL_STYLE);
+		murmur("uiCand style:\t%x", styleOrig);
+		SetWindowLong(uiCand.hWnd, GWL_STYLE, styleOrig | WS_CHILD);
+		murmur("uiCand style:\t%x", GetWindowLong(uiCand.hWnd, GWL_STYLE));
+		HWND previousParent = SetParent(uiCand.hWnd, uiComp.hWnd);
+		murmur("previousParent:\t%p", previousParent);
+		//</comment>
+		SetWindowLong(uiCand.hWnd , GWL_STYLE, 0x8c000000L);		
+		murmur("uiCand style:\t%x", GetWindowLong(uiCand.hWnd, GWL_STYLE));
+		
 		SendMessage(
 			uiCand.hWnd,
 			0x0128, //WM_UPDATEUISTATE
-			1, //UIS_SET
-			NULL);
-		UpdateWindow(uiCand.hWnd);
+			1|0x1 , //UIS_SET|UISF_HIDEFOCUS
+			0);
 		SendMessage(
-			hUIWnd,
+			uiComp.hWnd,
 			0x0127, //WM_CHANGEUISTATE
-			1, //UIS_SET
-			NULL);
-		UpdateWindow(hUIWnd);
+			1|0x1, //UIS_SET|UISF_HIDEFOCUS
+			0);
 		*/
-		//</comment>
 
 		//uiCand.sz.cx = sz.cx + 2;
 		//uiCand.sz.cy = sz.cy + 4;
