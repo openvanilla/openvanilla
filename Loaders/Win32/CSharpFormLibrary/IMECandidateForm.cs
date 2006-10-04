@@ -145,6 +145,20 @@ namespace CSharpFormLibrary
 
 		#endregion
 
+		#region a protected override method for WS_POPUP
+
+		protected override CreateParams CreateParams
+		{
+			get
+			{
+				CreateParams cp = base.CreateParams;
+				cp.Style = unchecked((int)0x80000000); //WS_POPUP
+				return cp;
+			}
+		}
+
+		#endregion
+
 		#region private methods
 
 		private void ShowListView(string[] pageCandidates)
