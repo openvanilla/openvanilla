@@ -40,6 +40,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	{
 		murmur("UIMSG");
 	case WM_CREATE:
+		murmur("WM_CREATE");
 		CompX = CompY = -1;
 		UICreateCompWindow(hWnd);
 		UICreateCandWindow(hWnd);
@@ -47,11 +48,14 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 		
 	case WM_IME_SETCONTEXT:
+		murmur("WM_IME_SETCONTEXT");
 		if (wParam)
 		{
+			murmur("hUICurIMC:%p", hUICurIMC);
 			if (hUICurIMC)
 			{
 				lpIMC = ImmLockIMC(hUICurIMC);
+				murmur("lpIMC:%p", lpIMC);
 				if (lpIMC)
 				{
 					lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
@@ -75,9 +79,11 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 		
 	case WM_IME_STARTCOMPOSITION:
+		murmur("WM_IME_STARTCOMPOSITION");
 		break;
 		
 	case WM_IME_COMPOSITION:
+		murmur("WM_IME_COMPOSITION");
 		lpIMC = ImmLockIMC(hUICurIMC);
 		POINT pt;
 		if(CompX < 0) {
@@ -95,14 +101,17 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 		
 	case WM_IME_ENDCOMPOSITION:
+		murmur("WM_IME_ENDCOMPOSITION");
 		UIHideCompWindow();
 		UIHideCandWindow();
 		break;
 		
 	case WM_IME_COMPOSITIONFULL:
+		murmur("WM_IME_COMPOSITIONFULL");
 		break;
 		
 	case WM_IME_SELECT:
+		murmur("WM_IME_SELECT");
 		break;
 		
 	case WM_IME_CONTROL:
@@ -117,15 +126,18 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 		
 	case WM_DESTROY:
+		murmur("WM_DESTROY");
 		loader->closeModule();
 		break;
 
 	case WM_IME_RELOADCONFIG:
+		murmur("WM_IME_RELOADCONFIG");
 		loader = AVLoader::getLoader();
 		loader->reloadConfig();
 		break;
 
 	default:
+		murmur("default");
 		return DefWindowProc(hWnd,msg,wParam,lParam);
     }
     return lRet;

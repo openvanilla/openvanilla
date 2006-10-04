@@ -18,20 +18,8 @@ LONG NotifyHandle(HIMC hUICurIMC,
 
     switch (wParam)
     {
-		murmur("On WM_IME_Notify");
+		murmur("On WM_IME_Notify");	
 
-	case IMN_CLOSESTATUSWINDOW:
-		murmur("IMN_CLOSESTATUSWINDOW");
-		UIHideStatusWindow();
-		//<comment author='b6s'>
-		// When attached app lost focus, only this message occurred,
-		// so it must also hide following windows.
-		UIHideCompWindow();
-		UIHideCandWindow();
-		UIHideNotifyWindow();
-		//</comment>
-		break;
-		
 	case IMN_OPENSTATUSWINDOW:
 		murmur("IMN_OPENSTATUSWINDOW");
 		UICreateStatusWindow(hWnd);
@@ -46,20 +34,34 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		UIShowStatusWindow();
 		break;
 		
+	case IMN_CLOSESTATUSWINDOW:
+		murmur("IMN_CLOSESTATUSWINDOW");
+		UIHideStatusWindow();
+		//<comment author='b6s'>
+		// When attached app lost focus, only this message occurred,
+		// so it must also hide following windows.
+		UIHideCompWindow();
+		UIHideCandWindow();
+		UIHideNotifyWindow();
+		//</comment>
+		break;
+
 	case IMN_OPENCANDIDATE:
 		murmur("IMN_OPENCANDIDATE");
-		dsvr->showCandi(true);
+		//dsvr->showCandi(true);
+		UIShowCandWindow();
 		break;
-		
+
+	case IMN_CLOSECANDIDATE:
+		murmur("IMN_CLOSECANDIDATE");
+		//dsvr->showCandi(false);
+		UIHideCandWindow();
+		break;
+
 	case IMN_CHANGECANDIDATE:
 		murmur("IMN_CHANGECANDIDATE");
 		break;
-		
-	case IMN_CLOSECANDIDATE:
-		murmur("IMN_CLOSECANDIDATE");
-		dsvr->showCandi(false);
-		break;
-		
+
 	case IMN_SETCONVERSIONMODE:
 		{
 			murmur("IMN_SETCONVERSIONMODE");

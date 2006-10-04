@@ -47,8 +47,9 @@ void UICreateCandWindow(HWND hUIWnd)
 	{
 		//SIZE sz;	sz.cx = sz.cy = 0;
 
-		//<comment author='b6s'> Use IntPtr of C# form instead		
-		/* 
+		/*<comment author='b6s'>
+		// CreateWindowEx is not equivalent to SetParent.
+		// Set WS_POPUP in each C# widget instead.
 		uiCand.hWnd = 
 			CreateWindowEx(0, UICANDCLASSNAME ,NULL,
 					WS_DISABLED | WS_POPUP,
@@ -64,36 +65,6 @@ void UICreateCandWindow(HWND hUIWnd)
 		uiCand.hWnd = _CreateCandPage();
 		watch.stop();
 		murmur("%1.3f sec:\tC# candidate window, create", watch.getSec());
-
-		/*
-		murmur("uiCand.hWnd:\t%p", uiCand.hWnd);
-		murmur("Parent Handle:\t%p", uiComp.hWnd);
-		//<comment author='b6s'>
-		// From MSDN:
-		// Conversely, if hWndNewParent is not NULL and the window
-		// was previously a child of the desktop, you should clear the
-		// WS_POPUP style and set the WS_CHILD style before calling SetParent.
-		DWORD styleOrig = GetWindowLong(uiCand.hWnd, GWL_STYLE);
-		murmur("uiCand style:\t%x", styleOrig);
-		SetWindowLong(uiCand.hWnd, GWL_STYLE, styleOrig | WS_CHILD);
-		murmur("uiCand style:\t%x", GetWindowLong(uiCand.hWnd, GWL_STYLE));
-		HWND previousParent = SetParent(uiCand.hWnd, uiComp.hWnd);
-		murmur("previousParent:\t%p", previousParent);
-		//</comment>
-		SetWindowLong(uiCand.hWnd , GWL_STYLE, 0x8c000000L);		
-		murmur("uiCand style:\t%x", GetWindowLong(uiCand.hWnd, GWL_STYLE));
-		
-		SendMessage(
-			uiCand.hWnd,
-			0x0128, //WM_UPDATEUISTATE
-			1|0x1 , //UIS_SET|UISF_HIDEFOCUS
-			0);
-		SendMessage(
-			uiComp.hWnd,
-			0x0127, //WM_CHANGEUISTATE
-			1|0x1, //UIS_SET|UISF_HIDEFOCUS
-			0);
-		*/
 
 		//uiCand.sz.cx = sz.cx + 2;
 		//uiCand.sz.cy = sz.cy + 4;
@@ -370,7 +341,6 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			watch.stop();
 			murmur("%1.3f sec:\tC# candidate window, move", watch.getSec());
 			murmur("uiCand.pt.x:%i, uiCand.pt.y:%i", uiCand.pt.x,uiCand.pt.y);
-			murmur("Parent Handle:\t%p", hUIWnd);
 			//<comment author='b6s'>
 			// Test
 			//UIShowCandWindow();
@@ -392,8 +362,6 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			watch.stop();
 			murmur("%1.3f sec:\tC# candidate window, move", watch.getSec());
 			murmur("From CompWnd, uiCand.pt.x:%i, uiCand.pt.y:%i", uiCand.pt.x,uiCand.pt.y);
-			murmur("uiCand.hWnd:\t%p", uiCand.hWnd);
-			murmur("Parent Handle:\t%p", hUIWnd);
 			//<comment author='b6s'>
 			// Test
 			//UIShowCandWindow();

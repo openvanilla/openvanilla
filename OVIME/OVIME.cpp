@@ -1,6 +1,6 @@
 // OVIME.cpp : 定義 DLL 應用程式的進入點。
 //
-#define OV_DEBUG
+//#define OV_DEBUG
 
 #include "OVIME.h"
 
