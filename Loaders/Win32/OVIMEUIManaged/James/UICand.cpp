@@ -1,5 +1,4 @@
-#define OV_DEBUG
-
+#define OV_DEBUG  
 #include <stdio.h>
 #include "PCMan.h"
 #include "AVDictionary.h"
@@ -7,6 +6,8 @@
 #include "DotNETHeader.h"
 
 #define		ITEMS_PER_ROW	4
+
+
 
 LRESULT APIENTRY CandWndProc(HWND hWnd, 
 		UINT msg, 
@@ -43,6 +44,7 @@ LRESULT APIENTRY CandWndProc(HWND hWnd,
 
 void UICreateCandWindow(HWND hUIWnd)
 {
+	murmur("UICreateCandWindow");
 	if (!IsWindow(uiCand.hWnd))
 	{
 		//SIZE sz;	sz.cx = sz.cy = 0;
@@ -113,7 +115,7 @@ BOOL GetCandPosFromCompWnd(LPSIZE lpsz)
 
 void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 {
-	
+	murmur("UIMoveCandWindow");
 //	free(lpCandStr);
 //	numCand = 0;
 //	lpCandStr = wcsdup(lpStr);
@@ -271,6 +273,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		watch.start();
 		std::wstring wsCandStr(lpCandStr);
 		_SetCandString(wsCandStr);
+		
 		watch.stop();
 		murmur("%1.3f sec:\tC# candidate window, set string", watch.getSec());
 		murmur("set candidate string:%s", lpCandStr);
@@ -368,12 +371,17 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			//</comment>
 			//InvalidateRect(uiCand.hWnd, NULL, FALSE);
 		}
+
+		//James test
+		if(lpStr)
+			UIShowCandWindow();
 	}
 	
 }
 
 void PaintCandWindow(HWND hCandWnd)
 {
+	murmur("PaintCandWindow");
 //	PAINTSTRUCT ps;
 //	HDC hDC;
 //	HFONT oldFont;
@@ -443,6 +451,7 @@ void PaintCandWindow(HWND hCandWnd)
 
 void UIShowCandWindow()
 {
+	murmur("UIShowCandWindow");
 	if (IsWindow(uiCand.hWnd)) {
 		Watch watch;
 		watch.start();
@@ -454,7 +463,9 @@ void UIShowCandWindow()
 
 void UIHideCandWindow()
 {
+	murmur("HideCandWindow");
 	if (IsWindow(uiCand.hWnd)) {
+		
 		Watch watch;
 		watch.start();
 		_HideCandPage();
