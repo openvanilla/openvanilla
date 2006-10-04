@@ -1,3 +1,4 @@
+#define OV_DEBUG 
 #include "DisplayServer.h"
 #include "OVIME.h"
 
@@ -51,6 +52,7 @@ AVDisplayServer *DisplayServer::setCandiString(const char *str)
 }
 AVDisplayServer *DisplayServer::showNotify(const char *str)
 {
+	murmur("AVDisplayServer *DisplayServer::showNotify");
 	wchar_t wstr[1024];
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
 	UIShowNotifyWindow(wstr);
@@ -63,6 +65,7 @@ AVDisplayServer *DisplayServer::hideNotify()
 }
 AVDisplayServer *DisplayServer::showBuf(bool t)
 {
+	murmur("AVDisplayServer *DisplayServer::showBuf");
 	if(t)
 		UIShowCompWindow();
 	else
@@ -71,10 +74,11 @@ AVDisplayServer *DisplayServer::showBuf(bool t)
 }
 AVDisplayServer *DisplayServer::showCandi(bool t)
 {
-	if(t)
+	murmur("AVDisplayServer *DisplayServer::showCandi");
+	/*if(t)
 		UIShowCandWindow();
 	else
-		UIHideCandWindow();
+		UIHideCandWindow();*/
 	return this;
 }
 AVDisplayServer *DisplayServer::setCursorPos(int i)

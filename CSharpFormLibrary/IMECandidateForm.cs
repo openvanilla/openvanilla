@@ -236,8 +236,18 @@ class UtilFuncs
  
 	public static void SetVisibleNoActivate(Form form, bool visible) 
 	{ 
-		if ( visible ) 
+		/*if ( visible) 
+		{
+			if(!form.Visible)
+			{				
+				ShowWindowTopMost(form.Handle);
+				form.Visible = visible;
+			}
+		}
+		else
+			form.Visible = visible;*/
+		if ( visible) 
 			ShowWindowTopMost(form.Handle);
-		form.Visible = visible;
+		form.Visible = visible;		
 	} 
 }

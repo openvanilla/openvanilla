@@ -106,7 +106,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		// this message occurred.
 		//UIShowCandWindow();
 		//murmur("Also try to do UIShowCandWindow()");
-		//</comment>
+		//</comment>		
 		break;
 		
 	case IMN_SETCOMPOSITIONWINDOW:
@@ -127,7 +127,10 @@ LONG NotifyHandle(HIMC hUICurIMC,
 
 			//dsvr.setBufPos(CompX, CompY)->notify();
 		}
+		
 		murmur("IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
+		//James add
+		//UIMoveCandWindow(hWnd, CompX, CompY, NULL);	//lpMyPrivate->CandStr); by b6s
 		/*
 		if (IsWindow(lpUIExtra->uiComp.hWnd))
 			InvalidateRect(lpUIExtra->uiComp.hWnd,NULL,FALSE);
