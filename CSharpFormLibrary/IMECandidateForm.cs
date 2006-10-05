@@ -53,12 +53,13 @@ namespace CSharpFormLibrary
 			this.lbCandidates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 				| System.Windows.Forms.AnchorStyles.Left) 
 				| System.Windows.Forms.AnchorStyles.Right)));
+			this.lbCandidates.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
 			this.lbCandidates.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.lbCandidates.ImeMode = System.Windows.Forms.ImeMode.NoControl;
 			this.lbCandidates.ItemHeight = 15;
 			this.lbCandidates.Location = new System.Drawing.Point(0, 0);
 			this.lbCandidates.Name = "lbCandidates";
-			this.lbCandidates.Size = new System.Drawing.Size(83, 165);
+			//this.lbCandidates.Size = new System.Drawing.Size(80, 15);
 			this.lbCandidates.TabIndex = 0;
 			this.lbCandidates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lbCandidates_KeyPress);
 			// 
@@ -66,11 +67,13 @@ namespace CSharpFormLibrary
 			// 
 			this.AllowDrop = true;
 			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
-			this.ClientSize = new System.Drawing.Size(82, 160);
+			this.BackColor = System.Drawing.SystemColors.Window;
+			this.ClientSize = new System.Drawing.Size(80, 160);
 			this.Controls.Add(this.lbCandidates);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Location = new System.Drawing.Point(199, 199);
 			this.Name = "IMECandidateForm";
+			this.Opacity = 0;
 			this.ShowInTaskbar = false;
 			this.Text = "Form1";
 			this.ResumeLayout(false);
@@ -85,6 +88,7 @@ namespace CSharpFormLibrary
 		{
 			string[] a_inputs = inputs.Split(' ');
 			if(a_inputs==null) return;			
+			this.lbCandidates.Height=(a_inputs.Length+1)*15;
 			this.ShowListView(a_inputs); // not show, only setstring
 		}
 
