@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "PCMan.h"
+#include "DotNETHeader.h"
+#include <exception>
 
 LRESULT APIENTRY CompWndProc(HWND hWnd,
 		UINT msg,
@@ -38,6 +40,9 @@ void UICreateCompWindow(HWND hUIWnd)
 {
 	if (!IsWindow(uiComp.hWnd))
 	{
+		uiComp.hWnd = _CreateCompPage();
+		
+#if 0
 		HDC hDC;
 		HFONT oldFont;
 		SIZE sz;
@@ -58,13 +63,86 @@ void UICreateCompWindow(HWND hUIWnd)
 
 		uiComp.sz.cx = sz.cx;
 		uiComp.sz.cy = sz.cy + 4;
+#endif
 	}
-	ShowWindow(uiComp.hWnd, SW_HIDE);
+	//ShowWindow(uiComp.hWnd, SW_HIDE);
 	return;
 }
 
 void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 {
+#if 0
+//	free(lpCompStr);
+//	lpCompStr = wcsdup(lpStr);
+//	if( (!lpCompStr || !*lpCompStr) /*!_tcscmp(lpStr, _T(""))*/ )
+//	{
+//		UIHideCompWindow();
+//		return;
+//	}
+//
+//	if (!IsWindow(uiComp.hWnd))
+//		UICreateCompWindow(hUIWnd);
+//
+//	if (IsWindow(uiComp.hWnd))
+//	{
+//		HDC hDC;
+//		HFONT oldFont;
+//		POINT pt;
+//		RECT screenrc;
+//		SIZE sz;
+//
+//		sz.cx = 0;
+//		sz.cy = 0;
+//		uiComp.pt.x = X;
+//		uiComp.pt.y = Y;
+//
+//		if(lpCompStr)
+//		{
+//			hDC = GetDC(uiComp.hWnd);
+//			oldFont = (HFONT)SelectObject(hDC, hUIFont);
+//			GetTextExtentPoint(hDC, lpCompStr, (int)wcslen(lpCompStr), &sz);
+//			SelectObject(hDC, oldFont);
+//			ReleaseDC(uiComp.hWnd, hDC);
+//			if( *lpCompStr )
+//				sz.cx += 4;
+//				sz.cx += 2 * sz.cx / _tcslen(lpCompStr);
+//		}
+//		else
+//		{
+//			UIHideCompWindow();
+//			return;
+//		}
+
+//		if(sz.cx < uiComp.sz.cx)
+//			sz.cx = uiComp.sz.cx;
+
+//		sz.cy = uiComp.sz.cy;
+//		sz.cx += 2;
+
+//		pt.x = uiComp.pt.x;
+//		pt.y = uiComp.pt.y;
+//
+//		SystemParametersInfo(SPI_GETWORKAREA,
+//				0,
+//				&screenrc,
+//				0);
+//
+//		if( (pt.x + sz.cx) > screenrc.right )
+//			pt.x = screenrc.right - sz.cx;
+//		if( (pt.y + sz.cy) > screenrc.bottom )
+//			pt.y = screenrc.bottom - sz.cy;
+//
+//		MoveWindow(uiComp.hWnd,
+//				pt.x,
+//				pt.y,
+//				sz.cx,
+//				sz.cy,
+//				TRUE);
+//		ShowWindow(uiComp.hWnd, SW_SHOWNOACTIVATE);
+//		InvalidateRect(uiComp.hWnd,NULL, FALSE);
+//	}
+#endif
+
 	free(lpCompStr);
 	lpCompStr = wcsdup(lpStr);
 	if( (!lpCompStr || !*lpCompStr) /*!_tcscmp(lpStr, _T(""))*/ )
@@ -97,8 +175,12 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			SelectObject(hDC, oldFont);
 			ReleaseDC(uiComp.hWnd, hDC);
 			if( *lpCompStr )
+			{
 				sz.cx += 4;
+				std::wstring wsCompStr(lpCompStr);
+				_SetCompString(wsCompStr);
 //				sz.cx += 2 * sz.cx / _tcslen(lpCompStr);
+		}
 		}
 		else
 		{
@@ -125,14 +207,10 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		if( (pt.y + sz.cy) > screenrc.bottom )
 			pt.y = screenrc.bottom - sz.cy;
 
-		MoveWindow(uiComp.hWnd,
-				pt.x,
-				pt.y,
-				sz.cx,
-				sz.cy,
-				TRUE);
-		ShowWindow(uiComp.hWnd, SW_SHOWNOACTIVATE);
-		InvalidateRect(uiComp.hWnd,NULL, FALSE);
+		_MoveCompPage(uiComp.pt.x,uiComp.pt.y);
+
+		//UIShowCompWindow();
+		
 	}
 }
 
@@ -152,36 +230,37 @@ int CompIndexToXPos(int index)
 
 void PaintCompWindow(HWND hCompWnd)
 {
-	PAINTSTRUCT ps;
-	HDC hDC;
-	HFONT oldFont;
-	RECT rc;
-	HBRUSH hBrush = (HBRUSH)NULL;
-	HBRUSH hOldBrush = (HBRUSH)NULL;
-	HPEN hPen = (HPEN)NULL;
-	HPEN hOldPen = (HPEN)NULL;
+#if 0
+//	PAINTSTRUCT ps;
+//	HDC hDC;
+//	HFONT oldFont;
+//	RECT rc;
+//	HBRUSH hBrush = (HBRUSH)NULL;
+//	HBRUSH hOldBrush = (HBRUSH)NULL;
+//	HPEN hPen = (HPEN)NULL;
+//	HPEN hOldPen = (HPEN)NULL;
+//
+//	hDC = BeginPaint(hCompWnd,&ps);
 
-	hDC = BeginPaint(hCompWnd,&ps);
+//	GetClientRect(hCompWnd,&rc);
+//	HDC memdc = CreateCompatibleDC( ps.hdc );
+//	HBITMAP membmp = CreateCompatibleBitmap( ps.hdc, rc.right, rc.bottom );
+//	HGDIOBJ oldbmp = SelectObject( memdc, membmp );
 
-	GetClientRect(hCompWnd,&rc);
-	HDC memdc = CreateCompatibleDC( ps.hdc );
-	HBITMAP membmp = CreateCompatibleBitmap( ps.hdc, rc.right, rc.bottom );
-	HGDIOBJ oldbmp = SelectObject( memdc, membmp );
+//	InflateRect( &rc, -1, -1 );
 
-	InflateRect( &rc, -1, -1 );
-
-	oldFont = (HFONT)SelectObject(memdc, hUIFont);
-	if(lpCompStr)
-	{
-		SetTextColor( memdc, GetSysColor( COLOR_WINDOWTEXT ) );
-		SetBkColor( memdc, GetSysColor( COLOR_WINDOW ) );
-		ExtTextOut( memdc, 1, 1, ETO_OPAQUE, &rc, lpCompStr, 
-			lstrlen(lpCompStr), NULL);
-		int selstart = CompIndexToXPos( CompSelStart );
-		int selend = CompIndexToXPos( CompSelEnd );
-		int cursor = CompIndexToXPos( CompCursorPos );
-		BitBlt( memdc, selstart, 0, selend-selstart, rc.bottom, memdc, selstart, 0, NOTSRCCOPY );
-		BitBlt( memdc, cursor, 0, 1, rc.bottom, memdc, cursor, 0, SRCINVERT );
+//	oldFont = (HFONT)SelectObject(memdc, hUIFont);
+//	if(lpCompStr)
+//	{
+//		SetTextColor( memdc, GetSysColor( COLOR_WINDOWTEXT ) );
+//		SetBkColor( memdc, GetSysColor( COLOR_WINDOW ) );
+//		ExtTextOut( memdc, 1, 1, ETO_OPAQUE, &rc, lpCompStr, 
+//			lstrlen(lpCompStr), NULL);
+//		int selstart = CompIndexToXPos( CompSelStart );
+//		int selend = CompIndexToXPos( CompSelEnd );
+//		int cursor = CompIndexToXPos( CompCursorPos );
+//		BitBlt( memdc, selstart, 0, selend-selstart, rc.bottom, memdc, selstart, 0, NOTSRCCOPY );
+//		BitBlt( memdc, cursor, 0, 1, rc.bottom, memdc, cursor, 0, SRCINVERT );
 
 /*		HDC tmpdc = GetDC(NULL);
 		TCHAR debug_info[100];
@@ -189,33 +268,48 @@ void PaintCompWindow(HWND hCompWnd)
 		TextOut( tmpdc, 0, 0, debug_info, lstrlen(debug_info));
 		ReleaseDC( NULL, tmpdc );
 */
+//	}
+
+//	InflateRect( &rc, 1, 1 );
+//	Draw3DBorder( memdc, &rc, GetSysColor(COLOR_3DFACE), 0/*GetSysColor(COLOR_3DDKSHADOW)*/);
+
+//	BitBlt( hDC, ps.rcPaint.left, ps.rcPaint.top, 
+//		(ps.rcPaint.right-ps.rcPaint.left), 
+//		(ps.rcPaint.bottom-ps.rcPaint.top), 
+//		memdc, ps.rcPaint.left, ps.rcPaint.top, SRCCOPY);
+
+//	SelectObject( memdc, oldbmp );
+//	DeleteObject( membmp );
+//	DeleteDC( memdc );
+
+//	SelectObject(memdc, oldFont);
+
+//	EndPaint(hCompWnd,&ps);
+#endif
+	if(lpCompStr)
+	{
+		UIShowCompWindow(); 
+		return;
 	}
-
-	InflateRect( &rc, 1, 1 );
-	Draw3DBorder( memdc, &rc, GetSysColor(COLOR_3DFACE), 0/*GetSysColor(COLOR_3DDKSHADOW)*/);
-
-	BitBlt( hDC, ps.rcPaint.left, ps.rcPaint.top, 
-		(ps.rcPaint.right-ps.rcPaint.left), 
-		(ps.rcPaint.bottom-ps.rcPaint.top), 
-		memdc, ps.rcPaint.left, ps.rcPaint.top, SRCCOPY);
-
-	SelectObject( memdc, oldbmp );
-	DeleteObject( membmp );
-	DeleteDC( memdc );
-
-	SelectObject(memdc, oldFont);
-
-	EndPaint(hCompWnd,&ps);
 }
 
 void UIShowCompWindow()
 {
 	if (IsWindow(uiComp.hWnd))
-		ShowWindow(uiComp.hWnd, SW_SHOWNOACTIVATE);
+	{
+		_ShowCompPage();
+	//	ShowWindow(uiComp.hWnd, SW_SHOWNOACTIVATE);
+	}
 }
 
 void UIHideCompWindow()
 {
 	if (IsWindow(uiComp.hWnd))
-		ShowWindow(uiComp.hWnd, SW_HIDE);
+	{
+		_HideCompPage();
+		_ClearCompPage();
+
+	}
+
+
 }
