@@ -84,6 +84,11 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		
 	case WM_IME_COMPOSITION:
 		murmur("WM_IME_COMPOSITION");
+		//test
+		//MyGenerateMessage(hWnd, WM_IME_NOTIFY, IMN_SETCANDIDATEPOS, 0);
+		
+		//lRet = NotifyHandle(hUICurIMC, hWnd, WM_IME_NOTIFY, IMN_SETCANDIDATEPOS, NULL);
+
 		lpIMC = ImmLockIMC(hUICurIMC);
 		POINT pt;
 		if(CompX < 0) {
@@ -95,7 +100,23 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		}
 		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 		UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
-		UIMoveCandWindow(hWnd, -1, -1, lpMyPrivate->CandStr);
+		//UIMoveCandWindow(hWnd, -1, -1, lpMyPrivate->CandStr);
+		//UIMoveCandWindow(hWnd, CandX,CandY,NULL);
+		UIMoveCandWindow(hWnd, CompX,CompY+20,NULL);
+		if(lpMyPrivate->CandStr)
+		{
+			if(wcslen(lpMyPrivate->CandStr))
+			{
+				UISetCandStr(lpMyPrivate->CandStr);
+				UIShowCandWindow();
+			}
+			else
+				UIHideCandWindow();
+		}
+		else
+		{
+			UIHideCandWindow();
+		}
 		ImmUnlockIMCC(lpIMC->hPrivate);
 		ImmUnlockIMC(hUICurIMC);
 		break;

@@ -33,4 +33,4 @@ EXPORTS
 	_ShowCandPage
 	_MoveCandPage
 	_ClearCandPage
-	
+	UISetCandStr

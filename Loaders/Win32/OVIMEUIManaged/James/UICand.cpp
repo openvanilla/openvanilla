@@ -4,8 +4,9 @@
 #include "AVDictionary.h"
 #include "AVConfig.h"
 #include "DotNETHeader.h"
+//#include "OVIME.h"
 
-#define		ITEMS_PER_ROW	4
+#define	ITEMS_PER_ROW	4
 
 
 
@@ -112,120 +113,35 @@ BOOL GetCandPosFromCompWnd(LPSIZE lpsz)
 	}
 	return FALSE;
 }
+void UISetCandStr(wchar_t* lpStr)
+{
+	lpCandStr = wcsdup(lpStr);
+	std::wstring wsCandStr(lpCandStr);
+	_SetCandString(wsCandStr);
+}
 
 void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 {
-	murmur("UIMoveCandWindow");
-//	free(lpCandStr);
-//	numCand = 0;
-//	lpCandStr = wcsdup(lpStr);
-//	if( !*lpStr )
-//	{
-//		UIHideCandWindow();
-//		return;
-//	}
-//
-//	if (!IsWindow(uiCand.hWnd))
-//		UICreateCandWindow(hUIWnd);
-//
-//	// FIXME: UIMoveCandWindow will be called twice almost at the same time.
-//	// The first call cause some problems.
-//	// This should be fixed in the future.
-//	// It's impossible to have lpStr != NULL and lpCompStr ==NULL.
-//	// Since there is no composition string, is candidate window needed?
-////	if( !lpCompStr || !*lpCompStr )
-////		return;
-//
-//	if (IsWindow(uiCand.hWnd))
-//	{
-//		HDC hDC;
-//		HFONT oldFont;
-//		SIZE sz;
-//		SIZE candsz;
-//
-//		sz.cx = 0;
-//		sz.cy = 0;
-//
-//		AVConfig cfg;
-//		AVDictionary *dict = AVDictionary::getDict(cfg.getUserDir(), "OVIMEUI");
-//		int items_per_row = dict->keyExist("items_per_row") ? dict->getInteger("items_per_row") : ITEMS_PER_ROW;
-//
-//		// No Cand
-//		if(lpStr == NULL) {
-//			ShowWindow(uiCand.hWnd, SW_HIDE);
-//			return;
-//		}
-//		hDC = GetDC(uiCand.hWnd);
-//		oldFont = (HFONT)SelectObject(hDC, hUIFont);
-//
-//		LPCTSTR cand = wcstok( lpCandStr, L" ");	// strtok, delimited by space
-//
-//		int num = 0;
-//		int width = 0;
-//		while( cand )
-//		{
-//			++numCand;
-//			int len = (int)wcslen( cand );
-//			GetTextExtentPoint32(hDC, cand, len, &candsz);
-//			candsz.cx += 4;
-//			candsz.cy += 2;
-//			width += candsz.cx;
-//			++num;
-//			if( num >= items_per_row )
-//			{
-//				sz.cy += candsz.cy;
-//				if( width > sz.cx )
-//					sz.cx = width;
-//				width = 0;
-//				num = 0;
-//			}
-//			cand = wcstok( NULL, L" " );
-//		}
-//		if( width > sz.cx )
-//			sz.cx = width;
-//		if( num > 0 && num < items_per_row )
-//			sz.cy += candsz.cy;
-//
-//		sz.cy += 2;
-//		sz.cx += 2;
-//
-//		SelectObject(hDC, oldFont);
-//		ReleaseDC(uiCand.hWnd,hDC);
-//
-//		if( X > 0 && Y > 0)
-//		{
-//			RECT screenrc;
-//			SystemParametersInfo(SPI_GETWORKAREA,
-//					0,
-//					&screenrc,
-//					0);
-//			if( (X + sz.cx) > screenrc.right)
-//				X = screenrc.right - sz.cx - 5;//rc.left - lpsz->cx - 5;
-//			if( (Y + sz.cy) > screenrc.bottom)
-//				Y = screenrc.bottom - sz.cy;
-//			uiCand.pt.x = X;
-//			uiCand.pt.y = Y;
-//			MoveWindow(uiCand.hWnd,
-//				uiCand.pt.x,
-//				uiCand.pt.y,
-//				sz.cx,
-//				sz.cy,
-//				TRUE);
-//			//ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
-//			InvalidateRect(uiCand.hWnd, NULL, FALSE);
-//		}
-//		else if( GetCandPosFromCompWnd(&sz) )
-//		{
-//			MoveWindow(uiCand.hWnd,
-//				uiCand.pt.x,
-//				uiCand.pt.y,
-//				sz.cx,
-//				sz.cy,
-//				TRUE);
-//			//ShowWindow(uiCand.hWnd, SW_SHOWNOACTIVATE);
-//			InvalidateRect(uiCand.hWnd, NULL, FALSE);
-//		}
-//	}
+	int newX=X+CompCursorPos*16;
+	int newY=Y;
+
+	murmur("UIMoveCandWindow");		
+	if (IsWindow(uiCand.hWnd))
+	{		
+		RECT screenrc;
+		SystemParametersInfo(SPI_GETWORKAREA,0,&screenrc,0);
+		if( newX+100 > screenrc.right )
+			newX=screenrc.right-100;
+		if( newY+200 > screenrc.bottom )			
+			newY=Y-190;
+		_MoveCandPage(newX,newY);	
+	}	
+}
+
+void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
+{
+	murmur("UIMoveCandWindow_OLD");
+
 	//James
 	free(lpCandStr);
 	lpCandStr = wcsdup(lpStr);

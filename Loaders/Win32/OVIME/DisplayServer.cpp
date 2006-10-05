@@ -75,6 +75,7 @@ AVDisplayServer *DisplayServer::showBuf(bool t)
 AVDisplayServer *DisplayServer::showCandi(bool t)
 {
 	murmur("AVDisplayServer *DisplayServer::showCandi");
+	//james test
 	/*if(t)
 		UIShowCandWindow();
 	else

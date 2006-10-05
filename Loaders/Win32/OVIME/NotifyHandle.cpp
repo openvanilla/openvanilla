@@ -81,7 +81,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		UIShowStatusWindow();
 		break;
 		
-	case IMN_SETCANDIDATEPOS:
+	case IMN_SETCANDIDATEPOS: // set candidate position , but no move
 		{
 			murmur("IMN_SETCANDIDATEPOS");
 			POINT ptSrc;
@@ -94,7 +94,10 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
 			ReleaseDC(lpIMC->hWnd,hDC);
 			LPMYPRIVATE lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-			UIMoveCandWindow(lpIMC->hWnd, ptSrc.x +szOffset.cx, ptSrc.y + szOffset.cy, lpMyPrivate->CandStr);
+			//James modify
+			CandX=ptSrc.x +szOffset.cx;
+			CandY=ptSrc.y + szOffset.cy;
+			//UIMoveCandWindow(lpIMC->hWnd, CompX+20,CompY+20, lpMyPrivate->CandStr);
 			ImmUnlockIMCC(lpIMC->hPrivate);
 		}
 		break;
@@ -109,7 +112,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		//</comment>		
 		break;
 		
-	case IMN_SETCOMPOSITIONWINDOW:
+	case IMN_SETCOMPOSITIONWINDOW:    // set composition window position, move
 		{
 			murmur("IMN_SETCOMPOSITIONWINDOW");
 			POINT ptSrc;
@@ -122,9 +125,13 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
 			ReleaseDC(lpIMC->hWnd,hDC);
 
-			CompX = ptSrc.x + szOffset.cx;
-			CompY = ptSrc.y + szOffset.cy;
-
+			//James modified
+			//CompX = ptSrc.x + szOffset.cx;
+			//CompY = ptSrc.y + szOffset.cy;			
+			CompX = ptSrc.x ;
+			CompY = ptSrc.y ;
+			//set candi
+			
 			//dsvr.setBufPos(CompX, CompY)->notify();
 		}
 		

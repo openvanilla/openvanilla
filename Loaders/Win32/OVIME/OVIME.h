@@ -17,6 +17,10 @@
 extern HINSTANCE hInst;
 extern int CompX;
 extern int CompY;
+//James add
+extern int CandX;
+extern int CandY;
+
 extern bool isChinese;
 extern bool isFullShape;
 extern DisplayServer *dsvr;
