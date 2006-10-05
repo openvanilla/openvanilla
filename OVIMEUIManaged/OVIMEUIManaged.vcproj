@@ -176,6 +176,9 @@
 					RelativePath=".\James\NewUICand.cpp">
 				</File>
 				<File
+					RelativePath=".\James\NewUIComp.cpp">
+				</File>
+				<File
 					RelativePath=".\James\PCMan.cpp">
 					<FileConfiguration
 						Name="Debug|Win32">
