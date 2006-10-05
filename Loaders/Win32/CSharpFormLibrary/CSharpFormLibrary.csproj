@@ -108,6 +108,21 @@
                     DependentUpon = "IMECandidateForm.cs"
                     BuildAction = "EmbeddedResource"
                 />
+                <File
+                    RelPath = "IMECompForm.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "IMECompForm.resx"
+                    DependentUpon = "IMECompForm.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "UtilFuncs.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
             </Include>
         </Files>
     </CSHARP>
