@@ -219,7 +219,7 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			newX=screenrc.right-100;
 		if( newY+200 > screenrc.bottom )			
 			newY=Y-190;
-		_MoveCandPage(newX,newY);	
+		_MoveCompPage(newX,newY);	
 	}	
 		//UIShowCompWindow();
 		
