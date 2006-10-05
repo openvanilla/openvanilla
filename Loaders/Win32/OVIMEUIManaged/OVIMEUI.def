@@ -34,3 +34,9 @@ EXPORTS
 	_MoveCandPage
 	_ClearCandPage
 	UISetCandStr
+	_CreateCompPage
+	_ShowCompPage
+	_HideCompPage
+	_ClearCompPage
+	_MoveCompPage
+	_SetCompString
