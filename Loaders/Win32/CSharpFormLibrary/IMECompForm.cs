@@ -56,8 +56,9 @@ namespace CSharpFormLibrary
 			// 
 			// textBox1
 			// 
-			this.textBox1.Location = new System.Drawing.Point(8, 8);
+			this.textBox1.Location = new System.Drawing.Point(0, 0);
 			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(184, 22);
 			this.textBox1.TabIndex = 0;
 			this.textBox1.Text = "textBox1";
 			// 
@@ -65,7 +66,7 @@ namespace CSharpFormLibrary
 			// 
 			this.AllowDrop = true;
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
-			this.ClientSize = new System.Drawing.Size(304, 48);
+			this.ClientSize = new System.Drawing.Size(200, 24);
 			this.Controls.Add(this.textBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "IMECompForm";
