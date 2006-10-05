@@ -35,6 +35,7 @@ void UICreateCompWindow(HWND);
 void UIMoveCompWindow(HWND, int, int, wchar_t*);
 void UIShowCompWindow();
 void UIHideCompWindow();
+void UISetCompStr(wchar_t*);
 // UICand.cpp
 void UICreateCandWindow(HWND);
 void UIMoveCandWindow(HWND, int, int, wchar_t*);

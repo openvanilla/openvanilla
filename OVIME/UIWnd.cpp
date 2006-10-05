@@ -102,6 +102,21 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 		//UIMoveCandWindow(hWnd, -1, -1, lpMyPrivate->CandStr);
 		//UIMoveCandWindow(hWnd, CandX,CandY,NULL);
+		if(lpMyPrivate->PreEditStr)
+		{
+			if(wcslen(lpMyPrivate->PreEditStr))
+			{
+				UISetCompStr(lpMyPrivate->PreEditStr);
+				UIShowCompWindow();
+			}
+			else
+				UIHideCompWindow();
+		}
+		else
+		{
+			UIHideCompWindow();
+		}
+
 		UIMoveCandWindow(hWnd, CompX,CompY+20,NULL);
 		if(lpMyPrivate->CandStr)
 		{

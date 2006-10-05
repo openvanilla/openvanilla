@@ -143,77 +143,94 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 //	}
 #endif
 
-	free(lpCompStr);
-	lpCompStr = wcsdup(lpStr);
-	if( (!lpCompStr || !*lpCompStr) /*!_tcscmp(lpStr, _T(""))*/ )
-	{
-		UIHideCompWindow();
-		return;
-	}
+//	free(lpCompStr);
+//	lpCompStr = wcsdup(lpStr);
+//	if( (!lpCompStr || !*lpCompStr) /*!_tcscmp(lpStr, _T(""))*/ )
+//	{
+//		UIHideCompWindow();
+//		return;
+//	}
 
-	if (!IsWindow(uiComp.hWnd))
-		UICreateCompWindow(hUIWnd);
+//	if (!IsWindow(uiComp.hWnd))
+//		UICreateCompWindow(hUIWnd);
 
-	if (IsWindow(uiComp.hWnd))
-	{
-		HDC hDC;
-		HFONT oldFont;
-		POINT pt;
-		RECT screenrc;
-		SIZE sz;
+//	if (IsWindow(uiComp.hWnd))
+//	{
+//		HDC hDC;
+//		HFONT oldFont;
+//		POINT pt;
+//		RECT screenrc;
+//		SIZE sz;
 
-		sz.cx = 0;
-		sz.cy = 0;
-		uiComp.pt.x = X;
-		uiComp.pt.y = Y;
+//		sz.cx = 0;
+//		sz.cy = 0;
+//		uiComp.pt.x = X;
+//		uiComp.pt.y = Y;
 
-		if(lpCompStr)
-		{
-			hDC = GetDC(uiComp.hWnd);
-			oldFont = (HFONT)SelectObject(hDC, hUIFont);
-			GetTextExtentPoint(hDC, lpCompStr, (int)wcslen(lpCompStr), &sz);
-			SelectObject(hDC, oldFont);
-			ReleaseDC(uiComp.hWnd, hDC);
-			if( *lpCompStr )
+//		if(lpCompStr)
+//		{
+//			hDC = GetDC(uiComp.hWnd);
+//			oldFont = (HFONT)SelectObject(hDC, hUIFont);
+//			GetTextExtentPoint(hDC, lpCompStr, (int)wcslen(lpCompStr), &sz);
+//			SelectObject(hDC, oldFont);
+//			ReleaseDC(uiComp.hWnd, hDC);
+//			if( *lpCompStr )
 			{
-				sz.cx += 4;
-				std::wstring wsCompStr(lpCompStr);
-				_SetCompString(wsCompStr);
+//				sz.cx += 4;
+//				std::wstring wsCompStr(lpCompStr);
+//				_SetCompString(wsCompStr);
 //				sz.cx += 2 * sz.cx / _tcslen(lpCompStr);
-		}
-		}
-		else
-		{
-			UIHideCompWindow();
-			return;
-		}
+				
+//			}
+//		}
+//		else
+//		{
+//			UIHideCompWindow();
+//			return;
+//		}
 
 //		if(sz.cx < uiComp.sz.cx)
 //			sz.cx = uiComp.sz.cx;
 
-		sz.cy = uiComp.sz.cy;
-		sz.cx += 2;
+		//sz.cy = uiComp.sz.cy;
+		//sz.cx += 2;
 
-		pt.x = uiComp.pt.x;
-		pt.y = uiComp.pt.y;
+		//pt.x = uiComp.pt.x;
+		//pt.y = uiComp.pt.y;
 
-		SystemParametersInfo(SPI_GETWORKAREA,
-				0,
-				&screenrc,
-				0);
+		//SystemParametersInfo(SPI_GETWORKAREA,
+		//		0,
+		//		&screenrc,
+		//		0);
 
-		if( (pt.x + sz.cx) > screenrc.right )
-			pt.x = screenrc.right - sz.cx;
-		if( (pt.y + sz.cy) > screenrc.bottom )
-			pt.y = screenrc.bottom - sz.cy;
+		//if( (pt.x + sz.cx) > screenrc.right )
+		//	pt.x = screenrc.right - sz.cx;
+		//if( (pt.y + sz.cy) > screenrc.bottom )
+		//	pt.y = screenrc.bottom - sz.cy;
+	int newX=X;
+	int newY=Y;
 
-		_MoveCompPage(uiComp.pt.x,uiComp.pt.y);
-
+	murmur("UIMoveCompWindow");		
+	if (IsWindow(uiCand.hWnd))
+	{		
+		RECT screenrc;
+		SystemParametersInfo(SPI_GETWORKAREA,0,&screenrc,0);
+		if( newX+100 > screenrc.right )
+			newX=screenrc.right-100;
+		if( newY+200 > screenrc.bottom )			
+			newY=Y-190;
+		_MoveCandPage(newX,newY);	
+	}	
 		//UIShowCompWindow();
 		
 	}
 }
-
+void UISetCompStr(wchar_t* lpStr)
+{
+	lpCompStr = wcsdup(lpStr);
+	std::wstring wsCompStr(lpCompStr);
+	_SetCompString(wsCompStr);
+}
 
 int CompIndexToXPos(int index)
 {
