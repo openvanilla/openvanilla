@@ -40,3 +40,4 @@ EXPORTS
 	_ClearCompPage
 	_MoveCompPage
 	_SetCompString
+	UISetCompStr
