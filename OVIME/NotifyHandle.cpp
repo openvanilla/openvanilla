@@ -113,30 +113,29 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 		
 	case IMN_SETCOMPOSITIONWINDOW:    // set composition window position, move
-		{
-			murmur("IMN_SETCOMPOSITIONWINDOW");
-			POINT ptSrc;
-			SIZE szOffset;
-			HDC hDC;
 
-			ptSrc = lpIMC->cfCompForm.ptCurrentPos;
-			ClientToScreen(lpIMC->hWnd, &ptSrc);
-			hDC = GetDC(lpIMC->hWnd);
-			GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
-			ReleaseDC(lpIMC->hWnd,hDC);
+		//murmur("IMN_SETCOMPOSITIONWINDOW");
+		POINT ptSrc;
+		SIZE szOffset;
+		HDC hDC;
 
-			//James modified
-			//CompX = ptSrc.x + szOffset.cx;
-			//CompY = ptSrc.y + szOffset.cy;			
-			CompX = ptSrc.x ;
-			CompY = ptSrc.y ;
-			//set candi
-			
-			//dsvr.setBufPos(CompX, CompY)->notify();
-		}
+		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
+		ClientToScreen(lpIMC->hWnd, &ptSrc);
+		hDC = GetDC(lpIMC->hWnd);
+		GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
+		ReleaseDC(lpIMC->hWnd,hDC);
+
+		//James modified
+		//CompX = ptSrc.x + szOffset.cx;
+		//CompY = ptSrc.y + szOffset.cy;			
+		CompX = ptSrc.x ;
+		CompY = ptSrc.y ;		
+		UIMoveCompWindow(hWnd, CompX, CompY,NULL);
+		UIMoveCandWindow(hWnd, CompX,CompY+20,NULL);
+		//dsvr.setBufPos(CompX, CompY)->notify();
 		
 		murmur("IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
-		//James add
+		
 		//UIMoveCandWindow(hWnd, CompX, CompY, NULL);	//lpMyPrivate->CandStr); by b6s
 		/*
 		if (IsWindow(lpUIExtra->uiComp.hWnd))
