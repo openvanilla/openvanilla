@@ -97,7 +97,12 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			//James modify
 			CandX=ptSrc.x +szOffset.cx;
 			CandY=ptSrc.y + szOffset.cy;
-			//UIMoveCandWindow(lpIMC->hWnd, CompX+20,CompY+20, lpMyPrivate->CandStr);
+			//<comment author='b6s'>For the Search Text Field of Firefox
+			UIMoveCandWindow(lpIMC->hWnd, CandX, CandY, lpMyPrivate->CandStr);
+			murmur("hello firefox: (%d, %d)", CandX, CandY);
+			UISetCandStr(lpMyPrivate->CandStr);
+			UIShowCandWindow();			
+			//</comment>
 			ImmUnlockIMCC(lpIMC->hPrivate);
 		}
 		break;
