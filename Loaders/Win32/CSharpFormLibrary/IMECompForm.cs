@@ -56,17 +56,22 @@ namespace CSharpFormLibrary
 			// 
 			// textBox1
 			// 
+			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+				| System.Windows.Forms.AnchorStyles.Left) 
+				| System.Windows.Forms.AnchorStyles.Right)));
+			this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.textBox1.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.textBox1.Location = new System.Drawing.Point(0, 0);
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(184, 22);
+			this.textBox1.Size = new System.Drawing.Size(184, 24);
 			this.textBox1.TabIndex = 0;
 			this.textBox1.Text = "textBox1";
 			// 
 			// IMECompForm
 			// 
 			this.AllowDrop = true;
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
-			this.ClientSize = new System.Drawing.Size(200, 24);
+			this.AutoScaleBaseSize = new System.Drawing.Size(6, 24);
+			this.ClientSize = new System.Drawing.Size(248, 24);
 			this.Controls.Add(this.textBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "IMECompForm";
