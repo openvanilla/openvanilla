@@ -21,7 +21,7 @@ namespace CSharpFormLibrary
 		{
 			InitializeComponent();
 			baseSize = this.lbCandidates.Location.Y+100;
-			this.Opacity = 0.75;
+			this.Opacity = 0.85;
 		}
 		public IMECandidateForm(string[] candidates)
 		{
@@ -59,7 +59,7 @@ namespace CSharpFormLibrary
 			this.lbCandidates.ItemHeight = 15;
 			this.lbCandidates.Location = new System.Drawing.Point(0, 0);
 			this.lbCandidates.Name = "lbCandidates";
-			//this.lbCandidates.Size = new System.Drawing.Size(80, 15);
+			this.lbCandidates.Size = new System.Drawing.Size(120, 90);
 			this.lbCandidates.TabIndex = 0;
 			this.lbCandidates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lbCandidates_KeyPress);
 			// 

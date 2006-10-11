@@ -58,9 +58,51 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 				murmur("lpIMC:%p", lpIMC);
 				if (lpIMC)
 				{
+					//James add
+					POINT pt;
+					if(CompX < 0)
+					{
+						pt.x = 15;
+						pt.y = 15;
+						ClientToScreen(lpIMC->hWnd, &pt);
+						CompX = pt.x;
+						CompY = pt.y;
+					}
+
 					lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-					UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
-					UIMoveCandWindow(hWnd, -1, -1, NULL);	//lpMyPrivate->CandStr); by b6s
+					//UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
+					//UIMoveCandWindow(hWnd, -1, -1, NULL);	//lpMyPrivate->CandStr); by b6s
+					if(lpMyPrivate->PreEditStr)
+					{
+						if(wcslen(lpMyPrivate->PreEditStr))
+						{
+							UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
+							UISetCompStr(lpMyPrivate->PreEditStr);
+							UIShowCompWindow();
+						}
+						else
+							UIHideCompWindow();
+					}
+					else
+					{
+						UIHideCompWindow();
+					}
+
+					if(lpMyPrivate->CandStr)
+					{
+						if(wcslen(lpMyPrivate->CandStr))
+						{
+							UIMoveCandWindow(hWnd, CompX,CompY+20,NULL);
+							UISetCandStr(lpMyPrivate->CandStr);
+							UIShowCandWindow();
+						}
+						else
+							UIHideCandWindow();
+					}
+					else
+					{
+						UIHideCandWindow();
+					}
 					ImmUnlockIMCC(lpIMC->hPrivate);
 				}
 				else
@@ -77,16 +119,16 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			}
 		}
 		break;
-		
+
 	case WM_IME_STARTCOMPOSITION:
 		murmur("WM_IME_STARTCOMPOSITION");
 		break;
-		
+
 	case WM_IME_COMPOSITION:
 		murmur("WM_IME_COMPOSITION");
 		//test
 		//MyGenerateMessage(hWnd, WM_IME_NOTIFY, IMN_SETCANDIDATEPOS, 0);
-		
+
 		//lRet = NotifyHandle(hUICurIMC, hWnd, WM_IME_NOTIFY, IMN_SETCANDIDATEPOS, NULL);
 
 		lpIMC = ImmLockIMC(hUICurIMC);
@@ -98,14 +140,14 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			CompX = pt.x;
 			CompY = pt.y;
 		}
-		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-		UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
+		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
 		//UIMoveCandWindow(hWnd, -1, -1, lpMyPrivate->CandStr);
 		//UIMoveCandWindow(hWnd, CandX,CandY,NULL);
 		if(lpMyPrivate->PreEditStr)
 		{
 			if(wcslen(lpMyPrivate->PreEditStr))
 			{
+				UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 				UISetCompStr(lpMyPrivate->PreEditStr);
 				UIShowCompWindow();
 			}
@@ -116,12 +158,12 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		{
 			UIHideCompWindow();
 		}
-
-		UIMoveCandWindow(hWnd, CompX,CompY+20,NULL);
+		
 		if(lpMyPrivate->CandStr)
 		{
 			if(wcslen(lpMyPrivate->CandStr))
 			{
+				UIMoveCandWindow(hWnd, CompX,CompY+20,NULL);
 				UISetCandStr(lpMyPrivate->CandStr);
 				UIShowCandWindow();
 			}

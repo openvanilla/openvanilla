@@ -18,6 +18,7 @@ LRESULT APIENTRY CandWndProc(HWND hWnd,
 	switch (msg)
 	{
 		case WM_PAINT:
+			murmur("PAINT candidate msg");
 			PaintCandWindow(hWnd);
 			break;
 
@@ -115,17 +116,25 @@ BOOL GetCandPosFromCompWnd(LPSIZE lpsz)
 }
 void UISetCandStr(wchar_t* lpStr)
 {
+	Watch watch;
+	watch.start();
+	_ClearCandPage();
+	watch.stop();
+	murmur("%1.3f sec:\tC# candidate window, clear", watch.getSec());
+		
 	lpCandStr = wcsdup(lpStr);
 	std::wstring wsCandStr(lpCandStr);
+	watch.start();
 	_SetCandString(wsCandStr);
+	watch.stop();
+	murmur("%1.3f sec:\tC# candidate window, set string", watch.getSec());
+
 }
 
 void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
-{
+{	
 	int newX=X+CompCursorPos*16;
-	int newY=Y;
-
-	murmur("UIMoveCandWindow");		
+	int newY=Y;		
 	if (IsWindow(uiCand.hWnd))
 	{		
 		RECT screenrc;
@@ -134,8 +143,12 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			newX=screenrc.right-100;
 		if( newY+200 > screenrc.bottom )			
 			newY=Y-190;
-		_MoveCandPage(newX,newY);	
-	}	
+		Watch watch;
+		watch.start();
+		_MoveCandPage(newX,newY);				
+		watch.stop();
+		murmur("%1.3f sec:\tC# candidate window, move to (%d,%d)", watch.getSec(),newX,newY);
+	}		
 }
 
 void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
@@ -379,7 +392,7 @@ void UIShowCandWindow()
 
 void UIHideCandWindow()
 {
-	murmur("HideCandWindow");
+	murmur("UIHideCandWindow");
 	if (IsWindow(uiCand.hWnd)) {
 		
 		Watch watch;
@@ -388,9 +401,10 @@ void UIHideCandWindow()
 		watch.stop();
 		murmur("%1.3f sec:\tC# candidate window, hide", watch.getSec());
 
-		watch.start();
+		//把clear移到setcandstr開始的時候
+		/*watch.start();
 		_ClearCandPage();
 		watch.stop();
-		murmur("%1.3f sec:\tC# candidate window, clear", watch.getSec());
+		murmur("%1.3f sec:\tC# candidate window, clear", watch.getSec());*/
 	}
 }
