@@ -39,7 +39,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	switch (msg)
 	{
 		murmur("UIMSG");
-	case WM_CREATE:
+	case WM_CREATE:  
 		murmur("WM_CREATE");
 		CompX = CompY = -1;
 		UICreateCompWindow(hWnd);
@@ -70,8 +70,6 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 					}
 
 					lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-					//UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
-					//UIMoveCandWindow(hWnd, -1, -1, NULL);	//lpMyPrivate->CandStr); by b6s
 					if(lpMyPrivate->PreEditStr)
 					{
 						if(wcslen(lpMyPrivate->PreEditStr))
@@ -107,6 +105,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 				}
 				else
 				{
+					murmur("hUICurIMC=NULL");
 					UIHideCandWindow();
 					UIHideCompWindow();
 				}
@@ -117,6 +116,12 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 				UIHideCandWindow();
 				UIHideCompWindow();
 			}
+		}
+		else //若把這個else拿掉 則切換視窗c# form 不會消失
+		{
+			murmur("wParam=NULL");
+			UIHideCandWindow();
+			UIHideCompWindow();
 		}
 		break;
 
@@ -141,8 +146,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			CompY = pt.y;
 		}
 		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
-		//UIMoveCandWindow(hWnd, -1, -1, lpMyPrivate->CandStr);
-		//UIMoveCandWindow(hWnd, CandX,CandY,NULL);
+
 		if(lpMyPrivate->PreEditStr)
 		{
 			if(wcslen(lpMyPrivate->PreEditStr))
@@ -199,7 +203,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		
 		
 	case WM_IME_NOTIFY:
-		murmur("WM_IME_NOTIFY");
+		murmur("WM_IME_NOTIFY: %p",wParam);
 		lRet = NotifyHandle(hUICurIMC, hWnd, msg, wParam, lParam);
 		break;
 		

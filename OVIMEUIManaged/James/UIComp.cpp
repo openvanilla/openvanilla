@@ -11,6 +11,7 @@ LRESULT APIENTRY CompWndProc(HWND hWnd,
 	switch (msg)
 	{
 		case WM_PAINT:
+			murmur("WM_PAINT, composition window");
 			PaintCompWindow( hWnd);
 			break;
 		case WM_ERASEBKGND:
@@ -249,37 +250,38 @@ int CompIndexToXPos(int index)
 
 void PaintCompWindow(HWND hCompWnd)
 {
+	murmur("PaintCompWindow");
 #if 0
-//	PAINTSTRUCT ps;
-//	HDC hDC;
-//	HFONT oldFont;
-//	RECT rc;
-//	HBRUSH hBrush = (HBRUSH)NULL;
-//	HBRUSH hOldBrush = (HBRUSH)NULL;
-//	HPEN hPen = (HPEN)NULL;
-//	HPEN hOldPen = (HPEN)NULL;
-//
-//	hDC = BeginPaint(hCompWnd,&ps);
+	PAINTSTRUCT ps;
+	HDC hDC;
+	HFONT oldFont;
+	RECT rc;
+	HBRUSH hBrush = (HBRUSH)NULL;
+	HBRUSH hOldBrush = (HBRUSH)NULL;
+	HPEN hPen = (HPEN)NULL;
+	HPEN hOldPen = (HPEN)NULL;
 
-//	GetClientRect(hCompWnd,&rc);
-//	HDC memdc = CreateCompatibleDC( ps.hdc );
-//	HBITMAP membmp = CreateCompatibleBitmap( ps.hdc, rc.right, rc.bottom );
-//	HGDIOBJ oldbmp = SelectObject( memdc, membmp );
+	hDC = BeginPaint(hCompWnd,&ps);
 
-//	InflateRect( &rc, -1, -1 );
+	GetClientRect(hCompWnd,&rc);
+	HDC memdc = CreateCompatibleDC( ps.hdc );
+	HBITMAP membmp = CreateCompatibleBitmap( ps.hdc, rc.right, rc.bottom );
+	HGDIOBJ oldbmp = SelectObject( memdc, membmp );
 
-//	oldFont = (HFONT)SelectObject(memdc, hUIFont);
-//	if(lpCompStr)
-//	{
-//		SetTextColor( memdc, GetSysColor( COLOR_WINDOWTEXT ) );
-//		SetBkColor( memdc, GetSysColor( COLOR_WINDOW ) );
-//		ExtTextOut( memdc, 1, 1, ETO_OPAQUE, &rc, lpCompStr, 
-//			lstrlen(lpCompStr), NULL);
-//		int selstart = CompIndexToXPos( CompSelStart );
-//		int selend = CompIndexToXPos( CompSelEnd );
-//		int cursor = CompIndexToXPos( CompCursorPos );
-//		BitBlt( memdc, selstart, 0, selend-selstart, rc.bottom, memdc, selstart, 0, NOTSRCCOPY );
-//		BitBlt( memdc, cursor, 0, 1, rc.bottom, memdc, cursor, 0, SRCINVERT );
+	InflateRect( &rc, -1, -1 );
+
+	oldFont = (HFONT)SelectObject(memdc, hUIFont);
+	if(lpCompStr)
+	{
+		SetTextColor( memdc, GetSysColor( COLOR_WINDOWTEXT ) );
+		SetBkColor( memdc, GetSysColor( COLOR_WINDOW ) );
+		ExtTextOut( memdc, 1, 1, ETO_OPAQUE, &rc, lpCompStr, 
+			lstrlen(lpCompStr), NULL);
+		int selstart = CompIndexToXPos( CompSelStart );
+		int selend = CompIndexToXPos( CompSelEnd );
+		int cursor = CompIndexToXPos( CompCursorPos );
+		BitBlt( memdc, selstart, 0, selend-selstart, rc.bottom, memdc, selstart, 0, NOTSRCCOPY );
+		BitBlt( memdc, cursor, 0, 1, rc.bottom, memdc, cursor, 0, SRCINVERT );
 
 /*		HDC tmpdc = GetDC(NULL);
 		TCHAR debug_info[100];
@@ -287,29 +289,30 @@ void PaintCompWindow(HWND hCompWnd)
 		TextOut( tmpdc, 0, 0, debug_info, lstrlen(debug_info));
 		ReleaseDC( NULL, tmpdc );
 */
-//	}
+	}
 
-//	InflateRect( &rc, 1, 1 );
-//	Draw3DBorder( memdc, &rc, GetSysColor(COLOR_3DFACE), 0/*GetSysColor(COLOR_3DDKSHADOW)*/);
+	InflateRect( &rc, 1, 1 );
+	Draw3DBorder( memdc, &rc, GetSysColor(COLOR_3DFACE), 0/*GetSysColor(COLOR_3DDKSHADOW)*/);
 
-//	BitBlt( hDC, ps.rcPaint.left, ps.rcPaint.top, 
-//		(ps.rcPaint.right-ps.rcPaint.left), 
-//		(ps.rcPaint.bottom-ps.rcPaint.top), 
-//		memdc, ps.rcPaint.left, ps.rcPaint.top, SRCCOPY);
+	BitBlt( hDC, ps.rcPaint.left, ps.rcPaint.top, 
+		(ps.rcPaint.right-ps.rcPaint.left), 
+		(ps.rcPaint.bottom-ps.rcPaint.top), 
+		memdc, ps.rcPaint.left, ps.rcPaint.top, SRCCOPY);
 
-//	SelectObject( memdc, oldbmp );
-//	DeleteObject( membmp );
-//	DeleteDC( memdc );
+	SelectObject( memdc, oldbmp );
+	DeleteObject( membmp );
+	DeleteDC( memdc );
 
-//	SelectObject(memdc, oldFont);
+	SelectObject(memdc, oldFont);
 
-//	EndPaint(hCompWnd,&ps);
+	EndPaint(hCompWnd,&ps);
 #endif
+	/*
 	if(lpCompStr)
 	{
 		UIShowCompWindow(); 
 		return;
-	}
+	}*/
 }
 
 void UIShowCompWindow()

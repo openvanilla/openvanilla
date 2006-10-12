@@ -40,9 +40,9 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		//<comment author='b6s'>
 		// When attached app lost focus, only this message occurred,
 		// so it must also hide following windows.
-		UIHideCompWindow();
+		/*UIHideCompWindow();
 		UIHideCandWindow();
-		UIHideNotifyWindow();
+		UIHideNotifyWindow();*/
 		//</comment>
 		break;
 
@@ -98,11 +98,26 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			CandX=ptSrc.x +szOffset.cx;
 			CandY=ptSrc.y + szOffset.cy;
 			//<comment author='b6s'>For the Search Text Field of Firefox
-			UIMoveCandWindow(lpIMC->hWnd, CandX, CandY, lpMyPrivate->CandStr);
+			/*UIMoveCandWindow(lpIMC->hWnd, CandX, CandY, lpMyPrivate->CandStr);
 			murmur("hello firefox: (%d, %d)", CandX, CandY);
 			UISetCandStr(lpMyPrivate->CandStr);
-			UIShowCandWindow();			
+			UIShowCandWindow();			*/
 			//</comment>
+			if(lpMyPrivate->CandStr)
+			{
+				if(wcslen(lpMyPrivate->CandStr))
+				{
+					UIMoveCandWindow(hWnd, CandX,CandY,NULL);
+					UISetCandStr(lpMyPrivate->CandStr);
+					UIShowCandWindow();
+				}
+				else
+					UIHideCandWindow();
+			}
+			else
+			{
+				UIHideCandWindow();
+			}
 			ImmUnlockIMCC(lpIMC->hPrivate);
 		}
 		break;
@@ -118,28 +133,50 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 		
 	case IMN_SETCOMPOSITIONWINDOW:    // set composition window position, move
-
-		//murmur("IMN_SETCOMPOSITIONWINDOW");
+		
 		POINT ptSrc;
 		SIZE szOffset;
 		HDC hDC;
-
 		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
 		ClientToScreen(lpIMC->hWnd, &ptSrc);
 		hDC = GetDC(lpIMC->hWnd);
 		GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
 		ReleaseDC(lpIMC->hWnd,hDC);
-
+		/*if(    ptSrc.x>CandX && ptSrc.x<=CandX+80
+			&& ptSrc.y>=CandY && ptSrc.y<=CandY+160)
+		{
+		
+		}
+		else*/
+		{
+			CompX = ptSrc.x ;
+			CompY = ptSrc.y ;
+			murmur("IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
+			UIMoveCompWindow(hWnd, CompX, CompY,NULL);
+			UIMoveCandWindow(hWnd, CompX,CompY+20,NULL);
+		}
 		//James modified
 		//CompX = ptSrc.x + szOffset.cx;
-		//CompY = ptSrc.y + szOffset.cy;			
-		CompX = ptSrc.x ;
-		CompY = ptSrc.y ;		
-		UIMoveCompWindow(hWnd, CompX, CompY,NULL);
-		UIMoveCandWindow(hWnd, CompX,CompY+20,NULL);
+		//CompY = ptSrc.y + szOffset.cy;
+		
+		/*lpIMC = ImmLockIMC(hUICurIMC);
+		POINT pt;
+		if(CompX < 0) {
+			pt.x = 15;
+			pt.y = 15;
+			ClientToScreen(lpIMC->hWnd, &pt);
+			CompX = pt.x;
+			CompY = pt.y;
+		}
+        ImmLockIMCC(lpIMC->hPrivate);*/
+				
+		
+		//ImmUnlockIMCC(lpIMC->hPrivate);
+		//ImmUnlockIMC(hUICurIMC);
+		
 		//dsvr.setBufPos(CompX, CompY)->notify();
 		
-		murmur("IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
+		
 		
 		//UIMoveCandWindow(hWnd, CompX, CompY, NULL);	//lpMyPrivate->CandStr); by b6s
 		/*
