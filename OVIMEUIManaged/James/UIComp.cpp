@@ -143,6 +143,7 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 //	}
 #endif
 
+//	mark for extract show from move function
 //	free(lpCompStr);
 //	lpCompStr = wcsdup(lpStr);
 //	if( (!lpCompStr || !*lpCompStr) /*!_tcscmp(lpStr, _T(""))*/ )
@@ -211,7 +212,7 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 	int newY=Y;
 
 	murmur("UIMoveCompWindow");		
-	if (IsWindow(uiCand.hWnd))
+	if (IsWindow(uiComp.hWnd))
 	{		
 		RECT screenrc;
 		SystemParametersInfo(SPI_GETWORKAREA,0,&screenrc,0);
