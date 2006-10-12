@@ -57,6 +57,7 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 	switch (msg)
 	{
 		case WM_PAINT:
+			murmur("WM_PAINT, status window");
 			PaintStatusWindow(hWnd);
 			break;
 		case WM_SETCURSOR:

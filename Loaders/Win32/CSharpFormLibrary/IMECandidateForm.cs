@@ -60,8 +60,8 @@ namespace CSharpFormLibrary
 			this.lbCandidates.Location = new System.Drawing.Point(0, 0);
 			this.lbCandidates.Name = "lbCandidates";
 			this.lbCandidates.Size = new System.Drawing.Size(120, 90);
-			this.lbCandidates.TabIndex = 0;
-			this.lbCandidates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lbCandidates_KeyPress);
+			this.lbCandidates.TabIndex = 0;			
+			this.lbCandidates.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbCandidates_MouseDown);
 			// 
 			// IMECandidateForm
 			// 
@@ -158,10 +158,7 @@ namespace CSharpFormLibrary
 		}
 		*/
 
-		private void lbCandidates_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
-		{
 		
-		}	
 		public int GetWidth()
 		{
 			return this.Width;
@@ -178,6 +175,21 @@ namespace CSharpFormLibrary
 		{
 			UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
 		}
+
+		private void IMECandidateForm_Click(object sender, System.EventArgs e)
+		{
+			MessageBox.Show("Cand form click");
+		}
+
+		private void lbCandidates_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+		{
+			//MessageBox.Show(this.lbCandidates.SelectedIndex.ToString());
+			SendKeys.SendWait((this.lbCandidates.SelectedIndex+1).ToString());
+		}
+
+	
+		
+		
 	}
 }
 

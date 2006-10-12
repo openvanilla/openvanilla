@@ -144,7 +144,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 {
 	LPINPUTCONTEXT lpIMC;
 	LPCOMPOSITIONSTRING lpCompStr;
-
+	
 	int spec;
 	int k;
 
@@ -279,6 +279,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		retVal = TRUE;
 		MyGenerateMessage(hIMC,
 				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
+		
 	} else {
 		retVal = FALSE;
 		MyGenerateMessage(hIMC,

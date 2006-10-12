@@ -18,7 +18,7 @@ LRESULT APIENTRY CandWndProc(HWND hWnd,
 	switch (msg)
 	{
 		case WM_PAINT:
-			murmur("PAINT candidate msg");
+			murmur("WM_PAINT, candidate window");
 			PaintCandWindow(hWnd);
 			break;
 
@@ -146,6 +146,8 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		Watch watch;
 		watch.start();
 		_MoveCandPage(newX,newY);				
+		uiCand.pt.x=newX;
+		uiCand.pt.y=newY;
 		watch.stop();
 		murmur("%1.3f sec:\tC# candidate window, move to (%d,%d)", watch.getSec(),newX,newY);
 	}		
