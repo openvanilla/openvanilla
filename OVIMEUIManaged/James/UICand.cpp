@@ -403,10 +403,5 @@ void UIHideCandWindow()
 		watch.stop();
 		murmur("%1.3f sec:\tC# candidate window, hide", watch.getSec());
 
-		//把clear移到setcandstr開始的時候
-		/*watch.start();
-		_ClearCandPage();
-		watch.stop();
-		murmur("%1.3f sec:\tC# candidate window, clear", watch.getSec());*/
 	}
 }

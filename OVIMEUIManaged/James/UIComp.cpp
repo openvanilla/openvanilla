@@ -230,6 +230,12 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 }
 void UISetCompStr(wchar_t* lpStr)
 {
+	Watch watch;
+	watch.start();
+	_ClearCompPage();
+	watch.stop();
+	murmur("%1.3f sec:\tC# comp window, clear", watch.getSec());
+	
 	lpCompStr = wcsdup(lpStr);
 	std::wstring wsCompStr(lpCompStr);
 	_SetCompString(wsCompStr);
@@ -328,9 +334,7 @@ void UIHideCompWindow()
 {
 	if (IsWindow(uiComp.hWnd))
 	{
-		_HideCompPage();
-		_ClearCompPage();
-
+		_HideCompPage();		
 	}
 
 
