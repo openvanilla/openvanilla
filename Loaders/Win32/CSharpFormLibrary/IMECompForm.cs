@@ -62,6 +62,7 @@ namespace CSharpFormLibrary
 			this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBox1.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.textBox1.Location = new System.Drawing.Point(0, 0);
+			this.textBox1.MaxLength = 20;
 			this.textBox1.Name = "textBox1";
 			this.textBox1.Size = new System.Drawing.Size(288, 24);
 			this.textBox1.TabIndex = 0;
@@ -77,6 +78,8 @@ namespace CSharpFormLibrary
 			this.Name = "IMECompForm";
 			this.ShowInTaskbar = false;
 			this.Text = "IMECompForm";
+			this.Activated += new System.EventHandler(this.IMECompForm_Activated);
+			this.Deactivate += new System.EventHandler(this.IMECompForm_Deactivate);
 			this.ResumeLayout(false);
 
 		}
@@ -107,6 +110,19 @@ namespace CSharpFormLibrary
 		private void textBox1_TextChanged(object sender, System.EventArgs e)
 		{
 		
+		}
+
+		private void IMECompForm_Activated(object sender, System.EventArgs e)
+		{
+			ShowNoActive();
+			System.Diagnostics.Debug.WriteLine(this.textBox1.Text);
+			System.Diagnostics.Debug.WriteLine("Comp Active();");
+		}
+
+		private void IMECompForm_Deactivate(object sender, System.EventArgs e)
+		{
+			HideNoActive();
+			System.Diagnostics.Debug.WriteLine("Comp DeActive();");
 		}
 	}
 }
