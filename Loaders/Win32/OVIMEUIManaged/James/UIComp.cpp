@@ -212,6 +212,7 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		//	pt.y = screenrc.bottom - sz.cy;
 	int newX=X;
 	int newY=Y;
+	lpCompStr = wcsdup(lpStr);
 
 	murmur("UIMoveCompWindow");		
 	if (IsWindow(uiComp.hWnd))
@@ -223,7 +224,31 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			newX=screenrc.right-100;
 		if( newY+200 > screenrc.bottom )			
 			newY=Y-190;*/
+		HDC hDC;
+		HFONT oldFont;
+		SIZE sz;
+		TCHAR szStr[100];
+
+		hDC = GetDC(uiComp.hWnd);
+		oldFont = (HFONT) SelectObject(hDC, hUIFont);
+		
+		if(lpCompStr)
+		{
+		GetTextExtentPoint(hDC, lpCompStr, (int)wcslen(lpCompStr), &sz);
+		murmur("YES lpCompStr FONT SIZE HEIGHT : %d", sz.cy);
+//		}
+//		else
+//		{
+//		GetTextExtentPoint(hDC, szStr, (int)_tcslen(szStr), &sz);	
+//		murmur("NO lpCompStr FONT SIZE HEIGHT : %d", sz.cy);
+//		}
+		SelectObject(hDC, oldFont);
+		ReleaseDC(uiComp.hWnd, hDC);
+		_MoveCompPage(newX,newY+sz.cy);
+		}
+		else
 		_MoveCompPage(newX,newY);	
+		
 	}	
 		//UIShowCompWindow();
 		
