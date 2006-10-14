@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace CSharpFormLibrary
 {
@@ -12,7 +11,7 @@ namespace CSharpFormLibrary
 	/// </summary>
 	public class IMECompForm : System.Windows.Forms.Form
 	{
-		protected System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox textBox1;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -57,23 +56,17 @@ namespace CSharpFormLibrary
 			// 
 			// textBox1
 			// 
-			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right)));
-			this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.textBox1.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.textBox1.Location = new System.Drawing.Point(0, 0);
-			this.textBox1.MaxLength = 20;
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(288, 24);
+			this.textBox1.Size = new System.Drawing.Size(200, 24);
 			this.textBox1.TabIndex = 0;
 			this.textBox1.Text = "textBox1";
 			// 
 			// IMECompForm
 			// 
 			this.AllowDrop = true;
-			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
-			this.ClientSize = new System.Drawing.Size(320, 18);
+			this.AutoScaleBaseSize = new System.Drawing.Size(6, 17);
+			this.ClientSize = new System.Drawing.Size(328, 24);
 			this.Controls.Add(this.textBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "IMECompForm";
@@ -87,12 +80,10 @@ namespace CSharpFormLibrary
 		#endregion
 		public void ShowNoActive()
 		{
-			Debug.WriteLine("comp ShowNoActive");
 			UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
 		}
 		public void HideNoActive()
 		{
-			Debug.WriteLine("comp HideNoActive");
 			UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
 		}
 		public void ClearComp()
@@ -107,6 +98,7 @@ namespace CSharpFormLibrary
 		{
 			//string[] a_inputs = inputs.Split(' ');
 			if(inputs==null) return;
+			this.Width = (inputs.Length)*16;
 			this.textBox1.Text = inputs;
 		}
 
@@ -118,7 +110,7 @@ namespace CSharpFormLibrary
 		private void IMECompForm_Activated(object sender, System.EventArgs e)
 		{
 			ShowNoActive();
-			//System.Diagnostics.Debug.WriteLine(this.textBox1.Text);
+			System.Diagnostics.Debug.WriteLine(this.textBox1.Text);
 			System.Diagnostics.Debug.WriteLine("Comp Active();");
 		}
 
