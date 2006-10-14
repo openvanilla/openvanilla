@@ -26,6 +26,7 @@ LRESULT APIENTRY CandWndProc(HWND hWnd,
 		case WM_MOUSEMOVE:
 		case WM_LBUTTONUP:
 		case WM_RBUTTONUP:
+			murmur("MOUSE MSG");
 			DragUI(hWnd, NULL, msg, wParam, lParam, FALSE);
 			if ((msg == WM_SETCURSOR) &&
 					(HIWORD(lParam) != WM_LBUTTONDOWN) &&
@@ -66,7 +67,8 @@ void UICreateCandWindow(HWND hUIWnd)
 
 		Watch watch;
 		watch.start();
-		uiCand.hWnd = _CreateCandPage();
+		//uiCand.hWnd = _CreateCandPage();
+		uiCand.hWnd = _CreateCandPageWithHandle(hUIWnd);
 		watch.stop();
 		murmur("%1.3f sec:\tC# candidate window, create", watch.getSec());
 

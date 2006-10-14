@@ -42,6 +42,7 @@ void UICreateCompWindow(HWND hUIWnd)
 	if (!IsWindow(uiComp.hWnd))
 	{
 		uiComp.hWnd = _CreateCompPage();
+		murmur("compHWND=%p",uiComp.hWnd);
 		
 #if 0
 		HDC hDC;

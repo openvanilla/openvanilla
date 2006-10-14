@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace CSharpFormLibrary
 {
@@ -86,10 +87,12 @@ namespace CSharpFormLibrary
 		#endregion
 		public void ShowNoActive()
 		{
+			Debug.WriteLine("comp ShowNoActive");
 			UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
 		}
 		public void HideNoActive()
 		{
+			Debug.WriteLine("comp HideNoActive");
 			UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
 		}
 		public void ClearComp()
@@ -115,7 +118,7 @@ namespace CSharpFormLibrary
 		private void IMECompForm_Activated(object sender, System.EventArgs e)
 		{
 			ShowNoActive();
-			System.Diagnostics.Debug.WriteLine(this.textBox1.Text);
+			//System.Diagnostics.Debug.WriteLine(this.textBox1.Text);
 			System.Diagnostics.Debug.WriteLine("Comp Active();");
 		}
 

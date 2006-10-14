@@ -16,6 +16,9 @@ namespace CSharpFormLibrary
 		//int now_index;		
 		int baseSize;	//基本長度(沒有candidate時form的大小)
 		private System.ComponentModel.Container components = null;
+		private System.UInt64 m_hwnd;
+
+		private bool isTouched = false;
 
 		public IMECandidateForm()
 		{
@@ -112,6 +115,19 @@ namespace CSharpFormLibrary
 		{
 			return this.lbCandidates.SelectedIndex;
 		}
+		public void ClearCandidates()
+		{
+			this.lbCandidates.Items.Clear();
+		}
+		public void DepthOfList(int number)
+		{
+			//14 = lbCandidate.Size.Height/9 進位 - Height%9
+			this.Size = new Size(this.Size.Width,baseSize+number*13);			
+		}
+		public void SetHWND(System.UInt64 hwnd)
+		{
+			m_hwnd=hwnd;
+		}
 
 		#endregion
 
@@ -140,16 +156,8 @@ namespace CSharpFormLibrary
 
 			//DepthOfList(pageCandidates.Length);
 		}
-		public void ClearCandidates()
-		{
-			this.lbCandidates.Items.Clear();
-		}
-		public void DepthOfList(int number)
-		{
-			//14 = lbCandidate.Size.Height/9 進位 - Height%9
-			this.Size = new Size(this.Size.Width,baseSize+number*13);			
-		}
-
+	
+		
 		#endregion
 
 		/*
@@ -175,10 +183,12 @@ namespace CSharpFormLibrary
 		}
 		public void ShowNoActive()
 		{
+			Debug.WriteLine("ShowNoActive cand ");
 			UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
 		}
 		public void HideNoActive()
 		{
+			Debug.WriteLine("HideNoActive cand ");
 			UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
 		}
 
@@ -195,13 +205,20 @@ namespace CSharpFormLibrary
 
 		private void IMECandidateForm_Activated(object sender, System.EventArgs e)
 		{
-			ShowNoActive();			
-			System.Diagnostics.Debug.WriteLine("Cand Active();");
+			//ShowNoActive();
+			//if(!isTouched) 
+			{
+				UtilFuncs.GiveBackFocus(m_hwnd);
+				System.Diagnostics.Debug.Write("Cand Active(); give back focus to ");
+				System.Diagnostics.Debug.WriteLine(m_hwnd);
+			//	isTouched = true;
+			}//else
+			//	isTouched = false;
 		}
 
 		private void IMECandidateForm_Deactivate(object sender, System.EventArgs e)
 		{
-			HideNoActive();
+			//HideNoActive();
 			System.Diagnostics.Debug.WriteLine("Cand DeActive();");
 		}
 
@@ -222,7 +239,7 @@ namespace CSharpFormLibrary
 
 		private void IMECandidateForm_Leave(object sender, System.EventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("Cand Leave");
+			System.Diagnostics.Debug.WriteLine("Cand Leave");			
 		}
 
 		private void IMECandidateForm_Validated(object sender, System.EventArgs e)
@@ -233,6 +250,7 @@ namespace CSharpFormLibrary
 		private void IMECandidateForm_Validating(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			System.Diagnostics.Debug.WriteLine("Cand Validating");
+			
 		}		
 	}
 }

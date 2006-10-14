@@ -29,6 +29,7 @@ EXPORTS
 	_EndCandPage
 	_GetCandidateValue
 	_CreateCandPage
+	_CreateCandPageWithHandle
 	_HideCandPage
 	_ShowCandPage
 	_MoveCandPage
