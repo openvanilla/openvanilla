@@ -1,3 +1,4 @@
+#define OV_DEBUG  
 #include <vector>
 //#include <windows.h>
 #include "PCMan.h"
@@ -147,6 +148,11 @@ public:
 		}
 		return methodCandiClear;
 	}
+
+	static MethodInfo* CandiSetHWND()
+	{
+		return 	CandFormAssembly::CandiType()->GetMethod("SetHWND");
+	}	
 };
 
 HWND _CreateCandPage()//create
@@ -156,11 +162,43 @@ HWND _CreateCandPage()//create
 	//	CandFormAssembly::CandiType()->GetMethod("IMECandidateForm");
 	PropertyInfo* propertyHandle =
 		CandFormAssembly::CandiType()->GetProperty("Handle");
+
 	return
 		(HWND)(
 			dynamic_cast<IntPtr*>(
 				propertyHandle->GetValue(CandFormAssembly::CandidateForm(), NULL))
 		)->ToPointer();
+
+}
+
+HWND _CreateCandPageWithHandle(HWND hwnd)//create
+{	
+	//System::Diagnostics::Debug::WriteLine("Candi Create");
+	//MethodInfo* methodCreateWindow =
+	//	CandFormAssembly::CandiType()->GetMethod("IMECandidateForm");
+	PropertyInfo* propertyHandle =
+		CandFormAssembly::CandiType()->GetProperty("Handle");
+
+	CandFormAssembly::argCollection->Clear();
+	try{
+		UInt64 handle = (UInt64)hwnd;
+		//int h=(int)handle;
+		murmur("%d",handle);
+		CandFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(handle)));
+		Object* param[] =
+			dynamic_cast<Object*[]>(CandFormAssembly::argCollection
+				->ToArray(System::Type::GetType("System.Object")));
+		CandFormAssembly::CandiSetHWND()->Invoke(CandFormAssembly::CandidateForm(), param);
+	} catch(System::Exception* e) {
+		Debug::WriteLine(e->StackTrace);
+	}
+
+	return
+		(HWND)(
+			dynamic_cast<IntPtr*>(
+				propertyHandle->GetValue(CandFormAssembly::CandidateForm(), NULL))
+		)->ToPointer();
+
 }
 
 void _SetCandString(const std::wstring& candidate)

@@ -6,6 +6,7 @@ void _SetCandString(const std::wstring& candidate);
 void _EndCandPage();
 int _GetCandValue();
 HWND _CreateCandPage();
+HWND _CreateCandPageWithHandle(HWND hwnd);
 void _HideCandPage();
 void _ShowCandPage();
 void _MoveCandPage(int x,int y);

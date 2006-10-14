@@ -36,5 +36,22 @@ namespace CSharpFormLibrary
 				ShowWindowTopMost(form.Handle);
 			form.Visible = visible;
 		} 
+
+		public const uint WM_IME_SETCONTEXT	=	0x281;
+		public const ulong HWND_BROADCAST = 0xffff ;
+		
+			[DllImport("user32.dll")]
+			public static extern int SendMessage(
+				System.UInt64 hWnd,      // handle to destination window
+				uint Msg,       // message
+				long wParam,  // first message parameter
+				long lParam   // second message parameter
+				);
+
+		public static void GiveBackFocus(System.UInt64 hwnd)
+		{			
+			//long lngResult = SendMessage(hwnd, WM_IME_SETCONTEXT,1L, 0L ); 
+			long lngResult = SendMessage(hwnd, WM_IME_SETCONTEXT,1L, 0L ); 
+		}
 	}
 }
