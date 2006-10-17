@@ -42,13 +42,13 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="..\..\..\Framework\Headers"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				AdditionalIncludeDirectories="..\tinyxml;..\..\..\Framework\Headers"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;TIXML_USE_STL"
 				StringPooling="true"
-				RuntimeLibrary="0"
+				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile=".\Release/AmphiVanilla.pch"
+				PrecompiledHeaderFile=""
 				AssemblerListingLocation=".\Release/"
 				ObjectFile=".\Release/"
 				ProgramDataBaseFileName=".\Release/"
@@ -68,7 +68,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="tinyxml.lib"
 				OutputFile=".\Release\AmphiVanilla.lib"
 				SuppressStartupBanner="true"
 			/>
@@ -116,18 +115,18 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\Framework\Headers"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				AdditionalIncludeDirectories="..\tinyxml;..\..\..\Framework\Headers"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;TIXML_USE_STL"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile=".\Debug/AmphiVanilla.pch"
+				PrecompiledHeaderFile=""
 				AssemblerListingLocation=".\Debug/"
 				ObjectFile=".\Debug/"
 				ProgramDataBaseFileName=".\Debug/"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -142,7 +141,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="tinyxml.lib"
 				OutputFile=".\Debug\AmphiVanilla.lib"
 				SuppressStartupBanner="true"
 			/>

@@ -44,9 +44,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;.\James"
+				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;.\James;..\tinyxml;"
 				AdditionalUsingDirectories=""
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL;TIXML_USE_STL"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="3"
@@ -70,14 +70,14 @@
 			<Tool
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="false"
-				AdditionalDependencies="comctl32.lib imm32.lib tinyxml.lib"
+				AdditionalDependencies="comctl32.lib imm32.lib"
 				OutputFile="$(OutDir)/OVIMEUI.dll"
-				LinkIncremental="2"
 				ModuleDefinitionFile="OVIMEUI.def"
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				SubSystem="2"
-				ResourceOnlyDLL="false"
+				OptimizeReferences="1"
+				EnableCOMDATFolding="1"
 				TargetMachine="1"
 				FixedBaseAddress="0"
 			/>
@@ -135,9 +135,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;.\PCMan"
+				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;.\James;..\tinyxml;"
 				AdditionalUsingDirectories=""
-				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL;TIXML_USE_STL"
 				StringPooling="true"
 				MinimalRebuild="false"
 				RuntimeLibrary="2"
@@ -162,7 +162,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="comctl32.lib imm32.lib tinyxml.lib"
+				AdditionalDependencies="comctl32.lib imm32.lib"
 				OutputFile="$(OutDir)/OVIMEUI.dll"
 				LinkIncremental="1"
 				ModuleDefinitionFile="OVIMEUI.def"
@@ -170,7 +170,6 @@
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ResourceOnlyDLL="false"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -248,6 +247,10 @@
 				</File>
 				<File
 					RelativePath=".\James\NewUICand.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\James\NewUIComp.cpp"
 					>
 				</File>
 				<File
@@ -369,7 +372,7 @@
 				Name="James"
 				>
 				<File
-					RelativePath=".\PCMan\PCMan.h"
+					RelativePath=".\James\PCMan.h"
 					>
 				</File>
 				<File

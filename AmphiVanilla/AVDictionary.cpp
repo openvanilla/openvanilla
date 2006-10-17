@@ -56,7 +56,10 @@ void AVDictionary::shutdown()
 
 bool AVDictionary::createNewConfig(std::string file)
 {
-	TiXmlDocument tmp(file);
+	//<comment author='b6s'>Old tinyxml usage;
+	//TiXmlDocument tmp(file);
+	//</comment>
+	TiXmlDocument tmp(file.c_str());
 	tmp.Parse("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><OpenVanilla></OpenVanilla>");
 	tmp.SaveFile();
 	return true;
@@ -71,7 +74,10 @@ void AVDictionary::setPath(const char *path)
 {
 	file = path;
 	file += "config.xml";
-	if(!doc.LoadFile(file)) {
+	//<comment author='b6s'>Old tinyxml usage;
+	//if(!doc.LoadFile(file)) {
+	//</comment>	
+	if(!doc.LoadFile(file.c_str(), TIXML_ENCODING_UTF8)) {
 		createNewConfig(file);
 		doc.LoadFile();
 	}

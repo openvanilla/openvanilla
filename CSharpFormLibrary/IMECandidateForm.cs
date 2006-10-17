@@ -18,8 +18,6 @@ namespace CSharpFormLibrary
 		private System.ComponentModel.Container components = null;
 		private System.UInt64 m_hwnd;
 
-		private bool isTouched = false;
-
 		public IMECandidateForm()
 		{
 			InitializeComponent();
@@ -67,7 +65,7 @@ namespace CSharpFormLibrary
 			// IMECandidateForm
 			// 
 			//this.ControlBox=false;
-			this.AllowDrop = true;
+			//this.AllowDrop = true;
 			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
 			this.BackColor = System.Drawing.SystemColors.Window;
 			this.ClientSize = new System.Drawing.Size(80, 160);

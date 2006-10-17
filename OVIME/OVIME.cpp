@@ -26,6 +26,10 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		watch.stop();
 		murmur("%1.3f sec:\tloader->connectDisplayServer(dsvr)", watch.getSec());
 
+		//<comment author='b6s'>Test for a replacement of UI's DllMain()
+		UIConstruct();
+		//</comment>
+
 		watch.start();
 		for(int i = 0;; ++i) {
 			if(loader->moduleName(i, str)) {
@@ -38,7 +42,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		watch.stop();
 		murmur("%1.3f sec:\tfor() { loader->moduleName(); UIPushInputMethod(); }",
 			watch.getSec());
-		
+
 		watch.start();
 		WNDCLASSEX wc;
 		wc.cbSize			= sizeof(WNDCLASSEX);
@@ -68,6 +72,9 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		AVLoader::shutdown();
 		UnregisterClass(UICLASSNAME, (HINSTANCE)hModule);
 		IMEUIUnRegisterClass( (HINSTANCE)hModule );
+		//<comment author='b6s'>Test for a replacement of UI's DllMain()
+		UIDispose();
+		//</comment>
 		break;
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:
