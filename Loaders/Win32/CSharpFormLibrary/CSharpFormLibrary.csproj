@@ -1,7 +1,7 @@
 <VisualStudioProject>
     <CSHARP
         ProjectType = "Local"
-        ProductVersion = "7.10.3077"
+        ProductVersion = "7.10.6030"
         SchemaVersion = "2.0"
         ProjectGuid = "{1610A612-3EC5-4FA8-8559-A7FE48802057}"
     >
@@ -97,6 +97,10 @@
                     RelPath = "AssemblyInfo.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "CSharpFormLibrary.config"
+                    BuildAction = "None"
                 />
                 <File
                     RelPath = "IMECandidateForm.cs"

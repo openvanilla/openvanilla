@@ -1,7 +1,9 @@
-copy %OV_DEPS%\libltdl3.dll .\Installer\system32\
-copy %OV_DEPS%\libiconv-2.dll .\Installer\system32\
-copy %OV_DEPS%\sqlite3.dll .\Installer\system32\
-copy %OV_DEPS%\tinyxml.dll .\Installer\system32\
+copy "%OV_DEPS%\libltdl3.dll" .\Installer\system32\
+copy "%OV_DEPS%\libiconv-2.dll" .\Installer\system32\
+copy "%OV_DEPS%\sqlite3.dll" .\Installer\system32\
+copy "%OV_DEPS%\tinyxml.dll" .\Installer\system32\
+copy .\CSharpFormLibrary\bin\Release\CSharpFormLibrary.dll .\Installer\OpenVanilla\
+copy .\CSharpFormLibrary\CSharpFormLibrary.config .\Installer\OpenVanilla\
 copy .\OVIMEUIManaged\Release\OVIMEUI.dll .\Installer\system32\
 copy .\OVIME\Release\ovime.ime .\Installer\system32\
 copy .\OVPreferences\Release\OVPreferences.exe .\Installer\OpenVanilla\

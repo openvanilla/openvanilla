@@ -1,5 +1,6 @@
 call .\deploy-dependencies.bat
 copy .\CSharpFormLibrary\bin\Debug\CSharpFormLibrary.dll %WINDIR%\OpenVanilla\
+copy .\CSharpFormLibrary\CSharpFormLibrary.config %WINDIR%\OpenVanilla\
 copy .\OVIMEUIManaged\Debug\OVIMEUI.dll %WINDIR%\system32\
 copy .\OVIME\Debug\ovime.ime %WINDIR%\system32\
 copy .\OVPreferences\Debug\OVPreferences.exe %WINDIR%\OpenVanilla\

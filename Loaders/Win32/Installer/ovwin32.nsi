@@ -403,6 +403,7 @@ Section "Modules" SEC02
   File "OVPreferences.exe"
   File "OVPreferences.exe.manifest"
   File "CSharpFormLibrary.dll"
+  File "CSharpFormLibrary.config"
 SectionEnd
 
 Section -AdditionalIcons
@@ -450,11 +451,7 @@ Section Uninstall
   Delete "$SYSDIR\tinyxml.dll"
   Delete "$SYSDIR\OVIMEUI.DLL"
   Delete "$SYSDIR\OVIME.ime"
-  Delete "$WINDIR\OpenVanilla\OVPreferences.exe"
-  Delete "$WINDIR\OpenVanilla\OVPreferences.exe.manifest"
-  Delete "$WINDIR\OpenVanilla\CSharpFormLibrary.dll"
-  RMDir /r "$WINDIR\OpenVanilla\zh_TW"
-  RMDir /r "$WINDIR\OpenVanilla\Modules"
+  RMDir /r "$WINDIR\OpenVanilla"
 
   Delete "$SMPROGRAMS\GOING-OpenVanilla\Uninstall.lnk"
   Delete "$SMPROGRAMS\GOING-OpenVanilla\OVPreferences.lnk"

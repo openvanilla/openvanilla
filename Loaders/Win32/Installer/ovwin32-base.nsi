@@ -80,6 +80,8 @@ Section "Modules" SEC02
   File /r "zh_TW"
   File "OVPreferences.exe"
   File "OVPreferences.exe.manifest"
+  File "CSharpFormLibrary.dll"
+  File "CSharpFormLibrary.config"
   SetOutPath "$WINDIR\OpenVanilla\Modules"
   File "Modules\OVIMRoman.DLL"
 SectionEnd
