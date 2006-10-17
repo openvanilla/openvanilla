@@ -403,7 +403,7 @@ Section "Modules" SEC02
   File "OVPreferences.exe"
   File "OVPreferences.exe.manifest"
   File "CSharpFormLibrary.dll"
-  File "CSharpFormLibrary.config"
+  File "CSharpFormLibrary.dll.config"
 SectionEnd
 
 Section -AdditionalIcons

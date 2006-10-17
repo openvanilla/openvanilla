@@ -17,7 +17,7 @@
                 DelaySign = "false"
                 OutputType = "Library"
                 PreBuildEvent = ""
-                PostBuildEvent = ""
+                PostBuildEvent = 'copy "$(ProjectDir)\CSharpFormLibrary.dll.config" "$(TargetDir)"'
                 RootNamespace = "CSharpFormLibrary"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
@@ -99,7 +99,7 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "CSharpFormLibrary.config"
+                    RelPath = "CSharpFormLibrary.dll.config"
                     BuildAction = "None"
                 />
                 <File
