@@ -4,6 +4,7 @@
 	Version="8.00"
 	Name="OVIME"
 	ProjectGUID="{684B2F15-E8EE-4032-B4A3-89732F32C12D}"
+	RootNamespace="OVIME"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -40,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\OVIMEUIManaged\Headers;..\..\..\Framework\Headers;..\..\..\Modules\SharedHeaders"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
+				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\OVIMEUIManaged\Headers;..\..\..\Framework\Headers;..\..\..\Modules\SharedHeaders;..\tinyxml"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;TIXML_USE_STL;OVIME_EXPORTS"
 				StringPooling="false"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -130,11 +131,11 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="true"
-				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\OVIMEUIManaged\Headers;..\..\..\Framework\Headers;..\..\..\Modules\SharedHeaders"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;OVIME_EXPORTS"
+				AdditionalIncludeDirectories=".\;..\AmphiVanilla\;..\OVIMEUIManaged\Headers;..\..\..\Framework\Headers;..\..\..\Modules\SharedHeaders;..\tinyxml"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;TIXML_USE_STL;OVIME_EXPORTS"
 				StringPooling="true"
 				MinimalRebuild="false"
-				RuntimeLibrary="0"
+				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"

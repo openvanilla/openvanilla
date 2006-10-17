@@ -64,7 +64,7 @@ namespace CSharpFormLibrary
 			// 
 			// IMECompForm
 			// 
-			this.AllowDrop = true;
+			//this.AllowDrop = true;
 			this.AutoScaleBaseSize = new System.Drawing.Size(6, 17);
 			this.ClientSize = new System.Drawing.Size(328, 24);
 			this.Controls.Add(this.textBox1);

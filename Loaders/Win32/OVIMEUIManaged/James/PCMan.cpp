@@ -314,6 +314,25 @@ void DragUI(HWND hWnd, HWND hWnd1,
 	}
 }
 
+void UIConstruct()
+{
+	INITCOMMONCONTROLSEX iccex;
+	iccex.dwSize = sizeof(INITCOMMONCONTROLSEX);
+	iccex.dwICC = ICC_BAR_CLASSES;
+	InitCommonControlsEx(&iccex);
+
+	hInstDLL = hInst;
+	DisableThreadLibraryCalls( HMODULE(hInstDLL) );
+	hIMESelMenu = CreatePopupMenu();
+}
+
+void UIDispose()
+{
+	//AVDictionary::shutdown();
+	DestroyMenu(hIMESelMenu);
+}
+
+/*
 BOOL WINAPI DllMain( HINSTANCE hInst,  DWORD fdwReason,  LPVOID lpvReserved )
 {
 	switch(fdwReason)
@@ -337,3 +356,4 @@ BOOL WINAPI DllMain( HINSTANCE hInst,  DWORD fdwReason,  LPVOID lpvReserved )
 	}
 	return TRUE;
 }
+*/

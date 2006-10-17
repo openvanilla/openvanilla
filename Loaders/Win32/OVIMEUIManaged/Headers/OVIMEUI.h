@@ -19,6 +19,9 @@ BOOL MyIsIMEMessage(UINT);
 void UIPushInputMethod(wchar_t*);
 int UICurrentInputMethod();
 
+void UIConstruct();
+void UIDispose();
+
 // UIStatus.cpp
 void UICreateStatusWindow(HWND);
 void UIMoveStatusWindow(HWND, int, int);

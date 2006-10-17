@@ -21,9 +21,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;.\James"
+				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;.\James;..\tinyxml;"
 				AdditionalUsingDirectories=""
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL;TIXML_USE_STL"
 				MinimalRebuild="FALSE"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="1"
@@ -37,14 +37,14 @@
 			<Tool
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="FALSE"
-				AdditionalDependencies="comctl32.lib imm32.lib tinyxml.lib"
+				AdditionalDependencies="comctl32.lib imm32.lib"
 				OutputFile="$(OutDir)/OVIMEUI.dll"
-				LinkIncremental="2"
 				ModuleDefinitionFile="OVIMEUI.def"
 				GenerateDebugInformation="TRUE"
 				AssemblyDebug="1"
 				SubSystem="2"
-				ResourceOnlyDLL="FALSE"
+				OptimizeReferences="1"
+				EnableCOMDATFolding="1"
 				TargetMachine="1"
 				FixedBaseAddress="0"/>
 			<Tool
@@ -82,9 +82,9 @@
 			ManagedExtensions="TRUE">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;.\PCMan"
+				AdditionalIncludeDirectories=".\Headers;..\AmphiVanilla;..\..\..\Framework\Headers;.\James;..\tinyxml;"
 				AdditionalUsingDirectories=""
-				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL;TIXML_USE_STL"
 				StringPooling="TRUE"
 				MinimalRebuild="FALSE"
 				RuntimeLibrary="0"
@@ -99,7 +99,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="comctl32.lib imm32.lib tinyxml.lib"
+				AdditionalDependencies="comctl32.lib imm32.lib"
 				OutputFile="$(OutDir)/OVIMEUI.dll"
 				LinkIncremental="1"
 				ModuleDefinitionFile="OVIMEUI.def"
@@ -107,7 +107,6 @@
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ResourceOnlyDLL="FALSE"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"

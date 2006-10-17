@@ -97,8 +97,18 @@
     <Compile Include="IMECandidateForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="IMECompForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilFuncs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="CSharpFormLibrary.dll.config" />
     <EmbeddedResource Include="IMECandidateForm.resx">
       <DependentUpon>IMECandidateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IMECompForm.resx">
+      <DependentUpon>IMECompForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -7,6 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIME", "OVIME\OVIME.vcproj
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AmphiVanilla", "AmphiVanilla\AmphiVanilla.vcproj", "{21FC3D4F-8918-4C03-8881-EC6C54DB3504}"
 	ProjectSection(ProjectDependencies) = postProject
+		{B2584669-D88A-4BC7-B638-C6937AFC823F} = {B2584669-D88A-4BC7-B638-C6937AFC823F}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpFormLibrary", "CSharpFormLibrary\CSharpFormLibrary.csproj", "{1610A612-3EC5-4FA8-8559-A7FE48802057}"
@@ -24,6 +25,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMGeneric", "..\..\Module
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMTobaccoOld", "..\..\..\branches\0.7.2-Module-OVIMTobacco-Old\OVIMTobaccoOld\OVIMTobaccoOld.vcproj", "{06DD6384-CF74-4115-AFC9-E6BA2D818E12}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxmlSTL", "tinyxml\tinyxmlSTL.vcproj", "{B2584669-D88A-4BC7-B638-C6937AFC823F}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -57,6 +62,10 @@ Global
 		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug.Build.0 = Debug|Win32
 		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release.ActiveCfg = Release|Win32
 		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release.Build.0 = Release|Win32
+		{B2584669-D88A-4BC7-B638-C6937AFC823F}.Debug.ActiveCfg = Debug|Win32
+		{B2584669-D88A-4BC7-B638-C6937AFC823F}.Debug.Build.0 = Debug|Win32
+		{B2584669-D88A-4BC7-B638-C6937AFC823F}.Release.ActiveCfg = Release|Win32
+		{B2584669-D88A-4BC7-B638-C6937AFC823F}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
