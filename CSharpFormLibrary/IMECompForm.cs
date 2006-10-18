@@ -65,18 +65,23 @@ namespace CSharpFormLibrary
 			// 
 			// textBox1
 			// 
+			this.textBox1.BackColor = System.Drawing.Color.FromArgb(((System.Byte)(255)), ((System.Byte)(255)), ((System.Byte)(192)));
+			this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.textBox1.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.textBox1.Location = new System.Drawing.Point(0, 0);
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(200, 24);
+			this.textBox1.Size = new System.Drawing.Size(273, 27);
 			this.textBox1.TabIndex = 0;
 			this.textBox1.Text = "textBox1";
 			// 
 			// IMECompForm
 			// 
 			//this.AllowDrop = true;
-			this.AutoScaleBaseSize = new System.Drawing.Size(6, 17);
-			this.ClientSize = new System.Drawing.Size(328, 24);
+			this.AutoScaleBaseSize = new System.Drawing.Size(7, 20);
+			this.BackColor = System.Drawing.SystemColors.Window;
+			this.ClientSize = new System.Drawing.Size(273, 21);
 			this.Controls.Add(this.textBox1);
+			this.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "IMECompForm";
 			this.ShowInTaskbar = false;
@@ -107,8 +112,11 @@ namespace CSharpFormLibrary
 		{
 			//string[] a_inputs = inputs.Split(' ');
 			if(inputs==null) return;
-			this.Width = (inputs.Length)*16;
+			this.Width = (inputs.Length)*16+7;
+			//this.Height = this.textBox1.PreferredHeight;
 			this.textBox1.Text = inputs;
+			//this.textBox1.Focus();
+
 		}
 
 		private void textBox1_TextChanged(object sender, System.EventArgs e)
