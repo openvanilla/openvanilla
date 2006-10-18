@@ -16,7 +16,8 @@ namespace CSharpFormLibrary
 		/// Required designer variable.
 		/// </summary>
 		private System.ComponentModel.Container components = null;
-
+		private const int WM_MOUSEACTIVATE = 0x0021;
+		private const int MA_NOACTIVATEANDEAT = 0x0004;
 		public IMECompForm()
 		{
 			//
@@ -28,7 +29,15 @@ namespace CSharpFormLibrary
 			// TODO: Add any constructor code after InitializeComponent call
 			//
 		}
-
+		protected override void WndProc(ref Message m) 
+		{
+			if (m.Msg == WM_MOUSEACTIVATE) 
+			{
+				m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
+				return;
+			}
+			base.WndProc(ref m);
+		}
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>

@@ -17,7 +17,8 @@ namespace CSharpFormLibrary
 		int baseSize;	//基本長度(沒有candidate時form的大小)
 		private System.ComponentModel.Container components = null;
 		private System.UInt64 m_hwnd;
-
+		private const int WM_MOUSEACTIVATE = 0x0021;
+		private const int MA_NOACTIVATEANDEAT = 0x0004;
 		public IMECandidateForm()
 		{
 			InitializeComponent();
@@ -27,6 +28,15 @@ namespace CSharpFormLibrary
 		public IMECandidateForm(string[] candidates)
 		{
 			InitializeComponent();
+		}
+		protected override void WndProc(ref Message m) 
+		{
+			if (m.Msg == WM_MOUSEACTIVATE) 
+			{
+				m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
+				return;
+			}
+			base.WndProc(ref m);
 		}
 		protected override void Dispose( bool disposing )
 		{
