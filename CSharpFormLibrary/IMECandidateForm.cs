@@ -77,7 +77,8 @@ namespace CSharpFormLibrary
 		protected override void WndProc(ref Message m) 
 		{
 			if (m.Msg == WM_MOUSEACTIVATE) 
-			{
+			{				
+				//this.RaiseMouseEvent( button1,);								
 				m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
 				//m.Result = (IntPtr)MA_NOACTIVATE;
 				return;
@@ -164,6 +165,7 @@ namespace CSharpFormLibrary
 			this.button1.Size = new System.Drawing.Size(56, 32);
 			this.button1.TabIndex = 0;
 			this.button1.Text = "¸â¸â";
+			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// label1
 			// 
@@ -702,6 +704,11 @@ namespace CSharpFormLibrary
 		{
 			//System.Diagnostics.Debug.WriteLine("Cand Validating");
 			
+		}
+
+		private void button1_Click(object sender, System.EventArgs e)
+		{
+			SendKeys.SendWait("1");
 		}		
 	}
 }
