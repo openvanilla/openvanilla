@@ -110,8 +110,8 @@ namespace CSharpFormLibrary
 		}
 		public void SetComp(string inputs)
 		{
-			//string[] a_inputs = inputs.Split(' ');
-			if(inputs==null) return;
+			//string[] a_inputs = inputs.Split(' ');			
+			if(inputs==null || textBox1.Text==inputs) return;
 			this.Width = (inputs.Length)*16+7;
 			//this.Height = this.textBox1.PreferredHeight;
 			this.textBox1.Text = inputs;
@@ -126,15 +126,15 @@ namespace CSharpFormLibrary
 
 		private void IMECompForm_Activated(object sender, System.EventArgs e)
 		{
-			ShowNoActive();
-			System.Diagnostics.Debug.WriteLine(this.textBox1.Text);
-			System.Diagnostics.Debug.WriteLine("Comp Active();");
+			//ShowNoActive();
+			//System.Diagnostics.Debug.WriteLine(this.textBox1.Text);
+			//System.Diagnostics.Debug.WriteLine("Comp Active();");
 		}
 
 		private void IMECompForm_Deactivate(object sender, System.EventArgs e)
 		{
-			HideNoActive();
-			System.Diagnostics.Debug.WriteLine("Comp DeActive();");
+			//HideNoActive();
+			//System.Diagnostics.Debug.WriteLine("Comp DeActive();");
 		}
 	}
 }
