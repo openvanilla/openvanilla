@@ -83,25 +83,31 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 						ClientToScreen(lpIMC->hWnd, &pt);
 						CompX = pt.x;
 						CompY = pt.y;
-					}
-
+					}					
 					lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-					if(lpMyPrivate->PreEditStr  && !wcslen(lpMyPrivate->CandStr))//如果有candidate 不refresh
-					{
-						if(wcslen(lpMyPrivate->PreEditStr))
+					if(lpMyPrivate->PreEditStr)//有comp指標 
+					{						
+						if(wcslen(lpMyPrivate->PreEditStr)&& !isActive) //comp有字且還沒被active
 						{
 							UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 							UISetCompStr(lpMyPrivate->PreEditStr);
 							UIShowCompWindow();
+							isActive=true;
 						}
-						else
+						else if(wcslen(lpMyPrivate->PreEditStr)&& isActive)//comp有字但已經被active 
+						{
+							if(!wcslen(lpMyPrivate->CandStr) )//如果沒有candidate才要秀
+							{
+								UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
+								UISetCompStr(lpMyPrivate->PreEditStr);
+								UIShowCompWindow();
+							}						
+						}
+						else//comp沒字
 							UIHideCompWindow();
+
 					}
-					else if (wcslen(lpMyPrivate->CandStr))//如果有candidate 不hide
-					{
-					
-					}
-					else
+					else //沒有comp指標 =>hide
 					{
 						UIHideCompWindow();
 					}
@@ -140,6 +146,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		else //若把這個else拿掉 則切換視窗c# form 不會消失
 		{
 			murmur("wParam=NULL");
+			isActive=false;
 			UIHideCandWindow();
 			UIHideCompWindow();
 		}
@@ -166,27 +173,32 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			CompY = pt.y;
 		}
 		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
-
-		if(lpMyPrivate->PreEditStr && !wcslen(lpMyPrivate->CandStr)) //如果有candidate 不refresh
-		{
-			if(wcslen(lpMyPrivate->PreEditStr))
+		if(lpMyPrivate->PreEditStr)//有comp指標 
+		{						
+			if(wcslen(lpMyPrivate->PreEditStr)&& !isActive) //comp有字且還沒被active
 			{
 				UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 				UISetCompStr(lpMyPrivate->PreEditStr);
 				UIShowCompWindow();
+				isActive=true;
 			}
-			else
+			else if(wcslen(lpMyPrivate->PreEditStr)&& isActive)//comp有字但已經被active 
+			{
+				if(!wcslen(lpMyPrivate->CandStr) )//如果沒有candidate才要秀
+				{
+					UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
+					UISetCompStr(lpMyPrivate->PreEditStr);
+					UIShowCompWindow();
+				}						
+			}
+			else//comp沒字
 				UIHideCompWindow();
+
 		}
-		else if (wcslen(lpMyPrivate->CandStr)) //如果有candidate 不hide
-					{
-					
-					}
-		else
+		else //沒有comp指標 =>hide
 		{
 			UIHideCompWindow();
 		}
-		
 		if(lpMyPrivate->CandStr)
 		{
 			if(wcslen(lpMyPrivate->CandStr))
