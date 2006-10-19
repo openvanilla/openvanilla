@@ -63,35 +63,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		
 	case WM_IME_SETCONTEXT:
 		murmur("WM_IME_SETCONTEXT");
-		murmur("%p",lParam);
-		
-		//switch(lParam)
-		//{
-		//case ISC_SHOWUICOMPOSITIONWINDOW:
-		//	murmur("ISC_SHOWUICOMPOSITIONWINDOW");
-		//	break;
-		//	/*case ISC_SHOWUIGUIDWINDOW:
-		//	murmur("ISC_SHOWUIGUIDWINDOW");
-		//	break;
-		//	case ISC_SHOWUISOFTKBD:
-		//	murmur("ISC_SHOWUISOFTKBD");
-		//	break;*/
-		//case ISC_SHOWUICANDIDATEWINDOW:
-		//	murmur("ISC_SHOWUICANDIDATEWINDOW");
-		//	break;
-		//case ISC_SHOWUICANDIDATEWINDOW << 1:
-		//	murmur("ISC_SHOWUICANDIDATEWINDOW << 1");
-		//	break;
-		//case ISC_SHOWUICANDIDATEWINDOW << 2:
-		//	murmur("ISC_SHOWUICANDIDATEWINDOW << 2");
-		//	break;
-		//case ISC_SHOWUICANDIDATEWINDOW << 3:
-		//	murmur("ISC_SHOWUICANDIDATEWINDOW << 3");
-		//	break;
-		//default:
-		//	
-		//	break;
-		//}
+		murmur("%p",lParam);				
 		if (wParam) //TRUE if the window is active, and FALSE otherwise.
 		{
 			murmur("wParm=%p",wParam);
@@ -114,7 +86,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 					}
 
 					lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-					if(lpMyPrivate->PreEditStr)
+					if(lpMyPrivate->PreEditStr  && !wcslen(lpMyPrivate->CandStr))//如果有candidate 不refresh
 					{
 						if(wcslen(lpMyPrivate->PreEditStr))
 						{
@@ -124,6 +96,10 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 						}
 						else
 							UIHideCompWindow();
+					}
+					else if (wcslen(lpMyPrivate->CandStr))//如果有candidate 不hide
+					{
+					
 					}
 					else
 					{
@@ -191,7 +167,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		}
 		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
 
-		if(lpMyPrivate->PreEditStr)
+		if(lpMyPrivate->PreEditStr && !wcslen(lpMyPrivate->CandStr)) //如果有candidate 不refresh
 		{
 			if(wcslen(lpMyPrivate->PreEditStr))
 			{
@@ -202,6 +178,10 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			else
 				UIHideCompWindow();
 		}
+		else if (wcslen(lpMyPrivate->CandStr)) //如果有candidate 不hide
+					{
+					
+					}
 		else
 		{
 			UIHideCompWindow();

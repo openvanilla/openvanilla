@@ -1,3 +1,4 @@
+#define OV_DEBUG  
 #include <stdio.h>
 #include "PCMan.h"
 #include "DotNETHeader.h"
@@ -39,6 +40,7 @@ LRESULT APIENTRY CompWndProc(HWND hWnd,
 
 void UICreateCompWindow(HWND hUIWnd)
 {
+	murmur("%1.3f sec:\tC# comp window, create");
 	if (!IsWindow(uiComp.hWnd))
 	{
 		uiComp.hWnd = _CreateCompPage();
@@ -244,10 +246,15 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 //		}
 		SelectObject(hDC, oldFont);
 		ReleaseDC(uiComp.hWnd, hDC);
-		_MoveCompPage(newX,newY+sz.cy);
+		Watch watch;
+
+		
+		_MoveCompPage(newX,newY+sz.cy);		
+		
 		}
 		else
 		_MoveCompPage(newX,newY);	
+		
 		
 	}	
 		//UIShowCompWindow();
@@ -264,7 +271,10 @@ void UISetCompStr(wchar_t* lpStr)
 	
 	lpCompStr = wcsdup(lpStr);
 	std::wstring wsCompStr(lpCompStr);
+	watch.start();
 	_SetCompString(wsCompStr);
+	watch.stop();
+	murmur("%1.3f sec:\tC# comp window, setstring", watch.getSec());
 }
 
 int CompIndexToXPos(int index)
@@ -349,15 +359,16 @@ void PaintCompWindow(HWND hCompWnd)
 
 void UIShowCompWindow()
 {
+	murmur("%1.3f sec:\tC# comp window, show");
 	if (IsWindow(uiComp.hWnd))
 	{
 		_ShowCompPage();
-	//	ShowWindow(uiComp.hWnd, SW_SHOWNOACTIVATE);
 	}
 }
 
 void UIHideCompWindow()
 {
+	murmur("%1.3f sec:\tC# comp window, hide");
 	if (IsWindow(uiComp.hWnd))
 	{
 		_HideCompPage();		
