@@ -23,12 +23,13 @@ LONG NotifyHandle(HIMC hUICurIMC,
 	case IMN_OPENSTATUSWINDOW:
 		murmur("IMN_OPENSTATUSWINDOW");
 		UICreateStatusWindow(hWnd);
+		murmur(" ---> notify window handle: %d", hWnd);
 		if(!first) {
 		SystemParametersInfo(SPI_GETWORKAREA,
 				0,
 				&rec,
 				0);
-			UIMoveStatusWindow(hWnd, rec.right - 50, rec.bottom - 50);
+			UIMoveStatusWindow(hWnd, rec.right - 350, rec.bottom - 100);
 			first = true;
 		}
 		UIShowStatusWindow();

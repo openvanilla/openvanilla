@@ -1,8 +1,9 @@
-#define OV_DEBUG  
+#define OV_DEBUG
 #include <stdio.h>
 #include "PCMan.h"
 #include "DotNETHeader.h"
 #include <exception>
+#include <windows.h>
 
 LRESULT APIENTRY CompWndProc(HWND hWnd,
 		UINT msg,
@@ -230,10 +231,21 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		HFONT oldFont;
 		SIZE sz;
 		TCHAR szStr[100];
+		TEXTMETRIC tm;
+		HWND hLocalHwnd;
 
-		hDC = GetDC(uiComp.hWnd);
-		oldFont = (HFONT) SelectObject(hDC, hUIFont);
-		
+		LPWSTR localString;
+		//hLocalHwnd = GetActiveWindow();
+		hLocalHwnd = GetForegroundWindow();
+
+		hDC = GetDC(GetParent(hLocalHwnd));
+		murmur(" ---> hLocalHwnd: %d", hLocalHwnd);
+		murmur(" ---> Parent hLocalHwnd: %d", GetParent(hLocalHwnd));
+		//oldFont = (HFONT) SelectObject(hDC, hUIFont);
+		GetTextMetrics(hDC, &tm);
+		murmur("GetTextMetrics %d", tm.tmHeight);
+		//murmur("GetTextExLeading %d", tm.tmExternalLeading);
+
 		if(lpCompStr)
 		{
 		GetTextExtentPoint(hDC, lpCompStr, (int)wcslen(lpCompStr), &sz);
@@ -245,16 +257,13 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 //		murmur("NO lpCompStr FONT SIZE HEIGHT : %d", sz.cy);
 //		}
 		SelectObject(hDC, oldFont);
-		ReleaseDC(uiComp.hWnd, hDC);
-		Watch watch;
-
-		
-		_MoveCompPage(newX,newY+sz.cy);		
+		ReleaseDC(hLocalHwnd, hDC);		
+		//_MoveCompPage(newX,newY+sz.cy);		
+		_MoveCompPage(newX, newY+tm.tmHeight);
 		
 		}
 		else
 		_MoveCompPage(newX,newY);	
-		
 		
 	}	
 		//UIShowCompWindow();
@@ -363,6 +372,7 @@ void UIShowCompWindow()
 	if (IsWindow(uiComp.hWnd))
 	{
 		_ShowCompPage();
+	//	ShowWindow(uiComp.hWnd, SW_SHOWNOACTIVATE);
 	}
 }
 

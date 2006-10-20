@@ -123,6 +123,16 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "IMEStatusForm.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "IMEStatusForm.resx"
+                    DependentUpon = "IMEStatusForm.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "UtilFuncs.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

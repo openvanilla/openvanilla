@@ -1,5 +1,7 @@
+#define OV_DEBUG
 #include <stdio.h>
 #include "PCMan.h"
+#include "DotNETHeader.h"
 #include "resource.h"
 
 #pragma managed
@@ -57,7 +59,7 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 	switch (msg)
 	{
 		case WM_PAINT:
-			murmur("WM_PAINT, status window");
+			murmur("-----> WM_PAINT, status window");
 			PaintStatusWindow(hWnd);
 			break;
 		case WM_SETCURSOR:
@@ -96,6 +98,7 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 			break;
 		case WM_NOTIFY:
 			{
+				murmur("-----> WM_NOTIFY, status window");
 				switch( ((NMHDR*)lParam)->code ) 
 				{
 				case TTN_GETDISPINFO:
@@ -114,12 +117,15 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 			break;
 		case WM_SIZE:
 			{
+				murmur("-----> WM_SIZE, status window");
 				int cx = LOWORD(lParam);
 				int cy = HIWORD(lParam);
 				MoveWindow( hToolbar, 12, 2, cx-13, cy-4, TRUE);
 			}
 			break;
 		case WM_COMMAND:
+
+			murmur("-----> WM_COMMAND, status window");
 			id = LOWORD(wParam);
 			switch( id )
 			{
@@ -223,57 +229,63 @@ TBBUTTON toolbar_btns[]={
 
 void UICreateStatusWindow(HWND hUIWnd)
 {
+	//murmur("-----> UICreateStatusWindow");
 	if (!IsWindow(uiStatus.hWnd))
 	{
-		SIZE sz;
+		uiStatus.hWnd = _CreateStatusPage();
+		//_MoveStatusPage(300,300);
+		//_ShowStatusPage();
+		
+//		SIZE sz;
 
-		hIMEWnd = hUIWnd;
+//		hIMEWnd = hUIWnd;
 
-		uiStatus.hWnd = 
-			CreateWindowEx(WS_EX_CONTROLPARENT|WS_EX_TOPMOST, UISTATUSCLASSNAME, NULL,
-					WS_POPUP | WS_CLIPCHILDREN,
-					0, 0, 1, 1, hUIWnd, NULL, hInst, NULL);
-		SetWindowLong(uiStatus.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
+//		uiStatus.hWnd = 
+//			CreateWindowEx(WS_EX_CONTROLPARENT|WS_EX_TOPMOST, UISTATUSCLASSNAME, NULL,
+//					WS_POPUP | WS_CLIPCHILDREN,
+//					0, 0, 1, 1, hUIWnd, NULL, hInst, NULL);
+//		SetWindowLong(uiStatus.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
 
-		hToolbar = CreateToolbarEx( uiStatus.hWnd, 
-			TBSTYLE_FLAT|TBSTYLE_TOOLTIPS|TBSTYLE_LIST|CCS_NODIVIDER|CCS_NORESIZE|
-			WS_CHILD|WS_VISIBLE|CCS_NOPARENTALIGN, 
-			10, 3, hInstDLL, 0, 
-			toolbar_btns, sizeof(toolbar_btns)/sizeof(TBBUTTON), 
-			16, 16, 16, 16, sizeof(TBBUTTON));
+//		hToolbar = CreateToolbarEx( uiStatus.hWnd, 
+//			TBSTYLE_FLAT|TBSTYLE_TOOLTIPS|TBSTYLE_LIST|CCS_NODIVIDER|CCS_NORESIZE|
+//			WS_CHILD|WS_VISIBLE|CCS_NOPARENTALIGN, 
+//			10, 3, hInstDLL, 0, 
+//			toolbar_btns, sizeof(toolbar_btns)/sizeof(TBBUTTON), 
+//			16, 16, 16, 16, sizeof(TBBUTTON));
 
 //		hToolbar = CreateWindowEx( 0, TOOLBARCLASSNAME, NULL, CCS_NOPARENTALIGN|WS_CHILD|WS_VISIBLE, 
 //			100, 1, 20, 24, uiStatus.hWnd, NULL, hInstDLL, NULL);
 
-		HIMAGELIST himl = ImageList_Create( 16, 16, ILC_COLOR24|ILC_MASK, 7, 0);
-		HBITMAP htbbmp = LoadBitmap( hInstDLL, LPCTSTR(IDB_STATUS_TB) );
-		ImageList_RemoveAll(himl);
-		ImageList_AddMasked( himl, htbbmp, RGB(192, 192, 192) );
-		DeleteObject(htbbmp);
-		himl = (HIMAGELIST)SendMessage( hToolbar, TB_SETIMAGELIST, 0, LPARAM(himl));
-		if( himl )
-			ImageList_Destroy( himl );
+//		HIMAGELIST himl = ImageList_Create( 16, 16, ILC_COLOR24|ILC_MASK, 7, 0);
+//		HBITMAP htbbmp = LoadBitmap( hInstDLL, LPCTSTR(IDB_STATUS_TB) );
+//		ImageList_RemoveAll(himl);
+//		ImageList_AddMasked( himl, htbbmp, RGB(192, 192, 192) );
+//		DeleteObject(htbbmp);
+//		himl = (HIMAGELIST)SendMessage( hToolbar, TB_SETIMAGELIST, 0, LPARAM(himl));
+//		if( himl )
+//			ImageList_Destroy( himl );
 
-		TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
-		tbi.dwMask = TBIF_TEXT;		tbi.pszText = IC.at(CurrentIC);
-		SendMessage( hToolbar, TB_SETBUTTONINFO, ID_CHANGE_IME, LPARAM(&tbi));
+//		TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
+//		tbi.dwMask = TBIF_TEXT;		tbi.pszText = IC.at(CurrentIC);
+//		SendMessage( hToolbar, TB_SETBUTTONINFO, ID_CHANGE_IME, LPARAM(&tbi));
 
 //		SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
-		GetToolbarSize( hToolbar, &sz );
+//		GetToolbarSize( hToolbar, &sz );
 
-		uiStatus.sz.cx = sz.cx + 14;
-		uiStatus.sz.cy = sz.cy + 4;
-		if( uiStatus.sz.cy < 26 )
-			uiStatus.sz.cy = 26;
-		MoveWindow(uiStatus.hWnd,
-				uiStatus.pt.x,
-				uiStatus.pt.y,
-				uiStatus.sz.cx,
-				uiStatus.sz.cy,
-				TRUE);
-		ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
+		// for status movement
+//		uiStatus.sz.cx = sz.cx + 14;
+//		uiStatus.sz.cy = sz.cy + 4;
+//		if( uiStatus.sz.cy < 26 )
+//			uiStatus.sz.cy = 26;
+//		MoveWindow(uiStatus.hWnd,
+//				uiStatus.pt.x,
+//				uiStatus.pt.y,
+//				uiStatus.sz.cx,
+//				uiStatus.sz.cy,
+//				TRUE);
+//		ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
 	}
-	UIHideStatusWindow();
+//	UIHideStatusWindow();
 	return;
 }
 
@@ -284,48 +296,74 @@ void UIMoveStatusWindow(HWND hUIWnd, int X, int Y)
 
 	if (IsWindow(uiStatus.hWnd))
 	{
-		//HDC hDC;
-		//HFONT oldFont;
 		POINT pt;
 		RECT screenrc;
 		SIZE sz;
 
 		sz.cx = 0;
 		sz.cy = 0;
+
 		uiStatus.pt.x = X;
 		uiStatus.pt.y = Y;
 
-		if(sz.cx < uiStatus.sz.cx)
-			sz.cx = uiStatus.sz.cx;
-
+		sz.cx = uiStatus.sz.cx;
 		sz.cy = uiStatus.sz.cy;
 
 		pt.x = uiStatus.pt.x;
 		pt.y = uiStatus.pt.y;
 
-		SystemParametersInfo(SPI_GETWORKAREA,
-				0,
-				&screenrc,
-				0);
+
+		SystemParametersInfo(SPI_GETWORKAREA, 0, &screenrc, 0);
 
 		if( (pt.x + sz.cx) > screenrc.right )
-			pt.x = screenrc.right - sz.cx;
+			pt.x = screenrc.right - 200;
 		if( (pt.y + sz.cy) > screenrc.bottom )
-			pt.y = screenrc.bottom - sz.cy;
+			pt.y = screenrc.bottom - 50;		
 
-		MoveWindow(uiStatus.hWnd,
-				pt.x,
-				pt.y,
-				sz.cx,
-				sz.cy,
-				TRUE);
+		_MoveStatusPage(pt.x, pt.y);
 
-		uiStatus.pt.x = pt.x;
-		uiStatus.pt.y = pt.y;
+		//HDC hDC;
+		//HFONT oldFont;
+//		POINT pt;
+//		RECT screenrc;
+//		SIZE sz;
 
-		ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
+//		sz.cx = 0;
+//		sz.cy = 0;
+//		uiStatus.pt.x = X;
+//		uiStatus.pt.y = Y;
 
-		InvalidateRect(uiStatus.hWnd,NULL, FALSE);
+//		if(sz.cx < uiStatus.sz.cx)
+//			sz.cx = uiStatus.sz.cx;
+
+//		sz.cy = uiStatus.sz.cy;
+
+//		pt.x = uiStatus.pt.x;
+//		pt.y = uiStatus.pt.y;
+
+//		SystemParametersInfo(SPI_GETWORKAREA,
+//				0,
+//				&screenrc,
+//				0);
+
+//		if( (pt.x + sz.cx) > screenrc.right )
+//			pt.x = screenrc.right - sz.cx;
+//		if( (pt.y + sz.cy) > screenrc.bottom )
+//			pt.y = screenrc.bottom - sz.cy;
+
+//		MoveWindow(uiStatus.hWnd,
+//				pt.x,
+//				pt.y,
+//				sz.cx,
+//				sz.cy,
+//				TRUE);
+
+//		uiStatus.pt.x = pt.x;
+//		uiStatus.pt.y = pt.y;
+
+//		ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
+
+//		InvalidateRect(uiStatus.hWnd,NULL, FALSE);
 	}
 }
 
@@ -355,13 +393,19 @@ void PaintStatusWindow(HWND hStatusWnd)
 void UIShowStatusWindow()
 {
 	if (IsWindow(uiStatus.hWnd))
-		ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
+	{
+		_ShowStatusPage();
+		_SetStatusChiEng(isChinese);
+		
+		//ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
+	}
 }
 
 void UIHideStatusWindow()
 {
 	if (IsWindow(uiStatus.hWnd))
-		ShowWindow(uiStatus.hWnd, SW_HIDE);
+		//ShowWindow(uiStatus.hWnd, SW_HIDE);
+		_HideStatusPage();
 }
 
 int CompIndexToXPos(int index);
@@ -380,6 +424,7 @@ void UISetCursorPos(int i)
 
 void UISetMarkFrom(int i)
 {
+	murmur("-----> UISetMarkFrom, status window");
 	CompSelStart = i;
 /*	HDC tmpdc = GetDC(NULL);
 	TCHAR debug_info[100];
@@ -391,6 +436,7 @@ void UISetMarkFrom(int i)
 
 void UISetMarkTo(int i)
 {
+	murmur("-----> UISetMarkTo, status window");
 /*	HDC tmpdc = GetDC(NULL);
 	TCHAR debug_info[100];
 	_stprintf(debug_info, _T("mt=%d"),  i);
@@ -443,7 +489,8 @@ void UIChangeHalfFull(HWND hWnd)
 void UIChangeChiEng(HWND hWnd)
 {
 	isChinese = !isChinese;
-	SendMessage( hToolbar, TB_CHANGEBITMAP, ID_CHI_ENG, MAKELPARAM(isChinese ? 2 : 3, 0));
+	//SendMessage( hToolbar, TB_CHANGEBITMAP, ID_CHI_ENG, MAKELPARAM(isChinese ? 2 : 3, 0));
+	UIShowStatusWindow();
 	HIMC imc = ImmGetContext( hIMEWnd );
 	if( imc )
 	{
