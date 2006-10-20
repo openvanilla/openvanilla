@@ -44,3 +44,8 @@ EXPORTS
 	_MoveCompPage
 	_SetCompString
 	UISetCompStr
+	_CreateStatusPage
+	_ShowStatusPage
+	_MoveStatusPage
+	_HideStatusPage
+	_SetStatusChiEng

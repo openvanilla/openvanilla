@@ -17,3 +17,8 @@ void _HideCompPage();
 void _ClearCompPage();
 void _MoveCompPage(int x, int y);
 void _SetCompString(const std::wstring&);
+HWND _CreateStatusPage();
+void _ShowStatusPage();
+void _MoveStatusPage(int, int);
+void _HideStatusPage();
+void _SetStatusChiEng(bool);

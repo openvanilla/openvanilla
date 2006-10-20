@@ -25,7 +25,7 @@ BOOL IMEUIRegisterClass( HINSTANCE hInstance )
 	hUIFont = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
 	LOGFONT lf;
 	GetObject( hUIFont, sizeof(lf), &lf);
-	lf.lfHeight = 16;
+	lf.lfHeight = 48;
 	hUIFont = CreateFontIndirect( &lf );
 
 	//
