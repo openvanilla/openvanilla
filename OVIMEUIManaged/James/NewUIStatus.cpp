@@ -1,0 +1,219 @@
+#include <vector>
+//#include <windows.h>
+#include "PCMan.h"
+
+
+#pragma managed
+
+#using <mscorlib.dll>
+#using <System.dll>
+#using <System.Windows.Forms.dll>
+using namespace System;
+using namespace System::Diagnostics;
+using namespace System::Reflection;
+using namespace System::Windows::Forms;
+using namespace System::Collections;
+using namespace std;
+
+__gc class StatusFormAssembly{
+private:
+	StatusFormAssembly(){}
+	static Assembly* pasm;
+	static bool hasPasm = false;
+
+	static Object* objStatusForm;
+	static bool hasObjStatusForm = false;
+
+	static Type* typeStatus;
+	static bool hasTypeStatus = false;
+
+	static MethodInfo* methodStatusShowNoActive;
+	static bool hasMethodStatusShowNoActive = false;
+
+	static MethodInfo* methodStatusMove;
+	static bool hasMethodStatusMove = false;
+
+	static MethodInfo* methodStatusSetChiEng;
+	static bool hasMethodStatusSetChiEng = false;
+
+	static MethodInfo* methodStatusHide;
+	static bool hasMethodStatusHide = false;
+
+	__nogc struct IsFormCreated
+	{
+		bool isCreated;
+		void PutValue(bool flag)
+		{
+			isCreated = flag;
+		}
+
+		bool GetValue()
+		{
+			return isCreated;
+		}
+		__declspec(property(get = GetValue, put = PutValue)) bool IsCreated;
+	};
+
+public:
+	
+	static ArrayList* argCollection = __gc new ArrayList();
+	static IsFormCreated* FormStatus=new IsFormCreated();
+	static Assembly* Instance()
+	{
+		if(!hasPasm) 
+		{
+			pasm = Reflection::Assembly::LoadFile("C:\\WINDOWS\\OpenVanilla\\CSharpFormLibrary.dll");	
+			hasPasm = true;
+		}
+		return pasm;
+	}
+	
+	static Object* StatusForm()
+	{
+		if(!hasObjStatusForm)
+		{
+			objStatusForm =
+				pasm->CreateInstance("CSharpFormLibrary.IMEStatusForm",true);
+			hasObjStatusForm = true;
+		}
+		return objStatusForm;
+	}
+
+	static Type* StatusType()
+	{
+		if(!hasTypeStatus)
+		{
+			typeStatus =
+				StatusFormAssembly::Instance()
+					->GetType("CSharpFormLibrary.IMEStatusForm");
+			hasTypeStatus = true;
+		}
+		return typeStatus;
+	}
+
+		static MethodInfo* StatusShowNoActive()
+	{
+		if(!hasMethodStatusShowNoActive)
+		{
+			methodStatusShowNoActive =
+				StatusFormAssembly::StatusType()->GetMethod("ShowNoActive");
+			hasMethodStatusShowNoActive = true;
+		}
+		return methodStatusShowNoActive;
+	}
+
+	static MethodInfo* StatusMove()
+	{
+		if(!hasMethodStatusMove)
+		{
+			methodStatusMove =
+				StatusFormAssembly::StatusType()	->GetMethod("SetLocation");
+			hasMethodStatusMove = true;
+		}
+		return methodStatusMove;
+	}
+
+	static MethodInfo* StatusSetChiEng()
+	{
+		if(!hasMethodStatusSetChiEng)
+		{
+			methodStatusSetChiEng = 
+				StatusFormAssembly::StatusType()->GetMethod("SetChiEng");
+			hasMethodStatusSetChiEng = true;
+		}
+		return methodStatusSetChiEng;
+	}
+
+
+	static MethodInfo* StatusHide()
+	{
+		if(!hasMethodStatusHide)
+		{
+			methodStatusHide =
+				StatusFormAssembly::StatusType()	->GetMethod("HideNoActive");
+			hasMethodStatusHide = true;
+		}
+		return methodStatusHide;
+	}
+
+};
+
+HWND _CreateStatusPage()//create
+{	
+	//System::Diagnostics::Debug::WriteLine("Status Create");
+	//MethodInfo* methodCreateWindow =
+	//	StatusFormAssembly::StatusType()->GetMethod("IMEStatusForm");
+	
+	PropertyInfo* propertyHandle =
+		StatusFormAssembly::StatusType()->GetProperty("Handle");
+	return
+		(HWND)(
+			dynamic_cast<IntPtr*>(
+				propertyHandle->GetValue(StatusFormAssembly::StatusForm(), NULL))
+		)->ToPointer();
+	
+}
+
+void _ShowStatusPage()
+{	
+	//System::Diagnostics::Debug::WriteLine("Comp Show");
+	//try 
+	//{
+		//System::Reflection::Assembly* foo = CandFormAssembly::Instance();	
+		//System::Type* bar = foo->GetType("CSharpFormLibrary.IMECompForm");
+		//MethodInfo* methodShowWindow = bar->GetMethod("ShowNoActive");
+		//methodShowWindow->Invoke(CandFormAssembly::CandidateForm(), NULL);
+		//Object* ret = CandFormAssembly::CandiShowNoActive()
+	Object* ret = StatusFormAssembly::StatusShowNoActive()
+			->Invoke(StatusFormAssembly::StatusForm(), NULL);
+	//}
+	/*
+	catch(System::Exception* e)
+	{
+		System::Diagnostics::Debug::WriteLine(e->Source);
+		System::Diagnostics::Debug::WriteLine(e->TargetSite);
+		System::Diagnostics::Debug::WriteLine(e->HelpLink);
+		System::Diagnostics::Debug::WriteLine(e->InnerException);
+		System::Diagnostics::Debug::WriteLine(e->Message);
+		System::Diagnostics::Debug::WriteLine(e->StackTrace);
+	}
+	*/
+}
+
+void _MoveStatusPage(int x,int y)
+{	
+	//System::Diagnostics::Debug::WriteLine("Candi Move");
+	StatusFormAssembly::argCollection->Clear();
+	StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(x)));
+	StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(y)));	
+
+	Object* param[] =
+		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
+			->ToArray(System::Type::GetType("System.Object")));
+	Object* ret =
+		StatusFormAssembly::StatusMove()->Invoke(StatusFormAssembly::StatusForm(), param);
+}
+
+void _SetStatusChiEng(bool inChinese)
+{	
+	//System::Diagnostics::Debug::WriteLine("Candi Move");
+	StatusFormAssembly::argCollection->Clear();
+	StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(inChinese)));
+	//StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(y)));	
+
+	Object* param[] =
+		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
+			->ToArray(System::Type::GetType("System.Object")));
+	Object* ret =
+		StatusFormAssembly::StatusSetChiEng()->Invoke(StatusFormAssembly::StatusForm(), param);
+}
+
+void _HideStatusPage()
+{
+	//System::Diagnostics::Debug::WriteLine("Candi Hide");
+	//MethodInfo* methodHideWindow = CompFormAssembly::Instance()->GetType("CSharpFormLibrary.IMECompForm")->	GetMethod("HideNoActive");
+	//methodHideWindow->Invoke(CompFormAssembly::CompForm(),NULL);
+	StatusFormAssembly::StatusHide()->Invoke(StatusFormAssembly::StatusForm(),NULL);
+}
+
+
