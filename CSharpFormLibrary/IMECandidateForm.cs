@@ -483,10 +483,16 @@ namespace CSharpFormLibrary
 			this.button12.Size = new System.Drawing.Size(48, 32);
 			this.button12.TabIndex = 17;
 			this.button12.Text = "1/1";
-			// 
-			// IMECandidateForm
-			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
+
+            // 
+            // IMECandidateForm
+            // 
+            //<comment author='b6s'>This makes DragDrop registration fail.
+            //this.AllowDrop = true;
+            //</comment>
+
+            //this.ControlBox=false;
+            this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
 			this.BackColor = System.Drawing.SystemColors.Window;
 			this.ClientSize = new System.Drawing.Size(272, 120);
 			this.Controls.Add(this.button12);

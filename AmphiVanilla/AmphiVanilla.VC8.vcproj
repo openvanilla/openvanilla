@@ -68,6 +68,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="libltdl.lib libiconv.lib"
 				OutputFile=".\Release\AmphiVanilla.lib"
 				SuppressStartupBanner="true"
 			/>
@@ -141,6 +142,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="libltdl.lib libiconv.lib"
 				OutputFile=".\Debug\AmphiVanilla.lib"
 				SuppressStartupBanner="true"
 			/>
