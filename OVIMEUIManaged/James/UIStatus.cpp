@@ -3,6 +3,9 @@
 #include "PCMan.h"
 #include "DotNETHeader.h"
 #include "resource.h"
+//<comment author='b6s'>For old process in C++, deprecated.
+//#include "AVLoader.h"
+//</comment>
 
 #pragma managed
 #using <mscorlib.dll>
@@ -235,55 +238,74 @@ void UICreateStatusWindow(HWND hUIWnd)
 		uiStatus.hWnd = _CreateStatusPage();
 		//_MoveStatusPage(300,300);
 		//_ShowStatusPage();
-		
-//		SIZE sz;
 
-//		hIMEWnd = hUIWnd;
+//<comment author='b6s'>Jaimie is working on porting these actions to C#
+/*
+		SIZE sz;
 
-//		uiStatus.hWnd = 
-//			CreateWindowEx(WS_EX_CONTROLPARENT|WS_EX_TOPMOST, UISTATUSCLASSNAME, NULL,
-//					WS_POPUP | WS_CLIPCHILDREN,
-//					0, 0, 1, 1, hUIWnd, NULL, hInst, NULL);
-//		SetWindowLong(uiStatus.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
+		hIMEWnd = hUIWnd;
 
-//		hToolbar = CreateToolbarEx( uiStatus.hWnd, 
-//			TBSTYLE_FLAT|TBSTYLE_TOOLTIPS|TBSTYLE_LIST|CCS_NODIVIDER|CCS_NORESIZE|
-//			WS_CHILD|WS_VISIBLE|CCS_NOPARENTALIGN, 
-//			10, 3, hInstDLL, 0, 
-//			toolbar_btns, sizeof(toolbar_btns)/sizeof(TBBUTTON), 
-//			16, 16, 16, 16, sizeof(TBBUTTON));
+		uiStatus.hWnd = 
+			CreateWindowEx(WS_EX_CONTROLPARENT|WS_EX_TOPMOST, UISTATUSCLASSNAME, NULL,
+					WS_POPUP | WS_CLIPCHILDREN,
+					0, 0, 1, 1, hUIWnd, NULL, hInst, NULL);
+		SetWindowLong(uiStatus.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
 
-//		hToolbar = CreateWindowEx( 0, TOOLBARCLASSNAME, NULL, CCS_NOPARENTALIGN|WS_CHILD|WS_VISIBLE, 
-//			100, 1, 20, 24, uiStatus.hWnd, NULL, hInstDLL, NULL);
+		hToolbar = CreateToolbarEx( uiStatus.hWnd, 
+			TBSTYLE_FLAT|TBSTYLE_TOOLTIPS|TBSTYLE_LIST|CCS_NODIVIDER|CCS_NORESIZE|
+			WS_CHILD|WS_VISIBLE|CCS_NOPARENTALIGN, 
+			10, 3, hInstDLL, 0, 
+			toolbar_btns, sizeof(toolbar_btns)/sizeof(TBBUTTON), 
+			16, 16, 16, 16, sizeof(TBBUTTON));
 
-//		HIMAGELIST himl = ImageList_Create( 16, 16, ILC_COLOR24|ILC_MASK, 7, 0);
-//		HBITMAP htbbmp = LoadBitmap( hInstDLL, LPCTSTR(IDB_STATUS_TB) );
-//		ImageList_RemoveAll(himl);
-//		ImageList_AddMasked( himl, htbbmp, RGB(192, 192, 192) );
-//		DeleteObject(htbbmp);
-//		himl = (HIMAGELIST)SendMessage( hToolbar, TB_SETIMAGELIST, 0, LPARAM(himl));
-//		if( himl )
-//			ImageList_Destroy( himl );
+		hToolbar = CreateWindowEx( 0, TOOLBARCLASSNAME, NULL, CCS_NOPARENTALIGN|WS_CHILD|WS_VISIBLE, 
+			100, 1, 20, 24, uiStatus.hWnd, NULL, hInstDLL, NULL);
 
-//		TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
-//		tbi.dwMask = TBIF_TEXT;		tbi.pszText = IC.at(CurrentIC);
-//		SendMessage( hToolbar, TB_SETBUTTONINFO, ID_CHANGE_IME, LPARAM(&tbi));
+		HIMAGELIST himl = ImageList_Create( 16, 16, ILC_COLOR24|ILC_MASK, 7, 0);
+		HBITMAP htbbmp = LoadBitmap( hInstDLL, LPCTSTR(IDB_STATUS_TB) );
+		ImageList_RemoveAll(himl);
+		ImageList_AddMasked( himl, htbbmp, RGB(192, 192, 192) );
+		DeleteObject(htbbmp);
+		himl = (HIMAGELIST)SendMessage( hToolbar, TB_SETIMAGELIST, 0, LPARAM(himl));
+		if( himl )
+			ImageList_Destroy( himl );
 
-//		SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
-//		GetToolbarSize( hToolbar, &sz );
+		TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
+		tbi.dwMask = TBIF_TEXT;
+		//<comment author='b6s'>Disable this global variable "IC" because of .NET 2.0's problem
+		//tbi.pszText = IC.at(CurrentIC);
+		//</comment>
+		char modNameUTF8[1024];
+		wchar_t modNameUCS2[1024];
+		AVLoader* loader = AVLoader::getLoader();
+		if(loader->moduleName(CurrentIC, modNameUTF8)) {
+			MultiByteToWideChar(
+				CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
+			tbi.pszText = modNameUCS2;
+		}
+		else {
+			tbi.pszText = L"ERROR";
+			murmur("loader->moduleName() failed.");
+		}
+		SendMessage( hToolbar, TB_SETBUTTONINFO, ID_CHANGE_IME, LPARAM(&tbi));
+
+		SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
+		GetToolbarSize( hToolbar, &sz );
 
 		// for status movement
-//		uiStatus.sz.cx = sz.cx + 14;
-//		uiStatus.sz.cy = sz.cy + 4;
-//		if( uiStatus.sz.cy < 26 )
-//			uiStatus.sz.cy = 26;
-//		MoveWindow(uiStatus.hWnd,
-//				uiStatus.pt.x,
-//				uiStatus.pt.y,
-//				uiStatus.sz.cx,
-//				uiStatus.sz.cy,
-//				TRUE);
-//		ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
+		uiStatus.sz.cx = sz.cx + 14;
+		uiStatus.sz.cy = sz.cy + 4;
+		if( uiStatus.sz.cy < 26 )
+			uiStatus.sz.cy = 26;
+		MoveWindow(uiStatus.hWnd,
+				uiStatus.pt.x,
+				uiStatus.pt.y,
+				uiStatus.sz.cx,
+				uiStatus.sz.cy,
+				TRUE);
+		ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
+*/
+//</comment>
 	}
 //	UIHideStatusWindow();
 	return;

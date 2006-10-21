@@ -337,22 +337,20 @@ BOOL WINAPI DllMain( HINSTANCE hInst,  DWORD fdwReason,  LPVOID lpvReserved )
 {
 	switch(fdwReason)
 	{
-	case DLL_PROCESS_ATTACH:
-		{
-		INITCOMMONCONTROLSEX iccex;
-		iccex.dwSize = sizeof(INITCOMMONCONTROLSEX);
-		iccex.dwICC = ICC_BAR_CLASSES;
-		InitCommonControlsEx(&iccex);
+		case DLL_PROCESS_ATTACH:
+			INITCOMMONCONTROLSEX iccex;
+			iccex.dwSize = sizeof(INITCOMMONCONTROLSEX);
+			iccex.dwICC = ICC_BAR_CLASSES;
+			InitCommonControlsEx(&iccex);
 
-		hInstDLL = hInst;
-		DisableThreadLibraryCalls( HMODULE(hInstDLL) );
-		hIMESelMenu = CreatePopupMenu();
-		return TRUE;
-		}
-	case DLL_PROCESS_DETACH:
-		AVDictionary::shutdown();
-		DestroyMenu(hIMESelMenu);
-		break;
+			hInstDLL = hInst;
+			DisableThreadLibraryCalls( HMODULE(hInstDLL) );
+			hIMESelMenu = CreatePopupMenu();
+			return TRUE;
+		case DLL_PROCESS_DETACH:
+			AVDictionary::shutdown();
+			DestroyMenu(hIMESelMenu);
+			break;
 	}
 	return TRUE;
 }
