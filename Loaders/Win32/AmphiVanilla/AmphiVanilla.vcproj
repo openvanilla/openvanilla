@@ -40,6 +40,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="libltdl.lib libiconv.lib"
 				OutputFile=".\Release\AmphiVanilla.lib"
 				SuppressStartupBanner="TRUE"/>
 			<Tool
@@ -90,6 +91,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="libltdl.lib libiconv.lib"
 				OutputFile=".\Debug\AmphiVanilla.lib"
 				SuppressStartupBanner="TRUE"/>
 			<Tool

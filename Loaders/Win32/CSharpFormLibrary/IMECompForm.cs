@@ -73,13 +73,17 @@ namespace CSharpFormLibrary
 			this.textBox1.Size = new System.Drawing.Size(408, 27);
 			this.textBox1.TabIndex = 0;
 			this.textBox1.Text = "textBox1";
-			// 
-			// IMECompForm
-			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(7, 20);
-			this.BackColor = System.Drawing.SystemColors.Window;
-			this.ClientSize = new System.Drawing.Size(408, 24);
-			this.Controls.Add(this.textBox1);
+			
+            //
+            // IMECompForm
+            //
+            //<comment author='b6s'>This makes DragDrop registration fail.
+            //this.AllowDrop = true;
+            //</comment>
+            this.AutoScaleBaseSize = new System.Drawing.Size(7, 20);
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(408, 24);
+            this.Controls.Add(this.textBox1);
 			this.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "IMECompForm";
