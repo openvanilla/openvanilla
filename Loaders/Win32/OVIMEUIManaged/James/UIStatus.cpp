@@ -3,9 +3,8 @@
 #include "PCMan.h"
 #include "DotNETHeader.h"
 #include "resource.h"
-//<comment author='b6s'>For old process in C++, deprecated.
-//#include "AVLoader.h"
-//</comment>
+#include "AVLoader.h"
+
 
 #pragma managed
 #using <mscorlib.dll>
@@ -194,6 +193,7 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 				{
 					id -= ID_IME_LIST_FIRST;
 					CurrentIC = id;
+					murmur("CurrentIC in ID_IME %d", CurrentIC);
 
 					TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
 					tbi.dwMask = TBIF_TEXT;		tbi.pszText = IC.at(CurrentIC);
@@ -308,7 +308,37 @@ void UICreateStatusWindow(HWND hUIWnd)
 //</comment>
 	}
 //	UIHideStatusWindow();
+	char modNameUTF8[1024];
+	wchar_t modNameUCS2[1024];
+	
+	AVLoader* loader = AVLoader::getLoader();
+	wchar_t *modCurrentName;
+	murmur("--->Current IC at create %d", CurrentIC);
+	if(loader->moduleName(CurrentIC, modNameUTF8)) 
+	{
+		MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
+		//tbi.pszText = modNameUCS2;
+		modCurrentName = modNameUCS2;
+	}
+	else 
+	{
+		//tbi.pszText = L"ERROR";
+		modCurrentName = L"ERROR";
+		murmur("loader->moduleName() failed.");
+	}
+	UISetStatusModStr(modCurrentName);
 	return;
+}
+
+void UISetStatusModStr(wchar_t* lpStr)
+{
+	//lpCompStr = wcsdup(lpStr);
+	std::wstring wsStatusStr(wcsdup(lpStr));
+	//watch.start();
+	_SetStatusModString(wsStatusStr);
+	//watch.stop();
+	//murmur("%1.3f sec:\tC# comp window, setstring", watch.getSec());
+
 }
 
 void UIMoveStatusWindow(HWND hUIWnd, int X, int Y)
@@ -470,25 +500,56 @@ void UISetMarkTo(int i)
 
 void UIChangeModule(HWND hWnd)
 {
-    TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
+    //TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
+	
+	//CurrentIC++;
+	//if(CurrentIC > (int)IC.size() - 1)
+	//		CurrentIC = 0;
+	
+	//tbi.dwMask = TBIF_TEXT;		tbi.pszText = IC.at(CurrentIC);
+
+	//SendMessage( hToolbar, TB_SETBUTTONINFO, ID_CHANGE_IME, LPARAM(&tbi));
+
+	//SIZE sz;
+//	SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
+	//GetToolbarSize( hToolbar, &sz );
+
+	//uiStatus.sz.cx = sz.cx + 14;
+	//uiStatus.sz.cy = sz.cy + 4;
+
+	char modNameUTF8[1024];
+	wchar_t modNameUCS2[1024];
+	
+	AVLoader* loader = AVLoader::getLoader();
+	wchar_t *modCurrentName;
+	murmur("---> current IC %d", CurrentIC);
+	murmur("---> loader->getInputMethodCount %d",loader->getInputMethodCount() );
 	
 	CurrentIC++;
-	if(CurrentIC > (int)IC.size() - 1)
-			CurrentIC = 0;
+	//module change to the next available module
+	if(CurrentIC > loader->getInputMethodCount()-1)
+		CurrentIC = 1;
 	
-	tbi.dwMask = TBIF_TEXT;		tbi.pszText = IC.at(CurrentIC);
-
-	SendMessage( hToolbar, TB_SETBUTTONINFO, ID_CHANGE_IME, LPARAM(&tbi));
-
-	SIZE sz;
-//	SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
-	GetToolbarSize( hToolbar, &sz );
-
-	uiStatus.sz.cx = sz.cx + 14;
-	uiStatus.sz.cy = sz.cy + 4;
+	//if(loader->moduleName(CurrentIC, modNameUTF8)) 
+	if(loader->moduleName(CurrentIC, modNameUTF8)) 
+	{
+		MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
+		//tbi.pszText = modNameUCS2;
+		modCurrentName = modNameUCS2;
+		
+	}
+	else 
+	{
+		//tbi.pszText = L"ERROR";
+		modCurrentName = L"ERROR";
+		murmur("loader->moduleName() failed.");
+	}
+	UISetStatusModStr(modCurrentName);
+	//murmur("UIStatus UIChangeModule %s",modCurrentName);
 	RECT rc;
 	GetWindowRect(uiStatus.hWnd, &rc);
 	UIMoveStatusWindow(hWnd, rc.left, rc.top );
+	_ShowStatusPage();
 }
 
 void UIChangeHalfFull(HWND hWnd)

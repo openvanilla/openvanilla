@@ -22,3 +22,4 @@ void _ShowStatusPage();
 void _MoveStatusPage(int, int);
 void _HideStatusPage();
 void _SetStatusChiEng(bool);
+void _SetStatusModString(const std::wstring&);
