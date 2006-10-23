@@ -20,6 +20,12 @@ public:
 	bool keyEvent(int n, AVKeyCode c);
 	bool moduleName(int i, char *str);
 	void closeModule();
+
+	//<comment author='b6s'>Add these two functions temporarily, will refactor them later.
+	int getInputMethodCount();
+	int getOutputFilterCount();
+	//</comment>
+
 private:
 	AVLoader();
 	static AVLoader *globalLoader;

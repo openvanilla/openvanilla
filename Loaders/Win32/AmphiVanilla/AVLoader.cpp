@@ -147,3 +147,13 @@ void AVLoader::closeModule()
 		activatedIm = -1;
 	}
 }
+
+int AVLoader::getInputMethodCount()
+{
+	return ctx_vector.size();
+}
+
+int AVLoader::getOutputFilterCount()
+{
+	return ovof_vector.size();
+}
