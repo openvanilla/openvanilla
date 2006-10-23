@@ -113,6 +113,16 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "IMECandidateFrom2D.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "IMECandidateFrom2D.resx"
+                    DependentUpon = "IMECandidateFrom2D.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "IMECompForm.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
