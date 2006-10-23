@@ -17,6 +17,7 @@ namespace CSharpFormLibrary
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 		private const int WM_MOUSEACTIVATE = 0x0021;
+		private const int MA_NOACTIVATE=0x0003;
 		private const int MA_NOACTIVATEANDEAT = 0x0004;
 		public IMECompForm()
 		{
@@ -33,7 +34,7 @@ namespace CSharpFormLibrary
 		{
 			if (m.Msg == WM_MOUSEACTIVATE) 
 			{
-				m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
+				m.Result = (IntPtr)MA_NOACTIVATE;
 				return;
 			}
 			base.WndProc(ref m);
