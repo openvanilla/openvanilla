@@ -49,3 +49,5 @@ EXPORTS
 	_MoveStatusPage
 	_HideStatusPage
 	_SetStatusChiEng
+	UISetStatusModStr
+	_SetStatusModString
