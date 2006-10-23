@@ -256,6 +256,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\James\NewUIStatus.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\James\PCMan.cpp"
 					>
 					<FileConfiguration
