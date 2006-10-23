@@ -14,8 +14,6 @@ namespace CSharpFormLibrary
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.Button button4;
-		private System.Windows.Forms.Button button5;
 		private System.Windows.Forms.Button button6;
 		/// <summary>
 		/// Required designer variable.
@@ -59,8 +57,6 @@ namespace CSharpFormLibrary
 			this.button1 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
-			this.button4 = new System.Windows.Forms.Button();
-			this.button5 = new System.Windows.Forms.Button();
 			this.button6 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
@@ -97,35 +93,12 @@ namespace CSharpFormLibrary
 			this.button3.TabIndex = 2;
 			this.button3.Text = "button3";
 			// 
-			// button4
-			// 
-			this.button4.BackColor = System.Drawing.SystemColors.Desktop;
-			this.button4.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
-			this.button4.ForeColor = System.Drawing.SystemColors.HighlightText;
-			this.button4.Location = new System.Drawing.Point(124, 4);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(40, 24);
-			this.button4.TabIndex = 3;
-			this.button4.Text = "Ác";
-			this.button4.Click += new System.EventHandler(this.button4_Click);
-			// 
-			// button5
-			// 
-			this.button5.BackColor = System.Drawing.SystemColors.Desktop;
-			this.button5.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
-			this.button5.ForeColor = System.Drawing.SystemColors.HighlightText;
-			this.button5.Location = new System.Drawing.Point(164, 4);
-			this.button5.Name = "button5";
-			this.button5.Size = new System.Drawing.Size(40, 24);
-			this.button5.TabIndex = 4;
-			this.button5.Text = "²Å¸¹";
-			// 
 			// button6
 			// 
 			this.button6.BackColor = System.Drawing.SystemColors.Desktop;
 			this.button6.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button6.ForeColor = System.Drawing.SystemColors.HighlightText;
-			this.button6.Location = new System.Drawing.Point(204, 4);
+			this.button6.Location = new System.Drawing.Point(124, 4);
 			this.button6.Name = "button6";
 			this.button6.Size = new System.Drawing.Size(40, 24);
 			this.button6.TabIndex = 5;
@@ -135,10 +108,8 @@ namespace CSharpFormLibrary
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
 			this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.ClientSize = new System.Drawing.Size(248, 32);
+			this.ClientSize = new System.Drawing.Size(168, 32);
 			this.Controls.Add(this.button6);
-			this.Controls.Add(this.button5);
-			this.Controls.Add(this.button4);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button1);
@@ -168,6 +139,11 @@ namespace CSharpFormLibrary
 				this.button3.Text = "¤¤";
 			}else
 				this.button3.Text = "­^";
+		}
+		public void SetModString(string inputs)
+		{
+			if(inputs == null) return;
+			this.button2.Text = inputs;
 		}
 
 		private void button4_Click(object sender, System.EventArgs e)
