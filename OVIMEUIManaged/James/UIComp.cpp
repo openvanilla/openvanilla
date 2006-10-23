@@ -244,6 +244,10 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		//oldFont = (HFONT) SelectObject(hDC, hUIFont);
 		GetTextMetrics(hDC, &tm);
 		murmur("GetTextMetrics %d", tm.tmHeight);
+
+		//oldFont = (HFONT) SendMessage(hLocalHwnd, WM_GETFONT, 0, 0);
+		//murmur (" ---> oldFont %d", oldFont);
+
 		//murmur("GetTextExLeading %d", tm.tmExternalLeading);
 
 		if(lpCompStr)

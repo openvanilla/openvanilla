@@ -39,6 +39,9 @@ private:
 	static MethodInfo* methodStatusHide;
 	static bool hasMethodStatusHide = false;
 
+	static MethodInfo* methodStatusSetModString;
+	static bool hasMethodStatusSetModString = false;
+
 	__nogc struct IsFormCreated
 	{
 		bool isCreated;
@@ -124,6 +127,17 @@ public:
 		return methodStatusSetChiEng;
 	}
 
+	static MethodInfo* StatusSetModString()
+	{
+		if(!hasMethodStatusSetModString)
+		{
+			methodStatusSetModString = 
+				StatusFormAssembly::StatusType()->GetMethod("SetModString");
+			hasMethodStatusSetModString = true;
+		}
+		return methodStatusSetModString;
+	}
+
 
 	static MethodInfo* StatusHide()
 	{
@@ -206,6 +220,18 @@ void _SetStatusChiEng(bool inChinese)
 			->ToArray(System::Type::GetType("System.Object")));
 	Object* ret =
 		StatusFormAssembly::StatusSetChiEng()->Invoke(StatusFormAssembly::StatusForm(), param);
+}
+
+void _SetStatusModString(const std::wstring& statusModName)
+{
+	//System::Diagnostics::Debug::WriteLine("Status SetString");
+	StatusFormAssembly::argCollection->Clear();
+	StatusFormAssembly::argCollection
+		->Add(dynamic_cast<Object*>((__gc new System::String(statusModName.c_str()))));
+	Object* param[] =
+		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
+			->ToArray(System::Type::GetType("System.Object")));
+	StatusFormAssembly::StatusSetModString()->Invoke(StatusFormAssembly::StatusForm(), param);
 }
 
 void _HideStatusPage()

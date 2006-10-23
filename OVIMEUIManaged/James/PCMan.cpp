@@ -113,7 +113,8 @@ BOOL IMEUIUnRegisterClass( HINSTANCE hInstance )
 	UnregisterClass(UINOTIFYCLASSNAME, hInstance);
 	for(int i = 0; i < (int)IC.size(); i++)
 		free(IC.at(i));
-	CurrentIC = 0;
+	//CurrentIC = 0;
+	CurrentIC = 1;
 	return TRUE;
 }
 
