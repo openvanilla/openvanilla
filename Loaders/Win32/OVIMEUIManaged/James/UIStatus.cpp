@@ -238,6 +238,7 @@ void UICreateStatusWindow(HWND hUIWnd)
 		uiStatus.hWnd = _CreateStatusPage();
 		//_MoveStatusPage(300,300);
 		//_ShowStatusPage();
+		hIMEWnd = hUIWnd;
 
 //<comment author='b6s'>Jaimie is working on porting these actions to C#
 /*
@@ -446,8 +447,9 @@ void UIShowStatusWindow()
 {
 	if (IsWindow(uiStatus.hWnd))
 	{
-		_ShowStatusPage();
 		_SetStatusChiEng(isChinese);
+		_ShowStatusPage();
+		
 		
 		//ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
 	}
@@ -527,11 +529,11 @@ void UIChangeModule(HWND hWnd)
 	
 	CurrentIC++;
 	//module change to the next available module
-	if(CurrentIC > loader->getInputMethodCount()-1)
-		CurrentIC = 1;
+	if(CurrentIC > loader->getInputMethodCount()-2)
+		CurrentIC = 0;
 	
 	//if(loader->moduleName(CurrentIC, modNameUTF8)) 
-	if(loader->moduleName(CurrentIC, modNameUTF8)) 
+	if(loader->moduleName(CurrentIC+1, modNameUTF8)) 
 	{
 		MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
 		//tbi.pszText = modNameUCS2;
@@ -546,9 +548,9 @@ void UIChangeModule(HWND hWnd)
 	}
 	UISetStatusModStr(modCurrentName);
 	//murmur("UIStatus UIChangeModule %s",modCurrentName);
-	RECT rc;
-	GetWindowRect(uiStatus.hWnd, &rc);
-	UIMoveStatusWindow(hWnd, rc.left, rc.top );
+	//RECT rc;
+	//GetWindowRect(uiStatus.hWnd, &rc);
+	//UIMoveStatusWindow(hWnd, rc.left, rc.top );
 	_ShowStatusPage();
 }
 
