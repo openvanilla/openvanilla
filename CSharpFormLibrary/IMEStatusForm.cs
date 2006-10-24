@@ -143,6 +143,8 @@ namespace CSharpFormLibrary
 		public void SetModString(string inputs)
 		{
 			if(inputs == null) return;
+
+			//this.button2.Width = (inputs.Length)*5;
 			this.button2.Text = inputs;
 		}
 
