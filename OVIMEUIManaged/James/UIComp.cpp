@@ -234,16 +234,16 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		TEXTMETRIC tm;
 		HWND hLocalHwnd;
 
-		LPWSTR localString;
+//		LPWSTR localString;
 		//hLocalHwnd = GetActiveWindow();
-		hLocalHwnd = GetForegroundWindow();
+//		hLocalHwnd = GetForegroundWindow();
 
-		hDC = GetDC(GetParent(hLocalHwnd));
-		murmur(" ---> hLocalHwnd: %d", hLocalHwnd);
-		murmur(" ---> Parent hLocalHwnd: %d", GetParent(hLocalHwnd));
+//		hDC = GetDC(GetParent(hLocalHwnd));
+//		murmur(" ---> hLocalHwnd: %d", hLocalHwnd);
+//		murmur(" ---> Parent hLocalHwnd: %d", GetParent(hLocalHwnd));
 		//oldFont = (HFONT) SelectObject(hDC, hUIFont);
-		GetTextMetrics(hDC, &tm);
-		murmur("GetTextMetrics %d", tm.tmHeight);
+//		GetTextMetrics(hDC, &tm);
+//		murmur("GetTextMetrics %d", tm.tmHeight);
 
 		//oldFont = (HFONT) SendMessage(hLocalHwnd, WM_GETFONT, 0, 0);
 		//murmur (" ---> oldFont %d", oldFont);
@@ -252,8 +252,8 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 
 		if(lpCompStr)
 		{
-		GetTextExtentPoint(hDC, lpCompStr, (int)wcslen(lpCompStr), &sz);
-		murmur("YES lpCompStr FONT SIZE HEIGHT : %d", sz.cy);
+//		GetTextExtentPoint(hDC, lpCompStr, (int)wcslen(lpCompStr), &sz);
+//		murmur("YES lpCompStr FONT SIZE HEIGHT : %d", sz.cy);
 //		}
 //		else
 //		{
@@ -263,12 +263,9 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		SelectObject(hDC, oldFont);
 		ReleaseDC(hLocalHwnd, hDC);		
 		//_MoveCompPage(newX,newY+sz.cy);		
-		_MoveCompPage(newX, newY+tm.tmHeight);
-		
+		_MoveCompPage(newX, newY);
+		murmur("---> newX : %d , newY : %d", newX, newY);
 		}
-		else
-		_MoveCompPage(newX,newY);	
-		
 	}	
 		//UIShowCompWindow();
 		
