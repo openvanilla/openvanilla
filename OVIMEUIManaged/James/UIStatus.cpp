@@ -478,7 +478,7 @@ void UISetCursorPos(int i)
 
 void UISetMarkFrom(int i)
 {
-	murmur("-----> UISetMarkFrom, status window");
+//	murmur("-----> UISetMarkFrom, status window");
 	CompSelStart = i;
 /*	HDC tmpdc = GetDC(NULL);
 	TCHAR debug_info[100];
@@ -490,7 +490,7 @@ void UISetMarkFrom(int i)
 
 void UISetMarkTo(int i)
 {
-	murmur("-----> UISetMarkTo, status window");
+//	murmur("-----> UISetMarkTo, status window");
 /*	HDC tmpdc = GetDC(NULL);
 	TCHAR debug_info[100];
 	_stprintf(debug_info, _T("mt=%d"),  i);
@@ -524,8 +524,8 @@ void UIChangeModule(HWND hWnd)
 	
 	AVLoader* loader = AVLoader::getLoader();
 	wchar_t *modCurrentName;
-	murmur("---> current IC %d", CurrentIC);
-	murmur("---> loader->getInputMethodCount %d",loader->getInputMethodCount() );
+	//murmur("---> current IC %d", CurrentIC);
+	//murmur("---> loader->getInputMethodCount %d",loader->getInputMethodCount() );
 	
 	CurrentIC++;
 	//module change to the next available module
@@ -538,6 +538,7 @@ void UIChangeModule(HWND hWnd)
 		MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
 		//tbi.pszText = modNameUCS2;
 		modCurrentName = modNameUCS2;
+		murmur(" ---> module name: %s", modNameUTF8);
 		
 	}
 	else 
