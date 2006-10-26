@@ -144,7 +144,18 @@ namespace CSharpFormLibrary
 		{
 			if(inputs == null) return;
 
-			//this.button2.Width = (inputs.Length)*5;
+			if(inputs.Length >10)
+			{
+				this.button2.Width = (inputs.Length)*10;
+			}
+			else
+			{
+				this.button2.Width = (inputs.Length)*2*10;
+			}
+			this.button3.Left = this.button2.Right;
+			this.button6.Left = this.button3.Right;
+			this.Width = this.button1.Width+ this.button2.Width + this.button3.Width +this.button6.Width +8;
+			//inputs = inputs.Length + inputs;
 			this.button2.Text = inputs;
 		}
 
