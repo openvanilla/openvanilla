@@ -11,9 +11,11 @@ LONG NotifyHandle(HIMC hUICurIMC,
 	LONG lRet = 0L;
     LPINPUTCONTEXT lpIMC;
 	static BOOL first = false;
+	LOGFONT* lfptr;
+	LOGFONT lf2;
 	RECT rec;
 
-    if (!(lpIMC = ImmLockIMC(hUICurIMC)))
+	if (!(lpIMC = ImmLockIMC(hUICurIMC)))
         return 0L;
 
     switch (wParam)
@@ -29,7 +31,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 				0,
 				&rec,
 				0);
-			UIMoveStatusWindow(hWnd, rec.right - 350, rec.bottom - 100);
+			UIMoveStatusWindow(hWnd, rec.right - 500, rec.bottom - 100);
 			first = true;
 		}
 		UIShowStatusWindow();
@@ -124,13 +126,31 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 		
 	case IMN_SETCOMPOSITIONFONT:
-		murmur("IMN_SETCOMPOSITIONFONT");
+				
 		//<comment author='b6s'>
 		// It is weird but... when the attached app got focus back,
 		// this message occurred.
 		//UIShowCandWindow();
 		//murmur("Also try to do UIShowCandWindow()");
-		//</comment>		
+		//</comment>	
+		//HWND hLocalHwnd = GetForegroundWindow();
+		//HIMC hUICurIMC = (HIMC)GetWindowLong(hLocalHwnd, IMMGWL_IMC);
+		//LPINPUTCONTEXT JlpIMC;
+		//	JlpIMC = ImmLockIMC(hUICurIMC);
+		//(LOGFONT*)ImmLockIMC(hUICurIMC)->lfFont;
+		//lfptr = (LOGFONT*)(&lpIMC->lfFont);
+		//memcpy( &lf2, lfptr, sizeof( lf2) );
+		// Convert unicode font face to ANSI encoding
+		//WideCharToMultiByte(
+		//	CP_ACP, 0, (LPCWSTR)lfptr->lfFaceName, (int)wcslen((LPCWSTR)lfptr->lfFaceName)+1,
+		//	(LPSTR)lf2.lfFaceName, (int)sizeof(lf2.lfFaceName), NULL, NULL);
+		//murmur("WIDE lfHeight:%ld", lf2.lfHeight);
+		//murmur("ANSI lfHeight:%ld", lfptr->lfHeight);
+		//murmur("--->lf2.lfHeight: %ld", abs(lf2.lfHeight)*3/5);
+		//UIMoveCompWindow(hWnd, CompX, CompY+abs(lf2.lfHeight)*3/5,NULL);
+		//CompY = CompY + abs(lf2.lfHeight)*3/5;
+
+
 		break;
 		
 	case IMN_SETCOMPOSITIONWINDOW:    // set composition window position, move
@@ -150,9 +170,17 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		}
 		else*/
 		{
+			lfptr = (LOGFONT*)(&lpIMC->lfFont);
+			memcpy( &lf2, lfptr, sizeof( lf2) );
+			// Convert unicode font face to ANSI encoding
+			WideCharToMultiByte(	
+			CP_ACP, 0, (LPCWSTR)lfptr->lfFaceName, (int)wcslen((LPCWSTR)lfptr->lfFaceName)+1,
+			(LPSTR)lf2.lfFaceName, (int)sizeof(lf2.lfFaceName), NULL, NULL);
+			
 			CompX = ptSrc.x ;
-			CompY = ptSrc.y ;
-			murmur("IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
+			CompY = ptSrc.y + abs(lf2.lfHeight)*0.62;
+			murmur(" ---> IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
+			murmur(" ---> WIDE lfHeight:%ld", lf2.lfHeight);
 			UIMoveCompWindow(hWnd, CompX, CompY,NULL);
 			UIMoveCandWindow(hWnd, CompX,CompY+20,NULL);
 		}
