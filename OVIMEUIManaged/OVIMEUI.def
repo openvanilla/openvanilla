@@ -51,3 +51,5 @@ EXPORTS
 	_SetStatusChiEng
 	UISetStatusModStr
 	_SetStatusModString
+	UISetStatusMenuModStr
+	_SetStatusMenuModString
