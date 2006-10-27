@@ -42,6 +42,9 @@ private:
 	static MethodInfo* methodStatusSetModString;
 	static bool hasMethodStatusSetModString = false;
 
+	static MethodInfo* methodStatusSetMenuModString;
+	static bool hasMethodStatusSetMenuModString = false;
+
 	__nogc struct IsFormCreated
 	{
 		bool isCreated;
@@ -138,6 +141,17 @@ public:
 		return methodStatusSetModString;
 	}
 
+	static MethodInfo* StatusSetMenuModString()
+	{
+		if(!hasMethodStatusSetMenuModString)
+		{
+			methodStatusSetMenuModString = 
+				StatusFormAssembly::StatusType()->GetMethod("SetMenuModString");
+			hasMethodStatusSetMenuModString = true;
+		}
+		return methodStatusSetMenuModString;
+	}
+
 
 	static MethodInfo* StatusHide()
 	{
@@ -232,6 +246,17 @@ void _SetStatusModString(const std::wstring& statusModName)
 		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
 			->ToArray(System::Type::GetType("System.Object")));
 	StatusFormAssembly::StatusSetModString()->Invoke(StatusFormAssembly::StatusForm(), param);
+}
+
+void _SetStatusMenuModString(const std::wstring& statusModName)
+{
+	StatusFormAssembly::argCollection->Clear();
+	StatusFormAssembly::argCollection
+		->Add(dynamic_cast<Object*>((__gc new System::String(statusModName.c_str()))));
+	Object* param[] =
+		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
+			->ToArray(System::Type::GetType("System.Object")));
+	StatusFormAssembly::StatusSetMenuModString()->Invoke(StatusFormAssembly::StatusForm(), param);
 }
 
 void _HideStatusPage()

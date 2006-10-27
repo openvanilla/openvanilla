@@ -342,6 +342,12 @@ void UISetStatusModStr(wchar_t* lpStr)
 
 }
 
+void UISetStatusMenuModStr(wchar_t* lpStr)
+{
+	std::wstring wsStatusStr(wcsdup(lpStr));
+	//watch.start();
+	_SetStatusMenuModString(wsStatusStr);
+}
 void UIMoveStatusWindow(HWND hUIWnd, int X, int Y)
 {
 	if (!IsWindow(uiStatus.hWnd))
