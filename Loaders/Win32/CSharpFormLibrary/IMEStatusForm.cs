@@ -19,6 +19,9 @@ namespace CSharpFormLibrary
 		private System.Windows.Forms.MenuItem menuItem1;
 		private System.Windows.Forms.MenuItem menuItem2;
 		private System.Windows.Forms.MenuItem menuItem3;
+
+		int currentMenu = 0;
+
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -191,16 +194,22 @@ namespace CSharpFormLibrary
 			//inputs = inputs.Length + inputs;
 			this.button2.Text = inputs;
 			//button2.ContextMenu.Show(button2, new System.Drawing.Point(0, button2.Height));
+			
 		}
 
 		public void SetMenuModString(string inputs)
 		{
 			if(inputs == null) return;
-		}
 
-		private void button4_Click(object sender, System.EventArgs e)
-		{
-		
+			if(currentMenu == 0)
+				this.menuItem1.Text = inputs;
+			if(currentMenu == 1)
+				this.menuItem2.Text = inputs;
+			if(currentMenu == 2)
+				this.menuItem3.Text = inputs;
+			
+			currentMenu++;
+
 		}
 
 		private void button2_Click(object sender, System.EventArgs e)
