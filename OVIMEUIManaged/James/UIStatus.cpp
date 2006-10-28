@@ -314,7 +314,24 @@ void UICreateStatusWindow(HWND hUIWnd)
 	
 	AVLoader* loader = AVLoader::getLoader();
 	wchar_t *modCurrentName;
+	wchar_t *modMenuName;
 	murmur("--->Current IC at create %d", CurrentIC);
+	
+	//jaimie for C# menu set module name
+	//to set all available module names into C# menu list.
+	for(int i=1; i< loader->getInputMethodCount(); i++)
+	{
+		if(loader->moduleName(i, modNameUTF8))
+		{
+			MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
+			//tbi.pszText = modNameUCS2;
+			modMenuName = modNameUCS2;
+		}
+		UISetStatusMenuModStr(modMenuName);
+		murmur(" ---> modMenuName : %s", modMenuName);
+	}
+	
+	//to show the currentIC module on the status window
 	if(loader->moduleName(CurrentIC, modNameUTF8)) 
 	{
 		MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
