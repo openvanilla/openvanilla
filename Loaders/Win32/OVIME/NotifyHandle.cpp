@@ -133,23 +133,6 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		//UIShowCandWindow();
 		//murmur("Also try to do UIShowCandWindow()");
 		//</comment>	
-		//HWND hLocalHwnd = GetForegroundWindow();
-		//HIMC hUICurIMC = (HIMC)GetWindowLong(hLocalHwnd, IMMGWL_IMC);
-		//LPINPUTCONTEXT JlpIMC;
-		//	JlpIMC = ImmLockIMC(hUICurIMC);
-		//(LOGFONT*)ImmLockIMC(hUICurIMC)->lfFont;
-		//lfptr = (LOGFONT*)(&lpIMC->lfFont);
-		//memcpy( &lf2, lfptr, sizeof( lf2) );
-		// Convert unicode font face to ANSI encoding
-		//WideCharToMultiByte(
-		//	CP_ACP, 0, (LPCWSTR)lfptr->lfFaceName, (int)wcslen((LPCWSTR)lfptr->lfFaceName)+1,
-		//	(LPSTR)lf2.lfFaceName, (int)sizeof(lf2.lfFaceName), NULL, NULL);
-		//murmur("WIDE lfHeight:%ld", lf2.lfHeight);
-		//murmur("ANSI lfHeight:%ld", lfptr->lfHeight);
-		//murmur("--->lf2.lfHeight: %ld", abs(lf2.lfHeight)*3/5);
-		//UIMoveCompWindow(hWnd, CompX, CompY+abs(lf2.lfHeight)*3/5,NULL);
-		//CompY = CompY + abs(lf2.lfHeight)*3/5;
-
 
 		break;
 		
@@ -158,10 +141,13 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		POINT ptSrc;
 		SIZE szOffset;
 		HDC hDC;
+		TEXTMETRIC tm;
 		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
 		ClientToScreen(lpIMC->hWnd, &ptSrc);
 		hDC = GetDC(lpIMC->hWnd);
 		GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
+		GetTextMetrics(hDC, &tm);
+		murmur(" ---> tm.YYY: %ld", tm.tmDigitizedAspectY);
 		ReleaseDC(lpIMC->hWnd,hDC);
 		/*if(    ptSrc.x>CandX && ptSrc.x<=CandX+80
 			&& ptSrc.y>=CandY && ptSrc.y<=CandY+160)
@@ -173,12 +159,17 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			lfptr = (LOGFONT*)(&lpIMC->lfFont);
 			memcpy( &lf2, lfptr, sizeof( lf2) );
 			// Convert unicode font face to ANSI encoding
-			WideCharToMultiByte(	
-			CP_ACP, 0, (LPCWSTR)lfptr->lfFaceName, (int)wcslen((LPCWSTR)lfptr->lfFaceName)+1,
-			(LPSTR)lf2.lfFaceName, (int)sizeof(lf2.lfFaceName), NULL, NULL);
-			
+//			WideCharToMultiByte(	
+//			CP_ACP, 0, (LPCWSTR)lfptr->lfFaceName, (int)wcslen((LPCWSTR)lfptr->lfFaceName)+1,
+//			(LPSTR)lf2.lfFaceName, (int)sizeof(lf2.lfFaceName), NULL, NULL);
+//			murmur(" ---> point size: %ld", (abs(lf2.lfHeight)+tm.tmInternalLeading)*72/tm.tmDigitizedAspectY);
+//			murmur(" ---> interLeading : %ld", (tm.tmInternalLeading));
+//			murmur(" ---> exterLeading : %ld", (tm.tmExternalLeading));
+						
 			CompX = ptSrc.x ;
-			CompY = ptSrc.y + abs(lf2.lfHeight)*0.62;
+//			CompY = ptSrc.y + abs(lf2.lfHeight)*0.62;
+			CompY = ptSrc.y + abs(lf2.lfHeight)*72/tm.tmDigitizedAspectY;
+
 			murmur(" ---> IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
 			murmur(" ---> WIDE lfHeight:%ld", lf2.lfHeight);
 			UIMoveCompWindow(hWnd, CompX, CompY,NULL);
