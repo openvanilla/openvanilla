@@ -489,14 +489,14 @@ int CompIndexToXPos(int index);
 
 void UISetCursorPos(int i)
 {
-	int cursor = CompIndexToXPos( CompCursorPos );
-	RECT rc;
-	GetClientRect( uiComp.hWnd, &rc );
-	HDC dc = GetDC( uiComp.hWnd );
-	BitBlt( dc, cursor, 0, 1, rc.bottom, dc, cursor, 0, SRCINVERT );
+//	int cursor = CompIndexToXPos( CompCursorPos );
+//	RECT rc;
+//	GetClientRect( uiComp.hWnd, &rc );
+//	HDC dc = GetDC( uiComp.hWnd );
+//	BitBlt( dc, cursor, 0, 1, rc.bottom, dc, cursor, 0, SRCINVERT );
 	CompCursorPos = i;
-	cursor = CompIndexToXPos( CompCursorPos );
-	BitBlt( dc, cursor, 0, 1, rc.bottom, dc, cursor, 0, SRCINVERT );
+//	cursor = CompIndexToXPos( CompCursorPos );
+//	BitBlt( dc, cursor, 0, 1, rc.bottom, dc, cursor, 0, SRCINVERT );
 }
 
 void UISetMarkFrom(int i)

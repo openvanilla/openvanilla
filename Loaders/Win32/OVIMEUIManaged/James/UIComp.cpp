@@ -13,7 +13,7 @@ LRESULT APIENTRY CompWndProc(HWND hWnd,
 	switch (msg)
 	{
 		case WM_PAINT:
-			murmur("WM_PAINT, composition window");
+//			murmur("WM_PAINT, composition window");
 			PaintCompWindow( hWnd);
 			break;
 		case WM_ERASEBKGND:
@@ -41,11 +41,11 @@ LRESULT APIENTRY CompWndProc(HWND hWnd,
 
 void UICreateCompWindow(HWND hUIWnd)
 {
-	murmur("%1.3f sec:\tC# comp window, create");
+//	murmur("%1.3f sec:\tC# comp window, create");
 	if (!IsWindow(uiComp.hWnd))
 	{
 		uiComp.hWnd = _CreateCompPage();
-		murmur("compHWND=%p",uiComp.hWnd);
+//		murmur("compHWND=%p",uiComp.hWnd);
 		
 #if 0
 		HDC hDC;
@@ -217,7 +217,7 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 	int newY=Y;
 	lpCompStr = wcsdup(lpStr);
 
-	murmur("UIMoveCompWindow");		
+//	murmur("UIMoveCompWindow");		
 	if (IsWindow(uiComp.hWnd))
 	{		
 		RECT screenrc;
@@ -238,12 +238,13 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		//hLocalHwnd = GetActiveWindow();
 //		hLocalHwnd = GetForegroundWindow();
 
-//		hDC = GetDC(GetParent(hLocalHwnd));
+		hDC = GetDC(uiComp.hWnd);
 //		murmur(" ---> hLocalHwnd: %d", hLocalHwnd);
 //		murmur(" ---> Parent hLocalHwnd: %d", GetParent(hLocalHwnd));
 		//oldFont = (HFONT) SelectObject(hDC, hUIFont);
-//		GetTextMetrics(hDC, &tm);
+		GetTextMetrics(hDC, &tm);
 //		murmur("GetTextMetrics %d", tm.tmHeight);
+		
 
 		//oldFont = (HFONT) SendMessage(hLocalHwnd, WM_GETFONT, 0, 0);
 		//murmur (" ---> oldFont %d", oldFont);
@@ -260,11 +261,14 @@ void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 //		GetTextExtentPoint(hDC, szStr, (int)_tcslen(szStr), &sz);	
 //		murmur("NO lpCompStr FONT SIZE HEIGHT : %d", sz.cy);
 //		}
+		GetTextExtentPoint(hDC, lpCompStr, (int)wcslen(lpCompStr), &sz);
+		murmur(" ---> GetTextExtentPoint sz.cx : %ld", sz.cx);
+		murmur(" ---> GetTextExtentPoint sz.cy : %ld", sz.cy);
 		SelectObject(hDC, oldFont);
 		ReleaseDC(hLocalHwnd, hDC);		
 		//_MoveCompPage(newX,newY+sz.cy);		
 		_MoveCompPage(newX, newY);
-		murmur("---> newX : %d , newY : %d", newX, newY);
+//		murmur("---> newX : %d , newY : %d", newX, newY);
 		}
 	}	
 		//UIShowCompWindow();
@@ -277,14 +281,19 @@ void UISetCompStr(wchar_t* lpStr)
 	watch.start();
 	_ClearCompPage();
 	watch.stop();
-	murmur("%1.3f sec:\tC# comp window, clear", watch.getSec());
+//	murmur("%1.3f sec:\tC# comp window, clear", watch.getSec());
 	
 	lpCompStr = wcsdup(lpStr);
 	std::wstring wsCompStr(lpCompStr);
 	watch.start();
 	_SetCompString(wsCompStr);
 	watch.stop();
-	murmur("%1.3f sec:\tC# comp window, setstring", watch.getSec());
+//	murmur("%1.3f sec:\tC# comp window, setstring", watch.getSec());
+}
+
+void UISetCompCaretPosX(int xIndex)
+{
+	_SetCompCaretPosX(xIndex);
 }
 
 int CompIndexToXPos(int index)
@@ -302,7 +311,7 @@ int CompIndexToXPos(int index)
 
 void PaintCompWindow(HWND hCompWnd)
 {
-	murmur("PaintCompWindow");
+//	murmur("PaintCompWindow");
 #if 0
 	PAINTSTRUCT ps;
 	HDC hDC;
@@ -369,17 +378,22 @@ void PaintCompWindow(HWND hCompWnd)
 
 void UIShowCompWindow()
 {
-	murmur("%1.3f sec:\tC# comp window, show");
+//	murmur("%1.3f sec:\tC# comp window, show");
 	if (IsWindow(uiComp.hWnd))
 	{
 		_ShowCompPage();
 	//	ShowWindow(uiComp.hWnd, SW_SHOWNOACTIVATE);
 	}
+	if(lpCompStr)
+	{
+//		_SetCompCaretPosX(CompCursorPos);
+//		murmur(" ---> CompCursorPos : %d", CompCursorPos);
+	}
 }
 
 void UIHideCompWindow()
 {
-	murmur("%1.3f sec:\tC# comp window, hide");
+//	murmur("%1.3f sec:\tC# comp window, hide");
 	if (IsWindow(uiComp.hWnd))
 	{
 		_HideCompPage();		
