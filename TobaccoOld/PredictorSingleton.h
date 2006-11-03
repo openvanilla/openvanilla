@@ -48,6 +48,7 @@ protected:
 	~PredictorSingleton();
 
 private:
+	const static size_t MAX_CONTEXT_LENGTH = 6;
 	static PredictorSingleton* itsInstance;
 	DictionarySingleton* dictionary;
 };

@@ -94,6 +94,15 @@ bool PredictorSingleton::setTokenVector(
         PredictorSingleton::tokenVector.insert(
             PredictorSingleton::tokenVector.begin() + position, currentToken);
 
+	//<comment author='b6s' date='20061104'>Set tokens fixed when the vector size reachs MAX_CONTEXT_LENGTH.
+	if(PredictorSingleton::tokenVector.size() > 0 &&
+		PredictorSingleton::tokenVector.size() / MAX_CONTEXT_LENGTH == 0)
+		for(size_t offset = PredictorSingleton::tokenVector.size() - 1;
+			offset >= PredictorSingleton::tokenVector.size() - MAX_CONTEXT_LENGTH;
+			offset--)
+			PredictorSingleton::tokenVector[offset].isFixed = true;
+	//</comment>
+
     PredictorSingleton::setTokenVectorByBigram();
     
     return true;
