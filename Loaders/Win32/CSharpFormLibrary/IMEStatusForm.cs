@@ -26,6 +26,10 @@ namespace CSharpFormLibrary
 		/// Required designer variable.
 		/// </summary>
 		private System.ComponentModel.Container components = null;
+		private const int WM_MOUSEACTIVATE = 0x0021;
+		private const int MA_NOACTIVATE=0x0003;
+		private System.Windows.Forms.Label label1;
+		private const int MA_NOACTIVATEANDEAT = 0x0004;
 
 		public IMEStatusForm()
 		{
@@ -37,6 +41,15 @@ namespace CSharpFormLibrary
 			//
 			// TODO: Add any constructor code after InitializeComponent call
 			//
+		}
+		protected override void WndProc(ref Message m) 
+		{
+			if (m.Msg == WM_MOUSEACTIVATE) 
+			{
+				m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
+				return;
+			}
+			base.WndProc(ref m);
 		}
 
 		/// <summary>
@@ -138,6 +151,7 @@ namespace CSharpFormLibrary
 			this.button6.Size = new System.Drawing.Size(40, 24);
 			this.button6.TabIndex = 5;
 			this.button6.Text = "³]©w";
+			this.button6.Visible = false;
 			// 
 			// IMEStatusForm
 			// 
@@ -190,7 +204,7 @@ namespace CSharpFormLibrary
 			this.button3.Left = this.button2.Right;
 			this.button6.Left = this.button3.Right;
 			this.Width = this.button1.Width+ this.button2.Width 
-				+ this.button3.Width +this.button6.Width + 8;
+				+ this.button3.Width +/*this.button6.Width*/ + 8;
 			//inputs = inputs.Length + inputs;
 			this.button2.Text = inputs;
 			//button2.ContextMenu.Show(button2, new System.Drawing.Point(0, button2.Height));

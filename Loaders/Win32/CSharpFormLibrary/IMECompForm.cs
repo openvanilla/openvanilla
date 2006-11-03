@@ -18,7 +18,10 @@ namespace CSharpFormLibrary
 		private System.ComponentModel.Container components = null;
 		private const int WM_MOUSEACTIVATE = 0x0021;
 		private const int MA_NOACTIVATE=0x0003;
+		private System.Windows.Forms.Label label1;
 		private const int MA_NOACTIVATEANDEAT = 0x0004;
+
+		private int caretWidth = 0;
 		public IMECompForm()
 		{
 			//
@@ -34,11 +37,12 @@ namespace CSharpFormLibrary
 		{
 			if (m.Msg == WM_MOUSEACTIVATE) 
 			{
-				m.Result = (IntPtr)MA_NOACTIVATE;
+				m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
 				return;
 			}
 			base.WndProc(ref m);
 		}
+
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
@@ -62,36 +66,43 @@ namespace CSharpFormLibrary
 		private void InitializeComponent()
 		{
 			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// textBox1
 			// 
 			this.textBox1.BackColor = System.Drawing.Color.FromArgb(((System.Byte)(255)), ((System.Byte)(255)), ((System.Byte)(192)));
-			this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.textBox1.Dock = System.Windows.Forms.DockStyle.Left;
 			this.textBox1.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.textBox1.Location = new System.Drawing.Point(0, 0);
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(408, 27);
+			this.textBox1.Size = new System.Drawing.Size(462, 29);
 			this.textBox1.TabIndex = 0;
 			this.textBox1.Text = "textBox1";
-			
-            //
-            // IMECompForm
-            //
-            //<comment author='b6s'>This makes DragDrop registration fail.
-            //this.AllowDrop = true;
-            //</comment>
-            this.AutoScaleBaseSize = new System.Drawing.Size(7, 20);
-            this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(408, 24);
-            this.Controls.Add(this.textBox1);
+			this.textBox1.WordWrap = false;
+			// 
+			// label1
+			// 
+			this.label1.BackColor = System.Drawing.SystemColors.WindowFrame;
+			this.label1.Location = new System.Drawing.Point(0, 22);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(26, 6);
+			this.label1.TabIndex = 1;
+			this.label1.Text = "label1";
+			this.label1.Visible = false;
+			// 
+			// IMECompForm
+			// 
+			this.AutoScaleBaseSize = new System.Drawing.Size(8, 22);
+			this.BackColor = System.Drawing.SystemColors.Window;
+			this.ClientSize = new System.Drawing.Size(462, 30);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.textBox1);
 			this.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "IMECompForm";
 			this.ShowInTaskbar = false;
 			this.Text = "IMECompForm";
-			this.Activated += new System.EventHandler(this.IMECompForm_Activated);
-			this.Deactivate += new System.EventHandler(this.IMECompForm_Deactivate);
 			this.ResumeLayout(false);
 
 		}
@@ -114,32 +125,33 @@ namespace CSharpFormLibrary
 		}
 		public void SetComp(string inputs)
 		{
-			//string[] a_inputs = inputs.Split(' ');			
+
 			if(inputs==null || textBox1.Text==inputs) return;
 			
-			this.Width = (inputs.Length)*16+7;
+			Graphics g = this.textBox1.CreateGraphics();
+
+			int width = (int)g.MeasureString(inputs, this.textBox1.Font).Width;
+//			caretWidth = width;
+
+			g.Dispose();
+			
+			//string[] a_inputs = inputs.Split(' ');			
+
+			
+			this.Width = width;
+			
 			//this.Height = this.textBox1.PreferredHeight;
 			this.textBox1.Text = inputs;
 			//this.textBox1.Focus();
+			
 
 		}
-
-		private void textBox1_TextChanged(object sender, System.EventArgs e)
+		public void SetCaretX(int x)
 		{
-		
-		}
-
-		private void IMECompForm_Activated(object sender, System.EventArgs e)
-		{
-			//ShowNoActive();
-			//System.Diagnostics.Debug.WriteLine(this.textBox1.Text);
-			//System.Diagnostics.Debug.WriteLine("Comp Active();");
-		}
-
-		private void IMECompForm_Deactivate(object sender, System.EventArgs e)
-		{
-			//HideNoActive();
-			//System.Diagnostics.Debug.WriteLine("Comp DeActive();");
+#if false
+			this.label1.Width = 10;
+			this.label1.Left = (caretWidth)*(x-1);
+#endif
 		}
 	}
 }
