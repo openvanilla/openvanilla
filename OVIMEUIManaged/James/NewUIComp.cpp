@@ -42,6 +42,9 @@ private:
 	static MethodInfo* methodCompClear;
 	static bool hasMethodCompClear = false;
 
+	static MethodInfo* methodCompCaretPosX;
+	static bool hasMethodCompCaretPosX = false;
+
 	__nogc struct IsFormCreated
 	{
 		bool isCreated;
@@ -126,6 +129,17 @@ public:
 		return methodCompSetString;
 	}
 
+
+	static MethodInfo* CompCaretPosX()
+	{
+		if(!hasMethodCompCaretPosX)
+		{
+			methodCompCaretPosX = 
+				CompFormAssembly::CompType() ->GetMethod("SetCaretX");
+			hasMethodCompCaretPosX = true;
+		}
+		return methodCompCaretPosX;
+	}
 	static MethodInfo* CompHide()
 	{
 		if(!hasMethodCompHide)
@@ -175,6 +189,19 @@ void _SetCompString(const std::wstring& Comp)
 		dynamic_cast<Object*[]>(CompFormAssembly::argCollection
 			->ToArray(System::Type::GetType("System.Object")));
 	CompFormAssembly::CompSetString()->Invoke(CompFormAssembly::CompForm(), param);
+}
+
+void _SetCompCaretPosX(int x)
+{
+	CompFormAssembly::argCollection->Clear();
+	CompFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(x)));
+	
+	Object* param[] =
+		dynamic_cast<Object*[]>(CompFormAssembly::argCollection
+			->ToArray(System::Type::GetType("System.Object")));
+	Object* ret =
+		CompFormAssembly::CompCaretPosX()->Invoke(CompFormAssembly::CompForm(), param);
+
 }
 
 void _ShowCompPage()
