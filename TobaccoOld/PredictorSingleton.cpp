@@ -46,7 +46,7 @@ void PredictorSingleton::clearAll()
 
 void PredictorSingleton::removeWord(size_t position, bool delFlag)
 {
-	size_t tokenIndex;
+	int tokenIndex;
 	if(delFlag)	// true	: DEL
 		tokenIndex = position;
 	else		// false: BackSpace
@@ -62,7 +62,7 @@ void PredictorSingleton::removeWord(size_t position, bool delFlag)
 
 	if(tokenIndex > 0)
 		PredictorSingleton::tokenVector[tokenIndex - 1].withSuffix = false;
-	if(tokenIndex < PredictorSingleton::tokenVector.size() - 1)
+	if(tokenIndex < (int)(PredictorSingleton::tokenVector.size() - 1))
 		PredictorSingleton::tokenVector[tokenIndex + 1].withPrefix = false;
 
 	PredictorSingleton::setTokenVectorByBigram();

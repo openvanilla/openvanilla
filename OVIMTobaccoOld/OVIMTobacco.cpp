@@ -62,6 +62,8 @@ public:
 
 	virtual bool isHsuEndKeyTriggered();
 
+	bool isHsuLayout;
+
 protected:
     virtual const char *query(char c);
     char composebuf[256];
@@ -353,7 +355,7 @@ const char *OVIMTobacco::localizedName(const char *lc) {
     } else {
 	name=QueryForKey(db, table, "_property_ename");
     }
-    sprintf(buf,"%s (GOING)",name);
+    sprintf(buf,"%s",name);
     return buf;
 }
 
@@ -535,9 +537,12 @@ int OVIMTobaccoContext::keyPrintable() {
         s->beep();
     }
     if (!seq.isEmpty()) {
-		if (strcmp("OVIMTobacco-hsu", parent->identifier()) == 0 &&
+		seq.isHsuLayout = false;
+		const char* ename = parent->localizedName("en");
+		if (strcmp("BoPoMoFo-hsu", ename) == 0 &&
 			seq.isHsuEndKeyTriggered()) {
-			return keyCompose();
+				seq.isHsuLayout = true;
+				return keyCompose();
 		}
 		else if (parent->isEndKey(k->code())) {
             freshBuffer();
@@ -948,11 +953,13 @@ const char *IMGKeySequence::compose() {
         const char *s=query(seq[i]);
         if (s) strcat(composebuf, s);
     }
-   
-	string bpmfStr(composebuf);
-	if(hsuKeyToBpmf(seq, bpmfStr)) {
-	    strcpy(composebuf, "");
-		strcpy(composebuf, bpmfStr.c_str());
+
+	if(isHsuLayout) {
+		string bpmfStr(composebuf);
+		if(hsuKeyToBpmf(seq, bpmfStr)) {
+			strcpy(composebuf, "");
+			strcpy(composebuf, bpmfStr.c_str());
+		}
 	}
 	return composebuf;
 }
