@@ -87,7 +87,7 @@ namespace CSharpFormLibrary
 			// button1
 			// 
 			this.button1.BackColor = System.Drawing.SystemColors.Desktop;
-			this.button1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.button1.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button1.ForeColor = System.Drawing.Color.FromArgb(((System.Byte)(255)), ((System.Byte)(255)), ((System.Byte)(128)));
 			this.button1.Location = new System.Drawing.Point(4, 4);
 			this.button1.Name = "button1";
@@ -99,7 +99,7 @@ namespace CSharpFormLibrary
 			// 
 			this.button2.BackColor = System.Drawing.SystemColors.Desktop;
 			this.button2.ContextMenu = this.contextMenu1;
-			this.button2.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.button2.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button2.ForeColor = System.Drawing.SystemColors.HighlightText;
 			this.button2.Location = new System.Drawing.Point(84, 4);
 			this.button2.Name = "button2";
@@ -133,7 +133,7 @@ namespace CSharpFormLibrary
 			// button3
 			// 
 			this.button3.BackColor = System.Drawing.SystemColors.Desktop;
-			this.button3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.button3.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button3.ForeColor = System.Drawing.SystemColors.HighlightText;
 			this.button3.Location = new System.Drawing.Point(124, 4);
 			this.button3.Name = "button3";
@@ -144,7 +144,7 @@ namespace CSharpFormLibrary
 			// button6
 			// 
 			this.button6.BackColor = System.Drawing.SystemColors.Desktop;
-			this.button6.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.button6.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button6.ForeColor = System.Drawing.SystemColors.HighlightText;
 			this.button6.Location = new System.Drawing.Point(164, 4);
 			this.button6.Name = "button6";
@@ -164,6 +164,7 @@ namespace CSharpFormLibrary
 			this.Controls.Add(this.button1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "IMEStatusForm";
+			this.ShowInTaskbar = false;
 			this.Text = "IMEStatusForm";
 			this.ResumeLayout(false);
 
