@@ -73,10 +73,10 @@ namespace CSharpFormLibrary
 			// 
 			this.textBox1.BackColor = System.Drawing.Color.FromArgb(((System.Byte)(255)), ((System.Byte)(255)), ((System.Byte)(192)));
 			this.textBox1.Dock = System.Windows.Forms.DockStyle.Left;
-			this.textBox1.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.textBox1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.textBox1.Location = new System.Drawing.Point(0, 0);
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(462, 29);
+			this.textBox1.Size = new System.Drawing.Size(404, 27);
 			this.textBox1.TabIndex = 0;
 			this.textBox1.Text = "textBox1";
 			this.textBox1.WordWrap = false;
@@ -84,23 +84,24 @@ namespace CSharpFormLibrary
 			// label1
 			// 
 			this.label1.BackColor = System.Drawing.SystemColors.WindowFrame;
-			this.label1.Location = new System.Drawing.Point(0, 22);
+			this.label1.Location = new System.Drawing.Point(0, 20);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(26, 6);
+			this.label1.Size = new System.Drawing.Size(23, 5);
 			this.label1.TabIndex = 1;
 			this.label1.Text = "label1";
 			this.label1.Visible = false;
 			// 
 			// IMECompForm
 			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(8, 22);
+			this.AutoScaleBaseSize = new System.Drawing.Size(7, 20);
 			this.BackColor = System.Drawing.SystemColors.Window;
-			this.ClientSize = new System.Drawing.Size(462, 30);
+			this.ClientSize = new System.Drawing.Size(404, 27);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.textBox1);
-			this.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "IMECompForm";
+			this.Opacity = 0.75;
 			this.ShowInTaskbar = false;
 			this.Text = "IMECompForm";
 			this.ResumeLayout(false);
@@ -143,9 +144,8 @@ namespace CSharpFormLibrary
 			//this.Height = this.textBox1.PreferredHeight;
 			this.textBox1.Text = inputs;
 			//this.textBox1.Focus();
-			
-
 		}
+
 		public void SetCaretX(int x)
 		{
 #if false
