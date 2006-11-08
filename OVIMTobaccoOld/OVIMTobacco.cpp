@@ -539,9 +539,9 @@ int OVIMTobaccoContext::keyPrintable() {
     if (!seq.isEmpty()) {
 		seq.isHsuLayout = false;
 		const char* ename = parent->localizedName("en");
-		if (strcmp("BoPoMoFo-hsu", ename) == 0 &&
-			seq.isHsuEndKeyTriggered()) {
-				seq.isHsuLayout = true;
+		if (strcmp("PhoneticHsu", ename) == 0) {
+			seq.isHsuLayout = true;
+			if(seq.isHsuEndKeyTriggered())
 				return keyCompose();
 		}
 		else if (parent->isEndKey(k->code())) {
