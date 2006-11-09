@@ -41,6 +41,7 @@ int OVStringToolKit::getLines(string inString,
 							  vector<string>& outStringVectorRef)
 {
 	vector<string> delimiters;
+	delimiters.push_back("\r");
 	delimiters.push_back("\n");
 	return splitString(inString, outStringVectorRef, delimiters, false);
 }
