@@ -27,7 +27,7 @@ namespace CSharpFormLibrary
 		{
 			InitializeComponent();
 			baseSize = this.lbCandidates.Location.Y+100;
-			this.Opacity = 0.85;
+			this.Opacity = 1;
 		}
 		public IMECandidateForm(string[] candidates)
 		{
@@ -80,8 +80,6 @@ namespace CSharpFormLibrary
 			// 
 			// IMECandidateForm
 			// 
-			//this.ControlBox=false;
-			//this.AllowDrop = true;
 			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
 			this.BackColor = System.Drawing.SystemColors.Window;
 			this.ClientSize = new System.Drawing.Size(80, 160);
@@ -112,7 +110,10 @@ namespace CSharpFormLibrary
 			string[] a_inputs = inputs.Split(' ');
 			if(a_inputs==null) return;			
 			this.lbCandidates.Height=(a_inputs.Length+1)*15;
+			//this.Height=this.lbCandidates.Height; ->第一次會畫不出來
+			 //this.Refresh();
 			this.ShowListView(a_inputs); // not show, only setstring
+		
 		}
 
 		public void SetLocation(int x, int y)

@@ -27,8 +27,9 @@ namespace CSharpFormLibrary
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 		private const int WM_MOUSEACTIVATE = 0x0021;
-		private const int MA_NOACTIVATE=0x0003;
-		private System.Windows.Forms.Label label1;
+		private const int MA_ACTIVATE=1;		
+		private const int MA_ACTIVATEANDEAT = 2;
+		private const int MA_NOACTIVATE=0x0003;		
 		private const int MA_NOACTIVATEANDEAT = 0x0004;
 
 		public IMEStatusForm()
@@ -37,19 +38,36 @@ namespace CSharpFormLibrary
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();
-
+			this.SetStyle(ControlStyles.StandardClick,false);
+			this.SetStyle(ControlStyles.EnableNotifyMessage,false);
+			this.SetStyle(ControlStyles.UserMouse,false);
 			//
 			// TODO: Add any constructor code after InitializeComponent call
 			//
 		}
 		protected override void WndProc(ref Message m) 
-		{
-			if (m.Msg == WM_MOUSEACTIVATE) 
-			{
-				m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
-				return;
+		{							
+			if (m.Msg == WM_MOUSEACTIVATE)// && m.Result==(IntPtr) MA_ACTIVATE) 
+			{				
+				//m.Result = (IntPtr)MA_NOACTIVATEANDEAT;				
+				
+				m.Result = (IntPtr)MA_NOACTIVATE;
+				/*
+				System.Diagnostics.Debug.WriteLine("==================");
+				System.Diagnostics.Debug.WriteLine("hwnd->"+m.HWnd);
+				System.Diagnostics.Debug.WriteLine("Msg->"+m.Msg);
+				System.Diagnostics.Debug.WriteLine("Result->"+m.Result);
+				System.Diagnostics.Debug.WriteLine("WM_MOUSEACTIVATE");*/
+				//return;
 			}
-			base.WndProc(ref m);
+				/*System.Diagnostics.Debug.WriteLine("==================");
+				System.Diagnostics.Debug.WriteLine("hwnd->"+m.HWnd);
+				System.Diagnostics.Debug.WriteLine("Msg->"+m.Msg);
+				System.Diagnostics.Debug.WriteLine("Result->"+m.Result);*/
+			else
+			{
+				base.WndProc(ref m);
+			}
 		}
 
 		/// <summary>
@@ -87,11 +105,11 @@ namespace CSharpFormLibrary
 			// button1
 			// 
 			this.button1.BackColor = System.Drawing.SystemColors.Desktop;
-			this.button1.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.button1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button1.ForeColor = System.Drawing.Color.FromArgb(((System.Byte)(255)), ((System.Byte)(255)), ((System.Byte)(128)));
-			this.button1.Location = new System.Drawing.Point(4, 4);
+			this.button1.Location = new System.Drawing.Point(5, 5);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(80, 24);
+			this.button1.Size = new System.Drawing.Size(96, 29);
 			this.button1.TabIndex = 0;
 			this.button1.Text = "自然輸入法";
 			// 
@@ -99,11 +117,11 @@ namespace CSharpFormLibrary
 			// 
 			this.button2.BackColor = System.Drawing.SystemColors.Desktop;
 			this.button2.ContextMenu = this.contextMenu1;
-			this.button2.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.button2.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button2.ForeColor = System.Drawing.SystemColors.HighlightText;
-			this.button2.Location = new System.Drawing.Point(84, 4);
+			this.button2.Location = new System.Drawing.Point(101, 5);
 			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(40, 24);
+			this.button2.Size = new System.Drawing.Size(48, 29);
 			this.button2.TabIndex = 1;
 			this.button2.Text = "button2";
 			this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -133,31 +151,31 @@ namespace CSharpFormLibrary
 			// button3
 			// 
 			this.button3.BackColor = System.Drawing.SystemColors.Desktop;
-			this.button3.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.button3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button3.ForeColor = System.Drawing.SystemColors.HighlightText;
-			this.button3.Location = new System.Drawing.Point(124, 4);
+			this.button3.Location = new System.Drawing.Point(149, 5);
 			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(40, 24);
+			this.button3.Size = new System.Drawing.Size(48, 29);
 			this.button3.TabIndex = 2;
 			this.button3.Text = "button3";
 			// 
 			// button6
 			// 
 			this.button6.BackColor = System.Drawing.SystemColors.Desktop;
-			this.button6.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.button6.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button6.ForeColor = System.Drawing.SystemColors.HighlightText;
-			this.button6.Location = new System.Drawing.Point(164, 4);
+			this.button6.Location = new System.Drawing.Point(197, 5);
 			this.button6.Name = "button6";
-			this.button6.Size = new System.Drawing.Size(40, 24);
+			this.button6.Size = new System.Drawing.Size(48, 29);
 			this.button6.TabIndex = 5;
 			this.button6.Text = "設定";
 			this.button6.Visible = false;
 			// 
 			// IMEStatusForm
 			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
+			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
 			this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.ClientSize = new System.Drawing.Size(208, 32);
+			this.ClientSize = new System.Drawing.Size(249, 38);
 			this.Controls.Add(this.button6);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button2);
@@ -166,8 +184,12 @@ namespace CSharpFormLibrary
 			this.Name = "IMEStatusForm";
 			this.ShowInTaskbar = false;
 			this.Text = "IMEStatusForm";
+			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
+			this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
+			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
 			this.ResumeLayout(false);
-
+			
+			//this.button1.
 		}
 		#endregion
 		public void ShowNoActive()
@@ -221,15 +243,49 @@ namespace CSharpFormLibrary
 			if(currentMenu == 1)
 				this.menuItem2.Text = inputs;
 			if(currentMenu == 2)
-				this.menuItem3.Text = inputs;
-			
-			currentMenu++;
-
+				this.menuItem3.Text = inputs;			
+			currentMenu++;			
 		}
 
 		private void button2_Click(object sender, System.EventArgs e)
 		{
-			button2.ContextMenu.Show(button2, new System.Drawing.Point(0, (-2)*(button2.Height)));
+			this.ShowNoActive();
+//			button2.ContextMenu.Show(button2, new System.Drawing.Point(0, (-2)*(button2.Height)));			
+		}
+
+		private Point mouseOffset;
+		private bool isMouseDown = false;
+
+		private void IMEStatusForm_MouseDown(object sender,System.Windows.Forms.MouseEventArgs e)
+		{
+			int xOffset;
+			int yOffset;
+			if (e.Button == MouseButtons.Left)
+			{
+				xOffset = -e.X - SystemInformation.FrameBorderSize.Width;
+				yOffset = -e.Y;
+				mouseOffset = new Point(xOffset, yOffset);
+				isMouseDown = true;
+			}
+		}
+		private void IMEStatusForm_MouseMove(object sender,
+			System.Windows.Forms.MouseEventArgs e)
+		{
+			if (isMouseDown)
+			{				
+				Point mousePos = Control.MousePosition;
+				mousePos.Offset(mouseOffset.X, mouseOffset.Y);
+				Location = mousePos;
+			}
+		}
+
+		private void IMEStatusForm_MouseUp(object sender,
+			System.Windows.Forms.MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Left)
+			{
+				isMouseDown = false;
+			}
 		}
 	}
 }
