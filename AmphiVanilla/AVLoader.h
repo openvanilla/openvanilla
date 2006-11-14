@@ -11,9 +11,15 @@ using std::vector;
 class AVLoader : public OVBase
 {
 public:
-	static AVLoader *getLoader();
-	static void shutdown();
-	~AVLoader();
+	static AVLoader* getLoader()
+	{
+		if(globalLoader == NULL)
+			globalLoader = new AVLoader();
+		return globalLoader;
+	}
+
+	static void shutdown();	
+
 	void initContext(int n);
 	void reloadConfig();
 	void connectDisplayServer(AVDisplayServer *svr);
@@ -26,10 +32,10 @@ public:
 	int getOutputFilterCount();
 	//</comment>
 
-private:
-	AVLoader();
-	static AVLoader *globalLoader;
 protected:
+	AVLoader();
+	~AVLoader();
+
 	AVEmbeddedLoader *em;
 	AVDisplayServer *dsvr;
 	AVCandidate *candi;
@@ -40,4 +46,7 @@ protected:
 	vector<bool> startedCtxVector;	// 這是很浪費的作法 orz
 
 	int activatedIm;
+
+private:
+	static AVLoader *globalLoader;
 };

@@ -11,18 +11,30 @@
 class AVEmbeddedLoader : public OVBase
 {
 public:
-	AVEmbeddedLoader();
-	~AVEmbeddedLoader();
+	static AVEmbeddedLoader* getInstance()
+	{
+		if(embeddedLoaderInstance == NULL)
+			embeddedLoaderInstance = new AVEmbeddedLoader();
+		return embeddedLoaderInstance;
+	}
+
 	AVService *srv();
 	AVConfig *cfg();
 	AVDictionary *dict();
 	AVDictionary *dict(const char *);
 	std::vector<OVModule*> &modlist();
+
+protected:
+	AVEmbeddedLoader();
+	~AVEmbeddedLoader();
+
 private:
 	AVService *m_srv;
 	AVConfig *m_cfg;
 	AVDictionary *m_dict;
 	std::vector<OVModule*> m_modlist;
+
+	static AVEmbeddedLoader* embeddedLoaderInstance;
 };
 
 #endif // AVEmbeddedLoader_h

@@ -3,6 +3,8 @@
 #include <functional>
 using namespace std;
 
+AVEmbeddedLoader* AVEmbeddedLoader::embeddedLoaderInstance = NULL;
+
 struct sort_im : public binary_function< OVModule*, OVModule*, bool >
 {
 	sort_im(AVDictionary* dict) : m_dict(dict) {}
