@@ -39,7 +39,7 @@
 // Some dirty public secrets goes here
 SQLite3 *db;
 //// Number of names in "tablelist" table
-int  IM_TABLES;
+static int IM_TABLES;
 //// The values of those names in "tablelist"... with some assumed limitations.
 //// Please, not extreme sports here.
 char *IM_TABLE_NAMES[32];
@@ -198,11 +198,14 @@ extern "C" int OVInitializeLibrary(OVService*, const char*p) {
         return 0;
     }
     SQLite3Statement *sth=db->prepare("select name from tablelist;");
+	//<comment author='b6s'>A workaround of loader singleton issue.
+	IM_TABLES = 0;
+	//</comment>
     while(sth->step()==SQLITE_ROW) {
-	const char *buf = (char*)sth->column_text(0);
-	IM_TABLE_NAMES[IM_TABLES] = (char*)calloc(1,strlen(buf)+1);
-	strcpy(IM_TABLE_NAMES[IM_TABLES],buf);
-	IM_TABLES++;
+		const char *buf = (char*)sth->column_text(0);
+		IM_TABLE_NAMES[IM_TABLES] = (char*)calloc(1,strlen(buf)+1);
+		strcpy(IM_TABLE_NAMES[IM_TABLES],buf);
+		IM_TABLES++;
     }
 
 	watch.stop();
