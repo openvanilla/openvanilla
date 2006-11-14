@@ -553,11 +553,10 @@ void UIChangeModule(HWND hWnd)
 	
 	CurrentIC++;
 	//module change to the next available module
-	if(CurrentIC > loader->getInputMethodCount()-2)
+	if(CurrentIC >= loader->getInputMethodCount())
 		CurrentIC = 0;
 	
-	//if(loader->moduleName(CurrentIC, modNameUTF8)) 
-	if(loader->moduleName(CurrentIC+1, modNameUTF8)) 
+	if(loader->moduleName(CurrentIC, modNameUTF8)) 
 	{
 		MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
 		//tbi.pszText = modNameUCS2;
