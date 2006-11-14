@@ -5,25 +5,18 @@
 #include <string>
 using namespace std;
 
-AVLoader* AVLoader::globalLoader = 0;
-
-AVLoader* AVLoader::getLoader()
-{
-	if(!globalLoader)
-		globalLoader = new AVLoader();
-	return globalLoader;
-}
+AVLoader* AVLoader::globalLoader = NULL;
 
 void AVLoader::shutdown()
 {
 	if(globalLoader)
 		delete globalLoader;
-	globalLoader = 0;
+	globalLoader = NULL;
 }
 
 AVLoader::AVLoader() : dsvr(0)
 {
-	em = new AVEmbeddedLoader();
+	em = AVEmbeddedLoader::getInstance();
 
 	vector<OVModule*> tmpmod_vector;
 	vector<OVModule*>::iterator m;
@@ -66,7 +59,7 @@ AVLoader::~AVLoader()
 		if(ctx_vector[i] != NULL)
 			delete ctx_vector[i];
 	*/
-	delete em;
+	//delete em;
 	delete candi;
 	delete buf;
 }
