@@ -24,4 +24,5 @@ void _HideStatusPage();
 void _SetStatusChiEng(bool);
 void _SetStatusModString(const std::wstring&);
 void _SetStatusMenuModString(const std::wstring&);
+void _SetStatusAppHWnd(HWND hwnd);
 void _SetCompCaretPosX(int);

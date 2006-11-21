@@ -53,5 +53,6 @@ EXPORTS
 	_SetStatusModString
 	UISetStatusMenuModStr
 	_SetStatusMenuModString
+	_SetStatusAppHWnd
 	UISetCompCaretPosX
-	_SetCompCaretPosX
+	_SetCompCaretPosX	

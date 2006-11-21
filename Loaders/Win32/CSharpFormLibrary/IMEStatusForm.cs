@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace CSharpFormLibrary
 {
@@ -98,6 +99,14 @@ namespace CSharpFormLibrary
         private const int WM_RBUTTONDBLCLK = 0x0206;
 
         private static int msgCounter = 0;
+        private UInt64 m_AppHWnd;
+
+        public void DoPressEffect()
+        {
+            Color tempForeColor = this.ForeColor;
+            this.ForeColor = this.BackColor;
+            this.BackColor = tempForeColor;
+        }
 
         public IMEButton() : base()
         {
@@ -106,25 +115,58 @@ namespace CSharpFormLibrary
             //this.SetStyle(ControlStyles.UserMouse, false);
         }
 
+        public UInt64 AppHWnd
+        {
+            get { return m_AppHWnd; }
+            set { m_AppHWnd = value; }
+        }
+
+        protected override void OnMouseUp(MouseEventArgs mevent)
+        {
+            base.OnMouseUp(mevent);
+            DoPressEffect();
+        }
+
         protected override void WndProc(ref Message m)
         {
             msgCounter++;
             System.Diagnostics.Debug.WriteLine(
-                "[" + msgCounter + "]: Msg->\t" +
+                "Button[" + msgCounter + "]: Msg->\t" +
                 Enum.GetName(typeof(WindowsMessage), m.Msg) +
                 "(0x" + m.Msg.ToString("X") + ")");
 
+            //if (m.Msg == WM_MOUSEACTIVATE)
             if (m.Msg == WM_LBUTTONDOWN)
             {
                 System.Diagnostics.Debug.WriteLine("==================");
-                System.Diagnostics.Debug.WriteLine("MOUSEACTIVATE");
-
-                m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
+                System.Diagnostics.Debug.WriteLine("WM_MOUSEACTIVATE");
+                System.Diagnostics.Debug.WriteLine(
+                    "Button[" + msgCounter + "]: this.Handle->\t0x" + this.Handle.ToString("X"));
+                System.Diagnostics.Debug.WriteLine(
+                    "Button[" + msgCounter + "]: Parent.Handle->\t0x" + this.Parent.Handle.ToString("X"));
+                System.Diagnostics.Debug.WriteLine(
+                    "Button[" + msgCounter + "]: App.Handle->\t0x" + m_AppHWnd.ToString("X"));
+                System.Diagnostics.Debug.WriteLine(
+                    "Button[" + msgCounter + "]: m.HWnd->\t0x" + m.HWnd.ToString("X"));
+                System.Diagnostics.Debug.WriteLine(
+                    "Button[" + msgCounter + "]: LParam->\t0x" + m.LParam.ToString("X"));
 
                 System.Diagnostics.Debug.WriteLine(
-                    "[" + msgCounter + "]: Result->\t0x" + m.Result.ToString("X"));
-            }
-            else
+                    "Button[" + msgCounter + "]: WParam (before)->\t0x" + m.WParam.ToString("X"));
+                m.WParam = this.Handle;
+                //m.WParam = new IntPtr((long)m_AppHWnd);
+                //m.WParam = IntPtr.Zero;
+                System.Diagnostics.Debug.WriteLine(
+                    "Button[" + msgCounter + "]: WParam (after)->\t0x" + m.WParam.ToString("X"));
+
+                m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
+                //m.Result = (IntPtr)MA_NOACTIVATE;
+
+                System.Diagnostics.Debug.WriteLine(
+                    "Button[" + msgCounter + "]: Result->\t0x" + m.Result.ToString("X"));
+
+                DoPressEffect();
+            } else            
                 base.WndProc(ref m);
         }
     }
@@ -155,6 +197,9 @@ namespace CSharpFormLibrary
 		private const int MA_NOACTIVATE=0x0003;		
 		private const int MA_NOACTIVATEANDEAT = 0x0004;
 
+        private int msgCounter = 0;
+        private UInt64 m_AppHWnd;
+
 		public IMEStatusForm()
 		{
 			//
@@ -166,31 +211,69 @@ namespace CSharpFormLibrary
 			this.SetStyle(ControlStyles.UserMouse,false);
 			//
 			// TODO: Add any constructor code after InitializeComponent call
-			//
+			//            
 		}
+
 		protected override void WndProc(ref Message m) 
-		{							
-			if (m.Msg == WM_MOUSEACTIVATE)// && m.Result==(IntPtr) MA_ACTIVATE) 
-			{				
-				//m.Result = (IntPtr)MA_NOACTIVATEANDEAT;				
-				
-				m.Result = (IntPtr)MA_NOACTIVATE;
-				/*
-				System.Diagnostics.Debug.WriteLine("==================");
-				System.Diagnostics.Debug.WriteLine("hwnd->"+m.HWnd);
-				System.Diagnostics.Debug.WriteLine("Msg->"+m.Msg);
-				System.Diagnostics.Debug.WriteLine("Result->"+m.Result);
-				System.Diagnostics.Debug.WriteLine("WM_MOUSEACTIVATE");*/
-				//return;
-			}
-				/*System.Diagnostics.Debug.WriteLine("==================");
-				System.Diagnostics.Debug.WriteLine("hwnd->"+m.HWnd);
-				System.Diagnostics.Debug.WriteLine("Msg->"+m.Msg);
-				System.Diagnostics.Debug.WriteLine("Result->"+m.Result);*/
-			else
-			{
-				base.WndProc(ref m);
-			}
+		{
+            msgCounter++;
+            System.Diagnostics.Debug.WriteLine(
+                "Form[" + msgCounter + "]: Msg->\t" +
+                Enum.GetName(typeof(WindowsMessage), m.Msg) +
+                "(0x" + m.Msg.ToString("X") + ")");
+
+            if (m.Msg == WM_MOUSEACTIVATE)// && m.Result==(IntPtr) MA_ACTIVATE) 
+            {
+                //m.Result = (IntPtr)MA_NOACTIVATEANDEAT;				
+
+                m.Result = (IntPtr)MA_NOACTIVATE;
+            }
+            else if (m.Msg == (Int32)WindowsMessage.WM_NCACTIVATE)
+            {
+                System.Diagnostics.Debug.WriteLine("== Damn WM_NCACTIVATE! ==");
+                /*
+                System.Diagnostics.Debug.WriteLine(
+                    "Form[" + msgCounter + "]: LParam->\t0x" + m.LParam.ToString("X"));
+
+                System.Diagnostics.Debug.WriteLine(
+                    "Form[" + msgCounter + "]: WParam (before)->\t0x" + m.WParam.ToString("X"));
+                m.WParam = IntPtr.Zero;
+                System.Diagnostics.Debug.WriteLine(
+                    "Form[" + msgCounter + "]: WParam (after)->\t0x" + m.WParam.ToString("X"));
+
+                System.Diagnostics.Debug.WriteLine(
+                    "Form[" + msgCounter + "]: Result (before)->\t0x" + m.Result.ToString("X"));
+                m.Result = new IntPtr(1);
+                System.Diagnostics.Debug.WriteLine(
+                    "Form[" + msgCounter + "]: Result (after)->\t0x" + m.Result.ToString("X"));
+                */
+            }
+            else if (m.Msg == (Int32)WindowsMessage.WM_ACTIVATE)
+            {
+                System.Diagnostics.Debug.WriteLine("== Damn WM_ACTIVATE! ==");
+                ShowNoActive();
+                /*
+                System.Diagnostics.Debug.WriteLine(
+                    "Form[" + msgCounter + "]: LParam (before)->\t0x" + m.LParam.ToString("X"));
+                m.LParam = IntPtr.Zero;
+                System.Diagnostics.Debug.WriteLine(
+                    "Form[" + msgCounter + "]: LParam (after)->\t0x" + m.LParam.ToString("X"));
+
+                System.Diagnostics.Debug.WriteLine(
+                    "Form[" + msgCounter + "]: WParam (before)->\t0x" + m.WParam.ToString("X"));
+                m.WParam = IntPtr.Zero;
+                System.Diagnostics.Debug.WriteLine(
+                    "Form[" + msgCounter + "]: WParam (after)->\t0x" + m.WParam.ToString("X"));
+
+                System.Diagnostics.Debug.WriteLine(
+                    "Form[" + msgCounter + "]: Result (before)->\t0x" + m.Result.ToString("X"));
+                m.Result = IntPtr.Zero;
+                System.Diagnostics.Debug.WriteLine(
+                    "Form[" + msgCounter + "]: Result (after)->\t0x" + m.Result.ToString("X"));
+                */
+            }
+            else
+                base.WndProc(ref m);
 		}
 
 		/// <summary>
@@ -321,6 +404,14 @@ namespace CSharpFormLibrary
 		}
 		#endregion
 
+        public void SetAppHWnd(UInt64 HWND)
+        {
+            m_AppHWnd = HWND;
+            System.Diagnostics.Debug.WriteLine("AppHWnd set: " + m_AppHWnd);
+            this.button2.AppHWnd = m_AppHWnd;
+            System.Diagnostics.Debug.WriteLine("button2.AppHWnd: " + this.button2.AppHWnd);
+        }
+
 		public void ShowNoActive()
 		{
 			UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
@@ -416,15 +507,15 @@ namespace CSharpFormLibrary
         private void button2_MouseDown(object sender, MouseEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Mouse Down!");
-            this.button2.ContextMenu.Show(button2, new System.Drawing.Point(0, (-2)*(button2.Height)));
-            System.Diagnostics.Debug.WriteLine("Context Menu Shown!");
+            //this.button2.ContextMenu.Show(button2, new System.Drawing.Point(0, (-2)*(button2.Height)));
+            //System.Diagnostics.Debug.WriteLine("Context Menu Shown!");
         }
 
         private void button2_MouseUp(object sender, MouseEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Mouse Up!");
-            this.button2.ContextMenu.Show(button2, new System.Drawing.Point(0, (-2) * (button2.Height)));
-            System.Diagnostics.Debug.WriteLine("Context Menu Shown!");
+            //this.button2.ContextMenu.Show(button2, new System.Drawing.Point(0, (-2) * (button2.Height)));
+            //System.Diagnostics.Debug.WriteLine("Context Menu Shown!");
         }
 	}
 }
