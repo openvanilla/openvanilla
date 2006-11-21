@@ -182,6 +182,21 @@ HWND _CreateStatusPage()//create
 	
 }
 
+void _SetStatusAppHWnd(HWND hwnd)
+{
+	murmur("_SetStatusAppHWnd: hwnd -> %x", hwnd);
+	try{		
+		UInt64 handle = (UInt64)hwnd;
+		murmur("_SetStatusAppHWnd: handle -> %ud", handle);
+		StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(handle)));
+		Object* param[] =
+			dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
+				->ToArray(System::Type::GetType("System.Object")));
+		StatusFormAssembly::StatusType()->GetMethod("SetAppHWnd")->Invoke(StatusFormAssembly::StatusForm(), param);
+	} catch(System::Exception* e) {
+		Debug::WriteLine(e->StackTrace);
+	}
+}
 void _ShowStatusPage()
 {	
 	//System::Diagnostics::Debug::WriteLine("Comp Show");

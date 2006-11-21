@@ -109,7 +109,6 @@
     <Compile Include="UtilFuncs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <None Include="CSharpFormLibrary.dll.config" />
     <EmbeddedResource Include="IMECandidateForm.resx">
       <DependentUpon>IMECandidateForm.cs</DependentUpon>
     </EmbeddedResource>

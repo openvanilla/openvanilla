@@ -83,11 +83,14 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 			}
 			if ((msg == WM_SETCURSOR) &&
 				(HIWORD(lParam) != WM_LBUTTONDOWN) &&
-				(HIWORD(lParam) != WM_RBUTTONDOWN))
+				(HIWORD(lParam) != WM_RBUTTONDOWN)) {
+				murmur("StatusWndProc: WM_SETCURSOR");
 				return DefWindowProc(hWnd, msg, wParam, lParam);
+			}
 
 			if ((msg == WM_LBUTTONUP) || (msg == WM_RBUTTONUP))
 			{
+				murmur("StatusWndProc: WM_LBUTTONUP");
 				SetWindowLong(hWnd, FIGWL_MOUSE, 0L);
 				if(msg == WM_RBUTTONUP) {
 					CurrentIC++;
@@ -235,6 +238,8 @@ void UICreateStatusWindow(HWND hUIWnd)
 	if (!IsWindow(uiStatus.hWnd))
 	{
 		uiStatus.hWnd = _CreateStatusPage();
+		murmur("UICreateStatusWindow: hUIWnd -> %x", hUIWnd);
+		_SetStatusAppHWnd(hUIWnd);
 		//_MoveStatusPage(300,300);
 		//_ShowStatusPage();
 		hIMEWnd = hUIWnd;
