@@ -154,7 +154,7 @@ namespace CSharpFormLibrary
             this.button1.Size = new System.Drawing.Size(80, 21);
             this.button1.TabIndex = 0;
             this.button1.Text = "自然輸入法";
-            this.button1.UseVisualStyleBackColor = false;
+            //this.button1.UseVisualStyleBackColor = false;
             // 
             // button2
             // 
@@ -168,7 +168,7 @@ namespace CSharpFormLibrary
             this.button2.Size = new System.Drawing.Size(40, 21);
             this.button2.TabIndex = 1;
             this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = false;
+            //this.button2.UseVisualStyleBackColor = false;
             this.button2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button2_MouseDown);
             // 
             // contextMenu1
@@ -203,7 +203,7 @@ namespace CSharpFormLibrary
             this.button3.Size = new System.Drawing.Size(40, 21);
             this.button3.TabIndex = 2;
             this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = false;
+            //this.button3.UseVisualStyleBackColor = false;
             // 
             // button6
             // 
@@ -215,7 +215,7 @@ namespace CSharpFormLibrary
             this.button6.Size = new System.Drawing.Size(40, 21);
             this.button6.TabIndex = 5;
             this.button6.Text = "設定";
-            this.button6.UseVisualStyleBackColor = false;
+            //this.button6.UseVisualStyleBackColor = false;
             this.button6.Visible = false;
             // 
             // IMEStatusForm
