@@ -72,16 +72,6 @@ namespace CSharpFormLibrary
         WM_MOUSELEAVE =     0x02A3
     };
 
-    public class MessageFilter : IMessageFilter
-    {
-        public bool PreFilterMessage(ref Message objMessage)
-        {
-            if(objMessage.Msg == Convert.ToInt32(WindowsMessage.WM_MOUSEACTIVATE))
-                return true;
-            return false;
-        }        
-    }
-
     public class IMEButton : System.Windows.Forms.Button
     {
         private const int WM_MOUSEACTIVATE = 0x0021;
@@ -311,27 +301,29 @@ namespace CSharpFormLibrary
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            //this.button1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.button1.Location = new System.Drawing.Point(4, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 21);
             this.button1.TabIndex = 0;
-            this.button1.Text = "自然輸入法";
+            this.button1.Text = "某輸入法";
             //this.button1.UseVisualStyleBackColor = false;
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.Desktop;
+            this.button2.BackColor = System.Drawing.SystemColors.Control;
             //this.button2.CausesValidation = false;
             this.button2.ContextMenu = this.contextMenu1;
-            this.button2.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.ForeColor = System.Drawing.SystemColors.HighlightText;
+            //this.button2.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.button2.Location = new System.Drawing.Point(84, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(40, 21);
+            //this.button2.Size = new System.Drawing.Size(40, 21);
             this.button2.TabIndex = 1;
             this.button2.Text = "button2";
+            //this.button2.AutoSize = true;
+            //this.button2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             //this.button2.UseVisualStyleBackColor = false;
             this.button2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button2_MouseDown);
             this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
@@ -361,7 +353,7 @@ namespace CSharpFormLibrary
             // button3
             // 
             this.button3.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            //this.button3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button3.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.button3.Location = new System.Drawing.Point(124, 4);
             this.button3.Name = "button3";
@@ -373,7 +365,7 @@ namespace CSharpFormLibrary
             // button6
             // 
             this.button6.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button6.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            //this.button6.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button6.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.button6.Location = new System.Drawing.Point(164, 4);
             this.button6.Name = "button6";
@@ -438,7 +430,7 @@ namespace CSharpFormLibrary
 		public void SetModString(string inputs)
 		{
 			if(inputs == null) return;
-
+            
 			if(inputs.Length >10)
 			{
 				this.button2.Width = (inputs.Length)*10;
@@ -447,11 +439,14 @@ namespace CSharpFormLibrary
 			{
 				this.button2.Width = (inputs.Length)*2*10;
 			}
-			this.button3.Left = this.button2.Right;
+            
+            this.button3.Left = this.button2.Right;
 			this.button6.Left = this.button3.Right;
-			this.Width = this.button1.Width+ this.button2.Width 
+            
+            this.Width = this.button1.Width+ this.button2.Width 
 				+ this.button3.Width +/*this.button6.Width*/ + 8;
 			//inputs = inputs.Length + inputs;
+            
 			this.button2.Text = inputs;
 			//button2.ContextMenu.Show(button2, new System.Drawing.Point(0, button2.Height));			
 		}
@@ -514,8 +509,20 @@ namespace CSharpFormLibrary
         private void button2_MouseUp(object sender, MouseEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Mouse Up!");
-            //this.button2.ContextMenu.Show(button2, new System.Drawing.Point(0, (-2) * (button2.Height)));
-            //System.Diagnostics.Debug.WriteLine("Context Menu Shown!");
+            this.button2.ContextMenu.Show(button2, new System.Drawing.Point(0, button2.Bottom));
+            System.Diagnostics.Debug.WriteLine("Context Menu Shown!");
         }
 	}
+
+    /*
+    public class MessageFilter : IMessageFilter
+    {
+        public bool PreFilterMessage(ref Message objMessage)
+        {
+            if (objMessage.Msg == Convert.ToInt32(WindowsMessage.WM_MOUSEACTIVATE))
+                return true;
+            return false;
+        }
+    }
+    */
 }
