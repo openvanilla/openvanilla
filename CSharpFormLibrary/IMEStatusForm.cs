@@ -6,6 +6,81 @@ using System.Windows.Forms;
 
 namespace CSharpFormLibrary
 {
+    public enum WindowsMessage : int
+    {
+        WM_NULL =           0x0000,
+        WM_CREATE =         0x0001,
+        WM_DESTROY =        0x0002,
+        WM_MOVE =           0x0003,
+        WM_SIZE =           0x0005,
+        WM_ACTIVATE =       0x0006,
+        WM_SETFOCUS =       0x0007,
+        WM_KILLFOCUS =      0x0008,
+        WM_ENABLE =         0x000A,
+        WM_SETREDRAW =      0x000B,
+        WM_SETTEXT =        0x000C,
+        WM_GETTEXT =        0x000D,
+        WM_GETTEXTLENGTH =  0x000E,
+        WM_PAINT =          0x000F,
+        WM_CLOSE =          0x0010,
+
+        WM_ERASEBKGND =     0x0014,
+
+        WM_SHOWWINDOW =     0x0018,
+
+        WM_SETCURSOR =      0x0020,
+        WM_MOUSEACTIVATE =  0x0021,
+
+        WM_WINDOWPOSCHANGING =  0x0046,
+        WM_WINDOWPOSCHANGED =   0x0047,
+
+        WM_NCCREATE =       0x0081,
+        WM_NCDESTROY =      0x0082,
+        WM_NCCALCSIZE =     0x0083,
+        WM_NCHITTEST =      0x0084,
+        WM_NCPAINT =        0x0085,
+        WM_NCACTIVATE =     0x0086,
+
+        WM_MENUSELECT =     0x011F,
+
+        WM_ENTERIDLE =          0x0121,
+        WM_MENURBUTTONUP =      0x0122,
+        WM_MENUDRAG =           0x0123,
+        WM_MENUGETOBJECT =      0x0124,
+        WM_UNINITMENUPOPUP =    0x0125,
+        WM_MENUCOMMAND =        0x0126,
+        WM_CHANGEUISTATE =      0x0127,
+        WM_UPDATEUISTATE =      0x0128,
+
+        WM_MOUSEMOVE =      0x0200,
+        WM_LBUTTONDOWN =    0x0201,
+        WM_LBUTTONUP =      0x0202,
+        WM_LBUTTONDBLCLK =  0x0203,
+        WM_RBUTTONDOWN =    0x0204,
+        WM_RBUTTONUP =      0x0205,
+        WM_RBUTTONDBLCLK =  0x0206,
+
+        WM_EXITMENULOOP =   0x0212,
+
+        WM_CAPTURECHANGED = 0x0215,
+
+        WM_IME_SETCONTEXT = 0x0281,
+        WM_IME_NOTIFY =     0x0282,
+
+        WM_MOUSEHOVER =     0x02A1,
+        WM_MOUSELEAVE =     0x02A3
+    };
+
+    public class MessageFilter : IMessageFilter
+    {
+        public bool PreFilterMessage(ref Message objMessage)
+        {
+            if(objMessage.Msg == Convert.ToInt32(WindowsMessage.WM_MOUSEACTIVATE))
+                return true;
+            return false;
+        }        
+    }
+
     public class IMEButton : System.Windows.Forms.Button
     {
         private const int WM_MOUSEACTIVATE = 0x0021;
@@ -15,36 +90,42 @@ namespace CSharpFormLibrary
         private const int MA_NOACTIVATEANDEAT = 0x0004;
         private const int WM_SETFOCUS = 0x0007;
         private const int WM_KILLFOCUS = 0x0008;
+        private const int WM_LBUTTONDOWN = 0x0201;
+        private const int WM_LBUTTONUP = 0x0202;
+        private const int WM_LBUTTONDBLCLK = 0x0203;
+        private const int WM_RBUTTONDOWN = 0x0204;
+        private const int WM_RBUTTONUP = 0x0205;
+        private const int WM_RBUTTONDBLCLK = 0x0206;
+
+        private static int msgCounter = 0;
 
         public IMEButton() : base()
         {
-            this.SetStyle(ControlStyles.StandardClick, false);
-            this.SetStyle(ControlStyles.EnableNotifyMessage, false);
-            this.SetStyle(ControlStyles.UserMouse, false);
+            //this.SetStyle(ControlStyles.StandardClick, false);
+            //this.SetStyle(ControlStyles.EnableNotifyMessage, false);
+            //this.SetStyle(ControlStyles.UserMouse, false);
         }
 
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == WM_MOUSEACTIVATE) //|| m.Msg == WM_SETFOCUS)// && m.Result==(IntPtr) MA_ACTIVATE) 
+            msgCounter++;
+            System.Diagnostics.Debug.WriteLine(
+                "[" + msgCounter + "]: Msg->\t" +
+                Enum.GetName(typeof(WindowsMessage), m.Msg) +
+                "(0x" + m.Msg.ToString("X") + ")");
+
+            if (m.Msg == WM_LBUTTONDOWN)
             {
-                m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
-                //m.Msg = WM_KILLFOCUS;
                 System.Diagnostics.Debug.WriteLine("==================");
-                System.Diagnostics.Debug.WriteLine("hwnd->"+m.HWnd);
-                System.Diagnostics.Debug.WriteLine("Msg->"+m.Msg);
-                System.Diagnostics.Debug.WriteLine("Result->"+m.Result);
-                System.Diagnostics.Debug.WriteLine("WM_MOUSEACTIVATE");
+                System.Diagnostics.Debug.WriteLine("MOUSEACTIVATE");
+
+                m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
+
+                System.Diagnostics.Debug.WriteLine(
+                    "[" + msgCounter + "]: Result->\t0x" + m.Result.ToString("X"));
             }
             else
-            {
-                /*
-                System.Diagnostics.Debug.WriteLine("==================");
-                System.Diagnostics.Debug.WriteLine("hwnd->"+m.HWnd);
-                System.Diagnostics.Debug.WriteLine("Msg->"+m.Msg);
-                System.Diagnostics.Debug.WriteLine("Result->"+m.Result);
-                */
                 base.WndProc(ref m);
-            }
         }
     }
 
@@ -159,7 +240,7 @@ namespace CSharpFormLibrary
             // button2
             // 
             this.button2.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button2.CausesValidation = false;
+            //this.button2.CausesValidation = false;
             this.button2.ContextMenu = this.contextMenu1;
             this.button2.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button2.ForeColor = System.Drawing.SystemColors.HighlightText;
@@ -170,6 +251,7 @@ namespace CSharpFormLibrary
             this.button2.Text = "button2";
             //this.button2.UseVisualStyleBackColor = false;
             this.button2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button2_MouseDown);
+            this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
             // 
             // contextMenu1
             // 
@@ -334,7 +416,14 @@ namespace CSharpFormLibrary
         private void button2_MouseDown(object sender, MouseEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Mouse Down!");
-            button2.ContextMenu.Show(button2, new System.Drawing.Point(0, (-2)*(button2.Height)));
+            this.button2.ContextMenu.Show(button2, new System.Drawing.Point(0, (-2)*(button2.Height)));
+            System.Diagnostics.Debug.WriteLine("Context Menu Shown!");
+        }
+
+        private void button2_MouseUp(object sender, MouseEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Mouse Up!");
+            this.button2.ContextMenu.Show(button2, new System.Drawing.Point(0, (-2) * (button2.Height)));
             System.Diagnostics.Debug.WriteLine("Context Menu Shown!");
         }
 	}
