@@ -94,6 +94,9 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IMEButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="IMECandidateForm.cs">
       <SubType>Form</SubType>
     </Compile>
