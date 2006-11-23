@@ -32,8 +32,6 @@ namespace CSharpFormLibrary
         private IMEButton button6;
         private System.Windows.Forms.ContextMenu contextMenu1;
         private System.Windows.Forms.MenuItem menuItem1;
-        private System.Windows.Forms.MenuItem menuItem2;
-        private System.Windows.Forms.MenuItem menuItem3;
 
 		public IMEStatusForm()
 		{
@@ -56,52 +54,60 @@ namespace CSharpFormLibrary
             get
             {
                 CreateParams cp = base.CreateParams;
-                System.Diagnostics.Debug.WriteLine(
-                    "Form: CreateParams.ExStyle (before) =" + cp.ExStyle);
+                //System.Diagnostics.Debug.WriteLine(
+                //    "Form: CreateParams.ExStyle (before) =" + cp.ExStyle);
                 cp.ExStyle = 0x00000004; //WS_EX_NOPARENTNOTIFY
-                System.Diagnostics.Debug.WriteLine(
-                    "Form: CreateParams.ExStyle (after) =" + cp.ExStyle);
+                //System.Diagnostics.Debug.WriteLine(
+                //    "Form: CreateParams.ExStyle (after) =" + cp.ExStyle);
                 return cp;
             }
         }
 
 		protected override void WndProc(ref Message m) 
 		{
+            /*
             msgCounter++;
             System.Diagnostics.Debug.WriteLine(
                 "Form[" + msgCounter + "]: (before base) Msg->\t" +
                 Enum.GetName(typeof(UtilFuncs.WindowsMessage), m.Msg) +
                 "(0x" + m.Msg.ToString("X") + ")");
+            */
 
             base.WndProc(ref m);
 
+            /*
             msgCounter++;
             System.Diagnostics.Debug.WriteLine(
                 "Form[" + msgCounter + "]: (after base) Msg->\t" +
                 Enum.GetName(typeof(UtilFuncs.WindowsMessage), m.Msg) +
                 "(0x" + m.Msg.ToString("X") + ")");
+             */
+
+            /*
             if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_PARENTNOTIFY)
             {
                 System.Diagnostics.Debug.WriteLine("== Damn WM_PARENTNOTIFY! ==");
             }
-            else if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_MOUSEACTIVATE)// && m.Result==(IntPtr) MA_ACTIVATE) 
+            else*/
+            if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_MOUSEACTIVATE)
             {
-                System.Diagnostics.Debug.WriteLine("== Damn WM_MOUSEACTIVATE! ==");
+                //System.Diagnostics.Debug.WriteLine("== Damn WM_MOUSEACTIVATE! ==");
 
-                System.Diagnostics.Debug.WriteLine(
-                    "Form[" + msgCounter + "]: Result (before)->\t0x" + m.Result.ToString("X"));
+                //System.Diagnostics.Debug.WriteLine(
+                //    "Form[" + msgCounter + "]: Result (before)->\t0x" + m.Result.ToString("X"));
 
                 //m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
                 m.Result = (IntPtr)MA_NOACTIVATE;
 
-                System.Diagnostics.Debug.WriteLine(
-                    "Form[" + msgCounter + "]: Result (after)->\t0x" + m.Result.ToString("X"));
+                //System.Diagnostics.Debug.WriteLine(
+                //    "Form[" + msgCounter + "]: Result (after)->\t0x" + m.Result.ToString("X"));
                 
             }
+            /*
             else if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_NCACTIVATE)
             {
                 System.Diagnostics.Debug.WriteLine("== Damn WM_NCACTIVATE! ==");
-                /*
+
                 System.Diagnostics.Debug.WriteLine(
                     "Form[" + msgCounter + "]: LParam->\t0x" + m.LParam.ToString("X"));
 
@@ -116,7 +122,6 @@ namespace CSharpFormLibrary
                 m.Result = new IntPtr(1);
                 System.Diagnostics.Debug.WriteLine(
                     "Form[" + msgCounter + "]: Result (after)->\t0x" + m.Result.ToString("X"));
-                */
             }
             else if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_ACTIVATE)
             {
@@ -140,10 +145,8 @@ namespace CSharpFormLibrary
                 m.Result = IntPtr.Zero;
                 System.Diagnostics.Debug.WriteLine(
                     "Form[" + msgCounter + "]: Result (after)->\t0x" + m.Result.ToString("X"));
-                */
             }
-            //else
-                //base.WndProc(ref m);
+             */
         }
         #endregion
 
@@ -176,8 +179,6 @@ namespace CSharpFormLibrary
 
             this.contextMenu1 = new System.Windows.Forms.ContextMenu();
             this.menuItem1 = new System.Windows.Forms.MenuItem();
-            //this.menuItem2 = new System.Windows.Forms.MenuItem();
-            //this.menuItem3 = new System.Windows.Forms.MenuItem();
 
             this.SuspendLayout();
             // 
@@ -235,26 +236,13 @@ namespace CSharpFormLibrary
             // 
             // contextMenu1
             // 
-            this.contextMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem1/*,
-            this.menuItem2,
-            this.menuItem3*/});
+            this.contextMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {this.menuItem1});
             // 
             // menuItem1
             // 
             this.menuItem1.Index = 0;
             this.menuItem1.Text = "";
             this.menuItem1.Click +=new EventHandler(menuItem_Click);
-            // 
-            // menuItem2
-            // 
-            //this.menuItem2.Index = 1;
-            //this.menuItem2.Text = "test2";
-            // 
-            // menuItem3
-            // 
-            //this.menuItem3.Index = 2;
-            //this.menuItem3.Text = "test3";
             // 
             // IMEStatusForm
             // 
@@ -355,19 +343,23 @@ namespace CSharpFormLibrary
 
         private void menuItem_Click(object sender, EventArgs e)
         {   
+            /*
             System.Diagnostics.Debug.WriteLine(
                 "Menu[xxx]: Changes to module[" +
                 ((MenuItem)sender).Index + "]=" + ((MenuItem)sender).Text);
+             */
 
             m_selectedModuleIndex = ((MenuItem)sender).Index;
 
-            System.Diagnostics.Debug.WriteLine("Menu[xxx]: Send message to handle " +
-                m_AppHWnd.ToString("X"));
+            //System.Diagnostics.Debug.WriteLine("Menu[xxx]: Send message to handle " +
+            //    m_AppHWnd.ToString("X"));
             int ret = UtilFuncs.SendMessage(
-                0xFFFF, (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
-                0x000E, //IMN_PRIVATE
-                3L);
-            System.Diagnostics.Debug.WriteLine("Menu[xxx]: Message ret=" + ret);
+                new IntPtr((long)m_AppHWnd),
+                (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
+                0xE, //IMN_PRIVATE
+                3);
+            //System.Diagnostics.Debug.WriteLine("Menu[xxx]: Message ret=" + ret);
+            //System.Diagnostics.Debug.WriteLine("Menu[xxx]: GetLastError=" + UtilFuncs.GetLastError());
         }
 
 		private void IMEStatusForm_MouseDown(object sender,System.Windows.Forms.MouseEventArgs e)
