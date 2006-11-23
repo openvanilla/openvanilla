@@ -478,8 +478,7 @@ void UIShowStatusWindow()
 	{
 		_SetStatusChiEng(isChinese);
 		_ShowStatusPage();
-		
-		
+
 		//ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
 	}
 }
@@ -580,6 +579,30 @@ void UIChangeModule(HWND hWnd)
 	//RECT rc;
 	//GetWindowRect(uiStatus.hWnd, &rc);
 	//UIMoveStatusWindow(hWnd, rc.left, rc.top );
+	_ShowStatusPage();
+}
+
+void UIChangeModuleByMouse(HWND hWnd)
+{
+	char modNameUTF8[1024];
+	wchar_t modNameUCS2[1024];
+	
+	AVLoader* loader = AVLoader::getLoader();
+	wchar_t *modCurrentName;
+	
+	CurrentIC = _GetStatusSelectedModuleIndex();
+	if(loader->moduleName(CurrentIC, modNameUTF8)) 
+	{
+		MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
+		modCurrentName = modNameUCS2;
+		murmur(" ---> module name: %s", modNameUTF8);		
+	}
+	else 
+	{
+		modCurrentName = L"ERROR";
+		murmur("loader->moduleName() failed.");
+	}
+	UISetStatusModStr(modCurrentName);
 	_ShowStatusPage();
 }
 

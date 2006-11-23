@@ -31,6 +31,7 @@ void UISetCursorPos(int);
 void UISetMarkFrom(int);
 void UISetMarkTo(int);
 void UIChangeModule(HWND);
+void UIChangeModuleByMouse(HWND);
 void UIChangeHalfFull(HWND);
 void UIChangeChiEng(HWND);
 void UISetStatusModStr(wchar_t*);

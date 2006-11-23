@@ -25,7 +25,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 	case IMN_OPENSTATUSWINDOW:
 		murmur("IMN_OPENSTATUSWINDOW");
 		UICreateStatusWindow(hWnd);
-		murmur(" ---> notify window handle: %d", hWnd);
+		murmur(" ---> notify window handle: %x", hWnd);
 		if(!first) {
 		SystemParametersInfo(SPI_GETWORKAREA,
 				0,
@@ -215,12 +215,24 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		
 	case IMN_PRIVATE:
 		murmur("IMN_PRIVATE");
-		if(lParam == 0)
-			UIChangeModule(hWnd);
-		if(lParam == 1)
-			UIChangeHalfFull(hWnd); //Change UI Half/Full
-		if(lParam == 2)
-			UIChangeChiEng(hWnd);  //Chnage UI CHI/ENG
+		murmur(" ---> notify window handle: %x", hWnd);
+		switch(lParam) {
+			case 0:
+				UIChangeModule(hWnd);
+				break;
+			case 1:
+				UIChangeHalfFull(hWnd); //Change UI Half/Full
+				break;
+			case 2:
+				UIChangeChiEng(hWnd);  //Chnage UI CHI/ENG
+				break;
+			case 3:
+				UIChangeModuleByMouse(hWnd);
+				break;
+			default:
+				murmur("Uknown IMN_PRIVATE");
+				break;
+		}
 
 		break;
 		

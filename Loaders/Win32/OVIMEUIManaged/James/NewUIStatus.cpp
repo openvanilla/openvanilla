@@ -282,4 +282,10 @@ void _HideStatusPage()
 	StatusFormAssembly::StatusHide()->Invoke(StatusFormAssembly::StatusForm(),NULL);
 }
 
-
+int _GetStatusSelectedModuleIndex()
+{
+	Object* ret = StatusFormAssembly::StatusType()
+		->GetMethod("GetSelectedModuleIndex")
+		->Invoke(StatusFormAssembly::StatusForm(), NULL);
+	return Convert::ToInt32(ret);
+}

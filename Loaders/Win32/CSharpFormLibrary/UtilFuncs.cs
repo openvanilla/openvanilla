@@ -47,12 +47,28 @@ namespace CSharpFormLibrary
             long lParam   // second message parameter
             );
 
+        [DllImport("user32.dll")]
+        public static extern int PostMessage(
+            System.UInt64 hWnd,      // handle to destination window
+            uint Msg,       // message
+            long wParam,  // first message parameter
+            long lParam   // second message parameter
+            );
+
+        [DllImport("user32.dll")]
+        public static extern int SendNotifyMessage(
+            System.UInt64 hWnd,      // handle to destination window
+            uint Msg,       // message
+            long wParam,  // first message parameter
+            long lParam   // second message parameter
+            );
+
 		public static void GiveBackFocus(System.UInt64 hwnd)
 		{			
 			long lngResult = SendMessage(hwnd, (Int32)WindowsMessage.WM_IME_SETCONTEXT, 1L, 0L); 
 		}
 
-        public enum WindowsMessage : int
+        public enum WindowsMessage : uint
         {
             WM_NULL = 0x0000,
             WM_CREATE = 0x0001,
