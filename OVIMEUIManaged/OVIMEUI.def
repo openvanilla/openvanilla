@@ -54,5 +54,7 @@ EXPORTS
 	UISetStatusMenuModStr
 	_SetStatusMenuModString
 	_SetStatusAppHWnd
+	UIChangeModuleByMouse
+	_GetStatusSelectedModuleIndex
 	UISetCompCaretPosX
 	_SetCompCaretPosX	

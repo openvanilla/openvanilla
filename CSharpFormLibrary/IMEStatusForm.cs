@@ -171,12 +171,14 @@ namespace CSharpFormLibrary
 		{
             this.button1 = new IMEButton();
             this.button2 = new IMEButton();
-            this.contextMenu1 = new System.Windows.Forms.ContextMenu();
-            this.menuItem1 = new System.Windows.Forms.MenuItem();
-            this.menuItem2 = new System.Windows.Forms.MenuItem();
-            this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.button3 = new IMEButton();
             this.button6 = new IMEButton();
+
+            this.contextMenu1 = new System.Windows.Forms.ContextMenu();
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
+            //this.menuItem2 = new System.Windows.Forms.MenuItem();
+            //this.menuItem3 = new System.Windows.Forms.MenuItem();
+
             this.SuspendLayout();
             // 
             // button1
@@ -206,28 +208,6 @@ namespace CSharpFormLibrary
             this.button2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button2_MouseDown);
             this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
             // 
-            // contextMenu1
-            // 
-            this.contextMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem1,
-            this.menuItem2,
-            this.menuItem3});
-            // 
-            // menuItem1
-            // 
-            this.menuItem1.Index = 0;
-            this.menuItem1.Text = "";
-            // 
-            // menuItem2
-            // 
-            this.menuItem2.Index = 1;
-            this.menuItem2.Text = "test2";
-            // 
-            // menuItem3
-            // 
-            this.menuItem3.Index = 2;
-            this.menuItem3.Text = "test3";
-            // 
             // button3
             // 
             this.button3.BackColor = System.Drawing.SystemColors.Desktop;
@@ -252,6 +232,29 @@ namespace CSharpFormLibrary
             this.button6.Text = "³]©w";
             //this.button6.UseVisualStyleBackColor = false;
             this.button6.Visible = false;
+            // 
+            // contextMenu1
+            // 
+            this.contextMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem1/*,
+            this.menuItem2,
+            this.menuItem3*/});
+            // 
+            // menuItem1
+            // 
+            this.menuItem1.Index = 0;
+            this.menuItem1.Text = "";
+            this.menuItem1.Click +=new EventHandler(menuItem_Click);
+            // 
+            // menuItem2
+            // 
+            //this.menuItem2.Index = 1;
+            //this.menuItem2.Text = "test2";
+            // 
+            // menuItem3
+            // 
+            //this.menuItem3.Index = 2;
+            //this.menuItem3.Text = "test3";
             // 
             // IMEStatusForm
             // 
@@ -328,20 +331,44 @@ namespace CSharpFormLibrary
 		{
 			if(inputs == null) return;
 
-			if(currentMenu == 0)
-				this.menuItem1.Text = inputs;
-			if(currentMenu == 1)
-				this.menuItem2.Text = inputs;
-			if(currentMenu == 2)
-				this.menuItem3.Text = inputs;			
+            if (currentMenu == 0)
+                this.menuItem1.Text = inputs;
+            else
+                this.contextMenu1.MenuItems.Add(
+                    inputs, new EventHandler(menuItem_Click));
+
 			currentMenu++;
         }
+
+        public int GetSelectedModuleIndex()
+        {
+            return m_selectedModuleIndex;
+        }
+
         #endregion
 
         #region private memebers
 
         private Point mouseOffset;
 		private bool isMouseDown = false;
+        private int m_selectedModuleIndex = 0;
+
+        private void menuItem_Click(object sender, EventArgs e)
+        {   
+            System.Diagnostics.Debug.WriteLine(
+                "Menu[xxx]: Changes to module[" +
+                ((MenuItem)sender).Index + "]=" + ((MenuItem)sender).Text);
+
+            m_selectedModuleIndex = ((MenuItem)sender).Index;
+
+            System.Diagnostics.Debug.WriteLine("Menu[xxx]: Send message to handle " +
+                m_AppHWnd.ToString("X"));
+            int ret = UtilFuncs.SendMessage(
+                0xFFFF, (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
+                0x000E, //IMN_PRIVATE
+                3L);
+            System.Diagnostics.Debug.WriteLine("Menu[xxx]: Message ret=" + ret);
+        }
 
 		private void IMEStatusForm_MouseDown(object sender,System.Windows.Forms.MouseEventArgs e)
 		{
