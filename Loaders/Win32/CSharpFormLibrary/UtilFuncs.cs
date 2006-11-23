@@ -37,36 +37,23 @@ namespace CSharpFormLibrary
 			form.Visible = visible;
 		} 
 
-		public const ulong HWND_BROADCAST = 0xffff ;
+		public const ulong HWND_BROADCAST = 0xFFFF;
 
         [DllImport("user32.dll")]
         public static extern int SendMessage(
-            System.UInt64 hWnd,      // handle to destination window
+            IntPtr hWnd,      // handle to destination window
             uint Msg,       // message
-            long wParam,  // first message parameter
-            long lParam   // second message parameter
+            uint wParam,  // first message parameter
+            uint lParam   // second message parameter
             );
 
-        [DllImport("user32.dll")]
-        public static extern int PostMessage(
-            System.UInt64 hWnd,      // handle to destination window
-            uint Msg,       // message
-            long wParam,  // first message parameter
-            long lParam   // second message parameter
-            );
+        [DllImport("kernel32.dll")]
+        public static extern int GetLastError();
 
-        [DllImport("user32.dll")]
-        public static extern int SendNotifyMessage(
-            System.UInt64 hWnd,      // handle to destination window
-            uint Msg,       // message
-            long wParam,  // first message parameter
-            long lParam   // second message parameter
-            );
-
-		public static void GiveBackFocus(System.UInt64 hwnd)
-		{			
-			long lngResult = SendMessage(hwnd, (Int32)WindowsMessage.WM_IME_SETCONTEXT, 1L, 0L); 
-		}
+		//public static void GiveBackFocus(System.UInt64 hwnd)
+		//{			
+		//	long lngResult = SendMessage(hwnd, (int)WindowsMessage.WM_IME_SETCONTEXT, 1, 0); 
+		//}
 
         public enum WindowsMessage : uint
         {

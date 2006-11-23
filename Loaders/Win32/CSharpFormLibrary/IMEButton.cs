@@ -39,11 +39,11 @@ namespace CSharpFormLibrary
             get
             {
                 CreateParams cp = base.CreateParams;
-                System.Diagnostics.Debug.WriteLine(
-                    "Button: CreateParams.ExStyle (before) =" + cp.ExStyle);
+                //System.Diagnostics.Debug.WriteLine(
+                //    "Button: CreateParams.ExStyle (before) =" + cp.ExStyle);
                 cp.ExStyle = 0x00000004; //WS_EX_NOPARENTNOTIFY
-                System.Diagnostics.Debug.WriteLine(
-                    "Button: CreateParams.ExStyle (after) =" + cp.ExStyle);
+                //System.Diagnostics.Debug.WriteLine(
+                //    "Button: CreateParams.ExStyle (after) =" + cp.ExStyle);
                 return cp;
             }
         }
@@ -69,12 +69,15 @@ namespace CSharpFormLibrary
 
         protected override void WndProc(ref Message m)
         {
+            /*
             msgCounter++;
             System.Diagnostics.Debug.WriteLine(
                 "Button[" + msgCounter + "]: (before base) Msg->\t" +
                 Enum.GetName(typeof(UtilFuncs.WindowsMessage), m.Msg) +
                 "(0x" + m.Msg.ToString("X") + ")");
+             */
 
+            /*
             if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_IME_SETCONTEXT)
             {
                 System.Diagnostics.Debug.WriteLine(
@@ -86,16 +89,20 @@ namespace CSharpFormLibrary
                 System.Diagnostics.Debug.WriteLine(
                     "Button[" + msgCounter + "]: WParam->\t0x" + m.WParam.ToString("X"));
             }
+             */
 
             base.WndProc(ref m);
 
+            /*
             System.Diagnostics.Debug.WriteLine(
                 "Button[" + msgCounter + "]: (after base) Msg->\t" +
                 Enum.GetName(typeof(UtilFuncs.WindowsMessage), m.Msg) +
                 "(0x" + m.Msg.ToString("X") + ")");
+             */
 
             if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_MOUSEACTIVATE)
             {
+                /*
                 System.Diagnostics.Debug.WriteLine("==================");
                 System.Diagnostics.Debug.WriteLine("WM_MOUSEACTIVATE");
                 System.Diagnostics.Debug.WriteLine(
@@ -116,15 +123,17 @@ namespace CSharpFormLibrary
                 //m.WParam = IntPtr.Zero;
                 System.Diagnostics.Debug.WriteLine(
                     "Button[" + msgCounter + "]: WParam (after)->\t0x" + m.WParam.ToString("X"));
+                 */
 
                 m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
                 //m.Result = (IntPtr)MA_NOACTIVATE;
 
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: Result->\t0x" + m.Result.ToString("X"));
+                //System.Diagnostics.Debug.WriteLine(
+                //    "Button[" + msgCounter + "]: Result->\t0x" + m.Result.ToString("X"));
 
                 MyOnMouseDown();
             }
+            /*
             else if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_SETCURSOR)
             {
                 System.Diagnostics.Debug.WriteLine(
@@ -149,6 +158,7 @@ namespace CSharpFormLibrary
             }
             //else
             //    base.WndProc(ref m);
+             */
         }
     }
 }
