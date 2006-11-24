@@ -110,9 +110,8 @@ namespace CSharpFormLibrary
             this.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "IMECompForm";
-            this.Opacity = 0.75;
+            this.Opacity = 0.85;
             this.ShowInTaskbar = false;
-            this.Text = "IMECompForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 
