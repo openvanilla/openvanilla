@@ -17,10 +17,8 @@ namespace CSharpFormLibrary
         private const int MA_NOACTIVATE = 0x0003;
         private const int MA_NOACTIVATEANDEAT = 0x0004;
 
-        private int msgCounter = 0;
+        //private int msgCounter = 0;
         private UInt64 m_AppHWnd;
-
-		private int currentMenu = 0;
 
 		/// <summary>
 		/// Required designer variable.
@@ -173,7 +171,6 @@ namespace CSharpFormLibrary
 			this.button1 = new CSharpFormLibrary.IMEButton();
 			this.button2 = new CSharpFormLibrary.IMEButton();
 			this.contextMenu1 = new System.Windows.Forms.ContextMenu();
-			this.menuItem1 = new System.Windows.Forms.MenuItem();
 			this.button3 = new CSharpFormLibrary.IMEButton();
 			this.button6 = new CSharpFormLibrary.IMEButton();
 			this.SuspendLayout();
@@ -203,18 +200,6 @@ namespace CSharpFormLibrary
 			this.button2.TabIndex = 1;
 			this.button2.Text = "button2";
 			this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
-			this.button2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button2_MouseDown);
-			// 
-			// contextMenu1
-			// 
-			this.contextMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																						 this.menuItem1});
-			// 
-			// menuItem1
-			// 
-			this.menuItem1.Index = 0;
-			this.menuItem1.Text = "";
-			this.menuItem1.Click += new System.EventHandler(this.menuItem_Click);
 			// 
 			// button3
 			// 
@@ -322,13 +307,12 @@ namespace CSharpFormLibrary
 		{
 			if(inputs == null) return;
 
-            if (currentMenu == 0)
-                this.menuItem1.Text = inputs;
-            else
-                this.contextMenu1.MenuItems.Add(
-                    inputs, new EventHandler(menuItem_Click));
+            System.Diagnostics.Debug.WriteLine("status: set menu=\t" + inputs);
+            this.contextMenu1.MenuItems.Add(
+                inputs, new EventHandler(menuItem_Click));
 
-			currentMenu++;
+            System.Diagnostics.Debug.WriteLine(
+                "status: menu size=\t" + this.contextMenu1.MenuItems.Count);
         }
 
         public int GetSelectedModuleIndex()
@@ -398,18 +382,10 @@ namespace CSharpFormLibrary
 			}
 		}
 
-        private void button2_MouseDown(object sender, MouseEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("Mouse Down!");
-            //this.button2.ContextMenu.Show(button2, new System.Drawing.Point(0, (-2)*(button2.Height)));
-            //System.Diagnostics.Debug.WriteLine("Context Menu Shown!");
-        }
-
         private void button2_MouseUp(object sender, MouseEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("Mouse Up!");
+        {            
             this.button2.ContextMenu.Show(button2, new System.Drawing.Point(0, button2.Bottom));
-            System.Diagnostics.Debug.WriteLine("Context Menu Shown!");
+            System.Diagnostics.Debug.WriteLine("status: context menu shown.");
         }
         #endregion
     }
