@@ -315,7 +315,12 @@ namespace CSharpFormLibrary
 			//button2.ContextMenu.Show(button2, new System.Drawing.Point(0, button2.Height));			
 		}
 
-		public void SetMenuModString(string inputs)
+        public void ClearMenuModString()
+        {
+            this.contextMenu1.MenuItems.Clear();
+        }
+
+        public void SetMenuModString(string inputs)
 		{
 			if(inputs == null) return;
 

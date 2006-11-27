@@ -36,6 +36,7 @@ void UIChangeHalfFull(HWND);
 void UIChangeChiEng(HWND);
 void UISetStatusModStr(wchar_t*);
 void UISetStatusMenuModStr(wchar_t*);
+void UIClearStatusMenuModString();
 // UIComp.cpp
 void UICreateCompWindow(HWND);
 void UIMoveCompWindow(HWND, int, int, wchar_t*);

@@ -45,6 +45,9 @@ private:
 	static MethodInfo* methodStatusSetMenuModString;
 	static bool hasMethodStatusSetMenuModString = false;
 
+	static MethodInfo* methodStatusClearMenuModString;
+	static bool hasMethodStatusClearMenuModString = false;
+
 	__nogc struct IsFormCreated
 	{
 		bool isCreated;
@@ -152,6 +155,16 @@ public:
 		return methodStatusSetMenuModString;
 	}
 
+	static MethodInfo* StatusClearMenuModString()
+	{
+		if(!hasMethodStatusClearMenuModString)
+		{
+			methodStatusClearMenuModString = 
+				StatusFormAssembly::StatusType()->GetMethod("ClearMenuModString");
+			hasMethodStatusClearMenuModString = true;
+		}
+		return methodStatusClearMenuModString;
+	}
 
 	static MethodInfo* StatusHide()
 	{
@@ -261,6 +274,12 @@ void _SetStatusModString(const std::wstring& statusModName)
 		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
 			->ToArray(System::Type::GetType("System.Object")));
 	StatusFormAssembly::StatusSetModString()->Invoke(StatusFormAssembly::StatusForm(), param);
+}
+
+void _ClearStatusMenuModString()
+{
+	StatusFormAssembly::StatusClearMenuModString()
+		->Invoke(StatusFormAssembly::StatusForm(), NULL);
 }
 
 void _SetStatusMenuModString(const std::wstring& statusModName)
