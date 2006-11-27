@@ -40,9 +40,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	{
 		murmur("UIMSG");	
 
-	case WM_WINDOWPOSCHANGING: //The WM_WINDOWPOSCHANGING message is sent to a window whose size, position, or place in the Z order is about to change as a result of a call to the SetWindowPos function or another window-management function.
-		murmur("WM_WINDOWPOSCHANGING");
-		break;
+
 			
 	case WM_MOUSEACTIVATE:
 		murmur("WM_MOUSEACTIVATE");
@@ -60,7 +58,10 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		UICreateCandWindow(hWnd);
 		UICreateNotifyWindow(hWnd);
 		break;
-		
+	case WM_WINDOWPOSCHANGING: //The WM_WINDOWPOSCHANGING message is sent to a window whose size, position, or place in the Z order is about to change as a result of a call to the SetWindowPos function or another window-management function.
+		murmur("WM_WINDOWPOSCHANGING");
+
+		break;
 	case WM_IME_SETCONTEXT:
 		murmur("WM_IME_SETCONTEXT");
 		murmur("%p",lParam);				
@@ -116,7 +117,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 					{
 						if(wcslen(lpMyPrivate->CandStr))
 						{
-							UIMoveCandWindow(hWnd, CompX,CompY+20,NULL);
+							UIMoveCandWindow(hWnd, CompX,CompY+30,NULL);
 							UISetCandStr(lpMyPrivate->CandStr);
 							UIShowCandWindow();
 						}
@@ -155,7 +156,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	case WM_IME_STARTCOMPOSITION:
 		murmur("WM_IME_STARTCOMPOSITION");
 		break;
-
+	
 	case WM_IME_COMPOSITION:
 		murmur("WM_IME_COMPOSITION");
 		//test
@@ -203,7 +204,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		{
 			if(wcslen(lpMyPrivate->CandStr))
 			{
-				UIMoveCandWindow(hWnd, CompX,CompY+20,NULL);
+				UIMoveCandWindow(hWnd, CompX,CompY+30,NULL);
 				UISetCandStr(lpMyPrivate->CandStr);
 				UIShowCandWindow();
 			}

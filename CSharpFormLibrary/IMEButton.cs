@@ -14,8 +14,7 @@ namespace CSharpFormLibrary
         private const int MA_ACTIVATEANDEAT = 2;
         private const int MA_NOACTIVATE = 0x0003;
         private const int MA_NOACTIVATEANDEAT = 0x0004;
-
-        private static int msgCounter = 0;
+        
         private UInt64 m_AppHWnd;
         private Color m_origForeColor;
         private bool m_wasMouseDown = false;

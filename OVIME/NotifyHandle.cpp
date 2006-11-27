@@ -163,11 +163,13 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			CompX = ptSrc.x ;
 //			CompY = ptSrc.y + abs(lf2.lfHeight)*72/tm.tmDigitizedAspectY;
 			CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
-
+			
+			int tmpY=abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
 //			murmur(" ---> IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
 
 			UIMoveCompWindow(hWnd, CompX, CompY,NULL);
-			UIMoveCandWindow(hWnd, CompX,CompY+20,NULL);
+			//UIMoveCandWindow(hWnd, CompX,CompY,tmpY);
+			UIMoveCandWindow(hWnd, CompX,CompY+30,NULL);			
 		}
 		//James modified
 		//CompX = ptSrc.x + szOffset.cx;

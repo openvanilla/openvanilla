@@ -24,7 +24,6 @@ namespace CSharpFormLibrary
 		/// Required designer variable.
 		/// </summary>
 		private System.ComponentModel.Container components = null;
-        private IMEButton button1;
         private IMEButton button2;
         private IMEButton button3;
         private IMEButton button6;
@@ -172,7 +171,6 @@ namespace CSharpFormLibrary
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.button1 = new CSharpFormLibrary.IMEButton();
 			this.button2 = new CSharpFormLibrary.IMEButton();
 			this.contextMenu1 = new System.Windows.Forms.ContextMenu();
 			this.button3 = new CSharpFormLibrary.IMEButton();
@@ -183,19 +181,6 @@ namespace CSharpFormLibrary
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// button1
-			// 
-			// TODO: Code generation for 'this.button1.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
-			this.button1.BackColor = System.Drawing.Color.Gray;
-			this.button1.Dock = System.Windows.Forms.DockStyle.Right;
-			this.button1.Font = new System.Drawing.Font("PMingLiU", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
-			this.button1.ForeColor = System.Drawing.Color.White;
-			this.button1.Location = new System.Drawing.Point(204, 0);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(96, 32);
-			this.button1.TabIndex = 0;
-			this.button1.Text = "¬Y¿é¤Jªk";
 			// 
 			// button2
 			// 
@@ -242,13 +227,13 @@ namespace CSharpFormLibrary
 			// 
 			this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label1.Font = new System.Drawing.Font("Haettenschweiler", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.label1.ForeColor = System.Drawing.Color.Beige;
+			this.label1.Font = new System.Drawing.Font("PMingLiU", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.label1.ForeColor = System.Drawing.Color.FromArgb(((System.Byte)(224)), ((System.Byte)(224)), ((System.Byte)(224)));
 			this.label1.Location = new System.Drawing.Point(0, 0);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(64, 32);
 			this.label1.TabIndex = 6;
-			this.label1.Text = "GOING";
+			this.label1.Text = "Ê¨";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.label1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
 			this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
@@ -265,7 +250,6 @@ namespace CSharpFormLibrary
 			// 
 			// panel2
 			// 
-			this.panel2.Controls.Add(this.button1);
 			this.panel2.Controls.Add(this.button2);
 			this.panel2.Controls.Add(this.button3);
 			this.panel2.Controls.Add(this.button6);
@@ -340,7 +324,7 @@ namespace CSharpFormLibrary
             this.button3.Left = this.button2.Right;
 			this.button6.Left = this.button3.Right;
             
-            this.Width = this.label1.Width+this.button1.Width+ this.button2.Width 
+            this.Width = this.label1.Width+ this.button2.Width 
 				+ this.button3.Width +this.button6.Width ;
 			//inputs = inputs.Length + inputs;
             
