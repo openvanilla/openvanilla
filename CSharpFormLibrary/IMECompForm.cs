@@ -69,51 +69,45 @@ namespace CSharpFormLibrary
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(159, 29);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "textBox1";
-            this.textBox1.WordWrap = false;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.label1.Location = new System.Drawing.Point(0, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(2, 6);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
-            // 
-            // IMECompForm
-            // 
-			//VC8
-			/* ****** DUE TO VC8 Upgrade ******
-			//this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
-			//this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            //this.AutoSize = true;
-			***********************************/
-            this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(159, 27);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "IMECompForm";
-            this.Opacity = 0.85;
-            this.ShowInTaskbar = false;
-            this.ResumeLayout(false);
-            this.PerformLayout();
+			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.SuspendLayout();
+			// 
+			// textBox1
+			// 
+			this.textBox1.BackColor = System.Drawing.Color.PapayaWhip;
+			this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.textBox1.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.textBox1.Location = new System.Drawing.Point(0, 0);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(159, 31);
+			this.textBox1.TabIndex = 0;
+			this.textBox1.Text = "textBox1";
+			this.textBox1.WordWrap = false;
+			// 
+			// label1
+			// 
+			this.label1.BackColor = System.Drawing.SystemColors.WindowFrame;
+			this.label1.Location = new System.Drawing.Point(0, 23);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(2, 6);
+			this.label1.TabIndex = 1;
+			this.label1.Text = "label1";
+			// 
+			// IMECompForm
+			// 
+			this.AutoScaleBaseSize = new System.Drawing.Size(9, 24);
+			this.BackColor = System.Drawing.SystemColors.Window;
+			this.ClientSize = new System.Drawing.Size(159, 27);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.textBox1);
+			this.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.Name = "IMECompForm";
+			this.Opacity = 0.85;
+			this.ShowInTaskbar = false;
+			this.ResumeLayout(false);
 
 		}
 		#endregion

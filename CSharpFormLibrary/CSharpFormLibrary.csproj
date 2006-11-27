@@ -103,6 +103,16 @@
                     BuildAction = "None"
                 />
                 <File
+                    RelPath = "IMEButton.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "IMEButton.resx"
+                    DependentUpon = "IMEButton.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "IMECandidateForm.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
