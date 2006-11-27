@@ -82,6 +82,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 						pt.x = 15;
 						pt.y = 15;
 						ClientToScreen(lpIMC->hWnd, &pt);
+						murmur("hWnd->%x", lpIMC->hWnd);
 						CompX = pt.x;
 						CompY = pt.y;
 					}					
@@ -90,6 +91,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 					{						
 						if(wcslen(lpMyPrivate->PreEditStr)&& !isActive) //comp有字且還沒被active
 						{
+							murmur("outter, move(%d, %d)", CompX, CompY);
 							UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 							UISetCompStr(lpMyPrivate->PreEditStr);
 							UIShowCompWindow();
@@ -99,6 +101,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 						{
 							if(!wcslen(lpMyPrivate->CandStr) )//如果沒有candidate才要秀
 							{
+								murmur("inner, move(%d, %d)", CompX, CompY);
 								UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 								UISetCompStr(lpMyPrivate->PreEditStr);
 								UIShowCompWindow();
@@ -166,7 +169,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 		lpIMC = ImmLockIMC(hUICurIMC);
 		POINT pt;
-		if(CompX < 0) {
+		if(CompX < 0) 
+		{
 			pt.x = 15;
 			pt.y = 15;
 			ClientToScreen(lpIMC->hWnd, &pt);
@@ -178,6 +182,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		{						
 			if(wcslen(lpMyPrivate->PreEditStr)&& !isActive) //comp有字且還沒被active
 			{
+				murmur("COMPOSITION, move(%d, %d)", CompX, CompY);
 				UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 				UISetCompStr(lpMyPrivate->PreEditStr);
 				UIShowCompWindow();
@@ -187,6 +192,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			{
 				if(!wcslen(lpMyPrivate->CandStr) )//如果沒有candidate才要秀
 				{
+					murmur("COMPOSITION, move(%d, %d)", CompX, CompY);
 					UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 					UISetCompStr(lpMyPrivate->PreEditStr);
 					UIShowCompWindow();
