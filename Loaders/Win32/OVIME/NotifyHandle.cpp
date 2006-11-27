@@ -137,15 +137,18 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 		
 	case IMN_SETCOMPOSITIONWINDOW:    // set composition window position, move
-		
+		murmur("IMN_SETCOMPOSITIONWINDOW");
 		POINT ptSrc;
 		SIZE szOffset;
 		HDC hDC;
 		TEXTMETRIC tm;
 		int localDPIY; //for device dpiY
 		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
+		murmur("x->%d", ptSrc.x);
+		murmur("y->%d", ptSrc.y);
 		ClientToScreen(lpIMC->hWnd, &ptSrc);
 		hDC = GetDC(lpIMC->hWnd);
+		murmur("hWnd->%x", lpIMC->hWnd);
 		GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
 		GetTextMetrics(hDC, &tm);
 		localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
@@ -166,7 +169,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			
 			int tmpY=abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
 //			murmur(" ---> IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
-
+			murmur("SETCOMPOSITIONWINDOW, move(%d, %d)", CompX, CompY);
 			UIMoveCompWindow(hWnd, CompX, CompY,NULL);
 			//UIMoveCandWindow(hWnd, CompX,CompY,tmpY);
 			UIMoveCandWindow(hWnd, CompX,CompY+30,NULL);			
