@@ -29,7 +29,6 @@ namespace CSharpFormLibrary
         private IMEButton button3;
         private IMEButton button6;
         private System.Windows.Forms.ContextMenu contextMenu1;
-        private System.Windows.Forms.MenuItem menuItem1;
 
 		public IMEStatusForm()
 		{
