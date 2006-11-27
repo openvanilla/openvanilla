@@ -53,6 +53,8 @@ EXPORTS
 	_SetStatusModString
 	UISetStatusMenuModStr
 	_SetStatusMenuModString
+	UIClearStatusMenuModString
+	_ClearStatusMenuModString	
 	_SetStatusAppHWnd
 	UIChangeModuleByMouse
 	_GetStatusSelectedModuleIndex

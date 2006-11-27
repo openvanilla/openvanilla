@@ -323,6 +323,7 @@ void UICreateStatusWindow(HWND hUIWnd)
 	
 	//jaimie for C# menu set module name
 	//to set all available module names into C# menu list.
+	UIClearStatusMenuModString();
 	for(int i = 0; i < loader->getInputMethodCount(); i++)
 	{
 		if(loader->moduleName(i, modNameUTF8))
@@ -371,6 +372,12 @@ void UISetStatusMenuModStr(wchar_t* lpStr)
 	//watch.start();
 	_SetStatusMenuModString(wsStatusStr);
 }
+
+void UIClearStatusMenuModString()
+{
+	_ClearStatusMenuModString();
+}
+
 void UIMoveStatusWindow(HWND hUIWnd, int X, int Y)
 {
 	if (!IsWindow(uiStatus.hWnd))
