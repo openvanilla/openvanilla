@@ -236,7 +236,7 @@ namespace CSharpFormLibrary
 			this.button6.ForeColor = System.Drawing.Color.White;
 			this.button6.Location = new System.Drawing.Point(192, 0);
 			this.button6.Name = "button6";
-			this.button6.Size = new System.Drawing.Size(64, 48);
+			this.button6.Size = new System.Drawing.Size(208, 48);
 			this.button6.TabIndex = 5;
 			this.button6.Text = "³]©w";
 			// 
@@ -244,7 +244,7 @@ namespace CSharpFormLibrary
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
 			this.BackColor = System.Drawing.Color.Gray;
-			this.ClientSize = new System.Drawing.Size(256, 48);
+			this.ClientSize = new System.Drawing.Size(400, 48);
 			this.Controls.Add(this.button6);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button2);
@@ -306,7 +306,7 @@ namespace CSharpFormLibrary
 			this.button6.Left = this.button3.Right;
             
             this.Width = this.button1.Width+ this.button2.Width 
-				+ this.button3.Width +/*this.button6.Width*/ + 8;
+				+ this.button3.Width /*this.button6.Width*/ ;
 			//inputs = inputs.Length + inputs;
             
 			this.button2.Text = inputs;
