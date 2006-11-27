@@ -133,26 +133,31 @@ void UISetCandStr(wchar_t* lpStr)
 
 }
 
-void UIMoveCandWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
+void UIMoveCandWindow(HWND hUIWnd, int X, int Y, int lpStr)//wchar_t* lpStr)
 {	
-	int newX=X+CompCursorPos*16;
-	int newY=Y;		
-	if (IsWindow(uiCand.hWnd))
-	{		
-		RECT screenrc;
-		SystemParametersInfo(SPI_GETWORKAREA,0,&screenrc,0);
-		if( newX+100 > screenrc.right )
-			newX=screenrc.right-100;
-		if( newY+200 > screenrc.bottom )			
-			newY=Y-190;
-		Watch watch;
-		watch.start();
-		_MoveCandPage(newX,newY);				
-		uiCand.pt.x=newX;
-		uiCand.pt.y=newY;
-		watch.stop();
-		murmur("%1.3f sec:\tC# candidate window, move to (%d,%d)", watch.getSec(),newX,newY);
-	}		
+//	if(lpStr!=NULL)
+	{
+		//int newX=X+(CompCursorPos-1)*((int)lpStr);
+		//int newY=Y+((int)lpStr);		
+		int newX=X+(CompCursorPos-1)*21 ;
+		int newY=Y;		
+		if (IsWindow(uiCand.hWnd))
+		{		
+			RECT screenrc;
+			SystemParametersInfo(SPI_GETWORKAREA,0,&screenrc,0);
+			if( newX+100 > screenrc.right )
+				newX=screenrc.right-100;
+			if( newY+200 > screenrc.bottom )			
+				newY=Y-190;
+			Watch watch;
+			watch.start();
+			_MoveCandPage(newX,newY);				
+			uiCand.pt.x=newX;
+			uiCand.pt.y=newY;
+			watch.stop();
+			murmur("%1.3f sec:\tC# candidate window, move to (%d,%d)", watch.getSec(),newX,newY);
+		}		
+	}
 }
 
 void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)

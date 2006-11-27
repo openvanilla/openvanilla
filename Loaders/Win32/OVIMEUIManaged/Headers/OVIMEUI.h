@@ -46,7 +46,8 @@ void UISetCompStr(wchar_t*);
 void UISetCompCaretPosX(int);
 // UICand.cpp
 void UICreateCandWindow(HWND);
-void UIMoveCandWindow(HWND, int, int, wchar_t*);
+void UIMoveCandWindow(HWND, int, int, int);
+//void UIMoveCandWindow(HWND, int, int, wchar_t*);
 void UIShowCandWindow();
 void UIHideCandWindow();
 void UISetCandStr(wchar_t*);
