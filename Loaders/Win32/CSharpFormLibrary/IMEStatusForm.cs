@@ -29,6 +29,10 @@ namespace CSharpFormLibrary
         private IMEButton button3;
         private IMEButton button6;
         private System.Windows.Forms.ContextMenu contextMenu1;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.MenuItem menuItem1;
 
 		public IMEStatusForm()
 		{
@@ -39,6 +43,7 @@ namespace CSharpFormLibrary
 			this.SetStyle(ControlStyles.StandardClick, false);
 			this.SetStyle(ControlStyles.EnableNotifyMessage, false);
 			this.SetStyle(ControlStyles.UserMouse, false);
+			
 		
             //Application.AddMessageFilter(new MessageFilter());
         }
@@ -172,17 +177,23 @@ namespace CSharpFormLibrary
 			this.contextMenu1 = new System.Windows.Forms.ContextMenu();
 			this.button3 = new CSharpFormLibrary.IMEButton();
 			this.button6 = new CSharpFormLibrary.IMEButton();
+			this.label1 = new System.Windows.Forms.Label();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.panel2 = new System.Windows.Forms.Panel();
+			this.panel1.SuspendLayout();
+			this.panel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// button1
 			// 
 			// TODO: Code generation for 'this.button1.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
 			this.button1.BackColor = System.Drawing.Color.Gray;
-			this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-			this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
-			this.button1.Location = new System.Drawing.Point(0, 0);
+			this.button1.Dock = System.Windows.Forms.DockStyle.Right;
+			this.button1.Font = new System.Drawing.Font("PMingLiU", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.button1.ForeColor = System.Drawing.Color.White;
+			this.button1.Location = new System.Drawing.Point(204, 0);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(96, 48);
+			this.button1.Size = new System.Drawing.Size(96, 32);
 			this.button1.TabIndex = 0;
 			this.button1.Text = "某輸入法";
 			// 
@@ -191,11 +202,12 @@ namespace CSharpFormLibrary
 			// TODO: Code generation for 'this.button2.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
 			this.button2.BackColor = System.Drawing.Color.Gray;
 			this.button2.ContextMenu = this.contextMenu1;
-			this.button2.Dock = System.Windows.Forms.DockStyle.Left;
+			this.button2.Dock = System.Windows.Forms.DockStyle.Right;
+			this.button2.Font = new System.Drawing.Font("PMingLiU", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button2.ForeColor = System.Drawing.Color.White;
-			this.button2.Location = new System.Drawing.Point(96, 0);
+			this.button2.Location = new System.Drawing.Point(300, 0);
 			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(48, 48);
+			this.button2.Size = new System.Drawing.Size(48, 32);
 			this.button2.TabIndex = 1;
 			this.button2.Text = "button2";
 			this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
@@ -204,11 +216,12 @@ namespace CSharpFormLibrary
 			// 
 			// TODO: Code generation for 'this.button3.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
 			this.button3.BackColor = System.Drawing.Color.Gray;
-			this.button3.Dock = System.Windows.Forms.DockStyle.Left;
+			this.button3.Dock = System.Windows.Forms.DockStyle.Right;
+			this.button3.Font = new System.Drawing.Font("PMingLiU", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button3.ForeColor = System.Drawing.Color.White;
-			this.button3.Location = new System.Drawing.Point(144, 0);
+			this.button3.Location = new System.Drawing.Point(348, 0);
 			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(48, 48);
+			this.button3.Size = new System.Drawing.Size(48, 32);
 			this.button3.TabIndex = 2;
 			this.button3.Text = "button3";
 			// 
@@ -216,23 +229,59 @@ namespace CSharpFormLibrary
 			// 
 			// TODO: Code generation for 'this.button6.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
 			this.button6.BackColor = System.Drawing.Color.Gray;
-			this.button6.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.button6.Dock = System.Windows.Forms.DockStyle.Right;
+			this.button6.Font = new System.Drawing.Font("PMingLiU", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button6.ForeColor = System.Drawing.Color.White;
-			this.button6.Location = new System.Drawing.Point(192, 0);
+			this.button6.Location = new System.Drawing.Point(396, 0);
 			this.button6.Name = "button6";
-			this.button6.Size = new System.Drawing.Size(208, 48);
+			this.button6.Size = new System.Drawing.Size(60, 32);
 			this.button6.TabIndex = 5;
 			this.button6.Text = "設定";
+			// 
+			// label1
+			// 
+			this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label1.Font = new System.Drawing.Font("Haettenschweiler", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
+			this.label1.ForeColor = System.Drawing.Color.Beige;
+			this.label1.Location = new System.Drawing.Point(0, 0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(64, 32);
+			this.label1.TabIndex = 6;
+			this.label1.Text = "GOING";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.label1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
+			this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
+			this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
+			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.label1);
+			this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+			this.panel1.Location = new System.Drawing.Point(0, 0);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(64, 32);
+			this.panel1.TabIndex = 7;
+			// 
+			// panel2
+			// 
+			this.panel2.Controls.Add(this.button1);
+			this.panel2.Controls.Add(this.button2);
+			this.panel2.Controls.Add(this.button3);
+			this.panel2.Controls.Add(this.button6);
+			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel2.Location = new System.Drawing.Point(64, 0);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(456, 32);
+			this.panel2.TabIndex = 8;
 			// 
 			// IMEStatusForm
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
 			this.BackColor = System.Drawing.Color.Gray;
-			this.ClientSize = new System.Drawing.Size(400, 48);
-			this.Controls.Add(this.button6);
-			this.Controls.Add(this.button3);
-			this.Controls.Add(this.button2);
-			this.Controls.Add(this.button1);
+			this.ClientSize = new System.Drawing.Size(520, 32);
+			this.Controls.Add(this.panel2);
+			this.Controls.Add(this.panel1);
 			this.ForeColor = System.Drawing.Color.Yellow;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.MaximizeBox = false;
@@ -242,6 +291,8 @@ namespace CSharpFormLibrary
 			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
 			this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
 			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
+			this.panel1.ResumeLayout(false);
+			this.panel2.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -289,8 +340,8 @@ namespace CSharpFormLibrary
             this.button3.Left = this.button2.Right;
 			this.button6.Left = this.button3.Right;
             
-            this.Width = this.button1.Width+ this.button2.Width 
-				+ this.button3.Width /*this.button6.Width*/ ;
+            this.Width = this.label1.Width+this.button1.Width+ this.button2.Width 
+				+ this.button3.Width +this.button6.Width ;
 			//inputs = inputs.Length + inputs;
             
 			this.button2.Text = inputs;
