@@ -26,7 +26,7 @@ namespace CSharpFormLibrary
 		public IMECandidateForm()
 		{
 			InitializeComponent();
-			baseSize = this.lbCandidates.Location.Y+100;
+//			baseSize = this.lbCandidates.Location.Y+100;
 			this.Opacity = 1;
 		}
 		public IMECandidateForm(string[] candidates)
@@ -62,44 +62,43 @@ namespace CSharpFormLibrary
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.lbCandidates = new System.Windows.Forms.ListBox();
-            this.SuspendLayout();
-            // 
-            // lbCandidates
-            // 
-            this.lbCandidates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbCandidates.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lbCandidates.BackColor = System.Drawing.Color.DarkGray;
-            this.lbCandidates.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.lbCandidates.BorderStyle = BorderStyle.None;
-            this.lbCandidates.ItemHeight = 16;
-            this.lbCandidates.Location = new System.Drawing.Point(0, 0);
-            this.lbCandidates.Name = "lbCandidates";
-            this.lbCandidates.Size = new System.Drawing.Size(99, 149);
-            this.lbCandidates.TabIndex = 0;
-            // 
-            // IMECandidateForm
-            // 
-            this.Controls.Add(this.lbCandidates);
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
-            this.BackColor = System.Drawing.SystemColors.WindowText;
-            this.ClientSize = new System.Drawing.Size(100, 150);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Location = new System.Drawing.Point(199, 199);
-            this.Name = "IMECandidateForm";
-            this.TransparencyKey = System.Drawing.SystemColors.WindowText;
-            this.Size = new System.Drawing.Size(100, 150);
-            this.ShowInTaskbar = false;
-            this.Deactivate += new System.EventHandler(this.IMECandidateForm_Deactivate);
-            this.Enter += new System.EventHandler(this.IMECandidateForm_Enter);
-            this.Activated += new System.EventHandler(this.IMECandidateForm_Activated);
-            this.Validated += new System.EventHandler(this.IMECandidateForm_Validated);
-            this.Click += new System.EventHandler(this.IMECandidateForm_Click);
-            this.Validating += new System.ComponentModel.CancelEventHandler(this.IMECandidateForm_Validating);
-            this.Leave += new System.EventHandler(this.IMECandidateForm_Leave);
-            this.ResumeLayout(false);
+			this.lbCandidates = new System.Windows.Forms.ListBox();
+			this.SuspendLayout();
+			// 
+			// lbCandidates
+			// 
+			this.lbCandidates.BackColor = System.Drawing.Color.Gray;
+			this.lbCandidates.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.lbCandidates.Dock = System.Windows.Forms.DockStyle.Top;
+			this.lbCandidates.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.lbCandidates.ForeColor = System.Drawing.Color.White;
+			this.lbCandidates.IntegralHeight = false;
+			this.lbCandidates.ItemHeight = 20;
+			this.lbCandidates.Location = new System.Drawing.Point(0, 0);
+			this.lbCandidates.Name = "lbCandidates";
+			this.lbCandidates.Size = new System.Drawing.Size(80, 30);
+			this.lbCandidates.TabIndex = 0;
+			// 
+			// IMECandidateForm
+			// 
+			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
+			this.BackColor = System.Drawing.SystemColors.WindowText;
+			this.ClientSize = new System.Drawing.Size(80, 200);
+			this.Controls.Add(this.lbCandidates);
+			this.ForeColor = System.Drawing.Color.White;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.Location = new System.Drawing.Point(199, 199);
+			this.Name = "IMECandidateForm";
+			this.ShowInTaskbar = false;
+			this.TransparencyKey = System.Drawing.SystemColors.WindowText;
+			this.Click += new System.EventHandler(this.IMECandidateForm_Click);
+			this.Validating += new System.ComponentModel.CancelEventHandler(this.IMECandidateForm_Validating);
+			this.Validated += new System.EventHandler(this.IMECandidateForm_Validated);
+			this.Activated += new System.EventHandler(this.IMECandidateForm_Activated);
+			this.Leave += new System.EventHandler(this.IMECandidateForm_Leave);
+			this.Enter += new System.EventHandler(this.IMECandidateForm_Enter);
+			this.Deactivate += new System.EventHandler(this.IMECandidateForm_Deactivate);
+			this.ResumeLayout(false);
 
 		}
 
@@ -111,8 +110,9 @@ namespace CSharpFormLibrary
 		{
 			string[] a_inputs = inputs.Split(' ');
 			if(a_inputs==null) return;			
-			this.lbCandidates.Height=(a_inputs.Length+1)*15;
-			//this.Height=this.lbCandidates.Height; ->第一次會畫不出來
+			
+			this.lbCandidates.Height=(a_inputs.Length+1)*this.lbCandidates.ItemHeight;
+			//this.Height=this.lbCandidates.Height; //->第一次會畫不出來
 			 //this.Refresh();
 			this.ShowListView(a_inputs); // not show, only setstring
 		
@@ -136,11 +136,7 @@ namespace CSharpFormLibrary
 		{
 			this.lbCandidates.Items.Clear();
 		}
-		public void DepthOfList(int number)
-		{
-			//14 = lbCandidate.Size.Height/9 進位 - Height%9
-			this.Size = new Size(this.Size.Width,baseSize+number*13);			
-		}
+
 		public void SetHWND(System.UInt64 hwnd)
 		{
 			m_hwnd=hwnd;
