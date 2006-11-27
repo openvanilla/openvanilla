@@ -42,9 +42,7 @@ namespace CSharpFormLibrary
 			this.SetStyle(ControlStyles.StandardClick, false);
 			this.SetStyle(ControlStyles.EnableNotifyMessage, false);
 			this.SetStyle(ControlStyles.UserMouse, false);
-			//
-			// TODO: Add any constructor code after InitializeComponent call
-			//
+		
             //Application.AddMessageFilter(new MessageFilter());
         }
 
@@ -172,95 +170,95 @@ namespace CSharpFormLibrary
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.button1 = new IMEButton();
-            this.button2 = new IMEButton();
-            this.button3 = new IMEButton();
-            this.button6 = new IMEButton();
-
-            this.contextMenu1 = new System.Windows.Forms.ContextMenu();
-            this.menuItem1 = new System.Windows.Forms.MenuItem();
-
-            this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.Desktop;
-            //this.button1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.ForeColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(4, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 21);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "某輸入法";
-            //this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.SystemColors.Desktop;
-            this.button2.ContextMenu = this.contextMenu1;
-            //this.button2.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.ForeColor = System.Drawing.Color.Transparent;
-            this.button2.Location = new System.Drawing.Point(84, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(40, 21);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            //this.button2.UseVisualStyleBackColor = false;
-            this.button2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button2_MouseDown);
-            this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.SystemColors.Desktop;
-            //this.button3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.ForeColor = System.Drawing.Color.Transparent;
-            this.button3.Location = new System.Drawing.Point(124, 4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(40, 21);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            //this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.SystemColors.Desktop;
-            //this.button6.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.ForeColor = System.Drawing.Color.Transparent;
-            this.button6.Location = new System.Drawing.Point(164, 4);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(40, 21);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "設定";
-            //this.button6.UseVisualStyleBackColor = false;
-            this.button6.Visible = false;
-            // 
-            // contextMenu1
-            // 
-            this.contextMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {this.menuItem1});
-            // 
-            // menuItem1
-            // 
-            this.menuItem1.Index = 0;
-            this.menuItem1.Text = "";
-            this.menuItem1.Click +=new EventHandler(menuItem_Click);
-            // 
-            // IMEStatusForm
-            // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(249, 38);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "IMEStatusForm";
-            this.ShowInTaskbar = false;
-            this.Text = "IMEStatusForm";
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
-            this.ResumeLayout(false);
+			this.button1 = new CSharpFormLibrary.IMEButton();
+			this.button2 = new CSharpFormLibrary.IMEButton();
+			this.contextMenu1 = new System.Windows.Forms.ContextMenu();
+			this.menuItem1 = new System.Windows.Forms.MenuItem();
+			this.button3 = new CSharpFormLibrary.IMEButton();
+			this.button6 = new CSharpFormLibrary.IMEButton();
+			this.SuspendLayout();
+			// 
+			// button1
+			// 
+			// TODO: Code generation for 'this.button1.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
+			this.button1.BackColor = System.Drawing.Color.Gray;
+			this.button1.Dock = System.Windows.Forms.DockStyle.Left;
+			this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.button1.Location = new System.Drawing.Point(0, 0);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(96, 48);
+			this.button1.TabIndex = 0;
+			this.button1.Text = "某輸入法";
+			// 
+			// button2
+			// 
+			// TODO: Code generation for 'this.button2.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
+			this.button2.BackColor = System.Drawing.Color.Gray;
+			this.button2.ContextMenu = this.contextMenu1;
+			this.button2.Dock = System.Windows.Forms.DockStyle.Left;
+			this.button2.ForeColor = System.Drawing.Color.White;
+			this.button2.Location = new System.Drawing.Point(96, 0);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(48, 48);
+			this.button2.TabIndex = 1;
+			this.button2.Text = "button2";
+			this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
+			this.button2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button2_MouseDown);
+			// 
+			// contextMenu1
+			// 
+			this.contextMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																						 this.menuItem1});
+			// 
+			// menuItem1
+			// 
+			this.menuItem1.Index = 0;
+			this.menuItem1.Text = "";
+			this.menuItem1.Click += new System.EventHandler(this.menuItem_Click);
+			// 
+			// button3
+			// 
+			// TODO: Code generation for 'this.button3.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
+			this.button3.BackColor = System.Drawing.Color.Gray;
+			this.button3.Dock = System.Windows.Forms.DockStyle.Left;
+			this.button3.ForeColor = System.Drawing.Color.White;
+			this.button3.Location = new System.Drawing.Point(144, 0);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(48, 48);
+			this.button3.TabIndex = 2;
+			this.button3.Text = "button3";
+			// 
+			// button6
+			// 
+			// TODO: Code generation for 'this.button6.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
+			this.button6.BackColor = System.Drawing.Color.Gray;
+			this.button6.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.button6.ForeColor = System.Drawing.Color.White;
+			this.button6.Location = new System.Drawing.Point(192, 0);
+			this.button6.Name = "button6";
+			this.button6.Size = new System.Drawing.Size(64, 48);
+			this.button6.TabIndex = 5;
+			this.button6.Text = "設定";
+			// 
+			// IMEStatusForm
+			// 
+			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
+			this.BackColor = System.Drawing.Color.Gray;
+			this.ClientSize = new System.Drawing.Size(256, 48);
+			this.Controls.Add(this.button6);
+			this.Controls.Add(this.button3);
+			this.Controls.Add(this.button2);
+			this.Controls.Add(this.button1);
+			this.ForeColor = System.Drawing.Color.Yellow;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.MaximizeBox = false;
+			this.Name = "IMEStatusForm";
+			this.ShowInTaskbar = false;
+			this.Text = "IMEStatusForm";
+			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
+			this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
+			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
+			this.ResumeLayout(false);
 
 		}
 		#endregion

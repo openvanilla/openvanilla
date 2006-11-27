@@ -43,9 +43,9 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		//<comment author='b6s'>
 		// When attached app lost focus, only this message occurred,
 		// so it must also hide following windows.
-		/*UIHideCompWindow();
+		UIHideCompWindow();
 		UIHideCandWindow();
-		UIHideNotifyWindow();*/
+		UIHideNotifyWindow();
 		//</comment>
 		break;
 
