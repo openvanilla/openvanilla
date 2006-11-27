@@ -92,7 +92,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 						if(wcslen(lpMyPrivate->PreEditStr)&& !isActive) //comp有字且還沒被active
 						{
 							murmur("outter, move(%d, %d)", CompX, CompY);
-							UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
+							//UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 							UISetCompStr(lpMyPrivate->PreEditStr);
 							UIShowCompWindow();
 							isActive=true;
@@ -102,7 +102,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 							if(!wcslen(lpMyPrivate->CandStr) )//如果沒有candidate才要秀
 							{
 								murmur("inner, move(%d, %d)", CompX, CompY);
-								UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
+								//UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 								UISetCompStr(lpMyPrivate->PreEditStr);
 								UIShowCompWindow();
 							}						
