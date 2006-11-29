@@ -188,7 +188,7 @@ namespace CSharpFormLibrary
 			this.button2.BackColor = System.Drawing.Color.Gray;
 			this.button2.ContextMenu = this.contextMenu1;
 			this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-			this.button2.Font = new System.Drawing.Font("PMingLiU", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.button2.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button2.ForeColor = System.Drawing.Color.White;
 			this.button2.Location = new System.Drawing.Point(300, 0);
 			this.button2.Name = "button2";
@@ -202,20 +202,21 @@ namespace CSharpFormLibrary
 			// TODO: Code generation for 'this.button3.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
 			this.button3.BackColor = System.Drawing.Color.Gray;
 			this.button3.Dock = System.Windows.Forms.DockStyle.Right;
-			this.button3.Font = new System.Drawing.Font("PMingLiU", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.button3.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button3.ForeColor = System.Drawing.Color.White;
 			this.button3.Location = new System.Drawing.Point(348, 0);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(48, 32);
 			this.button3.TabIndex = 2;
 			this.button3.Text = "button3";
+            this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button3_MouseUp);
 			// 
 			// button6
 			// 
 			// TODO: Code generation for 'this.button6.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
 			this.button6.BackColor = System.Drawing.Color.Gray;
 			this.button6.Dock = System.Windows.Forms.DockStyle.Right;
-			this.button6.Font = new System.Drawing.Font("PMingLiU", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.button6.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.button6.ForeColor = System.Drawing.Color.White;
 			this.button6.Location = new System.Drawing.Point(396, 0);
 			this.button6.Name = "button6";
@@ -227,7 +228,7 @@ namespace CSharpFormLibrary
 			// 
 			this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label1.Font = new System.Drawing.Font("PMingLiU", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.label1.Font = new System.Drawing.Font("PMingLiU", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
 			this.label1.ForeColor = System.Drawing.Color.FromArgb(((System.Byte)(224)), ((System.Byte)(224)), ((System.Byte)(224)));
 			this.label1.Location = new System.Drawing.Point(0, 0);
 			this.label1.Name = "label1";
@@ -420,6 +421,15 @@ namespace CSharpFormLibrary
         {            
             this.button2.ContextMenu.Show(button2, new System.Drawing.Point(0, button2.Bottom));
             System.Diagnostics.Debug.WriteLine("status: context menu shown.");
+        }
+
+        private void button3_MouseUp(object sender, MouseEventArgs e)
+        {
+            int ret = UtilFuncs.SendMessage(
+                new IntPtr((long)m_AppHWnd),
+                (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
+                0xE, //IMN_PRIVATE
+                2);
         }
         #endregion
     }
