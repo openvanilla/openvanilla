@@ -185,11 +185,11 @@ namespace CSharpFormLibrary
 			// button2
 			// 
 			// TODO: Code generation for 'this.button2.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
-			this.button2.BackColor = System.Drawing.Color.Gray;
+            //this.button2.BackColor = System.Drawing.SystemColors.ButtonFace;
 			this.button2.ContextMenu = this.contextMenu1;
 			this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-			this.button2.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
-			this.button2.ForeColor = System.Drawing.Color.White;
+			this.button2.Font = new System.Drawing.Font("PMingLiU", 10F);
+			this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.button2.Location = new System.Drawing.Point(300, 0);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(48, 32);
@@ -200,10 +200,10 @@ namespace CSharpFormLibrary
 			// button3
 			// 
 			// TODO: Code generation for 'this.button3.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
-			this.button3.BackColor = System.Drawing.Color.Gray;
+			//this.button3.BackColor = System.Drawing.SystemColors.ButtonFace;
 			this.button3.Dock = System.Windows.Forms.DockStyle.Right;
-			this.button3.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
-			this.button3.ForeColor = System.Drawing.Color.White;
+			this.button3.Font = new System.Drawing.Font("PMingLiU", 10F);
+			this.button3.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.button3.Location = new System.Drawing.Point(348, 0);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(48, 32);
@@ -214,10 +214,10 @@ namespace CSharpFormLibrary
 			// button6
 			// 
 			// TODO: Code generation for 'this.button6.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
-			this.button6.BackColor = System.Drawing.Color.Gray;
+			//this.button6.BackColor = System.Drawing.SystemColors.ButtonFace;
 			this.button6.Dock = System.Windows.Forms.DockStyle.Right;
-			this.button6.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
-			this.button6.ForeColor = System.Drawing.Color.White;
+			this.button6.Font = new System.Drawing.Font("PMingLiU", 10F);
+			this.button6.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.button6.Location = new System.Drawing.Point(396, 0);
 			this.button6.Name = "button6";
 			this.button6.Size = new System.Drawing.Size(60, 32);
@@ -228,7 +228,7 @@ namespace CSharpFormLibrary
 			// 
 			this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label1.Font = new System.Drawing.Font("PMingLiU", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(136)));
+			this.label1.Font = new System.Drawing.Font("PMingLiU", 16F);
 			this.label1.ForeColor = System.Drawing.Color.FromArgb(((System.Byte)(224)), ((System.Byte)(224)), ((System.Byte)(224)));
 			this.label1.Location = new System.Drawing.Point(0, 0);
 			this.label1.Name = "label1";
@@ -263,11 +263,11 @@ namespace CSharpFormLibrary
 			// IMEStatusForm
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
-			this.BackColor = System.Drawing.Color.Gray;
+			this.BackColor = System.Drawing.SystemColors.ActiveCaption;
 			this.ClientSize = new System.Drawing.Size(520, 32);
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.panel1);
-			this.ForeColor = System.Drawing.Color.Yellow;
+			this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.MaximizeBox = false;
 			this.Name = "IMEStatusForm";
