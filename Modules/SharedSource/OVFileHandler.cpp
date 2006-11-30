@@ -33,28 +33,31 @@
 
 using namespace std;
 
-OVFileHandler::OVFileHandler(const char* fileName)
+
+OVFileHandler::OVFileHandler(const char* filename)
 {
-	inFile.open(fileName, ios_base::binary);
-#ifndef WIN32
-	filePtr = open(fileName, O_RDONLY);
+	//inFile.open(fileName, ios_base::binary);
+#if defined (WIN32) && !defined (__CYGWIN__)
+	m_mmapHandle = 0;
 #endif
+	m_mmapPtr = openFileByMMAP(filename);
 }
 
 OVFileHandler::~OVFileHandler()
 {
-	inFile.close();
-#ifndef WIN32
-	close(filePtr);
-#endif
+	//inFile.close();
+	closeFileByMMAP();
 }
 
-bool OVFileHandler::isOpened()
+/*
+bool OVFileHandler::isOpenedBySTL()
 {
 	return inFile != 0 ? true : false;
-#ifndef WIN32
+}
+
+bool OVFileHandler::isOpenedByMMAP()
+{
 	return filePtr != 0 ? true : false;
-#endif
 }
 
 int OVFileHandler::getSize()
@@ -78,32 +81,83 @@ string OVFileHandler::getFileStringBySTL()
 	
 	return fileString;
 }
+*/
 
-#ifndef WIN32
 string OVFileHandler::getFileStringByMMAP()
 {
-	void* mmap_ptr;
-	int size;
-	
-	size = getSize();
-	mmap_ptr = mmap(0, size, PROT_READ, MAP_SHARED, filePtr, 0);
-	close(filePtr);
-	fflush(NULL);
-
-	string fileString(static_cast<char*>(mmap_ptr));
+	string fileString(static_cast<char*>(m_mmapPtr));
 
 	return fileString;
 }
-#endif
 
 int OVFileHandler::getLines(vector<string>& outStringVectorRef)
 {
 	string fileString;
-#ifndef WIN32
 	fileString = getFileStringByMMAP();	
-#else
-	fileString = getFileStringBySTL();
-#endif
 
 	return OVStringToolKit::getLines(fileString, outStringVectorRef);
+}
+
+char* OVFileHandler::openFileByMMAP (const char* file_name)
+{
+    char *mmap_ptr;
+#if defined (WIN32) && !defined (__CYGWIN__)
+	MmapHandles tmp;
+	int len;
+	
+	tmp.hFile = CreateFile(file_name, GENERIC_READ, FILE_SHARE_READ,
+                           NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (tmp.hFile == INVALID_HANDLE_VALUE) {
+        return NULL;
+    }
+	len = GetFileSize(tmp.hFile, NULL);
+	tmp.hMap = CreateFileMapping(tmp.hFile, NULL, PAGE_READONLY, 0, 0, NULL);
+    if (tmp.hMap == NULL) {
+        CloseHandle(tmp.hFile);
+        return NULL;
+    }
+	mmap_ptr = (char*)MapViewOfFile(tmp.hMap, FILE_MAP_READ, 0, 0, 0);
+	if (mmap_ptr == NULL) {    
+		CloseHandle(tmp.hFile);
+        CloseHandle(tmp.hMap);
+	}
+	if (!m_mmapHandle) {
+		m_mmapHandle = (MmapHandles*)malloc(sizeof(MmapHandles));
+	}
+	m_mmapHandle->hFile = tmp.hFile;
+	m_mmapHandle->hMap  = tmp.hMap;
+#else
+	int fd;
+    struct stat stat;
+    if ((fd = open (file_name, O_RDONLY)) < 0)  {
+		return NULL;
+    }
+    if (fstat(fd, &stat) < 0) {
+		return NULL;
+    }
+    mmap_ptr = mmap(0 /* select by system */,
+	    stat.st_size /* len */,
+	    PROT_READ /* Read */,
+	    MAP_NOCORE /* use no flag */,
+	    fd /* file pointer */,
+	    0 /* offset */
+	    );
+    close(fd);
+    if (MAP_FAILED == mmap_ptr) {
+		return NULL;
+    }
+#endif
+    return mmap_ptr;
+}
+
+int OVFileHandler::closeFileByMMAP ()
+{
+#if defined (WIN32) && !defined (__CYGWIN__)
+	CloseHandle(m_mmapHandle->hFile);
+    CloseHandle(m_mmapHandle->hMap);
+	free (m_mmapHandle);
+	return UnmapViewOfFile(m_mmapPtr);
+#else 
+    return munmap(m_mmapPtr, strlen(m_mmapPtr));
+#endif
 }

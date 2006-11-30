@@ -35,7 +35,14 @@
 #include <vector>
 #include <fstream>
 
-#ifndef WIN32
+#if defined (WIN32) && !defined (__CYGWIN__)
+	#include <windows.h>
+
+	typedef struct {
+    	HANDLE hFile;
+    	HANDLE hMap;
+	} MmapHandles;
+#else
 	#include <sys/mman.h>
 	#include <sys/stat.h>
 	#include <sys/types.h>
@@ -49,21 +56,29 @@ using namespace std;
 class OVFileHandler
 {
 public:
-	OVFileHandler(const char* fileName);
+	OVFileHandler(const char* filename);
 	~OVFileHandler();
 	
-	bool isOpened();
+	//bool isOpenedBySTL();
+	//bool isOpenedByMMAP();
+
 	int getLines(vector<string>& outStringVectorRef);
 	
 private:
-	ifstream inFile;
-	int filePtr;
-	int getSize();
-	string getFileStringBySTL();
+	//ifstream inFile;
+	//int filePtr;
+	//int getSize();
+	//string getFileStringBySTL();
+	string getFileStringByMMAP();
 
-#ifndef WIN32
-	string getFileStringByMMAP();	
+	char* openFileByMMAP (const char* /*file_name*/);
+	int closeFileByMMAP ();
+
+#if defined (WIN32) && !defined (__CYGWIN__)
+	MmapHandles* m_mmapHandle;
 #endif
+
+	char* m_mmapPtr;
 };
-	
+
 #endif
