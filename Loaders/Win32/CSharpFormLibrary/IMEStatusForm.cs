@@ -187,7 +187,7 @@ namespace CSharpFormLibrary
 			// TODO: Code generation for 'this.button2.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
 			this.button2.ContextMenu = this.contextMenu1;
 			this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-			this.button2.Font = new System.Drawing.Font("PMingLiU", 12F);
+			//this.button2.Font = new System.Drawing.Font("PMingLiU", 12F);
 			this.button2.Location = new System.Drawing.Point(404, 0);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(48, 44);
@@ -198,7 +198,7 @@ namespace CSharpFormLibrary
 			// 
 			// TODO: Code generation for 'this.button3.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
 			this.button3.Dock = System.Windows.Forms.DockStyle.Right;
-			this.button3.Font = new System.Drawing.Font("PMingLiU", 12F);
+			//this.button3.Font = new System.Drawing.Font("PMingLiU", 12F);
 			this.button3.Location = new System.Drawing.Point(452, 0);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(48, 44);
@@ -209,7 +209,7 @@ namespace CSharpFormLibrary
 			// 
 			// TODO: Code generation for 'this.button6.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
 			this.button6.Dock = System.Windows.Forms.DockStyle.Right;
-			this.button6.Font = new System.Drawing.Font("PMingLiU", 12F);
+			//this.button6.Font = new System.Drawing.Font("PMingLiU", 12F);
 			this.button6.Location = new System.Drawing.Point(500, 0);
 			this.button6.Name = "button6";
 			this.button6.Size = new System.Drawing.Size(60, 44);
