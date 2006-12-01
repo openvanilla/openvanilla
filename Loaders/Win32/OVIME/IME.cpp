@@ -282,8 +282,9 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		
 	} else {
 		retVal = FALSE;
-		MyGenerateMessage(hIMC,
-				WM_IME_ENDCOMPOSITION, 0, 0);
+		/*James comment: 解決未組成字之前選字 comp window 會消失的問題
+		MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
+		*/
 	}
 	dsvr->releaseIMC();
 	ImmUnlockIMCC(lpIMC->hCompStr);

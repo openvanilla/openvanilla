@@ -161,7 +161,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 	
 	case WM_IME_COMPOSITION:
-		murmur("WM_IME_COMPOSITION");
+		murmur("WM_IME_COMPOSITION");		
 		//test
 		//MyGenerateMessage(hWnd, WM_IME_NOTIFY, IMN_SETCANDIDATEPOS, 0);
 
@@ -180,6 +180,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
 		if(lpMyPrivate->PreEditStr)//有comp指標 
 		{						
+			murmur("%s",lpMyPrivate->PreEditStr);
 			if(wcslen(lpMyPrivate->PreEditStr)&& !isActive) //comp有字且還沒被active
 			{
 				murmur("COMPOSITION, move(%d, %d)", CompX, CompY);
@@ -198,8 +199,9 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 					UIShowCompWindow();
 				}						
 			}
-			else//comp沒字
+			else{//comp沒字
 				UIHideCompWindow();
+			}
 
 		}
 		else //沒有comp指標 =>hide

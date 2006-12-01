@@ -220,7 +220,7 @@ namespace CSharpFormLibrary
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Image = global::CSharpFormLibrary.Properties.Resources.waraiotoko_logo;
+            //this.label1.Image = global::CSharpFormLibrary.Properties.Resources.waraiotoko_logo;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 32);

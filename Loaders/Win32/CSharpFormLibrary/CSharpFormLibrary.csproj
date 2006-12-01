@@ -99,10 +99,6 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "CSharpFormLibrary.dll.config"
-                    BuildAction = "None"
-                />
-                <File
                     RelPath = "IMEButton.cs"
                     SubType = "Component"
                     BuildAction = "Compile"
