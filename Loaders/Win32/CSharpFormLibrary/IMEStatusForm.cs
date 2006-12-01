@@ -31,7 +31,6 @@ namespace CSharpFormLibrary
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.MenuItem menuItem1;
 
 		public IMEStatusForm()
 		{
@@ -189,7 +188,7 @@ namespace CSharpFormLibrary
 			this.button2.ContextMenu = this.contextMenu1;
 			this.button2.Dock = System.Windows.Forms.DockStyle.Right;
 			this.button2.Font = new System.Drawing.Font("PMingLiU", 10F);
-			this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
+			//this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.button2.Location = new System.Drawing.Point(300, 0);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(48, 32);
@@ -203,7 +202,7 @@ namespace CSharpFormLibrary
 			//this.button3.BackColor = System.Drawing.SystemColors.ButtonFace;
 			this.button3.Dock = System.Windows.Forms.DockStyle.Right;
 			this.button3.Font = new System.Drawing.Font("PMingLiU", 10F);
-			this.button3.ForeColor = System.Drawing.SystemColors.ControlText;
+			//this.button3.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.button3.Location = new System.Drawing.Point(348, 0);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(48, 32);
@@ -217,7 +216,7 @@ namespace CSharpFormLibrary
 			//this.button6.BackColor = System.Drawing.SystemColors.ButtonFace;
 			this.button6.Dock = System.Windows.Forms.DockStyle.Right;
 			this.button6.Font = new System.Drawing.Font("PMingLiU", 10F);
-			this.button6.ForeColor = System.Drawing.SystemColors.ControlText;
+			//this.button6.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.button6.Location = new System.Drawing.Point(396, 0);
 			this.button6.Name = "button6";
 			this.button6.Size = new System.Drawing.Size(60, 32);
@@ -226,10 +225,10 @@ namespace CSharpFormLibrary
 			// 
 			// label1
 			// 
-			this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.label1.Cursor = System.Windows.Forms.Cursors.SizeAll;
 			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label1.Font = new System.Drawing.Font("PMingLiU", 16F);
-			this.label1.ForeColor = System.Drawing.Color.FromArgb(((System.Byte)(224)), ((System.Byte)(224)), ((System.Byte)(224)));
+			//this.label1.ForeColor = System.Drawing.Color.FromArgb(((System.Byte)(224)), ((System.Byte)(224)), ((System.Byte)(224)));
 			this.label1.Location = new System.Drawing.Point(0, 0);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(64, 32);
@@ -263,11 +262,11 @@ namespace CSharpFormLibrary
 			// IMEStatusForm
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
-			this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            //this.BackColor = System.Drawing.SystemColors.MenuBar;
 			this.ClientSize = new System.Drawing.Size(520, 32);
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.panel1);
-			this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            //this.ForeColor = System.Drawing.SystemColors.MenuText;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.MaximizeBox = false;
 			this.Name = "IMEStatusForm";

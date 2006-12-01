@@ -17,15 +17,10 @@ namespace CSharpFormLibrary
         
         private UInt64 m_AppHWnd;
         private Color m_origForeColor;
+        private Color m_origBackColor;
         private bool m_wasMouseDown = false;
 
-        public IMEButton()
-            : base()
-        {
-            this.SetStyle(ControlStyles.StandardClick, false);
-            this.SetStyle(ControlStyles.EnableNotifyMessage, false);
-            this.SetStyle(ControlStyles.UserMouse, true);
-        }
+        public IMEButton(): base() {}
 
         public UInt64 AppHWnd
         {
@@ -50,7 +45,8 @@ namespace CSharpFormLibrary
         protected void MyOnMouseDown()
         {
             m_origForeColor = this.ForeColor;
-            this.ForeColor = this.BackColor;
+            m_origBackColor = this.BackColor;
+            this.ForeColor = System.Drawing.SystemColors.GrayText;
             this.BackColor = System.Drawing.Color.Transparent;
             m_wasMouseDown = true;
         }
@@ -60,7 +56,7 @@ namespace CSharpFormLibrary
             base.OnMouseUp(mevent);
             if (m_wasMouseDown)
             {
-                this.BackColor = this.ForeColor;
+                this.BackColor = m_origBackColor;
                 this.ForeColor = m_origForeColor;
                 m_wasMouseDown = false;
             }
