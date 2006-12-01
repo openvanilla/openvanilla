@@ -170,114 +170,103 @@ namespace CSharpFormLibrary
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.button2 = new CSharpFormLibrary.IMEButton();
-			this.contextMenu1 = new System.Windows.Forms.ContextMenu();
-			this.button3 = new CSharpFormLibrary.IMEButton();
-			this.button6 = new CSharpFormLibrary.IMEButton();
-			this.label1 = new System.Windows.Forms.Label();
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.panel2 = new System.Windows.Forms.Panel();
-			this.panel1.SuspendLayout();
-			this.panel2.SuspendLayout();
-			this.SuspendLayout();
-			// 
-			// button2
-			// 
-			// TODO: Code generation for 'this.button2.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
-            //this.button2.BackColor = System.Drawing.SystemColors.ButtonFace;
-			this.button2.ContextMenu = this.contextMenu1;
-			this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-			this.button2.Font = new System.Drawing.Font("PMingLiU", 10F);
-			//this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.button2.Location = new System.Drawing.Point(300, 0);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(48, 32);
-			this.button2.TabIndex = 1;
-			this.button2.Text = "button2";
-			this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
-			// 
-			// button3
-			// 
-			// TODO: Code generation for 'this.button3.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
-			//this.button3.BackColor = System.Drawing.SystemColors.ButtonFace;
-			this.button3.Dock = System.Windows.Forms.DockStyle.Right;
-			this.button3.Font = new System.Drawing.Font("PMingLiU", 10F);
-			//this.button3.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.button3.Location = new System.Drawing.Point(348, 0);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(48, 32);
-			this.button3.TabIndex = 2;
-			this.button3.Text = "button3";
+            this.button2 = new CSharpFormLibrary.IMEButton();
+            this.contextMenu1 = new System.Windows.Forms.ContextMenu();
+            this.button3 = new CSharpFormLibrary.IMEButton();
+            this.button6 = new CSharpFormLibrary.IMEButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // button2
+            // 
+            this.button2.AppHWnd = ((ulong)(0ul));
+            this.button2.ContextMenu = this.contextMenu1;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button2.Font = new System.Drawing.Font("PMingLiU", 12F);
+            this.button2.Location = new System.Drawing.Point(337, 0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(40, 32);
+            this.button2.TabIndex = 1;
+            this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
+            // 
+            // button3
+            // 
+            this.button3.AppHWnd = ((ulong)(0ul));
+            this.button3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button3.Font = new System.Drawing.Font("PMingLiU", 12F);
+            this.button3.Location = new System.Drawing.Point(377, 0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(40, 32);
+            this.button3.TabIndex = 2;
             this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button3_MouseUp);
-			// 
-			// button6
-			// 
-			// TODO: Code generation for 'this.button6.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
-			//this.button6.BackColor = System.Drawing.SystemColors.ButtonFace;
-			this.button6.Dock = System.Windows.Forms.DockStyle.Right;
-			this.button6.Font = new System.Drawing.Font("PMingLiU", 10F);
-			//this.button6.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.button6.Location = new System.Drawing.Point(396, 0);
-			this.button6.Name = "button6";
-			this.button6.Size = new System.Drawing.Size(60, 32);
-			this.button6.TabIndex = 5;
-			this.button6.Text = "設定";
-			// 
-			// label1
-			// 
-			this.label1.Cursor = System.Windows.Forms.Cursors.SizeAll;
-			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label1.Font = new System.Drawing.Font("PMingLiU", 16F);
-			//this.label1.ForeColor = System.Drawing.Color.FromArgb(((System.Byte)(224)), ((System.Byte)(224)), ((System.Byte)(224)));
-			this.label1.Location = new System.Drawing.Point(0, 0);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(64, 32);
-			this.label1.TabIndex = 6;
-			this.label1.Text = "囧";
-			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.label1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
-			this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
-			this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
-			// 
-			// panel1
-			// 
-			this.panel1.Controls.Add(this.label1);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-			this.panel1.Location = new System.Drawing.Point(0, 0);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(64, 32);
-			this.panel1.TabIndex = 7;
-			// 
-			// panel2
-			// 
-			this.panel2.Controls.Add(this.button2);
-			this.panel2.Controls.Add(this.button3);
-			this.panel2.Controls.Add(this.button6);
-			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel2.Location = new System.Drawing.Point(64, 0);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(456, 32);
-			this.panel2.TabIndex = 8;
-			// 
-			// IMEStatusForm
-			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
-            //this.BackColor = System.Drawing.SystemColors.MenuBar;
-			this.ClientSize = new System.Drawing.Size(520, 32);
-			this.Controls.Add(this.panel2);
-			this.Controls.Add(this.panel1);
-            //this.ForeColor = System.Drawing.SystemColors.MenuText;
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-			this.MaximizeBox = false;
-			this.Name = "IMEStatusForm";
-			this.ShowInTaskbar = false;
-			this.Text = "IMEStatusForm";
-			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
-			this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
-			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
-			this.panel1.ResumeLayout(false);
-			this.panel2.ResumeLayout(false);
-			this.ResumeLayout(false);
+            // 
+            // button6
+            // 
+            this.button6.AppHWnd = ((ulong)(0ul));
+            this.button6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button6.Font = new System.Drawing.Font("PMingLiU", 12F);
+            this.button6.Location = new System.Drawing.Point(417, 0);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(50, 32);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "設定";
+            // 
+            // label1
+            // 
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Image = global::CSharpFormLibrary.Properties.Resources.waraiotoko_logo;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 32);
+            this.label1.TabIndex = 6;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
+            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
+            this.label1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(53, 32);
+            this.panel1.TabIndex = 7;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.button6);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(53, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(467, 32);
+            this.panel2.TabIndex = 8;
+            // 
+            // IMEStatusForm
+            // 
+            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.ClientSize = new System.Drawing.Size(520, 32);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
+            this.Name = "IMEStatusForm";
+            this.ShowInTaskbar = false;
+            this.Text = "IMEStatusForm";
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.ResumeLayout(false);
 
 		}
 		#endregion
