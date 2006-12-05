@@ -85,6 +85,7 @@ AVDisplayServer *DisplayServer::showCandi(bool t)
 AVDisplayServer *DisplayServer::setCursorPos(int i)
 {
 	lpCompStr->dwCursorPos = i;
+	murmur("DisplayServer::setCursorPos-> %d",i);
 	UISetCursorPos(lpCompStr->dwCursorPos);
 	return this;
 }

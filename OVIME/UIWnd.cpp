@@ -129,7 +129,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 						{
 							UIMoveCandWindow(hWnd, CompX,CompY+30,NULL);
 							UISetCandStr(lpMyPrivate->CandStr);
-							//UIShowCandWindow();
+							UIShowCandWindow();
 						}
 						else
 							UIHideCandWindow();
