@@ -76,10 +76,10 @@ AVDisplayServer *DisplayServer::showCandi(bool t)
 {
 	murmur("AVDisplayServer *DisplayServer::showCandi");
 	//james test
-	/*if(t)
+	if(t)
 		UIShowCandWindow();
 	else
-		UIHideCandWindow();*/
+		UIHideCandWindow();
 	return this;
 }
 AVDisplayServer *DisplayServer::setCursorPos(int i)
