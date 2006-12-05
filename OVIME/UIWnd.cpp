@@ -108,12 +108,16 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 							}						
 						}
 						else//comp沒字
+						{
 							UIHideCompWindow();
+							isActive=false;
+						}
 
 					}
 					else //沒有comp指標 =>hide
 					{
 						UIHideCompWindow();
+						isActive=false;
 					}
 
 					if(lpMyPrivate->CandStr)
@@ -122,7 +126,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 						{
 							UIMoveCandWindow(hWnd, CompX,CompY+30,NULL);
 							UISetCandStr(lpMyPrivate->CandStr);
-							UIShowCandWindow();
+							//UIShowCandWindow();
 						}
 						else
 							UIHideCandWindow();
@@ -197,16 +201,22 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 					UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 					UISetCompStr(lpMyPrivate->PreEditStr);
 					UIShowCompWindow();
-				}						
+				}
+//				else
+//				{
+//					UISetCompStr(lpMyPrivate->PreEditStr);
+//				}
 			}
 			else{//comp沒字
 				UIHideCompWindow();
+				isActive=false;
 			}
 
 		}
 		else //沒有comp指標 =>hide
 		{
 			UIHideCompWindow();
+			isActive=false;
 		}
 		if(lpMyPrivate->CandStr)
 		{
@@ -214,7 +224,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			{
 				UIMoveCandWindow(hWnd, CompX,CompY+30,NULL);
 				UISetCandStr(lpMyPrivate->CandStr);
-				UIShowCandWindow();
+				//UIShowCandWindow();
 			}
 			else
 				UIHideCandWindow();
