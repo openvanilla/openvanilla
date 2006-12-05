@@ -105,7 +105,10 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 								//UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
 								UISetCompStr(lpMyPrivate->PreEditStr);
 								UIShowCompWindow();
-							}						
+							}else
+							{
+								UISetCompStr(lpMyPrivate->PreEditStr);
+							}
 						}
 						else//comp¨S¦r
 						{
@@ -202,10 +205,10 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 					UISetCompStr(lpMyPrivate->PreEditStr);
 					UIShowCompWindow();
 				}
-//				else
-//				{
-//					UISetCompStr(lpMyPrivate->PreEditStr);
-//				}
+				else
+				{
+					UISetCompStr(lpMyPrivate->PreEditStr);
+				}
 			}
 			else{//comp¨S¦r
 				UIHideCompWindow();
