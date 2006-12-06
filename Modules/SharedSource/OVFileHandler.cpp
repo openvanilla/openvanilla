@@ -98,7 +98,7 @@ int OVFileHandler::getLines(vector<string>& outStringVectorRef)
 	return OVStringToolKit::getLines(fileString, outStringVectorRef);
 }
 
-char* OVFileHandler::openFileByMMAP (const char* file_name)
+void* OVFileHandler::openFileByMMAP (const char* file_name)
 {
     char *mmap_ptr;
 #if defined (WIN32) && !defined (__CYGWIN__)

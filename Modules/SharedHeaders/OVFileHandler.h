@@ -71,14 +71,14 @@ private:
 	//string getFileStringBySTL();
 	string getFileStringByMMAP();
 
-	char* openFileByMMAP (const char* /*file_name*/);
+	void* openFileByMMAP (const char* /*file_name*/);
 	int closeFileByMMAP ();
 
 #if defined (WIN32) && !defined (__CYGWIN__)
 	MmapHandles* m_mmapHandle;
 #endif
 
-	char* m_mmapPtr;
+	void* m_mmapPtr;
 };
 
 #endif
