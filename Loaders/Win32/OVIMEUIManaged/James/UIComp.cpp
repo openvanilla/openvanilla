@@ -248,7 +248,7 @@ void UIShowCompWindow()
 	if(lpCompStr)
 	{
 		_SetCompCaretPosX(CompCursorPos);
-		//		murmur(" ---> CompCursorPos : %d", CompCursorPos);
+				murmur(" ---> CompCursorPos : %d", CompCursorPos);
 	}
 }
 

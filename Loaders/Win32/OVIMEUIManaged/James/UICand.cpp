@@ -139,7 +139,7 @@ void UIMoveCandWindow(HWND hUIWnd, int X, int Y, int lpStr)//wchar_t* lpStr)
 	{
 		//int newX=X+(CompCursorPos-1)*((int)lpStr);
 		//int newY=Y+((int)lpStr);		
-		int newX=X+(CompCursorPos-1)*21 ;
+		int newX=X+(CompCursorPos)*21 ;
 		int newY=Y;		
 		if (IsWindow(uiCand.hWnd))
 		{		

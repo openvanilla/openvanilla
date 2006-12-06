@@ -55,6 +55,7 @@ extern "C" {
 	BOOL APIENTRY DllMain(HANDLE, DWORD, LPVOID);
 	// UIWnd.cpp
 	LRESULT APIENTRY UIWndProc(HWND, UINT, WPARAM, LPARAM);
+	void AdjustUIWindow(HWND hWnd);
 	// ControlHandle.cpp
 	LONG ControlHandle(HIMC, HWND, UINT, WPARAM, LPARAM);
 	// NotifyHandel.cpp
@@ -68,6 +69,7 @@ extern "C" {
 	void InitCandInfo(LPCANDIDATEINFO);
 	void UpdateCandidate(LPINPUTCONTEXT, const wchar_t*);
 	void ClearCandidate(LPCANDIDATEINFO);
+	
 	// OVVBPOJ
 	// Param: 1 -> Context number, 2 -> KeyCode, 3 -> Output
 	// Return: Length of returned string.
