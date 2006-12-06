@@ -158,6 +158,6 @@ int OVFileHandler::closeFileByMMAP ()
 	free (m_mmapHandle);
 	return UnmapViewOfFile(m_mmapPtr);
 #else 
-    return munmap(m_mmapPtr, strlen(dynamic_cast<char*>(m_mmapPtr)));
+    return munmap(m_mmapPtr, strlen(static_cast<char*>(m_mmapPtr)));
 #endif
 }
