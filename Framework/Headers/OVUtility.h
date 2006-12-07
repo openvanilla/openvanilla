@@ -40,14 +40,20 @@ public:
 	void start()
 	{
 		tick_ = 0;
-		sec_ = 0.0;		
+		sec_ = 0.0;
+#ifdef OV_DEBUG
 		from_ = clock();
+#else
+		from_ = 0.0;
+#endif
 	}
 
 	void stop()
 	{
-		tick_ = clock()-from_;		
-		sec_ = double(tick_)/CLOCKS_PER_SEC;
+#ifdef OV_DEBUG
+		tick_ = clock() - from_;
+		sec_ = double(tick_) / CLOCKS_PER_SEC;
+#endif
 	}
 
 	clock_t getTick() { return tick_; }
