@@ -28,7 +28,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-// #define OV_DEBUG
+#define OV_DEBUG
 
 #include "OVIMGeneric.h"
 #include "CIN-Defaults.h"
@@ -61,14 +61,23 @@ extern "C" int OVInitializeLibrary(OVService *s, const char *libpath) {
     string datapath=string(libpath) + string(pathsep) + string("OVIMGeneric");
         
     murmur("OVIMGeneric initializing");
-    
+   
+    Watch watch;
     int loaded=0;
-    murmur("Loading modules from %s", userpath.c_str());
-    loaded += cinlist->load(userpath.c_str(), ".cin");
 
-    murmur("Loading modules from %s", datapath.c_str());
+    watch.start(); 
+    loaded += cinlist->load(userpath.c_str(), ".cin");
+    watch.stop();
+
+    murmur("Loaded modules from %s in %1.3f",
+        userpath.c_str(), watch.getSec());
+
+    watch.start(); 
     loaded += cinlist->load(datapath.c_str(), ".cin");
-    
+    watch.stop();
+
+    murmur("Loaded modules from %s in %1.3f",
+        datapath.c_str(), watch.getSec());
 
     if (!loaded) {
         murmur ("OVIMGeneric: nothing loaded, init failed");
@@ -134,10 +143,15 @@ const char* OVIMGeneric::localizedName(const char* locale)
 
 int OVIMGeneric::initialize(OVDictionary* global, OVService* srv, const char*)
 {
+    Watch watch;
+    watch.start();
     if (!cintab) {
         cintab=new OVCIN(cininfo.longfilename.c_str());
      }
-    murmur("OVIMGeneric: initializing %s", identifier());
+    watch.stop();
+
+    murmur("OVIMGeneric: initializing %s in %1.3f sec",
+        identifier(), watch.getSec());
     update(global, srv);
     return 1;
 }

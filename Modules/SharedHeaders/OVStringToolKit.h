@@ -42,12 +42,15 @@ public:
 	OVStringToolKit();
 	~OVStringToolKit();
 
-	static int getLines(string inString,
-						vector<string>& outStringVectorRef);	
-	static int splitString(string inString,
-						   vector<string>& outStringVectorRef,
-						   vector<string> delimiterVector,
-						   bool hasDelimiter);
+	static int getLines(
+		string& inString,
+		vector<string>& outStringVectorRef);	
+	static int splitString(
+		string& inString,
+		vector<string>& outStringVectorRef,
+		vector<string>& delimiterVector,
+		bool hasDelimiter);
+	static bool hasLinebreakBy(string& inString, const char crOrLf); 
 };
 
 #endif

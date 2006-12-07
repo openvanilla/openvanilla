@@ -37,19 +37,33 @@ OVStringToolKit::OVStringToolKit() {}
 
 OVStringToolKit::~OVStringToolKit() {}
 
-int OVStringToolKit::getLines(string inString,
-							  vector<string>& outStringVectorRef)
+bool OVStringToolKit::hasLinebreakBy(string& inString, const char crOrLf)
+{
+	if(string::npos == inString.find_last_of(crOrLf))
+		return false;
+	else
+		return true;
+}
+
+int OVStringToolKit::getLines(
+	string& inString,
+	vector<string>& outStringVectorRef)
 {
 	vector<string> delimiters;
-	delimiters.push_back("\r");
-	delimiters.push_back("\n");
+	//<comment author='b6s'>An heuristic to check file end for linebreaks.
+	if(hasLinebreakBy(inString, '\r'))
+		delimiters.push_back("\r");
+	if(hasLinebreakBy(inString, '\n'))
+		delimiters.push_back("\n");
+	//</comment>
 	return splitString(inString, outStringVectorRef, delimiters, false);
 }
 
-int OVStringToolKit::splitString(string inString,
-								 vector<string>& outStringVectorRef,
-								 vector<string> delimiterVector,
-								 bool hasDelimiter)
+int OVStringToolKit::splitString(
+	string& inString,
+	vector<string>& outStringVectorRef,
+	vector<string>& delimiterVector,
+	bool hasDelimiter)
 {
 	///* string::find()
 	int previousPosition = 0, currentPosition = 0;
