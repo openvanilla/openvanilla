@@ -74,30 +74,26 @@ int OVStringToolKit::splitString(
 		for(size_t i = 0; i < delimiterVector.size(); i++)
 		{
 			currentPosition =
-				static_cast<int>(inString.find(delimiterVector[i], previousPosition));
+				static_cast<int>(inString.find_first_of(delimiterVector[i], previousPosition));
+
 			if(currentPosition > -1) {
 				matchedDelimiter = delimiterVector[i];
-				break;
+				currentSubString =
+					inString.substr(previousPosition,
+						currentPosition - previousPosition);
+
+				previousPosition = currentPosition + 1;
+			} else
+				currentSubString =
+					inString.substr(previousPosition,
+						inString.length() - previousPosition + 1);
+
+			if(currentSubString.length() > 0) {
+				if(currentSubString == matchedDelimiter && hasDelimiter)
+					outStringVectorRef.push_back(matchedDelimiter);
+				else
+					outStringVectorRef.push_back(currentSubString);
 			}
-		}
-		
-		if(currentPosition > -1) {
-			currentSubString =
-				inString.substr(previousPosition,
-								currentPosition - previousPosition);
-
-			previousPosition = currentPosition + 1;
-		} else
-			currentSubString =
-				inString.substr(previousPosition,
-								inString.length() - previousPosition + 1);
-
-		if(currentSubString.length() > 0) {
-			if(currentSubString == matchedDelimiter && hasDelimiter)
-				outStringVectorRef.push_back(matchedDelimiter);
-			else
-				outStringVectorRef.push_back(currentSubString);
-
 			currentSubString.erase();
 			//.clear() -> .erase() makes VC++ happy...
 		}
