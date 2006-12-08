@@ -432,7 +432,7 @@ namespace CSharpFormLibrary
         private void button6_MouseUp(object sender, MouseEventArgs e)
         {
             
-
+            
             string _PATH_ = @"C:\WINDOWS\OpenVanilla\";
             Process proc = new System.Diagnostics.Process();				
             //proc.StartInfo.CreateNoWindow=true;			
@@ -475,15 +475,22 @@ namespace CSharpFormLibrary
               new IntPtr((long)m_AppHWnd),
               (uint)UtilFuncs.WindowsMessage.WM_IME_RELOADCONFIG,
               0, 0);
-                ret = UtilFuncs.SendMessage(
+                /*ret = UtilFuncs.SendMessage(
                 new IntPtr((long)m_AppHWnd),
                 (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
                 0x0002, //IMN_OPENSTATUSWINDOW
-                0);
-          /*  ret = UtilFuncs.SendMessage(
+                0);*/
+            
+           /*     ret = UtilFuncs.SendMessage(
+                new IntPtr((long)m_AppHWnd),
+                (uint)UtilFuncs.WindowsMessage.WM_IME_SETCONTEXT,
+                1, 0);*/
+
+
+            ret = UtilFuncs.SendMessage(
                 new IntPtr((long)m_AppHWnd),
                 (uint)UtilFuncs.WindowsMessage.WM_CREATE,
-                0, 0);*/
+                0, 0);
 
 
     //            string baseDir = System.Environment.GetEnvironmentVariable("OV_BASEDIR");

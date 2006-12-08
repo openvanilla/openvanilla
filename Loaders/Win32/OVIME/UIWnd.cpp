@@ -55,6 +55,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		murmur("WM_CREATE");
 
 		CompX = CompY = -1;
+//		UISCompWindow(hWnd);
 		UICreateCompWindow(hWnd);
 		UICreateCandWindow(hWnd);
 		UICreateNotifyWindow(hWnd);
@@ -69,7 +70,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		murmur("%p",lParam);				
 		if (wParam) //TRUE if the window is active, and FALSE otherwise.
 		{
-			murmur("wParm=%p",wParam);
+		
+			murmur("hwnd=%x",hWnd);
 			murmur("hUICurIMC:%p", hUICurIMC);
 			if (hUICurIMC)  //hUICurIMC==0 ªí¥Ü¥X¿ù(?)
 			{
@@ -148,6 +150,11 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	case WM_DESTROY:
 		murmur("WM_DESTROY");
+		//dsvr->sendBuf();	
+		UIHideStatusWindow();		
+		UIHideCompWindow();
+		UIHideCandWindow();
+		loader=AVLoader::getLoader();
 		loader->shutdown();
 		//loader->closeModule();
 		break;
@@ -158,7 +165,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		loader = AVLoader::getLoader();
 
 		//<comment author='b6s'>A test to reconnect the display server.
-		dsvr = new DisplayServer();
+		//dsvr = new DisplayServer();
 		loader->connectDisplayServer(dsvr);
 		//</comment>
 
