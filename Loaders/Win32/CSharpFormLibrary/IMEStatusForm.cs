@@ -4,6 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace CSharpFormLibrary
 {
@@ -170,104 +171,111 @@ namespace CSharpFormLibrary
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(IMEStatusForm));
-			this.button2 = new CSharpFormLibrary.IMEButton();
-			this.contextMenu1 = new System.Windows.Forms.ContextMenu();
-			this.button3 = new CSharpFormLibrary.IMEButton();
-			this.button6 = new CSharpFormLibrary.IMEButton();
-			this.label1 = new System.Windows.Forms.Label();
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.panel2 = new System.Windows.Forms.Panel();
-			this.panel1.SuspendLayout();
-			this.panel2.SuspendLayout();
-			this.SuspendLayout();
-			// 
-			// button2
-			// 
-			// TODO: Code generation for 'this.button2.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
-			this.button2.ContextMenu = this.contextMenu1;
-			this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-			//this.button2.Font = new System.Drawing.Font("PMingLiU", 12F);
-			this.button2.Location = new System.Drawing.Point(404, 0);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(48, 44);
-			this.button2.TabIndex = 1;
-			this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
-			// 
-			// button3
-			// 
-			// TODO: Code generation for 'this.button3.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
-			this.button3.Dock = System.Windows.Forms.DockStyle.Right;
-			//this.button3.Font = new System.Drawing.Font("PMingLiU", 12F);
-			this.button3.Location = new System.Drawing.Point(452, 0);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(48, 44);
-			this.button3.TabIndex = 2;
-			this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button3_MouseUp);
-			// 
-			// button6
-			// 
-			// TODO: Code generation for 'this.button6.AppHWnd' failed because of Exception 'Invalid Primitive Type: System.UInt64. Only CLS compliant primitive types can be used. Consider using CodeObjectCreateExpression.'.
-			this.button6.Dock = System.Windows.Forms.DockStyle.Right;
-			//this.button6.Font = new System.Drawing.Font("PMingLiU", 12F);
-			this.button6.Location = new System.Drawing.Point(500, 0);
-			this.button6.Name = "button6";
-			this.button6.Size = new System.Drawing.Size(60, 44);
-			this.button6.TabIndex = 5;
-			this.button6.Text = "設定";
-			// 
-			// label1
-			// 
-			this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.label1.Cursor = System.Windows.Forms.Cursors.SizeAll;
-			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
-			this.label1.Location = new System.Drawing.Point(0, 0);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(64, 44);
-			this.label1.TabIndex = 6;
-			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.label1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
-			this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
-			this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
-			// 
-			// panel1
-			// 
-			this.panel1.Controls.Add(this.label1);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-			this.panel1.Location = new System.Drawing.Point(0, 0);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(64, 44);
-			this.panel1.TabIndex = 7;
-			// 
-			// panel2
-			// 
-			this.panel2.Controls.Add(this.button2);
-			this.panel2.Controls.Add(this.button3);
-			this.panel2.Controls.Add(this.button6);
-			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel2.Location = new System.Drawing.Point(64, 0);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(560, 44);
-			this.panel2.TabIndex = 8;
-			// 
-			// IMEStatusForm
-			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
-			this.ClientSize = new System.Drawing.Size(624, 44);
-			this.Controls.Add(this.panel2);
-			this.Controls.Add(this.panel1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-			this.MaximizeBox = false;
-			this.Name = "IMEStatusForm";
-			this.ShowInTaskbar = false;
-			this.Text = "IMEStatusForm";
-			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
-			this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
-			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
-			this.panel1.ResumeLayout(false);
-			this.panel2.ResumeLayout(false);
-			this.ResumeLayout(false);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IMEStatusForm));
+            this.contextMenu1 = new System.Windows.Forms.ContextMenu();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.button2 = new CSharpFormLibrary.IMEButton();
+            this.button3 = new CSharpFormLibrary.IMEButton();
+            this.button6 = new CSharpFormLibrary.IMEButton();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 44);
+            this.label1.TabIndex = 6;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
+            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
+            this.label1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(64, 44);
+            this.panel1.TabIndex = 7;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.button6);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(64, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(560, 44);
+            this.panel2.TabIndex = 8;
+            // 
+            // button2
+            // 
+            this.button2.AppHWnd = ((ulong)(0ul));
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.ContextMenu = this.contextMenu1;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button2.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.button2.Location = new System.Drawing.Point(404, 0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(48, 44);
+            this.button2.TabIndex = 1;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
+            // 
+            // button3
+            // 
+            this.button3.AppHWnd = ((ulong)(0ul));
+            this.button3.BackColor = System.Drawing.Color.Transparent;
+            this.button3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button3.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.button3.Location = new System.Drawing.Point(452, 0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(48, 44);
+            this.button3.TabIndex = 2;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button3_MouseUp);
+            // 
+            // button6
+            // 
+            this.button6.AppHWnd = ((ulong)(0ul));
+            this.button6.BackColor = System.Drawing.Color.Transparent;
+            this.button6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button6.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.button6.Location = new System.Drawing.Point(500, 0);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(60, 44);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "設定";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button6_MouseUp);
+            // 
+            // IMEStatusForm
+            // 
+            this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
+            this.ClientSize = new System.Drawing.Size(624, 44);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
+            this.Name = "IMEStatusForm";
+            this.ShowInTaskbar = false;
+            this.Text = "IMEStatusForm";
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.ResumeLayout(false);
 
 		}
 		#endregion
@@ -419,7 +427,67 @@ namespace CSharpFormLibrary
                 (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
                 0xE, //IMN_PRIVATE
                 2);
+        }        
+
+        private void button6_MouseUp(object sender, MouseEventArgs e)
+        {
+            
+
+            string _PATH_ = @"C:\WINDOWS\OpenVanilla\";
+            Process proc = new System.Diagnostics.Process();				
+            //proc.StartInfo.CreateNoWindow=true;			
+            //proc.EnableRaisingEvents=false;
+            proc.StartInfo.FileName="OVPreferences.exe";  			
+            proc.StartInfo.WorkingDirectory=_PATH_;	//將此process的path設好		
+            //proc.StartInfo.RedirectStandardOutput=true;
+            //proc.StartInfo.UseShellExecute=false;			
+            
+            //proc.WaitForExit();
+            //string rr=proc.StandardOutput.ReadToEnd();   
+            int ret = UtilFuncs.SendMessage(
+                   new IntPtr((long)m_AppHWnd),
+                   (uint)UtilFuncs.WindowsMessage.WM_DESTROY,
+                   0, 0);
+                                  
+            string pre_file = @"C:\Documents and Settings\shihyi\Application Data\OpenVanilla\config.xml";
+            System.IO.FileInfo foo = new System.IO.FileInfo(pre_file);
+            proc.Start();
+            System.Threading.Thread.Sleep(1000); //is necessary!!
+            foo.Refresh();
+            DateTime dt = foo.LastWriteTime;            
+            int m = dt.Minute;
+            int s = dt.Second;                                               
+            while (true)
+            {             
+                foo.Refresh();
+                dt = foo.LastWriteTime;
+                if (dt.Minute != m || dt.Second != s)
+                {
+                    proc.Kill();
+                    proc.Dispose();
+                    break;
+                }
+                //Debug.WriteLine(dt.Minute + ":" + dt.Second + "\t" + m + ":" + s);               
+                System.Threading.Thread.Sleep(500);            
+            }
+            Debug.WriteLine("out");
+            ret = UtilFuncs.SendMessage(
+              new IntPtr((long)m_AppHWnd),
+              (uint)UtilFuncs.WindowsMessage.WM_IME_RELOADCONFIG,
+              0, 0);
+                ret = UtilFuncs.SendMessage(
+                new IntPtr((long)m_AppHWnd),
+                (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
+                0x0002, //IMN_OPENSTATUSWINDOW
+                0);
+           /* ret = UtilFuncs.SendMessage(
+                new IntPtr((long)m_AppHWnd),
+                (uint)UtilFuncs.WindowsMessage.WM_CREATE,
+                0, 0);*/
+            
+          
         }
+
         #endregion
     }
 

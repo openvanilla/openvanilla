@@ -59,7 +59,7 @@ namespace CSharpFormLibrary
         {
             WM_NULL = 0x0000,
             WM_CREATE = 0x0001,
-            WM_DESTROY = 0x0002,
+            WM_DESTROY = 0x0002,            
             WM_MOVE = 0x0003,
             WM_SIZE = 0x0005,
             WM_ACTIVATE = 0x0006,
@@ -119,7 +119,9 @@ namespace CSharpFormLibrary
             WM_IME_NOTIFY = 0x0282,
 
             WM_MOUSEHOVER = 0x02A1,
-            WM_MOUSELEAVE = 0x02A3
+            WM_MOUSELEAVE = 0x02A3,
+            WM_IME_RELOADCONFIG = 0x8000 + 601,
+            
         }
 	}
 }

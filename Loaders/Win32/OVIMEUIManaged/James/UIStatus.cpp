@@ -324,8 +324,10 @@ void UICreateStatusWindow(HWND hUIWnd)
 	//jaimie for C# menu set module name
 	//to set all available module names into C# menu list.
 	UIClearStatusMenuModString();
+	murmur ("module num=%d",loader->getInputMethodCount());
 	for(int i = 0; i < loader->getInputMethodCount(); i++)
 	{
+		
 		if(loader->moduleName(i, modNameUTF8))
 		{
 			MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);

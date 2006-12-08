@@ -1,3 +1,4 @@
+#define OV_DEBUG
 #include "AVLoader.h"
 #include <exception>
 #include <algorithm>
@@ -20,15 +21,17 @@ AVLoader::AVLoader() : dsvr(0)
 
 	vector<OVModule*> tmpmod_vector;
 	vector<OVModule*>::iterator m;
-	for(m = em->modlist().begin(); m != em->modlist().end(); m++) {
+	for(m = em->modlist().begin(); m != em->modlist().end(); m++) {		
 		em->dict()->setDict((*m)->identifier());
 		if(!strcmp((*m)->moduleType(), "OVInputMethod")) {
 			if(!em->dict()->keyExist("enable")) {
 				em->dict()->setInteger("enable", 1);
 				tmpmod_vector.push_back(*m);
+				murmur("enable ");
 			} else {
 				if(em->dict()->getInteger("enable")) {
 					tmpmod_vector.push_back(*m);
+					murmur("no enable key");
 				}
 			}
 		} else if(!strcmp((*m)->moduleType(), "OVOutputFilter")) {
@@ -79,7 +82,9 @@ void AVLoader::initContext(int i)
 void AVLoader::reloadConfig()
 {
 	em->dict()->update();
-	for(size_t i = 0; i < em->modlist().size(); i++) {
+	
+	murmur("em->modlist().size() :%d",em->modlist().size());
+	for(size_t i = 0; i < em->modlist().size(); i++) {		
 		if(ctx_vector.at(i) != NULL) {
 			murmur("Reload: %s", em->modlist().at(i)->identifier());
 			em->dict()->setDict(em->modlist().at(i)->identifier());
@@ -110,7 +115,7 @@ bool AVLoader::keyEvent(int n, AVKeyCode c)
 		activatedIm = n;
 	}
 	try {
-		dsvr->hideNotify();
+		//dsvr->hideNotify();   //James test
 		if(!ctx_vector[n]->keyEvent(&c, buf, candi, em->srv()))
 			st = false;
 	}

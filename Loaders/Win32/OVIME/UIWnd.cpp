@@ -147,13 +147,15 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	case WM_DESTROY:
 		murmur("WM_DESTROY");
-		loader->closeModule();
+		loader->shutdown();
+		//loader->closeModule();
 		break;
 
 	case WM_IME_RELOADCONFIG:
 		murmur("WM_IME_RELOADCONFIG");
-		loader = AVLoader::getLoader();
+		loader = AVLoader::getLoader();		
 		loader->reloadConfig();
+		
 		break;
 
 	default:
