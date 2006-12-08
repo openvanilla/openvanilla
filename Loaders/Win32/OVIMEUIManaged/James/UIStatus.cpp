@@ -517,6 +517,7 @@ void UISetMarkFrom(int i)
 {
 //	murmur("-----> UISetMarkFrom, status window");
 	CompSelStart = i;
+	murmur( "---> UISetMarkFrom Start %d", CompSelStart);
 /*	HDC tmpdc = GetDC(NULL);
 	TCHAR debug_info[100];
 	_stprintf(debug_info, _T("mf=%d"),  i);
@@ -535,6 +536,7 @@ void UISetMarkTo(int i)
 	ReleaseDC( NULL, tmpdc );
 */
 	CompSelEnd = i;
+	murmur( "---> UISetMarkFrom End %d", CompSelEnd);
 }
 
 void UIChangeModule(HWND hWnd)
