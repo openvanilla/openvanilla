@@ -54,11 +54,6 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	case WM_CREATE:  
 		murmur("WM_CREATE");
 
-		//<comment author='b6s'>A test to reconnect the display server.
-		loader = AVLoader::getLoader();
-		loader->connectDisplayServer(dsvr);
-		//</comment>
-
 		CompX = CompY = -1;
 		UICreateCompWindow(hWnd);
 		UICreateCandWindow(hWnd);
@@ -159,7 +154,14 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	case WM_IME_RELOADCONFIG:
 		murmur("WM_IME_RELOADCONFIG");
-		loader = AVLoader::getLoader();		
+
+		loader = AVLoader::getLoader();
+
+		//<comment author='b6s'>A test to reconnect the display server.
+		dsvr = new DisplayServer();
+		loader->connectDisplayServer(dsvr);
+		//</comment>
+
 		loader->reloadConfig();
 		
 		break;

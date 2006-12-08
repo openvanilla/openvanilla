@@ -480,12 +480,18 @@ namespace CSharpFormLibrary
                 (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
                 0x0002, //IMN_OPENSTATUSWINDOW
                 0);
-           /* ret = UtilFuncs.SendMessage(
+          /*  ret = UtilFuncs.SendMessage(
                 new IntPtr((long)m_AppHWnd),
                 (uint)UtilFuncs.WindowsMessage.WM_CREATE,
                 0, 0);*/
-            
-          
+
+
+    //            string baseDir = System.Environment.GetEnvironmentVariable("OV_BASEDIR");
+                ///string winDir = System.Environment.GetEnvironmentVariable("windir");
+                //System.Environment.
+                //Debug.WriteLine("userDir:" + userDir);
+//                Debug.WriteLine("baseDir" + baseDir);
+  //              Debug.WriteLine("winDir" + winDir);
         }
 
         #endregion
@@ -509,3 +515,4 @@ namespace CSharpFormLibrary
     */
     #endregion
 }
+
