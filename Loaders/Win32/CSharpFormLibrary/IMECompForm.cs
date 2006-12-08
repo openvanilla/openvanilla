@@ -24,7 +24,10 @@ namespace CSharpFormLibrary
 		//private int caretWidth = 0;
         //just give the caret a small point;
         private int caretWidth = 2;
-        private int CurrentAll = 0;
+        private int CurrentAll = 0; //現在input字數的大小
+        private int currentAllCompStrLength = 0;
+        private Label label2;//composition window那塊圖的大小
+        private int singleCaretHightlight = 0;
 
 		public IMECompForm()
 		{
@@ -71,43 +74,51 @@ namespace CSharpFormLibrary
 		{
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox1
             // 
-            //this.textBox1.BackColor = System.Drawing.SystemColors.Info;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox1.Font = new System.Drawing.Font("PMingLiU", 12F);
-            //this.textBox1.ForeColor = System.Drawing.SystemColors.InfoText;
             this.textBox1.Location = new System.Drawing.Point(0, 0);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(312, 27);
+            this.textBox1.Size = new System.Drawing.Size(312, 29);
             this.textBox1.TabIndex = 0;
             this.textBox1.WordWrap = false;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            //this.label1.BackColor = System.Drawing.SystemColors.Info;
-            this.label1.Location = new System.Drawing.Point(35, 22);
+            this.label1.BackColor = System.Drawing.SystemColors.InfoText;
+            this.label1.Location = new System.Drawing.Point(18, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(2, 5);
+            this.label1.Size = new System.Drawing.Size(10, 6);
             this.label1.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.Location = new System.Drawing.Point(38, 2);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(22, 18);
+            this.label2.TabIndex = 2;
             // 
             // IMECompForm
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(7, 20);
+            this.AutoScaleBaseSize = new System.Drawing.Size(8, 22);
             this.BackColor = System.Drawing.SystemColors.Info;
-            this.ForeColor = System.Drawing.SystemColors.InfoText;
-            //this.TransparencyKey = System.Drawing.SystemColors.Info;
-            this.Opacity = 0.75;
             this.ClientSize = new System.Drawing.Size(312, 32);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Font = new System.Drawing.Font("PMingLiU", 12F);
+            this.ForeColor = System.Drawing.SystemColors.InfoText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "IMECompForm";
+            this.Opacity = 0.75;
             this.ShowInTaskbar = false;
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -136,8 +147,8 @@ namespace CSharpFormLibrary
 			if(inputs==null) return;
             //if (inputs == null || this.textBox1.Text == inputs) return;
 
-/* *** Comments due to OVIME.VC8.sln <Jaimie> *************
- * *** postpone this merge until fully upgrade to VC8 *****
+/* *** Comments due to OVIME.VC8.sln <Jaimie> *************/
+/* *** postpone this merge until fully upgrade to VC8 *****/
 			Graphics g = this.textBox1.CreateGraphics();
             Size s;
             Size proposedSize1 = new Size();
@@ -157,8 +168,10 @@ namespace CSharpFormLibrary
 
             regions = g.MeasureCharacterRanges (inputs, this.textBox1.Font, rect, format);
             rect    = regions[0].GetBounds (g);
-
-            this.Width = (int)(rect.Right + 1.0f);
+            
+            //mark the next line for dynamic composition window length setting.
+            //this.Width = (int)(rect.Right + 1.0f);
+            currentAllCompStrLength = (int)(rect.Right + 1.0f);
 #endif
  
 //2nd method for getting the exact comp string length
@@ -188,26 +201,29 @@ namespace CSharpFormLibrary
 #endif
 
 //3rd method to set textFormatFlags.NoPadding
-
+#if false
             tff1 = TextFormatFlags.NoPadding;
             //proposedSize1.Height = this.textBox1.Height;
             //proposedSize1.Height = this.textBox1.Font.Height;
             //proposedSize1.Width = this.textBox1.Width;
             
 			//int width = (int)g.MeasureString(inputs, this.textBox1.Font).Width;
-  
+
             s = TextRenderer.MeasureText(g, inputs, this.textBox1.Font, proposedSize1, tff1);
             //this.Width = s.Width;
-            //if (inputs.Length == 1)
+#endif
+            if (inputs.Length == 1)
+
             {
                 //caretWidth = this.Size.Width;
                 //caretWidth = measured_width / (inputs.Length);
-
-                CurrentAll = inputs.Length;
+                singleCaretHightlight = (int) rect.Right;
+                
             }
+            CurrentAll = inputs.Length;
+            g.Dispose(); 
 
-			g.Dispose(); 
- * ********************************************************/			
+ /* ********************************************************/			
 			//string[] a_inputs = inputs.Split(' ');			
 
             this.textBox1.Text = inputs;
@@ -217,14 +233,17 @@ namespace CSharpFormLibrary
 		{
 
             //caretWidth = this.textBox1.Width;
-            /* *** Comments due to OVIME.VC8.sln <Jaimie> *************
-             * *** postpone this merge until fully upgrade to VC8 ***** 
+            /* *** Comments due to OVIME.VC8.sln <Jaimie> *************/
+             /* *** postpone this merge until fully upgrade to VC8 *****/ 
                         //this.label1.Width = this.Width / CurrentAll;
-                        //caretWidth = 2;
-                        //this.label1.Width = caretWidth;
+                        caretWidth = 2;
+                        this.label1.Width = caretWidth;
                         //總長度要除以不同字數的長度
-                        //this.label1.Left = ((this.Width)*(x)/CurrentAll);
-             * ********************************************************/
+                        this.label1.Left = ((currentAllCompStrLength) * (x) / CurrentAll);
+                        this.label2.Left = ((currentAllCompStrLength) * (x) / CurrentAll);
+                        //this.label2.Left = (currentAllCompStrLength);
+                        this.label2.Width = singleCaretHightlight; 
+             /* ********************************************************/
             this.label1.Height = 2;
 
 		}

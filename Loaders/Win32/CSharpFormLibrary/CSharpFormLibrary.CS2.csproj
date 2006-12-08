@@ -103,8 +103,11 @@
     <Compile Include="IMECandidateFrom2D.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IMECompForm.cs">
+    <Compile Include="IMECompRichForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IMECompRichForm.Designer.cs">
+      <DependentUpon>IMECompRichForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IMEStatusForm.cs">
       <SubType>Form</SubType>
@@ -119,13 +122,15 @@
     </Compile>
     <EmbeddedResource Include="IMECandidateForm.resx">
       <DependentUpon>IMECandidateForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="IMECandidateFrom2D.resx">
       <DependentUpon>IMECandidateFrom2D.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="IMECompForm.resx">
-      <DependentUpon>IMECompForm.cs</DependentUpon>
+    <EmbeddedResource Include="IMECompRichForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>IMECompRichForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IMEStatusForm.resx">
       <DependentUpon>IMEStatusForm.cs</DependentUpon>
