@@ -77,8 +77,10 @@ public:
 	{
 		if(!hasObjCompForm)
 		{
+			//objCompForm =
+			//	pasm->CreateInstance("CSharpFormLibrary.IMECompForm",true);
 			objCompForm =
-				pasm->CreateInstance("CSharpFormLibrary.IMECompForm",true);
+				pasm->CreateInstance("CSharpFormLibrary.IMECompRichForm",true);
 			hasObjCompForm = true;
 		}
 		return objCompForm;
@@ -90,7 +92,7 @@ public:
 		{
 			typeComp =
 				CompFormAssembly::Instance()
-					->GetType("CSharpFormLibrary.IMECompForm");
+					->GetType("CSharpFormLibrary.IMECompRichForm");
 			hasTypeComp = true;
 		}
 		return typeComp;
@@ -264,7 +266,7 @@ void _EndCompPage()
 {
 	//°õ¦æDisposeForm
 	//System::Diagnostics::Debug::WriteLine("Comp End");
-	MethodInfo* methodDisposeWindow = CompFormAssembly::Instance()->GetType("CSharpFormLibrary.IMECompForm")->GetMethod("DisposeForm");
+	MethodInfo* methodDisposeWindow = CompFormAssembly::Instance()->GetType("CSharpFormLibrary.IMECompRichForm")->GetMethod("DisposeForm");
 	methodDisposeWindow->Invoke(CompFormAssembly::CompForm(),NULL);
 }
 
