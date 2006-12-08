@@ -53,6 +53,12 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	case WM_CREATE:  
 		murmur("WM_CREATE");
+
+		//<comment author='b6s'>A test to reconnect the display server.
+		loader = AVLoader::getLoader();
+		loader->connectDisplayServer(dsvr);
+		//</comment>
+
 		CompX = CompY = -1;
 		UICreateCompWindow(hWnd);
 		UICreateCandWindow(hWnd);
