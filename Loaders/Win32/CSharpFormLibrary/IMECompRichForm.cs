@@ -108,10 +108,11 @@ namespace CSharpFormLibrary
         }
 
 		public void SetCaretX(int x)
-		{                       
+		{
             if (compSelStart == compSelEnd)
             {
-                this.richTextBox1.Select(compSelStart-1, 1);
+                if (compSelStart == 0)  compSelStart = 1;
+                this.richTextBox1.Select(compSelStart - 1, 1);
                 this.richTextBox1.SelectionBackColor = System.Drawing.Color.Blue;
                 this.richTextBox1.SelectionColor = Color.White;
                 this.label1.Left = ((currentAllCompStrLength) * (x) / CurrentAll);
@@ -128,7 +129,8 @@ namespace CSharpFormLibrary
             //{
             //    this.label1.Left = 0;
             //}
-		}
+        }
+
         public void CompMarkFrom(int x)
         {
             compSelStart = x;
