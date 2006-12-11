@@ -501,6 +501,7 @@ void UIHideStatusWindow()
 
 int CompIndexToXPos(int index);
 
+
 void UISetCursorPos(int i)
 {
 //	int cursor = CompIndexToXPos( CompCursorPos );
@@ -512,7 +513,7 @@ void UISetCursorPos(int i)
 //	cursor = CompIndexToXPos( CompCursorPos );
 //	BitBlt( dc, cursor, 0, 1, rc.bottom, dc, cursor, 0, SRCINVERT );
 }
-
+#if 0
 void UISetMarkFrom(int i)
 {
 //	murmur("-----> UISetMarkFrom, status window");
@@ -538,7 +539,7 @@ void UISetMarkTo(int i)
 	CompSelEnd = i;
 	murmur( "---> UISetMarkFrom End %d", CompSelEnd);
 }
-
+#endif
 void UIChangeModule(HWND hWnd)
 {
     //TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);

@@ -45,6 +45,12 @@ private:
 	static MethodInfo* methodCompCaretPosX;
 	static bool hasMethodCompCaretPosX = false;
 
+	static MethodInfo* methodCompMarkFrom;
+	static bool hasMethodCompMarkFrom = false;
+
+	static MethodInfo* methodCompMarkTo;
+	static bool hasMethodCompMarkTo = false;
+
 	__nogc struct IsFormCreated
 	{
 		bool isCreated;
@@ -142,6 +148,25 @@ public:
 		}
 		return methodCompCaretPosX;
 	}
+
+	static MethodInfo* CompMarkFrom()
+	{
+		if(!hasMethodCompMarkFrom)
+		{
+			methodCompMarkFrom = CompFormAssembly::CompType() -> GetMethod("CompMarkFrom");
+			hasMethodCompMarkFrom = true;
+		}
+		return methodCompMarkFrom;
+	}
+	static MethodInfo* CompMarkTo()
+	{
+		if(!hasMethodCompMarkTo)
+		{
+			methodCompMarkTo = CompFormAssembly::CompType() -> GetMethod("CompMarkTo");
+			hasMethodCompMarkTo = true;
+		}
+		return methodCompMarkTo;
+	}
 	static MethodInfo* CompHide()
 	{
 		if(!hasMethodCompHide)
@@ -204,6 +229,30 @@ void _SetCompCaretPosX(int x)
 	Object* ret =
 		CompFormAssembly::CompCaretPosX()->Invoke(CompFormAssembly::CompForm(), param);
 
+}
+void _SetCompMarkFrom(int x)
+{
+	CompFormAssembly::argCollection->Clear();
+	CompFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(x)));
+	
+	Object* param[] =
+		dynamic_cast<Object*[]>(CompFormAssembly::argCollection
+			->ToArray(System::Type::GetType("System.Object")));
+	Object* ret =
+		CompFormAssembly::CompMarkFrom()->Invoke(CompFormAssembly::CompForm(), param);
+
+}
+
+void _SetCompMarkTo(int x)
+{
+	CompFormAssembly::argCollection->Clear();
+	CompFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(x)));
+
+	Object* param[] = 
+		dynamic_cast<Object*[]>(CompFormAssembly::argCollection
+		->ToArray(System::Type::GetType("System.Object")));
+
+	Object* ret = CompFormAssembly::CompMarkTo()->Invoke(CompFormAssembly::CompForm(), param);
 }
 
 void _ShowCompPage()

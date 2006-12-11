@@ -259,6 +259,17 @@ void UIHideCompWindow()
 	{
 		_HideCompPage();		
 	}
+}
+void UISetMarkFrom(int i)
+{
+	CompSelStart = i;
+	_SetCompMarkFrom(CompSelStart);
+	murmur( "---> UISetMarkFrom Start %d", CompSelStart);
+}
 
-
+void UISetMarkTo(int i)
+{
+	CompSelEnd = i;
+	_SetCompMarkTo(CompSelEnd);
+	murmur( "---> UISetMarkFrom End %d", CompSelEnd);
 }
