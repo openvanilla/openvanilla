@@ -90,7 +90,7 @@ namespace CSharpFormLibrary
 #endif
             CurrentAll = inputs.Length;
             g.Dispose();
-            inputs = inputs + '¡@';
+            //inputs = inputs + '¡@';
             this.richTextBox1.Text = inputs;
         }
 
@@ -111,7 +111,7 @@ namespace CSharpFormLibrary
 		{                       
             if (compSelStart == compSelEnd)
             {
-                this.richTextBox1.Select(compSelStart, 1);
+                this.richTextBox1.Select(compSelStart-1, 1);
                 this.richTextBox1.SelectionBackColor = System.Drawing.Color.Blue;
                 this.richTextBox1.SelectionColor = Color.White;
                 this.label1.Left = ((currentAllCompStrLength) * (x) / CurrentAll);
@@ -119,8 +119,8 @@ namespace CSharpFormLibrary
             else
             {
                 this.richTextBox1.Select(compSelStart, compSelEnd - compSelStart);
-                this.richTextBox1.SelectionBackColor = System.Drawing.Color.Black;
-                this.richTextBox1.SelectionColor = Color.White;
+                //this.richTextBox1.SelectionBackColor = System.Drawing.Color.Black;
+                this.richTextBox1.SelectionColor = Color.Red;
                 //this.richTextBox1.Width = this.richTextBox1.Width;
                 this.label1.Left = ((currentAllCompStrLength) * (x) / CurrentAll);
             }
