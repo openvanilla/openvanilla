@@ -21,6 +21,9 @@ namespace CSharpFormLibrary
         private int currentAllCompStrLength = 0;
         private Label label2;//composition window那塊圖的大小
         private int singleCaretHightlight = 0;
+
+        private int compSelStart = 0;
+        private int compSelEnd = 0;
         
         public IMECompRichForm()
         {
@@ -55,6 +58,8 @@ namespace CSharpFormLibrary
 		{
 
 			if(inputs==null) return;
+
+            
             //if (inputs == null || this.textBox1.Text == inputs) return;
             /* *** Comments due to OVIME.VC8.sln <Jaimie> *************/
             /* *** postpone this merge until fully upgrade to VC8 *****/
@@ -84,28 +89,43 @@ namespace CSharpFormLibrary
             currentAllCompStrLength = (int)(rect.Right);
 #endif
             CurrentAll = inputs.Length;
-            g.Dispose(); 
+            g.Dispose();
+            inputs = inputs + '　';
             this.richTextBox1.Text = inputs;
         }
 		public void SetCaretX(int x)
 		{
 
-            if (x > 0)
+            if (compSelStart == compSelEnd)
             {
-                this.richTextBox1.Select(x - 1, 1);
+                this.richTextBox1.Select(compSelStart, 1);
+                this.richTextBox1.SelectionBackColor = System.Drawing.Color.Blue;
+                this.richTextBox1.SelectionColor = Color.White;
+                this.label1.Left = ((currentAllCompStrLength) * (x) / CurrentAll);
+            }
+            else
+            {
+                this.richTextBox1.Select(compSelStart, compSelEnd - compSelStart);
                 this.richTextBox1.SelectionBackColor = System.Drawing.Color.Black;
                 this.richTextBox1.SelectionColor = Color.White;
                 //this.richTextBox1.Width = this.richTextBox1.Width;
                 this.label1.Left = ((currentAllCompStrLength) * (x) / CurrentAll);
             }
-            else
-            {
-                this.label1.Left = 0;
-            }
-
-
-            
+            //else
+            //{
+            //    this.label1.Left = 0;
+            //}
 		}
+        public void CompMarkFrom(int x)
+        {
+            compSelStart = x;
+        }
+        
+        public void CompMarkTo(int x)
+        {
+            compSelEnd = x;
+        }
+
 
     }
 }
