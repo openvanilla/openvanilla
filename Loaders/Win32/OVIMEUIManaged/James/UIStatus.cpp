@@ -495,6 +495,7 @@ void UISetMarkTo(int i)
 #endif
 void UIChangeModule(HWND hWnd)
 {
+	CompCursorPos=0;  //James test
     //TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
 	
 	//CurrentIC++;
@@ -549,6 +550,7 @@ void UIChangeModule(HWND hWnd)
 
 void UIChangeModuleByMouse(HWND hWnd)
 {
+	CompCursorPos=0;  //James test
 	char modNameUTF8[1024];
 	wchar_t modNameUCS2[1024];
 	
