@@ -28,8 +28,10 @@ void UIMoveStatusWindow(HWND, int, int);
 void UIShowStatusWindow();
 void UIHideStatusWindow();
 void UISetCursorPos(int);
-void UISetMarkFrom(int);
-void UISetMarkTo(int);
+//Begin : move to UIComp.cpp//
+//void UISetMarkFrom(int);
+//void UISetMarkTo(int);
+//End : move to UIComp.cpp//
 void UIChangeModule(HWND);
 void UIChangeModuleByMouse(HWND);
 void UIChangeHalfFull(HWND);
@@ -44,6 +46,8 @@ void UIShowCompWindow();
 void UIHideCompWindow();
 void UISetCompStr(wchar_t*);
 void UISetCompCaretPosX(int);
+void UISetMarkFrom(int);
+void UISetMarkTo(int);
 // UICand.cpp
 void UICreateCandWindow(HWND);
 void UIMoveCandWindow(HWND, int, int, int);
