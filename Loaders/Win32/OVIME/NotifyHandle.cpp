@@ -44,7 +44,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		// When attached app lost focus, only this message occurred,
 		// so it must also hide following windows.
 		dsvr->showBuf(false);	
-		dsvr->showCand(false);								
+		dsvr->showCandi(false);								
 		
 		//</comment>
 		break;
