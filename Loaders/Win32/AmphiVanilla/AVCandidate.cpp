@@ -1,7 +1,7 @@
 #include "AVCandidate.h"
 
-AVCandidate::AVCandidate() : onscreen(0) {}
-AVCandidate::AVCandidate(AVDisplayServer* svr) : dsvr(svr), onscreen(0) {}
+AVCandidate::AVCandidate() : candiOnscreen(0) {}
+AVCandidate::AVCandidate(AVDisplayServer* svr) : dsvr(svr), candiOnscreen(0) {}
 
 void AVCandidate::setDisplayServer(AVDisplayServer *svr)
 {
@@ -16,11 +16,11 @@ OVCandidate* AVCandidate::append(const char *s) {
 	return this;
 }
 OVCandidate* AVCandidate::hide() {
-	if (onscreen) { onscreen=0; dsvr->showCandi(false);}
+	if (candiOnscreen) { candiOnscreen=0; dsvr->showCandi(false);}
 	return this;
 }
 OVCandidate* AVCandidate::show() {
-	if (!onscreen) { onscreen=1; dsvr->showCandi(true);}
+	if (!candiOnscreen) { candiOnscreen=1; dsvr->showCandi(true);}
 	return this;
 }
 OVCandidate* AVCandidate::update() {
@@ -28,5 +28,5 @@ OVCandidate* AVCandidate::update() {
 	return this; 
 }
 int AVCandidate::onScreen() {
-	return onscreen;
+	return candiOnscreen;
 }

@@ -74,67 +74,11 @@ void UICreateCompWindow(HWND hUIWnd)
 	return;
 }
 
-void UIMoveCompWindow(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
+void UIMoveCompWindow(int X, int Y)
 {
 	int newX=X;
 	int newY=Y;
 	_MoveCompPage(newX, newY);
-	/*
-	lpCompStr = wcsdup(lpStr);		
-	if (IsWindow(uiComp.hWnd))
-	{		
-	RECT screenrc;
-	SystemParametersInfo(SPI_GETWORKAREA,0,&screenrc,0);
-	//James comments
-	//if( newX+100 > screenrc.right )
-	//newX=screenrc.right-100;
-	//if( newY+200 > screenrc.bottom )			
-	//newY=Y-190;
-	HDC hDC;
-	HFONT oldFont;
-	SIZE sz;
-	TCHAR szStr[100];
-	TEXTMETRIC tm;
-	HWND hLocalHwnd;
-
-	//		LPWSTR localString;
-	//hLocalHwnd = GetActiveWindow();
-	//		hLocalHwnd = GetForegroundWindow();
-
-	hDC = GetDC(uiComp.hWnd);
-	//		murmur(" ---> hLocalHwnd: %d", hLocalHwnd);
-	//		murmur(" ---> Parent hLocalHwnd: %d", GetParent(hLocalHwnd));
-	//oldFont = (HFONT) SelectObject(hDC, hUIFont);
-	GetTextMetrics(hDC, &tm);
-	//		murmur("GetTextMetrics %d", tm.tmHeight);
-
-
-	//oldFont = (HFONT) SendMessage(hLocalHwnd, WM_GETFONT, 0, 0);
-	//murmur (" ---> oldFont %d", oldFont);
-
-	//murmur("GetTextExLeading %d", tm.tmExternalLeading);
-
-	if(lpCompStr)
-	{
-	//		GetTextExtentPoint(hDC, lpCompStr, (int)wcslen(lpCompStr), &sz);
-	//		murmur("YES lpCompStr FONT SIZE HEIGHT : %d", sz.cy);
-	//		}
-	//		else
-	//		{
-	//		GetTextExtentPoint(hDC, szStr, (int)_tcslen(szStr), &sz);	
-	//		murmur("NO lpCompStr FONT SIZE HEIGHT : %d", sz.cy);
-	//		}
-	GetTextExtentPoint(hDC, lpCompStr, (int)wcslen(lpCompStr), &sz);
-	murmur(" ---> GetTextExtentPoint sz.cx : %ld", sz.cx);
-	murmur(" ---> GetTextExtentPoint sz.cy : %ld", sz.cy);
-	SelectObject(hDC, oldFont);
-	ReleaseDC(hLocalHwnd, hDC);		
-	//_MoveCompPage(newX,newY+sz.cy);		
-	//				_MoveCompPage(newX, newY);
-	//		murmur("---> newX : %d , newY : %d", newX, newY);
-	}
-	}			*/
-
 }
 void UISetCompStr(wchar_t* lpStr)
 {
@@ -229,12 +173,7 @@ void PaintCompWindow(HWND hCompWnd)
 
 	EndPaint(hCompWnd,&ps);
 #endif
-	/*
-	if(lpCompStr)
-	{
-	UIShowCompWindow(); 
-	return;
-	}*/
+
 }
 
 void UIShowCompWindow()
@@ -272,4 +211,9 @@ void UISetMarkTo(int i)
 	CompSelEnd = i;
 	_SetCompMarkTo(CompSelEnd);
 	murmur( "---> UISetMarkFrom End %d", CompSelEnd);
+}
+
+int UIGetHeight()
+{
+	return _GetHeight();
 }

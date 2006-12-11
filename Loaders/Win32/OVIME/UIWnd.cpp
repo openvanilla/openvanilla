@@ -53,7 +53,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	case WM_CREATE:  
 		murmur("WM_CREATE");
-
+		loader=AVLoader::getLoader();
+		loader->connectDisplayServer(dsvr);
 		CompX = CompY = -1;
 //		UISCompWindow(hWnd);
 		UICreateCompWindow(hWnd);
@@ -65,68 +66,49 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		murmur("WM_WINDOWPOSCHANGING");
 		break;
 
-	case WM_IME_SETCONTEXT:
-		murmur("WM_IME_SETCONTEXT");
-		murmur("%p",lParam);				
-		if (wParam) //TRUE if the window is active, and FALSE otherwise.
-		{
-		
-			murmur("hwnd=%x",hWnd);
-			murmur("hUICurIMC:%p", hUICurIMC);
+	case WM_IME_SETCONTEXT:  //switch between windows
+		murmur("WM_IME_SETCONTEXT");					
+		if (wParam) //switch in
+		{		
+			murmur("setcontext to hwnd:%x",hWnd);			
 			if (hUICurIMC)  //hUICurIMC==0 表示出錯(?)
 			{
-				AdjustUIWindow(hWnd);				
+				murmur("if(hUICurIMC)=true, show all");
+				dsvr->showBuf(true);
+				dsvr->showCandi(true);				
+				RefreshUI(hWnd);				
 			}
 			else   // it is NULL input context. (?)
-			{
-				UIHideCandWindow();
-				UIHideCompWindow();
+			{				
+				murmur("if(hUICurIMC)=false, hide all");
+				dsvr->showBuf(false);
+				dsvr->showCandi(false);		
 			}
 		}
-		else //若把這個else拿掉 則切換視窗c# form 不會消失
+		else //switch out
 		{
-			murmur("wParam=NULL");
-			isActive=false;
-			UIHideCandWindow();
-			UIHideCompWindow();
+			murmur("switch out, hide all");
+			dsvr->showBuf(false);
+			dsvr->showCandi(false);
 		}
 		break;
 
 	case WM_IME_STARTCOMPOSITION:
-		murmur("WM_IME_STARTCOMPOSITION");
-		/*
-		//James test
-		//在start時先move到正確的座標
-		lpIMC = ImmLockIMC(hUICurIMC);
-		POINT pt2;
-		if(CompX < 0) 
-		{
-		//pt2.x = 15;
-		//pt2.y = 15;
-		pt2.x = 0;
-		pt2.y = 0;			
-		ClientToScreen(lpIMC->hWnd, &pt2);
-		CompX = pt2.x;
-		CompY = pt2.y;
-		}
-		//lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-		UIMoveCompWindow(hWnd, CompX, CompY, NULL);
-		//*/
+		murmur("WM_IME_STARTCOMPOSITION");		
+		//James comment
+		//Can we在start時先move到正確的座標?		
 		break;
 
 	case WM_IME_COMPOSITION:
 		murmur("WM_IME_COMPOSITION");		
-		//test
-		//MyGenerateMessage(hWnd, WM_IME_NOTIFY, IMN_SETCANDIDATEPOS, 0);
-		//lRet = NotifyHandle(hUICurIMC, hWnd, WM_IME_NOTIFY, IMN_SETCANDIDATEPOS, NULL);
-		AdjustUIWindow(hWnd);
+		RefreshUI(hWnd);
 		ImmUnlockIMC(hUICurIMC); 
 		break;
 
 	case WM_IME_ENDCOMPOSITION:
 		murmur("WM_IME_ENDCOMPOSITION");
-		UIHideCompWindow();
-		UIHideCandWindow();
+		dsvr->showBuf(false);
+		dsvr->showCandi(false);		
 		break;
 
 	case WM_IME_COMPOSITIONFULL:
@@ -149,26 +131,19 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 
 	case WM_DESTROY:
-		murmur("WM_DESTROY");
-		//dsvr->sendBuf();	
-		UIHideStatusWindow();		
-		UIHideCompWindow();
-		UIHideCandWindow();
+		murmur("WM_DESTROY");					
+		dsvr->showStatus(false);
+		dsvr->showBuf(false);
+		dsvr->showCandi(false);			
 		loader=AVLoader::getLoader();
-		loader->shutdown();
-		//loader->closeModule();
+		loader->closeModule(); //also send buf to app
+		loader->shutdown();		
 		break;
 
 	case WM_IME_RELOADCONFIG:
 		murmur("WM_IME_RELOADCONFIG");
-
 		loader = AVLoader::getLoader();
-
-		//<comment author='b6s'>A test to reconnect the display server.
-		//dsvr = new DisplayServer();
 		loader->connectDisplayServer(dsvr);
-		//</comment>
-
 		loader->reloadConfig();
 		
 		break;
@@ -179,7 +154,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	}
 	return lRet;
 }
-void AdjustUIWindow(HWND hWnd)  //調整comp cand
+void RefreshUI(HWND hWnd )  //調整comp cand
 {	
 	
 	HIMC			hUICurIMC;
@@ -187,69 +162,27 @@ void AdjustUIWindow(HWND hWnd)  //調整comp cand
 	LONG			lRet = 0L;
 	LPMYPRIVATE lpMyPrivate;
 	hUICurIMC = (HIMC)GetWindowLong(hWnd, IMMGWL_IMC);
+
 	lpIMC = ImmLockIMC(hUICurIMC);
 	POINT pt;
 	if(CompX < 0) 
 	{
-		pt.x = 15;
-		pt.y = 15;
+		pt.x = 0;
+		pt.y = 0;
 		ClientToScreen(lpIMC->hWnd, &pt);
 		CompX = pt.x;
 		CompY = pt.y;
 	}
 	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
-	if(lpMyPrivate->PreEditStr)//有comp指標 
-	{						
-		murmur("%s",lpMyPrivate->PreEditStr);
-		if(wcslen(lpMyPrivate->PreEditStr)&& !isActive) //comp有字且還沒被active
-		{
-			murmur("COMPOSITION, move(%d, %d)", CompX, CompY);
-			UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
-			UISetCompStr(lpMyPrivate->PreEditStr);
-			UIShowCompWindow();
-			isActive=true;
-		}
-		else if(wcslen(lpMyPrivate->PreEditStr)&& isActive)//comp有字但已經被active 
-		{
-			if(!wcslen(lpMyPrivate->CandStr) )//如果沒有candidate才要秀
-			{
-				murmur("COMPOSITION, move(%d, %d)", CompX, CompY);
-				UIMoveCompWindow(hWnd, CompX, CompY, lpMyPrivate->PreEditStr);
-				UISetCompStr(lpMyPrivate->PreEditStr);
-				UIShowCompWindow();
-			}
-			else
-			{
-				UISetCompStr(lpMyPrivate->PreEditStr);
-			}
-		}
-		else{//comp沒字
-			UIHideCompWindow();
-			isActive=false;
-		}
-
-	}
-	else //沒有comp指標 =>hide
+	murmur("%s",lpMyPrivate->PreEditStr);	
+	if(wcslen(lpMyPrivate->PreEditStr)) //comp有字->更新
 	{
-		UIHideCompWindow();
-		isActive=false;
-	}
-	if(lpMyPrivate->CandStr)
-	{
-		if(wcslen(lpMyPrivate->CandStr))
-		{
-			UIMoveCandWindow(hWnd, CompX,CompY+30,NULL);
-			UISetCandStr(lpMyPrivate->CandStr);
-			//UIShowCandWindow();
-		}
-		else
-			UIHideCandWindow();
-	}
-	else
-	{
-		UIHideCandWindow();
-	}
-	ImmUnlockIMCC(lpIMC->hPrivate);
-	
+		dsvr->moveBuf(CompX,CompY);								
+		if(wcslen(lpMyPrivate->CandStr))  //有cand
+		{								
+			dsvr->moveCandi(CompX,CompY+UIGetHeight());						
+		}		
+	}			
+	ImmUnlockIMCC(lpIMC->hPrivate);	
 	return;
 }

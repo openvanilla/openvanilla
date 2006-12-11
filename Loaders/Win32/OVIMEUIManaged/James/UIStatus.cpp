@@ -393,16 +393,12 @@ void UIMoveStatusWindow(HWND hUIWnd, int X, int Y)
 
 		sz.cx = 0;
 		sz.cy = 0;
-
 		uiStatus.pt.x = X;
 		uiStatus.pt.y = Y;
-
 		sz.cx = uiStatus.sz.cx;
 		sz.cy = uiStatus.sz.cy;
-
 		pt.x = uiStatus.pt.x;
 		pt.y = uiStatus.pt.y;
-
 
 		SystemParametersInfo(SPI_GETWORKAREA, 0, &screenrc, 0);
 
@@ -412,49 +408,6 @@ void UIMoveStatusWindow(HWND hUIWnd, int X, int Y)
 			pt.y = screenrc.bottom - 50;		
 
 		_MoveStatusPage(pt.x, pt.y);
-
-		//HDC hDC;
-		//HFONT oldFont;
-//		POINT pt;
-//		RECT screenrc;
-//		SIZE sz;
-
-//		sz.cx = 0;
-//		sz.cy = 0;
-//		uiStatus.pt.x = X;
-//		uiStatus.pt.y = Y;
-
-//		if(sz.cx < uiStatus.sz.cx)
-//			sz.cx = uiStatus.sz.cx;
-
-//		sz.cy = uiStatus.sz.cy;
-
-//		pt.x = uiStatus.pt.x;
-//		pt.y = uiStatus.pt.y;
-
-//		SystemParametersInfo(SPI_GETWORKAREA,
-//				0,
-//				&screenrc,
-//				0);
-
-//		if( (pt.x + sz.cx) > screenrc.right )
-//			pt.x = screenrc.right - sz.cx;
-//		if( (pt.y + sz.cy) > screenrc.bottom )
-//			pt.y = screenrc.bottom - sz.cy;
-
-//		MoveWindow(uiStatus.hWnd,
-//				pt.x,
-//				pt.y,
-//				sz.cx,
-//				sz.cy,
-//				TRUE);
-
-//		uiStatus.pt.x = pt.x;
-//		uiStatus.pt.y = pt.y;
-
-//		ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
-
-//		InvalidateRect(uiStatus.hWnd,NULL, FALSE);
 	}
 }
 

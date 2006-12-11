@@ -133,7 +133,7 @@ void UISetCandStr(wchar_t* lpStr)
 
 }
 
-void UIMoveCandWindow(HWND hUIWnd, int X, int Y, int lpStr)//wchar_t* lpStr)
+void UIMoveCandWindow(int X, int Y)
 {	
 //	if(lpStr!=NULL)
 	{

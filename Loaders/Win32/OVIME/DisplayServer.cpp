@@ -23,6 +23,7 @@ AVDisplayServer *DisplayServer::setBufString(const char *str)
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
 	wcscpy(lpMyPrivate->PreEditStr, wstr);
 	MakeCompStr(lpMyPrivate, lpCompStr);
+	UISetCompStr(lpMyPrivate->PreEditStr); 				
 	return this;
 }
 AVDisplayServer *DisplayServer::sendBuf(const char *str)
@@ -48,6 +49,7 @@ AVDisplayServer *DisplayServer::setCandiString(const char *str)
 	UpdateCandidate(lpIMC, wstr);
 //	MyGenerateMessage(hIMC,
 //			WM_IME_COMPOSITION, 0, GCS_COMPSTR);
+	UISetCandStr(lpMyPrivate->CandStr);
 	return this;
 }
 AVDisplayServer *DisplayServer::showNotify(const char *str)
@@ -63,6 +65,32 @@ AVDisplayServer *DisplayServer::hideNotify()
 	UIHideNotifyWindow();
 	return this;
 }
+
+
+DisplayServer *DisplayServer::moveBuf(int x, int y)
+{
+	murmur("AVDisplayServer *DisplayServer::moveBuf");
+	UIMoveCompWindow(x,y);
+	return this;
+}
+
+DisplayServer *DisplayServer::moveCandi(int x, int y)
+{
+	murmur("AVDisplayServer *DisplayServer::moveCand");
+	UIMoveCandWindow(x,y);
+	return this;
+}
+
+DisplayServer *DisplayServer::showStatus(bool t)
+{
+	murmur("AVDisplayServer *DisplayServer::showStatus");
+	if(t)
+		UIShowStatusWindow();
+	else
+		UIHideStatusWindow();
+	return this;
+}
+
 AVDisplayServer *DisplayServer::showBuf(bool t)
 {
 	murmur("AVDisplayServer *DisplayServer::showBuf");
@@ -72,6 +100,7 @@ AVDisplayServer *DisplayServer::showBuf(bool t)
 		UIHideCompWindow();
 	return this;
 }
+
 AVDisplayServer *DisplayServer::showCandi(bool t)
 {
 	murmur("AVDisplayServer *DisplayServer::showCandi");

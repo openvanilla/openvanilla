@@ -55,7 +55,7 @@ extern "C" {
 	BOOL APIENTRY DllMain(HANDLE, DWORD, LPVOID);
 	// UIWnd.cpp
 	LRESULT APIENTRY UIWndProc(HWND, UINT, WPARAM, LPARAM);
-	void AdjustUIWindow(HWND hWnd);
+	void RefreshUI(HWND hWnd);
 	// ControlHandle.cpp
 	LONG ControlHandle(HIMC, HWND, UINT, WPARAM, LPARAM);
 	// NotifyHandel.cpp

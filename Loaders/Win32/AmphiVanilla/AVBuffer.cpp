@@ -32,11 +32,14 @@ OVBuffer* AVBuffer::send()
 	}
 	dsvr->sendBuf(bufstr.c_str());
 	bufstr="";
+	//dsvr->showBuf(false); //James add
 	return this;
 }
+
 OVBuffer* AVBuffer::update()
 {
-	dsvr->setBufString(bufstr.c_str());
+	dsvr->setBufString(bufstr.c_str());	
+	dsvr->showBuf(true); //James add
 	return this;
 }
 OVBuffer* AVBuffer::update(int cursorPos, int markFrom=-1, int markTo=-1)
@@ -44,6 +47,7 @@ OVBuffer* AVBuffer::update(int cursorPos, int markFrom=-1, int markTo=-1)
 	dsvr->setCursorPos(cursorPos);
 	dsvr->setMarkFrom(markFrom);
 	dsvr->setMarkTo(markTo);
+	dsvr->showBuf(true); //James add
 	return update();
 }
 int AVBuffer::isEmpty()

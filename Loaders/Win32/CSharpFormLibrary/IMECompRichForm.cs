@@ -93,9 +93,22 @@ namespace CSharpFormLibrary
             inputs = inputs + '¡@';
             this.richTextBox1.Text = inputs;
         }
-		public void SetCaretX(int x)
-		{
 
+        public int GetHeight()
+        {
+            try
+            {
+                System.Diagnostics.Debug.WriteLine("c# comp height = " + this.Height);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.StackTrace);
+            }
+            return this.Height;
+        }
+
+		public void SetCaretX(int x)
+		{                       
             if (compSelStart == compSelEnd)
             {
                 this.richTextBox1.Select(compSelStart, 1);

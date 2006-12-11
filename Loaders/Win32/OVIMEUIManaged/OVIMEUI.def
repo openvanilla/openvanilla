@@ -59,6 +59,9 @@ EXPORTS
 	UIChangeModuleByMouse
 	_GetStatusSelectedModuleIndex
 	UISetCompCaretPosX
+	_SetCompCaretPosX
+	_GetHeight
+	UIGetHeight
 	_SetCompCaretPosX	
 	_SetCompMarkFrom
 	_SetCompMarkTo

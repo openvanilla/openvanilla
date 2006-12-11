@@ -19,7 +19,7 @@ public:
 
 protected:
     string candistr;
-    int onscreen;
+    int candiOnscreen;
     AVDisplayServer *dsvr;
 };
 #endif // AVCandidate_h

@@ -34,31 +34,29 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			UIMoveStatusWindow(hWnd, rec.right - 500, rec.bottom - 100);
 			first = true;
 		}
-		UIShowStatusWindow();
+		dsvr->showStatus(true);		
 		break;
 		
 	case IMN_CLOSESTATUSWINDOW:
 		murmur("IMN_CLOSESTATUSWINDOW");
-		UIHideStatusWindow();
+		dsvr->showStatus(false);			
 		//<comment author='b6s'>
 		// When attached app lost focus, only this message occurred,
 		// so it must also hide following windows.
-		UIHideCompWindow();
-		UIHideCandWindow();
-		UIHideNotifyWindow();
+		dsvr->showBuf(false);	
+		dsvr->showCand(false);								
+		
 		//</comment>
 		break;
 
 	case IMN_OPENCANDIDATE:
 		murmur("IMN_OPENCANDIDATE");
-		//dsvr->showCandi(true);
-		UIShowCandWindow();
+		dsvr->showCandi(true);		
 		break;
 
 	case IMN_CLOSECANDIDATE:
 		murmur("IMN_CLOSECANDIDATE");
-		//dsvr->showCandi(false);
-		UIHideCandWindow();
+		dsvr->showCandi(false);		
 		break;
 
 	case IMN_CHANGECANDIDATE:
@@ -81,47 +79,27 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		
 	case IMN_SETOPENSTATUS: // toggle status open or close
 		murmur("IMN_SETOPENSTATUS");
-		UIShowStatusWindow();
+		dsvr->showStatus(true);		
 		break;
 		
-	case IMN_SETCANDIDATEPOS: // set candidate position , but no move
+	case IMN_SETCANDIDATEPOS: // For the Search Text Field of Firefox
 		{
 			murmur("IMN_SETCANDIDATEPOS");
+			//<comment author='James'>
+			//not sure about this
+			/*
 			POINT ptSrc;
 			SIZE szOffset;
 			HDC hDC;
-
 			ptSrc = lpIMC->cfCandForm[0].ptCurrentPos;
 			ClientToScreen(lpIMC->hWnd, &ptSrc);
 			hDC = GetDC(lpIMC->hWnd);
 			GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
 			ReleaseDC(lpIMC->hWnd,hDC);
 			LPMYPRIVATE lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-			//James modify
 			CandX=ptSrc.x +szOffset.cx;
-			CandY=ptSrc.y + szOffset.cy;
-			//<comment author='b6s'>For the Search Text Field of Firefox
-			/*UIMoveCandWindow(lpIMC->hWnd, CandX, CandY, lpMyPrivate->CandStr);
-			murmur("hello firefox: (%d, %d)", CandX, CandY);
-			UISetCandStr(lpMyPrivate->CandStr);
-			UIShowCandWindow();			*/
-			//</comment>
-			if(lpMyPrivate->CandStr)
-			{
-				if(wcslen(lpMyPrivate->CandStr))
-				{
-					UIMoveCandWindow(hWnd, CandX,CandY,NULL);
-					UISetCandStr(lpMyPrivate->CandStr);
-					UIShowCandWindow();
-				}
-				else
-					UIHideCandWindow();
-			}
-			else
-			{
-				UIHideCandWindow();
-			}
-			ImmUnlockIMCC(lpIMC->hPrivate);
+			CandY=ptSrc.y + szOffset.cy;*/
+			RefreshUI(hWnd);
 		}
 		break;
 		
@@ -130,13 +108,11 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		//<comment author='b6s'>
 		// It is weird but... when the attached app got focus back,
 		// this message occurred.
-		//UIShowCandWindow();
-		//murmur("Also try to do UIShowCandWindow()");
 		//</comment>	
 
 		break;
 		
-	case IMN_SETCOMPOSITIONWINDOW:    // set composition window position, move
+	case IMN_SETCOMPOSITIONWINDOW:    // set composition window position & move
 		murmur("IMN_SETCOMPOSITIONWINDOW");
 		POINT ptSrc;
 		SIZE szOffset;
@@ -161,52 +137,13 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		else*/
 		{
 			lfptr = (LOGFONT*)(&lpIMC->lfFont);
-			memcpy( &lf2, lfptr, sizeof( lf2) );
-					
+			memcpy( &lf2, lfptr, sizeof( lf2) );					
 			CompX = ptSrc.x ;
-//			CompY = ptSrc.y + abs(lf2.lfHeight)*72/tm.tmDigitizedAspectY;
-			CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
-			
+			CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;			
 			int tmpY=abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
-//			murmur(" ---> IMN_SETCOMPOSITIONWINDOW x->%d y->%d", CompX, CompY);
-			murmur("SETCOMPOSITIONWINDOW, move(%d, %d)", CompX, CompY);
-			UIMoveCompWindow(hWnd, CompX, CompY,NULL);
-			//UIMoveCandWindow(hWnd, CompX,CompY,tmpY);
-			UIMoveCandWindow(hWnd, CompX,CompY+30,NULL);			
+			dsvr->moveBuf(CompX,CompY);
+			dsvr->moveCandi(CompX,CompY+30);						
 		}
-		//James modified
-		//CompX = ptSrc.x + szOffset.cx;
-		//CompY = ptSrc.y + szOffset.cy;
-		
-		/*lpIMC = ImmLockIMC(hUICurIMC);
-		POINT pt;
-		if(CompX < 0) {
-			pt.x = 15;
-			pt.y = 15;
-			ClientToScreen(lpIMC->hWnd, &pt);
-			CompX = pt.x;
-			CompY = pt.y;
-		}
-        ImmLockIMCC(lpIMC->hPrivate);*/
-				
-		
-		//ImmUnlockIMCC(lpIMC->hPrivate);
-		//ImmUnlockIMC(hUICurIMC);
-		
-		//dsvr.setBufPos(CompX, CompY)->notify();
-		
-		
-		
-		//UIMoveCandWindow(hWnd, CompX, CompY, NULL);	//lpMyPrivate->CandStr); by b6s
-		/*
-		if (IsWindow(lpUIExtra->uiComp.hWnd))
-			InvalidateRect(lpUIExtra->uiComp.hWnd,NULL,FALSE);
-		*/
-		//<comment author='b6s'>Not ready yet because of "Set Candidate String" issues.
-		//UIShowCandWindow();
-		//murmur("Also try to do UIShowCandWindow()");
-		//</comment>
-
 		break;
 		
 	case IMN_GUIDELINE:

@@ -315,18 +315,25 @@ void _EndCompPage()
 {
 	//°õ¦æDisposeForm
 	//System::Diagnostics::Debug::WriteLine("Comp End");
-	MethodInfo* methodDisposeWindow = CompFormAssembly::Instance()->GetType("CSharpFormLibrary.IMECompRichForm")->GetMethod("DisposeForm");
+	MethodInfo* methodDisposeWindow = CompFormAssembly::CompType()->GetMethod("DisposeForm");
 	methodDisposeWindow->Invoke(CompFormAssembly::CompForm(),NULL);
 }
 
 int _GetCompValue()
 {
 	/*
-	MethodInfo* methodGetValue = CompFormAssembly::Instance()->GetType("CSharpFormLibrary.IMECompForm")->GetMethod("GetValue");
+	MethodInfo* methodGetValue = CompFormAssembly::Instance()::CompType()->GetMethod("GetValue");
 	Object* rtnValue = methodGetValue->Invoke(CompFormAssembly::CompForm(),NULL);
 	return Convert::ToInt32(rtnValue);
 	*/
 	return 0;
+}
+
+int _GetHeight()
+{	
+	MethodInfo* methodGetValue = CompFormAssembly::CompType()->GetMethod("GetHeight");
+	Object* rtnValue = methodGetValue->Invoke(CompFormAssembly::CompForm(),NULL);
+	return Convert::ToInt32(rtnValue);
 }
 
 void _ShowCompPageArray(const std::vector<std::wstring>& Comp)

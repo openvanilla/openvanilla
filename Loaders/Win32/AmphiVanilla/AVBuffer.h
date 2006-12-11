@@ -18,10 +18,12 @@ public:
     virtual OVBuffer* update(int cursorPos, int markFrom, int markTo);
     virtual int isEmpty();
 
-private:
+
+//private:
+protected:
     string bufstr;
     AVDisplayServer *dsvr;
     vector<OVOutputFilter*> *ovof_vector;
-    OVService *srv;
+    OVService *srv;	
 };
 #endif // AVBuffer_h

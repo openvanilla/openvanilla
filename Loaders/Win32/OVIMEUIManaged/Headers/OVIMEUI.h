@@ -41,16 +41,17 @@ void UISetStatusMenuModStr(wchar_t*);
 void UIClearStatusMenuModString();
 // UIComp.cpp
 void UICreateCompWindow(HWND);
-void UIMoveCompWindow(HWND, int, int, wchar_t*);
+void UIMoveCompWindow(int, int);
 void UIShowCompWindow();
 void UIHideCompWindow();
+int UIGetHeight();
 void UISetCompStr(wchar_t*);
 void UISetCompCaretPosX(int);
 void UISetMarkFrom(int);
 void UISetMarkTo(int);
 // UICand.cpp
 void UICreateCandWindow(HWND);
-void UIMoveCandWindow(HWND, int, int, int);
+void UIMoveCandWindow(int, int);
 //void UIMoveCandWindow(HWND, int, int, wchar_t*);
 void UIShowCandWindow();
 void UIHideCandWindow();
