@@ -60,3 +60,5 @@ EXPORTS
 	_GetStatusSelectedModuleIndex
 	UISetCompCaretPosX
 	_SetCompCaretPosX	
+	_SetCompMarkFrom
+	_SetCompMarkTo
