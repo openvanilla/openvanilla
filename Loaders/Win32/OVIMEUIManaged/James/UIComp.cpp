@@ -88,12 +88,24 @@ void UISetCompStr(wchar_t* lpStr)
 	watch.stop();
 	//	murmur("%1.3f sec:\tC# comp window, clear", watch.getSec());
 
-	lpCompStr = wcsdup(lpStr);
-	std::wstring wsCompStr(lpCompStr);
-	watch.start();
-	_SetCompString(wsCompStr);
-	watch.stop();
+	if(wcslen(lpStr))
+	{
+		lpCompStr = wcsdup(lpStr);
+		std::wstring wsCompStr(lpCompStr);
+		watch.start();
+		_SetCompString(wsCompStr);
+		watch.stop();
+	}
+	else
+	{
+		_ClearCompPage();
+	}
+
 	//	murmur("%1.3f sec:\tC# comp window, setstring", watch.getSec());
+}
+void UIClearCompStr()
+{
+	_ClearCompPage();
 }
 
 void UISetCompCaretPosX(int xIndex)
@@ -187,7 +199,7 @@ void UIShowCompWindow()
 	if(lpCompStr)
 	{
 		_SetCompCaretPosX(CompCursorPos);
-				murmur(" ---> CompCursorPos : %d", CompCursorPos);
+		murmur(" ---> CompCursorPos : %d", CompCursorPos);
 	}
 }
 
