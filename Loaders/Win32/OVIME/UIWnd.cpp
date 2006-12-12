@@ -94,7 +94,9 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 
 	case WM_IME_STARTCOMPOSITION:
-		murmur("WM_IME_STARTCOMPOSITION");		
+		murmur("WM_IME_STARTCOMPOSITION");
+		dsvr->showStatus(true);
+		dsvr->showBuf(true);
 		//James comment
 		//Can we在start時先move到正確的座標?		
 		break;
@@ -134,16 +136,18 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		murmur("WM_DESTROY");					
 		dsvr->showStatus(false);
 		dsvr->showBuf(false);
-		dsvr->showCandi(false);			
-		loader=AVLoader::getLoader();
+		dsvr->showCandi(false);
+
 		loader->closeModule(); //also send buf to app
-		loader->shutdown();		
 		break;
 
 	case WM_IME_RELOADCONFIG:
 		murmur("WM_IME_RELOADCONFIG");
 		loader = AVLoader::getLoader();
-		loader->connectDisplayServer(dsvr);
+		loader->shutdown();		
+
+		loader = AVLoader::getLoader();
+		//loader->connectDisplayServer(dsvr);
 		loader->reloadConfig();
 		
 		break;

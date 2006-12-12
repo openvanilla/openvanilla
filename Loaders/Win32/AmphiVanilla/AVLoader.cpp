@@ -17,6 +17,34 @@ void AVLoader::shutdown()
 
 AVLoader::AVLoader() : dsvr(0)
 {
+	loadModules();
+
+	candi = new AVCandidate();
+	buf = new AVBuffer(&ovof_vector, em->srv());
+}
+
+AVLoader::~AVLoader()
+{
+	/* FIXME: uncomment this will cause segfault in ime.
+	for(int i = 0; i < ctx_vector.size(); i++)
+		if(ctx_vector[i] != NULL)
+			delete ctx_vector[i];
+	*/
+	//delete em;
+
+	ctx_vector.clear();
+	ovof_vector.clear();
+	startedCtxVector.clear();
+	murmur("Shutdown loader: clear containers");
+	em->removeInstance();
+	murmur("Shutdown loader: delete em");
+
+	delete candi;
+	delete buf;
+}
+
+void AVLoader::loadModules()
+{
 	em = AVEmbeddedLoader::getInstance();
 
 	vector<OVModule*> tmpmod_vector;
@@ -31,8 +59,10 @@ AVLoader::AVLoader() : dsvr(0)
 			} else {
 				if(em->dict()->getInteger("enable")) {
 					tmpmod_vector.push_back(*m);
-					murmur("no enable key");
+					murmur("enabled em_dict_name=%s",(*m)->identifier());
 				}
+				else
+					murmur("disabled em_dict_name=%s",(*m)->identifier());
 			}
 		} else if(!strcmp((*m)->moduleType(), "OVOutputFilter")) {
 			if(em->dict()->getInteger("enable")) {
@@ -50,21 +80,6 @@ AVLoader::AVLoader() : dsvr(0)
 	ctx_vector.assign(size, static_cast<OVInputMethodContext*>(NULL));
 	startedCtxVector.assign(size, false);
 	activatedIm = -1;
-
-	candi = new AVCandidate();
-	buf = new AVBuffer(&ovof_vector, em->srv());
-}
-
-AVLoader::~AVLoader()
-{
-	/* FIXME: uncomment this will cause segfault in ime.
-	for(int i = 0; i < ctx_vector.size(); i++)
-		if(ctx_vector[i] != NULL)
-			delete ctx_vector[i];
-	*/
-	//delete em;
-	delete candi;
-	delete buf;
 }
 
 void AVLoader::initContext(int i)

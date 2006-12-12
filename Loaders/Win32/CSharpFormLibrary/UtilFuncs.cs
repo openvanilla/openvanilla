@@ -121,6 +121,7 @@ namespace CSharpFormLibrary
             WM_MOUSEHOVER = 0x02A1,
             WM_MOUSELEAVE = 0x02A3,
             WM_IME_RELOADCONFIG = 0x8000 + 601,
+            WM_IME_STARTCOMPOSITION = 0x010D
             
         }
 	}

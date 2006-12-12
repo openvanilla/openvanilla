@@ -18,6 +18,8 @@ public:
 		return embeddedLoaderInstance;
 	}
 
+	void removeInstance();
+
 	AVService *srv();
 	AVConfig *cfg();
 	AVDictionary *dict();

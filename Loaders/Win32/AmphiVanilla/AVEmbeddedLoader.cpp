@@ -28,7 +28,7 @@ AVEmbeddedLoader::AVEmbeddedLoader()
 	m_cfg = new AVConfig();
 	m_dict = AVDictionary::getDict(m_cfg->getUserDir());
 	m_dict->setAutoFlush(true);
-	//murmur("AVEmbeddedLoader::AVEmbeddedLoader()->module dir= %s",m_cfg->moduledir());
+	murmur("AVEmbeddedLoader::AVEmbeddedLoader()");	
 	AVLoadEverything(m_cfg->getModuleDir(), m_srv, m_modlist);
 	sort(m_modlist.begin(), m_modlist.end(), sort_im(m_dict));
 }
@@ -39,6 +39,13 @@ AVEmbeddedLoader::~AVEmbeddedLoader()
 	delete m_cfg;
 	AVDictionary::shutdown();
 	AVUnloadLibrary(m_modlist);
+}
+
+void AVEmbeddedLoader::removeInstance()
+{
+	if(embeddedLoaderInstance)
+		embeddedLoaderInstance = NULL;
+		//delete embeddedLoaderInstance;
 }
 
 AVService *AVEmbeddedLoader::srv() { return m_srv; }

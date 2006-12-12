@@ -471,11 +471,11 @@ namespace CSharpFormLibrary
                 System.Threading.Thread.Sleep(500);            
             }
             Debug.WriteLine("out");
-            ret = UtilFuncs.SendMessage(
-              new IntPtr((long)m_AppHWnd),
-              (uint)UtilFuncs.WindowsMessage.WM_IME_RELOADCONFIG,
-              0, 0);
-                /*ret = UtilFuncs.SendMessage(
+                ret = UtilFuncs.SendMessage(
+                  new IntPtr((long)m_AppHWnd),
+                  (uint)UtilFuncs.WindowsMessage.WM_IME_RELOADCONFIG,
+                  0, 0);
+               /*ret = UtilFuncs.SendMessage(
                 new IntPtr((long)m_AppHWnd),
                 (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
                 0x0002, //IMN_OPENSTATUSWINDOW
@@ -491,6 +491,11 @@ namespace CSharpFormLibrary
                 new IntPtr((long)m_AppHWnd),
                 (uint)UtilFuncs.WindowsMessage.WM_CREATE,
                 0, 0);
+            ret = UtilFuncs.SendMessage(
+              new IntPtr((long)m_AppHWnd),
+              (uint)UtilFuncs.WindowsMessage.WM_IME_STARTCOMPOSITION,
+              0, 0);
+
 
 
     //            string baseDir = System.Environment.GetEnvironmentVariable("OV_BASEDIR");

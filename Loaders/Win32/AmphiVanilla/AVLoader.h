@@ -27,6 +27,8 @@ public:
 	bool moduleName(int i, char *str);
 	void closeModule();
 
+	void loadModules();
+
 	//<comment author='b6s'>Add these two functions temporarily, will refactor them later.
 	int getInputMethodCount();
 	int getOutputFilterCount();
