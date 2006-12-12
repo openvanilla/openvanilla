@@ -160,6 +160,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		murmur(" ---> notify window handle: %x", hWnd);
 		switch(lParam) {
 			case 0:
+				
 				UIChangeModule(hWnd);
 				break;
 			case 1:

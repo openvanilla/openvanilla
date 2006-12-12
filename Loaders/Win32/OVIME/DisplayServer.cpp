@@ -23,7 +23,9 @@ AVDisplayServer *DisplayServer::setBufString(const char *str)
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
 	wcscpy(lpMyPrivate->PreEditStr, wstr);
 	MakeCompStr(lpMyPrivate, lpCompStr);
-	UISetCompStr(lpMyPrivate->PreEditStr); 				
+	murmur(" ---> DisplayServer.cpp ");
+	UISetCompStr(lpMyPrivate->PreEditStr); 	//要不要先檢查有沒有PreEditStr有沒有東西？
+
 	return this;
 }
 AVDisplayServer *DisplayServer::sendBuf(const char *str)
@@ -33,8 +35,10 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 	wcscpy(GETLPRESULTSTR(lpCompStr), wstr);
 	lpCompStr->dwResultStrLen = (int)wcslen(wstr);
 	wcscpy(lpMyPrivate->PreEditStr, L"");
-	MakeCompStr(lpMyPrivate, lpCompStr);
 	
+	MakeCompStr(lpMyPrivate, lpCompStr);
+	//UIClearCompStr();//即時update C# comp string 同步資料
+
 	MyGenerateMessage(hIMC,
 		WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
 	MyGenerateMessage(hIMC,
