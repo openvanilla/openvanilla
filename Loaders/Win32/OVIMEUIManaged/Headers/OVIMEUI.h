@@ -49,6 +49,7 @@ void UISetCompStr(wchar_t*);
 void UISetCompCaretPosX(int);
 void UISetMarkFrom(int);
 void UISetMarkTo(int);
+void UIClearCompStr();
 // UICand.cpp
 void UICreateCandWindow(HWND);
 void UIMoveCandWindow(int, int);
