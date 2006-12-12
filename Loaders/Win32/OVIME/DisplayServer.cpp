@@ -37,7 +37,7 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 	wcscpy(lpMyPrivate->PreEditStr, L"");
 	
 	MakeCompStr(lpMyPrivate, lpCompStr);
-	//UIClearCompStr();//即時update C# comp string 同步資料
+	UIClearCompStr();//即時update C# comp string 同步資料
 
 	MyGenerateMessage(hIMC,
 		WM_IME_COMPOSITION, 0, GCS_RESULTSTR);

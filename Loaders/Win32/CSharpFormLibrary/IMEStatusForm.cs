@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
+
 namespace CSharpFormLibrary
 {
 	/// <summary>
@@ -20,7 +21,10 @@ namespace CSharpFormLibrary
 
         //private int msgCounter = 0;
         private UInt64 m_AppHWnd;
-
+        private string m_baseDir="";
+        private string m_moduleDir="";
+        private string m_userDir="";
+        
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -347,6 +351,14 @@ namespace CSharpFormLibrary
                 "status: menu size=\t" + this.contextMenu1.MenuItems.Count);
         }
 
+
+        public void SetDir(string baseDir, string moduleDir , string userDir)
+		{
+            m_baseDir = baseDir;
+            m_moduleDir = moduleDir;
+            m_userDir = userDir;            
+        }
+
         public int GetSelectedModuleIndex()
         {
             return m_selectedModuleIndex;
@@ -430,26 +442,16 @@ namespace CSharpFormLibrary
         }        
 
         private void button6_MouseUp(object sender, MouseEventArgs e)
-        {
-            
-            
-            string _PATH_ = @"C:\WINDOWS\OpenVanilla\";
+        {                     
             Process proc = new System.Diagnostics.Process();				
-            //proc.StartInfo.CreateNoWindow=true;			
-            //proc.EnableRaisingEvents=false;
-            proc.StartInfo.FileName="OVPreferences.exe";  			
-            proc.StartInfo.WorkingDirectory=_PATH_;	//將此process的path設好		
-            //proc.StartInfo.RedirectStandardOutput=true;
-            //proc.StartInfo.UseShellExecute=false;			
-            
-            //proc.WaitForExit();
-            //string rr=proc.StandardOutput.ReadToEnd();   
+            proc.StartInfo.FileName="OVPreferences.exe";
+            proc.StartInfo.WorkingDirectory = m_baseDir;	
             int ret = UtilFuncs.SendMessage(
                    new IntPtr((long)m_AppHWnd),
                    (uint)UtilFuncs.WindowsMessage.WM_DESTROY,
                    0, 0);
                                   
-            string pre_file = @"C:\Documents and Settings\shihyi\Application Data\OpenVanilla\config.xml";
+            string pre_file = m_userDir+"config.xml";
             System.IO.FileInfo foo = new System.IO.FileInfo(pre_file);
             proc.Start();
             System.Threading.Thread.Sleep(1000); //is necessary!!
@@ -527,4 +529,5 @@ namespace CSharpFormLibrary
     */
     #endregion
 }
+
 

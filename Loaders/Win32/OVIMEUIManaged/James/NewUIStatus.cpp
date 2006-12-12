@@ -1,6 +1,8 @@
 #include <vector>
 //#include <windows.h>
 #include "PCMan.h"
+#include "AVDictionary.h"
+#include "AVConfig.h"
 
 
 #pragma managed
@@ -35,6 +37,9 @@ private:
 
 	static MethodInfo* methodStatusSetChiEng;
 	static bool hasMethodStatusSetChiEng = false;
+
+	static MethodInfo* methodStatusSetDir;
+	static bool hasMethodStatusSetDir = false;
 
 	static MethodInfo* methodStatusHide;
 	static bool hasMethodStatusHide = false;
@@ -131,6 +136,17 @@ public:
 			hasMethodStatusSetChiEng = true;
 		}
 		return methodStatusSetChiEng;
+	}
+
+	static MethodInfo* StatusSetDir()
+	{
+		if(!hasMethodStatusSetDir)
+		{
+			methodStatusSetDir = 
+				StatusFormAssembly::StatusType()->GetMethod("SetDir");
+			hasMethodStatusSetDir = true;
+		}
+		return methodStatusSetDir;
 	}
 
 	static MethodInfo* StatusSetModString()
@@ -307,4 +323,26 @@ int _GetStatusSelectedModuleIndex()
 		->GetMethod("GetSelectedModuleIndex")
 		->Invoke(StatusFormAssembly::StatusForm(), NULL);
 	return Convert::ToInt32(ret);
+}
+
+void _SetUserDir()
+{
+	AVConfig *cfg= new AVConfig();
+	const char *baseDir=cfg->getBaseDir();
+	const char *moduleDir=cfg->getModuleDir();
+	const char *userDir=cfg->getUserDir();
+
+	StatusFormAssembly::argCollection->Clear();
+
+	StatusFormAssembly::argCollection
+		->Add(dynamic_cast<Object*>((__gc new System::String(baseDir))));
+	StatusFormAssembly::argCollection
+		->Add(dynamic_cast<Object*>((__gc new System::String(moduleDir))));
+	StatusFormAssembly::argCollection
+		->Add(dynamic_cast<Object*>((__gc new System::String(userDir))));
+	Object* param[] =
+		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
+			->ToArray(System::Type::GetType("System.Object")));
+	
+	StatusFormAssembly::StatusSetDir()->Invoke(StatusFormAssembly::StatusForm(), param);
 }

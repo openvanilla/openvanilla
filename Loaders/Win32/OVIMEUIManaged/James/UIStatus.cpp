@@ -235,6 +235,7 @@ TBBUTTON toolbar_btns[]={
 void UICreateStatusWindow(HWND hUIWnd)
 {
 	//murmur("-----> UICreateStatusWindow");
+	_SetUserDir();//³]©w¸ô®|
 	if (!IsWindow(uiStatus.hWnd))
 	{
 		uiStatus.hWnd = _CreateStatusPage();
@@ -607,3 +608,4 @@ void UIChangeChiEng(HWND hWnd)
 		ImmSetConversionStatus( imc, conv, sentence);
 	}
 }
+

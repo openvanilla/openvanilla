@@ -31,3 +31,4 @@ int _GetStatusSelectedModuleIndex();
 void _SetCompCaretPosX(int);
 void _SetCompMarkFrom(int);
 void _SetCompMarkTo(int);
+void _SetUserDir();
