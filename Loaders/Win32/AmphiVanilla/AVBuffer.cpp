@@ -36,25 +36,35 @@ OVBuffer* AVBuffer::send()
 	return this;
 }
 
-OVBuffer* AVBuffer::update()
+OVBuffer* AVBuffer::update() //set + show
 {
+	murmur("OVBuffer* AVBuffer::update() ");
 	dsvr->setBufString(bufstr.c_str());	
-	if(bufstr.length())
+	//if(bufstr.length())
 	{
 		dsvr->showBuf(true); 
 	}
-	else
+	/*else
 	{
 		dsvr->showBuf(false);
-	}
+	}*/
 	return this;
 }
 OVBuffer* AVBuffer::update(int cursorPos, int markFrom=-1, int markTo=-1)
 {
+	//dsvr->setBufString(bufstr.c_str());
+	murmur("OVBuffer* AVBuffer::update(int cursorPos, int markFrom=-1, int markTo=-1) ");
 	dsvr->setCursorPos(cursorPos);
 	dsvr->setMarkFrom(markFrom);
 	dsvr->setMarkTo(markTo);
-	dsvr->showBuf(true); //James add
+	//if(bufstr.length())
+	{
+		dsvr->showBuf(true); //James add
+	}
+	/*else
+	{
+		dsvr->showBuf(false);
+	}*/
 	return update();
 }
 int AVBuffer::isEmpty()

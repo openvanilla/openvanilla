@@ -1,3 +1,4 @@
+#define OV_DEBUG
 #include "OVIME.h"
 #include <cstdio>
 
@@ -90,3 +91,76 @@ void UpdateCandidate(LPINPUTCONTEXT lpIMC, const wchar_t* candis)
 		ImmUnlockIMCC(lpIMC->hCandInfo);
 	}
 }
+
+
+void RefreshUI(HWND hWnd )  //½Õ¾ãcomp cand
+{		
+	HIMC			hUICurIMC;
+	LPINPUTCONTEXT	lpIMC;
+	LONG			lRet = 0L;
+	LPMYPRIVATE lpMyPrivate;
+	hUICurIMC = (HIMC)GetWindowLong(hWnd, IMMGWL_IMC);
+
+	lpIMC = ImmLockIMC(hUICurIMC);
+	POINT pt;
+	if(CompX < 0) 
+	{
+		LONG lRet = 0L;
+ 
+	static BOOL first = false;
+	LOGFONT* lfptr;
+	LOGFONT lf2;
+	RECT rec;
+		SIZE szOffset;
+		HDC hDC;
+		POINT ptSrc;
+		TEXTMETRIC tm;
+		int localDPIY; //for device dpiY
+		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
+		ClientToScreen(lpIMC->hWnd, &ptSrc);
+		hDC = GetDC(lpIMC->hWnd);
+		murmur("hWnd->%x", lpIMC->hWnd);
+		GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
+		GetTextMetrics(hDC, &tm);
+		localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
+		ReleaseDC(lpIMC->hWnd,hDC);
+		/*if(    ptSrc.x>CandX && ptSrc.x<=CandX+80
+			&& ptSrc.y>=CandY && ptSrc.y<=CandY+160)
+		{
+		
+		}
+		else*/
+		{
+			lfptr = (LOGFONT*)(&lpIMC->lfFont);
+			memcpy( &lf2, lfptr, sizeof( lf2) );					
+			CompX = ptSrc.x ;
+			CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;			
+			int tmpY=abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
+			//dsvr->moveBuf(CompX,CompY);
+			//dsvr->moveCandi(CompX,CompY+UIGetHeight());	
+		}
+		/*POINT ptSrc;
+		LOGFONT* lfptr;
+		LOGFONT lf2;
+		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
+		ClientToScreen(lpIMC->hWnd, &ptSrc);
+		lfptr = (LOGFONT*)(&lpIMC->lfFont);
+		memcpy( &lf2, lfptr, sizeof( lf2) );					
+		CompX = ptSrc.x ;
+		CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;			
+		int tmpY=abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;*/
+		/*pt.x = 0;
+		pt.y = 0;
+		ClientToScreen(lpIMC->hWnd, &pt);
+		CompX = pt.x;
+		CompY = pt.y;*/
+		//murmur("fake setcompwindow");					
+	}
+	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
+	dsvr->moveBuf(CompX,CompY);												
+	dsvr->moveCandi(CompX,CompY+UIGetHeight());										
+	ImmUnlockIMCC(lpIMC->hPrivate);	
+	return;
+}
+
+

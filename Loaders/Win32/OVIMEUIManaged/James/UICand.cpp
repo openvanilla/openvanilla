@@ -123,13 +123,31 @@ void UISetCandStr(wchar_t* lpStr)
 	_ClearCandPage();
 	watch.stop();
 	murmur("%1.3f sec:\tC# candidate window, clear", watch.getSec());
-		
+	/*	
 	lpCandStr = wcsdup(lpStr);
 	std::wstring wsCandStr(lpCandStr);
 	watch.start();
 	_SetCandString(wsCandStr);
 	watch.stop();
 	murmur("%1.3f sec:\tC# candidate window, set string", watch.getSec());
+	Watch watch;
+	watch.start();
+	_ClearCompPage();
+	watch.stop();*/
+	//	murmur("%1.3f sec:\tC# comp window, clear", watch.getSec());
+
+	if(wcslen(lpStr))
+	{
+		lpCandStr = wcsdup(lpStr);
+		std::wstring wsCandStr(lpCandStr);
+		watch.start();
+		_SetCandString(wsCandStr);
+		watch.stop();
+	}
+	else
+	{
+		_ClearCandPage();		
+	}
 
 }
 

@@ -20,7 +20,14 @@ OVCandidate* AVCandidate::hide() {
 	return this;
 }
 OVCandidate* AVCandidate::show() {
-	if (!candiOnscreen) { candiOnscreen=1; dsvr->showCandi(true);}
+	if (!candiOnscreen) 
+	{	
+		if(candistr.length()>0)
+		{
+			candiOnscreen=1; 
+			dsvr->showCandi(true);
+		}
+	}
 	return this;
 }
 OVCandidate* AVCandidate::update() {

@@ -66,21 +66,21 @@ AVDisplayServer *DisplayServer::showNotify(const char *str)
 }
 AVDisplayServer *DisplayServer::hideNotify()
 {
-	UIHideNotifyWindow();
+	UIHideNotifyWindow();	
 	return this;
 }
 
 
 DisplayServer *DisplayServer::moveBuf(int x, int y)
 {
-	murmur("AVDisplayServer *DisplayServer::moveBuf");
+	murmur("AVDisplayServer *DisplayServer::moveBuf(%d,%d)",x,y);
 	UIMoveCompWindow(x,y);
 	return this;
 }
 
 DisplayServer *DisplayServer::moveCandi(int x, int y)
 {
-	murmur("AVDisplayServer *DisplayServer::moveCand");
+	murmur("AVDisplayServer *DisplayServer::moveCandi(%d,%d)",x,y);
 	UIMoveCandWindow(x,y);
 	return this;
 }
@@ -97,7 +97,7 @@ DisplayServer *DisplayServer::showStatus(bool t)
 
 AVDisplayServer *DisplayServer::showBuf(bool t)
 {		
-	if(t)
+	if(t && wcslen(lpMyPrivate->PreEditStr))
 	{
 		murmur("AVDisplayServer *DisplayServer::showBuf");
 		UIShowCompWindow();
@@ -111,10 +111,9 @@ AVDisplayServer *DisplayServer::showBuf(bool t)
 }
 
 AVDisplayServer *DisplayServer::showCandi(bool t)
-{
-	murmur("AVDisplayServer *DisplayServer::showCandi");
+{	
 	//james test
-	if(t)
+	if(t && wcslen(lpMyPrivate->CandStr))
 	{
 		murmur("AVDisplayServer *DisplayServer::showCandi");
 		UIShowCandWindow();

@@ -87,7 +87,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			murmur("IMN_SETCANDIDATEPOS");
 			//<comment author='James'>
 			//not sure about this
-			/*
+			
 			POINT ptSrc;
 			SIZE szOffset;
 			HDC hDC;
@@ -97,9 +97,11 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
 			ReleaseDC(lpIMC->hWnd,hDC);
 			LPMYPRIVATE lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-			CandX=ptSrc.x +szOffset.cx;
-			CandY=ptSrc.y + szOffset.cy;*/
-			RefreshUI(hWnd);
+			CandX=ptSrc.x ;//+szOffset.cx;
+			CandY=ptSrc.y + szOffset.cy;
+			dsvr->moveBuf(CandX,CandY);
+			dsvr->moveCandi(CandX,CandY+40);
+			//RefreshUI(hWnd);
 		}
 		break;
 		
@@ -112,7 +114,8 @@ LONG NotifyHandle(HIMC hUICurIMC,
 
 		break;
 		
-	case IMN_SETCOMPOSITIONWINDOW:    // set composition window position & move
+	case IMN_SETCOMPOSITIONWINDOW:    
+		// set composition window position & move
 		murmur("IMN_SETCOMPOSITIONWINDOW");
 		POINT ptSrc;
 		SIZE szOffset;
@@ -120,8 +123,6 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		TEXTMETRIC tm;
 		int localDPIY; //for device dpiY
 		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
-		murmur("x->%d", ptSrc.x);
-		murmur("y->%d", ptSrc.y);
 		ClientToScreen(lpIMC->hWnd, &ptSrc);
 		hDC = GetDC(lpIMC->hWnd);
 		murmur("hWnd->%x", lpIMC->hWnd);
@@ -141,9 +142,10 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			CompX = ptSrc.x ;
 			CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;			
 			int tmpY=abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
-			dsvr->moveBuf(CompX,CompY);
-			dsvr->moveCandi(CompX,CompY+30);						
+			//dsvr->moveBuf(CompX,CompY);
+			//dsvr->moveCandi(CompX,CompY+UIGetHeight());						
 		}
+		//RefreshUI(hWnd);
 		break;
 		
 	case IMN_GUIDELINE:

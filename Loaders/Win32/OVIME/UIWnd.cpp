@@ -159,29 +159,4 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	}
 	return lRet;
 }
-void RefreshUI(HWND hWnd )  //½Õ¾ãcomp cand
-{	
-	
-	HIMC			hUICurIMC;
-	LPINPUTCONTEXT	lpIMC;
-	LONG			lRet = 0L;
-	LPMYPRIVATE lpMyPrivate;
-	hUICurIMC = (HIMC)GetWindowLong(hWnd, IMMGWL_IMC);
 
-	lpIMC = ImmLockIMC(hUICurIMC);
-	POINT pt;
-	if(CompX < 0) 
-	{
-		pt.x = 0;
-		pt.y = 0;
-		ClientToScreen(lpIMC->hWnd, &pt);
-		CompX = pt.x;
-		CompY = pt.y;
-	}
-	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
-	murmur("%s",lpMyPrivate->PreEditStr);	
-	dsvr->moveBuf(CompX,CompY);												
-	dsvr->moveCandi(CompX,CompY+UIGetHeight());										
-	ImmUnlockIMCC(lpIMC->hPrivate);	
-	return;
-}
