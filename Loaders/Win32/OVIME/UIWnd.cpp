@@ -95,8 +95,9 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	case WM_IME_STARTCOMPOSITION:
 		murmur("WM_IME_STARTCOMPOSITION");
-		dsvr->showStatus(true);
-		dsvr->showBuf(true);
+		//dsvr->showStatus(true);
+		//dsvr->showBuf(true);
+		RefreshUI(hWnd);
 		//James comment
 		//Can we在start時先move到正確的座標?		
 		break;
@@ -179,14 +180,8 @@ void RefreshUI(HWND hWnd )  //調整comp cand
 	}
 	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
 	murmur("%s",lpMyPrivate->PreEditStr);	
-	if(wcslen(lpMyPrivate->PreEditStr)) //comp有字->更新
-	{
-		dsvr->moveBuf(CompX,CompY);								
-		if(wcslen(lpMyPrivate->CandStr))  //有cand
-		{								
-			dsvr->moveCandi(CompX,CompY+UIGetHeight());						
-		}		
-	}			
+	dsvr->moveBuf(CompX,CompY);												
+	dsvr->moveCandi(CompX,CompY+UIGetHeight());										
 	ImmUnlockIMCC(lpIMC->hPrivate);	
 	return;
 }

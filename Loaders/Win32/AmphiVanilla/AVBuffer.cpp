@@ -32,7 +32,7 @@ OVBuffer* AVBuffer::send()
 	}
 	dsvr->sendBuf(bufstr.c_str());
 	bufstr="";
-	//dsvr->showBuf(false); //James add
+	//dsvr->showBuf(false); 
 	return this;
 }
 
@@ -41,7 +41,7 @@ OVBuffer* AVBuffer::update()
 	dsvr->setBufString(bufstr.c_str());	
 	if(bufstr.length())
 	{
-	dsvr->showBuf(true); //James add
+		dsvr->showBuf(true); 
 	}
 	else
 	{

@@ -96,12 +96,17 @@ DisplayServer *DisplayServer::showStatus(bool t)
 }
 
 AVDisplayServer *DisplayServer::showBuf(bool t)
-{
-	murmur("AVDisplayServer *DisplayServer::showBuf");
+{		
 	if(t)
+	{
+		murmur("AVDisplayServer *DisplayServer::showBuf");
 		UIShowCompWindow();
+	}
 	else
+	{
+		murmur("AVDisplayServer *DisplayServer::hideBuf");
 		UIHideCompWindow();
+	}
 	return this;
 }
 
@@ -110,9 +115,15 @@ AVDisplayServer *DisplayServer::showCandi(bool t)
 	murmur("AVDisplayServer *DisplayServer::showCandi");
 	//james test
 	if(t)
+	{
+		murmur("AVDisplayServer *DisplayServer::showCandi");
 		UIShowCandWindow();
+	}
 	else
+	{
+		murmur("AVDisplayServer *DisplayServer::hideCandi");
 		UIHideCandWindow();
+	}
 	return this;
 }
 AVDisplayServer *DisplayServer::setCursorPos(int i)
