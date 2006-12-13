@@ -210,8 +210,10 @@ void _SetCompString(const std::wstring& Comp)
 {
 	//System::Diagnostics::Debug::WriteLine("Comp SetString");
 	CompFormAssembly::argCollection->Clear();
+	
 	CompFormAssembly::argCollection
 		->Add(dynamic_cast<Object*>((__gc new System::String(Comp.c_str()))));
+	
 	Object* param[] =
 		dynamic_cast<Object*[]>(CompFormAssembly::argCollection
 			->ToArray(System::Type::GetType("System.Object")));

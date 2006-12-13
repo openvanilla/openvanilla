@@ -99,6 +99,7 @@ void UISetCompStr(wchar_t* lpStr)
 	else
 	{
 		_ClearCompPage();
+		//UIHideCompWindow();
 	}
 
 	//	murmur("%1.3f sec:\tC# comp window, setstring", watch.getSec());
