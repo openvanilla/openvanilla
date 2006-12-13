@@ -39,7 +39,14 @@ OVBuffer* AVBuffer::send()
 OVBuffer* AVBuffer::update()
 {
 	dsvr->setBufString(bufstr.c_str());	
+	if(bufstr.length())
+	{
 	dsvr->showBuf(true); //James add
+	}
+	else
+	{
+		dsvr->showBuf(false);
+	}
 	return this;
 }
 OVBuffer* AVBuffer::update(int cursorPos, int markFrom=-1, int markTo=-1)
