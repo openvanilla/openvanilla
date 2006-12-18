@@ -43,8 +43,8 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		//<comment author='b6s'>
 		// When attached app lost focus, only this message occurred,
 		// so it must also hide following windows.
-		dsvr->showBuf(false);	
-		dsvr->showCandi(false);								
+		//dsvr->showBuf(false);	
+		//dsvr->showCandi(false);								
 		
 		//</comment>
 		break;
@@ -99,8 +99,8 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			LPMYPRIVATE lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 			CandX=ptSrc.x ;//+szOffset.cx;
 			CandY=ptSrc.y + szOffset.cy;
-			dsvr->moveBuf(CandX,CandY);
-			dsvr->moveCandi(CandX,CandY+40);
+			//dsvr->moveBuf(CandX,CandY);
+			//dsvr->moveCandi(CandX,CandY+40);
 			//RefreshUI(hWnd);
 		}
 		break;

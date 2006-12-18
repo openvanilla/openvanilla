@@ -324,8 +324,7 @@ void UICreateStatusWindow(HWND hUIWnd)
 	
 	//jaimie for C# menu set module name
 	//to set all available module names into C# menu list.
-	UIClearStatusMenuModString();
-	murmur ("module num=%d",loader->getInputMethodCount());
+	UIClearStatusMenuModString();	
 	for(int i = 0; i < loader->getInputMethodCount(); i++)
 	{
 		
@@ -496,6 +495,7 @@ void UISetMarkTo(int i)
 #endif
 void UIChangeModule(HWND hWnd)
 {
+
 	CompCursorPos=0;  //James test
     //TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
 	
@@ -518,6 +518,7 @@ void UIChangeModule(HWND hWnd)
 	wchar_t modNameUCS2[1024];
 	
 	AVLoader* loader = AVLoader::getLoader();
+	loader->closeModule();
 	wchar_t *modCurrentName;
 	//murmur("---> current IC %d", CurrentIC);
 	//murmur("---> loader->getInputMethodCount %d",loader->getInputMethodCount() );

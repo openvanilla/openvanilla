@@ -105,12 +105,13 @@ void RefreshUI(HWND hWnd )  //½Õ¾ãcomp cand
 	POINT pt;
 	if(CompX < 0) 
 	{
+		murmur("CompX<0");
 		LONG lRet = 0L;
  
-	static BOOL first = false;
-	LOGFONT* lfptr;
-	LOGFONT lf2;
-	RECT rec;
+		static BOOL first = false;
+		LOGFONT* lfptr;
+		LOGFONT lf2;
+		RECT rec;
 		SIZE szOffset;
 		HDC hDC;
 		POINT ptSrc;

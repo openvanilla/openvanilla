@@ -50,6 +50,7 @@ void UICreateCandWindow(HWND hUIWnd)
 	murmur("UICreateCandWindow");
 	if (!IsWindow(uiCand.hWnd))
 	{
+		
 		//SIZE sz;	sz.cx = sz.cy = 0;
 
 		/*<comment author='b6s'>

@@ -67,7 +67,30 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 
 	case WM_IME_SETCONTEXT:  //switch between windows
-		murmur("WM_IME_SETCONTEXT");					
+		murmur("WM_IME_SETCONTEXT");	
+		switch(lParam)
+		{
+			case ISC_SHOWUICANDIDATEWINDOW :
+				murmur("ISC_SHOWUICANDIDATEWINDOW ");
+				break;
+			case ISC_SHOWUICOMPOSITIONWINDOW :
+				murmur("ISC_SHOWUICOMPOSITIONWINDOW  ");
+				break;
+			case ISC_SHOWUIGUIDELINE :
+				murmur("ISC_SHOWUIGUIDELINE ");
+				break;
+			case ISC_SHOWUIALLCANDIDATEWINDOW :
+				murmur("ISC_SHOWUIALLCANDIDATEWINDOW");
+				break;
+			case ISC_SHOWUIALL :
+				murmur("ISC_SHOWUIALL");
+				break;
+			default:
+				murmur("default");
+				break;		
+		}
+		//CompX=-1;
+		//RefreshUI(hWnd);	
 		if (wParam) //switch in
 		{		
 			murmur("setcontext to hwnd:%x",hWnd);			
@@ -75,8 +98,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			{
 				murmur("if(hUICurIMC)=true, show all");
 				dsvr->showBuf(true);
-				dsvr->showCandi(true);				
-				RefreshUI(hWnd);				
+				dsvr->showCandi(true);											
 			}
 			else   // it is NULL input context. (?)
 			{				
