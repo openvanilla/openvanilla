@@ -97,8 +97,9 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			if (hUICurIMC)  //hUICurIMC==0 ªí¥Ü¥X¿ù(?)
 			{
 				murmur("if(hUICurIMC)=true, show all");
+				dsvr->lockIMC(hUICurIMC);
 				dsvr->showBuf(true);
-				dsvr->showCandi(true);											
+				dsvr->showCandi(true);				
 			}
 			else   // it is NULL input context. (?)
 			{				
@@ -117,7 +118,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	case WM_IME_STARTCOMPOSITION:
 		murmur("WM_IME_STARTCOMPOSITION");
-		//dsvr->showStatus(true);
+		dsvr->showStatus(true);
 		//dsvr->showBuf(true);
 		RefreshUI(hWnd);
 		//James comment
@@ -127,7 +128,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	case WM_IME_COMPOSITION:
 		murmur("WM_IME_COMPOSITION");		
 		RefreshUI(hWnd);
-		ImmUnlockIMC(hUICurIMC); 
+		//ImmUnlockIMC(hUICurIMC); 
 		break;
 
 	case WM_IME_ENDCOMPOSITION:
@@ -160,8 +161,10 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		dsvr->showStatus(false);
 		dsvr->showBuf(false);
 		dsvr->showCandi(false);
+		dsvr->releaseIMC();
 
 		loader->closeModule(); //also send buf to app
+		
 		break;
 
 	case WM_IME_RELOADCONFIG:

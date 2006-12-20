@@ -159,8 +159,8 @@ void RefreshUI(HWND hWnd )  //½Õ¾ãcomp cand
 	}
 	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
 	dsvr->moveBuf(CompX,CompY);												
-	dsvr->moveCandi(CompX,CompY+UIGetHeight());										
-	ImmUnlockIMCC(lpIMC->hPrivate);	
+	dsvr->moveCandi(CompX,CompY+UIGetHeight());	
+	
 	return;
 }
 

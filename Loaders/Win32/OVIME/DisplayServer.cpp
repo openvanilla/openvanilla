@@ -97,7 +97,7 @@ DisplayServer *DisplayServer::showStatus(bool t)
 
 AVDisplayServer *DisplayServer::showBuf(bool t)
 {		
-	if(t && wcslen(lpMyPrivate->PreEditStr))
+	if(t && lpMyPrivate->PreEditStr && wcslen(lpMyPrivate->PreEditStr))	
 	{
 		murmur("AVDisplayServer *DisplayServer::showBuf");
 		UIShowCompWindow();
@@ -113,7 +113,7 @@ AVDisplayServer *DisplayServer::showBuf(bool t)
 AVDisplayServer *DisplayServer::showCandi(bool t)
 {	
 	//james test
-	if(t && wcslen(lpMyPrivate->CandStr))
+	if(t &&  lpMyPrivate->CandStr && wcslen(lpMyPrivate->CandStr))	
 	{
 		murmur("AVDisplayServer *DisplayServer::showCandi");
 		UIShowCandWindow();
