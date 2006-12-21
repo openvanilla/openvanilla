@@ -142,7 +142,16 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 
 	case WM_IME_SELECT:
-		murmur("WM_IME_SELECT");
+		//Sent to an application when the operating system 
+		//     is about to change the current IME
+		if(wParam) //the indicated IME is selected
+		{
+			murmur("WM_IME_SELECT: selected.");
+		}
+		else
+		{
+			murmur("WM_IME_SELECT: specified IME is no longer selected.");
+		}		
 		break;
 
 	case WM_IME_CONTROL:
@@ -176,6 +185,29 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		//loader->connectDisplayServer(dsvr);
 		loader->reloadConfig();
 		
+		break;
+
+	case WM_NCCREATE:   
+		murmur("WM_NCCREATE");
+		break;
+		
+	case WM_NCDESTROY:   
+		murmur("WM_NCDESTROY");
+		break;
+		
+	case WM_NCCALCSIZE:   		
+		/* message is sent when the size and position of a 
+		window's client area must be calculated.
+		By processing this message, an application can 
+		control the content of the window's client area 
+		when the size or position of the window changes.*/
+		murmur("WM_NCCALCSIZE");
+		break;
+
+	case WM_DEVICECHANGE:   
+		//notifies an application of a change to the 
+		//hardware configuration of a device or the computer.
+		murmur("WM_DEVICECHANGE: wparam=%p",wParam);
 		break;
 
 	default:
