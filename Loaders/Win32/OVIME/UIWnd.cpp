@@ -187,20 +187,28 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		
 		break;
 
+
 	case WM_NCCREATE:   
-		murmur("WM_NCCREATE");
-		break;
+		if(!lParam) //ªÅ
+		{
+			murmur("WM_NCCREATE");
+			break;
+		}
+		else //«DªÅ
+		{
+			return DefWindowProc(hWnd,msg,wParam,lParam);
+		}
 		
 	case WM_NCDESTROY:   
 		murmur("WM_NCDESTROY");
 		break;
 		
 	case WM_NCCALCSIZE:   		
-		/* message is sent when the size and position of a 
-		window's client area must be calculated.
-		By processing this message, an application can 
-		control the content of the window's client area 
-		when the size or position of the window changes.*/
+		// message is sent when the size and position of a 
+		//window's client area must be calculated.
+		//By processing this message, an application can 
+		//control the content of the window's client area 
+		//when the size or position of the window changes.
 		murmur("WM_NCCALCSIZE");
 		break;
 
