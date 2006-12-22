@@ -90,9 +90,10 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
 		ReleaseDC(lpIMC->hWnd,hDC);
 		LPMYPRIVATE lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-		CandX=ptSrc.x ;//+szOffset.cx;
-		CandY=ptSrc.y + szOffset.cy;	
-		//RefreshUI(hWnd);
+		CompX=ptSrc.x ;//+szOffset.cx;
+		CompY=ptSrc.y + szOffset.cy;			
+		RefreshUI(hWnd);
+		//dsvr->moveCandi(CandX,CandY);
 		//not finished!!
 		break;
 		}

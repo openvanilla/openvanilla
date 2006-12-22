@@ -24,11 +24,13 @@ public:
 	virtual AVDisplayServer *setMarkTo(int i);	
 	virtual DisplayServer *moveBuf(int x,int y);
 	virtual DisplayServer *moveCandi(int x,int y);
+	virtual DisplayServer *SetCompStarted(bool t);
 private:
 	HIMC hIMC;
 	LPINPUTCONTEXT lpIMC;
 	LPCOMPOSITIONSTRING lpCompStr;
 	LPMYPRIVATE lpMyPrivate;
+	bool compStarted;
 };
 #endif //DISPLAYSERVER_H
 

@@ -20,7 +20,7 @@ extern int CompY;
 //James add
 extern int CandX;
 extern int CandY;
-extern bool isActive;
+extern bool compStarted;
 
 extern bool isChinese;
 extern bool isFullShape;

@@ -85,6 +85,16 @@ DisplayServer *DisplayServer::moveCandi(int x, int y)
 	return this;
 }
 
+DisplayServer *DisplayServer::SetCompStarted(bool t)
+{
+	if(t)
+		murmur("\t*DisplayServer::SetCompStarted=true");
+	else
+		murmur("\t*DisplayServer::SetCompStarted=false");
+	
+	compStarted=t;
+	return this;
+}
 DisplayServer *DisplayServer::showStatus(bool t)
 {	
 	if(t)
@@ -100,17 +110,21 @@ DisplayServer *DisplayServer::showStatus(bool t)
 	return this;
 }
 
+
 AVDisplayServer *DisplayServer::showBuf(bool t)
 {		
-	if(t && lpMyPrivate->PreEditStr && wcslen(lpMyPrivate->PreEditStr))	
+	if(compStarted)
 	{
-		murmur("\tAVDisplayServer *DisplayServer::showBuf");
-		UIShowCompWindow();
-	}
-	else
-	{
-		murmur("\tAVDisplayServer *DisplayServer::hideBuf");
-		UIHideCompWindow();
+		if(t && lpMyPrivate->PreEditStr && wcslen(lpMyPrivate->PreEditStr))	
+		{
+			murmur("\tAVDisplayServer *DisplayServer::showBuf");		
+			UIShowCompWindow();
+		}
+		else
+		{
+			murmur("\tAVDisplayServer *DisplayServer::hideBuf");
+			UIHideCompWindow();
+		}
 	}
 	return this;
 }

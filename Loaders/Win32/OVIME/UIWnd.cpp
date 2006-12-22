@@ -62,7 +62,11 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		UICreateNotifyWindow(hWnd);
 		break;
 
-	case WM_WINDOWPOSCHANGING: //The WM_WINDOWPOSCHANGING message is sent to a window whose size, position, or place in the Z order is about to change as a result of a call to the SetWindowPos function or another window-management function.
+	case WM_WINDOWPOSCHANGING: 
+		//The WM_WINDOWPOSCHANGING message is sent to 
+		//a window whose size, position, or place in the 
+		//Z order is about to change as a result of a call
+		//to the SetWindowPos function or another window-management function.
 		murmur("WM_WINDOWPOSCHANGING");
 		break;
 
@@ -90,7 +94,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 				break;		
 		}
 		//CompX=-1;
-		//RefreshUI(hWnd);	
+		//RefreshUI(hWnd);			
+		
 		if (wParam) //switch in
 		{		
 			murmur("\tsetcontext to hwnd:%x",hWnd);			
@@ -118,6 +123,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	case WM_IME_STARTCOMPOSITION:
 		murmur("WM_IME_STARTCOMPOSITION");
+		dsvr->SetCompStarted(true);
 		dsvr->showStatus(true);		
 		RefreshUI(hWnd);
 		//James comment
@@ -131,9 +137,10 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 
 	case WM_IME_ENDCOMPOSITION:
-		murmur("WM_IME_ENDCOMPOSITION");
+		murmur("WM_IME_ENDCOMPOSITION");				
 		dsvr->showBuf(false);
 		dsvr->showCandi(false);		
+		dsvr->SetCompStarted(false);
 		break;
 
 	case WM_IME_COMPOSITIONFULL:
@@ -143,6 +150,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	case WM_IME_SELECT:
 		//Sent to an application when the operating system 
 		//     is about to change the current IME
+		dsvr->SetCompStarted(false);
 		if(wParam) //the indicated IME is selected
 		{
 			murmur("WM_IME_SELECT: selected.");
