@@ -71,46 +71,46 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		switch(lParam)
 		{
 			case ISC_SHOWUICANDIDATEWINDOW :
-				murmur("ISC_SHOWUICANDIDATEWINDOW ");
+				murmur("\tISC_SHOWUICANDIDATEWINDOW ");
 				break;
 			case ISC_SHOWUICOMPOSITIONWINDOW :
-				murmur("ISC_SHOWUICOMPOSITIONWINDOW  ");
+				murmur("\tISC_SHOWUICOMPOSITIONWINDOW  ");
 				break;
 			case ISC_SHOWUIGUIDELINE :
-				murmur("ISC_SHOWUIGUIDELINE ");
+				murmur("\tISC_SHOWUIGUIDELINE ");
 				break;
 			case ISC_SHOWUIALLCANDIDATEWINDOW :
-				murmur("ISC_SHOWUIALLCANDIDATEWINDOW");
+				murmur("\tISC_SHOWUIALLCANDIDATEWINDOW");
 				break;
 			case ISC_SHOWUIALL :
-				murmur("ISC_SHOWUIALL");
+				murmur("\tISC_SHOWUIALL");
 				break;
 			default:
-				murmur("default");
+				murmur("\tdefault");
 				break;		
 		}
 		//CompX=-1;
 		//RefreshUI(hWnd);	
 		if (wParam) //switch in
 		{		
-			murmur("setcontext to hwnd:%x",hWnd);			
+			murmur("\tsetcontext to hwnd:%x",hWnd);			
 			if (hUICurIMC)  //hUICurIMC==0 表示出錯(?)
 			{
-				murmur("if(hUICurIMC)=true, show all");
+				murmur("\thUICurIMC==true, show all");
 				dsvr->lockIMC(hUICurIMC);
 				dsvr->showBuf(true);
 				dsvr->showCandi(true);				
 			}
 			else   // it is NULL input context. (?)
 			{				
-				murmur("if(hUICurIMC)=false, hide all");
+				murmur("\thUICurIMC==false, hide all");
 				dsvr->showBuf(false);
 				dsvr->showCandi(false);		
 			}
 		}
 		else //switch out
 		{
-			murmur("switch out, hide all");
+			murmur("\tswitch out, hide all");
 			dsvr->showBuf(false);
 			dsvr->showCandi(false);
 		}
@@ -118,8 +118,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	case WM_IME_STARTCOMPOSITION:
 		murmur("WM_IME_STARTCOMPOSITION");
-		dsvr->showStatus(true);
-		//dsvr->showBuf(true);
+		dsvr->showStatus(true);		
 		RefreshUI(hWnd);
 		//James comment
 		//Can we在start時先move到正確的座標?		
@@ -161,7 +160,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 
 	case WM_IME_NOTIFY:
-		murmur("WM_IME_NOTIFY: %p",wParam);
+		//murmur("WM_IME_NOTIFY: %p",wParam);
 		lRet = NotifyHandle(hUICurIMC, hWnd, msg, wParam, lParam);
 		break;
 
@@ -189,9 +188,9 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 
 	case WM_NCCREATE:   
+		murmur("WM_NCCREATE");
 		if(!lParam) //空
-		{
-			murmur("WM_NCCREATE");
+		{			
 			break;
 		}
 		else //非空
@@ -218,8 +217,24 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		murmur("WM_DEVICECHANGE: wparam=%p",wParam);
 		break;
 
+	case WM_WINDOWPOSCHANGED:   
+		murmur("WM_WINDOWPOSCHANGED");
+		break;
+
+	case WM_WININICHANGE:   
+		murmur("WM_WININICHANGE");
+		break;
+
+	case WM_MOVE:
+		murmur("WM_MOVE");
+		break;
+
+	case WM_SIZE:
+		murmur("WM_SIZE");
+		break;
+
 	default:
-		murmur("no this message,%p",msg);
+		murmur("Uncatched message,%p",msg);
 		return DefWindowProc(hWnd,msg,wParam,lParam);
 	}
 	return lRet;

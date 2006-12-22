@@ -23,7 +23,7 @@ AVDisplayServer *DisplayServer::setBufString(const char *str)
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
 	wcscpy(lpMyPrivate->PreEditStr, wstr);
 	MakeCompStr(lpMyPrivate, lpCompStr);
-	murmur(" ---> DisplayServer.cpp ");
+	murmur("\tAVDisplayServer *DisplayServer::setBufString(%s)",str);
 	UISetCompStr(lpMyPrivate->PreEditStr); 	//要不要先檢查有沒有PreEditStr有沒有東西？
 
 	return this;
@@ -58,7 +58,7 @@ AVDisplayServer *DisplayServer::setCandiString(const char *str)
 }
 AVDisplayServer *DisplayServer::showNotify(const char *str)
 {
-	murmur("AVDisplayServer *DisplayServer::showNotify");
+	murmur("\tAVDisplayServer *DisplayServer::showNotify");
 	wchar_t wstr[1024];
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
 	UIShowNotifyWindow(wstr);
@@ -73,25 +73,30 @@ AVDisplayServer *DisplayServer::hideNotify()
 
 DisplayServer *DisplayServer::moveBuf(int x, int y)
 {
-	murmur("AVDisplayServer *DisplayServer::moveBuf(%d,%d)",x,y);
+	murmur("\tAVDisplayServer *DisplayServer::moveBuf(%d,%d)",x,y);
 	UIMoveCompWindow(x,y);
 	return this;
 }
 
 DisplayServer *DisplayServer::moveCandi(int x, int y)
 {
-	murmur("AVDisplayServer *DisplayServer::moveCandi(%d,%d)",x,y);
+	murmur("\tAVDisplayServer *DisplayServer::moveCandi(%d,%d)",x,y);
 	UIMoveCandWindow(x,y);
 	return this;
 }
 
 DisplayServer *DisplayServer::showStatus(bool t)
-{
-	murmur("AVDisplayServer *DisplayServer::showStatus");
+{	
 	if(t)
+	{
+		murmur("\tAVDisplayServer *DisplayServer::showStatus");
 		UIShowStatusWindow();
+	}
 	else
+	{
+		murmur("\tAVDisplayServer *DisplayServer::hideStatus");
 		UIHideStatusWindow();
+	}
 	return this;
 }
 
@@ -99,12 +104,12 @@ AVDisplayServer *DisplayServer::showBuf(bool t)
 {		
 	if(t && lpMyPrivate->PreEditStr && wcslen(lpMyPrivate->PreEditStr))	
 	{
-		murmur("AVDisplayServer *DisplayServer::showBuf");
+		murmur("\tAVDisplayServer *DisplayServer::showBuf");
 		UIShowCompWindow();
 	}
 	else
 	{
-		murmur("AVDisplayServer *DisplayServer::hideBuf");
+		murmur("\tAVDisplayServer *DisplayServer::hideBuf");
 		UIHideCompWindow();
 	}
 	return this;
@@ -115,12 +120,12 @@ AVDisplayServer *DisplayServer::showCandi(bool t)
 	//james test
 	if(t &&  lpMyPrivate->CandStr && wcslen(lpMyPrivate->CandStr))	
 	{
-		murmur("AVDisplayServer *DisplayServer::showCandi");
+		murmur("\tAVDisplayServer *DisplayServer::showCandi");
 		UIShowCandWindow();
 	}
 	else
 	{
-		murmur("AVDisplayServer *DisplayServer::hideCandi");
+		murmur("\tAVDisplayServer *DisplayServer::hideCandi");
 		UIHideCandWindow();
 	}
 	return this;
@@ -128,7 +133,7 @@ AVDisplayServer *DisplayServer::showCandi(bool t)
 AVDisplayServer *DisplayServer::setCursorPos(int i)
 {
 	lpCompStr->dwCursorPos = i;
-	murmur("DisplayServer::setCursorPos-> %d",i);
+	murmur("\tDisplayServer::setCursorPos-> %d",i);
 	UISetCursorPos(lpCompStr->dwCursorPos);
 	return this;
 }

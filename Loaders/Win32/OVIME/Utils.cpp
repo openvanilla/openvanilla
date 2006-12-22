@@ -72,8 +72,7 @@ void UpdateCandidate(LPINPUTCONTEXT lpIMC, const wchar_t* candis)
 		for( int i = 0; i < rlen; i++ )
 		{
 			if(candis[i] == L' ' || i == rlen - 1)
-			{
-				murmur("UPDATE\n", NULL);
+			{				
 				int dst = i - 1;
 				if( i == rlen - 1)
 					dst = i + 1;
@@ -105,7 +104,7 @@ void RefreshUI(HWND hWnd )  //調整comp cand
 	POINT pt;
 	if(CompX < 0) 
 	{
-		murmur("CompX<0");
+		murmur("\tCompX<0");
 		LONG lRet = 0L;
  
 		static BOOL first = false;
@@ -120,7 +119,7 @@ void RefreshUI(HWND hWnd )  //調整comp cand
 		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
 		ClientToScreen(lpIMC->hWnd, &ptSrc);
 		hDC = GetDC(lpIMC->hWnd);
-		murmur("hWnd->%x", lpIMC->hWnd);
+		murmur("\thWnd->%x", lpIMC->hWnd);
 		GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
 		GetTextMetrics(hDC, &tm);
 		localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
@@ -157,9 +156,12 @@ void RefreshUI(HWND hWnd )  //調整comp cand
 		CompY = pt.y;*/
 		//murmur("fake setcompwindow");					
 	}
-	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
-	dsvr->moveBuf(CompX,CompY);												
-	dsvr->moveCandi(CompX,CompY+UIGetHeight());	
+//	else
+	{
+		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
+		dsvr->moveBuf(CompX,CompY);												
+		dsvr->moveCandi(CompX,CompY+UIGetHeight());	
+	}
 	
 	return;
 }

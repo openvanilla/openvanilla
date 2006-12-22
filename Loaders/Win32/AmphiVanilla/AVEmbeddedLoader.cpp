@@ -27,7 +27,7 @@ AVEmbeddedLoader::AVEmbeddedLoader()
 	m_cfg = new AVConfig();
 	m_dict = AVDictionary::getDict(m_cfg->getUserDir());
 	m_dict->setAutoFlush(true);
-	murmur("AVEmbeddedLoader::AVEmbeddedLoader()");	
+	murmur("\tAVEmbeddedLoader::AVEmbeddedLoader()");	
 	AVLoadEverything(m_cfg->getModuleDir(), m_srv, m_modlist);
 	sort(m_modlist.begin(), m_modlist.end(), sort_im(m_dict));
 }

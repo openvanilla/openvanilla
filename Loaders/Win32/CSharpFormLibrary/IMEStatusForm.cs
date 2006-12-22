@@ -295,12 +295,14 @@ namespace CSharpFormLibrary
 
 		public void ShowNoActive()
 		{
-			UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
+            if (!this.Visible)
+			    UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
 		}
 
         public void HideNoActive()
 		{
-			UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
+            if (this.Visible)
+			    UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
 		}
 
         public void SetLocation(int x, int y)

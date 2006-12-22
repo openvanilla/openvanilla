@@ -200,7 +200,7 @@ void UIShowCompWindow()
 	if(lpCompStr)
 	{
 		_SetCompCaretPosX(CompCursorPos);
-		murmur(" ---> CompCursorPos : %d", CompCursorPos);
+		murmur("\t---> CompCursorPos : %d", CompCursorPos);
 	}
 }
 
@@ -216,14 +216,14 @@ void UISetMarkFrom(int i)
 {
 	CompSelStart = i;
 	_SetCompMarkFrom(CompSelStart);
-	murmur( "---> UISetMarkFrom Start %d", CompSelStart);
+	murmur( "\t---> UISetMarkFrom Start %d", CompSelStart);
 }
 
 void UISetMarkTo(int i)
 {
 	CompSelEnd = i;
 	_SetCompMarkTo(CompSelEnd);
-	murmur( "---> UISetMarkFrom End %d", CompSelEnd);
+	murmur( "\t---> UISetMarkFrom End %d", CompSelEnd);
 }
 
 int UIGetHeight()

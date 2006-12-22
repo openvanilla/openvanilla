@@ -54,15 +54,14 @@ void AVLoader::loadModules()
 		if(!strcmp((*m)->moduleType(), "OVInputMethod")) {
 			if(!em->dict()->keyExist("enable")) {
 				em->dict()->setInteger("enable", 1);
-				tmpmod_vector.push_back(*m);
-				murmur("enable ");
+				tmpmod_vector.push_back(*m);				
 			} else {
 				if(em->dict()->getInteger("enable")) {
 					tmpmod_vector.push_back(*m);
-					murmur("enabled em_dict_name=%s",(*m)->identifier());
+					murmur("\tenabled em_dict_name=%s",(*m)->identifier());
 				}
 				else
-					murmur("disabled em_dict_name=%s",(*m)->identifier());
+					murmur("\tdisabled em_dict_name=%s",(*m)->identifier());
 			}
 		} else if(!strcmp((*m)->moduleType(), "OVOutputFilter")) {
 			if(em->dict()->getInteger("enable")) {
@@ -89,7 +88,7 @@ void AVLoader::initContext(int i)
 		OVInputMethod *im = reinterpret_cast<OVInputMethod*>(em->modlist()[i]);
 		em->dict()->setDict(im->identifier());
 		im->initialize(em->dict(), em->srv(), em->cfg()->getModuleDir());
-		murmur("InitContext %s", im->localizedName("zh_TW"));
+		murmur("\tInitContext %s", im->localizedName("zh_TW"));
 		ctx_vector.at(i) = im->newContext();
 	}
 }

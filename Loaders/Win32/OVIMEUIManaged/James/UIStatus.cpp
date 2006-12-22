@@ -320,7 +320,7 @@ void UICreateStatusWindow(HWND hUIWnd)
 	AVLoader* loader = AVLoader::getLoader();
 	wchar_t *modCurrentName;
 	wchar_t *modMenuName;
-	murmur("--->Current IC at create %d", CurrentIC);
+	murmur("UICreateStatusWindow, Current IC =%d", CurrentIC);
 	
 	//jaimie for C# menu set module name
 	//to set all available module names into C# menu list.

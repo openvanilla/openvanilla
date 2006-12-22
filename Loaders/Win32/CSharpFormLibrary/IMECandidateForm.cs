@@ -200,13 +200,13 @@ namespace CSharpFormLibrary
 		}
 		public void ShowNoActive()
 		{
-			Debug.WriteLine("ShowNoActive cand ");
-			UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
+            if (!this.Visible)
+			    UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
 		}
 		public void HideNoActive()
 		{
-			Debug.WriteLine("HideNoActive cand ");
-			UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
+            if (this.Visible)
+			    UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
 		}
 
 		private void IMECandidateForm_Click(object sender, System.EventArgs e)

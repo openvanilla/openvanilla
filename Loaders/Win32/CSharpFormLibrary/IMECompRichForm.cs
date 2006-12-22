@@ -38,13 +38,15 @@ namespace CSharpFormLibrary
             }
             base.WndProc(ref m);
         }
-        		public void ShowNoActive()
+        public void ShowNoActive()
 		{
-			UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
+            if(!this.Visible)
+			    UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
 		}
 		public void HideNoActive()
 		{
-			UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
+            if (this.Visible)
+			    UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
 		}
 		public void ClearComp()
 		{
@@ -57,11 +59,7 @@ namespace CSharpFormLibrary
 		public void SetComp(string inputs)
 		{
 
-            if (inputs == null)
-            {
-                //this.richTextBox1.Text.Remove(0);
-                return;
-            }
+			if(inputs==null) return;
 
             
             //if (inputs == null || this.textBox1.Text == inputs) return;
@@ -113,23 +111,21 @@ namespace CSharpFormLibrary
 
 		public void SetCaretX(int x)
 		{
-            //if ((x>0) && (compSelStart == compSelEnd))
-            //{
-                //if (compSelStart == 0)  compSelStart = 1;
-                //this.richTextBox1.Select(compSelStart - 1, 1);
-                //this.richTextBox1.SelectionBackColor = System.Drawing.Color.Blue;
-                //this.richTextBox1.SelectionColor = Color.White;
-                //this.label1.Left = ((currentAllCompStrLength) * (x) / CurrentAll);
-            //}
-            //else
+            if (compSelStart == compSelEnd)
+            {
+                if (compSelStart == 0)  compSelStart = 1;
+                this.richTextBox1.Select(compSelStart - 1, 1);
+                this.richTextBox1.SelectionBackColor = System.Drawing.Color.Blue;
+                this.richTextBox1.SelectionColor = Color.White;
+                this.label1.Left = ((currentAllCompStrLength) * (x) / CurrentAll);
+            }
+            else
             {
                 this.richTextBox1.Select(compSelStart, compSelEnd - compSelStart);
                 //this.richTextBox1.SelectionBackColor = System.Drawing.Color.Black;
                 this.richTextBox1.SelectionColor = Color.Red;
                 //this.richTextBox1.Width = this.richTextBox1.Width;
                 this.label1.Left = ((currentAllCompStrLength) * (x) / CurrentAll);
-                //compSelEnd = 0;
-                //compSelStart = 0;
             }
             //else
             //{
