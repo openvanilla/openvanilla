@@ -20,11 +20,15 @@ unsigned short convert(unsigned short s)
 {
     if ( s == 0x7684) return 0x5E95; //的->底
     if ( s == 0x5403) return 0x55AB; //吃->喫
-    if ( s == 0x5427) return 0x7F77; //吧->罷	
+    if ( s == 0x5427) return 0x7F77; //吧->罷
+    if ( s == 0x55CE) return 0x9EBC; //嗎->麼
+    if ( s == 0x561B) return 0x9EBC; //嘛->麼
     if ( s == 0x53EA) return 0x7947; //只->祇
     if ( s == 0x8702) return 0x882D; //蜂->蠭
     if ( s == 0x88E1) return 0x88CF; //裡->裏
-    if ( s == 0x554A) return 0x5406; //啊->吆		
+    if ( s == 0x554A) return 0x5466; //啊->呦
+    if ( s == 0x500B) return 0x7B87; //個->箇
+    if ( s == 0x770B) return 0x7785; //看->瞅	
     return s;
 }
 
