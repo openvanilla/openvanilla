@@ -35,6 +35,7 @@ namespace CSharpFormLibrary
         private System.Windows.Forms.ContextMenu contextMenu1;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Panel panel1;
+        private IMEButton imeButton1;
 		private System.Windows.Forms.Panel panel2;
 
 		public IMEStatusForm()
@@ -180,6 +181,7 @@ namespace CSharpFormLibrary
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.imeButton1 = new CSharpFormLibrary.IMEButton();
             this.button2 = new CSharpFormLibrary.IMEButton();
             this.button3 = new CSharpFormLibrary.IMEButton();
             this.button6 = new CSharpFormLibrary.IMEButton();
@@ -213,6 +215,7 @@ namespace CSharpFormLibrary
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.imeButton1);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.button6);
@@ -222,17 +225,32 @@ namespace CSharpFormLibrary
             this.panel2.Size = new System.Drawing.Size(560, 44);
             this.panel2.TabIndex = 8;
             // 
+            // imeButton1
+            // 
+            this.imeButton1.AppHWnd = ((ulong)(0ul));
+            this.imeButton1.BackColor = System.Drawing.Color.Transparent;
+            this.imeButton1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.imeButton1.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.imeButton1.Location = new System.Drawing.Point(404, 0);
+            this.imeButton1.Name = "imeButton1";
+            this.imeButton1.Size = new System.Drawing.Size(48, 44);
+            this.imeButton1.TabIndex = 6;
+            this.imeButton1.Text = "繁簡";
+            this.imeButton1.UseVisualStyleBackColor = false;
+            this.imeButton1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imeButton1_MouseUp);
+            // 
             // button2
             // 
             this.button2.AppHWnd = ((ulong)(0ul));
             this.button2.BackColor = System.Drawing.Color.Transparent;
             this.button2.ContextMenu = this.contextMenu1;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Left;
             this.button2.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.button2.Location = new System.Drawing.Point(404, 0);
+            this.button2.Location = new System.Drawing.Point(0, 0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(48, 44);
             this.button2.TabIndex = 1;
+            this.button2.Text = "模組";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
             // 
@@ -246,6 +264,7 @@ namespace CSharpFormLibrary
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(48, 44);
             this.button3.TabIndex = 2;
+            this.button3.Text = "中英";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button3_MouseUp);
             // 
@@ -315,6 +334,12 @@ namespace CSharpFormLibrary
 			if(isChinese)   this.button3.Text = "中";
 			else            this.button3.Text = "英";
 		}
+
+        public void SetSimpifiedOrTraditional(bool isTraditional)
+        {
+            if (isTraditional) this.imeButton1.Text = "繁";
+            else this.imeButton1.Text = "簡";
+        }
 
 		public void SetModString(string inputs)
 		{
@@ -434,17 +459,27 @@ namespace CSharpFormLibrary
             System.Diagnostics.Debug.WriteLine("status: context menu shown.");
         }
 
-        private void button3_MouseUp(object sender, MouseEventArgs e)
+        private void button3_MouseUp(object sender, MouseEventArgs e) //中英
         {
             int ret = UtilFuncs.SendMessage(
                 new IntPtr((long)m_AppHWnd),
                 (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
                 0xE, //IMN_PRIVATE
                 2);
-        }        
+        }
 
-        private void button6_MouseUp(object sender, MouseEventArgs e)
-        {                     
+        private void imeButton1_MouseUp(object sender, MouseEventArgs e) //繁簡
+        {
+            int ret = UtilFuncs.SendMessage(
+                new IntPtr((long)m_AppHWnd),
+                (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
+                0xE, //IMN_PRIVATE
+                4);
+        } 
+
+        private void button6_MouseUp(object sender, MouseEventArgs e) //設定
+        {
+            this.imeButton1.Text = "xxx";
             Process proc = new System.Diagnostics.Process();				
             proc.StartInfo.FileName="OVPreferences.exe";
             proc.StartInfo.WorkingDirectory = m_baseDir;	

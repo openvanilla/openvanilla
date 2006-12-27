@@ -23,6 +23,7 @@ void _ShowStatusPage();
 void _MoveStatusPage(int, int);
 void _HideStatusPage();
 void _SetStatusChiEng(bool);
+void _SetStatusSimpifiedOrTraditional(bool);
 void _SetStatusModString(const std::wstring&);
 void _SetStatusMenuModString(const std::wstring&);
 void _ClearStatusMenuModString();

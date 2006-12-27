@@ -24,6 +24,7 @@ extern bool compStarted;
 
 extern bool isChinese;
 extern bool isFullShape;
+extern bool isTraditional;
 extern DisplayServer *dsvr;
 extern AVLoader *loader;
 //extern MyOVDisplayServer dsvr;

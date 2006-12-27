@@ -168,7 +168,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 
 	case WM_IME_NOTIFY:
-		//murmur("WM_IME_NOTIFY: %p",wParam);
+		murmur("WM_IME_NOTIFY");
 		lRet = NotifyHandle(hUICurIMC, hWnd, msg, wParam, lParam);
 		break;
 
@@ -193,7 +193,6 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		loader->reloadConfig();
 		
 		break;
-
 
 	case WM_NCCREATE:   
 		murmur("WM_NCCREATE");
@@ -239,6 +238,10 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	case WM_SIZE:
 		murmur("WM_SIZE");
+		break;
+
+	case WM_GETTEXT:
+		murmur("WM_GETTEXT");
 		break;
 
 	default:

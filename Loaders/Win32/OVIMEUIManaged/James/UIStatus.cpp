@@ -436,9 +436,13 @@ void PaintStatusWindow(HWND hStatusWnd)
 
 void UIShowStatusWindow()
 {
+	murmur("UIShowStatusWindow()");
 	if (IsWindow(uiStatus.hWnd))
 	{
 		_SetStatusChiEng(isChinese);
+		if(isTraditional)	murmur("\tisTraditional=true");
+			else murmur("\tisTraditional=false");
+		_SetStatusSimpifiedOrTraditional(isTraditional);
 		_ShowStatusPage();
 
 		//ShowWindow(uiStatus.hWnd, SW_SHOWNOACTIVATE);
@@ -597,6 +601,7 @@ void UIChangeChiEng(HWND hWnd)
 	isChinese = !isChinese;
 	//SendMessage( hToolbar, TB_CHANGEBITMAP, ID_CHI_ENG, MAKELPARAM(isChinese ? 2 : 3, 0));
 	UIShowStatusWindow();
+	/*以下是模組要做的事情*/
 	HIMC imc = ImmGetContext( hIMEWnd );
 	if( imc )
 	{
@@ -610,3 +615,10 @@ void UIChangeChiEng(HWND hWnd)
 	}
 }
 
+void UIChangeSimpifiedOrTraditional(HWND hWnd)
+{
+	isTraditional = !isTraditional;
+	UIShowStatusWindow();
+	/*以下是模組要做的事情*/
+
+}

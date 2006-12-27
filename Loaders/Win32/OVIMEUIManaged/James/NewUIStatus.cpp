@@ -38,6 +38,9 @@ private:
 	static MethodInfo* methodStatusSetChiEng;
 	static bool hasMethodStatusSetChiEng = false;
 
+	static MethodInfo* methodStatusSetSimpifiedOrTraditional;
+	static bool hasMethodStatusSetSimpifiedOrTraditional = false;	
+
 	static MethodInfo* methodStatusSetDir;
 	static bool hasMethodStatusSetDir = false;
 
@@ -138,6 +141,17 @@ public:
 		return methodStatusSetChiEng;
 	}
 
+	static MethodInfo* StatusSetSimpifiedOrTraditional()
+	{
+		if(!hasMethodStatusSetSimpifiedOrTraditional)
+		{
+			methodStatusSetSimpifiedOrTraditional = 
+				StatusFormAssembly::StatusType()->GetMethod("SetSimpifiedOrTraditional");
+			hasMethodStatusSetSimpifiedOrTraditional = true;
+		}
+		return methodStatusSetSimpifiedOrTraditional;
+	}
+	
 	static MethodInfo* StatusSetDir()
 	{
 		if(!hasMethodStatusSetDir)
@@ -278,6 +292,16 @@ void _SetStatusChiEng(bool inChinese)
 			->ToArray(System::Type::GetType("System.Object")));
 	Object* ret =
 		StatusFormAssembly::StatusSetChiEng()->Invoke(StatusFormAssembly::StatusForm(), param);
+}
+void _SetStatusSimpifiedOrTraditional(bool isTraditional)
+{		
+	StatusFormAssembly::argCollection->Clear();
+	StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(isTraditional)));
+	Object* param[] =
+		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
+			->ToArray(System::Type::GetType("System.Object")));
+	Object* ret =
+		StatusFormAssembly::StatusSetSimpifiedOrTraditional()->Invoke(StatusFormAssembly::StatusForm(), param);
 }
 
 void _SetStatusModString(const std::wstring& statusModName)

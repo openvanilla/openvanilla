@@ -19,6 +19,7 @@ HWND hIMEWnd;
 HWND hToolbar;
 HMENU hIMESelMenu;
 bool isChinese = true;
+bool isTraditional = true;
 bool isFull = false;
 
 // InputContext

@@ -60,4 +60,5 @@ extern UICHILD uiNotify;
 extern std::vector<wchar_t*> IC;
 extern int CurrentIC;
 extern bool isChinese;
+extern bool isTraditional;
 extern bool isFull;

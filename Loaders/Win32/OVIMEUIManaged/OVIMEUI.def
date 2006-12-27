@@ -26,6 +26,8 @@ EXPORTS
 	UIChangeModule
 	UIChangeHalfFull
 	UIChangeChiEng
+	UIChangeSimpifiedOrTraditional
+	_SetStatusSimpifiedOrTraditional
 	_ShowCandPageArray
 	_SetCandString
 	_EndCandPage
@@ -65,4 +67,5 @@ EXPORTS
 	_SetCompCaretPosX	
 	_SetCompMarkFrom
 	_SetCompMarkTo
-	UIClearCompStr
+	UIClearCompStr	
+

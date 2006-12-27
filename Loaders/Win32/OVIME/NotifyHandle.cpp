@@ -155,6 +155,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 
 	case IMN_PRIVATE:
+		{
 		murmur("IMN_PRIVATE");
 		murmur("\thwnd=%x", hWnd);
 		switch(lParam) 
@@ -166,16 +167,21 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			UIChangeHalfFull(hWnd); //Change UI Half/Full
 			break;
 		case 2:
-			UIChangeChiEng(hWnd);  //Chnage UI CHI/ENG
+			UIChangeChiEng(hWnd);  //Change UI CHI/ENG
 			break;
 		case 3:
-			UIChangeModuleByMouse(hWnd);
+			UIChangeModuleByMouse(hWnd); 
+			break;
+		case 4:
+			murmur("\t4");
+			UIChangeSimpifiedOrTraditional(hWnd); // Change UI Traditional/Simplified Chinese
 			break;
 		default:
 			murmur("\tUknown IMN_PRIVATE");
 			break;
 		}
 		break;
+		}
 	default:
 		murmur("WM_IME_NOTIFY: no this wParam");
 		break;

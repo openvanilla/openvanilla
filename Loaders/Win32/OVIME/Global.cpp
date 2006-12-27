@@ -7,7 +7,8 @@ int CompY;
 int CandX;
 int CandY;
 bool isChinese = true;
+bool isTraditional = true;
 bool isFullShape = false;
-//bool isActive=true;
+
 DisplayServer *dsvr = new DisplayServer();
 AVLoader* loader;

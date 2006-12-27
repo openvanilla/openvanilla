@@ -254,6 +254,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\immdev.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\Framework\Headers\OpenVanilla.h"
 				>
 			</File>
