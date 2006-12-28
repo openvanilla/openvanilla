@@ -87,8 +87,8 @@ namespace CSharpFormLibrary
 
             //mark the next line for dynamic composition window length setting.
             //this.Width = (int)(rect.Right + 1.0f);
-            //currentAllCompStrLength = (int)(rect.Right + 1.0f);
-            currentAllCompStrLength = (int)(rect.Right);
+            currentAllCompStrLength = (int)(rect.Right + 1.0f);
+            //currentAllCompStrLength = (int)(rect.Right);
 #endif
             CurrentAll = inputs.Length;
             g.Dispose();
@@ -117,7 +117,7 @@ namespace CSharpFormLibrary
                 this.richTextBox1.Select(compSelStart - 1, 1);
                 this.richTextBox1.SelectionBackColor = System.Drawing.Color.Blue;
                 this.richTextBox1.SelectionColor = Color.White;
-                this.label1.Left = ((currentAllCompStrLength) * (x) / CurrentAll);
+                this.label1.Left = ((currentAllCompStrLength-3) * (x) / CurrentAll);
             }
             else
             {
