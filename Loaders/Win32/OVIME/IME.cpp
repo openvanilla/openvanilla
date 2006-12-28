@@ -1,3 +1,4 @@
+#define OV_DEBUG
 #include "OVIME.h"
 #include "AVKeyCode.h"
 #include "ExtraStructs.h"
@@ -142,6 +143,7 @@ ImeEscape(HIMC hIMC,UINT uSubFunc,LPVOID lpData)
 BOOL APIENTRY 
 ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 {
+	murmur("keycode=%ud",uVKey);
 	LPINPUTCONTEXT lpIMC;
 	LPCOMPOSITIONSTRING lpCompStr;
 	
@@ -185,9 +187,19 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		g_shiftPressedTime = -1;
 	}
 
-	if (/*uVKey == VK_SHIFT ||*/ uVKey == VK_CONTROL || uVKey == VK_MENU) 
-		return FALSE;
-	
+	if (/*uVKey == VK_SHIFT ||*/ uVKey == VK_CONTROL || uVKey == VK_MENU) 	
+	{
+		return FALSE; //<James comment> for app :"³æ³æ«ö ctrl ©Î alt"
+	}
+
+	if(LOWORD(uVKey) == VK_K && (lpbKeyState[VK_CONTROL] & 0x80)&& (lpbKeyState[VK_MENU] & 0x80) )
+	{
+		// Toggle Traditional / Simplified Chinese.
+		//Only Shift: lParam == 4
+		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 4);
+		return TRUE;  // ctrl+ alt +k		
+	}
+
 	if(LOWORD(uVKey) == VK_SPACE && (lpbKeyState[VK_CONTROL] & 0x80))
 		return TRUE;  //ctrl+space
 
@@ -195,7 +207,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	{
 		//shift+space: lParam == 1
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 1);	
-		return FALSE;  //shift+space
+		return FALSE;  //shift + space
 	}
 
 	//Change the module by Ctrl+"\"

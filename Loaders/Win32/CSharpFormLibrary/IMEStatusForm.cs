@@ -242,6 +242,7 @@ namespace CSharpFormLibrary
             // button2
             // 
             this.button2.AppHWnd = ((ulong)(0ul));
+            this.button2.AutoSize = true;
             this.button2.BackColor = System.Drawing.Color.Transparent;
             this.button2.ContextMenu = this.contextMenu1;
             this.button2.Dock = System.Windows.Forms.DockStyle.Left;
@@ -285,6 +286,7 @@ namespace CSharpFormLibrary
             // IMEStatusForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(624, 44);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -298,6 +300,7 @@ namespace CSharpFormLibrary
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
 		}

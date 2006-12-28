@@ -160,21 +160,21 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		murmur("\thwnd=%x", hWnd);
 		switch(lParam) 
 		{
-		case 0:
+		case 0: //Change Modules by ctrl +'\'
 			UIChangeModule(hWnd);
 			break;
-		case 1:
-			UIChangeHalfFull(hWnd); //Change UI Half/Full
+		case 1: //Change UI Half/Full
+			UIChangeHalfFull(hWnd); 
 			break;
-		case 2:
-			UIChangeChiEng(hWnd);  //Change UI CHI/ENG
+		case 2:  //Change UI CHI/ENG
+			UIChangeChiEng(hWnd);  
 			break;
-		case 3:
+		case 3: //Change Modules by Mouse
 			UIChangeModuleByMouse(hWnd); 
 			break;
-		case 4:
+		case 4: // Change UI Traditional/Simplified Chinese
 			murmur("\t4");
-			UIChangeSimpifiedOrTraditional(hWnd); // Change UI Traditional/Simplified Chinese
+			UIChangeSimpifiedOrTraditional(hWnd); 
 			break;
 		default:
 			murmur("\tUknown IMN_PRIVATE");
