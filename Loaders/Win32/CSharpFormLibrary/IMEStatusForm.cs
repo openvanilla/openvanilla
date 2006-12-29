@@ -345,23 +345,12 @@ namespace CSharpFormLibrary
         }
 
 		public void SetModString(string inputs)
-		{
-			if(inputs == null) return;
-            
-			if(inputs.Length >10)
-				this.button2.Width = (inputs.Length)*10;
-			else
-				this.button2.Width = (inputs.Length)*2*10;
-            
-            this.button3.Left = this.button2.Right;
-			this.button6.Left = this.button3.Right;
-            
-            this.Width = this.label1.Width+ this.button2.Width 
-				+ this.button3.Width +this.button6.Width ;
-			//inputs = inputs.Length + inputs;
-            
-			this.button2.Text = inputs;
-			//button2.ContextMenu.Show(button2, new System.Drawing.Point(0, button2.Height));			
+		{            
+			if(inputs == null) return;            
+            this.button2.Text = inputs;
+            this.button2.Width = 0;  //autosize it        
+            this.Width = this.label1.Width+ this.button2.Width+ this.imeButton1.Width
+				+ this.button3.Width +this.button6.Width ;			            			
 		}
 
         public void ClearMenuModString()
