@@ -21,6 +21,7 @@ namespace CSharpFormLibrary
         private int currentAllCompStrLength = 0;
         private Label label2;//composition window那塊圖的大小
         private int singleCaretHightlight = 0;
+        private int caretPosX = 0;
 
         private int compSelStart = 0;
         private int compSelEnd = 0;
@@ -108,15 +109,29 @@ namespace CSharpFormLibrary
             }
             return this.Height;
         }
+        public int GetCaretPosX()
+        {
+            try
+            {
+                System.Diagnostics.Debug.WriteLine("c# comp GetCaretPosX = " + caretPosX);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.StackTrace);
+            }
+            return caretPosX;
+        }
 
 		public void SetCaretX(int x)
 		{
+            caretPosX = (currentAllCompStrLength - 3) * (x) / CurrentAll;
+            
             if (compSelStart == compSelEnd)
             {
                 if (compSelStart == 0)  compSelStart = 1;
                 this.richTextBox1.Select(compSelStart - 1, 1);
-                this.richTextBox1.SelectionBackColor = System.Drawing.Color.Blue;
-                this.richTextBox1.SelectionColor = Color.White;
+                //this.richTextBox1.SelectionBackColor = System.Drawing.Color.Blue;
+                //this.richTextBox1.SelectionColor = Color.White;
                 this.label1.Left = ((currentAllCompStrLength-3) * (x) / CurrentAll);
             }
             else
@@ -125,7 +140,7 @@ namespace CSharpFormLibrary
                 //this.richTextBox1.SelectionBackColor = System.Drawing.Color.Black;
                 this.richTextBox1.SelectionColor = Color.Red;
                 //this.richTextBox1.Width = this.richTextBox1.Width;
-                this.label1.Left = ((currentAllCompStrLength) * (x) / CurrentAll);
+                this.label1.Left = ((currentAllCompStrLength-3) * (x) / CurrentAll);
             }
             //else
             //{
