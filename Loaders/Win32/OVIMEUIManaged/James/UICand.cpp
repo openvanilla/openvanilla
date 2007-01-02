@@ -158,9 +158,10 @@ void UIMoveCandWindow(int X, int Y)
 	{
 		//int newX=X+(CompCursorPos-1)*((int)lpStr);
 		//int newY=Y+((int)lpStr);		
-		int newX=X+(CompCursorPos)*21 ;
+		//int newX=X+(CompCursorPos)*21 ;
+		int newX=X ;
 		int newY=Y;		
-		if (IsWindow(uiCand.hWnd))
+		//if (IsWindow(uiCand.hWnd))
 		{		
 			RECT screenrc;
 			SystemParametersInfo(SPI_GETWORKAREA,0,&screenrc,0);
@@ -171,8 +172,8 @@ void UIMoveCandWindow(int X, int Y)
 			Watch watch;
 			watch.start();
 			_MoveCandPage(newX,newY);				
-			uiCand.pt.x=newX;
-			uiCand.pt.y=newY;
+			//uiCand.pt.x=newX;
+			//uiCand.pt.y=newY;
 			watch.stop();
 			murmur("%1.3f sec:\tC# candidate window, move to (%d,%d)", watch.getSec(),newX,newY);
 		}		

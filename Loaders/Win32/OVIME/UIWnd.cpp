@@ -101,16 +101,19 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			murmur("\tsetcontext to hwnd:%x",hWnd);			
 			if (hUICurIMC)  //hUICurIMC==0 表示出錯(?)
 			{
-				murmur("\thUICurIMC==true, show all");
-				dsvr->lockIMC(hUICurIMC);
-				dsvr->showBuf(true);
-				dsvr->showCandi(true);				
+				murmur("\thUICurIMC==true");
+				if(lParam & ISC_SHOWUICOMPOSITIONWINDOW) // not sure
+				{				
+					dsvr->lockIMC(hUICurIMC);
+					dsvr->showBuf(true);
+				}
+				//dsvr->showCandi(true); //註解掉因為切開就應該 send buf了		
 			}
 			else   // it is NULL input context. (?)
 			{				
 				murmur("\thUICurIMC==false, hide all");
 				dsvr->showBuf(false);
-				dsvr->showCandi(false);		
+				//dsvr->showCandi(false);		
 			}
 		}
 		else //switch out

@@ -30,7 +30,8 @@ private:
 	LPINPUTCONTEXT lpIMC;
 	LPCOMPOSITIONSTRING lpCompStr;
 	LPMYPRIVATE lpMyPrivate;
-	bool compStarted;
+public:
+	bool compStarted; //為了在Utils.cpp計算有無comp window的座標 暫改成public
 };
 #endif //DISPLAYSERVER_H
 
