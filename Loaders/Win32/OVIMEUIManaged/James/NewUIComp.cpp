@@ -338,6 +338,13 @@ int _GetHeight()
 	return Convert::ToInt32(rtnValue);
 }
 
+int _GetCaretPosX()
+{	
+	MethodInfo* methodGetValue = CompFormAssembly::CompType()->GetMethod("GetCaretPosX");
+	Object* rtnValue = methodGetValue->Invoke(CompFormAssembly::CompForm(),NULL);
+	return Convert::ToInt32(rtnValue);
+}
+
 void _ShowCompPageArray(const std::vector<std::wstring>& Comp)
 {
 	/*

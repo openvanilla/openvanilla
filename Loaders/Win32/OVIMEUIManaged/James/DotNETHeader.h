@@ -14,6 +14,7 @@ void _ClearCandPage();
 HWND _CreateCompPage();
 void _ShowCompPage();
 int _GetHeight();
+int _GetCaretPosX();
 void _HideCompPage();
 void _ClearCompPage();
 void _MoveCompPage(int x, int y);

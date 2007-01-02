@@ -230,3 +230,8 @@ int UIGetHeight()
 {
 	return _GetHeight();
 }
+
+int UIGetCaretPosX()
+{
+	return _GetCaretPosX();
+}
