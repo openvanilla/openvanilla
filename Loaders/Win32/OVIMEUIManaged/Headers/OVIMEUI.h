@@ -46,6 +46,7 @@ void UIMoveCompWindow(int, int);
 void UIShowCompWindow();
 void UIHideCompWindow();
 int UIGetHeight();
+int UIGetCaretPosX();
 void UISetCompStr(wchar_t*);
 void UISetCompCaretPosX(int);
 void UISetMarkFrom(int);
