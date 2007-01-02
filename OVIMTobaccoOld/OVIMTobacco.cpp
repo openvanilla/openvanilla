@@ -542,18 +542,21 @@ int OVIMTobaccoContext::keyPrintable() {
     if (!seq.isEmpty()) {
 		seq.isHsuLayout = false;
 		const char* ename = parent->localizedName("en");
-		if (strcmp("PhoneticHsu", ename) == 0) {
+		if (strcmp("PhoneticHsu", ename) == 0)
 			seq.isHsuLayout = true;
-			if(seq.isHsuEndKeyTriggered())
-				return keyCompose();
-		}
+
+		if (parent->cfgMaxSeqLen > 0 &&
+			seq.length() >= parent->cfgMaxSeqLen)
+			return keyCompose();
+
+		if(seq.isHsuLayout && seq.isHsuEndKeyTriggered())
+			return keyCompose();
 		else if (parent->isEndKey(k->code())) {
             freshBuffer();
             return keyCompose();
         }
-        else if (parent->doAutoCompose()) {
+        else if (parent->doAutoCompose())
             return keyCompose();
-        }
     }
     freshBuffer();
     return 1;

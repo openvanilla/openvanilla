@@ -70,6 +70,8 @@ bool hsuKeyToBpmf (const char* keyStr, string& bpmfStr) {
 		bpmfVec.push_back(" ");
 	if(length >= 10)
 		bpmfVec.push_back(" ");
+	if(length > 12)
+		return false;
 
 	for (size_t i = 0; i < strlen(keyStr); i++) {
 		char key = keyStr[i], keyNext;
