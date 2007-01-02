@@ -68,4 +68,6 @@ EXPORTS
 	_SetCompMarkFrom
 	_SetCompMarkTo
 	UIClearCompStr	
+	UIGetCaretPosX
+	_GetCaretPosX
 
