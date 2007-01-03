@@ -1,4 +1,3 @@
-#define OV_DEBUG
 #include <stdio.h>
 #include "PCMan.h"
 #include "DotNETHeader.h"
@@ -235,11 +234,10 @@ TBBUTTON toolbar_btns[]={
 void UICreateStatusWindow(HWND hUIWnd)
 {
 	//murmur("-----> UICreateStatusWindow");
-	
 	if (!IsWindow(uiStatus.hWnd))
 	{
 		uiStatus.hWnd = _CreateStatusPage();
-		murmur("UICreateStatusWindow: hUIWnd -> %x", hUIWnd);
+		//murmur("UICreateStatusWindow: hUIWnd -> %x", hUIWnd);
 		_SetStatusAppHWnd(hUIWnd);
 		//_MoveStatusPage(300,300);
 		//_ShowStatusPage();

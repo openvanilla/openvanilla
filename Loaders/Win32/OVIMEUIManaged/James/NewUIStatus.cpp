@@ -227,8 +227,7 @@ HWND _CreateStatusPage()//create
 }
 
 void _SetStatusAppHWnd(HWND hwnd)
-{
-	murmur("_SetStatusAppHWnd: hwnd -> %x", hwnd);
+{	
 	try{		
 		UInt64 handle = (UInt64)hwnd;		
 		StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(handle)));

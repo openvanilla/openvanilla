@@ -12,9 +12,19 @@ AVDisplayServer *DisplayServer::lockIMC(HIMC h)
 }
 AVDisplayServer *DisplayServer::releaseIMC()
 {
-	ImmUnlockIMCC(lpIMC->hPrivate);
-	ImmUnlockIMCC(lpIMC->hCompStr);
-	ImmUnlockIMC(hIMC);
+	murmur("\tlpIMC=%x",lpIMC);
+	murmur("\tlpIMC->hPrivate=%x",lpIMC->hPrivate);
+	murmur("\tlpIMC->hCompStr=%x",lpIMC->hCompStr);
+	murmur("\thIMC=%x",hIMC);
+	if(lpIMC)
+	{
+		if(lpIMC->hPrivate)
+			ImmUnlockIMCC(lpIMC->hPrivate);
+		if(lpIMC->hCompStr)
+			ImmUnlockIMCC(lpIMC->hCompStr);
+	}
+	if(hIMC)
+		ImmUnlockIMC(hIMC);
 	return this;
 }
 AVDisplayServer *DisplayServer::setBufString(const char *str)
@@ -134,13 +144,13 @@ AVDisplayServer *DisplayServer::showCandi(bool t)
 	//james test
 	if(t &&  lpMyPrivate->CandStr && wcslen(lpMyPrivate->CandStr))	
 	{
-		murmur("\tAVDisplayServer *DisplayServer::showCandi");
 		UIShowCandWindow();
+		murmur("\tAVDisplayServer *DisplayServer::showCandi");		
 	}
 	else
-	{
-		murmur("\tAVDisplayServer *DisplayServer::hideCandi");
+	{		
 		UIHideCandWindow();
+		murmur("\tAVDisplayServer *DisplayServer::hideCandi");
 	}
 	return this;
 }

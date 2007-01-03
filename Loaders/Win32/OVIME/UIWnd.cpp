@@ -55,11 +55,14 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		murmur("WM_CREATE");
 		loader=AVLoader::getLoader();
 		loader->connectDisplayServer(dsvr);
+		
 		CompX = CompY = -1;
 //		UISCompWindow(hWnd);
 		UICreateCompWindow(hWnd);
 		UICreateCandWindow(hWnd);
 		UICreateNotifyWindow(hWnd);
+
+		//dsvr->lockIMC(hUICurIMC); //這邊 lock hPrivate 會 exception
 		break;
 
 	case WM_WINDOWPOSCHANGING: 
@@ -180,8 +183,9 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		dsvr->showStatus(false);
 		dsvr->showBuf(false);
 		dsvr->showCandi(false);
-		dsvr->releaseIMC();
 
+		dsvr->releaseIMC(); // 裡面 access "lpIMC" 出現 exception
+		
 		loader->closeModule(); //also send buf to app
 		
 		break;

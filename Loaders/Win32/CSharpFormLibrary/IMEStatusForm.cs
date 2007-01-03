@@ -310,9 +310,9 @@ namespace CSharpFormLibrary
         public void SetAppHWnd(UInt64 HWND)
         {
             m_AppHWnd = HWND;
-            System.Diagnostics.Debug.WriteLine("AppHWnd set: " + m_AppHWnd);
+            //System.Diagnostics.Debug.WriteLine("AppHWnd set: " + m_AppHWnd);
             this.button2.AppHWnd = m_AppHWnd;
-            System.Diagnostics.Debug.WriteLine("button2.AppHWnd: " + this.button2.AppHWnd);
+            //System.Diagnostics.Debug.WriteLine("button2.AppHWnd: " + this.button2.AppHWnd);
         }
 
 		public void ShowNoActive()
@@ -474,16 +474,19 @@ namespace CSharpFormLibrary
 
         private void button6_MouseUp(object sender, MouseEventArgs e) //³]©w
         {
-            this.imeButton1.Text = "xxx";
-            Process proc = new System.Diagnostics.Process();				
+            string pre_file = m_userDir + "config.xml";            
+            Process proc = new System.Diagnostics.Process();            
             proc.StartInfo.FileName="OVPreferences.exe";
-            proc.StartInfo.WorkingDirectory = m_baseDir;	
+            proc.StartInfo.WorkingDirectory = m_baseDir;
+
+            Debug.WriteLine(m_AppHWnd.ToString("x"));
+            //exception!
             int ret = UtilFuncs.SendMessage(
                    new IntPtr((long)m_AppHWnd),
                    (uint)UtilFuncs.WindowsMessage.WM_DESTROY,
-                   0, 0);
-                                  
-            string pre_file = m_userDir+"config.xml";
+                   0, 0);            
+
+            
             System.IO.FileInfo foo = new System.IO.FileInfo(pre_file);
             proc.Start();
             System.Threading.Thread.Sleep(1000); //is necessary!!
@@ -497,8 +500,7 @@ namespace CSharpFormLibrary
                 dt = foo.LastWriteTime;
                 if (dt.Minute != m || dt.Second != s)
                 {
-                    proc.Kill();
-                    proc.Dispose();
+                    proc.Kill();                    
                     break;
                 }
                 //Debug.WriteLine(dt.Minute + ":" + dt.Second + "\t" + m + ":" + s);               
