@@ -348,7 +348,7 @@ namespace CSharpFormLibrary
 		{            
 			if(inputs == null) return;            
             this.button2.Text = inputs;
-            this.button2.Width = 0;  //autosize it        
+            //this.button2.Width = 0;  //autosize it        
             this.Width = this.label1.Width+ this.button2.Width+ this.imeButton1.Width
 				+ this.button3.Width +this.button6.Width ;			            			
 		}

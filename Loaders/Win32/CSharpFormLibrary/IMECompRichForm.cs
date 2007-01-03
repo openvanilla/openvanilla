@@ -66,6 +66,7 @@ namespace CSharpFormLibrary
             //if (inputs == null || this.textBox1.Text == inputs) return;
             /* *** Comments due to OVIME.VC8.sln <Jaimie> *************/
             /* *** postpone this merge until fully upgrade to VC8 *****/
+            /*
             Graphics g = this.richTextBox1.CreateGraphics();
             Size s;
             Size proposedSize1 = new Size();
@@ -75,7 +76,7 @@ namespace CSharpFormLibrary
 #if true
             System.Drawing.StringFormat format = new System.Drawing.StringFormat();
 
-            System.Drawing.RectangleF rect = new System.Drawing.RectangleF(0, 0, 1000, 1000);
+            System.Drawing.RectangleF rect = new System.Drawing.RectangleF(0, 0, 1000, 100);
 
             System.Drawing.CharacterRange[] ranges = 
              { new System.Drawing.CharacterRange(0, inputs.Length) };
@@ -86,15 +87,17 @@ namespace CSharpFormLibrary
             regions = g.MeasureCharacterRanges(inputs, this.richTextBox1.Font, rect, format);
             rect = regions[0].GetBounds(g);
 
-            //mark the next line for dynamic composition window length setting.
-            //this.Width = (int)(rect.Right + 1.0f);
-            currentAllCompStrLength = (int)(rect.Right + 1.0f);
-            //currentAllCompStrLength = (int)(rect.Right);
-#endif
-            CurrentAll = inputs.Length;
+            //mark the next line for dynamic composition window length setting.                                              
+            //currentAllCompStrLength = (int)(rect.Right + 1.0f);
+            currentAllCompStrLength = (int)(rect.Right);
             g.Dispose();
-            //inputs = inputs + '　';
-            this.richTextBox1.Text = inputs;
+            //CurrentAll = inputs.Length;
+            //this.Width = (int)(rect.Right + 2.0f);  
+#endif
+            */
+            this.richTextBox1.Text = inputs;            
+            Point pt = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.Text.Length);
+            this.Width = pt.X+10;                        
         }
 
         public int GetHeight()
@@ -123,29 +126,27 @@ namespace CSharpFormLibrary
         }
 
 		public void SetCaretX(int x)
-		{
-            caretPosX = (currentAllCompStrLength - 3) * (x) / CurrentAll;
-            
-            if (compSelStart == compSelEnd)
+		{            
+            Point pt = this.richTextBox1.GetPositionFromCharIndex(x);
+            caretPosX = pt.X+1;
+            //caretPosX = (currentAllCompStrLength) * (x) / CurrentAll;
+    
+            if (compSelStart == compSelEnd) //已經組字
             {
                 if (compSelStart == 0)  compSelStart = 1;
                 this.richTextBox1.Select(compSelStart - 1, 1);
                 //this.richTextBox1.SelectionBackColor = System.Drawing.Color.Blue;
-                //this.richTextBox1.SelectionColor = Color.White;
-                this.label1.Left = ((currentAllCompStrLength-3) * (x) / CurrentAll);
+                //this.richTextBox1.SelectionColor = Color.White;                
+                this.label1.Left = caretPosX;                
             }
-            else
+            else //正在組字
             {
                 this.richTextBox1.Select(compSelStart, compSelEnd - compSelStart);
                 //this.richTextBox1.SelectionBackColor = System.Drawing.Color.Black;
                 this.richTextBox1.SelectionColor = Color.Red;
-                //this.richTextBox1.Width = this.richTextBox1.Width;
-                this.label1.Left = ((currentAllCompStrLength-3) * (x) / CurrentAll);
+                //this.richTextBox1.Width = this.richTextBox1.Width;                
             }
-            //else
-            //{
-            //    this.label1.Left = 0;
-            //}
+            
         }
 
         public void CompMarkFrom(int x)
