@@ -235,7 +235,7 @@ TBBUTTON toolbar_btns[]={
 void UICreateStatusWindow(HWND hUIWnd)
 {
 	//murmur("-----> UICreateStatusWindow");
-	_SetUserDir();//設定路徑
+	
 	if (!IsWindow(uiStatus.hWnd))
 	{
 		uiStatus.hWnd = _CreateStatusPage();
@@ -244,7 +244,7 @@ void UICreateStatusWindow(HWND hUIWnd)
 		//_MoveStatusPage(300,300);
 		//_ShowStatusPage();
 		hIMEWnd = hUIWnd;
-
+		_SetUserDir();//設定路徑
 //<comment author='b6s'>Jaimie is working on porting these actions to C#
 /*
 		SIZE sz;

@@ -375,7 +375,10 @@ namespace CSharpFormLibrary
 		{
             m_baseDir = baseDir;
             m_moduleDir = moduleDir;
-            m_userDir = userDir;            
+            m_userDir = userDir;
+            Debug.WriteLine(m_baseDir);
+            Debug.WriteLine(m_moduleDir);
+            Debug.WriteLine(m_userDir);
         }
 
         public int GetSelectedModuleIndex()
@@ -501,7 +504,7 @@ namespace CSharpFormLibrary
                 //Debug.WriteLine(dt.Minute + ":" + dt.Second + "\t" + m + ":" + s);               
                 System.Threading.Thread.Sleep(500);            
             }
-            Debug.WriteLine("out");
+            Debug.WriteLine("m_AppHWnd="+m_AppHWnd.ToString());
                 ret = UtilFuncs.SendMessage(
                   new IntPtr((long)m_AppHWnd),
                   (uint)UtilFuncs.WindowsMessage.WM_IME_RELOADCONFIG,

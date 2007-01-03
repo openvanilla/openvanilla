@@ -1,3 +1,4 @@
+#define OV_DEBUG
 #include <vector>
 //#include <windows.h>
 #include "PCMan.h"
@@ -229,13 +230,14 @@ void _SetStatusAppHWnd(HWND hwnd)
 {
 	murmur("_SetStatusAppHWnd: hwnd -> %x", hwnd);
 	try{		
-		UInt64 handle = (UInt64)hwnd;
-		murmur("_SetStatusAppHWnd: handle -> %ud", handle);
+		UInt64 handle = (UInt64)hwnd;		
 		StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(handle)));
 		Object* param[] =
 			dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
 				->ToArray(System::Type::GetType("System.Object")));
-		StatusFormAssembly::StatusType()->GetMethod("SetAppHWnd")->Invoke(StatusFormAssembly::StatusForm(), param);
+		StatusFormAssembly::StatusType()
+			->GetMethod("SetAppHWnd")
+			->Invoke(StatusFormAssembly::StatusForm(), param);
 	} catch(System::Exception* e) {
 		Debug::WriteLine(e->StackTrace);
 	}
@@ -368,5 +370,6 @@ void _SetUserDir()
 		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
 			->ToArray(System::Type::GetType("System.Object")));
 	
-	StatusFormAssembly::StatusSetDir()->Invoke(StatusFormAssembly::StatusForm(), param);
+	StatusFormAssembly::StatusSetDir()
+		->Invoke(StatusFormAssembly::StatusForm(), param);
 }
