@@ -184,7 +184,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		dsvr->showBuf(false);
 		dsvr->showCandi(false);
 
-		//dsvr->releaseIMC(); // 裡面 access "lpIMC" 出現 exception
+		dsvr->releaseIMC(); // 裡面 access "lpIMC" 出現 exception
 		
 		loader->closeModule(); //also send buf to app
 		

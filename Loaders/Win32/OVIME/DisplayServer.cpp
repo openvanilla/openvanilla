@@ -12,19 +12,21 @@ AVDisplayServer *DisplayServer::lockIMC(HIMC h)
 }
 AVDisplayServer *DisplayServer::releaseIMC()
 {
-	murmur("\tlpIMC=%x",lpIMC);
-	murmur("\tlpIMC->hPrivate=%x",lpIMC->hPrivate);
-	murmur("\tlpIMC->hCompStr=%x",lpIMC->hCompStr);
-	murmur("\thIMC=%x",hIMC);
-	if(lpIMC)
+	if(lpMyPrivate)
 	{
-		if(lpIMC->hPrivate)
-			ImmUnlockIMCC(lpIMC->hPrivate);
-		if(lpIMC->hCompStr)
-			ImmUnlockIMCC(lpIMC->hCompStr);
+		ImmUnlockIMCC(lpIMC->hPrivate);
+		lpMyPrivate=NULL;
+	}
+	if(lpCompStr)
+	{
+		ImmUnlockIMCC(lpIMC->hCompStr);
+		lpCompStr=NULL;
 	}
 	if(hIMC)
+	{
 		ImmUnlockIMC(hIMC);
+		hIMC=NULL;
+	}
 	return this;
 }
 AVDisplayServer *DisplayServer::setBufString(const char *str)

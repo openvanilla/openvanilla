@@ -9,6 +9,13 @@
 class DisplayServer : public AVDisplayServer
 {
 public:
+	DisplayServer()
+	{
+		hIMC=NULL;
+		lpIMC=NULL;
+		lpCompStr=NULL;
+		lpMyPrivate=NULL;
+	}
 	AVDisplayServer *lockIMC(HIMC h);
 	AVDisplayServer *releaseIMC();
 	virtual AVDisplayServer *setBufString(const char *str);
