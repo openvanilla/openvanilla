@@ -744,16 +744,14 @@ int OVIMTobaccoContext::setCandidate() {
         candi=NULL;
     }
 
-    size_t choosingIndex = -1;
-    if(parent->doChooseInFrontOfCursor()) {
-        if(position == 0)
-            choosingIndex = 0;
-        else
+    size_t choosingIndex = 0;
+    if(parent->doChooseInFrontOfCursor())
+        if(position > 0)
             choosingIndex = position - 1;
-    }
     else
     {
-        if(position == predictor->tokenVector.size())
+        if(position == predictor->tokenVector.size() &&
+	   predictor->tokenVector.size() > 0)
             choosingIndex = position - 1;
         else
             choosingIndex = position;
@@ -858,7 +856,7 @@ int OVIMTobaccoContext::updateCandidateWindow() {
         c->append(dispstr)->append(candi->candidates[page*perpage+i])->append(" ");
     }
     // add current page number
-    sprintf(dispstr, "(%d/%d)", page+1, (candicount-1)/perpage +1);
+    sprintf(dispstr, "(%d/%lu)", page+1, (candicount-1)/perpage +1);
     c->append(dispstr);
     c->update();
     if (!c->onScreen()) c->show();

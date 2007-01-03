@@ -1,8 +1,8 @@
-MODULEID=OVIMTTobacco
+MODULEID=OVIMTobacco
 SOURCES=OVIMTobacco PredictorSingleton DictionarySingleton\
     Token Vocabulary Candidate BiGram
 DATA=imtables.db tsi.db
-BPMF=bpmf_punctuation.cin
+BPMF=bpmf_punctuation.cin ../bmpf-Hsu.cin
 CINS= ../SharedData/cj.cin
 
 LDFLAGS+=-lsqlite3
