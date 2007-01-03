@@ -1,11 +1,11 @@
-# CangJei input method table tweaked by b6s for OVIMGeneric(SQLite) in UTF-8 encoding.
+# CangJie input method table tweaked by b6s for OVIMGeneric(SQLite) in UTF-8 encoding.
 #
 # This table also extended to include HKSCS encodings. For details, see
 #	http://www.info.gov.hk/digital21/chi/hkscs/index.html
 #
 # 
 %gen_inp
-%ename Cangjei
+%ename CangJie
 %cname 倉頡
 %tcname 倉頡
 %scname 繁体仓颉

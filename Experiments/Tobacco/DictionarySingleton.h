@@ -20,7 +20,7 @@ class DictionarySingleton
 {
 public:
 	static DictionarySingleton* getInstance(
-	   const char* dbFilePath)
+		const char* dbFilePath)
 	{
 		if(itsInstance == NULL)
 			itsInstance = new DictionarySingleton(dbFilePath);
@@ -30,8 +30,14 @@ public:
 
 	static void lostInstance();
 
-	void setInputMethodId(string id) { inputMethodId = id; }
-    bool isVocabulary(string characters);
+	
+	void setInputMethodId(string id) {
+                inputMethodId = id;
+                if(inputMethodId == "PhoneticHsu")
+                        inputMethodId  = "BoPoMoFo";
+        }
+
+	bool isVocabulary(string characters);
 	bool getVocabulariesByKeystrokes(
 		string keystrokes, vector<Vocabulary>& vocabularyVectorRef);
 
@@ -41,8 +47,8 @@ protected:
 	
 private:
 	static DictionarySingleton* itsInstance;
-    static SQLite3 *dictionaryDB;
-    string inputMethodId;
+	static SQLite3 *dictionaryDB;
+	string inputMethodId;
 };
 
 #endif

@@ -1,4 +1,4 @@
-# Cangjie (often mis-Romanized as Changjei) input method table
+# CangJie (often mis-Romanized as Changjei) input method table
 # tweaked by b6s for OVIMGeneric(SQLite) in UTF-8 encoding.
 #
 # This table also extended to include HKSCS encodings. For details, see
@@ -9,7 +9,7 @@
 # merged by yylin and b6s.
 #
 %gen_inp
-%ename Cangjie (Large Character Set)
+%ename CangJie (Large Character Set)
 %cname 倉頡（大字集）
 %tcname 倉頡（大字集）
 %scname 仓颉（大字集）
