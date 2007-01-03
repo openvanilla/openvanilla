@@ -192,12 +192,12 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		return FALSE; //<James comment> for app :"³æ³æ«ö ctrl ©Î alt"
 	}
 
-	if(LOWORD(uVKey) == VK_K && (lpbKeyState[VK_CONTROL] & 0x80)&& (lpbKeyState[VK_MENU] & 0x80) )
+	if(LOWORD(uVKey) == VK_G && (lpbKeyState[VK_CONTROL] & 0x80)&& (lpbKeyState[VK_MENU] & 0x80) )
 	{
 		// Toggle Traditional / Simplified Chinese.
 		//Only Shift: lParam == 4
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 4);
-		return TRUE;  // ctrl+ alt +k		
+		return TRUE;  // ctrl+ alt +g		
 	}
 
 	if(LOWORD(uVKey) == VK_SPACE && (lpbKeyState[VK_CONTROL] & 0x80))
