@@ -1,1 +1,1 @@
-link ../OVIMGenericSQLite/imtables-schema.txt
+CREATE TABLE tablelist (name);

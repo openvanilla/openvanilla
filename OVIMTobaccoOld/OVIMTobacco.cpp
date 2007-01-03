@@ -776,7 +776,7 @@ int OVIMTobaccoContext::setCandidate() {
         candi=NULL;
     }
 
-    size_t choosingIndex = -1;
+    int choosingIndex = -1;
     if(parent->doChooseInFrontOfCursor()) {
         if(position == 0)
             choosingIndex = 0;
@@ -887,7 +887,7 @@ int OVIMTobaccoContext::updateCandidateWindow() {
         c->append(dispstr)->append(candi->candidates[page*perpage+i])->append(" ");
     }
     // add current page number
-    sprintf(dispstr, "(%d/%d)", page+1, (candicount-1)/perpage +1);
+    sprintf(dispstr, "(%d/%lu)", page+1, (candicount-1)/perpage +1);
     c->append(dispstr);
     c->update();
     if (!c->onScreen()) c->show();

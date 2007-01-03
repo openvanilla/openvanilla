@@ -42,6 +42,8 @@ void DictionarySingleton::lostInstance()
 bool DictionarySingleton::isVocabulary(string characters)
 {
     string strTableName = DictionarySingleton::inputMethodId;
+    if(strTableName == "PhoneticHsu")
+	strTableName = "BoPoMoFo";
     strTableName += "_char2word_table";
     string strColumnWordID = strTableName + ".wordID";    
     string strColumnCharacters = strTableName + ".characters";
