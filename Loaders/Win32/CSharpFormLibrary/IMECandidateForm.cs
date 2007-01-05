@@ -96,7 +96,7 @@ namespace CSharpFormLibrary
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Width = 30;
+            this.columnHeader1.Width = 25;
             // 
             // columnHeader2
             // 
@@ -216,8 +216,9 @@ namespace CSharpFormLibrary
 		private void ShowListView(string[] pageCandidates)
 		{
 			this.lbCandidates.Items.Clear();            
-            ListViewItem li;
-            
+
+            //1-9
+            ListViewItem li;            
             for (int i=0;i<pageCandidates.Length-1;i++)
             {        
                 string cand =pageCandidates[i];
@@ -229,12 +230,16 @@ namespace CSharpFormLibrary
                 li.SubItems.Add(candText,SystemColors.WindowText, SystemColors.Window, this.lbCandidates.Font);
                 this.lbCandidates.Items.Add(li);
             }
+            //page
             string pageInfo = pageCandidates[pageCandidates.Length-1];
             li = new ListViewItem();
             li.UseItemStyleForSubItems = false;
-            li.SubItems.Add(pageInfo, SystemColors.WindowText, SystemColors.ControlLight, this.lbCandidates.Font);                
+            li.SubItems.Add(pageInfo, SystemColors.WindowText, SystemColors.Window, this.lbCandidates.Font);                
             this.lbCandidates.Items.Add(li);
-			//this.lbCandidates.SelectedItem= this.lbCandidates.Items[0];            
+
+            this.lbCandidates.Items[0].Selected = true;
+
+			
             //this.lbCandidates.Items[0].Selected = true;
             string lastItem = pageCandidates[pageCandidates.Length-1];
             int currentPage = Int32.Parse(lastItem.Substring(1,lastItem.IndexOf('/')-1));
