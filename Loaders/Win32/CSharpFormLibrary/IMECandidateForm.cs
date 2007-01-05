@@ -24,6 +24,7 @@ namespace CSharpFormLibrary
         private TextBox textBox1;
         private VScrollBar vScrollBar1;
         private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
 		private const int MA_NOACTIVATEANDEAT = 0x0004;
 		
 		public IMECandidateForm()
@@ -67,29 +68,39 @@ namespace CSharpFormLibrary
 		{
             this.lbCandidates = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.SuspendLayout();
             // 
             // lbCandidates
             // 
-            this.lbCandidates.BackColor = System.Drawing.SystemColors.Window;
+            this.lbCandidates.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
+            this.lbCandidates.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbCandidates.BackColor = System.Drawing.SystemColors.ControlLight;
             this.lbCandidates.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
+            this.columnHeader1,
+            this.columnHeader2});
             this.lbCandidates.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lbCandidates.ForeColor = System.Drawing.SystemColors.WindowText;
             this.lbCandidates.GridLines = true;
+            this.lbCandidates.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lbCandidates.Location = new System.Drawing.Point(0, 28);
+            this.lbCandidates.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.lbCandidates.Name = "lbCandidates";
             this.lbCandidates.Scrollable = false;
-            this.lbCandidates.Size = new System.Drawing.Size(104, 217);
+            this.lbCandidates.Size = new System.Drawing.Size(103, 220);
             this.lbCandidates.TabIndex = 0;
             this.lbCandidates.UseCompatibleStateImageBehavior = false;
-            this.lbCandidates.View = System.Windows.Forms.View.List;
+            this.lbCandidates.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Width = 93;
+            this.columnHeader1.Width = 30;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Width = 80;
             // 
             // textBox1
             // 
@@ -204,15 +215,27 @@ namespace CSharpFormLibrary
 
 		private void ShowListView(string[] pageCandidates)
 		{
-			this.lbCandidates.Items.Clear();
+			this.lbCandidates.Items.Clear();            
             ListViewItem li;
-            foreach (string cand in pageCandidates)
-            {
-                li = new ListViewItem(cand);
+            
+            for (int i=0;i<pageCandidates.Length-1;i++)
+            {        
+                string cand =pageCandidates[i];
+                li = new ListViewItem();                
+                li.UseItemStyleForSubItems = false;                
+                string no = cand.Substring(0,1);
+                string candText = cand.Substring(2);
+                li.SubItems[0]=new ListViewItem.ListViewSubItem(li,no, SystemColors.WindowText, SystemColors.ControlLight, this.lbCandidates.Font);                
+                li.SubItems.Add(candText,SystemColors.WindowText, SystemColors.Window, this.lbCandidates.Font);
                 this.lbCandidates.Items.Add(li);
             }
+            string pageInfo = pageCandidates[pageCandidates.Length-1];
+            li = new ListViewItem();
+            li.UseItemStyleForSubItems = false;
+            li.SubItems.Add(pageInfo, SystemColors.WindowText, SystemColors.ControlLight, this.lbCandidates.Font);                
+            this.lbCandidates.Items.Add(li);
 			//this.lbCandidates.SelectedItem= this.lbCandidates.Items[0];            
-            this.lbCandidates.Items[0].Selected = true;
+            //this.lbCandidates.Items[0].Selected = true;
             string lastItem = pageCandidates[pageCandidates.Length-1];
             int currentPage = Int32.Parse(lastItem.Substring(1,lastItem.IndexOf('/')-1));
             string foo = lastItem.Substring(lastItem.IndexOf('/')+1);            
