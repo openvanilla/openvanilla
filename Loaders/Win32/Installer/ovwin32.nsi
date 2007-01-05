@@ -5,7 +5,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Going-OpenVanilla"
-!define PRODUCT_VERSION "alpha-2"
+!define PRODUCT_VERSION "beta-1"
 !define PRODUCT_PUBLISHER "IASL"
 !define PRODUCT_WEB_SITE "http://iasl.iis.sinica.edu.tw/"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -139,7 +139,7 @@ LangString FAILED_DOTNET_INSTALL ${LANG_TradChinese} " $(PRODUCT_NAME) ±N·|Ä~Äò¦
 ; .NET end --------------------------------------------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "GOING-OpenVanilla-alpha.2.exe"
+OutFile "GOING-OpenVanilla-beta.1.exe"
 InstallDir "$WINDIR\OpenVanilla"
 ShowInstDetails show
 ShowUnInstDetails show
