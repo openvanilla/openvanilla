@@ -12,7 +12,7 @@
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define IME_ROOT_KEY "HKLM"
 !define IME_KEY "SYSTEM\CurrentControlSet\Control\Keyboard Layouts\"
-!define IME_KEY_USER "Keyboard Layout\Preload"
+!define IME_KEY_USER "Keyboard Layout\Preload\"
 
 SetCompressor lzma
 
@@ -44,7 +44,7 @@ SetCompressor lzma
 !insertmacro MUI_UNPAGE_INSTFILES
 
 ; Language files
-!insertmacro MUI_LANGUAGE "English"
+;!insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "TradChinese"
 
 ; Reserve files
@@ -58,9 +58,13 @@ SetCompressor lzma
 ; .NET Framework 1.1 Chinese (Tranditional)
 !define BASE_URL http://download.microsoft.com/download
 ; .NET Framework
-; English
-!define URL_DOTNET_1033 "${BASE_URL}/a/a/c/aac39226-8825-44ce-90e3-bf8203e74006/dotnetfx.exe"
-!define URL_DOTNET_1028 "${BASE_URL}/8/2/7/827bb1ef-f5e1-4464-9788-40ef682930fd/dotnetfx.exe"
+; English version .net v1.1
+;!define URL_DOTNET_1033 "${BASE_URL}/a/a/c/aac39226-8825-44ce-90e3-bf8203e74006/dotnetfx.exe"
+!define URL_DOTNET_1033 "${BASE_URL}/5/6/7/567758a3-759e-473e-bf8f-52154438565a/dotnetfx.exe"
+;Traditional Chinese version .net v1.1
+;!define URL_DOTNET_1028 "${BASE_URL}/8/2/7/827bb1ef-f5e1-4464-9788-40ef682930fd/dotnetfx.exe"
+;Traditional Chinese version .net v2.0
+!define URL_DOTNET_1028 "${BASE_URL}/5/6/7/567758a3-759e-473e-bf8f-52154438565a/dotnetfx.exe"
 
 ; Variables
 ;Var "LANGUAGE_DLL_TITLE"
@@ -78,8 +82,8 @@ LangString DESC_MINUTE ${LANG_TradChinese} "分鐘"
 LangString DESC_SECOND ${LANG_TradChinese} "秒"
 LangString DESC_CONNECTING ${LANG_TradChinese} "連接中..."
 LangString DESC_DOWNLOADING ${LANG_TradChinese} "下載 %s"
-LangString DESC_SHORTDOTNET ${LANG_TradChinese} "Microsoft .Net Framework 1.1"
-LangString DESC_LONGDOTNET ${LANG_TradChinese} "Microsoft .Net Framework 1.1"
+LangString DESC_SHORTDOTNET ${LANG_TradChinese} "Microsoft .Net Framework 2.0"
+LangString DESC_LONGDOTNET ${LANG_TradChinese} "Microsoft .Net Framework 2.0"
 LangString DESC_DOTNET_DECISION ${LANG_TradChinese} "安裝此輸入法之前，必須先安裝 $(DESC_SHORTDOTNET) $\n強烈建議您先安裝完 \
   $(DESC_SHORTDOTNET)$\n再繼續進行安裝輸入法。$\n若你想繼續安裝 \
   ，您的電腦必須連接網路。$\n您要繼續這項安裝嗎？"
@@ -98,38 +102,38 @@ LangString ERROR_DOTNET_FATAL ${LANG_TradChinese} "嚴重錯誤訊息發生在安裝 \
 LangString FAILED_DOTNET_INSTALL ${LANG_TradChinese} " $(PRODUCT_NAME) 將會繼續安裝 \
   $\n 然而，部分功能必須等到 $(DESC_SHORTDOTNET)安裝完畢，才會正常運作"
 
-LangString DESC_REMAINING ${LANG_ENGLISH} " (%d %s%s remaining)"
-LangString DESC_PROGRESS ${LANG_ENGLISH} "%d.%01dkB/s" ;"%dkB (%d%%) of %dkB @ %d.%01dkB/s"
-LangString DESC_PLURAL ${LANG_ENGLISH} "s"
-LangString DESC_HOUR ${LANG_ENGLISH} "hour"
-LangString DESC_MINUTE ${LANG_ENGLISH} "minute"
-LangString DESC_SECOND ${LANG_ENGLISH} "second"
-LangString DESC_CONNECTING ${LANG_ENGLISH} "Connecting..."
-LangString DESC_DOWNLOADING ${LANG_ENGLISH} "Downloading %s"
-LangString DESC_SHORTDOTNET ${LANG_ENGLISH} "Microsoft .Net Framework 1.1"
-LangString DESC_LONGDOTNET ${LANG_ENGLISH} "Microsoft .Net Framework 1.1"
-LangString DESC_DOTNET_DECISION ${LANG_ENGLISH} "$(DESC_SHORTDOTNET) is required.$\nIt is strongly \
-  advised that you install$\n$(DESC_SHORTDOTNET) before continuing.$\nIf you choose to continue, \
-  you will need to connect$\nto the internet before proceeding.$\nWould you like to continue with \
-  the installation?"
-LangString SEC_DOTNET ${LANG_ENGLISH} "$(DESC_SHORTDOTNET) "
-LangString DESC_INSTALLING ${LANG_ENGLISH} "Installing"
-LangString DESC_DOWNLOADING1 ${LANG_ENGLISH} "Downloading"
-LangString DESC_DOWNLOADFAILED ${LANG_ENGLISH} "Download Failed:"
-LangString ERROR_DOTNET_DUPLICATE_INSTANCE ${LANG_ENGLISH} "The $(DESC_SHORTDOTNET) Installer is \
-  already running."
+;LangString DESC_REMAINING ${LANG_ENGLISH} " (%d %s%s remaining)"
+;LangString DESC_PROGRESS ${LANG_ENGLISH} "%d.%01dkB/s" ;"%dkB (%d%%) of %dkB @ %d.%01dkB/s"
+;LangString DESC_PLURAL ${LANG_ENGLISH} "s"
+;LangString DESC_HOUR ${LANG_ENGLISH} "hour"
+;LangString DESC_MINUTE ${LANG_ENGLISH} "minute"
+;LangString DESC_SECOND ${LANG_ENGLISH} "second"
+;LangString DESC_CONNECTING ${LANG_ENGLISH} "Connecting..."
+;LangString DESC_DOWNLOADING ${LANG_ENGLISH} "Downloading %s"
+;LangString DESC_SHORTDOTNET ${LANG_ENGLISH} "Microsoft .Net Framework 1.1"
+;LangString DESC_LONGDOTNET ${LANG_ENGLISH} "Microsoft .Net Framework 1.1"
+;LangString DESC_DOTNET_DECISION ${LANG_ENGLISH} "$(DESC_SHORTDOTNET) is required.$\nIt is strongly \
+;  advised that you install$\n$(DESC_SHORTDOTNET) before continuing.$\nIf you choose to continue, \
+;  you will need to connect$\nto the internet before proceeding.$\nWould you like to continue with \
+;  the installation?"
+;LangString SEC_DOTNET ${LANG_ENGLISH} "$(DESC_SHORTDOTNET) "
+;LangString DESC_INSTALLING ${LANG_ENGLISH} "Installing"
+;LangString DESC_DOWNLOADING1 ${LANG_ENGLISH} "Downloading"
+;LangString DESC_DOWNLOADFAILED ${LANG_ENGLISH} "Download Failed:"
+;LangString ERROR_DOTNET_DUPLICATE_INSTANCE ${LANG_ENGLISH} "The $(DESC_SHORTDOTNET) Installer is \
+;  already running."
 ;LangString ERROR_NOT_ADMINISTRATOR ${LANG_ENGLISH} "$(DESC_000022)"
 ;LangString ERROR_INVALID_PLATFORM ${LANG_ENGLISH} "$(DESC_000023)"
-LangString ERROR_NOT_ADMINISTRATOR ${LANG_ENGLISH} "Sorry, you are not the administrator."
-LangString ERROR_INVALID_PLATFORM ${LANG_ENGLISH} "This product is not working on this platform."
-LangString DESC_DOTNET_TIMEOUT ${LANG_ENGLISH} "The installation of the $(DESC_SHORTDOTNET) \
-  has timed out."
-LangString ERROR_DOTNET_INVALID_PATH ${LANG_ENGLISH} "The $(DESC_SHORTDOTNET) Installation$\n\
-  was not found in the following location:$\n"
-LangString ERROR_DOTNET_FATAL ${LANG_ENGLISH} "A fatal error occurred during the installation$\n\
-  of the $(DESC_SHORTDOTNET)."
-LangString FAILED_DOTNET_INSTALL ${LANG_ENGLISH} "The installation of $(PRODUCT_NAME) will$\n\
-  continue. However, it may not function properly$\nuntil $(DESC_SHORTDOTNET)$\nis installed."
+;LangString ERROR_NOT_ADMINISTRATOR ${LANG_ENGLISH} "Sorry, you are not the administrator."
+;LangString ERROR_INVALID_PLATFORM ${LANG_ENGLISH} "This product is not working on this platform."
+;LangString DESC_DOTNET_TIMEOUT ${LANG_ENGLISH} "The installation of the $(DESC_SHORTDOTNET) \
+;  has timed out."
+;LangString ERROR_DOTNET_INVALID_PATH ${LANG_ENGLISH} "The $(DESC_SHORTDOTNET) Installation$\n\
+;  was not found in the following location:$\n"
+;LangString ERROR_DOTNET_FATAL ${LANG_ENGLISH} "A fatal error occurred during the installation$\n\
+;  of the $(DESC_SHORTDOTNET)."
+;LangString FAILED_DOTNET_INSTALL ${LANG_ENGLISH} "The installation of $(PRODUCT_NAME) will$\n\
+;  continue. However, it may not function properly$\nuntil $(DESC_SHORTDOTNET)$\nis installed."
 
 
 ; .NET end --------------------------------------------
@@ -145,7 +149,7 @@ Function .onInit
   StrCmp $0 "" +3 0
 	  MessageBox MB_ICONINFORMATION|MB_OK "偵測到已安裝 OpenVanilla ，請移除後重新安裝。"
 	  Abort
-  !insertmacro MUI_LANGDLL_DISPLAY
+;  !insertmacro MUI_LANGDLL_DISPLAY
 
 ;DOTNET start --------------------------------------------
   
@@ -297,13 +301,13 @@ Section $(SEC_DOTNET) SECDOTNET
     
     StrCpy $0 $0 "" 1 # skip "v"
  
- 		${VersionCompare} $0 "2" $1
+; 		${VersionCompare} $0 "2" $1
  		
- 		${If} $1 == 1
- 			Goto lbl_DownloadRequired
- 		${EndIf}	
+; 		${If} $1 == 1
+; 			Goto lbl_DownloadRequired
+; 		${EndIf}	
   	
-  	${VersionCompare} $0 "1.1" $1
+  	${VersionCompare} $0 "2" $1
   	${If} $1 == 2
   		Goto lbl_DownloadRequired
 	  ${EndIf}
@@ -396,13 +400,15 @@ Section "MainSection" SEC01
 SectionEnd
 
 Section "Modules" SEC02
-  SetOutPath "$WINDIR\OpenVanilla"
+ ; SetOutPath "$WINDIR\OpenVanilla"
+SetOutPath "$WINDIR\"
   SetOVerwrite ifnewer
-  File /r "Modules"
+  File /r "OpenVanilla"
+  ;File /r "Modules"
   ;File /r "zh_TW"
-  File "OVPreferences.exe"
-  File "OVPreferences.exe.manifest"
-  File "CSharpFormLibrary.dll"
+  ;File "OpenVanilla\OVPreferences.exe"
+;  File "OpenVanilla\OVPreferences.exe.manifest"
+;  File "OpenVanilla\CSharpFormLibrary.dll"
 SectionEnd
 
 Section -AdditionalIcons
@@ -426,9 +432,9 @@ Section -Post
   StrCpy $6 $1 "" $5
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key" "$6"
   System::Call "user32::LoadKeyboardLayout(t $6, i 1)"
-  MessageBox MB_YESNO "若您是初次安裝，則須重新開機。是否要立刻重開機？" IDNO noreboot
-    Reboot
-noreboot:
+  ;MessageBox MB_YESNO "若您是初次安裝，則須重新開機。是否要立刻重開機？" IDNO noreboot
+  ;  Reboot
+;noreboot:
 SectionEnd
 
 Function un.onUninstSuccess
@@ -437,7 +443,7 @@ Function un.onUninstSuccess
 FunctionEnd
 
 Function un.onInit
-!insertmacro MUI_UNGETLANGUAGE
+;!insertmacro MUI_UNGETLANGUAGE
   MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "你確定要完全移除 GOING-OpenVanilla ，其及所有的元件？" IDYES +2
   Abort
 FunctionEnd
