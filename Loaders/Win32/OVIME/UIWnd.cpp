@@ -110,7 +110,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 					dsvr->lockIMC(hUICurIMC);
 					dsvr->showBuf(true);
 				}
-				//dsvr->showCandi(true); //註解掉因為切開就應該 send buf了		
+				//dsvr->showCandi(true); //註解掉因為切開就應該 clear cand了		
 			}
 			else   // it is NULL input context. (?)
 			{				

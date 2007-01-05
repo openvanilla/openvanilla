@@ -479,8 +479,8 @@ namespace CSharpFormLibrary
             proc.StartInfo.FileName="OVPreferences.exe";
             proc.StartInfo.WorkingDirectory = m_baseDir;
 
-            Debug.WriteLine(m_AppHWnd.ToString("x"));
-            //exception!
+            //Debug.WriteLine("m_AppHWnd="+m_AppHWnd.ToString("x"));
+            
             int ret = UtilFuncs.SendMessage(
                    new IntPtr((long)m_AppHWnd),
                    (uint)UtilFuncs.WindowsMessage.WM_DESTROY,
