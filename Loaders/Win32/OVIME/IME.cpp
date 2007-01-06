@@ -210,8 +210,9 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		return FALSE;  //shift + space
 	}
 
-	//Change the module by Ctrl+"\"
-	if(LOWORD(uVKey) == VK_OEM_5 && ((lpbKeyState[VK_CONTROL] & 0x80)))
+	//CTRL + "\" or "="
+	if((LOWORD(uVKey) == VK_OEM_5 || LOWORD(uVKey) == VK_OEM_PLUS) &&
+		((lpbKeyState[VK_CONTROL] & 0x80)))
 		return TRUE;
 
 	//Change CHI/ENG by CAPS
@@ -366,11 +367,15 @@ UINT APIENTRY
 ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 			  CONST LPBYTE lpbKeyState,
 			  LPDWORD lpdwTransKey, UINT fuState,HIMC hIMC)
-{
-	//Change the module by Ctrl+"\": lParam == 0
-	if(LOWORD(uVKey) == VK_OEM_5 && ((lpbKeyState[VK_CONTROL] & 0x80)))
+{	
+	if((lpbKeyState[VK_CONTROL] & 0x80))
 	{
-		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 0);
+		//Change the module by Ctrl+"\": lParam == 0
+		if(LOWORD(uVKey) == VK_OEM_5)
+			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 0);
+		//Change the BoPoMoFo keyboard layout by Ctrl+"=": lParam == 5
+		else if(LOWORD(uVKey) == VK_OEM_PLUS)
+			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 5);
 	}
 
 	//Change CHI/END by CAPS

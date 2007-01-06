@@ -45,6 +45,9 @@ AVLoader::~AVLoader()
 
 void AVLoader::loadModules()
 {
+	hasBoPoMoFo = false;
+	hasPhoneticHsu = false;
+
 	em = AVEmbeddedLoader::getInstance();
 
 	vector<OVModule*> tmpmod_vector;
@@ -59,6 +62,11 @@ void AVLoader::loadModules()
 				if(em->dict()->getInteger("enable")) {
 					tmpmod_vector.push_back(*m);
 					murmur("\tenabled em_dict_name=%s",(*m)->identifier());
+
+					if(!strcmp((*m)->localizedName("en"), "BoPoMoFo"))
+						hasBoPoMoFo = true;
+					if(!strcmp((*m)->localizedName("en"), "PhoneticHsu"))
+						hasPhoneticHsu = true;
 				}
 				else
 					murmur("\tdisabled em_dict_name=%s",(*m)->identifier());
@@ -145,7 +153,7 @@ bool AVLoader::moduleName(int i, char *str)
 		strcpy(str, "");
 		return false;
 	}
-	s = em->modlist().at(i)->localizedName("zh_TW");
+	s = em->modlist()[i]->localizedName("zh_TW");
 	strcpy(str, s.c_str());
 	return true;
 }
@@ -168,4 +176,27 @@ int AVLoader::getInputMethodCount()
 int AVLoader::getOutputFilterCount()
 {
 	return ovof_vector.size();
+}
+
+int AVLoader::switchBoPoMoFoLayout(int currentId)
+{
+	if(hasBoPoMoFo &&
+		!strcmp(em->modlist()[currentId]->localizedName("en"), "PhoneticHsu")) {
+		for(int i = 0; i < em->modlist().size(); i++) {
+			if(!strcmp(em->modlist()[i]->localizedName("en"), "BoPoMoFo")) {
+				return i;
+			}
+		}
+	}
+	
+	if(hasPhoneticHsu &&
+		!strcmp(em->modlist()[currentId]->localizedName("en"), "BoPoMoFo")) {
+		for(int i = 0; i < em->modlist().size(); i++) {
+			if(!strcmp(em->modlist()[i]->localizedName("en"), "PhoneticHsu")) {
+				return i;
+			}
+		}
+	}
+
+	return currentId;
 }

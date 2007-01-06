@@ -37,6 +37,7 @@ void UIChangeModuleByMouse(HWND);
 void UIChangeHalfFull(HWND);
 void UIChangeChiEng(HWND);
 void UIChangeSimpifiedOrTraditional(HWND);
+void UIChangeBoPoMoFoLayout(HWND);
 void UISetStatusModStr(wchar_t*);
 void UISetStatusMenuModStr(wchar_t*);
 void UIClearStatusMenuModString();

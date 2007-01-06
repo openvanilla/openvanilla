@@ -34,6 +34,8 @@ public:
 	int getOutputFilterCount();
 	//</comment>
 
+	int switchBoPoMoFoLayout(int currentId);
+
 protected:
 	AVLoader();
 	~AVLoader();
@@ -48,6 +50,9 @@ protected:
 	vector<bool> startedCtxVector;	// 這是很浪費的作法 orz
 
 	int activatedIm;
+
+	bool hasBoPoMoFo;
+	bool hasPhoneticHsu;
 
 private:
 	static AVLoader *globalLoader;

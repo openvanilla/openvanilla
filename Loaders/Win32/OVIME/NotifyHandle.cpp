@@ -176,6 +176,9 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			murmur("\t4");
 			UIChangeSimpifiedOrTraditional(hWnd); 
 			break;
+		case 5: //Change BoPoMoFo keyboard layout by ctrl +'='
+			UIChangeBoPoMoFoLayout(hWnd);
+			break;
 		default:
 			murmur("\tUknown IMN_PRIVATE");
 			break;

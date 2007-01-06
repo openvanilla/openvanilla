@@ -27,6 +27,7 @@ EXPORTS
 	UIChangeHalfFull
 	UIChangeChiEng
 	UIChangeSimpifiedOrTraditional
+	UIChangeBoPoMoFoLayout
 	_SetStatusSimpifiedOrTraditional
 	_ShowCandPageArray
 	_SetCandString

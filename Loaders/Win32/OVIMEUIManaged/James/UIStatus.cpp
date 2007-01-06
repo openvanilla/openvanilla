@@ -620,3 +620,35 @@ void UIChangeSimpifiedOrTraditional(HWND hWnd)
 	/*以下是模組要做的事情*/
 
 }
+
+void UIChangeBoPoMoFoLayout(HWND hWnd)
+{
+	CompCursorPos=0;  //James test
+ 
+	char modNameUTF8[1024];
+	wchar_t modNameUCS2[1024];
+	
+	AVLoader* loader = AVLoader::getLoader();
+	loader->closeModule();
+
+	int newIC = loader->switchBoPoMoFoLayout(CurrentIC);
+	if(newIC != CurrentIC) {
+		wchar_t *modCurrentName;
+		if(loader->moduleName(newIC, modNameUTF8)) 
+		{
+			CurrentIC = newIC;
+			MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
+			//tbi.pszText = modNameUCS2;
+			modCurrentName = modNameUCS2;
+			murmur(" ---> module name: %s", modNameUTF8);		
+		}
+		else 
+		{
+			//tbi.pszText = L"ERROR";
+			modCurrentName = L"ERROR";
+			murmur("loader->moduleName() failed.");
+		}
+		UISetStatusModStr(modCurrentName);
+		_ShowStatusPage();
+	}
+}
