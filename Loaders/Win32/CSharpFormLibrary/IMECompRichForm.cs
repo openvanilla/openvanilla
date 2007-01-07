@@ -129,13 +129,13 @@ namespace CSharpFormLibrary
 		{
             //System.Diagnostics.Debug.WriteLine("set caret:" + x);
             //System.Diagnostics.Debug.WriteLine("current char pos:" + this.richTextBox1.GetFirstCharIndexFromLine(0));
-            if (this.richTextBox1.GetFirstCharIndexFromLine(0) > 0)
-            {
+            //if (this.richTextBox1.GetFirstCharIndexFromLine(0) > 0)
+            //{
                 Point pt = this.richTextBox1.GetPositionFromCharIndex(x);
                 caretPosX = pt.X + 1;
-            }
-            else
-                caretPosX = 1;
+            //}
+            //else
+            //    caretPosX = 1;
             //System.Diagnostics.Debug.WriteLine("caret set = " + caretPosX);
             //caretPosX = (currentAllCompStrLength) * (x) / CurrentAll;
     
@@ -143,7 +143,7 @@ namespace CSharpFormLibrary
             {
                 if (compSelStart == 0)  compSelStart = 1;
                 //System.Diagnostics.Debug.WriteLine("if, before select");
-                if(this.richTextBox1.GetFirstCharIndexFromLine(0) > 0)
+                //if(this.richTextBox1.GetFirstCharIndexFromLine(0) > 0)
                     this.richTextBox1.Select(compSelStart - 1, 1);
                 //System.Diagnostics.Debug.WriteLine("if, after select");
                 //this.richTextBox1.SelectionBackColor = System.Drawing.Color.Blue;
@@ -152,9 +152,9 @@ namespace CSharpFormLibrary
             }
             else //¥¿¦b²Õ¦r
             {
-                System.Diagnostics.Debug.WriteLine("else, before select");
+                //System.Diagnostics.Debug.WriteLine("else, before select");
                 this.richTextBox1.Select(compSelStart, compSelEnd - compSelStart);
-                System.Diagnostics.Debug.WriteLine("else, after select");
+                //System.Diagnostics.Debug.WriteLine("else, after select");
                 //this.richTextBox1.SelectionBackColor = System.Drawing.Color.Black;
                 this.richTextBox1.SelectionColor = Color.Red;
                 //this.richTextBox1.Width = this.richTextBox1.Width;                
