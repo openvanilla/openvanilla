@@ -52,17 +52,17 @@ SetCompressor lzma
 
 ; MUI end ------
 
-; .NET Framework 1.1 testing/installing
+; .NET Framework 2.0 testing/installing
 ; .NET start -----------------------------------
 
-; .NET Framework 1.1 Chinese (Tranditional)
 !define BASE_URL http://download.microsoft.com/download
 ; .NET Framework
-; English version .net v1.1
+;English version .net v1.1
 ;!define URL_DOTNET_1033 "${BASE_URL}/a/a/c/aac39226-8825-44ce-90e3-bf8203e74006/dotnetfx.exe"
-!define URL_DOTNET_1033 "${BASE_URL}/5/6/7/567758a3-759e-473e-bf8f-52154438565a/dotnetfx.exe"
 ;Traditional Chinese version .net v1.1
 ;!define URL_DOTNET_1028 "${BASE_URL}/8/2/7/827bb1ef-f5e1-4464-9788-40ef682930fd/dotnetfx.exe"
+;English version .net v2.0
+;!define URL_DOTNET_1033 "${BASE_URL}/5/6/7/567758a3-759e-473e-bf8f-52154438565a/dotnetfx.exe"
 ;Traditional Chinese version .net v2.0
 !define URL_DOTNET_1028 "${BASE_URL}/5/6/7/567758a3-759e-473e-bf8f-52154438565a/dotnetfx.exe"
 
@@ -110,8 +110,8 @@ LangString FAILED_DOTNET_INSTALL ${LANG_TradChinese} " $(PRODUCT_NAME) ±N·|Ä~Äò¦
 ;LangString DESC_SECOND ${LANG_ENGLISH} "second"
 ;LangString DESC_CONNECTING ${LANG_ENGLISH} "Connecting..."
 ;LangString DESC_DOWNLOADING ${LANG_ENGLISH} "Downloading %s"
-;LangString DESC_SHORTDOTNET ${LANG_ENGLISH} "Microsoft .Net Framework 1.1"
-;LangString DESC_LONGDOTNET ${LANG_ENGLISH} "Microsoft .Net Framework 1.1"
+;LangString DESC_SHORTDOTNET ${LANG_ENGLISH} "Microsoft .Net Framework 2.0"
+;LangString DESC_LONGDOTNET ${LANG_ENGLISH} "Microsoft .Net Framework 2.0"
 ;LangString DESC_DOTNET_DECISION ${LANG_ENGLISH} "$(DESC_SHORTDOTNET) is required.$\nIt is strongly \
 ;  advised that you install$\n$(DESC_SHORTDOTNET) before continuing.$\nIf you choose to continue, \
 ;  you will need to connect$\nto the internet before proceeding.$\nWould you like to continue with \
@@ -135,8 +135,8 @@ LangString FAILED_DOTNET_INSTALL ${LANG_TradChinese} " $(PRODUCT_NAME) ±N·|Ä~Äò¦
 ;LangString FAILED_DOTNET_INSTALL ${LANG_ENGLISH} "The installation of $(PRODUCT_NAME) will$\n\
 ;  continue. However, it may not function properly$\nuntil $(DESC_SHORTDOTNET)$\nis installed."
 
-
 ; .NET end --------------------------------------------
+
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "GOING-OpenVanilla-beta.1.exe"
@@ -156,8 +156,8 @@ Function .onInit
   ;StrCpy $LANGUAGE_DLL_TITLE "Installer Language"
   ;StrCpy $LANGUAGE_DLL_INFO "Please select a language:"
   StrCpy $URL_DOTNET "${URL_DOTNET_1028}"
+  StrCpy $OSLANGUAGE "1028"
   ;StrCpy $OSLANGUAGE "1033"
-	StrCpy $OSLANGUAGE "1028"
 	
   ;!undef MUI_LANGDLL_WINDOWTITLE
   ;!undef MUI_LANGDLL_INFO
@@ -395,8 +395,8 @@ Section $(SEC_DOTNET) SECDOTNET
 Section "MainSection" SEC01
   SetOutPath "$SYSDIR"
   SetOverwrite ifnewer
-  File "System32\OVIME.ime"
-  File "System32\*.dll"
+  File "system32\OVIME.ime"
+  File "system32\*.dll"
 SectionEnd
 
 Section "Modules" SEC02
@@ -407,8 +407,8 @@ SetOutPath "$WINDIR\"
   ;File /r "Modules"
   ;File /r "zh_TW"
   ;File "OpenVanilla\OVPreferences.exe"
-;  File "OpenVanilla\OVPreferences.exe.manifest"
-;  File "OpenVanilla\CSharpFormLibrary.dll"
+  ;File "OpenVanilla\OVPreferences.exe.manifest"
+  ;File "OpenVanilla\CSharpFormLibrary.dll"
 SectionEnd
 
 Section -AdditionalIcons
