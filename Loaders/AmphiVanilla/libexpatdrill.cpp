@@ -16,7 +16,7 @@ public:
     
     Node(const Node& n) { name=n.name; text=n.text; children=n.children; parent=n.parent; }
     
-    const Node& operator=(const Node& n) { name=n.name; text=n.text; children=n.children; parent=n.parent; } 
+    const Node& operator=(const Node& n) { name=n.name; text=n.text; children=n.children; parent=n.parent; return *this; } 
   
     Node* addChild(const Node& n) { 
         children.push_back(n);
