@@ -10,10 +10,10 @@
 #include "AVDictionary.h"
 #include <fstream>
 
-#ifdef __APPLE__ || __BSD_VISIBLE
+#ifdef __APPLE__ 
     typedef struct timespec AVTimeStamp;
 #else
-    typedef struct time_t AVTimeStamp;
+    typedef time_t AVTimeStamp;
 #endif
 
 class AVConfig {
@@ -124,7 +124,7 @@ protected:
         bzero(&t, sizeof(t));
         if (f && !stat(f, &s))
         {
-            #ifdef __APPLE__ || _BSD_VISIBLE
+            #ifdef __APPLE__
                 t=s.st_mtimespec;
             #else
                 t=s.st_mtime;
