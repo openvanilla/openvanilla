@@ -10,28 +10,28 @@ int main()
     }
     
     
-    if (cfg.dictionary().dictionaryExists("TLIM")) {
-        AVDictionary tlim = cfg.dictionary().getDictionary("TLIM");
-        int d = tlim.getInteger("diacriticInputOption");
+    if (cfg.dictionary().dictionaryExists("OVDisplayServer")) {
+        AVDictionary tlim = cfg.dictionary().getDictionary("OVDisplayServer");
+        int d = tlim.getInteger("size");
         printf ("original value = %d\n", d);
     }
 
-    fgetc(stdin);
+//  fgetc(stdin);
     
     if (cfg.needSync()) {
-        printf ("need to sync!");
+        printf ("need to sync!\n");
         cfg.load();
     }
     
     AVDictionary dict = cfg.dictionary();
     
-    if (dict.dictionaryExists("TLIM")) {
-        AVDictionary tlim = dict.getDictionary("TLIM");
+    if (dict.dictionaryExists("OVDisplayServer")) {
+        AVDictionary tlim = dict.getDictionary("OVDisplayServer");
         
-        int d = tlim.getInteger("diacriticInputOption");
+        int d = tlim.getInteger("size");
         printf ("value = %d\n", d);
         d++;
-        tlim.setInteger("diacriticInputOption", d);
+        tlim.setInteger("size", d);
     }
     
     dict.createDictionaryForKey("Blah");
