@@ -57,7 +57,7 @@ namespace CSharpFormLibrary
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1, 20);
+            this.label1.Size = new System.Drawing.Size(1, 22);
             this.label1.TabIndex = 1;
             this.label1.Text = " ";
             // 
