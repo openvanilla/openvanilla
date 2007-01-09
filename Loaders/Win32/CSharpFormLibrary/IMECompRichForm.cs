@@ -102,64 +102,53 @@ namespace CSharpFormLibrary
 
         public int GetHeight()
         {
-            try
+            /*try
             {
                 System.Diagnostics.Debug.WriteLine("c# comp height = " + this.Height);
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.StackTrace);
-            }
+            }*/
             return this.Height;
         }
         public int GetCaretPosX()
         {
-            try
+            /*try
             {
                 System.Diagnostics.Debug.WriteLine("c# comp GetCaretPosX = " + caretPosX);
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.StackTrace);
-            }
+            }*/
             return caretPosX;
         }
 
 		public void SetCaretX(int x)
 		{
-            //System.Diagnostics.Debug.WriteLine("set caret:" + x);
-            //System.Diagnostics.Debug.WriteLine("current char pos:" + this.richTextBox1.GetFirstCharIndexFromLine(0));
-            //if (this.richTextBox1.GetFirstCharIndexFromLine(0) > 0)
-            //{
-                Point pt = this.richTextBox1.GetPositionFromCharIndex(x);
-                caretPosX = pt.X + 1;
-            //}
-            //else
-            //    caretPosX = 1;
-            //System.Diagnostics.Debug.WriteLine("caret set = " + caretPosX);
-            //caretPosX = (currentAllCompStrLength) * (x) / CurrentAll;
-    
+            Point pt = this.richTextBox1.GetPositionFromCharIndex(x);
+            caretPosX = pt.X + 1;
+            System.Diagnostics.Debug.WriteLine("caretPosX=" + caretPosX);
+            System.Diagnostics.Debug.WriteLine("compSelStart=" + compSelStart);
+            System.Diagnostics.Debug.WriteLine("compSelEnd=" + compSelEnd);
             if (compSelStart == compSelEnd) //已經組字
             {
-                if (compSelStart == 0)  compSelStart = 1;
-                //System.Diagnostics.Debug.WriteLine("if, before select");
-                //if(this.richTextBox1.GetFirstCharIndexFromLine(0) > 0)
+                //if (compSelStart == 0)  compSelStart = 1;
+                System.Diagnostics.Debug.WriteLine("compSelStart=" + compSelStart+",text="+this.richTextBox1.Text);
+                if (compSelStart > 0)
+                {
                     this.richTextBox1.Select(compSelStart - 1, 1);
-                //System.Diagnostics.Debug.WriteLine("if, after select");
-                //this.richTextBox1.SelectionBackColor = System.Drawing.Color.Blue;
-                //this.richTextBox1.SelectionColor = Color.White;                
+                }                
+                System.Diagnostics.Debug.WriteLine("complete combination: position"+x+"="+caretPosX);
+               
                 this.label1.Left = caretPosX;
             }
             else //正在組字
-            {
-                //System.Diagnostics.Debug.WriteLine("else, before select");
-                this.richTextBox1.Select(compSelStart, compSelEnd - compSelStart);
-                //System.Diagnostics.Debug.WriteLine("else, after select");
-                //this.richTextBox1.SelectionBackColor = System.Drawing.Color.Black;
-                this.richTextBox1.SelectionColor = Color.Red;
-                //this.richTextBox1.Width = this.richTextBox1.Width;                
-            }
-            
+            {                
+                this.richTextBox1.Select(compSelStart, compSelEnd - compSelStart);                
+                this.richTextBox1.SelectionColor = Color.Red;                
+            }            
         }
 
         public void CompMarkFrom(int x)
