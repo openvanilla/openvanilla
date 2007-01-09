@@ -40,7 +40,7 @@ public:
 
 protected:
     OVInputMethod *im;
-    DummyDictionary dict;
+    // DummyDictionary dict;
 };
 
 class OVSCIMInstance : public DIMEInstance
@@ -59,11 +59,11 @@ public:
 	virtual void focus_out();
 	
 	OVInputMethodContext *cxt;
-	
+        OVInputMethod *im;	
     DummyBuffer buf;
     DummyCandidate candi;
     DummyService srv;
-    DummyDictionary dict;
+    // DummyDictionary dict;
 };
 
 #endif

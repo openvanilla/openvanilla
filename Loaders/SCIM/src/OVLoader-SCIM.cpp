@@ -10,9 +10,14 @@
 #define Uses_SCIM_C_STRING
 
 #include "OVLoader-SCIM.h"
+
+#include "../../AmphiVanilla/AVConfig.h"
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <dirent.h>
+
+AVConfig im_config("/tmp/org.openvanilla.072.plist");
 
 using namespace scim;
 
@@ -22,6 +27,21 @@ static int scan_ov_modules();
 extern "C" void scim_module_init() {
    lt_dlinit();
    lt_dlsetsearchpath(OV_MODULEDIR);
+
+   const char *homedir = getenv("HOME");
+   string fn = string(homedir) + "/" + ".openvanilla";
+   string cmd = "mkdir -p " + fn;
+   system(cmd.c_str());
+
+   // string x;
+   // x= "echo " + fn + " > /tmp/output.txt";
+   // system(x.c_str());
+   fn += "/org.openvanilla.072.plist";
+   im_config.setFilename(fn);
+
+   if (!im_config.load()) {
+       fprintf(stderr, "OpenVanilla: No preset config file\n");
+   }
 }
 
 extern "C" void scim_module_exit() {
@@ -102,7 +122,15 @@ OVSCIMFactory::OVSCIMFactory(OVModule *i, const ConfigPointer& config) {
     if(!im)
        fprintf(stderr, "dynamic_cast OVInputMethod* failed\n");
     DummyService srv;
-    im->initialize(&dict, &srv, OV_MODULEDIR);
+
+    AVDictionary mainDict = im_config.dictionary();
+
+    const char *idf = im->identifier();
+    if (!mainDict.dictionaryExists(idf)) mainDict.createDictionaryForKey(idf);
+    AVDictionary imDict = mainDict.getDictionary(idf);
+
+    im->initialize(&imDict, &srv, OV_MODULEDIR);
+    im_config.write();
 }
 
 OVSCIMFactory::~OVSCIMFactory() {
@@ -148,6 +176,7 @@ IMEngineInstancePointer OVSCIMFactory::create_instance(const String& encoding, i
 
 OVSCIMInstance::OVSCIMInstance(OVInputMethodContext *c, OVSCIMFactory *factory, const String& encoding, int id ) : DIMEInstance(factory,encoding, id), buf(this), candi(this)
 {
+    im=factory->im;
     cxt=c;
     cxt->start(&buf, &candi, &srv);
 }
@@ -216,12 +245,29 @@ void OVSCIMInstance::reset() {
 }
 
 void OVSCIMInstance::focus_in() {
+
+    if (im_config.needSync()) {
+        im_config.load();
+    }
+
+    AVDictionary mainDict = im_config.dictionary();
+
+    const char *idf = im->identifier();
+    if (!mainDict.dictionaryExists(idf)) mainDict.createDictionaryForKey(idf);
+    AVDictionary imDict = mainDict.getDictionary(idf);
+
+    im->update(&imDict, &srv);
+ 
+
     // clear buffer, context::start()
+    buf.clear();
+    cxt->start(&buf, &candi, &srv);
     cxt->clear();
 }
 
 void OVSCIMInstance::focus_out() {
     // send out remaining texts
+    buf.clear();
     cxt->clear();
 }
 

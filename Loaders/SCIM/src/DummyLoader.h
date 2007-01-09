@@ -21,7 +21,7 @@ public:
     virtual ~DIMEInstance() {}
 
     // for compatiblity with scim-1.0
-    void move_preedit_caret(unsigned int){}
+    // void move_preedit_caret(unsigned int){}
     void trigger_property (const String &property){}
 
 protected:	
@@ -81,7 +81,9 @@ public:
         return this;
     }
     virtual OVBuffer* update(int cursorPos, int markFrom=-1, int markTo=-1) {
-        return update();
+        update();
+        im->update_preedit_caret(cursorPos);
+        return this;
     }
     virtual int isEmpty() {
         if (!strlen(buf)) return 1;
