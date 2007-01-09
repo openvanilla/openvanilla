@@ -15,6 +15,7 @@ public:
 		lpIMC=NULL;
 		lpCompStr=NULL;
 		lpMyPrivate=NULL;
+		compStarted=false;
 	}
 	AVDisplayServer *lockIMC(HIMC h);
 	AVDisplayServer *releaseIMC();

@@ -156,7 +156,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	case WM_IME_SELECT:
 		//Sent to an application when the operating system 
 		//     is about to change the current IME
-		dsvr->SetCompStarted(false);
+		//dsvr->SetCompStarted(false);
 		if(wParam) //the indicated IME is selected
 		{
 			murmur("WM_IME_SELECT: selected.");
@@ -185,8 +185,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		dsvr->showCandi(false);
 
 		dsvr->releaseIMC(); // 裡面 access "lpIMC" 出現 exception
-		
-		loader->closeModule(); //also send buf to app
+//		loader=AVLoader::getLoader();
+//		loader->closeModule(); //also send buf to app
 		
 		break;
 

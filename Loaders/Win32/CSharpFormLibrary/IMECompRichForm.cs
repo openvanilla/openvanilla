@@ -59,10 +59,7 @@ namespace CSharpFormLibrary
 		}
 		public void SetComp(string inputs)
 		{
-
-			if(inputs==null) return;
-
-            
+			if(inputs==null) return;            
             //if (inputs == null || this.textBox1.Text == inputs) return;
             /* *** Comments due to OVIME.VC8.sln <Jaimie> *************/
             /* *** postpone this merge until fully upgrade to VC8 *****/
@@ -75,18 +72,13 @@ namespace CSharpFormLibrary
             //1st method for get the exact composition length
 #if true
             System.Drawing.StringFormat format = new System.Drawing.StringFormat();
-
             System.Drawing.RectangleF rect = new System.Drawing.RectangleF(0, 0, 1000, 100);
-
             System.Drawing.CharacterRange[] ranges = 
              { new System.Drawing.CharacterRange(0, inputs.Length) };
             System.Drawing.Region[] regions = new System.Drawing.Region[1];
-
             format.SetMeasurableCharacterRanges(ranges);
-
             regions = g.MeasureCharacterRanges(inputs, this.richTextBox1.Font, rect, format);
             rect = regions[0].GetBounds(g);
-
             //mark the next line for dynamic composition window length setting.                                              
             //currentAllCompStrLength = (int)(rect.Right + 1.0f);
             currentAllCompStrLength = (int)(rect.Right);
@@ -97,7 +89,7 @@ namespace CSharpFormLibrary
             */
             this.richTextBox1.Text = inputs;            
             Point pt = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.Text.Length);
-            this.Width = pt.X+10;                        
+            this.Width = pt.X+25;                        
         }
 
         public int GetHeight()
@@ -128,20 +120,20 @@ namespace CSharpFormLibrary
 		public void SetCaretX(int x)
 		{
             Point pt = this.richTextBox1.GetPositionFromCharIndex(x);
-            caretPosX = pt.X + 1;
-            System.Diagnostics.Debug.WriteLine("caretPosX=" + caretPosX);
-            System.Diagnostics.Debug.WriteLine("compSelStart=" + compSelStart);
-            System.Diagnostics.Debug.WriteLine("compSelEnd=" + compSelEnd);
+            caretPosX = pt.X + 6;
+            //System.Diagnostics.Debug.WriteLine("caretPosX=" + caretPosX);
+            //System.Diagnostics.Debug.WriteLine("compSelStart=" + compSelStart);
+            //System.Diagnostics.Debug.WriteLine("compSelEnd=" + compSelEnd);
+            //System.Diagnostics.Debug.WriteLine("labelX=" +label1.Left.ToString());               
             if (compSelStart == compSelEnd) //已經組字
             {
                 //if (compSelStart == 0)  compSelStart = 1;
-                System.Diagnostics.Debug.WriteLine("compSelStart=" + compSelStart+",text="+this.richTextBox1.Text);
+                //System.Diagnostics.Debug.WriteLine("compSelStart=" + compSelStart+",text="+this.richTextBox1.Text);
                 if (compSelStart > 0)
                 {
                     this.richTextBox1.Select(compSelStart - 1, 1);
                 }                
-                System.Diagnostics.Debug.WriteLine("complete combination: position"+x+"="+caretPosX);
-               
+                //System.Diagnostics.Debug.WriteLine("complete combination: position"+x+"="+caretPosX);               
                 this.label1.Left = caretPosX;
             }
             else //正在組字

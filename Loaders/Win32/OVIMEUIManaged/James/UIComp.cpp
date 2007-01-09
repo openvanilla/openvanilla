@@ -197,11 +197,13 @@ void UIShowCompWindow()
 		_ShowCompPage();
 		//	ShowWindow(uiComp.hWnd, SW_SHOWNOACTIVATE);
 	}
+	/*
 	if(lpCompStr)
 	{
 		_SetCompCaretPosX(CompCursorPos);
 		murmur("\t---> CompCursorPos : %d", CompCursorPos);
 	}
+	*/
 }
 
 void UIHideCompWindow()

@@ -160,7 +160,8 @@ AVDisplayServer *DisplayServer::setCursorPos(int i)
 {
 	lpCompStr->dwCursorPos = i;
 	murmur("\tDisplayServer::setCursorPos-> %d",i);
-	UISetCursorPos(lpCompStr->dwCursorPos);
+	//UISetCursorPos(lpCompStr->dwCursorPos);
+	UISetCompCaretPosX(i);
 	return this;
 }
 AVDisplayServer *DisplayServer::setMarkFrom(int i)

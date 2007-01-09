@@ -17,6 +17,9 @@ void AVBuffer::setDisplayServer(AVDisplayServer *svr)
 OVBuffer* AVBuffer::clear()
 {
 	bufstr = "";
+	dsvr->setMarkFrom(0);
+	dsvr->setMarkTo(0);
+	dsvr->setCursorPos(0);
 	return this;
 }
 OVBuffer* AVBuffer::append(const char *s)
@@ -32,7 +35,7 @@ OVBuffer* AVBuffer::send()
 		bufstr = (*of)->process(bufstr.c_str(), srv);
 	}
 	dsvr->sendBuf(bufstr.c_str());
-	bufstr="";
+	clear();
 	//dsvr->showBuf(false); 
 	return this;
 }
@@ -40,24 +43,18 @@ OVBuffer* AVBuffer::send()
 OVBuffer* AVBuffer::update() //set + show
 {
 	murmur("OVBuffer* AVBuffer::update() ");
-	dsvr->setBufString(bufstr.c_str());	
-	//if(bufstr.length())
-	{
-		dsvr->showBuf(true); 
-	}
-	/*else
-	{
-		dsvr->showBuf(false);
-	}*/
+	dsvr->setBufString(bufstr.c_str());
+	dsvr->showBuf(true);
 	return this;
 }
 OVBuffer* AVBuffer::update(int cursorPos, int markFrom=-1, int markTo=-1)
 {	
-	murmur("OVBuffer* AVBuffer::update(int cursorPos, int markFrom=-1, int markTo=-1) ");	
-	dsvr->setCursorPos(cursorPos);
+	murmur("OVBuffer* AVBuffer::update(int cursorPos, int markFrom=-1, int markTo=-1) ");
+	dsvr->setBufString(bufstr.c_str());
 	dsvr->setMarkFrom(markFrom);
 	dsvr->setMarkTo(markTo);
-	update();
+	dsvr->setCursorPos(cursorPos);
+	dsvr->showBuf(true);
 	return this;
 }
 int AVBuffer::isEmpty()
