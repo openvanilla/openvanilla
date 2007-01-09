@@ -151,10 +151,12 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	int k;
 
 	if (!hIMC) return FALSE;
-	if (!(lpIMC = ImmLockIMC(hIMC))) 
+	if (!(lpIMC = ImmLockIMC(hIMC)))
 		return FALSE;
 	//if (lKeyData & 0x80000000)	
 	//	return FALSE;
+
+	dsvr->lockIMC(hIMC);
 
 	//if( (uVKey == VK_SHIFT)&&((GetKeyState(uVKey)& 0xF0) != 0xF0) )	
 	if ( GetKeyInfo(lKeyData).isKeyUp )
@@ -170,7 +172,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 				//return TRUE;
             }
             g_shiftPressedTime = -1;
-        }         
+        }
         return FALSE;
     }
 
@@ -284,7 +286,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		&& (uVKey <= VK_DIVIDE))
 		keycode.setNum(1);
 
-	dsvr->lockIMC(hIMC);
+	//dsvr->lockIMC(hIMC);
 	loader = AVLoader::getLoader();
 	BOOL retVal = FALSE;
 	if(loader->keyEvent(UICurrentInputMethod(), keycode)) {
@@ -299,8 +301,8 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		*/
 	}
 	dsvr->releaseIMC();
-	ImmUnlockIMCC(lpIMC->hCompStr);
-	ImmUnlockIMC(hIMC);
+	//ImmUnlockIMCC(lpIMC->hCompStr);
+	//ImmUnlockIMC(hIMC);
 
 	return retVal; 
 }

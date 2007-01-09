@@ -184,10 +184,11 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		dsvr->showBuf(false);
 		dsvr->showCandi(false);
 
+		loader = AVLoader::getLoader();
+		loader->closeModule(); //also send buf to app
+
 		dsvr->releaseIMC(); // 裡面 access "lpIMC" 出現 exception
-//		loader=AVLoader::getLoader();
-//		loader->closeModule(); //also send buf to app
-		
+
 		break;
 
 	case WM_IME_RELOADCONFIG:

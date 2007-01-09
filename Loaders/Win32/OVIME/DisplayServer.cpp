@@ -44,8 +44,8 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 {
 	wchar_t wstr[1024];
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
-	wcscpy(GETLPRESULTSTR(lpCompStr), wstr);
 	lpCompStr->dwResultStrLen = (int)wcslen(wstr);
+	wcscpy(GETLPRESULTSTR(lpCompStr), wstr);	
 	wcscpy(lpMyPrivate->PreEditStr, L"");
 	
 	MakeCompStr(lpMyPrivate, lpCompStr);
