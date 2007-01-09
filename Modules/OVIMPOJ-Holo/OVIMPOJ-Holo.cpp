@@ -38,7 +38,7 @@
 	#define PATH_MAX MAX_PATH
 	#define strcasecmp stricmp
 #else
-	#include <sys/syslimits.h>	//for PATH_MAX
+        #include <sys/param.h>
 #endif
 
 OV_SINGLE_MODULE_WRAPPER(OVIMPOJHolo);
