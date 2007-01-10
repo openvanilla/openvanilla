@@ -71,4 +71,7 @@ EXPORTS
 	UIClearCompStr	
 	UIGetCaretPosX
 	_GetCaretPosX
+	_ExpandCandi
+	UIExpandCandi
+	
 

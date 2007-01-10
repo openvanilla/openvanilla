@@ -432,3 +432,11 @@ void UIHideCandWindow()
 
 	}
 }
+void UIExpandCandi()
+{
+	murmur("UIExpandCand");
+	Watch watch;
+	watch.start();
+	_ExpandCandi();
+	watch.stop();	
+}

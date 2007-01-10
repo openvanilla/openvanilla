@@ -56,6 +56,7 @@ void UIClearCompStr();
 // UICand.cpp
 void UICreateCandWindow(HWND);
 void UIMoveCandWindow(int, int);
+void UIExpandCandi();
 //void UIMoveCandWindow(HWND, int, int, wchar_t*);
 void UIShowCandWindow();
 void UIHideCandWindow();

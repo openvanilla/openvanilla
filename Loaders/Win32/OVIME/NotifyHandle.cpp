@@ -179,6 +179,10 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		case 5: //Change BoPoMoFo keyboard layout by ctrl +'='
 			UIChangeBoPoMoFoLayout(hWnd);
 			break;
+		case 6: // Toggle Small/Large Candidate window.
+			murmur("\tToggle Small/Large Candidate window.");
+			UIExpandCandi();
+			break;
 		default:
 			murmur("\tUknown IMN_PRIVATE");
 			break;

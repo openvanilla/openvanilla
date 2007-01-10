@@ -34,3 +34,4 @@ void _SetCompCaretPosX(int);
 void _SetCompMarkFrom(int);
 void _SetCompMarkTo(int);
 void _SetUserDir();
+void _ExpandCandi();

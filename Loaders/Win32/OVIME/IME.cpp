@@ -193,15 +193,34 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	{
 		return FALSE; //<James comment> for app :"³æ³æ«ö ctrl ©Î alt"
 	}
+	
+	
+	if(LOWORD(uVKey) == VK_K && (lpbKeyState[VK_CONTROL] & 0x80)&& (lpbKeyState[VK_MENU] & 0x80) )
+	{
+		// Toggle Large Candidate window.
+		//Only Shift: lParam == 6
+		murmur("IME.cpp: ctrl+alt+K");
+		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 6);
+		return TRUE;  // ctrl+ alt +k		
+	}
+	/*
+	if(LOWORD(uVKey) == VK_J && (lpbKeyState[VK_CONTROL] & 0x80)&& (lpbKeyState[VK_MENU] & 0x80) )
+	{
+		// Toggle Small Candidate window.
+		//Only Shift: lParam == 6
+		murmur("IME.cpp: ctrl+alt+K");
+		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 6);
+		return TRUE;  // ctrl+ alt +k		
+	}*/
 
 	if(LOWORD(uVKey) == VK_G && (lpbKeyState[VK_CONTROL] & 0x80)&& (lpbKeyState[VK_MENU] & 0x80) )
 	{
 		// Toggle Traditional / Simplified Chinese.
 		//Only Shift: lParam == 4
+		murmur("IME.cpp: ctrl+alt+g");
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 4);
 		return TRUE;  // ctrl+ alt +g		
 	}
-
 	if(LOWORD(uVKey) == VK_SPACE && (lpbKeyState[VK_CONTROL] & 0x80))
 		return TRUE;  //ctrl+space
 

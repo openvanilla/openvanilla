@@ -153,6 +153,12 @@ public:
 	{
 		return 	CandFormAssembly::CandiType()->GetMethod("SetHWND");
 	}	
+	
+	static MethodInfo* ExpandCandi()
+	{
+		return 	CandFormAssembly::CandiType()->GetMethod("SwitchCandiMode");
+	}	
+	
 };
 
 HWND _CreateCandPage()//create
@@ -277,6 +283,11 @@ void _EndCandPage()
 	methodDisposeWindow->Invoke(CandFormAssembly::CandidateForm(),NULL);
 }
 
+void _ExpandCandi() //®i¶} cand window
+{
+	Object* ret = CandFormAssembly::ExpandCandi()
+			->Invoke(CandFormAssembly::CandidateForm(), NULL);
+}
 int _GetCandidateValue()
 {
 	/*
@@ -286,6 +297,7 @@ int _GetCandidateValue()
 	*/
 	return 0;
 }
+
 
 void _ShowCandPageArray(const std::vector<std::wstring>& candidates)
 {
