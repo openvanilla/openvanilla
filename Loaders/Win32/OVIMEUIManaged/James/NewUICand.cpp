@@ -2,7 +2,7 @@
 #include <vector>
 //#include <windows.h>
 #include "PCMan.h"
-
+#include "AVConfig.h"
 
 #pragma managed
 
@@ -65,7 +65,13 @@ public:
 	{
 		if(!hasPasm) 
 		{
-			pasm = Reflection::Assembly::LoadFile("C:\\WINDOWS\\OpenVanilla\\CSharpFormLibrary.dll");	
+			AVConfig *cfg= new AVConfig();
+			const char *baseDir=cfg->getBaseDir();
+			String* asmPath(baseDir);
+			pasm =
+				Reflection::Assembly::LoadFile(
+					asmPath->Concat(
+						asmPath, new String("CSharpFormLibrary.dll")));
 			hasPasm = true;
 		}
 		return pasm;

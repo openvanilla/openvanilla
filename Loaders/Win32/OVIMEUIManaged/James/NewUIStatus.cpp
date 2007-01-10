@@ -2,9 +2,7 @@
 #include <vector>
 //#include <windows.h>
 #include "PCMan.h"
-#include "AVDictionary.h"
 #include "AVConfig.h"
-
 
 #pragma managed
 
@@ -21,6 +19,7 @@ using namespace std;
 __gc class StatusFormAssembly{
 private:
 	StatusFormAssembly(){}
+
 	static Assembly* pasm;
 	static bool hasPasm = false;
 
@@ -40,7 +39,7 @@ private:
 	static bool hasMethodStatusSetChiEng = false;
 
 	static MethodInfo* methodStatusSetSimpifiedOrTraditional;
-	static bool hasMethodStatusSetSimpifiedOrTraditional = false;	
+	static bool hasMethodStatusSetSimpifiedOrTraditional = false;
 
 	static MethodInfo* methodStatusSetDir;
 	static bool hasMethodStatusSetDir = false;
@@ -80,7 +79,13 @@ public:
 	{
 		if(!hasPasm) 
 		{
-			pasm = Reflection::Assembly::LoadFile("C:\\WINDOWS\\OpenVanilla\\CSharpFormLibrary.dll");	
+			AVConfig *cfg= new AVConfig();
+			const char *baseDir=cfg->getBaseDir();
+			String* asmPath(baseDir);
+			pasm =
+				Reflection::Assembly::LoadFile(
+					asmPath->Concat(
+						asmPath, new String("CSharpFormLibrary.dll")));
 			hasPasm = true;
 		}
 		return pasm;
@@ -125,7 +130,7 @@ public:
 		if(!hasMethodStatusMove)
 		{
 			methodStatusMove =
-				StatusFormAssembly::StatusType()	->GetMethod("SetLocation");
+				StatusFormAssembly::StatusType()->GetMethod("SetLocation");
 			hasMethodStatusMove = true;
 		}
 		return methodStatusMove;
@@ -202,7 +207,7 @@ public:
 		if(!hasMethodStatusHide)
 		{
 			methodStatusHide =
-				StatusFormAssembly::StatusType()	->GetMethod("HideNoActive");
+				StatusFormAssembly::StatusType()->GetMethod("HideNoActive");
 			hasMethodStatusHide = true;
 		}
 		return methodStatusHide;
