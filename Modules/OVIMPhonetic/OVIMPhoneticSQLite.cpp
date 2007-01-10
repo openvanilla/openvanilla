@@ -37,7 +37,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <sys/syslimits.h>
+
+//#include <sys/syslimits.h>
+#include "OVOSDef.h"
+
 #include "OVSQLite3.h"
 #include "OVPhoneticLib.h"
 

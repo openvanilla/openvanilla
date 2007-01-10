@@ -5,7 +5,8 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <ctype.h>
-#include <sys/syslimits.h>
+//#include <sys/syslimits.h>
+#include "OVOSDef.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <string.h>

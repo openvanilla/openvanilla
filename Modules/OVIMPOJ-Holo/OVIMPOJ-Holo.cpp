@@ -33,13 +33,16 @@
 #include "OVIMPOJ-Holo.h"
 #include <ctype.h>
 
+#include "OVOSDef.h"
+/*
 #ifdef WIN32
 	#include <windows.h>
 	#define PATH_MAX MAX_PATH
 	#define strcasecmp stricmp
 #else
-        #include <sys/param.h>
+        #include <limits.h>
 #endif
+*/
 
 OV_SINGLE_MODULE_WRAPPER(OVIMPOJHolo);
 
