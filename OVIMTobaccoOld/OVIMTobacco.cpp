@@ -16,19 +16,20 @@
 #include <string.h>
 #include <ctype.h>
 
-#ifdef WIN32
-	#define strcasecmp stricmp
-#endif
-
 #include "OVKeySequence.h"
 #include "OVSQLite3.h"
 
+#include "OVOSDef.h"
+/*
 #ifndef WIN32
 	#include <sys/syslimits.h>	//for PATH_MAX
 #else
 	#include <windows.h>
 	#define PATH_MAX MAX_PATH
+
+	#define strcasecmp stricmp
 #endif
+*/
 
 #include <string>
 
