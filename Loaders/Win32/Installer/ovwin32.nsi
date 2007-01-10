@@ -9,8 +9,11 @@
 !define PRODUCT_PUBLISHER "IASL"
 !define PRODUCT_WEB_SITE "http://iasl.iis.sinica.edu.tw/"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
+; HKLM = HKEY_LOCAL_MACHINE
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define IME_ROOT_KEY "HKLM"
+; HKCU = HKEY_CURRENT_USER
+!define IME_CURRENT_USER "HKCU"
 !define IME_KEY "SYSTEM\CurrentControlSet\Control\Keyboard Layouts\"
 !define IME_KEY_USER "Keyboard Layout\Preload\"
 
@@ -144,11 +147,43 @@ InstallDir "$WINDIR\OpenVanilla"
 ShowInstDetails show
 ShowUnInstDetails show
 
+Function uninstOld
+   ClearErrors
+   IfFileExists "$SYSDIR\OVIME.ime" 0 ContinueUnist
+      Delete "$SYSDIR\OVIME.ime"
+      IfErrors 0 ContinueUnist
+         MessageBox MB_ICONSTOP|MB_OK "解決安裝舊版發生錯誤，請確定你有管理員權限。"
+         Abort
+      ContinueUnist:
+      SetOverwrite on
+      SetOutPath "$TEMP\~nsu.tmp"
+      CopyFiles /SILENT "$WINDIR\OpenVanilla\uninst.exe" "$TEMP\~nsu.tmp\AU_.exe"
+
+      ExecWait '"$TEMP\~nsu.tmp\Au_.exe" /S _?=$WINDIR\OpenVanilla'
+      Delete "$TEMP\~nsu.tmp\Au_.exe"
+      RMDir "$TEMP\~nsu.tmp"
+      ClearErrors
+
+      ;Ensure the old IME is deleted
+      Delete "$SYSDIR\OVIME.ime"
+
+      IfErrors 0 +2
+         Call onInstError
+FunctionEnd
+
+Function onInstError
+   MessageBox MB_ICONSTOP|MB_OK "安裝中發生錯誤，請確定您有管理員權限。"
+   Abort
+FunctionEnd
+
 Function .onInit
-  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
-  StrCmp $0 "" +3 0
-	  MessageBox MB_ICONINFORMATION|MB_OK "偵測到已安裝 OpenVanilla ，請移除後重新安裝。"
+  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion"
+  StrCmp $0 "" ContinueInst 0
+	  ;MessageBox MB_ICONINFORMATION|MB_OK "偵測到已安裝 OpenVanilla ，請移除後重新安裝。"
+          MessageBox MB_OKCANCEL|MB_ICONQUESTION "偵測到舊版 $0 已安裝，是否要移除舊版後重新安裝新版？" IDOK +2
 	  Abort
+          Call uninstOld
+   ContinueInst:
 ;  !insertmacro MUI_LANGDLL_DISPLAY
 
 ;DOTNET start --------------------------------------------
@@ -392,6 +427,15 @@ Section $(SEC_DOTNET) SECDOTNET
   !insertmacro MUI_DESCRIPTION_TEXT ${SECDOTNET} $(DESC_LONGDOTNET)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
+;Section "CheckVersion" CV1
+;  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion"
+;  StrCmp $0 "" ContinueInst 0
+;          MessageBox MB_OKCANCEL|MB_ICONQUESTION "偵測到舊版 $0 已安裝，是否要移除舊版後重新安裝新版？" IDOK +2
+;	  Abort
+;          Call uninstOld
+;    ContinueInst:      
+;SectionEnd          
+
 Section "MainSection" SEC01
   SetOutPath "$SYSDIR"
   SetOverwrite ifnewer
@@ -438,24 +482,25 @@ Section -Post
 SectionEnd
 
 Function un.onUninstSuccess
-  HideWindow
-  MessageBox MB_ICONINFORMATION|MB_OK "GOING-OpenVanilla 已成功地從你的電腦移除。"
+  ;HideWindow
+  MessageBox MB_ICONINFORMATION|MB_OK "GOING-OpenVanilla 已成功地從你的電腦移除。" /SD IDOK
 FunctionEnd
 
 Function un.onInit
 ;!insertmacro MUI_UNGETLANGUAGE
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "你確定要完全移除 GOING-OpenVanilla ，其及所有的元件？" IDYES +2
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "你確定要完全移除 GOING-OpenVanilla ，其及所有的元件？" /SD IDYES IDYES +2
   Abort
 FunctionEnd
 
 Section Uninstall
-  Delete "$INSTDIR\uninst.exe"
+  
   Delete "$SYSDIR\libltdl3.dll"
   Delete "$SYSDIR\libiconv-2.dll"
   Delete "$SYSDIR\sqlite3.dll"
   Delete "$SYSDIR\tinyxml.dll"
   Delete "$SYSDIR\OVIMEUI.DLL"
   Delete "$SYSDIR\OVIME.ime"
+  Delete "$INSTDIR\uninst.exe"
   RMDir /r "$WINDIR\OpenVanilla"
 
   Delete "$SMPROGRAMS\GOING-OpenVanilla\Uninstall.lnk"
@@ -466,6 +511,5 @@ Section Uninstall
   ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
   DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}$0"
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
- 
   SetAutoClose true
 SectionEnd
