@@ -65,6 +65,15 @@ private:
 	double sec_;
 };
 
+//<comment author='b6s'>
+//The following three headers are for WIN32 specific debug log.
+#if defined(WIN32) && defined(OV_DEBUG)
+#include <windows.h>
+#include <shlobj.h>
+#include <io.h>
+#endif
+//</comment>
+
 // debug routine
 #ifdef OV_DEBUG 
     #include <stdarg.h>
@@ -75,8 +84,33 @@ private:
 
     inline static void murmur(const char* format,...) {
 #ifdef WIN32
+		//<comment author='b6s'>
+		//The following codes of paths are redundant to AVConfig.cpp,
+		//however, they're necessary...		
+		char OV_BASEDIR_PRE[MAX_PATH];
+		char OV_USERDIR_PRE[MAX_PATH];
+
+		GetWindowsDirectoryA(OV_BASEDIR_PRE, MAX_PATH - 14);
+		sprintf(OV_BASEDIR_PRE, "%s\\%s", OV_BASEDIR_PRE, "OpenVanilla\\");
+
+		if (SHGetFolderPathA(
+				NULL,
+				CSIDL_APPDATA|CSIDL_FLAG_CREATE,
+				NULL,
+				0,
+				OV_USERDIR_PRE) >= 0) {
+			sprintf(OV_USERDIR_PRE, "%s\\%s", OV_USERDIR_PRE, "OpenVanilla\\");
+			if (_access (OV_USERDIR_PRE, 0))
+				CreateDirectoryA(OV_USERDIR_PRE, NULL);
+		} else
+			sprintf(OV_USERDIR_PRE, "%s\\%s", OV_BASEDIR_PRE, "User\\");
+
+		char OV_WIN32_DEBUG_LOG_PATH[MAX_PATH];
+		sprintf(OV_WIN32_DEBUG_LOG_PATH, "%s\\%s", OV_USERDIR_PRE, "orz.txt");
+		//</comment>
+
 		FILE *fp;
-		if (fp=fopen("C:\\WINDOWS\\OpenVanilla\\orz.txt", "a")) {
+		if (fp=fopen(OV_WIN32_DEBUG_LOG_PATH, "a")) {
 			va_list args;
 			va_start (args, format);
 			vfprintf (fp, format, args);
@@ -85,16 +119,15 @@ private:
 			fclose(fp);
 		}
 #else
-        va_list args;
-        va_start (args, format);
-        vfprintf (stderr, format, args);
-        va_end (args);
-        fprintf (stderr, "\n");
+		va_list args;
+		va_start (args, format);
+		vfprintf (stderr, format, args);
+		va_end (args);
+		fprintf (stderr, "\n");
 #endif
     }
 #else
-    inline static void murmur(const char* format,...) {
-    }
+    inline static void murmur(const char* format,...) {}
 #endif
 
 #endif
