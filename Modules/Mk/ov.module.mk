@@ -92,6 +92,7 @@ else
     # default for INST_PATH is /usr/local/lib/openvanilla
 	INST_PATH=$(INSTALL_PREFIX)/$(INSTALL_LIBPREFIX)/openvanilla/
 	OBJS=$(patsubst %, %.lo, $(SOURCES))
+	OBJS+=$(patsubst %, %.o, $(SOURCES))
 	GOALS=$(MODULEID).la
 	#CFLAGS=-I/usr/local/include/ -I../../Headers/
 
