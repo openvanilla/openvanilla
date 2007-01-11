@@ -130,10 +130,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	case WM_IME_STARTCOMPOSITION:
 		murmur("WM_IME_STARTCOMPOSITION");
 		dsvr->SetCompStarted(true);
-		dsvr->showStatus(true);		
-		RefreshUI(hWnd);
-		//James comment
-		//Can we在start時先move到正確的座標?		
+		//dsvr->showStatus(true);								
+		RefreshUI(hWnd); //James comment : 是否move到正確的座標?
 		break;
 
 	case WM_IME_COMPOSITION:

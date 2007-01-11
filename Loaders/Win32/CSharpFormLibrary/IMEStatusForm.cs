@@ -310,8 +310,10 @@ namespace CSharpFormLibrary
         public void SetAppHWnd(UInt64 HWND)
         {
             m_AppHWnd = HWND;
+            Debug.WriteLine("m_AppHWnd (status) =" + HWND);
             //System.Diagnostics.Debug.WriteLine("AppHWnd set: " + m_AppHWnd);
-            this.button2.AppHWnd = m_AppHWnd;
+            //this.button2.AppHWnd = m_AppHWnd;
+            //this.button3.AppHWnd =
             //System.Diagnostics.Debug.WriteLine("button2.AppHWnd: " + this.button2.AppHWnd);
         }
 
@@ -362,12 +364,11 @@ namespace CSharpFormLibrary
 		{
 			if(inputs == null) return;
 
-            System.Diagnostics.Debug.WriteLine("status: set menu=\t" + inputs);
+            System.Diagnostics.Debug.WriteLine("\tstatus: set menu=\t" + inputs);
             this.contextMenu1.MenuItems.Add(
                 inputs, new EventHandler(menuItem_Click));
 
-            System.Diagnostics.Debug.WriteLine(
-                "status: menu size=\t" + this.contextMenu1.MenuItems.Count);
+            //System.Diagnostics.Debug.WriteLine("\tstatus: menu size=\t" + this.contextMenu1.MenuItems.Count);
         }
 
 
@@ -376,9 +377,9 @@ namespace CSharpFormLibrary
             m_baseDir = baseDir;
             m_moduleDir = moduleDir;
             m_userDir = userDir;
-            Debug.WriteLine(m_baseDir);
+            /*Debug.WriteLine(m_baseDir);
             Debug.WriteLine(m_moduleDir);
-            Debug.WriteLine(m_userDir);
+            Debug.WriteLine(m_userDir);*/
         }
 
         public int GetSelectedModuleIndex()
@@ -451,11 +452,12 @@ namespace CSharpFormLibrary
         private void button2_MouseUp(object sender, MouseEventArgs e)
         {            
             this.button2.ContextMenu.Show(button2, new System.Drawing.Point(0, button2.Bottom));
-            System.Diagnostics.Debug.WriteLine("status: context menu shown.");
+            //System.Diagnostics.Debug.WriteLine("status: context menu shown.");
         }
 
         private void button3_MouseUp(object sender, MouseEventArgs e) //中英
         {
+            Debug.WriteLine("中英-> m_AppHWnd=" + m_AppHWnd);
             int ret = UtilFuncs.SendMessage(
                 new IntPtr((long)m_AppHWnd),
                 (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
@@ -465,6 +467,7 @@ namespace CSharpFormLibrary
 
         private void imeButton1_MouseUp(object sender, MouseEventArgs e) //繁簡
         {
+            //Debug.WriteLine("繁簡-> m_AppHWnd=" + m_AppHWnd);
             int ret = UtilFuncs.SendMessage(
                 new IntPtr((long)m_AppHWnd),
                 (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
@@ -474,6 +477,7 @@ namespace CSharpFormLibrary
 
         private void button6_MouseUp(object sender, MouseEventArgs e) //設定
         {
+
             string pre_file = m_userDir + "config.xml";            
             Process proc = new System.Diagnostics.Process();            
             proc.StartInfo.FileName="OVPreferences.exe";

@@ -22,8 +22,16 @@ LONG NotifyHandle(HIMC hUICurIMC,
 	{
 	case IMN_OPENSTATUSWINDOW:
 		murmur("IMN_OPENSTATUSWINDOW");
-		UICreateStatusWindow(hWnd);
 		murmur("\thwnd=%x", hWnd);
+		//James modified
+		//if(uiStatus.hWnd)
+		{
+			UICreateStatusWindow(hWnd);				
+		}
+		//else
+		{
+		
+		}
 		if(!first) {
 			SystemParametersInfo(SPI_GETWORKAREA,
 				0,
@@ -32,6 +40,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			UIMoveStatusWindow(hWnd, rec.right - 500, rec.bottom - 100);
 			first = true;
 		}
+		
 		dsvr->showStatus(true);		
 		break;
 
@@ -167,13 +176,15 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			UIChangeHalfFull(hWnd); 
 			break;
 		case 2:  //Change UI CHI/ENG
+			murmur("\tChange UI CHI/ENG.");
 			UIChangeChiEng(hWnd);  
 			break;
 		case 3: //Change Modules by Mouse
+			murmur("\tChange Modules by Mouse");
 			UIChangeModuleByMouse(hWnd); 
 			break;
 		case 4: // Change UI Traditional/Simplified Chinese
-			murmur("\t4");
+			murmur("\tChange UI Traditional/Simplified Chinese");			
 			UIChangeSimpifiedOrTraditional(hWnd); 
 			break;
 		case 5: //Change BoPoMoFo keyboard layout by ctrl +'='
