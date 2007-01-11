@@ -234,41 +234,38 @@ TBBUTTON toolbar_btns[]={
 
 void UICreateStatusWindow(HWND hUIWnd)
 {
-	murmur("\tUICreateStatusWindow, hUIWnd=%x",hUIWnd);
-	
-	if (!IsWindow(uiStatus.hWnd))
+	murmur("\tUICreateStatusWindow, hUIWnd=%x",hUIWnd);	
+	//if (!IsWindow(uiStatus.hWnd))
 	{
 		//create form:
 		uiStatus.hWnd = _CreateStatusPage();	
 		murmur("\t uiStatus.hWnd=%x",uiStatus.hWnd);
 	
 		//設定C# Status 內 m_AppHWnd 
-		_SetStatusAppHWnd(hUIWnd); 
-		murmur("\t before set hIMEWnd: hIMEWnd=%x,hUIWnd=%x",hIMEWnd,hUIWnd);
+		_SetStatusAppHWnd(hUIWnd); 		
+
+		//設定 module名稱
+		UISetStatusModStr();
 
 		//設定中英
 		_SetStatusChiEng(isChinese);  
-		/*if(isTraditional)	murmur("\tisTraditional=true");
-			else murmur("\tisTraditional=false");*/
 
 		//設定繁簡
 		_SetStatusSimpifiedOrTraditional(isTraditional);  		
 
 		//設定 hIMEWnd (?)
-		hIMEWnd = hUIWnd; //存到 hIMEWnd 之後會拿來判斷
+		murmur("\t before set hIMEWnd: hIMEWnd=%x,hUIWnd=%x",hIMEWnd,hUIWnd);
+		hIMEWnd = hUIWnd; //存到 hIMEWnd 之後會拿來判斷			
 		murmur("\t after set hIMEWnd: hIMEWnd=%x,hUIWnd=%x",hIMEWnd,hUIWnd);
 		
 		//設定 registry 
-		_SetUserDir();
-	}
-	/*else
-	{
-		hIMEWnd = hUIWnd; //存到 hIMEWnd 之後會拿來判斷
-		_SetStatusAppHWnd(hIMEWnd); //設定C# Status 內 m_AppHWnd 
-	}*/
-	
+		_SetUserDir();		
+	}	
+	return;
+}
 
-	murmur("\t after all, h	IMEWnd=%x",hIMEWnd);
+void UISetStatusModStr() //set Status window module list
+{
 	char modNameUTF8[1024];
 	wchar_t modNameUCS2[1024];
 	
@@ -276,7 +273,6 @@ void UICreateStatusWindow(HWND hUIWnd)
 	wchar_t *modCurrentName;
 	wchar_t *modMenuName;
 	murmur("\tUICreateStatusWindow, Current IC =%d", CurrentIC);
-	
 	//jaimie for C# menu set module name
 	//to set all available module names into C# menu list.
 	UIClearStatusMenuModString();	
@@ -297,24 +293,15 @@ void UICreateStatusWindow(HWND hUIWnd)
 	//to show the currentIC module on the status window
 	if(loader->moduleName(CurrentIC, modNameUTF8)) 
 	{
-		MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
-		//tbi.pszText = modNameUCS2;
+		MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);		
 		modCurrentName = modNameUCS2;
 	}
 	else 
-	{
-		//tbi.pszText = L"ERROR";
+	{		
 		modCurrentName = L"ERROR";
 		murmur("\tloader->moduleName() failed.");
 	}
-	UISetStatusModStr(modCurrentName);
-	return;
-}
-
-void UISetStatusModStr(wchar_t* lpStr)
-{
-	//lpCompStr = wcsdup(lpStr);
-	std::wstring wsStatusStr(wcsdup(lpStr));
+	std::wstring wsStatusStr(wcsdup(modCurrentName));
 	//watch.start();
 	_SetStatusModString(wsStatusStr);
 	//watch.stop();
@@ -449,58 +436,17 @@ void UISetMarkTo(int i)
 #endif
 void UIChangeModule(HWND hWnd)
 {
-
 	CompCursorPos=0;  //James test
-    //TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
-	
-	//CurrentIC++;
-	//if(CurrentIC > (int)IC.size() - 1)
-	//		CurrentIC = 0;
-	
-	//tbi.dwMask = TBIF_TEXT;		tbi.pszText = IC.at(CurrentIC);
-
-	//SendMessage( hToolbar, TB_SETBUTTONINFO, ID_CHANGE_IME, LPARAM(&tbi));
-
-	//SIZE sz;
-//	SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
-	//GetToolbarSize( hToolbar, &sz );
-
-	//uiStatus.sz.cx = sz.cx + 14;
-	//uiStatus.sz.cy = sz.cy + 4;
-
-	char modNameUTF8[1024];
-	wchar_t modNameUCS2[1024];
-	
 	AVLoader* loader = AVLoader::getLoader();
 	loader->closeModule();
-	wchar_t *modCurrentName;
-	//murmur("---> current IC %d", CurrentIC);
-	//murmur("---> loader->getInputMethodCount %d",loader->getInputMethodCount() );
-	
 	CurrentIC++;
+
 	//module change to the next available module
 	if(CurrentIC >= loader->getInputMethodCount())
 		CurrentIC = 0;
 	
-	if(loader->moduleName(CurrentIC, modNameUTF8)) 
-	{
-		MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
-		//tbi.pszText = modNameUCS2;
-		modCurrentName = modNameUCS2;
-		murmur("\tmodule name: %s", modNameUTF8);
-		
-	}
-	else 
-	{
-		//tbi.pszText = L"ERROR";
-		modCurrentName = L"ERROR";
-		murmur("\tloader->moduleName() failed.");
-	}
-	UISetStatusModStr(modCurrentName);
-	//murmur("UIStatus UIChangeModule %s",modCurrentName);
-	//RECT rc;
-	//GetWindowRect(uiStatus.hWnd, &rc);
-	//UIMoveStatusWindow(hWnd, rc.left, rc.top );
+	//set UI
+	UISetStatusModStr();
 	_ShowStatusPage();
 }
 
@@ -510,22 +456,12 @@ void UIChangeModuleByMouse(HWND hWnd)
 	char modNameUTF8[1024];
 	wchar_t modNameUCS2[1024];
 	
-	AVLoader* loader = AVLoader::getLoader();
-	wchar_t *modCurrentName;
-	
+	AVLoader* loader = AVLoader::getLoader();	
+
+	//get module name from UI
 	CurrentIC = _GetStatusSelectedModuleIndex();
-	if(loader->moduleName(CurrentIC, modNameUTF8)) 
-	{
-		MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
-		modCurrentName = modNameUCS2;
-		murmur("\tmodule name: %s", modNameUTF8);		
-	}
-	else 
-	{
-		modCurrentName = L"ERROR";
-		murmur("\tloader->moduleName() failed.");
-	}
-	UISetStatusModStr(modCurrentName);
+
+	UISetStatusModStr();
 	_ShowStatusPage();
 }
 
@@ -548,9 +484,16 @@ void UIChangeHalfFull(HWND hWnd)
 
 void UIChangeChiEng(HWND hWnd)
 {
-	isChinese = !isChinese;
+	
 	//SendMessage( hToolbar, TB_CHANGEBITMAP, ID_CHI_ENG, MAKELPARAM(isChinese ? 2 : 3, 0));
+		
+	//設定中英
+	isChinese = !isChinese;
+	_SetStatusChiEng(isChinese);  
+
+	//refresh
 	UIShowStatusWindow();
+
 	/*以下是模組要做的事情*/
 	HIMC imc = ImmGetContext( hIMEWnd );
 	if( imc )
@@ -566,9 +509,14 @@ void UIChangeChiEng(HWND hWnd)
 }
 
 void UIChangeSimpifiedOrTraditional(HWND hWnd)
-{
-	isTraditional = !isTraditional;
+{	
+	//設定繁簡
+	isTraditional = !isTraditional;		
+	_SetStatusSimpifiedOrTraditional(isTraditional); 
+
+	//refresh
 	UIShowStatusWindow();
+
 	/*以下是模組要做的事情*/
 
 }
@@ -576,16 +524,12 @@ void UIChangeSimpifiedOrTraditional(HWND hWnd)
 void UIChangeBoPoMoFoLayout(HWND hWnd)
 {
 	CompCursorPos=0;  //James test
- 
-	char modNameUTF8[1024];
-	wchar_t modNameUCS2[1024];
-	
 	AVLoader* loader = AVLoader::getLoader();
 	loader->closeModule();
 
 	int newIC = loader->switchBoPoMoFoLayout(CurrentIC);
 	if(newIC != CurrentIC) {
-		wchar_t *modCurrentName;
+		/*wchar_t *modCurrentName;
 		if(loader->moduleName(newIC, modNameUTF8)) 
 		{
 			CurrentIC = newIC;
@@ -599,8 +543,9 @@ void UIChangeBoPoMoFoLayout(HWND hWnd)
 			//tbi.pszText = L"ERROR";
 			modCurrentName = L"ERROR";
 			murmur("\tloader->moduleName() failed.");
-		}
-		UISetStatusModStr(modCurrentName);
+		}*/
+		CurrentIC=newIC;
+		UISetStatusModStr();
 		_ShowStatusPage();
 	}
 }

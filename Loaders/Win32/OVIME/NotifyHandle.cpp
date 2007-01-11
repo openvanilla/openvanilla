@@ -22,11 +22,10 @@ LONG NotifyHandle(HIMC hUICurIMC,
 	{
 	case IMN_OPENSTATUSWINDOW:
 		murmur("IMN_OPENSTATUSWINDOW");
-		murmur("\thwnd=%x", hWnd);
-		//James modified
+		murmur("\thwnd=%x", hWnd);		
 		//if(uiStatus.hWnd)
 		{
-			UICreateStatusWindow(hWnd);				
+			UICreateStatusWindow(hWnd);						
 		}
 		//else
 		{
