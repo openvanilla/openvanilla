@@ -235,14 +235,14 @@ TBBUTTON toolbar_btns[]={
 void UICreateStatusWindow(HWND hUIWnd)
 {
 	murmur("\tUICreateStatusWindow, hUIWnd=%x",hUIWnd);	
-	//if (!IsWindow(uiStatus.hWnd))
+	if (!IsWindow(uiStatus.hWnd))
 	{
 		//create form:
 		uiStatus.hWnd = _CreateStatusPage();	
-		murmur("\t uiStatus.hWnd=%x",uiStatus.hWnd);
+		murmur("\tuiStatus.hWnd=%x",uiStatus.hWnd);
 	
-		//設定C# Status 內 m_AppHWnd 
-		_SetStatusAppHWnd(hUIWnd); 		
+	    //設定C# Status 內 m_AppHWnd 
+	    _SetStatusAppHWnd(hUIWnd); 
 
 		//設定 module名稱
 		UISetStatusModStr();
@@ -261,6 +261,8 @@ void UICreateStatusWindow(HWND hUIWnd)
 		//設定 registry 
 		_SetUserDir();		
 	}	
+	//設定C# Status 內 m_AppHWnd 
+	_SetStatusAppHWnd(hUIWnd); 	
 	return;
 }
 
@@ -324,8 +326,8 @@ void UIClearStatusMenuModString()
 void UIMoveStatusWindow(HWND hUIWnd, int X, int Y)
 {   
 	
-	if (!IsWindow(uiStatus.hWnd))
-		UICreateStatusWindow(hUIWnd);
+	/*if (!IsWindow(uiStatus.hWnd))
+		UICreateStatusWindow(hUIWnd);*/
 
 	if (IsWindow(uiStatus.hWnd))
 	{

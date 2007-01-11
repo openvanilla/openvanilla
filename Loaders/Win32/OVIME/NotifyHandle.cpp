@@ -25,11 +25,8 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		murmur("\thwnd=%x", hWnd);		
 		//if(uiStatus.hWnd)
 		{
-			UICreateStatusWindow(hWnd);						
-		}
-		//else
-		{
-		
+			UICreateStatusWindow(hWnd);	
+					
 		}
 		if(!first) {
 			SystemParametersInfo(SPI_GETWORKAREA,
@@ -38,8 +35,9 @@ LONG NotifyHandle(HIMC hUICurIMC,
 				0);
 			UIMoveStatusWindow(hWnd, rec.right - 500, rec.bottom - 100);
 			first = true;
-		}
-		
+		}	
+
+		//show
 		dsvr->showStatus(true);		
 		break;
 

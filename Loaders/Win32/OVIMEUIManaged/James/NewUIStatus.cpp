@@ -235,6 +235,7 @@ void _SetStatusAppHWnd(HWND hwnd)
 {	
 	try{		
 		UInt64 handle = (UInt64)hwnd;		
+		StatusFormAssembly::argCollection->Clear();//!!!!
 		StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(handle)));
 		Object* param[] =
 			dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
@@ -244,6 +245,7 @@ void _SetStatusAppHWnd(HWND hwnd)
 			->Invoke(StatusFormAssembly::StatusForm(), param);
 	} catch(System::Exception* e) {
 		Debug::WriteLine(e->StackTrace);
+		murmur("%s",e->StackTrace);
 	}
 }
 void _ShowStatusPage()
