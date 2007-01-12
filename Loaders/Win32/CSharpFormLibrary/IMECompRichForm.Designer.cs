@@ -44,7 +44,7 @@ namespace CSharpFormLibrary
             this.richTextBox1.Multiline = false;
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.richTextBox1.Size = new System.Drawing.Size(550, 22);
+            this.richTextBox1.Size = new System.Drawing.Size(915, 22);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
@@ -64,7 +64,7 @@ namespace CSharpFormLibrary
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(332, 19);
+            this.ClientSize = new System.Drawing.Size(146, 19);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox1);

@@ -28,6 +28,7 @@ namespace CSharpFormLibrary
         
         public IMECompRichForm()
         {
+            //SetStyle(ControlStyles.DoubleBuffer, true);
             InitializeComponent();
         }
         protected override void WndProc(ref Message m)
@@ -54,8 +55,10 @@ namespace CSharpFormLibrary
 			this.richTextBox1.Clear();            
             compSelStart = 0;        
             compSelEnd = 0;
-            Point pt = this.richTextBox1.GetPositionFromCharIndex(caretPosIndex);
-            caretPosX = pt.X + 6; 
+            
+            //Point pt = this.richTextBox1.GetPositionFromCharIndex(caretPosIndex);
+            //caretPosX = pt.X + 6;
+            
 
 		}
 		public void SetLocation(int x, int y)
@@ -65,9 +68,10 @@ namespace CSharpFormLibrary
 		public void SetComp(string inputs)
 		{
 			if(inputs==null) return;            
-            this.richTextBox1.Text = inputs;            
-            Point pt = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.Text.Length);
-            this.Width = pt.X+25;                        
+            this.richTextBox1.Text = inputs; 
+            //Point pt = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.Text.Length);
+            //this.Width = pt.X+25;
+                       
         }
 
         public int GetHeight()
@@ -91,21 +95,23 @@ namespace CSharpFormLibrary
 		{
             caretPosIndex = x;
             Point pt = this.richTextBox1.GetPositionFromCharIndex(caretPosIndex);
-            caretPosX = pt.X + 6;  
-            System.Diagnostics.Debug.WriteLine("========SetCaretX=========");
+            caretPosX = pt.X + 6;
+            this.label1.Left = caretPosX;
+            /*System.Diagnostics.Debug.WriteLine("========SetCaretX=========");
             System.Diagnostics.Debug.WriteLine("cursor:" +x);
             System.Diagnostics.Debug.WriteLine("caretPosX=" + caretPosX);
             System.Diagnostics.Debug.WriteLine("compSelStart=" + compSelStart);
             System.Diagnostics.Debug.WriteLine("compSelEnd=" + compSelEnd);
             System.Diagnostics.Debug.WriteLine("labelX=" +label1.Left.ToString());               
-             
+             */
             if (compSelStart == compSelEnd) //已經組字
-            {                              
+            {                
+                Point pt2 = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.Text.Length);
+                this.Width = pt2.X + 100;                
                 if (compSelStart > 0)
-                {
+                {                    
                     this.richTextBox1.Select(compSelStart - 1, 1);
                 }
-                this.label1.Left = caretPosX;
                 //this.Width = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.Text.Length).X + 30;
             }
             else //正在組字
