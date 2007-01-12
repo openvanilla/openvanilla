@@ -121,6 +121,7 @@ protected:
     IMGKeySequence seq;
     IMGCandidate *candi;
     int page;
+	size_t currentCandidateLimit;
     
     size_t position;
     bool canNewSequence;
@@ -402,7 +403,8 @@ void OVIMTobaccoContext::end() {
 
 int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, OVService* ps) {
     k=pk; b=pb; c=pc; s=ps;
-    if (candi) return candidateEvent();
+    if (candi)
+		if(candidateEvent()) return 1;
     if (isPunctuationCombination()) return punctuationKey();
     if (k->isFunctionKey() && b->isEmpty()) return 0;
     if (k->isCapslock()) {
@@ -833,6 +835,14 @@ int OVIMTobaccoContext::candidateEvent() {
     size_t perpage=strlen(localSelKey);
     size_t i=0, l=perpage, nextsyl=0;
     for (i=0; i<perpage; i++) if(localSelKey[i]==kc) break;
+
+	//<comment author='b6s'>A workaround for index exceeding current boundary.
+	if (i >= currentCandidateLimit) {
+		closeCandidateWindow();
+		return 0;
+	}
+	//</comment>
+
     if (i==l) {         // not a valid candidate key
         if (kc==ovkReturn) i=0;
         if (seq.isValidKey(kc)) { i=0; nextsyl=1; }
@@ -878,12 +888,17 @@ int OVIMTobaccoContext::updateCandidateWindow() {
     size_t candicount=candi->count;
     size_t perpage=strlen(parent->selkey);
     size_t pgstart=page*perpage;
-        
+
+	currentCandidateLimit = perpage;
+
     c->clear();
     char dispstr[32];
     
     for (size_t i=0; i<perpage; i++) {
-        if (pgstart+i >= candicount) break;     // stop if idx exceeds candi counts
+		if (pgstart+i >= candicount) {
+			currentCandidateLimit = i;
+			break;     // stop if idx exceeds candi counts
+		}
         sprintf(dispstr, "%c.", parent->selkey[i]);
         c->append(dispstr)->append(candi->candidates[page*perpage+i])->append(" ");
     }
