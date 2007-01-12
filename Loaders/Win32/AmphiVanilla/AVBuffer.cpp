@@ -1,3 +1,4 @@
+#define OV_DEBUG
 #include "OVUtility.h"
 #include "AVBuffer.h"
 
@@ -17,9 +18,6 @@ void AVBuffer::setDisplayServer(AVDisplayServer *svr)
 OVBuffer* AVBuffer::clear()
 {
 	bufstr = "";
-	dsvr->setMarkFrom(0);
-	dsvr->setMarkTo(0);
-	dsvr->setCursorPos(0);
 	return this;
 }
 OVBuffer* AVBuffer::append(const char *s)
@@ -49,8 +47,8 @@ OVBuffer* AVBuffer::update() //set + show
 }
 OVBuffer* AVBuffer::update(int cursorPos, int markFrom=-1, int markTo=-1)
 {	
-	murmur("OVBuffer* AVBuffer::update(int cursorPos, int markFrom=-1, int markTo=-1) ");
-	dsvr->setBufString(bufstr.c_str());
+	murmur("OVBuffer* AVBuffer::update(cursorPos=%d, markFrom=%d, markTo=%d ",cursorPos,markFrom,markTo);
+	dsvr->setBufString(bufstr.c_str());	
 	dsvr->setMarkFrom(markFrom);
 	dsvr->setMarkTo(markTo);
 	dsvr->setCursorPos(cursorPos);
