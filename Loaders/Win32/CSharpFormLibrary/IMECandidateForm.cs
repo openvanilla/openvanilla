@@ -223,10 +223,10 @@ namespace CSharpFormLibrary
             {
                 if (totalPage > 1) //expandable
                 {
-                    m_mode = 1;            
+                    m_mode = 1;
                 }
             }
-            else if(m_mode==1)
+            else if (m_mode == 1)
             {
                 m_mode = 0;
             }
@@ -287,88 +287,105 @@ namespace CSharpFormLibrary
         private void ShowListView(int mode) //mode 0:直式 1:展開
         {
             ListViewItem li;
-            totalPage = 0;            
-            this.lbCandidates.Columns.Clear();
+            totalPage = 0;
+
+            //parse & save to arraylist
             m_candArray = new ArrayList();
-            for (int i = 0; i < m_inputs.Length - 1; i++)
+            for (int i = 0; i < m_inputs.Length; i++)
             {
                 string cand = m_inputs[i];
-                li = new ListViewItem();
-                li.UseItemStyleForSubItems = false;
-                string no = cand.Substring(0, 1);
-                string candText = cand.Substring(2);
-                m_candArray.Add(candText); //一邊存入此 object
-                //li.SubItems[0] = new ListViewItem.ListViewSubItem(li, no, SystemColors.WindowText, Color.GhostWhite, this.lbCandidates.Font);
-                //li.SubItems.Add(candText, SystemColors.WindowText, SystemColors.Window, this.lbCandidates.Font);
-                //this.lbCandidates.Items.Add(li);
+                if (i == m_inputs.Length - 1)
+                    m_candArray.Add(cand);
+                else
+                {
+                    string no = cand.Substring(0, 1);
+                    string candText = cand.Substring(2);
+                    m_candArray.Add(candText);
+                }
             }
-            //page
+
+            //page info
             string pageInfo = m_inputs[m_inputs.Length - 1];
             currentPage = Int32.Parse(pageInfo.Substring(1, pageInfo.IndexOf('/') - 1));
             string foo = pageInfo.Substring(pageInfo.IndexOf('/') + 1);
             totalPage = Int32.Parse(foo.Substring(0, foo.Length - 1));
-            //this.vScrollBar1.Visible = (totalPage > 1);
+
+            //set scrollbar
+            this.vScrollBar1.Enabled = (totalPage > 1);
+
+            //init listView
+            this.lbCandidates.Columns.Clear();
+            this.lbCandidates.Items.Clear();
 
             switch (mode)
             {
                 case 0:
                     {
-                        this.lbCandidates.Items.Clear();
+                        //columns
                         this.lbCandidates.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
-                        this.Width = this.columnHeader1.Width + this.columnHeader2.Width+vScrollBar1.Width;
-                        //Debug.WriteLine("h1=" + columnHeader1.Width.ToString());
-                        //Debug.WriteLine("h2=" + columnHeader2.Width.ToString());
-                        //Debug.WriteLine("cand width=" + this.lbCandidates.Width.ToString());
 
-                        //this.Width = this.lbCandidates.Width + vScrollBar1.Width;
+                        //set scrollbar                        
+                        this.vScrollBar1.Maximum = totalPage * 9;
+                        this.vScrollBar1.TabIndex = totalPage;
+                        this.vScrollBar1.Value = (currentPage - 1) * 9 + 1;
 
-
-
-                        for (int i = 0; i < m_inputs.Length - 1; i++)
+                        //new & set items
+                        for (int i = 0; i < m_candArray.Count; i++)
                         {
                             string cand = m_inputs[i];
                             li = new ListViewItem();
                             li.UseItemStyleForSubItems = false;
                             string no = cand.Substring(0, 1);
                             string candText = cand.Substring(2);
-                            //m_candArray.Add(candText); //一邊存入此 object
-                            li.SubItems[0] = new ListViewItem.ListViewSubItem(li, no, SystemColors.WindowText, Color.GhostWhite, this.lbCandidates.Font);
-                            li.SubItems.Add(candText, SystemColors.WindowText, SystemColors.Window, this.lbCandidates.Font);
+                            if (i == m_candArray.Count - 1)
+                                li.SubItems[0] = new ListViewItem.ListViewSubItem(li, "", SystemColors.WindowText, Color.GhostWhite, this.lbCandidates.Font);
+                            else
+                                li.SubItems[0] = new ListViewItem.ListViewSubItem(li, no, SystemColors.WindowText, Color.GhostWhite, this.lbCandidates.Font);
+                            li.SubItems.Add(m_candArray[i].ToString(), SystemColors.WindowText, SystemColors.Window, this.lbCandidates.Font);
                             this.lbCandidates.Items.Add(li);
                         }
-                        li = new ListViewItem();
-                        li.UseItemStyleForSubItems = false;
-                        li.SubItems.Add(pageInfo, SystemColors.WindowText, SystemColors.Window, this.lbCandidates.Font);
-                        this.lbCandidates.Items.Add(li);
-                        this.vScrollBar1.Enabled = (totalPage > 1);
-                        this.vScrollBar1.Maximum = totalPage * 9;
-                        this.vScrollBar1.TabIndex = totalPage;
-                        this.vScrollBar1.Value = (currentPage - 1) * 9 + 1;
                         break;
                     }
                 case 1:
                     {
-                        for (int i = 0; i < 9; i++)
-                        {
-                            this.lbCandidates.Items[i] = new ListViewItem();
-                            this.lbCandidates.Items[i].UseItemStyleForSubItems = false;
-                        }
-                        this.vScrollBar1.Enabled = false;
+                        //set columns
                         for (int i = 0; i < m_candArray.Count; i++)
                         {
-                            int columnIndex = (i / 9) * 2; //放編號的那些 Column 的 index
                             if (i % 9 == 0)
                             {
                                 this.lbCandidates.Columns.Add("no", 25, HorizontalAlignment.Left);
                                 this.lbCandidates.Columns.Add("cand", 60, HorizontalAlignment.Left);
                             }
+                        }
+
+                        //new items                        
+                        for (int i = 0; i < 9; i++)
+                        {
+                            if (this.lbCandidates.Items.Count <= i)
+                            {
+                                this.lbCandidates.Items.Add(new ListViewItem());
+                            }
+                            else
+                            {
+                                this.lbCandidates.Items[i] = new ListViewItem();
+                            }
+                            this.lbCandidates.Items[i].UseItemStyleForSubItems = false;
+                        }
+
+                        //set scrollbar
+                        this.vScrollBar1.Enabled = false;
+
+                        //set items
+                        for (int i = 0; i < m_candArray.Count; i++)
+                        {
+                            int columnIndex = (i / 9) * 2; //放編號的那些 Column 的 index
                             li = this.lbCandidates.Items[i % 9];
                             if (li.SubItems.Count == 1) //第一個subitem No.
-                            {                                
-                                if (columnIndex == (currentPage - 1) * 2)                                
-                                    li.SubItems[0] = new ListViewItem.ListViewSubItem(li, (i % 9 + 1).ToString(), SystemColors.WindowText, Color.GhostWhite, this.lbCandidates.Font);                                
+                            {
+                                if (columnIndex == (currentPage - 1) * 2)
+                                    li.SubItems[0] = new ListViewItem.ListViewSubItem(li, (i % 9 + 1).ToString(), SystemColors.WindowText, Color.GhostWhite, this.lbCandidates.Font);
                                 else
                                     li.SubItems[0] = new ListViewItem.ListViewSubItem(li, "", SystemColors.WindowText, SystemColors.Window, this.lbCandidates.Font);
                             }
@@ -379,39 +396,27 @@ namespace CSharpFormLibrary
                                 else
                                     li.SubItems.Add("", SystemColors.WindowText, SystemColors.Window, this.lbCandidates.Font);
                             }
-                            //candidates
                             li.SubItems.Add(m_candArray[i].ToString(), SystemColors.WindowText, SystemColors.Window, this.lbCandidates.Font);
                         }
-                        this.Width = (25 + 60) * this.lbCandidates.Columns.Count / 2 + this.vScrollBar1.Width;
                         break;
                     }
+
                 default:
                     {
                         break;
                     }
             }
 
-
-
-
-            //DepthOfList(m_inputs.Length);
+            //set form size
+            int width = this.vScrollBar1.Width;
+            int height=  this.panel1.Height;            
+            width += this.lbCandidates.Items[0].Bounds.Right;
+            height += this.lbCandidates.Items[this.lbCandidates.Items.Count-1].Bounds.Bottom;                                    
+            this.Width = width ;
+            this.Height = height + 5;   //+5為了好看
         }
 
-
         #endregion
-
-        /*
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main() 
-		{
-			CSharpFormLibrary.IMECandidateForm form = new CSharpFormLibrary.IMECandidateForm();
-			Application.Run(form);
-		}
-		*/
-
 
         public int GetWidth()
         {
@@ -510,8 +515,6 @@ namespace CSharpFormLibrary
                     MessageBox.Show("fuck");
                 }*/
         }
-
-
     }
 }
 
