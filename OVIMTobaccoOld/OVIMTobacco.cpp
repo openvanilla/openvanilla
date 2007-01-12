@@ -707,7 +707,7 @@ int OVIMTobaccoContext::keyCompose() {
         if(parent->doClearSequenceOnError()) seq.clear();
         freshBuffer();
 
-        return 1;
+        return 0;
     }
 }
 
