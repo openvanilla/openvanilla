@@ -6,5 +6,5 @@ copy .\OVPreferences\Debug\OVPreferences.exe %WINDIR%\OpenVanilla\
 copy .\OVPreferences\Release\OVPreferences.exe.manifest %WINDIR%\OpenVanilla\
 copy ..\..\Modules\OVIMGeneric\Debug\OVIMGeneric.dll %WINDIR%\OpenVanilla\Modules\
 copy "..\..\..\branches\0.7.2-Module-OVIMTobacco-Old\OVIMTobaccoOld\Debug\OVIMTobaccoOld.dll" "%WINDIR%\OpenVanilla\Modules\OVIMTobacco.dll"
-del C:\WINDOWS\OpenVanilla\orz.txt
+del "%APPDATA%\OpenVanilla\orz.txt"
 pause
