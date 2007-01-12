@@ -4,10 +4,10 @@
 !include "LogicLib.nsh"
 
 ; HM NIS Edit Wizard helper defines
-!define PRODUCT_NAME "Going-OpenVanilla"
-!define PRODUCT_VERSION "beta-1"
-!define PRODUCT_PUBLISHER "IASL"
-!define PRODUCT_WEB_SITE "http://iasl.iis.sinica.edu.tw/"
+!define PRODUCT_NAME "OpenVanilla"
+!define PRODUCT_VERSION "0.7.2.1-beta"
+!define PRODUCT_PUBLISHER "OpenVanilla.org"
+!define PRODUCT_WEB_SITE "http://openvanilla.org/"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 ; HKLM = HKEY_LOCAL_MACHINE
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
@@ -142,7 +142,7 @@ LangString FAILED_DOTNET_INSTALL ${LANG_TradChinese} " $(PRODUCT_NAME) ±N·|Ä~Äò¦
 
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "GOING-OpenVanilla-beta.1.exe"
+OutFile "OpenVanilla-0.7.2.1-beta.exe"
 InstallDir "$WINDIR\OpenVanilla"
 ShowInstDetails show
 ShowUnInstDetails show
@@ -457,9 +457,9 @@ SectionEnd
 
 Section -AdditionalIcons
   SetOutPath $INSTDIR
-  CreateDirectory "$SMPROGRAMS\GOING-OpenVanilla"
-  CreateShortCut "$SMPROGRAMS\GOING-OpenVanilla\Uninstall.lnk" "$INSTDIR\uninst.exe"
-  CreateShortCut "$SMPROGRAMS\GOING-OpenVanilla\OVPreferences.lnk" "$WINDIR\OpenVanilla\OVPreferences.exe"
+  CreateDirectory "$SMPROGRAMS\OpenVanilla"
+  CreateShortCut "$SMPROGRAMS\OpenVanilla\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  CreateShortCut "$SMPROGRAMS\OpenVanilla\OVPreferences.lnk" "$WINDIR\OpenVanilla\OVPreferences.exe"
 SectionEnd
 
 Section -Post
@@ -469,7 +469,7 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
-  System::Call 'imm32::ImmInstallIME(t "$SYSDIR\OVIME.ime", t "¤¤¤å (ÁcÅé) - GOING-OpenVanilla")'
+  System::Call 'imm32::ImmInstallIME(t "$SYSDIR\OVIME.ime", t "¤¤¤å (ÁcÅé) - OpenVanilla")'
   ${registry::Open} "${IME_ROOT_KEY}\${IME_KEY}" "/N='OVIME.ime' /G=1 /T=REG_SZ" $0
   ${registry::Find} $0 $1 $2 $3 $4
   StrLen $5 "${IME_KEY}"
@@ -483,12 +483,12 @@ SectionEnd
 
 Function un.onUninstSuccess
   ;HideWindow
-  MessageBox MB_ICONINFORMATION|MB_OK "GOING-OpenVanilla ¤w¦¨¥\¦a±q§Aªº¹q¸£²¾°£¡C" /SD IDOK
+  MessageBox MB_ICONINFORMATION|MB_OK "OpenVanilla ¤w¦¨¥\¦a±q§Aªº¹q¸£²¾°£¡C" /SD IDOK
 FunctionEnd
 
 Function un.onInit
 ;!insertmacro MUI_UNGETLANGUAGE
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "§A½T©w­n§¹¥þ²¾°£ GOING-OpenVanilla ¡A¨ä¤Î©Ò¦³ªº¤¸¥ó¡H" /SD IDYES IDYES +2
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "§A½T©w­n§¹¥þ²¾°£ OpenVanilla ¡A¨ä¤Î©Ò¦³ªº¤¸¥ó¡H" /SD IDYES IDYES +2
   Abort
 FunctionEnd
 
@@ -503,10 +503,10 @@ Section Uninstall
   Delete "$INSTDIR\uninst.exe"
   RMDir /r "$WINDIR\OpenVanilla"
 
-  Delete "$SMPROGRAMS\GOING-OpenVanilla\Uninstall.lnk"
-  Delete "$SMPROGRAMS\GOING-OpenVanilla\OVPreferences.lnk"
+  Delete "$SMPROGRAMS\OpenVanilla\Uninstall.lnk"
+  Delete "$SMPROGRAMS\OpenVanilla\OVPreferences.lnk"
 
-  RMDir "$SMPROGRAMS\GOING-OpenVanilla"
+  RMDir "$SMPROGRAMS\OpenVanilla"
 
   ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
   DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}$0"
