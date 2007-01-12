@@ -104,10 +104,17 @@ namespace CSharpFormLibrary
             System.Diagnostics.Debug.WriteLine("compSelEnd=" + compSelEnd);
             System.Diagnostics.Debug.WriteLine("labelX=" +label1.Left.ToString());               
              */
+            Point pt2 = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.Text.Length);
+            if (this.Width - this.richTextBox1.Bounds.Left < pt2.X)
+                this.Width = pt2.X + 100;
+
             if (compSelStart == compSelEnd) //¤w¸g²Õ¦r
-            {                
+            {
+                /*
                 Point pt2 = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.Text.Length);
-                this.Width = pt2.X + 100;                
+                if(this.Width - this.richTextBox1.Bounds.Left < pt2.X)
+                    this.Width = pt2.X + 100;
+                 */
                 if (compSelStart > 0)
                 {                    
                     this.richTextBox1.Select(compSelStart - 1, 1);
