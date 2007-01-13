@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "OpenVanilla/OpenVanilla.h"
+#include OV_HEADER
 #include "DummyDictionary.h"
 
 using namespace scim;

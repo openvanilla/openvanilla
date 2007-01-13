@@ -65,7 +65,7 @@ static OVLibrary* open_module(const char* modname){
    OVLibrary* mod = new OVLibrary();
    mod->handle = lt_dlopen(modname);
    if(mod->handle == NULL){
-      fprintf(stderr, "dlopen %s failed\n", modname);
+      SCIM_DEBUG_IMENGINE(2) << "dlopen " << modname << " failed\n";
       goto OPEN_FAILED;
    }
    mod->getModule = (TypeGetModule)lt_dlsym( mod->handle, 
@@ -75,11 +75,11 @@ static OVLibrary* open_module(const char* modname){
    mod->initLibrary = (TypeInitLibrary)lt_dlsym( mod->handle,
                                              "OVInitializeLibrary" );
    if( !mod->getModule || !mod->getLibVersion || !mod->initLibrary ){
-      fprintf(stderr, "dlsym %s failed\n", modname);
+      SCIM_DEBUG_IMENGINE(2) << "dlsym " << modname << " failed\n";
       goto OPEN_FAILED;
    }
    if( mod->getLibVersion() < OV_VERSION ){
-      fprintf(stderr, "%s %d is too old\n", modname, mod->getLibVersion());
+      SCIM_DEBUG_IMENGINE(2) << modname << " " << mod->getLibVersion() << " is too old\n";
       goto OPEN_FAILED;
    }
    return mod;
@@ -96,7 +96,7 @@ static int scan_ov_modules(){
       struct dirent *d_ent;
       while( (d_ent = readdir(dir)) != NULL ){
          if( strstr( d_ent->d_name, ".so" ) ){
-            fprintf(stderr,  "Load OV module: %s\n", d_ent->d_name);
+            SCIM_DEBUG_IMENGINE(2) << "Load OV module: " << d_ent->d_name << "\n";
             OVLibrary* mod = open_module(d_ent->d_name);
             if(mod){
                OVModule* m;
@@ -115,12 +115,12 @@ static int scan_ov_modules(){
 // OVSCIMFactory
 
 OVSCIMFactory::OVSCIMFactory(OVModule *i, const ConfigPointer& config) {
-    fprintf(stderr, "SCIM-OpenVanilla IMFactory init! id=%s\n", i->identifier());
+    SCIM_DEBUG_IMENGINE(2) << "SCIM-OpenVanilla IMFactory init! id=" << i->identifier() << "\n";
     set_languages("zh_TW,zh_HK,zh_SG");
     
     im = dynamic_cast<OVInputMethod*>(i);
     if(!im)
-       fprintf(stderr, "dynamic_cast OVInputMethod* failed\n");
+       SCIM_DEBUG_IMENGINE(2) << "dynamic_cast OVInputMethod* failed\n";
     DummyService srv;
 
     AVDictionary mainDict = im_config.dictionary();
@@ -154,7 +154,7 @@ String OVSCIMFactory::get_uuid() const {
 }
 
 String OVSCIMFactory::get_icon_file() const {
-    return String("/usr/X11R6/share/scim/icons/rawcode.png");
+    return String(SCIM_ICONDIR "/rawcode.png");
 }
 
 WideString OVSCIMFactory::get_authors() const {

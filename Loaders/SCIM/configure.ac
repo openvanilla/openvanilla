@@ -10,15 +10,21 @@ cppflags_set=${CPPFLAGS+set}
 AC_PROG_CXX
 AC_LANG(C++)
 
+# Init libtool
 AC_LIBTOOL_DLOPEN
 AC_PROG_LIBTOOL
-AC_LIB_LTDL
 AC_SUBST(LIBTOOL_DEPS)
+AC_LIB_LTDL
 AC_CHECK_HEADERS(ltdl.h)
 AC_CHCECK_LIB(expat)
 AC_CHECK_LIB(ltdl, lt_dlopen, [LTDL_LIBS="-lltdl"])
 AC_SUBST(INCLTDL)
 AC_SUBST(LIBLTDL)
+
+# Init gettext
+ALL_LINGUAS="zh_TW"
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION(0.14.1)
 
 # SCIM variables
 
@@ -54,7 +60,7 @@ AC_SUBST(ac_aux_dir)
 # libtool option to control which symbols are exported
 # right now, symbols starting with _ are not exported
 LIBTOOL_EXPORT_OPTIONS='-export-symbols-regex "^[[^_]].*"'
-
+AC_SUBST(LIBTOOL_EXPORT_OPTIONS)
 
 SCIM_ICONDIR=`pkg-config --variable=icondir scim`
 SCIM_MODULEDIR=`pkg-config --variable=moduledir scim`
@@ -71,11 +77,20 @@ fi
 if test "x$OV_MODULEDIR" = "x"; then
    OV_MODULEDIR="/usr/local/lib/openvanilla/"
 fi
-    
+
+maybe_ov_header=`pwd`/../../Framework/Headers/OpenVanilla.h
+if test -f $maybe_ov_header ; then
+  OV_HEADER=$maybe_ov_header
+else
+  dnl Use assumed path
+  OV_HEADER=/usr/local/include/OpenVanilla/OpenVanilla.h
+fi
+
 AC_SUBST(SCIM_ICONDIR)
 AC_SUBST(SCIM_MODULEDIR)
 AC_SUBST(SCIM_DATADIR)
 AC_SUBST(OV_MODULEDIR)
+AC_SUBST(OV_HEADER)
 
 
 AC_CONFIG_FILES([Makefile src/Makefile])
