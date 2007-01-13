@@ -19,6 +19,11 @@
 #include "chewing.h"
 #include "chewingio.h"
 
+#ifdef LIBCHEWING_VERSION_OSX_INCLUDE
+	#include "libchewing_version.h"
+	#include <Carbon/Carbon.h>
+#endif
+
 #ifndef LIBCHEWING_VERSION
     #define LIBCHEWING_VERSION  "(trunk)"
 #endif
@@ -257,14 +262,27 @@ public:
 
         string hashdir;
         hashdir = s->userSpacePath(identifier());
-        hashdir += s->pathSeparator();
+        // hashdir += s->pathSeparator();
         
         string chewingpath;
-        chewingpath = modulePath;
-        chewingpath += identifier();
+		
+		#ifdef LIBCHEWING_VERSION_OSX_INCLUDE
+			CFBundleRef bundle = CFBundleGetBundleWithIdentifier(CFSTR("org.openvanilla.module.ovimspacechewing"));
+			if (!bundle) return 0;
+			
+			CFURLRef url = CFBundleCopyResourcesDirectoryURL(bundle);
+			if (!url) return 0;
+			
+			char buf[1024];
+			CFURLGetFileSystemRepresentation(url, TRUE, (UInt8*)buf, sizeof(buf)-1);
+			chewingpath = buf;
+		#else
+			chewingpath = modulePath;
+			chewingpath += identifier();
+		#endif
         
 		if (!ChewingCheckData(chewingpath.c_str())) {
-			murmur("OVIMSpaceChewing: chewing data missing at %s", modulePath);
+			murmur("OVIMSpaceChewing: chewing data missing at %s", chewingpath.c_str());
 			return 0;
 		}
 
