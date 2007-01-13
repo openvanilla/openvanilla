@@ -31,8 +31,8 @@
 MODULEID=OVIMSpaceChewing
 SOURCES=OVIMSpaceChewing
 
-LIBCHEWING_PREFIX=/usr/local
-LIBCHEWING_VERSION=$(shell perl -n -e 'print "$$1\n" if /Version: (.+)/' < $(LIBCHEWING_PREFIX)/lib/pkgconfig/chewing.pc)
+LIBCHEWING_PREFIX?=/usr/local
+LIBCHEWING_VERSION?=$(shell perl -n -e 'print "$$1\n" if /Version: (.+)/' < $(LIBCHEWING_PREFIX)/lib/pkgconfig/chewing.pc)
 
 DATA=$(LIBCHEWING_PREFIX)/share/chewing/ch_index.dat     \
     $(LIBCHEWING_PREFIX)/share/chewing/dict.dat          \
