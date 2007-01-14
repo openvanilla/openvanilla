@@ -6,7 +6,7 @@
 #include <scim.h>
 using namespace scim;
 
-#include OV_HEADER
+#include "OpenVanilla/OpenVanilla.h"
 #include "DummyLoader.h"
 #include <ltdl.h>
 #include <vector>

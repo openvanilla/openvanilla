@@ -16,7 +16,7 @@ AC_PROG_LIBTOOL
 AC_SUBST(LIBTOOL_DEPS)
 AC_LIB_LTDL
 AC_CHECK_HEADERS(ltdl.h)
-AC_CHCECK_LIB(expat)
+AC_CHECK_LIB(expat)
 AC_CHECK_LIB(ltdl, lt_dlopen, [LTDL_LIBS="-lltdl"])
 AC_SUBST(INCLTDL)
 AC_SUBST(LIBLTDL)
@@ -80,10 +80,10 @@ fi
 
 maybe_ov_header=`pwd`/../../Framework/Headers/OpenVanilla.h
 if test -f $maybe_ov_header ; then
-  OV_HEADER=$maybe_ov_header
+  OV_HEADER=\"$maybe_ov_header\"
 else
   dnl Use assumed path
-  OV_HEADER=/usr/local/include/OpenVanilla/OpenVanilla.h
+  OV_HEADER=\"/usr/local/include/OpenVanilla/OpenVanilla.h\"
 fi
 
 AC_SUBST(SCIM_ICONDIR)
