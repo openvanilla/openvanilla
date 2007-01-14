@@ -15,16 +15,12 @@ using namespace System::Windows::Forms;
 
 void CSharpWidgetDemo() {	
 	try {
-		Assembly* exAsm
+		Assembly^ exAsm
 			= Reflection::Assembly::LoadFile("C:\\WINDOWS\\OpenVanilla\\CSharpFormLibrary.dll");
-		Form* exForm
-			= dynamic_cast<Form*>(exAsm->CreateInstance("CSharpFormLibrary.DemoForm", true));
+		Form^ exForm =
+			safe_cast<Form^>(exAsm->CreateInstance("CSharpFormLibrary.DemoForm", true));
 		exForm->ShowDialog();
-		/*
-		DemoForm __gc *bar = __gc new DemoForm();
-		bar->ShowDialog();
-		*/
-	} catch (Exception* e) {
+	} catch (Exception^ e) {
 		Console::WriteLine(e->Message);
 	}
 }

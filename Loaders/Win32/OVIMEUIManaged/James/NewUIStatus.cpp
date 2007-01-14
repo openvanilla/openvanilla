@@ -16,47 +16,48 @@ using namespace System::Windows::Forms;
 using namespace System::Collections;
 using namespace std;
 
-__gc class StatusFormAssembly{
+ref class StatusFormAssembly{
 private:
 	StatusFormAssembly(){}
 
-	static Assembly* pasm;
+	static Assembly^ pasm;
 	static bool hasPasm = false;
 
-	static Object* objStatusForm;
+	static Object^ objStatusForm;
 	static bool hasObjStatusForm = false;
 
-	static Type* typeStatus;
+	static Type^ typeStatus;
 	static bool hasTypeStatus = false;
 
-	static MethodInfo* methodStatusShowNoActive;
+	static MethodInfo^ methodStatusShowNoActive;
 	static bool hasMethodStatusShowNoActive = false;
 
-	static MethodInfo* methodStatusMove;
+	static MethodInfo^ methodStatusMove;
 	static bool hasMethodStatusMove = false;
 
-	static MethodInfo* methodStatusSetChiEng;
+	static MethodInfo^ methodStatusSetChiEng;
 	static bool hasMethodStatusSetChiEng = false;
 
-	static MethodInfo* methodStatusSetSimpifiedOrTraditional;
+	static MethodInfo^ methodStatusSetSimpifiedOrTraditional;
 	static bool hasMethodStatusSetSimpifiedOrTraditional = false;
 
-	static MethodInfo* methodStatusSetDir;
+	static MethodInfo^ methodStatusSetDir;
 	static bool hasMethodStatusSetDir = false;
 
-	static MethodInfo* methodStatusHide;
+	static MethodInfo^ methodStatusHide;
 	static bool hasMethodStatusHide = false;
 
-	static MethodInfo* methodStatusSetModString;
+	static MethodInfo^ methodStatusSetModString;
 	static bool hasMethodStatusSetModString = false;
 
-	static MethodInfo* methodStatusSetMenuModString;
+	static MethodInfo^ methodStatusSetMenuModString;
 	static bool hasMethodStatusSetMenuModString = false;
 
-	static MethodInfo* methodStatusClearMenuModString;
+	static MethodInfo^ methodStatusClearMenuModString;
 	static bool hasMethodStatusClearMenuModString = false;
 
-	__nogc struct IsFormCreated
+	/*
+	ref struct IsFormCreated
 	{
 		bool isCreated;
 		void PutValue(bool flag)
@@ -70,28 +71,29 @@ private:
 		}
 		__declspec(property(get = GetValue, put = PutValue)) bool IsCreated;
 	};
+	*/
 
 public:
 	
-	static ArrayList* argCollection = __gc new ArrayList();
-	static IsFormCreated* FormStatus=new IsFormCreated();
-	static Assembly* Instance()
+	static ArrayList^ argCollection = gcnew ArrayList();
+	//static IsFormCreated^ FormStatus = gcnew IsFormCreated();
+	static Assembly^ Instance()
 	{
 		if(!hasPasm) 
 		{
 			AVConfig *cfg= new AVConfig();
 			const char *baseDir=cfg->getBaseDir();
-			String* asmPath(baseDir);
+			String^ asmPath = gcnew String(baseDir);
 			pasm =
 				Reflection::Assembly::LoadFile(
 					asmPath->Concat(
-						asmPath, new String("CSharpFormLibrary.dll")));
+						asmPath, gcnew String("CSharpFormLibrary.dll")));
 			hasPasm = true;
 		}
 		return pasm;
 	}
 	
-	static Object* StatusForm()
+	static Object^ StatusForm()
 	{
 		if(!hasObjStatusForm)
 		{
@@ -102,7 +104,7 @@ public:
 		return objStatusForm;
 	}
 
-	static Type* StatusType()
+	static Type^ StatusType()
 	{
 		if(!hasTypeStatus)
 		{
@@ -114,7 +116,7 @@ public:
 		return typeStatus;
 	}
 
-		static MethodInfo* StatusShowNoActive()
+		static MethodInfo^ StatusShowNoActive()
 	{
 		if(!hasMethodStatusShowNoActive)
 		{
@@ -125,7 +127,7 @@ public:
 		return methodStatusShowNoActive;
 	}
 
-	static MethodInfo* StatusMove()
+	static MethodInfo^ StatusMove()
 	{
 		if(!hasMethodStatusMove)
 		{
@@ -136,7 +138,7 @@ public:
 		return methodStatusMove;
 	}
 
-	static MethodInfo* StatusSetChiEng()
+	static MethodInfo^ StatusSetChiEng()
 	{
 		if(!hasMethodStatusSetChiEng)
 		{
@@ -147,7 +149,7 @@ public:
 		return methodStatusSetChiEng;
 	}
 
-	static MethodInfo* StatusSetSimpifiedOrTraditional()
+	static MethodInfo^ StatusSetSimpifiedOrTraditional()
 	{
 		if(!hasMethodStatusSetSimpifiedOrTraditional)
 		{
@@ -158,7 +160,7 @@ public:
 		return methodStatusSetSimpifiedOrTraditional;
 	}
 	
-	static MethodInfo* StatusSetDir()
+	static MethodInfo^ StatusSetDir()
 	{
 		if(!hasMethodStatusSetDir)
 		{
@@ -169,7 +171,7 @@ public:
 		return methodStatusSetDir;
 	}
 
-	static MethodInfo* StatusSetModString()
+	static MethodInfo^ StatusSetModString()
 	{
 		if(!hasMethodStatusSetModString)
 		{
@@ -180,7 +182,7 @@ public:
 		return methodStatusSetModString;
 	}
 
-	static MethodInfo* StatusSetMenuModString()
+	static MethodInfo^ StatusSetMenuModString()
 	{
 		if(!hasMethodStatusSetMenuModString)
 		{
@@ -191,7 +193,7 @@ public:
 		return methodStatusSetMenuModString;
 	}
 
-	static MethodInfo* StatusClearMenuModString()
+	static MethodInfo^ StatusClearMenuModString()
 	{
 		if(!hasMethodStatusClearMenuModString)
 		{
@@ -202,7 +204,7 @@ public:
 		return methodStatusClearMenuModString;
 	}
 
-	static MethodInfo* StatusHide()
+	static MethodInfo^ StatusHide()
 	{
 		if(!hasMethodStatusHide)
 		{
@@ -212,7 +214,6 @@ public:
 		}
 		return methodStatusHide;
 	}
-
 };
 
 HWND _CreateStatusPage()//create
@@ -221,12 +222,12 @@ HWND _CreateStatusPage()//create
 	//MethodInfo* methodCreateWindow =
 	//	StatusFormAssembly::StatusType()->GetMethod("IMEStatusForm");
 	
-	PropertyInfo* propertyHandle =
+	PropertyInfo^ propertyHandle =
 		StatusFormAssembly::StatusType()->GetProperty("Handle");
 	return
 		(HWND)(
-			dynamic_cast<IntPtr*>(
-				propertyHandle->GetValue(StatusFormAssembly::StatusForm(), NULL))
+			safe_cast<IntPtr^>(
+				propertyHandle->GetValue(StatusFormAssembly::StatusForm(), nullptr))
 		)->ToPointer();
 	
 }
@@ -234,20 +235,19 @@ HWND _CreateStatusPage()//create
 void _SetStatusAppHWnd(HWND hwnd)
 {	
 	try{		
-		UInt64 handle = (UInt64)hwnd;		
+		UInt64 handle = (UInt64)hwnd;
 		StatusFormAssembly::argCollection->Clear();//!!!!
-		StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(handle)));
-		Object* param[] =
-			dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
-				->ToArray(System::Type::GetType("System.Object")));
+		StatusFormAssembly::argCollection->Add(handle);
+		array<Object^>^ param = StatusFormAssembly::argCollection->ToArray();
 		StatusFormAssembly::StatusType()
 			->GetMethod("SetAppHWnd")
-			->Invoke(StatusFormAssembly::StatusForm(), param);
-	} catch(System::Exception* e) {
+				->Invoke(StatusFormAssembly::StatusForm(), param);
+	} catch(System::Exception^ e) {
 		Debug::WriteLine(e->StackTrace);
 		murmur("%s",e->StackTrace);
 	}
 }
+
 void _ShowStatusPage()
 {	
 	//System::Diagnostics::Debug::WriteLine("Comp Show");
@@ -258,8 +258,8 @@ void _ShowStatusPage()
 		//MethodInfo* methodShowWindow = bar->GetMethod("ShowNoActive");
 		//methodShowWindow->Invoke(CandFormAssembly::CandidateForm(), NULL);
 		//Object* ret = CandFormAssembly::CandiShowNoActive()
-	Object* ret = StatusFormAssembly::StatusShowNoActive()
-			->Invoke(StatusFormAssembly::StatusForm(), NULL);
+	Object^ ret = StatusFormAssembly::StatusShowNoActive()
+			->Invoke(StatusFormAssembly::StatusForm(), nullptr);
 	//}
 	/*
 	catch(System::Exception* e)
@@ -278,13 +278,11 @@ void _MoveStatusPage(int x,int y)
 {	
 	//System::Diagnostics::Debug::WriteLine("Candi Move");
 	StatusFormAssembly::argCollection->Clear();
-	StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(x)));
-	StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(y)));	
+	StatusFormAssembly::argCollection->Add(x);
+	StatusFormAssembly::argCollection->Add(y);	
 
-	Object* param[] =
-		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
-			->ToArray(System::Type::GetType("System.Object")));
-	Object* ret =
+	array<Object^>^ param = StatusFormAssembly::argCollection->ToArray();
+	Object^ ret =
 		StatusFormAssembly::StatusMove()->Invoke(StatusFormAssembly::StatusForm(), param);
 }
 
@@ -292,23 +290,19 @@ void _SetStatusChiEng(bool inChinese)
 {	
 	//System::Diagnostics::Debug::WriteLine("Candi Move");
 	StatusFormAssembly::argCollection->Clear();
-	StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(inChinese)));
-	//StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(y)));	
+	StatusFormAssembly::argCollection->Add(inChinese);
 
-	Object* param[] =
-		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
-			->ToArray(System::Type::GetType("System.Object")));
-	Object* ret =
+	array<Object^>^ param = StatusFormAssembly::argCollection->ToArray();
+	Object^ ret =
 		StatusFormAssembly::StatusSetChiEng()->Invoke(StatusFormAssembly::StatusForm(), param);
 }
+
 void _SetStatusSimpifiedOrTraditional(bool isTraditional)
 {		
 	StatusFormAssembly::argCollection->Clear();
-	StatusFormAssembly::argCollection->Add(dynamic_cast<Object*>(__box(isTraditional)));
-	Object* param[] =
-		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
-			->ToArray(System::Type::GetType("System.Object")));
-	Object* ret =
+	StatusFormAssembly::argCollection->Add(isTraditional);
+	array<Object^>^ param = StatusFormAssembly::argCollection->ToArray();
+	Object^ ret =
 		StatusFormAssembly::StatusSetSimpifiedOrTraditional()->Invoke(StatusFormAssembly::StatusForm(), param);
 }
 
@@ -316,28 +310,22 @@ void _SetStatusModString(const std::wstring& statusModName)
 {
 	//System::Diagnostics::Debug::WriteLine("Status SetString");
 	StatusFormAssembly::argCollection->Clear();
-	StatusFormAssembly::argCollection
-		->Add(dynamic_cast<Object*>((__gc new System::String(statusModName.c_str()))));
-	Object* param[] =
-		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
-			->ToArray(System::Type::GetType("System.Object")));
+	StatusFormAssembly::argCollection->Add(gcnew System::String(statusModName.c_str()));
+	array<Object^>^ param = StatusFormAssembly::argCollection->ToArray();
 	StatusFormAssembly::StatusSetModString()->Invoke(StatusFormAssembly::StatusForm(), param);
 }
 
 void _ClearStatusMenuModString()
 {
 	StatusFormAssembly::StatusClearMenuModString()
-		->Invoke(StatusFormAssembly::StatusForm(), NULL);
+		->Invoke(StatusFormAssembly::StatusForm(), nullptr);
 }
 
 void _SetStatusMenuModString(const std::wstring& statusModName)
 {
 	StatusFormAssembly::argCollection->Clear();
-	StatusFormAssembly::argCollection
-		->Add(dynamic_cast<Object*>((__gc new System::String(statusModName.c_str()))));
-	Object* param[] =
-		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
-			->ToArray(System::Type::GetType("System.Object")));
+	StatusFormAssembly::argCollection->Add(gcnew System::String(statusModName.c_str()));
+	array<Object^>^ param = StatusFormAssembly::argCollection->ToArray();
 	StatusFormAssembly::StatusSetMenuModString()->Invoke(StatusFormAssembly::StatusForm(), param);
 }
 
@@ -346,14 +334,14 @@ void _HideStatusPage()
 	//System::Diagnostics::Debug::WriteLine("Candi Hide");
 	//MethodInfo* methodHideWindow = CompFormAssembly::Instance()->GetType("CSharpFormLibrary.IMECompForm")->	GetMethod("HideNoActive");
 	//methodHideWindow->Invoke(CompFormAssembly::CompForm(),NULL);
-	StatusFormAssembly::StatusHide()->Invoke(StatusFormAssembly::StatusForm(),NULL);
+	StatusFormAssembly::StatusHide()->Invoke(StatusFormAssembly::StatusForm(), nullptr);
 }
 
 int _GetStatusSelectedModuleIndex()
 {
-	Object* ret = StatusFormAssembly::StatusType()
+	Object^ ret = StatusFormAssembly::StatusType()
 		->GetMethod("GetSelectedModuleIndex")
-		->Invoke(StatusFormAssembly::StatusForm(), NULL);
+			->Invoke(StatusFormAssembly::StatusForm(), nullptr);
 	return Convert::ToInt32(ret);
 }
 
@@ -365,16 +353,10 @@ void _SetUserDir()
 	const char *userDir=cfg->getUserDir();
 
 	StatusFormAssembly::argCollection->Clear();
-
-	StatusFormAssembly::argCollection
-		->Add(dynamic_cast<Object*>((__gc new System::String(baseDir))));
-	StatusFormAssembly::argCollection
-		->Add(dynamic_cast<Object*>((__gc new System::String(moduleDir))));
-	StatusFormAssembly::argCollection
-		->Add(dynamic_cast<Object*>((__gc new System::String(userDir))));
-	Object* param[] =
-		dynamic_cast<Object*[]>(StatusFormAssembly::argCollection
-			->ToArray(System::Type::GetType("System.Object")));
+	StatusFormAssembly::argCollection->Add(gcnew String(baseDir));
+	StatusFormAssembly::argCollection->Add(gcnew String(moduleDir));
+	StatusFormAssembly::argCollection->Add(gcnew String(userDir));
+	array<Object^>^ param = StatusFormAssembly::argCollection->ToArray();
 	
 	StatusFormAssembly::StatusSetDir()
 		->Invoke(StatusFormAssembly::StatusForm(), param);

@@ -29,10 +29,8 @@ EXPORTS
 	UIChangeSimpifiedOrTraditional
 	UIChangeBoPoMoFoLayout
 	_SetStatusSimpifiedOrTraditional
-	_ShowCandPageArray
 	_SetCandString
 	_EndCandPage
-	_GetCandidateValue
 	_CreateCandPage
 	_CreateCandPageWithHandle
 	_HideCandPage
