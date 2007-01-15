@@ -407,7 +407,7 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
 		if(candidateEvent()) return 1;
     if (isPunctuationCombination()) return punctuationKey();
     if (k->isFunctionKey() && b->isEmpty()) return 0;
-	if (k->isShift()) {
+	if (!isprint(k->code()) && k->isShift()) {
 		if(!b->isEmpty())
 			return keyCommit();
 		return 0;
