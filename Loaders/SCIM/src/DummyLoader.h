@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "OpenVanilla/OpenVanilla.h"
-#include "DummyDictionary.h"
 
 using namespace scim;
 class DummyBuffer;
