@@ -351,7 +351,7 @@ IntOp $R2 $R0 / 0x00010000 ; $R2 now contains major version
 ${VersionCompare} $R2 "3" $1
 ; ## testing MessageBox MB_OK "$1" IDOK +1
 ${If} $1 == 2 ; VersionCompare the msi installer version, if smaller
-MessageBox MB_OKCANCEL|MB_ICONQUESTION "新版自然輸入法需要Windows Installer 3.1 (v2)，您是否願意連結官方下載網站？" IDOK +2
+MessageBox MB_OKCANCEL|MB_ICONQUESTION "需要 Windows Installer 3.1 (v2)，是否要立刻到官方網站下載？" IDOK +2
 Abort
 Call openLinkNewWindow
 Abort
