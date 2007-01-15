@@ -163,6 +163,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	{	// Key up      
 		if( g_shiftPressedTime > 0 )	
 		{
+			BOOL retVal = FALSE;
         	DWORD time = (GetTickCount() - g_shiftPressedTime);
 			if( uVKey == VK_SHIFT &&  time <= 20000 )
             {
@@ -170,8 +171,27 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 				//Only Shift: lParam == 2
 				MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
 				//return TRUE;
+
+				//<comment author='b6s'>Tell the module that Shift was pressed
+				AVKeyCode keycode;
+				keycode.setShift(1);
+				//</comment>
+
+				//<comment author='b6s'>Redundant module processing
+				loader = AVLoader::getLoader();			
+				if(loader->keyEvent(UICurrentInputMethod(), keycode)) {
+					retVal = TRUE;
+					MyGenerateMessage(hIMC,
+							WM_IME_COMPOSITION, 0, GCS_COMPSTR);		
+				} else {
+					retVal = FALSE;
+					MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
+				}
+				dsvr->releaseIMC();
+				//</comment>
             }
             g_shiftPressedTime = -1;
+			return retVal;
         }
         return FALSE;
     }
@@ -290,8 +310,11 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	DWORD conv, sentence;
 	ImmGetConversionStatus( hIMC, &conv, &sentence);
 
-	if( !(conv & IME_CMODE_NATIVE) )	// AlphaNumaric mode
-		keycode.setCapslock(1);
+	if( !(conv & IME_CMODE_NATIVE) )	//Alphanumeric mode
+		keycode.setShift(1);
+		//<comment author='b6s'>Unbind CapsLock and Alphanumeric mode
+		//keycode.setCapslock(1);
+		//</comment>		
 	if(LOWORD(lpbKeyState[VK_CAPITAL]))
 		keycode.setCapslock(1);
 	if(lpbKeyState[VK_SHIFT] & 0x80)
