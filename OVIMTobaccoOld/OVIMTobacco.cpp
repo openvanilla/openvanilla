@@ -407,9 +407,16 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
 		if(candidateEvent()) return 1;
     if (isPunctuationCombination()) return punctuationKey();
     if (k->isFunctionKey() && b->isEmpty()) return 0;
-    if (k->isCapslock()) {
+	if (k->isShift()) {
 		if(!b->isEmpty())
-			keyCommit();
+			return keyCommit();
+		return 0;
+	}
+    if (k->isCapslock()) {
+		//<comment author='b6s'>Deprecate CapsLock-English binding
+		//if(!b->isEmpty())
+		//	keyCommit();
+		//</comment>
 
 		return keyCapslock();
 	}
@@ -462,7 +469,7 @@ int OVIMTobaccoContext::keyMove() {
 int OVIMTobaccoContext::keyCommit() {
     if (b->isEmpty()) return 0;
     if (!seq.isEmpty()) {
-        if (keyCompose()) {
+		if (keyCompose() && !b->isEmpty()) {
             b->send();
 			clear();
             return 1;        
@@ -707,7 +714,7 @@ int OVIMTobaccoContext::keyCompose() {
         if(parent->doClearSequenceOnError()) seq.clear();
         freshBuffer();
 
-        return 0;
+        return 1;
     }
 }
 
