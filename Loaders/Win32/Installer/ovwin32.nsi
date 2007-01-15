@@ -9,10 +9,10 @@
 !define PRODUCT_PUBLISHER "OpenVanilla.org"
 !define PRODUCT_WEB_SITE "http://openvanilla.org/"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
-; HKLM = HKEY_LOCAL_MACHINE
+; ## HKLM = HKEY_LOCAL_MACHINE
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define IME_ROOT_KEY "HKLM"
-; HKCU = HKEY_CURRENT_USER
+; ## HKCU = HKEY_CURRENT_USER
 !define IME_CURRENT_USER "HKCU"
 !define IME_KEY "SYSTEM\CurrentControlSet\Control\Keyboard Layouts\"
 !define IME_KEY_USER "Keyboard Layout\Preload\"
@@ -169,7 +169,7 @@ Function uninstOld
 
       IfErrors 0 +2
          Call onInstError
-FunctionEnd
+FunctionEnd 
 
 Function onInstError
    MessageBox MB_ICONSTOP|MB_OK "安裝中發生錯誤，請確定您有管理員權限。"
@@ -179,11 +179,10 @@ FunctionEnd
 Function .onInit
   ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion"
   StrCmp $0 "" ContinueInst 0
-	  ;MessageBox MB_ICONINFORMATION|MB_OK "偵測到已安裝 OpenVanilla ，請移除後重新安裝。"
-          MessageBox MB_OKCANCEL|MB_ICONQUESTION "偵測到舊版 $0 已安裝，是否要移除舊版後重新安裝新版？" IDOK +2
+	  MessageBox MB_OKCANCEL|MB_ICONQUESTION "偵測到舊版 $0 已安裝，是否要移除舊版後重新安裝新版？" IDOK +2
 	  Abort
           Call uninstOld
-   ContinueInst:
+    ContinueInst:
 ;  !insertmacro MUI_LANGDLL_DISPLAY
 
 ;DOTNET start --------------------------------------------
@@ -205,8 +204,12 @@ Function .onInit
   SetOutPath "$PLUGINSDIR"
   ;File "Common\Plugins\*.*"
   File /r "${NSISDIR}\Plugins\*.*"
-
 ;DOTNET end ----------------------------------------------    
+FunctionEnd
+
+Function InstFailed
+Abort
+SetAutoClose true
 FunctionEnd
 
 Function GetDotNETVersion
@@ -306,6 +309,54 @@ Function VersionCompare
 	Pop $1
 	Exch $0
 FunctionEnd  
+
+Function openLinkNewWindow
+  StrCpy $0 "www.microsoft.com/downloads/details.aspx?displaylang=zh-tw&FamilyID=889482fc-5f56-4a38-b838-de776fd4138c"
+  Push $3 
+  Push $2
+  Push $1
+  Push $0
+  ReadRegStr $0 HKCR "http\shell\open\command" ""
+# Get browser path
+;    DetailPrint $0
+  StrCpy $2 '"'
+  StrCpy $1 $0 1
+  StrCmp $1 $2 +2 # if path is not enclosed in " look for space as final char
+    StrCpy $2 ' '
+  StrCpy $3 1
+  loop:
+    StrCpy $1 $0 1 $3
+;    DetailPrint $1
+    StrCmp $1 $2 found
+    StrCmp $1 "" found
+    IntOp $3 $3 + 1
+    Goto loop
+ 
+  found:
+    StrCpy $1 $0 $3
+    StrCmp $2 " " +2
+      StrCpy $1 '$1"'
+
+  Pop $0
+  Exec '$1 $0'
+  Pop $1
+  Pop $2
+  Pop $3
+FunctionEnd
+
+Section "CheckWindowInstaller" CW1
+GetDLLVersion "$SYSDIR\msi.dll" $R0 $R1
+IntOp $R2 $R0 / 0x00010000 ; $R2 now contains major version
+
+${VersionCompare} $R2 "3" $1
+; ## testing MessageBox MB_OK "$1" IDOK +1
+${If} $1 == 2 ; VersionCompare the msi installer version, if smaller
+MessageBox MB_OKCANCEL|MB_ICONQUESTION "新版自然輸入法需要Windows Installer 3.1 (v2)，您是否願意連結官方下載網站？" IDOK +2
+Abort
+Call openLinkNewWindow
+Abort
+${ENDIF}
+SectionEnd
 
 Section $(SEC_DOTNET) SECDOTNET
     SectionIn RO
@@ -476,9 +527,9 @@ Section -Post
   StrCpy $6 $1 "" $5
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key" "$6"
   System::Call "user32::LoadKeyboardLayout(t $6, i 1)"
-  ;MessageBox MB_YESNO "若您是初次安裝，則須重新開機。是否要立刻重開機？" IDNO noreboot
-  ;  Reboot
-;noreboot:
+  MessageBox MB_YESNO "若您是初次安裝，則須重新開機。是否要立刻重開機？" IDNO noreboot
+    Reboot
+noreboot:
 SectionEnd
 
 Function un.onUninstSuccess
