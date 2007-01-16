@@ -22911,10 +22911,9 @@ fi
 
 done
 
-
-{ echo "$as_me:$LINENO: checking for  in -lexpat" >&5
-echo $ECHO_N "checking for  in -lexpat... $ECHO_C" >&6; }
-if test "${ac_cv_lib_expat_+set}" = set; then
+{ echo "$as_me:$LINENO: checking for XML_ParserCreate in -lexpat" >&5
+echo $ECHO_N "checking for XML_ParserCreate in -lexpat... $ECHO_C" >&6; }
+if test "${ac_cv_lib_expat_XML_ParserCreate+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
 else
   ac_check_lib_save_LIBS=$LIBS
@@ -22932,11 +22931,11 @@ cat >>conftest.$ac_ext <<_ACEOF
 #ifdef __cplusplus
 extern "C"
 #endif
-char  ();
+char XML_ParserCreate ();
 int
 main ()
 {
-return  ();
+return XML_ParserCreate ();
   ;
   return 0;
 }
@@ -22975,27 +22974,22 @@ eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
   ac_status=$?
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); }; }; then
-  ac_cv_lib_expat_=yes
+  ac_cv_lib_expat_XML_ParserCreate=yes
 else
   echo "$as_me: failed program was:" >&5
 sed 's/^/| /' conftest.$ac_ext >&5
 
-	ac_cv_lib_expat_=no
+	ac_cv_lib_expat_XML_ParserCreate=no
 fi
 
 rm -f core conftest.err conftest.$ac_objext \
       conftest$ac_exeext conftest.$ac_ext
 LIBS=$ac_check_lib_save_LIBS
 fi
-{ echo "$as_me:$LINENO: result: $ac_cv_lib_expat_" >&5
-echo "${ECHO_T}$ac_cv_lib_expat_" >&6; }
-if test $ac_cv_lib_expat_ = yes; then
-  cat >>confdefs.h <<_ACEOF
-#define HAVE_LIBEXPAT 1
-_ACEOF
-
-  LIBS="-lexpat $LIBS"
-
+{ echo "$as_me:$LINENO: result: $ac_cv_lib_expat_XML_ParserCreate" >&5
+echo "${ECHO_T}$ac_cv_lib_expat_XML_ParserCreate" >&6; }
+if test $ac_cv_lib_expat_XML_ParserCreate = yes; then
+  EXPAT_LIBS="-lexpat"
 fi
 
 { echo "$as_me:$LINENO: checking for lt_dlopen in -lltdl" >&5

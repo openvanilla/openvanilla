@@ -24,7 +24,7 @@ OVLoader_SCIM_la_SOURCES  = OVLoader-SCIM.cpp
 OVLoader_SCIM_la_CFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@ 
 OVLoader_SCIM_la_CXXFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@ 
 
-OVLoader_SCIM_la_LIBADD = -lltdl
+OVLoader_SCIM_la_LIBADD = -lltdl -lexpat
 OVLoader_SCIM_la_LDFLAGS = \
 	-L/usr/local/lib \
 	-avoid-version \
