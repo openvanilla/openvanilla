@@ -177,6 +177,15 @@ Function onInstError
 FunctionEnd
 
 Function .onInit
+  Call CheckMSIVer
+  Pop $R5 # = "NeedMSI"
+  StrCmp $R5 "NeedMSI" NeedWIN31 KeepGo1
+  
+  NeedWIN31:
+     Call openLinkNewWindow
+     Abort  
+  
+  KeepGo1:
   ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion"
   StrCmp $0 "" ContinueInst 0
 	  MessageBox MB_OKCANCEL|MB_ICONQUESTION "偵測到舊版 $0 已安裝，是否要移除舊版後重新安裝新版？" IDOK +2
@@ -205,11 +214,6 @@ Function .onInit
   ;File "Common\Plugins\*.*"
   File /r "${NSISDIR}\Plugins\*.*"
 ;DOTNET end ----------------------------------------------    
-FunctionEnd
-
-Function InstFailed
-Abort
-SetAutoClose true
 FunctionEnd
 
 Function GetDotNETVersion
@@ -310,6 +314,19 @@ Function VersionCompare
 	Exch $0
 FunctionEnd  
 
+Function CheckMSIVer 
+GetDLLVersion "$SYSDIR\msi.dll" $R0 $R1
+IntOp $R2 $R0 / 0x00010000 ; $R2 now contains major version
+${VersionCompare} $R2 "3" $1
+; ## testing MessageBox MB_OK "$1" IDOK +1
+${If} $1 == 2 ; VersionCompare the msi installer version, if smaller
+MessageBox MB_OK|MB_ICONINFORMATION "需要 Windows Installer 3.1 (v2)，請至官方網站下載。" IDOK +1
+;Call openLinkNewWindow
+;Abort
+push "NeedMSI"
+${ENDIF}
+FunctionEnd
+
 Function openLinkNewWindow
   StrCpy $0 "www.microsoft.com/downloads/details.aspx?displaylang=zh-tw&FamilyID=889482fc-5f56-4a38-b838-de776fd4138c"
   Push $3 
@@ -343,20 +360,6 @@ Function openLinkNewWindow
   Pop $2
   Pop $3
 FunctionEnd
-
-Section "CheckWindowInstaller" CW1
-GetDLLVersion "$SYSDIR\msi.dll" $R0 $R1
-IntOp $R2 $R0 / 0x00010000 ; $R2 now contains major version
-
-${VersionCompare} $R2 "3" $1
-; ## testing MessageBox MB_OK "$1" IDOK +1
-${If} $1 == 2 ; VersionCompare the msi installer version, if smaller
-MessageBox MB_OKCANCEL|MB_ICONQUESTION "需要 Windows Installer 3.1 (v2)，是否要立刻到官方網站下載？" IDOK +2
-Abort
-Call openLinkNewWindow
-Abort
-${ENDIF}
-SectionEnd
 
 Section $(SEC_DOTNET) SECDOTNET
     SectionIn RO
