@@ -143,20 +143,18 @@ ImeEscape(HIMC hIMC,UINT uSubFunc,LPVOID lpData)
 BOOL APIENTRY 
 ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 {
-	murmur("keycode=%ud",uVKey);
-	LPINPUTCONTEXT lpIMC;
-	LPCOMPOSITIONSTRING lpCompStr;
-	
+	murmur("Process keycode=%ud",uVKey);		
 	int spec;
 	int k;
-
 	if (!hIMC) return FALSE;
-	if (!(lpIMC = ImmLockIMC(hIMC)))
+	dsvr->lockIMC(hIMC);  //所以所有的 return 之前都必須 dsvr->releaseIMC();
+	if (!dsvr->lpIMC)
+	{
+		dsvr->releaseIMC();
 		return FALSE;
+	}
 	//if (lKeyData & 0x80000000)	
-	//	return FALSE;
-
-	dsvr->lockIMC(hIMC);
+	//	return FALSE;		
 
 	//if( (uVKey == VK_SHIFT)&&((GetKeyState(uVKey)& 0xF0) != 0xF0) )	
 	if ( GetKeyInfo(lKeyData).isKeyUp )
@@ -185,14 +183,19 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 							WM_IME_COMPOSITION, 0, GCS_COMPSTR);		
 				} else {
 					retVal = FALSE;
-					MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
-				}
-				dsvr->releaseIMC();
+					if(dsvr->compStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) == 0)
+					{
+						MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
+						dsvr->SetCompStarted(false);
+					}
+				}				
 				//</comment>
             }
             g_shiftPressedTime = -1;
+			dsvr->releaseIMC();
 			return retVal;
         }
+		dsvr->releaseIMC();
         return FALSE;
     }
 
@@ -211,6 +214,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 
 	if (/*uVKey == VK_SHIFT ||*/ uVKey == VK_CONTROL || uVKey == VK_MENU) 	
 	{
+		dsvr->releaseIMC();
 		return FALSE; //<James comment> for app :"單單按 ctrl 或 alt"
 	}
 	
@@ -221,6 +225,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		//Only Shift: lParam == 6
 		murmur("IME.cpp: ctrl+alt+K");
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 6);
+		dsvr->releaseIMC();
 		return TRUE;  // ctrl+ alt +k		
 	}
 	/*
@@ -230,6 +235,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		//Only Shift: lParam == 6
 		murmur("IME.cpp: ctrl+alt+K");
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 6);
+		dsvr->releaseIMC();
 		return TRUE;  // ctrl+ alt +k		
 	}*/
 
@@ -239,30 +245,39 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		//Only Shift: lParam == 4
 		murmur("IME.cpp: ctrl+alt+g");
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 4);
+		dsvr->releaseIMC();
 		return TRUE;  // ctrl+ alt +g		
 	}
 	if(LOWORD(uVKey) == VK_SPACE && (lpbKeyState[VK_CONTROL] & 0x80))
+	{
+		dsvr->releaseIMC();
 		return TRUE;  //ctrl+space
-
+	}
     if(LOWORD(uVKey) == VK_SPACE && IsKeyDown(lpbKeyState[VK_SHIFT]))
 	{
 		//shift+space: lParam == 1
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 1);	
+		dsvr->releaseIMC();
 		return FALSE;  //shift + space
 	}
 
 	//CTRL + "\" or "="
 	if((LOWORD(uVKey) == VK_OEM_5 || LOWORD(uVKey) == VK_OEM_PLUS) &&
 		((lpbKeyState[VK_CONTROL] & 0x80)))
+	{
+		dsvr->releaseIMC();
 		return TRUE;
-
+	}
 	//Change CHI/ENG by CAPS
 	//if(LOWORD(uVkey) == VK_CAPS)
 	//	return TRUE;
 
-	lpCompStr = (LPCOMPOSITIONSTRING)ImmLockIMCC(lpIMC->hCompStr);
-	if(wcslen(GETLPCOMPSTR(lpCompStr)) == 0)
+	
+	if(!dsvr->compStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) > 0)
+	{
 		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);
+		dsvr->SetCompStarted(true);
+	}
 	
 	k = LOWORD(uVKey);
 	if( k >= 65 && k <= 90)
@@ -327,25 +342,27 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		&& (uVKey >= VK_NUMPAD0)
 		&& (uVKey <= VK_DIVIDE))
 		keycode.setNum(1);
-
-	//dsvr->lockIMC(hIMC);
+	
 	loader = AVLoader::getLoader();
 	BOOL retVal = FALSE;
-	if(loader->keyEvent(UICurrentInputMethod(), keycode)) {
+	if(loader->keyEvent(UICurrentInputMethod(), keycode)) //如果目前模組處理此key
+	{
 		retVal = TRUE;
 		MyGenerateMessage(hIMC,
 				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
 		
 	} else {
 		retVal = FALSE;
-		/*James comment: 解決未組成字之前選字 comp window 會消失的問題
-		MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
-		*/
+		//James comment: 解決未組成字之前選字 comp window 會消失的問題(?待商榷)
+
+		if(dsvr->compStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) == 0)
+		{
+			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
+			dsvr->SetCompStarted(false);
+		}
+		
 	}
 	dsvr->releaseIMC();
-	//ImmUnlockIMCC(lpIMC->hCompStr);
-	//ImmUnlockIMC(hIMC);
-
 	return retVal; 
 }
 

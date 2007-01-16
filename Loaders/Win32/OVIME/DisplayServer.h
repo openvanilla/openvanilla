@@ -32,14 +32,14 @@ public:
 	virtual AVDisplayServer *setMarkTo(int i);	
 	virtual DisplayServer *moveBuf(int x,int y);
 	virtual DisplayServer *moveCandi(int x,int y);
-	virtual DisplayServer *SetCompStarted(bool t);
-private:
-	HIMC hIMC;
-	LPINPUTCONTEXT lpIMC;
+	virtual DisplayServer *SetCompStarted(bool t);	
+
+public:	//James: 為了在Utils.cpp, IME.cpp 使用，暫改成public
+	HIMC hIMC;	
 	LPCOMPOSITIONSTRING lpCompStr;
-	LPMYPRIVATE lpMyPrivate;
-public:
-	bool compStarted; //為了在Utils.cpp計算有無comp window的座標 暫改成public
+	LPINPUTCONTEXT lpIMC;
+	LPMYPRIVATE lpMyPrivate;	
+	bool compStarted; 
 };
 #endif //DISPLAYSERVER_H
 
