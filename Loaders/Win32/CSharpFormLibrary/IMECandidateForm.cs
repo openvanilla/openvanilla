@@ -15,7 +15,6 @@ namespace CSharpFormLibrary
         private System.Windows.Forms.ListView lbCandidates;
         private IContainer components;
         private int currentPage = 0; //目前頁次 
-        private int selectedRow = 0; //目前選擇的row
         private int totalPage = 0; //傳入的 candidate 共有幾頁                 
         private ArrayList m_candArray; //傳入的 candi array
         private string[] m_inputs;
@@ -41,13 +40,23 @@ namespace CSharpFormLibrary
         public IMECandidateForm()
         {
             InitializeComponent();
-            //			baseSize = this.lbCandidates.Location.Y+100;
+            //baseSize = this.lbCandidates.Location.Y+100;
             //this.Opacity = 1;
+            this.SetStyle(
+                ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer, true);
         }
+
         public IMECandidateForm(string[] candidates)
         {
             InitializeComponent();
+            this.SetStyle(
+                ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer, true);
         }
+
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == WM_MOUSEACTIVATE)
@@ -59,6 +68,7 @@ namespace CSharpFormLibrary
 
             base.WndProc(ref m);
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -70,6 +80,7 @@ namespace CSharpFormLibrary
             }
             base.Dispose(disposing);
         }
+
         #region Windows Form Designer generated code
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -95,18 +106,15 @@ namespace CSharpFormLibrary
             this.lbCandidates.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
             this.lbCandidates.BackColor = System.Drawing.SystemColors.Window;
             this.lbCandidates.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbCandidates.Font = new System.Drawing.Font("PMingLiU", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbCandidates.Font = new System.Drawing.Font("PMingLiU", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lbCandidates.ForeColor = System.Drawing.SystemColors.WindowText;
             this.lbCandidates.GridLines = true;
             this.lbCandidates.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lbCandidates.HideSelection = false;
-            this.lbCandidates.Location = new System.Drawing.Point(0, 0);
             this.lbCandidates.Name = "lbCandidates";
+            this.lbCandidates.Bounds = new Rectangle(0, 0, 105, 266);
             this.lbCandidates.Scrollable = false;
-            this.lbCandidates.Size = new System.Drawing.Size(105, 266);
             this.lbCandidates.SmallImageList = this.imageList1;
-            this.lbCandidates.TabIndex = 0;
-            this.lbCandidates.UseCompatibleStateImageBehavior = false;
             this.lbCandidates.View = System.Windows.Forms.View.Details;
             this.lbCandidates.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbCandidates_KeyDown);
             this.lbCandidates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lbCandidates_KeyPress);
@@ -128,12 +136,10 @@ namespace CSharpFormLibrary
             // vScrollBar1
             // 
             this.vScrollBar1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.vScrollBar1.Location = new System.Drawing.Point(105, 0);
             this.vScrollBar1.Maximum = 11;
             this.vScrollBar1.Minimum = 1;
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(24, 266);
-            this.vScrollBar1.TabIndex = 0;
+            this.vScrollBar1.Bounds = new Rectangle(105, 0, 24, 266);
             this.vScrollBar1.Value = 1;
             // 
             // label1
@@ -141,10 +147,8 @@ namespace CSharpFormLibrary
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.label1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(3, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 15);
-            this.label1.TabIndex = 3;
+            this.label1.Bounds = new Rectangle(3, 4, 52, 15);
             this.label1.Text = "候選字";
             // 
             // panel1
@@ -152,10 +156,8 @@ namespace CSharpFormLibrary
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(129, 21);
-            this.panel1.TabIndex = 4;
+            this.panel1.Bounds = new Rectangle(0, 0, 129, 21);
             // 
             // panel2
             // 
@@ -163,22 +165,17 @@ namespace CSharpFormLibrary
             this.panel2.Controls.Add(this.lbCandidates);
             this.panel2.Controls.Add(this.vScrollBar1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 21);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(129, 266);
-            this.panel2.TabIndex = 5;
+            this.panel2.Bounds = new Rectangle(0, 21, 129, 266);
             // 
             // IMECandidateForm
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(129, 287);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.SystemColors.WindowText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Location = new System.Drawing.Point(199, 220);
             this.Name = "IMECandidateForm";
             this.ShowInTaskbar = false;
             this.Deactivate += new System.EventHandler(this.IMECandidateForm_Deactivate);
@@ -193,9 +190,7 @@ namespace CSharpFormLibrary
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
 
         #region public methods
@@ -422,15 +417,18 @@ namespace CSharpFormLibrary
         {
             return this.Width;
         }
+
         public int GetHeight()
         {
             return this.Height;
         }
+
         public void ShowNoActive()
         {
             if (!this.Visible)
                 UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
         }
+
         public void HideNoActive()
         {
             if (this.Visible)

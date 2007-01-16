@@ -14,13 +14,6 @@ namespace CSharpFormLibrary
         private const int MA_NOACTIVATE = 0x0003;
         private const int MA_NOACTIVATEANDEAT = 0x0004;
 
-        //private int caretWidth = 0;
-        //just give the caret a small point;
-        private int caretWidth = 2;
-        private int CurrentAll = 0; //現在input字數的大小
-        private int currentAllCompStrLength = 0;
-        private Label label2;//composition window那塊圖的大小
-        private int singleCaretHightlight = 0;
         private int caretPosX = 0;
         private int caretPosIndex = 0;
         private int compSelStart = 0;
@@ -28,9 +21,13 @@ namespace CSharpFormLibrary
         
         public IMECompRichForm()
         {
-            //SetStyle(ControlStyles.DoubleBuffer, true);
             InitializeComponent();
+            this.SetStyle(
+                ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer, true);
         }
+
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == WM_MOUSEACTIVATE)
@@ -40,44 +37,47 @@ namespace CSharpFormLibrary
             }
             base.WndProc(ref m);
         }
+
         public void ShowNoActive()
 		{
             if(!this.Visible)
 			    UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
 		}
+
 		public void HideNoActive()
 		{
             if (this.Visible)
 			    UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
 		}
+
 		public void ClearComp()
 		{
-			this.richTextBox1.Clear();            
-            compSelStart = 0;        
+			this.richTextBox1.Clear();
+            compSelStart = 0;
             compSelEnd = 0;
             
             //Point pt = this.richTextBox1.GetPositionFromCharIndex(caretPosIndex);
             //caretPosX = pt.X + 6;
-            
-
 		}
+
 		public void SetLocation(int x, int y)
 		{
 			this.Location = new Point(x,y);
 		}
+
 		public void SetComp(string inputs)
 		{
 			if(inputs==null) return;            
             this.richTextBox1.Text = inputs; 
             //Point pt = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.Text.Length);
-            //this.Width = pt.X+25;
-                       
+            //this.Width = pt.X+25;                       
         }
 
         public int GetHeight()
         {
             return this.Height;
         }
+
         public int GetCaretPosX()
         {
             /*try
