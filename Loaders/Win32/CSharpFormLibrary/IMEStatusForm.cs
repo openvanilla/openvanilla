@@ -197,7 +197,7 @@ namespace CSharpFormLibrary
             this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 44);
+            this.label1.Size = new System.Drawing.Size(53, 44);
             this.label1.TabIndex = 6;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
@@ -210,7 +210,7 @@ namespace CSharpFormLibrary
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(64, 44);
+            this.panel1.Size = new System.Drawing.Size(53, 44);
             this.panel1.TabIndex = 7;
             // 
             // panel2
@@ -220,9 +220,9 @@ namespace CSharpFormLibrary
             this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.button6);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(64, 0);
+            this.panel2.Location = new System.Drawing.Point(53, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(560, 44);
+            this.panel2.Size = new System.Drawing.Size(571, 44);
             this.panel2.TabIndex = 8;
             // 
             // imeButton1
@@ -230,10 +230,11 @@ namespace CSharpFormLibrary
             this.imeButton1.AppHWnd = ((ulong)(0ul));
             this.imeButton1.BackColor = System.Drawing.Color.Transparent;
             this.imeButton1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.imeButton1.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.imeButton1.Location = new System.Drawing.Point(404, 0);
+            this.imeButton1.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.imeButton1.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.imeButton1.Location = new System.Drawing.Point(441, 0);
             this.imeButton1.Name = "imeButton1";
-            this.imeButton1.Size = new System.Drawing.Size(48, 44);
+            this.imeButton1.Size = new System.Drawing.Size(40, 44);
             this.imeButton1.TabIndex = 6;
             this.imeButton1.Text = "繁簡";
             this.imeButton1.UseVisualStyleBackColor = false;
@@ -246,10 +247,11 @@ namespace CSharpFormLibrary
             this.button2.BackColor = System.Drawing.Color.Transparent;
             this.button2.ContextMenu = this.contextMenu1;
             this.button2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button2.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.button2.Font = new System.Drawing.Font("PMingLiU", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.ForeColor = System.Drawing.SystemColors.InfoText;
             this.button2.Location = new System.Drawing.Point(0, 0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(48, 44);
+            this.button2.Size = new System.Drawing.Size(47, 44);
             this.button2.TabIndex = 1;
             this.button2.Text = "模組";
             this.button2.UseVisualStyleBackColor = false;
@@ -260,10 +262,11 @@ namespace CSharpFormLibrary
             this.button3.AppHWnd = ((ulong)(0ul));
             this.button3.BackColor = System.Drawing.Color.Transparent;
             this.button3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button3.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.button3.Location = new System.Drawing.Point(452, 0);
+            this.button3.Font = new System.Drawing.Font("PMingLiU", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.button3.Location = new System.Drawing.Point(481, 0);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(48, 44);
+            this.button3.Size = new System.Drawing.Size(40, 44);
             this.button3.TabIndex = 2;
             this.button3.Text = "中英";
             this.button3.UseVisualStyleBackColor = false;
@@ -274,10 +277,11 @@ namespace CSharpFormLibrary
             this.button6.AppHWnd = ((ulong)(0ul));
             this.button6.BackColor = System.Drawing.Color.Transparent;
             this.button6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button6.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.button6.Location = new System.Drawing.Point(500, 0);
+            this.button6.Font = new System.Drawing.Font("PMingLiU", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button6.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.button6.Location = new System.Drawing.Point(521, 0);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(60, 44);
+            this.button6.Size = new System.Drawing.Size(50, 44);
             this.button6.TabIndex = 5;
             this.button6.Text = "設定";
             this.button6.UseVisualStyleBackColor = false;
@@ -285,7 +289,7 @@ namespace CSharpFormLibrary
             // 
             // IMEStatusForm
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(6, 18);
+            this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(624, 44);
             this.Controls.Add(this.panel2);
