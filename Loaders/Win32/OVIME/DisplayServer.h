@@ -14,8 +14,11 @@ public:
 		hIMC=NULL;
 		lpIMC=NULL;
 		lpCompStr=NULL;
-		lpMyPrivate=NULL;
-		compStarted=false;
+		lpMyPrivate=NULL;		
+		hasCompStarted=false;
+		isStatusEnabled=false;
+		isCompEnabled=false;
+		isCandiEnabled=false;
 	}
 	AVDisplayServer *lockIMC(HIMC h);
 	AVDisplayServer *releaseIMC();
@@ -34,12 +37,19 @@ public:
 	virtual DisplayServer *moveCandi(int x,int y);
 	virtual DisplayServer *SetCompStarted(bool t);	
 
+	virtual DisplayServer *SetStatusEnabled(bool t);	
+	virtual DisplayServer *SetCompEnabled(bool t);	
+	virtual DisplayServer *SetCandiEnabled(bool t);	
+
 public:	//James: 為了在Utils.cpp, IME.cpp 使用，暫改成public
 	HIMC hIMC;	
 	LPCOMPOSITIONSTRING lpCompStr;
 	LPINPUTCONTEXT lpIMC;
 	LPMYPRIVATE lpMyPrivate;	
-	bool compStarted; 
+	bool hasCompStarted; 
+	bool isStatusEnabled; 
+	bool isCompEnabled; 
+	bool isCandiEnabled; 
 };
 #endif //DISPLAYSERVER_H
 

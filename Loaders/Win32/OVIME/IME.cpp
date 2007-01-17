@@ -183,10 +183,10 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 							WM_IME_COMPOSITION, 0, GCS_COMPSTR);		
 				} else {
 					retVal = FALSE;
-					if(dsvr->compStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) == 0)
+					if(dsvr->hasCompStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) == 0)
 					{
-						MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
-						dsvr->SetCompStarted(false);
+						dsvr->SetCompStarted(false);//要先做!
+						MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);						
 					}
 				}				
 				//</comment>
@@ -273,10 +273,10 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	//	return TRUE;
 
 	
-	if(!dsvr->compStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) > 0)
+	if(!dsvr->hasCompStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) == 0)	
 	{
-		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);
-		dsvr->SetCompStarted(true);
+		dsvr->SetCompStarted(true);//要先做!
+		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);		
 	}
 	
 	k = LOWORD(uVKey);
@@ -355,10 +355,10 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		retVal = FALSE;
 		//James comment: 解決未組成字之前選字 comp window 會消失的問題(?待商榷)
 
-		if(dsvr->compStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) == 0)
+		if(dsvr->hasCompStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) == 0)
 		{
-			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
-			dsvr->SetCompStarted(false);
+			dsvr->SetCompStarted(false); //要先做!
+			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);			
 		}
 		
 	}

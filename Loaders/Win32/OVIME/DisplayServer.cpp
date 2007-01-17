@@ -104,28 +104,64 @@ DisplayServer *DisplayServer::SetCompStarted(bool t)
 	else
 		murmur("\t*DisplayServer::SetCompStarted=false");
 	
-	compStarted=t;
-	return this;
-}
-DisplayServer *DisplayServer::showStatus(bool t)
-{	
-	if(t)
-	{
-		murmur("\tAVDisplayServer *DisplayServer::showStatus");
-		UIShowStatusWindow();
-	}
-	else
-	{
-		murmur("\tAVDisplayServer *DisplayServer::hideStatus");
-		UIHideStatusWindow();
-	}
+	hasCompStarted=t;
 	return this;
 }
 
+DisplayServer *DisplayServer::SetStatusEnabled(bool t)
+{
+	if(t)
+		murmur("\t*DisplayServer::SetStatusEnabled=true");
+	else
+		murmur("\t*DisplayServer::SetStatusEnabled=false");
+	
+	isStatusEnabled=t;
+	return this;
+}
+
+DisplayServer *DisplayServer::SetCompEnabled(bool t)
+{
+	if(t)
+		murmur("\t*DisplayServer::SetCompEnabled=true");
+	else
+		murmur("\t*DisplayServer::SetCompEnabled=false");
+	
+	isCompEnabled=t;
+	return this;
+}
+
+DisplayServer *DisplayServer::SetCandiEnabled(bool t)
+{
+	if(t)
+		murmur("\t*DisplayServer::SetCandiEnabled=true");
+	else
+		murmur("\t*DisplayServer::SetCandiEnabled=false");
+	
+	isCandiEnabled=t;
+	return this;
+}
+
+DisplayServer *DisplayServer::showStatus(bool t)
+{	
+	if(dsvr->isStatusEnabled)
+	{
+		if(t)
+		{
+			murmur("\tAVDisplayServer *DisplayServer::showStatus");
+			UIShowStatusWindow();
+		}
+		else
+		{
+			murmur("\tAVDisplayServer *DisplayServer::hideStatus");
+			UIHideStatusWindow();
+		}
+	}
+	return this;
+}
 
 AVDisplayServer *DisplayServer::showBuf(bool t)
 {		
-	if(compStarted)
+	if(dsvr->isCompEnabled)
 	{
 		if(t && lpMyPrivate->PreEditStr && wcslen(lpMyPrivate->PreEditStr))	
 		{
@@ -142,17 +178,19 @@ AVDisplayServer *DisplayServer::showBuf(bool t)
 }
 
 AVDisplayServer *DisplayServer::showCandi(bool t)
-{	
-	//james test
-	if(t &&  lpMyPrivate->CandStr && wcslen(lpMyPrivate->CandStr))	
+{		
+	if(dsvr->isCandiEnabled)
 	{
-		UIShowCandWindow();
-		murmur("\tAVDisplayServer *DisplayServer::showCandi");		
-	}
-	else
-	{		
-		UIHideCandWindow();
-		murmur("\tAVDisplayServer *DisplayServer::hideCandi");
+		if(t &&  lpMyPrivate->CandStr && wcslen(lpMyPrivate->CandStr))	
+		{
+			UIShowCandWindow();
+			murmur("\tAVDisplayServer *DisplayServer::showCandi");		
+		}
+		else
+		{		
+			UIHideCandWindow();
+			murmur("\tAVDisplayServer *DisplayServer::hideCandi");
+		}
 	}
 	return this;
 }

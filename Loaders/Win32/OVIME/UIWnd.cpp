@@ -133,8 +133,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	case WM_IME_STARTCOMPOSITION:
 		murmur("WM_IME_STARTCOMPOSITION");
-		dsvr->SetCompStarted(true);
-		//dsvr->showStatus(true);								
+		dsvr->SetCompEnabled(true);
+		dsvr->SetCandiEnabled(true);									
 		RefreshUI(hWnd); //James comment : 是否move到正確的座標?
 		break;
 
@@ -146,9 +146,10 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	case WM_IME_ENDCOMPOSITION:
 		murmur("WM_IME_ENDCOMPOSITION");				
+		//dsvr->SetCompEnabled(false);
 		dsvr->showBuf(false);
 		dsvr->showCandi(false);		
-		dsvr->SetCompStarted(false);
+		
 		break;
 
 	case WM_IME_COMPOSITIONFULL:

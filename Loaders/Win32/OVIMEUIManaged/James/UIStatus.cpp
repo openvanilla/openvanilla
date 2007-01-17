@@ -229,10 +229,12 @@ TBBUTTON toolbar_btns[]={
 
 
 void UICreateStatusWindow(HWND hUIWnd)
-{
+{	
 	murmur("\tUICreateStatusWindow, hUIWnd=%x",hUIWnd);	
 	if (!IsWindow(uiStatus.hWnd))
 	{
+		RECT rec;
+
 		//create form:
 		uiStatus.hWnd = _CreateStatusPage();	
 		murmur("\tuiStatus.hWnd=%x",uiStatus.hWnd);
@@ -255,7 +257,14 @@ void UICreateStatusWindow(HWND hUIWnd)
 		murmur("\t after set hIMEWnd: hIMEWnd=%x,hUIWnd=%x",hIMEWnd,hUIWnd);
 		
 		//設定 registry 
-		_SetUserDir();		
+		_SetUserDir();	
+
+		//移動到螢幕右下方
+		SystemParametersInfo(SPI_GETWORKAREA,
+				0,
+				&rec,
+				0);
+		UIMoveStatusWindow(hUIWnd, rec.right - 500, rec.bottom - 100); 
 	}	
 	//設定C# Status 內 m_AppHWnd 
 	_SetStatusAppHWnd(hUIWnd); 	

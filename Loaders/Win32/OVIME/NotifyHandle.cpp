@@ -13,7 +13,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 	static BOOL first = false;
 	LOGFONT* lfptr;
 	LOGFONT lf2;
-	RECT rec;
+	
 
 	if (!(lpIMC = ImmLockIMC(hUICurIMC)))
 		return 0L;
@@ -23,21 +23,14 @@ LONG NotifyHandle(HIMC hUICurIMC,
 	case IMN_OPENSTATUSWINDOW:
 		murmur("IMN_OPENSTATUSWINDOW");
 		murmur("\thwnd=%x", hWnd);		
-		//if(uiStatus.hWnd)
-		{
-			UICreateStatusWindow(hWnd);	
-					
-		}
-		if(!first) {
-			SystemParametersInfo(SPI_GETWORKAREA,
-				0,
-				&rec,
-				0);
-			UIMoveStatusWindow(hWnd, rec.right - 500, rec.bottom - 100);
-			first = true;
-		}	
+		dsvr->SetStatusEnabled(true);
+		UICreateStatusWindow(hWnd);								
+		dsvr->showStatus(true);		
+		break;
 
-		//show
+	case IMN_SETOPENSTATUS: // the same as IMN_OPENSTATUSWINDOW
+		murmur("IMN_SETOPENSTATUS");
+		UICreateStatusWindow(hWnd);
 		dsvr->showStatus(true);		
 		break;
 
@@ -55,6 +48,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 
 	case IMN_OPENCANDIDATE:
 		murmur("IMN_OPENCANDIDATE");
+		dsvr->SetCandiEnabled(true);
 		dsvr->showCandi(true);		
 		break;
 
@@ -64,6 +58,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		break;
 
 	case IMN_CHANGECANDIDATE:
+		dsvr->SetCandiEnabled(true);
 		murmur("IMN_CHANGECANDIDATE");
 		break;
 
@@ -79,14 +74,10 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		murmur("IMN_SETSENTENCEMODE");
 		break;
 
-	case IMN_SETOPENSTATUS: // toggle status open or close
-		murmur("IMN_SETOPENSTATUS");
-		dsvr->showStatus(true);		
-		break;
-
 	case IMN_SETCANDIDATEPOS: // For the Search Text Field of Firefox
 		{
 		murmur("IMN_SETCANDIDATEPOS");
+		dsvr->SetCandiEnabled(true);
 		POINT ptSrc;
 		SIZE szOffset;
 		HDC hDC;
