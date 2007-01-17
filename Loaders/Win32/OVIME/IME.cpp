@@ -150,7 +150,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	dsvr->lockIMC(hIMC);  //所以所有的 return 之前都必須 dsvr->releaseIMC();
 	if (!dsvr->lpIMC)
 	{
-		dsvr->releaseIMC();
+		dsvr->releaseIMC();		
 		return FALSE;
 	}
 	//if (lKeyData & 0x80000000)	
@@ -192,10 +192,13 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 				//</comment>
             }
             g_shiftPressedTime = -1;
-			dsvr->releaseIMC();
+
+			/*暫時治標拿掉，應該還是要unlock，然後在 dsvr 裡面所有地方要 lock/unlock
+			dsvr->releaseIMC();  
+			*/			
 			return retVal;
         }
-		dsvr->releaseIMC();
+		dsvr->releaseIMC();		
         return FALSE;
     }
 
@@ -214,7 +217,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 
 	if (/*uVKey == VK_SHIFT ||*/ uVKey == VK_CONTROL || uVKey == VK_MENU) 	
 	{
-		dsvr->releaseIMC();
+		dsvr->releaseIMC();		
 		return FALSE; //<James comment> for app :"單單按 ctrl 或 alt"
 	}
 	
@@ -225,19 +228,9 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		//Only Shift: lParam == 6
 		murmur("IME.cpp: ctrl+alt+K");
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 6);
-		dsvr->releaseIMC();
+		dsvr->releaseIMC();		
 		return TRUE;  // ctrl+ alt +k		
 	}
-	/*
-	if(LOWORD(uVKey) == VK_J && (lpbKeyState[VK_CONTROL] & 0x80)&& (lpbKeyState[VK_MENU] & 0x80) )
-	{
-		// Toggle Small Candidate window.
-		//Only Shift: lParam == 6
-		murmur("IME.cpp: ctrl+alt+K");
-		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 6);
-		dsvr->releaseIMC();
-		return TRUE;  // ctrl+ alt +k		
-	}*/
 
 	if(LOWORD(uVKey) == VK_G && (lpbKeyState[VK_CONTROL] & 0x80)&& (lpbKeyState[VK_MENU] & 0x80) )
 	{
@@ -245,19 +238,21 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		//Only Shift: lParam == 4
 		murmur("IME.cpp: ctrl+alt+g");
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 4);
-		dsvr->releaseIMC();
+		dsvr->releaseIMC();		
 		return TRUE;  // ctrl+ alt +g		
 	}
+
 	if(LOWORD(uVKey) == VK_SPACE && (lpbKeyState[VK_CONTROL] & 0x80))
 	{
-		dsvr->releaseIMC();
+		//dsvr->releaseIMC();
 		return TRUE;  //ctrl+space
 	}
+
     if(LOWORD(uVKey) == VK_SPACE && IsKeyDown(lpbKeyState[VK_SHIFT]))
 	{
 		//shift+space: lParam == 1
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 1);	
-		dsvr->releaseIMC();
+		dsvr->releaseIMC();		
 		return FALSE;  //shift + space
 	}
 
@@ -265,7 +260,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	if((LOWORD(uVKey) == VK_OEM_5 || LOWORD(uVKey) == VK_OEM_PLUS) &&
 		((lpbKeyState[VK_CONTROL] & 0x80)))
 	{
-		dsvr->releaseIMC();
+		dsvr->releaseIMC();		
 		return TRUE;
 	}
 	//Change CHI/ENG by CAPS
@@ -362,7 +357,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		}
 		
 	}
-	dsvr->releaseIMC();
+	dsvr->releaseIMC();	
 	return retVal; 
 }
 

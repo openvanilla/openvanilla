@@ -43,18 +43,20 @@ AVDisplayServer *DisplayServer::setBufString(const char *str)
 AVDisplayServer *DisplayServer::sendBuf(const char *str)
 {
 	wchar_t wstr[1024];
-	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
+	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);	
+	
 	lpCompStr->dwResultStrLen = (int)wcslen(wstr);
+
 	wcscpy(GETLPRESULTSTR(lpCompStr), wstr);	
 	wcscpy(lpMyPrivate->PreEditStr, L"");
 	
 	MakeCompStr(lpMyPrivate, lpCompStr);
 	UIClearCompStr();//即時update C# comp string 同步資料
-
+		
 	MyGenerateMessage(hIMC,
-		WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
+		WM_IME_COMPOSITION, 0, GCS_RESULTSTR);  //?
 	MyGenerateMessage(hIMC,
-		WM_IME_ENDCOMPOSITION, 0, 0);	
+		WM_IME_ENDCOMPOSITION, 0, 0);	 //?
 	return this;
 }
 AVDisplayServer *DisplayServer::setCandiString(const char *str)
