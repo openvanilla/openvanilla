@@ -92,7 +92,7 @@ void UpdateCandidate(LPINPUTCONTEXT lpIMC, const wchar_t* candis)
 }
 
 
-void RefreshUI(HWND hWnd )  //調整comp cand
+void RefreshUI(HWND hWnd )  //調整 comp/cand position
 {		
 	HIMC			hUICurIMC;
 	LPINPUTCONTEXT	lpIMC;
@@ -106,60 +106,43 @@ void RefreshUI(HWND hWnd )  //調整comp cand
 	{
 		murmur("\tCompX<0");
 		LONG lRet = 0L;
- 
+
 		static BOOL first = false;
 		LOGFONT* lfptr;
 		LOGFONT lf2;
 		RECT rec;
-		SIZE szOffset;
-		HDC hDC;
+		
 		POINT ptSrc;
-		TEXTMETRIC tm;
+		
 		int localDPIY; //for device dpiY
 		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
 		ClientToScreen(lpIMC->hWnd, &ptSrc);
-		hDC = GetDC(lpIMC->hWnd);
+
+		
 		murmur("\thWnd->%x", lpIMC->hWnd);
+
+		//computes the width and height of the specified string of text.
+		HDC hDC; //Handle to the device context.
+		hDC = GetDC(lpIMC->hWnd);
+		SIZE szOffset;//Pointer to a SIZE structure that receives the dimensions of the string, in logical units.		
 		GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
+
+		//fills the specified buffer with the metrics for the currently selected font.
+		TEXTMETRIC tm; //Pointer to the TEXTMETRIC structure that receives the text metrics.
 		GetTextMetrics(hDC, &tm);
+
 		localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
 		ReleaseDC(lpIMC->hWnd,hDC);
-		/*if(    ptSrc.x>CandX && ptSrc.x<=CandX+80
-			&& ptSrc.y>=CandY && ptSrc.y<=CandY+160)
-		{
-		
-		}
-		else*/
-		{
-			lfptr = (LOGFONT*)(&lpIMC->lfFont);
-			memcpy( &lf2, lfptr, sizeof( lf2) );					
-			CompX = ptSrc.x ;
-			CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;			
-			int tmpY=abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
-			//dsvr->moveBuf(CompX,CompY);
-			//dsvr->moveCandi(CompX,CompY+UIGetHeight());	
-		}
-		/*POINT ptSrc;
-		LOGFONT* lfptr;
-		LOGFONT lf2;
-		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
-		ClientToScreen(lpIMC->hWnd, &ptSrc);
+
 		lfptr = (LOGFONT*)(&lpIMC->lfFont);
 		memcpy( &lf2, lfptr, sizeof( lf2) );					
 		CompX = ptSrc.x ;
 		CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;			
-		int tmpY=abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;*/
-		/*pt.x = 0;
-		pt.y = 0;
-		ClientToScreen(lpIMC->hWnd, &pt);
-		CompX = pt.x;
-		CompY = pt.y;*/
-		//murmur("fake setcompwindow");					
-	}
-//	else
-	{
+		//int tmpY=abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
+
+
 		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
-		
+
 		if(dsvr->isCompEnabled) 
 		{
 			dsvr->moveBuf(CompX,CompY);	
