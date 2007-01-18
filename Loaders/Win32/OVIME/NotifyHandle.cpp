@@ -78,7 +78,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		{
 		murmur("IMN_SETCANDIDATEPOS");
 		dsvr->SetCandiEnabled(true);
-		POINT ptSrc;
+		/*POINT ptSrc;
 		SIZE szOffset;
 		HDC hDC;
 		ptSrc = lpIMC->cfCandForm[0].ptCurrentPos;
@@ -89,7 +89,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		LPMYPRIVATE lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 		CompX=ptSrc.x ;//+szOffset.cx;
 		CompY=ptSrc.y + szOffset.cy;			
-		RefreshUI(hWnd);
+		RefreshUI(hWnd);*/
 		//dsvr->moveCandi(CandX,CandY);
 		//not finished!!
 		break;
@@ -97,21 +97,24 @@ LONG NotifyHandle(HIMC hUICurIMC,
 
 	case IMN_SETCOMPOSITIONFONT:
 		murmur("IMN_SETCOMPOSITIONFONT");
+		dsvr->SetCompEnabled(true);
 		//<comment author='b6s'>
 		// It is weird but... when the attached app got focus back,
 		// this message occurred.
 		//</comment>	
-
+		RefreshUI(hWnd);
 		break;
 
-	case IMN_SETCOMPOSITIONWINDOW:    
+	case IMN_SETCOMPOSITIONWINDOW:   
+		{			
 		/*	Sent immediately before the IME generates 
 			the composition string as a result of a keystroke.
 			This message is a notification to an IME window to 
 			open its composition window. An application should process
 			this message if it displays composition characters itself. */
 		murmur("IMN_SETCOMPOSITIONWINDOW");
-		POINT ptSrc;
+		dsvr->SetCompEnabled(true);
+		/*POINT ptSrc;
 		SIZE szOffset;
 		HDC hDC;
 		TEXTMETRIC tm;
@@ -124,24 +127,14 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		GetTextMetrics(hDC, &tm);
 		localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
 		ReleaseDC(lpIMC->hWnd,hDC);
-		/*if(    ptSrc.x>CandX && ptSrc.x<=CandX+80
-		&& ptSrc.y>=CandY && ptSrc.y<=CandY+160)
-		{
-
-		}
-		else*/
-		{
-			lfptr = (LOGFONT*)(&lpIMC->lfFont);
-			memcpy( &lf2, lfptr, sizeof( lf2) );					
-			CompX = ptSrc.x ;
-			CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;			
-			int tmpY=abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
-			//dsvr->moveBuf(CompX,CompY);
-			//dsvr->moveCandi(CompX,CompY+UIGetHeight());						
-		}
+		
+		lfptr = (LOGFONT*)(&lpIMC->lfFont);
+		memcpy( &lf2, lfptr, sizeof( lf2) );					
+		CompX = ptSrc.x ;
+		CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;*/					
 		RefreshUI(hWnd);
 		break;
-
+		}
 	case IMN_GUIDELINE:
 		murmur("IMN_GUIDELINE");
 		break;

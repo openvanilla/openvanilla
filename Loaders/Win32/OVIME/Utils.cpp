@@ -92,7 +92,7 @@ void UpdateCandidate(LPINPUTCONTEXT lpIMC, const wchar_t* candis)
 }
 
 
-void RefreshUI(HWND hWnd )  //調整 comp/cand position
+void RefreshUI(HWND hWnd )  //調整comp cand
 {		
 	HIMC			hUICurIMC;
 	LPINPUTCONTEXT	lpIMC;
@@ -102,59 +102,58 @@ void RefreshUI(HWND hWnd )  //調整 comp/cand position
 
 	lpIMC = ImmLockIMC(hUICurIMC);
 	POINT pt;
-	if(CompX < 0) 
-	{
-		murmur("\tCompX<0");
-		LONG lRet = 0L;
-
-		static BOOL first = false;
+	//if(CompX < 0)  //init
+	
+		//murmur("\tCompX<0");				
 		LOGFONT* lfptr;
 		LOGFONT lf2;
 		RECT rec;
-		
+		SIZE szOffset;
+		HDC hDC;
 		POINT ptSrc;
-		
+		TEXTMETRIC tm;
 		int localDPIY; //for device dpiY
 		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
 		ClientToScreen(lpIMC->hWnd, &ptSrc);
-
-		
-		murmur("\thWnd->%x", lpIMC->hWnd);
-
-		//computes the width and height of the specified string of text.
-		HDC hDC; //Handle to the device context.
 		hDC = GetDC(lpIMC->hWnd);
-		SIZE szOffset;//Pointer to a SIZE structure that receives the dimensions of the string, in logical units.		
+		murmur("\th Refresh: lpIMC->Wnd->%x", lpIMC->hWnd);
+		//computes the width and height of the specified string of text.
 		GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
-
 		//fills the specified buffer with the metrics for the currently selected font.
-		TEXTMETRIC tm; //Pointer to the TEXTMETRIC structure that receives the text metrics.
 		GetTextMetrics(hDC, &tm);
-
 		localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
 		ReleaseDC(lpIMC->hWnd,hDC);
-
 		lfptr = (LOGFONT*)(&lpIMC->lfFont);
 		memcpy( &lf2, lfptr, sizeof( lf2) );					
-		CompX = ptSrc.x ;
-		CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;			
+				
 		//int tmpY=abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
 
-
-		lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
-
-		if(dsvr->isCompEnabled) 
+	
+	
+	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
+	
+	if(dsvr->isCompEnabled) 
+	{
+		CompX = ptSrc.x ;
+		CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;		
+		dsvr->moveBuf(CompX,CompY);	
+		if(dsvr->isCandiEnabled)
 		{
-			dsvr->moveBuf(CompX,CompY);	
-			if(dsvr->isCandiEnabled)
-				dsvr->moveCandi(CompX+UIGetCaretPosX(),CompY+UIGetHeight());	
+			CandX = CompX+UIGetCaretPosX();
+			CandY = CompY+UIGetHeight();
+			dsvr->moveCandi(CandX,CandY);	
 		}
-		else
-		{
-			if(dsvr->isCandiEnabled)
-				dsvr->moveCandi(CompX,CompY);
+	}
+	else
+	{		
+		if(dsvr->isCandiEnabled)
+		{	
+			CandX= ptSrc.x ;
+			CandY= ptSrc.y + szOffset.cy;
+			dsvr->moveCandi(CandX,CandY);
 		}
-	}	
+	}
+
 	return;
 }
 

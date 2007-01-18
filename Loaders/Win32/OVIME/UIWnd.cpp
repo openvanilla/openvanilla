@@ -104,6 +104,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			murmur("\tsetcontext to hwnd:%x",hWnd);			
 			if (hUICurIMC)  //hUICurIMC==0 表示出錯(?)
 			{
+				RefreshUI(hWnd); //多視窗 program 切換子視窗要重設 ic position
 				murmur("\thUICurIMC==true");
 				if(lParam & ISC_SHOWUICOMPOSITIONWINDOW) // not sure
 				{				
