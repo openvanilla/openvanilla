@@ -94,7 +94,7 @@ LangString SEC_DOTNET ${LANG_TradChinese} "$(DESC_SHORTDOTNET) "
 LangString DESC_INSTALLING ${LANG_TradChinese} "安裝中"
 LangString DESC_DOWNLOADING1 ${LANG_TradChinese} "下載中"
 LangString DESC_DOWNLOADFAILED ${LANG_TradChinese} "下載失敗:"
-LangString ERROR_DOTNET_DUPLICATE_INSTANCE ${LANG_TradChinese} "已啟動 $(DESC_SHORTDOTNET) 安裝程序"
+LangString ERROR_DOTNET_DUPLICATE_INSTANCE ${LANG_TradChinese} "已有另一個 $(DESC_SHORTDOTNET) 啟動安裝程序"
 LangString ERROR_NOT_ADMINISTRATOR ${LANG_TradChinese} "請將您的權限提升至電腦系統管理員，謝謝"
 LangString ERROR_INVALID_PLATFORM ${LANG_TradChinese} "此產品並不適用於這個平台"
 LangString DESC_DOTNET_TIMEOUT ${LANG_TradChinese} " $(DESC_SHORTDOTNET) 安裝已逾時"
@@ -366,6 +366,7 @@ Section $(SEC_DOTNET) SECDOTNET
       IfSilent lbl_IsSilent
     !define DOTNETFILESDIR "Common\Files\MSNET"
     StrCpy $DOTNET_RETURN_CODE "0"
+
 !ifdef DOTNET_ONCD_1033
     StrCmp "$OSLANGUAGE" "1033" 0 lbl_Not1033
     SetOutPath "$PLUGINSDIR"
@@ -379,6 +380,7 @@ Section $(SEC_DOTNET) SECDOTNET
     Goto lbl_NoDownloadRequired
     lbl_Not1033:
 !endif
+
 ; Insert Other language blocks here
  
     ; the following Goto and Label is for consistencey.
@@ -428,6 +430,7 @@ Section $(SEC_DOTNET) SECDOTNET
       SetRebootFlag true
       ; silence the compiler
       Goto lbl_NoDownloadRequired
+    
       lbl_NoDownloadRequired:
  
       ; obtain any error code and inform the user ($DOTNET_RETURN_CODE)
@@ -437,16 +440,49 @@ Section $(SEC_DOTNET) SECDOTNET
       ; else it will return the return code from the executed process.
       StrCmp "$DOTNET_RETURN_CODE" "" lbl_NoError
       StrCmp "$DOTNET_RETURN_CODE" "0" lbl_NoError
-      StrCmp "$DOTNET_RETURN_CODE" "3010" lbl_NoError
-      StrCmp "$DOTNET_RETURN_CODE" "8192" lbl_NoError
+      StrCmp "$DOTNET_RETURN_CODE" "3010" lbl_NoError ;indicate success with a reboot required
+      StrCmp "$DOTNET_RETURN_CODE" "8192" lbl_NoError ;reboot is required
       StrCmp "$DOTNET_RETURN_CODE" "error" lbl_Error
       StrCmp "$DOTNET_RETURN_CODE" "timeout" lbl_TimeOut
       ; It's a .Net Error
-      StrCmp "$DOTNET_RETURN_CODE" "4101" lbl_Error_DuplicateInstance
       StrCmp "$DOTNET_RETURN_CODE" "4097" lbl_Error_NotAdministrator
+      StrCmp "$DOTNET_RETURN_CODE" "4098" lbl_Error_InstallMSIFailed ; need new step
+      StrCmp "$DOTNET_RETURN_CODE" "4099" lbl_Error_WInstallerNotProper ; need new step
+      StrCmp "$DOTNET_RETURN_CODE" "4100" lbl_Error
+      StrCmp "$DOTNET_RETURN_CODE" "4101" lbl_Error_DuplicateInstance
+      StrCmp "$DOTNET_RETURN_CODE" "4102" lbl_Error
+      StrCmp "$DOTNET_RETURN_CODE" "4103" lbl_Error
+      StrCmp "$DOTNET_RETURN_CODE" "4111" lbl_Error
+      StrCmp "$DOTNET_RETURN_CODE" "4113" lbl_Error_BetaRemove ; need new step
+      StrCmp "$DOTNET_RETURN_CODE" "4115" lbl_Error ; temp path is too long
+      StrCmp "$DOTNET_RETURN_CODE" "4116" lbl_Error ; the source path is too long
+      StrCmp "$DOTNET_RETURN_CODE" "4118" lbl_Error ; fail to create log file
+      StrCmp "$DOTNET_RETURN_CODE" "4119" lbl_Error
+      StrCmp "$DOTNET_RETURN_CODE" "4120" lbl_Error
+      StrCmp "$DOTNET_RETURN_CODE" "4121" lbl_Error
+      StrCmp "$DOTNET_RETURN_CODE" "4122" lbl_Error
+      StrCmp "$DOTNET_RETURN_CODE" "4123" lbl_Error ; already in os component like vista
+      StrCmp "$DOTNET_RETURN_CODE" "4124" lbl_Error
+      StrCmp "$DOTNET_RETURN_CODE" "8191" lbl_Error
+      StrCmp "$DOTNET_RETURN_CODE" "1602" lbl_Error_UserCancel ; need new step
+      
+      
       StrCmp "$DOTNET_RETURN_CODE" "1633" lbl_Error_InvalidPlatform lbl_FatalError
       ; all others are fatal
  
+    lbl_Error_InstallMSIFailed:
+    lbl_Error_WInstallerNotProper:
+    DetailPrint "Windows Installer 安裝時失敗"
+    GoTo lbl_Done
+    
+    lbl_Error_BetaRemove:
+    DetailPrint "需要先將.Net Framework Beta版進行移除"
+    GoTo lbl_Done
+    
+    lbl_Error_UserCancel:
+    DetailPrint "使用者自行取消"
+    GoTo lbl_Done
+    
     lbl_Error_DuplicateInstance:
     DetailPrint "$(ERROR_DOTNET_DUPLICATE_INSTANCE)"
     GoTo lbl_Done
