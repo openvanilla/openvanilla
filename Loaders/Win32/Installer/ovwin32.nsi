@@ -4,7 +4,7 @@
 !include "LogicLib.nsh"
 
 ; HM NIS Edit Wizard helper defines
-!define PRODUCT_NAME "OpenVanilla"
+!define PRODUCT_NAME "中文 (繁體) - 開放香草輸入法平台"
 !define PRODUCT_VERSION "0.7.2.1-beta"
 !define PRODUCT_PUBLISHER "OpenVanilla.org"
 !define PRODUCT_WEB_SITE "http://openvanilla.org/"
@@ -559,7 +559,7 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
-  System::Call 'imm32::ImmInstallIME(t "$SYSDIR\OVIME.ime", t "中文 (繁體) - OpenVanilla")'
+  System::Call 'imm32::ImmInstallIME(t "$SYSDIR\OVIME.ime", t "$(^Name)")'
   ${registry::Open} "${IME_ROOT_KEY}\${IME_KEY}" "/N='OVIME.ime' /G=1 /T=REG_SZ" $0
   ${registry::Find} $0 $1 $2 $3 $4
   StrLen $5 "${IME_KEY}"
@@ -573,12 +573,12 @@ SectionEnd
 
 Function un.onUninstSuccess
   ;HideWindow
-  MessageBox MB_ICONINFORMATION|MB_OK "OpenVanilla 已成功地從你的電腦移除。" /SD IDOK
+  MessageBox MB_ICONINFORMATION|MB_OK "$(^Name)已成功地從你的電腦移除。" /SD IDOK
 FunctionEnd
 
 Function un.onInit
 ;!insertmacro MUI_UNGETLANGUAGE
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "你確定要完全移除 OpenVanilla ，其及所有的元件？" /SD IDYES IDYES +2
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "你確定要完全移除$(^Name)，其及所有的元件？" /SD IDYES IDYES +2
   Abort
 FunctionEnd
 
