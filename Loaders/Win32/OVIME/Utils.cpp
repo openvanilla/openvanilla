@@ -122,20 +122,21 @@ void RefreshUI(HWND hWnd )  //調整comp cand
 	murmur("\th Refresh: lpIMC->Wnd->%x", lpIMC->hWnd);
 
 	//computes the width and height of the specified string of text.
-	GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
+	//GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
 
 	//fills the specified buffer with the metrics for the currently selected font.
 	GetTextMetrics(hDC, &tm);
-
 	localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
 	ReleaseDC(lpIMC->hWnd,hDC);
 	lfptr = (LOGFONT*)(&lpIMC->lfFont);
 	memcpy( &lf2, lfptr, sizeof( lf2) );
+
 	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 
 	if(dsvr->isCompEnabled) 
 	{	
 		CompX = ptSrc.x ;
+		//CompY = ptSrc.y + szOffset.cy;
 		CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;		
 		dsvr->moveBuf(CompX,CompY);	
 		if(dsvr->isCandiEnabled)
@@ -148,7 +149,8 @@ void RefreshUI(HWND hWnd )  //調整comp cand
 	else if(dsvr->isCandiEnabled)
 	{							
 		CandX= ptSrc.x ;
-		CandY= ptSrc.y + szOffset.cy;
+		//CandY= ptSrc.y + szOffset.cy;
+		CandY= ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
 		dsvr->moveCandi(CandX,CandY);		
 	}
 	return;
