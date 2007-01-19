@@ -99,41 +99,42 @@ void RefreshUI(HWND hWnd )  //調整comp cand
 	LONG			lRet = 0L;
 	LPMYPRIVATE lpMyPrivate;
 	hUICurIMC = (HIMC)GetWindowLong(hWnd, IMMGWL_IMC);
-
-	lpIMC = ImmLockIMC(hUICurIMC);
-	POINT pt;
-	//if(CompX < 0)  //init
-	
-		//murmur("\tCompX<0");				
-		LOGFONT* lfptr;
-		LOGFONT lf2;
-		RECT rec;
-		SIZE szOffset;
-		HDC hDC;
-		POINT ptSrc;
-		TEXTMETRIC tm;
-		int localDPIY; //for device dpiY
-		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
-		ClientToScreen(lpIMC->hWnd, &ptSrc);
-		hDC = GetDC(lpIMC->hWnd);
-		murmur("\th Refresh: lpIMC->Wnd->%x", lpIMC->hWnd);
-		//computes the width and height of the specified string of text.
-		GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
-		//fills the specified buffer with the metrics for the currently selected font.
-		GetTextMetrics(hDC, &tm);
-		localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
-		ReleaseDC(lpIMC->hWnd,hDC);
-		lfptr = (LOGFONT*)(&lpIMC->lfFont);
-		memcpy( &lf2, lfptr, sizeof( lf2) );					
-				
-		//int tmpY=abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
-
-	
-	
-	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);		
-	
-	if(dsvr->isCompEnabled) 
+	lpIMC = ImmLockIMC(hUICurIMC);				
+	LOGFONT* lfptr;
+	LOGFONT lf2;
+	RECT rec;
+	SIZE szOffset;
+	HDC hDC;
+	POINT ptSrc;
+	TEXTMETRIC tm;
+	int localDPIY; //for device dpiY		
+	if(dsvr->isCompEnabled)  // comp exist, cand follow comp's position
 	{
+		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
+	}
+	else if(dsvr->isCandiEnabled) // comp doesn't exist, get cand posistion
+	{
+		ptSrc = lpIMC->cfCandForm[0].ptCurrentPos;
+	}
+
+	ClientToScreen(lpIMC->hWnd, &ptSrc);
+	hDC = GetDC(lpIMC->hWnd);
+	murmur("\th Refresh: lpIMC->Wnd->%x", lpIMC->hWnd);
+
+	//computes the width and height of the specified string of text.
+	GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
+
+	//fills the specified buffer with the metrics for the currently selected font.
+	GetTextMetrics(hDC, &tm);
+
+	localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
+	ReleaseDC(lpIMC->hWnd,hDC);
+	lfptr = (LOGFONT*)(&lpIMC->lfFont);
+	memcpy( &lf2, lfptr, sizeof( lf2) );
+	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
+
+	if(dsvr->isCompEnabled) 
+	{	
 		CompX = ptSrc.x ;
 		CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;		
 		dsvr->moveBuf(CompX,CompY);	
@@ -144,16 +145,12 @@ void RefreshUI(HWND hWnd )  //調整comp cand
 			dsvr->moveCandi(CandX,CandY);	
 		}
 	}
-	else
-	{		
-		if(dsvr->isCandiEnabled)
-		{	
-			CandX= ptSrc.x ;
-			CandY= ptSrc.y + szOffset.cy;
-			dsvr->moveCandi(CandX,CandY);
-		}
+	else if(dsvr->isCandiEnabled)
+	{							
+		CandX= ptSrc.x ;
+		CandY= ptSrc.y + szOffset.cy;
+		dsvr->moveCandi(CandX,CandY);		
 	}
-
 	return;
 }
 

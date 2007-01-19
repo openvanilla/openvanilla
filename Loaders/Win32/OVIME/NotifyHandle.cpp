@@ -78,6 +78,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		{
 		murmur("IMN_SETCANDIDATEPOS");
 		dsvr->SetCandiEnabled(true);
+		RefreshUI(hWnd);
 		/*POINT ptSrc;
 		SIZE szOffset;
 		HDC hDC;
