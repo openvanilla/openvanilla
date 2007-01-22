@@ -46,12 +46,12 @@ namespace CSharpFormLibrary
 			this.SetStyle(ControlStyles.StandardClick, false);
 			this.SetStyle(ControlStyles.EnableNotifyMessage, false);
 			this.SetStyle(ControlStyles.UserMouse, false);
+
             this.SetStyle(
                 ControlStyles.UserPaint |
                 ControlStyles.AllPaintingInWmPaint |
                 ControlStyles.OptimizedDoubleBuffer, true);
-
-            //Application.AddMessageFilter(new MessageFilter());
+            Application.EnableVisualStyles();
         }
 
         #region IME-specific overridden methods
@@ -276,8 +276,8 @@ namespace CSharpFormLibrary
             // IMEStatusForm
             // 
             //this.AutoSize = true;
-            this.ClientSize = new Size(180, 75);
-            this.Size = new Size(180,76);
+            this.ClientSize = new Size(180, 40);
+            this.Size = new Size(180,75);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

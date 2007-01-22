@@ -69,6 +69,12 @@ namespace CSharpFormLibrary
 			buttonList.Add(this.button12);		
 			//baseSize = this.lbCandidates.Location.Y+100;
 			//this.Opacity = 0.85;
+
+            this.SetStyle(
+                ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer, true);
+            Application.EnableVisualStyles();
 		}
 		/*public IMECandidateForm(string[] candidates)
 		{

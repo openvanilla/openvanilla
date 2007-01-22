@@ -26,6 +26,7 @@ namespace CSharpFormLibrary
                 ControlStyles.UserPaint |
                 ControlStyles.AllPaintingInWmPaint |
                 ControlStyles.OptimizedDoubleBuffer, true);
+            Application.EnableVisualStyles();
         }
 
         protected override void WndProc(ref Message m)

@@ -45,6 +45,7 @@ namespace CSharpFormLibrary
                 ControlStyles.UserPaint |
                 ControlStyles.AllPaintingInWmPaint |
                 ControlStyles.OptimizedDoubleBuffer, true);
+            Application.EnableVisualStyles();
         }
 
         public IMENotifyForm(string[] Notifys)
