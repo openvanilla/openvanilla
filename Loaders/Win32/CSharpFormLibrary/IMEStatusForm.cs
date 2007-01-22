@@ -223,7 +223,6 @@ namespace CSharpFormLibrary
             this.button2.BackColor = System.Drawing.Color.Transparent;
             this.button2.ContextMenu = this.contextMenu1;
             this.button2.Font = new System.Drawing.Font("PMingLiU", 12F);
-            this.button2.ForeColor = System.Drawing.SystemColors.GrayText;
             this.button2.Location = new System.Drawing.Point(0, 0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(65, 40);
@@ -237,7 +236,6 @@ namespace CSharpFormLibrary
             this.imeButton1.BackColor = System.Drawing.Color.Transparent;
             this.imeButton1.Dock = System.Windows.Forms.DockStyle.Right;
             this.imeButton1.Font = new System.Drawing.Font("PMingLiU", 12F);
-            this.imeButton1.ForeColor = System.Drawing.SystemColors.GrayText;
             this.imeButton1.Location = new System.Drawing.Point(25, 0);
             this.imeButton1.Name = "imeButton1";
             this.imeButton1.Size = new System.Drawing.Size(40, 40);
@@ -253,7 +251,6 @@ namespace CSharpFormLibrary
             this.button3.BackColor = System.Drawing.Color.Transparent;
             //this.button3.Dock = System.Windows.Forms.DockStyle.Right;
             this.button3.Font = new System.Drawing.Font("PMingLiU", 12F);
-            this.button3.ForeColor = System.Drawing.SystemColors.GrayText;
             this.button3.Location = new System.Drawing.Point(65, 0);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(40, 40);
@@ -268,7 +265,6 @@ namespace CSharpFormLibrary
             this.button6.BackColor = System.Drawing.Color.Transparent;
             //this.button6.Dock = System.Windows.Forms.DockStyle.Right;
             this.button6.Font = new System.Drawing.Font("PMingLiU", 12F);
-            this.button6.ForeColor = System.Drawing.SystemColors.GrayText;
             this.button6.Location = new System.Drawing.Point(105, 0);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(65, 40);
