@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "PCMan.h"
+#include "DotNETHeader.h"
 
 LRESULT APIENTRY NotifyWndProc(HWND hWnd, 
 		UINT msg, 
@@ -38,6 +39,7 @@ void UICreateNotifyWindow(HWND hUIWnd)
 {
 	if (!IsWindow(uiNotify.hWnd))
 	{
+		/*
 		SIZE sz;	sz.cx = sz.cy = 0;
 		HDC hDC;
 		HFONT oldFont;
@@ -57,8 +59,12 @@ void UICreateNotifyWindow(HWND hUIWnd)
 		ReleaseDC(uiNotify.hWnd,hDC);
 
 		uiNotify.sz.cy = sz.cy + 4;
+		*/
+		uiNotify.hWnd=_CreateNotifyPage();
+
 	}
-	ShowWindow(uiNotify.hWnd, SW_HIDE);
+	//_ShowNotifyPage();
+	//ShowWindow(uiNotify.hWnd, SW_HIDE);
 	return;
 }
 
@@ -99,21 +105,22 @@ BOOL GetNotifyPosFromCompWnd(LPSIZE lpsz)
 }
 */
 
-void UIShowNotifyWindow(wchar_t* lpStr)
+void UIShowNotifyWindow()
 {
-	free(lpNotifyStr);
-	lpNotifyStr = wcsdup(lpStr);
+	/*
 	if( !*lpStr || !lpStr)
 	{
 		UIHideNotifyWindow();
 		return;
 	}
-
-	/*
-	if (!IsWindow(uiNotify.hWnd))
-		UICreateNotifyWindow(hUIWnd);
-	*/
-
+    */
+	
+	/*if (!IsWindow(uiNotify.hWnd))
+		UICreateNotifyWindow(hUIWnd);*/
+	
+	//_SetNotifyString(lpNotifyStr);
+	_ShowNotifyPage();
+/*
 	if (IsWindow(uiNotify.hWnd))
 	{
 		HDC hDC;
@@ -145,33 +152,47 @@ void UIShowNotifyWindow(wchar_t* lpStr)
 				TRUE);
 		ShowWindow(uiNotify.hWnd, SW_SHOWNOACTIVATE);
 		InvalidateRect(uiNotify.hWnd, NULL, FALSE);
-	}
+		
+	}*/
 }
 
 void PaintNotifyWindow(HWND hNotifyWnd)
 {
-	PAINTSTRUCT ps;
-	HDC hDC;
-	HFONT oldFont;
-	RECT rc;
-	//DWORD i;
-
-	hDC = BeginPaint(hNotifyWnd,&ps);
-	oldFont = (HFONT)SelectObject(hDC, hUIFont);
-
-	GetClientRect(hNotifyWnd,&rc);
-
-	if(lpNotifyStr)
-	{
-		ExtTextOut( hDC, 1, 1, ETO_OPAQUE, &rc, lpNotifyStr, (int)wcslen(lpNotifyStr), NULL);
-	}
-	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_3DFACE), 0/*GetSysColor(COLOR_3DDKSHADOW)*/);
-	SelectObject(hDC, oldFont);
-	EndPaint(hNotifyWnd,&ps);
+//	PAINTSTRUCT ps;
+//	HDC hDC;
+//	HFONT oldFont;
+//	RECT rc;
+//	//DWORD i;
+//
+//	hDC = BeginPaint(hNotifyWnd,&ps);
+//	oldFont = (HFONT)SelectObject(hDC, hUIFont);
+//
+//	GetClientRect(hNotifyWnd,&rc);
+//
+//	if(lpNotifyStr)
+//	{
+//		ExtTextOut( hDC, 1, 1, ETO_OPAQUE, &rc, lpNotifyStr, (int)wcslen(lpNotifyStr), NULL);
+//	}
+//	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_3DFACE), 0/*GetSysColor(COLOR_3DDKSHADOW)*/);
+//	SelectObject(hDC, oldFont);
+//	EndPaint(hNotifyWnd,&ps);
 }
 
 void UIHideNotifyWindow()
 {
 	if (IsWindow(uiNotify.hWnd))
 		ShowWindow(uiNotify.hWnd, SW_HIDE);
+}
+
+void UIMoveNotifyWindow(int X, int Y)
+{
+
+}
+
+void UISetNotifyStr(wchar_t* lpStr)
+{
+	free(lpNotifyStr);
+	lpNotifyStr = wcsdup(lpStr);	
+	std::wstring wsNotifyStr(lpNotifyStr);		
+	_SetNotifyString(wsNotifyStr);		
 }

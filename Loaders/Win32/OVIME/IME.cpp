@@ -232,6 +232,15 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		return TRUE;  // ctrl+ alt +k		
 	}
 
+		
+	if(LOWORD(uVKey) == VK_L && (lpbKeyState[VK_CONTROL] & 0x80)&& (lpbKeyState[VK_MENU] & 0x80) )
+	{
+		// Test Notify window.
+		murmur("IME.cpp: ctrl+alt+L");
+		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 7);
+		dsvr->releaseIMC();		
+		return TRUE;  // ctrl+ alt +L		
+	}
 	if(LOWORD(uVKey) == VK_G && (lpbKeyState[VK_CONTROL] & 0x80)&& (lpbKeyState[VK_MENU] & 0x80) )
 	{
 		// Toggle Traditional / Simplified Chinese.

@@ -258,6 +258,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\James\NewUINotify.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\James\NewUIStatus.cpp"
 					>
 				</File>

@@ -74,8 +74,10 @@ AVDisplayServer *DisplayServer::showNotify(const char *str)
 {
 	murmur("\tAVDisplayServer *DisplayServer::showNotify");
 	wchar_t wstr[1024];
+	murmur("notify str=%s",str);
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
-	UIShowNotifyWindow(wstr);
+	UISetNotifyStr(wstr);	
+	//UIShowNotifyWindow();
 	return this;
 }
 AVDisplayServer *DisplayServer::hideNotify()

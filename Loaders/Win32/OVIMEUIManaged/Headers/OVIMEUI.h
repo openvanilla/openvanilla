@@ -27,11 +27,6 @@ void UICreateStatusWindow(HWND);
 void UIMoveStatusWindow(HWND, int, int);
 void UIShowStatusWindow();
 void UIHideStatusWindow();
-void UISetCursorPos(int);
-//Begin : move to UIComp.cpp//
-//void UISetMarkFrom(int);
-//void UISetMarkTo(int);
-//End : move to UIComp.cpp//
 void UIChangeModule(HWND);
 void UIChangeModuleByMouse(HWND);
 void UIChangeHalfFull(HWND);
@@ -41,28 +36,32 @@ void UIChangeBoPoMoFoLayout(HWND);
 void UISetStatusModStr();
 void UISetStatusMenuModStr(wchar_t*);
 void UIClearStatusMenuModString();
+
 // UIComp.cpp
 void UICreateCompWindow(HWND);
 void UIMoveCompWindow(int, int);
 void UIShowCompWindow();
 void UIHideCompWindow();
 int UIGetHeight();
+void UISetCursorPos(int);
 int UIGetCaretPosX();
 void UISetCompStr(wchar_t*);
 void UISetCompCaretPosX(int);
 void UISetMarkFrom(int);
 void UISetMarkTo(int);
 void UIClearCompStr();
+
 // UICand.cpp
 void UICreateCandWindow(HWND);
 void UIMoveCandWindow(int, int);
 void UIExpandCandi();
-//void UIMoveCandWindow(HWND, int, int, wchar_t*);
 void UIShowCandWindow();
 void UIHideCandWindow();
 void UISetCandStr(wchar_t*);
+
 // UINotify.cpp
 void UICreateNotifyWindow(HWND);
-void UIShowNotifyWindow(wchar_t*);
+void UIShowNotifyWindow();
 void UIHideNotifyWindow();
+void UISetNotifyStr(wchar_t*);
 }

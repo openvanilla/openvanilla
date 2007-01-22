@@ -172,10 +172,19 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		case 5: //Change BoPoMoFo keyboard layout by ctrl +'='
 			UIChangeBoPoMoFoLayout(hWnd);
 			break;
-		case 6: // Toggle Small/Large Candidate window.
+		case 6: // Toggle Small/Large Candidate window. (ctrl+alt+g)			
 			murmur("\tToggle Small/Large Candidate window.");
 			UIExpandCandi();
 			break;
+		case 7: // Test Notify window. (ctrl+alt+L)
+			{
+			murmur("\tTest Notify window");		
+			char *str="GG notify message";			
+			//UICreateNotifyWindow(hWnd); //new IMENotifyWindow -> fake form
+			dsvr->showNotify(str); //·| new ¤@­Ó NotifyWindow ->real form			
+			//UIShowNotifyWindow(); //show our IMENotifyWindow ->fake form
+			break;
+			}
 		default:
 			murmur("\tUknown IMN_PRIVATE");
 			break;

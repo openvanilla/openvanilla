@@ -1,50 +1,23 @@
 EXPORTS
+;OVIME
 	IMEUIRegisterClass
 	IMEUIUnRegisterClass
 	UIConstruct
 	UIDispose
 	UIPushInputMethod
 	UICurrentInputMethod
+;OVIMEUI
+;;status
 	UICreateStatusWindow
 	UIMoveStatusWindow
 	UIShowStatusWindow
 	UIHideStatusWindow
-	UISetCursorPos
-	UISetMarkFrom
-	UISetMarkTo
-	UICreateCompWindow
-	UIMoveCompWindow
-	UIShowCompWindow
-	UIHideCompWindow
-	UICreateCandWindow
-	UIMoveCandWindow
-	UIShowCandWindow
-	UIHideCandWindow
-	UICreateNotifyWindow
-	UIShowNotifyWindow
-	UIHideNotifyWindow
 	UIChangeModule
 	UIChangeHalfFull
 	UIChangeChiEng
 	UIChangeSimpifiedOrTraditional
-	UIChangeBoPoMoFoLayout
 	_SetStatusSimpifiedOrTraditional
-	_SetCandString
-	_EndCandPage
-	_CreateCandPage
-	_CreateCandPageWithHandle
-	_HideCandPage
-	_ShowCandPage
-	_MoveCandPage
-	_ClearCandPage
-	UISetCandStr
-	_CreateCompPage
-	_ShowCompPage
-	_HideCompPage
-	_ClearCompPage
-	_MoveCompPage
-	_SetCompString
-	UISetCompStr
+	UIChangeBoPoMoFoLayout
 	_CreateStatusPage
 	_ShowStatusPage
 	_MoveStatusPage
@@ -59,6 +32,23 @@ EXPORTS
 	_SetStatusAppHWnd
 	UIChangeModuleByMouse
 	_GetStatusSelectedModuleIndex
+	
+	
+;;composition
+	UISetCursorPos
+	UISetMarkFrom
+	UISetMarkTo
+	UICreateCompWindow
+	UIMoveCompWindow
+	UIShowCompWindow
+	UIHideCompWindow
+	_CreateCompPage
+	_ShowCompPage
+	_HideCompPage
+	_ClearCompPage
+	_MoveCompPage
+	_SetCompString
+	UISetCompStr
 	UISetCompCaretPosX
 	_SetCompCaretPosX
 	_GetHeight
@@ -69,7 +59,37 @@ EXPORTS
 	UIClearCompStr	
 	UIGetCaretPosX
 	_GetCaretPosX
-	_ExpandCandi
+	
+	
+;;candidate
+	UICreateCandWindow
+	_CreateCandPage
+	_CreateCandPageWithHandle
+	UIMoveCandWindow
+	_MoveCandPage
+	UIShowCandWindow
+	_ShowCandPage
+	UIHideCandWindow
+	_HideCandPage	
+	_EndCandPage					
+	UISetCandStr	
+	_ClearCandPage				
+	_SetCandString	
 	UIExpandCandi
+	_ExpandCandi
 	
 
+;;notify
+	UICreateNotifyWindow
+	UIShowNotifyWindow
+	UIHideNotifyWindow	
+	_CreateNotifyPage
+	_CreateNotifyPageWithHandle
+	UIMoveNotifyWindow
+	_MoveNotifyPage	
+	_ShowNotifyPage	
+	_HideNotifyPage	
+	_EndNotifyPage					
+	UISetNotifyStr	
+	_ClearNotifyPage				
+	_SetNotifyString		

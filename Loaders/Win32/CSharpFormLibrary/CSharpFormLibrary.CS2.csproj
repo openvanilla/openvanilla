@@ -114,7 +114,13 @@
     <Compile Include="IMECompRichForm.Designer.cs">
       <DependentUpon>IMECompRichForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IMENotifyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="IMEStatusForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotifyWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -137,9 +143,17 @@
       <SubType>Designer</SubType>
       <DependentUpon>IMECompRichForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IMENotifyForm.resx">
+      <DependentUpon>IMENotifyForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="IMEStatusForm.resx">
       <DependentUpon>IMEStatusForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotifyWindow.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NotifyWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
