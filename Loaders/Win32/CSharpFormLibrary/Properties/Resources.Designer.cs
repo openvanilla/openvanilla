@@ -59,12 +59,5 @@ namespace CSharpFormLibrary.Properties {
                 resourceCulture = value;
             }
         }
-        
-        internal static System.Drawing.Bitmap waraiotoko_logo {
-            get {
-                object obj = ResourceManager.GetObject("waraiotoko_logo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }
