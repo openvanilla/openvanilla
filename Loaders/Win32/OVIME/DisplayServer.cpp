@@ -14,12 +14,14 @@ AVDisplayServer *DisplayServer::releaseIMC()
 {
 	if(lpMyPrivate)
 	{
-		ImmUnlockIMCC(lpIMC->hPrivate);
+		if(lpIMC)
+			ImmUnlockIMCC(lpIMC->hPrivate);
 		lpMyPrivate=NULL;
 	}
 	if(lpCompStr)
 	{
-		ImmUnlockIMCC(lpIMC->hCompStr);
+		if(lpIMC)
+			ImmUnlockIMCC(lpIMC->hCompStr);
 		lpCompStr=NULL;
 	}
 	if(hIMC)

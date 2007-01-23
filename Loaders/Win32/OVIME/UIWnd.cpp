@@ -183,7 +183,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 
 	case WM_DESTROY:
-		murmur("WM_DESTROY");					
+		murmur("WM_DESTROY");
+		dsvr->lockIMC(hUICurIMC);
 		dsvr->showStatus(false);
 		dsvr->showBuf(false);
 		dsvr->showCandi(false);
@@ -196,16 +197,25 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 
 	case WM_IME_RELOADCONFIG:
+		{
 		murmur("WM_IME_RELOADCONFIG");
 		loader = AVLoader::getLoader();
-		loader->shutdown();		
+		loader->closeModule();
+		loader->shutdown();
+		loader = NULL;
 
 		loader = AVLoader::getLoader();
 		//loader->connectDisplayServer(dsvr);
 		loader->reloadConfig();
-		
-		break;
 
+		//SendMessage(hWnd, WM_IME_NOTIFY, IMN_PRIVATE, 9L);
+		int modAmount = loader->getInputMethodCount();
+		const char** modNameList = new const char* [modAmount];
+		loader->getAllModuleNames(modNameList);
+		UISetStatusModStrMenuAll(modAmount, modNameList);
+
+		break;
+		}
 	case WM_NCCREATE:   
 		murmur("WM_NCCREATE");
 		if(!lParam) //ªÅ

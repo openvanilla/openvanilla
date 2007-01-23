@@ -21,9 +21,23 @@ namespace CSharpFormLibrary
 
         //private int msgCounter = 0;
         private UInt64 m_AppHWnd;
-        private string m_baseDir="";
-        private string m_moduleDir="";
-        private string m_userDir="";
+        private static string m_baseDir =
+            Environment.GetEnvironmentVariable("WINDIR") +
+            System.IO.Path.DirectorySeparatorChar +
+            "OpenVanilla";
+        private static string m_moduleDir =
+            m_baseDir +
+            System.IO.Path.DirectorySeparatorChar +
+            "Modules";
+        private static string m_userDir =
+            Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData) +
+            System.IO.Path.DirectorySeparatorChar +
+            "OpenVanilla";
+        private static string m_confingPath =
+            m_userDir +
+            System.IO.Path.DirectorySeparatorChar +
+            "config.xml";
         
 		/// <summary>
 		/// Required designer variable.
@@ -218,6 +232,7 @@ namespace CSharpFormLibrary
             // 
             this.buttonMenu.AppHWnd = ((ulong)(0ul));
             this.buttonMenu.AutoSize = true;
+            this.buttonMenu.BackColor = Color.Transparent;
             this.buttonMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.buttonMenu.ContextMenu = this.menuModule;
             this.buttonMenu.Font = new System.Drawing.Font("PMingLiU", 12F);
@@ -230,6 +245,7 @@ namespace CSharpFormLibrary
             // buttonHantHans
             // 
             this.buttonHantHans.AppHWnd = ((ulong)(0ul));
+            this.buttonHantHans.BackColor = Color.Transparent;
             this.buttonHantHans.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonHantHans.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.buttonHantHans.Location = new System.Drawing.Point(65, 0);
@@ -242,6 +258,7 @@ namespace CSharpFormLibrary
             // buttonZhEn
             // 
             this.buttonZhEn.AppHWnd = ((ulong)(0ul));
+            this.buttonZhEn.BackColor = Color.Transparent;
             this.buttonZhEn.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonZhEn.Font = new System.Drawing.Font("PMingLiU", 12F);
             //<comment author='b6s'>
@@ -256,6 +273,7 @@ namespace CSharpFormLibrary
             // buttonPref
             // 
             this.buttonPref.AppHWnd = ((ulong)(0ul));
+            this.buttonPref.BackColor = Color.Transparent;
             this.buttonPref.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonPref.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.buttonPref.Location = new System.Drawing.Point(105, 0);
@@ -461,73 +479,68 @@ namespace CSharpFormLibrary
 
         private void buttonPref_MouseUp(object sender, MouseEventArgs e) //³]©w
         {
-
-            string pre_file = m_userDir + "config.xml";            
-            Process proc = new System.Diagnostics.Process();            
-            proc.StartInfo.FileName="OVPreferences.exe";
+            Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName =
+                m_baseDir + System.IO.Path.DirectorySeparatorChar +
+                "OVPreferences.exe";
             proc.StartInfo.WorkingDirectory = m_baseDir;
+            System.IO.FileInfo configFile =
+                new System.IO.FileInfo(m_confingPath);
 
-            //Debug.WriteLine("m_AppHWnd="+m_AppHWnd.ToString("x"));
-            
             int ret = UtilFuncs.SendMessage(
                    new IntPtr((long)m_AppHWnd),
                    (uint)UtilFuncs.WindowsMessage.WM_DESTROY,
-                   0, 0);            
+                   0, 0);
 
-            
-            System.IO.FileInfo foo = new System.IO.FileInfo(pre_file);
             proc.Start();
+            proc.WaitForExit();
+            /*
+            configFile.Refresh();
+            DateTime before = configFile.LastWriteTime;
             System.Threading.Thread.Sleep(1000); //is necessary!!
-            foo.Refresh();
-            DateTime dt = foo.LastWriteTime;            
-            int m = dt.Minute;
-            int s = dt.Second;                                               
             while (true)
-            {             
-                foo.Refresh();
-                dt = foo.LastWriteTime;
-                if (dt.Minute != m || dt.Second != s)
+            {
+                configFile.Refresh();
+                DateTime after = configFile.LastWriteTime;
+                if (!after.Equals(before))
                 {
-                    proc.Kill();                    
+                    if(!proc.HasExited)
+                        proc.Kill();
                     break;
                 }
-                //Debug.WriteLine(dt.Minute + ":" + dt.Second + "\t" + m + ":" + s);               
-                System.Threading.Thread.Sleep(500);            
+                System.Threading.Thread.Sleep(1000);                
             }
-            Debug.WriteLine("m_AppHWnd="+m_AppHWnd.ToString());
-                ret = UtilFuncs.SendMessage(
-                  new IntPtr((long)m_AppHWnd),
-                  (uint)UtilFuncs.WindowsMessage.WM_IME_RELOADCONFIG,
-                  0, 0);
-               /*ret = UtilFuncs.SendMessage(
-                new IntPtr((long)m_AppHWnd),
-                (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
-                0x0002, //IMN_OPENSTATUSWINDOW
-                0);*/
-            
-           /*     ret = UtilFuncs.SendMessage(
-                new IntPtr((long)m_AppHWnd),
-                (uint)UtilFuncs.WindowsMessage.WM_IME_SETCONTEXT,
-                1, 0);*/
-
+            */
 
             ret = UtilFuncs.SendMessage(
                 new IntPtr((long)m_AppHWnd),
                 (uint)UtilFuncs.WindowsMessage.WM_CREATE,
                 0, 0);
+
             ret = UtilFuncs.SendMessage(
-              new IntPtr((long)m_AppHWnd),
-              (uint)UtilFuncs.WindowsMessage.WM_IME_STARTCOMPOSITION,
-              0, 0);
+                new IntPtr((long)m_AppHWnd),
+                (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
+                0x0002, //IMN_OPENSTATUSWINDOW
+                0);
 
+            ret = UtilFuncs.SendMessage(
+                new IntPtr((long)m_AppHWnd),
+                (uint)UtilFuncs.WindowsMessage.WM_IME_RELOADCONFIG,
+                0, 0);
 
+            /*
+            ret = UtilFuncs.SendMessage(
+                new IntPtr((long)m_AppHWnd),
+                (uint)UtilFuncs.WindowsMessage.WM_IME_SETCONTEXT,
+                1, 0);
+             */
 
-    //            string baseDir = System.Environment.GetEnvironmentVariable("OV_BASEDIR");
-                ///string winDir = System.Environment.GetEnvironmentVariable("windir");
-                //System.Environment.
-                //Debug.WriteLine("userDir:" + userDir);
-//                Debug.WriteLine("baseDir" + baseDir);
-  //              Debug.WriteLine("winDir" + winDir);
+            /*
+            ret = UtilFuncs.SendMessage(
+                new IntPtr((long)m_AppHWnd),
+                (uint)UtilFuncs.WindowsMessage.WM_IME_STARTCOMPOSITION,
+                0, 0);
+             */
         }
 
         private void ResizeAll()
