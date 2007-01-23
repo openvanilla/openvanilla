@@ -48,6 +48,9 @@ using System.Runtime.CompilerServices;
 //        [assembly: AssemblyKeyFile("..\\..\\mykey.snk")]
 //   (*) 延遲簽名是一個進階選項 - 如需詳細資訊，請參閱 Microsoft .NET Framework 文件。
 //
-[assembly: AssemblyDelaySign(false)]
-[assembly: AssemblyKeyFile("")]
-[assembly: AssemblyKeyName("")]
+//<comment author='b6s'>
+//The following settings are already included in the project file.
+//[assembly: AssemblyDelaySign(false)]
+//[assembly: AssemblyKeyFile("")]
+//[assembly: AssemblyKeyName("")]
+//</comment>
