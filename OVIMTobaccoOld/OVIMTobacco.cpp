@@ -786,7 +786,7 @@ int OVIMTobaccoContext::setCandidate() {
         candi=NULL;
     }
 
-    int choosingIndex = -1;
+    size_t choosingIndex = 0;
     if(parent->doChooseInFrontOfCursor()) {
         if(position == 0)
             choosingIndex = 0;
@@ -795,7 +795,8 @@ int OVIMTobaccoContext::setCandidate() {
     }
     else
     {
-        if(position == predictor->tokenVector.size())
+        if(position == predictor->tokenVector.size() &&
+			position > 0)
             choosingIndex = position - 1;
         else
             choosingIndex = position;
