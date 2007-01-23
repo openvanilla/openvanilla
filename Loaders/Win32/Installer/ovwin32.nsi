@@ -599,7 +599,7 @@ Section Uninstall
   RMDir "$SMPROGRAMS\OpenVanilla"
 
   ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
-  DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}$0"
+  DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}\$0"
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   SetAutoClose true
 SectionEnd
