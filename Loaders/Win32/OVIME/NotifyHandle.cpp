@@ -151,9 +151,6 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		murmur("\thwnd=%x", hWnd);
 		switch(lParam) 
 		{
-		case 0: //Change Modules by ctrl +'\'
-			UIChangeModule(hWnd);
-			break;
 		case 1: //Change UI Half/Full
 			UIChangeHalfFull(hWnd); 
 			break;
@@ -185,6 +182,9 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			//UIShowNotifyWindow(); //show our IMENotifyWindow ->fake form
 			break;
 			}
+		case 8: //Change Modules by ctrl +'\'
+			UIChangeModule(hWnd);
+			break;
 		default:
 			murmur("\tUknown IMN_PRIVATE");
 			break;

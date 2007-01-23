@@ -256,7 +256,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		//dsvr->releaseIMC();
 		return TRUE;  //ctrl+space
 	}
-
+/***
     if(LOWORD(uVKey) == VK_SPACE && IsKeyDown(lpbKeyState[VK_SHIFT]))
 	{
 		//shift+space: lParam == 1
@@ -264,7 +264,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		dsvr->releaseIMC();		
 		return FALSE;  //shift + space
 	}
-
+****/
 	//CTRL + "\" or "="
 	if((LOWORD(uVKey) == VK_OEM_5 || LOWORD(uVKey) == VK_OEM_PLUS) &&
 		((lpbKeyState[VK_CONTROL] & 0x80)))
