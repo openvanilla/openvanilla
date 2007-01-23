@@ -1,4 +1,4 @@
-LIBRARY	OVIME
+LIBRARY	OVIME.ime
 
 EXPORTS
                 ImeConversionList
