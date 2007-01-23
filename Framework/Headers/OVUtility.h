@@ -39,12 +39,12 @@ class Watch
 public:
 	void start()
 	{
-		tick_ = 0;
+		tick_ = 0L;
 		sec_ = 0.0;
 #ifdef OV_DEBUG
 		from_ = clock();
 #else
-		from_ = 0.0;
+		from_ = 0L;
 #endif
 	}
 
@@ -52,7 +52,7 @@ public:
 	{
 #ifdef OV_DEBUG
 		tick_ = clock() - from_;
-		sec_ = double(tick_) / CLOCKS_PER_SEC;
+		sec_ = static_cast<double>(tick_) / CLOCKS_PER_SEC;
 #endif
 	}
 
