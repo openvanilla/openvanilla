@@ -585,7 +585,6 @@ FunctionEnd
 Section Uninstall
   
   Delete "$SYSDIR\libltdl3.dll"
-  Delete "$SYSDIR\libiconv-2.dll"
   Delete "$SYSDIR\sqlite3.dll"
   Delete "$SYSDIR\tinyxml.dll"
   Delete "$SYSDIR\OVIMEUI.DLL"
