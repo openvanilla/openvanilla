@@ -3,7 +3,6 @@
 #include "PCMan.h"
 #include "DotNETHeader.h"
 #include "resource.h"
-#include "AVLoader.h"
 
 #pragma managed
 #using <mscorlib.dll>
@@ -12,18 +11,6 @@
 using namespace System;
 using namespace System::Reflection;
 using namespace System::Windows::Forms;
-
-void CSharpWidgetDemo() {	
-	try {
-		Assembly^ exAsm
-			= Reflection::Assembly::LoadFile("C:\\WINDOWS\\OpenVanilla\\CSharpFormLibrary.dll");
-		Form^ exForm =
-			safe_cast<Form^>(exAsm->CreateInstance("CSharpFormLibrary.DemoForm", true));
-		exForm->ShowDialog();
-	} catch (Exception^ e) {
-		Console::WriteLine(e->Message);
-	}
-}
 
 #pragma unmanaged
 //	SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
@@ -184,7 +171,6 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 				}
 				break;
 			case ID_IME_HELP:
-				CSharpWidgetDemo();				
 				break;
 			default:
 				if( id >= ID_IME_LIST_FIRST && id < ID_IME_LIST_LAST )
@@ -242,8 +228,9 @@ void UICreateStatusWindow(HWND hUIWnd)
 	    //設定C# Status 內 m_AppHWnd 
 	    _SetStatusAppHWnd(hUIWnd); 
 
-		//設定 module名稱
-		UISetStatusModStr();
+		//設定 module 名稱
+		SendMessage(hUIWnd, WM_IME_NOTIFY, IMN_PRIVATE, 9);
+		//UISetStatusModStr();
 
 		//設定中英
 		_SetStatusChiEng(isChinese);  
@@ -271,56 +258,33 @@ void UICreateStatusWindow(HWND hUIWnd)
 	return;
 }
 
-void UISetStatusModStr() //set Status window module list
+wstring convertUtf8NameToUcs2(const char* name)
 {
-	char modNameUTF8[1024];
-	wchar_t modNameUCS2[1024];
-	
-	AVLoader* loader = AVLoader::getLoader();
 	wchar_t *modCurrentName;
-	wchar_t *modMenuName;
-	murmur("\tUICreateStatusWindow, Current IC =%d", CurrentIC);
-	//jaimie for C# menu set module name
-	//to set all available module names into C# menu list.
-	UIClearStatusMenuModString();	
-	for(int i = 0; i < loader->getInputMethodCount(); i++)
-	{		
-		if(loader->moduleName(i, modNameUTF8))
-		{
-			MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
-			//tbi.pszText = modNameUCS2;
-			modMenuName = modNameUCS2;
-			UISetStatusMenuModStr(modMenuName);
-			murmur(" \tmodMenuName : %s", modNameUTF8);
-		}
-		else
-			murmur(" \tloader->moduleName() failed!");
-	}
-	
-	//to show the currentIC module on the status window
-	if(loader->moduleName(CurrentIC, modNameUTF8)) 
-	{
-		MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);		
-		modCurrentName = modNameUCS2;
-	}
-	else 
-	{		
-		modCurrentName = L"ERROR";
-		murmur("\tloader->moduleName() failed.");
-	}
+	wchar_t modNameUCS2[1024];
+	MultiByteToWideChar(
+		CP_UTF8, 0, name, (int)strlen(name)+1, modNameUCS2, 1024);
+	modCurrentName = modNameUCS2;
 	std::wstring wsStatusStr(wcsdup(modCurrentName));
-	//watch.start();
-	_SetStatusModString(wsStatusStr);
-	//watch.stop();
-	//murmur("%1.3f sec:\tC# comp window, setstring", watch.getSec());
-
+	return wsStatusStr;
 }
 
-void UISetStatusMenuModStr(wchar_t* lpStr)
+void UISetStatusModStrMenuEach(const char* newName)
 {
-	std::wstring wsStatusStr(wcsdup(lpStr));
-	//watch.start();
-	_SetStatusMenuModString(wsStatusStr);
+	_SetStatusMenuModString(convertUtf8NameToUcs2(newName));
+}
+
+//set Status window module list
+void UISetStatusModStrMenuAll(int modAmount, const char* modNames[])
+{
+	UIClearStatusMenuModString();	
+	for(int i = 0; i < modAmount; i++)
+		UISetStatusModStrMenuEach(modNames[i]);
+}
+
+void UISetStatusModStrCurrent(int index)
+{
+	_SetStatusModString(index);
 }
 
 void UIClearStatusMenuModString()
@@ -386,7 +350,6 @@ void PaintStatusWindow(HWND hStatusWnd)
 
 void UIShowStatusWindow()
 {
-	murmur("UIShowStatusWindow()");
 	//if (IsWindow(uiStatus.hWnd))
 	{	
 		_ShowStatusPage(); //show		
@@ -441,35 +404,20 @@ void UISetMarkTo(int i)
 	murmur( "---> UISetMarkFrom End %d", CompSelEnd);
 }
 #endif
-void UIChangeModule(HWND hWnd)
+
+void UIModuleChange()
 {
 	CompCursorPos=0;  //James test
-	AVLoader* loader = AVLoader::getLoader();
-	loader->closeModule();
-	CurrentIC++;
-
-	//module change to the next available module
-	if(CurrentIC >= loader->getInputMethodCount())
-		CurrentIC = 0;
 	
-	//set UI
-	UISetStatusModStr();
+	CurrentIC = _GetStatusSelectedModuleIndex();
+	UISetStatusModStrCurrent(CurrentIC);
 	_ShowStatusPage();
 }
 
-void UIChangeModuleByMouse(HWND hWnd)
+void UIModuleRotate()
 {
-	CompCursorPos=0;  //James test
-	char modNameUTF8[1024];
-	wchar_t modNameUCS2[1024];
-	
-	AVLoader* loader = AVLoader::getLoader();	
-
-	//get module name from UI
-	CurrentIC = _GetStatusSelectedModuleIndex();
-
-	UISetStatusModStr();
-	_ShowStatusPage();
+	_RotateStatusSelectedModule();
+	UIModuleChange();
 }
 
 void UIChangeHalfFull(HWND hWnd)
@@ -491,7 +439,6 @@ void UIChangeHalfFull(HWND hWnd)
 
 void UIChangeChiEng(HWND hWnd)
 {
-	
 	//SendMessage( hToolbar, TB_CHANGEBITMAP, ID_CHI_ENG, MAKELPARAM(isChinese ? 2 : 3, 0));
 		
 	//設定中英
@@ -528,31 +475,11 @@ void UIChangeSimpifiedOrTraditional(HWND hWnd)
 
 }
 
-void UIChangeBoPoMoFoLayout(HWND hWnd)
+void UIChangeBoPoMoFoLayout(int index)
 {
 	CompCursorPos=0;  //James test
-	AVLoader* loader = AVLoader::getLoader();
-	loader->closeModule();
 
-	int newIC = loader->switchBoPoMoFoLayout(CurrentIC);
-	if(newIC != CurrentIC) {
-		/*wchar_t *modCurrentName;
-		if(loader->moduleName(newIC, modNameUTF8)) 
-		{
-			CurrentIC = newIC;
-			MultiByteToWideChar(CP_UTF8, 0, modNameUTF8, (int)strlen(modNameUTF8)+1, modNameUCS2, 1024);
-			//tbi.pszText = modNameUCS2;
-			modCurrentName = modNameUCS2;
-			murmur("\tmodule name: %s", modNameUTF8);		
-		}
-		else 
-		{
-			//tbi.pszText = L"ERROR";
-			modCurrentName = L"ERROR";
-			murmur("\tloader->moduleName() failed.");
-		}*/
-		CurrentIC=newIC;
-		UISetStatusModStr();
-		_ShowStatusPage();
-	}
+	CurrentIC = index;
+	UISetStatusModStrCurrent(CurrentIC);
+	_ShowStatusPage();
 }

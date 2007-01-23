@@ -306,11 +306,11 @@ void _SetStatusSimpifiedOrTraditional(bool isTraditional)
 		StatusFormAssembly::StatusSetSimpifiedOrTraditional()->Invoke(StatusFormAssembly::StatusForm(), param);
 }
 
-void _SetStatusModString(const std::wstring& statusModName)
+void _SetStatusModString(int index)
 {
 	//System::Diagnostics::Debug::WriteLine("Status SetString");
 	StatusFormAssembly::argCollection->Clear();
-	StatusFormAssembly::argCollection->Add(gcnew System::String(statusModName.c_str()));
+	StatusFormAssembly::argCollection->Add(index);
 	array<Object^>^ param = StatusFormAssembly::argCollection->ToArray();
 	StatusFormAssembly::StatusSetModString()->Invoke(StatusFormAssembly::StatusForm(), param);
 }
@@ -360,4 +360,10 @@ void _SetUserDir()
 	
 	StatusFormAssembly::StatusSetDir()
 		->Invoke(StatusFormAssembly::StatusForm(), param);
+}
+
+void _RotateStatusSelectedModule()
+{
+	StatusFormAssembly::StatusType()->GetMethod("RotateModule")
+		->Invoke(StatusFormAssembly::StatusForm(), nullptr);
 }

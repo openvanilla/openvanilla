@@ -11,4 +11,4 @@ bool isTraditional = true;
 bool isFullShape = false;
 
 DisplayServer *dsvr = new DisplayServer();
-AVLoader* loader;
+AVLoader* loader = AVLoader::getLoader();

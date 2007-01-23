@@ -12,7 +12,8 @@ EXPORTS
 	UIMoveStatusWindow
 	UIShowStatusWindow
 	UIHideStatusWindow
-	UIChangeModule
+	UIModuleChange
+	UIModuleRotate
 	UIChangeHalfFull
 	UIChangeChiEng
 	UIChangeSimpifiedOrTraditional
@@ -23,15 +24,16 @@ EXPORTS
 	_MoveStatusPage
 	_HideStatusPage
 	_SetStatusChiEng
-	UISetStatusModStr
+	UISetStatusModStrCurrent
 	_SetStatusModString
-	UISetStatusMenuModStr
+	UISetStatusModStrMenuEach
+	UISetStatusModStrMenuAll
 	_SetStatusMenuModString
 	UIClearStatusMenuModString
 	_ClearStatusMenuModString	
 	_SetStatusAppHWnd
-	UIChangeModuleByMouse
 	_GetStatusSelectedModuleIndex
+	_RotateStatusSelectedModule
 	
 	
 ;;composition

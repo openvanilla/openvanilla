@@ -178,12 +178,14 @@ int AVLoader::getOutputFilterCount()
 	return ovof_vector.size();
 }
 
-int AVLoader::switchBoPoMoFoLayout(int currentId)
+int AVLoader::getSwitchedBoPoMoFoLayoutModIndex()
 {
+	int currentId = activatedIm;
 	if(hasBoPoMoFo &&
 		!strcmp(em->modlist()[currentId]->localizedName("en"), "PhoneticHsu")) {
-		for(int i = 0; i < em->modlist().size(); i++) {
+		for(size_t i = 0; i < em->modlist().size(); i++) {
 			if(!strcmp(em->modlist()[i]->localizedName("en"), "BoPoMoFo")) {
+				closeModule();
 				return i;
 			}
 		}
@@ -191,12 +193,22 @@ int AVLoader::switchBoPoMoFoLayout(int currentId)
 	
 	if(hasPhoneticHsu &&
 		!strcmp(em->modlist()[currentId]->localizedName("en"), "BoPoMoFo")) {
-		for(int i = 0; i < em->modlist().size(); i++) {
+		for(size_t i = 0; i < em->modlist().size(); i++) {
 			if(!strcmp(em->modlist()[i]->localizedName("en"), "PhoneticHsu")) {
+				closeModule();
 				return i;
 			}
 		}
 	}
 
 	return currentId;
+}
+
+void AVLoader::getAllModuleNames(const char* nameList[])
+{		
+	if(em && em->modlist().size() > 0)
+		for(size_t i = 0; i < em->modlist().size(); i++)
+			nameList[i] = em->modlist()[i]->localizedName("zh_TW");
+	else
+		nameList = NULL;
 }

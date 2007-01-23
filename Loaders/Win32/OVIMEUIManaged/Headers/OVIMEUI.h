@@ -27,15 +27,16 @@ void UICreateStatusWindow(HWND);
 void UIMoveStatusWindow(HWND, int, int);
 void UIShowStatusWindow();
 void UIHideStatusWindow();
-void UIChangeModule(HWND);
-void UIChangeModuleByMouse(HWND);
+void UIModuleChange();
+void UIModuleRotate();
 void UIChangeHalfFull(HWND);
 void UIChangeChiEng(HWND);
 void UIChangeSimpifiedOrTraditional(HWND);
-void UIChangeBoPoMoFoLayout(HWND);
-void UISetStatusModStr();
-void UISetStatusMenuModStr(wchar_t*);
+void UIChangeBoPoMoFoLayout(int index);
 void UIClearStatusMenuModString();
+void UISetStatusModStrMenuEach(const char* newName);
+void UISetStatusModStrMenuAll(int modAmount, const char* modNames[]);
+void UISetStatusModStrCurrent(int index);
 
 // UIComp.cpp
 void UICreateCompWindow(HWND);

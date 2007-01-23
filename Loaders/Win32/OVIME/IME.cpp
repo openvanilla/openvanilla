@@ -150,7 +150,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	dsvr->lockIMC(hIMC);  //所以所有的 return 之前都必須 dsvr->releaseIMC();
 	if (!dsvr->lpIMC)
 	{
-		dsvr->releaseIMC();		
+		dsvr->releaseIMC();
 		return FALSE;
 	}
 	//if (lKeyData & 0x80000000)	
@@ -437,7 +437,7 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 	{
 		//Change the module by Ctrl+"\": lParam == 0
 		if(LOWORD(uVKey) == VK_OEM_5)
-			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 0);
+			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 8);
 		//Change the BoPoMoFo keyboard layout by Ctrl+"=": lParam == 5
 		else if(LOWORD(uVKey) == VK_OEM_PLUS)
 			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 5);

@@ -30,6 +30,8 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		UIConstruct();
 		//</comment>
 
+		//<comment author='b6s'>Just a test...
+		/*
 		watch.start();
 		for(int i = 0;; ++i) {
 			if(loader->moduleName(i, str)) {
@@ -42,6 +44,8 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		watch.stop();
 		murmur("%1.3f sec:\tfor() { loader->moduleName(); UIPushInputMethod(); }",
 			watch.getSec());
+		*/
+		//</comment>
 
 		watch.start();
 		WNDCLASSEX wc;
@@ -69,7 +73,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		break;
 	case DLL_PROCESS_DETACH:
 		// free UI library
-		AVLoader::shutdown();
+		loader->shutdown();
 		UnregisterClass(UICLASSNAME, (HINSTANCE)hModule);
 		IMEUIUnRegisterClass( (HINSTANCE)hModule );
 		//<comment author='b6s'>Test for a replacement of UI's DllMain()

@@ -9,12 +9,13 @@ void _MoveStatusPage(int, int);
 void _HideStatusPage();
 void _SetStatusChiEng(bool);
 void _SetStatusSimpifiedOrTraditional(bool);
-void _SetStatusModString(const std::wstring&);
+void _SetStatusModString(int);
 void _SetStatusMenuModString(const std::wstring&);
 void _ClearStatusMenuModString();
 void _SetStatusAppHWnd(HWND hwnd);
 int _GetStatusSelectedModuleIndex();
 void _SetUserDir();
+void _RotateStatusSelectedModule();
 
 //composition
 HWND _CreateCompPage();

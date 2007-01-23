@@ -34,7 +34,8 @@ public:
 	int getOutputFilterCount();
 	//</comment>
 
-	int switchBoPoMoFoLayout(int currentId);
+	int getSwitchedBoPoMoFoLayoutModIndex();
+	void getAllModuleNames(const char* nameList[]);
 
 protected:
 	AVLoader();

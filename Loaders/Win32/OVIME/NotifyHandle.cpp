@@ -11,13 +11,16 @@ LONG NotifyHandle(HIMC hUICurIMC,
 	LONG lRet = 0L;
 	LPINPUTCONTEXT lpIMC;
 	static BOOL first = false;
-	LOGFONT* lfptr;
-	LOGFONT lf2;
+	//<comment author='b6s'>Unused codes
+	//LOGFONT* lfptr;
+	//LOGFONT lf2;
+	//</comment>
 	
 
 	if (!(lpIMC = ImmLockIMC(hUICurIMC)))
 		return 0L;
 
+	loader = AVLoader::getLoader();
 	switch (wParam)
 	{
 	case IMN_OPENSTATUSWINDOW:
@@ -66,8 +69,8 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		murmur("IMN_SETCONVERSIONMODE");
 		DWORD conv, sentence;
 		ImmGetConversionStatus( ImmGetContext(hWnd), &conv, &sentence);
-		isChinese = (conv & IME_CMODE_NATIVE);
-		isFullShape = (conv & IME_CMODE_FULLSHAPE);
+		isChinese = (conv & IME_CMODE_NATIVE) == 0 ? false : true;
+		isFullShape = (conv & IME_CMODE_FULLSHAPE) == 0 ? false : true;
 		break;
 
 	case IMN_SETSENTENCEMODE:
@@ -151,6 +154,8 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		murmur("\thwnd=%x", hWnd);
 		switch(lParam) 
 		{
+		case 0:
+			break;
 		case 1: //Change UI Half/Full
 			UIChangeHalfFull(hWnd); 
 			break;
@@ -158,16 +163,20 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			murmur("\tChange UI CHI/ENG.");
 			UIChangeChiEng(hWnd);  
 			break;
-		case 3: //Change Modules by Mouse
+		case 3: //Change Modules by Mouse			
 			murmur("\tChange Modules by Mouse");
-			UIChangeModuleByMouse(hWnd); 
+			/* close module and set new IC */
+			loader->closeModule();
+			UIModuleChange();
 			break;
 		case 4: // Change UI Traditional/Simplified Chinese
 			murmur("\tChange UI Traditional/Simplified Chinese");			
 			UIChangeSimpifiedOrTraditional(hWnd); 
 			break;
 		case 5: //Change BoPoMoFo keyboard layout by ctrl +'='
-			UIChangeBoPoMoFoLayout(hWnd);
+			/* close module and set new IC */			
+			UIChangeBoPoMoFoLayout(
+				loader->getSwitchedBoPoMoFoLayoutModIndex());
 			break;
 		case 6: // Toggle Small/Large Candidate window. (ctrl+alt+g)			
 			murmur("\tToggle Small/Large Candidate window.");
@@ -183,8 +192,18 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			break;
 			}
 		case 8: //Change Modules by ctrl +'\'
-			UIChangeModule(hWnd);
+			/* close module and poll current IC */
+			loader->closeModule();
+			UIModuleRotate();
 			break;
+		case 9: //Set all module names
+			{			
+			int modAmount = loader->getInputMethodCount();
+			const char** modNameList = new const char* [modAmount];
+			loader->getAllModuleNames(modNameList);
+			UISetStatusModStrMenuAll(modAmount, modNameList);
+			break;
+			}
 		default:
 			murmur("\tUknown IMN_PRIVATE");
 			break;

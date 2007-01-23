@@ -219,6 +219,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ModelImm.cpp"
+				>
+			</File>
+			<File
 				RelativePath="NotifyHandle.cpp"
 				>
 			</File>
@@ -260,6 +264,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ModelImm.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\Framework\Headers\OpenVanilla.h"
 				>
 			</File>
@@ -297,18 +305,10 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 			>
 			<File
-				RelativePath="icon1.ico"
-				>
-			</File>
-			<File
 				RelativePath="OVIME.rc"
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="ReadMe.txt"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

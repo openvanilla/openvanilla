@@ -29,13 +29,13 @@ namespace CSharpFormLibrary
 		/// Required designer variable.
 		/// </summary>
 		private System.ComponentModel.Container components = null;
-        private IMEButton button2;
-        private IMEButton button3;
-        private IMEButton button6;
-        private System.Windows.Forms.ContextMenu contextMenu1;
-		private System.Windows.Forms.Panel panel1;
-        private IMEButton imeButton1;
-		private System.Windows.Forms.Panel panel2;
+        private IMEButton buttonMenu;
+        private IMEButton buttonZhEn;
+        private IMEButton buttonHantHans;
+        private IMEButton buttonPref;
+        private System.Windows.Forms.ContextMenu menuModule;
+		private System.Windows.Forms.Panel panelHead;
+		private System.Windows.Forms.Panel panelBody;
 
 		public IMEStatusForm()
 		{
@@ -178,109 +178,99 @@ namespace CSharpFormLibrary
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.contextMenu1 = new System.Windows.Forms.ContextMenu();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button2 = new CSharpFormLibrary.IMEButton();
-            this.imeButton1 = new CSharpFormLibrary.IMEButton();
-            this.button3 = new CSharpFormLibrary.IMEButton();
-            this.button6 = new CSharpFormLibrary.IMEButton();
-            this.panel2.SuspendLayout();
+            this.menuModule = new System.Windows.Forms.ContextMenu();
+            this.panelHead = new System.Windows.Forms.Panel();
+            this.panelBody = new System.Windows.Forms.Panel();
+            this.buttonMenu = new CSharpFormLibrary.IMEButton();
+            this.buttonHantHans = new CSharpFormLibrary.IMEButton();
+            this.buttonZhEn = new CSharpFormLibrary.IMEButton();
+            this.buttonPref = new CSharpFormLibrary.IMEButton();
+            this.panelBody.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // panelHead
             // 
-            this.panel1.BackColor = System.Drawing.Color.AliceBlue;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            //this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(10, 40);
-            this.panel1.TabIndex = 1;
-            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
-            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
-            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
+            this.panelHead.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelHead.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.panelHead.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelHead.Location = new System.Drawing.Point(0, 0);
+            this.panelHead.Name = "panelHead";
+            this.panelHead.Size = new System.Drawing.Size(10, 40);
+            this.panelHead.TabIndex = 1;
+            this.panelHead.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
+            this.panelHead.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
+            this.panelHead.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
             // 
-            // panel2
+            // panelBody
             // 
-            this.panel2.CausesValidation = false;
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.imeButton1);
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.button6);
-            //this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(10, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(170, 40);
-            this.panel2.TabIndex = 0;
+            this.panelBody.CausesValidation = false;
+            this.panelBody.Controls.Add(this.buttonMenu);
+            this.panelBody.Controls.Add(this.buttonHantHans);
+            this.panelBody.Controls.Add(this.buttonZhEn);
+            this.panelBody.Controls.Add(this.buttonPref);
+            this.panelBody.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelBody.Location = new System.Drawing.Point(10, 0);
+            this.panelBody.Name = "panelBody";
+            this.panelBody.Size = new System.Drawing.Size(170, 40);
+            this.panelBody.TabIndex = 0;
             // 
-            // button2
+            // buttonMenu
             // 
-            //this.button2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.button2.AppHWnd = ((ulong)(0ul));
-            this.button2.AutoSize = true;
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.ContextMenu = this.contextMenu1;
-            this.button2.Font = new System.Drawing.Font("PMingLiU", 12F);
-            this.button2.Location = new System.Drawing.Point(0, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(65, 40);
-            this.button2.TabIndex = 0;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button2_MouseUp);
+            this.buttonMenu.AppHWnd = ((ulong)(0ul));
+            this.buttonMenu.AutoSize = true;
+            this.buttonMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.buttonMenu.ContextMenu = this.menuModule;
+            this.buttonMenu.Font = new System.Drawing.Font("PMingLiU", 12F);
+            this.buttonMenu.Location = new System.Drawing.Point(0, 0);
+            this.buttonMenu.Name = "buttonMenu";
+            this.buttonMenu.Size = new System.Drawing.Size(65, 40);
+            this.buttonMenu.TabIndex = 0;
+            this.buttonMenu.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonMenu_MouseUp);
             // 
-            // imeButton1
+            // buttonHantHans
             // 
-            this.imeButton1.AppHWnd = ((ulong)(0ul));
-            this.imeButton1.BackColor = System.Drawing.Color.Transparent;
-            this.imeButton1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.imeButton1.Font = new System.Drawing.Font("PMingLiU", 12F);
-            this.imeButton1.Location = new System.Drawing.Point(25, 0);
-            this.imeButton1.Name = "imeButton1";
-            this.imeButton1.Size = new System.Drawing.Size(40, 40);
-            this.imeButton1.TabIndex = 1;
-            this.imeButton1.UseVisualStyleBackColor = false;
-            this.imeButton1.Visible = false;
-            this.imeButton1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imeButton1_MouseUp);
+            this.buttonHantHans.AppHWnd = ((ulong)(0ul));
+            this.buttonHantHans.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonHantHans.Font = new System.Drawing.Font("PMingLiU", 12F);
+            this.buttonHantHans.Location = new System.Drawing.Point(65, 0);
+            this.buttonHantHans.Name = "buttonHantHans";
+            this.buttonHantHans.Size = new System.Drawing.Size(40, 40);
+            this.buttonHantHans.TabIndex = 1;
+            this.buttonHantHans.Visible = false;
+            this.buttonHantHans.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonHantHans_MouseUp);
             // 
-            // button3
+            // buttonZhEn
             // 
-            this.button3.AutoSize = true;
-            this.button3.AppHWnd = ((ulong)(0ul));
-            this.button3.BackColor = System.Drawing.Color.Transparent;
-            //this.button3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button3.Font = new System.Drawing.Font("PMingLiU", 12F);
-            this.button3.Location = new System.Drawing.Point(65, 0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(40, 40);
-            this.button3.TabIndex = 2;
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button3_MouseUp);
+            this.buttonZhEn.AppHWnd = ((ulong)(0ul));
+            this.buttonZhEn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonZhEn.Font = new System.Drawing.Font("PMingLiU", 12F);
+            //<comment author='b6s'>
+            //The localtion of buttonZhEn is overlapped with buttonHantHans temporarily.
+            this.buttonZhEn.Location = new System.Drawing.Point(65, 0);
+            //</comment>
+            this.buttonZhEn.Name = "buttonZhEn";
+            this.buttonZhEn.Size = new System.Drawing.Size(40, 40);
+            this.buttonZhEn.TabIndex = 2;
+            this.buttonZhEn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonZhEn_MouseUp);
             // 
-            // button6
+            // buttonPref
             // 
-            this.button6.AutoSize = true;
-            this.button6.AppHWnd = ((ulong)(0ul));
-            this.button6.BackColor = System.Drawing.Color.Transparent;
-            //this.button6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button6.Font = new System.Drawing.Font("PMingLiU", 12F);
-            this.button6.Location = new System.Drawing.Point(105, 0);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(65, 40);
-            this.button6.TabIndex = 3;
-            this.button6.Text = "設定";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button6_MouseUp);
+            this.buttonPref.AppHWnd = ((ulong)(0ul));
+            this.buttonPref.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonPref.Font = new System.Drawing.Font("PMingLiU", 12F);
+            this.buttonPref.Location = new System.Drawing.Point(105, 0);
+            this.buttonPref.Name = "buttonPref";
+            this.buttonPref.Size = new System.Drawing.Size(65, 40);
+            this.buttonPref.TabIndex = 3;
+            this.buttonPref.Text = "設定";
+            this.buttonPref.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonPref_MouseUp);
             // 
             // IMEStatusForm
             // 
-            //this.AutoSize = true;
-            this.ClientSize = new Size(180, 40);
-            this.Size = new Size(180,75);
+            this.ClientSize = new System.Drawing.Size(180, 40);
             this.ControlBox = false;
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelHead);
+            this.Controls.Add(this.panelBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "IMEStatusForm";
@@ -288,10 +278,9 @@ namespace CSharpFormLibrary
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseUp);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
-            this.panel2.ResumeLayout(false);
-            //this.panel2.PerformLayout();
-            //this.ResumeLayout(false);
-
+            this.panelBody.ResumeLayout(false);
+            this.panelBody.PerformLayout();
+            this.ResumeLayout(false);
 		}
 		#endregion
 
@@ -301,9 +290,9 @@ namespace CSharpFormLibrary
             m_AppHWnd = HWND;
             Debug.WriteLine("m_AppHWnd (status) =" + HWND);
             //System.Diagnostics.Debug.WriteLine("AppHWnd set: " + m_AppHWnd);
-            //this.button2.AppHWnd = m_AppHWnd;
-            //this.button3.AppHWnd =
-            //System.Diagnostics.Debug.WriteLine("button2.AppHWnd: " + this.button2.AppHWnd);
+            //this.buttonMenu.AppHWnd = m_AppHWnd;
+            //this.buttonZhEn.AppHWnd =
+            //System.Diagnostics.Debug.WriteLine("buttonMenu.AppHWnd: " + this.buttonMenu.AppHWnd);
         }
 
 		public void ShowNoActive()
@@ -325,32 +314,26 @@ namespace CSharpFormLibrary
 
 		public void SetChiEng(bool isChinese)
 		{
-			if(isChinese)   this.button3.Text = "中";
-			else            this.button3.Text = "英";
+			if(isChinese)   this.buttonZhEn.Text = "中";
+			else            this.buttonZhEn.Text = "英";
 		}
 
         public void SetSimpifiedOrTraditional(bool isTraditional)
         {
-            if (isTraditional) this.imeButton1.Text = "繁";
-            else this.imeButton1.Text = "簡";
+            if (isTraditional) this.buttonHantHans.Text = "繁";
+            else this.buttonHantHans.Text = "簡";
         }
 
-		public void SetModString(string inputs)
-		{            
-			if(inputs == null) return;            
-            this.button2.Text = inputs;
-            //this.button2.Width = 0;  //autosize it   
-                     
-            this.Width = this.panel1.Width+ this.button2.Width+( (this.imeButton1.Visible)?(this.imeButton1.Width):0)
-				+ this.button3.Width +this.button6.Width ;
-            this.panel2.Width = this.Width-this.panel1.Width;
-            this.button3.Location = new Point(this.button2.Bounds.Right, 0);
-            this.button6.Location = new Point(this.button3.Bounds.Right, 0);   
-		}
+        public void SetModString(int index)
+        {
+            if (index > this.menuModule.MenuItems.Count) return;
+            this.buttonMenu.Text = this.menuModule.MenuItems[index].Text;
+            ResizeAll();
+        }
 
         public void ClearMenuModString()
         {
-            this.contextMenu1.MenuItems.Clear();
+            this.menuModule.MenuItems.Clear();
         }
 
         public void SetMenuModString(string inputs)
@@ -358,12 +341,12 @@ namespace CSharpFormLibrary
 			if(inputs == null) return;
 
             System.Diagnostics.Debug.WriteLine("\tstatus: set menu=\t" + inputs);
-            this.contextMenu1.MenuItems.Add(
+            this.menuModule.MenuItems.Add(
                 inputs, new EventHandler(menuItem_Click));
-
-            //System.Diagnostics.Debug.WriteLine("\tstatus: menu size=\t" + this.contextMenu1.MenuItems.Count);
+            //System.Diagnostics.Debug.WriteLine("\tstatus: menu size=\t" + this.menuModule.MenuItems.Count);
+            
+            SetModString(0);
         }
-
 
         public void SetDir(string baseDir, string moduleDir , string userDir)
 		{
@@ -380,6 +363,14 @@ namespace CSharpFormLibrary
             return m_selectedModuleIndex;
         }
 
+        public void RotateModule()
+        {
+            m_selectedModuleIndex++;
+            if (m_selectedModuleIndex == menuModule.MenuItems.Count)
+                m_selectedModuleIndex = 0;
+            this.buttonMenu.Text =
+                menuModule.MenuItems[m_selectedModuleIndex].Text;
+        }
         #endregion
 
         #region private memebers
@@ -442,13 +433,13 @@ namespace CSharpFormLibrary
 			}
 		}
 
-        private void button2_MouseUp(object sender, MouseEventArgs e)
+        private void buttonMenu_MouseUp(object sender, MouseEventArgs e)
         {            
-            this.button2.ContextMenu.Show(button2, new System.Drawing.Point(0, button2.Bottom));
+            this.buttonMenu.ContextMenu.Show(buttonMenu, new System.Drawing.Point(0, buttonMenu.Bottom));
             //System.Diagnostics.Debug.WriteLine("status: context menu shown.");
         }
 
-        private void button3_MouseUp(object sender, MouseEventArgs e) //中英
+        private void buttonZhEn_MouseUp(object sender, MouseEventArgs e) //中英
         {
             Debug.WriteLine("中英-> m_AppHWnd=" + m_AppHWnd);
             int ret = UtilFuncs.SendMessage(
@@ -458,7 +449,7 @@ namespace CSharpFormLibrary
                 2);
         }
 
-        private void imeButton1_MouseUp(object sender, MouseEventArgs e) //繁簡
+        private void buttonHantHans_MouseUp(object sender, MouseEventArgs e) //繁簡
         {
             //Debug.WriteLine("繁簡-> m_AppHWnd=" + m_AppHWnd);
             int ret = UtilFuncs.SendMessage(
@@ -468,7 +459,7 @@ namespace CSharpFormLibrary
                 4);
         } 
 
-        private void button6_MouseUp(object sender, MouseEventArgs e) //設定
+        private void buttonPref_MouseUp(object sender, MouseEventArgs e) //設定
         {
 
             string pre_file = m_userDir + "config.xml";            
@@ -537,6 +528,19 @@ namespace CSharpFormLibrary
                 //Debug.WriteLine("userDir:" + userDir);
 //                Debug.WriteLine("baseDir" + baseDir);
   //              Debug.WriteLine("winDir" + winDir);
+        }
+
+        private void ResizeAll()
+        {
+            this.Width =
+                this.panelHead.Width +
+                this.buttonMenu.Width +
+                (this.buttonHantHans.Visible ? this.buttonHantHans.Width : 0) +
+                this.buttonZhEn.Width +
+                this.buttonPref.Width;
+            this.panelBody.Width = this.Width - this.panelHead.Width;
+            this.buttonZhEn.Location = new Point(this.buttonMenu.Bounds.Right, 0);
+            this.buttonPref.Location = new Point(this.buttonZhEn.Bounds.Right, 0);
         }
 
         #endregion
