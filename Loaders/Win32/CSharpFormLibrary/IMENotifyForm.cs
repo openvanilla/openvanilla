@@ -13,11 +13,13 @@ namespace CSharpFormLibrary
     public class IMENotifyForm : System.Windows.Forms.Form
     {
         private IContainer components;
-        private int currentPage = 0; //目前頁次 
-        private int totalPage = 0; //傳入的 Notify 共有幾頁                 
-        private ArrayList m_NotifyArray; //傳入的 Notify array
-        private string[] m_inputs;
-        private int m_mode = 0; //0:直式  1:展開
+        //<comment author='b6s'>Not used codes
+        //private int currentPage = 0; //目前頁次
+        //private int totalPage = 0; //傳入的 Notify 共有幾頁
+        //private ArrayList m_NotifyArray; //傳入的 Notify array
+        //private string[] m_inputs;
+        //private int m_mode = 0; //0:直式  1:展開
+        //</comment>
 
         //當頁的index
         //int now_index;		
@@ -27,8 +29,10 @@ namespace CSharpFormLibrary
         private const int MA_ACTIVATE = 0x0001;
         private const int MA_ACTIVATEANDEAT = 0x0002;
         private const int MA_NOACTIVATE = 0x0003;
-        private ColumnHeader columnHeader1;
-        private ColumnHeader columnHeader2;
+        //<comment author='b6s'>Not used codes
+        //private ColumnHeader columnHeader1;
+        //private ColumnHeader columnHeader2;
+        //</comment>
         private ImageList imageList1;
         private PictureBox pictureBox1;
         private TextBox textBox1;
