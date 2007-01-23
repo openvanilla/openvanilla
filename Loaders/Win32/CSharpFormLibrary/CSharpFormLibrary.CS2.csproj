@@ -163,7 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="csform.snk" />
-    <None Include="Resources\waraiotoko_logo1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
