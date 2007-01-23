@@ -167,6 +167,11 @@ protected:
     
     bool cfgDoChooseInFrontOfCursor;
     bool cfgDoClearSequenceOnError;
+
+	bool isEnNameSet;
+	bool isLocalizedNameSet;
+	char *m_name;
+	char *m_localizedName;
 };
 
 /*
@@ -288,6 +293,12 @@ const char* OVOFReverseLookupSQLite::process(const char *src, OVService *srv)
 OVIMTobacco::OVIMTobacco(char *name) {
     strcpy(table, name);
     sprintf(idstr,"OVIMTobacco-%s",name);
+
+	isEnNameSet = false;
+	m_name = new char[256];
+
+	isLocalizedNameSet = false;
+	m_localizedName = new char[256];
 }
 
 OVInputMethodContext *OVIMTobacco::newContext() {
@@ -353,15 +364,21 @@ const char *OVIMTobacco::identifier() {
 }
 
 const char *OVIMTobacco::localizedName(const char *lc) {
-    static char buf[256];
-    const char *name;
     if(!strcasecmp(lc,"zh_TW")) {
-	name=QueryForKey(db, table, "_property_cname");
+		if(!isLocalizedNameSet) {
+			sprintf(m_localizedName, "%s",
+				QueryForKey(db, table, "_property_cname"));
+			isLocalizedNameSet = true;
+		}
+		return m_localizedName;
     } else {
-	name=QueryForKey(db, table, "_property_ename");
+		if(!isEnNameSet) {
+			sprintf(m_name, "%s",
+				QueryForKey(db, table, "_property_ename"));
+			isEnNameSet = true;
+		}
+		return m_name;
     }
-    sprintf(buf,"%s",name);
-    return buf;
 }
 
 int OVIMTobacco::isEndKey(char c) {
