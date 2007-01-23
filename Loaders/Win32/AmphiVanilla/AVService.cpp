@@ -1,6 +1,8 @@
 #include "AVService.h"
 #include "AVDisplayServer.h"
-#include "iconv.h"
+//<comment author='b6s'>Disable iconv temporarily.
+//#include "iconv.h"
+//</comment>
 #include <cstring>
 
 const char *AVService::pathSeparator()
@@ -16,6 +18,13 @@ void AVService::notify(const char *msg)
 {
 	dsvr->showNotify(msg);
 }
+
+//<comment author='b6s'>Disable iconv temporarily.
+const char *AVService::toUTF8(const char *encoding, const char *src)
+{
+	return 0;
+}
+/*
 const char *AVService::toUTF8(const char *encoding, const char *src)
 {
 	char *out = NULL;
@@ -29,7 +38,15 @@ const char *AVService::toUTF8(const char *encoding, const char *src)
 	iconv_close(cd);
 	return internal;
 }
+*/
+//</comment>
 
+//<comment author='b6s'>Disable iconv temporarily.
+const char *AVService::fromUTF8(const char *encoding, const char *src)
+{
+	return 0;
+}
+/*
 const char *AVService::fromUTF8(const char *encoding, const char *src)
 {
 	char *out = NULL;
@@ -43,6 +60,8 @@ const char *AVService::fromUTF8(const char *encoding, const char *src)
 	iconv_close(cd);
 	return internal;
 }
+*/
+//</comment>
 
 const char *AVService::UTF16ToUTF8(unsigned short *s, int l)
 {
