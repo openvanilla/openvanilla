@@ -104,11 +104,11 @@ public:
     inline bool isValidKey(const string& keyString) const;
     
     // VXCIN::getKey()
-    inline int getCharVectorByKey(const string& inKey,
+    inline size_t getCharVectorByKey(const string& inKey,
                            vector<string>& outStringVectorRef);
     
     // VXCIN::find()
-    inline int getWordVectorByChar(const string& inKey,
+    inline size_t getWordVectorByChar(const string& inKey,
                             vector<string>& outStringVectorRef);
 
     void show(const CinMap &m, int x);
@@ -116,7 +116,7 @@ public:
     void test();
 
 protected:
-    int getVectorFromMap(const CinMap& inMapRef,
+    size_t getVectorFromMap(const CinMap& inMapRef,
                          const string& inKey,
                          vector<string>& outStringVectorRef);
     void lowerStr(string& str);
@@ -176,13 +176,13 @@ bool OVCIN::isValidKey(const string& keyString) const
         return false;
 }
 
-int OVCIN::getCharVectorByKey(const string& inKey,
+size_t OVCIN::getCharVectorByKey(const string& inKey,
                               vector<string>& outStringVectorRef)
 {
     return getVectorFromMap(maps[_OVCIN::M_KEY], inKey, outStringVectorRef);
 }
 
-int OVCIN::getWordVectorByChar(const string& inKey,
+size_t OVCIN::getWordVectorByChar(const string& inKey,
                                vector<string>& outStringVectorRef)
 {
     return getVectorFromMap(maps[_OVCIN::M_CHAR], inKey, outStringVectorRef);

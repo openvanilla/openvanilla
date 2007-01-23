@@ -38,10 +38,10 @@ void OVCandidateList::prepare(vector<string>* l, char* skey, OVCandidate *textba
 {
     onduty=true;
     strcpy(selkey, skey);
-    perpage=strlen(selkey);
+    perpage=static_cast<int>(strlen(selkey));
     pos=0;
 	list = l;	
-    count=list->size();
+    count=static_cast<int>(list->size());
         
     update(textbar);
     textbar->show();

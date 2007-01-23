@@ -123,14 +123,14 @@ void OVCIN::parseCinVector(const vector<string>& cinVector){
 }
 
 void OVCIN::lowerStr(string& str){
-    for(int i=str.length()-1;i>=0;i--)
+    for(int i=static_cast<int>(str.length())-1; i>=0; i--)
         if( !isprint(str[i]) )
             return;
     transform( str.begin(), str.end(), str.begin(),(int(*)(int)) tolower );
 }
 
 
-int OVCIN::getVectorFromMap(const CinMap& inMapRef,
+size_t OVCIN::getVectorFromMap(const CinMap& inMapRef,
                             const string& inKey,
                             vector<string>& outStringVectorRef)
 {
@@ -148,7 +148,7 @@ int OVCIN::getVectorFromMap(const CinMap& inMapRef,
 }
  
 int OVCIN::searchCinMap(const CinMap& m, const string& key) const{
-    int mid, low = 0, high = m.size() - 1;
+    int mid, low = 0, high = static_cast<int>(m.size()) - 1;
     while(low <= high){
         mid = (low + high) / 2;
         if( key == m[mid].first )
@@ -172,7 +172,7 @@ const pair<int, int> OVCIN::findRangeStartingWith(const CinMap& m,
     if (r.first == -1) return r;
     
     r.second = findClosestLowerBound(m, key);
-    if (r.second == -1) r.second=m.size();
+    if (r.second == -1) r.second=static_cast<int>(m.size());
     r.second--;
     
     if (r.first > r.second) r.first=r.second=-1;
@@ -181,7 +181,7 @@ const pair<int, int> OVCIN::findRangeStartingWith(const CinMap& m,
 
 
 int OVCIN::findClosestUpperBound(const CinMap& m, const string& key) const{
-    int mid, low = 0, high = m.size()-1;
+    int mid, low = 0, high = static_cast<int>(m.size())-1;
 
     while(low <= high){
         mid = (low + high) / 2;

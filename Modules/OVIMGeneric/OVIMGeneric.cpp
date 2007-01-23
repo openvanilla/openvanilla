@@ -374,7 +374,7 @@ int OVGenericContext::compose(OVBuffer *buf, OVCandidate *textbar, OVService *sr
 {
     if (!keyseq.length()) return 0;
 
-	int size =
+	size_t size =
 		cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
 
     if (size == 0)
