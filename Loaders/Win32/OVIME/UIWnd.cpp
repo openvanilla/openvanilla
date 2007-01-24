@@ -190,9 +190,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		dsvr->showCandi(false);
 
 		loader = AVLoader::getLoader();
-		loader->closeModule(); //also send buf to app
-
-		dsvr->releaseIMC(); // 裡面 access "lpIMC" 出現 exception
+		loader->shutdown();
+		dsvr->releaseIMC();
 
 		break;
 
@@ -200,13 +199,10 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		{
 		murmur("WM_IME_RELOADCONFIG");
 		loader = AVLoader::getLoader();
-		loader->closeModule();
 		loader->shutdown();
 		loader = NULL;
-
 		loader = AVLoader::getLoader();
 		loader->connectDisplayServer(dsvr);
-		loader->reloadConfig();
 
 		//SendMessage(hWnd, WM_IME_NOTIFY, IMN_PRIVATE, 9L);
 		int modAmount = loader->getInputMethodCount();
