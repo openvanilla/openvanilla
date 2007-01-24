@@ -232,48 +232,48 @@ namespace CSharpFormLibrary
             // 
             this.buttonMenu.AppHWnd = ((ulong)(0ul));
             this.buttonMenu.AutoSize = true;
-            this.buttonMenu.BackColor = Color.Transparent;
-            this.buttonMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.buttonMenu.BackColor = System.Drawing.Color.Transparent;
             this.buttonMenu.ContextMenu = this.menuModule;
+            this.buttonMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.buttonMenu.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.buttonMenu.Location = new System.Drawing.Point(0, 0);
             this.buttonMenu.Name = "buttonMenu";
             this.buttonMenu.Size = new System.Drawing.Size(65, 40);
             this.buttonMenu.TabIndex = 0;
+            this.buttonMenu.UseVisualStyleBackColor = false;
             this.buttonMenu.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonMenu_MouseUp);
             // 
             // buttonHantHans
             // 
             this.buttonHantHans.AppHWnd = ((ulong)(0ul));
-            this.buttonHantHans.BackColor = Color.Transparent;
+            this.buttonHantHans.BackColor = System.Drawing.Color.Transparent;
             this.buttonHantHans.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonHantHans.Font = new System.Drawing.Font("PMingLiU", 12F);
-            this.buttonHantHans.Location = new System.Drawing.Point(65, 0);
+            this.buttonHantHans.Location = new System.Drawing.Point(25, 0);
             this.buttonHantHans.Name = "buttonHantHans";
             this.buttonHantHans.Size = new System.Drawing.Size(40, 40);
             this.buttonHantHans.TabIndex = 1;
+            this.buttonHantHans.UseVisualStyleBackColor = false;
             this.buttonHantHans.Visible = false;
             this.buttonHantHans.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonHantHans_MouseUp);
             // 
             // buttonZhEn
             // 
             this.buttonZhEn.AppHWnd = ((ulong)(0ul));
-            this.buttonZhEn.BackColor = Color.Transparent;
+            this.buttonZhEn.BackColor = System.Drawing.Color.Transparent;
             this.buttonZhEn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonZhEn.Font = new System.Drawing.Font("PMingLiU", 12F);
-            //<comment author='b6s'>
-            //The localtion of buttonZhEn is overlapped with buttonHantHans temporarily.
+            this.buttonZhEn.Font = new System.Drawing.Font("PMingLiU", 12F);            
             this.buttonZhEn.Location = new System.Drawing.Point(65, 0);
-            //</comment>
             this.buttonZhEn.Name = "buttonZhEn";
             this.buttonZhEn.Size = new System.Drawing.Size(40, 40);
             this.buttonZhEn.TabIndex = 2;
+            this.buttonZhEn.UseVisualStyleBackColor = false;
             this.buttonZhEn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonZhEn_MouseUp);
             // 
             // buttonPref
             // 
             this.buttonPref.AppHWnd = ((ulong)(0ul));
-            this.buttonPref.BackColor = Color.Transparent;
+            this.buttonPref.BackColor = System.Drawing.Color.Transparent;
             this.buttonPref.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonPref.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.buttonPref.Location = new System.Drawing.Point(105, 0);
@@ -281,6 +281,7 @@ namespace CSharpFormLibrary
             this.buttonPref.Size = new System.Drawing.Size(65, 40);
             this.buttonPref.TabIndex = 3;
             this.buttonPref.Text = "設定";
+            this.buttonPref.UseVisualStyleBackColor = false;
             this.buttonPref.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonPref_MouseUp);
             // 
             // IMEStatusForm
@@ -299,6 +300,7 @@ namespace CSharpFormLibrary
             this.panelBody.ResumeLayout(false);
             this.panelBody.PerformLayout();
             this.ResumeLayout(false);
+
 		}
 		#endregion
 
@@ -475,6 +477,26 @@ namespace CSharpFormLibrary
                 (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
                 0xE, //IMN_PRIVATE
                 4);
+        }
+
+        private void proc_Exited(object sender, EventArgs e) //
+        {
+            int ret;
+            ret = UtilFuncs.SendMessage(
+                new IntPtr((long)m_AppHWnd),
+                (uint)UtilFuncs.WindowsMessage.WM_CREATE,
+                0, 0);
+
+            ret = UtilFuncs.SendMessage(
+                new IntPtr((long)m_AppHWnd),
+                (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
+                0x0002, //IMN_OPENSTATUSWINDOW
+                0);
+
+            ret = UtilFuncs.SendMessage(
+                new IntPtr((long)m_AppHWnd),
+                (uint)UtilFuncs.WindowsMessage.WM_IME_RELOADCONFIG,
+                0, 0);
         } 
 
         private void buttonPref_MouseUp(object sender, MouseEventArgs e) //設定
@@ -493,9 +515,10 @@ namespace CSharpFormLibrary
                    0, 0);
 
             proc.Start();
-            proc.WaitForExit();
-            /*
-            configFile.Refresh();
+            proc.Exited+=new EventHandler(proc_Exited);
+            //proc.WaitForExit();
+            
+           /* configFile.Refresh();
             DateTime before = configFile.LastWriteTime;
             System.Threading.Thread.Sleep(1000); //is necessary!!
             while (true)
@@ -504,14 +527,23 @@ namespace CSharpFormLibrary
                 DateTime after = configFile.LastWriteTime;
                 if (!after.Equals(before))
                 {
-                    if(!proc.HasExited)
-                        proc.Kill();
+                    if (!proc.HasExited)
+                    {
+                        try
+                        {
+                            proc.Kill();
+                        }catch(Exception ex)
+                        {
+                            Debug.WriteLine(ex.Message);
+                            break;
+                        }
+                    }
                     break;
                 }
                 System.Threading.Thread.Sleep(1000);                
             }
             */
-
+/*
             ret = UtilFuncs.SendMessage(
                 new IntPtr((long)m_AppHWnd),
                 (uint)UtilFuncs.WindowsMessage.WM_CREATE,
@@ -526,7 +558,7 @@ namespace CSharpFormLibrary
             ret = UtilFuncs.SendMessage(
                 new IntPtr((long)m_AppHWnd),
                 (uint)UtilFuncs.WindowsMessage.WM_IME_RELOADCONFIG,
-                0, 0);
+                0, 0);*/
 
             /*
             ret = UtilFuncs.SendMessage(

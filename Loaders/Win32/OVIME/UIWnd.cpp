@@ -205,7 +205,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		loader = NULL;
 
 		loader = AVLoader::getLoader();
-		//loader->connectDisplayServer(dsvr);
+		loader->connectDisplayServer(dsvr);
 		loader->reloadConfig();
 
 		//SendMessage(hWnd, WM_IME_NOTIFY, IMN_PRIVATE, 9L);
