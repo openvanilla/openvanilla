@@ -188,8 +188,9 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		dsvr->showStatus(false);
 		dsvr->showBuf(false);
 		dsvr->showCandi(false);
-
+		
 		loader = AVLoader::getLoader();
+		loader->closeModule();
 		loader->shutdown();
 		dsvr->releaseIMC();
 
@@ -199,8 +200,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		{
 		murmur("WM_IME_RELOADCONFIG");
 		loader = AVLoader::getLoader();
+		loader->closeModule();
 		loader->shutdown();
-		loader = NULL;
 		loader = AVLoader::getLoader();
 		loader->connectDisplayServer(dsvr);
 

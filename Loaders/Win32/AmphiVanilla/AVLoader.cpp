@@ -10,11 +10,11 @@ AVLoader* AVLoader::globalLoader = NULL;
 
 void AVLoader::shutdown()
 {
-	closeModule();
-
-	if(globalLoader)
+	if(globalLoader) {
+	//	closeModule();
 		delete globalLoader;
-	globalLoader = NULL;
+	}
+	globalLoader = NULL;	
 }
 
 AVLoader::AVLoader() : dsvr(0)
