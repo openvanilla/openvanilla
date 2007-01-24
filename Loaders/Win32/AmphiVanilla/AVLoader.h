@@ -18,16 +18,13 @@ public:
 		return globalLoader;
 	}
 
-	static void shutdown();	
+	void shutdown();	
 
 	void initContext(int n);
-	void reloadConfig();
 	void connectDisplayServer(AVDisplayServer *svr);
 	bool keyEvent(int n, AVKeyCode c);
 	bool moduleName(int i, char *str);
 	void closeModule();
-
-	void loadModules();
 
 	//<comment author='b6s'>Add these two functions temporarily, will refactor them later.
 	int getInputMethodCount();
@@ -40,6 +37,9 @@ public:
 protected:
 	AVLoader();
 	~AVLoader();
+
+	void loadPrefs();
+	void loadModules();
 
 	AVEmbeddedLoader *em;
 	AVDisplayServer *dsvr;

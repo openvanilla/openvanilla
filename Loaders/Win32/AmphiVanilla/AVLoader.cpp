@@ -10,6 +10,8 @@ AVLoader* AVLoader::globalLoader = NULL;
 
 void AVLoader::shutdown()
 {
+	closeModule();
+
 	if(globalLoader)
 		delete globalLoader;
 	globalLoader = NULL;
@@ -17,7 +19,10 @@ void AVLoader::shutdown()
 
 AVLoader::AVLoader() : dsvr(0)
 {
+	em = AVEmbeddedLoader::getInstance();
+
 	loadModules();
+	loadPrefs();
 
 	candi = new AVCandidate();
 	buf = new AVBuffer(&ovof_vector, em->srv());
@@ -30,8 +35,6 @@ AVLoader::~AVLoader()
 		if(ctx_vector[i] != NULL)
 			delete ctx_vector[i];
 	*/
-	//delete em;
-
 	ctx_vector.clear();
 	ovof_vector.clear();
 	startedCtxVector.clear();
@@ -43,12 +46,24 @@ AVLoader::~AVLoader()
 	delete buf;
 }
 
+void AVLoader::loadPrefs()
+{
+	em->dict()->update();
+	
+	murmur("em->modlist().size() :%d",em->modlist().size());
+	for(size_t i = 0; i < em->modlist().size(); i++) {		
+		if(ctx_vector.at(i) != NULL) {
+			murmur("Reload: %s", em->modlist().at(i)->identifier());
+			em->dict()->setDict(em->modlist().at(i)->identifier());
+			em->modlist().at(i)->update(em->dict(), em->srv());
+		}
+	}
+}
+
 void AVLoader::loadModules()
 {
 	hasBoPoMoFo = false;
 	hasPhoneticHsu = false;
-
-	em = AVEmbeddedLoader::getInstance();
 
 	vector<OVModule*> tmpmod_vector;
 	vector<OVModule*>::iterator m;
@@ -98,20 +113,6 @@ void AVLoader::initContext(int i)
 		im->initialize(em->dict(), em->srv(), em->cfg()->getModuleDir());
 		murmur("\tInitContext %s", im->localizedName("zh_TW"));
 		ctx_vector.at(i) = im->newContext();
-	}
-}
-
-void AVLoader::reloadConfig()
-{
-	em->dict()->update();
-	
-	murmur("em->modlist().size() :%d",em->modlist().size());
-	for(size_t i = 0; i < em->modlist().size(); i++) {		
-		if(ctx_vector.at(i) != NULL) {
-			murmur("Reload: %s", em->modlist().at(i)->identifier());
-			em->dict()->setDict(em->modlist().at(i)->identifier());
-			em->modlist().at(i)->update(em->dict(), em->srv());
-		}
 	}
 }
 

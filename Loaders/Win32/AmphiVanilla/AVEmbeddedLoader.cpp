@@ -43,8 +43,8 @@ AVEmbeddedLoader::~AVEmbeddedLoader()
 void AVEmbeddedLoader::removeInstance()
 {
 	if(embeddedLoaderInstance)
-		embeddedLoaderInstance = NULL;
-		//delete embeddedLoaderInstance;
+		delete embeddedLoaderInstance;
+	embeddedLoaderInstance = NULL;
 }
 
 AVService *AVEmbeddedLoader::srv() { return m_srv; }
