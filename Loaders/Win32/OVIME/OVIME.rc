@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文 (台灣) resources
+// Chinese (Taiwan) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
 #ifdef _WIN32
@@ -62,8 +62,8 @@ IDI_ICON1               ICON                    "ov.ico"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,1,0
- PRODUCTVERSION 0,0,1,0
+ FILEVERSION 0,7,2,1
+ PRODUCTVERSION 0,7,2,1
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -76,24 +76,23 @@ VS_VERSION_INFO VERSIONINFO
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "040404b0"
+        BLOCK "000004b0"
         BEGIN
-            VALUE "FileDescription", "OVIME"
-            VALUE "FileVersion", "1, 0, 0, 0"
+            VALUE "FileVersion", "0, 7, 2, 1"
             VALUE "InternalName", "OVIME"
-            VALUE "LegalCopyright", "Copyright (C) 2007"
+            VALUE "LegalCopyright", "BSD License"
             VALUE "OriginalFilename", "OVIME.ime"
-            VALUE "ProductName", "OVIME (win2k will see this...)"
-            VALUE "ProductVersion", "1, 0, 0, 0"
+            VALUE "ProductName", " OpenVanilla Win32"
+            VALUE "ProductVersion", "0, 7, 2, 1"
         END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x404, 1200
+        VALUE "Translation", 0x0, 1200
     END
 END
 
-#endif    // 中文 (台灣) resources
+#endif    // Chinese (Taiwan) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

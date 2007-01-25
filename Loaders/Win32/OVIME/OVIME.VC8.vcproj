@@ -305,6 +305,10 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 			>
 			<File
+				RelativePath=".\ov.ico"
+				>
+			</File>
+			<File
 				RelativePath="OVIME.rc"
 				>
 			</File>
