@@ -31,17 +31,27 @@ void _SetCompMarkFrom(int);
 void _SetCompMarkTo(int);
 
 //candidate
-void _ShowCandPageArray(const std::vector<std::wstring>& candidates);
-void _SetCandString(const std::wstring& candidate);
-void _EndCandPage();
-int _GetCandValue();
-HWND _CreateCandPage();
-HWND _CreateCandPageWithHandle(HWND hwnd);
-void _HideCandPage();
-void _ShowCandPage();
-void _MoveCandPage(int x,int y);
-void _ClearCandPage();
+void _SetCandiString(const std::wstring& candidate);
+void _EndCandiPage();
+HWND _CreateCandiPage();
+HWND _CreateCandiPageWithHandle(HWND hwnd);
+void _HideCandiPage();
+void _ShowCandiPage();
+void _MoveCandiPage(int x,int y);
+void _ClearCandiPage();
 void _ExpandCandi();
+
+//Symbol
+void _SetSymbolString(const std::wstring& candidate);
+void _EndSymbolPage();
+HWND _CreateSymbolPage();
+HWND _CreateSymbolPageWithHandle(HWND hwnd);
+void _HideSymbolPage();
+void _ShowSymbolPage();
+void _MoveSymbolPage(int x,int y);
+void _ClearSymbolPage();
+void _ExpandSymbol();
+
 
 //notify
 void _ShowNotifyPageArray(const std::vector<std::wstring>& candidates);

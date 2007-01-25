@@ -68,8 +68,8 @@ void UICreateCandWindow(HWND hUIWnd)
 
 		Watch watch;
 		watch.start();
-		//uiCand.hWnd = _CreateCandPage();
-		uiCand.hWnd = _CreateCandPageWithHandle(hUIWnd);
+		//uiCand.hWnd = _CreateCandiPage();		
+		uiCand.hWnd = _CreateCandiPageWithHandle(hUIWnd);		
 		watch.stop();
 		murmur("%1.3f sec:\tC# candidate window, create", watch.getSec());
 
@@ -121,7 +121,7 @@ void UISetCandStr(wchar_t* lpStr)
 {
 	Watch watch;
 	watch.start();
-	_ClearCandPage();
+	_ClearCandiPage();
 	watch.stop();
 	murmur("%1.3f sec:\tC# candidate window, clear", watch.getSec());
 	/*	
@@ -142,12 +142,12 @@ void UISetCandStr(wchar_t* lpStr)
 		lpCandStr = wcsdup(lpStr);
 		std::wstring wsCandStr(lpCandStr);
 		watch.start();
-		_SetCandString(wsCandStr);
+		_SetCandiString(wsCandStr);
 		watch.stop();
 	}
 	else
 	{
-		_ClearCandPage();		
+		_ClearCandiPage();		
 	}
 
 }
@@ -171,7 +171,7 @@ void UIMoveCandWindow(int X, int Y)
 				newY=Y-190;
 			Watch watch;
 			watch.start();
-			_MoveCandPage(newX,newY);				
+			_MoveCandiPage(newX,newY);				
 			//uiCand.pt.x=newX;
 			//uiCand.pt.y=newY;
 			watch.stop();
@@ -230,7 +230,7 @@ void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		Watch watch;
 		watch.start();
 		std::wstring wsCandStr(lpCandStr);
-		_SetCandString(wsCandStr);
+		_SetCandiString(wsCandStr);
 		
 		watch.stop();
 		murmur("%1.3f sec:\tC# candidate window, set string", watch.getSec());
@@ -298,7 +298,7 @@ void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 				TRUE);*/
 			Watch watch;
 			watch.start();
-			_MoveCandPage(uiCand.pt.x,uiCand.pt.y);
+			_MoveCandiPage(uiCand.pt.x,uiCand.pt.y);
 			watch.stop();
 			murmur("%1.3f sec:\tC# candidate window, move", watch.getSec());
 			murmur("uiCand.pt.x:%i, uiCand.pt.y:%i", uiCand.pt.x,uiCand.pt.y);
@@ -319,7 +319,7 @@ void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 
 			Watch watch;
 			watch.start();		
-			_MoveCandPage(uiCand.pt.x,uiCand.pt.y);
+			_MoveCandiPage(uiCand.pt.x,uiCand.pt.y);
 			watch.stop();
 			murmur("%1.3f sec:\tC# candidate window, move", watch.getSec());
 			murmur("From CompWnd, uiCand.pt.x:%i, uiCand.pt.y:%i", uiCand.pt.x,uiCand.pt.y);
@@ -413,7 +413,7 @@ void UIShowCandWindow()
 	if (IsWindow(uiCand.hWnd)) {
 		Watch watch;
 		watch.start();
-		_ShowCandPage();
+		_ShowCandiPage();
 		watch.stop();
 		murmur("%1.3f sec:\tC# candidate window, show", watch.getSec());
 	}
@@ -426,7 +426,7 @@ void UIHideCandWindow()
 		
 		Watch watch;
 		watch.start();
-		_HideCandPage();
+		_HideCandiPage();
 		watch.stop();
 		murmur("%1.3f sec:\tC# candidate window, hide", watch.getSec());
 

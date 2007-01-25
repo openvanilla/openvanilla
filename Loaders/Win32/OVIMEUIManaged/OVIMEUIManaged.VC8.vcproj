@@ -203,6 +203,10 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<ProjectReference
+			ReferencedProjectIdentifier="{1610A612-3EC5-4FA8-8559-A7FE48802057}"
+			RelativePathToProject=".\CSharpFormLibrary\CSharpFormLibrary.CS2.csproj"
+		/>
 	</References>
 	<Files>
 		<Filter
@@ -263,6 +267,10 @@
 				</File>
 				<File
 					RelativePath=".\James\NewUIStatus.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\NewUISymbol.cpp"
 					>
 				</File>
 				<File

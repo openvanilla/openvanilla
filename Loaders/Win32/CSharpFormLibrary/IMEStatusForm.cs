@@ -20,7 +20,7 @@ namespace CSharpFormLibrary
         private const int MA_NOACTIVATEANDEAT = 0x0004;
 
         //private int msgCounter = 0;
-        private UInt64 m_AppHWnd;
+        private IntPtr m_AppHWnd;
         private static string m_baseDir =
             Environment.GetEnvironmentVariable("WINDIR") +
             System.IO.Path.DirectorySeparatorChar +
@@ -305,7 +305,7 @@ namespace CSharpFormLibrary
 		#endregion
 
         #region public methods
-        public void SetAppHWnd(UInt64 HWND)
+        public void SetAppHWnd(IntPtr HWND)
         {
             m_AppHWnd = HWND;
             Debug.WriteLine("m_AppHWnd (status) =" + HWND);
@@ -313,6 +313,11 @@ namespace CSharpFormLibrary
             //this.buttonMenu.AppHWnd = m_AppHWnd;
             //this.buttonZhEn.AppHWnd =
             //System.Diagnostics.Debug.WriteLine("buttonMenu.AppHWnd: " + this.buttonMenu.AppHWnd);
+        }
+
+        public IntPtr GetHandle()
+        {
+            return this.Handle;
         }
 
 		public void ShowNoActive()
@@ -481,20 +486,21 @@ namespace CSharpFormLibrary
 
         private void proc_Exited(object sender, EventArgs e) //
         {
+            //System.Threading.Thread.Sleep(1000);
             int ret;
             ret = UtilFuncs.SendMessage(
-                new IntPtr((long)m_AppHWnd),
+                m_AppHWnd,
                 (uint)UtilFuncs.WindowsMessage.WM_CREATE,
                 0, 0);
 
             ret = UtilFuncs.SendMessage(
-                new IntPtr((long)m_AppHWnd),
+                m_AppHWnd,
                 (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
                 0x0002, //IMN_OPENSTATUSWINDOW
                 0);
 
             ret = UtilFuncs.SendMessage(
-                new IntPtr((long)m_AppHWnd),
+                m_AppHWnd,
                 (uint)UtilFuncs.WindowsMessage.WM_IME_RELOADCONFIG,
                 0, 0);
         } 
@@ -509,8 +515,7 @@ namespace CSharpFormLibrary
             System.IO.FileInfo configFile =
                 new System.IO.FileInfo(m_confingPath);
 
-            int ret = UtilFuncs.SendMessage(
-                   new IntPtr((long)m_AppHWnd),
+            int ret = UtilFuncs.SendMessage(m_AppHWnd,
                    (uint)UtilFuncs.WindowsMessage.WM_DESTROY,
                    0, 0);
 

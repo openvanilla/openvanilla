@@ -17,7 +17,10 @@ using namespace std;
 
 ref class CompFormAssembly{
 private:
-	CompFormAssembly(){}
+	CompFormAssembly()
+	{
+		pasm = CompFormAssembly::Instance();
+	}
 	static Assembly^ pasm;
 	static bool hasPasm = false;
 
@@ -92,9 +95,11 @@ public:
 		if(!hasObjCompForm)
 		{
 			//objCompForm =
-			//	pasm->CreateInstance("CSharpFormLibrary.IMECompForm",true);
+			// CompFormAssembly::Instance()
+			//	->CreateInstance("CSharpFormLibrary.IMECompForm",true);
 			objCompForm =
-				pasm->CreateInstance("CSharpFormLibrary.IMECompRichForm",true);
+				CompFormAssembly::Instance()
+					->CreateInstance("CSharpFormLibrary.IMECompRichForm",true);
 			hasObjCompForm = true;
 		}
 		return objCompForm;

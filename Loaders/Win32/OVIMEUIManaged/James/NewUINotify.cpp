@@ -18,7 +18,11 @@ using namespace std;
 
 ref class NotifyFormAssembly{
 private:
-	NotifyFormAssembly(){}
+	NotifyFormAssembly()
+	{
+		pasm = NotifyFormAssembly::Instance();
+	}
+
 	static Assembly^ pasm;
 	static bool hasPasm = false;
 
@@ -77,7 +81,8 @@ public:
 		if(!hasObjNotifyForm)
 		{
 			objNotifyForm =
-				pasm->CreateInstance("CSharpFormLibrary.IMENotifyForm",true);
+				NotifyFormAssembly::Instance()
+					->CreateInstance("CSharpFormLibrary.IMENotifyForm",true);
 			hasObjNotifyForm = true;
 		}
 		return objNotifyForm;

@@ -63,25 +63,35 @@ EXPORTS
 	_GetCaretPosX
 	
 	
-;;candidate
+;;Candidate
 	UICreateCandWindow
-	_CreateCandPage
-	_CreateCandPageWithHandle
+	_CreateCandiPage	
+	_CreateCandiPageWithHandle
 	UIMoveCandWindow
-	_MoveCandPage
+	_MoveCandiPage
 	UIShowCandWindow
-	_ShowCandPage
+	_ShowCandiPage
 	UIHideCandWindow
-	_HideCandPage	
-	_EndCandPage					
+	_HideCandiPage	
+	_EndCandiPage					
 	UISetCandStr	
-	_ClearCandPage				
-	_SetCandString	
+	_ClearCandiPage				
+	_SetCandiString	
 	UIExpandCandi
 	_ExpandCandi
 	
+;;Symbol
+	_CreateSymbolPage	
+	_CreateSymbolPageWithHandle
+	_MoveSymbolPage
+	_ShowSymbolPage
+	_HideSymbolPage	
+	_EndSymbolPage					
+	_ClearSymbolPage				
+	_SetSymbolString	
+	_ExpandSymbol
 
-;;notify
+;;Notify
 	UICreateNotifyWindow
 	UIShowNotifyWindow
 	UIHideNotifyWindow	
@@ -95,3 +105,4 @@ EXPORTS
 	UISetNotifyStr	
 	_ClearNotifyPage				
 	_SetNotifyString		
+	
