@@ -78,12 +78,12 @@ BEGIN
     BEGIN
         BLOCK "040404b0"
         BEGIN
-            VALUE "FileDescription", "教育部台羅拼音系統輸入法"
+            VALUE "FileDescription", "OVIME"
             VALUE "FileVersion", "1, 0, 0, 0"
             VALUE "InternalName", "OVIME"
             VALUE "LegalCopyright", "Copyright (C) 2007"
             VALUE "OriginalFilename", "OVIME.ime"
-            VALUE "ProductName", "教育部台羅拼音系統輸入法"
+            VALUE "ProductName", "OVIME (win2k will see this...)"
             VALUE "ProductVersion", "1, 0, 0, 0"
         END
     END
