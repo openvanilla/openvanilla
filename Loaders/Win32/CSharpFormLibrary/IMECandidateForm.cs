@@ -196,11 +196,6 @@ namespace CSharpFormLibrary
 
         #region public methods
 
-        public IntPtr GetHandle()
-        {
-            return this.Handle;
-        }
-
         public void SetCandidates(string inputs)
         {
             //input

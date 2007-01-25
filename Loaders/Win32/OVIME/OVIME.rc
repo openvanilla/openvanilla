@@ -78,13 +78,13 @@ BEGIN
     BEGIN
         BLOCK "040404b0"
         BEGIN
-            VALUE "FileDescription", "OpenVanilla 開放香草輸入法"
-            VALUE "FileVersion", "0, 0, 1, 0"
+            VALUE "FileDescription", "教育部台羅拼音系統輸入法"
+            VALUE "FileVersion", "1, 0, 0, 0"
             VALUE "InternalName", "OVIME"
-            VALUE "LegalCopyright", "Copyright (C) 2005"
-            VALUE "OriginalFilename", "OVIME.dll"
-            VALUE "ProductName", "OpenVanilla 開放香草輸入法"
-            VALUE "ProductVersion", "0, 0, 1, 0"
+            VALUE "LegalCopyright", "Copyright (C) 2007"
+            VALUE "OriginalFilename", "OVIME.ime"
+            VALUE "ProductName", "教育部台羅拼音系統輸入法"
+            VALUE "ProductVersion", "1, 0, 0, 0"
         END
     END
     BLOCK "VarFileInfo"

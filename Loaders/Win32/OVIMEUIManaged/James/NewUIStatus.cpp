@@ -6,15 +6,14 @@
 
 #pragma managed
 
-#using <mscorlib.dll>
-#using <System.dll>
-#using <System.Windows.Forms.dll>
 //<comment author='b6s'>
-//If you want to use "#using" here, the project property
-//"Resolve #using referecen" should also be set to
-//"..\CSharpFormLibrary\bin\Debug"
+//If you want to use "#using" here instead of adding references in
+//the project property, another project property "Resolve #using referecen"
+//should also be set to "..\CSharpFormLibrary\bin\Debug"
+//#using <mscorlib.dll>
+//#using <System.dll>
+//#using <System.Windows.Forms.dll>
 //#using <CSharpFormLibrary.dll>
-//using namespace CSharpFormLibrary;
 //</comment>
 
 using namespace System;
@@ -22,24 +21,25 @@ using namespace System::Diagnostics;
 using namespace System::Windows::Forms;
 using namespace System::Collections;
 using namespace std;
+using namespace CSharpFormLibrary;
 
 ref class CSharpStatusWrapper{
 private:
-	static CSharpFormLibrary::IMEStatusForm^ m_instance = nullptr;
+	static IMEStatusForm^ m_instance = nullptr;
 
 public:
-	static CSharpFormLibrary::IMEStatusForm^ Instance()
-	{		
+	static IMEStatusForm^ Instance()
+	{
 		if(m_instance == nullptr)
-			m_instance = gcnew CSharpFormLibrary::IMEStatusForm();
-		return m_instance;		
+			m_instance = gcnew IMEStatusForm();
+		return m_instance;
 	}
 };
 
 HWND _CreateStatusPage() //create
 {		
 	return (HWND)(safe_cast<IntPtr^>(
-		CSharpStatusWrapper::Instance()->GetHandle())->ToPointer());
+		CSharpStatusWrapper::Instance()->Handle)->ToPointer());
 }
 
 void _SetStatusAppHWnd(HWND hwnd)

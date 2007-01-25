@@ -34,14 +34,14 @@ public:
 HWND _CreateSymbolPage()//create without handle
 {		
 	return (HWND)(safe_cast<IntPtr^>(
-		CSharpSymbolWrapper::Instance()->GetHandle())->ToPointer());
+		CSharpSymbolWrapper::Instance()->Handle)->ToPointer());
 }
 
 HWND _CreateSymbolPageWithHandle(HWND hwnd)//create with handle
 {	
 	CSharpSymbolWrapper::Instance()->SetHWND(safe_cast<IntPtr>(hwnd));
 	return (HWND)(safe_cast<IntPtr^>(
-		CSharpSymbolWrapper::Instance()->GetHandle())->ToPointer());
+		CSharpSymbolWrapper::Instance()->Handle)->ToPointer());
 }
 
 void _SetSymbolString(const wstring& candidate)

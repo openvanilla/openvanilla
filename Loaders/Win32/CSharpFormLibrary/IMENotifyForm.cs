@@ -24,7 +24,7 @@ namespace CSharpFormLibrary
         //當頁的index
         //int now_index;		
         //int baseSize;	//基本長度(沒有Notify時form的大小)
-        private System.UInt64 m_hwnd;
+        private IntPtr m_hwnd;
         private const int WM_MOUSEACTIVATE = 0x0021;
         private const int MA_ACTIVATE = 0x0001;
         private const int MA_ACTIVATEANDEAT = 0x0002;
@@ -189,7 +189,7 @@ namespace CSharpFormLibrary
             
         }
 
-        public void SetHWND(System.UInt64 hwnd)
+        public void SetHWND(IntPtr hwnd)
         {
             m_hwnd = hwnd;
         }

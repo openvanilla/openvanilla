@@ -129,16 +129,19 @@ namespace CSharpFormLibrary
             }            
         }
 
-        public void CompMarkFrom(int x)
+        public void SetCompMarkFrom(int x)
         {
             compSelStart = x;
         }
         
-        public void CompMarkTo(int x)
+        public void SetCompMarkTo(int x)
         {
             compSelEnd = x;
         }
 
-
+        public void DisposeForm()
+        {
+            this.Dispose(true);
+        }
     }
 }
