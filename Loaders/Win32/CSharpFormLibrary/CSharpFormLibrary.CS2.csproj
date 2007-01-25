@@ -168,7 +168,6 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>cd "$(DevEnvDir)..\..\SDK\v2.0\bin\" &amp;&amp; gacutil.exe /if "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
