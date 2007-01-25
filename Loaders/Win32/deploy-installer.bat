@@ -2,7 +2,7 @@ mkdir .\Installer\system32
 mkdir .\Installer\OpenVanilla
 mkdir .\Installer\OpenVanilla\Modules
 copy "%OV_DEPS%\libltdl3.dll" .\Installer\system32\
-REM copy "%OV_DEPS%\libiconv-2.dll" .\Installer\system32\
+copy "%OV_DEPS%\libiconv-2.dll" .\Installer\system32\
 copy "%OV_DEPS%\sqlite3.dll" .\Installer\system32\
 copy "%OV_DEPS%\tinyxml.dll" .\Installer\system32\
 REM copy ".\CSharpFormLibrary\bin\Release\CSharpFormLibrary.dll" .\Installer\OpenVanilla\
