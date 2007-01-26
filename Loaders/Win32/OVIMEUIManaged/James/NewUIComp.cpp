@@ -93,7 +93,7 @@ int _GetCompValue()
 
 int _GetHeight()
 {
-	return CSharpCompWrapper::Instance()->GetHeight();
+	return CSharpCompWrapper::Instance()->Height;
 }
 
 int _GetCaretPosX()

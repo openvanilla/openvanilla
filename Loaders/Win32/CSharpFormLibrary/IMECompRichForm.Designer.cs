@@ -36,16 +36,12 @@ namespace CSharpFormLibrary
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBox1.BackColor = System.Drawing.Color.LightCyan;
             this.richTextBox1.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.ForeColor = System.Drawing.SystemColors.WindowText;
-            //this.richTextBox1.Location = new System.Drawing.Point(5, 0);
-            //this.richTextBox1.Size = new System.Drawing.Size(915, 22);
             this.richTextBox1.Bounds = new System.Drawing.Rectangle(5, 0, 915, 22);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(0);
             this.richTextBox1.Multiline = false;
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;            
+            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
@@ -53,13 +49,9 @@ namespace CSharpFormLibrary
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.SystemColors.InfoText;
-            this.label1.Font = new System.Drawing.Font("PMingLiU", 1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            
+            this.label1.Font = new System.Drawing.Font("PMingLiU", 1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));           
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            //this.label1.Location = new System.Drawing.Point(4, 0);
-            //this.label1.Size = new System.Drawing.Size(1, 22);
             this.label1.Bounds= new System.Drawing.Rectangle (4,0,1,22);
             this.label1.TabIndex = 1;
             this.label1.Text = " ";
@@ -68,20 +60,15 @@ namespace CSharpFormLibrary
             // IMECompRichForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(146, 19);
             this.ControlBox = false;
-            //this.Controls.Add(this.label1);
-            //this.Controls.Add(this.richTextBox1);
             this.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ForeColor = System.Drawing.SystemColors.WindowText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximumSize = new System.Drawing.Size(600, 25);
             this.Name = "IMECompRichForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.ResumeLayout(false);
-
         }
 
         #endregion

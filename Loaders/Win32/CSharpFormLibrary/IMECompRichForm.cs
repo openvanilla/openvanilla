@@ -56,77 +56,42 @@ namespace CSharpFormLibrary
 			this.richTextBox1.Clear();
             compSelStart = 0;
             compSelEnd = 0;
-            
-            //Point pt = this.richTextBox1.GetPositionFromCharIndex(caretPosIndex);
-            //caretPosX = pt.X + 6;
 		}
 
-		public void SetLocation(int x, int y)
-		{
-			this.Location = new Point(x,y);
-		}
+        public void SetLocation(int x, int y)
+        {
+            this.Location = new Point(x, y);
+        }
 
 		public void SetComp(string inputs)
 		{
-			if(inputs==null) return;            
-            this.richTextBox1.Text = inputs; 
-            //Point pt = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.Text.Length);
-            //this.Width = pt.X+25;                       
-        }
-
-        public int GetHeight()
-        {
-            return this.Height;
+			if(inputs==null) return;
+            this.richTextBox1.Text = inputs;
         }
 
         public int GetCaretPosX()
         {
-            /*try
-            {
-                System.Diagnostics.Debug.WriteLine("c# comp GetCaretPosX = " + caretPosX);
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.StackTrace);
-            }*/
             return caretPosX;
         }
 
 		public void SetCaretX(int x)
 		{
             caretPosIndex = x;
-            Point pt = this.richTextBox1.GetPositionFromCharIndex(caretPosIndex);
+            Point pt =
+                this.richTextBox1.GetPositionFromCharIndex(caretPosIndex);
             caretPosX = pt.X + 6;
             this.label1.Left = caretPosX;
-            /*System.Diagnostics.Debug.WriteLine("========SetCaretX=========");
-            System.Diagnostics.Debug.WriteLine("cursor:" +x);
-            System.Diagnostics.Debug.WriteLine("caretPosX=" + caretPosX);
-            System.Diagnostics.Debug.WriteLine("compSelStart=" + compSelStart);
-            System.Diagnostics.Debug.WriteLine("compSelEnd=" + compSelEnd);
-            System.Diagnostics.Debug.WriteLine("labelX=" +label1.Left.ToString());               
-             */
-            Point pt2 = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.Text.Length);
+            Point pt2 = 
+                this.richTextBox1.GetPositionFromCharIndex(
+                    this.richTextBox1.Text.Length);
             if (this.Width - this.richTextBox1.Bounds.Left < pt2.X)
                 this.Width = pt2.X + 100;
 
-            if (compSelStart == compSelEnd) //已經組字
-            {
-                /*
-                Point pt2 = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.Text.Length);
-                if(this.Width - this.richTextBox1.Bounds.Left < pt2.X)
-                    this.Width = pt2.X + 100;
-                 */
-                if (compSelStart > 0)
-                {                    
-                    this.richTextBox1.Select(compSelStart - 1, 1);
-                }
-                //this.Width = this.richTextBox1.GetPositionFromCharIndex(this.richTextBox1.Text.Length).X + 30;
-            }
+            if (compSelStart > 0 && compSelStart == compSelEnd) //已經組字
+                this.richTextBox1.Select(compSelStart - 1, 1);
             else //正在組字
-            {                
-                this.richTextBox1.Select(compSelStart, compSelEnd - compSelStart);                
-                this.richTextBox1.SelectionColor = Color.Red;                
-            }            
+                this.richTextBox1.Select(compSelStart, compSelEnd - compSelStart);
+            this.richTextBox1.SelectionColor = Color.Red;
         }
 
         public void SetCompMarkFrom(int x)
