@@ -228,8 +228,9 @@ void UICreateStatusWindow(HWND hUIWnd)
 	    //設定C# Status 內 m_AppHWnd 
 	    _SetStatusAppHWnd(hUIWnd); 
 
-		//設定 module 名稱
+		//設定 module menu (init: current module)
 		SendMessage(hUIWnd, WM_IME_NOTIFY, IMN_PRIVATE, 9);
+		//SendMessage(hUIWnd, WM_IME_NOTIFY, IMN_PRIVATE, 3);
 		//UISetStatusModStr();
 
 		//設定中英
