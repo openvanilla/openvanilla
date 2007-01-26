@@ -1,5 +1,4 @@
 using System;
-//using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -17,33 +16,23 @@ namespace CSharpFormLibrary
         private const int MA_NOACTIVATEANDEAT = 0x0004;
         
         private UInt64 m_AppHWnd;
-        private Color m_origForeColor;
-        private Color m_origBackColor;
         private bool m_wasMouseDown = false;
 
-        //======== Gradient Color =================//
-        private int colorTransparentcy = 128;
-        private Color _color0;
-        private Color _color1;
-        
-        public Color Color0
-        {
-            get { return _color0; }
-            set { _color0 = value; Invalidate(); }//invokeColorChange(); }
-        }
+        private Color m_colorTop;
+        private Color m_colorMiddle;
+        private Color m_colorBottom;
+        private Color m_colorBorder;
+        private Color m_colorText;
 
-        public Color Color1 
-		{
-			get { return _color1; }
-			set { _color1 = value; Invalidate ();}// invokeColorChange (); }
-		}
+        private ButtonBorderStyle m_buttonBorderStyle;
 
-        public IMEButton(): base()
+        public IMEButton()
         {
-            Color0 = Color.White;
-            Color1 = Color.Black;
-            //this.ForeColor = Color.White;
-            //this.Margin = new Padding(3, 3, 3, 3);
+            this.SetStyle(
+                ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer, true);
+            UpdateAppearance();
         }
 
         public UInt64 AppHWnd
@@ -57,60 +46,70 @@ namespace CSharpFormLibrary
             get
             {
                 CreateParams cp = base.CreateParams;
-                //System.Diagnostics.Debug.WriteLine(
-                //    "Button: CreateParams.ExStyle (before) =" + cp.ExStyle);
                 cp.ExStyle = 0x00000004; //WS_EX_NOPARENTNOTIFY
-                //System.Diagnostics.Debug.WriteLine(
-                //    "Button: CreateParams.ExStyle (after) =" + cp.ExStyle);
                 return cp;
             }
         }
 
+        private void UpdateAppearance()
+        {
+            if (m_wasMouseDown)
+            {
+                m_colorTop = Color.DimGray;
+                m_colorMiddle = Color.DimGray;
+                m_colorBottom = Color.Black;
+                m_colorBorder = Color.Gray;
+                m_colorText = Color.White;
+                m_buttonBorderStyle = ButtonBorderStyle.Inset;
+            }
+            else
+            {
+                m_colorTop = Color.LightGray;
+                m_colorMiddle = Color.DimGray;
+                m_colorBottom = Color.Black;
+                m_colorBorder = Color.Gray;
+                m_colorText = Color.White;
+                m_buttonBorderStyle = ButtonBorderStyle.Outset;
+            }
+
+        }
+
         protected override void OnPaint(PaintEventArgs pe)
         {
-            // Calling the base class OnPaint
             base.OnPaint(pe);
-            //base.OnPaintBackground;
 
-            // create the first transparent colours
-            //Color c0 = Color.FromArgb(colorTransparentcy, Color0);
-            //Color c1 = Color.FromArgb(colorTransparentcy, Color1);
-            Color c0 = Color.LightGray;
-            Color c1 = Color.Black;
             SizeF sizeF =
-                new SizeF(this.Size.Width - 3.0f, this.Size.Height / 2 - 2.0f);
-            //PointF pointF;
-            // getting rectangle to fill
-            //for (int i = 0; i < 3; i++)
-            {
-                //float percentage = ClientRectangle.Width * 0.5f;
-                RectangleF pRect = new RectangleF(new PointF(2.0f, 2.0f), sizeF);
-                Brush b = new LinearGradientBrush
-                    (pRect, c0, c1, System.Drawing.Drawing2D.LinearGradientMode.Vertical); //90度 (垂直)
+                new SizeF(
+                    (float)ClientRectangle.Width,
+                    (float)ClientRectangle.Height / 2.0f);
 
-                pe.Graphics.FillRectangle(b, pRect);
-                
+            RectangleF rectF = new RectangleF(new PointF(0.0f, 0.0f), sizeF);
+            Brush b = new LinearGradientBrush(
+                rectF, m_colorTop, m_colorMiddle,
+                    LinearGradientMode.Vertical);
+            pe.Graphics.FillRectangle(b, rectF);
 
-                pRect = new RectangleF(new PointF(2.0f, sizeF.Height + 2.0f), sizeF);
-                b = new LinearGradientBrush
-                    (pRect, c1, c1, System.Drawing.Drawing2D.LinearGradientMode.Vertical); //90度 (垂直)
-                pe.Graphics.FillRectangle(b, pRect);
+            rectF = new RectangleF(
+                new PointF(0.0f, sizeF.Height), sizeF);
+            b = new System.Drawing.SolidBrush(m_colorBottom);
+            pe.Graphics.FillRectangle(b, rectF);
 
-                Brush foreBrush = new SolidBrush(Color.White);
-                SizeF size2 = pe.Graphics.MeasureString(Text, Font);
-                PointF pt = new PointF((Width - size2.Width) / 2, (Height - size2.Height) / 2);
-                
-                pe.Graphics.DrawString(Text, Font, foreBrush, pt);
-            }
+            b = new SolidBrush(m_colorText);
+            sizeF = pe.Graphics.MeasureString(Text, Font);
+            PointF pt = new PointF(
+                (Width - sizeF.Width) / 2.0f, (Height - sizeF.Height) / 2.0f);
+            pe.Graphics.DrawString(Text, Font, b, pt);
+
+            b.Dispose();
+            ControlPaint.DrawBorder(
+                pe.Graphics, ClientRectangle,
+                    m_colorBorder, m_buttonBorderStyle);
         }
 
         protected void MyOnMouseDown()
         {
-            m_origForeColor = this.ForeColor;
-            m_origBackColor = this.BackColor;
-            this.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.BackColor = System.Drawing.Color.Transparent;
             m_wasMouseDown = true;
+            UpdateAppearance();
         }
 
         protected override void OnMouseUp(MouseEventArgs mevent)
@@ -118,113 +117,20 @@ namespace CSharpFormLibrary
             base.OnMouseUp(mevent);
             if (m_wasMouseDown)
             {
-                this.BackColor = m_origBackColor;
-                this.ForeColor = m_origForeColor;
                 m_wasMouseDown = false;
+                UpdateAppearance();
             }
         }
-/*
-        private void invokeColorChange()
-        {
-            if (ColorChanged != null)
-            {
-                EventArgs e = new EventArgs();
-                ColorChanged(this, e);
-            }
-        }*/
 
         protected override void WndProc(ref Message m)
         {
-            /*
-            msgCounter++;
-            System.Diagnostics.Debug.WriteLine(
-                "Button[" + msgCounter + "]: (before base) Msg->\t" +
-                Enum.GetName(typeof(UtilFuncs.WindowsMessage), m.Msg) +
-                "(0x" + m.Msg.ToString("X") + ")");
-             */
-
-            /*
-            if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_IME_SETCONTEXT)
-            {
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: Result->\t0x" + m.Result.ToString("X"));
-
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: LParam->\t0x" + m.LParam.ToString("X"));
-
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: WParam->\t0x" + m.WParam.ToString("X"));
-            }
-             */
-
             base.WndProc(ref m);
-
-            /*
-            System.Diagnostics.Debug.WriteLine(
-                "Button[" + msgCounter + "]: (after base) Msg->\t" +
-                Enum.GetName(typeof(UtilFuncs.WindowsMessage), m.Msg) +
-                "(0x" + m.Msg.ToString("X") + ")");
-             */
 
             if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_MOUSEACTIVATE)
             {
-                /*
-                System.Diagnostics.Debug.WriteLine("==================");
-                System.Diagnostics.Debug.WriteLine("WM_MOUSEACTIVATE");
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: this.Handle->\t0x" + this.Handle.ToString("X"));
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: Parent.Handle->\t0x" + this.Parent.Handle.ToString("X"));
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: App.Handle->\t0x" + m_AppHWnd.ToString("X"));
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: m.HWnd->\t0x" + m.HWnd.ToString("X"));
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: LParam->\t0x" + m.LParam.ToString("X"));
-
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: WParam (before)->\t0x" + m.WParam.ToString("X"));
-                m.WParam = this.Handle;
-                //m.WParam = new IntPtr((long)m_AppHWnd);
-                //m.WParam = IntPtr.Zero;
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: WParam (after)->\t0x" + m.WParam.ToString("X"));
-                 */
-
                 m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
-                //m.Result = (IntPtr)MA_NOACTIVATE;
-
-                //System.Diagnostics.Debug.WriteLine(
-                //    "Button[" + msgCounter + "]: Result->\t0x" + m.Result.ToString("X"));
-
                 MyOnMouseDown();
             }
-            /*
-            else if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_SETCURSOR)
-            {
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: (before) Result->\t0x" + m.Result.ToString("X"));
-
-                m.Result = new IntPtr(1);
-
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: (after) Result->\t0x" + m.Result.ToString("X"));
-
-            }
-            else if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_IME_NOTIFY)
-            {
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: Result->\t0x" + m.Result.ToString("X"));
-
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: LParam->\t0x" + m.LParam.ToString("X"));
-
-                System.Diagnostics.Debug.WriteLine(
-                    "Button[" + msgCounter + "]: WParam->\t0x" + m.WParam.ToString("X"));
-            }
-            //else
-            //    base.WndProc(ref m);
-             */
         }
     }
 }
