@@ -6,17 +6,22 @@
 
 #pragma managed
 
-#using <mscorlib.dll>
-#using <System.dll>
-#using <System.Windows.Forms.dll>
+//<comment author='b6s'>
+//If you want to use "#using" here instead of adding references in
+//the project property, another project property "Resolve #using referecen"
+//should also be set to "..\CSharpFormLibrary\bin\Debug"
+//#using <mscorlib.dll>
+//#using <System.dll>
+//#using <System.Windows.Forms.dll>
 //#using <CSharpFormLibrary.dll>
+//</comment>
 
 using namespace System;
 using namespace System::Diagnostics;
-using namespace System::Collections;
 using namespace System::Windows::Forms;
+using namespace System::Collections;
 using namespace std;
-//using namespace CSharpFormLibrary;
+using namespace CSharpFormLibrary;
 
 ref class CSharpSymbolWrapper{
 private:
