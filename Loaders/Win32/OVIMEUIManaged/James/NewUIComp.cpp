@@ -41,9 +41,9 @@ HWND _CreateCompPage()//create
 		CSharpCompWrapper::Instance()->Handle)->ToPointer());
 }
 
-void _SetCompString(const std::wstring& Comp)
+void _SetCompString(const wchar_t* compStr)
 {
-	CSharpCompWrapper::Instance()->SetComp(gcnew String(Comp.c_str()));
+	CSharpCompWrapper::Instance()->SetComp(gcnew String(compStr));
 }
 
 void _SetCompCaretPosX(int x)

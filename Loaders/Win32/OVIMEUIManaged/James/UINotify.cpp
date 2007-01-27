@@ -192,7 +192,6 @@ void UIMoveNotifyWindow(int X, int Y)
 void UISetNotifyStr(wchar_t* lpStr)
 {
 	free(lpNotifyStr);
-	lpNotifyStr = wcsdup(lpStr);	
-	std::wstring wsNotifyStr(lpNotifyStr);		
-	_SetNotifyString(wsNotifyStr);		
+	lpNotifyStr = wcsdup(lpStr);
+	_SetNotifyString(lpNotifyStr);
 }

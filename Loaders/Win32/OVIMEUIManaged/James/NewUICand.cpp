@@ -49,10 +49,10 @@ HWND _CreateCandiPageWithHandle(HWND hwnd) //create with handle (x)
 		CSharpCandiWrapper::Instance()->Handle)->ToPointer());
 }
 
-void _SetCandiString(const wstring& candidate)
+void _SetCandiString(const wchar_t* candiStr)
 {		
 	CSharpCandiWrapper::Instance()
-		->SetCandidates(gcnew String(candidate.c_str()));
+		->SetCandidates(gcnew String(candiStr));
 }
 
 void _ShowCandiPage()

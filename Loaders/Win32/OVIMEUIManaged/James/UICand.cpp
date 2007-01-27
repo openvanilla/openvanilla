@@ -1,10 +1,6 @@
-//#define OV_DEBUG  
 #include <stdio.h>
 #include "PCMan.h"
-#include "AVDictionary.h"
-#include "AVConfig.h"
 #include "DotNETHeader.h"
-//#include "OVIME.h"
 
 #define	ITEMS_PER_ROW	4
 
@@ -26,7 +22,6 @@ LRESULT APIENTRY CandWndProc(HWND hWnd,
 		case WM_MOUSEMOVE:
 		case WM_LBUTTONUP:
 		case WM_RBUTTONUP:
-			murmur("MOUSE MSG");
 			DragUI(hWnd, NULL, msg, wParam, lParam, FALSE);
 			if ((msg == WM_SETCURSOR) &&
 					(HIWORD(lParam) != WM_LBUTTONDOWN) &&
@@ -47,7 +42,6 @@ LRESULT APIENTRY CandWndProc(HWND hWnd,
 
 void UICreateCandWindow(HWND hUIWnd)
 {
-	murmur("UICreateCandWindow");
 	if (!IsWindow(uiCand.hWnd))
 	{
 		
@@ -66,12 +60,8 @@ void UICreateCandWindow(HWND hUIWnd)
 		*/
 		//</comment>
 
-		Watch watch;
-		watch.start();
 		//uiCand.hWnd = _CreateCandiPage();		
 		uiCand.hWnd = _CreateCandiPageWithHandle(hUIWnd);		
-		watch.stop();
-		murmur("%1.3f sec:\tC# candidate window, create", watch.getSec());
 
 		//uiCand.sz.cx = sz.cx + 2;
 		//uiCand.sz.cy = sz.cy + 4;
@@ -119,11 +109,7 @@ BOOL GetCandPosFromCompWnd(LPSIZE lpsz)
 }
 void UISetCandStr(wchar_t* lpStr)
 {
-	Watch watch;
-	watch.start();
 	_ClearCandiPage();
-	watch.stop();
-	murmur("%1.3f sec:\tC# candidate window, clear", watch.getSec());
 	/*	
 	lpCandStr = wcsdup(lpStr);
 	std::wstring wsCandStr(lpCandStr);
@@ -140,10 +126,7 @@ void UISetCandStr(wchar_t* lpStr)
 	if(wcslen(lpStr))
 	{
 		lpCandStr = wcsdup(lpStr);
-		std::wstring wsCandStr(lpCandStr);
-		watch.start();
-		_SetCandiString(wsCandStr);
-		watch.stop();
+		_SetCandiString(lpCandStr);
 	}
 	else
 	{
@@ -169,17 +152,15 @@ void UIMoveCandWindow(int X, int Y)
 				newX=screenrc.right-100;
 			if( newY+200 > screenrc.bottom )			
 				newY=Y-190;
-			Watch watch;
-			watch.start();
 			_MoveCandiPage(newX,newY);				
 			//uiCand.pt.x=newX;
 			//uiCand.pt.y=newY;
-			watch.stop();
-			murmur("%1.3f sec:\tC# candidate window, move to (%d,%d)", watch.getSec(),newX,newY);
 		}		
 	}
 }
 
+//<comment author='b6s'>Deprecated.
+#if 0
 void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 {
 	murmur("UIMoveCandWindow_OLD");
@@ -227,14 +208,8 @@ void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 			return;
 		}
 
-		Watch watch;
-		watch.start();
-		std::wstring wsCandStr(lpCandStr);
-		_SetCandiString(wsCandStr);
+		_SetCandiString(lpCandStr);
 		
-		watch.stop();
-		murmur("%1.3f sec:\tC# candidate window, set string", watch.getSec());
-		murmur("set candidate string:%s", lpCandStr);
 		//<comment author='b6s'>
 		//UIShowCandWindow();
 		//</comment>
@@ -296,12 +271,7 @@ void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 				sz.cx,
 				sz.cy,
 				TRUE);*/
-			Watch watch;
-			watch.start();
 			_MoveCandiPage(uiCand.pt.x,uiCand.pt.y);
-			watch.stop();
-			murmur("%1.3f sec:\tC# candidate window, move", watch.getSec());
-			murmur("uiCand.pt.x:%i, uiCand.pt.y:%i", uiCand.pt.x,uiCand.pt.y);
 			//<comment author='b6s'>
 			// Test
 			//UIShowCandWindow();
@@ -317,12 +287,7 @@ void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 				sz.cy,
 				TRUE);*/
 
-			Watch watch;
-			watch.start();		
 			_MoveCandiPage(uiCand.pt.x,uiCand.pt.y);
-			watch.stop();
-			murmur("%1.3f sec:\tC# candidate window, move", watch.getSec());
-			murmur("From CompWnd, uiCand.pt.x:%i, uiCand.pt.y:%i", uiCand.pt.x,uiCand.pt.y);
 			//<comment author='b6s'>
 			// Test
 			//UIShowCandWindow();
@@ -336,6 +301,8 @@ void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 	}
 	
 }
+#endif
+//</comment>
 
 void PaintCandWindow(HWND hCandWnd)
 {
@@ -411,11 +378,7 @@ void UIShowCandWindow()
 {
 	murmur("UIShowCandWindow");
 	if (IsWindow(uiCand.hWnd)) {
-		Watch watch;
-		watch.start();
 		_ShowCandiPage();
-		watch.stop();
-		murmur("%1.3f sec:\tC# candidate window, show", watch.getSec());
 	}
 }
 
@@ -423,20 +386,10 @@ void UIHideCandWindow()
 {
 	murmur("UIHideCandWindow");
 	if (IsWindow(uiCand.hWnd)) {
-		
-		Watch watch;
-		watch.start();
 		_HideCandiPage();
-		watch.stop();
-		murmur("%1.3f sec:\tC# candidate window, hide", watch.getSec());
-
 	}
 }
 void UIExpandCandi()
 {
-	murmur("UIExpandCand");
-	Watch watch;
-	watch.start();
 	_ExpandCandi();
-	watch.stop();	
 }

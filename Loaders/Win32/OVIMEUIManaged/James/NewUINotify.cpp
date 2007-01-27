@@ -51,9 +51,9 @@ HWND _CreateNotifyPageWithHandle(HWND hwnd)//create
 		CSharpNotifyWrapper::Instance()->Handle)->ToPointer());
 }
 
-void _SetNotifyString(const wstring& notifyStr)
+void _SetNotifyString(const wchar_t* notifyStr)
 {
-	CSharpNotifyWrapper::Instance()->SetNotifyStr(gcnew String(notifyStr.c_str()));
+	CSharpNotifyWrapper::Instance()->SetNotifyStr(gcnew String(notifyStr));
 }
 
 void _ShowNotifyPage()

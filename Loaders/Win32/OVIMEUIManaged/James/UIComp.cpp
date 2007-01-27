@@ -1,4 +1,4 @@
-#define OV_DEBUG
+//#define OV_DEBUG
 #include <stdio.h>
 #include "PCMan.h"
 #include "DotNETHeader.h"
@@ -82,27 +82,18 @@ void UIMoveCompWindow(int X, int Y)
 }
 void UISetCompStr(wchar_t* lpStr)
 {
-	Watch watch;
-	watch.start();
 	_ClearCompPage();
-	watch.stop();
-	//	murmur("%1.3f sec:\tC# comp window, clear", watch.getSec());
 
 	if(wcslen(lpStr))
 	{
 		lpCompStr = wcsdup(lpStr);
-		std::wstring wsCompStr(lpCompStr);
-		watch.start();
-		_SetCompString(wsCompStr);
-		watch.stop();
+		_SetCompString(lpCompStr);
 	}
 	else
 	{
 		_ClearCompPage();
 		//UIHideCompWindow();
 	}
-
-	//	murmur("%1.3f sec:\tC# comp window, setstring", watch.getSec());
 }
 void UIClearCompStr()
 {
@@ -129,7 +120,6 @@ int CompIndexToXPos(int index)
 
 void PaintCompWindow(HWND hCompWnd)
 {
-	//	murmur("PaintCompWindow");
 #if 0
 	PAINTSTRUCT ps;
 	HDC hDC;
@@ -218,14 +208,12 @@ void UISetMarkFrom(int i)
 {
 	CompSelStart = i;
 	_SetCompMarkFrom(CompSelStart);
-	murmur( "\t---> UISetMarkFrom Start %d", CompSelStart);
 }
 
 void UISetMarkTo(int i)
 {
 	CompSelEnd = i;
 	_SetCompMarkTo(CompSelEnd);
-	murmur( "\t---> UISetMarkFrom End %d", CompSelEnd);
 }
 
 int UIGetHeight()

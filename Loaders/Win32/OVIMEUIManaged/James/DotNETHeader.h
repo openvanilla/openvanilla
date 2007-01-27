@@ -10,11 +10,10 @@ void _HideStatusPage();
 void _SetStatusChiEng(bool);
 void _SetStatusSimpifiedOrTraditional(bool);
 void _SetStatusModString(int);
-void _SetStatusMenuModString(const std::wstring&);
+void _SetStatusMenuModString(const wchar_t* menuModStr);
 void _ClearStatusMenuModString();
 void _SetStatusAppHWnd(HWND hwnd);
 int _GetStatusSelectedModuleIndex();
-void _SetUserDir();
 void _RotateStatusSelectedModule();
 
 //composition
@@ -25,13 +24,13 @@ int _GetCaretPosX();
 void _HideCompPage();
 void _ClearCompPage();
 void _MoveCompPage(int x, int y);
-void _SetCompString(const std::wstring&);
+void _SetCompString(const wchar_t* compStr);
 void _SetCompCaretPosX(int);
 void _SetCompMarkFrom(int);
 void _SetCompMarkTo(int);
 
 //candidate
-void _SetCandiString(const std::wstring& candidate);
+void _SetCandiString(const wchar_t* candiStr);
 void _EndCandiPage();
 HWND _CreateCandiPage();
 HWND _CreateCandiPageWithHandle(HWND hwnd);
@@ -42,7 +41,7 @@ void _ClearCandiPage();
 void _ExpandCandi();
 
 //Symbol
-void _SetSymbolString(const std::wstring& candidate);
+void _SetSymbolString(const wchar_t* symbolStr);
 void _EndSymbolPage();
 HWND _CreateSymbolPage();
 HWND _CreateSymbolPageWithHandle(HWND hwnd);
@@ -55,7 +54,7 @@ void _ExpandSymbol();
 
 //notify
 void _ShowNotifyPageArray(const std::vector<std::wstring>& candidates);
-void _SetNotifyString(const std::wstring& candidate);
+void _SetNotifyString(const wchar_t* notifyStr);
 void _EndNotifyPage();
 int _GetNotifyValue();
 HWND _CreateNotifyPage();

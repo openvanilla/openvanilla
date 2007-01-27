@@ -49,10 +49,10 @@ HWND _CreateSymbolPageWithHandle(HWND hwnd)//create with handle
 		CSharpSymbolWrapper::Instance()->Handle)->ToPointer());
 }
 
-void _SetSymbolString(const wstring& candidate)
+void _SetSymbolString(const wchar_t* symbolStr)
 {		
 	CSharpSymbolWrapper::Instance()
-		->SetCandidates(gcnew String(candidate.c_str()));
+		->SetCandidates(gcnew String(symbolStr));
 }
 
 void _ShowSymbolPage()

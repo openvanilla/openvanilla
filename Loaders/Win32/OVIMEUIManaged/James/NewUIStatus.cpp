@@ -77,10 +77,10 @@ void _ClearStatusMenuModString()
 	CSharpStatusWrapper::Instance()->ClearMenuModString();	
 }
 
-void _SetStatusMenuModString(const std::wstring& statusModName)
+void _SetStatusMenuModString(const wchar_t* menuModStr)
 {
 	CSharpStatusWrapper::Instance()->SetMenuModString(
-		gcnew String(statusModName.c_str()));	
+		gcnew String(menuModStr));	
 }
 
 void _HideStatusPage()
@@ -91,16 +91,6 @@ void _HideStatusPage()
 int _GetStatusSelectedModuleIndex()
 {
 	return CSharpStatusWrapper::Instance()->GetSelectedModuleIndex();	
-}
-
-void _SetUserDir()
-{	
-	AVConfig *cfg= new AVConfig();
-	const char *baseDir=cfg->getBaseDir();
-	const char *moduleDir=cfg->getModuleDir();
-	const char *userDir=cfg->getUserDir();
-	CSharpStatusWrapper::Instance()->
-		SetDir(gcnew String(baseDir),gcnew String(moduleDir),gcnew String(userDir));		
 }
 
 void _RotateStatusSelectedModule()

@@ -1,21 +1,9 @@
-#define OV_DEBUG
+//#define OV_DEBUG
 #include <stdio.h>
 #include "PCMan.h"
 #include "DotNETHeader.h"
 #include "resource.h"
 
-#pragma managed
-#using <mscorlib.dll>
-#using <System.dll>
-#using <System.Windows.Forms.dll>
-using namespace System;
-using namespace System::Reflection;
-using namespace System::Windows::Forms;
-
-#pragma unmanaged
-//	SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
-//  This standard toolbar message provided by Windows has some known bugs.
-//  So I implemented a new function myself to prevent the problem.
 void GetToolbarSize(HWND toolbar, SIZE *sz)
 {
 	sz->cx = sz->cy = 0;
@@ -43,7 +31,6 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 	switch (msg)
 	{
 		case WM_PAINT:
-			murmur("\tWM_PAINT, status window");
 			PaintStatusWindow(hWnd);
 			break;
 		case WM_SETCURSOR:
@@ -67,13 +54,11 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 			if ((msg == WM_SETCURSOR) &&
 				(HIWORD(lParam) != WM_LBUTTONDOWN) &&
 				(HIWORD(lParam) != WM_RBUTTONDOWN)) {
-				murmur("\tStatusWndProc: WM_SETCURSOR");
 				return DefWindowProc(hWnd, msg, wParam, lParam);
 			}
 
 			if ((msg == WM_LBUTTONUP) || (msg == WM_RBUTTONUP))
 			{
-				murmur("\tStatusWndProc: WM_LBUTTONUP");
 				SetWindowLong(hWnd, FIGWL_MOUSE, 0L);
 				if(msg == WM_RBUTTONUP) {
 					CurrentIC++;
@@ -85,7 +70,6 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 			break;
 		case WM_NOTIFY:
 			{
-				murmur("\t WM_NOTIFY, status window");
 				switch( ((NMHDR*)lParam)->code ) 
 				{
 				case TTN_GETDISPINFO:
@@ -104,15 +88,12 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 			break;
 		case WM_SIZE:
 			{
-				murmur("\tWM_SIZE, status window");
 				int cx = LOWORD(lParam);
 				int cy = HIWORD(lParam);
 				MoveWindow( hToolbar, 12, 2, cx-13, cy-4, TRUE);
 			}
 			break;
 		case WM_COMMAND:
-
-			murmur("\tWM_COMMAND, status window");
 			id = LOWORD(wParam);
 			switch( id )
 			{
@@ -177,7 +158,6 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 				{
 					id -= ID_IME_LIST_FIRST;
 					CurrentIC = id;
-					murmur("\tCurrentIC in ID_IME %d", CurrentIC);
 
 					TBBUTTONINFO tbi;	tbi.cbSize = sizeof(tbi);
 					tbi.dwMask = TBIF_TEXT;		tbi.pszText = IC.at(CurrentIC);
@@ -223,7 +203,6 @@ void UICreateStatusWindow(HWND hUIWnd)
 
 		//create form:
 		uiStatus.hWnd = _CreateStatusPage();	
-		murmur("\tuiStatus.hWnd=%x",uiStatus.hWnd);
 	
 	    //設定C# Status 內 m_AppHWnd 
 	    _SetStatusAppHWnd(hUIWnd); 
@@ -240,13 +219,8 @@ void UICreateStatusWindow(HWND hUIWnd)
 		_SetStatusSimpifiedOrTraditional(isTraditional);  		
 
 		//設定 hIMEWnd (?)
-		murmur("\t before set hIMEWnd: hIMEWnd=%x,hUIWnd=%x",hIMEWnd,hUIWnd);
 		hIMEWnd = hUIWnd; //存到 hIMEWnd 之後會拿來判斷			
-		murmur("\t after set hIMEWnd: hIMEWnd=%x,hUIWnd=%x",hIMEWnd,hUIWnd);
 		
-		//設定 registry 
-		_SetUserDir();	
-
 		//移動到螢幕右下方
 		SystemParametersInfo(SPI_GETWORKAREA,
 				0,
@@ -259,15 +233,14 @@ void UICreateStatusWindow(HWND hUIWnd)
 	return;
 }
 
-wstring convertUtf8NameToUcs2(const char* name)
+const wchar_t* convertUtf8NameToUcs2(const char* name)
 {
 	wchar_t *modCurrentName;
 	wchar_t modNameUCS2[1024];
 	MultiByteToWideChar(
 		CP_UTF8, 0, name, (int)strlen(name)+1, modNameUCS2, 1024);
 	modCurrentName = modNameUCS2;
-	std::wstring wsStatusStr(wcsdup(modCurrentName));
-	return wsStatusStr;
+	return wcsdup(modCurrentName);
 }
 
 void UISetStatusModStrMenuEach(const char* newName)
