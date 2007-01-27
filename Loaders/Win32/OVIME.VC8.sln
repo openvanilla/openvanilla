@@ -19,11 +19,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMEUIManaged", "OVIMEUIMa
 		{21FC3D4F-8918-4C03-8881-EC6C54DB3504} = {21FC3D4F-8918-4C03-8881-EC6C54DB3504}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMGeneric", "..\..\Modules\OVIMGeneric\OVIMGeneric.VC8.vcproj", "{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxmlSTL", "tinyxml\tinyxmlSTL.VC8.vcproj", "{B2584669-D88A-4BC7-B638-C6937AFC823F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMTobaccoOld", "..\..\..\branches\0.7.2-Module-OVIMTobacco-Old\OVIMTobaccoOld\OVIMTobaccoOld.VC8.vcproj", "{06DD6384-CF74-4115-AFC9-E6BA2D818E12}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxmlSTL", "tinyxml\tinyxmlSTL.VC8.vcproj", "{B2584669-D88A-4BC7-B638-C6937AFC823F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,26 +73,6 @@ Global
 		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3C}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3C}.Release|Win32.ActiveCfg = Release|Win32
 		{E57C7D8A-31EC-4839-BBB1-91D54A0BEF3C}.Release|Win32.Build.0 = Release|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Debug|Win32.ActiveCfg = Debug|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Debug|Win32.Build.0 = Debug|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Release|Any CPU.ActiveCfg = Release|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Release|Win32.ActiveCfg = Release|Win32
-		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Release|Win32.Build.0 = Release|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Win32.ActiveCfg = Debug|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Win32.Build.0 = Debug|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Any CPU.ActiveCfg = Release|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Win32.ActiveCfg = Release|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Win32.Build.0 = Release|Win32
 		{B2584669-D88A-4BC7-B638-C6937AFC823F}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{B2584669-D88A-4BC7-B638-C6937AFC823F}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{B2584669-D88A-4BC7-B638-C6937AFC823F}.Debug|Mixed Platforms.Build.0 = Debug|Win32
@@ -105,6 +83,16 @@ Global
 		{B2584669-D88A-4BC7-B638-C6937AFC823F}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{B2584669-D88A-4BC7-B638-C6937AFC823F}.Release|Win32.ActiveCfg = Release|Win32
 		{B2584669-D88A-4BC7-B638-C6937AFC823F}.Release|Win32.Build.0 = Release|Win32
+		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Win32.ActiveCfg = Debug|Win32
+		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Win32.Build.0 = Debug|Win32
+		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Any CPU.ActiveCfg = Release|Win32
+		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Win32.ActiveCfg = Release|Win32
+		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

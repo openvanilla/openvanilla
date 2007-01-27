@@ -1,4 +1,4 @@
-#define OV_DEBUG
+//#define OV_DEBUG
 #include "OVIME.h"
 #include "AVKeyCode.h"
 #include "ExtraStructs.h"

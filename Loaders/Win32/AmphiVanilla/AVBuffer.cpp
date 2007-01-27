@@ -1,4 +1,4 @@
-#define OV_DEBUG
+//#define OV_DEBUG
 #include "OVUtility.h"
 #include "AVBuffer.h"
 
