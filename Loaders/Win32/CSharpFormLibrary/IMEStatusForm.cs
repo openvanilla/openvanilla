@@ -238,7 +238,6 @@ namespace CSharpFormLibrary
             // 
             // buttonMenu
             // 
-            this.buttonMenu.AppHWnd = ((ulong)(0ul));
             this.buttonMenu.AutoSize = true;
             this.buttonMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.buttonMenu.BackColor = System.Drawing.Color.Transparent;
@@ -256,7 +255,6 @@ namespace CSharpFormLibrary
             // 
             // buttonHantHans
             // 
-            this.buttonHantHans.AppHWnd = ((ulong)(0ul));
             this.buttonHantHans.BackColor = System.Drawing.Color.Transparent;
             this.buttonHantHans.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonHantHans.Font = new System.Drawing.Font("PMingLiU", 12F);
@@ -272,7 +270,6 @@ namespace CSharpFormLibrary
             // 
             // buttonZhEn
             // 
-            this.buttonZhEn.AppHWnd = ((ulong)(0ul));
             this.buttonZhEn.BackColor = System.Drawing.Color.Transparent;
             this.buttonZhEn.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonZhEn.Font = new System.Drawing.Font("PMingLiU", 12F);
@@ -287,7 +284,6 @@ namespace CSharpFormLibrary
             // 
             // buttonPref
             // 
-            this.buttonPref.AppHWnd = ((ulong)(0ul));
             this.buttonPref.BackColor = System.Drawing.Color.Transparent;
             this.buttonPref.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonPref.Font = new System.Drawing.Font("PMingLiU", 12F);

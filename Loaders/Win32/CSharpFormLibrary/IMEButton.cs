@@ -15,16 +15,16 @@ namespace CSharpFormLibrary
         private const int MA_NOACTIVATE = 0x0003;
         private const int MA_NOACTIVATEANDEAT = 0x0004;
         
-        private UInt64 m_AppHWnd;
         private bool m_wasMouseDown = false;
+        private bool m_wasButtonPressed = false;
 
-        private Color m_colorTop;
-        private Color m_colorMiddle;
-        private Color m_colorBottom;
-        private Color m_colorBorder;
-        private Color m_colorText;
+        private Color m_colorTop = Color.LightGray;
+        private Color m_colorMiddle = Color.DimGray;
+        private Color m_colorBottom = Color.Black;
+        private Color m_colorBorder = Color.Gray;
+        private Color m_colorText = Color.White;
 
-        private ButtonBorderStyle m_buttonBorderStyle;
+        private ButtonBorderStyle m_buttonBorderStyle = ButtonBorderStyle.Outset;
 
         public IMEButton()
         {
@@ -32,13 +32,7 @@ namespace CSharpFormLibrary
                 ControlStyles.UserPaint |
                 ControlStyles.AllPaintingInWmPaint |
                 ControlStyles.OptimizedDoubleBuffer, true);
-            UpdateAppearance();
-        }
-
-        public UInt64 AppHWnd
-        {
-            get { return m_AppHWnd; }
-            set { m_AppHWnd = value; }
+            Application.EnableVisualStyles();
         }
 
         protected override CreateParams CreateParams
@@ -61,17 +55,22 @@ namespace CSharpFormLibrary
                 m_colorBorder = Color.Gray;
                 m_colorText = Color.White;
                 m_buttonBorderStyle = ButtonBorderStyle.Inset;
+
+                m_wasButtonPressed = true;
             }
             else
             {
-                m_colorTop = Color.LightGray;
-                m_colorMiddle = Color.DimGray;
-                m_colorBottom = Color.Black;
-                m_colorBorder = Color.Gray;
-                m_colorText = Color.White;
-                m_buttonBorderStyle = ButtonBorderStyle.Outset;
-            }
+                if(m_wasButtonPressed) {
+                    m_colorTop = Color.LightGray;
+                    m_colorMiddle = Color.DimGray;
+                    m_colorBottom = Color.Black;
+                    m_colorBorder = Color.Gray;
+                    m_colorText = Color.White;
+                    m_buttonBorderStyle = ButtonBorderStyle.Outset;
+                }
 
+                m_wasButtonPressed = false;
+            }
         }
 
         protected override void OnPaint(PaintEventArgs pe)
@@ -115,11 +114,8 @@ namespace CSharpFormLibrary
         protected override void OnMouseUp(MouseEventArgs mevent)
         {
             base.OnMouseUp(mevent);
-            if (m_wasMouseDown)
-            {
-                m_wasMouseDown = false;
-                UpdateAppearance();
-            }
+            m_wasMouseDown = false;
+            UpdateAppearance();
         }
 
         protected override void WndProc(ref Message m)
