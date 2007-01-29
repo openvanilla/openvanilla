@@ -102,6 +102,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="cd &quot;$(SolutionDir)&quot; &amp;&amp; &quot;.\deploy-debug.bat&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -192,6 +193,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="cd &quot;$(SolutionDir)&quot; &amp;&amp; &quot;.\deploy-release.bat&quot;"
 			/>
 		</Configuration>
 	</Configurations>

@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxmlSTL", "tinyxml\tinyx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMTobaccoOld", "..\..\..\branches\0.7.2-Module-OVIMTobacco-Old\OVIMTobaccoOld\OVIMTobaccoOld.VC8.vcproj", "{06DD6384-CF74-4115-AFC9-E6BA2D818E12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GacUtil", "..\..\Utilities\GacUtil\GacUtil.csproj", "{5B57BD35-F14C-41AA-811C-5739873DEE7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,16 @@ Global
 		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Win32.ActiveCfg = Release|Win32
 		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Win32.Build.0 = Release|Win32
+		{5B57BD35-F14C-41AA-811C-5739873DEE7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B57BD35-F14C-41AA-811C-5739873DEE7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B57BD35-F14C-41AA-811C-5739873DEE7B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5B57BD35-F14C-41AA-811C-5739873DEE7B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5B57BD35-F14C-41AA-811C-5739873DEE7B}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{5B57BD35-F14C-41AA-811C-5739873DEE7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B57BD35-F14C-41AA-811C-5739873DEE7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B57BD35-F14C-41AA-811C-5739873DEE7B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5B57BD35-F14C-41AA-811C-5739873DEE7B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5B57BD35-F14C-41AA-811C-5739873DEE7B}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
