@@ -76,19 +76,20 @@ VS_VERSION_INFO VERSIONINFO
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "000004b0"
+        BLOCK "040404b0"
         BEGIN
+            VALUE "FileDescription", "中文 (繁體) - 開放香草輸入法平台"
             VALUE "FileVersion", "0, 7, 2, 1"
             VALUE "InternalName", "OVIME"
             VALUE "LegalCopyright", "BSD License"
             VALUE "OriginalFilename", "OVIME.ime"
-            VALUE "ProductName", " OpenVanilla Win32"
+            VALUE "ProductName", " OVIME"
             VALUE "ProductVersion", "0, 7, 2, 1"
         END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x0, 1200
+        VALUE "Translation", 0x404, 1200
     END
 END
 
