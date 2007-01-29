@@ -77,6 +77,7 @@ namespace CSharpFormLibrary
         {
             base.OnPaint(pe);
 
+            //draw 2-color gradient button
             SizeF sizeF =
                 new SizeF(
                     (float)ClientRectangle.Width,
@@ -93,6 +94,7 @@ namespace CSharpFormLibrary
             b = new System.Drawing.SolidBrush(m_colorBottom);
             pe.Graphics.FillRectangle(b, rectF);
 
+            //draw text
             b = new SolidBrush(m_colorText);
             sizeF = pe.Graphics.MeasureString(Text, Font);
             PointF pt = new PointF(

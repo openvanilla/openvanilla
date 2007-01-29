@@ -23,18 +23,30 @@ namespace CSharpFormLibrary
 		public const int SWP_NOMOVE = 2; // 0x0002 
 		public const int SWP_NOACTIVATE = 16; // 0x0010 
 		public const int SWP_SHOWWINDOW = 64; // 0x0040 
+        public const int SWP_HIDEWINDOW = 128; //0x0080
   
 		public static void ShowWindowTopMost(IntPtr handle) 
 		{ 
 			SetWindowPos( handle, (IntPtr) HWND_TOPMOST, 0, 0, 0, 0, 
 				SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE | SWP_SHOWWINDOW ); 
 		}
+
+        public static void HideWindowTopMost(IntPtr handle)
+        {
+            SetWindowPos(handle, (IntPtr)HWND_TOPMOST, 0, 0, 0, 0,
+               SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE | SWP_HIDEWINDOW);
+        }
  
 		public static void SetVisibleNoActivate(Form form, bool visible) 
-		{ 
-			if ( visible ) 
-				ShowWindowTopMost(form.Handle);
-			form.Visible = visible;
+		{
+            
+            if (visible)
+                ShowWindowTopMost(form.Handle);
+            form.Visible = visible;
+            /*else
+            {
+                HideWindowTopMost(form.Handle);                
+            }*/
 		} 
 
 		public const ulong HWND_BROADCAST = 0xFFFF;

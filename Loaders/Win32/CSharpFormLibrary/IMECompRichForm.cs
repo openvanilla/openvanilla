@@ -76,22 +76,28 @@ namespace CSharpFormLibrary
 
 		public void SetCaretX(int x)
 		{
+            /*StringBuilder sb =
+                new StringBuilder(this.richTextBox1.Text);
+            sb.Insert(x, "︳");
+            this.richTextBox1.Text = sb.ToString();*/
+
             caretPosIndex = x;
-            Point pt =
+            Point pt =             
                 this.richTextBox1.GetPositionFromCharIndex(caretPosIndex);
             caretPosX = pt.X + 6;
             this.label1.Left = caretPosX;
+            
             Point pt2 = 
                 this.richTextBox1.GetPositionFromCharIndex(
                     this.richTextBox1.Text.Length);
             if (this.Width - this.richTextBox1.Bounds.Left < pt2.X)
                 this.Width = pt2.X + 100;
-
+            /*
             if (compSelStart > 0 && compSelStart == compSelEnd) //已經組字
                 this.richTextBox1.Select(compSelStart - 1, 1);
             else //正在組字
                 this.richTextBox1.Select(compSelStart, compSelEnd - compSelStart);
-            this.richTextBox1.SelectionColor = Color.Red;
+            this.richTextBox1.SelectionColor = Color.Red;*/
         }
 
         public void SetCompMarkFrom(int x)
