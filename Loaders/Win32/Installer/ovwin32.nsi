@@ -563,12 +563,13 @@ Section -Post
   ${registry::Open} "${IME_ROOT_KEY}\${IME_KEY}" "/N='OVIME.ime' /G=1 /T=REG_SZ" $0
   ${registry::Find} $0 $1 $2 $3 $4
   StrLen $5 "${IME_KEY}"
+  IntOp $5 $5 - 1
   StrCpy $6 $1 "" $5
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key" "$6"
   System::Call "user32::LoadKeyboardLayout(t $6, i 1)"
   ;MessageBox MB_YESNO "若您是初次安裝，則須重新開機。是否要立刻重開機？" IDNO noreboot
   ;  Reboot
-noreboot:
+;noreboot:
 SectionEnd
 
 Function un.onUninstSuccess
@@ -584,6 +585,15 @@ FunctionEnd
 
 Section Uninstall
   
+  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"  
+  System::Call "user32::UnloadKeyboardLayout(t $0)"
+  DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}\$0"
+  
+  ${registry::Open} "${IME_CURRENT_USER}\" " /V=1 /S=1 /N='$0' /G=1 /T=REG_SZ" $9
+  ${registry::Find} $9 $1 $2 $3 $4
+  MessageBox MB_ICONINFORMATION|MB_OK "show 9:$9 1:$1 2:$2 3:$3 " IDOK +1
+  DeleteRegValue "${IME_CURRENT_USER}" "${IME_KEY_USER}" "$2"
+
   Delete "$SYSDIR\libltdl3.dll"
   Delete "$SYSDIR\sqlite3.dll"
   Delete "$SYSDIR\tinyxml.dll"
@@ -597,8 +607,6 @@ Section Uninstall
 
   RMDir "$SMPROGRAMS\OpenVanilla"
 
-  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
-  DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}\$0"
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   SetAutoClose true
 SectionEnd
