@@ -31,7 +31,18 @@ namespace CSharpFormLibrary
             //this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.richTextBox1 = new AdvRichTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            this.SuspendLayout();        
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.SystemColors.WindowText;
+            this.label1.Font = new System.Drawing.Font("PMingLiU", 1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));           
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Name = "label1";
+            this.label1.Bounds= new System.Drawing.Rectangle (4,0,1,22);
+            this.label1.TabIndex = 1;
+            this.label1.Text = " ";
+            this.label1.Parent = this;
             // 
             // richTextBox1
             // 
@@ -48,21 +59,11 @@ namespace CSharpFormLibrary
             this.richTextBox1.WordWrap = false;
             this.richTextBox1.Parent = this;
             // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("PMingLiU", 1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));           
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Bounds= new System.Drawing.Rectangle (4,0,1,22);
-            this.label1.TabIndex = 1;
-            this.label1.Text = " ";
-            this.label1.Parent = this;
-            // 
             // IMECompRichForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(146, 19);
-            this.ControlBox = false;
+            this.ControlBox = false;            
             this.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximumSize = new System.Drawing.Size(600, 25);
