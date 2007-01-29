@@ -543,6 +543,8 @@ SetOutPath "$WINDIR\"
   ;File "OpenVanilla\OVPreferences.exe"
   ;File "OpenVanilla\OVPreferences.exe.manifest"
   ;File "OpenVanilla\CSharpFormLibrary.dll"
+  nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
+  nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" install "$WINDIR\OpenVanilla\CSharpFormLibrary.dll"'
 SectionEnd
 
 Section -AdditionalIcons
@@ -584,7 +586,8 @@ Function un.onInit
 FunctionEnd
 
 Section Uninstall
-  
+  nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
+
   ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"  
   System::Call "user32::UnloadKeyboardLayout(t $0)"
   DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}\$0"
