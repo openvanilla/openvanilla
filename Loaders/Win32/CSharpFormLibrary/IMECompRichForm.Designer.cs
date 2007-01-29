@@ -28,7 +28,8 @@ namespace CSharpFormLibrary
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            //this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new AdvRichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
