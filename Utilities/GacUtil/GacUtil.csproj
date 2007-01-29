@@ -7,8 +7,8 @@
     <ProjectGuid>{5B57BD35-F14C-41AA-811C-5739873DEE7B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestPublish</RootNamespace>
-    <AssemblyName>TestPublish</AssemblyName>
+    <RootNamespace>GacUtil</RootNamespace>
+    <AssemblyName>GacUtil</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
