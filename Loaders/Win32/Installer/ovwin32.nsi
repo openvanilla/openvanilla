@@ -594,10 +594,11 @@ Section Uninstall
   
   ${registry::Open} "${IME_CURRENT_USER}\" " /V=1 /S=1 /N='$0' /G=1 /T=REG_SZ" $9
   ${registry::Find} $9 $1 $2 $3 $4
-  MessageBox MB_ICONINFORMATION|MB_OK "show 9:$9 1:$1 2:$2 3:$3 " IDOK +1
+  ;MessageBox MB_ICONINFORMATION|MB_OK "show 9:$9 1:$1 2:$2 3:$3 " IDOK +1
   DeleteRegValue "${IME_CURRENT_USER}" "${IME_KEY_USER}" "$2"
 
   Delete "$SYSDIR\libltdl3.dll"
+  Delete "$SYSDIR\libiconv-2.dll"
   Delete "$SYSDIR\sqlite3.dll"
   Delete "$SYSDIR\tinyxml.dll"
   Delete "$SYSDIR\OVIMEUI.DLL"
