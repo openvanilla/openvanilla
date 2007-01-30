@@ -14,6 +14,7 @@ namespace CSharpFormLibrary
         private const int MA_NOACTIVATE = 0x0003;
         private const int MA_NOACTIVATEANDEAT = 0x0004;
 
+        private int formInitWidth = 149;
         private int caretPosX = 0;
         private int caretPosIndex = 0;
         private int compSelStart = 0;
@@ -53,9 +54,10 @@ namespace CSharpFormLibrary
 
 		public void ClearComp()
 		{
-			this.richTextBox1.Clear();
+			this.richTextBox1.Text="";
             compSelStart = 0;
             compSelEnd = 0;
+            this.Width = formInitWidth;
 		}
 
         public void SetLocation(int x, int y)

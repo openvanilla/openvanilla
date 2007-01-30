@@ -62,7 +62,7 @@ namespace CSharpFormLibrary
             // IMECompRichForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(146, 19);
+            this.ClientSize = new System.Drawing.Size(formInitWidth, 19);
             this.ControlBox = false;            
             this.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

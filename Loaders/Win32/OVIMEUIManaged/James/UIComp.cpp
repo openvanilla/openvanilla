@@ -82,18 +82,17 @@ void UIMoveCompWindow(int X, int Y)
 }
 void UISetCompStr(wchar_t* lpStr)
 {
-	_ClearCompPage();
+	//_ClearCompPage();  //James:®³±¼, no need
 
 	if(wcslen(lpStr))
 	{
 		lpCompStr = wcsdup(lpStr);
 		_SetCompString(lpCompStr);
 	}
-	else
+	/*else  //James:®³±¼, no need
 	{
-		_ClearCompPage();
-		//UIHideCompWindow();
-	}
+		_ClearCompPage();		
+	}*/
 }
 void UIClearCompStr()
 {
