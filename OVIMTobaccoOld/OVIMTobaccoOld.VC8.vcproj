@@ -98,6 +98,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\Windows\OpenVanilla\Modules\&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -184,6 +185,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\Windows\OpenVanilla\Modules\&quot;"
 			/>
 		</Configuration>
 	</Configurations>
