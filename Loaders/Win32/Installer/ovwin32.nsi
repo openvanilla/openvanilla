@@ -428,7 +428,7 @@ Section $(SEC_DOTNET) SECDOTNET
       ;nsExec::ExecToStack '"$PLUGINSDIR\dotnetfx.exe" /q /c:"install.exe /noaspupgrade /q"'
       nsExec::ExecToStack '"$PLUGINSDIR\dotnetfx.exe" /q /c:"install.exe /noaspupgrade"'
       pop $DOTNET_RETURN_CODE
-      MessageBox MB_ICONINFORMATION|MB_OK "show dotnet return code:$DOTNET_RETURN_CODE" IDOK +1
+      ;MessageBox MB_ICONINFORMATION|MB_OK "show dotnet return code:$DOTNET_RETURN_CODE" IDOK +1
       ;Banner::destroy
       ;SetRebootFlag true
       ; silence the compiler
