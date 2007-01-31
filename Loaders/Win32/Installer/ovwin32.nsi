@@ -570,7 +570,7 @@ Section -Post
   ${registry::Open} "${IME_ROOT_KEY}\${IME_KEY}" "/N='OVIME.ime' /G=1 /T=REG_SZ" $0
   ${registry::Find} $0 $1 $2 $3 $4
   StrLen $5 "${IME_KEY}"
-  IntOp $5 $5 - 1
+  ;IntOp $5 $5 - 1
   StrCpy $6 $1 "" $5
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key" "$6"
   ${registry::Close} "$0"
