@@ -85,7 +85,7 @@ LangString DESC_MINUTE ${LANG_TradChinese} "分鐘"
 LangString DESC_SECOND ${LANG_TradChinese} "秒"
 LangString DESC_CONNECTING ${LANG_TradChinese} "連接中..."
 LangString DESC_DOWNLOADING ${LANG_TradChinese} "下載 %s"
-LangString DESC_SHORTDOTNET ${LANG_TradChinese} "Microsoft .Net Framework 2.0"
+LangString DESC_SHORTDOTNET ${LANG_TradChinese} ".Net Framework 2.0"
 LangString DESC_LONGDOTNET ${LANG_TradChinese} "Microsoft .Net Framework 2.0"
 LangString DESC_DOTNET_DECISION ${LANG_TradChinese} "安裝此輸入法之前，必須先安裝 $(DESC_SHORTDOTNET) $\n強烈建議您先安裝完 \
   $(DESC_SHORTDOTNET)$\n再繼續進行安裝輸入法。$\n若你想繼續安裝 \
@@ -102,9 +102,9 @@ LangString ERROR_DOTNET_INVALID_PATH ${LANG_TradChinese} "$(DESC_SHORTDOTNET) 安
   並未在以下路徑:$\n"
 LangString ERROR_DOTNET_FATAL ${LANG_TradChinese} "嚴重錯誤訊息發生在安裝 \
   $(DESC_SHORTDOTNET) 過程當中"
-LangString FAILED_DOTNET_INSTALL ${LANG_TradChinese} " $(PRODUCT_NAME) 將會繼續安裝 \
-  $\n 然而，部分功能必須等到 $(DESC_SHORTDOTNET)安裝完畢，才會正常運作"
-
+;LangString FAILED_DOTNET_INSTALL ${LANG_TradChinese} " $(PRODUCT_NAME) 將會繼續安裝 \
+;  $\n 然而，部分功能必須等到 $(DESC_SHORTDOTNET)安裝完畢，才會正常運作
+LangString FAILED_DOTNET_INSTALL ${LANG_TradChinese} "輸入法安裝終止，$\n必須等到 $(DESC_SHORTDOTNET)安裝完畢，才能正常進行安裝"
 ;LangString DESC_REMAINING ${LANG_ENGLISH} " (%d %s%s remaining)"
 ;LangString DESC_PROGRESS ${LANG_ENGLISH} "%d.%01dkB/s" ;"%dkB (%d%%) of %dkB @ %d.%01dkB/s"
 ;LangString DESC_PLURAL ${LANG_ENGLISH} "s"
@@ -372,11 +372,12 @@ Section $(SEC_DOTNET) SECDOTNET
     SetOutPath "$PLUGINSDIR"
     file /r "${DOTNETFILESDIR}\dotnetfx1033.exe"
     DetailPrint "$(DESC_INSTALLING) $(DESC_SHORTDOTNET)..."
-    Banner::show /NOUNLOAD "$(DESC_INSTALLING) $(DESC_SHORTDOTNET)..."
-    nsExec::ExecToStack '"$PLUGINSDIR\dotnetfx1033.exe" /q /c:"install.exe /noaspupgrade /q"'
+    ;Banner::show /NOUNLOAD "$(DESC_INSTALLING) $(DESC_SHORTDOTNET)..."
+    ;nsExec::ExecToStack '"$PLUGINSDIR\dotnetfx1033.exe" /q /c:"install.exe /noaspupgrade /q"'
+    nsExec::ExecToStack '"$PLUGINSDIR\dotnetfx1033.exe" /q /c:"install.exe /noaspupgrade"'
     pop $DOTNET_RETURN_CODE
-    Banner::destroy
-    SetRebootFlag true
+    ;Banner::destroy
+    ;SetRebootFlag true
     Goto lbl_NoDownloadRequired
     lbl_Not1033:
 !endif
@@ -423,11 +424,13 @@ Section $(SEC_DOTNET) SECDOTNET
  
     lbl_continue:
       DetailPrint "$(DESC_INSTALLING) $(DESC_SHORTDOTNET)..."
-      Banner::show /NOUNLOAD "$(DESC_INSTALLING) $(DESC_SHORTDOTNET)..."
-      nsExec::ExecToStack '"$PLUGINSDIR\dotnetfx.exe" /q /c:"install.exe /noaspupgrade /q"'
+      ;Banner::show /NOUNLOAD "$(DESC_INSTALLING) $(DESC_SHORTDOTNET)..."
+      ;nsExec::ExecToStack '"$PLUGINSDIR\dotnetfx.exe" /q /c:"install.exe /noaspupgrade /q"'
+      nsExec::ExecToStack '"$PLUGINSDIR\dotnetfx.exe" /q /c:"install.exe /noaspupgrade"'
       pop $DOTNET_RETURN_CODE
-      Banner::destroy
-      SetRebootFlag true
+      MessageBox MB_ICONINFORMATION|MB_OK "show dotnet return code:$DOTNET_RETURN_CODE" IDOK +1
+      ;Banner::destroy
+      ;SetRebootFlag true
       ; silence the compiler
       Goto lbl_NoDownloadRequired
     
@@ -509,6 +512,8 @@ Section $(SEC_DOTNET) SECDOTNET
  
     lbl_Done:
     DetailPrint "$(FAILED_DOTNET_INSTALL)"
+    Abort
+    
     lbl_NoError:
     lbl_IsSilent:  
   SectionEnd
@@ -568,6 +573,7 @@ Section -Post
   IntOp $5 $5 - 1
   StrCpy $6 $1 "" $5
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key" "$6"
+  ${registry::Close} "$0"
   System::Call "user32::LoadKeyboardLayout(t $6, i 1)"
   ;MessageBox MB_YESNO "若您是初次安裝，則須重新開機。是否要立刻重開機？" IDNO noreboot
   ;  Reboot
@@ -596,6 +602,7 @@ Section Uninstall
   ${registry::Find} $9 $1 $2 $3 $4
   ;MessageBox MB_ICONINFORMATION|MB_OK "show 9:$9 1:$1 2:$2 3:$3 " IDOK +1
   DeleteRegValue "${IME_CURRENT_USER}" "${IME_KEY_USER}" "$2"
+  ${registry::Close} "$9"
 
   Delete "$SYSDIR\libltdl3.dll"
   Delete "$SYSDIR\libiconv-2.dll"
