@@ -182,10 +182,21 @@ Function .onInit
   StrCmp $R5 "NeedMSI" NeedWIN31 KeepGo1
   
   NeedWIN31:
+     Push "www.microsoft.com/downloads/details.aspx?displaylang=zh-tw&FamilyID=889482fc-5f56-4a38-b838-de776fd4138c"
      Call openLinkNewWindow
      Abort  
   
   KeepGo1:
+  Call CheckOffice2003Otk
+  Pop $R6 # = "Office2003Otk"
+  StrCmp $R6 "Office2003Otk" Need2003Otk KeepGo2
+  
+  Need2003Otk:
+  Push "http://www.microsoft.com/downloads/details.aspx?displaylang=zh-tw&FamilyID=1B0BFB35-C252-43CC-8A2A-6A64D6AC4670"
+  Call openLinkNewWindow
+  Abort
+  
+  KeepGo2:
   ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion"
   StrCmp $0 "" ContinueInst 0
 	  MessageBox MB_OKCANCEL|MB_ICONQUESTION "偵測到舊版 $0 已安裝，是否要移除舊版後重新安裝新版？" IDOK +2
@@ -323,12 +334,36 @@ ${If} $1 == 2 ; VersionCompare the msi installer version, if smaller
 MessageBox MB_OK|MB_ICONINFORMATION "需要 Windows Installer 3.1 (v2)，請至官方網站下載。" IDOK +1
 ;Call openLinkNewWindow
 ;Abort
-push "NeedMSI"
+Push "NeedMSI"
 ${ENDIF}
 FunctionEnd
 
+Function CheckOffice2003Otk
+;${registry::Open} "HKLM\${CURRENTVERSION_UNINSTALL}" "\NI=microsoft office" $9
+;${registry::Find} $9 $1 $2 $3 $4
+;MessageBox MB_ICONINFORMATION|MB_OK "show 9:$9 1:$1 2:$2 3:$3 " IDOK +1
+
+ClearErrors
+GetDLLVersion "$PROGRAMFILES\Microsoft Office\OFFICE11\ADDINS\Otkloadr.dll" $R0 $R1
+IfErrors notOffice2003 0
+IntOp $R2 $R0 / 0x00010000 ; $R2 now contains major version
+IntOp $R3 $R0 & 0x0000FFFF ; $R3 now contains minor version
+IntOp $R4 $R1 / 0x00010000 ; $R4 now contains release
+IntOp $R5 $R1 & 0x0000FFFF ; $R5 now contains build
+StrCpy $0 "$R2.$R3.$R4.$R5" ; $0 now contains string like "1.2.0.192"
+${VersionCompare} $0 "7.10.5077.0" $1
+${If} $1 == 2   ;if $0 is smaller
+Push "Office2003Otk"
+MessageBox MB_OK|MB_ICONINFORMATION "自然輸入法需要 Office 2003 使用者進行 patch ，請至官方網站下載。"IDOK +1
+${ENDIF}
+notOffice2003:
+FunctionEnd
+
+
+
 Function openLinkNewWindow
-  StrCpy $0 "www.microsoft.com/downloads/details.aspx?displaylang=zh-tw&FamilyID=889482fc-5f56-4a38-b838-de776fd4138c"
+  Pop $0
+  
   Push $3 
   Push $2
   Push $1
