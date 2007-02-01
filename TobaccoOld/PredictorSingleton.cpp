@@ -126,6 +126,50 @@ void PredictorSingleton::setFixedToken(
     PredictorSingleton::setTokenVectorByBigram();
 }
 
+void PredictorSingleton::rotateTop3Candidates(size_t position)
+{
+	if(position + 1 > top3CandidateStackVector.size() ||
+		top3CandidateStackVector[position].size() == 0)
+	{
+		candidateVector.clear();
+		candidatePositionVector.clear();
+
+		vector<Vocabulary> vocabularies;
+		for(size_t i = 0;
+			i < tokenVector[position].characterStringVector.size();
+			i++)
+			addCandidates(
+				tokenVector[position].characterStringVector[i], position);
+
+		sort(
+			candidateVector.begin(),
+			candidateVector.end(),
+			Vocabulary::isFreqGreater);
+
+		if(position + 1 > top3CandidateStackVector.size())
+		{
+			stack<string> newStack;
+			top3CandidateStackVector.push_back(newStack);
+		}
+		for(size_t j = 0;
+			j < candidateVector.size() && j < 3;
+			j++)
+			top3CandidateStackVector[position].push(
+				candidateVector[j].word);		
+
+		candidateVector.clear();
+		candidatePositionVector.clear();
+	}
+
+	if(tokenVector[position].word.compare(
+		top3CandidateStackVector[position].top()) == 0)
+		top3CandidateStackVector[position].pop();
+	tokenVector[position].word =
+		top3CandidateStackVector[position].top();
+	tokenVector[position].isFixed = true;
+	top3CandidateStackVector[position].pop();
+}
+
 void PredictorSingleton::addCandidates(string characters, size_t head)
 {
     vector<Vocabulary> vocabularies;
@@ -150,7 +194,6 @@ void PredictorSingleton::addCandidates(string characters, size_t head)
 	   PredictorSingleton::candidateVector.begin(),
 	   PredictorSingleton::candidateVector.end(),
 	   Vocabulary::isWordLonger);
-
 }
 
 void PredictorSingleton::setCandidateVector(size_t position)

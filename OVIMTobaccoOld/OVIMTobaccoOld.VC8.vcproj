@@ -4,6 +4,7 @@
 	Version="8.00"
 	Name="OVIMTobaccoOld"
 	ProjectGUID="{06DD6384-CF74-4115-AFC9-E6BA2D818E12}"
+	RootNamespace="OVIMTobaccoOld"
 	Keyword="ExtStoredProcProj"
 	>
 	<Platforms>
@@ -98,7 +99,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\Windows\OpenVanilla\Modules\&quot;"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\Windows\OpenVanilla\Modules\OVIMTobacco.dll&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -185,7 +186,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\Windows\OpenVanilla\Modules\&quot;"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\Windows\OpenVanilla\Modules\OVIMTobacco.dll&quot;"
 			/>
 		</Configuration>
 	</Configurations>
