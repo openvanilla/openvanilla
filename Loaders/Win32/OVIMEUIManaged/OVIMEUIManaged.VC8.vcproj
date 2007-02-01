@@ -229,14 +229,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\AmphiVanilla\AVConfig.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\AmphiVanilla\AVDictionary.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\OVIMEUI.def"
 				>
 			</File>

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "PCMan.h"
 #include "resource.h"
-#include "AVDictionary.h"
 
 #ifndef	CS_DROPSHADOW
 	#define	CS_DROPSHADOW	0x00020000
@@ -329,7 +328,6 @@ void UIConstruct()
 
 void UIDispose()
 {
-	//AVDictionary::shutdown();
 	DestroyMenu(hIMESelMenu);
 }
 

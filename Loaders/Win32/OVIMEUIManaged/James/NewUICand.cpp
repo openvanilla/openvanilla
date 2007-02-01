@@ -2,7 +2,6 @@
 #include <vector>
 //#include <windows.h>
 #include "PCMan.h"
-#include "AVConfig.h"
 
 #pragma managed
 
