@@ -277,11 +277,9 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 5);
 
 		MyGenerateMessage(hIMC, WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
-		if(dsvr->hasCompStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) == 0)
-		{
-			dsvr->SetCompStarted(false); //要先做!
-			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);			
-		}
+		dsvr->SetCompStarted(false); //要先做!
+		MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
+		InitCompStr(dsvr->lpCompStr);
 
 		dsvr->releaseIMC();
 		return TRUE;
@@ -366,9 +364,15 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	if(loader->keyEvent(UICurrentInputMethod(), keycode)) //如果目前模組處理此key
 	{
 		retVal = TRUE;
-		MyGenerateMessage(hIMC,
-				WM_IME_COMPOSITION, 0, GCS_COMPSTR);
-		
+
+		if(LOWORD(uVKey) != VK_RETURN)
+			MyGenerateMessage(hIMC, WM_IME_COMPOSITION, 0, GCS_COMPSTR);
+		else {
+			MyGenerateMessage(hIMC, WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
+			dsvr->SetCompStarted(false); //要先做!
+			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
+			InitCompStr(dsvr->lpCompStr);
+		}
 	} else {
 		retVal = FALSE;
 		//James comment: 解決未組成字之前選字 comp window 會消失的問題(?待商榷)
@@ -376,9 +380,8 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 		if(dsvr->hasCompStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) == 0)
 		{
 			dsvr->SetCompStarted(false); //要先做!
-			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);			
-		}
-		
+			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
+		}		
 	}
 	dsvr->releaseIMC();	
 	return retVal; 
