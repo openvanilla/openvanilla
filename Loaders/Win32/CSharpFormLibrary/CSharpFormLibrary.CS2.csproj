@@ -171,6 +171,6 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>cd "$(DevEnvDir)..\..\SDK\v2.0\bin\" &amp;&amp; gacutil.exe /u "$(TargetName)" &amp;&amp; gacutil.exe /i "$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent>C: &amp;&amp; cd "$(DevEnvDir)..\..\SDK\v2.0\bin\" &amp;&amp; gacutil.exe /u "$(TargetName)" &amp;&amp; gacutil.exe /i "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
