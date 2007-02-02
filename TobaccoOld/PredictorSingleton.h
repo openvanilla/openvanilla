@@ -20,7 +20,7 @@ public:
 	vector<Token> tokenVector;
 	vector<Candidate> candidateVector;
 	vector<size_t> candidatePositionVector;
-	map< int, queue<string> > top3CandidateQueueMap;
+	map< size_t, queue<string> > top3CandidateQueueMap;
 
 	static PredictorSingleton* getInstance(const char* dbFilePath)
 	{
