@@ -154,8 +154,9 @@ void PredictorSingleton::rotateTopCandidates(size_t position)
 	else
 		tokenVector[position].word = vocabularies[index + 1].word;
 
+	tokenVector[position].isFixed = true;
     setTokenVectorByBigram();
-	for(size_t k = 0; k <= position; k++)
+	for(size_t k = 0; k < position; k++)
 		tokenVector[k].isFixed = true;
 
     setComposedString();
