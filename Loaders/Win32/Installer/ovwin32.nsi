@@ -604,9 +604,11 @@ Section -Post
   System::Call 'imm32::ImmInstallIME(t "$SYSDIR\OVIME.ime", t "$(^Name)")'
   ${registry::Open} "${IME_ROOT_KEY}\${IME_KEY}" "/N='OVIME.ime' /G=1 /T=REG_SZ" $0
   ${registry::Find} $0 $1 $2 $3 $4
-  StrLen $5 "${IME_KEY}"
-  ;IntOp $5 $5 - 1
-  StrCpy $6 $1 "" $5
+  ;StrLen $5 "${IME_KEY}"
+  ;StrCpy $6 $1 "" $5
+  StrCpy $6 $1 "" -8
+  ;MessageBox MB_OK "show 0:$0 1:$1 2:$2 3:$3 4:$4" IDOK +1
+  ;MessageBox MB_OK "show 6:$6" IDOK +1
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key" "$6"
   ${registry::Close} "$0"
   System::Call "user32::LoadKeyboardLayout(t $6, i 1)"
