@@ -23,6 +23,7 @@ public:
 	AVDisplayServer *lockIMC(HIMC h);
 	AVDisplayServer *releaseIMC();
 	virtual AVDisplayServer *setBufString(const char *str);
+	virtual AVDisplayServer *setBufString(const char *str,int caretX);
 	virtual AVDisplayServer *sendBuf(const char *str);
 	virtual AVDisplayServer *setCandiString(const char *str);	
 	virtual DisplayServer *showStatus(bool t); //Jamed add
@@ -30,7 +31,7 @@ public:
 	virtual AVDisplayServer *showNotify(const char *str);
 	virtual AVDisplayServer *hideNotify();
 	virtual AVDisplayServer *showCandi(bool t);
-	virtual AVDisplayServer *setCursorPos(int i);
+	//virtual AVDisplayServer *setCursorPos(int i);
 	virtual AVDisplayServer *setMarkFrom(int i);
 	virtual AVDisplayServer *setMarkTo(int i);	
 	virtual DisplayServer *moveBuf(int x,int y);

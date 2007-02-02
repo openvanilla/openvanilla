@@ -31,6 +31,7 @@ AVDisplayServer *DisplayServer::releaseIMC()
 	}
 	return this;
 }
+
 AVDisplayServer *DisplayServer::setBufString(const char *str)
 {
 	wchar_t wstr[1024];
@@ -39,6 +40,21 @@ AVDisplayServer *DisplayServer::setBufString(const char *str)
 	MakeCompStr(lpMyPrivate, lpCompStr);
 	murmur("\tAVDisplayServer *DisplayServer::setBufString(%s)",str);
 	UISetCompStr(lpMyPrivate->PreEditStr); 	//要不要先檢查有沒有PreEditStr有沒有東西？
+	return this;
+}
+
+AVDisplayServer *DisplayServer::setBufString(const char *str,int caretX)
+{
+	wchar_t wstr[1024];
+	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
+	wcscpy(lpMyPrivate->PreEditStr, wstr);
+	MakeCompStr(lpMyPrivate, lpCompStr);
+	murmur("\tAVDisplayServer *DisplayServer::setBufString(%s)",str);
+	UISetCompStr(lpMyPrivate->PreEditStr); 	//要不要先檢查有沒有PreEditStr有沒有東西？
+
+	lpCompStr->dwCursorPos = caretX;
+	murmur("\tDisplayServer::setCursorPos-> %d",caretX);	
+	UISetCompCaretPosX(caretX);
 
 	return this;
 }
@@ -200,14 +216,14 @@ AVDisplayServer *DisplayServer::showCandi(bool t)
 	}
 	return this;
 }
-AVDisplayServer *DisplayServer::setCursorPos(int i)
+/*AVDisplayServer *DisplayServer::setCursorPos(int i) //搬到 setBufStr
 {
 	lpCompStr->dwCursorPos = i;
 	murmur("\tDisplayServer::setCursorPos-> %d",i);
 	//UISetCursorPos(lpCompStr->dwCursorPos);
 	UISetCompCaretPosX(i);
 	return this;
-}
+}*/
 AVDisplayServer *DisplayServer::setMarkFrom(int i)
 {
 	UISetMarkFrom(i);

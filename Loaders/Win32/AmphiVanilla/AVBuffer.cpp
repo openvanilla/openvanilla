@@ -48,10 +48,10 @@ OVBuffer* AVBuffer::update() //set + show
 OVBuffer* AVBuffer::update(int cursorPos, int markFrom=-1, int markTo=-1)
 {	
 	murmur("OVBuffer* AVBuffer::update(cursorPos=%d, markFrom=%d, markTo=%d ",cursorPos,markFrom,markTo);
-	dsvr->setBufString(bufstr.c_str());	
+	dsvr->setBufString(bufstr.c_str(),cursorPos);	
 	dsvr->setMarkFrom(markFrom);
 	dsvr->setMarkTo(markTo);
-	dsvr->setCursorPos(cursorPos);
+	//dsvr->setCursorPos(cursorPos);
 	dsvr->showBuf(true);
 	return this;
 }

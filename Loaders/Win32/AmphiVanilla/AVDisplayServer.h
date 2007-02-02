@@ -7,6 +7,7 @@ class AVDisplayServer : public OVBase
 {
 public:
 	virtual AVDisplayServer *setBufString(const char *str) { return this; }
+	virtual AVDisplayServer *setBufString(const char *str,int caretX) { return this; }
 	virtual AVDisplayServer *sendBuf(const char *str) { return this; }
 	virtual AVDisplayServer *setCandiString(const char *str) { return this; }
 	virtual AVDisplayServer *updateBuf() { return this; }
