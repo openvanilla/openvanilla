@@ -50,56 +50,62 @@ namespace CSharpFormLibrary
 
         private void IMECompRichForm_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
-            
-            Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);            
-            Size proposedSize = new Size(int.MaxValue, int.MaxValue);
-            TextFormatFlags flags = TextFormatFlags.NoPadding;
-            Size size = TextRenderer.MeasureText(e.Graphics, Buf, Font, proposedSize, flags);
-            Size sizeText = TextRenderer.MeasureText(e.Graphics, Buf.Substring(0, caretIndex), Font, proposedSize,flags);
-            
-            int offsetX = 2;
-            int offsetY = 3;
-            //SizeF sizeF = e.Graphics.MeasureString(Buf.Substring(0, caretIndex), Font);
-                
-            //resize
-            if (this.Width - 50 < (int)size.Width)
-                this.Width += 100;            
-
-            //draw backcolor
-            /*b = new System.Drawing.SolidBrush(SystemColors.ButtonFace);
-            e.Graphics.FillRectangle(b, this.Bounds);
-            b.Dispose();*/
-            
-            //draw string
-            //Brush b;
-            //b = new SolidBrush(Color.Black);
-            TextRenderer.DrawText(e.Graphics, Buf, Font, new Point(offsetX, offsetY), Color.Black, flags);
-            //TextRenderer.DrawText(e.Graphics, Buf, Font, new Point(offsetX, offsetY), Color.Yellow, flags);
-
-            if (compSelEnd-compSelStart > 0)
+            if (Buf.Length > 0)
             {
-                //Debug.WriteLine("(" + compSelStart + "," + compSelEnd + ")");
-                if (compSelStart == 0)
-                    TextRenderer.DrawText(e.Graphics, Buf.Substring(compSelStart, compSelEnd - compSelStart), Font, new Point(offsetX, offsetY), Color.DarkKhaki, flags);
-                else
+                Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                Size proposedSize = new Size(int.MaxValue, int.MaxValue);
+                TextFormatFlags flags = TextFormatFlags.NoPadding;
+                Size size = TextRenderer.MeasureText(e.Graphics, Buf, Font, proposedSize, flags);
+                Size sizeText = TextRenderer.MeasureText(e.Graphics, Buf.Substring(0, caretIndex), Font, proposedSize, flags);
+
+                int offsetX = 2;
+                int offsetY = 3;
+                //SizeF sizeF = e.Graphics.MeasureString(Buf.Substring(0, caretIndex), Font);
+
+                //resize
+                if (this.Width - 50 < (int)size.Width)
+                    this.Width += 100;
+
+                //draw backcolor
+                /*b = new System.Drawing.SolidBrush(SystemColors.ButtonFace);
+                e.Graphics.FillRectangle(b, this.Bounds);
+                b.Dispose();*/
+
+                //draw string
+                //Brush b;
+                //b = new SolidBrush(Color.Black);
+                TextRenderer.DrawText(e.Graphics, Buf, Font, new Point(offsetX, offsetY), Color.Black, flags);
+                //TextRenderer.DrawText(e.Graphics, Buf, Font, new Point(offsetX, offsetY), Color.Yellow, flags);
+
+                if (compSelEnd - compSelStart > 0)
                 {
-                    Size sizeSelectionText = TextRenderer.MeasureText(e.Graphics, Buf.Substring(0,compSelStart), Font, proposedSize, flags);
-                    TextRenderer.DrawText(e.Graphics, Buf.Substring(compSelStart, compSelEnd - compSelStart), Font, new Point(sizeSelectionText.Width + offsetX, offsetY), Color.DarkKhaki, flags);
+                    //Debug.WriteLine("(" + compSelStart + "," + compSelEnd + ")");
+                    if (compSelStart == 0)
+                        TextRenderer.DrawText(e.Graphics, Buf.Substring(compSelStart, compSelEnd - compSelStart), Font, new Point(offsetX, offsetY), Color.DarkKhaki, flags);
+                    else
+                    {
+                        Size sizeSelectionText = TextRenderer.MeasureText(e.Graphics, Buf.Substring(0, compSelStart), Font, proposedSize, flags);
+                        TextRenderer.DrawText(e.Graphics, Buf.Substring(compSelStart, compSelEnd - compSelStart), Font, new Point(sizeSelectionText.Width + offsetX, offsetY), Color.DarkKhaki, flags);
+                    }
                 }
+
+                //save caret  for c++ using  and draw it                    
+                CaretX = (int)sizeText.Width;
+                Pen p = new Pen(Color.Black, 1);
+                e.Graphics.DrawLine(p, sizeText.Width + offsetX, offsetY, sizeText.Width + offsetX, sizeText.Height + offsetY);
+                p.Dispose();
             }
-            
-            
+            else
+            {
+                Brush b = new SolidBrush(SystemColors.ButtonFace);
+                e.Graphics.FillRectangle(b, this.Bounds);
+                b.Dispose();
+            }
+
             //draw border
             ControlPaint.DrawBorder(
                 e.Graphics, ClientRectangle,
-                    Color.LightGray, ButtonBorderStyle.Outset);
-             
-            //save caret  for c++ using  and draw it                    
-            CaretX = (int)sizeText.Width;                                    
-            Pen p = new Pen(Color.Black, 1);
-            e.Graphics.DrawLine(p, sizeText.Width + offsetX, offsetY, sizeText.Width + offsetX, sizeText.Height + offsetY);
-            p.Dispose();
-            
+                    Color.LightGray, ButtonBorderStyle.Inset);
         }
 
         /*private void MeasureStringMin(PaintEventArgs e)
@@ -165,6 +171,7 @@ namespace CSharpFormLibrary
 		{	
             //this.richTextBox1.Text="";
             Buf = "";
+            this.Refresh();
             //compSelStart = 0;
             //compSelEnd = 0;
             this.Width = formInitWidth;
