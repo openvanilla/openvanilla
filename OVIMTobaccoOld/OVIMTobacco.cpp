@@ -113,7 +113,7 @@ protected:
     
     void freshBuffer();
 
-	int rotateTop3Candidates();
+	int rotateTopCandidates();
 
     OVKeyCode *k;
     OVBuffer *b;
@@ -425,7 +425,7 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
     if (candi)
 		if(candidateEvent()) return 1;
 	//<comment author='b6s'>CTRL+Q rotates top-3 candidates
-	if (k->isCtrl() && k->code()==17) return rotateTop3Candidates();
+	if (k->isCtrl() && k->code()==17) return rotateTopCandidates();
 	//</comment>
     if (isPunctuationCombination()) return punctuationKey();
     if (k->isFunctionKey() && b->isEmpty()) return 0;
@@ -454,13 +454,13 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
     return 0;
 }
 
-int OVIMTobaccoContext::rotateTop3Candidates()
+int OVIMTobaccoContext::rotateTopCandidates()
 {
 	size_t index = position;
 	if(parent->doChooseInFrontOfCursor())
 		index--;
 
-	predictor->rotateTop3Candidates(index);
+	predictor->rotateTopCandidates(index);
 	freshBuffer();
 
 	return 1;

@@ -126,7 +126,7 @@ void PredictorSingleton::setFixedToken(
     PredictorSingleton::setTokenVectorByBigram();
 }
 
-void PredictorSingleton::rotateTop3Candidates(size_t position)
+void PredictorSingleton::rotateTopCandidates(size_t position)
 {
 	vector<Vocabulary> vocabularies;
 	for(size_t i = 0;
@@ -135,53 +135,24 @@ void PredictorSingleton::rotateTop3Candidates(size_t position)
 		dictionary->getVocabularyVectorByCharacters(
 			tokenVector[position].characterStringVector[i],
 			vocabularies);
-	if(vocabularies.size() < 2)
+	if(vocabularies.size() < ROTATE_LIMIT - 1)
 		return;
 
-	bool hasQueue =
-		top3CandidateQueueMap.find(position)
-			== top3CandidateQueueMap.end()
-		? false : true;
+	sort(
+		vocabularies.begin(),
+		vocabularies.end(),
+		Vocabulary::isFreqGreater);
 
-	if(!hasQueue)
-	{
-		candidateVector.clear();
-		candidatePositionVector.clear();
-		
-		for(size_t i = 0;
-			i < tokenVector[position].characterStringVector.size();
-			i++)
-			addCandidates(
-				tokenVector[position].characterStringVector[i], position);
-
-		sort(
-			candidateVector.begin(),
-			candidateVector.end(),
-			Vocabulary::isFreqGreater);
-
-		queue<string> newQueue;
-		top3CandidateQueueMap[position] = newQueue;
-		for(size_t j = 0;
-			j < candidateVector.size() && j < 3;
-			j++)
-			top3CandidateQueueMap[position].push(
-				candidateVector[j].word);	
-
-		candidateVector.clear();
-		candidatePositionVector.clear();
-	}
-
-	if(tokenVector[position].word ==
-		top3CandidateQueueMap[position].front()) {
-		top3CandidateQueueMap[position].push(
-			top3CandidateQueueMap[position].front());
-		top3CandidateQueueMap[position].pop();
-	}
-	tokenVector[position].word =
-		top3CandidateQueueMap[position].front();
-	top3CandidateQueueMap[position].push(
-		top3CandidateQueueMap[position].front());
-	top3CandidateQueueMap[position].pop();
+	size_t index = ROTATE_LIMIT;
+	for(size_t j = 0;
+		j < vocabularies.size() && j < ROTATE_LIMIT;
+		j++)
+		if(tokenVector[position].word == vocabularies[j].word)
+			index = j;
+	if(index == ROTATE_LIMIT || index == ROTATE_LIMIT - 1)
+		tokenVector[position].word = vocabularies[0].word;
+	else
+		tokenVector[position].word = vocabularies[index + 1].word;
 
     setTokenVectorByBigram();
 	for(size_t k = 0; k <= position; k++)

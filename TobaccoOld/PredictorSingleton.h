@@ -42,7 +42,7 @@ public:
 	void removeWord(size_t position, bool delFlag);
 	void clearAll();
 
-	void rotateTop3Candidates(size_t position);
+	void rotateTopCandidates(size_t position);
 
 protected:
 	void addCandidates(string characters, size_t head);
@@ -53,6 +53,7 @@ protected:
 	~PredictorSingleton();
 
 private:
+	const static size_t ROTATE_LIMIT = 3;
 	const static size_t MAX_CONTEXT_LENGTH = 6;
 	static PredictorSingleton* itsInstance;
 	DictionarySingleton* dictionary;
