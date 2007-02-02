@@ -269,7 +269,21 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	if((LOWORD(uVKey) == VK_OEM_5 || LOWORD(uVKey) == VK_OEM_PLUS) &&
 		((lpbKeyState[VK_CONTROL] & 0x80)))
 	{
-		dsvr->releaseIMC();		
+		//Change the module by Ctrl+"\": lParam == 8
+		if(LOWORD(uVKey) == VK_OEM_5)
+			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 8);
+		//Change the BoPoMoFo keyboard layout by Ctrl+"=": lParam == 5
+		else if(LOWORD(uVKey) == VK_OEM_PLUS)
+			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 5);
+
+		MyGenerateMessage(hIMC, WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
+		if(dsvr->hasCompStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) == 0)
+		{
+			dsvr->SetCompStarted(false); //­n¥ý°µ!
+			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);			
+		}
+
+		dsvr->releaseIMC();
 		return TRUE;
 	}
 	//Change CHI/ENG by CAPS
@@ -433,6 +447,9 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 			  CONST LPBYTE lpbKeyState,
 			  LPDWORD lpdwTransKey, UINT fuState,HIMC hIMC)
 {	
+	//<comment author='b6s'>
+	//Moves back to ImeProcessKey for preventing strange messaging bug.
+	/*
 	if((lpbKeyState[VK_CONTROL] & 0x80))
 	{
 		//Change the module by Ctrl+"\": lParam == 0
@@ -441,7 +458,15 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 		//Change the BoPoMoFo keyboard layout by Ctrl+"=": lParam == 5
 		else if(LOWORD(uVKey) == VK_OEM_PLUS)
 			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 5);
+
+		//<comment author='b6s'>
+		//Addes unlocking here to return the resources locked in ImeProcessKey.
+		//This solution needs to be refactored.
+		dsvr->releaseIMC();
+		//</comment>
 	}
+	*/
+	//</comment>
 
 	//Change CHI/END by CAPS
 	//if(LOWORD(uVKey) == VK_CAPS)

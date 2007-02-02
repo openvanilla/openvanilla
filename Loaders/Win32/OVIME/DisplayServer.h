@@ -6,6 +6,8 @@
 #include "ExtraStructs.h"
 #include "AVDisplayServer.h"
 
+#include "ModelImm.h"
+
 class DisplayServer : public AVDisplayServer
 {
 public:
@@ -50,7 +52,10 @@ public:	//James: 為了在Utils.cpp, IME.cpp 使用，暫改成public
 	bool hasCompStarted; 
 	bool isStatusEnabled; 
 	bool isCompEnabled; 
-	bool isCandiEnabled; 
+	bool isCandiEnabled;
+
+private:
+	ModelImm* imm;
 };
 #endif //DISPLAYSERVER_H
 

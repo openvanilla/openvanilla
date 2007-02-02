@@ -1,19 +1,28 @@
 #include "ModelImm.h"
 
 ModelImm* ModelImm::m_modelImm = NULL;
+
 ModelImm::ModelImm(HIMC h)
 {
 	m_hIMC = h;
+
+	m_lpIMC = NULL;
 	m_lpIMC = lockIMC();
+
+	m_lpCompStr = NULL;
 	m_lpCompStr = lockCompStr();
+
+	m_lpMyPrivate = NULL;
 	m_lpMyPrivate = lockMyPrivate();
 }
 
 ModelImm::~ModelImm(void)
 {
-	unlockMyPrivate();
-	unlockCompStr();
+	//unlockMyPrivate();
+	//unlockCompStr();
 	unlockIMC();
+
+	m_modelImm = NULL;
 }
 
 ModelImm* ModelImm::open(HIMC h)

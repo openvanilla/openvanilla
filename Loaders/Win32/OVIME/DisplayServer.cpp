@@ -5,13 +5,31 @@
 AVDisplayServer *DisplayServer::lockIMC(HIMC h)
 {
 	hIMC = h;
-	lpIMC = ImmLockIMC(hIMC);
-	lpCompStr = (LPCOMPOSITIONSTRING)ImmLockIMCC(lpIMC->hCompStr);
-	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
+	imm = ModelImm::open(hIMC);
+
+	lpIMC = imm->getIMC();
+	//ImmLockIMC(hIMC);
+
+	lpCompStr = imm->getCompStr();
+	//(LPCOMPOSITIONSTRING)ImmLockIMCC(lpIMC->hCompStr);
+
+	lpMyPrivate = imm->getMyPrivate();
+	//(LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
+
 	return this;
 }
+
 AVDisplayServer *DisplayServer::releaseIMC()
 {
+	ModelImm::close();
+
+	lpMyPrivate = NULL;
+	lpCompStr = NULL;
+	lpIMC = NULL;
+	hIMC = NULL;
+
+	imm= NULL;
+	/*
 	if(lpMyPrivate)
 	{
 		if(lpIMC)
@@ -29,6 +47,7 @@ AVDisplayServer *DisplayServer::releaseIMC()
 		ImmUnlockIMC(hIMC);
 		hIMC=NULL;
 	}
+	*/
 	return this;
 }
 
@@ -70,11 +89,16 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 	
 	MakeCompStr(lpMyPrivate, lpCompStr);
 	UIClearCompStr();//即時update C# comp string 同步資料
-		
-	MyGenerateMessage(hIMC,
-		WM_IME_COMPOSITION, 0, GCS_RESULTSTR);  //?
-	MyGenerateMessage(hIMC,
-		WM_IME_ENDCOMPOSITION, 0, 0);	 //?
+	
+	//<comment author='b6s'>
+	//Moves them to IME.cpp's ImeProcessKey,
+	//since it casued a infinite-loop when "CTRL+\" occurred.
+	//MyGenerateMessage(hIMC,
+	//	WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
+	//MyGenerateMessage(hIMC,
+	//	WM_IME_ENDCOMPOSITION, 0, 0);
+	//</comment>
+
 	return this;
 }
 AVDisplayServer *DisplayServer::setCandiString(const char *str)
