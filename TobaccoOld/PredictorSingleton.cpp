@@ -128,13 +128,26 @@ void PredictorSingleton::setFixedToken(
 
 void PredictorSingleton::rotateTop3Candidates(size_t position)
 {
-	if(position + 1 > top3CandidateQueueVector.size() ||
-		top3CandidateQueueVector[position].size() == 0)
+	vector<Vocabulary> vocabularies;
+	for(size_t i = 0;
+		i < tokenVector[position].characterStringVector.size();
+		i++)
+		dictionary->getVocabularyVectorByCharacters(
+			tokenVector[position].characterStringVector[i],
+			vocabularies);
+	if(vocabularies.size() < 2)
+		return;
+
+	bool hasQueue =
+		top3CandidateQueueMap.find(position)
+			== top3CandidateQueueMap.end()
+		? false : true;
+
+	if(!hasQueue)
 	{
 		candidateVector.clear();
 		candidatePositionVector.clear();
-
-		vector<Vocabulary> vocabularies;
+		
 		for(size_t i = 0;
 			i < tokenVector[position].characterStringVector.size();
 			i++)
@@ -146,27 +159,29 @@ void PredictorSingleton::rotateTop3Candidates(size_t position)
 			candidateVector.end(),
 			Vocabulary::isFreqGreater);
 
-		if(position + 1 > top3CandidateQueueVector.size())
-		{
-			queue<string> newQueue;
-			top3CandidateQueueVector.push_back(newQueue);
-		}
+		queue<string> newQueue;
+		top3CandidateQueueMap[position] = newQueue;
 		for(size_t j = 0;
 			j < candidateVector.size() && j < 3;
 			j++)
-			top3CandidateQueueVector[position].push(
-				candidateVector[j].word);		
+			top3CandidateQueueMap[position].push(
+				candidateVector[j].word);	
 
 		candidateVector.clear();
 		candidatePositionVector.clear();
 	}
 
 	if(tokenVector[position].word ==
-		top3CandidateQueueVector[position].front())
-		top3CandidateQueueVector[position].pop();
+		top3CandidateQueueMap[position].front()) {
+		top3CandidateQueueMap[position].push(
+			top3CandidateQueueMap[position].front());
+		top3CandidateQueueMap[position].pop();
+	}
 	tokenVector[position].word =
-		top3CandidateQueueVector[position].front();
-	top3CandidateQueueVector[position].pop();
+		top3CandidateQueueMap[position].front();
+	top3CandidateQueueMap[position].push(
+		top3CandidateQueueMap[position].front());
+	top3CandidateQueueMap[position].pop();
 
     setTokenVectorByBigram();
 	for(size_t k = 0; k <= position; k++)

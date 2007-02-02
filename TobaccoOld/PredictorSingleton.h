@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <map>
 #include <queue>
 
 #include "DictionarySingleton.h"
@@ -19,7 +20,7 @@ public:
 	vector<Token> tokenVector;
 	vector<Candidate> candidateVector;
 	vector<size_t> candidatePositionVector;
-	vector< queue<string> > top3CandidateQueueVector;
+	map< int, queue<string> > top3CandidateQueueMap;
 
 	static PredictorSingleton* getInstance(const char* dbFilePath)
 	{
