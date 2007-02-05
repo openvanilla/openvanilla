@@ -66,7 +66,7 @@ namespace CSharpFormLibrary
                 if (this.Width - 50 < (int)size.Width)
                     this.Width += 100;
 
-                //draw backcolor
+                //draw backcolor- turn off
                 /*b = new System.Drawing.SolidBrush(SystemColors.ButtonFace);
                 e.Graphics.FillRectangle(b, this.Bounds);
                 b.Dispose();*/
@@ -81,11 +81,11 @@ namespace CSharpFormLibrary
                 {
                     //Debug.WriteLine("(" + compSelStart + "," + compSelEnd + ")");
                     if (compSelStart == 0)
-                        TextRenderer.DrawText(e.Graphics, Buf.Substring(compSelStart, compSelEnd - compSelStart), Font, new Point(offsetX, offsetY), Color.DarkKhaki, flags);
+                        TextRenderer.DrawText(e.Graphics, Buf.Substring(compSelStart, compSelEnd - compSelStart), Font, new Point(offsetX, offsetY), Color.Red, flags);
                     else
                     {
                         Size sizeSelectionText = TextRenderer.MeasureText(e.Graphics, Buf.Substring(0, compSelStart), Font, proposedSize, flags);
-                        TextRenderer.DrawText(e.Graphics, Buf.Substring(compSelStart, compSelEnd - compSelStart), Font, new Point(sizeSelectionText.Width + offsetX, offsetY), Color.DarkKhaki, flags);
+                        TextRenderer.DrawText(e.Graphics, Buf.Substring(compSelStart, compSelEnd - compSelStart), Font, new Point(sizeSelectionText.Width + offsetX, offsetY), Color.Red, flags);
                     }
                 }
 
