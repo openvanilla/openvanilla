@@ -623,7 +623,7 @@ Section -Post
   ;MessageBox MB_OK "show 6:$6" IDOK +1
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key" "$6"
   ${registry::Close} "$0"
-  System::Call "user32::LoadKeyboardLayout(t $6, i 1)"
+  System::Call "user32::LoadKeyboardLayout(l $6, i 1)"
   ;MessageBox MB_YESNO "若您是初次安裝，則須重新開機。是否要立刻重開機？" IDNO noreboot
   ;  Reboot
 ;noreboot:
@@ -646,7 +646,7 @@ Section Uninstall
   ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\excel-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\excel.exe" $R5
   ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\winword-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\winword.exe" $R6
   ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"  
-  System::Call "user32::UnloadKeyboardLayout(t $0)"
+  System::Call "user32::UnloadKeyboardLayout(l $0)"
   DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}\$0"
   
   ${registry::Open} "${IME_CURRENT_USER}\" " /V=1 /S=1 /N='$0' /G=1 /T=REG_SZ" $9
