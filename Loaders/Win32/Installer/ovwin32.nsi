@@ -161,8 +161,8 @@ Function uninstOld
       ContinueUnist:
       SetOverwrite on
       SetOutPath "$TEMP\~nsu.tmp"
-      CopyFiles /SILENT "$WINDIR\OpenVanilla\uninst.exe" "$TEMP\~nsu.tmp\AU_.exe"
-      ExecWait '"$TEMP\~nsu.tmp\Au_.exe" /S _?=$WINDIR\OpenVanilla'
+      CopyFiles /SILENT "$WINDIR\OpenVanilla\uninst.exe" "$TEMP\~nsu.tmp\AU_.exe"            
+      ExecWait '"$TEMP\~nsu.tmp\Au_.exe" /S _?=$WINDIR\OpenVanilla' $0            
       Delete "$TEMP\~nsu.tmp\Au_.exe"
       RMDir "$TEMP\~nsu.tmp"
       ClearErrors
@@ -205,8 +205,11 @@ Function .onInit
   StrCmp $0 "" ContinueInst 0
 	  MessageBox MB_OKCANCEL|MB_ICONQUESTION "偵測到舊版 $0 已安裝，是否要移除舊版後重新安裝新版？" IDOK +2
 	  Abort
-          Call uninstOld
-    ContinueInst:
+          Call uninstOld          
+          IfFileExists "$SYSDIR\OVIME.ime"  0 ContinueInst     ;代表反安裝失敗 
+          Abort
+    ContinueInst:     
+					MessageBox MB_ICONSTOP|MB_OK "continue"
 ;  !insertmacro MUI_LANGDLL_DISPLAY
 
 ;DOTNET start --------------------------------------------
@@ -641,8 +644,15 @@ Function un.onInit
 FunctionEnd
 
 Section Uninstall
+  ClearErrors
+  Delete "$SYSDIR\OVIME.ime"
+  IfErrors 0 ContinueUnist1
+         MessageBox MB_ICONSTOP|MB_OK "偵測到有正在使用輸入法的程式，請關閉之或重新開機，以繼續反安裝程式。" IDOK +1
+;         Push "OVIMEinUSE"
+         Quit
+  ContinueUnist1:
+  ;MessageBox MB_OK "繼續反安裝"
   nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
-
   ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\excel-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\excel.exe" $R5
   ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\winword-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\winword.exe" $R6
   ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"  
@@ -660,12 +670,6 @@ Section Uninstall
   Delete "$SYSDIR\sqlite3.dll"
   Delete "$SYSDIR\tinyxml.dll"
   Delete "$SYSDIR\OVIMEUI.DLL"
-  ClearErrors
-  Delete "$SYSDIR\OVIME.ime"
-  IfErrors 0 ContinueUnist1
-         MessageBox MB_ICONSTOP|MB_OK "偵測到有正在使用輸入法的程式，請關閉之或重新開機，以繼續反安裝程式。"
-         Abort
-  ContinueUnist1:
   Delete "$INSTDIR\uninst.exe"
   RMDir /r "$WINDIR\OpenVanilla"
 
