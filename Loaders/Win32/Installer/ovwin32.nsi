@@ -14,7 +14,7 @@
 !define IME_ROOT_KEY "HKLM"
 ; ## HKCU = HKEY_CURRENT_USER
 !define IME_CURRENT_USER "HKCU"
-!define IME_KEY "SYSTEM\CurrentControlSet\Control\Keyboard Layouts\"
+!define IME_KEY "SYSTEM\CurrentControlSet\Control\Keyboard Layouts"
 !define IME_KEY_USER "Keyboard Layout\Preload\"
 
 SetCompressor lzma
@@ -78,7 +78,7 @@ Var "DOTNET_RETURN_CODE"
 
 ; Language Strings
 LangString DESC_REMAINING ${LANG_TradChinese} " ( 剩餘 %d %s%s )"
-LangString DESC_PROGRESS ${LANG_TradChinese} "%d.%01dkB/s" ;"%dkB (%d%%) of %dkB @ %d.%01dkB/s"
+LangString DESC_PROGRESS ${LANG_TradChinese} "%d.%01dkB" ;"%dkB (%d%%) of %dkB @ %d.%01dkB/s"
 LangString DESC_PLURAL ${LANG_TradChinese} " "
 LangString DESC_HOUR ${LANG_TradChinese} "小時"
 LangString DESC_MINUTE ${LANG_TradChinese} "分鐘"
@@ -150,25 +150,29 @@ ShowUnInstDetails show
 Function uninstOld
    ClearErrors
    IfFileExists "$SYSDIR\OVIME.ime" 0 ContinueUnist
+      /*
       Delete "$SYSDIR\OVIME.ime"
       IfErrors 0 ContinueUnist
          MessageBox MB_ICONSTOP|MB_OK "解決安裝舊版發生錯誤，請確定你有管理員權限。"
          Abort
       ContinueUnist:
+      	 MessageBox MB_ICONINFORMATION|MB_OK "Delete OVIME.ime ok."
+      */
+      ContinueUnist:
       SetOverwrite on
       SetOutPath "$TEMP\~nsu.tmp"
       CopyFiles /SILENT "$WINDIR\OpenVanilla\uninst.exe" "$TEMP\~nsu.tmp\AU_.exe"
-
       ExecWait '"$TEMP\~nsu.tmp\Au_.exe" /S _?=$WINDIR\OpenVanilla'
       Delete "$TEMP\~nsu.tmp\Au_.exe"
       RMDir "$TEMP\~nsu.tmp"
       ClearErrors
 
       ;Ensure the old IME is deleted
+      /*
       Delete "$SYSDIR\OVIME.ime"
-
       IfErrors 0 +2
          Call onInstError
+      */
 FunctionEnd 
 
 Function onInstError
@@ -225,6 +229,13 @@ Function .onInit
   ;File "Common\Plugins\*.*"
   File /r "${NSISDIR}\Plugins\*.*"
 ;DOTNET end ----------------------------------------------    
+FunctionEnd
+
+Function dotNet2AppachKeyIns
+${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\excel.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\excel-new.exe" $R5
+${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\winword.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\winword-new.exe" $R6
+;MessageBox MB_OK "dotNet2AppachKey: $R5" IDOK +1
+;MessageBox MB_OK "dotNet2AppachKey: $R6" IDOK +1
 FunctionEnd
 
 Function GetDotNETVersion
@@ -595,6 +606,7 @@ Section -AdditionalIcons
 SectionEnd
 
 Section -Post
+  Call dotNet2AppachKeyIns
   WriteUninstaller "$INSTDIR\uninst.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
@@ -631,6 +643,8 @@ FunctionEnd
 Section Uninstall
   nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
 
+  ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\excel-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\excel.exe" $R5
+  ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\winword-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\winword.exe" $R6
   ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"  
   System::Call "user32::UnloadKeyboardLayout(t $0)"
   DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}\$0"
@@ -646,7 +660,12 @@ Section Uninstall
   Delete "$SYSDIR\sqlite3.dll"
   Delete "$SYSDIR\tinyxml.dll"
   Delete "$SYSDIR\OVIMEUI.DLL"
+  ClearErrors
   Delete "$SYSDIR\OVIME.ime"
+  IfErrors 0 ContinueUnist1
+         MessageBox MB_ICONSTOP|MB_OK "偵測到有正在使用輸入法的程式，請關閉之或重新開機，以繼續反安裝程式。"
+         Abort
+  ContinueUnist1:
   Delete "$INSTDIR\uninst.exe"
   RMDir /r "$WINDIR\OpenVanilla"
 
