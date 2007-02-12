@@ -26,6 +26,10 @@ SetCompressor lzma
 !define MUI_ABORTWARNING
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\modern-install.ico"
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
+!define MUI_HEADERIMAGE 
+!define MUI_HEADERIMAGE_NOSTRETCH
+!define MUI_HEADERIMAGE_BITMAP "cc.bmp"
+
 
 ; Language Selection Dialog Settings
 !define MUI_LANGDLL_REGISTRY_ROOT "${PRODUCT_UNINST_ROOT_KEY}"
@@ -202,14 +206,15 @@ Function .onInit
   
   KeepGo2:
   ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion"
-  StrCmp $0 "" ContinueInst 0
+  StrCmp $0 "" StartInstall 0
 	  MessageBox MB_OKCANCEL|MB_ICONQUESTION "偵測到舊版 $0 已安裝，是否要移除舊版後重新安裝新版？" IDOK +2
 	  Abort
           Call uninstOld          
-          IfFileExists "$SYSDIR\OVIME.ime"  0 ContinueInst     ;代表反安裝失敗 
+          IfFileExists "$SYSDIR\OVIME.ime"  0 RemoveFinished     ;代表反安裝失敗 
           Abort
-    ContinueInst:     
-					MessageBox MB_ICONSTOP|MB_OK "continue"
+    RemoveFinished:     
+    		MessageBox MB_ICONINFORMATION|MB_OK "解除舊版完成。"				
+    StartInstall:     
 ;  !insertmacro MUI_LANGDLL_DISPLAY
 
 ;DOTNET start --------------------------------------------
@@ -373,11 +378,8 @@ ${ENDIF}
 notOffice2003:
 FunctionEnd
 
-
-
 Function openLinkNewWindow
   Pop $0
-  
   Push $3 
   Push $2
   Push $1
@@ -619,21 +621,13 @@ Section -Post
   System::Call 'imm32::ImmInstallIME(t "$SYSDIR\OVIME.ime", t "$(^Name)")'
   ${registry::Open} "${IME_ROOT_KEY}\${IME_KEY}" "/N='OVIME.ime' /G=1 /T=REG_SZ" $0
   ${registry::Find} $0 $1 $2 $3 $4
-  ;StrLen $5 "${IME_KEY}"
-  ;StrCpy $6 $1 "" $5
   StrCpy $6 $1 "" -8
-  ;MessageBox MB_OK "show 0:$0 1:$1 2:$2 3:$3 4:$4" IDOK +1
-  ;MessageBox MB_OK "show 6:$6" IDOK +1
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key" "$6"
   ${registry::Close} "$0"
   System::Call "user32::LoadKeyboardLayout(l $6, i 1)"
-  ;MessageBox MB_YESNO "若您是初次安裝，則須重新開機。是否要立刻重開機？" IDNO noreboot
-  ;  Reboot
-;noreboot:
 SectionEnd
 
-Function un.onUninstSuccess
-  ;HideWindow
+Function un.onUninstSuccess  
   MessageBox MB_ICONINFORMATION|MB_OK "$(^Name)已成功地從你的電腦移除。" /SD IDOK
 FunctionEnd
 
@@ -648,10 +642,8 @@ Section Uninstall
   Delete "$SYSDIR\OVIME.ime"
   IfErrors 0 ContinueUnist1
          MessageBox MB_ICONSTOP|MB_OK "偵測到有正在使用輸入法的程式，請關閉之或重新開機，以繼續反安裝程式。" IDOK +1
-;         Push "OVIMEinUSE"
          Quit
-  ContinueUnist1:
-  ;MessageBox MB_OK "繼續反安裝"
+  ContinueUnist1:  
   nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
   ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\excel-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\excel.exe" $R5
   ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\winword-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\winword.exe" $R6
@@ -660,8 +652,7 @@ Section Uninstall
   DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}\$0"
   
   ${registry::Open} "${IME_CURRENT_USER}\" " /V=1 /S=1 /N='$0' /G=1 /T=REG_SZ" $9
-  ${registry::Find} $9 $1 $2 $3 $4
-  ;MessageBox MB_ICONINFORMATION|MB_OK "show 9:$9 1:$1 2:$2 3:$3 " IDOK +1
+  ${registry::Find} $9 $1 $2 $3 $4  
   DeleteRegValue "${IME_CURRENT_USER}" "${IME_KEY_USER}" "$2"
   ${registry::Close} "$9"
 
@@ -672,12 +663,9 @@ Section Uninstall
   Delete "$SYSDIR\OVIMEUI.DLL"
   Delete "$INSTDIR\uninst.exe"
   RMDir /r "$WINDIR\OpenVanilla"
-
   Delete "$SMPROGRAMS\OpenVanilla\Uninstall.lnk"
   Delete "$SMPROGRAMS\OpenVanilla\OVPreferences.lnk"
-
   RMDir "$SMPROGRAMS\OpenVanilla"
-
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   SetAutoClose true
 SectionEnd
