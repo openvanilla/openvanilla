@@ -2,26 +2,23 @@
 #include "DisplayServer.h"
 #include "OVIME.h"
 
+DisplayServer* DisplayServer::m_self = NULL;
+/*
 AVDisplayServer *DisplayServer::lockIMC(HIMC h)
 {
 	hIMC = h;
-	imm = ModelImm::open(hIMC);
+	imm = ImmModel::open(hIMC);
 
 	lpIMC = imm->getIMC();
-	//ImmLockIMC(hIMC);
-
 	lpCompStr = imm->getCompStr();
-	//(LPCOMPOSITIONSTRING)ImmLockIMCC(lpIMC->hCompStr);
-
 	lpMyPrivate = imm->getMyPrivate();
-	//(LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 
 	return this;
 }
 
 AVDisplayServer *DisplayServer::releaseIMC()
 {
-	ModelImm::close();
+	ImmModel::close();
 
 	lpMyPrivate = NULL;
 	lpCompStr = NULL;
@@ -29,65 +26,67 @@ AVDisplayServer *DisplayServer::releaseIMC()
 	hIMC = NULL;
 
 	imm= NULL;
-	/*
-	if(lpMyPrivate)
-	{
-		if(lpIMC)
-			ImmUnlockIMCC(lpIMC->hPrivate);
-		lpMyPrivate=NULL;
-	}
-	if(lpCompStr)
-	{
-		if(lpIMC)
-			ImmUnlockIMCC(lpIMC->hCompStr);
-		lpCompStr=NULL;
-	}
-	if(hIMC)
-	{
-		ImmUnlockIMC(hIMC);
-		hIMC=NULL;
-	}
-	*/
+
 	return this;
+}
+*/
+
+DisplayServer* DisplayServer::open()
+{
+	if(m_self == NULL)
+		m_self = new DisplayServer();
+
+	return m_self;
+}
+
+void DisplayServer::connectModel(HIMC hIMC)
+{
+	m_model = ImmModel::open(hIMC);
 }
 
 AVDisplayServer *DisplayServer::setBufString(const char *str)
 {
 	wchar_t wstr[1024];
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
-	wcscpy(lpMyPrivate->PreEditStr, wstr);
-	MakeCompStr(lpMyPrivate, lpCompStr);
+	wcscpy(m_model->getMyPrivate()->PreEditStr, wstr);
+	MakeCompStr(m_model->getMyPrivate(), m_model->getCompStr());
+
 	murmur("\tAVDisplayServer *DisplayServer::setBufString(%s)",str);
-	UISetCompStr(lpMyPrivate->PreEditStr); 	//要不要先檢查有沒有PreEditStr有沒有東西？
+	UISetCompStr(m_model->getMyPrivate()->PreEditStr);
+	//要不要先檢查有沒有PreEditStr有沒有東西？
+
 	return this;
 }
 
-AVDisplayServer *DisplayServer::setBufString(const char *str,int caretX)
+AVDisplayServer *DisplayServer::setBufString(const char *str, int caretX)
 {
 	wchar_t wstr[1024];
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
-	wcscpy(lpMyPrivate->PreEditStr, wstr);
-	MakeCompStr(lpMyPrivate, lpCompStr);
-	murmur("\tAVDisplayServer *DisplayServer::setBufString(%s)",str);
-	UISetCompStr(lpMyPrivate->PreEditStr); 	//要不要先檢查有沒有PreEditStr有沒有東西？
+	wcscpy(m_model->getMyPrivate()->PreEditStr, wstr);
+	MakeCompStr(m_model->getMyPrivate(), m_model->getCompStr());
 
-	lpCompStr->dwCursorPos = caretX;
-	murmur("\tDisplayServer::setCursorPos-> %d",caretX);	
+	murmur("\tAVDisplayServer *DisplayServer::setBufString(%s)",str);
+	UISetCompStr(m_model->getMyPrivate()->PreEditStr);
+	//要不要先檢查有沒有PreEditStr有沒有東西？
+
+	m_model->getCompStr()->dwCursorPos = caretX;
+	murmur("\tDisplayServer::setCursorPos-> %d", caretX);
 	UISetCompCaretPosX(caretX);
 
 	return this;
 }
+
 AVDisplayServer *DisplayServer::sendBuf(const char *str)
 {
 	wchar_t wstr[1024];
-	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);	
+	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
 	
-	lpCompStr->dwResultStrLen = (int)wcslen(wstr);
+	m_model->getCompStr()->dwResultStrLen = (int)wcslen(wstr);
 
-	wcscpy(GETLPRESULTSTR(lpCompStr), wstr);	
-	wcscpy(lpMyPrivate->PreEditStr, L"");
+	wcscpy(GETLPRESULTSTR(m_model->getCompStr()), wstr);
+	wcscpy(m_model->getMyPrivate()->PreEditStr, L"");
 	
-	MakeCompStr(lpMyPrivate, lpCompStr);
+	MakeCompStr(m_model->getMyPrivate(), m_model->getCompStr());
 	UIClearCompStr();//即時update C# comp string 同步資料
 	
 	//<comment author='b6s'>
@@ -101,33 +100,35 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 
 	return this;
 }
+
 AVDisplayServer *DisplayServer::setCandiString(const char *str)
 {
 	wchar_t wstr[1024];
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
-	wcscpy(lpMyPrivate->CandStr, wstr);
-	UpdateCandidate(lpIMC, wstr);
+	wcscpy(m_model->getMyPrivate()->CandStr, wstr);
+	UpdateCandidate(m_model->getIMC(), wstr);
 //	MyGenerateMessage(hIMC,
 //			WM_IME_COMPOSITION, 0, GCS_COMPSTR);
-	UISetCandStr(lpMyPrivate->CandStr);
+	UISetCandStr(m_model->getMyPrivate()->CandStr);
 	return this;
 }
+
 AVDisplayServer *DisplayServer::showNotify(const char *str)
 {
 	murmur("\tAVDisplayServer *DisplayServer::showNotify");
 	wchar_t wstr[1024];
 	murmur("notify str=%s",str);
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
-	UISetNotifyStr(wstr);	
+	UISetNotifyStr(wstr);
 	//UIShowNotifyWindow();
 	return this;
 }
+
 AVDisplayServer *DisplayServer::hideNotify()
 {
 	UIHideNotifyWindow();	
 	return this;
 }
-
 
 DisplayServer *DisplayServer::moveBuf(int x, int y)
 {
@@ -206,12 +207,14 @@ DisplayServer *DisplayServer::showStatus(bool t)
 }
 
 AVDisplayServer *DisplayServer::showBuf(bool t)
-{		
+{
 	if(dsvr->isCompEnabled)
 	{
-		if(t && lpMyPrivate->PreEditStr && wcslen(lpMyPrivate->PreEditStr))	
+		if(t &&
+			m_model->getMyPrivate()->PreEditStr &&
+			wcslen(m_model->getMyPrivate()->PreEditStr))
 		{
-			murmur("\tAVDisplayServer *DisplayServer::showBuf");		
+			murmur("\tAVDisplayServer *DisplayServer::showBuf");
 			UIShowCompWindow();
 		}
 		else
@@ -224,22 +227,25 @@ AVDisplayServer *DisplayServer::showBuf(bool t)
 }
 
 AVDisplayServer *DisplayServer::showCandi(bool t)
-{		
+{
 	if(dsvr->isCandiEnabled)
 	{
-		if(t &&  lpMyPrivate->CandStr && wcslen(lpMyPrivate->CandStr))	
+		if(t &&
+			m_model->getMyPrivate()->CandStr &&
+			wcslen(m_model->getMyPrivate()->CandStr))
 		{
 			UIShowCandWindow();
-			murmur("\tAVDisplayServer *DisplayServer::showCandi");		
+			murmur("\tAVDisplayServer *DisplayServer::showCandi");
 		}
 		else
-		{		
+		{
 			UIHideCandWindow();
 			murmur("\tAVDisplayServer *DisplayServer::hideCandi");
 		}
 	}
 	return this;
 }
+
 /*AVDisplayServer *DisplayServer::setCursorPos(int i) //搬到 setBufStr
 {
 	lpCompStr->dwCursorPos = i;
@@ -248,11 +254,13 @@ AVDisplayServer *DisplayServer::showCandi(bool t)
 	UISetCompCaretPosX(i);
 	return this;
 }*/
+
 AVDisplayServer *DisplayServer::setMarkFrom(int i)
 {
 	UISetMarkFrom(i);
 	return this;
 }
+
 AVDisplayServer *DisplayServer::setMarkTo(int i)
 {
 	UISetMarkTo(i);

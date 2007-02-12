@@ -4,7 +4,7 @@
 #include "ExtraStructs.h"
 #include <commctrl.h>
 
-
+#include "ImmController.h"
 
 #include <vector>
 #include <string>
@@ -12,24 +12,6 @@
 #include <sstream>
 #include <fstream>
 using namespace std;
-
-long g_shiftPressedTime = -1;
-
-struct KeyInfo
-{
-	UINT repeatCount:16;
-	UINT scanCode:8;
-	UINT isExtended:1;
-	UINT reserved:4;
-	UINT contextCode:1;
-	UINT prevKeyState:1;
-	UINT isKeyUp:1;	// transition state
-};
-
-inline KeyInfo GetKeyInfo(LPARAM lparam)
-{	return *(KeyInfo*)&lparam;	}
-
-inline bool IsKeyDown(BYTE keystate){ return !!(keystate & 0xF0); }
 
 void
 MyGenerateMessage(HIMC hIMC, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -143,247 +125,15 @@ ImeEscape(HIMC hIMC,UINT uSubFunc,LPVOID lpData)
 BOOL APIENTRY 
 ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 {
-	murmur("Process keycode=%ud",uVKey);		
-	int spec;
-	int k;
+	murmur("Process keycode=%ud",uVKey);
 	if (!hIMC) return FALSE;
-	dsvr->lockIMC(hIMC);  //所以所有的 return 之前都必須 dsvr->releaseIMC();
-	if (!dsvr->lpIMC)
-	{
-		dsvr->releaseIMC();
-		return FALSE;
-	}
-	//if (lKeyData & 0x80000000)	
-	//	return FALSE;		
 
-	//if( (uVKey == VK_SHIFT)&&((GetKeyState(uVKey)& 0xF0) != 0xF0) )	
-	if ( GetKeyInfo(lKeyData).isKeyUp )
-	{	// Key up      
-		if( g_shiftPressedTime > 0 )	
-		{
-			BOOL retVal = FALSE;
-        	DWORD time = (GetTickCount() - g_shiftPressedTime);
-			if( uVKey == VK_SHIFT &&  time <= 20000 )
-            {
-				// Toggle Chinese/English mode.
-				//Only Shift: lParam == 2
-				MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
-				//return TRUE;
+	dsvr->connectModel(hIMC);
+	ImmController* controller = ImmController::open(ImmModel::open(hIMC));
+	BOOL retVal =
+		controller->onControlEvent(hIMC, uVKey, lKeyData, lpbKeyState);
+	ImmController::close();
 
-				//<comment author='b6s'>Tell the module that Shift was pressed
-				AVKeyCode keycode;
-				keycode.setShift(1);
-				//</comment>
-
-				//<comment author='b6s'>Redundant module processing
-				loader = AVLoader::getLoader();			
-				if(loader->keyEvent(UICurrentInputMethod(), keycode)) {
-					retVal = TRUE;
-					MyGenerateMessage(hIMC,
-							WM_IME_COMPOSITION, 0, GCS_COMPSTR);		
-				} else {
-					retVal = FALSE;
-					if(dsvr->hasCompStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) == 0)
-					{
-						dsvr->SetCompStarted(false);//要先做!
-						MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);						
-					}
-				}				
-				//</comment>
-            }
-            g_shiftPressedTime = -1;
-
-			/*暫時治標拿掉，應該還是要unlock，然後在 dsvr 裡面所有地方要 lock/unlock
-			dsvr->releaseIMC();  
-			*/			
-			return retVal;
-        }
-		dsvr->releaseIMC();		
-        return FALSE;
-    }
-
-	if( uVKey == VK_SHIFT  )	
-	{
-    	//if( ! IsKeyDown( lpbKeyState[VK_CONTROL] ) && g_shiftPressedTime < 0 )
-		if( g_shiftPressedTime < 0 )
-		{
-			g_shiftPressedTime = GetTickCount();
-		}
-    }
-    else if( g_shiftPressedTime > 0 )
-	{
-		g_shiftPressedTime = -1;
-	}
-
-	if (/*uVKey == VK_SHIFT ||*/ uVKey == VK_CONTROL || uVKey == VK_MENU) 	
-	{
-		dsvr->releaseIMC();		
-		return FALSE; //<James comment> for app :"單單按 ctrl 或 alt"
-	}
-	
-	
-	if(LOWORD(uVKey) == VK_K && (lpbKeyState[VK_CONTROL] & 0x80)&& (lpbKeyState[VK_MENU] & 0x80) )
-	{
-		// Toggle Large Candidate window.
-		//Only Shift: lParam == 6
-		murmur("IME.cpp: ctrl+alt+K");
-		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 6);
-		dsvr->releaseIMC();		
-		return TRUE;  // ctrl+ alt +k		
-	}
-
-		
-	if(LOWORD(uVKey) == VK_L && (lpbKeyState[VK_CONTROL] & 0x80)&& (lpbKeyState[VK_MENU] & 0x80) )
-	{
-		// Test Notify window.
-		murmur("IME.cpp: ctrl+alt+L");
-		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 7);
-		dsvr->releaseIMC();		
-		return TRUE;  // ctrl+ alt +L		
-	}
-	if(LOWORD(uVKey) == VK_G && (lpbKeyState[VK_CONTROL] & 0x80)&& (lpbKeyState[VK_MENU] & 0x80) )
-	{
-		// Toggle Traditional / Simplified Chinese.
-		//Only Shift: lParam == 4
-		murmur("IME.cpp: ctrl+alt+g");
-		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 4);
-		dsvr->releaseIMC();		
-		return TRUE;  // ctrl+ alt +g		
-	}
-
-	if(LOWORD(uVKey) == VK_SPACE && (lpbKeyState[VK_CONTROL] & 0x80))
-	{
-		//dsvr->releaseIMC();
-		return TRUE;  //ctrl+space
-	}
-/***
-    if(LOWORD(uVKey) == VK_SPACE && IsKeyDown(lpbKeyState[VK_SHIFT]))
-	{
-		//shift+space: lParam == 1
-		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 1);	
-		dsvr->releaseIMC();		
-		return FALSE;  //shift + space
-	}
-****/
-	//CTRL + "\" or "="
-	if((LOWORD(uVKey) == VK_OEM_5 || LOWORD(uVKey) == VK_OEM_PLUS) &&
-		((lpbKeyState[VK_CONTROL] & 0x80)))
-	{
-		//Change the module by Ctrl+"\": lParam == 8
-		if(LOWORD(uVKey) == VK_OEM_5)
-			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 8);
-		//Change the BoPoMoFo keyboard layout by Ctrl+"=": lParam == 5
-		else if(LOWORD(uVKey) == VK_OEM_PLUS)
-			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 5);
-
-		MyGenerateMessage(hIMC, WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
-		dsvr->SetCompStarted(false); //要先做!
-		MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
-		InitCompStr(dsvr->lpCompStr);
-
-		dsvr->releaseIMC();
-		return TRUE;
-	}
-	//Change CHI/ENG by CAPS
-	//if(LOWORD(uVkey) == VK_CAPS)
-	//	return TRUE;
-
-	
-	if(!dsvr->hasCompStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) == 0)	
-	{
-		dsvr->SetCompStarted(true);//要先做!
-		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);		
-	}
-	
-	k = LOWORD(uVKey);
-	if( k >= 65 && k <= 90)
-		k = k + 32;
-	WORD out[2];
-	spec = ToAscii(uVKey, MapVirtualKey(uVKey, 0), lpbKeyState, (LPWORD)&out, 0);
-	murmur("KEY: %c\n", out[0]);
-	switch(LOWORD(uVKey))	{
-	case VK_PRIOR: // pageup
-		k = 11;
-		break;
-	case VK_NEXT: // pagedown
-		k = 12;
-		break;
-	case VK_END:
-		k = 4;
-		break;
-	case VK_HOME:
-		k = 1;
-		break;
-	case VK_LEFT:
-		k = 28;
-		break;
-	case VK_UP:
-		k = 30;
-		break;
-	case VK_RIGHT:
-		k = 29;
-		break;
-	case VK_DOWN:
-		k = 31;
-		break;
-	case VK_DELETE:
-		k = 127;
-		break;
-	default:
-		//DebugLog("uVKey: %x, %c\n", LOWORD(uVKey), LOWORD(uVKey));
-		break;
-	}
-	
-	if(spec == 1)
-		k = (char)out[0];
-
-	AVKeyCode keycode(k);
-	DWORD conv, sentence;
-	ImmGetConversionStatus( hIMC, &conv, &sentence);
-
-	if( !(conv & IME_CMODE_NATIVE) )	//Alphanumeric mode
-		keycode.setShift(1);
-		//<comment author='b6s'>Unbind CapsLock and Alphanumeric mode
-		//keycode.setCapslock(1);
-		//</comment>		
-	if(LOWORD(lpbKeyState[VK_CAPITAL]))
-		keycode.setCapslock(1);
-	if(lpbKeyState[VK_SHIFT] & 0x80)
-		keycode.setShift(1);
-	if(lpbKeyState[VK_CONTROL] & 0x80)
-		keycode.setCtrl(1);
-	if(lpbKeyState[VK_MENU] & 0x80)
-		keycode.setAlt(1);
-	if((lpbKeyState[VK_NUMLOCK])
-		&& (uVKey >= VK_NUMPAD0)
-		&& (uVKey <= VK_DIVIDE))
-		keycode.setNum(1);
-	
-	loader = AVLoader::getLoader();
-	BOOL retVal = FALSE;
-	if(loader->keyEvent(UICurrentInputMethod(), keycode)) //如果目前模組處理此key
-	{
-		retVal = TRUE;
-
-		if(LOWORD(uVKey) != VK_RETURN)
-			MyGenerateMessage(hIMC, WM_IME_COMPOSITION, 0, GCS_COMPSTR);
-		else {
-			MyGenerateMessage(hIMC, WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
-			dsvr->SetCompStarted(false); //要先做!
-			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
-			InitCompStr(dsvr->lpCompStr);
-		}
-	} else {
-		retVal = FALSE;
-		//James comment: 解決未組成字之前選字 comp window 會消失的問題(?待商榷)
-
-		if(dsvr->hasCompStarted && wcslen(GETLPCOMPSTR(dsvr->lpCompStr)) == 0)
-		{
-			dsvr->SetCompStarted(false); //要先做!
-			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
-		}		
-	}
-	dsvr->releaseIMC();	
 	return retVal; 
 }
 
@@ -475,7 +225,16 @@ ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 	//if(LOWORD(uVKey) == VK_CAPS)
 	//	MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
 
-	return 0;
+	murmur("ImeToAsciiEx: %ud",uVKey);
+	if (!hIMC) return FALSE;
+
+	dsvr->connectModel(hIMC);
+	ImmController* controller = ImmController::open(ImmModel::open(hIMC));
+	BOOL retVal =
+		controller->onTypingEvent(hIMC, uVKey, lpbKeyState);
+	ImmController::close();
+
+	return retVal; 
 }
 
 BOOL APIENTRY

@@ -86,34 +86,4 @@ extern "C" {
 	void ReloadConfig();
 	*/
 }
-/*
-#ifdef DEBUG 
-    #include <stdarg.h>
-    #include <stdio.h>
-    inline static void DebugLog(const char* format,...) {
-	static char first_time=1;
-	FILE *fp;
-
-	if (first_time) {
-		first_time=0;
-		if (fp=fopen("orz.txt", "w")) {
-			fclose(fp);
-		}
-	}
-
-	if (fp=fopen("orz.txt", "a")) {
-		va_list args;
-		va_start (args, format);
-		vfprintf (fp, format, args);
-		va_end (args);
-		fprintf (fp, "\n");
-		fclose(fp);
-	}
-    }
-
-#else
-    inline static void DebugLog(const char* format,...) {
-    }
-#endif
-*/
 #endif // OVIME_h

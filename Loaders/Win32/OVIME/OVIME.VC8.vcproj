@@ -221,7 +221,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\ModelImm.cpp"
+				RelativePath=".\ImmController.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ImmModel.cpp"
 				>
 			</File>
 			<File
@@ -262,11 +266,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ImmController.h"
+				>
+			</File>
+			<File
 				RelativePath=".\immdev.h"
 				>
 			</File>
 			<File
-				RelativePath=".\ModelImm.h"
+				RelativePath=".\ImmModel.h"
 				>
 			</File>
 			<File

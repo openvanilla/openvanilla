@@ -108,7 +108,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 				murmur("\thUICurIMC==true");
 				if(lParam & ISC_SHOWUICOMPOSITIONWINDOW) // not sure
 				{				
-					dsvr->lockIMC(hUICurIMC);					
+					dsvr->connectModel(hUICurIMC);
 					dsvr->showBuf(true);
 				}
 				//dsvr->showCandi(true); //註解掉因為切開就應該 clear cand了		
@@ -184,7 +184,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	case WM_DESTROY:
 		murmur("WM_DESTROY");
-		dsvr->lockIMC(hUICurIMC);
+		dsvr->connectModel(hUICurIMC);
 		dsvr->showStatus(false);
 		dsvr->showBuf(false);
 		dsvr->showCandi(false);
@@ -192,7 +192,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		loader = AVLoader::getLoader();
 		loader->closeModule();
 		loader->shutdown();
-		dsvr->releaseIMC();
+		//dsvr->releaseIMC();
 
 		break;
 

@@ -6,24 +6,15 @@
 #include "ExtraStructs.h"
 #include "AVDisplayServer.h"
 
-#include "ModelImm.h"
+#include "ImmModel.h"
 
 class DisplayServer : public AVDisplayServer
 {
 public:
-	DisplayServer()
-	{
-		hIMC=NULL;
-		lpIMC=NULL;
-		lpCompStr=NULL;
-		lpMyPrivate=NULL;		
-		hasCompStarted=false;
-		isStatusEnabled=false;
-		isCompEnabled=false;
-		isCandiEnabled=false;
-	}
-	AVDisplayServer *lockIMC(HIMC h);
-	AVDisplayServer *releaseIMC();
+	static DisplayServer* open();
+
+	void connectModel(HIMC hIMC);
+
 	virtual AVDisplayServer *setBufString(const char *str);
 	virtual AVDisplayServer *setBufString(const char *str,int caretX);
 	virtual AVDisplayServer *sendBuf(const char *str);
@@ -45,17 +36,23 @@ public:
 	virtual DisplayServer *SetCandiEnabled(bool t);	
 
 public:	//James: 為了在Utils.cpp, IME.cpp 使用，暫改成public
-	HIMC hIMC;	
-	LPCOMPOSITIONSTRING lpCompStr;
-	LPINPUTCONTEXT lpIMC;
-	LPMYPRIVATE lpMyPrivate;	
 	bool hasCompStarted; 
 	bool isStatusEnabled; 
 	bool isCompEnabled; 
 	bool isCandiEnabled;
 
+protected:
+	DisplayServer()
+	{
+		hasCompStarted=false;
+		isStatusEnabled=false;
+		isCompEnabled=false;
+		isCandiEnabled=false;
+	}
+
 private:
-	ModelImm* imm;
+	static DisplayServer* m_self;
+	ImmModel* m_model;
 };
 #endif //DISPLAYSERVER_H
 

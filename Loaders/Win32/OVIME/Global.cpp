@@ -10,5 +10,5 @@ bool isChinese = true;
 bool isTraditional = true;
 bool isFullShape = false;
 
-DisplayServer *dsvr = new DisplayServer();
+DisplayServer *dsvr = DisplayServer::open();
 AVLoader* loader = AVLoader::getLoader();
