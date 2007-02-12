@@ -89,9 +89,9 @@ namespace CSharpFormLibrary
 
         #endregion
 
-        private System.Windows.Forms.Label label1;        
+        /*private System.Windows.Forms.Label label1;        
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.TextBox richTextBox1;
+        private System.Windows.Forms.TextBox richTextBox1;*/
        
     }
 }

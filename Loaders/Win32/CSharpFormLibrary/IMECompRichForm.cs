@@ -242,7 +242,7 @@ namespace CSharpFormLibrary
         }
    
 
-        private void timer2_Tick(object sender, EventArgs e)
+        /*private void timer2_Tick(object sender, EventArgs e)
         {            
             if (label1.Visible == true)
             {
@@ -254,7 +254,7 @@ namespace CSharpFormLibrary
                 label1.Visible = true;
                 System.Diagnostics.Debug.WriteLine("label1.Visible=true");
             }
-        }
+        }*/
 
     }
 }
