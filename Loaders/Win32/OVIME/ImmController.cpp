@@ -203,7 +203,8 @@ BOOL ImmController::onTypingEvent
 	ImmGetConversionStatus( hIMC, &conv, &sentence);
 
 	if( !(conv & IME_CMODE_NATIVE) )	//Alphanumeric mode
-		keycode.setShift(1);
+		return FALSE;
+		//keycode.setShift(1);
 		//<comment author='b6s'>Unbind CapsLock and Alphanumeric mode
 		//keycode.setCapslock(1);
 		//</comment>		
