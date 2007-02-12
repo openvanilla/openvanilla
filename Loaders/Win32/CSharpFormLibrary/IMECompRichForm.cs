@@ -66,10 +66,10 @@ namespace CSharpFormLibrary
                 if (this.Width - 50 < (int)size.Width)
                     this.Width += 100;
 
-                //draw backcolor- turn off
-                /*b = new System.Drawing.SolidBrush(SystemColors.ButtonFace);
-                e.Graphics.FillRectangle(b, this.Bounds);
-                b.Dispose();*/
+                //draw backcolor
+                Brush b = new System.Drawing.SolidBrush(Color.GhostWhite);
+                e.Graphics.FillRectangle(b, this.ClientRectangle);
+                b.Dispose();
 
                 //draw string
                 //Brush b;
