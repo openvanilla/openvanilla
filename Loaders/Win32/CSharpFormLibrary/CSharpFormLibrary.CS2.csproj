@@ -117,6 +117,9 @@
     <Compile Include="IMECompRichForm.Designer.cs">
       <DependentUpon>IMECompRichForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IMEListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="IMENotifyForm.cs">
       <SubType>Form</SubType>
     </Compile>
