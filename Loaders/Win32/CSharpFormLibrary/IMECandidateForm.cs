@@ -12,7 +12,8 @@ namespace CSharpFormLibrary
 {
     public class IMECandidateForm : System.Windows.Forms.Form
     {
-        private System.Windows.Forms.ListView lbCandidates;
+        //private System.Windows.Forms.ListView lbCandidates;
+        private IMEListView lbCandidates;
         private IContainer components;
         private int currentPage = 0; //目前頁次 
         private int totalPage = 0; //傳入的 candidate 共有幾頁                 
@@ -90,7 +91,8 @@ namespace CSharpFormLibrary
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lbCandidates = new System.Windows.Forms.ListView();
+            //this.lbCandidates = new System.Windows.Forms.ListView();
+            this.lbCandidates = new IMEListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
