@@ -49,6 +49,7 @@ namespace CSharpFormLibrary
         private IMEButton buttonZhEn;
         private IMEButton buttonHantHans;
         private IMEButton buttonPref;
+        private IMEButton buttonSymbol;
         private System.Windows.Forms.ContextMenu menuModule;
         private System.Windows.Forms.Panel panelHead;
 		private System.Windows.Forms.Panel panelBody;
@@ -202,6 +203,7 @@ namespace CSharpFormLibrary
             this.buttonHantHans = new CSharpFormLibrary.IMEButton();
             this.buttonZhEn = new CSharpFormLibrary.IMEButton();
             this.buttonPref = new CSharpFormLibrary.IMEButton();
+            this.buttonSymbol = new CSharpFormLibrary.IMEButton();
             this.panelBody.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -229,11 +231,12 @@ namespace CSharpFormLibrary
             this.panelBody.Controls.Add(this.buttonHantHans);
             this.panelBody.Controls.Add(this.buttonZhEn);
             this.panelBody.Controls.Add(this.buttonPref);
+            this.panelBody.Controls.Add(this.buttonSymbol);
             this.panelBody.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelBody.Location = new System.Drawing.Point(6, 0);
             this.panelBody.Margin = new System.Windows.Forms.Padding(0);
             this.panelBody.Name = "panelBody";
-            this.panelBody.Size = new System.Drawing.Size(155, 35);
+            this.panelBody.Size = new System.Drawing.Size(195, 35);
             this.panelBody.TabIndex = 0;
             // 
             // buttonMenu
@@ -280,7 +283,7 @@ namespace CSharpFormLibrary
             this.buttonZhEn.Size = new System.Drawing.Size(40, 33);
             this.buttonZhEn.TabIndex = 2;
             this.buttonZhEn.UseVisualStyleBackColor = false;
-            this.buttonZhEn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonZhEn_MouseUp);
+            this.buttonZhEn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonZhEn_MouseUp);           
             // 
             // buttonPref
             // 
@@ -297,10 +300,25 @@ namespace CSharpFormLibrary
             this.buttonPref.UseVisualStyleBackColor = false;
             this.buttonPref.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonPref_MouseUp);
             // 
+            // buttonSymbol
+            // 
+            this.buttonSymbol.BackColor = System.Drawing.Color.Transparent;
+            this.buttonSymbol.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonSymbol.Font = new System.Drawing.Font("PMingLiU", 12F);
+            this.buttonSymbol.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.buttonSymbol.Location = new System.Drawing.Point(153, 0);
+            this.buttonSymbol.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonSymbol.Name = "buttonSymbol";
+            this.buttonSymbol.Size = new System.Drawing.Size(40, 33);
+            this.buttonSymbol.TabIndex = 4;
+            this.buttonSymbol.Text = "£á";
+            this.buttonSymbol.UseVisualStyleBackColor = false;
+            this.buttonSymbol.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonSymbol_MouseUp);
+            // 
             // IMEStatusForm
             // 
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(161, 35);
+            this.ClientSize = new System.Drawing.Size(201, 35);
             this.ControlBox = false;
             this.Controls.Add(this.panelHead);
             this.Controls.Add(this.panelBody);
@@ -535,64 +553,14 @@ namespace CSharpFormLibrary
                    0, 0);
 
             proc.Start();
-            proc.Exited+=new EventHandler(proc_Exited);
-            //proc.WaitForExit();
-            
-           /* configFile.Refresh();
-            DateTime before = configFile.LastWriteTime;
-            System.Threading.Thread.Sleep(1000); //is necessary!!
-            while (true)
-            {
-                configFile.Refresh();
-                DateTime after = configFile.LastWriteTime;
-                if (!after.Equals(before))
-                {
-                    if (!proc.HasExited)
-                    {
-                        try
-                        {
-                            proc.Kill();
-                        }catch(Exception ex)
-                        {
-                            Debug.WriteLine(ex.Message);
-                            break;
-                        }
-                    }
-                    break;
-                }
-                System.Threading.Thread.Sleep(1000);                
-            }
-            */
-/*
-            ret = UtilFuncs.SendMessage(
-                new IntPtr((long)m_AppHWnd),
-                (uint)UtilFuncs.WindowsMessage.WM_CREATE,
-                0, 0);
+            proc.Exited+=new EventHandler(proc_Exited);           
+        }
 
-            ret = UtilFuncs.SendMessage(
-                new IntPtr((long)m_AppHWnd),
-                (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
-                0x0002, //IMN_OPENSTATUSWINDOW
-                0);
-
-            ret = UtilFuncs.SendMessage(
-                new IntPtr((long)m_AppHWnd),
-                (uint)UtilFuncs.WindowsMessage.WM_IME_RELOADCONFIG,
-                0, 0);*/
-
-            /*
-            ret = UtilFuncs.SendMessage(
-                new IntPtr((long)m_AppHWnd),
-                (uint)UtilFuncs.WindowsMessage.WM_IME_SETCONTEXT,
-                1, 0);
-             */
-
-            /*
-            ret = UtilFuncs.SendMessage(
-                new IntPtr((long)m_AppHWnd),
-                (uint)UtilFuncs.WindowsMessage.WM_IME_STARTCOMPOSITION,
-                0, 0);
-             */
+        private void buttonSymbol_MouseUp(object sender, MouseEventArgs e) //²Å¸¹ªí
+        {            
+         /*   int ret = UtilFuncs.SendMessage(m_AppHWnd,
+                   (uint)UtilFuncs.WindowsMessage.WM_DESTROY,
+                   0, 0);*/
         }
 
         private void ResizeAll()
@@ -600,7 +568,7 @@ namespace CSharpFormLibrary
             Debug.WriteLine("ReSize");
             this.panelBody.Width = 5+this.buttonMenu.Width +
                 (this.buttonHantHans.Visible ? this.buttonHantHans.Width : 0) +
-                this.buttonZhEn.Width + this.buttonPref.Width;
+                this.buttonZhEn.Width + this.buttonPref.Width + this.buttonSymbol.Width;
             this.Width = this.panelBody.Width + this.panelHead.Width;                                            
             this.buttonZhEn.Location = new Point(this.buttonMenu.Bounds.Right, 0);
             this.buttonPref.Location = new Point(this.buttonZhEn.Bounds.Right, 0);
