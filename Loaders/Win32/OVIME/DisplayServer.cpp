@@ -1,4 +1,4 @@
-//#define OV_DEBUG 
+#define OV_DEBUG 
 #include "DisplayServer.h"
 #include "OVIME.h"
 
@@ -39,9 +39,9 @@ DisplayServer* DisplayServer::open()
 	return m_self;
 }
 
-void DisplayServer::connectModel(HIMC hIMC)
+void DisplayServer::connectModel(ImmModel* model)
 {
-	m_model = ImmModel::open(hIMC);
+	m_model = model;
 }
 
 AVDisplayServer *DisplayServer::setBufString(const char *str)
@@ -81,7 +81,7 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 	wchar_t wstr[1024];
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
 	
-	m_model->getCompStr()->dwResultStrLen = (int)wcslen(wstr);
+		m_model->getCompStr()->dwResultStrLen = (int)wcslen(wstr);
 
 	wcscpy(GETLPRESULTSTR(m_model->getCompStr()), wstr);
 	wcscpy(m_model->getMyPrivate()->PreEditStr, L"");
@@ -210,6 +210,7 @@ AVDisplayServer *DisplayServer::showBuf(bool t)
 {
 	if(dsvr->isCompEnabled)
 	{
+				murmur("m_model:%p", m_model);
 		if(t &&
 			m_model->getMyPrivate()->PreEditStr &&
 			wcslen(m_model->getMyPrivate()->PreEditStr))
@@ -230,7 +231,7 @@ AVDisplayServer *DisplayServer::showCandi(bool t)
 {
 	if(dsvr->isCandiEnabled)
 	{
-		if(t &&
+				if(t &&
 			m_model->getMyPrivate()->CandStr &&
 			wcslen(m_model->getMyPrivate()->CandStr))
 		{

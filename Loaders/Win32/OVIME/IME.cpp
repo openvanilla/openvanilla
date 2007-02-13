@@ -1,4 +1,4 @@
-//#define OV_DEBUG
+#define OV_DEBUG
 #include "OVIME.h"
 #include "AVKeyCode.h"
 #include "ExtraStructs.h"
@@ -125,16 +125,23 @@ ImeEscape(HIMC hIMC,UINT uSubFunc,LPVOID lpData)
 BOOL APIENTRY 
 ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 {
-	murmur("Process keycode=%ud",uVKey);
-	if (!hIMC) return FALSE;
+	BOOL isProcessed = FALSE;
+	murmur("ImeProcessKey: %ud", uVKey);
+	if (!hIMC) isProcessed;
 
-	dsvr->connectModel(hIMC);
-	ImmController* controller = ImmController::open(ImmModel::open(hIMC));
-	BOOL retVal =
-		controller->onControlEvent(hIMC, uVKey, lKeyData, lpbKeyState);
-	ImmController::close();
+	ImmModel* model = ImmModel::open(hIMC);
 
-	return retVal; 
+	dsvr->connectModel(model);
+	ImmController* controller = ImmController::open(model);
+	if(controller->onControlEvent(hIMC, uVKey, lKeyData, lpbKeyState))
+		isProcessed = TRUE;
+	else
+		isProcessed =
+			controller->onTypingEvent(hIMC, uVKey, lKeyData, lpbKeyState);
+
+	ImmModel::close();
+
+	return isProcessed;
 }
 
 BOOL APIENTRY 
@@ -198,43 +205,10 @@ ImeSetActiveContext(HIMC hIMC,BOOL fFlag)
 UINT APIENTRY 
 ImeToAsciiEx (UINT uVKey, UINT uScanCode,
 			  CONST LPBYTE lpbKeyState,
-			  LPDWORD lpdwTransKey, UINT fuState,HIMC hIMC)
-{	
-	//<comment author='b6s'>
-	//Moves back to ImeProcessKey for preventing strange messaging bug.
-	/*
-	if((lpbKeyState[VK_CONTROL] & 0x80))
-	{
-		//Change the module by Ctrl+"\": lParam == 0
-		if(LOWORD(uVKey) == VK_OEM_5)
-			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 8);
-		//Change the BoPoMoFo keyboard layout by Ctrl+"=": lParam == 5
-		else if(LOWORD(uVKey) == VK_OEM_PLUS)
-			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 5);
-
-		//<comment author='b6s'>
-		//Addes unlocking here to return the resources locked in ImeProcessKey.
-		//This solution needs to be refactored.
-		dsvr->releaseIMC();
-		//</comment>
-	}
-	*/
-	//</comment>
-
-	//Change CHI/END by CAPS
-	//if(LOWORD(uVKey) == VK_CAPS)
-	//	MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
-
-	murmur("ImeToAsciiEx: %ud",uVKey);
-	if (!hIMC) return FALSE;
-
-	dsvr->connectModel(hIMC);
-	ImmController* controller = ImmController::open(ImmModel::open(hIMC));
-	BOOL retVal =
-		controller->onTypingEvent(hIMC, uVKey, lpbKeyState);
-	ImmController::close();
-
-	return retVal; 
+			  LPDWORD lpdwTransKey, UINT fuState, HIMC hIMC)
+{
+	//murmur("ImeToAsciiEx");
+	return 0;
 }
 
 BOOL APIENTRY

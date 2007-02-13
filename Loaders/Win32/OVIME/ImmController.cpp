@@ -1,3 +1,4 @@
+#define OV_DEBUG
 #include "ImmController.h"
 
 ImmController* ImmController::m_self = NULL;
@@ -13,9 +14,8 @@ ImmController::ImmController(ImmModel* model)
 
 ImmController::~ImmController(void)
 {
-	m_model->close();
+	//m_model->close();
 	m_model = NULL;
-
 	m_self = NULL;
 }
 
@@ -23,6 +23,8 @@ ImmController* ImmController::open(ImmModel* model)
 {
 	if(m_self == NULL)
 		m_self = new ImmController(model);
+	else if(model != m_self->m_model)
+		m_self->m_model = model;
 
 	return m_self;
 }
@@ -35,20 +37,18 @@ void ImmController::close(void)
 BOOL ImmController::onKeyShift(HIMC hIMC, LPARAM lKeyData)
 {
 	BOOL isShiftEaten = FALSE;
-
 	if(m_shiftPressedTime == 0)
 		m_shiftPressedTime = GetTickCount();
 	else if(getKeyInfo(lKeyData).isKeyUp)
 	{
-		if(GetTickCount() - m_shiftPressedTime <= 20000)
+		if(GetTickCount() - m_shiftPressedTime < 100)
 		{
 			//Toggle Chinese/English mode.
 			//lParam == 2
 			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
 			isShiftEaten = TRUE;
 		}
-
-		m_shiftPressedTime = 0;        
+		m_shiftPressedTime = 0;
     }
 
 	return isShiftEaten;
@@ -64,18 +64,15 @@ BOOL ImmController::onControlEvent
 				case VK_G:
 					//Toggle Traditional / Simplified Chinese.
 					//lParam == 4
-					murmur("IME.cpp: ctrl+alt+g");
 					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 4);
 					return TRUE;  // ctrl+ alt +g
 				case VK_K:
 					//Toggle Large Candidate window.
 					//lParam == 6
-					murmur("IME.cpp: ctrl+alt+K");
 					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 6);
 					return TRUE;
 				case VK_L:
 					// Test Notify window.
-					murmur("IME.cpp: ctrl+alt+L");
 					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 7);
 					return TRUE;
 				default:
@@ -104,12 +101,11 @@ BOOL ImmController::onControlEvent
 	}
 
 	switch(uVKey) {
-		case VK_CONTROL:
-		case VK_MENU:
-			return FALSE;
 		case VK_SHIFT:
 		{
-			BOOL isShiftPressedOnly = onKeyShift(hIMC, lKeyData);
+			return onKeyShift(hIMC, lKeyData);
+
+			/*
 			BOOL isKeyProcessed = FALSE;
 			if(isShiftPressedOnly) {
 				//<comment author='b6s'>Tell the module that Shift was pressed
@@ -119,7 +115,7 @@ BOOL ImmController::onControlEvent
 
 				//<comment author='b6s'>Redundant module processing
 				if(m_loader->keyEvent(UICurrentInputMethod(), keycode)) {
-					isKeyProcessed = TRUE;
+					//isKeyProcessed = TRUE;
 					MyGenerateMessage(hIMC,
 							WM_IME_COMPOSITION, 0, GCS_COMPSTR);
 				} else {
@@ -131,28 +127,32 @@ BOOL ImmController::onControlEvent
 					}
 				}
 				//</comment>
-
-				/*暫時治標拿掉，應該還是要unlock，然後在 dsvr 裡面所有地方要 lock/unlock
-				dsvr->releaseIMC();  
-				*/
-				//return retVal;
 			}
 
 			return isKeyProcessed;
+			*/
 		}
+		case VK_CONTROL:
+		case VK_MENU:
+			return FALSE;
 	}
 
-	return TRUE;
+	return FALSE;
 }
 
 BOOL ImmController::onTypingEvent
-(HIMC hIMC, UINT uVKey, CONST LPBYTE lpbKeyState)
+(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 {
-	if(!m_isCompStarted &&
+	BOOL isProcessed = FALSE;
+
+	if(getKeyInfo(lKeyData).isKeyUp) return isProcessed;
+
+		if(!m_isCompStarted &&
 		wcslen(GETLPCOMPSTR(m_model->getCompStr())) == 0)	
 	{
+		murmur("STARTCOMPOSITION");
 		m_isCompStarted = true;//要先做!
-		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);		
+		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);
 	}
 
 	int k = LOWORD(uVKey);
@@ -161,8 +161,8 @@ BOOL ImmController::onTypingEvent
 	WORD out[2];
 	int spec =
 		ToAscii(uVKey, MapVirtualKey(uVKey, 0), lpbKeyState, (LPWORD)&out, 0);
-	murmur("KEY: %c\n", out[0]);
-	switch(LOWORD(uVKey))	{
+	murmur("KEY: %c", out[0]);
+	switch(LOWORD(uVKey)) {
 	case VK_PRIOR: // pageup
 		k = 11;
 		break;
@@ -203,7 +203,7 @@ BOOL ImmController::onTypingEvent
 	ImmGetConversionStatus( hIMC, &conv, &sentence);
 
 	if( !(conv & IME_CMODE_NATIVE) )	//Alphanumeric mode
-		return FALSE;
+		return isProcessed;
 		//keycode.setShift(1);
 		//<comment author='b6s'>Unbind CapsLock and Alphanumeric mode
 		//keycode.setCapslock(1);
@@ -221,30 +221,32 @@ BOOL ImmController::onTypingEvent
 		&& (uVKey <= VK_DIVIDE))
 		keycode.setNum(1);
 	
-	BOOL retVal = FALSE;
 	if(m_loader->keyEvent(UICurrentInputMethod(), keycode)) //如果目前模組處理此key
 	{
-		retVal = TRUE;
-
-		if(LOWORD(uVKey) != VK_RETURN)
+		isProcessed = TRUE;
+		if(LOWORD(uVKey) != VK_RETURN) {
+			murmur("COMPOSITION GCS_COMPSTR");
 			MyGenerateMessage(hIMC, WM_IME_COMPOSITION, 0, GCS_COMPSTR);
+		}
 		else {
+			murmur("COMPOSITION GCS_RESULTSTR");
 			MyGenerateMessage(hIMC, WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
+
 			m_isCompStarted = false; //要先做!
+			murmur("ENDCOMPOSITION");
 			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
 			//InitCompStr(m_model->getCompStr());
 		}
 	} else {
-		retVal = FALSE;
 		//James comment: 解決未組成字之前選字 comp window 會消失的問題(?待商榷)
-
 		if(m_isCompStarted &&
 			wcslen(GETLPCOMPSTR(m_model->getCompStr())) == 0)
 		{
+			murmur("ENDCOMPOSITION");
 			m_isCompStarted = false; //要先做!
 			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
 		}
 	}
 
-	return retVal;
+	return isProcessed;
 }

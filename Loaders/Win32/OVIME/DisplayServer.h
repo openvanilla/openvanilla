@@ -13,7 +13,7 @@ class DisplayServer : public AVDisplayServer
 public:
 	static DisplayServer* open();
 
-	void connectModel(HIMC hIMC);
+	void connectModel(ImmModel* model);
 
 	virtual AVDisplayServer *setBufString(const char *str);
 	virtual AVDisplayServer *setBufString(const char *str,int caretX);

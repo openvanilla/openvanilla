@@ -29,7 +29,7 @@ public:
 	static void close(void);
 
 	inline KeyInfo getKeyInfo(LPARAM lparam) { return *(KeyInfo*)&lparam; }
-	inline bool isKeyDown(BYTE keystate) { return !!(keystate & 0xF0); }
+	inline bool isKeyDown(BYTE keyState) { return !!(keyState & 0xF0); }
 
 	inline bool isShiftPressed(CONST LPBYTE lpbKeyState)
 	{ return (lpbKeyState[VK_SHIFT] & 0x80) ? true: false; }
@@ -44,7 +44,7 @@ public:
 	BOOL onControlEvent(
 		HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState);
 	BOOL onTypingEvent(
-		HIMC hIMC, UINT uVKey, CONST LPBYTE lpbKeyState);
+		HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState);
 
 protected:
 	ImmController(ImmModel* model);
