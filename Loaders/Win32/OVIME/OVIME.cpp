@@ -13,11 +13,11 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 	{
 	case DLL_PROCESS_ATTACH:
 		// load UI library
-		char str[1024];
-		wchar_t wstr[1024];
+		//char str[1024];
+		//wchar_t wstr[1024];
 		Watch watch;
 		watch.start();
-		loader = AVLoader::getLoader();
+		loader = AVLoader::open();
 		watch.stop();
 		murmur("%1.3f sec:\tAVLoader::getLoader()", watch.getSec());
 
@@ -73,7 +73,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		break;
 	case DLL_PROCESS_DETACH:
 		// free UI library
-		loader->shutdown();
+		AVLoader::close();
 		UnregisterClass(UICLASSNAME, (HINSTANCE)hModule);
 		IMEUIUnRegisterClass( (HINSTANCE)hModule );
 		//<comment author='b6s'>Test for a replacement of UI's DllMain()

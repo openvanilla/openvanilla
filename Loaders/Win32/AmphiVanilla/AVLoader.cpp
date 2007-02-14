@@ -8,13 +8,10 @@ using namespace std;
 
 AVLoader* AVLoader::globalLoader = NULL;
 
-void AVLoader::shutdown()
+void AVLoader::close()
 {
-	if(globalLoader) {
-	//	closeModule();
-		delete globalLoader;
-	}
-	globalLoader = NULL;	
+	if(globalLoader) delete globalLoader;
+	globalLoader = NULL;
 }
 
 AVLoader::AVLoader() : dsvr(0)
@@ -159,7 +156,7 @@ bool AVLoader::moduleName(int i, char *str)
 	return true;
 }
 
-void AVLoader::closeModule()
+void AVLoader::unloadCurrentModule()
 {
 	if(activatedIm > -1)
 	{
@@ -186,7 +183,7 @@ int AVLoader::getSwitchedBoPoMoFoLayoutModIndex()
 		!strcmp(em->modlist()[currentId]->localizedName("en"), "PhoneticHsu")) {
 		for(size_t i = 0; i < em->modlist().size(); i++) {
 			if(!strcmp(em->modlist()[i]->localizedName("en"), "BoPoMoFo")) {
-				closeModule();
+				unloadCurrentModule();
 				return i;
 			}
 		}
@@ -196,7 +193,7 @@ int AVLoader::getSwitchedBoPoMoFoLayoutModIndex()
 		!strcmp(em->modlist()[currentId]->localizedName("en"), "BoPoMoFo")) {
 		for(size_t i = 0; i < em->modlist().size(); i++) {
 			if(!strcmp(em->modlist()[i]->localizedName("en"), "PhoneticHsu")) {
-				closeModule();
+				unloadCurrentModule();
 				return i;
 			}
 		}

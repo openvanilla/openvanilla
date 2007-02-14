@@ -11,20 +11,20 @@ using std::vector;
 class AVLoader : public OVBase
 {
 public:
-	static AVLoader* getLoader()
+	static AVLoader* open()
 	{
 		if(globalLoader == NULL)
 			globalLoader = new AVLoader();
 		return globalLoader;
 	}
 
-	void shutdown();	
+	static void close();	
 
 	void initContext(int n);
 	void connectDisplayServer(AVDisplayServer *svr);
 	bool keyEvent(int n, AVKeyCode c);
 	bool moduleName(int i, char *str);
-	void closeModule();
+	void unloadCurrentModule();
 
 	//<comment author='b6s'>Add these two functions temporarily, will refactor them later.
 	int getInputMethodCount();

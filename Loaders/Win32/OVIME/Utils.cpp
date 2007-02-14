@@ -92,22 +92,25 @@ void UpdateCandidate(LPINPUTCONTEXT lpIMC, const wchar_t* candis)
 }
 
 
-void RefreshUI(HWND hWnd )  //調整comp cand
+void RefreshUI(HWND hWnd)  //調整comp cand
 {		
-	HIMC			hUICurIMC;
-	LPINPUTCONTEXT	lpIMC;
-	LONG			lRet = 0L;
-	LPMYPRIVATE lpMyPrivate;
-	hUICurIMC = (HIMC)GetWindowLong(hWnd, IMMGWL_IMC);
-	lpIMC = ImmLockIMC(hUICurIMC);				
 	LOGFONT* lfptr;
 	LOGFONT lf2;
-	RECT rec;
-	SIZE szOffset;
+	//RECT rec;
+	//SIZE szOffset;
 	HDC hDC;
 	POINT ptSrc;
 	TEXTMETRIC tm;
-	int localDPIY; //for device dpiY		
+
+	HIMC hUICurIMC = (HIMC)GetWindowLong(hWnd, IMMGWL_IMC);
+	ImmModel* model = ImmModel::open(hUICurIMC);
+
+	dsvr->setHIMC(hUICurIMC);
+
+	LPINPUTCONTEXT lpIMC = model->getIMC();
+	//lpIMC = ImmLockIMC(hUICurIMC);
+
+	int localDPIY; //for device dpiY
 	if(dsvr->isCompEnabled)  // comp exist, cand follow comp's position
 	{
 		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
@@ -131,9 +134,9 @@ void RefreshUI(HWND hWnd )  //調整comp cand
 	lfptr = (LOGFONT*)(&lpIMC->lfFont);
 	memcpy( &lf2, lfptr, sizeof( lf2) );
 
-	lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-
-	if(dsvr->isCompEnabled) 
+	//LPMYPRIVATE lpMyPrivate = model->getMyPrivate();
+	//lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
+	if(dsvr->isCompEnabled)
 	{	
 		CompX = ptSrc.x ;
 		//CompY = ptSrc.y + szOffset.cy;
@@ -153,7 +156,6 @@ void RefreshUI(HWND hWnd )  //調整comp cand
 		CandY= ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
 		dsvr->moveCandi(CandX,CandY);		
 	}
-	return;
+
+	ImmModel::close();
 }
-
-

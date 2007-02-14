@@ -129,10 +129,7 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	murmur("ImeProcessKey: %ud", uVKey);
 	if (!hIMC) isProcessed;
 
-	ImmModel* model = ImmModel::open(hIMC);
-
-	dsvr->connectModel(model);
-	ImmController* controller = ImmController::open(model);
+	ImmController* controller = ImmController::open();
 	int controlState =
 		controller->onControlEvent(hIMC, uVKey, lKeyData, lpbKeyState);
 	switch(controlState) {
@@ -152,7 +149,6 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	// NOT close ImmController because of counting for SHIFT pressed time.
 	//ImmController::close();
 	//</comment>
-	ImmModel::close();
 
 	return isProcessed;
 }

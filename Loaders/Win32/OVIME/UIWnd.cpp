@@ -1,4 +1,4 @@
-//#define OV_DEBUG
+#define OV_DEBUG
 
 #include "OVIME.h"
 
@@ -7,13 +7,11 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 						   WPARAM wParam,
 						   LPARAM lParam)
 {
-	HIMC			hUICurIMC;
-	LPINPUTCONTEXT	lpIMC;
-	LONG			lRet = 0L;
-	LPMYPRIVATE lpMyPrivate;
+	LRESULT lRet = 0L;
+	//LPINPUTCONTEXT	lpIMC;
+	//LPMYPRIVATE lpMyPrivate;
 
-	hUICurIMC = (HIMC)GetWindowLong(hWnd, IMMGWL_IMC);
-
+	HIMC hUICurIMC = (HIMC)GetWindowLong(hWnd, IMMGWL_IMC);
 	//
 	// Even if there is no current UI. these messages should not be pass to 
 	// DefWindowProc().
@@ -36,6 +34,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		}
 	}
 
+	bool doDefWndProc = false;
+
 	switch (msg)
 	{
 
@@ -51,20 +51,21 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		murmur("WM_CHILDACTIVATE");
 		break;
 
-	case WM_CREATE:  
+	case WM_CREATE:
+	{
 		murmur("WM_CREATE");
-		loader=AVLoader::getLoader();
+
+		dsvr->setHIMC(hUICurIMC);
+		loader = AVLoader::open();
 		loader->connectDisplayServer(dsvr);
-		
+
 		CompX = CompY = -1;
 //		UISCompWindow(hWnd);
 		UICreateCompWindow(hWnd);
 		UICreateCandWindow(hWnd);
 		UICreateNotifyWindow(hWnd);
-
-		//dsvr->lockIMC(hUICurIMC); //這邊 lock hPrivate 會 exception
 		break;
-
+	}
 	case WM_WINDOWPOSCHANGING: 
 		//The WM_WINDOWPOSCHANGING message is sent to 
 		//a window whose size, position, or place in the 
@@ -104,30 +105,30 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			murmur("\tsetcontext to hwnd:%x",hWnd);			
 			if (hUICurIMC)  //hUICurIMC==0 表示出錯(?)
 			{
+				dsvr->setHIMC(hUICurIMC);
+				loader = AVLoader::open();
+				loader->connectDisplayServer(dsvr);
+
 				RefreshUI(hWnd); //多視窗 program 切換子視窗要重設 ic position
 				murmur("\thUICurIMC==true");
 				if(lParam & ISC_SHOWUICOMPOSITIONWINDOW) // not sure
-				{				
-					//dsvr->connectModel(hUICurIMC);
+				{	
 					dsvr->showBuf(true);
 				}
-				//dsvr->showCandi(true); //註解掉因為切開就應該 clear cand了		
+				//dsvr->showCandi(true); //註解掉因為切開就應該 clear cand了
 			}
 			else   // it is NULL input context. (?)
 			{				
 				murmur("\thUICurIMC==false, hide all");
 				dsvr->showBuf(false);
-				//dsvr->showCandi(false);		
 			}
 		}
 		else //switch out
 		{
 			murmur("\tswitch out, hide all");
-			
 			dsvr->showBuf(false);
 			dsvr->showCandi(false);
 
-			
 			//dsvr->releaseIMC();  //?
 		}
 		break;
@@ -146,11 +147,10 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		break;
 
 	case WM_IME_ENDCOMPOSITION:
-		murmur("WM_IME_ENDCOMPOSITION");				
+		murmur("WM_IME_ENDCOMPOSITION");
 		//dsvr->SetCompEnabled(false);
 		dsvr->showBuf(false);
-		dsvr->showCandi(false);		
-		
+		dsvr->showCandi(false);	
 		break;
 
 	case WM_IME_COMPOSITIONFULL:
@@ -176,33 +176,34 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		lRet = ControlHandle(hUICurIMC, hWnd, msg, wParam, lParam);
 		break;
 
-
 	case WM_IME_NOTIFY:
 		murmur("WM_IME_NOTIFY");
 		lRet = NotifyHandle(hUICurIMC, hWnd, msg, wParam, lParam);
 		break;
 
 	case WM_DESTROY:
+	{
 		murmur("WM_DESTROY");
-		//dsvr->connectModel(hUICurIMC);
+		
 		dsvr->showStatus(false);
 		dsvr->showBuf(false);
 		dsvr->showCandi(false);
 		
-		loader = AVLoader::getLoader();
-		loader->closeModule();
-		loader->shutdown();
-		//dsvr->releaseIMC();
+		loader->unloadCurrentModule();
+		
+		AVLoader::close();
 
 		break;
-
+	}
 	case WM_IME_RELOADCONFIG:
-		{
+	{
 		murmur("WM_IME_RELOADCONFIG");
-		loader = AVLoader::getLoader();
-		loader->closeModule();
-		loader->shutdown();
-		loader = AVLoader::getLoader();
+
+		loader->unloadCurrentModule();
+		AVLoader::close();
+
+		dsvr->setHIMC(hUICurIMC);
+		loader = AVLoader::open();
 		loader->connectDisplayServer(dsvr);
 
 		//SendMessage(hWnd, WM_IME_NOTIFY, IMN_PRIVATE, 9L);
@@ -212,18 +213,12 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		UISetStatusModStrMenuAll(modAmount, modNameList);
 
 		break;
-		}
-	case WM_NCCREATE:   
+	}
+	case WM_NCCREATE:
 		murmur("WM_NCCREATE");
-		if(!lParam) //空
-		{			
-			break;
-		}
-		else //非空
-		{
-			return DefWindowProc(hWnd,msg,wParam,lParam);
-		}
-		
+		if(lParam) doDefWndProc = true;
+		break;
+
 	case WM_NCDESTROY:   
 		murmur("WM_NCDESTROY");
 		break;
@@ -265,8 +260,11 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 	default:
 		murmur("Uncatched message,%p",msg);
-		return DefWindowProc(hWnd,msg,wParam,lParam);
+		doDefWndProc = true;
+		break;
 	}
+
+	if(doDefWndProc) lRet = DefWindowProc(hWnd, msg, wParam, lParam);
+
 	return lRet;
 }
-

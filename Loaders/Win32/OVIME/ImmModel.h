@@ -15,10 +15,6 @@ public:
 	LPCOMPOSITIONSTRING getCompStr(void);
 	LPMYPRIVATE getMyPrivate(void);
 
-	bool setIMC(LPINPUTCONTEXT inLpIMC);
-	bool setCompStr(LPCOMPOSITIONSTRING inLpCompStr);
-	bool setMyPrivate(LPMYPRIVATE inLpMyPrivate);
-
 protected:
 	ImmModel(HIMC h);
 	~ImmModel(void);
@@ -26,11 +22,11 @@ protected:
 private:
 	static ImmModel* m_self;
 
-	HIMC m_hIMC;
+	static HIMC m_hIMC;
 
-	LPINPUTCONTEXT m_lpIMC;
-	LPCOMPOSITIONSTRING m_lpCompStr;
-	LPMYPRIVATE m_lpMyPrivate;
+	static LPINPUTCONTEXT m_lpIMC;
+	static LPCOMPOSITIONSTRING m_lpCompStr;
+	static LPMYPRIVATE m_lpMyPrivate;
 
 	LPINPUTCONTEXT lockIMC(void);
 	LPCOMPOSITIONSTRING lockCompStr(void);

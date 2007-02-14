@@ -11,7 +11,8 @@
 #include "AVDisplayServer.h"
 #include "DisplayServer.h"
 #include "AVLoader.h"
-
+#include "ImmModel.h"
+#include "ImmController.h"
 
 // Extern
 extern HINSTANCE hInst;
@@ -59,9 +60,9 @@ extern "C" {
 	LRESULT APIENTRY UIWndProc(HWND, UINT, WPARAM, LPARAM);
 	void RefreshUI(HWND hWnd);
 	// ControlHandle.cpp
-	LONG ControlHandle(HIMC, HWND, UINT, WPARAM, LPARAM);
+	LRESULT ControlHandle(HIMC, HWND, UINT, WPARAM, LPARAM);
 	// NotifyHandel.cpp
-	LONG NotifyHandle(HIMC, HWND, UINT, WPARAM, LPARAM);
+	LRESULT NotifyHandle(HIMC, HWND, UINT, WPARAM, LPARAM);
 	// IME.cpp
 	void MyGenerateMessage(HIMC, UINT, WPARAM, LPARAM);
 	BOOL MyGenerateMessageToTransKey(LPDWORD, UINT*, UINT, WPARAM, LPARAM);

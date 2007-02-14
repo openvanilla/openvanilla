@@ -3,10 +3,9 @@
 
 ImmController* ImmController::m_self = NULL;
 
-ImmController::ImmController(ImmModel* model)
+ImmController::ImmController()
 {
-	m_model = model;
-	m_loader = AVLoader::getLoader();
+	m_loader = AVLoader::open();
 
 	m_shiftPressedTime = 0;
 	m_isCompStarted = false;
@@ -14,17 +13,13 @@ ImmController::ImmController(ImmModel* model)
 
 ImmController::~ImmController(void)
 {
-	//m_model->close();
-	m_model = NULL;
 	m_self = NULL;
 }
 
-ImmController* ImmController::open(ImmModel* model)
+ImmController* ImmController::open()
 {
 	if(m_self == NULL)
-		m_self = new ImmController(model);
-	else if(model != m_self->m_model)
-		m_self->m_model = model;
+		m_self = new ImmController();
 
 	return m_self;
 }
@@ -111,7 +106,7 @@ int ImmController::onControlEvent
 				case VK_OEM_5:
 					//Change the module by Ctrl+"\":
 					//lParam == 8
-					murmur("C_\: change module");
+					murmur("C_\\: change module");
 					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 8);
 					processState = 1;
 					break;
@@ -200,13 +195,15 @@ BOOL ImmController::onTypingEvent
 	//Alphanumeric mode
 	if(!(conv & IME_CMODE_NATIVE)) return isProcessed;
 
+	ImmModel* model = ImmModel::open(hIMC);
 	if(!m_isCompStarted &&
-		wcslen(GETLPCOMPSTR(m_model->getCompStr())) == 0)	
+		wcslen(GETLPCOMPSTR(model->getCompStr())) == 0)
 	{
 		murmur("STARTCOMPOSITION");
 		m_isCompStarted = true;//要先做!
 		MyGenerateMessage(hIMC, WM_IME_STARTCOMPOSITION, 0, 0);
 	}
+	ImmModel::close();
 
 	int k = LOWORD(uVKey);
 	if( k >= 65 && k <= 90)
@@ -282,14 +279,16 @@ BOOL ImmController::onTypingEvent
 			//InitCompStr(m_model->getCompStr());
 		}
 	} else {
+		model = ImmModel::open(hIMC);
 		//James comment: 解決未組成字之前選字 comp window 會消失的問題(?待商榷)
 		if(m_isCompStarted &&
-			wcslen(GETLPCOMPSTR(m_model->getCompStr())) == 0)
+			wcslen(GETLPCOMPSTR(model->getCompStr())) == 0)
 		{
 			murmur("ENDCOMPOSITION");
 			m_isCompStarted = false; //要先做!
 			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
 		}
+		ImmModel::close();
 	}
 
 	return isProcessed;

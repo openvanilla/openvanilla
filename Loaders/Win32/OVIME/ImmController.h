@@ -25,7 +25,7 @@ struct KeyInfo
 class ImmController
 {
 public:
-	static ImmController* open(ImmModel* model);
+	static ImmController* open();
 	static void close(void);
 
 	inline KeyInfo getKeyInfo(LPARAM lparam) { return *(KeyInfo*)&lparam; }
@@ -47,12 +47,11 @@ public:
 		HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState);
 
 protected:
-	ImmController(ImmModel* model);
+	ImmController();
 	~ImmController(void);
 
 private:
 	static ImmController* m_self;
-	ImmModel* m_model;
 
 	AVLoader* m_loader;
 

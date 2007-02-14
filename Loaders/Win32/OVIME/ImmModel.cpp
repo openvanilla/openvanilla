@@ -1,18 +1,19 @@
 #include "ImmModel.h"
 
 ImmModel* ImmModel::m_self = NULL;
+HIMC ImmModel::m_hIMC = NULL;
+LPINPUTCONTEXT ImmModel::m_lpIMC = NULL;
+LPCOMPOSITIONSTRING ImmModel::m_lpCompStr = NULL;
+LPMYPRIVATE ImmModel::m_lpMyPrivate = NULL;
 
 ImmModel::ImmModel(HIMC h)
 {
 	m_hIMC = h;
 
-	m_lpIMC = NULL;
 	m_lpIMC = lockIMC();
 
-	m_lpCompStr = NULL;
 	m_lpCompStr = lockCompStr();
 
-	m_lpMyPrivate = NULL;
 	m_lpMyPrivate = lockMyPrivate();
 }
 
@@ -49,36 +50,6 @@ LPCOMPOSITIONSTRING ImmModel::getCompStr(void)
 LPMYPRIVATE ImmModel::getMyPrivate(void)
 {
 	return lockMyPrivate();
-}
-
-bool ImmModel::setIMC(LPINPUTCONTEXT inLpIMC)
-{
-	bool flag = false;
-	if(getIMC()) {
-		m_lpIMC = inLpIMC;
-		if(m_lpIMC) flag = true;
-	}
-	return flag;
-}
-
-bool ImmModel::setCompStr(LPCOMPOSITIONSTRING inLpCompStr)
-{
-	bool flag = false;
-	if(getCompStr()) {
-		m_lpCompStr = inLpCompStr;
-		if(m_lpCompStr) flag = true;
-	}
-	return flag;
-}
-
-bool ImmModel::setMyPrivate(LPMYPRIVATE inLpMyPrivate)
-{
-	bool flag = false;
-	if(getMyPrivate()) {
-		m_lpMyPrivate = inLpMyPrivate;
-		if(m_lpMyPrivate) flag = true;
-	}
-	return flag;
 }
 
 LPINPUTCONTEXT ImmModel::lockIMC(void)

@@ -1,10 +1,10 @@
 #include "OVIME.h"
 
-LONG ControlHandle(HIMC hUICurIMC,
+LRESULT ControlHandle(HIMC hUICurIMC,
 				   HWND hWnd,
 				   UINT msg,
 				   WPARAM wParam,
 				   LPARAM lParam)
 {
-	return 0;
+	return 0L;
 }

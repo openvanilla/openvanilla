@@ -2,33 +2,34 @@
 
 #include "OVIME.h"
 
-LONG NotifyHandle(HIMC hUICurIMC,
+LRESULT NotifyHandle(HIMC hUICurIMC,
 				  HWND hWnd,
 				  UINT message,
 				  WPARAM wParam,
 				  LPARAM lParam)
 {
-	LONG lRet = 0L;
-	LPINPUTCONTEXT lpIMC;
+	LRESULT lRet = 0L;
+	//LPINPUTCONTEXT lpIMC;
 	static BOOL first = false;
 	//<comment author='b6s'>Unused codes
 	//LOGFONT* lfptr;
 	//LOGFONT lf2;
 	//</comment>
 	
+	if(!hUICurIMC) return lRet;
 
-	if (!(lpIMC = ImmLockIMC(hUICurIMC)))
-		return 0L;
+	dsvr->setHIMC(hUICurIMC);
+	AVLoader* loader = AVLoader::open();
+	loader->connectDisplayServer(dsvr);
 
-	loader = AVLoader::getLoader();
 	switch (wParam)
 	{
 	case IMN_OPENSTATUSWINDOW:
 		murmur("IMN_OPENSTATUSWINDOW");
 		murmur("\thwnd=%x", hWnd);		
 		dsvr->SetStatusEnabled(true);
-		UICreateStatusWindow(hWnd);								
-		dsvr->showStatus(true);		
+		UICreateStatusWindow(hWnd);							
+		dsvr->showStatus(true);
 		break;
 
 	case IMN_SETOPENSTATUS: // the same as IMN_OPENSTATUSWINDOW
@@ -39,7 +40,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 
 	case IMN_CLOSESTATUSWINDOW:
 		murmur("IMN_CLOSESTATUSWINDOW");
-		dsvr->showStatus(false);			
+		dsvr->showStatus(false);
 		//<comment author='b6s'>
 		// When attached app lost focus, only this message occurred,
 		// so it must also hide following windows.
@@ -105,12 +106,12 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		//<comment author='b6s'>
 		// It is weird but... when the attached app got focus back,
 		// this message occurred.
-		//</comment>	
+		//</comment>
 		RefreshUI(hWnd);
 		break;
 
-	case IMN_SETCOMPOSITIONWINDOW:   
-		{			
+	case IMN_SETCOMPOSITIONWINDOW:
+		{
 		/*	Sent immediately before the IME generates 
 			the composition string as a result of a keystroke.
 			This message is a notification to an IME window to 
@@ -166,7 +167,7 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		case 3: //Change Modules by Mouse			
 			murmur("\tChange Modules by Mouse");
 			/* close module and set new IC */
-			loader->closeModule();
+			loader->unloadCurrentModule();
 			UIModuleChange();
 			break;
 		case 4: // Change UI Traditional/Simplified Chinese
@@ -184,16 +185,16 @@ LONG NotifyHandle(HIMC hUICurIMC,
 			break;
 		case 7: // Test Notify window. (ctrl+alt+L)
 			{
-			murmur("\tTest Notify window");		
+			murmur("\tTest Notify window");
 			char *str="GG notify message";			
 			//UICreateNotifyWindow(hWnd); //new IMENotifyWindow -> fake form
-			dsvr->showNotify(str); //會 new 一個 NotifyWindow ->real form			
+			dsvr->showNotify(str); //會 new 一個 NotifyWindow ->real form		
 			//UIShowNotifyWindow(); //show our IMENotifyWindow ->fake form
 			break;
 			}
 		case 8: //Change Modules by ctrl +'\'
 			/* close module and poll current IC */
-			loader->closeModule();
+			loader->unloadCurrentModule();
 			UIModuleRotate();
 			break;
 		case 9: //Set all module names
@@ -214,7 +215,6 @@ LONG NotifyHandle(HIMC hUICurIMC,
 		murmur("WM_IME_NOTIFY: no this wParam");
 		break;
 	}
-	ImmUnlockIMC(hUICurIMC);
 
 	return lRet;
 }

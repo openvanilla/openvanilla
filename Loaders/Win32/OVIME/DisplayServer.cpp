@@ -1,59 +1,38 @@
-#define OV_DEBUG 
+//#define OV_DEBUG 
 #include "DisplayServer.h"
 #include "OVIME.h"
 
-DisplayServer* DisplayServer::m_self = NULL;
-/*
-AVDisplayServer *DisplayServer::lockIMC(HIMC h)
+DisplayServer::DisplayServer()
 {
-	hIMC = h;
-	imm = ImmModel::open(hIMC);
-
-	lpIMC = imm->getIMC();
-	lpCompStr = imm->getCompStr();
-	lpMyPrivate = imm->getMyPrivate();
-
-	return this;
+	hasCompStarted=false;
+	isStatusEnabled=false;
+	isCompEnabled=false;
+	isCandiEnabled=false;	
 }
 
-AVDisplayServer *DisplayServer::releaseIMC()
+DisplayServer::~DisplayServer()
 {
-	ImmModel::close();
-
-	lpMyPrivate = NULL;
-	lpCompStr = NULL;
-	lpIMC = NULL;
-	hIMC = NULL;
-
-	imm= NULL;
-
-	return this;
-}
-*/
-
-DisplayServer* DisplayServer::open()
-{
-	if(m_self == NULL)
-		m_self = new DisplayServer();
-
-	return m_self;
+	m_hIMC = NULL;
 }
 
-void DisplayServer::connectModel(ImmModel* model)
+void DisplayServer::setHIMC(HIMC hIMC)
 {
-	m_model = model;
+	m_hIMC = hIMC;
 }
 
 AVDisplayServer *DisplayServer::setBufString(const char *str)
 {
 	wchar_t wstr[1024];
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
-	wcscpy(m_model->getMyPrivate()->PreEditStr, wstr);
-	MakeCompStr(m_model->getMyPrivate(), m_model->getCompStr());
 
-	murmur("\tAVDisplayServer *DisplayServer::setBufString(%s)",str);
-	UISetCompStr(m_model->getMyPrivate()->PreEditStr);
+	ImmModel* model = ImmModel::open(m_hIMC);
+
+	wcscpy(model->getMyPrivate()->PreEditStr, wstr);
+	MakeCompStr(model->getMyPrivate(), model->getCompStr());
+	UISetCompStr(model->getMyPrivate()->PreEditStr);
 	//要不要先檢查有沒有PreEditStr有沒有東西？
+
+	ImmModel::close();
 
 	return this;
 }
@@ -62,16 +41,18 @@ AVDisplayServer *DisplayServer::setBufString(const char *str, int caretX)
 {
 	wchar_t wstr[1024];
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
-	wcscpy(m_model->getMyPrivate()->PreEditStr, wstr);
-	MakeCompStr(m_model->getMyPrivate(), m_model->getCompStr());
 
-	murmur("\tAVDisplayServer *DisplayServer::setBufString(%s)",str);
-	UISetCompStr(m_model->getMyPrivate()->PreEditStr);
+	ImmModel* model = ImmModel::open(m_hIMC);
+
+	wcscpy(model->getMyPrivate()->PreEditStr, wstr);
+	MakeCompStr(model->getMyPrivate(), model->getCompStr());
+	UISetCompStr(model->getMyPrivate()->PreEditStr);
 	//要不要先檢查有沒有PreEditStr有沒有東西？
 
-	m_model->getCompStr()->dwCursorPos = caretX;
-	murmur("\tDisplayServer::setCursorPos-> %d", caretX);
+	model->getCompStr()->dwCursorPos = caretX;
 	UISetCompCaretPosX(caretX);
+
+	ImmModel::close();
 
 	return this;
 }
@@ -80,15 +61,16 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 {
 	wchar_t wstr[1024];
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
-	
-		m_model->getCompStr()->dwResultStrLen = (int)wcslen(wstr);
 
-	wcscpy(GETLPRESULTSTR(m_model->getCompStr()), wstr);
-	wcscpy(m_model->getMyPrivate()->PreEditStr, L"");
+	ImmModel* model = ImmModel::open(m_hIMC);
+
+	model->getCompStr()->dwResultStrLen = (int)wcslen(wstr);
+	wcscpy(GETLPRESULTSTR(model->getCompStr()), wstr);
+	wcscpy(model->getMyPrivate()->PreEditStr, L"");
 	
-	MakeCompStr(m_model->getMyPrivate(), m_model->getCompStr());
+	MakeCompStr(model->getMyPrivate(), model->getCompStr());
 	UIClearCompStr();//即時update C# comp string 同步資料
-	
+
 	//<comment author='b6s'>
 	//Moves them to IME.cpp's ImeProcessKey,
 	//since it casued a infinite-loop when "CTRL+\" occurred.
@@ -98,6 +80,8 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 	//	WM_IME_ENDCOMPOSITION, 0, 0);
 	//</comment>
 
+	ImmModel::close();
+
 	return this;
 }
 
@@ -105,19 +89,23 @@ AVDisplayServer *DisplayServer::setCandiString(const char *str)
 {
 	wchar_t wstr[1024];
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
-	wcscpy(m_model->getMyPrivate()->CandStr, wstr);
-	UpdateCandidate(m_model->getIMC(), wstr);
+
+	ImmModel* model = ImmModel::open(m_hIMC);
+
+	wcscpy(model->getMyPrivate()->CandStr, wstr);
+	UpdateCandidate(model->getIMC(), wstr);
 //	MyGenerateMessage(hIMC,
 //			WM_IME_COMPOSITION, 0, GCS_COMPSTR);
-	UISetCandStr(m_model->getMyPrivate()->CandStr);
+	UISetCandStr(model->getMyPrivate()->CandStr);
+
+	ImmModel::close();
+
 	return this;
 }
 
 AVDisplayServer *DisplayServer::showNotify(const char *str)
 {
-	murmur("\tAVDisplayServer *DisplayServer::showNotify");
 	wchar_t wstr[1024];
-	murmur("notify str=%s",str);
 	MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
 	UISetNotifyStr(wstr);
 	//UIShowNotifyWindow();
@@ -132,14 +120,12 @@ AVDisplayServer *DisplayServer::hideNotify()
 
 DisplayServer *DisplayServer::moveBuf(int x, int y)
 {
-	murmur("\tAVDisplayServer *DisplayServer::moveBuf(%d,%d)",x,y);
 	UIMoveCompWindow(x,y);
 	return this;
 }
 
 DisplayServer *DisplayServer::moveCandi(int x, int y)
 {
-	murmur("\tAVDisplayServer *DisplayServer::moveCandi(%d,%d)",x,y);
 	UIMoveCandWindow(x,y);
 	return this;
 }
@@ -192,16 +178,8 @@ DisplayServer *DisplayServer::showStatus(bool t)
 {	
 	if(dsvr->isStatusEnabled)
 	{
-		if(t)
-		{
-			murmur("\tAVDisplayServer *DisplayServer::showStatus");
-			UIShowStatusWindow();
-		}
-		else
-		{
-			murmur("\tAVDisplayServer *DisplayServer::hideStatus");
-			UIHideStatusWindow();
-		}
+		if(t)	UIShowStatusWindow();
+		else	UIHideStatusWindow();
 	}
 	return this;
 }
@@ -210,19 +188,16 @@ AVDisplayServer *DisplayServer::showBuf(bool t)
 {
 	if(dsvr->isCompEnabled)
 	{
-				murmur("m_model:%p", m_model);
+		ImmModel* model = ImmModel::open(m_hIMC);
+
 		if(t &&
-			m_model->getMyPrivate()->PreEditStr &&
-			wcslen(m_model->getMyPrivate()->PreEditStr))
-		{
-			murmur("\tAVDisplayServer *DisplayServer::showBuf");
+			model->getMyPrivate()->PreEditStr &&
+			wcslen(model->getMyPrivate()->PreEditStr))
 			UIShowCompWindow();
-		}
 		else
-		{
-			murmur("\tAVDisplayServer *DisplayServer::hideBuf");
 			UIHideCompWindow();
-		}
+
+		ImmModel::close();
 	}
 	return this;
 }
@@ -231,18 +206,16 @@ AVDisplayServer *DisplayServer::showCandi(bool t)
 {
 	if(dsvr->isCandiEnabled)
 	{
-				if(t &&
-			m_model->getMyPrivate()->CandStr &&
-			wcslen(m_model->getMyPrivate()->CandStr))
-		{
+		ImmModel* model = ImmModel::open(m_hIMC);
+
+		if(t &&
+			model->getMyPrivate()->CandStr &&
+			wcslen(model->getMyPrivate()->CandStr))
 			UIShowCandWindow();
-			murmur("\tAVDisplayServer *DisplayServer::showCandi");
-		}
 		else
-		{
 			UIHideCandWindow();
-			murmur("\tAVDisplayServer *DisplayServer::hideCandi");
-		}
+
+		ImmModel::close();
 	}
 	return this;
 }
