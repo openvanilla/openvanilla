@@ -4,6 +4,9 @@
 #include "DotNETHeader.h"
 #include "resource.h"
 
+//<comment author='b6s'>
+// Uses the managed UI function instead
+/*
 void GetToolbarSize(HWND toolbar, SIZE *sz)
 {
 	sz->cx = sz->cy = 0;
@@ -18,6 +21,8 @@ void GetToolbarSize(HWND toolbar, SIZE *sz)
 			sz->cy = itemrc.bottom;
 	}
 }
+*/
+//</comment>
 
 LRESULT APIENTRY StatusWndProc(HWND hWnd,
 		UINT msg,
@@ -222,7 +227,9 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 	return 0;
 }
 
-
+//<comment author='b6s'>
+// Uses the managed UI function instead
+/*
 TBBUTTON toolbar_btns[]={
 	{0, ID_CHANGE_IME, TBSTATE_ENABLED ,TBSTYLE_BUTTON|TBSTYLE_AUTOSIZE, {0}, 0, 0 }, 
 	{1, ID_CONFIG, TBSTATE_ENABLED ,TBSTYLE_BUTTON|TBSTYLE_AUTOSIZE, {0}, 0, 0 },
@@ -230,7 +237,8 @@ TBBUTTON toolbar_btns[]={
 	{5, ID_FULL_HALF, TBSTATE_ENABLED ,TBSTYLE_BUTTON, {0}, 0, 0 },
 	{6, ID_IME_HELP, TBSTATE_ENABLED ,TBSTYLE_BUTTON, {0}, 0, 0 }
 };
-
+*/
+//</comment>
 
 void UICreateStatusWindow(HWND hUIWnd)
 {	
@@ -396,6 +404,7 @@ void UISetCursorPos(int i)
 //	cursor = CompIndexToXPos( CompCursorPos );
 //	BitBlt( dc, cursor, 0, 1, rc.bottom, dc, cursor, 0, SRCINVERT );
 }
+
 #if 0
 void UISetMarkFrom(int i)
 {

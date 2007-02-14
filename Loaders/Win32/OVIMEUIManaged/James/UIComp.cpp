@@ -79,7 +79,6 @@ void UICreateCompWindow(HWND hUIWnd)
 #endif
 	}
 	//ShowWindow(uiComp.hWnd, SW_HIDE);
-	return;
 }
 
 void UIMoveCompWindow(int X, int Y)
@@ -88,6 +87,7 @@ void UIMoveCompWindow(int X, int Y)
 	int newY=Y;
 	_MoveCompPage(newX, newY);
 }
+
 void UISetCompStr(wchar_t* lpStr)
 {
 	//_ClearCompPage();  //James:®³±¼, no need

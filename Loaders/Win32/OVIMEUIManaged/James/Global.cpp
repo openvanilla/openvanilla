@@ -1,5 +1,6 @@
-#include <vector>
+//#include <vector>
 #include "OVIMEUI.h"
+
 HFONT hUIFont;
 HINSTANCE hInst;
 HINSTANCE hInstDLL;
@@ -23,5 +24,5 @@ bool isTraditional = true;
 bool isFull = false;
 
 // InputContext
-std::vector<wchar_t*> IC;
+//std::vector<wchar_t*> IC;
 int CurrentIC;
