@@ -12,42 +12,15 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 	switch(dwReason)
 	{
 	case DLL_PROCESS_ATTACH:
+		{
 		// load UI library
-		//char str[1024];
-		//wchar_t wstr[1024];
-		Watch watch;
-		watch.start();
-		loader = AVLoader::open();
-		watch.stop();
-		murmur("%1.3f sec:\tAVLoader::getLoader()", watch.getSec());
-
-		watch.start();
+		AVLoader* loader = AVLoader::open();
 		loader->connectDisplayServer(dsvr);
-		watch.stop();
-		murmur("%1.3f sec:\tloader->connectDisplayServer(dsvr)", watch.getSec());
 
 		//<comment author='b6s'>Test for a replacement of UI's DllMain()
 		UIConstruct();
 		//</comment>
 
-		//<comment author='b6s'>Just a test...
-		/*
-		watch.start();
-		for(int i = 0;; ++i) {
-			if(loader->moduleName(i, str)) {
-				MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str)+1, wstr, 1024);
-				UIPushInputMethod(wstr);
-			} else {
-				break;
-			}
-		}
-		watch.stop();
-		murmur("%1.3f sec:\tfor() { loader->moduleName(); UIPushInputMethod(); }",
-			watch.getSec());
-		*/
-		//</comment>
-
-		watch.start();
 		WNDCLASSEX wc;
 		wc.cbSize			= sizeof(WNDCLASSEX);
 		wc.style			= CS_OVIME | CS_IME;
@@ -64,13 +37,11 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		IMEUIRegisterClass( (HINSTANCE)hModule );
 		hInst = (HINSTANCE)hModule;
 
-		watch.stop();
-		murmur("%1.3f sec:\t IMEUIRegisterClass", watch.getSec());
-
 		if( !RegisterClassEx( (LPWNDCLASSEX)&wc ) )
 		  return FALSE;
 
 		break;
+		}
 	case DLL_PROCESS_DETACH:
 		// free UI library
 		AVLoader::close();

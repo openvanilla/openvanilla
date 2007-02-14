@@ -56,7 +56,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		murmur("WM_CREATE");
 
 		dsvr->setHIMC(hUICurIMC);
-		loader = AVLoader::open();
+		AVLoader* loader = AVLoader::open();
 		loader->connectDisplayServer(dsvr);
 
 		CompX = CompY = -1;
@@ -106,7 +106,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 			if (hUICurIMC)  //hUICurIMC==0 表示出錯(?)
 			{
 				dsvr->setHIMC(hUICurIMC);
-				loader = AVLoader::open();
+				AVLoader* loader = AVLoader::open();
 				loader->connectDisplayServer(dsvr);
 
 				RefreshUI(hWnd); //多視窗 program 切換子視窗要重設 ic position
@@ -189,8 +189,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		dsvr->showBuf(false);
 		dsvr->showCandi(false);
 		
-		loader->unloadCurrentModule();
-		
+		AVLoader* loader = AVLoader::open();
+		loader->unloadCurrentModule();	
 		AVLoader::close();
 
 		break;
@@ -199,6 +199,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	{
 		murmur("WM_IME_RELOADCONFIG");
 
+		AVLoader* loader = AVLoader::open();
 		loader->unloadCurrentModule();
 		AVLoader::close();
 
