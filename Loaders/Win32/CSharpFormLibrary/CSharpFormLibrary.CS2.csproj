@@ -126,6 +126,9 @@
     <Compile Include="IMEStatusForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="IMESymbolForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="NotifyWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +160,10 @@
       <DependentUpon>IMEStatusForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="IMESymbolForm.resx">
+      <DependentUpon>IMESymbolForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="NotifyWindow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NotifyWindow.cs</DependentUpon>
@@ -168,6 +175,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="csform.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

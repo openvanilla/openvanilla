@@ -283,7 +283,7 @@ namespace CSharpFormLibrary
             this.buttonZhEn.Size = new System.Drawing.Size(40, 33);
             this.buttonZhEn.TabIndex = 2;
             this.buttonZhEn.UseVisualStyleBackColor = false;
-            this.buttonZhEn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonZhEn_MouseUp);           
+            this.buttonZhEn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonZhEn_MouseUp);
             // 
             // buttonPref
             // 
@@ -323,7 +323,7 @@ namespace CSharpFormLibrary
             this.Controls.Add(this.panelHead);
             this.Controls.Add(this.panelBody);
             this.ForeColor = System.Drawing.Color.Transparent;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "IMEStatusForm";
             this.ShowInTaskbar = false;
@@ -561,6 +561,14 @@ namespace CSharpFormLibrary
          /*   int ret = UtilFuncs.SendMessage(m_AppHWnd,
                    (uint)UtilFuncs.WindowsMessage.WM_DESTROY,
                    0, 0);*/
+            CSharpFormLibrary.IMESymbolForm form = new IMESymbolForm();
+            form.SetLocation(800, 600);
+            Debug.WriteLine(form.Location.ToString());
+            form.SetSymbols("1.1 2.2 3.3 4.4 5.5 6.6 7.7 8.8 9.9 10.10 11.11 12.1/2");
+            Debug.WriteLine(form.Location.ToString());
+            form.ShowNoActive();
+            form.SetLocation(800, 600);
+            Debug.WriteLine(form.Location.ToString());
         }
 
         private void ResizeAll()
