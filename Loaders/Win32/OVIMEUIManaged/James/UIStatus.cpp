@@ -24,20 +24,26 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 		WPARAM wParam,
 		LPARAM lParam)
 {
-	POINT pt;
+	//POINT pt;
+	//RECT drc;
+	//DWORD dwT;
+
 	UINT id;
-	RECT drc;
-	DWORD        dwT;
 	switch (msg)
 	{
 		case WM_PAINT:
-			PaintStatusWindow(hWnd);
+			//<comment author='b6s'>
+			// Uses the managed UI function instead
+			//PaintStatusWindow(hWnd);
+			//</comment>
 			break;
 		case WM_SETCURSOR:
 		case WM_MOUSEMOVE:
 		case WM_LBUTTONUP:
 		case WM_RBUTTONUP:
-
+			//<comment author='b6s'>
+			// Uses the managed UI functions instead
+			/*
 			if( GetCapture() != hWnd && GetCursorPos( &pt ) && 
 				ScreenToClient( hWnd, &pt ) && pt.x >= 12 )
 				return DefWindowProc(hWnd, msg, wParam, lParam);
@@ -67,8 +73,13 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 					InvalidateRect(uiStatus.hWnd,NULL, FALSE);
 				}
 			}
+			*/
+			//</comment>
 			break;
 		case WM_NOTIFY:
+			//<comment author='b6s'>
+			// Not support currently
+			/*
 			{
 				switch( ((NMHDR*)lParam)->code ) 
 				{
@@ -82,22 +93,32 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 				}
 				}
 			}
+			*/
+			//</comment>
 			break;
 		case WM_MOUSEACTIVATE:
 			return MA_NOACTIVATE;
 			break;
 		case WM_SIZE:
+			//<comment author='b6s'>
+			// Not support currently
+			/*
 			{
 				int cx = LOWORD(lParam);
 				int cy = HIWORD(lParam);
 				MoveWindow( hToolbar, 12, 2, cx-13, cy-4, TRUE);
 			}
+			*/
+			//</comment>
 			break;
 		case WM_COMMAND:
 			id = LOWORD(wParam);
-			switch( id )
+			switch(id)
 			{
 			case ID_CHANGE_IME:
+				//<comment author='b6s'>
+				// Uses the managed UI function instead
+				/*
 				{
 					RECT rc;
 					SendMessage( hToolbar, TB_GETITEMRECT, 0, LPARAM(&rc) );
@@ -106,8 +127,13 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 					TrackPopupMenu( hIMESelMenu, TPM_LEFTALIGN, rc.left, rc.bottom, 0, hWnd, NULL);
 					CheckMenuItem( hIMESelMenu, ID_IME_LIST_FIRST + CurrentIC, MF_UNCHECKED );
 				}
+				*/
+				//</comment>
 				break;
 			case ID_CHI_ENG:
+				//<comment author='b6s'>
+				// Uses the managed UI function instead
+				/*
 				{
 					isChinese = !isChinese;
 					SendMessage( hToolbar, TB_CHANGEBITMAP, ID_CHI_ENG, MAKELPARAM(isChinese ? 2 : 3, 0));
@@ -123,8 +149,13 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 						ImmSetConversionStatus( imc, conv, sentence);
 					}
 				}
+				*/
+				//</comment>
 				break;
 			case ID_FULL_HALF:
+				//<comment author='b6s'>
+				// Not support currently
+				/*
 				{
 					isFull = !isFull;
 					SendMessage( hToolbar, TB_CHANGEBITMAP, ID_FULL_HALF, MAKELPARAM(isFull ? 4 : 5, 0));
@@ -140,6 +171,8 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 						ImmSetConversionStatus( imc, conv, sentence);
 					}
 				}
+				*/
+				//<comment>
 				break;
 			case ID_CONFIG:
 				{
@@ -154,6 +187,9 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 			case ID_IME_HELP:
 				break;
 			default:
+				//<comment author='b6s'>
+				// Uses the managed UI functions instead
+				/*
 				if( id >= ID_IME_LIST_FIRST && id < ID_IME_LIST_LAST )
 				{
 					id -= ID_IME_LIST_FIRST;
@@ -165,7 +201,7 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 					SendMessage( hToolbar, TB_SETBUTTONINFO, ID_CHANGE_IME, LPARAM(&tbi));
 
 					SIZE sz;
-//					SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
+					//SendMessage( hToolbar, TB_GETMAXSIZE, 0, LPARAM(&sz));
 					GetToolbarSize( hToolbar, &sz );
 
 					uiStatus.sz.cx = sz.cx + 14;
@@ -174,8 +210,10 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 					GetWindowRect(uiStatus.hWnd, &rc);
 					UIMoveStatusWindow(hWnd, rc.left, rc.top );
 				}
-			}
-			break;
+				*/
+				//</comment>
+				break;
+			}			
 		default:
 			if (!MyIsIMEMessage(msg))
 				return DefWindowProc(hWnd, msg, wParam, lParam);
@@ -299,6 +337,9 @@ void UIMoveStatusWindow(HWND hUIWnd, int X, int Y)
 	
 }
 
+//<comment author='b6s'>
+// Uses the managed UI function instead
+/*
 void PaintStatusWindow(HWND hStatusWnd)
 {
 	PAINTSTRUCT ps;
@@ -310,7 +351,9 @@ void PaintStatusWindow(HWND hStatusWnd)
 
 	FillSolidRect( hDC, &rc, GetSysColor(COLOR_BTNFACE));
 
-	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_BTNHILIGHT), 0/*GetSysColor(COLOR_BTNSHADOW)*/);
+	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_BTNHILIGHT),
+	//*GetSysColor(COLOR_BTNSHADOW)
+	0);
 
 	InflateRect( &rc, -3, -3 );
 	rc.left++;
@@ -321,6 +364,8 @@ void PaintStatusWindow(HWND hStatusWnd)
 
 	EndPaint(hStatusWnd,&ps);
 }
+*/
+//</comment>
 
 void UIShowStatusWindow()
 {

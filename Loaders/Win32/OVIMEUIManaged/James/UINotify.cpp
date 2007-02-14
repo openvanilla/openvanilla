@@ -10,13 +10,19 @@ LRESULT APIENTRY NotifyWndProc(HWND hWnd,
 	switch (msg)
 	{
 		case WM_PAINT:
-			PaintNotifyWindow(hWnd);
+			//<comment author='b6s'>
+			// Uses the managed UI function instead
+			//PaintNotifyWindow(hWnd);
+			//</comment>
 			break;
 
 		case WM_SETCURSOR:
 		case WM_MOUSEMOVE:
 		case WM_LBUTTONUP:
 		case WM_RBUTTONUP:
+			//<comment author='b6s'>
+			// Uses the managed UI function instead
+			/*
 			DragUI(hWnd, NULL, msg, wParam, lParam, FALSE);
 			if ((msg == WM_SETCURSOR) &&
 					(HIWORD(lParam) != WM_LBUTTONDOWN) &&
@@ -24,6 +30,8 @@ LRESULT APIENTRY NotifyWndProc(HWND hWnd,
 				return DefWindowProc(hWnd, msg, wParam, lParam);
 			if ((msg == WM_LBUTTONUP) || (msg == WM_RBUTTONUP))
 				SetWindowLong(hWnd, FIGWL_MOUSE, 0L);
+			*/
+			//</comment>
 			break;
 
 		default:
@@ -156,27 +164,34 @@ void UIShowNotifyWindow()
 	}*/
 }
 
+//<comment author='b6s'>
+// Uses the managed UI function instead
+/*
 void PaintNotifyWindow(HWND hNotifyWnd)
 {
-//	PAINTSTRUCT ps;
-//	HDC hDC;
-//	HFONT oldFont;
-//	RECT rc;
-//	//DWORD i;
-//
-//	hDC = BeginPaint(hNotifyWnd,&ps);
-//	oldFont = (HFONT)SelectObject(hDC, hUIFont);
-//
-//	GetClientRect(hNotifyWnd,&rc);
-//
-//	if(lpNotifyStr)
-//	{
-//		ExtTextOut( hDC, 1, 1, ETO_OPAQUE, &rc, lpNotifyStr, (int)wcslen(lpNotifyStr), NULL);
-//	}
-//	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_3DFACE), 0/*GetSysColor(COLOR_3DDKSHADOW)*/);
-//	SelectObject(hDC, oldFont);
-//	EndPaint(hNotifyWnd,&ps);
+	PAINTSTRUCT ps;
+	HDC hDC;
+	HFONT oldFont;
+	RECT rc;
+	//DWORD i;
+
+	hDC = BeginPaint(hNotifyWnd,&ps);
+	oldFont = (HFONT)SelectObject(hDC, hUIFont);
+
+	GetClientRect(hNotifyWnd,&rc);
+
+	if(lpNotifyStr)
+	{
+		ExtTextOut( hDC, 1, 1, ETO_OPAQUE, &rc, lpNotifyStr, (int)wcslen(lpNotifyStr), NULL);
+	}
+	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_3DFACE), 0
+	//, GetSysColor(COLOR_3DDKSHADOW)
+	);
+	SelectObject(hDC, oldFont);
+	EndPaint(hNotifyWnd,&ps);
 }
+*/
+//</comment>
 
 void UIHideNotifyWindow()
 {

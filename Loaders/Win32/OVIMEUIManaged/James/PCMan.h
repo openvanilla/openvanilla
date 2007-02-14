@@ -19,24 +19,44 @@
 
 // Interfaces
 // OVIMEUI.cpp
+//<comment author='b6s'>
+// Uses the managed UI function instead
+/*
 void DrawUIBorder(LPRECT);
 void DragUI(HWND ,HWND, UINT, WPARAM, LPARAM, BOOL);
 
 void FillSolidRect( HDC dc, LPRECT rc, COLORREF color );
 void Draw3DBorder(HDC hdc, LPRECT rc, COLORREF light, COLORREF dark, int width=1);
+*/
+//</comment>
 
 // UIStatus.cpp
 LRESULT APIENTRY StatusWndProc(HWND, UINT, WPARAM, LPARAM);
-void PaintStatusWindow(HWND);
+//<comment author='b6s'>
+// Uses the managed UI function instead
+//void PaintStatusWindow(HWND);
+//</comment>
+
 // UIComp.cpp
 LRESULT APIENTRY CompWndProc(HWND, UINT, WPARAM, LPARAM);
-void PaintCompWindow(HWND);
+//<comment author='b6s'>
+// Uses the managed UI function instead
+//void PaintCompWindow(HWND);
+//</comment>
+
 // UICand.cpp
 LRESULT APIENTRY CandWndProc(HWND, UINT, WPARAM, LPARAM);
-void PaintCandWindow(HWND);
+//<comment author='b6s'>
+// Uses the managed UI function instead
+//void PaintCandWindow(HWND);
+//</comment>
+
 // UINotify.cpp
 LRESULT APIENTRY NotifyWndProc(HWND, UINT, WPARAM, LPARAM);
-void PaintNotifyWindow(HWND);
+//<comment author='b6s'>
+// Uses the managed UI function instead
+//void PaintNotifyWindow(HWND);
+//</comment>
 
 // Private variable
 extern HFONT hUIFont;
@@ -57,7 +77,7 @@ extern UICHILD uiCand;
 extern UICHILD uiComp;
 extern UICHILD uiStatus;
 extern UICHILD uiNotify;
-extern std::vector<wchar_t*> IC;
+//extern std::vector<wchar_t*> IC;
 extern int CurrentIC;
 extern bool isChinese;
 extern bool isTraditional;

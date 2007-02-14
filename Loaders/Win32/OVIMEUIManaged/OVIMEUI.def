@@ -4,7 +4,7 @@ EXPORTS
 	IMEUIUnRegisterClass
 	UIConstruct
 	UIDispose
-	UIPushInputMethod
+;	UIPushInputMethod
 	UICurrentInputMethod
 ;OVIMEUI
 ;;status

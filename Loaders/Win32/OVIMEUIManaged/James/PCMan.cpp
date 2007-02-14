@@ -110,13 +110,44 @@ BOOL IMEUIUnRegisterClass( HINSTANCE hInstance )
 	UnregisterClass(UICOMPCLASSNAME, hInstance);
 	UnregisterClass(UICANDCLASSNAME, hInstance);
 	UnregisterClass(UINOTIFYCLASSNAME, hInstance);
+	//<comment author='b6s'>
+	// Uses the managed UI function instead
+	/*
 	for(int i = 0; i < (int)IC.size(); i++)
 		free(IC.at(i));
+	*/
+	//</comment>
+
 	//CurrentIC = 0;
 	CurrentIC = 1;
 	return TRUE;
 }
 
+void UIConstruct()
+{
+	INITCOMMONCONTROLSEX iccex;
+	iccex.dwSize = sizeof(INITCOMMONCONTROLSEX);
+	iccex.dwICC = ICC_BAR_CLASSES;
+	InitCommonControlsEx(&iccex);
+
+	hInstDLL = hInst;
+	DisableThreadLibraryCalls( HMODULE(hInstDLL) );
+	hIMESelMenu = CreatePopupMenu();
+}
+
+void UIDispose()
+{
+	DestroyMenu(hIMESelMenu);
+}
+
+int UICurrentInputMethod()
+{
+	return CurrentIC;
+}
+
+//<comment author='b6s'>
+// Uses the managed UI function instead
+/*
 void UIPushInputMethod( wchar_t *lpStr )
 {
 	IC.push_back(wcsdup(lpStr));
@@ -131,12 +162,6 @@ void UIPushInputMethod( wchar_t *lpStr )
 #endif
 	AppendMenu( hIMESelMenu, MF_STRING, ID_IME_LIST_FIRST + IC.size() -1, name );
 }
-
-int UICurrentInputMethod()
-{
-	return CurrentIC;
-}
-
 
 void DrawUIBorder( LPRECT lprc )
 {
@@ -288,8 +313,8 @@ void DragUI(HWND hWnd, HWND hWnd1,
 							sz.cx,
 							sz.cy,TRUE);
 
-					/*
-					if(fIsCompWnd) {
+#if 0
+						if(fIsCompWnd) {
 						HWND hUIWnd;
 						LPARAM mylParam;
 
@@ -300,7 +325,7 @@ void DragUI(HWND hWnd, HWND hWnd1,
 						if (IsWindow(hUIWnd))
 							SendMessage(hUIWnd, WM_UI_COMPMOVE, 0, mylParam);
 					}
-					*/
+#endif
 
 					if (IsWindow(hWnd1)) {
 						MoveWindow(hWnd1,pt.x - ptdif1.x,
@@ -313,23 +338,7 @@ void DragUI(HWND hWnd, HWND hWnd1,
 			break;
 	}
 }
-
-void UIConstruct()
-{
-	INITCOMMONCONTROLSEX iccex;
-	iccex.dwSize = sizeof(INITCOMMONCONTROLSEX);
-	iccex.dwICC = ICC_BAR_CLASSES;
-	InitCommonControlsEx(&iccex);
-
-	hInstDLL = hInst;
-	DisableThreadLibraryCalls( HMODULE(hInstDLL) );
-	hIMESelMenu = CreatePopupMenu();
-}
-
-void UIDispose()
-{
-	DestroyMenu(hIMESelMenu);
-}
+*/
 
 /*
 BOOL WINAPI DllMain( HINSTANCE hInst,  DWORD fdwReason,  LPVOID lpvReserved )
@@ -354,3 +363,4 @@ BOOL WINAPI DllMain( HINSTANCE hInst,  DWORD fdwReason,  LPVOID lpvReserved )
 	return TRUE;
 }
 */
+//</comment>

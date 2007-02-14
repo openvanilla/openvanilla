@@ -16,7 +16,10 @@ extern "C" {
 BOOL IMEUIRegisterClass( HINSTANCE );
 BOOL IMEUIUnRegisterClass( HINSTANCE );
 BOOL MyIsIMEMessage(UINT);
-void UIPushInputMethod(wchar_t*);
+//<comment author='b6s'>
+// Uses the managed UI function instead
+//void UIPushInputMethod(wchar_t*);
+//</comment>
 int UICurrentInputMethod();
 
 void UIConstruct();

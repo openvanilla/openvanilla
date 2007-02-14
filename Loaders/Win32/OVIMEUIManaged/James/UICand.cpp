@@ -2,9 +2,7 @@
 #include "PCMan.h"
 #include "DotNETHeader.h"
 
-#define	ITEMS_PER_ROW	4
-
-
+//#define	ITEMS_PER_ROW	4
 
 LRESULT APIENTRY CandWndProc(HWND hWnd, 
 		UINT msg, 
@@ -14,14 +12,20 @@ LRESULT APIENTRY CandWndProc(HWND hWnd,
 	switch (msg)
 	{
 		case WM_PAINT:
-			murmur("WM_PAINT, candidate window");
-			PaintCandWindow(hWnd);
+			//murmur("WM_PAINT, candidate window");
+			//<comment author='b6s'>
+			// Uses the managed UI function instead
+			//PaintCandWindow(hWnd);
+			//</comment>
 			break;
 
 		case WM_SETCURSOR:
 		case WM_MOUSEMOVE:
 		case WM_LBUTTONUP:
 		case WM_RBUTTONUP:
+			//<comment author='b6s'>
+			// Uses the managed UI function instead
+			/*
 			DragUI(hWnd, NULL, msg, wParam, lParam, FALSE);
 			if ((msg == WM_SETCURSOR) &&
 					(HIWORD(lParam) != WM_LBUTTONDOWN) &&
@@ -29,6 +33,8 @@ LRESULT APIENTRY CandWndProc(HWND hWnd,
 				return DefWindowProc(hWnd, msg, wParam, lParam);
 			if ((msg == WM_LBUTTONUP) || (msg == WM_RBUTTONUP))
 				SetWindowLong(hWnd, FIGWL_MOUSE, 0L);
+			*/
+			//</comment>
 			break;
 
 		default:
@@ -142,8 +148,8 @@ void UIMoveCandWindow(int X, int Y)
 		//int newX=X+(CompCursorPos-1)*((int)lpStr);
 		//int newY=Y+((int)lpStr);		
 		//int newX=X+(CompCursorPos)*21 ;
-		int newX=X ;
-		int newY=Y;		
+		int newX = X;
+		int newY = Y;		
 		//if (IsWindow(uiCand.hWnd))
 		{		
 			RECT screenrc;
@@ -160,7 +166,7 @@ void UIMoveCandWindow(int X, int Y)
 }
 
 //<comment author='b6s'>Deprecated.
-#if 0
+/*
 void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 {
 	murmur("UIMoveCandWindow_OLD");
@@ -265,12 +271,12 @@ void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 				Y = screenrc.bottom - sz.cy;
 			uiCand.pt.x = X;
 			uiCand.pt.y = Y;
-			/*MoveWindow(uiCand.hWnd,
-				uiCand.pt.x,
-				uiCand.pt.y,
-				sz.cx,
-				sz.cy,
-				TRUE);*/
+			//MoveWindow(uiCand.hWnd,
+			//	uiCand.pt.x,
+			//	uiCand.pt.y,
+			//	sz.cx,
+			//	sz.cy,
+			//	TRUE);
 			_MoveCandiPage(uiCand.pt.x,uiCand.pt.y);
 			//<comment author='b6s'>
 			// Test
@@ -280,12 +286,12 @@ void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		}
 		else if( GetCandPosFromCompWnd(&sz) )
 		{
-			/*MoveWindow(uiCand.hWnd,
-				uiCand.pt.x,
-				uiCand.pt.y,
-				sz.cx,
-				sz.cy,
-				TRUE);*/
+			//MoveWindow(uiCand.hWnd,
+			//	uiCand.pt.x,
+			//	uiCand.pt.y,
+			//	sz.cx,
+			//	sz.cy,
+			//	TRUE);
 
 			_MoveCandiPage(uiCand.pt.x,uiCand.pt.y);
 			//<comment author='b6s'>
@@ -299,80 +305,89 @@ void UIMoveCandWindow_OLD(HWND hUIWnd, int X, int Y, wchar_t* lpStr)
 		if(lpStr)
 			UIShowCandWindow();
 	}
-	
 }
-#endif
+*/
 //</comment>
 
+//<comment author='b6s'>
+// Uses the managed UI function instead
+/*
 void PaintCandWindow(HWND hCandWnd)
 {
 	murmur("PaintCandWindow");
-//	PAINTSTRUCT ps;
-//	HDC hDC;
-//	HFONT oldFont;
-//	RECT rc;
-//	//DWORD i;
-//
-//	hDC = BeginPaint(hCandWnd,&ps);
-//	oldFont = (HFONT)SelectObject(hDC, hUIFont);
-//
-//	GetClientRect(hCandWnd,&rc);
-//
-//	if(lpCandStr)
-//	{
-//		SetTextColor( hDC, GetSysColor( COLOR_WINDOWTEXT ) );
-//		SetBkColor( hDC, GetSysColor( COLOR_WINDOW ) );
-//
-//		AVConfig cfg;
-//		AVDictionary *dict = AVDictionary::getDict(cfg.getBaseDir(), "OVIMEUI");
-//		int items_per_row = dict->keyExist("items_per_row") ? dict->getInteger("items_per_row") : ITEMS_PER_ROW;
-//
-//		RECT cand_rc;	cand_rc.left = 1;	cand_rc.top = 1;
-//		LPCTSTR cand = lpCandStr;
-//		//Array foo = cand.split(new char[]{' '});
-//		int num = 0;
-//		for( int i = 0; i < numCand; ++i )
-//		{
-//			++num;
-//			int len = (int)wcslen( cand );
-//			SIZE candsz;
-//			GetTextExtentPoint32(hDC, cand, len, &candsz);
-//			candsz.cx += 4;
-//			candsz.cy += 2;
-//
-//			cand_rc.right = cand_rc.left + candsz.cx;
-//			cand_rc.bottom = cand_rc.top + candsz.cy;
-//
-//			if( (i + 1) == numCand )
-//				SetTextColor( hDC, RGB(0, 0, 192) );
-//
-//			ExtTextOut( hDC, cand_rc.left + 2, cand_rc.top, ETO_OPAQUE, &cand_rc, cand, 
-//				len, NULL);
-//
-//			if( num >= items_per_row && (i + 1) < numCand )
-//			{
-//				cand_rc.left = 1;
-//				cand_rc.top += candsz.cy;
-//				num = 0;
-//			}
-//			else
-//				cand_rc.left = cand_rc.right;
-//			cand = cand + wcslen(cand) + 1;
-//		}
-//		cand_rc.left = cand_rc.right;
-//		cand_rc.right = rc.right;
-//		ExtTextOut( hDC, cand_rc.left, cand_rc.top, ETO_OPAQUE, &cand_rc, NULL, 0, NULL);
-//	}
-//	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_3DFACE), 0/*GetSysColor(COLOR_3DDKSHADOW)*/);
-//	SelectObject(hDC, oldFont);
-//	EndPaint(hCandWnd,&ps);
-//	
+
+#if 0
+	PAINTSTRUCT ps;
+	HDC hDC;
+	HFONT oldFont;
+	RECT rc;
+	//DWORD i;
+
+	hDC = BeginPaint(hCandWnd,&ps);
+	oldFont = (HFONT)SelectObject(hDC, hUIFont);
+
+	GetClientRect(hCandWnd,&rc);
+
+	if(lpCandStr)
+	{
+		SetTextColor( hDC, GetSysColor( COLOR_WINDOWTEXT ) );
+		SetBkColor( hDC, GetSysColor( COLOR_WINDOW ) );
+
+		AVConfig cfg;
+		AVDictionary *dict = AVDictionary::getDict(cfg.getBaseDir(), "OVIMEUI");
+		int items_per_row = dict->keyExist("items_per_row") ? dict->getInteger("items_per_row") : ITEMS_PER_ROW;
+
+		RECT cand_rc;	cand_rc.left = 1;	cand_rc.top = 1;
+		LPCTSTR cand = lpCandStr;
+		//Array foo = cand.split(new char[]{' '});
+		int num = 0;
+		for( int i = 0; i < numCand; ++i )
+		{
+			++num;
+			int len = (int)wcslen( cand );
+			SIZE candsz;
+			GetTextExtentPoint32(hDC, cand, len, &candsz);
+			candsz.cx += 4;
+			candsz.cy += 2;
+
+			cand_rc.right = cand_rc.left + candsz.cx;
+			cand_rc.bottom = cand_rc.top + candsz.cy;
+
+			if( (i + 1) == numCand )
+				SetTextColor( hDC, RGB(0, 0, 192) );
+
+			ExtTextOut( hDC, cand_rc.left + 2, cand_rc.top, ETO_OPAQUE, &cand_rc, cand, 
+				len, NULL);
+
+			if( num >= items_per_row && (i + 1) < numCand )
+			{
+				cand_rc.left = 1;
+				cand_rc.top += candsz.cy;
+				num = 0;
+			}
+			else
+				cand_rc.left = cand_rc.right;
+			cand = cand + wcslen(cand) + 1;
+		}
+		cand_rc.left = cand_rc.right;
+		cand_rc.right = rc.right;
+		ExtTextOut( hDC, cand_rc.left, cand_rc.top, ETO_OPAQUE, &cand_rc, NULL, 0, NULL);
+	}
+	Draw3DBorder( hDC, &rc, GetSysColor(COLOR_3DFACE), 0
+	//,GetSysColor(COLOR_3DDKSHADOW)
+	);
+	SelectObject(hDC, oldFont);
+	EndPaint(hCandWnd,&ps);
+#endif
+
 	if(lpCandStr)
 	{
 		UIShowCandWindow(); //James comments
 		return;
 	}
 }
+*/
+//</comment>
 
 void UIShowCandWindow()
 {
@@ -389,6 +404,7 @@ void UIHideCandWindow()
 		_HideCandiPage();
 	}
 }
+
 void UIExpandCandi()
 {
 	_ExpandCandi();

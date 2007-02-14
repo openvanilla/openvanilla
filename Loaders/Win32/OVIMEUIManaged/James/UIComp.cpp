@@ -13,8 +13,11 @@ LRESULT APIENTRY CompWndProc(HWND hWnd,
 	switch (msg)
 	{
 	case WM_PAINT:
-		//			murmur("WM_PAINT, composition window");
-		PaintCompWindow( hWnd);
+		//murmur("WM_PAINT, composition window");
+		//<comment author='b6s'>
+		// Uses the managed UI function instead
+		//PaintCompWindow( hWnd);
+		//</comment>
 		break;
 	case WM_ERASEBKGND:
 		return TRUE;
@@ -23,6 +26,9 @@ LRESULT APIENTRY CompWndProc(HWND hWnd,
 	case WM_MOUSEMOVE:
 	case WM_LBUTTONUP:
 	case WM_RBUTTONUP:
+		//<comment author='b6s'>
+		// Uses the managed UI function instead
+		/*
 		DragUI(hWnd, NULL, msg, wParam, lParam, TRUE);
 		if ((msg == WM_SETCURSOR) &&
 			(HIWORD(lParam) != WM_LBUTTONDOWN) &&
@@ -30,6 +36,8 @@ LRESULT APIENTRY CompWndProc(HWND hWnd,
 			return DefWindowProc(hWnd, msg, wParam, lParam);
 		if ((msg == WM_LBUTTONUP) || (msg == WM_RBUTTONUP))
 			SetWindowLong(hWnd, FIGWL_MOUSE, 0L);
+		*/
+		//</comment>
 		break;
 	default:
 		if (!MyIsIMEMessage(msg))
@@ -117,9 +125,11 @@ int CompIndexToXPos(int index)
 	return size.cx + 1;
 }
 
+//<comment author='b6s'>
+// Uses the managed UI function instead
+/*
 void PaintCompWindow(HWND hCompWnd)
 {
-#if 0
 	PAINTSTRUCT ps;
 	HDC hDC;
 	HFONT oldFont;
@@ -151,16 +161,19 @@ void PaintCompWindow(HWND hCompWnd)
 		BitBlt( memdc, selstart, 0, selend-selstart, rc.bottom, memdc, selstart, 0, NOTSRCCOPY );
 		BitBlt( memdc, cursor, 0, 1, rc.bottom, memdc, cursor, 0, SRCINVERT );
 
-		/*		HDC tmpdc = GetDC(NULL);
+#if 0		
+		HDC tmpdc = GetDC(NULL);
 		TCHAR debug_info[100];
 		_stprintf(debug_info, _T("ss=%d, se=%d, cp=%d"), selstart, selend, cursor);
 		TextOut( tmpdc, 0, 0, debug_info, lstrlen(debug_info));
 		ReleaseDC( NULL, tmpdc );
-		*/
+#endif
 	}
 
 	InflateRect( &rc, 1, 1 );
-	Draw3DBorder( memdc, &rc, GetSysColor(COLOR_3DFACE), 0/*GetSysColor(COLOR_3DDKSHADOW)*/);
+	Draw3DBorder( memdc, &rc, GetSysColor(COLOR_3DFACE), 0
+	//,GetSysColor(COLOR_3DDKSHADOW)
+	);
 
 	BitBlt( hDC, ps.rcPaint.left, ps.rcPaint.top, 
 		(ps.rcPaint.right-ps.rcPaint.left), 
@@ -174,9 +187,9 @@ void PaintCompWindow(HWND hCompWnd)
 	SelectObject(memdc, oldFont);
 
 	EndPaint(hCompWnd,&ps);
-#endif
-
 }
+*/
+//</comment>
 
 void UIShowCompWindow()
 {
@@ -203,6 +216,7 @@ void UIHideCompWindow()
 		_HideCompPage();		
 	}
 }
+
 void UISetMarkFrom(int i)
 {
 	CompSelStart = i;
