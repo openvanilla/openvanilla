@@ -136,16 +136,22 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	int controlState =
 		controller->onControlEvent(hIMC, uVKey, lKeyData, lpbKeyState);
 	switch(controlState) {
-		case 0:	// normal
-			isProcessed =
-				controller->onTypingEvent(hIMC, uVKey, lKeyData, lpbKeyState);
+		case 0: // CTRL/ALT/SHIFT, passed
+			isProcessed = FALSE;
 			break;
 		case 1:	// CTRL/ALT/SHIFT, processed
 			isProcessed = TRUE;
-		case 2: // CTRL/ALT/SHIFT, passed
-			isProcessed = FALSE;
-	}	
-
+			break;
+		case 2:	// normal
+			isProcessed =
+				controller->onTypingEvent(hIMC, uVKey, lKeyData, lpbKeyState);
+			break;
+	}
+	
+	//<comment author='b6s'>
+	// NOT close ImmController because of counting for SHIFT pressed time.
+	//ImmController::close();
+	//</comment>
 	ImmModel::close();
 
 	return isProcessed;

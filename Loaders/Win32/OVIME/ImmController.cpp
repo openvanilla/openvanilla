@@ -34,36 +34,44 @@ void ImmController::close(void)
 	if(m_self) delete m_self;
 }
 
-bool ImmController::onKeyShift(HIMC hIMC, LPARAM lKeyData)
+int ImmController::onKeyShift(HIMC hIMC, LPARAM lKeyData)
 {
-	bool isShiftEaten = false;
-	if(m_shiftPressedTime == 0)
+	int shiftState;
+	if(!getKeyInfo(lKeyData).isKeyUp) {
 		m_shiftPressedTime = GetTickCount();
-	else if(getKeyInfo(lKeyData).isKeyUp)
+		shiftState = 1;
+	}
+	else if(GetTickCount() - m_shiftPressedTime < 200)
 	{
-		if(GetTickCount() - m_shiftPressedTime < 300)
-		{
-			//Toggle Chinese/English mode.
-			//lParam == 2
-			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
-			isShiftEaten = true;
-		}
-		m_shiftPressedTime = 0;
-    }
+		//Toggle Chinese/English mode.
+		//lParam == 2
+		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
+		shiftState = 2;
+		//m_shiftPressedTime = 0;
+	}
+	else {
+		shiftState = 0;
+		//m_shiftPressedTime = 0;
+	}
 
-	return isShiftEaten;
+	return shiftState;
 }
 
 int ImmController::onControlEvent
 (HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 {
-	int processState = 0;
+	int processState;
 	if(isCtrlPressed(lpbKeyState))
 	{
 		murmur("control state");
 		if(isAltPressed(lpbKeyState)) {
 			murmur("alt state");
 			switch(LOWORD(uVKey)) {
+				case VK_MENU:
+				case VK_CONTROL:
+					murmur("C_A: passed");
+					processState = 0;
+					break;
 				case VK_G:
 					//Toggle Traditional / Simplified Chinese.
 					//lParam == 4
@@ -85,13 +93,21 @@ int ImmController::onControlEvent
 					processState = 1;
 					break;
 				default:
-					murmur("C_A: passed");
+					murmur("C_A_%u: assume normal", LOWORD(uVKey));
 					processState = 2;
 			}
 		}
 		else
 		{
 			switch(LOWORD(uVKey)) {
+				case VK_CONTROL:
+					murmur("C: passed");
+					processState = 0;
+					break;
+				case VK_MENU:
+					murmur("C_A: passed");
+					processState = 0;
+					break;
 				case VK_OEM_5:
 					//Change the module by Ctrl+"\":
 					//lParam == 8
@@ -106,71 +122,67 @@ int ImmController::onControlEvent
 					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 5);
 					processState = 1;
 					break;
-				/* Seems not necessary
 				case VK_SPACE:
-					murmur("C_space: switch IME");
+					murmur("C_Space: switch IME");
 					processState = 1;
 					break;
-				*/
+				case VK_SHIFT:
+					murmur("C_S: rotate IME");
+					processState = 1;
+					break;
 				default:
-					murmur("C: passed");
+					murmur("C_%u: assume normal", LOWORD(uVKey));
 					processState = 2;
 			}
 		}
-	}
-
-	if(processState == 0) {
+	} else if(isShiftPressed(lpbKeyState)) {
+		if(LOWORD(uVKey) == VK_SPACE) {
+			murmur("S: vkey=%u", LOWORD(uVKey));
+			murmur("S_Space: Full-Half char");
+			processState = 1;
+		}
+		else if(LOWORD(uVKey) == VK_SHIFT) {
+			murmur("S: vkey=%u", LOWORD(uVKey));
+			if(onKeyShift(hIMC, lKeyData)) {
+				murmur("S: EN-ZH: waiting for key-up");
+				processState = 1;
+			}
+			else {
+				murmur("S: passed");
+				processState = 0;
+			}
+		}
+		else {
+			murmur("S_%u: assume normal", LOWORD(uVKey));
+			processState = 2;
+		}
+	} else {
 		switch(uVKey) {
 			case VK_SHIFT:
-			{
 				murmur("shift vkey");
 				if(onKeyShift(hIMC, lKeyData)) {
-					murmur("S: EN-ZH");
+					murmur("S: EN-ZH: proceeded");
 					processState = 1;
 				}
 				else {
 					murmur("S: passed");
-					processState = 2;
+					processState = 0;
 				}
 				break;
-				/*
-				BOOL isKeyProcessed = FALSE;
-				if(isShiftPressedOnly) {
-					//<comment author='b6s'>Tell the module that Shift was pressed
-						AVKeyCode keycode;
-						keycode.setShift(1);
-					//</comment>
-
-					//<comment author='b6s'>Redundant module processing
-					if(m_loader->keyEvent(UICurrentInputMethod(), keycode)) {
-						//isKeyProcessed = TRUE;
-						MyGenerateMessage(hIMC,
-								WM_IME_COMPOSITION, 0, GCS_COMPSTR);
-					} else {
-						if(m_isCompStarted &&
-							wcslen(GETLPCOMPSTR(m_model->getCompStr())) == 0)
-						{
-							m_isCompStarted = false; //­n¥ý°µ!
-							MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);						
-						}
-					}
-					//</comment>
-				}
-
-				return isKeyProcessed;
-				*/
-			}
 			case VK_CONTROL:
 				murmur("control vkey");
 				murmur("C: passed");
-				processState = 2;
+				processState = 0;
 				break;
 			case VK_MENU:
 				murmur("alt vkey");
 				murmur("A: passed");
-				processState = 2;
+				processState = 0;
 				break;
 		}
+
+		murmur("others: assume normal");
+		processState = 2;
 	}
 
 	return processState;
@@ -183,7 +195,12 @@ BOOL ImmController::onTypingEvent
 
 	if(getKeyInfo(lKeyData).isKeyUp) return isProcessed;
 
-		if(!m_isCompStarted &&
+	DWORD conv, sentence;
+	ImmGetConversionStatus(hIMC, &conv, &sentence);
+	//Alphanumeric mode
+	if(!(conv & IME_CMODE_NATIVE)) return isProcessed;
+
+	if(!m_isCompStarted &&
 		wcslen(GETLPCOMPSTR(m_model->getCompStr())) == 0)	
 	{
 		murmur("STARTCOMPOSITION");
@@ -194,10 +211,7 @@ BOOL ImmController::onTypingEvent
 	int k = LOWORD(uVKey);
 	if( k >= 65 && k <= 90)
 		k = k + 32;
-	WORD out[2];
-	int spec =
-		ToAscii(uVKey, MapVirtualKey(uVKey, 0), lpbKeyState, (LPWORD)&out, 0);
-	murmur("KEY: %c", out[0]);
+
 	switch(LOWORD(uVKey)) {
 	case VK_PRIOR: // pageup
 		k = 11;
@@ -230,20 +244,14 @@ BOOL ImmController::onTypingEvent
 		//DebugLog("uVKey: %x, %c\n", LOWORD(uVKey), LOWORD(uVKey));
 		break;
 	}
+
+	WORD out[2];
+	int spec =
+		ToAscii(uVKey, MapVirtualKey(uVKey, 0), lpbKeyState, (LPWORD)&out, 0);
+	if(spec == 1) k = (char)out[0];
+	murmur("KEY: %c", out[0]);
 	
-	if(spec == 1)
-		k = (char)out[0];
-
 	AVKeyCode keycode(k);
-	DWORD conv, sentence;
-	ImmGetConversionStatus( hIMC, &conv, &sentence);
-
-	if( !(conv & IME_CMODE_NATIVE) )	//Alphanumeric mode
-		return isProcessed;
-		//keycode.setShift(1);
-		//<comment author='b6s'>Unbind CapsLock and Alphanumeric mode
-		//keycode.setCapslock(1);
-		//</comment>		
 	if(LOWORD(lpbKeyState[VK_CAPITAL]))
 		keycode.setCapslock(1);
 	if(isShiftPressed(lpbKeyState))

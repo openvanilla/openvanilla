@@ -40,7 +40,7 @@ public:
 	inline bool isAltPressed(CONST LPBYTE lpbKeyState)
 	{ return (lpbKeyState[VK_MENU] & 0x80) ? true: false; }
 
-	bool onKeyShift(HIMC hIMC, LPARAM lKeyData);
+	int onKeyShift(HIMC hIMC, LPARAM lKeyData);
 	int onControlEvent(
 		HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState);
 	BOOL onTypingEvent(
