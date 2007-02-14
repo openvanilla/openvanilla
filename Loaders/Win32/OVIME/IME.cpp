@@ -133,11 +133,18 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 
 	dsvr->connectModel(model);
 	ImmController* controller = ImmController::open(model);
-	if(controller->onControlEvent(hIMC, uVKey, lKeyData, lpbKeyState))
-		isProcessed = TRUE;
-	else
-		isProcessed =
-			controller->onTypingEvent(hIMC, uVKey, lKeyData, lpbKeyState);
+	int controlState =
+		controller->onControlEvent(hIMC, uVKey, lKeyData, lpbKeyState);
+	switch(controlState) {
+		case 0:	// normal
+			isProcessed =
+				controller->onTypingEvent(hIMC, uVKey, lKeyData, lpbKeyState);
+			break;
+		case 1:	// CTRL/ALT/SHIFT, processed
+			isProcessed = TRUE;
+		case 2: // CTRL/ALT/SHIFT, passed
+			isProcessed = FALSE;
+	}	
 
 	ImmModel::close();
 

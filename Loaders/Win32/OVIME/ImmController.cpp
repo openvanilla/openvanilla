@@ -34,19 +34,19 @@ void ImmController::close(void)
 	if(m_self) delete m_self;
 }
 
-BOOL ImmController::onKeyShift(HIMC hIMC, LPARAM lKeyData)
+bool ImmController::onKeyShift(HIMC hIMC, LPARAM lKeyData)
 {
-	BOOL isShiftEaten = FALSE;
+	bool isShiftEaten = false;
 	if(m_shiftPressedTime == 0)
 		m_shiftPressedTime = GetTickCount();
 	else if(getKeyInfo(lKeyData).isKeyUp)
 	{
-		if(GetTickCount() - m_shiftPressedTime < 100)
+		if(GetTickCount() - m_shiftPressedTime < 300)
 		{
 			//Toggle Chinese/English mode.
 			//lParam == 2
 			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
-			isShiftEaten = TRUE;
+			isShiftEaten = true;
 		}
 		m_shiftPressedTime = 0;
     }
@@ -54,29 +54,39 @@ BOOL ImmController::onKeyShift(HIMC hIMC, LPARAM lKeyData)
 	return isShiftEaten;
 }
 
-BOOL ImmController::onControlEvent
+int ImmController::onControlEvent
 (HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 {
+	int processState = 0;
 	if(isCtrlPressed(lpbKeyState))
 	{
+		murmur("control state");
 		if(isAltPressed(lpbKeyState)) {
+			murmur("alt state");
 			switch(LOWORD(uVKey)) {
 				case VK_G:
 					//Toggle Traditional / Simplified Chinese.
 					//lParam == 4
+					murmur("C_A_g: TW-CN");
 					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 4);
-					return TRUE;  // ctrl+ alt +g
+					processState = 1;
+					break;
 				case VK_K:
 					//Toggle Large Candidate window.
 					//lParam == 6
+					murmur("C_A_k: Expand Cand");
 					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 6);
-					return TRUE;
+					processState = 1;
+					break;
 				case VK_L:
 					// Test Notify window.
+					murmur("C_A_l: Notify");
 					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 7);
-					return TRUE;
+					processState = 1;
+					break;
 				default:
-					return FALSE;
+					murmur("C_A: passed");
+					processState = 2;
 			}
 		}
 		else
@@ -85,59 +95,85 @@ BOOL ImmController::onControlEvent
 				case VK_OEM_5:
 					//Change the module by Ctrl+"\":
 					//lParam == 8
+					murmur("C_\: change module");
 					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 8);
-					return TRUE;
+					processState = 1;
+					break;
 				case VK_OEM_PLUS:					
 					//Change the BoPoMoFo keyboard layout by Ctrl+"=":
 					//lParam == 5
+					murmur("C_=: change Hsu's layout");
 					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 5);
-					return TRUE;
-				case VK_SPACE: //is this necessary?
-					return TRUE;
+					processState = 1;
+					break;
+				/* Seems not necessary
+				case VK_SPACE:
+					murmur("C_space: switch IME");
+					processState = 1;
+					break;
+				*/
 				default:
-					return FALSE;
+					murmur("C: passed");
+					processState = 2;
 			}
 		}
 	}
 
-	switch(uVKey) {
-		case VK_SHIFT:
-		{
-			return onKeyShift(hIMC, lKeyData);
-
-			/*
-			BOOL isKeyProcessed = FALSE;
-			if(isShiftPressedOnly) {
-				//<comment author='b6s'>Tell the module that Shift was pressed
-					AVKeyCode keycode;
-					keycode.setShift(1);
-				//</comment>
-
-				//<comment author='b6s'>Redundant module processing
-				if(m_loader->keyEvent(UICurrentInputMethod(), keycode)) {
-					//isKeyProcessed = TRUE;
-					MyGenerateMessage(hIMC,
-							WM_IME_COMPOSITION, 0, GCS_COMPSTR);
-				} else {
-					if(m_isCompStarted &&
-						wcslen(GETLPCOMPSTR(m_model->getCompStr())) == 0)
-					{
-						m_isCompStarted = false; //要先做!
-						MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);						
-					}
+	if(processState == 0) {
+		switch(uVKey) {
+			case VK_SHIFT:
+			{
+				murmur("shift vkey");
+				if(onKeyShift(hIMC, lKeyData)) {
+					murmur("S: EN-ZH");
+					processState = 1;
 				}
-				//</comment>
-			}
+				else {
+					murmur("S: passed");
+					processState = 2;
+				}
+				break;
+				/*
+				BOOL isKeyProcessed = FALSE;
+				if(isShiftPressedOnly) {
+					//<comment author='b6s'>Tell the module that Shift was pressed
+						AVKeyCode keycode;
+						keycode.setShift(1);
+					//</comment>
 
-			return isKeyProcessed;
-			*/
+					//<comment author='b6s'>Redundant module processing
+					if(m_loader->keyEvent(UICurrentInputMethod(), keycode)) {
+						//isKeyProcessed = TRUE;
+						MyGenerateMessage(hIMC,
+								WM_IME_COMPOSITION, 0, GCS_COMPSTR);
+					} else {
+						if(m_isCompStarted &&
+							wcslen(GETLPCOMPSTR(m_model->getCompStr())) == 0)
+						{
+							m_isCompStarted = false; //要先做!
+							MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);						
+						}
+					}
+					//</comment>
+				}
+
+				return isKeyProcessed;
+				*/
+			}
+			case VK_CONTROL:
+				murmur("control vkey");
+				murmur("C: passed");
+				processState = 2;
+				break;
+			case VK_MENU:
+				murmur("alt vkey");
+				murmur("A: passed");
+				processState = 2;
+				break;
 		}
-		case VK_CONTROL:
-		case VK_MENU:
-			return FALSE;
 	}
 
-	return FALSE;
+	return processState;
 }
 
 BOOL ImmController::onTypingEvent
