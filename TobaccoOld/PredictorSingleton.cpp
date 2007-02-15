@@ -1,4 +1,4 @@
-#define OV_DEBUG
+//#define OV_DEBUG
 
 #include "BiGram.h"
 #include "PredictorSingleton.h"
@@ -241,6 +241,13 @@ void PredictorSingleton::setSelectedCandidate(
 
 void PredictorSingleton::setTokenVectorByBigram()
 {
+	/*
+	for(size_t i = 0;
+		i < PredictorSingleton::tokenVector.size();
+		i++)
+		PredictorSingleton::tokenVector[i].word = "\xE5\x86\x8F";
+	*/
+
 	BiGram biGram;
 	size_t begin = 0;
 	size_t end = 0;
@@ -279,13 +286,14 @@ void PredictorSingleton::setTokenVectorByBigram()
 
 			if(length > begin)
 			{
-				vector<Token> forwardTokenVector(
-				    PredictorSingleton::tokenVector);
+				//vector<Token> forwardTokenVector(
+				//    PredictorSingleton::tokenVector);
     			int backwardScore =
                     biGram.maximumMatching(
                         PredictorSingleton::dictionary,
                         PredictorSingleton::tokenVector,
                         begin, length, true);
+				/*
     			int forwardScore =
                     biGram.maximumMatching(
                         PredictorSingleton::dictionary,
@@ -295,6 +303,7 @@ void PredictorSingleton::setTokenVectorByBigram()
 	       			PredictorSingleton::tokenVector = forwardTokenVector;
                 else
                     forwardTokenVector.clear();
+				*/
 			}
 
 			begin = end + 1;
@@ -302,7 +311,7 @@ void PredictorSingleton::setTokenVectorByBigram()
 
 		++end;
 	}
-	
+
 	PredictorSingleton::setComposedString();
 }
 
