@@ -40,11 +40,11 @@ int ImmController::onKeyShift(HIMC hIMC, LPARAM lKeyData)
 		//lParam == 2
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
 		shiftState = 2;
-		//m_shiftPressedTime = 0;
+		m_shiftPressedTime = 0;
 	}
 	else {
 		shiftState = 0;
-		//m_shiftPressedTime = 0;
+		m_shiftPressedTime = 0;
 	}
 
 	return shiftState;
@@ -132,33 +132,37 @@ int ImmController::onControlEvent
 		if(LOWORD(uVKey) == VK_SPACE) {
 			murmur("S: vkey=%u", LOWORD(uVKey));
 			murmur("S_Space: Full-Half char");
+			m_shiftPressedTime = 0;
 			processState = 1;
 		}
 		else if(LOWORD(uVKey) == VK_SHIFT) {
 			murmur("S: vkey=%u", LOWORD(uVKey));
-			if(onKeyShift(hIMC, lKeyData)) {
+			if(onKeyShift(hIMC, lKeyData) == 1) {
 				murmur("S: EN-ZH: waiting for key-up");
 				processState = 1;
 			}
 			else {
 				murmur("S: passed");
+				m_shiftPressedTime = 0;
 				processState = 0;
 			}
 		}
 		else {
 			murmur("S_%u: assume normal", LOWORD(uVKey));
+			m_shiftPressedTime = 0;
 			processState = 2;
 		}
 	} else {
 		switch(uVKey) {
 			case VK_SHIFT:
 				murmur("shift vkey");
-				if(onKeyShift(hIMC, lKeyData)) {
+				if(onKeyShift(hIMC, lKeyData) == 2) {
 					murmur("S: EN-ZH: proceeded");
 					processState = 1;
 				}
 				else {
 					murmur("S: passed");
+					m_shiftPressedTime = 0;
 					processState = 0;
 				}
 				break;
@@ -175,6 +179,7 @@ int ImmController::onControlEvent
 		}
 
 		murmur("others: assume normal");
+		m_shiftPressedTime = 0;
 		processState = 2;
 	}
 
