@@ -27,15 +27,17 @@ void ImmController::close(void)
 	if(m_self) delete m_self;
 }
 
-int ImmController::onKeyShift(HIMC hIMC, LPARAM lKeyData)
+int ImmController::onKeyShiftOnly(HIMC hIMC, LPARAM lKeyData)
 {
 	int shiftState;
 	if(!getKeyInfo(lKeyData).isKeyUp) {
+		murmur("shift-only: down");
 		m_shiftPressedTime = GetTickCount();
 		shiftState = 1;
 	}
 	else if(GetTickCount() - m_shiftPressedTime < 200)
 	{
+		murmur("shift-only: up");
 		//Toggle Chinese/English mode.
 		//lParam == 2
 		MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 2);
@@ -43,6 +45,7 @@ int ImmController::onKeyShift(HIMC hIMC, LPARAM lKeyData)
 		m_shiftPressedTime = 0;
 	}
 	else {
+		murmur("shift-only: other");
 		shiftState = 0;
 		m_shiftPressedTime = 0;
 	}
@@ -50,135 +53,150 @@ int ImmController::onKeyShift(HIMC hIMC, LPARAM lKeyData)
 	return shiftState;
 }
 
+int ImmController::onKeyShift(HIMC hIMC, UINT uVKey, LPARAM lKeyData)
+{
+	int processState;
+	if(LOWORD(uVKey) == VK_SPACE) {
+		murmur("S: vkey=%u", LOWORD(uVKey));
+		murmur("S_Space: Full-Half char");
+		m_shiftPressedTime = 0;
+		processState = 1;
+	}
+	else if(LOWORD(uVKey) == VK_SHIFT) {
+		switch(onKeyShiftOnly(hIMC, lKeyData)) {
+			case 1:
+				murmur("S: EN-ZH: waiting for key-up");
+				processState = 1;
+				break;
+			case 2:
+				murmur("S: EN-ZH: proceeded");
+				processState = 1;
+				break;
+			case 0:
+			default:
+				murmur("S: passed");
+				m_shiftPressedTime = 0;
+				processState = 0;
+				break;
+		}
+	}
+	else {
+		murmur("S_%u: assume normal", LOWORD(uVKey));
+		m_shiftPressedTime = 0;
+		processState = 2;
+	}
+	return processState;
+}
+
+int ImmController::onKeyCtrl(HIMC hIMC, UINT uVKey)
+{
+	int processState;
+	switch(LOWORD(uVKey)) {
+		case VK_CONTROL:
+			murmur("C: passed");
+			processState = 0;
+			break;
+		case VK_MENU:
+			murmur("C_A: passed");
+			processState = 0;
+			break;
+		case VK_OEM_5:
+			//Change the module by Ctrl+"\":
+			//lParam == 8
+			murmur("C_\\: change module");
+			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 8);
+			processState = 1;
+			break;
+		case VK_OEM_PLUS:					
+			//Change the BoPoMoFo keyboard layout by Ctrl+"=":
+			//lParam == 5
+			murmur("C_=: change Hsu's layout");
+			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 5);
+			processState = 1;
+			break;
+		case VK_SPACE:
+			murmur("C_Space: switch IME");
+			processState = 1;
+			break;
+		case VK_SHIFT:
+			murmur("C_S: rotate IME");
+			processState = 1;
+			break;
+		default:
+			murmur("C_%u: assume normal", LOWORD(uVKey));
+			processState = 2;
+	}
+	return processState;
+}
+
+int ImmController::onKeyCtrlAlt(HIMC hIMC, UINT uVKey)
+{
+	int processState;
+	switch(LOWORD(uVKey)) {
+		case VK_MENU:
+		case VK_CONTROL:
+			murmur("C_A: passed");
+			processState = 0;
+			break;
+		case VK_G:
+			//Toggle Traditional / Simplified Chinese.
+			//lParam == 4
+			murmur("C_A_g: TW-CN");
+			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 4);
+			processState = 1;
+			break;
+		case VK_K:
+			//Toggle Large Candidate window.
+			//lParam == 6
+			murmur("C_A_k: Expand Cand");
+			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 6);
+			processState = 1;
+			break;
+		case VK_L:
+			// Test Notify window.
+			murmur("C_A_l: Notify");
+			MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 7);
+			processState = 1;
+			break;
+		default:
+			murmur("C_A_%u: assume normal", LOWORD(uVKey));
+			processState = 2;
+			break;
+	}
+	return processState;
+}
+
 int ImmController::onControlEvent
 (HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 {
 	int processState;
-	if(isCtrlPressed(lpbKeyState))
-	{
-		murmur("control state");
-		if(isAltPressed(lpbKeyState)) {
-			murmur("alt state");
-			switch(LOWORD(uVKey)) {
-				case VK_MENU:
-				case VK_CONTROL:
-					murmur("C_A: passed");
-					processState = 0;
-					break;
-				case VK_G:
-					//Toggle Traditional / Simplified Chinese.
-					//lParam == 4
-					murmur("C_A_g: TW-CN");
-					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 4);
-					processState = 1;
-					break;
-				case VK_K:
-					//Toggle Large Candidate window.
-					//lParam == 6
-					murmur("C_A_k: Expand Cand");
-					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 6);
-					processState = 1;
-					break;
-				case VK_L:
-					// Test Notify window.
-					murmur("C_A_l: Notify");
-					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 7);
-					processState = 1;
-					break;
-				default:
-					murmur("C_A_%u: assume normal", LOWORD(uVKey));
-					processState = 2;
-			}
-		}
-		else
-		{
-			switch(LOWORD(uVKey)) {
-				case VK_CONTROL:
-					murmur("C: passed");
-					processState = 0;
-					break;
-				case VK_MENU:
-					murmur("C_A: passed");
-					processState = 0;
-					break;
-				case VK_OEM_5:
-					//Change the module by Ctrl+"\":
-					//lParam == 8
-					murmur("C_\\: change module");
-					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 8);
-					processState = 1;
-					break;
-				case VK_OEM_PLUS:					
-					//Change the BoPoMoFo keyboard layout by Ctrl+"=":
-					//lParam == 5
-					murmur("C_=: change Hsu's layout");
-					MyGenerateMessage(hIMC, WM_IME_NOTIFY, IMN_PRIVATE, 5);
-					processState = 1;
-					break;
-				case VK_SPACE:
-					murmur("C_Space: switch IME");
-					processState = 1;
-					break;
-				case VK_SHIFT:
-					murmur("C_S: rotate IME");
-					processState = 1;
-					break;
-				default:
-					murmur("C_%u: assume normal", LOWORD(uVKey));
-					processState = 2;
-			}
-		}
-	} else if(isShiftPressed(lpbKeyState)) {
-		if(LOWORD(uVKey) == VK_SPACE) {
-			murmur("S: vkey=%u", LOWORD(uVKey));
-			murmur("S_Space: Full-Half char");
+
+	if(getKeyInfo(lKeyData).isKeyUp) {
+		if(LOWORD(uVKey) == VK_SHIFT) {
+			processState = onKeyShift(hIMC, uVKey, lKeyData);
+		} else {
+			murmur("other key up");
 			m_shiftPressedTime = 0;
-			processState = 1;
+			processState = 0;
 		}
-		else if(LOWORD(uVKey) == VK_SHIFT) {
-			murmur("S: vkey=%u", LOWORD(uVKey));
-			if(onKeyShift(hIMC, lKeyData) == 1) {
-				murmur("S: EN-ZH: waiting for key-up");
-				processState = 1;
-			}
-			else {
-				murmur("S: passed");
-				m_shiftPressedTime = 0;
-				processState = 0;
-			}
+	}
+	else if(isCtrlPressed(lpbKeyState))
+	{
+		if(isAltPressed(lpbKeyState)) {
+			murmur("ctrl-alt state");
+			processState = onKeyCtrlAlt(hIMC, uVKey);
 		}
 		else {
-			murmur("S_%u: assume normal", LOWORD(uVKey));
-			m_shiftPressedTime = 0;
-			processState = 2;
+			murmur("ctrl state");
+			processState = onKeyCtrl(hIMC, uVKey);
 		}
-	} else {
-		switch(uVKey) {
-			case VK_SHIFT:
-				murmur("shift vkey");
-				if(onKeyShift(hIMC, lKeyData) == 2) {
-					murmur("S: EN-ZH: proceeded");
-					processState = 1;
-				}
-				else {
-					murmur("S: passed");
-					m_shiftPressedTime = 0;
-					processState = 0;
-				}
-				break;
-			case VK_CONTROL:
-				murmur("control vkey");
-				murmur("C: passed");
-				processState = 0;
-				break;
-			case VK_MENU:
-				murmur("alt vkey");
-				murmur("A: passed");
-				processState = 0;
-				break;
-		}
-
-		murmur("others: assume normal");
+	}
+	else if(isShiftPressed(lpbKeyState)) {
+		murmur("shift state");
+		processState = onKeyShift(hIMC, uVKey, lKeyData);
+	}
+	else {
+		murmur("other state: assume normal");
 		m_shiftPressedTime = 0;
 		processState = 2;
 	}
