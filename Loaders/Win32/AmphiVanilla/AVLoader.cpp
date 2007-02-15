@@ -178,7 +178,12 @@ int AVLoader::getOutputFilterCount()
 
 int AVLoader::getSwitchedBoPoMoFoLayoutModIndex()
 {
-	int currentId = activatedIm;
+	int currentId;
+	if(activatedIm == -1)
+		currentId = 0;
+	else
+		currentId = activatedIm;
+
 	if(hasBoPoMoFo &&
 		!strcmp(em->modlist()[currentId]->localizedName("en"), "PhoneticHsu")) {
 		for(size_t i = 0; i < em->modlist().size(); i++) {
