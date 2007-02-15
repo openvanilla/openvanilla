@@ -242,16 +242,14 @@ TBBUTTON toolbar_btns[]={
 
 void UICreateStatusWindow(HWND hUIWnd)
 {	
-	murmur("\tUICreateStatusWindow, hUIWnd=%x",hUIWnd);	
-	if (!IsWindow(uiStatus.hWnd))
-	{
-		RECT rec;
+	murmur("\tUICreateStatusWindow, hUIWnd=%x",hUIWnd);
 
-		//create form:
-		uiStatus.hWnd = _CreateStatusPage();	
+	RECT rec;
+	if (!IsWindow(uiStatus.hWnd)) {
+		uiStatus.hWnd = _CreateStatusPage();
 	
-	    //設定C# Status 內 m_AppHWnd 
-	    _SetStatusAppHWnd(hUIWnd); 
+		//設定C# Status 內 m_AppHWnd
+		_SetStatusAppHWnd(hUIWnd);
 
 		//設定 module menu (init: current module)
 		SendMessage(hUIWnd, WM_IME_NOTIFY, IMN_PRIVATE, 9);
@@ -259,24 +257,20 @@ void UICreateStatusWindow(HWND hUIWnd)
 		//UISetStatusModStr();
 
 		//設定中英
-		_SetStatusChiEng(isChinese);  
+		_SetStatusChiEng(isChinese);
 
 		//設定繁簡
 		_SetStatusSimpifiedOrTraditional(isTraditional);  		
 
 		//設定 hIMEWnd (?)
-		hIMEWnd = hUIWnd; //存到 hIMEWnd 之後會拿來判斷			
+		hIMEWnd = hUIWnd; //存到 hIMEWnd 之後會拿來判斷
 		
 		//移動到螢幕右下方
-		SystemParametersInfo(SPI_GETWORKAREA,
-				0,
-				&rec,
-				0);
-		UIMoveStatusWindow(hUIWnd, rec.right - 500, rec.bottom - 100); 
-	}	
+		SystemParametersInfo(SPI_GETWORKAREA, 0, &rec, 0);
+		UIMoveStatusWindow(hUIWnd, rec.right - 500, rec.bottom - 100);
+	}
 	//設定C# Status 內 m_AppHWnd 
 	_SetStatusAppHWnd(hUIWnd); 	
-	return;
 }
 
 const wchar_t* convertUtf8NameToUcs2(const char* name)

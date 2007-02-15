@@ -5,8 +5,6 @@ ImmController* ImmController::m_self = NULL;
 
 ImmController::ImmController()
 {
-	m_loader = AVLoader::open();
-
 	m_shiftPressedTime = 0;
 	m_isCompStarted = false;
 }
@@ -262,7 +260,8 @@ BOOL ImmController::onTypingEvent
 		&& (uVKey <= VK_DIVIDE))
 		keycode.setNum(1);
 	
-	if(m_loader->keyEvent(UICurrentInputMethod(), keycode)) //如果目前模組處理此key
+	AVLoader* loader = AVLoader::open();
+	if(loader->keyEvent(UICurrentInputMethod(), keycode)) //如果目前模組處理此key
 	{
 		isProcessed = TRUE;
 		if(LOWORD(uVKey) != VK_RETURN) {

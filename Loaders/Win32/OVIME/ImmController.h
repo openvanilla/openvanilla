@@ -53,8 +53,6 @@ protected:
 private:
 	static ImmController* m_self;
 
-	AVLoader* m_loader;
-
 	DWORD m_shiftPressedTime;
 	bool m_isCompStarted;
 };

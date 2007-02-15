@@ -60,7 +60,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		loader->connectDisplayServer(dsvr);
 
 		CompX = CompY = -1;
-//		UISCompWindow(hWnd);
+		//UICreateStatusWindow(hWnd);
 		UICreateCompWindow(hWnd);
 		UICreateCandWindow(hWnd);
 		UICreateNotifyWindow(hWnd);
