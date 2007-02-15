@@ -499,6 +499,8 @@ void UIChangeSimpifiedOrTraditional(HWND hWnd)
 
 void UIChangeBoPoMoFoLayout(int index)
 {
+	if(index == -1) return;
+
 	CompCursorPos=0;  //James test
 
 	CurrentIC = index;
