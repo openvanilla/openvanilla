@@ -28,6 +28,9 @@ public:
 	static ImmController* open();
 	static void close(void);
 
+	void setCompStartedFlag(bool isCompStarted)
+	{ m_isCompStarted = isCompStarted; }
+
 	inline KeyInfo getKeyInfo(LPARAM lparam) { return *(KeyInfo*)&lparam; }
 	inline bool isKeyDown(BYTE keyState) { return !!(keyState & 0xF0); }
 

@@ -1,6 +1,7 @@
 //#define OV_DEBUG 
 #include "DisplayServer.h"
 #include "OVIME.h"
+#include "ImmController.h"
 
 DisplayServer::DisplayServer()
 {
@@ -34,6 +35,9 @@ AVDisplayServer *DisplayServer::setBufString(const char *str)
 
 	ImmModel::close();
 
+	murmur("COMPOSITION GCS_COMPSTR");
+	MyGenerateMessage(m_hIMC, WM_IME_COMPOSITION, 0, GCS_COMPSTR);
+
 	return this;
 }
 
@@ -54,6 +58,9 @@ AVDisplayServer *DisplayServer::setBufString(const char *str, int caretX)
 
 	ImmModel::close();
 
+	murmur("COMPOSITION GCS_COMPSTR");
+	MyGenerateMessage(m_hIMC, WM_IME_COMPOSITION, 0, GCS_COMPSTR);
+
 	return this;
 }
 
@@ -71,16 +78,18 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 	MakeCompStr(model->getMyPrivate(), model->getCompStr());
 	UIClearCompStr();//即時update C# comp string 同步資料
 
-	//<comment author='b6s'>
-	//Moves them to IME.cpp's ImeProcessKey,
-	//since it casued a infinite-loop when "CTRL+\" occurred.
-	//MyGenerateMessage(hIMC,
-	//	WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
-	//MyGenerateMessage(hIMC,
-	//	WM_IME_ENDCOMPOSITION, 0, 0);
-	//</comment>
-
 	ImmModel::close();
+
+	murmur("COMPOSITION GCS_RESULTSTR");
+	MyGenerateMessage(m_hIMC, WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
+
+	ImmController* controller = ImmController::open();
+	controller->setCompStartedFlag(false);
+	ImmController::close();
+	controller = NULL;
+
+	murmur("ENDCOMPOSITION");
+	MyGenerateMessage(m_hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
 
 	return this;
 }

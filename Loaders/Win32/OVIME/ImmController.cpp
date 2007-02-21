@@ -287,6 +287,9 @@ BOOL ImmController::onTypingEvent
 	if(loader->keyEvent(UICurrentInputMethod(), keycode)) //如果目前模組處理此key
 	{
 		isProcessed = TRUE;
+		//<comment author='b6s'>
+		// Moves this block back to DisplayServer.
+		/*
 		if(LOWORD(uVKey) != VK_RETURN) {
 			murmur("COMPOSITION GCS_COMPSTR");
 			MyGenerateMessage(hIMC, WM_IME_COMPOSITION, 0, GCS_COMPSTR);
@@ -300,6 +303,8 @@ BOOL ImmController::onTypingEvent
 			MyGenerateMessage(hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
 			//InitCompStr(m_model->getCompStr());
 		}
+		*/
+		//</comment>
 	} else {
 		model = ImmModel::open(hIMC);
 		//James comment: 解決未組成字之前選字 comp window 會消失的問題(?待商榷)
