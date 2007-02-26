@@ -255,12 +255,13 @@ void PredictorSingleton::setTokenVectorByBigram()
 	{
 		if(end == PredictorSingleton::tokenVector.size() && end > begin)
 		{
-			vector<Token> forwardTokenVector(PredictorSingleton::tokenVector);
+			//vector<Token> forwardTokenVector(PredictorSingleton::tokenVector);
 			int backwardScore =
                 biGram.maximumMatching(
                     PredictorSingleton::dictionary,
                     PredictorSingleton::tokenVector,
                     begin, end, true);
+			/*
 			int forwardScore =
                 biGram.maximumMatching(
                     PredictorSingleton::dictionary,
@@ -270,6 +271,7 @@ void PredictorSingleton::setTokenVectorByBigram()
 				PredictorSingleton::tokenVector = forwardTokenVector;
             else
                 forwardTokenVector.clear();
+			*/
 		}
 		else if(end == PredictorSingleton::tokenVector.size())
 		{
