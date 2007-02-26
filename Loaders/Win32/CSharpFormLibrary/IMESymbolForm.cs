@@ -7,14 +7,14 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace CSharpFormLibrary
 {
     public class IMESymbolForm : System.Windows.Forms.Form
     {
         //private System.Windows.Forms.ListView m_listViews;
-        private IMEListView m_listViews;
-        private IContainer components;
+        
         private int currentPage = 0; //目前頁次 
         private int totalPage = 0; //傳入的 Symbol 共有幾頁                 
         private ArrayList m_candArray; //傳入的 candi array
@@ -38,6 +38,15 @@ namespace CSharpFormLibrary
         private const int MA_NOACTIVATEANDEAT = 0x0004;
 
         private Point mouseOffset;
+        private IMEListView m_listViews;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private TabPage tabPage3;
+        private IContainer components;
+        private Panel panel3;
+        private IMEButton buttonUp;
+        private IMEButton buttonDown;
         private bool isMouseDown = false;
 
         public IMESymbolForm()
@@ -71,14 +80,7 @@ namespace CSharpFormLibrary
         }
 
         protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (components != null)
-                {
-                    components.Dispose();
-                }
-            }
+        {        
             base.Dispose(disposing);
         }
 
@@ -90,22 +92,25 @@ namespace CSharpFormLibrary
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.buttonUp = new CSharpFormLibrary.IMEButton();
+            this.buttonDown = new CSharpFormLibrary.IMEButton();
             this.m_listViews = new CSharpFormLibrary.IMEListView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(1, 25);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // columnHeader1
             // 
@@ -128,7 +133,6 @@ namespace CSharpFormLibrary
             this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMESymbolForm_MouseDown);
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMESymbolForm_MouseMove);
             this.label1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IMESymbolForm_MouseUp);
-          
             // 
             // panel1
             // 
@@ -138,7 +142,7 @@ namespace CSharpFormLibrary
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(292, 21);
+            this.panel1.Size = new System.Drawing.Size(236, 21);
             this.panel1.TabIndex = 1;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMESymbolForm_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMESymbolForm_MouseMove);
@@ -147,40 +151,119 @@ namespace CSharpFormLibrary
             // panel2
             // 
             this.panel2.AutoSize = true;
-            this.panel2.Controls.Add(this.m_listViews);
+            this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel2.Controls.Add(this.tabControl1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 21);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(292, 239);
+            this.panel2.Size = new System.Drawing.Size(236, 187);
             this.panel2.TabIndex = 0;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(0, 0);
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(236, 187);
+            this.tabControl1.TabIndex = 1;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            // 
+            // tabPage1
+            //             
+            this.tabPage1.Controls.Add(this.m_listViews);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(228, 159);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.buttonUp);
+            this.panel3.Controls.Add(this.buttonDown);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(184, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(44, 159);
+            this.panel3.TabIndex = 4;
+            // 
+            // buttonUp
+            // 
+            this.buttonUp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonUp.Location = new System.Drawing.Point(0, 0);
+            this.buttonUp.Name = "buttonUp";
+            this.buttonUp.Size = new System.Drawing.Size(44, 100);
+            this.buttonUp.TabIndex = 5;
+            this.buttonUp.Text = "上";
+            this.buttonUp.UseVisualStyleBackColor = true;
+            this.buttonUp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonUp_MouseUp);
+            // 
+            // buttonDown
+            // 
+            this.buttonDown.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonDown.Location = new System.Drawing.Point(0, 59);
+            this.buttonDown.Name = "buttonDown";
+            this.buttonDown.Size = new System.Drawing.Size(44, 100);
+            this.buttonDown.TabIndex = 4;
+            this.buttonDown.Text = "下";
+            this.buttonDown.UseVisualStyleBackColor = true;
+            this.buttonDown.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonDown_MouseUp);
             // 
             // m_listViews
             // 
             this.m_listViews.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
             this.m_listViews.BackColor = System.Drawing.Color.GhostWhite;
-            this.m_listViews.Dock = System.Windows.Forms.DockStyle.Fill;
             this.m_listViews.Font = new System.Drawing.Font("PMingLiU", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.m_listViews.ForeColor = System.Drawing.SystemColors.WindowText;
             this.m_listViews.GridLines = true;
             this.m_listViews.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.m_listViews.HideSelection = false;
             this.m_listViews.Location = new System.Drawing.Point(0, 0);
+            this.m_listViews.Margin = new System.Windows.Forms.Padding(0);
             this.m_listViews.Name = "m_listViews";
             this.m_listViews.Scrollable = false;
-            this.m_listViews.Size = new System.Drawing.Size(292, 239);
-            this.m_listViews.SmallImageList = this.imageList1;
-            this.m_listViews.TabIndex = 0;
+            this.m_listViews.Size = new System.Drawing.Size(121, 97);
+            this.m_listViews.TabIndex = 1;
             this.m_listViews.UseCompatibleStateImageBehavior = false;
             this.m_listViews.View = System.Windows.Forms.View.Details;
-            this.m_listViews.KeyDown += new System.Windows.Forms.KeyEventHandler(this.m_listViews_KeyDown);
-            this.m_listViews.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.m_listViews_KeyPress);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(228, 173);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(228, 173);
+            this.tabPage3.TabIndex = 3;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // IMESymbolForm
             // 
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(292, 260);
+            this.ClientSize = new System.Drawing.Size(236, 208);
             this.ControlBox = false;
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -190,6 +273,9 @@ namespace CSharpFormLibrary
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,13 +296,26 @@ namespace CSharpFormLibrary
             
             //m_inputs = a_inputs;                              
             m_inputs = fakeInputs;
-            //label2.Visible=imeButton1.Visible = imeButton2.Visible = false;
+            //label2.Visible=buttonUp.Visible = buttonDown.Visible = false;
 
-            string fakeInputs2 = "， 。 、 ； ！ ？ ﹛ 『 （ 【 ＃ ％ ＆ ＊ ※ ○ ◎ □ ㊣ ＋ ＊ ※ ○ ◎ ＜ ＞ ＝ ＝ ＄ ￥ ㏄ € ℃ ㎜ ㎞ ㎝ ㎏ 】 ） 』 ﹜";
+            string fakeInputs2 = "， 。 、 ； ！ ？ ﹛ 『 （ 【 ＃ ％ ＆ ＊ ※ ○ ◎ □ ㊣ ＋ ＊ ※ ○ ◎ ＜ ＞ ＝ ＝ ＄ ￥ ㏄ € ℃ ㎜ ㎞ ㎝ ㎏ 】 ） 』 ﹜";            
             m_listViews.SetCapacity(6, 6);
             m_listViews.SetContent(fakeInputs2);
+           // Debug.WriteLine("this.panel2.Location.X=" + this.panel2.Location.X);
+            //Debug.WriteLine("this.m_listViews.Location.X=" + this.m_listViews.Location.X);
+            
+            this.panel2.Margin = Padding.Empty;
+            this.panel2.Padding = Padding.Empty;
+            this.panel2.Width = m_listViews.Width;
+            this.buttonUp.Height = panel3.Height / 2;
+            this.buttonDown.Height = panel3.Height / 2;
+            Debug.WriteLine("panel2 width=" + this.panel2.Width.ToString());
+            Debug.WriteLine("form width=" + this.Width.ToString());
+            //this.Width = this.panel2.Width;
+            //this.Width = m_listViews.Width;
+            //this.Height = panel1.Height+tabControl1.Height+ m_listViews.Height;
             //set form size
-            int width = 0;// this.vScrollBar1.Width;
+           /* int width = 0;// this.vScrollBar1.Width;
             int height = this.panel1.Height;
             width += this.m_listViews.Items[0].Bounds.Right;            
             height += this.m_listViews.Items[this.m_listViews.Items.Count - 1].Bounds.Bottom;
@@ -225,6 +324,7 @@ namespace CSharpFormLibrary
             Debug.WriteLine("width=" + Width);
             this.Height= height + 5;   //+5為了好看
             Debug.WriteLine("listview visible?"+m_listViews.Visible.ToString());
+            */            
             //m_mode = 1;    
             //this.vScrollBar1.Visible = true;
             //this.ShowListView(m_mode); // not show, only setstring                       
@@ -485,8 +585,17 @@ namespace CSharpFormLibrary
                 UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
         }
 
-        private void m_listViews_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void buttonUp_MouseUp(object sender, MouseEventArgs e)
         {
+            IMEListView lv=(IMEListView)this.tabControl1.SelectedTab.Controls[0];
+            lv.ShowNextPage();
+        }
+
+
+        private void buttonDown_MouseUp(object sender, MouseEventArgs e)
+        {
+            IMEListView lv = (IMEListView)this.tabControl1.SelectedTab.Controls[0];
+            lv.ShowNextPage();
         }
 
         private void m_listViews_KeyDown(object sender, KeyEventArgs e)
@@ -502,6 +611,49 @@ namespace CSharpFormLibrary
                 {
                     e.Handled = true;
                 }*/
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            if (this.tabControl1.SelectedTab.Controls.Count==0)
+            {
+                IMEListView lv = new IMEListView();
+                this.tabControl1.SelectedTab.Controls.Add(lv);
+                string foo = "";                
+                switch (this.tabControl1.SelectedIndex)
+                {
+                    case 0:
+                        foo = "， 。 、 ； ！ ？ ﹛ 『 （ 【 ＃ ％ ＆ ＊ ※ ○ ◎ □ ㊣ ＋ ＊ ※ ○ ◎ ＜ ＞ ＝ ＝ ＄ ￥ ㏄ € ℃ ㎜ ㎞ ㎝ ㎏ 】 ） 』 ﹜";
+                        lv.SetCapacity(6, 6);
+                        lv.SetContent(foo);
+                        break;
+                    case 1:
+                        foo = "1 2 3 4 5 6 7";
+                        lv.SetCapacity(6, 6);
+                        lv.SetContent(foo);
+                        break;
+                    case 2:
+                        foo = "ㄅ ㄆ ㄇ ㄈ";
+                        lv.SetCapacity(6, 6);
+                        lv.SetContent(foo);
+                        break;
+                    default:
+                        break;
+                }         
+            }
+            //m_listViews.ShowNextPage();
+           
+        }
+
+        private void buttonUp_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonDown_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
