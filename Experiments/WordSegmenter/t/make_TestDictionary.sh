@@ -1,0 +1,1 @@
+g++ -I../ -I../../Tobacco -I../../../Modules/SharedHeaders TestDictionary.cpp ../Dictionary.cpp ../../Tobacco/Token.cpp ../../../Modules/SharedSource/OVFileHandler.cpp ../../../Modules/SharedSource/OVStringToolKit.cpp -lUnitTest++ -o TestDictionary

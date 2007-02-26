@@ -12,7 +12,7 @@ Dictionary::Dictionary (string& dicFilePath)
 {
 	cerr << "Loading the dictionary file: " << dicFilePath << endl;
 	OVFileHandler *fh = new OVFileHandler(dicFilePath.c_str());
-	if(!fh->isOpened()) {
+	if(!fh) {
 		cerr << "The dictionary file " << dicFilePath;
 		cerr << " not found." << endl;
 		exit(-1);
