@@ -19,7 +19,7 @@ LanguageModel::LanguageModel (string& lmFilePath)
 	string delimiter("\t");
 	delimiters.push_back(delimiter);
 	bool readGramFlag = false;
-	if(!fh->isOpened()) {
+	if(!fh) {
 		cerr << "The language model file " << lmFilePath;
 		cerr << " not found." << endl;
 		exit(-1);
