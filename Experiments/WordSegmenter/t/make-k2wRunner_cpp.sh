@@ -1,1 +1,0 @@
-g++ -I../ -I../../Tobacco -I../../../Modules/SharedHeaders -I$CXXTEST_HOME k2wRunner.cpp ../LanguageModel.cpp ../Dictionary.cpp ../KeystrokeToWordConverter.cpp ../../Tobacco/Token.cpp ../../../Modules/SharedSource/OVFileHandler.cpp ../../../Modules/SharedSource/OVStringToolKit.cpp -o k2wRunner

@@ -1,0 +1,1 @@
+g++ -I../ -I../../Tobacco -I../../../Modules/SharedHeaders TestWordSegmenter.cpp ../LanguageModel.cpp ../WordSegmenter.cpp ../../Tobacco/Token.cpp ../../../Modules/SharedSource/OVFileHandler.cpp ../../../Modules/SharedSource/OVStringToolKit.cpp -lUnitTest++ -o TestWordSegmenter
