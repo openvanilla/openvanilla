@@ -21,41 +21,41 @@ public:
 
 		string dicFilePath("./tsi.src");
 		k2w->loadDictionary(dicFilePath);
+	
+		//string inputString("ABCDE");
+		//string outputString;
+		Token* tokenA = new Token();
+		tokenA->characterStringVector.push_back("ㄒㄧㄚˋ");
+		inputTokens.push_back(tokenA);
+		
+		Token* tokenB = new Token();
+		tokenB->characterStringVector.push_back("ㄩˇ");
+		inputTokens.push_back(tokenB);
+	
+		Token* tokenC = new Token();
+		tokenC->characterStringVector.push_back("ㄊㄧㄢ");
+		inputTokens.push_back(tokenC);
+		
+		Token* tokenD = new Token();
+		tokenD->characterStringVector.push_back("ㄌㄧㄡˊ");
+		inputTokens.push_back(tokenD);
+		
+		Token* tokenE = new Token();
+		tokenE->characterStringVector.push_back("ㄎㄜˋ");
+		inputTokens.push_back(tokenE);
 	}
-
+       
 	~TestKeystrokeToWordConverter()
-	{
-		delete k2w;
-	}
-	
-	KeystrokeToWordConverter* k2w;
-};
-	
-TEST_FIXTURE (TestKeystrokeToWordConverter, ConvertKeystrokeToWordTest)
-{
-	//string inputString("ABCDE");
-	//string outputString;
+        {
+                delete k2w;
+        }
+
+        KeystrokeToWordConverter* k2w;
 	vector<Token*> inputTokens;
-	Token* tokenA = new Token();
-	tokenA->word = "ㄒㄧㄚˋ";
-	inputTokens.push_back(tokenA);
-		
-	Token* tokenB = new Token();
-	tokenB->word = "ㄩˇ";
-	inputTokens.push_back(tokenB);
-	
-	Token* tokenC = new Token();
-	tokenC->word = "ㄊㄧㄢ";
-	inputTokens.push_back(tokenC);
-		
-	Token* tokenD = new Token();
-	tokenD->word = "ㄌㄧㄡˊ";
-	inputTokens.push_back(tokenD);
-		
-	Token* tokenE = new Token();
-	tokenE->word = "ㄎㄜˋ";
-	inputTokens.push_back(tokenE);
-		
+};
+
+TEST_FIXTURE(TestKeystrokeToWordConverter, ConvertTest)
+{
 	vector<Token*> outputTokens;
 	CHECK(k2w->convert(inputTokens, outputTokens));
 	
@@ -63,6 +63,22 @@ TEST_FIXTURE (TestKeystrokeToWordConverter, ConvertKeystrokeToWordTest)
 	for(int i = 0; i < outputTokens.size(); i++)
 		outputString += outputTokens[i]->word + " ";
 	cerr << outputString;
+}
+
+TEST_FIXTURE(TestKeystrokeToWordConverter, ConvertWithFixedTokenTest)
+{
+	inputTokens[0]->isFixed = true;
+	inputTokens[0]->word = "夏";
+
+        vector<Token*> outputTokens;
+        CHECK(k2w->convert(inputTokens, outputTokens));
+
+        string outputString("");
+        for(int i = 0; i < outputTokens.size(); i++)
+                outputString += outputTokens[i]->word + " ";
+        cerr << outputString;
+
+	CHECK(outputString.find("夏") == 0);
 }
 
 int main()

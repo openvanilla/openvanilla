@@ -27,7 +27,7 @@ bool KeystrokeToWordConverter::convert(vector<Token*>& inputTokens, vector<Token
 	size_t length = inputTokens.size();
 	cerr << "input tokens: " << length << endl;
 	for(size_t shift = 0; shift < length; shift++)
-		cerr << inputTokens[shift]->word << endl;		
+		cerr << inputTokens[shift]->characterStringVector[0] << endl;		
 	cerr << "----" << endl;
 	vector<double> scores(length + 1);
 	vector<int> tracks(length + 1);
@@ -49,7 +49,7 @@ bool KeystrokeToWordConverter::convert(vector<Token*>& inputTokens, vector<Token
 			cerr << endl << "(" << prefix << "," << index << "):";
 			string rightKey("");
 			for(size_t shift = prefix; shift < index; shift++)
-				rightKey += inputTokens[shift]->word + " ";
+				rightKey += inputTokens[shift]->characterStringVector[0] + " ";
 			rightKey = rightKey.substr(0, rightKey.length() - 1);
 			cerr << "{" << rightKey << "}";
 			vector<string> rightGrams;
@@ -66,7 +66,7 @@ bool KeystrokeToWordConverter::convert(vector<Token*>& inputTokens, vector<Token
 					{
 						string leftKey("");
 						for(size_t shift = left; shift < prefix; shift++)
-							leftKey += inputTokens[shift]->word + " ";
+							leftKey += inputTokens[shift]->characterStringVector[0] + " ";
 						leftKey = leftKey.substr(0, leftKey.length() - 1);
 						vector<string> leftGrams;
 						size_t leftGramCount =
