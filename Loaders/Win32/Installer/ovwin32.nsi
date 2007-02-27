@@ -641,7 +641,10 @@ Section Uninstall
   ClearErrors
   Delete "$SYSDIR\OVIME.ime"
   IfErrors 0 ContinueUnist1
-         MessageBox MB_ICONSTOP|MB_OK "偵測到有正在使用輸入法的程式，請關閉之或重新開機，以繼續反安裝程式。" IDOK +1
+         MessageBox MB_ICONSTOP|MB_YESNO "偵測到有正在使用輸入法的程式，請重新開機，以繼續反安裝程式。是否要立即重新開機？" IDNO noReboot
+         Reboot
+         noReboot:
+         MessageBox MB_ICONSTOP|MB_OK "請自行重新開機後，再進行移除安裝程式" IDOK +1
          Quit
   ContinueUnist1:  
   nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
