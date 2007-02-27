@@ -88,7 +88,6 @@ namespace CSharpFormLibrary
                 return cp;
             }
         }
-
         protected void MyOnMouseDown()
         {
             this.SelectDown();
@@ -115,9 +114,65 @@ namespace CSharpFormLibrary
             this.Items[selectedY].SubItems[selectedX].BackColor = Color.GhostWhite;
             this.Items[selectedY].SubItems[selectedX].ForeColor = SystemColors.WindowText;
         }
+        private void ShowPage(int pageNo)
+        {
+            ClearPage();
+            pageNo_now = pageNo;
+            if (pageNo >= 0 && pageNo < pageNo_all) //合理的page
+            {
+                int itemIndex;
+                int subItemIndex;
+                ListViewItem li;
+                if (pageNo == pageNo_all - 1) //last page
+                {
+                    contentNumInPage = content.Length - pageNo * pageCapacity;
+                }
+                else // filled page 
+                {
+                    contentNumInPage = pageCapacity;
+                }
+                for (int i = 0; i < pageCapacity; i++)
+                {
+                    subItemIndex = i / m_maxColumnNum; //放編號的那些 Column 的 index
+                    itemIndex = i % m_maxRowNum;
+                    li = this.Items[itemIndex];
+                    if (i < contentNumInPage) //有值
+                    {
+                        if (i < m_maxRowNum) //第一個用new的方式
+                        {
+                            li.SubItems[0] = new ListViewItem.ListViewSubItem(li, content[i + pageNo * pageCapacity], SystemColors.WindowText, Color.GhostWhite, Font);
+                        }
+                        else //其他用add的方式
+                        {
+                            li.SubItems.Add(content[i + pageNo * pageCapacity].ToString(), SystemColors.WindowText, Color.GhostWhite, Font);
+                        }
+                    }
+                    /*
+                                        else //清空
+                                        {
+                                            if (i < m_maxRowNum) //第一個用new的方式
+                                            {
+                                                li.SubItems.RemoveAt(0);
+                                            }
+                                            else //其他用add的方式
+                                            {
+                                                li.SubItems.RemoveAt();
+                                            }
+                                        }*/
 
+                }
+
+                selectedX = selectedY = 0;
+                MarkSelected();
+            }
+        }
         #endregion
         #region public methods
+        public string GetSelectedItem()
+        {
+            return this.Items[selectedY].SubItems[selectedX].Text;
+        }
+
         public void SetCapacity(int maxRowNum, int maxColumnNum)
         {
             pageCapacity = maxRowNum * maxColumnNum;
@@ -165,58 +220,6 @@ namespace CSharpFormLibrary
                 ShowPage(pageNo_now+1);
         }
 
-        private void ShowPage(int pageNo)
-        {
-            ClearPage();
-            pageNo_now = pageNo;
-            if (pageNo >= 0 && pageNo < pageNo_all) //合理的page
-            {                              
-                int itemIndex;
-                int subItemIndex;
-                ListViewItem li;                
-                if (pageNo == pageNo_all - 1) //last page
-                {
-                    contentNumInPage = content.Length - pageNo * pageCapacity;
-                }
-                else // filled page 
-                {
-                    contentNumInPage = pageCapacity;
-                }
-                for (int i = 0; i < pageCapacity; i++)
-                {
-                    subItemIndex = i / m_maxColumnNum; //放編號的那些 Column 的 index
-                    itemIndex = i % m_maxRowNum;
-                    li = this.Items[itemIndex];
-                    if (i < contentNumInPage) //有值
-                    {
-                        if (i < m_maxRowNum) //第一個用new的方式
-                        {
-                            li.SubItems[0] = new ListViewItem.ListViewSubItem(li, content[i + pageNo * pageCapacity], SystemColors.WindowText, Color.GhostWhite, Font);
-                        }
-                        else //其他用add的方式
-                        {
-                            li.SubItems.Add(content[i + pageNo * pageCapacity].ToString(), SystemColors.WindowText, Color.GhostWhite, Font);
-                        }
-                    }
-/*
-                    else //清空
-                    {
-                        if (i < m_maxRowNum) //第一個用new的方式
-                        {
-                            li.SubItems.RemoveAt(0);
-                        }
-                        else //其他用add的方式
-                        {
-                            li.SubItems.RemoveAt();
-                        }
-                    }*/
-
-                }
-                
-                selectedX = selectedY = 0;
-                MarkSelected();
-            }
-        }
         public void SelectDown()  //向下
         {
             UnMarkSelected();
@@ -242,6 +245,7 @@ namespace CSharpFormLibrary
             MarkSelected();
         }
         #endregion
+
     }
 }
 

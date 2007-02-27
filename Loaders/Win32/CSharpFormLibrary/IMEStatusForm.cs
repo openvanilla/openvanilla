@@ -562,13 +562,16 @@ namespace CSharpFormLibrary
                    (uint)UtilFuncs.WindowsMessage.WM_DESTROY,
                    0, 0);*/
             CSharpFormLibrary.IMESymbolForm form = new IMESymbolForm();
+            string[] fakeInput = new string[4];
+            fakeInput[0] = "¡A ¡C ¡B ¡F ¡I ¡H ¡¡ ¡y ¡] ¡i ¡­ ¢H ¡® ¡¯ ¡° ¡³ ¡· ¡¼ ¡À ¡Ï ¡¯ ¡° ¡³ ¡· ¡Õ ¡Ö ¡× ¡× ¢C ¢D ¢W £á ¢J ¢P ¢R ¢Q ¢V ¡j ¡^ ¡z ¡¢";
+            fakeInput[1] = "1 2 3 4 5 6 7";
+            fakeInput[2] = "£t £u £v £w";
+            fakeInput[3] = "ªü £v £{";
+            form.SetSymbols(fakeInput);
+            //form.SetSymbols("1.1 2.2 3.3 4.4 5.5 6.6 7.7 8.8 9.9 10.10 11.11 12.1/2");                                                
             form.SetLocation(800, 600);
-            Debug.WriteLine(form.Location.ToString());
-            form.SetSymbols("1.1 2.2 3.3 4.4 5.5 6.6 7.7 8.8 9.9 10.10 11.11 12.1/2");
-            Debug.WriteLine(form.Location.ToString());
-            form.ShowNoActive();
-            form.SetLocation(800, 600);
-            Debug.WriteLine(form.Location.ToString());
+            form.ShowNoActive();                         
+            
         }
 
         private void ResizeAll()
