@@ -14,16 +14,26 @@ using namespace std;
 
 DictionarySingleton* DictionarySingleton::itsInstance = NULL;
 SQLite3* DictionarySingleton::dictionaryDB = NULL;
+SQLite3* DictionarySingleton::imTableDB = NULL;
 
 DictionarySingleton::DictionarySingleton(
     const char* dbFilePath)
 {
     murmur("new DictionarySingleton");
 
-    DictionarySingleton::dictionaryDB = new SQLite3;
-    if (int err = DictionarySingleton::dictionaryDB->open(dbFilePath)) {
+	int err = 0;
+
+	char tsiDbFilePath[256];
+	sprintf(tsiDbFilePath, "%s/tsi.db", dbFilePath);
+    dictionaryDB = new SQLite3;
+    if (err = dictionaryDB->open(tsiDbFilePath))
         murmur("SQLite3 error! code=%d", err);
-    }
+
+	char imDbFilePath[256];
+	sprintf(imDbFilePath, "%s/imtables.db", dbFilePath);
+	imTableDB = new SQLite3;
+    if (err = imTableDB->open(imDbFilePath))
+        murmur("SQLite3 error! code=%d", err);
 }
 
 DictionarySingleton::~DictionarySingleton()
@@ -76,7 +86,7 @@ bool DictionarySingleton::isVocabulary(string characters)
     }
 }
 
-bool DictionarySingleton::getVocabularyVectorByCharacters(string characters,
+bool DictionarySingleton::getWordsByCharacters(string characters,
     vector<Vocabulary>& vocabularyVectorRef)
 {
     /// characters-word table schema:    |characters|wordID|
@@ -117,7 +127,7 @@ bool DictionarySingleton::getVocabularyVectorByCharacters(string characters,
     string commandString = selectString + fromString + whereString;
 
     SQLite3Statement *sth =
-        DictionarySingleton::dictionaryDB->prepare(commandString.c_str());
+        dictionaryDB->prepare(commandString.c_str());
     if (!sth) {
         murmur("illegal SQL statement[%s]?", commandString.c_str());
         return false;
@@ -141,6 +151,42 @@ bool DictionarySingleton::getVocabularyVectorByCharacters(string characters,
         Vocabulary currentVocabulary;
         currentVocabulary.word = string(word);
         currentVocabulary.freq = freq;
+        
+        vocabularyVectorRef.push_back(currentVocabulary);
+    }
+    delete sth;
+    return true;
+}
+
+bool DictionarySingleton::getVocablesByCharacters(string characters,
+    vector<Vocabulary>& vocabularyVectorRef)
+{
+	char cmd[512];
+	sprintf(
+		cmd,
+		"SELECT value, ord FROM %s WHERE key=?1 ORDER BY ord;",
+		imTableId.c_str());
+
+    SQLite3Statement *sth =
+		imTableDB->prepare(cmd);
+    if (!sth) return false;
+	sth->bind_text(1, characters.c_str());
+    
+    int rows=0;
+    while (sth->step()==SQLITE_ROW) rows++;
+    if (!rows) {
+        delete sth;
+        return false;
+    }
+    
+    sth->reset();
+    while (sth->step()==SQLITE_ROW) {
+        const char* word = sth->column_text(0);
+        murmur("found[%s]", word);
+        int order = sth->column_int(1);
+        Vocabulary currentVocabulary;
+        currentVocabulary.word = string(word);
+		currentVocabulary.order = order;
         
         vocabularyVectorRef.push_back(currentVocabulary);
     }

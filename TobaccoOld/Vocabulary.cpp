@@ -4,11 +4,17 @@ Vocabulary::Vocabulary()
 {
 	word = "";
 	freq = 0;
+	order = 0;
 }
 
 Vocabulary::~Vocabulary()
 {
 	word.erase();
+}
+
+bool Vocabulary::isOrderPrior(const Vocabulary& voc1, const Vocabulary& voc2)
+{
+	return voc1.order < voc2.order;
 }
 
 bool Vocabulary::isFreqGreater(const Vocabulary& voc1, const Vocabulary& voc2)

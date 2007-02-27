@@ -13,4 +13,9 @@ public:
 	size_t position;
 };
 
+struct CandidateType
+{
+	static const int WORD = 0;
+	static const int VOCABLE = 1;
+};
 #endif

@@ -17,31 +17,31 @@ PredictorSingleton* PredictorSingleton::itsInstance = NULL;
 
 PredictorSingleton::PredictorSingleton(const char* dbFilePath)
 {
-	PredictorSingleton::dictionary =
+	dictionary =
 	   DictionarySingleton::getInstance(dbFilePath);
 }
 
 PredictorSingleton::~PredictorSingleton()
 {
-	PredictorSingleton::clearAll();
-	PredictorSingleton::dictionary->lostInstance();
+	clearAll();
+	dictionary->lostInstance();
 }
 
 void PredictorSingleton::lostInstance()
 {
-	if(PredictorSingleton::itsInstance)
+	if(itsInstance)
 	{
-	   delete PredictorSingleton::itsInstance;
+	   delete itsInstance;
 	}
 }
 
 void PredictorSingleton::clearAll()
 {
-    PredictorSingleton::composedString.erase();
-	PredictorSingleton::vectorOfCharacterVector.clear();
-	PredictorSingleton::tokenVector.clear();
-	PredictorSingleton::candidateVector.clear();
-	PredictorSingleton::candidatePositionVector.clear();
+    composedString.erase();
+	vectorOfCharacterVector.clear();
+	tokenVector.clear();
+	candidateVector.clear();
+	candidatePositionVector.clear();
 }
 
 void PredictorSingleton::removeWord(size_t position, bool delFlag)
@@ -57,51 +57,53 @@ void PredictorSingleton::removeWord(size_t position, bool delFlag)
 			tokenIndex = position;
 	}
 
-	PredictorSingleton::tokenVector.erase(
-	   PredictorSingleton::tokenVector.begin() + tokenIndex);
+	tokenVector.erase(
+		tokenVector.begin() + tokenIndex);
 
 	if(tokenIndex > 0)
-		PredictorSingleton::tokenVector[tokenIndex - 1].withSuffix = false;
+		tokenVector[tokenIndex - 1].withSuffix = false;
 	if(static_cast<int>(tokenIndex) <
-		static_cast<int>(PredictorSingleton::tokenVector.size()) - 1)
-		PredictorSingleton::tokenVector[tokenIndex + 1].withPrefix = false;
+		static_cast<int>(tokenVector.size()) - 1)
+		tokenVector[tokenIndex + 1].withPrefix = false;
 
-	PredictorSingleton::setTokenVectorByBigram();
+	setTokenVectorByBigram();
 }
 
 bool PredictorSingleton::setTokenVector(
-    string currentSequence, size_t position, bool doReplace)
+    string keystrokes, string currentSequence,
+	size_t position, bool doReplace)
 {
-    if(!PredictorSingleton::dictionary->isVocabulary(currentSequence))
+    if(!dictionary->isVocabulary(currentSequence))
         return false;
 
 	Token currentToken;
 	currentToken.withPrefix = false;
 	currentToken.withSuffix = false;
 	currentToken.characterStringVector.push_back(currentSequence);
+	currentToken.keystrokes = keystrokes;
 
     if(doReplace)
     {
-        if(PredictorSingleton::tokenVector.size() > position)
-            PredictorSingleton::tokenVector[position] = currentToken;
-        else if(PredictorSingleton::tokenVector.size() == position)
-            PredictorSingleton::tokenVector.insert(
-                PredictorSingleton::tokenVector.begin() + position,
+        if(tokenVector.size() > position)
+			tokenVector[position] = currentToken;
+        else if(tokenVector.size() == position)
+            tokenVector.insert(
+                tokenVector.begin() + position,
                 currentToken);            
         else
             return false;
     }
     else
-        PredictorSingleton::tokenVector.insert(
-            PredictorSingleton::tokenVector.begin() + position, currentToken);
+        tokenVector.insert(
+			tokenVector.begin() + position, currentToken);
 
 	//<comment author='b6s' date='20061104'>Set tokens fixed when the vector size reachs MAX_CONTEXT_LENGTH.
-	if(PredictorSingleton::tokenVector.size() > 0 &&
-		PredictorSingleton::tokenVector.size() / MAX_CONTEXT_LENGTH == 0)
-		for(size_t offset = PredictorSingleton::tokenVector.size() - 1;
-			offset >= PredictorSingleton::tokenVector.size() - MAX_CONTEXT_LENGTH;
+	if(tokenVector.size() > 0 &&
+		tokenVector.size() / MAX_CONTEXT_LENGTH == 0)
+		for(size_t offset = tokenVector.size() - 1;
+			offset >= tokenVector.size() - MAX_CONTEXT_LENGTH;
 			offset--)
-			PredictorSingleton::tokenVector[offset].isFixed = true;
+			tokenVector[offset].isFixed = true;
 	//</comment>
 
     PredictorSingleton::setTokenVectorByBigram();
@@ -120,28 +122,26 @@ void PredictorSingleton::setFixedToken(
 	currentToken.characterStringVector.push_back(currentSequence);
 	currentToken.word = currentWord;
 
-    PredictorSingleton::tokenVector.insert(
-        PredictorSingleton::tokenVector.begin() + position, currentToken);
+    tokenVector.insert(
+		tokenVector.begin() + position, currentToken);
 
-    PredictorSingleton::setTokenVectorByBigram();
+    setTokenVectorByBigram();
 }
 
 void PredictorSingleton::rotateTopCandidates(size_t position)
 {
 	vector<Vocabulary> vocabularies;
-	for(size_t i = 0;
-		i < tokenVector[position].characterStringVector.size();
-		i++)
-		dictionary->getVocabularyVectorByCharacters(
-			tokenVector[position].characterStringVector[i],
-			vocabularies);
+	dictionary->getVocablesByCharacters(
+		tokenVector[position].keystrokes, vocabularies);
 	if(vocabularies.size() < ROTATE_LIMIT - 1)
 		return;
 
+	/*
 	sort(
 		vocabularies.begin(),
 		vocabularies.end(),
 		Vocabulary::isFreqGreater);
+	*/
 
 	size_t index = ROTATE_LIMIT;
 	for(size_t j = 0;
@@ -162,123 +162,143 @@ void PredictorSingleton::rotateTopCandidates(size_t position)
     setComposedString();
 }
 
-void PredictorSingleton::addCandidates(string characters, size_t head)
+void PredictorSingleton::addCandidates(
+	string characters, size_t head, int type)
 {
-    vector<Vocabulary> vocabularies;
-	if(PredictorSingleton::dictionary->getVocabularyVectorByCharacters(
-	   characters, vocabularies))
+	vector<Vocabulary> vocabularies;
+
+	bool hasCandidate = false;
+	switch(type) {
+		case CandidateType::WORD:
+			hasCandidate =
+				dictionary->getWordsByCharacters(
+					characters, vocabularies);
+			break;
+		case CandidateType::VOCABLE:
+		default:
+			hasCandidate =
+				dictionary->getVocablesByCharacters(
+					characters, vocabularies);
+			break;
+	}
+
+	if(hasCandidate)
 	{
 		for(size_t i = 0; i < vocabularies.size(); i++)
 		{
 			Candidate currentCandidate(vocabularies[i]);
 			currentCandidate.position = head;
-			PredictorSingleton::candidateVector.push_back(currentCandidate);
-			PredictorSingleton::candidatePositionVector.push_back(head);
+			candidateVector.push_back(currentCandidate);
+			candidatePositionVector.push_back(head);
 		}
 	}
 	
+	/*
 	sort(
-	   PredictorSingleton::candidateVector.begin(),
-	   PredictorSingleton::candidateVector.end(),
+	   candidateVector.begin(),
+	   candidateVector.end(),
 	   Vocabulary::isFreqGreater);
 
 	stable_sort(
-	   PredictorSingleton::candidateVector.begin(),
-	   PredictorSingleton::candidateVector.end(),
+	   candidateVector.begin(),
+	   candidateVector.end(),
 	   Vocabulary::isWordLonger);
+   */
 }
 
 void PredictorSingleton::setCandidateVector(size_t position)
 {	
-	PredictorSingleton::candidateVector.clear();
-	PredictorSingleton::candidatePositionVector.clear();
-
-	size_t candidateKeyCount =
-	   PredictorSingleton::tokenVector[position].characterStringVector.size();
-	for(size_t candidateKeyIndex = 0; candidateKeyIndex < candidateKeyCount; ++candidateKeyIndex)
-	{
-		string currentCharacterString =
-		  PredictorSingleton::tokenVector[position].characterStringVector[candidateKeyIndex];
-		PredictorSingleton::addCandidates(currentCharacterString, position);
-	}
+	candidateVector.clear();
+	candidatePositionVector.clear();
 
 	BiGram biGram;
 	vector<string> currentCharacterCombinationVector =
-		PredictorSingleton::tokenVector[position].characterStringVector;
+		tokenVector[position].characterStringVector;
 
 	size_t backwardPosition = position;
-	size_t bound = position - 4 > 0 ? position - 4 : 0;
-	while(backwardPosition > bound) //&& !PredictorSingleton::tokenVector[backwardPosition - 1].isBoundary) //&& PredictorSingleton::tokenVector[backwardPosition].withPrefix)
+	size_t bound =
+		position >= MAX_CONTEXT_LENGTH ? position - MAX_CONTEXT_LENGTH : 0;
+	while(backwardPosition > bound)
+		//&& !tokenVector[backwardPosition - 1].isBoundary)
+		//&& tokenVector[backwardPosition].withPrefix)
 	{
 		vector<string> newCharacterCombinationVector;
 		biGram.getCharacterCombination(
-			PredictorSingleton::tokenVector[--backwardPosition].characterStringVector,
+			tokenVector[--backwardPosition].characterStringVector,
 			currentCharacterCombinationVector,
 			newCharacterCombinationVector);
 		currentCharacterCombinationVector = newCharacterCombinationVector;
 
-		for(size_t backwardStep = 0; backwardStep < currentCharacterCombinationVector.size(); ++backwardStep)
-			PredictorSingleton::addCandidates(currentCharacterCombinationVector[backwardStep], backwardPosition);
+		for(size_t backwardStep = 0;
+			backwardStep < currentCharacterCombinationVector.size();
+			++backwardStep)
+			addCandidates(
+				currentCharacterCombinationVector[backwardStep],
+				backwardPosition,
+				CandidateType::WORD);
 	}
+
+	addCandidates(
+		tokenVector[position].keystrokes,
+		position,
+		CandidateType::VOCABLE);
 }
 
 void PredictorSingleton::setSelectedCandidate(
     size_t index, size_t selectedCandidateIndex)
 {
 	string selectedCandidateWordString =
-		PredictorSingleton::candidateVector[selectedCandidateIndex].word;
+		candidateVector[selectedCandidateIndex].word;
 	size_t head =
-	   PredictorSingleton::candidateVector[selectedCandidateIndex].position;
-	for(size_t i = head, offset = 0; i <= index; i++, offset+=3)
+		candidateVector[selectedCandidateIndex].position;
+	for(size_t i = head, offset = 0;
+		i <= index;
+		i++, offset += MAX_CONTEXT_LENGTH - 1)
 	{
-		PredictorSingleton::tokenVector[i].isFixed = true;
-		PredictorSingleton::tokenVector[i].word =
-			selectedCandidateWordString.substr(offset, 3);
+		tokenVector[i].isFixed = true;
+		tokenVector[i].word =
+			selectedCandidateWordString.substr(
+				offset, MAX_CONTEXT_LENGTH - 1);
 	}
 	
-	PredictorSingleton::setComposedString();
+	setComposedString();
 }
 
 void PredictorSingleton::setTokenVectorByBigram()
 {
-	/*
-	for(size_t i = 0;
-		i < PredictorSingleton::tokenVector.size();
-		i++)
-		PredictorSingleton::tokenVector[i].word = "\xE5\x86\x8F";
-	*/
-
 	BiGram biGram;
 	size_t begin = 0;
 	size_t end = 0;
-	while(end <= PredictorSingleton::tokenVector.size())
+	while(end <= tokenVector.size())
 	{
-		if(end == PredictorSingleton::tokenVector.size() && end > begin)
+		if(end == tokenVector.size() && end > begin)
 		{
 			//vector<Token> forwardTokenVector(PredictorSingleton::tokenVector);
+			/*
 			int backwardScore =
                 biGram.maximumMatching(
-                    PredictorSingleton::dictionary,
-                    PredictorSingleton::tokenVector,
+                    dictionary,
+                    tokenVector,
                     begin, end, true);
-			/*
+			*/
 			int forwardScore =
                 biGram.maximumMatching(
                     PredictorSingleton::dictionary,
-                    forwardTokenVector,
+                    tokenVector,//forwardTokenVector,
                     begin, end, false);
+			/*
 			if(forwardScore > backwardScore)
 				PredictorSingleton::tokenVector = forwardTokenVector;
             else
                 forwardTokenVector.clear();
 			*/
 		}
-		else if(end == PredictorSingleton::tokenVector.size())
+		else if(end == tokenVector.size())
 		{
             break;
 		}
-		else if(PredictorSingleton::tokenVector[end].isFixed ||
-				PredictorSingleton::tokenVector[end].isBoundary)
+		else if(tokenVector[end].isFixed ||
+				tokenVector[end].isBoundary)
 		{
 			size_t length;
 			if(PredictorSingleton::tokenVector[end].isFixed)
@@ -290,17 +310,20 @@ void PredictorSingleton::setTokenVectorByBigram()
 			{
 				//vector<Token> forwardTokenVector(
 				//    PredictorSingleton::tokenVector);
+				/*
     			int backwardScore =
                     biGram.maximumMatching(
-                        PredictorSingleton::dictionary,
-                        PredictorSingleton::tokenVector,
+                        dictionary,
+                        tokenVector,
                         begin, length, true);
-				/*
+				*/
+
     			int forwardScore =
                     biGram.maximumMatching(
                         PredictorSingleton::dictionary,
-                        forwardTokenVector,
+                        tokenVector,//forwardTokenVector,
                         begin, length, false);
+				/*
     			if(forwardScore > backwardScore)
 	       			PredictorSingleton::tokenVector = forwardTokenVector;
                 else
@@ -314,13 +337,13 @@ void PredictorSingleton::setTokenVectorByBigram()
 		++end;
 	}
 
-	PredictorSingleton::setComposedString();
+	setComposedString();
 }
 
 void PredictorSingleton::setComposedString()
 {
-    PredictorSingleton::composedString.erase();
-    for(size_t i = 0; i < PredictorSingleton::tokenVector.size(); i++)
-        PredictorSingleton::composedString +=
-            PredictorSingleton::tokenVector[i].word;
+    composedString.erase();
+    for(size_t i = 0; i < tokenVector.size(); i++)
+		composedString +=
+			tokenVector[i].word;
 }

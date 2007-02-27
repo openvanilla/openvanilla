@@ -21,6 +21,7 @@ public:
 
 	vector<string> characterStringVector;
 	string word;
+	string keystrokes;
 };
 
 #endif

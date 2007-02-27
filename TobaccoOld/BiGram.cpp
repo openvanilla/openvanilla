@@ -147,7 +147,7 @@ int BiGram::maximumMatching(
 		{
 			string tokenSequence = foundCharacterStringVector[j];
 			vector<Vocabulary> vocabularies;
-			dictionary->getVocabularyVectorByCharacters(
+			dictionary->getWordsByCharacters(
 			    tokenSequence, vocabularies);
 
             for(size_t k = 0; k < vocabularies.size(); k++)
@@ -231,15 +231,14 @@ void BiGram::getVocabularyCombination(
 {
     vector<Vocabulary> combinedVocabularyVector;
 	size_t leftBound = leftRef.size();
-	if(leftBound > 5)
-		leftBound = 5;
+	if(leftBound > N_BEST)
+		leftBound = N_BEST;
 	size_t rightBound = rightRef.size();
-	if(rightBound > 5)
-		rightBound = 5;
+	if(rightBound > N_BEST)
+		rightBound = N_BEST;
 
 	for(size_t i = 0; i < leftBound; ++i)
 	{
-		int matrix = 0;
 		for(size_t j = 0; j < rightBound; ++j)
 		{
 			Vocabulary combinedVocabulary;
@@ -247,25 +246,12 @@ void BiGram::getVocabularyCombination(
 
 			int leftFreq = leftRef[i].freq;
 			int rightFreq = rightRef[j].freq;
-			matrix = leftFreq + rightFreq;
-			/* Since there are many symbols and words that have zero count in tsi.src...
-			if(matrix == 0)
-				break;
-			*/
+			int matrix = leftFreq + rightFreq;
+			if(matrix == 0) matrix = 1;
 
-            /*
-			int wordCount = combinedVocabulary.word.length();
-			combinedVocabulary.freq =
-                ((leftFreq * rightFreq) /
-                    (matrix * wordCount)) + (matrix / wordCount);
-            */
-            combinedVocabulary.freq = matrix;
+			combinedVocabulary.freq = 2*leftFreq*rightFreq / matrix;
 			combinedVocabularyVector.push_back(combinedVocabulary);
 		}
-
-		// Zero count still has to be considered...
-		//if(matrix == 0)
-		//	break;
 	}
 	
 	combinedRef = combinedVocabularyVector;

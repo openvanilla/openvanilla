@@ -33,7 +33,11 @@ public:
 	static void lostInstance();
     
 	void setInputMethodId(string id) { dictionary->setInputMethodId(id); }
-	bool setTokenVector(string currentSequence, size_t position, bool doReplace);
+	void setImTableId(string id) { dictionary->setImTableId(id); }
+
+	bool setTokenVector(
+		string keystrokes, string currentSequence,
+		size_t position, bool doReplace);
 	void setFixedToken(
 	   string currentSequence, string currentWord, size_t position);
 	void setCandidateVector(size_t position);
@@ -45,7 +49,7 @@ public:
 	void rotateTopCandidates(size_t position);
 
 protected:
-	void addCandidates(string characters, size_t head);
+	void addCandidates(string characters, size_t head, int type);
     void setTokenVectorByBigram();
     void setComposedString();
 
@@ -54,7 +58,7 @@ protected:
 
 private:
 	const static size_t ROTATE_LIMIT = 3;
-	const static size_t MAX_CONTEXT_LENGTH = 6;
+	const static size_t MAX_CONTEXT_LENGTH = 4;
 	static PredictorSingleton* itsInstance;
 	DictionarySingleton* dictionary;
 };

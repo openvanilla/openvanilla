@@ -308,7 +308,7 @@ OVInputMethodContext *OVIMTobacco::newContext() {
 }
 
 int OVIMTobacco::initialize(OVDictionary *cfg, OVService * s, const char *p) {
-    sprintf(tsiDbFilePath, "%sOVIMTobacco/tsi.db", p);
+    sprintf(tsiDbFilePath, "%sOVIMTobacco", p);
 
 	murmur("initial predictor(%s)", tsiDbFilePath);
 
@@ -399,6 +399,7 @@ void OVIMTobaccoContext::start(OVBuffer* buf, OVCandidate*, OVService* s) {
 	const char* ename = QueryForKey(db, parent->table, "_property_ename");
     	string inputMethodId(ename);
 	predictor->setInputMethodId(inputMethodId);
+	predictor->setImTableId(string(parent->table));
 }
 
 void OVIMTobaccoContext::clear() {
@@ -714,10 +715,11 @@ int OVIMTobaccoContext::keyCapslock() {
 }
 
 int OVIMTobaccoContext::keyCompose() {
-    murmur("key composing... [%s], (%d)", seq.compose(), position);
+    murmur("key composing... [%s], (%d)", seq.sequence(), position);
+	std::string keystrokes(seq.sequence());
     std::string characterString(seq.compose());
     if(predictor->setTokenVector(
-        characterString, position, parent->doAutoCompose()))
+		keystrokes, characterString, position, parent->doAutoCompose()))
     {
         if(!parent->doAutoCompose()) {
             position++;

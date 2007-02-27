@@ -21,7 +21,10 @@ public:
 	   vector<string>& combinedRef);
 	void getVocabularyCombination(
 	   vector<Vocabulary>& leftRef, vector<Vocabulary>& rightRef,
-	   vector<Vocabulary>& combinedRef);	   
+	   vector<Vocabulary>& combinedRef);
+
+private:
+	const static size_t N_BEST = 5;
 };
 
 #endif

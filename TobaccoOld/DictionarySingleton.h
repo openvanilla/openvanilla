@@ -35,9 +35,12 @@ public:
 		if(inputMethodId == "PhoneticHsu")
 			inputMethodId  = "BoPoMoFo";
 	}
+	void setImTableId(string id) { imTableId = id; }
 
 	bool isVocabulary(string characters);
-	bool getVocabularyVectorByCharacters(string characters,
+	bool getWordsByCharacters(string characters,
+		vector<Vocabulary>& vocabularyVectorRef);
+	bool getVocablesByCharacters(string characters,
 		vector<Vocabulary>& vocabularyVectorRef);
 
 protected:
@@ -47,7 +50,9 @@ protected:
 private:
 	static DictionarySingleton* itsInstance;
 	static SQLite3 *dictionaryDB;
+	static SQLite3 *imTableDB;
 	string inputMethodId;
+	string imTableId;
 };
 
 #endif
