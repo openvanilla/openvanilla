@@ -130,11 +130,13 @@ namespace CSharpFormLibrary
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Width = 25;
+            //this.columnHeader1.Width = 25;
+            this.columnHeader1.Width = -1;
             // 
             // columnHeader2
-            // 
-            this.columnHeader2.Width = 80;
+            //             
+            //this.columnHeader2.Width = 80;
+            this.columnHeader2.Width = -1;
             // 
             // vScrollBar1
             // 
@@ -344,6 +346,8 @@ namespace CSharpFormLibrary
                             li.SubItems.Add(m_candArray[i].ToString(), SystemColors.WindowText, SystemColors.Window, this.lbCandidates.Font);
                             this.lbCandidates.Items.Add(li);
                         }
+                        this.columnHeader1.Width = -1;
+                        this.columnHeader2.Width = -1;
                         break;
                     }
                 case 1:
