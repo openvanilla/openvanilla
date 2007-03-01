@@ -28,7 +28,7 @@ SetCompressor lzma
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
 !define MUI_HEADERIMAGE 
 !define MUI_HEADERIMAGE_NOSTRETCH
-!define MUI_HEADERIMAGE_BITMAP "cc.bmp"
+!define MUI_HEADERIMAGE_BITMAP "openvanilla-logo.bmp"
 
 
 ; Language Selection Dialog Settings
