@@ -1086,7 +1086,7 @@ const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key) {
     char *ep=keyescaped;
     while (*kp) {
         if (*kp=='\'') { *ep++='\''; *ep++='\''; }
-		if (*kp=='%') { *ep++='%'; *ep++='%'; }
+		else if (*kp=='%') { *ep++='%'; *ep++='%'; }
         else *ep++=*kp;
         kp++;
     }
