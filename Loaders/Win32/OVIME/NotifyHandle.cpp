@@ -164,12 +164,15 @@ LRESULT NotifyHandle(HIMC hUICurIMC,
 			murmur("\tChange UI CHI/ENG.");
 			UIChangeChiEng(hWnd);  
 			break;
-		case 3: //Change Modules by Mouse			
+		case 3: //Change Modules by Mouse
+			{
 			murmur("\tChange Modules by Mouse");
 			/* close module and set new IC */
 			loader->unloadCurrentModule();
-			UIModuleChange();
+			int moduleId = UIModuleChange();
+			loader->initContext(moduleId);
 			break;
+			}
 		case 4: // Change UI Traditional/Simplified Chinese
 			murmur("\tChange UI Traditional/Simplified Chinese");			
 			UIChangeSimpifiedOrTraditional(hWnd); 
@@ -193,10 +196,13 @@ LRESULT NotifyHandle(HIMC hUICurIMC,
 			break;
 			}
 		case 8: //Change Modules by ctrl +'\'
+			{
 			/* close module and poll current IC */
 			loader->unloadCurrentModule();
-			UIModuleRotate();
+			int moduleId = UIModuleRotate();
+			loader->initContext(moduleId);
 			break;
+			}
 		case 9: //Set all module names
 			{			
 			int modAmount = loader->getInputMethodCount();

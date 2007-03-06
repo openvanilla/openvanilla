@@ -427,19 +427,21 @@ void UISetMarkTo(int i)
 }
 #endif
 
-void UIModuleChange()
+int UIModuleChange()
 {
 	CompCursorPos=0;  //James test
 	
 	CurrentIC = _GetStatusSelectedModuleIndex();
 	UISetStatusModStrCurrent(CurrentIC);
 	_ShowStatusPage();
+
+	return CurrentIC;
 }
 
-void UIModuleRotate()
+int UIModuleRotate()
 {
 	_RotateStatusSelectedModule();
-	UIModuleChange();
+	return UIModuleChange();
 }
 
 void UIChangeHalfFull(HWND hWnd)

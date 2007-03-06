@@ -99,6 +99,7 @@ void AVLoader::loadModules()
 	ctx_vector.assign(size, static_cast<OVInputMethodContext*>(NULL));
 	startedCtxVector.assign(size, false);
 	activatedIm = -1;
+	if(size > 0) initContext(0);
 }
 
 void AVLoader::initContext(int i)
