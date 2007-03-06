@@ -49,14 +49,20 @@ int OVStringToolKit::getLines(
 	string& inString,
 	vector<string>& outStringVectorRef)
 {
-	vector<string> delimiters;
+	vector<string> linebreaker;
 	//<comment author='b6s'>An heuristic to check file end for linebreaks.
-	if(hasLinebreakBy(inString, '\r'))
-		delimiters.push_back("\r");
-	if(hasLinebreakBy(inString, '\n'))
-		delimiters.push_back("\n");
+	bool hasCR = hasLinebreakBy(inString, '\r');
+	bool hasLF = hasLinebreakBy(inString, '\n');
+	if(hasCR && hasLF)
+		linebreaker.push_back("\r\n");
+	else if(hasCR)
+		linebreaker.push_back("\r");
+	else if(hasLF)
+		linebreaker.push_back("\n");
+	else
+		return 0;
 	//</comment>
-	return splitString(inString, outStringVectorRef, delimiters, false);
+	return splitString(inString, outStringVectorRef, linebreaker, false);
 }
 
 int OVStringToolKit::splitString(
@@ -98,31 +104,6 @@ int OVStringToolKit::splitString(
 			//.clear() -> .erase() makes VC++ happy...
 		}
 	}
-	//*/
-	
-	/* handcraft sequencial search... =_=
-	bool doPush = false;
-	string currentSubString;
-	for(int charIndex = 0; charIndex < inString.length(); charIndex++)
-	{
-		if(inString[charIndex] != delimiter) {
-			currentSubString.push_back(inString[charIndex]);
-			
-			if(charIndex == inString.length() - 1)
-				doPush = true;
-		} else
-			doPush = true;
-		
-		if(doPush) {
-			doPush = false;
-			
-			if(currentSubString.length() > 0) {
-				outStringVectorRef.push_back(currentSubString);
-				currentSubString.clear();
-			}
-		}
-	}
-	*/
 	
 	return static_cast<int>(outStringVectorRef.size());
 }
