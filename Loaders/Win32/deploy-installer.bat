@@ -13,4 +13,5 @@ copy .\OVPreferences\Release\OVPreferences.exe .\Installer\OpenVanilla\
 copy .\OVPreferences\Release\OVPreferences.exe.manifest .\Installer\OpenVanilla\
 xcopy /e .\OVPreferences\Release\zh_TW .\Installer\OpenVanilla\zh_TW\
 copy "..\..\..\branches\0.7.2-Module-OVIMTobacco-Old\OVIMTobaccoOld\Release\OVIMTobaccoOld.dll" ".\Installer\OpenVanilla\Modules\OVIMTobacco.dll"
+copy "..\..\Modules\OVIMGeneric\Release\OVIMGeneric.dll" ".\Installer\OpenVanilla\Modules\"
 pause
