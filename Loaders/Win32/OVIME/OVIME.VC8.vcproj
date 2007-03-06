@@ -241,10 +241,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Modules\SharedSource\OVStringToolKit.cpp"
-				>
-			</File>
-			<File
 				RelativePath="UIWnd.cpp"
 				>
 			</File>
@@ -291,10 +287,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\Framework\Headers\OVLibrary.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\Modules\SharedHeaders\OVStringToolKit.h"
 				>
 			</File>
 			<File
