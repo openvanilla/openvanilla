@@ -100,7 +100,8 @@ namespace CSharpFormLibrary
             this.buttonUp = new CSharpFormLibrary.IMEButton();
             this.buttonDown = new CSharpFormLibrary.IMEButton();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            //this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl1 = new IMETabControl();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -228,6 +229,7 @@ namespace CSharpFormLibrary
             this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.CanTakeFocus = false;
 
         }
         #endregion
@@ -254,7 +256,7 @@ namespace CSharpFormLibrary
                 tp.Text = "class"+counter.ToString();
                 tp.UseVisualStyleBackColor = true;                
 
-                //add tabpage to tabcontrol
+                //add tabpage to tabcontrol                
                 tabControl1.Controls.Add(tp);
 
                 //new listview
@@ -319,6 +321,15 @@ namespace CSharpFormLibrary
         public void SetHWND(IntPtr hwnd)
         {
             m_hwnd = hwnd;
+        }
+
+        public bool CanTakeFocus
+        {
+            get { return this.CanFocus; }
+            set
+            {
+                this.SetStyle(ControlStyles.Selectable, value);    // <--- making control non-selectable
+            }
         }
 
         #endregion

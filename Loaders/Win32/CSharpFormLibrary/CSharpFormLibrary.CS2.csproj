@@ -129,6 +129,12 @@
     <Compile Include="IMESymbolForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="IMETabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IMETabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="NotifyWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +169,10 @@
     <EmbeddedResource Include="IMESymbolForm.resx">
       <DependentUpon>IMESymbolForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IMETabControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>IMETabControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NotifyWindow.resx">
       <SubType>Designer</SubType>
