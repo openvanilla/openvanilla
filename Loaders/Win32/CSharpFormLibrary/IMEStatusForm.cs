@@ -51,8 +51,9 @@ namespace CSharpFormLibrary
         private System.Windows.Forms.Panel panelHead;
 		private System.Windows.Forms.Panel panelBody;
 
-        private CSharpFormLibrary.IMESymbolForm m_symbolForm = null;
-
+        //private CSharpFormLibrary.IMESymbolForm m_symbolForm = null;
+        private CSharpFormLibrary.IMETestSymbolForm m_symbolForm = null;
+        
 		public IMEStatusForm()
 		{
 			//
@@ -562,7 +563,8 @@ namespace CSharpFormLibrary
                    0, 0);*/
             if (m_symbolForm == null)
             {
-                m_symbolForm = new IMESymbolForm();
+                //m_symbolForm = new IMESymbolForm();
+                m_symbolForm = new IMETestSymbolForm();
                 string[] fakeInput = new string[4];
                 fakeInput[0] = "¡A ¡C ¡B ¡F ¡I ¡H ¡¡ ¡y ¡] ¡i ¡­ ¢H ¡® ¡¯ ¡° ¡³ ¡· ¡¼ ¡À ¡Ï ¡¯ ¡° ¡³ ¡· ¡Õ ¡Ö ¡× ¡× ¢C ¢D ¢W £á ¢J ¢P ¢R ¢Q ¢V ¡j ¡^ ¡z ¡¢";
                 fakeInput[1] = "1 2 3 4 5 6 7";
