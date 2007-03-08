@@ -132,9 +132,6 @@
     <Compile Include="IMETabControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="IMETabPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="NotifyWindow.cs">
       <SubType>Form</SubType>
     </Compile>

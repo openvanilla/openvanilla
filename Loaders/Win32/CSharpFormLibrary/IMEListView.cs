@@ -88,9 +88,11 @@ namespace CSharpFormLibrary
                 return cp;
             }
         }
-        protected void MyOnMouseDown()
+        protected void MyOnMouseDown(Point pt)
         {
-            this.SelectDown();
+            //this.SelectDown();
+            //MessageBox.Show("original pt=" + pt.ToString());
+            this.SelectItem(this.PointToClient(pt));
         }
 
         protected override void WndProc(ref Message m)
@@ -99,7 +101,32 @@ namespace CSharpFormLibrary
             if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_MOUSEACTIVATE)
             {
                 m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
-                MyOnMouseDown();
+                MyOnMouseDown(MousePosition);
+            }
+        }
+
+        private void SelectItem(Point pt)
+        {
+            // Get the item at the mouse pointer.            
+            ListViewHitTestInfo info = this.HitTest(pt.X, pt.Y);            
+            ListViewItem.ListViewSubItem subItem = null;            
+            if (info != null)
+                if (info.Item != null)
+                    subItem = info.Item.GetSubItemAt(pt.X , pt.Y);
+
+            // Show the text of the subitem, if found.
+            if (subItem != null)
+            {
+                //MessageBox.Show(subItem.Text);
+                int tmpY = this.Items.IndexOf(info.Item);
+                int tmpX = info.Item.SubItems.IndexOf(subItem);                
+                if (tmpY >= 0 && tmpX >= 0)
+                {
+                    UnMarkSelected();
+                    selectedY = tmpY;
+                    selectedX = tmpX;
+                    MarkSelected();
+                }
             }
         }
 
