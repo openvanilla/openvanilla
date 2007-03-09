@@ -15,6 +15,7 @@ namespace CSharpFormLibrary
         private const int MA_ACTIVATE = 0x0001;
         private const int MA_ACTIVATEANDEAT = 0x0002;
         private const int MA_NOACTIVATE = 0x0003;
+        private const int MA_NOACTIVATEANDEAT = 0x0004;
         private IntPtr m_hwnd;
         private Point mouseOffset;
         private bool isMouseDown = false;
@@ -22,13 +23,33 @@ namespace CSharpFormLibrary
         public IMETestSymbolForm()
         {
             InitializeComponent();
+            this.SetStyle(
+                ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer, true);
+            Application.EnableVisualStyles();
         }
 
         public IMETestSymbolForm(string[] Symbols)
         {
             InitializeComponent();
+            this.SetStyle(
+                ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer, true);
+            Application.EnableVisualStyles();
         }
-        #region public methods
+
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+            if (m.Msg == WM_MOUSEACTIVATE)
+            {
+                m.Result = (IntPtr)MA_NOACTIVATE;
+                return;
+            }
+        }
+
         public void SetSymbols(string[] inputs)
         {
             tabControl1.Controls.Clear();
@@ -141,20 +162,7 @@ namespace CSharpFormLibrary
             }
         }
 
-
-        #endregion
-
-        protected override void WndProc(ref Message m)
-        {
-            base.WndProc(ref m);
-            if (m.Msg == WM_MOUSEACTIVATE)
-            {
-                m.Result = (IntPtr)MA_NOACTIVATE;
-                return;
-            }
-        }
-
-        private void IMESymbolForm_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void IMETestSymbolForm_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             int xOffset;
             int yOffset;
@@ -167,7 +175,7 @@ namespace CSharpFormLibrary
             }
         }
 
-        private void IMESymbolForm_MouseMove(object sender,
+        private void IMETestSymbolForm_MouseMove(object sender,
             System.Windows.Forms.MouseEventArgs e)
         {
             if (isMouseDown)
@@ -178,7 +186,7 @@ namespace CSharpFormLibrary
             }
         }
 
-        private void IMESymbolForm_MouseUp(object sender,
+        private void IMETestSymbolForm_MouseUp(object sender,
             System.Windows.Forms.MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
