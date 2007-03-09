@@ -153,14 +153,14 @@ namespace CSharpFormLibrary
             if (this.Visible)
                 UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
         }
-        public bool CanTakeFocus
-        {
-            get { return this.CanFocus; }
-            set
-            {
-                this.SetStyle(ControlStyles.Selectable, value);    // <--- making control non-selectable
-            }
-        }
+        //public bool CanTakeFocus
+        //{
+        //    get { return this.CanFocus; }
+        //    set
+        //    {
+        //        this.SetStyle(ControlStyles.Selectable, value);    // <--- making control non-selectable
+        //    }
+        //}
 
         private void IMETestSymbolForm_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
@@ -212,6 +212,10 @@ namespace CSharpFormLibrary
         {
             IMEListView lv = (IMEListView)this.tabControl1.SelectedTab.Controls[0];
             lv.ShowNextPage();
+        }
+        private void button3_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.Dispose();
         }
     }
 }
