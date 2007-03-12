@@ -62,10 +62,11 @@ namespace CSharpFormLibrary
                 
                 //new tabpage
                 TabPage tp = new TabPage();                
-                tp.Margin = new System.Windows.Forms.Padding(0);
-                tp.Text = "class"+counter.ToString();
+                tp.Margin = new System.Windows.Forms.Padding(0);                
+                tp.Text = a_input[0];
+                tp.Font =  new System.Drawing.Font("PMingLiU", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));                
                 tp.UseVisualStyleBackColor = true;                
-
+                
                 //add tabpage to tabcontrol
                 tabControl1.Controls.Add(tp);
 
@@ -94,7 +95,9 @@ namespace CSharpFormLibrary
             {
                 tabLines = (this.tabControl1.TabCount - 1) / tabsPerLine + 1;
             }                        
-            this.Height = this.panel1.Height+ m_lv.Height + (this.tabControl1.ItemSize.Height)*tabLines+20;            
+            this.Height = this.panel1.Height+ m_lv.Height + (this.tabControl1.ItemSize.Height)*tabLines+20;
+            this.panel2.Height = this.Height - this.panel1.Height;
+            this.panel3.Height = this.panel2.Height;
             this.button1.Top = panel4.Top;
             this.button1.Height = panel4.Height / 2;
             this.button2.Top = this.button1.Bottom;

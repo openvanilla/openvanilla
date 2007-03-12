@@ -83,6 +83,7 @@ namespace CSharpFormLibrary
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(35, 33);
             this.button3.TabIndex = 0;
+            this.button3.Dock = System.Windows.Forms.DockStyle.Right;
             this.button3.Text = "X";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button3_MouseUp);
@@ -142,16 +143,20 @@ namespace CSharpFormLibrary
             // 
             // tabControl1
             // 
+            //this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.;
+            
             this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.ItemSize = new System.Drawing.Size(70, 20);
+            
+            this.tabControl1.ItemSize = new System.Drawing.Size(40, 40);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(603, 392);
-            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
