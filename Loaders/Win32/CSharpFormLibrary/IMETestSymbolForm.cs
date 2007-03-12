@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace CSharpFormLibrary
 {
@@ -16,7 +17,7 @@ namespace CSharpFormLibrary
         private const int MA_ACTIVATEANDEAT = 0x0002;
         private const int MA_NOACTIVATE = 0x0003;
         private const int MA_NOACTIVATEANDEAT = 0x0004;
-        private IntPtr m_hwnd;
+
         private Point mouseOffset;
         private bool isMouseDown = false;
         
@@ -58,15 +59,10 @@ namespace CSharpFormLibrary
             {
                 string[] a_input = input.Split(' ');
                 if (a_input == null) continue;
-//                string fakeInputs2 = "¡A ¡C ¡B ¡F ¡I ¡H ¡¡ ¡y ¡] ¡i ¡­ ¢H ¡® ¡¯ ¡° ¡³ ¡· ¡¼ ¡À ¡Ï ¡¯ ¡° ¡³ ¡· ¡Õ ¡Ö ¡× ¡× ¢C ¢D ¢W £á ¢J ¢P ¢R ¢Q ¢V ¡j ¡^ ¡z ¡¢";
                 
                 //new tabpage
                 TabPage tp = new TabPage();                
-                //tp.Location = new System.Drawing.Point(4, 24);
                 tp.Margin = new System.Windows.Forms.Padding(0);
-                //tp.Name = "tabPage1";
-                //tp.Size = new System.Drawing.Size(228, 159);
-                //tp.TabIndex = 2;               
                 tp.Text = "class"+counter.ToString();
                 tp.UseVisualStyleBackColor = true;                
 
@@ -75,20 +71,34 @@ namespace CSharpFormLibrary
 
                 //new listview
                 IMEListView lv= new IMEListView();
-                lv.SetCapacity(6, 6);
+                lv.BackColor = Color.GhostWhite;
+                lv.BorderStyle = BorderStyle.Fixed3D;
+                lv.SetCapacity(7, 7);
                 lv.SetContent(input);
 
                 //add listview to tabpage
                 tp.Controls.Add(lv);
-
                 counter++;
             }
-            this.panel2.Margin = Padding.Empty;
-            this.panel2.Padding = Padding.Empty;                        
+                     
             m_lv = (IMEListView)tabControl1.SelectedTab.Controls[0];
-            this.panel2.Width = m_lv.Width;
-            this.button1.Height = m_lv.Height / 2;
-            this.button2.Height = m_lv.Height / 2;
+       
+            //width
+            this.Width = m_lv.Width + this.panel4.Width+10;
+            this.panel3.Width = m_lv.Width+10;
+           
+            //height
+            int tabsPerLine = panel3.Width / this.tabControl1.ItemSize.Width ;
+            int tabLines = 1;
+            if (this.tabControl1.TabCount > 0)
+            {
+                tabLines = (this.tabControl1.TabCount - 1) / tabsPerLine + 1;
+            }                        
+            this.Height = this.panel1.Height+ m_lv.Height + (this.tabControl1.ItemSize.Height)*tabLines+20;            
+            this.button1.Top = panel4.Top;
+            this.button1.Height = panel4.Height / 2;
+            this.button2.Top = this.button1.Bottom;
+            this.button2.Height = panel4.Height / 2;            
         }
 
         public string GetSelectedItem()
@@ -128,10 +138,6 @@ namespace CSharpFormLibrary
             this.m_lv.Items.Clear();
         }
 
-        public void SetHWND(IntPtr hwnd)
-        {
-            m_hwnd = hwnd;
-        }
         public int GetWidth()
         {
             return this.Width;
