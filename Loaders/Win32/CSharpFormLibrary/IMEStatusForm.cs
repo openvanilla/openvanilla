@@ -577,8 +577,25 @@ namespace CSharpFormLibrary
             }
             else
             {
-                m_symbolForm.Dispose();
-                m_symbolForm = null;
+                if (m_symbolForm.IsDisposed)
+                {
+                    m_symbolForm = null;
+                    m_symbolForm = new IMESymbolForm();
+                    string[] fakeInput = new string[4];
+                    fakeInput[0] = "¡A ¡C ¡B ¡F ¡I ¡H ¡¡ ¡y ¡] ¡i ¡­ ¢H ¡® ¡¯ ¡° ¡³ ¡· ¡¼ ¡À ¡Ï ¡¯ ¡° ¡³ ¡· ¡Õ ¡Ö ¡× ¡× ¢C ¢D ¢W £á ¢J ¢P ¢R ¢Q ¢V ¡j ¡^ ¡z ¡¢";
+                    fakeInput[1] = "1 2 3 4 5 6 7";
+                    fakeInput[2] = "£t £u £v £w";
+                    fakeInput[3] = "ªü £v £{";
+                    m_symbolForm.SetSymbols(fakeInput);
+                    //m_symbolForm.SetSymbols("1.1 2.2 3.3 4.4 5.5 6.6 7.7 8.8 9.9 10.10 11.11 12.1/2");                                                
+                    m_symbolForm.SetLocation(800, 600);
+                    m_symbolForm.ShowNoActive();
+                }
+                else
+                {
+                    m_symbolForm.Dispose();
+                    m_symbolForm = null;
+                }
             }
         }
 
