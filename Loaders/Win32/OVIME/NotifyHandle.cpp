@@ -1,4 +1,4 @@
-//#define OV_DEBUG
+#define OV_DEBUG
 
 #include "OVIME.h"
 
@@ -103,6 +103,7 @@ LRESULT NotifyHandle(HIMC hUICurIMC,
 	case IMN_SETCOMPOSITIONFONT:
 		murmur("IMN_SETCOMPOSITIONFONT");
 		dsvr->SetCompEnabled(true);
+		dsvr->SetCandiEnabled(true);
 		//<comment author='b6s'>
 		// It is weird but... when the attached app got focus back,
 		// this message occurred.
@@ -119,6 +120,7 @@ LRESULT NotifyHandle(HIMC hUICurIMC,
 			this message if it displays composition characters itself. */
 		murmur("IMN_SETCOMPOSITIONWINDOW");
 		dsvr->SetCompEnabled(true);
+		dsvr->SetCandiEnabled(true);
 		/*POINT ptSrc;
 		SIZE szOffset;
 		HDC hDC;

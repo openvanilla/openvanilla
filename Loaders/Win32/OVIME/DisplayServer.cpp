@@ -90,7 +90,8 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 
 	murmur("ENDCOMPOSITION");
 	MyGenerateMessage(m_hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
-
+	showBuf(false);
+	showCandi(false);	
 	return this;
 }
 

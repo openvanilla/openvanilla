@@ -1,4 +1,4 @@
-//#define OV_DEBUG
+#define OV_DEBUG
 
 #include "OVIME.h"
 
@@ -10,7 +10,6 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	LRESULT lRet = 0L;
 	//LPINPUTCONTEXT	lpIMC;
 	//LPMYPRIVATE lpMyPrivate;
-
 	HIMC hUICurIMC = (HIMC)GetWindowLong(hWnd, IMMGWL_IMC);
 	//
 	// Even if there is no current UI. these messages should not be pass to 
@@ -149,8 +148,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 	case WM_IME_ENDCOMPOSITION:
 		murmur("WM_IME_ENDCOMPOSITION");
 		//dsvr->SetCompEnabled(false);
-		dsvr->showBuf(false);
-		dsvr->showCandi(false);	
+		//dsvr->showBuf(false);
+		//dsvr->showCandi(false);	
 		break;
 
 	case WM_IME_COMPOSITIONFULL:
