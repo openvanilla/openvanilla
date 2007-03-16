@@ -1,4 +1,4 @@
-//#define OV_DEBUG 
+#define OV_DEBUG 
 #include "DisplayServer.h"
 #include "OVIME.h"
 #include "ImmController.h"
@@ -35,7 +35,7 @@ AVDisplayServer *DisplayServer::setBufString(const char *str)
 
 	ImmModel::close();
 
-	murmur("COMPOSITION GCS_COMPSTR");
+	murmur("\tCOMPOSITION GCS_COMPSTR");
 	MyGenerateMessage(m_hIMC, WM_IME_COMPOSITION, 0, GCS_COMPSTR);
 
 	return this;
@@ -58,7 +58,7 @@ AVDisplayServer *DisplayServer::setBufString(const char *str, int caretX)
 
 	ImmModel::close();
 
-	murmur("COMPOSITION GCS_COMPSTR");
+	murmur("\tCOMPOSITION GCS_COMPSTR");
 	MyGenerateMessage(m_hIMC, WM_IME_COMPOSITION, 0, GCS_COMPSTR);
 
 	return this;
@@ -73,14 +73,17 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 
 	model->getCompStr()->dwResultStrLen = (int)wcslen(wstr);
 	wcscpy(GETLPRESULTSTR(model->getCompStr()), wstr);
-	wcscpy(model->getMyPrivate()->PreEditStr, L"");
-	
+	wcscpy(model->getMyPrivate()->PreEditStr, L"");	
 	MakeCompStr(model->getMyPrivate(), model->getCompStr());
+
 	UIClearCompStr();//即時update C# comp string 同步資料
 
 	ImmModel::close();
 
-	murmur("COMPOSITION GCS_RESULTSTR");
+	murmur("\tCOMPOSITION GCS_RESULTSTR");	
+	//James:把下兩行提前，看能否解決閃爍問題
+	showBuf(false);
+	showCandi(false);
 	MyGenerateMessage(m_hIMC, WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
 
 	ImmController* controller = ImmController::open();
@@ -88,10 +91,11 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 	ImmController::close();
 	controller = NULL;
 
-	murmur("ENDCOMPOSITION");
+	
+
+	murmur("\tENDCOMPOSITION");
 	MyGenerateMessage(m_hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
-	showBuf(false);
-	showCandi(false);	
+
 	return this;
 }
 
@@ -130,12 +134,14 @@ AVDisplayServer *DisplayServer::hideNotify()
 
 DisplayServer *DisplayServer::moveBuf(int x, int y)
 {
+	murmur("\t move comp to (%d,%d)",x,y);
 	UIMoveCompWindow(x,y);
 	return this;
 }
 
 DisplayServer *DisplayServer::moveCandi(int x, int y)
 {
+	murmur("\t move candi to (%d,%d)",x,y);
 	UIMoveCandWindow(x,y);
 	return this;
 }
@@ -203,9 +209,15 @@ AVDisplayServer *DisplayServer::showBuf(bool t)
 		if(t &&
 			model->getMyPrivate()->PreEditStr &&
 			wcslen(model->getMyPrivate()->PreEditStr))
+		{
+			murmur("\t show comp");
 			UIShowCompWindow();
+		}
 		else
+		{
+			murmur("\t hide comp");
 			UIHideCompWindow();
+		}
 
 		ImmModel::close();
 	}
@@ -221,9 +233,15 @@ AVDisplayServer *DisplayServer::showCandi(bool t)
 		if(t &&
 			model->getMyPrivate()->CandStr &&
 			wcslen(model->getMyPrivate()->CandStr))
+		{
+			murmur("\t show candi");
 			UIShowCandWindow();
+		}
 		else
+		{
+			murmur("\t hide candi");
 			UIHideCandWindow();
+		}
 
 		ImmModel::close();
 	}
