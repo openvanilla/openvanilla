@@ -500,11 +500,13 @@ namespace CSharpFormLibrary
         private void buttonZhEn_MouseUp(object sender, MouseEventArgs e) //中英
         {
             Debug.WriteLine("中英-> m_AppHWnd=" + m_AppHWnd);
-            int ret = UtilFuncs.SendMessage(
+            SendKeys.SendWait("+"); //send shift
+            //comment below because handing over the job to modules
+            /* int ret = UtilFuncs.SendMessage(
                 new IntPtr((long)m_AppHWnd),
                 (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
                 0xE, //IMN_PRIVATE
-                2);
+                2);*/
         }
 
         private void buttonHantHans_MouseUp(object sender, MouseEventArgs e) //繁簡

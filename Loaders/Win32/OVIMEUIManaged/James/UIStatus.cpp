@@ -472,7 +472,8 @@ void UIChangeChiEng(HWND hWnd)
 	//refresh
 	UIShowStatusWindow();
 
-	/*以下是模組要做的事情*/
+	
+    //通知 windows API 輸入法狀態改變
 	HIMC imc = ImmGetContext( hIMEWnd );
 	if( imc )
 	{
@@ -483,7 +484,7 @@ void UIChangeChiEng(HWND hWnd)
 		else
 			conv &= ~IME_CMODE_NATIVE;
 		ImmSetConversionStatus( imc, conv, sentence);
-	}
+	}	
 }
 
 void UIChangeSimpifiedOrTraditional(HWND hWnd)
