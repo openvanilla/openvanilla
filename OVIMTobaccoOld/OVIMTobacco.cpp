@@ -90,7 +90,8 @@ public:
     virtual int keyEvent(OVKeyCode*, OVBuffer*, OVCandidate*, OVService*);
     
 protected:
-    int keyCommit();
+	int keyCommitOneTerm();
+	int keyCommit();
     int keyEsc();
     int keyRemove();
     int keyMove();
@@ -128,6 +129,8 @@ protected:
     size_t position;
     bool canNewSequence;
     bool doInsert;
+
+	const static size_t MAX_BUFFER_LENGTH = 12;
 };
 
 class OVIMTobacco : public OVInputMethod {
@@ -501,6 +504,27 @@ int OVIMTobaccoContext::keyMove() {
         return 0;
 }
 
+//<comment author='b6s'>The new function of popping up one word.
+int OVIMTobaccoContext::keyCommitOneTerm() {
+	b->clear();
+	bool hasNext;
+	do {
+		hasNext = predictor->tokenVector.begin()->withSuffix;
+		b->append(predictor->tokenVector.begin()->word.c_str());
+		predictor->removeWord(0, true);
+		//<comment author='b6s'>
+		// It's really bad that position is a global variable.
+		position--;
+		//</comment>
+
+		//predictor->tokenVector.erase(predictor->tokenVector.begin());
+	} while(hasNext);
+	b->send();
+
+	return 1;
+}
+//</comment>
+
 int OVIMTobaccoContext::keyCommit() {
     if (b->isEmpty()) return 0;
     if (!seq.isEmpty()) {
@@ -612,6 +636,11 @@ void OVIMTobaccoContext::freshBuffer() {
 /// BAD UTF-8 Chinese character processing here, again...
 
 	size_t currentBufferLength = predictor->tokenVector.size();
+
+	//<comment author='b6s'>Adds new function to pop up a word.
+	if(currentBufferLength == MAX_BUFFER_LENGTH) keyCommitOneTerm();
+	//</comment>
+
 	if(strlen(seq.sequence()) > 0 && position < currentBufferLength)
     {
         murmur("should be here with [%s], [%s], (%d)",
