@@ -99,3 +99,8 @@ int _GetCaretPosX()
 {
 	return CSharpCompWrapper::Instance()->GetCaretPosX();
 }
+
+void _SetCompAppHWnd(HWND hwnd)
+{	
+	CSharpCompWrapper::Instance()->SetAppHWnd(safe_cast<IntPtr>(hwnd));
+}

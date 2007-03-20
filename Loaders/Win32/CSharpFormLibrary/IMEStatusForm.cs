@@ -16,9 +16,7 @@ namespace CSharpFormLibrary
         private const int MA_ACTIVATE = 1;
         private const int MA_ACTIVATEANDEAT = 2;
         private const int MA_NOACTIVATE = 0x0003;
-        private const int MA_NOACTIVATEANDEAT = 0x0004;
-
-        //private int msgCounter = 0;
+        private const int MA_NOACTIVATEANDEAT = 0x0004;        
         private IntPtr m_AppHWnd;
         private static string m_baseDir =
             Environment.GetEnvironmentVariable("WINDIR") +
@@ -342,10 +340,6 @@ namespace CSharpFormLibrary
         {
             m_AppHWnd = HWND;
             Debug.WriteLine("m_AppHWnd (status) =" + HWND);
-            //System.Diagnostics.Debug.WriteLine("AppHWnd set: " + m_AppHWnd);
-            //this.buttonMenu.AppHWnd = m_AppHWnd;
-            //this.buttonZhEn.AppHWnd =
-            //System.Diagnostics.Debug.WriteLine("buttonMenu.AppHWnd: " + this.buttonMenu.AppHWnd);
         }
 
         public IntPtr GetHandle()

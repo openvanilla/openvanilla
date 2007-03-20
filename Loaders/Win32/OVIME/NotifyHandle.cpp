@@ -213,6 +213,11 @@ LRESULT NotifyHandle(HIMC hUICurIMC,
 			UISetStatusModStrMenuAll(modAmount, modNameList);
 			break;
 			}
+		case 10: //send first word to app and refresh comp window
+			{
+
+			break;
+			}
 		default:
 			murmur("\tUknown IMN_PRIVATE");
 			break;

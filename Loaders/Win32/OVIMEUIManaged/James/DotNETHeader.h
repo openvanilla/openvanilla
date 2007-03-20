@@ -28,6 +28,7 @@ void _SetCompString(const wchar_t* compStr);
 void _SetCompCaretPosX(int);
 void _SetCompMarkFrom(int);
 void _SetCompMarkTo(int);
+void _SetCompAppHWnd(HWND);
 
 //candidate
 void _SetCandiString(const wchar_t* candiStr);

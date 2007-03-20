@@ -53,32 +53,8 @@ void UICreateCompWindow(HWND hUIWnd)
 	if (!IsWindow(uiComp.hWnd))
 	{
 		uiComp.hWnd = _CreateCompPage();
-		//		murmur("compHWND=%p",uiComp.hWnd);
-
-#if 0
-		HDC hDC;
-		HFONT oldFont;
-		SIZE sz;
-		TCHAR szStr[100];
-
-		uiComp.hWnd = 
-			CreateWindowEx(0, UICOMPCLASSNAME, NULL,
-			WS_DISABLED | WS_POPUP,
-			0, 0, 1, 1, hUIWnd, NULL, hInst, NULL);
-		SetWindowLong(uiComp.hWnd, FIGWL_SVRWND, (DWORD)hUIWnd);
-
-		_stprintf(szStr, _T("AAAAAAAAAAAAA"));
-		hDC = GetDC(uiComp. hWnd);
-		oldFont = (HFONT)SelectObject(hDC, hUIFont);
-		GetTextExtentPoint(hDC, szStr, (int)_tcslen(szStr), &sz);
-		SelectObject(hDC, oldFont);
-		ReleaseDC(uiComp.hWnd,hDC);
-
-		uiComp.sz.cx = sz.cx;
-		uiComp.sz.cy = sz.cy + 4;
-#endif
+		_SetCompAppHWnd(hUIWnd);
 	}
-	//ShowWindow(uiComp.hWnd, SW_HIDE);
 }
 
 void UIMoveCompWindow(int X, int Y)
