@@ -33,7 +33,12 @@ namespace CSharpFormLibrary
             // IMECompRichForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(240, 20);
+            //this.ClientSize = new System.Drawing.Size(240, 20);
+            System.Diagnostics.Debug.WriteLine("before" + this.Height.ToString());
+            //this.Height = 20;
+            //this.Width = 240;
+            this.Size = new System.Drawing.Size(240, 30);
+            System.Diagnostics.Debug.WriteLine("after " + this.Height.ToString());
             this.ControlBox = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "IMECompRichForm";

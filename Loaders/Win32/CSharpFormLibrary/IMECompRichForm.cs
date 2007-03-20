@@ -47,7 +47,7 @@ namespace CSharpFormLibrary
                 ControlStyles.OptimizedDoubleBuffer, true);
              
             Application.EnableVisualStyles();
-            Debug.WriteLine("after setstyle" + this.Height.ToString());
+            Debug.WriteLine("after setstyle" + this.Handle.ToString() + " " + this.Height.ToString());            
         }
       
 
@@ -158,10 +158,10 @@ namespace CSharpFormLibrary
 
         public void SetAppHWnd(IntPtr HWND)
         {
-            Debug.WriteLine("before set hwnd " + this.Height.ToString());
+            Debug.WriteLine("before set hwnd " + this.Handle.ToString() + " " + this.Height.ToString());
             m_AppHWnd = HWND;
             Debug.WriteLine("m_AppHWnd (comp) =" + HWND);
-            Debug.WriteLine("after set hwnd " + this.Height.ToString());
+            Debug.WriteLine("after set hwnd " + this.Handle.ToString() + " " + this.Height.ToString());
         }
 
         public void ShowNoActive()
