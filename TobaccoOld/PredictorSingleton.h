@@ -58,7 +58,7 @@ protected:
 
 private:
 	const static size_t ROTATE_LIMIT = 3;
-	const static size_t MAX_CONTEXT_LENGTH = 4;
+	const static size_t MAX_CONTEXT_LENGTH = 5;
 	static PredictorSingleton* itsInstance;
 	DictionarySingleton* dictionary;
 };

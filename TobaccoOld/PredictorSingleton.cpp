@@ -97,15 +97,6 @@ bool PredictorSingleton::setTokenVector(
         tokenVector.insert(
 			tokenVector.begin() + position, currentToken);
 
-	//<comment author='b6s' date='20061104'>Set tokens fixed when the vector size reachs MAX_CONTEXT_LENGTH.
-	if(tokenVector.size() > 0 &&
-		tokenVector.size() / MAX_CONTEXT_LENGTH == 0)
-		for(size_t offset = tokenVector.size() - 1;
-			offset >= tokenVector.size() - MAX_CONTEXT_LENGTH;
-			offset--)
-			tokenVector[offset].isFixed = true;
-	//</comment>
-
     PredictorSingleton::setTokenVectorByBigram();
     
     return true;
@@ -336,6 +327,21 @@ void PredictorSingleton::setTokenVectorByBigram()
 
 		++end;
 	}
+
+	//<comment author='b6s' date='20070320'>
+	// Set tokens fixed when the vector size reachs MAX_CONTEXT_LENGTH.
+	if(tokenVector.size() == MAX_CONTEXT_LENGTH ||
+		(tokenVector.size() > MAX_CONTEXT_LENGTH &&
+		tokenVector.size() % MAX_CONTEXT_LENGTH == 0)) {
+		int step = MAX_CONTEXT_LENGTH;
+		vector<Token>::iterator iter = tokenVector.end();
+		while(step > 0) {
+			iter--;
+			iter->isFixed = true;
+			step--;			
+		}
+	}
+	//</comment>
 
 	setComposedString();
 }
