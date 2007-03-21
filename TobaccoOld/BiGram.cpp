@@ -1,6 +1,8 @@
 //#define OV_DEBUG
 
 #include <algorithm>
+#include <math.h>
+#include <limits>
 
 #include "BiGram.h"
 
@@ -88,7 +90,7 @@ int BiGram::maximumMatching(
 
 			if(foundFlag)
 			{
-				if(bound < 5)
+				if(bound < MAX_CONTEXT_LENGTH)
 				{
 					for(size_t round = 0; round < bound; ++round)
 					{
@@ -249,10 +251,19 @@ void BiGram::getVocabularyCombination(
 			int matrix = leftFreq + rightFreq;
 			if(matrix == 0) matrix = 1;
 
-			combinedVocabulary.freq = 2*leftFreq*rightFreq / matrix;
+			combinedVocabulary.freq = matrix;
+			double score = 2.0*leftFreq*rightFreq / matrix;
+			if(score == 0.0) score = 1.0;
+			combinedVocabulary.prob =
+				-(log(score/numeric_limits<double>::max()) / log(2.0));
 			combinedVocabularyVector.push_back(combinedVocabulary);
 		}
 	}
 	
+	sort(
+		combinedVocabularyVector.begin(),
+		combinedVocabularyVector.end(),
+		Vocabulary::isProbGreater);
+
 	combinedRef = combinedVocabularyVector;
 }

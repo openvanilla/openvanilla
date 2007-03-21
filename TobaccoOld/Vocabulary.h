@@ -15,8 +15,11 @@ public:
 	int freq;
 	int order;
 
+	double prob;
+
 	static bool isOrderPrior(const Vocabulary& voc1, const Vocabulary& voc2);
 	static bool isFreqGreater(const Vocabulary& voc1, const Vocabulary& voc2);
+	static bool isProbGreater(const Vocabulary& voc1, const Vocabulary& voc2);
 	static bool isWordLonger(const Vocabulary& voc1, const Vocabulary& voc2);
 };
 

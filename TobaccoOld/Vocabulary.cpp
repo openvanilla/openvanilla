@@ -5,6 +5,8 @@ Vocabulary::Vocabulary()
 	word = "";
 	freq = 0;
 	order = 0;
+
+	prob = 0.0;
 }
 
 Vocabulary::~Vocabulary()
@@ -20,6 +22,11 @@ bool Vocabulary::isOrderPrior(const Vocabulary& voc1, const Vocabulary& voc2)
 bool Vocabulary::isFreqGreater(const Vocabulary& voc1, const Vocabulary& voc2)
 {
 	return voc1.freq > voc2.freq;
+}
+
+bool Vocabulary::isProbGreater(const Vocabulary& voc1, const Vocabulary& voc2)
+{
+	return voc1.prob < voc2.prob;
 }
 
 bool Vocabulary::isWordLonger(const Vocabulary& voc1, const Vocabulary& voc2)

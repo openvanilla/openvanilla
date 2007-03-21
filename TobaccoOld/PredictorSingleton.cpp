@@ -208,7 +208,8 @@ void PredictorSingleton::setCandidateVector(size_t position)
 
 	size_t backwardPosition = position;
 	size_t bound =
-		position >= MAX_CONTEXT_LENGTH ? position - MAX_CONTEXT_LENGTH : 0;
+		position >= BiGram::MAX_CONTEXT_LENGTH ?
+			position - BiGram::MAX_CONTEXT_LENGTH : 0;
 	while(backwardPosition > bound)
 		//&& !tokenVector[backwardPosition - 1].isBoundary)
 		//&& tokenVector[backwardPosition].withPrefix)
@@ -244,12 +245,12 @@ void PredictorSingleton::setSelectedCandidate(
 		candidateVector[selectedCandidateIndex].position;
 	for(size_t i = head, offset = 0;
 		i <= index;
-		i++, offset += MAX_CONTEXT_LENGTH - 1)
+		i++, offset += BiGram::MAX_CONTEXT_LENGTH - 1)
 	{
 		tokenVector[i].isFixed = true;
 		tokenVector[i].word =
 			selectedCandidateWordString.substr(
-				offset, MAX_CONTEXT_LENGTH - 1);
+				offset, BiGram::MAX_CONTEXT_LENGTH - 1);
 	}
 	
 	setComposedString();
@@ -330,10 +331,10 @@ void PredictorSingleton::setTokenVectorByBigram()
 
 	//<comment author='b6s' date='20070320'>
 	// Set tokens fixed when the vector size reachs MAX_CONTEXT_LENGTH.
-	if(tokenVector.size() == MAX_CONTEXT_LENGTH ||
-		(tokenVector.size() > MAX_CONTEXT_LENGTH &&
-		tokenVector.size() % MAX_CONTEXT_LENGTH == 0)) {
-		int step = MAX_CONTEXT_LENGTH;
+	if(tokenVector.size() == BiGram::MAX_CONTEXT_LENGTH ||
+		(tokenVector.size() > BiGram::MAX_CONTEXT_LENGTH &&
+		tokenVector.size() % BiGram::MAX_CONTEXT_LENGTH == 0)) {
+		int step = BiGram::MAX_CONTEXT_LENGTH;
 		vector<Token>::iterator iter = tokenVector.end();
 		while(step > 0) {
 			iter--;
