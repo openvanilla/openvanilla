@@ -1,4 +1,4 @@
-#define OV_DEBUG 
+//#define OV_DEBUG
 #include "DisplayServer.h"
 #include "OVIME.h"
 #include "ImmController.h"
@@ -72,31 +72,40 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 	ImmModel* model = ImmModel::open(m_hIMC);
 
 	model->getCompStr()->dwResultStrLen = (int)wcslen(wstr);
-	wcscpy(GETLPRESULTSTR(model->getCompStr()), wstr);
+	wchar_t* word = GETLPRESULTSTR(model->getCompStr());
+	wcscpy(word, wstr);
 	wcscpy(model->getMyPrivate()->PreEditStr, L"");	
 	MakeCompStr(model->getMyPrivate(), model->getCompStr());
 
-	
-
 	ImmModel::close();
 
-	murmur("\tCOMPOSITION GCS_RESULTSTR");	
 	//James:把下兩行提前，看能否解決閃爍問題
 	showBuf(false);
 	//再hide後再清掉，避免殘像發生
 	UIClearCompStr();//即時update C# comp string 同步資料
 	showCandi(false);
-	MyGenerateMessage(m_hIMC, WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
+
+	murmur("\tCOMPOSITION GCS_RESULTSTR");
+
+	MyGenerateMessage(
+		m_hIMC,
+		WM_IME_COMPOSITION,
+		*(WORD*)word,
+		GCS_COMPSTR|GCS_COMPATTR|
+		GCS_COMPREADSTR|GCS_COMPREADATTR|
+		GCS_COMPCLAUSE|GCS_COMPREADCLAUSE|
+		GCS_CURSORPOS|GCS_DELTASTART|
+		GCS_RESULTSTR|GCS_RESULTCLAUSE|
+		GCS_RESULTREADSTR|GCS_RESULTREADCLAUSE		
+	);
 
 	ImmController* controller = ImmController::open();
 	controller->setCompStartedFlag(false);
 	ImmController::close();
 	controller = NULL;
 
-	
-
 	murmur("\tENDCOMPOSITION");
-	MyGenerateMessage(m_hIMC,	WM_IME_ENDCOMPOSITION, 0, 0);
+	MyGenerateMessage(m_hIMC, WM_IME_ENDCOMPOSITION, 0, 0);
 
 	return this;
 }
