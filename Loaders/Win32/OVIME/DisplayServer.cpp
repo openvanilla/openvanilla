@@ -76,13 +76,15 @@ AVDisplayServer *DisplayServer::sendBuf(const char *str)
 	wcscpy(model->getMyPrivate()->PreEditStr, L"");	
 	MakeCompStr(model->getMyPrivate(), model->getCompStr());
 
-	UIClearCompStr();//即時update C# comp string 同步資料
+	
 
 	ImmModel::close();
 
 	murmur("\tCOMPOSITION GCS_RESULTSTR");	
 	//James:把下兩行提前，看能否解決閃爍問題
 	showBuf(false);
+	//再hide後再清掉，避免殘像發生
+	UIClearCompStr();//即時update C# comp string 同步資料
 	showCandi(false);
 	MyGenerateMessage(m_hIMC, WM_IME_COMPOSITION, 0, GCS_RESULTSTR);
 
