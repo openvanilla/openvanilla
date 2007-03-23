@@ -1,6 +1,8 @@
-#define OV_DEBUG
+//#define OV_DEBUG
 
 #include "OVIME.h"
+
+static bool isPrivateEightExecuting = false;
 
 LRESULT NotifyHandle(HIMC hUICurIMC,
 				  HWND hWnd,
@@ -9,9 +11,8 @@ LRESULT NotifyHandle(HIMC hUICurIMC,
 				  LPARAM lParam)
 {
 	LRESULT lRet = 0L;
-	//LPINPUTCONTEXT lpIMC;
-	static BOOL first = false;
 	//<comment author='b6s'>Unused codes
+	//LPINPUTCONTEXT lpIMC;
 	//LOGFONT* lfptr;
 	//LOGFONT lf2;
 	//</comment>
@@ -155,6 +156,7 @@ LRESULT NotifyHandle(HIMC hUICurIMC,
 		{
 		murmur("IMN_PRIVATE");
 		murmur("\thwnd=%x", hWnd);
+		murmur("lParam=%i", lParam);
 		switch(lParam) 
 		{
 		case 0:
@@ -200,9 +202,16 @@ LRESULT NotifyHandle(HIMC hUICurIMC,
 		case 8: //Change Modules by ctrl +'\'
 			{
 			/* close module and poll current IC */
-			loader->unloadCurrentModule();
-			int moduleId = UIModuleRotate();
-			loader->initContext(moduleId);
+				//<comment author='b6s'>
+				// A stupid but necessary check to prevent infinite loop.
+				if(!isPrivateEightExecuting) {
+					isPrivateEightExecuting = true;
+					loader->unloadCurrentModule();
+					int moduleId = UIModuleRotate();					
+					loader->initContext(moduleId);
+					isPrivateEightExecuting = false;
+				}
+				//</comment>
 			break;
 			}
 		case 9: //Set all module names
