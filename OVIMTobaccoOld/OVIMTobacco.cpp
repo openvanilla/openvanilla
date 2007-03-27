@@ -1,6 +1,6 @@
 // OVIMTobacco.cpp
 
-//#define OV_DEBUG
+#define OV_DEBUG
 
 #ifndef WIN32
 	#include <OpenVanilla/OpenVanilla.h>
@@ -36,6 +36,7 @@
 #include "PredictorSingleton.h"
 
 #include "hsukey.h"
+#include "bpmfReplace.h"
 
 // Some dirty public secrets goes here
 SQLite3 *db;
@@ -1045,10 +1046,29 @@ const char *IMGKeySequence::query(char c) {
 
 const char *IMGKeySequence::compose() {
     strcpy(composebuf, "");
-    for (int i=0; i<len; i++) {
+
+	///////////////////////////////////////////
+	//   ¦Xªkª`­µ´À´«
+	///////////////////////////////////////////
+	string inputStr(seq);
+	string foo="";	
+	convert2LegalBPMF(inputStr,foo);	
+	len=foo.length();
+	strcpy(seq,foo.c_str());
+	for(int i=0;i<foo.length();i++)
+	{
+		const char *s=query(foo[i]);
+        if (s) strcat(composebuf, s);
+	}
+	///////////////////////////////////////////
+	
+/*    for (int i=0; i<len; i++) {
         const char *s=query(seq[i]);
         if (s) strcat(composebuf, s);
-    }
+	}*/
+
+	//murmur("IMGKeySequence::compose, seq=\"%s\"",seq);
+	//murmur("\tcomposebuf=\"%s\"",composebuf);
 
 	if(isHsuLayout) {
 		string bpmfStr(composebuf);

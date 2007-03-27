@@ -237,6 +237,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\bpmfReplace.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TobaccoOld\Candidate.h"
 				>
 			</File>
