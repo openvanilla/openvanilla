@@ -1,1 +1,0 @@
-g++ -I../ -I../../Tobacco -I../../../Modules/SharedHeaders TestKeystrokeToWordConverter.cpp ../LanguageModel.cpp ../Dictionary.cpp ../KeystrokeToWordConverter.cpp ../../Tobacco/Token.cpp ../../../Modules/SharedSource/OVFileHandler.cpp ../../../Modules/SharedSource/OVStringToolKit.cpp -lUnitTest++ -o TestKeystrokeToWordConverter
