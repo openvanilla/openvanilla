@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class TestLanguageModel : public CxxTest::TestSuite 
+class LanguageModelTest : public CxxTest::TestSuite 
 {
 public:
 	void setUp(void)
@@ -14,49 +14,49 @@ public:
 	
 	void testGetLogProb(void)
 	{
-		string gram = "下雨 天";
+		string gram = "\xE4\xB8\x8B\xE9\x9B\xA8 \xE5\xA4\xA9"; //rainy /xiayv/, day /tian/
 		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 		
-		gram = "下雨天";
+		gram = "\xE4\xB8\x8B\xE9\x9B\xA8\xE5\xA4\xA9";
 		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 		
-		gram = "下雨";
+		gram = "\xE4\xB8\x8B\xE9\x9B\xA8";
 		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 		
-		gram = "雨天";
+		gram = "\xE9\x9B\xA8\xE5\xA4\xA9";
 		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 		
-		gram = "下";
+		gram = "\xE4\xB8\x8B";
 		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 		
-		gram = "雨";
+		gram = "\xE9\x9B\xA8";
 		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 		
-		gram = "天";
+		gram = "\xE5\xA4\xA9";
 		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
 	}
 	
 	void testGetBackOff(void)
 	{
-		string gram = "下雨 天";
+		string gram = "\xE4\xB8\x8B\xE9\x9B\xA8 \xE5\xA4\xA9";
 		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 		
-		gram = "下雨天";
+		gram = "\xE4\xB8\x8B\xE9\x9B\xA8\xE5\xA4\xA9";
 		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 		
-		gram = "下雨";
+		gram = "\xE4\xB8\x8B\xE9\x9B\xA8";
 		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 		
-		gram = "雨天";
+		gram = "\xE9\x9B\xA8\xE5\xA4\xA9";
 		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 		
-		gram = "下";
+		gram = "\xE4\xB8\x8B";
 		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 		
-		gram = "雨";
+		gram = "\xE9\x9B\xA8";
 		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 		
-		gram = "天";
+		gram = "\xE5\xA4\xA9";
 		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
 	}
 

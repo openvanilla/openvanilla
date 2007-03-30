@@ -7,7 +7,7 @@
 
 using namespace std;
           
-class TestWordSegmenter : public CxxTest::TestSuite 
+class WordSegmenterTest : public CxxTest::TestSuite 
 {
 public:
 	void setUp(void)
@@ -18,38 +18,34 @@ public:
 	
 	void testSegment(void)
 	{
-		//string inputString("ABCDE");
-		//string outputString;
 		vector<Token*> inputTokens;
 		Token* tokenA = new Token();
-		tokenA->word = "下";
+		tokenA->word = "\xE4\xB8\x8B";
 		inputTokens.push_back(tokenA);
 		
 		Token* tokenB = new Token();
-		tokenB->word = "雨";
+		tokenB->word = "\xE9\x9B\xA8";
 		inputTokens.push_back(tokenB);
 		
 		Token* tokenC = new Token();
-		tokenC->word = "天";
+		tokenC->word = "\xE5\xA4\xA9";
 		inputTokens.push_back(tokenC);
 		
 		Token* tokenD = new Token();
-		tokenD->word = "留";
+		tokenD->word = "\xE7\x95\x99";
 		inputTokens.push_back(tokenD);
 		
 		Token* tokenE = new Token();
-		tokenE->word = "客";
+		tokenE->word = "\xE5\xAE\xA2";
 		inputTokens.push_back(tokenE);
 		
-		///TS_ASSERT(seg.segment(inputString, outputString));
 		vector<Token*> outputTokens;
 		TS_ASSERT(seg.segment(inputTokens, outputTokens));
 		
 		string outputString("");
 		for(int i = 0; i < outputTokens.size(); i++)
 			outputString += outputTokens[i]->word + " ";
-		//TS_WARN(outputString);
-		cerr << outputString;
+		TS_TRACE(outputString);
 	}
 	
 private:

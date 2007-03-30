@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class TestDictionary : public CxxTest::TestSuite 
+class DictionaryTest : public CxxTest::TestSuite 
 {
 public:
 	void setUp(void)
@@ -15,7 +15,7 @@ public:
 	void testGetValueVector(void)
 	{
 		vector<string> values;
-		string key("ㄧ");
+		string key("\xE3\x84\xA7");
 		size_t count = dic_->getValueVector(key, values);
 		TS_ASSERT_LESS_THAN(0, count);
 		cerr << key << "(" << count << "):";

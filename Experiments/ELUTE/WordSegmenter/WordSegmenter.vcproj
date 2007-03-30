@@ -17,10 +17,11 @@
 			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine="cxxtestgen.pl --error-printer -o WordSegmenterTestRunner.cpp --gui=Win32Gui WordSegmenterTest.h"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -36,7 +37,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\;..\LanguageModel"
+				AdditionalIncludeDirectories="..\;..\LanguageModel;..\..\..\Modules\SharedHeaders"
+				PreprocessorDefinitions="WIN32"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -48,10 +50,13 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -61,6 +66,12 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -70,10 +81,11 @@
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine="cxxtestgen.pl --error-printer -o WordSegmenterTestRunner.cpp --gui=Win32Gui WordSegmenterTest.h"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -89,7 +101,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\;..\LanguageModel"
+				AdditionalIncludeDirectories="..\;..\LanguageModel;..\..\..\Modules\SharedHeaders"
+				PreprocessorDefinitions="WIN32"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -101,10 +114,13 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -114,6 +130,12 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -129,11 +151,27 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\LanguageModel\LanguageModel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Modules\SharedSource\OVFileHandler.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Modules\SharedSource\OVStringToolKit.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Token.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\WordSegmenter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\WordSegmenterTestRunner.cpp"
 				>
 			</File>
 		</Filter>
@@ -142,6 +180,18 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\LanguageModel\LanguageModel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Modules\SharedHeaders\OVFileHandler.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Modules\SharedHeaders\OVStringToolKit.h"
+				>
+			</File>
 			<File
 				RelativePath="..\Token.h"
 				>
