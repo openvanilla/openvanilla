@@ -10,10 +10,9 @@
 #include <cxxtest/TestRunner.h>
 #include <cxxtest/RealDescriptions.h>
 #include <cxxtest/ErrorPrinter.h>
-#include <cxxtest/Win32Gui.h>
 
-int main( int argc, char *argv[] ) {
- return CxxTest::GuiTuiRunner<CxxTest::Win32Gui, CxxTest::ErrorPrinter>( argc, argv ).run();
+int main() {
+ return CxxTest::ErrorPrinter().run();
 }
 #include "DictionaryTest.h"
 

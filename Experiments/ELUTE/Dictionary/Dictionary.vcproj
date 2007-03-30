@@ -4,6 +4,7 @@
 	Version="8.00"
 	Name="Dictionary"
 	ProjectGUID="{AD9400F1-148D-4F0C-83D8-607B5D851679}"
+	RootNamespace="Dictionary"
 	>
 	<Platforms>
 		<Platform
@@ -15,7 +16,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			>
@@ -37,8 +38,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				EnableIntrinsicFunctions="false"
 				AdditionalIncludeDirectories="..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32"
+				ExceptionHandling="2"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -79,7 +82,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			>
