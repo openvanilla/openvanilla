@@ -1,0 +1,33 @@
+#include <cxxtest/TestSuite.h>
+#include "Dictionary.h"
+
+using namespace std;
+
+class TestDictionary : public CxxTest::TestSuite 
+{
+public:
+	void setUp(void)
+	{
+		string dicFilePath("./tsi.src");
+		dic_ = new Dictionary(dicFilePath);
+	}
+
+	void testGetValueVector(void)
+	{
+		vector<string> values;
+		string key("ㄧ");
+		size_t count = dic_->getValueVector(key, values);
+		TS_ASSERT_LESS_THAN(0, count);
+		cerr << key << "(" << count << "):";
+		for(size_t i = 0; i < count; i++)
+			cerr << values[i] << " ";
+	}
+	
+	void tearDown (void)
+	{
+		delete dic_;
+	}
+	
+private:
+	Dictionary* dic_;
+};
