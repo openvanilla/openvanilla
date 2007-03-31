@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="LanguageModel"
-	ProjectGUID="{23D5A8E7-5EEB-42E5-B04B-D7B311EED018}"
+	Name="LanguageModelTest"
+	ProjectGUID="{CDCB83BA-27B4-4A31-B337-B0D631063BCC}"
 	>
 	<Platforms>
 		<Platform
@@ -15,13 +15,13 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine=""
+				CommandLine="cxxtestgen.pl --error-printer -o LanguageModelTestRunner.cpp --gui=Win32Gui LanguageModelTest.h"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -37,8 +37,6 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\Modules\SharedHeaders"
-				PreprocessorDefinitions="WIN32"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -50,10 +48,13 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -63,6 +64,12 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -70,13 +77,13 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine=""
+				CommandLine="cxxtestgen.pl --error-printer -o LanguageModelTestRunner.cpp --gui=Win32Gui LanguageModelTest.h"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -92,9 +99,6 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\Modules\SharedHeaders"
-				AdditionalUsingDirectories=""
-				PreprocessorDefinitions="WIN32"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -106,10 +110,13 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -119,6 +126,12 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -134,15 +147,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\LanguageModel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\Modules\SharedSource\OVFileHandler.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\Modules\SharedSource\OVStringToolKit.cpp"
+				RelativePath="..\LanguageModel\LanguageModelTestRunner.cpp"
 				>
 			</File>
 		</Filter>
@@ -152,7 +157,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\LanguageModel.h"
+				RelativePath="..\LanguageModel\LanguageModel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\LanguageModel\LanguageModelTest.h"
 				>
 			</File>
 			<File
