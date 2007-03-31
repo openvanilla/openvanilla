@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KeystrokeToWordConverter", "KeystrokeToWordConverter\KeystrokeToWordConverter.vcproj", "{AF95223B-3593-474B-B696-454A312FBCD0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KeystrokeToWordConverterTest", "KeystrokeToWordConverter\KeystrokeToWordConverterTest.vcproj", "{42F768CD-22D4-4C13-8AC0-19CC9D02BF33}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AF95223B-3593-474B-B696-454A312FBCD0} = {AF95223B-3593-474B-B696-454A312FBCD0}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF95223B-3593-474B-B696-454A312FBCD0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AF95223B-3593-474B-B696-454A312FBCD0}.Debug|Win32.Build.0 = Debug|Win32
+		{AF95223B-3593-474B-B696-454A312FBCD0}.Release|Win32.ActiveCfg = Release|Win32
+		{AF95223B-3593-474B-B696-454A312FBCD0}.Release|Win32.Build.0 = Release|Win32
+		{42F768CD-22D4-4C13-8AC0-19CC9D02BF33}.Debug|Win32.ActiveCfg = Debug|Win32
+		{42F768CD-22D4-4C13-8AC0-19CC9D02BF33}.Debug|Win32.Build.0 = Debug|Win32
+		{42F768CD-22D4-4C13-8AC0-19CC9D02BF33}.Release|Win32.ActiveCfg = Release|Win32
+		{42F768CD-22D4-4C13-8AC0-19CC9D02BF33}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

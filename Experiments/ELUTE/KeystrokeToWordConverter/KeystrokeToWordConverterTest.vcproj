@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="KeystrokeToWordConverter"
-	ProjectGUID="{AF95223B-3593-474B-B696-454A312FBCD0}"
+	Name="KeystrokeToWordConverterTest"
+	ProjectGUID="{42F768CD-22D4-4C13-8AC0-19CC9D02BF33}"
 	>
 	<Platforms>
 		<Platform
@@ -17,10 +17,11 @@
 			Name="Debug|Win32"
 			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine="cxxtestgen.pl --error-printer -o KeystrokeToWordConverterTestRunner.cpp --gui=Win32Gui KeystrokeToWordConverterTest.h"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -49,10 +50,13 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -62,6 +66,12 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -71,10 +81,11 @@
 			Name="Release|Win32"
 			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine="cxxtestgen.pl --error-printer -o KeystrokeToWordConverterTestRunner.cpp --gui=Win32Gui KeystrokeToWordConverterTest.h"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -103,10 +114,13 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -116,6 +130,12 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -131,27 +151,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\Dictionary\Dictionary.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\KeystrokeToWordConverter.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\LanguageModel\LanguageModel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\Modules\SharedSource\OVFileHandler.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\Modules\SharedSource\OVStringToolKit.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Token.cpp"
+				RelativePath=".\KeystrokeToWordConverterTestRunner.cpp"
 				>
 			</File>
 		</Filter>
@@ -166,6 +166,10 @@
 			</File>
 			<File
 				RelativePath=".\KeystrokeToWordConverter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\KeystrokeToWordConverterTest.h"
 				>
 			</File>
 			<File
