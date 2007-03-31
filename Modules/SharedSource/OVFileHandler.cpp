@@ -49,15 +49,15 @@ OVFileHandler::~OVFileHandler()
 	closeFileByMMAP();
 }
 
+bool OVFileHandler::isOpenedByMMAP()
+{
+	return m_mmapPtr != 0 ? true : false;
+}
+
 /*
 bool OVFileHandler::isOpenedBySTL()
 {
 	return inFile != 0 ? true : false;
-}
-
-bool OVFileHandler::isOpenedByMMAP()
-{
-	return filePtr != 0 ? true : false;
 }
 
 int OVFileHandler::getSize()

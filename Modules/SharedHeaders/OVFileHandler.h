@@ -58,9 +58,9 @@ class OVFileHandler
 public:
 	OVFileHandler(const char* filename);
 	~OVFileHandler();
-	
+
+	bool isOpenedByMMAP();
 	//bool isOpenedBySTL();
-	//bool isOpenedByMMAP();
 
 	int getLines(vector<string>& outStringVectorRef);
 	
