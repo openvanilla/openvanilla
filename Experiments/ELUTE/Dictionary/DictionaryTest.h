@@ -18,9 +18,10 @@ public:
 		string key("\xE3\x84\xA7");
 		size_t count = dic_->getValueVector(key, values);
 		TS_ASSERT_LESS_THAN(0, count);
-		cerr << key << "(" << count << "):";
+		cout << "dic[" << key << "](" << count << ")={";
 		for(size_t i = 0; i < count; i++)
-			cerr << values[i] << " ";
+			cout << values[i] << ",";
+		cout << "}" << endl;
 	}
 	
 	void tearDown (void)

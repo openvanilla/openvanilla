@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="Dictionary"
-	ProjectGUID="{AD9400F1-148D-4F0C-83D8-607B5D851679}"
+	ProjectGUID="{223E05E8-6BA9-41F6-B6D6-A9D5A0C0DEFC}"
 	RootNamespace="Dictionary"
 	>
 	<Platforms>
@@ -18,11 +18,11 @@
 			Name="Debug|Win32"
 			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="4"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="cxxtestgen.pl --error-printer -o DictionaryTestRunner.cpp --gui=Win32Gui DictionaryTest.h"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -41,7 +41,7 @@
 				EnableIntrinsicFunctions="false"
 				AdditionalIncludeDirectories="..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32"
-				ExceptionHandling="2"
+				ExceptionHandling="1"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -53,13 +53,10 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLinkerTool"
+				Name="VCLibrarianTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -71,12 +68,6 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -84,11 +75,11 @@
 			Name="Release|Win32"
 			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="4"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="cxxtestgen.pl --error-printer -o DictionaryTestRunner.cpp --gui=Win32Gui DictionaryTest.h"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -117,13 +108,10 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLinkerTool"
+				Name="VCLibrarianTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -133,12 +121,6 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -158,10 +140,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DictionaryTestRunner.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\Modules\SharedSource\OVFileHandler.cpp"
 				>
 			</File>
@@ -177,10 +155,6 @@
 			>
 			<File
 				RelativePath=".\Dictionary.h"
-				>
-			</File>
-			<File
-				RelativePath=".\DictionaryTest.h"
 				>
 			</File>
 			<File

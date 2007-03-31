@@ -10,11 +10,11 @@ using namespace std;
 
 Dictionary::Dictionary (string& dicFilePath)
 {
-	cerr << "Loading the dictionary file: " << dicFilePath << endl;
+	//cerr << "Loading the dictionary file: " << dicFilePath << endl;
 	OVFileHandler *fh = new OVFileHandler(dicFilePath.c_str());
-	if(!fh) {
+	if(!fh->isOpenedByMMAP()) {
 		cerr << "The dictionary file " << dicFilePath;
-		cerr << " not found." << endl;
+		cerr << " is failed to open." << endl;
 		exit(-1);
 	}
 
@@ -39,7 +39,7 @@ Dictionary::Dictionary (string& dicFilePath)
 		}	
 	}
 
-	cerr << "The dictionary file " << dicFilePath << " loaded." << endl;
+	cerr << "The dictionary file " << dicFilePath << " is loaded." << endl;
 	delete fh;
 }
 
