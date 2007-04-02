@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DictionaryTest", "Dictionary\DictionaryTest.vcproj", "{AD9400F1-148D-4F0C-83D8-607B5D851679}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dictionary", "Dictionary\Dictionary.vcproj", "{223E05E8-6BA9-41F6-B6D6-A9D5A0C0DEFC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DictionaryTest", "Dictionary\DictionaryTest\DictionaryTest.vcproj", "{AD9400F1-148D-4F0C-83D8-607B5D851679}"
 	ProjectSection(ProjectDependencies) = postProject
 		{223E05E8-6BA9-41F6-B6D6-A9D5A0C0DEFC} = {223E05E8-6BA9-41F6-B6D6-A9D5A0C0DEFC}
 	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dictionary", "Dictionary\Dictionary.vcproj", "{223E05E8-6BA9-41F6-B6D6-A9D5A0C0DEFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,14 +14,14 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AD9400F1-148D-4F0C-83D8-607B5D851679}.Debug|Win32.ActiveCfg = Debug|Win32
-		{AD9400F1-148D-4F0C-83D8-607B5D851679}.Debug|Win32.Build.0 = Debug|Win32
-		{AD9400F1-148D-4F0C-83D8-607B5D851679}.Release|Win32.ActiveCfg = Release|Win32
-		{AD9400F1-148D-4F0C-83D8-607B5D851679}.Release|Win32.Build.0 = Release|Win32
 		{223E05E8-6BA9-41F6-B6D6-A9D5A0C0DEFC}.Debug|Win32.ActiveCfg = Debug|Win32
 		{223E05E8-6BA9-41F6-B6D6-A9D5A0C0DEFC}.Debug|Win32.Build.0 = Debug|Win32
 		{223E05E8-6BA9-41F6-B6D6-A9D5A0C0DEFC}.Release|Win32.ActiveCfg = Release|Win32
 		{223E05E8-6BA9-41F6-B6D6-A9D5A0C0DEFC}.Release|Win32.Build.0 = Release|Win32
+		{AD9400F1-148D-4F0C-83D8-607B5D851679}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AD9400F1-148D-4F0C-83D8-607B5D851679}.Debug|Win32.Build.0 = Debug|Win32
+		{AD9400F1-148D-4F0C-83D8-607B5D851679}.Release|Win32.ActiveCfg = Release|Win32
+		{AD9400F1-148D-4F0C-83D8-607B5D851679}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

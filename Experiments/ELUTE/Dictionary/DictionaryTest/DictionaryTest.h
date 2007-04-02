@@ -8,7 +8,7 @@ class DictionaryTest : public CxxTest::TestSuite
 public:
 	void setUp(void)
 	{
-		string dicFilePath("./tsi.src");
+		string dicFilePath("../../tsi.src");
 		dic_ = new Dictionary(dicFilePath);
 	}
 
