@@ -23,13 +23,13 @@ CxxTest::StaticSuiteDescription suiteDescription_LanguageModelTest( "LanguageMod
 
 static class TestDescription_LanguageModelTest_testGetLogProb : public CxxTest::RealTestDescription {
 public:
- TestDescription_LanguageModelTest_testGetLogProb() : CxxTest::RealTestDescription( Tests_LanguageModelTest, suiteDescription_LanguageModelTest, 15, "testGetLogProb" ) {}
+ TestDescription_LanguageModelTest_testGetLogProb() : CxxTest::RealTestDescription( Tests_LanguageModelTest, suiteDescription_LanguageModelTest, 22, "testGetLogProb" ) {}
  void runTest() { suite_LanguageModelTest.testGetLogProb(); }
 } testDescription_LanguageModelTest_testGetLogProb;
 
 static class TestDescription_LanguageModelTest_testGetBackOff : public CxxTest::RealTestDescription {
 public:
- TestDescription_LanguageModelTest_testGetBackOff() : CxxTest::RealTestDescription( Tests_LanguageModelTest, suiteDescription_LanguageModelTest, 39, "testGetBackOff" ) {}
+ TestDescription_LanguageModelTest_testGetBackOff() : CxxTest::RealTestDescription( Tests_LanguageModelTest, suiteDescription_LanguageModelTest, 60, "testGetBackOff" ) {}
  void runTest() { suite_LanguageModelTest.testGetBackOff(); }
 } testDescription_LanguageModelTest_testGetBackOff;
 

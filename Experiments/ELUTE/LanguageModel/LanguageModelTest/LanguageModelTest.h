@@ -6,64 +6,97 @@ using namespace std;
 class LanguageModelTest : public CxxTest::TestSuite 
 {
 public:
-	void setUp(void)
+	LanguageModelTest()
 	{
-		string lmFilePath("./as_large-kn-2.lm");
+		string lmFilePath("../../as_large-kn-2.lm");
 		lm_ = new LanguageModel(lmFilePath);
 	}
+
+	~LanguageModelTest()
+	{
+		delete lm_;
+	}
+
+	void setUp(void) {}
 	
 	void testGetLogProb(void)
 	{
 		string gram = "\xE4\xB8\x8B\xE9\x9B\xA8 \xE5\xA4\xA9"; //rainy /xiayv/, day /tian/
-		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
+		double logprob = lm_->getLogProb(gram);
+		TS_ASSERT_LESS_THAN(logprob, 0.0L);
+		cerr << gram << " logprob: " << logprob << endl;
 		
 		gram = "\xE4\xB8\x8B\xE9\x9B\xA8\xE5\xA4\xA9";
-		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
+		logprob = lm_->getLogProb(gram);
+		TS_ASSERT_LESS_THAN(logprob, 0.0L);
+		cerr << gram << " logprob: " << logprob << endl;
 		
 		gram = "\xE4\xB8\x8B\xE9\x9B\xA8";
-		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
+		logprob = lm_->getLogProb(gram);
+		TS_ASSERT_LESS_THAN(logprob, 0.0L);
+		cerr << gram << " logprob: " << logprob << endl;
 		
 		gram = "\xE9\x9B\xA8\xE5\xA4\xA9";
-		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
+		logprob = lm_->getLogProb(gram);
+		TS_ASSERT_LESS_THAN(logprob, 0.0L);
+		cerr << gram << " logprob: " << logprob << endl;
 		
 		gram = "\xE4\xB8\x8B";
-		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
+		logprob = lm_->getLogProb(gram);
+		TS_ASSERT_LESS_THAN(logprob, 0.0L);
+		cerr << gram << " logprob: " << logprob << endl;
 		
 		gram = "\xE9\x9B\xA8";
-		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
+		logprob = lm_->getLogProb(gram);
+		TS_ASSERT_LESS_THAN(logprob, 0.0L);
+		cerr << gram << " logprob: " << logprob << endl;
 		
 		gram = "\xE5\xA4\xA9";
-		cerr << gram << " logprob: " << lm_->getLogProb(gram) << endl;
+		logprob = lm_->getLogProb(gram);
+		TS_ASSERT_LESS_THAN(logprob, 0.0L);
+		cerr << gram << " logprob: " << logprob << endl;
 	}
 	
 	void testGetBackOff(void)
 	{
 		string gram = "\xE4\xB8\x8B\xE9\x9B\xA8 \xE5\xA4\xA9";
-		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
+		double backoff = lm_->getBackOff(gram);
+		TS_ASSERT_EQUALS(backoff, 0.0L);
+		// The highest order grams have no backoff weights.
+		cerr << gram << " back-off: " << backoff << endl;
 		
 		gram = "\xE4\xB8\x8B\xE9\x9B\xA8\xE5\xA4\xA9";
-		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
+		backoff = lm_->getBackOff(gram);
+		TS_ASSERT_LESS_THAN(backoff, 0.0L);
+		cerr << gram << " back-off: " << backoff << endl;
 		
 		gram = "\xE4\xB8\x8B\xE9\x9B\xA8";
-		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
+		backoff = lm_->getBackOff(gram);
+		TS_ASSERT_LESS_THAN(backoff, 0.0L);
+		cerr << gram << " back-off: " << backoff << endl;
 		
 		gram = "\xE9\x9B\xA8\xE5\xA4\xA9";
-		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
+		backoff = lm_->getBackOff(gram);
+		TS_ASSERT_LESS_THAN(backoff, 0.0L);
+		cerr << gram << " back-off: " << backoff << endl;
 		
 		gram = "\xE4\xB8\x8B";
-		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
+		backoff = lm_->getBackOff(gram);
+		TS_ASSERT_LESS_THAN(backoff, 0.0L);
+		cerr << gram << " back-off: " << backoff << endl;
 		
 		gram = "\xE9\x9B\xA8";
-		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
+		backoff = lm_->getBackOff(gram);
+		TS_ASSERT_LESS_THAN(backoff, 0.0L);
+		cerr << gram << " back-off: " << backoff << endl;
 		
 		gram = "\xE5\xA4\xA9";
-		cerr << gram << " back-off: " << lm_->getBackOff(gram) << endl;
+		backoff = lm_->getBackOff(gram);
+		TS_ASSERT_LESS_THAN(backoff, 0.0L);
+		cerr << gram << " back-off: " << backoff << endl;
 	}
 
-	void tearDown (void)
-	{
-		delete lm_;
-	}
+	void tearDown (void) {}
 	
 private:
 	LanguageModel* lm_;
