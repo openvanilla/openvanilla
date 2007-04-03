@@ -21,7 +21,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="cxxtestgen.pl --error-printer -o KeystrokeToWordConverterTestRunner.cpp --gui=Win32Gui KeystrokeToWordConverterTest.h"
+				CommandLine="cxxtestgen.py --runner=ParenPrinter -o KeystrokeToWordConverterTestRunner.cpp KeystrokeToWordConverterTest.h"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -37,8 +37,11 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\;..\LanguageModel;..\Dictionary;..\..\..\Modules\SharedHeaders"
+				Optimization="2"
+				AdditionalIncludeDirectories="..\;..\..\;..\..\LanguageModel;..\..\Dictionary;..\..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32"
+				RuntimeLibrary="1"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -51,6 +54,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				GenerateDebugInformation="true"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -85,7 +89,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="cxxtestgen.pl --error-printer -o KeystrokeToWordConverterTestRunner.cpp --gui=Win32Gui KeystrokeToWordConverterTest.h"
+				CommandLine="cxxtestgen.py --runner=ParenPrinter -o KeystrokeToWordConverterTestRunner.cpp KeystrokeToWordConverterTest.h"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -101,7 +105,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\;..\LanguageModel;..\Dictionary;..\..\..\Modules\SharedHeaders"
+				AdditionalIncludeDirectories="..\;..\..\;..\..\LanguageModel;..\..\Dictionary;..\..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32"
 			/>
 			<Tool
@@ -161,11 +165,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\Dictionary\Dictionary.h"
+				RelativePath="..\..\Dictionary\Dictionary.h"
 				>
 			</File>
 			<File
-				RelativePath=".\KeystrokeToWordConverter.h"
+				RelativePath="..\KeystrokeToWordConverter.h"
 				>
 			</File>
 			<File
@@ -173,19 +177,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\LanguageModel\LanguageModel.h"
+				RelativePath="..\..\LanguageModel\LanguageModel.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Modules\SharedHeaders\OVFileHandler.h"
+				RelativePath="..\..\..\..\Modules\SharedHeaders\OVFileHandler.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Modules\SharedHeaders\OVStringToolKit.h"
+				RelativePath="..\..\..\..\Modules\SharedHeaders\OVStringToolKit.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Token.h"
+				RelativePath="..\..\Token.h"
 				>
 			</File>
 		</Filter>

@@ -36,8 +36,11 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				Optimization="2"
 				AdditionalIncludeDirectories="..\;..\LanguageModel;..\Dictionary;..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32"
+				RuntimeLibrary="1"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

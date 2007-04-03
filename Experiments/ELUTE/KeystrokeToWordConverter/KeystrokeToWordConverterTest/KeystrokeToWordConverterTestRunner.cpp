@@ -9,11 +9,10 @@
 #include <cxxtest/TestTracker.h>
 #include <cxxtest/TestRunner.h>
 #include <cxxtest/RealDescriptions.h>
-#include <cxxtest/ErrorPrinter.h>
-#include <cxxtest/Win32Gui.h>
+#include <cxxtest/ParenPrinter.h>
 
-int main( int argc, char *argv[] ) {
- return CxxTest::GuiTuiRunner<CxxTest::Win32Gui, CxxTest::ErrorPrinter>( argc, argv ).run();
+int main() {
+ return CxxTest::ParenPrinter().run();
 }
 #include "KeystrokeToWordConverterTest.h"
 
@@ -24,13 +23,13 @@ CxxTest::StaticSuiteDescription suiteDescription_KeystrokeToWordConverterTest( "
 
 static class TestDescription_KeystrokeToWordConverterTest_testConvert : public CxxTest::RealTestDescription {
 public:
- TestDescription_KeystrokeToWordConverterTest_testConvert() : CxxTest::RealTestDescription( Tests_KeystrokeToWordConverterTest, suiteDescription_KeystrokeToWordConverterTest, 42, "testConvert" ) {}
+ TestDescription_KeystrokeToWordConverterTest_testConvert() : CxxTest::RealTestDescription( Tests_KeystrokeToWordConverterTest, suiteDescription_KeystrokeToWordConverterTest, 55, "testConvert" ) {}
  void runTest() { suite_KeystrokeToWordConverterTest.testConvert(); }
 } testDescription_KeystrokeToWordConverterTest_testConvert;
 
 static class TestDescription_KeystrokeToWordConverterTest_testFixedToken : public CxxTest::RealTestDescription {
 public:
- TestDescription_KeystrokeToWordConverterTest_testFixedToken() : CxxTest::RealTestDescription( Tests_KeystrokeToWordConverterTest, suiteDescription_KeystrokeToWordConverterTest, 47, "testFixedToken" ) {}
+ TestDescription_KeystrokeToWordConverterTest_testFixedToken() : CxxTest::RealTestDescription( Tests_KeystrokeToWordConverterTest, suiteDescription_KeystrokeToWordConverterTest, 60, "testFixedToken" ) {}
  void runTest() { suite_KeystrokeToWordConverterTest.testFixedToken(); }
 } testDescription_KeystrokeToWordConverterTest_testFixedToken;
 
