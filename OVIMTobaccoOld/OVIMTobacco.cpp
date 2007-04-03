@@ -65,6 +65,7 @@ public:
 	virtual bool isHsuEndKeyTriggered();
 
 	bool isHsuLayout;
+	bool isBoPoMoFoLayout;
 
 protected:
     virtual const char *query(char c);
@@ -617,9 +618,12 @@ int OVIMTobaccoContext::keyPrintable() {
 
     if (!seq.isEmpty()) {
 		seq.isHsuLayout = false;
+		seq.isBoPoMoFoLayout =false;
 		const char* ename = parent->localizedName("en");
 		if (strcmp("PhoneticHsu", ename) == 0)
 			seq.isHsuLayout = true;
+		else if (strcmp("BoPoMoFo", ename) == 0)
+			seq.isBoPoMoFoLayout = true;
 		if(seq.isHsuLayout && seq.isHsuEndKeyTriggered())
 			return keyCompose();
 		else if (parent->isEndKey(k->code())) {
@@ -1050,11 +1054,15 @@ const char *IMGKeySequence::compose() {
 	///////////////////////////////////////////
 	//   ¦Xªkª`­µ´À´«
 	///////////////////////////////////////////
-	string inputStr(seq);
-	string foo="";	
-	convert2LegalBPMF(inputStr,foo);	
-	len=foo.length();
-	strcpy(seq,foo.c_str());
+	string foo(seq);
+	if(isBoPoMoFoLayout)
+	{
+		string inputStr(seq);		
+		convert2LegalBPMF(inputStr,foo);	
+		len=foo.length();
+		strcpy(seq,foo.c_str());
+	}	
+		
 	for(int i=0;i<foo.length();i++)
 	{
 		const char *s=query(foo[i]);
