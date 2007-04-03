@@ -38,6 +38,8 @@
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="..\;..\LanguageModel;..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32"
+				RuntimeLibrary="1"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

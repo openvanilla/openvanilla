@@ -21,7 +21,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="cxxtestgen.pl --error-printer -o WordSegmenterTestRunner.cpp --gui=Win32Gui WordSegmenterTest.h"
+				CommandLine="cxxtestgen.py --runner=ParenPrinter -o WordSegmenterTestRunner.cpp WordSegmenterTest.h"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -37,8 +37,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\;..\LanguageModel;..\..\..\Modules\SharedHeaders"
+				AdditionalIncludeDirectories="..\;..\..\;..\..\LanguageModel;..\..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32"
+				RuntimeLibrary="1"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -51,6 +53,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				GenerateDebugInformation="true"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -85,7 +88,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="cxxtestgen.pl --error-printer -o WordSegmenterTestRunner.cpp --gui=Win32Gui WordSegmenterTest.h"
+				CommandLine="cxxtestgen.py --runner=ParenPrinter -o WordSegmenterTestRunner.cpp WordSegmenterTest.h"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -101,7 +104,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\;..\LanguageModel;..\..\..\Modules\SharedHeaders"
+				AdditionalIncludeDirectories="..\;..\..\;..\..\LanguageModel;..\..\..\..\Modules\SharedHeaders"
 				PreprocessorDefinitions="WIN32"
 			/>
 			<Tool
@@ -161,23 +164,23 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\LanguageModel\LanguageModel.h"
+				RelativePath="..\..\LanguageModel\LanguageModel.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Modules\SharedHeaders\OVFileHandler.h"
+				RelativePath="..\..\..\..\Modules\SharedHeaders\OVFileHandler.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Modules\SharedHeaders\OVStringToolKit.h"
+				RelativePath="..\..\..\..\Modules\SharedHeaders\OVStringToolKit.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Token.h"
+				RelativePath="..\..\Token.h"
 				>
 			</File>
 			<File
-				RelativePath=".\WordSegmenter.h"
+				RelativePath="..\WordSegmenter.h"
 				>
 			</File>
 			<File

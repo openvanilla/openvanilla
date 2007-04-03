@@ -12,7 +12,7 @@ class WordSegmenterTest : public CxxTest::TestSuite
 public:
 	void setUp(void)
 	{
-		string lmFilePath("./as_large-kn-2.lm");		
+		string lmFilePath("../../as_large-kn-2.lm");		
 		TS_ASSERT(seg.loadModel(lmFilePath));
 	}
 	
