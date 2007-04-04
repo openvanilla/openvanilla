@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GacUtil", "..\..\Utilities\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMGeneric", "..\..\Modules\OVIMGeneric\OVIMGeneric.VC8.vcproj", "{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsApplication1", "WindowsApplication1\WindowsApplication1.csproj", "{AA07FE85-7BC7-4CD3-BEC3-A3D7B31EE84B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,16 @@ Global
 		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Release|Win32.ActiveCfg = Release|Win32
 		{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}.Release|Win32.Build.0 = Release|Win32
+		{AA07FE85-7BC7-4CD3-BEC3-A3D7B31EE84B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA07FE85-7BC7-4CD3-BEC3-A3D7B31EE84B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA07FE85-7BC7-4CD3-BEC3-A3D7B31EE84B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AA07FE85-7BC7-4CD3-BEC3-A3D7B31EE84B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AA07FE85-7BC7-4CD3-BEC3-A3D7B31EE84B}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{AA07FE85-7BC7-4CD3-BEC3-A3D7B31EE84B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA07FE85-7BC7-4CD3-BEC3-A3D7B31EE84B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA07FE85-7BC7-4CD3-BEC3-A3D7B31EE84B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AA07FE85-7BC7-4CD3-BEC3-A3D7B31EE84B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AA07FE85-7BC7-4CD3-BEC3-A3D7B31EE84B}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -50,7 +50,7 @@ namespace CSharpFormLibrary
 		private System.Windows.Forms.Panel panelBody;
 
         //private CSharpFormLibrary.IMESymbolForm m_symbolForm = null;
-        private IMESymbolForm m_symbolForm = null;
+        private IMEFilterForm m_symbolForm = null;
         
 		public IMEStatusForm()
 		{
@@ -560,7 +560,8 @@ namespace CSharpFormLibrary
             if (m_symbolForm == null)
             {
                 //m_symbolForm = new IMESymbolForm();
-                m_symbolForm = new IMESymbolForm();
+                m_symbolForm = new IMEFilterForm();
+                /*
                 string[] fakeInput = new string[4];
                 fakeInput[0] = "¡A ¡C ¡B ¡F ¡I ¡H ¡¡ ¡y ¡] ¡i ¡­ ¢H ¡® ¡¯ ¡° ¡³ ¡· ¡¼ ¡À ¡Ï ¡¯ ¡° ¡³ ¡· ¡Õ ¡Ö ¡× ¡× ¢C ¢D ¢W £á ¢J ¢P ¢R ¢Q ¢V ¡j ¡^ ¡z ¡¢";
                 fakeInput[1] = "1 2 3 4 5 6 7";
@@ -570,13 +571,24 @@ namespace CSharpFormLibrary
                 //m_symbolForm.SetSymbols("1.1 2.2 3.3 4.4 5.5 6.6 7.7 8.8 9.9 10.10 11.11 12.1/2");                                                
                 m_symbolForm.SetLocation(800, 600);
                 m_symbolForm.ShowNoActive();
+                 */
+                string[] fakeInput = new string[4];
+                fakeInput[0] = "¡A ¡C ¡B ¡F ¡I ¡H ¡¡ ¡y ¡] ¡i ¡­ ¢H ¡® ¡¯ ¡° ¡³ ¡· ¡¼ ¡À ¡Ï ¡¯ ¡° ¡³ ¡· ¡Õ ¡Ö ¡× ¡× ¢C ¢D ¢W £á ¢J ¢P ¢R ¢Q ¢V ¡j ¡^ ¡z ¡¢";
+                fakeInput[1] = "1 2 3 4 5 6 7";
+                fakeInput[2] = "£t £u £v £w";
+                fakeInput[3] = "ªü £v £{";
+                m_symbolForm.SetPossibleList("£¨£³£¾ £¨£µ");//£¤£³ £¤£³£½ 
+                m_symbolForm.SetSymbols(fakeInput);
+                //m_symbolForm.SetSymbols("1.1 2.2 3.3 4.4 5.5 6.6 7.7 8.8 9.9 10.10 11.11 12.1/2");                                                
+                // m_symbolForm.SetLocation(800, 600);
+                m_symbolForm.ShowNoActive();
             }
             else
-            {
+            {/*
                 if (m_symbolForm.IsDisposed)
                 {
                     m_symbolForm = null;
-                    m_symbolForm = new IMESymbolForm();
+                    m_symbolForm = new IMESymbolForm();6
                     string[] fakeInput = new string[4];
                     fakeInput[0] = "¡A ¡C ¡B ¡F ¡I ¡H ¡¡ ¡y ¡] ¡i ¡­ ¢H ¡® ¡¯ ¡° ¡³ ¡· ¡¼ ¡À ¡Ï ¡¯ ¡° ¡³ ¡· ¡Õ ¡Ö ¡× ¡× ¢C ¢D ¢W £á ¢J ¢P ¢R ¢Q ¢V ¡j ¡^ ¡z ¡¢";
                     fakeInput[1] = "1 2 3 4 5 6 7";
@@ -591,7 +603,7 @@ namespace CSharpFormLibrary
                 {
                     m_symbolForm.Dispose();
                     m_symbolForm = null;
-                }
+                }*/
             }
         }
 

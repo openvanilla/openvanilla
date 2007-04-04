@@ -111,11 +111,20 @@
     <Compile Include="IMECandidateFrom2D.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="IMECheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="IMECompRichForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IMECompRichForm.Designer.cs">
       <DependentUpon>IMECompRichForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IMEFilterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IMEFilterForm.Designer.cs">
+      <DependentUpon>IMEFilterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IMEListView.cs">
       <SubType>Component</SubType>
@@ -158,6 +167,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>IMECompRichForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IMEFilterForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>IMEFilterForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IMENotifyForm.resx">
       <DependentUpon>IMENotifyForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -183,6 +196,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report1.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="csform.snk" />

@@ -145,7 +145,7 @@ namespace CSharpFormLibrary
             // 
             //this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.;
             
-            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.Normal;
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             
             this.tabControl1.ItemSize = new System.Drawing.Size(40, 40);
