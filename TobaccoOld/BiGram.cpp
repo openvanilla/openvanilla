@@ -249,11 +249,16 @@ void BiGram::getVocabularyCombination(
 			int leftFreq = leftRef[i].freq;
 			int rightFreq = rightRef[j].freq;
 			int matrix = leftFreq + rightFreq;
-			if(matrix == 0) matrix = 1;
-
-			combinedVocabulary.freq = matrix;
-			double score = 2.0*leftFreq*rightFreq / matrix;
-			if(score == 0.0) score = 1.0;
+			
+			double score = 0.0;
+			if(matrix > 0) {
+				combinedVocabulary.freq = matrix;
+				score = matrix;			
+			} else {
+				combinedVocabulary.freq = 1;
+				score = numeric_limits<double>::min();
+			}
+				
 			combinedVocabulary.prob =
 				-(log(score/numeric_limits<double>::max()) / log(2.0));
 			combinedVocabularyVector.push_back(combinedVocabulary);
