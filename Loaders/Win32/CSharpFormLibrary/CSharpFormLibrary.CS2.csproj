@@ -132,6 +132,9 @@
     <Compile Include="IMENotifyForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="IMEPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="IMEStatusForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +202,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="csform.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="search.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

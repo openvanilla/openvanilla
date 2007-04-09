@@ -29,7 +29,7 @@ namespace CSharpFormLibrary
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IMECompRichForm));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new CSharpFormLibrary.IMEPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,7 +43,8 @@ namespace CSharpFormLibrary
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(25, 25);
             this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.pictureBox1.TabStop = false;            
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // IMECompRichForm
             // 
@@ -57,7 +58,7 @@ namespace CSharpFormLibrary
             this.Padding = new System.Windows.Forms.Padding(3);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.IMECompRichForm_Paint);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.IMECompRichForm_Paint);            
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -65,7 +66,8 @@ namespace CSharpFormLibrary
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private IMEPictureBox pictureBox1;
+
 
 
         /*private System.Windows.Forms.Label label1;        

@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Threading;
 
 namespace CSharpFormLibrary
 {
@@ -139,7 +140,7 @@ namespace CSharpFormLibrary
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == WM_MOUSEACTIVATE)
-            {
+            {                
                 m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
                 return;
             }
@@ -269,7 +270,39 @@ namespace CSharpFormLibrary
         {
             this.Dispose(true);
         }
-   
+
+        public void MyCallbackFunction()
+        {
+            string target = "http://www.google.com/search?q=";
+            string encodeBuf = System.Web.HttpUtility.UrlEncode(Buf);
+            try
+            {
+                System.Diagnostics.Process.Start(target+encodeBuf);
+            }
+            catch
+            (
+                System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+        }
+
+        private void RunProcess()
+        {
+            Thread MyThread = new Thread(new ThreadStart(MyCallbackFunction));
+            MyThread.Start();
+          
+        }
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show("google!!");
+            RunProcess();
+        }                       
 
         /*private void timer2_Tick(object sender, EventArgs e)
         {            
