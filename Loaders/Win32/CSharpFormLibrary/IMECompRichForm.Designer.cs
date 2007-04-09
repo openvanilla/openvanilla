@@ -28,29 +28,45 @@ namespace CSharpFormLibrary
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IMECompRichForm));
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Location = new System.Drawing.Point(249, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // IMECompRichForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            //this.ClientSize = new System.Drawing.Size(240, 20);
-            System.Diagnostics.Debug.WriteLine("before" + this.Height.ToString());
-            //this.Height = 20;
-            //this.Width = 240;
-            this.Size = new System.Drawing.Size(240, 30);
-            System.Diagnostics.Debug.WriteLine("after " + this.Height.ToString());
+            this.BackColor = System.Drawing.Color.LemonChiffon;
+            this.ClientSize = new System.Drawing.Size(277, 24);
             this.ControlBox = false;
+            this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "IMECompRichForm";
+            this.Padding = new System.Windows.Forms.Padding(3);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            //this.TransparencyKey = this.BackColor;
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.IMECompRichForm_Paint);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.PictureBox pictureBox1;
+
 
         /*private System.Windows.Forms.Label label1;        
         private System.Windows.Forms.Timer timer1;

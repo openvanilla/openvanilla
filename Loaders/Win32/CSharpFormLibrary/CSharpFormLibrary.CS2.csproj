@@ -196,7 +196,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report1.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="csform.snk" />

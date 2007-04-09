@@ -16,7 +16,7 @@ namespace CSharpFormLibrary
         private const int MA_NOACTIVATE = 0x0003;
         private const int MA_NOACTIVATEANDEAT = 0x0004;        
         private const int WM_NCACTIVATE = 0x0086;
-        private int formInitWidth=199;
+        private int formInitWidth=277;
         private int compSelStart = 0;
         private int compSelEnd = 0;
         private int m_caretX = 0;
@@ -67,21 +67,22 @@ namespace CSharpFormLibrary
                 //SizeF sizeF = e.Graphics.MeasureString(Buf.Substring(0, caretIndex), Font);
 
                 //resize
-                if (this.Width - 50 < (int)size.Width)
+                if (this.Width - 100 < (int)size.Width)
                 {
                     /*int ret = UtilFuncs.SendMessage(m_AppHWnd,
                    (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
-                   0xE, 10); // 暫時改成擠出字*/
-                    this.Width += 100;
+                   0xE, 10); // 暫時改成擠出字*/                    
+                    this.Width += 100;                    
                 }
 
                 //draw backcolor
-                Brush b = new System.Drawing.SolidBrush(Color.GhostWhite);
+                //Brush b = new System.Drawing.SolidBrush(Color.GhostWhite);
+                Brush b = new System.Drawing.SolidBrush(Color.LemonChiffon);
                 e.Graphics.FillRectangle(b, this.ClientRectangle);
                 b.Dispose();
 
                 //draw string
-                TextRenderer.DrawText(e.Graphics, Buf, Font, new Point(offsetX, offsetY), Color.Black, flags);                
+                TextRenderer.DrawText(e.Graphics, Buf, Font, new Point(offsetX, offsetY), System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(66)))), ((int)(((byte)(0))))), flags);                
                 if (compSelEnd - compSelStart > 0)
                 {                
                     if (compSelStart == 0)
@@ -101,15 +102,21 @@ namespace CSharpFormLibrary
             }
             else
             {
-                Brush b = new SolidBrush(SystemColors.ButtonFace);
+                //Brush b = new SolidBrush(SystemColors.ButtonFace);
+                Brush b = new System.Drawing.SolidBrush(Color.Khaki);
                 e.Graphics.FillRectangle(b, this.Bounds);
                 b.Dispose();
             }
             Debug.WriteLine("after paint words" + this.Height.ToString());
             //draw border
+            //ControlPaint.DrawBorder(
+            //    e.Graphics, ClientRectangle,
+            //        Color.LightGray, ButtonBorderStyle.Outset);
+
             ControlPaint.DrawBorder(
                 e.Graphics, ClientRectangle,
-                    Color.LightGray, ButtonBorderStyle.Outset);
+                    Color.Moccasin, ButtonBorderStyle.Outset);
+
             Debug.WriteLine("after paint border" + this.Height.ToString());
         }
 
