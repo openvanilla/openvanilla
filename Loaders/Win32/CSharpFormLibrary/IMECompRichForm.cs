@@ -300,7 +300,7 @@ namespace CSharpFormLibrary
         }
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            MessageBox.Show("google!!");
+            //MessageBox.Show("google!!");
             RunProcess();
         }                       
 
