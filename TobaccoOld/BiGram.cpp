@@ -156,8 +156,14 @@ int BiGram::maximumMatching(
 				currentVocabularyVector.push_back(vocabularies[k]);
 		}
 
-		if(currentVocabularyVector[0].word.length() == 1 &&
-            currentVocabularyVector[0].freq > 199) {
+		//<comment author='b6s'> Filters candidates arbitrarily
+		sort(
+			currentVocabularyVector.begin(),
+			currentVocabularyVector.end(),
+			Vocabulary::isFreqGreater);		
+		//if(currentVocabularyVector[0].word.length() == 1 &&
+		//</comment>
+		if(currentVocabularyVector[0].freq > 199) {
 			size_t thrashold = 0;
 			for(size_t step = 0; step < currentVocabularyVector.size(); step++)
 			{
