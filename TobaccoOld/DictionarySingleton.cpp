@@ -123,7 +123,9 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
     whereString += strColumnCharacters + " = '" + characters + "'";
     whereString += " AND word_table.wordID = " + strColumnWordID +
         " AND word_table.wordID = generic_freq_table.wordID";
-    whereString += " ORDER BY generic_freq_table.freq DESC";
+	//<comment author='b6s'> Sort them later.
+    //whereString += " ORDER BY generic_freq_table.freq DESC";
+	//</comment>
     string commandString = selectString + fromString + whereString;
 
     SQLite3Statement *sth =

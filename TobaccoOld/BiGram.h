@@ -23,10 +23,10 @@ public:
 	   vector<Vocabulary>& leftRef, vector<Vocabulary>& rightRef,
 	   vector<Vocabulary>& combinedRef);
 
-	const static size_t MAX_CONTEXT_LENGTH = 5;
+	const static size_t MAX_CONTEXT_LENGTH = 4;
 
 private:
-	const static size_t N_BEST = 5;
+	const static size_t N_BEST = 3;
 };
 
 #endif

@@ -40,8 +40,8 @@ int BiGram::maximumMatching(
 	while(index < stop)
 	{
 		size_t offsetBound = stop - index;
-		if(offsetBound > 7)
-			offsetBound = 7;
+		if(offsetBound > MAX_CONTEXT_LENGTH)
+			offsetBound = MAX_CONTEXT_LENGTH;
 		bool foundFlag = false;
 		vector<string> initialCharacterStringVector =
             tokenVectorRef[index].characterStringVector;
@@ -157,11 +157,11 @@ int BiGram::maximumMatching(
 		}
 
 		if(currentVocabularyVector[0].word.length() == 1 &&
-            currentVocabularyVector[0].freq > 99) {
+            currentVocabularyVector[0].freq > 199) {
 			size_t thrashold = 0;
 			for(size_t step = 0; step < currentVocabularyVector.size(); step++)
 			{
-				if(currentVocabularyVector[step].freq < 100) {
+				if(currentVocabularyVector[step].freq < 200) {
 					thrashold = step;
 					break;
 				}
