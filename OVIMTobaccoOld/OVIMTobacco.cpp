@@ -825,24 +825,26 @@ int OVIMTobaccoContext::fetchCandidate(const char *qs) {
     SQLite3Statement *sth=db->prepare(cmd);
     if (!sth) return 0;
     sth->bind_text(1, realqs);
-      
+    
+    int rows=0;
+    while (sth->step()==SQLITE_ROW) rows++;
+    murmur("query string=%s, number of candidates=%d", realqs, rows);
+    if (!rows) {
+        delete sth;
+        return 0;
+    }
+    
     candi=new IMGCandidate;
     candi->count=0;
     candi->candidates=new char* [rows];
 
-    int rows=0;
+	sth->reset();
     while (sth->step()==SQLITE_ROW) {
-		rows++;
         const char *v=sth->column_text(0);
         char *s=(char*)calloc(1, strlen(v)+1);
         strcpy(s, v);
         candi->candidates[candi->count++]=s;
     }
-    if (!rows) {
-        delete sth;
-        return 0;
-    }
-    murmur("query string=%s, number of candidates=%d", realqs, rows);
 
 	delete sth;
     return rows;
