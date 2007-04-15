@@ -172,16 +172,10 @@ bool DictionarySingleton::getVocablesByCharacters(string characters,
 		imTableDB->prepare(cmd);
     if (!sth) return false;
 	sth->bind_text(1, characters.c_str());
-    
+       
     int rows=0;
-    while (sth->step()==SQLITE_ROW) rows++;
-    if (!rows) {
-        delete sth;
-        return false;
-    }
-    
-    sth->reset();
     while (sth->step()==SQLITE_ROW) {
+		rows++;
         const char* word = sth->column_text(0);
         murmur("found[%s]", word);
         int order = sth->column_int(1);
@@ -191,6 +185,11 @@ bool DictionarySingleton::getVocablesByCharacters(string characters,
         
         vocabularyVectorRef.push_back(currentVocabulary);
     }
-    delete sth;
+    if (!rows) {
+        delete sth;
+        return false;
+    }
+
+	delete sth;
     return true;
 }
