@@ -134,19 +134,10 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
         murmur("illegal SQL statement[%s]?", commandString.c_str());
         return false;
     }
-    
+
     int rows = 0;
-    while (sth->step() == SQLITE_ROW) rows++;
-
-    murmur("query string=%s, number of candidates=%d",
-        characters.c_str(), rows);
-    if (!rows) {
-        delete sth;
-        return false;
-    }
-
-    sth->reset();
     while (sth->step() == SQLITE_ROW) {
+		rows++;
         const char* word = sth->column_text(0);
         murmur("found[%s]", word);
         int freq = sth->column_int(1);
@@ -156,7 +147,15 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
         
         vocabularyVectorRef.push_back(currentVocabulary);
     }
-    delete sth;
+
+	if (!rows) {
+		delete sth;
+        return false;
+    }
+    murmur("query string=%s, number of candidates=%d",
+        characters.c_str(), rows);
+
+	delete sth;
     return true;
 }
 
