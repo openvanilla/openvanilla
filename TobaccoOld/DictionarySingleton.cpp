@@ -51,17 +51,15 @@ void DictionarySingleton::lostInstance()
 
 bool DictionarySingleton::isVocabulary(string characters)
 {
-    string strTableName = DictionarySingleton::inputMethodId;
-    strTableName += "_char2word_table";
-    string strColumnWordID = strTableName + ".wordID";    
-    string strColumnCharacters = strTableName + ".characters";
+	//<comment author='b6s'> These strings should be set only once!
+	//string strTableName = DictionarySingleton::inputMethodId;
+	//strTableName += "_char2word_table";
+	//string strColumnWordID = strTableName + ".wordID";
+	//string strColumnCharacters = strTableName + ".characters";
+	//</comment>
       
-    string selectString("SELECT count(" + strColumnWordID + ")");
-    string fromString(" FROM ");
-    fromString += strTableName;
-    string whereString(" WHERE ");
-    whereString += strColumnCharacters + " = '" + characters + "'";
-    string commandString = selectString + fromString + whereString;
+	string whereString = " WHERE "+strColumnCharacters+"='"+characters+"'";
+    string commandString = selectCountString + fromCountString + whereString;
 
     SQLite3Statement *sth =
         DictionarySingleton::dictionaryDB->prepare(commandString.c_str());
@@ -108,24 +106,21 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
     /// Since there're two inner joins,
     /// the order of tables and columns are very very important.
 
-    string strTableName = DictionarySingleton::inputMethodId;
-    strTableName += "_char2word_table";
-    string strColumnWordID = strTableName + ".wordID";    
-    string strColumnCharacters = strTableName + ".characters";
+	//<comment author='b6s'> These strings should be set only once!
+	//string strTableName = DictionarySingleton::inputMethodId;
+	//strTableName += "_char2word_table";
+	//string strColumnWordID = strTableName + ".wordID";    
+	//string strColumnCharacters = strTableName + ".characters";
+	//<comment>
       
     /// bind_foo seems not work on table/column name (sure it can't!),
     /// so use stupid concat...
-    string selectString("SELECT word_table.word,generic_freq_table.freq");
-    string fromString(" FROM ");
-    fromString += strTableName + ",word_table,generic_freq_table";
-    string whereString(" WHERE ");
-    whereString += strColumnCharacters + "='" + characters + "'";
-    whereString += " AND " + strColumnWordID + "=word_table.wordID" +
-        " AND " + strColumnWordID + "=generic_freq_table.wordID";
+	string whereString = " WHERE "+strColumnCharacters+"='"+characters+"'";
 	//<comment author='b6s'> Sort them later.
     //whereString += " ORDER BY generic_freq_table.freq DESC";
 	//</comment>
-    string commandString = selectString + fromString + whereString;
+	string commandString =
+		selectString + fromString + whereString + joinString;
 
     SQLite3Statement *sth =
         dictionaryDB->prepare(commandString.c_str());

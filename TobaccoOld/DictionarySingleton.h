@@ -34,6 +34,18 @@ public:
 		inputMethodId = id;
 		if(inputMethodId == "PhoneticHsu")
 			inputMethodId  = "BoPoMoFo";
+		strTableName = inputMethodId+"_char2word_table";
+		strColumnWordID = strTableName+".wordID";
+		strColumnCharacters = strTableName+".characters";
+
+		selectCountString = "SELECT count("+strColumnWordID +")";
+		fromCountString = " FROM "+strTableName;
+
+		selectString = "SELECT word_table.word,generic_freq_table.freq";
+		fromString = " FROM "+strTableName+",word_table,generic_freq_table";
+		joinString =
+			" AND "+strColumnWordID+"=word_table.wordID"+
+			" AND "+strColumnWordID+"=generic_freq_table.wordID";
 	}
 	void setImTableId(string id) { imTableId = id; }
 
@@ -53,6 +65,16 @@ private:
 	static SQLite3 *imTableDB;
 	string inputMethodId;
 	string imTableId;
+    string strTableName;
+    string strColumnWordID;
+    string strColumnCharacters;
+
+	string selectCountString;
+	string fromCountString;
+
+	string selectString;
+	string fromString;
+	string joinString;
 };
 
 #endif
