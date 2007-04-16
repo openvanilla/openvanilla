@@ -100,11 +100,10 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
     ///
     /// A SQL statement for example:
     /// SELECT word_table.word, generic_freq_table.freq
-    /// FROM phone_char2word_table, word_table, generic_freq_table
-    /// WHERE phone_char2word_table.characters = '£t£«£¿'
-    ///     AND word_table.wordID = phone_char2word_table.wordID
-    ///     AND word_table.wordID = generic_freq_table.wordID
-    /// ORDER BY generic_freq_table.freq DESC"
+    /// FROM BoPoMoFo_char2word_table, word_table, generic_freq_table
+    /// WHERE BoPoMoFo_char2word_table.characters = '£t£«£¿'
+    ///     AND BoPoMoFo_char2word_table.wordID = word_table.wordID
+    ///     AND BoPoMoFo_char2word_table.wordID = generic_freq_table.wordID
     ///
     /// Since there're two inner joins,
     /// the order of tables and columns are very very important.
@@ -116,13 +115,13 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
       
     /// bind_foo seems not work on table/column name (sure it can't!),
     /// so use stupid concat...
-    string selectString("SELECT word_table.word, generic_freq_table.freq");
+    string selectString("SELECT word_table.word,generic_freq_table.freq");
     string fromString(" FROM ");
-    fromString += strTableName + ", word_table, generic_freq_table";
+    fromString += strTableName + ",word_table,generic_freq_table";
     string whereString(" WHERE ");
-    whereString += strColumnCharacters + " = '" + characters + "'";
-    whereString += " AND word_table.wordID = " + strColumnWordID +
-        " AND word_table.wordID = generic_freq_table.wordID";
+    whereString += strColumnCharacters + "='" + characters + "'";
+    whereString += " AND " + strColumnWordID + "=word_table.wordID" +
+        " AND " + strColumnWordID + "=generic_freq_table.wordID";
 	//<comment author='b6s'> Sort them later.
     //whereString += " ORDER BY generic_freq_table.freq DESC";
 	//</comment>
