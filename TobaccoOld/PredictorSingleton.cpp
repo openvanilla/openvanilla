@@ -163,7 +163,7 @@ void PredictorSingleton::addCandidates(
 		case CandidateType::WORD:
 			hasCandidate =
 				dictionary->getWordsByCharacters(
-					characters, vocabularies);
+					characters, vocabularies, false);
 			break;
 		case CandidateType::VOCABLE:
 		default:

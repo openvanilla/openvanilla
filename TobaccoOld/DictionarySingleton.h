@@ -45,12 +45,14 @@ public:
 		joinString =
 			" AND "+strColumnWordID+"=word_table.wordID"+
 			" AND "+strColumnWordID+"=generic_freq_table.wordID";
+		orderString = " ORDER BY generic_freq_table.freq DESC";
+		orderLimitString = orderString+" LIMIT 10";
 	}
 	void setImTableId(string id) { imTableId = id; }
 
 	bool isVocabulary(string characters);
 	bool getWordsByCharacters(string characters,
-		vector<Vocabulary>& vocabularyVectorRef);
+		vector<Vocabulary>& vocabularyVectorRef, bool isLimited);
 	bool getVocablesByCharacters(string characters,
 		vector<Vocabulary>& vocabularyVectorRef);
 
@@ -73,6 +75,8 @@ private:
 	string selectString;
 	string fromString;
 	string joinString;
+	string orderString;
+	string orderLimitString;
 };
 
 #endif

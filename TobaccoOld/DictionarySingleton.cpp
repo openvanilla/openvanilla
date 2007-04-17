@@ -58,7 +58,7 @@ bool DictionarySingleton::isVocabulary(string characters)
 	//string strColumnCharacters = strTableName + ".characters";
 	//</comment>
       
-	string whereString = " WHERE "+strColumnCharacters+"='"+characters+"'";
+	string whereString = " WHERE "+strColumnCharacters+"='"+characters+"' LIMIT 1";
     string commandString = checkString + whereString;
 
     SQLite3Statement *sth =
@@ -82,7 +82,7 @@ bool DictionarySingleton::isVocabulary(string characters)
 }
 
 bool DictionarySingleton::getWordsByCharacters(string characters,
-    vector<Vocabulary>& vocabularyVectorRef)
+    vector<Vocabulary>& vocabularyVectorRef, bool isLimited)
 {
     /// characters-word table schema:    |characters|wordID|
     /// word table schema:               |wordID|word|
@@ -113,11 +113,13 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
     /// bind_foo seems not work on table/column name (sure it can't!),
     /// so use stupid concat...
 	string whereString = " WHERE "+strColumnCharacters+"='"+characters+"'";
-	//<comment author='b6s'> Sort them later.
-    //whereString += " ORDER BY generic_freq_table.freq DESC";
-	//</comment>
-	string commandString =
-		selectString + fromString + whereString + joinString;
+	string commandString;
+	if(isLimited)
+		commandString =
+			selectString+fromString+whereString+joinString+orderLimitString;
+	else
+		commandString =
+			selectString+fromString+whereString+joinString+orderString;
 
     SQLite3Statement *sth =
         dictionaryDB->prepare(commandString.c_str());

@@ -150,34 +150,25 @@ int BiGram::maximumMatching(
 			string tokenSequence = foundCharacterStringVector[j];
 			vector<Vocabulary> vocabularies;
 			dictionary->getWordsByCharacters(
-			    tokenSequence, vocabularies);
+			    tokenSequence, vocabularies, true);
 
             for(size_t k = 0; k < vocabularies.size(); k++)
 				currentVocabularyVector.push_back(vocabularies[k]);
 		}
 
-		//<comment author='b6s'> Filters candidates arbitrarily
-		sort(
-			currentVocabularyVector.begin(),
-			currentVocabularyVector.end(),
-			Vocabulary::isFreqGreater);		
-		//if(currentVocabularyVector[0].word.length() == 1 &&
-		//</comment>
-		size_t thrashold = 0;
-		if(currentVocabularyVector.size() > 10)
-			thrashold = 10;
-		else if(currentVocabularyVector[0].freq > 199) {			
+		size_t threshold = 0;
+		if(currentVocabularyVector[0].freq > 199) {
 			for(size_t step = 0; step < currentVocabularyVector.size(); step++)
 			{
 				if(currentVocabularyVector[step].freq < 200) {
-					thrashold = step;
+					threshold = step;
 					break;
 				}
-			}			
-		}		
-		if(thrashold > 0)
+			}
+		}	
+		if(threshold > 0)
 			currentVocabularyVector.erase(
-				currentVocabularyVector.begin() + thrashold,
+				currentVocabularyVector.begin() + threshold,
 				currentVocabularyVector.end());
 
 		vectorOfVocabularyVector.push_back(currentVocabularyVector);
@@ -198,9 +189,9 @@ int BiGram::maximumMatching(
                 rightVocabularyVector, leftVocabularyVector,
 				combinedVocabularyVector);
 		else
-            BiGram::getVocabularyCombination(
-                leftVocabularyVector, rightVocabularyVector,
-                combinedVocabularyVector);
+			BiGram::getVocabularyCombination(
+				leftVocabularyVector, rightVocabularyVector,
+				combinedVocabularyVector);
 	}
 
 	Vocabulary bestVocabularyCombination = combinedVocabularyVector.front();
