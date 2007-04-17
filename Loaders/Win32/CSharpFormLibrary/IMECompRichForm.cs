@@ -274,13 +274,13 @@ namespace CSharpFormLibrary
         public void MyCallbackFunction()
         {
             string target_google = "http://www.google.com/search?q=";
-            string target_asqa = "http://asqa.iis.sinica.edu.tw/clqa2006/default.aspx?q=";
+            //string target_asqa = "http://asqa.iis.sinica.edu.tw/clqa2006/default.aspx?q=";
             string encodeBuf = System.Web.HttpUtility.UrlEncode(Buf);
             try
             {
-                if (Buf.Length >= 5)
-                    System.Diagnostics.Process.Start(target_asqa + encodeBuf);
-                else
+                //if (Buf.Length >= 5)
+                 //   System.Diagnostics.Process.Start(target_asqa + encodeBuf);
+                //else
                     System.Diagnostics.Process.Start(target_google + encodeBuf);                
             }
             catch
