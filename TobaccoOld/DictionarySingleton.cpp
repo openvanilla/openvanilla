@@ -59,7 +59,7 @@ bool DictionarySingleton::isVocabulary(string characters)
 	//</comment>
       
 	string whereString = " WHERE "+strColumnCharacters+"='"+characters+"'";
-    string commandString = selectCountString + fromCountString + whereString;
+    string commandString = checkString + whereString;
 
     SQLite3Statement *sth =
         DictionarySingleton::dictionaryDB->prepare(commandString.c_str());
@@ -69,18 +69,15 @@ bool DictionarySingleton::isVocabulary(string characters)
     }
 
     if (sth->step() == SQLITE_ROW) {
-        int count = sth->column_int(0);
-        murmur("found[%d]", count);
-        delete sth;
-        
-        if (count > 0)  return true;
-        else            return false;
+		murmur("found!");
+		delete sth;
+		return true;
     }
     else
     {
-        delete sth;
-        murmur("found count but encountered error?");
-        return false;
+		murmur("not found...");
+		delete sth;
+		return false;
     }
 }
 

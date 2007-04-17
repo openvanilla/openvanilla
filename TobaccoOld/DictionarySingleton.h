@@ -38,8 +38,7 @@ public:
 		strColumnWordID = strTableName+".wordID";
 		strColumnCharacters = strTableName+".characters";
 
-		selectCountString = "SELECT count("+strColumnWordID +")";
-		fromCountString = " FROM "+strTableName;
+		checkString = "SELECT "+strColumnWordID + " FROM "+strTableName;
 
 		selectString = "SELECT word_table.word,generic_freq_table.freq";
 		fromString = " FROM "+strTableName+",word_table,generic_freq_table";
@@ -69,8 +68,7 @@ private:
     string strColumnWordID;
     string strColumnCharacters;
 
-	string selectCountString;
-	string fromCountString;
+	string checkString;
 
 	string selectString;
 	string fromString;
