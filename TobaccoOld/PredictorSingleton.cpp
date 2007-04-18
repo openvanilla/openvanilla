@@ -81,20 +81,13 @@ bool PredictorSingleton::setTokenVector(
 	currentToken.withSuffix = false;
 	currentToken.characterStringVector.push_back(currentSequence);
 	currentToken.keystrokes = keystrokes;
-
-    if(doReplace)
-    {
-        if(tokenVector.size() > position)
-			tokenVector[position] = currentToken;
-        else if(tokenVector.size() == position)
-            tokenVector.insert(
-                tokenVector.begin() + position,
-                currentToken);            
-        else
-            return false;
-    }
-    else
-        tokenVector.insert(
+	
+	if(position == tokenVector.size())
+		tokenVector.push_back(currentToken);
+	else if(doReplace)
+		tokenVector[position] = currentToken;
+	else
+		tokenVector.insert(
 			tokenVector.begin() + position, currentToken);
 
     PredictorSingleton::setTokenVectorByBigram();
@@ -113,8 +106,11 @@ void PredictorSingleton::setFixedToken(
 	currentToken.characterStringVector.push_back(currentSequence);
 	currentToken.word = currentWord;
 
-    tokenVector.insert(
-		tokenVector.begin() + position, currentToken);
+	if(position == tokenVector.size())
+		tokenVector.push_back(currentToken);
+	else
+		tokenVector.insert(
+			tokenVector.begin() + position, currentToken);
 
     setTokenVectorByBigram();
 }
