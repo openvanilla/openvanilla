@@ -46,7 +46,7 @@ public:
 			" AND "+strColumnWordID+"=word_table.wordID"+
 			" AND "+strColumnWordID+"=generic_freq_table.wordID";
 		orderString = " ORDER BY generic_freq_table.freq DESC";
-		orderLimitString = orderString+" LIMIT 10";
+		orderLimitString = orderString+" LIMIT 3";
 	}
 	void setImTableId(string id) { imTableId = id; }
 
