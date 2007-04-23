@@ -39,6 +39,11 @@ DictionarySingleton::DictionarySingleton(
 DictionarySingleton::~DictionarySingleton()
 {
     delete DictionarySingleton::dictionaryDB;
+
+	delete [] vocableString;
+	delete [] viewLimitString;
+	delete [] viewString;
+	delete [] checkString;
 }
 
 void DictionarySingleton::lostInstance()
@@ -50,23 +55,15 @@ void DictionarySingleton::lostInstance()
 }
 
 bool DictionarySingleton::isVocabulary(string characters)
-{
-	//<comment author='b6s'> These strings should be set only once!
-	//string strTableName = DictionarySingleton::inputMethodId;
-	//strTableName += "_char2word_table";
-	//string strColumnWordID = strTableName + ".wordID";
-	//string strColumnCharacters = strTableName + ".characters";
-	//</comment>
-      
-	string whereString = " WHERE "+strColumnCharacters+"='"+characters+"' LIMIT 1";
-    string commandString = checkString + whereString;
-
+{      
     SQLite3Statement *sth =
-        DictionarySingleton::dictionaryDB->prepare(commandString.c_str());
+        DictionarySingleton::dictionaryDB->prepare(checkString);
     if (!sth) {
-        murmur("illegal SQL statement[%s]?", commandString.c_str());
+        murmur("illegal SQL statement[%s]?", checkString);
         return false;
     }
+	
+	sth->bind_text(1, characters.c_str());
 
     if (sth->step() == SQLITE_ROW) {
 		murmur("found!");
@@ -103,30 +100,18 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
     /// Since there're two inner joins,
     /// the order of tables and columns are very very important.
 
-	//<comment author='b6s'> These strings should be set only once!
-	//string strTableName = DictionarySingleton::inputMethodId;
-	//strTableName += "_char2word_table";
-	//string strColumnWordID = strTableName + ".wordID";    
-	//string strColumnCharacters = strTableName + ".characters";
-	//<comment>
-      
-    /// bind_foo seems not work on table/column name (sure it can't!),
-    /// so use stupid concat...
-	string whereString = " WHERE "+strColumnCharacters+"='"+characters+"'";
-	string commandString;
+	SQLite3Statement *sth = NULL;
+	const char* command = NULL;
 	if(isLimited)
-		commandString =
-			selectString+fromString+whereString+joinString+orderLimitString;
+		command = viewLimitString;
 	else
-		commandString =
-			selectString+fromString+whereString+joinString+orderString;
-
-    SQLite3Statement *sth =
-        dictionaryDB->prepare(commandString.c_str());
+		command = viewString;	
+	sth = dictionaryDB->prepare(command);
     if (!sth) {
-        murmur("illegal SQL statement[%s]?", commandString.c_str());
-        return false;
+        murmur("illegal SQL statement[%s]?", command);
+		return false;
     }
+	sth->bind_text(1, characters.c_str());
 
     int rows = 0;
     while (sth->step() == SQLITE_ROW) {
@@ -155,14 +140,8 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
 bool DictionarySingleton::getVocablesByCharacters(string characters,
     vector<Vocabulary>& vocabularyVectorRef)
 {
-	char cmd[512];
-	sprintf(
-		cmd,
-		"SELECT value, ord FROM %s WHERE key=?1 ORDER BY ord;",
-		imTableId.c_str());
-
     SQLite3Statement *sth =
-		imTableDB->prepare(cmd);
+		imTableDB->prepare(vocableString);
     if (!sth) return false;
 	sth->bind_text(1, characters.c_str());
        

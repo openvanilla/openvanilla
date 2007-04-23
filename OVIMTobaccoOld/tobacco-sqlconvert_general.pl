@@ -49,6 +49,13 @@ for my $fn_cin (@ARGV) {
 		$table_prefix;
 	    printf "CREATE INDEX %s_index_characters ON %s_char2word_table(characters);\n",
 		$table_prefix, $table_prefix;
+		printf
+			"CREATE VIEW %s_view AS SELECT characters, word, freq ".
+			"FROM %s_char2word_table, word_table, generic_freq_table ".
+			"WHERE %s_char2_word_table.wordID = word_table.wordID ".
+			"AND %s_char2word_table.wordID = generic_freq_table.wordID ".
+			"ORDER BY freq DESC;\n",
+			$table_prefix, $table_prefix, $table_prefix, $table_prefix;
 	}
 	$keyname_sec = 1 if ($_ =~ m/^%keyname\s+begin/);
 	$keyname_sec = 0 if ($_ =~ m/^%keyname\s+end/);

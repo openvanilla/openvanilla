@@ -34,21 +34,26 @@ public:
 		inputMethodId = id;
 		if(inputMethodId == "PhoneticHsu")
 			inputMethodId  = "BoPoMoFo";
-		strTableName = inputMethodId+"_char2word_table";
-		strColumnWordID = strTableName+".wordID";
-		strColumnCharacters = strTableName+".characters";
 
-		checkString = "SELECT "+strColumnWordID + " FROM "+strTableName;
-
-		selectString = "SELECT word_table.word,generic_freq_table.freq";
-		fromString = " FROM "+strTableName+",word_table,generic_freq_table";
-		joinString =
-			" AND "+strColumnWordID+"=word_table.wordID"+
-			" AND "+strColumnWordID+"=generic_freq_table.wordID";
-		orderString = " ORDER BY generic_freq_table.freq DESC";
-		orderLimitString = orderString+" LIMIT 3";
+		sprintf(
+			checkString,
+			"SELECT wordID FROM %s_char2word_table WHERE characters=?1 LIMIT 1;",
+			inputMethodId.c_str());
+		sprintf(
+			viewString,
+			"SELECT word, freq FROM %s_view WHERE characters=?1",
+			inputMethodId.c_str());
+		strcpy(viewLimitString, viewString);
+		strcat(viewLimitString, " LIMIT 3");
 	}
-	void setImTableId(string id) { imTableId = id; }
+
+	void setImTableId(string id) {
+		imTableId = id;
+		sprintf(
+			vocableString,
+			"SELECT value, ord FROM %s WHERE key=?1 ORDER BY ord;",
+			imTableId.c_str());
+	}
 
 	bool isVocabulary(string characters);
 	bool getWordsByCharacters(string characters,
@@ -64,19 +69,14 @@ private:
 	static DictionarySingleton* itsInstance;
 	static SQLite3 *dictionaryDB;
 	static SQLite3 *imTableDB;
+
 	string inputMethodId;
 	string imTableId;
-    string strTableName;
-    string strColumnWordID;
-    string strColumnCharacters;
 
-	string checkString;
-
-	string selectString;
-	string fromString;
-	string joinString;
-	string orderString;
-	string orderLimitString;
+	char checkString[256];
+	char viewString[256];
+	char viewLimitString[256];
+	char vocableString[128];
 };
 
 #endif
