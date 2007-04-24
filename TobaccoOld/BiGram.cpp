@@ -24,8 +24,8 @@ int BiGram::maximumMatching(
     DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
     size_t index, size_t stop, bool doBackward)
 {
-	vector<int> boundaryVector;
-	vector< vector<Vocabulary> > vectorOfVocabularyVector;
+	vector<int> boundaryVector(MAX_CONTEXT_LENGTH);
+	vector< vector<Vocabulary> > vectorOfVocabularyVector(MAX_CONTEXT_LENGTH);
 	size_t begin = index;
 	size_t end = stop;
 	if(doBackward)
@@ -80,7 +80,6 @@ int BiGram::maximumMatching(
 			for(size_t i = 0; i < currentCharacterStringVector.size(); ++i)
 			{
 				string tokenSequence = currentCharacterStringVector[i];
-				vector<Vocabulary> tempVocabularies;
 				if(dictionary->isVocabulary(tokenSequence))
 				{
 					foundFlag = true;
@@ -144,13 +143,18 @@ int BiGram::maximumMatching(
 			}
 		}
 
-		vector<Vocabulary> currentVocabularyVector;
+		vector<Vocabulary> currentVocabularyVector(
+			DictionarySingleton::N_BEST * foundCharacterStringVector.size());
 		for(size_t j = 0; j < foundCharacterStringVector.size(); ++j)
 		{
 			string tokenSequence = foundCharacterStringVector[j];
-			vector<Vocabulary> vocabularies;
-			dictionary->getWordsByCharacters(
+			vector<Vocabulary> vocabularies(DictionarySingleton::N_BEST);
+			bool found = dictionary->getWordsByCharacters(
 			    tokenSequence, vocabularies, true);
+
+			//<comment author='b6s'> Shit happeds on Vista!
+			if(!found) return -1;
+			//</comment>
 
             for(size_t k = 0; k < vocabularies.size(); k++)
 				currentVocabularyVector.push_back(vocabularies[k]);
