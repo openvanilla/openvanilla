@@ -241,12 +241,12 @@ void PredictorSingleton::setSelectedCandidate(
 		candidateVector[selectedCandidateIndex].position;
 	for(size_t i = head, offset = 0;
 		i <= index;
-		i++, offset += BiGram::MAX_CONTEXT_LENGTH - 1)
+		i++, offset += 3)	// 3 is the magical number of UTF-8 Chinese length
 	{
 		tokenVector[i].isFixed = true;
 		tokenVector[i].word =
 			selectedCandidateWordString.substr(
-				offset, BiGram::MAX_CONTEXT_LENGTH - 1);
+				offset, 3); // UTF-8 Chinese length
 	}
 	
 	setComposedString();
