@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OpenVanilla>
+    <dict name="OVIMTobacco-hsu">
+        <key name="enable" value="1" />
+        <key name="selectKey" value="123456789" />
+        <key name="wildcard" value="0" />
+        <key name="warningBeep" value="1" />
+        <key name="autoCompose" value="0" />
+        <key name="hitMaxAndCompose" value="0" />
+        <key name="shiftSelectionKey" value="0" />
+        <key name="chooseInFrontOfCursor" value="1" />
+        <key name="clearSequenceOnError" value="1" />
+        <key name="maxKeySequenceLength" value="4" />
+        <key name="priority" value="1" />
+    </dict>
+    <dict name="OVIMTobacco-bpmf_punctuation">
+        <key name="enable" value="1" />
+        <key name="selectKey" value="123456789" />
+        <key name="wildcard" value="0" />
+        <key name="warningBeep" value="1" />
+        <key name="autoCompose" value="0" />
+        <key name="hitMaxAndCompose" value="0" />
+        <key name="shiftSelectionKey" value="0" />
+        <key name="chooseInFrontOfCursor" value="1" />
+        <key name="clearSequenceOnError" value="1" />
+        <key name="maxKeySequenceLength" value="4" />        
+        <key name="priority" value="2" />
+    </dict>
+    <dict name="OVIMTobacco-cj">
+        <key name="enable" value="1" />
+        <key name="selectKey" value="123456789" />
+        <key name="wildcard" value="0" />
+        <key name="warningBeep" value="1" />
+        <key name="autoCompose" value="0" />
+        <key name="hitMaxAndCompose" value="0" />
+        <key name="shiftSelectionKey" value="0" />
+        <key name="chooseInFrontOfCursor" value="1" />
+        <key name="clearSequenceOnError" value="1" />
+        <key name="maxKeySequenceLength" value="5" />        
+        <key name="priority" value="3" />
+    </dict>
+</OpenVanilla>

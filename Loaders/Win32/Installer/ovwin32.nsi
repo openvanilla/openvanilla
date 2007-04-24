@@ -604,6 +604,9 @@ SetOutPath "$WINDIR\"
   ;File "OpenVanilla\CSharpFormLibrary.dll"
   nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
   nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" install "$WINDIR\OpenVanilla\CSharpFormLibrary.dll"'
+SetOutPath "$APPDATA\OpenVanilla\"
+  File "config.xml"
+  File "orz.txt"
 SectionEnd
 
 Section -AdditionalIcons
