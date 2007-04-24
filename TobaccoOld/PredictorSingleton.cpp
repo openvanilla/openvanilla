@@ -19,6 +19,7 @@ PredictorSingleton::PredictorSingleton(const char* dbFilePath)
 {
 	dictionary =
 	   DictionarySingleton::getInstance(dbFilePath);
+	tokenVector.reserve(BiGram::MAX_CONTEXT_LENGTH);
 }
 
 PredictorSingleton::~PredictorSingleton()
