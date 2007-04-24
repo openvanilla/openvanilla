@@ -24,8 +24,10 @@ int BiGram::maximumMatching(
     DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
     size_t index, size_t stop, bool doBackward)
 {
-	vector<int> boundaryVector(MAX_CONTEXT_LENGTH);
-	vector< vector<Vocabulary> > vectorOfVocabularyVector(MAX_CONTEXT_LENGTH);
+	vector<int> boundaryVector;
+	boundaryVector.reserve(MAX_CONTEXT_LENGTH);
+	vector< vector<Vocabulary> > vectorOfVocabularyVector;
+	vectorOfVocabularyVector.reserve(MAX_CONTEXT_LENGTH);
 	size_t begin = index;
 	size_t end = stop;
 	if(doBackward)
@@ -143,12 +145,14 @@ int BiGram::maximumMatching(
 			}
 		}
 
-		vector<Vocabulary> currentVocabularyVector(
+		vector<Vocabulary> currentVocabularyVector;
+		currentVocabularyVector.reserve(
 			DictionarySingleton::N_BEST * foundCharacterStringVector.size());
 		for(size_t j = 0; j < foundCharacterStringVector.size(); ++j)
 		{
 			string tokenSequence = foundCharacterStringVector[j];
-			vector<Vocabulary> vocabularies(DictionarySingleton::N_BEST);
+			vector<Vocabulary> vocabularies;
+			vocabularies.reserve(DictionarySingleton::N_BEST);
 			bool found = dictionary->getWordsByCharacters(
 			    tokenSequence, vocabularies, true);
 
