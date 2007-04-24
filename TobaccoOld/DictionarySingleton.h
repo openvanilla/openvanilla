@@ -45,7 +45,7 @@ public:
 			inputMethodId.c_str());
 		sprintf(
 			viewLimitString,
-			"SELECT word, freq FROM %s_view WHERE characters=?1 LIMIT %s",
+			"SELECT word, freq FROM %s_view WHERE characters=?1 LIMIT %d",
 			inputMethodId.c_str(),
 			N_BEST);
 	}
