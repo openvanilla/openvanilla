@@ -43,8 +43,11 @@ public:
 			viewString,
 			"SELECT word, freq FROM %s_view WHERE characters=?1",
 			inputMethodId.c_str());
-		strcpy(viewLimitString, viewString);
-		strcat(viewLimitString, " LIMIT 3");
+		sprintf(
+			viewLimitString,
+			"SELECT word, freq FROM %s_view WHERE characters=?1 LIMIT %s",
+			inputMethodId.c_str(),
+			N_BEST);
 	}
 
 	void setImTableId(string id) {
@@ -60,6 +63,8 @@ public:
 		vector<Vocabulary>& vocabularyVectorRef, bool isLimited);
 	bool getVocablesByCharacters(string characters,
 		vector<Vocabulary>& vocabularyVectorRef);
+
+	const static size_t N_BEST = 3;
 
 protected:
 	DictionarySingleton(const char* dbFilePath);

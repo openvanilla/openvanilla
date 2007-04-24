@@ -24,9 +24,6 @@ public:
 	   vector<Vocabulary>& combinedRef);
 
 	const static size_t MAX_CONTEXT_LENGTH = 7;
-
-private:
-	const static size_t N_BEST = 3;
 };
 
 #endif
