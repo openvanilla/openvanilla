@@ -231,12 +231,16 @@ void BiGram::getVocabularyCombination(
     vector<Vocabulary>& combinedRef)
 {
     vector<Vocabulary> combinedVocabularyVector;
-	size_t leftBound = leftRef.size();
-	if(leftBound > N_BEST)
-		leftBound = N_BEST;
-	size_t rightBound = rightRef.size();
-	if(rightBound > N_BEST)
-		rightBound = N_BEST;
+	//<comment author='b6s'> No needs to combine currently...
+	size_t leftBound = 1;
+	size_t rightBound = 1;
+	//</comment>
+	//size_t leftBound = leftRef.size();
+	//if(leftBound > N_BEST)
+	//	leftBound = N_BEST;
+	//size_t rightBound = rightRef.size();
+	//if(rightBound > N_BEST)
+	//	rightBound = N_BEST;
 
 	for(size_t i = 0; i < leftBound; ++i)
 	{
@@ -252,22 +256,25 @@ void BiGram::getVocabularyCombination(
 			double score = 0.0;
 			if(matrix > 0) {
 				combinedVocabulary.freq = matrix;
-				score = matrix;			
+				score = matrix;
 			} else {
 				combinedVocabulary.freq = 1;
 				score = numeric_limits<double>::min();
 			}
-				
+
 			combinedVocabulary.prob =
 				-(log(score/numeric_limits<double>::max()) / log(2.0));
 			combinedVocabularyVector.push_back(combinedVocabulary);
 		}
 	}
 	
-	sort(
-		combinedVocabularyVector.begin(),
-		combinedVocabularyVector.end(),
-		Vocabulary::isProbGreater);
+
+	//<comment author='b6s'> The order was prepared by SQL and won't change
+	//sort(
+	//	combinedVocabularyVector.begin(),
+	//	combinedVocabularyVector.end(),
+	//	Vocabulary::isProbGreater);
+	//</comment>
 
 	combinedRef = combinedVocabularyVector;
 }
