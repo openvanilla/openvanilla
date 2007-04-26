@@ -128,6 +128,11 @@ ImeProcessKey(HIMC hIMC, UINT uVKey, LPARAM lKeyData, CONST LPBYTE lpbKeyState)
 	BOOL isProcessed = FALSE;
 	murmur("ImeProcessKey: %ud", uVKey);
 	if (!hIMC) isProcessed;
+	
+	/*DWORD conv, sentence;
+	ImmGetConversionStatus(hIMC, &conv, &sentence);
+	//Alphanumeric mode
+	if(!(conv & IME_CMODE_NATIVE)) return isProcessed;*/
 
 	ImmController* controller = ImmController::open();
 	int controlState =

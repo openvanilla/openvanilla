@@ -165,9 +165,25 @@ LRESULT NotifyHandle(HIMC hUICurIMC,
 			UIChangeHalfFull(hWnd); 
 			break;
 		case 2:  //Change UI CHI/ENG
+		{
 			murmur("\tChange UI CHI/ENG.");
 			UIChangeChiEng(hWnd);  
+
+		    //通知 windows API 輸入法狀態改變
+			HIMC imc = ImmGetContext( hWnd );
+			if( imc )
+			{
+				isChinese=!isChinese;
+				DWORD conv, sentence;
+				ImmGetConversionStatus( imc, &conv, &sentence);
+				if( isChinese )
+					conv |= IME_CMODE_NATIVE;
+				else				
+					conv &= ~IME_CMODE_NATIVE;									
+				ImmSetConversionStatus( imc, conv, sentence);
+			}				
 			break;
+		}
 		case 3: //Change Modules by Mouse
 			{
 			murmur("\tChange Modules by Mouse");

@@ -48,6 +48,7 @@ namespace CSharpFormLibrary
         private System.Windows.Forms.ContextMenu menuModule;
         private System.Windows.Forms.Panel panelHead;
 		private System.Windows.Forms.Panel panelBody;
+        private bool isChinese=true;
 
         //private CSharpFormLibrary.IMESymbolForm m_symbolForm = null;
         private IMEFilterForm m_symbolForm = null;
@@ -280,6 +281,7 @@ namespace CSharpFormLibrary
             this.buttonZhEn.Name = "buttonZhEn";
             this.buttonZhEn.Size = new System.Drawing.Size(40, 33);
             this.buttonZhEn.TabIndex = 2;
+            this.buttonZhEn.Text = "¤¤";
             this.buttonZhEn.UseVisualStyleBackColor = false;
             this.buttonZhEn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonZhEn_MouseUp);
             // 
@@ -364,8 +366,9 @@ namespace CSharpFormLibrary
 			this.Location = new Point(x,y);
 		}
 
-		public void SetChiEng(bool isChinese)
+		public void SetChiEng()
 		{
+            isChinese = !isChinese;
 			if(isChinese)   this.buttonZhEn.Text = "¤¤";
 			else            this.buttonZhEn.Text = "­^";
 		}

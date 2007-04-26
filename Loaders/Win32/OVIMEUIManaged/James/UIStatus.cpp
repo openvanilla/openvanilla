@@ -257,7 +257,7 @@ void UICreateStatusWindow(HWND hUIWnd)
 		//UISetStatusModStr();
 
 		//設定中英
-		_SetStatusChiEng(isChinese);
+		//_SetStatusChiEng();
 
 		//設定繁簡
 		_SetStatusSimpifiedOrTraditional(isTraditional);  		
@@ -466,25 +466,11 @@ void UIChangeChiEng(HWND hWnd)
 	//SendMessage( hToolbar, TB_CHANGEBITMAP, ID_CHI_ENG, MAKELPARAM(isChinese ? 2 : 3, 0));
 		
 	//設定中英
-	isChinese = !isChinese;
-	_SetStatusChiEng(isChinese);  
+	//isChinese = !isChinese;
+	_SetStatusChiEng();  
 
 	//refresh
 	UIShowStatusWindow();
-
-	
-    //通知 windows API 輸入法狀態改變
-	HIMC imc = ImmGetContext( hIMEWnd );
-	if( imc )
-	{
-		DWORD conv, sentence;
-		ImmGetConversionStatus( imc, &conv, &sentence);
-		if( isChinese )
-			conv |= IME_CMODE_NATIVE;
-		else
-			conv &= ~IME_CMODE_NATIVE;
-		ImmSetConversionStatus( imc, conv, sentence);
-	}	
 }
 
 void UIChangeSimpifiedOrTraditional(HWND hWnd)

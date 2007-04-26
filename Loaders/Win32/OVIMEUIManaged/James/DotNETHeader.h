@@ -7,7 +7,7 @@ HWND _CreateStatusPage();
 void _ShowStatusPage();
 void _MoveStatusPage(int, int);
 void _HideStatusPage();
-void _SetStatusChiEng(bool);
+void _SetStatusChiEng();
 void _SetStatusSimpifiedOrTraditional(bool);
 void _SetStatusModString(int);
 void _SetStatusMenuModString(const wchar_t* menuModStr);

@@ -30,12 +30,13 @@ void ImmController::close(void)
 int ImmController::onKeyShiftOnly(HIMC hIMC, LPARAM lKeyData)
 {
 	int shiftState;
-	if(!getKeyInfo(lKeyData).isKeyUp) {
+	if(!getKeyInfo(lKeyData).isKeyUp)  // Shift pressed
+	{
 		murmur("shift-only: down");
 		m_shiftPressedTime = GetTickCount();
 		shiftState = 1;
 	}
-	else if(GetTickCount() - m_shiftPressedTime < 200)
+	else if(GetTickCount() - m_shiftPressedTime < 200) // Shift Up
 	{
 		murmur("shift-only: up");
 		//Toggle Chinese/English mode.
@@ -44,7 +45,8 @@ int ImmController::onKeyShiftOnly(HIMC hIMC, LPARAM lKeyData)
 		shiftState = 2;
 		m_shiftPressedTime = 0;
 	}
-	else {
+	else   //Shift Up too late
+	{ 
 		murmur("shift-only: other");
 		shiftState = 0;
 		m_shiftPressedTime = 0;
@@ -56,13 +58,15 @@ int ImmController::onKeyShiftOnly(HIMC hIMC, LPARAM lKeyData)
 int ImmController::onKeyShift(HIMC hIMC, UINT uVKey, LPARAM lKeyData)
 {
 	int processState;
-	if(LOWORD(uVKey) == VK_SPACE) {
+	if(LOWORD(uVKey) == VK_SPACE)   //shift + space
+	{
 		murmur("S: vkey=%u", LOWORD(uVKey));
 		murmur("S_Space: Full-Half char");
 		m_shiftPressedTime = 0;
 		processState = 1;
 	}
-	else if(LOWORD(uVKey) == VK_SHIFT) {
+	else if(LOWORD(uVKey) == VK_SHIFT)  // only shift
+	{
 		switch(onKeyShiftOnly(hIMC, lKeyData)) {
 			case 1:
 				murmur("S: EN-ZH: waiting for key-up");
@@ -70,7 +74,8 @@ int ImmController::onKeyShift(HIMC hIMC, UINT uVKey, LPARAM lKeyData)
 				break;
 			case 2:
 				murmur("S: EN-ZH: proceeded");
-				processState = 1;
+				//processState = 1;
+				processState = 2;
 				break;
 			case 0:
 			default:
@@ -80,7 +85,8 @@ int ImmController::onKeyShift(HIMC hIMC, UINT uVKey, LPARAM lKeyData)
 				break;
 		}
 	}
-	else {
+	else  //shift + ?
+	{
 		murmur("S_%u: assume normal", LOWORD(uVKey));
 		m_shiftPressedTime = 0;
 		processState = 2;
@@ -171,7 +177,8 @@ int ImmController::onControlEvent
 {
 	int processState;
 
-	if(getKeyInfo(lKeyData).isKeyUp) {
+	if(getKeyInfo(lKeyData).isKeyUp) 
+	{
 		if(LOWORD(uVKey) == VK_SHIFT) {
 			processState = onKeyShift(hIMC, uVKey, lKeyData);
 		} else {
@@ -198,9 +205,13 @@ int ImmController::onControlEvent
 	else {
 		murmur("other state: assume normal");
 		m_shiftPressedTime = 0;
-		processState = 2;
-	}
 
+		DWORD conv, sentence;
+		ImmGetConversionStatus(hIMC, &conv, &sentence);
+		//Alphanumeric mode
+		if(!(conv & IME_CMODE_NATIVE)) processState = 0;
+		else processState = 2;
+	}
 	return processState;
 }
 
@@ -209,12 +220,13 @@ BOOL ImmController::onTypingEvent
 {
 	BOOL isProcessed = FALSE;
 
-	if(getKeyInfo(lKeyData).isKeyUp) return isProcessed;
-
+	//if(getKeyInfo(lKeyData).isKeyUp) return isProcessed;
+/*
 	DWORD conv, sentence;
 	ImmGetConversionStatus(hIMC, &conv, &sentence);
 	//Alphanumeric mode
 	if(!(conv & IME_CMODE_NATIVE)) return isProcessed;
+	*/
 
 	ImmModel* model = ImmModel::open(hIMC);
 	if(!m_isCompStarted &&
@@ -272,7 +284,7 @@ BOOL ImmController::onTypingEvent
 	AVKeyCode keycode(k);
 	if(LOWORD(lpbKeyState[VK_CAPITAL]))
 		keycode.setCapslock(1);
-	if(isShiftPressed(lpbKeyState))
+	if(isShiftPressed(lpbKeyState) || LOWORD(uVKey) == VK_SHIFT)
 		keycode.setShift(1);
 	if(isCtrlPressed(lpbKeyState))
 		keycode.setCtrl(1);

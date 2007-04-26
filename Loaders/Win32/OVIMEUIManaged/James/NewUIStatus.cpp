@@ -56,9 +56,9 @@ void _MoveStatusPage(int x,int y)
 	CSharpStatusWrapper::Instance()->SetLocation(x,y);	
 }
 
-void _SetStatusChiEng(bool isChinese)
+void _SetStatusChiEng()
 {	
-	CSharpStatusWrapper::Instance()->SetChiEng(isChinese);	
+	CSharpStatusWrapper::Instance()->SetChiEng();	
 }
 
 void _SetStatusSimpifiedOrTraditional(bool isTraditional)
