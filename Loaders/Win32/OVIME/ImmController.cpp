@@ -201,6 +201,11 @@ int ImmController::onControlEvent
 	else if(isShiftPressed(lpbKeyState)) {
 		murmur("shift state");
 		processState = onKeyShift(hIMC, uVKey, lKeyData);
+		DWORD conv, sentence;
+		ImmGetConversionStatus(hIMC, &conv, &sentence);
+		//Alphanumeric mode
+		if(!(conv & IME_CMODE_NATIVE)) processState = 0;
+		//else processState = onKeyShift(hIMC, uVKey, lKeyData);
 	}
 	else {
 		murmur("other state: assume normal");
