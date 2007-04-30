@@ -4,6 +4,7 @@
 	Version="8.00"
 	Name="OVIMRomanNew"
 	ProjectGUID="{A5AF52BA-AEA5-4D62-8DED-73216D23FE31}"
+	RootNamespace="OVIMRomanNew"
 	Keyword="ExtStoredProcProj"
 	>
 	<Platforms>
@@ -66,7 +67,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="sqlite3.lib aspell-15.lib"
+				AdditionalDependencies="sqlite3.lib dhunspell.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
 				ModuleDefinitionFile="..\OVModule.def"
@@ -97,6 +98,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\Windows\OpenVanilla\Modules\OVIMRomanNew.dll&quot;"
 			/>
 		</Configuration>
 		<Configuration

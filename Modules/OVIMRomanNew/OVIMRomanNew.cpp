@@ -24,8 +24,8 @@
 //#include "OVSQLite3.h"
 
 //#include "LuceneSearch.h"
-#include "aspell.h"
-
+//#include "aspell.h"
+#include "dhunspell.h"
 using namespace std;
 
 int is_punc(char i){
@@ -61,7 +61,7 @@ public:
     char buf[ebMaxKeySeq];
     size_t len;
 };
-
+const int ovMaxCandiLen = 32;
 class IMGCandidate
 {
 public:
@@ -83,9 +83,11 @@ const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key);
 
 string modulePath;
 
-AspellCanHaveError* aspell_possible_err = 0;
-AspellSpeller* aspell_checker = 0;
-AspellConfig* aspell_config = 0;
+//AspellCanHaveError* aspell_possible_err = 0;
+//AspellSpeller* aspell_checker = 0;
+//AspellConfig* aspell_config = 0;
+
+HunspellHandle hunspell_checker = NewHunspell("C:\\hunspell\\spell_en_US\\en_US.aff","C:\\hunspell\\spell_en_US\\en_US.dic");
 
 class OVIMRomanNewContext : public OVInputMethodContext
 {
@@ -94,28 +96,33 @@ public:
 	{
 		clear();
 
-		aspell_config = new_aspell_config();
-		aspell_config_replace(aspell_config, "lang", "en_US");		
+//		aspell_config = new_aspell_config();
+//		aspell_config_replace(aspell_config, "lang", "en_US");		
 
-		aspell_possible_err = new_aspell_speller(aspell_config);
-		if (aspell_error_number(aspell_possible_err) != 0)
-			puts(aspell_error_message(aspell_possible_err));
-		else
-			aspell_checker = to_aspell_speller(aspell_possible_err);
+//		aspell_possible_err = new_aspell_speller(aspell_config);
+//		if (aspell_error_number(aspell_possible_err) != 0)
+//			puts(aspell_error_message(aspell_possible_err));
+//		else
+//			aspell_checker = to_aspell_speller(aspell_possible_err);
 	}
     virtual void clear() { keyseq.clear();} 
 
-	virtual void end() { delete_aspell_speller(aspell_checker); }
+//	virtual void end() { delete_aspell_speller(aspell_checker); }
+virtual void end() { DeleteHunspell(hunspell_checker); }
     virtual int keyEvent(
         OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* s)    
     {
         if(candi.count()) {
             if (k->code()==ovkLeft || k->code()==ovkUp) {
                 if(pagenumber > 0) pagenumber--;
+				else
+					pagenumber = pagetotal;
                 return showcandi(i);
     		}
     		if (k->code()==ovkRight || k->code()==ovkDown) {
-                if(pagenumber < pagetotal + 1) pagenumber++;
+                				if(pagenumber == pagetotal) 
+					pagenumber = 0;
+				else pagenumber++;
                 return showcandi(i);
     		}
             if(k->code()==ovkTab){
@@ -131,8 +138,8 @@ public:
                 if(n+pagenumber*10 >= candi.count()) return 0;
 				const char* correctedWord = candi.item(n+pagenumber*10);
 
-				aspell_speller_store_replacement(
-					aspell_checker, static_cast<const char*>(keyseq.buf), -1, correctedWord, -1);
+				//aspell_speller_store_replacement(
+				//	aspell_checker, static_cast<const char*>(keyseq.buf), -1, correctedWord, -1);
 
                 b->clear()->append(correctedWord)->append(" ")->send();
 		    	if (i->onScreen()) i->hide();
@@ -165,8 +172,8 @@ public:
             int n = (k->code() - '1' + 10) % 10;
 			const char* correctedWord = candi.item(n+pagenumber*10) + keyseq.len;
 
-			aspell_speller_store_replacement(
-				aspell_checker, static_cast<const char*>(keyseq.buf), -1, correctedWord, -1);
+		//	aspell_speller_store_replacement(
+		//		aspell_checker, static_cast<const char*>(keyseq.buf), -1, correctedWord, -1);
 
             b->clear()->append(keyseq.buf)->append(correctedWord)->append(" ")->send();
 
@@ -174,15 +181,32 @@ public:
 			keyseq.clear();
 			return closeCandidateWindow(i);
 		}
+		if (k->code() == ovkReturn)
+		{
+			if(!(strlen(keyseq.buf)))
+					return 0;
 
-		if (k->code()==ovkSpace || k->code()==ovkReturn || is_punc(k->code())) {
+			if (keyseq.buf)
+			{
+				if(!(strlen(keyseq.buf)))
+					return 0;
+
+				keyseq.clear();
+				//keyseq.add(k->code());
+				b->append(keyseq.buf)->send();
+				keyseq.clear();
+				return 1;
+			}
+		}
+		if (k->code()==ovkSpace || is_punc(k->code())) {
             if (!(strlen(keyseq.buf))) return 0;   // empty buffer, do nothing            
 
             if(keyseq.buf) {
                 pagenumber = 0;
                 if(!isEnglish(keyseq.buf) &&
 					//spellCheckerByLuceneFuzzySearch(keyseq.buf))
-					spellCheckerByAspell(keyseq.buf))
+					//spellCheckerByAspell(keyseq.buf))
+spellCheckerByHunspell(keyseq.buf))
                 {
 					showcandi(i);
 					return 1;
@@ -205,8 +229,10 @@ public:
 			keyseq.remove();
             if(keyseq.len && i->onScreen()) {
                 pagenumber = 0;
-                if(!isEnglish(keyseq.buf) &&
-					spellCheckerByAspell(keyseq.buf))
+                //if(!isEnglish(keyseq.buf) &&
+		//			spellCheckerByAspell(keyseq.buf))
+				  if(!isEnglish(keyseq.buf) &&
+					spellCheckerByHunspell(keyseq.buf))
 				{
 					showcandi(i);
 					return 1;
@@ -224,8 +250,10 @@ public:
 		if(k->code()==ovkTab){
             if(keyseq.buf) {
                 pagenumber = 0;
+                /*if(!isEnglish(keyseq.buf) &&
+					spellCheckerByAspell(keyseq.buf))*/
                 if(!isEnglish(keyseq.buf) &&
-					spellCheckerByAspell(keyseq.buf))
+					spellCheckerByHunspell(keyseq.buf))
 				{
 					showcandi(i);
 					return 1;
@@ -252,8 +280,12 @@ public:
             if(keyseq.buf && i->onScreen()) {
                 pagenumber = 0;
                 temp = 0;
+                /*if(!isEnglish(keyseq.buf) &&
+					spellCheckerByAspell(keyseq.buf))*/
+				//murmur("OVIMRomanNew: isPrint.isEnglish = %d", isEnglish(keyseq.buf));
+				//murmur("OVIMRomanNew: isPrint.spellCheckerByHunspell(candi.count) = %d", spellCheckerByHunspell(keyseq.buf));
                 if(!isEnglish(keyseq.buf) &&
-					spellCheckerByAspell(keyseq.buf))
+					spellCheckerByHunspell(keyseq.buf))
 				{
 					showcandi(i);
 					return 1;
@@ -279,7 +311,8 @@ protected:
     //int updatepagetotal(char* buf);
     //int spellCheckerBySQLiteSoundex(char* buf);
     //int spellCheckerByLuceneFuzzySearch(char* buf);
-	size_t spellCheckerByAspell(char* buf);
+	//size_t spellCheckerByAspell(char* buf);
+	size_t spellCheckerByHunspell(char* buf);
     bool isEnglish(char* buf);
 
 protected:
@@ -291,28 +324,100 @@ protected:
 };
 
 bool OVIMRomanNewContext::isEnglish(char* buf) {
-	return aspell_speller_check(aspell_checker, static_cast<const char*>(buf), -1) != 0 ? true : false;
+	//return aspell_speller_check(aspell_checker, static_cast<const char*>(buf), -1) != 0 ? true : false;
+	return spell(hunspell_checker, static_cast<const char*>(buf)) != 0 ? true : false;
+
 }
 
-size_t OVIMRomanNewContext::spellCheckerByAspell(char* buf)
+size_t OVIMRomanNewContext::spellCheckerByHunspell(char* buf)
 {
+    //char* result;
+	char result[200];
+	
+
     pagenumber=0;
     pagetotal=0;
     candi.clear();
 
-     const AspellWordList * suggestions =
-		 aspell_speller_suggest(aspell_checker, static_cast<const char*>(buf), -1);
-     AspellStringEnumeration * aspell_elements = aspell_word_list_elements(suggestions);
-     const char * word;
-     while ( (word = aspell_string_enumeration_next(aspell_elements)) != NULL )
+	memset(result, 0, sizeof(result));
+    		
+	suggest(hunspell_checker, const_cast<const char*>(buf), result); 
+	murmur("RomanNew result : %s", result);
+	//char* tempResult = gets(result);
+
+	int i = 0, j = 0;
+	
+	//initial the intoDoubleQ is false.
+	bool intoDoubleQ = false;
+	char word[15];
+	memset(word, 0, sizeof(word));
+	do
+	{
+		if(result[i] == '"')
+		{
+			if(intoDoubleQ == true)
+			{
+				//word[j] = '@';
+				//word[j+1] = 0;
 		 candi.add(string(word));
+				j = 0;
+			}
+			intoDoubleQ = !intoDoubleQ;
 
-     delete_aspell_string_enumeration(aspell_elements);
+		}
+		else if(result[i] == ',')
+		{
+			//do nothing
+		}
+		else
+		{
+			word[j] = result[i];
+			j++;
+		}
 
+		i++;
+		murmur("RomanNew Suggest array [I] : %d", i);
+	}while(result[i] != '\0');
+
+	//const AspellWordList * suggestions =
+	//	 aspell_speller_suggest(aspell_checker, static_cast<const char*>(buf), -1);
+ //    AspellStringEnumeration * aspell_elements = aspell_word_list_elements(suggestions);
+   //  const char * word;
+   //  while ( (word = aspell_string_enumeration_next(aspell_elements)) != NULL )
+		 //candi.add(string(word));
+
+   //  delete_aspell_string_enumeration(aspell_elements);
+
+	//original
+	//candi.add(string(result));
+
+	//Jaimie Test
+	//candi.add("gi");
+	//candi.add("gi2");
+     //candi.count() = 10;
 	 pagetotal=candi.count()/10;
 
 	 return candi.count();
 }
+//size_t OVIMRomanNewContext::spellCheckerByAspell(char* buf)
+//{
+//    pagenumber=0;
+//    pagetotal=0;
+//    candi.clear();
+//
+//     const AspellWordList * suggestions =
+//		 aspell_speller_suggest(aspell_checker, static_cast<const char*>(buf), -1);
+//     AspellStringEnumeration * aspell_elements = aspell_word_list_elements(suggestions);
+//     const char * word;
+//     while ( (word = aspell_string_enumeration_next(aspell_elements)) != NULL )
+//		 candi.add(string(word));
+//
+//     delete_aspell_string_enumeration(aspell_elements);
+//
+//	 pagetotal=candi.count()/10;
+//
+//	 return candi.count();
+//}
 
 /*
 bool OVIMRomanNewContext::isEnglish(char* buf) {
@@ -403,7 +508,7 @@ int OVIMRomanNewContext::showcandi(OVCandidate* i) {
         return 1;
     }
 
-    char dispstr[32];    
+    char dispstr[128];    
     const char *selkey="1234567890";
     i->clear();
     
@@ -411,7 +516,7 @@ int OVIMRomanNewContext::showcandi(OVCandidate* i) {
     for (size_t j=0; j<10; j++) {
         if (j+pagenumber*10 >= total) break;
         sprintf(dispstr, "%c.", selkey[j]);
-        i->append(dispstr)->append(candi.item(j+pagenumber*10))->append("\n");
+        i->append(dispstr)->append(candi.item(j+pagenumber*10))->append("\t");
     }
     
     sprintf(dispstr, "(%d/%d)", pagenumber + 1, pagetotal + 1);
@@ -432,8 +537,11 @@ public:
     }
 
     virtual const char* localizedName(const char *locale) {
-        if (!strcasecmp(locale, "zh_TW")) return "新英數";
-        if (!strcasecmp(locale, "zh_CN")) return "新英数";
+        //newline error temp comment
+		//if (!strcasecmp(locale, "zh_TW")) return "?�英??;
+        //if (!strcasecmp(locale, "zh_CN")) return "?�英??;
+		if (!strcasecmp(locale, "zh_TW")) return "ZH_TW";
+        if (!strcasecmp(locale, "zh_CN")) return "ZH_CN";
         return "New Roman (alphanumeric)";
     }    
 };

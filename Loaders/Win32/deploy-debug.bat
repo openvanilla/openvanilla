@@ -5,6 +5,7 @@ copy .\OVIME\Debug\OVIME.ime %WINDIR%\system32\
 REM copy .\OVPreferences\Debug\OVPreferences.exe %WINDIR%\OpenVanilla\
 REM copy .\OVPreferences\Release\OVPreferences.exe.manifest %WINDIR%\OpenVanilla\
 copy ..\..\Modules\OVIMGeneric\Debug\OVIMGeneric.dll %WINDIR%\OpenVanilla\Modules\
+copy ..\..\Modules\OVIMRomanNew\Debug\OVIMRomanNew.dll %WINDIR%\OpenVanilla\Modules\
 copy "..\..\..\branches\0.7.2-Module-OVIMTobacco-Old\OVIMTobaccoOld\Debug\OVIMTobaccoOld.dll" "%WINDIR%\OpenVanilla\Modules\OVIMTobacco.dll"
 REM del "%APPDATA%\OpenVanilla\orz.txt"
 pause

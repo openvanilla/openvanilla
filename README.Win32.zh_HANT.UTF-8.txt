@@ -20,7 +20,15 @@ include files 和 library files 的 path 都要記得加上。
 http://taipedia.selfip.info/mediawiki/index.php/SQLite3Win32LibVC8/zh-hant
 下載，並同樣放在 %OV_DEPS% 裡。
 
-4. 若遇到任何問題，請透過 IRC 到 FreeNote 的 #im-dev 找 kanru 或 pcman 或 b6s。
+4. OV dependencies 加入OVIMRomanNew所需要的拼字檢查library--hunspell。
+4.1. 加入檔案如下：
+dhunspell.dll, hunspell.hxx, license.hunspell, dhunspell.lib, affixmgr.hxx, 
+hashmgr.hxx, htypes.hxx, atypes.hxx, suggestmgr.hxx, langnum.hxx, dictmgr.hxx, 
+csutil.hxx, baseaffix.hxx, affentry.hxx, hunspell.h, dhunspell.h, license.myspell
+4.2 請記得前往下載
+http://going04.iis.sinica.edu.tw:81/trac/going/attachment/ticket/139/ov-deps-hunspell.zip
+
+5. 若遇到任何問題，請透過 IRC 到 FreeNote 的 #im-dev 找 kanru 或 pcman 或 b6s。
 
 
 == 編譯 ==

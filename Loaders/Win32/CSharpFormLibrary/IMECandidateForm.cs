@@ -203,7 +203,17 @@ namespace CSharpFormLibrary
         public void SetCandidates(string inputs)
         {
             //input
-            string[] a_inputs = inputs.Split(' ');
+            //string[] a_inputs = inputs.Split(' ');
+            string[] a_inputs;
+            if ((inputs.IndexOf('\t')) > 0)
+            {
+                a_inputs = inputs.Split('\t');
+            }
+            else
+            {
+                a_inputs = inputs.Split(' ');
+            }
+            
             if (a_inputs == null) return;
             string[] fakeInputs ={  "1.一", "2.二", "3.三", "4.四", "5.五", "6.六", "7.七", "8.八", "9.九","(1/9)", 
               "1.十一", "2.十二", "3.十三", "4.十四", "5.十五", "6.十六", "7.十七", "8.十八", "9.十九","(2/9)" };
