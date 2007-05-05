@@ -49,7 +49,7 @@ function ov_clear() {
 
 function ov_init() {
     ovc = new OV.CandidateController({});
-    ov_update("OLA");
+    ov_update("");
 
     var e = document.getElementById("wrapper");
     setInterval(function() {

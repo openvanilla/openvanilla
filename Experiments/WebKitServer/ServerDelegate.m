@@ -133,6 +133,18 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 }
 - (void)candidateHide {
 	candion=NO;
+
+	NSLog(@"clear");
+	
+	WebScriptObject *scrobj = [candiweb windowScriptObject];
+	
+	NSString *script=[NSString stringWithFormat:@"ov_clear()"];
+	NSLog(@"evaluating javascript: %@", script);
+	id y=[scrobj evaluateWebScript:script];
+	if (y) {
+		NSLog(@"cleared!!!!", [y description]);
+	}	
+	
 	// [candi orderOut:self];
 }
 - (void)candidateUpdate:(bycopy NSString*)s position:(Point)p {
@@ -214,19 +226,6 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 		nfr.origin.y = cfr.origin.y - (nfr.size.height + 5);
 		[noti setFrameOrigin:nfr.origin];
 	}
-}
-
-
-// ----------------------- WebUIDelegate delegate methods
-- (NSArray *)candiweb: (WebView *)wv contextMenuItemsForElement: (NSDictionary *)theElement  defaultMenuItems: (NSArray *)defaultMenuItems
-{
-	NSLog(@"Menu~~");
-    return nil;
-}
-
-
-- (void)candiweb: (WebView *)wv runJavaScriptAlertPanelWithMessage:(NSString *)message
-{
 }
 
 @end
