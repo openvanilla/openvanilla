@@ -18,7 +18,9 @@ while(<HNDL>) {
     if (/#?\s*(\S+)\s+(\d+)\s+(.+)/) {
         my ($w, $f, $c)=(decode("utf8", $1), $2, decode("utf8", $3));
 
-		unless (exists($word2freqHash{$w}) && $f <= $word2freqHash{$w}) {
+		unless (exists($word2freqHash{$w}) &&
+			$f <= $word2freqHash{$w} &&
+			(length($w) == 1 || $f > 0) {
 			$word2freqHash{$w} = $f;
         }
 
