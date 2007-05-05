@@ -96,7 +96,7 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 //	urlbase=[[NSURL alloc] initFileURLWithPath:[CVWS_URLBASE stringByExpandingTildeInPath]];
 	NSLog([urlbase absoluteString]);
 	
-	[candi setLevel:NSScreenSaverWindowLevel];
+//	[candi setLevel:NSScreenSaverWindowLevel];
 	[noti setLevel:NSScreenSaverWindowLevel];
 	
 	NSString *toload=[CVWS_DEFAULTFILE stringByExpandingTildeInPath];
@@ -106,16 +106,19 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 	NSLog([loadurl description]);
 		
 	[[candiweb mainFrame] loadRequest:[NSURLRequest requestWithURL:loadurl]];
+	[candiweb setUIDelegate:self];
+    [candiweb setFrameLoadDelegate:self];
+	[candiweb setEditable:NO];
 
 	[candi setHasShadow:YES];
-            [candi setOpaque:NO];	
-    [candi setBackgroundColor:[NSColor clearColor]];
+	// [candi setOpaque:NO];	
+    // [candi setBackgroundColor:[NSColor clearColor]];
     [candiweb setDrawsBackground:NO];
 	// [candi changStyleMask:0];
 }
 - (void)setConfig:(NSDictionary*)cfg {
-	[self applyConfig:cfg window:candi];
-	[self applyConfig:cfg window:noti];
+	// [self applyConfig:cfg window:candi];
+	// [self applyConfig:cfg window:noti];
 	notialpha=[noti alphaValue];
 
     notistyle=OVDPS_NOTIFY_DEFAULT; 
@@ -212,44 +215,20 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 		[noti setFrameOrigin:nfr.origin];
 	}
 }
-- (void)applyConfig:(NSDictionary*)d window:(NSWindow*)w {
-	float alpha=[[d valueForKey:@"opacity" default:@"1.0"] floatValue];
-	NSColor *fc=[[d valueForKey:@"foreground" default:@"1.0 1.0 1.0"] colorByString];
-	NSString *img=[d valueForKey:@"backgroundImage" default:@""];
-	NSString *font=[d valueForKey:@"font" default:@"Lucida Grande"];
-	float s=[[d valueForKey:@"size" default:@"18"] floatValue];
 
-	[w setAlphaValue:alpha];
-    [w setHasShadow:YES];
-    [w setOpaque:YES];
-    if ([img length]) {
-		NSImage *i=[[NSImage alloc] initByReferencingFile:img];
-		if (i && [i isValid]) {
-			[i autorelease];
-			NSColor *c=[NSColor colorWithPatternImage:i];
-			[w setBackgroundColor:c];
-		}
-	}
-    else {
-        // no image, use color
-        NSString *bcstr=[d valueForKey:@"background" default:@"1.0 1.0 1.0"];
-        if ([bcstr isEqualToString:@"transparent"]) {
-            [w setHasShadow:NO];
-            [w setOpaque:NO];
-            [w setBackgroundColor:[NSColor clearColor]];
-        }
-        else if ([bcstr isEqualToString:@"none"]) {
-            [w setBackgroundColor:defaultbackground];
-        }
-        else {
-            NSColor *bc=[bcstr colorByString];
-            [w setBackgroundColor:bc];
-        }
-    }
-    
-    // [t setFont:[NSFont fontWithName:font size:s]];
-	// [t setTextColor:fc];
+
+// ----------------------- WebUIDelegate delegate methods
+- (NSArray *)candiweb: (WebView *)wv contextMenuItemsForElement: (NSDictionary *)theElement  defaultMenuItems: (NSArray *)defaultMenuItems
+{
+	NSLog(@"Menu~~");
+    return nil;
 }
+
+
+- (void)candiweb: (WebView *)wv runJavaScriptAlertPanelWithMessage:(NSString *)message
+{
+}
+
 @end
 
 void CVFixWindowOrigin(NSWindow *w, Point p) {

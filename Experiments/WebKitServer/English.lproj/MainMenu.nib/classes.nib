@@ -1,6 +1,9 @@
 {
     IBClasses = (
+        {CLASS = CandiWeb; LANGUAGE = ObjC; SUPERCLASS = WebView; }, 
+        {CLASS = CandiWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NotifyWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {
             ACTIONS = {sendKeyTest = id; }; 
             CLASS = ServerDelegate; 

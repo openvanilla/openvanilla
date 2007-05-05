@@ -15,6 +15,7 @@
 		6A99077B0A66C7A9007272EB /* ServerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9907760A66C7A9007272EB /* ServerDelegate.m */; };
 		6A9907840A66C7C6007272EB /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6A9907810A66C7C6007272EB /* MainMenu.nib */; };
 		6A9907900A66C82F007272EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A99078E0A66C82F007272EB /* InfoPlist.strings */; };
+		D4419AC30BECFA1900949D5F /* CandiWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D4419AC20BECFA1900949D5F /* CandiWindow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		6A9907760A66C7A9007272EB /* ServerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerDelegate.m; sourceTree = "<group>"; };
 		6A9907820A66C7C6007272EB /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		6A99078F0A66C82F007272EB /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D4419AC10BECFA1900949D5F /* CandiWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandiWindow.h; sourceTree = "<group>"; };
+		D4419AC20BECFA1900949D5F /* CandiWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandiWindow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,8 @@
 				6A9907270A66C771007272EB /* WebKit.framework */,
 				6A9907320A66C77F007272EB /* Products */,
 				6A9907340A66C77F007272EB /* WebKitServer-Info.plist */,
+				D4419AC10BECFA1900949D5F /* CandiWindow.h */,
+				D4419AC20BECFA1900949D5F /* CandiWindow.m */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,6 +135,7 @@
 				6A9907790A66C7A9007272EB /* NSDictionaryExtension.m in Sources */,
 				6A99077A0A66C7A9007272EB /* NSStringExtension.m in Sources */,
 				6A99077B0A66C7A9007272EB /* ServerDelegate.m in Sources */,
+				D4419AC30BECFA1900949D5F /* CandiWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
