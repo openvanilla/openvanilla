@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BackwardsCompatibleClassLookup</key>
+	<true/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>OVChan</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.openvanilla.widget.ovchan</string>
+	<key>CFBundleName</key>
+	<string>Default</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CloseBoxInsetX</key>
+	<integer>58</integer>
+	<key>CloseBoxInsetY</key>
+	<integer>47</integer>
+	<key>MainHTML</key>
+	<string>ov.html</string>
+</dict>
+</plist>

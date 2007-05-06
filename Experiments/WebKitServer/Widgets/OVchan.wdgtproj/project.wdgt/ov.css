@@ -1,0 +1,51 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	font-size: 12pt;
+	background-image: initial;
+	background-repeat: initial;
+	background-attachment: initial;
+	background-position-x: initial;
+	background-position-y: initial;
+	background-color: transparent;
+	color: rgb(51, 51, 51);
+	font-family: Lucida Grande, Verdana, Arial, sans-serif;
+	width: 310px;
+	height: 400px;
+	overflow: hidden;
+}
+
+div#wrapper {
+	padding: 0px;
+	margin: 0px;
+	width: 310px;
+	height: 400px;
+	background-image: url(Images/ovbg.png);
+	background-repeat: no-repeat;
+	background-attachment: initial;
+	background-position-x: initial;
+	background-position-y: initial;
+	background-color: initial;
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+}
+
+div#content {
+	position: absolute;
+	padding: 20px;
+	padding-right: 30px;
+	padding-top: 30px;
+	top: 140px;
+	left: 10px;
+	width: 230px;
+	height: 100px;
+	opacity: 0.8;
+	background-image: url(Images/ovbubble.png);
+	background-repeat: no-repeat;
+	background-attachment: initial;
+	background-position-x: initial;
+	background-position-y: initial;
+	background-color: initial;
+}
+
