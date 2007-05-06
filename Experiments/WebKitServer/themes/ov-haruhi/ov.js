@@ -1,4 +1,6 @@
-OV = {};
+if (typeof OV == 'undefined') {
+    OV = {};
+}
 
 OV.CandidateController = function (params) {
     // Parameter checking, setup default values
@@ -50,6 +52,13 @@ function ov_clear() {
 function ov_init() {
     ovc = new OV.CandidateController({});
     ov_update("");
+    OV.Notify.setup();
+
+    OV.Notify.rss("http://twitter.com/statuses/public_timeline.rss");
+    setInterval(function() {
+        OV.Notify.rss("http://twitter.com/statuses/public_timeline.rss");
+    },
+    60000)
 }
 
 function test(str) {
