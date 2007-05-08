@@ -33,9 +33,11 @@ OV.CandidateController.prototype.clear = function() {
 OV.CandidateController.prototype.refresh = function() {
     this.elem.innerHTML = this.string;
     if(this.elem.innerHTML == "") {
-    	this.elem.style.display = "none";
+    	new Effect.Fade(this.elem);
+    	// this.elem.style.display = "none";
     } else {
-    	this.elem.style.display = "block";  
+    	new Effect.Appear(this.elem);    	
+    	// this.elem.style.display = "block";      	
     }
 }
 

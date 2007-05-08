@@ -14,7 +14,7 @@ OV.Notify = {
                 }, 2900)
             }
         }
-        setInterval(notifier, 3000);
+        setInterval(notifier, 5000);
     },
     rss: function(url) {
         new Ajax.Request(url, {

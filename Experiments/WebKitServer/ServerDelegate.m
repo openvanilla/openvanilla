@@ -43,6 +43,16 @@ enum {
     OVDPS_NOTIFY_SILENT=1
 };
 
+enum {
+    OVDPS_CANDI_MAYHIDE=0,
+    OVDPS_CANDI_ALWAYSSHOW=1
+};
+
+enum {
+    OVDPS_CANDI_MAYMOVE=0,
+    OVDPS_CANDI_FIXED=1
+};
+
 void CVFixWindowOrigin(NSWindow *w, Point p);
 
 #define CVWS_DEFAULTFILE	@"~/Sites/ov-theme/ov.html"
@@ -79,7 +89,7 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
     if ([c registerName:OVDSPSRVR_NAME]) ; // NSLog(@"OVDisplayServer registered");
 	else {
 		NSLog(@"WebkitServer registration failed");
-		NSAlert *a=[NSAlert alertWithMessageText:@"WebKitServer registration failed" 
+		NSAlert *a=[NSAlert alertWithMessageText:@"WebKitServer registration failed!"
 			defaultButton:nil
 			alternateButton:nil
 			otherButton:nil
@@ -89,15 +99,12 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 	}
 
 	candion=NO;
-    defaultbackground=[[candi backgroundColor] retain];
+//    defaultbackground=[[candi backgroundColor] retain];
 	fadetimer=nil;
 
 //	NSLog([CVWS_URLBASE stringByExpandingTildeInPath]);
 //	urlbase=[[NSURL alloc] initFileURLWithPath:[CVWS_URLBASE stringByExpandingTildeInPath]];
 	NSLog([urlbase absoluteString]);
-	
-//	[candi setLevel:NSScreenSaverWindowLevel];
-	[noti setLevel:NSScreenSaverWindowLevel];
 	
 	NSString *toload=[CVWS_DEFAULTFILE stringByExpandingTildeInPath];
 	NSLog(@"this default candidate html file will be used: %@", toload);
@@ -111,19 +118,28 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 	[candiweb setEditable:NO];
 
 	[candi setHasShadow:YES];
-	// [candi setOpaque:NO];	
-    // [candi setBackgroundColor:[NSColor clearColor]];
     [candiweb setDrawsBackground:NO];
-	// [candi changStyleMask:0];
+	if(candialwaysshow != OVDPS_CANDI_ALWAYSSHOW) {
+		[candi orderOut:self];
+	}
 }
 - (void)setConfig:(NSDictionary*)cfg {
-	// [self applyConfig:cfg window:candi];
-	// [self applyConfig:cfg window:noti];
+	
 	notialpha=[noti alphaValue];
 
     notistyle=OVDPS_NOTIFY_DEFAULT; 
     NSString *ns=[cfg valueForKey:@"notificationStyle" default:@"default"];
     if ([ns isEqualToString:@"silent"]) notistyle=OVDPS_NOTIFY_SILENT;
+	
+	candialwaysshow = OVDPS_CANDI_MAYHIDE;
+	NSString *ns2=[cfg valueForKey:@"candialwaysshow" default:@"false"];
+    if ([ns2 isEqualToString:@"true"]) candialwaysshow=OVDPS_CANDI_ALWAYSSHOW;
+	else [cfg setValue:@"false" forKey:@"candialwaysshow"];
+	
+	candifix = OVDPS_CANDI_MAYMOVE;
+	NSString *ns3=[cfg valueForKey:@"candifix" default:@"false"];
+    if ([ns3 isEqualToString:@"true"]) candifix= OVDPS_CANDI_FIXED;	
+	else [cfg setValue:@"false" forKey:@"candifix"];
 }
 - (void)candidateShow {
 	candion=YES;
@@ -145,7 +161,9 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 		NSLog(@"cleared!!!!", [y description]);
 	}	
 	
-	// [candi orderOut:self];
+	if(candialwaysshow != OVDPS_CANDI_ALWAYSSHOW) {
+		[candi orderOut:self];
+	}
 }
 - (void)candidateUpdate:(bycopy NSString*)s position:(Point)p {
 	NSLog(@"candiupdate");
@@ -160,22 +178,32 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 	}
 
 
-	// NSString *ws=[NSString stringWithFormat:CVWS_EXAMPLE, [urlbase absoluteString], s];
-	// [[candiweb mainFrame] loadHTMLString:ws baseURL:[NSURL URLWithString:@"http://localhost"]];
-
-	// CVFixWindowOrigin(candi, p);
+	if(candifix != OVDPS_CANDI_FIXED) {
+		CVFixWindowOrigin(candi, p);
+	}
 }
 - (void)notifyMessage:(bycopy NSString*)s position:(Point)p {
 	NSLog(@"notiupdate");
+	
+	WebScriptObject *scrobj = [candiweb windowScriptObject];
+	
+	NSString *script=[NSString stringWithFormat:@"ov_notify('%@')", s];
+	NSLog(@"evaluating javascript: %@", script);
+	id y=[scrobj evaluateWebScript:script];
+	if (y) {
+		NSLog(@"update text!!!!", [y description]);
+	}	
+	
+	[candi orderFront:self];
+	if(candifix != OVDPS_CANDI_FIXED) {
+		CVFixWindowOrigin(candi, p);
+	}	
 
-//	NSString *ws=[NSString stringWithFormat:CVWS_EXAMPLE, [urlbase absoluteString], s];
-//	[[notiweb mainFrame] loadHTMLString:ws baseURL:[NSURL URLWithString:@"http://localhost"]];
-
-	CVFixWindowOrigin(noti, p);
-	[self solveConflict];
+//	CVFixWindowOrigin(noti, p);
+//	[self solveConflict];
     
-    if (notistyle!=OVDPS_NOTIFY_DEFAULT) return;
-    [noti orderFront:self];
+//    if (notistyle!=OVDPS_NOTIFY_DEFAULT) return;
+//    [noti orderFront:self];
 }
 - (void)notifyClose {
 	[noti orderOut:self];

@@ -26,12 +26,14 @@
 	float notialpha;
 	float fadealpha;
     int notistyle;
+	int candialwaysshow;
+	int candifix;
 	NSTimer *fadetimer;
     NSColor *defaultbackground;
 	NSURL *urlbase;
 }
 - (IBAction)sendKeyTest:(id)sender;
-- (void)applyConfig:(NSDictionary*)d window:(NSWindow*)w;
+// - (void)applyConfig:(NSDictionary*)d window:(NSWindow*)w;
 - (void)solveConflict;
 - (void)stopTimer;
 - (void)fadeStart;
