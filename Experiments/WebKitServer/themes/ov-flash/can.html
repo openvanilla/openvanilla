@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<title>candis</title>
+</head>
+<body bgcolor="#ffffff">
+<div id="content">
+</div>
+</body>
+
+<script type="text/javascript">
+
+function updatevars(myVar) {
+	return "<object classid=\"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000\" codebase=\"http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0\" width=\"400\" height=\"60\" id=\"candis\" align=\"middle\"><param name=\"allowScriptAccess\" value=\"sameDomain\" /><param name=\"movie\" value=\"candis.swf\" /><param name=\"quality\" value=\"high\" /><param name=\"bgcolor\" value=\"#ffffff\" /><param name=\"FlashVars\" value=\"myCandis=" + myVar + "\"><embed src=\"candis.swf\" FlashVars=\"myCandis=" + myVar + "\" quality=\"high\" bgcolor=\"#ffffff\" width=\"400\" height=\"60\" name=\"candis\" align=\"middle\" allowScriptAccess=\"sameDomain\" type=\"application/x-shockwave-flash\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\" id=\"candivar\"/></object>";
+}
+
+function update(s) {
+	document.getElementById("content").innerHTML = updatevars(s);
+}
+
+update("中文輸入法");
+
+</script>
+</html>
