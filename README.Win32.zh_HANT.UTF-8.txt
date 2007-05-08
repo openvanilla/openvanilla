@@ -3,32 +3,29 @@ Copyright (c) 2004-2006 The OpenVanilla Project
 
 
 == 注意事項 ==
-1. 目前只能用 Microsoft Visual C++ 編譯。最好使用 VC 7.1 (VS.NET 2003)。
+1. 目前只能用 Microsoft Visual C++ 8 (VS.NET 2005) 編譯。
 
-2. 請使用 trunk/Loaders/Win32/ 底下的 OVIME.sln 和 OVPreferences.sln 及
-trunk/Modules/Modules.sln 來編譯。
+2. 請使用 trunk/Loaders/Win32/ 底下的 OVIME.sln 和 trunk/Modules/Modules.sln
+來編譯。
 
 3. 原先在 repository 裡的 ltdl, iconv, tinyxml 皆已移除，請下載
-http://taipedia.info/OV-deps.zip 或
-http://rt.openfoundry.org/Foundry/Project/Download/Attachment/65269/46252/OV-deps.zip
+http://taipedia.selfip.info/OV-deps.zip 「或」
+http://rt.openfoundry.org/Foundry/Project/Download/Attachment/86227/59650/OV-deps.zip
 （兩個是一樣的），解壓縮後置於某處，再按照
-http://www.flickr.com/photos/b6s/159926134/ 示範的方式讓 VS.NET 2003 知道要去那
+http://www.flickr.com/photos/b6s/159926134/ 示範的方式讓 VS.NET 2005 知道要去那
 裡找這些函式庫。
 3.1. 為了之後布署方便，請設定環境變數 %OV_DEPS% 到這些函式庫所在的目錄，
 include files 和 library files 的 path 都要記得加上。
-3.2. SQLite3 也已自 svn repository 移除，請到
+3.2. SQLite3 也已自 svn repository 移除，若想用「比 OV-deps.zip 還新的」，請到
 http://taipedia.selfip.info/mediawiki/index.php/SQLite3Win32LibVC8/zh-hant
 下載，並同樣放在 %OV_DEPS% 裡。
 
-4. OV dependencies 加入OVIMRomanNew所需要的拼字檢查library--hunspell。
-4.1. 加入檔案如下：
+4. OV-deps 已加入 OVIMRomanNew 所需要的拼字檢查 library -- hunspell, 檔案如下：
 hunspelldll.dll, hunspell.hxx, license.hunspell, hunspelldll.lib, affixmgr.hxx, 
 hashmgr.hxx, htypes.hxx, atypes.hxx, suggestmgr.hxx, langnum.hxx, dictmgr.hxx, 
 csutil.hxx, baseaffix.hxx, affentry.hxx, hunspell.h, hunspelldll.h, license.myspell
-4.2 請記得前往下載
-http://going04.iis.sinica.edu.tw:81/trac/going/attachment/ticket/139/ov-deps-hunspell.zip
 
-5. 若遇到任何問題，請透過 IRC 到 FreeNote 的 #im-dev 找 kanru 或 pcman 或 b6s。
+5. 若遇到任何問題，請透過 IRC 到 FreeNote 的 #im-dev 找 b6s。
 
 
 == 編譯 ==
@@ -38,14 +35,14 @@ OVPreferences 所需的靜態函式庫。目前 wxWidgets 版本
 是 2.6.3，為避免經歷與 OV 無關的痛苦，請按以下步驟進行：
 
 1.1. 開啟命令提示字元，然後執行
-"C:\Program Files\Microsoft Visual Studio .NET 2003\Common7\Tools\vsvars32.bat"
+"C:\Program Files\Microsoft Visual Studio 8\Common7\Tools\vsvars32.bat"
 每次進入命令列模式進行一連串編譯前，請先確定是否做了這一步。
 1.2. 到 C:\wxWidgets-2.6.3\build\msw 底下執行
 nmake -f makefile.vc BUILD=release UNICODE=1 SHARED=0 RUNTIME_LIBS=static
 和
 nmake -f makefile.vc BUILD=debug UNICODE=1 SHARED=0 RUNTIME_LIBS=static
 
-2. 如果有 VS.NET 2003 IDE，開啟 OVIME.sln 應能直接編譯。
+2. 如果有 VS.NET 2005 IDE，開啟 OVIME.sln 應能直接編譯。
 
 3. 接著請開啟 OVPreferences.sln 以編譯設定選單。
 
@@ -73,7 +70,7 @@ Modules.sln 裡編譯 OVIMPOJ-Holo 模組。
 
 6. 開啟輸入法設定視窗, 新增剛剛裝入的輸入法
 
-7. 使用 VC.NET 2003 的 debug 模式，開啟 OV，依照下列網址中的圖解操作：
+7. 使用 VC.NET 2005 的 debug 模式，開啟 OV，依照下列網址中的圖解操作：
 http://openvanilla.org/wiki/zh/index.php?title=%E8%88%8Awiki%E9%A0%81%E9%9D%A2%E5%BD%99%E6%95%B4:Win32%E7%AD%86%E8%A8%98#Debugging_Instructions
 
 
