@@ -25,7 +25,8 @@
 
 //#include "LuceneSearch.h"
 //#include "aspell.h"
-#include "dhunspell.h"
+//#include "dhunspell.h"
+#include "hunspelldll.h"
 using namespace std;
 
 int is_punc(char i){
@@ -87,7 +88,8 @@ string modulePath;
 //AspellSpeller* aspell_checker = 0;
 //AspellConfig* aspell_config = 0;
 
-HunspellHandle hunspell_checker = NewHunspell("C:\\hunspell\\spell_en_US\\en_US.aff","C:\\hunspell\\spell_en_US\\en_US.dic");
+//HunspellHandle hunspell_checker = NewHunspell("C:\\hunspell\\spell_en_US\\en_US.aff","C:\\hunspell\\spell_en_US\\en_US.dic");
+void* hunspell_checker = hunspell_initialize("C:\\hunspell\\spell_en_US\\en_US.aff","C:\\hunspell\\spell_en_US\\en_US.dic");
 
 class OVIMRomanNewContext : public OVInputMethodContext
 {
@@ -108,7 +110,7 @@ public:
     virtual void clear() { keyseq.clear();} 
 
 //	virtual void end() { delete_aspell_speller(aspell_checker); }
-virtual void end() { DeleteHunspell(hunspell_checker); }
+virtual void end() { hunspell_uninitialize((Hunspell*) hunspell_checker); }
     virtual int keyEvent(
         OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* s)    
     {
@@ -325,59 +327,65 @@ protected:
 
 bool OVIMRomanNewContext::isEnglish(char* buf) {
 	//return aspell_speller_check(aspell_checker, static_cast<const char*>(buf), -1) != 0 ? true : false;
-	return spell(hunspell_checker, static_cast<const char*>(buf)) != 0 ? true : false;
+	return hunspell_spell((Hunspell*)hunspell_checker, (buf)) != 0 ? true : false;
 
 }
 
 size_t OVIMRomanNewContext::spellCheckerByHunspell(char* buf)
 {
     //char* result;
-	char result[200];
-	
+	char** pString_array;
+	int numSuggestWord = -1;
 
     pagenumber=0;
     pagetotal=0;
     candi.clear();
 
-	memset(result, 0, sizeof(result));
-    		
-	suggest(hunspell_checker, const_cast<const char*>(buf), result); 
-	murmur("RomanNew result : %s", result);
-	//char* tempResult = gets(result);
-
-	int i = 0, j = 0;
 	
-	//initial the intoDoubleQ is false.
-	bool intoDoubleQ = false;
-	char word[15];
-	memset(word, 0, sizeof(word));
-	do
+    		
+	//hunspell_suggest(hunspell_checker, const_cast<const char*>(buf), result); 
+	numSuggestWord = hunspell_suggest((Hunspell*)hunspell_checker, (buf), &pString_array); 
+
+	//int i = 0, j = 0;
+	
+	if(numSuggestWord > 0)
 	{
-		if(result[i] == '"')
+		for(int i= 0; i <numSuggestWord; i++)
 		{
-			if(intoDoubleQ == true)
-			{
-				//word[j] = '@';
-				//word[j+1] = 0;
-		 candi.add(string(word));
-				j = 0;
-			}
-			intoDoubleQ = !intoDoubleQ;
+			candi.add(string(*(pString_array + i)));
+		}
+	}
+	//initial the intoDoubleQ is false.
+	//bool intoDoubleQ = false;
+	//char word[15];
+	//memset(word, 0, sizeof(word));
+	//do
+	//{
+	//	if(&result[i] == '"')
+	//	{
+	//		if(intoDoubleQ == true)
+	//		{
+	//			//word[j] = '@';
+	//			//word[j+1] = 0;
+	//	 candi.add(string(word));
+	//			j = 0;
+	//		}
+	//		intoDoubleQ = !intoDoubleQ;
 
-		}
-		else if(result[i] == ',')
-		{
-			//do nothing
-		}
-		else
-		{
-			word[j] = result[i];
-			j++;
-		}
+	//	}
+	//	else if(result[i] == ',')
+	//	{
+	//		//do nothing
+	//	}
+	//	else
+	//	{
+	//		word[j] = result[i];
+	//		j++;
+	//	}
 
-		i++;
-		murmur("RomanNew Suggest array [I] : %d", i);
-	}while(result[i] != '\0');
+	//	i++;
+	//	murmur("RomanNew Suggest array [I] : %d", i);
+	//}while(result[i] != '\0');
 
 	//const AspellWordList * suggestions =
 	//	 aspell_speller_suggest(aspell_checker, static_cast<const char*>(buf), -1);
@@ -396,7 +404,7 @@ size_t OVIMRomanNewContext::spellCheckerByHunspell(char* buf)
 	//candi.add("gi2");
      //candi.count() = 10;
 	 pagetotal=candi.count()/10;
-
+	 
 	 return candi.count();
 }
 //size_t OVIMRomanNewContext::spellCheckerByAspell(char* buf)

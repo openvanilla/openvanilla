@@ -67,7 +67,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="dhunspell.lib sqlite3.lib"
+				AdditionalDependencies="hunspelldll.lib sqlite3.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
 				ModuleDefinitionFile="..\OVModule.def"
