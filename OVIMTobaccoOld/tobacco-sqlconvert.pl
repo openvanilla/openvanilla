@@ -20,7 +20,7 @@ while(<HNDL>) {
 
 		unless (exists($word2freqHash{$w}) &&
 			$f <= $word2freqHash{$w} &&
-			(length($w) == 1 || $f > 0) {
+			(length($w) == 1 || $f > 0)) {
 			$word2freqHash{$w} = $f;
         }
 
