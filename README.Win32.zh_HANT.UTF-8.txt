@@ -1,4 +1,4 @@
-﻿OpenVanilla 0.7.1 / 0.7.2: Framework, Loaders and Modules
+OpenVanilla 0.7.1 / 0.7.2: Framework, Loaders and Modules
 Copyright (c) 2004-2006 The OpenVanilla Project
 
 
@@ -22,9 +22,9 @@ http://taipedia.selfip.info/mediawiki/index.php/SQLite3Win32LibVC8/zh-hant
 
 4. OV dependencies 加入OVIMRomanNew所需要的拼字檢查library--hunspell。
 4.1. 加入檔案如下：
-dhunspell.dll, hunspell.hxx, license.hunspell, dhunspell.lib, affixmgr.hxx, 
+hunspelldll.dll, hunspell.hxx, license.hunspell, hunspelldll.lib, affixmgr.hxx, 
 hashmgr.hxx, htypes.hxx, atypes.hxx, suggestmgr.hxx, langnum.hxx, dictmgr.hxx, 
-csutil.hxx, baseaffix.hxx, affentry.hxx, hunspell.h, dhunspell.h, license.myspell
+csutil.hxx, baseaffix.hxx, affentry.hxx, hunspell.h, hunspelldll.h, license.myspell
 4.2 請記得前往下載
 http://going04.iis.sinica.edu.tw:81/trac/going/attachment/ticket/139/ov-deps-hunspell.zip
 
