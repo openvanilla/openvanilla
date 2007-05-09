@@ -8,37 +8,42 @@ OV.CandidateController = function (params) {
         params = {};
     }
     if (typeof params["elementId"] == "undefined") {
-        params["elementId"] = "candi";
+        params["elementId"] = "content";
     }
 
     // The candidate window content.
     this.string = "";
-
-    // The HTML element that shows candidates
-    this.elem = document.getElementById(params["elementId"]);
-	if(this.elem.loaded()){
-	    this.elem.pause();
-	    this.elem.setInputValue("Candis", "歡迎、歡迎，熱烈歡迎");
-	    this.elem.play();
-	}
+    this.oldstring = "OpenVanilla";
+    this.candi = document.getElementById("candi");      	
 }
 
 OV.CandidateController.prototype.update = function(str) {
+	if(this.string) this.oldstring = this.string;
     this.string = str;
     this.refresh();
 }
 
 OV.CandidateController.prototype.clear = function() {
+	if(this.string) this.oldstring = this.string;
     this.string = "";
     this.refresh();
 }
 
 
 OV.CandidateController.prototype.refresh = function() {
-	if(this.elem.loaded()){
-    	this.elem.pause();
-    	this.elem.setInputValue("Candis", this.string);
-    	this.elem.play();  
+	if(this.candi.loaded()){
+		if(this.string) {
+	    	this.candi.setInputValue("Candis", this.string);
+	    	if(this.oldstring){ 
+    			this.candi.setInputValue("OldCandis", this.oldstring);
+	    	}
+	    	if(this.candi.playing()) {
+				this.candi.pause();	    	
+		    	this.candi.setInputValue("start", 0);		    	
+		    	this.candi.play();
+		    	this.candi.setInputValue("start", 1);
+	    	}	    	
+		}
 	}
 }
 
