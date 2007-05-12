@@ -45,9 +45,9 @@ namespace CSharpFormLibrary
         private IMEButton buttonHantHans;
         private IMEButton buttonPref;
         private IMEButton buttonSymbol;
-        private System.Windows.Forms.ContextMenu menuModule;
-        private System.Windows.Forms.Panel panelHead;
-		private System.Windows.Forms.Panel panelBody;
+        private ContextMenu menuModule;
+        private Panel panelHead;
+		private Panel panelBody;
         private bool isChinese=true;
 
         //private CSharpFormLibrary.IMESymbolForm m_symbolForm = null;
@@ -199,9 +199,9 @@ namespace CSharpFormLibrary
             this.panelHead = new System.Windows.Forms.Panel();
             this.panelBody = new System.Windows.Forms.Panel();
             this.buttonMenu = new CSharpFormLibrary.IMEButton();
-            this.buttonHantHans = new CSharpFormLibrary.IMEButton();
             this.buttonZhEn = new CSharpFormLibrary.IMEButton();
             this.buttonPref = new CSharpFormLibrary.IMEButton();
+            this.buttonHantHans = new CSharpFormLibrary.IMEButton();
             this.buttonSymbol = new CSharpFormLibrary.IMEButton();
             this.panelBody.SuspendLayout();
             this.SuspendLayout();
@@ -211,11 +211,11 @@ namespace CSharpFormLibrary
             this.panelHead.BackColor = System.Drawing.Color.Gray;
             this.panelHead.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelHead.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.panelHead.Dock = System.Windows.Forms.DockStyle.Left;
+            //this.panelHead.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelHead.Location = new System.Drawing.Point(0, 0);
             this.panelHead.Margin = new System.Windows.Forms.Padding(0);
             this.panelHead.Name = "panelHead";
-            this.panelHead.Size = new System.Drawing.Size(8, 35);
+            this.panelHead.Size = new System.Drawing.Size(8, 36);
             this.panelHead.TabIndex = 1;
             this.panelHead.MouseDown += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseDown);
             this.panelHead.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IMEStatusForm_MouseMove);
@@ -223,19 +223,19 @@ namespace CSharpFormLibrary
             // 
             // panelBody
             // 
+            this.panelBody.AutoSize = true;
+            this.panelBody.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelBody.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panelBody.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelBody.CausesValidation = false;
             this.panelBody.Controls.Add(this.buttonMenu);
-            this.panelBody.Controls.Add(this.buttonHantHans);
             this.panelBody.Controls.Add(this.buttonZhEn);
             this.panelBody.Controls.Add(this.buttonPref);
-            this.panelBody.Controls.Add(this.buttonSymbol);
-            this.panelBody.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelBody.Location = new System.Drawing.Point(6, 0);
+            //this.panelBody.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelBody.Location = new System.Drawing.Point(10, 0);
             this.panelBody.Margin = new System.Windows.Forms.Padding(0);
             this.panelBody.Name = "panelBody";
-            this.panelBody.Size = new System.Drawing.Size(195, 35);
+            this.panelBody.Size = new System.Drawing.Size(154, 36);
             this.panelBody.TabIndex = 0;
             // 
             // buttonMenu
@@ -244,42 +244,26 @@ namespace CSharpFormLibrary
             this.buttonMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.buttonMenu.BackColor = System.Drawing.Color.Transparent;
             this.buttonMenu.ContextMenu = this.menuModule;
-            this.buttonMenu.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.buttonMenu.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.buttonMenu.ForeColor = System.Drawing.Color.White;
-            this.buttonMenu.Location = new System.Drawing.Point(2, 0);
+            this.buttonMenu.Location = new System.Drawing.Point(0, 0);
             this.buttonMenu.Margin = new System.Windows.Forms.Padding(0);
             this.buttonMenu.Name = "buttonMenu";
-            this.buttonMenu.Size = new System.Drawing.Size(6, 33);
+            this.buttonMenu.Size = new System.Drawing.Size(60, 34);
             this.buttonMenu.TabIndex = 0;
             this.buttonMenu.UseVisualStyleBackColor = false;
             this.buttonMenu.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonMenu_MouseUp);
             // 
-            // buttonHantHans
-            // 
-            this.buttonHantHans.BackColor = System.Drawing.Color.Transparent;
-            this.buttonHantHans.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonHantHans.Font = new System.Drawing.Font("PMingLiU", 12F);
-            this.buttonHantHans.ForeColor = System.Drawing.Color.White;
-            this.buttonHantHans.Location = new System.Drawing.Point(8, 0);
-            this.buttonHantHans.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonHantHans.Name = "buttonHantHans";
-            this.buttonHantHans.Size = new System.Drawing.Size(40, 33);
-            this.buttonHantHans.TabIndex = 1;
-            this.buttonHantHans.UseVisualStyleBackColor = false;
-            this.buttonHantHans.Visible = false;
-            this.buttonHantHans.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonHantHans_MouseUp);
-            // 
             // buttonZhEn
             // 
             this.buttonZhEn.BackColor = System.Drawing.Color.Transparent;
-            this.buttonZhEn.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonZhEn.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.buttonZhEn.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.buttonZhEn.Location = new System.Drawing.Point(48, 0);
+            this.buttonZhEn.Location = new System.Drawing.Point(60, 0);
             this.buttonZhEn.Margin = new System.Windows.Forms.Padding(0);
             this.buttonZhEn.Name = "buttonZhEn";
-            this.buttonZhEn.Size = new System.Drawing.Size(40, 33);
+            this.buttonZhEn.Size = new System.Drawing.Size(34, 34);
             this.buttonZhEn.TabIndex = 2;
             this.buttonZhEn.Text = "中";
             this.buttonZhEn.UseVisualStyleBackColor = false;
@@ -288,37 +272,50 @@ namespace CSharpFormLibrary
             // buttonPref
             // 
             this.buttonPref.BackColor = System.Drawing.Color.Transparent;
-            this.buttonPref.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonPref.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.buttonPref.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.buttonPref.Location = new System.Drawing.Point(88, 0);
+            this.buttonPref.Location = new System.Drawing.Point(94, 0);
             this.buttonPref.Margin = new System.Windows.Forms.Padding(0);
             this.buttonPref.Name = "buttonPref";
-            this.buttonPref.Size = new System.Drawing.Size(65, 33);
+            this.buttonPref.Size = new System.Drawing.Size(60, 34);
             this.buttonPref.TabIndex = 3;
             this.buttonPref.Text = "設定";
             this.buttonPref.UseVisualStyleBackColor = false;
             this.buttonPref.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonPref_MouseUp);
             // 
+            // buttonHantHans
+            // 
+            this.buttonHantHans.BackColor = System.Drawing.Color.Transparent;
+            this.buttonHantHans.ForeColor = System.Drawing.Color.White;
+            this.buttonHantHans.Location = new System.Drawing.Point(154, 0);
+            this.buttonHantHans.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonHantHans.Name = "buttonHantHans";
+            this.buttonHantHans.Size = new System.Drawing.Size(34, 34);
+            this.buttonHantHans.TabIndex = 1;
+            this.buttonHantHans.UseVisualStyleBackColor = false;
+            this.buttonHantHans.Visible = false;
+            this.buttonHantHans.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonHantHans_MouseUp);
+            // 
             // buttonSymbol
             // 
             this.buttonSymbol.BackColor = System.Drawing.Color.Transparent;
-            this.buttonSymbol.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonSymbol.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.buttonSymbol.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.buttonSymbol.Location = new System.Drawing.Point(153, 0);
+            this.buttonSymbol.Location = new System.Drawing.Point(188, 0);
             this.buttonSymbol.Margin = new System.Windows.Forms.Padding(0);
             this.buttonSymbol.Name = "buttonSymbol";
-            this.buttonSymbol.Size = new System.Drawing.Size(40, 33);
+            this.buttonSymbol.Size = new System.Drawing.Size(34, 34);
             this.buttonSymbol.TabIndex = 4;
             this.buttonSymbol.Text = "€";
             this.buttonSymbol.UseVisualStyleBackColor = false;
+            this.buttonSymbol.Visible = false;
             this.buttonSymbol.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonSymbol_MouseUp);
             // 
             // IMEStatusForm
             // 
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(201, 35);
+            this.ClientSize = new System.Drawing.Size(166, 36);
             this.ControlBox = false;
             this.Controls.Add(this.panelHead);
             this.Controls.Add(this.panelBody);
@@ -333,6 +330,7 @@ namespace CSharpFormLibrary
             this.panelBody.ResumeLayout(false);
             this.panelBody.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 		#endregion
@@ -370,7 +368,7 @@ namespace CSharpFormLibrary
 		{
             isChinese = !isChinese;
 			if(isChinese)   this.buttonZhEn.Text = "中";
-			else            this.buttonZhEn.Text = "英";
+			else            this.buttonZhEn.Text = "A";
 		}
 
         public void SetSimpifiedOrTraditional(bool isTraditional)
@@ -613,12 +611,16 @@ namespace CSharpFormLibrary
         private void ResizeAll()
         {
             Debug.WriteLine("ReSize");
-            this.panelBody.Width = 5+this.buttonMenu.Width +
-                (this.buttonHantHans.Visible ? this.buttonHantHans.Width : 0) +
-                this.buttonZhEn.Width + this.buttonPref.Width + this.buttonSymbol.Width;
-            this.Width = this.panelBody.Width + this.panelHead.Width;                                            
+            this.buttonMenu.Location = new Point(0, 0);
             this.buttonZhEn.Location = new Point(this.buttonMenu.Bounds.Right, 0);
             this.buttonPref.Location = new Point(this.buttonZhEn.Bounds.Right, 0);
+
+            this.panelBody.Width =
+                this.buttonMenu.Width +
+                (this.buttonHantHans.Visible ? this.buttonHantHans.Width : 0) +
+                this.buttonZhEn.Width + this.buttonPref.Width +
+                (this.buttonSymbol.Visible ? this.buttonSymbol.Width : 0);
+            this.Width = this.panelBody.Width + this.panelHead.Width + 2;
         }
 
         #endregion
