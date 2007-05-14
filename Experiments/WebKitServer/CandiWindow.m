@@ -1,4 +1,5 @@
 #import "CandiWindow.h"
+#import <WebKit/WebKit.h>
 
 @implementation CandiWindow
 
@@ -30,6 +31,17 @@
 	NSRect  screenFrame = [[NSScreen mainScreen] frame];
 	NSRect  windowFrame = [self frame];
 	
+	NSLog(@"drag");
+	
+	WebScriptObject *scrobj = [candiweb windowScriptObject];
+	
+	NSString *script=[NSString stringWithFormat:@"ov_startdrag()"];
+	NSLog(@"evaluating javascript: %@", script);
+	id y=[scrobj evaluateWebScript:script];
+	if (y) {
+		NSLog(@"update text!!!!", [y description]);
+	}	
+	
 	
 	//grab the current global mouse location; we could just as easily get the mouse location 
 	//in the same way as we do in -mouseDown:
@@ -56,6 +68,17 @@
 	initialLocation = [self convertBaseToScreen:[theEvent locationInWindow]];
 	initialLocation.x -= windowFrame.origin.x;
 	initialLocation.y -= windowFrame.origin.y;
+
+	NSLog(@"stopdrag");
+	
+	WebScriptObject *scrobj = [candiweb windowScriptObject];
+	
+	NSString *script=[NSString stringWithFormat:@"ov_stopdrag()"];
+	NSLog(@"evaluating javascript: %@", script);
+	id y=[scrobj evaluateWebScript:script];
+	if (y) {
+		NSLog(@"update text!!!!", [y description]);
+	}		
 }
 
 @end

@@ -99,11 +99,8 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 	}
 
 	candion=NO;
-//    defaultbackground=[[candi backgroundColor] retain];
 	fadetimer=nil;
 
-//	NSLog([CVWS_URLBASE stringByExpandingTildeInPath]);
-//	urlbase=[[NSURL alloc] initFileURLWithPath:[CVWS_URLBASE stringByExpandingTildeInPath]];
 	NSLog([urlbase absoluteString]);
 	
 	NSString *toload=[CVWS_DEFAULTFILE stringByExpandingTildeInPath];
