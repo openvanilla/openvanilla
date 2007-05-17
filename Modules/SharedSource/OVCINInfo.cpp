@@ -30,6 +30,8 @@
 
 // #define OV_DEBUG
 
+#include "OVCINInfo.h"
+
 #ifndef WIN32
     #include <OpenVanilla/OpenVanilla.h>
     #include <OpenVanilla/OVUtility.h>
@@ -38,15 +40,17 @@
     #include <dirent.h>
     #include <unistd.h>
 #else   
-    #include <windows.h>
     #include "OpenVanilla.h"
     #include "OVUtility.h"
-	#define strcasecmp stricmp
+	//<comment author='b6s'> Uses OVOSDef.h instead.
+	//#define strcasecmp stricmp
+	//</comment>
+	#include <string.h>	//memset
 	#define bzero(addr, num) memset(addr, 0, num)
-#endif
 
-#include <string.h>
-#include "OVCINInfo.h"
+	#include <windows.h> //FindFirstFile
+#endif
+#include "OVOSDef.h"
 
 const char *clExtension=NULL;
 

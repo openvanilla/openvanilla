@@ -31,7 +31,11 @@
 #ifndef _ARRAYKEYSEQUENCE_H
 #define _ARRAYKEYSEQUENCE_H
 
-#include <OpenVanilla/OpenVanilla.h>
+#ifndef WIN32
+	#include <OpenVanilla/OpenVanilla.h>
+#else
+	#include "OpenVanilla.h"
+#endif
 #include "OVKeySequence.h"
 #include "OVCIN.h"
 #include <string>

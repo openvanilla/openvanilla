@@ -31,7 +31,18 @@
 #ifndef _OVIMARRAY_H
 #define _OVIMARRAY_H
 
-#include <OpenVanilla/OpenVanilla.h>
+#ifndef WIN32
+	#include <OpenVanilla/OpenVanilla.h>
+#else
+	#include "OpenVanilla.h"
+
+	//<comment author='b6s'> Uses OVOSDef.h instead.
+	//#include <string.h>
+	//#define strcasecmp stricmp
+	//</comment>
+#endif
+#include "OVOSDef.h"
+
 #include "ArrayKeySequence.h"
 #include "OVCandidateList.h"
 #include "OVCIN.h"
@@ -114,8 +125,8 @@ public:
     int updateConfig(OVDictionary *conf);
     virtual const char *localizedName(const char *locale){  
         if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN")){
-            strcpy(cname,"è¡Œåˆ—");
-            //if( isForceSP() )   strcat(cname, "(å¿«)");
+            strcpy(cname,"\xE8\xA1\x8C\xE5\x88\x97"); //¦æ¦C
+            //if( isForceSP() )   strcat(cname, "(§Ö)");
             return cname;
         }
         else{

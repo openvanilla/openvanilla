@@ -36,10 +36,11 @@
 	#include <OpenVanilla/OVLibrary.h>
 	#include <OpenVanilla/OVUtility.h>
 #else
-    #include <windows.h>	
 	#include "OpenVanilla.h"
 	#include "OVLibrary.h"
 	#include "OVUtility.h"
+
+    #include <string.h>
 	#define strcasecmp stricmp
 #endif
 

@@ -31,8 +31,18 @@
 // #define OV_DEBUG
 #include "ctype.h"
 #include "OVIMArray.h"
-#include <OpenVanilla/OVLibrary.h>
-#include <OpenVanilla/OVUtility.h>
+#ifndef WIN32
+	#include <OpenVanilla/OVLibrary.h>
+	#include <OpenVanilla/OVUtility.h>
+#else
+	#include "OVLibrary.h"
+	#include "OVUtility.h"
+
+	//<comment author='b6s'> Uses OVOSDef.h in OVIMArray.h instead.
+	//#include <stdlib.h>
+	//#define PATH_MAX _MAX_PATH
+	//</comment>
+#endif
 #include <utility>
 
 using namespace std;
@@ -73,7 +83,7 @@ int OVIMArrayContext::WaitKey1(OVKeyCode* key, OVBuffer* buf,
     updateCandidate(tabs[SHORT_TAB], buf, candibar);
     char keycode = keyseq.getSeq()[0];
     if( keycode == 't' )
-        buf->clear()->append((char*)"çš„")->update();
+        buf->clear()->append((char*)"ªº")->update();
     if( isprint(keycode) && keyseq.valid(keycode) )
         changeState(STATE_WAIT_KEY2);
 
@@ -259,7 +269,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         !(keyseq.length() == 1 && isWSeq(keyseq.getSeq()[0],keycode)) ){
         string c;
         if( candi.select(keycode, c) ){
-            if( c != "âŽ”"  ){
+            if( c != "?"  ){
                 sendAndReset(c.c_str(), buf, candi_bar, srv);
             }
             else{
@@ -363,8 +373,8 @@ int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path) {
 }
 
 int OVIMArray::updateConfig(OVDictionary *conf){
-    const char *AutoSP = "ç‰¹åˆ¥ç¢¼æç¤º";
-    const char *ForceSP = "å¿«æ‰“æ¨¡å¼";
+    const char *AutoSP = "\xE7\x89\xB9\xE5\x88\xA5\xE7\xA2\xBC\xE6\x8F\x90\xE7\xA4\xBA"; // ¯S§O½X´£¥Ü
+    const char *ForceSP = "\xE5\xBF\xAB\xE6\x89\x93\xE6\xA8\xA1\xE5\xBC\x8F"; // §Ö¥´¼Ò¦¡
 
     if( !conf->keyExist(AutoSP) ) conf->setInteger(AutoSP, 1);
     if( !conf->keyExist(ForceSP) ) conf->setInteger(ForceSP, 0);
