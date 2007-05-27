@@ -62,7 +62,6 @@
 +(NSString*)webScriptNameForSelector:(SEL)aSel {
 	NSString *retval = nil;
 	
-	//NSLog(@"webScriptNameForSelector");
 	if (aSel == @selector(genList)) {
 		retval = @"genList";	
 	} else if (aSel == @selector(myConvert:filter:)) {
@@ -90,7 +89,6 @@
 
 - (NSString *) genList {
     loader=[[CVEmbeddedLoader alloc] init];
-	NSLog(@"Generating List....");
     const char *lc=[loader service]->locale();	
     if (!loader) {
 		return @"";
@@ -110,11 +108,8 @@
 }
 
 - (NSString *) myConvert:(NSString *)str filter:(NSString *) currentFilter {
-	if([currentFilter isEqualToString:@""]) return @"";
-	NSLog(@"currentFilter: %@....", currentFilter);			
+	if([currentFilter isEqualToString:@""]) return @"";		
     loader=[[CVEmbeddedLoader alloc] init];
-	NSLog(@"Converting....");
-	NSLog(@"input: %@....", str);	
 	CVModuleWrapper *m=CVFindModule([loader moduleList], currentFilter, @"OVOutputFilter");
 	
 	if (!m) {return @"Module not found!, module: %@", currentFilter;}
@@ -129,19 +124,8 @@
 	[loader clearNotification];
 	NSString *output= @"";
 	output=[NSString stringWithUTF8String:of->process([str UTF8String],[loader service])];
-	NSLog(@"output: %@....", output);	
 	return output;
 }
-
-
-/* - (void) setModule:(NSString *) module {
-	currentFilter = @"";
-	if(module) {
-		currentFilter = module;
-		NSLog(@"currentFilter: %@....", currentFilter);	
-	}
-	return;
-} */
 
 - (void) logMessage:(NSString *)str {
 	NSLog(@"JavaScript says: %@", str);
