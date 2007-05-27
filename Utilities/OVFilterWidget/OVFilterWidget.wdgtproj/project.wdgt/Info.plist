@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BackwardsCompatibleClassLookup</key>
+	<true/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>filter</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.openvanilla.filterwidget.072</string>
+	<key>CFBundleName</key>
+	<string>filter</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CloseBoxInsetX</key>
+	<integer>14</integer>
+	<key>CloseBoxInsetY</key>
+	<integer>18</integer>
+	<key>Height</key>
+	<integer>354</integer>
+	<key>MainHTML</key>
+	<string>filter.html</string>
+	<key>Plugin</key>
+	<string>OVFilter.widgetplugin</string>
+	<key>Width</key>
+	<integer>232</integer>
+</dict>
+</plist>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CYBackwardCompatibleExport</key>
+	<false/>
+	<key>Steps</key>
+	<array>
+		<dict>
+			<key>Completed</key>
+			<true/>
+			<key>Detail</key>
+			<string>Place an item from the library on the canvas, then change its properties with the inspector.
+
+[DONT_LOCALIZE GoTo, Tag(400) DONT_LOCALIZE] Library
+[DONT_LOCALIZE GoTo, Tag(101) DONT_LOCALIZE] Canvas
+[DONT_LOCALIZE GoTo, Tag(300) DONT_LOCALIZE] Inspector</string>
+			<key>MainHelp</key>
+			<string>Tag(200)</string>
+			<key>Required</key>
+			<true/>
+			<key>Title</key>
+			<string>Lay out interface</string>
+		</dict>
+		<dict>
+			<key>Completed</key>
+			<true/>
+			<key>Detail</key>
+			<string>Assign handlers for events on elements, then author code for the handlers.
+
+[DONT_LOCALIZE GoTo, Tag(302) DONT_LOCALIZE] Behaviors inspector 
+[DONT_LOCALIZE GoTo, Tag(102) DONT_LOCALIZE] Source code editor</string>
+			<key>MainHelp</key>
+			<string>Tag(201)</string>
+			<key>Required</key>
+			<true/>
+			<key>Title</key>
+			<string>Add handlers &amp; code</string>
+		</dict>
+		<dict>
+			<key>Completed</key>
+			<false/>
+			<key>Detail</key>
+			<string>Provide an identifier and version number for your widget and turn on access to any resources your widget needs.
+
+[DONT_LOCALIZE GoTo, Tag(200) DONT_LOCALIZE] Attributes</string>
+			<key>MainHelp</key>
+			<string>Tag(202)</string>
+			<key>Required</key>
+			<true/>
+			<key>Title</key>
+			<string>Set attributes</string>
+		</dict>
+		<dict>
+			<key>Completed</key>
+			<true/>
+			<key>Detail</key>
+			<string>Preview your widget's default image and exclude items on the canvas that have text.
+
+[DONT_LOCALIZE GoTo, Tag(103) DONT_LOCALIZE] Default image preview
+[DONT_LOCALIZE GoTo, Tag(101) DONT_LOCALIZE] Canvas
+[DONT_LOCALIZE GoTo, Tag(303) DONT_LOCALIZE] Attributes inspector</string>
+			<key>MainHelp</key>
+			<string>Tag(203)</string>
+			<key>Recommended</key>
+			<true/>
+			<key>Title</key>
+			<string>Preview default image</string>
+		</dict>
+		<dict>
+			<key>Completed</key>
+			<true/>
+			<key>Detail</key>
+			<string>Create an icon for your widget by placing art and adjusting the icon's properties in the Fill &amp; Stroke inspector.
+
+[DONT_LOCALIZE GoTo, Tag(104) DONT_LOCALIZE] Widget icon composer
+[DONT_LOCALIZE GoTo, Tag(301) DONT_LOCALIZE] Fill &amp; Stroke inspector</string>
+			<key>MainHelp</key>
+			<string>Tag(204)</string>
+			<key>Recommended</key>
+			<true/>
+			<key>Title</key>
+			<string>Design widget icon</string>
+		</dict>
+		<dict>
+			<key>Completed</key>
+			<true/>
+			<key>Detail</key>
+			<string>Run your widget to test it and track down problems.
+
+When you're finished with testing, deploy your widget to share it.</string>
+			<key>MainHelp</key>
+			<string>Tag(205)</string>
+			<key>Recommended</key>
+			<true/>
+			<key>Title</key>
+			<string>Test &amp; share</string>
+		</dict>
+	</array>
+	<key>TemplateIdentifier</key>
+	<string>com.apple.Dashcode.template.custom</string>
+	<key>WidgetIconImageSettings</key>
+	<string>image-theme: 2; image-shape: 3; image-opacity: 1.00; image-top-color: 0.2944,0.2944,0.2944; image-bottom-color: 0.6700,0.6700,0.6700; image-radius: 21,21,21,21; image-border: 2; image-border-color: 0.6154,0.6154,0.6154; image-border-width: 8; shine-include-shine: 0; shine-strength: 0.70; shine-include-alphas: 0; shine-alpha-level: 0.50; shine-height: 0.51; glass-include-arc: 1; shine-include-bottom: 0; shadow-include-shadow: 0; shadow-blur: 9.00;</string>
+</dict>
+</plist>
