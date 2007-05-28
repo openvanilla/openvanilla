@@ -39,7 +39,7 @@
 		</dict>
 		<dict>
 			<key>Completed</key>
-			<false/>
+			<true/>
 			<key>Detail</key>
 			<string>Provide an identifier and version number for your widget and turn on access to any resources your widget needs.
 

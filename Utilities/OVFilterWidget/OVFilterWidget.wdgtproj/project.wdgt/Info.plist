@@ -9,17 +9,17 @@
 	<key>CFBundleDisplayName</key>
 	<string>filter</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.filterwidget.072</string>
+	<string>org.openvanilla.filterwidget</string>
 	<key>CFBundleName</key>
-	<string>filter</string>
+	<string>OVFilterWidget</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>0.72</string>
 	<key>CloseBoxInsetX</key>
-	<integer>14</integer>
+	<integer>17</integer>
 	<key>CloseBoxInsetY</key>
-	<integer>18</integer>
+	<integer>17</integer>
 	<key>Height</key>
 	<integer>354</integer>
 	<key>MainHTML</key>
@@ -27,6 +27,6 @@
 	<key>Plugin</key>
 	<string>OVFilter.widgetplugin</string>
 	<key>Width</key>
-	<integer>232</integer>
+	<integer>236</integer>
 </dict>
 </plist>

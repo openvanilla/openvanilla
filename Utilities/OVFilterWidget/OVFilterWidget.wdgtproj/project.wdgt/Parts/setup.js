@@ -3,13 +3,14 @@
 function setupParts() {
     if (setupParts.called) return;
     setupParts.called = true;
-    CreateInfoButton('info', { frontID: 'front', foregroundStyle: 'white', backgroundStyle: 'black', onclick: 'showBack' });
+    CreateInfoButton('info', { foregroundStyle: 'white', onclick: 'showBack', backgroundStyle: 'white', frontID: 'front' });
     CreateGlassButton('done', { text: 'Done', onclick: 'showFront' });
     CreateText('openvanilla-b-title', { text: 'OpenVanilla' });
     CreateText('desc', { text: unescape('OpenVanilla is an Input Method Framework%2C it contains not only input method modules but also output filter modules. For further information%2C please visit http://openvanilla.org/ .') });
+    CreateText('text', { text: unescape('2004-2007 %u00A9 openvanilla.org') });
     CreateText('b-Output-Filter-Widget', { text: 'Output Filter Widget' });
-    CreateGlassButton('glassbutton', { text: 'Start Converting!', onclick: 'convert' });
     CreateText('openvanilla-f-title', { text: 'OpenVanilla' });
     CreateText('f-Output-Filter-Widget', { text: 'Output Filter Widget' });
+    CreateGlassButton('glassbutton', { text: 'Start Converting!', onclick: 'convert' });
 }
 window.addEventListener('load', setupParts, false);
