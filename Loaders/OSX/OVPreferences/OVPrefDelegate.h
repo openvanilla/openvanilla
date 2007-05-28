@@ -86,6 +86,7 @@
     IBOutlet id sharetab_soundlist;
     IBOutlet id sharetab_transparencyslider;
     IBOutlet id sharetab_transparencytag;
+	IBOutlet id pref_tab;
 
     // user interface states
     int modtab_modlist_currentrow;

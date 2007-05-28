@@ -123,6 +123,7 @@
 		D48C829F0C09CC6100EB008A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9651690970E1D9004BCC4D /* Cocoa.framework */; };
 		D48C82AB0C09CCE800EB008A /* ovwidgerplugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = D48C82AA0C09CCE800EB008A /* ovwidgerplugin.mm */; };
 		D48C82CA0C09CEE400EB008A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D48C82C90C09CEE400EB008A /* WebKit.framework */; };
+		D4FE84200C0B1D4000CC868C /* ServicesMenu.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4FE841F0C0B1D4000CC868C /* ServicesMenu.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -273,6 +274,9 @@
 		D48C82AA0C09CCE800EB008A /* ovwidgerplugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ovwidgerplugin.mm; path = OVFilterWidget/ovwidgerplugin.mm; sourceTree = "<group>"; };
 		D48C82C90C09CEE400EB008A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		D48C84030C09D52E00EB008A /* OVFilter.widgetplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVFilter.widgetplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4FE84160C0B1CCC00CC868C /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = OVPreferences/English.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
+		D4FE84210C0B1D5200CC868C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = OVPreferences/zh_TW.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
+		D4FE84220C0B1D5D00CC868C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = OVPreferences/zh_CN.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -400,6 +404,7 @@
 				6A9651460970E05E004BCC4D /* Frameworks */,
 				6A96534C0970F882004BCC4D /* PropertyLists */,
 				6A96514E0970E0B2004BCC4D /* Products */,
+				D4FE841F0C0B1D4000CC868C /* ServicesMenu.strings */,
 			);
 			sourceTree = "<group>";
 		};
@@ -894,6 +899,7 @@
 				6A074FA609712AB300CA4201 /* MainMenu.nib in Resources */,
 				6A074FA109712A3500CA4201 /* OVPreferencesIcon.icns in Resources */,
 				6A0751D909713F9600CA4201 /* OpenVanillaManual.pdf in Resources */,
+				D4FE84200C0B1D4000CC868C /* ServicesMenu.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1257,6 +1263,16 @@
 				6AA6881009710BA4002080DE /* zh_CN */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		D4FE841F0C0B1D4000CC868C /* ServicesMenu.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4FE84160C0B1CCC00CC868C /* English */,
+				D4FE84210C0B1D5200CC868C /* zh_TW */,
+				D4FE84220C0B1D5D00CC868C /* zh_CN */,
+			);
+			name = ServicesMenu.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

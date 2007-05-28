@@ -55,6 +55,33 @@
 @end
 
 @implementation OVPrefDelegate
+
+// Services
+
+- (void)applicationDidFinishLaunching:(NSNotification *)notification {
+    [NSApp setServicesProvider:self];
+}
+
+- (void)doConvert:(NSPasteboard *)pboard userData:(NSString *)data error:(NSString **)error {
+	
+    NSString *pboardString;
+    NSString *newString;
+    NSArray *types;
+	
+    types = [pboard types];
+	
+    if (![types containsObject:NSStringPboardType] || !(pboardString = [pboard stringForType:NSStringPboardType])) {
+        *error = NSLocalizedString(@"Error: Pasteboard doesn't contain a string.", @"Pasteboard couldn't give string.");
+        return;
+    }
+
+	[pref_tab selectTabViewItemAtIndex:3];
+	[oftab_inputtext setString:pboardString];	
+    return;
+}
+
+// End Services
+
 - (void)awakeFromNib {
     // set user interface state defaults
     modtab_modlist_currentrow=-1;

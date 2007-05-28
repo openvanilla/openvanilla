@@ -53,6 +53,7 @@
                 "oftab_notifymessage" = id; 
                 "oftab_oforderlist" = id; 
                 "oftab_outputtext" = id; 
+                "pref_tab" = id; 
                 "settab_chewinglayout" = id; 
                 "settab_phoneticslayout" = id; 
                 "settab_pojascii" = id; 
