@@ -6,6 +6,12 @@
 	<dict>
 		<key>primaryInputMethod</key>
 		<string>OVIMPhonetic</string>
+		<key>displayServerName</key>
+		<string>OVDisplayServer-0.7.2</string>
+		<key>displayServerStartupTimeout</key>
+		<string>40</string>
+		<key>displayServerPath</key>
+		<string>/Library/OpenVanilla/0.7.2/Loader/OVDisplayServer.app</string>
 	</dict>
 </dict>
 </plist>

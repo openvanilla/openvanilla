@@ -85,6 +85,10 @@ CVService::~CVService() {
     [beepsound release];
 }
 
+void CVService::changeDisplayServer(id newServer) {
+	dspsrvr = newServer;
+}
+
 void CVService::beep() {
     if (!shouldbeep) return;
     
@@ -116,7 +120,7 @@ void CVService::notify(const char* msg) {
     // usually this means an app has started IM service but
     // hasn't displayed the cursor yet
     if (!notifypos.h) return;
-	[dspsrvr notifyMessage:[NSString stringWithUTF8String:msg] position:notifypos];
+	if (dspsrvr) [dspsrvr notifyMessage:[NSString stringWithUTF8String:msg] position:notifypos];
 }
 
 void CVService::setNotificationPosition(Point p) {
@@ -124,14 +128,14 @@ void CVService::setNotificationPosition(Point p) {
 }
 
 void CVService::closeNotification() {
-	[dspsrvr notifyClose];
+	if (dspsrvr) [dspsrvr notifyClose];
 }
 
 void CVService::fadeNotification() {
     if (!notifypos.h)
         closeNotification();
     else
-        [dspsrvr notifyFade];
+        if (dspsrvr) [dspsrvr notifyFade];
 }
 
 const char *CVService::locale() {

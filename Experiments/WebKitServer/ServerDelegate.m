@@ -62,6 +62,10 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 @end
 
 @implementation ServerDelegate
+- (BOOL)ping
+{
+	return YES;
+}
 - (IBAction)sendKeyTest:(id)sender {
 	NSLog(@"getting remote object");
 	id keyrcvr=[[NSConnection rootProxyForConnectionWithRegisteredName:@"OVKeyReceiverTest" host:nil] retain];

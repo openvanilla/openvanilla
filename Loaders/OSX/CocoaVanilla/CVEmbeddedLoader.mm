@@ -109,4 +109,8 @@
 }
 - (void)notifyFade {}
 - (void)aboutDialog {}
+- (BOOL)ping
+{
+	return TRUE;
+}
 @end

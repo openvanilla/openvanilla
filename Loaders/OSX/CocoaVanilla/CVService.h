@@ -53,6 +53,8 @@ public:
     
     virtual void setShouldBeep(int s);
     virtual void setBeepSound(NSString *s);
+	
+	virtual void changeDisplayServer(id newServer);	
 protected:
     CFStringRef u8buf;
     char *userbuf;

@@ -53,6 +53,10 @@ void nop() {
 void CVFixWindowOrigin(NSWindow *w, Point p);
 
 @implementation ServerDelegate
+- (BOOL)ping
+{
+	return YES;
+}
 - (void)setConfig:(NSDictionary*)cfg {
 	[self applyConfig:cfg window:candi textField:canditext];
 	[self applyConfig:cfg window:noti textField:notitext];

@@ -119,29 +119,30 @@ int CVLoader::init(MenuRef m) {
         return 0;
     }
 
-	// connect to the display server
-	if (!connectDisplayServer()) {
-		NSLog ([NSString stringWithFormat: @"CVLoader: init failed, cannot start up OVDisplayServer at %@", CVLC_DISPLAYSERVER]);
-		return 0;
-	}
-	
     // gets factory (default) settings
     CVConfig *factorydef=[[CVConfig alloc] initWithFile:CVLC_FACTORY_DEFAULTS defaultData:nil];
     [factorydef autorelease];
     // NSLog([[factorydef dictionary] description]);
-    
+
+	// load the user config
+    cfg=[[CVConfig alloc] initWithFile:CVGetUserConfigFilename() defaultData:[factorydef dictionary]];
+
+    // load configuration
+    loaderdict=[[cfg dictionary] valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
+
+	// connect to the display server
+	if (!connectDisplayServer()) {
+		return 0;
+	}
+
 	// member variables initialization
     activecontext=NULL;
 	immenu=m;
     srv=new CVService(CVGetUserSpacePath(), dspsrvr);
     candi=new CVCandidate(dspsrvr);
-    cfg=[[CVConfig alloc] initWithFile:CVGetUserConfigFilename() defaultData:[factorydef dictionary]];
     modarray=[NSMutableArray new];
     imarray=[NSMutableArray new];
     ofarray=[NSMutableArray new];
-
-    // load configuration
-    loaderdict=[[cfg dictionary] valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
     
     NSString *timeout=[loaderdict valueForKey:@"atomicInitLockTimeout" default:@"500"];
     // check if our last atomic init failed
@@ -285,22 +286,31 @@ void CVLoader::menuHandler(unsigned int cmd) {
 }
 
 id CVLoader::connectDisplayServer() {
-	dspsrvr=nil;
+	NSString *displayServerName = [loaderdict valueForKey:@"displayServerName" default:OVDSPSRVR_NAME];
+	NSString *displayServerStartupTimeout = [loaderdict valueForKey:@"displayServerStartupTimeout" default:@"20"];
+	NSString *displayServerPath = [loaderdict valueForKey:@"displayServerPath" default:CVLC_DISPLAYSERVER];
 	
-	dspsrvr=[[NSConnection rootProxyForConnectionWithRegisteredName:OVDSPSRVR_NAME host:nil] retain];
+	NSLog(@"connecting to OV display server, name = %@, timeout = %@, path = %@", displayServerName, displayServerStartupTimeout, displayServerPath);
+
+	dspsrvr=nil;	
+	dspsrvr=[[NSConnection rootProxyForConnectionWithRegisteredName:displayServerName host:nil] retain];
 	if (!dspsrvr) {
-		system([[NSString stringWithFormat:@"open %@", CVLC_DISPLAYSERVER] UTF8String]);
+		system([[NSString stringWithFormat:@"open %@", displayServerPath] UTF8String]);
 		
 		// a total timeout of 1 sec
-		for (int retry=0; retry<20; retry++) {
+		int timeout = [displayServerStartupTimeout intValue];
+		for (int retry = 0; retry < timeout; retry++) {
 			NSLog([NSString stringWithFormat:@"OpenVanilla connects to OVDisplayServer, tick %d", retry]);
 			usleep(50000);		// wait for the server to be brought up (0.05 sec)
-			dspsrvr=[[NSConnection rootProxyForConnectionWithRegisteredName:OVDSPSRVR_NAME host:nil] retain];
+			dspsrvr=[[NSConnection rootProxyForConnectionWithRegisteredName:displayServerName host:nil] retain];
 			if (dspsrvr) break;
 		}
 	}
 	
-	if (dspsrvr) [dspsrvr setProtocolForProxy:@protocol(OVDisplayServer)];
+	if (dspsrvr) 
+		[dspsrvr setProtocolForProxy:@protocol(OVDisplayServer)];
+	else
+		NSLog(@"failed to connect to OV display server");
 	return dspsrvr;
 }
 
@@ -654,6 +664,18 @@ CVContext::~CVContext() {
 }
 
 void CVContext::activate(TSComposingBuffer *b) {
+	// ping the display server to make sure it's alive
+	@try {
+		[loader->dspsrvr ping];
+	}
+	@catch(NSException *e) {
+		NSLog(@"OVDisplayServer connection lost, reconnecting");
+		id dspsrvr = loader->connectDisplayServer();
+		loader->candi->changeDisplayServer(dspsrvr);
+		loader->srv->changeDisplayServer(dspsrvr);
+	}	
+	
+
 	keyrcvr=[CVKeyReceiver alloc];
 	if (keyrcvr) [(CVKeyReceiver*)keyrcvr initWithContext:this];
 

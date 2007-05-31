@@ -42,6 +42,7 @@
 - (void)notifyClose;
 - (void)notifyFade;
 - (void)aboutDialog;
+- (BOOL)ping;
 @end
 
 #endif

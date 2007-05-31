@@ -52,6 +52,11 @@ CVCandidate::~CVCandidate() {
 	[text release];
 }
 
+void CVCandidate::changeDisplayServer(id newServer)
+{
+	srvr = newServer;
+}
+
 OVCandidate* CVCandidate::clear() {
 	[text setString:@""];
     return this;
@@ -65,7 +70,7 @@ OVCandidate* CVCandidate::append(const char *s) {
 
 OVCandidate* CVCandidate::hide() {
 	if (onscreen) {
-		[srvr candidateHide];
+		if (srvr) [srvr candidateHide];
 		onscreen=NO;
 	}
     return this;
@@ -73,14 +78,14 @@ OVCandidate* CVCandidate::hide() {
 
 OVCandidate* CVCandidate::show() {
 	if (!onscreen) {
-		[srvr candidateShow];
+		if (srvr) [srvr candidateShow];
 		onscreen=YES;
 	}
     return this;
 }
 
 OVCandidate* CVCandidate::update() {
-	[srvr candidateUpdate:text position:pos];
+	if (srvr) [srvr candidateUpdate:text position:pos];
     return this;
 }
 

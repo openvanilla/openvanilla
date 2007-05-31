@@ -57,6 +57,8 @@ public:
     virtual OVCandidate* setPosition(Point p);
     virtual CVCandidateState* saveState();
     virtual OVCandidate* restoreState(CVCandidateState *s);
+	
+	virtual void changeDisplayServer(id newServer);
 protected:
 	id srvr;
 	NSMutableString *text;

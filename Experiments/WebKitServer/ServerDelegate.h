@@ -2,7 +2,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-#define OVDSPSRVR_NAME		@"OVDisplayServer-0.7.2"
+#define OVDSPSRVR_NAME		@"OVWebKitServer-0.7.2"
 
 @protocol OVDisplayServer
 - (void)setConfig:(bycopy NSDictionary*)cfg;
@@ -13,6 +13,7 @@
 - (void)notifyClose;
 - (void)notifyFade;
 - (void)aboutDialog;
+- (BOOL)ping;
 @end
 
 @interface ServerDelegate : NSObject <OVDisplayServer>
