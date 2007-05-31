@@ -677,18 +677,33 @@ void CVContext::activate(TSComposingBuffer *b) {
 		// since OS X 10.5, lost connection stops yielding exception? we'll do it on our own
 		if (!loader->dspsrvr || !value) @throw [NSException exceptionWithName:@"OVException" reason:@"Display server connection lost" userInfo:nil];
 	}
-	@catch(NSException *e) {
+	@catch(NSException *e) {	
+		NSLog(@"OVDisplayServer connection lost, reconnecting");
+		
+		// extra safety measure, because when we forced-sync config, it asks input method
+		// contexts to end themselves; some of them may want to call candidate/notification
+		// services; in OS X 10.4 we need to make sure distant objects are now all nil 
+		// once they are found to be invalid; also, we want to make sure this is thread 
+		// safe; as other threads may attempt to call the display service via the now
+		// stale display server object
+		@synchronized(loader->dspsrvr) {
+			loader->dspsrvr = nil;
+			loader->candi->changeDisplayServer(nil);
+			loader->srv->changeDisplayServer(nil);
+		}
+		
+		NSLog(@"reloading config");
 		syncConfig(1);
 		loader->loaderdict=[[loader->cfg dictionary] valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
 
-		fprintf(stderr, "OVDisplayServer connection lost, reconnecting");
-		NSLog(@"OVDisplayServer connection lost, reconnecting");
+		NSLog(@"starting to reconnect the server");
 		id dspsrvr = loader->connectDisplayServer();
 
 		// if connected, pass the config
 		NSDictionary *dsrvdict=[[loader->cfg dictionary] valueForKey:@"OVDisplayServer" default:CVGetDisplayServerConfig()];
+		
 		if (dspsrvr) {
-			// NSLog(@"syncing config with display server");
+			NSLog(@"syncing config with display server");
 			[dspsrvr setConfig:dsrvdict];
 		}
 

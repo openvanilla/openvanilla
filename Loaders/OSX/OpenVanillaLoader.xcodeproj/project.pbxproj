@@ -863,7 +863,6 @@
 		6A9651350970DFEE004BCC4D /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 6A9651360970DFEE004BCC4D /* Build configuration list for PBXProject "OpenVanillaLoader" */;
-			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				English,
@@ -876,7 +875,6 @@
 			mainGroup = 6A9651330970DFEE004BCC4D;
 			projectDirPath = "";
 			projectRoot = "";
-			shouldCheckCompatibility = 1;
 			targets = (
 				6A7C22F3097BE15F003EE29A /* OpenVanillaLoader-Default */,
 				6A9652120970E7C9004BCC4D /* OpenVanilla-TSComponent-UnicodeScript */,
