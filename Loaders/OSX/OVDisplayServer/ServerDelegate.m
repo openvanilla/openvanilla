@@ -55,6 +55,7 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 @implementation ServerDelegate
 - (BOOL)ping
 {
+	NSLog(@"OVDisplayServer: pong");
 	return YES;
 }
 - (void)setConfig:(NSDictionary*)cfg {

@@ -664,17 +664,37 @@ CVContext::~CVContext() {
 }
 
 void CVContext::activate(TSComposingBuffer *b) {
+	NSLog(@"CVContext::activate");
+	
 	// ping the display server to make sure it's alive
 	@try {
-		[loader->dspsrvr ping];
+		NSLog(@"pinging OV display server");
+		BOOL value = [loader->dspsrvr ping];
+		
+		// if we see value == 0, it's probably 10.5; 10.4 would never survive the last line if connection is lost
+		NSLog(@"pinged value: %d", value);
+		
+		// since OS X 10.5, lost connection stops yielding exception? we'll do it on our own
+		if (!loader->dspsrvr || !value) @throw [NSException exceptionWithName:@"OVException" reason:@"Display server connection lost" userInfo:nil];
 	}
 	@catch(NSException *e) {
+		syncConfig(1);
+		loader->loaderdict=[[loader->cfg dictionary] valueForKey:@"OVLoader" default:[[NSMutableDictionary new] autorelease]];
+
+		fprintf(stderr, "OVDisplayServer connection lost, reconnecting");
 		NSLog(@"OVDisplayServer connection lost, reconnecting");
 		id dspsrvr = loader->connectDisplayServer();
+
+		// if connected, pass the config
+		NSDictionary *dsrvdict=[[loader->cfg dictionary] valueForKey:@"OVDisplayServer" default:CVGetDisplayServerConfig()];
+		if (dspsrvr) {
+			// NSLog(@"syncing config with display server");
+			[dspsrvr setConfig:dsrvdict];
+		}
+
 		loader->candi->changeDisplayServer(dspsrvr);
 		loader->srv->changeDisplayServer(dspsrvr);
 	}	
-	
 
 	keyrcvr=[CVKeyReceiver alloc];
 	if (keyrcvr) [(CVKeyReceiver*)keyrcvr initWithContext:this];
