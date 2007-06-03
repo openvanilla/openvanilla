@@ -16,6 +16,7 @@
 		D44E43830C12F78800A0E7D7 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44E43820C12F78800A0E7D7 /* Carbon.framework */; };
 		D451CE710C12F68200919FB3 /* IconFamily.m in Sources */ = {isa = PBXBuildFile; fileRef = D451CE700C12F68200919FB3 /* IconFamily.m */; };
 		D451CE780C12F6D300919FB3 /* NSString+CarbonFSRefCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = D451CE770C12F6D300919FB3 /* NSString+CarbonFSRefCreation.m */; };
+		D4AA41440C1335AF004AAB67 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA41430C1335AF004AAB67 /* Localizable.strings */; };
 		D4BDE5AC0C11FE0F006FF43C /* Delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BDE5AA0C11FE0F006FF43C /* Delegate.m */; };
 		D4BDE74F0C12834F006FF43C /* b-array.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7310C12834F006FF43C /* b-array.icns */; };
 		D4BDE7500C12834F006FF43C /* b-bo-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7320C12834F006FF43C /* b-bo-1.icns */; };
@@ -55,6 +56,8 @@
 		D451CE700C12F68200919FB3 /* IconFamily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconFamily.m; sourceTree = "<group>"; };
 		D451CE760C12F6D300919FB3 /* NSString+CarbonFSRefCreation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CarbonFSRefCreation.h"; sourceTree = "<group>"; };
 		D451CE770C12F6D300919FB3 /* NSString+CarbonFSRefCreation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CarbonFSRefCreation.m"; sourceTree = "<group>"; };
+		D4AA413F0C13359F004AAB67 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D4AA416E0C13370C004AAB67 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4BDE5AA0C11FE0F006FF43C /* Delegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Delegate.m; sourceTree = "<group>"; };
 		D4BDE5AB0C11FE0F006FF43C /* Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delegate.h; sourceTree = "<group>"; };
 		D4BDE6B50C127944006FF43C /* OVIconChanger_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIconChanger_Prefix.pch; sourceTree = "<group>"; };
@@ -77,6 +80,8 @@
 		D4BDE74A0C12834F006FF43C /* twin-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "twin-2.icns"; path = "../../Artworks/icns/twin-2.icns"; sourceTree = SOURCE_ROOT; };
 		D4BDE74D0C12834F006FF43C /* weed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = weed.icns; path = ../../Artworks/icns/weed.icns; sourceTree = SOURCE_ROOT; };
 		D4BDE74E0C12834F006FF43C /* zonble.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = zonble.icns; path = ../../Artworks/icns/zonble.icns; sourceTree = SOURCE_ROOT; };
+		D4F8FCE10C133B4700353C7B /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		D4F8FCE70C133B5400353C7B /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,8 +109,6 @@
 		29B97314FDCFA39411CA2CEA /* OVUninstall */ = {
 			isa = PBXGroup;
 			children = (
-				D451CE760C12F6D300919FB3 /* NSString+CarbonFSRefCreation.h */,
-				D451CE770C12F6D300919FB3 /* NSString+CarbonFSRefCreation.m */,
 				D4BDE5C00C11FE9B006FF43C /* Icon Changer */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -117,6 +120,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D4AA41430C1335AF004AAB67 /* Localizable.strings */,
 				D423D5BF0C1295A30058F65D /* DisplayServerIcon.icns */,
 				D4BDE6940C127725006FF43C /* Icons */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -138,11 +142,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D4AA41390C13356D004AAB67 /* Icon Family Tools */ = {
+			isa = PBXGroup;
+			children = (
+				D451CE760C12F6D300919FB3 /* NSString+CarbonFSRefCreation.h */,
+				D451CE770C12F6D300919FB3 /* NSString+CarbonFSRefCreation.m */,
+				D451CE6F0C12F68200919FB3 /* IconFamily.h */,
+				D451CE700C12F68200919FB3 /* IconFamily.m */,
+			);
+			name = "Icon Family Tools";
+			sourceTree = "<group>";
+		};
 		D4BDE5C00C11FE9B006FF43C /* Icon Changer */ = {
 			isa = PBXGroup;
 			children = (
-				D451CE6F0C12F68200919FB3 /* IconFamily.h */,
-				D451CE700C12F68200919FB3 /* IconFamily.m */,
+				D4AA41390C13356D004AAB67 /* Icon Family Tools */,
 				D4BDE5AA0C11FE0F006FF43C /* Delegate.m */,
 				D4BDE5AB0C11FE0F006FF43C /* Delegate.h */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
@@ -249,6 +263,7 @@
 				D4BDE76B0C12834F006FF43C /* weed.icns in Resources */,
 				D4BDE76C0C12834F006FF43C /* zonble.icns in Resources */,
 				D423D5C00C1295A30058F65D /* DisplayServerIcon.icns in Resources */,
+				D4AA41440C1335AF004AAB67 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +288,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				089C165DFE840E0CC02AAC07 /* English */,
+				D4F8FCE70C133B5400353C7B /* zh_TW */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -281,8 +297,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				29B97319FDCFA39411CA2CEA /* English */,
+				D4F8FCE10C133B4700353C7B /* zh_TW */,
 			);
 			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		D4AA41430C1335AF004AAB67 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4AA413F0C13359F004AAB67 /* English */,
+				D4AA416E0C13370C004AAB67 /* zh_TW */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

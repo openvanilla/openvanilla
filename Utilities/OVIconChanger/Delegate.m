@@ -1,3 +1,34 @@
+// Delegate.m
+//
+//
+// Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. Neither the name of OpenVanilla nor the names of its contributors
+//    may be used to endorse or promote products derived from this software
+//    without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
 #import "Delegate.h"
 #import "IconFamily.h"
 
@@ -43,7 +74,7 @@
 	}
 }
 
-- (void)addItem:(NSString*)path type:(NSString*)icontype {
+- (void)addItem:(NSString*)path type:(NSString*)icontype size: (float)size {
 	if(![self pathExists: [path UTF8String]]) return;
 
 	NSMutableDictionary *d=[NSMutableDictionary new];
@@ -52,7 +83,7 @@
 	if([filename isEqualToString:@"DisplayServerIcon.icns"]) return; // We do not use the icon of this application
 	NSImage *preview = [NSImage new];
 	[preview initByReferencingFile:path];
-	[preview setSize:NSMakeSize(16.0, 16.0)];
+	[preview setSize:NSMakeSize(size, size)];
 
 	[d setObject:filename forKey:@"filename"];
 	[d setObject:icontype forKey:@"type"];	
@@ -63,13 +94,13 @@
 }
 
 
-- (void)scanIcons {
+- (void)scanIcons:(float) size{
 	items = [NSMutableArray new];
 	
 	NSArray *icons = [[NSBundle mainBundle] pathsForResourcesOfType:@"icns" inDirectory:nil];
 	int i;
 	for (i=0; i<[icons count]; i++) {
-		[self addItem:[icons objectAtIndex: i] type: @"Built-in"];
+		[self addItem:[icons objectAtIndex: i] type: @"Built-in" size:size];
 	}
 	if(![self pathExists:USERICONPATH]) return;
 	NSString *usericonpath =[[NSString stringWithUTF8String:USERICONPATH] stringByStandardizingPath];
@@ -77,19 +108,20 @@
 	NSString *pname;
 	while(pname = [direnum nextObject]) {
 		if ([pname hasSuffix: @"icns"]) {
-			[self addItem:[usericonpath stringByAppendingPathComponent: pname] type: @"User"];
+			[self addItem:[usericonpath stringByAppendingPathComponent: pname] type: @"User" size:size];
 		}
 		[direnum skipDescendents];
 	}
 }
 
 -	(void) refresh {
-	[self scanIcons];
-	[listview reloadData];	
+	[self scanIcons:currSize];
+	[listview reloadData];
 }
 
 - (void)awakeFromNib  {
-	[self scanIcons];
+	currSize = 16;
+	[self scanIcons:currSize];
 	[listview setDataSource:self];	
 	[listview setRowHeight:24];
 	[listview setDoubleAction:@selector(preview)];
@@ -146,10 +178,12 @@
 - (IBAction)openIcon:(id)sender {
 	[self checkUserIconFolder];
 	NSOpenPanel *panel = [NSOpenPanel openPanel];
+	NSString *importsPath = [ @"~/Desktop" stringByStandardizingPath ];	
 	[panel setAllowsMultipleSelection:YES];
 	[panel setCanCreateDirectories:NO];
 	[panel setMessage:MSG(@"Please choose the icon file which you want to add (File extension must be \".icns\".):")];
-	if([panel runModalForTypes:[NSArray arrayWithObjects:@"icns", nil]]  == NSOKButton) {
+	if([panel runModalForDirectory:importsPath file:nil
+		types:[NSArray arrayWithObjects:@"icns", nil]]  == NSOKButton) {
 		NSArray *filenames = [panel filenames];
 		int i;
 		if(![filenames count]) return;
@@ -171,30 +205,46 @@
 - (IBAction)convertIcon:(id)sender {
 	[self checkUserIconFolder];
 	NSOpenPanel *panel = [NSOpenPanel openPanel];
+	NSString *importsPath = [ @"~/Pictures" stringByStandardizingPath ];
 	[panel setAllowsMultipleSelection:YES];
 	[panel setCanCreateDirectories:NO];
 	[panel setTitle:MSG(@"Choose the Source Image")];
-	[panel setMessage:MSG(@"Please choose the image file that you would like to convert (File extension coud be \".jpeg\", \".gif\", \".png\", \".jsd\" and so on.):")];
-	if([panel runModalForTypes:[NSArray arrayWithObjects:@"jpeg", @"jpg", @"gif", @"png", @"psd", nil]]  == NSOKButton) {
+	[panel setMessage:MSG(@"Please choose the image file that you want to convert:")];
+	if([panel runModalForDirectory:importsPath file:nil 
+			types:[NSArray arrayWithObjects:@"jpeg", @"jpg", @"jpe", @"gif", 
+				  @"png", @"eps", @"epi", @"epsf", @"epsi", @"ps",
+				  @"psd", @"tif", @"tiff", @"bmp", nil]]  == NSOKButton) {
 		NSArray *filenames = [panel filenames];
 		int i;
 		if(![filenames count]) return;
 		for(i = 0; i < [filenames count]; i ++) {
 			NSString *sfilename = [self takeFilenameFromPath:[filenames objectAtIndex:i]];
+			NSString *tfilename = [[sfilename stringByDeletingPathExtension] stringByAppendingString:@".icns"];
 			NSSavePanel *savepanel= [NSSavePanel savePanel];
 			[savepanel setRequiredFileType:@"icns"];
 			[savepanel setCanCreateDirectories:NO];
 			[savepanel setAllowsOtherFileTypes:NO];
 			[savepanel setTitle:MSG(@"Save the Converted Icon")];	
 			[savepanel setMessage:[NSString stringWithFormat:MSG(@"Please set the filename of the icon converted from \"%@\":"), sfilename]];
-			if ([savepanel runModalForDirectory:[NSString stringWithUTF8String:USERICONPATH] file:@"newicon.icns"] != NSOKButton) {
+			if ([savepanel runModalForDirectory:[NSString stringWithUTF8String:USERICONPATH] file:tfilename] != NSOKButton) {
 				continue;
 			}
 			NSString *filepath = [[savepanel filename] stringByStandardizingPath];				
 			NSImage *icon = [NSImage new];
 
 			[icon initWithContentsOfFile:[filenames objectAtIndex:i]];
-			[icon setScalesWhenResized:TRUE];	
+			
+			if(![icon isValid]) {
+				NSAlert *errorbox=[NSAlert
+		alertWithMessageText:MSG(@"Error: Invalid Image file!")
+			   defaultButton:MSG(@"OK")
+			 alternateButton:nil
+				 otherButton:nil
+   informativeTextWithFormat:MSG(@"The selected file is invalid, please check your file.")];
+				[errorbox runModal];				
+				return;
+			}
+			[icon setScalesWhenResized:TRUE];
 			NSImage *ricon = [[[NSImage alloc] initWithSize:NSMakeSize(16, 16)] autorelease];
 			[ricon lockFocus];
 			[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
@@ -234,7 +284,44 @@
 	return;
 }
 
+- (BOOL)checkSelection {
+	if([listview numberOfSelectedRows] != 1) {
+		NSAlert *errorbox=[NSAlert
+		alertWithMessageText:MSG(@"Error: Please select one of the icons in the list.")
+			   defaultButton:MSG(@"OK")
+			 alternateButton:nil
+				 otherButton:nil
+   informativeTextWithFormat:MSG(@"It seems that you did not select any icon, or you selected whole column but not any unique icon.")];
+		[errorbox runModal];
+		return FALSE;
+	}
+	return TRUE;
+}
+
+- (IBAction)deleteIcon:(id)sender {
+	if(![self checkSelection]) return;	
+	NSString *type = [[items objectAtIndex:[listview selectedRow]] objectForKey:@"type"];
+	if([type isEqualToString:@"Built-in"]) {
+		NSAlert *errorbox=[NSAlert
+		alertWithMessageText:MSG(@"Error: You cannot delete the built-in icons.")
+			   defaultButton:MSG(@"OK")
+			 alternateButton:nil
+				 otherButton:nil
+   informativeTextWithFormat:MSG(@"You can delete your own customzied icons only.")];
+		[errorbox runModal];		
+		return;
+	}
+
+	NSString *path = [[items objectAtIndex:[listview selectedRow]] objectForKey:@"path"];
+	NSWorkspace *ws = [NSWorkspace sharedWorkspace];
+	[ws performFileOperation:NSWorkspaceRecycleOperation
+						  source:[path stringByDeletingLastPathComponent] destination:@""
+						  files:[NSArray arrayWithObject:[path lastPathComponent]] tag:0];
+	[self refresh];
+}
+
 - (void)preview {
+	if(![self checkSelection]) return;
 	NSString *cmd =[NSString stringWithFormat:@"open -a Preview %@", [[items objectAtIndex:[listview selectedRow]] objectForKey:@"path"]];	
 	system([cmd UTF8String]);
 	return;
@@ -252,17 +339,7 @@
 }
 
 - (IBAction)changeIcon:(id)sender {
-	if([listview numberOfSelectedRows] != 1) {
-		NSAlert *errorbox=[NSAlert
-		alertWithMessageText:MSG(@"Error: Please select one of the icons in the list.")
-			   defaultButton:MSG(@"OK")
-			 alternateButton:nil
-				 otherButton:nil
-   informativeTextWithFormat:MSG(@"It seems that you did not select any icon, or you selected whole column but not any unique icon.")];
-		[errorbox runModal];
-		return;
-	}
-	
+	if(![self checkSelection]) return;	
 	NSString *iconpath = [[items objectAtIndex:[listview selectedRow]] objectForKey:@"path"];
 	NSString *iconfilename = [[items objectAtIndex:[listview selectedRow]] objectForKey:@"filename"];
 	
@@ -367,19 +444,33 @@
     if (s != errAuthorizationSuccess) return;
 	
 	NSAlert *endbox=[NSAlert
-		alertWithMessageText:MSG(@"System Restart Required")
-			   defaultButton:MSG(@"Restart")
+		alertWithMessageText:MSG(@"Logout and Re-login Required")
+			   defaultButton:MSG(@"Logout")
 			 alternateButton:nil
 				 otherButton:nil
-   informativeTextWithFormat:MSG(@"Restart Explanation")];	
+   informativeTextWithFormat:MSG(@"Please logout and re-login to make the effect take place.")];	
 	
 	[endbox runModal];
 	
-	system("/usr/bin/osascript -e \"tell application \\\"Finder\\\" to restart\"");		
+	system("/usr/bin/osascript -e \"tell application \\\"system events\\\" to log out\"");		
 }
 
 - (void)windowWillClose:(NSNotification*)n {
 	[[NSApplication sharedApplication] terminate:self];
+}
+
+- (IBAction)refreshList:(id)sender {
+	[self refresh];
+}
+
+- (IBAction)viewStanard:(id)sender {
+	currSize = 16;
+	[self refresh];
+}
+
+- (IBAction)viewBigger:(id)sender {
+	currSize = 40;	
+	[self refresh];	
 }
 
 @end
