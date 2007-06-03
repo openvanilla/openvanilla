@@ -13,6 +13,9 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		D423D5C00C1295A30058F65D /* DisplayServerIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D423D5BF0C1295A30058F65D /* DisplayServerIcon.icns */; };
+		D44E43830C12F78800A0E7D7 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44E43820C12F78800A0E7D7 /* Carbon.framework */; };
+		D451CE710C12F68200919FB3 /* IconFamily.m in Sources */ = {isa = PBXBuildFile; fileRef = D451CE700C12F68200919FB3 /* IconFamily.m */; };
+		D451CE780C12F6D300919FB3 /* NSString+CarbonFSRefCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = D451CE770C12F6D300919FB3 /* NSString+CarbonFSRefCreation.m */; };
 		D4BDE5AC0C11FE0F006FF43C /* Delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BDE5AA0C11FE0F006FF43C /* Delegate.m */; };
 		D4BDE74F0C12834F006FF43C /* b-array.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7310C12834F006FF43C /* b-array.icns */; };
 		D4BDE7500C12834F006FF43C /* b-bo-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7320C12834F006FF43C /* b-bo-1.icns */; };
@@ -47,6 +50,11 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D423D5980C128DFB0058F65D /* OVIconChanger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVIconChanger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D423D5BF0C1295A30058F65D /* DisplayServerIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DisplayServerIcon.icns; sourceTree = "<group>"; };
+		D44E43820C12F78800A0E7D7 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		D451CE6F0C12F68200919FB3 /* IconFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconFamily.h; sourceTree = "<group>"; };
+		D451CE700C12F68200919FB3 /* IconFamily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconFamily.m; sourceTree = "<group>"; };
+		D451CE760C12F6D300919FB3 /* NSString+CarbonFSRefCreation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CarbonFSRefCreation.h"; sourceTree = "<group>"; };
+		D451CE770C12F6D300919FB3 /* NSString+CarbonFSRefCreation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CarbonFSRefCreation.m"; sourceTree = "<group>"; };
 		D4BDE5AA0C11FE0F006FF43C /* Delegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Delegate.m; sourceTree = "<group>"; };
 		D4BDE5AB0C11FE0F006FF43C /* Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delegate.h; sourceTree = "<group>"; };
 		D4BDE6B50C127944006FF43C /* OVIconChanger_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIconChanger_Prefix.pch; sourceTree = "<group>"; };
@@ -78,6 +86,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				6AD9F3450A4471F7008FE580 /* Security.framework in Frameworks */,
+				D44E43830C12F78800A0E7D7 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +104,8 @@
 		29B97314FDCFA39411CA2CEA /* OVUninstall */ = {
 			isa = PBXGroup;
 			children = (
+				D451CE760C12F6D300919FB3 /* NSString+CarbonFSRefCreation.h */,
+				D451CE770C12F6D300919FB3 /* NSString+CarbonFSRefCreation.m */,
 				D4BDE5C00C11FE9B006FF43C /* Icon Changer */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -130,6 +141,8 @@
 		D4BDE5C00C11FE9B006FF43C /* Icon Changer */ = {
 			isa = PBXGroup;
 			children = (
+				D451CE6F0C12F68200919FB3 /* IconFamily.h */,
+				D451CE700C12F68200919FB3 /* IconFamily.m */,
 				D4BDE5AA0C11FE0F006FF43C /* Delegate.m */,
 				D4BDE5AB0C11FE0F006FF43C /* Delegate.h */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
@@ -142,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				D4BDE7310C12834F006FF43C /* b-array.icns */,
+				D44E43820C12F78800A0E7D7 /* Carbon.framework */,
 				D4BDE7320C12834F006FF43C /* b-bo-1.icns */,
 				D4BDE7330C12834F006FF43C /* b-bo-2.icns */,
 				D4BDE7340C12834F006FF43C /* b-bpmf.icns */,
@@ -247,6 +261,8 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				D4BDE5AC0C11FE0F006FF43C /* Delegate.m in Sources */,
+				D451CE710C12F68200919FB3 /* IconFamily.m in Sources */,
+				D451CE780C12F6D300919FB3 /* NSString+CarbonFSRefCreation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

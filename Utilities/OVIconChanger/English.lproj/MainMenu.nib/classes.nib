@@ -1,7 +1,14 @@
 {
     IBClasses = (
         {
-            ACTIONS = {changeIcon = id; }; 
+            ACTIONS = {
+                changeIcon = id; 
+                convertIcon = id; 
+                homepage = id; 
+                openIcon = id; 
+                openIconFolder = id; 
+                previewIcon = id; 
+            }; 
             CLASS = Delegate; 
             LANGUAGE = ObjC; 
             OUTLETS = {listview = id; }; 
