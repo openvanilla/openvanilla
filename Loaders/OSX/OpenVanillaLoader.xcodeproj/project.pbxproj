@@ -123,6 +123,18 @@
 		D48C829F0C09CC6100EB008A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9651690970E1D9004BCC4D /* Cocoa.framework */; };
 		D48C82AB0C09CCE800EB008A /* ovwidgerplugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = D48C82AA0C09CCE800EB008A /* ovwidgerplugin.mm */; };
 		D48C82CA0C09CEE400EB008A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D48C82C90C09CEE400EB008A /* WebKit.framework */; };
+		D49FF85B0C0DDB6500997851 /* CVConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651720970E28C004BCC4D /* CVConfig.mm */; };
+		D49FF85C0C0DDB6500997851 /* CVDictionary.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651740970E28C004BCC4D /* CVDictionary.mm */; };
+		D49FF85D0C0DDB6500997851 /* CVEmbeddedLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651700970E238004BCC4D /* CVEmbeddedLoader.mm */; };
+		D49FF85E0C0DDB6500997851 /* CVKeyCode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651760970E28C004BCC4D /* CVKeyCode.mm */; };
+		D49FF85F0C0DDB6500997851 /* CVLoaderConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651780970E28C004BCC4D /* CVLoaderConfig.mm */; };
+		D49FF8600C0DDB6500997851 /* CVLoaderUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A96517A0970E28C004BCC4D /* CVLoaderUtility.mm */; };
+		D49FF8610C0DDB6500997851 /* CVService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A96517C0970E28C004BCC4D /* CVService.mm */; };
+		D49FF8620C0DDB6500997851 /* CVWrappers.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A96517E0970E28C004BCC4D /* CVWrappers.mm */; };
+		D49FF8630C0DDB6500997851 /* NSDictionaryExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651650970E118004BCC4D /* NSDictionaryExtension.mm */; };
+		D49FF8640C0DDB6500997851 /* NSStringExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651670970E118004BCC4D /* NSStringExtension.mm */; };
+		D49FF8670C0DDB9500997851 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9651680970E1D9004BCC4D /* Carbon.framework */; };
+		D49FF8680C0DDB9500997851 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9651690970E1D9004BCC4D /* Cocoa.framework */; };
 		D4FE84200C0B1D4000CC868C /* ServicesMenu.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4FE841F0C0B1D4000CC868C /* ServicesMenu.strings */; };
 /* End PBXBuildFile section */
 
@@ -269,6 +281,8 @@
 		6AA9CFA9097C0514008EDA95 /* OpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenVanilla.h; path = OpenVanilla.framework/Headers/OpenVanilla.h; sourceTree = "<group>"; };
 		6AA9CFAA097C0514008EDA95 /* OVLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVLibrary.h; path = OpenVanilla.framework/Headers/OVLibrary.h; sourceTree = "<group>"; };
 		6AA9CFAB097C0514008EDA95 /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVUtility.h; path = OpenVanilla.framework/Headers/OVUtility.h; sourceTree = "<group>"; };
+		D4066D950C0C7E360018A159 /* OVFilterService.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVFilterService.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4066D970C0C7E360018A159 /* OVFilterService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVFilterService-Info.plist"; sourceTree = "<group>"; };
 		D48C827F0C09CB4B00EB008A /* OVFilter-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVFilter-info.plist"; sourceTree = "<group>"; };
 		D48C82A90C09CCE800EB008A /* ovwidgerplugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ovwidgerplugin.h; path = OVFilterWidget/ovwidgerplugin.h; sourceTree = "<group>"; };
 		D48C82AA0C09CCE800EB008A /* ovwidgerplugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ovwidgerplugin.mm; path = OVFilterWidget/ovwidgerplugin.mm; sourceTree = "<group>"; };
@@ -349,6 +363,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D4066D930C0C7E360018A159 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D49FF8670C0DDB9500997851 /* Carbon.framework in Frameworks */,
+				D49FF8680C0DDB9500997851 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D48C82890C09CBE700EB008A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -405,6 +428,7 @@
 				6A96534C0970F882004BCC4D /* PropertyLists */,
 				6A96514E0970E0B2004BCC4D /* Products */,
 				D4FE841F0C0B1D4000CC868C /* ServicesMenu.strings */,
+				D4066D970C0C7E360018A159 /* OVFilterService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -605,6 +629,7 @@
 				6AA4352F0A38C1230028130A /* OpenVanilla-TSComponent-0.7.2-SC.bundle */,
 				6A24B0400A447EFA002ECCC2 /* OpenVanilla-TSComponent-0.7.2.bundle */,
 				D48C84030C09D52E00EB008A /* OVFilter.widgetplugin */,
+				D4066D950C0C7E360018A159 /* OVFilterService.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -840,6 +865,23 @@
 			productReference = 6AA687C2097109EB002080DE /* OVLoader.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		D4066D940C0C7E360018A159 /* OVFilterService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4066D980C0C7E370018A159 /* Build configuration list for PBXNativeTarget "OVFilterService" */;
+			buildPhases = (
+				D4066D910C0C7E360018A159 /* Resources */,
+				D4066D920C0C7E360018A159 /* Sources */,
+				D4066D930C0C7E360018A159 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVFilterService;
+			productName = OVFilterService;
+			productReference = D4066D950C0C7E360018A159 /* OVFilterService.app */;
+			productType = "com.apple.product-type.application";
+		};
 		D48C828A0C09CBE700EB008A /* OpenVanilla-Widget-Plugin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D48C828C0C09CC0600EB008A /* Build configuration list for PBXNativeTarget "OpenVanilla-Widget-Plugin" */;
@@ -886,6 +928,7 @@
 				6A074F710971284800CA4201 /* OVPreferences */,
 				6A0750FB09712DAC00CA4201 /* ovfilter */,
 				D48C828A0C09CBE700EB008A /* OpenVanilla-Widget-Plugin */,
+				D4066D940C0C7E360018A159 /* OVFilterService */,
 			);
 		};
 /* End PBXProject section */
@@ -957,6 +1000,13 @@
 				6AA6880C09710B99002080DE /* Localizable.strings in Resources */,
 				6AA6881A09710C14002080DE /* OpenVanillaLoaderIcon.icns in Resources */,
 				6AA6881B09710C18002080DE /* org.openvanilla.OVLoader.DefaultSettings.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4066D910C0C7E360018A159 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1106,6 +1156,23 @@
 				6AA6882909710C76002080DE /* CVWrappers.mm in Sources */,
 				6AA6882A09710C84002080DE /* NSDictionaryExtension.mm in Sources */,
 				6AA6882B09710C84002080DE /* NSStringExtension.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4066D920C0C7E360018A159 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D49FF85B0C0DDB6500997851 /* CVConfig.mm in Sources */,
+				D49FF85C0C0DDB6500997851 /* CVDictionary.mm in Sources */,
+				D49FF85D0C0DDB6500997851 /* CVEmbeddedLoader.mm in Sources */,
+				D49FF85E0C0DDB6500997851 /* CVKeyCode.mm in Sources */,
+				D49FF85F0C0DDB6500997851 /* CVLoaderConfig.mm in Sources */,
+				D49FF8600C0DDB6500997851 /* CVLoaderUtility.mm in Sources */,
+				D49FF8610C0DDB6500997851 /* CVService.mm in Sources */,
+				D49FF8620C0DDB6500997851 /* CVWrappers.mm in Sources */,
+				D49FF8630C0DDB6500997851 /* NSDictionaryExtension.mm in Sources */,
+				D49FF8640C0DDB6500997851 /* NSStringExtension.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1756,6 +1823,56 @@
 			};
 			name = Release;
 		};
+		D4066D990C0C7E370018A159 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVFilterService-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVFilterService;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4066D9A0C0C7E370018A159 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVFilterService-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVFilterService;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		D48C828D0C09CC0600EB008A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1895,6 +2012,15 @@
 			buildConfigurations = (
 				6AA687C5097109EC002080DE /* Debug */,
 				6AA687C6097109EC002080DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4066D980C0C7E370018A159 /* Build configuration list for PBXNativeTarget "OVFilterService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4066D990C0C7E370018A159 /* Debug */,
+				D4066D9A0C0C7E370018A159 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

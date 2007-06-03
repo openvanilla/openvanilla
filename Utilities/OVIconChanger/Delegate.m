@@ -53,6 +53,7 @@
 
 - (NSString *)takeFilenameFromPath: (NSString *)path {
 	if([path length]) {
+		
 		NSArray *pathComponents = [path pathComponents];
 		NSString *filename = [pathComponents lastObject];	
 		return filename;
@@ -85,7 +86,7 @@
 	[preview initByReferencingFile:path];
 	[preview setSize:NSMakeSize(size, size)];
 
-	[d setObject:filename forKey:@"filename"];
+	[d setObject:[filename stringByDeletingPathExtension] forKey:@"filename"];
 	[d setObject:icontype forKey:@"type"];	
 	[d setObject:path forKey:@"path"];
 	[d setObject:preview forKey:@"preview"];
@@ -97,21 +98,22 @@
 - (void)scanIcons:(float) size{
 	items = [NSMutableArray new];
 	
+	if([self pathExists:USERICONPATH]){
+		NSString *usericonpath =[[NSString stringWithUTF8String:USERICONPATH] stringByStandardizingPath];
+		NSDirectoryEnumerator *direnum = [[NSFileManager defaultManager] enumeratorAtPath:usericonpath];
+		NSString *pname;
+		while(pname = [direnum nextObject]) {
+			if ([pname hasSuffix: @"icns"]) {
+				[self addItem:[usericonpath stringByAppendingPathComponent: pname] type: @"User" size:size];
+			}
+			[direnum skipDescendents];
+		}
+	}
 	NSArray *icons = [[NSBundle mainBundle] pathsForResourcesOfType:@"icns" inDirectory:nil];
 	int i;
 	for (i=0; i<[icons count]; i++) {
 		[self addItem:[icons objectAtIndex: i] type: @"Built-in" size:size];
-	}
-	if(![self pathExists:USERICONPATH]) return;
-	NSString *usericonpath =[[NSString stringWithUTF8String:USERICONPATH] stringByStandardizingPath];
-	NSDirectoryEnumerator *direnum = [[NSFileManager defaultManager] enumeratorAtPath:usericonpath];
-	NSString *pname;
-	while(pname = [direnum nextObject]) {
-		if ([pname hasSuffix: @"icns"]) {
-			[self addItem:[usericonpath stringByAppendingPathComponent: pname] type: @"User" size:size];
-		}
-		[direnum skipDescendents];
-	}
+	}	
 }
 
 -	(void) refresh {
@@ -133,7 +135,7 @@
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {
 	if ([[aTableColumn identifier] isEqualToString:@"filename"]) {
-		return [[items objectAtIndex:rowIndex] objectForKey:@"filename"];
+		return MSG([[items objectAtIndex:rowIndex] objectForKey:@"filename"]);
 	}
 	if ([[aTableColumn identifier] isEqualToString:@"preview"]) {
 		return [[items objectAtIndex:rowIndex] objectForKey:@"preview"];

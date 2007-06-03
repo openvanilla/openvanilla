@@ -27,3 +27,50 @@
 "User" = "User";
 "Error: Invalid Image file!" = "Error: Invalid Image file!";
 "The selected file is invalid, please check your file." = "The selected file is invalid, please check your file.";
+
+//
+
+"OpenVanillaMenuIcon" = "The default OpenVanilla icon";
+"b-array" = "Icon of Array Input Method";
+"b-bo-1" = "Icon of Tibetan Input Method";
+"b-bo-2" = "Icon of Tibetan Input Method";
+"b-bpmf" = "Icon of Zhuyin(Bopomofo) Input Method";
+"b-chewing" = "Icon of Chewing Input Method";
+"b-eten" = "Icon of Eten Input Method";
+"b-pai" = "Icon of POJ Input Method";
+"b-poj" = "Icon of POJ Input Method";
+"b-sss" = "Icon of Unicode Input Method";
+"b-tai" = "Icon of Taiwanese Input Method";
+"b-tobaco" = "Icon of Tobacco Input Method";
+"cn" = "The Five-Star Red Flag - People Republic of China";
+"hk-1" = "Logo of Hongkong";
+"hk-2" = "Logo of Hongkong";
+"kaoshiung-1" = "Logo of Kaoshiung City";
+"kaohsiung-2" = "Logo of Kaoshiung City";
+"macau-1" = "Logo of Macau";
+"macau-2" = "Logo of Macau";
+"nccu" = "Logo of Chengchi University, Taiwan";
+"ncku" = "Logo of Chengkung University, Taiwan";
+"nctu" = "Logo of Chiaotung University, Taiwan";
+"ntu" = "Logo of Taiwan University, Taiwan";
+"qing-1" = "Logo of Qing Dynasty";
+"qing-2" = "Logo of Qing Dynasty";
+"roc-1" = "Flag of of Blue Sky and White Sun - National Flag of Republic of China";
+"roc-2" = "Flag of of Blue Sky and White Sun - National Flag of Republic of China";
+"roc-old-1" = "The 5-colored Flag - National Flag of Republic of China";
+"roc-old-2" = "The 18-Stars Flag - National Flag of Republic of China";
+"sg" = "National Flag of Singapore";
+"taichung" = "Logo of Taichung City";
+"taipei" = "Logo of Taipei City";
+"tp-sssh" = "Logo of Sungshan Senior High School - Taipei City";
+"twin-1" = "Taiwanese Flag";
+"twin-2" = "Taiwanese Flag";
+"weed" = "Logo of Weed Input Method";
+"zonble" = "zonble";
+
+"anarchist" = "Flag of Anarcho-syndicalism";
+"chinesetaipei" = "The Chinese Taipei Flag";
+"earth" = "The Earth Flag";
+"esperanto" = "Logo of Esperanto";
+"rainbow" = "Rainbow Flag";
+"trans" = "Transgender Pride flag";

@@ -27,3 +27,50 @@
 "User" = "使用者圖示";
 "Error: Invalid Image file!" = "錯誤：輸入的檔案不正確！";
 "The selected file is invalid, please check your file." = "您所輸入的圖檔格式不正確，請檢查後重新輸入。";
+
+//
+
+"OpenVanillaMenuIcon" = "OpenVanilla 預設圖示";
+"b-array" = "行列輸入法圖示";
+"b-bo-1" = "藏文輸入法圖示";
+"b-bo-2" = "藏文輸入法圖示";
+"b-bpmf" = "注音輸入法圖示";
+"b-chewing" = "酷音輸入法圖示";
+"b-eten" = "倚天輸入法圖示";
+"b-pai" = "白話字輸入法圖示";
+"b-poj" = "白話字輸入法圖示";
+"b-sss" = "Unicode 輸入法圖示";
+"b-tai" = "台文輸入法圖示";
+"b-tobaco" = "哈草輸入法圖示";
+"cn" = "中華人民共和國五星旗";
+"hk-1" = "香港特別行政區洋紫荊旗";
+"hk-2" = "香港特別行政區洋紫荊旗";
+"kaoshiung-1" = "高雄市市徽";
+"kaohsiung-2" = "高雄市市徽";
+"macau-1" = "澳門特別行政區";
+"macau-2" = "澳門特別行政區";
+"nccu" = "政治大學校徽";
+"ncku" = "成功大學校徽";
+"nctu" = "交通大學校徽";
+"ntu" = "台灣大學校徽";
+"qing-1" = "清朝黃龍旗";
+"qing-2" = "清朝黃龍旗";
+"roc-1" = "中華民國青天白日滿地紅旗";
+"roc-2" = "中華民國青天白日滿地紅旗";
+"roc-old-1" = "中華民國五色旗";
+"roc-old-2" = "中華民國鐵血十八星旗";
+"sg" = "星加坡國徽";
+"taichung" = "台中市市徽";
+"taipei" = "台北市市徽";
+"tp-sssh" = "台北市立松山高中校徽";
+"twin-1" = "台灣同心旗";
+"twin-2" = "台灣同心旗";
+"weed" = "哈草輸入法";
+"zonble" = "zonble";
+
+"anarchist" = "無政府工聯主義";
+"chinesetaipei" = "中華台北奧運代表旗";
+"earth" = "地球旗";
+"esperanto" = "世界語圖示";
+"rainbow" = "彩虹旗";
+"trans" = "跨性別驕傲旗幟";
