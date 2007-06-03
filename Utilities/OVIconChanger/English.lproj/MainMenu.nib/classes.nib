@@ -1,0 +1,13 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {changeIcon = id; }; 
+            CLASS = Delegate; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {listview = id; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}
