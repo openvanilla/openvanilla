@@ -26,5 +26,9 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>OVIconChanger Help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>OpenVanilla Icon Changer Help</string>
 </dict>
 </plist>

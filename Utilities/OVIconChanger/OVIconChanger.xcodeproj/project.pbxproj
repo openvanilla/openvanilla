@@ -41,6 +41,7 @@
 		D4A910E30C137EB0006A5A1E /* rainbow.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910DD0C137EB0006A5A1E /* rainbow.icns */; };
 		D4A910E40C137EB0006A5A1E /* trans.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910DE0C137EB0006A5A1E /* trans.icns */; };
 		D4AA41440C1335AF004AAB67 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA41430C1335AF004AAB67 /* Localizable.strings */; };
+		D4B2ED930C1454DB007C6026 /* OVIconChanger Help in Resources */ = {isa = PBXBuildFile; fileRef = D4B2ED8D0C1454DB007C6026 /* OVIconChanger Help */; };
 		D4BDE5AC0C11FE0F006FF43C /* Delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BDE5AA0C11FE0F006FF43C /* Delegate.m */; };
 		D4BDE74F0C12834F006FF43C /* b-array.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7310C12834F006FF43C /* b-array.icns */; };
 		D4BDE7500C12834F006FF43C /* b-bo-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7320C12834F006FF43C /* b-bo-1.icns */; };
@@ -61,6 +62,7 @@
 		D4BDE7680C12834F006FF43C /* twin-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE74A0C12834F006FF43C /* twin-2.icns */; };
 		D4BDE76B0C12834F006FF43C /* weed.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE74D0C12834F006FF43C /* weed.icns */; };
 		D4BDE76C0C12834F006FF43C /* zonble.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE74E0C12834F006FF43C /* zonble.icns */; };
+		D4E54A950C143AE60011D1B5 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D4E54A940C143AE60011D1B5 /* Credits.rtf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +111,9 @@
 		D4A910DE0C137EB0006A5A1E /* trans.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = trans.icns; path = ../../Artworks/icns/trans.icns; sourceTree = SOURCE_ROOT; };
 		D4AA413F0C13359F004AAB67 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4AA416E0C13370C004AAB67 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D4B2ED8E0C1454DB007C6026 /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = "English.lproj/OVIconChanger Help"; sourceTree = "<group>"; };
+		D4B2ED960C1454F3007C6026 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = folder; name = zh_TW; path = "zh_TW.lproj/OVIconChanger Help"; sourceTree = "<group>"; };
+		D4B2ED9D0C145500007C6026 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = folder; name = zh_CN; path = "zh_CN.lproj/OVIconChanger Help"; sourceTree = "<group>"; };
 		D4BDE5AA0C11FE0F006FF43C /* Delegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Delegate.m; sourceTree = "<group>"; };
 		D4BDE5AB0C11FE0F006FF43C /* Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delegate.h; sourceTree = "<group>"; };
 		D4BDE6B50C127944006FF43C /* OVIconChanger_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIconChanger_Prefix.pch; sourceTree = "<group>"; };
@@ -131,6 +136,9 @@
 		D4BDE74A0C12834F006FF43C /* twin-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "twin-2.icns"; path = "../../Artworks/icns/twin-2.icns"; sourceTree = SOURCE_ROOT; };
 		D4BDE74D0C12834F006FF43C /* weed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = weed.icns; path = ../../Artworks/icns/weed.icns; sourceTree = SOURCE_ROOT; };
 		D4BDE74E0C12834F006FF43C /* zonble.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = zonble.icns; path = ../../Artworks/icns/zonble.icns; sourceTree = SOURCE_ROOT; };
+		D4E54A810C1439010011D1B5 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
+		D4E54A960C143AEB0011D1B5 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = zh_TW; path = zh_TW.lproj/Credits.rtf; sourceTree = "<group>"; };
+		D4E54A9C0C143B610011D1B5 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = zh_CN; path = zh_CN.lproj/Credits.rtf; sourceTree = "<group>"; };
 		D4F8FCE10C133B4700353C7B /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		D4F8FCE70C133B5400353C7B /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,6 +179,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D4B2ED8D0C1454DB007C6026 /* OVIconChanger Help */,
+				D4B2ED280C143BED007C6026 /* Documents */,
 				D4AA41430C1335AF004AAB67 /* Localizable.strings */,
 				D423D5BF0C1295A30058F65D /* DisplayServerIcon.icns */,
 				D4BDE6940C127725006FF43C /* Icons */,
@@ -203,6 +213,14 @@
 				D451CE700C12F68200919FB3 /* IconFamily.m */,
 			);
 			name = "Icon Family Tools";
+			sourceTree = "<group>";
+		};
+		D4B2ED280C143BED007C6026 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				D4E54A940C143AE60011D1B5 /* Credits.rtf */,
+			);
+			name = Documents;
 			sourceTree = "<group>";
 		};
 		D4BDE5C00C11FE9B006FF43C /* Icon Changer */ = {
@@ -363,6 +381,8 @@
 				D4A910E20C137EB0006A5A1E /* esperanto.icns in Resources */,
 				D4A910E30C137EB0006A5A1E /* rainbow.icns in Resources */,
 				D4A910E40C137EB0006A5A1E /* trans.icns in Resources */,
+				D4E54A950C143AE60011D1B5 /* Credits.rtf in Resources */,
+				D4B2ED930C1454DB007C6026 /* OVIconChanger Help in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +431,26 @@
 				D40F82030C13B8F2003F773D /* zh_CN */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		D4B2ED8D0C1454DB007C6026 /* OVIconChanger Help */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4B2ED8E0C1454DB007C6026 /* English */,
+				D4B2ED960C1454F3007C6026 /* zh_TW */,
+				D4B2ED9D0C145500007C6026 /* zh_CN */,
+			);
+			name = "OVIconChanger Help";
+			sourceTree = "<group>";
+		};
+		D4E54A940C143AE60011D1B5 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4E54A810C1439010011D1B5 /* English */,
+				D4E54A960C143AEB0011D1B5 /* zh_TW */,
+				D4E54A9C0C143B610011D1B5 /* zh_CN */,
+			);
+			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
