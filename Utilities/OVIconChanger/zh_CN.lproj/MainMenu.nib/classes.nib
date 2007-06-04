@@ -1,0 +1,24 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                changeIcon = id; 
+                convertIcon = id; 
+                deleteIcon = id; 
+                homepage = id; 
+                openIcon = id; 
+                openIconFolder = id; 
+                previewIcon = id; 
+                refreshList = id; 
+                viewBigger = id; 
+                viewStanard = id; 
+            }; 
+            CLASS = Delegate; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {listview = id; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}

@@ -1,5 +1,5 @@
 "Error: File does not exist!" = "錯誤:找不到檔案！";
-"The icon that you want to add exists no more, you might deleted it, or some unknown errors happened." = "現在在硬碟裡找不到您想要加入的圖示，您可以已經將檔案刪除，或是發生了不明的錯誤。";
+"The icon that you want to add exists no more, you might deleted it, or some unknown errors happened." = "現在在硬碟裡找不到您想要加入的圖示，您可能已經將檔案刪除，或是發生了不明的錯誤。";
 "Error: File alreay exists!" = "錯誤:已經有這個檔案了！";
 "OK" = "好";
 "You have already have a icon file called \"%@\". You can not copy it again." = "您已經將 \"%@\" 加入到您的圖示目錄中了，您不需要再加入一次。";
@@ -59,7 +59,7 @@
 "roc-2" = "中華民國青天白日滿地紅旗";
 "roc-old-1" = "中華民國五色旗";
 "roc-old-2" = "中華民國鐵血十八星旗";
-"sg" = "星加坡國徽";
+"sg" = "新加坡國徽";
 "taichung" = "台中市市徽";
 "taipei" = "台北市市徽";
 "tp-sssh" = "台北市立松山高中校徽";

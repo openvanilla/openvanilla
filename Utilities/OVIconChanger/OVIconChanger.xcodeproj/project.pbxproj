@@ -73,6 +73,9 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		6AD9F3440A4471F7008FE580 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D40F81F40C13B8C5003F773D /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D40F82030C13B8F2003F773D /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D40F82450C13BBC0003F773D /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = zh_CN.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		D423D5980C128DFB0058F65D /* OVIconChanger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVIconChanger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D423D5BF0C1295A30058F65D /* DisplayServerIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DisplayServerIcon.icns; sourceTree = "<group>"; };
 		D44E43820C12F78800A0E7D7 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
@@ -385,6 +388,7 @@
 			children = (
 				089C165DFE840E0CC02AAC07 /* English */,
 				D4F8FCE70C133B5400353C7B /* zh_TW */,
+				D40F81F40C13B8C5003F773D /* zh_CN */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -394,6 +398,7 @@
 			children = (
 				29B97319FDCFA39411CA2CEA /* English */,
 				D4F8FCE10C133B4700353C7B /* zh_TW */,
+				D40F82450C13BBC0003F773D /* zh_CN */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
@@ -403,6 +408,7 @@
 			children = (
 				D4AA413F0C13359F004AAB67 /* English */,
 				D4AA416E0C13370C004AAB67 /* zh_TW */,
+				D40F82030C13B8F2003F773D /* zh_CN */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
