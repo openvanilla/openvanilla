@@ -34,9 +34,9 @@
 @interface Delegate : NSObject
 {
     IBOutlet id listview;
-	
-	NSMutableArray *items;
-	float currSize;
+
+    NSMutableArray *items;
+    float currSize;
 }
 - (IBAction)changeIcon:(id)sender;
 - (IBAction)convertIcon:(id)sender;

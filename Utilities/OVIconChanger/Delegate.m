@@ -1,5 +1,6 @@
 // Delegate.m
 //
+// A Utility to change OpenVanilla's icon.
 //
 // Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
@@ -52,427 +53,417 @@
 @implementation Delegate
 
 - (NSString *)takeFilenameFromPath: (NSString *)path {
-	if([path length]) {
-		
-		NSArray *pathComponents = [path pathComponents];
-		NSString *filename = [pathComponents lastObject];	
-		return filename;
-	}
-	return @"";
+    if([path length]) {
+
+	NSArray *pathComponents = [path pathComponents];
+	NSString *filename = [pathComponents lastObject];	
+	return filename;
+    }
+    return @"";
 }
 
 - (BOOL)pathExists:(const char *)cp {
-	NSString *p=[[NSString stringWithUTF8String:cp] stringByStandardizingPath];
+    NSString *p=[[NSString stringWithUTF8String:cp] stringByStandardizingPath];
     struct stat st;
     if (stat([p UTF8String], &st)) return NO;
     return YES;
 }
 
 - (void) checkUserIconFolder {
-	if(![self pathExists:USERICONPATH]) {
-		mkdir([[[NSString stringWithUTF8String:USERICONPATH] stringByStandardizingPath] UTF8String], 0000755);
-		NSLog(@"Path not exists!");
-	}
+    if(![self pathExists:USERICONPATH]) {
+	mkdir([[[NSString stringWithUTF8String:USERICONPATH] stringByStandardizingPath] UTF8String], 0000755);
+	NSLog(@"Path not exists!");
+    }
 }
 
 - (void)addItem:(NSString*)path type:(NSString*)icontype size: (float)size {
-	if(![self pathExists: [path UTF8String]]) return;
+    if(![self pathExists: [path UTF8String]]) return;
 
-	NSMutableDictionary *d=[NSMutableDictionary new];
-	NSString *filename = [self takeFilenameFromPath:path];
-	
-	if([filename isEqualToString:@"DisplayServerIcon.icns"]) return; // We do not use the icon of this application
-	NSImage *preview = [NSImage new];
-	[preview initByReferencingFile:path];
-	[preview setSize:NSMakeSize(size, size)];
+    NSMutableDictionary *d=[NSMutableDictionary new];
+    NSString *filename = [self takeFilenameFromPath:path];
 
-	[d setObject:[filename stringByDeletingPathExtension] forKey:@"filename"];
-	[d setObject:icontype forKey:@"type"];	
-	[d setObject:path forKey:@"path"];
-	[d setObject:preview forKey:@"preview"];
-	[items addObject:d];
-	[d release];
+    if([filename isEqualToString:@"DisplayServerIcon.icns"]) return; // We do not use the icon of this application
+    NSImage *preview = [NSImage new];
+    [preview initByReferencingFile:path];
+    [preview setSize:NSMakeSize(size, size)];
+
+    [d setObject:[filename stringByDeletingPathExtension] forKey:@"filename"];
+    [d setObject:icontype forKey:@"type"];	
+    [d setObject:path forKey:@"path"];
+    [d setObject:preview forKey:@"preview"];
+    [items addObject:d];
+    [d release];
 }
 
 
 - (void)scanIcons:(float) size{
-	items = [NSMutableArray new];
-	
-	if([self pathExists:USERICONPATH]){
-		NSString *usericonpath =[[NSString stringWithUTF8String:USERICONPATH] stringByStandardizingPath];
-		NSDirectoryEnumerator *direnum = [[NSFileManager defaultManager] enumeratorAtPath:usericonpath];
-		NSString *pname;
-		while(pname = [direnum nextObject]) {
-			if ([pname hasSuffix: @"icns"]) {
-				[self addItem:[usericonpath stringByAppendingPathComponent: pname] type: @"User" size:size];
-			}
-			[direnum skipDescendents];
-		}
+    items = [NSMutableArray new];
+
+    if([self pathExists:USERICONPATH]){
+	NSString *usericonpath =[[NSString stringWithUTF8String:USERICONPATH] stringByStandardizingPath];
+	NSDirectoryEnumerator *direnum = [[NSFileManager defaultManager] enumeratorAtPath:usericonpath];
+	NSString *pname;
+	while(pname = [direnum nextObject]) {
+	    if ([pname hasSuffix: @"icns"]) {
+		[self addItem:[usericonpath stringByAppendingPathComponent: pname] type: @"User" size:size];
+	    }
+	    [direnum skipDescendents];
 	}
-	NSArray *icons = [[NSBundle mainBundle] pathsForResourcesOfType:@"icns" inDirectory:nil];
-	int i;
-	for (i=0; i<[icons count]; i++) {
-		[self addItem:[icons objectAtIndex: i] type: @"Built-in" size:size];
-	}	
+    }
+    NSArray *icons = [[NSBundle mainBundle] pathsForResourcesOfType:@"icns" inDirectory:nil];
+    int i;
+    for (i=0; i<[icons count]; i++) {
+	[self addItem:[icons objectAtIndex: i] type: @"Built-in" size:size];
+    }	
 }
 
 -	(void) refresh {
-	[self scanIcons:currSize];
-	[listview reloadData];
+    [self scanIcons:currSize];
+    [listview reloadData];
 }
 
 - (void)awakeFromNib  {
-	currSize = 16;
-	[self scanIcons:currSize];
-	[listview setDataSource:self];	
-	[listview setRowHeight:24];
-	[listview setDoubleAction:@selector(preview)];
+    currSize = 16;
+    [self scanIcons:currSize];
+    [listview setDataSource:self];	
+    [listview setRowHeight:24];
+    [listview setDoubleAction:@selector(preview)];
 }
 
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView {
-	return [items count];
+    return [items count];
 }
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {
-	if ([[aTableColumn identifier] isEqualToString:@"filename"]) {
-		return MSG([[items objectAtIndex:rowIndex] objectForKey:@"filename"]);
-	}
-	if ([[aTableColumn identifier] isEqualToString:@"preview"]) {
-		return [[items objectAtIndex:rowIndex] objectForKey:@"preview"];
-	}
-	
-	if ([[aTableColumn identifier] isEqualToString:@"type"]) {
-		return MSG([[items objectAtIndex:rowIndex] objectForKey:@"type"]);
-	}
-	
-	return nil;
+    if ([[aTableColumn identifier] isEqualToString:@"filename"]) {
+	return MSG([[items objectAtIndex:rowIndex] objectForKey:@"filename"]);
+    }
+    if ([[aTableColumn identifier] isEqualToString:@"preview"]) {
+	return [[items objectAtIndex:rowIndex] objectForKey:@"preview"];
+    }
+
+    if ([[aTableColumn identifier] isEqualToString:@"type"]) {
+	return MSG([[items objectAtIndex:rowIndex] objectForKey:@"type"]);
+    }
+
+    return nil;
 }
 
 - (void) copyToUserDir: (NSString *) path {
-	if(![self pathExists:[path UTF8String]]) {
-		NSAlert *errorbox=[NSAlert
-		alertWithMessageText:MSG(@"Error: File does not exist!")
-			   defaultButton:MSG(@"OK")
-			 alternateButton:nil
-				 otherButton:nil
-   informativeTextWithFormat:MSG(@"The icon that you want to add exists no more, you might deleted it, or some unknown errors happened.")];
-		[errorbox runModal];
-		return;
-	}
-	
-	NSString *filename = [self takeFilenameFromPath:path];
-	NSString *targetfilepath = [NSString stringWithFormat:@"%@/%@", [NSString stringWithUTF8String:USERICONPATH], filename];
-	if([self pathExists:[targetfilepath UTF8String]]) {
-		NSAlert *errorbox=[NSAlert
-		alertWithMessageText:MSG(@"Error: File alreay exists!")
-			   defaultButton:MSG(@"OK")
-			 alternateButton:nil
-				 otherButton:nil
-   informativeTextWithFormat:MSG(@"You have already have a icon file called \"%@\". You can not copy it again."), filename];
-		[errorbox runModal];
-		return;	
-	}	
-	NSString *cmd = [NSString stringWithFormat:@"/bin/cp %@ %@ \n", path, targetfilepath];
-	system([cmd UTF8String]);
+    if(![self pathExists:[path UTF8String]]) {
+	NSAlert *errorbox=[NSAlert
+	    alertWithMessageText:MSG(@"Error: File does not exist!")
+	    defaultButton:MSG(@"OK")
+	    alternateButton:nil
+	    otherButton:nil
+	    informativeTextWithFormat:MSG(@"The icon that you want to add exists no more, you might deleted it, or some unknown errors happened.")];
+	[errorbox runModal];
 	return;
+    }
+
+    NSString *filename = [self takeFilenameFromPath:path];
+    NSString *targetfilepath = [NSString stringWithFormat:@"%@/%@", [NSString stringWithUTF8String:USERICONPATH], filename];
+    if([self pathExists:[targetfilepath UTF8String]]) {
+	NSAlert *errorbox=[NSAlert
+	    alertWithMessageText:MSG(@"Error: File alreay exists!")
+	    defaultButton:MSG(@"OK")
+	    alternateButton:nil
+	    otherButton:nil
+	    informativeTextWithFormat:MSG(@"You have already have a icon file called \"%@\". You can not copy it again."), filename];
+	[errorbox runModal];
+	return;	
+    }	
+    NSString *cmd = [NSString stringWithFormat:@"/bin/cp %@ %@ \n", path, targetfilepath];
+    system([cmd UTF8String]);
+    return;
 }
 
 - (IBAction)openIcon:(id)sender {
-	[self checkUserIconFolder];
-	NSOpenPanel *panel = [NSOpenPanel openPanel];
-	NSString *importsPath = [ @"~/Desktop" stringByStandardizingPath ];	
-	[panel setAllowsMultipleSelection:YES];
-	[panel setCanCreateDirectories:NO];
-	[panel setMessage:MSG(@"Please choose the icon file which you want to add (File extension must be \".icns\".):")];
-	if([panel runModalForDirectory:importsPath file:nil
-		types:[NSArray arrayWithObjects:@"icns", nil]]  == NSOKButton) {
-		NSArray *filenames = [panel filenames];
-		int i;
-		if(![filenames count]) return;
-		for(i = 0; i < [filenames count]; i ++) {
-			[self copyToUserDir:[[filenames objectAtIndex:i] stringByStandardizingPath]];
-		}
-		NSAlert *msgbox=[NSAlert
-			alertWithMessageText:MSG(@"Done!")
-			   defaultButton:MSG(@"OK")
-			 alternateButton:nil
-				 otherButton:nil
-	   informativeTextWithFormat:MSG(@"Complete copying.")];
-		[msgbox runModal];
-		[self refresh];	
+    [self checkUserIconFolder];
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    NSString *importsPath = [ @"~/Desktop" stringByStandardizingPath ];	
+    [panel setAllowsMultipleSelection:YES];
+    [panel setCanCreateDirectories:NO];
+    [panel setMessage:MSG(@"Please choose the icon file which you want to add (File extension must be \".icns\".):")];
+    if([panel runModalForDirectory:importsPath file:nil
+	    types:[NSArray arrayWithObjects:@"icns", nil]]  == NSOKButton) {
+	NSArray *filenames = [panel filenames];
+	int i;
+	if(![filenames count]) return;
+	for(i = 0; i < [filenames count]; i ++) {
+	    [self copyToUserDir:[[filenames objectAtIndex:i] stringByStandardizingPath]];
 	}
-	return;	
+	NSAlert *msgbox=[NSAlert
+	    alertWithMessageText:MSG(@"Done!")
+	    defaultButton:MSG(@"OK")
+	    alternateButton:nil
+	    otherButton:nil
+	    informativeTextWithFormat:MSG(@"Complete copying.")];
+	[msgbox runModal];
+	[self refresh];	
+    }
+    return;	
 }
 
 - (IBAction)convertIcon:(id)sender {
-	[self checkUserIconFolder];
-	NSOpenPanel *panel = [NSOpenPanel openPanel];
-	NSString *importsPath = [ @"~/Pictures" stringByStandardizingPath ];
-	[panel setAllowsMultipleSelection:YES];
-	[panel setCanCreateDirectories:NO];
-	[panel setTitle:MSG(@"Choose the Source Image")];
-	[panel setMessage:MSG(@"Please choose the image file that you want to convert:")];
-	if([panel runModalForDirectory:importsPath file:nil 
-			types:[NSArray arrayWithObjects:@"jpeg", @"jpg", @"jpe", @"gif", 
-				  @"png", @"eps", @"epi", @"epsf", @"epsi", @"ps",
-				  @"psd", @"tif", @"tiff", @"bmp", nil]]  == NSOKButton) {
-		NSArray *filenames = [panel filenames];
-		int i;
-		if(![filenames count]) return;
-		for(i = 0; i < [filenames count]; i ++) {
-			NSString *sfilename = [self takeFilenameFromPath:[filenames objectAtIndex:i]];
-			NSString *tfilename = [[sfilename stringByDeletingPathExtension] stringByAppendingString:@".icns"];
-			NSSavePanel *savepanel= [NSSavePanel savePanel];
-			[savepanel setRequiredFileType:@"icns"];
-			[savepanel setCanCreateDirectories:NO];
-			[savepanel setAllowsOtherFileTypes:NO];
-			[savepanel setTitle:MSG(@"Save the Converted Icon")];	
-			[savepanel setMessage:[NSString stringWithFormat:MSG(@"Please set the filename of the icon converted from \"%@\":"), sfilename]];
-			if ([savepanel runModalForDirectory:[NSString stringWithUTF8String:USERICONPATH] file:tfilename] != NSOKButton) {
-				continue;
-			}
-			NSString *filepath = [[savepanel filename] stringByStandardizingPath];				
-			NSImage *icon = [NSImage new];
+    [self checkUserIconFolder];
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    NSString *importsPath = [ @"~/Pictures" stringByStandardizingPath ];
+    [panel setAllowsMultipleSelection:YES];
+    [panel setCanCreateDirectories:NO];
+    [panel setTitle:MSG(@"Choose the Source Image")];
+    [panel setMessage:MSG(@"Please choose the image file that you want to convert:")];
+    if([panel runModalForDirectory:importsPath file:nil 
+	    types:[NSArray arrayWithObjects:@"jpeg", @"jpg", @"jpe", @"gif", 
+	    @"png", @"eps", @"epi", @"epsf", @"epsi", @"ps",
+	    @"psd", @"tif", @"tiff", @"bmp", nil]]  == NSOKButton) {
+	NSArray *filenames = [panel filenames];
+	int i;
+	if(![filenames count]) return;
+	for(i = 0; i < [filenames count]; i ++) {
+	    NSString *sfilename = [self takeFilenameFromPath:[filenames objectAtIndex:i]];
+	    NSString *tfilename = [[sfilename stringByDeletingPathExtension] stringByAppendingString:@".icns"];
+	    NSSavePanel *savepanel= [NSSavePanel savePanel];
+	    [savepanel setRequiredFileType:@"icns"];
+	    [savepanel setCanCreateDirectories:NO];
+	    [savepanel setAllowsOtherFileTypes:NO];
+	    [savepanel setTitle:MSG(@"Save the Converted Icon")];	
+	    [savepanel setMessage:[NSString stringWithFormat:MSG(@"Please set the filename of the icon converted from \"%@\":"), sfilename]];
+	    if ([savepanel runModalForDirectory:[NSString stringWithUTF8String:USERICONPATH] file:tfilename] != NSOKButton) {
+		continue;
+	    }
+	    NSString *filepath = [[savepanel filename] stringByStandardizingPath];				
+	    NSImage *icon = [NSImage new];
 
-			[icon initWithContentsOfFile:[filenames objectAtIndex:i]];
-			
-			if(![icon isValid]) {
-				NSAlert *errorbox=[NSAlert
-		alertWithMessageText:MSG(@"Error: Invalid Image file!")
-			   defaultButton:MSG(@"OK")
-			 alternateButton:nil
-				 otherButton:nil
-   informativeTextWithFormat:MSG(@"The selected file is invalid, please check your file.")];
-				[errorbox runModal];				
-				return;
-			}
-			[icon setScalesWhenResized:TRUE];
-			NSImage *ricon = [[[NSImage alloc] initWithSize:NSMakeSize(16, 16)] autorelease];
-			[ricon lockFocus];
-			[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-			[icon setSize:NSMakeSize(16, 16)];
-			[icon compositeToPoint:NSZeroPoint operation:NSCompositeCopy];
-			[ricon unlockFocus];			
-			
-			IconFamily* iconFamily;
-			
-			iconFamily = [IconFamily ovicon:ricon];			
-			[iconFamily writeToFile:filepath];			
-			// [iconFamily setAsCustomIconForFile:filepath];
-			
-			/* Save to jpeg
-			NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:[ricon TIFFRepresentation]];
-			NSDictionary *imageProps = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:0.9] forKey:NSImageCompressionFactor];
-			NSData *photoData = [NSData data];
-			photoData = [imageRep representationUsingType:NSJPEGFileType properties:imageProps];
-			[photoData writeToFile:[@"~/Desktop/test.jpg" stringByStandardizingPath] atomically:NO];
-			 */
-		}
+	    [icon initWithContentsOfFile:[filenames objectAtIndex:i]];
+
+	    if(![icon isValid]) {
+		NSAlert *errorbox=[NSAlert
+		    alertWithMessageText:MSG(@"Error: Invalid Image file!")
+		    defaultButton:MSG(@"OK")
+		    alternateButton:nil
+		    otherButton:nil
+		    informativeTextWithFormat:MSG(@"The selected file is invalid, please check your file.")];
+		[errorbox runModal];				
+		return;
+	    }
+	    [icon setScalesWhenResized:TRUE];
+	    NSImage *ricon = [[[NSImage alloc] initWithSize:NSMakeSize(16, 16)] autorelease];
+	    [ricon lockFocus];
+	    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+	    [icon setSize:NSMakeSize(16, 16)];
+	    [icon compositeToPoint:NSZeroPoint operation:NSCompositeCopy];
+	    [ricon unlockFocus];			
+
+	    IconFamily* iconFamily;
+
+	    iconFamily = [IconFamily ovicon:ricon];			
+	    [iconFamily writeToFile:filepath];			
+	    [iconFamily setAsCustomIconForFile:filepath];
 	}
-	[self refresh];	
-	return;	
+    }
+    [self refresh];	
+    return;	
 }
 
 - (IBAction)openIconFolder:(id)sender {
-	[self checkUserIconFolder];
-	NSString *folderpath = [[NSString stringWithUTF8String:USERICONPATH] stringByStandardizingPath];
-	NSString *cmd = [@"open -a Finder " stringByAppendingFormat:folderpath];
-	system([cmd UTF8String]);
-	return;
+    [self checkUserIconFolder];
+    NSString *folderpath = [[NSString stringWithUTF8String:USERICONPATH] stringByStandardizingPath];
+    NSString *cmd = [@"open -a Finder " stringByAppendingFormat:folderpath];
+    system([cmd UTF8String]);
+    return;
 }
 
 - (IBAction)homepage:(id)sender {
-	system("open http://openvanilla.org");
-	return;
+    system("open http://openvanilla.org");
+    return;
 }
 
 - (BOOL)checkSelection {
-	if([listview numberOfSelectedRows] != 1) {
-		NSAlert *errorbox=[NSAlert
-		alertWithMessageText:MSG(@"Error: Please select one of the icons in the list.")
-			   defaultButton:MSG(@"OK")
-			 alternateButton:nil
-				 otherButton:nil
-   informativeTextWithFormat:MSG(@"It seems that you did not select any icon, or you selected whole column but not any unique icon.")];
-		[errorbox runModal];
-		return FALSE;
-	}
-	return TRUE;
+    if([listview numberOfSelectedRows] != 1) {
+	NSAlert *errorbox=[NSAlert
+	    alertWithMessageText:MSG(@"Error: Please select one of the icons in the list.")
+	    defaultButton:MSG(@"OK")
+	    alternateButton:nil
+	    otherButton:nil
+	    informativeTextWithFormat:MSG(@"It seems that you did not select any icon, or you selected whole column but not any unique icon.")];
+	[errorbox runModal];
+	return FALSE;
+    }
+    return TRUE;
 }
 
 - (IBAction)deleteIcon:(id)sender {
-	if(![self checkSelection]) return;	
-	NSString *type = [[items objectAtIndex:[listview selectedRow]] objectForKey:@"type"];
-	if([type isEqualToString:@"Built-in"]) {
-		NSAlert *errorbox=[NSAlert
-		alertWithMessageText:MSG(@"Error: You cannot delete the built-in icons.")
-			   defaultButton:MSG(@"OK")
-			 alternateButton:nil
-				 otherButton:nil
-   informativeTextWithFormat:MSG(@"You can delete your own customzied icons only.")];
-		[errorbox runModal];		
-		return;
-	}
+    if(![self checkSelection]) return;	
+    NSString *type = [[items objectAtIndex:[listview selectedRow]] objectForKey:@"type"];
+    if([type isEqualToString:@"Built-in"]) {
+	NSAlert *errorbox=[NSAlert
+	    alertWithMessageText:MSG(@"Error: You cannot delete the built-in icons.")
+	    defaultButton:MSG(@"OK")
+	    alternateButton:nil
+	    otherButton:nil
+	    informativeTextWithFormat:MSG(@"You can delete your own customzied icons only.")];
+	[errorbox runModal];		
+	return;
+    }
 
-	NSString *path = [[items objectAtIndex:[listview selectedRow]] objectForKey:@"path"];
-	NSWorkspace *ws = [NSWorkspace sharedWorkspace];
-	[ws performFileOperation:NSWorkspaceRecycleOperation
-						  source:[path stringByDeletingLastPathComponent] destination:@""
-						  files:[NSArray arrayWithObject:[path lastPathComponent]] tag:0];
-	[self refresh];
+    NSString *path = [[items objectAtIndex:[listview selectedRow]] objectForKey:@"path"];
+    NSWorkspace *ws = [NSWorkspace sharedWorkspace];
+    [ws performFileOperation:NSWorkspaceRecycleOperation
+	source:[path stringByDeletingLastPathComponent] destination:@""
+	files:[NSArray arrayWithObject:[path lastPathComponent]] tag:0];
+    [self refresh];
 }
 
 - (void)preview {
-	if(![self checkSelection]) return;
-	NSString *cmd =[NSString stringWithFormat:@"open -a Preview %@", [[items objectAtIndex:[listview selectedRow]] objectForKey:@"path"]];	
-	system([cmd UTF8String]);
-	return;
+    if(![self checkSelection]) return;
+    NSString *cmd =[NSString stringWithFormat:@"open -a Preview %@", [[items objectAtIndex:[listview selectedRow]] objectForKey:@"path"]];	
+    system([cmd UTF8String]);
+    return;
 }
 
 - (IBAction)previewIcon:(id)sender {
-	return [self preview];
+    return [self preview];
 }
 
 - (void) copyToTarget:(const char *) target source: (NSString *)source script: (NSMutableString *)script{
-	NSString *t = [NSString stringWithUTF8String:target];
-	NSString *line = [NSString stringWithFormat:@"/bin/cp %@ %@ \n", source, t];
-	NSLog(line);
-	[script appendString:line];
+    NSString *t = [NSString stringWithUTF8String:target];
+    NSString *line = [NSString stringWithFormat:@"/bin/cp %@ %@ \n", source, t];
+    NSLog(line);
+    [script appendString:line];
 }
 
 - (IBAction)changeIcon:(id)sender {
-	if(![self checkSelection]) return;	
-	NSString *iconpath = [[items objectAtIndex:[listview selectedRow]] objectForKey:@"path"];
-	NSString *iconfilename = [[items objectAtIndex:[listview selectedRow]] objectForKey:@"filename"];
-	
-	NSAlert *beginbox=[NSAlert
-		alertWithMessageText:MSG(@"Chaning the icon of OpenVanilla")
-			   defaultButton:MSG(@"Proceed")
-			 alternateButton:MSG(@"Cancel")
-				 otherButton:nil
-   informativeTextWithFormat:MSG(@"Do you really want to change the icon to \"%@\" ?"), iconfilename];	
-	
-	if ([beginbox runModal]==0) return;	
-	
-	char tmpfn[L_tmpnam];
-	tmpnam(tmpfn);
-	NSLog(@"Temp script file created as %s", tmpfn);
-	NSMutableString *script=[NSMutableString new];
-	[script autorelease];	
-	
-	if ([self pathExists:LCP OV072]) {
-		[self copyToTarget: LCP OV072 MENUICON source: iconpath script:script];
-	}
-	
-	if ([self pathExists:LCP OV072TC]) {
-		[self copyToTarget: LCP OV072TC MENUICON source: iconpath script:script];
-	}
-	
-	if ([self pathExists:LCP OV072SC]) {
-		[self copyToTarget: LCP OV072SC MENUICON source: iconpath script:script];		
-	}
-	
-	NSLog(@"Scripts: %d", [script length]);
-	
-	if([script length] ==0) {
-		NSAlert *errorbox=[NSAlert
-		alertWithMessageText:MSG(@"You did not install any newer version then 0.72 of OpenVanilla!")
-			   defaultButton:MSG(@"OK")
-			 alternateButton:nil			
-				 otherButton:nil
-   informativeTextWithFormat:MSG(@"An installation of OpenVanilla or newer version is required. The process of chaning icon will be terminated.")];
-		[errorbox runModal];
-		return;
-	}
-	
-	NSLog(@"Generated script:\n=== BEGIN OF SCRIPT ===\n%@=== END OF SCRIPT ===", script);
+    if(![self checkSelection]) return;	
+    NSString *iconpath = [[items objectAtIndex:[listview selectedRow]] objectForKey:@"path"];
+    NSString *iconfilename = [[items objectAtIndex:[listview selectedRow]] objectForKey:@"filename"];
 
-	BOOL result=NO;
-	if ([NSString instancesRespondToSelector:@selector(writeToFile:atomically:encoding:error:)]) {
-		result=[script writeToFile:[NSString stringWithUTF8String:tmpfn] atomically:YES encoding:NSUTF8StringEncoding error:NULL];
-	}
-	else {
-		result=[script writeToFile:[NSString stringWithUTF8String:tmpfn] atomically:YES];
-	}
-	
-	if (!result) {
-		NSLog(@"Error: Failed to create script file");
-		return;
-		
-	}
-	
+    NSAlert *beginbox=[NSAlert
+	alertWithMessageText:MSG(@"Chaning the icon of OpenVanilla")
+	defaultButton:MSG(@"Proceed")
+	alternateButton:MSG(@"Cancel")
+	otherButton:nil
+	informativeTextWithFormat:MSG(@"Do you really want to change the icon to \"%@\" ?"), MSG(iconfilename)];
+
+    if ([beginbox runModal]==0) return;	
+
+    char tmpfn[L_tmpnam];
+    tmpnam(tmpfn);
+    NSLog(@"Temp script file created as %s", tmpfn);
+    NSMutableString *script=[NSMutableString new];
+    [script autorelease];	
+
+    if ([self pathExists:LCP OV072]) {
+	[self copyToTarget: LCP OV072 MENUICON source: iconpath script:script];
+    }
+
+    if ([self pathExists:LCP OV072TC]) {
+	[self copyToTarget: LCP OV072TC MENUICON source: iconpath script:script];
+    }
+
+    if ([self pathExists:LCP OV072SC]) {
+	[self copyToTarget: LCP OV072SC MENUICON source: iconpath script:script];		
+    }
+
+    NSLog(@"Scripts: %d", [script length]);
+
+    if([script length] ==0) {
+	NSAlert *errorbox=[NSAlert
+	    alertWithMessageText:MSG(@"You did not install any newer version then 0.72 of OpenVanilla!")
+	    defaultButton:MSG(@"OK")
+	    alternateButton:nil			
+	    otherButton:nil
+	    informativeTextWithFormat:MSG(@"An installation of OpenVanilla or newer version is required. The process of chaning icon will be terminated.")];
+	[errorbox runModal];
+	return;
+    }
+
+    NSLog(@"Generated script:\n=== BEGIN OF SCRIPT ===\n%@=== END OF SCRIPT ===", script);
+
+    BOOL result=NO;
+    if ([NSString instancesRespondToSelector:@selector(writeToFile:atomically:encoding:error:)]) {
+	result=[script writeToFile:[NSString stringWithUTF8String:tmpfn] atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+    }
+    else {
+	result=[script writeToFile:[NSString stringWithUTF8String:tmpfn] atomically:YES];
+    }
+
+    if (!result) {
+	NSLog(@"Error: Failed to create script file");
+	return;
+    }
+
     AuthorizationFlags authflags = kAuthorizationFlagDefaults;
     AuthorizationRef authref;
-	OSStatus s;
+    OSStatus s;
     s = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, authflags, &authref);
     if (s != errAuthorizationSuccess) {
-		NSLog(@"Authorization failed: on creation");
-	}
-	
-	AuthorizationItem reqitem = {kAuthorizationRightExecute, 0, NULL, 0};
-	AuthorizationRights reqright = {1, &reqitem};
-	
-	authflags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed |
-		kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
-	
+	NSLog(@"Authorization failed: on creation");
+    }
+
+    AuthorizationItem reqitem = {kAuthorizationRightExecute, 0, NULL, 0};
+    AuthorizationRights reqright = {1, &reqitem};
+
+    authflags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed |
+	kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
+
     s = AuthorizationCopyRights (authref, &reqright, NULL, authflags, NULL );
-	if (s != errAuthorizationSuccess) {
-		NSLog(@"Authorization failed: on copying rights");
+    if (s != errAuthorizationSuccess) {
+	NSLog(@"Authorization failed: on copying rights");
+    }
+
+    const char *cmdpath="/bin/sh";
+    char *argv[] = {tmpfn, NULL};
+    FILE *fpipe = NULL;
+    char buf[128];
+
+    s = AuthorizationExecuteWithPrivileges(authref, cmdpath, kAuthorizationFlagDefaults, argv, &fpipe);
+
+    if (s == errAuthorizationSuccess)
+    {
+	for(;;) {
+	    int b = read (fileno(fpipe), buf, sizeof(buf));
+	    if (b < 1) break;
+	    write (fileno(stderr), buf, b);
 	}
-	
-	const char *cmdpath="/bin/sh";
-	char *argv[] = {tmpfn, NULL};
-	FILE *fpipe = NULL;
-	char buf[128];
-	
-	s = AuthorizationExecuteWithPrivileges(authref, cmdpath, kAuthorizationFlagDefaults, argv, &fpipe);
-	
-	if (s == errAuthorizationSuccess)
-	{
-		for(;;) {
-			int b = read (fileno(fpipe), buf, sizeof(buf));
-			if (b < 1) break;
-			write (fileno(stderr), buf, b);
-		}
-		fclose(fpipe);
-        AuthorizationFree (authref, kAuthorizationFlagDefaults);
-	}
-	
-	
+	fclose(fpipe);
+	AuthorizationFree (authref, kAuthorizationFlagDefaults);
+    }
+
     AuthorizationFree (authref, kAuthorizationFlagDefaults);
-	
-	NSLog(@"deleting tmp file: %s", tmpfn);
-	unlink(tmpfn);
+
+    NSLog(@"deleting tmp file: %s", tmpfn);
+    unlink(tmpfn);
     if (s != errAuthorizationSuccess) return;
-	
-	NSAlert *endbox=[NSAlert
-		alertWithMessageText:MSG(@"Logout and Re-login Required")
-			   defaultButton:MSG(@"Logout")
-			 alternateButton:nil
-				 otherButton:nil
-   informativeTextWithFormat:MSG(@"Please logout and re-login to make the effect take place.")];	
-	
-	[endbox runModal];
-	
-	system("/usr/bin/osascript -e \"tell application \\\"system events\\\" to log out\"");		
+
+    NSAlert *endbox=[NSAlert
+	alertWithMessageText:MSG(@"Logout and Re-login Required")
+	defaultButton:MSG(@"Logout")
+	alternateButton:nil
+	otherButton:nil
+	informativeTextWithFormat:MSG(@"Please logout and re-login to make the effect take place.")];	
+
+    [endbox runModal];
+
+    system("/usr/bin/osascript -e \"tell application \\\"system events\\\" to log out\"");		
 }
 
 - (void)windowWillClose:(NSNotification*)n {
-	[[NSApplication sharedApplication] terminate:self];
+    [[NSApplication sharedApplication] terminate:self];
 }
 
 - (IBAction)refreshList:(id)sender {
-	[self refresh];
+    [self refresh];
 }
 
 - (IBAction)viewStanard:(id)sender {
-	currSize = 16;
-	[self refresh];
+    currSize = 16;
+    [self refresh];
 }
 
 - (IBAction)viewBigger:(id)sender {
-	currSize = 40;	
-	[self refresh];	
+    currSize = 40;	
+    [self refresh];	
 }
 
 @end
