@@ -15,7 +15,7 @@
             }; 
             CLASS = Delegate; 
             LANGUAGE = ObjC; 
-            OUTLETS = {listview = id; }; 
+            OUTLETS = {listview = id; window = id; }; 
             SUPERCLASS = NSObject; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }

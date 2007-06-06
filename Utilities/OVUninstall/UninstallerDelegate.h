@@ -6,6 +6,7 @@
 {
     IBOutlet id listview;
     IBOutlet id resetCheckbox;
+    IBOutlet id window;	
 	
 	NSMutableArray *versions;
 }

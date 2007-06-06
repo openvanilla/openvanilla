@@ -61,6 +61,7 @@
 }
 
 - (void)awakeFromNib  {
+	[window center];
 	versions = [NSMutableArray new];
 	
 	NSString *item=MSG(@"OpenVanilla (version unknown)");

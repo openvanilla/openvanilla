@@ -5,7 +5,7 @@
             ACTIONS = {uninstall = id; }; 
             CLASS = UninstallerDelegate; 
             LANGUAGE = ObjC; 
-            OUTLETS = {listview = id; resetCheckbox = id; }; 
+            OUTLETS = {listview = id; resetCheckbox = id; window = id; }; 
             SUPERCLASS = NSObject; 
         }
     ); 

@@ -123,6 +123,7 @@
 }
 
 - (void)awakeFromNib  {
+	[window center];
     currSize = 16;
     [self scanIcons:currSize];
     [listview setDataSource:self];	

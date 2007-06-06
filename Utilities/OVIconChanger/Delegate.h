@@ -34,6 +34,7 @@
 @interface Delegate : NSObject
 {
     IBOutlet id listview;
+    IBOutlet id window;	
 
     NSMutableArray *items;
     float currSize;

@@ -179,13 +179,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D49C18670C171CB10014EF6C /* Strings */,
 				D4B2ED8D0C1454DB007C6026 /* OVIconChanger Help */,
 				D4B2ED280C143BED007C6026 /* Documents */,
-				D4AA41430C1335AF004AAB67 /* Localizable.strings */,
 				D423D5BF0C1295A30058F65D /* DisplayServerIcon.icns */,
 				D4BDE6940C127725006FF43C /* Icons */,
-				8D1107310486CEB800E47090 /* Info.plist */,
-				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
 			);
 			name = Resources;
@@ -202,6 +200,16 @@
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D49C18670C171CB10014EF6C /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				D4AA41430C1335AF004AAB67 /* Localizable.strings */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+			);
+			name = Strings;
 			sourceTree = "<group>";
 		};
 		D4AA41390C13356D004AAB67 /* Icon Family Tools */ = {
