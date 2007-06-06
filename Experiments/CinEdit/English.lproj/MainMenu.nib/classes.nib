@@ -1,0 +1,22 @@
+{
+    IBClasses = (
+        {
+            CLASS = Delegate; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                "list_chardef" = id; 
+                "list_keyname" = id; 
+                "txt_cname" = id; 
+                "txt_ename" = id; 
+                "txt_endkey" = id; 
+                "txt_scname" = id; 
+                "txt_selkey" = id; 
+                "txt_tcname" = id; 
+                "win_cin" = id; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}
