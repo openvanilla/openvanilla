@@ -12,7 +12,9 @@
 {
 	NSMutableArray *keyname_items;	
 }
-- (NSString *)dump;
+
+- (NSString *)dumpline: (int)row;
+- (int)count;
 - (NSString *)dumpEndkey;
 - (void)addKey: (NSMutableDictionary *)d;
 - (void)addRow: (int)row;

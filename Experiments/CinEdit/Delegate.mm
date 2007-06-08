@@ -3,7 +3,6 @@
 // #include 
 
 #define MYPATH "/Library/OpenVanilla/0.7.2/Modules/OVIMGeneric/"
-#define MYCIN "/Library/OpenVanilla/0.7.2/Modules/OVIMGeneric/cj.cin"
 #define CIN "~/Desktop/test.cin"
 
 @implementation Delegate
@@ -33,25 +32,35 @@
 }
 
 - (void) saveExec {
-	NSString * cin = [NSString stringWithFormat:@"%cgen_inp\n", '%'];
+	NSMutableString  * cin = [NSMutableString new];
+	[cin appendFormat:@"%cgen_inp\n", '%'];
 	if([txt_ename stringValue]) {
-		cin = [cin stringByAppendingFormat:@"%cename: %@\n", '%', [txt_ename stringValue]];
+		[cin appendFormat:@"%cename: %@\n", '%', [txt_ename stringValue]];
 	}
 	if([txt_cname stringValue]) {
-		cin = [cin stringByAppendingFormat:@"%ccname: %@\n", '%', [txt_cname stringValue]];
+		[cin appendFormat:@"%ccname: %@\n", '%', [txt_cname stringValue]];
 	}
-	cin = [cin stringByAppendingFormat:@"%ctcname: %@\n", '%', [txt_tcname stringValue]];
-	cin = [cin stringByAppendingFormat:@"%cscname: %@\n", '%', [txt_scname stringValue]];
-	cin = [cin stringByAppendingFormat:@"%cselkey: %@\n", '%', [txt_selkey stringValue]];
-	cin = [cin stringByAppendingFormat:@"%cendkey: %@\n", '%', [k dumpEndkey]];		
-	cin = [cin stringByAppendingFormat:@"%cencoding UTF-8\n", '%'];	
-	cin = [cin stringByAppendingFormat:@"%ckeyname begin\n", '%'];
-	cin = [cin stringByAppendingString:[k dump]];
-	cin = [cin stringByAppendingFormat:@"%ckeyname end\n", '%'];
-	cin = [cin stringByAppendingFormat:@"%cchardef begin\n", '%'];
-	// cin = [cin stringByAppendingString:[c dump]];	
-	cin = [cin stringByAppendingFormat:@"%cchardef end\n", '%'];	
-	[cin writeToFile:[[NSString stringWithUTF8String:CIN] stringByStandardizingPath]atomically:TRUE ];
+	[cin appendFormat:@"%ctcname: %@\n", '%', [txt_tcname stringValue]];
+	[cin appendFormat:@"%cscname: %@\n", '%', [txt_scname stringValue]];
+	[cin appendFormat:@"%cselkey: %@\n", '%', [txt_selkey stringValue]];
+	[cin appendFormat:@"%cendkey: %@\n", '%', [k dumpEndkey]];		
+	[cin appendFormat:@"%cencoding UTF-8\n", '%'];	
+	[cin appendFormat:@"%ckeyname begin\n", '%'];
+	int i;
+	for(i = 0; i < [k count]; i++) {
+		[cin appendString:[k dumpline:i]];
+	}
+	[cin appendFormat:@"%ckeyname end\n", '%'];
+	[cin appendFormat:@"%cchardef begin\n", '%'];
+	for(i = 0; i < [c count]; i++) {
+		[cin appendString:[c dumpline:i]];
+	}
+	[cin appendFormat:@"%cchardef end\n", '%'];	
+	[cin writeToFile:[[NSString stringWithUTF8String:CIN] stringByStandardizingPath]
+		atomically:TRUE
+		encoding:NSUTF8StringEncoding
+			   error:NULL
+		];
 }
 
 - (IBAction) save:(id)sender {

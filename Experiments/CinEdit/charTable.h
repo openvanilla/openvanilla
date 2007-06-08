@@ -12,7 +12,8 @@
 {
 	NSMutableArray *chardef_items;	
 }
-- (NSString *)dump;
+- (NSString *)dumpline: (int)row;
+- (int)count;
 - (void)addKey: (NSMutableDictionary *)d;
 - (void)addRow: (int)row;
 - (void)removeRow:(unsigned)row;

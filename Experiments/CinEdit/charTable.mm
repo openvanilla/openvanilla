@@ -14,16 +14,17 @@
 	chardef_items = [NSMutableArray new];
 }
 
-- (NSString *) dump {
-	NSString * rtn = @"";
-	int i;
-	for(i =0; i< [chardef_items count]; i++) {
-		rtn = [rtn stringByAppendingFormat:@"%@ %@\n",
-			[[chardef_items objectAtIndex:i] objectForKey:@"key"],
-			[[chardef_items objectAtIndex:i] objectForKey:@"value"]
-			];
-	}
+- (NSString *) dumpline: (int)row; {
+	NSString * rtn;
+	rtn = [NSString stringWithFormat:@"%@ %@\n",
+		[[chardef_items objectAtIndex:row] objectForKey:@"key"],
+		[[chardef_items objectAtIndex:row] objectForKey:@"value"]
+		];
 	return rtn;
+}
+
+- (int) count {
+	return [chardef_items count];
 }
 
 - (void)addKey: (NSMutableDictionary *)d {

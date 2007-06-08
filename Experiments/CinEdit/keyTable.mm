@@ -14,25 +14,25 @@
 	keyname_items = [NSMutableArray new];
 }
 
-- (NSString *) dump {
-	NSString * rtn = @"";
-	int i;
-	for(i =0; i< [keyname_items count]; i++) {
-		rtn = [rtn stringByAppendingFormat:@"%@ %@\n",
-			[[keyname_items objectAtIndex:i] objectForKey:@"key"],
-			[[keyname_items objectAtIndex:i] objectForKey:@"value"]
+- (NSString *) dumpline: (int)row; {
+	NSString * rtn;
+	rtn = [NSString stringWithFormat:@"%@ %@\n",
+			[[keyname_items objectAtIndex:row] objectForKey:@"key"],
+			[[keyname_items objectAtIndex:row] objectForKey:@"value"]
 			];
-	}
 	return rtn;
 }
 
+- (int) count {
+	return [keyname_items count];
+}
+
 - (NSString *) dumpEndkey {
-	NSString * rtn = @"";
+	NSMutableString * rtn = [NSMutableString new];
 	int i;
 	for(i =0; i< [keyname_items count]; i++) {
 		if([[[keyname_items objectAtIndex:i] objectForKey:@"endkey"] intValue]) {
-			NSLog([[keyname_items objectAtIndex:i] objectForKey:@"key"]);
-			rtn = [rtn stringByAppendingString:[[keyname_items objectAtIndex:i] objectForKey:@"key"]];
+			[rtn appendString:[[keyname_items objectAtIndex:i] objectForKey:@"key"]];
 		}
 	}
 	return rtn;
