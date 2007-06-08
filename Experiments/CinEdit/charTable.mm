@@ -14,8 +14,16 @@
 	chardef_items = [NSMutableArray new];
 }
 
-- (NSMutableDictionary *d) getTable {
-	return chardef_items;
+- (NSString *) dump {
+	NSString * rtn = @"";
+	int i;
+	for(i =0; i< [chardef_items count]; i++) {
+		rtn = [rtn stringByAppendingFormat:@"%@ %@\n",
+			[[chardef_items objectAtIndex:i] objectForKey:@"key"],
+			[[chardef_items objectAtIndex:i] objectForKey:@"value"]
+			];
+	}
+	return rtn;
 }
 
 - (void)addKey: (NSMutableDictionary *)d {

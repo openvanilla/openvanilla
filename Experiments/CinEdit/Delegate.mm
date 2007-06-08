@@ -42,16 +42,16 @@
 	}
 	cin = [cin stringByAppendingFormat:@"%ctcname: %@\n", '%', [txt_tcname stringValue]];
 	cin = [cin stringByAppendingFormat:@"%cscname: %@\n", '%', [txt_scname stringValue]];
-	cin = [cin stringByAppendingFormat:@"%cselkey: %@\n", '%', [txt_selkey stringValue]];	
+	cin = [cin stringByAppendingFormat:@"%cselkey: %@\n", '%', [txt_selkey stringValue]];
+	cin = [cin stringByAppendingFormat:@"%cendkey: %@\n", '%', [k dumpEndkey]];		
 	cin = [cin stringByAppendingFormat:@"%cencoding UTF-8\n", '%'];	
 	cin = [cin stringByAppendingFormat:@"%ckeyname begin\n", '%'];
 	cin = [cin stringByAppendingString:[k dump]];
 	cin = [cin stringByAppendingFormat:@"%ckeyname end\n", '%'];
 	cin = [cin stringByAppendingFormat:@"%cchardef begin\n", '%'];
-	cin = [cin stringByAppendingString:[c dump]];	
+	// cin = [cin stringByAppendingString:[c dump]];	
 	cin = [cin stringByAppendingFormat:@"%cchardef end\n", '%'];	
 	[cin writeToFile:[[NSString stringWithUTF8String:CIN] stringByStandardizingPath]atomically:TRUE ];
-	[cin release];
 }
 
 - (IBAction) save:(id)sender {
@@ -72,17 +72,17 @@
 	NSString *tcname = [NSString stringWithUTF8String: cin->get_tcname()];
 	NSString *scname = [NSString stringWithUTF8String: cin->get_scname()];	
 	NSString *selkey = [NSString stringWithUTF8String: cin->get_selkey()];
-	NSString *endkey = [NSString stringWithUTF8String: cin->get_endkey()];
-	
-	NSLog([NSString stringWithFormat:@"%d", cin->keycount()]);
-	NSLog([NSString stringWithFormat:@"%d", cin->charcount()]);	
 	int i;
 	k = [keyTable alloc];
 	[k init];
 	for(i = 0; i < cin->keycount(); i++) {
 		Keyname keyname=cin->get_key(i);
 		NSMutableDictionary *d=[NSMutableDictionary new];
-		[d setObject:[NSNumber numberWithInt:FALSE] forKey:@"endkey"];
+		if(strstr(cin->get_endkey(), keyname.key.c_str())) {
+			[d setObject:[NSNumber numberWithInt:TRUE] forKey:@"endkey"];
+		} else {
+			[d setObject:[NSNumber numberWithInt:FALSE] forKey:@"endkey"];			
+		}
 		[d setObject:[NSString stringWithUTF8String:keyname.key.c_str()] forKey:@"key"];
 		[d setObject:[NSString stringWithUTF8String:keyname.value.c_str()] forKey:@"value"];
 		[k addKey: d];
@@ -107,7 +107,6 @@
 	[txt_tcname setStringValue:tcname];	
 	[txt_scname setStringValue:scname];	
 	[txt_selkey setStringValue:selkey];
-	[txt_endkey setStringValue:endkey];	
 }
 
 - (void)awakeFromNib {

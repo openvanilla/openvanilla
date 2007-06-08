@@ -63,11 +63,9 @@ bool OVCIN::load(const char *loadpath, const char *filename) {
 		if (!strcasecmp(key, "%keyname")) {
 			if(!strcasecmp(v.c_str(), "begin")) {
 				c_keyname = 1;
-				printf("Starting Keyname\n");
 				continue;				
 			} else if(!strcasecmp(v.c_str(), "end")) {
 				c_keyname = 0;
-				printf("End Keyname\n");
 				continue;				
 			}				
 		}
@@ -75,11 +73,9 @@ bool OVCIN::load(const char *loadpath, const char *filename) {
 		if (!strcasecmp(key, "%chardef")) {
 			if(!strcasecmp(v.c_str(), "begin")) {
 				c_chardef = 1;
-				printf("Starting chardef\n");
 				continue;
 			} else if(!strcasecmp(v.c_str(), "end")) {
 				c_chardef = 0;
-				printf("End chardef\n");
 				continue;				
 			}				
 		}

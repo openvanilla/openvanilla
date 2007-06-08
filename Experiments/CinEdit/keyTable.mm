@@ -7,8 +7,6 @@
 //
 
 #import "keyTable.h"
-#include "OVCIN.h"
-#include <ctype.h>
 
 @implementation keyTable
 
@@ -24,6 +22,18 @@
 			[[keyname_items objectAtIndex:i] objectForKey:@"key"],
 			[[keyname_items objectAtIndex:i] objectForKey:@"value"]
 			];
+	}
+	return rtn;
+}
+
+- (NSString *) dumpEndkey {
+	NSString * rtn = @"";
+	int i;
+	for(i =0; i< [keyname_items count]; i++) {
+		if([[[keyname_items objectAtIndex:i] objectForKey:@"endkey"] intValue]) {
+			NSLog([[keyname_items objectAtIndex:i] objectForKey:@"key"]);
+			rtn = [rtn stringByAppendingString:[[keyname_items objectAtIndex:i] objectForKey:@"key"]];
+		}
 	}
 	return rtn;
 }

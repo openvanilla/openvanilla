@@ -13,6 +13,7 @@
 	NSMutableArray *keyname_items;	
 }
 - (NSString *)dump;
+- (NSString *)dumpEndkey;
 - (void)addKey: (NSMutableDictionary *)d;
 - (void)addRow: (int)row;
 - (void)removeRow:(unsigned)row;
