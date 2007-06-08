@@ -1,6 +1,9 @@
 /* Delegate */
 
 #import <Cocoa/Cocoa.h>
+#import "keyTable.h"
+#import "charTable.h"
+
 
 @interface Delegate : NSObject
 {
@@ -14,7 +17,13 @@
     IBOutlet id txt_tcname;
     IBOutlet id win_cin;
 	
-
-	NSMutableArray *chardef_items;	
+	keyTable * k;
+	charTable * c;
 }
+- (IBAction)chardef_add:(id)sender;
+- (IBAction)chardef_rm:(id)sender;
+- (IBAction)keyname_add:(id)sender;
+- (IBAction)keyname_rm:(id)sender;
+- (IBAction)save:(id)sender;
+- (IBAction)saveAs:(id)sender;
 @end

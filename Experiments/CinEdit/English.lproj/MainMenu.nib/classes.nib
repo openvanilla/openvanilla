@@ -1,6 +1,20 @@
 {
     IBClasses = (
         {
+            CLASS = AddRemoveView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {mDeleteButton = NSButton; mNewButton = NSButton; }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {
+            ACTIONS = {
+                "chardef_add" = id; 
+                "chardef_rm" = id; 
+                "keyname_add" = id; 
+                "keyname_rm" = id; 
+                save = id; 
+                saveAs = id; 
+            }; 
             CLASS = Delegate; 
             LANGUAGE = ObjC; 
             OUTLETS = {
@@ -16,7 +30,8 @@
             }; 
             SUPERCLASS = NSObject; 
         }, 
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }
     ); 
     IBVersion = 1; 
 }

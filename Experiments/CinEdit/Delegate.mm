@@ -1,95 +1,66 @@
 #import "Delegate.h"
 #include "OVCIN.h"
+// #include 
 
 #define MYPATH "/Library/OpenVanilla/0.7.2/Modules/OVIMGeneric/"
 #define MYCIN "/Library/OpenVanilla/0.7.2/Modules/OVIMGeneric/cj.cin"
-
-
-@interface keyTable : NSObject
-{
-	NSMutableArray *keyname_items;	
-}
-@end
-
-@implementation keyTable
-
-- (void) init {
-	keyname_items = [NSMutableArray new];
-}
-
-- (void)addKey: (Keyname)keyname {
-	NSMutableDictionary *d=[NSMutableDictionary new];
-	[d setObject:[NSString stringWithUTF8String:keyname.key.c_str()] forKey:@"key"];
-	[d setObject:[NSString stringWithUTF8String:keyname.value.c_str()] forKey:@"value"];
-	[keyname_items addObject:d];
-	[d release];
-}
-
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {
-    if ([[aTableColumn identifier] isEqualToString:@"key"]) {
-        return [[keyname_items objectAtIndex:rowIndex] objectForKey:@"key"];
-    }
-    if ([[aTableColumn identifier] isEqualToString:@"value"]) {
-        return [[keyname_items objectAtIndex:rowIndex] objectForKey:@"value"];
-    }	
-    return nil;
-}
-
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView {
-    return [keyname_items count];
-}
-
-- (void) test {
-	NSLog([NSString stringWithFormat:@"%d", [keyname_items count]]);
-}
-
-@end
-//----
-
-@interface charTable : NSObject
-{
-	NSMutableArray *chardef_items;	
-}
-@end
-
-@implementation charTable
-
-- (void) init {
-	chardef_items = [NSMutableArray new];
-}
-
-- (void)addKey: (Chardef)chardef {
-	NSMutableDictionary *d=[NSMutableDictionary new];
-	[d setObject:[NSString stringWithUTF8String:chardef.key.c_str()] forKey:@"key"];
-	[d setObject:[NSString stringWithUTF8String:chardef.value.c_str()] forKey:@"value"];
-	[chardef_items addObject:d];
-	[d release];
-}
-
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {
-    if ([[aTableColumn identifier] isEqualToString:@"key"]) {
-        return [[chardef_items objectAtIndex:rowIndex] objectForKey:@"key"];
-    }
-    if ([[aTableColumn identifier] isEqualToString:@"value"]) {
-        return [[chardef_items objectAtIndex:rowIndex] objectForKey:@"value"];
-    }	
-    return nil;
-}
-
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView {
-    return [chardef_items count];
-}
-
-@end
-
-//-----
+#define CIN "~/Desktop/test.cin"
 
 @implementation Delegate
 
-
-
-- (void)addChar: (Chardef)chardef{
+- (IBAction)keyname_add:(id)sender {
+	[k addRow:[list_keyname selectedRow]];
+	[list_keyname reloadData];	
 }
+
+- (IBAction)keyname_rm:(id)sender {
+	if([list_keyname selectedRow] > -1) {
+		[k removeRow:[list_keyname selectedRow]];
+		[list_keyname reloadData];
+	}
+}
+
+- (IBAction)chardef_add:(id)sender {
+	[c addRow:[list_chardef selectedRow]];
+	[list_chardef reloadData];	
+}
+
+- (IBAction)chardef_rm:(id)sender {
+	if([list_chardef selectedRow] > -1) {
+		[c removeRow:[list_chardef selectedRow]];
+		[list_chardef reloadData];
+	}
+}
+
+- (void) saveExec {
+	NSString * cin = [NSString stringWithFormat:@"%cgen_inp\n", '%'];
+	if([txt_ename stringValue]) {
+		cin = [cin stringByAppendingFormat:@"%cename: %@\n", '%', [txt_ename stringValue]];
+	}
+	if([txt_cname stringValue]) {
+		cin = [cin stringByAppendingFormat:@"%ccname: %@\n", '%', [txt_cname stringValue]];
+	}
+	cin = [cin stringByAppendingFormat:@"%ctcname: %@\n", '%', [txt_tcname stringValue]];
+	cin = [cin stringByAppendingFormat:@"%cscname: %@\n", '%', [txt_scname stringValue]];
+	cin = [cin stringByAppendingFormat:@"%cselkey: %@\n", '%', [txt_selkey stringValue]];	
+	cin = [cin stringByAppendingFormat:@"%cencoding UTF-8\n", '%'];	
+	cin = [cin stringByAppendingFormat:@"%ckeyname begin\n", '%'];
+	cin = [cin stringByAppendingString:[k dump]];
+	cin = [cin stringByAppendingFormat:@"%ckeyname end\n", '%'];
+	cin = [cin stringByAppendingFormat:@"%cchardef begin\n", '%'];
+	cin = [cin stringByAppendingString:[c dump]];	
+	cin = [cin stringByAppendingFormat:@"%cchardef end\n", '%'];	
+	[cin writeToFile:[[NSString stringWithUTF8String:CIN] stringByStandardizingPath]atomically:TRUE ];
+	[cin release];
+}
+
+- (IBAction) save:(id)sender {
+	[self saveExec];
+}
+
+- (IBAction) saveAs:(id)sender {
+}
+
 
 - (void)loadCin {
 	[win_cin center];
@@ -106,17 +77,27 @@
 	NSLog([NSString stringWithFormat:@"%d", cin->keycount()]);
 	NSLog([NSString stringWithFormat:@"%d", cin->charcount()]);	
 	int i;
-	keyTable * k = [keyTable alloc];
+	k = [keyTable alloc];
 	[k init];
 	for(i = 0; i < cin->keycount(); i++) {
-		[k addKey: cin->get_key(i)];
+		Keyname keyname=cin->get_key(i);
+		NSMutableDictionary *d=[NSMutableDictionary new];
+		[d setObject:[NSNumber numberWithInt:FALSE] forKey:@"endkey"];
+		[d setObject:[NSString stringWithUTF8String:keyname.key.c_str()] forKey:@"key"];
+		[d setObject:[NSString stringWithUTF8String:keyname.value.c_str()] forKey:@"value"];
+		[k addKey: d];
+		[d release];		
 	}
 	[list_keyname setDataSource:k];
 
-	charTable * c = [charTable alloc];
+	c = [charTable alloc];
 	[c init];
 	for(i = 0; i < cin->charcount(); i++) {
-		[c addKey: cin->get_char(i)];
+		Chardef chardef=cin->get_char(i);
+		NSMutableDictionary *d=[NSMutableDictionary new];		
+		[d setObject:[NSString stringWithUTF8String:chardef.key.c_str()] forKey:@"key"];
+		[d setObject:[NSString stringWithUTF8String:chardef.value.c_str()] forKey:@"value"];
+		[c addKey: d];
 	}
 	[list_chardef setDataSource:c];	
 

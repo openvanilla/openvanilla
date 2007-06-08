@@ -12,6 +12,8 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		D44537920C16F5B00051F58B /* OVCIN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44537910C16F5B00051F58B /* OVCIN.cpp */; };
+		D4598C130C18852A0039D825 /* keyTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4598C120C18852A0039D825 /* keyTable.mm */; };
+		D4598C210C1885790039D825 /* charTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4598C200C1885790039D825 /* charTable.mm */; };
 		D490622A0C14729F006110DF /* Delegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = D49062280C14729F006110DF /* Delegate.mm */; };
 		D490626E0C14768A006110DF /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D490626D0C14768A006110DF /* Carbon.framework */; };
 /* End PBXBuildFile section */
@@ -29,6 +31,10 @@
 		8D1107320486CEB800E47090 /* CinEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CinEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D44537900C16F5B00051F58B /* OVCIN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCIN.h; sourceTree = "<group>"; };
 		D44537910C16F5B00051F58B /* OVCIN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVCIN.cpp; sourceTree = "<group>"; };
+		D4598C110C18852A0039D825 /* keyTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keyTable.h; sourceTree = "<group>"; };
+		D4598C120C18852A0039D825 /* keyTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = keyTable.mm; sourceTree = "<group>"; };
+		D4598C1F0C1885790039D825 /* charTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = charTable.h; sourceTree = "<group>"; };
+		D4598C200C1885790039D825 /* charTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = charTable.mm; sourceTree = "<group>"; };
 		D49062280C14729F006110DF /* Delegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Delegate.mm; sourceTree = "<group>"; };
 		D49062290C14729F006110DF /* Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delegate.h; sourceTree = "<group>"; };
 		D490626D0C14768A006110DF /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
@@ -91,6 +97,10 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				D4598C110C18852A0039D825 /* keyTable.h */,
+				D4598C120C18852A0039D825 /* keyTable.mm */,
+				D4598C1F0C1885790039D825 /* charTable.h */,
+				D4598C200C1885790039D825 /* charTable.mm */,
 			);
 			name = CinEdit;
 			sourceTree = "<group>";
@@ -189,6 +199,8 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				D490622A0C14729F006110DF /* Delegate.mm in Sources */,
 				D44537920C16F5B00051F58B /* OVCIN.cpp in Sources */,
+				D4598C130C18852A0039D825 /* keyTable.mm in Sources */,
+				D4598C210C1885790039D825 /* charTable.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
