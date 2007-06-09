@@ -29,8 +29,6 @@
 #import "CinDocument.h"
 #include "OVCIN.h"
 
-#define MSG(x)      [[NSBundle mainBundle] localizedStringForKey:x value:nil table:nil]
-
 @implementation CinDocument
 
 - (void) showMsgWindow: (NSString *) msg {
@@ -46,8 +44,7 @@
 }
 
 - (void) editCin{
-	isEdited = YES;
-	NSLog(@"Changed");
+	[window setDocumentEdited:YES];
 }
 
 - (IBAction)keynameAdd:(id)sender {
@@ -192,10 +189,16 @@
 	[txtTcname setStringValue:_tcname];	
 	[txtScname setStringValue:_scname];	
 	[txtSelkey setStringValue:_selkey];
-	isEdited = NO;	
-	ka =[[NSArray alloc] initWithArray:[k getArray]];
-	ca =[[NSArray alloc] initWithArray:[c getArray]];	
-}	
+	isEdited = NO;
+}
+
+- (IBAction)newDocument:(id)sender{
+	[[NSDocumentController sharedDocumentController] newDocument: sender];
+}
+
+- (IBAction)openDocument:(id)sender{
+	[[NSDocumentController sharedDocumentController] openDocument: sender];
+}
 
 - (id)init {
     self = [super init];
@@ -219,17 +222,14 @@
 	_tcname = [txtTcname stringValue];	
 	_scname = [txtScname stringValue];	
 	_selkey = [txtSelkey stringValue];
-	isEdited = NO;
-	[ka release];
-	ka =[[NSArray alloc] initWithArray:[k getArray]];
-	[ca release];
-	ca =[[NSArray alloc] initWithArray:[c getArray]];		
+	isEdited = NO;		
 	[self hideMsgWindow];	
 	return YES;
 }
 
-- (void)windowControllerDidLoadNib:(NSWindowController *) aController {
-    [super windowControllerDidLoadNib:aController];
+- (void)windowControllerDidLoadNib:(NSWindowController *) windowController {
+    [super windowControllerDidLoadNib:windowController];
+    [self setupToolbarForWindow:[windowController window]];		
 }
 
 - (NSData *)dataRepresentationOfType:(NSString *)aType {	
@@ -240,24 +240,19 @@
     return YES;
 }
 
+- (IBAction)keymapHelp:(id)sender {
+	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"keymap" inBook:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleHelpBookName"]];
+}
+
+- (IBAction)chardefHelp:(id)sender {
+	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"chardef" inBook:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleHelpBookName"]];
+}
+
+
 /* window delegate */
 
 - (BOOL)windowShouldClose:(id)sender {
-	if(!isEdited) {
-		/* if(![[txtEname stringValue] isEqualToString:_ename] ||
-		   ![[txtCname stringValue] isEqualToString:_cname] ||
-		   ![[txtTcname stringValue] isEqualToString:_tcname] ||	
-		   ![[txtScname stringValue] isEqualToString:_scname] ||
-		   ![[txtSelkey stringValue] isEqualToString:_selkey]  	
-		   ){
-			[self editCin];
-		} */
-		if( ![ka isEqualToArray:[k getArray]] || 
-			![ca isEqualToArray:[c getArray]] ) {
-			[self editCin];		
-		}
-	}
-	if(isEdited) {
+	if([self isDocumentEdited]) {
 		NSAlert *alert = [NSAlert alertWithMessageText:MSG(@"You changes will be lost!") 
 										 defaultButton:MSG(@"Quit with Saving") 
 									   alternateButton:MSG(@"Continue Editing") 
@@ -269,8 +264,6 @@
 }
 
 - (void)windowWillClose:(NSNotification *)aNotification{
-	[ka release];
-	[ca release];
 }
 
 - (BOOL)windowShouldZoom:(NSWindow *)window toFrame:(NSRect)newFrame {

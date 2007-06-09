@@ -30,6 +30,7 @@
 #import "keyTable.h"
 #import "charTable.h"
 
+#define MSG(x)      [[NSBundle mainBundle] localizedStringForKey:x value:nil table:nil]
 
 @interface CinDocument : NSDocument
 {
@@ -42,7 +43,8 @@
     IBOutlet id txtSelkey;
     IBOutlet id msgIndicator;
     IBOutlet id msgText;	
-    IBOutlet id msgWindow;	
+    IBOutlet id msgWindow;
+    IBOutlet id window;	
 
 	NSString *_ename;
 	NSString *_cname;
@@ -54,12 +56,13 @@
 	keyTable * k;
 	charTable * c;	
 	NSString *currentPath;
-	NSArray *ka;
-	NSArray *ca;	
 	BOOL isEdited;
 }
+- (IBAction)chardefHelp:(id)sender;
 - (IBAction)chardefAdd:(id)sender;
 - (IBAction)chardefRemove:(id)sender;
+- (IBAction)keymapHelp:(id)sender;
 - (IBAction)keynameAdd:(id)sender;
 - (IBAction)keynameRemove:(id)sender;
+- (void)setupToolbarForWindow:(NSWindow *)window;
 @end

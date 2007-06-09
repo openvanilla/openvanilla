@@ -18,7 +18,7 @@
 				<string>text/plain</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>OpenVanilla Generic input Method Table</string>
+			<string>OpenVanilla Generic Input Method Table</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>NSDocumentClass</key>
@@ -28,7 +28,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>cinedit</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.openvanilla.CinEdit</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -45,5 +45,9 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>Help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>OpenVanilla Generic Input Method Table Editor Help</string>	
 </dict>
 </plist>

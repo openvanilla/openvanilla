@@ -13,11 +13,19 @@
 		8D15AC310486D014006FF6A4 /* CinDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4ACFDCFA73011CA2CEA /* CinDocument.mm */; settings = {ATTRIBUTES = (); }; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		D43FA0230C1B630600797C7D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D43FA0220C1B630600797C7D /* Localizable.strings */; };
 		D4A868B70C19A7A70089730D /* CinDocument.nib in Resources */ = {isa = PBXBuildFile; fileRef = D4A868B50C19A7A70089730D /* CinDocument.nib */; };
 		D4A868C90C19A7FE0089730D /* charTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A868C20C19A7FE0089730D /* charTable.m */; };
 		D4A868CB0C19A7FE0089730D /* keyTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A868C60C19A7FE0089730D /* keyTable.m */; };
 		D4A868CC0C19A7FE0089730D /* OVCIN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4A868C70C19A7FE0089730D /* OVCIN.cpp */; };
 		D4A869290C19B0620089730D /* ovcin.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A869280C19B0620089730D /* ovcin.icns */; };
+		D4A8B57D0C1AAC670008E3D3 /* cinedit.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A8B57C0C1AAC670008E3D3 /* cinedit.icns */; };
+		D4A8B6190C1AFB8B0008E3D3 /* new.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A8B6170C1AFB8B0008E3D3 /* new.png */; };
+		D4A8B61A0C1AFB8B0008E3D3 /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A8B6180C1AFB8B0008E3D3 /* open.png */; };
+		D4A8B61C0C1AFB930008E3D3 /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A8B61B0C1AFB930008E3D3 /* save.png */; };
+		D4A8B6720C1AFF9C0008E3D3 /* CinDocument_Toolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8B6710C1AFF9C0008E3D3 /* CinDocument_Toolbar.m */; };
+		D4A8B7F80C1B10B20008E3D3 /* MainDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8B7F70C1B10B20008E3D3 /* MainDelegate.m */; };
+		D4E7E41D0C1B47A1001934CF /* Help in Resources */ = {isa = PBXBuildFile; fileRef = D4E7E40C0C1B47A1001934CF /* Help */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +41,14 @@
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* CinEdit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinEdit_Prefix.pch; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D15AC370486D014006FF6A4 /* CinEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CinEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D15AC370486D014006FF6A4 /* OVCinEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVCinEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D43DC0E10C1AA3DA00BFBE3D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D43F9FDD0C1B4E1B00797C7D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = folder; name = zh_TW; path = zh_TW.lproj/Help; sourceTree = "<group>"; };
+		D43FA0040C1B586F00797C7D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		D43FA0140C1B62B200797C7D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D43FA0240C1B630D00797C7D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D43FA0330C1B64A900797C7D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/CinDocument.nib; sourceTree = "<group>"; };
+		D43FA0400C1B676000797C7D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = zh_TW; path = zh_TW.lproj/Credits.rtf; sourceTree = "<group>"; };
 		D4A868B60C19A7A70089730D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CinDocument.nib; sourceTree = "<group>"; };
 		D4A868C10C19A7FE0089730D /* charTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = charTable.h; sourceTree = "<group>"; };
 		D4A868C20C19A7FE0089730D /* charTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = charTable.m; sourceTree = "<group>"; };
@@ -42,6 +57,14 @@
 		D4A868C70C19A7FE0089730D /* OVCIN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVCIN.cpp; sourceTree = "<group>"; };
 		D4A868C80C19A7FE0089730D /* OVCIN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCIN.h; sourceTree = "<group>"; };
 		D4A869280C19B0620089730D /* ovcin.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ovcin.icns; sourceTree = "<group>"; };
+		D4A8B57C0C1AAC670008E3D3 /* cinedit.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = cinedit.icns; sourceTree = "<group>"; };
+		D4A8B6170C1AFB8B0008E3D3 /* new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new.png; sourceTree = "<group>"; };
+		D4A8B6180C1AFB8B0008E3D3 /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
+		D4A8B61B0C1AFB930008E3D3 /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
+		D4A8B6710C1AFF9C0008E3D3 /* CinDocument_Toolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinDocument_Toolbar.m; sourceTree = "<group>"; };
+		D4A8B7F60C1B10B20008E3D3 /* MainDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainDelegate.h; sourceTree = "<group>"; };
+		D4A8B7F70C1B10B20008E3D3 /* MainDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainDelegate.m; sourceTree = "<group>"; };
+		D4E7E40D0C1B47A1001934CF /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = English.lproj/Help; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +100,7 @@
 		19C28FB0FE9D524F11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D15AC370486D014006FF6A4 /* CinEdit.app */,
+				8D15AC370486D014006FF6A4 /* OVCinEdit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,13 +108,6 @@
 		2A37F4AAFDCFA73011CA2CEA /* CinEdit */ = {
 			isa = PBXGroup;
 			children = (
-				D4A869280C19B0620089730D /* ovcin.icns */,
-				D4A868C10C19A7FE0089730D /* charTable.h */,
-				D4A868C20C19A7FE0089730D /* charTable.m */,
-				D4A868C50C19A7FE0089730D /* keyTable.h */,
-				D4A868C60C19A7FE0089730D /* keyTable.m */,
-				D4A868C70C19A7FE0089730D /* OVCIN.cpp */,
-				D4A868C80C19A7FE0089730D /* OVCIN.h */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
 				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
@@ -104,8 +120,17 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D4A868C70C19A7FE0089730D /* OVCIN.cpp */,
+				D4A868C80C19A7FE0089730D /* OVCIN.h */,
+				D4A868C10C19A7FE0089730D /* charTable.h */,
+				D4A868C20C19A7FE0089730D /* charTable.m */,
+				D4A868C50C19A7FE0089730D /* keyTable.h */,
+				D4A868C60C19A7FE0089730D /* keyTable.m */,
 				2A37F4AEFDCFA73011CA2CEA /* CinDocument.h */,
 				2A37F4ACFDCFA73011CA2CEA /* CinDocument.mm */,
+				D4A8B6710C1AFF9C0008E3D3 /* CinDocument_Toolbar.m */,
+				D4A8B7F60C1B10B20008E3D3 /* MainDelegate.h */,
+				D4A8B7F70C1B10B20008E3D3 /* MainDelegate.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -122,6 +147,9 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D43FA0220C1B630600797C7D /* Localizable.strings */,
+				D4E7E40C0C1B47A1001934CF /* Help */,
+				D4A8B57F0C1AAC6E0008E3D3 /* Icons */,
 				D4A868B50C19A7A70089730D /* CinDocument.nib */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
 				2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */,
@@ -138,6 +166,18 @@
 				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D4A8B57F0C1AAC6E0008E3D3 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				D4A8B61B0C1AFB930008E3D3 /* save.png */,
+				D4A8B6170C1AFB8B0008E3D3 /* new.png */,
+				D4A8B6180C1AFB8B0008E3D3 /* open.png */,
+				D4A8B57C0C1AAC670008E3D3 /* cinedit.icns */,
+				D4A869280C19B0620089730D /* ovcin.icns */,
+			);
+			name = Icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,7 +198,7 @@
 			name = CinEdit;
 			productInstallPath = "$(HOME)/Applications";
 			productName = CinEdit;
-			productReference = 8D15AC370486D014006FF6A4 /* CinEdit.app */;
+			productReference = 8D15AC370486D014006FF6A4 /* OVCinEdit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -168,6 +208,13 @@
 			isa = PBXProject;
 			buildConfigurationList = C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "CinEdit" */;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				zh_TW,
+			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* CinEdit */;
 			projectDirPath = "";
 			targets = (
@@ -186,6 +233,12 @@
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
 				D4A868B70C19A7A70089730D /* CinDocument.nib in Resources */,
 				D4A869290C19B0620089730D /* ovcin.icns in Resources */,
+				D4A8B57D0C1AAC670008E3D3 /* cinedit.icns in Resources */,
+				D4A8B6190C1AFB8B0008E3D3 /* new.png in Resources */,
+				D4A8B61A0C1AFB8B0008E3D3 /* open.png in Resources */,
+				D4A8B61C0C1AFB930008E3D3 /* save.png in Resources */,
+				D4E7E41D0C1B47A1001934CF /* Help in Resources */,
+				D43FA0230C1B630600797C7D /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +254,8 @@
 				D4A868C90C19A7FE0089730D /* charTable.m in Sources */,
 				D4A868CB0C19A7FE0089730D /* keyTable.m in Sources */,
 				D4A868CC0C19A7FE0089730D /* OVCIN.cpp in Sources */,
+				D4A8B6720C1AFF9C0008E3D3 /* CinDocument_Toolbar.m in Sources */,
+				D4A8B7F80C1B10B20008E3D3 /* MainDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +266,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				089C1660FE840EACC02AAC07 /* English */,
+				D43DC0E10C1AA3DA00BFBE3D /* zh_TW */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -219,6 +275,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2A37F4B7FDCFA73011CA2CEA /* English */,
+				D43FA0040C1B586F00797C7D /* zh_TW */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
@@ -227,16 +284,36 @@
 			isa = PBXVariantGroup;
 			children = (
 				2A37F4BAFDCFA73011CA2CEA /* English */,
+				D43FA0400C1B676000797C7D /* zh_TW */,
 			);
 			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		D43FA0220C1B630600797C7D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D43FA0140C1B62B200797C7D /* English */,
+				D43FA0240C1B630D00797C7D /* zh_TW */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		D4A868B50C19A7A70089730D /* CinDocument.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D4A868B60C19A7A70089730D /* English */,
+				D43FA0330C1B64A900797C7D /* zh_TW */,
 			);
 			name = CinDocument.nib;
+			sourceTree = "<group>";
+		};
+		D4E7E40C0C1B47A1001934CF /* Help */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4E7E40D0C1B47A1001934CF /* English */,
+				D43F9FDD0C1B4E1B00797C7D /* zh_TW */,
+			);
+			name = Help;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -252,7 +329,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = CinEdit;
+				PRODUCT_NAME = OVCinEdit;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
@@ -269,7 +346,7 @@
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = CinEdit;
+				PRODUCT_NAME = OVCinEdit;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
