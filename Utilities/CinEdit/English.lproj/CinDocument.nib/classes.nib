@@ -1,0 +1,24 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {chardefAdd = id; chardefRemove = id; keynameAdd = id; keynameRemove = id; }; 
+            CLASS = CinDocument; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                listChardef = id; 
+                listKeyname = id; 
+                msgIndicator = id; 
+                msgText = id; 
+                msgWindow = id; 
+                txtCname = id; 
+                txtEname = id; 
+                txtScname = id; 
+                txtSelkey = id; 
+                txtTcname = id; 
+            }; 
+            SUPERCLASS = NSDocument; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}

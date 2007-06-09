@@ -28,26 +28,26 @@ class OVCIN
 public:
     OVCIN() {};
     bool load(const char *loadpath, const char *filename);	
-    const char* get_filename(){ return shortfilename.c_str(); }
-    const char* get_ename(){ return ename.c_str(); }
-    const char* get_cname(){ return cname.c_str(); }
-    const char* get_tcname(){ return tcname.c_str(); }
-    const char* get_scname(){ return scname.c_str(); }	
-    const char* get_selkey(){ return selkey.c_str(); }	
-    const char* get_endkey(){ return endkey.c_str(); }
+    const char* get_filename(){ return m_shortfilename.c_str(); }
+    const char* get_ename(){ return m_ename.c_str(); }
+    const char* get_cname(){ return m_cname.c_str(); }
+    const char* get_tcname(){ return m_tcname.c_str(); }
+    const char* get_scname(){ return m_scname.c_str(); }	
+    const char* get_selkey(){ return m_selkey.c_str(); }	
+    const char* get_endkey(){ return m_endkey.c_str(); }
 	Keyname get_key(size_t i) { return keynames[i];}
 	Chardef get_char(size_t i) { return chardefs[i];}	
 	size_t keycount() { return keynames.size(); }
 	size_t charcount() { return chardefs.size(); }	
 protected:
-	string longfilename;
-    string shortfilename;
-    string ename;
-    string cname;
-    string tcname;
-    string scname;
-	string selkey;
-	string endkey;
+	string m_longfilename;
+    string m_shortfilename;
+    string m_ename;
+    string m_cname;
+    string m_tcname;
+    string m_scname;
+	string m_selkey;
+	string m_endkey;
 	vector<Keyname> keynames;
 	vector<Chardef> chardefs;
 };

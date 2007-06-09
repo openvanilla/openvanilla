@@ -35,8 +35,8 @@ bool OVCIN::load(const char *loadpath, const char *filename) {
 	bool c_keyname = 0;
 	bool c_chardef = 0;
 	
-    shortfilename=filename;
-    longfilename=longname;
+    m_shortfilename=filename;
+    m_longfilename=longname;
 	
     int line=0;
     const size_t bs=2049;
@@ -53,12 +53,12 @@ bool OVCIN::load(const char *loadpath, const char *filename) {
         CLSplitString(buf, k, v);        
         const char *key=k.c_str();
 		
-		if (!strcasecmp(key, "%ename")) ename=v;
-		else if (!strcasecmp(key, "%cname")) cname=v;
-		else if (!strcasecmp(key, "%tcname")) tcname=v;
-		else if (!strcasecmp(key, "%scname")) scname=v;
-		else if (!strcasecmp(key, "%selkey")) selkey=v;	
-		else if (!strcasecmp(key, "%endkey")) endkey=v;
+		if (!strcasecmp(key, "%ename")) m_ename=v;
+		else if (!strcasecmp(key, "%cname")) m_cname=v;
+		else if (!strcasecmp(key, "%tcname")) m_tcname=v;
+		else if (!strcasecmp(key, "%scname")) m_scname=v;
+		else if (!strcasecmp(key, "%selkey")) m_selkey=v;	
+		else if (!strcasecmp(key, "%endkey")) m_endkey=v;
 		
 		if (!strcasecmp(key, "%keyname")) {
 			if(!strcasecmp(v.c_str(), "begin")) {
@@ -100,9 +100,9 @@ bool OVCIN::load(const char *loadpath, const char *filename) {
     fclose(in);
 	
     // some fallbacks..
-    if (!ename.length()) ename=filename;
-    if (!cname.length()) cname=ename;
-    if (!tcname.length()) tcname=cname;
-    if (!scname.length()) scname=cname;
+    if (!m_ename.length()) m_ename=filename;
+    if (!m_cname.length()) m_cname=m_ename;
+    if (!m_tcname.length()) m_tcname=m_cname;
+    if (!m_scname.length()) m_scname=m_cname;
     return 1;
 }
