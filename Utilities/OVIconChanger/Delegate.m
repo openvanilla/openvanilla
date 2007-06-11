@@ -52,16 +52,6 @@
 
 @implementation Delegate
 
-- (NSString *)takeFilenameFromPath: (NSString *)path {
-    if([path length]) {
-
-	NSArray *pathComponents = [path pathComponents];
-	NSString *filename = [pathComponents lastObject];	
-	return filename;
-    }
-    return @"";
-}
-
 - (BOOL)pathExists:(const char *)cp {
     NSString *p=[[NSString stringWithUTF8String:cp] stringByStandardizingPath];
     struct stat st;
@@ -80,7 +70,7 @@
     if(![self pathExists: [path UTF8String]]) return;
 
     NSMutableDictionary *d=[NSMutableDictionary new];
-    NSString *filename = [self takeFilenameFromPath:path];
+    NSString *filename = [path lastPathComponent];
 
     if([filename isEqualToString:@"DisplayServerIcon.icns"]) return; // We do not use the icon of this application
     NSImage *preview = [NSImage new];
@@ -162,7 +152,7 @@
 	return;
     }
 
-    NSString *filename = [self takeFilenameFromPath:path];
+    NSString *filename = [path lastPathComponent];
     NSString *targetfilepath = [NSString stringWithFormat:@"%@/%@", [NSString stringWithUTF8String:USERICONPATH], filename];
     if([self pathExists:[targetfilepath UTF8String]]) {
 	NSAlert *errorbox=[NSAlert
@@ -222,7 +212,7 @@
 	int i;
 	if(![filenames count]) return;
 	for(i = 0; i < [filenames count]; i ++) {
-	    NSString *sfilename = [self takeFilenameFromPath:[filenames objectAtIndex:i]];
+	    NSString *sfilename = [[filenames objectAtIndex:i] lastPathComponent];
 	    NSString *tfilename = [[sfilename stringByDeletingPathExtension] stringByAppendingString:@".icns"];
 	    NSSavePanel *savepanel= [NSSavePanel savePanel];
 	    [savepanel setRequiredFileType:@"icns"];
