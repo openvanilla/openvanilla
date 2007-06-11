@@ -40,4 +40,5 @@
 - (void)removeRow:(unsigned)row;
 - (BOOL)isEdited;
 - (void)reset;
+- (int) find: (NSString *) str;
 @end

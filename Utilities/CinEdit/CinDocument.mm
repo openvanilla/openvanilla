@@ -33,6 +33,8 @@
 
 @implementation CinDocument
 
+/* Window Management */
+
 - (void) showMsgWindow: (NSString *) msg {
 	[msgIndicator startAnimation:self];
 	[msgText setStringValue:msg];
@@ -49,12 +51,19 @@
 	isEdited = YES;
 }
 
+- (void)keynameGoto: (int) i {
+	NSRect r = [[scrollKeyname documentView] frame];
+	float y =((float)i / [k count] * (int)r.size.height) -100;		
+	[[scrollKeyname documentView] scrollPoint: NSMakePoint(0, y)];	
+}
+
 - (IBAction)keynameAdd:(id)sender {
 	int i = -1;
 	i = [k addRow:[listKeyname selectedRow]];
 	[listKeyname reloadData];
 	if(i > -1) {
 		[listKeyname selectRowIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(i,1)] byExtendingSelection:YES];
+		[self keynameGoto:i];
 	}	
 	[self editCin];
 }
@@ -67,12 +76,19 @@
 	}
 }
 
+- (void) chardefGoto: (int) i {
+	NSRect r = [[scrollChardef documentView] frame];
+	float y =((float)i / [c count] * (int)r.size.height) -100;		
+	[[scrollChardef documentView] scrollPoint: NSMakePoint(0, y)];		
+}
+
 - (IBAction)chardefAdd:(id)sender {
 	int i = -1;
 	i = [c addRow:[listChardef selectedRow]];
 	[listChardef reloadData];
 	if(i > -1) {
-		[listChardef selectRowIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(i,1)] byExtendingSelection:YES];		
+		[listChardef selectRowIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(i,1)] byExtendingSelection:YES];
+		[self chardefGoto:i];
 	}
 	[self editCin];	
 }
@@ -82,6 +98,34 @@
 		[c removeRow:[listChardef selectedRow]];
 		[listChardef reloadData];
 		[self editCin];
+	}
+}
+
+- (IBAction)keynameSearch:(id)sender {
+	NSString *str = [sender stringValue];
+	if([str isEqualToString:@""]) {
+		return;
+	}
+	int i;
+	i = [k find:str];
+	NSLog(@"D: %d", i);
+	if(i > -1) {
+		[listKeyname selectRowIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(i,1)] byExtendingSelection:YES];
+		[self keynameGoto:i];
+	}	
+}
+
+- (IBAction)chardefSearch:(id)sender {
+	NSString *str = [sender stringValue];
+	if([str isEqualToString:@""]) {
+		return;
+	}
+	int i;
+	i = [c find:str];
+	NSLog(@"D: %d", i);
+	if(i > -1) {
+		[listChardef selectRowIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(i,1)] byExtendingSelection:YES];
+		[self chardefGoto:i];
 	}
 }
 
@@ -150,15 +194,16 @@
 		[d setObject:[NSString stringWithUTF8String:chardef.key.c_str()] forKey:@"key"];
 		[d setObject:[NSString stringWithUTF8String:chardef.value.c_str()] forKey:@"value"];
 		[c addKey: d];
+		[d release];
 	}
 	[self hideMsgWindow];	
 }
 
 - (void) makeNewCin {
 	_ename = @"New Input Method";
-	_cname = @"New Input Method";
-	_tcname = @"New Input Method";
-	_scname = @"New Input Method";
+	_cname = [NSString stringWithUTF8String:"\u65b0\u8f38\u5165\u6cd5"];
+	_tcname = [NSString stringWithUTF8String:"\u65b0\u8f38\u5165\u6cd5"];
+	_scname = [NSString stringWithUTF8String:"\u65b0\u8f93\u5165\u6cd5"];	
 	_selkey = @"1234567890";
 	k = [keyTable alloc];
 	[k init];

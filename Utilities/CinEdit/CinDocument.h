@@ -39,7 +39,9 @@
     IBOutlet id listChardef;
     IBOutlet id listKeyname;
     IBOutlet id scrollChardef;
-    IBOutlet id scrollKeyname;	
+    IBOutlet id scrollKeyname;
+    IBOutlet id searchChardef;
+    IBOutlet id searchKeyname;		
     IBOutlet id txtCname;
     IBOutlet id txtEname;
     IBOutlet id txtTcname;
@@ -65,8 +67,10 @@
 - (IBAction)chardefHelp:(id)sender;
 - (IBAction)chardefAdd:(id)sender;
 - (IBAction)chardefRemove:(id)sender;
+- (IBAction)chardefSearch:(id)sender;
 - (IBAction)keymapHelp:(id)sender;
 - (IBAction)keynameAdd:(id)sender;
 - (IBAction)keynameRemove:(id)sender;
+- (IBAction)keynameSearch:(id)sender;
 - (void)setupToolbarForWindow:(NSWindow *)window;
 @end

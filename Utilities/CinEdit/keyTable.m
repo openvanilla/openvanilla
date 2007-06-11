@@ -34,13 +34,33 @@
 	keyname_items = [NSMutableArray new];
 }
 
-- (NSString *) dumpline: (int)row; {
+- (NSString *) dumpline: (int)row {
 	NSString * rtn;
 	rtn = [NSString stringWithFormat:@"%@ %@\n",
 			[[keyname_items objectAtIndex:row] objectForKey:@"key"],
 			[[keyname_items objectAtIndex:row] objectForKey:@"value"]
 			];
 	return rtn;
+}
+
+- (int) find: (NSString *) str {
+	int i = 0;	
+	NSEnumerator *enumerator = [keyname_items objectEnumerator];
+	NSMutableDictionary * d;	
+	
+	while (d = [enumerator nextObject]) {
+		NSString *key = [[d objectForKey:@"key"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		NSString *value = [[d objectForKey:@"value"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		if([key isEqualToString:@""] || [value isEqualToString:@""]) {
+			i++;
+			continue;
+		}
+		if([key compare:str options:NSCaseInsensitiveSearch] == 0 || [value compare:str options:NSCaseInsensitiveSearch] == 0 ) {
+			return i;
+		}
+		i++;
+	}
+	return 0;
 }
 
 - (int) count {

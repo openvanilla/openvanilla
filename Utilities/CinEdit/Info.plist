@@ -26,7 +26,11 @@
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
+	<string>OVCinEdit</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>Help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>OpenVanilla Input Method Creator Help</string>
 	<key>CFBundleIconFile</key>
 	<string>cinedit</string>
 	<key>CFBundleIdentifier</key>
@@ -34,7 +38,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>OVCinEdit</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
@@ -45,9 +49,5 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>CFBundleHelpBookFolder</key>
-	<string>Help</string>
-	<key>CFBundleHelpBookName</key>
-	<string>OpenVanilla Generic Input Method Table Editor Help</string>	
 </dict>
 </plist>

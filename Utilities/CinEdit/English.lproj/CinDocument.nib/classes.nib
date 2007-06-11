@@ -5,9 +5,11 @@
                 chardefAdd = id; 
                 chardefHelp = id; 
                 chardefRemove = id; 
+                chardefSearch = id; 
                 keymapHelp = id; 
                 keynameAdd = id; 
                 keynameRemove = id; 
+                keynameSearch = id; 
             }; 
             CLASS = CinDocument; 
             LANGUAGE = ObjC; 
@@ -17,6 +19,10 @@
                 msgIndicator = id; 
                 msgText = id; 
                 msgWindow = id; 
+                scrollChardef = id; 
+                scrollKeyname = id; 
+                searchChardef = id; 
+                searchKeyname = id; 
                 txtCname = id; 
                 txtEname = id; 
                 txtScname = id; 
@@ -26,7 +32,12 @@
             }; 
             SUPERCLASS = NSDocument; 
         }, 
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+        {
+            ACTIONS = {"" = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }
     ); 
     IBVersion = 1; 
 }
