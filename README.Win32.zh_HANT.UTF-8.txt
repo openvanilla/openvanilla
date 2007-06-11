@@ -19,6 +19,9 @@ include files 和 library files 的 path 都要記得加上。
 3.2. SQLite3 也已自 svn repository 移除，若想用「比 OV-deps.zip 還新的」，請到
 http://taipedia.selfip.info/mediawiki/index.php/SQLite3Win32LibVC8/zh-hant
 下載，並同樣放在 %OV_DEPS% 裡。
+3.2.1. 若想在 Vista 上用 IE7, 請用 http://sqlite.org/sqlitedll-3_2_5.zip 蓋掉
+上述 OV-deps.zip 裡的 sqlite3.dll. 這是最近發現的相容性問題，詳細狀況請參考
+http://article.gmane.org/gmane.comp.db.sqlite.general/29356 的說明。
 
 4. OV-deps 已加入 OVIMRomanNew 所需要的拼字檢查 library -- hunspell, 檔案如下：
 hunspelldll.dll, hunspell.hxx, license.hunspell, hunspelldll.lib, affixmgr.hxx, 
@@ -29,6 +32,8 @@ csutil.hxx, baseaffix.hxx, affentry.hxx, hunspell.h, hunspelldll.h, license.mysp
 
 
 == 編譯 ==
+0. 如果只想測試打字功能而「不」想測試「設定功能」，請跳過步驟 1 和 3.
+
 1. 首先，為了編譯 OVPreferences，必須安裝 wxWidgets Win32 版
 (http://www.wxwidgets.org/dl_msw2.htm#stable)，裝完之後 *必須* 自行編譯出
 OVPreferences 所需的靜態函式庫。目前 wxWidgets 版本
