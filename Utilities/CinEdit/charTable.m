@@ -31,6 +31,7 @@
 @implementation charTable
 
 - (void) init {
+	isEdited = NO;
 	chardef_items = [NSMutableArray new];
 }
 
@@ -47,15 +48,47 @@
 	return [chardef_items count];
 }
 
+- (BOOL) isEdited {
+	return isEdited;
+}
+
+- (void)reset {
+	isEdited = NO;
+	NSLog(@"chartable reset");
+}
+
 - (void)addKey: (NSMutableDictionary *)d {
 	[chardef_items addObject:d];
 }
 
+- (int)addRow: (int)row {
+	NSMutableDictionary *d=[NSMutableDictionary new];
+	int i;
+	[d setObject:@"" forKey:@"key"];
+	[d setObject:@"" forKey:@"value"];	
+	if(row == -1) { 
+		i = [chardef_items count];
+	} else {
+		i = row;
+	}
+	[chardef_items insertObject:d atIndex:i];
+	[d release];
+	return i;
+}
+
+- (void)removeRow:(unsigned)row {
+	[chardef_items removeObjectAtIndex:row];
+}
+
+/* The routines of a tableview */
+
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {
     if ([[aTableColumn identifier] isEqualToString:@"key"]) {
+		isEdited = YES;
         return [[chardef_items objectAtIndex:rowIndex] objectForKey:@"key"];
     }
     if ([[aTableColumn identifier] isEqualToString:@"value"]) {
+		isEdited = YES;		
         return [[chardef_items objectAtIndex:rowIndex] objectForKey:@"value"];
     }	
     return nil;
@@ -79,29 +112,6 @@
 		a = [a stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 		[[chardef_items objectAtIndex:rowIndex] setObject:a forKey:@"value"];
 	}
-}
-
-- (int)addRow: (int)row {
-	NSMutableDictionary *d=[NSMutableDictionary new];
-	int i;
-	[d setObject:@"" forKey:@"key"];
-	[d setObject:@"" forKey:@"value"];	
-	if(row == -1) { 
-		i = [chardef_items count];
-	} else {
-		i = row;
-	}
-	[chardef_items insertObject:d atIndex:i];
-	[d release];
-	return i;
-}
-
-- (void)removeRow:(unsigned)row {
-	[chardef_items removeObjectAtIndex:row];
-}
-
-- (NSMutableArray *) getArray {
-	return chardef_items;
 }
 
 @end

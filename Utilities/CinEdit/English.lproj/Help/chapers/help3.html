@@ -3,16 +3,15 @@
 <head>
   <meta name="AppleOrder" content="3">   
   <meta http-equiv="content-type" content="text/html;charset=UTF-8">  
-  <meta name="AppleTitle" content="OpenVanilla Generic Input Method Table Editor Help">  
+  <meta name="AppleTitle" content="OpenVanilla Input Method Creator Help">  
   <meta name="AppleIcon" content="ov.png">  
-  <title>OpenVanilla Generic Input Method Table Editor: The Structure of the Input Method Table</title>
+  <title>OpenVanilla Input Method Creator: The Structure of the Input Method Table</title>
   <meta name="KEYWORDS" content="openvanilla, input method, table-based">  
-  <meta name="DESCRIPTION" content="OpenVanilla Generic Input Method Table Editor: The Structure of the Input Method Table">  
+  <meta name="DESCRIPTION" content="OpenVanilla Input Method Creator: The Structure of the Input Method Table">  
   <link rel="stylesheet" href="../style.css" type="text/css">
 </head>
 <body>
-<h1><span class="ov">OpenVanilla</span><br>
-Generic Input Method Table Editor</h1>
+<h1><span class="ov">OpenVanilla</span> Input Method Creator</h1>
 <p class="credit">&copy; OpenVanilla project. 2004-2007<br>
 <a href="http://openvanilla.org/">http://openvanilla.org/</a>
 </p>
@@ -31,26 +30,25 @@ may look like this:</p>
 %chardef begin<br>
 ....<br>
 %chardef end</blockquote>
-<p>%gen_inp: Every table should start with this line. Please do not change it.</p>
-<p>
-%ename: The English name of your Table-based Input Method Module. While
+<p><strong>%gen_inp:</strong> Every table should start with this line. Please do not change it.</p>
+<p><strong>%ename:</strong> The English name of your Table-based Input Method Module. While
 it is blank, OpenVanilla will use the filename of the Input Method
 table insteed.</p>
-<p>%cname: The Chinese name of your Table-based Input
+<p><strong>%cname:</strong> The Chinese name of your Table-based Input
 Method Module. It could be in Traditional Chinese or Simplified
 Chinese. While it is blank, OpenVanilla will use the English name
 insteed.</p>
-<p>%selkey: The setting of the key to select the canidate
+<p><strong>%selkey:</strong> The setting of the key to select the canidate
 characters
 from the candidate list. In most situations, users would like to use
 number keys from 1 to 0 to select a character. However, it could be
 customized.</p>
 <p>You can also edit these settings by the "Basic Setting" pane
-of the OpenVanilla Generic Input Method Editor.&nbsp;</p>
+of the OpenVanilla Generic Input Method Editor.</p>
 <p>The settings within
 "keyname" and "chardef" section is the core of an Input Method table.
 We will introduce them in next two sections: <a href="help4.html">"The
 Key-mappings"</a> and <a href="help5.html">"The
-Character-Definitions"</a> .</p>
+Character-Definitions"</a>.</p>
 </body>
 </html>

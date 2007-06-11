@@ -31,11 +31,13 @@
 @interface charTable : NSObject
 {
 	NSMutableArray *chardef_items;	
+	BOOL isEdited;
 }
 - (NSString *)dumpline: (int)row;
 - (int)count;
 - (void)addKey: (NSMutableDictionary *)d;
 - (int)addRow: (int)row;
 - (void)removeRow:(unsigned)row;
-- (NSMutableArray *) getArray;
+- (BOOL)isEdited;
+- (void)reset;
 @end

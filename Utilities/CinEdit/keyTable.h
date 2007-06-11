@@ -30,7 +30,8 @@
 
 @interface keyTable : NSObject
 {
-	NSMutableArray *keyname_items;	
+	NSMutableArray *keyname_items;
+	BOOL isEdited;	
 }
 
 - (NSString *)dumpline: (int)row;
@@ -39,5 +40,6 @@
 - (void)addKey: (NSMutableDictionary *)d;
 - (int)addRow: (int)row;
 - (void)removeRow:(unsigned)row;
-- (NSMutableArray *) getArray;
+- (BOOL)isEdited;
+- (void)reset;
 @end

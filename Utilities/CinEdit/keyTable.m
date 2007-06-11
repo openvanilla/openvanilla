@@ -47,6 +47,16 @@
 	return [keyname_items count];
 }
 
+
+- (BOOL) isEdited {
+	return isEdited;
+}
+
+- (void)reset {
+	isEdited = NO;
+	NSLog(@"keytable reset");	
+}
+
 - (NSString *) dumpEndkey {
 	NSMutableString * rtn = [NSMutableString new];
 	int i;
@@ -62,14 +72,39 @@
 	[keyname_items addObject:d];
 }
 
+- (int)addRow: (int)row {
+	NSMutableDictionary *d=[NSMutableDictionary new];
+	int i;
+	[d setObject:@"" forKey:@"key"];
+	[d setObject:@"" forKey:@"value"];	
+	[d setObject:[NSNumber numberWithInt:FALSE]  forKey:@"endkey"];		
+	if(row == -1) { 
+		i = [keyname_items count];
+	} else {		
+		i = row;
+	}
+	[keyname_items insertObject:d atIndex:i];	
+	[d release];	
+	return i;
+}
+
+- (void)removeRow:(unsigned)row {
+	[keyname_items removeObjectAtIndex:row];
+}
+
+/* The routines of a tableview */
+
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {
     if ([[aTableColumn identifier] isEqualToString:@"key"]) {
+		isEdited = YES;
         return [[keyname_items objectAtIndex:rowIndex] objectForKey:@"key"];
     }
     if ([[aTableColumn identifier] isEqualToString:@"value"]) {
+		isEdited = YES;		
         return [[keyname_items objectAtIndex:rowIndex] objectForKey:@"value"];
     }
     if ([[aTableColumn identifier] isEqualToString:@"endkey"]) {
+		isEdited = YES;	
         return [[keyname_items objectAtIndex:rowIndex] objectForKey:@"endkey"];
     }		
     return nil;
@@ -101,30 +136,6 @@
 		a = [a stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 		[[keyname_items objectAtIndex:rowIndex] setObject:a forKey:@"value"];
 	}
-}
-
-- (int)addRow: (int)row {
-	NSMutableDictionary *d=[NSMutableDictionary new];
-	int i;
-	[d setObject:@"" forKey:@"key"];
-	[d setObject:@"" forKey:@"value"];	
-	[d setObject:[NSNumber numberWithInt:FALSE]  forKey:@"endkey"];		
-	if(row == -1) { 
-		i = [keyname_items count];
-	} else {		
-		i = row;
-	}
-	[keyname_items insertObject:d atIndex:i];	
-	[d release];	
-	return i;
-}
-
-- (void)removeRow:(unsigned)row {
-	[keyname_items removeObjectAtIndex:row];
-}
-
-- (NSMutableArray *) getArray {
-	return keyname_items;
 }
 
 @end

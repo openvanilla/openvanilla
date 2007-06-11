@@ -1,7 +1,7 @@
 "Opening a Input Method Table file. If you have a lot of definitions within this file, it may take time. Please be patient." = "正在載入您的輸入法表格。如果您的輸入法表格中定義了非常多的資料，可能要花上一些時間。請稍後。";
 "Svaing your Input Method Table file. If you have a lot of definitions within this file, it may take time. Please be patient." = "正在儲存您的輸入法表格。如果您的輸入法表格中定義了非常多的資料，可能要花上一些時間。請稍後。";
 "You changes will be lost!" = "存檔提示";
-"Quit with Saving" = "不存檔直接離開";
+"Close without Saving" = "不存檔直接離開";
 "Continue Editing" = "繼續編輯";
 "If you do not save file before closing window, your changes will be lost. Do you want to save?" = "如果您不存檔就直接關閉視窗，您剛才所做的各項變更將不會保留。您想要存檔嗎？";
 "New" = "新增";

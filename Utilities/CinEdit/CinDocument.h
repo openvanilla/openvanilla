@@ -1,3 +1,5 @@
+// CinDocument.h
+//
 // Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
@@ -36,6 +38,8 @@
 {
     IBOutlet id listChardef;
     IBOutlet id listKeyname;
+    IBOutlet id scrollChardef;
+    IBOutlet id scrollKeyname;	
     IBOutlet id txtCname;
     IBOutlet id txtEname;
     IBOutlet id txtTcname;

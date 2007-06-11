@@ -1,5 +1,7 @@
+// CinDocument.mm
+//
 // Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
-// All rights reserved.
+// All rights reserved.w
 // 
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions
@@ -44,7 +46,7 @@
 }
 
 - (void) editCin{
-	[window setDocumentEdited:YES];
+	isEdited = YES;
 }
 
 - (IBAction)keynameAdd:(id)sender {
@@ -52,7 +54,7 @@
 	i = [k addRow:[listKeyname selectedRow]];
 	[listKeyname reloadData];
 	if(i > -1) {
-		[listKeyname selectRowIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(i,1)] byExtendingSelection:YES];		
+		[listKeyname selectRowIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(i,1)] byExtendingSelection:YES];
 	}	
 	[self editCin];
 }
@@ -193,12 +195,15 @@
 }
 
 - (IBAction)newDocument:(id)sender{
+	NSLog(@"Creating new input method table");
 	[[NSDocumentController sharedDocumentController] newDocument: sender];
 }
 
 - (IBAction)openDocument:(id)sender{
 	[[NSDocumentController sharedDocumentController] openDocument: sender];
 }
+
+/* NSDocument routines */
 
 - (id)init {
     self = [super init];
@@ -222,6 +227,8 @@
 	_tcname = [txtTcname stringValue];	
 	_scname = [txtScname stringValue];	
 	_selkey = [txtSelkey stringValue];
+	[k reset];
+	[c reset];
 	isEdited = NO;		
 	[self hideMsgWindow];	
 	return YES;
@@ -229,6 +236,7 @@
 
 - (void)windowControllerDidLoadNib:(NSWindowController *) windowController {
     [super windowControllerDidLoadNib:windowController];
+	// Adding toolbar to a window
     [self setupToolbarForWindow:[windowController window]];		
 }
 
@@ -240,6 +248,8 @@
     return YES;
 }
 
+/* Actions of opening helpbook */
+
 - (IBAction)keymapHelp:(id)sender {
 	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"keymap" inBook:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleHelpBookName"]];
 }
@@ -249,21 +259,31 @@
 }
 
 
-/* window delegate */
+/* Window delegate */
 
 - (BOOL)windowShouldClose:(id)sender {
-	if([self isDocumentEdited]) {
+	if([k isEdited] || [c isEdited]) {
+		[self editCin];
+	}
+	if(isEdited) {
 		NSAlert *alert = [NSAlert alertWithMessageText:MSG(@"You changes will be lost!") 
-										 defaultButton:MSG(@"Quit with Saving") 
+										 defaultButton:MSG(@"Save") 
 									   alternateButton:MSG(@"Continue Editing") 
-										   otherButton:nil 
+										   otherButton:MSG(@"Close without Saving") 
 							 informativeTextWithFormat:MSG(@"If you do not save file before closing window, your changes will be lost. Do you want to save?")];
-		return [alert runModal];
+		int i =  [alert runModal];
+		if(i == 1) {
+			[self saveDocument:sender];
+			return NO;
+		} 
+		return i;
 	}
 	return YES;
 }
 
 - (void)windowWillClose:(NSNotification *)aNotification{
+	[k release];
+	[c release];
 }
 
 - (BOOL)windowShouldZoom:(NSWindow *)window toFrame:(NSRect)newFrame {
