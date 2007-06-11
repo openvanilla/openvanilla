@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+  <meta name="AppleOrder" content="1">  
+  <meta name="AppleTitle" content="OpenVanilla 通用输入法表格编辑帮助">
+  <meta name="AppleIcon" content="../ov.png">
+  <title>OpenVanilla 通用输入法表格编辑: OpenVanilla 输入法表格结构</title>
+  <meta name="KEYWORDS" content="openvanilla, 输入法, 输入法表格">
+  <meta name="DESCRIPTION" content="如何使用 OpenVanilla 通用输入法表格编辑">
+  <link rel="stylesheet" href="../style.css" type="text/css">
+</head>
+<body>
+<h1><span class="ov">OpenVanilla</span> 通用输入法表格编辑</h1>
+<p class="credit">&copy; OpenVanilla project. 2004-2007<br>
+<a href="http://openvanilla.org/">http://openvanilla.org/</a>
+</p>
+<p><a href="../index.html">« 回到帮助索引</a></p>
+<h2>OpenVanilla 输入法表格结构</h2>
+<p>当您用编辑软件开启了一个输入法表格之后，内容大概会像是这样：</p>
+<blockquote>%gen_inp<br>
+%ename EHQ-Symbols<br>
+%cname 渔村符号<br>
+%encoding UTF-8<br>
+%selkey 1234567890<br>
+%keyname begin<br>
+....<br>
+%keyname end<br>
+%chardef begin<br>
+....<br>
+%chardef end</blockquote>
+<p>每一行的意义如下：</p>
+<p>%gen_inp: 所有输入法表格都必须以这一行开头，请不要修改。</p>
+<p>
+%ename: 输入法模组的英文名称。如果没有定义，OpenVanilla 会使用文件的档名代替。</p>
+<p>%cname: 输入法模组的中文名称。如果没有定义，OpenVanilla 会使用英文名称代替。</p>
+<p>%selkey: 用来设定要用那些按键选择候选字。当您输入的内容有许多组候选字时，您可以使用键盘选择候选字列表中的项目，通常来说会设定成 1 到 0，不过，您也可以根据自己的需求，修改选字按键的位置。</p>
+<p>您可以在 OpenVanilla 通用输入法表格编辑这套工具的“基本设定”中，完成以上各项设定。而在“keyname”与“chardef”的部份，才是输入法表格的核心定义，我们会分别在<a href="help4.html">“键位对应”</a>与<a href="help5.html">“字元对应”</a>两章中，介绍这一部份。</p>
+</body>
+</html>

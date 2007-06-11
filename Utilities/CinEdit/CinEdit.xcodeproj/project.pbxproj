@@ -65,6 +65,12 @@
 		D4A8B7F60C1B10B20008E3D3 /* MainDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainDelegate.h; sourceTree = "<group>"; };
 		D4A8B7F70C1B10B20008E3D3 /* MainDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainDelegate.m; sourceTree = "<group>"; };
 		D4E7E40D0C1B47A1001934CF /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = English.lproj/Help; sourceTree = "<group>"; };
+		D4F0364E0C1D9FAD004BA779 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = zh_CN.lproj/CinDocument.nib; sourceTree = "<group>"; };
+		D4F036530C1DA151004BA779 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D4F0365C0C1DA1A4004BA779 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D4F0367B0C1DA2B3004BA779 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = zh_CN.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		D4F036820C1DA3DF004BA779 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = folder; name = zh_CN; path = zh_CN.lproj/Help; sourceTree = "<group>"; };
+		D4F036AB0C1DA848004BA779 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = zh_CN; path = zh_CN.lproj/Credits.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,14 +153,10 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D43FA0220C1B630600797C7D /* Localizable.strings */,
+				D4F14FC50C1DA9BD00167005 /* String */,
+				D4F14FC40C1DA9AE00167005 /* Interface */,
 				D4E7E40C0C1B47A1001934CF /* Help */,
 				D4A8B57F0C1AAC6E0008E3D3 /* Icons */,
-				D4A868B50C19A7A70089730D /* CinDocument.nib */,
-				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
-				2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */,
-				8D15AC360486D014006FF6A4 /* Info.plist */,
-				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -178,6 +180,26 @@
 				D4A869280C19B0620089730D /* ovcin.icns */,
 			);
 			name = Icons;
+			sourceTree = "<group>";
+		};
+		D4F14FC40C1DA9AE00167005 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */,
+				D4A868B50C19A7A70089730D /* CinDocument.nib */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		D4F14FC50C1DA9BD00167005 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				D43FA0220C1B630600797C7D /* Localizable.strings */,
+				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
+				8D15AC360486D014006FF6A4 /* Info.plist */,
+				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
+			);
+			name = String;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +236,7 @@
 				French,
 				German,
 				zh_TW,
+				zh_CN,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* CinEdit */;
 			projectDirPath = "";
@@ -267,6 +290,7 @@
 			children = (
 				089C1660FE840EACC02AAC07 /* English */,
 				D43DC0E10C1AA3DA00BFBE3D /* zh_TW */,
+				D4F036530C1DA151004BA779 /* zh_CN */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -276,6 +300,7 @@
 			children = (
 				2A37F4B7FDCFA73011CA2CEA /* English */,
 				D43FA0040C1B586F00797C7D /* zh_TW */,
+				D4F0367B0C1DA2B3004BA779 /* zh_CN */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
@@ -285,6 +310,7 @@
 			children = (
 				2A37F4BAFDCFA73011CA2CEA /* English */,
 				D43FA0400C1B676000797C7D /* zh_TW */,
+				D4F036AB0C1DA848004BA779 /* zh_CN */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -294,6 +320,7 @@
 			children = (
 				D43FA0140C1B62B200797C7D /* English */,
 				D43FA0240C1B630D00797C7D /* zh_TW */,
+				D4F0365C0C1DA1A4004BA779 /* zh_CN */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -303,6 +330,7 @@
 			children = (
 				D4A868B60C19A7A70089730D /* English */,
 				D43046430C1C87A5004A08C5 /* zh_TW */,
+				D4F0364E0C1D9FAD004BA779 /* zh_CN */,
 			);
 			name = CinDocument.nib;
 			sourceTree = "<group>";
@@ -312,6 +340,7 @@
 			children = (
 				D4E7E40D0C1B47A1001934CF /* English */,
 				D43F9FDD0C1B4E1B00797C7D /* zh_TW */,
+				D4F036820C1DA3DF004BA779 /* zh_CN */,
 			);
 			name = Help;
 			sourceTree = "<group>";

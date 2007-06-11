@@ -1,0 +1,9 @@
+"Opening a Input Method Table file. If you have a lot of definitions within this file, it may take time. Please be patient." = "正在打开您的输入法表格。如果您的输入法表格中定义了非常多的资料，可能要花上一些时间。请稍后。";
+"Svaing your Input Method Table file. If you have a lot of definitions within this file, it may take time. Please be patient." = "正在存储您的输入法表格。如果您的输入法表格中定义了非常多的资料，可能要花上一些时间。请稍后。";
+"You changes will be lost!" = "存储提示";
+"Close without Saving" = "不存储直接关闭";
+"Continue Editing" = "继续编辑";
+"If you do not save file before closing window, your changes will be lost. Do you want to save?" = "如果您不存储就直接关闭视窗，您刚才所做的各项变更将不会保留。您想要存储文件吗？";
+"New" = "新建";
+"Open" = "打开";
+"Save" = "存储";

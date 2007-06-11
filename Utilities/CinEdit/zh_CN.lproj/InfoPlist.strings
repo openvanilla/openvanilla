@@ -1,0 +1,6 @@
+CFBundleName = "OpenVanilla 通用输入法表格编辑";
+CFBundleShortVersionString = "OpenVanilla 通用输入法表格编辑 0.7.2";
+NSHumanReadableCopyright = "© The OpenVanilla Project, 2004-2007";
+
+CFBundleHelpGookName = "OpenVanilla 通用输入法表格编辑帮助";
+"OpenVanilla Generic Input Method Table" = "OpenVanilla 通用输入法表格";
