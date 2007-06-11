@@ -30,10 +30,10 @@
 	<string>2</string>
 	<key>IBOpenObjects</key>
 	<array>
-		<integer>5</integer>
-		<integer>109</integer>
-		<integer>104</integer>
 		<integer>78</integer>
+		<integer>5</integer>
+		<integer>104</integer>
+		<integer>109</integer>
 	</array>
 	<key>IBSystem Version</key>
 	<string>8P135</string>
