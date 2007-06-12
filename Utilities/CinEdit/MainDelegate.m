@@ -1,3 +1,5 @@
+// MainDelegate.m
+//
 // Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 

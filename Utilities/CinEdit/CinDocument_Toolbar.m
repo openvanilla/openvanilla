@@ -1,3 +1,7 @@
+// CinDocument_Toolbar.m
+//
+// The routines to maintain a toolbar
+//
 // Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 

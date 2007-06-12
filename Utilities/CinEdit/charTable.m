@@ -1,3 +1,7 @@
+// charTable.m
+//
+// The routines of the tableview of Character-Definitions
+//
 // Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 

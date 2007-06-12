@@ -1,3 +1,7 @@
+// keyTable.h
+//
+// The routines of the tableview of key-mapping
+//
 // Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
