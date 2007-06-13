@@ -15,8 +15,8 @@
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		D43FA0230C1B630600797C7D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D43FA0220C1B630600797C7D /* Localizable.strings */; };
 		D4A868B70C19A7A70089730D /* CinDocument.nib in Resources */ = {isa = PBXBuildFile; fileRef = D4A868B50C19A7A70089730D /* CinDocument.nib */; };
-		D4A868C90C19A7FE0089730D /* charTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A868C20C19A7FE0089730D /* charTable.m */; };
-		D4A868CB0C19A7FE0089730D /* keyTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A868C60C19A7FE0089730D /* keyTable.m */; };
+		D4A868C90C19A7FE0089730D /* CharTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A868C20C19A7FE0089730D /* CharTable.m */; };
+		D4A868CB0C19A7FE0089730D /* KeyTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A868C60C19A7FE0089730D /* KeyTable.m */; };
 		D4A868CC0C19A7FE0089730D /* OVCIN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4A868C70C19A7FE0089730D /* OVCIN.cpp */; };
 		D4A869290C19B0620089730D /* ovcin.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A869280C19B0620089730D /* ovcin.icns */; };
 		D4A8B57D0C1AAC670008E3D3 /* cinedit.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A8B57C0C1AAC670008E3D3 /* cinedit.icns */; };
@@ -50,10 +50,10 @@
 		D43FA0240C1B630D00797C7D /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D43FA0400C1B676000797C7D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = zh_TW; path = zh_TW.lproj/Credits.rtf; sourceTree = "<group>"; };
 		D4A868B60C19A7A70089730D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CinDocument.nib; sourceTree = "<group>"; };
-		D4A868C10C19A7FE0089730D /* charTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = charTable.h; sourceTree = "<group>"; };
-		D4A868C20C19A7FE0089730D /* charTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = charTable.m; sourceTree = "<group>"; };
-		D4A868C50C19A7FE0089730D /* keyTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keyTable.h; sourceTree = "<group>"; };
-		D4A868C60C19A7FE0089730D /* keyTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = keyTable.m; sourceTree = "<group>"; };
+		D4A868C10C19A7FE0089730D /* CharTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharTable.h; sourceTree = "<group>"; };
+		D4A868C20C19A7FE0089730D /* CharTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharTable.m; sourceTree = "<group>"; };
+		D4A868C50C19A7FE0089730D /* KeyTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyTable.h; sourceTree = "<group>"; };
+		D4A868C60C19A7FE0089730D /* KeyTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyTable.m; sourceTree = "<group>"; };
 		D4A868C70C19A7FE0089730D /* OVCIN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVCIN.cpp; sourceTree = "<group>"; };
 		D4A868C80C19A7FE0089730D /* OVCIN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCIN.h; sourceTree = "<group>"; };
 		D4A869280C19B0620089730D /* ovcin.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ovcin.icns; sourceTree = "<group>"; };
@@ -128,10 +128,10 @@
 			children = (
 				D4A868C70C19A7FE0089730D /* OVCIN.cpp */,
 				D4A868C80C19A7FE0089730D /* OVCIN.h */,
-				D4A868C10C19A7FE0089730D /* charTable.h */,
-				D4A868C20C19A7FE0089730D /* charTable.m */,
-				D4A868C50C19A7FE0089730D /* keyTable.h */,
-				D4A868C60C19A7FE0089730D /* keyTable.m */,
+				D4A868C10C19A7FE0089730D /* CharTable.h */,
+				D4A868C20C19A7FE0089730D /* CharTable.m */,
+				D4A868C50C19A7FE0089730D /* KeyTable.h */,
+				D4A868C60C19A7FE0089730D /* KeyTable.m */,
 				2A37F4AEFDCFA73011CA2CEA /* CinDocument.h */,
 				2A37F4ACFDCFA73011CA2CEA /* CinDocument.mm */,
 				D4A8B6710C1AFF9C0008E3D3 /* CinDocument_Toolbar.m */,
@@ -274,8 +274,8 @@
 			files = (
 				8D15AC310486D014006FF6A4 /* CinDocument.mm in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
-				D4A868C90C19A7FE0089730D /* charTable.m in Sources */,
-				D4A868CB0C19A7FE0089730D /* keyTable.m in Sources */,
+				D4A868C90C19A7FE0089730D /* CharTable.m in Sources */,
+				D4A868CB0C19A7FE0089730D /* KeyTable.m in Sources */,
 				D4A868CC0C19A7FE0089730D /* OVCIN.cpp in Sources */,
 				D4A8B6720C1AFF9C0008E3D3 /* CinDocument_Toolbar.m in Sources */,
 				D4A8B7F80C1B10B20008E3D3 /* MainDelegate.m in Sources */,

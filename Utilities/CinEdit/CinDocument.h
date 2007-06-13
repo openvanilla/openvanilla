@@ -29,10 +29,11 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #import <Cocoa/Cocoa.h>
-#import "keyTable.h"
-#import "charTable.h"
+#import "KeyTable.h"
+#import "CharTable.h"
 
 #define MSG(x)      [[NSBundle mainBundle] localizedStringForKey:x value:nil table:nil]
+#define helpAncor(x) [[NSHelpManager sharedHelpManager] openHelpAnchor:x inBook:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleHelpBookName"]]
 
 @interface CinDocument : NSDocument
 {
@@ -59,8 +60,8 @@
 	NSString *_selkey;
 	NSString *_endkey;
 	
-	keyTable * k;
-	charTable * c;	
+	KeyTable * k;
+	CharTable * c;	
 	NSString *currentPath;
 	BOOL isEdited;
 }
@@ -72,5 +73,4 @@
 - (IBAction)keynameAdd:(id)sender;
 - (IBAction)keynameRemove:(id)sender;
 - (IBAction)keynameSearch:(id)sender;
-- (void)setupToolbarForWindow:(NSWindow *)window;
 @end

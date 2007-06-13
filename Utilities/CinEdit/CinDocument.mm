@@ -1,7 +1,7 @@
 // CinDocument.mm
 //
 // Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
-// All rights reserved.w
+// All rights reserved
 // 
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions
@@ -146,12 +146,12 @@
 	[cin appendFormat:@"%ckeyname begin\n", '%'];
 	int i;
 	for(i = 0; i < [k count]; i++) {
-		[cin appendString:[k dumpline:i]];
+		[cin appendString:[k dumpDataFromARow:i]];
 	}
 	[cin appendFormat:@"%ckeyname end\n", '%'];
 	[cin appendFormat:@"%cchardef begin\n", '%'];
 	for(i = 0; i < [c count]; i++) {
-		[cin appendString:[c dumpline:i]];
+		[cin appendString:[c dumpDataFromARow:i]];
 	}
 	[cin appendFormat:@"%cchardef end\n", '%'];	
 	[cin writeToFile:savePath
@@ -171,7 +171,7 @@
 	_scname = [NSString stringWithUTF8String: cin->get_scname()];	
 	_selkey = [NSString stringWithUTF8String: cin->get_selkey()];
 	int i;	
-	k = [keyTable alloc];
+	k = [KeyTable alloc];
 	[k init];
 	for(i = 0; i < cin->keycount(); i++) {
 		Keyname keyname=cin->get_key(i);
@@ -186,7 +186,7 @@
 		[k addKey: d];
 		[d release];		
 	}	
-	c = [charTable alloc];
+	c = [CharTable alloc];
 	[c init];
 	for(i = 0; i < cin->charcount(); i++) {
 		Chardef chardef=cin->get_char(i);
@@ -205,21 +205,21 @@
 	_tcname = [NSString stringWithUTF8String:"\u65b0\u8f38\u5165\u6cd5"];
 	_scname = [NSString stringWithUTF8String:"\u65b0\u8f93\u5165\u6cd5"];	
 	_selkey = @"1234567890";
-	k = [keyTable alloc];
+	k = [KeyTable alloc];
 	[k init];
 	int i;
 	for(i = 0; i < 26; i++) {
 		NSMutableDictionary *d=[NSMutableDictionary new];		
 		[d setObject:[NSNumber numberWithInt:NO] forKey:@"endkey"];
-		unichar c = 'a' + i;
-		NSString *a = [[NSString alloc] initWithCharacters:&c length:1];		
+		unichar u = (unichar)'a' + i;
+		NSString *a = [[NSString alloc] initWithCharacters:&u length:1];		
 		[d setObject:a forKey:@"key"];
 		[d setObject:a forKey:@"value"];
 		[k addKey: d];
 		[d release];
 		[a release];
 	}
-	c = [charTable alloc];
+	c = [CharTable alloc];
 	[c init];
 }
 
@@ -296,11 +296,11 @@
 /* Actions of opening helpbook */
 
 - (IBAction)keymapHelp:(id)sender {
-	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"keymap" inBook:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleHelpBookName"]];
+	helpAncor(@"keymap");
 }
 
 - (IBAction)chardefHelp:(id)sender {
-	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"chardef" inBook:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleHelpBookName"]];
+	helpAncor(@"chardef");	
 }
 
 
