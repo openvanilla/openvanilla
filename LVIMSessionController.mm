@@ -1,9 +1,9 @@
 //
-//  InputMethodSessionController.m of ÇPROJECTNAMEÈ
+//  InputMethodSessionController.m of Â«PROJECTNAMEÂ»
 //
-//	Created:	ÇDATEÈ
+//	Created:	Â«DATEÂ»
 //
-//	Copyright:	Copyright  ÇYEARÈ ÇORGANIZATIONNAMEÈ, All Rights Reserved
+//	Copyright:	Copyright  Â«YEARÂ» Â«ORGANIZATIONNAMEÂ», All Rights Reserved
 //
 
 #import "LVIMSessionController.h"
@@ -41,8 +41,8 @@ TSComposingBuffer *buf;
 
 - (void)tscbSend
 {
-	[composed setString:[NSString string]];	
 	[self commitComposition:current_sender];
+	[composed setString:[NSString string]];	
 }
 
 - (void)tscbUpdate:(BOOL)send withCursor:(int)cursor from:(int)markFrom to:(int)markTo
@@ -167,8 +167,9 @@ TSComposingBuffer *buf;
 - (BOOL)insertNewline:(id)sender
 {
 	if ([composed length] == 0) return NO;
-	[composed setString:[NSString string]];
 	[self commitComposition:sender];
+	[composed setString:[NSString string]];
+
 	return YES;
 }
 
