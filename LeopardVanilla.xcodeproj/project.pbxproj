@@ -237,7 +237,6 @@
 			mainGroup = 29B97314FDCFA39411CA2CEA /* LeopardVanilla */;
 			projectDirPath = "";
 			projectRoot = "";
-			shouldCheckCompatibility = 1;
 			targets = (
 				8D1107260486CEB800E47090 /* LeopardVanilla */,
 			);

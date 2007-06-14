@@ -32,6 +32,7 @@
 #define __TSComposingBuffer_h
 
 #include <Cocoa/Cocoa.h>
+#import "LVIMSessionController.h"
 
 class TSComposingBuffer
 {
@@ -82,7 +83,7 @@ public:
 		return x;
 	}
 	
-    NSMutableString* getContent()
+    NSString* getContent()
 	{
 		return [inst tscbGetContent];
 	}

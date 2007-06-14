@@ -357,9 +357,9 @@ void CVLoader::createMenuGroups() {
         // CVInsertMenuItem(immenu, CVLMI_FASTIMSWITCH, MSG(@"Input method toggle"), 0, [menudict valueForKey:@"fastIMSwitch"]);
     }
 
-    CVInsertMenuItem(immenu, CVLMI_PREFERENCES, MSG(@"Preferences"), 0);
-    CVInsertMenuItem(immenu, CVLMI_HELP, MSG(@"Help"), 0);
-	CVInsertMenuItem(immenu, CVLMI_ABOUT, MSG(@"About"), 0);
+//    CVInsertMenuItem(immenu, CVLMI_PREFERENCES, MSG(@"Preferences"), 0);
+//    CVInsertMenuItem(immenu, CVLMI_HELP, MSG(@"Help"), 0);
+//	CVInsertMenuItem(immenu, CVLMI_ABOUT, MSG(@"About"), 0);
 }
 
 void CVLoader::checkMenuItems() {

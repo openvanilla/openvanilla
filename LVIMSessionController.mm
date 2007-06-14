@@ -1,9 +1,9 @@
 //
-//  InputMethodSessionController.m of Â«PROJECTNAMEÂ»
+//  InputMethodSessionController.m of ÇPROJECTNAMEÈ
 //
-//	Created:	Â«DATEÂ»
+//	Created:	ÇDATEÈ
 //
-//	Copyright:	Copyright  Â«YEARÂ» Â«ORGANIZATIONNAMEÂ», All Rights Reserved
+//	Copyright:	Copyright  ÇYEARÈ ÇORGANIZATIONNAMEÈ, All Rights Reserved
 //
 
 #import "LVIMSessionController.h"
@@ -18,13 +18,18 @@ TSComposingBuffer *buf;
 @implementation LVIMSessionController
 - (int)tscbGetX
 {
-	NSRect r=[current_sender firstRectForCharacterRange:NSMakeRange(0,0)];
+//	NSRect r = [current_sender firstRectForCharacterRange:NSMakeRange(0,0)];
+	NSRect r;
+	[current_sender attributesForCharacterIndex:0 lineHeightRectangle:&r];
 	NSLog(@"(%f,%f)[%f,%f]", r.origin.x, r.origin.y, r.size.width, r.size.height);
 	return (int)r.origin.x;
 }
 - (int)tscbGetY
 {
-	NSRect r=[current_sender firstRectForCharacterRange:NSMakeRange(0,0)];
+//	NSRect r=[current_sender firstRectForCharacterRange:NSMakeRange(0,0)];
+	NSRect r;
+	[current_sender attributesForCharacterIndex:0 lineHeightRectangle:&r];
+
 	r.origin.y=1200-r.origin.y;
 	NSLog(@"(%f,%f)[%f,%f]", r.origin.x, r.origin.y, r.size.width, r.size.height);
 	return (int)r.origin.y;
@@ -36,8 +41,8 @@ TSComposingBuffer *buf;
 
 - (void)tscbSend
 {
-	[super commitComposition];
 	[composed setString:[NSString string]];	
+	[self commitComposition:current_sender];
 }
 
 - (void)tscbUpdate:(BOOL)send withCursor:(int)cursor from:(int)markFrom to:(int)markTo
@@ -113,7 +118,26 @@ TSComposingBuffer *buf;
 	context->activate(buf);
 
 }
+-(void)commitComposition:(id)sender 
+{
+	NSLog(@"commitComposition");
+	NSString *c = composed;
+	if (!c || ![c length]) c = @"";
+	
+/*	NSString*		text = [self composedBuffer];
 
+	if ( text == nil || [text length] == 0 ) {
+		text = [self originalBuffer];
+	}
+*/
+	[sender insertText:composed replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
+//	[sender insertText:text replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
+	
+//	[self setComposedBuffer:@""];
+//	[self setOriginalBuffer:@""];
+//	_insertionIndex = 0;
+//	_didConvert = NO;
+}
 
 -(BOOL)inputText:(NSString*)string key:(NSInteger)keyCode modifiers:(NSUInteger)flags client:(id)sender
 {
@@ -143,8 +167,8 @@ TSComposingBuffer *buf;
 - (BOOL)insertNewline:(id)sender
 {
 	if ([composed length] == 0) return NO;
-	[super commitComposition];
 	[composed setString:[NSString string]];
+	[self commitComposition:sender];
 	return YES;
 }
 

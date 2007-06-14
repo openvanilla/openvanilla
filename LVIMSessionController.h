@@ -12,5 +12,12 @@
 @interface LVIMSessionController : IMKInputController {
 	NSMutableString *composed;
 }
-
+- (int)tscbGetX;
+- (int)tscbGetY;
+- (void)tscbClear;
+- (void)tscbSend;
+- (void)tscbUpdate:(BOOL)send withCursor:(int)cursor from:(int)markFrom to:(int)markTo;
+- (void)tscbAppend:(NSString*)s;
+- (BOOL)tscbIsEmpty;
+- (NSString*)tscbGetContent;
 @end
