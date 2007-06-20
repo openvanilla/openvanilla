@@ -1,5 +1,32 @@
-// OVIMRomanNew.cpp
-// Copyright (c) 2004-2005 The OpenVanilla Project (http://openvanilla.org)
+// OVIMRomanNew.cpp: New Roman Input Method, supports hunspell.
+//
+// Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. Neither the name of OpenVanilla nor the names of its contributors
+//    may be used to endorse or promote products derived from this software
+//    without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
 
 #define OV_DEBUG
 #ifndef WIN32
@@ -23,57 +50,7 @@
 #include <vector>
 //#include "OVSQLite3.h"
 
-//#include "LuceneSearch.h"
-//#include "aspell.h"
-//#include "dhunspell.h"
-#include "hunspelldll.h"
-using namespace std;
-
-int is_punc(char i){
-	if(i >= '!' && i <= '@')  return 1;
-	if(i >= '[' && i <= '\'') return 1;
-	if(i >= '{' && i <= '~') return 1;
-	return 0;
-}
-
-int is_selkey(char i){
-	if(i >= '0' && i <= '9') return 1;
-	return 0;
-}
-
-const size_t ebMaxKeySeq=40;
-class KeySeq {
-public:
-    KeySeq() {
-        clear();
-    }
-    void add(char c) {
-        if (len == ebMaxKeySeq) return;
-        buf[len++]=c;
-        buf[len]=0;
-    }
-    void remove() {
-        if (!len) return;
-        buf[--len]=0;
-    }
-    void clear() {
-        len=0; buf[0]=0;
-    }
-    char buf[ebMaxKeySeq];
-    size_t len;
-};
-const int ovMaxCandiLen = 32;
-class IMGCandidate
-{
-public:
-    size_t count() { return candidates.size(); }
-    void clear() { candidates.clear(); }
-    void add(const string& s) { candidates.push_back(s); }
-    const char *item(size_t i) { return candidates[i].c_str(); }
-    vector<string>& vectorInstance() { return candidates; }
-protected:    
-    vector<string> candidates;
-};
+#include "OVIMRomanNew.h"
 
 /*
 SQLite3 *db;
@@ -82,40 +59,26 @@ const char *QueryForCommand(SQLite3 *db, const char *command);
 const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key);
 */
 
-string modulePath;
-
-//AspellCanHaveError* aspell_possible_err = 0;
-//AspellSpeller* aspell_checker = 0;
-//AspellConfig* aspell_config = 0;
-
-//HunspellHandle hunspell_checker = NewHunspell("C:\\hunspell\\spell_en_US\\en_US.aff","C:\\hunspell\\spell_en_US\\en_US.dic");
-void* hunspell_checker = hunspell_initialize("C:\\hunspell\\spell_en_US\\en_US.aff","C:\\hunspell\\spell_en_US\\en_US.dic");
-
-class OVIMRomanNewContext : public OVInputMethodContext
+void OVIMRomanNewContext::start(OVBuffer*, OVCandidate*, OVService* s)
 {
-public:
-    virtual void start(OVBuffer*, OVCandidate*, OVService*)
-	{
-		clear();
+	clear();
 
-//		aspell_config = new_aspell_config();
-//		aspell_config_replace(aspell_config, "lang", "en_US");		
+	string affPath =
+		parent->modulePath + string(s->pathSeparator()) + "en_US.aff";
+	string dictPath =
+		parent->modulePath + string(s->pathSeparator()) + "en_US.dic";
+	hunspellChecker
+		= hunspell_initialize(
+			const_cast<char*>(affPath.c_str()),
+			const_cast<char*>(dictPath.c_str())
+			);
+}
 
-//		aspell_possible_err = new_aspell_speller(aspell_config);
-//		if (aspell_error_number(aspell_possible_err) != 0)
-//			puts(aspell_error_message(aspell_possible_err));
-//		else
-//			aspell_checker = to_aspell_speller(aspell_possible_err);
-	}
-    virtual void clear() { keyseq.clear();} 
-
-//	virtual void end() { delete_aspell_speller(aspell_checker); }
-virtual void end() { hunspell_uninitialize((Hunspell*) hunspell_checker); }
-    virtual int keyEvent(
-        OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* s)    
-    {
-        if(candi.count()) {
-            if (k->code()==ovkLeft || k->code()==ovkUp) {
+int OVIMRomanNewContext::keyEvent(
+	OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* s)
+{
+	if(candi.count()) {
+		if (k->code()==ovkLeft || k->code()==ovkUp) {
                 if(pagenumber > 0) pagenumber--;
 				else
 					pagenumber = pagetotal;
@@ -206,9 +169,7 @@ virtual void end() { hunspell_uninitialize((Hunspell*) hunspell_checker); }
             if(keyseq.buf) {
                 pagenumber = 0;
                 if(!isEnglish(keyseq.buf) &&
-					//spellCheckerByLuceneFuzzySearch(keyseq.buf))
-					//spellCheckerByAspell(keyseq.buf))
-spellCheckerByHunspell(keyseq.buf))
+					spellCheckerByHunspell(keyseq.buf))
                 {
 					showcandi(i);
 					return 1;
@@ -231,8 +192,6 @@ spellCheckerByHunspell(keyseq.buf))
 			keyseq.remove();
             if(keyseq.len && i->onScreen()) {
                 pagenumber = 0;
-                //if(!isEnglish(keyseq.buf) &&
-		//			spellCheckerByAspell(keyseq.buf))
 				  if(!isEnglish(keyseq.buf) &&
 					spellCheckerByHunspell(keyseq.buf))
 				{
@@ -252,8 +211,6 @@ spellCheckerByHunspell(keyseq.buf))
 		if(k->code()==ovkTab){
             if(keyseq.buf) {
                 pagenumber = 0;
-                /*if(!isEnglish(keyseq.buf) &&
-					spellCheckerByAspell(keyseq.buf))*/
                 if(!isEnglish(keyseq.buf) &&
 					spellCheckerByHunspell(keyseq.buf))
 				{
@@ -282,10 +239,6 @@ spellCheckerByHunspell(keyseq.buf))
             if(keyseq.buf && i->onScreen()) {
                 pagenumber = 0;
                 temp = 0;
-                /*if(!isEnglish(keyseq.buf) &&
-					spellCheckerByAspell(keyseq.buf))*/
-				//murmur("OVIMRomanNew: isPrint.isEnglish = %d", isEnglish(keyseq.buf));
-				//murmur("OVIMRomanNew: isPrint.spellCheckerByHunspell(candi.count) = %d", spellCheckerByHunspell(keyseq.buf));
                 if(!isEnglish(keyseq.buf) &&
 					spellCheckerByHunspell(keyseq.buf))
 				{
@@ -299,35 +252,11 @@ spellCheckerByHunspell(keyseq.buf))
 			b->clear()->append(keyseq.buf)->update();
 			return 1;
 		}
-		return 0;
-    }
-
-protected:
-    int closeCandidateWindow(OVCandidate* c) {
-        if (c->onScreen()) c->hide()->clear()->update();
-        candi.clear();
-        return 1;        
-    }
-
-    int showcandi(OVCandidate* i);
-    //int updatepagetotal(char* buf);
-    //int spellCheckerBySQLiteSoundex(char* buf);
-    //int spellCheckerByLuceneFuzzySearch(char* buf);
-	//size_t spellCheckerByAspell(char* buf);
-	size_t spellCheckerByHunspell(char* buf);
-    bool isEnglish(char* buf);
-
-protected:
-	KeySeq keyseq;
-    IMGCandidate candi;
-    size_t pagenumber;
-    size_t pagetotal;
-    size_t temp;    
-};
+	return 0;
+}
 
 bool OVIMRomanNewContext::isEnglish(char* buf) {
-	//return aspell_speller_check(aspell_checker, static_cast<const char*>(buf), -1) != 0 ? true : false;
-	return hunspell_spell((Hunspell*)hunspell_checker, (buf)) != 0 ? true : false;
+	return hunspell_spell((Hunspell*)hunspellChecker, (buf)) != 0 ? true : false;
 
 }
 
@@ -340,14 +269,9 @@ size_t OVIMRomanNewContext::spellCheckerByHunspell(char* buf)
     pagenumber=0;
     pagetotal=0;
     candi.clear();
+   		
+	numSuggestWord = hunspell_suggest((Hunspell*)hunspellChecker, (buf), &pString_array); 
 
-	
-    		
-	//hunspell_suggest(hunspell_checker, const_cast<const char*>(buf), result); 
-	numSuggestWord = hunspell_suggest((Hunspell*)hunspell_checker, (buf), &pString_array); 
-
-	//int i = 0, j = 0;
-	
 	if(numSuggestWord > 0)
 	{
 		for(int i= 0; i <numSuggestWord; i++)
@@ -530,45 +454,4 @@ int OVIMRomanNewContext::showcandi(OVCandidate* i) {
     sprintf(dispstr, "(%d/%d)", pagenumber + 1, pagetotal + 1);
     i->append(dispstr)->update()->show();    
     return 1;
-}
-
-class OVIMRomanNew : public OVInputMethod
-{
-public:
-    virtual const char* identifier() { return "OVIMRomanNew"; }
-    virtual OVInputMethodContext *newContext() { return new OVIMRomanNewContext; }
-    virtual int initialize(OVDictionary* l, OVService* s, const char* mp)
-    {
-        string idString(identifier());
-        modulePath = mp + idString + "/";
-        return 1; 
-    }
-
-    virtual const char* localizedName(const char *locale) {
-        //newline error temp comment
-		//if (!strcasecmp(locale, "zh_TW")) return "?°è‹±??;
-        //if (!strcasecmp(locale, "zh_CN")) return "?°è‹±??;
-		if (!strcasecmp(locale, "zh_TW")) return "ZH_TW";
-        if (!strcasecmp(locale, "zh_CN")) return "ZH_CN";
-        return "New Roman (alphanumeric)";
-    }    
-};
-
-extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }
-extern "C" int OVInitializeLibrary(OVService*, const char* p) {
-	/*
-    db=new SQLite3;  // this never gets deleted, but so do we
-    char dbfile[128];
-    sprintf(dbfile, "%sOVIMRomanNew/dict.db", p);
-    murmur("DBPath: %s",dbfile);
-    if (int err=db->open(dbfile)) {
-        murmur("SQLite3 error! code=%d", err);
-        return 0;
-    }
-	*/
-
-    return 1;
-}
-extern "C" OVModule *OVGetModuleFromLibrary(int idx) {
-    return (idx==0) ? new OVIMRomanNew : NULL;
 }

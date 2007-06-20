@@ -1,2 +1,0 @@
-cl /I..\..\Framework\Headers /I..\..\Modules\SharedHeaders /GR /EHsc /ML /D"WIN32" /D"UNICODE" /D"_UNICODE" /FeOVIMRomanNew.DLL /LD OVIMRomanNew.cpp /link /DEF:..\..\Experiments\Win32\OVModule.DEF aspell-15.lib
-pause

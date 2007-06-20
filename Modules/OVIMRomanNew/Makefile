@@ -1,6 +1,6 @@
 # Makefile for OVIMRomanNew
 #
-# Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
+# Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -30,7 +30,7 @@
 
 MODULEID=OVIMRomanNew
 SOURCES=OVIMRomanNew
-LDFLAGS+=-L/opt/local/lib -L/usr/local/lib -laspell
+LDFLAGS+=-L/opt/local/lib -L/usr/local/lib -lhunspell
 INC+=-I/usr/local/include -I/opt/local/include
 
 include ../Mk/ov.module.mk
