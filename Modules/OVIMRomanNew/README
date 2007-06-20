@@ -3,7 +3,7 @@
 1.2 For Mac OS X:
 1.2.1. Get the source from
 	http://hunspell.sourceforge.net/
-1.2.2. Build the library. Currently only i386 works, see
+1.2.2. Build the library. Universal Binary does not work yet, see
 	http://sourceforge.net/tracker/index.php?func=detail&aid=1740138&group_id=143754&atid=756395
 for the details of this issue. Anyway, under the source code folder:
 	> ./configure && make && sudo make install

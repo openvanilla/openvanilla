@@ -36,4 +36,10 @@ INC+=-I/usr/local/include/hunspell -I/usr/local/include -I/opt/local/include
 
 include ../Mk/ov.module.mk
 
+PROCESSOR:=$(shell uname -p)
+ifeq (PROCESSOR, powerpc)
+ARCH=-arch ppc
+else
 ARCH=-arch i386
+endif
+
