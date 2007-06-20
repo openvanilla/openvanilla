@@ -148,8 +148,10 @@ public:
     }
 
     virtual const char* localizedName(const char *locale) {
-		if (!strcasecmp(locale, "zh_TW")) return "ZH_TW";
-        if (!strcasecmp(locale, "zh_CN")) return "ZH_CN";
+		if (!strcasecmp(locale, "zh_TW"))
+			return "\xE6\x96\xB0\xE8\x8B\xB1\xE6\x95\xB8";
+        if (!strcasecmp(locale, "zh_CN"))
+			return "\xE6\x96\xB0\xE8\x8B\xB1\xE6\x95\xB0";
         return "New Roman (alphanumeric)";
     }
 
