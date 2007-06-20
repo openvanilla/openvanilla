@@ -31,7 +31,18 @@
 #ifndef OVIMRomanNew_h
 #define OVIMRomanNew_h
 
-#include "hunspelldll.h"
+#ifdef WIN32
+	#include "hunspelldll.h"
+#else
+	#include "hunspell.hxx"
+	#include "hunspell.h"
+	#define Hunspell Hunhandle
+	#define hunspell_initialize (void*)Hunspell_create
+	#define hunspell_uninitialize Hunspell_destroy
+	#define hunspell_spell Hunspell_spell
+	#define hunspell_suggest Hunspell_suggest
+#endif
+
 using namespace std;
 
 int is_punc(char i){

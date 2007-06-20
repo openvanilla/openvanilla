@@ -270,8 +270,12 @@ size_t OVIMRomanNewContext::spellCheckerByHunspell(char* buf)
     pagetotal=0;
     candi.clear();
    		
-	numSuggestWord = hunspell_suggest((Hunspell*)hunspellChecker, (buf), &pString_array); 
-
+	numSuggestWord =
+#ifdef WIN32
+		hunspell_suggest((Hunspell*)hunspellChecker, (buf), &pString_array); 
+#else
+		hunspell_suggest((Hunspell*)hunspellChecker, &pString_array, (buf));
+#endif
 	if(numSuggestWord > 0)
 	{
 		for(int i= 0; i <numSuggestWord; i++)
