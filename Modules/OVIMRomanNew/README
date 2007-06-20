@@ -7,6 +7,9 @@
 	http://sourceforge.net/tracker/index.php?func=detail&aid=1740138&group_id=143754&atid=756395
 for the details of this issue. Anyway, under the source code folder:
 	> ./configure && make && sudo make install
+1.2.3. Copy the license files
+	> sudo cp license.* $PREFIX/include/hunspell
+where $PREFIX is usually /usr/local
 
 2. Prepare Hunspell dictionary
 2.1. Get affix and dictionary files from
