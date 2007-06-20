@@ -30,7 +30,10 @@
 
 MODULEID=OVIMRomanNew
 SOURCES=OVIMRomanNew
+DATA=en_US.aff en_US.dic
 LDFLAGS+=-L/opt/local/lib -L/usr/local/lib -lhunspell-1.1
 INC+=-I/usr/local/include/hunspell -I/usr/local/include -I/opt/local/include
 
 include ../Mk/ov.module.mk
+
+ARCH=-arch i386
