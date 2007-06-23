@@ -1,11 +1,10 @@
 /* CandiWindow */
-
 #import <Cocoa/Cocoa.h>
+#import <WebKit/WebKit.h>
 
 @interface CandiWindow : NSWindow
 {
-	//This point is used in dragging to mark the initial click location
     NSPoint initialLocation;
-    IBOutlet id candiweb;	
+    WebView* candiweb;	
 }
 @end

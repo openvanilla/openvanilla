@@ -104,13 +104,11 @@
 		6A99071B0A66C760007272EB /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 6A99071C0A66C760007272EB /* Build configuration list for PBXProject "WebKitServer" */;
-			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 0;
 			mainGroup = 6A9907190A66C760007272EB;
 			productRefGroup = 6A9907320A66C77F007272EB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
-			shouldCheckCompatibility = 1;
 			targets = (
 				6A9907300A66C77F007272EB /* WebKitServer */,
 			);

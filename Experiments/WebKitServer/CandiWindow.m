@@ -31,7 +31,7 @@
 	NSRect  screenFrame = [[NSScreen mainScreen] frame];
 	NSRect  windowFrame = [self frame];
 	
-	NSLog(@"drag");
+	NSLog(@"Start dragging");
 	
 	WebScriptObject *scrobj = [candiweb windowScriptObject];
 	
@@ -39,7 +39,7 @@
 	NSLog(@"evaluating javascript: %@", script);
 	id y=[scrobj evaluateWebScript:script];
 	if (y) {
-		NSLog(@"update text!!!!", [y description]);
+		NSLog(@"Script of Start dragging: %@", [y description]);
 	}	
 	
 	
@@ -69,7 +69,7 @@
 	initialLocation.x -= windowFrame.origin.x;
 	initialLocation.y -= windowFrame.origin.y;
 
-	NSLog(@"stopdrag");
+	NSLog(@"Stop dragging");
 	
 	WebScriptObject *scrobj = [candiweb windowScriptObject];
 	
@@ -77,7 +77,7 @@
 	NSLog(@"evaluating javascript: %@", script);
 	id y=[scrobj evaluateWebScript:script];
 	if (y) {
-		NSLog(@"update text!!!!", [y description]);
+		NSLog(@"Script of Stop dragging: %@", [y description]);
 	}		
 }
 
