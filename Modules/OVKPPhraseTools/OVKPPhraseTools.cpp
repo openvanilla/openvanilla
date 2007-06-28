@@ -242,11 +242,18 @@ bool OVKPPhraseToolsContext::parse_command() {
     }
     
     // if it's a command
+    char cmdbuf[1024];
+
     if (cps.length() > 2 && cps[1]==' ') {
         string param=cps.substr(2, cps.length()-2);
         switch(tolower(cps[0])) {
             case 'a':
                 return command_add(param);
+                
+            case 'g':
+                sprintf(cmdbuf, "open -a Safari.app \"http://www.google.com.tw/search?q=%s\"", param.c_str());
+                system(cmdbuf);
+                return clearBufCandi();
         }
             
         s->notify(PTMsg(
