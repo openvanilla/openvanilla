@@ -45,7 +45,7 @@
 const size_t vxSC2TCTableSize=8189;
 extern unsigned short vxSC2TCTable[];
 
-const size_t vxTC2SCTableSize=3214;
+const size_t vxTC2SCTableSize=3209;
 extern unsigned short vxTC2SCTable[];
 
 struct VXHCData {
