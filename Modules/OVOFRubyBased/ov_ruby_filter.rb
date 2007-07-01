@@ -23,6 +23,9 @@ class OVOFRubyFilter
     # yet another brain-dead substituion
     str.gsub!(/惡劣/, "ㄚˋ劣")
     
+    # lukhnos's common typos
+    str.gsub!(/開摧/, "開催")
+    
     # returns the string
     str
   end
