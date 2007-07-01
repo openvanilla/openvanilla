@@ -40,6 +40,7 @@
 #include <sys/stat.h>
 
 #define MSG(x)      [[NSBundle mainBundle] localizedStringForKey:x value:nil table:nil]
+#define imageTypes  [NSArray arrayWithObjects:@"jpeg", @"jpg", @"jpe", @"gif", @"png", @"eps", @"epi", @"epsf", @"epsi", @"ps", @"psd", @"tif", @"tiff", @"bmp", nil]
 
 #define LCP			"/Library/Components"
 #define OV063		"/OVLoader.bundle"
@@ -57,6 +58,16 @@
     struct stat st;
     if (stat([p UTF8String], &st)) return NO;
     return YES;
+}
+
+- (BOOL) validateType: (NSString *)ext {
+	int i;
+	for(i = 0; i < [imageTypes count]; i++) {
+		if([ext isEqualToString:[imageTypes objectAtIndex:i]]) {
+			return YES;
+		}
+	}
+	return NO;
 }
 
 - (void) checkUserIconFolder {
@@ -85,7 +96,6 @@
     [d release];
 }
 
-
 - (void)scanIcons:(float) size{
     items = [NSMutableArray new];
 
@@ -107,18 +117,126 @@
     }	
 }
 
--	(void) refresh {
+- (void) refresh {
     [self scanIcons:currSize];
     [listview reloadData];
+}
+
+- (void) copyToUserDir: (NSString *) path {
+    if(![self pathExists:[path UTF8String]]) {
+		NSAlert *errorbox=[NSAlert
+	    alertWithMessageText:MSG(@"Error: File does not exist!")
+			   defaultButton:MSG(@"OK")
+			 alternateButton:nil
+				 otherButton:nil
+   informativeTextWithFormat:MSG(@"The icon that you want to add exists no more, you might deleted it, or some unknown errors happened.")];
+		[errorbox runModal];
+		return;
+    }
+	
+    NSString *filename = [path lastPathComponent];
+    NSString *targetfilepath = [NSString stringWithFormat:@"%@/%@", [NSString stringWithUTF8String:USERICONPATH], filename];
+    if([self pathExists:[targetfilepath UTF8String]]) {
+		NSAlert *errorbox=[NSAlert
+	    alertWithMessageText:MSG(@"Error: File alreay exists!")
+			   defaultButton:MSG(@"OK")
+			 alternateButton:nil
+				 otherButton:nil
+   informativeTextWithFormat:MSG(@"You have already have a icon file called \"%@\". You can not copy it again."), filename];
+		[errorbox runModal];
+		return;	
+    }	
+    NSString *cmd = [NSString stringWithFormat:@"/bin/cp %@ %@ \n", path, targetfilepath];
+    system([cmd UTF8String]);
+    return;
+}
+
+- (void) convertLoop:(NSArray*)filenames {
+	int i;
+	if(![filenames count]) return;
+	for(i = 0; i < [filenames count]; i ++) {
+		NSString *ext = [[filenames objectAtIndex:i] pathExtension];
+		if([self validateType:ext] == NO) {
+			continue;
+		}
+		if([ext isEqualToString:@"icns"]) {
+			[self copyToUserDir:[filenames objectAtIndex:i]];
+			continue;
+		}
+	    NSString *sfilename = [[filenames objectAtIndex:i] lastPathComponent];
+	    NSString *tfilename = [[sfilename stringByDeletingPathExtension] stringByAppendingString:@".icns"];
+	    NSSavePanel *savepanel= [NSSavePanel savePanel];
+	    [savepanel setRequiredFileType:@"icns"];
+	    [savepanel setCanCreateDirectories:NO];
+	    [savepanel setAllowsOtherFileTypes:NO];
+	    [savepanel setTitle:MSG(@"Save the Converted Icon")];	
+	    [savepanel setMessage:[NSString stringWithFormat:MSG(@"Please set the filename of the icon converted from \"%@\":"), sfilename]];
+	    if ([savepanel runModalForDirectory:[NSString stringWithUTF8String:USERICONPATH] file:tfilename] != NSOKButton) {
+			continue;
+	    }
+	    NSString *filepath = [[savepanel filename] stringByStandardizingPath];				
+	    NSImage *icon = [NSImage new];
+		
+	    [icon initWithContentsOfFile:[filenames objectAtIndex:i]];
+		
+	    if(![icon isValid]) {
+			NSAlert *errorbox=[NSAlert
+		    alertWithMessageText:MSG(@"Error: Invalid Image file!")
+				   defaultButton:MSG(@"OK")
+				 alternateButton:nil
+					 otherButton:nil
+	   informativeTextWithFormat:MSG(@"The selected file is invalid, please check your file.")];
+			[errorbox runModal];				
+			return;
+	    }
+	    [icon setScalesWhenResized:TRUE];
+	    NSImage *ricon = [[[NSImage alloc] initWithSize:NSMakeSize(16, 16)] autorelease];
+	    [ricon lockFocus];
+	    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+	    [icon setSize:NSMakeSize(16, 16)];
+	    [icon compositeToPoint:NSZeroPoint operation:NSCompositeCopy];
+	    [ricon unlockFocus];			
+		
+	    IconFamily* iconFamily;
+		
+	    iconFamily = [IconFamily ovicon:ricon];			
+	    [iconFamily writeToFile:filepath];			
+	    [iconFamily setAsCustomIconForFile:filepath];
+	}	
 }
 
 - (void)awakeFromNib  {
 	[window center];
     currSize = 16;
     [self scanIcons:currSize];
+    [listview registerForDraggedTypes:
+		[NSArray arrayWithObjects:NSFilenamesPboardType,nil]];	
     [listview setDataSource:self];	
     [listview setRowHeight:24];
     [listview setDoubleAction:@selector(preview)];
+}
+
+- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id <NSDraggingInfo>)info proposedRow:(int)row proposedDropOperation:(NSTableViewDropOperation)op {
+    [tv setDropRow:[tv numberOfRows] dropOperation:NSTableViewDropAbove];
+    return NSTableViewDropAbove;
+}
+
+- (BOOL)tableView:(NSTableView*)tv acceptDrop:(id <NSDraggingInfo>)info row:(int)row dropOperation:(NSTableViewDropOperation)op
+{
+    NSPasteboard *myPasteboard=[info draggingPasteboard];
+    NSArray *typeArray=[NSArray arrayWithObjects:NSFilenamesPboardType,nil];
+    NSString *availableType;
+    NSArray *filesList;
+	
+    availableType=[myPasteboard availableTypeFromArray:typeArray];
+    filesList=[myPasteboard propertyListForType:availableType];
+	[self convertLoop:filesList];
+	[self refresh];
+    return YES;
+}
+
+- (BOOL)tableView:(NSTableView *)tableView shouldEditTableColumn:(NSTableColumn *)tableColumn row:(int)row{ 
+	return NO; 
 }
 
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView {
@@ -138,35 +256,6 @@
     }
 
     return nil;
-}
-
-- (void) copyToUserDir: (NSString *) path {
-    if(![self pathExists:[path UTF8String]]) {
-	NSAlert *errorbox=[NSAlert
-	    alertWithMessageText:MSG(@"Error: File does not exist!")
-	    defaultButton:MSG(@"OK")
-	    alternateButton:nil
-	    otherButton:nil
-	    informativeTextWithFormat:MSG(@"The icon that you want to add exists no more, you might deleted it, or some unknown errors happened.")];
-	[errorbox runModal];
-	return;
-    }
-
-    NSString *filename = [path lastPathComponent];
-    NSString *targetfilepath = [NSString stringWithFormat:@"%@/%@", [NSString stringWithUTF8String:USERICONPATH], filename];
-    if([self pathExists:[targetfilepath UTF8String]]) {
-	NSAlert *errorbox=[NSAlert
-	    alertWithMessageText:MSG(@"Error: File alreay exists!")
-	    defaultButton:MSG(@"OK")
-	    alternateButton:nil
-	    otherButton:nil
-	    informativeTextWithFormat:MSG(@"You have already have a icon file called \"%@\". You can not copy it again."), filename];
-	[errorbox runModal];
-	return;	
-    }	
-    NSString *cmd = [NSString stringWithFormat:@"/bin/cp %@ %@ \n", path, targetfilepath];
-    system([cmd UTF8String]);
-    return;
 }
 
 - (IBAction)openIcon:(id)sender {
@@ -204,54 +293,8 @@
     [panel setCanCreateDirectories:NO];
     [panel setTitle:MSG(@"Choose the Source Image")];
     [panel setMessage:MSG(@"Please choose the image file that you want to convert:")];
-    if([panel runModalForDirectory:importsPath file:nil 
-	    types:[NSArray arrayWithObjects:@"jpeg", @"jpg", @"jpe", @"gif", 
-	    @"png", @"eps", @"epi", @"epsf", @"epsi", @"ps",
-	    @"psd", @"tif", @"tiff", @"bmp", nil]]  == NSOKButton) {
-	NSArray *filenames = [panel filenames];
-	int i;
-	if(![filenames count]) return;
-	for(i = 0; i < [filenames count]; i ++) {
-	    NSString *sfilename = [[filenames objectAtIndex:i] lastPathComponent];
-	    NSString *tfilename = [[sfilename stringByDeletingPathExtension] stringByAppendingString:@".icns"];
-	    NSSavePanel *savepanel= [NSSavePanel savePanel];
-	    [savepanel setRequiredFileType:@"icns"];
-	    [savepanel setCanCreateDirectories:NO];
-	    [savepanel setAllowsOtherFileTypes:NO];
-	    [savepanel setTitle:MSG(@"Save the Converted Icon")];	
-	    [savepanel setMessage:[NSString stringWithFormat:MSG(@"Please set the filename of the icon converted from \"%@\":"), sfilename]];
-	    if ([savepanel runModalForDirectory:[NSString stringWithUTF8String:USERICONPATH] file:tfilename] != NSOKButton) {
-		continue;
-	    }
-	    NSString *filepath = [[savepanel filename] stringByStandardizingPath];				
-	    NSImage *icon = [NSImage new];
-
-	    [icon initWithContentsOfFile:[filenames objectAtIndex:i]];
-
-	    if(![icon isValid]) {
-		NSAlert *errorbox=[NSAlert
-		    alertWithMessageText:MSG(@"Error: Invalid Image file!")
-		    defaultButton:MSG(@"OK")
-		    alternateButton:nil
-		    otherButton:nil
-		    informativeTextWithFormat:MSG(@"The selected file is invalid, please check your file.")];
-		[errorbox runModal];				
-		return;
-	    }
-	    [icon setScalesWhenResized:TRUE];
-	    NSImage *ricon = [[[NSImage alloc] initWithSize:NSMakeSize(16, 16)] autorelease];
-	    [ricon lockFocus];
-	    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-	    [icon setSize:NSMakeSize(16, 16)];
-	    [icon compositeToPoint:NSZeroPoint operation:NSCompositeCopy];
-	    [ricon unlockFocus];			
-
-	    IconFamily* iconFamily;
-
-	    iconFamily = [IconFamily ovicon:ricon];			
-	    [iconFamily writeToFile:filepath];			
-	    [iconFamily setAsCustomIconForFile:filepath];
-	}
+    if([panel runModalForDirectory:importsPath file:nil types:imageTypes]  == NSOKButton) {
+		[self convertLoop:[panel filenames]];
     }
     [self refresh];	
     return;	
