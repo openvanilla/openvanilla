@@ -28,16 +28,16 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#import "ServerDelegate.h"
 #import "NSDictionaryExtension.h"
 #import "NSStringExtension.h"
 #import <Carbon/Carbon.h>
 #import <WebKit/WebKit.h>
+#import "ServerDelegate.h"
 
-#define CVIB_FADEWAIT       0.5     // fade after 0.5 sec
-#define CVIB_FADEINTERVAL   0.05    // 0.05 sec/frame
-#define CVIB_FADEVALUE      0.025   // alphaValue-=0.025/frame
-
+#define MSG(x)      [[NSBundle mainBundle] localizedStringForKey:x value:nil table:nil]
+#define SERVICE_NAME @"OpenVanilla Notify"
+#define	IconData [NSData dataWithData:[[NSImage imageNamed:@"DisplayServerIcon"] TIFFRepresentation]]
+ 
 enum {
     OVDPS_NOTIFY_DEFAULT=0,
     OVDPS_NOTIFY_SILENT=1
@@ -61,11 +61,44 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 - (void)sendKey:(char)c;
 @end
 
+@implementation NotifyDelegate
+-(void) init {
+	NSLog(@"register growl delegate");
+	[GrowlApplicationBridge setGrowlDelegate: self];
+}
+
+- (NSDictionary *)registrationDictionaryForGrowl {
+	NSLog(@"register growl service");
+	NSArray * arrayOfNotifys = [NSArray arrayWithObjects:SERVICE_NAME, nil];
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+		arrayOfNotifys, GROWL_NOTIFICATIONS_ALL,
+		arrayOfNotifys, GROWL_NOTIFICATIONS_DEFAULT, nil];
+}
+
+- (NSString *)applicationNameForGrowl {
+	return @"OpenVanilla";
+}
+
+- (void) notify: (NSString *)title {
+	NSLog(@"send growl notify");
+	[GrowlApplicationBridge
+	notifyWithTitle:title
+		description:title
+   notificationName:SERVICE_NAME
+		   iconData:IconData
+		   priority:0
+		   isSticky:YES
+	   clickContext:nil];
+	NSLog(@"send growl notify....end");	
+}
+
+@end
+
 @implementation ServerDelegate
-- (BOOL)ping
-{
+- (BOOL)ping {
 	return YES;
 }
+
 - (IBAction)sendKeyTest:(id)sender {
 	NSLog(@"getting remote object");
 	id keyrcvr=[[NSConnection rootProxyForConnectionWithRegisteredName:@"OVKeyReceiverTest" host:nil] retain];
@@ -88,45 +121,43 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 
 - (void)awakeFromNib {
 	NSLog(@"WebkitServer started");
+	notifyDelegate = [NotifyDelegate alloc];
+	[notifyDelegate init];
 	NSConnection *c=[NSConnection defaultConnection];
 	[c setRootObject:self];
     if ([c registerName:OVDSPSRVR_NAME]) ; // NSLog(@"OVDisplayServer registered");
 	else {
 		NSLog(@"WebkitServer registration failed");
-		NSAlert *a=[NSAlert alertWithMessageText:@"WebKitServer registration failed!"
+		NSAlert *a=[NSAlert alertWithMessageText:MSG(@"WebKitServer registration failed!")
 			defaultButton:nil
 			alternateButton:nil
 			otherButton:nil
-			informativeTextWithFormat:@"Make sure you have killed the process of OVDisplayServer"];
+			informativeTextWithFormat:MSG(@"Make sure you have killed the process of OVDisplayServer")];
 		[a runModal];
 		[[NSApplication sharedApplication] terminate:self];
 	}
-
 	candion=NO;
-	fadetimer=nil;
 
 	NSLog([urlbase absoluteString]);
 	
 	NSString *toload=[CVWS_DEFAULTFILE stringByExpandingTildeInPath];
-	NSLog(@"this default candidate html file will be used: %@", toload);
+	NSLog(MSG(@"this default candidate html file will be used: %@"), toload);
 	
 	NSURL *loadurl=[NSURL fileURLWithPath:toload];
 	NSLog([loadurl description]);
 		
-	[[candiweb mainFrame] loadRequest:[NSURLRequest requestWithURL:loadurl]];
-	[candiweb setUIDelegate:self];
-    [candiweb setFrameLoadDelegate:self];
-	[candiweb setEditable:NO];
+	[[candiWeb mainFrame] loadRequest:[NSURLRequest requestWithURL:loadurl]];	
+	[candiWeb setUIDelegate:self];
+    [candiWeb setFrameLoadDelegate:self];
+    [candiWeb setDrawsBackground:NO];	
+	[candiWeb setEditable:NO];
 
-	[candi setHasShadow:YES];
-    [candiweb setDrawsBackground:NO];
 	if(candialwaysshow != OVDPS_CANDI_ALWAYSSHOW) {
-		[candi orderOut:self];
+		[candiWindow orderOut:self];
 	}
 }
+
 - (void)setConfig:(NSDictionary*)cfg {
-	
-	notialpha=[noti alphaValue];
 
     notistyle=OVDPS_NOTIFY_DEFAULT; 
     NSString *ns=[cfg valueForKey:@"notificationStyle" default:@"default"];
@@ -142,63 +173,48 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
     if ([ns3 isEqualToString:@"true"]) candifix= OVDPS_CANDI_FIXED;	
 	else [cfg setValue:@"false" forKey:@"candifix"];
 }
+
 - (void)candidateShow {
 	candion=YES;
-	[self solveConflict];
-	[candi orderFront:self];
-    // nop();
+	[candiWindow orderFront:self];
 }
-- (void)candidateHide {
-	candion=NO;
 
-	NSLog(@"clear");
-	
-	WebScriptObject *scrobj = [candiweb windowScriptObject];
-	
-	NSString *script=[NSString stringWithFormat:@"ov_clear()"];
+- (void)executeScript:(NSString*) script {
+	WebScriptObject *scrobj = [candiWeb windowScriptObject];	
 	NSLog(@"evaluating javascript: %@", script);
 	id y=[scrobj evaluateWebScript:script];
-	if (y) {
-		NSLog(@"cleared!!!!", [y description]);
-	}	
+	NSLog(@"result: %@", [y description]);
+}
+
+- (void)candidateHide {
+	candion=NO;	
+	[self executeScript:@"ov_clear()"];
 	
 	if(candialwaysshow != OVDPS_CANDI_ALWAYSSHOW) {
-		[candi orderOut:self];
+		[candiWindow orderOut:self];
 	}
 }
-- (void)candidateUpdate:(bycopy NSString*)s position:(Point)p {
-	NSLog(@"candiupdate");
 
-	WebScriptObject *scrobj = [candiweb windowScriptObject];
-	
-	NSString *script=[NSString stringWithFormat:@"ov_update('%@')", s];
-	NSLog(@"evaluating javascript: %@", script);
-	id y=[scrobj evaluateWebScript:script];
-	if (y) {
-	   NSLog(@"update text!!!!", [y description]);
-	}
-
+- (void)candidateUpdate:(bycopy NSString*)s position:(Point)p {	
+	[self executeScript:[NSString stringWithFormat:@"ov_update('%@')", s]];
 
 	if(candifix != OVDPS_CANDI_FIXED) {
-		CVFixWindowOrigin(candi, p);
+		CVFixWindowOrigin(candiWindow, p);
 	}
 }
+
 - (void)notifyMessage:(bycopy NSString*)s position:(Point)p {
-	NSLog(@"notiupdate");
+	if([s isEqualToString:@""]) {
+		[candiWindow orderOut:self];
+		return;
+	}
+	[notifyDelegate notify:s];	
+	[self executeScript:[NSString stringWithFormat:@"ov_notify('%@')", s]];	
 	
-	WebScriptObject *scrobj = [candiweb windowScriptObject];
-	
-	NSString *script=[NSString stringWithFormat:@"ov_notify('%@')", s];
-	NSLog(@"evaluating javascript: %@", script);
-	id y=[scrobj evaluateWebScript:script];
-	if (y) {
-		NSLog(@"update text!!!!", [y description]);
-	}	
-	
-	[candi orderFront:self];
+	[candiWindow orderFront:self];
 	if(candifix != OVDPS_CANDI_FIXED) {
-		CVFixWindowOrigin(candi, p);
-	}	
+		CVFixWindowOrigin(candiWindow, p);
+	}
 
 //	CVFixWindowOrigin(noti, p);
 //	[self solveConflict];
@@ -206,56 +222,26 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 //    if (notistyle!=OVDPS_NOTIFY_DEFAULT) return;
 //    [noti orderFront:self];
 }
+
 - (void)notifyClose {
-	[noti orderOut:self];
+	[self executeScript:[NSString stringWithFormat:@"ov_notifyclose()"]];
+	[candiWindow orderOut:self];
 }
-- (void)notifyFade {
-    if (fadetimer) [self stopTimer];
-    
-    if (notistyle!=OVDPS_NOTIFY_DEFAULT) return;
-    fadetimer=[NSTimer scheduledTimerWithTimeInterval:CVIB_FADEWAIT target:self selector:@selector(fadeStart) userInfo:nil repeats:NO];
-}
+
+
 - (void)aboutDialog {
-    // [aboutdialog setLevel:NSScreenSaverWindowLevel];
-    // [aboutdialog orderFront:self];
-	[[NSApplication sharedApplication] orderFrontStandardAboutPanel:self];
+    [aboutWindow setLevel:NSScreenSaverWindowLevel];
+    [aboutWindow orderFront:self];
+	[aboutWindow center];
+	// [[NSApplication sharedApplication] orderFrontStandardAboutPanel:self];
 }
+
 - (void)dealloc {
-    [defaultbackground release];
 	[urlbase release];
 	[super dealloc];
 }
-- (void)stopTimer {
-    if (fadetimer) [fadetimer invalidate];
-    fadetimer=nil;
-	[noti setAlphaValue:notialpha];
-}
-- (void)fadeStart {
-    [fadetimer invalidate];
-    fadetimer=[NSTimer scheduledTimerWithTimeInterval:CVIB_FADEINTERVAL target:self selector:@selector(fadeWork) userInfo:nil repeats:YES];
-    fadealpha=notialpha;
-}
-- (void)fadeWork {
-    fadealpha-=CVIB_FADEVALUE;
-    if (fadealpha<=0) {
-        [noti orderOut:self];
-        [self stopTimer];
-        // nop();
-        return;
-    }
-	[noti setAlphaValue:fadealpha];
 
-}
-- (void)solveConflict {
-	if (!candion) return;
-	NSRect cfr, nfr;
-	cfr=[candi frame];
-	nfr=[noti frame];
-	if (cfr.origin.y+cfr.size.height == nfr.origin.y+nfr.size.height) {
-		nfr.origin.y = cfr.origin.y - (nfr.size.height + 5);
-		[noti setFrameOrigin:nfr.origin];
-	}
-}
+
 
 @end
 

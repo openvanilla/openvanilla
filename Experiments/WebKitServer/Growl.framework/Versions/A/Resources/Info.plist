@@ -5,24 +5,20 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string>DisplayServerIcon</string>
+	<string>Growl</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.webkitserver</string>
+	<string>com.growl.growlframework</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>FMWK</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.7.6</string>
 	<key>CFBundleSignature</key>
-	<string>opvn</string>
+	<string>GRRR</string>
 	<key>CFBundleVersion</key>
-	<string>0.7.2</string>
-	<key>LSBackgroundOnly</key>
-	<string>1</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
+	<string>0.7.6</string>
 	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
+	<string>GrowlApplicationBridge</string>
 </dict>
 </plist>

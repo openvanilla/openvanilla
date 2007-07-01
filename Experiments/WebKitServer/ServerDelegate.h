@@ -1,6 +1,8 @@
 /* ServerDelegate */
 
 #import <Cocoa/Cocoa.h>
+#import <Growl/GrowlApplicationBridge.h>
+#import "CandiWindow.h"
 
 #define OVDSPSRVR_NAME		@"OVWebKitServer-0.7.2"
 
@@ -11,32 +13,28 @@
 - (void)candidateUpdate:(bycopy NSString*)s position:(Point)p;
 - (void)notifyMessage:(bycopy NSString*)s position:(Point)p;
 - (void)notifyClose;
-- (void)notifyFade;
 - (void)aboutDialog;
 - (BOOL)ping;
 @end
 
+@interface NotifyDelegate : NSObject <GrowlApplicationBridgeDelegate>
+{
+}
+@end
+
 @interface ServerDelegate : NSObject <OVDisplayServer>
 {
-    IBOutlet id candi;
-    IBOutlet id candiweb;
-    IBOutlet id noti;
-    IBOutlet id notiweb;
+    //IBOutlet id candiWindow;
+	NotifyDelegate * notifyDelegate;	
+	CandiWindow * candiWindow;
+    IBOutlet id candiWeb;
+	IBOutlet id aboutWindow;
 
 	BOOL candion;
-	float notialpha;
-	float fadealpha;
     int notistyle;
 	int candialwaysshow;
 	int candifix;
-	NSTimer *fadetimer;
-    NSColor *defaultbackground;
 	NSURL *urlbase;
 }
 - (IBAction)sendKeyTest:(id)sender;
-// - (void)applyConfig:(NSDictionary*)d window:(NSWindow*)w;
-- (void)solveConflict;
-- (void)stopTimer;
-- (void)fadeStart;
-- (void)fadeWork;
 @end

@@ -13,7 +13,7 @@
             ACTIONS = {sendKeyTest = id; }; 
             CLASS = ServerDelegate; 
             LANGUAGE = ObjC; 
-            OUTLETS = {candi = id; candiweb = id; noti = id; notiweb = id; }; 
+            OUTLETS = {aboutWindow = id; candiWeb = id; candiWindow = id; }; 
             SUPERCLASS = NSObject; 
         }
     ); 
