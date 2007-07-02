@@ -6,8 +6,10 @@ $KCODE = "u"
 class OVOFRubyFilter
   $stderr.puts "OVRubyFilter class init"
       
-  def process(str)
+  def process(str, service)
     $stderr.puts "Received string: #{str}"
+
+    source = str.dup
 
     # this splits each codepoint into separate UTF-8 strings
     array = str.split //
@@ -25,6 +27,8 @@ class OVOFRubyFilter
     str.gsub!(/楊維中/, "zonble")
     
     str.gsub!(OVOFRubyFilter::SUBST_REGEX) { |s| OVOFRubyFilter::PHRASE_TW_TO_CN[s] }
+
+    service.notify("source=#{source}, filtered=#{str}")
     
     # returns the string
     str
