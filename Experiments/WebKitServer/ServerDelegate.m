@@ -1,6 +1,6 @@
 // ServerDelegate.mm: OVDisplayServer.app delegated object
 //
-// Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
+// Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
@@ -80,16 +80,14 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 }
 
 - (void) notify: (NSString *)title {
-	NSLog(@"send growl notify");
 	[GrowlApplicationBridge
 	notifyWithTitle:title
-		description:title
+		description:@""
    notificationName:SERVICE_NAME
 		   iconData:IconData
 		   priority:0
 		   isSticky:YES
 	   clickContext:nil];
-	NSLog(@"send growl notify....end");	
 }
 
 @end
@@ -204,10 +202,7 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 }
 
 - (void)notifyMessage:(bycopy NSString*)s position:(Point)p {
-	if([s isEqualToString:@""]) {
-		[candiWindow orderOut:self];
-		return;
-	}
+
 	[notifyDelegate notify:s];	
 	[self executeScript:[NSString stringWithFormat:@"ov_notify('%@')", s]];	
 	
@@ -225,7 +220,7 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
 
 - (void)notifyClose {
 	[self executeScript:[NSString stringWithFormat:@"ov_notifyclose()"]];
-	[candiWindow orderOut:self];
+	// [candiWindow orderOut:self];
 }
 
 
