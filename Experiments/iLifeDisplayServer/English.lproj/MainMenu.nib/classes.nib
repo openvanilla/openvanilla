@@ -1,0 +1,14 @@
+{
+    IBClasses = (
+        {CLASS = EtchedText; LANGUAGE = ObjC; SUPERCLASS = NSTextField; }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NFHUDWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
+        {
+            CLASS = ServerDelegate; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {aboutdialog = id; candi = id; noti = id; }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
