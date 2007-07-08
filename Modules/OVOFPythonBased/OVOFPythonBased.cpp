@@ -1,45 +1,88 @@
+// OVIMPythonBased.cpp: Loader of python based filter for OpenVanilla
+
+// Originally written by Chen-Shan Chin, lukhnos, 2007
+
+// This package is released under the Artistic License,
+// please refer to LICENSE.txt for the terms of use and distribution
+
 #define OV_DEBUG
+#include <Python.h>
 #include <stdlib.h>
 #include <string.h>
 #include <string>
+#include <iostream>
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVLibrary.h>
 #include <OpenVanilla/OVUtility.h>
-#include <Python.h>  
-
-static PyObject *PYOVFilter;
-static PyObject *PYOVFilterInstance;                        
-static PyObject *PYOVFilter_process;
 
 class OVOFPythonBasedFilter : public OVOutputFilter {
-public:
-    OVOFPythonBasedFilter() {
-        buf = NULL;
+public:                         
+
+    OVOFPythonBasedFilter(const char *className) {
+        
+        PyObject *PYOVFilterModule;
+        PyObject *PYOVFilterClass;
+        
+        //Py_Initialize();
+        
+        //PYOVFilterModule = PyImport_Import(PyString_FromString("PYOVFilter"));
+        
+        PYOVFilterClass = PyObject_GetAttrString(PYOVFilterModule, (char *) className);
+        Py_DECREF(PYOVFilterModule);
+
+        PYOVFilter = PyObject_CallObject(PYOVFilterClass, NULL);    
+        Py_DECREF(PYOVFilterClass);
+
+        if (PyErr_Occurred()) {
+            PyErr_Print();
+            PyErr_Clear();
+        }
     }
     
     virtual int initialize(OVDictionary *moduleCfg, OVService *srv, const char *modulePath) {
         return 1;
     }
-    virtual const char *identifier() { return "OVOFPythonBasedFilter"; }
     
-    virtual const char *process (const char *src, OVService *srv) {
-        fprintf(stderr, "passing string to Python: %s\n", src);
-        
-        if (buf) free(buf);
-        
-        PyObject *pValue;
-        PyObject *pArgs;
-        pArgs =  PyString_FromString(src);        
-        pValue = PyObject_CallMethodObjArgs(PYOVFilterInstance, PyString_FromString("process"), pArgs, NULL);
-
-        char *result = PyString_AsString(pValue);
-        buf = (char*)calloc(1, strlen(result + 1));
-        strcpy(buf, result);
-        return buf;
+    virtual const char *identifier() {
+        PyObject *pyRtnStr; 
+        pyRtnStr = PyObject_CallMethodObjArgs(PYOVFilter, 
+                                              PyString_FromString("identifier"), 
+                                              NULL);
+        char *result = PyString_AsString(pyRtnStr);
+        Py_DECREF(pyRtnStr);  
+        return result; 
     }
     
-protected:
-    char *buf;
+    virtual const char *process (const char *src, OVService *srv) {
+        //fprintf(stderr, "passing string to Python: %s\n", src);
+        
+        srv->notify("Python Filter");
+        
+        //pyReturnValue = PyObject_CallFunctionObjArgs(PYOVFilter, pyString, NULL);
+        PyObject *pyRtnStr;        
+        pyRtnStr = PyObject_CallMethodObjArgs(PYOVFilter, 
+                                              PyString_FromString("process"), 
+                                              PyString_FromString(src), NULL);
+        
+        if (PyErr_Occurred()) {
+            PyErr_Print();
+            PyErr_Clear();
+            return src;
+        }
+        
+        char *result = PyString_AsString(pyRtnStr);
+        Py_DECREF(pyRtnStr);
+        return result;
+    }
+    
+    
+    ~OVOFPythonBasedFilter() {
+        //Py_Finalize();
+    }
+    
+private:
+
+    PyObject *PYOVFilter;
 };
 
 extern "C" unsigned int OVGetLibraryVersion() {     
@@ -47,35 +90,31 @@ extern "C" unsigned int OVGetLibraryVersion() {
 }
 
 extern "C" int OVInitializeLibrary(OVService* s, const char* p) { 
+    
     std::string scriptPath;
 	scriptPath = std::string(p) + std::string(s->pathSeparator())  + std::string("OVOFPythonBased");
-
-	fprintf(stderr, "script load path = %s\n", scriptPath.c_str());	
+	std::cerr <<  "script load path = " << scriptPath << std::endl;
 	setenv("PYTHONPATH", scriptPath.c_str(), 1);
-	
-    //Load python here
-    Py_Initialize();
-    PyObject *pName = PyString_FromString("PYOVFilter");
-    if (!pName) return 0;
-    
-    PyObject *pModule = PyImport_Import(pName);
-    if (!pModule) return 0;
-    
-    Py_DECREF(pName);
-    PYOVFilter = PyObject_GetAttrString(pModule, "PYOVFilter");
-    if (!PYOVFilter) return 0;
-        
-    PYOVFilterInstance = PyObject_CallObject(PYOVFilter, NULL);    
-    if (!PYOVFilterInstance) return 0;
-    
-    PYOVFilter_process = PyObject_GetAttrString(PYOVFilter, "process");
-    if (!PYOVFilter_process) return 0;
-
-    //de-reference PYOVFilter and PYOVFilterInstance?
-    //Py_Finalize(); //should be called when OV exiting .... where should I put it?    
+	Py_Initialize(); 
     return 1; 
 }
 
 extern "C" OVModule *OVGetModuleFromLibrary(int idx) {
-    return (idx==0) ? new OVOFPythonBasedFilter : NULL;
+
+    PyObject *PYOVFilterModule;
+    PYOVFilterModule = PyImport_Import(PyString_FromString("_PYOVHelper"));
+    PyObject *pyAvaiableClasses;
+    pyAvaiableClasses = PyObject_CallMethodObjArgs(PYOVFilterModule, 
+                                                   PyString_FromString("getAllFilters"), 
+                                                   NULL);
+    int numClasses = PyList_Size(pyAvaiableClasses);
+    char *className;
+    if (idx < numClasses) {
+         className = PyString_AsString(PyList_GetItem(pyAvaiableClasses,idx));
+    } else {
+        return NULL;
+    }                                              
+   
+    return new OVOFPythonBasedFilter(className);
+    
 }

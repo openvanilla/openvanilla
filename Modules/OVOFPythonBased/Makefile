@@ -1,6 +1,6 @@
 MODULEID=OVOFPythonBased
 SOURCES=OVOFPythonBased
-DATA=PYOVFilter.py
+DATA=PYOVFilter.py _PYOVFilter.py _PYOVHelper.py
 
 include ../Mk/ov.module.mk
 
