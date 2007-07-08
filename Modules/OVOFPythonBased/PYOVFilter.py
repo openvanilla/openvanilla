@@ -34,9 +34,10 @@ class PYOVFilterDynamical(_PYOVFilterBase):
         """Check if _PYOVFilter.py is modified, if so, reload it. 
            call _PYOVFilter.process(arg) at the end."""
             
-        print >>sys.stderr, "the argument tuple is ", arg
+        #print >>sys.stderr, "the argument tuple is ", arg
       
         currentTimeStamp = os.stat(PYOVFilterDynamical._PYOVFilter.__file__)[stat.ST_MTIME]
+        #print >>sys.stderr, "time stamp is ", currentTimeStamp
         if currentTimeStamp != PYOVFilterDynamical.timeStamp:
             PYOVFilterDynamical.timeStamp = currentTimeStamp
             try:
@@ -80,6 +81,8 @@ class PYOVFilterHalfToFull(_PYOVFilterBase):
         return "PYHalfToFull";    
 
     def process(self, *arg):
+        
+        #print >>sys.stderr, arg
         halfWidthChars=list(" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
         fullWidthChars=list(u"　！”＃＄％＆’（）＊＋，－．／０１２３４５６７８９：；＜＝＞？＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ〔＼〕＾＿‘ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～");
         
@@ -88,6 +91,7 @@ class PYOVFilterHalfToFull(_PYOVFilterBase):
         
         uniStr = arg[0].decode("utf-8")              
         uniStr = "".join([ charMap.get(x,x) for x in list(uniStr) ])
+        #print >>sys.stderr, uniStr.encode("utf-8")
         return uniStr.encode("utf-8")
 
 class PYOVFilterMorseCode(_PYOVFilterBase):
