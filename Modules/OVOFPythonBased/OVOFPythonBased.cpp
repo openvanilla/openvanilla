@@ -25,7 +25,7 @@ public:
         
         //Py_Initialize();
         
-        //PYOVFilterModule = PyImport_Import(PyString_FromString("PYOVFilter"));
+        PYOVFilterModule = PyImport_Import(PyString_FromString("PYOVFilter"));
         
         PYOVFilterClass = PyObject_GetAttrString(PYOVFilterModule, (char *) className);
         Py_DECREF(PYOVFilterModule);
@@ -56,7 +56,7 @@ public:
     virtual const char *process (const char *src, OVService *srv) {
         //fprintf(stderr, "passing string to Python: %s\n", src);
         
-        srv->notify("Python Filter");
+        //srv->notify("Python Filter");
         
         //pyReturnValue = PyObject_CallFunctionObjArgs(PYOVFilter, pyString, NULL);
         PyObject *pyRtnStr;        
