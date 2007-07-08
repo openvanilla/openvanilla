@@ -23,9 +23,9 @@ public:
         PyObject *PYOVFilterModule;
         PyObject *PYOVFilterClass;
         
-        //Py_Initialize();
-        
         PYOVFilterModule = PyImport_Import(PyString_FromString("PYOVFilter"));
+        if (!PYOVFilterModule) {std::cerr << "can not load PYOVFilter.py, check syntex error ";}
+        
         
         PYOVFilterClass = PyObject_GetAttrString(PYOVFilterModule, (char *) className);
         Py_DECREF(PYOVFilterModule);
@@ -54,11 +54,9 @@ public:
     }
     
     virtual const char *process (const char *src, OVService *srv) {
-        //fprintf(stderr, "passing string to Python: %s\n", src);
         
         //srv->notify("Python Filter");
         
-        //pyReturnValue = PyObject_CallFunctionObjArgs(PYOVFilter, pyString, NULL);
         PyObject *pyRtnStr;        
         pyRtnStr = PyObject_CallMethodObjArgs(PYOVFilter, 
                                               PyString_FromString("process"), 
@@ -73,11 +71,6 @@ public:
         char *result = PyString_AsString(pyRtnStr);
         Py_DECREF(pyRtnStr);
         return result;
-    }
-    
-    
-    ~OVOFPythonBasedFilter() {
-        //Py_Finalize();
     }
     
 private:
