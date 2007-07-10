@@ -36,7 +36,7 @@ INC+=-I/usr/local/include/hunspell -I/usr/local/include -I/opt/local/include
 
 include ../Mk/ov.module.mk
 
-ifeq "$(shell uname -p)", "powerpc"
+ifeq "$(shell uname -p)" "powerpc"
 ARCH=-arch ppc
 else
 ARCH=-arch i386
