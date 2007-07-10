@@ -202,21 +202,37 @@ namespace CSharpFormLibrary
 
         public void SetCandidates(string inputs)
         {
-            //input
-            //string[] a_inputs = inputs.Split(' ');
             string[] a_inputs;
             if ((inputs.IndexOf('\t')) > 0)
-            {
                 a_inputs = inputs.Split('\t');
-            }
             else
             {
+                //<comment author='b6s'>
+                // A temporary patch of the special case of
+                // "shift selection key" by space.
+                bool isStartWithSpace = false;
+                if (inputs.StartsWith(" ."))
+                {
+                    isStartWithSpace = true;
+                    inputs = inputs.TrimStart();
+                }
+                //</comment>
+
                 a_inputs = inputs.Split(' ');
+
+                //<comment author='b6s'>
+                // Appends the heading space back for the spacial case of
+                // "shift selection key."
+                if (isStartWithSpace &&
+                    a_inputs != null && a_inputs.Length > 0)
+                    a_inputs[0] = " " + a_inputs[0];
+                //</comment>
             }
             
             if (a_inputs == null) return;
-            string[] fakeInputs ={  "1.一", "2.二", "3.三", "4.四", "5.五", "6.六", "7.七", "8.八", "9.九","(1/9)", 
-              "1.十一", "2.十二", "3.十三", "4.十四", "5.十五", "6.十六", "7.十七", "8.十八", "9.十九","(2/9)" };
+            //string[] fakeInputs =
+                //{"1.一", "2.二", "3.三", "4.四", "5.五", "6.六", "7.七", "8.八", "9.九","(1/9)", 
+                //"1.十一", "2.十二", "3.十三", "4.十四", "5.十五", "6.十六", "7.十七", "8.十八", "9.十九","(2/9)" };
 
             //this.ShowListView(a_inputs); // not show, only setstring		            
             m_mode = 0;
