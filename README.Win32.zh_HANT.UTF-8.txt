@@ -10,7 +10,7 @@ Copyright (c) 2004-2006 The OpenVanilla Project
 
 3. 原先在 repository 裡的 ltdl, iconv, tinyxml 皆已移除，請下載
 http://taipedia.selfip.info/OV-deps.zip 「或」
-http://rt.openfoundry.org/Foundry/Project/Download/Attachment/86227/59650/OV-deps.zip
+http://rt.openfoundry.org/Foundry/Project/Download/Attachment/89705/61781/OV-deps.zip
 （兩個是一樣的），解壓縮後置於某處，再按照
 http://www.flickr.com/photos/b6s/159926134/ 示範的方式讓 VS.NET 2005 知道要去那
 裡找這些函式庫。
