@@ -11,22 +11,24 @@ Copyright (c) 2004-2006 The OpenVanilla Project
 3. 原先在 repository 裡的 ltdl, iconv, tinyxml 皆已移除，請下載
 http://taipedia.selfip.info/OV-deps.zip 「或」
 http://rt.openfoundry.org/Foundry/Project/Download/Attachment/89705/61781/OV-deps.zip
-（兩個是一樣的），解壓縮後置於某處，再按照
+（兩個是一樣的），解壓縮後置於某處－－例如 "your_dependency_path"－－再按照
 http://www.flickr.com/photos/b6s/159926134/ 示範的方式讓 VS.NET 2005 知道要去那
 裡找這些函式庫。
-3.1. 為了之後布署方便，請設定環境變數 %OV_DEPS% 到這些函式庫所在的目錄，
+3.1. 為了之後布署方便，請設定環境變數 %OV_DEPS% 到 "your_dependency_path"，
 include files 和 library files 的 path 都要記得加上。
-3.2. SQLite3 也已自 svn repository 移除，若想用「比 OV-deps.zip 還新的」，請到
+3.2. 若想在 Vista 上用 IE7, 請「不要」看底下的 3.2.1.。上述 OV-deps.zip 裡的
+sqlite3.dll 是 http://sqlite.org/sqlitedll-3_2_5.zip. 這是最近發現的問題，詳細
+狀況請參考 http://article.gmane.org/gmane.comp.db.sqlite.general/29356 的說明。
+3.2.1. SQLite3 也已自 svn repository 移除，若想用「比 OV-deps.zip 還新的」，請到
 http://taipedia.selfip.info/mediawiki/index.php/SQLite3Win32LibVC8/zh-hant
 下載，並同樣放在 %OV_DEPS% 裡。
-3.2.1. 若想在 Vista 上用 IE7, 請用 http://sqlite.org/sqlitedll-3_2_5.zip 蓋掉
-上述 OV-deps.zip 裡的 sqlite3.dll. 這是最近發現的相容性問題，詳細狀況請參考
-http://article.gmane.org/gmane.comp.db.sqlite.general/29356 的說明。
 
 4. OV-deps 已加入 OVIMRomanNew 所需要的拼字檢查 library -- hunspell, 檔案如下：
-hunspelldll.dll, hunspell.hxx, license.hunspell, hunspelldll.lib, affixmgr.hxx, 
-hashmgr.hxx, htypes.hxx, atypes.hxx, suggestmgr.hxx, langnum.hxx, dictmgr.hxx, 
-csutil.hxx, baseaffix.hxx, affentry.hxx, hunspell.h, hunspelldll.h, license.myspell
+affentry.hxx, affixmgr.hxx, atypes.hxx, baseaffix.hxx, csutil.hxx, dictmgr.hxx,
+hashmgr.hxx, htypes.hxx, hunspell.h, hunspell.hxx, hunspelldll.dll, hunspelldll.h,
+hunspelldll.lib, license.hunspell, license.myspell, langnum.hxx, suggestmgr.hxx
+4.1. 比照 3. 的說明，請替 VS.NET 2005 的 include directory 和 library directory
+加上 "your_dependency_path"\hunspell
 
 5. 若遇到任何問題，請透過 IRC 到 FreeNote 的 #im-dev 找 b6s。
 
@@ -35,7 +37,7 @@ csutil.hxx, baseaffix.hxx, affentry.hxx, hunspell.h, hunspelldll.h, license.mysp
 0. 如果只想測試打字功能而「不」想測試「設定功能」，請跳過步驟 1 和 3.
 
 1. 首先，為了編譯 OVPreferences，必須安裝 wxWidgets Win32 版
-(http://www.wxwidgets.org/dl_msw2.htm#stable)，裝完之後 *必須* 自行編譯出
+(http://www.wxwidgets.org/dl_msw2.htm#stable)，裝完之後「必須」自行編譯出
 OVPreferences 所需的靜態函式庫。目前 wxWidgets 版本
 是 2.6.3，為避免經歷與 OV 無關的痛苦，請按以下步驟進行：
 
