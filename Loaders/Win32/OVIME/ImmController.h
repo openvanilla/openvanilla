@@ -35,13 +35,16 @@ public:
 	inline bool isKeyDown(BYTE keyState) { return !!(keyState & 0xF0); }
 
 	inline bool isShiftPressed(CONST LPBYTE lpbKeyState)
-	{ return (lpbKeyState[VK_SHIFT] & 0x80) ? true: false; }
+	{ return (lpbKeyState[VK_SHIFT] & 0x80)? true: false; }
 
 	inline bool isCtrlPressed(CONST LPBYTE lpbKeyState)
-	{ return (lpbKeyState[VK_CONTROL] & 0x80) ? true: false; }
+	{ return (lpbKeyState[VK_CONTROL] & 0x80)? true: false; }
 
 	inline bool isAltPressed(CONST LPBYTE lpbKeyState)
-	{ return (lpbKeyState[VK_MENU] & 0x80) ? true: false; }
+	{ return (lpbKeyState[VK_MENU] & 0x80)? true: false; }
+
+	inline bool isFnPressed(UINT vkey)
+	{ return (LOWORD(vkey) >= VK_F1 && LOWORD(vkey) <= VK_F24)? true: false; }
 
 	int onKeyShiftOnly(HIMC hIMC, LPARAM lKeyData);
 	int onKeyShift(HIMC hIMC, UINT uVKey, LPARAM lKeyData);

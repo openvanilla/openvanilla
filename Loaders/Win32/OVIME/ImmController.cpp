@@ -207,6 +207,10 @@ int ImmController::onControlEvent
 		if(!(conv & IME_CMODE_NATIVE)) processState = 0;
 		//else processState = onKeyShift(hIMC, uVKey, lKeyData);
 	}
+	else if(isFnPressed(uVKey)) {
+		murmur("Fn pressed");
+		processState = 0;
+	}
 	else {
 		murmur("other state: assume normal");
 		m_shiftPressedTime = 0;
