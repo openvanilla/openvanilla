@@ -16,6 +16,14 @@
 #include <OpenVanilla/OVUtility.h>
 
 
+void logPyError() {
+    if (PyErr_Occurred()) {
+        PyErr_Print();
+        PyErr_Clear();
+    }
+}
+
+
 char *SWIG_PackData(char *c, void *ptr, int sz) {      // copied from SWIG wrapper
   static char hex[17] = "0123456789abcdef";
   int i;
@@ -49,12 +57,10 @@ PyObject *getPythonPointerObjectFrom(void *ptr, const char * type, PyObject * mo
                                        PyString_FromString( classPtrName.c_str() ),
                                        robjStr,
                                        NULL);
-   if (PyErr_Occurred()) {
-       PyErr_Print();
-       PyErr_Clear();
-   }
+    logPyError();
     return robj; 
 }
+ 
 
 class OVIMPythonBasedContext : public OVInputMethodContext {
     public:
@@ -76,11 +82,8 @@ class OVIMPythonBasedContext : public OVInputMethodContext {
 
             PYIMContext = PyObject_CallObject(PYIMContextClass, NULL);    
             Py_DECREF(PYIMContextClass);
-
-            if (PyErr_Occurred()) {
-                PyErr_Print();
-                PyErr_Clear();
-            }
+            logPyError();
+            
             
         }
         
@@ -105,13 +108,41 @@ class OVIMPythonBasedContext : public OVInputMethodContext {
                                               candiateObj,
                                               serviceObj, 
                                               NULL);
-        if (PyErr_Occurred()) {
-            PyErr_Print();
-            PyErr_Clear();
-        }
+        logPyError();
         return 0;                         
+    }   
+    
+    virtual void start(OVBuffer* b, OVCandidate* i, OVService* srv) {
+        PyObject *bufferObj;
+        bufferObj =  getPythonPointerObjectFrom(b, "OVBuffer", OVIMPythonModule);  
+        
+        PyObject *candiateObj;
+        candiateObj =  getPythonPointerObjectFrom(i, "OVCandidate", OVIMPythonModule);  
+        
+        PyObject *serviceObj;
+        serviceObj =  getPythonPointerObjectFrom(srv, "OVService", OVIMPythonModule);  
+        
+        PyObject *pyRtnVal; 
+        pyRtnVal = PyObject_CallMethodObjArgs(PYIMContext, 
+                                              PyString_FromString("start"),
+                                              bufferObj,
+                                              candiateObj,
+                                              serviceObj, 
+                                              NULL);
+        logPyError();
+    } 
+     
+    virtual void clear() {
+        PyObject_CallMethodObjArgs(PYIMContext, 
+                                   PyString_FromString("clear"),
+                                   NULL);
     }
     
+    virtual void end() {
+        PyObject_CallMethodObjArgs(PYIMContext, 
+                                   PyString_FromString("end"),
+                                   NULL);
+    }
     
     private:
         std::string myClassName;
@@ -128,9 +159,9 @@ public:
         PyObject *PYIMModule;
         PyObject *PYIMClass;
         
+        OVIMPythonModule = PyImport_Import(PyString_FromString("OVIMPython"));
         PYIMModule = PyImport_Import(PyString_FromString("PYIM"));
         if (!PYIMModule) {std::cerr << "can not load PYIM.py, check syntex error ";}
-        
         
         PYIMClass = PyObject_GetAttrString(PYIMModule, (char *) className);
         Py_DECREF(PYIMModule);
@@ -138,14 +169,7 @@ public:
         PYIM = PyObject_CallObject(PYIMClass, NULL);    
         Py_DECREF(PYIMClass);
 
-        if (PyErr_Occurred()) {
-            PyErr_Print();
-            PyErr_Clear();
-        }
-    }
-    
-    virtual int initialize(OVDictionary *moduleCfg, OVService *srv, const char *modulePath) {
-        return 1;
+        logPyError();
     }
     
     virtual const char *identifier() {
@@ -162,9 +186,40 @@ public:
         return new OVIMPythonBasedContext(myClassName); 
     } 
     
+    virtual int initialize(OVDictionary *moduleCfg, OVService *srv, const char *modulePath) { 
+        PyObject *cfgObj;
+        cfgObj =  getPythonPointerObjectFrom(moduleCfg, "OVDictionary", OVIMPythonModule);
+        PyObject *srvObj;
+        srvObj =  getPythonPointerObjectFrom(srv, "OVService", OVIMPythonModule);
+        PyObject *modulePathStr;
+        modulePathStr = PyString_FromString(modulePath);
+        PyObject *pyRtnVal; 
+        pyRtnVal = PyObject_CallMethodObjArgs(PYIM, 
+                                              PyString_FromString("initialize"),
+                                              cfgObj,
+                                              srvObj,
+                                              modulePathStr, 
+                                              NULL);
+        return 1;  //should return the converted pyRtnVal
+    } 
+    
+    virtual void update(OVDictionary *moduleCfg, OVService *srv) { 
+        PyObject *cfgObj;
+        cfgObj =  getPythonPointerObjectFrom(moduleCfg, "OVDictionary", OVIMPythonModule);
+        PyObject *srvObj;
+        srvObj =  getPythonPointerObjectFrom(srv, "OVService", OVIMPythonModule);
+                    
+        PyObject_CallMethodObjArgs(PYIM, 
+                                   PyString_FromString("update"),
+                                   cfgObj,
+                                   srvObj,
+                                   NULL);
+      
+    }
  
 private:
     PyObject *PYIM;
+    PyObject *OVIMPythonModule; 
     std::string myClassName;
 };
 
@@ -180,10 +235,7 @@ extern "C" int OVInitializeLibrary(OVService* s, const char* p) {
 	setenv("PYTHONPATH", scriptPath.c_str(), 1);
 	Py_Initialize();
 	std::cerr << "Python initialized in OVIMPython.\n"; 
-	if (PyErr_Occurred()) {
-        PyErr_Print();
-        PyErr_Clear();
-    }
+	logPyError();
     return 1; 
 }
 
@@ -196,7 +248,7 @@ extern "C" OVModule *OVGetModuleFromLibrary(int idx) {
     pyAvaiableClasses = PyObject_CallMethodObjArgs(PYOVIMModule, 
                                                    PyString_FromString("getAllIM"), 
                                                    NULL);     
-    std::cerr << "get all avaiable class.\n";                                               
+    std::cerr << "get all avaiable classes.\n";                                               
     int numClasses = PyList_Size(pyAvaiableClasses);
     char *className;
     if (idx < numClasses) {

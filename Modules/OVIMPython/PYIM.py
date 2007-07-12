@@ -4,13 +4,13 @@ import OVIMPython
 
 class PYIMTestContext(OVIMPython.OVInputMethodContext):
     def keyEvent(self, keycode, buf, candidate, srv): 
-        print >>sys.stderr, keycode
-        print >>sys.stderr, buf
-        print >>sys.stderr, candidate
-        print >>sys.stderr, srv
+        #print >>sys.stderr, keycode
+        #print >>sys.stderr, buf
+        #print >>sys.stderr, candidate
+        #print >>sys.stderr, srv
                            
         char = chr(keycode.code());
-        print >>sys.stderr, char
+        #print >>sys.stderr, char
         buf.append(char).update()
         srv.notify(char)
         candidate.show()
