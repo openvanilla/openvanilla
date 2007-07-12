@@ -55,6 +55,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="TabTLIM.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TabTLIM.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -68,6 +72,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TabTLIM.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabTLIM.Designer.cs">
+      <DependentUpon>TabTLIM.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
