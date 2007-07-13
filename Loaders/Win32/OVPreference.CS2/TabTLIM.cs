@@ -9,12 +9,12 @@ using System.Xml;
 
 namespace OVPreference.CS2
 {
-    public partial class TabTLIM : UserControl
+    public partial class PanelTLIM : UserControl
     {
         private OVConfig m_ovConf = null;
         private XmlDocument m_ovConfDOM = new XmlDocument();
 
-        public TabTLIM(OVConfig conf, XmlDocument confDOM)
+        public PanelTLIM(OVConfig conf, XmlDocument confDOM)
         {
             m_ovConf = conf;
             m_ovConfDOM = confDOM;
@@ -24,14 +24,14 @@ namespace OVPreference.CS2
 
         public void SetBehaviors()
         {
-            this.diacriticFrontButton.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.diacriticEndButton.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.inputPOJButton.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.inputTLButton.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.inputTLPAButton.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.inputDTButton.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.outputPOJButton.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.outputTLButton.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.rbDiacriticFront.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.rbDiacriticEnd.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.rbInputPOJ.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.rbInputTL.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.rbInputTLPA.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.rbInputDT.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.rbOutputPOJ.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.rbOutputTL.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
             /*
             inputType = outputType = 1;
             diacritic = 0;
@@ -61,48 +61,48 @@ namespace OVPreference.CS2
             switch (inputType)
             {
                 case 1:
-                    inputTLButton.Checked = true;
+                    rbInputTL.Checked = true;
                     break;
                 case 0:
-                    inputPOJButton.Checked = true;
+                    rbInputPOJ.Checked = true;
                     break;
                 case 2:
-                    inputTLPAButton.Checked = true;
+                    rbInputTLPA.Checked = true;
                     break;
                 case 3:
-                    inputDTButton.Checked = true;
+                    rbInputDT.Checked = true;
                     break;
             }
 
             switch (outputType)
             {
                 case 1:
-                    outputTLButton.Checked = true;
+                    rbOutputTL.Checked = true;
                     break;
                 case 0:
-                    outputPOJButton.Checked = true;
+                    rbOutputPOJ.Checked = true;
                     break;
             }
 
             if (diacritic == 0)
-                diacriticFrontButton.Checked = true;
+                rbDiacriticFront.Checked = true;
             else
-                diacriticEndButton.Checked = true;
+                rbDiacriticEnd.Checked = true;
 
             if (normalize)
-                normalizeButton.Checked = true;
+                cbNormalize.Checked = true;
             if (forcePOJStyle)
-                forcePOJStyleButton.Checked = true;
+                cbForcePOJStyle.Checked = true;
         }
 
         private void checkOutputType()
         {
             if (outputType == 1) // TL
-                forcePOJStyleButton.Enabled = true;
+                cbForcePOJStyle.Enabled = true;
             else
             {
-                forcePOJStyleButton.Enabled = false;
-                forcePOJStyleButton.Checked = false;
+                cbForcePOJStyle.Enabled = false;
+                cbForcePOJStyle.Checked = false;
             }
         }
 
@@ -114,7 +114,7 @@ namespace OVPreference.CS2
 
         private void normalizeButton_CheckedChanged(object sender, EventArgs e)
         {
-            normalize = normalizeButton.Checked;
+            normalize = cbNormalize.Checked;
             XmlNode nodeNormalize = m_ovConfDOM.SelectSingleNode(
                 "/OpenVanilla/dict[@name='TLIM']/key[@name='shouldNormalize']");
             nodeNormalize.Attributes["value"].Value =
@@ -129,44 +129,44 @@ namespace OVPreference.CS2
             bool isInputGroup = false;
             bool isOutputGroup = false;
             bool isDiacriticGroup = false;
-            if (button == inputPOJButton)
+            if (button == rbInputPOJ)
             {
                 inputType = 0;
                 isInputGroup = true;
             }
-            if (button == inputTLButton)
+            if (button == rbInputTL)
             {
                 inputType = 1;
                 isInputGroup = true;
             }
-            if (button == inputTLPAButton)
+            if (button == rbInputTLPA)
             {
                 inputType = 2;
                 isInputGroup = true;
             }
-            if (button == inputDTButton)
+            if (button == rbInputDT)
             {
                 inputType = 3;
                 isInputGroup = true;
             }
 
-            if (button == outputPOJButton)
+            if (button == rbOutputPOJ)
             {
                 outputType = 0;
                 isOutputGroup = true;
             }
-            if (button == outputTLButton)
+            if (button == rbOutputTL)
             {
                 outputType = 1;
                 isOutputGroup = true;
             }
 
-            if (button == diacriticFrontButton)
+            if (button == rbDiacriticFront)
             {
                 diacritic = 0;
                 isDiacriticGroup = true;
             }
-            if (button == diacriticEndButton)
+            if (button == rbDiacriticEnd)
             {
                 diacritic = 1;
                 isDiacriticGroup = true;
@@ -199,7 +199,7 @@ namespace OVPreference.CS2
 
         private void forcePOJStyleButton_CheckedChanged(object sender, EventArgs e)
         {
-            forcePOJStyle = forcePOJStyleButton.Checked;
+            forcePOJStyle = cbForcePOJStyle.Checked;
             XmlNode nodeForcePOJStyle = m_ovConfDOM.SelectSingleNode(
                 "/OpenVanilla/dict[@name='TLIM']/key[@name='forcePOJStyleWithTL']");
             nodeForcePOJStyle.Attributes["value"].Value =
