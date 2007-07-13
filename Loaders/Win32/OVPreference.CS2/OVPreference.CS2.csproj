@@ -44,11 +44,21 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="OVConfig.cs" />
+    <Compile Include="PanelGeneric.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelGeneric.Designer.cs">
+      <DependentUpon>PanelGeneric.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelGeneric.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelGeneric.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
