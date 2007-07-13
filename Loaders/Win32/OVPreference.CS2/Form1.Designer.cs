@@ -30,14 +30,16 @@ namespace OVPreference.CS2
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.saveButton = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tcSelf = new System.Windows.Forms.TabControl();
             this.tabPageGeneric = new System.Windows.Forms.TabPage();
-            this.tabControl1.SuspendLayout();
+            this.tlSelf = new System.Windows.Forms.TableLayoutPanel();
+            this.tlSelf.SuspendLayout();
             this.SuspendLayout();
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(183, 330);
+            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveButton.Location = new System.Drawing.Point(185, 342);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(94, 25);
             this.saveButton.TabIndex = 12;
@@ -45,13 +47,13 @@ namespace OVPreference.CS2
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // tabControl1
-            //             
-            this.tabControl1.Location = new System.Drawing.Point(0, 1);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(277, 327);
-            this.tabControl1.TabIndex = 13;
+            // tcSelf
+            // 
+            this.tcSelf.Location = new System.Drawing.Point(3, 3);
+            this.tcSelf.Name = "tcSelf";
+            this.tcSelf.SelectedIndex = 0;
+            this.tcSelf.Size = new System.Drawing.Size(276, 333);
+            this.tcSelf.TabIndex = 13;
             // 
             // tabPageGeneric
             // 
@@ -63,35 +65,43 @@ namespace OVPreference.CS2
             this.tabPageGeneric.Text = "泛用模組";
             this.tabPageGeneric.UseVisualStyleBackColor = true;
             // 
+            // tlSelf
+            // 
+            this.tlSelf.AutoSize = true;
+            this.tlSelf.ColumnCount = 1;
+            this.tlSelf.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlSelf.Controls.Add(this.saveButton, 0, 1);
+            this.tlSelf.Controls.Add(this.tcSelf, 0, 0);
+            this.tlSelf.Location = new System.Drawing.Point(14, 12);
+            this.tlSelf.Name = "tlSelf";
+            this.tlSelf.RowCount = 2;
+            this.tlSelf.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlSelf.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlSelf.Size = new System.Drawing.Size(282, 372);
+            this.tlSelf.TabIndex = 14;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 358);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.saveButton);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(311, 397);
+            this.Controls.Add(this.tlSelf);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "偏好設定";
-            this.tabControl1.ResumeLayout(false);
+            this.tlSelf.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
 
-        protected void AddTabGeneric()
-        {
-            this.tabControl1.Controls.Add(this.tabPageGeneric);
-        }
-
-        protected void AddTabTLIM()
-        {
-            //this.tabControl1.Controls.Add(this.tabPageTLIM);
-        }
-
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tcSelf;
         private System.Windows.Forms.TabPage tabPageGeneric;
+        private System.Windows.Forms.TableLayoutPanel tlSelf;
     }
 }
 

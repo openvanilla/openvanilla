@@ -54,14 +54,15 @@ namespace OVPreference.CS2
             // 
             // pnSelf
             // 
+            this.pnSelf.AutoSize = true;
             this.pnSelf.Controls.Add(this.gbSpellCheck);
             this.pnSelf.Controls.Add(this.gbTypingOrder);
             this.pnSelf.Controls.Add(this.gbSyllableTypeOutput);
             this.pnSelf.Controls.Add(this.gbSyllableTypeInput);
-            this.pnSelf.Location = new System.Drawing.Point(3, 0);
+            this.pnSelf.Location = new System.Drawing.Point(15, 10);
             this.pnSelf.Name = "pnSelf";
             this.pnSelf.Padding = new System.Windows.Forms.Padding(3);
-            this.pnSelf.Size = new System.Drawing.Size(272, 364);
+            this.pnSelf.Size = new System.Drawing.Size(257, 438);
             this.pnSelf.TabIndex = 1;
             this.pnSelf.Text = "台羅輸入法";
             // 
@@ -71,9 +72,9 @@ namespace OVPreference.CS2
             this.gbSpellCheck.Controls.Add(this.lbToneMark);
             this.gbSpellCheck.Controls.Add(this.cbForcePOJStyle);
             this.gbSpellCheck.Controls.Add(this.cbNormalize);
-            this.gbSpellCheck.Location = new System.Drawing.Point(9, 221);
+            this.gbSpellCheck.Location = new System.Drawing.Point(8, 297);
             this.gbSpellCheck.Name = "gbSpellCheck";
-            this.gbSpellCheck.Size = new System.Drawing.Size(253, 137);
+            this.gbSpellCheck.Size = new System.Drawing.Size(242, 133);
             this.gbSpellCheck.TabIndex = 11;
             this.gbSpellCheck.TabStop = false;
             this.gbSpellCheck.Text = "拼寫與調符自動檢查";
@@ -82,22 +83,22 @@ namespace OVPreference.CS2
             // 
             this.lbDiacritics.Location = new System.Drawing.Point(24, 97);
             this.lbDiacritics.Name = "lbDiacritics";
-            this.lbDiacritics.Size = new System.Drawing.Size(212, 35);
+            this.lbDiacritics.Size = new System.Drawing.Size(212, 33);
             this.lbDiacritics.TabIndex = 5;
             this.lbDiacritics.Text = "使用右上方有一點的o來表示oo，以及用上標n來表示nn";
             // 
             // lbToneMark
             // 
-            this.lbToneMark.Location = new System.Drawing.Point(23, 40);
+            this.lbToneMark.Location = new System.Drawing.Point(24, 39);
             this.lbToneMark.Name = "lbToneMark";
-            this.lbToneMark.Size = new System.Drawing.Size(216, 35);
+            this.lbToneMark.Size = new System.Drawing.Size(212, 35);
             this.lbToneMark.TabIndex = 4;
             this.lbToneMark.Text = "依照台羅的標調規則，將調號標在正確的母音上。";
             // 
             // cbForcePOJStyle
             // 
             this.cbForcePOJStyle.AutoSize = true;
-            this.cbForcePOJStyle.Location = new System.Drawing.Point(7, 78);
+            this.cbForcePOJStyle.Location = new System.Drawing.Point(7, 77);
             this.cbForcePOJStyle.Name = "cbForcePOJStyle";
             this.cbForcePOJStyle.Size = new System.Drawing.Size(206, 17);
             this.cbForcePOJStyle.TabIndex = 3;
@@ -107,7 +108,7 @@ namespace OVPreference.CS2
             // cbNormalize
             // 
             this.cbNormalize.AutoSize = true;
-            this.cbNormalize.Location = new System.Drawing.Point(7, 21);
+            this.cbNormalize.Location = new System.Drawing.Point(7, 19);
             this.cbNormalize.Name = "cbNormalize";
             this.cbNormalize.Size = new System.Drawing.Size(134, 17);
             this.cbNormalize.TabIndex = 2;
@@ -118,9 +119,9 @@ namespace OVPreference.CS2
             // 
             this.gbTypingOrder.Controls.Add(this.rbDiacriticEnd);
             this.gbTypingOrder.Controls.Add(this.rbDiacriticFront);
-            this.gbTypingOrder.Location = new System.Drawing.Point(8, 144);
+            this.gbTypingOrder.Location = new System.Drawing.Point(8, 210);
             this.gbTypingOrder.Name = "gbTypingOrder";
-            this.gbTypingOrder.Size = new System.Drawing.Size(260, 71);
+            this.gbTypingOrder.Size = new System.Drawing.Size(242, 71);
             this.gbTypingOrder.TabIndex = 14;
             this.gbTypingOrder.TabStop = false;
             this.gbTypingOrder.Text = "調號與母音的輸入順序";
@@ -128,7 +129,7 @@ namespace OVPreference.CS2
             // rbDiacriticEnd
             // 
             this.rbDiacriticEnd.AutoSize = true;
-            this.rbDiacriticEnd.Location = new System.Drawing.Point(6, 48);
+            this.rbDiacriticEnd.Location = new System.Drawing.Point(7, 42);
             this.rbDiacriticEnd.Name = "rbDiacriticEnd";
             this.rbDiacriticEnd.Size = new System.Drawing.Size(167, 17);
             this.rbDiacriticEnd.TabIndex = 1;
@@ -139,7 +140,7 @@ namespace OVPreference.CS2
             // rbDiacriticFront
             // 
             this.rbDiacriticFront.AutoSize = true;
-            this.rbDiacriticFront.Location = new System.Drawing.Point(7, 24);
+            this.rbDiacriticFront.Location = new System.Drawing.Point(7, 19);
             this.rbDiacriticFront.Name = "rbDiacriticFront";
             this.rbDiacriticFront.Size = new System.Drawing.Size(170, 17);
             this.rbDiacriticFront.TabIndex = 0;
@@ -151,9 +152,9 @@ namespace OVPreference.CS2
             // 
             this.gbSyllableTypeOutput.Controls.Add(this.rbOutputPOJ);
             this.gbSyllableTypeOutput.Controls.Add(this.rbOutputTL);
-            this.gbSyllableTypeOutput.Location = new System.Drawing.Point(141, 6);
+            this.gbSyllableTypeOutput.Location = new System.Drawing.Point(8, 128);
             this.gbSyllableTypeOutput.Name = "gbSyllableTypeOutput";
-            this.gbSyllableTypeOutput.Size = new System.Drawing.Size(127, 131);
+            this.gbSyllableTypeOutput.Size = new System.Drawing.Size(242, 63);
             this.gbSyllableTypeOutput.TabIndex = 13;
             this.gbSyllableTypeOutput.TabStop = false;
             this.gbSyllableTypeOutput.Text = "輸出的音節種類";
@@ -161,7 +162,7 @@ namespace OVPreference.CS2
             // rbOutputPOJ
             // 
             this.rbOutputPOJ.AutoSize = true;
-            this.rbOutputPOJ.Location = new System.Drawing.Point(6, 80);
+            this.rbOutputPOJ.Location = new System.Drawing.Point(7, 42);
             this.rbOutputPOJ.Name = "rbOutputPOJ";
             this.rbOutputPOJ.Size = new System.Drawing.Size(105, 17);
             this.rbOutputPOJ.TabIndex = 13;
@@ -172,7 +173,7 @@ namespace OVPreference.CS2
             // rbOutputTL
             // 
             this.rbOutputTL.AutoSize = true;
-            this.rbOutputTL.Location = new System.Drawing.Point(6, 35);
+            this.rbOutputTL.Location = new System.Drawing.Point(7, 19);
             this.rbOutputTL.Name = "rbOutputTL";
             this.rbOutputTL.Size = new System.Drawing.Size(86, 17);
             this.rbOutputTL.TabIndex = 12;
@@ -188,7 +189,7 @@ namespace OVPreference.CS2
             this.gbSyllableTypeInput.Controls.Add(this.rbInputTL);
             this.gbSyllableTypeInput.Location = new System.Drawing.Point(8, 6);
             this.gbSyllableTypeInput.Name = "gbSyllableTypeInput";
-            this.gbSyllableTypeInput.Size = new System.Drawing.Size(127, 131);
+            this.gbSyllableTypeInput.Size = new System.Drawing.Size(242, 107);
             this.gbSyllableTypeInput.TabIndex = 12;
             this.gbSyllableTypeInput.TabStop = false;
             this.gbSyllableTypeInput.Text = "輸入的音節種類";
@@ -196,7 +197,7 @@ namespace OVPreference.CS2
             // rbInputDT
             // 
             this.rbInputDT.AutoSize = true;
-            this.rbInputDT.Location = new System.Drawing.Point(6, 94);
+            this.rbInputDT.Location = new System.Drawing.Point(7, 88);
             this.rbInputDT.Name = "rbInputDT";
             this.rbInputDT.Size = new System.Drawing.Size(205, 17);
             this.rbInputDT.TabIndex = 9;
@@ -207,7 +208,7 @@ namespace OVPreference.CS2
             // rbInputTLPA
             // 
             this.rbInputTLPA.AutoSize = true;
-            this.rbInputTLPA.Location = new System.Drawing.Point(6, 70);
+            this.rbInputTLPA.Location = new System.Drawing.Point(7, 65);
             this.rbInputTLPA.Name = "rbInputTLPA";
             this.rbInputTLPA.Size = new System.Drawing.Size(187, 17);
             this.rbInputTLPA.TabIndex = 8;
@@ -218,7 +219,7 @@ namespace OVPreference.CS2
             // rbInputPOJ
             // 
             this.rbInputPOJ.AutoSize = true;
-            this.rbInputPOJ.Location = new System.Drawing.Point(6, 47);
+            this.rbInputPOJ.Location = new System.Drawing.Point(7, 42);
             this.rbInputPOJ.Name = "rbInputPOJ";
             this.rbInputPOJ.Size = new System.Drawing.Size(233, 17);
             this.rbInputPOJ.TabIndex = 7;
@@ -229,7 +230,7 @@ namespace OVPreference.CS2
             // rbInputTL
             // 
             this.rbInputTL.AutoSize = true;
-            this.rbInputTL.Location = new System.Drawing.Point(6, 23);
+            this.rbInputTL.Location = new System.Drawing.Point(7, 19);
             this.rbInputTL.Name = "rbInputTL";
             this.rbInputTL.Size = new System.Drawing.Size(86, 17);
             this.rbInputTL.TabIndex = 6;
@@ -241,9 +242,10 @@ namespace OVPreference.CS2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.Controls.Add(this.pnSelf);
             this.Name = "PanelTLIM";
-            this.Size = new System.Drawing.Size(279, 370);
+            this.Size = new System.Drawing.Size(287, 459);
             this.pnSelf.ResumeLayout(false);
             this.gbSpellCheck.ResumeLayout(false);
             this.gbSpellCheck.PerformLayout();
@@ -254,6 +256,8 @@ namespace OVPreference.CS2
             this.gbSyllableTypeInput.ResumeLayout(false);
             this.gbSyllableTypeInput.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

@@ -31,9 +31,11 @@ namespace OVPreference.CS2
 
             foreach (string moduleKey in m_ovConfDict.Keys)
             {
+                OVConfig conf = m_ovConfDict[moduleKey];
+
                 if (moduleKey.Equals("TLIM"))
                 {
-                    this.AddTabTLIM();
+                    this.AddTabTLIM(conf, m_ovConfDOM);
                     //set TabTLIM's behavior here
                 }
                 else
@@ -44,13 +46,44 @@ namespace OVPreference.CS2
                         this.AddTabGeneric();
                     }
 
-                    OVConfig conf = m_ovConfDict[moduleKey];
                     foreach (string entryKey in conf.settings.Keys)
                     {
                         string entryValue = conf.settings[entryKey];
                     }
                 }
             }
+        }
+
+        protected void AddTabGeneric(OVConfig conf, XmlDocument confDOM)
+        {
+            //PanelGeneric plGen = new PanelGeneric(conf, confDOM);
+            TabPage tpGeneric = new TabPage(conf.moduleName);
+
+            //tpGeneric.Controls.Add(plGeneric);
+            //tpGeneric.ClientSize = plGeneric.Size;
+
+            this.tcSelf.Controls.Add(tpGeneric);
+            this.tcSelf.ClientSize = tpGeneric.Size;
+
+            this.tlSelf.ClientSize = this.tcSelf.Size;
+
+            this.ClientSize = this.tlSelf.Size;
+        }
+
+        protected void AddTabTLIM(OVConfig conf, XmlDocument confDOM)
+        {
+            PanelTLIM plTLIM = new PanelTLIM(conf, confDOM);
+            TabPage tpTLIM = new TabPage(conf.moduleName);
+
+            tpTLIM.Controls.Add(plTLIM);
+            tpTLIM.ClientSize = plTLIM.Size;
+
+            this.tcSelf.Controls.Add(tpTLIM);
+            this.tcSelf.ClientSize = tpTLIM.Size;
+
+            this.tlSelf.ClientSize = this.tcSelf.Size;
+
+            this.ClientSize = this.tlSelf.Size;
         }
 
         private void loadData()
