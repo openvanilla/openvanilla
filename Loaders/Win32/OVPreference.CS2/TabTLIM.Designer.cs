@@ -28,7 +28,7 @@ namespace OVPreference.CS2
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabPageTLIM = new System.Windows.Forms.TabPage();
+            this.panelTLIM = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.forcePOJStyleButton = new System.Windows.Forms.CheckBox();
             this.normalizeButton = new System.Windows.Forms.CheckBox();
@@ -43,34 +43,34 @@ namespace OVPreference.CS2
             this.inputTLPAButton = new System.Windows.Forms.RadioButton();
             this.inputPOJButton = new System.Windows.Forms.RadioButton();
             this.inputTLButton = new System.Windows.Forms.RadioButton();
-            this.tabPageTLIM.SuspendLayout();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.panelTLIM.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabPageTLIM
+            // panelTLIM
             // 
-            this.tabPageTLIM.Controls.Add(this.groupBox4);
-            this.tabPageTLIM.Controls.Add(this.groupBox3);
-            this.tabPageTLIM.Controls.Add(this.groupBox2);
-            this.tabPageTLIM.Controls.Add(this.groupBox1);
-            this.tabPageTLIM.Location = new System.Drawing.Point(4, 22);
-            this.tabPageTLIM.Name = "tabPageTLIM";
-            this.tabPageTLIM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTLIM.Size = new System.Drawing.Size(269, 301);
-            this.tabPageTLIM.TabIndex = 1;
-            this.tabPageTLIM.Text = "台羅輸入法";
-            this.tabPageTLIM.UseVisualStyleBackColor = true;
+            this.panelTLIM.Controls.Add(this.groupBox4);
+            this.panelTLIM.Controls.Add(this.groupBox3);
+            this.panelTLIM.Controls.Add(this.groupBox2);
+            this.panelTLIM.Controls.Add(this.groupBox1);
+            this.panelTLIM.Location = new System.Drawing.Point(4, 22);
+            this.panelTLIM.Name = "panelTLIM";
+            this.panelTLIM.Padding = new System.Windows.Forms.Padding(3);
+            this.panelTLIM.Size = new System.Drawing.Size(272, 308);
+            this.panelTLIM.TabIndex = 1;
+            this.panelTLIM.Text = "台羅輸入法";
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.forcePOJStyleButton);
             this.groupBox4.Controls.Add(this.normalizeButton);
-            this.groupBox4.Location = new System.Drawing.Point(8, 232);
+            this.groupBox4.Location = new System.Drawing.Point(8, 234);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(260, 78);
+            this.groupBox4.Size = new System.Drawing.Size(258, 65);
             this.groupBox4.TabIndex = 15;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "調號與母音的輸入順序";
@@ -218,12 +218,14 @@ namespace OVPreference.CS2
             this.inputTLButton.Text = "台羅（TL）";
             this.inputTLButton.UseVisualStyleBackColor = true;
             // 
-            // TabTLIM
+            // panelTLIM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.panelTLIM);
             this.Name = "TabTLIM";
-            this.tabPageTLIM.ResumeLayout(false);
+            this.Size = new System.Drawing.Size(343, 406);
+            this.panelTLIM.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -237,7 +239,7 @@ namespace OVPreference.CS2
 
         #endregion
 
-        private System.Windows.Forms.TabPage tabPageTLIM;
+        private System.Windows.Forms.Panel panelTLIM;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox forcePOJStyleButton;
         private System.Windows.Forms.CheckBox normalizeButton;
