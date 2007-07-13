@@ -43,7 +43,7 @@ namespace OVPreference.CS2
                     if (!isGenericTabAdded && moduleKey.StartsWith("OVIMGeneric"))
                     {
                         isGenericTabAdded = true;
-                        this.AddTabGeneric();
+                        this.AddTabGeneric(conf, m_ovConfDOM);
                     }
 
                     foreach (string entryKey in conf.settings.Keys)
@@ -56,11 +56,11 @@ namespace OVPreference.CS2
 
         protected void AddTabGeneric(OVConfig conf, XmlDocument confDOM)
         {
-            //PanelGeneric plGen = new PanelGeneric(conf, confDOM);
+            PanelGeneric plGeneric = new PanelGeneric(conf, confDOM);
             TabPage tpGeneric = new TabPage(conf.moduleName);
 
-            //tpGeneric.Controls.Add(plGeneric);
-            //tpGeneric.ClientSize = plGeneric.Size;
+            tpGeneric.Controls.Add(plGeneric);
+            tpGeneric.ClientSize = plGeneric.Size;
 
             this.tcSelf.Controls.Add(tpGeneric);
             this.tcSelf.ClientSize = tpGeneric.Size;
@@ -152,7 +152,7 @@ namespace OVPreference.CS2
 
         private void saveData()
         {
-            //MessageBox.Show("i=" + inputType + ", o=" + outputType + ", diacritic=" + diacritic + ", normalize=" + normalize + ", forcePOJStyle=" + forcePOJStyle);
+            //MessageBox.Show("i=" + m_inputType + ", o=" + m_outputType + ", m_diacriticOption=" + m_diacriticOption + ", m_doNormalize=" + m_doNormalize + ", m_doForcePOJStyle=" + m_doForcePOJStyle);
             m_ovConfDOM.Save(m_ovConfPath);
             this.Close();
         }

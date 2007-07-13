@@ -14,15 +14,24 @@ namespace OVPreference.CS2
         private OVConfig m_ovConf = null;
         private XmlDocument m_ovConfDOM = new XmlDocument();
 
+        protected int m_inputType;
+        protected int m_outputType;
+        protected int m_diacriticOption;
+        protected bool m_doNormalize;
+        protected bool m_doForcePOJStyle;
+
         public PanelTLIM(OVConfig conf, XmlDocument confDOM)
         {
             m_ovConf = conf;
             m_ovConfDOM = confDOM;
 
             InitializeComponent();
+
+            SetEventHandler();
+            LoadSettings();
         }
 
-        public void SetBehaviors()
+        protected void SetEventHandler()
         {
             this.rbDiacriticFront.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
             this.rbDiacriticEnd.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
@@ -32,33 +41,27 @@ namespace OVPreference.CS2
             this.rbInputDT.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
             this.rbOutputPOJ.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
             this.rbOutputTL.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            /*
-            inputType = outputType = 1;
-            diacritic = 0;
-            normalize = forcePOJStyle = false;
-             */
-            //<comment author='b6s'>
-            //The variable settings here should use the variable name itself
-            //to retrieve the value. This will be implemented in the near
-            //future.
-            //</comment>
-            inputType =
+        }
+
+        protected void LoadSettings()
+        {
+            m_inputType =
                 Convert.ToInt32(
                     m_ovConf.settings["inputSyllableType"]);
-            outputType =
+            m_outputType =
                 Convert.ToInt32(
                     m_ovConf.settings["outputSyllableType"]);
-            diacritic =
+            m_diacriticOption =
                 Convert.ToInt32(
                     m_ovConf.settings["diacriticInputOption"]);
-            normalize =
+            m_doNormalize =
                 Convert.ToBoolean(Convert.ToInt32(
                     m_ovConf.settings["shouldNormalize"]));
-            forcePOJStyle =
+            m_doForcePOJStyle =
                 Convert.ToBoolean(Convert.ToInt32(
                     m_ovConf.settings["forcePOJStyleWithTL"]));
 
-            switch (inputType)
+            switch (m_inputType)
             {
                 case 1:
                     rbInputTL.Checked = true;
@@ -74,7 +77,7 @@ namespace OVPreference.CS2
                     break;
             }
 
-            switch (outputType)
+            switch (m_outputType)
             {
                 case 1:
                     rbOutputTL.Checked = true;
@@ -84,20 +87,20 @@ namespace OVPreference.CS2
                     break;
             }
 
-            if (diacritic == 0)
+            if (m_diacriticOption == 0)
                 rbDiacriticFront.Checked = true;
             else
                 rbDiacriticEnd.Checked = true;
 
-            if (normalize)
+            if (m_doNormalize)
                 cbNormalize.Checked = true;
-            if (forcePOJStyle)
+            if (m_doForcePOJStyle)
                 cbForcePOJStyle.Checked = true;
         }
 
         private void checkOutputType()
         {
-            if (outputType == 1) // TL
+            if (m_outputType == 1) // TL
                 cbForcePOJStyle.Enabled = true;
             else
             {
@@ -106,19 +109,13 @@ namespace OVPreference.CS2
             }
         }
 
-        protected int inputType;
-        protected int outputType;
-        protected int diacritic;
-        protected bool normalize;
-        protected bool forcePOJStyle;
-
         private void normalizeButton_CheckedChanged(object sender, EventArgs e)
         {
-            normalize = cbNormalize.Checked;
+            m_doNormalize = cbNormalize.Checked;
             XmlNode nodeNormalize = m_ovConfDOM.SelectSingleNode(
                 "/OpenVanilla/dict[@name='TLIM']/key[@name='shouldNormalize']");
             nodeNormalize.Attributes["value"].Value =
-                normalize ? "1" : "0";
+                m_doNormalize ? "1" : "0";
         }
 
         private void buttons_CheckedChanged(object sender, EventArgs e)
@@ -131,44 +128,44 @@ namespace OVPreference.CS2
             bool isDiacriticGroup = false;
             if (button == rbInputPOJ)
             {
-                inputType = 0;
+                m_inputType = 0;
                 isInputGroup = true;
             }
             if (button == rbInputTL)
             {
-                inputType = 1;
+                m_inputType = 1;
                 isInputGroup = true;
             }
             if (button == rbInputTLPA)
             {
-                inputType = 2;
+                m_inputType = 2;
                 isInputGroup = true;
             }
             if (button == rbInputDT)
             {
-                inputType = 3;
+                m_inputType = 3;
                 isInputGroup = true;
             }
 
             if (button == rbOutputPOJ)
             {
-                outputType = 0;
+                m_outputType = 0;
                 isOutputGroup = true;
             }
             if (button == rbOutputTL)
             {
-                outputType = 1;
+                m_outputType = 1;
                 isOutputGroup = true;
             }
 
             if (button == rbDiacriticFront)
             {
-                diacritic = 0;
+                m_diacriticOption = 0;
                 isDiacriticGroup = true;
             }
             if (button == rbDiacriticEnd)
             {
-                diacritic = 1;
+                m_diacriticOption = 1;
                 isDiacriticGroup = true;
             }
 
@@ -177,17 +174,17 @@ namespace OVPreference.CS2
             if (isInputGroup)
             {
                 attrName = "inputSyllableType";
-                attrValue = inputType.ToString();
+                attrValue = m_inputType.ToString();
             }
             else if (isOutputGroup)
             {
                 attrName = "outputSyllableType";
-                attrValue = outputType.ToString();
+                attrValue = m_outputType.ToString();
             }
             else if (isDiacriticGroup)
             {
                 attrName = "diacriticInputOption";
-                attrValue = diacritic.ToString();
+                attrValue = m_diacriticOption.ToString();
             }
 
             XmlNode nodeOption = m_ovConfDOM.SelectSingleNode(
@@ -199,11 +196,11 @@ namespace OVPreference.CS2
 
         private void forcePOJStyleButton_CheckedChanged(object sender, EventArgs e)
         {
-            forcePOJStyle = cbForcePOJStyle.Checked;
+            m_doForcePOJStyle = cbForcePOJStyle.Checked;
             XmlNode nodeForcePOJStyle = m_ovConfDOM.SelectSingleNode(
                 "/OpenVanilla/dict[@name='TLIM']/key[@name='forcePOJStyleWithTL']");
             nodeForcePOJStyle.Attributes["value"].Value =
-                forcePOJStyle ? "1" : "0";
+                m_doForcePOJStyle ? "1" : "0";
         }
     }
 }
