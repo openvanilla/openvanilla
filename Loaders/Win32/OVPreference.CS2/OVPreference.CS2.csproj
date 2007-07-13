@@ -55,9 +55,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabTLIM.resx">
+    <EmbeddedResource Include="PanelTLIM.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>TabTLIM.cs</DependentUpon>
+      <DependentUpon>PanelTLIM.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -73,11 +73,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="TabTLIM.cs">
+    <Compile Include="PanelTLIM.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TabTLIM.Designer.cs">
-      <DependentUpon>TabTLIM.cs</DependentUpon>
+    <Compile Include="PanelTLIM.Designer.cs">
+      <DependentUpon>PanelTLIM.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
