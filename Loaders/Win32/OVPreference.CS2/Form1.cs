@@ -11,8 +11,7 @@ namespace OVPreference.CS2
 {
     public partial class Form1 : Form
     {
-        private Dictionary<string, OVConfig> m_ovConfDict =
-            new Dictionary<string, OVConfig>();
+        private List<OVConfig> m_ovConfList = new List<OVConfig>();
         private static string m_ovConfPath =
             Environment.GetFolderPath(
                 Environment.SpecialFolder.ApplicationData) +
@@ -29,61 +28,82 @@ namespace OVPreference.CS2
 
             loadData();
 
-            foreach (string moduleKey in m_ovConfDict.Keys)
-            {
-                OVConfig conf = m_ovConfDict[moduleKey];
+            ComparerOVConfig comparer = new ComparerOVConfig();
+            comparer.SortBy = EnumSortBy.Priority;
+            m_ovConfList.Sort(comparer);
+            comparer.SortBy = EnumSortBy.Enabled;
+            m_ovConfList.Sort(comparer);
 
-                if (moduleKey.Equals("TLIM"))
+            PanelModuleList pnModuleList = new PanelModuleList();
+            foreach (OVConfig conf in m_ovConfList)
+            {
+                pnModuleList.AddModule(
+                    conf.moduleName,
+                    Convert.ToBoolean(
+                        Convert.ToInt32(
+                            conf.settings["enabled"])));
+
+                if (conf.moduleName.Equals("TLIM"))
                 {
                     this.AddTabTLIM(conf, m_ovConfDOM);
-                    //set TabTLIM's behavior here
                 }
                 else
                 {
-                    if (!isGenericTabAdded && moduleKey.StartsWith("OVIMGeneric"))
+                    if (!isGenericTabAdded &&
+                        conf.moduleName.StartsWith("OVIMGeneric"))
                     {
                         isGenericTabAdded = true;
                         this.AddTabGeneric(conf, m_ovConfDOM);
                     }
-
-                    foreach (string entryKey in conf.settings.Keys)
-                    {
-                        string entryValue = conf.settings[entryKey];
-                    }
                 }
+            }
+            this.AddTabModuleList(pnModuleList);
+        }
+
+        protected void AddTabModuleList(PanelModuleList pnModuleList)
+        {
+            TabPage tpModuleList = new TabPage("Module List");
+            tpModuleList.Controls.Add(pnModuleList);
+            this.m_tcSelf.Controls.Add(tpModuleList);
+
+            Control control = tpModuleList;
+            while (control.Parent != null)
+            {
+                control.Parent.ClientSize = control.Size;
+                control = control.Parent;
             }
         }
 
         protected void AddTabGeneric(OVConfig conf, XmlDocument confDOM)
         {
-            PanelGeneric plGeneric = new PanelGeneric(conf, confDOM);
+            PanelGeneric pnGeneric = new PanelGeneric(conf, confDOM);
             TabPage tpGeneric = new TabPage(conf.moduleName);
 
-            tpGeneric.Controls.Add(plGeneric);
-            tpGeneric.ClientSize = plGeneric.Size;
+            tpGeneric.Controls.Add(pnGeneric);
+            tpGeneric.ClientSize = pnGeneric.Size;
 
-            this.tcSelf.Controls.Add(tpGeneric);
-            this.tcSelf.ClientSize = tpGeneric.Size;
+            this.m_tcSelf.Controls.Add(tpGeneric);
+            this.m_tcSelf.ClientSize = tpGeneric.Size;
 
-            this.tlSelf.ClientSize = this.tcSelf.Size;
+            this.m_tlSelf.ClientSize = this.m_tcSelf.Size;
 
-            this.ClientSize = this.tlSelf.Size;
+            this.ClientSize = this.m_tlSelf.Size;
         }
 
         protected void AddTabTLIM(OVConfig conf, XmlDocument confDOM)
         {
-            PanelTLIM plTLIM = new PanelTLIM(conf, confDOM);
+            PanelTLIM pnTLIM = new PanelTLIM(conf, confDOM);
             TabPage tpTLIM = new TabPage(conf.moduleName);
 
-            tpTLIM.Controls.Add(plTLIM);
-            tpTLIM.ClientSize = plTLIM.Size;
+            tpTLIM.Controls.Add(pnTLIM);
+            tpTLIM.ClientSize = pnTLIM.Size;
 
-            this.tcSelf.Controls.Add(tpTLIM);
-            this.tcSelf.ClientSize = tpTLIM.Size;
+            this.m_tcSelf.Controls.Add(tpTLIM);
+            this.m_tcSelf.ClientSize = tpTLIM.Size;
 
-            this.tlSelf.ClientSize = this.tcSelf.Size;
+            this.m_tlSelf.ClientSize = this.m_tcSelf.Size;
 
-            this.ClientSize = this.tlSelf.Size;
+            this.ClientSize = this.m_tlSelf.Size;
         }
 
         private void loadData()
@@ -116,7 +136,7 @@ namespace OVPreference.CS2
                         isKey = true;
 
                     if (isDictEnd)
-                        m_ovConfDict.Add(ovConfSet.moduleName, ovConfSet);
+                        m_ovConfList.Add(ovConfSet);
 
                     string attrNameTemp = "";
                     #region Read attributes

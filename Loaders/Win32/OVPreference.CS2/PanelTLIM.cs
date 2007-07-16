@@ -33,14 +33,14 @@ namespace OVPreference.CS2
 
         protected void SetEventHandler()
         {
-            this.rbDiacriticFront.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.rbDiacriticEnd.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.rbInputPOJ.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.rbInputTL.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.rbInputTLPA.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.rbInputDT.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.rbOutputPOJ.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
-            this.rbOutputTL.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.m_rbDiacriticFront.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.m_rbDiacriticEnd.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.m_rbInputPOJ.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.m_rbInputTL.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.m_rbInputTLPA.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.m_rbInputDT.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.m_rbOutputPOJ.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
+            this.m_rbOutputTL.CheckedChanged += new System.EventHandler(this.buttons_CheckedChanged);
         }
 
         protected void LoadSettings()
@@ -64,54 +64,54 @@ namespace OVPreference.CS2
             switch (m_inputType)
             {
                 case 1:
-                    rbInputTL.Checked = true;
+                    m_rbInputTL.Checked = true;
                     break;
                 case 0:
-                    rbInputPOJ.Checked = true;
+                    m_rbInputPOJ.Checked = true;
                     break;
                 case 2:
-                    rbInputTLPA.Checked = true;
+                    m_rbInputTLPA.Checked = true;
                     break;
                 case 3:
-                    rbInputDT.Checked = true;
+                    m_rbInputDT.Checked = true;
                     break;
             }
 
             switch (m_outputType)
             {
                 case 1:
-                    rbOutputTL.Checked = true;
+                    m_rbOutputTL.Checked = true;
                     break;
                 case 0:
-                    rbOutputPOJ.Checked = true;
+                    m_rbOutputPOJ.Checked = true;
                     break;
             }
 
             if (m_diacriticOption == 0)
-                rbDiacriticFront.Checked = true;
+                m_rbDiacriticFront.Checked = true;
             else
-                rbDiacriticEnd.Checked = true;
+                m_rbDiacriticEnd.Checked = true;
 
             if (m_doNormalize)
-                cbNormalize.Checked = true;
+                m_cbNormalize.Checked = true;
             if (m_doForcePOJStyle)
-                cbForcePOJStyle.Checked = true;
+                m_cbForcePOJStyle.Checked = true;
         }
 
         private void checkOutputType()
         {
             if (m_outputType == 1) // TL
-                cbForcePOJStyle.Enabled = true;
+                m_cbForcePOJStyle.Enabled = true;
             else
             {
-                cbForcePOJStyle.Enabled = false;
-                cbForcePOJStyle.Checked = false;
+                m_cbForcePOJStyle.Enabled = false;
+                m_cbForcePOJStyle.Checked = false;
             }
         }
 
         private void normalizeButton_CheckedChanged(object sender, EventArgs e)
         {
-            m_doNormalize = cbNormalize.Checked;
+            m_doNormalize = m_cbNormalize.Checked;
             XmlNode nodeNormalize = m_ovConfDOM.SelectSingleNode(
                 "/OpenVanilla/dict[@name='TLIM']/key[@name='shouldNormalize']");
             nodeNormalize.Attributes["value"].Value =
@@ -126,44 +126,44 @@ namespace OVPreference.CS2
             bool isInputGroup = false;
             bool isOutputGroup = false;
             bool isDiacriticGroup = false;
-            if (button == rbInputPOJ)
+            if (button == m_rbInputPOJ)
             {
                 m_inputType = 0;
                 isInputGroup = true;
             }
-            if (button == rbInputTL)
+            if (button == m_rbInputTL)
             {
                 m_inputType = 1;
                 isInputGroup = true;
             }
-            if (button == rbInputTLPA)
+            if (button == m_rbInputTLPA)
             {
                 m_inputType = 2;
                 isInputGroup = true;
             }
-            if (button == rbInputDT)
+            if (button == m_rbInputDT)
             {
                 m_inputType = 3;
                 isInputGroup = true;
             }
 
-            if (button == rbOutputPOJ)
+            if (button == m_rbOutputPOJ)
             {
                 m_outputType = 0;
                 isOutputGroup = true;
             }
-            if (button == rbOutputTL)
+            if (button == m_rbOutputTL)
             {
                 m_outputType = 1;
                 isOutputGroup = true;
             }
 
-            if (button == rbDiacriticFront)
+            if (button == m_rbDiacriticFront)
             {
                 m_diacriticOption = 0;
                 isDiacriticGroup = true;
             }
-            if (button == rbDiacriticEnd)
+            if (button == m_rbDiacriticEnd)
             {
                 m_diacriticOption = 1;
                 isDiacriticGroup = true;
@@ -196,7 +196,7 @@ namespace OVPreference.CS2
 
         private void forcePOJStyleButton_CheckedChanged(object sender, EventArgs e)
         {
-            m_doForcePOJStyle = cbForcePOJStyle.Checked;
+            m_doForcePOJStyle = m_cbForcePOJStyle.Checked;
             XmlNode nodeForcePOJStyle = m_ovConfDOM.SelectSingleNode(
                 "/OpenVanilla/dict[@name='TLIM']/key[@name='forcePOJStyleWithTL']");
             nodeForcePOJStyle.Attributes["value"].Value =

@@ -5,7 +5,7 @@ namespace OVPreference.CS2
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private System.ComponentModel.IContainer m_components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -13,9 +13,9 @@ namespace OVPreference.CS2
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (m_components != null))
             {
-                components.Dispose();
+                m_components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -28,111 +28,111 @@ namespace OVPreference.CS2
         /// </summary>
         private void InitializeComponent()
         {
-            this.plSelf = new System.Windows.Forms.Panel();
-            this.lbMaxKeySequenceLength = new System.Windows.Forms.Label();
-            this.tbMaxKeySequenceLength = new System.Windows.Forms.TextBox();
-            this.cbShiftSelectionKey = new System.Windows.Forms.CheckBox();
-            this.cbAutoCompose = new System.Windows.Forms.CheckBox();
-            this.cbHitMaxAndCompose = new System.Windows.Forms.CheckBox();
-            this.cbWarningBeep = new System.Windows.Forms.CheckBox();
-            this.plSelf.SuspendLayout();
+            this.m_pnSelf = new System.Windows.Forms.Panel();
+            this.m_lbMaxKeySequenceLength = new System.Windows.Forms.Label();
+            this.m_tbMaxKeySequenceLength = new System.Windows.Forms.TextBox();
+            this.m_cbShiftSelectionKey = new System.Windows.Forms.CheckBox();
+            this.m_cbAutoCompose = new System.Windows.Forms.CheckBox();
+            this.m_cbHitMaxAndCompose = new System.Windows.Forms.CheckBox();
+            this.m_cbWarningBeep = new System.Windows.Forms.CheckBox();
+            this.m_pnSelf.SuspendLayout();
             this.SuspendLayout();
             // 
-            // plSelf
+            // m_pnSelf
             // 
-            this.plSelf.Controls.Add(this.cbWarningBeep);
-            this.plSelf.Controls.Add(this.cbHitMaxAndCompose);
-            this.plSelf.Controls.Add(this.cbAutoCompose);
-            this.plSelf.Controls.Add(this.cbShiftSelectionKey);
-            this.plSelf.Controls.Add(this.tbMaxKeySequenceLength);
-            this.plSelf.Controls.Add(this.lbMaxKeySequenceLength);
-            this.plSelf.Location = new System.Drawing.Point(6, 12);
-            this.plSelf.Name = "plSelf";
-            this.plSelf.Size = new System.Drawing.Size(160, 148);
-            this.plSelf.TabIndex = 0;
+            this.m_pnSelf.Controls.Add(this.m_cbWarningBeep);
+            this.m_pnSelf.Controls.Add(this.m_cbHitMaxAndCompose);
+            this.m_pnSelf.Controls.Add(this.m_cbAutoCompose);
+            this.m_pnSelf.Controls.Add(this.m_cbShiftSelectionKey);
+            this.m_pnSelf.Controls.Add(this.m_tbMaxKeySequenceLength);
+            this.m_pnSelf.Controls.Add(this.m_lbMaxKeySequenceLength);
+            this.m_pnSelf.Location = new System.Drawing.Point(6, 12);
+            this.m_pnSelf.Name = "m_pnSelf";
+            this.m_pnSelf.Size = new System.Drawing.Size(160, 148);
+            this.m_pnSelf.TabIndex = 0;
             // 
-            // lbMaxKeySequenceLength
+            // m_lbMaxKeySequenceLength
             // 
-            this.lbMaxKeySequenceLength.AutoSize = true;
-            this.lbMaxKeySequenceLength.Location = new System.Drawing.Point(13, 123);
-            this.lbMaxKeySequenceLength.Name = "lbMaxKeySequenceLength";
-            this.lbMaxKeySequenceLength.Size = new System.Drawing.Size(91, 13);
-            this.lbMaxKeySequenceLength.TabIndex = 0;
-            this.lbMaxKeySequenceLength.Text = "程龄计ヘ";
+            this.m_lbMaxKeySequenceLength.AutoSize = true;
+            this.m_lbMaxKeySequenceLength.Location = new System.Drawing.Point(13, 123);
+            this.m_lbMaxKeySequenceLength.Name = "m_lbMaxKeySequenceLength";
+            this.m_lbMaxKeySequenceLength.Size = new System.Drawing.Size(91, 13);
+            this.m_lbMaxKeySequenceLength.TabIndex = 0;
+            this.m_lbMaxKeySequenceLength.Text = "程龄计ヘ";
             // 
-            // tbMaxKeySequenceLength
+            // m_tbMaxKeySequenceLength
             // 
-            this.tbMaxKeySequenceLength.Location = new System.Drawing.Point(110, 120);
-            this.tbMaxKeySequenceLength.Name = "tbMaxKeySequenceLength";
-            this.tbMaxKeySequenceLength.Size = new System.Drawing.Size(37, 20);
-            this.tbMaxKeySequenceLength.TabIndex = 1;
-            this.tbMaxKeySequenceLength.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.m_tbMaxKeySequenceLength.Location = new System.Drawing.Point(110, 120);
+            this.m_tbMaxKeySequenceLength.Name = "m_tbMaxKeySequenceLength";
+            this.m_tbMaxKeySequenceLength.Size = new System.Drawing.Size(37, 20);
+            this.m_tbMaxKeySequenceLength.TabIndex = 1;
+            this.m_tbMaxKeySequenceLength.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // cbShiftSelectionKey
+            // m_cbShiftSelectionKey
             // 
-            this.cbShiftSelectionKey.AutoSize = true;
-            this.cbShiftSelectionKey.Location = new System.Drawing.Point(16, 8);
-            this.cbShiftSelectionKey.Name = "cbShiftSelectionKey";
-            this.cbShiftSelectionKey.Size = new System.Drawing.Size(115, 17);
-            this.cbShiftSelectionKey.TabIndex = 2;
-            this.cbShiftSelectionKey.Text = "Shift Selection Key";
-            this.cbShiftSelectionKey.UseVisualStyleBackColor = true;
-            this.cbShiftSelectionKey.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.m_cbShiftSelectionKey.AutoSize = true;
+            this.m_cbShiftSelectionKey.Location = new System.Drawing.Point(16, 8);
+            this.m_cbShiftSelectionKey.Name = "m_cbShiftSelectionKey";
+            this.m_cbShiftSelectionKey.Size = new System.Drawing.Size(115, 17);
+            this.m_cbShiftSelectionKey.TabIndex = 2;
+            this.m_cbShiftSelectionKey.Text = "Shift Selection Key";
+            this.m_cbShiftSelectionKey.UseVisualStyleBackColor = true;
+            this.m_cbShiftSelectionKey.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // cbAutoCompose
+            // m_cbAutoCompose
             // 
-            this.cbAutoCompose.AutoSize = true;
-            this.cbAutoCompose.Location = new System.Drawing.Point(16, 31);
-            this.cbAutoCompose.Name = "cbAutoCompose";
-            this.cbAutoCompose.Size = new System.Drawing.Size(95, 17);
-            this.cbAutoCompose.TabIndex = 3;
-            this.cbAutoCompose.Text = "Auto Compose";
-            this.cbAutoCompose.UseVisualStyleBackColor = true;
-            this.cbAutoCompose.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.m_cbAutoCompose.AutoSize = true;
+            this.m_cbAutoCompose.Location = new System.Drawing.Point(16, 31);
+            this.m_cbAutoCompose.Name = "m_cbAutoCompose";
+            this.m_cbAutoCompose.Size = new System.Drawing.Size(95, 17);
+            this.m_cbAutoCompose.TabIndex = 3;
+            this.m_cbAutoCompose.Text = "Auto Compose";
+            this.m_cbAutoCompose.UseVisualStyleBackColor = true;
+            this.m_cbAutoCompose.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // cbHitMaxAndCompose
+            // m_cbHitMaxAndCompose
             // 
-            this.cbHitMaxAndCompose.AutoSize = true;
-            this.cbHitMaxAndCompose.Location = new System.Drawing.Point(16, 54);
-            this.cbHitMaxAndCompose.Name = "cbHitMaxAndCompose";
-            this.cbHitMaxAndCompose.Size = new System.Drawing.Size(130, 17);
-            this.cbHitMaxAndCompose.TabIndex = 4;
-            this.cbHitMaxAndCompose.Text = "Hit Max and Compose";
-            this.cbHitMaxAndCompose.UseVisualStyleBackColor = true;
-            this.cbHitMaxAndCompose.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            this.m_cbHitMaxAndCompose.AutoSize = true;
+            this.m_cbHitMaxAndCompose.Location = new System.Drawing.Point(16, 54);
+            this.m_cbHitMaxAndCompose.Name = "m_cbHitMaxAndCompose";
+            this.m_cbHitMaxAndCompose.Size = new System.Drawing.Size(130, 17);
+            this.m_cbHitMaxAndCompose.TabIndex = 4;
+            this.m_cbHitMaxAndCompose.Text = "Hit Max and Compose";
+            this.m_cbHitMaxAndCompose.UseVisualStyleBackColor = true;
+            this.m_cbHitMaxAndCompose.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
-            // cbWarningBeep
+            // m_cbWarningBeep
             // 
-            this.cbWarningBeep.AutoSize = true;
-            this.cbWarningBeep.Location = new System.Drawing.Point(16, 77);
-            this.cbWarningBeep.Name = "cbWarningBeep";
-            this.cbWarningBeep.Size = new System.Drawing.Size(94, 17);
-            this.cbWarningBeep.TabIndex = 5;
-            this.cbWarningBeep.Text = "Warning Beep";
-            this.cbWarningBeep.UseVisualStyleBackColor = true;
-            this.cbWarningBeep.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            this.m_cbWarningBeep.AutoSize = true;
+            this.m_cbWarningBeep.Location = new System.Drawing.Point(16, 77);
+            this.m_cbWarningBeep.Name = "m_cbWarningBeep";
+            this.m_cbWarningBeep.Size = new System.Drawing.Size(94, 17);
+            this.m_cbWarningBeep.TabIndex = 5;
+            this.m_cbWarningBeep.Text = "Warning Beep";
+            this.m_cbWarningBeep.UseVisualStyleBackColor = true;
+            this.m_cbWarningBeep.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // PanelGeneric
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.plSelf);
+            this.Controls.Add(this.m_pnSelf);
             this.Name = "PanelGeneric";
             this.Size = new System.Drawing.Size(172, 172);
-            this.plSelf.ResumeLayout(false);
-            this.plSelf.PerformLayout();
+            this.m_pnSelf.ResumeLayout(false);
+            this.m_pnSelf.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel plSelf;
-        private System.Windows.Forms.CheckBox cbWarningBeep;
-        private System.Windows.Forms.CheckBox cbHitMaxAndCompose;
-        private System.Windows.Forms.CheckBox cbAutoCompose;
-        private System.Windows.Forms.CheckBox cbShiftSelectionKey;
-        private System.Windows.Forms.TextBox tbMaxKeySequenceLength;
-        private System.Windows.Forms.Label lbMaxKeySequenceLength;
+        private System.Windows.Forms.Panel m_pnSelf;
+        private System.Windows.Forms.CheckBox m_cbWarningBeep;
+        private System.Windows.Forms.CheckBox m_cbHitMaxAndCompose;
+        private System.Windows.Forms.CheckBox m_cbAutoCompose;
+        private System.Windows.Forms.CheckBox m_cbShiftSelectionKey;
+        private System.Windows.Forms.TextBox m_tbMaxKeySequenceLength;
+        private System.Windows.Forms.Label m_lbMaxKeySequenceLength;
     }
 }

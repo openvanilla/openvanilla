@@ -5,7 +5,7 @@ namespace OVPreference.CS2
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private System.ComponentModel.IContainer m_components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -13,9 +13,9 @@ namespace OVPreference.CS2
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (m_components != null))
             {
-                components.Dispose();
+                m_components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -28,233 +28,233 @@ namespace OVPreference.CS2
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnSelf = new System.Windows.Forms.Panel();
-            this.gbSpellCheck = new System.Windows.Forms.GroupBox();
-            this.lbDiacritics = new System.Windows.Forms.Label();
-            this.lbToneMark = new System.Windows.Forms.Label();
-            this.cbForcePOJStyle = new System.Windows.Forms.CheckBox();
-            this.cbNormalize = new System.Windows.Forms.CheckBox();
-            this.gbTypingOrder = new System.Windows.Forms.GroupBox();
-            this.rbDiacriticEnd = new System.Windows.Forms.RadioButton();
-            this.rbDiacriticFront = new System.Windows.Forms.RadioButton();
-            this.gbSyllableTypeOutput = new System.Windows.Forms.GroupBox();
-            this.rbOutputPOJ = new System.Windows.Forms.RadioButton();
-            this.rbOutputTL = new System.Windows.Forms.RadioButton();
-            this.gbSyllableTypeInput = new System.Windows.Forms.GroupBox();
-            this.rbInputDT = new System.Windows.Forms.RadioButton();
-            this.rbInputTLPA = new System.Windows.Forms.RadioButton();
-            this.rbInputPOJ = new System.Windows.Forms.RadioButton();
-            this.rbInputTL = new System.Windows.Forms.RadioButton();
-            this.pnSelf.SuspendLayout();
-            this.gbSpellCheck.SuspendLayout();
-            this.gbTypingOrder.SuspendLayout();
-            this.gbSyllableTypeOutput.SuspendLayout();
-            this.gbSyllableTypeInput.SuspendLayout();
+            this.m_pnSelf = new System.Windows.Forms.Panel();
+            this.m_gbSpellCheck = new System.Windows.Forms.GroupBox();
+            this.m_lbDiacritics = new System.Windows.Forms.Label();
+            this.m_lbToneMark = new System.Windows.Forms.Label();
+            this.m_cbForcePOJStyle = new System.Windows.Forms.CheckBox();
+            this.m_cbNormalize = new System.Windows.Forms.CheckBox();
+            this.m_gbTypingOrder = new System.Windows.Forms.GroupBox();
+            this.m_rbDiacriticEnd = new System.Windows.Forms.RadioButton();
+            this.m_rbDiacriticFront = new System.Windows.Forms.RadioButton();
+            this.m_gbSyllableTypeOutput = new System.Windows.Forms.GroupBox();
+            this.m_rbOutputPOJ = new System.Windows.Forms.RadioButton();
+            this.m_rbOutputTL = new System.Windows.Forms.RadioButton();
+            this.m_gbSyllableTypeInput = new System.Windows.Forms.GroupBox();
+            this.m_rbInputDT = new System.Windows.Forms.RadioButton();
+            this.m_rbInputTLPA = new System.Windows.Forms.RadioButton();
+            this.m_rbInputPOJ = new System.Windows.Forms.RadioButton();
+            this.m_rbInputTL = new System.Windows.Forms.RadioButton();
+            this.m_pnSelf.SuspendLayout();
+            this.m_gbSpellCheck.SuspendLayout();
+            this.m_gbTypingOrder.SuspendLayout();
+            this.m_gbSyllableTypeOutput.SuspendLayout();
+            this.m_gbSyllableTypeInput.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnSelf
+            // m_pnSelf
             // 
-            this.pnSelf.AutoSize = true;
-            this.pnSelf.Controls.Add(this.gbSpellCheck);
-            this.pnSelf.Controls.Add(this.gbTypingOrder);
-            this.pnSelf.Controls.Add(this.gbSyllableTypeOutput);
-            this.pnSelf.Controls.Add(this.gbSyllableTypeInput);
-            this.pnSelf.Location = new System.Drawing.Point(15, 10);
-            this.pnSelf.Name = "pnSelf";
-            this.pnSelf.Padding = new System.Windows.Forms.Padding(3);
-            this.pnSelf.Size = new System.Drawing.Size(257, 438);
-            this.pnSelf.TabIndex = 1;
-            this.pnSelf.Text = "台羅輸入法";
+            this.m_pnSelf.AutoSize = true;
+            this.m_pnSelf.Controls.Add(this.m_gbSpellCheck);
+            this.m_pnSelf.Controls.Add(this.m_gbTypingOrder);
+            this.m_pnSelf.Controls.Add(this.m_gbSyllableTypeOutput);
+            this.m_pnSelf.Controls.Add(this.m_gbSyllableTypeInput);
+            this.m_pnSelf.Location = new System.Drawing.Point(15, 10);
+            this.m_pnSelf.Name = "m_pnSelf";
+            this.m_pnSelf.Padding = new System.Windows.Forms.Padding(3);
+            this.m_pnSelf.Size = new System.Drawing.Size(257, 438);
+            this.m_pnSelf.TabIndex = 1;
+            this.m_pnSelf.Text = "台羅輸入法";
             // 
-            // gbSpellCheck
+            // m_gbSpellCheck
             // 
-            this.gbSpellCheck.Controls.Add(this.lbDiacritics);
-            this.gbSpellCheck.Controls.Add(this.lbToneMark);
-            this.gbSpellCheck.Controls.Add(this.cbForcePOJStyle);
-            this.gbSpellCheck.Controls.Add(this.cbNormalize);
-            this.gbSpellCheck.Location = new System.Drawing.Point(8, 297);
-            this.gbSpellCheck.Name = "gbSpellCheck";
-            this.gbSpellCheck.Size = new System.Drawing.Size(242, 133);
-            this.gbSpellCheck.TabIndex = 11;
-            this.gbSpellCheck.TabStop = false;
-            this.gbSpellCheck.Text = "拼寫與調符自動檢查";
+            this.m_gbSpellCheck.Controls.Add(this.m_lbDiacritics);
+            this.m_gbSpellCheck.Controls.Add(this.m_lbToneMark);
+            this.m_gbSpellCheck.Controls.Add(this.m_cbForcePOJStyle);
+            this.m_gbSpellCheck.Controls.Add(this.m_cbNormalize);
+            this.m_gbSpellCheck.Location = new System.Drawing.Point(8, 297);
+            this.m_gbSpellCheck.Name = "m_gbSpellCheck";
+            this.m_gbSpellCheck.Size = new System.Drawing.Size(242, 133);
+            this.m_gbSpellCheck.TabIndex = 11;
+            this.m_gbSpellCheck.TabStop = false;
+            this.m_gbSpellCheck.Text = "拼寫與調符自動檢查";
             // 
-            // lbDiacritics
+            // m_lbDiacritics
             // 
-            this.lbDiacritics.Location = new System.Drawing.Point(24, 97);
-            this.lbDiacritics.Name = "lbDiacritics";
-            this.lbDiacritics.Size = new System.Drawing.Size(212, 33);
-            this.lbDiacritics.TabIndex = 5;
-            this.lbDiacritics.Text = "使用右上方有一點的o來表示oo，以及用上標n來表示nn";
+            this.m_lbDiacritics.Location = new System.Drawing.Point(24, 97);
+            this.m_lbDiacritics.Name = "m_lbDiacritics";
+            this.m_lbDiacritics.Size = new System.Drawing.Size(212, 33);
+            this.m_lbDiacritics.TabIndex = 5;
+            this.m_lbDiacritics.Text = "使用右上方有一點的o來表示oo，以及用上標n來表示nn";
             // 
-            // lbToneMark
+            // m_lbToneMark
             // 
-            this.lbToneMark.Location = new System.Drawing.Point(24, 39);
-            this.lbToneMark.Name = "lbToneMark";
-            this.lbToneMark.Size = new System.Drawing.Size(212, 35);
-            this.lbToneMark.TabIndex = 4;
-            this.lbToneMark.Text = "依照台羅的標調規則，將調號標在正確的母音上。";
+            this.m_lbToneMark.Location = new System.Drawing.Point(24, 39);
+            this.m_lbToneMark.Name = "m_lbToneMark";
+            this.m_lbToneMark.Size = new System.Drawing.Size(212, 35);
+            this.m_lbToneMark.TabIndex = 4;
+            this.m_lbToneMark.Text = "依照台羅的標調規則，將調號標在正確的母音上。";
             // 
-            // cbForcePOJStyle
+            // m_cbForcePOJStyle
             // 
-            this.cbForcePOJStyle.AutoSize = true;
-            this.cbForcePOJStyle.Location = new System.Drawing.Point(7, 77);
-            this.cbForcePOJStyle.Name = "cbForcePOJStyle";
-            this.cbForcePOJStyle.Size = new System.Drawing.Size(206, 17);
-            this.cbForcePOJStyle.TabIndex = 3;
-            this.cbForcePOJStyle.Text = "使用台羅傳統版的符號來輸出台羅";
-            this.cbForcePOJStyle.UseVisualStyleBackColor = true;
+            this.m_cbForcePOJStyle.AutoSize = true;
+            this.m_cbForcePOJStyle.Location = new System.Drawing.Point(7, 77);
+            this.m_cbForcePOJStyle.Name = "m_cbForcePOJStyle";
+            this.m_cbForcePOJStyle.Size = new System.Drawing.Size(206, 17);
+            this.m_cbForcePOJStyle.TabIndex = 3;
+            this.m_cbForcePOJStyle.Text = "使用台羅傳統版的符號來輸出台羅";
+            this.m_cbForcePOJStyle.UseVisualStyleBackColor = true;
             // 
-            // cbNormalize
+            // m_cbNormalize
             // 
-            this.cbNormalize.AutoSize = true;
-            this.cbNormalize.Location = new System.Drawing.Point(7, 19);
-            this.cbNormalize.Name = "cbNormalize";
-            this.cbNormalize.Size = new System.Drawing.Size(134, 17);
-            this.cbNormalize.TabIndex = 2;
-            this.cbNormalize.Text = "輸入後做正規化檢查";
-            this.cbNormalize.UseVisualStyleBackColor = true;
+            this.m_cbNormalize.AutoSize = true;
+            this.m_cbNormalize.Location = new System.Drawing.Point(7, 19);
+            this.m_cbNormalize.Name = "m_cbNormalize";
+            this.m_cbNormalize.Size = new System.Drawing.Size(134, 17);
+            this.m_cbNormalize.TabIndex = 2;
+            this.m_cbNormalize.Text = "輸入後做正規化檢查";
+            this.m_cbNormalize.UseVisualStyleBackColor = true;
             // 
-            // gbTypingOrder
+            // m_gbTypingOrder
             // 
-            this.gbTypingOrder.Controls.Add(this.rbDiacriticEnd);
-            this.gbTypingOrder.Controls.Add(this.rbDiacriticFront);
-            this.gbTypingOrder.Location = new System.Drawing.Point(8, 210);
-            this.gbTypingOrder.Name = "gbTypingOrder";
-            this.gbTypingOrder.Size = new System.Drawing.Size(242, 71);
-            this.gbTypingOrder.TabIndex = 14;
-            this.gbTypingOrder.TabStop = false;
-            this.gbTypingOrder.Text = "調號與母音的輸入順序";
+            this.m_gbTypingOrder.Controls.Add(this.m_rbDiacriticEnd);
+            this.m_gbTypingOrder.Controls.Add(this.m_rbDiacriticFront);
+            this.m_gbTypingOrder.Location = new System.Drawing.Point(8, 210);
+            this.m_gbTypingOrder.Name = "m_gbTypingOrder";
+            this.m_gbTypingOrder.Size = new System.Drawing.Size(242, 71);
+            this.m_gbTypingOrder.TabIndex = 14;
+            this.m_gbTypingOrder.TabStop = false;
+            this.m_gbTypingOrder.Text = "調號與母音的輸入順序";
             // 
-            // rbDiacriticEnd
+            // m_rbDiacriticEnd
             // 
-            this.rbDiacriticEnd.AutoSize = true;
-            this.rbDiacriticEnd.Location = new System.Drawing.Point(7, 42);
-            this.rbDiacriticEnd.Name = "rbDiacriticEnd";
-            this.rbDiacriticEnd.Size = new System.Drawing.Size(167, 17);
-            this.rbDiacriticEnd.TabIndex = 1;
-            this.rbDiacriticEnd.TabStop = true;
-            this.rbDiacriticEnd.Text = "先打母音再打調號 ( \' ` ^ = | )";
-            this.rbDiacriticEnd.UseVisualStyleBackColor = true;
+            this.m_rbDiacriticEnd.AutoSize = true;
+            this.m_rbDiacriticEnd.Location = new System.Drawing.Point(7, 42);
+            this.m_rbDiacriticEnd.Name = "m_rbDiacriticEnd";
+            this.m_rbDiacriticEnd.Size = new System.Drawing.Size(167, 17);
+            this.m_rbDiacriticEnd.TabIndex = 1;
+            this.m_rbDiacriticEnd.TabStop = true;
+            this.m_rbDiacriticEnd.Text = "先打母音再打調號 ( \' ` ^ = | )";
+            this.m_rbDiacriticEnd.UseVisualStyleBackColor = true;
             // 
-            // rbDiacriticFront
+            // m_rbDiacriticFront
             // 
-            this.rbDiacriticFront.AutoSize = true;
-            this.rbDiacriticFront.Location = new System.Drawing.Point(7, 19);
-            this.rbDiacriticFront.Name = "rbDiacriticFront";
-            this.rbDiacriticFront.Size = new System.Drawing.Size(170, 17);
-            this.rbDiacriticFront.TabIndex = 0;
-            this.rbDiacriticFront.TabStop = true;
-            this.rbDiacriticFront.Text = "先打調號 ( \' ` ^ = | ) 再打母音";
-            this.rbDiacriticFront.UseVisualStyleBackColor = true;
+            this.m_rbDiacriticFront.AutoSize = true;
+            this.m_rbDiacriticFront.Location = new System.Drawing.Point(7, 19);
+            this.m_rbDiacriticFront.Name = "m_rbDiacriticFront";
+            this.m_rbDiacriticFront.Size = new System.Drawing.Size(170, 17);
+            this.m_rbDiacriticFront.TabIndex = 0;
+            this.m_rbDiacriticFront.TabStop = true;
+            this.m_rbDiacriticFront.Text = "先打調號 ( \' ` ^ = | ) 再打母音";
+            this.m_rbDiacriticFront.UseVisualStyleBackColor = true;
             // 
-            // gbSyllableTypeOutput
+            // m_gbSyllableTypeOutput
             // 
-            this.gbSyllableTypeOutput.Controls.Add(this.rbOutputPOJ);
-            this.gbSyllableTypeOutput.Controls.Add(this.rbOutputTL);
-            this.gbSyllableTypeOutput.Location = new System.Drawing.Point(8, 128);
-            this.gbSyllableTypeOutput.Name = "gbSyllableTypeOutput";
-            this.gbSyllableTypeOutput.Size = new System.Drawing.Size(242, 63);
-            this.gbSyllableTypeOutput.TabIndex = 13;
-            this.gbSyllableTypeOutput.TabStop = false;
-            this.gbSyllableTypeOutput.Text = "輸出的音節種類";
+            this.m_gbSyllableTypeOutput.Controls.Add(this.m_rbOutputPOJ);
+            this.m_gbSyllableTypeOutput.Controls.Add(this.m_rbOutputTL);
+            this.m_gbSyllableTypeOutput.Location = new System.Drawing.Point(8, 128);
+            this.m_gbSyllableTypeOutput.Name = "m_gbSyllableTypeOutput";
+            this.m_gbSyllableTypeOutput.Size = new System.Drawing.Size(242, 63);
+            this.m_gbSyllableTypeOutput.TabIndex = 13;
+            this.m_gbSyllableTypeOutput.TabStop = false;
+            this.m_gbSyllableTypeOutput.Text = "輸出的音節種類";
             // 
-            // rbOutputPOJ
+            // m_rbOutputPOJ
             // 
-            this.rbOutputPOJ.AutoSize = true;
-            this.rbOutputPOJ.Location = new System.Drawing.Point(7, 42);
-            this.rbOutputPOJ.Name = "rbOutputPOJ";
-            this.rbOutputPOJ.Size = new System.Drawing.Size(105, 17);
-            this.rbOutputPOJ.TabIndex = 13;
-            this.rbOutputPOJ.TabStop = true;
-            this.rbOutputPOJ.Text = "白話字（POJ）";
-            this.rbOutputPOJ.UseVisualStyleBackColor = true;
+            this.m_rbOutputPOJ.AutoSize = true;
+            this.m_rbOutputPOJ.Location = new System.Drawing.Point(7, 42);
+            this.m_rbOutputPOJ.Name = "m_rbOutputPOJ";
+            this.m_rbOutputPOJ.Size = new System.Drawing.Size(105, 17);
+            this.m_rbOutputPOJ.TabIndex = 13;
+            this.m_rbOutputPOJ.TabStop = true;
+            this.m_rbOutputPOJ.Text = "白話字（POJ）";
+            this.m_rbOutputPOJ.UseVisualStyleBackColor = true;
             // 
-            // rbOutputTL
+            // m_rbOutputTL
             // 
-            this.rbOutputTL.AutoSize = true;
-            this.rbOutputTL.Location = new System.Drawing.Point(7, 19);
-            this.rbOutputTL.Name = "rbOutputTL";
-            this.rbOutputTL.Size = new System.Drawing.Size(86, 17);
-            this.rbOutputTL.TabIndex = 12;
-            this.rbOutputTL.TabStop = true;
-            this.rbOutputTL.Text = "台羅（TL）";
-            this.rbOutputTL.UseVisualStyleBackColor = true;
+            this.m_rbOutputTL.AutoSize = true;
+            this.m_rbOutputTL.Location = new System.Drawing.Point(7, 19);
+            this.m_rbOutputTL.Name = "m_rbOutputTL";
+            this.m_rbOutputTL.Size = new System.Drawing.Size(86, 17);
+            this.m_rbOutputTL.TabIndex = 12;
+            this.m_rbOutputTL.TabStop = true;
+            this.m_rbOutputTL.Text = "台羅（TL）";
+            this.m_rbOutputTL.UseVisualStyleBackColor = true;
             // 
-            // gbSyllableTypeInput
+            // m_gbSyllableTypeInput
             // 
-            this.gbSyllableTypeInput.Controls.Add(this.rbInputDT);
-            this.gbSyllableTypeInput.Controls.Add(this.rbInputTLPA);
-            this.gbSyllableTypeInput.Controls.Add(this.rbInputPOJ);
-            this.gbSyllableTypeInput.Controls.Add(this.rbInputTL);
-            this.gbSyllableTypeInput.Location = new System.Drawing.Point(8, 6);
-            this.gbSyllableTypeInput.Name = "gbSyllableTypeInput";
-            this.gbSyllableTypeInput.Size = new System.Drawing.Size(242, 107);
-            this.gbSyllableTypeInput.TabIndex = 12;
-            this.gbSyllableTypeInput.TabStop = false;
-            this.gbSyllableTypeInput.Text = "輸入的音節種類";
+            this.m_gbSyllableTypeInput.Controls.Add(this.m_rbInputDT);
+            this.m_gbSyllableTypeInput.Controls.Add(this.m_rbInputTLPA);
+            this.m_gbSyllableTypeInput.Controls.Add(this.m_rbInputPOJ);
+            this.m_gbSyllableTypeInput.Controls.Add(this.m_rbInputTL);
+            this.m_gbSyllableTypeInput.Location = new System.Drawing.Point(8, 6);
+            this.m_gbSyllableTypeInput.Name = "m_gbSyllableTypeInput";
+            this.m_gbSyllableTypeInput.Size = new System.Drawing.Size(242, 107);
+            this.m_gbSyllableTypeInput.TabIndex = 12;
+            this.m_gbSyllableTypeInput.TabStop = false;
+            this.m_gbSyllableTypeInput.Text = "輸入的音節種類";
             // 
-            // rbInputDT
+            // m_rbInputDT
             // 
-            this.rbInputDT.AutoSize = true;
-            this.rbInputDT.Location = new System.Drawing.Point(7, 88);
-            this.rbInputDT.Name = "rbInputDT";
-            this.rbInputDT.Size = new System.Drawing.Size(205, 17);
-            this.rbInputDT.TabIndex = 9;
-            this.rbInputDT.TabStop = true;
-            this.rbInputDT.Text = "通用：輸入通用拼音，輸出為台羅";
-            this.rbInputDT.UseVisualStyleBackColor = true;
+            this.m_rbInputDT.AutoSize = true;
+            this.m_rbInputDT.Location = new System.Drawing.Point(7, 88);
+            this.m_rbInputDT.Name = "m_rbInputDT";
+            this.m_rbInputDT.Size = new System.Drawing.Size(205, 17);
+            this.m_rbInputDT.TabIndex = 9;
+            this.m_rbInputDT.TabStop = true;
+            this.m_rbInputDT.Text = "通用：輸入通用拼音，輸出為台羅";
+            this.m_rbInputDT.UseVisualStyleBackColor = true;
             // 
-            // rbInputTLPA
+            // m_rbInputTLPA
             // 
-            this.rbInputTLPA.AutoSize = true;
-            this.rbInputTLPA.Location = new System.Drawing.Point(7, 65);
-            this.rbInputTLPA.Name = "rbInputTLPA";
-            this.rbInputTLPA.Size = new System.Drawing.Size(187, 17);
-            this.rbInputTLPA.TabIndex = 8;
-            this.rbInputTLPA.TabStop = true;
-            this.rbInputTLPA.Text = "TLPA：輸入TLPA，輸出為台羅";
-            this.rbInputTLPA.UseVisualStyleBackColor = true;
+            this.m_rbInputTLPA.AutoSize = true;
+            this.m_rbInputTLPA.Location = new System.Drawing.Point(7, 65);
+            this.m_rbInputTLPA.Name = "m_rbInputTLPA";
+            this.m_rbInputTLPA.Size = new System.Drawing.Size(187, 17);
+            this.m_rbInputTLPA.TabIndex = 8;
+            this.m_rbInputTLPA.TabStop = true;
+            this.m_rbInputTLPA.Text = "TLPA：輸入TLPA，輸出為台羅";
+            this.m_rbInputTLPA.UseVisualStyleBackColor = true;
             // 
-            // rbInputPOJ
+            // m_rbInputPOJ
             // 
-            this.rbInputPOJ.AutoSize = true;
-            this.rbInputPOJ.Location = new System.Drawing.Point(7, 42);
-            this.rbInputPOJ.Name = "rbInputPOJ";
-            this.rbInputPOJ.Size = new System.Drawing.Size(233, 17);
-            this.rbInputPOJ.TabIndex = 7;
-            this.rbInputPOJ.TabStop = true;
-            this.rbInputPOJ.Text = "白話字（POJ）：輸入POJ，輸出為台羅";
-            this.rbInputPOJ.UseVisualStyleBackColor = true;
+            this.m_rbInputPOJ.AutoSize = true;
+            this.m_rbInputPOJ.Location = new System.Drawing.Point(7, 42);
+            this.m_rbInputPOJ.Name = "m_rbInputPOJ";
+            this.m_rbInputPOJ.Size = new System.Drawing.Size(233, 17);
+            this.m_rbInputPOJ.TabIndex = 7;
+            this.m_rbInputPOJ.TabStop = true;
+            this.m_rbInputPOJ.Text = "白話字（POJ）：輸入POJ，輸出為台羅";
+            this.m_rbInputPOJ.UseVisualStyleBackColor = true;
             // 
-            // rbInputTL
+            // m_rbInputTL
             // 
-            this.rbInputTL.AutoSize = true;
-            this.rbInputTL.Location = new System.Drawing.Point(7, 19);
-            this.rbInputTL.Name = "rbInputTL";
-            this.rbInputTL.Size = new System.Drawing.Size(86, 17);
-            this.rbInputTL.TabIndex = 6;
-            this.rbInputTL.TabStop = true;
-            this.rbInputTL.Text = "台羅（TL）";
-            this.rbInputTL.UseVisualStyleBackColor = true;
+            this.m_rbInputTL.AutoSize = true;
+            this.m_rbInputTL.Location = new System.Drawing.Point(7, 19);
+            this.m_rbInputTL.Name = "m_rbInputTL";
+            this.m_rbInputTL.Size = new System.Drawing.Size(86, 17);
+            this.m_rbInputTL.TabIndex = 6;
+            this.m_rbInputTL.TabStop = true;
+            this.m_rbInputTL.Text = "台羅（TL）";
+            this.m_rbInputTL.UseVisualStyleBackColor = true;
             // 
             // PanelTLIM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.Controls.Add(this.pnSelf);
+            this.Controls.Add(this.m_pnSelf);
             this.Name = "PanelTLIM";
             this.Size = new System.Drawing.Size(287, 459);
-            this.pnSelf.ResumeLayout(false);
-            this.gbSpellCheck.ResumeLayout(false);
-            this.gbSpellCheck.PerformLayout();
-            this.gbTypingOrder.ResumeLayout(false);
-            this.gbTypingOrder.PerformLayout();
-            this.gbSyllableTypeOutput.ResumeLayout(false);
-            this.gbSyllableTypeOutput.PerformLayout();
-            this.gbSyllableTypeInput.ResumeLayout(false);
-            this.gbSyllableTypeInput.PerformLayout();
+            this.m_pnSelf.ResumeLayout(false);
+            this.m_gbSpellCheck.ResumeLayout(false);
+            this.m_gbSpellCheck.PerformLayout();
+            this.m_gbTypingOrder.ResumeLayout(false);
+            this.m_gbTypingOrder.PerformLayout();
+            this.m_gbSyllableTypeOutput.ResumeLayout(false);
+            this.m_gbSyllableTypeOutput.PerformLayout();
+            this.m_gbSyllableTypeInput.ResumeLayout(false);
+            this.m_gbSyllableTypeInput.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,22 +262,22 @@ namespace OVPreference.CS2
 
         #endregion
 
-        private System.Windows.Forms.Panel pnSelf;
-        private System.Windows.Forms.GroupBox gbSpellCheck;
-        private System.Windows.Forms.Label lbToneMark;
-        private System.Windows.Forms.Label lbDiacritics;
-        private System.Windows.Forms.CheckBox cbForcePOJStyle;
-        private System.Windows.Forms.CheckBox cbNormalize;
-        private System.Windows.Forms.GroupBox gbTypingOrder;
-        private System.Windows.Forms.RadioButton rbDiacriticEnd;
-        private System.Windows.Forms.RadioButton rbDiacriticFront;
-        private System.Windows.Forms.GroupBox gbSyllableTypeOutput;
-        private System.Windows.Forms.RadioButton rbOutputPOJ;
-        private System.Windows.Forms.RadioButton rbOutputTL;
-        private System.Windows.Forms.GroupBox gbSyllableTypeInput;
-        private System.Windows.Forms.RadioButton rbInputDT;
-        private System.Windows.Forms.RadioButton rbInputTLPA;
-        private System.Windows.Forms.RadioButton rbInputPOJ;
-        private System.Windows.Forms.RadioButton rbInputTL;
+        private System.Windows.Forms.Panel m_pnSelf;
+        private System.Windows.Forms.GroupBox m_gbSpellCheck;
+        private System.Windows.Forms.Label m_lbToneMark;
+        private System.Windows.Forms.Label m_lbDiacritics;
+        private System.Windows.Forms.CheckBox m_cbForcePOJStyle;
+        private System.Windows.Forms.CheckBox m_cbNormalize;
+        private System.Windows.Forms.GroupBox m_gbTypingOrder;
+        private System.Windows.Forms.RadioButton m_rbDiacriticEnd;
+        private System.Windows.Forms.RadioButton m_rbDiacriticFront;
+        private System.Windows.Forms.GroupBox m_gbSyllableTypeOutput;
+        private System.Windows.Forms.RadioButton m_rbOutputPOJ;
+        private System.Windows.Forms.RadioButton m_rbOutputTL;
+        private System.Windows.Forms.GroupBox m_gbSyllableTypeInput;
+        private System.Windows.Forms.RadioButton m_rbInputDT;
+        private System.Windows.Forms.RadioButton m_rbInputTLPA;
+        private System.Windows.Forms.RadioButton m_rbInputPOJ;
+        private System.Windows.Forms.RadioButton m_rbInputTL;
     }
 }

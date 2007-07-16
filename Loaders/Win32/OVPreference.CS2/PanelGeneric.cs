@@ -56,16 +56,16 @@ namespace OVPreference.CS2
                 Convert.ToBoolean(Convert.ToInt32(
                     m_ovConf.settings["warningBeep"]));
 
-            cbAutoCompose.Checked = m_doAutoCompose;
-            cbHitMaxAndCompose.Checked = m_doHitMaxAndCompose;
-            tbMaxKeySequenceLength.Text = m_maxKeySequenceLength.ToString();
-            cbShiftSelectionKey.Checked = m_doShiftSelectionKey;
-            cbWarningBeep.Checked = m_doWarningBeep;
+            m_cbAutoCompose.Checked = m_doAutoCompose;
+            m_cbHitMaxAndCompose.Checked = m_doHitMaxAndCompose;
+            m_tbMaxKeySequenceLength.Text = m_maxKeySequenceLength.ToString();
+            m_cbShiftSelectionKey.Checked = m_doShiftSelectionKey;
+            m_cbWarningBeep.Checked = m_doWarningBeep;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            m_doShiftSelectionKey = cbShiftSelectionKey.Checked;
+            m_doShiftSelectionKey = m_cbShiftSelectionKey.Checked;
             XmlNode nodeShiftSelectionKey =
                 m_ovConfDOM.SelectSingleNode(
                     "/OpenVanilla/dict[@name='" +
@@ -77,7 +77,7 @@ namespace OVPreference.CS2
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            m_doAutoCompose = cbAutoCompose.Checked;
+            m_doAutoCompose = m_cbAutoCompose.Checked;
             XmlNode nodeAutoCompose =
                 m_ovConfDOM.SelectSingleNode(
                     "/OpenVanilla/dict[@name='" +
@@ -89,7 +89,7 @@ namespace OVPreference.CS2
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
-            m_doHitMaxAndCompose = cbHitMaxAndCompose.Checked;
+            m_doHitMaxAndCompose = m_cbHitMaxAndCompose.Checked;
             XmlNode nodeHitMaxAndCompose =
                 m_ovConfDOM.SelectSingleNode(
                     "/OpenVanilla/dict[@name='" +
@@ -101,7 +101,7 @@ namespace OVPreference.CS2
 
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
         {
-            m_doWarningBeep = cbWarningBeep.Checked;
+            m_doWarningBeep = m_cbWarningBeep.Checked;
             XmlNode nodeWarningBeep =
                 m_ovConfDOM.SelectSingleNode(
                     "/OpenVanilla/dict[@name='" +
@@ -113,8 +113,8 @@ namespace OVPreference.CS2
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (tbMaxKeySequenceLength.Text.Length == 0) return;
-            m_maxKeySequenceLength = Convert.ToInt32(tbMaxKeySequenceLength.Text);
+            if (m_tbMaxKeySequenceLength.Text.Length == 0) return;
+            m_maxKeySequenceLength = Convert.ToInt32(m_tbMaxKeySequenceLength.Text);
             XmlNode nodeMaxKeySequenceLength =
                 m_ovConfDOM.SelectSingleNode(
                     "/OpenVanilla/dict[@name='" +
