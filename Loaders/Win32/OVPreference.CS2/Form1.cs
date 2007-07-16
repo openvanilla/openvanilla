@@ -51,8 +51,7 @@ namespace OVPreference.CS2
                 }
                 else
                 {
-                    if (!isGenericTabAdded &&
-                        conf.moduleName.StartsWith("OVIMGeneric"))
+                    if (conf.moduleName.StartsWith("OVIMGeneric"))
                     {
                         isGenericTabAdded = true;
                         this.AddTabGeneric(conf, m_ovConfDOM);
