@@ -37,6 +37,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComparerOVConfig.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -50,6 +51,12 @@
     <Compile Include="PanelGeneric.Designer.cs">
       <DependentUpon>PanelGeneric.cs</DependentUpon>
     </Compile>
+    <Compile Include="PanelModuleList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelModuleList.Designer.cs">
+      <DependentUpon>PanelModuleList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -59,6 +66,10 @@
     <EmbeddedResource Include="PanelGeneric.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PanelGeneric.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelModuleList.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelModuleList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
