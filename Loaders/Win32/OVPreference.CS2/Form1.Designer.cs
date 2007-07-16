@@ -37,10 +37,10 @@ namespace OVPreference.CS2
             // 
             // m_btSave
             // 
-            this.m_btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.m_btSave.Location = new System.Drawing.Point(185, 342);
+            this.m_btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.m_btSave.Location = new System.Drawing.Point(215, 248);
             this.m_btSave.Name = "m_btSave";
-            this.m_btSave.Size = new System.Drawing.Size(94, 25);
+            this.m_btSave.Size = new System.Drawing.Size(94, 22);
             this.m_btSave.TabIndex = 12;
             this.m_btSave.Text = "Àx¦s¨ÃÂ÷¶}";
             this.m_btSave.UseVisualStyleBackColor = true;
@@ -48,10 +48,12 @@ namespace OVPreference.CS2
             // 
             // m_tcSelf
             // 
+            this.m_tcSelf.Dock = System.Windows.Forms.DockStyle.Fill;
             this.m_tcSelf.Location = new System.Drawing.Point(3, 3);
             this.m_tcSelf.Name = "m_tcSelf";
             this.m_tcSelf.SelectedIndex = 0;
-            this.m_tcSelf.Size = new System.Drawing.Size(276, 333);
+            this.m_tcSelf.Size = new System.Drawing.Size(306, 239);
+            this.m_tcSelf.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.m_tcSelf.TabIndex = 13;
             // 
             // m_tlSelf
@@ -59,22 +61,23 @@ namespace OVPreference.CS2
             this.m_tlSelf.AutoSize = true;
             this.m_tlSelf.ColumnCount = 1;
             this.m_tlSelf.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.m_tlSelf.Controls.Add(this.m_btSave, 0, 1);
             this.m_tlSelf.Controls.Add(this.m_tcSelf, 0, 0);
-            this.m_tlSelf.Location = new System.Drawing.Point(14, 12);
+            this.m_tlSelf.Controls.Add(this.m_btSave, 0, 1);
+            this.m_tlSelf.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.m_tlSelf.Location = new System.Drawing.Point(0, 0);
             this.m_tlSelf.Name = "m_tlSelf";
             this.m_tlSelf.RowCount = 2;
-            this.m_tlSelf.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.m_tlSelf.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.m_tlSelf.Size = new System.Drawing.Size(282, 372);
+            this.m_tlSelf.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.m_tlSelf.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.m_tlSelf.Size = new System.Drawing.Size(312, 273);
             this.m_tlSelf.TabIndex = 14;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(311, 397);
+            this.ClientSize = new System.Drawing.Size(312, 273);
             this.Controls.Add(this.m_tlSelf);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -90,6 +93,7 @@ namespace OVPreference.CS2
         private System.Windows.Forms.Button m_btSave;
         private System.Windows.Forms.TabControl m_tcSelf;
         private System.Windows.Forms.TableLayoutPanel m_tlSelf;
+
     }
 }
 

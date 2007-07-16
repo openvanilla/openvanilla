@@ -20,8 +20,6 @@ namespace OVPreference.CS2
             "config.xml";
         private XmlDocument m_ovConfDOM = new XmlDocument();
 
-        private bool isGenericTabAdded = false;
-
         public Form1()
         {
             InitializeComponent();
@@ -49,13 +47,9 @@ namespace OVPreference.CS2
                 {
                     this.AddTabTLIM(conf, m_ovConfDOM);
                 }
-                else
+                else if (conf.moduleName.StartsWith("OVIMGeneric"))
                 {
-                    if (conf.moduleName.StartsWith("OVIMGeneric"))
-                    {
-                        isGenericTabAdded = true;
                         this.AddTabGeneric(conf, m_ovConfDOM);
-                    }
                 }
             }
             this.AddTabModuleList(pnModuleList);
@@ -66,7 +60,6 @@ namespace OVPreference.CS2
             TabPage tpModuleList = new TabPage("Module List");
             tpModuleList.Controls.Add(pnModuleList);
             this.m_tcSelf.Controls.Add(tpModuleList);
-            //this.m_tcSelf.Controls.SetChildIndex(tpModuleList, 0);
 
             this.SetSize(tpModuleList);
         }

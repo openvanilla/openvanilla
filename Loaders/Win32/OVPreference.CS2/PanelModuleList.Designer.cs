@@ -42,17 +42,19 @@ namespace OVPreference.CS2
             // 
             this.m_pnSelf.AutoSize = true;
             this.m_pnSelf.Controls.Add(this.m_clModuleList);
-            this.m_pnSelf.Location = new System.Drawing.Point(9, 8);
+            this.m_pnSelf.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.m_pnSelf.Location = new System.Drawing.Point(0, 0);
             this.m_pnSelf.Name = "m_pnSelf";
-            this.m_pnSelf.Size = new System.Drawing.Size(243, 166);
+            this.m_pnSelf.Size = new System.Drawing.Size(320, 240);
             this.m_pnSelf.TabIndex = 0;
             // 
             // m_clModuleList
             // 
+            this.m_clModuleList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.m_clModuleList.FormattingEnabled = true;
-            this.m_clModuleList.Location = new System.Drawing.Point(11, 12);
+            this.m_clModuleList.Location = new System.Drawing.Point(0, 0);
             this.m_clModuleList.Name = "m_clModuleList";
-            this.m_clModuleList.Size = new System.Drawing.Size(221, 140);
+            this.m_clModuleList.Size = new System.Drawing.Size(320, 225);
             this.m_clModuleList.TabIndex = 0;
             this.m_clModuleList.SelectedIndexChanged += new System.EventHandler(this.m_clModuleList_SelectedIndexChanged);
             // 
@@ -63,7 +65,7 @@ namespace OVPreference.CS2
             this.AutoSize = true;
             this.Controls.Add(this.m_pnSelf);
             this.Name = "PanelModuleList";
-            this.Size = new System.Drawing.Size(260, 183);
+            this.Size = new System.Drawing.Size(320, 240);
             this.m_pnSelf.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
