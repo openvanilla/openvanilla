@@ -12,7 +12,7 @@ namespace OVPreference.CS2
     public partial class PanelGeneric : UserControl
     {
         private OVConfig m_ovConf = null;
-        private XmlDocument m_ovConfDOM = new XmlDocument();
+        private XmlDocument m_ovConfDOM = null;
 
         private bool m_doAutoCompose;
         private bool m_isEnabled;

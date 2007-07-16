@@ -34,7 +34,7 @@ namespace OVPreference.CS2
             comparer.SortBy = EnumSortBy.Enabled;
             m_ovConfList.Sort(comparer);
 
-            PanelModuleList pnModuleList = new PanelModuleList();
+            PanelModuleList pnModuleList = new PanelModuleList(m_ovConfDOM);
             foreach (OVConfig conf in m_ovConfList)
             {
                 bool isEnabled = false;

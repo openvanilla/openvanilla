@@ -12,7 +12,7 @@ namespace OVPreference.CS2
     public partial class PanelTLIM : UserControl
     {
         private OVConfig m_ovConf = null;
-        private XmlDocument m_ovConfDOM = new XmlDocument();
+        private XmlDocument m_ovConfDOM = null;
 
         protected int m_inputType;
         protected int m_outputType;
