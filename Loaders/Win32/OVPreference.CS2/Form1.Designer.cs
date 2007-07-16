@@ -44,7 +44,7 @@ namespace OVPreference.CS2
             this.m_btSave.TabIndex = 12;
             this.m_btSave.Text = "Àx¦s¨ÃÂ÷¶}";
             this.m_btSave.UseVisualStyleBackColor = true;
-            this.m_btSave.Click += new System.EventHandler(this.saveButton_Click);
+            this.m_btSave.Click += new System.EventHandler(this.m_btSave_Click);
             // 
             // m_tcSelf
             // 

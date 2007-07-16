@@ -40,6 +40,7 @@ namespace OVPreference.CS2
             // 
             // m_pnSelf
             // 
+            this.m_pnSelf.AutoSize = true;
             this.m_pnSelf.Controls.Add(this.m_clModuleList);
             this.m_pnSelf.Location = new System.Drawing.Point(9, 9);
             this.m_pnSelf.Name = "m_pnSelf";
@@ -56,6 +57,7 @@ namespace OVPreference.CS2
             // 
             // PanelModuleList
             // 
+            this.AutoSize = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.m_pnSelf);
@@ -63,7 +65,6 @@ namespace OVPreference.CS2
             this.Size = new System.Drawing.Size(260, 198);
             this.m_pnSelf.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
         #endregion

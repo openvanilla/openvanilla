@@ -26,7 +26,7 @@ namespace OVPreference.CS2
         {
             InitializeComponent();
 
-            loadData();
+            LoadData();
 
             ComparerOVConfig comparer = new ComparerOVConfig();
             comparer.SortBy = EnumSortBy.Priority;
@@ -37,11 +37,13 @@ namespace OVPreference.CS2
             PanelModuleList pnModuleList = new PanelModuleList();
             foreach (OVConfig conf in m_ovConfList)
             {
-                pnModuleList.AddModule(
-                    conf.moduleName,
-                    Convert.ToBoolean(
-                        Convert.ToInt32(
-                            conf.settings["enabled"])));
+                bool isEnabled = false;
+                if(conf.settings.ContainsKey("enable"))
+                    isEnabled =
+                        Convert.ToBoolean(
+                            Convert.ToInt32(
+                                conf.settings["enable"]));
+                pnModuleList.AddModule(conf.moduleName, isEnabled);
 
                 if (conf.moduleName.Equals("TLIM"))
                 {
@@ -65,13 +67,9 @@ namespace OVPreference.CS2
             TabPage tpModuleList = new TabPage("Module List");
             tpModuleList.Controls.Add(pnModuleList);
             this.m_tcSelf.Controls.Add(tpModuleList);
+            //this.m_tcSelf.Controls.SetChildIndex(tpModuleList, 0);
 
-            Control control = tpModuleList;
-            while (control.Parent != null)
-            {
-                control.Parent.ClientSize = control.Size;
-                control = control.Parent;
-            }
+            this.SetSize(tpModuleList);
         }
 
         protected void AddTabGeneric(OVConfig conf, XmlDocument confDOM)
@@ -80,14 +78,9 @@ namespace OVPreference.CS2
             TabPage tpGeneric = new TabPage(conf.moduleName);
 
             tpGeneric.Controls.Add(pnGeneric);
-            tpGeneric.ClientSize = pnGeneric.Size;
-
             this.m_tcSelf.Controls.Add(tpGeneric);
-            this.m_tcSelf.ClientSize = tpGeneric.Size;
 
-            this.m_tlSelf.ClientSize = this.m_tcSelf.Size;
-
-            this.ClientSize = this.m_tlSelf.Size;
+            this.SetSize(pnGeneric);
         }
 
         protected void AddTabTLIM(OVConfig conf, XmlDocument confDOM)
@@ -96,17 +89,22 @@ namespace OVPreference.CS2
             TabPage tpTLIM = new TabPage(conf.moduleName);
 
             tpTLIM.Controls.Add(pnTLIM);
-            tpTLIM.ClientSize = pnTLIM.Size;
-
             this.m_tcSelf.Controls.Add(tpTLIM);
-            this.m_tcSelf.ClientSize = tpTLIM.Size;
 
-            this.m_tlSelf.ClientSize = this.m_tcSelf.Size;
-
-            this.ClientSize = this.m_tlSelf.Size;
+            this.SetSize(pnTLIM);
         }
 
-        private void loadData()
+        private void SetSize(Control innerControl)
+        {
+            while (innerControl.Parent != null)
+            {
+                innerControl.Size = innerControl.PreferredSize;
+                innerControl.Parent.ClientSize = innerControl.Size;
+                innerControl = innerControl.Parent;
+            }
+        }
+
+        private void LoadData()
         {
             //MessageBox.Show("Loads XML config here");
             m_ovConfDOM.Load(m_ovConfPath);
@@ -170,16 +168,16 @@ namespace OVPreference.CS2
             }
         }
 
-        private void saveData()
+        private void SaveData()
         {
             //MessageBox.Show("i=" + m_inputType + ", o=" + m_outputType + ", m_diacriticOption=" + m_diacriticOption + ", m_doNormalize=" + m_doNormalize + ", m_doForcePOJStyle=" + m_doForcePOJStyle);
             m_ovConfDOM.Save(m_ovConfPath);
             this.Close();
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private void m_btSave_Click(object sender, EventArgs e)
         {
-            saveData();
+            SaveData();
         }
     }
 }

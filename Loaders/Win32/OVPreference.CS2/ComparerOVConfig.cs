@@ -29,14 +29,24 @@ namespace OVPreference.CS2
             switch (m_sortBy)
             {
                 case EnumSortBy.Priority:
-                    diff =
-                        Convert.ToInt32(x.settings["priority"]) -
-                        Convert.ToInt32(y.settings["priority"]);
+                    int priorityX = 0;
+                    int priorityY = 0;
+                    if (x.settings.ContainsKey("priority"))
+                        priorityX = Convert.ToInt32(x.settings["priority"]);
+                    if (y.settings.ContainsKey("priority"))
+                        priorityY = Convert.ToInt32(y.settings["priority"]);
+                    
+                    diff = priorityX - priorityY;                        
                     break;
                 case EnumSortBy.Enabled:
-                    diff =
-                        Convert.ToInt32(x.settings["enabled"]) -
-                        Convert.ToInt32(y.settings["enabled"]);
+                    int enabledX = 0;
+                    int enabledY = 0;
+                    if (x.settings.ContainsKey("enable"))
+                        enabledX = Convert.ToInt32(x.settings["enable"]);
+                    if (y.settings.ContainsKey("enable"))
+                        enabledY = Convert.ToInt32(y.settings["enable"]);
+
+                    diff = enabledX - enabledY;
                     break;
                 default:
                     break;
