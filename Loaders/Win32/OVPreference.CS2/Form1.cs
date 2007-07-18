@@ -59,7 +59,15 @@ namespace OVPreference.CS2
         {
             TabPage tpModuleList = new TabPage("Module List");
             tpModuleList.Controls.Add(pnModuleList);
-            this.m_tcSelf.Controls.Add(tpModuleList);
+            //this.m_tcSelf.Controls.Add(tpModuleList);
+
+            //<comment author='b6s'>
+            IntPtr h = this.m_tcSelf.Handle;
+            // It's a bug that TabControl.Handle has to be touched manually
+            // Before TabControl.TabPages.Insert() is invoked.
+            this.m_tcSelf.TabPages.Insert(0, tpModuleList);
+            //</comment>
+            this.m_tcSelf.SelectTab(0);
 
             this.SetSize(tpModuleList);
         }
@@ -70,7 +78,7 @@ namespace OVPreference.CS2
             TabPage tpGeneric = new TabPage(conf.moduleName);
 
             tpGeneric.Controls.Add(pnGeneric);
-            this.m_tcSelf.Controls.Add(tpGeneric);
+            this.m_tcSelf.TabPages.Add(tpGeneric);
 
             this.SetSize(pnGeneric);
         }
@@ -81,17 +89,41 @@ namespace OVPreference.CS2
             TabPage tpTLIM = new TabPage(conf.moduleName);
 
             tpTLIM.Controls.Add(pnTLIM);
-            this.m_tcSelf.Controls.Add(tpTLIM);
+            this.m_tcSelf.TabPages.Add(tpTLIM);
 
             this.SetSize(pnTLIM);
         }
 
         private void SetSize(Control innerControl)
         {
+            if (innerControl == null) return;
+            //<comment author='b6s'>
+            innerControl.ClientSize = innerControl.PreferredSize;
+            // It's a trick to change the smaller ClientSize to
+            // a larger PreferredSize to reserve more spaces.
+            //</comment>
+
+            //<comment author='b6s'>
+            // A while loop insteads recusive calls of SetSize()
+            // since the size of Parent must connect to Child's.
+            //</comment>
             while (innerControl.Parent != null)
             {
-                innerControl.Size = innerControl.PreferredSize;
-                innerControl.Parent.ClientSize = innerControl.Size;
+                if (innerControl.Parent.ClientSize.Width
+                        < innerControl.PreferredSize.Width
+                    ||
+                    innerControl.Parent.ClientSize.Height
+                        < innerControl.PreferredSize.Height)
+                {
+                    //<comment author='b6s'>
+                    innerControl.Parent.ClientSize =
+                        innerControl.PreferredSize;
+                    innerControl.Parent.ClientSize =
+                        innerControl.Parent.PreferredSize;
+                    // It's a trick to change ClientSize twice.
+                    //</comment>
+                }
+                
                 innerControl = innerControl.Parent;
             }
         }

@@ -59,10 +59,11 @@ namespace OVPreference.CS2
             this.m_pnSelf.Controls.Add(this.m_gbTypingOrder);
             this.m_pnSelf.Controls.Add(this.m_gbSyllableTypeOutput);
             this.m_pnSelf.Controls.Add(this.m_gbSyllableTypeInput);
-            this.m_pnSelf.Location = new System.Drawing.Point(15, 10);
+            this.m_pnSelf.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.m_pnSelf.Location = new System.Drawing.Point(0, 0);
             this.m_pnSelf.Name = "m_pnSelf";
             this.m_pnSelf.Padding = new System.Windows.Forms.Padding(3);
-            this.m_pnSelf.Size = new System.Drawing.Size(257, 438);
+            this.m_pnSelf.Size = new System.Drawing.Size(287, 459);
             this.m_pnSelf.TabIndex = 1;
             this.m_pnSelf.Text = "台羅輸入法";
             // 
@@ -74,7 +75,7 @@ namespace OVPreference.CS2
             this.m_gbSpellCheck.Controls.Add(this.m_cbNormalize);
             this.m_gbSpellCheck.Location = new System.Drawing.Point(8, 297);
             this.m_gbSpellCheck.Name = "m_gbSpellCheck";
-            this.m_gbSpellCheck.Size = new System.Drawing.Size(242, 133);
+            this.m_gbSpellCheck.Size = new System.Drawing.Size(242, 141);
             this.m_gbSpellCheck.TabIndex = 11;
             this.m_gbSpellCheck.TabStop = false;
             this.m_gbSpellCheck.Text = "拼寫與調符自動檢查";
