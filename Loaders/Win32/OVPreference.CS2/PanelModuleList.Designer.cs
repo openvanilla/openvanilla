@@ -50,13 +50,31 @@ namespace OVPreference.CS2
             // 
             // m_clModuleList
             // 
+            this.m_clModuleList.AllowDrop = true;
             this.m_clModuleList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.m_clModuleList.FormattingEnabled = true;
             this.m_clModuleList.Location = new System.Drawing.Point(0, 0);
             this.m_clModuleList.Name = "m_clModuleList";
             this.m_clModuleList.Size = new System.Drawing.Size(320, 259);
             this.m_clModuleList.TabIndex = 0;
-            this.m_clModuleList.SelectedIndexChanged += new System.EventHandler(this.m_clModuleList_SelectedIndexChanged);
+            this.m_clModuleList.ItemCheck +=
+                new System.Windows.Forms.ItemCheckEventHandler(
+                    m_clModuleList_ItemCheck);
+            this.m_clModuleList.MouseDown +=
+                new System.Windows.Forms.MouseEventHandler(
+                    m_clModuleList_MouseDown);
+            this.m_clModuleList.MouseMove +=
+                new System.Windows.Forms.MouseEventHandler(
+                    m_clModuleList_MouseMove);
+            this.m_clModuleList.MouseUp +=
+                new System.Windows.Forms.MouseEventHandler(
+                    m_clModuleList_MouseUp);
+            this.m_clModuleList.DragDrop +=
+                new System.Windows.Forms.DragEventHandler(
+                    m_clModuleList_DragDrop);
+            this.m_clModuleList.DragOver +=
+                new System.Windows.Forms.DragEventHandler(
+                    m_clModuleList_DragOver);
             // 
             // PanelModuleList
             // 
@@ -76,6 +94,5 @@ namespace OVPreference.CS2
 
         private System.Windows.Forms.Panel m_pnSelf;
         private System.Windows.Forms.CheckedListBox m_clModuleList;
-
     }
 }
