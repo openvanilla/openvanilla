@@ -29,8 +29,12 @@ namespace OVPreference.CS2
             ComparerOVConfig comparer = new ComparerOVConfig();
             comparer.SortBy = EnumSortBy.Priority;
             m_ovConfList.Sort(comparer);
-            comparer.SortBy = EnumSortBy.Enabled;
-            m_ovConfList.Sort(comparer);
+            //<comment author='b6s'>
+            // The following code is useless
+            // since C# does not have a stable sort.
+            //comparer.SortBy = EnumSortBy.Enabled;
+            //m_ovConfList.Sort(comparer);
+            //</commnet>
 
             PanelModuleList pnModuleList = new PanelModuleList(m_ovConfDOM);
             foreach (OVConfig conf in m_ovConfList)

@@ -45,6 +45,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="OVConfig.cs" />
+    <Compile Include="OVConfigDomWriter.cs" />
     <Compile Include="PanelGeneric.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -13,32 +13,25 @@ namespace OVPreference.CS2
         private XmlDocument m_ovConfDOM = null;
         private bool m_isMouseDown = false;
         private int m_draggingIndex = -1;
+        private OVConfigDomWriter m_ovConfDomWriter = null;
 
-        public PanelModuleList(XmlDocument confDOM)
+        public PanelModuleList(XmlDocument ovConfDOM)
         {
-            m_ovConfDOM = confDOM;
+            m_ovConfDOM = ovConfDOM;
+            m_ovConfDomWriter = new OVConfigDomWriter(m_ovConfDOM);
 
             InitializeComponent();
         }
 
         private void SetModulePriority()
         {
-            int priority = 0;
+            int priority = m_clModuleList.Items.Count;
             foreach (object item in m_clModuleList.Items)
             {
                 string moduleName = item.ToString();
-                XmlNode nodeModule =
-                    m_ovConfDOM.SelectSingleNode(
-                        "/OpenVanilla/dict[@name='" + moduleName +
-                            "']/key[@name='priority']");
-                if (nodeModule == null)
-                {
-                    //<comment author='b6s'> TODO...
-                    return;
-                    //</comment>
-                }
-                nodeModule.Attributes["value"].Value = priority.ToString();
-                priority++;
+                m_ovConfDomWriter.SetAttribute(
+                    moduleName, "priority", priority.ToString());
+                priority--;
             }
         }
 
@@ -47,13 +40,10 @@ namespace OVPreference.CS2
             if (e.Index < 0) return;
             string checkedModuleName =
                 m_clModuleList.Items[e.Index].ToString();
-
-            XmlNode nodeCheckedModule =
-                m_ovConfDOM.SelectSingleNode(
-                    "/OpenVanilla/dict[@name='" + checkedModuleName +
-                        "']/key[@name='enable']");
-            nodeCheckedModule.Attributes["value"].Value =
-                e.NewValue.Equals(CheckState.Checked) ? "1" : "0";
+            m_ovConfDomWriter.SetAttribute(
+                checkedModuleName,
+                "enable",
+                e.NewValue.Equals(CheckState.Checked) ? "1" : "0");
         }
 
         private void m_clModuleList_MouseDown(object sender, MouseEventArgs e)
