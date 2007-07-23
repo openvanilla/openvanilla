@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OVPreference.CS2</RootNamespace>
     <AssemblyName>OVPreference.CS2</AssemblyName>
-    <ApplicationIcon>Icon1.ico</ApplicationIcon>
+    <ApplicationIcon>OVPreference.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,11 +38,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComparerOVConfig.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="OVPrefrence.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="OVPrefrence.Designer.cs">
+      <DependentUpon>OVPrefrence.cs</DependentUpon>
     </Compile>
     <Compile Include="OVConfig.cs" />
     <Compile Include="OVConfigDomWriter.cs" />
@@ -60,9 +60,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="OVPrefrence.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>Form1.cs</DependentUpon>
+      <DependentUpon>OVPrefrence.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelGeneric.resx">
       <SubType>Designer</SubType>
@@ -103,7 +103,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icon1.ico" />
+    <Content Include="OVPreference.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace OVPreference.CS2
 {
-    public partial class Form1 : Form
+    public partial class OVPrefrence : Form
     {
         private List<OVConfig> m_ovConfList = new List<OVConfig>();
         private static string m_ovConfPath =
@@ -20,7 +20,7 @@ namespace OVPreference.CS2
             "config.xml";
         private XmlDocument m_ovConfDOM = new XmlDocument();
 
-        public Form1()
+        public OVPrefrence()
         {
             InitializeComponent();
 

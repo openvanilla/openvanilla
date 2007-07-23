@@ -1,6 +1,6 @@
 namespace OVPreference.CS2
 {
-    partial class Form1
+    partial class OVPrefrence
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace OVPreference.CS2
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OVPrefrence));
             this.m_btSave = new System.Windows.Forms.Button();
             this.m_tcSelf = new System.Windows.Forms.TabControl();
             this.m_tlSelf = new System.Windows.Forms.TableLayoutPanel();
@@ -72,7 +72,7 @@ namespace OVPreference.CS2
             this.m_tlSelf.Size = new System.Drawing.Size(312, 273);
             this.m_tlSelf.TabIndex = 14;
             // 
-            // Form1
+            // OVPrefrence
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -80,7 +80,7 @@ namespace OVPreference.CS2
             this.ClientSize = new System.Drawing.Size(312, 273);
             this.Controls.Add(this.m_tlSelf);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "OVPrefrence";
             this.Text = "°¾¦n³]©w";
             this.m_tlSelf.ResumeLayout(false);
             this.ResumeLayout(false);
