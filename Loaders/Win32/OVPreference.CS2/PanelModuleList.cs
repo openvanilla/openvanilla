@@ -14,6 +14,8 @@ namespace OVPreference.CS2
         private bool m_isMouseDown = false;
         private int m_draggingIndex = -1;
         private OVConfigDomWriter m_ovConfDomWriter = null;
+        private Point m_previousLineBegin;
+        private Point m_previousLineEnd;
 
         public PanelModuleList(XmlDocument ovConfDOM)
         {
@@ -113,7 +115,31 @@ namespace OVPreference.CS2
         private void m_clModuleList_DragOver(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.Text))
+            {
                 e.Effect = DragDropEffects.Move;
+                int overIndex =
+                    m_clModuleList.IndexFromPoint(
+                        m_clModuleList.PointToClient(new Point(e.X, e.Y)));
+
+                Rectangle r = m_clModuleList.GetItemRectangle(overIndex);
+                Graphics g = m_clModuleList.CreateGraphics();
+                if(!m_previousLineBegin.IsEmpty && !m_previousLineEnd.IsEmpty)
+                    g.DrawLine(
+                        new Pen(m_clModuleList.BackColor),
+                        m_previousLineBegin,
+                        m_previousLineEnd);
+                m_previousLineBegin =
+                    new Point(
+                        r.Left,
+                        overIndex > m_draggingIndex? r.Bottom: r.Top);
+                m_previousLineEnd =
+                    new Point(r.Right,
+                        overIndex > m_draggingIndex? r.Bottom: r.Top);
+                g.DrawLine(
+                    new Pen(m_clModuleList.ForeColor),
+                    m_previousLineBegin,
+                    m_previousLineEnd);
+            }
             else
                 e.Effect = DragDropEffects.None;
         }
