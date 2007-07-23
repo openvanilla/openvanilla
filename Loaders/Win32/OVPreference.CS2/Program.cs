@@ -13,6 +13,17 @@ namespace OVPreference.CS2
         static void Main()
         {
             Application.EnableVisualStyles();
+
+            //It would be much better to initialize the thread¡¦s UICulture and Culture 
+            //when the thread is first created, and decouple it from a specific form¡¦s code. 
+            //This can be handled in the Main() entry point
+            System.Threading.Thread.CurrentThread.CurrentUICulture = 
+                new System.Globalization.CultureInfo(Properties.Settings.Default.UICulture);
+
+            System.Threading.Thread.CurrentThread.CurrentCulture =
+            System.Globalization.CultureInfo.CreateSpecificCulture
+                  (Properties.Settings.Default.Culture);
+
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new OVPrefrence());
         }

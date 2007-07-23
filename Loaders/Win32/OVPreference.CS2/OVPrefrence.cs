@@ -22,6 +22,20 @@ namespace OVPreference.CS2
 
         public OVPrefrence()
         {
+
+            //Runtime Culture
+            //The main thread・s UICulture must be set to the appropriate value prior to 
+            //initializing form and control properties with a ResourceManager instance. 
+            //Typically you・ll see this handled in the main form・s constructor.
+            //However, it is better initialize the thread・s UICulture and Culture 
+            //when the thread is first created, and decouple it from a specific form・s code.
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = 
+            //    new System.Globalization.CultureInfo(Properties.Settings.Default.UICulture);
+
+            //System.Threading.Thread.CurrentThread.CurrentCulture =
+            //System.Globalization.CultureInfo.CreateSpecificCulture
+            //    (Properties.Settings.Default.Culture);
+            
             InitializeComponent();
 
             LoadData();
