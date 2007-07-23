@@ -18,7 +18,7 @@ namespace OVPreference.CS2
             System.IO.Path.DirectorySeparatorChar +
             "OpenVanilla" + System.IO.Path.DirectorySeparatorChar +
             "config.xml";
-        private XmlDocument m_ovConfDOM = new XmlDocument();
+        private XmlDocument m_ovConfDom = new XmlDocument();
 
         public OVPrefrence()
         {
@@ -26,6 +26,13 @@ namespace OVPreference.CS2
 
             LoadData();
 
+            SortModules();
+
+            SetUI();
+        }
+
+        private void SortModules()
+        {
             ComparerOVConfig comparer = new ComparerOVConfig();
             comparer.SortBy = EnumSortBy.Priority;
             m_ovConfList.Sort(comparer);
@@ -35,36 +42,42 @@ namespace OVPreference.CS2
             //comparer.SortBy = EnumSortBy.Enabled;
             //m_ovConfList.Sort(comparer);
             //</commnet>
+        }
 
-            PanelModuleList pnModuleList = new PanelModuleList(m_ovConfDOM);
+        private void SetUI()        
+        {
+            PanelModuleList pnModuleList = new PanelModuleList(m_ovConfDom);
             foreach (OVConfig conf in m_ovConfList)
             {
                 bool isEnabled = false;
-                if(conf.settings.ContainsKey("enable"))
+                if (conf.settings.ContainsKey("enable"))
                     isEnabled =
                         Convert.ToBoolean(
                             Convert.ToInt32(
                                 conf.settings["enable"]));
                 pnModuleList.AddModule(conf.moduleName, isEnabled);
 
+                if (conf.moduleName.StartsWith("OVIMGeneric"))
+                    AddTabGeneric(conf, m_ovConfDom);
+                if (conf.moduleName.Equals("OVIMPhonetic"))
+                    AddTabPhonetic(conf, m_ovConfDom);
+                if (conf.moduleName.Equals("OVIMPOJ-Holo"))
+                    AddTabPOJ(conf, m_ovConfDom);
+                if (conf.moduleName.Equals("OVIMTibetan"))
+                    AddTabTibetan(conf, m_ovConfDom);
+                if (conf.moduleName.StartsWith("OVIMTobacco"))
+                    AddTabTobacco(conf, m_ovConfDom);
                 if (conf.moduleName.Equals("TLIM"))
-                {
-                    this.AddTabTLIM(conf, m_ovConfDOM);
-                }
-                else if (conf.moduleName.StartsWith("OVIMGeneric"))
-                {
-                        this.AddTabGeneric(conf, m_ovConfDOM);
-                }
+                    AddTabTLIM(conf, m_ovConfDom);
             }
-            this.AddTabModuleList(pnModuleList);
+            if (m_ovConfList.Count > 1)
+                this.AddTabModuleList(pnModuleList);
         }
 
         protected void AddTabModuleList(PanelModuleList pnModuleList)
         {
             TabPage tpModuleList = new TabPage("Module List");
             tpModuleList.Controls.Add(pnModuleList);
-            //this.m_tcSelf.Controls.Add(tpModuleList);
-
             //<comment author='b6s'>
             IntPtr h = this.m_tcSelf.Handle;
             // It's a bug that TabControl.Handle has to be touched manually
@@ -76,26 +89,53 @@ namespace OVPreference.CS2
             this.SetSize(tpModuleList);
         }
 
-        protected void AddTabGeneric(OVConfig conf, XmlDocument confDOM)
+        protected void AddTabGeneric(OVConfig conf, XmlDocument confDom)
         {
-            PanelGeneric pnGeneric = new PanelGeneric(conf, confDOM);
-            TabPage tpGeneric = new TabPage(conf.moduleName);
-
-            tpGeneric.Controls.Add(pnGeneric);
-            this.m_tcSelf.TabPages.Add(tpGeneric);
-
-            this.SetSize(pnGeneric);
+            PanelGeneric pnGeneric = new PanelGeneric();
+            pnGeneric.Init(conf, confDom);
+            AddTab(pnGeneric, conf.moduleName);
         }
 
-        protected void AddTabTLIM(OVConfig conf, XmlDocument confDOM)
+        protected void AddTabPhonetic(OVConfig conf, XmlDocument confDom)
         {
-            PanelTLIM pnTLIM = new PanelTLIM(conf, confDOM);
-            TabPage tpTLIM = new TabPage(conf.moduleName);
+            PanelPhonetic pnPhonetic = new PanelPhonetic();
+            pnPhonetic.Init(conf, confDom);
+            AddTab(pnPhonetic, conf.moduleName);
+        }
 
-            tpTLIM.Controls.Add(pnTLIM);
-            this.m_tcSelf.TabPages.Add(tpTLIM);
+        protected void AddTabPOJ(OVConfig conf, XmlDocument confDom)
+        {
+            PanelPOJ pnPOJ = new PanelPOJ();
+            pnPOJ.Init(conf, confDom);
+            AddTab(pnPOJ, conf.moduleName);
+        }
 
-            this.SetSize(pnTLIM);
+        protected void AddTabTibetan(OVConfig conf, XmlDocument confDom)
+        {
+            PanelTibetan pnTibetan = new PanelTibetan();
+            pnTibetan.Init(conf, confDom);
+            AddTab(pnTibetan, conf.moduleName);
+        }
+
+        protected void AddTabTobacco(OVConfig conf, XmlDocument confDom)
+        {
+            PanelTobacco pnTobacco = new PanelTobacco();
+            pnTobacco.Init(conf, confDom);
+            AddTab(pnTobacco, conf.moduleName);
+        }
+
+        protected void AddTabTLIM(OVConfig conf, XmlDocument confDom)
+        {
+            PanelTLIM pnTLIM = new PanelTLIM(conf, confDom);
+            AddTab(pnTLIM, conf.moduleName);
+        }
+
+        private void AddTab(Control panel, string name)
+        {
+            TabPage tp = new TabPage(name);
+            tp.Controls.Add(panel);
+            this.m_tcSelf.TabPages.Add(tp);
+            this.SetSize(panel);
         }
 
         private void SetSize(Control innerControl)
@@ -135,7 +175,7 @@ namespace OVPreference.CS2
         private void LoadData()
         {
             //MessageBox.Show("Loads XML config here");
-            m_ovConfDOM.Load(m_ovConfPath);
+            m_ovConfDom.Load(m_ovConfPath);
             OVConfig ovConfSet = new OVConfig();
             using (XmlReader ovConfReader = XmlReader.Create(m_ovConfPath))
             {
@@ -199,7 +239,7 @@ namespace OVPreference.CS2
         private void SaveData()
         {
             //MessageBox.Show("i=" + m_inputType + ", o=" + m_outputType + ", m_diacriticOption=" + m_diacriticOption + ", m_doNormalize=" + m_doNormalize + ", m_doForcePOJStyle=" + m_doForcePOJStyle);
-            m_ovConfDOM.Save(m_ovConfPath);
+            m_ovConfDom.Save(m_ovConfPath);
             this.Close();
         }
 

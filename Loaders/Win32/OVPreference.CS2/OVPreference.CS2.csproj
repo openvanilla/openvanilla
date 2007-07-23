@@ -58,6 +58,30 @@
     <Compile Include="PanelModuleList.Designer.cs">
       <DependentUpon>PanelModuleList.cs</DependentUpon>
     </Compile>
+    <Compile Include="PanelPhonetic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelPhonetic.Designer.cs">
+      <DependentUpon>PanelPhonetic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelPOJ.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelPOJ.Designer.cs">
+      <DependentUpon>PanelPOJ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelTibetan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelTibetan.Designer.cs">
+      <DependentUpon>PanelTibetan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelTobacco.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelTobacco.Designer.cs">
+      <DependentUpon>PanelTobacco.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="OVPrefrence.resx">
@@ -71,6 +95,14 @@
     <EmbeddedResource Include="PanelModuleList.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PanelModuleList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelPhonetic.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelPhonetic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelPOJ.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelPOJ.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

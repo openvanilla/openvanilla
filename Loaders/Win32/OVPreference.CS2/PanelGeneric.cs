@@ -16,32 +16,30 @@ namespace OVPreference.CS2
         private OVConfigDomWriter m_ovConfDomWriter = null;
 
         private bool m_doAutoCompose;
-        private bool m_isEnabled;
         private bool m_doHitMaxAndCompose;
         private uint m_maxKeySequenceLength;
-        private int m_priority;
         private bool m_doShiftSelectionKey;
         private bool m_doWarningBeep;
 
-        public PanelGeneric(OVConfig conf, XmlDocument confDOM)
+        public PanelGeneric()
+        {
+            InitializeComponent();
+        }
+
+        public virtual void Init(OVConfig conf, XmlDocument confDOM)
         {
             m_ovConf = conf;
             m_ovConfDOM = confDOM;
             m_ovConfDomWriter = new OVConfigDomWriter(m_ovConfDOM);
 
-            InitializeComponent();
-
             LoadSettings();
         }
 
-        protected void LoadSettings()
+        protected virtual void LoadSettings()
         {
             m_doAutoCompose =
                 Convert.ToBoolean(Convert.ToInt32(
                     m_ovConf.settings["autoCompose"]));
-            m_isEnabled =
-                Convert.ToBoolean(Convert.ToInt32(
-                    m_ovConf.settings["enable"]));
             m_doHitMaxAndCompose =
                 Convert.ToBoolean(Convert.ToInt32(
                     m_ovConf.settings["hitMaxAndCompose"]));
@@ -49,9 +47,6 @@ namespace OVPreference.CS2
                 Convert.ToUInt32(
                     m_ovConf.settings["maxKeySequenceLength"]);
             if (m_maxKeySequenceLength == 0) m_maxKeySequenceLength = 5;
-            m_priority =
-                Convert.ToInt32(
-                    m_ovConf.settings["priority"]);
             m_doShiftSelectionKey =
                 Convert.ToBoolean(Convert.ToInt32(
                     m_ovConf.settings["shiftSelectionKey"]));
