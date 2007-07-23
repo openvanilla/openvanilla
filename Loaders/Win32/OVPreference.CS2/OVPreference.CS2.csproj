@@ -70,6 +70,12 @@
     <Compile Include="PanelPOJ.Designer.cs">
       <DependentUpon>PanelPOJ.cs</DependentUpon>
     </Compile>
+    <Compile Include="PanelSharedSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelSharedSettings.Designer.cs">
+      <DependentUpon>PanelSharedSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="PanelTibetan.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -103,6 +109,10 @@
     <EmbeddedResource Include="PanelPOJ.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PanelPOJ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelSharedSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelSharedSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

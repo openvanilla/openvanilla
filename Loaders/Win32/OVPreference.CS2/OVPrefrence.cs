@@ -60,6 +60,7 @@ namespace OVPreference.CS2
 
         private void SetUI()        
         {
+            AddTabSharedSettings();
             PanelModuleList pnModuleList = new PanelModuleList(m_ovConfDom);
             foreach (OVConfig conf in m_ovConfList)
             {
@@ -88,6 +89,19 @@ namespace OVPreference.CS2
                 this.AddTabModuleList(pnModuleList);
         }
 
+        protected void AddTabSharedSettings()
+        {
+            PanelSharedSettings pnSharedSettings = new PanelSharedSettings();
+            TabPage tpSharedSettings = new TabPage("Shared Settings");
+            tpSharedSettings.Controls.Add(pnSharedSettings);
+            this.m_tcSelf.TabPages.Add(tpSharedSettings);
+
+            //<comment author='b6s'>
+            // A strange trick here is to set size from TabPage, not Panel.
+            this.SetSize(tpSharedSettings);
+            //</comment>
+        }
+
         protected void AddTabModuleList(PanelModuleList pnModuleList)
         {
             TabPage tpModuleList = new TabPage("Module List");
@@ -96,11 +110,13 @@ namespace OVPreference.CS2
             IntPtr h = this.m_tcSelf.Handle;
             // It's a bug that TabControl.Handle has to be touched manually
             // Before TabControl.TabPages.Insert() is invoked.
-            this.m_tcSelf.TabPages.Insert(0, tpModuleList);
+            this.m_tcSelf.TabPages.Insert(1, tpModuleList);
             //</comment>
-            this.m_tcSelf.SelectTab(0);
 
+            //<comment author='b6s'>
+            // A strange trick here is to set size from TabPage, not Panel.
             this.SetSize(tpModuleList);
+            //</comment>
         }
 
         protected void AddTabGeneric(OVConfig conf, XmlDocument confDom)
