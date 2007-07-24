@@ -13,6 +13,10 @@ namespace OVPreference.CS2
         public PanelSharedSettings()
         {
             InitializeComponent();
+            
+            //FontComboBox fontComboBox1;
+            fontComboBox1.Populate(false);
+            //fontComboBox1.Populate(false);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -20,4 +24,6 @@ namespace OVPreference.CS2
             this.colorDialog1.ShowDialog();
         }
     }
+
+
 }
