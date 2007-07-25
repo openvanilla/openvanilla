@@ -16,6 +16,8 @@ namespace OVPreference.CS2
             
             //FontComboBox fontComboBox1;
             fontComboBox1.Populate(false);
+            fontColorPicker.Items = new KnownColorCollection(KnownColorFilter.System);
+            bgColorPicker.Items = new KnownColorCollection(KnownColorFilter.Web);
             //fontComboBox1.Populate(false);
         }
 

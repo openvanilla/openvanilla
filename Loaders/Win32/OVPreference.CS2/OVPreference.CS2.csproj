@@ -41,6 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorPicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ColorPicker.Designer.cs">
+      <DependentUpon>ColorPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ColorPickerKnownColorCollection.cs" />
     <Compile Include="ComparerOVConfig.cs" />
     <Compile Include="FontComboBox.cs">
       <SubType>Component</SubType>
