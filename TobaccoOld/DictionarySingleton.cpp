@@ -40,10 +40,10 @@ DictionarySingleton::~DictionarySingleton()
 {
     delete DictionarySingleton::dictionaryDB;
 
-	delete [] vocableString;
-	delete [] viewLimitString;
-	delete [] viewString;
-	delete [] checkString;
+	delete [] &vocableString;
+	delete [] &viewLimitString;
+	delete [] &viewString;
+	delete [] &checkString;
 }
 
 void DictionarySingleton::lostInstance()
