@@ -39,10 +39,13 @@
 	#include "OpenVanilla.h"
 	#include "OVLibrary.h"
 	#include "OVUtility.h"
-
+/*
     #include <string.h>
 	#define strcasecmp stricmp
+*/
 #endif
+
+#include "OVOSDef.h"
 
 #include "OVCIN.h"
 #include "OVKeySequence.h"

@@ -44,7 +44,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\Framework\Headers;..\SharedHeaders"
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL;_CRT_SECURE_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -129,7 +129,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="..\..\Framework\Headers;..\SharedHeaders"
-				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL;_CRT_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
@@ -207,6 +207,10 @@
 			>
 			<File
 				RelativePath=".\OVIMRomanNew.h"
+				>
+			</File>
+			<File
+				RelativePath="..\SharedHeaders\OVOSDef.h"
 				>
 			</File>
 		</Filter>

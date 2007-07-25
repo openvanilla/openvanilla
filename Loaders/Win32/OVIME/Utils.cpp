@@ -134,27 +134,28 @@ void RefreshUI(HWND hWnd)  //½Õ¾ãcomp cand
 	lfptr = (LOGFONT*)(&lpIMC->lfFont);
 	memcpy( &lf2, lfptr, sizeof( lf2) );
 
+	int fontHeight = abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
 	//LPMYPRIVATE lpMyPrivate = model->getMyPrivate();
 	//lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 	if(dsvr->isCompEnabled)
 	{	
-		CompX = ptSrc.x ;
+		CompX = ptSrc.x;
 		//CompY = ptSrc.y + szOffset.cy;
-		CompY = ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;		
-		dsvr->moveBuf(CompX,CompY);	
+		CompY = ptSrc.y + fontHeight;
+		dsvr->moveBuf(CompX, CompY);	
 		if(dsvr->isCandiEnabled)
 		{
-			CandX = CompX+UIGetCaretPosX();
-			CandY = CompY+UIGetHeight();
-			dsvr->moveCandi(CandX,CandY);	
+			CandX = CompX + UIGetCaretPosX();
+			CandY = CompY;
+			dsvr->moveCandi(CandX, CandY, UIGetHeight());
 		}
 	}
 	else if(dsvr->isCandiEnabled)
 	{							
 		CandX= ptSrc.x ;
 		//CandY= ptSrc.y + szOffset.cy;
-		CandY= ptSrc.y + abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
-		dsvr->moveCandi(CandX,CandY);		
+		CandY= ptSrc.y;
+		dsvr->moveCandi(CandX, CandY, fontHeight);		
 	}
 
 	ImmModel::close();

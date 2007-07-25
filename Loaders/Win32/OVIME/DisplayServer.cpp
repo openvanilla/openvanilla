@@ -150,10 +150,10 @@ DisplayServer *DisplayServer::moveBuf(int x, int y)
 	return this;
 }
 
-DisplayServer *DisplayServer::moveCandi(int x, int y)
+DisplayServer *DisplayServer::moveCandi(int x, int y, int compHeight)
 {
 	murmur("\t move candi to (%d,%d)",x,y);
-	UIMoveCandWindow(x,y);
+	UIMoveCandWindow(x, y, compHeight);
 	return this;
 }
 

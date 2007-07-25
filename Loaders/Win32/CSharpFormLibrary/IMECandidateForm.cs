@@ -264,19 +264,16 @@ namespace CSharpFormLibrary
             this.lbCandidates.Columns.Clear();
 
         }
-        public void SetLocation(int x, int y)
+
+        public void SetLocation(int x, int y, int compHeight)
         {
-            this.Location = new Point(x, y);
-            //<comment author='b6s'>
-            // The trick of 2*this.FontHeight is for
-            // an approximation of CompRichForm.Height.
+            this.Location = new Point(x, y + compHeight);
             if (this.Bottom >
                 Screen.PrimaryScreen.WorkingArea.Bottom)
                 this.Location =
                     new Point(
                         this.Location.X,
-                        this.Location.Y - this.Height - 2*this.FontHeight);
-            //</comment>
+                        this.Location.Y - this.Height - compHeight);
             if (this.Right >
                 Screen.PrimaryScreen.WorkingArea.Right)
                 this.Location =

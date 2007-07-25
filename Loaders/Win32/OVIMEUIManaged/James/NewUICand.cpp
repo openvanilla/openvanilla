@@ -59,9 +59,9 @@ void _ShowCandiPage()
 	CSharpCandiWrapper::Instance()->ShowNoActive();
 }
 
-void _MoveCandiPage(int x, int y)
+void _MoveCandiPage(int x, int y, int compHeight)
 {
-	CSharpCandiWrapper::Instance()->SetLocation(x, y);
+	CSharpCandiWrapper::Instance()->SetLocation(x, y, compHeight);
 }
 
 void _HideCandiPage()

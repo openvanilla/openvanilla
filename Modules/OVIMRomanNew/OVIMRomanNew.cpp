@@ -38,10 +38,13 @@
 	#include "OVLibrary.h"
 	#include "OVUtility.h"
 #endif
-	
+
+#include "OVOSDef.h"
+/*
 #ifdef WIN32
 	#define strcasecmp stricmp
 #endif
+*/
 
 #include <ctype.h>
 #include <stdio.h>

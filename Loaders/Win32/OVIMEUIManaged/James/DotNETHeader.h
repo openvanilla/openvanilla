@@ -37,7 +37,7 @@ HWND _CreateCandiPage();
 HWND _CreateCandiPageWithHandle(HWND hwnd);
 void _HideCandiPage();
 void _ShowCandiPage();
-void _MoveCandiPage(int x,int y);
+void _MoveCandiPage(int x, int y, int compHeight);
 void _ClearCandiPage();
 void _ExpandCandi();
 

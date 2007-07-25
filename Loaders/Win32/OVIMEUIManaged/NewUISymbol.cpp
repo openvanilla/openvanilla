@@ -59,9 +59,9 @@ void _ShowSymbolPage()
 	CSharpSymbolWrapper::Instance()->ShowNoActive();
 }
 
-void _MoveSymbolPage(int x, int y)
+void _MoveSymbolPage(int x, int y, int compHeight)
 {
-	CSharpSymbolWrapper::Instance()->SetLocation(x, y);
+	CSharpSymbolWrapper::Instance()->SetLocation(x, y, compHeight);
 }
 
 void _HideSymbolPage()

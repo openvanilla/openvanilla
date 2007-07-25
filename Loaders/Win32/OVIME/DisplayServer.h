@@ -30,7 +30,7 @@ public:
 
 	virtual DisplayServer *showStatus(bool t);
 	virtual DisplayServer *moveBuf(int x,int y);
-	virtual DisplayServer *moveCandi(int x,int y);
+	virtual DisplayServer *moveCandi(int x, int y, int compHeight);
 
 	virtual DisplayServer *SetStatusEnabled(bool t);
 	virtual DisplayServer *SetCompEnabled(bool t);
