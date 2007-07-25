@@ -151,13 +151,19 @@ void UIMoveCandWindow(int X, int Y)
 		int newX = X;
 		int newY = Y;		
 		//if (IsWindow(uiCand.hWnd))
-		{		
+		{
+			//<comment author='b6s'>
+			// The position decision procedure is moved
+			// into IMECandidateForm.SetLocation.
+			/*
 			RECT screenrc;
 			SystemParametersInfo(SPI_GETWORKAREA,0,&screenrc,0);
 			if( newX+100 > screenrc.right )
 				newX=screenrc.right-100;
 			if( newY+200 > screenrc.bottom )			
 				newY=Y-190;
+			*/
+			//</comment>
 			_MoveCandiPage(newX,newY);				
 			//uiCand.pt.x=newX;
 			//uiCand.pt.y=newY;

@@ -267,6 +267,20 @@ namespace CSharpFormLibrary
         public void SetLocation(int x, int y)
         {
             this.Location = new Point(x, y);
+            //<comment author='b6s'>
+            // The trick of 2*this.FontHeight is for
+            // an approximation of CompRichForm.Height.
+            if (this.Bottom >
+                Screen.PrimaryScreen.WorkingArea.Bottom)
+                this.Location =
+                    new Point(
+                        this.Location.X,
+                        this.Location.Y - this.Height - 2*this.FontHeight);
+            //</comment>
+            if (this.Right >
+                Screen.PrimaryScreen.WorkingArea.Right)
+                this.Location =
+                    new Point(this.Location.X - this.Width, this.Location.Y);             
         }
 
         public void DisposeForm()
