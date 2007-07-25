@@ -63,6 +63,8 @@ namespace OVPreference.CS2
                     foreach (Color color in value) base.Items.Add(color.Name);
                     Refresh();
                 }
+                // add this for show the VS.Net 2005 color picker
+                base.Items.Add("More Colors");
             }
         }
         

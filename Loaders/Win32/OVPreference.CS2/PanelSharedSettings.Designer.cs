@@ -155,6 +155,7 @@ namespace OVPreference.CS2
             this.fontColorPicker.Name = "fontColorPicker";
             this.fontColorPicker.Size = new System.Drawing.Size(163, 23);
             this.fontColorPicker.TabIndex = 8;
+            this.fontColorPicker.SelectedIndexChanged += new System.EventHandler(this.fontColorPickerNotiFunction);
             // 
             // fontComboBox1
             // 

@@ -25,6 +25,14 @@ namespace OVPreference.CS2
         {
             this.colorDialog1.ShowDialog();
         }
+
+        private void fontColorPickerNotiFunction(object sender, EventArgs e)
+        {
+            if (fontColorPicker.SelectedText.Equals("More Colors"))
+            {
+                this.colorDialog1.ShowDialog();
+            }
+        }
     }
 
 
