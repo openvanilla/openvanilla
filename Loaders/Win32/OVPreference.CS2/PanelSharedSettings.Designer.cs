@@ -144,6 +144,7 @@ namespace OVPreference.CS2
             this.bgColorPicker.Name = "bgColorPicker";
             this.bgColorPicker.Size = new System.Drawing.Size(162, 23);
             this.bgColorPicker.TabIndex = 10;
+            this.bgColorPicker.SelectedIndexChanged += new System.EventHandler(this.bgColorPickerNotiFunction);
             // 
             // fontColorPicker
             // 

@@ -45,7 +45,8 @@ namespace OVPreference.CS2
         {
             get
             {
-                if (iColor < 0 || iColor >= Count) throw new ArgumentOutOfRangeException();
+                //+2 is because preventing the exception due to "More Colors" option!
+                if (iColor < 0 || iColor >= Count +2) throw new ArgumentOutOfRangeException();
                 return Color.FromKnownColor((KnownColor)(iColor + FIRST));
             }
         }

@@ -16,8 +16,8 @@ namespace OVPreference.CS2
             
             //FontComboBox fontComboBox1;
             fontComboBox1.Populate(false);
-            fontColorPicker.Items = new KnownColorCollection(KnownColorFilter.System);
-            bgColorPicker.Items = new KnownColorCollection(KnownColorFilter.Web);
+            fontColorPicker.Items = new KnownColorCollection(KnownColorFilter.All);
+            bgColorPicker.Items = new KnownColorCollection(KnownColorFilter.All);
             //fontComboBox1.Populate(false);
         }
 
@@ -28,7 +28,14 @@ namespace OVPreference.CS2
 
         private void fontColorPickerNotiFunction(object sender, EventArgs e)
         {
-            if (fontColorPicker.SelectedText.Equals("More Colors"))
+            if(fontColorPicker.SelectedIndex.Equals(168))
+            {
+                this.colorDialog1.ShowDialog();
+            }
+        }
+        private void bgColorPickerNotiFunction(object sender, EventArgs e)
+        {
+            if (fontColorPicker.SelectedIndex.Equals(168))
             {
                 this.colorDialog1.ShowDialog();
             }
