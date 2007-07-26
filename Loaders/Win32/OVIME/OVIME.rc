@@ -79,12 +79,12 @@ BEGIN
         BLOCK "040404b0"
         BEGIN
             VALUE "FileDescription", "中文 (繁體) - 開放香草輸入法平台"
-            VALUE "FileVersion", "0, 7, 2, 1"
+            VALUE "FileVersion", "0, 7, 2, 4"
             VALUE "InternalName", "OVIME"
             VALUE "LegalCopyright", "BSD License"
             VALUE "OriginalFilename", "OVIME.ime"
             VALUE "ProductName", " OVIME"
-            VALUE "ProductVersion", "0, 7, 2, 1"
+            VALUE "ProductVersion", "0, 7, 2, 4"
         END
     END
     BLOCK "VarFileInfo"
