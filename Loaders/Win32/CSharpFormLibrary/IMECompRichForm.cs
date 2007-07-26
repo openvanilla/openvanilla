@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using System.Diagnostics;
 using System.Threading;
 
@@ -25,6 +26,7 @@ namespace CSharpFormLibrary
         private string m_text="";
         private int m_caretIndex = 0;
         private IntPtr m_appHWnd;
+        private VisualStyleRenderer m_vsr = null;
 
         public int CaretX
         {
@@ -41,34 +43,47 @@ namespace CSharpFormLibrary
         public IMECompRichForm()
         {
             InitializeComponent();
-            Debug.WriteLine("after init" + this.Height.ToString());
             this.SetStyle(
                 ControlStyles.UserPaint |
-                ControlStyles.AllPaintingInWmPaint /*|
-                ControlStyles.OptimizedDoubleBuffer*/, true);
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer, true);
              
             Application.EnableVisualStyles();
-            Debug.WriteLine("after setstyle" + this.Handle.ToString() + " " + this.Height.ToString());            
+            m_vsr =
+                new VisualStyleRenderer(
+                    VisualStyleElement.TextBox.TextEdit.Normal);
+
         }
       
         private void IMECompRichForm_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             if (Buf.Length > 0)
             {
+                Debug.WriteLine("m_fontSize:" + m_fontSize);
                 this.Font =
                     new System.Drawing.Font(
-                        "PMingLiU", /*12F*/m_fontSize, System.Drawing.FontStyle.Regular,
-                        System.Drawing.GraphicsUnit.Point);
-                Size proposedFontSize = new Size(m_fontSize, m_fontSize);
+                        "PMingLiU", /*12F*/m_fontSize, GraphicsUnit.Pixel);
+                TextMetrics tm = m_vsr.GetTextMetrics(e.Graphics);
+                int fontHeight =
+                    Convert.ToInt32(
+                        m_fontSize * e.Graphics.DpiY / tm.DigitizedAspectY);
+                int fontWidth =
+                    Convert.ToInt32(
+                        m_fontSize * e.Graphics.DpiX / tm.DigitizedAspectX);
+                Size proposedFontSize = new Size(fontWidth, fontHeight);
+                Debug.WriteLine("proposed font size:" + proposedFontSize.ToString());
 
-                TextFormatFlags flags = TextFormatFlags.NoPadding;
+                TextFormatFlags textFormatFlag = TextFormatFlags.NoPadding;
                 Size sizeString =
                     TextRenderer.MeasureText(
-                        e.Graphics, Buf, this.Font, proposedFontSize, flags);
+                        e.Graphics, Buf, this.Font,
+                        proposedFontSize, textFormatFlag);
+                Debug.WriteLine("sizeString:" + sizeString.ToString());
                 Size sizePreviousString =
                     TextRenderer.MeasureText(
                         e.Graphics, Buf.Substring(0, m_caretIndex), this.Font,
-                        proposedFontSize, flags);
+                        proposedFontSize, textFormatFlag);
+                Debug.WriteLine("sizePreviousString:" + sizePreviousString.ToString());
                 //SizeF sizeF = e.Graphics.MeasureString(Buf.Substring(0, m_caretIndex), Font);
 
                 //resize
@@ -79,7 +94,7 @@ namespace CSharpFormLibrary
                 TextRenderer.DrawText(
                     e.Graphics, Buf, this.Font,
                     new Point(0, 0),
-                    Color.Black, Color.White, flags);
+                    Color.Black, Color.White, textFormatFlag);
                 if (m_compSelEnd - m_compSelStart > 0)
                 {
                     if (m_compSelStart == 0)
@@ -89,14 +104,14 @@ namespace CSharpFormLibrary
                             Buf.Substring(
                                 m_compSelStart, m_compSelEnd - m_compSelStart),
                             this.Font, new Point(0, 0),
-                            Color.White, Color.Black, flags);
+                            Color.White, Color.Black, textFormatFlag);
                     }
                     else
                     {
                         Size sizeSelectedText =
                             TextRenderer.MeasureText(
                                 e.Graphics, Buf.Substring(0, m_compSelStart),
-                                this.Font, proposedFontSize, flags);
+                                this.Font, proposedFontSize, textFormatFlag);
                         TextRenderer.DrawText(
                             e.Graphics,
                             Buf.Substring(
@@ -104,7 +119,7 @@ namespace CSharpFormLibrary
                             this.Font,
                             new Point(
                                 sizeSelectedText.Width, 0),
-                            Color.White, Color.Black, flags);
+                            Color.White, Color.Black, textFormatFlag);
                     }
                 }
 
