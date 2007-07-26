@@ -25,7 +25,6 @@ namespace CSharpFormLibrary
         private string m_text="";
         private int m_caretIndex = 0;
         private IntPtr m_appHWnd;
-        private bool m_doClear = false;
 
         public int CaretX
         {
@@ -45,8 +44,8 @@ namespace CSharpFormLibrary
             Debug.WriteLine("after init" + this.Height.ToString());
             this.SetStyle(
                 ControlStyles.UserPaint |
-                ControlStyles.AllPaintingInWmPaint |
-                ControlStyles.OptimizedDoubleBuffer, true);
+                ControlStyles.AllPaintingInWmPaint /*|
+                ControlStyles.OptimizedDoubleBuffer*/, true);
              
             Application.EnableVisualStyles();
             Debug.WriteLine("after setstyle" + this.Handle.ToString() + " " + this.Height.ToString());            
@@ -55,7 +54,6 @@ namespace CSharpFormLibrary
         private void IMECompRichForm_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             Debug.WriteLine("before paint" + this.Height.ToString());
-            e.Graphics.Clear(Color.Transparent);
             if (Buf.Length > 0)
             {
                 Font =
@@ -81,19 +79,19 @@ namespace CSharpFormLibrary
                 {
                     /*int ret = UtilFuncs.SendMessage(m_appHWnd,
                    (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
-                   0xE, 10); // 暫時改成擠出字*/                    
-                    this.Width += 100;                    
+                   0xE, 10); // 暫時改成擠出字*/
+                    this.Width += 100;
                 }
 
                 //draw backcolor
                 //Brush b = new System.Drawing.SolidBrush(Color.Transparent);
-                //e.Graphics.FillRectangle(b, this.ClientRectangle);                
+                //e.Graphics.FillRectangle(b, this.ClientRectangle);
                 //b.Dispose();
 
                 //draw string
                 TextRenderer.DrawText(
                     e.Graphics, Buf, Font, new Point(offsetX, offsetY),
-                    System.Drawing.Color.Red, flags);
+                    System.Drawing.Color.Blue, flags);
                 if (m_compSelEnd - m_compSelStart > 0)
                 {                
                     if (m_compSelStart == 0)
@@ -120,7 +118,7 @@ namespace CSharpFormLibrary
                     }
                 }
 
-                //save caret for c++ using and draw it                    
+                //save caret for c++ using and draw it
                 CaretX = sizeText.Width;
                 Pen pCaret = new Pen(Color.Green, 1);
                 e.Graphics.DrawLine(
@@ -128,12 +126,12 @@ namespace CSharpFormLibrary
                     sizeText.Width + offsetX, sizeText.Height + offsetY);
                 pCaret.Dispose();
             }
-            //else
-            //{
-            //    Brush b = new System.Drawing.SolidBrush(Color.Transparent);
-            //    e.Graphics.FillRectangle(b, this.Bounds);
-            //    b.Dispose();
-            //}
+            else
+            {
+                //Brush b = new System.Drawing.SolidBrush(Color.Transparent);
+                //e.Graphics.FillRectangle(b, this.Bounds);
+                //b.Dispose();
+            }
             Debug.WriteLine("after paint words" + this.Height.ToString());
             //draw border
             //ControlPaint.DrawBorder(
@@ -163,14 +161,14 @@ namespace CSharpFormLibrary
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x00000020; //WS_EX_TRANSPARENT                 
+                cp.ExStyle |= 0x00000020; //WS_EX_TRANSPARENT
                 return cp;
             }
         }
 
-        protected override void OnPaintBackground(PaintEventArgs pevent)
+        protected override void OnPaintBackground(PaintEventArgs e)
         {
-            //do nothing 
+            //base.OnPaintBackground(e);
         }
 
         protected override void WndProc(ref Message m)
@@ -212,7 +210,12 @@ namespace CSharpFormLibrary
 		{
             if (!this.Visible)
                 UtilFuncs.SetVisibleNoActivate(this, true); // true to show.
-            //this.richTextBox1.Text = Buf;            
+
+            if (this.Parent != null)
+                this.Parent.Invalidate(this.ClientRectangle, true);
+            this.Invalidate(this.ClientRectangle, true);
+            
+            //this.richTextBox1.Text = Buf;
             this.Height = 30;//不知道為什麼之前會被亂改 只好這邊再改一次
             Debug.WriteLine("before refresh " + this.Height.ToString());
             this.Refresh();
@@ -235,7 +238,6 @@ namespace CSharpFormLibrary
             //m_compSelStart = 0;
             //m_compSelEnd = 0;
             this.Width = m_formInitWidth;
-            this.Refresh();
             Debug.WriteLine("after clear " + this.Height.ToString());
 		}
 

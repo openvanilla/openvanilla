@@ -47,9 +47,8 @@ namespace CSharpFormLibrary
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // IMECompRichForm
-            // 
+            //
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            //this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(277, 24);
             this.ControlBox = false;
             //this.Controls.Add(this.pictureBox1);
@@ -58,7 +57,6 @@ namespace CSharpFormLibrary
             this.Padding = new System.Windows.Forms.Padding(3);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            //this.Opacity = 0.5;
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.IMECompRichForm_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
