@@ -132,30 +132,31 @@ void RefreshUI(HWND hWnd)  //½Õ¾ãcomp cand
 	localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
 	ReleaseDC(lpIMC->hWnd,hDC);
 	lfptr = (LOGFONT*)(&lpIMC->lfFont);
-	memcpy( &lf2, lfptr, sizeof( lf2) );
+	memcpy(&lf2, lfptr, sizeof(lf2));
 
-	int fontHeight = abs(lf2.lfHeight)*localDPIY/tm.tmDigitizedAspectY;
+	int fontSize = abs(lf2.lfHeight);
+	int fontHeight = fontSize*localDPIY/tm.tmDigitizedAspectY;
 	//LPMYPRIVATE lpMyPrivate = model->getMyPrivate();
 	//lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
-	if(dsvr->isCompEnabled)
+	if (dsvr->isCompEnabled)
 	{	
 		CompX = ptSrc.x;
 		//CompY = ptSrc.y + szOffset.cy;
-		CompY = ptSrc.y + fontHeight;
-		dsvr->moveBuf(CompX, CompY);	
-		if(dsvr->isCandiEnabled)
+		CompY = ptSrc.y;
+		dsvr->moveBuf(CompX, CompY, fontSize);	
+		if (dsvr->isCandiEnabled)
 		{
 			CandX = CompX + UIGetCaretPosX();
 			CandY = CompY;
 			dsvr->moveCandi(CandX, CandY, UIGetHeight());
 		}
 	}
-	else if(dsvr->isCandiEnabled)
+	else if (dsvr->isCandiEnabled)
 	{							
-		CandX= ptSrc.x ;
+		CandX= ptSrc.x;
 		//CandY= ptSrc.y + szOffset.cy;
 		CandY= ptSrc.y;
-		dsvr->moveCandi(CandX, CandY, fontHeight);		
+		dsvr->moveCandi(CandX, CandY, fontHeight);
 	}
 
 	ImmModel::close();

@@ -143,10 +143,10 @@ AVDisplayServer *DisplayServer::hideNotify()
 	return this;
 }
 
-DisplayServer *DisplayServer::moveBuf(int x, int y)
+DisplayServer *DisplayServer::moveBuf(int x, int y, int fontSize)
 {
 	murmur("\t move comp to (%d,%d)",x,y);
-	UIMoveCompWindow(x,y);
+	UIMoveCompWindow(x, y, fontSize);
 	return this;
 }
 

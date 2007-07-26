@@ -65,9 +65,9 @@ void _ShowCompPage()
 	CSharpCompWrapper::Instance()->ShowNoActive();
 }
 
-void _MoveCompPage(int x,int y)
+void _MoveCompPage(int x, int y, int fontSize)
 {
-	CSharpCompWrapper::Instance()->SetLocation(x, y);
+	CSharpCompWrapper::Instance()->SetLocation(x, y, fontSize);
 }
 
 void _HideCompPage()

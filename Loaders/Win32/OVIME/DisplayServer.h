@@ -29,7 +29,7 @@ public:
 	virtual AVDisplayServer *setMarkTo(int i);
 
 	virtual DisplayServer *showStatus(bool t);
-	virtual DisplayServer *moveBuf(int x,int y);
+	virtual DisplayServer *moveBuf(int x,int y, int compHeight);
 	virtual DisplayServer *moveCandi(int x, int y, int compHeight);
 
 	virtual DisplayServer *SetStatusEnabled(bool t);

@@ -57,11 +57,9 @@ void UICreateCompWindow(HWND hUIWnd)
 	}
 }
 
-void UIMoveCompWindow(int X, int Y)
+void UIMoveCompWindow(int x, int y, int fontSize)
 {
-	int newX=X;
-	int newY=Y;
-	_MoveCompPage(newX, newY);
+	_MoveCompPage(x, y, fontSize);
 }
 
 void UISetCompStr(wchar_t* lpStr)
