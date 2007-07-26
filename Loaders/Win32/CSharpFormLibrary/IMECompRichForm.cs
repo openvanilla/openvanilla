@@ -17,13 +17,15 @@ namespace CSharpFormLibrary
         private const int MA_NOACTIVATE = 0x0003;
         private const int MA_NOACTIVATEANDEAT = 0x0004;        
         private const int WM_NCACTIVATE = 0x0086;
-        private int formInitWidth=277;
-        private int compSelStart = 0;
-        private int compSelEnd = 0;
+        private int m_formInitWidth=277;
+        private int m_compSelStart = 0;
+        private int m_compSelEnd = 0;
         private int m_caretX = 0;
+        private int m_caretY = 0;
         private string m_text="";
-        private int caretIndex = 0;
-        private IntPtr m_AppHWnd;
+        private int m_caretIndex = 0;
+        private IntPtr m_appHWnd;
+        private bool m_doClear = false;
 
         public int CaretX
         {
@@ -39,7 +41,6 @@ namespace CSharpFormLibrary
         
         public IMECompRichForm()
         {
-            
             InitializeComponent();
             Debug.WriteLine("after init" + this.Height.ToString());
             this.SetStyle(
@@ -51,73 +52,93 @@ namespace CSharpFormLibrary
             Debug.WriteLine("after setstyle" + this.Handle.ToString() + " " + this.Height.ToString());            
         }
       
-
         private void IMECompRichForm_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             Debug.WriteLine("before paint" + this.Height.ToString());
+            e.Graphics.Clear(Color.Transparent);
             if (Buf.Length > 0)
             {
-                Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                Font =
+                    new System.Drawing.Font(
+                        "PMingLiU", 12F, System.Drawing.FontStyle.Regular,
+                        System.Drawing.GraphicsUnit.Point);
                 Size proposedSize = new Size(int.MaxValue, int.MaxValue);
                 TextFormatFlags flags = TextFormatFlags.NoPadding;
-                Size size = TextRenderer.MeasureText(e.Graphics, Buf, Font, proposedSize, flags);
-                Size sizeText = TextRenderer.MeasureText(e.Graphics, Buf.Substring(0, caretIndex), Font, proposedSize, flags);
+                Size size =
+                    TextRenderer.MeasureText(
+                        e.Graphics, Buf, Font, proposedSize, flags);
+                Size sizeText =
+                    TextRenderer.MeasureText(
+                        e.Graphics, Buf.Substring(0, m_caretIndex), Font,
+                        proposedSize, flags);
 
                 int offsetX = 2;
                 int offsetY = 3;
-                //SizeF sizeF = e.Graphics.MeasureString(Buf.Substring(0, caretIndex), Font);
+                //SizeF sizeF = e.Graphics.MeasureString(Buf.Substring(0, m_caretIndex), Font);
 
                 //resize
                 if (this.Width - 100 < (int)size.Width)
                 {
-                    /*int ret = UtilFuncs.SendMessage(m_AppHWnd,
+                    /*int ret = UtilFuncs.SendMessage(m_appHWnd,
                    (uint)UtilFuncs.WindowsMessage.WM_IME_NOTIFY,
                    0xE, 10); // 暫時改成擠出字*/                    
                     this.Width += 100;                    
                 }
 
                 //draw backcolor
-                //Brush b = new System.Drawing.SolidBrush(Color.GhostWhite);
-                Brush b = new System.Drawing.SolidBrush(Color.LemonChiffon);
-                e.Graphics.FillRectangle(b, this.ClientRectangle);
-                b.Dispose();
+                //Brush b = new System.Drawing.SolidBrush(Color.Transparent);
+                //e.Graphics.FillRectangle(b, this.ClientRectangle);                
+                //b.Dispose();
 
                 //draw string
-                TextRenderer.DrawText(e.Graphics, Buf, Font, new Point(offsetX, offsetY), System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(66)))), ((int)(((byte)(0))))), flags);                
-                if (compSelEnd - compSelStart > 0)
+                TextRenderer.DrawText(
+                    e.Graphics, Buf, Font, new Point(offsetX, offsetY),
+                    System.Drawing.Color.Red, flags);
+                if (m_compSelEnd - m_compSelStart > 0)
                 {                
-                    if (compSelStart == 0)
-                        TextRenderer.DrawText(e.Graphics, Buf.Substring(compSelStart, compSelEnd - compSelStart), Font, new Point(offsetX, offsetY), Color.Red, flags);
+                    if (m_compSelStart == 0)
+                        TextRenderer.DrawText(
+                            e.Graphics,
+                            Buf.Substring(
+                                m_compSelStart, m_compSelEnd - m_compSelStart),
+                            Font, new Point(offsetX, offsetY),
+                            Color.Red, flags);
                     else
                     {
-                        Size sizeSelectionText = TextRenderer.MeasureText(e.Graphics, Buf.Substring(0, compSelStart), Font, proposedSize, flags);
-                        TextRenderer.DrawText(e.Graphics, Buf.Substring(compSelStart, compSelEnd - compSelStart), Font, new Point(sizeSelectionText.Width + offsetX, offsetY), Color.Red, flags);
+                        Size sizeSelectionText =
+                            TextRenderer.MeasureText(
+                                e.Graphics, Buf.Substring(0, m_compSelStart),
+                                Font, proposedSize, flags);
+                        TextRenderer.DrawText(
+                            e.Graphics,
+                            Buf.Substring(
+                                m_compSelStart, m_compSelEnd - m_compSelStart),
+                            Font,
+                            new Point(
+                                sizeSelectionText.Width + offsetX, offsetY),
+                            Color.Red, flags);
                     }
                 }
 
-                //save caret  for c++ using  and draw it                    
-                CaretX = (int)sizeText.Width;
-                Pen p = new Pen(Color.Black, 1);
-                e.Graphics.DrawLine(p, sizeText.Width + offsetX, offsetY, sizeText.Width + offsetX, sizeText.Height + offsetY);
-                p.Dispose();
+                //save caret for c++ using and draw it                    
+                CaretX = sizeText.Width;
+                Pen pCaret = new Pen(Color.Green, 1);
+                e.Graphics.DrawLine(
+                    pCaret, sizeText.Width + offsetX, offsetY,
+                    sizeText.Width + offsetX, sizeText.Height + offsetY);
+                pCaret.Dispose();
             }
-            else
-            {
-                //Brush b = new SolidBrush(SystemColors.ButtonFace);
-                Brush b = new System.Drawing.SolidBrush(Color.Khaki);
-                e.Graphics.FillRectangle(b, this.Bounds);
-                b.Dispose();
-            }
+            //else
+            //{
+            //    Brush b = new System.Drawing.SolidBrush(Color.Transparent);
+            //    e.Graphics.FillRectangle(b, this.Bounds);
+            //    b.Dispose();
+            //}
             Debug.WriteLine("after paint words" + this.Height.ToString());
             //draw border
             //ControlPaint.DrawBorder(
             //    e.Graphics, ClientRectangle,
-            //        Color.LightGray, ButtonBorderStyle.Outset);
-
-            ControlPaint.DrawBorder(
-                e.Graphics, ClientRectangle,
-                    Color.Moccasin, ButtonBorderStyle.Outset);
-
+            //        Color.LightGray, ButtonBorderStyle.Dashed);
             Debug.WriteLine("after paint border" + this.Height.ToString());
         }
 
@@ -136,6 +157,21 @@ namespace CSharpFormLibrary
             System.Diagnostics.Debug.WriteLine("Buf sub=" + Buf.Substring(0, CaretX));
             System.Diagnostics.Debug.WriteLine("size=" + stringSize.Width.ToString());
         }*/
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x00000020; //WS_EX_TRANSPARENT                 
+                return cp;
+            }
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs pevent)
+        {
+            //do nothing 
+        }
 
         protected override void WndProc(ref Message m)
         {
@@ -167,28 +203,28 @@ namespace CSharpFormLibrary
         public void SetAppHWnd(IntPtr HWND)
         {
             Debug.WriteLine("before set hwnd " + this.Handle.ToString() + " " + this.Height.ToString());
-            m_AppHWnd = HWND;
-            Debug.WriteLine("m_AppHWnd (comp) =" + HWND);
+            m_appHWnd = HWND;
+            Debug.WriteLine("m_appHWnd (comp) =" + HWND);
             Debug.WriteLine("after set hwnd " + this.Handle.ToString() + " " + this.Height.ToString());
         }
 
         public void ShowNoActive()
-		{            
+		{
+            if (!this.Visible)
+                UtilFuncs.SetVisibleNoActivate(this, true); // true to show.
             //this.richTextBox1.Text = Buf;            
             this.Height = 30;//不知道為什麼之前會被亂改 只好這邊再改一次
             Debug.WriteLine("before refresh " + this.Height.ToString());
             this.Refresh();
             Debug.WriteLine("after refresh " + this.Height.ToString());
             //this.timer1.Enabled = true;
-            if(!this.Visible)
-			    UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
 		}
 
 		public void HideNoActive()
 		{
             //this.timer1.Enabled = false;
             if (this.Visible)
-			    UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.  
+                UtilFuncs.SetVisibleNoActivate(this, false); // false to hide.
 		}
 
 		public void ClearComp()
@@ -196,10 +232,10 @@ namespace CSharpFormLibrary
             Debug.WriteLine("before clear " + this.Height.ToString());
             //this.richTextBox1.Text="";
             Buf = "";
+            //m_compSelStart = 0;
+            //m_compSelEnd = 0;
+            this.Width = m_formInitWidth;
             this.Refresh();
-            //compSelStart = 0;
-            //compSelEnd = 0;
-            this.Width = formInitWidth;
             Debug.WriteLine("after clear " + this.Height.ToString());
 		}
 
@@ -208,17 +244,17 @@ namespace CSharpFormLibrary
             Debug.WriteLine("before location " + this.Height.ToString());
             this.Location = new Point(x, y);
             Debug.WriteLine("after location " + this.Height.ToString());
+            m_caretY = y;
         }
 
 		public void SetComp(string inputs)
 		{
-
 			if(inputs==null) return;
             //先設定至 Buf -> 給 onPaint 算 Caret
             Debug.WriteLine(this.Height.ToString());
             Buf = inputs;
             Debug.WriteLine(this.Height.ToString());
-            //CaretX = caretIndex;
+            //CaretX = m_caretIndex;
             //this.richTextBox1.Text = inputs;
         }
 
@@ -240,8 +276,7 @@ namespace CSharpFormLibrary
             System.Diagnostics.Debug.WriteLine("X=" + x.ToString());
             System.Diagnostics.Debug.WriteLine("labelX=" + label1.Left.ToString());*/
 
-            this.caretIndex = x;
-            
+            this.m_caretIndex = x;            
 
             /*Point pt2 = 
                 this.richTextBox1.GetPositionFromCharIndex(
@@ -249,21 +284,21 @@ namespace CSharpFormLibrary
             if (this.Width - this.richTextBox1.Bounds.Left < pt2.X)
                 this.Width = pt2.X + 100;*/
             /*
-            if (compSelStart > 0 && compSelStart == compSelEnd) //已經組字
-                this.richTextBox1.Select(compSelStart - 1, 1);
+            if (m_compSelStart > 0 && m_compSelStart == m_compSelEnd) //已經組字
+                this.richTextBox1.Select(m_compSelStart - 1, 1);
             else //正在組字
-                this.richTextBox1.Select(compSelStart, compSelEnd - compSelStart);
+                this.richTextBox1.Select(m_compSelStart, m_compSelEnd - m_compSelStart);
             this.richTextBox1.SelectionColor = Color.Red;*/
         }
 
         public void SetCompMarkFrom(int x)
         {
-            compSelStart = x;
+            m_compSelStart = x;
         }
         
         public void SetCompMarkTo(int x)
         {
-            compSelEnd = x;
+            m_compSelEnd = x;
         }
 
         public void DisposeForm()
@@ -321,6 +356,5 @@ namespace CSharpFormLibrary
                 System.Diagnostics.Debug.WriteLine("label1.Visible=true");
             }
         }*/
-
     }
 }
