@@ -376,7 +376,7 @@ StrCpy $0 "$R2.$R3.$R4.$R5" ; $0 now contains string like "1.2.0.192"
 ${VersionCompare} $0 "7.10.5077.0" $1
 ${If} $1 == 2   ;if $0 is smaller
 Push "Office2003Otk"
-MessageBox MB_OK|MB_ICONINFORMATION "自然輸入法需要 Office 2003 使用者進行 patch ，請至官方網站下載。"IDOK +1
+MessageBox MB_OK|MB_ICONINFORMATION "$(^Name)需要 Office 2003 使用者進行 patch ，請至官方網站下載。"IDOK +1
 ${ENDIF}
 notOffice2003:
 FunctionEnd
@@ -665,6 +665,7 @@ Section Uninstall
   DeleteRegValue "${IME_CURRENT_USER}" "${IME_KEY_USER}" "$2"
   ${registry::Close} "$9"
 
+  Delete "$SYSDIR\hunspelldll.dll"
   Delete "$SYSDIR\libltdl3.dll"
   Delete "$SYSDIR\libiconv-2.dll"
   Delete "$SYSDIR\sqlite3.dll"
