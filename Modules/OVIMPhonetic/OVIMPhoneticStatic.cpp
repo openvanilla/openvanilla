@@ -40,9 +40,10 @@
 	#include "OVUtility.h"
 #endif
 
-#ifdef WIN32
-	#define strcasecmp stricmp
-#endif
+#include "OVOSDef.h"
+//#ifdef WIN32
+//	#define strcasecmp stricmp
+//#endif
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -52,13 +53,13 @@
 
 #ifndef OVIMPHONETIC_EXT
     #define OVIMP_MODID         "OVIMPhonetic"
-    #define OVIMP_NAME_ZH_TW    "注音"
-    #define OVIMP_NAME_ZH_CN    "繁体注音"
+    #define OVIMP_NAME_ZH_TW    "\xE6\xB3\xA8\xE9\x9F\xB3"
+    #define OVIMP_NAME_ZH_CN    "\xE7\xB9\x81\xE4\xBD\x93\xE6\xB3\xA8\xE9\x9F\xB3"
     #define OVIMP_NAME_EN       "Phonetic (Bopomofo)"
 #else
     #define OVIMP_MODID         "OVIMPhonetic"
-    #define OVIMP_NAME_ZH_TW    "注音（大字集）"
-    #define OVIMP_NAME_ZH_CN    "繁体注音（大字集）"
+    #define OVIMP_NAME_ZH_TW    "\xE6\xB3\xA8\xE9\x9F\xB3\xEF\xBC\x88\xE5\xA4\xA7\xE5\xAD\x97\xE9\x9B\x86\xEF\xBC\x89"
+    #define OVIMP_NAME_ZH_CN    "\xE7\xB9\x81\xE4\xBD\x93\xE6\xB3\xA8\xE9\x9F\xB3\xEF\xBC\x88\xE5\xA4\xA7\xE5\xAD\x97\xE9\x9B\x86\xEF\xBC\x89"
     #define OVIMP_NAME_EN       "Phonetic (Bopomofo) Large Set"
 #endif
     
@@ -384,4 +385,3 @@ int OVIMPhoneticContext::candidatePageDown() {
     }
     return 1;
 }
-

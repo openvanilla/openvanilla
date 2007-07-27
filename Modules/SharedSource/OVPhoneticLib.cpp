@@ -492,4 +492,3 @@ int VPCheckFormation (unsigned short s)
 	// ignore 0xc000 (the highest 2 bits), as it's meaningless
 	return 1;
 }
-
