@@ -13,10 +13,8 @@ namespace CSharpFormLibrary
     {
         private int m_maxRowNum = 6;
         private int m_maxColumnNum = 9;
-        private int m_columnNum =0;
-        private int m_rowNum = 0;
-        private int selectedX=-1;
-        private int selectedY=-1;
+        private int m_selectedX = -1;
+        private int m_selectedY = -1;
         private int pageNo_all = 0;
         private int pageNo_now = 0;
         private int pageCapacity = 0;
@@ -29,11 +27,13 @@ namespace CSharpFormLibrary
 
         public IMEListView()
         {
-            
-            this.SetStyle(
-               // ControlStyles.UserPaint |
-                //ControlStyles.AllPaintingInWmPaint |
-                ControlStyles.OptimizedDoubleBuffer, true);
+            //<comment author='b6s'>
+            // This is not necessary since candidate window does not flicking.
+            //this.SetStyle(
+            //    ControlStyles.UserPaint |
+            //    ControlStyles.AllPaintingInWmPaint |
+            //    ControlStyles.OptimizedDoubleBuffer, true);
+            //</comment>
             Application.EnableVisualStyles();
 
             //components
@@ -57,7 +57,7 @@ namespace CSharpFormLibrary
             Margin = new System.Windows.Forms.Padding(0);
             Padding = new System.Windows.Forms.Padding(0);
             Scrollable = false;
-            Font = new System.Drawing.Font("PMingLiU", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            Font = new System.Drawing.Font("PMingLiU", 12F);
             HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             SmallImageList = this.imageList1;
             //TabIndex = 1;
@@ -79,6 +79,7 @@ namespace CSharpFormLibrary
             }
             base.Dispose(disposing);
         }
+
         protected override CreateParams CreateParams
         {
             get
@@ -88,6 +89,7 @@ namespace CSharpFormLibrary
                 return cp;
             }
         }
+
         protected void MyOnMouseDown(Point pt)
         {
             //this.SelectDown();
@@ -101,15 +103,15 @@ namespace CSharpFormLibrary
             if (m.Msg == (Int32)UtilFuncs.WindowsMessage.WM_MOUSEACTIVATE)
             {
                 m.Result = (IntPtr)MA_NOACTIVATEANDEAT;
-                MyOnMouseDown(MousePosition);
+                MyOnMouseDown(Control.MousePosition);
             }
         }
 
         private void SelectItem(Point pt)
         {
-            // Get the item at the mouse pointer.            
-            ListViewHitTestInfo info = this.HitTest(pt.X, pt.Y);            
-            ListViewItem.ListViewSubItem subItem = null;            
+            // Get the item at the mouse pointer.
+            ListViewHitTestInfo info = this.HitTest(pt.X, pt.Y);
+            ListViewItem.ListViewSubItem subItem = null;    
             if (info != null)
                 if (info.Item != null)
                     subItem = info.Item.GetSubItemAt(pt.X , pt.Y);
@@ -119,12 +121,13 @@ namespace CSharpFormLibrary
             {
                 //MessageBox.Show(subItem.Text);
                 int tmpY = this.Items.IndexOf(info.Item);
-                int tmpX = info.Item.SubItems.IndexOf(subItem);                
+                int tmpX = info.Item.SubItems.IndexOf(subItem);
                 if (tmpY >= 0 && tmpX >= 0)
                 {
-                    UnMarkSelected();
-                    selectedY = tmpY;
-                    selectedX = tmpX;
+                    if (m_selectedX >= 0 && m_selectedY >= 0)
+                        UnMarkSelected();
+                    m_selectedY = tmpY;
+                    m_selectedX = tmpX;
                     MarkSelected();
                 }
             }
@@ -132,14 +135,14 @@ namespace CSharpFormLibrary
 
         private void MarkSelected()
         {
-            this.Items[selectedY].SubItems[selectedX].BackColor = Color.DimGray;
-            this.Items[selectedY].SubItems[selectedX].ForeColor = Color.White;
+            this.Items[m_selectedY].SubItems[m_selectedX].BackColor = Color.DimGray;
+            this.Items[m_selectedY].SubItems[m_selectedX].ForeColor = Color.White;
         }
 
         private void UnMarkSelected()
         {
-            this.Items[selectedY].SubItems[selectedX].BackColor = Color.GhostWhite;
-            this.Items[selectedY].SubItems[selectedX].ForeColor = SystemColors.WindowText;
+            this.Items[m_selectedY].SubItems[m_selectedX].BackColor = Color.GhostWhite;
+            this.Items[m_selectedY].SubItems[m_selectedX].ForeColor = SystemColors.WindowText;
         }
         private void ShowPage(int pageNo)
         {
@@ -189,7 +192,7 @@ namespace CSharpFormLibrary
 
                 }
 
-                selectedX = selectedY = 0;
+                m_selectedX = m_selectedY = 0;
                 MarkSelected();
             }
         }
@@ -197,7 +200,7 @@ namespace CSharpFormLibrary
         #region public methods
         public string GetSelectedItem()
         {
-            return this.Items[selectedY].SubItems[selectedX].Text;
+            return this.Items[m_selectedY].SubItems[m_selectedX].Text;
         }
 
         public void SetCapacity(int maxRowNum, int maxColumnNum)
@@ -250,25 +253,25 @@ namespace CSharpFormLibrary
         public void SelectDown()  //向下
         {
             UnMarkSelected();
-            if (selectedY + 1 >= m_maxRowNum)
+            if (m_selectedY + 1 >= m_maxRowNum)
             {
-                if (selectedX + 1 >= m_maxColumnNum)
+                if (m_selectedX + 1 >= m_maxColumnNum)
                 {
-                    selectedX = selectedY = 0;
+                    m_selectedX = m_selectedY = 0;
                 }
                 else
                 {
-                    selectedY = 0;
-                    selectedX++;
+                    m_selectedY = 0;
+                    m_selectedX++;
                 }
             }
             else
             {                
-                selectedY++;                
+                m_selectedY++;                
                     
             }
-            if (selectedX * m_maxRowNum + selectedY >= contentNumInPage) //不合法規零
-                selectedX = selectedY = 0;
+            if (m_selectedX * m_maxRowNum + m_selectedY >= contentNumInPage) //不合法規零
+                m_selectedX = m_selectedY = 0;
             MarkSelected();
         }
         #endregion
