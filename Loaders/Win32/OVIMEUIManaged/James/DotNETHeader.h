@@ -23,7 +23,7 @@ int _GetHeight();
 int _GetCaretPosX();
 void _HideCompPage();
 void _ClearCompPage();
-void _MoveCompPage(int x, int y, int fontSize);
+void _MoveCompPage(int x, int y, int fontSize, int fontHeight);
 void _SetCompString(const wchar_t* compStr);
 void _SetCompCaretPosX(int);
 void _SetCompMarkFrom(int);

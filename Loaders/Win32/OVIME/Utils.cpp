@@ -143,7 +143,7 @@ void RefreshUI(HWND hWnd)  //½Õ¾ãcomp cand
 		CompX = ptSrc.x;
 		//CompY = ptSrc.y + szOffset.cy;
 		CompY = ptSrc.y;
-		dsvr->moveBuf(CompX, CompY, fontSize);	
+		dsvr->moveBuf(CompX, CompY, fontSize, fontHeight);
 		if (dsvr->isCandiEnabled)
 		{
 			CandX = CompX + UIGetCaretPosX();

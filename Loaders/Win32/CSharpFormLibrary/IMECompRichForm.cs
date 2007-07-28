@@ -23,10 +23,10 @@ namespace CSharpFormLibrary
         private int m_compSelEnd = 0;
         private int m_caretX = 0;
         private int m_fontSize = 0;
+        private int m_fontHeight = 0;
         private string m_text="";
         private int m_caretIndex = 0;
         private IntPtr m_appHWnd;
-        private VisualStyleRenderer m_vsr = null;
 
         public int CaretX
         {
@@ -49,10 +49,6 @@ namespace CSharpFormLibrary
                 ControlStyles.OptimizedDoubleBuffer, true);
              
             Application.EnableVisualStyles();
-            m_vsr =
-                new VisualStyleRenderer(
-                    VisualStyleElement.TextBox.TextEdit.Normal);
-
         }
       
         private void IMECompRichForm_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -63,14 +59,7 @@ namespace CSharpFormLibrary
                 this.Font =
                     new System.Drawing.Font(
                         "PMingLiU", /*12F*/m_fontSize, GraphicsUnit.Pixel);
-                TextMetrics tm = m_vsr.GetTextMetrics(e.Graphics);
-                int fontHeight =
-                    Convert.ToInt32(
-                        m_fontSize * e.Graphics.DpiY / tm.DigitizedAspectY);
-                int fontWidth =
-                    Convert.ToInt32(
-                        m_fontSize * e.Graphics.DpiX / tm.DigitizedAspectX);
-                Size proposedFontSize = new Size(fontWidth, fontHeight);
+                Size proposedFontSize = new Size(m_fontSize, m_fontHeight);
                 Debug.WriteLine("proposed font size:" + proposedFontSize.ToString());
 
                 TextFormatFlags textFormatFlag = TextFormatFlags.NoPadding;
@@ -247,9 +236,10 @@ namespace CSharpFormLibrary
             Debug.WriteLine("after clear " + this.Height.ToString());
 		}
 
-        public void SetLocation(int x, int y, int fontSize)
+        public void SetLocation(int x, int y, int fontSize, int fontHeight)
         {
             m_fontSize = fontSize;
+            m_fontHeight = fontHeight;
             this.Location = new Point(x, y);
         }
 
