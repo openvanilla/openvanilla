@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Diagnostics;
 
 namespace OVPreference.CS2
 {
@@ -37,22 +38,63 @@ namespace OVPreference.CS2
 
         protected virtual void LoadSettings()
         {
-            m_doAutoCompose =
-                Convert.ToBoolean(Convert.ToInt32(
-                    m_ovConf.settings["autoCompose"]));
-            m_doHitMaxAndCompose =
-                Convert.ToBoolean(Convert.ToInt32(
-                    m_ovConf.settings["hitMaxAndCompose"]));
-            m_maxKeySequenceLength =
-                Convert.ToUInt32(
-                    m_ovConf.settings["maxKeySequenceLength"]);
-            if (m_maxKeySequenceLength == 0) m_maxKeySequenceLength = 5;
-            m_doShiftSelectionKey =
+            //if (m_ovConf.settings.ContainsKey("autoCompose"))
+            try
+            {
+                m_doAutoCompose =
+                    Convert.ToBoolean(Convert.ToInt32(
+                        m_ovConf.settings["autoCompose"]));
+            }
+            catch (Exception)
+            {
+                Trace.TraceWarning("autoCompose not found");
+            }
+
+            //if (m_ovConf.settings.ContainsKey("hitMaxAndCompose"))
+            try
+            {
+                m_doHitMaxAndCompose =
+                    Convert.ToBoolean(Convert.ToInt32(
+                        m_ovConf.settings["hitMaxAndCompose"]));
+            }
+            catch (Exception)
+            {
+                Trace.TraceWarning("hitMaxAndCompose not found");
+            }
+
+            try
+            {
+                m_maxKeySequenceLength =
+                    Convert.ToUInt32(
+                        m_ovConf.settings["maxKeySequenceLength"]);
+                if (m_maxKeySequenceLength == 0) m_maxKeySequenceLength = 5;
+            }
+            catch (Exception)
+            {
+                Trace.TraceWarning("maxKeySequenceLength not found");
+            }
+
+            try
+            {
+                m_doShiftSelectionKey =
                 Convert.ToBoolean(Convert.ToInt32(
                     m_ovConf.settings["shiftSelectionKey"]));
-            m_doWarningBeep =
-                Convert.ToBoolean(Convert.ToInt32(
-                    m_ovConf.settings["warningBeep"]));
+            }
+            catch (Exception)
+            {
+                Trace.TraceWarning("shiftSelectionKey not found");
+            }
+
+            try
+            {
+                m_doWarningBeep =
+                    Convert.ToBoolean(Convert.ToInt32(
+                        m_ovConf.settings["warningBeep"]));
+            }
+            catch (Exception)
+            {
+                Trace.TraceWarning("warningBeep");
+            }
 
             m_cbAutoCompose.Checked = m_doAutoCompose;
             m_cbHitMaxAndCompose.Checked = m_doHitMaxAndCompose;

@@ -55,6 +55,7 @@
     <Compile Include="FontComboBox.Designer.cs">
       <DependentUpon>FontComboBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="OVConfigDomReader.cs" />
     <Compile Include="OVPrefrence.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +166,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="OVPreference.ico" />
+    <EmbeddedResource Include="OVPrefrence.en-US.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OVPrefrence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OVPrefrence.zh-TW.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OVPrefrence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelSharedSettings.zh-TW.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelSharedSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource.en-US.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource.zh-TW.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ttfbmp.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

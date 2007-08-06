@@ -6,6 +6,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Resources;
+using System.Globalization;
+using System.Threading;
 
 namespace OVPreference.CS2
 {
@@ -19,6 +22,16 @@ namespace OVPreference.CS2
             "OpenVanilla" + System.IO.Path.DirectorySeparatorChar +
             "config.xml";
         private XmlDocument m_ovConfDom = new XmlDocument();
+
+        //ResourceManager resourceMgr = Resource_zh_TW.ResourceManager;
+        
+        ResourceManager resourceMgr = 
+            ResourceManager.CreateFileBasedResourceManager("Resource",@"..\..\", null);
+        
+        //CultureInfo ci =  Resource_ch_TW.Culture;// new CultureInfo("ch-TW");
+        
+//        CultureInfo ci = Thread.CurrentThread.CurrentUICulture;
+        CultureInfo ci;
 
         public OVPrefrence()
         {
@@ -35,6 +48,10 @@ namespace OVPreference.CS2
             //System.Threading.Thread.CurrentThread.CurrentCulture =
             //System.Globalization.CultureInfo.CreateSpecificCulture
             //    (Properties.Settings.Default.Culture);
+
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-TW");
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+            ci = Thread.CurrentThread.CurrentUICulture;
             
             InitializeComponent();
 
@@ -60,6 +77,7 @@ namespace OVPreference.CS2
 
         private void SetUI()        
         {
+            
             AddTabSharedSettings();
             PanelModuleList pnModuleList = new PanelModuleList(m_ovConfDom);
             foreach (OVConfig conf in m_ovConfList)
@@ -92,7 +110,9 @@ namespace OVPreference.CS2
         protected void AddTabSharedSettings()
         {
             PanelSharedSettings pnSharedSettings = new PanelSharedSettings();
-            TabPage tpSharedSettings = new TabPage("Shared Settings");
+            string msg = resourceMgr.GetString("TabSharedSetting", ci);
+            //TabPage tpSharedSettings = new TabPage("Shared Settings");
+            TabPage tpSharedSettings = new TabPage(msg);
             tpSharedSettings.Controls.Add(pnSharedSettings);
             this.m_tcSelf.TabPages.Add(tpSharedSettings);
 
@@ -104,7 +124,9 @@ namespace OVPreference.CS2
 
         protected void AddTabModuleList(PanelModuleList pnModuleList)
         {
-            TabPage tpModuleList = new TabPage("Module List");
+            string msg = resourceMgr.GetString("TabModuleList", ci);
+            TabPage tpModuleList = new TabPage(msg);
+            //TabPage tpModuleList = new TabPage("Module List");
             tpModuleList.Controls.Add(pnModuleList);
             //<comment author='b6s'>
             IntPtr h = this.m_tcSelf.Handle;
@@ -123,14 +145,18 @@ namespace OVPreference.CS2
         {
             PanelGeneric pnGeneric = new PanelGeneric();
             pnGeneric.Init(conf, confDom);
+            //string msg = resourceMgr.GetString(conf.moduleName, ci);
             AddTab(pnGeneric, conf.moduleName);
+            //AddTab(pnGeneric, msg);
         }
 
         protected void AddTabPhonetic(OVConfig conf, XmlDocument confDom)
         {
             PanelPhonetic pnPhonetic = new PanelPhonetic();
             pnPhonetic.Init(conf, confDom);
-            AddTab(pnPhonetic, conf.moduleName);
+            string msg = resourceMgr.GetString("Phonetic", ci);
+            //AddTab(pnPhonetic, conf.moduleName);
+            AddTab(pnPhonetic, msg);
         }
 
         protected void AddTabPOJ(OVConfig conf, XmlDocument confDom)

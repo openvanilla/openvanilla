@@ -37,51 +37,47 @@ namespace OVPreference.CS2
             // 
             // m_btSave
             // 
-            this.m_btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.m_btSave.Location = new System.Drawing.Point(215, 248);
+            this.m_btSave.AccessibleDescription = null;
+            this.m_btSave.AccessibleName = null;
+            resources.ApplyResources(this.m_btSave, "m_btSave");
+            this.m_btSave.BackgroundImage = null;
+            this.m_btSave.Font = null;
             this.m_btSave.Name = "m_btSave";
-            this.m_btSave.Size = new System.Drawing.Size(94, 22);
-            this.m_btSave.TabIndex = 12;
-            this.m_btSave.Text = "儲存並離開";
             this.m_btSave.UseVisualStyleBackColor = true;
             this.m_btSave.Click += new System.EventHandler(this.m_btSave_Click);
             // 
             // m_tcSelf
             // 
-            this.m_tcSelf.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.m_tcSelf.Location = new System.Drawing.Point(3, 3);
+            this.m_tcSelf.AccessibleDescription = null;
+            this.m_tcSelf.AccessibleName = null;
+            resources.ApplyResources(this.m_tcSelf, "m_tcSelf");
+            this.m_tcSelf.BackgroundImage = null;
+            this.m_tcSelf.Font = null;
             this.m_tcSelf.Name = "m_tcSelf";
             this.m_tcSelf.SelectedIndex = 0;
-            this.m_tcSelf.Size = new System.Drawing.Size(306, 239);
             this.m_tcSelf.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
-            this.m_tcSelf.TabIndex = 13;
             // 
             // m_tlSelf
             // 
-            this.m_tlSelf.AutoSize = true;
-            this.m_tlSelf.ColumnCount = 1;
-            this.m_tlSelf.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.m_tlSelf.AccessibleDescription = null;
+            this.m_tlSelf.AccessibleName = null;
+            resources.ApplyResources(this.m_tlSelf, "m_tlSelf");
+            this.m_tlSelf.BackgroundImage = null;
             this.m_tlSelf.Controls.Add(this.m_tcSelf, 0, 0);
             this.m_tlSelf.Controls.Add(this.m_btSave, 0, 1);
-            this.m_tlSelf.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.m_tlSelf.Location = new System.Drawing.Point(0, 0);
+            this.m_tlSelf.Font = null;
             this.m_tlSelf.Name = "m_tlSelf";
-            this.m_tlSelf.RowCount = 2;
-            this.m_tlSelf.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
-            this.m_tlSelf.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.m_tlSelf.Size = new System.Drawing.Size(312, 273);
-            this.m_tlSelf.TabIndex = 14;
             // 
             // OVPrefrence
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(312, 273);
+            this.BackgroundImage = null;
             this.Controls.Add(this.m_tlSelf);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Font = null;
             this.Name = "OVPrefrence";
-            this.Text = "偏好設定";
             this.m_tlSelf.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
