@@ -55,7 +55,6 @@
     <Compile Include="FontComboBox.Designer.cs">
       <DependentUpon>FontComboBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="OVConfigDomReader.cs" />
     <Compile Include="OVPrefrence.cs">
       <SubType>Form</SubType>
     </Compile>
