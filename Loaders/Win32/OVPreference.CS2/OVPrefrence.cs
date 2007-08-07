@@ -49,7 +49,7 @@ namespace OVPreference.CS2
             //System.Globalization.CultureInfo.CreateSpecificCulture
             //    (Properties.Settings.Default.Culture);
 
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-TW");
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-TW");
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             ci = Thread.CurrentThread.CurrentUICulture;
             

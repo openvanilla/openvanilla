@@ -32,17 +32,17 @@ namespace OVPreference.CS2
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PanelSharedSettings));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.bgColorPicker = new OVPreference.CS2.ColorPicker();
             this.label4 = new System.Windows.Forms.Label();
+            this.fontColorPicker = new OVPreference.CS2.ColorPicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.bgColorPicker = new OVPreference.CS2.ColorPicker();
-            this.fontColorPicker = new OVPreference.CS2.ColorPicker();
             this.fontComboBox1 = new OVPreference.CS2.FontComboBox();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
@@ -66,6 +66,20 @@ namespace OVPreference.CS2
             this.panel1.Font = null;
             this.panel1.Name = "panel1";
             // 
+            // bgColorPicker
+            // 
+            this.bgColorPicker.AccessibleDescription = null;
+            this.bgColorPicker.AccessibleName = null;
+            resources.ApplyResources(this.bgColorPicker, "bgColorPicker");
+            this.bgColorPicker.BackgroundImage = null;
+            this.bgColorPicker.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.bgColorPicker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.bgColorPicker.Font = null;
+            this.bgColorPicker.FormattingEnabled = true;
+            this.bgColorPicker.Items = null;
+            this.bgColorPicker.Name = "bgColorPicker";
+            this.bgColorPicker.SelectedIndexChanged += new System.EventHandler(this.bgColorPickerNotiFunction);
+            // 
             // label4
             // 
             this.label4.AccessibleDescription = null;
@@ -73,6 +87,20 @@ namespace OVPreference.CS2
             resources.ApplyResources(this.label4, "label4");
             this.label4.Font = null;
             this.label4.Name = "label4";
+            // 
+            // fontColorPicker
+            // 
+            this.fontColorPicker.AccessibleDescription = null;
+            this.fontColorPicker.AccessibleName = null;
+            resources.ApplyResources(this.fontColorPicker, "fontColorPicker");
+            this.fontColorPicker.BackgroundImage = null;
+            this.fontColorPicker.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.fontColorPicker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.fontColorPicker.Font = null;
+            this.fontColorPicker.FormattingEnabled = true;
+            this.fontColorPicker.Items = null;
+            this.fontColorPicker.Name = "fontColorPicker";
+            this.fontColorPicker.SelectedIndexChanged += new System.EventHandler(this.fontColorPickerNotiFunction);
             // 
             // label3
             // 
@@ -135,34 +163,6 @@ namespace OVPreference.CS2
             resources.ApplyResources(this.label1, "label1");
             this.label1.Font = null;
             this.label1.Name = "label1";
-            // 
-            // bgColorPicker
-            // 
-            this.bgColorPicker.AccessibleDescription = null;
-            this.bgColorPicker.AccessibleName = null;
-            resources.ApplyResources(this.bgColorPicker, "bgColorPicker");
-            this.bgColorPicker.BackgroundImage = null;
-            this.bgColorPicker.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.bgColorPicker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.bgColorPicker.Font = null;
-            this.bgColorPicker.FormattingEnabled = true;
-            this.bgColorPicker.Items = null;
-            this.bgColorPicker.Name = "bgColorPicker";
-            this.bgColorPicker.SelectedIndexChanged += new System.EventHandler(this.bgColorPickerNotiFunction);
-            // 
-            // fontColorPicker
-            // 
-            this.fontColorPicker.AccessibleDescription = null;
-            this.fontColorPicker.AccessibleName = null;
-            resources.ApplyResources(this.fontColorPicker, "fontColorPicker");
-            this.fontColorPicker.BackgroundImage = null;
-            this.fontColorPicker.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.fontColorPicker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fontColorPicker.Font = null;
-            this.fontColorPicker.FormattingEnabled = true;
-            this.fontColorPicker.Items = null;
-            this.fontColorPicker.Name = "fontColorPicker";
-            this.fontColorPicker.SelectedIndexChanged += new System.EventHandler(this.fontColorPickerNotiFunction);
             // 
             // fontComboBox1
             // 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Resources;
 using System.Globalization;
+using System.Threading;
 
 namespace OVPreference.CS2
 {
@@ -25,13 +26,9 @@ namespace OVPreference.CS2
             //System.Threading.Thread.CurrentThread.CurrentCulture =
             //System.Globalization.CultureInfo.CreateSpecificCulture
             //      (Properties.Settings.Default.Culture);
-
-            //ResourceManager resourceMgr = Resource_ch_TW.ResourceManager;
-            //ResourceManager resourceMgr = 
-            //    ResourceManager.CreateFileBasedResourceManager("Resource",@"C:\Program Files\ResourceSet", null);
-
-            //CultureInfo ci = Resource_ch_TW.Culture;// new CultureInfo("ch-TW");
-
+                        
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-TW");
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new OVPrefrence());
         }

@@ -173,14 +173,30 @@
       <SubType>Designer</SubType>
       <DependentUpon>OVPrefrence.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PanelGeneric.en-US.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelGeneric.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelGeneric.zh-TW.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelGeneric.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelPhonetic.zh-TW.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelPhonetic.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PanelSharedSettings.zh-TW.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PanelSharedSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resource.en-US.resx">
+    <EmbeddedResource Include="PanelTobacco.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelTobacco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resource.en-US.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resource.zh-TW.resx">
+    <EmbeddedResource Include="Properties\Resource.zh-TW.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ttfbmp.bmp" />

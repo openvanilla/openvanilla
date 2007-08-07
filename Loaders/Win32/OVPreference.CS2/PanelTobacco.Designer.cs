@@ -28,7 +28,19 @@ namespace OVPreference.CS2
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PanelTobacco));
+            this.SuspendLayout();
+            // 
+            // PanelTobacco
+            // 
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
+            resources.ApplyResources(this, "$this");
+            this.BackgroundImage = null;
+            this.Font = null;
+            this.Name = "PanelTobacco";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
