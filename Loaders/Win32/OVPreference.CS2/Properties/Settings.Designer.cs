@@ -25,7 +25,7 @@ namespace OVPreference.CS2.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("en")]
+        [global::System.Configuration.DefaultSettingValueAttribute("zh-TW")]
         public string UICulture {
             get {
                 return ((string)(this["UICulture"]));
@@ -34,7 +34,7 @@ namespace OVPreference.CS2.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("en")]
+        [global::System.Configuration.DefaultSettingValueAttribute("zh-TW")]
         public string Culture {
             get {
                 return ((string)(this["Culture"]));

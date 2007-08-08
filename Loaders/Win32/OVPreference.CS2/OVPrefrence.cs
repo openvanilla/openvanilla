@@ -26,7 +26,7 @@ namespace OVPreference.CS2
         //ResourceManager resourceMgr = Resource_zh_TW.ResourceManager;
         
         ResourceManager resourceMgr = 
-            ResourceManager.CreateFileBasedResourceManager("Resource",@"..\..\", null);
+            ResourceManager.CreateFileBasedResourceManager("Resource",@".\Resources\", null);
         
         //CultureInfo ci =  Resource_ch_TW.Culture;// new CultureInfo("ch-TW");
         
