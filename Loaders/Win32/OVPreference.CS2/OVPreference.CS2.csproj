@@ -185,6 +185,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>PanelPhonetic.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PanelPOJ.zh-TW.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelPOJ.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PanelSharedSettings.zh-TW.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PanelSharedSettings.cs</DependentUpon>

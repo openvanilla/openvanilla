@@ -119,21 +119,42 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="m_cbWarningBeep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 16</value>
+    <value>108, 16</value>
   </data>
   <data name="m_cbWarningBeep.Text" xml:space="preserve">
-    <value>警告音</value>
+    <value>錯誤時發出嗶聲</value>
+  </data>
+  <data name="m_cbHitMaxAndCompose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 16</value>
+  </data>
+  <data name="m_cbHitMaxAndCompose.Text" xml:space="preserve">
+    <value>打到最大長度便自動出字</value>
   </data>
   <data name="m_cbAutoCompose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 16</value>
+    <value>192, 16</value>
   </data>
   <data name="m_cbAutoCompose.Text" xml:space="preserve">
-    <value>自動組成</value>
+    <value>一邊打字同時一邊組字出選字窗</value>
   </data>
   <data name="m_cbShiftSelectionKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 16</value>
+    <value>228, 16</value>
   </data>
   <data name="m_cbShiftSelectionKey.Text" xml:space="preserve">
-    <value>Shift 選擇鍵</value>
+    <value>空白鍵選第一字，第一選字鍵選第二字</value>
+  </data>
+  <data name="m_tbMaxKeySequenceLength.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 94</value>
+  </data>
+  <data name="m_lbMaxKeySequenceLength.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 12</value>
+  </data>
+  <data name="m_lbMaxKeySequenceLength.Text" xml:space="preserve">
+    <value>最大組字鍵碼長度：</value>
+  </data>
+  <data name="m_pnSelf.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 126</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 159</value>
   </data>
 </root>
