@@ -125,23 +125,14 @@
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 12</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>背景顏色</value>
-  </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 12</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>字型顏色</value>
-  </data>
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>透明度</value>
   </data>
   <data name="trackBar1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -149,16 +140,25 @@
   <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="button1.Text" xml:space="preserve">
-    <value>顏色</value>
-  </data>
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 12</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="m_lbBackColor.Text" xml:space="preserve">
+    <value>背景顏色</value>
+  </data>
+  <data name="m_lbFont.Text" xml:space="preserve">
     <value>字型</value>
+  </data>
+  <data name="m_lbFontColor.Text" xml:space="preserve">
+    <value>字型顏色</value>
+  </data>
+  <data name="m_lbOpacity.Text" xml:space="preserve">
+    <value>不透明度</value>
+  </data>
+  <data name="m_gbPreview.Text" xml:space="preserve">
+    <value>預覽</value>
   </data>
 </root>

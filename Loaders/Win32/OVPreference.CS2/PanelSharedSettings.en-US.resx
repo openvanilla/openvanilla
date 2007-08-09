@@ -121,25 +121,25 @@
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 12</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
+  <data name="m_lbBackColor.Text" xml:space="preserve">
     <value>Background Color</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 12</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
+  <data name="m_lbFontColor.Text" xml:space="preserve">
     <value>Font Color</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
+  <data name="m_lbOpacity.Text" xml:space="preserve">
     <value>Opacity</value>
-  </data>
-  <data name="button1.Text" xml:space="preserve">
-    <value>Color</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 12</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="m_lbFont.Text" xml:space="preserve">
     <value>Font</value>
+  </data>
+  <data name="m_gbPreview.Text" xml:space="preserve">
+    <value>Preview</value>
   </data>
 </root>

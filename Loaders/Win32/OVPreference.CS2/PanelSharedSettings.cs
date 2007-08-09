@@ -14,30 +14,28 @@ namespace OVPreference.CS2
         {
             InitializeComponent();
             
-            //FontComboBox fontComboBox1;
-            fontComboBox1.Populate(false);
-            fontColorPicker.Items = new KnownColorCollection(KnownColorFilter.All);
-            bgColorPicker.Items = new KnownColorCollection(KnownColorFilter.All);
-            //fontComboBox1.Populate(false);
+            m_cbFont.Populate(false);
+            m_cbFontColor.Items = new KnownColorCollection(KnownColorFilter.All);
+            m_cbBackColor.Items = new KnownColorCollection(KnownColorFilter.All);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.colorDialog1.ShowDialog();
+            this.m_cdMoreColors.ShowDialog();
         }
 
         private void fontColorPickerNotiFunction(object sender, EventArgs e)
         {
-            if(fontColorPicker.SelectedIndex.Equals(168))
+            if(m_cbFontColor.SelectedIndex.Equals(168))
             {
-                this.colorDialog1.ShowDialog();
+                this.m_cdMoreColors.ShowDialog();
             }
         }
         private void bgColorPickerNotiFunction(object sender, EventArgs e)
         {
-            if (fontColorPicker.SelectedIndex.Equals(168))
+            if (m_cbFontColor.SelectedIndex.Equals(168))
             {
-                this.colorDialog1.ShowDialog();
+                this.m_cdMoreColors.ShowDialog();
             }
         }
     }

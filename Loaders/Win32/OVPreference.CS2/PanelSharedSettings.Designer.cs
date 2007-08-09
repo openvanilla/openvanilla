@@ -6,9 +6,6 @@ namespace OVPreference.CS2
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        FontComboBox fontComboBox1;
-        ColorPicker fontColorPicker;
-        ColorPicker bgColorPicker;
         /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
@@ -31,181 +28,135 @@ namespace OVPreference.CS2
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PanelSharedSettings));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.bgColorPicker = new OVPreference.CS2.ColorPicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.fontColorPicker = new OVPreference.CS2.ColorPicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.fontComboBox1 = new OVPreference.CS2.FontComboBox();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.m_pnSelf = new System.Windows.Forms.Panel();
+            this.m_gbPreview = new System.Windows.Forms.GroupBox();
+            this.m_cbBackColor = new OVPreference.CS2.ColorPicker();
+            this.m_lbBackColor = new System.Windows.Forms.Label();
+            this.m_cbFontColor = new OVPreference.CS2.ColorPicker();
+            this.m_lbFontColor = new System.Windows.Forms.Label();
+            this.m_lbOpacity = new System.Windows.Forms.Label();
+            this.m_tbOpacity = new System.Windows.Forms.TrackBar();
+            this.m_cbFontSize = new System.Windows.Forms.ComboBox();
+            this.m_lbFont = new System.Windows.Forms.Label();
+            this.m_cbFont = new OVPreference.CS2.FontComboBox();
+            this.m_cdMoreColors = new System.Windows.Forms.ColorDialog();
+            this.m_pnSelf.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.m_tbOpacity)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // m_pnSelf
             // 
-            this.panel1.AccessibleDescription = null;
-            this.panel1.AccessibleName = null;
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.BackgroundImage = null;
-            this.panel1.Controls.Add(this.bgColorPicker);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.fontColorPicker);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.trackBar1);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.comboBox2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.fontComboBox1);
-            this.panel1.Font = null;
-            this.panel1.Name = "panel1";
+            this.m_pnSelf.Controls.Add(this.m_gbPreview);
+            this.m_pnSelf.Controls.Add(this.m_cbBackColor);
+            this.m_pnSelf.Controls.Add(this.m_lbBackColor);
+            this.m_pnSelf.Controls.Add(this.m_cbFontColor);
+            this.m_pnSelf.Controls.Add(this.m_lbFontColor);
+            this.m_pnSelf.Controls.Add(this.m_lbOpacity);
+            this.m_pnSelf.Controls.Add(this.m_tbOpacity);
+            this.m_pnSelf.Controls.Add(this.m_cbFontSize);
+            this.m_pnSelf.Controls.Add(this.m_lbFont);
+            this.m_pnSelf.Controls.Add(this.m_cbFont);
+            resources.ApplyResources(this.m_pnSelf, "m_pnSelf");
+            this.m_pnSelf.Name = "m_pnSelf";
             // 
-            // bgColorPicker
+            // m_gbPreview
             // 
-            this.bgColorPicker.AccessibleDescription = null;
-            this.bgColorPicker.AccessibleName = null;
-            resources.ApplyResources(this.bgColorPicker, "bgColorPicker");
-            this.bgColorPicker.BackgroundImage = null;
-            this.bgColorPicker.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.bgColorPicker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.bgColorPicker.Font = null;
-            this.bgColorPicker.FormattingEnabled = true;
-            this.bgColorPicker.Items = null;
-            this.bgColorPicker.Name = "bgColorPicker";
-            this.bgColorPicker.SelectedIndexChanged += new System.EventHandler(this.bgColorPickerNotiFunction);
+            resources.ApplyResources(this.m_gbPreview, "m_gbPreview");
+            this.m_gbPreview.Name = "m_gbPreview";
+            this.m_gbPreview.TabStop = false;
             // 
-            // label4
+            // m_cbBackColor
             // 
-            this.label4.AccessibleDescription = null;
-            this.label4.AccessibleName = null;
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Font = null;
-            this.label4.Name = "label4";
+            this.m_cbBackColor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.m_cbBackColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.m_cbBackColor.FormattingEnabled = true;
+            this.m_cbBackColor.Items = null;
+            resources.ApplyResources(this.m_cbBackColor, "m_cbBackColor");
+            this.m_cbBackColor.Name = "m_cbBackColor";
+            this.m_cbBackColor.SelectedIndexChanged += new System.EventHandler(this.bgColorPickerNotiFunction);
             // 
-            // fontColorPicker
+            // m_lbBackColor
             // 
-            this.fontColorPicker.AccessibleDescription = null;
-            this.fontColorPicker.AccessibleName = null;
-            resources.ApplyResources(this.fontColorPicker, "fontColorPicker");
-            this.fontColorPicker.BackgroundImage = null;
-            this.fontColorPicker.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.fontColorPicker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fontColorPicker.Font = null;
-            this.fontColorPicker.FormattingEnabled = true;
-            this.fontColorPicker.Items = null;
-            this.fontColorPicker.Name = "fontColorPicker";
-            this.fontColorPicker.SelectedIndexChanged += new System.EventHandler(this.fontColorPickerNotiFunction);
+            resources.ApplyResources(this.m_lbBackColor, "m_lbBackColor");
+            this.m_lbBackColor.Name = "m_lbBackColor";
             // 
-            // label3
+            // m_cbFontColor
             // 
-            this.label3.AccessibleDescription = null;
-            this.label3.AccessibleName = null;
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Font = null;
-            this.label3.Name = "label3";
+            this.m_cbFontColor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.m_cbFontColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.m_cbFontColor.FormattingEnabled = true;
+            this.m_cbFontColor.Items = null;
+            resources.ApplyResources(this.m_cbFontColor, "m_cbFontColor");
+            this.m_cbFontColor.Name = "m_cbFontColor";
+            this.m_cbFontColor.SelectedIndexChanged += new System.EventHandler(this.fontColorPickerNotiFunction);
             // 
-            // label2
+            // m_lbFontColor
             // 
-            this.label2.AccessibleDescription = null;
-            this.label2.AccessibleName = null;
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Font = null;
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.m_lbFontColor, "m_lbFontColor");
+            this.m_lbFontColor.Name = "m_lbFontColor";
             // 
-            // trackBar1
+            // m_lbOpacity
             // 
-            this.trackBar1.AccessibleDescription = null;
-            this.trackBar1.AccessibleName = null;
-            resources.ApplyResources(this.trackBar1, "trackBar1");
-            this.trackBar1.BackgroundImage = null;
-            this.trackBar1.Font = null;
-            this.trackBar1.Name = "trackBar1";
+            resources.ApplyResources(this.m_lbOpacity, "m_lbOpacity");
+            this.m_lbOpacity.Name = "m_lbOpacity";
             // 
-            // button1
+            // m_tbOpacity
             // 
-            this.button1.AccessibleDescription = null;
-            this.button1.AccessibleName = null;
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.BackgroundImage = null;
-            this.button1.Font = null;
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            resources.ApplyResources(this.m_tbOpacity, "m_tbOpacity");
+            this.m_tbOpacity.Name = "m_tbOpacity";
             // 
-            // comboBox2
+            // m_cbFontSize
             // 
-            this.comboBox2.AccessibleDescription = null;
-            this.comboBox2.AccessibleName = null;
-            resources.ApplyResources(this.comboBox2, "comboBox2");
-            this.comboBox2.BackgroundImage = null;
-            this.comboBox2.Font = null;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            resources.GetString("comboBox2.Items"),
-            resources.GetString("comboBox2.Items1"),
-            resources.GetString("comboBox2.Items2"),
-            resources.GetString("comboBox2.Items3"),
-            resources.GetString("comboBox2.Items4"),
-            resources.GetString("comboBox2.Items5"),
-            resources.GetString("comboBox2.Items6")});
-            this.comboBox2.Name = "comboBox2";
+            this.m_cbFontSize.FormattingEnabled = true;
+            this.m_cbFontSize.Items.AddRange(new object[] {
+            resources.GetString("m_cbFontSize.Items"),
+            resources.GetString("m_cbFontSize.Items1"),
+            resources.GetString("m_cbFontSize.Items2"),
+            resources.GetString("m_cbFontSize.Items3"),
+            resources.GetString("m_cbFontSize.Items4"),
+            resources.GetString("m_cbFontSize.Items5"),
+            resources.GetString("m_cbFontSize.Items6")});
+            resources.ApplyResources(this.m_cbFontSize, "m_cbFontSize");
+            this.m_cbFontSize.Name = "m_cbFontSize";
             // 
-            // label1
+            // m_lbFont
             // 
-            this.label1.AccessibleDescription = null;
-            this.label1.AccessibleName = null;
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Font = null;
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.m_lbFont, "m_lbFont");
+            this.m_lbFont.Name = "m_lbFont";
             // 
-            // fontComboBox1
+            // m_cbFont
             // 
-            this.fontComboBox1.AccessibleDescription = null;
-            this.fontComboBox1.AccessibleName = null;
-            resources.ApplyResources(this.fontComboBox1, "fontComboBox1");
-            this.fontComboBox1.BackgroundImage = null;
-            this.fontComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.fontComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fontComboBox1.Font = null;
-            this.fontComboBox1.FormattingEnabled = true;
-            this.fontComboBox1.Name = "fontComboBox1";
+            this.m_cbFont.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.m_cbFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.m_cbFont.FormattingEnabled = true;
+            resources.ApplyResources(this.m_cbFont, "m_cbFont");
+            this.m_cbFont.Name = "m_cbFont";
             // 
             // PanelSharedSettings
             // 
-            this.AccessibleDescription = null;
-            this.AccessibleName = null;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = null;
-            this.Controls.Add(this.panel1);
-            this.Font = null;
+            this.Controls.Add(this.m_pnSelf);
             this.Name = "PanelSharedSettings";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.m_pnSelf.ResumeLayout(false);
+            this.m_pnSelf.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.m_tbOpacity)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TrackBar trackBar1;
-        //private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label3;
-        //private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Label label4;
-        //private System.Windows.Forms.ComboBox comboBox1;
+        private FontComboBox m_cbFont;
+        private ColorPicker m_cbFontColor;
+        private ColorPicker m_cbBackColor;
+        private System.Windows.Forms.Panel m_pnSelf;
+        private System.Windows.Forms.ComboBox m_cbFontSize;
+        private System.Windows.Forms.Label m_lbFont;
+        private System.Windows.Forms.ColorDialog m_cdMoreColors;
+        private System.Windows.Forms.Label m_lbOpacity;
+        private System.Windows.Forms.TrackBar m_tbOpacity;
+        private System.Windows.Forms.Label m_lbFontColor;
+        private System.Windows.Forms.Label m_lbBackColor;
+        private System.Windows.Forms.GroupBox m_gbPreview;
     }
 }
