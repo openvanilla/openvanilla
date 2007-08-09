@@ -28,7 +28,15 @@ namespace OVPreference.CS2
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PanelTibetan));
+            this.SuspendLayout();
+            // 
+            // PanelTibetan
+            // 
+            resources.ApplyResources(this, "$this");
+            this.Name = "PanelTibetan";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

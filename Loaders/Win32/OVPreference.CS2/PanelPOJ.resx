@@ -149,9 +149,6 @@
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="checkBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 38</value>
-  </data>
   <data name="&gt;&gt;checkBox1.Name" xml:space="preserve">
     <value>checkBox1</value>
   </data>
@@ -161,8 +158,8 @@
   <data name="label1.Text" xml:space="preserve">
     <value>KeyboardLayout</value>
   </data>
-  <data name="&gt;&gt;checkBox2.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="checkBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 38</value>
   </data>
   <data name="checkBox2.Text" xml:space="preserve">
     <value>fullPOJOutput</value>
@@ -188,9 +185,6 @@
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="checkBox1.Text" xml:space="preserve">
     <value>ASCIIOutput</value>
   </data>
@@ -199,6 +193,9 @@
   </data>
   <data name="comboBox1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;checkBox2.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="checkBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 59</value>
@@ -212,6 +209,9 @@
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
   <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 12</value>
   </data>
@@ -224,8 +224,8 @@
   <data name="&gt;&gt;checkBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
@@ -256,8 +256,5 @@
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>Chinese (Taiwan)</value>
   </metadata>
 </root>

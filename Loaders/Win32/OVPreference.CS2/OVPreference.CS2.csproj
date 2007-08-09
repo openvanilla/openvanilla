@@ -193,6 +193,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>PanelSharedSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PanelTibetan.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelTibetan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PanelTobacco.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PanelTobacco.cs</DependentUpon>
