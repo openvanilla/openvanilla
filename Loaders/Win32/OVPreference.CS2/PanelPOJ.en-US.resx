@@ -118,34 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="m_cbWarningBeep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 16</value>
+  <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 16</value>
   </data>
-  <data name="m_cbWarningBeep.Text" xml:space="preserve">
-    <value>Warning Beep</value>
+  <data name="checkBox2.Text" xml:space="preserve">
+    <value>Full POJ Output</value>
   </data>
-  <data name="m_cbHitMaxAndCompose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 16</value>
+  <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 16</value>
   </data>
-  <data name="m_cbHitMaxAndCompose.Text" xml:space="preserve">
-    <value>Hit Max and Compose</value>
+  <data name="checkBox1.Text" xml:space="preserve">
+    <value>ASCII Output</value>
   </data>
-  <data name="m_cbAutoCompose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 16</value>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 12</value>
   </data>
-  <data name="m_cbAutoCompose.Text" xml:space="preserve">
-    <value>Auto Compose</value>
-  </data>
-  <data name="m_cbShiftSelectionKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 16</value>
-  </data>
-  <data name="m_cbShiftSelectionKey.Text" xml:space="preserve">
-    <value>Shift Selection Key</value>
-  </data>
-  <data name="m_lbMaxKeySequenceLength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 12</value>
-  </data>
-  <data name="m_lbMaxKeySequenceLength.Text" xml:space="preserve">
-    <value>Maximum Keys : </value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Keyboard Layout</value>
   </data>
 </root>

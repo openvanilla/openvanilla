@@ -37,27 +37,42 @@ namespace OVPreference.CS2
             // 
             // panel1
             // 
+            this.panel1.AccessibleDescription = null;
+            this.panel1.AccessibleName = null;
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.BackgroundImage = null;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.comboBox1);
-            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Font = null;
             this.panel1.Name = "panel1";
             // 
             // label1
             // 
+            this.label1.AccessibleDescription = null;
+            this.label1.AccessibleName = null;
             resources.ApplyResources(this.label1, "label1");
+            this.label1.Font = null;
             this.label1.Name = "label1";
             // 
             // comboBox1
             // 
-            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.AccessibleDescription = null;
+            this.comboBox1.AccessibleName = null;
             resources.ApplyResources(this.comboBox1, "comboBox1");
+            this.comboBox1.BackgroundImage = null;
+            this.comboBox1.Font = null;
+            this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Name = "comboBox1";
             // 
             // PanelPhonetic
             // 
+            this.AccessibleDescription = null;
+            this.AccessibleName = null;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = null;
             this.Controls.Add(this.panel1);
+            this.Font = null;
             this.Name = "PanelPhonetic";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

@@ -181,13 +181,25 @@
       <SubType>Designer</SubType>
       <DependentUpon>PanelGeneric.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PanelPhonetic.en-US.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelPhonetic.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PanelPhonetic.zh-TW.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PanelPhonetic.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PanelPOJ.en-US.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelPOJ.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PanelPOJ.zh-TW.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PanelPOJ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelSharedSettings.en-US.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelSharedSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelSharedSettings.zh-TW.resx">
       <SubType>Designer</SubType>
