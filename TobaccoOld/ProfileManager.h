@@ -3,7 +3,7 @@
 
 #include "Cache.h"
 #include "ProfileFetcher.h"
-#include "token.h"
+#include "Token.h"
 
 #include <map>
 
@@ -12,30 +12,28 @@ using namespace std;
 class ProfileManager {
 	public:
 		static ProfileManager* getInstance();
-		void lostInstance();
+		void releaseInstance();
   
-		Profile* query(std::wstring id);
-		Profile* fetch(std::wstring id, int pos);
-		void LoadCacheFile();
-		void LoadCacheFile(bool doSync);
-		void SaveCacheFile();
+		Profile* query(const string& id);
+		Profile* fetch(const string& id, size_t position);
+		void writeBack();
 		
 		void clearSession();
-
+		
 		ProfileManager();
 		~ProfileManager();
-	private:
-		static ProfileManager* _instance;
-		static Profile* profileWaitingForHit;
 
-		Cache* cache;
-		ProfileFetcher server;
+	private:
+		static ProfileManager* m_instance;
+
+		Cache* m_cache;
+		ProfileFetcher m_server;
 		/*
 		以上兩個 new class object 的動作應該要套 singleton pattern 才好，
 		暫時先不去改它們。
 		*/
-
-		multimap<wstring, int> session;
+		
+		multimap<string, size_t> m_session;
 };
 
 #endif

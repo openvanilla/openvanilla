@@ -2,7 +2,7 @@
 #define PROFILE_H
 
 #include <string>
-#include "token.h"
+#include "Token.h"
 
 using namespace std;
 
@@ -12,23 +12,24 @@ class Profile
 	friend class ProfileManager;
 
 public:
- 		wstring GetID();
-		wstring GetWord();
-		int	GetCurTokenPos();
-		const Token *GetTokenAt(int iPos) ;
-		int	GetTokenSize();
-		int GetHitRate();
-		void SetHitRate(int);
-		bool GetCustomizeFlag();
-		void SetCustomizeFlag(bool setFlag);
-		Profile(const wstring strID, int iPos, vector<Token> &tokenvec);
+		Profile(const string& id, size_t position, const vector<Token>& tokens);
+ 		const string& id();
+		const string& word();
+		size_t currentPosition();
+		Token* tokenAt(size_t position);
+		size_t tokenSize();
+		size_t hitRate();
+		void setHitRate(size_t hits);
+		bool isCustom();
+		void setCustomFlag(bool isCustom);
 		
 private:
-		wstring m_ID;
-		vector<Token> m_Tokens;
-		int	m_iCurTokenPos;
-		int m_hitsRate;
-		bool _isCustomized;
+		string m_id;
+		string m_word;
+		vector<Token> m_tokens;
+		size_t m_currentPosition;
+		size_t m_hitRate;
+		bool m_isCustom;
 };
 
 #endif

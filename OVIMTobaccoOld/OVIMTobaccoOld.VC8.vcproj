@@ -226,6 +226,26 @@
 				RelativePath="..\TobaccoOld\Vocabulary.cpp"
 				>
 			</File>
+			<Filter
+				Name="OnlineLearning"
+				>
+				<File
+					RelativePath="..\TobaccoOld\Cache.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\TobaccoOld\Profile.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\TobaccoOld\ProfileFetcher.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\TobaccoOld\ProfileManager.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="¼ÐÀYÀÉ"
@@ -268,6 +288,26 @@
 				RelativePath="..\TobaccoOld\Vocabulary.h"
 				>
 			</File>
+			<Filter
+				Name="OnlineLearning"
+				>
+				<File
+					RelativePath="..\TobaccoOld\Cache.h"
+					>
+				</File>
+				<File
+					RelativePath="..\TobaccoOld\Profile.h"
+					>
+				</File>
+				<File
+					RelativePath="..\TobaccoOld\ProfileFetcher.h"
+					>
+				</File>
+				<File
+					RelativePath="..\TobaccoOld\ProfileManager.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="¸ê·½ÀÉ"

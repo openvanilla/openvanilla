@@ -2,19 +2,13 @@
 #define PROFILEFETCHER_H
 
 #include "Profile.h"
-#include "FileHandler.h"
+
+using namespace std;
 
 class ProfileFetcher
 {
 	public:
-		ProfileFetcher()
-		{}
-
-		Profile* fetch(std::wstring id);
-
-	private:
-		FileHandler fileCache;
-
+		Profile* fetch(const string& id);
 };
 
 #endif

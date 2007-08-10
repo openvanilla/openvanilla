@@ -2,46 +2,38 @@
 
 #include "DictionarySingleton.h"
 
-ProfileManager* ProfileManager::_instance = 0;
-Profile* ProfileManager::profileWaitingForHit = 0;
+ProfileManager* ProfileManager::m_instance = 0;
 
 ProfileManager::ProfileManager()
 {
-	cache = Cache::getInstance();
-//	LoadCacheFile();  // comment out by Aileen to synchronize with utility program
+	m_cache = Cache::getInstance();
 }
 
 ProfileManager::~ProfileManager()
 {
-//	SaveCacheFile();  // // comment out by Aileen to synchronize with utility program
-	cache->lostInstance();
+	m_cache->releaseInstance();
 }
 
 ProfileManager* ProfileManager::getInstance()
 {
-	if(ProfileManager::_instance == 0)
+	if(ProfileManager::m_instance == 0)
 	{
-		_instance = new ProfileManager();
+		m_instance = new ProfileManager();
 	}
 
-	return _instance;
+	return m_instance;
 }
 
-void ProfileManager::lostInstance()
+void ProfileManager::releaseInstance()
 {
-	if(ProfileManager::_instance != 0)
+	if(ProfileManager::m_instance != 0)
 		ProfileManager::~ProfileManager();
 }
 
-void ProfileManager::clearSession()
-{
-	ProfileManager::session.clear();
-}
-
-Profile* ProfileManager::query(std::wstring id)
+Profile* ProfileManager::query(const string& id)
 {
 	Profile* profile = 0;
-	profile = cache->fetch(id);		// 到 cache 裡看看有沒有符合的物件。
+	profile = m_cache->fetch(id);		// 到 cache 裡看看有沒有符合的物件。
 	/*
 	if (profile == 0)					// 如果沒有，就叫後端去把需要的物件找出來。
 	{									// 對輸入法來說，後端動作也可以換成是切出學習到的字串。
@@ -68,19 +60,19 @@ Profile* ProfileManager::query(std::wstring id)
 	return profile;
 }
 
-Profile* ProfileManager::fetch(std::wstring id, int currentPos)
+Profile* ProfileManager::fetch(const string& id, size_t position)
 {
 	Profile* profile = query(id);
 
 	if(profile != 0) {
-		wstring currentWord = profile->GetWord();
-		int count = session.count(currentWord);
+		string word = profile->word();
+		size_t count = m_session.count(word);
 		bool doRank = true;
 		if(count > 0) {
-			multimap<wstring, int>::iterator iter = session.find(currentWord);
-			for(int i = 0; i < count; ++i, ++iter)
+			multimap<string, size_t>::iterator iter = m_session.find(word);
+			for(size_t i = 0; i < count; ++i, ++iter)
 			{
-				if(iter->second == currentPos) {
+				if(iter->second == position) {
 					doRank = false;
 					break;
 				}
@@ -88,29 +80,20 @@ Profile* ProfileManager::fetch(std::wstring id, int currentPos)
 		}
 
 		if(doRank) {
-			session.insert(make_pair(currentWord, currentPos));
-			cache->rank(profile);
+			m_session.insert(make_pair(word, position));
+			m_cache->rank(id, word);
 		}
 	}
 
 	return profile;
 }
 
-void ProfileManager::LoadCacheFile()
+void ProfileManager::writeBack()
 {
-	LoadCacheFile(false);
+	//@todo writes cache back to SQLite db here.
 }
 
-void ProfileManager::LoadCacheFile(bool doSync)
+void ProfileManager::clearSession()
 {
-	DictionarySingleton* dictionary = DictionarySingleton::getInstance();
-	wstring cacheFilePath =dictionary->productInstalledPath + L"\\cache.txt";
-	cache->LoadFromFile(cacheFilePath, doSync);
-}
-
-void ProfileManager::SaveCacheFile()
-{
-	DictionarySingleton* dictionary = DictionarySingleton::getInstance();
-	wstring cacheFilePath =dictionary->productInstalledPath + L"\\cache.txt";
-	cache->SaveToFile(cacheFilePath);
+	ProfileManager::m_session.clear();
 }

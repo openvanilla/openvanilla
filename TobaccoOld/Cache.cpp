@@ -18,20 +18,20 @@ struct DeleteObject {
 
 Cache::Cache()
 {
-	Cache::m_currentCacheSize = 0;
+	m_currentCacheSize = 0;
 }
 
 Cache::~Cache()
 {
-	//Cache::clearTable();
-	Cache::m_table.clear();
-	Cache::m_recentlyUsedList.clear();
-	Cache::m_currentCacheSize = 0;
+	//clearTable();
+	m_table.clear();
+	m_recentlyUsedList.clear();
+	m_currentCacheSize = 0;
 }
 
 Cache* Cache::getInstance()
 {
-	if(Cache::m_instance == 0)
+	if(!m_instance)
 	{
 		m_instance = new Cache();
 	}
@@ -41,7 +41,7 @@ Cache* Cache::getInstance()
 
 void Cache::releaseInstance()
 {
-	if(Cache::m_instance != 0)
+	if(m_instance)
 		Cache::~Cache();
 }
 
@@ -57,30 +57,29 @@ void Cache::clearTable()
 }
 */
 
-void Cache::rank(const Profile& profile)
+void Cache::rank(const string& id, const string& word)
 {
-	string targetID = profile->GetID();
-	if(Cache::m_table.count(targetID) > 0) {
-		vector<Profile> profileVector = Cache::m_table[targetID];
+	if(m_table.count(id) > 0) {
+		vector<Profile> profileVector = m_table[id];
 		for(size_t i = 0; i < profileVector.size(); ++i)
 		{
 			Profile existedProfile = profileVector[i];
-			int currentHitRate = existedProfile->GetHitRate();
-			if(existedProfile->GetWord() == profile->GetWord())
-				Cache::m_table[targetID][i]->SetHitRate(++currentHitRate);
+			size_t currentHitRate = existedProfile.hitRate();
+			if(existedProfile.word() == word)
+				m_table[id][i].setHitRate(++currentHitRate);
 			else if(currentHitRate > 0)
-				Cache::m_table[targetID][i]->SetHitRate(--currentHitRate);
+				m_table[id][i].setHitRate(--currentHitRate);
 		}
 	}
 }
 
-void Cache::add(const Profile& profile)
+void Cache::add(Profile& profile)
 {
-	string id = profile->GetID();
-	if (Cache::m_table.count(id) == 0)
+	string id = profile.id();
+	if (m_table.count(id) == 0)
 	{
-		//依照司法院的要求先取消掉MAX_CACHE_SIZE的判斷
-		Cache::m_recentlyUsedList.push_back(id);
+		//先取消 MAX_CACHE_SIZE 的判斷
+		m_recentlyUsedList.push_back(id);
 //		/*
 //		cache 還有空間的話就直接擺到最後面。
 //		這裡只是先對排序用的 deque 作記錄。
@@ -109,96 +108,88 @@ void Cache::add(const Profile& profile)
 		vector<Profile> currentVector;
 		currentVector.push_back(profile);
 
-		Cache::m_table.insert(make_pair(id, currentVector));
+		m_table.insert(make_pair(id, currentVector));
 	}
 	else
 	{
 		bool foundWord = false;
-		vector<Profile> profileVector = Cache::m_table[id];
+		vector<Profile> profileVector = m_table[id];
 		for(size_t i = 0; i < profileVector.size(); ++i)
 		{
 			Profile existedProfile = profileVector[i];
-			int currentHitRate = existedProfile->GetHitRate();
-			if(existedProfile->GetWord() == profile->GetWord())
+			size_t currentHitRate = existedProfile.hitRate();
+			if(existedProfile.word() == profile.word())
 			{
-				Cache::m_table[id][i]->SetHitRate(++currentHitRate);
+				m_table[id][i].setHitRate(++currentHitRate);
 				foundWord = true;
 				break;
 			}
 			else if(currentHitRate > 0)
-				Cache::m_table[id][i]->SetHitRate(--currentHitRate);
+				m_table[id][i].setHitRate(--currentHitRate);
 		}
 
 		if(!foundWord)
-			Cache::m_table[id].push_back(profile);
+			m_table[id].push_back(profile);
 	}
 
-	currentCacheSize++;
+	m_currentCacheSize++;
 }
 
-Profile* Cache::fetch(string id)
+Profile* Cache::fetch(const string& id)
 {
-	vector<Profile> profileVector = Cache::fetchAll(id);
-	bool hasCustomizedTerm = false;
+	vector<Profile> profiles;
+	size_t amount = fetchAll(id, profiles);
+	bool hasCustomTerm = false;
 	bool doUpdate = false;
-
-	if(profileVector.size() != 0)
+	Profile* profile = 0;
+	if(amount > 0)
 	{
 		///*
-		int maxHitRate = 0;
-		int bestIndex = profileVector.size() - 1;
-		for(size_t i = 0; i < profileVector.size(); i++)
+		size_t maxHitRate = 0;
+		for(size_t i = 0; i < profiles.size(); ++i)
 		{
-			if(profileVector[i]->GetCustomizeFlag()) {
-				if(!hasCustomizedTerm) {
-					hasCustomizedTerm = true;
+			if(profiles[i].isCustom()) {
+				if(!hasCustomTerm) {
+					hasCustomTerm = true;
 					doUpdate = true;
-				} else if (profileVector[i]->GetHitRate() >= maxHitRate) {
+				} else if (profiles[i].hitRate() >= maxHitRate) {
 					doUpdate = true;
 				}
 			}
 
-			if(!hasCustomizedTerm && profileVector[i]->GetHitRate() >= maxHitRate)
+			if(!hasCustomTerm && profiles[i].hitRate() >= maxHitRate)
 				doUpdate = true;
 
 			if(doUpdate) {
-				maxHitRate = profileVector[i]->GetHitRate();
-				bestIndex = i;
+				maxHitRate = profiles[i].hitRate();
+				profile = &profile[i];
 				doUpdate = false;
 			}
 		}
 
-		return &profileVector[bestIndex];
 		//*/
 		// 改回「後進先出」模式
 		//return profileVector.back();
 	}
-	else
-		return 0;
+
+	return profile;
 }
 
-vector<Profile>* Cache::fetchAll(string id)
+size_t Cache::fetchAll(const string& id, vector<Profile>& profiles)
 {
-	vector<Profile> currentVector;
-	int counter = Cache::count(id);
-	if (counter == 0)
-		currentVector.clear();
-	else
-	{
-		std::deque<string>::iterator current;
-		current = find(Cache::m_recentlyUsedList.begin(), Cache::m_recentlyUsedList.end(), id);
-		currentVector = Cache::table[id];
-	}
+	size_t amount = count(id);
+	if (amount > 0)
+		profiles = m_table[id];
 
-	return &currentVector;
+	return amount;
 }
 
-size_t Cache::count(string id)
+size_t Cache::count(const string& id)
 {
-	return Cache::m_table.count(id);
+	return m_table.count(id);
 }
 
-bool Cache::remove(string id, string word)
+bool Cache::remove(const string& id, const string& word)
 {
 /*
 移除 cache 裡的東西要完成以下三個步驟：
@@ -207,27 +198,28 @@ bool Cache::remove(string id, string word)
 將目前 cache 使用掉的空間減 1。
 */
 	deque<string>::iterator current;
-	current = find(Cache::m_recentlyUsedList.begin(), Cache::m_recentlyUsedList.end(), id);
-	Cache::m_recentlyUsedList.erase(current);
+	current =
+		find(m_recentlyUsedList.begin(), m_recentlyUsedList.end(), id);
+	m_recentlyUsedList.erase(current);
 
-	int counter = Cache::m_table.count(id);
+	size_t counter = m_table.count(id);
 
 	bool doEraseFlag = false;
 	if(counter > 0)
 	{
-		for(size_t i = 0; i < Cache::m_table[id].size(); ++i)
+		for(size_t i = 0; i < m_table[id].size(); ++i)
 		{
-			if(Cache::m_table[id][i]->GetWord() == word)
+			if(m_table[id][i].word() == word)
 			{
-				Cache::m_table[id].erase(Cache::m_table[id].begin() + i);
-				currentCacheSize--;
+				m_table[id].erase(m_table[id].begin() + i);
+				m_currentCacheSize--;
 				doEraseFlag = true;
 				break;
 			}
 		}
 
-		if(Cache::m_table[id].size() == 0)
-			Cache::m_table.erase(Cache::m_table.find(id));
+		if(m_table[id].size() == 0)
+			m_table.erase(m_table.find(id));
 	}
 
 	return doEraseFlag;

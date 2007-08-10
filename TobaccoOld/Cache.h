@@ -17,14 +17,14 @@ public:
 	static Cache* getInstance();
 	void releaseInstance();
 
-	void add(const Profile& profile);
- 	Profile* fetch(string id);
-	vector<Profile>* fetchAll(string id);
- 	bool remove(string id, string word);
+	void add(Profile& profile);
+ 	Profile* fetch(const string& id);
+	size_t fetchAll(const string& id, vector<Profile>& profiles);
+ 	bool remove(const string& id, const string& word);
 
-	size_t count(string id);
+	size_t count(const string& id);
 
-	void rank(const Profile& profile);
+	void rank(const string& id, const string& word);
 
 	Cache::Cache();
 	Cache::~Cache();

@@ -1061,11 +1061,11 @@ const char *IMGKeySequence::compose() {
 	{
 		string inputStr(seq);		
 		convert2LegalBPMF(inputStr,foo);	
-		len=foo.length();
+		len = static_cast<int>(foo.length());
 		strcpy(seq,foo.c_str());
 	}	
 		
-	for(int i=0;i<foo.length();i++)
+	for(size_t i = 0; i < foo.length(); i++)
 	{
 		const char *s=query(foo[i]);
         if (s) strcat(composebuf, s);

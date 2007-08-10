@@ -2,67 +2,68 @@
 
 using namespace std;
 
-Profile::Profile(const wstring strID, int iPos, vector<Token> &tokenvec)
+Profile::Profile(const string& id, size_t position, const vector<Token>& tokens)
 {
-	m_ID = strID;
-	for( vector<Token>::const_iterator i= tokenvec.begin(); i!=tokenvec.end();i++)
+	m_id = id;
+	m_tokens = tokens;
+	/*
+	for(vector<Token>::const_iterator iter = tokens.begin();
+		iter != tokens.end(); ++iter)
 	{
-		m_Tokens.push_back(*i);
-
+		m_tokens.push_back(*iter);	
 	}
-	m_iCurTokenPos = iPos;
-	m_hitsRate = 1;
-	_isCustomized = false;
+	*/
+
+	m_currentPosition = position;
+	m_hitRate = 1;
+	m_isCustom = false;
 }
 
-
-wstring Profile::GetID() {return m_ID;}
+const string& Profile::id() {return m_id;}
 /*
 Profile 裡面現在只有個叫 id 的 string，
-事實上至少還要加上一個 weighting 才恰當。
+事實上可能還要有 weight 才恰當。
 */
 
-int Profile::GetCurTokenPos() { return m_iCurTokenPos; }
-
-const Token *Profile::GetTokenAt(int iPos) 
+const string& Profile::word()
 {
-	if( iPos >= m_Tokens.size() || iPos < 0 )
-		return NULL;
+	m_word.clear();
+	for(size_t i = 0; i < m_tokens.size(); ++i)
+		m_word.append(m_tokens[i].word);
 
-	return &m_Tokens.at(iPos);
+	return m_word;
 }
 
-int Profile::GetTokenSize()
+size_t Profile::currentPosition() { return m_currentPosition; }
+
+Token* Profile::tokenAt(size_t position)
 {
-	return m_Tokens.size();
+	if(position >= m_tokens.size()) return 0;
+
+	return &m_tokens.at(position);
 }
 
-void Profile::SetHitRate(int hits)
+size_t Profile::tokenSize()
+{
+	return m_tokens.size();
+}
+
+size_t Profile::hitRate()
+{
+	return m_hitRate;
+}
+
+void Profile::setHitRate(size_t hits)
 {	
-	m_hitsRate = hits;
+	m_hitRate = hits;
 }
 
-int Profile::GetHitRate()
+bool Profile::isCustom()
 {
-	return m_hitsRate;
+	return m_isCustom;
 }
 
-wstring Profile::GetWord()
+void Profile::setCustomFlag(bool isCustom)
 {
-	wstring word(L"");
-	int size = m_Tokens.size();
-	for(int i = 0; i < size; ++i)
-		word.append(m_Tokens[i].word);
-
-	return word;
-}
-
-void Profile::SetCustomizeFlag(bool setFlag)
-{
-	_isCustomized = setFlag;
-}
-
-bool Profile::GetCustomizeFlag()
-{
-	return _isCustomized;
+	m_isCustom = isCustom;
 }

@@ -15,14 +15,14 @@ void convert2LegalBPMF(string input, string &output)
 	{
 		flags[i]=false;		
 	}	
-	for(int i=0;i<input.length();i++)
+	for(size_t i = 0; i < input.length(); i++)
 	{
 		if(group0.find(input[i]) != string::npos)
 		{
-			flags[0]=true;
-			foo[0]=input[i];			
+			flags[0] = true;
+			foo[0] = input[i];
 		}
-		else if(group1.find(input[i])!= string::npos)
+		else if(group1.find(input[i]) != string::npos)
 		{
 			flags[1]=true;
 			foo[1]=input[i];
