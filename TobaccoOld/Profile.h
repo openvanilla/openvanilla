@@ -12,24 +12,18 @@ class Profile
 	friend class ProfileManager;
 
 public:
-		Profile(const string& id, size_t position, const vector<Token>& tokens);
- 		const string& id();
-		const string& word();
-		size_t currentPosition();
-		Token* tokenAt(size_t position);
-		size_t tokenSize();
-		size_t hitRate();
-		void setHitRate(size_t hits);
-		bool isCustom();
-		void setCustomFlag(bool isCustom);
-		
+	Profile(const string& id, const vector<Token>& tokens);
+
+ 	const string& id();
+	const vector<Token>& tokens();
+
+	size_t position;
+	size_t hitRate;
+	bool isCustom;
+
 private:
-		string m_id;
-		string m_word;
-		vector<Token> m_tokens;
-		size_t m_currentPosition;
-		size_t m_hitRate;
-		bool m_isCustom;
+	string m_id;
+	vector<Token> m_tokens;
 };
 
 #endif

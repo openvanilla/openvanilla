@@ -65,7 +65,10 @@ Profile* ProfileManager::fetch(const string& id, size_t position)
 	Profile* profile = query(id);
 
 	if(profile != 0) {
-		string word = profile->word();
+		//@author b6s
+		//@todo Refactoring is needed.
+		//string word = profile->word();
+		string word("");
 		size_t count = m_session.count(word);
 		bool doRank = true;
 		if(count > 0) {

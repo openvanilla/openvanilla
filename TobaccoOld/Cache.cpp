@@ -64,11 +64,15 @@ void Cache::rank(const string& id, const string& word)
 		for(size_t i = 0; i < profileVector.size(); ++i)
 		{
 			Profile existedProfile = profileVector[i];
-			size_t currentHitRate = existedProfile.hitRate();
+			size_t currentHitRate = existedProfile.hitRate;
+			//@author b6s
+			//@todo Refactoring is needed.
+			/*
 			if(existedProfile.word() == word)
-				m_table[id][i].setHitRate(++currentHitRate);
+				m_table[id][i].hitRate = ++currentHitRate;
 			else if(currentHitRate > 0)
-				m_table[id][i].setHitRate(--currentHitRate);
+				m_table[id][i].hitRate = --currentHitRate;
+			*/
 		}
 	}
 }
@@ -117,7 +121,10 @@ void Cache::add(Profile& profile)
 		for(size_t i = 0; i < profileVector.size(); ++i)
 		{
 			Profile existedProfile = profileVector[i];
-			size_t currentHitRate = existedProfile.hitRate();
+			size_t currentHitRate = existedProfile.hitRate;
+			//@author b6s
+			//@todo Refactoring is needed.
+			/*
 			if(existedProfile.word() == profile.word())
 			{
 				m_table[id][i].setHitRate(++currentHitRate);
@@ -126,6 +133,7 @@ void Cache::add(Profile& profile)
 			}
 			else if(currentHitRate > 0)
 				m_table[id][i].setHitRate(--currentHitRate);
+			*/
 		}
 
 		if(!foundWord)
@@ -148,20 +156,20 @@ Profile* Cache::fetch(const string& id)
 		size_t maxHitRate = 0;
 		for(size_t i = 0; i < profiles.size(); ++i)
 		{
-			if(profiles[i].isCustom()) {
+			if(profiles[i].isCustom) {
 				if(!hasCustomTerm) {
 					hasCustomTerm = true;
 					doUpdate = true;
-				} else if (profiles[i].hitRate() >= maxHitRate) {
+				} else if (profiles[i].hitRate >= maxHitRate) {
 					doUpdate = true;
 				}
 			}
 
-			if(!hasCustomTerm && profiles[i].hitRate() >= maxHitRate)
+			if(!hasCustomTerm && profiles[i].hitRate >= maxHitRate)
 				doUpdate = true;
 
 			if(doUpdate) {
-				maxHitRate = profiles[i].hitRate();
+				maxHitRate = profiles[i].hitRate;
 				profile = &profile[i];
 				doUpdate = false;
 			}
@@ -209,6 +217,9 @@ bool Cache::remove(const string& id, const string& word)
 	{
 		for(size_t i = 0; i < m_table[id].size(); ++i)
 		{
+			//@author b6s
+			//@todo Refactoring is needed.
+			/*
 			if(m_table[id][i].word() == word)
 			{
 				m_table[id].erase(m_table[id].begin() + i);
@@ -216,6 +227,7 @@ bool Cache::remove(const string& id, const string& word)
 				doEraseFlag = true;
 				break;
 			}
+			*/
 		}
 
 		if(m_table[id].size() == 0)
