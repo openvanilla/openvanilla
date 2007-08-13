@@ -147,13 +147,29 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\Profile.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Token.cpp"
 				>
 			</File>
+			<Filter
+				Name="Learning"
+				>
+				<File
+					RelativePath=".\Cache.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Profile.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\ProfileCreator.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\ProfileManager.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -161,13 +177,29 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\Profile.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Token.h"
 				>
 			</File>
+			<Filter
+				Name="Learning"
+				>
+				<File
+					RelativePath=".\Cache.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Profile.h"
+					>
+				</File>
+				<File
+					RelativePath=".\ProfileCreator.h"
+					>
+				</File>
+				<File
+					RelativePath=".\ProfileManager.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"

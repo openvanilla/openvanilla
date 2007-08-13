@@ -189,6 +189,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TestCache.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\TestProfile.cpp"
 				>
 			</File>

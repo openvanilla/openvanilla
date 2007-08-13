@@ -17,27 +17,15 @@ public:
 	static Cache* getInstance();
 	void releaseInstance();
 
-	void add(Profile& profile);
- 	Profile* fetch(const string& id);
-	size_t fetchAll(const string& id, vector<Profile>& profiles);
- 	bool remove(const string& id, const string& word);
-
-	size_t count(const string& id);
-
-	void rank(const string& id, const string& word);
-
-	Cache::Cache();
-	Cache::~Cache();
+	void add(Profile& theProfile);
+ 	bool remove(const pair<const string, const string>& theId);
+	vector<Profile>* fetch(const string& theKey);
 
 private:
-	//void clearTable();
-
 	static Cache* m_instance;
 	map<string, vector<Profile> > m_table;
-	deque<string> m_recentlyUsedList;	//±Æ§Ç¥Î
 
-	size_t m_currentCacheSize;
-	static const size_t MAX_CACHE_SIZE;
+	static const size_t MAX_CACHE_SIZE = 1000;
 };
 
 #endif

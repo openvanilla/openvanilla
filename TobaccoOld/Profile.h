@@ -12,9 +12,12 @@ class Profile
 	friend class ProfileManager;
 
 public:
-	Profile(const string& theId, const vector<Token>& theTokens);
+	Profile(
+		const pair<const string, const string>& theId,
+		const vector<Token>& theTokens);
+	Profile& operator=(const Profile& rhs);
 
- 	const string& id() const;
+ 	const pair<const string, const string>& id() const;
 	const vector<Token>& tokens() const;
 
 	size_t position;
@@ -22,7 +25,7 @@ public:
 	bool isCustom;
 
 private:
-	const string m_id;
+	const pair<const string, const string> m_id;
 	const vector<Token> m_tokens;
 };
 
