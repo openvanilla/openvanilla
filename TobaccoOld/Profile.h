@@ -12,18 +12,18 @@ class Profile
 	friend class ProfileManager;
 
 public:
-	Profile(const string& id, const vector<Token>& tokens);
+	Profile(const string& theId, const vector<Token>& theTokens);
 
- 	const string& id();
-	const vector<Token>& tokens();
+ 	const string& id() const;
+	const vector<Token>& tokens() const;
 
 	size_t position;
 	size_t hitRate;
 	bool isCustom;
 
 private:
-	string m_id;
-	vector<Token> m_tokens;
+	const string m_id;
+	const vector<Token> m_tokens;
 };
 
 #endif
