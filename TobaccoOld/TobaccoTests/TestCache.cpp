@@ -38,6 +38,16 @@ TEST_FIXTURE(TestCacheFixture, CacheTest)
 	{
 		CHECK(profiles->at(0).id().first == "keystroke string");
 		CHECK(profiles->at(0).id().second == "word string");
+		CHECK_EQUAL(0, profiles->at(0).hitRate);
+	}
+
+	cache->update(make_pair("keystroke string", "word string"));
+	profiles = cache->fetch("keystroke string");
+	if(profiles)
+	{
+		CHECK(profiles->at(0).id().first == "keystroke string");
+		CHECK(profiles->at(0).id().second == "word string");
+		CHECK_EQUAL(1, profiles->at(0).hitRate);
 	}
 
 	CHECK(cache->remove(make_pair("keystroke string", "word string")));

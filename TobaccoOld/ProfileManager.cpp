@@ -33,12 +33,8 @@ vector<Profile>* ProfileManager::fetch(const string& theKey)
 	vector<Profile>* profiles = m_cache->fetch(theKey);
 	if(profiles) return profiles;
 
-	//@todo collects required data from Tobacco's Tokens here.
-	//m_creator.create(theKey, theWord, theTokens);
-	profiles = m_cache->fetch(theKey);
-	if(profiles) return profiles;
-
-	return 0;
+	profiles = m_fetcher.fetch(theKey);
+	return profiles;
 }
 
 void ProfileManager::writeBack()

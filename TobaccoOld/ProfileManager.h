@@ -2,7 +2,7 @@
 #define PROFILEMANAGER_H
 
 #include "Cache.h"
-#include "ProfileCreator.h"
+#include "ProfileFetcher.h"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ private:
 	static ProfileManager* m_instance;
 
 	Cache* m_cache;
-	ProfileCreator m_creator;		
+	ProfileFetcher m_fetcher;
 };
 
 #endif

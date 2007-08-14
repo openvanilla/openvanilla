@@ -39,6 +39,36 @@ void Cache::add(Profile& theProfile)
 		m_table[theProfile.id().first].push_back(theProfile);
 }
 
+vector<Profile>* Cache::fetch(const string& theKey)
+{
+	if(m_table.count(theKey) > 0)
+		return &m_table[theKey];
+	else
+		return 0;
+}
+
+void Cache::update(const pair<const string, const string>& theId)
+{
+	vector<Profile>* profiles = fetch(theId.first);
+	if(profiles)
+	{
+		for(vector<Profile>::iterator i = profiles->begin();
+			i != profiles->end();
+			++i)
+		{
+			if(i->id() == theId) {
+				++i->hitRate;
+				return;
+			}
+		}
+	}
+	else
+	{
+		//@todo add new Profiles here
+		return;
+	}
+}
+
 bool Cache::remove(const pair<const string, const string>& theId)
 {
 	vector<Profile>* profiles = fetch(theId.first);
@@ -58,12 +88,4 @@ bool Cache::remove(const pair<const string, const string>& theId)
 	}
 
 	return false;
-}
-
-vector<Profile>* Cache::fetch(const string& theKey)
-{
-	if(m_table.count(theKey) > 0)
-		return &m_table[theKey];
-	else
-		return 0;
 }

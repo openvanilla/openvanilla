@@ -12,14 +12,13 @@ using namespace std;
 class Cache
 {
 public:
-	bool isSaved;
-
 	static Cache* getInstance();
 	void releaseInstance();
 
 	void add(Profile& theProfile);
- 	bool remove(const pair<const string, const string>& theId);
 	vector<Profile>* fetch(const string& theKey);
+	void update(const pair<const string, const string>& theId);
+ 	bool remove(const pair<const string, const string>& theId);
 
 private:
 	static Cache* m_instance;

@@ -1,10 +1,7 @@
 #include "ProfileFetcher.h"
 
-Profile* ProfileFetcher::fetch(const string& id)
+vector<Profile>* ProfileFetcher::fetch(const string& theKey)
 {
-	/*
-	The learning algorithm should be here.
-	*/
-
+	//@todo fetch candidates by the key.
 	return 0;
 }
