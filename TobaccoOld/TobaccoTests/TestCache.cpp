@@ -7,13 +7,7 @@ struct TestCacheFixture
 	{
 		cache = Cache::getInstance();
 
-		aToken.characterStringVector.push_back("syllable string 1");
-		aToken.characterStringVector.push_back("syllable string 2");
-		aToken.keystrokes = "keystroke string";
-		aToken.word = "word string";
-		tokens.push_back(aToken);
-
-		anId = make_pair(aToken.keystrokes, aToken.word);
+		anId = make_pair("keystroke string", "word string");
 	}
 
 	~TestCacheFixture()
@@ -24,14 +18,12 @@ struct TestCacheFixture
 	Cache* cache;
 
 	pair<string, string> anId;
-	Token aToken;
-	vector<Token> tokens;
 };
 
 //@note use cases of ProfileManager, actually.
 TEST_FIXTURE(TestCacheFixture, CacheTest)
 {
-	Profile profile(anId, tokens); //< it should be done by ProfileFetcher.
+	Profile profile(anId); //< it should be done by ProfileFetcher.
 	cache->add(profile);
 
 	vector<Profile>* profiles = cache->fetch("keystroke string");

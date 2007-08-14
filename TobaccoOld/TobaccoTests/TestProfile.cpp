@@ -23,7 +23,7 @@ TEST_FIXTURE(TestProfileFixture, IdTest)
 
 TEST_FIXTURE(TestProfileFixture, HitRateTest)
 {
-	Profile profile(anId, tokens);
+	Profile profile(anId);
 	CHECK_EQUAL(0, profile.hitRate);
 	++profile.hitRate;
 	CHECK_EQUAL(1, profile.hitRate);
@@ -33,7 +33,7 @@ TEST_FIXTURE(TestProfileFixture, HitRateTest)
 
 TEST_FIXTURE(TestProfileFixture, IsCustomTest)
 {
-	Profile profile(anId, tokens);
+	Profile profile(anId);
 	CHECK(!profile.isCustom);
 	profile.isCustom = true;
 	CHECK(profile.isCustom);
