@@ -14,6 +14,30 @@ struct TestProfileFixture
 	pair<string, string> anId;
 };
 
+TEST_FIXTURE(TestProfileFixture, CopyConstructorTest)
+{
+	Profile* src = new Profile(anId);
+	Profile* tgt = new Profile(*src);
+	delete src;
+	src = 0;
+	if(tgt)
+		CHECK_EQUAL("keystroke string", tgt->id().first.c_str());
+	else
+		CHECK(false);
+}
+
+TEST_FIXTURE(TestProfileFixture, CopyAssignmentTest)
+{
+	Profile* src = new Profile(anId);
+	Profile tgt1 = *src;	
+	delete src;
+	src = 0;
+	CHECK_EQUAL("keystroke string", tgt1.id().first.c_str());
+
+	Profile tgt2 = tgt1;
+	CHECK_EQUAL("keystroke string", tgt2.id().first.c_str());
+}
+
 TEST_FIXTURE(TestProfileFixture, IdTest)
 {	
 	Profile profile(anId);
