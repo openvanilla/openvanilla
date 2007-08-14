@@ -1,6 +1,8 @@
 #ifndef PROFILEFETCHER_H
 #define PROFILEFETCHER_H
 
+#include <vector>
+
 #include "Profile.h"
 
 using namespace std;

@@ -1,6 +1,7 @@
 MODULEID=OVIMTobacco
 SOURCES=OVIMTobacco PredictorSingleton DictionarySingleton\
-    Token Vocabulary Candidate BiGram
+    Token Vocabulary Candidate BiGram\
+    ProfileManager ProfileFetcher Cache Profile
 DATA=imtables.db tsi.db
 BPMF=bpmf_punctuation.cin bpmf-Hsu.cin
 CINS=cj.cin
