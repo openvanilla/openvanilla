@@ -47,14 +47,6 @@ TEST_FIXTURE(TestProfileFixture, TokensTest)
 	CHECK(!tokens[0].withSuffix);
 }
 
-TEST_FIXTURE(TestProfileFixture, PositionTest)
-{
-	Profile profile(anId, tokens);
-	CHECK_EQUAL(-1, profile.position);
-	profile.position = 1;
-	CHECK_EQUAL(1, profile.position);
-}
-
 TEST_FIXTURE(TestProfileFixture, HitRateTest)
 {
 	Profile profile(anId, tokens);

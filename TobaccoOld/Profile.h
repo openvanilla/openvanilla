@@ -15,12 +15,11 @@ public:
 	Profile(
 		const pair<const string, const string>& theId,
 		const vector<Token>& theTokens);
-	Profile& operator=(const Profile& rhs);
+	Profile& operator=(const Profile& rhsProfile);
 
  	const pair<const string, const string>& id() const;
 	const vector<Token>& tokens() const;
 
-	size_t position;
 	size_t hitRate;
 	bool isCustom;
 

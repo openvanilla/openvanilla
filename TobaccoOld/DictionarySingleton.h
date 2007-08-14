@@ -8,11 +8,13 @@
 	#include <OpenVanilla/OVUtility.h>
 #else
 	#include "OVUtility.h"
+	#pragma warning(disable:4996)
 #endif
 
 #include "OVSQLite3.h"
 
 #include "Vocabulary.h"
+#include "ProfileManager.h"
 
 using namespace std;
 
@@ -82,6 +84,8 @@ private:
 	char viewString[256];
 	char viewLimitString[256];
 	char vocableString[128];
+
+	ProfileManager* m_profileManager;
 };
 
 #endif

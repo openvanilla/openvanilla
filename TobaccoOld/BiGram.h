@@ -13,7 +13,7 @@ public:
 	BiGram();
 	~BiGram();
 
-	int maximumMatching(
+	size_t maximumMatching(
 	   DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
 	   size_t index, size_t length, bool doBackward);
 	void getCharacterCombination(

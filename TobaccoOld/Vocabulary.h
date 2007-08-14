@@ -8,12 +8,11 @@ using namespace std;
 class Vocabulary
 {
 public:
-	Vocabulary();
-	~Vocabulary();
+	Vocabulary(const string& aWord);
 
 	string word;
-	int freq;
-	int order;
+	size_t freq;
+	size_t order;
 
 	double prob;
 

@@ -40,6 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="&quot;..\..\..\trunk\Framework\Headers&quot;;&quot;..\..\..\trunk\Modules\SharedHeaders&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -102,6 +103,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="&quot;..\..\..\trunk\Framework\Headers&quot;;&quot;..\..\..\trunk\Modules\SharedHeaders&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -147,7 +149,27 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\BiGram.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Candidate.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DictionarySingleton.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\PredictorSingleton.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Token.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Vocabulary.cpp"
 				>
 			</File>
 			<Filter
@@ -177,7 +199,27 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\BiGram.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Candidate.h"
+				>
+			</File>
+			<File
+				RelativePath=".\DictionarySingleton.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PredictorSingleton.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Token.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Vocabulary.h"
 				>
 			</File>
 			<Filter

@@ -12,9 +12,9 @@
 
 using namespace std;
 
-DictionarySingleton* DictionarySingleton::itsInstance = NULL;
-SQLite3* DictionarySingleton::dictionaryDB = NULL;
-SQLite3* DictionarySingleton::imTableDB = NULL;
+DictionarySingleton* DictionarySingleton::itsInstance = 0;
+SQLite3* DictionarySingleton::dictionaryDB = 0;
+SQLite3* DictionarySingleton::imTableDB = 0;
 
 DictionarySingleton::DictionarySingleton(
     const char* dbFilePath)
@@ -34,6 +34,8 @@ DictionarySingleton::DictionarySingleton(
 	imTableDB = new SQLite3;
     if (err = imTableDB->open(imDbFilePath))
         murmur("SQLite3 error! code=%d", err);
+
+	m_profileManager = ProfileManager::getInstance();
 }
 
 DictionarySingleton::~DictionarySingleton()
@@ -44,6 +46,8 @@ DictionarySingleton::~DictionarySingleton()
 	delete [] &viewLimitString;
 	delete [] &viewString;
 	delete [] &checkString;
+
+	m_profileManager->releaseInstance();
 }
 
 void DictionarySingleton::lostInstance()
@@ -81,6 +85,22 @@ bool DictionarySingleton::isVocabulary(string characters)
 bool DictionarySingleton::getWordsByCharacters(string characters,
     vector<Vocabulary>& vocabularyVectorRef, bool isLimited)
 {
+	//@{
+	//@warning first fetches learned data here, not finished yet.
+	vector<Profile>* profiles = m_profileManager->fetch(characters);
+	if(profiles) {
+		for(vector<Profile>::const_iterator i = profiles->begin();
+			i != profiles->end();
+			++i)
+		{
+			Vocabulary currentVocabulary(i->id().second);
+			currentVocabulary.freq = i->hitRate; //< this is not good enough.
+
+			vocabularyVectorRef.push_back(currentVocabulary);
+		}
+	}
+	//@}
+
     /// characters-word table schema:    |characters|wordID|
     /// word table schema:               |wordID|word|
     /// frequency table schema:          |wordID|freq|
@@ -119,8 +139,7 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
         const char* word = sth->column_text(0);
         murmur("found[%s]", word);
         int freq = sth->column_int(1);
-        Vocabulary currentVocabulary;
-        currentVocabulary.word = string(word);
+        Vocabulary currentVocabulary(word);
         currentVocabulary.freq = freq;
         
         vocabularyVectorRef.push_back(currentVocabulary);
@@ -151,7 +170,7 @@ bool DictionarySingleton::getVocablesByCharacters(string characters,
         const char* word = sth->column_text(0);
         murmur("found[%s]", word);
         int order = sth->column_int(1);
-        Vocabulary currentVocabulary;
+        Vocabulary currentVocabulary(word);
         currentVocabulary.word = string(word);
 		currentVocabulary.order = order;
         

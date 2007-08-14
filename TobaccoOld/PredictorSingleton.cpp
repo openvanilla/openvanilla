@@ -270,7 +270,7 @@ void PredictorSingleton::setTokenVectorByBigram()
                     tokenVector,
                     begin, end, true);
 			*/
-			int forwardScore =
+			size_t forwardScore =
                 biGram.maximumMatching(
                     PredictorSingleton::dictionary,
                     tokenVector,//forwardTokenVector,
@@ -307,7 +307,7 @@ void PredictorSingleton::setTokenVectorByBigram()
                         begin, length, true);
 				*/
 
-    			int forwardScore =
+    			size_t forwardScore =
                     biGram.maximumMatching(
                         PredictorSingleton::dictionary,
                         tokenVector,//forwardTokenVector,

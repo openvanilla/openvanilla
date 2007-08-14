@@ -1,18 +1,8 @@
 #include "Vocabulary.h"
 
-Vocabulary::Vocabulary()
-{
-	word = "";
-	freq = 0;
-	order = 0;
-
-	prob = 0.0;
-}
-
-Vocabulary::~Vocabulary()
-{
-	word.erase();
-}
+Vocabulary::Vocabulary(const string& aWord) :
+	word(aWord), freq(0), order(0), prob(0.0)
+{}
 
 bool Vocabulary::isOrderPrior(const Vocabulary& voc1, const Vocabulary& voc2)
 {

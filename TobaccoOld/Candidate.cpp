@@ -1,17 +1,13 @@
 #include "Candidate.h"
 
-Candidate::Candidate()
-{
-	position = 0;
-}
+Candidate::Candidate(const string& aWord) : Vocabulary(aWord), position(0)
+{}
 
-Candidate::Candidate(Vocabulary& voc)
+Candidate::Candidate(Vocabulary& aVocabulary) :
+	Vocabulary(aVocabulary.word),
+	position(0)
 {
-	word = voc.word;
-	freq = voc.freq;
-	position = 0;
-}
-
-Candidate::~Candidate()
-{
+	this->freq = aVocabulary.freq;
+	this->order = aVocabulary.order;
+	this->prob = aVocabulary.prob;
 }

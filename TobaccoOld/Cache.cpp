@@ -35,7 +35,7 @@ void Cache::add(Profile& theProfile)
 		theProfiles.push_back(theProfile);
 		m_table.insert(make_pair(theProfile.id().first, theProfiles));
 	}
-	else
+	else if(!update(theProfile.id(), theProfile.isCustom))
 		m_table[theProfile.id().first].push_back(theProfile);
 }
 
@@ -47,7 +47,7 @@ vector<Profile>* Cache::fetch(const string& theKey)
 		return 0;
 }
 
-void Cache::update(const pair<const string, const string>& theId)
+bool Cache::update(const pair<const string, const string>& theId, bool isCustom)
 {
 	vector<Profile>* profiles = fetch(theId.first);
 	if(profiles)
@@ -57,16 +57,14 @@ void Cache::update(const pair<const string, const string>& theId)
 			++i)
 		{
 			if(i->id() == theId) {
-				++i->hitRate;
-				return;
+				++(i->hitRate);
+				i->isCustom = isCustom;
+				return true;
 			}
 		}
 	}
-	else
-	{
-		//@todo add new Profiles here
-		return;
-	}
+
+	return false;
 }
 
 bool Cache::remove(const pair<const string, const string>& theId)

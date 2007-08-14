@@ -6,9 +6,8 @@
 class Candidate : public Vocabulary
 {
 public:
-	Candidate();
-	Candidate(Vocabulary& voc);
-	~Candidate();
+	Candidate(const string& aWord);
+	Candidate(Vocabulary& aVocabulary);
 
 	size_t position;
 };

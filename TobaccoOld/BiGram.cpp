@@ -20,7 +20,7 @@ BiGram::~BiGram()
 {
 }
 
-int BiGram::maximumMatching(
+size_t BiGram::maximumMatching(
     DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
     size_t index, size_t stop, bool doBackward)
 {
@@ -254,12 +254,12 @@ void BiGram::getVocabularyCombination(
 	{
 		for(size_t j = 0; j < rightBound; ++j)
 		{
-			Vocabulary combinedVocabulary;
-			combinedVocabulary.word = leftRef[i].word + rightRef[j].word;
+			Vocabulary combinedVocabulary(
+				leftRef[i].word + rightRef[j].word);
 
-			int leftFreq = leftRef[i].freq;
-			int rightFreq = rightRef[j].freq;
-			int matrix = leftFreq + rightFreq;
+			size_t leftFreq = leftRef[i].freq;
+			size_t rightFreq = rightRef[j].freq;
+			size_t matrix = leftFreq + rightFreq;
 			
 			double score = 0.0;
 			if(matrix > 0) {
