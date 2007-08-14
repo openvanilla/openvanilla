@@ -15,6 +15,7 @@ public:
 	Profile(
 		const pair<const string, const string>& theId,
 		const vector<Token>& theTokens);
+	Profile(const Profile& theProfile);
 	Profile& operator=(const Profile& rhsProfile);
 
  	const pair<const string, const string>& id() const;

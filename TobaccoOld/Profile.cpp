@@ -9,7 +9,20 @@ Profile::Profile(
 		hitRate(0), isCustom(false)
 {}
 
-Profile& Profile::operator=(const Profile& rhsProfile) { return *this; }
+Profile::Profile(const Profile& theProfile) :
+	m_id(theProfile.id()), m_tokens(theProfile.tokens()),
+	hitRate(theProfile.hitRate), isCustom(theProfile.isCustom)
+{}
+
+//@{
+//@note for Cache::add(Profile&) { vector<Profile>... }
+Profile& Profile::operator=(const Profile& rhsProfile)
+{
+	if(this != &rhsProfile) *this = rhsProfile;
+
+	return *this;
+}
+//@}
 
 const pair<const string, const string>& Profile::id() const { return m_id; }
 
