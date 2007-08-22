@@ -93,7 +93,7 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
 			i != profiles->end();
 			++i)
 		{
-			Vocabulary currentVocabulary(i->id().second);
+			Vocabulary currentVocabulary(i->id.pattern);
 			currentVocabulary.freq = i->hitRate; //< this is not good enough.
 
 			vocabularyVectorRef.push_back(currentVocabulary);

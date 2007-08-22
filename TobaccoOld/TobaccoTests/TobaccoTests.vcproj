@@ -192,10 +192,6 @@
 				RelativePath=".\TestCache.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\TestProfile.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"

@@ -5,20 +5,25 @@
 
 using namespace std;
 
-class Profile 
+struct ProfileId
 {
-public:
-	Profile(const pair<const string, const string>& theId);
+	ProfileId(const string& theKeystrokes, const string& thePattern);
+	ProfileId(const ProfileId& theId);
+
+	bool operator==(const ProfileId& rhsProfileId);
+
+	string keystrokes;
+	string pattern;
+};
+
+struct Profile 
+{
+	Profile(const ProfileId& theId);
 	Profile(const Profile& theProfile);
-	Profile& operator=(const Profile& rhsProfile);
 
- 	const pair<const string, const string>& id() const;
-
+ 	ProfileId id;
 	size_t hitRate;
 	bool isCustom;
-
-private:
-	const pair<const string, const string> m_id;
 };
 
 #endif

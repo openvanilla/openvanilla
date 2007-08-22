@@ -2,24 +2,26 @@
 
 using namespace std;
 
-Profile::Profile(const pair<const string, const string>& theId) :
-	m_id(theId), hitRate(0), isCustom(false)
+ProfileId::ProfileId(const string& theKeystrokes, const string& thePattern) :
+	keystrokes(theKeystrokes), pattern(thePattern)
+{}
+
+ProfileId::ProfileId(const ProfileId& theId) :
+	keystrokes(theId.keystrokes), pattern(theId.pattern)
+{}
+
+bool ProfileId::operator==(const ProfileId& rhsProfileId)
+{
+	return
+		keystrokes == rhsProfileId.keystrokes &&
+			pattern == rhsProfileId.pattern;
+}
+
+Profile::Profile(const ProfileId& theId) :
+	id(theId), hitRate(0), isCustom(false)
 {}
 
 Profile::Profile(const Profile& theProfile) :
-	m_id(theProfile.id()), hitRate(theProfile.hitRate),
+	id(theProfile.id), hitRate(theProfile.hitRate),
 	isCustom(theProfile.isCustom)
 {}
-
-//@{
-//@note for Cache::add(Profile&) { vector<Profile>... }
-Profile& Profile::operator=(const Profile& rhsProfile)
-{
-	if(this != &rhsProfile) *this = rhsProfile;
-
-	return *this;
-}
-//@}
-
-const pair<const string, const string>& Profile::id() const { return m_id; }
-

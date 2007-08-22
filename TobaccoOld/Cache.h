@@ -17,10 +17,8 @@ public:
 
 	void add(Profile& theProfile);
 	vector<Profile>* fetch(const string& theKey);
-	bool update(
-		const pair<const string, const string>& theId,
-		bool isCustom = false);
- 	bool remove(const pair<const string, const string>& theId);
+	bool update(const ProfileId& theId, bool isCustom = false);
+ 	bool remove(const ProfileId& theId);
 
 private:
 	static Cache* m_instance;

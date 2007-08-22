@@ -29,14 +29,14 @@ void Cache::releaseInstance()
 
 void Cache::add(Profile& theProfile)
 {
-	if(m_table.count(theProfile.id().first) == 0)
+	if(m_table.count(theProfile.id.keystrokes) == 0)
 	{
 		vector<Profile> theProfiles;
 		theProfiles.push_back(theProfile);
-		m_table.insert(make_pair(theProfile.id().first, theProfiles));
+		m_table.insert(make_pair(theProfile.id.keystrokes, theProfiles));
 	}
-	else if(!update(theProfile.id(), theProfile.isCustom))
-		m_table[theProfile.id().first].push_back(theProfile);
+	else if(!update(theProfile.id, theProfile.isCustom))
+		m_table[theProfile.id.keystrokes].push_back(theProfile);
 }
 
 vector<Profile>* Cache::fetch(const string& theKey)
@@ -47,16 +47,16 @@ vector<Profile>* Cache::fetch(const string& theKey)
 		return 0;
 }
 
-bool Cache::update(const pair<const string, const string>& theId, bool isCustom)
+bool Cache::update(const ProfileId& theId, bool isCustom)
 {
-	vector<Profile>* profiles = fetch(theId.first);
+	vector<Profile>* profiles = fetch(theId.keystrokes);
 	if(profiles)
 	{
 		for(vector<Profile>::iterator i = profiles->begin();
 			i != profiles->end();
 			++i)
 		{
-			if(i->id() == theId) {
+			if(i->id == theId) {
 				++(i->hitRate);
 				i->isCustom = isCustom;
 				return true;
@@ -67,19 +67,19 @@ bool Cache::update(const pair<const string, const string>& theId, bool isCustom)
 	return false;
 }
 
-bool Cache::remove(const pair<const string, const string>& theId)
+bool Cache::remove(const ProfileId& theId)
 {
-	vector<Profile>* profiles = fetch(theId.first);
+	vector<Profile>* profiles = fetch(theId.keystrokes);
 	if(profiles)
 	{
 		for(vector<Profile>::iterator i = profiles->begin();
 			i != profiles->end();
 			++i)
 		{
-			if(i->id() == theId) {
+			if(i->id == theId) {
 				profiles->erase(i);
 				if(profiles->empty())
-					m_table.erase(theId.first);
+					m_table.erase(theId.keystrokes);
 				return true;
 			}
 		}
