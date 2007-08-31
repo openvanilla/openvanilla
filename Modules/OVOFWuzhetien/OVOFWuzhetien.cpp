@@ -16,7 +16,7 @@
 #include <string.h>
 #include <stdio.h>
 
-unsigned short chars[26][2] = {
+unsigned int ConversionTable[26][2] = {
 	{0x7167, 0x66CC},  // 照
 	{0x5929, 0xD840DC11}, // 天
 	{0x5730, 0x57CA},  // 地
@@ -45,13 +45,12 @@ unsigned short chars[26][2] = {
 	{0x6388, 0xD856DC93} // 授	
 };	
 
-unsigned short convert(unsigned short s) {
+unsigned int convert(unsigned short s) {
 	unsigned short i;
 	for(i = 0; i < 26; i++) {
-		if ( s == chars[i][0]) {
-			return chars[i][1];
+		if ( s == ConversionTable[i][0]) {
+			return ConversionTable[i][1];
 		}
-		// if ( s == 0xFF0E) return 0x00B7;
 	}
     return s;
 }
@@ -92,15 +91,24 @@ const char *OVOFWuzhetien::process(const char *src, OVService *srv)
     l=srv->UTF8ToUTF16(src, &u16p);
     
     if (!l) return src;
-    u16buf=(unsigned short*)calloc(1,l*sizeof(unsigned short));
+    u16buf=(unsigned short*)calloc(1,l*sizeof(unsigned short)*2);
     memcpy(u16buf, u16p, l*sizeof(unsigned short));
     
-    int nl=0;
+    size_t u16ptr = 0;
     
     for (int i=0; i<l; i++)
     {
-		u16buf[nl++] = convert(u16p[i]);
+        unsigned result = convert(u16p[i]);
+        
+        if (result > 0xffff) {
+           // got a surrogate pair, feed in the first then the second
+           u16buf[u16ptr++] = (result & 0xffff0000) >> 16;
+           u16buf[u16ptr++] = (result & 0x0000ffff);
+        }
+	    else {
+	       u16buf[u16ptr++] = result;
+	    }	
     }
 
-    return srv->UTF16ToUTF8(u16buf, nl);    
+    return srv->UTF16ToUTF8(u16buf, u16ptr);    
 }
