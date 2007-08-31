@@ -10,7 +10,7 @@ Copyright (c) 2004-2006 The OpenVanilla Project
 
 3. 原先在 repository 裡的 ltdl, iconv, tinyxml 皆已移除，請下載
 http://taipedia.selfip.info/OV-deps.zip 「或」
-http://rt.openfoundry.org/Foundry/Project/Download/Attachment/89705/61781/OV-deps.zip
+http://rt.openfoundry.org/Foundry/Project/Download/Attachment/91835/63197/OV-deps.zip
 （兩個是一樣的），解壓縮後置於某處－－例如 "your_dependency_path"－－再按照
 http://www.flickr.com/photos/b6s/159926134/ 示範的方式讓 VS.NET 2005 知道要去那
 裡找這些函式庫。
@@ -23,12 +23,19 @@ sqlite3.dll 是 http://sqlite.org/sqlitedll-3_2_5.zip. 這是最近發現的問�
 http://taipedia.selfip.info/mediawiki/index.php/SQLite3Win32LibVC8/zh-hant
 下載，並同樣放在 %OV_DEPS% 裡。
 
-4. OV-deps 已加入 OVIMRomanNew 所需要的拼字檢查 library -- hunspell, 檔案如下：
+4. OV-deps 已加入 OVIMRomanNew 所需要的拼字檢查 library -- hunspell, 18 個檔案
+如下：
 affentry.hxx, affixmgr.hxx, atypes.hxx, baseaffix.hxx, csutil.hxx, dictmgr.hxx,
-hashmgr.hxx, htypes.hxx, hunspell.h, hunspell.hxx, hunspelldll.dll, hunspelldll.h,
-hunspelldll.lib, license.hunspell, license.myspell, langnum.hxx, suggestmgr.hxx
+hashmgr.hxx, htypes.hxx, hunspell.h, hunspell.hxx, hunspell.dll, hunspell.lib,
+hunspelldll.h, license.hunspell, license.myspell, langnum.hxx, phonet.hxx,
+suggestmgr.hxx
 4.1. 比照 3. 的說明，請替 VS.NET 2005 的 include directory 和 library directory
 加上 "your_dependency_path"\hunspell
+4.2. 您也可由 hunspell 原始碼自行編譯出 hunspell.dll 及 hunspell.lib, 以便自行
+與 hunspell 最新版同步。用 VS.NET 2005 開啟
+    %your_hunspell_src_dir%/src/win_api/Hunspell.sln
+在 Debug_dll 或 Release_dll 配置下編譯即可。
+
 
 5. 若遇到任何問題，請透過 IRC 到 FreeNote 的 #im-dev 找 b6s。
 
