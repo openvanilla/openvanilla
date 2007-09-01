@@ -80,8 +80,8 @@ namespace CSharpFormLibrary
                     new Point(0, 0),
                     Color.Black, Color.White, textFormatFlag);
 
-                if (m_compSelEnd >= Buf.Length)
-                    m_compSelEnd = Buf.Length - 1;
+                if (m_compSelEnd > Buf.Length)
+                    m_compSelEnd = Buf.Length;
 
                 if (m_compSelEnd - m_compSelStart > 0)
                 {
