@@ -104,8 +104,9 @@ public:
 			buf->append("　")->send();
 			return 1;
 		}
-				
+
         if(key->isCommand()) return 0;
+        if(!isprint(key->code()) && buf->isEmpty()) return 0;
 		
         KeyPress(key,buf,textbar,srv);
         if(chewing_keystroke_CheckIgnore(im)) return 0;
@@ -133,6 +134,8 @@ protected:
         }
         else if (k == ovkDown) { chewing_handle_Down(im); }
         else if (k == ovkUp)   { chewing_handle_Up(im);   }
+        else if (k == ovkPageUp) { chewing_handle_PageUp(im);   }
+        else if (k == ovkPageDown) { chewing_handle_PageDown(im);   }
         else if (k == ovkEsc)  { chewing_handle_Esc(im);  }
         else if (k == ovkTab)  { chewing_handle_Tab(im);  }
         else if (k == ovkHome) { chewing_handle_Home(im); }
