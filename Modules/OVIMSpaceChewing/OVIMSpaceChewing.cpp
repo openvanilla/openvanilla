@@ -158,7 +158,7 @@ protected:
             }
 			else if(key->isAlt()) { 
 				#warning chewing_handle_CtrlOption not found in libchewing trunk
-				// chewing_handle_CtrlOption(im, (key->code()));
+				chewing_handle_CtrlOption(im, (key->code()));
 			}
             return;
         }
@@ -243,7 +243,6 @@ protected:
 			   textbar->append( str );
 			   free( cand_string );
 			   i++;
-			   if( i == 5) textbar->append("\n");
 			}
 			sprintf(s," %d/%d", chewing_cand_CurrentPage(im) + 1, chewing_cand_TotalPage(im));
 			textbar->append((char*)s)->update()->show();
