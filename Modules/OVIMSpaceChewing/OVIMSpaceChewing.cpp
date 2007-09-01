@@ -113,13 +113,7 @@ public:
 		CandidateWindow(textbar, srv);
         Redraw(buf, srv);
 		Notify(srv);
-		
-		if (textbar->onScreen() && buf->isEmpty() && 
-			((key->isCtrl() && key->code() == '1') || (key->isCtrl() && key->code() == '0') || key->code() == '`'))
-		{
-			buf->append("符")->update();
-		}
-		
+	
         return 1;
     }
   
