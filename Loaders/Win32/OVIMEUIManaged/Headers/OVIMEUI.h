@@ -43,7 +43,7 @@ void UISetStatusModStrCurrent(int index);
 
 // UIComp.cpp
 void UICreateCompWindow(HWND);
-void UIMoveCompWindow(int, int, int, int);
+void UIMoveCompWindow(int, int, int, int, const wchar_t*);
 void UIShowCompWindow();
 void UIHideCompWindow();
 int UIGetHeight();

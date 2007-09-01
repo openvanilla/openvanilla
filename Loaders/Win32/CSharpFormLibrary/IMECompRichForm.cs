@@ -24,6 +24,7 @@ namespace CSharpFormLibrary
         private int m_caretX = 0;
         private int m_fontSize = 0;
         private int m_fontHeight = 0;
+        private string m_fontName = "";
         private string m_text="";
         private int m_caretIndex = 0;
         private IntPtr m_appHWnd;
@@ -55,35 +56,33 @@ namespace CSharpFormLibrary
         {
             if (Buf.Length > 0)
             {
-                Debug.WriteLine("m_fontSize:" + m_fontSize);
                 this.Font =
-                    new System.Drawing.Font(
-                        "PMingLiU", /*12F*/m_fontSize, GraphicsUnit.Pixel);
+                    new Font(m_fontName, m_fontSize, GraphicsUnit.Pixel);
+                    //new System.Drawing.Font(
+                    //    "PMingLiU", /*12F*/m_fontSize, GraphicsUnit.Pixel);
                 Size proposedFontSize = new Size(m_fontSize, m_fontHeight);
-                Debug.WriteLine("proposed font size:" + proposedFontSize.ToString());
 
                 TextFormatFlags textFormatFlag = TextFormatFlags.NoPadding;
                 Size sizeString =
                     TextRenderer.MeasureText(
                         e.Graphics, Buf, this.Font,
                         proposedFontSize, textFormatFlag);
-                Debug.WriteLine("sizeString:" + sizeString.ToString());
                 Size sizePreviousString =
                     TextRenderer.MeasureText(
                         e.Graphics, Buf.Substring(0, m_caretIndex), this.Font,
                         proposedFontSize, textFormatFlag);
-                Debug.WriteLine("sizePreviousString:" + sizePreviousString.ToString());
-                //SizeF sizeF = e.Graphics.MeasureString(Buf.Substring(0, m_caretIndex), Font);
 
-                //resize
                 this.Width = sizeString.Width + 1;
                 this.Height = sizeString.Height + 1;
 
-                //draw string
                 TextRenderer.DrawText(
                     e.Graphics, Buf, this.Font,
                     new Point(0, 0),
                     Color.Black, Color.White, textFormatFlag);
+
+                if (m_compSelEnd >= Buf.Length)
+                    m_compSelEnd = Buf.Length - 1;
+
                 if (m_compSelEnd - m_compSelStart > 0)
                 {
                     if (m_compSelStart == 0)
@@ -236,11 +235,16 @@ namespace CSharpFormLibrary
             Debug.WriteLine("after clear " + this.Height.ToString());
 		}
 
-        public void SetLocation(int x, int y, int fontSize, int fontHeight)
+        public void SetLocation(int x, int y)
+        {
+            this.Location = new Point(x, y);
+        }
+
+        public void SetFont(int fontSize, int fontHeight, string fontName)
         {
             m_fontSize = fontSize;
             m_fontHeight = fontHeight;
-            this.Location = new Point(x, y);
+            m_fontName = fontName;
         }
 
 		public void SetComp(string inputs)

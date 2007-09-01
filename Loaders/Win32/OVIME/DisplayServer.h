@@ -29,7 +29,8 @@ public:
 	virtual AVDisplayServer *setMarkTo(int i);
 
 	virtual DisplayServer *showStatus(bool t);
-	virtual DisplayServer *moveBuf(int x,int y, int fontSize, int fontHeight);
+	virtual DisplayServer *moveBuf(
+		int x, int y, int fontSize, int fontHeight, const wchar_t* fontName);
 	virtual DisplayServer *moveCandi(int x, int y, int compHeight);
 
 	virtual DisplayServer *SetStatusEnabled(bool t);
