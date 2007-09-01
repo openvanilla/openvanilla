@@ -216,7 +216,6 @@
 		6A757FC10B582A2C00CDCD5C /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 6A757FC20B582A2C00CDCD5C /* Build configuration list for PBXProject "OVIMSpaceChewing" */;
-			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 0;
 			mainGroup = 6A757FBF0B582A2C00CDCD5C;
 			productRefGroup = 6A757FCF0B582A4B00CDCD5C /* Products */;
@@ -325,6 +324,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = LIBCHEWING_VERSION_OSX_INCLUDE;
 				INFOPLIST_FILE = "OVIMSpaceChewing-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -350,6 +350,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = LIBCHEWING_VERSION_OSX_INCLUDE;
 				INFOPLIST_FILE = "OVIMSpaceChewing-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
