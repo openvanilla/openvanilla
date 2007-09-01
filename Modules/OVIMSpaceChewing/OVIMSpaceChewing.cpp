@@ -99,6 +99,12 @@ public:
      
     virtual int keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, OVService *srv)
 	{
+		// fix the SHIFT-SPACE problem
+		if (!textbar->onScreen() && buf->isEmpty() && key->isShift() && key->code() == 32) {
+			buf->append("　")->send();
+			return 1;
+		}
+				
         if(key->isCommand()) return 0;
 		
         KeyPress(key,buf,textbar,srv);
@@ -107,6 +113,13 @@ public:
 		CandidateWindow(textbar, srv);
         Redraw(buf, srv);
 		Notify(srv);
+		
+		if (textbar->onScreen() && buf->isEmpty() && 
+			((key->isCtrl() && key->code() == '1') || (key->isCtrl() && key->code() == '0') || key->code() == '`'))
+		{
+			buf->append("符")->update();
+		}
+		
         return 1;
     }
   
