@@ -25,7 +25,7 @@ namespace CSharpFormLibrary
         private int m_fontSize = 0;
         private int m_fontHeight = 0;
         private string m_fontName = "";
-        private string m_text="";
+        private string m_text= "";
         private int m_caretIndex = 0;
         private IntPtr m_appHWnd;
 
@@ -54,7 +54,7 @@ namespace CSharpFormLibrary
       
         private void IMECompRichForm_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
-            if (Buf.Length > 0)
+            if (m_text.Length > 0)
             {
                 this.Font =
                     new Font(m_fontName, m_fontSize, GraphicsUnit.Pixel);
@@ -65,23 +65,19 @@ namespace CSharpFormLibrary
                 TextFormatFlags textFormatFlag = TextFormatFlags.NoPadding;
                 Size sizeString =
                     TextRenderer.MeasureText(
-                        e.Graphics, Buf, this.Font,
-                        proposedFontSize, textFormatFlag);
-                Size sizePreviousString =
-                    TextRenderer.MeasureText(
-                        e.Graphics, Buf.Substring(0, m_caretIndex), this.Font,
+                        e.Graphics, m_text, this.Font,
                         proposedFontSize, textFormatFlag);
 
                 this.Width = sizeString.Width + 1;
                 this.Height = sizeString.Height + 1;
 
                 TextRenderer.DrawText(
-                    e.Graphics, Buf, this.Font,
+                    e.Graphics, m_text, this.Font,
                     new Point(0, 0),
                     Color.Black, Color.White, textFormatFlag);
 
-                if (m_compSelEnd > Buf.Length)
-                    m_compSelEnd = Buf.Length;
+                if (m_compSelEnd > m_text.Length)
+                    m_compSelEnd = m_text.Length;
 
                 if (m_compSelEnd - m_compSelStart > 0)
                 {
@@ -89,7 +85,7 @@ namespace CSharpFormLibrary
                     {
                         TextRenderer.DrawText(
                             e.Graphics,
-                            Buf.Substring(
+                            m_text.Substring(
                                 m_compSelStart, m_compSelEnd - m_compSelStart),
                             this.Font, new Point(0, 0),
                             Color.White, Color.Black, textFormatFlag);
@@ -98,11 +94,12 @@ namespace CSharpFormLibrary
                     {
                         Size sizeSelectedText =
                             TextRenderer.MeasureText(
-                                e.Graphics, Buf.Substring(0, m_compSelStart),
+                                e.Graphics,
+                                m_text.Substring(0, m_compSelStart),
                                 this.Font, proposedFontSize, textFormatFlag);
                         TextRenderer.DrawText(
                             e.Graphics,
-                            Buf.Substring(
+                            m_text.Substring(
                                 m_compSelStart, m_compSelEnd - m_compSelStart),
                             this.Font,
                             new Point(
@@ -112,6 +109,11 @@ namespace CSharpFormLibrary
                 }
 
                 //save caret for c++ using and draw it
+                if (m_caretIndex > m_text.Length)
+                    m_caretIndex = m_text.Length;
+                Size sizePreviousString = TextRenderer.MeasureText(
+                    e.Graphics, m_text.Substring(0, m_caretIndex), this.Font,
+                    proposedFontSize, textFormatFlag);
                 CaretX = sizePreviousString.Width;
                 Pen pCaret = new Pen(Color.Green, 1);
                 e.Graphics.DrawLine(
