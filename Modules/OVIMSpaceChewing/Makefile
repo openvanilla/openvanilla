@@ -44,7 +44,7 @@ DATA=$(LIBCHEWING_PREFIX)/share/chewing/ch_index.dat     \
     $(LIBCHEWING_PREFIX)/share/chewing/us_freq.dat
     
 INC+=-I$(LIBCHEWING_PREFIX)/include/chewing
-CFLAGS+=-DLIBCHEWING_VERSION="\"$(LIBCHEWING_VERSION)\""
+CFLAGS+=-DLIBCHEWING_VERSION="\"$(LIBCHEWING_VERSION)\"" -g
 LIBS+=-lchewing
 LDFLAGS+=-L$(LIBCHEWING_PREFIX)/lib
 
