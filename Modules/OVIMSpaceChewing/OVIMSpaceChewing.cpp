@@ -105,8 +105,11 @@ public:
 			return 1;
 		}
 
-        if(key->isCommand()) return 0;
-        if(!isprint(key->code()) && buf->isEmpty()) return 0;
+        // see if it's the combination of CTRL-OPT-x
+        if (!(key->isOpt() && key->isCtrl())) {
+            if(key->isCommand()) return 0;
+            if(!isprint(key->code()) && buf->isEmpty()) return 0;
+        }
 		
         KeyPress(key,buf,textbar,srv);
         if(chewing_keystroke_CheckIgnore(im)) return 0;
@@ -341,9 +344,9 @@ public:
 
     virtual const char *localizedName(const char *locale)
 	{
-        if (!strcasecmp(locale, "zh_TW")) return "酷音 "LIBCHEWING_VERSION;
-        if (!strcasecmp(locale, "zh_CN")) return "繁体酷音 "LIBCHEWING_VERSION;
- 	    return "Chewing (Smart Phonetics) "LIBCHEWING_VERSION;
+        if (!strcasecmp(locale, "zh_TW")) return "酷音 "LIBCHEWING_VERSION" 2007-09-02";
+        if (!strcasecmp(locale, "zh_CN")) return "繁体酷音 "LIBCHEWING_VERSION" 2007-09-02";
+ 	    return "Chewing (Smart Phonetics) "LIBCHEWING_VERSION" 2007-09-02";
     }
 
     virtual OVInputMethodContext* newContext()
