@@ -14,7 +14,7 @@ namespace OVPreferences
     {
         private OVConfig m_ovConf = null;
         private XmlDocument m_ovConfDOM = null;
-        private OVConfigDomWriter m_ovConfDomWriter = null;
+        private OVConfigDom m_ovConfDomHandler = null;
 
         private bool m_doAutoCompose;
         private bool m_doHitMaxAndCompose;
@@ -31,70 +31,33 @@ namespace OVPreferences
         {
             m_ovConf = conf;
             m_ovConfDOM = confDOM;
-            m_ovConfDomWriter = new OVConfigDomWriter(m_ovConfDOM);
+            m_ovConfDomHandler = new OVConfigDom(m_ovConfDOM);
 
             LoadSettings();
         }
 
         protected virtual void LoadSettings()
         {
-            //if (m_ovConf.settings.ContainsKey("autoCompose"))
-            try
-            {
-                m_doAutoCompose =
-                    Convert.ToBoolean(Convert.ToInt32(
-                        m_ovConf.settings["autoCompose"]));
-            }
-            catch (Exception)
-            {
-                Trace.TraceWarning("autoCompose not found");
-            }
-
-            //if (m_ovConf.settings.ContainsKey("hitMaxAndCompose"))
-            try
-            {
-                m_doHitMaxAndCompose =
-                    Convert.ToBoolean(Convert.ToInt32(
-                        m_ovConf.settings["hitMaxAndCompose"]));
-            }
-            catch (Exception)
-            {
-                Trace.TraceWarning("hitMaxAndCompose not found");
-            }
-
-            try
-            {
-                m_maxKeySequenceLength =
-                    Convert.ToUInt32(
-                        m_ovConf.settings["maxKeySequenceLength"]);
-                if (m_maxKeySequenceLength == 0) m_maxKeySequenceLength = 5;
-            }
-            catch (Exception)
-            {
-                Trace.TraceWarning("maxKeySequenceLength not found");
-            }
-
-            try
-            {
-                m_doShiftSelectionKey =
+            m_doAutoCompose =
                 Convert.ToBoolean(Convert.ToInt32(
-                    m_ovConf.settings["shiftSelectionKey"]));
-            }
-            catch (Exception)
-            {
-                Trace.TraceWarning("shiftSelectionKey not found");
-            }
-
-            try
-            {
-                m_doWarningBeep =
-                    Convert.ToBoolean(Convert.ToInt32(
-                        m_ovConf.settings["warningBeep"]));
-            }
-            catch (Exception)
-            {
-                Trace.TraceWarning("warningBeep");
-            }
+                    m_ovConfDomHandler.GetAttribute(
+                        m_ovConf.moduleName, "autoCompose", "0")));
+            m_doHitMaxAndCompose =
+                Convert.ToBoolean(Convert.ToInt32(
+                    m_ovConfDomHandler.GetAttribute(
+                        m_ovConf.moduleName, "hitMaxAndCompose", "0")));
+            m_maxKeySequenceLength =
+                Convert.ToUInt32(
+                    m_ovConfDomHandler.GetAttribute(
+                        m_ovConf.moduleName, "maxKeySequenceLength", "5"));
+            m_doShiftSelectionKey =
+                Convert.ToBoolean(Convert.ToInt32(
+                    m_ovConfDomHandler.GetAttribute(
+                        m_ovConf.moduleName, "shiftSelectionKey", "0")));
+            m_doWarningBeep =
+                Convert.ToBoolean(Convert.ToInt32(
+                    m_ovConfDomHandler.GetAttribute(
+                        m_ovConf.moduleName, "warningBeep", "0")));
 
             m_cbAutoCompose.Checked = m_doAutoCompose;
             m_cbHitMaxAndCompose.Checked = m_doHitMaxAndCompose;
@@ -106,7 +69,7 @@ namespace OVPreferences
         private void m_cbShiftSelectionKey_CheckedChanged(object sender, EventArgs e)
         {
             m_doShiftSelectionKey = m_cbShiftSelectionKey.Checked;
-            m_ovConfDomWriter.SetAttribute(
+            m_ovConfDomHandler.SetAttribute(
                 m_ovConf.moduleName,
                 "shiftSelectionKey",
                 m_doShiftSelectionKey ? "1" : "0");
@@ -115,7 +78,7 @@ namespace OVPreferences
         private void m_cbAutoCompose_CheckedChanged(object sender, EventArgs e)
         {
             m_doAutoCompose = m_cbAutoCompose.Checked;
-            m_ovConfDomWriter.SetAttribute(
+            m_ovConfDomHandler.SetAttribute(
                 m_ovConf.moduleName,
                 "autoCompose",
                 m_doAutoCompose ? "1" : "0");
@@ -124,7 +87,7 @@ namespace OVPreferences
         private void m_cbHitMaxAndCompose_CheckedChanged(object sender, EventArgs e)
         {
             m_doHitMaxAndCompose = m_cbHitMaxAndCompose.Checked;
-            m_ovConfDomWriter.SetAttribute(
+            m_ovConfDomHandler.SetAttribute(
                 m_ovConf.moduleName,
                 "hitMaxAndCompose",
                 m_doHitMaxAndCompose ? "1" : "0");
@@ -133,7 +96,7 @@ namespace OVPreferences
         private void m_cbWarningBeep_CheckedChanged(object sender, EventArgs e)
         {
             m_doWarningBeep = m_cbWarningBeep.Checked;
-            m_ovConfDomWriter.SetAttribute(
+            m_ovConfDomHandler.SetAttribute(
                 m_ovConf.moduleName,
                 "warningBeep",
                 m_doWarningBeep ? "1" : "0");
@@ -158,7 +121,7 @@ namespace OVPreferences
                 return;
             }
 
-            m_ovConfDomWriter.SetAttribute(
+            m_ovConfDomHandler.SetAttribute(
                 m_ovConf.moduleName,
                 "maxKeySequenceLength",
                 m_maxKeySequenceLength.ToString());

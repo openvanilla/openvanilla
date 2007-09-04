@@ -121,7 +121,16 @@
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 12</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="m_cbKeyboardLayout.Items" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="m_cbKeyboardLayout.Items1" xml:space="preserve">
+    <value>Yi-Tian</value>
+  </data>
+  <data name="m_lbKeyboardLayout.Text" xml:space="preserve">
     <value>Keyboard Layout</value>
+  </data>
+  <data name="m_lbSelectionKeys.Text" xml:space="preserve">
+    <value>Selection Keys</value>
   </data>
 </root>

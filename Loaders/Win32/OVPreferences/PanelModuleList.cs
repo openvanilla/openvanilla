@@ -13,14 +13,14 @@ namespace OVPreferences
         private XmlDocument m_ovConfDOM = null;
         private bool m_isMouseDown = false;
         private int m_draggingIndex = -1;
-        private OVConfigDomWriter m_ovConfDomWriter = null;
+        private OVConfigDom m_ovConfDomHandler = null;
         private Point m_previousLineBegin;
         private Point m_previousLineEnd;
 
         public PanelModuleList(XmlDocument ovConfDOM)
         {
             m_ovConfDOM = ovConfDOM;
-            m_ovConfDomWriter = new OVConfigDomWriter(m_ovConfDOM);
+            m_ovConfDomHandler = new OVConfigDom(m_ovConfDOM);
 
             InitializeComponent();
         }
@@ -31,7 +31,7 @@ namespace OVPreferences
             foreach (object item in m_clModuleList.Items)
             {
                 string moduleName = item.ToString();
-                m_ovConfDomWriter.SetAttribute(
+                m_ovConfDomHandler.SetAttribute(
                     moduleName, "priority", priority.ToString());
                 priority--;
             }
@@ -42,7 +42,7 @@ namespace OVPreferences
             if (e.Index < 0) return;
             string checkedModuleName =
                 m_clModuleList.Items[e.Index].ToString();
-            m_ovConfDomWriter.SetAttribute(
+            m_ovConfDomHandler.SetAttribute(
                 checkedModuleName,
                 "enable",
                 e.NewValue.Equals(CheckState.Checked) ? "1" : "0");

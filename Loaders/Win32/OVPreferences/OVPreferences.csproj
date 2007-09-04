@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OVPreferences</RootNamespace>
     <AssemblyName>OVPreferences</AssemblyName>
-    <ApplicationIcon>OVPreference.ico</ApplicationIcon>
+    <ApplicationIcon>OVPreferences.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,14 +55,14 @@
     <Compile Include="FontComboBox.Designer.cs">
       <DependentUpon>FontComboBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="OVPreference.cs">
+    <Compile Include="OVPreferences.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OVPreference.Designer.cs">
-      <DependentUpon>OVPreference.cs</DependentUpon>
+    <Compile Include="OVPreferences.Designer.cs">
+      <DependentUpon>OVPreferences.cs</DependentUpon>
     </Compile>
     <Compile Include="OVConfig.cs" />
-    <Compile Include="OVConfigDomWriter.cs" />
+    <Compile Include="OVConfigDom.cs" />
     <Compile Include="PanelGeneric.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -107,9 +107,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="OVPreference.resx">
+    <EmbeddedResource Include="OVPreferences.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>OVPreference.cs</DependentUpon>
+      <DependentUpon>OVPreferences.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelGeneric.resx">
       <SubType>Designer</SubType>
@@ -164,14 +164,14 @@
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="OVPreference.ico" />
-    <EmbeddedResource Include="OVPreference.en-US.resx">
+    <Content Include="OVPreferences.ico" />
+    <EmbeddedResource Include="OVPreferences.en-US.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>OVPreference.cs</DependentUpon>
+      <DependentUpon>OVPreferences.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OVPreference.zh-TW.resx">
+    <EmbeddedResource Include="OVPreferences.zh-TW.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>OVPreference.cs</DependentUpon>
+      <DependentUpon>OVPreferences.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelGeneric.en-US.resx">
       <SubType>Designer</SubType>

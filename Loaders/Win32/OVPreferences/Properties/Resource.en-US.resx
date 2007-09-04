@@ -129,6 +129,9 @@
   <data name="FontSize" xml:space="preserve">
     <value>Size</value>
   </data>
+  <data name="OVIMGeneric" xml:space="preserve">
+    <value>Generic</value>
+  </data>
   <data name="Phonetic" xml:space="preserve">
     <value>Phonetic</value>
   </data>

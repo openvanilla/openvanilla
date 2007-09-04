@@ -5,12 +5,33 @@ using System.Xml;
 
 namespace OVPreferences
 {
-    public class OVConfigDomWriter
+    public class OVConfigDom
     {
         private XmlDocument m_ovConfDOM = null;
-        public OVConfigDomWriter(XmlDocument ovConfDOM)
+        public OVConfigDom(XmlDocument ovConfDOM)
         {
             m_ovConfDOM = ovConfDOM;
+        }
+
+        public string GetAttribute(
+            string moduleName, string attrName)
+        {
+            XmlNode nodeModule =
+                m_ovConfDOM.SelectSingleNode(
+                    "/OpenVanilla/dict[@name='" + moduleName +
+                        "']/key[@name='" + attrName + "']");
+            if (nodeModule != null)
+                return nodeModule.Attributes["value"].Value;
+            else
+                return null;
+        }
+
+        public string GetAttribute(
+            string moduleName, string attrName, string defaultAttrValue)
+        {
+            if (null == GetAttribute(moduleName, attrName))
+                SetAttribute(moduleName, attrName, defaultAttrValue);
+            return GetAttribute(moduleName, attrName);
         }
 
         public void SetAttribute(

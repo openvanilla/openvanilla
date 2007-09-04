@@ -145,9 +145,10 @@ namespace OVPreferences
         {
             PanelGeneric pnGeneric = new PanelGeneric();
             pnGeneric.Init(conf, confDom);
-            //string msg = resourceMgr.GetString(conf.moduleName, ci);
-            AddTab(pnGeneric, conf.moduleName);
-            //AddTab(pnGeneric, msg);
+            string msg = resourceMgr.GetString("OVIMGeneric", ci);
+            string inputMethod = conf.moduleName.Replace("OVIMGeneric-", "");
+            inputMethod = inputMethod.Replace(".cin", "");
+            AddTab(pnGeneric, msg + " (" + inputMethod + ")");
         }
 
         protected void AddTabPhonetic(OVConfig conf, XmlDocument confDom)

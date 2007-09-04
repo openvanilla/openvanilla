@@ -29,63 +29,67 @@ namespace OVPreferences
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PanelPhonetic));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.panel1.SuspendLayout();
+            this.m_pnSelf = new System.Windows.Forms.Panel();
+            this.m_lbSelectionKeys = new System.Windows.Forms.Label();
+            this.m_tbSelectionKeys = new System.Windows.Forms.TextBox();
+            this.m_lbKeyboardLayout = new System.Windows.Forms.Label();
+            this.m_cbKeyboardLayout = new System.Windows.Forms.ComboBox();
+            this.m_pnSelf.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // m_pnSelf
             // 
-            this.panel1.AccessibleDescription = null;
-            this.panel1.AccessibleName = null;
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.BackgroundImage = null;
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Font = null;
-            this.panel1.Name = "panel1";
+            this.m_pnSelf.Controls.Add(this.m_lbSelectionKeys);
+            this.m_pnSelf.Controls.Add(this.m_tbSelectionKeys);
+            this.m_pnSelf.Controls.Add(this.m_lbKeyboardLayout);
+            this.m_pnSelf.Controls.Add(this.m_cbKeyboardLayout);
+            resources.ApplyResources(this.m_pnSelf, "m_pnSelf");
+            this.m_pnSelf.Name = "m_pnSelf";
             // 
-            // label1
+            // m_lbSelectionKeys
             // 
-            this.label1.AccessibleDescription = null;
-            this.label1.AccessibleName = null;
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Font = null;
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.m_lbSelectionKeys, "m_lbSelectionKeys");
+            this.m_lbSelectionKeys.Name = "m_lbSelectionKeys";
             // 
-            // comboBox1
+            // m_tbSelectionKeys
             // 
-            this.comboBox1.AccessibleDescription = null;
-            this.comboBox1.AccessibleName = null;
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.BackgroundImage = null;
-            this.comboBox1.Font = null;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Name = "comboBox1";
+            resources.ApplyResources(this.m_tbSelectionKeys, "m_tbSelectionKeys");
+            this.m_tbSelectionKeys.Name = "m_tbSelectionKeys";
+            this.m_tbSelectionKeys.TextChanged += new System.EventHandler(this.m_tbSelectionKeys_TextChanged);
+            // 
+            // m_lbKeyboardLayout
+            // 
+            resources.ApplyResources(this.m_lbKeyboardLayout, "m_lbKeyboardLayout");
+            this.m_lbKeyboardLayout.Name = "m_lbKeyboardLayout";
+            // 
+            // m_cbKeyboardLayout
+            // 
+            this.m_cbKeyboardLayout.FormattingEnabled = true;
+            this.m_cbKeyboardLayout.Items.AddRange(new object[] {
+            resources.GetString("m_cbKeyboardLayout.Items"),
+            resources.GetString("m_cbKeyboardLayout.Items1")});
+            resources.ApplyResources(this.m_cbKeyboardLayout, "m_cbKeyboardLayout");
+            this.m_cbKeyboardLayout.Name = "m_cbKeyboardLayout";
+            this.m_cbKeyboardLayout.SelectedIndexChanged += new System.EventHandler(this.m_cbKeyboardLayout_SelectedIndexChanged);
             // 
             // PanelPhonetic
             // 
-            this.AccessibleDescription = null;
-            this.AccessibleName = null;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = null;
-            this.Controls.Add(this.panel1);
-            this.Font = null;
+            this.Controls.Add(this.m_pnSelf);
             this.Name = "PanelPhonetic";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.m_pnSelf.ResumeLayout(false);
+            this.m_pnSelf.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
-
-
+        private System.Windows.Forms.Panel m_pnSelf;
+        private System.Windows.Forms.Label m_lbKeyboardLayout;
+        private System.Windows.Forms.ComboBox m_cbKeyboardLayout;
+        private System.Windows.Forms.Label m_lbSelectionKeys;
+        private System.Windows.Forms.TextBox m_tbSelectionKeys;
     }
 }

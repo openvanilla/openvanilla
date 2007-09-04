@@ -13,7 +13,7 @@ namespace OVPreferences
     {
         private OVConfig m_ovConf = null;
         private XmlDocument m_ovConfDOM = null;
-        private OVConfigDomWriter m_ovConfDomWriter = null;
+        private OVConfigDom m_ovConfDomHandler = null;
 
         public PanelPOJ()
         {
@@ -24,7 +24,7 @@ namespace OVPreferences
         {
             m_ovConf = conf;
             m_ovConfDOM = confDOM;
-            m_ovConfDomWriter = new OVConfigDomWriter(m_ovConfDOM);
+            m_ovConfDomHandler = new OVConfigDom(m_ovConfDOM);
 
             LoadSettings();
         }

@@ -37,18 +37,18 @@ namespace OVPreferences
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // m_pnSelf
             // 
             this.panel1.AccessibleDescription = null;
             this.panel1.AccessibleName = null;
-            resources.ApplyResources(this.panel1, "panel1");
+            resources.ApplyResources(this.panel1, "m_pnSelf");
             this.panel1.BackgroundImage = null;
             this.panel1.Controls.Add(this.checkBox2);
             this.panel1.Controls.Add(this.checkBox1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Font = null;
-            this.panel1.Name = "panel1";
+            this.panel1.Name = "m_pnSelf";
             // 
             // checkBox2
             // 
@@ -70,23 +70,23 @@ namespace OVPreferences
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // m_lbKeyboardLayout
             // 
             this.label1.AccessibleDescription = null;
             this.label1.AccessibleName = null;
-            resources.ApplyResources(this.label1, "label1");
+            resources.ApplyResources(this.label1, "m_lbKeyboardLayout");
             this.label1.Font = null;
-            this.label1.Name = "label1";
+            this.label1.Name = "m_lbKeyboardLayout";
             // 
-            // comboBox1
+            // m_cbKeyboardLayout
             // 
             this.comboBox1.AccessibleDescription = null;
             this.comboBox1.AccessibleName = null;
-            resources.ApplyResources(this.comboBox1, "comboBox1");
+            resources.ApplyResources(this.comboBox1, "m_cbKeyboardLayout");
             this.comboBox1.BackgroundImage = null;
             this.comboBox1.Font = null;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Name = "m_cbKeyboardLayout";
             // 
             // PanelPOJ
             // 

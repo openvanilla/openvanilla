@@ -117,198 +117,198 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="m_cbShiftSelectionKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 16</value>
-  </data>
-  <data name="&gt;&gt;m_cbHitMaxAndCompose.Parent" xml:space="preserve">
-    <value>m_pnSelf</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="m_tbMaxKeySequenceLength.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="m_cbWarningBeep.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;m_lbMaxKeySequenceLength.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="m_pnSelf.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 11</value>
-  </data>
-  <data name="&gt;&gt;m_cbAutoCompose.Parent" xml:space="preserve">
-    <value>m_pnSelf</value>
-  </data>
-  <data name="m_lbMaxKeySequenceLength.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;m_tbMaxKeySequenceLength.Name" xml:space="preserve">
-    <value>m_tbMaxKeySequenceLength</value>
-  </data>
-  <data name="m_cbAutoCompose.Text" xml:space="preserve">
-    <value>一邊打字同時一邊組字出選字窗</value>
-  </data>
-  <data name="&gt;&gt;m_cbShiftSelectionKey.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="m_pnSelf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 126</value>
-  </data>
-  <data name="m_cbShiftSelectionKey.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="m_cbHitMaxAndCompose.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="m_pnSelf.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;m_tbMaxKeySequenceLength.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_lbMaxKeySequenceLength.Parent" xml:space="preserve">
-    <value>m_pnSelf</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
-  </data>
-  <data name="&gt;&gt;m_pnSelf.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_cbShiftSelectionKey.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="m_lbMaxKeySequenceLength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 12</value>
-  </data>
-  <data name="m_cbAutoCompose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 32</value>
-  </data>
-  <data name="&gt;&gt;m_cbWarningBeep.Parent" xml:space="preserve">
-    <value>m_pnSelf</value>
-  </data>
-  <data name="&gt;&gt;m_cbShiftSelectionKey.Name" xml:space="preserve">
-    <value>m_cbShiftSelectionKey</value>
-  </data>
-  <data name="m_cbHitMaxAndCompose.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="m_lbMaxKeySequenceLength.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;m_cbHitMaxAndCompose.Name" xml:space="preserve">
-    <value>m_cbHitMaxAndCompose</value>
-  </data>
-  <data name="&gt;&gt;m_lbMaxKeySequenceLength.Name" xml:space="preserve">
-    <value>m_lbMaxKeySequenceLength</value>
-  </data>
-  <data name="m_cbWarningBeep.Text" xml:space="preserve">
-    <value>錯誤時發出嗶聲</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_cbWarningBeep.Name" xml:space="preserve">
-    <value>m_cbWarningBeep</value>
-  </data>
-  <data name="&gt;&gt;m_cbHitMaxAndCompose.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;m_cbWarningBeep.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="m_tbMaxKeySequenceLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 96</value>
-  </data>
-  <data name="&gt;&gt;m_cbHitMaxAndCompose.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="m_cbWarningBeep.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 75</value>
   </data>
   <data name="m_cbWarningBeep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 16</value>
-  </data>
-  <data name="m_cbShiftSelectionKey.Text" xml:space="preserve">
-    <value>空白鍵選第一字，第一選字鍵選第二字</value>
-  </data>
-  <data name="&gt;&gt;m_cbShiftSelectionKey.Parent" xml:space="preserve">
-    <value>m_pnSelf</value>
-  </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 159</value>
-  </data>
-  <data name="&gt;&gt;m_pnSelf.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="m_cbHitMaxAndCompose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 16</value>
-  </data>
-  <data name="&gt;&gt;m_cbAutoCompose.Name" xml:space="preserve">
-    <value>m_cbAutoCompose</value>
+    <value>109, 16</value>
   </data>
   <data name="m_cbWarningBeep.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;m_lbMaxKeySequenceLength.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="m_cbWarningBeep.Text" xml:space="preserve">
+    <value>錯誤時發出嗶聲</value>
   </data>
-  <data name="&gt;&gt;m_pnSelf.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_cbWarningBeep.Name" xml:space="preserve">
+    <value>m_cbWarningBeep</value>
+  </data>
+  <data name="&gt;&gt;m_cbWarningBeep.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_cbWarningBeep.Parent" xml:space="preserve">
     <value>m_pnSelf</value>
   </data>
   <data name="&gt;&gt;m_cbWarningBeep.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;m_pnSelf.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;m_cbAutoCompose.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="m_cbAutoCompose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 16</value>
-  </data>
-  <data name="m_cbAutoCompose.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="m_lbMaxKeySequenceLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 99</value>
-  </data>
-  <data name="m_cbShiftSelectionKey.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="m_cbHitMaxAndCompose.Text" xml:space="preserve">
-    <value>打到最大長度便自動出字</value>
-  </data>
-  <data name="m_lbMaxKeySequenceLength.Text" xml:space="preserve">
-    <value>最大組字鍵碼長度：</value>
-  </data>
-  <data name="&gt;&gt;m_tbMaxKeySequenceLength.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="m_cbShiftSelectionKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 11</value>
-  </data>
-  <data name="&gt;&gt;m_tbMaxKeySequenceLength.Parent" xml:space="preserve">
-    <value>m_pnSelf</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PanelGeneric</value>
-  </data>
-  <data name="&gt;&gt;m_cbAutoCompose.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="m_cbHitMaxAndCompose.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="m_cbHitMaxAndCompose.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 54</value>
   </data>
-  <data name="m_cbWarningBeep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 75</value>
+  <data name="m_cbHitMaxAndCompose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 16</value>
+  </data>
+  <data name="m_cbHitMaxAndCompose.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="m_cbHitMaxAndCompose.Text" xml:space="preserve">
+    <value>打到最大長度便自動出字</value>
+  </data>
+  <data name="&gt;&gt;m_cbHitMaxAndCompose.Name" xml:space="preserve">
+    <value>m_cbHitMaxAndCompose</value>
+  </data>
+  <data name="&gt;&gt;m_cbHitMaxAndCompose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_cbHitMaxAndCompose.Parent" xml:space="preserve">
+    <value>m_pnSelf</value>
+  </data>
+  <data name="&gt;&gt;m_cbHitMaxAndCompose.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="m_cbAutoCompose.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="m_cbAutoCompose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 32</value>
+  </data>
+  <data name="m_cbAutoCompose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 16</value>
+  </data>
+  <data name="m_cbAutoCompose.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="m_cbAutoCompose.Text" xml:space="preserve">
+    <value>一邊打字同時一邊組字出選字窗</value>
+  </data>
+  <data name="&gt;&gt;m_cbAutoCompose.Name" xml:space="preserve">
+    <value>m_cbAutoCompose</value>
+  </data>
+  <data name="&gt;&gt;m_cbAutoCompose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_cbAutoCompose.Parent" xml:space="preserve">
+    <value>m_pnSelf</value>
+  </data>
+  <data name="&gt;&gt;m_cbAutoCompose.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="m_cbShiftSelectionKey.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="m_cbShiftSelectionKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 10</value>
+  </data>
+  <data name="m_cbShiftSelectionKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 16</value>
+  </data>
+  <data name="m_cbShiftSelectionKey.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="m_cbShiftSelectionKey.Text" xml:space="preserve">
+    <value>空白鍵選第一字，第一選字鍵選第二字</value>
+  </data>
+  <data name="&gt;&gt;m_cbShiftSelectionKey.Name" xml:space="preserve">
+    <value>m_cbShiftSelectionKey</value>
+  </data>
+  <data name="&gt;&gt;m_cbShiftSelectionKey.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_cbShiftSelectionKey.Parent" xml:space="preserve">
+    <value>m_pnSelf</value>
+  </data>
+  <data name="&gt;&gt;m_cbShiftSelectionKey.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="m_tbMaxKeySequenceLength.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 96</value>
+  </data>
   <data name="m_tbMaxKeySequenceLength.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 22</value>
+  </data>
+  <data name="m_tbMaxKeySequenceLength.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;m_tbMaxKeySequenceLength.Name" xml:space="preserve">
+    <value>m_tbMaxKeySequenceLength</value>
+  </data>
+  <data name="&gt;&gt;m_tbMaxKeySequenceLength.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_tbMaxKeySequenceLength.Parent" xml:space="preserve">
+    <value>m_pnSelf</value>
+  </data>
+  <data name="&gt;&gt;m_tbMaxKeySequenceLength.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="m_lbMaxKeySequenceLength.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="m_lbMaxKeySequenceLength.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 99</value>
+  </data>
+  <data name="m_lbMaxKeySequenceLength.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 12</value>
+  </data>
+  <data name="m_lbMaxKeySequenceLength.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="m_lbMaxKeySequenceLength.Text" xml:space="preserve">
+    <value>最大組字鍵碼長度：</value>
+  </data>
+  <data name="&gt;&gt;m_lbMaxKeySequenceLength.Name" xml:space="preserve">
+    <value>m_lbMaxKeySequenceLength</value>
+  </data>
+  <data name="&gt;&gt;m_lbMaxKeySequenceLength.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_lbMaxKeySequenceLength.Parent" xml:space="preserve">
+    <value>m_pnSelf</value>
+  </data>
+  <data name="&gt;&gt;m_lbMaxKeySequenceLength.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="m_pnSelf.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="m_pnSelf.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 126</value>
+  </data>
+  <data name="m_pnSelf.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;m_pnSelf.Name" xml:space="preserve">
+    <value>m_pnSelf</value>
+  </data>
+  <data name="&gt;&gt;m_pnSelf.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_pnSelf.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;m_pnSelf.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 12</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 133</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>PanelGeneric</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
