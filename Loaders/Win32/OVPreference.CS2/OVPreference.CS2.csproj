@@ -55,11 +55,11 @@
     <Compile Include="FontComboBox.Designer.cs">
       <DependentUpon>FontComboBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="OVPrefrence.cs">
+    <Compile Include="OVPreference.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OVPrefrence.Designer.cs">
-      <DependentUpon>OVPrefrence.cs</DependentUpon>
+    <Compile Include="OVPreference.Designer.cs">
+      <DependentUpon>OVPreference.cs</DependentUpon>
     </Compile>
     <Compile Include="OVConfig.cs" />
     <Compile Include="OVConfigDomWriter.cs" />
@@ -107,9 +107,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="OVPrefrence.resx">
+    <EmbeddedResource Include="OVPreference.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>OVPrefrence.cs</DependentUpon>
+      <DependentUpon>OVPreference.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelGeneric.resx">
       <SubType>Designer</SubType>
@@ -165,13 +165,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="OVPreference.ico" />
-    <EmbeddedResource Include="OVPrefrence.en-US.resx">
+    <EmbeddedResource Include="OVPreference.en-US.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>OVPrefrence.cs</DependentUpon>
+      <DependentUpon>OVPreference.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OVPrefrence.zh-TW.resx">
+    <EmbeddedResource Include="OVPreference.zh-TW.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>OVPrefrence.cs</DependentUpon>
+      <DependentUpon>OVPreference.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelGeneric.en-US.resx">
       <SubType>Designer</SubType>

@@ -30,7 +30,7 @@ namespace OVPreference.CS2
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-TW");
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new OVPrefrence());
+            Application.Run(new OVPreference());
         }
     }
 }

@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace OVPreference.CS2
 {
-    public partial class OVPrefrence : Form
+    public partial class OVPreference : Form
     {
         private List<OVConfig> m_ovConfList = new List<OVConfig>();
         private static string m_ovConfPath =
@@ -33,7 +33,7 @@ namespace OVPreference.CS2
 //        CultureInfo ci = Thread.CurrentThread.CurrentUICulture;
         CultureInfo ci;
 
-        public OVPrefrence()
+        public OVPreference()
         {
 
             //Runtime Culture
@@ -77,8 +77,8 @@ namespace OVPreference.CS2
 
         private void SetUI()        
         {
-            
-            AddTabSharedSettings();
+            //@warning Shared Settings are not ready yet.
+            //AddTabSharedSettings();
             PanelModuleList pnModuleList = new PanelModuleList(m_ovConfDom);
             foreach (OVConfig conf in m_ovConfList)
             {
@@ -132,7 +132,7 @@ namespace OVPreference.CS2
             IntPtr h = this.m_tcSelf.Handle;
             // It's a bug that TabControl.Handle has to be touched manually
             // Before TabControl.TabPages.Insert() is invoked.
-            this.m_tcSelf.TabPages.Insert(1, tpModuleList);
+            this.m_tcSelf.TabPages.Insert(0, tpModuleList);
             //</comment>
 
             //<comment author='b6s'>
