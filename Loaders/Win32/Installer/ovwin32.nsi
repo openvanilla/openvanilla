@@ -5,7 +5,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "¤¤¤å (ÁcÅé) - ¶}©ñ­»¯ó¿é¤Jªk¥­¥x"
-!define PRODUCT_VERSION "0.7.2.4-beta"
+!define PRODUCT_VERSION "0.7.2.5-beta"
 !define PRODUCT_PUBLISHER "OpenVanilla.org"
 !define PRODUCT_WEB_SITE "http://openvanilla.org/"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -149,7 +149,7 @@ LangString FAILED_DOTNET_INSTALL ${LANG_TradChinese} "¿é¤Jªk¦w¸Ë²×¤î¡A$\n¥²¶·µ¥¨
 
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "OpenVanilla-0.7.2.4-beta.exe"
+OutFile "OpenVanilla-0.7.2.5-beta.exe"
 InstallDir "$WINDIR\OpenVanilla"
 ShowInstDetails show
 ShowUnInstDetails show
@@ -597,11 +597,6 @@ Section "Modules" SEC02
 SetOutPath "$WINDIR\"
   SetOVerwrite ifnewer
   File /r "OpenVanilla"
-  ;File /r "Modules"
-  ;File /r "zh_TW"
-  ;File "OpenVanilla\OVPreferences.exe"
-  ;File "OpenVanilla\OVPreferences.exe.manifest"
-  ;File "OpenVanilla\CSharpFormLibrary.dll"
   nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
   nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" install "$WINDIR\OpenVanilla\CSharpFormLibrary.dll"'
 SetOutPath "$APPDATA\OpenVanilla\"
@@ -645,19 +640,17 @@ FunctionEnd
 
 Section Uninstall
   ClearErrors
-  Delete "$SYSDIR\OVIME.ime"
-  IfErrors 0 ContinueUnist1
-         MessageBox MB_ICONSTOP|MB_YESNO "°»´ú¨ì¦³¥¿¦b¨Ï¥Î¿é¤Jªkªºµ{¦¡¡A½Ð­«·s¶}¾÷¡A¥HÄ~Äò¤Ï¦w¸Ëµ{¦¡¡C¬O§_­n¥ß§Y­«·s¶}¾÷¡H" IDNO noReboot
-         Reboot
-         noReboot:
-         MessageBox MB_ICONSTOP|MB_OK "½Ð¦Û¦æ­«·s¶}¾÷«á¡A¦A¶i¦æ²¾°£¦w¸Ëµ{¦¡" IDOK +1
-         Quit
-  ContinueUnist1:  
-  nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
-  ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\excel-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\excel.exe" $R5
-  ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\winword-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\winword.exe" $R6
-  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"  
   System::Call "user32::UnloadKeyboardLayout(l $0)"
+  ${If} $0 <> 0
+    Call :lbContinueUninstall
+  ${EndIf}
+  MessageBox MB_ICONSTOP|MB_YESNO "°»´ú¨ì¦³¥¿¦b¨Ï¥Î¿é¤Jªkªºµ{¦¡¡A½Ð­«·s¶}¾÷¡A¥HÄ~Äò¤Ï¦w¸Ëµ{¦¡¡C¬O§_­n¥ß§Y­«·s¶}¾÷¡H" IDNO noReboot
+  Reboot
+  noReboot:
+  MessageBox MB_ICONSTOP|MB_OK "½Ð¦Û¦æ­«·s¶}¾÷«á¡A¦A¶i¦æ²¾°£¦w¸Ëµ{¦¡" IDOK +1
+  Quit
+
+  lbContinueUninstall:
   DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}\$0"
   
   ${registry::Open} "${IME_CURRENT_USER}\" " /V=1 /S=1 /N='$0' /G=1 /T=REG_SZ" $9
@@ -665,12 +658,19 @@ Section Uninstall
   DeleteRegValue "${IME_CURRENT_USER}" "${IME_KEY_USER}" "$2"
   ${registry::Close} "$9"
 
-  Delete "$SYSDIR\hunspelldll.dll"
+  ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\excel-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\excel.exe" $R5
+  ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\winword-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\winword.exe" $R6
+  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"  
+
+  nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
+
+  Delete "$SYSDIR\OVIME.ime"
+  Delete "$SYSDIR\Hunspell.dll"
   Delete "$SYSDIR\libltdl3.dll"
   Delete "$SYSDIR\libiconv-2.dll"
   Delete "$SYSDIR\sqlite3.dll"
   Delete "$SYSDIR\tinyxml.dll"
-  Delete "$SYSDIR\OVIMEUI.DLL"
+  Delete "$SYSDIR\OVIMEUI.dll"
   Delete "$INSTDIR\uninst.exe"
   RMDir /r "$WINDIR\OpenVanilla"
   Delete "$SMPROGRAMS\OpenVanilla\Uninstall.lnk"
