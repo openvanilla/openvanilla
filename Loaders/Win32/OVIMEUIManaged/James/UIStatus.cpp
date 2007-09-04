@@ -182,7 +182,7 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 			case ID_CONFIG:
 				{
 					TCHAR exe_path[MAX_PATH];
-					TCHAR file_name[] = _T("\\OpenVanilla\\OVPreference.CS2.exe");
+					TCHAR file_name[] = _T("\\OpenVanilla\\OVPreferences.exe");
 				    GetWindowsDirectory(exe_path, MAX_PATH - (int)_tcslen( file_name ) );
 				    _stprintf(exe_path, _T("%s\\%s"), exe_path, file_name);
 

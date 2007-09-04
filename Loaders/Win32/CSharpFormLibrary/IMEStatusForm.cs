@@ -540,7 +540,7 @@ namespace CSharpFormLibrary
             Process proc = new System.Diagnostics.Process();
             proc.StartInfo.FileName =
                 m_baseDir + System.IO.Path.DirectorySeparatorChar +
-                "OVPreference.CS2.exe";
+                "OVPreferences.exe";
             proc.StartInfo.WorkingDirectory = m_baseDir;
             System.IO.FileInfo configFile =
                 new System.IO.FileInfo(m_confingPath);

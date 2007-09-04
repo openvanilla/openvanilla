@@ -97,7 +97,7 @@ ImeConfigure(HKL hKL,HWND hWnd, DWORD dwMode, LPVOID lpData)
 	{
 		TCHAR buf[MAX_PATH];
 		GetWindowsDirectory( buf, MAX_PATH );
-		_tcscat( buf, _T("\\OpenVanilla\\OVPreference.CS2.exe"));
+		_tcscat( buf, _T("\\OpenVanilla\\OVPreferences.exe"));
 		ShellExecute( hWnd, _T("open"), buf, NULL, NULL, SW_SHOWNORMAL );
 	}
 	InvalidateRect(hWnd,NULL,FALSE);
