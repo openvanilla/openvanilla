@@ -10,9 +10,9 @@ using System.Resources;
 using System.Globalization;
 using System.Threading;
 
-namespace OVPreference.CS2
+namespace OVPreferences
 {
-    public partial class OVPreference : Form
+    public partial class OVPreferences : Form
     {
         private List<OVConfig> m_ovConfList = new List<OVConfig>();
         private static string m_ovConfPath =
@@ -33,7 +33,7 @@ namespace OVPreference.CS2
 //        CultureInfo ci = Thread.CurrentThread.CurrentUICulture;
         CultureInfo ci;
 
-        public OVPreference()
+        public OVPreferences()
         {
 
             //Runtime Culture

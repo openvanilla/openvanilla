@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace OVPreference.CS2
+namespace OVPreferences
 {
     public interface ColorCollection : IEnumerable
     {

@@ -1,4 +1,4 @@
-namespace OVPreference.CS2
+namespace OVPreferences
 {
     partial class PanelPOJ
     {

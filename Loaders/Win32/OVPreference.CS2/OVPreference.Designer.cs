@@ -1,6 +1,6 @@
-namespace OVPreference.CS2
+namespace OVPreferences
 {
-    partial class OVPreference
+    partial class OVPreferences
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace OVPreference.CS2
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OVPreference));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OVPreferences));
             this.m_btSave = new System.Windows.Forms.Button();
             this.m_tcSelf = new System.Windows.Forms.TabControl();
             this.m_tlSelf = new System.Windows.Forms.TableLayoutPanel();

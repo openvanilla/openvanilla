@@ -7,9 +7,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace OVPreference.CS2
+namespace OVPreferences
 {
-    public partial class PanelTobacco : OVPreference.CS2.PanelGeneric
+    public partial class PanelTobacco : PanelGeneric
     {
         public PanelTobacco()
         {

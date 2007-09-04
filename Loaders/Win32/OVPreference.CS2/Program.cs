@@ -5,7 +5,7 @@ using System.Resources;
 using System.Globalization;
 using System.Threading;
 
-namespace OVPreference.CS2
+namespace OVPreferences
 {
     static class Program
     {
@@ -30,7 +30,7 @@ namespace OVPreference.CS2
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-TW");
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new OVPreference());
+            Application.Run(new OVPreferences());
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Text;
 using System.Drawing;
 
-namespace OVPreference.CS2
+namespace OVPreferences
 {
  
     public enum KnownColorFilter

@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace OVPreference.CS2
+namespace OVPreferences
 {
-    public partial class PanelTibetan : OVPreference.CS2.PanelPhonetic
+    public partial class PanelTibetan : PanelPhonetic
     {
         public PanelTibetan()
         {

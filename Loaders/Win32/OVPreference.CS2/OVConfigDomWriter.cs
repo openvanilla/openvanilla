@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
-namespace OVPreference.CS2
+namespace OVPreferences
 {
     public class OVConfigDomWriter
     {

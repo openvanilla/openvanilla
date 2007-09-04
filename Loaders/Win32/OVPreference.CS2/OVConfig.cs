@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OVPreference.CS2
+namespace OVPreferences
 {
     public class OVConfig
     {

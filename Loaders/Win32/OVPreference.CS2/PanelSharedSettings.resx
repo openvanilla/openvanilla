@@ -156,7 +156,7 @@
     <value>m_cbBackColor</value>
   </data>
   <data name="&gt;&gt;m_cbBackColor.Type" xml:space="preserve">
-    <value>OVPreference.CS2.ColorPicker, OVPreference.CS2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>OVPreferences.ColorPicker, OVPreferences, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;m_cbBackColor.Parent" xml:space="preserve">
     <value>m_pnSelf</value>
@@ -201,7 +201,7 @@
     <value>m_cbFontColor</value>
   </data>
   <data name="&gt;&gt;m_cbFontColor.Type" xml:space="preserve">
-    <value>OVPreference.CS2.ColorPicker, OVPreference.CS2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>OVPreferences.ColorPicker, OVPreferences, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;m_cbFontColor.Parent" xml:space="preserve">
     <value>m_pnSelf</value>
@@ -366,7 +366,7 @@
     <value>m_cbFont</value>
   </data>
   <data name="&gt;&gt;m_cbFont.Type" xml:space="preserve">
-    <value>OVPreference.CS2.FontComboBox, OVPreference.CS2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>OVPreferences.FontComboBox, OVPreferences, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;m_cbFont.Parent" xml:space="preserve">
     <value>m_pnSelf</value>

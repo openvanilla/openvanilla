@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace OVPreference.CS2
+namespace OVPreferences
 {
     public partial class PanelTLIM : UserControl
     {

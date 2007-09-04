@@ -1,4 +1,4 @@
-namespace OVPreference.CS2
+namespace OVPreferences
 {
     partial class PanelSharedSettings
     {
@@ -30,15 +30,15 @@ namespace OVPreference.CS2
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PanelSharedSettings));
             this.m_pnSelf = new System.Windows.Forms.Panel();
             this.m_gbPreview = new System.Windows.Forms.GroupBox();
-            this.m_cbBackColor = new OVPreference.CS2.ColorPicker();
+            this.m_cbBackColor = new ColorPicker();
             this.m_lbBackColor = new System.Windows.Forms.Label();
-            this.m_cbFontColor = new OVPreference.CS2.ColorPicker();
+            this.m_cbFontColor = new ColorPicker();
             this.m_lbFontColor = new System.Windows.Forms.Label();
             this.m_lbOpacity = new System.Windows.Forms.Label();
             this.m_tbOpacity = new System.Windows.Forms.TrackBar();
             this.m_cbFontSize = new System.Windows.Forms.ComboBox();
             this.m_lbFont = new System.Windows.Forms.Label();
-            this.m_cbFont = new OVPreference.CS2.FontComboBox();
+            this.m_cbFont = new FontComboBox();
             this.m_cdMoreColors = new System.Windows.Forms.ColorDialog();
             this.m_pnSelf.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_tbOpacity)).BeginInit();

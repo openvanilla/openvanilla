@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Diagnostics;
 
-namespace OVPreference.CS2
+namespace OVPreferences
 {
     public partial class PanelGeneric : UserControl
     {
