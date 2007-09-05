@@ -1,4 +1,4 @@
-#define OV_DEBUG
+//#define OV_DEBUG
 #include "OVIME.h"
 #include <cstdio>
 
@@ -94,14 +94,6 @@ void UpdateCandidate(LPINPUTCONTEXT lpIMC, const wchar_t* candis)
 
 void RefreshUI(HWND hWnd)  //調整comp cand
 {		
-	LOGFONT* lfptr;
-	LOGFONT lf2;
-	//RECT rec;
-	//SIZE szOffset;
-	HDC hDC;
-	POINT ptSrc;
-	TEXTMETRIC tm;
-
 	HIMC hUICurIMC = (HIMC)GetWindowLong(hWnd, IMMGWL_IMC);
 	ImmModel* model = ImmModel::open(hUICurIMC);
 
@@ -110,64 +102,68 @@ void RefreshUI(HWND hWnd)  //調整comp cand
 	LPINPUTCONTEXT lpIMC = model->getIMC();
 	//lpIMC = ImmLockIMC(hUICurIMC);
 
-	int localDPIY; //for device dpiY
+	POINT ptSrc;
 	if(dsvr->isCompEnabled)  // comp exist, cand follow comp's position
 	{
-		murmur("isCompEnabled");
+		//murmur("isCompEnabled");
 		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
 	}
 	else if(dsvr->isCandiEnabled) // comp doesn't exist, get cand posistion
 	{
-		murmur("isCandiEnabled");
+		//murmur("isCandiEnabled");
 		ptSrc = lpIMC->cfCandForm[0].ptCurrentPos;
 	}
 
 	ClientToScreen(lpIMC->hWnd, &ptSrc);
-	hDC = GetDC(lpIMC->hWnd);
+	HDC hDC = GetDC(lpIMC->hWnd);
 
 	//computes the width and height of the specified string of text.
 	//GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
 
 	//fills the specified buffer with the metrics for the currently selected font.
+	TEXTMETRIC tm;
 	GetTextMetrics(hDC, &tm);
-	localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
-	lfptr = (LOGFONT*)(&lpIMC->lfFont);
-	//memcpy(&lf2, lfptr, sizeof(lf2));
-	murmur("original ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
-	murmur("lfptr->lfHeight: %i", lfptr->lfHeight);
+	int localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
+	LOGFONT* lfptr = (LOGFONT*)(&lpIMC->lfFont);
+	LOGFONT lfClone;
+	memcpy(&lfClone, lfptr, sizeof(lfClone));
+	ReleaseDC(lpIMC->hWnd,hDC);
 
-	int fontSize = abs(lfptr->lfHeight);
+	//murmur("original ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
+	//murmur("lfptr->lfHeight: %i", lfClone.lfHeight);
+
+	int fontSize = abs(lfClone.lfHeight);
 	if(fontSize == 0)
 		fontSize = 12;
 	int fontHeight = fontSize*localDPIY/tm.tmDigitizedAspectY;
-	murmur("fontSize: %i", fontSize);
-	murmur("fontHeight: %i", fontHeight);
+	//murmur("fontSize: %i", fontSize);
+	//murmur("fontHeight: %i", fontHeight);
 
-	if(lfptr->lfHeight > 0)
+	if(lfClone.lfHeight > 0)
 		ptSrc.y -= fontHeight;
-	murmur("adjusted ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
-
-	ReleaseDC(lpIMC->hWnd,hDC);
+	//murmur("adjusted ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
 
 	//LPMYPRIVATE lpMyPrivate = model->getMyPrivate();
 	//lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 	if (dsvr->isCompEnabled)
 	{	
 		CompX = ptSrc.x;
-		//CompY = ptSrc.y + szOffset.cy;
 		CompY = ptSrc.y;
-		dsvr->moveBuf(CompX, CompY, fontSize, fontHeight, lf2.lfFaceName);
+		murmur(
+			"moveBuf(%i, %i, %i, %i)",
+			CompX, CompY, fontSize, fontHeight);
+		dsvr->moveBuf(CompX, CompY, fontSize, fontHeight, lfClone.lfFaceName);
 		if (dsvr->isCandiEnabled)
 		{
 			CandX = CompX + UIGetCaretPosX();
 			CandY = CompY;
-			dsvr->moveCandi(CandX, CandY, UIGetHeight());
+			murmur("moveCandi(%i, %i, %i)", CandX, CandY, fontHeight);
+			dsvr->moveCandi(CandX, CandY, fontHeight/*UIGetHeight()*/);
 		}
 	}
 	else if (dsvr->isCandiEnabled)
 	{							
 		CandX= ptSrc.x;
-		//CandY= ptSrc.y + szOffset.cy;
 		CandY= ptSrc.y;
 		dsvr->moveCandi(CandX, CandY, fontHeight);
 	}
