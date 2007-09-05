@@ -1,4 +1,4 @@
-//#define OV_DEBUG
+#define OV_DEBUG
 #include "OVIME.h"
 #include <cstdio>
 
@@ -113,16 +113,17 @@ void RefreshUI(HWND hWnd)  //調整comp cand
 	int localDPIY; //for device dpiY
 	if(dsvr->isCompEnabled)  // comp exist, cand follow comp's position
 	{
+		murmur("isCompEnabled");
 		ptSrc = lpIMC->cfCompForm.ptCurrentPos;
 	}
 	else if(dsvr->isCandiEnabled) // comp doesn't exist, get cand posistion
 	{
+		murmur("isCandiEnabled");
 		ptSrc = lpIMC->cfCandForm[0].ptCurrentPos;
 	}
 
 	ClientToScreen(lpIMC->hWnd, &ptSrc);
 	hDC = GetDC(lpIMC->hWnd);
-	murmur("\th Refresh: lpIMC->Wnd->%x", lpIMC->hWnd);
 
 	//computes the width and height of the specified string of text.
 	//GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
@@ -130,12 +131,24 @@ void RefreshUI(HWND hWnd)  //調整comp cand
 	//fills the specified buffer with the metrics for the currently selected font.
 	GetTextMetrics(hDC, &tm);
 	localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
-	ReleaseDC(lpIMC->hWnd,hDC);
 	lfptr = (LOGFONT*)(&lpIMC->lfFont);
-	memcpy(&lf2, lfptr, sizeof(lf2));
+	//memcpy(&lf2, lfptr, sizeof(lf2));
+	murmur("original ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
+	murmur("lfptr->lfHeight: %i", lfptr->lfHeight);
 
-	int fontSize = abs(lf2.lfHeight);
+	int fontSize = abs(lfptr->lfHeight);
+	if(fontSize == 0)
+		fontSize = 12;
 	int fontHeight = fontSize*localDPIY/tm.tmDigitizedAspectY;
+	murmur("fontSize: %i", fontSize);
+	murmur("fontHeight: %i", fontHeight);
+
+	if(lfptr->lfHeight > 0)
+		ptSrc.y -= fontHeight;
+	murmur("adjusted ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
+
+	ReleaseDC(lpIMC->hWnd,hDC);
+
 	//LPMYPRIVATE lpMyPrivate = model->getMyPrivate();
 	//lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 	if (dsvr->isCompEnabled)
