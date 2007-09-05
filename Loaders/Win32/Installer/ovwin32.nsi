@@ -640,8 +640,9 @@ FunctionEnd
 
 Section Uninstall
   ClearErrors
-  System::Call "user32::UnloadKeyboardLayout(l $0)"
-  ${If} $0 <> 0
+  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
+  System::Call "user32::UnloadKeyboardLayout(l $0) i $1 ?e"
+  ${If} $1 <> 0
     Call :lbContinueUninstall
   ${EndIf}
   MessageBox MB_ICONSTOP|MB_YESNO "偵測到有正在使用輸入法的程式，請重新開機，以繼續反安裝程式。是否要立即重新開機？" IDNO noReboot
@@ -660,7 +661,6 @@ Section Uninstall
 
   ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\excel-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\excel.exe" $R5
   ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\winword-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\winword.exe" $R6
-  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"  
 
   nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
 
