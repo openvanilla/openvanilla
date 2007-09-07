@@ -22,7 +22,6 @@ namespace CSharpFormLibrary
         private int m_compSelStart = 0;
         private int m_compSelEnd = 0;
         private int m_caretX = 0;
-        private int m_fontSize = 0;
         private int m_fontHeight = 0;
         private string m_fontName = "";
         private string m_text= "";
@@ -55,12 +54,21 @@ namespace CSharpFormLibrary
         private void IMECompRichForm_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             if (m_text.Length > 0)
-            {
+            {                
+                GraphicsUnit unit = GraphicsUnit.Point;
+                int fontSize = Math.Abs(m_fontHeight);
+                if(fontSize == 0) {
+                    fontSize = 16;
+                }
+                if (m_fontHeight < 0)
+                    unit = GraphicsUnit.Pixel;
+
                 this.Font =
-                    new Font(m_fontName, m_fontSize, GraphicsUnit.Pixel);
+                    new Font(m_fontName, fontSize, unit);
                     //new System.Drawing.Font(
                     //    "PMingLiU", /*12F*/m_fontSize, GraphicsUnit.Pixel);
-                Size proposedFontSize = new Size(m_fontSize, m_fontHeight);
+                Size proposedFontSize =
+                    new Size(int.MaxValue, int.MaxValue);
 
                 TextFormatFlags textFormatFlag = TextFormatFlags.NoPadding;
                 Size sizeString =
@@ -70,6 +78,8 @@ namespace CSharpFormLibrary
 
                 this.Width = sizeString.Width + 1;
                 this.Height = sizeString.Height + 1;
+                Debug.WriteLine("width:" + this.Width);
+                Debug.WriteLine("height:" + this.Height);
 
                 TextRenderer.DrawText(
                     e.Graphics, m_text, this.Font,
@@ -242,9 +252,8 @@ namespace CSharpFormLibrary
             this.Location = new Point(x, y);
         }
 
-        public void SetFont(int fontSize, int fontHeight, string fontName)
+        public void SetFont(int fontHeight, string fontName)
         {
-            m_fontSize = fontSize;
             m_fontHeight = fontHeight;
             m_fontName = fontName;
         }

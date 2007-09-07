@@ -66,11 +66,11 @@ void _ShowCompPage()
 }
 
 void _MoveCompPage(
-	int x, int y, int fontSize, int fontHeight, const wchar_t* fontName)
+	int x, int y, int fontHeight, const wchar_t* fontName)
 {
 	CSharpCompWrapper::Instance()->SetLocation(x, y);
 	CSharpCompWrapper::Instance()->SetFont(
-		fontSize, fontHeight, gcnew System::String(fontName));
+		fontHeight, gcnew System::String(fontName));
 }
 
 void _HideCompPage()

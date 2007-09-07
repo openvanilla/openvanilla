@@ -115,33 +115,32 @@ void RefreshUI(HWND hWnd)  //調整comp cand
 	}
 
 	ClientToScreen(lpIMC->hWnd, &ptSrc);
-	HDC hDC = GetDC(lpIMC->hWnd);
 
 	//computes the width and height of the specified string of text.
 	//GetTextExtentPoint(hDC, _T("A"), 1, &szOffset);
 
-	//fills the specified buffer with the metrics for the currently selected font.
-	TEXTMETRIC tm;
-	GetTextMetrics(hDC, &tm);
-	int localDPIY = GetDeviceCaps(hDC, LOGPIXELSY);
 	LOGFONT* lfptr = (LOGFONT*)(&lpIMC->lfFont);
 	LOGFONT lfClone;
 	memcpy(&lfClone, lfptr, sizeof(lfClone));
-	ReleaseDC(lpIMC->hWnd,hDC);
 
-	//murmur("original ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
-	//murmur("lfptr->lfHeight: %i", lfClone.lfHeight);
+	// Fills the specified buffer with the metrics for
+	// the currently selected font.
+	//HDC hDC = GetDC(lpIMC->hWnd);
+	//TEXTMETRIC tm;
+	//GetTextMetrics(hDC, &tm);
+	//int localDpiY = GetDeviceCaps(hDC, LOGPIXELSY);
+	//ReleaseDC(lpIMC->hWnd, hDC);
 
-	int fontSize = abs(lfClone.lfHeight);
-	if(fontSize == 0)
-		fontSize = 12;
-	int fontHeight = fontSize*localDPIY/tm.tmDigitizedAspectY;
-	//murmur("fontSize: %i", fontSize);
-	//murmur("fontHeight: %i", fontHeight);
+	//murmur("localDpiY:%i", localDpiY);
+	//murmur("tmDigitizedAspectY:%i", tm.tmDigitizedAspectY);
+	//float fontSize = fontHeight*(localDpiY/tm.tmDigitizedAspectY);	
+	//murmur("fontSize: %f", fontSize);
 
+	murmur("original ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
+	murmur("lfptr->lfHeight: %i", lfClone.lfHeight);
 	if(lfClone.lfHeight > 0)
-		ptSrc.y -= fontHeight;
-	//murmur("adjusted ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
+		ptSrc.y -= lfClone.lfHeight;
+	murmur("adjusted ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
 
 	//LPMYPRIVATE lpMyPrivate = model->getMyPrivate();
 	//lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
@@ -150,22 +149,26 @@ void RefreshUI(HWND hWnd)  //調整comp cand
 		CompX = ptSrc.x;
 		CompY = ptSrc.y;
 		murmur(
-			"moveBuf(%i, %i, %i, %i)",
-			CompX, CompY, fontSize, fontHeight);
-		dsvr->moveBuf(CompX, CompY, fontSize, fontHeight, lfClone.lfFaceName);
+			"moveBuf(%i, %i, %i)",
+			CompX, CompY, lfClone.lfHeight);
+		dsvr->moveBuf(
+			CompX, CompY,
+			lfClone.lfHeight, lfClone.lfFaceName);
 		if (dsvr->isCandiEnabled)
 		{
 			CandX = CompX + UIGetCaretPosX();
 			CandY = CompY;
-			murmur("moveCandi(%i, %i, %i)", CandX, CandY, fontHeight);
-			dsvr->moveCandi(CandX, CandY, fontHeight/*UIGetHeight()*/);
+			murmur(
+				"moveCandi(%i, %i, %i)",
+				CandX, CandY, abs(lfClone.lfHeight));
+			dsvr->moveCandi(CandX, CandY, abs(lfClone.lfHeight)/*UIGetHeight()*/);
 		}
 	}
 	else if (dsvr->isCandiEnabled)
 	{							
 		CandX= ptSrc.x;
 		CandY= ptSrc.y;
-		dsvr->moveCandi(CandX, CandY, fontHeight);
+		dsvr->moveCandi(CandX, CandY, abs(lfClone.lfHeight));
 	}
 
 	ImmModel::close();
