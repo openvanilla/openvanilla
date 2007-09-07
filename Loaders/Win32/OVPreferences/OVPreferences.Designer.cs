@@ -68,7 +68,7 @@ namespace OVPreferences
             this.m_tlSelf.Font = null;
             this.m_tlSelf.Name = "m_tlSelf";
             // 
-            // OVPrefrence
+            // OVPrefrences
             // 
             this.AccessibleDescription = null;
             this.AccessibleName = null;
@@ -77,7 +77,7 @@ namespace OVPreferences
             this.BackgroundImage = null;
             this.Controls.Add(this.m_tlSelf);
             this.Font = null;
-            this.Name = "OVPrefrence";
+            this.Name = "OVPrefrences";
             this.m_tlSelf.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -89,7 +89,6 @@ namespace OVPreferences
         private System.Windows.Forms.Button m_btSave;
         private System.Windows.Forms.TabControl m_tcSelf;
         private System.Windows.Forms.TableLayoutPanel m_tlSelf;
-
     }
 }
 
