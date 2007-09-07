@@ -54,7 +54,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "ov.ico"
+IDI_ICON1               ICON                    "OVIME.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -62,8 +62,8 @@ IDI_ICON1               ICON                    "ov.ico"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,7,2,1
- PRODUCTVERSION 0,7,2,1
+ FILEVERSION 0,7,2,5
+ PRODUCTVERSION 0,7,2,5
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -79,12 +79,12 @@ BEGIN
         BLOCK "040404b0"
         BEGIN
             VALUE "FileDescription", "中文 (繁體) - 開放香草輸入法平台"
-            VALUE "FileVersion", "0, 7, 2, 4"
+            VALUE "FileVersion", "0, 7, 2, 5"
             VALUE "InternalName", "OVIME"
             VALUE "LegalCopyright", "BSD License"
             VALUE "OriginalFilename", "OVIME.ime"
             VALUE "ProductName", " OVIME"
-            VALUE "ProductVersion", "0, 7, 2, 4"
+            VALUE "ProductVersion", "0, 7, 2, 5"
         END
     END
     BLOCK "VarFileInfo"
