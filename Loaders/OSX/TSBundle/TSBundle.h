@@ -33,8 +33,8 @@
 #ifndef __TSBundle_H
 #define __TSBundle_H
 
-#define TSBUNDLEFILENAME    "/Library/OpenVanilla/0.7.2/Loader/OVLoader.bundle"
-#define TSBUNDLEID          "org.openvanilla.ovloader.072"
+#define TSBUNDLEFILENAME    "/Library/OpenVanilla/0.8.0/Loader/OVLoader.bundle"
+#define TSBUNDLEID          "org.openvanilla.ovloader.080"
 
 #ifdef __cplusplus
 extern "C" {

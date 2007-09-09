@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.tscomponent.072</string>
+	<string>org.openvanilla.tscomponent.080</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleSignature</key>
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>0.7.2</string>
+	<string>0.8.0</string>
 	<key>CSResourcesFileMapped</key>
 	<string>yes</string>
 	<key>tsInputMethodIconFileKey</key>

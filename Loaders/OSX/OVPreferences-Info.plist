@@ -13,7 +13,7 @@
 	<key>CFBundleIconFile</key>
 	<string>OVPreferencesIcon</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.ovpreferences.072</string>
+	<string>org.openvanilla.ovpreferences.080</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -23,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>0.7.2</string>
+	<string>0.8.0</string>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
 	<key>NSHelpFile</key>

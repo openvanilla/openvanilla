@@ -7,11 +7,11 @@
 		<key>primaryInputMethod</key>
 		<string>OVIMPhonetic</string>
 		<key>displayServerName</key>
-		<string>OVDisplayServer-0.7.2</string>
+		<string>OVDisplayServer-0.8.0</string>
 		<key>displayServerStartupTimeout</key>
 		<string>40</string>
 		<key>displayServerPath</key>
-		<string>/Library/OpenVanilla/0.7.2/Loader/OVDisplayServer.app</string>
+		<string>/Library/OpenVanilla/0.8.0/Loader/OVDisplayServer.app</string>
 	</dict>
 </dict>
 </plist>

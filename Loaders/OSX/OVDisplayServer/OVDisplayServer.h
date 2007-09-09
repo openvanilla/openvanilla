@@ -31,7 +31,7 @@
 #ifndef __OVDisplayServer_h
 #define __OVDisplayServer_h
 
-#define OVDSPSRVR_NAME		@"OVDisplayServer-0.7.2"
+#define OVDSPSRVR_NAME		@"OVDisplayServer-0.8.0"
 
 @protocol OVDisplayServer
 - (void)setConfig:(bycopy NSDictionary*)cfg;

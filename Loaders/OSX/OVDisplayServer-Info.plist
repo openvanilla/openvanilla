@@ -13,7 +13,7 @@
 	<key>CFBundleIconFile</key>
 	<string>DisplayServerIcon</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.ovdisplayserver.072</string>
+	<string>org.openvanilla.ovdisplayserver.080	</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

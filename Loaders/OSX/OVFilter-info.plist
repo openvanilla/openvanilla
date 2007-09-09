@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>OVFilter</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.widgetplugin.072</string>
+	<string>org.openvanilla.widgetplugin.080</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
