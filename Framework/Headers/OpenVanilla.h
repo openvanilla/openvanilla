@@ -31,7 +31,7 @@
 #ifndef __OpenVanilla_h
 #define __OpenVanilla_h
 
-#define OV_VERSION   (0x00070200)      // version 0.7.2 (00_07_02_00)
+#define OV_VERSION   (0x00080000)      // version 0.8.0 (00_08_00_00)
 
 // A pure base class that defines the virtual destructor
 class OVBase {
