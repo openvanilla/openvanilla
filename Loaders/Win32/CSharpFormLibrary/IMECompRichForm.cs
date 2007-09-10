@@ -57,10 +57,15 @@ namespace CSharpFormLibrary
             if (m_text.Length > 0)
             {                
                 GraphicsUnit unit = GraphicsUnit.Point;
-                int fontSize = Math.Abs(m_fontHeight);
-                if(fontSize == 0)
-                    fontSize = 16;
+                float fontSize = Convert.ToSingle(Math.Abs(m_fontHeight));
+                if (fontSize == 0)
+                    fontSize = 16.0F;
 
+                //@warning God I hate magical numbers...
+                if (m_fontHeight > 0)
+                    fontSize -= 0.5F;
+
+                //@warning A Device/DPI magic.
                 if (m_fontHeight < 0)
                     unit = GraphicsUnit.Pixel;
 
@@ -77,12 +82,14 @@ namespace CSharpFormLibrary
                         e.Graphics, m_text, this.Font,
                         proposedFontSize, textFormatFlag);
 
+                //@warning Another Device/DPI magic.
                 if (m_fontHeight > 0)
                     this.Location =
                         new Point(
                             this.Location.X,
                             m_locationY - sizeString.Height);
 
+                //@warning Reserves for the caret and the dotted underline.
                 this.Width = sizeString.Width + 1;
                 this.Height = sizeString.Height + 1;
 

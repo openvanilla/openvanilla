@@ -39,6 +39,8 @@ namespace CSharpFormLibrary
         private Panel panel2;
         private const int MA_NOACTIVATEANDEAT = 0x0004;
 
+        private bool m_isFormSizeSet = false;
+
         public IMECandidateForm()
         {
             InitializeComponent();
@@ -266,10 +268,14 @@ namespace CSharpFormLibrary
         }
 
         public void SetLocation(int x, int y, int compHeight)
-        {
+        {            
             m_compHeight = compHeight;
             this.Location = new Point(x, y + m_compHeight);
-            duckScreenBoundry();
+            if (m_isFormSizeSet)
+            {
+                duckScreenBoundry();
+                m_isFormSizeSet = false;
+            }
         }
 
         public void DisposeForm()
@@ -281,6 +287,7 @@ namespace CSharpFormLibrary
         {
             return this.lbCandidates.SelectedIndex;
         }*/
+
         public void ClearCandidates()
         {
             this.lbCandidates.Items.Clear();
@@ -446,7 +453,8 @@ namespace CSharpFormLibrary
             this.Width = width ;
             this.Height = height + 5;   //+5為了好看
 
-            //duckScreenBoundry();
+            m_isFormSizeSet = true;
+            duckScreenBoundry();
         }
 
         #endregion
@@ -463,7 +471,6 @@ namespace CSharpFormLibrary
 
         public void ShowNoActive()
         {
-            Debug.WriteLine("show");
             if (!this.Visible)
                 UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
         }
@@ -529,10 +536,10 @@ namespace CSharpFormLibrary
 
             System.Diagnostics.Debug.WriteLine("Cand Validated");
         }
+
         private void IMECandidateForm_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Cand Validating");
-
         }
 
         private void lbCandidates_KeyDown(object sender, KeyEventArgs e)
@@ -555,22 +562,12 @@ namespace CSharpFormLibrary
 
         private void duckScreenBoundry()
         {
-            Debug.WriteLine("height:" + this.Height);
-            Debug.WriteLine("m_compHeight:" + m_compHeight);
-            Debug.WriteLine("Y:" + this.Location.Y);
-            Debug.WriteLine("bottom:" + this.Bottom);
-            Debug.WriteLine(
-                "screen bottom:" + Screen.PrimaryScreen.WorkingArea.Bottom);
             if (this.Bottom >
                 Screen.PrimaryScreen.WorkingArea.Bottom)
-            {
                 this.Location =
                     new Point(
                         this.Location.X,
                         this.Location.Y - this.Height - m_compHeight);
-                Debug.WriteLine("new bottom:" + this.Bottom);
-                Debug.WriteLine("new Y:" + this.Location.Y);
-            }
             if (this.Right >
                 Screen.PrimaryScreen.WorkingArea.Right)
                 this.Location =
