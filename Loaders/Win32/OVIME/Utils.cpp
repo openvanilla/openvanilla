@@ -167,7 +167,7 @@ void RefreshUI(HWND hWnd)  //½Õ¾ãcomp cand
 		{			
 			CandX = CompX + UIGetCaretPosX();
 			CandY = CompY;
-			if(lfClone.lfHeight > 0)
+			if(lfClone.lfHeight >= 0)
 				CandY -= UIGetHeight();
 			murmur(
 				"moveCandi(%i, %i, %i)",

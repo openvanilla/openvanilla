@@ -62,6 +62,7 @@ namespace CSharpFormLibrary
                     fontSize = 16.0F;
 
                 //@warning God I hate magical numbers...
+                // This is almost for Windows Live Messenger only.
                 if (m_fontHeight > 0)
                     fontSize -= 0.5F;
 
@@ -73,17 +74,20 @@ namespace CSharpFormLibrary
                     new Font(m_fontName, fontSize, unit);
                     //new System.Drawing.Font(
                     //    "PMingLiU", /*12F*/m_fontSize, GraphicsUnit.Pixel);
-                Size proposedFontSize =
-                    new Size(int.MaxValue, int.MaxValue);
+                Size proposedSize =
+                    new Size(
+                        Math.Abs(m_fontHeight) * m_text.Length,
+                        Math.Abs(m_fontHeight));
 
-                TextFormatFlags textFormatFlag = TextFormatFlags.NoPadding;
+                TextFormatFlags textFormatFlag =
+                    TextFormatFlags.NoPadding | TextFormatFlags.NoClipping;
                 Size sizeString =
                     TextRenderer.MeasureText(
-                        e.Graphics, m_text, this.Font,
-                        proposedFontSize, textFormatFlag);
+                        e.Graphics, m_text, this.Font, proposedSize,
+                        textFormatFlag);
 
                 //@warning Another Device/DPI magic.
-                if (m_fontHeight > 0)
+                if (m_fontHeight >= 0)
                     this.Location =
                         new Point(
                             this.Location.X,
@@ -95,8 +99,8 @@ namespace CSharpFormLibrary
 
                 TextRenderer.DrawText(
                     e.Graphics, m_text, this.Font,
-                    new Point(0, 0),
-                    Color.Black, Color.White, textFormatFlag);
+                    new Point(0, 0), Color.Black, Color.White,
+                    textFormatFlag);
 
                 if (m_compSelEnd > m_text.Length)
                     m_compSelEnd = m_text.Length;
@@ -118,7 +122,11 @@ namespace CSharpFormLibrary
                             TextRenderer.MeasureText(
                                 e.Graphics,
                                 m_text.Substring(0, m_compSelStart),
-                                this.Font, proposedFontSize, textFormatFlag);
+                                this.Font,
+                                new Size(
+                                    Math.Abs(m_fontHeight) * m_compSelStart,
+                                    Math.Abs(m_fontHeight)),
+                                textFormatFlag);
                         TextRenderer.DrawText(
                             e.Graphics,
                             m_text.Substring(
@@ -135,7 +143,7 @@ namespace CSharpFormLibrary
                     m_caretIndex = m_text.Length;
                 Size sizePreviousString = TextRenderer.MeasureText(
                     e.Graphics, m_text.Substring(0, m_caretIndex), this.Font,
-                    proposedFontSize, textFormatFlag);
+                    proposedSize, textFormatFlag);
                 CaretX = sizePreviousString.Width;
                 Pen pCaret = new Pen(Color.Green, 1);
                 e.Graphics.DrawLine(
