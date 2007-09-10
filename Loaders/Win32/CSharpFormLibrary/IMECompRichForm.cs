@@ -27,6 +27,7 @@ namespace CSharpFormLibrary
         private string m_text= "";
         private int m_caretIndex = 0;
         private IntPtr m_appHWnd;
+        private int m_locationY = 0;
 
         public int CaretX
         {
@@ -57,9 +58,9 @@ namespace CSharpFormLibrary
             {                
                 GraphicsUnit unit = GraphicsUnit.Point;
                 int fontSize = Math.Abs(m_fontHeight);
-                if(fontSize == 0) {
+                if(fontSize == 0)
                     fontSize = 16;
-                }
+
                 if (m_fontHeight < 0)
                     unit = GraphicsUnit.Pixel;
 
@@ -76,10 +77,14 @@ namespace CSharpFormLibrary
                         e.Graphics, m_text, this.Font,
                         proposedFontSize, textFormatFlag);
 
+                if (m_fontHeight > 0)
+                    this.Location =
+                        new Point(
+                            this.Location.X,
+                            m_locationY - sizeString.Height);
+
                 this.Width = sizeString.Width + 1;
                 this.Height = sizeString.Height + 1;
-                Debug.WriteLine("width:" + this.Width);
-                Debug.WriteLine("height:" + this.Height);
 
                 TextRenderer.DrawText(
                     e.Graphics, m_text, this.Font,
@@ -223,9 +228,9 @@ namespace CSharpFormLibrary
                 UtilFuncs.SetVisibleNoActivate(this, true); // true to show.
             //this.richTextBox1.Text = Buf;
             this.Height = 30;//不知道為什麼之前會被亂改 只好這邊再改一次
-            Debug.WriteLine("before refresh " + this.Height.ToString());
+            //Debug.WriteLine("before refresh " + this.Height.ToString());
             this.Refresh();
-            Debug.WriteLine("after refresh " + this.Height.ToString());
+            //Debug.WriteLine("after refresh " + this.Height.ToString());
             //this.timer1.Enabled = true;
 		}
 
@@ -238,18 +243,17 @@ namespace CSharpFormLibrary
 
 		public void ClearComp()
         {
-            Debug.WriteLine("before clear " + this.Height.ToString());
             //this.richTextBox1.Text="";
             Buf = "";
             //m_compSelStart = 0;
             //m_compSelEnd = 0;
             this.Width = m_formInitWidth;
-            Debug.WriteLine("after clear " + this.Height.ToString());
 		}
 
         public void SetLocation(int x, int y)
         {
-            this.Location = new Point(x, y);
+            m_locationY = y;
+            this.Location = new Point(x, m_locationY);
         }
 
         public void SetFont(int fontHeight, string fontName)

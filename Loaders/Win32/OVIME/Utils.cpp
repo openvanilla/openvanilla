@@ -123,6 +123,11 @@ void RefreshUI(HWND hWnd)  //調整comp cand
 	LOGFONT lfClone;
 	memcpy(&lfClone, lfptr, sizeof(lfClone));
 
+	//@defgroup Device/DPI specific code
+	//@warning
+	// All device/DPI specific code in the following block were moved into C#,
+	// although they remain dirty work-around currently.
+	//@{
 	// Fills the specified buffer with the metrics for
 	// the currently selected font.
 	//HDC hDC = GetDC(lpIMC->hWnd);
@@ -136,16 +141,20 @@ void RefreshUI(HWND hWnd)  //調整comp cand
 	//float fontSize = fontHeight*(localDpiY/tm.tmDigitizedAspectY);	
 	//murmur("fontSize: %f", fontSize);
 
-	murmur("original ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
-	murmur("lfptr->lfHeight: %i", lfClone.lfHeight);
-	if(lfClone.lfHeight > 0)
-		ptSrc.y -= lfClone.lfHeight;
-	murmur("adjusted ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
+	//murmur("original ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
+	//murmur("lfptr->lfHeight: %i", lfClone.lfHeight);
+	//if(lfClone.lfHeight > 0)
+	//	ptSrc.y -= lfClone.lfHeight;
+	//murmur("adjusted ptSrc(%i, %i)", ptSrc.x, ptSrc.y);
+	//@}
 
 	//LPMYPRIVATE lpMyPrivate = model->getMyPrivate();
 	//lpMyPrivate = (LPMYPRIVATE)ImmLockIMCC(lpIMC->hPrivate);
 	if (dsvr->isCompEnabled)
-	{	
+	{
+		//@warning
+		// We may have better control flow on all lfHeight, UIGetCaretPosX, and
+		// UIGetHeight stuffs, later.
 		CompX = ptSrc.x;
 		CompY = ptSrc.y;
 		murmur(
@@ -155,13 +164,15 @@ void RefreshUI(HWND hWnd)  //調整comp cand
 			CompX, CompY,
 			lfClone.lfHeight, lfClone.lfFaceName);
 		if (dsvr->isCandiEnabled)
-		{
+		{			
 			CandX = CompX + UIGetCaretPosX();
 			CandY = CompY;
+			if(lfClone.lfHeight > 0)
+				CandY -= UIGetHeight();
 			murmur(
 				"moveCandi(%i, %i, %i)",
-				CandX, CandY, abs(lfClone.lfHeight));
-			dsvr->moveCandi(CandX, CandY, abs(lfClone.lfHeight)/*UIGetHeight()*/);
+				CandX, CandY, UIGetHeight());
+			dsvr->moveCandi(CandX, CandY, UIGetHeight());
 		}
 	}
 	else if (dsvr->isCandiEnabled)

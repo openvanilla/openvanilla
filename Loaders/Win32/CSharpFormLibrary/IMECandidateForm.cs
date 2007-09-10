@@ -15,11 +15,12 @@ namespace CSharpFormLibrary
         //private System.Windows.Forms.ListView lbCandidates;
         private IMEListView lbCandidates;
         private IContainer components;
-        private int currentPage = 0; //目前頁次 
-        private int totalPage = 0; //傳入的 candidate 共有幾頁                 
+        private int m_currentPage = 0; //目前頁次 
+        private int m_totalPage = 0; //傳入的 candidate 共有幾頁                 
         private ArrayList m_candArray; //傳入的 candi array
-        private string[] m_inputs;
-        private int m_mode = 0; //0:直式  1:展開
+        private string[] m_candidates;
+        private int m_formStyle = 0; //0:直式  1:展開
+        private int m_compHeight = 0;
 
         //當頁的index
         //int now_index;		
@@ -236,26 +237,26 @@ namespace CSharpFormLibrary
             }
                                
             if (candidates == null) return;
-            m_mode = 0;
+            m_formStyle = 0;
 
-            m_inputs = candidates;
-            this.ShowListView(m_mode); // not show, only setstring                       
+            m_candidates = candidates;
+            this.ShowListView(m_formStyle); // not show, only setstring                       
         }
 
         public void SwitchCandiMode() //expand candidate window if possible
         {
-            if (m_mode == 0)
+            if (m_formStyle == 0)
             {
-                if (totalPage > 1) //expandable
+                if (m_totalPage > 1) //expandable
                 {
-                    m_mode = 1;
+                    m_formStyle = 1;
                 }
             }
-            else if (m_mode == 1)
+            else if (m_formStyle == 1)
             {
-                m_mode = 0;
+                m_formStyle = 0;
             }
-            this.ShowListView(m_mode);
+            this.ShowListView(m_formStyle);
         }
 
         public void ResetCandi()
@@ -266,17 +267,9 @@ namespace CSharpFormLibrary
 
         public void SetLocation(int x, int y, int compHeight)
         {
-            this.Location = new Point(x, y + compHeight);
-            if (this.Bottom >
-                Screen.PrimaryScreen.WorkingArea.Bottom)
-                this.Location =
-                    new Point(
-                        this.Location.X,
-                        this.Location.Y - this.Height - compHeight);
-            if (this.Right >
-                Screen.PrimaryScreen.WorkingArea.Right)
-                this.Location =
-                    new Point(this.Location.X - this.Width, this.Location.Y);             
+            m_compHeight = compHeight;
+            this.Location = new Point(x, y + m_compHeight);
+            duckScreenBoundry();
         }
 
         public void DisposeForm()
@@ -323,14 +316,14 @@ namespace CSharpFormLibrary
         private void ShowListView(int mode) //mode 0:直式 1:展開
         {
             ListViewItem li;
-            totalPage = 0;
+            m_totalPage = 0;
 
             //parse & save to arraylist
             m_candArray = new ArrayList();
-            for (int i = 0; i < m_inputs.Length; i++)
+            for (int i = 0; i < m_candidates.Length; i++)
             {
-                string cand = m_inputs[i];
-                if (i == m_inputs.Length - 1)
+                string cand = m_candidates[i];
+                if (i == m_candidates.Length - 1)
                     m_candArray.Add(cand);
                 else
                 {
@@ -341,13 +334,13 @@ namespace CSharpFormLibrary
             }
 
             //page info
-            string pageInfo = m_inputs[m_inputs.Length - 1];
-            currentPage = Int32.Parse(pageInfo.Substring(1, pageInfo.IndexOf('/') - 1));
+            string pageInfo = m_candidates[m_candidates.Length - 1];
+            m_currentPage = Int32.Parse(pageInfo.Substring(1, pageInfo.IndexOf('/') - 1));
             string foo = pageInfo.Substring(pageInfo.IndexOf('/') + 1);
-            totalPage = Int32.Parse(foo.Substring(0, foo.Length - 1));
+            m_totalPage = Int32.Parse(foo.Substring(0, foo.Length - 1));
 
             //set scrollbar
-            this.vScrollBar1.Enabled = (totalPage > 1);
+            this.vScrollBar1.Enabled = (m_totalPage > 1);
 
             //init listView
             this.lbCandidates.Columns.Clear();
@@ -363,14 +356,14 @@ namespace CSharpFormLibrary
             this.columnHeader2});
 
                         //set scrollbar                        
-                        this.vScrollBar1.Maximum = totalPage * 9;
-                        this.vScrollBar1.TabIndex = totalPage;
-                        this.vScrollBar1.Value = (currentPage - 1) * 9 + 1;
+                        this.vScrollBar1.Maximum = m_totalPage * 9;
+                        this.vScrollBar1.TabIndex = m_totalPage;
+                        this.vScrollBar1.Value = (m_currentPage - 1) * 9 + 1;
 
                         //new & set items
                         for (int i = 0; i < m_candArray.Count; i++)
                         {
-                            string cand = m_inputs[i];
+                            string cand = m_candidates[i];
                             li = new ListViewItem();
                             li.UseItemStyleForSubItems = false;
                             string no = cand.Substring(0, 1);
@@ -422,14 +415,14 @@ namespace CSharpFormLibrary
                             li = this.lbCandidates.Items[i % 9];
                             if (li.SubItems.Count == 1) //第一個subitem No.
                             {
-                                if (columnIndex == (currentPage - 1) * 2)
+                                if (columnIndex == (m_currentPage - 1) * 2)
                                     li.SubItems[0] = new ListViewItem.ListViewSubItem(li, (i % 9 + 1).ToString(), SystemColors.WindowText, Color.GhostWhite, this.lbCandidates.Font);
                                 else
                                     li.SubItems[0] = new ListViewItem.ListViewSubItem(li, "", SystemColors.WindowText, SystemColors.Window, this.lbCandidates.Font);
                             }
                             else //其他subitem No.
                             {
-                                if (columnIndex == (currentPage - 1) * 2)
+                                if (columnIndex == (m_currentPage - 1) * 2)
                                     li.SubItems.Add((i % 9 + 1).ToString(), SystemColors.WindowText, Color.GhostWhite, this.lbCandidates.Font);
                                 else
                                     li.SubItems.Add("", SystemColors.WindowText, SystemColors.Window, this.lbCandidates.Font);
@@ -452,6 +445,8 @@ namespace CSharpFormLibrary
             height += this.lbCandidates.Items[this.lbCandidates.Items.Count-1].Bounds.Bottom;                                    
             this.Width = width ;
             this.Height = height + 5;   //+5為了好看
+
+            //duckScreenBoundry();
         }
 
         #endregion
@@ -468,6 +463,7 @@ namespace CSharpFormLibrary
 
         public void ShowNoActive()
         {
+            Debug.WriteLine("show");
             if (!this.Visible)
                 UtilFuncs.SetVisibleNoActivate(this, true); // true to show. 
         }
@@ -541,7 +537,7 @@ namespace CSharpFormLibrary
 
         private void lbCandidates_KeyDown(object sender, KeyEventArgs e)
         {
-            /* if (totalPage > 1 && e.KeyCode==Keys.Right) //超過一頁才有展開功能
+            /* if (m_totalPage > 1 && e.KeyCode==Keys.Right) //超過一頁才有展開功能
              {
                  //expandable = true;                
                  MessageBox.Show("fuck");
@@ -550,13 +546,35 @@ namespace CSharpFormLibrary
 
         private void lbCandidates_KeyPress(object sender, KeyPressEventArgs e)
         {
-            /*    if (totalPage > 1)              
+            /*    if (m_totalPage > 1)              
                 {
                     e.Handled = true;
                     MessageBox.Show("fuck");
                 }*/
         }
+
+        private void duckScreenBoundry()
+        {
+            Debug.WriteLine("height:" + this.Height);
+            Debug.WriteLine("m_compHeight:" + m_compHeight);
+            Debug.WriteLine("Y:" + this.Location.Y);
+            Debug.WriteLine("bottom:" + this.Bottom);
+            Debug.WriteLine(
+                "screen bottom:" + Screen.PrimaryScreen.WorkingArea.Bottom);
+            if (this.Bottom >
+                Screen.PrimaryScreen.WorkingArea.Bottom)
+            {
+                this.Location =
+                    new Point(
+                        this.Location.X,
+                        this.Location.Y - this.Height - m_compHeight);
+                Debug.WriteLine("new bottom:" + this.Bottom);
+                Debug.WriteLine("new Y:" + this.Location.Y);
+            }
+            if (this.Right >
+                Screen.PrimaryScreen.WorkingArea.Right)
+                this.Location =
+                    new Point(this.Location.X - this.Width, this.Location.Y);
+        }
     }
 }
-
-
