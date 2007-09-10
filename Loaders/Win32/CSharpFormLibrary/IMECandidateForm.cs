@@ -268,9 +268,11 @@ namespace CSharpFormLibrary
         }
 
         public void SetLocation(int x, int y, int compHeight)
-        {            
+        {
             m_compHeight = compHeight;
             this.Location = new Point(x, y + m_compHeight);
+
+            //@warning A damn state flag, needs refactoring ASAP.
             if (m_isFormSizeSet)
             {
                 duckScreenBoundry();
@@ -453,6 +455,7 @@ namespace CSharpFormLibrary
             this.Width = width ;
             this.Height = height + 5;   //+5為了好看
 
+            //@warning A damn state flag, needs refactoring ASAP.
             m_isFormSizeSet = true;
             duckScreenBoundry();
         }
