@@ -5,12 +5,12 @@
 BUILDER=xcodebuild
 CONFIG?=Release
 DSTROOT?=/
-CMDLINETOOLROOT?=/opt/local
+CMDLINETOOLROOT?=/usr/local
 
 PROJECT=OpenVanillaLoader.xcodeproj
 
-PRODUCTS=$(DSTROOT)/Library/Components/OpenVanilla-TSComponent-0.7.2.bundle \
-	$(DSTROOT)/Library/OpenVanilla/0.7.2/Loader \
+PRODUCTS=$(DSTROOT)/Library/Components/OpenVanilla-TSComponent-0.8.0.bundle \
+	$(DSTROOT)/Library/OpenVanilla/0.8.0/Loader \
 	$(DSTROOT)/$(CMDLINETOOLROOT)/bin/ovfilter
 
 all:

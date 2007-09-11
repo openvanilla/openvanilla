@@ -109,6 +109,11 @@
 		6AA6899A09710DD6002080DE /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9651680970E1D9004BCC4D /* Carbon.framework */; };
 		6AA6899B09710DD6002080DE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9651690970E1D9004BCC4D /* Cocoa.framework */; };
 		6AA6899C09710DD6002080DE /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A96516A0970E1D9004BCC4D /* CoreServices.framework */; };
+		D43AD74A0C95BD270085AB23 /* ovdisplayserver.icns in Resources */ = {isa = PBXBuildFile; fileRef = D43AD7490C95BD270085AB23 /* ovdisplayserver.icns */; };
+		D43AD74B0C95BD270085AB23 /* ovdisplayserver.icns in Resources */ = {isa = PBXBuildFile; fileRef = D43AD7490C95BD270085AB23 /* ovdisplayserver.icns */; };
+		D43AD7530C95BD890085AB23 /* ovlight16x16 in Resources */ = {isa = PBXBuildFile; fileRef = D43AD7520C95BD890085AB23 /* ovlight16x16 */; };
+		D43AD7540C95BD890085AB23 /* ovlight16x16 in Resources */ = {isa = PBXBuildFile; fileRef = D43AD7520C95BD890085AB23 /* ovlight16x16 */; };
+		D43AD7550C95BD890085AB23 /* ovlight16x16 in Resources */ = {isa = PBXBuildFile; fileRef = D43AD7520C95BD890085AB23 /* ovlight16x16 */; };
 		D48C82940C09CC4900EB008A /* CVConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651720970E28C004BCC4D /* CVConfig.mm */; };
 		D48C82950C09CC4900EB008A /* CVDictionary.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651740970E28C004BCC4D /* CVDictionary.mm */; };
 		D48C82960C09CC4900EB008A /* CVEmbeddedLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651700970E238004BCC4D /* CVEmbeddedLoader.mm */; };
@@ -191,10 +196,10 @@
 		6A24B0260A447EB3002ECCC2 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = "TSComponentResources-Panther/English.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6A24B0290A447EBB002ECCC2 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = "TSComponentResources-Panther/zh_TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6A24B02A0A447EBE002ECCC2 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = "TSComponentResources-Panther/zh_CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		6A24B0400A447EFA002ECCC2 /* OpenVanilla-TSComponent-0.7.2.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.7.2.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A24B0400A447EFA002ECCC2 /* OpenVanilla-TSComponent-0.8.0.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.8.0.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A24B0410A447EFA002ECCC2 /* OpenVanilla-TSComponent-SimplifiedChineseScript copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-TSComponent-SimplifiedChineseScript copy.plist"; sourceTree = "<group>"; };
 		6A77AB8C0971122300F5417F /* DisplayServerIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = DisplayServerIcon.icns; path = OVDisplayServer/DisplayServerIcon.icns; sourceTree = "<group>"; };
-		6A77ABAF097112C300F5417F /* OVDisplayServer.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OVDisplayServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A77ABAF097112C300F5417F /* OVDisplayServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVDisplayServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A77ABB1097112C300F5417F /* OVDisplayServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVDisplayServer-Info.plist"; sourceTree = "<group>"; };
 		6A9651640970E118004BCC4D /* NSDictionaryExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDictionaryExtension.h; path = NSExtensions/NSDictionaryExtension.h; sourceTree = "<group>"; };
 		6A9651650970E118004BCC4D /* NSDictionaryExtension.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NSDictionaryExtension.mm; path = NSExtensions/NSDictionaryExtension.mm; sourceTree = "<group>"; };
@@ -263,15 +268,15 @@
 		6A9651FC0970E50E004BCC4D /* ServerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerDelegate.m; path = OVDisplayServer/ServerDelegate.m; sourceTree = "<group>"; };
 		6A96520D0970E77B004BCC4D /* OpenVanillaLoaderIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaLoaderIcon.icns; path = OVLoaderResources/OpenVanillaLoaderIcon.icns; sourceTree = "<group>"; };
 		6A96520E0970E77B004BCC4D /* org.openvanilla.OVLoader.DefaultSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = org.openvanilla.OVLoader.DefaultSettings.plist; path = OVLoaderResources/org.openvanilla.OVLoader.DefaultSettings.plist; sourceTree = "<group>"; };
-		6A9652130970E7C9004BCC4D /* OpenVanilla-TSComponent-0.7.2.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.7.2.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A9652130970E7C9004BCC4D /* OpenVanilla-TSComponent-0.8.0.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.8.0.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A9652140970E7C9004BCC4D /* OpenVanilla-TSComponent-UnicodeScript-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-TSComponent-UnicodeScript-Info.plist"; sourceTree = "<group>"; };
 		6A9652550970EC0B004BCC4D /* OpenVanillaMenuIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaMenuIcon.icns; path = TSComponentResources/OpenVanillaMenuIcon.icns; sourceTree = "<group>"; };
 		6A96525E0970EC2E004BCC4D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = TSComponentResources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A9652620970EC33004BCC4D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = TSComponentResources/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A9652630970EC35004BCC4D /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = TSComponentResources/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6AA434E70A38BF9E0028130A /* OpenVanilla-TSComponent-0.7.2-TC.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.7.2-TC.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AA434E70A38BF9E0028130A /* OpenVanilla-TSComponent-0.8.0-TC.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.8.0-TC.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA434E80A38BF9E0028130A /* OpenVanilla-TSComponent-TraditionalChineseScript.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-TSComponent-TraditionalChineseScript.plist"; sourceTree = "<group>"; };
-		6AA4352F0A38C1230028130A /* OpenVanilla-TSComponent-0.7.2-SC.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.7.2-SC.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AA4352F0A38C1230028130A /* OpenVanilla-TSComponent-0.8.0-SC.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.8.0-SC.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA435300A38C1230028130A /* OpenVanilla-TSComponent-SimplifiedChineseScript.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-TSComponent-SimplifiedChineseScript.plist"; sourceTree = "<group>"; };
 		6AA687C2097109EB002080DE /* OVLoader.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVLoader.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA687C3097109EB002080DE /* OVLoader-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVLoader-Info.plist"; sourceTree = "<group>"; };
@@ -283,6 +288,8 @@
 		6AA9CFAB097C0514008EDA95 /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVUtility.h; path = OpenVanilla.framework/Headers/OVUtility.h; sourceTree = "<group>"; };
 		D4066D950C0C7E360018A159 /* OVFilterService.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVFilterService.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4066D970C0C7E360018A159 /* OVFilterService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVFilterService-Info.plist"; sourceTree = "<group>"; };
+		D43AD7490C95BD270085AB23 /* ovdisplayserver.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = ovdisplayserver.icns; path = ../../Artworks/icon2008/ovdisplayserver/ovdisplayserver.icns; sourceTree = SOURCE_ROOT; };
+		D43AD7520C95BD890085AB23 /* ovlight16x16 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ovlight16x16; path = ../../Artworks/icon2008/ov16x16/ovlight16x16; sourceTree = SOURCE_ROOT; };
 		D48C827F0C09CB4B00EB008A /* OVFilter-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVFilter-info.plist"; sourceTree = "<group>"; };
 		D48C82A90C09CCE800EB008A /* ovwidgerplugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ovwidgerplugin.h; path = OVFilterWidget/ovwidgerplugin.h; sourceTree = "<group>"; };
 		D48C82AA0C09CCE800EB008A /* ovwidgerplugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ovwidgerplugin.mm; path = OVFilterWidget/ovwidgerplugin.mm; sourceTree = "<group>"; };
@@ -490,6 +497,7 @@
 		6A9651420970E035004BCC4D /* ATSComponent */ = {
 			isa = PBXGroup;
 			children = (
+				D43AD7520C95BD890085AB23 /* ovlight16x16 */,
 				6A20C3BD0A38C6C700A364CA /* Resources-Shared */,
 				6A9651920970E2F1004BCC4D /* Resources-UnicodeScript */,
 				6A20C3BB0A38C63100A364CA /* Resources-TraditionalChineseScript */,
@@ -561,6 +569,7 @@
 		6A9651480970E077004BCC4D /* OVLoader */ = {
 			isa = PBXGroup;
 			children = (
+				D43AD7490C95BD270085AB23 /* ovdisplayserver.icns */,
 				6A9651440970E052004BCC4D /* TSBundle */,
 				6A96514C0970E0A5004BCC4D /* Resources */,
 			);
@@ -620,14 +629,14 @@
 		6A96514E0970E0B2004BCC4D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6A9652130970E7C9004BCC4D /* OpenVanilla-TSComponent-0.7.2.bundle */,
+				6A9652130970E7C9004BCC4D /* OpenVanilla-TSComponent-0.8.0.bundle */,
 				6AA687C2097109EB002080DE /* OVLoader.bundle */,
 				6A77ABAF097112C300F5417F /* OVDisplayServer.app */,
 				6A074F720971284800CA4201 /* OVPreferences.app */,
 				6A0750FC09712DAC00CA4201 /* ovfilter */,
-				6AA434E70A38BF9E0028130A /* OpenVanilla-TSComponent-0.7.2-TC.bundle */,
-				6AA4352F0A38C1230028130A /* OpenVanilla-TSComponent-0.7.2-SC.bundle */,
-				6A24B0400A447EFA002ECCC2 /* OpenVanilla-TSComponent-0.7.2.bundle */,
+				6AA434E70A38BF9E0028130A /* OpenVanilla-TSComponent-0.8.0-TC.bundle */,
+				6AA4352F0A38C1230028130A /* OpenVanilla-TSComponent-0.8.0-SC.bundle */,
+				6A24B0400A447EFA002ECCC2 /* OpenVanilla-TSComponent-0.8.0.bundle */,
 				D48C84030C09D52E00EB008A /* OVFilter.widgetplugin */,
 				D4066D950C0C7E360018A159 /* OVFilterService.app */,
 			);
@@ -774,7 +783,7 @@
 			);
 			name = "OpenVanilla-TSComponent-Panther";
 			productName = "OpenVanilla-TSComponent";
-			productReference = 6A24B0400A447EFA002ECCC2 /* OpenVanilla-TSComponent-0.7.2.bundle */;
+			productReference = 6A24B0400A447EFA002ECCC2 /* OpenVanilla-TSComponent-0.8.0.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		6A77ABAE097112C300F5417F /* OVDisplayServer */ = {
@@ -809,7 +818,7 @@
 			);
 			name = "OpenVanilla-TSComponent-UnicodeScript";
 			productName = "OpenVanilla-TSComponent";
-			productReference = 6A9652130970E7C9004BCC4D /* OpenVanilla-TSComponent-0.7.2.bundle */;
+			productReference = 6A9652130970E7C9004BCC4D /* OpenVanilla-TSComponent-0.8.0.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		6AA434DA0A38BF9E0028130A /* OpenVanilla-TSComponent-TraditionalChineseScript */ = {
@@ -827,7 +836,7 @@
 			);
 			name = "OpenVanilla-TSComponent-TraditionalChineseScript";
 			productName = "OpenVanilla-TSComponent";
-			productReference = 6AA434E70A38BF9E0028130A /* OpenVanilla-TSComponent-0.7.2-TC.bundle */;
+			productReference = 6AA434E70A38BF9E0028130A /* OpenVanilla-TSComponent-0.8.0-TC.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		6AA435220A38C1230028130A /* OpenVanilla-TSComponent-SimplifiedChineseScript */ = {
@@ -845,7 +854,7 @@
 			);
 			name = "OpenVanilla-TSComponent-SimplifiedChineseScript";
 			productName = "OpenVanilla-TSComponent";
-			productReference = 6AA4352F0A38C1230028130A /* OpenVanilla-TSComponent-0.7.2-SC.bundle */;
+			productReference = 6AA4352F0A38C1230028130A /* OpenVanilla-TSComponent-0.8.0-SC.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		6AA687C1097109EB002080DE /* OVLoader */ = {
@@ -944,6 +953,7 @@
 				6A074FA109712A3500CA4201 /* OVPreferencesIcon.icns in Resources */,
 				6A0751D909713F9600CA4201 /* OpenVanillaManual.pdf in Resources */,
 				D4FE84200C0B1D4000CC868C /* ServicesMenu.strings in Resources */,
+				D43AD74A0C95BD270085AB23 /* ovdisplayserver.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -963,6 +973,7 @@
 				6A77ABC00971131C00F5417F /* DisplayServerIcon.icns in Resources */,
 				6A77ABC10971131F00F5417F /* InfoPlist.strings in Resources */,
 				6A77ABC20971132200F5417F /* MainMenu.nib in Resources */,
+				D43AD74B0C95BD270085AB23 /* ovdisplayserver.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,6 +983,7 @@
 			files = (
 				6A9652560970EC0B004BCC4D /* OpenVanillaMenuIcon.icns in Resources */,
 				6A96525F0970EC2E004BCC4D /* InfoPlist.strings in Resources */,
+				D43AD7530C95BD890085AB23 /* ovlight16x16 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,6 +993,7 @@
 			files = (
 				6A20C4020A38C85F00A364CA /* InfoPlist.strings in Resources */,
 				6AA434DC0A38BF9E0028130A /* OpenVanillaMenuIcon.icns in Resources */,
+				D43AD7540C95BD890085AB23 /* ovlight16x16 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -990,6 +1003,7 @@
 			files = (
 				6A20C4010A38C85900A364CA /* InfoPlist.strings in Resources */,
 				6AA435240A38C1230028130A /* OpenVanillaMenuIcon.icns in Resources */,
+				D43AD7550C95BD890085AB23 /* ovlight16x16 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1359,7 +1373,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVPreferences-Info.plist";
-				INSTALL_PATH = /Library/OpenVanilla/0.7.2/Loader;
+				INSTALL_PATH = /Library/OpenVanilla/0.8.0/Loader;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1384,7 +1398,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVPreferences-Info.plist";
-				INSTALL_PATH = /Library/OpenVanilla/0.7.2/Loader;
+				INSTALL_PATH = /Library/OpenVanilla/0.8.0/Loader;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1401,7 +1415,7 @@
 		6A07510609712DE800CA4201 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CMDLINETOOLROOT = /opt/local;
+				CMDLINETOOLROOT = /usr/local;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1427,7 +1441,7 @@
 		6A07510709712DE800CA4201 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CMDLINETOOLROOT = /opt/local;
+				CMDLINETOOLROOT = /usr/local;
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1470,7 +1484,7 @@
 				);
 				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
 				PREBINDING = NO;
-				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2";
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.8.0";
 				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_OSX_10_3_9=1";
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = YES;
@@ -1497,7 +1511,7 @@
 				);
 				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
 				PREBINDING = NO;
-				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2";
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.8.0";
 				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_OSX_10_3_9=1";
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = NO;
@@ -1517,7 +1531,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVDisplayServer-Info.plist";
-				INSTALL_PATH = /Library/OpenVanilla/0.7.2/Loader;
+				INSTALL_PATH = /Library/OpenVanilla/0.8.0/Loader;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1542,7 +1556,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVDisplayServer-Info.plist";
-				INSTALL_PATH = /Library/OpenVanilla/0.7.2/Loader;
+				INSTALL_PATH = /Library/OpenVanilla/0.8.0/Loader;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1632,7 +1646,7 @@
 				);
 				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
 				PREBINDING = NO;
-				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2";
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.8.0";
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = YES;
 			};
@@ -1656,7 +1670,7 @@
 				);
 				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
 				PREBINDING = NO;
-				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2";
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.8.0";
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = NO;
 			};
@@ -1683,7 +1697,7 @@
 				);
 				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
 				PREBINDING = NO;
-				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2-TC";
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.8.0-TC";
 				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_TRADITIONAL_CHINESE=1";
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = YES;
@@ -1709,7 +1723,7 @@
 				);
 				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
 				PREBINDING = NO;
-				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2-TC";
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.8.0-TC";
 				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_TRADITIONAL_CHINESE=1";
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = NO;
@@ -1737,7 +1751,7 @@
 				);
 				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
 				PREBINDING = NO;
-				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2-SC";
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.8.0-SC";
 				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_SIMPLIFIED_CHINESE=1";
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = YES;
@@ -1763,7 +1777,7 @@
 				);
 				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
 				PREBINDING = NO;
-				PRODUCT_NAME = "OpenVanilla-TSComponent-0.7.2-SC";
+				PRODUCT_NAME = "OpenVanilla-TSComponent-0.8.0-SC";
 				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_SIMPLIFIED_CHINESE=1";
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = NO;
@@ -1783,7 +1797,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVLoader-Info.plist";
-				INSTALL_PATH = /Library/OpenVanilla/0.7.2/Loader;
+				INSTALL_PATH = /Library/OpenVanilla/0.8.0/Loader;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1809,7 +1823,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVLoader-Info.plist";
-				INSTALL_PATH = /Library/OpenVanilla/0.7.2/Loader;
+				INSTALL_PATH = /Library/OpenVanilla/0.8.0/Loader;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
