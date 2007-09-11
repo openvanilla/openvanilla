@@ -599,6 +599,7 @@
 			isa = PBXGroup;
 			children = (
 				6A77AB8C0971122300F5417F /* DisplayServerIcon.icns */,
+				D43A12C70C96FA6E003ED0E5 /* OVLogo.icns */,
 				6A9651E30970E4AE004BCC4D /* InfoPlist.strings */,
 				6A9651F20970E4DD004BCC4D /* MainMenu.nib */,
 			);
