@@ -5,7 +5,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "¤¤¤å (ÁcÅé) - ¶}©ñ­»¯ó¿é¤Jªk¥­¥x"
-!define PRODUCT_VERSION "0.7.2.5-beta"
+!define PRODUCT_VERSION "0.7.2.6-beta"
 !define PRODUCT_PUBLISHER "OpenVanilla.org"
 !define PRODUCT_WEB_SITE "http://openvanilla.org/"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -149,7 +149,7 @@ LangString FAILED_DOTNET_INSTALL ${LANG_TradChinese} "¿é¤Jªk¦w¸Ë²×¤î¡A$\n¥²¶·µ¥¨
 
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "OpenVanilla-0.7.2.5-beta.exe"
+OutFile "OpenVanilla-0.7.2.6-beta.exe"
 InstallDir "$WINDIR\OpenVanilla"
 ShowInstDetails show
 ShowUnInstDetails show
@@ -160,7 +160,7 @@ Function uninstOld
       /*
       Delete "$SYSDIR\OVIME.ime"
       IfErrors 0 ContinueUnist
-         MessageBox MB_ICONSTOP|MB_OK "¸Ñ¨M¦w¸ËÂÂª©µo¥Í¿ù»~¡A½Ð½T©w§A¦³ºÞ²z­ûÅv­­¡C"
+         MessageBox MB_ICONSTOP|MB_OK "ÂÂª©²¾°£¥¢±Ñ¡A½Ð½T©w±z¦³ºÞ²z­ûÅv­­¡C"
          Abort
       ContinueUnist:
       	 MessageBox MB_ICONINFORMATION|MB_OK "Delete OVIME.ime ok."
@@ -183,7 +183,7 @@ Function uninstOld
 FunctionEnd 
 
 Function onInstError
-   MessageBox MB_ICONSTOP|MB_OK "¦w¸Ë¤¤µo¥Í¿ù»~¡A½Ð½T©w±z¦³ºÞ²z­ûÅv­­¡C"
+   MessageBox MB_ICONSTOP|MB_OK "¦w¸Ë¥¢±Ñ¡A½Ð½T©w±z¦³ºÞ²z­ûÅv­­¡C"
    Abort
 FunctionEnd
 
@@ -210,13 +210,13 @@ Function .onInit
   KeepGo2:
   ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion"
   StrCmp $0 "" StartInstall 0
-	  MessageBox MB_OKCANCEL|MB_ICONQUESTION "°»´ú¨ìÂÂª© $0 ¤w¦w¸Ë¡A¬O§_­n²¾°£ÂÂª©«á­«·s¦w¸Ë·sª©¡H" IDOK +2
+	  MessageBox MB_OKCANCEL|MB_ICONQUESTION "°»´ú¨ìÂÂª© $0¡A¥²¶·¥ý²¾°£¤~¯à¦w¸Ë·sª©¡C¬O§_­n²{¦b¶i¦æ¡H" IDOK +2
 	  Abort
           Call uninstOld          
           IfFileExists "$SYSDIR\OVIME.ime"  0 RemoveFinished     ;¥Nªí¤Ï¦w¸Ë¥¢±Ñ 
           Abort
     RemoveFinished:     
-    		MessageBox MB_ICONINFORMATION|MB_OK "¸Ñ°£ÂÂª©§¹¦¨¡C"				
+    		MessageBox MB_ICONINFORMATION|MB_OK "ÂÂª©¤w²¾°£¡C"
     StartInstall:     
 ;  !insertmacro MUI_LANGDLL_DISPLAY
 
@@ -376,7 +376,7 @@ StrCpy $0 "$R2.$R3.$R4.$R5" ; $0 now contains string like "1.2.0.192"
 ${VersionCompare} $0 "7.10.5077.0" $1
 ${If} $1 == 2   ;if $0 is smaller
 Push "Office2003Otk"
-MessageBox MB_OK|MB_ICONINFORMATION "$(^Name)»Ý­n Office 2003 ¨Ï¥ÎªÌ¶i¦æ patch ¡A½Ð¦Ü©x¤èºô¯¸¤U¸ü¡C"IDOK +1
+MessageBox MB_OK|MB_ICONINFORMATION "$(^Name)»Ý­n Office 2003 ¨Ï¥ÎªÌ¶i¦æ patch¡A½Ð¦Ü©x¤èºô¯¸¤U¸ü¡C"IDOK +1
 ${ENDIF}
 notOffice2003:
 FunctionEnd
@@ -529,11 +529,11 @@ Section $(SEC_DOTNET) SECDOTNET
  
     lbl_Error_InstallMSIFailed:
     lbl_Error_WInstallerNotProper:
-    DetailPrint "Windows Installer ¦w¸Ë®É¥¢±Ñ"
+    DetailPrint "Windows Installer ¦w¸Ë¥¢±Ñ"
     GoTo lbl_Done
     
     lbl_Error_BetaRemove:
-    DetailPrint "»Ý­n¥ý±N.Net Framework Betaª©¶i¦æ²¾°£"
+    DetailPrint "¥²¶·¥ý²¾°£ .Net Framework Beta ª©"
     GoTo lbl_Done
     
     lbl_Error_UserCancel:
@@ -579,7 +579,7 @@ Section $(SEC_DOTNET) SECDOTNET
 ;Section "CheckVersion" CV1
 ;  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion"
 ;  StrCmp $0 "" ContinueInst 0
-;          MessageBox MB_OKCANCEL|MB_ICONQUESTION "°»´ú¨ìÂÂª© $0 ¤w¦w¸Ë¡A¬O§_­n²¾°£ÂÂª©«á­«·s¦w¸Ë·sª©¡H" IDOK +2
+;          MessageBox MB_OKCANCEL|MB_ICONQUESTION "°»´ú¨ìÂÂª© $0¡A¥²¶·¥ý²¾°£¤~¯à¦w¸Ë·sª©¡C¬O§_­n²{¦b¶i¦æ¡H" IDOK +2
 ;	  Abort
 ;          Call uninstOld
 ;    ContinueInst:      
@@ -629,29 +629,35 @@ Section -Post
 SectionEnd
 
 Function un.onUninstSuccess  
-  MessageBox MB_ICONINFORMATION|MB_OK "$(^Name)¤w¦¨¥\¦a±q§Aªº¹q¸£²¾°£¡C" /SD IDOK
+  MessageBox MB_ICONINFORMATION|MB_OK "$(^Name)¤w²¾°£¦¨¥\¡C" /SD IDOK
 FunctionEnd
 
 Function un.onInit
 ;!insertmacro MUI_UNGETLANGUAGE
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "§A½T©w­n§¹¥þ²¾°£$(^Name)¡A¨ä¤Î©Ò¦³ªº¤¸¥ó¡H" /SD IDYES IDYES +2
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "½T©w­n§¹¥þ²¾°£$(^Name)¡H" /SD IDYES IDYES +2
   Abort
 FunctionEnd
 
 Section Uninstall
   ClearErrors
-  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
-  System::Call "user32::UnloadKeyboardLayout(l $0) i $1 ?e"
-  ${If} $1 <> 0
-    Call :lbContinueUninstall
-  ${EndIf}
-  MessageBox MB_ICONSTOP|MB_YESNO "°»´ú¨ì¦³¥¿¦b¨Ï¥Î¿é¤Jªkªºµ{¦¡¡A½Ð­«·s¶}¾÷¡A¥HÄ~Äò¤Ï¦w¸Ëµ{¦¡¡C¬O§_­n¥ß§Y­«·s¶}¾÷¡H" IDNO noReboot
+  Delete "$SYSDIR\OVIME.ime"
+  IfErrors lbNeedReboot lbContinueUninstall
+
+  lbNeedReboot:
+  MessageBox MB_ICONSTOP|MB_YESNO "°»´ú¨ì¦³µ{¦¡¥¿¦b¨Ï¥Î¿é¤Jªk¡A½Ð­«·s¶}¾÷¥HÄ~Äò²¾°£ÂÂª©¡C¬O§_­n¥ß§Y­«·s¶}¾÷¡H" IDNO lbNoReboot
   Reboot
-  noReboot:
-  MessageBox MB_ICONSTOP|MB_OK "½Ð¦Û¦æ­«·s¶}¾÷«á¡A¦A¶i¦æ²¾°£¦w¸Ëµ{¦¡" IDOK +1
+
+  lbNoReboot:
+  MessageBox MB_ICONSTOP|MB_OK "½Ð±N©Ò¦³µ{¦¡Ãö³¬¡A¦A¹Á¸Õ°õ¦æ¥»¦w¸Ëµ{¦¡¡C­Y¤´¬Ý¨ì¦¹µe­±¡A½Ð­«·s¶}¾÷¡C" IDOK +1
   Quit
 
   lbContinueUninstall:
+  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
+  System::Call "user32::UnloadKeyboardLayout(l r0) i .r1 ?e"
+  ${If} $1 == 0
+    Call :lbNeedReboot
+  ${EndIf}
+
   DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}\$0"
   
   ${registry::Open} "${IME_CURRENT_USER}\" " /V=1 /S=1 /N='$0' /G=1 /T=REG_SZ" $9
@@ -664,13 +670,12 @@ Section Uninstall
 
   nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
 
-  Delete "$SYSDIR\OVIME.ime"
-  Delete "$SYSDIR\Hunspell.dll"
+  Delete "$SYSDIR\OVIMEUI.dll"
   Delete "$SYSDIR\libltdl3.dll"
   Delete "$SYSDIR\libiconv-2.dll"
-  Delete "$SYSDIR\sqlite3.dll"
   Delete "$SYSDIR\tinyxml.dll"
-  Delete "$SYSDIR\OVIMEUI.dll"
+  Delete "$SYSDIR\sqlite3.dll"
+  Delete "$SYSDIR\Hunspell.dll"
   Delete "$INSTDIR\uninst.exe"
   RMDir /r "$WINDIR\OpenVanilla"
   Delete "$SMPROGRAMS\OpenVanilla\Uninstall.lnk"
