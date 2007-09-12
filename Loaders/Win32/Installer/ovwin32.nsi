@@ -639,6 +639,12 @@ Function un.onInit
 FunctionEnd
 
 Section Uninstall
+  ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
+  System::Call "user32::UnloadKeyboardLayout(l r0) i .r1 ?e"
+  ${If} $1 == 0
+    Call :lbNeedReboot
+  ${EndIf}
+
   ClearErrors
   Delete "$SYSDIR\OVIME.ime"
   IfErrors lbNeedReboot lbContinueUninstall
@@ -653,11 +659,6 @@ Section Uninstall
 
   lbContinueUninstall:
   ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Key"
-  System::Call "user32::UnloadKeyboardLayout(l r0) i .r1 ?e"
-  ${If} $1 == 0
-    Call :lbNeedReboot
-  ${EndIf}
-
   DeleteRegKey ${IME_ROOT_KEY} "${IME_KEY}\$0"
   
   ${registry::Open} "${IME_CURRENT_USER}\" " /V=1 /S=1 /N='$0' /G=1 /T=REG_SZ" $9
