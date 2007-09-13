@@ -321,7 +321,7 @@ namespace CSharpFormLibrary
             this.Controls.Add(this.panelHead);
             this.Controls.Add(this.panelBody);
             this.ForeColor = System.Drawing.Color.Transparent;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.Name = "IMEStatusForm";
             this.ShowInTaskbar = false;
