@@ -21,6 +21,16 @@ namespace CSharpFormLibrary
             base.Dispose(disposing);
         }
 
+        protected override System.Windows.Forms.CreateParams CreateParams
+        {
+            get
+            {
+                System.Windows.Forms.CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x80; //<WS_EX_TOOLWINDOW to hide from alt-tab
+                return cp;
+            }
+        }
+
         #region Windows Form Designer generated code
 
         /// <summary>

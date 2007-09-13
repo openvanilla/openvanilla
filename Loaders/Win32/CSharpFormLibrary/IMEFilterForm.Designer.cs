@@ -20,6 +20,16 @@ namespace CSharpFormLibrary
             base.Dispose(disposing);
         }
 
+        protected override System.Windows.Forms.CreateParams CreateParams
+        {
+            get
+            {
+                System.Windows.Forms.CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x80; //<WS_EX_TOOLWINDOW to hide from alt-tab
+                return cp;
+            }
+        }
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -298,6 +308,7 @@ namespace CSharpFormLibrary
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panel1);
             this.Name = "IMEFilterForm";
+            this.ShowInTaskbar = false;
             this.Text = "IMEFilterForm";
             this.Load += new System.EventHandler(this.IMEFilterForm_Load);
             this.panel1.ResumeLayout(false);

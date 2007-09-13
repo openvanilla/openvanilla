@@ -79,7 +79,8 @@ namespace CSharpFormLibrary
                 CreateParams cp = base.CreateParams;
                 //System.Diagnostics.Debug.WriteLine(
                 //    "Form: CreateParams.ExStyle (before) =" + cp.ExStyle);
-                cp.ExStyle = 0x00000004; //WS_EX_NOPARENTNOTIFY
+                cp.ExStyle |= 0x00000004; //<WS_EX_NOPARENTNOTIFY
+                cp.ExStyle |= 0x80; //<WS_EX_TOOLWINDOW to hide from alt-tab
                 //System.Diagnostics.Debug.WriteLine(
                 //    "Form: CreateParams.ExStyle (after) =" + cp.ExStyle);
                 return cp;
