@@ -1,5 +1,3 @@
-CREATE TABLE word_table(wordID INTEGER PRIMARY KEY, word TEXT);
-CREATE TABLE generic_freq_table(wordID INTEGER PRIMARY KEY, freq INTEGER);
-CREATE TABLE BoPoMoFo_char2word_table(characters TEXT, wordID INTEGER);
+CREATE TABLE word_table(wordId INTEGER PRIMARY KEY, word TEXT);
+CREATE TABLE BoPoMoFo_char2word_table(characters TEXT, wordId INTEGER, prob REAL);
 CREATE INDEX BoPoMoFo_index_characters ON BoPoMoFo_char2word_table(characters);
-CREATE VIEW BoPoMoFo_view AS SELECT characters, word, freq FROM BoPoMoFo_char2word_table, word_table, generic_freq_table WHERE BoPoMoFo_char2word_table.wordID = word_table.wordID AND BoPoMoFo_char2word_table.wordID = generic_freq_table.wordID ORDER BY freq DESC;

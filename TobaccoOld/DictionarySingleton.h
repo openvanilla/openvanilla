@@ -39,15 +39,15 @@ public:
 
 		sprintf(
 			checkString,
-			"SELECT wordID FROM %s_char2word_table WHERE characters=?1 LIMIT 1;",
+			"SELECT wordId FROM %s_char2word_table WHERE characters=?1 LIMIT 1;",
 			inputMethodId.c_str());
 		sprintf(
 			viewString,
-			"SELECT word, freq FROM %s_view WHERE characters=?1",
+			"SELECT w.word, c.prob FROM %s_char2word_table c, word_table w WHERE c.characters=?1 AND c.wordId = w.wordId",
 			inputMethodId.c_str());
 		sprintf(
 			viewLimitString,
-			"SELECT word, freq FROM %s_view WHERE characters=?1 LIMIT %d",
+			"SELECT w.word, c.prob FROM %s_char2word_table c, word_table w WHERE c.characters=?1 AND c.wordId = w.wordId LIMIT %d",
 			inputMethodId.c_str(),
 			N_BEST);
 	}

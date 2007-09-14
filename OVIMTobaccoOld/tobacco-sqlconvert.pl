@@ -3,8 +3,8 @@ use strict;
 use utf8;
 use Encode;
 
-my %word2charsHash;
-my %word2freqHash;
+my %freqHash;
+my %word2IdHash;
 my $fn_tsi;
 
 $fn_tsi = $ARGV[0] if defined($ARGV[0]);
@@ -13,43 +13,27 @@ print "begin;\n";
 
 # reading tsi_punctuation.src
 open (HNDL, $fn_tsi) or die $!;
+
+my $idCounter = 0;
 while(<HNDL>) {
     chomp;
     if (/#?\s*(\S+)\s+(\d+)\s+(.+)/) {
         my ($w, $f, $c)=(decode("utf8", $1), $2, decode("utf8", $3));
 
-		unless (exists($word2freqHash{$w}) &&
-			$f <= $word2freqHash{$w} &&
-			(length($w) == 1 || $f > 0)) {
-			$word2freqHash{$w} = $f;
+	unless (exists($word2IdHash{$w})) { 
+		$word2IdHash{$w} = $idCounter;
+		printf "insert into word_table values(%d, '%s');\n",
+		$idCounter, sprintf("%s", $w);
+		$idCounter++;
         }
 
+	my $currentWordId = $word2IdHash{$w};
 	$c =~ s/ /\t/g;
-	push @{$word2charsHash{$w}}, $c;
+
+        printf "insert into BoPoMoFo_char2word_table values('%s', %d, %f);\n",
+            sprintf("%s", $c), $currentWordId, $f;
     }
 }
 close HNDL;
-
-my $idCounter = 0;
-my @words = keys(%word2charsHash);
-@words = sort @words;
-for(@words) {
-    my $word = $_;
-    my $freq = $word2freqHash{$word};
-    printf "insert into word_table values(%d, '%s');\n",
-        $idCounter, sprintf("%s", $word);
-    printf "insert into generic_freq_table values(%d, %d);\n",
-        $idCounter, $freq;
-
-    my $currentCharsRef = $word2charsHash{$word};
-    for(@{$currentCharsRef}) {
-        my $currentChar = $_;
-	$currentChar =~ s/\'/\'\'/g;
-        printf "insert into BoPoMoFo_char2word_table values('%s', %d);\n",
-            sprintf("%s", $currentChar), $idCounter;
-    }   
-        
-    $idCounter = $idCounter + 1;
-}
 
 print "commit;\n";
