@@ -26,7 +26,7 @@
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
-	<string>OVCinEdit</string>
+	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleHelpBookFolder</key>
 	<string>Help</string>
 	<key>CFBundleHelpBookName</key>
@@ -38,13 +38,13 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>OVCinEdit</string>
+	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
 	<string>OPVN</string>
 	<key>CFBundleVersion</key>
-	<string>0.72</string>
+	<string>0.8.0</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

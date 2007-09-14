@@ -41,7 +41,7 @@
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* CinEdit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinEdit_Prefix.pch; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D15AC370486D014006FF6A4 /* OVCinEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVCinEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D15AC370486D014006FF6A4 /* OVCinEdit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OVCinEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D43046430C1C87A5004A08C5 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/CinDocument.nib; sourceTree = "<group>"; };
 		D43DC0E10C1AA3DA00BFBE3D /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D43F9FDD0C1B4E1B00797C7D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = folder; name = zh_TW; path = zh_TW.lproj/Help; sourceTree = "<group>"; };
@@ -357,7 +357,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
+				INSTALL_PATH = /Library/OpenVanilla/0.8.0/Loader/;
 				PRODUCT_NAME = OVCinEdit;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
@@ -374,7 +374,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
+				INSTALL_PATH = /Library/OpenVanilla/0.8.0/Loader/;
 				PRODUCT_NAME = OVCinEdit;
 				WRAPPER_EXTENSION = app;
 			};
