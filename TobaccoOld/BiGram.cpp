@@ -267,7 +267,7 @@ void BiGram::getVocabularyCombination(
 				score = matrix;
 			} else {
 				combinedVocabulary.freq = 1;
-				score = numeric_limits<double>::min();
+				score = 1.0 / numeric_limits<double>::max();
 			}
 
 			combinedVocabulary.prob =
