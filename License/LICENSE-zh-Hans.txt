@@ -1,7 +1,7 @@
 OpenVanilla文字处理架构：
 程序库框架（framework）、载入器（loaders）与各模块
 
-Copyright (c) 2004-2006
+Copyright (c) 2004-2007
 版权由The OpenVanilla Project (http://openvanilla.org)所有
 
 这份授权许可证，在使用者（您）符合以下三条件的情形下，授予使用者使用及

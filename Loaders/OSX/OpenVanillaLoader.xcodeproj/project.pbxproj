@@ -110,7 +110,6 @@
 		6AA6899B09710DD6002080DE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9651690970E1D9004BCC4D /* Cocoa.framework */; };
 		6AA6899C09710DD6002080DE /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A96516A0970E1D9004BCC4D /* CoreServices.framework */; };
 		D43AD74A0C95BD270085AB23 /* ovdisplayserver.icns in Resources */ = {isa = PBXBuildFile; fileRef = D43AD7490C95BD270085AB23 /* ovdisplayserver.icns */; };
-		D43AD74B0C95BD270085AB23 /* ovdisplayserver.icns in Resources */ = {isa = PBXBuildFile; fileRef = D43AD7490C95BD270085AB23 /* ovdisplayserver.icns */; };
 		D43AD7530C95BD890085AB23 /* ovlight16x16 in Resources */ = {isa = PBXBuildFile; fileRef = D43AD7520C95BD890085AB23 /* ovlight16x16 */; };
 		D43AD7540C95BD890085AB23 /* ovlight16x16 in Resources */ = {isa = PBXBuildFile; fileRef = D43AD7520C95BD890085AB23 /* ovlight16x16 */; };
 		D43AD7550C95BD890085AB23 /* ovlight16x16 in Resources */ = {isa = PBXBuildFile; fileRef = D43AD7520C95BD890085AB23 /* ovlight16x16 */; };
@@ -199,7 +198,7 @@
 		6A24B0400A447EFA002ECCC2 /* OpenVanilla-TSComponent-0.8.0.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.8.0.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A24B0410A447EFA002ECCC2 /* OpenVanilla-TSComponent-SimplifiedChineseScript copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-TSComponent-SimplifiedChineseScript copy.plist"; sourceTree = "<group>"; };
 		6A77AB8C0971122300F5417F /* DisplayServerIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = DisplayServerIcon.icns; path = OVDisplayServer/DisplayServerIcon.icns; sourceTree = "<group>"; };
-		6A77ABAF097112C300F5417F /* OVDisplayServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVDisplayServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A77ABAF097112C300F5417F /* OVDisplayServer.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OVDisplayServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A77ABB1097112C300F5417F /* OVDisplayServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVDisplayServer-Info.plist"; sourceTree = "<group>"; };
 		6A9651640970E118004BCC4D /* NSDictionaryExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDictionaryExtension.h; path = NSExtensions/NSDictionaryExtension.h; sourceTree = "<group>"; };
 		6A9651650970E118004BCC4D /* NSDictionaryExtension.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NSDictionaryExtension.mm; path = NSExtensions/NSDictionaryExtension.mm; sourceTree = "<group>"; };
@@ -599,7 +598,6 @@
 			isa = PBXGroup;
 			children = (
 				6A77AB8C0971122300F5417F /* DisplayServerIcon.icns */,
-				D43A12C70C96FA6E003ED0E5 /* OVLogo.icns */,
 				6A9651E30970E4AE004BCC4D /* InfoPlist.strings */,
 				6A9651F20970E4DD004BCC4D /* MainMenu.nib */,
 			);
@@ -974,7 +972,6 @@
 				6A77ABC00971131C00F5417F /* DisplayServerIcon.icns in Resources */,
 				6A77ABC10971131F00F5417F /* InfoPlist.strings in Resources */,
 				6A77ABC20971132200F5417F /* MainMenu.nib in Resources */,
-				D43AD74B0C95BD270085AB23 /* ovdisplayserver.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

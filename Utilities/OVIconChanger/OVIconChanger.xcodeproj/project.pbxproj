@@ -78,7 +78,7 @@
 		D40F81F40C13B8C5003F773D /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D40F82030C13B8F2003F773D /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D40F82450C13BBC0003F773D /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = zh_CN.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		D423D5980C128DFB0058F65D /* OVIconChanger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVIconChanger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D423D5980C128DFB0058F65D /* OVIconChanger.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OVIconChanger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D423D5BF0C1295A30058F65D /* DisplayServerIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DisplayServerIcon.icns; sourceTree = "<group>"; };
 		D44E43820C12F78800A0E7D7 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		D451CE6F0C12F68200919FB3 /* IconFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconFamily.h; sourceTree = "<group>"; };

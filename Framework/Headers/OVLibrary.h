@@ -1,6 +1,6 @@
 // OVLibrary.h: Interface header for dynamic loadable OV modules
 //
-// Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
+// Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
