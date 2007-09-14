@@ -34,7 +34,7 @@
 	<key>CFBundleIconFile</key>
 	<string>cinedit</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.CinEdit</string>
+	<string>org.openvanilla.cinedit</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -42,7 +42,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
-	<string>OPVN</string>
+	<string>opvn</string>
 	<key>CFBundleVersion</key>
 	<string>0.8.0</string>
 	<key>NSMainNibFile</key>
