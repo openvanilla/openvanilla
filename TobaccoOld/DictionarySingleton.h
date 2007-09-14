@@ -43,11 +43,11 @@ public:
 			inputMethodId.c_str());
 		sprintf(
 			viewString,
-			"SELECT w.word, c.prob FROM %s_char2word_table c, word_table w WHERE c.characters=?1 AND c.wordId = w.wordId",
+			"SELECT w.word, c.prob FROM %s_char2word_table c, word_table w WHERE c.characters=?1 AND c.wordId = w.wordId ORDER BY c.prob DESC",
 			inputMethodId.c_str());
 		sprintf(
 			viewLimitString,
-			"SELECT w.word, c.prob FROM %s_char2word_table c, word_table w WHERE c.characters=?1 AND c.wordId = w.wordId LIMIT %d",
+			"SELECT w.word, c.prob FROM %s_char2word_table c, word_table w WHERE c.characters=?1 AND c.wordId = w.wordId ORDER BY c.prob DESC LIMIT %d",
 			inputMethodId.c_str(),
 			N_BEST);
 	}
