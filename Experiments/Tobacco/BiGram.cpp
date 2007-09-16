@@ -89,6 +89,14 @@ double BiGram::viterbi(
 								double bigramBackOff =
 									//lm_->getLogProb(leftGram) +
 									rightGrams[i].freq;
+								//@warning
+								// This is a heuristic to adjust the unbalanced
+								// tsi.src.
+								//@{
+								if(rightGrams[i].word.length() > 3)
+									bigramBackOff *=
+										rightGrams[i].word.length() * 100.0f;
+								//@}
 									//lm_->getBackOff(rightGram);
 								tempScore += bigramBackOff;
 								murmur(
@@ -123,6 +131,13 @@ double BiGram::viterbi(
 						double tempScore =
 							//lm_->getLogProb(rightGram);
 							rightGrams[i].freq;
+						//@warning
+						// This is a heuristic to adjust the unbalanced
+						// tsi.src.
+						//@{
+						if(rightGrams[i].word.length() > 3)
+							tempScore *= rightGrams[i].word.length() * 100.0f;
+						//@}
 						murmur(
 							"rightGrams[%i]:%s=%f",
 							i,
@@ -184,6 +199,15 @@ double BiGram::viterbi(
 	while(leftBound >= 0) {
 		murmur("bounds[left:%i, right:%i]", leftBound, rightBound);
 		for(int back = rightBound - 1; back > leftBound - 1; back--) {
+			if(back > leftBound)
+				tokenVectorRef[back + begin].withPrefix = true;
+			else
+				tokenVectorRef[back + begin].withPrefix = false;
+			if(back < rightBound - 1)
+				tokenVectorRef[back + begin].withSuffix = true;
+			else
+				tokenVectorRef[back + begin].withSuffix = false;
+
 			tokenVectorRef[back + begin].word =
 				words[rightBound].substr((back - leftBound)*3, 3);
 			murmur(
