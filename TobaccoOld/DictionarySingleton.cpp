@@ -26,13 +26,13 @@ DictionarySingleton::DictionarySingleton(
 	char tsiDbFilePath[256];
 	sprintf(tsiDbFilePath, "%s/tsi.db", dbFilePath);
     dictionaryDB = new SQLite3;
-    if (err = dictionaryDB->open(tsiDbFilePath))
+    if ((err = dictionaryDB->open(tsiDbFilePath)))
         murmur("SQLite3 error! code=%d", err);
 
 	char imDbFilePath[256];
 	sprintf(imDbFilePath, "%s/imtables.db", dbFilePath);
 	imTableDB = new SQLite3;
-    if (err = imTableDB->open(imDbFilePath))
+    if ((err = imTableDB->open(imDbFilePath)))
         murmur("SQLite3 error! code=%d", err);
 
 	m_profileManager = ProfileManager::getInstance();

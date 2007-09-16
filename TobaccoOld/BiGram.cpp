@@ -1,4 +1,4 @@
-//#define OV_DEBUG
+#define OV_DEBUG
 
 #include <algorithm>
 #include <math.h>
@@ -18,6 +18,186 @@ BiGram::BiGram()
 
 BiGram::~BiGram()
 {
+}
+
+size_t BiGram::viterbi(
+	DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
+	int begin, int end)
+{
+	int length = end - begin;
+	vector<double> scores(length + 1, 0.0f);
+	vector<int> tracks(length + 1, -1);
+	vector<string> words(length + 1, "");
+	
+	murmur("begin:%i", begin);
+	murmur("length:%i", length);
+
+	for(int index = begin + 1; index <= end; index++)
+	{
+		murmur("index:%i", index);
+		int innerIndex = index - begin;
+		double bestScore = 0.0f;
+		int bestPrefix = -1;
+		string bestWord = "";
+		for(int prefix = index - 1; prefix >= begin; prefix--)
+		{
+			murmur("prefix:%i", prefix);
+			int innerPrefix = prefix - begin;
+			string rightKey("");
+			for(int shift = prefix; shift < index; shift++)
+				rightKey +=
+					tokenVectorRef[shift].characterStringVector[0] + '\t';
+			rightKey = rightKey.substr(0, rightKey.length() - 1);
+			murmur("rightKey:%s", rightKey.c_str());
+
+			vector<Vocabulary> rightGrams;
+			dictionary->getWordsByCharacters(rightKey, rightGrams, true);
+			size_t rightGramCount = rightGrams.size();
+			murmur("rightGramCount:%i", rightGramCount);
+			for(size_t i = 0; i < rightGramCount; i++)
+			{
+				//string rightGram = rightGrams[i];
+				//if(lm_->has(rightGram)) {
+					int left = tracks[innerPrefix] + begin;
+					murmur("left:%i", left);
+					if(left >= 0 && left != prefix)
+					{
+						string leftKey("");
+						for(int shift = left; shift < prefix; shift++)
+							leftKey +=
+								tokenVectorRef[shift].characterStringVector[0]
+									+ '\t';
+						leftKey = leftKey.substr(0, leftKey.length() - 1);
+						murmur("leftKey:%s", leftKey.c_str());
+
+						vector<Vocabulary> leftGrams;
+						dictionary->getWordsByCharacters(
+							leftKey, leftGrams, true);
+						size_t leftGramCount = leftGrams.size();
+						murmur("leftGramCount:%i",leftGramCount);
+						for(size_t j = 0; j < leftGramCount; j++)
+						{
+							double tempScore = 0.0f;
+							//string leftGram = leftGrams[j];
+							//string bigram = leftGram + " " + rightGram;
+							//if(lm_->has(bigram)) {
+							//	double bigramScore = lm_->getLogProb(bigram);
+							//	cerr << bigramScore << "(bigram) + ";
+							//	tempScore += bigramScore;
+							//}
+							//else if(dic_->has(leftGram)) {								double pseudoBackOffWeight = 1000.0f;
+								double bigramBackOff =
+									//lm_->getLogProb(leftGram) +
+									rightGrams[i].freq;
+									//lm_->getBackOff(rightGram);
+								tempScore += bigramBackOff;
+								murmur(
+									"leftGrams[%i]:%s=%i",
+									j,
+									leftGrams[j].word.c_str(),
+									leftGrams[j].freq);
+								murmur(
+									"rightGrams[%i]:%s=%i",
+									i,
+									rightGrams[i].word.c_str(),
+									rightGrams[i].freq);
+								murmur("tempScore:%f", tempScore);								
+							//}
+							//else {
+							//	tempScore +=
+							//		lm_->getUnkLogProb() +
+							//		lm_->getBackOff(rightGram);
+							//}
+							
+							tempScore += scores[innerPrefix];
+							if(bestScore == 0.0f || tempScore > bestScore)
+							{
+								bestScore = tempScore;
+								bestPrefix = innerPrefix;
+								bestWord = rightGrams[i].word;
+							}
+						}
+					}
+					else {
+						murmur("else!");
+						double tempScore =
+							//lm_->getLogProb(rightGram);
+							rightGrams[i].freq;
+						murmur(
+							"rightGrams[%i]:%s=%f",
+							i,
+							rightGrams[i].word.c_str(),
+							tempScore);
+						if(bestScore == 0.0f || tempScore > bestScore)
+						{
+							bestScore = tempScore;
+							bestPrefix = innerPrefix;
+							bestWord = rightGrams[i].word;
+						}				
+					}
+				/*
+				}
+				else
+				{
+					double tempScore = lm_->getUnkLogProb() + scores[prefix];
+					cerr << "unknown single char word:" << tempScore << endl;
+					if(bestScore == 0.0f || tempScore > bestScore)
+					{
+						bestScore = tempScore;
+						bestPrefix = prefix;
+						bestWord = rightGram;
+						cerr << "argmax=" << prefix;
+						cerr << "," << bestScore;
+						cerr << "," << bestWord << endl;
+					}
+				}
+				*/
+			}
+		}
+		scores[innerIndex] = bestScore;
+		tracks[innerIndex] = bestPrefix;
+		words[innerIndex] = bestWord;
+		murmur("best score[%i]: %f", innerIndex, bestScore);
+		murmur("best prefix[%i]: %i", innerIndex, bestPrefix);
+		murmur("best word[%i]: %s", innerIndex, bestWord.c_str());
+
+		murmur("innerIndex:%i", innerIndex);
+		if(tracks[innerIndex] == -1)
+			tracks[innerIndex] = innerIndex - 1;
+		murmur("tracks[%i]:%i", innerIndex, tracks[innerIndex]);
+	}
+	
+	/*
+	size_t boundary = length;
+	while(boundary > 0) {
+		Token* token = new Token();
+		token->word = words[boundary];
+		outputTokens.push_back(token);
+		boundary = tracks[boundary];
+	}
+	*/
+	
+	int rightBound = length;
+	int leftBound = tracks[rightBound];
+	murmur("init rightBound:%i", rightBound);
+	murmur("init leftBound:%i", leftBound);
+	while(leftBound >= 0) {
+		murmur("bounds[left:%i, right:%i]", leftBound, rightBound);
+		for(int back = rightBound - 1; back > leftBound - 1; back--) {
+			tokenVectorRef[back + begin].word =
+				words[rightBound].substr((back - leftBound)*3, 3);
+			murmur(
+				"token[%i].word: %s",
+				back + begin,
+				tokenVectorRef[back + begin].word.c_str());
+		}
+
+		rightBound = leftBound;
+		leftBound = tracks[rightBound];
+	}
+	murmur("=======================");
+
+	return scores[length];
 }
 
 size_t BiGram::maximumMatching(

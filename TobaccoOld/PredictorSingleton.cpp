@@ -256,6 +256,7 @@ void PredictorSingleton::setSelectedCandidate(
 void PredictorSingleton::setTokenVectorByBigram()
 {
 	BiGram biGram;
+
 	size_t begin = 0;
 	size_t end = 0;
 	while(end <= tokenVector.size())
@@ -269,18 +270,20 @@ void PredictorSingleton::setTokenVectorByBigram()
                     dictionary,
                     tokenVector,
                     begin, end, true);
-			*/
 			size_t forwardScore =
                 biGram.maximumMatching(
                     PredictorSingleton::dictionary,
                     tokenVector,//forwardTokenVector,
                     begin, end, false);
-			/*
 			if(forwardScore > backwardScore)
 				PredictorSingleton::tokenVector = forwardTokenVector;
             else
                 forwardTokenVector.clear();
 			*/
+			biGram.viterbi(
+				PredictorSingleton::dictionary,
+				tokenVector,
+				begin, end);
 		}
 		else if(end == tokenVector.size())
 		{
@@ -289,13 +292,13 @@ void PredictorSingleton::setTokenVectorByBigram()
 		else if(tokenVector[end].isFixed ||
 				tokenVector[end].isBoundary)
 		{
-			size_t length;
+			size_t currentEnd;
 			if(PredictorSingleton::tokenVector[end].isFixed)
-				length = end;
+				currentEnd = end;
 			else
-				length = end + 1;
+				currentEnd = end + 1;
 
-			if(length > begin)
+			if(currentEnd > begin)
 			{
 				//vector<Token> forwardTokenVector(
 				//    PredictorSingleton::tokenVector);
@@ -304,20 +307,21 @@ void PredictorSingleton::setTokenVectorByBigram()
                     biGram.maximumMatching(
                         dictionary,
                         tokenVector,
-                        begin, length, true);
-				*/
-
+                        begin, currentEnd, true);
     			size_t forwardScore =
                     biGram.maximumMatching(
                         PredictorSingleton::dictionary,
                         tokenVector,//forwardTokenVector,
-                        begin, length, false);
-				/*
+                        begin, currentEnd, false);
     			if(forwardScore > backwardScore)
 	       			PredictorSingleton::tokenVector = forwardTokenVector;
                 else
                     forwardTokenVector.clear();
 				*/
+				biGram.viterbi(
+					PredictorSingleton::dictionary,
+					tokenVector,
+					begin, currentEnd);
 			}
 
 			begin = end + 1;
