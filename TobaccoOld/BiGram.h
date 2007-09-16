@@ -13,7 +13,7 @@ public:
 	BiGram();
 	~BiGram();
 
-	size_t viterbi(
+	double viterbi(
 		DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
 		int begin, int end);
 	size_t maximumMatching(

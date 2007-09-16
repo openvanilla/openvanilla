@@ -20,7 +20,7 @@ BiGram::~BiGram()
 {
 }
 
-size_t BiGram::viterbi(
+double BiGram::viterbi(
 	DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
 	int begin, int end)
 {
@@ -447,11 +447,11 @@ void BiGram::getVocabularyCombination(
 				score = matrix;
 			} else {
 				combinedVocabulary.freq = 1;
-				score = 1.0 / numeric_limits<double>::max();
+				score = 0.001f;
 			}
 
 			combinedVocabulary.prob =
-				-(log(score/numeric_limits<double>::max()) / log(2.0));
+				-(log(score) / log(2.0));
 			combinedVocabularyVector.push_back(combinedVocabulary);
 		}
 	}
