@@ -4,14 +4,14 @@ SOURCES=OVIMTobacco PredictorSingleton DictionarySingleton\
     ProfileManager ProfileFetcher Cache Profile
 DATA=imtables.db tsi.db
 BPMF=bpmf_punctuation.cin bpmf-Hsu.cin
-CINS=cj.cin
+CINS=../SharedData/cj.cin
 
 LDFLAGS+=-lsqlite3
 
-INC+=-I../TobaccoOld -I../../../trunk/Modules/SharedHeaders
-VPATH+= ../TobaccoOld ../../../trunk/Modules/SharedSource
+INC+=-I../../Experiments/Tobacco -I../SharedHeaders
+VPATH+= ../../Experiments/Tobacco ../SharedSource
 
-include ../../../trunk/Modules/Mk/ov.module.mk
+include ../Mk/ov.module.mk
 
 CFLAGS+=$(INC) -g
 
