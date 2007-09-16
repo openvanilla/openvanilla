@@ -1,16 +1,17 @@
 MODULEID=OVIMTobacco
 SOURCES=OVIMTobacco PredictorSingleton DictionarySingleton\
-    Token Vocabulary Candidate BiGram
+    Token Vocabulary Candidate BiGram\
+    ProfileManager ProfileFetcher Cache Profile
 DATA=imtables.db tsi.db
-BPMF=bpmf_punctuation.cin ../bmpf-Hsu.cin
-CINS= ../SharedData/cj.cin
+BPMF=bpmf_punctuation.cin bpmf-Hsu.cin
+CINS=cj.cin
 
 LDFLAGS+=-lsqlite3
 
-INC+=-I../../Experiments/Tobacco
-VPATH+= ../../Experiments/Tobacco/
+INC+=-I../TobaccoOld -I../../../trunk/Modules/SharedHeaders
+VPATH+= ../TobaccoOld ../../../trunk/Modules/SharedSource
 
-include ../Mk/ov.module.mk
+include ../../../trunk/Modules/Mk/ov.module.mk
 
 CFLAGS+=$(INC) -g
 
@@ -24,8 +25,8 @@ imtables.db: imtables-schema.txt ${BPMF} ${CINS} cin-sqlconvert.pl
 tsi.db: tobacco-schema.txt tobacco-sqlconvert.pl
 	rm -f tsi.db
 	sqlite3 tsi.db < tobacco-schema.txt
-	svn cat https://svn.csie.net/chewing/libchewing/branches/utf8/data/tsi.src > tsi.src
-	patch tsi.src tsi.src.patch
+	svn cat http://svn.openfoundry.org/libchewingdata/utf-8/tsi.src > tsi.src
+	#cat tsi.src tsi.src-ext.txt > tsi-ext.src
 	cat tsi.src punctuation.src > tsi_punctuation.src
 	perl -w -CO tobacco-sqlconvert.pl tsi_punctuation.src | sqlite3 tsi.db
 	perl -w -CO tobacco-sqlconvert_general.pl tsi_punctuation.src ${CINS} | sqlite3 tsi.db

@@ -21,7 +21,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMEUIManaged", "OVIMEUIMa
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxmlSTL", "tinyxml\tinyxmlSTL.VC8.vcproj", "{B2584669-D88A-4BC7-B638-C6937AFC823F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMTobaccoOld", "..\..\..\branches\0.7.2-Module-OVIMTobacco-Old\OVIMTobaccoOld\OVIMTobaccoOld.VC8.vcproj", "{06DD6384-CF74-4115-AFC9-E6BA2D818E12}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMTobacco", "..\..\Modules\OVIMTobacco\OVIMTobacco.vcproj", "{06DD6384-CF74-4115-AFC9-E6BA2D818E12}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GacUtil", "..\..\Utilities\GacUtil\GacUtil.csproj", "{5B57BD35-F14C-41AA-811C-5739873DEE7B}"
 EndProject

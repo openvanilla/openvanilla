@@ -1,6 +1,6 @@
 // OVIMTobacco.cpp
 
-#define OV_DEBUG
+//#define OV_DEBUG
 
 #ifndef WIN32
 	#include <OpenVanilla/OpenVanilla.h>
@@ -35,6 +35,9 @@
 
 #include "PredictorSingleton.h"
 
+#include "hsukey.h"
+#include "bpmfReplace.h"
+
 // Some dirty public secrets goes here
 SQLite3 *db;
 //// Number of names in "tablelist" table
@@ -58,6 +61,11 @@ public:
 	virtual int length() { return len; }
     virtual const char *compose();
     virtual const char *sequence() { return seq; }
+
+	virtual bool isHsuEndKeyTriggered();
+
+	bool isHsuLayout;
+	bool isBoPoMoFoLayout;
 
 protected:
     virtual const char *query(char c);
@@ -84,7 +92,8 @@ public:
     virtual int keyEvent(OVKeyCode*, OVBuffer*, OVCandidate*, OVService*);
     
 protected:
-    int keyCommit();
+	int keyCommitOneTerm();
+	int keyCommit();
     int keyEsc();
     int keyRemove();
     int keyMove();
@@ -107,6 +116,8 @@ protected:
     
     void freshBuffer();
 
+	int rotateTopCandidates();
+
     OVKeyCode *k;
     OVBuffer *b;
     OVCandidate *c;
@@ -115,10 +126,13 @@ protected:
     IMGKeySequence seq;
     IMGCandidate *candi;
     int page;
+	size_t currentCandidateLimit;
     
     size_t position;
     bool canNewSequence;
     bool doInsert;
+
+	const static size_t MAX_BUFFER_LENGTH = 12;
 };
 
 class OVIMTobacco : public OVInputMethod {
@@ -160,6 +174,11 @@ protected:
     
     bool cfgDoChooseInFrontOfCursor;
     bool cfgDoClearSequenceOnError;
+
+	bool isEnNameSet;
+	bool isLocalizedNameSet;
+	char *m_name;
+	char *m_localizedName;
 };
 
 /*
@@ -182,6 +201,9 @@ extern "C" unsigned int OVGetLibraryVersion() {
     return OV_VERSION;
 }
 extern "C" int OVInitializeLibrary(OVService*, const char*p) { 
+	Watch watch;
+	watch.start();
+
     db=new SQLite3;  // this never gets deleted, but so do we
     char dbfile[PATH_MAX];
     sprintf(dbfile, "%s/OVIMTobacco/imtables.db", p);
@@ -190,13 +212,19 @@ extern "C" int OVInitializeLibrary(OVService*, const char*p) {
         return 0;
     }
     SQLite3Statement *sth=db->prepare("select name from tablelist;");
-    IM_TABLES = 0;
+	//<comment author='b6s'>A workaround of loader singleton issue.
+	IM_TABLES = 0;
+	//</comment>
     while(sth->step()==SQLITE_ROW) {
-	const char *buf = (char*)sth->column_text(0);
-	IM_TABLE_NAMES[IM_TABLES] = (char*)calloc(1,strlen(buf)+1);
-	strcpy(IM_TABLE_NAMES[IM_TABLES],buf);
-	IM_TABLES++;
+		const char *buf = (char*)sth->column_text(0);
+		IM_TABLE_NAMES[IM_TABLES] = (char*)calloc(1,strlen(buf)+1);
+		strcpy(IM_TABLE_NAMES[IM_TABLES],buf);
+		IM_TABLES++;
     }
+
+	watch.stop();
+	murmur("%1.3f sec:\tOVInitializeLibrary", watch.getSec());
+
     return 1;
 }
 extern "C" OVModule *OVGetModuleFromLibrary(int x) {
@@ -272,6 +300,12 @@ const char* OVOFReverseLookupSQLite::process(const char *src, OVService *srv)
 OVIMTobacco::OVIMTobacco(char *name) {
     strcpy(table, name);
     sprintf(idstr,"OVIMTobacco-%s",name);
+
+	isEnNameSet = false;
+	m_name = new char[256];
+
+	isLocalizedNameSet = false;
+	m_localizedName = new char[256];
 }
 
 OVInputMethodContext *OVIMTobacco::newContext() {
@@ -279,12 +313,17 @@ OVInputMethodContext *OVIMTobacco::newContext() {
 }
 
 int OVIMTobacco::initialize(OVDictionary *cfg, OVService * s, const char *p) {
-    sprintf(tsiDbFilePath, "%sOVIMTobacco/tsi.db", p);
+    sprintf(tsiDbFilePath, "%sOVIMTobacco", p);
 
 	murmur("initial predictor(%s)", tsiDbFilePath);
+
+	Watch watch;
+	watch.start();
     predictor = PredictorSingleton::getInstance(tsiDbFilePath);
 
     update(cfg, s);
+	watch.stop();
+	murmur("%1.3f sec:\tPredictorSingleton::getInstance(tsiDbFilePath)", watch.getSec());
 
 	murmur("initialized");    
     return 1;        
@@ -332,15 +371,21 @@ const char *OVIMTobacco::identifier() {
 }
 
 const char *OVIMTobacco::localizedName(const char *lc) {
-    static char buf[256];
-    const char *name;
     if(!strcasecmp(lc,"zh_TW")) {
-	name=QueryForKey(db, table, "_property_cname");
+		if(!isLocalizedNameSet) {
+			sprintf(m_localizedName, "%s",
+				QueryForKey(db, table, "_property_cname"));
+			isLocalizedNameSet = true;
+		}
+		return m_localizedName;
     } else {
-	name=QueryForKey(db, table, "_property_ename");
+		if(!isEnNameSet) {
+			sprintf(m_name, "%s",
+				QueryForKey(db, table, "_property_ename"));
+			isEnNameSet = true;
+		}
+		return m_name;
     }
-    sprintf(buf,"%s (Tobacco)",name);
-    return buf;
 }
 
 int OVIMTobacco::isEndKey(char c) {
@@ -359,6 +404,7 @@ void OVIMTobaccoContext::start(OVBuffer* buf, OVCandidate*, OVService* s) {
 	const char* ename = QueryForKey(db, parent->table, "_property_ename");
     	string inputMethodId(ename);
 	predictor->setInputMethodId(inputMethodId);
+	predictor->setImTableId(string(parent->table));
 }
 
 void OVIMTobaccoContext::clear() {
@@ -382,24 +428,48 @@ void OVIMTobaccoContext::end() {
 
 int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, OVService* ps) {
     k=pk; b=pb; c=pc; s=ps;
-    if (candi) return candidateEvent();
+    if (candi)
+		if(candidateEvent()) return 1;
+	//<comment author='b6s'>CTRL+Q rotates top-3 candidates
+	if (k->isCtrl() && k->code()==17) return rotateTopCandidates();
+	//</comment>
     if (isPunctuationCombination()) return punctuationKey();
     if (k->isFunctionKey() && b->isEmpty()) return 0;
-    if (k->isCapslock()) {
+	if (!isprint(k->code()) && k->isShift()) {
 		if(!b->isEmpty())
-			keyCommit();
+			return keyCommit();
+		return 0;
+	}
+    if (k->isCapslock()) {
+		//<comment author='b6s'>Deprecate CapsLock-English binding
+		//if(!b->isEmpty())
+		//	keyCommit();
+		//</comment>
 
 		return keyCapslock();
 	}
     if (k->code()==ovkEsc) return keyEsc();
     if (k->code()==ovkBackspace || k->code()==ovkDelete) return keyRemove();
-    if (k->code()==ovkSpace && !seq.isEmpty()) return keyCompose();
-    if ((k->code()==ovkSpace || k->code()==ovkDown) && !b->isEmpty() && seq.isEmpty())
+	if (k->code()==ovkSpace && !seq.isEmpty()) return keyCompose();
+    if ((k->code()==ovkSpace || k->code()==ovkDown)
+		&& !b->isEmpty() && seq.isEmpty())
 		return setCandidate();
     if (k->code()==ovkReturn) return keyCommit();
     if (k->code()==ovkLeft || k->code()==ovkRight) return keyMove();
     if (isprint(k->code())) return keyPrintable();
     return 0;
+}
+
+int OVIMTobaccoContext::rotateTopCandidates()
+{
+	size_t index = position;
+	if(parent->doChooseInFrontOfCursor())
+		index--;
+
+	predictor->rotateTopCandidates(index);
+	freshBuffer();
+
+	return 1;
 }
 
 int OVIMTobaccoContext::keyMove() {
@@ -436,10 +506,31 @@ int OVIMTobaccoContext::keyMove() {
         return 0;
 }
 
+//<comment author='b6s'>The new function of popping up one word.
+int OVIMTobaccoContext::keyCommitOneTerm() {
+	b->clear();
+	bool hasNext;
+	do {
+		hasNext = predictor->tokenVector.begin()->withSuffix;
+		b->append(predictor->tokenVector.begin()->word.c_str());
+		predictor->removeWord(0, true);
+		//<comment author='b6s'>
+		// It's really bad that position is a global variable.
+		position--;
+		//</comment>
+
+		//predictor->tokenVector.erase(predictor->tokenVector.begin());
+	} while(hasNext);
+	b->send();
+
+	return 1;
+}
+//</comment>
+
 int OVIMTobaccoContext::keyCommit() {
     if (b->isEmpty()) return 0;
     if (!seq.isEmpty()) {
-        if (keyCompose()) {
+		if (keyCompose() && !b->isEmpty()) {
             b->send();
 			clear();
             return 1;        
@@ -514,19 +605,33 @@ int OVIMTobaccoContext::keyPrintable() {
     if (parent->allowwildcard && b->isEmpty() && 
         (k->code()=='?' || k->code()=='*')) return keyNonRadical();
 	*/
- 
-    if (!seq.add(k->code())) {
+	if (parent->maxSeqLen() > 0 &&
+		seq.length() >= parent->maxSeqLen()) {
+		if (parent->doBeep()) s->beep();
+		return 1;
+	}
+
+	if (!seq.add(k->code())) {
         if (b->isEmpty()) return keyNonRadical();
-        s->beep();
+		if (parent->doBeep()) s->beep();
     }
+
     if (!seq.isEmpty()) {
-        if (parent->isEndKey(k->code())) {
+		seq.isHsuLayout = false;
+		seq.isBoPoMoFoLayout =false;
+		const char* ename = parent->localizedName("en");
+		if (strcmp("PhoneticHsu", ename) == 0)
+			seq.isHsuLayout = true;
+		else if (strcmp("BoPoMoFo", ename) == 0)
+			seq.isBoPoMoFoLayout = true;
+		if(seq.isHsuLayout && seq.isHsuEndKeyTriggered())
+			return keyCompose();
+		else if (parent->isEndKey(k->code())) {
             freshBuffer();
             return keyCompose();
         }
-        else if (parent->doAutoCompose()) {
+        else if (parent->doAutoCompose())
             return keyCompose();
-        }
     }
     freshBuffer();
     return 1;
@@ -536,6 +641,11 @@ void OVIMTobaccoContext::freshBuffer() {
 /// BAD UTF-8 Chinese character processing here, again...
 
 	size_t currentBufferLength = predictor->tokenVector.size();
+
+	//<comment author='b6s'>Adds new function to pop up a word.
+	if(currentBufferLength == MAX_BUFFER_LENGTH) keyCommitOneTerm();
+	//</comment>
+
 	if(strlen(seq.sequence()) > 0 && position < currentBufferLength)
     {
         murmur("should be here with [%s], [%s], (%d)",
@@ -639,10 +749,11 @@ int OVIMTobaccoContext::keyCapslock() {
 }
 
 int OVIMTobaccoContext::keyCompose() {
-    murmur("key composing... [%s], (%d)", seq.compose(), position);
+    murmur("key composing... [%s], (%d)", seq.sequence(), position);
+	std::string keystrokes(seq.sequence());
     std::string characterString(seq.compose());
     if(predictor->setTokenVector(
-        characterString, position, parent->doAutoCompose()))
+		keystrokes, characterString, position, parent->doAutoCompose()))
     {
         if(!parent->doAutoCompose()) {
             position++;
@@ -726,14 +837,16 @@ int OVIMTobaccoContext::fetchCandidate(const char *qs) {
     candi=new IMGCandidate;
     candi->count=0;
     candi->candidates=new char* [rows];
-    sth->reset();
+
+	sth->reset();
     while (sth->step()==SQLITE_ROW) {
         const char *v=sth->column_text(0);
         char *s=(char*)calloc(1, strlen(v)+1);
         strcpy(s, v);
         candi->candidates[candi->count++]=s;
     }
-    delete sth;
+
+	delete sth;
     return rows;
 }
 
@@ -746,24 +859,24 @@ int OVIMTobaccoContext::setCandidate() {
     }
 
     size_t choosingIndex = 0;
-    if(parent->doChooseInFrontOfCursor())
-        if(position > 0)
+    if(parent->doChooseInFrontOfCursor()) {
+        if(position == 0)
+            choosingIndex = 0;
+        else
             choosingIndex = position - 1;
+    }
     else
     {
         if(position == predictor->tokenVector.size() &&
-	   predictor->tokenVector.size() > 0)
+			position > 0)
             choosingIndex = position - 1;
         else
             choosingIndex = position;
     }
         
-	predictor->candidateVector.clear();
-	predictor->candidatePositionVector.clear();
-    predictor->setMultiCharacterWordCandidateVector(choosingIndex);
-    predictor->setSingleCharacterWordCandidateVector(choosingIndex);
+    predictor->setCandidateVector(choosingIndex);
     /// Currently use "post" choosing mode only
-    size_t rows = predictor->candidateVector.size();    		
+    size_t rows = predictor->candidateVector.size();
     murmur("got %d rows", rows);
     if(!rows) return 1; //zonble
     candi=new IMGCandidate;
@@ -802,6 +915,14 @@ int OVIMTobaccoContext::candidateEvent() {
     size_t perpage=strlen(localSelKey);
     size_t i=0, l=perpage, nextsyl=0;
     for (i=0; i<perpage; i++) if(localSelKey[i]==kc) break;
+
+	//<comment author='b6s'>A workaround for index exceeding current boundary.
+	if (i >= currentCandidateLimit) {
+		closeCandidateWindow();
+		return 0;
+	}
+	//</comment>
+
     if (i==l) {         // not a valid candidate key
         if (kc==ovkReturn) i=0;
         if (seq.isValidKey(kc)) { i=0; nextsyl=1; }
@@ -847,12 +968,17 @@ int OVIMTobaccoContext::updateCandidateWindow() {
     size_t candicount=candi->count;
     size_t perpage=strlen(parent->selkey);
     size_t pgstart=page*perpage;
-        
+
+	currentCandidateLimit = perpage;
+
     c->clear();
     char dispstr[32];
     
     for (size_t i=0; i<perpage; i++) {
-        if (pgstart+i >= candicount) break;     // stop if idx exceeds candi counts
+		if (pgstart+i >= candicount) {
+			currentCandidateLimit = i;
+			break;     // stop if idx exceeds candi counts
+		}
         sprintf(dispstr, "%c.", parent->selkey[i]);
         c->append(dispstr)->append(candi->candidates[page*perpage+i])->append(" ");
     }
@@ -926,13 +1052,59 @@ const char *IMGKeySequence::query(char c) {
 
 const char *IMGKeySequence::compose() {
     strcpy(composebuf, "");
-    for (int i=0; i<len; i++) {
+
+	///////////////////////////////////////////
+	//   ¦Xªkª`­µ´À´«
+	///////////////////////////////////////////
+	string foo(seq);
+	if(isBoPoMoFoLayout)
+	{
+		string inputStr(seq);		
+		convert2LegalBPMF(inputStr,foo);	
+		len = static_cast<int>(foo.length());
+		strcpy(seq,foo.c_str());
+	}	
+		
+	for(size_t i = 0; i < foo.length(); i++)
+	{
+		const char *s=query(foo[i]);
+        if (s) strcat(composebuf, s);
+	}
+	///////////////////////////////////////////
+	
+/*    for (int i=0; i<len; i++) {
         const char *s=query(seq[i]);
         if (s) strcat(composebuf, s);
-    }
-    return composebuf;
+	}*/
+
+	//murmur("IMGKeySequence::compose, seq=\"%s\"",seq);
+	//murmur("\tcomposebuf=\"%s\"",composebuf);
+
+	if(isHsuLayout) {
+		string bpmfStr(composebuf);
+		if(hsuKeyToBpmf(seq, bpmfStr)) {
+			strcpy(composebuf, "");
+			strcpy(composebuf, bpmfStr.c_str());
+		}
+	}
+	return composebuf;
 }
 
+bool IMGKeySequence::isHsuEndKeyTriggered() {
+	size_t lastIndex = strlen(seq) - 1;
+	if(lastIndex > 0 && lastIndex < 4) {
+		switch (seq[lastIndex]) {
+			case 'd':
+			case 'f':
+			case 'j':
+			case 's':
+				return true;
+			default:
+				break;
+		}
+	}
+	return false;
+}
 
 IMGCandidate::IMGCandidate()
 {
@@ -973,6 +1145,7 @@ const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key) {
     char *ep=keyescaped;
     while (*kp) {
         if (*kp=='\'') { *ep++='\''; *ep++='\''; }
+		else if (*kp=='%') { *ep++='%'; *ep++='%'; }
         else *ep++=*kp;
         kp++;
     }

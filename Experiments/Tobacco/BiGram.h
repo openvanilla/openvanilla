@@ -13,15 +13,20 @@ public:
 	BiGram();
 	~BiGram();
 
-	int maximumMatching(
-	   DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
-	   size_t index, size_t length, bool doBackward);
+	double viterbi(
+		DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
+		int begin, int end);
+	size_t maximumMatching(
+		DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
+		size_t begin, size_t end, bool doBackward);
 	void getCharacterCombination(
-	   vector<string>& leftRef, vector<string>& rightRef,
-	   vector<string>& combinedRef);
+		vector<string>& leftRef, vector<string>& rightRef,
+		vector<string>& combinedRef);
 	void getVocabularyCombination(
-	   vector<Vocabulary>& leftRef, vector<Vocabulary>& rightRef,
-	   vector<Vocabulary>& combinedRef);	   
+		vector<Vocabulary>& leftRef, vector<Vocabulary>& rightRef,
+		vector<Vocabulary>& combinedRef);
+
+	const static size_t MAX_CONTEXT_LENGTH = 7;
 };
 
 #endif

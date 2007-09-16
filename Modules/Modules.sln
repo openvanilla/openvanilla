@@ -12,7 +12,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMPhoneticStatic", "OVIMP
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVOFFullWidthCharacter", "OVOFFullWidthCharacter\OVOFFullWidthCharacter.vcproj", "{A12A02AF-F3F9-4CDF-851F-9555406C087E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMTobaccoOld", "..\..\branches\0.7.2-Module-OVIMTobacco-Old\OVIMTobaccoOld\OVIMTobaccoOld.VC8.vcproj", "{06DD6384-CF74-4115-AFC9-E6BA2D818E12}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMTobacco", "OVIMTobacco\OVIMTobacco.vcproj", "{06DD6384-CF74-4115-AFC9-E6BA2D818E12}"
 EndProject
 Global
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution

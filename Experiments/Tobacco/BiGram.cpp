@@ -1,6 +1,8 @@
-#define OV_DEBUG
+//#define OV_DEBUG
 
 #include <algorithm>
+#include <math.h>
+#include <limits>
 
 #include "BiGram.h"
 
@@ -18,12 +20,194 @@ BiGram::~BiGram()
 {
 }
 
-int BiGram::maximumMatching(
+double BiGram::viterbi(
+	DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
+	int begin, int end)
+{
+	int length = end - begin;
+	vector<double> scores(length + 1, 0.0f);
+	vector<int> tracks(length + 1, -1);
+	vector<string> words(length + 1, "");
+	
+	murmur("begin:%i", begin);
+	murmur("length:%i", length);
+
+	for(int index = begin + 1; index <= end; index++)
+	{
+		murmur("index:%i", index);
+		int innerIndex = index - begin;
+		double bestScore = 0.0f;
+		int bestPrefix = -1;
+		string bestWord = "";
+		for(int prefix = index - 1; prefix >= begin; prefix--)
+		{
+			murmur("prefix:%i", prefix);
+			int innerPrefix = prefix - begin;
+			string rightKey("");
+			for(int shift = prefix; shift < index; shift++)
+				rightKey +=
+					tokenVectorRef[shift].characterStringVector[0] + '\t';
+			rightKey = rightKey.substr(0, rightKey.length() - 1);
+			murmur("rightKey:%s", rightKey.c_str());
+
+			vector<Vocabulary> rightGrams;
+			dictionary->getWordsByCharacters(rightKey, rightGrams, true);
+			size_t rightGramCount = rightGrams.size();
+			murmur("rightGramCount:%i", rightGramCount);
+			for(size_t i = 0; i < rightGramCount; i++)
+			{
+				//string rightGram = rightGrams[i];
+				//if(lm_->has(rightGram)) {
+					int left = tracks[innerPrefix] + begin;
+					murmur("left:%i", left);
+					if(left >= 0 && left != prefix)
+					{
+						string leftKey("");
+						for(int shift = left; shift < prefix; shift++)
+							leftKey +=
+								tokenVectorRef[shift].characterStringVector[0]
+									+ '\t';
+						leftKey = leftKey.substr(0, leftKey.length() - 1);
+						murmur("leftKey:%s", leftKey.c_str());
+
+						vector<Vocabulary> leftGrams;
+						dictionary->getWordsByCharacters(
+							leftKey, leftGrams, true);
+						size_t leftGramCount = leftGrams.size();
+						murmur("leftGramCount:%i",leftGramCount);
+						for(size_t j = 0; j < leftGramCount; j++)
+						{
+							double tempScore = 0.0f;
+							//string leftGram = leftGrams[j];
+							//string bigram = leftGram + " " + rightGram;
+							//if(lm_->has(bigram)) {
+							//	double bigramScore = lm_->getLogProb(bigram);
+							//	cerr << bigramScore << "(bigram) + ";
+							//	tempScore += bigramScore;
+							//}
+							//else if(dic_->has(leftGram)) {								double pseudoBackOffWeight = 1000.0f;
+								double bigramBackOff =
+									//lm_->getLogProb(leftGram) +
+									rightGrams[i].freq;
+									//lm_->getBackOff(rightGram);
+								tempScore += bigramBackOff;
+								murmur(
+									"leftGrams[%i]:%s=%i",
+									j,
+									leftGrams[j].word.c_str(),
+									leftGrams[j].freq);
+								murmur(
+									"rightGrams[%i]:%s=%i",
+									i,
+									rightGrams[i].word.c_str(),
+									rightGrams[i].freq);
+								murmur("tempScore:%f", tempScore);								
+							//}
+							//else {
+							//	tempScore +=
+							//		lm_->getUnkLogProb() +
+							//		lm_->getBackOff(rightGram);
+							//}
+							
+							tempScore += scores[innerPrefix];
+							if(bestScore == 0.0f || tempScore > bestScore)
+							{
+								bestScore = tempScore;
+								bestPrefix = innerPrefix;
+								bestWord = rightGrams[i].word;
+							}
+						}
+					}
+					else {
+						murmur("else!");
+						double tempScore =
+							//lm_->getLogProb(rightGram);
+							rightGrams[i].freq;
+						murmur(
+							"rightGrams[%i]:%s=%f",
+							i,
+							rightGrams[i].word.c_str(),
+							tempScore);
+						if(bestScore == 0.0f || tempScore > bestScore)
+						{
+							bestScore = tempScore;
+							bestPrefix = innerPrefix;
+							bestWord = rightGrams[i].word;
+						}				
+					}
+				/*
+				}
+				else
+				{
+					double tempScore = lm_->getUnkLogProb() + scores[prefix];
+					cerr << "unknown single char word:" << tempScore << endl;
+					if(bestScore == 0.0f || tempScore > bestScore)
+					{
+						bestScore = tempScore;
+						bestPrefix = prefix;
+						bestWord = rightGram;
+						cerr << "argmax=" << prefix;
+						cerr << "," << bestScore;
+						cerr << "," << bestWord << endl;
+					}
+				}
+				*/
+			}
+		}
+		scores[innerIndex] = bestScore;
+		tracks[innerIndex] = bestPrefix;
+		words[innerIndex] = bestWord;
+		murmur("best score[%i]: %f", innerIndex, bestScore);
+		murmur("best prefix[%i]: %i", innerIndex, bestPrefix);
+		murmur("best word[%i]: %s", innerIndex, bestWord.c_str());
+
+		murmur("innerIndex:%i", innerIndex);
+		if(tracks[innerIndex] == -1)
+			tracks[innerIndex] = innerIndex - 1;
+		murmur("tracks[%i]:%i", innerIndex, tracks[innerIndex]);
+	}
+	
+	/*
+	size_t boundary = length;
+	while(boundary > 0) {
+		Token* token = new Token();
+		token->word = words[boundary];
+		outputTokens.push_back(token);
+		boundary = tracks[boundary];
+	}
+	*/
+	
+	int rightBound = length;
+	int leftBound = tracks[rightBound];
+	murmur("init rightBound:%i", rightBound);
+	murmur("init leftBound:%i", leftBound);
+	while(leftBound >= 0) {
+		murmur("bounds[left:%i, right:%i]", leftBound, rightBound);
+		for(int back = rightBound - 1; back > leftBound - 1; back--) {
+			tokenVectorRef[back + begin].word =
+				words[rightBound].substr((back - leftBound)*3, 3);
+			murmur(
+				"token[%i].word: %s",
+				back + begin,
+				tokenVectorRef[back + begin].word.c_str());
+		}
+
+		rightBound = leftBound;
+		leftBound = tracks[rightBound];
+	}
+	murmur("=======================");
+
+	return scores[length];
+}
+
+size_t BiGram::maximumMatching(
     DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
     size_t index, size_t stop, bool doBackward)
 {
 	vector<int> boundaryVector;
+	boundaryVector.reserve(MAX_CONTEXT_LENGTH);
 	vector< vector<Vocabulary> > vectorOfVocabularyVector;
+	vectorOfVocabularyVector.reserve(MAX_CONTEXT_LENGTH);
 	size_t begin = index;
 	size_t end = stop;
 	if(doBackward)
@@ -38,8 +222,8 @@ int BiGram::maximumMatching(
 	while(index < stop)
 	{
 		size_t offsetBound = stop - index;
-		if(offsetBound > 7)
-			offsetBound = 7;
+		if(offsetBound > MAX_CONTEXT_LENGTH)
+			offsetBound = MAX_CONTEXT_LENGTH;
 		bool foundFlag = false;
 		vector<string> initialCharacterStringVector =
             tokenVectorRef[index].characterStringVector;
@@ -78,7 +262,6 @@ int BiGram::maximumMatching(
 			for(size_t i = 0; i < currentCharacterStringVector.size(); ++i)
 			{
 				string tokenSequence = currentCharacterStringVector[i];
-				vector<Vocabulary> tempVocabularies;
 				if(dictionary->isVocabulary(tokenSequence))
 				{
 					foundFlag = true;
@@ -88,7 +271,7 @@ int BiGram::maximumMatching(
 
 			if(foundFlag)
 			{
-				if(bound < 5)
+				if(bound < MAX_CONTEXT_LENGTH)
 				{
 					for(size_t round = 0; round < bound; ++round)
 					{
@@ -143,33 +326,39 @@ int BiGram::maximumMatching(
 		}
 
 		vector<Vocabulary> currentVocabularyVector;
+		currentVocabularyVector.reserve(
+			DictionarySingleton::N_BEST * foundCharacterStringVector.size());
 		for(size_t j = 0; j < foundCharacterStringVector.size(); ++j)
 		{
 			string tokenSequence = foundCharacterStringVector[j];
 			vector<Vocabulary> vocabularies;
-			dictionary->getVocabulariesByKeystrokes(
-			    tokenSequence, vocabularies);
+			vocabularies.reserve(DictionarySingleton::N_BEST);
+			bool found = dictionary->getWordsByCharacters(
+			    tokenSequence, vocabularies, true);
+
+			//<comment author='b6s'> Shit happeds on Vista!
+			if(!found) return -1;
+			//</comment>
 
             for(size_t k = 0; k < vocabularies.size(); k++)
 				currentVocabularyVector.push_back(vocabularies[k]);
 		}
 
-		if(currentVocabularyVector[0].word.length() == 1 &&
-            currentVocabularyVector[0].freq > 99) {
-			size_t thrashold = 0;
+		size_t threshold = 0;
+		if(currentVocabularyVector[0].freq > 199) {
 			for(size_t step = 0; step < currentVocabularyVector.size(); step++)
 			{
-				if(currentVocabularyVector[step].freq < 100) {
-					thrashold = step;
+				if(currentVocabularyVector[step].freq < 200) {
+					threshold = step;
 					break;
 				}
 			}
-			
-			if(thrashold > 0)
-				currentVocabularyVector.erase(
-                    currentVocabularyVector.begin() + thrashold,
-                    currentVocabularyVector.end());
-		}
+		}	
+		if(threshold > 0)
+			currentVocabularyVector.erase(
+				currentVocabularyVector.begin() + threshold,
+				currentVocabularyVector.end());
+
 		vectorOfVocabularyVector.push_back(currentVocabularyVector);
 
 		index = currentIndex + 1;
@@ -188,9 +377,9 @@ int BiGram::maximumMatching(
                 rightVocabularyVector, leftVocabularyVector,
 				combinedVocabularyVector);
 		else
-            BiGram::getVocabularyCombination(
-                leftVocabularyVector, rightVocabularyVector,
-                combinedVocabularyVector);
+			BiGram::getVocabularyCombination(
+				leftVocabularyVector, rightVocabularyVector,
+				combinedVocabularyVector);
 	}
 
 	Vocabulary bestVocabularyCombination = combinedVocabularyVector.front();
@@ -230,43 +419,50 @@ void BiGram::getVocabularyCombination(
     vector<Vocabulary>& combinedRef)
 {
     vector<Vocabulary> combinedVocabularyVector;
-	size_t leftBound = leftRef.size();
-	if(leftBound > 5)
-		leftBound = 5;
-	size_t rightBound = rightRef.size();
-	if(rightBound > 5)
-		rightBound = 5;
+	//<comment author='b6s'> No needs to combine currently...
+	size_t leftBound = 1;
+	size_t rightBound = 1;
+	//</comment>
+	//size_t leftBound = leftRef.size();
+	//if(leftBound > N_BEST)
+	//	leftBound = N_BEST;
+	//size_t rightBound = rightRef.size();
+	//if(rightBound > N_BEST)
+	//	rightBound = N_BEST;
 
 	for(size_t i = 0; i < leftBound; ++i)
 	{
-		int matrix = 0;
 		for(size_t j = 0; j < rightBound; ++j)
 		{
-			Vocabulary combinedVocabulary;
-			combinedVocabulary.word = leftRef[i].word + rightRef[j].word;
+			Vocabulary combinedVocabulary(
+				leftRef[i].word + rightRef[j].word);
 
-			int leftFreq = leftRef[i].freq;
-			int rightFreq = rightRef[j].freq;
-			matrix = leftFreq + rightFreq;
-			/* Since there are many symbols and words that have zero count in tsi.src...
-			if(matrix == 0)
-				break;
-			*/
+			size_t leftFreq = leftRef[i].freq;
+			size_t rightFreq = rightRef[j].freq;
+			size_t matrix = leftFreq + rightFreq;
+			
+			double score = 0.0;
+			if(matrix > 0) {
+				combinedVocabulary.freq = matrix;
+				score = matrix;
+			} else {
+				combinedVocabulary.freq = 1;
+				score = 0.001f;
+			}
 
-            /*
-			int wordCount = combinedVocabulary.word.length();
-			combinedVocabulary.freq =
-                ((leftFreq * rightFreq) /
-                    (matrix * wordCount)) + (matrix / wordCount);
-            */
-            combinedVocabulary.freq = matrix;
+			combinedVocabulary.prob =
+				-(log(score) / log(2.0));
 			combinedVocabularyVector.push_back(combinedVocabulary);
 		}
-
-		// Zero count still has to be considered...
-		//if(matrix == 0)
-		//	break;
 	}
 	
+
+	//<comment author='b6s'> The order was prepared by SQL and won't change
+	//sort(
+	//	combinedVocabularyVector.begin(),
+	//	combinedVocabularyVector.end(),
+	//	Vocabulary::isProbGreater);
+	//</comment>
+
 	combinedRef = combinedVocabularyVector;
 }

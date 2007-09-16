@@ -6,11 +6,15 @@
 class Candidate : public Vocabulary
 {
 public:
-	Candidate();
-	Candidate(Vocabulary& voc);
-	~Candidate();
+	Candidate(const string& aWord);
+	Candidate(Vocabulary& aVocabulary);
 
 	size_t position;
 };
 
+struct CandidateType
+{
+	static const int WORD = 0;
+	static const int VOCABLE = 1;
+};
 #endif

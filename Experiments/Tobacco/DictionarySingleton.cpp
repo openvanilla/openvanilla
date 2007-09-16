@@ -1,7 +1,6 @@
-#define OV_DEBUG
+//#define OV_DEBUG
 
 #include <vector>
-#include <algorithm>
 
 #include "DictionarySingleton.h"
 
@@ -13,23 +12,42 @@
 
 using namespace std;
 
-DictionarySingleton* DictionarySingleton::itsInstance = NULL;
-SQLite3* DictionarySingleton::dictionaryDB = NULL;
+DictionarySingleton* DictionarySingleton::itsInstance = 0;
+SQLite3* DictionarySingleton::dictionaryDB = 0;
+SQLite3* DictionarySingleton::imTableDB = 0;
 
 DictionarySingleton::DictionarySingleton(
     const char* dbFilePath)
 {
     murmur("new DictionarySingleton");
 
-    DictionarySingleton::dictionaryDB = new SQLite3;
-    if (int err = DictionarySingleton::dictionaryDB->open(dbFilePath)) {
+	int err = 0;
+
+	char tsiDbFilePath[256];
+	sprintf(tsiDbFilePath, "%s/tsi.db", dbFilePath);
+    dictionaryDB = new SQLite3;
+    if ((err = dictionaryDB->open(tsiDbFilePath)))
         murmur("SQLite3 error! code=%d", err);
-    }
+
+	char imDbFilePath[256];
+	sprintf(imDbFilePath, "%s/imtables.db", dbFilePath);
+	imTableDB = new SQLite3;
+    if ((err = imTableDB->open(imDbFilePath)))
+        murmur("SQLite3 error! code=%d", err);
+
+	m_profileManager = ProfileManager::getInstance();
 }
 
 DictionarySingleton::~DictionarySingleton()
 {
     delete DictionarySingleton::dictionaryDB;
+
+	delete [] &vocableString;
+	delete [] &viewLimitString;
+	delete [] &viewString;
+	delete [] &checkString;
+
+	m_profileManager->releaseInstance();
 }
 
 void DictionarySingleton::lostInstance()
@@ -41,125 +59,128 @@ void DictionarySingleton::lostInstance()
 }
 
 bool DictionarySingleton::isVocabulary(string characters)
-{
-    string strTableName = DictionarySingleton::inputMethodId;
-    strTableName += "_char2word_table";
-    string strColumnWordID = strTableName + ".wordID";    
-    string strColumnCharacters = strTableName + ".characters";
-      
-    string selectString("SELECT count(" + strColumnWordID + ")");
-    string fromString(" FROM ");
-    fromString += strTableName;
-    string whereString(" WHERE ");
-    whereString += strColumnCharacters + " = '" + characters + "'";
-    string commandString = selectString + fromString + whereString;
-
+{      
     SQLite3Statement *sth =
-        DictionarySingleton::dictionaryDB->prepare(commandString.c_str());
+        DictionarySingleton::dictionaryDB->prepare(checkString);
     if (!sth) {
-        murmur("illegal SQL statement[%s]?", commandString.c_str());
+        murmur("illegal SQL statement[%s]?", checkString);
         return false;
     }
+	
+	sth->bind_text(1, characters.c_str());
 
     if (sth->step() == SQLITE_ROW) {
-        int count = sth->column_int(0);
-        murmur("found[%d]", count);
-        delete sth;
-        
-        if (count > 0)  return true;
-        else            return false;
+		murmur("found!");
+		delete sth;
+		return true;
     }
     else
     {
-        delete sth;
-        murmur("found count but encountered error?");
-        return false;
+		murmur("not found...");
+		delete sth;
+		return false;
     }
 }
 
-bool DictionarySingleton::getVocabulariesByKeystrokes(
-	string keystrokes, vector<Vocabulary>& vocabulariesRef)
+bool DictionarySingleton::getWordsByCharacters(string characters,
+    vector<Vocabulary>& vocabularyVectorRef, bool isLimited)
 {
-    /// key2word table schema:  |key|wordID|
-    /// word table schema:      |wordID|word|
-    /// frequency table schema: |wordID|freq|
+	//@{
+	//@warning first fetches learned data here, not finished yet.
+	vector<Profile>* profiles = m_profileManager->fetch(characters);
+	if(profiles) {
+		for(vector<Profile>::const_iterator i = profiles->begin();
+			i != profiles->end();
+			++i)
+		{
+			Vocabulary currentVocabulary(i->id.pattern);
+			currentVocabulary.freq = i->hitRate; //< this is not good enough.
+
+			vocabularyVectorRef.push_back(currentVocabulary);
+		}
+	}
+	//@}
+
+    /// characters-word table schema:    |characters|wordID|
+    /// word table schema:               |wordID|word|
+    /// frequency table schema:          |wordID|freq|
     ///
     /// The reasons why to separate into 3 tables are:
     /// 1. Characters can be different by different input methods.
     /// 2. Different frequency table represents different "context" or
-    ///    "user profile," for example, "freq_zh_Hant_contextBar." 
-    /// 3. Support words in zh_Hans and zh_Holo, etc.
+    ///    "user profile".
     ///
     /// A SQL statement for example:
-    /// SELECT word_zh_Hant.word, freq_zh_Hant_generic.freq, key2word_bpmf.ord
-    /// FROM key2word_bpmf, word_zh_Hant, freq_zh_Hant_generic
-    /// WHERE key2word_bpmf.key = 'foo'
-    ///     AND word_zh_Hant.wordID = key2word_bpmf.wordID
-    ///     AND word_zh_Hant.wordID = freq_zh_Hant_generic.wordID
-    /// ORDER BY freq_zh_Hant_generic.freq DESC"
+    /// SELECT word_table.word, generic_freq_table.freq
+    /// FROM BoPoMoFo_char2word_table, word_table, generic_freq_table
+    /// WHERE BoPoMoFo_char2word_table.characters = '£t£«£¿'
+    ///     AND BoPoMoFo_char2word_table.wordID = word_table.wordID
+    ///     AND BoPoMoFo_char2word_table.wordID = generic_freq_table.wordID
     ///
     /// Since there're two inner joins,
     /// the order of tables and columns are very very important.
-      
-    /// bind_foo seems not work on table/column name (sure it can't!),
-    /// so use stupid concat...
-    string tableIM = "key2word_" + DictionarySingleton::inputMethodId;
-    string lang = "zh_Hant";
-    string tableWord = "word_" + lang;
-    string tableFreq = "freq_" + lang;
-    string selectString("SELECT ");
-    selectString +=
-    	tableWord + ".word, " + tableFreq + ".freq, " + tableIM + ".ord";
-    string fromString(" FROM ");
-    fromString += tableIM + ", " + tableWord + ", " + tableFreq;
-    string whereString(" WHERE ");
-    whereString += tableIM + ".key = '" + keystrokes + "'";
-    whereString += " AND " + tableWord + ".wordID = " + tableIM + ".wordID" +
-        " AND " + tableWord + ".wordID = " + tableFreq + ".wordID";
-    whereString += " ORDER BY " + tableFreq + ".freq DESC";
-    string commandString = selectString + fromString + whereString;
 
-    SQLite3Statement *sth =
-        DictionarySingleton::dictionaryDB->prepare(commandString.c_str());
+	SQLite3Statement *sth = NULL;
+	const char* command = NULL;
+	if(isLimited)
+		command = viewLimitString;
+	else
+		command = viewString;	
+	sth = dictionaryDB->prepare(command);
     if (!sth) {
-        murmur("illegal SQL statement[%s]?", commandString.c_str());
+        murmur("illegal SQL statement[%s]?", command);
+		return false;
+    }
+	sth->bind_text(1, characters.c_str());
+
+    int rows = 0;
+    while (sth->step() == SQLITE_ROW) {
+		rows++;
+        const char* word = sth->column_text(0);
+        murmur("found[%s]", word);
+        int freq = sth->column_int(1);
+        Vocabulary currentVocabulary(word);
+        currentVocabulary.freq = freq;
+        
+        vocabularyVectorRef.push_back(currentVocabulary);
+    }
+
+	if (!rows) {
+		delete sth;
         return false;
     }
-    
-    int rows = 0;
-    while (sth->step() == SQLITE_ROW) rows++;
-
     murmur("query string=%s, number of candidates=%d",
-        keystrokes.c_str(), rows);
+        characters.c_str(), rows);
+
+	delete sth;
+    return true;
+}
+
+bool DictionarySingleton::getVocablesByCharacters(string characters,
+    vector<Vocabulary>& vocabularyVectorRef)
+{
+    SQLite3Statement *sth =
+		imTableDB->prepare(vocableString);
+    if (!sth) return false;
+	sth->bind_text(1, characters.c_str());
+       
+    int rows=0;
+    while (sth->step()==SQLITE_ROW) {
+		rows++;
+        const char* word = sth->column_text(0);
+        murmur("found[%s]", word);
+        int order = sth->column_int(1);
+        Vocabulary currentVocabulary(word);
+        currentVocabulary.word = string(word);
+		currentVocabulary.order = order;
+        
+        vocabularyVectorRef.push_back(currentVocabulary);
+    }
     if (!rows) {
         delete sth;
         return false;
     }
 
-    sth->reset();
-    
-    // count token numbers by '\t'.
-    int length = 1;
-    string::size_type index = 0;
-    while(index != string::npos) {
-	    index = keystrokes.find('\t', index);
-	    if(index != string::npos)
-	    	length++;
-	}
-
-    while (sth->step() == SQLITE_ROW) {
-        const char* word = sth->column_text(0);
-        murmur("found[%s]", word);
-        int freq = sth->column_int(1);
-        int order = sth->column_int(2);
-        Vocabulary currentVocabulary;
-        currentVocabulary.word = string(word);
-        currentVocabulary.freq = freq;
-        currentVocabulary.order = order;
-        currentVocabulary.length = length;
-        
-        vocabulariesRef.push_back(currentVocabulary);
-    }
-    delete sth;
+	delete sth;
     return true;
 }

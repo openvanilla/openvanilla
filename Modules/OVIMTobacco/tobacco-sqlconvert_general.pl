@@ -3,7 +3,7 @@ use strict;
 use utf8;
 use Encode;
 
-my %wordMap;
+my %word2FreqHash;
 my %word2IdHash;
 my $fn_tsi;
 
@@ -15,24 +15,26 @@ print "begin;\n";
 
 # reading tsi_punctuation.src
 open (HNDL, $fn_tsi) or die $!;
+
+my $idCounter = 0;
 while(<HNDL>) {
     chomp;
     if (/#?\s*(\S+)\s+(\d+)\s+(.+)/) {
         my $w=decode("utf8", $1);
-
-        $wordMap{$w} = 1 unless exists $wordMap{$w};
+	if (exists $word2FreqHash{$w}) {
+		$word2FreqHash{$w} += $2;
+	}
+	else {
+        	$word2FreqHash{$w} = $2;
+		$word2IdHash{$w} = $idCounter;
+		$idCounter++;
+	}
     }
 }
 close HNDL;
 
-my $idCounter = 0;
-my @words = keys(%wordMap);
-@words = sort @words;
-for(@words) {
-    $word2IdHash{$_} = $idCounter;
-    $idCounter = $idCounter + 1;
-}
-
+my @words = keys(%word2IdHash);
+ 
 # reading xxx.cin
 for my $fn_cin (@ARGV) {
     open (HNDL, "<:utf8",$fn_cin) or die $!;
@@ -45,7 +47,7 @@ for my $fn_cin (@ARGV) {
 	chomp;
 	if ($_ =~ m/^%ename\s+([^\s]+)/) {
 	    $table_prefix = $1;
-	    printf "CREATE TABLE %s_char2word_table(characters TEXT, wordID INTEGER);\n",
+	    printf "CREATE TABLE %s_char2word_table(characters TEXT, wordId INTEGER, prob REAL);\n",
 		$table_prefix;
 	    printf "CREATE INDEX %s_index_characters ON %s_char2word_table(characters);\n",
 		$table_prefix, $table_prefix;
@@ -64,9 +66,10 @@ for my $fn_cin (@ARGV) {
     close HNDL;
 
     for(@words) {   # "不好"
-	my $wordId = $word2IdHash{$_};
+	my $currentWord = $_;
+	my $wordId = $word2IdHash{$currentWord};
 	#print "\ncurrent word: $wordId:$_\n";
-	my @wordSequence = split(//, $_);   # {"不","好"}
+	my @wordSequence = split(//, $currentWord);   # {"不","好"}
 	my @charSequenceArray = qw//;
 	my $flag = 1;
 	for(@wordSequence) {	# "不"
@@ -119,7 +122,7 @@ for my $fn_cin (@ARGV) {
 	    }
 
 	    for(keys(%combinationMap)) {
-		printf "insert into %s_char2word_table values ('%s', %d);\n", $table_prefix, sprintf("%s", $_), $wordId;
+		printf "insert into %s_char2word_table values ('%s', %d, %f);\n", $table_prefix, sprintf("%s", $_), $wordId, $word2FreqHash{$currentWord};
 	    }
 	}
     }

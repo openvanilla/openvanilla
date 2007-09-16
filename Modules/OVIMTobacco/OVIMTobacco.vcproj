@@ -4,6 +4,7 @@
 	Version="8.00"
 	Name="OVIMTobacco"
 	ProjectGUID="{06DD6384-CF74-4115-AFC9-E6BA2D818E12}"
+	RootNamespace="OVIMTobacco"
 	Keyword="ExtStoredProcProj"
 	>
 	<Platforms>
@@ -43,7 +44,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\Framework\Headers;..\SharedHeaders;..\..\Experiments\Tobacco"
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL;_CRT_SECURE_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -79,6 +80,7 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
+				UseFAT32Workaround="true"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -97,6 +99,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\Windows\OpenVanilla\Modules\OVIMTobacco.dll&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -127,7 +130,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="..\..\Framework\Headers;..\SharedHeaders;..\..\Experiments\Tobacco"
-				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL;_CRT_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
@@ -164,6 +167,7 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
+				UseFAT32Workaround="true"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -182,6 +186,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\Windows\OpenVanilla\Modules\OVIMTobacco.dll&quot;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -221,6 +226,26 @@
 				RelativePath="..\..\Experiments\Tobacco\Vocabulary.cpp"
 				>
 			</File>
+			<Filter
+				Name="OnlineLearning"
+				>
+				<File
+					RelativePath="..\..\Experiments\Tobacco\Cache.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Experiments\Tobacco\Profile.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Experiments\Tobacco\ProfileFetcher.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Experiments\Tobacco\ProfileManager.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="¼ÐÀYÀÉ"
@@ -232,11 +257,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\bpmfReplace.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Experiments\Tobacco\Candidate.h"
 				>
 			</File>
 			<File
 				RelativePath="..\..\Experiments\Tobacco\DictionarySingleton.h"
+				>
+			</File>
+			<File
+				RelativePath=".\hsukey.h"
+				>
+			</File>
+			<File
+				RelativePath="..\SharedHeaders\OVOSDef.h"
 				>
 			</File>
 			<File
@@ -251,6 +288,26 @@
 				RelativePath="..\..\Experiments\Tobacco\Vocabulary.h"
 				>
 			</File>
+			<Filter
+				Name="OnlineLearning"
+				>
+				<File
+					RelativePath="..\..\Experiments\Tobacco\Cache.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Experiments\Tobacco\Profile.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Experiments\Tobacco\ProfileFetcher.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Experiments\Tobacco\ProfileManager.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="¸ê·½ÀÉ"
@@ -258,10 +315,6 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 		</Filter>
-		<File
-			RelativePath=".\ReadMe.txt"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
