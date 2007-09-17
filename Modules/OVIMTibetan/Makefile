@@ -1,6 +1,6 @@
 # Makefile for OVIMTibetan
 #
-# Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
+# Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -30,5 +30,6 @@
 
 MODULEID=OVIMTibetan
 SOURCES=OVIMTibetan
+PROJECT=OVIMTibetan.xcodeproj
 
 include ../Mk/ov.module.mk

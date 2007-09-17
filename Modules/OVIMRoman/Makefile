@@ -30,5 +30,6 @@
 
 MODULEID=OVIMRoman
 SOURCES=OVIMRoman
+PROJECT=OVIMRoman.xcodeproj
 
 include ../Mk/ov.module.mk

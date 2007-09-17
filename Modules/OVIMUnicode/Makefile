@@ -30,6 +30,7 @@
 
 MODULEID=OVIMUnicode
 SOURCES=OVIMUnicode
+PROJECT=OVIMUnicode.xcodeproj
 
 include ../Mk/ov.module.mk
 

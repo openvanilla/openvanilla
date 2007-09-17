@@ -1,0 +1,5 @@
+//
+// Prefix header for all source files of the 'OVOFFullWidthCharacter' target in the 'OVOFFullWidthCharacter' project.
+//
+
+#include <Carbon/Carbon.h>

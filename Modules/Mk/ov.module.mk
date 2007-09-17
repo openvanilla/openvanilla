@@ -53,6 +53,9 @@ INSTALL_PREFIX?=/usr/local/
 INSTALL_LIBPREFIX?=/lib/
 OV_INCLUDE=/usr/local/include
 
+BUILDER=xcodebuild
+CONFIG?=Release
+
 ###### OS Settings
 
 OS?=$(shell uname)
@@ -155,13 +158,15 @@ help:
 	@echo "    OS_COMPILE         Target platform at compiling stage (default=OS)"
 	@echo "    OS_INSTALL         Target platform at installation stage (default=OS)"
 	@echo "    VARIANT            Build the variant (if any)"
-
 ifdef HAS_VARIANTS
 	@echo "This module has the following variant(s):"
 	@echo "    $(HAS_VARIANTS)"
 else
 	@echo "This modules does not have any variant."
 endif    
+
+bundle:
+	$(BUILDER) -project $(PROJECT) -configuration $(CONFIG) build $(MAKEFLAGS)
 
 ###### Variables
 

@@ -44,6 +44,9 @@
 	//</comment>
 #endif
 #include <utility>
+#ifdef OSX_INCLUDE
+        #include <Carbon/Carbon.h>
+#endif
 
 using namespace std;
 using namespace OV_Array;
@@ -357,14 +360,33 @@ void OVIMArrayContext::changeState(STATE s){
 }
 
 int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path) {
+    char arraypath[PATH_MAX];
     char buf[PATH_MAX];
     char *cinfiles[] = { 
-        "%sOVIMArray%sarray30.cin",  
+        /* "%sOVIMArray%sarray30.cin",  
         "%sOVIMArray%sarray-shortcode.cin",
-        "%sOVIMArray%sarray-special.cin"
+        "%sOVIMArray%sarray-special.cin" */
+        "%sarray30.cin",  
+        "%sarray-shortcode.cin",
+        "%sarray-special.cin"
     };
+
+#ifdef OSX_INCLUDE
+    CFBundleRef bundle = CFBundleGetBundleWithIdentifier(CFSTR("org.openvanilla.module.ovimarray"));
+    if (!bundle) return 0;
+
+    CFURLRef url = CFBundleCopyResourcesDirectoryURL(bundle);
+    if (!url) return 0;
+
+    CFURLGetFileSystemRepresentation(url, TRUE, (UInt8*)buf, sizeof(buf)-1);
+    sprintf(arraypath, "%s/", buf);
+#else
+    sprintf(arraypath, "%sOVIMArray%s", path, s->pathSeparator());
+#endif
+    printf("OVIMArray: data dir %s", arraypath);
+
     for(int i=0;i<3;i++){
-        sprintf(buf, cinfiles[i], path, s->pathSeparator());
+        sprintf(buf, cinfiles[i], arraypath);
         murmur("OVIMArray: open cin %s", buf);
         tabs[i] = new OVCIN(buf); 
     }

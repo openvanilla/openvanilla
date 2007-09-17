@@ -31,5 +31,6 @@
 MODULEID=OVIMArray
 SOURCES=OVIMArray OVCIN OVStringToolKit OVFileHandler OVCandidateList
 DATA=array30.cin array-shortcode.cin array-special.cin
+PROJECT=OVIMArray.xcodeproj
 
 include ../Mk/ov.module.mk

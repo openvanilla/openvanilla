@@ -30,6 +30,7 @@
 
 MODULEID=OVIMBig5
 SOURCES=OVIMBig5 Big5ToUnicodeTable
+PROJECT=OVIMBig5.xcodeproj
 
 include ../Mk/ov.module.mk
 
