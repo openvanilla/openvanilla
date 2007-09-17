@@ -95,7 +95,7 @@ double BiGram::viterbi(
 								//@{
 								if(rightGrams[i].word.length() > 3)
 									bigramBackOff *=
-										rightGrams[i].word.length() * 100.0f;
+										rightGrams[i].word.length() * 1500.0f;
 								//@}
 									//lm_->getBackOff(rightGram);
 								tempScore += bigramBackOff;
@@ -104,7 +104,7 @@ double BiGram::viterbi(
 									j,
 									leftGrams[j].word.c_str(),
 									leftGrams[j].freq);
-								murmur(
+								murmur( 
 									"rightGrams[%i]:%s=%i",
 									i,
 									rightGrams[i].word.c_str(),
@@ -136,7 +136,7 @@ double BiGram::viterbi(
 						// tsi.src.
 						//@{
 						if(rightGrams[i].word.length() > 3)
-							tempScore *= rightGrams[i].word.length() * 100.0f;
+							tempScore *= rightGrams[i].word.length() * 1500.0f;
 						//@}
 						murmur(
 							"rightGrams[%i]:%s=%f",
@@ -149,7 +149,7 @@ double BiGram::viterbi(
 							bestPrefix = innerPrefix;
 							bestWord = rightGrams[i].word;
 						}				
-					}
+					} 
 				/*
 				}
 				else
