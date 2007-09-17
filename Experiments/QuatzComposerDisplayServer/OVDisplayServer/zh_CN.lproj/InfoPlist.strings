@@ -1,5 +1,0 @@
-/* Localized versions of Info.plist keys */
-
-CFBundleName = "OpenVanilla 显示服务器";
-CFBundleDisplayName = "OpenVanilla 显示服务器";
-NSHumanReadableCopyright = "© The OpenVanilla Project, 2004-2006";
