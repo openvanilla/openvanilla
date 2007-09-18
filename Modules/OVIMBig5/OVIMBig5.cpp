@@ -65,6 +65,18 @@ public:
         OVService *srv)
     {
 		if (key->isOpt() || key->isCommand() || key->isCtrl()) return 0;
+		
+		char * notitext;
+		if (!strcasecmp(srv->locale(), "zh_TW")) {
+			notitext = "[Big5 內碼] ";
+		}
+		else if (!strcasecmp(srv->locale(), "zh_CN")) {
+			notitext = "[Big5 内码] ";
+		}
+		else {
+			notitext = "[Big5 Hex] ";			
+		}	
+		
 
         if (key->code()==ovkReturn || key->code()==ovkSpace) {
             if (!(strlen(keyseq.buf))) return 0;   // empty buffer, do nothing
@@ -76,7 +88,15 @@ public:
             } else {
                 buf->clear()->update();
                 textbar->clear()->hide();
-                srv->notify("Sorry. No such code!");
+				if (!strcasecmp(srv->locale(), "zh_TW")) {
+					srv->notify("錯誤：您輸入的不是正確的 Big5 內碼");
+				}
+				else if (!strcasecmp(srv->locale(), "zh_CN")) {
+					srv->notify("错误：您输入的不是正确的 Big5 内码");
+				}
+				else {
+					srv->notify("Error. No such code!");
+				}	
                 srv->beep();
             }
             return 1;   // key processed
@@ -95,7 +115,8 @@ public:
 			if(!strlen(keyseq.buf)) 
 				textbar->clear()->hide();
 			else
-				textbar->clear()->append((char *)"[Big5 Hex] ")->append(keyseq.buf)->update()->show();
+				//textbar->clear()->append((char *)"[Big5 Hex] ")->append(keyseq.buf)->update()->show();
+				textbar->clear()->append(notitext)->append(keyseq.buf)->update()->show();				
 			buf->clear()->append(keyseq.buf)->update();
 			return 1;
 		}
@@ -108,7 +129,8 @@ public:
 			{
 				keyseq.add(key->code());
 				buf->clear()->append(keyseq.buf)->update();
-				textbar->clear()->append((char *)"[Big5 Hex] ")->append(keyseq.buf)->update()->show();
+//				textbar->clear()->append((char *)"[Big5 Hex] ")->append(keyseq.buf)->update()->show();
+				textbar->clear()->append(notitext)->append(keyseq.buf)->update()->show();
 			} else {
 			    srv->beep();
 			}
