@@ -6,10 +6,14 @@
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>OVIconChanger Help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>OpenVanilla Icon Changer Help</string>
 	<key>CFBundleIconFile</key>
-	<string>DisplayServerIcon</string>
+	<string>OVIconChanger</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.iconchanger</string>
+	<string>org.openvanilla.utilities.iconchanger</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -19,16 +23,12 @@
 	<key>CFBundleSignature</key>
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>0.7.2</string>
+	<string>0.8.0</string>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>CFBundleHelpBookFolder</key>
-	<string>OVIconChanger Help</string>
-	<key>CFBundleHelpBookName</key>
-	<string>OpenVanilla Icon Changer Help</string>
 </dict>
 </plist>

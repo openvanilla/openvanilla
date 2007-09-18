@@ -31,6 +31,7 @@
 //
 
 "OpenVanillaMenuIcon" = "The default OpenVanilla icon";
+"OpenVanillaMenuIconOld" = "The previous default OpenVanilla icon";
 "b-array" = "Icon of Array Input Method";
 "b-bo-1" = "Icon of Tibetan Input Method";
 "b-bo-2" = "Icon of Tibetan Input Method";
@@ -74,3 +75,5 @@
 "esperanto" = "Logo of Esperanto";
 "rainbow" = "Rainbow Flag";
 "trans" = "Transgender Pride flag";
+"bsd" = "FreeBSD, the Power to Serve";
+"che" = "Che Guevara";

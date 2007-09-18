@@ -45,11 +45,11 @@
 #define LCP			"/Library/Components"
 #define OV063		"/OVLoader.bundle"
 #define OV07x		"/OVInit.bundle"
-#define OV072		"/OpenVanilla-TSComponent-0.7.2.bundle"
-#define OV072TC		"/OpenVanilla-TSComponent-0.7.2-TC.bundle"
-#define OV072SC		"/OpenVanilla-TSComponent-0.7.2-SC.bundle"
+#define OV080		"/OpenVanilla-TSComponent-0.8.0.bundle"
+#define OV080TC		"/OpenVanilla-TSComponent-0.8.0-TC.bundle"
+#define OV080SC		"/OpenVanilla-TSComponent-0.8.0-SC.bundle"
 #define MENUICON	"/Contents/Resources/OpenVanillaMenuIcon.icns"
-#define USERICONPATH	"~/Library/OpenVanilla/0.7.2/Icons"
+#define USERICONPATH	"~/Library/OpenVanilla/0.8.0/Icons"
 
 @implementation Delegate
 
@@ -83,7 +83,7 @@
     NSMutableDictionary *d=[NSMutableDictionary new];
     NSString *filename = [path lastPathComponent];
 
-    if([filename isEqualToString:@"DisplayServerIcon.icns"]) return; // We do not use the icon of this application
+    if([filename isEqualToString:@"OVIconChanger.icns"]) return; // We do not use the icon of this application
     NSImage *preview = [NSImage new];
     [preview initByReferencingFile:path];
     [preview setSize:NSMakeSize(size, size)];
@@ -385,25 +385,25 @@
     tmpnam(tmpfn);
     NSLog(@"Temp script file created as %s", tmpfn);
     NSMutableString *script=[NSMutableString new];
-    [script autorelease];	
-
-    if ([self pathExists:LCP OV072]) {
-	[self copyToTarget: LCP OV072 MENUICON source: iconpath script:script];
+    [script autorelease];
+	
+    if ([self pathExists:LCP OV080]) {
+		[self copyToTarget: LCP OV080 MENUICON source: iconpath script:script];
     }
-
-    if ([self pathExists:LCP OV072TC]) {
-	[self copyToTarget: LCP OV072TC MENUICON source: iconpath script:script];
+	
+    if ([self pathExists:LCP OV080TC]) {
+		[self copyToTarget: LCP OV080TC MENUICON source: iconpath script:script];
     }
-
-    if ([self pathExists:LCP OV072SC]) {
-	[self copyToTarget: LCP OV072SC MENUICON source: iconpath script:script];		
-    }
+	
+    if ([self pathExists:LCP OV080SC]) {
+		[self copyToTarget: LCP OV080SC MENUICON source: iconpath script:script];		
+    }	
 
     NSLog(@"Scripts: %d", [script length]);
 
     if([script length] ==0) {
 	NSAlert *errorbox=[NSAlert
-	    alertWithMessageText:MSG(@"You did not install any newer version then 0.72 of OpenVanilla!")
+	    alertWithMessageText:MSG(@"You did not install any newer version then 0.8.0 of OpenVanilla!")
 	    defaultButton:MSG(@"OK")
 	    alternateButton:nil			
 	    otherButton:nil

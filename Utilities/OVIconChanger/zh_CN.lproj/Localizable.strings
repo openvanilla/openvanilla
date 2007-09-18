@@ -31,6 +31,7 @@
 //
 
 "OpenVanillaMenuIcon" = "OpenVanilla 预设图标";
+"OpenVanillaMenuIconOld" = "OpenVanilla 前版预设图标";
 "b-array" = "行列输入法图标";
 "b-bo-1" = "藏文输入法图标";
 "b-bo-2" = "藏文输入法图标";
@@ -74,3 +75,5 @@
 "esperanto" = "世界语图标";
 "rainbow" = "彩虹旗";
 "trans" = "跨性别骄傲旗帜";
+"bsd" = "FreeBSD 小恶魔";
+"che" = "切．格瓦拉";

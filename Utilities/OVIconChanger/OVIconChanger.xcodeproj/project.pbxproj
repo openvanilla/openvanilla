@@ -12,56 +12,59 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		D423D5C00C1295A30058F65D /* DisplayServerIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D423D5BF0C1295A30058F65D /* DisplayServerIcon.icns */; };
 		D44E43830C12F78800A0E7D7 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44E43820C12F78800A0E7D7 /* Carbon.framework */; };
 		D451CE710C12F68200919FB3 /* IconFamily.m in Sources */ = {isa = PBXBuildFile; fileRef = D451CE700C12F68200919FB3 /* IconFamily.m */; };
 		D451CE780C12F6D300919FB3 /* NSString+CarbonFSRefCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = D451CE770C12F6D300919FB3 /* NSString+CarbonFSRefCreation.m */; };
-		D4A910910C137074006A5A1E /* cn.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A9108C0C137074006A5A1E /* cn.icns */; };
-		D4A910920C137074006A5A1E /* hk-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A9108D0C137074006A5A1E /* hk-1.icns */; };
-		D4A910930C137074006A5A1E /* hk-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A9108E0C137074006A5A1E /* hk-2.icns */; };
-		D4A910940C137074006A5A1E /* kaohsiung-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A9108F0C137074006A5A1E /* kaohsiung-2.icns */; };
-		D4A910950C137074006A5A1E /* kaoshiung-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910900C137074006A5A1E /* kaoshiung-1.icns */; };
-		D4A9109B0C13708E006A5A1E /* macau-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910960C13708E006A5A1E /* macau-1.icns */; };
-		D4A9109C0C13708E006A5A1E /* macau-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910970C13708E006A5A1E /* macau-2.icns */; };
-		D4A9109D0C13708E006A5A1E /* nccu.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910980C13708E006A5A1E /* nccu.icns */; };
-		D4A9109E0C13708E006A5A1E /* ncku.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910990C13708E006A5A1E /* ncku.icns */; };
-		D4A9109F0C13708E006A5A1E /* nctu.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A9109A0C13708E006A5A1E /* nctu.icns */; };
-		D4A910A80C1370B2006A5A1E /* ntu.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910A00C1370B2006A5A1E /* ntu.icns */; };
-		D4A910A90C1370B2006A5A1E /* qing-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910A10C1370B2006A5A1E /* qing-1.icns */; };
-		D4A910AA0C1370B2006A5A1E /* qing-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910A20C1370B2006A5A1E /* qing-2.icns */; };
-		D4A910AB0C1370B2006A5A1E /* roc-old-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910A30C1370B2006A5A1E /* roc-old-1.icns */; };
-		D4A910AC0C1370B2006A5A1E /* roc-old-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910A40C1370B2006A5A1E /* roc-old-2.icns */; };
-		D4A910AD0C1370B2006A5A1E /* sg.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910A50C1370B2006A5A1E /* sg.icns */; };
-		D4A910AE0C1370B2006A5A1E /* taichung.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910A60C1370B2006A5A1E /* taichung.icns */; };
-		D4A910AF0C1370B2006A5A1E /* tp-sssh.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910A70C1370B2006A5A1E /* tp-sssh.icns */; };
-		D4A910DF0C137EB0006A5A1E /* anarchist.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910D90C137EB0006A5A1E /* anarchist.icns */; };
-		D4A910E00C137EB0006A5A1E /* chinesetaipei.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910DA0C137EB0006A5A1E /* chinesetaipei.icns */; };
-		D4A910E10C137EB0006A5A1E /* earth.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910DB0C137EB0006A5A1E /* earth.icns */; };
-		D4A910E20C137EB0006A5A1E /* esperanto.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910DC0C137EB0006A5A1E /* esperanto.icns */; };
-		D4A910E30C137EB0006A5A1E /* rainbow.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910DD0C137EB0006A5A1E /* rainbow.icns */; };
-		D4A910E40C137EB0006A5A1E /* trans.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4A910DE0C137EB0006A5A1E /* trans.icns */; };
+		D45FFB9D0C9FEFFA001EC974 /* OVIconChanger.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFB9C0C9FEFFA001EC974 /* OVIconChanger.icns */; };
+		D45FFBE50C9FF445001EC974 /* anarchist.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBAF0C9FF445001EC974 /* anarchist.icns */; };
+		D45FFBE60C9FF445001EC974 /* b-array.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBB00C9FF445001EC974 /* b-array.icns */; };
+		D45FFBE70C9FF445001EC974 /* b-bo-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBB10C9FF445001EC974 /* b-bo-1.icns */; };
+		D45FFBE80C9FF445001EC974 /* b-bo-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBB20C9FF445001EC974 /* b-bo-2.icns */; };
+		D45FFBE90C9FF445001EC974 /* b-bpmf.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBB30C9FF445001EC974 /* b-bpmf.icns */; };
+		D45FFBEA0C9FF445001EC974 /* b-chewing.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBB40C9FF445001EC974 /* b-chewing.icns */; };
+		D45FFBEB0C9FF445001EC974 /* b-eten.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBB50C9FF445001EC974 /* b-eten.icns */; };
+		D45FFBEC0C9FF445001EC974 /* b-pai.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBB60C9FF445001EC974 /* b-pai.icns */; };
+		D45FFBED0C9FF445001EC974 /* b-poj.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBB70C9FF445001EC974 /* b-poj.icns */; };
+		D45FFBEE0C9FF445001EC974 /* b-sss.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBB80C9FF445001EC974 /* b-sss.icns */; };
+		D45FFBEF0C9FF445001EC974 /* b-tai.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBB90C9FF445001EC974 /* b-tai.icns */; };
+		D45FFBF00C9FF445001EC974 /* b-tobaco.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBBA0C9FF445001EC974 /* b-tobaco.icns */; };
+		D45FFBF10C9FF445001EC974 /* bsd.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBBB0C9FF445001EC974 /* bsd.icns */; };
+		D45FFBF20C9FF445001EC974 /* che.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBBC0C9FF445001EC974 /* che.icns */; };
+		D45FFBF30C9FF445001EC974 /* chinesetaipei.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBBD0C9FF445001EC974 /* chinesetaipei.icns */; };
+		D45FFBF40C9FF445001EC974 /* cn.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBBE0C9FF445001EC974 /* cn.icns */; };
+		D45FFBF50C9FF445001EC974 /* earth.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBBF0C9FF445001EC974 /* earth.icns */; };
+		D45FFBF60C9FF445001EC974 /* esperanto.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBC00C9FF445001EC974 /* esperanto.icns */; };
+		D45FFBF70C9FF445001EC974 /* hk-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBC10C9FF445001EC974 /* hk-1.icns */; };
+		D45FFBF80C9FF445001EC974 /* hk-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBC20C9FF445001EC974 /* hk-2.icns */; };
+		D45FFBF90C9FF445001EC974 /* kaohsiung-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBC30C9FF445001EC974 /* kaohsiung-2.icns */; };
+		D45FFBFA0C9FF445001EC974 /* kaoshiung-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBC40C9FF445001EC974 /* kaoshiung-1.icns */; };
+		D45FFBFE0C9FF445001EC974 /* macau-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBC80C9FF445001EC974 /* macau-1.icns */; };
+		D45FFBFF0C9FF445001EC974 /* macau-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBC90C9FF445001EC974 /* macau-2.icns */; };
+		D45FFC000C9FF445001EC974 /* nccu.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBCA0C9FF445001EC974 /* nccu.icns */; };
+		D45FFC010C9FF445001EC974 /* ncku.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBCB0C9FF445001EC974 /* ncku.icns */; };
+		D45FFC020C9FF445001EC974 /* nctu.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBCC0C9FF445001EC974 /* nctu.icns */; };
+		D45FFC050C9FF445001EC974 /* ntu.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBCF0C9FF445001EC974 /* ntu.icns */; };
+		D45FFC060C9FF445001EC974 /* OpenVanillaMenuIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBD00C9FF445001EC974 /* OpenVanillaMenuIcon.icns */; };
+		D45FFC070C9FF445001EC974 /* qing-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBD10C9FF445001EC974 /* qing-1.icns */; };
+		D45FFC080C9FF445001EC974 /* qing-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBD20C9FF445001EC974 /* qing-2.icns */; };
+		D45FFC090C9FF445001EC974 /* rainbow.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBD30C9FF445001EC974 /* rainbow.icns */; };
+		D45FFC0A0C9FF445001EC974 /* roc-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBD40C9FF445001EC974 /* roc-1.icns */; };
+		D45FFC0B0C9FF445001EC974 /* roc-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBD50C9FF445001EC974 /* roc-2.icns */; };
+		D45FFC0C0C9FF445001EC974 /* roc-old-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBD60C9FF445001EC974 /* roc-old-1.icns */; };
+		D45FFC0D0C9FF445001EC974 /* roc-old-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBD70C9FF445001EC974 /* roc-old-2.icns */; };
+		D45FFC0E0C9FF445001EC974 /* sg.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBD80C9FF445001EC974 /* sg.icns */; };
+		D45FFC110C9FF445001EC974 /* taichung.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBDB0C9FF445001EC974 /* taichung.icns */; };
+		D45FFC120C9FF445001EC974 /* taipei.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBDC0C9FF445001EC974 /* taipei.icns */; };
+		D45FFC130C9FF445001EC974 /* tp-sssh.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBDD0C9FF445001EC974 /* tp-sssh.icns */; };
+		D45FFC140C9FF445001EC974 /* trans.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBDE0C9FF445001EC974 /* trans.icns */; };
+		D45FFC150C9FF445001EC974 /* twin-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBDF0C9FF445001EC974 /* twin-1.icns */; };
+		D45FFC160C9FF445001EC974 /* twin-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBE00C9FF445001EC974 /* twin-2.icns */; };
+		D45FFC190C9FF445001EC974 /* weed.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBE30C9FF445001EC974 /* weed.icns */; };
+		D45FFC1A0C9FF445001EC974 /* zonble.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFBE40C9FF445001EC974 /* zonble.icns */; };
+		D45FFC250C9FF629001EC974 /* OpenVanillaMenuIconOld.icns in Resources */ = {isa = PBXBuildFile; fileRef = D45FFC240C9FF629001EC974 /* OpenVanillaMenuIconOld.icns */; };
 		D4AA41440C1335AF004AAB67 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA41430C1335AF004AAB67 /* Localizable.strings */; };
 		D4B2ED930C1454DB007C6026 /* OVIconChanger Help in Resources */ = {isa = PBXBuildFile; fileRef = D4B2ED8D0C1454DB007C6026 /* OVIconChanger Help */; };
 		D4BDE5AC0C11FE0F006FF43C /* Delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BDE5AA0C11FE0F006FF43C /* Delegate.m */; };
-		D4BDE74F0C12834F006FF43C /* b-array.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7310C12834F006FF43C /* b-array.icns */; };
-		D4BDE7500C12834F006FF43C /* b-bo-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7320C12834F006FF43C /* b-bo-1.icns */; };
-		D4BDE7510C12834F006FF43C /* b-bo-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7330C12834F006FF43C /* b-bo-2.icns */; };
-		D4BDE7520C12834F006FF43C /* b-bpmf.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7340C12834F006FF43C /* b-bpmf.icns */; };
-		D4BDE7530C12834F006FF43C /* b-chewing.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7350C12834F006FF43C /* b-chewing.icns */; };
-		D4BDE7540C12834F006FF43C /* b-eten.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7360C12834F006FF43C /* b-eten.icns */; };
-		D4BDE7550C12834F006FF43C /* b-pai.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7370C12834F006FF43C /* b-pai.icns */; };
-		D4BDE7560C12834F006FF43C /* b-poj.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7380C12834F006FF43C /* b-poj.icns */; };
-		D4BDE7570C12834F006FF43C /* b-sss.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7390C12834F006FF43C /* b-sss.icns */; };
-		D4BDE7580C12834F006FF43C /* b-tai.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE73A0C12834F006FF43C /* b-tai.icns */; };
-		D4BDE7590C12834F006FF43C /* b-tobaco.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE73B0C12834F006FF43C /* b-tobaco.icns */; };
-		D4BDE7610C12834F006FF43C /* OpenVanillaMenuIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7430C12834F006FF43C /* OpenVanillaMenuIcon.icns */; };
-		D4BDE7620C12834F006FF43C /* roc-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7440C12834F006FF43C /* roc-1.icns */; };
-		D4BDE7630C12834F006FF43C /* roc-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7450C12834F006FF43C /* roc-2.icns */; };
-		D4BDE7660C12834F006FF43C /* taipei.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7480C12834F006FF43C /* taipei.icns */; };
-		D4BDE7670C12834F006FF43C /* twin-1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE7490C12834F006FF43C /* twin-1.icns */; };
-		D4BDE7680C12834F006FF43C /* twin-2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE74A0C12834F006FF43C /* twin-2.icns */; };
-		D4BDE76B0C12834F006FF43C /* weed.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE74D0C12834F006FF43C /* weed.icns */; };
-		D4BDE76C0C12834F006FF43C /* zonble.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4BDE74E0C12834F006FF43C /* zonble.icns */; };
 		D4E54A950C143AE60011D1B5 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D4E54A940C143AE60011D1B5 /* Credits.rtf */; };
 /* End PBXBuildFile section */
 
@@ -78,37 +81,59 @@
 		D40F81F40C13B8C5003F773D /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D40F82030C13B8F2003F773D /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D40F82450C13BBC0003F773D /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = zh_CN.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		D423D5980C128DFB0058F65D /* OVIconChanger.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OVIconChanger.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D423D5BF0C1295A30058F65D /* DisplayServerIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DisplayServerIcon.icns; sourceTree = "<group>"; };
+		D423D5980C128DFB0058F65D /* OVIconChanger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVIconChanger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D44E43820C12F78800A0E7D7 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		D451CE6F0C12F68200919FB3 /* IconFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconFamily.h; sourceTree = "<group>"; };
 		D451CE700C12F68200919FB3 /* IconFamily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconFamily.m; sourceTree = "<group>"; };
 		D451CE760C12F6D300919FB3 /* NSString+CarbonFSRefCreation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CarbonFSRefCreation.h"; sourceTree = "<group>"; };
 		D451CE770C12F6D300919FB3 /* NSString+CarbonFSRefCreation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CarbonFSRefCreation.m"; sourceTree = "<group>"; };
-		D4A9108C0C137074006A5A1E /* cn.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = cn.icns; path = ../../Artworks/icns/cn.icns; sourceTree = SOURCE_ROOT; };
-		D4A9108D0C137074006A5A1E /* hk-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "hk-1.icns"; path = "../../Artworks/icns/hk-1.icns"; sourceTree = SOURCE_ROOT; };
-		D4A9108E0C137074006A5A1E /* hk-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "hk-2.icns"; path = "../../Artworks/icns/hk-2.icns"; sourceTree = SOURCE_ROOT; };
-		D4A9108F0C137074006A5A1E /* kaohsiung-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "kaohsiung-2.icns"; path = "../../Artworks/icns/kaohsiung-2.icns"; sourceTree = SOURCE_ROOT; };
-		D4A910900C137074006A5A1E /* kaoshiung-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "kaoshiung-1.icns"; path = "../../Artworks/icns/kaoshiung-1.icns"; sourceTree = SOURCE_ROOT; };
-		D4A910960C13708E006A5A1E /* macau-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "macau-1.icns"; path = "../../Artworks/icns/macau-1.icns"; sourceTree = SOURCE_ROOT; };
-		D4A910970C13708E006A5A1E /* macau-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "macau-2.icns"; path = "../../Artworks/icns/macau-2.icns"; sourceTree = SOURCE_ROOT; };
-		D4A910980C13708E006A5A1E /* nccu.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = nccu.icns; path = ../../Artworks/icns/nccu.icns; sourceTree = SOURCE_ROOT; };
-		D4A910990C13708E006A5A1E /* ncku.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = ncku.icns; path = ../../Artworks/icns/ncku.icns; sourceTree = SOURCE_ROOT; };
-		D4A9109A0C13708E006A5A1E /* nctu.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = nctu.icns; path = ../../Artworks/icns/nctu.icns; sourceTree = SOURCE_ROOT; };
-		D4A910A00C1370B2006A5A1E /* ntu.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = ntu.icns; path = ../../Artworks/icns/ntu.icns; sourceTree = SOURCE_ROOT; };
-		D4A910A10C1370B2006A5A1E /* qing-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "qing-1.icns"; path = "../../Artworks/icns/qing-1.icns"; sourceTree = SOURCE_ROOT; };
-		D4A910A20C1370B2006A5A1E /* qing-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "qing-2.icns"; path = "../../Artworks/icns/qing-2.icns"; sourceTree = SOURCE_ROOT; };
-		D4A910A30C1370B2006A5A1E /* roc-old-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "roc-old-1.icns"; path = "../../Artworks/icns/roc-old-1.icns"; sourceTree = SOURCE_ROOT; };
-		D4A910A40C1370B2006A5A1E /* roc-old-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "roc-old-2.icns"; path = "../../Artworks/icns/roc-old-2.icns"; sourceTree = SOURCE_ROOT; };
-		D4A910A50C1370B2006A5A1E /* sg.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = sg.icns; path = ../../Artworks/icns/sg.icns; sourceTree = SOURCE_ROOT; };
-		D4A910A60C1370B2006A5A1E /* taichung.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = taichung.icns; path = ../../Artworks/icns/taichung.icns; sourceTree = SOURCE_ROOT; };
-		D4A910A70C1370B2006A5A1E /* tp-sssh.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "tp-sssh.icns"; path = "../../Artworks/icns/tp-sssh.icns"; sourceTree = SOURCE_ROOT; };
-		D4A910D90C137EB0006A5A1E /* anarchist.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = anarchist.icns; path = ../../Artworks/icns/anarchist.icns; sourceTree = SOURCE_ROOT; };
-		D4A910DA0C137EB0006A5A1E /* chinesetaipei.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = chinesetaipei.icns; path = ../../Artworks/icns/chinesetaipei.icns; sourceTree = SOURCE_ROOT; };
-		D4A910DB0C137EB0006A5A1E /* earth.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = earth.icns; path = ../../Artworks/icns/earth.icns; sourceTree = SOURCE_ROOT; };
-		D4A910DC0C137EB0006A5A1E /* esperanto.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = esperanto.icns; path = ../../Artworks/icns/esperanto.icns; sourceTree = SOURCE_ROOT; };
-		D4A910DD0C137EB0006A5A1E /* rainbow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = rainbow.icns; path = ../../Artworks/icns/rainbow.icns; sourceTree = SOURCE_ROOT; };
-		D4A910DE0C137EB0006A5A1E /* trans.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = trans.icns; path = ../../Artworks/icns/trans.icns; sourceTree = SOURCE_ROOT; };
+		D45FFB9C0C9FEFFA001EC974 /* OVIconChanger.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OVIconChanger.icns; sourceTree = "<group>"; };
+		D45FFBAF0C9FF445001EC974 /* anarchist.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = anarchist.icns; path = ../../Artworks/icon2007/icns/anarchist.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBB00C9FF445001EC974 /* b-array.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-array.icns"; path = "../../Artworks/icon2007/icns/b-array.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBB10C9FF445001EC974 /* b-bo-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-bo-1.icns"; path = "../../Artworks/icon2007/icns/b-bo-1.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBB20C9FF445001EC974 /* b-bo-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-bo-2.icns"; path = "../../Artworks/icon2007/icns/b-bo-2.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBB30C9FF445001EC974 /* b-bpmf.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-bpmf.icns"; path = "../../Artworks/icon2007/icns/b-bpmf.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBB40C9FF445001EC974 /* b-chewing.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-chewing.icns"; path = "../../Artworks/icon2007/icns/b-chewing.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBB50C9FF445001EC974 /* b-eten.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-eten.icns"; path = "../../Artworks/icon2007/icns/b-eten.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBB60C9FF445001EC974 /* b-pai.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-pai.icns"; path = "../../Artworks/icon2007/icns/b-pai.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBB70C9FF445001EC974 /* b-poj.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-poj.icns"; path = "../../Artworks/icon2007/icns/b-poj.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBB80C9FF445001EC974 /* b-sss.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-sss.icns"; path = "../../Artworks/icon2007/icns/b-sss.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBB90C9FF445001EC974 /* b-tai.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-tai.icns"; path = "../../Artworks/icon2007/icns/b-tai.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBBA0C9FF445001EC974 /* b-tobaco.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-tobaco.icns"; path = "../../Artworks/icon2007/icns/b-tobaco.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBBB0C9FF445001EC974 /* bsd.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = bsd.icns; path = ../../Artworks/icon2007/icns/bsd.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBBC0C9FF445001EC974 /* che.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = che.icns; path = ../../Artworks/icon2007/icns/che.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBBD0C9FF445001EC974 /* chinesetaipei.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = chinesetaipei.icns; path = ../../Artworks/icon2007/icns/chinesetaipei.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBBE0C9FF445001EC974 /* cn.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = cn.icns; path = ../../Artworks/icon2007/icns/cn.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBBF0C9FF445001EC974 /* earth.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = earth.icns; path = ../../Artworks/icon2007/icns/earth.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBC00C9FF445001EC974 /* esperanto.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = esperanto.icns; path = ../../Artworks/icon2007/icns/esperanto.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBC10C9FF445001EC974 /* hk-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "hk-1.icns"; path = "../../Artworks/icon2007/icns/hk-1.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBC20C9FF445001EC974 /* hk-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "hk-2.icns"; path = "../../Artworks/icon2007/icns/hk-2.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBC30C9FF445001EC974 /* kaohsiung-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "kaohsiung-2.icns"; path = "../../Artworks/icon2007/icns/kaohsiung-2.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBC40C9FF445001EC974 /* kaoshiung-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "kaoshiung-1.icns"; path = "../../Artworks/icon2007/icns/kaoshiung-1.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBC80C9FF445001EC974 /* macau-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "macau-1.icns"; path = "../../Artworks/icon2007/icns/macau-1.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBC90C9FF445001EC974 /* macau-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "macau-2.icns"; path = "../../Artworks/icon2007/icns/macau-2.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBCA0C9FF445001EC974 /* nccu.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = nccu.icns; path = ../../Artworks/icon2007/icns/nccu.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBCB0C9FF445001EC974 /* ncku.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = ncku.icns; path = ../../Artworks/icon2007/icns/ncku.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBCC0C9FF445001EC974 /* nctu.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = nctu.icns; path = ../../Artworks/icon2007/icns/nctu.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBCF0C9FF445001EC974 /* ntu.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = ntu.icns; path = ../../Artworks/icon2007/icns/ntu.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBD00C9FF445001EC974 /* OpenVanillaMenuIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaMenuIcon.icns; path = ../../Artworks/icon2007/icns/OpenVanillaMenuIcon.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBD10C9FF445001EC974 /* qing-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "qing-1.icns"; path = "../../Artworks/icon2007/icns/qing-1.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBD20C9FF445001EC974 /* qing-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "qing-2.icns"; path = "../../Artworks/icon2007/icns/qing-2.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBD30C9FF445001EC974 /* rainbow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = rainbow.icns; path = ../../Artworks/icon2007/icns/rainbow.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBD40C9FF445001EC974 /* roc-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "roc-1.icns"; path = "../../Artworks/icon2007/icns/roc-1.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBD50C9FF445001EC974 /* roc-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "roc-2.icns"; path = "../../Artworks/icon2007/icns/roc-2.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBD60C9FF445001EC974 /* roc-old-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "roc-old-1.icns"; path = "../../Artworks/icon2007/icns/roc-old-1.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBD70C9FF445001EC974 /* roc-old-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "roc-old-2.icns"; path = "../../Artworks/icon2007/icns/roc-old-2.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBD80C9FF445001EC974 /* sg.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = sg.icns; path = ../../Artworks/icon2007/icns/sg.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBDB0C9FF445001EC974 /* taichung.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = taichung.icns; path = ../../Artworks/icon2007/icns/taichung.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBDC0C9FF445001EC974 /* taipei.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = taipei.icns; path = ../../Artworks/icon2007/icns/taipei.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBDD0C9FF445001EC974 /* tp-sssh.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "tp-sssh.icns"; path = "../../Artworks/icon2007/icns/tp-sssh.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBDE0C9FF445001EC974 /* trans.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = trans.icns; path = ../../Artworks/icon2007/icns/trans.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBDF0C9FF445001EC974 /* twin-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "twin-1.icns"; path = "../../Artworks/icon2007/icns/twin-1.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBE00C9FF445001EC974 /* twin-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "twin-2.icns"; path = "../../Artworks/icon2007/icns/twin-2.icns"; sourceTree = SOURCE_ROOT; };
+		D45FFBE30C9FF445001EC974 /* weed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = weed.icns; path = ../../Artworks/icon2007/icns/weed.icns; sourceTree = SOURCE_ROOT; };
+		D45FFBE40C9FF445001EC974 /* zonble.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = zonble.icns; path = ../../Artworks/icon2007/icns/zonble.icns; sourceTree = SOURCE_ROOT; };
+		D45FFC240C9FF629001EC974 /* OpenVanillaMenuIconOld.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaMenuIconOld.icns; path = ../../Artworks/icon2007/icns/OpenVanillaMenuIconOld.icns; sourceTree = SOURCE_ROOT; };
 		D4AA413F0C13359F004AAB67 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4AA416E0C13370C004AAB67 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4B2ED8E0C1454DB007C6026 /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = "English.lproj/OVIconChanger Help"; sourceTree = "<group>"; };
@@ -117,25 +142,6 @@
 		D4BDE5AA0C11FE0F006FF43C /* Delegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Delegate.m; sourceTree = "<group>"; };
 		D4BDE5AB0C11FE0F006FF43C /* Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delegate.h; sourceTree = "<group>"; };
 		D4BDE6B50C127944006FF43C /* OVIconChanger_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIconChanger_Prefix.pch; sourceTree = "<group>"; };
-		D4BDE7310C12834F006FF43C /* b-array.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-array.icns"; path = "../../Artworks/icns/b-array.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE7320C12834F006FF43C /* b-bo-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-bo-1.icns"; path = "../../Artworks/icns/b-bo-1.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE7330C12834F006FF43C /* b-bo-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-bo-2.icns"; path = "../../Artworks/icns/b-bo-2.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE7340C12834F006FF43C /* b-bpmf.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-bpmf.icns"; path = "../../Artworks/icns/b-bpmf.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE7350C12834F006FF43C /* b-chewing.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-chewing.icns"; path = "../../Artworks/icns/b-chewing.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE7360C12834F006FF43C /* b-eten.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-eten.icns"; path = "../../Artworks/icns/b-eten.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE7370C12834F006FF43C /* b-pai.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-pai.icns"; path = "../../Artworks/icns/b-pai.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE7380C12834F006FF43C /* b-poj.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-poj.icns"; path = "../../Artworks/icns/b-poj.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE7390C12834F006FF43C /* b-sss.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-sss.icns"; path = "../../Artworks/icns/b-sss.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE73A0C12834F006FF43C /* b-tai.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-tai.icns"; path = "../../Artworks/icns/b-tai.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE73B0C12834F006FF43C /* b-tobaco.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "b-tobaco.icns"; path = "../../Artworks/icns/b-tobaco.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE7430C12834F006FF43C /* OpenVanillaMenuIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaMenuIcon.icns; path = ../../Artworks/icns/OpenVanillaMenuIcon.icns; sourceTree = SOURCE_ROOT; };
-		D4BDE7440C12834F006FF43C /* roc-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "roc-1.icns"; path = "../../Artworks/icns/roc-1.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE7450C12834F006FF43C /* roc-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "roc-2.icns"; path = "../../Artworks/icns/roc-2.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE7480C12834F006FF43C /* taipei.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = taipei.icns; path = ../../Artworks/icns/taipei.icns; sourceTree = SOURCE_ROOT; };
-		D4BDE7490C12834F006FF43C /* twin-1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "twin-1.icns"; path = "../../Artworks/icns/twin-1.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE74A0C12834F006FF43C /* twin-2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "twin-2.icns"; path = "../../Artworks/icns/twin-2.icns"; sourceTree = SOURCE_ROOT; };
-		D4BDE74D0C12834F006FF43C /* weed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = weed.icns; path = ../../Artworks/icns/weed.icns; sourceTree = SOURCE_ROOT; };
-		D4BDE74E0C12834F006FF43C /* zonble.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = zonble.icns; path = ../../Artworks/icns/zonble.icns; sourceTree = SOURCE_ROOT; };
 		D4E54A810C1439010011D1B5 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		D4E54A960C143AEB0011D1B5 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = zh_TW; path = zh_TW.lproj/Credits.rtf; sourceTree = "<group>"; };
 		D4E54A9C0C143B610011D1B5 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = zh_CN; path = zh_CN.lproj/Credits.rtf; sourceTree = "<group>"; };
@@ -182,7 +188,6 @@
 				D49C18670C171CB10014EF6C /* Strings */,
 				D4B2ED8D0C1454DB007C6026 /* OVIconChanger Help */,
 				D4B2ED280C143BED007C6026 /* Documents */,
-				D423D5BF0C1295A30058F65D /* DisplayServerIcon.icns */,
 				D4BDE6940C127725006FF43C /* Icons */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
 			);
@@ -246,49 +251,53 @@
 		D4BDE6940C127725006FF43C /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				D4A910D90C137EB0006A5A1E /* anarchist.icns */,
-				D4A910DA0C137EB0006A5A1E /* chinesetaipei.icns */,
-				D4A910DB0C137EB0006A5A1E /* earth.icns */,
-				D4A910DC0C137EB0006A5A1E /* esperanto.icns */,
-				D4A910DD0C137EB0006A5A1E /* rainbow.icns */,
-				D4A910DE0C137EB0006A5A1E /* trans.icns */,
-				D4A910A00C1370B2006A5A1E /* ntu.icns */,
-				D4A910A10C1370B2006A5A1E /* qing-1.icns */,
-				D4A910A20C1370B2006A5A1E /* qing-2.icns */,
-				D4A910A30C1370B2006A5A1E /* roc-old-1.icns */,
-				D4A910A40C1370B2006A5A1E /* roc-old-2.icns */,
-				D4A910A50C1370B2006A5A1E /* sg.icns */,
-				D4A910A60C1370B2006A5A1E /* taichung.icns */,
-				D4A910A70C1370B2006A5A1E /* tp-sssh.icns */,
-				D4A910960C13708E006A5A1E /* macau-1.icns */,
-				D4A910970C13708E006A5A1E /* macau-2.icns */,
-				D4A910980C13708E006A5A1E /* nccu.icns */,
-				D4A910990C13708E006A5A1E /* ncku.icns */,
-				D4A9109A0C13708E006A5A1E /* nctu.icns */,
-				D4A9108C0C137074006A5A1E /* cn.icns */,
-				D4A9108D0C137074006A5A1E /* hk-1.icns */,
-				D4A9108E0C137074006A5A1E /* hk-2.icns */,
-				D4A9108F0C137074006A5A1E /* kaohsiung-2.icns */,
-				D4A910900C137074006A5A1E /* kaoshiung-1.icns */,
-				D4BDE7310C12834F006FF43C /* b-array.icns */,
-				D4BDE7320C12834F006FF43C /* b-bo-1.icns */,
-				D4BDE7330C12834F006FF43C /* b-bo-2.icns */,
-				D4BDE7340C12834F006FF43C /* b-bpmf.icns */,
-				D4BDE7350C12834F006FF43C /* b-chewing.icns */,
-				D4BDE7360C12834F006FF43C /* b-eten.icns */,
-				D4BDE7370C12834F006FF43C /* b-pai.icns */,
-				D4BDE7380C12834F006FF43C /* b-poj.icns */,
-				D4BDE7390C12834F006FF43C /* b-sss.icns */,
-				D4BDE73A0C12834F006FF43C /* b-tai.icns */,
-				D4BDE73B0C12834F006FF43C /* b-tobaco.icns */,
-				D4BDE7430C12834F006FF43C /* OpenVanillaMenuIcon.icns */,
-				D4BDE7440C12834F006FF43C /* roc-1.icns */,
-				D4BDE7450C12834F006FF43C /* roc-2.icns */,
-				D4BDE7480C12834F006FF43C /* taipei.icns */,
-				D4BDE7490C12834F006FF43C /* twin-1.icns */,
-				D4BDE74A0C12834F006FF43C /* twin-2.icns */,
-				D4BDE74D0C12834F006FF43C /* weed.icns */,
-				D4BDE74E0C12834F006FF43C /* zonble.icns */,
+				D45FFC240C9FF629001EC974 /* OpenVanillaMenuIconOld.icns */,
+				D45FFBAF0C9FF445001EC974 /* anarchist.icns */,
+				D45FFBB00C9FF445001EC974 /* b-array.icns */,
+				D45FFBB10C9FF445001EC974 /* b-bo-1.icns */,
+				D45FFBB20C9FF445001EC974 /* b-bo-2.icns */,
+				D45FFBB30C9FF445001EC974 /* b-bpmf.icns */,
+				D45FFBB40C9FF445001EC974 /* b-chewing.icns */,
+				D45FFBB50C9FF445001EC974 /* b-eten.icns */,
+				D45FFBB60C9FF445001EC974 /* b-pai.icns */,
+				D45FFBB70C9FF445001EC974 /* b-poj.icns */,
+				D45FFBB80C9FF445001EC974 /* b-sss.icns */,
+				D45FFBB90C9FF445001EC974 /* b-tai.icns */,
+				D45FFBBA0C9FF445001EC974 /* b-tobaco.icns */,
+				D45FFBBB0C9FF445001EC974 /* bsd.icns */,
+				D45FFBBC0C9FF445001EC974 /* che.icns */,
+				D45FFBBD0C9FF445001EC974 /* chinesetaipei.icns */,
+				D45FFBBE0C9FF445001EC974 /* cn.icns */,
+				D45FFBBF0C9FF445001EC974 /* earth.icns */,
+				D45FFBC00C9FF445001EC974 /* esperanto.icns */,
+				D45FFBC10C9FF445001EC974 /* hk-1.icns */,
+				D45FFBC20C9FF445001EC974 /* hk-2.icns */,
+				D45FFBC30C9FF445001EC974 /* kaohsiung-2.icns */,
+				D45FFBC40C9FF445001EC974 /* kaoshiung-1.icns */,
+				D45FFBC80C9FF445001EC974 /* macau-1.icns */,
+				D45FFBC90C9FF445001EC974 /* macau-2.icns */,
+				D45FFBCA0C9FF445001EC974 /* nccu.icns */,
+				D45FFBCB0C9FF445001EC974 /* ncku.icns */,
+				D45FFBCC0C9FF445001EC974 /* nctu.icns */,
+				D45FFBCF0C9FF445001EC974 /* ntu.icns */,
+				D45FFBD00C9FF445001EC974 /* OpenVanillaMenuIcon.icns */,
+				D45FFBD10C9FF445001EC974 /* qing-1.icns */,
+				D45FFBD20C9FF445001EC974 /* qing-2.icns */,
+				D45FFBD30C9FF445001EC974 /* rainbow.icns */,
+				D45FFBD40C9FF445001EC974 /* roc-1.icns */,
+				D45FFBD50C9FF445001EC974 /* roc-2.icns */,
+				D45FFBD60C9FF445001EC974 /* roc-old-1.icns */,
+				D45FFBD70C9FF445001EC974 /* roc-old-2.icns */,
+				D45FFBD80C9FF445001EC974 /* sg.icns */,
+				D45FFBDB0C9FF445001EC974 /* taichung.icns */,
+				D45FFBDC0C9FF445001EC974 /* taipei.icns */,
+				D45FFBDD0C9FF445001EC974 /* tp-sssh.icns */,
+				D45FFBDE0C9FF445001EC974 /* trans.icns */,
+				D45FFBDF0C9FF445001EC974 /* twin-1.icns */,
+				D45FFBE00C9FF445001EC974 /* twin-2.icns */,
+				D45FFBE30C9FF445001EC974 /* weed.icns */,
+				D45FFBE40C9FF445001EC974 /* zonble.icns */,
+				D45FFB9C0C9FEFFA001EC974 /* OVIconChanger.icns */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -344,53 +353,56 @@
 			files = (
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				D4BDE74F0C12834F006FF43C /* b-array.icns in Resources */,
-				D4BDE7500C12834F006FF43C /* b-bo-1.icns in Resources */,
-				D4BDE7510C12834F006FF43C /* b-bo-2.icns in Resources */,
-				D4BDE7520C12834F006FF43C /* b-bpmf.icns in Resources */,
-				D4BDE7530C12834F006FF43C /* b-chewing.icns in Resources */,
-				D4BDE7540C12834F006FF43C /* b-eten.icns in Resources */,
-				D4BDE7550C12834F006FF43C /* b-pai.icns in Resources */,
-				D4BDE7560C12834F006FF43C /* b-poj.icns in Resources */,
-				D4BDE7570C12834F006FF43C /* b-sss.icns in Resources */,
-				D4BDE7580C12834F006FF43C /* b-tai.icns in Resources */,
-				D4BDE7590C12834F006FF43C /* b-tobaco.icns in Resources */,
-				D4BDE7610C12834F006FF43C /* OpenVanillaMenuIcon.icns in Resources */,
-				D4BDE7620C12834F006FF43C /* roc-1.icns in Resources */,
-				D4BDE7630C12834F006FF43C /* roc-2.icns in Resources */,
-				D4BDE7660C12834F006FF43C /* taipei.icns in Resources */,
-				D4BDE7670C12834F006FF43C /* twin-1.icns in Resources */,
-				D4BDE7680C12834F006FF43C /* twin-2.icns in Resources */,
-				D4BDE76B0C12834F006FF43C /* weed.icns in Resources */,
-				D4BDE76C0C12834F006FF43C /* zonble.icns in Resources */,
-				D423D5C00C1295A30058F65D /* DisplayServerIcon.icns in Resources */,
 				D4AA41440C1335AF004AAB67 /* Localizable.strings in Resources */,
-				D4A910910C137074006A5A1E /* cn.icns in Resources */,
-				D4A910920C137074006A5A1E /* hk-1.icns in Resources */,
-				D4A910930C137074006A5A1E /* hk-2.icns in Resources */,
-				D4A910940C137074006A5A1E /* kaohsiung-2.icns in Resources */,
-				D4A910950C137074006A5A1E /* kaoshiung-1.icns in Resources */,
-				D4A9109B0C13708E006A5A1E /* macau-1.icns in Resources */,
-				D4A9109C0C13708E006A5A1E /* macau-2.icns in Resources */,
-				D4A9109D0C13708E006A5A1E /* nccu.icns in Resources */,
-				D4A9109E0C13708E006A5A1E /* ncku.icns in Resources */,
-				D4A9109F0C13708E006A5A1E /* nctu.icns in Resources */,
-				D4A910A80C1370B2006A5A1E /* ntu.icns in Resources */,
-				D4A910A90C1370B2006A5A1E /* qing-1.icns in Resources */,
-				D4A910AA0C1370B2006A5A1E /* qing-2.icns in Resources */,
-				D4A910AB0C1370B2006A5A1E /* roc-old-1.icns in Resources */,
-				D4A910AC0C1370B2006A5A1E /* roc-old-2.icns in Resources */,
-				D4A910AD0C1370B2006A5A1E /* sg.icns in Resources */,
-				D4A910AE0C1370B2006A5A1E /* taichung.icns in Resources */,
-				D4A910AF0C1370B2006A5A1E /* tp-sssh.icns in Resources */,
-				D4A910DF0C137EB0006A5A1E /* anarchist.icns in Resources */,
-				D4A910E00C137EB0006A5A1E /* chinesetaipei.icns in Resources */,
-				D4A910E10C137EB0006A5A1E /* earth.icns in Resources */,
-				D4A910E20C137EB0006A5A1E /* esperanto.icns in Resources */,
-				D4A910E30C137EB0006A5A1E /* rainbow.icns in Resources */,
-				D4A910E40C137EB0006A5A1E /* trans.icns in Resources */,
 				D4E54A950C143AE60011D1B5 /* Credits.rtf in Resources */,
 				D4B2ED930C1454DB007C6026 /* OVIconChanger Help in Resources */,
+				D45FFB9D0C9FEFFA001EC974 /* OVIconChanger.icns in Resources */,
+				D45FFBE50C9FF445001EC974 /* anarchist.icns in Resources */,
+				D45FFBE60C9FF445001EC974 /* b-array.icns in Resources */,
+				D45FFBE70C9FF445001EC974 /* b-bo-1.icns in Resources */,
+				D45FFBE80C9FF445001EC974 /* b-bo-2.icns in Resources */,
+				D45FFBE90C9FF445001EC974 /* b-bpmf.icns in Resources */,
+				D45FFBEA0C9FF445001EC974 /* b-chewing.icns in Resources */,
+				D45FFBEB0C9FF445001EC974 /* b-eten.icns in Resources */,
+				D45FFBEC0C9FF445001EC974 /* b-pai.icns in Resources */,
+				D45FFBED0C9FF445001EC974 /* b-poj.icns in Resources */,
+				D45FFBEE0C9FF445001EC974 /* b-sss.icns in Resources */,
+				D45FFBEF0C9FF445001EC974 /* b-tai.icns in Resources */,
+				D45FFBF00C9FF445001EC974 /* b-tobaco.icns in Resources */,
+				D45FFBF10C9FF445001EC974 /* bsd.icns in Resources */,
+				D45FFBF20C9FF445001EC974 /* che.icns in Resources */,
+				D45FFBF30C9FF445001EC974 /* chinesetaipei.icns in Resources */,
+				D45FFBF40C9FF445001EC974 /* cn.icns in Resources */,
+				D45FFBF50C9FF445001EC974 /* earth.icns in Resources */,
+				D45FFBF60C9FF445001EC974 /* esperanto.icns in Resources */,
+				D45FFBF70C9FF445001EC974 /* hk-1.icns in Resources */,
+				D45FFBF80C9FF445001EC974 /* hk-2.icns in Resources */,
+				D45FFBF90C9FF445001EC974 /* kaohsiung-2.icns in Resources */,
+				D45FFBFA0C9FF445001EC974 /* kaoshiung-1.icns in Resources */,
+				D45FFBFE0C9FF445001EC974 /* macau-1.icns in Resources */,
+				D45FFBFF0C9FF445001EC974 /* macau-2.icns in Resources */,
+				D45FFC000C9FF445001EC974 /* nccu.icns in Resources */,
+				D45FFC010C9FF445001EC974 /* ncku.icns in Resources */,
+				D45FFC020C9FF445001EC974 /* nctu.icns in Resources */,
+				D45FFC050C9FF445001EC974 /* ntu.icns in Resources */,
+				D45FFC060C9FF445001EC974 /* OpenVanillaMenuIcon.icns in Resources */,
+				D45FFC070C9FF445001EC974 /* qing-1.icns in Resources */,
+				D45FFC080C9FF445001EC974 /* qing-2.icns in Resources */,
+				D45FFC090C9FF445001EC974 /* rainbow.icns in Resources */,
+				D45FFC0A0C9FF445001EC974 /* roc-1.icns in Resources */,
+				D45FFC0B0C9FF445001EC974 /* roc-2.icns in Resources */,
+				D45FFC0C0C9FF445001EC974 /* roc-old-1.icns in Resources */,
+				D45FFC0D0C9FF445001EC974 /* roc-old-2.icns in Resources */,
+				D45FFC0E0C9FF445001EC974 /* sg.icns in Resources */,
+				D45FFC110C9FF445001EC974 /* taichung.icns in Resources */,
+				D45FFC120C9FF445001EC974 /* taipei.icns in Resources */,
+				D45FFC130C9FF445001EC974 /* tp-sssh.icns in Resources */,
+				D45FFC140C9FF445001EC974 /* trans.icns in Resources */,
+				D45FFC150C9FF445001EC974 /* twin-1.icns in Resources */,
+				D45FFC160C9FF445001EC974 /* twin-2.icns in Resources */,
+				D45FFC190C9FF445001EC974 /* weed.icns in Resources */,
+				D45FFC1A0C9FF445001EC974 /* zonble.icns in Resources */,
+				D45FFC250C9FF629001EC974 /* OpenVanillaMenuIconOld.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,7 +502,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
+				INSTALL_PATH = /Library/OpenVanilla/0.8.0/Loader;
 				PRODUCT_NAME = OVIconChanger;
 				WRAPPER_EXTENSION = app;
 			};

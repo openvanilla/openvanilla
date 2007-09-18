@@ -1,6 +1,5 @@
 /* Localized versions of Info.plist keys */
 CFBundleName = "OpenVanilla 图标修改器";
-CFBundleShortVersionString = "OpenVanilla 图标修改器 0.7.2 版";
 NSHumanReadableCopyright = "© The OpenVanilla Project, 2004-2007";
 
 CFBundleHelpBookName = "OpenVanilla 图标修改器帮助";
