@@ -1,0 +1,235 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{12F0E7CB-21B0-4121-A934-334CFD4425A5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OVPreference.CS2</RootNamespace>
+    <AssemblyName>OVPreference.CS2</AssemblyName>
+    <ApplicationIcon>OVPreference.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FontCombo, Version=1.0.2761.26598, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\outsideDLL\FontCombo.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ColorPicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ColorPicker.Designer.cs">
+      <DependentUpon>ColorPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ColorPickerKnownColorCollection.cs" />
+    <Compile Include="ComparerOVConfig.cs" />
+    <Compile Include="FontComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FontComboBox.Designer.cs">
+      <DependentUpon>FontComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OVPrefrence.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OVPrefrence.Designer.cs">
+      <DependentUpon>OVPrefrence.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OVConfig.cs" />
+    <Compile Include="OVConfigDomWriter.cs" />
+    <Compile Include="PanelGeneric.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelGeneric.Designer.cs">
+      <DependentUpon>PanelGeneric.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelModuleList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelModuleList.Designer.cs">
+      <DependentUpon>PanelModuleList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelPhonetic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelPhonetic.Designer.cs">
+      <DependentUpon>PanelPhonetic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelPOJ.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelPOJ.Designer.cs">
+      <DependentUpon>PanelPOJ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelSharedSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelSharedSettings.Designer.cs">
+      <DependentUpon>PanelSharedSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelTibetan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelTibetan.Designer.cs">
+      <DependentUpon>PanelTibetan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelTobacco.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelTobacco.Designer.cs">
+      <DependentUpon>PanelTobacco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="OVPrefrence.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OVPrefrence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelGeneric.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelGeneric.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelModuleList.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelModuleList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelPhonetic.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelPhonetic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelPOJ.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelPOJ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelSharedSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelSharedSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelTLIM.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelTLIM.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PanelTLIM.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelTLIM.Designer.cs">
+      <DependentUpon>PanelTLIM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="OVPreference.ico" />
+    <EmbeddedResource Include="OVPrefrence.en-US.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OVPrefrence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OVPrefrence.zh-TW.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OVPrefrence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelGeneric.en-US.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelGeneric.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelGeneric.zh-TW.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelGeneric.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelPhonetic.en-US.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelPhonetic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelPhonetic.zh-TW.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelPhonetic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelPOJ.en-US.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelPOJ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelPOJ.zh-TW.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelPOJ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelSharedSettings.en-US.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelSharedSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelSharedSettings.zh-TW.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelSharedSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelTibetan.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelTibetan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelTobacco.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelTobacco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resource.en-US.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resource.zh-TW.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ttfbmp.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "C:\Windows\OpenVanilla\OVPreference.CS2.exe" &amp;&amp; "..\..\deploy-resgen.bat"</PostBuildEvent>
+  </PropertyGroup>
+</Project>
