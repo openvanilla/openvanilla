@@ -12,7 +12,6 @@ Copyright (c) 2004-2006 The OpenVanilla Project
 http://taipedia.selfip.info/OV-deps.zip 「或」
 http://rt.openfoundry.org/Foundry/Project/Download/Attachment/89705/61781/OV-deps.zip
 （兩個是一樣的），解壓縮後置於某處－－例如 "your_dependency_path"－－再按照
-
 http://www.flickr.com/photos/b6s/159926134/ 示範的方式讓 VS.NET 2005 知道要去那
 裡找這些函式庫。
 3.1. 為了之後布署方便，請設定環境變數 %OV_DEPS% 到 "your_dependency_path"，
@@ -31,33 +30,45 @@ hunspelldll.lib, license.hunspell, license.myspell, langnum.hxx, suggestmgr.hxx
 4.1. 比照 3. 的說明，請替 VS.NET 2005 的 include directory 和 library directory
 加上 "your_dependency_path"\hunspell
 
-
-
 5. 若遇到任何問題，請透過 IRC 到 FreeNote 的 #im-dev 找 b6s。
 
 
 == 編譯 ==
-1. 如果有 VS.NET 2005 IDE，開啟 OVIME.sln 應能直接編譯。
+0. 如果只想測試打字功能而「不」想測試「設定功能」，請跳過步驟 1 和 3.
 
 1. 首先，為了編譯 OVPreferences，必須安裝 wxWidgets Win32 版
 (http://www.wxwidgets.org/dl_msw2.htm#stable)，裝完之後「必須」自行編譯出
 OVPreferences 所需的靜態函式庫。目前 wxWidgets 版本
 是 2.6.3，為避免經歷與 OV 無關的痛苦，請按以下步驟進行：
 
+1.1. 開啟命令提示字元，然後執行
+"C:\Program Files\Microsoft Visual Studio 8\Common7\Tools\vsvars32.bat"
+每次進入命令列模式進行一連串編譯前，請先確定是否做了這一步。
+1.2. 到 C:\wxWidgets-2.6.3\build\msw 底下執行
+nmake -f makefile.vc BUILD=release UNICODE=1 SHARED=0 RUNTIME_LIBS=static
+和
+nmake -f makefile.vc BUILD=debug UNICODE=1 SHARED=0 RUNTIME_LIBS=static
 
-3. 最後，開啟 Modules.sln 以編譯目前支援的模組。
+2. 如果有 VS.NET 2005 IDE，開啟 OVIME.sln 應能直接編譯。
+
+3. 接著請開啟 OVPreferences.sln 以編譯設定選單。
+
+4. 最後，開啟 Modules.sln 以編譯目前支援的模組。
 
 
 == 測試 ==
 在此以 OVIMPOJ-Holo 為例
 
-1. 按照上一節所述，完成 OVIME.sln 與 OVPreference.CS2.sln 的編譯，然後在
+1. 按照上一節所述，完成 OVIME.sln 與 OVPreferences.sln 的編譯，然後在
 Modules.sln 裡編譯 OVIMPOJ-Holo 模組。
 
 2. 手動建立 %WINDIR%\OpenVanilla 及 %WINDIR%\OpenVanilla\Modules
 
 3. 布署檔案，請參考 trunk/Loaders/Win32/deploy-debug.bat，或直接使用之。
 3.1. 把「注意事項 3」提到的 DLLs 放進 %SYSTEM32% (%WINDIR%\system32)
+3.2. 把 OVIME.sln 編譯出來的 OVIME.ime 及 OVIMEUI.dll 放進 %SYSTEM32%
+3.3. 把 OVPreferences.sln 編譯出來的 OVPreferences.exe 放進 %WINDIR%\OpenVanilla
+3.4. 把 OVIMPOJ-Holo.dll 放進 %WINDIR%\OpenVanilla\Modules
 
 4. 把 poj-holo.cin 放到 %WINDIR%\OpenVanilla\OVIMPOJ-Holo 裡；當然，這個目錄必
 須先手動建立。
