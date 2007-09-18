@@ -34,7 +34,7 @@
 	<key>CFBundleIconFile</key>
 	<string>cinedit</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.cinedit</string>
+	<string>org.openvanilla.utilities.cinedit</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -45,6 +45,8 @@
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
 	<string>0.8.0</string>
+	<key>LSHasLocalizedDisplayName</key>
+	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
