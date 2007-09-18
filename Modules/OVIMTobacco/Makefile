@@ -25,8 +25,6 @@ imtables.db: imtables-schema.txt ${BPMF} ${CINS} cin-sqlconvert.pl
 tsi.db: tobacco-schema.txt tobacco-sqlconvert.pl
 	rm -f tsi.db
 	sqlite3 tsi.db < tobacco-schema.txt
-	svn cat http://svn.openfoundry.org/libchewingdata/utf-8/tsi.src > tsi.src
-	#cat tsi.src tsi.src-ext.txt > tsi-ext.src
-	cat tsi.src punctuation.src > tsi_punctuation.src
-	perl -w -CO tobacco-sqlconvert.pl tsi_punctuation.src | sqlite3 tsi.db
-	perl -w -CO tobacco-sqlconvert_general.pl tsi_punctuation.src ${CINS} | sqlite3 tsi.db
+	cat iasl.lm punctuation.lm > tobacco.lm
+	perl -w -CO tobacco-sqlconvert.pl tobacco.lm | sqlite3 tsi.db
+	perl -w -CO tobacco-sqlconvert_general.pl tobacco.lm ${CINS} | sqlite3 tsi.db

@@ -7,7 +7,7 @@ Candidate::Candidate(Vocabulary& aVocabulary) :
 	Vocabulary(aVocabulary.word),
 	position(0)
 {
-	this->freq = aVocabulary.freq;
 	this->order = aVocabulary.order;
-	this->prob = aVocabulary.prob;
+	this->logProb = aVocabulary.logProb;
+	this->backOff = aVocabulary.backOff;
 }

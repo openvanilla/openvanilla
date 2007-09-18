@@ -1,7 +1,7 @@
 #include "Vocabulary.h"
 
 Vocabulary::Vocabulary(const string& aWord) :
-	word(aWord), freq(0), order(0), prob(0.0)
+	word(aWord), order(0), logProb(0.0f), backOff(0.0f)
 {}
 
 bool Vocabulary::isOrderPrior(const Vocabulary& voc1, const Vocabulary& voc2)
@@ -9,14 +9,9 @@ bool Vocabulary::isOrderPrior(const Vocabulary& voc1, const Vocabulary& voc2)
 	return voc1.order < voc2.order;
 }
 
-bool Vocabulary::isFreqGreater(const Vocabulary& voc1, const Vocabulary& voc2)
-{
-	return voc1.freq > voc2.freq;
-}
-
 bool Vocabulary::isProbGreater(const Vocabulary& voc1, const Vocabulary& voc2)
 {
-	return voc1.prob < voc2.prob;
+	return voc1.logProb < voc2.logProb;
 }
 
 bool Vocabulary::isWordLonger(const Vocabulary& voc1, const Vocabulary& voc2)

@@ -74,7 +74,7 @@ bool PredictorSingleton::setTokenVector(
     string keystrokes, string currentSequence,
 	size_t position, bool doReplace)
 {
-    if(!dictionary->isVocabulary(currentSequence))
+    if(!dictionary->isVocabulary(keystrokes))
         return false;
 
 	Token currentToken;
@@ -119,7 +119,7 @@ void PredictorSingleton::setFixedToken(
 void PredictorSingleton::rotateTopCandidates(size_t position)
 {
 	vector<Vocabulary> vocabularies;
-	dictionary->getVocablesByCharacters(
+	dictionary->getVocablesByKeystrokes(
 		tokenVector[position].keystrokes, vocabularies);
 	if(vocabularies.size() < ROTATE_LIMIT - 1)
 		return;
@@ -165,7 +165,7 @@ void PredictorSingleton::addCandidates(
 		case CandidateType::VOCABLE:
 		default:
 			hasCandidate =
-				dictionary->getVocablesByCharacters(
+				dictionary->getVocablesByKeystrokes(
 					characters, vocabularies);
 			break;
 	}

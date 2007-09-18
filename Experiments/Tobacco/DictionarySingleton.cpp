@@ -42,11 +42,6 @@ DictionarySingleton::~DictionarySingleton()
 {
     delete DictionarySingleton::dictionaryDB;
 
-	delete [] &vocableString;
-	delete [] &viewLimitString;
-	delete [] &viewString;
-	delete [] &checkString;
-
 	m_profileManager->releaseInstance();
 }
 
@@ -60,14 +55,13 @@ void DictionarySingleton::lostInstance()
 
 bool DictionarySingleton::isVocabulary(string characters)
 {      
-    SQLite3Statement *sth =
-        DictionarySingleton::dictionaryDB->prepare(checkString);
+    SQLite3Statement *sth = imTableDB->prepare(checkString);
     if (!sth) {
         murmur("illegal SQL statement[%s]?", checkString);
         return false;
     }
-	
 	sth->bind_text(1, characters.c_str());
+    murmur("query string=%s", characters.c_str());
 
     if (sth->step() == SQLITE_ROW) {
 		murmur("found!");
@@ -82,8 +76,8 @@ bool DictionarySingleton::isVocabulary(string characters)
     }
 }
 
-bool DictionarySingleton::getWordsByCharacters(string characters,
-    vector<Vocabulary>& vocabularyVectorRef, bool isLimited)
+bool DictionarySingleton::getWordsByCharacters(
+	string characters, vector<Vocabulary>& vocabularyVectorRef, bool isLimited)
 {
 	//@{
 	//@warning first fetches learned data here, not finished yet.
@@ -94,39 +88,22 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
 			++i)
 		{
 			Vocabulary currentVocabulary(i->id.pattern);
-			currentVocabulary.freq = i->hitRate; //< this is not good enough.
+			currentVocabulary.logProb = i->hitRate; //< this is not good enough.
 
 			vocabularyVectorRef.push_back(currentVocabulary);
 		}
 	}
 	//@}
 
-    /// characters-word table schema:    |characters|wordID|
-    /// word table schema:               |wordID|word|
-    /// frequency table schema:          |wordID|freq|
-    ///
-    /// The reasons why to separate into 3 tables are:
-    /// 1. Characters can be different by different input methods.
-    /// 2. Different frequency table represents different "context" or
-    ///    "user profile".
-    ///
-    /// A SQL statement for example:
-    /// SELECT word_table.word, generic_freq_table.freq
-    /// FROM BoPoMoFo_char2word_table, word_table, generic_freq_table
-    /// WHERE BoPoMoFo_char2word_table.characters = '£t£«£¿'
-    ///     AND BoPoMoFo_char2word_table.wordID = word_table.wordID
-    ///     AND BoPoMoFo_char2word_table.wordID = generic_freq_table.wordID
-    ///
-    /// Since there're two inner joins,
-    /// the order of tables and columns are very very important.
-
-	SQLite3Statement *sth = NULL;
-	const char* command = NULL;
+    /// characters-word table schema:    |characters|wordId|logProb|backOff
+    /// word table schema:               |wordId|word|
+    /// frequency table schema:          |wordId|freq|
+	const char* command = 0;
 	if(isLimited)
 		command = viewLimitString;
 	else
 		command = viewString;	
-	sth = dictionaryDB->prepare(command);
+	SQLite3Statement *sth = dictionaryDB->prepare(command);
     if (!sth) {
         murmur("illegal SQL statement[%s]?", command);
 		return false;
@@ -138,16 +115,18 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
 		rows++;
         const char* word = sth->column_text(0);
         murmur("found[%s]", word);
-        int freq = sth->column_int(1);
+        double logProb = sth->column_double(1);
+        double backOff = sth->column_double(2);
         Vocabulary currentVocabulary(word);
-        currentVocabulary.freq = freq;
+        currentVocabulary.logProb = logProb;
+        currentVocabulary.backOff = backOff;
         
         vocabularyVectorRef.push_back(currentVocabulary);
     }
 
 	if (!rows) {
 		delete sth;
-        return false;
+		return false;
     }
     murmur("query string=%s, number of candidates=%d",
         characters.c_str(), rows);
@@ -156,13 +135,13 @@ bool DictionarySingleton::getWordsByCharacters(string characters,
     return true;
 }
 
-bool DictionarySingleton::getVocablesByCharacters(string characters,
-    vector<Vocabulary>& vocabularyVectorRef)
+bool DictionarySingleton::getVocablesByKeystrokes(
+	string keystrokes, vector<Vocabulary>& vocabularyVectorRef)
 {
     SQLite3Statement *sth =
 		imTableDB->prepare(vocableString);
     if (!sth) return false;
-	sth->bind_text(1, characters.c_str());
+	sth->bind_text(1, keystrokes.c_str());
        
     int rows=0;
     while (sth->step()==SQLITE_ROW) {
@@ -173,6 +152,9 @@ bool DictionarySingleton::getVocablesByCharacters(string characters,
         Vocabulary currentVocabulary(word);
         currentVocabulary.word = string(word);
 		currentVocabulary.order = order;
+		//@warning The log prob. of <unk> is hard-coded here temporarily.
+		currentVocabulary.logProb = -5.517275f / order;
+		currentVocabulary.backOff = 0.0f;
         
         vocabularyVectorRef.push_back(currentVocabulary);
     }

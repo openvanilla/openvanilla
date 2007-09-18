@@ -3,29 +3,32 @@ use strict;
 use utf8;
 use Encode;
 
-my %word2FreqHash;
+my %word2LogProbHash;
+my %word2BackOffHash;
 my %word2IdHash;
 my $fn_tsi;
 
 $fn_tsi = $ARGV[0] if defined($ARGV[0]);
-$fn_tsi = "tsi_punctuation.src" unless defined($ARGV[0]);
+$fn_tsi = "tobacco.lm" unless defined($ARGV[0]);
 shift @ARGV;
-die "USAGE: $0 tsi_punctuation.src 1.cin 2.cin ..." if (!@ARGV);
+die "USAGE: $0 tobacco.lm 1.cin 2.cin ..." if (!@ARGV);
 print "begin;\n";
 
-# reading tsi_punctuation.src
+# reading tobacco.src
 open (HNDL, $fn_tsi) or die $!;
 
 my $idCounter = 0;
 while(<HNDL>) {
     chomp;
-    if (/#?\s*(\S+)\s+(\d+)\s+(.+)/) {
-        my $w=decode("utf8", $1);
-	if (exists $word2FreqHash{$w}) {
-		$word2FreqHash{$w} += $2;
+    if (/#?\s*(\S+)\s+([^_]+)_(\S+)\s+(\S+)/) {
+        my $w=decode("utf8", $2);
+	if (exists $word2IdHash{$w}) {
+		$word2LogProbHash{$w} += $1;
+		$word2BackOffHash{$w} += $4;
 	}
 	else {
-        	$word2FreqHash{$w} = $2;
+        	$word2LogProbHash{$w} = $1;
+		$word2BackOffHash{$w} = $4;
 		$word2IdHash{$w} = $idCounter;
 		$idCounter++;
 	}
@@ -47,7 +50,7 @@ for my $fn_cin (@ARGV) {
 	chomp;
 	if ($_ =~ m/^%ename\s+([^\s]+)/) {
 	    $table_prefix = $1;
-	    printf "CREATE TABLE %s_char2word_table(characters TEXT, wordId INTEGER, prob REAL);\n",
+	    printf "CREATE TABLE %s_char2word_table(characters TEXT, wordId INTEGER, logProb REAL, backOff REAL);\n",
 		$table_prefix;
 	    printf "CREATE INDEX %s_index_characters ON %s_char2word_table(characters);\n",
 		$table_prefix, $table_prefix;
@@ -107,7 +110,7 @@ for my $fn_cin (@ARGV) {
 		for(@combination) {
 		    my $prefix = $_;
 		    for(@suffixArray) {
-			my $newPrefix .= $prefix . "\t" . $_;
+			my $newPrefix .= $prefix . "-" . $_;
 			#print "new prefix: $newPrefix\n";
 			push @newCombination, $newPrefix;
 		    }
@@ -116,13 +119,18 @@ for my $fn_cin (@ARGV) {
 	    }
 
 	    my %combinationMap;
-	    for(@combination) { # {"ㄅㄨˋ\tㄏㄠˇ", "ㄅㄨˋ\tㄏㄠˋ", "ㄅㄨˊ\tㄏㄠˇ", "ㄅㄨˊ\tㄏㄠˋ"}
+	    for(@combination) { # {"ㄅㄨˋ-ㄏㄠˇ", "ㄅㄨˋ-ㄏㄠˋ", "ㄅㄨˊ-ㄏㄠˇ", "ㄅㄨˊ-ㄏㄠˋ"}
 		#print "combination:$_\n";
 		$combinationMap{$_} = 1 unless exists $combinationMap{$_};
 	    }
 
 	    for(keys(%combinationMap)) {
-		printf "insert into %s_char2word_table values ('%s', %d, %f);\n", $table_prefix, sprintf("%s", $_), $wordId, $word2FreqHash{$currentWord};
+		printf "insert into %s_char2word_table values('%s',%d,%f,%f);\n",
+			$table_prefix,
+			sprintf("%s", $_),
+			$wordId,
+			$word2LogProbHash{$currentWord},
+			$word2BackOffHash{$currentWord};
 	    }
 	}
     }

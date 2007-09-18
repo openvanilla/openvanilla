@@ -8,17 +8,17 @@ my %word2IdHash;
 my $fn_tsi;
 
 $fn_tsi = $ARGV[0] if defined($ARGV[0]);
-$fn_tsi = "tsi_punctuation.src" unless defined($ARGV[0]);
+$fn_tsi = "tobacco.lm" unless defined($ARGV[0]);
 print "begin;\n";
 
-# reading tsi_punctuation.src
+# reading tobacco.lm
 open (HNDL, $fn_tsi) or die $!;
 
 my $idCounter = 0;
 while(<HNDL>) {
     chomp;
-    if (/#?\s*(\S+)\s+(\d+)\s+(.+)/) {
-        my ($w, $f, $c)=(decode("utf8", $1), $2, decode("utf8", $3));
+    if (/#?\s*(\S+)\s+([^_]+)_(\S+)\s+(\S+)/) {
+        my ($p, $w, $c, $b)=($1, decode("utf8", $2), decode("utf8", $3), $4);
 
 	unless (exists($word2IdHash{$w})) { 
 		$word2IdHash{$w} = $idCounter;
@@ -28,10 +28,8 @@ while(<HNDL>) {
         }
 
 	my $currentWordId = $word2IdHash{$w};
-	$c =~ s/ /\t/g;
-
-        printf "insert into BoPoMoFo_char2word_table values('%s', %d, %f);\n",
-            sprintf("%s", $c), $currentWordId, $f;
+        printf "insert into BoPoMoFo_char2word_table values('%s',%d,%f,%f);\n",
+            sprintf("%s", $c), $currentWordId, $p, $b;
     }
 }
 close HNDL;

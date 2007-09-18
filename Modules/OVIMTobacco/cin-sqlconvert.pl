@@ -5,7 +5,7 @@ die "USAGE: cin-sqlconvert file1 file2 ..." if (!@ARGV);
 
 for my $fn (@ARGV) {
     open HNDL, "<$fn";
-    my @a=($fn=~/(\w+)\..+/);
+    my @a=($fn=~/(\w+)\.cin/);
     my $tblname=lc $a[0];
     
     print "insert into tablelist values ('$tblname');\n";

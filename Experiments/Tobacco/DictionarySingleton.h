@@ -38,16 +38,12 @@ public:
 			inputMethodId  = "BoPoMoFo";
 
 		sprintf(
-			checkString,
-			"SELECT wordId FROM %s_char2word_table WHERE characters=?1 LIMIT 1;",
-			inputMethodId.c_str());
-		sprintf(
 			viewString,
-			"SELECT w.word, c.prob FROM %s_char2word_table c, word_table w WHERE c.characters=?1 AND c.wordId = w.wordId ORDER BY c.prob DESC",
+			"SELECT w.word, c.logProb, c.backOff FROM %s_char2word_table c, word_table w WHERE c.characters=?1 AND c.wordId = w.wordId ORDER BY c.logProb DESC",
 			inputMethodId.c_str());
 		sprintf(
 			viewLimitString,
-			"SELECT w.word, c.prob FROM %s_char2word_table c, word_table w WHERE c.characters=?1 AND c.wordId = w.wordId ORDER BY c.prob DESC LIMIT %u",
+			"SELECT w.word, c.logProb, c.backOff FROM %s_char2word_table c, word_table w WHERE c.characters=?1 AND c.wordId = w.wordId ORDER BY c.logProb DESC LIMIT %u",
 			inputMethodId.c_str(),
 			N_BEST);
 	}
@@ -55,15 +51,19 @@ public:
 	void setImTableId(string id) {
 		imTableId = id;
 		sprintf(
+			checkString,
+			"SELECT value FROM %s WHERE key=?1 LIMIT 1",
+			imTableId.c_str());
+		sprintf(
 			vocableString,
-			"SELECT value, ord FROM %s WHERE key=?1 ORDER BY ord;",
+			"SELECT value, ord FROM %s WHERE key=?1 ORDER BY ord",
 			imTableId.c_str());
 	}
 
 	bool isVocabulary(string characters);
 	bool getWordsByCharacters(string characters,
 		vector<Vocabulary>& vocabularyVectorRef, bool isLimited);
-	bool getVocablesByCharacters(string characters,
+	bool getVocablesByKeystrokes(string keystrokes,
 		vector<Vocabulary>& vocabularyVectorRef);
 
 	const static size_t N_BEST = 3;

@@ -49,6 +49,7 @@ public:
     const char *column_text(int c)  
         { return (const char*)sqlite3_column_text(s, c); }
     int column_int(int c)           { return sqlite3_column_int(s, c); }
+    double column_double(int c)     { return sqlite3_column_double(s, c); }
     int column_count()              { return sqlite3_column_count(s); }
 protected:
     sqlite3_stmt *s;

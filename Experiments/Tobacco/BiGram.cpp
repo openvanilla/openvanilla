@@ -46,7 +46,7 @@ double BiGram::viterbi(
 			string rightKey("");
 			for(int shift = prefix; shift < index; shift++)
 				rightKey +=
-					tokenVectorRef[shift].characterStringVector[0] + '\t';
+					tokenVectorRef[shift].characterStringVector[0] + '-';
 			rightKey = rightKey.substr(0, rightKey.length() - 1);
 			murmur("rightKey:%s", rightKey.c_str());
 
@@ -54,6 +54,11 @@ double BiGram::viterbi(
 			dictionary->getWordsByCharacters(rightKey, rightGrams, true);
 			size_t rightGramCount = rightGrams.size();
 			murmur("rightGramCount:%i", rightGramCount);
+			if(prefix == index - 1 && rightGramCount  == 0)
+				dictionary->getVocablesByKeystrokes(
+					tokenVectorRef[prefix].keystrokes, rightGrams);
+			rightGramCount = rightGrams.size();
+			murmur("rightGramCount:%i", rightGramCount);			
 			for(size_t i = 0; i < rightGramCount; i++)
 			{
 				//string rightGram = rightGrams[i];
@@ -66,7 +71,7 @@ double BiGram::viterbi(
 						for(int shift = left; shift < prefix; shift++)
 							leftKey +=
 								tokenVectorRef[shift].characterStringVector[0]
-									+ '\t';
+									+ '-';
 						leftKey = leftKey.substr(0, leftKey.length() - 1);
 						murmur("leftKey:%s", leftKey.c_str());
 
@@ -75,6 +80,11 @@ double BiGram::viterbi(
 							leftKey, leftGrams, true);
 						size_t leftGramCount = leftGrams.size();
 						murmur("leftGramCount:%i",leftGramCount);
+						if(left == prefix - 1 && leftGramCount  == 0)
+							dictionary->getVocablesByKeystrokes(
+								tokenVectorRef[left].keystrokes, leftGrams);
+						leftGramCount = leftGrams.size();
+						murmur("leftGramCount:%i", leftGramCount);			
 						for(size_t j = 0; j < leftGramCount; j++)
 						{
 							double tempScore = 0.0f;
@@ -85,30 +95,13 @@ double BiGram::viterbi(
 							//	cerr << bigramScore << "(bigram) + ";
 							//	tempScore += bigramScore;
 							//}
-							//else if(dic_->has(leftGram)) {								double pseudoBackOffWeight = 1000.0f;
+							//else if(dic_->has(leftGram)) {
 								double bigramBackOff =
 									//lm_->getLogProb(leftGram) +
-									rightGrams[i].freq;
-								//@warning
-								// This is a heuristic to adjust the unbalanced
-								// tsi.src.
-								//@{
-								if(rightGrams[i].word.length() > 3)
-									bigramBackOff *=
-										rightGrams[i].word.length() * 1500.0f;
-								//@}
+									leftGrams[j].logProb +
 									//lm_->getBackOff(rightGram);
+									rightGrams[i].backOff;
 								tempScore += bigramBackOff;
-								murmur(
-									"leftGrams[%i]:%s=%i",
-									j,
-									leftGrams[j].word.c_str(),
-									leftGrams[j].freq);
-								murmur( 
-									"rightGrams[%i]:%s=%i",
-									i,
-									rightGrams[i].word.c_str(),
-									rightGrams[i].freq);
 								murmur("tempScore:%f", tempScore);								
 							//}
 							//else {
@@ -130,19 +123,8 @@ double BiGram::viterbi(
 						murmur("else!");
 						double tempScore =
 							//lm_->getLogProb(rightGram);
-							rightGrams[i].freq;
-						//@warning
-						// This is a heuristic to adjust the unbalanced
-						// tsi.src.
-						//@{
-						if(rightGrams[i].word.length() > 3)
-							tempScore *= rightGrams[i].word.length() * 1500.0f;
-						//@}
-						murmur(
-							"rightGrams[%i]:%s=%f",
-							i,
-							rightGrams[i].word.c_str(),
-							tempScore);
+							rightGrams[i].logProb;
+						murmur("tempScore:%f", tempScore);
 						if(bestScore == 0.0f || tempScore > bestScore)
 						{
 							bestScore = tempScore;
@@ -224,6 +206,7 @@ double BiGram::viterbi(
 	return scores[length];
 }
 
+#if 0
 size_t BiGram::maximumMatching(
     DictionarySingleton* dictionary, vector<Token>& tokenVectorRef,
     size_t index, size_t stop, bool doBackward)
@@ -428,6 +411,7 @@ size_t BiGram::maximumMatching(
 
 	return bestVocabularyCombination.freq;
 }
+#endif
 
 void BiGram::getCharacterCombination(
     vector<string>& leftRef, vector<string>& rightRef,
@@ -435,9 +419,10 @@ void BiGram::getCharacterCombination(
 {
 	for(size_t i = 0; i < leftRef.size(); ++i)
 		for(size_t j = 0; j < rightRef.size(); ++j)
-			combinedRef.push_back(leftRef[i] + "\t" + rightRef[j]);
+			combinedRef.push_back(leftRef[i] + "-" + rightRef[j]);
 }
 
+#if 0
 void BiGram::getVocabularyCombination(
     vector<Vocabulary>& leftRef, vector<Vocabulary>& rightRef,
     vector<Vocabulary>& combinedRef)
@@ -490,3 +475,4 @@ void BiGram::getVocabularyCombination(
 
 	combinedRef = combinedVocabularyVector;
 }
+#endif
