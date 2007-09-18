@@ -62,8 +62,8 @@ IDI_ICON1               ICON                    "OVIME.ico"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,7,2,6
- PRODUCTVERSION 0,7,2,6
+ FILEVERSION 0,7,2,7
+ PRODUCTVERSION 0,7,2,7
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -79,12 +79,12 @@ BEGIN
         BLOCK "040404b0"
         BEGIN
             VALUE "FileDescription", "中文 (繁體) - 開放香草輸入法平台"
-            VALUE "FileVersion", "0, 7, 2, 6"
+            VALUE "FileVersion", "0, 7, 2, 7"
             VALUE "InternalName", "OVIME"
             VALUE "LegalCopyright", "BSD License"
             VALUE "OriginalFilename", "OVIME.ime"
             VALUE "ProductName", "OpenVanilla"
-            VALUE "ProductVersion", "0, 7, 2, 6"
+            VALUE "ProductVersion", "0, 7, 2, 7"
         END
     END
     BLOCK "VarFileInfo"
