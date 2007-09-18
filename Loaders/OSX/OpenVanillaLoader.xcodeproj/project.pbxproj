@@ -252,7 +252,6 @@
 		6A9651FC0970E50E004BCC4D /* ServerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerDelegate.m; path = OVDisplayServer/ServerDelegate.m; sourceTree = "<group>"; };
 		6A96520D0970E77B004BCC4D /* OpenVanillaLoaderIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaLoaderIcon.icns; path = OVLoaderResources/OpenVanillaLoaderIcon.icns; sourceTree = "<group>"; };
 		6A96520E0970E77B004BCC4D /* org.openvanilla.OVLoader.DefaultSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = org.openvanilla.OVLoader.DefaultSettings.plist; path = OVLoaderResources/org.openvanilla.OVLoader.DefaultSettings.plist; sourceTree = "<group>"; };
-		6A9652130970E7C9004BCC4D /* OpenVanilla-TSComponent-0.8.0.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-TSComponent-0.8.0.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A9652140970E7C9004BCC4D /* OpenVanilla-TSComponent-UnicodeScript-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-TSComponent-UnicodeScript-Info.plist"; sourceTree = "<group>"; };
 		6A9652550970EC0B004BCC4D /* OpenVanillaMenuIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaMenuIcon.icns; path = TSComponentResources/OpenVanillaMenuIcon.icns; sourceTree = "<group>"; };
 		6A96525E0970EC2E004BCC4D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = TSComponentResources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -273,6 +272,7 @@
 		D433F2F80CA0013C0097A356 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = OVLoaderResources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D433F32C0CA002630097A356 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = OVLoaderResources/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D433F32D0CA002670097A356 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = OVLoaderResources/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D458D2140CA00A1F00325C7D /* OpenVanilla-TSComponent-0.8.0.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "OpenVanilla-TSComponent-0.8.0.bundle"; path = "build/Release/OpenVanilla-TSComponent-0.8.0.bundle"; sourceTree = "<group>"; };
 		D48C827F0C09CB4B00EB008A /* OVFilter-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVFilter-info.plist"; sourceTree = "<group>"; };
 		D48C82A90C09CCE800EB008A /* ovwidgerplugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ovwidgerplugin.h; path = OVFilterWidget/ovwidgerplugin.h; sourceTree = "<group>"; };
 		D48C82AA0C09CCE800EB008A /* ovwidgerplugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ovwidgerplugin.mm; path = OVFilterWidget/ovwidgerplugin.mm; sourceTree = "<group>"; };
@@ -610,6 +610,7 @@
 				6A0750FC09712DAC00CA4201 /* ovfilter */,
 				D48C84030C09D52E00EB008A /* OVFilter.widgetplugin */,
 				6A24B0400A447EFA002ECCC2 /* OpenVanilla-TSComponent-0.8.0.bundle */,
+				D458D2140CA00A1F00325C7D /* OpenVanilla-TSComponent-0.8.0.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -789,7 +790,7 @@
 			);
 			name = "OpenVanilla-TSComponent-UnicodeScript";
 			productName = "OpenVanilla-TSComponent";
-			productReference = 6A9652130970E7C9004BCC4D /* OpenVanilla-TSComponent-0.8.0.bundle */;
+			productReference = D458D2140CA00A1F00325C7D /* OpenVanilla-TSComponent-0.8.0.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		6AA434DA0A38BF9E0028130A /* OpenVanilla-TSComponent-TraditionalChineseScript */ = {
