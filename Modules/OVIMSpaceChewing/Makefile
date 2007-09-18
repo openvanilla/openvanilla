@@ -48,5 +48,5 @@ CFLAGS+=-DLIBCHEWING_VERSION="\"$(LIBCHEWING_VERSION)\"" -g
 LIBS+=-lchewing
 LDFLAGS+=-L$(LIBCHEWING_PREFIX)/lib
 
-include ../Mk/ov.module.mk
+include ../Mk/ov.module.i386.mk
 

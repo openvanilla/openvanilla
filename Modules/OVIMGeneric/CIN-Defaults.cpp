@@ -32,14 +32,14 @@
 #include <stdlib.h>
 
 #include "OVOSDef.h"
-/*
+
 #ifndef WIN32
 	#include <strings.h> //for strcasecmp
 #else
 	#include <string.h> //for stricmp
 	#define strcasecmp stricmp
 #endif
-*/
+
 bool CINSetConfig(const char *sn, OVDictionary *d, const char *tn, int ln, 
     int ac=0, int hit=0, int ssk=0, int bp=1);
 
