@@ -18,5 +18,7 @@
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
 	<string>0.8.0</string>
+	<key>LSHasLocalizedDisplayName</key>
+	<true/>
 </dict>
 </plist>

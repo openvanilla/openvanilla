@@ -1,5 +1,5 @@
 # Makefile: xcodebuild wrapper for OpenVanilla Loader for Mac OS X
-# Copyright (c) 2004-2006 The OpenVanilla Project
+# Copyright (c) 2004-2007 The OpenVanilla Project
 # Please see trunk/License/license.txt for the terms of use
 
 BUILDER=xcodebuild
