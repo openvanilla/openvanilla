@@ -53,15 +53,15 @@ void DictionarySingleton::lostInstance()
 	}
 }
 
-bool DictionarySingleton::isVocabulary(string characters)
+bool DictionarySingleton::isVocabulary(string keystrokes)
 {      
     SQLite3Statement *sth = imTableDB->prepare(checkString);
     if (!sth) {
         murmur("illegal SQL statement[%s]?", checkString);
         return false;
     }
-	sth->bind_text(1, characters.c_str());
-    murmur("query string=%s", characters.c_str());
+	sth->bind_text(1, keystrokes.c_str());
+    murmur("query string=%s", keystrokes.c_str());
 
     if (sth->step() == SQLITE_ROW) {
 		murmur("found!");

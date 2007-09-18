@@ -202,7 +202,10 @@ extern "C" unsigned int OVGetLibraryVersion() {
 }
 extern "C" int OVInitializeLibrary(OVService*, const char*p) { 
 	Watch watch;
+
 	watch.start();
+
+
 
     db=new SQLite3;  // this never gets deleted, but so do we
     char dbfile[PATH_MAX];
@@ -223,7 +226,9 @@ extern "C" int OVInitializeLibrary(OVService*, const char*p) {
     }
 
 	watch.stop();
+
 	murmur("%1.3f sec:\tOVInitializeLibrary", watch.getSec());
+
 
     return 1;
 }
@@ -318,12 +323,16 @@ int OVIMTobacco::initialize(OVDictionary *cfg, OVService * s, const char *p) {
 	murmur("initial predictor(%s)", tsiDbFilePath);
 
 	Watch watch;
+
 	watch.start();
+
     predictor = PredictorSingleton::getInstance(tsiDbFilePath);
 
     update(cfg, s);
 	watch.stop();
+
 	murmur("%1.3f sec:\tPredictorSingleton::getInstance(tsiDbFilePath)", watch.getSec());
+
 
 	murmur("initialized");    
     return 1;        
@@ -1051,12 +1060,15 @@ const char *IMGKeySequence::query(char c) {
 }
 
 const char *IMGKeySequence::compose() {
+	murmur("IMGKeySequence::compose, seq=\"%s\"",seq);
+
     strcpy(composebuf, "");
 
-	///////////////////////////////////////////
-	//   ¦Xªkª`­µ´À´«
-	///////////////////////////////////////////
 	string foo(seq);
+//@warning The following code block ate punctuations...
+//@defgroup Detect legal BoPoMoFo vowels and consonants.
+//@{
+/*
 	if(isBoPoMoFoLayout)
 	{
 		string inputStr(seq);		
@@ -1064,21 +1076,16 @@ const char *IMGKeySequence::compose() {
 		len = static_cast<int>(foo.length());
 		strcpy(seq,foo.c_str());
 	}	
-		
+*/
+//@}
+
 	for(size_t i = 0; i < foo.length(); i++)
 	{
 		const char *s=query(foo[i]);
         if (s) strcat(composebuf, s);
 	}
-	///////////////////////////////////////////
 	
-/*    for (int i=0; i<len; i++) {
-        const char *s=query(seq[i]);
-        if (s) strcat(composebuf, s);
-	}*/
-
-	//murmur("IMGKeySequence::compose, seq=\"%s\"",seq);
-	//murmur("\tcomposebuf=\"%s\"",composebuf);
+	murmur("\tcomposebuf=\"%s\"",composebuf);
 
 	if(isHsuLayout) {
 		string bpmfStr(composebuf);

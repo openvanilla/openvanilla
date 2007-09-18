@@ -60,7 +60,7 @@ public:
 			imTableId.c_str());
 	}
 
-	bool isVocabulary(string characters);
+	bool isVocabulary(string keystrokes);
 	bool getWordsByCharacters(string characters,
 		vector<Vocabulary>& vocabularyVectorRef, bool isLimited);
 	bool getVocablesByKeystrokes(string keystrokes,
