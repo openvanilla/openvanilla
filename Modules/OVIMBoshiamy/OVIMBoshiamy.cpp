@@ -141,10 +141,24 @@ protected:
 extern "C" unsigned int OVGetLibraryVersion() {
     return OV_VERSION;
 }
-extern "C" int OVInitializeLibrary(OVService*, const char*p) { 
+extern "C" int OVInitializeLibrary(OVService* s, const char*p) { 
     db=new SQLite3;  // this never gets deleted, but so do we
     char dbfile[PATH_MAX];
-    sprintf(dbfile, "%s/OVIMBoshiamy/imtables.db", p);
+	
+#ifdef OSX_INCLUDE
+    char buf[PATH_MAX];	
+    CFBundleRef bundle = CFBundleGetBundleWithIdentifier(CFSTR("org.openvanilla.module.ovimboshiamy"));
+    if (!bundle) return 0;
+	
+    CFURLRef url = CFBundleCopyResourcesDirectoryURL(bundle);
+    if (!url) return 0;
+	
+    CFURLGetFileSystemRepresentation(url, TRUE, (UInt8*)buf, sizeof(buf)-1);
+    sprintf(dbfile, "%s/imtables.db", buf);		
+#else
+    sprintf(dbfile, "%s%sOVIMBoshiamy%simtables.db", p,  s->pathSeparator(),  s->pathSeparator());
+#endif	
+	
     if (int err=db->open(dbfile)) {
         murmur("SQLite3 error! code=%d", err);
         return 0;
