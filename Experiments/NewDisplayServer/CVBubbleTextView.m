@@ -85,6 +85,7 @@
 	[tmp release];
 	
 	_boundingRect = viewBound;
+	[self setNeedsDisplay:YES];
 }
 - (void)setBackgroundColor:(NSColor *)color
 {
