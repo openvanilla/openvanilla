@@ -9,6 +9,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NSBezierPath (CVBezelPathAdditions)
-+ (NSBezierPath*)fullBezelPathWithRect:(NSRect)boundingRect radius:(float)radius;
-+ (NSBezierPath*)halfBezelPathWithRect:(NSRect)boundingRect radius:(float)radius;
++ (NSBezierPath*)bezelPathWithRect:(NSRect)boundingRect radius:(float)radius;
 @end

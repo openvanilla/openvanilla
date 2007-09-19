@@ -7,6 +7,10 @@
 		<dict>
 			<key>ACTIONS</key>
 			<dict>
+				<key>textButtion2Action</key>
+				<string>id</string>
+				<key>textButton1Action</key>
+				<string>id</string>
 				<key>updateTextAction</key>
 				<string>id</string>
 			</dict>

@@ -16,6 +16,11 @@
 NSPoint CVFixWindowOriginWithTSMCoordinate(NSRect windowRect, Point oldStylePoint);
 NSColor *CVColorFromRGBValueString(NSString *string);
 
+@protocol OVDistributedStringReceiver
+- (void)sendString:(NSString *)string;
+- (void)sendCharacter:(NSString *)string;
+@end
+
 @implementation CVDisplayServerController
 - (void)awakeFromNib
 {
@@ -29,11 +34,14 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 	
 	_fadeAlpha = 1.0;
 	_fadeTimer = nil;
+	_nextRemoteID = 0;
+	_currentFocusRemoteID = -1;
 }
 - (IBAction)updateTextAction:(id)sender
 {
 	[_candidateWindow orderFront:self];
 	[(CVBubbleTextWindow*)_candidateWindow setText:[_userText stringValue]];
+	[self sendStringToCurrentComposingBuffer:[_userText stringValue]];
 }
 - (void)setConfig:(bycopy NSDictionary*)cfg
 {
@@ -146,6 +154,63 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 	else {
 		[_notificationWindow setAlphaValue:_fadeAlpha];
 	}
+}
+- (void)sendStringToCurrentComposingBuffer:(NSString *)string
+{
+	NSLog(@"sending string to current composing buffer: %@", string);
+	if (_currentFocusRemoteID < 0) return;
+	NSLog(@"no remote buffer is activated, end");
+	
+	NSString *remoteName = [NSString stringWithFormat:@"OVLoaderComposingBuffer-%d", _currentFocusRemoteID];
+	
+	id remoteObject = [[NSConnection rootProxyForConnectionWithRegisteredName:remoteName host:nil] retain];
+	
+	if (remoteObject) {
+		@try {
+			[remoteObject setProtocolForProxy:@protocol(OVDistributedStringReceiver)];
+			[remoteObject sendString:string];
+			[remoteObject release];
+		}
+		@catch(NSException *e) {
+			NSLog(@"exception: %@", [e description]);
+		}
+	}
+}
+- (void)sendCharacterToCurrentComposingBuffer:(NSString*)string
+{
+	NSLog(@"sending string to current composing buffer: %@, current remote ID = %d", string, _currentFocusRemoteID);
+	if (_currentFocusRemoteID < 0) {
+		NSLog(@"no remote buffer is activated, end");
+		return;
+	}
+	
+	NSString *remoteName = [NSString stringWithFormat:@"OVLoaderComposingBuffer-%d", _currentFocusRemoteID];
+	
+	id remoteObject = [[NSConnection rootProxyForConnectionWithRegisteredName:remoteName host:nil] retain];
+	
+	if (remoteObject) {
+		@try {
+			[remoteObject setProtocolForProxy:@protocol(OVDistributedStringReceiver)];
+			[remoteObject sendCharacter:string];
+			[remoteObject release];
+		}
+		@catch(NSException *e) {
+			NSLog(@"exception: %@", [e description]);
+		}
+	}
+	else {
+		NSLog(@"no remote object available");
+	}
+}
+- (int)nextAvailableRemoteID
+{
+	NSLog(@"asking for the next available remote ID, returning %d", _nextRemoteID);
+	return _nextRemoteID++;
+}
+- (void)setCurrentComposingBufferRemoteID:(int)remoteID
+{
+	NSLog(@"setting current focus remote ID to %d", remoteID);
+	_currentFocusRemoteID = remoteID;
 }
 @end
 

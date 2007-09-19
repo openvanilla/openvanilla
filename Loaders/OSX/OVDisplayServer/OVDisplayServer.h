@@ -43,6 +43,10 @@
 - (void)notifyFade;
 - (void)aboutDialog;
 - (BOOL)ping;
+- (void)sendCharacterToCurrentComposingBuffer:(NSString*)string;
+- (void)sendStringToCurrentComposingBuffer:(NSString*)string;
+- (int)nextAvailableRemoteID;
+- (void)setCurrentComposingBufferRemoteID:(int)remoteID;
 @end
 
 #endif

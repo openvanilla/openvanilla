@@ -100,6 +100,7 @@ public:
     void clearAll();
     void syncConfig(int forced=0);
     
+	void sendString(NSString *string);
 protected:
     CVLoader *loader;
     CVBuffer *buf;
@@ -109,6 +110,7 @@ protected:
 	
 	// key receiver test
 	id keyrcvr;
+	int remoteID;
 };
 
 #endif

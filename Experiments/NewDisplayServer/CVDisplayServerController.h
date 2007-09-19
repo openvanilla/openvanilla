@@ -19,6 +19,9 @@
 	
 	float _fadeAlpha;
 	NSTimer *_fadeTimer;
+	
+	int _nextRemoteID;
+	int _currentFocusRemoteID;
 }
 - (IBAction)updateTextAction:(id)sender;
 - (void)stopTimer;

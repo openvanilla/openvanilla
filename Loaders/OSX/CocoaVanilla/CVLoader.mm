@@ -95,7 +95,7 @@ int CVLoader::init(MenuRef m) {
 	NSArray *aba=[NSBundle allBundles];
 	int ai;
 	for (ai=0; ai<[aba count]; ai++) {
-		NSLog(@"Loaded along with bundle %d %@", ai, [[aba objectAtIndex:ai] bundleIdentifier]);
+		// NSLog(@"Loaded along with bundle %d %@", ai, [[aba objectAtIndex:ai] bundleIdentifier]);
 		
 		if ([[[aba objectAtIndex:ai] bundleIdentifier] isEqualToString:@"org.openvanilla.webkitserver"]) {
 			NSLog(@"Can't be loaded with WebKitServer, die.");
@@ -583,65 +583,35 @@ NSString *CVLoader::MSG(NSString *m) {
 }
 
 
-
-@protocol OVKeyReceiver
-- (void)sendKey:(char)c;
+@protocol OVDistributedStringReceiver
+- (void)sendString:(NSString *)string;
+- (void)sendCharacter:(NSString *)string;
 @end
 
-@interface CVKeyReceiver : NSObject <OVKeyReceiver>
+@interface CVKeyReceiver : NSObject <OVDistributedStringReceiver>
 {
 	CVContext *ctxt;
 }
-- (id)initWithContext:(CVContext*)c;
-- (void)sendKey:(char)c;
-- (void)unregister;
-- (void)dealloc;
+- (id)initWithCVContext:(CVContext*)c;
+- (void)sendString:(NSString *)string;
 @end
 
 @implementation CVKeyReceiver
-- (void)dealloc {
-	NSLog(@"object dealloc");
-	[super dealloc];
-}
-- (void)unregister {
-	NSLog(@"unregistering object");
-	NSConnection *cnc=[NSConnection defaultConnection];
-	// [cnc invalidate];
-
-	// [cnc setRootObject:nil];
-
-	if ([cnc registerName:nil]) {
-		NSLog(@"unregister succeeded");
-	}
-	else {
-		NSLog(@"unregister failed");
-	}
-	
-	NSLog(@"invalidating connection");
-}
-- (id)initWithContext:(CVContext*)c
+- (id)initWithCVContext:(CVContext*)c
 {
-	ctxt=NULL;
-	if ((self = [super init])) {
-		ctxt=c;
-
-		NSConnection *cnc=[NSConnection defaultConnection];
-		[cnc setRootObject:self];
-		if ([cnc registerName:@"OVKeyReceiverTest"]) {
-			NSLog(@"OVKeyReceiverTest registered");
-		}
-		else {
-			NSLog(@"OVKeyReceiverTest registration failed");
-		}
-
+	if (self = [super init]) {
+		ctxt = c;
 	}
 	return self;
 }
-- (void)sendKey:(char)c {
-	if (ctxt) {
-		NSLog(@"Sending key event via registered object. Key='%c'", c);
-		ctxt->event(c, 0);
-	}
+- (void)sendCharacter:(NSString *)string
+{
+	ctxt->event([string characterAtIndex:0], 0);
+}
+- (void)sendString:(NSString *)string
+{
+	NSLog(@"received remote string: %@", string);
+	ctxt->sendString(string);
 }
 @end
 
@@ -654,6 +624,8 @@ CVContext::CVContext(CVLoader *p) {
     // NSLog(@"dumping cfg");
     // NSLog([loader->cfg description]);
     stamp=[loader->cfg timeStamp];
+	keyrcvr = nil;
+	
     syncConfig(1);
 }
 
@@ -661,6 +633,7 @@ CVContext::~CVContext() {
     CVSAFETY;
     delete buf;
     [contexts release];
+	[keyrcvr release];
 }
 
 void CVContext::activate(TSComposingBuffer *b) {
@@ -676,6 +649,30 @@ void CVContext::activate(TSComposingBuffer *b) {
 		
 		// since OS X 10.5, lost connection stops yielding exception? we'll do it on our own
 		if (!loader->dspsrvr || !value) @throw [NSException exceptionWithName:@"OVException" reason:@"Display server connection lost" userInfo:nil];
+
+
+		if (!keyrcvr) {
+			keyrcvr = [[CVKeyReceiver alloc] initWithCVContext:this];
+			
+			remoteID = -1;			
+			remoteID = [loader->dspsrvr nextAvailableRemoteID];
+
+			if (remoteID >= 0) {
+				// vend keyrcvr
+				NSConnection *connection = [NSConnection defaultConnection];
+				[connection setRootObject:keyrcvr];
+				
+				if (![connection registerName:[NSString stringWithFormat:@"OVLoaderComposingBuffer-%d", remoteID]]) {
+					NSLog(@"Register loader composer buffer (remoteID: %d) failed", remoteID);
+				}
+				else {
+					NSLog(@"Register loader composer buffer (remoteID: %d) succeeded", remoteID);	
+				}
+			}
+		}
+		
+		NSLog(@"telling display server that we're focused, our remote ID = %d", remoteID);
+		[loader->dspsrvr setCurrentComposingBufferRemoteID:remoteID];
 	}
 	@catch(NSException *e) {	
 		NSLog(@"OVDisplayServer connection lost, reconnecting");
@@ -710,10 +707,6 @@ void CVContext::activate(TSComposingBuffer *b) {
 		loader->candi->changeDisplayServer(dspsrvr);
 		loader->srv->changeDisplayServer(dspsrvr);
 	}	
-
-	keyrcvr=[CVKeyReceiver alloc];
-	if (keyrcvr) [(CVKeyReceiver*)keyrcvr initWithContext:this];
-
 
     CVSAFETY;
     buf->setComposingBuffer(b);
@@ -753,8 +746,6 @@ void CVContext::activate(TSComposingBuffer *b) {
 
 void CVContext::deactivate() {
     CVSAFETY;
-	[keyrcvr unregister];
-	[keyrcvr release];
 	
     // if the buf is not empty, it means the user just switches away from the
     // current IM temporarily
@@ -775,6 +766,18 @@ void CVContext::deactivate() {
     loader->setActiveContext(NULL);
     loader->candi->hide()->clear()->update();
     loader->srv->closeNotification();
+	
+	NSLog(@"telling display server that we're defocused, our remote ID = %d, now = -1", remoteID);
+	[loader->dspsrvr setCurrentComposingBufferRemoteID:-1];
+	
+}
+
+void CVContext::sendString(NSString *string)
+{
+	CVSAFETY;
+	
+	buf->clear()->append([string UTF8String])->send();
+	clearAll();
 }
 
 void CVContext::fix() {

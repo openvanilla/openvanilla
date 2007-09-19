@@ -62,7 +62,7 @@
 	NSBezierPath *outerPath;
 	NSBezierPath *innerPath;
 	
-	outerPath = [NSBezierPath fullBezelPathWithRect:viewBound radius:_radius];
+	outerPath = [NSBezierPath bezelPathWithRect:viewBound radius:_radius];
 	
 	NSRect innerBound = viewBound;
 	
@@ -73,7 +73,7 @@
 	
 	// move the innerBound's y up
 	innerBound.origin.y = viewBound.size.height - innerBound.size.height - 2.0;
-	innerPath = [NSBezierPath halfBezelPathWithRect:innerBound radius:_radius / 2.0];
+	innerPath = [NSBezierPath bezelPathWithRect:innerBound radius:_radius / 2.0];
 	
 	NSBezierPath *tmp;
 	tmp = _outerBezelPath;
@@ -137,25 +137,33 @@
 }
 - (void)drawRect:(NSRect)rect
 {
-	// gradient fill the outer bezel
-	NSGradient *gradient;
-	
-	if (_outerBezelPath) {
-		gradient = [[[NSGradient alloc] initWithStartingColor:_backgroundFromColor endingColor:_backgroundToColor] autorelease];
-		[gradient drawInBezierPath:_outerBezelPath angle:270.0];
+	#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+		// gradient fill the outer bezel
+		NSGradient *gradient;
 		
-		// draw a gray outer ring
-//		[[NSColor grayColor] setStroke];
-//		[_outerBezelPath stroke];
-	}
-	
-	if (_innerBezelPath) {
-		// then use the transparent white to fill the inner bezel
-		NSColor *whiteColor1 = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5];
-		NSColor *whiteColor2 = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.0];
-		gradient = [[[NSGradient alloc] initWithStartingColor:whiteColor1 endingColor:whiteColor2] autorelease];
-		[gradient drawInBezierPath:_innerBezelPath angle:270.0];
-	}
+		if (_outerBezelPath) {
+			gradient = [[[NSGradient alloc] initWithStartingColor:_backgroundFromColor endingColor:_backgroundToColor] autorelease];
+			[gradient drawInBezierPath:_outerBezelPath angle:270.0];
+		}
+		
+		if (_innerBezelPath) {
+			// then use the transparent white to fill the inner bezel
+			NSColor *whiteColor1 = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5];
+			NSColor *whiteColor2 = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.0];
+			gradient = [[[NSGradient alloc] initWithStartingColor:whiteColor1 endingColor:whiteColor2] autorelease];
+			[gradient drawInBezierPath:_innerBezelPath angle:270.0];
+		}
+	#else
+		if (_outerBezelPath) {
+			[_backgroundFromColor setFill];
+			[_outerBezelPath fill];
+		}
+		
+		if (_innerBezelPath) {
+			[[NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5] setFill];
+			[_innerBezelPath fill];
+		}		
+	#endif
 	
 	[_attributedString drawAtPoint:NSMakePoint(_padding, _padding)];
 }

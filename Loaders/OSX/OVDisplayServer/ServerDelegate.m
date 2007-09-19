@@ -221,6 +221,22 @@ void CVFixWindowOrigin(NSWindow *w, Point p);
     [t setFont:[NSFont fontWithName:font size:s]];
 	[t setTextColor:fc];
 }
+- (void)sendStringToCurrentComposingBuffer:(NSString*)string
+{
+	if (string) ;
+}
+- (int)nextAvailableRemoteID
+{
+	return -1;
+}
+- (void)setCurrentComposingBufferRemoteID:(int)remoteID
+{
+	if (remoteID) ;
+}
+- (void)sendCharacterToCurrentComposingBuffer:(NSString*)string
+{
+	if (string) ;
+}
 @end
 
 void CVFixWindowOrigin(NSWindow *w, Point p) {
