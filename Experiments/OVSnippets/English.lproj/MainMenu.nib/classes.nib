@@ -1,0 +1,13 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {saveAction = id; stringAction = id; }; 
+            CLASS = "OVSnippet_AppDelegate"; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {sendKey = id; snippetListview = id; window = NSWindow; }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
