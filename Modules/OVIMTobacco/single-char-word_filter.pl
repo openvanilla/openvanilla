@@ -27,7 +27,9 @@ for(keys(%$key2wordHashRef)) {
 			$bpmf .= $key2charHashRef->{$_};
 		}
 	}
-	$bpmf2topWordHash{$bpmf} = $key2wordHashRef->{$key};
+	foreach(keys(%{$key2wordHashRef->{$key}})) {
+		$bpmf2topWordHash{$_}{$bpmf} = 1;
+	}
 	$bpmf = "";
 }
 close bpmfTableFile;
@@ -35,13 +37,20 @@ close bpmfTableFile;
 open lmFile, "<iasl.lm";
 while(<lmFile>) {
 	chomp;
+	my $line = $_;
 	if(/#?\s*(\S+)\s+([^_]+)_(\S+)\s+(\S+)/) {
 		my($p, $w, $c, $b) =
 			($1, decode("utf8", $2), decode("utf8", $3), $4);
 	
-        	unless(exists $bpmf2topWordHash{$c} &&
-			$w ne $bpmf2topWordHash{$c}) {
-			print "$_\n";
+        	if(length($w) > 1) {
+			print "$line\n";
+		}
+		else {
+			foreach(keys(%{$bpmf2topWordHash{$w}})) {
+				if($c eq $_) {
+					print "$line\n";
+				}
+			}
 		}
 	}
 }
@@ -68,10 +77,11 @@ sub parseChardef {
 		next unless $_;
 		last if (/%chardef/);
 		my @a=split;
-		unless (exists $key2topWordHash{decode("utf8", $a[0])})
+		my $key = decode("utf8", $a[0]);
+		my $word = decode("utf8", $a[1]);
+		unless (keys(%{$key2topWordHash{$key}}) == 1)
 		{
-			$key2topWordHash{decode("utf8", $a[0])} =
-				decode("utf8", $a[1]);
+			$key2topWordHash{$key}{$word} = 1;
 		}
 	}
 
