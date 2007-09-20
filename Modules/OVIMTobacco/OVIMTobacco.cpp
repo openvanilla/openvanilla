@@ -132,7 +132,8 @@ protected:
     bool canNewSequence;
     bool doInsert;
 
-	const static size_t MAX_BUFFER_LENGTH = 12;
+	//@warning This has no effect since word-popping is disabled.
+	const static size_t MAX_BUFFER_LENGTH = 8;
 };
 
 class OVIMTobacco : public OVInputMethod {
@@ -651,8 +652,9 @@ void OVIMTobaccoContext::freshBuffer() {
 
 	size_t currentBufferLength = predictor->tokenVector.size();
 
+	//@warning Disables the word-popping behavior.
 	//<comment author='b6s'>Adds new function to pop up a word.
-	if(currentBufferLength == MAX_BUFFER_LENGTH) keyCommitOneTerm();
+	//if(currentBufferLength == MAX_BUFFER_LENGTH) keyCommitOneTerm();
 	//</comment>
 
 	if(strlen(seq.sequence()) > 0 && position < currentBufferLength)

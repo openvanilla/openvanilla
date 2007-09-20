@@ -30,7 +30,7 @@ public:
 		vector<Vocabulary>& combinedRef);
 	*/
 
-	const static size_t MAX_CONTEXT_LENGTH = 7;
+	const static size_t MAX_CONTEXT_LENGTH = 6;
 };
 
 #endif

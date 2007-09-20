@@ -19,7 +19,7 @@ PredictorSingleton::PredictorSingleton(const char* dbFilePath)
 {
 	dictionary =
 	   DictionarySingleton::getInstance(dbFilePath);
-	tokenVector.reserve(BiGram::MAX_CONTEXT_LENGTH);
+	//tokenVector.reserve(BiGram::MAX_CONTEXT_LENGTH);
 }
 
 PredictorSingleton::~PredictorSingleton()
@@ -330,20 +330,22 @@ void PredictorSingleton::setTokenVectorByBigram()
 		++end;
 	}
 
-	//<comment author='b6s' date='20070320'>
-	// Set tokens fixed when the vector size reachs MAX_CONTEXT_LENGTH.
-	if(tokenVector.size() == BiGram::MAX_CONTEXT_LENGTH ||
-		(tokenVector.size() > BiGram::MAX_CONTEXT_LENGTH &&
-		tokenVector.size() % BiGram::MAX_CONTEXT_LENGTH == 0)) {
-		int step = BiGram::MAX_CONTEXT_LENGTH;
-		vector<Token>::iterator iter = tokenVector.end();
-		while(step > 0) {
-			iter--;
-			iter->isFixed = true;
-			step--;			
-		}
+	//@defgroup FixesOlderWords
+	//@{
+	// Sets tokens fixed when the vector size reachs MAX_CONTEXT_LENGTH.
+	/*
+	if(tokenVector.size() > BiGram::MAX_CONTEXT_LENGTH) {
+		int tail = tokenVector.size() - BiGram::MAX_CONTEXT_LENGTH - 1;
+		for(int i = 0, j = tail;
+			i < BiGram::MAX_CONTEXT_LENGTH, j >= 0;
+			i++, j--)
+			tokenVector[j].isFixed = true;
+
+		while(tail < tokenVector.size() && tokenVector[tail].withSuffix)
+			tokenVector[++tail].isFixed = true;
 	}
-	//</comment>
+	*/
+	//@}
 
 	setComposedString();
 }
