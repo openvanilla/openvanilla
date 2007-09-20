@@ -42,6 +42,8 @@
 #define CIN_MAXSEQLEN           "maxKeySequenceLength"
 #define CIN_HITMAX              "hitMaxAndCompose"
 #define CIN_SHIFTSELECTIONKEY   "shiftSelectionKey"
+#define CIN_MATCHONECHAR		"matchOneChar"
+#define CIN_MATCHZEROORMORECHAR	"matchZeroOrMoreChar"
 
 bool CINSetDefaults(const char *shortname, OVDictionary *dict);
 

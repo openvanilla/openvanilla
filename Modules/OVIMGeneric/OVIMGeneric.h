@@ -114,6 +114,9 @@ public:
     virtual int isHitMaxAndCompose() { return cfgHitMaxAndCompose; }
     virtual bool isShiftSelKey() { return doShiftSelKey; };
     
+	virtual char matchOneChar() { return cfgMatchOneChar; }
+	virtual char matchZeroOrMoreChar() { return cfgMatchZeroOrMoreChar; }
+
 protected:
     OVCINInfo cininfo;
     OVCIN* cintab;
@@ -124,6 +127,9 @@ protected:
     int cfgBeep;
     int cfgAutoCompose;
     int cfgHitMaxAndCompose;
+
+	char cfgMatchOneChar;
+	char cfgMatchZeroOrMoreChar;
     
     bool doShiftSelKey;
 };

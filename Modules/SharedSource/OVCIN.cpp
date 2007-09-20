@@ -31,12 +31,13 @@
 //#define  OV_DEBUG
 #include "OVCIN.h"
 #include "OVFileHandler.h"
+#include "OVWildcard.h"
 
 #include <algorithm>	//for stable_sort() and transform()
 
 using namespace std;
 using namespace _OVCIN;
-
+using namespace OpenVanilla;
 
 static const char *propertyNames[NUM_PROPERTY] = {
     "selkey", "ename", "cname", "tcname", "scname", "endkey", "encoding" 
@@ -146,7 +147,29 @@ size_t OVCIN::getVectorFromMap(const CinMap& inMapRef,
         outStringVectorRef.clear();
     return 0;    
 }
- 
+
+
+size_t OVCIN::getVectorFromMapWithWildcardSupport(const CinMap& inMapRef,const string& inKey, vector<string>& outStringVectorRef, char matchOneChar, char matchZeroOrMoreChar)
+{
+	size_t i, size = inMapRef.size();
+	OVWildcard wildcard(inKey, matchOneChar, matchZeroOrMoreChar, true);
+	
+	outStringVectorRef.clear();
+	
+	for (i = 0; i < size; i++) {
+		const pair<string, vector<string> >& p = inMapRef[i];
+		
+		if (wildcard.match(p.first)) {
+			const vector<string>& vs = p.second;
+			size_t j, vssize = vs.size();
+			
+			for (j = 0; j < vssize; j++) outStringVectorRef.push_back(vs[j]);
+		}
+	}
+	
+	return outStringVectorRef.size();
+}
+
 int OVCIN::searchCinMap(const CinMap& m, const string& key) const{
     int mid, low = 0, high = static_cast<int>(m.size()) - 1;
     while(low <= high){
@@ -211,63 +234,3 @@ int OVCIN::findClosestLowerBound(const CinMap& m, const string& key) const{
     
     return findClosestUpperBound(m, newkey);
 }
-
-
-
-
-// discarded test routines
-/*
-void OVCIN::show(const CinMap &m, int x) {
-    if (x==-1) {
-        printf ("    not found\n");
-        return;
-    }
-    
-    int size=m.size();
-    printf ("    %d: ", x);
-    if (x > 0) {
-        printf ("[%d: %s >>> (%d: %s)", x-1, m[x-1].first.c_str(), x, m[x].first.c_str());
-    }
-    else {
-        printf ("(%d: %s)", x, m[x].first.c_str());
-    }
-
-    if (x < size-1) {
-        printf (" <<< %d: %s]\n", x+1, m[x+1].first.c_str());
-    }    
-    else {
-        printf ("\n");
-    }
-}
-
-void OVCIN::runtest(const string &s) {
-    CinMap &m=maps[_OVCIN::M_CHAR];
-
-    pair<int, int> p=findRangeStartingWith(m, s);
-    
-    printf ("key=%s, range=(%d, %d)", s.c_str(), p.first, p.second);
-    if (p.first==-1) printf (": NOT FOUND\n"); 
-    else {
-        printf("\n");
-        show(m, p.first);
-        show(m, p.second);
-    }
-}
-void OVCIN::test() {
-    runtest("");
-    runtest("0");
-    runtest("9");
-    runtest("a");
-    runtest("az");
-    runtest("b");
-    runtest("yv");
-    runtest("yvvv");
-    runtest("yw");
-    runtest("yz");
-    runtest("zxc");
-    runtest("zxcy");
-    runtest("zxcz");
-    runtest("zzzz");    
-}
-*/
-

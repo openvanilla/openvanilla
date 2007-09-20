@@ -104,12 +104,11 @@ public:
     inline bool isValidKey(const string& keyString) const;
     
     // VXCIN::getKey()
-    inline size_t getCharVectorByKey(const string& inKey,
-                           vector<string>& outStringVectorRef);
+    inline size_t getCharVectorByKey(const string& inKey, vector<string>& outStringVectorRef);
     
     // VXCIN::find()
-    inline size_t getWordVectorByChar(const string& inKey,
-                            vector<string>& outStringVectorRef);
+    inline size_t getWordVectorByChar(const string& inKey, vector<string>& outStringVectorRef);
+	inline size_t getWordVectorByCharWithWildcardSupport(const string& inKey, vector<string>& outStringVectorRef, char matchOneChar = 0, char matchZeroOrMoreChar = 0);
 
     void show(const CinMap &m, int x);
     void runtest(const string &s);
@@ -119,6 +118,8 @@ protected:
     size_t getVectorFromMap(const CinMap& inMapRef,
                          const string& inKey,
                          vector<string>& outStringVectorRef);
+	size_t getVectorFromMapWithWildcardSupport(const CinMap& inMapRef,const string& inKey, vector<string>& outStringVectorRef, char matchOneChar = 0, char matchZeroOrMoreChar = 0);
+					
     void lowerStr(string& str);
     void parseCinVector(const vector<string>& cinVector);
     void setBlockMap();
@@ -187,5 +188,17 @@ size_t OVCIN::getWordVectorByChar(const string& inKey,
 {
     return getVectorFromMap(maps[_OVCIN::M_CHAR], inKey, outStringVectorRef);
 }
+
+size_t OVCIN::getWordVectorByCharWithWildcardSupport(const string& inKey, vector<string>& outStringVectorRef, char matchOneChar, char matchZeroOrMoreChar)
+{
+	string::size_type i, len = inKey.length();
+	for (i = 0; i < len; i++) {
+		if (inKey[i] == matchOneChar || inKey[i] == matchZeroOrMoreChar)
+			return getVectorFromMapWithWildcardSupport(maps[_OVCIN::M_CHAR], inKey, outStringVectorRef, matchOneChar, matchZeroOrMoreChar);
+	}
+	
+	return getVectorFromMap(maps[_OVCIN::M_CHAR], inKey, outStringVectorRef);
+}
+
 
 #endif

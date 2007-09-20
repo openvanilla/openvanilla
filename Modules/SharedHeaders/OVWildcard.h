@@ -49,8 +49,10 @@ namespace OpenVanilla {
 		
 		typedef pair<Directive, int> State;
 		
-		OVWildcard(const string& expression, char matchOneChar, char matchZeroOrMoreChar)
+		OVWildcard(const string& expression, char matchOneChar = 0, char matchZeroOrMoreChar = 0, bool matchEndOfLine = false)
 		{
+			m_matchEndOfLine = matchEndOfLine;
+			
 			for (string::size_type i = 0; i < expression.length(); i++) {
 				char c = expression[i];
 				if (c == matchOneChar) {
@@ -131,12 +133,14 @@ namespace OpenVanilla {
 				}				
 			}
 			
+			if (m_matchEndOfLine && i != slength) return false;
 			return true;
 		}
 		
 		friend ostream& operator<<(ostream& stream, const OVWildcard& wildcard);
 		
 	protected:
+		bool m_matchEndOfLine;
 		vector<State> m_states;
 	};
 

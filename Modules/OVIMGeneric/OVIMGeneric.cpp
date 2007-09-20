@@ -136,6 +136,8 @@ const char* OVIMGeneric::identifier()
 
 const char* OVIMGeneric::localizedName(const char* locale)
 {
+	return (cininfo.ename + " (wildcard)").c_str();
+	
     if (!strcasecmp(locale, "zh_TW")) return cininfo.tcname.c_str();
     if (!strcasecmp(locale, "zh_CN")) return cininfo.scname.c_str();
     return cininfo.ename.c_str();
@@ -169,6 +171,13 @@ void OVIMGeneric::update(OVDictionary* global, OVService*)
 	   doShiftSelKey = false;
 	else
 		doShiftSelKey = true;
+		
+	const char *cfgstr;
+	cfgstr = global->getStringWithDefault(CIN_MATCHONECHAR, "");
+	cfgMatchOneChar = cfgstr[0];
+	
+	cfgstr = global->getStringWithDefault(CIN_MATCHZEROORMORECHAR, "");
+	cfgMatchZeroOrMoreChar = cfgstr[0];
 }
 
 OVInputMethodContext *OVIMGeneric::newContext()
@@ -239,8 +248,7 @@ int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textb
         // if autocomposing is on
         if (keyseq.length() && parent->isAutoCompose())
         {
-			if (cintab->getWordVectorByChar(keyseq.getSeq(),
-			candidateStringVector))
+			if (cintab->getWordVectorByCharWithWildcardSupport(keyseq.getSeq(), candidateStringVector, parent->matchOneChar(), parent->matchZeroOrMoreChar()))
             {
                 autocomposing=true;
                 compose(buf, textbar, srv);
@@ -375,7 +383,7 @@ int OVGenericContext::compose(OVBuffer *buf, OVCandidate *textbar, OVService *sr
     if (!keyseq.length()) return 0;
 
 	size_t size =
-		cintab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
+		cintab->getWordVectorByCharWithWildcardSupport(keyseq.getSeq(), candidateStringVector, parent->matchOneChar(), parent->matchZeroOrMoreChar());
 
     if (size == 0)
     {
