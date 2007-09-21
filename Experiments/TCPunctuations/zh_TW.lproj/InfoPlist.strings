@@ -1,0 +1,4 @@
+/* Localized versions of Info.plist keys */
+CFBundleName = "繁體中文標點符號";
+CFBundleDisplayName = "繁體中文標點符號";
+NSHumanReadableCopyright = "© The OpenVanilla Project, 2004-2007";

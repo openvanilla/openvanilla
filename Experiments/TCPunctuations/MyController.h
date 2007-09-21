@@ -1,5 +1,5 @@
 //
-// OVSnippet_AppDelegate.h
+// MyController.h
 //
 // Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
@@ -31,22 +31,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface OVSnippet_AppDelegate : NSObject
-{
-    IBOutlet NSWindow *window;
-    IBOutlet id snippetListview;
-    IBOutlet id sendKey;	
-	id _displayServer;	
-    NSPersistentStoreCoordinator *persistentStoreCoordinator;
-    NSManagedObjectModel *managedObjectModel;
-    NSManagedObjectContext *managedObjectContext;
+
+@interface MyController : NSWindowController {
+	id _displayServer;
 }
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
-- (NSManagedObjectModel *)managedObjectModel;
-- (NSManagedObjectContext *)managedObjectContext;
-
+- (IBAction)characterAction:(id)sender;
 - (IBAction)stringAction:(id)sender;
-- (IBAction)saveAction:(id)sender;
-
 @end

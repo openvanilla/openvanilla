@@ -1,10 +1,33 @@
 //
-//  OVSnippet_AppDelegate.m
-//  OVSnippet
-//
-//  Created by zonble on 2007/9/20.
-//  Copyright __MyCompanyName__ 2007 . All rights reserved.
-//
+// OVSnippet_AppDelegate.m
+//  
+// Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. Neither the name of OpenVanilla nor the names of its contributors
+//    may be used to endorse or promote products derived from this software
+//    without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
 
 #import "OVSnippet_AppDelegate.h"
 #define MSG(x)      [[NSBundle mainBundle] localizedStringForKey:x value:nil table:nil]
@@ -14,12 +37,21 @@
 - (void)sendCharacterToCurrentComposingBuffer:(NSString *)string;
 @end
 
+NSPoint setWindowPosition(NSRect windowRect)
+{	
+	NSPoint point;
+	NSRect frame = [[NSScreen mainScreen] frame];
+	point.y = windowRect.size.height + 50;
+	point.x = frame.size.width - windowRect.size.width - 20;		
+	return point;
+}
+
 @implementation OVSnippet_AppDelegate
 
 - (NSString *)applicationSupportFolder {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
-    return [basePath stringByAppendingPathComponent:@"OVSnippet"];
+    return [basePath stringByAppendingPathComponent:@"OpenVanilla"];
 }
 
 - (NSManagedObjectModel *)managedObjectModel {
@@ -136,6 +168,7 @@
 }
 
 // Services
+// User should add new Snippet by using the Service Menu.
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
     [NSApp setServicesProvider:self];
@@ -165,47 +198,50 @@
 
 - (BOOL)tableView:(NSTableView*)tv acceptDrop:(id <NSDraggingInfo>)info row:(int)row dropOperation:(NSTableViewDropOperation)op
 {
-	NSLog(@"acceptDrop");
-    NSPasteboard *myPasteboard=[info draggingPasteboard];
-    NSString *string;	
-    string=[myPasteboard stringForType:NSStringPboardType];
-	[self insertSnippet:string];
-    return YES;
+   NSLog(@"acceptDrop");
+   NSPasteboard *myPasteboard=[info draggingPasteboard];
+   NSString *string;	
+   string=[myPasteboard stringForType:NSStringPboardType];
+   [self insertSnippet:string];
+   return YES;
 }
 
 - (void)awakeFromNib
 {
-	NSLog(@"Start!");
-	_displayServer = [[NSConnection rootProxyForConnectionWithRegisteredName:@"OVNewDisplayServer-0.8.0" host:nil] retain];
-	
-	if (_displayServer) {
-		[_displayServer setProtocolForProxy:@protocol(CVDisplayServerPart)];		
-		[window setLevel:NSFloatingWindowLevel];
-	}
-	else {
-		NSLog(@"cannot find display server");
-		[[NSApplication sharedApplication] terminate:self];
-	}
-	// Make it posssible to drag and drop text into snippetListview
-    [snippetListview registerForDraggedTypes:
-		[NSArray arrayWithObjects:NSStringPboardType,nil]];	
-	[snippetListview setDelegate:self];
-	[snippetListview setDoubleAction:@selector(tableAction)];
-	[snippetListview setDraggingSourceOperationMask:NSDragOperationLink
-									 forLocal:NO];
-	[snippetListview setDraggingSourceOperationMask:NSDragOperationCopy
-									 forLocal:YES];	
-	
+   NSLog(@"Start!");
+   _displayServer = [[NSConnection rootProxyForConnectionWithRegisteredName:@"OVNewDisplayServer-0.8.0" host:nil] retain];
+
+   if (_displayServer) {
+      [_displayServer setProtocolForProxy:@protocol(CVDisplayServerPart)];		
+      [window setLevel:NSFloatingWindowLevel];
+   }
+   else {
+      NSLog(@"cannot find display server");
+      [[NSApplication sharedApplication] terminate:self];	
+   }
+
+   [window setFrameTopLeftPoint:setWindowPosition([window frame])];
+   // Make it posssible to drag and drop text into snippetListview
+   [snippetListview registerForDraggedTypes:
+      [NSArray arrayWithObjects:NSStringPboardType,nil]];	
+   [snippetListview setDelegate:self];
+   [snippetListview setDoubleAction:@selector(tableAction)];
+   [snippetListview setDraggingSourceOperationMask:NSDragOperationLink
+      forLocal:NO];
+   [snippetListview setDraggingSourceOperationMask:NSDragOperationCopy
+      forLocal:YES];	
+
 }
 
 
 - (void)tableAction {
-	[_displayServer sendStringToCurrentComposingBuffer:[sendKey toolTip]];
+   [_displayServer sendStringToCurrentComposingBuffer:[sendKey toolTip]];
 }
 
 - (IBAction)stringAction:(id)sender
 {
-	[_displayServer sendStringToCurrentComposingBuffer:[sender toolTip]];
+   [_displayServer sendStringToCurrentComposingBuffer:[sender toolTip]];
 }
 
 @end
+

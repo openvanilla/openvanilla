@@ -7,34 +7,54 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		770B37ED0679A11B001EADE2 /* OVSnippet_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 770B37EC0679A11B001EADE2 /* OVSnippet_DataModel.xcdatamodel */; };
-		77C8280E06725ACE000B614F /* OVSnippet_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* OVSnippet_AppDelegate.m */; };
+		6A0ACAA20CA1679F0074C2DB /* MyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0ACAA10CA1679F0074C2DB /* MyController.m */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		D486A65D0CA229CA00804CFB /* ServicesMenu.strings in Resources */ = {isa = PBXBuildFile; fileRef = D486A65B0CA229CA00804CFB /* ServicesMenu.strings */; };
+		D4B0F7970CA3E23C00AECF18 /* mj.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4B0F7960CA3E23C00AECF18 /* mj.icns */; };
+		D4D9B2260CA29DA900F6B13C /* TraditionalChinesePunctuations_Prefix.pch in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D4D9B2250CA29DA900F6B13C /* TraditionalChinesePunctuations_Prefix.pch */; };
+		D4FE56550CA3BFF200FF7AB3 /* mj.png in Resources */ = {isa = PBXBuildFile; fileRef = D4FE56540CA3BFF200FF7AB3 /* mj.png */; };
+		D4FE565B0CA3C7F500FF7AB3 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = D4FE565A0CA3C7F500FF7AB3 /* close.png */; };
+		D4FE56620CA3C9E600FF7AB3 /* MJWindow.h in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D4FE56600CA3C9E600FF7AB3 /* MJWindow.h */; };
+		D4FE56630CA3C9E600FF7AB3 /* MJWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D4FE56610CA3C9E600FF7AB3 /* MJWindow.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D4D9B20E0CA29B3C00F6B13C /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D4D9B2260CA29DA900F6B13C /* TraditionalChinesePunctuations_Prefix.pch in Copy Frameworks */,
+				D4FE56620CA3C9E600FF7AB3 /* MJWindow.h in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		32CA4F630368D1EE00C91783 /* OVSnippet_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVSnippet_Prefix.pch; sourceTree = "<group>"; };
-		770B37EC0679A11B001EADE2 /* OVSnippet_DataModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = OVSnippet_DataModel.xcdatamodel; sourceTree = "<group>"; };
-		77C82804067257F0000B614F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		77C8280B06725ACE000B614F /* OVSnippet_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVSnippet_AppDelegate.h; sourceTree = "<group>"; };
-		77C8280C06725ACE000B614F /* OVSnippet_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVSnippet_AppDelegate.m; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* OVSnippets.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OVSnippets.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D486A65C0CA229CA00804CFB /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
-		D4D9B24B0CA2A43200F6B13C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D4D9B24E0CA2A44000F6B13C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D4D9B2560CA2A48F00F6B13C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
-		D4D9B2570CA2A49600F6B13C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
+		6A0ACAA00CA1679F0074C2DB /* MyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyController.h; sourceTree = "<group>"; };
+		6A0ACAA10CA1679F0074C2DB /* MyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyController.m; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* TCPunctuations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCPunctuations.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4B0F7790CA3DEE500AECF18 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D4B0F77A0CA3DEEC00AECF18 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D4B0F7960CA3E23C00AECF18 /* mj.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = mj.icns; sourceTree = "<group>"; };
+		D4D9B2250CA29DA900F6B13C /* TraditionalChinesePunctuations_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraditionalChinesePunctuations_Prefix.pch; sourceTree = "<group>"; };
+		D4FE56540CA3BFF200FF7AB3 /* mj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mj.png; sourceTree = "<group>"; };
+		D4FE565A0CA3C7F500FF7AB3 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
+		D4FE56600CA3C9E600FF7AB3 /* MJWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJWindow.h; sourceTree = "<group>"; };
+		D4FE56610CA3C9E600FF7AB3 /* MJWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJWindow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +72,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				77C8280B06725ACE000B614F /* OVSnippet_AppDelegate.h */,
-				77C8280C06725ACE000B614F /* OVSnippet_AppDelegate.m */,
+				6A0ACAA00CA1679F0074C2DB /* MyController.h */,
+				6A0ACAA10CA1679F0074C2DB /* MyController.m */,
+				D4FE56600CA3C9E600FF7AB3 /* MJWindow.h */,
+				D4FE56610CA3C9E600FF7AB3 /* MJWindow.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -69,9 +91,9 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				77C82804067257F0000B614F /* CoreData.framework */,
-				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -79,28 +101,27 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* OVSnippets.app */,
+				8D1107320486CEB800E47090 /* TCPunctuations.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		29B97314FDCFA39411CA2CEA /* OVSnippet */ = {
+		29B97314FDCFA39411CA2CEA /* ScreenKeyboardExample */ = {
 			isa = PBXGroup;
 			children = (
-				7756732906782D8800D1FEB8 /* Models */,
+				D4D9B2250CA29DA900F6B13C /* TraditionalChinesePunctuations_Prefix.pch */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
-			name = OVSnippet;
+			name = ScreenKeyboardExample;
 			sourceTree = "<group>";
 		};
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				32CA4F630368D1EE00C91783 /* OVSnippet_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
@@ -109,7 +130,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D486A65B0CA229CA00804CFB /* ServicesMenu.strings */,
+				D4B0F7960CA3E23C00AECF18 /* mj.icns */,
+				D4FE565A0CA3C7F500FF7AB3 /* close.png */,
+				D4FE56540CA3BFF200FF7AB3 /* mj.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
@@ -126,33 +149,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7756732906782D8800D1FEB8 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				770B37EC0679A11B001EADE2 /* OVSnippet_DataModel.xcdatamodel */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D1107260486CEB800E47090 /* OVSnippets */ = {
+		8D1107260486CEB800E47090 /* TCPunctuations */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 26FC0A840875C7B200E6366F /* Build configuration list for PBXNativeTarget "OVSnippets" */;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "TCPunctuations" */;
 			buildPhases = (
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
+				D4D9B20E0CA29B3C00F6B13C /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = OVSnippets;
+			name = TCPunctuations;
 			productInstallPath = "$(HOME)/Applications";
-			productName = OVSnippet;
-			productReference = 8D1107320486CEB800E47090 /* OVSnippets.app */;
+			productName = ScreenKeyboardExample;
+			productReference = 8D1107320486CEB800E47090 /* TCPunctuations.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -160,7 +176,7 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 26FC0A880875C7B200E6366F /* Build configuration list for PBXProject "OVSnippets" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TCPunctuations" */;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -170,10 +186,11 @@
 				zh_TW,
 				zh_CN,
 			);
-			mainGroup = 29B97314FDCFA39411CA2CEA /* OVSnippet */;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* ScreenKeyboardExample */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
-				8D1107260486CEB800E47090 /* OVSnippets */,
+				8D1107260486CEB800E47090 /* TCPunctuations */,
 			);
 		};
 /* End PBXProject section */
@@ -185,7 +202,9 @@
 			files = (
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				D486A65D0CA229CA00804CFB /* ServicesMenu.strings in Resources */,
+				D4FE56550CA3BFF200FF7AB3 /* mj.png in Resources */,
+				D4FE565B0CA3C7F500FF7AB3 /* close.png in Resources */,
+				D4B0F7970CA3E23C00AECF18 /* mj.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,8 +216,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
-				77C8280E06725ACE000B614F /* OVSnippet_AppDelegate.m in Sources */,
-				770B37ED0679A11B001EADE2 /* OVSnippet_DataModel.xcdatamodel in Sources */,
+				6A0ACAA20CA1679F0074C2DB /* MyController.m in Sources */,
+				D4FE56630CA3C9E600FF7AB3 /* MJWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,8 +228,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				089C165DFE840E0CC02AAC07 /* English */,
-				D4D9B24B0CA2A43200F6B13C /* zh_TW */,
-				D4D9B24E0CA2A44000F6B13C /* zh_CN */,
+				D4B0F7790CA3DEE500AECF18 /* zh_TW */,
+				D4B0F77A0CA3DEEC00AECF18 /* zh_CN */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -223,58 +242,52 @@
 			name = MainMenu.nib;
 			sourceTree = "<group>";
 		};
-		D486A65B0CA229CA00804CFB /* ServicesMenu.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D486A65C0CA229CA00804CFB /* English */,
-				D4D9B2560CA2A48F00F6B13C /* zh_TW */,
-				D4D9B2570CA2A49600F6B13C /* zh_CN */,
-			);
-			name = ServicesMenu.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		26FC0A850875C7B200E6366F /* Debug */ = {
+		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = OVSnippet_Prefix.pch;
+				GCC_PREFIX_HEADER = ScreenKeyboardExample_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = OVSnippet;
+				PRODUCT_NAME = ScreenKeyboardExample;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
-		26FC0A860875C7B200E6366F /* Release */ = {
+		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 				);
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = OVSnippet_Prefix.pch;
+				GCC_PREFIX_HEADER = TraditionalChinesePunctuations_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = OVSnippets;
+				PRODUCT_NAME = TCPunctuations;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
-		26FC0A890875C7B200E6366F /* Debug */ = {
+		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -284,9 +297,13 @@
 			};
 			name = Debug;
 		};
-		26FC0A8A0875C7B200E6366F /* Release */ = {
+		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
@@ -297,20 +314,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		26FC0A840875C7B200E6366F /* Build configuration list for PBXNativeTarget "OVSnippets" */ = {
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "TCPunctuations" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				26FC0A850875C7B200E6366F /* Debug */,
-				26FC0A860875C7B200E6366F /* Release */,
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		26FC0A880875C7B200E6366F /* Build configuration list for PBXProject "OVSnippets" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TCPunctuations" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				26FC0A890875C7B200E6366F /* Debug */,
-				26FC0A8A0875C7B200E6366F /* Release */,
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

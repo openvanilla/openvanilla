@@ -1,5 +1,5 @@
 //
-// OVSnippet_AppDelegate.h
+// MyController.m
 //
 // Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
@@ -29,24 +29,51 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#import <Cocoa/Cocoa.h>
+#import "MyController.h"
 
-@interface OVSnippet_AppDelegate : NSObject
-{
-    IBOutlet NSWindow *window;
-    IBOutlet id snippetListview;
-    IBOutlet id sendKey;	
-	id _displayServer;	
-    NSPersistentStoreCoordinator *persistentStoreCoordinator;
-    NSManagedObjectModel *managedObjectModel;
-    NSManagedObjectContext *managedObjectContext;
+@protocol CVDisplayServerPart
+- (void)sendStringToCurrentComposingBuffer:(NSString *)string;
+- (void)sendCharacterToCurrentComposingBuffer:(NSString *)string;
+@end
+
+NSPoint setWindowPosition(NSRect windowRect)
+{	
+	NSPoint point;
+//	NSRect frame = [[NSScreen mainScreen] frame];
+	point.y = windowRect.size.height + 50;
+	point.x = 30;		
+	return point;
 }
 
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
-- (NSManagedObjectModel *)managedObjectModel;
-- (NSManagedObjectContext *)managedObjectContext;
-
-- (IBAction)stringAction:(id)sender;
-- (IBAction)saveAction:(id)sender;
-
+@implementation MyController
+- (void)awakeFromNib
+{
+	_displayServer = [[NSConnection rootProxyForConnectionWithRegisteredName:@"OVNewDisplayServer-0.8.0" host:nil] retain];
+	
+	if (_displayServer) {
+		[_displayServer setProtocolForProxy:@protocol(CVDisplayServerPart)];
+		
+		[[self window] setLevel:NSScreenSaverWindowLevel];
+	}
+	else {
+		NSLog(@"cannot find display server");
+		[[NSApplication sharedApplication] terminate:self];
+	}
+	[[self window] setFrameTopLeftPoint:setWindowPosition([[self window] frame])];	
+}
+- (void)windowWillClose:(NSNotification *)notification
+{
+	NSLog(@"Screen keyboard terminated.");
+	[[NSApplication sharedApplication] terminate:self];
+}
+- (IBAction)characterAction:(id)sender
+{
+	NSLog(@"sending character %@", [sender title]);
+	[_displayServer sendCharacterToCurrentComposingBuffer:[sender title]];
+}
+- (IBAction)stringAction:(id)sender
+{
+	NSLog(@"sending composed string %@", [sender title]);
+	[_displayServer sendStringToCurrentComposingBuffer:[sender title]];
+}
 @end
