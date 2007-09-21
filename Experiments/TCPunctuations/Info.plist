@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>mj</string>
+	<string>mjicon</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.openvanilla.tcpunctuations</string>
 	<key>CFBundleInfoDictionaryVersion</key>
