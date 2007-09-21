@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "CTGradient.h"
 
 @interface CVBubbleTextView : NSView {
 	NSMutableAttributedString *_attributedString;
@@ -17,9 +18,11 @@
 	NSColor *_textColor;
 	NSFont *_font;
 	NSRect _boundingRect;
+	NSRect _innerBound;	
 	float _padding;
 	float _radius;
 }
+
 - (void)setText:(NSString *)newText;
 - (void)setBackgroundColor:(NSColor *)color;
 - (void)setTextColor:(NSColor *)color;
