@@ -6,27 +6,15 @@
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string>DisplayServerIcon</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.displayserver</string>
+	<string>org.openvanilla.ctgradient</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>FMWK</string>
 	<key>CFBundleSignature</key>
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>0.8.0</string>
-	<key>LSBackgroundOnly</key>
-	<string>1</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
-	<key>LSHasLocalizedDisplayName</key>
-	<true/>	
+	<string>1.0</string>
 </dict>
 </plist>

@@ -8,6 +8,7 @@
 
 #import "CVBubbleTextView.h"
 #import "NSBezierPathAdditions.h"
+#import "CTGradient.h"
 
 #define CVBubbleTextViewLineHeightThreshold	12.0
 
@@ -187,11 +188,11 @@
 	// + (id)hydrogenSpectrumGradient;
 	
 	Gradient = [[CTGradient gradientWithBeginningColor:_backgroundFromColor endingColor:_backgroundToColor] retain];
-	[Gradient fillRect:rect angle:90 radius: 4.0];
+	[Gradient fillRect:rect angle:90 radius: _radius];
 	NSColor *whiteColor1 = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5];
 	NSColor *whiteColor2 = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.0];
 	Gradient = [[CTGradient gradientWithBeginningColor:whiteColor1 endingColor:whiteColor2] retain];
-	[Gradient fillRect:_innerBound angle:270 radius: 4.0];
+	[Gradient fillRect:_innerBound angle:270 radius: _radius];
 	[_attributedString drawAtPoint:NSMakePoint(_padding, _padding)];
 }
 

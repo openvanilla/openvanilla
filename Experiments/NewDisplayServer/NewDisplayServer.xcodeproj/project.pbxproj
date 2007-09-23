@@ -6,6 +6,21 @@
 	objectVersion = 42;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		D4430C750CA6F5A9009B6776 /* NewDisplayServer-Deafult */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = D4430C7E0CA6F5E0009B6776 /* Build configuration list for PBXAggregateTarget "NewDisplayServer-Deafult" */;
+			buildPhases = (
+			);
+			dependencies = (
+				D4430C770CA6F5B0009B6776 /* PBXTargetDependency */,
+				D4430C790CA6F5B3009B6776 /* PBXTargetDependency */,
+			);
+			name = "NewDisplayServer-Deafult";
+			productName = "NewDisplayServer-Deafult";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		6A321E2D0CA04B4E0087FD6A /* NSBezierPathAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A321E2C0CA04B4E0087FD6A /* NSBezierPathAdditions.m */; };
 		6A5479130CA071B800C07FB1 /* ovstandard.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A5479120CA071B800C07FB1 /* ovstandard.icns */; };
@@ -16,13 +31,47 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		D4FC86D60CA2B72000EA2390 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = D4FC86D50CA2B72000EA2390 /* CTGradient.m */; };
+		D4430C460CA6F4FC009B6776 /* CTGradient.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D4430C330CA6F444009B6776 /* CTGradient.framework */; };
+		D4430C8C0CA6F70C009B6776 /* CTGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = D4430C8A0CA6F70C009B6776 /* CTGradient.h */; };
+		D4430C8D0CA6F70C009B6776 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = D4430C8B0CA6F70C009B6776 /* CTGradient.m */; };
+		D4430C8F0CA6F759009B6776 /* DisplayServerIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4430C8E0CA6F759009B6776 /* DisplayServerIcon.icns */; };
+		D49B6C9C0CA702E5009175E4 /* CTGradient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4430C330CA6F444009B6776 /* CTGradient.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D4430C760CA6F5B0009B6776 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4430C320CA6F444009B6776;
+			remoteInfo = CTGradient;
+		};
+		D4430C780CA6F5B3009B6776 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1107260486CEB800E47090;
+			remoteInfo = NewDisplayServer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D4430C440CA6F4CA009B6776 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D4430C460CA6F4FC009B6776 /* CTGradient.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -40,8 +89,13 @@
 		6A7DC3290CA03E2000B580D3 /* CVDisplayServerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVDisplayServerController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* NewDisplayServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewDisplayServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4FC86D40CA2B72000EA2390 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
-		D4FC86D50CA2B72000EA2390 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
+		D4430C330CA6F444009B6776 /* CTGradient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CTGradient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4430C340CA6F444009B6776 /* CTGradient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "CTGradient-Info.plist"; sourceTree = "<group>"; };
+		D4430C8A0CA6F70C009B6776 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTGradient.h; path = CTGradient/CTGradient.h; sourceTree = "<group>"; };
+		D4430C8B0CA6F70C009B6776 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTGradient.m; path = CTGradient/CTGradient.m; sourceTree = "<group>"; };
+		D4430C8E0CA6F759009B6776 /* DisplayServerIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DisplayServerIcon.icns; sourceTree = "<group>"; };
+		D4430CB90CA6F9DC009B6776 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D4430CBA0CA6F9E4009B6776 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +103,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D49B6C9C0CA702E5009175E4 /* CTGradient.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4430C310CA6F444009B6776 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,8 +121,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D4FC86D40CA2B72000EA2390 /* CTGradient.h */,
-				D4FC86D50CA2B72000EA2390 /* CTGradient.m */,
 				6A7DC3020CA0391100B580D3 /* CVBubbleTextWindow.h */,
 				6A7DC3030CA0391100B580D3 /* CVBubbleTextWindow.m */,
 				6A7DC3120CA03AB000B580D3 /* CVBubbleTextView.h */,
@@ -77,6 +137,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4430C330CA6F444009B6776 /* CTGradient.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -86,7 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
-				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
@@ -103,11 +163,13 @@
 		29B97314FDCFA39411CA2CEA /* NewDisplayServer */ = {
 			isa = PBXGroup;
 			children = (
+				D4430C400CA6F494009B6776 /* CTGradient */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				D4430C340CA6F444009B6776 /* CTGradient-Info.plist */,
 			);
 			name = NewDisplayServer;
 			sourceTree = "<group>";
@@ -125,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				6A5479120CA071B800C07FB1 /* ovstandard.icns */,
+				D4430C8E0CA6F759009B6776 /* DisplayServerIcon.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
@@ -141,13 +204,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D4430C400CA6F494009B6776 /* CTGradient */ = {
+			isa = PBXGroup;
+			children = (
+				D4430C8A0CA6F70C009B6776 /* CTGradient.h */,
+				D4430C8B0CA6F70C009B6776 /* CTGradient.m */,
+			);
+			name = CTGradient;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D4430C2E0CA6F444009B6776 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4430C8C0CA6F70C009B6776 /* CTGradient.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		8D1107260486CEB800E47090 /* NewDisplayServer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "NewDisplayServer" */;
 			buildPhases = (
+				D4430C440CA6F4CA009B6776 /* Copy Frameworks */,
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
@@ -162,6 +246,24 @@
 			productReference = 8D1107320486CEB800E47090 /* NewDisplayServer.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D4430C320CA6F444009B6776 /* CTGradient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4430C350CA6F446009B6776 /* Build configuration list for PBXNativeTarget "CTGradient" */;
+			buildPhases = (
+				D4430C2E0CA6F444009B6776 /* Headers */,
+				D4430C2F0CA6F444009B6776 /* Resources */,
+				D4430C300CA6F444009B6776 /* Sources */,
+				D4430C310CA6F444009B6776 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CTGradient;
+			productName = CTGradient;
+			productReference = D4430C330CA6F444009B6776 /* CTGradient.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -169,11 +271,21 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "NewDisplayServer" */;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				zh_TW,
+				zh_CN,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* NewDisplayServer */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				D4430C750CA6F5A9009B6776 /* NewDisplayServer-Deafult */,
 				8D1107260486CEB800E47090 /* NewDisplayServer */,
+				D4430C320CA6F444009B6776 /* CTGradient */,
 			);
 		};
 /* End PBXProject section */
@@ -186,6 +298,14 @@
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				6A5479130CA071B800C07FB1 /* ovstandard.icns in Resources */,
+				D4430C8F0CA6F759009B6776 /* DisplayServerIcon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4430C2F0CA6F444009B6776 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,17 +321,39 @@
 				6A7DC3140CA03AB000B580D3 /* CVBubbleTextView.m in Sources */,
 				6A7DC32A0CA03E2000B580D3 /* CVDisplayServerController.m in Sources */,
 				6A321E2D0CA04B4E0087FD6A /* NSBezierPathAdditions.m in Sources */,
-				D4FC86D60CA2B72000EA2390 /* CTGradient.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4430C300CA6F444009B6776 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4430C8D0CA6F70C009B6776 /* CTGradient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D4430C770CA6F5B0009B6776 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4430C320CA6F444009B6776 /* CTGradient */;
+			targetProxy = D4430C760CA6F5B0009B6776 /* PBXContainerItemProxy */;
+		};
+		D4430C790CA6F5B3009B6776 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D1107260486CEB800E47090 /* NewDisplayServer */;
+			targetProxy = D4430C780CA6F5B3009B6776 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				089C165DFE840E0CC02AAC07 /* English */,
+				D4430CB90CA6F9DC009B6776 /* zh_TW */,
+				D4430CBA0CA6F9E4009B6776 /* zh_CN */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -231,6 +373,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/build/Release\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/build/Release\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -249,6 +398,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/build/Release\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/build/Release\"";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = NewDisplayServer_Prefix.pch;
@@ -283,6 +439,82 @@
 			};
 			name = Release;
 		};
+		D4430C360CA6F446009B6776 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "CTGradient-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CTGradient;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4430C370CA6F446009B6776 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "CTGradient-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CTGradient;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D4430C7F0CA6F5E0009B6776 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "NewDisplayServer-Deafult";
+			};
+			name = Debug;
+		};
+		D4430C800CA6F5E0009B6776 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				PRODUCT_NAME = "NewDisplayServer-Deafult";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -300,6 +532,24 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4430C350CA6F446009B6776 /* Build configuration list for PBXNativeTarget "CTGradient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4430C360CA6F446009B6776 /* Debug */,
+				D4430C370CA6F446009B6776 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4430C7E0CA6F5E0009B6776 /* Build configuration list for PBXAggregateTarget "NewDisplayServer-Deafult" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4430C7F0CA6F5E0009B6776 /* Debug */,
+				D4430C800CA6F5E0009B6776 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -619,7 +619,7 @@ static void resolveHSV(float *color1, float *color2);
 #pragma mark Drawing
 - (void)drawSwatchInRect:(NSRect)rect
   {
-  [self fillRect:rect angle:45];
+  [self fillRect:rect angle:45 radius:0];
   }
 
 - (void)fillRect:(NSRect)rect angle:(float)angle radius:(float)radius
@@ -778,7 +778,7 @@ static void resolveHSV(float *color1, float *color2);
 	[transform concat];
 	
 	[path addClip];
-	[self fillRect:[path bounds] angle:0];
+	[self fillRect:[path bounds] angle:0 radius:0];
 	[path transformUsingAffineTransform:transform];
 	[transform release];
   [currentContext restoreGraphicsState];

@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "CTGradient.h"
 
 @interface CVBubbleTextView : NSView {
 	NSMutableAttributedString *_attributedString;
