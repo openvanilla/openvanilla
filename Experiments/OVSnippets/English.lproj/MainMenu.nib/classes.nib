@@ -2,12 +2,18 @@
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
-            ACTIONS = {saveAction = id; stringAction = id; }; 
+            ACTIONS = {
+                insertSnippetViaClipboard = id; 
+                saveAction = id; 
+                showAddMenu = id; 
+                stringAction = id; 
+            }; 
             CLASS = "OVSnippet_AppDelegate"; 
             LANGUAGE = ObjC; 
-            OUTLETS = {sendKey = id; snippetListview = id; window = NSWindow; }; 
+            OUTLETS = {addMenu = id; sendKey = id; snippetListview = id; window = NSWindow; }; 
             SUPERCLASS = NSObject; 
-        }
+        }, 
+        {CLASS = SnippetWindow; LANGUAGE = ObjC; SUPERCLASS = NSPanel; }
     ); 
     IBVersion = 1; 
 }

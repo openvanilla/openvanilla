@@ -37,15 +37,6 @@
 - (void)sendCharacterToCurrentComposingBuffer:(NSString *)string;
 @end
 
-NSPoint setWindowPosition(NSRect windowRect)
-{	
-	NSPoint point;
-	NSRect frame = [[NSScreen mainScreen] frame];
-	point.y = windowRect.size.height + 50;
-	point.x = frame.size.width - windowRect.size.width - 20;		
-	return point;
-}
-
 @implementation OVSnippet_AppDelegate
 
 - (NSString *)applicationSupportFolder {
@@ -116,7 +107,6 @@ NSPoint setWindowPosition(NSRect windowRect)
 }
  
 - (IBAction) saveAction:(id)sender {
-
     NSError *error = nil;
     if (![[self managedObjectContext] save:&error]) {
         [[NSApplication sharedApplication] presentError:error];
@@ -153,11 +143,11 @@ NSPoint setWindowPosition(NSRect windowRect)
     [super dealloc];
 }
 
-- (void)windowWillClose:(NSNotification *)notification
-{
-	NSLog(@"OpenVanilla Snippets terminated.");
+- (void)windowWillClose:(NSNotification *)notification {
 	[[NSApplication sharedApplication] terminate:self];	
 }
+
+//
 
 - (void) insertSnippet:(NSString *)string {
 	NSLog(@"Add object");
@@ -180,14 +170,21 @@ NSPoint setWindowPosition(NSRect windowRect)
     NSArray *types;
 	
     types = [pboard types];	
-    if (![types containsObject:NSStringPboardType] || !(pboardString = [pboard stringForType:NSStringPboardType])) {
-        *error = NSLocalizedString(@"Error: Pasteboard doesn't contain a string.", @"Pasteboard couldn't give string.");
+    if (![types containsObject:NSStringPboardType] ||
+		!(pboardString = [pboard stringForType:NSStringPboardType])) {
+        NSLog(@"Error: Pasteboard doesn't contain a string.");
         return;
     }
 	
 	[self insertSnippet:pboardString];	
 	[window orderFront:self]; 
+	[[NSApplication sharedApplication] updateWindows];
     return;
+}
+
+- (IBAction) insertSnippetViaClipboard:(id)sender {
+	NSPasteboard *pb = [NSPasteboard generalPasteboard];
+	[self insertSnippetViaService:pb userData:nil error:nil];	
 }
 
 /*
@@ -208,7 +205,6 @@ NSPoint setWindowPosition(NSRect windowRect)
 
 - (void)awakeFromNib
 {
-   NSLog(@"Start!");
    _displayServer = [[NSConnection rootProxyForConnectionWithRegisteredName:@"OVNewDisplayServer-0.8.0" host:nil] retain];
 
    if (_displayServer) {
@@ -220,7 +216,6 @@ NSPoint setWindowPosition(NSRect windowRect)
       [[NSApplication sharedApplication] terminate:self];	
    }
 
-   [window setFrameTopLeftPoint:setWindowPosition([window frame])];
    // Make it posssible to drag and drop text into snippetListview
    [snippetListview registerForDraggedTypes:
       [NSArray arrayWithObjects:NSStringPboardType,nil]];	
@@ -233,9 +228,8 @@ NSPoint setWindowPosition(NSRect windowRect)
 
 }
 
-
 - (void)tableAction {
-   [_displayServer sendStringToCurrentComposingBuffer:[sendKey toolTip]];
+   [self stringAction:sendKey];
 }
 
 - (IBAction)stringAction:(id)sender

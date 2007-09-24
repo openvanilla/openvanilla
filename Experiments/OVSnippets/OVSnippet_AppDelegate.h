@@ -30,12 +30,14 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #import <Cocoa/Cocoa.h>
+#import "SnippetWindow.h"
 
 @interface OVSnippet_AppDelegate : NSObject
 {
-    IBOutlet NSWindow *window;
+    IBOutlet SnippetWindow *window;
     IBOutlet id snippetListview;
-    IBOutlet id sendKey;	
+    IBOutlet id sendKey;
+    IBOutlet id addMenu;	
 	id _displayServer;	
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
@@ -48,5 +50,5 @@
 
 - (IBAction)stringAction:(id)sender;
 - (IBAction)saveAction:(id)sender;
-
+- (IBAction)insertSnippetViaClipboard:(id)sender;
 @end
