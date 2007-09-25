@@ -30,7 +30,6 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #import "OVSnippet_AppDelegate.h"
-#define MSG(x)      [[NSBundle mainBundle] localizedStringForKey:x value:nil table:nil]
 
 @protocol CVDisplayServerPart
 - (void)sendStringToCurrentComposingBuffer:(NSString *)string;
@@ -143,18 +142,46 @@
     [super dealloc];
 }
 
+- (void)awakeFromNib
+{
+	_displayServer = [[NSConnection rootProxyForConnectionWithRegisteredName:@"OVNewDisplayServer-0.8.0" host:nil] retain];
+	
+	if (_displayServer) {
+		[_displayServer setProtocolForProxy:@protocol(CVDisplayServerPart)];		
+		[window setLevel:NSFloatingWindowLevel];
+	}
+	else {
+		NSLog(@"cannot find display server");
+		[[NSApplication sharedApplication] terminate:self];	
+	}
+	
+	[self setupToolbarForWindow:window];
+	
+	// Make it posssible to drag and drop text into snippetListview
+	[snippetListview registerForDraggedTypes:
+		[NSArray arrayWithObjects:NSStringPboardType,nil]];	
+	[snippetListview setDelegate:self];
+	[snippetListview setDoubleAction:@selector(tableAction)];
+	[snippetListview setDraggingSourceOperationMask:NSDragOperationLink
+										   forLocal:NO];
+	[snippetListview setDraggingSourceOperationMask:NSDragOperationCopy
+										   forLocal:YES];	
+	
+}
+
 - (void)windowWillClose:(NSNotification *)notification {
 	[[NSApplication sharedApplication] terminate:self];	
 }
 
-//
+// insertSnippet
 
 - (void) insertSnippet:(NSString *)string {
-	NSLog(@"Add object");
 	NSManagedObjectContext *moc = [self managedObjectContext];
 	NSManagedObject *stringObject = [NSEntityDescription insertNewObjectForEntityForName:@"Snippet" inManagedObjectContext:moc];
 	[stringObject setValue:string forKey:@"snippetItem"];
-	NSLog(@"Done");	
+	[stringObject setValue:[NSDate date] forKey:@"snippetDate"];	
+	[window orderFront:self]; 
+	[[NSApplication sharedApplication] updateWindows];	
 }
 
 // Services
@@ -176,9 +203,8 @@
         return;
     }
 	
-	[self insertSnippet:pboardString];	
-	[window orderFront:self]; 
-	[[NSApplication sharedApplication] updateWindows];
+	[self insertSnippet:pboardString];
+	[self saveAction:self];
     return;
 }
 
@@ -203,38 +229,29 @@
    return YES;
 }
 
-- (void)awakeFromNib
+- (IBAction)cutAction:(id)sender
 {
-   _displayServer = [[NSConnection rootProxyForConnectionWithRegisteredName:@"OVNewDisplayServer-0.8.0" host:nil] retain];
-
-   if (_displayServer) {
-      [_displayServer setProtocolForProxy:@protocol(CVDisplayServerPart)];		
-      [window setLevel:NSFloatingWindowLevel];
-   }
-   else {
-      NSLog(@"cannot find display server");
-      [[NSApplication sharedApplication] terminate:self];	
-   }
-
-   // Make it posssible to drag and drop text into snippetListview
-   [snippetListview registerForDraggedTypes:
-      [NSArray arrayWithObjects:NSStringPboardType,nil]];	
-   [snippetListview setDelegate:self];
-   [snippetListview setDoubleAction:@selector(tableAction)];
-   [snippetListview setDraggingSourceOperationMask:NSDragOperationLink
-      forLocal:NO];
-   [snippetListview setDraggingSourceOperationMask:NSDragOperationCopy
-      forLocal:YES];	
-
 }
 
-- (void)tableAction {
+- (IBAction)copyAction:(id)sender
+{
+	NSPasteboard *pb = [NSPasteboard generalPasteboard];
+	NSArray *types = [NSArray arrayWithObjects:NSStringPboardType, nil];
+	[pb declareTypes:types owner:self];	
+	[pb setString:[sendKey toolTip] forType:NSStringPboardType];
+}
+
+- (void)tableAction
+{
    [self stringAction:sendKey];
 }
 
 - (IBAction)stringAction:(id)sender
 {
-   [_displayServer sendStringToCurrentComposingBuffer:[sender toolTip]];
+	NSString *string = [sender toolTip];
+	if([string length]) {
+		[_displayServer sendStringToCurrentComposingBuffer:[sender toolTip]];
+	}
 }
 
 @end

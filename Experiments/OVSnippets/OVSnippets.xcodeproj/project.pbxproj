@@ -13,9 +13,12 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		D4226B030CA792F100CECE81 /* OVSnippet_Template.m in Sources */ = {isa = PBXBuildFile; fileRef = D4226B020CA792F000CECE81 /* OVSnippet_Template.m */; };
+		D4346A360CA84BB70057A700 /* OVSnippet_Toolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = D4346A350CA84BB70057A700 /* OVSnippet_Toolbar.m */; };
+		D46C31740CA8687B005B5326 /* drawer.png in Resources */ = {isa = PBXBuildFile; fileRef = D46C31730CA8687B005B5326 /* drawer.png */; };
 		D486A65D0CA229CA00804CFB /* ServicesMenu.strings in Resources */ = {isa = PBXBuildFile; fileRef = D486A65B0CA229CA00804CFB /* ServicesMenu.strings */; };
 		D4B464DC0CA71401002F5FDB /* SnippetWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B464DB0CA71401002F5FDB /* SnippetWindow.m */; };
-		D4B466420CA73466002F5FDB /* keydown.aif in Resources */ = {isa = PBXBuildFile; fileRef = D4B466410CA73466002F5FDB /* keydown.aif */; };
+		D4E6A17A0CA87D1C009DC6E1 /* keydown.aif in Resources */ = {isa = PBXBuildFile; fileRef = D4E6A1790CA87D1C009DC6E1 /* keydown.aif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,14 +35,17 @@
 		77C8280C06725ACE000B614F /* OVSnippet_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVSnippet_AppDelegate.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* OVSnippets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVSnippets.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4226B020CA792F000CECE81 /* OVSnippet_Template.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVSnippet_Template.m; sourceTree = "<group>"; };
+		D4346A350CA84BB70057A700 /* OVSnippet_Toolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVSnippet_Toolbar.m; sourceTree = "<group>"; };
+		D46C31730CA8687B005B5326 /* drawer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = drawer.png; path = resource/drawer.png; sourceTree = "<group>"; };
 		D486A65C0CA229CA00804CFB /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
 		D4B464DA0CA71401002F5FDB /* SnippetWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnippetWindow.h; sourceTree = "<group>"; };
 		D4B464DB0CA71401002F5FDB /* SnippetWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnippetWindow.m; sourceTree = "<group>"; };
-		D4B466410CA73466002F5FDB /* keydown.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = keydown.aif; sourceTree = "<group>"; };
 		D4D9B24B0CA2A43200F6B13C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D4D9B24E0CA2A44000F6B13C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D4D9B2560CA2A48F00F6B13C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
 		D4D9B2570CA2A49600F6B13C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
+		D4E6A1790CA87D1C009DC6E1 /* keydown.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = keydown.aif; path = resource/keydown.aif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,11 +63,12 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D4346A350CA84BB70057A700 /* OVSnippet_Toolbar.m */,
+				D4226B020CA792F000CECE81 /* OVSnippet_Template.m */,
 				77C8280B06725ACE000B614F /* OVSnippet_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* OVSnippet_AppDelegate.m */,
 				D4B464DA0CA71401002F5FDB /* SnippetWindow.h */,
 				D4B464DB0CA71401002F5FDB /* SnippetWindow.m */,
-				D4B466410CA73466002F5FDB /* keydown.aif */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -117,6 +124,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D4E6A1790CA87D1C009DC6E1 /* keydown.aif */,
+				D46C31730CA8687B005B5326 /* drawer.png */,
 				D486A65B0CA229CA00804CFB /* ServicesMenu.strings */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -194,7 +203,8 @@
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				D486A65D0CA229CA00804CFB /* ServicesMenu.strings in Resources */,
-				D4B466420CA73466002F5FDB /* keydown.aif in Resources */,
+				D46C31740CA8687B005B5326 /* drawer.png in Resources */,
+				D4E6A17A0CA87D1C009DC6E1 /* keydown.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +219,8 @@
 				77C8280E06725ACE000B614F /* OVSnippet_AppDelegate.m in Sources */,
 				770B37ED0679A11B001EADE2 /* OVSnippet_DataModel.xcdatamodel in Sources */,
 				D4B464DC0CA71401002F5FDB /* SnippetWindow.m in Sources */,
+				D4226B030CA792F100CECE81 /* OVSnippet_Template.m in Sources */,
+				D4346A360CA84BB70057A700 /* OVSnippet_Toolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

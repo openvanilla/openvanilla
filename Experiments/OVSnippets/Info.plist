@@ -34,7 +34,7 @@
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
-				<string>Add to OpenVanilla Snippets</string>
+				<string>New OpenVanilla Snippet</string>
 			</dict>
 			<key>NSMessage</key>
 			<string>insertSnippetViaService</string>

@@ -32,13 +32,17 @@
 #import <Cocoa/Cocoa.h>
 #import "SnippetWindow.h"
 
+#define MSG(x)      [[NSBundle mainBundle] localizedStringForKey:x value:nil table:nil]
+#define u8string(u) [NSString stringWithUTF8String:u]
+
+
 @interface OVSnippet_AppDelegate : NSObject
 {
     IBOutlet SnippetWindow *window;
     IBOutlet id snippetListview;
     IBOutlet id sendKey;
-    IBOutlet id addMenu;	
-	id _displayServer;	
+    IBOutlet id drawer;	
+ 	id _displayServer;	
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
@@ -47,8 +51,14 @@
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 - (NSManagedObjectModel *)managedObjectModel;
 - (NSManagedObjectContext *)managedObjectContext;
+- (void)insertSnippet:(NSString *)string;
 
 - (IBAction)stringAction:(id)sender;
 - (IBAction)saveAction:(id)sender;
+- (IBAction)cutAction:(id)sender;
+- (IBAction)copyAction:(id)sender;
 - (IBAction)insertSnippetViaClipboard:(id)sender;
+
+- (IBAction)htmlTemplate:(id)sender;
+- (IBAction)bidTemplate:(id)sender;
 @end

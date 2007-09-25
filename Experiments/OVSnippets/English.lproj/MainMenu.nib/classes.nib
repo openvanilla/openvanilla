@@ -1,8 +1,12 @@
 {
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSDatePicker; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
         {
             ACTIONS = {
+                bidTemplate = id; 
+                copyAction = id; 
+                htmlTemplate = id; 
                 insertSnippetViaClipboard = id; 
                 saveAction = id; 
                 showAddMenu = id; 
@@ -10,10 +14,15 @@
             }; 
             CLASS = "OVSnippet_AppDelegate"; 
             LANGUAGE = ObjC; 
-            OUTLETS = {addMenu = id; sendKey = id; snippetListview = id; window = NSWindow; }; 
+            OUTLETS = {drawer = id; sendKey = id; snippetListview = id; window = NSWindow; }; 
             SUPERCLASS = NSObject; 
         }, 
-        {CLASS = SnippetWindow; LANGUAGE = ObjC; SUPERCLASS = NSPanel; }
+        {
+            CLASS = SnippetWindow; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {drawer = id; }; 
+            SUPERCLASS = NSPanel; 
+        }
     ); 
     IBVersion = 1; 
 }

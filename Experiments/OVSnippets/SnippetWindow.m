@@ -1,3 +1,34 @@
+// 
+// SnippetWindow.m
+//
+// Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. Neither the name of OpenVanilla nor the names of its contributors
+//    may be used to endorse or promote products derived from this software
+//    without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
 #import "SnippetWindow.h"
 
 NSPoint setWindowPosition(NSRect windowRect)
@@ -22,14 +53,18 @@ NSSize setWindowSize(NSRect windowRect)
 
 - (id)initWithContentRect:(NSRect)contentRect styleMask:(unsigned int)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
 {	
-    NSWindow *window = [super initWithContentRect:contentRect styleMask: (NSBorderlessWindowMask | NSUtilityWindowMask | NSNonactivatingPanelMask | NSTitledWindowMask | NSClosableWindowMask | NSResizableWindowMask) backing:NSBackingStoreBuffered defer:NO]; 
+    NSWindow *window = [super initWithContentRect:contentRect styleMask: (NSBorderlessWindowMask | NSUtilityWindowMask | NSNonactivatingPanelMask | NSTitledWindowMask | NSClosableWindowMask | NSResizableWindowMask ) backing:NSBackingStoreBuffered defer:NO]; 
     [window setLevel:NSScreenSaverWindowLevel];
     [window setAlphaValue:1.0];
     [window setOpaque:NO];
     [window setHasShadow:YES];	
 	[window setMovableByWindowBackground:YES];
     [window setFrameTopLeftPoint:setWindowPosition([window frame])];	
-	[window setMaxSize:setWindowSize([window frame])];
+	[window setMaxSize:setWindowSize([window frame])];	
+	[[window toolbar] setDisplayMode:NSToolbarDisplayModeIconOnly];
+	[[window toolbar] setSizeMode: NSToolbarSizeModeSmall];	
+	[[window toolbar] setVisible: NO];
+	
 	_isZoomed = NO;
 	_soundEffet = [NSSound soundNamed:@"keydown"];	
     return window;
@@ -41,9 +76,17 @@ NSSize setWindowSize(NSRect windowRect)
 }
 
 - (void)saveSize {
-	_currentWidth = [super frame].size.width;
-	_currentHeight = [super frame].size.height;	
-	_currentY = [super frame].origin.y;
+	if(_currentToolbar) {
+		_currentHeight = [super frame].size.height + 32;
+	} else {
+		_currentHeight = [super frame].size.height;	
+	}
+	if(_currentToolbar) {	
+		_currentY = [super frame].origin.y -32;
+	} else {
+		_currentY = [super frame].origin.y;		
+	}
+	_currentWidth = [super frame].size.width;	
 	_currentX = [super frame].origin.x;
 }
 
@@ -52,20 +95,40 @@ NSSize setWindowSize(NSRect windowRect)
 	point.y = [super frame].origin.y;
 	point.x = [super frame].origin.x;	
 	if(_isZoomed == NO) {	
-		[self saveSize];		
+		if([drawer state] == 2) {
+			_currentDrawer = YES;
+			[drawer toggle:self];
+		} else {
+			_currentDrawer = NO;			
+		}
+		if([[super toolbar] isVisible]) {
+			_currentToolbar = YES;
+			[[super toolbar] setVisible:NO];
+		} else {
+			_currentToolbar = NO;			
+		}
+		[self saveSize];
 		NSRect rect = NSMakeRect(point.x,point.y + [super frame].size.height - 36 ,[super frame].size.width,36);
 		[super setFrame:rect display:YES animate:YES];
-		[_soundEffet play];
+		[super setShowsResizeIndicator:NO];
+		[_soundEffet play];		
 		_isZoomed = YES;
-	} else {
+	} else {	
+		if(_currentToolbar == YES) {
+			[[super toolbar] setVisible:YES];			
+		}
 		NSRect rect = NSMakeRect(_currentX,_currentY,_currentWidth,_currentHeight);
 		[super setFrame:rect display:YES animate:YES];
-		[_soundEffet play];		
-		_isZoomed = NO;		
+		[_soundEffet play];	
+		if(_currentDrawer == YES) {
+			[drawer toggle:self];			
+		}	
+		[super setShowsResizeIndicator:YES];		
+		_isZoomed = NO;			
 	}
 }
 
--(void) isZoomed {
+-(BOOL) isZoomed {
 	return _isZoomed;
 }
 
