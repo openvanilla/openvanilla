@@ -144,7 +144,7 @@
 
 - (void)awakeFromNib
 {
-	_displayServer = [[NSConnection rootProxyForConnectionWithRegisteredName:@"OVNewDisplayServer-0.8.0" host:nil] retain];
+	_displayServer = [[NSConnection rootProxyForConnectionWithRegisteredName:OVDSPSRVR_NAME host:nil] retain];
 	
 	if (_displayServer) {
 		[_displayServer setProtocolForProxy:@protocol(CVDisplayServerPart)];		

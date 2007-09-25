@@ -32,6 +32,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SnippetWindow.h"
 
+#define OVDSPSRVR_NAME @"OVDisplayServer-0.8.0"
 #define MSG(x)      [[NSBundle mainBundle] localizedStringForKey:x value:nil table:nil]
 #define u8string(u) [NSString stringWithUTF8String:u]
 

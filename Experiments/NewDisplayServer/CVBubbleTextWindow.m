@@ -25,6 +25,11 @@
 {
     return NO;
 }
+- (NSTimeInterval)animationResizeTime:(NSRect)newWindowFrame
+{
+	NSTimeInterval interval=0.05;
+	return interval;
+}
 - (void)mouseDragged:(NSEvent *)theEvent
 {
 	NSPoint currentLocation;

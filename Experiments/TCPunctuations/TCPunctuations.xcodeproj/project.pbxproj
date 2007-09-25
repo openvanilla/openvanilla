@@ -12,7 +12,7 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		D4B0F7970CA3E23C00AECF18 /* mj.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4B0F7960CA3E23C00AECF18 /* mj.icns */; };
+		D43F07FF0CA8FCB9009DDD5D /* mjicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D43F07FE0CA8FCB9009DDD5D /* mjicon.icns */; };
 		D4D9B2260CA29DA900F6B13C /* TraditionalChinesePunctuations_Prefix.pch in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D4D9B2250CA29DA900F6B13C /* TraditionalChinesePunctuations_Prefix.pch */; };
 		D4FE56550CA3BFF200FF7AB3 /* mj.png in Resources */ = {isa = PBXBuildFile; fileRef = D4FE56540CA3BFF200FF7AB3 /* mj.png */; };
 		D4FE565B0CA3C7F500FF7AB3 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = D4FE565A0CA3C7F500FF7AB3 /* close.png */; };
@@ -46,10 +46,10 @@
 		6A0ACAA00CA1679F0074C2DB /* MyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyController.h; sourceTree = "<group>"; };
 		6A0ACAA10CA1679F0074C2DB /* MyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* TCPunctuations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCPunctuations.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* TCPunctuations.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TCPunctuations.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D43F07FE0CA8FCB9009DDD5D /* mjicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = mjicon.icns; sourceTree = "<group>"; };
 		D4B0F7790CA3DEE500AECF18 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D4B0F77A0CA3DEEC00AECF18 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D4B0F7960CA3E23C00AECF18 /* mj.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = mj.icns; sourceTree = "<group>"; };
 		D4D9B2250CA29DA900F6B13C /* TraditionalChinesePunctuations_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraditionalChinesePunctuations_Prefix.pch; sourceTree = "<group>"; };
 		D4FE56540CA3BFF200FF7AB3 /* mj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mj.png; sourceTree = "<group>"; };
 		D4FE565A0CA3C7F500FF7AB3 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
@@ -109,7 +109,6 @@
 		29B97314FDCFA39411CA2CEA /* ScreenKeyboardExample */ = {
 			isa = PBXGroup;
 			children = (
-				D4D9B2250CA29DA900F6B13C /* TraditionalChinesePunctuations_Prefix.pch */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -130,7 +129,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D4B0F7960CA3E23C00AECF18 /* mj.icns */,
+				D43F07FE0CA8FCB9009DDD5D /* mjicon.icns */,
+				D4D9B2250CA29DA900F6B13C /* TraditionalChinesePunctuations_Prefix.pch */,
 				D4FE565A0CA3C7F500FF7AB3 /* close.png */,
 				D4FE56540CA3BFF200FF7AB3 /* mj.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -204,7 +204,7 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				D4FE56550CA3BFF200FF7AB3 /* mj.png in Resources */,
 				D4FE565B0CA3C7F500FF7AB3 /* close.png in Resources */,
-				D4B0F7970CA3E23C00AECF18 /* mj.icns in Resources */,
+				D43F07FF0CA8FCB9009DDD5D /* mjicon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,6 +31,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+#define OVDSPSRVR_NAME @"OVDisplayServer-0.8.0"
 
 @interface MyController : NSWindowController {
 	id _displayServer;
