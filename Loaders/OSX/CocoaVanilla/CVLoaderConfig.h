@@ -34,18 +34,18 @@
 #include <Cocoa/Cocoa.h>
 
 #define CVLC_SVN                "$Rev$"
-#define CVLC_SYSMODULE_PATH     @"/Library/OpenVanilla/0.8.0/Modules/"
-#define CVLC_USERMODULE_PATH    @"~/Library/OpenVanilla/0.8.0/Modules/"
-#define CVLC_USERSPACE_PATH		@"~/Library/OpenVanilla/0.8.0/UserSpace/"
-#define CVLC_USERCONFIG_PATH	@"~/Library/OpenVanilla/0.8.0/Preferences/"
-#define CVLC_USERCONFIG_FILE	@"~/Library/OpenVanilla/0.8.0/Preferences/org.openvanilla.080.plist"
-#define CVLC_DISPLAYSERVER		@"/Library/OpenVanilla/0.8.0/Loader/OVDisplayServer.app"
+#define CVLC_SYSMODULE_PATH     @"/Library/OpenVanilla/0.8/Modules/"
+#define CVLC_USERMODULE_PATH    @"~/Library/OpenVanilla/0.8/Modules/"
+#define CVLC_USERSPACE_PATH		@"~/Library/OpenVanilla/0.8/UserSpace/"
+#define CVLC_USERCONFIG_PATH	@"~/Library/OpenVanilla/0.8/Preferences/"
+#define CVLC_USERCONFIG_FILE	@"~/Library/OpenVanilla/0.8/Preferences/org.openvanilla.080.plist"
+#define CVLC_DISPLAYSERVER		@"/Library/OpenVanilla/0.8/Loader/OVDisplayServer.app"
 #define CVLC_ATOMIC_INIT_FILE   @"atomic-init-lock"
 #define CVLC_ATOIMC_ERROR_FILE  @"/tmp/_openvanilla-atomicinit-error.html"
-#define CVLC_FACTORY_DEFAULTS   @"/Library/OpenVanilla/0.8.0/Loader/OVLoader.bundle/Contents/Resources/org.openvanilla.OVLoader.DefaultSettings.plist"
-#define CVLC_PREFERENCEUTIL     @"/Library/OpenVanilla/0.8.0/Loader/OVPreferences.app"
+#define CVLC_FACTORY_DEFAULTS   @"/Library/OpenVanilla/0.8/Loader/OVLoader.bundle/Contents/Resources/org.openvanilla.OVLoader.DefaultSettings.plist"
+#define CVLC_PREFERENCEUTIL     @"/Library/OpenVanilla/0.8/Loader/OVPreferences.app"
 #define CVLC_DOCUMENT_EN		"open http://en.openvanilla.org"
-#define CVLC_DOCUMENT_ZH_TW		"open /Library/OpenVanilla/0.8.0/Loader/OVPreferences.app/Contents/Resources/ZH_TW.lproj/OpenVanillaManual.pdf"
+#define CVLC_DOCUMENT_ZH_TW		"open /Library/OpenVanilla/0.8/Loader/OVPreferences.app/Contents/Resources/ZH_TW.lproj/OpenVanillaManual.pdf"
 #define CVLC_DOCUMENT_ZH_CN		"open http://zh.openvanilla.org"
 
 NSArray *CVGetModuleLoadPath();

@@ -11,7 +11,7 @@
 		<key>displayServerStartupTimeout</key>
 		<string>40</string>
 		<key>displayServerPath</key>
-		<string>/Library/OpenVanilla/0.8.0/Loader/OVDisplayServer.app</string>
+		<string>/Library/OpenVanilla/0.8/Loader/OVDisplayServer.app</string>
 	</dict>
 </dict>
 </plist>
