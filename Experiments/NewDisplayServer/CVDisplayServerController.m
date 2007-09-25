@@ -27,7 +27,7 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 	NSConnection *connection = [NSConnection defaultConnection];
 	[connection setRootObject:self];
 	
-	if (![connection registerName:CVDisplayServerName]) {
+	if (![connection registerName:OVDSPSRVR_NAME]) {
 		[[NSApplication sharedApplication] terminate:self];
 		return;
 	}

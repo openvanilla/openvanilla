@@ -88,7 +88,7 @@
 		6A7DC3280CA03E2000B580D3 /* CVDisplayServerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVDisplayServerController.h; sourceTree = "<group>"; };
 		6A7DC3290CA03E2000B580D3 /* CVDisplayServerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVDisplayServerController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* NewDisplayServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewDisplayServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* OVDisplayServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVDisplayServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4430C330CA6F444009B6776 /* CTGradient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CTGradient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4430C340CA6F444009B6776 /* CTGradient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "CTGradient-Info.plist"; sourceTree = "<group>"; };
 		D4430C8A0CA6F70C009B6776 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTGradient.h; path = CTGradient/CTGradient.h; sourceTree = "<group>"; };
@@ -155,7 +155,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* NewDisplayServer.app */,
+				8D1107320486CEB800E47090 /* OVDisplayServer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -243,7 +243,7 @@
 			name = NewDisplayServer;
 			productInstallPath = "$(HOME)/Applications";
 			productName = NewDisplayServer;
-			productReference = 8D1107320486CEB800E47090 /* NewDisplayServer.app */;
+			productReference = 8D1107320486CEB800E47090 /* OVDisplayServer.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D4430C320CA6F444009B6776 /* CTGradient */ = {
@@ -270,6 +270,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "NewDisplayServer" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -388,7 +389,7 @@
 				GCC_PREFIX_HEADER = NewDisplayServer_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = NewDisplayServer;
+				PRODUCT_NAME = OVDisplayServer;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
@@ -410,7 +411,7 @@
 				GCC_PREFIX_HEADER = NewDisplayServer_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = NewDisplayServer;
+				PRODUCT_NAME = OVDisplayServer;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

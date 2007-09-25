@@ -251,7 +251,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         return 1;
     }
 
-    if( key->isShift() && isprint(keycode) && keyseq.length()==0 ){
+    if( key->isShift() && isprint(keycode) && keyseq.length()==0 && keycode != '*' && keycode != '?'){
         char k[2] = { tolower(keycode), 0 };
         buf->append(k)->send();
         return 1;
