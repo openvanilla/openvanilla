@@ -70,6 +70,15 @@ public:
         return s;
     }
     virtual char* getSeq() { return seq; }
+
+	virtual bool hasWildcardCharacter()
+	{
+		for (int i = 0; i < len; i++)
+			if (seq[i] == '?' || seq[i] == '*')
+				return true;
+
+		return false;
+	}
 };
 
 #endif

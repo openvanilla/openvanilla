@@ -28,7 +28,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-// #define OV_DEBUG
+#define OV_DEBUG
 #include "ctype.h"
 #include "OVIMArray.h"
 #ifndef WIN32
@@ -68,7 +68,7 @@ void OVIMArrayContext::updateDisplay(OVBuffer* buf){
 }
 
 int OVIMArrayContext::updateCandidate(OVCIN *tab,OVBuffer *buf, OVCandidate *candibar){
-    tab->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
+    tab->getWordVectorByCharWithWildcardSupport(keyseq.getSeq(), candidateStringVector, '?', '*');
     string currentSelKey = tab->getSelKey();
     if( candidateStringVector.size() == 0 )
         clearCandidate(candibar);
@@ -83,7 +83,9 @@ int OVIMArrayContext::WaitKey1(OVKeyCode* key, OVBuffer* buf,
     if(keyseq.length() != 1)
         return 0;
 
-    updateCandidate(tabs[SHORT_TAB], buf, candibar);
+	if (!keyseq.hasWildcardCharacter())
+    	updateCandidate(tabs[SHORT_TAB], buf, candibar);
+
     char keycode = keyseq.getSeq()[0];
     if( keycode == 't' )
         buf->clear()->append((char*)"ªº")->update();
@@ -105,7 +107,9 @@ int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf,
         changeState(STATE_WAIT_CANDIDATE);
     }
     else{
-        updateCandidate(tabs[SHORT_TAB], buf, candibar);
+		if (!keyseq.hasWildcardCharacter())
+        	updateCandidate(tabs[SHORT_TAB], buf, candibar);
+
         if( isprint(keycode) && keyseq.valid(keycode) )
             changeState(STATE_WAIT_KEY3);
     }
@@ -115,7 +119,8 @@ int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf,
 int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVBuffer* buf, 
                                OVCandidate* candibar, OVService* srv){
     if( keyseq.length() >= 3){
-        updateCandidate(tabs[MAIN_TAB], buf, candibar);
+		if (!keyseq.hasWildcardCharacter())
+        	updateCandidate(tabs[MAIN_TAB], buf, candibar);
     }
     return 1;    
 }
@@ -179,7 +184,7 @@ void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf,
     
     // lookup special code
     if((parent->isAutoSP() || parent->isForceSP()) &&
-       tabs[SPECIAL_TAB]->getWordVectorByChar(ch, specialCodeVector)>0)
+       tabs[SPECIAL_TAB]->getWordVectorByCharWithWildcardSupport(ch, specialCodeVector, '?', '*')>0)
     {
         int splen = specialCodeVector[0].length();
         const char *spcode = specialCodeVector[0].c_str();
@@ -264,10 +269,18 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         return 1;
     }
 
+	// cancels candidate window if wildcard character is entered
+	if (!keyseq.hasWildcardCharacter() && (keycode == '?' || keycode== '*')) {
+		murmur("candidate canceled because of wildcard");
+		clearCandidate(candi_bar);
+		state = STATE_WAIT_KEY3;
+	}
+
     if( state == STATE_WAIT_CANDIDATE ){
         int r = WaitCandidate(key, buf, candi_bar, srv);
         if( r != RET_CONTINUE ) return r;
     }
+
     if( candi.onDuty() && isdigit(keycode) && 
         !(keyseq.length() == 1 && isWSeq(keyseq.getSeq()[0],keycode)) ){
         string c;
@@ -285,7 +298,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
     }
     
     if (keyseq.length() && keycode == ovkSpace){
-        tabs[MAIN_TAB]->getWordVectorByChar(keyseq.getSeq(), candidateStringVector);
+        tabs[MAIN_TAB]->getWordVectorByCharWithWildcardSupport(keyseq.getSeq(), candidateStringVector, '?', '*');
         string c;
         if(candidateStringVector.size() == 1){
             if(selectCandidate(0, c))

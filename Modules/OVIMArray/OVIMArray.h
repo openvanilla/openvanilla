@@ -125,12 +125,12 @@ public:
     int updateConfig(OVDictionary *conf);
     virtual const char *localizedName(const char *locale){  
         if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN")){
-            strcpy(cname,"\xE8\xA1\x8C\xE5\x88\x97"); //¦æ¦C
+            strcpy(cname,"\xE8\xA1\x8C\xE5\x88\x97 (wildcard)"); //¦æ¦C
             //if( isForceSP() )   strcat(cname, "(§Ö)");
             return cname;
         }
         else{
-            strcpy(ename,"Array 30");
+            strcpy(ename,"Array 30 (wildcard)");
             //if( isForceSP() )   strcat(ename, "(Q)");
             return ename;
         }
