@@ -39,6 +39,7 @@
 		D4C2FEC40C9EE70200343D93 /* OVOSDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVOSDef.h; path = ../SharedHeaders/OVOSDef.h; sourceTree = SOURCE_ROOT; };
 		D4C2FEC80C9EE75700343D93 /* OVCIN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVCIN.h; path = ../SharedHeaders/OVCIN.h; sourceTree = SOURCE_ROOT; };
 		D4C2FECE0C9EE7B600343D93 /* OVCINInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVCINInfo.h; path = ../SharedHeaders/OVCINInfo.h; sourceTree = SOURCE_ROOT; };
+		D4CE77720CA90A4A000BB65D /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVWildcard.h; path = ../SharedHeaders/OVWildcard.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +108,7 @@
 		D4C2FECA0C9EE75D00343D93 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				D4CE77720CA90A4A000BB65D /* OVWildcard.h */,
 				D434206A0C9EEB6900D5EE58 /* OVStringToolKit.h */,
 				D43420680C9EEB3500D5EE58 /* OVFileHandler.h */,
 				D43420490C9EEADC00D5EE58 /* OVCandidateList.h */,
