@@ -73654,7 +73654,6 @@ i;;ti	𪛕
 i;;.i	𪛕
 i;;si	𪛕
 i;;,i	𪛖
-
 w0 ㄅ
 w0 ㄆ
 w0 ㄇ
@@ -74064,15 +74063,4 @@ w9 φ
 w9 χ
 w9 ψ
 w9 ω
-
-### big5 字集特殊用字 ###
-# ,nr 粧
-# ilvg 銹
-# napa 恒
-# rakg 碁
-# rfk; 墻
-# weu 嫺
-# yprx 裏
-
-,,sp 快打模式
 %chardef end
