@@ -13,7 +13,6 @@
 			buildPhases = (
 			);
 			dependencies = (
-				D4430C770CA6F5B0009B6776 /* PBXTargetDependency */,
 				D4430C790CA6F5B3009B6776 /* PBXTargetDependency */,
 			);
 			name = "NewDisplayServer-Deafult";
@@ -22,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6A051AE00CA9DB8900A6AB82 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = D4430C8B0CA6F70C009B6776 /* CTGradient.m */; };
 		6A321E2D0CA04B4E0087FD6A /* NSBezierPathAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A321E2C0CA04B4E0087FD6A /* NSBezierPathAdditions.m */; };
 		6A5479130CA071B800C07FB1 /* ovstandard.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A5479120CA071B800C07FB1 /* ovstandard.icns */; };
 		6A7DC3040CA0391100B580D3 /* CVBubbleTextWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7DC3030CA0391100B580D3 /* CVBubbleTextWindow.m */; };
@@ -31,21 +31,10 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		D4430C460CA6F4FC009B6776 /* CTGradient.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D4430C330CA6F444009B6776 /* CTGradient.framework */; };
-		D4430C8C0CA6F70C009B6776 /* CTGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = D4430C8A0CA6F70C009B6776 /* CTGradient.h */; };
-		D4430C8D0CA6F70C009B6776 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = D4430C8B0CA6F70C009B6776 /* CTGradient.m */; };
 		D4430C8F0CA6F759009B6776 /* DisplayServerIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D4430C8E0CA6F759009B6776 /* DisplayServerIcon.icns */; };
-		D49B6C9C0CA702E5009175E4 /* CTGradient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4430C330CA6F444009B6776 /* CTGradient.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D4430C760CA6F5B0009B6776 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D4430C320CA6F444009B6776;
-			remoteInfo = CTGradient;
-		};
 		D4430C780CA6F5B3009B6776 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -54,20 +43,6 @@
 			remoteInfo = NewDisplayServer;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		D4430C440CA6F4CA009B6776 /* Copy Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D4430C460CA6F4FC009B6776 /* CTGradient.framework in Copy Frameworks */,
-			);
-			name = "Copy Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -89,8 +64,6 @@
 		6A7DC3290CA03E2000B580D3 /* CVDisplayServerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVDisplayServerController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* OVDisplayServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVDisplayServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4430C330CA6F444009B6776 /* CTGradient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CTGradient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4430C340CA6F444009B6776 /* CTGradient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "CTGradient-Info.plist"; sourceTree = "<group>"; };
 		D4430C8A0CA6F70C009B6776 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTGradient.h; path = CTGradient/CTGradient.h; sourceTree = "<group>"; };
 		D4430C8B0CA6F70C009B6776 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTGradient.m; path = CTGradient/CTGradient.m; sourceTree = "<group>"; };
 		D4430C8E0CA6F759009B6776 /* DisplayServerIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DisplayServerIcon.icns; sourceTree = "<group>"; };
@@ -103,55 +76,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D49B6C9C0CA702E5009175E4 /* CTGradient.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D4430C310CA6F444009B6776 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		080E96DDFE201D6D7F000001 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				6A7DC3020CA0391100B580D3 /* CVBubbleTextWindow.h */,
-				6A7DC3030CA0391100B580D3 /* CVBubbleTextWindow.m */,
-				6A7DC3120CA03AB000B580D3 /* CVBubbleTextView.h */,
-				6A7DC3130CA03AB000B580D3 /* CVBubbleTextView.m */,
-				6A7DC3280CA03E2000B580D3 /* CVDisplayServerController.h */,
-				6A7DC3290CA03E2000B580D3 /* CVDisplayServerController.m */,
-				6A321E2B0CA04B4E0087FD6A /* NSBezierPathAdditions.h */,
-				6A321E2C0CA04B4E0087FD6A /* NSBezierPathAdditions.m */,
-				6A7516D10CA053930045DE7C /* OVDisplayServer.h */,
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
-		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D4430C330CA6F444009B6776 /* CTGradient.framework */,
-				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
-			);
-			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
-		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
-				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,24 +94,13 @@
 		29B97314FDCFA39411CA2CEA /* NewDisplayServer */ = {
 			isa = PBXGroup;
 			children = (
+				6A051ADF0CA9DB6900A6AB82 /* Source */,
 				D4430C400CA6F494009B6776 /* CTGradient */,
-				080E96DDFE201D6D7F000001 /* Classes */,
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				D4430C340CA6F444009B6776 /* CTGradient-Info.plist */,
 			);
 			name = NewDisplayServer;
-			sourceTree = "<group>";
-		};
-		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
-			isa = PBXGroup;
-			children = (
-				32CA4F630368D1EE00C91783 /* NewDisplayServer_Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
-			);
-			name = "Other Sources";
 			sourceTree = "<group>";
 		};
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
@@ -198,10 +118,29 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
-				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6A051ADF0CA9DB6900A6AB82 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				6A7DC3020CA0391100B580D3 /* CVBubbleTextWindow.h */,
+				6A7DC3030CA0391100B580D3 /* CVBubbleTextWindow.m */,
+				6A7DC3120CA03AB000B580D3 /* CVBubbleTextView.h */,
+				6A7DC3130CA03AB000B580D3 /* CVBubbleTextView.m */,
+				6A7DC3280CA03E2000B580D3 /* CVDisplayServerController.h */,
+				6A7DC3290CA03E2000B580D3 /* CVDisplayServerController.m */,
+				6A321E2B0CA04B4E0087FD6A /* NSBezierPathAdditions.h */,
+				6A321E2C0CA04B4E0087FD6A /* NSBezierPathAdditions.m */,
+				6A7516D10CA053930045DE7C /* OVDisplayServer.h */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+				32CA4F630368D1EE00C91783 /* NewDisplayServer_Prefix.pch */,
+			);
+			name = Source;
 			sourceTree = "<group>";
 		};
 		D4430C400CA6F494009B6776 /* CTGradient */ = {
@@ -215,23 +154,11 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		D4430C2E0CA6F444009B6776 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D4430C8C0CA6F70C009B6776 /* CTGradient.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		8D1107260486CEB800E47090 /* NewDisplayServer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "NewDisplayServer" */;
 			buildPhases = (
-				D4430C440CA6F4CA009B6776 /* Copy Frameworks */,
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
@@ -246,30 +173,13 @@
 			productReference = 8D1107320486CEB800E47090 /* OVDisplayServer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D4430C320CA6F444009B6776 /* CTGradient */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D4430C350CA6F446009B6776 /* Build configuration list for PBXNativeTarget "CTGradient" */;
-			buildPhases = (
-				D4430C2E0CA6F444009B6776 /* Headers */,
-				D4430C2F0CA6F444009B6776 /* Resources */,
-				D4430C300CA6F444009B6776 /* Sources */,
-				D4430C310CA6F444009B6776 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CTGradient;
-			productName = CTGradient;
-			productReference = D4430C330CA6F444009B6776 /* CTGradient.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "NewDisplayServer" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -285,7 +195,6 @@
 			targets = (
 				D4430C750CA6F5A9009B6776 /* NewDisplayServer-Deafult */,
 				8D1107260486CEB800E47090 /* NewDisplayServer */,
-				D4430C320CA6F444009B6776 /* CTGradient */,
 			);
 		};
 /* End PBXProject section */
@@ -302,13 +211,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D4430C2F0CA6F444009B6776 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -316,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A051AE00CA9DB8900A6AB82 /* CTGradient.m in Sources */,
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				6A7DC3040CA0391100B580D3 /* CVBubbleTextWindow.m in Sources */,
 				6A7DC3140CA03AB000B580D3 /* CVBubbleTextView.m in Sources */,
@@ -324,22 +227,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D4430C300CA6F444009B6776 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D4430C8D0CA6F70C009B6776 /* CTGradient.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D4430C770CA6F5B0009B6776 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D4430C320CA6F444009B6776 /* CTGradient */;
-			targetProxy = D4430C760CA6F5B0009B6776 /* PBXContainerItemProxy */;
-		};
 		D4430C790CA6F5B3009B6776 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8D1107260486CEB800E47090 /* NewDisplayServer */;
@@ -387,7 +277,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = NewDisplayServer_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Loader;
 				PRODUCT_NAME = OVDisplayServer;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
@@ -409,7 +299,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = NewDisplayServer_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Loader;
 				PRODUCT_NAME = OVDisplayServer;
 				WRAPPER_EXTENSION = app;
 			};
@@ -436,60 +326,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = Release;
-		};
-		D4430C360CA6F446009B6776 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "CTGradient-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Frameworks";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = CTGradient;
-				ZERO_LINK = YES;
-			};
-			name = Debug;
-		};
-		D4430C370CA6F446009B6776 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "CTGradient-Info.plist";
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = CTGradient;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -532,15 +368,6 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D4430C350CA6F446009B6776 /* Build configuration list for PBXNativeTarget "CTGradient" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D4430C360CA6F446009B6776 /* Debug */,
-				D4430C370CA6F446009B6776 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -685,6 +685,7 @@ static void resolveHSV(float *color1, float *color2);
   //Calls to CoreGraphics
   CGContextRef currentContext = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
   CGContextSaveGState(currentContext);
+	  CGContextSaveGState(currentContext);
 	  #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 		CGColorSpaceRef colorspace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
 	  #else

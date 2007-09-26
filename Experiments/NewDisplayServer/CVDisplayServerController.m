@@ -60,16 +60,21 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 	NSString *fontSize = [cfg objectForKey:@"size"];
 	if (!fontSize) fontSize = @"24";
 	
+	NSNumber *useWindowAnimation = [cfg objectForKey:@"useWindowAnimation"];
+	if (!useWindowAnimation) useWindowAnimation = [NSNumber numberWithBool:YES];
+	
 	NSFont *font = [NSFont fontWithName:fontName size:[fontSize floatValue]];
 	
 	[(CVBubbleTextWindow*)_candidateWindow setFont:font];
 	[(CVBubbleTextWindow*)_candidateWindow setBubbleBackgroundColor:CVColorFromRGBValueString(background)];
 	[(CVBubbleTextWindow*)_candidateWindow setTextColor:CVColorFromRGBValueString(foreground)];
+	[(CVBubbleTextWindow*)_candidateWindow setUseWindowAnimation:[useWindowAnimation boolValue]];
 	[_candidateWindow setAlphaValue:[opacity floatValue]];
 	
 	[(CVBubbleTextWindow*)_notificationWindow setFont:font];
 	[(CVBubbleTextWindow*)_notificationWindow setBubbleBackgroundColor:CVColorFromRGBValueString(background)];
 	[(CVBubbleTextWindow*)_notificationWindow setTextColor:CVColorFromRGBValueString(foreground)];	
+	[(CVBubbleTextWindow*)_notificationWindow setUseWindowAnimation:[useWindowAnimation boolValue]];
 	[_notificationWindow setAlphaValue:1.0];
 }
 - (void)candidateShow
@@ -83,7 +88,7 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 - (void)candidateUpdate:(bycopy NSString*)s position:(Point)p
 {
 	[(CVBubbleTextWindow*)_candidateWindow setText:s];
-	[(CVBubbleTextWindow*)_candidateWindow updateWindowSizeWithAnimation];
+	[(CVBubbleTextWindow*)_candidateWindow updateWindowSize];
 	NSRect frame = [_candidateWindow frame];
 	
 	Point point;
@@ -95,7 +100,7 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 - (void)notifyMessage:(bycopy NSString*)s position:(Point)p
 {
 	[(CVBubbleTextWindow*)_notificationWindow setText:s];
-	[_notificationWindow updateWindowSizeWithAnimation];
+	[_notificationWindow updateWindowSize];
 	
 	NSRect frame = [_notificationWindow frame];	
 	Point point;

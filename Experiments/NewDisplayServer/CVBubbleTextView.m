@@ -140,7 +140,6 @@
 }
 - (void)drawRect:(NSRect)rect
 {
-	/*
 	#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 		// gradient fill the outer bezel
 		NSGradient *gradient;
@@ -158,42 +157,17 @@
 			[gradient drawInBezierPath:_innerBezelPath angle:270.0];
 		}
 	#else 
-		if (_outerBezelPath) {
-			[_outerBezelPath fill];					
-			[_backgroundFromColor setFill];
-		}
-		if (_innerBezelPath) {
-			[[NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.2] setFill];
-			[_innerBezelPath fill];
-		} 
-	#endif */
+		CTGradient *gradient;
 
-	CTGradient *Gradient;
+		gradient = [CTGradient gradientWithBeginningColor:_backgroundFromColor endingColor:_backgroundToColor];
+		[gradient fillRect:[self frame] angle:90 radius: _radius];
+		
+		NSColor *whiteColor1 = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5];
+		NSColor *whiteColor2 = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.0];
+		gradient = [CTGradient gradientWithBeginningColor:whiteColor1 endingColor:whiteColor2];
+		[gradient fillRect:_innerBound angle:270 radius: _radius];
+	#endif
 	
-	// The CTGradient Class by Chad Weider offers vary types of gradients
-	// + (id)gradientWithBeginningColor:(NSColor *)begin endingColor:(NSColor *)end;	
-	// + (id)aquaSelectedGradient;
-	// + (id)aquaNormalGradient;
-	// + (id)aquaPressedGradient;
-	
-	// + (id)unifiedSelectedGradient;
-	// + (id)unifiedNormalGradient;
-	// + (id)unifiedPressedGradient;
-	// + (id)unifiedDarkGradient;
-	
-	// + (id)sourceListSelectedGradient;
-	// + (id)sourceListUnselectedGradient;
-	
-	// + (id)rainbowGradient;
-	// + (id)hydrogenSpectrumGradient;
-	
-	Gradient = [[CTGradient gradientWithBeginningColor:_backgroundFromColor endingColor:_backgroundToColor] retain];
-	[Gradient fillRect:rect angle:90 radius: _radius];
-	NSColor *whiteColor1 = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5];
-	NSColor *whiteColor2 = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.0];
-	Gradient = [[CTGradient gradientWithBeginningColor:whiteColor1 endingColor:whiteColor2] retain];
-	[Gradient fillRect:_innerBound angle:270 radius: _radius];
 	[_attributedString drawAtPoint:NSMakePoint(_padding, _padding)];
 }
-
 @end

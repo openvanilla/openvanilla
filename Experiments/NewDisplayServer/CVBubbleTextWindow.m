@@ -14,7 +14,10 @@
     [window setLevel:NSScreenSaverWindowLevel];
     [window setAlphaValue:1.0];
     [window setOpaque:NO];
-    [window setHasShadow:YES];	
+    [window setHasShadow:YES];
+	
+	_useWindowAnimation = YES;
+	
     return window;
 }
 - (BOOL)canBecomeKeyWindow
@@ -69,10 +72,14 @@
 {
 	[(CVBubbleTextView*)_textView setFont:font];
 }
-- (void)updateWindowSizeWithAnimation
+- (void)setUseWindowAnimation:(BOOL)animation
+{
+	_useWindowAnimation = animation;
+}
+- (void)updateWindowSize
 {
 	NSRect frame = [self frame];	
 	frame.size = [(CVBubbleTextView*)_textView boundingRect].size;
-	[self setFrame:frame display:YES animate:YES];
+	[self setFrame:frame display:YES animate:_useWindowAnimation];
 }
 @end
