@@ -1165,7 +1165,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVPreferences-Info.plist";
-				INSTALL_PATH = /Library/OpenVanilla/0.8.0/Loader;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Loader;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1190,7 +1190,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVPreferences-Info.plist";
-				INSTALL_PATH = /Library/OpenVanilla/0.8.0/Loader;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Loader;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1479,7 +1479,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVLoader-Info.plist";
-				INSTALL_PATH = /Library/OpenVanilla/0.8.0/Loader;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Loader;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1505,7 +1505,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVLoader-Info.plist";
-				INSTALL_PATH = /Library/OpenVanilla/0.8.0/Loader;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Loader;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
