@@ -43,9 +43,13 @@ print;
 while (<>) {
     chomp;
     last if (/%chardef/);
-    my @l = split;
+    my @l = split /[\s\t]+/;
     ($a, $b) = (shift (@l), shift(@l));
-    print join (" ", $b, $a, @l), "\n";
+    
+    $a =~ s/^\s+//g;
+    $b =~ s/^\s+//g;
+    
+    print join " ", ($b, $a), "\n";
 }
 print;
 print "\n";

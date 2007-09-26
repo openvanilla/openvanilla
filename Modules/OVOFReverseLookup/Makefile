@@ -31,7 +31,7 @@
 MODULEID=OVOFReverseLookup
 
 SOURCES=OVCIN OVFileHandler OVStringToolKit OVOFReverseLookup OVCINInfo
-DATA=lookup-array.cin lookup-bpmf.cin lookup-cj.cin lookup-poj.cin
+DATA=lookup-bpmf.cin lookup-cj.cin lookup-poj.cin
 
 include ../Mk/ov.module.mk
 
