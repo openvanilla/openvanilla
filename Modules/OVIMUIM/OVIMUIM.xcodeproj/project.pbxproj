@@ -125,7 +125,7 @@
 		6AFA607B097C8ADB00976C01 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -136,7 +136,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVIMUIM-Info.plist";
-				INSTALL_PATH = /Library/OpenVanilla/0.7.2/Modules/;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules/;
 				LIBRARY_SEARCH_PATHS = (
 					"$(LIBRARY_SEARCH_PATHS)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks/UIM.framework/Versions/0.4.7/lib",
@@ -157,7 +157,7 @@
 		6AFA607C097C8ADB00976C01 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -166,7 +166,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVIMUIM-Info.plist";
-				INSTALL_PATH = /Library/OpenVanilla/0.7.2/Modules/;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules/;
 				LIBRARY_SEARCH_PATHS = (
 					"$(LIBRARY_SEARCH_PATHS)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks/UIM.framework/Versions/0.4.7/lib",
