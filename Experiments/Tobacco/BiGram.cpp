@@ -98,9 +98,10 @@ double BiGram::viterbi(
 							//else if(dic_->has(leftGram)) {
 								double bigramBackOff =
 									//lm_->getLogProb(leftGram) +
-									leftGrams[j].logProb +
+									//leftGrams[j].logProb +
 									//lm_->getBackOff(rightGram);
-									rightGrams[i].backOff;
+									//rightGrams[i].backOff;
+									rightGrams[i].logProb;
 								tempScore += bigramBackOff;
 								murmur("tempScore:%f", tempScore);								
 							//}
