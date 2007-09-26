@@ -50,7 +50,8 @@ public:
 		vector<string>& outStringVectorRef,
 		vector<string>& delimiterVector,
 		bool hasDelimiter);
-	static bool hasLinebreakBy(string& inString, const char crOrLf); 
+	static bool hasLinebreakBy(string& inString, const char crOrLf);
+	static string trim(string& inputString);
 };
 
 #endif

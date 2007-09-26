@@ -294,6 +294,10 @@
 				RelativePath="..\SharedHeaders\OVStringToolKit.h"
 				>
 			</File>
+			<File
+				RelativePath="..\SharedHeaders\OVWildcard.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="¸ê·½ÀÉ"

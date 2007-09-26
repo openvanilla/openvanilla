@@ -94,6 +94,7 @@ int OVStringToolKit::splitString(
 					inString.substr(previousPosition,
 						inString.length() - previousPosition + 1);
 
+			currentSubString = trim(currentSubString);
 			if(currentSubString.length() > 0) {
 				if(currentSubString == matchedDelimiter && hasDelimiter)
 					outStringVectorRef.push_back(matchedDelimiter);
@@ -106,4 +107,17 @@ int OVStringToolKit::splitString(
 	}
 	
 	return static_cast<int>(outStringVectorRef.size());
+}
+
+string OVStringToolKit::trim(string& inputString)
+{
+	size_t begin = inputString.find_first_not_of(" ");
+	if(begin == string::npos)
+		return "";
+
+	size_t end = inputString.find_last_not_of(" ");
+	if(end - begin + 1 == inputString.size())
+		return inputString;
+	
+	return inputString.substr(begin, end - begin);
 }
