@@ -65,7 +65,7 @@ OS_INSTALL?=$(OS)
 
 # install rules for Darwin (Mac OS X)
 ifeq ("$(OS_INSTALL)", "Darwin")
-    INST_PATH=$(DSTROOT)/Library/OpenVanilla/0.8.0/Modules/
+    INST_PATH=$(DSTROOT)/Library/OpenVanilla/0.8/Modules/
 	OBJS=$(patsubst %, %.o, $(SOURCES))
 	GOALS=$(MODULEID).dylib
 
