@@ -140,7 +140,7 @@
 }
 - (void)drawRect:(NSRect)rect
 {
-	#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+	#if MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_4
 		// gradient fill the outer bezel
 		NSGradient *gradient;
 		
