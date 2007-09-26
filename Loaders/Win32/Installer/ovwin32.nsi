@@ -5,7 +5,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "¤¤¤å (ÁcÅé) - ¶}©ñ­»¯ó¿é¤Jªk¥­¥x"
-!define PRODUCT_VERSION "0.7.2.7-beta"
+!define PRODUCT_VERSION "0.7.2.8-beta"
 !define PRODUCT_PUBLISHER "OpenVanilla.org"
 !define PRODUCT_WEB_SITE "http://openvanilla.org/"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -149,7 +149,7 @@ LangString FAILED_DOTNET_INSTALL ${LANG_TradChinese} "¿é¤Jªk¦w¸Ë²×¤î¡A$\n¥²¶·µ¥¨
 
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "OpenVanilla-0.7.2.7-beta.exe"
+OutFile "OpenVanilla-0.7.2.8-beta.exe"
 InstallDir "$WINDIR\OpenVanilla"
 ShowInstDetails show
 ShowUnInstDetails show
