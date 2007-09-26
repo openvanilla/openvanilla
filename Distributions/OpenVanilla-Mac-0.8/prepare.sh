@@ -33,11 +33,11 @@ make DSTROOT=$DSTROOT install
 rm -rf $DSTROOT/Library/OpenVanilla/0.8/Modules/OVIMSpaceChewing*
 
 cd $OVIMSPACECHEWING
-make clean
-make
-make DSTROOT=$DSTROOT install
+xcodebuild clean
+xcodebuild
+xcodebuild DSTROOT=$DSTROOT install
 
 cd $OVIMUIM
-make clean
-make
-make DSTROOT=$DSTROOT install
+xcodebuild clean
+xcodebuild
+xcodebuild DSTROOT=$DSTROOT install
