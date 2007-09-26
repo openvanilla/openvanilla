@@ -110,6 +110,8 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 
 				RefreshUI(hWnd); //多視窗 program 切換子視窗要重設 ic position
 				murmur("\thUICurIMC==true");
+
+				dsvr->showStatus(true);
 				if(lParam & ISC_SHOWUICOMPOSITIONWINDOW) // not sure
 				{	
 					dsvr->showBuf(true);
@@ -117,16 +119,16 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 				//dsvr->showCandi(true); //註解掉因為切開就應該 clear cand了
 			}
 			else   // it is NULL input context. (?)
-			{				
 				murmur("\thUICurIMC==false, hide all");
-				dsvr->showBuf(false);
-			}
 		}
 		else //switch out
 		{
 			murmur("\tswitch out, hide all");
-			dsvr->showBuf(false);
 			dsvr->showCandi(false);
+			dsvr->showBuf(false);
+
+			murmur("WM_IME_SETCONTEXT: Close Status Window");
+			dsvr->showStatus(false);
 
 			//dsvr->releaseIMC();  //?
 		}
