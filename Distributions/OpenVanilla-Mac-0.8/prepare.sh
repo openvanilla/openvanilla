@@ -8,7 +8,7 @@ MODULES=$PWD/../../Modules
 OVIMSPACECHEWING=$PWD/../../Modules/OVIMSpaceChewing
 OVIMUIM=$PWD/../../Modules/OVIMUIM
 
-sudo rm -rf $DSTROOT/*
+# sudo rm -rf $DSTROOT/*
 
 cd $FRAMEWORK
 xcodebuild clean
