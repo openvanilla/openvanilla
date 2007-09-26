@@ -260,6 +260,9 @@ NSPoint CVFixWindowOriginWithTSMCoordinate(NSRect windowRect, Point oldStylePoin
 NSColor *CVColorFromRGBValueString(NSString *string)
 {
 	NSArray *components = [string componentsSeparatedByString:@" "];
+	
+	if ([components count] < 3) return [NSColor colorWithCalibratedRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+	
 	NSString *red = [components objectAtIndex:0];
 	NSString *green = [components objectAtIndex:1];
 	NSString *blue = [components objectAtIndex:2];
