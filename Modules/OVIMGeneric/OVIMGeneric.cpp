@@ -136,8 +136,6 @@ const char* OVIMGeneric::identifier()
 
 const char* OVIMGeneric::localizedName(const char* locale)
 {
-	return (cininfo.ename + " (wildcard)").c_str();
-	
     if (!strcasecmp(locale, "zh_TW")) return cininfo.tcname.c_str();
     if (!strcasecmp(locale, "zh_CN")) return cininfo.scname.c_str();
     return cininfo.ename.c_str();

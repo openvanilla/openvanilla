@@ -344,9 +344,9 @@ public:
 
     virtual const char *localizedName(const char *locale)
 	{
-        if (!strcasecmp(locale, "zh_TW")) return "酷音 "LIBCHEWING_VERSION" 2007-09-02";
-        if (!strcasecmp(locale, "zh_CN")) return "繁体酷音 "LIBCHEWING_VERSION" 2007-09-02";
- 	    return "Chewing (Smart Phonetics) "LIBCHEWING_VERSION" 2007-09-02";
+        if (!strcasecmp(locale, "zh_TW")) return "酷音";
+        if (!strcasecmp(locale, "zh_CN")) return "繁体酷音";
+ 	    return "Chewing (Smart Phonetics)";
     }
 
     virtual OVInputMethodContext* newContext()
