@@ -1,0 +1,13 @@
+{
+    IBClasses = (
+        {
+            CLASS = AZYWController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {image = id; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = AZYWWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}
