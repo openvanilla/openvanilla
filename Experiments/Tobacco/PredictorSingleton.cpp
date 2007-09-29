@@ -200,6 +200,27 @@ void PredictorSingleton::setCandidateVector(size_t position)
 	candidatePositionVector.clear();
 
 	BiGram biGram;
+	string characterString;
+	for(size_t head = 0; head <= position; head++)
+	{
+		for(size_t end = tokenVector.size() - 1; end >= position; end--)
+		{
+			if(head == end)
+				break;
+			characterString.erase();
+			for(size_t shift = head; shift <= end; shift++)
+			{
+				characterString += tokenVector[shift].characterStringVector[0];
+				if(shift < end)
+					characterString += "-";
+			}
+			addCandidates(characterString, head, CandidateType::WORD);
+		}
+	}	
+	
+	//@defgroup BackwardOnlyCandidates
+	//@{
+	/*
 	vector<string> currentCharacterCombinationVector =
 		tokenVector[position].characterStringVector;
 
@@ -226,7 +247,9 @@ void PredictorSingleton::setCandidateVector(size_t position)
 				backwardPosition,
 				CandidateType::WORD);
 	}
-
+	*/
+	//@}
+	
 	addCandidates(
 		tokenVector[position].keystrokes,
 		position,
