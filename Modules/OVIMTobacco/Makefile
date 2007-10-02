@@ -25,7 +25,6 @@ imtables.db: imtables-schema.txt ${BPMF} ${CINS} cin-sqlconvert.pl
 tsi.db: tobacco-schema.txt tobacco-sqlconvert.pl
 	rm -f tsi.db
 	sqlite3 tsi.db < tobacco-schema.txt
-	perl single-char-word_filter.pl > prepared.lm
-	cat prepared.lm punctuation.lm > tobacco.lm
+	perl single-char-word_filter.pl > tobacco.lm
 	perl -w -CO tobacco-sqlconvert.pl tobacco.lm | sqlite3 tsi.db
 	perl -w -CO tobacco-sqlconvert_general.pl tobacco.lm ${CINS} | sqlite3 tsi.db
