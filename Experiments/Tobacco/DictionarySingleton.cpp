@@ -153,7 +153,7 @@ bool DictionarySingleton::getVocablesByKeystrokes(
         currentVocabulary.word = string(word);
 		currentVocabulary.order = order;
 		//@warning The log prob. of <unk> is hard-coded here temporarily.
-		currentVocabulary.logProb = -5.517275f; //* 0.9f + order * 0.1f;
+		currentVocabulary.logProb = -5.515997f; //* 0.9f + order * 0.1f;
 		currentVocabulary.backOff = 0.0f;
         
         vocabularyVectorRef.push_back(currentVocabulary);
