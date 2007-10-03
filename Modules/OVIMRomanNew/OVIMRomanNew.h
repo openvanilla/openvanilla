@@ -82,13 +82,14 @@ const int ovMaxCandiLen = 32;
 class IMGCandidate
 {
 public:
-    size_t count() { return candidates.size(); }
-    void clear() { candidates.clear(); }
-    void add(const string& s) { candidates.push_back(s); }
-    const char *item(size_t i) { return candidates[i].c_str(); }
-    vector<string>& vectorInstance() { return candidates; }
+    size_t count() { return m_candidates.size(); }
+    void clear() { m_candidates.clear(); }
+    void add(const string& s) { m_candidates.push_back(s); }
+    const char *item(size_t i) { return m_candidates[i].c_str(); }
+    vector<string>& vectorInstance() { return m_candidates; }
+	bool isEmpty() { return m_candidates.empty(); }
 protected:    
-    vector<string> candidates;
+    vector<string> m_candidates;
 };
 
 class OVIMRomanNew;
@@ -100,9 +101,17 @@ public:
 
     virtual void start(OVBuffer*, OVCandidate*, OVService* s);
 
-    virtual void clear() { keyseq.clear();} 
+	virtual void clear()
+	{
+		keyseq.clear();
+		candi.clear();
+	}
 
-	virtual void end() { hunspell_uninitialize((Hunspell*) hunspellChecker); }
+	virtual void end()
+	{
+		clear();
+		hunspell_uninitialize((Hunspell*) hunspellChecker);
+	}
 
     virtual int keyEvent(
         OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* s);
@@ -117,6 +126,7 @@ protected:
     int showcandi(OVCandidate* i);
 	size_t spellCheckerByHunspell(char* buf);
     bool isEnglish(char* buf);
+	bool isCandiOnDuty;
 
 protected:
 	KeySeq keyseq;

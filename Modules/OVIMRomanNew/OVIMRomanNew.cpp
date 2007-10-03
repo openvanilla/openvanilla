@@ -28,7 +28,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#define OV_DEBUG
+//#define OV_DEBUG
 #ifndef WIN32
 	#include <OpenVanilla/OpenVanilla.h>
 	#include <OpenVanilla/OVLibrary.h>
@@ -80,181 +80,169 @@ void OVIMRomanNewContext::start(OVBuffer*, OVCandidate*, OVService* s)
 int OVIMRomanNewContext::keyEvent(
 	OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* s)
 {
-	if(candi.count()) {
+	if(!candi.isEmpty()) {
 		if (k->code()==ovkLeft || k->code()==ovkUp) {
-                if(pagenumber > 0) pagenumber--;
-				else
-					pagenumber = pagetotal;
-                return showcandi(i);
-    		}
-    		if (k->code()==ovkRight || k->code()==ovkDown) {
-                				if(pagenumber == pagetotal) 
-					pagenumber = 0;
-				else pagenumber++;
-                return showcandi(i);
-    		}
-            if(k->code()==ovkTab){
-                if(!candi.item(temp+pagenumber*10)) return 0;
-                b->clear()->append(keyseq.buf)->append(candi.item(temp+pagenumber*10) + keyseq.len)->update();
-                if(temp++ > 8) temp = 0;
-                if(temp+pagenumber*10 > candi.count()) temp = 0;
-                return 1;
-            }
-            if(is_selkey(k->code())){
-		        murmur("SelectKey Pressed: %c",k->code());
-                int n = (k->code() - '1' + 10) % 10;
-                if(n+pagenumber*10 >= candi.count()) return 0;
-				const char* correctedWord = candi.item(n+pagenumber*10);
-
-				//aspell_speller_store_replacement(
-				//	aspell_checker, static_cast<const char*>(keyseq.buf), -1, correctedWord, -1);
-
-                b->clear()->append(correctedWord)->append(" ")->send();
-		    	if (i->onScreen()) i->hide();
-		    	keyseq.clear();
-		    	return closeCandidateWindow(i);
-		    }
-		    
-            if (k->code()==ovkSpace ||
-                k->code()==ovkReturn ||
-                is_punc(k->code()))
-            {
-                if (!(strlen(keyseq.buf))) return 0; // empty buffer, do nothing            
-
-    			b->append(" ")->send();
-                keyseq.clear();
-	       		return closeCandidateWindow(i);
-    		}
-
-			if(!b->isEmpty() && isprint(k->code())) {
-				b->append(" ")->send();
-				keyseq.clear();
-				keyseq.add(k->code());
-				b->clear()->append(keyseq.buf)->update();
-				return closeCandidateWindow(i);
-			}
+			if(pagenumber > 0)
+				pagenumber--;
+			else
+				pagenumber = pagetotal;
+			return showcandi(i);
 		}
+		if (k->code()==ovkRight || k->code()==ovkDown) {
+			if(pagenumber == pagetotal)
+				pagenumber = 0;
+			else
+				pagenumber++;
+			return showcandi(i);
+		}
+		if(k->code()==ovkTab){
+			if(!candi.item(temp+pagenumber*10))
+				return 0;
+			b->clear()
+				->append(keyseq.buf)
+				->append(candi.item(temp+pagenumber*10) + keyseq.len)
+				->update();
+			if(temp++ > 8)
+				temp = 0;
+			if(temp+pagenumber*10 > candi.count())
+				temp = 0;
+			return 1;
+		}
+		if(is_selkey(k->code())) {
+			murmur("SelectKey Pressed: %c",k->code());
+			int n = (k->code() - '1' + 10) % 10;
+			if(n+pagenumber*10 >= candi.count())
+				return 0;
+			const char* correctedWord = candi.item(n+pagenumber*10);
 
-		if(is_selkey(k->code())){
-		    murmur("SelectKey Pressed: %c",k->code());
-            int n = (k->code() - '1' + 10) % 10;
-			const char* correctedWord = candi.item(n+pagenumber*10) + keyseq.len;
-
-		//	aspell_speller_store_replacement(
-		//		aspell_checker, static_cast<const char*>(keyseq.buf), -1, correctedWord, -1);
-
-            b->clear()->append(keyseq.buf)->append(correctedWord)->append(" ")->send();
-
-			if (i->onScreen()) i->hide();
+			b->clear()->append(correctedWord)->append(" ")->send();
+			if (i->onScreen())
+				i->hide();
 			keyseq.clear();
 			return closeCandidateWindow(i);
 		}
-		if (k->code() == ovkReturn)
+		if (k->code()==ovkSpace || k->code()==ovkReturn || is_punc(k->code()))
+		{
+			if (!(strlen(keyseq.buf)))
+				return 0; // empty buffer, do nothing
+
+			b->append(" ")->send();
+			keyseq.clear();
+			return closeCandidateWindow(i);
+		}
+		if(!b->isEmpty() && isprint(k->code())) {
+			b->append(" ")->send();
+			keyseq.clear();
+			keyseq.add(k->code());
+			b->clear()->append(keyseq.buf)->update();
+			return closeCandidateWindow(i);
+		}
+	}
+
+	if (k->code() == ovkReturn)
+	{
+		if(!(strlen(keyseq.buf)))
+			return 0;
+
+		if (keyseq.buf)
 		{
 			if(!(strlen(keyseq.buf)))
-					return 0;
+				return 0;
 
-			if (keyseq.buf)
+			keyseq.clear();
+			//keyseq.add(k->code());
+			b->append(keyseq.buf)->send();
+			keyseq.clear();
+			return 1;
+		}
+	}
+	if (k->code()==ovkSpace || is_punc(k->code())) {
+		if (!(strlen(keyseq.buf))) return 0;   // empty buffer, do nothing            
+
+		if(keyseq.buf) {
+			pagenumber = 0;
+			if(!isEnglish(keyseq.buf) &&
+				spellCheckerByHunspell(keyseq.buf))
 			{
-				if(!(strlen(keyseq.buf)))
-					return 0;
-
-				keyseq.clear();
-				//keyseq.add(k->code());
-				b->append(keyseq.buf)->send();
-				keyseq.clear();
+				showcandi(i);
 				return 1;
 			}
-		}
-		if (k->code()==ovkSpace || is_punc(k->code())) {
-            if (!(strlen(keyseq.buf))) return 0;   // empty buffer, do nothing            
 
-            if(keyseq.buf) {
-                pagenumber = 0;
-                if(!isEnglish(keyseq.buf) &&
-					spellCheckerByHunspell(keyseq.buf))
-                {
-					showcandi(i);
-					return 1;
-                }
-
-				if (!(strlen(keyseq.buf))) return 0;
-				keyseq.clear();
-				keyseq.add(k->code());
-				b->append(keyseq.buf)->send();
-				keyseq.clear();
-          		return closeCandidateWindow(i);
-			} else {
-    			b->send();
-                return 0;
-			}
-		}
-
-		if (k->code()==ovkDelete || k->code()==ovkBackspace) {
-			if(!strlen(keyseq.buf)) { closeCandidateWindow(i); return 0;}
-			keyseq.remove();
-            if(keyseq.len && i->onScreen()) {
-                pagenumber = 0;
-				  if(!isEnglish(keyseq.buf) &&
-					spellCheckerByHunspell(keyseq.buf))
-				{
-					showcandi(i);
-					return 1;
-                }
-				else {
-					closeCandidateWindow(i);
-				}
-            } else {
-                closeCandidateWindow(i);
-            }
-			b->clear()->append(keyseq.buf)->update();
-			return 1;
-		}
-		
-		if(k->code()==ovkTab){
-            if(keyseq.buf) {
-                pagenumber = 0;
-                if(!isEnglish(keyseq.buf) &&
-					spellCheckerByHunspell(keyseq.buf))
-				{
-					showcandi(i);
-					return 1;
-                }
-				else {
-					closeCandidateWindow(i);
-				}
-			} else {
-                return 0;
-			}
-		}
-		
-		if (!isprint(k->code()) || k->isFunctionKey()) {
-		   closeCandidateWindow(i);
-		   return 0;
-        }
-		
-		if(strlen(keyseq.buf) >= ebMaxKeySeq) return 1;
-		
-		if (isprint(k->code())){
-			char s[2];
-			sprintf(s, "%c", k->code());
+			if (!(strlen(keyseq.buf)))
+				return 0;
+			keyseq.clear();
 			keyseq.add(k->code());
-            if(keyseq.buf && i->onScreen()) {
-                pagenumber = 0;
-                temp = 0;
-                if(!isEnglish(keyseq.buf) &&
-					spellCheckerByHunspell(keyseq.buf))
-				{
-					showcandi(i);
-					return 1;
-                }
-				else {
-					closeCandidateWindow(i);
-				}
-			}
-			b->clear()->append(keyseq.buf)->update();
-			return 1;
+			b->append(keyseq.buf)->send();
+			keyseq.clear();
+          	return closeCandidateWindow(i);
+		} else {
+    		b->send();
+			return 0;
 		}
+	}
+
+	if (k->code()==ovkDelete || k->code()==ovkBackspace) {
+		if(!strlen(keyseq.buf)) { closeCandidateWindow(i); return 0;}
+		keyseq.remove();
+		if(keyseq.len && i->onScreen()) {
+			pagenumber = 0;
+			if(!isEnglish(keyseq.buf) &&
+				spellCheckerByHunspell(keyseq.buf))
+			{
+				showcandi(i);
+				return 1;
+			} else {
+				closeCandidateWindow(i);
+			}
+		} else {
+			closeCandidateWindow(i);
+		}
+		b->clear()->append(keyseq.buf)->update();
+		return 1;
+	}
+		
+	if(k->code()==ovkTab){
+		if(keyseq.buf) {
+			pagenumber = 0;
+			if(!isEnglish(keyseq.buf) &&
+				spellCheckerByHunspell(keyseq.buf))
+			{
+				showcandi(i);
+				return 1;
+			} else {
+				closeCandidateWindow(i);
+			}
+		} else {
+			return 0;
+		}
+	}
+		
+	if (!isprint(k->code()) || k->isFunctionKey()) {
+		closeCandidateWindow(i);
+		return 0;
+	}
+		
+	if(strlen(keyseq.buf) >= ebMaxKeySeq) return 1;
+		
+	if (isprint(k->code())){
+		char s[2];
+		sprintf(s, "%c", k->code());
+		keyseq.add(k->code());
+		if(keyseq.buf && i->onScreen()) {
+			pagenumber = 0;
+			temp = 0;
+			if(!isEnglish(keyseq.buf) &&
+				spellCheckerByHunspell(keyseq.buf))
+			{
+				showcandi(i);
+				return 1;
+			} else {
+				closeCandidateWindow(i);
+			}
+		}
+		b->clear()->append(keyseq.buf)->update();
+		return 1;
+	}
 	return 0;
 }
 
@@ -447,7 +435,7 @@ int OVIMRomanNewContext::showcandi(OVCandidate* i) {
         return 1;
     }
 
-    char dispstr[128];    
+    char dispstr[128];
     const char *selkey="1234567890";
     i->clear();
     
@@ -459,6 +447,9 @@ int OVIMRomanNewContext::showcandi(OVCandidate* i) {
     }
     
     sprintf(dispstr, "(%d/%d)", pagenumber + 1, pagetotal + 1);
-    i->append(dispstr)->update()->show();    
+    i->append(dispstr)->update()->show();
+
+	isCandiOnDuty = true;
+
     return 1;
 }
