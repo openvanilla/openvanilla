@@ -192,7 +192,7 @@ LRESULT APIENTRY UIWndProc(HWND hWnd,
 		
 		AVLoader* loader = AVLoader::open();
 		loader->unloadCurrentModule();	
-		AVLoader::close();
+		//AVLoader::close();
 
 		break;
 	}
