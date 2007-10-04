@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -14,19 +15,26 @@ namespace OVPreferences
 {
     public partial class OVPreferences : Form
     {
+        private static string m_ovPrefWorkingFolder =
+            Environment.GetEnvironmentVariable("WINDIR") +
+            Path.DirectorySeparatorChar + "OpenVanilla" +
+            Path.DirectorySeparatorChar;
         private List<OVConfig> m_ovConfList = new List<OVConfig>();
         private static string m_ovConfPath =
             Environment.GetFolderPath(
                 Environment.SpecialFolder.ApplicationData) +
-            System.IO.Path.DirectorySeparatorChar +
-            "OpenVanilla" + System.IO.Path.DirectorySeparatorChar +
+            Path.DirectorySeparatorChar +
+            "OpenVanilla" + Path.DirectorySeparatorChar +
             "config.xml";
         private XmlDocument m_ovConfDom = new XmlDocument();
 
         //ResourceManager resourceMgr = Resource_zh_TW.ResourceManager;
         
         ResourceManager resourceMgr = 
-            ResourceManager.CreateFileBasedResourceManager("Resource",@".\Resources\", null);
+            ResourceManager.CreateFileBasedResourceManager(
+                "Resource",
+                m_ovPrefWorkingFolder + "Resources",
+                null);
         
         //CultureInfo ci =  Resource_ch_TW.Culture;// new CultureInfo("ch-TW");
         
