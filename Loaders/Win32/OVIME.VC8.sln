@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMGeneric", "..\..\Module
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMRomanNew", "..\..\Modules\OVIMRomanNew\OVIMRomanNew.vcproj", "{A5AF52BA-AEA5-4D62-8DED-73216D23FE31}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMArray", "..\..\Modules\OVIMArray\OVIMArray.vcproj", "{6EA86154-8C37-4869-A2BA-08E1D6BF09EB}"
+EndProject
 Global
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
 		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
@@ -132,6 +134,16 @@ Global
 		{A5AF52BA-AEA5-4D62-8DED-73216D23FE31}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{A5AF52BA-AEA5-4D62-8DED-73216D23FE31}.Release|Win32.ActiveCfg = Release|Win32
 		{A5AF52BA-AEA5-4D62-8DED-73216D23FE31}.Release|Win32.Build.0 = Release|Win32
+		{6EA86154-8C37-4869-A2BA-08E1D6BF09EB}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{6EA86154-8C37-4869-A2BA-08E1D6BF09EB}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{6EA86154-8C37-4869-A2BA-08E1D6BF09EB}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{6EA86154-8C37-4869-A2BA-08E1D6BF09EB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6EA86154-8C37-4869-A2BA-08E1D6BF09EB}.Debug|Win32.Build.0 = Debug|Win32
+		{6EA86154-8C37-4869-A2BA-08E1D6BF09EB}.Release|Any CPU.ActiveCfg = Release|Win32
+		{6EA86154-8C37-4869-A2BA-08E1D6BF09EB}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{6EA86154-8C37-4869-A2BA-08E1D6BF09EB}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{6EA86154-8C37-4869-A2BA-08E1D6BF09EB}.Release|Win32.ActiveCfg = Release|Win32
+		{6EA86154-8C37-4869-A2BA-08E1D6BF09EB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
