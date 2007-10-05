@@ -5,7 +5,7 @@
 class AVService : public OVService {
 public:
     void setDisplayServer(AVDisplayServer *svr) {dsvr = svr;}
-    virtual void beep() {}
+    virtual void beep();
     virtual void notify(const char *msg);
     virtual const char *locale() { return "zh_TW"; }
     virtual const char *userSpacePath(const char *modid) { return cfg.getUserDir(); }

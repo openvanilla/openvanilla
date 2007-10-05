@@ -5,6 +5,8 @@
 //</comment>
 #include <cstring>
 
+#include <windows.h>	//< For Beep(DWORD, DWORD);
+
 const char *AVService::pathSeparator()
 {
 #ifdef WIN32
@@ -12,6 +14,11 @@ const char *AVService::pathSeparator()
 #else
 	return "/";
 #endif
+}
+
+void AVService::beep()
+{
+	Beep(440, 500);
 }
 
 void AVService::notify(const char *msg)
