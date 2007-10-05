@@ -117,93 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;m_cbChooseInFront.Parent" xml:space="preserve">
-    <value>pnTobacco</value>
-  </data>
-  <data name="&gt;&gt;m_cbClearOnError.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 228</value>
-  </data>
-  <data name="pnTobacco.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 72</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="&gt;&gt;pnTobacco.Name" xml:space="preserve">
-    <value>pnTobacco</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="pnTobacco.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;m_cbClearOnError.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="m_cbChooseInFront.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="m_cbClearOnError.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pnTobacco.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pnTobacco.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 146</value>
-  </data>
-  <data name="&gt;&gt;pnTobacco.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="m_cbClearOnError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 24</value>
-  </data>
-  <data name="m_cbClearOnError.Text" xml:space="preserve">
-    <value>Clear sequence on error</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PanelTobacco</value>
-  </data>
   <data name="m_cbChooseInFront.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 33</value>
-  </data>
-  <data name="m_cbClearOnError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 3</value>
-  </data>
-  <data name="&gt;&gt;m_cbChooseInFront.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>OVPreferences.PanelGeneric, OVPreferences, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;m_cbClearOnError.Parent" xml:space="preserve">
-    <value>pnTobacco</value>
+    <value>13, 25</value>
   </data>
   <data name="m_cbChooseInFront.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 24</value>
+    <value>104, 16</value>
+  </data>
+  <data name="m_cbClearOnError.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 16</value>
+  </data>
+  <data name="pnTobacco.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 50</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 209</value>
   </data>
   <data name="m_cbChooseInFront.Text" xml:space="preserve">
-    <value>Choose in front of cursor</value>
+    <value>游標前選字</value>
   </data>
-  <data name="&gt;&gt;m_cbChooseInFront.Name" xml:space="preserve">
-    <value>m_cbChooseInFront</value>
+  <data name="m_cbClearOnError.Text" xml:space="preserve">
+    <value>錯誤時清除</value>
   </data>
-  <data name="&gt;&gt;m_cbClearOnError.Name" xml:space="preserve">
-    <value>m_cbClearOnError</value>
-  </data>
-  <data name="&gt;&gt;m_cbChooseInFront.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pnTobacco.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>Chinese (Taiwan)</value>
-  </metadata>
 </root>

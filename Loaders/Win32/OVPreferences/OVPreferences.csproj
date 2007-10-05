@@ -209,7 +209,15 @@
       <SubType>Designer</SubType>
       <DependentUpon>PanelTibetan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PanelTobacco.en-US.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelTobacco.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PanelTobacco.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PanelTobacco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelTobacco.zh-TW.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PanelTobacco.cs</DependentUpon>
     </EmbeddedResource>

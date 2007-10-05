@@ -12,9 +12,9 @@ namespace OVPreferences
 {
     public partial class PanelGeneric : UserControl
     {
-        private OVConfig m_ovConf = null;
-        private XmlDocument m_ovConfDOM = null;
-        private OVConfigDom m_ovConfDomHandler = null;
+        protected OVConfig m_ovConf = null;
+        protected XmlDocument m_ovConfDOM = null;
+        protected OVConfigDom m_ovConfDomHandler = null;
 
         private bool m_doAutoCompose;
         private bool m_doHitMaxAndCompose;
