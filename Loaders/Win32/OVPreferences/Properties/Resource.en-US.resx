@@ -132,8 +132,17 @@
   <data name="OVIMGeneric" xml:space="preserve">
     <value>Generic</value>
   </data>
-  <data name="Phonetic" xml:space="preserve">
+  <data name="OVIMPhonetic" xml:space="preserve">
     <value>Phonetic</value>
+  </data>
+  <data name="OVIMTobacco-bpmf_punctuation" xml:space="preserve">
+    <value>BoPoMoFo Tobacco</value>
+  </data>
+  <data name="OVIMTobacco-cj" xml:space="preserve">
+    <value>CangJie Tobacco</value>
+  </data>
+  <data name="OVIMTobacco-hsu" xml:space="preserve">
+    <value>Hsu's BoPoMoFo Tobacco</value>
   </data>
   <data name="TabModuleList" xml:space="preserve">
     <value>Module Lists</value>

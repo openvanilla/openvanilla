@@ -132,8 +132,17 @@
   <data name="OVIMGeneric" xml:space="preserve">
     <value>汎用模組</value>
   </data>
-  <data name="Phonetic" xml:space="preserve">
-    <value>注音</value>
+  <data name="OVIMPhonetic" xml:space="preserve">
+    <value>傳統注音</value>
+  </data>
+  <data name="OVIMTobacco-bpmf_punctuation" xml:space="preserve">
+    <value>菸草注音</value>
+  </data>
+  <data name="OVIMTobacco-cj" xml:space="preserve">
+    <value>菸草倉頡</value>
+  </data>
+  <data name="OVIMTobacco-hsu" xml:space="preserve">
+    <value>菸草許氏</value>
   </data>
   <data name="TabModuleList" xml:space="preserve">
     <value>模組列表</value>

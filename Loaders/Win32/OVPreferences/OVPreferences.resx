@@ -133,7 +133,7 @@
     <value>12</value>
   </data>
   <data name="m_btSave.Text" xml:space="preserve">
-    <value>Save and Exit</value>
+    <value>儲存並離開 </value>
   </data>
   <data name="&gt;&gt;m_btSave.Name" xml:space="preserve">
     <value>m_btSave</value>
@@ -1626,7 +1626,7 @@
 </value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Preference Settings</value>
+    <value>偏好設定</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>OVPreferences</value>

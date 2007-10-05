@@ -119,18 +119,15 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="m_cbChooseInFront.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 16</value>
+    <value>229, 16</value>
   </data>
-  <data name="m_cbClearOnError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 12</value>
-  </data>
-  <data name="m_cbClearOnError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 15</value>
+  <data name="m_cbChooseInFront.Text" xml:space="preserve">
+    <value>Choose in front of  cursor</value>
   </data>
   <data name="pnTobacco.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 63</value>
+    <value>261, 46</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 222</value>
+    <value>268, 188</value>
   </data>
 </root>

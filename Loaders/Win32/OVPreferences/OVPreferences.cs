@@ -163,7 +163,7 @@ namespace OVPreferences
         {
             PanelPhonetic pnPhonetic = new PanelPhonetic();
             pnPhonetic.Init(conf, confDom);
-            string msg = resourceMgr.GetString("Phonetic", ci);
+            string msg = resourceMgr.GetString("OVIMPhonetic", ci);
             //AddTab(pnPhonetic, conf.moduleName);
             AddTab(pnPhonetic, msg);
         }
@@ -186,7 +186,8 @@ namespace OVPreferences
         {
             PanelTobacco pnTobacco = new PanelTobacco();
             pnTobacco.Init(conf, confDom);
-            AddTab(pnTobacco, conf.moduleName);
+            string msg = resourceMgr.GetString(conf.moduleName, ci);
+            AddTab(pnTobacco, msg);
         }
 
         protected void AddTabTLIM(OVConfig conf, XmlDocument confDom)

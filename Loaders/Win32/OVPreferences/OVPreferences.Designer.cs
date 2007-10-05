@@ -37,47 +37,31 @@ namespace OVPreferences
             // 
             // m_btSave
             // 
-            this.m_btSave.AccessibleDescription = null;
-            this.m_btSave.AccessibleName = null;
             resources.ApplyResources(this.m_btSave, "m_btSave");
-            this.m_btSave.BackgroundImage = null;
-            this.m_btSave.Font = null;
             this.m_btSave.Name = "m_btSave";
             this.m_btSave.UseVisualStyleBackColor = true;
             this.m_btSave.Click += new System.EventHandler(this.m_btSave_Click);
             // 
             // m_tcSelf
             // 
-            this.m_tcSelf.AccessibleDescription = null;
-            this.m_tcSelf.AccessibleName = null;
             resources.ApplyResources(this.m_tcSelf, "m_tcSelf");
-            this.m_tcSelf.BackgroundImage = null;
-            this.m_tcSelf.Font = null;
             this.m_tcSelf.Name = "m_tcSelf";
             this.m_tcSelf.SelectedIndex = 0;
             this.m_tcSelf.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             // 
             // m_tlSelf
             // 
-            this.m_tlSelf.AccessibleDescription = null;
-            this.m_tlSelf.AccessibleName = null;
             resources.ApplyResources(this.m_tlSelf, "m_tlSelf");
-            this.m_tlSelf.BackgroundImage = null;
             this.m_tlSelf.Controls.Add(this.m_tcSelf, 0, 0);
             this.m_tlSelf.Controls.Add(this.m_btSave, 0, 1);
-            this.m_tlSelf.Font = null;
             this.m_tlSelf.Name = "m_tlSelf";
             // 
-            // OVPrefrences
+            // OVPreferences
             // 
-            this.AccessibleDescription = null;
-            this.AccessibleName = null;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = null;
             this.Controls.Add(this.m_tlSelf);
-            this.Font = null;
-            this.Name = "OVPrefrences";
+            this.Name = "OVPreferences";
             this.m_tlSelf.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

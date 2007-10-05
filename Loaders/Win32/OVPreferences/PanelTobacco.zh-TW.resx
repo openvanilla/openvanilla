@@ -122,21 +122,21 @@
     <value>13, 25</value>
   </data>
   <data name="m_cbChooseInFront.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 16</value>
+    <value>229, 22</value>
+  </data>
+  <data name="m_cbChooseInFront.Text" xml:space="preserve">
+    <value>游標前選字</value>
   </data>
   <data name="m_cbClearOnError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 16</value>
+    <value>229, 16</value>
+  </data>
+  <data name="m_cbClearOnError.Text" xml:space="preserve">
+    <value>錯誤時清除</value>
   </data>
   <data name="pnTobacco.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 50</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 209</value>
-  </data>
-  <data name="m_cbChooseInFront.Text" xml:space="preserve">
-    <value>游標前選字</value>
-  </data>
-  <data name="m_cbClearOnError.Text" xml:space="preserve">
-    <value>錯誤時清除</value>
+    <value>268, 191</value>
   </data>
 </root>
