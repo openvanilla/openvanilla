@@ -81,6 +81,8 @@ int OVIMRomanNewContext::keyEvent(
 	OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* s)
 {
 	if(!candi.isEmpty()) {
+		if(k->code()==ovkEsc)
+			return closeCandidateWindow(i);
 		if (k->code()==ovkLeft || k->code()==ovkUp) {
 			if(pagenumber > 0)
 				pagenumber--;
@@ -139,6 +141,11 @@ int OVIMRomanNewContext::keyEvent(
 		}
 	}
 
+	if(k->code() == ovkEsc) {
+		b->clear()->update();
+		clear();
+		return 1;
+	}
 	if (k->code() == ovkReturn)
 	{
 		if(!(strlen(keyseq.buf)))
@@ -287,9 +294,11 @@ size_t OVIMRomanNewContext::spellCheckerByHunspell(char* buf)
 	//			//word[j] = '@';
 	//			//word[j+1] = 0;
 	//	 candi.add(string(word));
+
 	//			j = 0;
 	//		}
 	//		intoDoubleQ = !intoDoubleQ;
+
 
 	//	}
 	//	else if(result[i] == ',')
@@ -446,7 +455,7 @@ int OVIMRomanNewContext::showcandi(OVCandidate* i) {
         i->append(dispstr)->append(candi.item(j+pagenumber*10))->append("\t");
     }
     
-    sprintf(dispstr, "(%d/%d)", pagenumber + 1, pagetotal + 1);
+    sprintf(dispstr, "(%ld/%ld)", pagenumber + 1, pagetotal + 1);
     i->append(dispstr)->update()->show();
 
 	isCandiOnDuty = true;
