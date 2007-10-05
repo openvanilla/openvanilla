@@ -1067,19 +1067,18 @@ const char *IMGKeySequence::compose() {
     strcpy(composebuf, "");
 
 	string foo(seq);
-//@warning The following code block ate punctuations...
-//@defgroup Detect legal BoPoMoFo vowels and consonants.
-//@{
-/*
-	if(isBoPoMoFoLayout)
+	//@defgroup Detect legal BoPoMoFo vowels and consonants.
+	//@{
+	char keystr[64];
+    sprintf(keystr, "_punctuation_%s", seq);
+	if(isBoPoMoFoLayout && !QueryForKey(db, table, keystr))
 	{
 		string inputStr(seq);		
 		convert2LegalBPMF(inputStr,foo);	
 		len = static_cast<int>(foo.length());
 		strcpy(seq,foo.c_str());
 	}	
-*/
-//@}
+	//@}
 
 	for(size_t i = 0; i < foo.length(); i++)
 	{
