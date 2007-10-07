@@ -151,12 +151,17 @@ public:
 
     virtual int initialize(OVDictionary* l, OVService* s, const char* libPath)
     {        
-		modulePath =
-			string(libPath) + string(identifier()) + string(s->pathSeparator());
-
+        modulePath = string(libPath) + string(identifier()) + string(s->pathSeparator());
+	updateConfig(l);
         return 1; 
     }
-
+    int updateConfig(OVDictionary *l)
+    {
+        const char *Dict = "Dictionary File";
+        if( !l->keyExist(Dict) ) l->setString(Dict, "en_US");
+        dict = string(l->getString(Dict));
+        return 1;
+    }
     virtual const char* localizedName(const char *locale) {
 		if (!strcasecmp(locale, "zh_TW"))
 			return "\xE6\x96\xB0\xE8\x8B\xB1\xE6\x95\xB8";
@@ -165,7 +170,8 @@ public:
         return "New Roman (alphanumeric)";
     }
 
-	string modulePath;
+    string modulePath;
+    string dict;
 };
 
 extern "C" unsigned int OVGetLibraryVersion() { return OV_VERSION; }

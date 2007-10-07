@@ -65,11 +65,10 @@ const char *QueryForKey(SQLite3 *db, const char *tbl, const char *key);
 void OVIMRomanNewContext::start(OVBuffer*, OVCandidate*, OVService* s)
 {
 	clear();
-
 	string affPath =
-		parent->modulePath + string(s->pathSeparator()) + "en_US.aff";
+		parent->modulePath + string(s->pathSeparator()) + parent->dict + ".aff";
 	string dictPath =
-		parent->modulePath + string(s->pathSeparator()) + "en_US.dic";
+		parent->modulePath + string(s->pathSeparator()) + parent->dict + ".dic";
 	hunspellChecker
 		= hunspell_initialize(
 			const_cast<char*>(affPath.c_str()),
@@ -452,7 +451,11 @@ int OVIMRomanNewContext::showcandi(OVCandidate* i) {
     for (size_t j=0; j<10; j++) {
         if (j+pagenumber*10 >= total) break;
         sprintf(dispstr, "%c.", selkey[j]);
+#ifdef WIN32
         i->append(dispstr)->append(candi.item(j+pagenumber*10))->append("\t");
+#else
+        i->append(dispstr)->append(candi.item(j+pagenumber*10))->append("\n");
+#endif
     }
     
     sprintf(dispstr, "(%ld/%ld)", pagenumber + 1, pagetotal + 1);
