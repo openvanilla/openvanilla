@@ -18,7 +18,7 @@ const char *AVService::pathSeparator()
 
 void AVService::beep()
 {
-	Beep(440, 100);
+	MessageBeep(-1);
 }
 
 void AVService::notify(const char *msg)
