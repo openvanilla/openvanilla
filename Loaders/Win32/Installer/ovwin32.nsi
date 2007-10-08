@@ -28,9 +28,9 @@ SetCompressor lzma
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
 !define MUI_HEADERIMAGE 
 !define MUI_HEADERIMAGE_NOSTRETCH
-!define MUI_HEADERIMAGE_BITMAP "openvanilla.bmp"
+!define MUI_HEADERIMAGE_BITMAP "ov-installer2.bmp"
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP_NOSTRETCH
-!define MUI_WELCOMEFINISHPAGE_BITMAP "ov-button-logo-gg.bmp"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "ov-installer.bmp"
 
 
 
