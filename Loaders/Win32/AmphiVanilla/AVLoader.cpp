@@ -161,6 +161,8 @@ void AVLoader::unloadCurrentModule()
 {
 	if(activatedIm > -1)
 	{
+		if(buf && !buf->isEmpty())
+			buf->send()->clear();
 		ctx_vector[activatedIm]->end();
 		startedCtxVector[activatedIm] = false;
 		activatedIm = -1;
