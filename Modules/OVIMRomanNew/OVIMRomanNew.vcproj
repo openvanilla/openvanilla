@@ -98,7 +98,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\Windows\OpenVanilla\Modules\OVIMRomanNew.dll&quot; &amp;&amp; &quot;.\deploy-hunspell.bat&quot;"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\OpenVanilla\Modules\OVIMRomanNew.dll&quot; &amp;&amp; &quot;.\deploy-hunspell.bat&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -183,7 +183,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\Windows\OpenVanilla\Modules\OVIMRomanNew.dll&quot; &amp;&amp; &quot;.\deploy-hunspell.bat&quot;"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;C:\OpenVanilla\Modules\OVIMRomanNew.dll&quot; &amp;&amp; &quot;.\deploy-hunspell.bat&quot;"
 			/>
 		</Configuration>
 	</Configurations>

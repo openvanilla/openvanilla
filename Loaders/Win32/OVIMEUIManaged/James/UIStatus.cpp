@@ -181,10 +181,13 @@ LRESULT APIENTRY StatusWndProc(HWND hWnd,
 				break;
 			case ID_CONFIG:
 				{
+					//@warning an OV-specific path here!
+
 					TCHAR exe_path[MAX_PATH];
-					TCHAR file_name[] = _T("\\OpenVanilla\\OVPreferences.exe");
-				    GetWindowsDirectory(exe_path, MAX_PATH - (int)_tcslen( file_name ) );
-				    _stprintf(exe_path, _T("%s\\%s"), exe_path, file_name);
+					//TCHAR file_name[] = _T("\\OpenVanilla\\OVPreferences.exe");
+				    //GetWindowsDirectory(exe_path, MAX_PATH - (int)_tcslen( file_name ) );
+				    //_stprintf(exe_path, _T("%s\\%s"), exe_path, file_name);
+					_tcscpy(exe_path, _T("C:\\OpenVanilla\OVPreferences.exe"));
 
 					ShellExecute( NULL, _T("open"), exe_path, NULL, NULL, SW_SHOWNORMAL );
 				}

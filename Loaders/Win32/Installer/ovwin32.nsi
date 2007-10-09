@@ -150,7 +150,7 @@ LangString FAILED_DOTNET_INSTALL ${LANG_TradChinese} "¿é¤Jªk¦w¸Ë²×¤î¡A$\n¥²¶·µ¥¨
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "OpenVanilla-Windows-0.7.2.9-beta.exe"
-InstallDir "$WINDIR\OpenVanilla"
+InstallDir "C:\OpenVanilla"
 ShowInstDetails show
 ShowUnInstDetails show
 
@@ -168,8 +168,8 @@ Function uninstOld
       ContinueUnist:
       SetOverwrite on
       SetOutPath "$TEMP\~nsu.tmp"
-      CopyFiles /SILENT "$WINDIR\OpenVanilla\uninst.exe" "$TEMP\~nsu.tmp\AU_.exe"            
-      ExecWait '"$TEMP\~nsu.tmp\Au_.exe" /S _?=$WINDIR\OpenVanilla' $0            
+      CopyFiles /SILENT "C:\OpenVanilla\uninst.exe" "$TEMP\~nsu.tmp\AU_.exe"            
+      ExecWait '"$TEMP\~nsu.tmp\Au_.exe" /S _?=C:\OpenVanilla' $0            
       Delete "$TEMP\~nsu.tmp\Au_.exe"
       RMDir "$TEMP\~nsu.tmp"
       ClearErrors
@@ -593,12 +593,12 @@ Section "MainSection" SEC01
 SectionEnd
 
 Section "Modules" SEC02
- ; SetOutPath "$WINDIR\OpenVanilla"
-SetOutPath "$WINDIR\"
+ ; SetOutPath "C:\OpenVanilla"
+SetOutPath "C:\"
   SetOVerwrite ifnewer
   File /r "OpenVanilla"
-  nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
-  nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" install "$WINDIR\OpenVanilla\CSharpFormLibrary.dll"'
+  nsExec::ExecToStack '"C:\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
+  nsExec::ExecToStack '"C:\OpenVanilla\GacUtil.exe" install "C:\OpenVanilla\CSharpFormLibrary.dll"'
 SetOutPath "$APPDATA\OpenVanilla\"
   File "config.xml"
   File "orz.txt"
@@ -608,7 +608,7 @@ Section -AdditionalIcons
   SetOutPath $INSTDIR
   CreateDirectory "$SMPROGRAMS\OpenVanilla"
   CreateShortCut "$SMPROGRAMS\OpenVanilla\Uninstall.lnk" "$INSTDIR\uninst.exe"
-  CreateShortCut "$SMPROGRAMS\OpenVanilla\OVPreferences.lnk" "$WINDIR\OpenVanilla\OVPreferences.exe"
+  CreateShortCut "$SMPROGRAMS\OpenVanilla\OVPreferences.lnk" "C:\OpenVanilla\OVPreferences.exe"
 SectionEnd
 
 Section -Post
@@ -669,16 +669,14 @@ Section Uninstall
   ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\excel-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\excel.exe" $R5
   ${registry::MoveKey} "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\winword-new.exe" "HKLM\SOFTWARE\Microsoft\.NETFramework\Policy\AppPatch\v2.0.50727.00000\\winword.exe" $R6
 
-  nsExec::ExecToStack '"$WINDIR\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
+  nsExec::ExecToStack '"C:\OpenVanilla\GacUtil.exe" uninstall "CSharpFormLibrary.dll"'
 
   Delete "$SYSDIR\OVIMEUI.dll"
   Delete "$SYSDIR\libltdl3.dll"
-  Delete "$SYSDIR\libiconv-2.dll"
-  Delete "$SYSDIR\tinyxml.dll"
   Delete "$SYSDIR\sqlite3.dll"
   Delete "$SYSDIR\Hunspell.dll"
   Delete "$INSTDIR\uninst.exe"
-  RMDir /r "$WINDIR\OpenVanilla"
+  RMDir /r "C:\OpenVanilla"
   Delete "$SMPROGRAMS\OpenVanilla\Uninstall.lnk"
   Delete "$SMPROGRAMS\OpenVanilla\OVPreferences.lnk"
   RMDir "$SMPROGRAMS\OpenVanilla"

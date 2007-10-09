@@ -18,8 +18,11 @@ namespace CSharpFormLibrary
         private const int MA_NOACTIVATE = 0x0003;
         private const int MA_NOACTIVATEANDEAT = 0x0004;        
         private IntPtr m_AppHWnd;
+
+        //@warning OV-specific paths here!
         private static string m_baseDir =
-            Environment.GetEnvironmentVariable("WINDIR") +
+            "C:" +
+            //Environment.GetEnvironmentVariable("WINDIR") +
             System.IO.Path.DirectorySeparatorChar +
             "OpenVanilla";
         private static string m_moduleDir =

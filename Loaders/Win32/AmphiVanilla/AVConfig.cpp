@@ -14,8 +14,11 @@ AVConfig::AVConfig()
 	char OV_USERDIR[PATH_MAX];
 	char OV_MODULEDIR[PATH_MAX];
 #ifdef WIN32
-	GetWindowsDirectoryA(OV_BASEDIR, MAX_PATH - 14);
-	sprintf(OV_BASEDIR, "%s\\%s", OV_BASEDIR, "OpenVanilla\\");
+	//@warning OV-specific paths here!
+
+	//GetWindowsDirectoryA(OV_BASEDIR, MAX_PATH - 14);
+	//sprintf(OV_BASEDIR, "%s\\%s", OV_BASEDIR, "OpenVanilla\\");
+	strcpy(OV_BASEDIR, "C:\\OpenVanilla\\");
 	sprintf(OV_MODULEDIR, "%s\\%s", OV_BASEDIR, "Modules\\");
 
 	if (SHGetFolderPathA(NULL, CSIDL_APPDATA|CSIDL_FLAG_CREATE, 

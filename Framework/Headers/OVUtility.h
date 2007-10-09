@@ -84,14 +84,16 @@ private:
 
     inline static void murmur(const char* format,...) {
 #ifdef WIN32
+		//@warning OV-specific paths here!
 		//<comment author='b6s'>
 		//The following codes of paths are redundant to AVConfig.cpp,
 		//however, they're necessary...		
 		char OV_BASEDIR_PRE[MAX_PATH];
 		char OV_USERDIR_PRE[MAX_PATH];
 
-		GetWindowsDirectoryA(OV_BASEDIR_PRE, MAX_PATH - 14);
-		sprintf(OV_BASEDIR_PRE, "%s\\%s", OV_BASEDIR_PRE, "OpenVanilla\\");
+		//GetWindowsDirectoryA(OV_BASEDIR_PRE, MAX_PATH - 14);
+		//sprintf(OV_BASEDIR_PRE, "%s\\%s", OV_BASEDIR_PRE, "OpenVanilla\\");
+		strcpy(OV_BASEDIR_PRE, "C:\\OpenVanilla\\");
 
 		if (SHGetFolderPathA(
 				NULL,

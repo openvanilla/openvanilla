@@ -95,9 +95,13 @@ ImeConfigure(HKL hKL,HWND hWnd, DWORD dwMode, LPVOID lpData)
 {
 	if( IME_CONFIG_GENERAL == dwMode )
 	{
-		TCHAR buf[MAX_PATH];
-		GetWindowsDirectory( buf, MAX_PATH );
-		_tcscat( buf, _T("\\OpenVanilla\\OVPreferences.exe"));
+		//TCHAR buf[MAX_PATH];
+		//GetWindowsDirectory( buf, MAX_PATH );
+		//_tcscat( buf, _T("\\OpenVanilla\\OVPreferences.exe"));
+
+		//@warning an OV-specific path here!
+		// Is it better to use OVService to get it?
+		LPCTSTR buf = _T("C:\\OpenVanilla\\OVPreferences.exe");
 		ShellExecute( hWnd, _T("open"), buf, NULL, NULL, SW_SHOWNORMAL );
 	}
 	InvalidateRect(hWnd,NULL,FALSE);

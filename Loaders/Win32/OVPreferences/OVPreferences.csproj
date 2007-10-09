@@ -238,6 +238,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "C:\Windows\OpenVanilla\OVPreferences.exe" &amp;&amp; "..\..\deploy-resgen.bat"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "C:\OpenVanilla\OVPreferences.exe" &amp;&amp; "..\..\deploy-resgen.bat"</PostBuildEvent>
   </PropertyGroup>
 </Project>
