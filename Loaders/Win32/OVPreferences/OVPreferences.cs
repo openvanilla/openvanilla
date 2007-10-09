@@ -15,8 +15,10 @@ namespace OVPreferences
 {
     public partial class OVPreferences : Form
     {
+        //@warning OV-specific paths here!
         private static string m_ovPrefWorkingFolder =
-            Environment.GetEnvironmentVariable("WINDIR") +
+            "C:" +
+            //Environment.GetEnvironmentVariable("WINDIR") +
             Path.DirectorySeparatorChar + "OpenVanilla" +
             Path.DirectorySeparatorChar;
         private List<OVConfig> m_ovConfList = new List<OVConfig>();
