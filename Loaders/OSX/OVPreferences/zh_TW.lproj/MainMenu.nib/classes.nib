@@ -10,6 +10,7 @@
                 "modtab_clearShortcut" = id; 
                 "modtab_shortcutKeyChange" = id; 
                 "oftab_convert" = id; 
+                onlineHelp = id; 
                 "pedit_changeModule" = id; 
                 "pref_dumpConfigToConsole" = id; 
                 "pref_writeConfig" = id; 

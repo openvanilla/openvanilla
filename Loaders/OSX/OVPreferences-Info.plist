@@ -29,7 +29,7 @@
 	<key>NSHelpFile</key>
 	<string>OpenVanillaManual.pdf</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© The OpenVanilla Project, 2004-2006</string>
+	<string>© The OpenVanilla Project, 2004-2007</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

@@ -126,6 +126,7 @@
 - (IBAction)sharetab_setFont:(id)sender;
 - (IBAction)sharetab_shortcutKeyChange:(id)sender;
 - (IBAction)sharetab_testSound:(id)sender;
+- (IBAction)onlineHelp:(id)sender;
 - (NSString*)shortenedFilename:(NSString*)f maxLength:(int)m;
 - (void)setupSound;
 // methods for IM settings

@@ -38,7 +38,7 @@
 
 int main(int argc, char** argv) {
 	if (argc < 2) {
-		fprintf(stderr, "usage: ovfilter [-l] name_of_the_output_filter\n");
+		fprintf(stderr, "Usage: ovfilter [-l] name_of_the_output_filter\n");
 		return 1;
 	}
 	

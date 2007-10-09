@@ -55,7 +55,6 @@
 		6A07511A09712EDF00CA4201 /* NSDictionaryExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651650970E118004BCC4D /* NSDictionaryExtension.mm */; };
 		6A07511B09712EDF00CA4201 /* NSStringExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A9651670970E118004BCC4D /* NSStringExtension.mm */; };
 		6A07511D09712F0300CA4201 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9651680970E1D9004BCC4D /* Carbon.framework */; };
-		6A0751D909713F9600CA4201 /* OpenVanillaManual.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6A0751D809713F9600CA4201 /* OpenVanillaManual.pdf */; };
 		6A20C4020A38C85F00A364CA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A20C3BE0A38C6FD00A364CA /* InfoPlist.strings */; };
 		6A77ABC00971131C00F5417F /* DisplayServerIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A77AB8C0971122300F5417F /* DisplayServerIcon.icns */; };
 		6A77ABC10971131F00F5417F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A9651E30970E4AE004BCC4D /* InfoPlist.strings */; };
@@ -112,6 +111,8 @@
 		D48C829F0C09CC6100EB008A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9651690970E1D9004BCC4D /* Cocoa.framework */; };
 		D48C82AB0C09CCE800EB008A /* OVWidgetPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = D48C82AA0C09CCE800EB008A /* OVWidgetPlugin.mm */; };
 		D48C82CA0C09CEE400EB008A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D48C82C90C09CEE400EB008A /* WebKit.framework */; };
+		D4C0E0A10CABD1F300874100 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C0E0A00CABD1F300874100 /* CTGradient.m */; };
+		D4C0E0A20CABD20500874100 /* CTGradient.h in Sources */ = {isa = PBXBuildFile; fileRef = D4C0E09F0CABD1F300874100 /* CTGradient.h */; };
 		D4FE84200C0B1D4000CC868C /* ServicesMenu.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4FE841F0C0B1D4000CC868C /* ServicesMenu.strings */; };
 /* End PBXBuildFile section */
 
@@ -144,7 +145,6 @@
 		6A074F720971284800CA4201 /* OVPreferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A0750FC09712DAC00CA4201 /* ovfilter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ovfilter; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A0751C409713E2800CA4201 /* OVPreferences-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "OVPreferences-Info.plist"; sourceTree = "<group>"; };
-		6A0751DC09713FB000CA4201 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = zh_TW; path = PDFManuals/zh_TW.lproj/OpenVanillaManual.pdf; sourceTree = "<group>"; };
 		6A20C3BF0A38C6FD00A364CA /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = "TSComponentResources-TradtionalChineseScript/English.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6A20C3C20A38C70900A364CA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = "TSComponentResources-TradtionalChineseScript/zh_TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6A20C3C30A38C70D00A364CA /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = "TSComponentResources-TradtionalChineseScript/zh_CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 		6A24B02A0A447EBE002ECCC2 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = "TSComponentResources-Panther/zh_CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6A24B0410A447EFA002ECCC2 /* OpenVanilla-TSComponent-SimplifiedChineseScript copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OpenVanilla-TSComponent-SimplifiedChineseScript copy.plist"; sourceTree = "<group>"; };
 		6A77AB8C0971122300F5417F /* DisplayServerIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = DisplayServerIcon.icns; path = OVDisplayServer/DisplayServerIcon.icns; sourceTree = "<group>"; };
-		6A77ABAF097112C300F5417F /* OVDisplayServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVDisplayServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A77ABAF097112C300F5417F /* OVDisplayServer.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OVDisplayServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A77ABB1097112C300F5417F /* OVDisplayServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVDisplayServer-Info.plist"; sourceTree = "<group>"; };
 		6A9651640970E118004BCC4D /* NSDictionaryExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDictionaryExtension.h; path = NSExtensions/NSDictionaryExtension.h; sourceTree = "<group>"; };
 		6A9651650970E118004BCC4D /* NSDictionaryExtension.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NSDictionaryExtension.mm; path = NSExtensions/NSDictionaryExtension.mm; sourceTree = "<group>"; };
@@ -250,6 +250,8 @@
 		D48C82AA0C09CCE800EB008A /* OVWidgetPlugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OVWidgetPlugin.mm; path = OVFilterWidget/OVWidgetPlugin.mm; sourceTree = "<group>"; };
 		D48C82C90C09CEE400EB008A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		D48C84030C09D52E00EB008A /* OVFilter.widgetplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVFilter.widgetplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4C0E09F0CABD1F300874100 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTGradient.h; path = CTGradient/CTGradient.h; sourceTree = "<group>"; };
+		D4C0E0A00CABD1F300874100 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTGradient.m; path = CTGradient/CTGradient.m; sourceTree = "<group>"; };
 		D4FE84160C0B1CCC00CC868C /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = OVPreferences/English.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
 		D4FE84210C0B1D5200CC868C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = OVPreferences/zh_TW.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
 		D4FE84220C0B1D5D00CC868C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = OVPreferences/zh_CN.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
@@ -576,14 +578,6 @@
 			name = "Resources-UnicodeScript";
 			sourceTree = "<group>";
 		};
-		6A9651B20970E367004BCC4D /* PDFManuals */ = {
-			isa = PBXGroup;
-			children = (
-				6A0751D809713F9600CA4201 /* OpenVanillaManual.pdf */,
-			);
-			name = PDFManuals;
-			sourceTree = "<group>";
-		};
 		6A9651DE0970E46F004BCC4D /* DisplayServerInterface */ = {
 			isa = PBXGroup;
 			children = (
@@ -636,11 +630,11 @@
 		6AD7AFCB0970F9350000BF7C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D4C0E09E0CABD1D500874100 /* GTGradient */,
 				6A9651480970E077004BCC4D /* OVLoader */,
 				6A9651490970E07C004BCC4D /* OVDisplayServer */,
 				6A9651470970E068004BCC4D /* OVPreferences */,
 				6A9651420970E035004BCC4D /* ATSComponent */,
-				6A9651B20970E367004BCC4D /* PDFManuals */,
 				6A96514A0970E08A004BCC4D /* OVFilter */,
 				D48C82B60C09CD3400EB008A /* OVFilterWidget */,
 			);
@@ -655,6 +649,15 @@
 				D48C82AA0C09CCE800EB008A /* OVWidgetPlugin.mm */,
 			);
 			name = OVFilterWidget;
+			sourceTree = "<group>";
+		};
+		D4C0E09E0CABD1D500874100 /* GTGradient */ = {
+			isa = PBXGroup;
+			children = (
+				D4C0E09F0CABD1F300874100 /* CTGradient.h */,
+				D4C0E0A00CABD1F300874100 /* CTGradient.m */,
+			);
+			name = GTGradient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -786,7 +789,6 @@
 		6A9651350970DFEE004BCC4D /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 6A9651360970DFEE004BCC4D /* Build configuration list for PBXProject "OpenVanillaLoader" */;
-			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				English,
@@ -821,7 +823,6 @@
 				6A074FA509712AA800CA4201 /* Localizable.strings in Resources */,
 				6A074FA609712AB300CA4201 /* MainMenu.nib in Resources */,
 				6A074FA109712A3500CA4201 /* OVPreferencesIcon.icns in Resources */,
-				6A0751D909713F9600CA4201 /* OpenVanillaManual.pdf in Resources */,
 				D4FE84200C0B1D4000CC868C /* ServicesMenu.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -898,6 +899,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4C0E0A20CABD20500874100 /* CTGradient.h in Sources */,
+				D4C0E0A10CABD1F300874100 /* CTGradient.m in Sources */,
 				6A074FA709712AD900CA4201 /* CVPreviewView.mm in Sources */,
 				6A074FA809712AD900CA4201 /* OVPrefDelegate.mm in Sources */,
 				6A074FA909712AD900CA4201 /* main.m in Sources */,
@@ -1021,14 +1024,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6A0751D809713F9600CA4201 /* OpenVanillaManual.pdf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6A0751DC09713FB000CA4201 /* zh_TW */,
-			);
-			name = OpenVanillaManual.pdf;
-			sourceTree = "<group>";
-		};
 		6A20C3BE0A38C6FD00A364CA /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

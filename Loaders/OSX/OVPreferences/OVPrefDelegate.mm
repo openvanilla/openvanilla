@@ -816,6 +816,10 @@
 - (int)numberOfRowsInTableView:(NSTableView*)t {
     return [propeditproplist count];
 }
+
+- (IBAction)onlineHelp:(id)sender {
+	system("open http://openvanilla.org/help/");
+}
 @end
 
 @implementation CVPrefArray 
