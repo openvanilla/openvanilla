@@ -321,6 +321,8 @@ public:
 		config.candPerPage = 7;
 		config.maxChiSymbolLen = 20;
 		config.bAddPhraseForward = 0;
+		int dir = l->getIntegerWithDefault("addPhraseForward", 0);
+		config.bAddPhraseForward = dir;
         // config.bEscCleanAllBuf = 0,
 
         // This seems to be removed
