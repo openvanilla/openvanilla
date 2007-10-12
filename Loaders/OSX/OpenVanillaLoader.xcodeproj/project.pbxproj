@@ -111,6 +111,8 @@
 		D48C829F0C09CC6100EB008A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9651690970E1D9004BCC4D /* Cocoa.framework */; };
 		D48C82AB0C09CCE800EB008A /* OVWidgetPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = D48C82AA0C09CCE800EB008A /* OVWidgetPlugin.mm */; };
 		D48C82CA0C09CEE400EB008A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D48C82C90C09CEE400EB008A /* WebKit.framework */; };
+		D4BD4F840CC012A60077C4BB /* CVBubbleTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BD4F830CC012A60077C4BB /* CVBubbleTextView.m */; };
+		D4BD4F990CC013AF0077C4BB /* NSBezierPathAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BD4F980CC013AF0077C4BB /* NSBezierPathAdditions.m */; };
 		D4C0E0A10CABD1F300874100 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C0E0A00CABD1F300874100 /* CTGradient.m */; };
 		D4C0E0A20CABD20500874100 /* CTGradient.h in Sources */ = {isa = PBXBuildFile; fileRef = D4C0E09F0CABD1F300874100 /* CTGradient.h */; };
 		D4FE84200C0B1D4000CC868C /* ServicesMenu.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4FE841F0C0B1D4000CC868C /* ServicesMenu.strings */; };
@@ -250,6 +252,10 @@
 		D48C82AA0C09CCE800EB008A /* OVWidgetPlugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OVWidgetPlugin.mm; path = OVFilterWidget/OVWidgetPlugin.mm; sourceTree = "<group>"; };
 		D48C82C90C09CEE400EB008A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		D48C84030C09D52E00EB008A /* OVFilter.widgetplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVFilter.widgetplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4BD4F820CC012A60077C4BB /* CVBubbleTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVBubbleTextView.h; path = ../../Experiments/NewDisplayServer/CVBubbleTextView.h; sourceTree = SOURCE_ROOT; };
+		D4BD4F830CC012A60077C4BB /* CVBubbleTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CVBubbleTextView.m; path = ../../Experiments/NewDisplayServer/CVBubbleTextView.m; sourceTree = SOURCE_ROOT; };
+		D4BD4F970CC013AF0077C4BB /* NSBezierPathAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBezierPathAdditions.h; path = ../../Experiments/NewDisplayServer/NSBezierPathAdditions.h; sourceTree = SOURCE_ROOT; };
+		D4BD4F980CC013AF0077C4BB /* NSBezierPathAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSBezierPathAdditions.m; path = ../../Experiments/NewDisplayServer/NSBezierPathAdditions.m; sourceTree = SOURCE_ROOT; };
 		D4C0E09F0CABD1F300874100 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTGradient.h; path = CTGradient/CTGradient.h; sourceTree = "<group>"; };
 		D4C0E0A00CABD1F300874100 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTGradient.m; path = CTGradient/CTGradient.m; sourceTree = "<group>"; };
 		D4FE84160C0B1CCC00CC868C /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = OVPreferences/English.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
@@ -485,6 +491,10 @@
 		6A9651470970E068004BCC4D /* OVPreferences */ = {
 			isa = PBXGroup;
 			children = (
+				D4BD4F820CC012A60077C4BB /* CVBubbleTextView.h */,
+				D4BD4F830CC012A60077C4BB /* CVBubbleTextView.m */,
+				D4BD4F970CC013AF0077C4BB /* NSBezierPathAdditions.h */,
+				D4BD4F980CC013AF0077C4BB /* NSBezierPathAdditions.m */,
 				6A96514D0970E0AA004BCC4D /* Resources */,
 				6A9651D80970E430004BCC4D /* CVPreviewView.h */,
 				6A9651D90970E430004BCC4D /* CVPreviewView.mm */,
@@ -914,6 +924,8 @@
 				6A074FB009712B3E00CA4201 /* CVWrappers.mm in Sources */,
 				6A074FB109712B4E00CA4201 /* NSDictionaryExtension.mm in Sources */,
 				6A074FB209712B4E00CA4201 /* NSStringExtension.mm in Sources */,
+				D4BD4F840CC012A60077C4BB /* CVBubbleTextView.m in Sources */,
+				D4BD4F990CC013AF0077C4BB /* NSBezierPathAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

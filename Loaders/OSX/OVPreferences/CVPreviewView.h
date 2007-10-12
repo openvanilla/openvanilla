@@ -29,10 +29,17 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #import <Cocoa/Cocoa.h>
+#import "CVBubbleTextView.h"
+#import "NSStringExtension.h"
 
 @interface CVPreviewView : NSView
 {
-	NSTextField *text;
+//	NSTextField *text;
+	CVBubbleTextView *_text;
+	NSColor *_fc;	
+	NSColor *_bc;
+	NSString *_font;
+	float _s;
 }
 - (void)changeConfig:(NSDictionary*)d;
 @end
