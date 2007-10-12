@@ -161,6 +161,7 @@
     [sharetab_forecolor setColor:fc];
     [sharetab_transparencyslider setFloatValue:opacity*100];
     
+	/*
     if ([img length]) {
         // NEED TO USE SHORTENED FORM, OTHERWISE IT'S TOO LONG
         [sharetab_backimage setStringValue:[self shortenedFilename:img maxLength:26]];
@@ -171,7 +172,8 @@
         if ([bcstr isEqualToString:@"none"]) [sharetab_backimage setStringValue:MSG(@"(aqua)")];
         else if ([bcstr isEqualToString:@"transparent"]) [sharetab_backimage setStringValue:MSG(@"(transparent)")];
         else [sharetab_backcolor setColor:[bcstr colorByString]];
-    }
+	} */	
+	[sharetab_backcolor setColor:[bcstr colorByString]];	
     
     // set font manager too
     [fontmanager setDelegate:self];
@@ -399,13 +401,16 @@
         [dsrvrcfg setValue:[NSString stringByColor:[sharetab_forecolor color]] forKey:@"foreground"];
     }
     else {
-        [dsrvrcfg setValue:@"" forKey:@"backgroundImage"];
-        [sharetab_backimage setStringValue:MSG(@"(none)")];
+        // [dsrvrcfg setValue:@"" forKey:@"backgroundImage"];
+        // [sharetab_backimage setStringValue:MSG(@"(none)")];
         [dsrvrcfg setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
     }
 
     [sharetab_previewview changeConfig:dsrvrcfg];
 }
+
+// We do not support background image in the candidate window since 0.8
+/*
 - (IBAction)sharetab_changeImage:(id)sender {
     // we use this trick to tell which button is which
     NSString *button=[sender alternateTitle];
@@ -437,7 +442,8 @@
     }
     
     [sharetab_previewview changeConfig:dsrvrcfg];
-}
+} */
+
 - (IBAction)sharetab_changeTransparency:(id)sender {
     // NSLog(@"%f", [sender intValue]/100.0);
     [sharetab_transparencytag setStringValue:[NSString stringWithFormat:@"%d%%", [sender intValue]]];
@@ -649,6 +655,8 @@
         d=[self getConfigNode:@"OVIMSpaceChewing"];
         [settab_chewinglayout selectItemAtIndex:[[d valueForKey:@"keyboardLayout" default:@"0"] intValue]];
         [settab_chewinglayout setEnabled:YES];
+		[settab_chewingaddphrase setIntValue:[[d valueForKey:@"addPhraseForward" default:@"0"] intValue]];
+		[settab_chewingaddphrase setEnabled:YES];
         CVRemoveStringFromArray(@"OVIMSpaceChewing", propeditmodlist);
     }
 
@@ -741,6 +749,7 @@
     if ([self identifierExists:@"OVIMSpaceChewing"]) {
         d=[self getConfigNode:@"OVIMSpaceChewing"];
         [d setValue:NUM([settab_chewinglayout indexOfSelectedItem]) forKey:@"keyboardLayout"];
+        [d setValue:NUM([settab_chewingaddphrase intValue]) forKey:@"addPhraseForward"];		
     }
 
     if ([self identifierExists:@"OVIMTibetan"]) {

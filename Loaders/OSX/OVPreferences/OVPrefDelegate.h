@@ -66,13 +66,14 @@
     IBOutlet id oftab_oforderlist;
     IBOutlet id oftab_outputtext;
     IBOutlet id settab_chewinglayout;
+    IBOutlet id settab_chewingaddphrase;
     IBOutlet id settab_phoneticslayout;
     IBOutlet id settab_pojascii;
     IBOutlet id settab_pojlayout;
     IBOutlet id settab_pojpojonly;
     IBOutlet id settab_tibetanlayout;
     IBOutlet id sharetab_backcolor;
-    IBOutlet id sharetab_backimage;
+//  IBOutlet id sharetab_backimage;
     IBOutlet id sharetab_cmd;
     IBOutlet id sharetab_control;
     IBOutlet id sharetab_fonttag;
@@ -118,7 +119,7 @@
 - (IBAction)pref_dumpConfigToConsole:(id)sender;
 - (IBAction)pref_writeConfig:(id)sender;
 - (IBAction)sharetab_changeColor:(id)sender;
-- (IBAction)sharetab_changeImage:(id)sender;
+// - (IBAction)sharetab_changeImage:(id)sender;
 - (IBAction)sharetab_changeNotify:(id)sender;
 - (IBAction)sharetab_changeSound:(id)sender;
 - (IBAction)sharetab_changeTransparency:(id)sender;

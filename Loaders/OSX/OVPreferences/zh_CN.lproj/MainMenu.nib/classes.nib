@@ -20,7 +20,6 @@
                 "pref_dumpConfigToConsole" = id; 
                 "pref_writeConfig" = id; 
                 "sharetab_changeColor" = id; 
-                "sharetab_changeImage" = id; 
                 "sharetab_changeNotify" = id; 
                 "sharetab_changeSound" = id; 
                 "sharetab_changeTransparency" = id; 
@@ -55,6 +54,7 @@
                 "oftab_oforderlist" = id; 
                 "oftab_outputtext" = id; 
                 "pref_tab" = id; 
+                "settab_chewingaddphrase" = id; 
                 "settab_chewinglayout" = id; 
                 "settab_phoneticslayout" = id; 
                 "settab_pojascii" = id; 
