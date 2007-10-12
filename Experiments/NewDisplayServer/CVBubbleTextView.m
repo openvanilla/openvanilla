@@ -160,7 +160,7 @@
 		CTGradient *gradient;
 
 		gradient = [CTGradient gradientWithBeginningColor:_backgroundFromColor endingColor:_backgroundToColor];
-		[gradient fillRect:[self frame] angle:90 radius: _radius];
+		[gradient fillRect:_boundingRect angle:90 radius: _radius];
 		
 		NSColor *whiteColor1 = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5];
 		NSColor *whiteColor2 = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.0];
