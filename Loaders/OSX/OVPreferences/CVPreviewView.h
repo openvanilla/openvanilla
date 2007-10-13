@@ -34,12 +34,7 @@
 
 @interface CVPreviewView : NSView
 {
-//	NSTextField *text;
 	CVBubbleTextView *_text;
-	NSColor *_fc;	
-	NSColor *_bc;
-	NSString *_font;
-	float _s;
 }
 - (void)changeConfig:(NSDictionary*)d;
 @end
