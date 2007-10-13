@@ -60,8 +60,11 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 	NSString *fontSize = [cfg objectForKey:@"size"];
 	if (!fontSize) fontSize = @"24";
 	
-	NSNumber *useWindowAnimation = [[cfg objectForKey:@"useWindowAnimation"] intValue];
-	if (!useWindowAnimation) useWindowAnimation = [NSNumber numberWithBool:YES];
+	NSNumber *useWindowAnimation = [NSNumber numberWithBool:YES];
+	NSLog(@"useWidnowAnimatio %@", [cfg objectForKey:@"useWindowAnimation"]);
+	if([[cfg objectForKey:@"useWindowAnimation"] length]) {
+	   useWindowAnimation =  [NSNumber numberWithBool:[[cfg objectForKey:@"useWindowAnimation"] intValue]];
+	}
 	
 	NSFont *font = [NSFont fontWithName:fontName size:[fontSize floatValue]];
 	
