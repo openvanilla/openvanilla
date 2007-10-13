@@ -30,6 +30,7 @@
 
 #import "CVPreviewView.h"
 #import "NSDictionaryExtension.h"
+
 @implementation CVPreviewView
 - (void)awakeFromNib {
     NSLog(@"view awake from nib!");
@@ -48,24 +49,34 @@
 {
     [[NSColor whiteColor] set];
     NSRectFill(rect);
+	
+	NSShadow *dropShadow = [[[NSShadow alloc] init] autorelease];
+	[dropShadow setShadowColor:[[NSColor lightGrayColor] colorWithAlphaComponent:0.1]];
+	[dropShadow setShadowBlurRadius:20];
+	[dropShadow setShadowOffset:NSMakeSize(0,-5)];
+
+	[NSGraphicsContext saveGraphicsState];	
+	[dropShadow set];	
+	NSRectFill([_text frame]);
+	[NSGraphicsContext restoreGraphicsState];	
 } 
 
 - (void)changeConfig:(NSDictionary*)d {
-    float alpha=1.0;
-	_fc=[[d valueForKey:@"foreground" default:@"1.0 1.0 1.0"] colorByString];
-	_bc=[[d valueForKey:@"background" default:@"0.0 0.0 0.0"] colorByString];	
-	_font=[d valueForKey:@"font" default:@"Lucida Grande"];
-	_s=[[d valueForKey:@"size" default:@"18"] floatValue];
+    float alpha=1.0;	
+	NSColor* fc=[[d valueForKey:@"foreground" default:@"1.0 1.0 1.0"] colorByString];
+	NSColor* bc=[[d valueForKey:@"background" default:@"0.0 0.0 0.0"] colorByString];	
+	NSString* font=[d valueForKey:@"font" default:@"Lucida Grande"];
+	float s=[[d valueForKey:@"size" default:@"18"] floatValue];
 	
-    [_text setFont:[NSFont fontWithName:_font size:_s]];
-	[_text setTextColor:[_fc colorWithAlphaComponent:alpha]]; 	
-	[_text setBackgroundColor:[_bc colorWithAlphaComponent:alpha]];	
+    [_text setFont:[NSFont fontWithName:font size:s]];
+	[_text setTextColor:[fc colorWithAlphaComponent:alpha]]; 	
+	[_text setBackgroundColor:[bc colorWithAlphaComponent:alpha]];	
 	[_text setText:@"OpenVanilla"];	
 	
     NSRect r=[_text boundingRect];	
     NSRect vf=[self frame];
     [_text setFrameOrigin:NSMakePoint((vf.size.width-r.size.width)/2, (vf.size.height-r.size.height)/2)];	
-	[_text setFrameSize:r.size];		
+	[_text setFrameSize:r.size];	
 	[self setNeedsDisplay:TRUE];	
 }
 

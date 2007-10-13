@@ -18,6 +18,7 @@
                 "sharetab_changeNotify" = id; 
                 "sharetab_changeSound" = id; 
                 "sharetab_changeTransparency" = id; 
+                "sharetab_changeWindowAnimation" = id; 
                 "sharetab_clearShortcutKey" = id; 
                 "sharetab_setFont" = id; 
                 "sharetab_shortcutKeyChange" = id; 
@@ -50,14 +51,15 @@
                 "oftab_outputtext" = id; 
                 "pref_tab" = id; 
                 "settab_chewingaddphrase" = id; 
+                "settab_chewingcandidates" = id; 
                 "settab_chewinglayout" = id; 
                 "settab_phoneticslayout" = id; 
                 "settab_pojascii" = id; 
                 "settab_pojlayout" = id; 
                 "settab_pojpojonly" = id; 
                 "settab_tibetanlayout" = id; 
+                "sharetab_animatewindow" = id; 
                 "sharetab_backcolor" = id; 
-                "sharetab_backimage" = id; 
                 "sharetab_cmd" = id; 
                 "sharetab_control" = id; 
                 "sharetab_fonttag" = id; 
@@ -71,6 +73,7 @@
                 "sharetab_soundlist" = id; 
                 "sharetab_transparencyslider" = id; 
                 "sharetab_transparencytag" = id; 
+                window = id; 
             }; 
             SUPERCLASS = NSObject; 
         }

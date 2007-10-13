@@ -67,13 +67,13 @@
     IBOutlet id oftab_outputtext;
     IBOutlet id settab_chewinglayout;
     IBOutlet id settab_chewingaddphrase;
+    IBOutlet id settab_chewingcandidates;	
     IBOutlet id settab_phoneticslayout;
     IBOutlet id settab_pojascii;
     IBOutlet id settab_pojlayout;
     IBOutlet id settab_pojpojonly;
     IBOutlet id settab_tibetanlayout;
     IBOutlet id sharetab_backcolor;
-//  IBOutlet id sharetab_backimage;
     IBOutlet id sharetab_cmd;
     IBOutlet id sharetab_control;
     IBOutlet id sharetab_fonttag;
@@ -82,12 +82,14 @@
     IBOutlet id sharetab_option;
     IBOutlet id sharetab_previewview;
     IBOutlet id sharetab_shift;
+    IBOutlet id sharetab_animatewindow;
     IBOutlet id sharetab_shownotify;
     IBOutlet id sharetab_soundfile;
     IBOutlet id sharetab_soundlist;
     IBOutlet id sharetab_transparencyslider;
     IBOutlet id sharetab_transparencytag;
 	IBOutlet id pref_tab;
+	IBOutlet id window;	
 
     // user interface states
     int modtab_modlist_currentrow;
@@ -119,7 +121,7 @@
 - (IBAction)pref_dumpConfigToConsole:(id)sender;
 - (IBAction)pref_writeConfig:(id)sender;
 - (IBAction)sharetab_changeColor:(id)sender;
-// - (IBAction)sharetab_changeImage:(id)sender;
+- (IBAction)sharetab_changeWindowAnimation:(id)sender;
 - (IBAction)sharetab_changeNotify:(id)sender;
 - (IBAction)sharetab_changeSound:(id)sender;
 - (IBAction)sharetab_changeTransparency:(id)sender;

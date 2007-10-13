@@ -104,6 +104,8 @@
         // what if not...? how to abort?
     }
     
+	[window center];
+	
     // copy our own dictionary
     config=[[NSMutableDictionary dictionaryWithDictionary:[[loader config] dictionary]] retain];
     
@@ -149,7 +151,7 @@
         [sharetab_shownotify setIntValue:1];
     else
         [sharetab_shownotify setIntValue:0];
-    
+	[sharetab_animatewindow setIntValue:[[dsrvrcfg valueForKey:@"useWindowAnimation" default:@"1"] intValue]];   
 	float opacity=[[dsrvrcfg valueForKey:@"opacity" default:@"1.0"] floatValue];
 	NSColor *fc=[[dsrvrcfg valueForKey:@"foreground" default:@"1.0 1.0 1.0"] colorByString];
 	NSString *img=[dsrvrcfg valueForKey:@"backgroundImage" default:@""];
@@ -160,19 +162,7 @@
     NSFont *font=[NSFont fontWithName:fontname size:fontsize];
     [sharetab_forecolor setColor:fc];
     [sharetab_transparencyslider setFloatValue:opacity*100];
-    
-	/*
-    if ([img length]) {
-        // NEED TO USE SHORTENED FORM, OTHERWISE IT'S TOO LONG
-        [sharetab_backimage setStringValue:[self shortenedFilename:img maxLength:26]];
-    }
-    else {
-        [sharetab_backimage setStringValue:MSG(@"(none)")];
-        [sharetab_backcolor setColor:[NSColor colorWithDeviceRed:1.0 green:1.0 blue:1.0 alpha:1.0]];
-        if ([bcstr isEqualToString:@"none"]) [sharetab_backimage setStringValue:MSG(@"(aqua)")];
-        else if ([bcstr isEqualToString:@"transparent"]) [sharetab_backimage setStringValue:MSG(@"(transparent)")];
-        else [sharetab_backcolor setColor:[bcstr colorByString]];
-	} */	
+    	
 	[sharetab_backcolor setColor:[bcstr colorByString]];	
     
     // set font manager too
@@ -401,48 +391,11 @@
         [dsrvrcfg setValue:[NSString stringByColor:[sharetab_forecolor color]] forKey:@"foreground"];
     }
     else {
-        // [dsrvrcfg setValue:@"" forKey:@"backgroundImage"];
-        // [sharetab_backimage setStringValue:MSG(@"(none)")];
         [dsrvrcfg setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
     }
 
     [sharetab_previewview changeConfig:dsrvrcfg];
 }
-
-// We do not support background image in the candidate window since 0.8
-/*
-- (IBAction)sharetab_changeImage:(id)sender {
-    // we use this trick to tell which button is which
-    NSString *button=[sender alternateTitle];
-    
-    if ([button isEqualToString:@"set"]) {
-        NSOpenPanel *op=[NSOpenPanel openPanel];
-        [op setAllowsMultipleSelection:FALSE];
-        if ([op runModalForDirectory:nil file:nil]==NSFileHandlingPanelOKButton) {
-            NSString *f=[[op filenames] objectAtIndex:0];
-            [sharetab_backimage setStringValue:[self shortenedFilename:f maxLength:26]];
-            [dsrvrcfg setValue:f forKey:@"backgroundImage"];
-            [dsrvrcfg setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
-        }
-    }
-    else if ([button isEqualToString:@"none"]) {
-        [dsrvrcfg setValue:@"" forKey:@"backgroundImage"];
-        [dsrvrcfg setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
-        [sharetab_backimage setStringValue:MSG(@"(none)")];
-
-        [dsrvrcfg setValue:@"" forKey:@"backgroundImage"];
-        [sharetab_backimage setStringValue:MSG(@"(none)")];
-        [dsrvrcfg setValue:[NSString stringByColor:[sharetab_backcolor color]] forKey:@"background"];
-
-    }
-    else if ([button isEqualToString:@"transparent"]) {
-        [dsrvrcfg setValue:@"" forKey:@"backgroundImage"];
-        [dsrvrcfg setValue:@"transparent" forKey:@"background"];
-        [sharetab_backimage setStringValue:MSG(@"(transparent)")];
-    }
-    
-    [sharetab_previewview changeConfig:dsrvrcfg];
-} */
 
 - (IBAction)sharetab_changeTransparency:(id)sender {
     // NSLog(@"%f", [sender intValue]/100.0);
@@ -456,7 +409,8 @@
 }
 - (void)changeFont:(id)sender {
     NSFont *newfont=[fontmanager convertFont:[fontmanager selectedFont]];
-    [sharetab_fonttag setStringValue:[NSString stringWithFormat:@"%@, %d pt", [newfont fontName], (int)[newfont pointSize]]];
+    [sharetab_fonttag setStringValue:[NSString stringWithFormat:@"%@, %d pt", [newfont displayName], (int)[newfont pointSize]]];
+	[sharetab_fonttag setFont:[NSFont fontWithName:[newfont fontName] size:16.0]];
 
     [dsrvrcfg setValue:[newfont fontName] forKey:@"font"];
     [dsrvrcfg setValue:[NSNumber numberWithFloat:[newfont pointSize]] forKey:@"size"];
@@ -505,6 +459,11 @@
         [dsrvrcfg setValue:@"default" forKey:@"notificationStyle"];
     else
         [dsrvrcfg setValue:@"silent" forKey:@"notificationStyle"];
+}
+- (IBAction)sharetab_changeWindowAnimation:(id)sender {
+    #define NUM(x)  [NSString stringWithFormat:@"%d", x] 	
+	[dsrvrcfg setValue:NUM([sender intValue]) forKey:@"useWindowAnimation"];
+	#undef NUM
 }
 - (IBAction)sharetab_testSound:(id)sender {
     if (sound) {
@@ -657,6 +616,9 @@
         [settab_chewinglayout setEnabled:YES];
 		[settab_chewingaddphrase setIntValue:[[d valueForKey:@"addPhraseForward" default:@"0"] intValue]];
 		[settab_chewingaddphrase setEnabled:YES];
+        [settab_chewingcandidates selectItemAtIndex:([[d valueForKey:@"candPerPage" default:@"7"] intValue] -6)];
+        [settab_chewingcandidates setEnabled:YES];
+		
         CVRemoveStringFromArray(@"OVIMSpaceChewing", propeditmodlist);
     }
 
@@ -749,7 +711,8 @@
     if ([self identifierExists:@"OVIMSpaceChewing"]) {
         d=[self getConfigNode:@"OVIMSpaceChewing"];
         [d setValue:NUM([settab_chewinglayout indexOfSelectedItem]) forKey:@"keyboardLayout"];
-        [d setValue:NUM([settab_chewingaddphrase intValue]) forKey:@"addPhraseForward"];		
+        [d setValue:NUM([settab_chewingaddphrase intValue]) forKey:@"addPhraseForward"];
+        [d setValue:NUM([settab_chewingcandidates indexOfSelectedItem] + 6) forKey:@"candPerPage"];		
     }
 
     if ([self identifierExists:@"OVIMTibetan"]) {
