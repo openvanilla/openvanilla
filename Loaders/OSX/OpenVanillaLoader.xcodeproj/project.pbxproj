@@ -111,6 +111,7 @@
 		D48C829F0C09CC6100EB008A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9651690970E1D9004BCC4D /* Cocoa.framework */; };
 		D48C82AB0C09CCE800EB008A /* OVWidgetPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = D48C82AA0C09CCE800EB008A /* OVWidgetPlugin.mm */; };
 		D48C82CA0C09CEE400EB008A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D48C82C90C09CEE400EB008A /* WebKit.framework */; };
+		D4B931EB0CC17EA2006E2E63 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4B931EA0CC17EA2006E2E63 /* background.jpg */; };
 		D4BD4F840CC012A60077C4BB /* CVBubbleTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BD4F830CC012A60077C4BB /* CVBubbleTextView.m */; };
 		D4BD4F990CC013AF0077C4BB /* NSBezierPathAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BD4F980CC013AF0077C4BB /* NSBezierPathAdditions.m */; };
 		D4C0E0A10CABD1F300874100 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C0E0A00CABD1F300874100 /* CTGradient.m */; };
@@ -252,6 +253,7 @@
 		D48C82AA0C09CCE800EB008A /* OVWidgetPlugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OVWidgetPlugin.mm; path = OVFilterWidget/OVWidgetPlugin.mm; sourceTree = "<group>"; };
 		D48C82C90C09CEE400EB008A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		D48C84030C09D52E00EB008A /* OVFilter.widgetplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVFilter.widgetplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4B931EA0CC17EA2006E2E63 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background.jpg; path = OVPreferences/background.jpg; sourceTree = "<group>"; };
 		D4BD4F820CC012A60077C4BB /* CVBubbleTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVBubbleTextView.h; path = ../../Experiments/NewDisplayServer/CVBubbleTextView.h; sourceTree = SOURCE_ROOT; };
 		D4BD4F830CC012A60077C4BB /* CVBubbleTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CVBubbleTextView.m; path = ../../Experiments/NewDisplayServer/CVBubbleTextView.m; sourceTree = SOURCE_ROOT; };
 		D4BD4F970CC013AF0077C4BB /* NSBezierPathAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBezierPathAdditions.h; path = ../../Experiments/NewDisplayServer/NSBezierPathAdditions.h; sourceTree = SOURCE_ROOT; };
@@ -557,6 +559,7 @@
 		6A96514D0970E0AA004BCC4D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D4B931EA0CC17EA2006E2E63 /* background.jpg */,
 				D4FE841F0C0B1D4000CC868C /* ServicesMenu.strings */,
 				6A9651C10970E3C4004BCC4D /* InfoPlist.strings */,
 				6A9651C30970E3C4004BCC4D /* Localizable.strings */,
@@ -834,6 +837,7 @@
 				6A074FA609712AB300CA4201 /* MainMenu.nib in Resources */,
 				6A074FA109712A3500CA4201 /* OVPreferencesIcon.icns in Resources */,
 				D4FE84200C0B1D4000CC868C /* ServicesMenu.strings in Resources */,
+				D4B931EB0CC17EA2006E2E63 /* background.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

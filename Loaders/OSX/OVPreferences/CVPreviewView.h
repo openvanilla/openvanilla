@@ -35,6 +35,7 @@
 @interface CVPreviewView : NSView
 {
 	CVBubbleTextView *_text;
+	NSImage *_background;
 }
 - (void)changeConfig:(NSDictionary*)d;
 @end

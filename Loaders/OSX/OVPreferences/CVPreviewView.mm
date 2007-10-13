@@ -41,17 +41,21 @@
 	if ((self = [super initWithFrame:frameRect]) != nil) {
 		_text = [[CVBubbleTextView alloc] initWithFrame:NSMakeRect(0, 0, 200, 50)];
         [self addSubview:_text];
-	}	
+	}
+	_background = [NSImage imageNamed:@"background"];
 	return self;
 }
 
 - (void)drawRect:(NSRect)rect
 {
-    [[NSColor whiteColor] set];
-    NSRectFill(rect);
+    //[[NSColor clearColor] set];
+    // NSRectFill(rect);
+	[_background drawInRect:rect fromRect:rect operation:NSCompositeCopy fraction:1.0];
+	NSBezierPath *b = [NSBezierPath bezierPathWithRect:rect];
+	[b stroke];
 	
 	NSShadow *dropShadow = [[[NSShadow alloc] init] autorelease];
-	[dropShadow setShadowColor:[[NSColor lightGrayColor] colorWithAlphaComponent:0.1]];
+	[dropShadow setShadowColor:[[NSColor blackColor] colorWithAlphaComponent:0.7]];
 	[dropShadow setShadowBlurRadius:20];
 	[dropShadow setShadowOffset:NSMakeSize(0,-5)];
 
