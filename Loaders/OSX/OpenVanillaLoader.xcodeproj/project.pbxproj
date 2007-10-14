@@ -145,7 +145,7 @@
 
 /* Begin PBXFileReference section */
 		6A074F6D097127D800CA4201 /* OVPreferencesIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OVPreferencesIcon.icns; path = OVPreferences/OVPreferencesIcon.icns; sourceTree = "<group>"; };
-		6A074F720971284800CA4201 /* OVPreferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A074F720971284800CA4201 /* OVPreferences.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A0750FC09712DAC00CA4201 /* ovfilter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ovfilter; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A0751C409713E2800CA4201 /* OVPreferences-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "OVPreferences-Info.plist"; sourceTree = "<group>"; };
 		6A20C3BF0A38C6FD00A364CA /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = "TSComponentResources-TradtionalChineseScript/English.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
