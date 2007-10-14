@@ -62,7 +62,7 @@
 	[NSGraphicsContext saveGraphicsState];	
 	[dropShadow set];	
 	NSRectFill([_text frame]);
-	[NSGraphicsContext restoreGraphicsState];	
+	[NSGraphicsContext restoreGraphicsState];
 } 
 
 - (void)changeConfig:(NSDictionary*)d {
@@ -75,7 +75,7 @@
     [_text setFont:[NSFont fontWithName:font size:s]];
 	[_text setTextColor:[fc colorWithAlphaComponent:alpha]]; 	
 	[_text setBackgroundColor:[bc colorWithAlphaComponent:alpha]];	
-	[_text setText:@"OpenVanilla"];	
+	[_text setText:[NSString stringWithUTF8String:"Aa10あア繁简♨"]];	
 	
     NSRect r=[_text boundingRect];	
     NSRect vf=[self frame];
