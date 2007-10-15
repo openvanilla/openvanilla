@@ -45,6 +45,24 @@ CFStringEncoding CVGetCFEncoding(const char *encoding) {
 }
 
 NSString *CVGetAppBundleLocale() {
+	// http://developer.apple.com/qa/qa2006/qa1391.html
+	// The locale string in Tiger sees Traditional Chinese as zh-Hant and
+	// Simplified Chinese as zh-Hans, it seems that we need to translate them
+	// into zh_TW and zh_CN.
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    NSArray * languages = [defaults objectForKey:@"AppleLanguages"];
+    int i;
+    for(i=0; i < [languages count]; i++) {
+       if([[languages objectAtIndex:i] isEqualToString:@"zh-Hant"]) {
+	  return @"zh_TW";
+       } else if([[languages objectAtIndex:i] isEqualToString:@"zh-Hans"]) {
+	  return @"zh_CN";
+       } else if([[languages objectAtIndex:i] isEqualToString:@"en"]) {
+	  return @"en";
+       }
+    }
+    return @"en";
+/*
     NSBundle *b=[NSBundle mainBundle];
     if (!b) return @"en";
     
@@ -56,7 +74,7 @@ NSString *CVGetAppBundleLocale() {
     NSString *l=(NSString*)CFLocaleCreateCanonicalLocaleIdentifierFromString(NULL, (CFStringRef)s);
     if (!l) return @"en";
     [l autorelease];
-    return l;
+    return l; */
 }
 
 CVService::CVService(NSString *usrpath, id displayserver) {

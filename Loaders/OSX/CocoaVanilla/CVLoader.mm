@@ -101,11 +101,11 @@ int CVLoader::init(MenuRef m) {
 			NSLog(@"Can't be loaded with WebKitServer, die.");
 			return 0;
 		}
-		
+		/*
 		if ([[[aba objectAtIndex:ai] bundleIdentifier] isEqualToString:@"com.blacktree.Quicksilver"]) {
 			NSLog(@"Can't be loaded with QuickSilver, die.");
 			return 0;
-		}
+		} */
 	}
 	
 
@@ -267,7 +267,8 @@ void CVLoader::menuHandler(unsigned int cmd) {
             [dspsrvr aboutDialog];
             return;
         case CVLMI_PREFERENCES:
-            system([[NSString stringWithFormat:@"open %@", CVLC_PREFERENCEUTIL] UTF8String]);
+			// system([[NSString stringWithFormat:@"open %@", CVLC_PREFERENCEUTIL] UTF8String]);	
+			system([[NSString stringWithFormat:@"open -b %@", CVLC_PREFERENCEBUNDLE] UTF8String]);
             return;
         case CVLMI_HELP:
 			if (!strcasecmp(srv->locale(), "zh_TW")) {
