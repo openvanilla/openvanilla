@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by OVIME.rc
+// Used by OVIME.rc (and OVIME-en.rc)
 //
 #define IDI_ICON1                       101
 
