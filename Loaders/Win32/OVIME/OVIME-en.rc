@@ -13,6 +13,56 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+//#pragma code_page(950)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,7,2,9
+ PRODUCTVERSION 0,7,2,9
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x3L
+ FILESUBTYPE 0xbL
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004b0"
+        BEGIN
+            VALUE "FileDescription", "English (US) - OpenVanilla"
+            VALUE "FileVersion", "0, 7, 2, 9"
+            VALUE "InternalName", "OVIME"
+            VALUE "LegalCopyright", "BSD License"
+            VALUE "OriginalFilename", "OVIME.ime"
+            VALUE "ProductName", "OpenVanilla"
+            VALUE "ProductVersion", "0, 7, 2, 9"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1200
+    END
+END
+
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
 // Chinese (Taiwan) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
@@ -55,44 +105,6 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_ICON1               ICON                    "OVIME.ico"
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Version
-//
-
-VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,7,2,9
- PRODUCTVERSION 0,7,2,9
- FILEFLAGSMASK 0x17L
-#ifdef _DEBUG
- FILEFLAGS 0x1L
-#else
- FILEFLAGS 0x0L
-#endif
- FILEOS 0x4L
- FILETYPE 0x3L
- FILESUBTYPE 0xbL
-BEGIN
-    BLOCK "StringFileInfo"
-    BEGIN
-        BLOCK "000004b0"
-        BEGIN
-            VALUE "FileDescription", "中文 (繁體) - 開放香草輸入法平台"
-            VALUE "FileVersion", "0, 7, 2, 9"
-            VALUE "InternalName", "OVIME"
-            VALUE "LegalCopyright", "BSD License"
-            VALUE "OriginalFilename", "OVIME.ime"
-            VALUE "ProductName", "OpenVanilla"
-            VALUE "ProductVersion", "0, 7, 2, 9"
-        END
-    END
-    BLOCK "VarFileInfo"
-    BEGIN
-        VALUE "Translation", 0x0, 1200
-    END
-END
-
 #endif    // Chinese (Taiwan) resources
 /////////////////////////////////////////////////////////////////////////////
 
