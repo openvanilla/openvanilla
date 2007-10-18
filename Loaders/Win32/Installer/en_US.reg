@@ -6,5 +6,5 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layouts\E0990409]
 "Ime File"="OVIME.IME"
-"Layout Text"="English (United States) - OpenVanilla 0.7.2.9"
+"Layout Text"="United States - OpenVanilla 0.7.2.9"
 "Layout File"="kbdus.dll"
