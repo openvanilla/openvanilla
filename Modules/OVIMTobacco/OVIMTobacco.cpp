@@ -620,13 +620,17 @@ int OVIMTobaccoContext::keyPrintable() {
 	*/
 	if (parent->maxSeqLen() > 0 &&
 		seq.length() >= parent->maxSeqLen()) {
-		if (parent->doBeep()) s->beep();
+		s->notify("\xE9\x8C\xAF\xE4\xBA\x86\xE5\x97\x8E\xEF\xBC\x9F");
+		if (parent->doBeep())
+			s->beep();
 		return 1;
 	}
 
 	if (!seq.add(k->code())) {
-        if (b->isEmpty()) return keyNonRadical();
-		if (parent->doBeep()) s->beep();
+		s->notify("\xE9\x8C\xAF\xE4\xBA\x86\xE5\x97\x8E\xEF\xBC\x9F");
+		if (parent->doBeep())
+			s->beep();
+        if (b->isEmpty()) return keyNonRadical();		
     }
 
     if (!seq.isEmpty()) {
@@ -794,8 +798,11 @@ int OVIMTobaccoContext::keyCompose() {
         return 0;
     }
     else {
-        s->beep();
-        if(parent->doClearSequenceOnError()) seq.clear();
+		s->notify("\xE9\x8C\xAF\xE4\xBA\x86\xE5\x97\x8E\xEF\xBC\x9F");
+		if (parent->doBeep())
+			s->beep();
+        if(parent->doClearSequenceOnError())
+			seq.clear();
         freshBuffer();
 
         return 1;
@@ -942,7 +949,9 @@ int OVIMTobaccoContext::candidateEvent() {
         if (seq.isValidKey(kc)) { i=0; nextsyl=1; }
     }
     if (i==l) {
-        s->beep();
+		s->notify("\xE9\x8C\xAF\xE4\xBA\x86\xE5\x97\x8E\xEF\xBC\x9F");
+        if (parent->doBeep())
+			s->beep();
         b->update((int)position, (int)position, (int)position);    // we do this to make some applications happy
     }
     else {
@@ -1025,9 +1034,15 @@ int OVIMTobaccoContext::commitFirstCandidate() {
 
 int OVIMTobaccoContext::candidatePageUp() {
     int maxpage=(candi->count-1) / strlen(parent->selkey);
-    if (!maxpage) s->beep();
-    else {
-        if (!page) page=maxpage; else page--;
+	if (!maxpage) {
+		s->notify("\xE9\x8C\xAF\xE4\xBA\x86\xE5\x97\x8E\xEF\xBC\x9F");
+		if (parent->doBeep())
+			s->beep();
+	} else {
+        if (!page)
+			page=maxpage;
+		else
+			page--;
         updateCandidateWindow();
     }
     return 1;
@@ -1035,9 +1050,15 @@ int OVIMTobaccoContext::candidatePageUp() {
 
 int OVIMTobaccoContext::candidatePageDown() {
     int maxpage=(candi->count-1) / strlen(parent->selkey);
-    if (!maxpage) s->beep();
-    else {
-        if (page==maxpage) page=0; else page++;
+	if (!maxpage) {
+		s->notify("\xE9\x8C\xAF\xE4\xBA\x86\xE5\x97\x8E\xEF\xBC\x9F");
+		if (parent->doBeep())
+			s->beep();
+	} else {
+        if (page==maxpage)
+			page=0;
+		else
+			page++;
         updateCandidateWindow();
     }
     return 1;

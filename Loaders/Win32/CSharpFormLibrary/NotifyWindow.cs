@@ -121,17 +121,20 @@ namespace CSharpFormLibrary
 			StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 
 			// Default values
+            ActualWidth = 130;
+            ActualHeight = 110;
+
+            ClockState = ClockStates.None;
+
 			BackgroundStyle = BackgroundStyles.VerticalGradient;
-			ClockState = ClockStates.None;
-			BackColor = Color.SteelBlue;
-			GradientColor = Color.WhiteSmoke;
-			PressedColor = Color.Gray;
-			TitleColor = SystemColors.ControlText;
-			TextColor = SystemColors.ControlText;
+			BackColor = Color.Black;
+            GradientColor = Color.DarkGray;
+            TextColor = Color.White;
+            PressedColor = Color.LightGray;
+            TitleColor = Color.Black;
+
 			WaitOnMouseOver = true;
-			ActualWidth = 130;
-			ActualHeight = 110;
-			WaitTime = 11000;            
+            WaitTime = 5000;
 		}
 		#endregion
 
@@ -154,7 +157,7 @@ namespace CSharpFormLibrary
 				throw new System.Exception ("You must set NotifyWindow.Text before calling Notify()");
 
 			Width = ActualWidth;
-			rScreen = Screen.GetWorkingArea (Screen.PrimaryScreen.Bounds);
+            rScreen = Screen.PrimaryScreen.WorkingArea;
 			Height = 0;
 			Top = rScreen.Bottom;
 			Left = rScreen.Width - Width - 11;
@@ -590,7 +593,6 @@ namespace CSharpFormLibrary
             this.Font = new System.Drawing.Font("PMingLiU", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.Name = "NotifyWindow";
             this.ResumeLayout(false);
-
         }
 	}
 }
