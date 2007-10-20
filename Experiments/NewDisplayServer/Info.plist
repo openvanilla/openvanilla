@@ -28,5 +28,9 @@
 	<string>NSApplication</string>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>	
+	<key>NSAppleScriptEnabled</key>
+	<string>YES</string>
+	<key>OSAScriptingDefinition</key>
+        <string>OVDisplayServer.sdef</string>
 </dict>
 </plist>

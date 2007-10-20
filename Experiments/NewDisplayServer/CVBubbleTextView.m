@@ -47,7 +47,10 @@
 {
 	[[_attributedString mutableString] setString:newText];
 
-	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:_font, NSFontAttributeName, _textColor, NSForegroundColorAttributeName, nil];
+	NSShadow *s = [[[NSShadow alloc] init] autorelease];
+	[s setShadowBlurRadius:(float)([_font pointSize] / 5)];
+	[s setShadowColor:_textColor];
+	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:_font, NSFontAttributeName, _textColor, NSForegroundColorAttributeName, s, NSShadowAttributeName, nil];
 	NSRange range = NSMakeRange(0, [[_attributedString mutableString] length]);
 	[_attributedString setAttributes:attributes range:range];
 	
