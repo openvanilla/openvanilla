@@ -94,8 +94,6 @@ namespace CSharpFormLibrary
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            //this.lbCandidates = new System.Windows.Forms.ListView();
-            this.lbCandidates = new IMEListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -103,27 +101,10 @@ namespace CSharpFormLibrary
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lbCandidates = new CSharpFormLibrary.IMEListView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lbCandidates
-            // 
-            this.lbCandidates.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
-            this.lbCandidates.BackColor = System.Drawing.SystemColors.Window;
-            this.lbCandidates.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbCandidates.Font = new System.Drawing.Font("PMingLiU", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lbCandidates.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.lbCandidates.GridLines = true;
-            this.lbCandidates.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.lbCandidates.HideSelection = false;
-            this.lbCandidates.Name = "lbCandidates";
-            this.lbCandidates.Bounds = new Rectangle(0, 0, 105, 266);
-            this.lbCandidates.Scrollable = false;
-            this.lbCandidates.SmallImageList = this.imageList1;
-            this.lbCandidates.View = System.Windows.Forms.View.Details;
-            this.lbCandidates.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbCandidates_KeyDown);
-            this.lbCandidates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lbCandidates_KeyPress);
             // 
             // imageList1
             // 
@@ -133,39 +114,44 @@ namespace CSharpFormLibrary
             // 
             // columnHeader1
             // 
-            //this.columnHeader1.Width = 25;
             this.columnHeader1.Width = -1;
             // 
             // columnHeader2
-            //             
-            //this.columnHeader2.Width = 80;
+            // 
             this.columnHeader2.Width = -1;
             // 
             // vScrollBar1
             // 
             this.vScrollBar1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.vScrollBar1.Location = new System.Drawing.Point(268, 0);
             this.vScrollBar1.Maximum = 11;
             this.vScrollBar1.Minimum = 1;
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Bounds = new Rectangle(105, 0, 24, 266);
+            this.vScrollBar1.Size = new System.Drawing.Size(24, 232);
+            this.vScrollBar1.TabIndex = 1;
             this.vScrollBar1.Value = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Font = new System.Drawing.Font("MS PGothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(3, 4);
             this.label1.Name = "label1";
-            this.label1.Bounds = new Rectangle(3, 4, 52, 15);
-            this.label1.Text = "候選字";
+            this.label1.Size = new System.Drawing.Size(72, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "候選字詞";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Bounds = new Rectangle(0, 0, 129, 21);
+            this.panel1.Size = new System.Drawing.Size(292, 26);
+            this.panel1.TabIndex = 1;
             // 
             // panel2
             // 
@@ -173,13 +159,38 @@ namespace CSharpFormLibrary
             this.panel2.Controls.Add(this.lbCandidates);
             this.panel2.Controls.Add(this.vScrollBar1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 26);
             this.panel2.Name = "panel2";
-            this.panel2.Bounds = new Rectangle(0, 21, 129, 266);
+            this.panel2.Size = new System.Drawing.Size(292, 232);
+            this.panel2.TabIndex = 0;
+            // 
+            // lbCandidates
+            // 
+            this.lbCandidates.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
+            this.lbCandidates.BackColor = System.Drawing.SystemColors.Window;
+            this.lbCandidates.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbCandidates.Font = new System.Drawing.Font("Arial Unicode MS", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbCandidates.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.lbCandidates.GridLines = true;
+            this.lbCandidates.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lbCandidates.HideSelection = false;
+            this.lbCandidates.Location = new System.Drawing.Point(0, 0);
+            this.lbCandidates.Margin = new System.Windows.Forms.Padding(0);
+            this.lbCandidates.Name = "lbCandidates";
+            this.lbCandidates.Scrollable = false;
+            this.lbCandidates.Size = new System.Drawing.Size(268, 232);
+            this.lbCandidates.SmallImageList = this.imageList1;
+            this.lbCandidates.TabIndex = 0;
+            this.lbCandidates.UseCompatibleStateImageBehavior = false;
+            this.lbCandidates.View = System.Windows.Forms.View.Details;
+            this.lbCandidates.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbCandidates_KeyDown);
+            this.lbCandidates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lbCandidates_KeyPress);
             // 
             // IMECandidateForm
             // 
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(292, 258);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -198,6 +209,7 @@ namespace CSharpFormLibrary
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
 

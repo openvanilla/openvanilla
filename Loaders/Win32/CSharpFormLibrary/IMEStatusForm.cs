@@ -249,7 +249,7 @@ namespace CSharpFormLibrary
             this.buttonMenu.BackColor = System.Drawing.Color.Transparent;
             this.buttonMenu.ContextMenu = this.menuModule;
             this.buttonMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.buttonMenu.Font = new System.Drawing.Font("PMingLiU", 12F);
+            this.buttonMenu.Font = new System.Drawing.Font("MS PGothic", 14F);
             this.buttonMenu.ForeColor = System.Drawing.Color.White;
             this.buttonMenu.Location = new System.Drawing.Point(0, 0);
             this.buttonMenu.Margin = new System.Windows.Forms.Padding(0);
@@ -262,21 +262,21 @@ namespace CSharpFormLibrary
             // buttonZhEn
             // 
             this.buttonZhEn.BackColor = System.Drawing.Color.Transparent;
-            this.buttonZhEn.Font = new System.Drawing.Font("PMingLiU", 12F);
+            this.buttonZhEn.Font = new System.Drawing.Font("MS PGothic", 14F);
             this.buttonZhEn.ForeColor = System.Drawing.SystemColors.WindowText;
             this.buttonZhEn.Location = new System.Drawing.Point(60, 0);
             this.buttonZhEn.Margin = new System.Windows.Forms.Padding(0);
             this.buttonZhEn.Name = "buttonZhEn";
             this.buttonZhEn.Size = new System.Drawing.Size(34, 34);
             this.buttonZhEn.TabIndex = 2;
-            this.buttonZhEn.Text = "¤¤";
+            this.buttonZhEn.Text = "¦r";
             this.buttonZhEn.UseVisualStyleBackColor = false;
             this.buttonZhEn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonZhEn_MouseUp);
             // 
             // buttonPref
             // 
             this.buttonPref.BackColor = System.Drawing.Color.Transparent;
-            this.buttonPref.Font = new System.Drawing.Font("PMingLiU", 12F);
+            this.buttonPref.Font = new System.Drawing.Font("MS PGothic", 14F);
             this.buttonPref.ForeColor = System.Drawing.SystemColors.WindowText;
             this.buttonPref.Location = new System.Drawing.Point(94, 0);
             this.buttonPref.Margin = new System.Windows.Forms.Padding(0);
