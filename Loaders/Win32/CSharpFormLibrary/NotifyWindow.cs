@@ -134,7 +134,7 @@ namespace CSharpFormLibrary
             TitleColor = Color.Black;
 
 			WaitOnMouseOver = true;
-            WaitTime = 5000;
+            WaitTime = 3000;
 		}
 		#endregion
 
@@ -165,8 +165,7 @@ namespace CSharpFormLibrary
 			if (HoverFont == null)
 				HoverFont = new Font (Font, Font.Style | FontStyle.Underline);
             if (TitleFont == null)
-                TitleFont = Font;
-                //TitleFont =  new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+                TitleFont = new System.Drawing.Font("MS PGothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
 			if (TitleHoverFont == null)
 				TitleHoverFont = new Font (TitleFont, TitleFont.Style | FontStyle.Underline);
 			if (this.StringFormat == null)
@@ -257,7 +256,7 @@ namespace CSharpFormLibrary
 				useColor = TextColor;
             using (SolidBrush sb = new SolidBrush(useColor))
             {
-                e.Graphics.DrawString(Text, new System.Drawing.Font("PMingLiU", 12F), sb, rText, this.StringFormat);                
+                e.Graphics.DrawString(Text, Font, sb, rText, this.StringFormat);                
             }
 
 		}
@@ -590,7 +589,7 @@ namespace CSharpFormLibrary
             // NotifyWindow
             // 
             this.ClientSize = new System.Drawing.Size(292, 260);
-            this.Font = new System.Drawing.Font("PMingLiU", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Font = new System.Drawing.Font("MS PGothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.Name = "NotifyWindow";
             this.ResumeLayout(false);
         }

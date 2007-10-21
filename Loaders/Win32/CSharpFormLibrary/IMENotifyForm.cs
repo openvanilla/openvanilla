@@ -33,10 +33,6 @@ namespace CSharpFormLibrary
         //private ColumnHeader columnHeader1;
         //private ColumnHeader columnHeader2;
         //</comment>
-        private ImageList imageList1;
-        private PictureBox pictureBox1;
-        private TextBox textBox1;
-        private ToolStrip toolStrip1;
         private const int MA_NOACTIVATEANDEAT = 0x0004;
 
         public IMENotifyForm()
@@ -92,52 +88,14 @@ namespace CSharpFormLibrary
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(1, 25);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(57, 42);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(138, 96);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(32, 161);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(223, 31);
-            this.textBox1.TabIndex = 1;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(292, 25);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // IMENotifyForm
             // 
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Info;
-            this.ClientSize = new System.Drawing.Size(292, 260);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.pictureBox1);
-            this.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ClientSize = new System.Drawing.Size(208, 137);
+            this.Font = new System.Drawing.Font("MS PGothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.ForeColor = System.Drawing.SystemColors.WindowText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "IMENotifyForm";
@@ -149,9 +107,7 @@ namespace CSharpFormLibrary
             this.Click += new System.EventHandler(this.IMENotifyForm_Click);
             this.Validating += new System.ComponentModel.CancelEventHandler(this.IMENotifyForm_Validating);
             this.Leave += new System.EventHandler(this.IMENotifyForm_Leave);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
         #endregion
@@ -160,15 +116,9 @@ namespace CSharpFormLibrary
 
         public void SetNotifyStr(string inputs)
         {            
-            //this.textBox1.Text = inputs;
             NotifyWindow nw;
-            //if (checkBoxTitle.Checked)
-            {
-                nw = new NotifyWindow("Notify Titile",inputs );
-                nw.TitleClicked += new System.EventHandler(titleClick);
-            }
-            //else
-                //nw = new NotifyWindow(textBoxText.Text);
+            nw = new NotifyWindow("OpenVanilla Notify", inputs);
+            nw.TitleClicked += new System.EventHandler(titleClick);
             nw.TextClicked += new System.EventHandler(textClick);
             nw.SetDimensions(200, 120);
             nw.Notify();
