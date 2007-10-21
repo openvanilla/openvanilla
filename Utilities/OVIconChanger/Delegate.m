@@ -45,11 +45,9 @@
 #define LCP			"/Library/Components"
 #define OV063		"/OVLoader.bundle"
 #define OV07x		"/OVInit.bundle"
-#define OV080		"/OpenVanilla-TSComponent-0.8.0.bundle"
-#define OV080TC		"/OpenVanilla-TSComponent-0.8.0-TC.bundle"
-#define OV080SC		"/OpenVanilla-TSComponent-0.8.0-SC.bundle"
+#define OV080		"/OpenVanilla-0.8.bundle"
 #define MENUICON	"/Contents/Resources/OpenVanillaMenuIcon.icns"
-#define USERICONPATH	"~/Library/OpenVanilla/0.8.0/Icons"
+#define USERICONPATH	"~/Library/OpenVanilla/0.8/Icons"
 
 @implementation Delegate
 
@@ -390,14 +388,14 @@
     if ([self pathExists:LCP OV080]) {
 		[self copyToTarget: LCP OV080 MENUICON source: iconpath script:script];
     }
-	
+	/*
     if ([self pathExists:LCP OV080TC]) {
 		[self copyToTarget: LCP OV080TC MENUICON source: iconpath script:script];
     }
 	
     if ([self pathExists:LCP OV080SC]) {
 		[self copyToTarget: LCP OV080SC MENUICON source: iconpath script:script];		
-    }	
+    }*/	
 
     NSLog(@"Scripts: %d", [script length]);
 
