@@ -18,11 +18,21 @@ namespace CSharpFormLibrary
         private bool m_wasMouseDown = false;
         private bool m_wasButtonPressed = false;
 
-        private Color m_colorTop = Color.DarkGray;
-        private Color m_colorMiddle = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-        private Color m_colorBottom = Color.Black;
-        private Color m_colorBorder = Color.Gray;
-        private Color m_colorText = Color.White;
+        private static Color m_btTopColor = Color.DarkGray;
+        private static Color m_btMiddleColor =
+            Color.FromArgb(
+                ((int)(((byte)(36)))),
+                ((int)(((byte)(36)))),
+                ((int)(((byte)(36)))));
+        private static Color m_btBottomColor = Color.Black;
+        private static Color m_btBorderColor = Color.Gray;
+        private static Color m_btTextColor = Color.White;
+
+        private Color m_topColor = m_btTopColor;
+        private Color m_middleColor = m_btMiddleColor;
+        private Color m_bottomColor = m_btBottomColor;
+        private Color m_borderColor = m_btBorderColor;
+        private Color m_textColor = m_btTextColor;
 
         private ButtonBorderStyle m_buttonBorderStyle = ButtonBorderStyle.Outset;
 
@@ -49,11 +59,7 @@ namespace CSharpFormLibrary
         {
             if (m_wasMouseDown)
             {                
-                m_colorTop = Color.DimGray;
-                m_colorMiddle = Color.DimGray;
-                m_colorBottom = Color.Black;
-                m_colorBorder = Color.Gray;
-                m_colorText = Color.White;
+                m_topColor = m_btMiddleColor;
                 m_buttonBorderStyle = ButtonBorderStyle.Inset;
                 m_wasButtonPressed = true;
                 this.Refresh();
@@ -61,11 +67,7 @@ namespace CSharpFormLibrary
             else
             {
                 if(m_wasButtonPressed) {                    
-                    m_colorTop = Color.LightGray;
-                    m_colorMiddle = Color.DimGray;
-                    m_colorBottom = Color.Black;
-                    m_colorBorder = Color.Gray;
-                    m_colorText = Color.White;
+                    m_topColor = m_btTopColor;
                     m_buttonBorderStyle = ButtonBorderStyle.Outset;
                     this.Refresh();
                 }
@@ -85,17 +87,17 @@ namespace CSharpFormLibrary
 
             RectangleF rectF = new RectangleF(new PointF(0.0f, 0.0f), sizeF);
             Brush b = new LinearGradientBrush(
-                rectF, m_colorTop, m_colorMiddle,
+                rectF, m_topColor, m_middleColor,
                     LinearGradientMode.Vertical);
             pe.Graphics.FillRectangle(b, rectF);
 
             rectF = new RectangleF(
                 new PointF(0.0f, sizeF.Height), sizeF);
-            b = new System.Drawing.SolidBrush(m_colorBottom);
+            b = new System.Drawing.SolidBrush(m_bottomColor);
             pe.Graphics.FillRectangle(b, rectF);
 
             //draw text
-            b = new SolidBrush(m_colorText);
+            b = new SolidBrush(m_textColor);
             sizeF = pe.Graphics.MeasureString(Text, Font);
             PointF pt = new PointF(
                 (Width - sizeF.Width) / 2.0f, (Height - sizeF.Height) / 2.0f);
@@ -104,7 +106,7 @@ namespace CSharpFormLibrary
             b.Dispose();
             ControlPaint.DrawBorder(
                 pe.Graphics, ClientRectangle,
-                    m_colorBorder, m_buttonBorderStyle);
+                    m_borderColor, m_buttonBorderStyle);
         }
 
         protected void MyOnMouseDown()
