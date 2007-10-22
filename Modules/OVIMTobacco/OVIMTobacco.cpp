@@ -345,7 +345,11 @@ void OVIMTobacco::update(OVDictionary *cfg, OVService *) {
     const char *maxSeqLen="maxKeySequenceLength";
     const char *hitMax="hitMaxAndCompose";
 
-    strcpy(selkey, cfg->getStringWithDefault("selectKey", "123456789"));    
+	const char* ename = localizedName("en");
+	if (!strcmp("PhoneticHsu", ename))
+		strcpy(selkey, "asdfzxcv");
+	else
+		strcpy(selkey, cfg->getStringWithDefault("selectKey", "123456789"));
     allowwildcard=cfg->getIntegerWithDefault("wildcard", 1);
     if (allowwildcard !=0 && allowwildcard !=1) allowwildcard=1;
     
@@ -412,7 +416,7 @@ void OVIMTobaccoContext::start(OVBuffer* buf, OVCandidate*, OVService* s) {
 	b = buf;
 
 	const char* ename = QueryForKey(db, parent->table, "_property_ename");
-    	string inputMethodId(ename);
+    string inputMethodId(ename);
 	predictor->setInputMethodId(inputMethodId);
 	predictor->setImTableId(string(parent->table));
 }
