@@ -18,8 +18,8 @@ namespace CSharpFormLibrary
         private bool m_wasMouseDown = false;
         private bool m_wasButtonPressed = false;
 
-        private Color m_colorTop = Color.LightGray;
-        private Color m_colorMiddle = Color.DimGray;
+        private Color m_colorTop = Color.DarkGray;
+        private Color m_colorMiddle = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
         private Color m_colorBottom = Color.Black;
         private Color m_colorBorder = Color.Gray;
         private Color m_colorText = Color.White;
