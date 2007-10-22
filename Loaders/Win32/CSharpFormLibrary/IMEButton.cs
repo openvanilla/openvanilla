@@ -21,9 +21,9 @@ namespace CSharpFormLibrary
         private static Color m_btTopColor = Color.DarkGray;
         private static Color m_btMiddleColor =
             Color.FromArgb(
-                ((int)(((byte)(36)))),
-                ((int)(((byte)(36)))),
-                ((int)(((byte)(36)))));
+                ((int)(((byte)(55)))),
+                ((int)(((byte)(55)))),
+                ((int)(((byte)(55)))));
         private static Color m_btBottomColor = Color.Black;
         private static Color m_btBorderColor = Color.Gray;
         private static Color m_btTextColor = Color.White;
