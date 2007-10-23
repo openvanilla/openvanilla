@@ -35,25 +35,22 @@ public:
 	void setInputMethodId(string id) { dictionary->setInputMethodId(id); }
 	void setImTableId(string id) { dictionary->setImTableId(id); }
 
-	bool setTokenVector(
-		string keystrokes, string currentSequence,
-		size_t position, bool doReplace);
-	void setFixedToken(
-	   string currentSequence, string currentWord, size_t position);
-	void setCandidateVector(size_t position);
-	void setSelectedCandidate(size_t position, size_t selectedCandidateIndex);
+	bool setTokenVector(string, string, size_t, bool);
+	void setFixedToken(string, string, size_t);
+	void setCandidateVector(size_t);
+	void setSelectedCandidate(size_t, size_t);
 
-	void removeWord(size_t position, bool delFlag);
+	void removeWord(size_t, bool);
 	void clearAll();
 
-	void rotateTopCandidates(size_t position);
+	void rotateTopCandidates(size_t);
 
 protected:
-	void addCandidates(string characters, size_t head, int type);
+	void addCandidates(string, size_t, int);
     void setTokenVectorByBigram();
     void setComposedString();
 
-	PredictorSingleton(const char* dbFilePath);
+	PredictorSingleton(const char*);
 	~PredictorSingleton();
 
 private:

@@ -347,10 +347,18 @@ void OVIMTobacco::update(OVDictionary *cfg, OVService *) {
 
 	const char* ename = localizedName("en");
 	if (!strcmp("PhoneticHsu", ename))
-		strcpy(selkey, "asdfzxcv");
+		strcpy(selkey, cfg->getStringWithDefault("selectKey", "asdfzxcv"));
 	else
 		strcpy(selkey, cfg->getStringWithDefault("selectKey", "123456789"));
-    allowwildcard=cfg->getIntegerWithDefault("wildcard", 1);
+
+	if (!strcmp("CangJie", ename))
+		cfgMaxSeqLen =
+			cfg->getIntegerWithDefault(maxSeqLen, 5);
+	else
+		cfgMaxSeqLen =
+			cfg->getIntegerWithDefault(maxSeqLen, 4);
+
+	allowwildcard=cfg->getIntegerWithDefault("wildcard", 1);
     if (allowwildcard !=0 && allowwildcard !=1) allowwildcard=1;
     
     const char *ek=QueryForKey(db, table, "_property_endkey");
@@ -360,8 +368,6 @@ void OVIMTobacco::update(OVDictionary *cfg, OVService *) {
     else {
         strcpy(endkey, "");
     }
-
-    cfgMaxSeqLen = cfg->getInteger(maxSeqLen);
 
     cfgBeep =
         cfg->getIntegerWithDefault(warningBeep, 1) == 0 ? false : true;
@@ -680,8 +686,7 @@ void OVIMTobaccoContext::freshBuffer() {
             rightString = 
                 predictor->
                     composedString.substr((position)*3, len-(position)*3);
-        }
-		else {
+        } else {
             leftString = rightString = "";
 			murmur("left[%s], right[%s]", leftString.c_str(), rightString.c_str());
 		}
@@ -691,9 +696,7 @@ void OVIMTobaccoContext::freshBuffer() {
 			->append(seq.compose())
 			->append(rightString.c_str())
 			->update((int)position, (int)position, (int)position + (int)seq.length());
-    }
-    else
-	{
+    } else {
 		b->clear();
 		if(predictor->composedString.length() > 0)
 			b->append(predictor->composedString.c_str());

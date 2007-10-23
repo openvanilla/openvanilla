@@ -39,12 +39,12 @@ double BiGram::viterbi(
 		double bestScore = 0.0f;
 		int bestPrefix = -1;
 		string bestWord = "";
-		for(int prefix = index - 1; prefix >= begin; prefix--)
+		for (int prefix = index - 1; prefix >= begin; prefix--)
 		{
 			murmur("prefix:%i", prefix);
 			int innerPrefix = prefix - begin;
 			string rightKey("");
-			for(int shift = prefix; shift < index; shift++)
+			for (int shift = prefix; shift < index; shift++)
 				rightKey +=
 					tokenVectorRef[shift].characterStringVector[0] + '-';
 			rightKey = rightKey.substr(0, rightKey.length() - 1);
@@ -53,13 +53,28 @@ double BiGram::viterbi(
 			vector<Vocabulary> rightGrams;
 			dictionary->getWordsByCharacters(rightKey, rightGrams, true);
 			size_t rightGramCount = rightGrams.size();
-			murmur("rightGramCount:%i", rightGramCount);
+			murmur("rightGramCount:%i, original", rightGramCount);
 			if(prefix == index - 1 && rightGramCount  == 0)
 				dictionary->getVocablesByKeystrokes(
 					tokenVectorRef[prefix].keystrokes, rightGrams);
 			rightGramCount = rightGrams.size();
-			murmur("rightGramCount:%i", rightGramCount);			
-			for(size_t i = 0; i < rightGramCount; i++)
+			murmur("rightGramCount:%i, single char", rightGramCount);
+			vector<Vocabulary> filteredRightGrams;
+			for (int shift = prefix; shift < index; shift++) {
+				if (tokenVectorRef[shift].isFixed) {
+					for (size_t k = 0; k < rightGrams.size(); k++)
+						if (tokenVectorRef[shift].word ==
+								rightGrams[k].word.substr(
+									(shift - prefix) * 3, 3))
+							filteredRightGrams.push_back(rightGrams[k]);
+				}
+			}
+			if (filteredRightGrams.size() > 0)
+				rightGrams = filteredRightGrams;
+			rightGramCount = rightGrams.size();
+			murmur("rightGramCount:%i, filtered", rightGramCount);
+
+			for (size_t i = 0; i < rightGramCount; i++)
 			{
 				//string rightGram = rightGrams[i];
 				//if(lm_->has(rightGram)) {
@@ -79,13 +94,28 @@ double BiGram::viterbi(
 						dictionary->getWordsByCharacters(
 							leftKey, leftGrams, true);
 						size_t leftGramCount = leftGrams.size();
-						murmur("leftGramCount:%i",leftGramCount);
-						if(left == prefix - 1 && leftGramCount  == 0)
+						murmur("leftGramCount:%i, original", leftGramCount);
+						if (left == prefix - 1 && leftGramCount  == 0)
 							dictionary->getVocablesByKeystrokes(
 								tokenVectorRef[left].keystrokes, leftGrams);
 						leftGramCount = leftGrams.size();
-						murmur("leftGramCount:%i", leftGramCount);			
-						for(size_t j = 0; j < leftGramCount; j++)
+						murmur("leftGramCount:%i, single char", leftGramCount);
+						vector<Vocabulary> filteredLeftGrams;
+						for (int shift = left; shift < prefix; shift++) {
+							if (tokenVectorRef[shift].isFixed) {
+								for (size_t k = 0; k < leftGrams.size(); k++)
+									if (tokenVectorRef[shift].word ==
+											leftGrams[k].word.substr(
+												(shift - left) * 3, 3))
+										filteredLeftGrams.push_back(leftGrams[k]);
+							}
+						}
+						if (filteredLeftGrams.size() > 0)
+							leftGrams = filteredLeftGrams;
+						leftGramCount = leftGrams.size();
+						murmur("leftGramCount:%i, filtered", leftGramCount);
+
+						for (size_t j = 0; j < leftGramCount; j++)
 						{
 							double tempScore = 0.0f;
 							//string leftGram = leftGrams[j];
