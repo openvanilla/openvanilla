@@ -101,11 +101,18 @@ int CVLoader::init(MenuRef m) {
 			NSLog(@"Can't be loaded with WebKitServer, die.");
 			return 0;
 		}
-		/*
 		if ([[[aba objectAtIndex:ai] bundleIdentifier] isEqualToString:@"com.blacktree.Quicksilver"]) {
 			NSLog(@"Can't be loaded with QuickSilver, die.");
 			return 0;
-		} */
+		} 
+		if ([[[aba objectAtIndex:ai] bundleIdentifier] isEqualToString:@"com.gryphel.minivmac"]) {
+			NSLog(@"Can't be loaded with QuickSilver, die.");
+			return 0;
+		} 
+		if ([[[[aba objectAtIndex:ai] infoDictionary] objectForKey:@"CFBundleDisplayName"] isEqualToString:@"DOSBox"]) {
+			NSLog(@"Can't be loaded with DOSBOX, die.");
+			return 0;
+		} 
 	}
 	
 
