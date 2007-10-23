@@ -9,33 +9,31 @@ Copyright (c) 2004-2006 The OpenVanilla Project
 來編譯。
 
 3. 原先在 repository 裡的 ltdl, iconv, tinyxml 皆已移除，請下載
-http://taipedia.selfip.info/OV-deps.zip 「或」
-http://rt.openfoundry.org/Foundry/Project/Download/Attachment/91835/63197/OV-deps.zip
-（兩個是一樣的），解壓縮後置於某處－－例如 "your_dependency_path"－－再按照
-http://www.flickr.com/photos/b6s/159926134/ 示範的方式讓 VS.NET 2005 知道要去那
-裡找這些函式庫。
-3.1. 為了之後布署方便，請設定環境變數 %OV_DEPS% 到 "your_dependency_path"，
-include files 和 library files 的 path 都要記得加上。
-3.2. 若想在 Vista 上用 IE7, 請「不要」看底下的 3.2.1.。上述 OV-deps.zip 裡的
-sqlite3.dll 是 http://sqlite.org/sqlitedll-3_2_5.zip. 這是最近發現的問題，詳細
-狀況請參考 http://article.gmane.org/gmane.comp.db.sqlite.general/29356 的說明。
+http://openvanilla.googlecode.com/files/OV-deps.zip，解壓縮後置於某處－－例如
+"your_dependency_path"－－再按照 http://www.flickr.com/photos/b6s/159926134/ 示範的方式讓
+ VS.NET 2005 知道要去那裡找這些函式庫 (Library files) 及標頭檔 (Include files)；圖示僅為 Include 
+files, Library files 也請照做一遍。
+3.1. 為了之後布署方便，請設定環境變數 %OV_DEPS% 到 "your_dependency_path"，同樣地，
+Include files 和 Library files 的 path 都要記得加上。
+3.2. 若想在 Vista 上用 IE7, 請「不要」看底下的 3.2.1.。上述 OV-deps.zip 裡的 sqlite3.dll 是
+http://sqlite.org/sqlitedll-3_2_5.zip. 這是最近發現的問題，詳細狀況請參考
+http://article.gmane.org/gmane.comp.db.sqlite.general/29356 的說明。
 3.2.1. SQLite3 也已自 svn repository 移除，若想用「比 OV-deps.zip 還新的」，請到
 http://taipedia.selfip.info/mediawiki/index.php/SQLite3Win32LibVC8/zh-hant
 下載，並同樣放在 %OV_DEPS% 裡。
 
-4. OV-deps 已加入 OVIMRomanNew 所需要的拼字檢查 library -- hunspell, 18 個檔案
-如下：
-affentry.hxx, affixmgr.hxx, atypes.hxx, baseaffix.hxx, csutil.hxx, dictmgr.hxx,
-hashmgr.hxx, htypes.hxx, hunspell.h, hunspell.hxx, hunspell.dll, hunspell.lib,
-hunspelldll.h, license.hunspell, license.myspell, langnum.hxx, phonet.hxx,
-suggestmgr.hxx
-4.1. 比照 3. 的說明，請替 VS.NET 2005 的 include directory 和 library directory
-加上 "your_dependency_path"\hunspell
-4.2. 您也可由 hunspell 原始碼自行編譯出 hunspell.dll 及 hunspell.lib, 以便自行
-與 hunspell 最新版同步。用 VS.NET 2005 開啟
+4. OV-deps 已加入 OVIMRomanNew 所需要的拼字檢查 library -- hunspell, 18 個檔案如下：
+affentry.hxx, affixmgr.hxx, atypes.hxx, baseaffix.hxx, csutil.hxx, dictmgr.hxx, hashmgr.hxx,
+htypes.hxx, hunspell.h, hunspell.hxx, libhunspell.dll, libhunspell.lib, hunspelldll.h, license.hunspell,
+license.myspell, langnum.hxx, phonet.hxx, suggestmgr.hxx
+4.1. 比照 3. 的說明，請替 VS.NET 2005 的 Include directory 和 Library directory 加上
+"your_dependency_path"\hunspell
+4.2. 您也可由 hunspell 原始碼自行編譯出 hunspell.dll 及 hunspell.lib, 以便自行與 hunspell 最新版同
+步。用 VS.NET 2005 開啟
     %your_hunspell_src_dir%/src/win_api/Hunspell.sln
 在 Debug_dll 或 Release_dll 配置下編譯即可。
-
+4.3. 請下載 http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/en_US.zip
+並解壓縮，將其中的 en_US.dic 和 en_US.aff 置於 Modules/OVIMRomanNew/ 底下。
 
 5. 若遇到任何問題，請透過 IRC 到 FreeNote 的 #im-dev 找 b6s。
 
@@ -51,16 +49,16 @@ suggestmgr.hxx
 == 測試 ==
 在此以 OVIMPOJ-Holo 為例
 
-1. 按照上一節所述，完成 OVIME.sln 與 OVPreference.CS2.sln 的編譯，然後在
-Modules.sln 裡編譯 OVIMPOJ-Holo 模組。
+1. 按照上一節所述，完成 OVIME.sln 與 OVPreference.CS2.sln 的編譯，然後在Modules.sln 裡編譯
+OVIMPOJ-Holo 模組。
 
 2. 手動建立 %WINDIR%\OpenVanilla 及 %WINDIR%\OpenVanilla\Modules
 
 3. 布署檔案，請參考 trunk/Loaders/Win32/deploy-debug.bat，或直接使用之。
 3.1. 把「注意事項 3」提到的 DLLs 放進 %SYSTEM32% (%WINDIR%\system32)
 
-4. 把 poj-holo.cin 放到 %WINDIR%\OpenVanilla\OVIMPOJ-Holo 裡；當然，這個目錄必
-須先手動建立。
+4. 把 poj-holo.cin 放到 %WINDIR%\OpenVanilla\OVIMPOJ-Holo 裡；當然，這個目錄必須先手動建
+立。
 
 5. 若未曾安裝過 OV，請執行 OVIME.reg。
 
