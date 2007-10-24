@@ -113,4 +113,16 @@
 {
 	return TRUE;
 }
+- (void)sendCharacterToCurrentComposingBuffer:(NSString*)text
+{
+}
+- (void)sendStringToCurrentComposingBuffer:(NSString*)text
+{
+}
+- (int)nextAvailableRemoteID
+{
+}
+- (void)setCurrentComposingBufferRemoteID:(int)remoteID
+{
+}
 @end

@@ -42,7 +42,7 @@
 		_text = [[CVBubbleTextView alloc] initWithFrame:NSMakeRect(0, 0, 200, 50)];
         [self addSubview:_text];
 	}
-	_background = [NSImage imageNamed:@"background"];
+	_background = [NSImage imageNamed:@"WindowBackground"];
 	return self;
 }
 
@@ -51,7 +51,7 @@
     //[[NSColor clearColor] set];
     // NSRectFill(rect);
 	[_background drawInRect:rect fromRect:rect operation:NSCompositeCopy fraction:1.0];
-	NSBezierPath *b = [NSBezierPath bezierPathWithRect:rect];
+	NSBezierPath *b = [NSBezierPath bezierPathWithRect:[self bounds]];
 	[b stroke];
 	
 	NSShadow *dropShadow = [[[NSShadow alloc] init] autorelease];
