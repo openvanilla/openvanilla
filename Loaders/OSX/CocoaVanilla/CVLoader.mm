@@ -62,7 +62,7 @@ protected:
 
 #define CVSAFETY CVAutorelease _cvar;
 
-#define CV_INTERNAL_VERSION @"0.8.0 stable (r2911)"
+#define CV_INTERNAL_VERSION @"0.8.0 stable (r3020)"
 
 enum {      // CVLMI = CVLoader Menu Item
     CVLMI_KPGROUPSTART=1000,
@@ -106,7 +106,7 @@ int CVLoader::init(MenuRef m) {
 			return 0;
 		} 
 		if ([[[aba objectAtIndex:ai] bundleIdentifier] isEqualToString:@"com.gryphel.minivmac"]) {
-			NSLog(@"Can't be loaded with QuickSilver, die.");
+			NSLog(@"Can't be loaded with Minivmac, die.");
 			return 0;
 		} 
 		if ([[[[aba objectAtIndex:ai] infoDictionary] objectForKey:@"CFBundleDisplayName"] isEqualToString:@"DOSBox"]) {
@@ -618,7 +618,7 @@ NSString *CVLoader::MSG(NSString *m) {
 }
 - (void)sendString:(NSString *)string
 {
-	NSLog(@"received remote string: %@", string);
+	// NSLog(@"received remote string: %@", string);
 	ctxt->sendString(string);
 }
 @end
@@ -645,15 +645,15 @@ CVContext::~CVContext() {
 }
 
 void CVContext::activate(TSComposingBuffer *b) {
-	NSLog(@"CVContext::activate");
+	// NSLog(@"CVContext::activate");
 	
 	// ping the display server to make sure it's alive
 	@try {
-		NSLog(@"pinging OV display server");
+		// NSLog(@"pinging OV display server");
 		BOOL value = [loader->dspsrvr ping];
 		
 		// if we see value == 0, it's probably 10.5; 10.4 would never survive the last line if connection is lost
-		NSLog(@"pinged value: %d", value);
+		// NSLog(@"pinged value: %d", value);
 		
 		// since OS X 10.5, lost connection stops yielding exception? we'll do it on our own
 		if (!loader->dspsrvr || !value) @throw [NSException exceptionWithName:@"OVException" reason:@"Display server connection lost" userInfo:nil];
@@ -671,15 +671,15 @@ void CVContext::activate(TSComposingBuffer *b) {
 				[connection setRootObject:keyrcvr];
 				
 				if (![connection registerName:[NSString stringWithFormat:@"OVLoaderComposingBuffer-%d", remoteID]]) {
-					NSLog(@"Register loader composer buffer (remoteID: %d) failed", remoteID);
+					// NSLog(@"Register loader composer buffer (remoteID: %d) failed", remoteID);
 				}
 				else {
-					NSLog(@"Register loader composer buffer (remoteID: %d) succeeded", remoteID);	
+					// NSLog(@"Register loader composer buffer (remoteID: %d) succeeded", remoteID);	
 				}
 			}
 		}
 		
-		NSLog(@"telling display server that we're focused, our remote ID = %d", remoteID);
+		// NSLog(@"telling display server that we're focused, our remote ID = %d", remoteID);
 		[loader->dspsrvr setCurrentComposingBufferRemoteID:remoteID];
 	}
 	@catch(NSException *e) {	
@@ -775,7 +775,7 @@ void CVContext::deactivate() {
     loader->candi->hide()->clear()->update();
     loader->srv->closeNotification();
 	
-	NSLog(@"telling display server that we're defocused, our remote ID = %d, now = -1", remoteID);
+	// NSLog(@"telling display server that we're defocused, our remote ID = %d, now = -1", remoteID);
 	[loader->dspsrvr setCurrentComposingBufferRemoteID:-1];
 	
 }

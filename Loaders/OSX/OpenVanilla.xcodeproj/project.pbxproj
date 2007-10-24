@@ -140,49 +140,49 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6ACC51660CCF7F7700E2307C /* CocoaVanilla */;
+			remoteGlobalIDString = 6ACC51660CCF7F7700E2307C;
 			remoteInfo = CocoaVanilla;
 		};
 		6A77AA6A0CCFA8FB00203045 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6ACC51F50CCF82C000E2307C /* OVPreferences */;
+			remoteGlobalIDString = 6ACC51F50CCF82C000E2307C;
 			remoteInfo = OVPreferences;
 		};
 		6A77AA6C0CCFA8FB00203045 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6ACC537B0CCF863100E2307C /* OVDisplayServer */;
+			remoteGlobalIDString = 6ACC537B0CCF863100E2307C;
 			remoteInfo = OVDisplayServer;
 		};
 		6A77AA6E0CCFA8FB00203045 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6ACC53E70CCF872200E2307C /* OVLoader */;
+			remoteGlobalIDString = 6ACC53E70CCF872200E2307C;
 			remoteInfo = OVLoader;
 		};
 		6A77AA700CCFA8FB00203045 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6ACC55690CCF8AE800E2307C /* OpenVanilla (Unicode Script) */;
+			remoteGlobalIDString = 6ACC55690CCF8AE800E2307C;
 			remoteInfo = "OpenVanilla (Unicode Script)";
 		};
 		6A77AA720CCFA8FB00203045 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6A93BA660CCF973500BF99B9 /* OpenVanilla (smTradChinese) */;
+			remoteGlobalIDString = 6A93BA660CCF973500BF99B9;
 			remoteInfo = "OpenVanilla (smTradChinese)";
 		};
 		6A77AA740CCFA8FB00203045 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6A77AA380CCFA83900203045 /* OpenVanilla (smSimpChinese) */;
+			remoteGlobalIDString = 6A77AA380CCFA83900203045;
 			remoteInfo = "OpenVanilla (smSimpChinese)";
 		};
 /* End PBXContainerItemProxy section */
