@@ -61,9 +61,10 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 	if (!fontSize) fontSize = @"24";
 	
 	NSNumber *useWindowAnimation = [NSNumber numberWithBool:YES];
-	NSLog(@"useWidnowAnimatio %@", [cfg objectForKey:@"useWindowAnimation"]);
-	if([[cfg objectForKey:@"useWindowAnimation"] length]) {
-	   useWindowAnimation =  [NSNumber numberWithBool:[[cfg objectForKey:@"useWindowAnimation"] intValue]];
+	id uWAKey = [cfg objectForKey:@"useWindowAnimation"];
+	
+	if (uWAKey) {
+		useWindowAnimation = [NSNumber numberWithBool:[uWAKey intValue]];
 	}
 	
 	NSFont *font = [NSFont fontWithName:fontName size:[fontSize floatValue]];
@@ -165,9 +166,9 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 }
 - (void)sendStringToCurrentComposingBuffer:(NSString *)string
 {
-	NSLog(@"sending string to current composing buffer: %@", string);
+	// NSLog(@"sending string to current composing buffer: %@", string);
 	if (_currentFocusRemoteID < 0) return;
-	NSLog(@"no remote buffer is activated, end");
+	// NSLog(@"no remote buffer is activated, end");
 	
 	NSString *remoteName = [NSString stringWithFormat:@"OVLoaderComposingBuffer-%d", _currentFocusRemoteID];
 	
@@ -186,9 +187,9 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 }
 - (void)sendCharacterToCurrentComposingBuffer:(NSString*)string
 {
-	NSLog(@"sending string to current composing buffer: %@, current remote ID = %d", string, _currentFocusRemoteID);
+	// NSLog(@"sending string to current composing buffer: %@, current remote ID = %d", string, _currentFocusRemoteID);
 	if (_currentFocusRemoteID < 0) {
-		NSLog(@"no remote buffer is activated, end");
+		// NSLog(@"no remote buffer is activated, end");
 		return;
 	}
 	
@@ -203,21 +204,21 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 			[remoteObject release];
 		}
 		@catch(NSException *e) {
-			NSLog(@"exception: %@", [e description]);
+			// NSLog(@"exception: %@", [e description]);
 		}
 	}
 	else {
-		NSLog(@"no remote object available");
+		// NSLog(@"no remote object available");
 	}
 }
 - (int)nextAvailableRemoteID
 {
-	NSLog(@"asking for the next available remote ID, returning %d", _nextRemoteID);
+	// NSLog(@"asking for the next available remote ID, returning %d", _nextRemoteID);
 	return _nextRemoteID++;
 }
 - (void)setCurrentComposingBufferRemoteID:(int)remoteID
 {
-	NSLog(@"setting current focus remote ID to %d", remoteID);
+	// NSLog(@"setting current focus remote ID to %d", remoteID);
 	_currentFocusRemoteID = remoteID;
 }
 @end
