@@ -133,6 +133,8 @@
 		6ACC557A0CCF8B9B00E2307C /* ATSComponent.c in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC51D90CCF826700E2307C /* ATSComponent.c */; };
 		6ACC557B0CCF8BA000E2307C /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ACC51E80CCF829700E2307C /* Carbon.framework */; };
 		6ACC557F0CCF8BC900E2307C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ACC557D0CCF8BC900E2307C /* InfoPlist.strings */; };
+		D40406FB0CCFB83B00AD5D83 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40406FA0CCFB83B00AD5D83 /* Sparkle.framework */; };
+		D40407000CCFB92200AD5D83 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D40406FA0CCFB83B00AD5D83 /* Sparkle.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +216,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				6ACC539D0CCF865A00E2307C /* CocoaVanilla.framework in CopyFiles */,
+				D40407000CCFB92200AD5D83 /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,7 +308,7 @@
 		6ACC53C20CCF869900E2307C /* OVDisplayServer.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.sdef; name = OVDisplayServer.sdef; path = OVDisplayServer/OVDisplayServer.sdef; sourceTree = "<group>"; };
 		6ACC53C30CCF869900E2307C /* CVDisplayServerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVDisplayServerController.h; path = OVDisplayServer/CVDisplayServerController.h; sourceTree = "<group>"; };
 		6ACC53C40CCF869900E2307C /* CVDisplayServerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CVDisplayServerController.m; path = OVDisplayServer/CVDisplayServerController.m; sourceTree = "<group>"; };
-		6ACC53CB0CCF86A700E2307C /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = OVDisplayServer/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6ACC53CB0CCF86A700E2307C /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = OVDisplayServer/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6ACC53CD0CCF86A700E2307C /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = OVDisplayServer/English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		6ACC53D00CCF86AD00E2307C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = OVDisplayServer/zh_TW.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		6ACC53D10CCF86B100E2307C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = OVDisplayServer/zh_CN.lproj/MainMenu.nib; sourceTree = "<group>"; };
@@ -325,6 +328,7 @@
 		6ACC557E0CCF8BC900E2307C /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = TextServiceComponent/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6ACC55800CCF8BCD00E2307C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = TextServiceComponent/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6ACC55810CCF8BCF00E2307C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = TextServiceComponent/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D40406FA0CCFB83B00AD5D83 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = OVDisplayServer/Sparkle.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -370,6 +374,7 @@
 				6ACC53DA0CCF86E400E2307C /* Carbon.framework in Frameworks */,
 				6ACC53DB0CCF86E400E2307C /* Cocoa.framework in Frameworks */,
 				6ACC53B80CCF866100E2307C /* CocoaVanilla.framework in Frameworks */,
+				D40406FB0CCFB83B00AD5D83 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,6 +559,7 @@
 		6ACC51E70CCF828B00E2307C /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D40406FA0CCFB83B00AD5D83 /* Sparkle.framework */,
 				6ACC51E80CCF829700E2307C /* Carbon.framework */,
 				6ACC51E90CCF829700E2307C /* Cocoa.framework */,
 			);
@@ -1377,6 +1383,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -1403,6 +1414,11 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)/OVDisplayServer",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)\"";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

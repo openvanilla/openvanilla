@@ -133,7 +133,11 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 }
 - (void)aboutDialog
 {
-    [_aboutWindow setLevel:NSScreenSaverWindowLevel];
+	[_aboutWindow center];	
+    // [_aboutWindow setLevel:NSScreenSaverWindowLevel];
+	// NSScreenSaverWindowLevel will be higher than the windows of 
+	// Sparkle.framework.
+    [_aboutWindow setLevel:NSFloatingWindowLevel];	
 	[_aboutWindow orderFront:self];
 }
 - (BOOL)ping
