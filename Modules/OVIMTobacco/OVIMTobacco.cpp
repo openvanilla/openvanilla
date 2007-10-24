@@ -452,8 +452,9 @@ int OVIMTobaccoContext::keyEvent(OVKeyCode* pk, OVBuffer* pb, OVCandidate* pc, O
 		if(candidateEvent()) return 1;
 	//@defgroup top-3 candidates rotation by CTRL-Q, and Q of Hsu's layout.
 	//@{
-	if ((k->code() == 17 && k->isCtrl()) ||
-		(k->code() == 'q' && seq.isHsuLayout))
+	if (seq.isEmpty() &&
+			((k->code() == 17 && k->isCtrl()) ||
+				(k->code() == 'q' && seq.isHsuLayout)))
 		return rotateTopCandidates();
 	//@}
     if (isPunctuationCombination()) return punctuationKey();
