@@ -144,9 +144,9 @@
 
 /* Begin PBXFileReference section */
 		6A93BA730CCF973500BF99B9 /* OpenVanilla-0.8-smTradChinese.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-0.8-smTradChinese.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A93BA750CCF973500BF99B9 /* OpenVanilla-Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-Info copy.plist"; path = "TextServiceComponent/OpenVanilla-Info copy.plist"; sourceTree = "<group>"; };
+		6A93BA750CCF973500BF99B9 /* OpenVanilla-Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OpenVanilla-Info copy.plist"; path = "TextServiceComponent/OpenVanilla-Info copy.plist"; sourceTree = "<group>"; };
 		6ACC51670CCF7F7700E2307C /* CocoaVanilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaVanilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6ACC51680CCF7F7700E2307C /* CocoaVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "CocoaVanilla-Info.plist"; path = "CocoaVanilla/CocoaVanilla-Info.plist"; sourceTree = "<group>"; };
+		6ACC51680CCF7F7700E2307C /* CocoaVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "CocoaVanilla-Info.plist"; path = "CocoaVanilla/CocoaVanilla-Info.plist"; sourceTree = "<group>"; };
 		6ACC516D0CCF7FCE00E2307C /* CocoaVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocoaVanilla.h; path = CocoaVanilla/CocoaVanilla.h; sourceTree = "<group>"; };
 		6ACC516F0CCF7FCE00E2307C /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
 		6ACC51700CCF7FCE00E2307C /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
@@ -197,8 +197,8 @@
 		6ACC51DF0CCF826700E2307C /* OpenVanilla.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanilla.icns; path = TextServiceComponent/OpenVanilla.icns; sourceTree = "<group>"; };
 		6ACC51E80CCF829700E2307C /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		6ACC51E90CCF829700E2307C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		6ACC51F60CCF82C000E2307C /* OVPreferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6ACC51F80CCF82C000E2307C /* OVPreferences-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OVPreferences-Info.plist"; path = "OVPreferences/OVPreferences-Info.plist"; sourceTree = "<group>"; };
+		6ACC51F60CCF82C000E2307C /* OVPreferences.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6ACC51F80CCF82C000E2307C /* OVPreferences-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OVPreferences-Info.plist"; path = "OVPreferences/OVPreferences-Info.plist"; sourceTree = "<group>"; };
 		6ACC521C0CCF835700E2307C /* WindowBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = WindowBackground.jpg; path = OVPreferences/WindowBackground.jpg; sourceTree = "<group>"; };
 		6ACC521D0CCF835700E2307C /* CVPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVPreviewView.h; path = OVPreferences/CVPreviewView.h; sourceTree = "<group>"; };
 		6ACC521E0CCF835700E2307C /* CVPreviewView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVPreviewView.mm; path = OVPreferences/CVPreviewView.mm; sourceTree = "<group>"; };
@@ -219,7 +219,7 @@
 		6ACC52430CCF83D700E2307C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = OVPreferences/zh_TW.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
 		6ACC52440CCF83D900E2307C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = OVPreferences/zh_CN.lproj/ServicesMenu.strings; sourceTree = "<group>"; };
 		6ACC537C0CCF863100E2307C /* OVDisplayServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVDisplayServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6ACC537E0CCF863100E2307C /* OVDisplayServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OVDisplayServer-Info.plist"; path = "OVDisplayServer/OVDisplayServer-Info.plist"; sourceTree = "<group>"; };
+		6ACC537E0CCF863100E2307C /* OVDisplayServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OVDisplayServer-Info.plist"; path = "OVDisplayServer/OVDisplayServer-Info.plist"; sourceTree = "<group>"; };
 		6ACC53BF0CCF869900E2307C /* DisplayServer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = DisplayServer.icns; path = OVDisplayServer/DisplayServer.icns; sourceTree = "<group>"; };
 		6ACC53C00CCF869900E2307C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = OVDisplayServer/main.m; sourceTree = "<group>"; };
 		6ACC53C10CCF869900E2307C /* OpenVanilla.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanilla.icns; path = OVDisplayServer/OpenVanilla.icns; sourceTree = "<group>"; };
@@ -233,8 +233,8 @@
 		6ACC53D30CCF86C300E2307C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = OVDisplayServer/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6ACC53D40CCF86C500E2307C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = OVDisplayServer/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6ACC53E80CCF872200E2307C /* OVLoader.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVLoader.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		6ACC53E90CCF872200E2307C /* OVLoader-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OVLoader-Info.plist"; path = "OVLoader/OVLoader-Info.plist"; sourceTree = "<group>"; };
-		6ACC54210CCF888700E2307C /* org.openvanilla.OVLoader.DefaultSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = org.openvanilla.OVLoader.DefaultSettings.plist; path = OVLoader/org.openvanilla.OVLoader.DefaultSettings.plist; sourceTree = "<group>"; };
+		6ACC53E90CCF872200E2307C /* OVLoader-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OVLoader-Info.plist"; path = "OVLoader/OVLoader-Info.plist"; sourceTree = "<group>"; };
+		6ACC54210CCF888700E2307C /* org.openvanilla.OVLoader.DefaultSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = org.openvanilla.OVLoader.DefaultSettings.plist; path = OVLoader/org.openvanilla.OVLoader.DefaultSettings.plist; sourceTree = "<group>"; };
 		6ACC54240CCF892300E2307C /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = OVLoader/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6ACC54260CCF892300E2307C /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = OVLoader/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6ACC54290CCF892800E2307C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = OVLoader/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -242,7 +242,7 @@
 		6ACC542C0CCF893000E2307C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = OVLoader/zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6ACC542D0CCF893300E2307C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = OVLoader/zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6ACC556A0CCF8AE800E2307C /* OpenVanilla-0.8.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-0.8.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6ACC556B0CCF8AE800E2307C /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-Info.plist"; path = "TextServiceComponent/OpenVanilla-Info.plist"; sourceTree = "<group>"; };
+		6ACC556B0CCF8AE800E2307C /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OpenVanilla-Info.plist"; path = "TextServiceComponent/OpenVanilla-Info.plist"; sourceTree = "<group>"; };
 		6ACC557E0CCF8BC900E2307C /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = TextServiceComponent/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6ACC55800CCF8BCD00E2307C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = TextServiceComponent/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6ACC55810CCF8BCF00E2307C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = TextServiceComponent/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -972,6 +972,7 @@
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
 				COPY_PHASE_STRIP = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Debug;
@@ -982,10 +983,9 @@
 				ARCHS = (
 					i386,
 					ppc,
-					x86_64,
-					ppc64,
 				);
 				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Release;
