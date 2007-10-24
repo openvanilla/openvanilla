@@ -1,5 +1,11 @@
 // !$*UTF8*$!
 {
+	6A77AA380CCFA83900203045 /* OpenVanilla (smSimpChinese) */ = {
+		activeExec = 0;
+	};
+	6A77AA540CCFA89200203045 /* OpenVanilla Loader */ = {
+		activeExec = 0;
+	};
 	6A93BA660CCF973500BF99B9 /* OpenVanilla (smTradChinese) */ = {
 		activeExec = 0;
 	};
@@ -7,9 +13,9 @@
 		activeArchitecture = i386;
 		activeBuildConfigurationName = Release;
 		activeExecutable = 6ACC537D0CCF863100E2307C /* OVDisplayServer */;
-		activeTarget = 6A93BA660CCF973500BF99B9 /* OpenVanilla (smTradChinese) */;
+		activeTarget = 6A77AA540CCFA89200203045 /* OpenVanilla Loader */;
 		addToTargets = (
-			6ACC55690CCF8AE800E2307C /* OpenVanilla */,
+			6ACC55690CCF8AE800E2307C /* OpenVanilla (Unicode Script) */,
 		);
 		codeSenseManager = 6ACC51320CCF7EC600E2307C /* Code sense */;
 		executables = (
@@ -91,8 +97,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 214932424;
-			PBXWorkspaceStateSaveDate = 214932424;
+			PBXPerProjectTemplateStateSaveDate = 214935771;
+			PBXWorkspaceStateSaveDate = 214935771;
 		};
 		sourceControlManager = 6ACC51310CCF7EC600E2307C /* Source Control */;
 		userBuildSettings = {
@@ -176,9 +182,9 @@
 	};
 	6ACC51DA0CCF826700E2307C /* ATSComponent.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {887, 1547}}";
-			sepNavSelRange = "{2631, 0}";
-			sepNavVisRange = "{2009, 1710}";
+			sepNavIntBoundsRect = "{{0, 0}, {840, 1598}}";
+			sepNavSelRange = "{1960, 7}";
+			sepNavVisRange = "{1726, 599}";
 			sepNavWindowFrame = "{{38, 185}, {946, 667}}";
 		};
 	};
@@ -299,6 +305,14 @@
 		sourceDirectories = (
 		);
 	};
+	6ACC537E0CCF863100E2307C /* OVDisplayServer-Info.plist */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {887, 539}}";
+			sepNavSelRange = "{827, 0}";
+			sepNavVisRange = "{0, 846}";
+			sepNavWindowFrame = "{{15, 206}, {946, 667}}";
+		};
+	};
 	6ACC53C40CCF869900E2307C /* CVDisplayServerController.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {651, 4840}}";
@@ -333,7 +347,7 @@
 			sepNavWindowFrame = "{{153, 120}, {979, 627}}";
 		};
 	};
-	6ACC55690CCF8AE800E2307C /* OpenVanilla */ = {
+	6ACC55690CCF8AE800E2307C /* OpenVanilla (Unicode Script) */ = {
 		activeExec = 0;
 	};
 	6ACC556B0CCF8AE800E2307C /* OpenVanilla-Info.plist */ = {

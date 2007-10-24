@@ -6,23 +6,19 @@
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string>OpenVanilla</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.ovdisplayserver</string>
+	<string>org.openvanilla.tscomponent.sc.080</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>THNG</string>
 	<key>CFBundleSignature</key>
-	<string>OPVN</string>
+	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
-	<key>LSBackgroundOnly</key>
-	<string>1</string>	
+	<string>0.8.0</string>
+	<key>CSResourcesFileMapped</key>
+	<string>yes</string>
+	<key>tsInputMethodIconFileKey</key>
+	<string>OpenVanilla.icns</string>
 </dict>
 </plist>

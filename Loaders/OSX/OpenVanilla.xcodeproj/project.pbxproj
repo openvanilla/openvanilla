@@ -6,7 +6,32 @@
 	objectVersion = 42;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		6A77AA540CCFA89200203045 /* OpenVanilla Loader */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6A77AA570CCFA8C200203045 /* Build configuration list for PBXAggregateTarget "OpenVanilla Loader" */;
+			buildPhases = (
+			);
+			dependencies = (
+				6A77AA690CCFA8F600203045 /* PBXTargetDependency */,
+				6A77AA6B0CCFA8FB00203045 /* PBXTargetDependency */,
+				6A77AA6D0CCFA8FB00203045 /* PBXTargetDependency */,
+				6A77AA6F0CCFA8FB00203045 /* PBXTargetDependency */,
+				6A77AA710CCFA8FB00203045 /* PBXTargetDependency */,
+				6A77AA730CCFA8FB00203045 /* PBXTargetDependency */,
+				6A77AA750CCFA8FB00203045 /* PBXTargetDependency */,
+			);
+			name = "OpenVanilla Loader";
+			productName = "OpenVanilla Loader";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
+		6A77AA3A0CCFA83900203045 /* OpenVanilla.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6ACC51DF0CCF826700E2307C /* OpenVanilla.icns */; };
+		6A77AA3B0CCFA83900203045 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ACC557D0CCF8BC900E2307C /* InfoPlist.strings */; };
+		6A77AA3D0CCFA83900203045 /* ATSComponent.c in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC51D90CCF826700E2307C /* ATSComponent.c */; };
+		6A77AA3F0CCFA83900203045 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ACC51E80CCF829700E2307C /* Carbon.framework */; };
+		6A77AA410CCFA83900203045 /* ATSComponent.r in Rez */ = {isa = PBXBuildFile; fileRef = 6ACC51DB0CCF826700E2307C /* ATSComponent.r */; };
 		6A93BA680CCF973500BF99B9 /* OpenVanilla.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6ACC51DF0CCF826700E2307C /* OpenVanilla.icns */; };
 		6A93BA690CCF973500BF99B9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ACC557D0CCF8BC900E2307C /* InfoPlist.strings */; };
 		6A93BA6B0CCF973500BF99B9 /* ATSComponent.c in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC51D90CCF826700E2307C /* ATSComponent.c */; };
@@ -110,6 +135,58 @@
 		6ACC557F0CCF8BC900E2307C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ACC557D0CCF8BC900E2307C /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6A77AA680CCFA8F600203045 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6ACC51660CCF7F7700E2307C /* CocoaVanilla */;
+			remoteInfo = CocoaVanilla;
+		};
+		6A77AA6A0CCFA8FB00203045 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6ACC51F50CCF82C000E2307C /* OVPreferences */;
+			remoteInfo = OVPreferences;
+		};
+		6A77AA6C0CCFA8FB00203045 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6ACC537B0CCF863100E2307C /* OVDisplayServer */;
+			remoteInfo = OVDisplayServer;
+		};
+		6A77AA6E0CCFA8FB00203045 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6ACC53E70CCF872200E2307C /* OVLoader */;
+			remoteInfo = OVLoader;
+		};
+		6A77AA700CCFA8FB00203045 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6ACC55690CCF8AE800E2307C /* OpenVanilla (Unicode Script) */;
+			remoteInfo = "OpenVanilla (Unicode Script)";
+		};
+		6A77AA720CCFA8FB00203045 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A93BA660CCF973500BF99B9 /* OpenVanilla (smTradChinese) */;
+			remoteInfo = "OpenVanilla (smTradChinese)";
+		};
+		6A77AA740CCFA8FB00203045 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A77AA380CCFA83900203045 /* OpenVanilla (smSimpChinese) */;
+			remoteInfo = "OpenVanilla (smSimpChinese)";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		6ACC521A0CCF834300E2307C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -143,8 +220,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smSimpChinese.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-0.8-smSimpChinese.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A77AA490CCFA83900203045 /* OpenVanilla-smSimpChinese-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-smSimpChinese-Info.plist"; path = "TextServiceComponent/OpenVanilla-smSimpChinese-Info.plist"; sourceTree = "<group>"; };
 		6A93BA730CCF973500BF99B9 /* OpenVanilla-0.8-smTradChinese.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-0.8-smTradChinese.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A93BA750CCF973500BF99B9 /* OpenVanilla-Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OpenVanilla-Info copy.plist"; path = "TextServiceComponent/OpenVanilla-Info copy.plist"; sourceTree = "<group>"; };
+		6A93BA750CCF973500BF99B9 /* OpenVanilla-smTradChinese-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-smTradChinese-Info.plist"; path = "TextServiceComponent/OpenVanilla-smTradChinese-Info.plist"; sourceTree = "<group>"; };
 		6ACC51670CCF7F7700E2307C /* CocoaVanilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaVanilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACC51680CCF7F7700E2307C /* CocoaVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "CocoaVanilla-Info.plist"; path = "CocoaVanilla/CocoaVanilla-Info.plist"; sourceTree = "<group>"; };
 		6ACC516D0CCF7FCE00E2307C /* CocoaVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocoaVanilla.h; path = CocoaVanilla/CocoaVanilla.h; sourceTree = "<group>"; };
@@ -197,7 +276,7 @@
 		6ACC51DF0CCF826700E2307C /* OpenVanilla.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanilla.icns; path = TextServiceComponent/OpenVanilla.icns; sourceTree = "<group>"; };
 		6ACC51E80CCF829700E2307C /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		6ACC51E90CCF829700E2307C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		6ACC51F60CCF82C000E2307C /* OVPreferences.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6ACC51F60CCF82C000E2307C /* OVPreferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACC51F80CCF82C000E2307C /* OVPreferences-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OVPreferences-Info.plist"; path = "OVPreferences/OVPreferences-Info.plist"; sourceTree = "<group>"; };
 		6ACC521C0CCF835700E2307C /* WindowBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = WindowBackground.jpg; path = OVPreferences/WindowBackground.jpg; sourceTree = "<group>"; };
 		6ACC521D0CCF835700E2307C /* CVPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVPreviewView.h; path = OVPreferences/CVPreviewView.h; sourceTree = "<group>"; };
@@ -249,6 +328,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6A77AA3E0CCFA83900203045 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A77AA3F0CCFA83900203045 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6A93BA6C0CCF973500BF99B9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -306,6 +393,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A77AA7B0CCFA95C00203045 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6ACC54230CCF892300E2307C /* InfoPlist.strings */,
+				6ACC54250CCF892300E2307C /* Localizable.strings */,
+				6ACC54210CCF888700E2307C /* org.openvanilla.OVLoader.DefaultSettings.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		6A77AA7C0CCFA96500203045 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6ACC53CA0CCF86A700E2307C /* InfoPlist.strings */,
+				6ACC53CC0CCF86A700E2307C /* MainMenu.nib */,
+				6ACC53BF0CCF869900E2307C /* DisplayServer.icns */,
+				6ACC53C10CCF869900E2307C /* OpenVanilla.icns */,
+				6ACC53C20CCF869900E2307C /* OVDisplayServer.sdef */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		6A77AA7D0CCFA97B00203045 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6ACC52380CCF839200E2307C /* InfoPlist.strings */,
+				6ACC522A0CCF836E00E2307C /* Localizable.strings */,
+				6ACC522C0CCF836E00E2307C /* MainMenu.nib */,
+				6ACC522E0CCF836E00E2307C /* ServicesMenu.strings */,
+				6ACC521C0CCF835700E2307C /* WindowBackground.jpg */,
+				6ACC52220CCF835700E2307C /* OVPreferences.icns */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		6A77AA7E0CCFA99400203045 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6ACC557D0CCF8BC900E2307C /* InfoPlist.strings */,
+				6ACC51DB0CCF826700E2307C /* ATSComponent.r */,
+				6ACC51DF0CCF826700E2307C /* OpenVanilla.icns */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		6ACC512B0CCF7EC600E2307C = {
 			isa = PBXGroup;
 			children = (
@@ -321,7 +453,8 @@
 				6ACC537E0CCF863100E2307C /* OVDisplayServer-Info.plist */,
 				6ACC53E90CCF872200E2307C /* OVLoader-Info.plist */,
 				6ACC556B0CCF8AE800E2307C /* OpenVanilla-Info.plist */,
-				6A93BA750CCF973500BF99B9 /* OpenVanilla-Info copy.plist */,
+				6A93BA750CCF973500BF99B9 /* OpenVanilla-smTradChinese-Info.plist */,
+				6A77AA490CCFA83900203045 /* OpenVanilla-smSimpChinese-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -334,6 +467,7 @@
 				6ACC53E80CCF872200E2307C /* OVLoader.bundle */,
 				6ACC556A0CCF8AE800E2307C /* OpenVanilla-0.8.bundle */,
 				6A93BA730CCF973500BF99B9 /* OpenVanilla-0.8-smTradChinese.bundle */,
+				6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smSimpChinese.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -410,11 +544,9 @@
 		6ACC51D80CCF824900E2307C /* Text Service Component */ = {
 			isa = PBXGroup;
 			children = (
-				6ACC557D0CCF8BC900E2307C /* InfoPlist.strings */,
+				6A77AA7E0CCFA99400203045 /* Resources */,
 				6ACC51D90CCF826700E2307C /* ATSComponent.c */,
 				6ACC51DA0CCF826700E2307C /* ATSComponent.h */,
-				6ACC51DB0CCF826700E2307C /* ATSComponent.r */,
-				6ACC51DF0CCF826700E2307C /* OpenVanilla.icns */,
 			);
 			name = "Text Service Component";
 			sourceTree = "<group>";
@@ -431,17 +563,12 @@
 		6ACC52190CCF834300E2307C /* OVPreferences */ = {
 			isa = PBXGroup;
 			children = (
-				6ACC52380CCF839200E2307C /* InfoPlist.strings */,
-				6ACC522A0CCF836E00E2307C /* Localizable.strings */,
-				6ACC522C0CCF836E00E2307C /* MainMenu.nib */,
-				6ACC522E0CCF836E00E2307C /* ServicesMenu.strings */,
-				6ACC521C0CCF835700E2307C /* WindowBackground.jpg */,
+				6A77AA7D0CCFA97B00203045 /* Resources */,
 				6ACC521D0CCF835700E2307C /* CVPreviewView.h */,
 				6ACC521E0CCF835700E2307C /* CVPreviewView.mm */,
 				6ACC521F0CCF835700E2307C /* main.m */,
 				6ACC52200CCF835700E2307C /* OVPrefDelegate.h */,
 				6ACC52210CCF835700E2307C /* OVPrefDelegate.mm */,
-				6ACC52220CCF835700E2307C /* OVPreferences.icns */,
 			);
 			name = OVPreferences;
 			sourceTree = "<group>";
@@ -449,12 +576,8 @@
 		6ACC53740CCF85E200E2307C /* OVDisplayServer */ = {
 			isa = PBXGroup;
 			children = (
-				6ACC53CA0CCF86A700E2307C /* InfoPlist.strings */,
-				6ACC53CC0CCF86A700E2307C /* MainMenu.nib */,
-				6ACC53BF0CCF869900E2307C /* DisplayServer.icns */,
+				6A77AA7C0CCFA96500203045 /* Resources */,
 				6ACC53C00CCF869900E2307C /* main.m */,
-				6ACC53C10CCF869900E2307C /* OpenVanilla.icns */,
-				6ACC53C20CCF869900E2307C /* OVDisplayServer.sdef */,
 				6ACC53C30CCF869900E2307C /* CVDisplayServerController.h */,
 				6ACC53C40CCF869900E2307C /* CVDisplayServerController.m */,
 			);
@@ -464,9 +587,7 @@
 		6ACC53F80CCF87E100E2307C /* OVLoader */ = {
 			isa = PBXGroup;
 			children = (
-				6ACC54230CCF892300E2307C /* InfoPlist.strings */,
-				6ACC54250CCF892300E2307C /* Localizable.strings */,
-				6ACC54210CCF888700E2307C /* org.openvanilla.OVLoader.DefaultSettings.plist */,
+				6A77AA7B0CCFA95C00203045 /* Resources */,
 			);
 			name = OVLoader;
 			sourceTree = "<group>";
@@ -507,6 +628,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		6A77AA380CCFA83900203045 /* OpenVanilla (smSimpChinese) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A77AA420CCFA83900203045 /* Build configuration list for PBXNativeTarget "OpenVanilla (smSimpChinese)" */;
+			buildPhases = (
+				6A77AA390CCFA83900203045 /* Resources */,
+				6A77AA3C0CCFA83900203045 /* Sources */,
+				6A77AA3E0CCFA83900203045 /* Frameworks */,
+				6A77AA400CCFA83900203045 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenVanilla (smSimpChinese)";
+			productName = OpenVanilla;
+			productReference = 6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smSimpChinese.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		6A93BA660CCF973500BF99B9 /* OpenVanilla (smTradChinese) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A93BA700CCF973500BF99B9 /* Build configuration list for PBXNativeTarget "OpenVanilla (smTradChinese)" */;
@@ -597,9 +736,9 @@
 			productReference = 6ACC53E80CCF872200E2307C /* OVLoader.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		6ACC55690CCF8AE800E2307C /* OpenVanilla */ = {
+		6ACC55690CCF8AE800E2307C /* OpenVanilla (Unicode Script) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6ACC556E0CCF8AE800E2307C /* Build configuration list for PBXNativeTarget "OpenVanilla" */;
+			buildConfigurationList = 6ACC556E0CCF8AE800E2307C /* Build configuration list for PBXNativeTarget "OpenVanilla (Unicode Script)" */;
 			buildPhases = (
 				6ACC55660CCF8AE800E2307C /* Resources */,
 				6ACC55670CCF8AE800E2307C /* Sources */,
@@ -610,7 +749,7 @@
 			);
 			dependencies = (
 			);
-			name = OpenVanilla;
+			name = "OpenVanilla (Unicode Script)";
 			productName = OpenVanilla;
 			productReference = 6ACC556A0CCF8AE800E2307C /* OpenVanilla-0.8.bundle */;
 			productType = "com.apple.product-type.bundle";
@@ -637,17 +776,28 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				6A77AA540CCFA89200203045 /* OpenVanilla Loader */,
 				6ACC51660CCF7F7700E2307C /* CocoaVanilla */,
 				6ACC51F50CCF82C000E2307C /* OVPreferences */,
 				6ACC537B0CCF863100E2307C /* OVDisplayServer */,
 				6ACC53E70CCF872200E2307C /* OVLoader */,
-				6ACC55690CCF8AE800E2307C /* OpenVanilla */,
+				6ACC55690CCF8AE800E2307C /* OpenVanilla (Unicode Script) */,
 				6A93BA660CCF973500BF99B9 /* OpenVanilla (smTradChinese) */,
+				6A77AA380CCFA83900203045 /* OpenVanilla (smSimpChinese) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6A77AA390CCFA83900203045 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A77AA3A0CCFA83900203045 /* OpenVanilla.icns in Resources */,
+				6A77AA3B0CCFA83900203045 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6A93BA670CCF973500BF99B9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -711,6 +861,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXRezBuildPhase section */
+		6A77AA400CCFA83900203045 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A77AA410CCFA83900203045 /* ATSComponent.r in Rez */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6A93BA6E0CCF973500BF99B9 /* Rez */ = {
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
@@ -730,6 +888,14 @@
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6A77AA3C0CCFA83900203045 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A77AA3D0CCFA83900203045 /* ATSComponent.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6A93BA6A0CCF973500BF99B9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -817,6 +983,44 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6A77AA690CCFA8F600203045 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6ACC51660CCF7F7700E2307C /* CocoaVanilla */;
+			targetProxy = 6A77AA680CCFA8F600203045 /* PBXContainerItemProxy */;
+		};
+		6A77AA6B0CCFA8FB00203045 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6ACC51F50CCF82C000E2307C /* OVPreferences */;
+			targetProxy = 6A77AA6A0CCFA8FB00203045 /* PBXContainerItemProxy */;
+		};
+		6A77AA6D0CCFA8FB00203045 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6ACC537B0CCF863100E2307C /* OVDisplayServer */;
+			targetProxy = 6A77AA6C0CCFA8FB00203045 /* PBXContainerItemProxy */;
+		};
+		6A77AA6F0CCFA8FB00203045 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6ACC53E70CCF872200E2307C /* OVLoader */;
+			targetProxy = 6A77AA6E0CCFA8FB00203045 /* PBXContainerItemProxy */;
+		};
+		6A77AA710CCFA8FB00203045 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6ACC55690CCF8AE800E2307C /* OpenVanilla (Unicode Script) */;
+			targetProxy = 6A77AA700CCFA8FB00203045 /* PBXContainerItemProxy */;
+		};
+		6A77AA730CCFA8FB00203045 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A93BA660CCF973500BF99B9 /* OpenVanilla (smTradChinese) */;
+			targetProxy = 6A77AA720CCFA8FB00203045 /* PBXContainerItemProxy */;
+		};
+		6A77AA750CCFA8FB00203045 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A77AA380CCFA83900203045 /* OpenVanilla (smSimpChinese) */;
+			targetProxy = 6A77AA740CCFA8FB00203045 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6ACC522A0CCF836E00E2307C /* Localizable.strings */ = {
@@ -912,6 +1116,83 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6A77AA430CCFA83900203045 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					"$(NATIVE_ARCH_32_BIT)",
+					"$(NATIVE_ARCH_64_BIT)",
+				);
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_PREPROCESSOR_DEFINITIONS = ATSC_TRADITIONAL_CHINESE;
+				INFOPLIST_FILE = "TextServiceComponent/OpenVanilla-smSimpChinese-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
+				PREBINDING = NO;
+				PRODUCT_NAME = "OpenVanilla-0.8-smTradChinese";
+				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_TRADITIONAL_CHINESE=1";
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		6A77AA440CCFA83900203045 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_PREPROCESSOR_DEFINITIONS = ATSC_SIMPLIFIED_CHINESE;
+				INFOPLIST_FILE = "TextServiceComponent/OpenVanilla-smSimpChinese-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
+				PREBINDING = NO;
+				PRODUCT_NAME = "OpenVanilla-0.8-smSimpChinese";
+				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_SIMPLIFIED_CHINESE=1";
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		6A77AA550CCFA89300203045 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "OpenVanilla Loader";
+			};
+			name = Debug;
+		};
+		6A77AA560CCFA89300203045 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = "OpenVanilla Loader";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		6A93BA710CCF973500BF99B9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -952,7 +1233,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_PREPROCESSOR_DEFINITIONS = ATSC_TRADITIONAL_CHINESE;
-				INFOPLIST_FILE = "/Users/lukhnos/codex/openvanilla/trunk/Loaders/OSX-New/TextServiceComponent/OpenVanilla-Info copy.plist";
+				INFOPLIST_FILE = "TextServiceComponent/OpenVanilla-smTradChinese-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1244,6 +1525,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6A77AA420CCFA83900203045 /* Build configuration list for PBXNativeTarget "OpenVanilla (smSimpChinese)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A77AA430CCFA83900203045 /* Debug */,
+				6A77AA440CCFA83900203045 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A77AA570CCFA8C200203045 /* Build configuration list for PBXAggregateTarget "OpenVanilla Loader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A77AA550CCFA89300203045 /* Debug */,
+				6A77AA560CCFA89300203045 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6A93BA700CCF973500BF99B9 /* Build configuration list for PBXNativeTarget "OpenVanilla (smTradChinese)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1298,7 +1597,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6ACC556E0CCF8AE800E2307C /* Build configuration list for PBXNativeTarget "OpenVanilla" */ = {
+		6ACC556E0CCF8AE800E2307C /* Build configuration list for PBXNativeTarget "OpenVanilla (Unicode Script)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6ACC556C0CCF8AE800E2307C /* Debug */,
