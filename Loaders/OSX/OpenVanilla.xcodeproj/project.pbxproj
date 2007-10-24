@@ -175,14 +175,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6ACC537B0CCF863100E2307C /* OVDisplayServer */;
+			remoteGlobalIDString = 6ACC537B0CCF863100E2307C;
 			remoteInfo = OVDisplayServer;
 		};
 		D404064E0CCFACE400AD5D83 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6ACC51F50CCF82C000E2307C /* OVPreferences */;
+			remoteGlobalIDString = 6ACC51F50CCF82C000E2307C;
 			remoteInfo = OVPreferences;
 		};
 /* End PBXContainerItemProxy section */
@@ -276,7 +276,7 @@
 		6ACC51DF0CCF826700E2307C /* OpenVanilla.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanilla.icns; path = TextServiceComponent/OpenVanilla.icns; sourceTree = "<group>"; };
 		6ACC51E80CCF829700E2307C /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		6ACC51E90CCF829700E2307C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		6ACC51F60CCF82C000E2307C /* OVPreferences.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6ACC51F60CCF82C000E2307C /* OVPreferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACC51F80CCF82C000E2307C /* OVPreferences-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OVPreferences-Info.plist"; path = "OVPreferences/OVPreferences-Info.plist"; sourceTree = "<group>"; };
 		6ACC521C0CCF835700E2307C /* WindowBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = WindowBackground.jpg; path = OVPreferences/WindowBackground.jpg; sourceTree = "<group>"; };
 		6ACC521D0CCF835700E2307C /* CVPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVPreviewView.h; path = OVPreferences/CVPreviewView.h; sourceTree = "<group>"; };
