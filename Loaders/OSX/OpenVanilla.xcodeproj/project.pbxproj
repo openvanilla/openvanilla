@@ -14,12 +14,12 @@
 			);
 			dependencies = (
 				6A77AA690CCFA8F600203045 /* PBXTargetDependency */,
-				6A77AA6B0CCFA8FB00203045 /* PBXTargetDependency */,
-				6A77AA6D0CCFA8FB00203045 /* PBXTargetDependency */,
 				6A77AA6F0CCFA8FB00203045 /* PBXTargetDependency */,
 				6A77AA710CCFA8FB00203045 /* PBXTargetDependency */,
 				6A77AA730CCFA8FB00203045 /* PBXTargetDependency */,
 				6A77AA750CCFA8FB00203045 /* PBXTargetDependency */,
+				D404064F0CCFACE400AD5D83 /* PBXTargetDependency */,
+				D404064D0CCFACE400AD5D83 /* PBXTargetDependency */,
 			);
 			name = "OpenVanilla Loader";
 			productName = "OpenVanilla Loader";
@@ -143,20 +143,6 @@
 			remoteGlobalIDString = 6ACC51660CCF7F7700E2307C;
 			remoteInfo = CocoaVanilla;
 		};
-		6A77AA6A0CCFA8FB00203045 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6ACC51F50CCF82C000E2307C;
-			remoteInfo = OVPreferences;
-		};
-		6A77AA6C0CCFA8FB00203045 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6ACC537B0CCF863100E2307C;
-			remoteInfo = OVDisplayServer;
-		};
 		6A77AA6E0CCFA8FB00203045 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
@@ -184,6 +170,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6A77AA380CCFA83900203045;
 			remoteInfo = "OpenVanilla (smSimpChinese)";
+		};
+		D404064C0CCFACE400AD5D83 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6ACC537B0CCF863100E2307C /* OVDisplayServer */;
+			remoteInfo = OVDisplayServer;
+		};
+		D404064E0CCFACE400AD5D83 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6ACC51F50CCF82C000E2307C /* OVPreferences */;
+			remoteInfo = OVPreferences;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -221,9 +221,9 @@
 
 /* Begin PBXFileReference section */
 		6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smSimpChinese.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-0.8-smSimpChinese.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A77AA490CCFA83900203045 /* OpenVanilla-smSimpChinese-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-smSimpChinese-Info.plist"; path = "TextServiceComponent/OpenVanilla-smSimpChinese-Info.plist"; sourceTree = "<group>"; };
+		6A77AA490CCFA83900203045 /* OpenVanilla-smSimpChinese-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OpenVanilla-smSimpChinese-Info.plist"; path = "TextServiceComponent/OpenVanilla-smSimpChinese-Info.plist"; sourceTree = "<group>"; };
 		6A93BA730CCF973500BF99B9 /* OpenVanilla-0.8-smTradChinese.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-0.8-smTradChinese.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A93BA750CCF973500BF99B9 /* OpenVanilla-smTradChinese-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-smTradChinese-Info.plist"; path = "TextServiceComponent/OpenVanilla-smTradChinese-Info.plist"; sourceTree = "<group>"; };
+		6A93BA750CCF973500BF99B9 /* OpenVanilla-smTradChinese-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OpenVanilla-smTradChinese-Info.plist"; path = "TextServiceComponent/OpenVanilla-smTradChinese-Info.plist"; sourceTree = "<group>"; };
 		6ACC51670CCF7F7700E2307C /* CocoaVanilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaVanilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACC51680CCF7F7700E2307C /* CocoaVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "CocoaVanilla-Info.plist"; path = "CocoaVanilla/CocoaVanilla-Info.plist"; sourceTree = "<group>"; };
 		6ACC516D0CCF7FCE00E2307C /* CocoaVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocoaVanilla.h; path = CocoaVanilla/CocoaVanilla.h; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 		6ACC51DF0CCF826700E2307C /* OpenVanilla.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanilla.icns; path = TextServiceComponent/OpenVanilla.icns; sourceTree = "<group>"; };
 		6ACC51E80CCF829700E2307C /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		6ACC51E90CCF829700E2307C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		6ACC51F60CCF82C000E2307C /* OVPreferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6ACC51F60CCF82C000E2307C /* OVPreferences.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACC51F80CCF82C000E2307C /* OVPreferences-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OVPreferences-Info.plist"; path = "OVPreferences/OVPreferences-Info.plist"; sourceTree = "<group>"; };
 		6ACC521C0CCF835700E2307C /* WindowBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = WindowBackground.jpg; path = OVPreferences/WindowBackground.jpg; sourceTree = "<group>"; };
 		6ACC521D0CCF835700E2307C /* CVPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVPreviewView.h; path = OVPreferences/CVPreviewView.h; sourceTree = "<group>"; };
@@ -990,16 +990,6 @@
 			target = 6ACC51660CCF7F7700E2307C /* CocoaVanilla */;
 			targetProxy = 6A77AA680CCFA8F600203045 /* PBXContainerItemProxy */;
 		};
-		6A77AA6B0CCFA8FB00203045 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6ACC51F50CCF82C000E2307C /* OVPreferences */;
-			targetProxy = 6A77AA6A0CCFA8FB00203045 /* PBXContainerItemProxy */;
-		};
-		6A77AA6D0CCFA8FB00203045 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6ACC537B0CCF863100E2307C /* OVDisplayServer */;
-			targetProxy = 6A77AA6C0CCFA8FB00203045 /* PBXContainerItemProxy */;
-		};
 		6A77AA6F0CCFA8FB00203045 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6ACC53E70CCF872200E2307C /* OVLoader */;
@@ -1019,6 +1009,16 @@
 			isa = PBXTargetDependency;
 			target = 6A77AA380CCFA83900203045 /* OpenVanilla (smSimpChinese) */;
 			targetProxy = 6A77AA740CCFA8FB00203045 /* PBXContainerItemProxy */;
+		};
+		D404064D0CCFACE400AD5D83 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6ACC537B0CCF863100E2307C /* OVDisplayServer */;
+			targetProxy = D404064C0CCFACE400AD5D83 /* PBXContainerItemProxy */;
+		};
+		D404064F0CCFACE400AD5D83 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6ACC51F50CCF82C000E2307C /* OVPreferences */;
+			targetProxy = D404064E0CCFACE400AD5D83 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1359,7 +1359,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVPreferences/OVPreferences-Info.plist";
-				INSTALL_PATH = "$(HOME)/Applications";
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Loader;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1408,7 +1408,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVDisplayServer/OVDisplayServer-Info.plist";
-				INSTALL_PATH = "$(HOME)/Applications";
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Loader;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1457,7 +1457,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "OVLoader/OVLoader-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Loader;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1508,7 +1508,7 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				INFOPLIST_FILE = "TextServiceComponent/OpenVanilla-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				INSTALL_PATH = /Library/Components;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Carbon,
