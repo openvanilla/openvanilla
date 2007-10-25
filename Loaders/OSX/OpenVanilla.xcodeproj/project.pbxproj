@@ -1156,7 +1156,7 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_PREPROCESSOR_DEFINITIONS = ATSC_SIMPLIFIED_CHINESE;
 				INFOPLIST_FILE = "TextServiceComponent/OpenVanilla-smSimpChinese-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				INSTALL_PATH = /Library/Components;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Carbon,
@@ -1233,7 +1233,7 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_PREPROCESSOR_DEFINITIONS = ATSC_TRADITIONAL_CHINESE;
 				INFOPLIST_FILE = "TextServiceComponent/OpenVanilla-smTradChinese-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				INSTALL_PATH = /Library/Components;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Carbon,
@@ -1319,6 +1319,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = CocoaVanilla;
+				SKIP_INSTALL = YES;
 				ZERO_LINK = NO;
 			};
 			name = Release;
