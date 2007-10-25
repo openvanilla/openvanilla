@@ -133,8 +133,6 @@
 		6ACC557A0CCF8B9B00E2307C /* ATSComponent.c in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC51D90CCF826700E2307C /* ATSComponent.c */; };
 		6ACC557B0CCF8BA000E2307C /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ACC51E80CCF829700E2307C /* Carbon.framework */; };
 		6ACC557F0CCF8BC900E2307C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ACC557D0CCF8BC900E2307C /* InfoPlist.strings */; };
-		D40406FB0CCFB83B00AD5D83 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40406FA0CCFB83B00AD5D83 /* Sparkle.framework */; };
-		D40407000CCFB92200AD5D83 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D40406FA0CCFB83B00AD5D83 /* Sparkle.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,7 +214,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				6ACC539D0CCF865A00E2307C /* CocoaVanilla.framework in CopyFiles */,
-				D40407000CCFB92200AD5D83 /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +325,6 @@
 		6ACC557E0CCF8BC900E2307C /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = TextServiceComponent/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6ACC55800CCF8BCD00E2307C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = TextServiceComponent/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6ACC55810CCF8BCF00E2307C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = TextServiceComponent/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D40406FA0CCFB83B00AD5D83 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = OVDisplayServer/Sparkle.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -374,7 +370,6 @@
 				6ACC53DA0CCF86E400E2307C /* Carbon.framework in Frameworks */,
 				6ACC53DB0CCF86E400E2307C /* Cocoa.framework in Frameworks */,
 				6ACC53B80CCF866100E2307C /* CocoaVanilla.framework in Frameworks */,
-				D40406FB0CCFB83B00AD5D83 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,7 +554,6 @@
 		6ACC51E70CCF828B00E2307C /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D40406FA0CCFB83B00AD5D83 /* Sparkle.framework */,
 				6ACC51E80CCF829700E2307C /* Carbon.framework */,
 				6ACC51E90CCF829700E2307C /* Cocoa.framework */,
 			);
