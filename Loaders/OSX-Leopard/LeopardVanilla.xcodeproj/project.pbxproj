@@ -331,7 +331,7 @@
 				GCC_PREFIX_HEADER = LeopardVanilla_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = USE_MAIN_BUNDLE;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
+				INSTALL_PATH = "/Library/Input Methods";
 				PRODUCT_NAME = OpenVanilla;
 				WRAPPER_EXTENSION = app;
 			};
