@@ -564,10 +564,7 @@
     [[[loader config] dictionary] addEntriesFromDictionary:config];
     [[loader config] sync];
 	
-	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:@"tell application \"LeopardVanilla\" to quit"] autorelease];
-	NSDictionary *errorInfo;
-	[script executeAndReturnError:&errorInfo];
-	[script executeAndReturnError:&errorInfo];
+	system("killall LeopardVanilla");
 }
 - (NSString*)shortenedFilename:(NSString*)f maxLength:(int)m {
     NSString *display=f;
