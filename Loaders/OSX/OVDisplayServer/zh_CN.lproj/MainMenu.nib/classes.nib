@@ -1,30 +1,60 @@
-{
-    IBClasses = (
-        {CLASS = CVBubbleTextView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
-        {
-            CLASS = CVBubbleTextWindow; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {"_textView" = id; }; 
-            SUPERCLASS = NSWindow; 
-        }, 
-        {
-            ACTIONS = {textButtion2Action = id; textButton1Action = id; updateTextAction = id; }; 
-            CLASS = CVDisplayServerController; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {
-                "_aboutWindow" = id; 
-                "_candidateWindow" = id; 
-                "_notificationWindow" = id; 
-                "_userText" = id; 
-            }; 
-            SUPERCLASS = NSWindowController; 
-        }, 
-        {
-            ACTIONS = {checkForUpdates = id; }; 
-            CLASS = SUUpdater; 
-            LANGUAGE = ObjC; 
-            SUPERCLASS = NSObject; 
-        }
-    ); 
-    IBVersion = 1; 
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IBClasses</key>
+	<array>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>textButtion2Action</key>
+				<string>id</string>
+				<key>textButton1Action</key>
+				<string>id</string>
+				<key>updateTextAction</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>CVDisplayServerController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>_aboutWindow</key>
+				<string>id</string>
+				<key>_candidateWindow</key>
+				<string>id</string>
+				<key>_notificationWindow</key>
+				<string>id</string>
+				<key>_userText</key>
+				<string>id</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSWindowController</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>CVBubbleTextView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>CVBubbleTextWindow</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>_textView</key>
+				<string>id</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSWindow</string>
+		</dict>
+	</array>
+	<key>IBVersion</key>
+	<string>1</string>
+</dict>
+</plist>

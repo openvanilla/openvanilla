@@ -28,13 +28,9 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>SUFeedURL</key>
-	<string>http://openvanilla.org/openvanilla.xml</string>
 	<key>OSAScriptingDefinition</key>
 	<string>OVDisplayServer.sdef</string>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
-	<key>SUCheckAtStartup</key>
-	<false/>
 </dict>
 </plist>
