@@ -1,5 +1,0 @@
-//
-// Prefix header for all source files of the 'OVIMTibetan' target in the 'OVIMTibetan' project.
-//
-
-#include <Carbon/Carbon.h>

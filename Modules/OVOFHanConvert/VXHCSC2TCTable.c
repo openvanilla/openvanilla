@@ -1,7 +1,7 @@
 /* VXHCSC2TCTable.c: Simplified Chinese -> Traditional Chinese conv. table
  * (VX is abbr. for Vanilla OS X, a legacy from OpenVanilla 0.6.x)
  *
- * Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
+ * Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without

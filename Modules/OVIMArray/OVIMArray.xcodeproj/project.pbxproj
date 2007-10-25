@@ -218,7 +218,7 @@
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = OSX_INCLUDE;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules;
 				PRODUCT_NAME = OVIMArray;
 				WRAPPER_EXTENSION = bundle;
 			};

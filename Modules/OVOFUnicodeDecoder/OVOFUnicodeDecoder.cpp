@@ -1,5 +1,5 @@
 // OVOFUnicodeDecoder.cpp: Decodes Unicode
-// 2004-2006 By Weizhong Yang
+// 2004-2007 By Weizhong Yang
 //
 // This program is Zonble-ware and adopts Zonble's License
 // -- "How could a person who doesn't even believe in law adopt any license?"

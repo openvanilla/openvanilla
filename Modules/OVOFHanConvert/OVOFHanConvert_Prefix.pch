@@ -1,5 +1,0 @@
-//
-// Prefix header for all source files of the 'OVOFHanConvert' target in the 'OVOFHanConvert' project.
-//
-
-#include <Carbon/Carbon.h>

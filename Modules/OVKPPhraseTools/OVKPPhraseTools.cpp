@@ -39,7 +39,7 @@ bool PTDBErrMsg(const char *m, SQLite3 *db, bool returnValue=false);
 bool PTDBErrMsg(OVService *s, const char *m, SQLite3 *db, bool
     returnValue=false);
 void PTRecordingMessage(const string& rstr, OVService *s);
-void PTModeOnMsg(OVService *s);
+void PTModeOnMsg(OVService *s, const string& rstr);
 string PTTime();
 
 OVKPPhraseToolsContext::OVKPPhraseToolsContext(OVKPPhraseTools *p) {
@@ -99,7 +99,7 @@ int OVKPPhraseToolsContext::keyEvent(OVKeyCode *pk, OVBuffer *pb,
     
     if (b->isEmpty() && k->code()==parent->actkey && !k->isFunctionKey()) {
         state=PTS_MODE_ACTIVATED;
-        PTModeOnMsg(s);
+        PTModeOnMsg(s, parent->recSeq.compose());
         return true;
     }
     
@@ -146,10 +146,11 @@ s->notify(PTMsg(s, "Start text recording", "進入記錄模式", "进入记录�
 
 bool OVKPPhraseToolsContext::state_command() {
     // now we have something in the buffer, ban all function keys
+	string v=parent->recSeq.compose();
     if (k->isFunctionKey()) {
         b->update();
         s->beep();
-        PTModeOnMsg(s);
+        PTModeOnMsg(s, v);
         return true;
     }
     
@@ -159,7 +160,7 @@ bool OVKPPhraseToolsContext::state_command() {
             clearBufCandi();
             return cancelmsg(PTS_WAIT, true);
         }
-        PTModeOnMsg(s);
+        PTModeOnMsg(s, v);
         return composeAndUpdateBuffer();
     }
     
@@ -178,7 +179,7 @@ bool OVKPPhraseToolsContext::state_command() {
     
     if (isprint(k->code())) {
         keyseq.add(string(1, k->code()));
-        PTModeOnMsg(s);
+        PTModeOnMsg(s, v);
         return composeAndUpdateBuffer();
     }
     
@@ -221,7 +222,7 @@ bool OVKPPhraseToolsContext::state_candidate() {
     b->clear()->append(sel.c_str())->send();
     clearBufCandi();
     
-    string msg(PTMsg(s, "Sent phrase: ", "送出詞彙：", "送出词汇："));
+    string msg(PTMsg(s, "Sent phrase: ", "送出詞彙：", "送出词汇："));
     msg += sel;
     s->notify(msg.c_str());
     
@@ -456,8 +457,13 @@ const char *PTMsg(OVService *s, const char *en, const char *tw, const char *cn)
     return PTMsg(s->locale(), en, tw, cn);
 }
 
-void PTModeOnMsg(OVService *s) {
-    s->notify(PTMsg(s, "Phrase management mode", "詞彙管理工具", "词汇管理工具"));
+void PTModeOnMsg(OVService *s, const string& rstr) {	
+	string msgString = PTMsg(s, "Phrase management mode", "詞彙管理工具", "词汇管理工具");
+	if(rstr.length() > 0) {
+		msgString += PTMsg(s, ". Current phrase: ", "，目前詞彙: ", "，当前词汇: ");
+		msgString += rstr;
+	}	
+	s->notify(msgString.c_str());
 }
 
 void PTRecordingMessage(const string& rstr, OVService *s) {

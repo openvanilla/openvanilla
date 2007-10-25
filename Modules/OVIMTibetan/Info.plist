@@ -17,6 +17,6 @@
 	<key>CFBundleSignature</key>
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>0.8.0</string>
 </dict>
 </plist>

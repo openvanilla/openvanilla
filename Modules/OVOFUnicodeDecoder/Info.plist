@@ -5,9 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>OVOFMorseCode</string>
+	<string>OVOFUnicodeDecoder</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.ovofmorsecode</string>
+	<string>org.openvanilla.ovofunicodedecoder</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>

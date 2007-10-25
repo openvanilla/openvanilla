@@ -1,5 +1,5 @@
 // OVIMBig5.cpp: Big-5 Code Input Method
-// 2005-2006 By Weizhong Yang
+// 2005-2007 By Weizhong Yang
 //
 // This program is Zonble-ware and adopts Zonble's License
 // -- "How could a person who doesn't even believe in law adopt any license?"

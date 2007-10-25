@@ -31,6 +31,7 @@
 MODULEID=OVKPPhraseTools
 SOURCES=OVKPPhraseTools OVCandidateList
 LDFLAGS+=-lsqlite3
+PROJECT=OVKPPhraseTools.xcodeproj
 
 include ../Mk/ov.module.mk
 

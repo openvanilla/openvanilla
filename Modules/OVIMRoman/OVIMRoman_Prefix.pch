@@ -1,5 +1,0 @@
-//
-// Prefix header for all source files of the 'OVIMRoman' target in the 'OVIMRoman' project.
-//
-
-#include <Carbon/Carbon.h>

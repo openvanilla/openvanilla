@@ -20,8 +20,13 @@
 				D4E56FC50CCFDCC800B8C28A /* PBXTargetDependency */,
 				D4E56FC30CCFDCC800B8C28A /* PBXTargetDependency */,
 				D4E570070CCFDE3F00B8C28A /* PBXTargetDependency */,
+				D4BB14F60CD0761F0037EDBE /* PBXTargetDependency */,
 				D4E5703C0CCFE06300B8C28A /* PBXTargetDependency */,
 				D4BB13850CD04F060037EDBE /* PBXTargetDependency */,
+				D4BB149A0CD058390037EDBE /* PBXTargetDependency */,
+				D4BB151B0CD077280037EDBE /* PBXTargetDependency */,
+				D4FE48350CD0861D008585D2 /* PBXTargetDependency */,
+				D4FE484C0CD086D8008585D2 /* PBXTargetDependency */,
 			);
 			name = Modules;
 			productName = Modules;
@@ -35,6 +40,10 @@
 		D43420500C9EEB0400D5EE58 /* OVFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D434204C0C9EEB0400D5EE58 /* OVFileHandler.cpp */; };
 		D43420510C9EEB0400D5EE58 /* OVStringToolKit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D434204D0C9EEB0400D5EE58 /* OVStringToolKit.cpp */; };
 		D4BB13830CD04EF20037EDBE /* OVOFFullWidthCharacter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4BB13820CD04EF20037EDBE /* OVOFFullWidthCharacter.cpp */; };
+		D4BB148B0CD057D10037EDBE /* OVOFSmartQuotations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4BB148A0CD057D10037EDBE /* OVOFSmartQuotations.cpp */; };
+		D4BB14F20CD075C80037EDBE /* OVOFHTMLCharEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4BB14F10CD075C80037EDBE /* OVOFHTMLCharEntity.cpp */; };
+		D4BB15190CD077190037EDBE /* OVOFUnicodeDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4BB15180CD077190037EDBE /* OVOFUnicodeDecoder.cpp */; };
+		D4BB15550CD079C90037EDBE /* OVOFMorseCode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E56FF40CCFDDF300B8C28A /* OVOFMorseCode.cpp */; };
 		D4C2FEB00C9EE5FB00343D93 /* OVIMArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4C2FEAE0C9EE5FB00343D93 /* OVIMArray.cpp */; };
 		D4C2FEB50C9EE61000343D93 /* array-shortcode.cin in Resources */ = {isa = PBXBuildFile; fileRef = D4C2FEB20C9EE61000343D93 /* array-shortcode.cin */; };
 		D4C2FEB60C9EE61000343D93 /* array-special.cin in Resources */ = {isa = PBXBuildFile; fileRef = D4C2FEB30C9EE61000343D93 /* array-special.cin */; };
@@ -48,6 +57,10 @@
 		D4E56FAA0CCFDC2900B8C28A /* OVIMTibetan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E56FA80CCFDC2900B8C28A /* OVIMTibetan.cpp */; };
 		D4E56FEF0CCFDD9700B8C28A /* VXHCSC2TCTable.c in Sources */ = {isa = PBXBuildFile; fileRef = D4E56FED0CCFDD9700B8C28A /* VXHCSC2TCTable.c */; };
 		D4E56FF00CCFDD9700B8C28A /* VXHCTC2SCTable.c in Sources */ = {isa = PBXBuildFile; fileRef = D4E56FEE0CCFDD9700B8C28A /* VXHCTC2SCTable.c */; };
+		D4FE47C60CD08486008585D2 /* OVIMUnicode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4FE47C50CD08486008585D2 /* OVIMUnicode.cpp */; };
+		D4FE47F30CD084BC008585D2 /* OVOFHanConvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4FE47F20CD084BC008585D2 /* OVOFHanConvert.cpp */; };
+		D4FE482C0CD085E6008585D2 /* OVOFWuzhetien.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4FE482B0CD085E6008585D2 /* OVOFWuzhetien.cpp */; };
+		D4FE48460CD0869B008585D2 /* OVOFZhWikipidealize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4FE48450CD0869B008585D2 /* OVOFZhWikipidealize.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,8 +68,29 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D4BB13730CD04E960037EDBE /* OVOFFullWidthCharacter */;
+			remoteGlobalIDString = D4BB13730CD04E960037EDBE;
 			remoteInfo = OVOFFullWidthCharacter;
+		};
+		D4BB14990CD058390037EDBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4BB14840CD057B30037EDBE;
+			remoteInfo = OVOFSmartQuotations;
+		};
+		D4BB14F50CD0761F0037EDBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4BB14E10CD0759A0037EDBE;
+			remoteInfo = OVOFHTMLCharEntity;
+		};
+		D4BB151A0CD077280037EDBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4BB150C0CD076E00037EDBE;
+			remoteInfo = OVOFUnicodeDecoder;
 		};
 		D4E56F680CCFDA7000B8C28A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -114,6 +148,20 @@
 			remoteGlobalIDString = D4E570280CCFE01700B8C28A;
 			remoteInfo = OVOFMorseCode;
 		};
+		D4FE48340CD0861D008585D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4FE48070CD0858D008585D2 /* OVOFWuzhetien */;
+			remoteInfo = OVOFWuzhetien;
+		};
+		D4FE484B0CD086D8008585D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4FE483B0CD08672008585D2 /* OVOFZhWikipidealize */;
+			remoteInfo = OVOFZhWikipidealize;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +177,12 @@
 		D434206A0C9EEB6900D5EE58 /* OVStringToolKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVStringToolKit.h; path = SharedHeaders/OVStringToolKit.h; sourceTree = "<group>"; };
 		D4BB13740CD04E960037EDBE /* OVOFFullWidthCharacter.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVOFFullWidthCharacter.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4BB13820CD04EF20037EDBE /* OVOFFullWidthCharacter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVOFFullWidthCharacter.cpp; path = OVOFFullWidthCharacter/OVOFFullWidthCharacter.cpp; sourceTree = "<group>"; };
+		D4BB14850CD057B30037EDBE /* OVOFSmartQuotations.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVOFSmartQuotations.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4BB148A0CD057D10037EDBE /* OVOFSmartQuotations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVOFSmartQuotations.cpp; path = OVOFSmartQuotations/OVOFSmartQuotations.cpp; sourceTree = "<group>"; };
+		D4BB14E20CD0759A0037EDBE /* OVOFHTMLCharEntity.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVOFHTMLCharEntity.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4BB14F10CD075C80037EDBE /* OVOFHTMLCharEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVOFHTMLCharEntity.cpp; path = OVOFHTMLCharEntity/OVOFHTMLCharEntity.cpp; sourceTree = "<group>"; };
+		D4BB150D0CD076E00037EDBE /* OVOFUnicodeDecoder.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVOFUnicodeDecoder.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4BB15180CD077190037EDBE /* OVOFUnicodeDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVOFUnicodeDecoder.cpp; path = OVOFUnicodeDecoder/OVOFUnicodeDecoder.cpp; sourceTree = "<group>"; };
 		D4C2FEAE0C9EE5FB00343D93 /* OVIMArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMArray.cpp; path = OVIMArray/OVIMArray.cpp; sourceTree = "<group>"; };
 		D4C2FEAF0C9EE5FB00343D93 /* OVIMArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVIMArray.h; path = OVIMArray/OVIMArray.h; sourceTree = "<group>"; };
 		D4C2FEB10C9EE60200343D93 /* ArrayKeySequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrayKeySequence.h; path = OVIMArray/ArrayKeySequence.h; sourceTree = "<group>"; };
@@ -140,7 +194,6 @@
 		D4C2FECE0C9EE7B600343D93 /* OVCINInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVCINInfo.h; path = SharedHeaders/OVCINInfo.h; sourceTree = "<group>"; };
 		D4CE77720CA90A4A000BB65D /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVWildcard.h; path = SharedHeaders/OVWildcard.h; sourceTree = "<group>"; };
 		D4E56EDE0CCFD69100B8C28A /* OVIMBig5.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMBig5.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4E56F030CCFD76200B8C28A /* OVIMBig5_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVIMBig5_Prefix.pch; path = OVIMBig5/OVIMBig5_Prefix.pch; sourceTree = "<group>"; };
 		D4E56F040CCFD76200B8C28A /* OVIMBig5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMBig5.cpp; path = OVIMBig5/OVIMBig5.cpp; sourceTree = "<group>"; };
 		D4E56F060CCFD76A00B8C28A /* Big5ToUnicodeTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Big5ToUnicodeTable.cpp; path = OVIMBig5/Big5ToUnicodeTable.cpp; sourceTree = "<group>"; };
 		D4E56F300CCFD84100B8C28A /* OVIMPhonetic_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVIMPhonetic_Prefix.pch; path = OVIMPhonetic/OVIMPhonetic_Prefix.pch; sourceTree = "<group>"; };
@@ -162,6 +215,12 @@
 		D4E56FEE0CCFDD9700B8C28A /* VXHCTC2SCTable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = VXHCTC2SCTable.c; path = OVOFHanConvert/VXHCTC2SCTable.c; sourceTree = "<group>"; };
 		D4E56FF40CCFDDF300B8C28A /* OVOFMorseCode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVOFMorseCode.cpp; path = OVOFMorseCode/OVOFMorseCode.cpp; sourceTree = "<group>"; };
 		D4E570290CCFE01700B8C28A /* OVOFMorseCode.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVOFMorseCode.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4FE47C50CD08486008585D2 /* OVIMUnicode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMUnicode.cpp; path = OVIMUnicode/OVIMUnicode.cpp; sourceTree = "<group>"; };
+		D4FE47F20CD084BC008585D2 /* OVOFHanConvert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVOFHanConvert.cpp; path = OVOFHanConvert/OVOFHanConvert.cpp; sourceTree = "<group>"; };
+		D4FE48080CD0858D008585D2 /* OVOFWuzhetien.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVOFWuzhetien.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4FE482B0CD085E6008585D2 /* OVOFWuzhetien.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVOFWuzhetien.cpp; path = OVOFWuzhetien/OVOFWuzhetien.cpp; sourceTree = "<group>"; };
+		D4FE483C0CD08672008585D2 /* OVOFZhWikipidealize.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVOFZhWikipidealize.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4FE48450CD0869B008585D2 /* OVOFZhWikipidealize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVOFZhWikipidealize.cpp; path = OVOFZhWikipidealize/OVOFZhWikipidealize.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,14 +239,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D4E56FBA0CCFDCA000B8C28A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D4E570270CCFE01700B8C28A /* Frameworks */ = {
+		D4FE483A0CD08672008585D2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -208,7 +260,12 @@
 				D4E56FB70CCFDC8900B8C28A /* OVIMUnicode */,
 				D4BB137F0CD04ED20037EDBE /* OVOFFullWidthCharacter */,
 				D4E56FE40CCFDD6F00B8C28A /* OVOFHanConvert */,
+				D4BB14EA0CD075A20037EDBE /* OVOFHTMLCharEntity */,
 				D4E56FF10CCFDDDC00B8C28A /* OVOFMorseCode */,
+				D4BB14800CD057960037EDBE /* OVOFSmartQuotations */,
+				D4BB15150CD076FC0037EDBE /* OVOFUnicodeDecoder */,
+				D4FE48030CD08575008585D2 /* OVOFWuzhetien */,
+				D4FE48430CD08688008585D2 /* OVOFZhWikipidealize */,
 				D4C2FECA0C9EE75D00343D93 /* Shared Headers */,
 				08FB77ADFE841716C02AAC07 /* Shared Source */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
@@ -260,6 +317,11 @@
 				D4E56FDC0CCFDD5A00B8C28A /* OVOFHanConvert.bundle */,
 				D4E570290CCFE01700B8C28A /* OVOFMorseCode.bundle */,
 				D4BB13740CD04E960037EDBE /* OVOFFullWidthCharacter.bundle */,
+				D4BB14850CD057B30037EDBE /* OVOFSmartQuotations.bundle */,
+				D4BB14E20CD0759A0037EDBE /* OVOFHTMLCharEntity.bundle */,
+				D4BB150D0CD076E00037EDBE /* OVOFUnicodeDecoder.bundle */,
+				D4FE48080CD0858D008585D2 /* OVOFWuzhetien.bundle */,
+				D4FE483C0CD08672008585D2 /* OVOFZhWikipidealize.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -270,6 +332,30 @@
 				D4BB13820CD04EF20037EDBE /* OVOFFullWidthCharacter.cpp */,
 			);
 			name = OVOFFullWidthCharacter;
+			sourceTree = "<group>";
+		};
+		D4BB14800CD057960037EDBE /* OVOFSmartQuotations */ = {
+			isa = PBXGroup;
+			children = (
+				D4BB148A0CD057D10037EDBE /* OVOFSmartQuotations.cpp */,
+			);
+			name = OVOFSmartQuotations;
+			sourceTree = "<group>";
+		};
+		D4BB14EA0CD075A20037EDBE /* OVOFHTMLCharEntity */ = {
+			isa = PBXGroup;
+			children = (
+				D4BB14F10CD075C80037EDBE /* OVOFHTMLCharEntity.cpp */,
+			);
+			name = OVOFHTMLCharEntity;
+			sourceTree = "<group>";
+		};
+		D4BB15150CD076FC0037EDBE /* OVOFUnicodeDecoder */ = {
+			isa = PBXGroup;
+			children = (
+				D4BB15180CD077190037EDBE /* OVOFUnicodeDecoder.cpp */,
+			);
+			name = OVOFUnicodeDecoder;
 			sourceTree = "<group>";
 		};
 		D4C2FECA0C9EE75D00343D93 /* Shared Headers */ = {
@@ -328,7 +414,6 @@
 			isa = PBXGroup;
 			children = (
 				D4E56F060CCFD76A00B8C28A /* Big5ToUnicodeTable.cpp */,
-				D4E56F030CCFD76200B8C28A /* OVIMBig5_Prefix.pch */,
 				D4E56F040CCFD76200B8C28A /* OVIMBig5.cpp */,
 			);
 			name = Source;
@@ -380,6 +465,7 @@
 		D4E56FB70CCFDC8900B8C28A /* OVIMUnicode */ = {
 			isa = PBXGroup;
 			children = (
+				D4FE47C50CD08486008585D2 /* OVIMUnicode.cpp */,
 			);
 			name = OVIMUnicode;
 			sourceTree = "<group>";
@@ -387,6 +473,7 @@
 		D4E56FE40CCFDD6F00B8C28A /* OVOFHanConvert */ = {
 			isa = PBXGroup;
 			children = (
+				D4FE47F20CD084BC008585D2 /* OVOFHanConvert.cpp */,
 				D4E56FED0CCFDD9700B8C28A /* VXHCSC2TCTable.c */,
 				D4E56FEE0CCFDD9700B8C28A /* VXHCTC2SCTable.c */,
 			);
@@ -399,6 +486,22 @@
 				D4E56FF40CCFDDF300B8C28A /* OVOFMorseCode.cpp */,
 			);
 			name = OVOFMorseCode;
+			sourceTree = "<group>";
+		};
+		D4FE48030CD08575008585D2 /* OVOFWuzhetien */ = {
+			isa = PBXGroup;
+			children = (
+				D4FE482B0CD085E6008585D2 /* OVOFWuzhetien.cpp */,
+			);
+			name = OVOFWuzhetien;
+			sourceTree = "<group>";
+		};
+		D4FE48430CD08688008585D2 /* OVOFZhWikipidealize */ = {
+			isa = PBXGroup;
+			children = (
+				D4FE48450CD0869B008585D2 /* OVOFZhWikipidealize.cpp */,
+			);
+			name = OVOFZhWikipidealize;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,6 +538,51 @@
 			name = OVOFFullWidthCharacter;
 			productName = OVOFFullWidthCharacter;
 			productReference = D4BB13740CD04E960037EDBE /* OVOFFullWidthCharacter.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D4BB14840CD057B30037EDBE /* OVOFSmartQuotations */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4BB14870CD057B40037EDBE /* Build configuration list for PBXNativeTarget "OVOFSmartQuotations" */;
+			buildPhases = (
+				D4BB14820CD057B30037EDBE /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVOFSmartQuotations;
+			productName = OVOFSmartQuotations;
+			productReference = D4BB14850CD057B30037EDBE /* OVOFSmartQuotations.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D4BB14E10CD0759A0037EDBE /* OVOFHTMLCharEntity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4BB14E40CD0759B0037EDBE /* Build configuration list for PBXNativeTarget "OVOFHTMLCharEntity" */;
+			buildPhases = (
+				D4BB14DF0CD0759A0037EDBE /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVOFHTMLCharEntity;
+			productName = OVOFHTMLCharEntity;
+			productReference = D4BB14E20CD0759A0037EDBE /* OVOFHTMLCharEntity.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D4BB150C0CD076E00037EDBE /* OVOFUnicodeDecoder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4BB150F0CD076E10037EDBE /* Build configuration list for PBXNativeTarget "OVOFUnicodeDecoder" */;
+			buildPhases = (
+				D4BB150A0CD076E00037EDBE /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVOFUnicodeDecoder;
+			productName = OVOFUnicodeDecoder;
+			productReference = D4BB150D0CD076E00037EDBE /* OVOFUnicodeDecoder.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		D4E56EDD0CCFD69100B8C28A /* OVIMBig5 */ = {
@@ -504,9 +652,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4E56FBE0CCFDCA100B8C28A /* Build configuration list for PBXNativeTarget "OVIMUnicode" */;
 			buildPhases = (
-				D4E56FB80CCFDCA000B8C28A /* Resources */,
 				D4E56FB90CCFDCA000B8C28A /* Sources */,
-				D4E56FBA0CCFDCA000B8C28A /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -536,9 +682,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4E5702B0CCFE01800B8C28A /* Build configuration list for PBXNativeTarget "OVOFMorseCode" */;
 			buildPhases = (
-				D4E570250CCFE01700B8C28A /* Resources */,
 				D4E570260CCFE01700B8C28A /* Sources */,
-				D4E570270CCFE01700B8C28A /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -547,6 +691,38 @@
 			name = OVOFMorseCode;
 			productName = OVOFMorseCode;
 			productReference = D4E570290CCFE01700B8C28A /* OVOFMorseCode.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D4FE48070CD0858D008585D2 /* OVOFWuzhetien */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4FE480A0CD0858E008585D2 /* Build configuration list for PBXNativeTarget "OVOFWuzhetien" */;
+			buildPhases = (
+				D4FE48050CD0858D008585D2 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVOFWuzhetien;
+			productName = OVOFWuzhetien;
+			productReference = D4FE48080CD0858D008585D2 /* OVOFWuzhetien.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D4FE483B0CD08672008585D2 /* OVOFZhWikipidealize */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4FE483E0CD08673008585D2 /* Build configuration list for PBXNativeTarget "OVOFZhWikipidealize" */;
+			buildPhases = (
+				D4FE48380CD08672008585D2 /* Resources */,
+				D4FE48390CD08672008585D2 /* Sources */,
+				D4FE483A0CD08672008585D2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVOFZhWikipidealize;
+			productName = OVOFZhWikipidealize;
+			productReference = D4FE483C0CD08672008585D2 /* OVOFZhWikipidealize.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -566,9 +742,14 @@
 				D4E56F870CCFDB4E00B8C28A /* OVIMRoman */,
 				D4E56F9D0CCFDC0100B8C28A /* OVIMTibetan */,
 				D4E56FBB0CCFDCA000B8C28A /* OVIMUnicode */,
+				D4BB14E10CD0759A0037EDBE /* OVOFHTMLCharEntity */,
 				D4E56FDB0CCFDD5A00B8C28A /* OVOFHanConvert */,
 				D4E570280CCFE01700B8C28A /* OVOFMorseCode */,
 				D4BB13730CD04E960037EDBE /* OVOFFullWidthCharacter */,
+				D4BB14840CD057B30037EDBE /* OVOFSmartQuotations */,
+				D4BB150C0CD076E00037EDBE /* OVOFUnicodeDecoder */,
+				D4FE48070CD0858D008585D2 /* OVOFWuzhetien */,
+				D4FE483B0CD08672008585D2 /* OVOFZhWikipidealize */,
 			);
 		};
 /* End PBXProject section */
@@ -591,14 +772,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D4E56FB80CCFDCA000B8C28A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D4E570250CCFE01700B8C28A /* Resources */ = {
+		D4FE48380CD08672008585D2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -644,6 +818,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D4BB14820CD057B30037EDBE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4BB148B0CD057D10037EDBE /* OVOFSmartQuotations.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4BB14DF0CD0759A0037EDBE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4BB14F20CD075C80037EDBE /* OVOFHTMLCharEntity.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4BB150A0CD076E00037EDBE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4BB15190CD077190037EDBE /* OVOFUnicodeDecoder.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D4E56EDB0CCFD69100B8C28A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -683,6 +881,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4FE47C60CD08486008585D2 /* OVIMUnicode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,6 +891,7 @@
 			files = (
 				D4E56FEF0CCFDD9700B8C28A /* VXHCSC2TCTable.c in Sources */,
 				D4E56FF00CCFDD9700B8C28A /* VXHCTC2SCTable.c in Sources */,
+				D4FE47F30CD084BC008585D2 /* OVOFHanConvert.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +899,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4BB15550CD079C90037EDBE /* OVOFMorseCode.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4FE48050CD0858D008585D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4FE482C0CD085E6008585D2 /* OVOFWuzhetien.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4FE48390CD08672008585D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4FE48460CD0869B008585D2 /* OVOFZhWikipidealize.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,6 +926,21 @@
 			isa = PBXTargetDependency;
 			target = D4BB13730CD04E960037EDBE /* OVOFFullWidthCharacter */;
 			targetProxy = D4BB13840CD04F060037EDBE /* PBXContainerItemProxy */;
+		};
+		D4BB149A0CD058390037EDBE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4BB14840CD057B30037EDBE /* OVOFSmartQuotations */;
+			targetProxy = D4BB14990CD058390037EDBE /* PBXContainerItemProxy */;
+		};
+		D4BB14F60CD0761F0037EDBE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4BB14E10CD0759A0037EDBE /* OVOFHTMLCharEntity */;
+			targetProxy = D4BB14F50CD0761F0037EDBE /* PBXContainerItemProxy */;
+		};
+		D4BB151B0CD077280037EDBE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4BB150C0CD076E00037EDBE /* OVOFUnicodeDecoder */;
+			targetProxy = D4BB151A0CD077280037EDBE /* PBXContainerItemProxy */;
 		};
 		D4E56F690CCFDA7000B8C28A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -749,6 +981,16 @@
 			isa = PBXTargetDependency;
 			target = D4E570280CCFE01700B8C28A /* OVOFMorseCode */;
 			targetProxy = D4E5703B0CCFE06300B8C28A /* PBXContainerItemProxy */;
+		};
+		D4FE48350CD0861D008585D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4FE48070CD0858D008585D2 /* OVOFWuzhetien */;
+			targetProxy = D4FE48340CD0861D008585D2 /* PBXContainerItemProxy */;
+		};
+		D4FE484C0CD086D8008585D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4FE483B0CD08672008585D2 /* OVOFZhWikipidealize */;
+			targetProxy = D4FE484B0CD086D8008585D2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -844,13 +1086,151 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				INFOPLIST_FILE = OVOFFullWidthCharacter/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Carbon,
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = OVOFFullWidthCharacter;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D4BB14880CD057B40037EDBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVOFSmartQuotations-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFSmartQuotations;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4BB14890CD057B40037EDBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = OVOFSmartQuotations/Info.plist;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFSmartQuotations;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D4BB14E50CD0759B0037EDBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVOFHTMLCharEntity-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFHTMLCharEntity;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4BB14E60CD0759B0037EDBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = OVOFHTMLCharEntity/Info.plist;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFHTMLCharEntity;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D4BB15100CD076E10037EDBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVOFUnicodeDecoder-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFUnicodeDecoder;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4BB15110CD076E10037EDBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = OVOFUnicodeDecoder/Info.plist;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFUnicodeDecoder;
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = NO;
 			};
@@ -1200,6 +1580,98 @@
 			};
 			name = Release;
 		};
+		D4FE480B0CD0858E008585D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVOFWuzhetien-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFWuzhetien;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4FE480C0CD0858E008585D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = OVOFWuzhetien/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFWuzhetien;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D4FE483F0CD08673008585D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVOFZhWikipidealize-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFZhWikipidealize;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4FE48400CD08673008585D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = OVOFZhWikipidealize/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFZhWikipidealize;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1226,6 +1698,33 @@
 			buildConfigurations = (
 				D4BB13780CD04E970037EDBE /* Debug */,
 				D4BB13790CD04E970037EDBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4BB14870CD057B40037EDBE /* Build configuration list for PBXNativeTarget "OVOFSmartQuotations" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4BB14880CD057B40037EDBE /* Debug */,
+				D4BB14890CD057B40037EDBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4BB14E40CD0759B0037EDBE /* Build configuration list for PBXNativeTarget "OVOFHTMLCharEntity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4BB14E50CD0759B0037EDBE /* Debug */,
+				D4BB14E60CD0759B0037EDBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4BB150F0CD076E10037EDBE /* Build configuration list for PBXNativeTarget "OVOFUnicodeDecoder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4BB15100CD076E10037EDBE /* Debug */,
+				D4BB15110CD076E10037EDBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1298,6 +1797,24 @@
 			buildConfigurations = (
 				D4E5702C0CCFE01800B8C28A /* Debug */,
 				D4E5702D0CCFE01800B8C28A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4FE480A0CD0858E008585D2 /* Build configuration list for PBXNativeTarget "OVOFWuzhetien" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4FE480B0CD0858E008585D2 /* Debug */,
+				D4FE480C0CD0858E008585D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4FE483E0CD08673008585D2 /* Build configuration list for PBXNativeTarget "OVOFZhWikipidealize" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4FE483F0CD08673008585D2 /* Debug */,
+				D4FE48400CD08673008585D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
