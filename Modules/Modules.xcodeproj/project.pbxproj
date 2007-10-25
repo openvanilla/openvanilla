@@ -152,14 +152,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D4FE48070CD0858D008585D2 /* OVOFWuzhetien */;
+			remoteGlobalIDString = D4FE48070CD0858D008585D2;
 			remoteInfo = OVOFWuzhetien;
 		};
 		D4FE484B0CD086D8008585D2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D4FE483B0CD08672008585D2 /* OVOFZhWikipidealize */;
+			remoteGlobalIDString = D4FE483B0CD08672008585D2;
 			remoteInfo = OVOFZhWikipidealize;
 		};
 /* End PBXContainerItemProxy section */
@@ -731,9 +731,11 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 4FADC23708B4156C00ABE55E /* Build configuration list for PBXProject "Modules" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* OVIMArray */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				D4E56F670CCFDA6600B8C28A /* Modules */,
 				8D01CCC60486CAD60068D4B7 /* OVIMArray */,
@@ -1045,6 +1047,10 @@
 		4FADC23908B4156C00ABE55E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
