@@ -760,7 +760,6 @@
 		6ACC512D0CCF7EC600E2307C /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 6ACC51300CCF7EC600E2307C /* Build configuration list for PBXProject "OpenVanilla" */;
-			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				English,

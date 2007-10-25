@@ -1,34 +1,24 @@
 {
-    IBClasses =     (
-                {
-            CLASS = CVBubbleTextView;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSView;
-        },
-                {
-            CLASS = CVBubbleTextWindow;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                "_textView" = id;
-            };
-            SUPERCLASS = NSWindow;
-        },
-                {
-            ACTIONS =             {
-                textButtion2Action = id;
-                textButton1Action = id;
-                updateTextAction = id;
-            };
-            CLASS = CVDisplayServerController;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                "_aboutWindow" = id;
-                "_candidateWindow" = id;
-                "_notificationWindow" = id;
-                "_userText" = id;
-            };
-            SUPERCLASS = NSWindowController;
+    IBClasses = (
+        {CLASS = CVBubbleTextView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            CLASS = CVBubbleTextWindow; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {"_textView" = id; }; 
+            SUPERCLASS = NSWindow; 
+        }, 
+        {
+            ACTIONS = {textButtion2Action = id; textButton1Action = id; updateTextAction = id; }; 
+            CLASS = CVDisplayServerController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                "_aboutWindow" = id; 
+                "_candidateWindow" = id; 
+                "_notificationWindow" = id; 
+                "_userText" = id; 
+            }; 
+            SUPERCLASS = NSWindowController; 
         }
-    );
-    IBVersion = 1;
+    ); 
+    IBVersion = 1; 
 }
