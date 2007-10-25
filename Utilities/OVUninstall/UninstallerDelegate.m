@@ -10,9 +10,10 @@
 #define LCP			"/Library/Components"
 #define OV063		"/OVLoader.bundle"
 #define OV07x		"/OVInit.bundle"
-#define OV080		"/OpenVanilla-TSComponent-0.8.0.bundle"
-#define OV080TC		"/OpenVanilla-TSComponent-0.8.0-TC.bundle"
-#define OV080SC		"/OpenVanilla-TSComponent-0.8.0-SC.bundle"
+#define LV08x		"/Library/Input Methods/LeopardVanilla.app"
+#define OV08x		"/OpenVanilla-0.8.bundle"
+#define OV08xTC		"/OpenVanilla-0.8-smTradChinese.bundle"
+#define OV08xSC		"/OpenVanilla-0.8-smSimpChinese.bundle"
 #define OV072		"/OpenVanilla-TSComponent-0.7.2.bundle"
 #define OV072TC		"/OpenVanilla-TSComponent-0.7.2-TC.bundle"
 #define OV072SC		"/OpenVanilla-TSComponent-0.7.2-SC.bundle"
@@ -68,7 +69,54 @@
 	versions = [NSMutableArray new];
 	
 	NSString *item=MSG(@"OpenVanilla (version unknown)");
+
+	// 0.8.x
+	if ([self pathExists:LV08x]) {
+		item=MSG(@"LeopardVanilla 0.8.x (unknown version)");
+		
+		if ([self resource:LV08x INFOP contains:@"LeopardVanilla 0.8.0"]) {
+			item=MSG(@"LeopardVanilla 0.8.0");
+		}
+		
+		[self addItem:item path:LV08x checked:YES];
+	}
+	 
+	// 0.8.x
+	if ([self pathExists:LCP OV08x]) {
+		item=MSG(@"OpenVanilla 0.8.x (unknown version)");
+		
+		if ([self resource:LCP OV08x INFOP contains:@"OpenVanilla 0.8.0 (beta 1)"]) {
+			item=MSG(@"OpenVanilla 0.8.0 beta 1");
+		}
+		else if ([self resource:LCP OV08x INFOP contains:@"OpenVanilla 0.8.0"]) {
+			item=MSG(@"OpenVanilla 0.8.0");
+		}
+		
+		[self addItem:item path:LCP OV08x checked:YES];
+	}
 	
+	// 0.8.x smTradChinese
+	if ([self pathExists:LCP OV08xTC]) {
+		item=MSG(@"OpenVanilla 0.8.x (unknown version, Traditional Chinese Script)");
+		
+		if ([self resource:LCP OV08xTC INFOP contains:@"OpenVanilla 0.8.0"]) {
+			item=MSG(@"OpenVanilla 0.8.0 (Traditional Chinese Script)");
+		}
+		
+		[self addItem:item path:LCP OV08xTC checked:YES];
+	}	
+
+	// 0.8.x smSimpChinese
+	if ([self pathExists:LCP OV08xSC]) {
+		item=MSG(@"OpenVanilla 0.8.x (unknown version, Simplified Chinese Script)");
+		
+		if ([self resource:LCP OV08xSC INFOP contains:@"OpenVanilla 0.8.0"]) {
+			item=MSG(@"OpenVanilla 0.8.0 (Simplified Chinese Script)");
+		}
+		
+		[self addItem:item path:LCP OV08xSC checked:YES];
+	}	
+
 	// detects version 0.7.2 (Unicode script): stable and beta
 	if ([self pathExists:LCP OV072]) {
 		item=MSG(@"OpenVanilla 0.7.2 (unknown branch)");
@@ -85,8 +133,7 @@
 		
 		[self addItem:item path:LCP OV072 checked:YES];
 	}
-
-
+	
 	// detects version 0.7.2 (Traditional Chinese script): stable and beta	
 	if ([self pathExists:LCP OV072TC]) {
 		item=MSG(@"OpenVanilla 0.7.2 (unknown branch, Traditional Chinese script)");
@@ -197,7 +244,7 @@
 		if ([[d objectForKey:@"checked"] intValue]) {
 			[script appendString:
 				[NSString stringWithFormat:
-					@"rm -rf %@\n", [d objectForKey:@"path"]
+					@"rm -rf '%@'\n", [d objectForKey:@"path"]
 				]
 			];
 		}
