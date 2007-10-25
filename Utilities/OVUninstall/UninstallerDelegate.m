@@ -10,7 +10,7 @@
 #define LCP			"/Library/Components"
 #define OV063		"/OVLoader.bundle"
 #define OV07x		"/OVInit.bundle"
-#define LV08x		"/Library/Input Methods/LeopardVanilla.app"
+#define LV08x		"/Library/Input Methods/OpenVanilla.app"
 #define OV08x		"/OpenVanilla-0.8.bundle"
 #define OV08xTC		"/OpenVanilla-0.8-smTradChinese.bundle"
 #define OV08xSC		"/OpenVanilla-0.8-smSimpChinese.bundle"
