@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>zh_TW</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIconFile</key>
+	<string>LeopardVanilla</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.openvanilla.inputmethod.leopardvanilla</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>OPVN</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CSResourcesFileMapped</key>
+	<true/>
+	<key>InputMethodConnectionName</key>
+	<string>LeopardVanillaConnection</string>
+	<key>InputMethodServerControllerClass</key>
+	<string>LVInputMethodController</string>
+	<key>InputMethodServerDelegateClass</key>
+	<string>LVInputMethodController</string>
+	<key>LSBackgroundOnly</key>
+	<string>0</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>TISInputSourceID</key>
+	<string>org.openvanilla.inputmethod.leopardvanilla</string>
+	<key>TISIntendedLanguage</key>
+	<string>ja</string>
+	<key>tsInputMethodCharacterRepertoire</key>
+	<array>
+		<string>Kana</string>
+	</array>
+	<key>tsInputMethodIconFileKey</key>
+	<string>LeopardVanilla.icns</string>
+</dict>
+</plist>

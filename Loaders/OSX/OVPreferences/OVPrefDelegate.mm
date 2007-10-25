@@ -291,7 +291,7 @@
     [[NSApplication sharedApplication] terminate:self];
 }
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    [self pref_writeConfig:self];
+    [self pref_writeConfig:self];	
 }
 - (BOOL)tableView:(NSTableView *)t shouldSelectRow:(int)r {
     if (t==modtab_modlist) {
@@ -563,6 +563,11 @@
     [[[loader config] dictionary] removeAllObjects];
     [[[loader config] dictionary] addEntriesFromDictionary:config];
     [[loader config] sync];
+	
+	NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:@"tell application \"LeopardVanilla\" to quit"] autorelease];
+	NSDictionary *errorInfo;
+	[script executeAndReturnError:&errorInfo];
+	[script executeAndReturnError:&errorInfo];
 }
 - (NSString*)shortenedFilename:(NSString*)f maxLength:(int)m {
     NSString *display=f;
