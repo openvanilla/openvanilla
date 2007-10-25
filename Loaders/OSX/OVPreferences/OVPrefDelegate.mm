@@ -564,7 +564,7 @@
     [[[loader config] dictionary] addEntriesFromDictionary:config];
     [[loader config] sync];
 	
-	system("killall LeopardVanilla");
+	system("/usr/bin/killall LeopardVanilla");
 }
 - (NSString*)shortenedFilename:(NSString*)f maxLength:(int)m {
     NSString *display=f;

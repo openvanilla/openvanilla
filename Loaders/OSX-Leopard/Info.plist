@@ -36,12 +36,6 @@
 	<string>NSApplication</string>
 	<key>TISInputSourceID</key>
 	<string>org.openvanilla.inputmethod.leopardvanilla</string>
-	<key>TISIntendedLanguage</key>
-	<string>ja</string>
-	<key>tsInputMethodCharacterRepertoire</key>
-	<array>
-		<string>Kana</string>
-	</array>
 	<key>tsInputMethodIconFileKey</key>
 	<string>LeopardVanilla.icns</string>
 </dict>

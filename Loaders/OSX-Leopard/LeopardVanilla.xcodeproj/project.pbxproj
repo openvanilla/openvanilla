@@ -19,23 +19,22 @@
 		6A1725900CCFCD5200C27C90 /* CVSmartMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A1725820CCFCD5200C27C90 /* CVSmartMenu.mm */; };
 		6A1725910CCFCD5200C27C90 /* CVWrappers.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A1725840CCFCD5200C27C90 /* CVWrappers.mm */; };
 		6A17259A0CCFCD7B00C27C90 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6A1725990CCFCD7B00C27C90 /* MainMenu.nib */; };
-		6A17259C0CCFCD8400C27C90 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A17259B0CCFCD8400C27C90 /* InfoPlist.strings */; };
 		6A1725A30CCFCDB200C27C90 /* NSDictionaryExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A1725A00CCFCDB200C27C90 /* NSDictionaryExtension.mm */; };
 		6A1725A40CCFCDB200C27C90 /* NSStringExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A1725A20CCFCDB200C27C90 /* NSStringExtension.mm */; };
 		6A1725E00CCFD35500C27C90 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1725DF0CCFD35500C27C90 /* Carbon.framework */; };
 		6A1725FB0CCFD48800C27C90 /* TSComposingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A1725FA0CCFD48800C27C90 /* TSComposingBuffer.mm */; };
 		6AABAFE50CC577CD00835C13 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AABAFE40CC577CD00835C13 /* InputMethodKit.framework */; };
 		6AABAFE80CC578AF00835C13 /* LeopardVanilla.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6AABAFE60CC578AF00835C13 /* LeopardVanilla.icns */; };
-		6AABAFE90CC578AF00835C13 /* LeopardVanilla.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6AABAFE70CC578AF00835C13 /* LeopardVanilla.tiff */; };
 		6AABAFFF0CC57C6500835C13 /* LVInputMethodController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AABAFFE0CC57C6500835C13 /* LVInputMethodController.mm */; };
 		6AB6AF3D0CCFEBEC008A44AC /* LVComposingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6AF3C0CCFEBEC008A44AC /* LVComposingBuffer.mm */; };
 		6AB6B0000CD074A9008A44AC /* LeopardVanilla.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6AFFF0CD074A9008A44AC /* LeopardVanilla.sdef */; };
+		6AD732A10CD0E4E200052686 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AD732A00CD0E4E200052686 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
@@ -70,7 +69,6 @@
 		6A1725FA0CCFD48800C27C90 /* TSComposingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TSComposingBuffer.mm; sourceTree = "<group>"; };
 		6AABAFE40CC577CD00835C13 /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = /System/Library/Frameworks/InputMethodKit.framework; sourceTree = "<absolute>"; };
 		6AABAFE60CC578AF00835C13 /* LeopardVanilla.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LeopardVanilla.icns; sourceTree = "<group>"; };
-		6AABAFE70CC578AF00835C13 /* LeopardVanilla.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = LeopardVanilla.tiff; sourceTree = "<group>"; };
 		6AABAFF90CC579D700835C13 /* LeopardVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeopardVanilla.h; sourceTree = "<group>"; };
 		6AABAFFD0CC57C6500835C13 /* LVInputMethodController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVInputMethodController.h; sourceTree = "<group>"; };
 		6AABAFFE0CC57C6500835C13 /* LVInputMethodController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LVInputMethodController.mm; sourceTree = "<group>"; };
@@ -80,6 +78,8 @@
 		6AB6AF360CCFEA7A008A44AC /* TSComposingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSComposingBuffer.h; path = ../OSX/CocoaVanilla/TSComposingBuffer.h; sourceTree = SOURCE_ROOT; };
 		6AB6AF3C0CCFEBEC008A44AC /* LVComposingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LVComposingBuffer.mm; sourceTree = "<group>"; };
 		6AB6AFFF0CD074A9008A44AC /* LeopardVanilla.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.sdef; path = LeopardVanilla.sdef; sourceTree = "<group>"; };
+		6AD732A20CD0E4E900052686 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6AD732A30CD0E4EE00052686 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* LeopardVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeopardVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -130,9 +130,8 @@
 			children = (
 				6AB6AFFF0CD074A9008A44AC /* LeopardVanilla.sdef */,
 				6AABAFE60CC578AF00835C13 /* LeopardVanilla.icns */,
-				6AABAFE70CC578AF00835C13 /* LeopardVanilla.tiff */,
 				8D1107310486CEB800E47090 /* Info.plist */,
-				6A17259B0CCFCD8400C27C90 /* InfoPlist.strings */,
+				6AD732A00CD0E4E200052686 /* InfoPlist.strings */,
 				6A1725990CCFCD7B00C27C90 /* MainMenu.nib */,
 			);
 			name = Resources;
@@ -227,6 +226,8 @@
 				French,
 				German,
 				zh_TW,
+				zh_EN,
+				zh_CN,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* OpenVanilla */;
 			projectDirPath = "";
@@ -243,9 +244,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A17259A0CCFCD7B00C27C90 /* MainMenu.nib in Resources */,
-				6A17259C0CCFCD8400C27C90 /* InfoPlist.strings in Resources */,
+				6AD732A10CD0E4E200052686 /* InfoPlist.strings in Resources */,
 				6AABAFE80CC578AF00835C13 /* LeopardVanilla.icns in Resources */,
-				6AABAFE90CC578AF00835C13 /* LeopardVanilla.tiff in Resources */,
 				6AB6B0000CD074A9008A44AC /* LeopardVanilla.sdef in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,10 +288,12 @@
 			name = MainMenu.nib;
 			sourceTree = "<group>";
 		};
-		6A17259B0CCFCD8400C27C90 /* InfoPlist.strings */ = {
+		6AD732A00CD0E4E200052686 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				089C165DFE840E0CC02AAC07 /* English */,
+				6AD732A20CD0E4E900052686 /* zh_TW */,
+				6AD732A30CD0E4EE00052686 /* zh_CN */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -323,13 +325,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_OBJC_GC = supported;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LeopardVanilla_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = USE_MAIN_BUNDLE;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = LeopardVAnilla;
+				PRODUCT_NAME = LeopardVanilla;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
