@@ -28,7 +28,7 @@
 		_padding = 4.0;
 		_radius = 4.0;
 		
-		[self setTextColor:[NSColor whiteColor]];
+		[self setTextColor:[NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:1.0]];
 		[self setBackgroundColor:[NSColor colorWithCalibratedRed:0.0 green:0.0 blue:0.5 alpha:1.0]];
 		[self setText:@""];
     }
@@ -48,8 +48,11 @@
 	[[_attributedString mutableString] setString:newText];
 
 	NSShadow *s = [[[NSShadow alloc] init] autorelease];
-	[s setShadowBlurRadius:(float)([_font pointSize] / 5)];
-	[s setShadowColor:_textColor];
+	[s setShadowBlurRadius:(float)([_font pointSize] / 6)];
+	[s setShadowColor:[NSColor colorWithCalibratedHue:[_textColor hueComponent]
+										   saturation:[_textColor saturationComponent]
+										   brightness:[_textColor brightnessComponent]
+												alpha:0.5]];
 	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:_font, NSFontAttributeName, _textColor, NSForegroundColorAttributeName, s, NSShadowAttributeName, nil];
 	NSRange range = NSMakeRange(0, [[_attributedString mutableString] length]);
 	[_attributedString setAttributes:attributes range:range];
