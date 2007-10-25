@@ -36,15 +36,14 @@ class TSComposingBuffer
 public:
     TSComposingBuffer(ComponentInstance i);
     ~TSComposingBuffer();
-    TSComposingBuffer* clear();
-    TSComposingBuffer* send();
-    TSComposingBuffer* update(Boolean send=FALSE, int cursor=-1,
-        int markFrom=-1, int markTo=-1);
-    TSComposingBuffer* append(NSString* s);
-    Boolean isEmpty();
+    virtual TSComposingBuffer* clear();
+    virtual TSComposingBuffer* send();
+    virtual TSComposingBuffer* update(Boolean send=FALSE, int cursor=-1, int markFrom=-1, int markTo=-1);
+    virtual TSComposingBuffer* append(NSString* s);
+    virtual Boolean isEmpty();
     
-    Point getAppCursorPosition();
-    NSMutableString* getContent();
+    virtual Point getAppCursorPosition();
+    virtual NSMutableString* getContent();
     
 protected:
     int realPos(int p);         // convert codepoint pos to real UniChar position

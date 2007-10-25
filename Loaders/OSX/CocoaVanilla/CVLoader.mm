@@ -120,11 +120,16 @@ int CVLoader::init(MenuRef m) {
     // beginTime = TickCount();
     // murmur("CVLoader::init begin");
 	// get CVLoader.bundle
-    loaderbundle=[NSBundle bundleWithIdentifier:@ TSBUNDLEID];
-    if (!loaderbundle) {
-        NSLog (@"CVLoader: fatal error, bundle %s not found", TSBUNDLEID);
-        return 0;
-    }
+	
+	#ifndef USE_MAIN_BUNDLE
+		loaderbundle=[NSBundle bundleWithIdentifier:@ TSBUNDLEID];
+		if (!loaderbundle) {
+			NSLog (@"CVLoader: fatal error, bundle %s not found", TSBUNDLEID);
+			return 0;
+		}
+	#else
+		loaderbundle = [NSBundle mainBundle];
+	#endif
 
     // gets factory (default) settings
     CVConfig *factorydef=[[CVConfig alloc] initWithFile:CVLC_FACTORY_DEFAULTS defaultData:nil];
