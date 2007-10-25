@@ -81,7 +81,7 @@
 		6AD732A20CD0E4E900052686 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6AD732A30CD0E4EE00052686 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* LeopardVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeopardVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* OpenVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +101,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* LeopardVanilla.app */,
+				8D1107320486CEB800E47090 /* OpenVanilla.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -209,7 +209,7 @@
 			name = LeopardVanilla;
 			productInstallPath = "$(HOME)/Applications";
 			productName = OpenVanilla;
-			productReference = 8D1107320486CEB800E47090 /* LeopardVanilla.app */;
+			productReference = 8D1107320486CEB800E47090 /* OpenVanilla.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -332,7 +332,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = USE_MAIN_BUNDLE;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = LeopardVanilla;
+				PRODUCT_NAME = OpenVanilla;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
