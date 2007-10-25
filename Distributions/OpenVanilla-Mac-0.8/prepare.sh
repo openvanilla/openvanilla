@@ -3,7 +3,6 @@ PWD=`pwd`
 DSTROOT=$PWD/Pkgroot
 FRAMEWORK=$PWD/../../Framework
 LOADER=$PWD/../../Loaders/OSX
-DISPLAYSERVER=$PWD/../../Experiments/NewDisplayServer
 MODULES=$PWD/../../Modules
 OVIMSPACECHEWING=$PWD/../../Modules/OVIMSpaceChewing
 OVIMUIM=$PWD/../../Modules/OVIMUIM
@@ -16,11 +15,6 @@ xcodebuild
 xcodebuild DSTROOT=$DSTROOT install
 
 cd $LOADER
-xcodebuild clean
-xcodebuild
-xcodebuild DSTROOT=$DSTROOT install
-
-cd $DISPLAYSERVER
 xcodebuild clean
 xcodebuild
 xcodebuild DSTROOT=$DSTROOT install
