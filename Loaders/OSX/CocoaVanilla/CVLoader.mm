@@ -279,8 +279,7 @@ void CVLoader::menuHandler(unsigned int cmd) {
             [dspsrvr aboutDialog];
             return;
         case CVLMI_PREFERENCES:
-			// system([[NSString stringWithFormat:@"open %@", CVLC_PREFERENCEUTIL] UTF8String]);	
-			system([[NSString stringWithFormat:@"open -b %@", CVLC_PREFERENCEBUNDLE] UTF8String]);
+			system([[NSString stringWithFormat:@"open -a %@", CVLC_PREFERENCEUTIL] UTF8String]);	
             return;
         case CVLMI_HELP:
 			if (!strcasecmp(srv->locale(), "zh_TW")) {
