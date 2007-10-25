@@ -1,0 +1,1308 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		D4E56F670CCFDA6600B8C28A /* Modules */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = D4E56F780CCFDA8100B8C28A /* Build configuration list for PBXAggregateTarget "Modules" */;
+			buildPhases = (
+			);
+			dependencies = (
+				D4E56F6D0CCFDA7000B8C28A /* PBXTargetDependency */,
+				D4E56F6B0CCFDA7000B8C28A /* PBXTargetDependency */,
+				D4E56F690CCFDA7000B8C28A /* PBXTargetDependency */,
+				D4E56FC70CCFDCC800B8C28A /* PBXTargetDependency */,
+				D4E56FC50CCFDCC800B8C28A /* PBXTargetDependency */,
+				D4E56FC30CCFDCC800B8C28A /* PBXTargetDependency */,
+				D4E570070CCFDE3F00B8C28A /* PBXTargetDependency */,
+				D4E5703C0CCFE06300B8C28A /* PBXTargetDependency */,
+				D4BB13850CD04F060037EDBE /* PBXTargetDependency */,
+			);
+			name = Modules;
+			productName = Modules;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		8D01CCCE0486CAD60068D4B7 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
+		D434204E0C9EEB0400D5EE58 /* OVCandidateList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D434204A0C9EEB0400D5EE58 /* OVCandidateList.cpp */; };
+		D434204F0C9EEB0400D5EE58 /* OVCIN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D434204B0C9EEB0400D5EE58 /* OVCIN.cpp */; };
+		D43420500C9EEB0400D5EE58 /* OVFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D434204C0C9EEB0400D5EE58 /* OVFileHandler.cpp */; };
+		D43420510C9EEB0400D5EE58 /* OVStringToolKit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D434204D0C9EEB0400D5EE58 /* OVStringToolKit.cpp */; };
+		D4BB13830CD04EF20037EDBE /* OVOFFullWidthCharacter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4BB13820CD04EF20037EDBE /* OVOFFullWidthCharacter.cpp */; };
+		D4C2FEB00C9EE5FB00343D93 /* OVIMArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4C2FEAE0C9EE5FB00343D93 /* OVIMArray.cpp */; };
+		D4C2FEB50C9EE61000343D93 /* array-shortcode.cin in Resources */ = {isa = PBXBuildFile; fileRef = D4C2FEB20C9EE61000343D93 /* array-shortcode.cin */; };
+		D4C2FEB60C9EE61000343D93 /* array-special.cin in Resources */ = {isa = PBXBuildFile; fileRef = D4C2FEB30C9EE61000343D93 /* array-special.cin */; };
+		D4C2FEB70C9EE61000343D93 /* array30.cin in Resources */ = {isa = PBXBuildFile; fileRef = D4C2FEB40C9EE61000343D93 /* array30.cin */; };
+		D4E56F050CCFD76200B8C28A /* OVIMBig5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E56F040CCFD76200B8C28A /* OVIMBig5.cpp */; };
+		D4E56F070CCFD76A00B8C28A /* Big5ToUnicodeTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E56F060CCFD76A00B8C28A /* Big5ToUnicodeTable.cpp */; };
+		D4E56F480CCFD95B00B8C28A /* OVPhoneticLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E56F460CCFD95B00B8C28A /* OVPhoneticLib.cpp */; };
+		D4E56F4A0CCFD97C00B8C28A /* OVIMPhoneticStatic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E56F430CCFD93B00B8C28A /* OVIMPhoneticStatic.cpp */; };
+		D4E56F4B0CCFD97C00B8C28A /* OVPhoneticData.c in Sources */ = {isa = PBXBuildFile; fileRef = D4E56F410CCFD93000B8C28A /* OVPhoneticData.c */; };
+		D4E56F900CCFDB6900B8C28A /* OVIMRoman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E56F830CCFDB4100B8C28A /* OVIMRoman.cpp */; };
+		D4E56FAA0CCFDC2900B8C28A /* OVIMTibetan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E56FA80CCFDC2900B8C28A /* OVIMTibetan.cpp */; };
+		D4E56FEF0CCFDD9700B8C28A /* VXHCSC2TCTable.c in Sources */ = {isa = PBXBuildFile; fileRef = D4E56FED0CCFDD9700B8C28A /* VXHCSC2TCTable.c */; };
+		D4E56FF00CCFDD9700B8C28A /* VXHCTC2SCTable.c in Sources */ = {isa = PBXBuildFile; fileRef = D4E56FEE0CCFDD9700B8C28A /* VXHCTC2SCTable.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D4BB13840CD04F060037EDBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4BB13730CD04E960037EDBE /* OVOFFullWidthCharacter */;
+			remoteInfo = OVOFFullWidthCharacter;
+		};
+		D4E56F680CCFDA7000B8C28A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4E56F390CCFD8CE00B8C28A;
+			remoteInfo = OVIMPhonetic;
+		};
+		D4E56F6A0CCFDA7000B8C28A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4E56EDD0CCFD69100B8C28A;
+			remoteInfo = OVIMBig5;
+		};
+		D4E56F6C0CCFDA7000B8C28A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D01CCC60486CAD60068D4B7;
+			remoteInfo = OVIMArray;
+		};
+		D4E56FC20CCFDCC800B8C28A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4E56FBB0CCFDCA000B8C28A;
+			remoteInfo = OVIMUnicode;
+		};
+		D4E56FC40CCFDCC800B8C28A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4E56F9D0CCFDC0100B8C28A;
+			remoteInfo = OVIMTibetan;
+		};
+		D4E56FC60CCFDCC800B8C28A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4E56F870CCFDB4E00B8C28A;
+			remoteInfo = OVIMRoman;
+		};
+		D4E570060CCFDE3F00B8C28A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4E56FDB0CCFDD5A00B8C28A;
+			remoteInfo = OVOFHanConvert;
+		};
+		D4E5703B0CCFE06300B8C28A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4E570280CCFE01700B8C28A;
+			remoteInfo = OVOFMorseCode;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		8D01CCD20486CAD60068D4B7 /* OVIMArray.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMArray.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D43420480C9EEACE00D5EE58 /* OVKeySequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVKeySequence.h; path = SharedHeaders/OVKeySequence.h; sourceTree = "<group>"; };
+		D43420490C9EEADC00D5EE58 /* OVCandidateList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVCandidateList.h; path = SharedHeaders/OVCandidateList.h; sourceTree = "<group>"; };
+		D434204A0C9EEB0400D5EE58 /* OVCandidateList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVCandidateList.cpp; path = SharedSource/OVCandidateList.cpp; sourceTree = "<group>"; };
+		D434204B0C9EEB0400D5EE58 /* OVCIN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVCIN.cpp; path = SharedSource/OVCIN.cpp; sourceTree = "<group>"; };
+		D434204C0C9EEB0400D5EE58 /* OVFileHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVFileHandler.cpp; path = SharedSource/OVFileHandler.cpp; sourceTree = "<group>"; };
+		D434204D0C9EEB0400D5EE58 /* OVStringToolKit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVStringToolKit.cpp; path = SharedSource/OVStringToolKit.cpp; sourceTree = "<group>"; };
+		D43420680C9EEB3500D5EE58 /* OVFileHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVFileHandler.h; path = SharedHeaders/OVFileHandler.h; sourceTree = "<group>"; };
+		D434206A0C9EEB6900D5EE58 /* OVStringToolKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVStringToolKit.h; path = SharedHeaders/OVStringToolKit.h; sourceTree = "<group>"; };
+		D4BB13740CD04E960037EDBE /* OVOFFullWidthCharacter.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVOFFullWidthCharacter.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4BB13820CD04EF20037EDBE /* OVOFFullWidthCharacter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVOFFullWidthCharacter.cpp; path = OVOFFullWidthCharacter/OVOFFullWidthCharacter.cpp; sourceTree = "<group>"; };
+		D4C2FEAE0C9EE5FB00343D93 /* OVIMArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMArray.cpp; path = OVIMArray/OVIMArray.cpp; sourceTree = "<group>"; };
+		D4C2FEAF0C9EE5FB00343D93 /* OVIMArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVIMArray.h; path = OVIMArray/OVIMArray.h; sourceTree = "<group>"; };
+		D4C2FEB10C9EE60200343D93 /* ArrayKeySequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrayKeySequence.h; path = OVIMArray/ArrayKeySequence.h; sourceTree = "<group>"; };
+		D4C2FEB20C9EE61000343D93 /* array-shortcode.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "array-shortcode.cin"; path = "OVIMArray/array-shortcode.cin"; sourceTree = "<group>"; };
+		D4C2FEB30C9EE61000343D93 /* array-special.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "array-special.cin"; path = "OVIMArray/array-special.cin"; sourceTree = "<group>"; };
+		D4C2FEB40C9EE61000343D93 /* array30.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = array30.cin; path = OVIMArray/array30.cin; sourceTree = "<group>"; };
+		D4C2FEC40C9EE70200343D93 /* OVOSDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVOSDef.h; path = SharedHeaders/OVOSDef.h; sourceTree = "<group>"; };
+		D4C2FEC80C9EE75700343D93 /* OVCIN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVCIN.h; path = SharedHeaders/OVCIN.h; sourceTree = "<group>"; };
+		D4C2FECE0C9EE7B600343D93 /* OVCINInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVCINInfo.h; path = SharedHeaders/OVCINInfo.h; sourceTree = "<group>"; };
+		D4CE77720CA90A4A000BB65D /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVWildcard.h; path = SharedHeaders/OVWildcard.h; sourceTree = "<group>"; };
+		D4E56EDE0CCFD69100B8C28A /* OVIMBig5.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMBig5.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4E56F030CCFD76200B8C28A /* OVIMBig5_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVIMBig5_Prefix.pch; path = OVIMBig5/OVIMBig5_Prefix.pch; sourceTree = "<group>"; };
+		D4E56F040CCFD76200B8C28A /* OVIMBig5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMBig5.cpp; path = OVIMBig5/OVIMBig5.cpp; sourceTree = "<group>"; };
+		D4E56F060CCFD76A00B8C28A /* Big5ToUnicodeTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Big5ToUnicodeTable.cpp; path = OVIMBig5/Big5ToUnicodeTable.cpp; sourceTree = "<group>"; };
+		D4E56F300CCFD84100B8C28A /* OVIMPhonetic_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVIMPhonetic_Prefix.pch; path = OVIMPhonetic/OVIMPhonetic_Prefix.pch; sourceTree = "<group>"; };
+		D4E56F340CCFD89C00B8C28A /* OVPhoneticLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVPhoneticLib.h; path = SharedHeaders/OVPhoneticLib.h; sourceTree = "<group>"; };
+		D4E56F350CCFD89C00B8C28A /* OVSQLite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVSQLite3.h; path = SharedHeaders/OVSQLite3.h; sourceTree = "<group>"; };
+		D4E56F3A0CCFD8CE00B8C28A /* OVIMPhonetic.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMPhonetic.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4E56F410CCFD93000B8C28A /* OVPhoneticData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = OVPhoneticData.c; path = OVIMPhonetic/OVPhoneticData.c; sourceTree = "<group>"; };
+		D4E56F430CCFD93B00B8C28A /* OVIMPhoneticStatic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMPhoneticStatic.cpp; path = OVIMPhonetic/OVIMPhoneticStatic.cpp; sourceTree = "<group>"; };
+		D4E56F450CCFD95B00B8C28A /* OVCINInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVCINInfo.cpp; path = SharedSource/OVCINInfo.cpp; sourceTree = "<group>"; };
+		D4E56F460CCFD95B00B8C28A /* OVPhoneticLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVPhoneticLib.cpp; path = SharedSource/OVPhoneticLib.cpp; sourceTree = "<group>"; };
+		D4E56F830CCFDB4100B8C28A /* OVIMRoman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMRoman.cpp; path = OVIMRoman/OVIMRoman.cpp; sourceTree = "<group>"; };
+		D4E56F880CCFDB4E00B8C28A /* OVIMRoman.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMRoman.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4E56F9E0CCFDC0100B8C28A /* OVIMTibetan.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMTibetan.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4E56FA80CCFDC2900B8C28A /* OVIMTibetan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMTibetan.cpp; path = OVIMTibetan/OVIMTibetan.cpp; sourceTree = "<group>"; };
+		D4E56FA90CCFDC2900B8C28A /* OVIMTibetan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVIMTibetan.h; path = OVIMTibetan/OVIMTibetan.h; sourceTree = "<group>"; };
+		D4E56FBC0CCFDCA000B8C28A /* OVIMUnicode.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMUnicode.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4E56FDC0CCFDD5A00B8C28A /* OVOFHanConvert.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVOFHanConvert.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4E56FED0CCFDD9700B8C28A /* VXHCSC2TCTable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = VXHCSC2TCTable.c; path = OVOFHanConvert/VXHCSC2TCTable.c; sourceTree = "<group>"; };
+		D4E56FEE0CCFDD9700B8C28A /* VXHCTC2SCTable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = VXHCTC2SCTable.c; path = OVOFHanConvert/VXHCTC2SCTable.c; sourceTree = "<group>"; };
+		D4E56FF40CCFDDF300B8C28A /* OVOFMorseCode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVOFMorseCode.cpp; path = OVOFMorseCode/OVOFMorseCode.cpp; sourceTree = "<group>"; };
+		D4E570290CCFE01700B8C28A /* OVOFMorseCode.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVOFMorseCode.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D01CCCD0486CAD60068D4B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D01CCCE0486CAD60068D4B7 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E56F9C0CCFDC0100B8C28A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E56FBA0CCFDCA000B8C28A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E570270CCFE01700B8C28A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* OVIMArray */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56EA80CCFD52200B8C28A /* OVIMArray */,
+				D4E56EC30CCFD63300B8C28A /* OVIMBig5 */,
+				D4E56F180CCFD80900B8C28A /* OVIMPhonetic */,
+				D4E56F810CCFDB1B00B8C28A /* OVIMRoman */,
+				D4E56FA50CCFDC1200B8C28A /* OVIMTibetan */,
+				D4E56FB70CCFDC8900B8C28A /* OVIMUnicode */,
+				D4BB137F0CD04ED20037EDBE /* OVOFFullWidthCharacter */,
+				D4E56FE40CCFDD6F00B8C28A /* OVOFHanConvert */,
+				D4E56FF10CCFDDDC00B8C28A /* OVOFMorseCode */,
+				D4C2FECA0C9EE75D00343D93 /* Shared Headers */,
+				08FB77ADFE841716C02AAC07 /* Shared Source */,
+				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
+				19C28FB4FE9D528D11CA2CBB /* Products */,
+			);
+			name = OVIMArray;
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D4C2FEB20C9EE61000343D93 /* array-shortcode.cin */,
+				D4C2FEB30C9EE61000343D93 /* array-special.cin */,
+				D4C2FEB40C9EE61000343D93 /* array30.cin */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77ADFE841716C02AAC07 /* Shared Source */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56F450CCFD95B00B8C28A /* OVCINInfo.cpp */,
+				D4E56F460CCFD95B00B8C28A /* OVPhoneticLib.cpp */,
+				D434204A0C9EEB0400D5EE58 /* OVCandidateList.cpp */,
+				D434204B0C9EEB0400D5EE58 /* OVCIN.cpp */,
+				D434204C0C9EEB0400D5EE58 /* OVFileHandler.cpp */,
+				D434204D0C9EEB0400D5EE58 /* OVStringToolKit.cpp */,
+			);
+			name = "Shared Source";
+			sourceTree = "<group>";
+		};
+		19C28FB4FE9D528D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56EDE0CCFD69100B8C28A /* OVIMBig5.bundle */,
+				8D01CCD20486CAD60068D4B7 /* OVIMArray.bundle */,
+				D4E56F3A0CCFD8CE00B8C28A /* OVIMPhonetic.bundle */,
+				D4E56F880CCFDB4E00B8C28A /* OVIMRoman.bundle */,
+				D4E56F9E0CCFDC0100B8C28A /* OVIMTibetan.bundle */,
+				D4E56FBC0CCFDCA000B8C28A /* OVIMUnicode.bundle */,
+				D4E56FDC0CCFDD5A00B8C28A /* OVOFHanConvert.bundle */,
+				D4E570290CCFE01700B8C28A /* OVOFMorseCode.bundle */,
+				D4BB13740CD04E960037EDBE /* OVOFFullWidthCharacter.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D4BB137F0CD04ED20037EDBE /* OVOFFullWidthCharacter */ = {
+			isa = PBXGroup;
+			children = (
+				D4BB13820CD04EF20037EDBE /* OVOFFullWidthCharacter.cpp */,
+			);
+			name = OVOFFullWidthCharacter;
+			sourceTree = "<group>";
+		};
+		D4C2FECA0C9EE75D00343D93 /* Shared Headers */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56F340CCFD89C00B8C28A /* OVPhoneticLib.h */,
+				D4E56F350CCFD89C00B8C28A /* OVSQLite3.h */,
+				D4CE77720CA90A4A000BB65D /* OVWildcard.h */,
+				D434206A0C9EEB6900D5EE58 /* OVStringToolKit.h */,
+				D43420680C9EEB3500D5EE58 /* OVFileHandler.h */,
+				D43420490C9EEADC00D5EE58 /* OVCandidateList.h */,
+				D43420480C9EEACE00D5EE58 /* OVKeySequence.h */,
+				D4C2FEC40C9EE70200343D93 /* OVOSDef.h */,
+				D4C2FECE0C9EE7B600343D93 /* OVCINInfo.h */,
+				D4C2FEC80C9EE75700343D93 /* OVCIN.h */,
+			);
+			name = "Shared Headers";
+			sourceTree = "<group>";
+		};
+		D4E56EA80CCFD52200B8C28A /* OVIMArray */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56EB40CCFD5A400B8C28A /* Source */,
+				D4E56EAF0CCFD54E00B8C28A /* Headers */,
+				089C167CFE841241C02AAC07 /* Resources */,
+			);
+			name = OVIMArray;
+			sourceTree = "<group>";
+		};
+		D4E56EAF0CCFD54E00B8C28A /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				D4C2FEB10C9EE60200343D93 /* ArrayKeySequence.h */,
+				D4C2FEAF0C9EE5FB00343D93 /* OVIMArray.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		D4E56EB40CCFD5A400B8C28A /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D4C2FEAE0C9EE5FB00343D93 /* OVIMArray.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		D4E56EC30CCFD63300B8C28A /* OVIMBig5 */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56F160CCFD7CF00B8C28A /* Source */,
+			);
+			name = OVIMBig5;
+			sourceTree = "<group>";
+		};
+		D4E56F160CCFD7CF00B8C28A /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56F060CCFD76A00B8C28A /* Big5ToUnicodeTable.cpp */,
+				D4E56F030CCFD76200B8C28A /* OVIMBig5_Prefix.pch */,
+				D4E56F040CCFD76200B8C28A /* OVIMBig5.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		D4E56F180CCFD80900B8C28A /* OVIMPhonetic */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56F3F0CCFD8F300B8C28A /* Source */,
+				D4E56F290CCFD82A00B8C28A /* Headers */,
+			);
+			name = OVIMPhonetic;
+			sourceTree = "<group>";
+		};
+		D4E56F290CCFD82A00B8C28A /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56F300CCFD84100B8C28A /* OVIMPhonetic_Prefix.pch */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		D4E56F3F0CCFD8F300B8C28A /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56F430CCFD93B00B8C28A /* OVIMPhoneticStatic.cpp */,
+				D4E56F410CCFD93000B8C28A /* OVPhoneticData.c */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		D4E56F810CCFDB1B00B8C28A /* OVIMRoman */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56F830CCFDB4100B8C28A /* OVIMRoman.cpp */,
+			);
+			name = OVIMRoman;
+			sourceTree = "<group>";
+		};
+		D4E56FA50CCFDC1200B8C28A /* OVIMTibetan */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56FA80CCFDC2900B8C28A /* OVIMTibetan.cpp */,
+				D4E56FA90CCFDC2900B8C28A /* OVIMTibetan.h */,
+			);
+			name = OVIMTibetan;
+			sourceTree = "<group>";
+		};
+		D4E56FB70CCFDC8900B8C28A /* OVIMUnicode */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = OVIMUnicode;
+			sourceTree = "<group>";
+		};
+		D4E56FE40CCFDD6F00B8C28A /* OVOFHanConvert */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56FED0CCFDD9700B8C28A /* VXHCSC2TCTable.c */,
+				D4E56FEE0CCFDD9700B8C28A /* VXHCTC2SCTable.c */,
+			);
+			name = OVOFHanConvert;
+			sourceTree = "<group>";
+		};
+		D4E56FF10CCFDDDC00B8C28A /* OVOFMorseCode */ = {
+			isa = PBXGroup;
+			children = (
+				D4E56FF40CCFDDF300B8C28A /* OVOFMorseCode.cpp */,
+			);
+			name = OVOFMorseCode;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D01CCC60486CAD60068D4B7 /* OVIMArray */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4FADC23308B4156C00ABE55E /* Build configuration list for PBXNativeTarget "OVIMArray" */;
+			buildPhases = (
+				8D01CCC90486CAD60068D4B7 /* Resources */,
+				8D01CCCB0486CAD60068D4B7 /* Sources */,
+				8D01CCCD0486CAD60068D4B7 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVIMArray;
+			productInstallPath = "$(HOME)/Library/Bundles";
+			productName = OVIMArray;
+			productReference = 8D01CCD20486CAD60068D4B7 /* OVIMArray.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D4BB13730CD04E960037EDBE /* OVOFFullWidthCharacter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4BB13770CD04E970037EDBE /* Build configuration list for PBXNativeTarget "OVOFFullWidthCharacter" */;
+			buildPhases = (
+				D4BB13710CD04E960037EDBE /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVOFFullWidthCharacter;
+			productName = OVOFFullWidthCharacter;
+			productReference = D4BB13740CD04E960037EDBE /* OVOFFullWidthCharacter.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D4E56EDD0CCFD69100B8C28A /* OVIMBig5 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4E56EE00CCFD69100B8C28A /* Build configuration list for PBXNativeTarget "OVIMBig5" */;
+			buildPhases = (
+				D4E56EDB0CCFD69100B8C28A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVIMBig5;
+			productName = OVIMBig5;
+			productReference = D4E56EDE0CCFD69100B8C28A /* OVIMBig5.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D4E56F390CCFD8CE00B8C28A /* OVIMPhonetic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4E56F3C0CCFD8CF00B8C28A /* Build configuration list for PBXNativeTarget "OVIMPhonetic" */;
+			buildPhases = (
+				D4E56F4E0CCFD9AC00B8C28A /* ShellScript */,
+				D4E56F370CCFD8CE00B8C28A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVIMPhonetic;
+			productName = OVIMPhonetic;
+			productReference = D4E56F3A0CCFD8CE00B8C28A /* OVIMPhonetic.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D4E56F870CCFDB4E00B8C28A /* OVIMRoman */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4E56F8A0CCFDB4F00B8C28A /* Build configuration list for PBXNativeTarget "OVIMRoman" */;
+			buildPhases = (
+				D4E56F850CCFDB4E00B8C28A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVIMRoman;
+			productName = OVIMRoman;
+			productReference = D4E56F880CCFDB4E00B8C28A /* OVIMRoman.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D4E56F9D0CCFDC0100B8C28A /* OVIMTibetan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4E56FA00CCFDC0200B8C28A /* Build configuration list for PBXNativeTarget "OVIMTibetan" */;
+			buildPhases = (
+				D4E56F9A0CCFDC0100B8C28A /* Resources */,
+				D4E56F9B0CCFDC0100B8C28A /* Sources */,
+				D4E56F9C0CCFDC0100B8C28A /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVIMTibetan;
+			productName = OVIMTibetan;
+			productReference = D4E56F9E0CCFDC0100B8C28A /* OVIMTibetan.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D4E56FBB0CCFDCA000B8C28A /* OVIMUnicode */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4E56FBE0CCFDCA100B8C28A /* Build configuration list for PBXNativeTarget "OVIMUnicode" */;
+			buildPhases = (
+				D4E56FB80CCFDCA000B8C28A /* Resources */,
+				D4E56FB90CCFDCA000B8C28A /* Sources */,
+				D4E56FBA0CCFDCA000B8C28A /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVIMUnicode;
+			productName = OVIMUnicode;
+			productReference = D4E56FBC0CCFDCA000B8C28A /* OVIMUnicode.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D4E56FDB0CCFDD5A00B8C28A /* OVOFHanConvert */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4E56FDE0CCFDD5B00B8C28A /* Build configuration list for PBXNativeTarget "OVOFHanConvert" */;
+			buildPhases = (
+				D4E56FD90CCFDD5A00B8C28A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVOFHanConvert;
+			productName = OVOFHanConvert;
+			productReference = D4E56FDC0CCFDD5A00B8C28A /* OVOFHanConvert.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D4E570280CCFE01700B8C28A /* OVOFMorseCode */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4E5702B0CCFE01800B8C28A /* Build configuration list for PBXNativeTarget "OVOFMorseCode" */;
+			buildPhases = (
+				D4E570250CCFE01700B8C28A /* Resources */,
+				D4E570260CCFE01700B8C28A /* Sources */,
+				D4E570270CCFE01700B8C28A /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVOFMorseCode;
+			productName = OVOFMorseCode;
+			productReference = D4E570290CCFE01700B8C28A /* OVOFMorseCode.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 4FADC23708B4156C00ABE55E /* Build configuration list for PBXProject "Modules" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 089C166AFE841209C02AAC07 /* OVIMArray */;
+			projectDirPath = "";
+			targets = (
+				D4E56F670CCFDA6600B8C28A /* Modules */,
+				8D01CCC60486CAD60068D4B7 /* OVIMArray */,
+				D4E56EDD0CCFD69100B8C28A /* OVIMBig5 */,
+				D4E56F390CCFD8CE00B8C28A /* OVIMPhonetic */,
+				D4E56F870CCFDB4E00B8C28A /* OVIMRoman */,
+				D4E56F9D0CCFDC0100B8C28A /* OVIMTibetan */,
+				D4E56FBB0CCFDCA000B8C28A /* OVIMUnicode */,
+				D4E56FDB0CCFDD5A00B8C28A /* OVOFHanConvert */,
+				D4E570280CCFE01700B8C28A /* OVOFMorseCode */,
+				D4BB13730CD04E960037EDBE /* OVOFFullWidthCharacter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D01CCC90486CAD60068D4B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4C2FEB50C9EE61000343D93 /* array-shortcode.cin in Resources */,
+				D4C2FEB60C9EE61000343D93 /* array-special.cin in Resources */,
+				D4C2FEB70C9EE61000343D93 /* array30.cin in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E56F9A0CCFDC0100B8C28A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E56FB80CCFDCA000B8C28A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E570250CCFE01700B8C28A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D4E56F4E0CCFD9AC00B8C28A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "perl ./OVIMPhonetic/convert-phonedata.pl ./OVIMPhonetic/bpmf.cin ./OVIMPhonetic/punctuations.cin > ./OVIMPhonetic/OVPhoneticData.c";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D01CCCB0486CAD60068D4B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4C2FEB00C9EE5FB00343D93 /* OVIMArray.cpp in Sources */,
+				D434204E0C9EEB0400D5EE58 /* OVCandidateList.cpp in Sources */,
+				D434204F0C9EEB0400D5EE58 /* OVCIN.cpp in Sources */,
+				D43420500C9EEB0400D5EE58 /* OVFileHandler.cpp in Sources */,
+				D43420510C9EEB0400D5EE58 /* OVStringToolKit.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4BB13710CD04E960037EDBE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4BB13830CD04EF20037EDBE /* OVOFFullWidthCharacter.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E56EDB0CCFD69100B8C28A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4E56F050CCFD76200B8C28A /* OVIMBig5.cpp in Sources */,
+				D4E56F070CCFD76A00B8C28A /* Big5ToUnicodeTable.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E56F370CCFD8CE00B8C28A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4E56F4A0CCFD97C00B8C28A /* OVIMPhoneticStatic.cpp in Sources */,
+				D4E56F4B0CCFD97C00B8C28A /* OVPhoneticData.c in Sources */,
+				D4E56F480CCFD95B00B8C28A /* OVPhoneticLib.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E56F850CCFDB4E00B8C28A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4E56F900CCFDB6900B8C28A /* OVIMRoman.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E56F9B0CCFDC0100B8C28A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4E56FAA0CCFDC2900B8C28A /* OVIMTibetan.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E56FB90CCFDCA000B8C28A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E56FD90CCFDD5A00B8C28A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4E56FEF0CCFDD9700B8C28A /* VXHCSC2TCTable.c in Sources */,
+				D4E56FF00CCFDD9700B8C28A /* VXHCTC2SCTable.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E570260CCFE01700B8C28A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D4BB13850CD04F060037EDBE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4BB13730CD04E960037EDBE /* OVOFFullWidthCharacter */;
+			targetProxy = D4BB13840CD04F060037EDBE /* PBXContainerItemProxy */;
+		};
+		D4E56F690CCFDA7000B8C28A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4E56F390CCFD8CE00B8C28A /* OVIMPhonetic */;
+			targetProxy = D4E56F680CCFDA7000B8C28A /* PBXContainerItemProxy */;
+		};
+		D4E56F6B0CCFDA7000B8C28A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4E56EDD0CCFD69100B8C28A /* OVIMBig5 */;
+			targetProxy = D4E56F6A0CCFDA7000B8C28A /* PBXContainerItemProxy */;
+		};
+		D4E56F6D0CCFDA7000B8C28A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D01CCC60486CAD60068D4B7 /* OVIMArray */;
+			targetProxy = D4E56F6C0CCFDA7000B8C28A /* PBXContainerItemProxy */;
+		};
+		D4E56FC30CCFDCC800B8C28A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4E56FBB0CCFDCA000B8C28A /* OVIMUnicode */;
+			targetProxy = D4E56FC20CCFDCC800B8C28A /* PBXContainerItemProxy */;
+		};
+		D4E56FC50CCFDCC800B8C28A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4E56F9D0CCFDC0100B8C28A /* OVIMTibetan */;
+			targetProxy = D4E56FC40CCFDCC800B8C28A /* PBXContainerItemProxy */;
+		};
+		D4E56FC70CCFDCC800B8C28A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4E56F870CCFDB4E00B8C28A /* OVIMRoman */;
+			targetProxy = D4E56FC60CCFDCC800B8C28A /* PBXContainerItemProxy */;
+		};
+		D4E570070CCFDE3F00B8C28A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4E56FDB0CCFDD5A00B8C28A /* OVOFHanConvert */;
+			targetProxy = D4E570060CCFDE3F00B8C28A /* PBXContainerItemProxy */;
+		};
+		D4E5703C0CCFE06300B8C28A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4E570280CCFE01700B8C28A /* OVOFMorseCode */;
+			targetProxy = D4E5703B0CCFE06300B8C28A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4FADC23408B4156C00ABE55E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = OVIMArray_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				PRODUCT_NAME = OVIMArray;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		4FADC23508B4156C00ABE55E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = OSX_INCLUDE;
+				INFOPLIST_FILE = OVIMArray/Info.plist;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules;
+				PRODUCT_NAME = OVIMArray;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		4FADC23808B4156C00ABE55E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Debug;
+		};
+		4FADC23908B4156C00ABE55E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Release;
+		};
+		D4BB13780CD04E970037EDBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVOFFullWidthCharacter-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFFullWidthCharacter;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4BB13790CD04E970037EDBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = OVOFFullWidthCharacter/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFFullWidthCharacter;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D4E56EE10CCFD69100B8C28A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVIMBig5-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMBig5;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4E56EE20CCFD69100B8C28A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = OVIMBig5/Info.plist;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMBig5;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D4E56F3D0CCFD8CF00B8C28A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVIMPhonetic-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMPhonetic;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4E56F3E0CCFD8CF00B8C28A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = OVIMPhonetic/Info.plist;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMPhonetic;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D4E56F790CCFDA8100B8C28A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = Modules;
+			};
+			name = Debug;
+		};
+		D4E56F7A0CCFDA8100B8C28A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				PRODUCT_NAME = Modules;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D4E56F8B0CCFDB4F00B8C28A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVIMRoman-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMRoman;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4E56F8C0CCFDB4F00B8C28A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = OVIMRoman/Info.plist;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMRoman;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D4E56FA10CCFDC0200B8C28A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVIMTibetan-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMTibetan;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4E56FA20CCFDC0200B8C28A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = OVIMTibetan/Info.plist;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMTibetan;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D4E56FBF0CCFDCA100B8C28A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVIMUnicode-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMUnicode;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4E56FC00CCFDCA100B8C28A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = OVIMUnicode/Info.plist;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMUnicode;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D4E56FDF0CCFDD5B00B8C28A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVOFHanConvert-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFHanConvert;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4E56FE00CCFDD5B00B8C28A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = OVOFHanConvert/Info.plist;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFHanConvert;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D4E5702C0CCFE01800B8C28A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVOFMorseCode-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFMorseCode;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D4E5702D0CCFE01800B8C28A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = OVOFMorseCode/Info.plist;
+				INSTALL_PATH = /Library/OpenVanilla/0.8/Modules;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVOFMorseCode;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4FADC23308B4156C00ABE55E /* Build configuration list for PBXNativeTarget "OVIMArray" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4FADC23408B4156C00ABE55E /* Debug */,
+				4FADC23508B4156C00ABE55E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4FADC23708B4156C00ABE55E /* Build configuration list for PBXProject "Modules" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4FADC23808B4156C00ABE55E /* Debug */,
+				4FADC23908B4156C00ABE55E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4BB13770CD04E970037EDBE /* Build configuration list for PBXNativeTarget "OVOFFullWidthCharacter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4BB13780CD04E970037EDBE /* Debug */,
+				D4BB13790CD04E970037EDBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4E56EE00CCFD69100B8C28A /* Build configuration list for PBXNativeTarget "OVIMBig5" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4E56EE10CCFD69100B8C28A /* Debug */,
+				D4E56EE20CCFD69100B8C28A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4E56F3C0CCFD8CF00B8C28A /* Build configuration list for PBXNativeTarget "OVIMPhonetic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4E56F3D0CCFD8CF00B8C28A /* Debug */,
+				D4E56F3E0CCFD8CF00B8C28A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4E56F780CCFDA8100B8C28A /* Build configuration list for PBXAggregateTarget "Modules" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4E56F790CCFDA8100B8C28A /* Debug */,
+				D4E56F7A0CCFDA8100B8C28A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4E56F8A0CCFDB4F00B8C28A /* Build configuration list for PBXNativeTarget "OVIMRoman" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4E56F8B0CCFDB4F00B8C28A /* Debug */,
+				D4E56F8C0CCFDB4F00B8C28A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4E56FA00CCFDC0200B8C28A /* Build configuration list for PBXNativeTarget "OVIMTibetan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4E56FA10CCFDC0200B8C28A /* Debug */,
+				D4E56FA20CCFDC0200B8C28A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4E56FBE0CCFDCA100B8C28A /* Build configuration list for PBXNativeTarget "OVIMUnicode" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4E56FBF0CCFDCA100B8C28A /* Debug */,
+				D4E56FC00CCFDCA100B8C28A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4E56FDE0CCFDD5B00B8C28A /* Build configuration list for PBXNativeTarget "OVOFHanConvert" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4E56FDF0CCFDD5B00B8C28A /* Debug */,
+				D4E56FE00CCFDD5B00B8C28A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4E5702B0CCFE01800B8C28A /* Build configuration list for PBXNativeTarget "OVOFMorseCode" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4E5702C0CCFE01800B8C28A /* Debug */,
+				D4E5702D0CCFE01800B8C28A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}
