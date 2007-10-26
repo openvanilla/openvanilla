@@ -40,6 +40,8 @@
 }
 - (void)deactivateServer:(id)sender
 {
+	_context->clearAll();
+	_context->deactivate();
 	_sharedLoader->setActiveContext(0);
 	_currentClient = nil;
 }
