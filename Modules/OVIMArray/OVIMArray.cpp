@@ -408,8 +408,8 @@ int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path) {
 }
 
 int OVIMArray::updateConfig(OVDictionary *conf){
-    const char *AutoSP = "\xE7\x89\xB9\xE5\x88\xA5\xE7\xA2\xBC\xE6\x8F\x90\xE7\xA4\xBA"; // ç‰¹åˆ¥ç¢¼æç¤º
-    const char *ForceSP = "\xE5\xBF\xAB\xE6\x89\x93\xE6\xA8\xA1\xE5\xBC\x8F"; // å¿«æ‰“æ¨¡å¼
+    const char *AutoSP = "\xE7\x89\xB9\xE5\x88\xA5\xE7\xA2\xBC\xE6\x8F\x90\xE7\xA4\xBA"; // ¯S§O½X´£¥Ü
+    const char *ForceSP = "\xE5\xBF\xAB\xE6\x89\x93\xE6\xA8\xA1\xE5\xBC\x8F"; // §Ö¥´¼Ò¦¡
 
     if( !conf->keyExist(AutoSP) ) conf->setInteger(AutoSP, 1);
     if( !conf->keyExist(ForceSP) ) conf->setInteger(ForceSP, 0);
