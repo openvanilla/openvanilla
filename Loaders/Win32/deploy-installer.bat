@@ -8,7 +8,7 @@ mkdir ".\Installer\OpenVanilla\Modules\OVIMTobacco"
 mkdir ".\Installer\OpenVanilla\Resources"
 copy "%OV_DEPS%\libltdl3.dll" .\Installer\system32\
 copy "%OV_DEPS%\sqlite3.dll" .\Installer\system32\
-copy "%OV_DEPS%\hunspell\hunspell.dll" .\Installer\system32\
+copy "%OV_DEPS%\hunspell\libhunspell.dll" .\Installer\system32\
 copy ".\CSharpFormLibrary\bin\Release\CSharpFormLibrary.dll" .\Installer\OpenVanilla\
 copy "..\..\Utilities\GacUtil\bin\Release\GacUtil.exe" .\Installer\OpenVanilla\
 copy .\OVIMEUIManaged\Release\OVIMEUI.dll .\Installer\system32\
@@ -16,7 +16,9 @@ copy .\OVIME\Release\OVIME.ime .\Installer\system32\
 copy .\OVPreferences\bin\Release\OVPreferences.exe .\Installer\OpenVanilla\
 copy .\OVPreferences\bin\Release\Resources\*.resources .\Installer\OpenVanilla\Resources
 copy "..\..\Modules\OVIMArray\Release\OVIMArray.dll" ".\Installer\OpenVanilla\Modules\"
-copy "..\..\Modules\SharedData\array*.cin" ".\Installer\OpenVanilla\Modules\OVIMArray\"
+copy "..\..\Modules\SharedData\array30.cin" ".\Installer\OpenVanilla\Modules\OVIMArray\"
+copy "..\..\Modules\SharedData\array-special.cin" ".\Installer\OpenVanilla\Modules\OVIMArray\"
+copy "..\..\Modules\SharedData\array-shortcode.cin" ".\Installer\OpenVanilla\Modules\OVIMArray\"
 copy "..\..\Modules\OVIMGeneric\Release\OVIMGeneric.dll" ".\Installer\OpenVanilla\Modules\"
 copy "..\..\Modules\SharedData\dayi3-patched.cin" ".\Installer\OpenVanilla\Modules\OVIMGeneric\"
 copy "..\..\Modules\SharedData\ehq-symbols.cin" ".\Installer\OpenVanilla\Modules\OVIMGeneric\"
