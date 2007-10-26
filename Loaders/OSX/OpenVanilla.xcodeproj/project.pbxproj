@@ -760,7 +760,6 @@
 		6ACC512D0CCF7EC600E2307C /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 6ACC51300CCF7EC600E2307C /* Build configuration list for PBXProject "OpenVanilla" */;
-			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				English,
@@ -1166,6 +1165,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = "OpenVanilla-0.8-smSimpChinese";
 				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_SIMPLIFIED_CHINESE=1";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = NO;
 			};
@@ -1243,6 +1243,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = "OpenVanilla-0.8-smTradChinese";
 				REZ_PREPROCESSOR_DEFINITIONS = "ATSC_TRADITIONAL_CHINESE=1";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = NO;
 			};
