@@ -164,8 +164,16 @@ Function uninstOld
       ContinueUnist:
       SetOverwrite on
       SetOutPath "$TEMP\~nsu.tmp"
-      CopyFiles /SILENT "C:\OpenVanilla\uninst.exe" "$TEMP\~nsu.tmp\AU_.exe"            
-      ExecWait '"$TEMP\~nsu.tmp\Au_.exe" /S _?=C:\OpenVanilla' $0            
+      ClearErrors
+      IfFileExists "C:\OpenVanilla\unist.exe" NewPathUninst OldPathUninst
+      NewPathUninst:
+        CopyFiles /SILENT "C:\OpenVanilla\uninst.exe" "$TEMP\~nsu.tmp\AU_.exe"
+        ExecWait '"$TEMP\~nsu.tmp\Au_.exe" /S _?=C:\OpenVanilla' $0
+        Goto AfterUninst
+      OldPathUninst:
+        CopyFiles /SILENT "$WINDIR\OpenVanilla\uninst.exe" "$TEMP\~nsu.tmp\AU_.exe"
+        ExecWait '"$TEMP\~nsu.tmp\Au_.exe" /S _?=$WINDIR\OpenVanilla' $0
+      AfterUninst:
       Delete "$TEMP\~nsu.tmp\Au_.exe"
       RMDir "$TEMP\~nsu.tmp"
       ClearErrors
