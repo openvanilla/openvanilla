@@ -5,7 +5,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "¤¤¤å (ÁcÅé) - ¶}©ñ­»¯ó¿é¤Jªk¥­¥x"
-!define PRODUCT_VERSION "0.7.2.9-beta"
+!define PRODUCT_VERSION "0.8.0 (beta 1)"
 !define PRODUCT_PUBLISHER "OpenVanilla.org"
 !define PRODUCT_WEB_SITE "http://openvanilla.org/"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -67,10 +67,6 @@ SetCompressor lzma
 
 !define BASE_URL http://download.microsoft.com/download
 ; .NET Framework
-;English version .net v1.1
-;!define URL_DOTNET_1033 "${BASE_URL}/a/a/c/aac39226-8825-44ce-90e3-bf8203e74006/dotnetfx.exe"
-;Traditional Chinese version .net v1.1
-;!define URL_DOTNET_1028 "${BASE_URL}/8/2/7/827bb1ef-f5e1-4464-9788-40ef682930fd/dotnetfx.exe"
 ;English version .net v2.0
 ;!define URL_DOTNET_1033 "${BASE_URL}/5/6/7/567758a3-759e-473e-bf8f-52154438565a/dotnetfx.exe"
 ;Traditional Chinese version .net v2.0
@@ -149,7 +145,7 @@ LangString FAILED_DOTNET_INSTALL ${LANG_TradChinese} "¿é¤Jªk¦w¸Ë²×¤î¡A$\n¥²¶·µ¥¨
 
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "OpenVanilla-Windows-0.7.2.9-beta.exe"
+OutFile "OpenVanilla-Windows-0.8.0b1.exe"
 InstallDir "C:\OpenVanilla"
 ShowInstDetails show
 ShowUnInstDetails show
@@ -674,7 +670,7 @@ Section Uninstall
   Delete "$SYSDIR\OVIMEUI.dll"
   Delete "$SYSDIR\libltdl3.dll"
   Delete "$SYSDIR\sqlite3.dll"
-  Delete "$SYSDIR\Hunspell.dll"
+  Delete "$SYSDIR\libhunspell.dll"
   Delete "$INSTDIR\uninst.exe"
   RMDir /r "C:\OpenVanilla"
   Delete "$SMPROGRAMS\OpenVanilla\Uninstall.lnk"
