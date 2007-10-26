@@ -1,22 +1,20 @@
 # Makefile.Darwin: Makefile for OpenVanilla Framework and Loader for Mac OS X
-# Copyright (c) 2004-2006 The OpenVanilla Project
+# Copyright (c) 2004-2007 The OpenVanilla Project
 # Please see License/license.txt for the terms of use
 
 # global variables
-VERSION?=0.7.2
+VERSION?=0.8
 CONFIG?=Release
 DSTROOT?=/
-CMDLINETOOLROOT?=/opt/local
 
 # Xcode project files
 FW=Framework/OpenVanillaFramework.xcodeproj
-LD=Loaders/OSX/OpenVanillaLoader.xcodeproj
+LD=Loaders/OSX/OpenVanilla.xcodeproj
 
 # These are the built products to be cleaned up
 LIBFW=$(DSTROOT)/Library/Frameworks/OpenVanilla.framework
-LIBLDR=$(DSTROOT)/Library/Components/OpenVanilla-TSComponent-$(VERSION).bundle \
+LIBLDR=$(DSTROOT)/Library/Components/OpenVanilla-$(VERSION).bundle \
 	$(DSTROOT)/Library/OpenVanilla/$(VERSION)/Loader
-USRTOOL=$(DSTROOT)/$(CMDLINETOOLROOT)/bin/ovfilter
 
 CF=../../Framework/build/Release/
 
@@ -36,6 +34,6 @@ clean:
 	make -C Modules clean
         
 uninstall:
-	rm -rf $(LIBFW) $(LIBLDR) $(USRTOOL)
+	rm -rf $(LIBFW) $(LIBLDR)
 	make -C Modules uninstall
 
