@@ -10,12 +10,22 @@
 // -- "How could a person who doesn't even believe in law adopt any license?"
 
 // #define OV_DEBUG
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h> 
-#include <OpenVanilla/OpenVanilla.h>
-#include <OpenVanilla/OVLibrary.h>
-#include <OpenVanilla/OVUtility.h>
+#include <cstdio>
+#include <cstring>
+#include <cctype>
+
+#ifndef WIN32
+	#include <OpenVanilla/OpenVanilla.h>
+	#include <OpenVanilla/OVLibrary.h>
+	#include <OpenVanilla/OVUtility.h>
+#else
+	#include "OpenVanilla.h"
+	#include "OVLibrary.h"
+	#include "OVUtility.h"
+#endif
+
+#include "OVOSDef.h"
+
 #include "OVIMTibetan.h"
 
 int keyboardlayout = 0; 
@@ -189,9 +199,11 @@ class OVTibetanContext : public OVInputMethodContext
 		  keyseq.lastisother();
 		  keyseq.add(keycode);
 		  if (!strcasecmp(srv->locale(), "zh_TW")) 
-			  srv->notify("進入組合字狀態…");
+			  srv->notify(
+				"\xE9\x80\xB2\xE5\x85\xA5\xE7\xB5\x84\xE5\x90\x88\xE5\xAD\x97\xE7\x8B\x80\xE6\x85\x8B\xE2\x80\xA6");
 		  else if(!strcasecmp(srv->locale(), "zh_CN"))
-			  srv->notify("进入组合字状态…");
+			  srv->notify(
+				"\xE8\xBF\x9B\xE5\x85\xA5\xE7\xBB\x84\xE5\x90\x88\xE5\xAD\x97\xE7\x8A\xB6\xE6\x80\x81\xE2\x80\xA6");
 		  else
 			  srv->notify("Stacking characters..");
 	       }
@@ -366,23 +378,23 @@ class OVTibetanContext : public OVInputMethodContext
 	    { //Extra 
 	       if(keycode == 'M' || keycode == '>')
 	       {
-		  buf->clear()->append((char*)"ཧཱུྃ")->send();keyseq.clear();
+		  buf->clear()->append((char*)"\xE0\xBD\xA7\xE0\xBD\xB1\xE0\xBD\xB4\xE0\xBE\x83")->send();keyseq.clear();
 	       }
 	       if(keycode == '+' || keycode == '!')
 	       {
-		  buf->clear()->append((char*)"༄༅")->send();keyseq.clear();
+		  buf->clear()->append((char*)"\xE0\xBC\x84\xE0\xBC\x85")->send();keyseq.clear();
 	       }
 	       if(keycode == '=')
 	       {
-		  buf->clear()->append((char*)"ཨཱཿ")->send();keyseq.clear();
+		  buf->clear()->append((char*)"\xE0\xBD\xA8\xE0\xBD\xB1\xE0\xBD\xBF")->send();keyseq.clear();
 	       }
 	       if(keycode == '<')
 	       {
-		  buf->clear()->append((char*)"ཨོཾ")->send();keyseq.clear();
+		  buf->clear()->append((char*)"\xE0\xBD\xA8\xE0\xBD\xBC\xE0\xBD\xBE")->send();keyseq.clear();
 	       }
 	       if(keycode == '^')
 	       {
-		  buf->clear()->append((char*)"༁ྃ")->send();keyseq.clear();
+		  buf->clear()->append((char*)"\xE0\xBC\x81\xE0\xBE\x83")->send();keyseq.clear();
 	       }
 	    }
 	    return 1;
@@ -406,10 +418,8 @@ class OVIMTibetan : public OVInputMethod
 
       virtual const char *localizedName(const char *locale)
       {
-	 if (!strcasecmp(locale, "zh_TW"))
-	    return "藏文";
-	 else if (!strcasecmp(locale, "zh_CN"))
-	    return "藏文";
+	 if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
+	    return "\xE8\x97\x8F\xE6\x96\x87";
 	 else
 	    return "Tibetan";
       }
