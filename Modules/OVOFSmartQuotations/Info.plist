@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>OVOFSmartQuotations</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.ovofsmartquotations</string>
+	<string>org.openvanilla.module.ovofsmartquotations</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>

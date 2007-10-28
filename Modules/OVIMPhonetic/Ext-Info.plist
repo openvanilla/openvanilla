@@ -5,9 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>OVOFWuzhetien</string>
+	<string>OVIMPhonetic-Ext</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.module.ovofwuzhetien</string>
+	<string>org.openvanilla.module.ovimphonetic-ext</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleSignature</key>
 	<string>opvn</string>
 	<key>CFBundleVersion</key>
-	<string>0.8.0</string>
+	<string>0.8</string>
 	<key>CSResourcesFileMapped</key>
 	<string>yes</string>
 </dict>

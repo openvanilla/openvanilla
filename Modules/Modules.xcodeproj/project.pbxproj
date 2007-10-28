@@ -13,6 +13,7 @@
 			buildPhases = (
 			);
 			dependencies = (
+				D46626860CD4104100C0189C /* PBXTargetDependency */,
 				D4E56F6D0CCFDA7000B8C28A /* PBXTargetDependency */,
 				D4E56F6B0CCFDA7000B8C28A /* PBXTargetDependency */,
 				D4E56F690CCFDA7000B8C28A /* PBXTargetDependency */,
@@ -39,6 +40,9 @@
 		D434204F0C9EEB0400D5EE58 /* OVCIN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D434204B0C9EEB0400D5EE58 /* OVCIN.cpp */; };
 		D43420500C9EEB0400D5EE58 /* OVFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D434204C0C9EEB0400D5EE58 /* OVFileHandler.cpp */; };
 		D43420510C9EEB0400D5EE58 /* OVStringToolKit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D434204D0C9EEB0400D5EE58 /* OVStringToolKit.cpp */; };
+		D46626500CD40F8700C0189C /* OVIMPhoneticStatic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E56F430CCFD93B00B8C28A /* OVIMPhoneticStatic.cpp */; };
+		D46626510CD40F8700C0189C /* OVPhoneticData.c in Sources */ = {isa = PBXBuildFile; fileRef = D4E56F410CCFD93000B8C28A /* OVPhoneticData.c */; };
+		D46626520CD40F8700C0189C /* OVPhoneticLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E56F460CCFD95B00B8C28A /* OVPhoneticLib.cpp */; };
 		D4BB13830CD04EF20037EDBE /* OVOFFullWidthCharacter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4BB13820CD04EF20037EDBE /* OVOFFullWidthCharacter.cpp */; };
 		D4BB148B0CD057D10037EDBE /* OVOFSmartQuotations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4BB148A0CD057D10037EDBE /* OVOFSmartQuotations.cpp */; };
 		D4BB14F20CD075C80037EDBE /* OVOFHTMLCharEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4BB14F10CD075C80037EDBE /* OVOFHTMLCharEntity.cpp */; };
@@ -64,6 +68,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D46626850CD4104100C0189C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D466264A0CD40F5600C0189C /* OVIMPhonetic-Ext */;
+			remoteInfo = "OVIMPhonetic-Ext";
+		};
 		D4BB13840CD04F060037EDBE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
@@ -175,6 +186,7 @@
 		D434204D0C9EEB0400D5EE58 /* OVStringToolKit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVStringToolKit.cpp; path = SharedSource/OVStringToolKit.cpp; sourceTree = "<group>"; };
 		D43420680C9EEB3500D5EE58 /* OVFileHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVFileHandler.h; path = SharedHeaders/OVFileHandler.h; sourceTree = "<group>"; };
 		D434206A0C9EEB6900D5EE58 /* OVStringToolKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVStringToolKit.h; path = SharedHeaders/OVStringToolKit.h; sourceTree = "<group>"; };
+		D466264B0CD40F5600C0189C /* OVIMPhonetic-Ext.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OVIMPhonetic-Ext.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4BB13740CD04E960037EDBE /* OVOFFullWidthCharacter.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVOFFullWidthCharacter.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4BB13820CD04EF20037EDBE /* OVOFFullWidthCharacter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVOFFullWidthCharacter.cpp; path = OVOFFullWidthCharacter/OVOFFullWidthCharacter.cpp; sourceTree = "<group>"; };
 		D4BB14850CD057B30037EDBE /* OVOFSmartQuotations.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVOFSmartQuotations.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -322,6 +334,7 @@
 				D4BB150D0CD076E00037EDBE /* OVOFUnicodeDecoder.bundle */,
 				D4FE48080CD0858D008585D2 /* OVOFWuzhetien.bundle */,
 				D4FE483C0CD08672008585D2 /* OVOFZhWikipidealize.bundle */,
+				D466264B0CD40F5600C0189C /* OVIMPhonetic-Ext.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -523,6 +536,22 @@
 			productInstallPath = "$(HOME)/Library/Bundles";
 			productName = OVIMArray;
 			productReference = 8D01CCD20486CAD60068D4B7 /* OVIMArray.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D466264A0CD40F5600C0189C /* OVIMPhonetic-Ext */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D466264D0CD40F5800C0189C /* Build configuration list for PBXNativeTarget "OVIMPhonetic-Ext" */;
+			buildPhases = (
+				D46626530CD40F9A00C0189C /* ShellScript */,
+				D46626480CD40F5600C0189C /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OVIMPhonetic-Ext";
+			productName = "OVIMPhonetic-Ext";
+			productReference = D466264B0CD40F5600C0189C /* OVIMPhonetic-Ext.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		D4BB13730CD04E960037EDBE /* OVOFFullWidthCharacter */ = {
@@ -741,6 +770,7 @@
 				8D01CCC60486CAD60068D4B7 /* OVIMArray */,
 				D4E56EDD0CCFD69100B8C28A /* OVIMBig5 */,
 				D4E56F390CCFD8CE00B8C28A /* OVIMPhonetic */,
+				D466264A0CD40F5600C0189C /* OVIMPhonetic-Ext */,
 				D4E56F870CCFDB4E00B8C28A /* OVIMRoman */,
 				D4E56F9D0CCFDC0100B8C28A /* OVIMTibetan */,
 				D4E56FBB0CCFDCA000B8C28A /* OVIMUnicode */,
@@ -784,6 +814,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		D46626530CD40F9A00C0189C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "perl ./OVIMPhonetic/convert-phonedata.pl ./OVIMPhonetic/bpmf-ext.cin ./OVIMPhonetic/punctuations.cin > ./OVIMPhonetic/OVPhoneticData.c";
+		};
 		D4E56F4E0CCFD9AC00B8C28A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -809,6 +852,16 @@
 				D434204F0C9EEB0400D5EE58 /* OVCIN.cpp in Sources */,
 				D43420500C9EEB0400D5EE58 /* OVFileHandler.cpp in Sources */,
 				D43420510C9EEB0400D5EE58 /* OVStringToolKit.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D46626480CD40F5600C0189C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D46626500CD40F8700C0189C /* OVIMPhoneticStatic.cpp in Sources */,
+				D46626510CD40F8700C0189C /* OVPhoneticData.c in Sources */,
+				D46626520CD40F8700C0189C /* OVPhoneticLib.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -924,6 +977,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D46626860CD4104100C0189C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D466264A0CD40F5600C0189C /* OVIMPhonetic-Ext */;
+			targetProxy = D46626850CD4104100C0189C /* PBXContainerItemProxy */;
+		};
 		D4BB13850CD04F060037EDBE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D4BB13730CD04E960037EDBE /* OVOFFullWidthCharacter */;
@@ -1055,6 +1113,52 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Release;
+		};
+		D466264E0CD40F5800C0189C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVIMPhonetic-Ext-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "OVIMPhonetic-Ext";
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		D466264F0CD40F5800C0189C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVIMPhonetic/Ext-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "OVIMPhonetic-Ext";
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -1695,6 +1799,15 @@
 			buildConfigurations = (
 				4FADC23808B4156C00ABE55E /* Debug */,
 				4FADC23908B4156C00ABE55E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D466264D0CD40F5800C0189C /* Build configuration list for PBXNativeTarget "OVIMPhonetic-Ext" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D466264E0CD40F5800C0189C /* Debug */,
+				D466264F0CD40F5800C0189C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
