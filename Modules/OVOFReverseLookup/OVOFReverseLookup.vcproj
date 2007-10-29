@@ -239,6 +239,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\SharedHeaders\OVOSDef.h"
+				>
+			</File>
+			<File
 				RelativePath="..\SharedHeaders\OVStringToolKit.h"
 				>
 			</File>

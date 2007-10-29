@@ -35,9 +35,11 @@
 #else
     #include "OVLibrary.h"
     #include "OVUtility.h"
-    #define strcasecmp stricmp
 #endif
-#include <stdlib.h>
+
+#include "OVOSDef.h"
+
+#include <cstdlib>
 
 using namespace std;
 
@@ -136,10 +138,10 @@ const char *OVOFReverseLookup::process(const char *src, OVService *srv) {
         
         if (u8==NULL) {
             if (!strcasecmp(srv->locale(), "zh_TW")) {
-                srv->notify("反查失敗：Unicode字碼錯誤");
+                srv->notify("?�查失�?：Unicode字碼?�誤");
             }
             else if (!strcasecmp(srv->locale(), "zh_CN")) {
-                srv->notify("反查失败：Unicode字码错误");
+                srv->notify("?�查失败：Unicode字�??�误");
             }
             else {
                 srv->notify("Look-up failed: Bad Unicode codepoint");

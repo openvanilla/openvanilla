@@ -182,7 +182,7 @@
 	</References>
 	<Files>
 		<Filter
-			Name="原始程式檔"
+			Name="Source Files"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
@@ -196,6 +196,14 @@
 			</File>
 			<File
 				RelativePath=".\VXHCTC2SCTable.c"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			>
+			<File
+				RelativePath="..\SharedHeaders\OVOSDef.h"
 				>
 			</File>
 		</Filter>

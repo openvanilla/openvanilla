@@ -34,8 +34,9 @@
 #else
     #include "OpenVanilla.h"
     #include "OVLibrary.h"
-    #define strcasecmp stricmp
 #endif
+
+#include "OVOSDef.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -77,8 +78,8 @@ protected:
                        
 const char *OVOFFullWidthCharacter::localizedName(const char *locale)
 {
-    if (!strcasecmp(locale, "zh_TW")) return "\xE5\x85\xA8\xE5\xBD\xA2\xE8\x8B\xB1\xE6\x95\xB8\xE5\xAD\x97";//"å…¨å½¢è‹±æ•¸å­—";
-    if (!strcasecmp(locale, "zh_CN")) return "\xE5\x85\xA8\xE8\xA7\x92\xE8\x8B\xB1\xE6\x95\xB8\xE5\xAD\x97";//"å…¨è§’è‹±æ•°å­—";
+    if (!strcasecmp(locale, "zh_TW")) return "\xE5\x85\xA8\xE5\xBD\xA2\xE8\x8B\xB1\xE6\x95\xB8\xE5\xAD\x97";//"?¨å½¢?±æ•¸å­?;
+    if (!strcasecmp(locale, "zh_CN")) return "\xE5\x85\xA8\xE8\xA7\x92\xE8\x8B\xB1\xE6\x95\xB8\xE5\xAD\x97";//"?¨è??±æ•°å­?;
     return "Full-Width ASCII Character";
 }
 

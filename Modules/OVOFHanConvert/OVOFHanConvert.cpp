@@ -34,8 +34,9 @@
 #else
     #include "OpenVanilla.h"
     #include "OVLibrary.h"
-    #define strcasecmp stricmp
 #endif
+
+#include "OVOSDef.h"
 
 #include <cstdlib>
 #include <cstring>
