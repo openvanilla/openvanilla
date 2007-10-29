@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="OVIMGenericSQLite"
-	ProjectGUID="{030D6D55-545E-43DD-9DF5-E99A06EFFD38}"
-	Keyword="ExtStoredProcProj"
+	Name="OVOFHanConvert"
+	ProjectGUID="{575E02A0-8236-471D-AF56-9CB6D60B6C84}"
+	RootNamespace="OVOFHanConvert"
 	>
 	<Platforms>
 		<Platform
@@ -19,8 +19,7 @@
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			CharacterSet="0"
+			CharacterSet="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -66,9 +65,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="sqlite3.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories=""
 				ModuleDefinitionFile="..\OVModule.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -104,8 +101,7 @@
 			OutputDirectory="Release"
 			IntermediateDirectory="Release"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			CharacterSet="0"
+			CharacterSet="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -148,9 +144,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="sqlite3.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories=""
 				ModuleDefinitionFile="..\OVModule.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -193,24 +187,18 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\OVIMGenericSQLite.cpp"
+				RelativePath=".\OVOFHanConvert.cpp"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="¼ÐÀYÀÉ"
-			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
-			>
 			<File
-				RelativePath="..\SharedHeaders\OVSQLite3.h"
+				RelativePath=".\VXHCSC2TCTable.c"
+				>
+			</File>
+			<File
+				RelativePath=".\VXHCTC2SCTable.c"
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath=".\README.txt"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

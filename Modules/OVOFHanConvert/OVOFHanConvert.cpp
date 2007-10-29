@@ -37,16 +37,16 @@
     #define strcasecmp stricmp
 #endif
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <ctype.h>
+#include <cstdlib>
+#include <cstring>
+#include <cstdio>
+#include <cctype>
 
 const size_t vxSC2TCTableSize=8189;
-extern unsigned short vxSC2TCTable[];
+extern "C" unsigned short vxSC2TCTable[];
 
 const size_t vxTC2SCTableSize=3209;
-extern unsigned short vxTC2SCTable[];
+extern "C" unsigned short vxTC2SCTable[];
 
 struct VXHCData {
 	unsigned short key, value;
@@ -93,8 +93,8 @@ protected:
                        
 const char *OVOFConvSC2TC::localizedName(const char *locale)
 {
-    if (!strcasecmp(locale, "zh_TW")) return "\xE7\xB0\xA1\xE9\xAB\x94\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\x89\xE7\xB9\x81\xE9\xAB\x94";//"簡體中文轉繁體";
-    if (!strcasecmp(locale, "zh_CN")) return "\xE7\xAE\x80\xE4\xBD\x93\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\xAC\xE7\xB9\x81\xE4\xBD\x93";//"简体中文转繁体";
+    if (!strcasecmp(locale, "zh_TW")) return "\xE7\xB0\xA1\xE9\xAB\x94\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\x89\xE7\xB9\x81\xE9\xAB\x94";//"簡�?中�?轉�?�?;
+    if (!strcasecmp(locale, "zh_CN")) return "\xE7\xAE\x80\xE4\xBD\x93\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\xAC\xE7\xB9\x81\xE4\xBD\x93";//"简体中?�转繁�?";
     return "Simplified Chinese to Traditional Chinese";
 }
 
@@ -138,8 +138,8 @@ protected:
                        
 const char *OVOFConvTC2SC::localizedName(const char *locale)
 {
-    if (!strcasecmp(locale, "zh_TW")) return "\xE7\xB9\x81\xE9\xAB\x94\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\x89\xE7\xB0\xA1\xE9\xAB\x94";//"繁體中文轉簡體";
-    if (!strcasecmp(locale, "zh_CN")) return "\xE7\xB9\x81\xE4\xBD\x93\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\xAC\xE7\xAE\x80\xE4\xBD\x93";//"繁体中文转简体";
+    if (!strcasecmp(locale, "zh_TW")) return "\xE7\xB9\x81\xE9\xAB\x94\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\x89\xE7\xB0\xA1\xE9\xAB\x94";//"繁�?中�?轉簡�?;
+    if (!strcasecmp(locale, "zh_CN")) return "\xE7\xB9\x81\xE4\xBD\x93\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\xAC\xE7\xAE\x80\xE4\xBD\x93";//"繁�?中�?转�?�?;
     return "Traditional Chinese to Simpified Chinese";
 }
 

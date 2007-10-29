@@ -53,7 +53,7 @@
 
 #ifndef OVIMPHONETIC_EXT
     #define OVIMP_MODID         "OVIMPhonetic"
-    #define OVIMP_NAME_ZH_TW    "\xE6\xB3\xA8\xE9\x9F\xB3"
+    #define OVIMP_NAME_ZH_TW    "\xE5\x82\xB3\xE7\xB5\xB1\xE6\xB3\xA8\xE9\x9F\xB3"
     #define OVIMP_NAME_ZH_CN    "\xE7\xB9\x81\xE4\xBD\x93\xE6\xB3\xA8\xE9\x9F\xB3"
     #define OVIMP_NAME_EN       "Phonetic (Bopomofo)"
 #else
