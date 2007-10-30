@@ -5,6 +5,9 @@
 @implementation LVInputMethodController
 - (id)initWithServer:(IMKServer*)server delegate:(id)delegate client:(id)inputClient
 {
+	if (!_sharedLoader)
+		return nil;
+
 	if (self = [super initWithServer:server delegate:delegate client:inputClient]) {
 		_bufferContent = [NSMutableString new];
 		_composingBuffer = new LVComposingBuffer(self);

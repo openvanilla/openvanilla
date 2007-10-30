@@ -8,9 +8,9 @@
 #import "LeopardVanilla.h"
 #import "CVLoader.h"
 
-IMKServer *_inputMethodServer;
+IMKServer *_inputMethodServer = nil;
 MenuRef _sharedCarbonMenu;
-CVLoader *_sharedLoader;
+CVLoader *_sharedLoader = nil;
 
 int main(int argc, char *argv[])
 {
@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	
 	_sharedLoader = new CVLoader;
 	_sharedLoader->init(_sharedCarbonMenu);
-
+	
 	[[NSApplication sharedApplication] run];
 	
 	[pool drain];
