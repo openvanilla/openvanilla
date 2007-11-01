@@ -8,5 +8,6 @@
 extern IMKServer *_inputMethodServer;
 extern MenuRef _sharedCarbonMenu;
 extern CVLoader *_sharedLoader;
+extern NSLock *_sharedLock;
 
 #define LEOPARD_VANILLA_CONNECTION_NAME @"LeopardVanillaConnection"

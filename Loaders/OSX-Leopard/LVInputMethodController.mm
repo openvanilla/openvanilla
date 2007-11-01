@@ -5,14 +5,23 @@
 @implementation LVInputMethodController
 - (id)initWithServer:(IMKServer*)server delegate:(id)delegate client:(id)inputClient
 {
-	if (!_sharedLoader)
-		return nil;
-
+	NSLog(@"init with server, delegate = %x, client = %x", delegate, inputClient);
+	
 	if (self = [super initWithServer:server delegate:delegate client:inputClient]) {
+		[_sharedLock lock];
+		
 		_bufferContent = [NSMutableString new];
 		_composingBuffer = new LVComposingBuffer(self);
-		_context = _sharedLoader->newContext();
+		
+		if (!_sharedLoader)
+			_context = 0;
+		else
+			_context = _sharedLoader->newContext();
+			
 		_currentClient = nil;
+		_nonActivationEventBlocker = YES;
+		
+		[_sharedLock unlock];
 	}
 	
 	return self;
@@ -36,6 +45,10 @@
 }
 - (void)activateServer:(id)sender
 {
+	if (!_sharedLoader || !_context) return;
+	_nonActivationEventBlocker = NO;
+	
+	NSLog(@"activated, client = %x", sender);
  	_sharedLoader->setActiveContext(_context);
 	
 	_currentClient = sender;
@@ -43,6 +56,11 @@
 }
 - (void)deactivateServer:(id)sender
 {
+	if (!_sharedLoader || !_context) return;
+	NSLog(@"deactivated, client = %x", sender);
+
+	_nonActivationEventBlocker = YES;
+
 	_context->clearAll();
 	_context->deactivate();
 	_sharedLoader->setActiveContext(0);
@@ -50,15 +68,37 @@
 }
 - (void)commitComposition:(id)sender 
 {
+	if (!_sharedLoader || !_context) return;
+
 	if ([_bufferContent length] > 0) {
 		[sender insertText:_bufferContent replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
 	}
 }
 - (BOOL)handleEvent:(NSEvent*)event client:(id)sender
 {
+
+	_currentClient = nil;
+	
+	if (!_sharedLoader || !_context) return NO;
+
+	NSLog(@"event, client = %x", sender);
+
 	_currentClient = sender;
 	
 	if ([event type] == NSKeyDown) {
+		// we find that handleEvent might be called prior to activation
+		// and this is because, for example, OpenVanilla.app can be killed
+		// in the middle of an input session. For example, if an app still
+		// has an input session, but OVPreferences.app kills OpenVanilla.app
+		// (in order to restart), then the next input client message
+		// will get here directly, no -activateServer: is called
+	
+		if (_nonActivationEventBlocker) {
+			_sharedLoader->setActiveContext(_context);
+			_context->activate(_composingBuffer);
+			_nonActivationEventBlocker = NO;
+		}
+	
 		[self updateCursorPosition];
 
 		NSString *chars = [event characters];
@@ -84,10 +124,14 @@
 }
 - (void)handleMenuEvent:(id)sender
 {
+	if (!_sharedLoader || !_context) return;
+
 	_sharedLoader->menuHandler([[sender objectForKey:@"IMKCommandMenuItem"] tag]);
 }
 - (NSMenu*)menu
-{	
+{
+	if (!_sharedLoader || !_context) return [[[NSMenu alloc] init] autorelease];
+
 	NSMenu *menu = [[[NSMenu alloc] init] autorelease];
 	
 	UInt16 carbonMenuItemCount = CountMenuItems(_sharedCarbonMenu);

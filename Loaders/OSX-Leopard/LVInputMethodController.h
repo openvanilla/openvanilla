@@ -12,6 +12,8 @@
 	
 	id _currentClient;
 	NSPoint _cursorPosition;
+	
+	BOOL _nonActivationEventBlocker;
 }
 - (void)composingBufferClear;
 - (void)composingBufferSend;
