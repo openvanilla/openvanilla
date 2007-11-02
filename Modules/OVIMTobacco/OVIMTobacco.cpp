@@ -638,10 +638,13 @@ int OVIMTobaccoContext::keyPrintable() {
 	}
 
 	if (!seq.add(k->code())) {
-		s->notify("\xE5\x9B\xA7");
-		if (parent->doBeep())
-			s->beep();
-        if (b->isEmpty()) return keyNonRadical();		
+        if (b->isEmpty())
+			return keyNonRadical();
+		else {
+			s->notify("\xE5\x9B\xA7");
+			if (parent->doBeep())
+				s->beep();
+		}
     }
 
     if (!seq.isEmpty()) {
