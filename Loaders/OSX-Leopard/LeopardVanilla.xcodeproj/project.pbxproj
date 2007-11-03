@@ -18,11 +18,17 @@
 		6A17258F0CCFCD5200C27C90 /* CVService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A1725800CCFCD5200C27C90 /* CVService.mm */; };
 		6A1725900CCFCD5200C27C90 /* CVSmartMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A1725820CCFCD5200C27C90 /* CVSmartMenu.mm */; };
 		6A1725910CCFCD5200C27C90 /* CVWrappers.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A1725840CCFCD5200C27C90 /* CVWrappers.mm */; };
-		6A17259A0CCFCD7B00C27C90 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6A1725990CCFCD7B00C27C90 /* MainMenu.nib */; };
 		6A1725A30CCFCDB200C27C90 /* NSDictionaryExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A1725A00CCFCDB200C27C90 /* NSDictionaryExtension.mm */; };
 		6A1725A40CCFCDB200C27C90 /* NSStringExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A1725A20CCFCDB200C27C90 /* NSStringExtension.mm */; };
 		6A1725E00CCFD35500C27C90 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1725DF0CCFD35500C27C90 /* Carbon.framework */; };
 		6A1725FB0CCFD48800C27C90 /* TSComposingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A1725FA0CCFD48800C27C90 /* TSComposingBuffer.mm */; };
+		6A6D91F70CDCB9EC002AF70A /* NSBezierPathAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D91F60CDCB9EC002AF70A /* NSBezierPathAdditions.m */; };
+		6A8D4DD80CDCB50E002DDE1F /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D4DD60CDCB50E002DDE1F /* MainMenu.nib */; };
+		6A8D4DDF0CDCB553002DDE1F /* OpenVanilla.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D4DDE0CDCB553002DDE1F /* OpenVanilla.icns */; };
+		6A8D4DE30CDCB56C002DDE1F /* CVDisplayServerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D4DE20CDCB56C002DDE1F /* CVDisplayServerController.m */; };
+		6A8D4DEB0CDCB597002DDE1F /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D4DE60CDCB597002DDE1F /* CTGradient.m */; };
+		6A8D4DEC0CDCB597002DDE1F /* CVBubbleTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D4DE80CDCB597002DDE1F /* CVBubbleTextView.m */; };
+		6A8D4DED0CDCB597002DDE1F /* CVBubbleTextWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D4DEA0CDCB597002DDE1F /* CVBubbleTextWindow.m */; };
 		6AABAFE50CC577CD00835C13 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AABAFE40CC577CD00835C13 /* InputMethodKit.framework */; };
 		6AABAFE80CC578AF00835C13 /* LeopardVanilla.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6AABAFE60CC578AF00835C13 /* LeopardVanilla.icns */; };
 		6AABAFFF0CC57C6500835C13 /* LVInputMethodController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AABAFFE0CC57C6500835C13 /* LVInputMethodController.mm */; };
@@ -37,7 +43,6 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
-		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* LeopardVanilla_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeopardVanilla_Prefix.pch; sourceTree = "<group>"; };
 		6A17256F0CCFCD5200C27C90 /* CVBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVBuffer.h; path = ../OSX/CocoaVanilla/CVBuffer.h; sourceTree = SOURCE_ROOT; };
 		6A1725700CCFCD5200C27C90 /* CVBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVBuffer.mm; path = ../OSX/CocoaVanilla/CVBuffer.mm; sourceTree = SOURCE_ROOT; };
@@ -67,6 +72,20 @@
 		6A1725A20CCFCDB200C27C90 /* NSStringExtension.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NSStringExtension.mm; path = ../OSX/CocoaVanilla/NSExtensions/NSStringExtension.mm; sourceTree = SOURCE_ROOT; };
 		6A1725DF0CCFD35500C27C90 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		6A1725FA0CCFD48800C27C90 /* TSComposingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TSComposingBuffer.mm; sourceTree = "<group>"; };
+		6A6D91F50CDCB9EC002AF70A /* NSBezierPathAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBezierPathAdditions.h; path = ../OSX/CocoaVanilla/NSExtensions/NSBezierPathAdditions.h; sourceTree = SOURCE_ROOT; };
+		6A6D91F60CDCB9EC002AF70A /* NSBezierPathAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSBezierPathAdditions.m; path = ../OSX/CocoaVanilla/NSExtensions/NSBezierPathAdditions.m; sourceTree = SOURCE_ROOT; };
+		6A8D4DD70CDCB50E002DDE1F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = ../OSX/OVDisplayServer/English.lproj/MainMenu.nib; sourceTree = SOURCE_ROOT; };
+		6A8D4DD90CDCB51B002DDE1F /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = ../OSX/OVDisplayServer/zh_TW.lproj/MainMenu.nib; sourceTree = SOURCE_ROOT; };
+		6A8D4DDB0CDCB52C002DDE1F /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = ../OSX/OVDisplayServer/zh_CN.lproj/MainMenu.nib; sourceTree = SOURCE_ROOT; };
+		6A8D4DDE0CDCB553002DDE1F /* OpenVanilla.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanilla.icns; path = ../OSX/OVDisplayServer/OpenVanilla.icns; sourceTree = SOURCE_ROOT; };
+		6A8D4DE10CDCB56C002DDE1F /* CVDisplayServerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVDisplayServerController.h; path = ../OSX/OVDisplayServer/CVDisplayServerController.h; sourceTree = SOURCE_ROOT; };
+		6A8D4DE20CDCB56C002DDE1F /* CVDisplayServerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CVDisplayServerController.m; path = ../OSX/OVDisplayServer/CVDisplayServerController.m; sourceTree = SOURCE_ROOT; };
+		6A8D4DE50CDCB597002DDE1F /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
+		6A8D4DE60CDCB597002DDE1F /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
+		6A8D4DE70CDCB597002DDE1F /* CVBubbleTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVBubbleTextView.h; path = ../OSX/CocoaVanilla/CVBubbleTextView.h; sourceTree = SOURCE_ROOT; };
+		6A8D4DE80CDCB597002DDE1F /* CVBubbleTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CVBubbleTextView.m; path = ../OSX/CocoaVanilla/CVBubbleTextView.m; sourceTree = SOURCE_ROOT; };
+		6A8D4DE90CDCB597002DDE1F /* CVBubbleTextWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVBubbleTextWindow.h; path = ../OSX/CocoaVanilla/CVBubbleTextWindow.h; sourceTree = SOURCE_ROOT; };
+		6A8D4DEA0CDCB597002DDE1F /* CVBubbleTextWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CVBubbleTextWindow.m; path = ../OSX/CocoaVanilla/CVBubbleTextWindow.m; sourceTree = SOURCE_ROOT; };
 		6AABAFE40CC577CD00835C13 /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = /System/Library/Frameworks/InputMethodKit.framework; sourceTree = "<absolute>"; };
 		6AABAFE60CC578AF00835C13 /* LeopardVanilla.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LeopardVanilla.icns; sourceTree = "<group>"; };
 		6AABAFF90CC579D700835C13 /* LeopardVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeopardVanilla.h; sourceTree = "<group>"; };
@@ -109,6 +128,8 @@
 		29B97314FDCFA39411CA2CEA /* OpenVanilla */ = {
 			isa = PBXGroup;
 			children = (
+				6A8D4DE10CDCB56C002DDE1F /* CVDisplayServerController.h */,
+				6A8D4DE20CDCB56C002DDE1F /* CVDisplayServerController.m */,
 				6A17256E0CCFCD2400C27C90 /* CocoaVanilla */,
 				6AABAFF90CC579D700835C13 /* LeopardVanilla.h */,
 				6AABAFFD0CC57C6500835C13 /* LVInputMethodController.h */,
@@ -128,11 +149,12 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A8D4DDE0CDCB553002DDE1F /* OpenVanilla.icns */,
+				6A8D4DD60CDCB50E002DDE1F /* MainMenu.nib */,
 				6AB6AFFF0CD074A9008A44AC /* LeopardVanilla.sdef */,
 				6AABAFE60CC578AF00835C13 /* LeopardVanilla.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				6AD732A00CD0E4E200052686 /* InfoPlist.strings */,
-				6A1725990CCFCD7B00C27C90 /* MainMenu.nib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -150,6 +172,11 @@
 		6A17256E0CCFCD2400C27C90 /* CocoaVanilla */ = {
 			isa = PBXGroup;
 			children = (
+				6A8D4DE40CDCB597002DDE1F /* CTGradient */,
+				6A8D4DE70CDCB597002DDE1F /* CVBubbleTextView.h */,
+				6A8D4DE80CDCB597002DDE1F /* CVBubbleTextView.m */,
+				6A8D4DE90CDCB597002DDE1F /* CVBubbleTextWindow.h */,
+				6A8D4DEA0CDCB597002DDE1F /* CVBubbleTextWindow.m */,
 				6AB6AF340CCFEA7A008A44AC /* OVDisplayServer.h */,
 				6AB6AF350CCFEA7A008A44AC /* TSBundle.h */,
 				6AB6AF360CCFEA7A008A44AC /* TSComposingBuffer.h */,
@@ -183,6 +210,8 @@
 		6A17259E0CCFCD9E00C27C90 /* NSExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				6A6D91F50CDCB9EC002AF70A /* NSBezierPathAdditions.h */,
+				6A6D91F60CDCB9EC002AF70A /* NSBezierPathAdditions.m */,
 				6A17259F0CCFCDB200C27C90 /* NSDictionaryExtension.h */,
 				6A1725A00CCFCDB200C27C90 /* NSDictionaryExtension.mm */,
 				6A1725A10CCFCDB200C27C90 /* NSStringExtension.h */,
@@ -190,6 +219,16 @@
 			);
 			name = NSExtensions;
 			sourceTree = "<group>";
+		};
+		6A8D4DE40CDCB597002DDE1F /* CTGradient */ = {
+			isa = PBXGroup;
+			children = (
+				6A8D4DE50CDCB597002DDE1F /* CTGradient.h */,
+				6A8D4DE60CDCB597002DDE1F /* CTGradient.m */,
+			);
+			name = CTGradient;
+			path = ../OSX/CocoaVanilla/CTGradient;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -243,10 +282,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A17259A0CCFCD7B00C27C90 /* MainMenu.nib in Resources */,
 				6AD732A10CD0E4E200052686 /* InfoPlist.strings in Resources */,
 				6AABAFE80CC578AF00835C13 /* LeopardVanilla.icns in Resources */,
 				6AB6B0000CD074A9008A44AC /* LeopardVanilla.sdef in Resources */,
+				6A8D4DD80CDCB50E002DDE1F /* MainMenu.nib in Resources */,
+				6A8D4DDF0CDCB553002DDE1F /* OpenVanilla.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,16 +314,23 @@
 				6A1725A40CCFCDB200C27C90 /* NSStringExtension.mm in Sources */,
 				6A1725FB0CCFD48800C27C90 /* TSComposingBuffer.mm in Sources */,
 				6AB6AF3D0CCFEBEC008A44AC /* LVComposingBuffer.mm in Sources */,
+				6A8D4DE30CDCB56C002DDE1F /* CVDisplayServerController.m in Sources */,
+				6A8D4DEB0CDCB597002DDE1F /* CTGradient.m in Sources */,
+				6A8D4DEC0CDCB597002DDE1F /* CVBubbleTextView.m in Sources */,
+				6A8D4DED0CDCB597002DDE1F /* CVBubbleTextWindow.m in Sources */,
+				6A6D91F70CDCB9EC002AF70A /* NSBezierPathAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6A1725990CCFCD7B00C27C90 /* MainMenu.nib */ = {
+		6A8D4DD60CDCB50E002DDE1F /* MainMenu.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				29B97319FDCFA39411CA2CEA /* English */,
+				6A8D4DD70CDCB50E002DDE1F /* English */,
+				6A8D4DD90CDCB51B002DDE1F /* zh_TW */,
+				6A8D4DDB0CDCB52C002DDE1F /* zh_CN */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
@@ -312,7 +359,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LeopardVanilla_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = USE_MAIN_BUNDLE;
+				GCC_PREPROCESSOR_DEFINITIONS = LEOPARD_VANILLA;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = LeopardVanilla;
@@ -330,7 +377,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LeopardVanilla_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = USE_MAIN_BUNDLE;
+				GCC_PREPROCESSOR_DEFINITIONS = LEOPARD_VANILLA;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "/Library/Input Methods";
 				PRODUCT_NAME = OpenVanilla;

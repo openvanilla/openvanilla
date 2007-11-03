@@ -121,7 +121,7 @@ int CVLoader::init(MenuRef m) {
     // murmur("CVLoader::init begin");
 	// get CVLoader.bundle
 	
-	#ifndef USE_MAIN_BUNDLE
+	#ifndef LEOPARD_VANILLA
 		loaderbundle=[NSBundle bundleWithIdentifier:@ TSBUNDLEID];
 		if (!loaderbundle) {
 			NSLog (@"CVLoader: fatal error, bundle %s not found", TSBUNDLEID);
@@ -298,6 +298,12 @@ void CVLoader::menuHandler(unsigned int cmd) {
 }
 
 id CVLoader::connectDisplayServer() {
+	#ifdef LEOPARD_VANILLA
+		NSLog(@"LeopardVanilla, no more display server");
+		dspsrvr = [[NSApplication sharedApplication] delegate];
+		return dspsrvr;
+	#endif
+
 	NSString *displayServerName = [loaderdict valueForKey:@"displayServerName" default:OVDSPSRVR_NAME];
 	NSString *displayServerStartupTimeout = [loaderdict valueForKey:@"displayServerStartupTimeout" default:@"20"];
 	NSString *displayServerPath = [loaderdict valueForKey:@"displayServerPath" default:CVLC_DISPLAYSERVER];

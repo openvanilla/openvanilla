@@ -24,13 +24,17 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 @implementation CVDisplayServerController
 - (void)awakeFromNib
 {
-	NSConnection *connection = [NSConnection defaultConnection];
-	[connection setRootObject:self];
-	
-	if (![connection registerName:OVDSPSRVR_NAME]) {
-		[[NSApplication sharedApplication] terminate:self];
-		return;
-	}
+	#ifndef LEOPARD_VANILLA
+		NSConnection *connection = [NSConnection defaultConnection];
+		[connection setRootObject:self];
+		
+		if (![connection registerName:OVDSPSRVR_NAME]) {
+			[[NSApplication sharedApplication] terminate:self];
+			return;
+		}
+	#else
+		NSLog(@"LeopardVanilla, display server now embedded");
+	#endif
 	
 	_fadeAlpha = 1.0;
 	_fadeTimer = nil;
