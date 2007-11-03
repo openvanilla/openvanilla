@@ -92,7 +92,7 @@ extern "C" OVModule *OVGetModuleFromLibrary(int x) {
     return new OVOFReverseLookup(cinlist->cinInfo((size_t)x));
 }
 
-OVOFReverseLookup::OVOFReverseLookup(const OVCINInfo &ci) : cininfo(ci) {
+OVOFReverseLookup::OVOFReverseLookup(const OVCINInfo &ci) : cininfo(ci), cintab(0) {
     idstr = "OVOFReverseLookup-" + cininfo.shortfilename;
 }
 
@@ -112,9 +112,12 @@ const char* OVOFReverseLookup::localizedName(const char* locale) {
 
 int OVOFReverseLookup::initialize(OVDictionary* global, OVService*, const char*) {
     if (!cintab) {
+	    murmur("OVOFRevereseLookup: initializing %s", identifier());
         cintab=new OVCIN(cininfo.longfilename.c_str());
      }
-    murmur("OVOFRevereseLookup: initializing %s", identifier());
+	else {
+		murmur("Already initialized");
+	}
     return 1;
 }
 
