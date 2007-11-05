@@ -125,7 +125,8 @@ void OVCIN::parseCinVector(const vector<string>& cinVector){
 
 void OVCIN::lowerStr(string& str){
     for(int i=static_cast<int>(str.length())-1; i>=0; i--)
-        if( !isprint(str[i]) )
+        //if( !isprint(str[i]) )
+		if(!isprint(str[i], m_locale))
             return;
     transform( str.begin(), str.end(), str.begin(),(int(*)(int)) tolower );
 }

@@ -42,6 +42,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <locale>
 
 using namespace std;
 
@@ -80,6 +81,7 @@ private:
     vector< pair<string, string > > block_buf;
     CinMap maps[_OVCIN::NUM_MAP];
     int curMapIndex;
+	locale m_locale;
 
 public:    
     // VXCIN::read()
