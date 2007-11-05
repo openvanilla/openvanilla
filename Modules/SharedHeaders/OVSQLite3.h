@@ -68,7 +68,7 @@ public:
         char *cmd=sqlite3_vmprintf(sqlcmd, l);
         va_end(l);
         int r=sqlite3_exec(handle, cmd, NULL, NULL, NULL);
-        free(cmd);
+        sqlite3_free(cmd);
         return r;
     }
     
