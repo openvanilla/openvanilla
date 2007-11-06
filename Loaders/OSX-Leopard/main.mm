@@ -40,6 +40,15 @@ int main(int argc, char *argv[])
 	
 	_sharedLock = [[NSLock alloc] init];
 	_inputMethodServer = [[IMKServer alloc] initWithName:LEOPARD_VANILLA_CONNECTION_NAME bundleIdentifier:[[NSBundle mainBundle] bundleIdentifier]];
+	
+	if (_inputMethodServer) {
+		NSLog(@"input method server initialized");
+	}
+	else {
+		NSLog(@"input method server init failed!");
+	}
+	
+	
 	[NSBundle loadNibNamed:@"MainMenu" owner:[NSApplication sharedApplication]];
 
 	// create the shared menu

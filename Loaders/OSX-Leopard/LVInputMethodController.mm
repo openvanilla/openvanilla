@@ -45,10 +45,14 @@
 }
 - (void)activateServer:(id)sender
 {
-	if (!_sharedLoader || !_context) return;
+	NSLog(@"activated, client = %x", sender);
+
+	if (!_sharedLoader || !_context) {
+		NSLog(@"nothing!");
+		return;
+	}
 	_nonActivationEventBlocker = NO;
 	
-	NSLog(@"activated, client = %x", sender);
  	_sharedLoader->setActiveContext(_context);
 	
 	_currentClient = sender;
@@ -56,8 +60,11 @@
 }
 - (void)deactivateServer:(id)sender
 {
-	if (!_sharedLoader || !_context) return;
 	NSLog(@"deactivated, client = %x", sender);
+	if (!_sharedLoader || !_context) {
+		NSLog(@"nothing!");
+		return;
+	}
 
 	_nonActivationEventBlocker = YES;
 
@@ -79,9 +86,10 @@
 
 	_currentClient = nil;
 	
-	if (!_sharedLoader || !_context) return NO;
-
-	NSLog(@"event, client = %x", sender);
+	if (!_sharedLoader || !_context) {
+		NSLog(@"event nothing!");
+		return NO;
+	}
 
 	_currentClient = sender;
 	
