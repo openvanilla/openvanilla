@@ -631,7 +631,7 @@ int OVIMTobaccoContext::keyPrintable() {
 	*/
 	if (parent->maxSeqLen() > 0 &&
 		seq.length() >= parent->maxSeqLen()) {
-		s->notify("\xE5\x9B\xA7");
+		s->notify("\xE6\x8C\x89\xE9\x8D\xB5\xE6\x9C\x89\xE8\xAA\xA4");
 		if (parent->doBeep())
 			s->beep();
 		return 1;
@@ -641,7 +641,7 @@ int OVIMTobaccoContext::keyPrintable() {
         if (b->isEmpty())
 			return keyNonRadical();
 		else {
-			s->notify("\xE5\x9B\xA7");
+			s->notify("\xE6\x8C\x89\xE9\x8D\xB5\xE6\x9C\x89\xE8\xAA\xA4");
 			if (parent->doBeep())
 				s->beep();
 		}
@@ -809,7 +809,7 @@ int OVIMTobaccoContext::keyCompose() {
         return 0;
     }
     else {
-		s->notify("\xE5\x9B\xA7");
+		s->notify("\xE6\x8C\x89\xE9\x8D\xB5\xE6\x9C\x89\xE8\xAA\xA4");
 		if (parent->doBeep())
 			s->beep();
         if(parent->doClearSequenceOnError())
@@ -960,7 +960,7 @@ int OVIMTobaccoContext::candidateEvent() {
         if (seq.isValidKey(kc)) { i=0; nextsyl=1; }
     }
     if (i==l) {
-		s->notify("\xE5\x9B\xA7");
+		s->notify("\xE6\x8C\x89\xE9\x8D\xB5\xE6\x9C\x89\xE8\xAA\xA4");
         if (parent->doBeep())
 			s->beep();
         b->update((int)position, (int)position, (int)position);    // we do this to make some applications happy
@@ -1046,7 +1046,7 @@ int OVIMTobaccoContext::commitFirstCandidate() {
 int OVIMTobaccoContext::candidatePageUp() {
     int maxpage=(candi->count-1) / strlen(parent->selkey);
 	if (!maxpage) {
-		s->notify("\xE5\x9B\xA7");
+		s->notify("\xE6\x8C\x89\xE9\x8D\xB5\xE6\x9C\x89\xE8\xAA\xA4");
 		if (parent->doBeep())
 			s->beep();
 	} else {
@@ -1062,7 +1062,7 @@ int OVIMTobaccoContext::candidatePageUp() {
 int OVIMTobaccoContext::candidatePageDown() {
     int maxpage=(candi->count-1) / strlen(parent->selkey);
 	if (!maxpage) {
-		s->notify("\xE5\x9B\xA7");
+		s->notify("\xE6\x8C\x89\xE9\x8D\xB5\xE6\x9C\x89\xE8\xAA\xA4");
 		if (parent->doBeep())
 			s->beep();
 	} else {

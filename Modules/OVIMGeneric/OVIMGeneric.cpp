@@ -316,7 +316,7 @@ int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textb
     		keyseq.length() == parent->maxSeqLen())
     	{
             updateDisplay(buf);
-			srv->notify("\xE5\x9B\xA7");
+			srv->notify("\xE6\x8C\x89\xE9\x8D\xB5\xE6\x9C\x89\xE8\xAA\xA4");
             if (parent->isBeep())
 				srv->beep();
             return 1;
@@ -356,7 +356,7 @@ int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textb
     }
     
     if (!buf->isEmpty()) {
-		srv->notify("\xE5\x9B\xA7");
+		srv->notify("\xE6\x8C\x89\xE9\x8D\xB5\xE6\x9C\x89\xE8\xAA\xA4");
         if (parent->isBeep())
 			srv->beep();
         return 1;
@@ -389,7 +389,7 @@ int OVGenericContext::compose(OVBuffer *buf, OVCandidate *textbar, OVService *sr
 
     if (size == 0)
     {
-		srv->notify("\xE5\x9B\xA7");
+		srv->notify("\xE6\x8C\x89\xE9\x8D\xB5\xE6\x9C\x89\xE8\xAA\xA4");
         if (parent->isBeep())
 			srv->beep();
         return 1;
@@ -473,7 +473,7 @@ int OVGenericContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
 		return 1;			
     }
 
-	srv->notify("\xE5\x9B\xA7");
+	srv->notify("\xE6\x8C\x89\xE9\x8D\xB5\xE6\x9C\x89\xE8\xAA\xA4");
     if (parent->isBeep())
 		srv->beep();
 
