@@ -318,7 +318,7 @@ public:
 
 		// Enable this, because this is called... SpaceChewing
 		config.bSpaceAsSelection = 1;
-		config.candPerPage = 7;
+		config.candPerPage = l->getIntegerWithDefault("candPerPage", 7);
 		config.maxChiSymbolLen = 20;
 		config.bAddPhraseForward = 0;
 		int dir = l->getIntegerWithDefault("addPhraseForward", 0);
