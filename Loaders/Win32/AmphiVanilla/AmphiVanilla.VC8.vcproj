@@ -4,6 +4,7 @@
 	Version="8.00"
 	Name="AmphiVanilla"
 	ProjectGUID="{21FC3D4F-8918-4C03-8881-EC6C54DB3504}"
+	RootNamespace="AmphiVanilla"
 	>
 	<Platforms>
 		<Platform
@@ -86,6 +87,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="&quot;.\deploy-ltdl.bat&quot; &amp;&amp; &quot;.\deploy-sqlite.bat&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -160,6 +162,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="&quot;.\deploy-ltdl.bat&quot; &amp;&amp; &quot;.\deploy-sqlite.bat&quot;"
 			/>
 		</Configuration>
 	</Configurations>
