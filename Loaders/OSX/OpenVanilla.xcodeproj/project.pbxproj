@@ -220,7 +220,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smSimpChinese.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-0.8-smSimpChinese.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smTradChinese.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-0.8-smTradChinese.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A77AA490CCFA83900203045 /* OpenVanilla-smSimpChinese-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OpenVanilla-smSimpChinese-Info.plist"; path = "TextServiceComponent/OpenVanilla-smSimpChinese-Info.plist"; sourceTree = "<group>"; };
 		6A93BA730CCF973500BF99B9 /* OpenVanilla-0.8-smTradChinese.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-0.8-smTradChinese.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A93BA750CCF973500BF99B9 /* OpenVanilla-smTradChinese-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "OpenVanilla-smTradChinese-Info.plist"; path = "TextServiceComponent/OpenVanilla-smTradChinese-Info.plist"; sourceTree = "<group>"; };
@@ -467,7 +467,7 @@
 				6ACC53E80CCF872200E2307C /* OVLoader.bundle */,
 				6ACC556A0CCF8AE800E2307C /* OpenVanilla-0.8.bundle */,
 				6A93BA730CCF973500BF99B9 /* OpenVanilla-0.8-smTradChinese.bundle */,
-				6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smSimpChinese.bundle */,
+				6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smTradChinese.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -643,7 +643,7 @@
 			);
 			name = "OpenVanilla (smSimpChinese)";
 			productName = OpenVanilla;
-			productReference = 6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smSimpChinese.bundle */;
+			productReference = 6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smTradChinese.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		6A93BA660CCF973500BF99B9 /* OpenVanilla (smTradChinese) */ = {
@@ -1119,10 +1119,7 @@
 		6A77AA430CCFA83900203045 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(NATIVE_ARCH_32_BIT)",
-					"$(NATIVE_ARCH_64_BIT)",
-				);
+				ARCHS = "$(NATIVE_ARCH_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -1197,10 +1194,7 @@
 		6A93BA710CCF973500BF99B9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(NATIVE_ARCH_32_BIT)",
-					"$(NATIVE_ARCH_64_BIT)",
-				);
+				ARCHS = "$(NATIVE_ARCH_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -1209,7 +1203,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_PREPROCESSOR_DEFINITIONS = ATSC_TRADITIONAL_CHINESE;
-				INFOPLIST_FILE = "/Users/lukhnos/codex/openvanilla/trunk/Loaders/OSX-New/TextServiceComponent/OpenVanilla-Info copy.plist";
+				INFOPLIST_FILE = "TextServiceComponent/OpenVanilla-smTradChinese-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = (
 					"-framework",

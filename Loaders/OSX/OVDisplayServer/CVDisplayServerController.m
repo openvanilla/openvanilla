@@ -25,6 +25,7 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 - (void)awakeFromNib
 {
 	#ifndef LEOPARD_VANILLA
+	
 		NSConnection *connection = [NSConnection defaultConnection];
 		[connection setRootObject:self];
 		
@@ -34,6 +35,24 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 		}
 	#else
 		NSLog(@"LeopardVanilla, display server now embedded");
+
+		NSString *killOV = [NSString stringWithContentsOfFile:@"/tmp/killov" encoding:NSUTF8StringEncoding error:nil];
+		if (killOV) {
+			NSLog(@"Kill OV exists");			
+			unlink("/tmp/killov");
+			
+			NSString *still = [NSString stringWithContentsOfFile:@"/tmp/killov" encoding:NSUTF8StringEncoding error:nil];
+			if (still) {
+				NSLog(@"still exists! bizarre!");
+			}
+			else {
+				[[NSApplication sharedApplication] terminate:self];
+			}
+		}
+		else {
+			NSLog(@"Kill OV doesn't exist");
+		}
+
 	#endif
 	
 	_fadeAlpha = 1.0;
