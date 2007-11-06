@@ -36,6 +36,7 @@
 		6AB6AF3D0CCFEBEC008A44AC /* LVComposingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6AF3C0CCFEBEC008A44AC /* LVComposingBuffer.mm */; };
 		6AB6B0000CD074A9008A44AC /* LeopardVanilla.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6AFFF0CD074A9008A44AC /* LeopardVanilla.sdef */; };
 		6AD732A10CD0E4E200052686 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AD732A00CD0E4E200052686 /* InfoPlist.strings */; };
+		6AEA5A300CE09DA800D6ACE6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AEA5A2E0CE09DA800D6ACE6 /* Localizable.strings */; };
 		8D11072D0486CEB800E47090 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -101,6 +102,9 @@
 		6AB6AFFF0CD074A9008A44AC /* LeopardVanilla.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.sdef; path = LeopardVanilla.sdef; sourceTree = "<group>"; };
 		6AD732A20CD0E4E900052686 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6AD732A30CD0E4EE00052686 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6AEA5A2F0CE09DA800D6ACE6 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = ../OSX/OVLoader/English.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		6AEA5A310CE09DAE00D6ACE6 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = ../OSX/OVLoader/zh_TW.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		6AEA5A320CE09DB100D6ACE6 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = ../OSX/OVLoader/zh_CN.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* OpenVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -151,6 +155,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6AEA5A2D0CE09D9700D6ACE6 /* OVLoader */,
 				6A7D8D410CE095AE00F798FA /* OpenVanillaInputMenu.icns */,
 				6A8D4DDE0CDCB553002DDE1F /* OpenVanilla.icns */,
 				6A8D4DD60CDCB50E002DDE1F /* MainMenu.nib */,
@@ -233,6 +238,14 @@
 			path = ../OSX/CocoaVanilla/CTGradient;
 			sourceTree = SOURCE_ROOT;
 		};
+		6AEA5A2D0CE09D9700D6ACE6 /* OVLoader */ = {
+			isa = PBXGroup;
+			children = (
+				6AEA5A2E0CE09DA800D6ACE6 /* Localizable.strings */,
+			);
+			name = OVLoader;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -291,6 +304,7 @@
 				6A8D4DD80CDCB50E002DDE1F /* MainMenu.nib in Resources */,
 				6A8D4DDF0CDCB553002DDE1F /* OpenVanilla.icns in Resources */,
 				6A7D8D420CE095AE00F798FA /* OpenVanillaInputMenu.icns in Resources */,
+				6AEA5A300CE09DA800D6ACE6 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +361,16 @@
 				6AD732A30CD0E4EE00052686 /* zh_CN */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6AEA5A2E0CE09DA800D6ACE6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6AEA5A2F0CE09DA800D6ACE6 /* English */,
+				6AEA5A310CE09DAE00D6ACE6 /* zh_TW */,
+				6AEA5A320CE09DB100D6ACE6 /* zh_CN */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

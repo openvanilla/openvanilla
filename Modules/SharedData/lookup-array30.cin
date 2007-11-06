@@ -25,8 +25,8 @@
 #  2007-09-25 將 big5 字集定義【粧銹恒碁墻嫺裏】共七個特殊用字，自    #
 #  cin 檔移除，避免這些字在 unicode 選字窗中重複出現。(gontera)       #
 #######################################################################
-%ename array30
-%cname 行列30
+%ename Array30 Reverse Lookup
+%cname 行列30反查
 %encoding UTF-8
 %selkey 1234567890
 %keyname begin
