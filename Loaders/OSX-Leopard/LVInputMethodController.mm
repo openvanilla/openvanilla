@@ -5,7 +5,7 @@
 @implementation LVInputMethodController
 - (id)initWithServer:(IMKServer*)server delegate:(id)delegate client:(id)inputClient
 {
-	NSLog(@"init with server, delegate = %x, client = %x", delegate, inputClient);
+	NSLog(@"LeopardVanilla: -initWithServer:%08x delegate:%08x client:%08x", server, delegate, inputClient);
 	
 	if (self = [super initWithServer:server delegate:delegate client:inputClient]) {
 		[_sharedLock lock];
@@ -45,14 +45,16 @@
 }
 - (void)activateServer:(id)sender
 {
-	NSLog(@"activated, client = %x", sender);
+	NSLog(@"LeopardVanilla: -activateServer:%08x", sender);
 
 	if (!_sharedLoader || !_context) {
-		NSLog(@"nothing!");
+		NSLog(@"LeopardVanilla: no shared loader or no context, returned");
 		return;
 	}
-	_nonActivationEventBlocker = NO;
 	
+	[sender overrideKeyboardWithKeyboardNamed:@"com.apple.keylayout.US"];
+
+	_nonActivationEventBlocker = NO;	
  	_sharedLoader->setActiveContext(_context);
 	
 	_currentClient = sender;
@@ -60,9 +62,9 @@
 }
 - (void)deactivateServer:(id)sender
 {
-	NSLog(@"deactivated, client = %x", sender);
+	NSLog(@"LeopardVanilla: -deactivateServer:%08x", sender);
 	if (!_sharedLoader || !_context) {
-		NSLog(@"nothing!");
+		NSLog(@"LeopardVanilla: no shared loader or no context, returned");
 		return;
 	}
 
@@ -87,7 +89,7 @@
 	_currentClient = nil;
 	
 	if (!_sharedLoader || !_context) {
-		NSLog(@"event nothing!");
+		NSLog(@"LeopardVanilla: no shared loader or no context, returned");
 		return NO;
 	}
 
@@ -111,7 +113,8 @@
 
 		NSString *chars = [event characters];
 		NSUInteger cocoaModifiers = [event modifierFlags];
-		// unsigned short keyCode = [event keyCode];
+		unsigned short virtualKeyCode = [event keyCode];
+		
 		
 		UInt32 carbonModifiers = 0;
 		if (cocoaModifiers & NSAlphaShiftKeyMask) carbonModifiers = carbonModifiers | alphaLock;
@@ -119,11 +122,28 @@
 		if (cocoaModifiers & NSControlKeyMask) carbonModifiers = carbonModifiers | controlKey;
 		if (cocoaModifiers & NSAlternateKeyMask) carbonModifiers = carbonModifiers | optionKey;
 		if (cocoaModifiers & NSCommandKeyMask) carbonModifiers = carbonModifiers | cmdKey;
+
+		// keycode (not charcode) for numkeys
+		UInt32 numKeys[16] = {    
+			// 0,1,2,3,4,5
+			// 6,7,8,9,.,+,-,*,/,=
+			0x52, 0x53, 0x54, 0x55, 0x56, 0x57,
+			0x58, 0x59, 0x5b, 0x5c, 0x41, 0x45, 0x4e, 0x43, 0x4b, 0x51
+		};
+		
+		for (size_t i = 0; i < 16; i++) {
+			if (virtualKeyCode == numKeys[i]) {
+				carbonModifiers  |= 0x10000;   // only if it's numback we put mask back
+				break;
+			}
+		}
 		
 		UniChar unicharCode = 0;
 		if ([chars length] > 0) {
 			unicharCode = [chars characterAtIndex:0];
 		}
+
+		// NSLog(@"key down, unicharCode = %d, virtualKeyCode = %d, cocoaModifiers = %08x, carbonModifiers = %08x", unicharCode, virtualKeyCode, cocoaModifiers, carbonModifiers);
 
 		return _context->event(unicharCode, carbonModifiers);
 	}

@@ -29,7 +29,7 @@
 	<key>InputMethodServerDelegateClass</key>
 	<string>LVInputMethodController</string>
 	<key>LSBackgroundOnly</key>
-	<string>0</string>
+	<string>1</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -38,5 +38,7 @@
 	<string>org.openvanilla.inputmethod.leopardvanilla</string>
 	<key>tsInputMethodIconFileKey</key>
 	<string>LeopardVanilla.icns</string>
+	<key>LSHasLocalizedDisplayName</key>
+	<true/>	
 </dict>
 </plist>
