@@ -23,7 +23,7 @@
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	<key>InputMethodConnectionName</key>
-	<string>LeopardVanillaConnection</string>
+	<string>LeopardVanilla_1_Connection</string>
 	<key>InputMethodServerControllerClass</key>
 	<string>LVInputMethodController</string>
 	<key>InputMethodServerDelegateClass</key>

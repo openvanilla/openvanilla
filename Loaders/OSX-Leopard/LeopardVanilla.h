@@ -10,4 +10,4 @@ extern MenuRef _sharedCarbonMenu;
 extern CVLoader *_sharedLoader;
 extern NSLock *_sharedLock;
 
-#define LEOPARD_VANILLA_CONNECTION_NAME @"LeopardVanillaConnection"
+#define LEOPARD_VANILLA_CONNECTION_NAME @"LeopardVanilla_1_Connection"
