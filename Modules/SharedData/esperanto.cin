@@ -1,0 +1,27 @@
+%gen_inp
+%ename Esperanto
+%cname 世界語 (Esperanto)
+%encoding UTF-8
+%endkey x
+%keyname begin
+c c
+g g
+h h
+j j
+s s
+u u
+x x
+%keyname end
+%chardef begin
+c c
+g g
+h h
+j j
+s s
+u u
+cx ĉ
+gx ĝ
+jx ĵ
+sx ŝ
+ux ŭ
+%chardef end
