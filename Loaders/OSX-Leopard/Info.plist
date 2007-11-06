@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>OPVN</string>
 	<key>CFBundleVersion</key>
-	<string>0.8.0.2</string>
+	<string>0.8.0.3</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	<key>InputMethodConnectionName</key>
