@@ -310,7 +310,7 @@ public:
 		
 		const char *selKey_define = "1234567890";
 		
-		if (kb==KB_HSU) selKey_define = "asdfjkl789";
+		if (kb==KB_HSU) selKey_define = "asdfghjkl";
 		if (kb==KB_DVORAK_HSU) selKey_define = "aoeuhtn789";
 		
 		for (int i=0; i<MAX_SELKEY; i++) config.selKey[i] = selKey_define[i];
