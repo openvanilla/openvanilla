@@ -37,7 +37,7 @@
 	<key>TISInputSourceID</key>
 	<string>org.openvanilla.inputmethod.leopardvanilla</string>
 	<key>tsInputMethodIconFileKey</key>
-	<string>LeopardVanilla.icns</string>
+	<string>OpenVanillaInputMenu.icns</string>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>	
 </dict>

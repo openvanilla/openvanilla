@@ -23,6 +23,7 @@
 		6A1725E00CCFD35500C27C90 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1725DF0CCFD35500C27C90 /* Carbon.framework */; };
 		6A1725FB0CCFD48800C27C90 /* TSComposingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A1725FA0CCFD48800C27C90 /* TSComposingBuffer.mm */; };
 		6A6D91F70CDCB9EC002AF70A /* NSBezierPathAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D91F60CDCB9EC002AF70A /* NSBezierPathAdditions.m */; };
+		6A7D8D420CE095AE00F798FA /* OpenVanillaInputMenu.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A7D8D410CE095AE00F798FA /* OpenVanillaInputMenu.icns */; };
 		6A8D4DD80CDCB50E002DDE1F /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D4DD60CDCB50E002DDE1F /* MainMenu.nib */; };
 		6A8D4DDF0CDCB553002DDE1F /* OpenVanilla.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D4DDE0CDCB553002DDE1F /* OpenVanilla.icns */; };
 		6A8D4DE30CDCB56C002DDE1F /* CVDisplayServerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8D4DE20CDCB56C002DDE1F /* CVDisplayServerController.m */; };
@@ -74,6 +75,7 @@
 		6A1725FA0CCFD48800C27C90 /* TSComposingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TSComposingBuffer.mm; sourceTree = "<group>"; };
 		6A6D91F50CDCB9EC002AF70A /* NSBezierPathAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBezierPathAdditions.h; path = ../OSX/CocoaVanilla/NSExtensions/NSBezierPathAdditions.h; sourceTree = SOURCE_ROOT; };
 		6A6D91F60CDCB9EC002AF70A /* NSBezierPathAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSBezierPathAdditions.m; path = ../OSX/CocoaVanilla/NSExtensions/NSBezierPathAdditions.m; sourceTree = SOURCE_ROOT; };
+		6A7D8D410CE095AE00F798FA /* OpenVanillaInputMenu.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OpenVanillaInputMenu.icns; sourceTree = "<group>"; };
 		6A8D4DD70CDCB50E002DDE1F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = ../OSX/OVDisplayServer/English.lproj/MainMenu.nib; sourceTree = SOURCE_ROOT; };
 		6A8D4DD90CDCB51B002DDE1F /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = ../OSX/OVDisplayServer/zh_TW.lproj/MainMenu.nib; sourceTree = SOURCE_ROOT; };
 		6A8D4DDB0CDCB52C002DDE1F /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = ../OSX/OVDisplayServer/zh_CN.lproj/MainMenu.nib; sourceTree = SOURCE_ROOT; };
@@ -149,6 +151,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A7D8D410CE095AE00F798FA /* OpenVanillaInputMenu.icns */,
 				6A8D4DDE0CDCB553002DDE1F /* OpenVanilla.icns */,
 				6A8D4DD60CDCB50E002DDE1F /* MainMenu.nib */,
 				6AB6AFFF0CD074A9008A44AC /* LeopardVanilla.sdef */,
@@ -287,6 +290,7 @@
 				6AB6B0000CD074A9008A44AC /* LeopardVanilla.sdef in Resources */,
 				6A8D4DD80CDCB50E002DDE1F /* MainMenu.nib in Resources */,
 				6A8D4DDF0CDCB553002DDE1F /* OpenVanilla.icns in Resources */,
+				6A7D8D420CE095AE00F798FA /* OpenVanillaInputMenu.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
