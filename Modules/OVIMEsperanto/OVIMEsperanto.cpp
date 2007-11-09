@@ -101,8 +101,9 @@ public:
 		}
 		if (k->code() == ovkDelete || k->code() == ovkBackspace) {
 			if(keyseq.value() > -1) {
-				b->clear();
+				b->clear()->update();
 				keyseq.reset();
+				return 1;
 			}
 			return 0;
 		}
@@ -142,7 +143,7 @@ public:
         return 1;
     }
     virtual const char* localizedName(const char *locale) {
-		if (!strcasecmp(locale, "ja")) return "エスペラント";
+	if (!strcasecmp(locale, "ja")) return "エスペラント";
         if (!strcasecmp(locale, "zh_TW")) return "世界語";
         if (!strcasecmp(locale, "zh_CN")) return "世界语";
         return "Experanto";
