@@ -81,7 +81,7 @@ bool CINSetDefaults(const char *shortname, OVDictionary *dict) {
     if (S, "jyutping.cin", 7) R;
     if (S, "klingon.cin", 1, 0, 1) R;     // maxlen=1, autocompose, hitmax&cmpse.
     if (S, "kk.cin", 2, 0, 1) R;          // maxlen=2, hitmax&cmpse.
-    if (S, "kks.cin", 20, 1) R;           // maxlen=20, autocompose
+    if (S, "kks.cin", 20, 0) R;           // maxlen=20
     if (S, "liu57.cin", 4, 1, 1) R;       // maxlen=4, autocompose, hitmax&cmpse.
     if (S, "pictograph.cin", 4, 1, 1) R;
     if (S, "pinyin.cin", 50, 1) R;        // maxlen=50, autocompose
