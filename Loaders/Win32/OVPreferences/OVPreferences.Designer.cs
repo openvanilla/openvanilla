@@ -32,6 +32,7 @@ namespace OVPreferences
             this.m_btSave = new System.Windows.Forms.Button();
             this.m_tcSelf = new System.Windows.Forms.TabControl();
             this.m_tlSelf = new System.Windows.Forms.TableLayoutPanel();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.m_tlSelf.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,9 +53,18 @@ namespace OVPreferences
             // m_tlSelf
             // 
             resources.ApplyResources(this.m_tlSelf, "m_tlSelf");
-            this.m_tlSelf.Controls.Add(this.m_tcSelf, 0, 0);
-            this.m_tlSelf.Controls.Add(this.m_btSave, 0, 1);
+            this.m_tlSelf.Controls.Add(this.m_tcSelf, 1, 0);
+            this.m_tlSelf.Controls.Add(this.m_btSave, 1, 1);
+            this.m_tlSelf.Controls.Add(this.listView1, 0, 0);
             this.m_tlSelf.Name = "m_tlSelf";
+            // 
+            // listView1
+            // 
+            this.listView1.CheckBoxes = true;
+            resources.ApplyResources(this.listView1, "listView1");
+            this.listView1.Name = "listView1";
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.List;
             // 
             // OVPreferences
             // 
@@ -73,6 +83,7 @@ namespace OVPreferences
         private System.Windows.Forms.Button m_btSave;
         private System.Windows.Forms.TabControl m_tcSelf;
         private System.Windows.Forms.TableLayoutPanel m_tlSelf;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 

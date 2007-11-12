@@ -121,9 +121,12 @@
   <data name="m_btSave.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
+  <data name="m_btSave.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="m_btSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 248</value>
+    <value>437, 362</value>
   </data>
   <data name="m_btSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 22</value>
@@ -151,10 +154,10 @@
     <value>Fill</value>
   </data>
   <data name="m_tcSelf.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>164, 3</value>
   </data>
   <data name="m_tcSelf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 239</value>
+    <value>367, 342</value>
   </data>
   <data name="m_tcSelf.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -175,7 +178,28 @@
     <value>True</value>
   </data>
   <data name="m_tlSelf.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="listView1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="listView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 342</value>
+  </data>
+  <data name="listView1.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;listView1.Name" xml:space="preserve">
+    <value>listView1</value>
+  </data>
+  <data name="&gt;&gt;listView1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listView1.Parent" xml:space="preserve">
+    <value>m_tlSelf</value>
+  </data>
+  <data name="&gt;&gt;listView1.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="m_tlSelf.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -187,7 +211,7 @@
     <value>2</value>
   </data>
   <data name="m_tlSelf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 273</value>
+    <value>534, 387</value>
   </data>
   <data name="m_tlSelf.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -205,11 +229,11 @@
     <value>0</value>
   </data>
   <data name="m_tlSelf.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="m_tcSelf" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_btSave" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="Percent,90,Percent,10" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="m_tcSelf" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="m_btSave" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="listView1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,20" /&gt;&lt;Rows Styles="Percent,90,Percent,10" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="$this.Localizable" type="System.Boolean, mscorlib">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 12</value>
   </data>
@@ -217,7 +241,7 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>312, 273</value>
+    <value>534, 387</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
