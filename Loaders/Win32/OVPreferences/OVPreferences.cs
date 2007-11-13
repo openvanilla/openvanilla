@@ -88,8 +88,8 @@ namespace OVPreferences
         private void SetUI()        
         {
             //@warning Shared Settings are not ready yet.
-            //AddTabSharedSettings();
-            PanelModuleList pnModuleList = new PanelModuleList(m_ovConfDom);
+            //AddPanelSharedSettings();
+            PanelModuleList pnModuleList = new PanelModuleList(m_ovConfDom, panelOptions, labelOptions);
             foreach (OVConfig conf in m_ovConfList)
             {
                 bool isEnabled = false;
@@ -102,196 +102,95 @@ namespace OVPreferences
 
                 if (conf.moduleName.StartsWith("OVIMGeneric"))
                 {
-                    AddTabGeneric(conf, m_ovConfDom);
-                    AddListItemGeneric(conf, m_ovConfDom);
+                    AddPanelGeneric(conf, m_ovConfDom);
                 }
                 if (conf.moduleName.Equals("OVIMPhonetic"))
                 {
-                    AddTabPhonetic(conf, m_ovConfDom);
-                    AddListItemPhonetic(conf, m_ovConfDom);
+                    AddPanelPhonetic(conf, m_ovConfDom);
                 }
                 if (conf.moduleName.Equals("OVIMPOJ-Holo"))
                 {
-                    AddTabPOJ(conf, m_ovConfDom);
-                    AddListItemPOJ(conf, m_ovConfDom);
+                    AddPanelPOJ(conf, m_ovConfDom);
                 }
                 if (conf.moduleName.Equals("OVIMTibetan"))
                 {
-                    AddTabTibetan(conf, m_ovConfDom);
-                    AddListItemTibetan(conf, m_ovConfDom);
+                    AddPanelTibetan(conf, m_ovConfDom);
                 }
                 if (conf.moduleName.StartsWith("OVIMTobacco"))
                 {
-                    AddTabTobacco(conf, m_ovConfDom);
-                    AddListItemTobacco(conf, m_ovConfDom);
+                    AddPanelTobacco(conf, m_ovConfDom);
                 }
                 if (conf.moduleName.Equals("TLIM"))
                 {
-                    AddTabTLIM(conf, m_ovConfDom);
-                    AddListItemTLIM(conf, m_ovConfDom);
+                    AddPanelTLIM(conf, m_ovConfDom);
                 }
             }
             if (m_ovConfList.Count > 1)
-                this.AddTabModuleList(pnModuleList);
+            {
+                pnModuleList.Height = this.panelModuleList.Size.Height;
+                pnModuleList.Width = this.panelModuleList.Size.Width;
+                pnModuleList.start();
+                this.panelModuleList.Controls.Add(pnModuleList); 
+            }
         }
 
-        protected void AddTabSharedSettings()
-        {
-            PanelSharedSettings pnSharedSettings = new PanelSharedSettings();
-            string msg = resourceMgr.GetString("TabSharedSetting", ci);
-            //TabPage tpSharedSettings = new TabPage("Shared Settings");
-            TabPage tpSharedSettings = new TabPage(msg);
-            tpSharedSettings.Controls.Add(pnSharedSettings);
-            this.m_tcSelf.TabPages.Add(tpSharedSettings);
-
-            //<comment author='b6s'>
-            // A strange trick here is to set size from TabPage, not Panel.
-            this.SetSize(tpSharedSettings);
-            //</comment>
-        }
-
-        protected void AddTabModuleList(PanelModuleList pnModuleList)
-        {
-            string msg = resourceMgr.GetString("TabModuleList", ci);
-            TabPage tpModuleList = new TabPage(msg);
-            //TabPage tpModuleList = new TabPage("Module List");
-            tpModuleList.Controls.Add(pnModuleList);
-            //<comment author='b6s'>
-            IntPtr h = this.m_tcSelf.Handle;
-            // It's a bug that TabControl.Handle has to be touched manually
-            // Before TabControl.TabPages.Insert() is invoked.
-            this.m_tcSelf.TabPages.Insert(0, tpModuleList);
-            //</comment>
-
-            //<comment author='b6s'>
-            // A strange trick here is to set size from TabPage, not Panel.
-            this.SetSize(tpModuleList);
-            //</comment>
-        }
-
-        protected void AddTabGeneric(OVConfig conf, XmlDocument confDom)
+        protected void AddPanelGeneric(OVConfig conf, XmlDocument confDom)
         {
             PanelGeneric pnGeneric = new PanelGeneric();
             pnGeneric.Init(conf, confDom);
             string msg = resourceMgr.GetString("OVIMGeneric", ci);
             string inputMethod = conf.moduleName.Replace("OVIMGeneric-", "");
             inputMethod = inputMethod.Replace(".cin", "");
-            AddTab(pnGeneric, msg + " (" + inputMethod + ")");
+            AddPanel(conf, pnGeneric, msg + " (" + inputMethod + ")");
         }
 
-        protected void AddListItemGeneric(OVConfig conf, XmlDocument confDom)
-        {
-            ListViewItem li = new ListViewItem();
-            //PanelGeneric pnGeneric = new PanelGeneric();
-            //pnGeneric.Init(conf, confDom);
-            string msg = resourceMgr.GetString("OVIMGeneric", ci);
-            string inputMethod = conf.moduleName.Replace("OVIMGeneric-", "");
-            inputMethod = inputMethod.Replace(".cin", "");
-            //TabPage tp = new TabPage(name);
-            
-            //tp.Controls.Add(panel);
-            li.SubItems[0] = new ListViewItem.ListViewSubItem(li, inputMethod);
-            this.listView1.Items.Add(li);
-            //this.m_tcSelf.TabPages.Add(tp);
-            //this.SetSize(panel);
-        }
-
-        protected void AddTabPhonetic(OVConfig conf, XmlDocument confDom)
+        protected void AddPanelPhonetic(OVConfig conf, XmlDocument confDom)
         {
             PanelPhonetic pnPhonetic = new PanelPhonetic();
             pnPhonetic.Init(conf, confDom);
             string msg = resourceMgr.GetString("OVIMPhonetic", ci);
-            //AddTab(pnPhonetic, conf.moduleName);
-            AddTab(pnPhonetic, msg);
+            //AddPanel(pnPhonetic, conf.moduleName);
+            AddPanel(conf,pnPhonetic, msg);
         }
 
-        protected void AddListItemPhonetic(OVConfig conf, XmlDocument confDom)
-        {
-            ListViewItem li = new ListViewItem();
-            //PanelGeneric pnGeneric = new PanelGeneric();
-            //pnGeneric.Init(conf, confDom);
-            string msg = resourceMgr.GetString("OVIMPhonetic", ci);
-            //string inputMethod = conf.moduleName.Replace("OVIMGeneric-", "");
-            //inputMethod = inputMethod.Replace(".cin", "");
-            //TabPage tp = new TabPage(name);
-
-            //tp.Controls.Add(panel);
-            li.SubItems[0] = new ListViewItem.ListViewSubItem(li, msg);
-            this.listView1.Items.Add(li);
-        }
-
-
-        protected void AddTabPOJ(OVConfig conf, XmlDocument confDom)
+        protected void AddPanelPOJ(OVConfig conf, XmlDocument confDom)
         {
             PanelPOJ pnPOJ = new PanelPOJ();
             pnPOJ.Init(conf, confDom);
-            AddTab(pnPOJ, conf.moduleName);
+            AddPanel(conf,pnPOJ, conf.moduleName);
         }
 
-        protected void AddListItemPOJ(OVConfig conf, XmlDocument confDom)
-        {
-            //TabPage tp = new TabPage(name);
-            //TabPage tp = new TabPage();
-            //tp.Controls.Add(panel);
-
-            //this.m_tcSelf.TabPages.Add(tp);
-            //this.SetSize(panel);
-            ListViewItem li = new ListViewItem();
-            li.SubItems[0] = new ListViewItem.ListViewSubItem(li, conf.moduleName);
-            this.listView1.Items.Add(li);
-        }
-
-        protected void AddTabTibetan(OVConfig conf, XmlDocument confDom)
+        protected void AddPanelTibetan(OVConfig conf, XmlDocument confDom)
         {
             PanelTibetan pnTibetan = new PanelTibetan();
             pnTibetan.Init(conf, confDom);
-            AddTab(pnTibetan, conf.moduleName);
+            AddPanel(conf,pnTibetan, conf.moduleName);
         }
 
-        protected void AddListItemTibetan(OVConfig conf, XmlDocument confDom)
-        {
-            ListViewItem li = new ListViewItem();
-            li.SubItems[0] = new ListViewItem.ListViewSubItem(li, conf.moduleName);
-            this.listView1.Items.Add(li);
-        }
-
-        protected void AddTabTobacco(OVConfig conf, XmlDocument confDom)
+        protected void AddPanelTobacco(OVConfig conf, XmlDocument confDom)
         {
             PanelTobacco pnTobacco = new PanelTobacco();
             pnTobacco.Init(conf, confDom);
             string msg = resourceMgr.GetString(conf.moduleName, ci);
-            AddTab(pnTobacco, msg);
+            AddPanel(conf,pnTobacco, msg);
         }
 
-        protected void AddListItemTobacco(OVConfig conf, XmlDocument confDom)
-        {
-            string msg = resourceMgr.GetString(conf.moduleName, ci);
-            ListViewItem li = new ListViewItem();
-            li.SubItems[0] = new ListViewItem.ListViewSubItem(li, msg);
-            this.listView1.Items.Add(li);
-        }
-
-        protected void AddTabTLIM(OVConfig conf, XmlDocument confDom)
+        protected void AddPanelTLIM(OVConfig conf, XmlDocument confDom)
         {
             PanelTLIM pnTLIM = new PanelTLIM(conf, confDom);
-            AddTab(pnTLIM, conf.moduleName);
+            AddPanel(conf,pnTLIM, conf.moduleName);
         }
 
-        protected void AddListItemTLIM(OVConfig conf, XmlDocument confDom)
+        private void AddPanel(OVConfig conf,Control panel, string name)
         {
-            ListViewItem li = new ListViewItem();
-            li.SubItems[0] = new ListViewItem.ListViewSubItem(li, conf.moduleName);
-            this.listView1.Items.Add(li);
-        }
-
-        private void AddTab(Control panel, string name)
-        {
-            TabPage tp = new TabPage(name);
+            Panel tp = new Panel();
+            tp.Name = conf.moduleName;
             tp.Controls.Add(panel);
-            this.m_tcSelf.TabPages.Add(tp);
+            tp.Visible = false;
+            this.panelOptions.Controls.Add(tp);
             this.SetSize(panel);
         }
-
+        
         private void SetSize(Control innerControl)
         {
             if (innerControl == null) return;

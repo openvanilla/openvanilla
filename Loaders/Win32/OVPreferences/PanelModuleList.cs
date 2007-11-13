@@ -16,11 +16,15 @@ namespace OVPreferences
         private OVConfigDom m_ovConfDomHandler = null;
         private Point m_previousLineBegin;
         private Point m_previousLineEnd;
+        private Panel m_panelOptions;
+        private Label m_labelOptions;
 
-        public PanelModuleList(XmlDocument ovConfDOM)
+        public PanelModuleList(XmlDocument ovConfDOM, Panel panelOptions, Label labelOptions)
         {
             m_ovConfDOM = ovConfDOM;
             m_ovConfDomHandler = new OVConfigDom(m_ovConfDOM);
+            m_panelOptions = panelOptions;
+            m_labelOptions = labelOptions;
 
             InitializeComponent();
         }
@@ -142,6 +146,36 @@ namespace OVPreferences
             }
             else
                 e.Effect = DragDropEffects.None;
+        }
+
+        private void showPanel()
+        {
+            m_labelOptions.Text = m_clModuleList.Items[m_clModuleList.SelectedIndex].ToString();
+            ControlCollection c = m_panelOptions.Controls;
+            // System.Diagnostics.Debug.WriteLine(m_clModuleList.Items[m_clModuleList.SelectedIndex].ToString());
+            foreach (Control item in c)
+            {
+
+                if (item.Name == m_clModuleList.Items[m_clModuleList.SelectedIndex].ToString())
+                {
+                    item.Visible = true;
+                }
+                else
+                {
+                    item.Visible = false;
+                }
+            }
+        }
+
+        private void m_clModuleList_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            showPanel();
+        }
+
+        public void start()
+        {
+            m_clModuleList.SelectedIndex = 0;
+            showPanel();
         }
     }
 }
