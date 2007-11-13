@@ -1,4 +1,4 @@
-// OVIMExperanto.cpp: Input Method which applies X-transformation for Esperanto
+// OVIMEsperanto.cpp: Input Method which applies X-transformation for Esperanto
 //
 // Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
@@ -80,7 +80,7 @@ short isXtrans(int key)
 	return -1;
 }
 
-class OVIMExperantoContext : public OVInputMethodContext
+class OVIMEsperantoContext : public OVInputMethodContext
 {
 public:
     virtual void start(OVBuffer*, OVCandidate*, OVService*) {
@@ -91,7 +91,7 @@ public:
     }	
     virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* srv) {
 		if (k->isOpt() || k->isCommand() || k->isCtrl()){return 0;}
-		if (k->code() == ovkUp || k->code() == ovkDown ||k->code() == ovkLeft ||k->code() == ovkRight ) 
+		if (k->code() == ovkUp || k->code() == ovkDown ||k->code() == ovkLeft ||k->code() == ovkRight || k->code()==ovkReturn) 
 		{
             if(keyseq.value() > -1) {
                 b->send()->clear();
@@ -134,11 +134,11 @@ protected:
 	KeySeq keyseq;	
 };
 
-class OVIMExperanto : public OVInputMethod
+class OVIMEsperanto : public OVInputMethod
 {
 public:
-    virtual const char* identifier() { return "OVIMExperanto"; }
-    virtual OVInputMethodContext *newContext() { return new OVIMExperantoContext; }
+    virtual const char* identifier() { return "OVIMEsperanto"; }
+    virtual OVInputMethodContext *newContext() { return new OVIMEsperantoContext; }
     virtual int initialize(OVDictionary *, OVService*, const char *mp) {
         return 1;
     }
@@ -146,8 +146,8 @@ public:
 	if (!strcasecmp(locale, "ja")) return "エスペラント";
         if (!strcasecmp(locale, "zh_TW")) return "世界語";
         if (!strcasecmp(locale, "zh_CN")) return "世界语";
-        return "Experanto";
+        return "Esperanto";
     }
 };
 
-OV_SINGLE_MODULE_WRAPPER(OVIMExperanto);
+OV_SINGLE_MODULE_WRAPPER(OVIMEsperanto);
