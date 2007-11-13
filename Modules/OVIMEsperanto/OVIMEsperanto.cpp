@@ -91,7 +91,7 @@ public:
     }	
     virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* srv) {
 		if (k->isOpt() || k->isCommand() || k->isCtrl()){return 0;}
-		if (k->code() == ovkUp || k->code() == ovkDown ||k->code() == ovkLeft ||k->code() == ovkRight || k->code()==ovkReturn) 
+		if (k->code() == ovkUp || k->code() == ovkDown ||k->code() == ovkLeft ||k->code() == ovkRight || k->code()==ovkReturn  ) 
 		{
             if(keyseq.value() > -1) {
                 b->send()->clear();
