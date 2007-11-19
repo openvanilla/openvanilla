@@ -1,0 +1,381 @@
+.hla hu
+.TH hunspell 4 "2005. május 13."
+.LO 1
+.SH NÉV
+hunspell \- a Hunspell állományainak formátuma
+.SH LEÍRÁS
+A
+.IR Hunspell (1)
+két állományt igényel egy adott nyelven történõ helyesírás\-ellenõrzéshez.
+Az elsõ állomány egy szótárállomány, ami az adott nyelv szavait, és
+ezek kapcsolóit (attribútumait) tartalmazza. A második állomány
+egy ragozási (affixum) állomány, ami meghatározza az említett
+kapcsolók jelentését. A \fIhunspell\fR, ellentétben az \fIispell\fR\-lel, 
+közvetlenül használja fel ezeket az állományokat, tehát nem
+képez belõlük bináris (.hash kiterjesztésû) állományt (l.
+.IR ispell "(4))."
+.SH SZÓTÁRÁLLOMÁNY
+Egy hunspell
+.B szótárállomány
+elsõ sora a szótárállományban
+lévõ szavak számát tartalmazza. A többi sor soronként egy
+szót tartalmaz. Minden szó után nem kötelezõen egy
+perjel, és egy, vagy több kapcsoló következhet. A
+kapcsolók egybetûsek, és meghatározzák, hogy milyen
+toldalékokat kaphat a tõszó. Például a
+.PP
+.RS
+.nf
+1
+hunspellezik/EeX
+.fi
+.RE
+.PP
+szótár egy szót tartalmaz (hunspell), ami a magyar ragozási
+állomány alapján alanyi és tárgyas igeragozást is
+vonz (E és e kapcsolók), valamint igekötõ prefixumokat is
+kaphat. A példa szótárállomány és a magyar ragozási
+állomány alapján a \fImeghunspelleztétek\fR helyes szóként
+kerülne felismerésre.
+.PP
+Morfológiai leírást adhatunk meg a tabulátorjellel
+elválasztott második mezõben:
+.PP
+.RS
+.nf
+1
+hunspellezik/EeX	[IGE]
+.fi
+.RE
+.PP
+.SH RAGOZÁSI ÁLLOMÁNY
+A
+.B "ragozási állomány"
+rendszerint kisebb méretû, és különféle definíciók mellett
+a ragozási szabályokat adja meg.
+.PP
+.RS
+.nf
+SET ISO8859\-2
+TRY íóúÍÓÚtaeslzánorhgkiédmyõpvöbucfjüûxwqTAESLZÁNORHGKIÉDMYÕPVÖBUCFJÜÛXWQ\-.
+LANG hu_HU
+COMPOUNDMIN 2
+COMPOUNDFLAG Y
+COMPOUNDWORDMAX 2
+COMPOUNDROOT y
+COMPOUNDSYLLABLE 6 aáeéiíoóöõuúüû
+SYLLABLENUM klmc
+COMPOUNDBEGIN v
+COMPOUNDEND x
+FORBIDDENWORD w
+PSEUDOROOT u
+ACCENT áéíóöõúüû aeiooouuu
+WORDCHARS \-.§%°0123456789
+LEMMA_PRESENT (
+
+REP 2
+REP j ly
+REP ly j
+
+PFX X Y 3
+PFX X   0    meg          .
+PFX X   0    rá           .
+PFX X   0    össze        .
+
+SFX e Y 6
+SFX e   ik   tük          e[dz]ik
+SFX e   ik   tétek        e[dz]ik
+SFX e   ik   ték          e[dz]ik
+SFX e   0    tük          e[dzt]
+SFX e   0    tétek        e[dzt]
+SFX e   0    ték          e[dzt]
+
+SFX f Y 2
+SFX f   ik   het/e        e[dz]ik   [hAt]
+SFX f   ik   tet/e        e[dz]ik   [tAt]
+.fi
+.RE
+.PP
+A kulcsszavak jelentése:
+.IP "SET karakterkód"
+A szótár és affixumállomány karakterkódolásának beállítása.
+A lehetséges értékek: UTF-8, ISO8859\-1-tõl ISO8859\-10-ig, 
+ISO8859\-14, KOI8-R, KOI8-U, microsoft-cp1251, ISCII-DEVANAGARI.
+.IP "TRY karakterek"
+A javaslattevésnél az 1 karakteres próbálkozásoknál az itt felsorolt
+karakterekre cserél, illetve bõvít.
+.IP "NOSPLITSUGS"
+Nem javasol szófelbontást a Hunspell ezzel a beállítással.
+.IP "MAXNGRAMSUGS"
+Az ngram javaslatok maximális számának beállítása. Alapértelmezetten
+3. A 0 érték kikapcsolja az ngram javaslatokat.
+.IP "SUGSWITHDOTS"
+Ha a hibás szó pont(ok)ra végzõdik, ezeket a javaslatok esetében is
+feltünteti. Az OpenOffice.org szótárak számára nem szükséges ez a
+beállítás.
+.IP "LANG nyelvkód"
+Nyelv megadása (Morphbase kiegészítés, ami a nyelvfüggõ
+programrészek bekapcsolását végzi). Új nyelv hozzáadása a langnum.hxx
+és a csutil.cxx állományon keresztül lehetséges a forráskódban.
+.IP "COMPLEXPREFIXES"
+Kétszeres prefixum levágás beállítása (de ezzel a kétszeres szuffixum
+levágás lehetõsége megszûnik).
+.IP "COMPOUNDMIN szám"
+A legkisebb szóhossz, ami még összetett szóban szerepelhet.
+Alapértelmezés szerint 3 karakter.
+.IP "COMPOUNDFLAG kapcsoló"
+Itt adható meg a szóösszetételben való szereplést engedélyezõ
+kapcsoló.
+.IP "COMPOUNDBEGIN kapcsoló"
+A kapcsoló az összetett szavak elsõ tagjaként engedélyezi
+a megjelölt szavakat.
+.IP "COMPOUNDLAST kapcsoló"
+A kapcsoló az összetett szavak utolsó tagjaként engedélyezi
+a megjelölt szavakat. Kombinálható az elõzõ kapcsolóval.
+.IP "COMPOUNDMIDDLE kapcsoló"
+A kapcsoló az összetett szavak közbensõ tagjaként engedélyezi
+a megjelölt szavakat. Kombinálható a két elõzõ kapcsolóval.
+.IP "ONLYINCOMPOUND kapcsoló"
+Csak az összetett szavakban megjelenõ ragozás jelölésére szolgáló
+kapcsoló (germán nyelvek esetében tipikus).
+.IP "CIRCUMFIX kapcsoló"
+Ezzel a kapcsolóval jelölt szuffixum csak ugyanilyen kapcsolóval
+jelölt prefixummal jelenhet meg egy tövön. (Pl. leg-édes-ebb).
+.IP "COMPOUNDPERMITFLAG kapcsoló"
+Alapéetelmezés szerint a prefixumok és szuffixumok nem fordulhatnak
+elõ az összetett szavak belsejében. A COMPOUNDPERMITFLAG
+kapcsolóval rendelkezõ affixumok viszont itt is megjelenhetnek.
+.IP "COMPOUNDFORBIDFLAG kapcsoló"
+Toldalékolt szavak szóösszetételben való szereplését tiltó
+kapcsoló. A tiltáshoz az adott SFX szabály folytatási
+osztályaként (l. késõbb) adjuk meg ezt a kapcsolót.
+.IP "COMPOUNDROOT kapcsoló"
+A szótárba közvetlenül felvett összetett szavakat
+jelölõ kapcsoló. A COMPOUNDWORDMAX, és így a magyar esetében
+a 6-3-as szabály mûködését befolyásolja azzal, hogy a COMPOUNDROOT
+kapcsolóval összetettnek jelölt
+szavak két szónak számítanak.
+.IP "COMPOUNDWORDMAX szám"
+A szóösszetételekben szereplõ egyszerû tövek maximális száma.
+A magyar esetében 2 az érték, e fölötti szószámnál már életbe lép
+a 6-3-as szabály.
+.IP "COMPOUNDSYLLABLE szám karakterek"
+Két paramétert vár. Az elsõ megadja az összetett szavak tövének
+maximális szótagszámát, ami a magyar helyesírás 6-3-as szabálya szerint 6.
+A második mezõ felsorolja a magánhangzókat,
+ami a szótagszám megállapításához szükséges.
+Ha hiányzik ez a definíció, akkor nincsen
+korlátozás az összetett szavak tövének szótagszámára
+vonatkozóan.
+.IP "SYLLABLENUM kapcsolók"
+Egy paramétert vár. A paraméterben megadhatóak azok a ragozási
+osztályok, amelyek ragozás esetén eggyel növelik az összetett
+szavak tövénél kiszámított szótagszámot. A magyarban ezek
+a melléknévképzõk: kerékpárjavításainkról, de kerékpár\-javítási.
+A 
+.IP "FORBIDDENWORD kapcsoló"
+A tiltott szavakat jelölõ kapcsoló. A tiltott szótövek
+toldalékolt alakjai is letiltásra kerülnek. A tiltott
+szavak akár toldalékolási, vagy szóösszetételi szinonimaként
+sem kerülnek elfogadásra.
+.IP "PSEUDOROOT kapcsoló"
+A kapcsolóval jelölt szavak toldalékolt alakjai kerülnek
+csak elfogadásra. Fiktív tövek megadására szolgáló
+kapcsoló. A tõ lehet még helyes szó, ha
+érvényes szinonimaként elõáll vagy szerepel a szótárban.
+.IP "ACCENT ékezetes_betûk ugyanaz_ékezet_nélkül"
+Az ékezetesítéshez szükséges betûket két paraméterrel
+adhatjuk meg itt. Az elsõ paraméterben
+az ékezetes karaktereket, a másodikban az azoknak
+megfelelõ ékezet nélküli betûket adjuk meg.
+.IP "WORDCHARS karakterek"
+Paramétere azok a karakterek, amelyek a beállított kódolás (pl.
+a magyar esetében az ISO-8859-2) betûi mellett még az adott
+nyelv szavaiban elõfordulhatnak. Ilyen például a magyarban
+a kötõjel, pont, százalékjel, fokjel, paragrafusjel és a
+nagykötõjel. Az utóbbi csak UTF-8, vagy microsoft-cp1250
+karakterkészlet mellett lesz használható a magyar szótárban.
+.IP "LEMMA_PRESENT kapcsoló"
+A morfológiai leírás elején megadhatunk más töveket is a
+tõszótárban az alapértelmezett helyett. A LEMMA_PRESENT
+kapcsolóval jelölt tövek esetében az elemzõ nem teszi a
+kimenetbe a lemmát (mivel az már szerepel a morfológiai
+leírásban). Így adhatunk meg fiktív vagy nem szótári
+tövekhez valódi töveket.
+.IP "REP szám"
+.IP "REP mit mire"
+A javítási cseretáblázat megadására szolgáló definíciók.
+Az elsõ REP után adjuk meg a többi REP sor számát.
+Ezek a sorok már két paramétert várnak: elõször
+megadjuk a felismerendõ mintát (hibás szórészletet),
+utána pedig azt a karaktersorozatot, amire a felismert
+mintát javítani szeretnénk. A helyesírás\-ellenõrzõ
+a cseretáblázat révén tud helyes javaslatot tenni
+többkarakteres eltérés (pl. j/ly) esetén.
+A Magyar Ispellben meglévõ keresztellenõrzés miatt
+egy karakteres cserék (i/í) is szerepelnek
+a REP táblázatban. Ennek köszönhetõ, hogy az amúgy
+helyes nem szótári szóösszetételek nem kerülnek
+elfogadásra, ha a cseretáblázat egyik cseréjével
+elõállíthatók egy szótári szóból (például:
+a ,,színtû'' szó hibás összetett szó lesz, mert az
+i\->í cserével elõállítható a szintû szóból).
+.IP "PFX kapcsoló keresztkombinálódás szám"
+.IP "PFX kapcsoló levágás prefixum feltétel morfológia"
+Prefixum megadására szolgáló definíciók.
+A prefixumok egykarakteres névvel jelölt osztályokba
+vannak sorolva. A példában az X osztály
+definíciója látható. Az egyes osztályokra
+vonatkozó PFX fejléc tartalmazza a következõket:
+
+(1) az osztály betûjelét (a példában X)
+
+(2) a keresztbe való kombinálás engedélyezése, illetve
+tiltása (Y/N). Engedélyezés esetén az adott prefixum akkor is
+alkalmazható, ha a tõszó toldalékolt alakban fordul elõ.
+Ehhez az is szükséges, hogy a toldalék (affixum) ragozási
+osztályában is legyen engedélyezve a kombinálás.
+
+(3) az osztályba tartozó bejegyzések számát
+
+A PFX fejlécet követõ sorokban a PFX paraméterek jelentése
+a következõ:
+
+(1) az osztály betûjele
+
+(2) a ragozásnál a szó elejérõl leválasztandó karaktersorozat.
+Ha nem kell leválasztani, akkor 0.
+
+(3) a prefixum (például igekötõ, vagy a leg\-, legesleg\-
+a mellékneveknél). Perjellel elválasztva kapcsolókat
+is megadhatunk (l. többszörös toldalékolás).
+
+(4) a minta, ami ha illeszkedik, alkalmazható a szabály.
+Például ha itt kutya szerepelne, akkor csak a kutya
+kezdetû szavak elé lehetne tenni az ebben a sorban
+megadott prefixumot. A minta megadásánál a pont (.)
+speciális jelentéssel bír: minden karakterre illeszkedik.
+Megadhatunk csak bizonyos karakterekre illeszkedõ mintát
+is szögletes zárójelek segítségével. Például az [abcd] illeszkedik
+az a, b, c, illetve d karakterekre is.
+Ellentétben az Ispell\-lel, a kötõjel
+szerepe a szögletes zárójelek között nem speciális,
+vagyis kötõjelet jelent, és nem karaktertartományt.
+Ha a nyitó szögletes zárójel után kalap (^) karakter
+található, a karaktertartomány komplementerére
+illeszkedik a minta, hasonlóan a reguláris
+kifejezésekhez (l.
+.IR regex "(7))."
+
+(5) Morfológiai leírás. Szóközön és szóköz értékû
+karaktereken kívül tetszõleges karakterekbõl álló leírás.
+A morfológiai elemzés során a program összefûzi az
+itt található leírást, tartalmával nem foglalkozik.
+Kivéve a { és } közé zárt leírásokat, amelyek a
+sor végi zárójelezett rész kivételével eltûnnek az elemzésbõl.
+Ezen a módon a zéró morfémához kapcsolódó elemzést adhatjuk
+meg.
+
+.IP "SFX kapcsoló keresztkombinálódás szám"
+.IP "SFX kapcsoló szuffixum feltétel mofológiai_leírás"
+A PFX\-szel megegyezõ paramétereket kap, csak nem
+a szó eleji, hanem a szó végi toldalékok leírására
+szolgál. A példában szereplõ definíciók jelentése:
+az \-edik, vagy \-ezik végû szavakra alkalmazható
+a három szabály. A rag illesztésénél levesszük
+a szó végi \-ik karaktersorozatot, és szabálytól függõen
+illesztjük a \-tük, \-tétek, \-ték toldalékokat,
+végeredményben \-edtük, \-edtétek, \-edték, illetve
+-eztük, \-eztétek, \-ezték végû szavakat kapva.
+.IP "Többszörös toldalékolás"
+A PFX és az SFX szabályokban a toldalék perjellel elválasztva kapcsolókat is
+kaphat, hasonlóan a szótárállomány töveihez. A kapcsolók a
+következõek lehetnek:
+
+(1) SFX szabályban az SFX folytatás jelentése, hogy a toldalék még tovább
+ragozódhat a megadott kapcsolókkal (többszörös affixumleválasztás).
+A Hunspell esetében csak a kétszeres affixumleválasztás lett megvalósítva,
+tehát a folytatási osztály folytatását már nem veszi figyelembe a program.
+
+(2) SFX szabályban a PFX folytatás jelentése, hogy az adott prefixum is
+hozzájárulhat a tõhöz, feltéve, ha az SFX szabály is él.
+
+(3) PFX szabályban az SFX szabály jelentése, hogy a megjelölt SFX
+szabály a tõhöz járulhat, ha a PFX szabály is él.
+
+(4) ONLYINCOMPOUND kapcsoló megadásával az adott PFX vagy SFX toldalék csak
+szóösszetételben jelentkezhet.
+
+(5) CIRCUMFIX kapcsoló megadásával az adott SFX csak az ugyanilyen
+toldalékot kapó PFX-szel együtt fordulhat csak elõ.
+
+(6) Az összetételi kapcsolók megadásával engedélyezhetjük
+vagy letilthatjuk (COMPOUNDFORBIDFLAG) az összetételben való
+szereplést. A összetett szavak utolsó tagja alapértelmezés szerint
+minden affixumot felvehet. A közbensõ szavaknál viszont
+explixit módon engedélyezni kell ezt.
+
+.PP
+A ragozási állomány ezeken kívül még megjegyzéseket is tartalmazhat, ezért az adott
+szótár változatát, szerzõjét, felhasználási engedélyeit itt
+keressük.
+.SH SAJÁT SZÓTÁR
+A saját szótár formátuma közel megegyezik a szótárállomány
+formátumával. A különbségek a következõek:
+
+(1) Nem kell megadni az elsõ sorban az állományban lévõ szavak
+méretét. (Ne is adjuk meg!)
+
+(2) A sorban a kapcsolók helyett megadhatunk két
+perjellel elválasztva egy mintaszót is,
+aminek a kapcsolóit örökli a késõbbiekben a saját
+szótárba felvett szó. Például a Patyomkin//Ádám sor
+jelentése, hogy a Patyomkin szót az Ádáméval megegyezõ
+ragozással is el kell fogadni.
+
+(3) Az állomány kézzel módosítható, és ezt idõnként
+javasolt is megtenni, ha esetleg hibásan vettünk fel szavakat.
+.SH LÁSD MÉG
+.B angol nyelvû hunspell (4),
+.B hunspell (1),
+.B ispell (1),
+.B ispell (4),
+Magyar Ispell dokumentáció.
+.SH TÖRTÉNET
+A MySpell szótár\-, illetve ragozási állományának formátumát
+Kevin Hendricks készítette olyan céllal, hogy lehetõvé
+tegye ezen állományok gyors, futás idejû feldolgozását.
+
+A COMPOUNDFLAG és a Hunspell formátumbõvítést, valamint
+a REP többkarakteres cseretáblázatot Németh László
+készítette elsõsorban a jobb magyar
+nyelvû helyesírás\-ellenõrzés céljából. A minimális
+összetettszó\-kezelést lehetõvé tevõ COMPOUNDMIN, COMPOUNDFLAG,
+és a REP többkarakteres cseretáblázat része a hivatalos
+MySpell függvénykönyvtárnak is.
+
+A Hunspell szótárállományának formátuma megegyezik
+a MySpell függvénykönyvtáréval, a ragozási táblázat pedig
+a fentiekben felsorolt bõvítéseket tartalmazza.
+A bõvített formátumú affixum állomány gond nélkül
+együttmûködik az eredeti MySpell függvénykönyvtárral is,
+de a bõvítések nem fognak mûködni. Sõt, mivel a
+hivatalos MySpell egy megengedõbb összetettszó\-kezelést
+valósít meg, mint a magyar változat, az
+összetett szavakon belüli toldalékolt alakok is elfogadásra
+kerülnek (ez különösen sok hibás összetétel
+elfogadását eredményezi a magyar nyelv esetében).
+
+Ebbõl fakad, hogy a hivatalos Magyar
+OpenOffice.org (http://office.fsf.hu) \- mivel a Magyar
+MySpell függvénykönyvtárat tartalmazza \- jobban támogatja
+a magyar nyelvet, mint más változatok. Egyszerûen
+meggyõzõdhetünk arról, hogy melyik változattal van dolgunk:
+írjuk be, hogy
+.I helyesírásellenõrzõ
+az OOo szövegszerkesztõjébe.
+Ha hibásnak jelzi, és
+.I helyesírás\-ellenõrzõt
+javasol helyette,
+a Hunspell\-lel van dolgunk. Ha helyesnek fogadja
+el, akkor pedig az eredeti MySpell\-lel.

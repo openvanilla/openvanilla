@@ -1,0 +1,433 @@
+.hla hu
+.TH hunspell 1 "2003. december 15."
+.LO 1
+.SH NÉV
+hunspell \- helyesírás\-javító, szótövezõ és morfológiai elemzõ program
+.SH ÁTTEKINTÉS
+hunspell [\-1 \-a \-G \-h \-H \-l \-L \-m \-n \-t] [\-d szótár] [\-p saját_szótár] [állomány(ok)]
+.SH LEÍRÁS
+A
+.B hunspell
+Ispell\-szerû interaktív és csõfelület a (Magyar) Myspell függvénykönyvtárhoz.
+Felismeri és javítja az elütéseket és típushibákat
+sima szöveges, (La)TeX, HTML, és groff (kézikönyv oldal) állományokban.
+.PP
+Ha nem adunk meg állománynév paramétert, a Hunspell az Ispell
+csõfelületéhez hasonlóan mûködik: a bemenet sorait szavakra bontja,
+és *, +, vagy - jellel kezdõdõ kimeneti sorral jelzi, ha egy szó jó,
+és # vagy & jellel, ha rossz. A csõfelület parancsait viszont az
+Ispellhez hasonlóan csak a
+.I \-a
+kapcsoló megadásával értelmezi.
+.PP
+Állománynév paraméter esetén elindul egy az Ispelléhez hasonló interaktív felület.
+.PP
+A program a következõ elõnyöket nyújtja a hasonló célokat szolgáló \fIIspell\fR\-lel szemben:
+.IP \-
+Képzõk átfogó ismerete. (Több tízezer helyes szóalak elfogadását tette
+lehetõvé a tesztelésre használt 4 millió szavas gyakorisági szótárban.)
+.IP \-
+Homonimák kezelése (nincsenek például olyan alakok elfogadva, mint megvárban).
+.IP \-
+Helyes javaslatok a több karakter változásával járó tipikus hibákra
+(j/ly, íj/ijj, nyj/nny és még több tucatnyi tévesztés megvizsgálásával).
+Az \fIIspell\fR csak két karakter felcserélése; vagy egy karakter hiánya,
+cseréje, illetve felesleges jelenléte esetén ad helyes javaslatot.
+.IP \-
+Az összes helyes összetett szónak látszó, de tipikus hibával elõálló alak tiltása (karvaj, színtû, súlytó stb.)
+.IP \-
+Javaslatok valószínûségi sorrendben  jelennek meg (tipikus hibák, i/í, o/ó, u/ú tévesztések stb.).
+.IP \-
+Összetett szavak esetén  6\-3\-as szabály alkalmazása (helyesírás\-ellenõrzõ, gépkocsi\-összeszerelés).
+.IP \-
+Mozgószabály alkalmazása (kiviteli engedély, kiviteliengedély\-kérés).
+.IP \-
+A magyar nyelv egyéb összetételi szabályainak alkalmazása (például hatlövetû, tizenkét lövetû, kéthavi, két hónapos, másodmagával).
+.IP \-
+Leg-, legesleg- és -bb confixum helyes kezelése (nincs pl. legédes, csak legédesebb).
+.IP \-
+Ragozható tõszófelvétel. Megkönnyíti egy új szó ragozott változatainak ellenõrzését, feleslegessé téve ezek külön\-külön történõ felvételét a saját szótárba.
+.IP \-
+Javaslatok mássalhangzó\-triplázások (sakkkör, baletttáncos, dzsesszszak) esetén.
+(Ispell helyesnek fogadja el ezeket.)
+.IP \-
+Javaslatok szótagduplázások (oktatatás, igenenevet) esetén.
+.IP \-
+Javaslatok ékezet nélküli szövegre (tukorfurogep\->tükörfúrógép).
+.IP \-
+Kötõjeles szavak kezelése (unos\-untalan).
+.IP \-
+Toldalékolt számok (1\-jén, 11\-én, 5.\-et) kezelése.
+.IP \-
+°, %, és § jelek (%\-kal) toldalékolt alakjainak kezelése.
+.IP \-
+Mozaikszavak (MÁV\-osokat) kezelése.
+.IP \-
+Y-ra végzõdõ szavak (boyjal, pennyvel) kezelése.
+.IP \-
+Idegen ejtésû szótagra végzõdõ szavak (Anonymusszal, Voltaire\-nek) kezelése.
+.IP \-
+Két szóból álló földrajzi nevek (San Franciscó\-i) kezelése.
+.IP \-
+Hibás alakok tiltása (Babitssal, tanit, alkotómûvész stb.)
+.IP \-
+Tiltások jelzése a felhasználói felületen.
+.IP \-
+Egyéb (például az Ispell ragozott utószó esetében bármilyen szóösszetételt elfogad: macskatekerem, kutyakavarom, ezt a Hunspell nem teszi meg).
+.IP \-
+Magyar nyelvû (illetve 
+.B locale (7)
+függõ) felület.
+.IP \-
+Hordozható szöveges szótárállományok, szemben az Ispell platform, és bináris Ispell fordítástól függõen (nem) kezelhetõ adatállományaival.
+.SH KAPCSOLÓK
+.TP
+.B \-1
+Speciális formátum: a bemeneti állomány tabulátorjelet tartalmazó soraiból csak az
+elsõ tabulátorjel elõtti karaktersorozatot vizsgálja meg.
+.TP
+.B \-a
+Ispellhez csõfelület. A
+.I !,
+.I +,
+.I \-,
+.I \@,
+.I #,
+vagy
+.I ^
+jellel kezdõdõ sorok a csõfelület parancsai, jelentésüket
+az Ispell kézikönyvoldal részletezi. A \-a kapcsoló
+hatására a kimenetben a jó szavakat csak csillaggal jelzi
+a Hunspell. Ez nagyobb kompatibilitást biztosít az Ispellt használó programok
+némelyikével (például a LyX-szel). Ekkor nem kell
+megadnunk a \-a kapcsolót, mivel az Ispellt
+használó programok automatikusan ezzel a kapcsolóval indítják
+el az Ispell nevében futó Hunspellt is.
+.TP
+.B \-d " szótár"
+Meghatározza a helyesírási szótárt. Az alapértelmezett szótár a
+.BR /usr/share/hunspell/default.
+A megadott útvonal lehet abszolút és relatív is. Relatív
+útvonal esetén elõször az aktuális, majd a
+.BR /usr/share/hunspell
+könyvtárban keresi a szótárt a program. L.
+.BR PÉLDÁK.
+.TP
+.B \-G
+A \-l, \-w, és \-L kapcsolókat kiegészítõ kapcsoló. A standard bemenetrõl
+érkezõ hibás szavak, illetve
+sorok megjelenítése helyett a jó szavak és a hibátlan sorok megjelenítését
+kérhetjük vele. Ha mást nem adunk meg, a \-l kapcsoló hatásának megfelelõen
+mûködik, csak a rossz helyett a jó szavakat írja a standard kimenetre.
+.TP
+.B \-h, \-\-help
+A beépített leírás megjelenítése.
+.TP
+.B \-H
+HTML bemeneti állományformátum beállítása. Ha az állomány
+nevének .html, .htm, vagy .xml a kiterjesztése, ez automatikusan bekövetkezik.
+.TP
+.B \-l
+Kiírja a hibás szavakat a standard bemenetrõl érkezõ állományból.
+Használható a \-H, \-t, \-n, \-1 kapcsolókkal együtt is. A \-G kapcsoló
+megfordítja a Hunspell mûködését: csak a jó szavak kerülnek kiírásra.
+.TP
+.B \-L
+Csak a hibás szavakat tartalmazó sorokat írja ki a standard bemenetrõl érkezõ állományból.
+Használható a \-H, \-t, \-n, \-1 kapcsolókkal együtt is. A \-G kapcsoló
+megfordítja a mûködését: csak azok a sorok kerülnek kiírásra, amelyek egy
+hibás szót sem tartalmaznak.
+.TP
+.B \-n
+Nroff/troff bemeneti állományformátum beállítása, elsõsorban a 
+kézikönyvlapok ellenõrzésére.
+.TP
+.B \-p " saját_szótár"
+A felhasználó saját szótárának beállítására szolgál.
+
+Az alapértelmezett saját szótár a
+.BR $HOME/.hunspell_default
+állomány. Ha szótárat is megadunk a
+.I \-d
+kapcsolóval, vagy a
+.I DICTIONARY
+környezeti változóval, a saját szótár a
+.BR $HOME/.hunspell_szótárnév
+lesz. Ha a saját szótár nem létezik, létrehozza.
+
+Ha az aktuális könyvtárban is van egy ugyanilyen nevû
+állomány, akkor annak tartalma is beolvasásra kerül,
+mint saját szótár, és az újonnan felvett szavak is
+ide kerülnek.
+
+A
+.I \-p ,
+vagy a
+.I WORDLIST
+környezeti változó megadásával új saját szótárat
+jelölünk ki. A saját szótárat az aktuális könyvtárban,
+és a saját könyvtár gyökerében ($HOME) keresi a
+Hunspell. Ha nem található, akkor az újonnan felvett
+szavak mentésénél létrehozza a saját könyvtár gyökerében.
+.TP
+.B \-t
+LaTeX bemeneti állományformátum beállítása. Ha az állomány nevének .tex
+a kiterjesztése, ez automatikusan bekövetkezik.
+.TP
+.B \-u
+Tipikus hibák kijelzése az állományból, cserejavaslattal.
+.TP
+.B \-u2
+Tipikus hibák és javításuk kijelzése módosítható, és a
+sed programmal végrehajtatható formában.
+Irányítsuk a Hunspell kimenetét egy állományba.
+Törüljük azokat a sorokat az elmentett állományból,
+amelyek sed paranccsal megadott javítását nem szeretnénk.
+Mentsük el az állományt, és
+a \fIsed -f javítás eredeti_állomány >javított_állomány\fR
+paranccsal javíthatjuk az állományt gyorsan
+és egyszerûen. (A sok hibát tartalmazó állományok
+javítását gyorsítja meg ez a lehetõség.)
+.TP
+.B \-U
+Ha az -u kapcsolóval kapott javaslatokat mind el szeretnénk fogadni,
+akkor az \-U kapcsolóval a Hunspell automatikusan
+végrehajtja a cseréket, és a módosított állományt
+a szabványos kimenetre küldi. Példa a javításra:
+\fIhunspell -U eredeti_állomány >javított_állomány\fR.
+A hibakimeneten megjelennek a javítások is még egyszer, a
+-\u kapcsolóhoz hasonló módon.
+.TP
+.B \-v
+Verziószám.
+.TP
+.B \-vv
+Verziószám (Ispell kompatibilitás miatt).
+.TP
+.B \-w
+Csak a hibás szavakat írja ki a standard bemenetrõl érkezõ, soronként
+egy szót tartalmazó állományból. A sorok nincsenek szavakra
+bontva. A sorok szavakra bontása, és csak a hibás szavak kiírása a \-w kapcsolóval
+érhetõ el. A \-G kapcsoló megfordítja a Hunspell mûködését: csak a jó szavak kerülnek
+kiírásra.
+.SH INTERAKTÍV FELÜLET
+A felület legfelsõ sorában a hibás szóalakot, és az éppen vizsgált
+állomány nevét látjuk. Amennyiben egy szóalak szótári tiltás
+miatt nem kerül elfogadásra, a bal felsõ sarokban a TILTOTT!
+(FORBIDDEN!) üzenet is megjelenik. Ez az üzenet arra utal, hogy nem
+hiányos szókincs, hanem szándékos tiltás miatt nem került a szó
+elfogadásra. Az elsõ sor alatt az állomány hibás szót tartalmazó sorát, és
+szövegkörnyezetét láthatjuk, majd ezt követik a javaslatok, ha vannak.
+.PP
+A használható billentyûkombinációk:
+.TP
+.B Szóköz
+Továbblépés javítás nélkül a következõ hibás szóra.
+.TP
+.B Számok
+A megfelelõ javaslat kiválasztása.
+.TP
+.B c
+Csere. A hibás szó cseréje a megadott szóra, vagy szavakra.
+Az Escape billentyû kétszeri lenyomásával megszakíthatjuk a
+a cserét.
+.TP
+.B j
+A szó elfogadása a program futásának befejezõdéséig.
+.TP
+.B f
+A szó felvétele a saját szótárba.
+.TP
+.B k
+A szó kisbetûsként való felvétele a saját szótárba.
+.TP
+.B t
+Ragozott tõszó felvétele. A ragozás a másodikként
+megadott, mintául szolgáló szó alapján történik.
+Ha ez a szó nincs felvéve a szótárba, a tõszófelvételt
+elölrõl kell kezdeni.
+
+Példa: gyakran hiányoznak az idegen és a
+mozaikszavak. Vegyük fel a hiányzó OTP szót
+a tv köznévi mozaikszó toldalékaival!
+Lenyomjuk a t billentyût, beírjuk, hogy OTP,
+leütjük az új sor billentyût, beírjuk, hogy tv, és ismét új sor. A tv szó
+ugyanis már szerepel a szótárban, és ragozása
+mondja meg a programnak, hogy az OTP szót
+milyen toldalékokkal szeretnénk látni, pl.
+OTP\-hez, OTP\-met stb. a tv\-hez, tv\-met mintájára.
+A \-val/\-vel, \-vá/\-vé toldalékokat
+a kötõjellel kapcsolt toldalékú szavak
+esetében külön kell felvenni, de még így is sokkal
+kényelmesebb a speciális tõfelvétel, mint minden
+(akár több száz) toldalékos alakot külön\-külön
+felvenni.
+
+Egy kis segítség a minta kiválasztásához:
+elsõ menetben a hangrend számít. Pl. mozaikszavaknál a
+mély hangrendû új szavak felvételénél használhatjuk
+a \fIMÁV\fR szót példaként, ajakréses magas hangrendnél
+pedig az említett \fItv\fR\-t. Ajakkerekítéses magas hangrend
+esetében a \fIHÖK\fR szót használhatjuk (amíg át nem
+lesz javítva a helyes hök\-re). Ha a hiányzó
+szó nem mozaikszó, hanem például tulajdonnév, 
+a \fIPál\fR, \fIPéter\fR, \fIÖrs\fR szavakat adhatjuk
+meg példának a hangrendtõl függõen. Ha meg
+egyszerû köznévrõl van szó, akkor használjuk az
+\fIok\fR, \fIék\fR, \fIük\fR szavakat.
+Igéknél \fIáll\fR, \fIvél\fR, \fIül\fR,
+ikes igéknél \fIázik\fR, \fIvérzik\fR, \fInõzik\fR
+lehet a példa (remélhetõleg a következõ
+változatokban egyszerûsödik ez a tõfelvétel).
+
+Az Escape billentyû kétszeri lenyomásával megszakíthatjuk ezt
+a mûveletet.
+
+Az itt felvett szavak automatikusan a saját
+szótárba kerülnek. Ha ezt innen törölni
+szeretnénk, a programból kilépve
+a saját szótár kézi átszerkesztésével tehetjük meg.
+
+.TP
+.B m
+Kilépés a változtatások mentése nélkül. A program
+változtatás megléte esetén megerõsítést kér.
+.TP
+.B v
+Az állomány ellenõrzésének megszakítása a változtatások
+mentésével. Ha van következõ állomány, akkor
+a program annak ellenõrzését kezdi el.
+.TP
+.B ?
+Segítség. Hasonló rövid leírás megjelenítése a
+billentyûparancsokról.
+.SH CSÕFELÜLET
+A \fIHunspell \fR soronként dolgozza fel az
+állományokat, a helyes szavakat \fI*\fR (tõszó), \fI\-\fR
+(összetett szó), vagy
+.I +
+(ragozott szó) karakterrel jelöli, a helyteleneket
+.I #
+(nincs javaslat) , vagy
+.I &
+(van javaslat) karakterrel. A + jelet a kimenetben követi még a szótõ.
+A # jel után a hibás szó, és kezdõpozíciója van feltüntetve.
+A & jelet követi a hibás szó; a javaslatok száma; a hibás szó
+kezdõpozíciója; majd kettõspont után a javaslatok, vesszõvel elválasztva:
+.PP
+.RS
+.nf
+macska
+*
+macskabajusz
+-
+macskák
++ macska
+mcsk
+# mcsk 0
+macka
+& macka 7 0: macska, maca, racka, packa, vacka, marka, mackó
+.fi
+.RS
+.SH PÉLDÁK
+.TP
+.B hunspell \-d en_US english.html
+Az amerikai angol helyesírási szótár kiválasztása (aktuális, vagy a
+.BR /usr/share/hunspell
+könyvtárból.
+.TP
+.B hunspell \-d /opt/OpenOffice.org1.0.1/share/dict/ooo/de_DE
+A német helyesírási szótár kiválasztása a megadott abszolút
+útvonalról, a standard bemenet feldolgozásával.
+.TP
+.B hunspell *.html
+Az aktuális könyvtárban található összes HTML állomány
+interaktív ellenõrzése.
+.TP
+.B hunspell -l szöveg.html
+A megadott állomány hibás szavainak kiírása.
+.TP
+.B hunspell -r *.html
+Az aktuális könyvtárban található összes HTML állomány
+szavainak, és a szavak szótöveinek kiírása.
+.SH KÖRNYEZET
+.TP
+.B DICTIONARY
+A szótár helyének megadására szolgál. Szerepe megegyezik a
+.I \-d
+kapcsolóval.
+.TP
+.B DICPATH
+A szótárkeresési útvonalat tartalmazó változó.
+.TP
+.B WORDLIST
+A saját szótár helyének megadására szolgál. Szerepe megegyezik a
+.I \-p
+kapcsolóval.
+.SH ÁLLOMÁNYOK
+.BI /usr/share/default.aff
+Az alapértelmezett ragozási táblázat. Lásd hunspell(4).
+.PP
+.BI /usr/share/default.dic
+Az alapértelmezett szótár az elõzõ ragozási táblázathoz.
+Lásd hunspell(4).
+.BI $HOME/.hunspell_default
+Az alapértelmezett saját szótár. Az állományt létrehozza
+a Hunspell, ha nem létezik. Lásd ispell(1).
+.SH LÁSD MÉG
+.B hunspell (4),
+.B hunstem (1),
+.B makedb (1),
+.B lookdb (1),
+.B ispell (1),
+.B ispell (4),
+Magyar Ispell dokumentáció.
+.SH SZERZÕ
+A Hunspell az International Ispell lényegi részének C++\-os újramegvalósításának,
+a Myspell függvénykönyvtárnak a bõvítése.
+Nemcsak felület a könyvtárhoz, hanem egy jelentõs bõvítés is a magyar nyelv
+vonatkozásában (Magyar Myspell).
+.PP
+A mintaként szolgáló International Ispell szerzõje Geoff Kuenning,
+sok más elõdje munkájára támaszkodva (l. ispell(1)).
+.PP
+A Myspellt Kevin Hendricks készítette a kiváló és ingyenes OpenOffice.org
+(eredetileg StarOffice) irodai programcsomaghoz 2001\-2002\-ben.
+.PP
+A Magyar Myspellt, illetve a Hunspell felületet
+Németh László <nemethl@gyorsposta.hu> készítette 2002\-2003\-ban.
+.PP
+2003 márciusától a fejlesztést a Szószablya projekt viszi tovább egy
+nyitott forráskódú magyar morfológiai elemzõ elkészítésének irányába.
+.PP
+A Hunspell a Magyar Ispell projekt eredményét, a magyar Ispell/Myspell
+helyesírási szótármodult használja a magyar nyelvû szövegek ellenõrzésekor.
+A Magyar Ispell levelezõlista a magyarispell@yahoogroups.com
+címen található. Várunk minden olyan észrevételt, illetve segítséget,
+ami jobbá teheti a Magyar Myspell helyesírás\-ellenõrzõt, és a
+Magyar Ispell szótármodult.
+.PP
+Az International Ispell\-nek, és így a Myspellnek is
+magyar vonatkozása is van.
+A programokban szereplõ affixumtömörítés a Dömölki\-algoritmuson
+alapszik, Dömölki Bálint egyik 60\-as években publikált algoritmusán,
+amit a magyar M3\-as, az elsõ hazai elektronikus számítógép
+megépítését követõen, nyelvészeti jellegû kutatások kapcsán
+dolgozott ki.
+.SH HIBÁK
+Az UTF-8, vagy UTF-16 karakterkódolású állományok ellenõrzését a Hunspell
+parancssori felület még nem támogatja. UTF-8 kódolású szótárak, és
+a check() függvény már használható.
+.PP
+A sorok maximális mérete nincs korlátozva, de a 8 kB\-os határokon
+tévesen hibát jelezhet a program. A szóköz lenyomásával
+ugorjuk át a téves hibajelzést!
+.PP
+Az e\-mail címek, URL\-ek, és egyéb útvonalak
+ellenõrzését elkerülhetjük, ha ezeket a javasolt módon;
+HTML esetében a \fB<var>útvonal</var>\fR, LaTeX esetében \fB\\url{útvonal}\fR
+formában adjuk meg. (A címek elválasztást is lehetõvé
+tevõ \fI\\url\fR LaTeX parancs az \fIurl\fR csomagban található, tehát
+használatához a \fB\\usepackage{url}\fR parancs kiadására is szükség
+van a preambulumban.)
+.PP

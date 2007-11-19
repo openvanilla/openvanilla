@@ -1,0 +1,7 @@
+all: aspell.txt hunspell.txt
+	./prepare List*txt
+	./test List*txt
+
+clean:
+	rm List*txt[1-6] result.*
+
