@@ -1,10 +1,30 @@
+#Version 2.3, November 2007
+#Eric Rasmussen <hello.rasmus@gmail.com>
+#Covers Pinyin, MPS-2, Yale
+#Omits ê
+#Special thanks to OpenVanilla.org for converting the data table
+
 %gen_inp
-%ename Biauyin
+%ename Biaoyin
 %cname 表音
 %encoding UTF-8
 %selkey 1234567890
-%endkey 1234
+%endkey '"-()[];:,.!?/
 %keyname begin
+' '
+" "
+- -
+( (
+) )
+[ [
+] ]
+; ;
+: :
+, ,
+. .
+! !
+? ?
+/ /
 1 1
 2 2
 3 3
@@ -30,13 +50,28 @@ r r
 s s
 t t
 u u
-v v
+v ü
 w w
 x x
 y y
 z z
 %keyname end
 %chardef begin
+'	'
+"	"
+-	-
+(	(
+)	)
+[	[
+]	]
+;	;
+:	:
+,	,
+.	.
+!	!
+?	?
+/	/
+
 a	a
 a	A
 a1	ā
@@ -2428,7 +2463,6 @@ ju3	jǔ
 ju3	Jǔ
 ju4	jù
 ju4	Jù
- jiu
 jyu	jyu
 jyu	Jyu
 jyu1	jyū
@@ -3120,6 +3154,14 @@ lyou4	Lyòu
 
 lo	lo
 lo	Lo
+lo1	lō
+lo1	Lō
+lo2	ló
+lo2	Ló
+lo3	lǒ
+lo3	Lǒ
+lo4	lò
+lo4	Lò
 
 long	long
 long	Long
@@ -3174,7 +3216,6 @@ lv3	lǚ
 lv3	Lǚ
 lv4	lǜ
 lv4	Lǜ
- liu
 lyu	lyu
 lyu	Lyu
 lyu1	lyū
@@ -3962,7 +4003,6 @@ nv3	nǚ
 nv3	Nǚ
 nv4	nǜ
 nv4	Nǜ
- niu
 nyu	nyu
 nyu	Nyu
 nyu1	nyū
@@ -4356,7 +4396,6 @@ qi3	qǐ
 qi3	Qǐ
 qi4	qì
 qi4	Qì
- chi
 
 qia	qia
 qia	Qia
@@ -6019,7 +6058,6 @@ xi3	xǐ
 xi3	Xǐ
 xi4	xì
 xi4	Xì
- shi
 syi	syi
 syi	Syi
 syi1	syī
@@ -6557,6 +6595,12 @@ yo	yo
 yo	Yo
 yo1	yō
 yo1	Yō
+yo2	yó
+yo2	Yó
+yo3	yǒ
+yo3	Yǒ
+yo4	yò
+yo4	Yò
 
 you	you
 you	You
@@ -7174,16 +7218,6 @@ zhu3	zhǔ
 zhu3	Zhǔ
 zhu4	zhù
 zhu4	Zhù
-ju	ju
-ju	Ju
-ju1	jū
-ju1	Jū
-ju2	jú
-ju2	Jú
-ju3	jǔ
-ju3	Jǔ
-ju4	jù
-ju4	Jù
 
 zhua	zhua
 zhua	Zhua
@@ -7257,7 +7291,6 @@ zhuan3	zhuǎn
 zhuan3	Zhuǎn
 zhuan4	zhuàn
 zhuan4	Zhuàn
- juan
 jwan	jwan
 jwan	Jwan
 jwan1	jwān
