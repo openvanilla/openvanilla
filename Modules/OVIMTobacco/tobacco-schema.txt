@@ -1,3 +1,0 @@
-CREATE TABLE word_table(wordId INTEGER PRIMARY KEY, word TEXT);
-CREATE TABLE BoPoMoFo_char2word_table(characters TEXT, wordId INTEGER, logProb REAL, backOff REAL);
-CREATE INDEX BoPoMoFo_index_characters ON BoPoMoFo_char2word_table(characters);
