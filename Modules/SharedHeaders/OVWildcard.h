@@ -41,15 +41,7 @@ namespace OpenVanilla {
 
 	class OVWildcard {
 	public:
-		enum Directive {
-			Exact,
-			AnyOne,
-			AnyUntil
-		};
-		
-		typedef pair<Directive, int> State;
-		
-		OVWildcard(const string& expression, char matchOneChar = 0, char matchZeroOrMoreChar = 0, bool matchEndOfLine = false)
+		OVWildcard(const string& expression, char matchOneChar = '?', char matchZeroOrMoreChar = '*', bool matchEndOfLine = true)
 		{
 			m_matchEndOfLine = matchEndOfLine;
 			
@@ -140,6 +132,15 @@ namespace OpenVanilla {
 		friend ostream& operator<<(ostream& stream, const OVWildcard& wildcard);
 		
 	protected:
+		enum Directive {
+			Exact,
+			AnyOne,
+			AnyUntil
+		};
+		
+		typedef pair<Directive, int> State;
+		
+	    
 		bool m_matchEndOfLine;
 		vector<State> m_states;
 	};
