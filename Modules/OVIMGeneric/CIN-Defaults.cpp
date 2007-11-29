@@ -93,6 +93,8 @@ bool CINSetDefaults(const char *shortname, OVDictionary *dict) {
     if (S, "simplex.cin", 2, 0, 1) R;
     if (S, "tcj.cin", 5) R;               // tcj=cj
     if (S, "telecode.cin", 5, 1, 1) R;    // maxlen=5, autocompose, hitmax&cmpse.
+    if (S, "tp_hakka_hl.cin", 7) R;
+    if (S, "tp_hakka_sy.cin", 7) R;
     if (S, "wu.cin", 14) R;
     if (S, "wubizixing.cin", 4, 0, 1) R;  // maxlen=4, hitmax&cmpse;
     if (S, "wus.cin", 13) R;
