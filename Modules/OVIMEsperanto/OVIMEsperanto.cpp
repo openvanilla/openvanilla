@@ -143,9 +143,9 @@ public:
         return 1;
     }
     virtual const char* localizedName(const char *locale) {
-	if (!strcasecmp(locale, "ja")) return "エスペラント";
-        if (!strcasecmp(locale, "zh_TW")) return "世界語";
-        if (!strcasecmp(locale, "zh_CN")) return "世界语";
+	if (!strcasecmp(locale, "ja")) return "\xE3\x82\xA8\xE3\x82\xB9\xE3\x83\x9A\xE3\x83\xA9\xE3\x83\xB3\xE3\x83\x88";
+        if (!strcasecmp(locale, "zh_TW")) return "\xE4\xB8\x96\xE7\x95\x8C\xE8\xAA\x9E";
+        if (!strcasecmp(locale, "zh_CN")) return "\xE4\xB8\x96\xE7\x95\x8C\xE8\xAF\xAD";
         return "Esperanto";
     }
 };
