@@ -65,7 +65,6 @@ public:
 # define XTRANS 12
 
 char XtransKey[XTRANS] = {'c','g', 'h', 'j', 's', 'u', 'C', 'G', 'H', 'J', 'S', 'U'};
-//'ĉ','ĝ', 'ĥ', 'ĵ', 'ŝ', 'ŭ', 'Ĉ', 'Ĝ', 'Ĥ', 'Ĵ', 'Ŝ', 'Ŭ
 unsigned short XtransChar[XTRANS] = {0x0109,0x011D,0x0125,0x0135,0x015D,0x016D,
 									 0x0108,0x011C,0x0124,0x0134,0x015C,0x016C};
 
