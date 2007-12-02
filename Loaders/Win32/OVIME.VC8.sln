@@ -21,8 +21,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMEUIManaged", "OVIMEUIMa
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxmlSTL", "tinyxml\tinyxmlSTL.VC8.vcproj", "{B2584669-D88A-4BC7-B638-C6937AFC823F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMTobacco", "..\..\Modules\OVIMTobacco\OVIMTobacco.vcproj", "{06DD6384-CF74-4115-AFC9-E6BA2D818E12}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GacUtil", "..\..\Utilities\GacUtil\GacUtil.csproj", "{5B57BD35-F14C-41AA-811C-5739873DEE7B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMGeneric", "..\..\Modules\OVIMGeneric\OVIMGeneric.VC8.vcproj", "{54BFFD19-C34D-4C86-8DA6-440B1E9ACF08}"
@@ -36,6 +34,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVOFFullWidthCharacter", "..\..\Modules\OVOFFullWidthCharacter\OVOFFullWidthCharacter.vcproj", "{A12A02AF-F3F9-4CDF-851F-9555406C087E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVOFReverseLookup", "..\..\Modules\OVOFReverseLookup\OVOFReverseLookup.vcproj", "{575E02A0-8236-471D-AF56-9CB6D60B6C85}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMEsperanto", "..\..\Modules\OVIMEsperanto\OVIMEsperanto.vcproj", "{6D922987-9977-4F51-8D8E-45F4DE440725}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,16 +97,6 @@ Global
 		{B2584669-D88A-4BC7-B638-C6937AFC823F}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{B2584669-D88A-4BC7-B638-C6937AFC823F}.Release|Win32.ActiveCfg = Release|Win32
 		{B2584669-D88A-4BC7-B638-C6937AFC823F}.Release|Win32.Build.0 = Release|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Win32.ActiveCfg = Debug|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Debug|Win32.Build.0 = Debug|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Any CPU.ActiveCfg = Release|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Win32.ActiveCfg = Release|Win32
-		{06DD6384-CF74-4115-AFC9-E6BA2D818E12}.Release|Win32.Build.0 = Release|Win32
 		{5B57BD35-F14C-41AA-811C-5739873DEE7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B57BD35-F14C-41AA-811C-5739873DEE7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B57BD35-F14C-41AA-811C-5739873DEE7B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -177,6 +167,16 @@ Global
 		{575E02A0-8236-471D-AF56-9CB6D60B6C85}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{575E02A0-8236-471D-AF56-9CB6D60B6C85}.Release|Win32.ActiveCfg = Release|Win32
 		{575E02A0-8236-471D-AF56-9CB6D60B6C85}.Release|Win32.Build.0 = Release|Win32
+		{6D922987-9977-4F51-8D8E-45F4DE440725}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{6D922987-9977-4F51-8D8E-45F4DE440725}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{6D922987-9977-4F51-8D8E-45F4DE440725}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{6D922987-9977-4F51-8D8E-45F4DE440725}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6D922987-9977-4F51-8D8E-45F4DE440725}.Debug|Win32.Build.0 = Debug|Win32
+		{6D922987-9977-4F51-8D8E-45F4DE440725}.Release|Any CPU.ActiveCfg = Release|Win32
+		{6D922987-9977-4F51-8D8E-45F4DE440725}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{6D922987-9977-4F51-8D8E-45F4DE440725}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{6D922987-9977-4F51-8D8E-45F4DE440725}.Release|Win32.ActiveCfg = Release|Win32
+		{6D922987-9977-4F51-8D8E-45F4DE440725}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
