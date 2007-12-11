@@ -7,6 +7,7 @@
 
 #import "LeopardVanilla.h"
 #import "CVLoader.h"
+#import "OVDisplayServer.h"
 
 IMKServer *_inputMethodServer = nil;
 MenuRef _sharedCarbonMenu;
@@ -37,7 +38,25 @@ NSLock *_sharedLock = nil;
 int main(int argc, char *argv[])
 {
     NSAutoreleasePool *pool = [NSAutoreleasePool new];
-	
+
+    if (argc > 1 && !strcasecmp(argv[1], "reload")) {
+        NSApplicationLoad();
+        
+        id ovdspsrvr = [[NSConnection rootProxyForConnectionWithRegisteredName:OVDSPSRVR_NAME host:nil] retain];
+        
+        if (!ovdspsrvr)
+            return 1;
+
+        NSLog(@"quitting LeopardVanilla");
+
+        [ovdspsrvr setProtocolForProxy:@protocol(OVDisplayServer)];
+        [ovdspsrvr quitLoader];
+        
+        sleep(3);
+        
+        return 0;
+    }
+    	
 	_sharedLock = [[NSLock alloc] init];
 	_inputMethodServer = [[IMKServer alloc] initWithName:LEOPARD_VANILLA_CONNECTION_NAME bundleIdentifier:[[NSBundle mainBundle] bundleIdentifier]];
 	

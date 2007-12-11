@@ -604,6 +604,7 @@ NSString *CVLoader::MSG(NSString *m) {
 @protocol OVDistributedStringReceiver
 - (void)sendString:(NSString *)string;
 - (void)sendCharacter:(NSString *)string;
+- (void)quitLoader;
 @end
 
 @interface CVKeyReceiver : NSObject <OVDistributedStringReceiver>
@@ -630,6 +631,10 @@ NSString *CVLoader::MSG(NSString *m) {
 {
 	// NSLog(@"received remote string: %@", string);
 	ctxt->sendString(string);
+}
+- (void)quitLoader
+{
+    [NSApp performSelector:@selector(terminate:) withObject:self afterDelay:0];
 }
 @end
 

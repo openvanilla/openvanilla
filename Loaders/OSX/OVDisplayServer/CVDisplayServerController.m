@@ -19,41 +19,27 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 @protocol OVDistributedStringReceiver
 - (void)sendString:(NSString *)string;
 - (void)sendCharacter:(NSString *)string;
+- (void)quitLoader;
 @end
 
 @implementation CVDisplayServerController
 - (void)awakeFromNib
 {
-	#ifndef LEOPARD_VANILLA
-	
-		NSConnection *connection = [NSConnection defaultConnection];
-		[connection setRootObject:self];
-		
-		if (![connection registerName:OVDSPSRVR_NAME]) {
-			[[NSApplication sharedApplication] terminate:self];
-			return;
-		}
-	#else
-		NSLog(@"LeopardVanilla, display server now embedded");
 
-		NSString *killOV = [NSString stringWithContentsOfFile:@"/tmp/killov" encoding:NSUTF8StringEncoding error:nil];
-		if (killOV) {
-			NSLog(@"Kill OV exists");			
-			unlink("/tmp/killov");
-			
-			NSString *still = [NSString stringWithContentsOfFile:@"/tmp/killov" encoding:NSUTF8StringEncoding error:nil];
-			if (still) {
-				NSLog(@"still exists! bizarre!");
-			}
-			else {
-				[[NSApplication sharedApplication] terminate:self];
-			}
-		}
-		else {
-			NSLog(@"Kill OV doesn't exist");
-		}
+    #ifndef LEOPARD_VANILLA
+    NSConnection *connection = [NSConnection defaultConnection];
+    [connection setRootObject:self];
+    
+    if (![connection registerName:OVDSPSRVR_NAME]) {
+        NSLog(@"Cannot register distant object service under the name %@", OVDSPSRVR_NAME);
+        [[NSApplication sharedApplication] terminate:self];
+        return;
+    }
+    else {
+        NSLog(@"Distant object service registered");
+    }
 
-	#endif
+    #endif
 	
 	_fadeAlpha = 1.0;
 	_fadeTimer = nil;
@@ -247,6 +233,12 @@ NSColor *CVColorFromRGBValueString(NSString *string);
 {
 	// NSLog(@"setting current focus remote ID to %d", remoteID);
 	_currentFocusRemoteID = remoteID;
+}
+- (void)quitLoader
+{
+    NSLog(@"received quit request");
+    
+    [[NSApplication sharedApplication] performSelector:@selector(terminate:) withObject:self afterDelay:1.0];
 }
 @end
 

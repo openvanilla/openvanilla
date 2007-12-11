@@ -2,6 +2,10 @@
 
 #import "LVInputMethodController.h"
 
+@protocol OVAnimatedCandidateServer
+- (void) moveWindowTo: (NSPoint)point;
+@end
+
 @implementation LVInputMethodController
 - (id)initWithServer:(IMKServer*)server delegate:(id)delegate client:(id)inputClient
 {
@@ -364,6 +368,13 @@
 }
 - (Point)getCursorPosition
 {
+    id aniCandi = [[NSConnection rootProxyForConnectionWithRegisteredName:@"OVAnimatedCandidateServer" host:nil] retain];
+	if (aniCandi) {
+		[aniCandi setProtocolForProxy:@protocol(OVAnimatedCandidateServer)];
+        [aniCandi moveWindowTo:_cursorPosition];
+	}
+
+
 	// translates Cocoa coordinate to Carbon coordinate
 	Point point;
 	point.h = _cursorPosition.x;

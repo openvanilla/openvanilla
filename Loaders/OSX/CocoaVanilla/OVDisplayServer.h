@@ -47,6 +47,7 @@
 - (void)setCurrentComposingBufferRemoteID:(int)remoteID;
 - (void)sendStringToCurrentComposingBuffer:(NSString*)string;
 - (void)sendCharacterToCurrentComposingBuffer:(NSString*)string;
+- (void)quitLoader;
 @end
 
 #endif
