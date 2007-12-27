@@ -199,15 +199,28 @@ void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf,
         }
     }
 
+    bool committed = false;
+
     if( isForceSPSeq() )
         parent->setForceSP( !parent->isForceSP() );
     else{
-        if( !(parent->isForceSP() && notifySP) )
+        if( !(parent->isForceSP() && notifySP) ) {
+            fprintf(stderr, "Changed ARRAY send mechanism\n");
             buf->clear()->append(ch)->send();
+            committed = true;
+        }
         else
             srv->beep();
     }
-    clearAll(buf, candibar);
+    
+    // clearAll(buf, candibar);
+    
+    // we can't call clearAll becaue clearAll does one extra clean-up, this causes problem in WoW
+    clearCandidate(candibar);
+    if (!committed)
+        buf->clear()->update();
+    keyseq.clear();
+        
     changeState(STATE_WAIT_KEY1);
 }
 
