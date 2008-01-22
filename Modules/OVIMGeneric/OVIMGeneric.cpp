@@ -220,7 +220,7 @@ int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textb
 		string output;
         if (candi.select(key->code(), output))
         {
-            buf->clear()->append(output.c_str())->send();
+            buf->clear()->append(output.c_str())->update()->send();
             keyseq.clear();
             cancelAutoCompose(textbar);
             return 1;
@@ -304,7 +304,7 @@ int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textb
         //else if (key->isShift()) buf->appendChar(key->lower());
         cancelAutoCompose(textbar);
         keyseq.clear();
-        buf->send();
+        buf->update()->send();
         return 1;
     }
 
@@ -365,7 +365,7 @@ int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textb
     if (isprint(key->code())) {
         char sb[2];
         sprintf(sb, "%c", key->code());
-        buf->append(sb)->send();
+        buf->append(sb)->update()->send();
         return 1;
     }
     
@@ -397,7 +397,7 @@ int OVGenericContext::compose(OVBuffer *buf, OVCandidate *textbar, OVService *sr
 
     if (size ==1 && !autocomposing)
     {
-        buf->clear()->append(candidateStringVector[0].c_str())->send();
+        buf->clear()->append(candidateStringVector[0].c_str())->update()->send();
         keyseq.clear();
         return 1;
     }
@@ -450,7 +450,7 @@ int OVGenericContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
 
     string output;
     if (candi.select(c, output)) {
-        buf->clear()->append(output.c_str())->send();
+        buf->clear()->append(output.c_str())->update()->send();
         candi.cancel();
         textbar->hide()->clear();
         return 1;
@@ -462,7 +462,7 @@ int OVGenericContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
         string output;
         candi.select(candi.getSelKey()[0], output);
 
-        buf->clear()->append(output.c_str())->send();
+        buf->clear()->append(output.c_str())->update()->send();
 		keyseq.add(c);
 		updateDisplay(buf);
 		candi.cancel();

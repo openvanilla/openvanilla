@@ -205,7 +205,6 @@ void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf,
         parent->setForceSP( !parent->isForceSP() );
     else{
         if( !(parent->isForceSP() && notifySP) ) {
-            fprintf(stderr, "Changed ARRAY send mechanism\n");
             buf->clear()->append(ch)->send();
             committed = true;
         }
