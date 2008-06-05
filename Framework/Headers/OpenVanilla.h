@@ -97,31 +97,31 @@ public:
 /*!
 	@function isShift
 	@abstract If the Shift key is pressed down.
-	@result If the Shift key is pressred down, it returns 1, else 
-	returns 0.
+	@result If the Shift key is pressred down, it returns true, else 
+	returns false.
 */
-    virtual int isShift() = 0;
+    virtual bool isShift() = 0;
 /*!
 	@function isCapslock
 	@abstract If the Capslock is on.
-	@result If the Capslock is on, it returns 1, else returns 0.
+	@result If the Capslock is on, it returns true, else returns false.
 */
-    virtual int isCapslock() = 0;
+    virtual bool isCapslock() = 0;
 
 /*!
 	@function isCtrl
 	@abstract If the Control key is pressed down.
-	@result If the Control key is pressed down, it returns 1, else 
-	returns 0.
+	@result If the Control key is pressed down, it returns true, else 
+	returns false.
 */
-    virtual int isCtrl() = 0;
+    virtual bool isCtrl() = 0;
 /*!
 	@function isAlt
 	@abstract If the Alt key is pressed down.
-	@result If the Alt key is pressed down, it returns 1, else 
-	returns 0.
+	@result If the Alt key is pressed down, it returns true, else 
+	returns false.
 */
-    virtual int isAlt() = 0;
+    virtual bool isAlt() = 0;
 /*!
 	@function isOpt
 	@abstract If the Option key is pressed down.
@@ -129,11 +129,11 @@ public:
 	Only Mac OS supprts the Option key, so if you need to
 	implement your input method to other platforms such as Windows
 	and *nix, use isAlt() instead. 
-	@result If the Option key is pressed down, it returns 1, else 
-	returns 0.
+	@result If the Option key is pressed down, it returns true, else 
+	returns false.
 	@seealso isAlt isAlt	
 */
-    virtual int isOpt() { return isAlt(); }
+    virtual bool isOpt() { return isAlt(); }
 /*!
 	@function isCommand
 	@abstract If the Command key is pressed down.
@@ -141,18 +141,18 @@ public:
 	Only Mac OS supprts the Command key, so if you need to
 	implement your input method to other platforms such as Windows
 	and *nix, use isAlt() or isCtrl() instead. 
-	@result If the Command key is pressed down, it returns 1, else 
-	returns 0.
+	@result If the Command key is pressed down, it returns true, else 
+	returns false.
 	@seealso isAlt isAlt
 */
-    virtual int isCommand() { return isAlt(); }
+    virtual bool isCommand() { return isAlt(); }
 /*!
 	@function isNum
 	@abstract If the Number Lock is on.
-	@result If the Number Lock is on, it returns 1, else 
-	returns 0.
+	@result If the Number Lock is on, it returns true, else 
+	returns false.
 */
-    virtual int isNum() = 0;
+    virtual bool isNum() = 0;
 /*!
 	@function isFunctionKey
 	@abstract If any function key is pressed, the function keys
@@ -164,15 +164,15 @@ public:
 	combination of a function key and any other key often represents an
 	application hotkey or system hotkey, and you should let the applications
 	to take over the control of the keyboard events.
-	@result If any function key is pressed, it returns 1, else 
-	returns 0.
+	@result If any function key is pressed, it returns true, else 
+	returns false.
 	@seealso isCtrl isCtrl
 	@seealso isAlt isAlt
 	@seealso isOpt isOpt
 	@seealso isCommand isCommand
 	@seealso isNum isNum
 */
-    virtual int isFunctionKey() {
+    virtual bool isFunctionKey() {
         return isCtrl() || isAlt() || isOpt() || isCommand() || isNum();
     }
 
@@ -255,9 +255,10 @@ public:
 /*! 
 	@function isEmpty
 	@abstract If the the composing text is empty.
-	@result	If the composing text is empty, it returns 1, else returns 0.
+	@result	If the composing text is empty, it returns true, else 
+	returns false.
 */
-    virtual int isEmpty() = 0 ;
+    virtual bool isEmpty() = 0;
 };
 
 /*!
@@ -323,10 +324,10 @@ public:
 	@discussion 
 	You can use hide() or show() to hide and show the
 	Candidates list window.
-	@result If the Candidates list window is shown, it returns 1, else
-	it returns 0.
+	@result If the Candidates list window is shown, it returns true, else
+	it returns false.
 */
-    virtual int onScreen()=0;
+    virtual bool onScreen() = 0;
 };
 
 /*!
@@ -344,10 +345,10 @@ public:
 	@function keyExist
 	@abstract If a configuration key exists in the dictionary.
 	@param key The configuration key.
-	@result If the configuration key exists. it returns 1, else it 
-	returns 0.
+	@result If the configuration key exists. it returns true, else it 
+	returns false.
 */	
-    virtual int keyExist(const char *key) = 0;
+    virtual bool keyExist(const char *key) = 0;
 /*! 
 	@function getInteger
 	@abstract Retrieve the integer value of a configuration key from
@@ -625,7 +626,7 @@ public:
 	@param modulePath The full-path where the binary of the module is
 	located.
 */
-    virtual int initialize(OVDictionary *moduleCfg, OVService *srv, 
+	virtual int initialize(OVDictionary *moduleCfg, OVService *srv, 
         const char *modulePath) { return 1; }
 /*!
 	@function update

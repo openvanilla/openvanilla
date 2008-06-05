@@ -39,7 +39,7 @@ CVDictionary::~CVDictionary() {
     [d release];
 }
 
-int CVDictionary::keyExist(const char *key) {
+bool CVDictionary::keyExist(const char *key) {
     return [d objectForKey:[NSString stringWithUTF8String:key]] ? 1 : 0;
 }
 

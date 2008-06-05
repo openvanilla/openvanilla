@@ -118,27 +118,27 @@ UInt8 CVKeyCode::convertToMenuModifier() {
 	return mm;
 }
 
-int CVKeyCode::isShift() {
+bool CVKeyCode::isShift() {
     if (m & (shiftKey | rightShiftKey)) return 1;
     return 0;
 }
 
-int CVKeyCode::isCtrl() {
+bool CVKeyCode::isCtrl() {
     if (m & (controlKey | rightControlKey)) return 1;
     return 0;
 }
 
-int CVKeyCode::isAlt() {
+bool CVKeyCode::isAlt() {
     if (m & (optionKey | rightOptionKey)) return 1;
     return 0;
 }
 
-int CVKeyCode::isCommand() {
+bool CVKeyCode::isCommand() {
     if (m & cmdKey) return 1;
     return 0;
 }
 
-int CVKeyCode::isCapslock() {
+bool CVKeyCode::isCapslock() {
     if (m & (alphaLock | kEventKeyModifierNumLockMask)) return 1; 
 //  if (m & alphaLock) return 1; 
     return 0;

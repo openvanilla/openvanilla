@@ -42,7 +42,7 @@ public:
     virtual OVBuffer* send();
     virtual OVBuffer* update();
     virtual OVBuffer* update(int cursorPos, int markFrom=-1, int markTo=-1);
-    virtual int isEmpty();
+    virtual bool isEmpty();
     virtual Point getAppCursorPosition();
     
     virtual CVBuffer* setComposingBuffer(TSComposingBuffer *cb);

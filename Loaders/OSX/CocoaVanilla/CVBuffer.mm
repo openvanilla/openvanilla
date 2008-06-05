@@ -95,7 +95,7 @@ OVBuffer* CVBuffer::update(int cursorPos, int markFrom, int markTo) {
     return this;
 }
 
-int CVBuffer::isEmpty() {
+bool CVBuffer::isEmpty() {
     return cbuf ? cbuf->isEmpty() : 0;
 }
 

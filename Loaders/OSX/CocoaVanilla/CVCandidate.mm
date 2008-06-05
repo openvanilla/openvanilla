@@ -89,7 +89,7 @@ OVCandidate* CVCandidate::update() {
     return this;
 }
 
-int CVCandidate::onScreen() {
+bool CVCandidate::onScreen() {
     return onscreen;
 }
 

@@ -43,13 +43,13 @@ class CVKeyCode : public OVKeyCode
 public:
     CVKeyCode(char charcode, UInt32 modifiers);
     virtual int code()       { return c; }
-    virtual int isShift();
-    virtual int isCtrl();
-    virtual int isAlt();
-    virtual int isNum()      { return 0; }  // always so in OS X
-    virtual int isOpt()      { return isAlt(); }
-    virtual int isCommand();
-    virtual int isCapslock();
+    virtual bool isShift();
+    virtual bool isCtrl();
+    virtual bool isAlt();
+    virtual bool isNum()      { return 0; }  // always so in OS X
+    virtual bool isOpt()      { return isAlt(); }
+    virtual bool isCommand();
+    virtual bool isCapslock();
 	
 	// extensions for CVSmartMenu
 	CVKeyCode(const char *charcode, const char *modifiers);

@@ -38,7 +38,7 @@ class CVDictionary : public OVDictionary {
 public:
     CVDictionary(NSMutableDictionary *dict);
     virtual ~CVDictionary();
-    virtual int keyExist(const char *key);
+    virtual bool keyExist(const char *key);
     virtual int getInteger(const char *key);
     virtual int setInteger(const char *key, int value);
     virtual const char* getString(const char *key);

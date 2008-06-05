@@ -52,7 +52,7 @@ public:
     virtual OVCandidate* hide();
     virtual OVCandidate* show();
     virtual OVCandidate* update();
-    virtual int onScreen();
+    virtual bool onScreen();
     
     virtual OVCandidate* setPosition(Point p);
     virtual CVCandidateState* saveState();
