@@ -29,8 +29,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 MODULES=OVIMBig5 OVIMRoman OVIMTibetan OVIMUIM OVIMUnicode OVOFAntiZhuyinwen \
-    OVOFHTMLCharEntity OVOFSmartQuotations OVOFUnicodeDecoder \
-    OVOFZhWikipidealize
+    OVOFUnicodeDecoder
 
 all:
 	make -C OVIMPhonetic VARIANT+="sqlite bpmf-extended" all
