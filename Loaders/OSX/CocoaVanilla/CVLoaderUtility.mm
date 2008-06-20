@@ -87,7 +87,7 @@ NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *libexcludelis
         if ([i hasSuffix: @".dylib"])
 			l = CVLoadLibraryFromDylib(i);
 		else 
-			l=CVLoadLibraryFromBundle(i);    
+			l = CVLoadLibraryFromBundle(i);    
         if (!l)
 			continue;   // err message already supplied
         
@@ -102,7 +102,8 @@ NSArray* CVLoadEverything(NSArray *paths, OVService *srv, NSArray *libexcludelis
         CVAtomicInitEnd(atomic);
     }
         
-    if (history) [history addEntriesFromDictionary:histdict];
+    if (history)
+		[history addEntriesFromDictionary:histdict];
     return modList;
 }
 
@@ -200,28 +201,27 @@ NSArray *CVGetModulesByType(NSArray *modlist, NSString *type)
 
 OVLoadedLibrary *CVLoadLibraryFromBundle(NSString *p)
 {
-    const char *func="CVLoadLibraryFromOSXBundle";
+    const char *func = "CVLoadLibraryFromOSXBundle";
     // murmur("%s: loading library (OS X bundle fashion) %s", func, [p UTF8String]);
     
     NSURL *url = [NSURL fileURLWithPath:[p stringByExpandingTildeInPath]];
     if (!url)
 		return NULL;
 
-    CFBundleRef libref=CFBundleCreate(NULL, (CFURLRef)url);
+    CFBundleRef libref = CFBundleCreate(NULL, (CFURLRef)url);
     if (!libref) {
         murmur("%s: failed loading library %s", func, [p UTF8String]);
         return NULL;
     }
 
-    _OVGetLibraryVersion_t *g;
-    _OVInitializeLibrary_t *i;
-    _OVGetModuleFromLibrary_t *m;
+    _OVGetLibraryVersion_t* g;
+    _OVInitializeLibrary_t* i;
+    _OVGetModuleFromLibrary_t* m;
     
     #define GETPOINTER(x) CFBundleGetFunctionPointerForName(libref, CFSTR(x))
     if (!(g=(_OVGetLibraryVersion_t*)GETPOINTER("OVGetLibraryVersion")) ||
         !(i=(_OVInitializeLibrary_t*)GETPOINTER("OVInitializeLibrary")) ||
-        !(m=(_OVGetModuleFromLibrary_t*)GETPOINTER("OVGetModuleFromLibrary")))
-    {
+        !(m=(_OVGetModuleFromLibrary_t*)GETPOINTER("OVGetModuleFromLibrary"))) {
         murmur("%s: incompatible interface (library %s)", func, [p UTF8String]);
         return NULL;
     }
@@ -243,7 +243,7 @@ OVLoadedLibrary *CVLoadLibraryFromBundle(NSString *p)
 // this is actually platform-independent
 OVLoadedLibrary *CVLoadLibraryFromDylib(NSString *p)
 {
-    const char *func="CVLoadLibraryFromDylib";
+    const char *func = "CVLoadLibraryFromDylib";
     // murmur("%s: loading library (.dylib fashion) %s", func, [p UTF8String]);
     
     void *libh = dlopen([[p stringByExpandingTildeInPath] UTF8String], RTLD_LAZY);
@@ -252,9 +252,9 @@ OVLoadedLibrary *CVLoadLibraryFromDylib(NSString *p)
         return NULL;
     }
 
-    _OVGetLibraryVersion_t *g;
-    _OVInitializeLibrary_t *i;
-    _OVGetModuleFromLibrary_t *m;
+    _OVGetLibraryVersion_t* g;
+    _OVInitializeLibrary_t* i;
+    _OVGetModuleFromLibrary_t* m;
     
     g = (_OVGetLibraryVersion_t*)dlsym(libh, "OVGetLibraryVersion");
     i = (_OVInitializeLibrary_t*)dlsym(libh, "OVInitializeLibrary");
@@ -320,8 +320,5 @@ NSArray *CVMilkModulesFromLibrary(NSString *libname, OVLoadedLibrary *lib, NSMut
 
 BOOL CVIfPathExists(NSString *p)
 {
-    struct stat st;
-    if (stat([[p stringByStandardizingPath] UTF8String], &st))
-		return NO;
-    return YES;
+	return [[NSFileManager defaultManager] fileExistsAtPath:[p stringByStandardizingPath]];
 }

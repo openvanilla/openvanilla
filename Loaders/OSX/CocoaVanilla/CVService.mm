@@ -183,7 +183,7 @@ const char *CVService::userSpacePath(const char *modid)
 
     if (!CVIfPathExists(usp)) {
 		NSLog([NSString stringWithFormat:@"path %@ doesn't exist, creating", usp]);
-		system([[NSString stringWithFormat:@"mkdir -p %@", usp] UTF8String]);
+		[[NSFileManager defaultManager] createDirectoryAtPath:usp attributes:nil];
 	}
 
     return [usp UTF8String];
@@ -215,7 +215,8 @@ const char *CVService::fromUTF8(const char *encoding, const char *src)
         userbuf = NULL;
     }
     userbuf = (char*)calloc(1, strlen(src)*2+1);
-    if (!userbuf) return NULL;
+    if (!userbuf)
+		return NULL;
     if (u8buf) {
         CFRelease(u8buf);
         u8buf = NULL;
@@ -223,7 +224,7 @@ const char *CVService::fromUTF8(const char *encoding, const char *src)
     u8buf = (CFStringRef)[[NSString alloc] initWithUTF8String:src];
     if (!u8buf)
 		return NULL;
-    if (CFStringGetCString(u8buf, userbuf, strlen(src)*2+1, CVGetCFEncoding(encoding))) {
+    if (CFStringGetCString(u8buf, userbuf, strlen(src) * 2 + 1, CVGetCFEncoding(encoding))) {
         return userbuf;
     }
     return NULL;
@@ -259,10 +260,10 @@ int CVService::UTF8ToUTF16(const char *src, unsigned short **rcvr)
 		return 0;
     
     int l = [u8 length];
-    u16buf = (UniChar*)calloc(1, l*sizeof(UniChar));
+    u16buf = (UniChar*)calloc(1, l * sizeof(UniChar));
     if (!u16buf)
 		return 0; 
     [u8 getCharacters:u16buf]; 
-    *rcvr=u16buf;
+    *rcvr = u16buf;
     return l;
 }

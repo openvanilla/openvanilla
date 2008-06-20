@@ -35,21 +35,21 @@
 #include "NSDictionaryExtension.h"
 
 void CVPreparePath() {
-	NSString *up=[CVLC_USERSPACE_PATH stringByStandardizingPath];
-	NSString *cp=[CVLC_USERCONFIG_PATH stringByStandardizingPath];
+	NSString *up = [CVLC_USERSPACE_PATH stringByStandardizingPath];
+	NSString *cp = [CVLC_USERCONFIG_PATH stringByStandardizingPath];
 	
     if (!CVIfPathExists(up)) {
 		NSLog([NSString stringWithFormat:@"path %@ doesn't exist, creating", up]);
-		system([[NSString stringWithFormat:@"mkdir -p %@", up] UTF8String]);
+		[[NSFileManager defaultManager] createDirectoryAtPath:up attributes:nil];
 	}
     if (!CVIfPathExists(cp)) {
 		NSLog([NSString stringWithFormat:@"path %@ doesn't exist, creating", cp]);
-		system([[NSString stringWithFormat:@"mkdir -p %@", cp] UTF8String]);
+		[[NSFileManager defaultManager] createDirectoryAtPath:cp attributes:nil];
 	}
 }
 
 NSArray *CVGetModuleLoadPath() {
-    NSMutableArray *a=[[NSMutableArray new] autorelease];
+    NSMutableArray *a = [[NSMutableArray new] autorelease];
     
     // put in CVLC_SYSMODULE_PATH (/Library/OpenVanilla/[version_no]/Modules)
     [a addObject:CVLC_SYSMODULE_PATH];
@@ -58,7 +58,7 @@ NSArray *CVGetModuleLoadPath() {
     NSString *um=[CVLC_USERMODULE_PATH stringByStandardizingPath];
     if (!CVIfPathExists(um)) {
 		NSLog([NSString stringWithFormat:@"path %@ doesn't exist, creating", um]);
-		system([[NSString stringWithFormat:@"mkdir -p %@", um] UTF8String]);
+		[[NSFileManager defaultManager] createDirectoryAtPath:um attributes:nil];		
 	}
     [a addObject:um];
     return a;

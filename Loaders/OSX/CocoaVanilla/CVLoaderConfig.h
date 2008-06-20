@@ -45,9 +45,7 @@
 #define CVLC_FACTORY_DEFAULTS   @"/Library/OpenVanilla/0.8/Loader/OVLoader.bundle/Contents/Resources/org.openvanilla.OVLoader.DefaultSettings.plist"
 #define CVLC_PREFERENCEUTIL     @"/Library/OpenVanilla/0.8/Loader/OVPreferences.app"
 #define CVLC_PREFERENCEBUNDLE   @"org.openvanilla.ovpreferences.080"
-#define CVLC_DOCUMENT_EN		"open http://openvanilla.org/help/"
-#define CVLC_DOCUMENT_ZH_TW		"open http://openvanilla.org/help/"
-#define CVLC_DOCUMENT_ZH_CN		"open http://openvanilla.org/help/"
+#define CVLC_DOCUMENT			@"http://openvanilla.org/help/"
 
 NSArray *CVGetModuleLoadPath();
 NSString *CVGetUserSpacePath();

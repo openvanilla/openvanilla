@@ -292,18 +292,12 @@ void CVLoader::menuHandler(unsigned int cmd)
             [dspsrvr aboutDialog];
             return;
         case CVLMI_PREFERENCES:
-			system([[NSString stringWithFormat:@"open -a %@", CVLC_PREFERENCEUTIL] UTF8String]);	
+			[[NSWorkspace sharedWorkspace] openFile:CVLC_PREFERENCEUTIL];
             return;
         case CVLMI_HELP:
-			if (!strcasecmp(srv->locale(), "zh_TW")) {
-				system(CVLC_DOCUMENT_ZH_TW);
-			}
-			else if (!strcasecmp(srv->locale(), "zh_CN")) {
-				system(CVLC_DOCUMENT_ZH_CN);
-			}
-			else {
-				system(CVLC_DOCUMENT_EN);
-			}
+			NSURL *url = [NSURL URLWithString:CVLC_DOCUMENT];
+			[[NSWorkspace sharedWorkspace] openURL:url];
+
             return;
     }
     
@@ -327,7 +321,7 @@ id CVLoader::connectDisplayServer()
 	dspsrvr = nil;	
 	dspsrvr = [[NSConnection rootProxyForConnectionWithRegisteredName:displayServerName host:nil] retain];
 	if (!dspsrvr) {
-		system([[NSString stringWithFormat:@"open %@", displayServerPath] UTF8String]);
+		[[NSWorkspace sharedWorkspace] openFile:displayServerPath];
 		
 		// a total timeout of 1 sec
 		int timeout = [displayServerStartupTimeout intValue];
@@ -597,7 +591,7 @@ BOOL CVLoader::checkIfLastAtomicInitFailed(int timeout)
 		return NO;    
     
     NSLog(@"CVLoader: found atomic lock file, wait to see if it's a failure or a lock in another process.");
-    int tick=0;
+    int tick = 0;
     while (tick < timeout) {
         if (!CVIfPathExists(atomic))
 			return NO;
@@ -612,7 +606,7 @@ BOOL CVLoader::checkIfLastAtomicInitFailed(int timeout)
     NSString *datestr = [[NSDate date] descriptionWithCalendarFormat:nil timeZone:nil locale:nil];
     NSString *msg = [NSString stringWithFormat:MSG(@"AtomicInitFailed"), libname, atomic, datestr];
 
-    char *username=getenv("USER");
+    char *username = getenv("USER");
     NSString *msgfile = [NSString stringWithFormat:@"%@-%s",
         CVGetAtomicInitErrorMessageFilename(),
         username ? username : "unknown-user"];
@@ -622,7 +616,7 @@ BOOL CVLoader::checkIfLastAtomicInitFailed(int timeout)
     [msg writeToFile:msgfile atomically:NO];
 
     // unlink([atomic UTF8String]);
-    system([[NSString stringWithFormat:@"open %@", msgfile] UTF8String]);
+	[[NSWorkspace sharedWorkspace] openFile:msgfile];
     return YES;
 }
 
