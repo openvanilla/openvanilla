@@ -34,19 +34,19 @@
 #define OVDSPSRVR_NAME		@"OVDisplayServer-0.8.0"
 
 @protocol OVDisplayServer
-- (void)setConfig:(bycopy NSDictionary*)cfg;
+- (void)setConfig:(bycopy NSDictionary *)cfg;
 - (void)candidateShow;
 - (void)candidateHide;
-- (void)candidateUpdate:(bycopy NSString*)s position:(Point)p;
-- (void)notifyMessage:(bycopy NSString*)s position:(Point)p;
+- (void)candidateUpdate:(bycopy NSString *)s position:(Point)p;
+- (void)notifyMessage:(bycopy NSString *)s position:(Point)p;
 - (void)notifyClose;
 - (void)notifyFade;
 - (void)aboutDialog;
 - (BOOL)ping;
 - (int)nextAvailableRemoteID;
 - (void)setCurrentComposingBufferRemoteID:(int)remoteID;
-- (void)sendStringToCurrentComposingBuffer:(NSString*)string;
-- (void)sendCharacterToCurrentComposingBuffer:(NSString*)string;
+- (void)sendStringToCurrentComposingBuffer:(NSString *)string;
+- (void)sendCharacterToCurrentComposingBuffer:(NSString *)string;
 - (void)quitLoader;
 @end
 

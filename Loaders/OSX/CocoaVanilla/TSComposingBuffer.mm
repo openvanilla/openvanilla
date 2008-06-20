@@ -39,9 +39,9 @@
 
 TSComposingBuffer::TSComposingBuffer(ComponentInstance i)
 {
-    inst=i;
-    lastupdate=0;
-    str=[NSMutableString new];
+    inst = i;
+    lastupdate = 0;
+    str = [NSMutableString new];
 }
 
 TSComposingBuffer::~TSComposingBuffer()
@@ -52,8 +52,8 @@ TSComposingBuffer::~TSComposingBuffer()
 TSComposingBuffer* TSComposingBuffer::clear()
 {
     NSRange r;
-    r.length=[str length];
-    r.location=0;    
+    r.length = [str length];
+    r.location = 0;    
     [str deleteCharactersInRange: r];
     
     // lastupdate=0;
@@ -62,13 +62,11 @@ TSComposingBuffer* TSComposingBuffer::clear()
 
 TSComposingBuffer* TSComposingBuffer::send()
 {
-    if (!isEmpty())
-    {
+    if (!isEmpty()) {
         update(FALSE);
-        lastupdate=[str length];
+        lastupdate = [str length];
         update(TRUE);
-        lastupdate=0;
-        
+        lastupdate = 0;
         
         [str setString:@""];
         // update(FALSE);
@@ -88,25 +86,27 @@ NSMutableString* TSComposingBuffer::getContent()
 
 TSComposingBuffer* TSComposingBuffer::append(NSString *s)
 {
-    if (s) [str appendString: s];
+    if (s)
+		[str appendString: s];
     return this;
 }
 
 int TSComposingBuffer::realPos(int p)
 {
-    int rp=0;
+    int rp = 0;
     unsigned int i;
     
-    for (i=0; i<[str length]; i++)
+    for (i = 0; i < [str length]; i++)
     {
-        if (rp==p) break;
+        if (rp == p)
+			break;
 
         // see if encounters a surrogate pair
-        UniChar c=[str characterAtIndex: i];
-        if (c >= 0xd800 && c < 0xdc00)
-        {
-            c=[str characterAtIndex: ++i];
-            if (i<[str length] && c >= 0xdc00 && c < 0xe000) rp++;
+        UniChar c = [str characterAtIndex: i];
+        if (c >= 0xd800 && c < 0xdc00) {
+            c = [str characterAtIndex: ++i];
+            if (i < [str length] && c >= 0xdc00 && c < 0xe000)
+				rp++;
         }
         else rp++;
     }
@@ -117,9 +117,9 @@ int TSComposingBuffer::realPos(int p)
 Point TSComposingBuffer::getAppCursorPosition()
 {
     Point pnt;	
-	long refcon=0, offset=0;
-	Boolean edge=0;
-	EventRef event=NULL;
+	long refcon = 0, offset = 0;
+	Boolean edge = 0;
+	EventRef event = NULL;
 	OSStatus status;
 	
 	// define an ASSERT macro here for getAppCursorPosition (GACP)
@@ -159,14 +159,14 @@ Point TSComposingBuffer::getAppCursorPosition()
 TSComposingBuffer* TSComposingBuffer::update(Boolean send, int cursor,
     int markFrom, int markTo)
 {
-    OSErr error=noErr;
-    UniChar *buf=NULL;
-    long reallen=[str length]*sizeof(UniChar);
-    long fixlen=0;
-    EventRef event=NULL;
+    OSErr error = noErr;
+    UniChar *buf = NULL;
+    long reallen = [str length] * sizeof(UniChar);
+    long fixlen = 0;
+    EventRef event = NULL;
     ScriptLanguageRecord script;
     TextRange pinrange;
-    TextRangeArrayPtr markrange=nil, updaterange=nil;
+    TextRangeArrayPtr markrange = nil, updaterange = nil;
 
     if (send) fixlen=reallen;
 
@@ -191,11 +191,14 @@ TSComposingBuffer* TSComposingBuffer::update(Boolean send, int cursor,
     UASSERT(SetEventParameter(event, kEventParamTextInputSendSLRec,
         typeIntlWritingCode, sizeof(ScriptLanguageRecord), &script));
 
-    buf=new UniChar[[str length]+1];
+    buf = new UniChar[[str length]+1];
     NSRange bufrange;
-    bufrange.location=0;
-    bufrange.length=[str length];
-    if (!buf) { clear(); return this; }
+    bufrange.location = 0;
+    bufrange.length = [str length];
+    if (!buf) {
+		clear();
+		return this;
+	}
     [str getCharacters:buf range: bufrange];
     // 3rd parameter: what we have in the buffer
     UASSERT(SetEventParameter(event, kEventParamTextInputSendText,
@@ -206,65 +209,67 @@ TSComposingBuffer* TSComposingBuffer::update(Boolean send, int cursor,
         typeLongInteger, sizeof(long), &fixlen));
 
     // set update region
-    updaterange=(TextRangeArrayPtr)NewPtrClear(sizeof(short)+
+    updaterange = (TextRangeArrayPtr)NewPtrClear(sizeof(short)+
         sizeof(TextRange)*2);
             
-    if (!updaterange) return this;   // memory full (unlikely)
+    if (!updaterange)
+		return this;   // memory full (unlikely)
     
-    updaterange->fNumOfRanges=2;
-    updaterange->fRange[0].fStart=0;
-    updaterange->fRange[0].fEnd=lastupdate*sizeof(UniChar);
-    updaterange->fRange[0].fHiliteStyle=0;
-    updaterange->fRange[1].fStart=0;
-    updaterange->fRange[1].fEnd=reallen;
-    updaterange->fRange[1].fHiliteStyle=0;
+    updaterange->fNumOfRanges = 2;
+    updaterange->fRange[0].fStart = 0;
+    updaterange->fRange[0].fEnd = lastupdate*sizeof(UniChar);
+    updaterange->fRange[0].fHiliteStyle = 0;
+    updaterange->fRange[1].fStart = 0;
+    updaterange->fRange[1].fEnd = reallen;
+    updaterange->fRange[1].fHiliteStyle = 0;
 
-    lastupdate=[str length];
+    lastupdate = [str length];
     UASSERT(SetEventParameter(event, kEventParamTextInputSendUpdateRng,
-        typeTextRangeArray, sizeof(short)+sizeof(TextRange)*2, updaterange));
+        typeTextRangeArray, sizeof(short) + sizeof(TextRange) * 2, updaterange));
 
-    markrange=(TextRangeArrayPtr)NewPtrClear(sizeof(short)+
-        sizeof(TextRange)*3);
+    markrange=(TextRangeArrayPtr)NewPtrClear(sizeof(short) +
+        sizeof(TextRange) * 3);
 			
     // among the four TSM update messages: k(Selected)RawText and
     // k(Selected)ConvertedText, it seems only the latter pair works,
     // i.e both kSelectedRawText and kRawText seem to be defunct
 			
     #define SETRANGE(r, f, e, s) markrange->fRange[r].fStart=f; \
-        markrange->fRange[r].fEnd=e; \
-        markrange->fRange[r].fHiliteStyle=s
+        markrange->fRange[r].fEnd = e; \
+        markrange->fRange[r].fHiliteStyle = s
 			
-    if(!markrange) return this;     // memory full (unlikely)
+    if(!markrange)
+		return this;     // memory full (unlikely)
     
-    markrange->fNumOfRanges=2;
-    int realcur=reallen;
+    markrange->fNumOfRanges = 2;
+    int realcur = reallen;
     
     // if cursor is set (!= -1), we set its position accordingly
-    if (cursor>=0 && realPos(cursor)<=(int)[str length]) 
-        realcur=realPos(cursor)*sizeof(UniChar);
+    if (cursor >= 0 && realPos(cursor) <= (int)[str length]) 
+        realcur=realPos(cursor) * sizeof(UniChar);
 
     // requests app to draw a light gray underline to our text area                
     SETRANGE(0, 0, reallen, tsbkConvertedText);
     SETRANGE(1, realcur, realcur, tsbkCaretPosition);
     
     // if markFrom & markTo are set, draw a darker line underneath the marked area
-    if ((markFrom>=0 && realPos(markFrom)<=(int)[str length]) &&
-        (markTo>markFrom && realPos(markTo)<=(int)[str length]))
+    if ((markFrom >= 0 && realPos(markFrom) <= (int)[str length]) &&
+        (markTo > markFrom && realPos(markTo) <= (int)[str length]))
     {
-        markrange->fNumOfRanges=3;		// send one more range block 
-        SETRANGE(2, realPos(markFrom)*sizeof(UniChar),
-            realPos(markTo)*sizeof(UniChar), tsbkSelectedConvertedText); 
+        markrange->fNumOfRanges = 3;		// send one more range block 
+        SETRANGE(2, realPos(markFrom) * sizeof(UniChar),
+            realPos(markTo) * sizeof(UniChar), tsbkSelectedConvertedText); 
     }
 
     if (!send) {
         UASSERT(SetEventParameter(event, kEventParamTextInputSendHiliteRng,
             typeTextRangeArray,
-            sizeof(short)+sizeof(TextRange)*markrange->fNumOfRanges, markrange));
+            sizeof(short) + sizeof(TextRange)*markrange->fNumOfRanges, markrange));
     }
 
     // we don't any "clause" information
-    pinrange.fStart=0;
-    pinrange.fEnd=reallen;
+    pinrange.fStart = 0;
+    pinrange.fEnd = reallen;
     UASSERT(SetEventParameter(event,kEventParamTextInputSendPinRng,
         typeTextRange, sizeof(TextRange), &pinrange));
 

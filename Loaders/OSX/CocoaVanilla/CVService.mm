@@ -36,7 +36,8 @@
 CFStringEncoding CVGetCFEncoding(const char *encoding);
 NSString *CVGetAppBundleLocale();
 
-CFStringEncoding CVGetCFEncoding(const char *encoding) {
+CFStringEncoding CVGetCFEncoding(const char *encoding)
+{
     if (!strcasecmp(encoding, "big5")) {
         return kCFStringEncodingBig5_HKSCS_1999;
     }
@@ -44,125 +45,141 @@ CFStringEncoding CVGetCFEncoding(const char *encoding) {
     return kCFStringEncodingUTF8;
 }
 
-NSString *CVGetAppBundleLocale() {
+NSString *CVGetAppBundleLocale()
+{
 	// http://developer.apple.com/qa/qa2006/qa1391.html
 	// The locale string in Tiger sees Traditional Chinese as zh-Hant and
 	// Simplified Chinese as zh-Hans, it seems that we need to translate them
 	// into zh_TW and zh_CN.
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    NSArray * languages = [defaults objectForKey:@"AppleLanguages"];
-    int i;
-    for(i=0; i < [languages count]; i++) {
-       if([[languages objectAtIndex:i] isEqualToString:@"zh-Hant"]) {
-	  return @"zh_TW";
-       } else if([[languages objectAtIndex:i] isEqualToString:@"zh-Hans"]) {
-	  return @"zh_CN";
-       } else if([[languages objectAtIndex:i] isEqualToString:@"en"]) {
-	  return @"en";
-       }
-    }
-    return @"en";
-/*
-    NSBundle *b=[NSBundle mainBundle];
-    if (!b) return @"en";
-    
-    NSArray *a=[b preferredLocalizations]; 
-    if (!a) return @"en";
-    if (![a count]) return @"en";
-    
-    NSString *s=[a objectAtIndex:0];
-    NSString *l=(NSString*)CFLocaleCreateCanonicalLocaleIdentifierFromString(NULL, (CFStringRef)s);
-    if (!l) return @"en";
-    [l autorelease];
-    return l; */
+	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+	NSArray * languages = [defaults objectForKey:@"AppleLanguages"];
+	int i;
+	for (i = 0; i < [languages count]; i++) {
+		if ([[languages objectAtIndex:i] isEqualToString:@"zh-Hant"] || [[languages objectAtIndex:i] isEqualToString:@"zh_Hant"]) {
+			return @"zh_TW";
+		} 
+		else if ([[languages objectAtIndex:i] isEqualToString:@"zh-Hans"] || [[languages objectAtIndex:i] isEqualToString:@"zh_Hans"]) {
+			return @"zh_CN";
+		}
+		else if ([[languages objectAtIndex:i] isEqualToString:@"en"]) {
+			return @"en";
+		}
+	}
+	return @"en";
 }
 
-CVService::CVService(NSString *usrpath, id displayserver) {
-    u8buf=NULL;
-    u16buf=NULL;
-    userbuf=NULL;
+CVService::CVService(NSString *usrpath, id displayserver)
+{
+    u8buf = NULL;
+    u16buf = NULL;
+    userbuf = NULL;
     
     lctag=CVGetAppBundleLocale();
     [lctag retain];
     
-	dspsrvr=displayserver;
-	notifypos=(Point){0, 0};
-    userspace=[usrpath stringByStandardizingPath];
+	dspsrvr = displayserver;
+	notifypos = (Point){0, 0};
+    userspace = [usrpath stringByStandardizingPath];
     [userspace retain];
     
-    shouldbeep=1;
-    beepsound=[[NSString alloc] initWithString:@""];
+    shouldbeep = 1;
+    beepsound = [[NSString alloc] initWithString:@""];
 }
 
-CVService::~CVService() {
-    if (u8buf) CFRelease(u8buf);
-    if (u16buf) free(u16buf);
-    if (userbuf) free(userbuf);
+CVService::~CVService()
+{
+    if (u8buf)
+		CFRelease(u8buf);
+    if (u16buf)
+		free(u16buf);
+    if (userbuf)
+		free(userbuf);
     [lctag release];
     [userspace release];
     [beepsound release];
 }
 
-void CVService::changeDisplayServer(id newServer) {
+void CVService::changeDisplayServer(id newServer)
+{
 	dspsrvr = newServer;
 }
 
-void CVService::beep() {
-    if (!shouldbeep) return;
+void CVService::beep()
+{
+    if (!shouldbeep) 
+		return;
     
     if (![beepsound length]) {
-        SysBeep(30);
+		NSBeep();
     }
     else {
-        NSSound *s=[NSSound soundNamed:beepsound];
-        if (s) [s retain]; else s=[[NSSound alloc] initWithContentsOfFile:beepsound byReference:YES];        
+        NSSound *s = [NSSound soundNamed:beepsound];
+        if (s) {
+			[s retain]; 
+		}
+		else {
+			s = [[NSSound alloc] initWithContentsOfFile:beepsound byReference:YES];
+		}
+		
         if (s) {
             [s play];
             [s release];
         }
-        else SysBeep(30);
+        else { 
+			NSBeep();
+		}
     }
 }
 
-void CVService::setShouldBeep(int s) {
-    shouldbeep=s;
+void CVService::setShouldBeep(int s)
+{
+    shouldbeep = s;
 }
 
-void CVService::setBeepSound(NSString *s) {
+void CVService::setBeepSound(NSString *s)
+{
     [beepsound release];
-    beepsound=[[NSString alloc] initWithString:s];
+    beepsound = [[NSString alloc] initWithString:s];
 }
 
-void CVService::notify(const char* msg) {
+void CVService::notify(const char* msg)
+{
     // if notifypos.h==0, we don't notify --
     // usually this means an app has started IM service but
     // hasn't displayed the cursor yet
-    if (!notifypos.h) return;
-	if (dspsrvr) [dspsrvr notifyMessage:[NSString stringWithUTF8String:msg] position:notifypos];
+    if (!notifypos.h)
+		return;
+	if (dspsrvr)
+		[dspsrvr notifyMessage:[NSString stringWithUTF8String:msg] position:notifypos];
 }
 
-void CVService::setNotificationPosition(Point p) {
-	notifypos=p;
+void CVService::setNotificationPosition(Point p)
+{
+	notifypos = p;
 }
 
-void CVService::closeNotification() {
-	if (dspsrvr) [dspsrvr notifyClose];
+void CVService::closeNotification()
+{
+	if (dspsrvr)
+		[dspsrvr notifyClose];
 }
 
-void CVService::fadeNotification() {
+void CVService::fadeNotification()
+{
     if (!notifypos.h)
         closeNotification();
     else
         if (dspsrvr) [dspsrvr notifyFade];
 }
 
-const char *CVService::locale() {
+const char *CVService::locale()
+{
     return [lctag UTF8String];
 }
 
-const char *CVService::userSpacePath(const char *modid) {
-	NSString *usp=[NSString stringWithFormat:@"%@/%@/",
-		userspace, [NSString stringWithUTF8String:modid]];
+const char *CVService::userSpacePath(const char *modid)
+{
+	NSString *usp = [NSString stringWithFormat:@"%@/%@/", userspace, [NSString stringWithUTF8String:modid]];
 
     if (!CVIfPathExists(usp)) {
 		NSLog([NSString stringWithFormat:@"path %@ doesn't exist, creating", usp]);
@@ -172,66 +189,79 @@ const char *CVService::userSpacePath(const char *modid) {
     return [usp UTF8String];
 }
 
-const char *CVService::pathSeparator() {
+const char *CVService::pathSeparator()
+{
     return "/";
 }
 
-const char *CVService::toUTF8(const char *encoding, const char *src) {
+const char *CVService::toUTF8(const char *encoding, const char *src)
+{
     if (u8buf) {
         CFRelease(u8buf);
         u8buf=NULL;
     }
-    u8buf=CFStringCreateWithCString(NULL, src, CVGetCFEncoding(encoding));
-    if (u8buf) return [(NSString*)u8buf UTF8String];
+    u8buf = CFStringCreateWithCString(NULL, src, CVGetCFEncoding(encoding));
+    
+	if (u8buf)
+		return [(NSString*)u8buf UTF8String];
+	
     return NULL;
 }
 
-const char *CVService::fromUTF8(const char *encoding, const char *src) {
+const char *CVService::fromUTF8(const char *encoding, const char *src)
+{
     if (userbuf) {
         free(userbuf); 
-        userbuf=NULL;
+        userbuf = NULL;
     }
-    userbuf=(char*)calloc(1, strlen(src)*2+1);
+    userbuf = (char*)calloc(1, strlen(src)*2+1);
     if (!userbuf) return NULL;
     if (u8buf) {
         CFRelease(u8buf);
-        u8buf=NULL;
+        u8buf = NULL;
     }
-    u8buf=(CFStringRef)[[NSString alloc] initWithUTF8String:src];
-    if (!u8buf) return NULL;
+    u8buf = (CFStringRef)[[NSString alloc] initWithUTF8String:src];
+    if (!u8buf)
+		return NULL;
     if (CFStringGetCString(u8buf, userbuf, strlen(src)*2+1, CVGetCFEncoding(encoding))) {
         return userbuf;
     }
     return NULL;
 }
 
-const char *CVService::UTF16ToUTF8(unsigned short *src, int len) {
+const char *CVService::UTF16ToUTF8(unsigned short *src, int len)
+{
     if (u8buf) {
         CFRelease(u8buf);
-        u8buf=NULL;
+        u8buf = NULL;
     }
-    u8buf=(CFStringRef)[[NSString alloc] initWithCharacters:(UniChar*)src length:len];
-    if (!u8buf) return NULL;
+    u8buf = (CFStringRef)[[NSString alloc] initWithCharacters:(UniChar*)src length:len];
+    if (!u8buf)
+		return NULL;
     return [(NSString*)u8buf UTF8String];
 }
 
-int CVService::UTF8ToUTF16(const char *src, unsigned short **rcvr) {
+int CVService::UTF8ToUTF16(const char *src, unsigned short **rcvr)
+{
     if (u16buf) {
         free(u16buf);
-        u16buf=NULL;
+        u16buf = NULL;
     }
     if (u8buf) {
         CFRelease(u8buf);
-        u8buf=NULL;
+        u8buf = NULL;
     }
-    *rcvr=NULL;
-    NSString *u8=[[NSString alloc] initWithUTF8String:src];
-    u8buf=(CFStringRef)u8;
-    if (!u8buf) return 0;
+	
+    *rcvr = NULL;
+    NSString *u8 = [[NSString alloc] initWithUTF8String:src];
+    u8buf = (CFStringRef)u8;
+    if (!u8buf)
+		return 0;
     
-    int l=[u8 length];
-    u16buf=(UniChar*)calloc(1, l*sizeof(UniChar));
-    if (!u16buf) return 0; 
+    int l = [u8 length];
+    u16buf = (UniChar*)calloc(1, l*sizeof(UniChar));
+    if (!u16buf)
+		return 0; 
     [u8 getCharacters:u16buf]; 
     *rcvr=u16buf;
     return l;

@@ -38,7 +38,7 @@ public:
     ~TSComposingBuffer();
     virtual TSComposingBuffer* clear();
     virtual TSComposingBuffer* send();
-    virtual TSComposingBuffer* update(Boolean send=FALSE, int cursor=-1, int markFrom=-1, int markTo=-1);
+    virtual TSComposingBuffer* update(Boolean send=FALSE, int cursor = -1, int markFrom = -1, int markTo = -1);
     virtual TSComposingBuffer* append(NSString* s);
     virtual Boolean isEmpty();
     

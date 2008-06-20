@@ -41,41 +41,50 @@ CVLoader *loader=NULL;
 
 int IMInitialize(MenuRef mnu)
 {
-    if (loader) return 1;
+    if (loader)
+		return 1;
     
-    loader=new CVLoader;    
-    if (!loader) return 0;
+    loader = new CVLoader;    
+    
+	if (!loader)
+		return 0;
+	
     return loader->init(mnu);
 }
 
-int IMContextOpen(IMContext *c)
+int IMContextOpen(IMContext* c)
 {
     return (c->data=loader->newContext()) ? 1 : 0;
 }
 
-void IMContextClose(IMContext *c)
+void IMContextClose(IMContext* c)
 {
-    if (c->data) delete (CVContext*)(c->data);
+    if (c->data)
+		delete (CVContext*)(c->data);
 }
 
-void IMContextActivate(IMContext *c)
+void IMContextActivate(IMContext* c)
 {
-    if (c->data) ((CVContext*)(c->data))->activate(c->buf);
+    if (c->data)
+		((CVContext*)(c->data))->activate(c->buf);
 }
 
-void IMContextDeactivate(IMContext *c)
+void IMContextDeactivate(IMContext* c)
 {
-    if (c->data) ((CVContext*)(c->data))->deactivate();
+    if (c->data)
+		((CVContext*)(c->data))->deactivate();
 }
 
-void IMContextFix(IMContext *c)
+void IMContextFix(IMContext* c)
 {
-    if (c->data) ((CVContext*)(c->data))->fix();
+    if (c->data)
+		((CVContext*)(c->data))->fix();
 }
 
-int IMContextEvent(IMContext *c, char charcode, unsigned int modifiers)
+int IMContextEvent(IMContext* c, char charcode, unsigned int modifiers)
 {
-    if (c->data) return ((CVContext*)(c->data))->event(charcode, modifiers);
+    if (c->data)
+		return ((CVContext*)(c->data))->event(charcode, modifiers);
     return 0;
 }
 

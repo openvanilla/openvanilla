@@ -36,18 +36,18 @@
 #include "CVkeyCode.h"
 
 enum {
-    CVSM_EXCLUSIVE=0,
-    CVSM_MULTIPLE=1
+    CVSM_EXCLUSIVE = 0,
+    CVSM_MULTIPLE = 1
 };
 
 enum {
-    CVSMATTR_DISABLED=kMenuItemAttrDisabled,
-    CVSMATTR_SEPARATOR=kMenuItemAttrSeparator
+    CVSMATTR_DISABLED = kMenuItemAttrDisabled,
+    CVSMATTR_SEPARATOR = kMenuItemAttrSeparator
 };
 
 void CVDeleteMenu(MenuRef m);
-int CVInsertMenuItem(MenuRef m, int cmdid, NSString *s, int attr=0, NSString *k=nil);
-int CVInsertMenuItem(MenuRef m, int cmdid, NSBundle *b, NSString *s, int attr=0, NSString *k=nil);
+int CVInsertMenuItem(MenuRef m, int cmdid, NSString *s, int attr = 0, NSString *k = nil);
+int CVInsertMenuItem(MenuRef m, int cmdid, NSBundle *b, NSString *s, int attr = 0, NSString *k = nil);
 
 @interface CVSmartMenuItem : NSObject {
     NSString *idtag;
@@ -68,12 +68,12 @@ int CVInsertMenuItem(MenuRef m, int cmdid, NSBundle *b, NSString *s, int attr=0,
 
 class CVSmartMenuGroup {
 public:
-    CVSmartMenuGroup(MenuRef m, int startcmd, NSBundle *b, int t=CVSM_EXCLUSIVE);
+    CVSmartMenuGroup(MenuRef m, int startcmd, NSBundle *b, int t = CVSM_EXCLUSIVE);
     ~CVSmartMenuGroup();
     
     void insertSeparator();
     void insertTitle(NSString *t);  // looks up in bundle's localization table
-    void insertItem(NSString *idtag, NSString *displaytag, NSString *shortcutkey=nil, BOOL bundlelookup=NO);
+    void insertItem(NSString *idtag, NSString *displaytag, NSString *shortcutkey = nil, BOOL bundlelookup = NO);
     void checkItem(NSString *idtag);
     void uncheckItem(NSString *idtag);
     void uncheckAll();
