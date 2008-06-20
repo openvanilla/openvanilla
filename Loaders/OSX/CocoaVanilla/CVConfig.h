@@ -40,7 +40,7 @@ typedef struct timespec CVTimeTag;
 
 #ifdef __cplusplus
     extern "C" BOOL CVTimeTagEqual(const CVTimeTag *s1, const CVTimeTag *s2);
-    inline int operator==(const CVTimeTag &s1, const CVTimeTag &s2) {
+    inline int operator == (const CVTimeTag &s1, const CVTimeTag &s2) {
         return CVTimeTagEqual(&s1, &s2);
     }
 #endif
@@ -53,11 +53,11 @@ typedef struct timespec CVTimeTag;
     CVTimeTag stamp;
 }
 - (void)dealloc;
-- (NSString*)description;
-- (CVConfig*)initWithFile:(NSString*)f defaultData:(NSDictionary*)d;
+- (NSString *)description;
+- (CVConfig*)initWithFile:(NSString *)f defaultData:(NSDictionary *)d;
 - (CVTimeTag)timeStamp;
 - (CVTimeTag)sync;
-- (NSMutableDictionary*)dictionary;
+- (NSMutableDictionary *)dictionary;
 - (BOOL)needSync;
 @end
 

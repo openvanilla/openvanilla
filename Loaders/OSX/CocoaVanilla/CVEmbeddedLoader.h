@@ -37,8 +37,8 @@
 
 @interface CVEmbeddedLoader : NSObject {
     id dpsrv;       // dump display server;
-    CVService *srv;
-    CVConfig *cfg;
+    CVService* srv;
+    CVConfig* cfg;
     NSMutableArray *modlist;
     NSMutableDictionary *loadhistory;
 }
@@ -46,9 +46,9 @@
 - (void)dealloc;
 - (CVConfig*)config;
 - (CVService*)service;
-- (NSArray*)moduleList;
-- (NSDictionary*)loadHistory;
-- (NSString*)notifyMessage;
+- (NSArray *)moduleList;
+- (NSDictionary *)loadHistory;
+- (NSString *)notifyMessage;
 - (void)clearNotification;
 @end
 

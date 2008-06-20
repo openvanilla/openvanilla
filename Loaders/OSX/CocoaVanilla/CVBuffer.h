@@ -36,20 +36,20 @@
 
 class CVBuffer : public OVBuffer {
 public:
-    CVBuffer(TSComposingBuffer *cb, NSArray *ofa, OVService *s);
+    CVBuffer(TSComposingBuffer* cb, NSArray *ofa, OVService* s);
     virtual OVBuffer* clear();
     virtual OVBuffer* append(const char *s);
     virtual OVBuffer* send();
     virtual OVBuffer* update();
-    virtual OVBuffer* update(int cursorPos, int markFrom=-1, int markTo=-1);
+    virtual OVBuffer* update(int cursorPos, int markFrom = -1, int markTo = -1);
     virtual bool isEmpty();
     virtual Point getAppCursorPosition();
     
-    virtual CVBuffer* setComposingBuffer(TSComposingBuffer *cb);
+    virtual CVBuffer* setComposingBuffer(TSComposingBuffer* cb);
 protected:
-    TSComposingBuffer *cbuf;
+    TSComposingBuffer* cbuf;
     NSArray *ofarray;
-    OVService *srv;
+    OVService* srv;
 };
 
 #endif

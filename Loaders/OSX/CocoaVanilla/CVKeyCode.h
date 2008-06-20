@@ -54,7 +54,7 @@ public:
 	// extensions for CVSmartMenu
 	CVKeyCode(const char *charcode, const char *modifiers);
 	CVKeyCode(NSString *s);
-	virtual BOOL equalToKey(CVKeyCode *k, BOOL ignorecase=YES);
+	virtual BOOL equalToKey(CVKeyCode* k, BOOL ignorecase=YES);
 	virtual UInt8 convertToMenuModifier();
     
     // facility functions for OVPreference

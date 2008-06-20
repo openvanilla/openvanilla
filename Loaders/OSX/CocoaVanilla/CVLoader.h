@@ -51,26 +51,26 @@ public:
     CVLoader();
     virtual ~CVLoader();
     int init(MenuRef m);
-    CVContext *newContext();
-    void setActiveContext(CVContext *c);
+    CVContext* newContext();
+    void setActiveContext(CVContext* c);
     void menuHandler(unsigned int cmd);
 protected:
 	id connectDisplayServer();
 	void refreshMenu();
 	void createMenuGroups();
 	void checkMenuItems();
-    void initializeModules(NSArray *src, NSMutableArray *dst, CVSmartMenuGroup *fallout);
+    void initializeModules(NSArray *src, NSMutableArray *dst, CVSmartMenuGroup* fallout);
     void syncMenuAndConfig(); // sync menu items&config, reassemble IM/OF arrays
-    void pourModuleArrayIntoMenu(NSArray *ma, CVSmartMenuGroup *g, NSArray *orderedby=nil);
+    void pourModuleArrayIntoMenu(NSArray *ma, CVSmartMenuGroup* g, NSArray *orderedby = nil);
 	void showOutputFilterStatus(NSString *modid, BOOL s);
 	void switchToLastPrimaryIM();
     BOOL checkIfLastAtomicInitFailed(int timeout);  // unit in 1/100 second
 	NSString *MSG(NSString *m);
 
-    CVService *srv;
-    CVCandidate *candi;
-    CVContext *activecontext;
-    CVConfig *cfg;
+    CVService* srv;
+    CVCandidate* candi;
+    CVContext* activecontext;
+    CVConfig* cfg;
     NSMutableDictionary *loaderdict;        // dictionary for loader config
 	NSMutableDictionary *menudict;		   // dictionary for menu keys
 	NSBundle *loaderbundle;
@@ -80,17 +80,17 @@ protected:
     NSMutableArray *modarray;       // all loaded moudles
     NSMutableArray *imarray;        // current in-use KP & IM modules
     NSMutableArray *ofarray;        // current in-use OF modules
-    CVSmartMenuGroup *kpmenugroup;  // key preprocessor menu group
-    CVSmartMenuGroup *immenugroup;  // input method menu group
-    CVSmartMenuGroup *ofmenugroup;  // output filter menu group
+    CVSmartMenuGroup* kpmenugroup;  // key preprocessor menu group
+    CVSmartMenuGroup* immenugroup;  // input method menu group
+    CVSmartMenuGroup* ofmenugroup;  // output filter menu group
     friend class CVContext;
 };
 
 class CVContext {
 public:
-    CVContext(CVLoader *p);
+    CVContext(CVLoader* p);
     virtual ~CVContext();
-    void activate(TSComposingBuffer *b);
+    void activate(TSComposingBuffer* b);
     void deactivate();
     void fix();
     int event(char charcode, int modifiers);
@@ -102,11 +102,11 @@ public:
     
 	void sendString(NSString *string);
 protected:
-    CVLoader *loader;
-    CVBuffer *buf;
+    CVLoader* loader;
+    CVBuffer* buf;
     NSMutableArray *contexts;
     CVTimeTag stamp;
-    CVCandidateState *candistate;
+    CVCandidateState* candistate;
 	
 	// key receiver test
 	id keyrcvr;

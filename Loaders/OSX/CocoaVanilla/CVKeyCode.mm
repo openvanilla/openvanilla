@@ -32,24 +32,27 @@
 #include "CVKeyCode.h"
 #include "NSStringExtension.h"
 
-CVKeyCode::CVKeyCode(char charcode, UInt32 modifiers) {
-	m=modifiers;
-	c=charcode;
+CVKeyCode::CVKeyCode(char charcode, UInt32 modifiers)
+{
+	m = modifiers;
+	c = charcode;
 	
 	// translate keycode
 	switch (c) {
 		case 3:		// Mac's very confusing "enter" key
-			c=ovkReturn;
+			c = ovkReturn;
 			break;
 	}
 }
 
-CVKeyCode::CVKeyCode(const char *charcode, const char *modifiers) {
+CVKeyCode::CVKeyCode(const char *charcode, const char *modifiers)
+{
 	init (charcode, modifiers);
 }
 
-CVKeyCode::CVKeyCode(NSString *s) {
-	NSArray *a=[s splitBySpaceWithQuote];
+CVKeyCode::CVKeyCode(NSString *s)
+{
+	NSArray *a = [s splitBySpaceWithQuote];
 	if ([a count] < 2) {
 		init([s UTF8String], "");
 	}
@@ -59,12 +62,12 @@ CVKeyCode::CVKeyCode(NSString *s) {
 }
 
 void CVKeyCode::init(const char *charcode, const char *modifiers) {
-    c=0;
-    if (strlen(charcode)==1) {
-        c=toupper(*charcode);
+    c = 0;
+    if (strlen(charcode) == 1) {
+        c = toupper(*charcode);
     }
     else {
-        #define KMAP(x,y)  if(!strcasecmp(charcode, x)) c=y
+        #define KMAP(x,y)  if(!strcasecmp(charcode, x)) c = y
         KMAP("esc", ovkEsc);
         else KMAP("space", ovkSpace);
         else KMAP("delete", ovkDelete);
@@ -80,9 +83,9 @@ void CVKeyCode::init(const char *charcode, const char *modifiers) {
         else KMAP("tab", ovkTab);
         #undef KMAP
     }
-	m=0;
+	m = 0;
 	
-	for (size_t i=0; i<strlen(modifiers); i++) {
+	for (size_t i = 0; i < strlen(modifiers); i++) {
 		switch(toupper(modifiers[i])) {
 			case 'M': m |= cmdKey; break;
 			case 'O': m |= optionKey; break;
@@ -92,24 +95,29 @@ void CVKeyCode::init(const char *charcode, const char *modifiers) {
 	}
 }
 
-BOOL CVKeyCode::equalToKey(CVKeyCode *k, BOOL ignorecase) {
+BOOL CVKeyCode::equalToKey(CVKeyCode* k, BOOL ignorecase)
+{
 	if (ignorecase) {
-		if (toupper(code()) != toupper(k->code())) return NO;
+		if (toupper(code()) != toupper(k->code())) 
+			return NO;
 	}
 	else {
-		if (code() != k->code()) return NO;
+		if (code() != k->code())
+			return NO;
 	}
 
 	if ((isShift() == k->isShift()) &&
 	    (isCtrl() == k->isCtrl()) &&
 		(isOpt() == k->isOpt()) &&
-		(isCommand() == k->isCommand())) return YES;
+		(isCommand() == k->isCommand()))
+		return YES;
 
 	return NO;
 }
 
-UInt8 CVKeyCode::convertToMenuModifier() {
-	UInt8 mm=0;
+UInt8 CVKeyCode::convertToMenuModifier()
+{
+	UInt8 mm = 0;
 	
 	if (isShift()) mm |= kMenuShiftModifier;
 	if (isCtrl()) mm |= kMenuControlModifier;
@@ -118,34 +126,45 @@ UInt8 CVKeyCode::convertToMenuModifier() {
 	return mm;
 }
 
-bool CVKeyCode::isShift() {
-    if (m & (shiftKey | rightShiftKey)) return 1;
-    return 0;
+bool CVKeyCode::isShift() 
+{
+    if (m & (shiftKey | rightShiftKey))
+		return true;
+    return false;
 }
 
-bool CVKeyCode::isCtrl() {
-    if (m & (controlKey | rightControlKey)) return 1;
-    return 0;
+bool CVKeyCode::isCtrl()
+{
+    if (m & (controlKey | rightControlKey))
+		return true;
+    return false;
 }
 
-bool CVKeyCode::isAlt() {
-    if (m & (optionKey | rightOptionKey)) return 1;
-    return 0;
+bool CVKeyCode::isAlt()
+{
+    if (m & (optionKey | rightOptionKey))
+		return true;
+    return false;
 }
 
-bool CVKeyCode::isCommand() {
-    if (m & cmdKey) return 1;
-    return 0;
+bool CVKeyCode::isCommand()
+{
+    if (m & cmdKey)
+		return true;
+    return false;
 }
 
-bool CVKeyCode::isCapslock() {
-    if (m & (alphaLock | kEventKeyModifierNumLockMask)) return 1; 
+bool CVKeyCode::isCapslock()
+{
+    if (m & (alphaLock | kEventKeyModifierNumLockMask))
+		return true; 
 //  if (m & alphaLock) return 1; 
-    return 0;
+    return false;
 }
 
-NSArray *CVKeyCode::getKeyList() {
-    NSMutableArray *ma=[[NSMutableArray new] autorelease];
+NSArray *CVKeyCode::getKeyList()
+{
+    NSMutableArray *ma = [[NSMutableArray new] autorelease];
     #define KMAP(x)     [ma addObject:x]
     KMAP(@"esc");
     KMAP(@"space");
@@ -161,22 +180,23 @@ NSArray *CVKeyCode::getKeyList() {
     KMAP(@"pagedown");
     KMAP(@"tab");
     #undef KMAP
-    char *s="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`";
+    char *s = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;< = >?@[\\]^_`";
     char buf[2];
-    buf[1]=0;
-    for (size_t i=0; i<strlen(s); i++) {
-        buf[0]=s[i];
+    buf[1] = 0;
+    for (size_t i = 0; i<strlen(s); i++) {
+        buf[0] = s[i];
         [ma addObject:[NSString stringWithUTF8String:buf]];
     }
 
     return ma;
 }
 
-NSString *CVKeyCode::getKeyCodeString() {
+NSString *CVKeyCode::getKeyCodeString()
+{
     char buf[32];
     bzero(buf, 32);
-    buf[0]=code();
-    #define KMAP(x,y)  if(c==y) strcpy(buf, x)
+    buf[0] = code();
+    #define KMAP(x,y)  if(c == y) strcpy(buf, x)
     KMAP("esc", ovkEsc);
     else KMAP("space", ovkSpace);
     else KMAP("delete", ovkDelete);
@@ -194,22 +214,32 @@ NSString *CVKeyCode::getKeyCodeString() {
     return [NSString stringWithUTF8String:buf];
 }
 
-NSString *CVKeyCode::getModifierIconString() {    
+NSString *CVKeyCode::getModifierIconString()
+{ 
     char func[32];
     bzero(func, 32);
-    if (isCommand()) strcat(func, "⌘");
-    if (isOpt()) strcat(func, "⌥");
-    if (isCtrl()) strcat(func, "^");
-    if (isShift()) strcat(func, "⇧");
+    if (isCommand()) 
+		strcat(func, "⌘");
+    if (isOpt()) 
+		strcat(func, "⌥");
+    if (isCtrl()) 
+		strcat(func, "^");
+    if (isShift()) 
+		strcat(func, "⇧");
     return [NSString stringWithUTF8String:func];
 }
 
-NSString *CVKeyCode::getModifierString() {
+NSString *CVKeyCode::getModifierString()
+{
     char func[32];
     bzero(func, 32);
-    if (isCommand()) strcat(func, "m");
-    if (isOpt()) strcat(func, "o");
-    if (isCtrl()) strcat(func, "c");
-    if (isShift()) strcat(func, "s");
+    if (isCommand()) 
+		strcat(func, "m");
+    if (isOpt()) 
+		strcat(func, "o");
+    if (isCtrl()) 
+		strcat(func, "c");
+    if (isShift()) 
+		strcat(func, "s");
     return [NSString stringWithUTF8String:func];
 }

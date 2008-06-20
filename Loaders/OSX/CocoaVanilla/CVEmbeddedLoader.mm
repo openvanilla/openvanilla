@@ -36,11 +36,13 @@
 @interface CVDumpDisplayServer : NSObject <OVDisplayServer> {
     NSMutableString *msg;
 }
+
 - (NSString*)notifyMessage;
 @end
 
 @implementation CVEmbeddedLoader 
-- (void)dealloc {
+- (void)dealloc
+{
     delete srv;
     [dpsrv release];
     [cfg release];
@@ -48,63 +50,76 @@
     [loadhistory release];
     [super dealloc];
 }
-- (id)init {
-    self=[super init];
-    if (!self) return nil;
+- (id)init
+{
+    self = [super init];
+    if (!self)
+		return nil;
 
-    dpsrv=[CVDumpDisplayServer new];
-    srv=new CVService(CVGetUserSpacePath(), dpsrv);
+    dpsrv = [CVDumpDisplayServer new];
+    srv = new CVService(CVGetUserSpacePath(), dpsrv);
     srv->setNotificationPosition((Point){1,1});     // to prevent "hide ghost notification" feature
-    cfg=[[CVConfig alloc] initWithFile:CVGetUserConfigFilename() defaultData:nil];
-    modlist=[NSMutableArray new];
-    loadhistory=[NSMutableDictionary new];
+    cfg = [[CVConfig alloc] initWithFile:CVGetUserConfigFilename() defaultData:nil];
+    modlist = [NSMutableArray new];
+    loadhistory = [NSMutableDictionary new];
     
     // load everything!
     [modlist addObjectsFromArray: CVLoadEverything(CVGetModuleLoadPath(), srv, nil, nil, loadhistory, nil)];
     return self;
 }
-- (CVConfig*)config {
+- (CVConfig*)config
+{
     return cfg;
 }
-- (CVService*)service {
+- (CVService*)service
+{
     return srv;
 }
-- (NSArray*)moduleList {
+- (NSArray *)moduleList
+{
     return modlist;
 }
-- (NSDictionary*)loadHistory {
+- (NSDictionary *)loadHistory
+{
     return loadhistory;
 }
-- (NSString*)notifyMessage {
+- (NSString *)notifyMessage
+{
     return [dpsrv notifyMessage];
 }
-- (void)clearNotification {
+- (void)clearNotification
+{
     [dpsrv notifyClose];
 }
 @end
 
 @implementation CVDumpDisplayServer
-- (id)init {
-    if (self=[super init]) {
+- (id)init
+{
+    if (self = [super init]) {
         msg=[NSMutableString new];
     }
     return self;
 }
-- (void)dealloc {
+- (void)dealloc
+{
     [msg release];
     [super dealloc];
 }
-- (NSString*)notifyMessage {
+- (NSString *)notifyMessage
+{
     return msg;
 }
 - (void)setConfig:(NSDictionary*)cfg {}
 - (void)candidateShow {}
 - (void)candidateHide {}
-- (void)candidateUpdate:(bycopy NSString*)s position:(Point)p {}
-- (void)notifyMessage:(bycopy NSString*)s position:(Point)p {
+- (void)candidateUpdate:(bycopy NSString *)s position:(Point)p {}
+- (void)notifyMessage:(bycopy NSString *)s position:(Point)p
+{
     [msg setString:s];
 }
-- (void)notifyClose {
+- (void)notifyClose
+{
     [msg setString:@""];
 }
 - (void)notifyFade {}
@@ -113,16 +128,8 @@
 {
 	return TRUE;
 }
-- (void)sendCharacterToCurrentComposingBuffer:(NSString*)text
-{
-}
-- (void)sendStringToCurrentComposingBuffer:(NSString*)text
-{
-}
-- (int)nextAvailableRemoteID
-{
-}
-- (void)setCurrentComposingBufferRemoteID:(int)remoteID
-{
-}
+- (void)sendCharacterToCurrentComposingBuffer:(NSString *)text {}
+- (void)sendStringToCurrentComposingBuffer:(NSString *)text {}
+- (int)nextAvailableRemoteID {}
+- (void)setCurrentComposingBufferRemoteID:(int)remoteID {}
 @end
