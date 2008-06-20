@@ -30,8 +30,85 @@
 
 /*!
 	@file OpenVanilla.h
-	@abstract The OpenVanilla Framework
+	@framework OpenVanilla Framework
 	@copyright OpenVanilla.org
+	@abstract OpenVanilla is a collection of popular Chinese, Taiwanese,
+	Japanese and symbol input methods and language tools, and there are already 
+	OpenVanilla installation package for Mac OS X, Windows and Linux platform.
+	
+	However, in the point of view of developers, OpenVanilla is not only an
+	Inpur Method software, but a cross-platform Input Method/Text Proccessing
+	framework.
+	
+	The OpenVanilla framework composites two main parts. One is the core
+	loader, while another part is the collection of modules (or so-called 
+	plugins). The core loader's work is to communicate with the system Input
+	Method APIs, such as the IME (Input Method Editor) architecture on Microsoft
+	Windows platform, TSM (Text Service Manager) and IMK (Input Method Kit)
+	architectures on Mac OS X, and so on. Another work of the core loader
+	is to load the module, the modules are dynamic loadable binary files.
+	
+	In other words, OpenVanilla provides an abstract interface between the
+	Input Method engines and the system Input Method APIs. By the implementation
+	of an OpenVnailla Inpue Method module, you need not to rewrite your codes
+	for varied platforms just because the system APis are varied.
+	
+	The core of the OpenVanilla framework is just a concept, a header file,
+	or just several simple C++ classes which define the basic but flexible 
+	properties that an Input Method should have, the events it should handle
+	and the tools it could use.
+	
+	To work with your own Input Method module, just implemet the OVInputMethod 
+	class by providing an unique identifier and localized name, and creating
+	an Input Method context (the OVInputMethodContext class) to handle keyboard
+	events. The keyEvent method is the function to proccess/translate the
+	keyboard events to corresponding text to output to the current application.
+	The keyboard events are defined in the OVKeyCode class.
+	 
+	There are two main tools that an Input Method module could use while
+	proccessing the keyboard events, they are the pre-edit buffer (OVBuffer)
+	and the candidate list window (OVCandidate). If your Input Method needs to
+	use several keys as components to compose a character, like most Chinese
+	and Japanese Input Methods and so on, you can use the pre-edit buffer to
+	display the components by calling the append() method to append a component
+	to current content of the buffer, and call the send() method to send the
+	content of the buffer to the current application.
+	
+	If there are two or more results matching to the combination of the
+	components, you may ask users to choose one of these results. In this case,
+	you should use the candidate list window. You can decide the content of
+	the window, and ask it to be shown and hidden.
+	
+	If your module offers extra settings which allow users to customize the
+	behaviours, your can read the settings from the configuration file
+	in the initialize() method in your module. The settings of your module
+	is restored in the OVDictionary object which contains varied string and
+	integer values. You can use the update() method to write the settings.
+	
+	You can also obtain the file path of your module in the initialize()
+	method. That means, if your Input Method need to load extra resources
+	such as a database file and so on, you can specify the path of your database
+	file when the loader is calling the initialize() method of modules.
+	
+	The OVService class also supports some simple tools that your module
+	can use, for example, if you need to make an alert sound when the users input
+	wrong keys, you can call the beep() method. And if you want to show some
+	messages to notify the users, just call the notify() method.
+	
+	The OpenVanilla Framework also has a kind of module which is called Output
+	Filter. Unlike an Input Method module which handles the keyboard events,
+	an Output Filter module haneles the output text of an Input Method module.
+	For example, when a user typed a character in Traditional Chinese,
+	he or she can use an Output Filter module to convert the character to
+	Simplified Chinese. So he or she can use his or her favorite Traditional
+	Chinese Input Method to type Simplified Chinese without learning any
+	Simplified Chinese Input Methods.
+	
+	Most methods in an Ouput Filter module are the same as the methods in an
+	Input Method module. The difference between an Output Filter and an Input
+	Method modules is, an Output Filter has no Input Method context, and you 
+	need to implement the process() method. You can obtain the source text
+	to convert in this method, and just return the converted result.
 */
 
 #ifndef __OpenVanilla_h
@@ -49,6 +126,8 @@
 	version of the OpenVanilla framework that the loader or a module is
 	based on, and ask the loader to load the modules only based on
 	the same version of the OpenVanilla framework.
+	
+	If the version is updated, you need to re-compile all modules.
 */
 #define OV_VERSION   (0x00080000)      // version 0.8.0 (00_08_00_00)
 
@@ -90,57 +169,58 @@ public:
 /*!
 	@function code
 	@abstract The keycode of the pressed key sent to your input
-	method software.
+	method software. For example, if it returns 'c', it means the user
+	pressed on the 'c' key on his/her keyboard.
 	@return	The keycode.
 */	
     virtual int code() = 0;
 /*!
 	@function isShift
-	@abstract If the Shift key is pressed down.
-	@result If the Shift key is pressred down, it returns true, else 
+	@abstract If the shift key is pressed down.
+	@result If the shift key is pressred down, it returns true, else 
 	returns false.
 */
     virtual bool isShift() = 0;
 /*!
 	@function isCapslock
-	@abstract If the Capslock is on.
-	@result If the Capslock is on, it returns true, else returns false.
+	@abstract If the capslock is on.
+	@result If the capslock is on, it returns true, else returns false.
 */
     virtual bool isCapslock() = 0;
 
 /*!
 	@function isCtrl
-	@abstract If the Control key is pressed down.
-	@result If the Control key is pressed down, it returns true, else 
+	@abstract If the control key is pressed down.
+	@result If the control key is pressed down, it returns true, else 
 	returns false.
 */
     virtual bool isCtrl() = 0;
 /*!
 	@function isAlt
-	@abstract If the Alt key is pressed down.
-	@result If the Alt key is pressed down, it returns true, else 
+	@abstract If the alt key is pressed down.
+	@result If the alt key is pressed down, it returns true, else 
 	returns false.
 */
     virtual bool isAlt() = 0;
 /*!
 	@function isOpt
-	@abstract If the Option key is pressed down.
+	@abstract If the option key is pressed down.
 	@discussion 
-	Only Mac OS supprts the Option key, so if you need to
+	Only Mac OS supprts the option key, so if you need to
 	implement your input method to other platforms such as Windows
 	and *nix, use isAlt() instead. 
-	@result If the Option key is pressed down, it returns true, else 
+	@result If the option key is pressed down, it returns true, else 
 	returns false.
 	@seealso isAlt isAlt	
 */
     virtual bool isOpt() { return isAlt(); }
 /*!
 	@function isCommand
-	@abstract If the Command key is pressed down.
+	@abstract If the command key is pressed down.
 	@discussion 
-	Only Mac OS supprts the Command key, so if you need to
+	Only Mac OS supprts the command key, so if you need to
 	implement your input method to other platforms such as Windows
-	and *nix, use isAlt() or isCtrl() instead. 
+	and *nix, use isAlt() or isCtrl() instead.
 	@result If the Command key is pressed down, it returns true, else 
 	returns false.
 	@seealso isAlt isAlt
@@ -148,8 +228,8 @@ public:
     virtual bool isCommand() { return isAlt(); }
 /*!
 	@function isNum
-	@abstract If the Number Lock is on.
-	@result If the Number Lock is on, it returns true, else 
+	@abstract If the number lock is on.
+	@result If the number lock is on, it returns true, else 
 	returns false.
 */
     virtual bool isNum() = 0;
@@ -181,6 +261,14 @@ public:
 /*! 
 	@class OVBuffer
 	@abstract An abstract interface for the pre-edit and composing buffer.
+	@discusson
+	Most Input Methods require a pre-edit and composing area. That means,
+	If your Input Method needs to use several keys as components to compose
+	a character, like most Chinese and Japanese Input Methods and so on, you
+	can use the pre-edit buffer to display the components by calling the
+	append() method to append a component to current content of the buffer,
+	and call the send() method to send the content of the buffer to the
+	current application.	
 */
 class OVBuffer : public OVBase {
 public:
@@ -372,7 +460,7 @@ public:
 	@param key The configuration key.
 	@result The string value of the configuration key.
 */
-    virtual const char* getString(const char *key) = 0;
+    virtual const char *getString(const char *key) = 0;
 /*! 
 	@function setString
 	@abstract Set the string value of a configuration key to the
@@ -382,7 +470,7 @@ public:
 	@seealso setString
 	@seealso getStringWithDefault
 */
-    virtual const char* setString(const char *key, const char *value) = 0;
+    virtual const char *setString(const char *key, const char *value) = 0;
 /*! 
 	@function getIntegerWithDefault
 	@abstract Try to retrieve the integer value of a configuration key
@@ -406,7 +494,7 @@ public:
 	@seealso getString
 	@seealso setString
 */
-    virtual const char* getStringWithDefault(const char *key, const char *value) 
+    virtual const char *getStringWithDefault(const char *key, const char *value) 
     {
         if (!keyExist(key)) setString(key, value); return getString(key);
     }
@@ -614,7 +702,7 @@ public:
 	in your module, the looader will use the identifier instead.
 	@return The localized name.
 */
-    virtual const char *localizedName(const char* locale) { return identifier(); }
+    virtual const char *localizedName(const char *locale) { return identifier(); }
 /*!
 	@function initialize
 	@abstract To initialize the module.
@@ -626,16 +714,16 @@ public:
 	@param modulePath The full-path where the binary of the module is
 	located.
 */
-	virtual int initialize(OVDictionary *moduleCfg, OVService *srv, 
+	virtual int initialize(OVDictionary* moduleCfg, OVService* srv, 
         const char *modulePath) { return 1; }
 /*!
 	@function update
 	@abstract To update the configuration dictionary and write it into
 	the disk drive.
 	@param moduleCfg The configuration dictionary.
-	@param srv The shared service.
+	@param srv The shared service object.
 */
-    virtual void update(OVDictionary *moduleCfg, OVService *srv) {}
+    virtual void update(OVDictionary* moduleCfg, OVService* srv) {}
 };
 
 /*!
@@ -663,14 +751,30 @@ public:
 	need an identifier to tell if a module is an Input Method module.
 	@return The "OVInputMethod" characters.
 */
-    virtual const char* moduleType() { return "OVInputMethod"; }
+    virtual const char *moduleType() { return "OVInputMethod"; }
 };
 
 /*!
 	@class OVOutputFilter
-	@abstract The OutputFilter module interface. 
+	@abstract The Output Filter module interface. 
 	@discussion 
-	.
+	
+	The Output Filter is a special module type of OpenVanilla, which haneles
+	the output text of an Input Method module. For example, when a user typed
+	a character in Traditional Chinese, he or she can use an Output Filter
+	module to convert the character to Simplified Chinese. So he or she can
+	use his or her favorite Traditional Chinese Input Method to type Simplified
+	Chinese without learning any Simplified Chinese Input Methods.
+	
+	Most methods in an Ouput Filter module are the same as the methods in an
+	Input Method module. The difference between an Output Filter and an Input
+	Method modules is, an Output Filter has no Input Method context, and you 
+	need to implement the process() method. You can obtain the source text
+	to convert in this method, and just return the converted result.
+	
+	OVOutputFilter is a subclass of OVModule. If you want to start 
+	working with your own Output Filter module, you should work with
+	your own OVOutputFilter subclass.
 */
 class OVOutputFilter : public OVModule
 {
@@ -692,7 +796,7 @@ public:
 	@param srv The shared OpenVanilla service.	
 	@return The processed text.
 */	
-    virtual const char* process(const char *source, OVService *srv) = 0;
+    virtual const char *process(const char *source, OVService* srv) = 0;
 /*!
 	@function moduleType
 	@abstract The type of OVOutputFilter.
@@ -702,7 +806,7 @@ public:
 	module or not.
 	@return The "OVOutputFilter" characters.
 */
-    virtual const char* moduleType() { return "OVOutputFilter"; }
+    virtual const char *moduleType() { return "OVOutputFilter"; }
 };
 
 /*!
@@ -712,28 +816,28 @@ public:
 	IM environment should map different key codes into these when offering
 	OVKeyCode-derived objects to an IM context
 
-	@constant ovkEsc The keycode of the Escape key.
-	@constant ovkSpace	The keycode of the Space key.
-	@constant ovkReturn	The keycode of the Return key.
-	@constant ovkDelete The keycode of the Delete key.
-	@constant ovkBackspace The keycode of the BackSpace key.
-	@constant ovkUp The keycode of the Up arrow key.
-	@constant ovkDown The keycode of the Down arrow key.
-	@constant ovkLeft The keycode of the Left arrow key.
-	@constant ovkRight The keycode of the Right arrow key.
-	@constant ovkHome The keycode of the Home key.
-	@constant ovkEnd The keycode of the End key.
-	@constant ovkPageUp The keycode of the Page Up key.
-	@constant ovkPageDown The keycode of the Page Down key.
-	@constant ovkTab The keycode of the Tab key.	
+	@constant ovkEsc The keycode of the escape key.
+	@constant ovkSpace The keycode of the space key.
+	@constant ovkReturn	The keycode of the return key.
+	@constant ovkDelete The keycode of the delete key.
+	@constant ovkBackspace The keycode of the backSpace key.
+	@constant ovkUp The keycode of the up arrow key.
+	@constant ovkDown The keycode of the down arrow key.
+	@constant ovkLeft The keycode of the left arrow key.
+	@constant ovkRight The keycode of the right arrow key.
+	@constant ovkHome The keycode of the home key.
+	@constant ovkEnd The keycode of the end key.
+	@constant ovkPageUp The keycode of the page Up key.
+	@constant ovkPageDown The keycode of the page Down key.
+	@constant ovkTab The keycode of the tab key.	
 */ 
 enum 
 {
-    ovkEsc=27, ovkSpace=32, ovkReturn=13, 
-    ovkDelete=127, ovkBackspace=8,
-    ovkUp=30, ovkDown=31, ovkLeft=28, ovkRight=29,
-    ovkHome=1, ovkEnd=4, ovkPageUp=11, ovkPageDown=12,
-    ovkTab=9
+    ovkEsc =27, ovkSpace = 32, ovkReturn = 13,
+    ovkDelete = 127, ovkBackspace = 8,
+    ovkUp = 30, ovkDown = 31, ovkLeft = 28, ovkRight = 29,
+    ovkHome = 1, ovkEnd = 4, ovkPageUp = 11, ovkPageDown = 12,
+    ovkTab = 9
 };
 
 #endif
