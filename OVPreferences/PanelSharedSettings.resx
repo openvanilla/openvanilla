@@ -1,0 +1,885 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="m_lbOpacity.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="m_lbOpacity.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft JhengHei, 8.25pt</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="m_lbOpacity.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_lbOpacity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>292, 206</value>
+  </data>
+  <data name="m_lbOpacity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 15</value>
+  </data>
+  <data name="m_lbOpacity.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="m_lbOpacity.Text" xml:space="preserve">
+    <value>Opacity</value>
+  </data>
+  <data name="&gt;&gt;m_lbOpacity.Name" xml:space="preserve">
+    <value>m_lbOpacity</value>
+  </data>
+  <data name="&gt;&gt;m_lbOpacity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_lbOpacity.Parent" xml:space="preserve">
+    <value>m_pnSelf</value>
+  </data>
+  <data name="&gt;&gt;m_lbOpacity.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="m_cbCandiFont.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="m_cbCandiFont.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 32</value>
+  </data>
+  <data name="m_cbCandiFont.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="m_cbCandiFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 26</value>
+  </data>
+  <data name="m_cbCandiFont.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiFont.Name" xml:space="preserve">
+    <value>m_cbCandiFont</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiFont.Type" xml:space="preserve">
+    <value>OVPreferences.FontComboBox, OVPreferences, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiFont.Parent" xml:space="preserve">
+    <value>m_gpCandi</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiFont.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="m_cbCandiBackColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_cbCandiBackColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 69</value>
+  </data>
+  <data name="m_cbCandiBackColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 30</value>
+  </data>
+  <data name="m_cbCandiBackColor.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiBackColor.Name" xml:space="preserve">
+    <value>m_cbCandiBackColor</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiBackColor.Type" xml:space="preserve">
+    <value>OVPreferences.ColorButton, OVPreferences, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiBackColor.Parent" xml:space="preserve">
+    <value>m_gpCandi</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiBackColor.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="m_cbCandiFontSize.Items" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="m_cbCandiFontSize.Items1" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="m_cbCandiFontSize.Items2" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="m_cbCandiFontSize.Items3" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="m_cbCandiFontSize.Items4" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="m_cbCandiFontSize.Items5" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="m_cbCandiFontSize.Items6" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="m_cbCandiFontSize.Items7" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="m_cbCandiFontSize.Items8" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="m_cbCandiFontSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>206, 33</value>
+  </data>
+  <data name="m_cbCandiFontSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 25</value>
+  </data>
+  <data name="m_cbCandiFontSize.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="m_cbCandiFontSize.Text" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiFontSize.Name" xml:space="preserve">
+    <value>m_cbCandiFontSize</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiFontSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiFontSize.Parent" xml:space="preserve">
+    <value>m_gpCandi</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiFontSize.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="m_lbCandiBackColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_lbCandiBackColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 55</value>
+  </data>
+  <data name="m_lbCandiBackColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="m_lbCandiBackColor.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="m_lbCandiBackColor.Text" xml:space="preserve">
+    <value>Background Color</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiBackColor.Name" xml:space="preserve">
+    <value>m_lbCandiBackColor</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiBackColor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiBackColor.Parent" xml:space="preserve">
+    <value>m_gpCandi</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiBackColor.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="m_cbCandiFontColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_cbCandiFontColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 26</value>
+  </data>
+  <data name="m_cbCandiFontColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 30</value>
+  </data>
+  <data name="m_cbCandiFontColor.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiFontColor.Name" xml:space="preserve">
+    <value>m_cbCandiFontColor</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiFontColor.Type" xml:space="preserve">
+    <value>OVPreferences.ColorButton, OVPreferences, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiFontColor.Parent" xml:space="preserve">
+    <value>m_gpCandi</value>
+  </data>
+  <data name="&gt;&gt;m_cbCandiFontColor.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="m_lbCandiFont.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_lbCandiFont.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 14</value>
+  </data>
+  <data name="m_lbCandiFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="m_lbCandiFont.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="m_lbCandiFont.Text" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiFont.Name" xml:space="preserve">
+    <value>m_lbCandiFont</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiFont.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiFont.Parent" xml:space="preserve">
+    <value>m_gpCandi</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiFont.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="m_lbCandiFontColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_lbCandiFontColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 13</value>
+  </data>
+  <data name="m_lbCandiFontColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="m_lbCandiFontColor.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="m_lbCandiFontColor.Text" xml:space="preserve">
+    <value>Font Color</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiFontColor.Name" xml:space="preserve">
+    <value>m_lbCandiFontColor</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiFontColor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiFontColor.Parent" xml:space="preserve">
+    <value>m_gpCandi</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiFontColor.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="m_gpCandi.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft JhengHei, 9.75pt</value>
+  </data>
+  <data name="m_gpCandi.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="m_gpCandi.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 104</value>
+  </data>
+  <data name="m_gpCandi.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="m_gpCandi.Text" xml:space="preserve">
+    <value>Candidates  Text</value>
+  </data>
+  <data name="&gt;&gt;m_gpCandi.Name" xml:space="preserve">
+    <value>m_gpCandi</value>
+  </data>
+  <data name="&gt;&gt;m_gpCandi.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_gpCandi.Parent" xml:space="preserve">
+    <value>m_pnSelf</value>
+  </data>
+  <data name="&gt;&gt;m_gpCandi.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="m_cbEnableNotify.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="m_cbEnableNotify.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_cbEnableNotify.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 110</value>
+  </data>
+  <data name="m_cbEnableNotify.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 21</value>
+  </data>
+  <data name="m_cbEnableNotify.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="m_cbEnableNotify.Text" xml:space="preserve">
+    <value>Enable Notify Window</value>
+  </data>
+  <data name="&gt;&gt;m_cbEnableNotify.Name" xml:space="preserve">
+    <value>m_cbEnableNotify</value>
+  </data>
+  <data name="&gt;&gt;m_cbEnableNotify.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_cbEnableNotify.Parent" xml:space="preserve">
+    <value>m_gpNotify</value>
+  </data>
+  <data name="&gt;&gt;m_cbEnableNotify.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="m_cbFont.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="m_cbFont.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 32</value>
+  </data>
+  <data name="m_cbFont.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="m_cbFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 26</value>
+  </data>
+  <data name="m_cbFont.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;m_cbFont.Name" xml:space="preserve">
+    <value>m_cbFont</value>
+  </data>
+  <data name="&gt;&gt;m_cbFont.Type" xml:space="preserve">
+    <value>OVPreferences.FontComboBox, OVPreferences, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;m_cbFont.Parent" xml:space="preserve">
+    <value>m_gpNotify</value>
+  </data>
+  <data name="&gt;&gt;m_cbFont.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="m_cbBackColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_cbBackColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 69</value>
+  </data>
+  <data name="m_cbBackColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 30</value>
+  </data>
+  <data name="m_cbBackColor.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;m_cbBackColor.Name" xml:space="preserve">
+    <value>m_cbBackColor</value>
+  </data>
+  <data name="&gt;&gt;m_cbBackColor.Type" xml:space="preserve">
+    <value>OVPreferences.ColorButton, OVPreferences, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;m_cbBackColor.Parent" xml:space="preserve">
+    <value>m_gpNotify</value>
+  </data>
+  <data name="&gt;&gt;m_cbBackColor.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="m_cbFontSize.Items" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="m_cbFontSize.Items1" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="m_cbFontSize.Items2" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="m_cbFontSize.Items3" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="m_cbFontSize.Items4" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="m_cbFontSize.Items5" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="m_cbFontSize.Items6" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="m_cbFontSize.Items7" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="m_cbFontSize.Items8" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="m_cbFontSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>205, 33</value>
+  </data>
+  <data name="m_cbFontSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 25</value>
+  </data>
+  <data name="m_cbFontSize.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="m_cbFontSize.Text" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;m_cbFontSize.Name" xml:space="preserve">
+    <value>m_cbFontSize</value>
+  </data>
+  <data name="&gt;&gt;m_cbFontSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_cbFontSize.Parent" xml:space="preserve">
+    <value>m_gpNotify</value>
+  </data>
+  <data name="&gt;&gt;m_cbFontSize.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="m_lbBackColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_lbBackColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 55</value>
+  </data>
+  <data name="m_lbBackColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="m_lbBackColor.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="m_lbBackColor.Text" xml:space="preserve">
+    <value>Background Color</value>
+  </data>
+  <data name="&gt;&gt;m_lbBackColor.Name" xml:space="preserve">
+    <value>m_lbBackColor</value>
+  </data>
+  <data name="&gt;&gt;m_lbBackColor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_lbBackColor.Parent" xml:space="preserve">
+    <value>m_gpNotify</value>
+  </data>
+  <data name="&gt;&gt;m_lbBackColor.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="m_cbFontColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_cbFontColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 26</value>
+  </data>
+  <data name="m_cbFontColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 30</value>
+  </data>
+  <data name="m_cbFontColor.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;m_cbFontColor.Name" xml:space="preserve">
+    <value>m_cbFontColor</value>
+  </data>
+  <data name="&gt;&gt;m_cbFontColor.Type" xml:space="preserve">
+    <value>OVPreferences.ColorButton, OVPreferences, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;m_cbFontColor.Parent" xml:space="preserve">
+    <value>m_gpNotify</value>
+  </data>
+  <data name="&gt;&gt;m_cbFontColor.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="m_lbFont.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_lbFont.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 13</value>
+  </data>
+  <data name="m_lbFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="m_lbFont.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="m_lbFont.Text" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="&gt;&gt;m_lbFont.Name" xml:space="preserve">
+    <value>m_lbFont</value>
+  </data>
+  <data name="&gt;&gt;m_lbFont.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_lbFont.Parent" xml:space="preserve">
+    <value>m_gpNotify</value>
+  </data>
+  <data name="&gt;&gt;m_lbFont.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="m_lbFontColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_lbFontColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="m_lbFontColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="m_lbFontColor.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="m_lbFontColor.Text" xml:space="preserve">
+    <value>Font Color</value>
+  </data>
+  <data name="&gt;&gt;m_lbFontColor.Name" xml:space="preserve">
+    <value>m_lbFontColor</value>
+  </data>
+  <data name="&gt;&gt;m_lbFontColor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_lbFontColor.Parent" xml:space="preserve">
+    <value>m_gpNotify</value>
+  </data>
+  <data name="&gt;&gt;m_lbFontColor.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="m_gpNotify.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft JhengHei, 9.75pt</value>
+  </data>
+  <data name="m_gpNotify.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 105</value>
+  </data>
+  <data name="m_gpNotify.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 138</value>
+  </data>
+  <data name="m_gpNotify.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="m_gpNotify.Text" xml:space="preserve">
+    <value>Notify Text</value>
+  </data>
+  <data name="&gt;&gt;m_gpNotify.Name" xml:space="preserve">
+    <value>m_gpNotify</value>
+  </data>
+  <data name="&gt;&gt;m_gpNotify.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_gpNotify.Parent" xml:space="preserve">
+    <value>m_pnSelf</value>
+  </data>
+  <data name="&gt;&gt;m_gpNotify.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="m_lbptOpacity.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="m_lbptOpacity.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt</value>
+  </data>
+  <data name="m_lbptOpacity.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_lbptOpacity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>366, 216</value>
+  </data>
+  <data name="m_lbptOpacity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 16</value>
+  </data>
+  <data name="m_lbptOpacity.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="m_lbptOpacity.Text" xml:space="preserve">
+    <value>0%</value>
+  </data>
+  <data name="&gt;&gt;m_lbptOpacity.Name" xml:space="preserve">
+    <value>m_lbptOpacity</value>
+  </data>
+  <data name="&gt;&gt;m_lbptOpacity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_lbptOpacity.Parent" xml:space="preserve">
+    <value>m_pnSelf</value>
+  </data>
+  <data name="&gt;&gt;m_lbptOpacity.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="m_lbCandiPreview.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="m_lbCandiPreview.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft JhengHei, 12pt</value>
+  </data>
+  <data name="m_lbCandiPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_lbCandiPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>36, 32</value>
+  </data>
+  <data name="m_lbCandiPreview.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="m_lbCandiPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 30</value>
+  </data>
+  <data name="m_lbCandiPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="m_lbCandiPreview.Text" xml:space="preserve">
+    <value>候選文字</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiPreview.Name" xml:space="preserve">
+    <value>m_lbCandiPreview</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiPreview.Parent" xml:space="preserve">
+    <value>panelPreview</value>
+  </data>
+  <data name="&gt;&gt;m_lbCandiPreview.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="m_lbNotifyPreview.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="m_lbNotifyPreview.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft JhengHei, 12pt</value>
+  </data>
+  <data name="m_lbNotifyPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_lbNotifyPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>36, 121</value>
+  </data>
+  <data name="m_lbNotifyPreview.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="m_lbNotifyPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 30</value>
+  </data>
+  <data name="m_lbNotifyPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="m_lbNotifyPreview.Text" xml:space="preserve">
+    <value>訊息文字</value>
+  </data>
+  <data name="&gt;&gt;m_lbNotifyPreview.Name" xml:space="preserve">
+    <value>m_lbNotifyPreview</value>
+  </data>
+  <data name="&gt;&gt;m_lbNotifyPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_lbNotifyPreview.Parent" xml:space="preserve">
+    <value>panelPreview</value>
+  </data>
+  <data name="&gt;&gt;m_lbNotifyPreview.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelPreview.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 18</value>
+  </data>
+  <data name="panelPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 183</value>
+  </data>
+  <data name="panelPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelPreview.Name" xml:space="preserve">
+    <value>panelPreview</value>
+  </data>
+  <data name="&gt;&gt;panelPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelPreview.Parent" xml:space="preserve">
+    <value>m_gbPreview</value>
+  </data>
+  <data name="&gt;&gt;panelPreview.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="m_gbPreview.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft JhengHei, 8.25pt</value>
+  </data>
+  <data name="m_gbPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 0</value>
+  </data>
+  <data name="m_gbPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 204</value>
+  </data>
+  <data name="m_gbPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="m_gbPreview.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="&gt;&gt;m_gbPreview.Name" xml:space="preserve">
+    <value>m_gbPreview</value>
+  </data>
+  <data name="&gt;&gt;m_gbPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_gbPreview.Parent" xml:space="preserve">
+    <value>m_pnSelf</value>
+  </data>
+  <data name="&gt;&gt;m_gbPreview.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="m_tbOpacity.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_tbOpacity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 214</value>
+  </data>
+  <data name="m_tbOpacity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 45</value>
+  </data>
+  <data name="m_tbOpacity.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;m_tbOpacity.Name" xml:space="preserve">
+    <value>m_tbOpacity</value>
+  </data>
+  <data name="&gt;&gt;m_tbOpacity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_tbOpacity.Parent" xml:space="preserve">
+    <value>m_pnSelf</value>
+  </data>
+  <data name="&gt;&gt;m_tbOpacity.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="m_pnSelf.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="m_pnSelf.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft JhengHei, 8.25pt</value>
+  </data>
+  <data name="m_pnSelf.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="m_pnSelf.Size" type="System.Drawing.Size, System.Drawing">
+    <value>542, 303</value>
+  </data>
+  <data name="m_pnSelf.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;m_pnSelf.Name" xml:space="preserve">
+    <value>m_pnSelf</value>
+  </data>
+  <data name="&gt;&gt;m_pnSelf.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_pnSelf.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;m_pnSelf.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="m_cdMoreColors.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>542, 303</value>
+  </data>
+  <data name="&gt;&gt;m_cdMoreColors.Name" xml:space="preserve">
+    <value>m_cdMoreColors</value>
+  </data>
+  <data name="&gt;&gt;m_cdMoreColors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColorDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>PanelSharedSettings</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

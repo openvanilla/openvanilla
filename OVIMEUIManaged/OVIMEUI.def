@@ -1,0 +1,148 @@
+LIBRARY	OVIMEUI
+EXPORTS
+;OVIME
+;	IMEUIRegisterClass
+;	IMEUIUnRegisterClass
+;	UIConstruct
+;	UIDispose
+;	UIPushInputMethod
+	
+	
+;OVDeskBand
+	DllGetClassObject   PRIVATE
+    DllCanUnloadNow     PRIVATE
+    DllRegisterServer   PRIVATE
+    DllUnregisterServer PRIVATE
+	
+	UIShowDeskBand
+;OVIMEUI
+;;status
+	UICreateStatusWindow
+	UIMoveStatusWindow
+	UIShowStatusWindow
+	UIHideStatusWindow
+	UIGetStatusPos
+	UIGetModuleChecked
+	UISetModuleChecked
+	UISetkpCount
+	UISetofCount
+	UISetimCount
+	UIModuleChange
+	UIModuleRotate
+	UIChangeHalfFull
+	UIChangeChiEng
+	UIChangeSimpifiedOrTraditional
+	UIChangeBoPoMoFoLayout
+	UISetStatusModStrCurrent
+	UISetStatusModStrMenuEach
+	UISetStatusModStrMenuAll
+	UIClearStatusMenuModString
+	UICurrentInputMethod
+	UIGetIsStatusDocked
+	UISetIsStatusDocked
+	_SetStatusSimpifiedOrTraditional
+	_CreateStatusPage
+	_ShowStatusPage
+	_MoveStatusPage
+	_HideStatusPage
+	_SetStatusChiEng
+	_SetStatusHalfFull
+	_SetStatusModString
+	_SetStatusMenuModString
+	_ClearStatusMenuModString	
+	_SetStatusAppHWnd
+	_GetStatusSelectedModuleIndex
+	_RotateStatusSelectedModule
+	
+	
+;;composition
+	UISetCursorPos
+	UISetMarkFrom
+	UISetMarkTo
+	UICreateCompWindow
+	UIMoveCompWindow
+	UIShowCompWindow
+	UIHideCompWindow
+	UISetCompStr
+	UISetCompCaretPosX
+	UIGetHeight
+	UIClearCompStr	
+	UIGetCaretPosX
+	_CreateCompPage
+	_ShowCompPage
+	_HideCompPage
+	_ClearCompPage
+	_MoveCompPage
+	_SetCompString
+	_SetCompCaretPosX
+	_GetHeight
+	_SetCompCaretPosX	
+	_SetCompMarkFrom
+	_SetCompMarkTo
+	_GetCaretPosX
+	_SetCompAppHWnd
+	
+	
+;;Candidate
+	UICreateCandWindow
+	UIMoveCandWindow
+	UIShowCandWindow
+	UIHideCandWindow
+	UISetCandStr	
+	UIExpandCandi
+	UISelectNextCandItem
+	UIGetCandSelectedItemKey
+	UIGetCandHeight
+	UIGetCandWidth
+	UISetCandiFont
+	UISetCandiColor
+	UISetCandiOpacity
+	_CreateCandiPage	
+	_CreateCandiPageWithHandle
+	_MoveCandiPage
+	_ShowCandiPage
+	_HideCandiPage	
+	_EndCandiPage					
+	_ClearCandiPage				
+	_SetCandiString	
+	_ExpandCandi
+	_SetCandiColor
+	_SetCandiFont
+	_SetCandiOpacity
+	
+;;Symbol
+	_CreateSymbolPage	
+	_CreateSymbolPageWithHandle
+	_MoveSymbolPage
+	_ShowSymbolPage
+	_HideSymbolPage	
+	_EndSymbolPage					
+	_ClearSymbolPage				
+	_SetSymbolString	
+	_ExpandSymbol
+
+;;Notify 
+	UICreateNotifyWindow
+	UIShowNotifyWindow
+	UIHideNotifyWindow	
+	UIMoveNotifyWindow
+	UISetNotifyStr
+	UIGetNotifyHeight
+	UIGetNotifyWidth	
+	UISetNotifyFont
+	UISetNotifyColor
+	UISetNotifyEnabled
+	UISetNotifyOpacity
+	_CreateNotifyPage
+	_CreateNotifyPageWithHandle
+	_MoveNotifyPage	
+	_ShowNotifyPage	
+	_HideNotifyPage	
+	_EndNotifyPage					
+	_ClearNotifyPage				
+	_SetNotifyString
+	_SetNotifyFont
+	_SetNotifyColor
+	_SetNotifyEnabled		
+	_SetNotifyOpacity
+
