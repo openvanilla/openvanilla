@@ -52,14 +52,16 @@ using namespace std;
 using namespace OV_Array;
 
 
-void OVIMArrayContext::clear(){
+void OVIMArrayContext::clear()
+{
     keyseq.clear();
     changeState(STATE_WAIT_KEY1);
 }
 
-void OVIMArrayContext::updateDisplay(OVBuffer* buf){
+void OVIMArrayContext::updateDisplay(OVBuffer* buf)
+{
     buf->clear();
-    if (keyseq.length()){   
+    if (keyseq.length()) {
         string str;
         keyseq.compose(str);
         buf->append(str.c_str());
@@ -67,58 +69,67 @@ void OVIMArrayContext::updateDisplay(OVBuffer* buf){
     buf->update();
 }
 
-int OVIMArrayContext::updateCandidate(OVCIN *tab,OVBuffer *buf, OVCandidate *candibar){
+int OVIMArrayContext::updateCandidate(OVCIN *tab,OVBuffer *buf, OVCandidate *candibar)
+{
     tab->getWordVectorByCharWithWildcardSupport(keyseq.getSeq(), candidateStringVector, '?', '*');
     string currentSelKey = tab->getSelKey();
-    if( candidateStringVector.size() == 0 )
-        clearCandidate(candibar);
-    else
+    if (candidateStringVector.size() == 0) {
+        clearCandidate(candibar);	
+	}
+    else {
         candi.prepare(&candidateStringVector,
                           const_cast<char*>(currentSelKey.c_str()), candibar);
+	}
     return 1;
 }
 
 int OVIMArrayContext::WaitKey1(OVKeyCode* key, OVBuffer* buf, 
-                               OVCandidate* candibar, OVService* srv){
-    if(keyseq.length() != 1)
+                               OVCandidate* candibar, OVService* srv)
+{
+    if (keyseq.length() != 1)
         return 0;
 
 	if (!keyseq.hasWildcardCharacter())
     	updateCandidate(tabs[SHORT_TAB], buf, candibar);
 
     char keycode = keyseq.getSeq()[0];
-    if( keycode == 't' )
+
+    if (keycode == 't')
         buf->clear()->append((char*)"\xe7\x9a\x84")->update();
-    if( isprint(keycode) && keyseq.valid(keycode) )
+
+    if (isprint(keycode) && keyseq.valid(keycode))
         changeState(STATE_WAIT_KEY2);
 
-    return 1;    
+    return 1;
 }
 
 int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf, 
-                               OVCandidate* candibar, OVService* srv){
-    if( keyseq.length()!=2 )
+                               OVCandidate* candibar, OVService* srv)
+{
+    if (keyseq.length() != 2)
         return 0;
 
     char keycode = keyseq.getSeq()[1];
-    if( isWSeq(keyseq.getSeq()[0], keyseq.getSeq()[1]) ){
+
+    if (isWSeq(keyseq.getSeq()[0], keyseq.getSeq()[1])) {
         updateCandidate(tabs[MAIN_TAB], buf, candibar);
         buf->clear()->append(candidateStringVector[0].c_str())->update();
         changeState(STATE_WAIT_CANDIDATE);
     }
-    else{
+    else {
 		if (!keyseq.hasWildcardCharacter())
         	updateCandidate(tabs[SHORT_TAB], buf, candibar);
 
-        if( isprint(keycode) && keyseq.valid(keycode) )
+        if (isprint(keycode) && keyseq.valid(keycode))
             changeState(STATE_WAIT_KEY3);
     }
     return 1;    
 }
 
 int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVBuffer* buf, 
-                               OVCandidate* candibar, OVService* srv){
-    if( keyseq.length() >= 3){
+                               OVCandidate* candibar, OVService* srv)
+{
+    if (keyseq.length() >= 3) {
 		if (!keyseq.hasWildcardCharacter())
         	updateCandidate(tabs[MAIN_TAB], buf, candibar);
     }
@@ -127,39 +138,42 @@ int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVBuffer* buf,
 
 
 int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVBuffer* buf, 
-                                    OVCandidate* candibar, OVService* srv){
+                                    OVCandidate* candibar, OVService* srv)
+{
     const char keycode = key->code();
-    if (keycode == ovkEsc || keycode == ovkBackspace){
+
+    if (keycode == ovkEsc || keycode == ovkBackspace) {
         clearAll(buf, candibar);
         changeState(STATE_WAIT_KEY1);
         return RET_DONE;
     }
 
     if (keycode == ovkDown || keycode == ovkRight ||
-        (!candi.onePage() && keycode==ovkSpace) ){
+        (!candi.onePage() && keycode == ovkSpace)) {
         candi.pageDown()->update(candibar);
         return RET_DONE;
     }
 
-    if (keycode == ovkUp || keycode == ovkLeft){
+    if (keycode == ovkUp || keycode == ovkLeft) {
         candi.pageUp()->update(candibar);
         return RET_DONE;
     }
 
     // enter == first candidate
     // space (when candidate list has only one page) == first candidate
-    char c=key->code();
-    bool notSelkey = 
-        tabs[MAIN_TAB]->getSelKey().find(key->code()) == string::npos;
-    bool defaultSelKey = c == ovkReturn || (candi.onePage() && c==ovkSpace);
+    char c = key->code();
+    bool notSelkey = tabs[MAIN_TAB]->getSelKey().find(keycode) == string::npos;
+
+    bool defaultSelKey = (keycode == ovkReturn || (candi.onePage() && keycode == ovkSpace));
     murmur("notSelkey: %d", notSelkey);
-    if ( defaultSelKey || notSelkey) 
-        c=candi.getSelKey()[0];
+    if (defaultSelKey || notSelkey) 
+        c = candi.getSelKey()[0];
 
     string output;
+
     if (candi.select(c, output)) {
         sendAndReset(output.c_str(), buf, candibar, srv);
-        if( notSelkey && !defaultSelKey )
+        if (notSelkey && !defaultSelKey)
             return RET_CONTINUE;
         return RET_DONE;
     }
@@ -168,28 +182,29 @@ int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVBuffer* buf,
 }
 
 
-void OVIMArrayContext::queryKeyName(const char *keys, std::string& outKeyNames){
+void OVIMArrayContext::queryKeyName(const char *keys, std::string& outKeyNames)
+{
     int len = strlen(keys);
-    for(int i=0;i<len;i++){
+    for (int i = 0; i < len; i++) {
         string inKey(keys, i, 1);
         vector<string> keyName;
-        if( tabs[MAIN_TAB]->getCharVectorByKey(inKey, keyName) > 0)
+        if (tabs[MAIN_TAB]->getCharVectorByKey(inKey, keyName) > 0)
             outKeyNames.append(keyName[0]);
     }
 }
 
 void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf, 
-                                    OVCandidate* candibar, OVService* srv){
+                                    OVCandidate* candibar, OVService* srv)
+{
     bool notifySP = false;
     
     // lookup special code
     if((parent->isAutoSP() || parent->isForceSP()) &&
-       tabs[SPECIAL_TAB]->getWordVectorByCharWithWildcardSupport(ch, specialCodeVector, '?', '*')>0)
-    {
+       tabs[SPECIAL_TAB]->getWordVectorByCharWithWildcardSupport(ch, specialCodeVector, '?', '*') > 0) {
         int splen = specialCodeVector[0].length();
         const char *spcode = specialCodeVector[0].c_str();
-        if( !(splen == keyseq.length() && 
-              equal(spcode, spcode+splen, keyseq.getSeq())) ){
+        if (!(splen == keyseq.length() && 
+              equal(spcode, spcode+splen, keyseq.getSeq()))) {
             char buf[16];
             string keynames;
             queryKeyName(specialCodeVector[0].c_str(), keynames);
@@ -201,15 +216,17 @@ void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf,
 
     bool committed = false;
 
-    if( isForceSPSeq() )
-        parent->setForceSP( !parent->isForceSP() );
-    else{
-        if( !(parent->isForceSP() && notifySP) ) {
+    if (isForceSPSeq()) {
+        parent->setForceSP(!parent->isForceSP());
+	}
+    else {
+        if (!(parent->isForceSP() && notifySP)) {
             buf->clear()->append(ch)->send();
             committed = true;
         }
-        else
+        else {
             srv->beep();
+		}
     }
     
     // clearAll(buf, candibar);
@@ -223,20 +240,23 @@ void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf,
     changeState(STATE_WAIT_KEY1);
 }
 
-void OVIMArrayContext::clearAll(OVBuffer* buf, OVCandidate* candi_bar){
+void OVIMArrayContext::clearAll(OVBuffer* buf, OVCandidate* candi_bar)
+{
     clearCandidate(candi_bar);
     buf->clear()->update();
     keyseq.clear();
 }
 
-void OVIMArrayContext::clearCandidate(OVCandidate *candi_bar){           
+void OVIMArrayContext::clearCandidate(OVCandidate *candi_bar)
+{
     candi.cancel();
     candi_bar->hide()->clear();
 }   
 
-int OVIMArrayContext::selectCandidate(int num, string& out){
-   char c=candi.getSelKey()[num];
-   return candi.select(c, out);
+int OVIMArrayContext::selectCandidate(int num, string& out)
+{
+	char c = candi.getSelKey()[num];
+	return candi.select(c, out);
 }
 
 int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf, 
@@ -245,14 +265,15 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
     int ret = 0;
     const char keycode = key->code();
     const bool validkey = keyseq.valid(keycode) || 
-      ( keyseq.getSeq()[0]=='w' && isdigit(keycode) );
+      ( keyseq.getSeq()[0] == 'w' && isdigit(keycode) );
 
     murmur("OVIMArray state: %d", state);
-    if (!keyseq.length() && !isprint(keycode)) return 0;
-    if (!keyseq.length() && key->isFunctionKey()) return 0;
+    if (!keyseq.length() && !isprint(keycode))
+		return 0;
+    if (!keyseq.length() && key->isFunctionKey())
+		return 0;
     
-    if (isprint(key->code()) && key->isCapslock() && keyseq.length()==0)
-    {
+    if (isprint(key->code()) && key->isCapslock() && keyseq.length() == 0) {
         char cbuf[2];
         if (key->isShift())
             sprintf(cbuf, "%c", toupper(key->code()));
@@ -263,7 +284,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         return 1;
     }
 
-    if( key->isShift() && isprint(keycode) && keyseq.length()==0 && keycode != '*' && keycode != '?'){
+    if (key->isShift() && isprint(keycode) && keyseq.length() == 0 && keycode != '*' && keycode != '?') {
         char k[2] = { tolower(keycode), 0 };
         buf->append(k)->send();
         return 1;
@@ -290,41 +311,43 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
 
     if( state == STATE_WAIT_CANDIDATE ){
         int r = WaitCandidate(key, buf, candi_bar, srv);
-        if( r != RET_CONTINUE ) return r;
+        if (r != RET_CONTINUE) 
+			return r;
     }
 
-    if( candi.onDuty() && isdigit(keycode) && 
-        !(keyseq.length() == 1 && isWSeq(keyseq.getSeq()[0],keycode)) ){
+    if (candi.onDuty() && isdigit(keycode) && 
+        !(keyseq.length() == 1 && isWSeq(keyseq.getSeq()[0],keycode))) {
         string c;
-        if( candi.select(keycode, c) ){
-            if( c != "?"  ){
+        if (candi.select(keycode, c)){
+            if (c != "?" ) {
                 sendAndReset(c.c_str(), buf, candi_bar, srv);
             }
-            else{
+            else {
                 srv->beep();
-                if( state <= STATE_WAIT_KEY3 ) //dirty hack to set duty=1
+                if (state <= STATE_WAIT_KEY3 ) //dirty hack to set duty=1
                     updateCandidate(tabs[SHORT_TAB], buf, candi_bar);
             }
         }
         return 1;
     }
     
-    if (keyseq.length() && keycode == ovkSpace){
+    if (keyseq.length() && keycode == ovkSpace) {
         tabs[MAIN_TAB]->getWordVectorByCharWithWildcardSupport(keyseq.getSeq(), candidateStringVector, '?', '*');
         string c;
-        if(candidateStringVector.size() == 1){
-            if(selectCandidate(0, c))
+        if (candidateStringVector.size() == 1) {
+            if (selectCandidate(0, c))
                 sendAndReset(c.c_str(), buf, candi_bar, srv);
         }
-        else if(candidateStringVector.size() > 1){
+        else if (candidateStringVector.size() > 1) {
             updateCandidate(tabs[MAIN_TAB], buf, candi_bar);
-            if(selectCandidate(0, c))
+            if (selectCandidate(0, c))
                 buf->clear()->append(c.c_str())->update();
             changeState(STATE_WAIT_CANDIDATE);
         }
         return 1;
     }
-    if( isprint(keycode) && validkey ){
+
+    if (isprint(keycode) && validkey) {
         if( keyseq.length() >= 5 ||
             (keyseq.length() == 4 && keycode != 'i') )
             return 1;
@@ -333,7 +356,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
         updateDisplay(buf);
         ret = 1;
     }
-    else if (key->code() == ovkDelete || key->code() == ovkBackspace){   
+    else if (key->code() == ovkDelete || key->code() == ovkBackspace) {
         keyseq.remove();
         updateDisplay(buf);
         if(keyseq.length() == 0 && candi.onDuty())
@@ -363,34 +386,34 @@ void OVIMArrayContext::dispatchStateHandler(OVKeyCode* key, OVBuffer* buf,
     }
 }
 
-void OVIMArrayContext::changeBackState(STATE s){
+void OVIMArrayContext::changeBackState(STATE s)
+{
     switch(s){
         case STATE_WAIT_CANDIDATE:
         case STATE_WAIT_KEY2: 
             changeState(STATE_WAIT_KEY1); 
             break;
         case STATE_WAIT_KEY3: 
-            if( keyseq.length() == 2)
+            if (keyseq.length() == 2)
                 changeState(STATE_WAIT_KEY2); 
-            else if( keyseq.length() == 1)
+            else if (keyseq.length() == 1)
                 changeState(STATE_WAIT_KEY1);
             break;
         default: break;
     }
 }
 
-void OVIMArrayContext::changeState(STATE s){    
+void OVIMArrayContext::changeState(STATE s)
+{
     murmur("OVIMArray change state: %d -> %d", state, s);
     state = s;  
 }
 
-int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path) {
+int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path)
+{
     char arraypath[PATH_MAX];
     char buf[PATH_MAX];
     char *cinfiles[] = { 
-        /* "%sOVIMArray%sarray30.cin",  
-        "%sOVIMArray%sarray-shortcode.cin",
-        "%sOVIMArray%sarray-special.cin" */
         "%sarray30.cin",  
         "%sarray-shortcode.cin",
         "%sarray-special.cin"
@@ -398,19 +421,21 @@ int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path) {
 
 #ifdef OSX_INCLUDE
     CFBundleRef bundle = CFBundleGetBundleWithIdentifier(CFSTR("org.openvanilla.module.ovimarray"));
-    if (!bundle) return 0;
+    if (!bundle)
+		return 0;
 
     CFURLRef url = CFBundleCopyResourcesDirectoryURL(bundle);
-    if (!url) return 0;
+    if (!url) 
+		return 0;
 
-    CFURLGetFileSystemRepresentation(url, TRUE, (UInt8*)buf, sizeof(buf)-1);
+    CFURLGetFileSystemRepresentation(url, TRUE, (UInt8*)buf, sizeof(buf) - 1);
     sprintf(arraypath, "%s/", buf);
 #else
     sprintf(arraypath, "%sOVIMArray%s", path, s->pathSeparator());
 #endif
     printf("OVIMArray: data dir %s", arraypath);
 
-    for(int i=0;i<3;i++){
+    for (int i = 0; i < 3 ; i++) {
         sprintf(buf, cinfiles[i], arraypath);
         murmur("OVIMArray: open cin %s", buf);
         tabs[i] = new OVCIN(buf); 
@@ -423,8 +448,11 @@ int OVIMArray::updateConfig(OVDictionary *conf){
     const char *AutoSP = "\xE7\x89\xB9\xE5\x88\xA5\xE7\xA2\xBC\xE6\x8F\x90\xE7\xA4\xBA"; // 特別碼提示
     const char *ForceSP = "\xE5\xBF\xAB\xE6\x89\x93\xE6\xA8\xA1\xE5\xBC\x8F"; // 快打模式
 
-    if( !conf->keyExist(AutoSP) ) conf->setInteger(AutoSP, 1);
-    if( !conf->keyExist(ForceSP) ) conf->setInteger(ForceSP, 0);
+    if (!conf->keyExist(AutoSP))
+		conf->setInteger(AutoSP, 1);
+		
+    if (!conf->keyExist(ForceSP))
+		conf->setInteger(ForceSP, 0);
 
     cfgAutoSP = conf->getInteger(AutoSP);
     cfgForceSP = conf->getInteger(ForceSP);

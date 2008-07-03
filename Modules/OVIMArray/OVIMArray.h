@@ -83,7 +83,8 @@ private:
     //OVService* _srv;
 public:
     OVIMArrayContext(OVIMArray* p, OVCIN** t)
-        : parent(p), tabs(t), keyseq(t[OV_Array::MAIN_TAB]) {
+        : parent(p), tabs(t), keyseq(t[OV_Array::MAIN_TAB])
+	{
         state = OV_Array::STATE_WAIT_KEY1;
     }
     virtual int keyEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
@@ -102,8 +103,9 @@ private:
     void clearAll(OVBuffer* buf, OVCandidate* candi_bar);
     void clearCandidate(OVCandidate *candi_bar);
     int selectCandidate(int num, string& out);
-    bool isWSeq(char a, char b) const {  return a=='w' && isdigit(b);    }
-    bool isForceSPSeq() {
+    bool isWSeq(char a, char b) const {  return a == 'w' && isdigit(b);    }
+    bool isForceSPSeq()
+	{
         return keyseq.length() == 4 && !memcmp(keyseq.getSeq(),",,sp",4);
     }
     void queryKeyName(const char *keys, std::string& outKeyNames);
@@ -119,25 +121,28 @@ private:
 public:
     virtual int initialize(OVDictionary *, OVService*, const char *mp);
     virtual const char* identifier() { return "OVIMArray"; }
-    virtual OVInputMethodContext *newContext() { 
+    virtual OVInputMethodContext *newContext()
+	{ 
         return new OVIMArrayContext(this,tabs); 
     }
     int updateConfig(OVDictionary *conf);
-    virtual const char *localizedName(const char *locale){  
+    virtual const char *localizedName(const char *locale)
+	{  
         if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN")){
-            strcpy(cname,"\xE8\xA1\x8C\xE5\x88\x97 (patched for WoW)"); //¦æ¦C
+            strcpy(cname,"\xE8\xA1\x8C\xE5\x88\x97"); //¦æ¦C
             //if( isForceSP() )   strcat(cname, "(§Ö)");
             return cname;
         }
-        else{
-            strcpy(ename,"Array (patched for WoW)");
+        else {
+            strcpy(ename,"Array");
             //if( isForceSP() )   strcat(ename, "(Q)");
             return ename;
         }
     }
-    virtual int isAutoSP() const    {   return cfgAutoSP;   }
-    virtual int isForceSP() const   {   return cfgForceSP;   }
-    virtual void setForceSP(bool value) { 
+    virtual int isAutoSP() const { return cfgAutoSP; }
+    virtual int isForceSP() const { return cfgForceSP; }
+    virtual void setForceSP(bool value)
+	{ 
         cfgForceSP = value; 
     }
 };
