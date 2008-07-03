@@ -16,26 +16,34 @@
 const int ebMaxKeySeq=10;
 class KeySeq
 {
-public:
-    KeySeq() { len=0; buf[0]=0; }
-    void add(char c)
-{
-		if (len == ebMaxKeySeq) return;
-		buf[len++]=c;
-//		buf[len]=0;
-}
-void remove()
-{
-	if (!len) return;
-	buf[--len]=0;
-}
-void clear() { len=0; buf[0]=0; }
-void lastisvowel() {last=VOWEL;}
-void lastisconsonant() {last=CONSONAT;}
-void lastisother() {last=OTHER;}
-char buf[ebMaxKeySeq];
-int len;
-int last;
+	public:
+		KeySeq() { len=0; buf[0]=0; }
+		void add(char c) {
+			if (len == ebMaxKeySeq)
+				return;
+			buf[len++]=c;
+		}
+		void remove() {
+			if (!len)
+				return;
+			buf[--len]=0;
+		}
+		void clear() {
+			len = 0;
+			buf[0] = 0;
+		}
+		void lastisvowel() {
+			last = VOWEL;
+		}
+		void lastisconsonant() {
+			last = CONSONAT;
+		}
+		void lastisother() {
+			last = OTHER;
+		}
+		char buf[ebMaxKeySeq];
+		int len;
+		int last;
 };
 
 #define SYMBOL_NUM 11
@@ -157,3 +165,61 @@ unsigned short WylieConsonantChars[37] =
 	0x0F5E,0x0F5F,0x0F60,0x0F61,0x0F62,0x0F63,0x0F64,0x0F66,0x0F67,0x0F68,
 	0x0F4A,0x0F4B,0x0F4C,0x0F4E,0x0F57,0x0F55,0x0F56
 };
+
+/*!
+	@function isSymbolKey
+	@abstract Check if a keycode is mapping to a Tibetan punctuation
+	or a symbol.
+	@param key The keycode
+	@return If the keycode is not maapping to a Tibetan punctuation
+	or a symbol, it retunes -1. Otherwise return the position of the
+	punctuation or symbol in the array defined in OVIMTibetan.h.
+*/
+short isSymbolKey(int key);
+/*!
+	@function isConsonantKey
+	@abstract Check if a keycode is mapping to a Tibetan consonant.
+	@param key The keycode
+	@return If the keycode is not maapping to a Tibetan consonant,
+	it retunes -1. Otherwise return the position of the letter
+	in the array defined in OVIMTibetan.h.
+*/
+short isConsonantKey(int key);
+/*!
+	@function isVowelKey
+	@abstract Check if a keycode is mapping to a Tibetan vowel.
+	@param key The keycode
+	@return If the keycode is not maapping to a Tibetan vowel,
+	it retunes -1. Otherwise return the position of the letter
+	in the array defined in OVIMTibetan.h.
+*/
+short isVowelKey(int key);
+/*!
+	@function isFinalAddKey
+	@abstract Check if a keycode is mapping to "m" or "n".
+	@param key The keycode
+	@return If the keycode is not maapping to a "m" or "n",
+	it retunes -1. Otherwise return the position of letter
+	in the array defined in OVIMTibetan.h.
+*/
+short isFinalAddKey(int key);
+/*!
+	@function isHtransform
+	@abstract Check if a keycode is mapping to a "H-transform"
+	key.
+	
+	@discussion
+	There are five special codes defined in the
+	Unicode standard. These fived codes are not Tibetan letters
+	but glyphs composed by two Tibetan characters, such as
+	Ga and Ta compose Gha.
+	
+	I do not know if there is a terminology to call this behaviour.
+	I call it "H-transform" for this time.
+	
+	@param key The keycode
+	@return If the keycode is not maapping to a "H-transform",
+	it retunes -1. Otherwise return the position of letter
+	in the array defined in OVIMTibetan.h.
+*/
+short isHtransform(int key);
