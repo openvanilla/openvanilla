@@ -37,27 +37,33 @@
 	#include "OVLibrary.h"
 	#include "OVUtility.h"
 	#define strcasecmp stricmp
+	#define snprintf sprintf_s	
 #endif
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
 
 const size_t ebMaxKeySeq=3;
-class KeySeq {
-public:
-    KeySeq() {
-        reset();
-    }
-    void set(int i) {
-		x = i;
-    }
-    void reset() {
-        x = -1;
-    }
-	int value() {
-		return x;
-	}
-	int x;	
+class KeySeq 
+{
+	public:
+	    KeySeq()
+		{
+	        reset();
+	    }
+	    void set(int i)
+		{
+			x = i;
+	    }
+	    void reset()
+		{
+	        x = -1;
+	    }
+		int value()
+		{
+			return x;
+		}
+		int x;	
 };
 
 // cx, gx, hx, jx, sx and ux
@@ -71,8 +77,7 @@ unsigned short XtransChar[XTRANS] = {0x0109,0x011D,0x0125,0x0135,0x015D,0x016D,
 short isXtrans(int key)
 {
 	int i;
-	for(i=0; i< XTRANS; i++)
-	{
+	for (i = 0; i < XTRANS; i++) {
 		if(key == XtransKey[i])
 			return i;
 	}
@@ -82,49 +87,54 @@ short isXtrans(int key)
 class OVIMEsperantoContext : public OVInputMethodContext
 {
 public:
-    virtual void start(OVBuffer*, OVCandidate*, OVService*) {
+    virtual void start(OVBuffer*, OVCandidate*, OVService*)
+	{
         clear();
     }
-    virtual void clear() {
+    virtual void clear()
+	{
 		keyseq.reset();
     }	
-    virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* srv) {
+    virtual int keyEvent(OVKeyCode* k, OVBuffer* b, OVCandidate* i, OVService* srv)
+	{
 		if (k->isOpt() || k->isCommand() || k->isCtrl()){return 0;}
-		if (k->code() == ovkUp || k->code() == ovkDown ||k->code() == ovkLeft ||k->code() == ovkRight || k->code()==ovkReturn  ) 
-		{
-            if(keyseq.value() > -1) {
+		if (k->code() == ovkUp || k->code() == ovkDown || k->code() == ovkLeft || k->code() == ovkRight || k->code()==ovkReturn) {
+            if (keyseq.value() > -1) {
                 b->send()->clear();
             }
 			keyseq.reset();
-            return 0;   // key processed
+            return 0;
 		}
 		if (k->code() == ovkDelete || k->code() == ovkBackspace) {
-			if(keyseq.value() > -1) {
+			if (keyseq.value() > -1) {
 				b->clear()->update();
 				keyseq.reset();
 				return 1;
 			}
 			return 0;
 		}
+		
         char s[3];
 		int x = isXtrans(k->code());
-		sprintf(s, "%c", k->code());
+		snprintf(s, 3, "%c", k->code());
 		
-		if(keyseq.value() > -1){
-			if(k->code() == 'x' || k->code() == 'X') {
+		if (keyseq.value() > -1) {
+			if (k->code() == 'x' || k->code() == 'X') {
 				const char *u8;				
 				unsigned short y = XtransChar[keyseq.value()];
-				u8=srv->UTF16ToUTF8(&y, 1);
+				u8 = srv->UTF16ToUTF8(&y, 1);
 				b->clear()->append(u8)->send();
-			} else {
+			} 
+			else {
 				b->append(s)->send();
 			}
 			keyseq.reset();
 		}
-		else if(x > -1) {
+		else if (x > -1) {
 			keyseq.set(x);
 			b->append(s)->update();
-		} else {
+		}
+		else {
 			b->append(s)->send();
 		}
         return 1;
@@ -138,13 +148,18 @@ class OVIMEsperanto : public OVInputMethod
 public:
     virtual const char* identifier() { return "OVIMEsperanto"; }
     virtual OVInputMethodContext *newContext() { return new OVIMEsperantoContext; }
-    virtual int initialize(OVDictionary *, OVService*, const char *mp) {
+    virtual int initialize(OVDictionary *, OVService*, const char *mp)
+	{
         return 1;
     }
-    virtual const char* localizedName(const char *locale) {
-	if (!strcasecmp(locale, "ja")) return "\xE3\x82\xA8\xE3\x82\xB9\xE3\x83\x9A\xE3\x83\xA9\xE3\x83\xB3\xE3\x83\x88";
-        if (!strcasecmp(locale, "zh_TW")) return "\xE4\xB8\x96\xE7\x95\x8C\xE8\xAA\x9E";
-        if (!strcasecmp(locale, "zh_CN")) return "\xE4\xB8\x96\xE7\x95\x8C\xE8\xAF\xAD";
+    virtual const char* localizedName(const char *locale)
+	{
+		if (!strcasecmp(locale, "ja"))
+			return "\xE3\x82\xA8\xE3\x82\xB9\xE3\x83\x9A\xE3\x83\xA9\xE3\x83\xB3\xE3\x83\x88";
+        if (!strcasecmp(locale, "zh_TW"))
+			return "\xE4\xB8\x96\xE7\x95\x8C\xE8\xAA\x9E";
+        if (!strcasecmp(locale, "zh_CN"))
+			return "\xE4\xB8\x96\xE7\x95\x8C\xE8\xAF\xAD";
         return "Esperanto";
     }
 };
