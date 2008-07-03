@@ -27,13 +27,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMDayiSQLite", "..\..\Mod
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVKPPhraseTools", "..\..\Modules\OVKPPhraseTools\OVKPPhraseTools.vcproj", "{4049BA5E-E06B-48B2-A45C-3B4129DB1E4E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMGenericSQLite", "..\..\Modules\OVIMGenericSQLite\OVIMGenericSQLite.vcproj", "{030D6D55-545E-43DD-9DF5-E99A06EFFD38}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIMGenericSQ", "..\..\Modules\OVIMGenericSQ\OVIMGenericSQ.vcproj", "{63C6BFAB-6A98-4C30-ABFE-86E4D7756C0C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sqlite3_5_9", "..\..\sqlite3_5_9\sqlite3_5_9.vcproj", "{ECEBE891-D8AC-47ED-A9FA-5A62C385012C}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "OpenVanilla", "OpenVanilla\OpenVanilla.vdproj", "{1713AB90-3244-4F96-8F72-03D294448B74}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OVIME", "OVIME\OVIME.VC8.vcproj", "{684B2F15-E8EE-4032-B4A3-89732F32C12D}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -173,16 +169,6 @@ Global
 		{4049BA5E-E06B-48B2-A45C-3B4129DB1E4E}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{4049BA5E-E06B-48B2-A45C-3B4129DB1E4E}.Release|Win32.ActiveCfg = Release|Win32
 		{4049BA5E-E06B-48B2-A45C-3B4129DB1E4E}.Release|Win32.Build.0 = Release|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Debug|Win32.ActiveCfg = Debug|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Debug|Win32.Build.0 = Debug|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Release|Any CPU.ActiveCfg = Release|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Release|Win32.ActiveCfg = Release|Win32
-		{030D6D55-545E-43DD-9DF5-E99A06EFFD38}.Release|Win32.Build.0 = Release|Win32
 		{63C6BFAB-6A98-4C30-ABFE-86E4D7756C0C}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{63C6BFAB-6A98-4C30-ABFE-86E4D7756C0C}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{63C6BFAB-6A98-4C30-ABFE-86E4D7756C0C}.Debug|Mixed Platforms.Build.0 = Debug|Win32
@@ -203,12 +189,6 @@ Global
 		{ECEBE891-D8AC-47ED-A9FA-5A62C385012C}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{ECEBE891-D8AC-47ED-A9FA-5A62C385012C}.Release|Win32.ActiveCfg = Release|Win32
 		{ECEBE891-D8AC-47ED-A9FA-5A62C385012C}.Release|Win32.Build.0 = Release|Win32
-		{1713AB90-3244-4F96-8F72-03D294448B74}.Debug|Any CPU.ActiveCfg = Debug
-		{1713AB90-3244-4F96-8F72-03D294448B74}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{1713AB90-3244-4F96-8F72-03D294448B74}.Debug|Win32.ActiveCfg = Debug
-		{1713AB90-3244-4F96-8F72-03D294448B74}.Release|Any CPU.ActiveCfg = Release
-		{1713AB90-3244-4F96-8F72-03D294448B74}.Release|Mixed Platforms.ActiveCfg = Release
-		{1713AB90-3244-4F96-8F72-03D294448B74}.Release|Win32.ActiveCfg = Release
 		{684B2F15-E8EE-4032-B4A3-89732F32C12D}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{684B2F15-E8EE-4032-B4A3-89732F32C12D}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{684B2F15-E8EE-4032-B4A3-89732F32C12D}.Debug|Mixed Platforms.Build.0 = Debug|Win32
