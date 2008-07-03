@@ -35,7 +35,7 @@
 
 using namespace std;
 
-OVCINList *cinlist=NULL;
+OVCINList *cinlist = NULL;
 
 extern "C" unsigned int OVGetLibraryVersion() {
     return OV_VERSION;
@@ -47,23 +47,24 @@ extern "C" int OVInitializeLibrary(OVService *s, const char *libpath) {
         return false;
     }
 
-    const char *pathsep=s->pathSeparator();
+    const char *pathsep = s->pathSeparator();
         
     cinlist = new OVCINList(pathsep);
-    if (!cinlist) return false;
+    if (!cinlist)
+		return false;
 
     // will be something like this on OS X:
     //     ~/Library/OpenVanilla/version/UserSpace/OVIMGeneric/
-    string userpath=s->userSpacePath("OVIMGeneric");
+    string userpath = s->userSpacePath("OVIMGeneric");
 
     // will be something like this on OS X:
     //     /Library/OpenVanilla/version/Modules/OVIMGeneric/
-    string datapath=string(libpath) + string(pathsep) + string("OVIMGeneric");
+    string datapath = string(libpath) + string(pathsep) + string("OVIMGeneric");
         
     murmur("OVIMGeneric initializing");
    
     Watch watch;
-    int loaded=0;
+    int loaded = 0;
 
     watch.start(); 
     loaded += cinlist->load(userpath.c_str(), ".cin");
@@ -87,30 +88,35 @@ extern "C" int OVInitializeLibrary(OVService *s, const char *libpath) {
     return true;
 }
 extern "C" OVModule *OVGetModuleFromLibrary(int x) {
-    if ((size_t)x >= cinlist->count()) return NULL;
+    if ((size_t)x >= cinlist->count())
+		return NULL;
        
     return new OVIMGeneric(cinlist->cinInfo((size_t)x));
 }
 
 GenericKeySequence::GenericKeySequence(OVCIN* cintab) {
-    cinTable=cintab;
+    cinTable = cintab;
 }
     
 bool GenericKeySequence::valid(char c) {
 	string inKey;
 	inKey.push_back(c);
-    if (!cinTable->isValidKey(inKey)) return false;
+	
+    if (!cinTable->isValidKey(inKey))
+		return false;
+		
     return true;
 }
     
 bool GenericKeySequence::add(char c) {
-    if (valid(c) == 0) return false;
+    if (valid(c) == 0) 
+		return false;
     return OVKeySequenceSimple::add(c);
 }
     
 string *GenericKeySequence::compose(string *s)
 {
-    for (int i=0; i<len; i++)
+    for (int i = 0; i < len; i++)
     {
 		string inKey;
 		inKey.push_back(seq[i]);
@@ -136,8 +142,10 @@ const char* OVIMGeneric::identifier()
 
 const char* OVIMGeneric::localizedName(const char* locale)
 {
-    if (!strcasecmp(locale, "zh_TW")) return cininfo.tcname.c_str();
-    if (!strcasecmp(locale, "zh_CN")) return cininfo.scname.c_str();
+    if (!strcasecmp(locale, "zh_TW"))
+		return cininfo.tcname.c_str();
+    if (!strcasecmp(locale, "zh_CN"))
+		return cininfo.scname.c_str();
     return cininfo.ename.c_str();
 }
 
@@ -146,8 +154,8 @@ int OVIMGeneric::initialize(OVDictionary* global, OVService* srv, const char*)
     Watch watch;
     watch.start();
     if (!cintab) {
-        cintab=new OVCIN(cininfo.longfilename.c_str());
-     }
+        cintab = new OVCIN(cininfo.longfilename.c_str());
+	}
     watch.stop();
 
     murmur("OVIMGeneric: initializing %s in %1.3f sec",
@@ -187,39 +195,37 @@ void OVGenericContext::updateDisplay(OVBuffer *buf)
 {
     buf->clear();
     // murmur("UpdateDisplay");
-    if (keyseq.length())
-    {
-        string *ms= new string;
+    if (keyseq.length()) {
+        string *ms = new string;
         keyseq.compose(ms);
         buf->append(ms->c_str());
         delete ms;
     }
+
     buf->update();
 }
 
 void OVGenericContext::clear() {
     keyseq.clear();
-    autocomposing=false;
+    autocomposing = false;
     candi.cancel();
 }
 
-int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, 
-    OVService *srv)
-{
-    if (candi.onDuty())
-    {
-        if (!autocomposing) return candidateEvent(key, buf, textbar, srv);
+int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textbar, OVService *srv) {
+    if (candi.onDuty()) {
+        if (!autocomposing)
+			return candidateEvent(key, buf, textbar, srv);
 
 		if (key->code() == ovkDown ||
             key->code() == ovkLeft ||
             key->code() == ovkUp ||
             key->code() == ovkRight ||
-			(!candi.onePage() && key->code()==ovkSpace))
-			return candidateEvent(key, buf, textbar, srv);
+			(!candi.onePage() && !parent->isShiftSelKey() && key->code()==ovkSpace)) {
+			return candidateEvent(key, buf, textbar, srv);				
+		}
         
 		string output;
-        if (candi.select(key->code(), output))
-        {
+        if (candi.select(key->code(), output)) {
             buf->clear()->append(output.c_str())->update()->send();
             keyseq.clear();
             cancelAutoCompose(textbar);
@@ -227,57 +233,54 @@ int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textb
         }
     }
 
-    if (!keyseq.length() && !isprint(key->code())) return 0;
+    if (!keyseq.length() && !isprint(key->code()))
+		return 0;
 
-    if (key->code()==ovkEsc)
-    {
+    if (key->code() == ovkEsc) {
         cancelAutoCompose(textbar);
         buf->clear()->update();
         keyseq.clear();
         return 1;
     }
 
-    if (key->code() == ovkDelete || key->code() == ovkBackspace)
-    {
+    if (key->code() == ovkDelete || key->code() == ovkBackspace) {
         keyseq.remove();
         updateDisplay(buf);
-        if (!keyseq.length() && autocomposing) cancelAutoCompose(textbar);
+        if (!keyseq.length() && autocomposing) 
+			cancelAutoCompose(textbar);
         
         // if autocomposing is on
-        if (keyseq.length() && parent->isAutoCompose())
-        {
-			if (cintab->getWordVectorByCharWithWildcardSupport(keyseq.getSeq(), candidateStringVector, parent->matchOneChar(), parent->matchZeroOrMoreChar()))
-            {
+        if (keyseq.length() && parent->isAutoCompose()) {
+			if (cintab->getWordVectorByCharWithWildcardSupport(keyseq.getSeq(), candidateStringVector, parent->matchOneChar(), parent->matchZeroOrMoreChar())) {
                 autocomposing=true;
                 compose(buf, textbar, srv);
             }
-            else if (candi.onDuty()) cancelAutoCompose(textbar);
+            else if (candi.onDuty()) {
+				cancelAutoCompose(textbar);		
+			}
         }
 
         return 1;
     }
 
-    if (keyseq.length() && key->code()==ovkSpace)
-    {
+    if (keyseq.length() && key->code()==ovkSpace) {
         // there the candiate window has only one page, space key
         // will send out the first candidate
-        if (autocomposing && candi.onDuty())
-        {
+        if (autocomposing && candi.onDuty()) {
             keyseq.clear();
-            autocomposing=false;
+            autocomposing = false;
             cancelAutoCompose(textbar);
             return candidateEvent(key, buf, textbar, srv);
         }
 
-        autocomposing=false;        
+        autocomposing = false;        
         return compose(buf, textbar, srv);
     }
     
     // we send back any CTRL/OPT/CMD key combination 
     // <comment author='lukhnos'>In OV 0.7 this part will be processed by
     // pre-IM key filters</comment>
-    if (key->isOpt() || key->isCommand() || key->isCtrl())
-    {
+    if (key->isOpt() || key->isCommand() || key->isCtrl()) {
         if (!buf->isEmpty()) {
             cancelAutoCompose(textbar);
             buf->clear()->update();
@@ -289,10 +292,8 @@ int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textb
     
     // shift and capslock processing
 	// <comment author='b6s'>Shift processing is disabled.</comment>
-    if (isprint(key->code()) && (key->isCapslock() /*|| key->isShift()*/))
-    {
-        if (key->isCapslock())
-        {
+    if (isprint(key->code()) && (key->isCapslock() /*|| key->isShift()*/)) {
+        if (key->isCapslock()) {
             char cbuf[2];
             if (key->isShift())
                 sprintf(cbuf, "%c", toupper(key->code()));
@@ -313,8 +314,7 @@ int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textb
     {
     	if (keyseq.length() > 0 &&
     		// prevent to the exception of parent->maxSeqLen() == 0
-    		keyseq.length() == parent->maxSeqLen())
-    	{
+    		keyseq.length() == parent->maxSeqLen()) {
             updateDisplay(buf);
 			srv->notify("\xE6\x8C\x89\xE9\x8D\xB5\xE6\x9C\x89\xE8\xAA\xA4");
             if (parent->isBeep())
@@ -325,31 +325,30 @@ int OVGenericContext::keyEvent(OVKeyCode *key, OVBuffer *buf, OVCandidate *textb
         keyseq.add(key->code());
 		// murmur("add %d", key->code());
         if (keyseq.length() == parent->maxSeqLen() &&
-        parent->isHitMaxAndCompose())
-        {
-            autocomposing=false;
+        	parent->isHitMaxAndCompose()) {
+            autocomposing = false;
             cancelAutoCompose(textbar);
             return compose(buf, textbar, srv);
         }
 		
         updateDisplay(buf);
-        if (cintab->isEndKey(static_cast<char>(key->code())))
-        {
+
+        if (cintab->isEndKey(static_cast<char>(key->code()))) {
             autocomposing=false;
             cancelAutoCompose(textbar);
             return compose(buf, textbar, srv);
         }
         
         // if autocomposing is on
-        if (parent->isAutoCompose())
-        {
+        if (parent->isAutoCompose()) {
             if (cintab->getWordVectorByChar(keyseq.getSeq(),
-            candidateStringVector))
-            {
-                autocomposing=1;
+	            candidateStringVector)) {
+                autocomposing = 1;
                 compose(buf, textbar, srv);
             }
-            else if (candi.onDuty()) cancelAutoCompose(textbar);
+            else if (candi.onDuty()) {
+				cancelAutoCompose(textbar);
+			}
         }
 		        
         return 1;
@@ -387,23 +386,20 @@ int OVGenericContext::compose(OVBuffer *buf, OVCandidate *textbar, OVService *sr
 	size_t size =
 		cintab->getWordVectorByCharWithWildcardSupport(keyseq.getSeq(), candidateStringVector, parent->matchOneChar(), parent->matchZeroOrMoreChar());
 
-    if (size == 0)
-    {
+    if (size == 0) {
 		srv->notify("\xE6\x8C\x89\xE9\x8D\xB5\xE6\x9C\x89\xE8\xAA\xA4");
         if (parent->isBeep())
 			srv->beep();
         return 1;
     }
 
-    if (size ==1 && !autocomposing)
-    {
+    if (size == 1 && !autocomposing) {
         buf->clear()->append(candidateStringVector[0].c_str())->update()->send();
         keyseq.clear();
         return 1;
     }
 
-    if (!autocomposing)
-    {    
+    if (!autocomposing) {   
         buf->clear()->append(candidateStringVector[0].c_str())->update();
         keyseq.clear();
     }
@@ -421,8 +417,7 @@ int OVGenericContext::compose(OVBuffer *buf, OVCandidate *textbar, OVService *sr
 int OVGenericContext::candidateEvent(OVKeyCode *key, OVBuffer *buf, 
     OVCandidate *textbar, OVService *srv)
 {
-    if (key->code() == ovkEsc || key->code() == ovkBackspace)
-    {
+    if (key->code() == ovkEsc || key->code() == ovkBackspace) {
         textbar->hide()->clear();
         candi.cancel();
         buf->clear()->update();
@@ -430,21 +425,19 @@ int OVGenericContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
     }
 
     if (key->code() == ovkDown || key->code() == ovkRight ||
-        (!candi.onePage() && key->code()==ovkSpace))
-    {
+        (!candi.onePage() && key->code()==ovkSpace)) {
         candi.pageDown()->update(textbar);
         return 1;
     }
 
-    if (key->code() == ovkUp || key->code() == ovkLeft)
-    {
+    if (key->code() == ovkUp || key->code() == ovkLeft) {
         candi.pageUp()->update(textbar);
         return 1;
     }
 
     // enter == first candidate
     // space (when candidate list has only one page) == first candidate
-    char c=key->code();
+    char c = key->code();
     if (key->code() == ovkReturn || 
         (candi.onePage() && key->code()==ovkSpace)) c=candi.getSelKey()[0];
 
@@ -458,6 +451,7 @@ int OVGenericContext::candidateEvent(OVKeyCode *key, OVBuffer *buf,
 
 	string inKey;
 	inKey.push_back(c);
+
     if (cintab->isValidKey(inKey) || cintab->isEndKey(c)) {
         string output;
         candi.select(candi.getSelKey()[0], output);
