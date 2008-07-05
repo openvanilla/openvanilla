@@ -11,6 +11,12 @@
 
 @implementation OVModuleController
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    id copy = [[[self class] allocWithZone: zone] initWithIdentifier:_identifier localizedName:_localizedName dictionary:_dictionary enabled:_enabled delegate:_delegate];
+    return copy;
+}
+
 // - (id)initWithIdentifier:(NSString *)identifier localizedName:(NSString *)localizedName dictionary:(NSDictionary *)dictionary delegate:(id)delegate
 - (id)initWithIdentifier:(NSString *)identifier localizedName:(NSString *)localizedName dictionary:(NSDictionary *)dictionary enabled:(BOOL)enabled delegate:(id)delegate;
 

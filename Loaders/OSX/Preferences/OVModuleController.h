@@ -18,6 +18,7 @@
 	id _delegate;
 }
 
+- (id)copyWithZone:(NSZone *)zone;
 - (id)initWithIdentifier:(NSString *)identifier localizedName:(NSString *)localizedName dictionary:(NSDictionary *)dictionary enabled:(BOOL)enabled delegate:(id)delegate;
 - (void)loadNib;
 - (NSString *)moduleIdentifer;

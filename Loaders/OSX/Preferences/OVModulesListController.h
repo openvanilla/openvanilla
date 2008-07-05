@@ -20,9 +20,11 @@
 	NSMutableArray *m_ouputFilters;
 	
 	id _currentItem;
+	id _draggingItem;
 }
 
 - (NSView *)view;
+- (void)expandAll;
 - (void)reload;
 - (void)addInputMethod:(id)inputMethod;
 - (void)addOutputFilter:(id)outputFilter;

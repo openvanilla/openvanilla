@@ -87,7 +87,8 @@
 		}
 		
 	}
-	[m_moduleListController reload];
+//	[m_moduleListController reload];
+	[m_moduleListController expandAll];
 }
 
 - (void)awakeFromNib

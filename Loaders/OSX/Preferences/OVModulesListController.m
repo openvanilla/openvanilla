@@ -11,21 +11,39 @@
 
 @implementation OVModulesListController
 
+#define DragDropSimplePboardType 	@"MyCustomOutlineViewPboardType"
+
 - (void)awakeFromNib
 {
 	if (m_inputMethods == nil)
 		m_inputMethods = [NSMutableArray new];
 	if (m_ouputFilters == nil)
 		m_ouputFilters = [NSMutableArray new];
+
+    [u_outlineView registerForDraggedTypes:[NSArray arrayWithObjects:DragDropSimplePboardType, NSStringPboardType, NSFilenamesPboardType, nil]];
+    [u_outlineView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:YES];
 	
-	[u_outlineView setDelegate:self];
-	[u_outlineView setDataSource:self];
-	[u_outlineView expandItem:m_inputMethods];
-	[u_outlineView expandItem:m_ouputFilters];
-	[u_outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
+//	[u_outlineView setDelegate:self];
+//	[u_outlineView setDataSource:self];
 }
 
-- (void) dealloc
+- (void)expandAll
+{
+	[u_outlineView setDelegate:self];
+	[u_outlineView setDataSource:self];
+	[u_outlineView reloadData];
+	
+	if (m_inputMethods) {
+		[u_outlineView expandItem:m_inputMethods];
+		if ([m_inputMethods count])
+			[u_outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];		
+	}
+	if (m_ouputFilters) {
+		[u_outlineView expandItem:m_ouputFilters];
+	}
+}
+
+- (void)dealloc
 {
 	[m_inputMethods release];
 	[m_ouputFilters release];
@@ -65,7 +83,6 @@
 	}
 	if (view) {
 		NSRect frame = [view frame];
-//		frame.origin.y = [u_settingView frame].size.height - frame.size.height;
 		frame.size.height = [u_settingView frame].size.height;
 		frame.size.width = [u_settingView frame].size.width;
 		[view setFrame:frame];
@@ -228,4 +245,35 @@
 	}
 }
 
+- (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pboard {
+
+    id draggingItem = [items objectAtIndex:0];
+	if (![m_ouputFilters containsObject:[items objectAtIndex:0]])
+		return NO;
+	
+	_draggingItem = draggingItem;
+	[pboard declareTypes:[NSArray arrayWithObjects:DragDropSimplePboardType, nil] owner:self];	
+    [pboard setData:[NSData data] forType:DragDropSimplePboardType]; 
+    return YES;
+}
+
+- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(NSInteger)childIndex
+{
+	if (childIndex < 0) {
+		return NSDragOperationNone;
+	}
+	else if (item == m_inputMethods) {
+		return NSDragOperationNone;		
+	}
+	return NSDragOperationGeneric;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(NSInteger)childIndex
+{
+	int originalIndex = [m_ouputFilters indexOfObject:_draggingItem];
+	[m_ouputFilters insertObject:[_draggingItem copy] atIndex:childIndex];
+	[m_ouputFilters removeObject:_draggingItem];
+	[u_outlineView reloadData];
+	return YES;
+}
 @end
