@@ -11,7 +11,9 @@
 
 @implementation OVModuleController
 
-- (id)initWithIdentifier:(NSString *)identifier localizedName:(NSString *)localizedName dictionary:(NSDictionary *)dictionary delegate:(id)delegate
+// - (id)initWithIdentifier:(NSString *)identifier localizedName:(NSString *)localizedName dictionary:(NSDictionary *)dictionary delegate:(id)delegate
+- (id)initWithIdentifier:(NSString *)identifier localizedName:(NSString *)localizedName dictionary:(NSDictionary *)dictionary enabled:(BOOL)enabled delegate:(id)delegate;
+
 {
 	self = [super init];
 	if (self != nil) {
@@ -19,6 +21,7 @@
 		_localizedName = [localizedName retain];
 		_dictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
 		[_dictionary retain];
+		_enabled = enabled;
 		_delegate = [delegate retain];
 		[self loadNib];
 	}
@@ -26,6 +29,7 @@
 }
 - (void)loadNib
 {
+	// This class does not load Nib file, but subclasses of this class do.
 }
 - (void)dealloc
 {
@@ -49,6 +53,10 @@
 {
 	return _localizedName;
 }
+- (NSDictionary *)dictionary
+{
+	return _dictionary;
+}
 - (void)setDictionary:(NSDictionary *)dictionary
 {
 	if (!_dictionary) {
@@ -57,10 +65,29 @@
 	[_dictionary removeAllObjects];
 	[_dictionary addEntriesFromDictionary:dictionary];
 }
-- (NSDictionary *)dictionary
+- (id)delegate
 {
-	return _dictionary;
+	return _delegate;
 }
+- (void)setDelegate:(id)delegate
+{
+	id tmp = _delegate;
+	_delegate = delegate;
+	[tmp release];
+}
+- (BOOL)isEnabled
+{
+	return _enabled;
+}
+- (void)setEnabled:(BOOL)enabled
+{
+	_enabled = enabled;
+}
+- (void)setValue:(id)value forKey:(NSString *)key
+{
+	[_dictionary setValue:value forKey:key];
+}
+
 - (void)update
 {
 	[_delegate updateConfigWithIdentifer:_identifier dictionary:_dictionary];	
@@ -69,20 +96,4 @@
 {
 	[_delegate writeConfigWithIdentifer:_identifier dictionary:_dictionary];
 }
-- (void)setValue:(id)value forKey:(NSString *)key
-{
-	[_dictionary setValue:value forKey:key];
-}
-- (void)setDelegate:(id)delegate
-{
-	id tmp = _delegate;
-	_delegate = delegate;
-	[tmp release];
-}
-- (id)delegate
-{
-	return _delegate;
-}
-
-
 @end

@@ -14,20 +14,23 @@
 	NSString *_identifier;
 	NSString *_localizedName;
 	NSMutableDictionary *_dictionary;
+	BOOL _enabled;
 	id _delegate;
 }
 
-- (id)initWithIdentifier:(NSString *)identifier localizedName:(NSString *)localizedName dictionary:(NSDictionary *)dictionary delegate:(id)delegate;
+- (id)initWithIdentifier:(NSString *)identifier localizedName:(NSString *)localizedName dictionary:(NSDictionary *)dictionary enabled:(BOOL)enabled delegate:(id)delegate;
 - (void)loadNib;
 - (NSString *)identifer;
 - (NSString *)localizedName;
-- (void)setDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionary;
+- (void)setDictionary:(NSDictionary *)dictionary;
+- (BOOL)isEnabled;
+- (void)setEnabled:(BOOL)enabled;
+- (id)delegate;
+- (void)setDelegate:(id)delegate;
+- (void)setValue:(id)value forKey:(NSString *)key;
 - (void)update;
 - (void)updateAndWrite;
-- (void)setValue:(id)value forKey:(NSString *)key;
-- (void)setDelegate:(id)delegate;
-- (id)delegate;
 - (NSView *)view;
 
 @end

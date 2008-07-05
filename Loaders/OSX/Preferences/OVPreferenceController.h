@@ -27,6 +27,7 @@ static NSString *ModulesToolbarItemIdentifier				= @"Modules";
 	
     CVEmbeddedLoader *_loader;
     NSMutableDictionary *_config;
+	NSMutableArray *_excludeModuleList;
 }
 - (void)writeConfig;
 - (void)setActiveView:(NSView *)view animate:(BOOL)flag;

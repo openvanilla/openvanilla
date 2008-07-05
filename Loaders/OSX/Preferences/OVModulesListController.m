@@ -20,6 +20,8 @@
 	
 	[u_outlineView setDelegate:self];
 	[u_outlineView setDataSource:self];
+	[u_outlineView expandItem:m_inputMethods];
+	[u_outlineView expandItem:m_ouputFilters];
 }
 
 - (void) dealloc
@@ -119,21 +121,31 @@
 		return [m_ouputFilters objectAtIndex:index];
 	}
 	
-	
 	return nil;
 }
-
-- (NSCell *)textField: (NSString *) text
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectTableColumn:(NSTableColumn *)tableColumn
 {
-	NSCell *cell = [[[NSCell alloc] initTextCell:text] autorelease];
-	return cell;
+	return NO;
 }
-
+- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
+{
+	if (item == m_inputMethods || item == m_ouputFilters) {
+		return YES;
+	}	
+	return NO;
+}
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{
+	if ([[tableColumn identifier] isEqualToString:@"enabled"]) {
+		return YES;
+	}
+	return NO;
+}
 - (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
 	if ([[tableColumn identifier] isEqualToString:@"enabled"]) {
 		if (item == nil || item == m_inputMethods || item == m_ouputFilters) {
-			return [self textField:@" "];
+			return [[[NSCell alloc] initTextCell:@""] autorelease];
 		}
 	}
 	return [tableColumn dataCell];
@@ -159,7 +171,10 @@
 		if (item == nil || item == m_inputMethods || item == m_ouputFilters) {
 			return nil;
 		}
-		return [NSNumber numberWithBool:YES];		
+		else {
+			BOOL enabled = [item isEnabled];
+			return [NSNumber numberWithBool:enabled];
+		}
 	}
 	return nil;
 }
@@ -182,10 +197,6 @@
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
-	//NSLog([notification description]);
-//	NSLog(@"Changes");
-//	NSLog([_currentItem description]);
-//	NSLog([[_currentItem view] description]);
 	[self switchToView:[_currentItem view]];
 }
 

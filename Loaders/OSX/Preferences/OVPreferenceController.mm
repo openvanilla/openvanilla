@@ -11,18 +11,57 @@
 
 @implementation OVPreferenceController
 
+- (void)setExcludeList
+{
+	NSEnumerator *enumerator;
+	
+	NSMutableDictionary *moduleLibraries = [NSMutableDictionary dictionary];
+    NSDictionary *history = [_loader loadHistory];
+	enumerator = [[history allKeys] objectEnumerator];
+    NSString *loaderKey;
+    while (loaderKey = [enumerator nextObject]) {
+        NSArray *loaderNode = [history valueForKey:loaderKey];
+        NSMutableDictionary *newnode = [NSMutableDictionary dictionary];
+        NSEnumerator *loaderEnumerator = [loaderNode objectEnumerator];
+        NSString *s;
+        while (s = [loaderEnumerator nextObject])  {
+			[newnode setValue:[NSNumber numberWithBool:TRUE] forKey:s];
+		}
+        [moduleLibraries setValue:newnode forKey:[loaderKey lastPathComponent]];        
+    }
+	
+	NSArray *loaderConfig = [_config valueForKey:@"OVLoader"];		
+	
+    _excludeModuleList = [NSMutableArray arrayWithArray:[loaderConfig valueForKey:@"excludeModuleList"]];
+	[_excludeModuleList retain];
+    enumerator = [[loaderConfig valueForKey:@"excludeLibraryList"] objectEnumerator];
+    NSString *s;
+    while (s = [enumerator nextObject]) {
+        NSDictionary *moduleLibrary = [moduleLibraries valueForKey:s];
+        if (moduleLibrary) 
+			[_excludeModuleList addObjectsFromArray:[moduleLibrary allKeys]];
+    }
+//    NSLog(@"exclude list=%@", [_excludeModuleList description]);	
+}
+
 - (void)setUpModules
 {
 	NSArray *moduleLists = [_loader moduleList];
-	
+	if (!moduleLists) {
+		moduleLists = [NSArray array];
+	}
+		
 	const char *locale = [_loader service]->locale();	
 	NSEnumerator *e = [moduleLists objectEnumerator];
 	CVModuleWrapper *w;
 	
 	while (w = [e nextObject]) {
         OVModule *ovm = [w module];
-        NSString *name = [NSString stringWithUTF8String:ovm->localizedName(locale)];
-		NSDictionary *dictionary = [_config valueForKey:[w identifier]];
+		NSString *identifier = [w identifier];
+        NSString *localizedName = [NSString stringWithUTF8String:ovm->localizedName(locale)];
+		NSDictionary *dictionary = [_config valueForKey:identifier];
+		BOOL enabled = [_excludeModuleList containsObject:identifier];
+		
 		if (!dictionary) {
 			dictionary = [NSDictionary dictionary];
 		}
@@ -30,20 +69,20 @@
 		
 		if ([[w moduleType] isEqualToString:@"OVInputMethod"]) {
 			if ([[w identifier] hasPrefix:@"OVIMGeneric-"]) {
-				OVIMGenericController *moduleCotroller = [[OVIMGenericController alloc] initWithIdentifier:[w identifier] localizedName:name dictionary:dictionary delegate:self];
+				OVIMGenericController *moduleCotroller = [[OVIMGenericController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
 				[m_moduleListController addInputMethod:moduleCotroller];				
 			}
 			else if ([dictionary count]) {
-				OVTableModuleController *moduleCotroller = [[OVTableModuleController alloc] initWithIdentifier:[w identifier] localizedName:name dictionary:dictionary delegate:self];
+				OVTableModuleController *moduleCotroller = [[OVTableModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
 				[m_moduleListController addInputMethod:moduleCotroller];
 			}
 			else {
-				OVModuleController *moduleCotroller = [[OVModuleController alloc] initWithIdentifier:[w identifier] localizedName:name dictionary:dictionary delegate:self];
+				OVModuleController *moduleCotroller = [[OVModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
 				[m_moduleListController addInputMethod:moduleCotroller];
 			}
 		}
 		else if ([[w moduleType] isEqualToString:@"OVOutputFilter"]) {
-			OVModuleController *moduleCotroller = [[OVModuleController alloc] initWithIdentifier:[w identifier] localizedName:name dictionary:nil delegate:self];
+			OVModuleController *moduleCotroller = [[OVModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:nil enabled:enabled delegate:self];
 			[m_moduleListController addOutputFilter:moduleCotroller];
 		}
 		
@@ -54,21 +93,18 @@
 - (void)awakeFromNib
 {	
 	[[self window] setDelegate:self];
-	
-	_loader = [CVEmbeddedLoader new];
-    if (_loader) {
-    }
-    else {
-    }
-	
-    _config = [[NSMutableDictionary dictionaryWithDictionary:[[_loader config] dictionary]] retain];
-	[self setUpModules];
-	
+			
 	NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@""];
 	[toolbar setDelegate:self];
 	[toolbar autorelease];
 	[[self window] setToolbar:toolbar];
 	[[self window] center];	
+	
+	_loader = [CVEmbeddedLoader new];
+    _config = [[NSMutableDictionary dictionaryWithDictionary:[[_loader config] dictionary]] retain];
+	
+	[self setExcludeList];
+	[self setUpModules];	
 	[self setActiveView:[m_moduleListController view] animate:NO];
 }
 
@@ -76,6 +112,7 @@
 {
 	[_loader release];
 	[_config release];
+	[_excludeModuleList release];
 	[super dealloc];
 }
 
@@ -87,8 +124,6 @@
 		return NO;
 	
 	[_config setValue:dictionary forKey:identifier];
-	NSLog(@"update");
-	NSLog([dictionary description]);
 	
 	return YES;
 }
