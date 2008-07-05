@@ -22,6 +22,7 @@
 	[u_outlineView setDataSource:self];
 	[u_outlineView expandItem:m_inputMethods];
 	[u_outlineView expandItem:m_ouputFilters];
+	[u_outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
 }
 
 - (void) dealloc
@@ -198,6 +199,33 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
 	[self switchToView:[_currentItem view]];
+}
+
+- (CGFloat)indentationPerLevel
+{
+	return 0;
+}
+
+- (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+{
+	if (item == nil || item == m_inputMethods || item == m_ouputFilters) {
+		return;
+	}	
+	if ([[tableColumn identifier] isEqualToString:@"enabled"]) {
+		BOOL enabled = [object boolValue];
+		[item setEnabled:enabled];
+		NSString *identifier = [item moduleIdentifer];
+		NSLog(identifier);
+		if (m_preferenceController) {
+			if (enabled == YES) {
+				[m_preferenceController removeFromExcludeList:identifier];
+			}
+			else {
+				[m_preferenceController addToExcludeList:identifier];
+			}
+
+		}		
+	}
 }
 
 @end

@@ -8,12 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import "NSObjectUpdateConfig.h"
+#import "OVModuleController.h"
 
 @interface OVModulesListController : NSObject {
 	IBOutlet NSOutlineView *u_outlineView;
 	IBOutlet NSView *u_settingView;
 	IBOutlet NSView *u_mainView;
-	IBOutlet id delegate;
+	IBOutlet id m_preferenceController;
 	
 	NSMutableArray *m_inputMethods;
 	NSMutableArray *m_ouputFilters;

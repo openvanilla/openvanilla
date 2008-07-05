@@ -45,7 +45,7 @@
 		return view;
 	return nil;
 }
-- (NSString *)identifer
+- (NSString *)moduleIdentifer
 {
 	return _identifier;
 }

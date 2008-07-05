@@ -8,7 +8,6 @@
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="453"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1135,7 +1134,7 @@
 				<string key="NSClassName">OVPreferenceController</string>
 			</object>
 			<object class="NSCustomView" id="625296402">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1351,7 +1350,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{605, 555}</string>
-				<reference key="NSSuperview"/>
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSCustomObject" id="1045415887">
@@ -1936,6 +1934,14 @@
 						<reference key="destination" ref="1045415887"/>
 					</object>
 					<int key="connectionID">501</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">m_preferenceController</string>
+						<reference key="source" ref="1045415887"/>
+						<reference key="destination" ref="293200630"/>
+					</object>
+					<int key="connectionID">511</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3435,7 +3441,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">509</int>
+			<int key="maxID">511</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3454,12 +3460,14 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>m_preferenceController</string>
 							<string>u_mainView</string>
 							<string>u_outlineView</string>
 							<string>u_settingView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>NSView</string>
 							<string>NSOutlineView</string>
 							<string>NSView</string>

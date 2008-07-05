@@ -60,7 +60,7 @@
 		NSString *identifier = [w identifier];
         NSString *localizedName = [NSString stringWithUTF8String:ovm->localizedName(locale)];
 		NSDictionary *dictionary = [_config valueForKey:identifier];
-		BOOL enabled = [_excludeModuleList containsObject:identifier];
+		BOOL enabled = ![_excludeModuleList containsObject:identifier];
 		
 		if (!dictionary) {
 			dictionary = [NSDictionary dictionary];
@@ -132,6 +132,23 @@
 	if ([self updateConfigWithIdentifer:identifier dictionary:dictionary])
 		[self writeConfig];
 }
+- (void)addToExcludeList:(NSString *)identifier
+{
+	NSLog(@"i");
+	[_excludeModuleList addObject:identifier];
+	NSMutableDictionary *loaderConfig = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVLoader"]];
+	[loaderConfig setValue:_excludeModuleList forKey:@"excludeModuleList"];
+	[self writeConfigWithIdentifer:@"OVLoader" dictionary:loaderConfig];	
+}
+- (void)removeFromExcludeList:(NSString *)identifier
+{
+	NSLog(@"i");	
+	[_excludeModuleList removeObject:identifier];
+	NSMutableDictionary *loaderConfig = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVLoader"]];
+	[loaderConfig setValue:_excludeModuleList forKey:@"excludeModuleList"];
+	[self writeConfigWithIdentifer:@"OVLoader" dictionary:loaderConfig];		
+}
+
 - (void)writeConfig
 {
 	[[_loader config] sync];
