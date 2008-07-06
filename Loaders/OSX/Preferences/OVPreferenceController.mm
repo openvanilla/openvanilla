@@ -7,7 +7,7 @@
 //
 
 #import "OVPreferenceController.h"
-
+#import "OVShortcutHelper.h"
 
 @implementation OVPreferenceController
 
@@ -66,7 +66,8 @@
 {
 	NSEnumerator *enumerator;
 	
-	NSArray *outputFilterOrderConfigArray = [[_config valueForKey:@"OVMenuManager"] valueForKey:@"outputFilterOrder"];
+	NSDictionary *menuManagerDicttionary = [_config valueForKey:@"OVMenuManager"];
+	NSArray *outputFilterOrderConfigArray = [menuManagerDicttionary valueForKey:@"outputFilterOrder"];
 	NSMutableArray *outputFilterOrderArray = [NSMutableArray array];
 	enumerator = [outputFilterOrderConfigArray objectEnumerator];
 	NSString *outputFilterIdentfier;
@@ -93,6 +94,8 @@
         NSString *localizedName = [NSString stringWithUTF8String:ovm->localizedName(locale)];
 		NSDictionary *dictionary = [_config valueForKey:identifier];
 		BOOL enabled = ![_excludeModuleList containsObject:identifier];
+		NSString *shortcut = [menuManagerDicttionary valueForKey:identifier];
+		NSLog(@"short cut: %@ :: %@",shortcut, [OVShortcutHelper readableShortCut:shortcut]);
 		
 		if (!dictionary) {
 			dictionary = [NSDictionary dictionary];

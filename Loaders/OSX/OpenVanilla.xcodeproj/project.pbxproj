@@ -133,6 +133,7 @@
 		6ACC557A0CCF8B9B00E2307C /* ATSComponent.c in Sources */ = {isa = PBXBuildFile; fileRef = 6ACC51D90CCF826700E2307C /* ATSComponent.c */; };
 		6ACC557B0CCF8BA000E2307C /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ACC51E80CCF829700E2307C /* Carbon.framework */; };
 		6ACC557F0CCF8BC900E2307C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ACC557D0CCF8BC900E2307C /* InfoPlist.strings */; };
+		D43D6C500E20FE3000ECA0DE /* OVShortcutHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = D43D6C4F0E20FE3000ECA0DE /* OVShortcutHelper.mm */; };
 		D45277560E1EC9F300AF407A /* OVModuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = D45277550E1EC9F300AF407A /* OVModuleController.m */; };
 		D45277A40E1ED00A00AF407A /* OVIMGenericController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D45277A20E1ED00A00AF407A /* OVIMGenericController.xib */; };
 		D45277AE0E1ED08800AF407A /* OVIMGenericController.m in Sources */ = {isa = PBXBuildFile; fileRef = D45277AD0E1ED08800AF407A /* OVIMGenericController.m */; };
@@ -350,6 +351,8 @@
 		6ACC557E0CCF8BC900E2307C /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = TextServiceComponent/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6ACC55800CCF8BCD00E2307C /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = TextServiceComponent/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6ACC55810CCF8BCF00E2307C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = TextServiceComponent/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D43D6C4E0E20FE3000ECA0DE /* OVShortcutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVShortcutHelper.h; path = Preferences/OVShortcutHelper.h; sourceTree = "<group>"; };
+		D43D6C4F0E20FE3000ECA0DE /* OVShortcutHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OVShortcutHelper.mm; path = Preferences/OVShortcutHelper.mm; sourceTree = "<group>"; };
 		D45277540E1EC9F300AF407A /* OVModuleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVModuleController.h; path = Preferences/OVModuleController.h; sourceTree = "<group>"; wrapsLines = 1; };
 		D45277550E1EC9F300AF407A /* OVModuleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OVModuleController.m; path = Preferences/OVModuleController.m; sourceTree = "<group>"; };
 		D45277A30E1ED00A00AF407A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Preferences/English.lproj/OVIMGenericController.xib; sourceTree = "<group>"; };
@@ -669,6 +672,8 @@
 				D45277AD0E1ED08800AF407A /* OVIMGenericController.m */,
 				D4D5520D0E1F0AC5003E2FC3 /* OVTableModuleController.h */,
 				D4D5520E0E1F0AC5003E2FC3 /* OVTableModuleController.m */,
+				D43D6C4E0E20FE3000ECA0DE /* OVShortcutHelper.h */,
+				D43D6C4F0E20FE3000ECA0DE /* OVShortcutHelper.mm */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -1104,6 +1109,7 @@
 				D45277AE0E1ED08800AF407A /* OVIMGenericController.m in Sources */,
 				D4D5520F0E1F0AC5003E2FC3 /* OVTableModuleController.m in Sources */,
 				D4D552930E1F11B8003E2FC3 /* OVPreference_Toolbar.mm in Sources */,
+				D43D6C500E20FE3000ECA0DE /* OVShortcutHelper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
