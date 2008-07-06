@@ -15,6 +15,7 @@
 #import "OVIMGenericController.h"
 #import "OVTableModuleController.h"
 
+// The height of the window title and tool bar.
 #define WINDOW_TITLE_HEIGHT 78
 #define MSG(x)      [[NSBundle mainBundle] localizedStringForKey:x value:nil table:nil]
 
@@ -26,7 +27,9 @@ static NSString *ModulesToolbarItemIdentifier				= @"Modules";
 	IBOutlet OVModulesListController *m_moduleListController;
 	
     CVEmbeddedLoader *_loader;
+	// The while OpenVanilla config.
     NSMutableDictionary *_config;
+	// The list of excluded modules.
 	NSMutableArray *_excludeModuleList;
 }
 - (void)writeConfig;

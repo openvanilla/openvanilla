@@ -26,6 +26,7 @@
 - (NSView *)view;
 - (void)expandAll;
 - (void)reload;
+- (void)switchToView: (NSView *)view;
 - (void)addInputMethod:(id)inputMethod;
 - (void)addOutputFilter:(id)outputFilter;
 - (void)setCurrentItem:(id)item;

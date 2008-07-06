@@ -35,8 +35,11 @@
 	
 	if (m_inputMethods) {
 		[u_outlineView expandItem:m_inputMethods];
-		if ([m_inputMethods count])
-			[u_outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];		
+		if ([m_inputMethods count]) {
+			[u_outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
+			id selectedController = [m_inputMethods objectAtIndex:0];
+			[self switchToView:[selectedController view]];
+		}
 	}
 	if (m_ouputFilters) {
 		[u_outlineView expandItem:m_ouputFilters];
@@ -93,6 +96,7 @@
 
 #pragma mark outlineView delegate methods.
 
+
 - (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
 	if (item == nil) {
@@ -112,6 +116,11 @@
 	return YES;
 }
 
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(id)item
+{
+	return NO;
+}
+
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
 	if (item == nil || item == m_inputMethods || item == m_ouputFilters) {
@@ -120,17 +129,13 @@
 	return NO;
 }
 
-- (id)outlineView:(NSOutlineView *)outlineView
-			child:(int)index
-		   ofItem:(id)item
+- (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item
 {
 	if (item == nil) {
-		if (index == 0) {
+		if (index == 0)
 			return m_inputMethods;
-		}
-		else if (index == 1) {
+		else if (index == 1)
 			return m_ouputFilters;
-		}
 	}
 	else if (item == m_inputMethods) {
 		return [m_inputMethods objectAtIndex:index];

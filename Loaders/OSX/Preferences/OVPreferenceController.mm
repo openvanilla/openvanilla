@@ -30,7 +30,7 @@
         [moduleLibraries setValue:newnode forKey:[loaderKey lastPathComponent]];        
     }
 	
-	NSArray *loaderConfig = [_config valueForKey:@"OVLoader"];		
+	NSArray *loaderConfig = [_config valueForKey:@"OVLoader"];
 	
     _excludeModuleList = [NSMutableArray arrayWithArray:[loaderConfig valueForKey:@"excludeModuleList"]];
 	[_excludeModuleList retain];
@@ -44,18 +44,50 @@
 //    NSLog(@"exclude list=%@", [_excludeModuleList description]);	
 }
 
+- (int)outputFilterExists:(NSString *)identifier inArray:(NSArray *)outputFilterArray
+{
+	NSLog(@"hi");
+	if (![outputFilterArray count])
+		return -1;
+	NSEnumerator *e = [outputFilterArray objectEnumerator];
+	NSDictionary *d;
+	int i = 0;
+	while (d = [e nextObject]) {
+		NSString *s = [d valueForKey:@"identifier"];		
+		if ([s isEqualToString:identifier]) {
+			return i;
+		}
+		i++;
+	}
+	return -1;
+}
+
 - (void)setUpModules
 {
+	NSEnumerator *enumerator;
+	
+	NSArray *outputFilterOrderConfigArray = [[_config valueForKey:@"OVMenuManager"] valueForKey:@"outputFilterOrder"];
+	NSMutableArray *outputFilterOrderArray = [NSMutableArray array];
+	enumerator = [outputFilterOrderConfigArray objectEnumerator];
+	NSString *outputFilterIdentfier;
+	
+	while (outputFilterIdentfier = [enumerator nextObject]) {
+		NSMutableDictionary *d = [NSMutableDictionary dictionary];
+		[d setValue:outputFilterIdentfier forKey:@"identifier"];
+		[outputFilterOrderArray addObject:d];
+	}
+		
 	NSArray *moduleLists = [_loader moduleList];
 	if (!moduleLists) {
 		moduleLists = [NSArray array];
 	}
-		
+	
 	const char *locale = [_loader service]->locale();	
-	NSEnumerator *e = [moduleLists objectEnumerator];
+
+	enumerator = [moduleLists objectEnumerator];
 	CVModuleWrapper *w;
 	
-	while (w = [e nextObject]) {
+	while (w = [enumerator nextObject]) {
         OVModule *ovm = [w module];
 		NSString *identifier = [w identifier];
         NSString *localizedName = [NSString stringWithUTF8String:ovm->localizedName(locale)];
@@ -82,12 +114,39 @@
 			}
 		}
 		else if ([[w moduleType] isEqualToString:@"OVOutputFilter"]) {
-			OVModuleController *moduleCotroller = [[OVModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:nil enabled:enabled delegate:self];
-			[m_moduleListController addOutputFilter:moduleCotroller];
+			int i = [self outputFilterExists:identifier inArray:outputFilterOrderArray];
+			NSLog(@"i: %d", i);
+			if (i >= 0) {
+				NSMutableDictionary *d = [NSMutableDictionary dictionaryWithDictionary:[outputFilterOrderArray objectAtIndex:i]];
+				[d setValue:localizedName forKey:@"localizedName"];
+//				[d setValue:dictionary forKey:@"dictionary"];
+				[d setValue:[NSNumber numberWithBool:enabled] forKey:@"enabled"];
+				[outputFilterOrderArray replaceObjectAtIndex:i withObject:d];
+				NSLog(@"found!");
+			}
+			else {
+				NSMutableDictionary *d = [NSMutableDictionary dictionary];
+				[d setValue:identifier forKey:@"identifier"];
+				[d setValue:localizedName forKey:@"localizedName"];
+//				[d setValue:dictionary forKey:@"dictionary"];
+				[d setValue:[NSNumber numberWithBool:enabled] forKey:@"enabled"];					
+				[outputFilterOrderArray addObject:d];
+				NSLog(@"not found!");				
+			}			
 		}
-		
 	}
-//	[m_moduleListController reload];
+	
+	enumerator = [outputFilterOrderArray objectEnumerator];
+	NSDictionary *d;
+	while (d = [enumerator nextObject]) {
+		NSString *identifier = [d valueForKey:@"identifier"];
+		NSString *localizedName = [d valueForKey:@"localizedName"];
+//		NSDictionary *dictionary = [d valueForKey:@"dictionary"];
+		BOOL enabled = [[d valueForKey:@"enabled"] boolValue];
+		OVModuleController *moduleCotroller = [[OVModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:nil enabled:enabled delegate:self];
+		[m_moduleListController addOutputFilter:moduleCotroller];
+	}
+	
 	[m_moduleListController expandAll];
 }
 
