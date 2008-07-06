@@ -137,6 +137,8 @@
 		D45277560E1EC9F300AF407A /* OVModuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = D45277550E1EC9F300AF407A /* OVModuleController.m */; };
 		D45277A40E1ED00A00AF407A /* OVIMGenericController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D45277A20E1ED00A00AF407A /* OVIMGenericController.xib */; };
 		D45277AE0E1ED08800AF407A /* OVIMGenericController.m in Sources */ = {isa = PBXBuildFile; fileRef = D45277AD0E1ED08800AF407A /* OVIMGenericController.m */; };
+		D48FB1790E2130F40071F20E /* OVHotkeyField.m in Sources */ = {isa = PBXBuildFile; fileRef = D48FB1770E2130F40071F20E /* OVHotkeyField.m */; };
+		D48FB17C0E2130FD0071F20E /* NDHotKeyEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = D48FB17B0E2130FD0071F20E /* NDHotKeyEvent.m */; };
 		D4ACBA050E1E6BFC005E7BA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACBA040E1E6BFC005E7BA7 /* main.m */; };
 		D4ACBA0A0E1E6C09005E7BA7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ACBA060E1E6C09005E7BA7 /* MainMenu.xib */; };
 		D4ACBA0B0E1E6C09005E7BA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4ACBA080E1E6C09005E7BA7 /* InfoPlist.strings */; };
@@ -359,6 +361,10 @@
 		D45277AC0E1ED08800AF407A /* OVIMGenericController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVIMGenericController.h; path = Preferences/OVIMGenericController.h; sourceTree = "<group>"; };
 		D45277AD0E1ED08800AF407A /* OVIMGenericController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OVIMGenericController.m; path = Preferences/OVIMGenericController.m; sourceTree = "<group>"; wrapsLines = 1; };
 		D452786D0E1EDDBD00AF407A /* NSObjectUpdateConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSObjectUpdateConfig.h; path = Preferences/NSObjectUpdateConfig.h; sourceTree = "<group>"; };
+		D48FB1770E2130F40071F20E /* OVHotkeyField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OVHotkeyField.m; path = Preferences/OVHotkeyField.m; sourceTree = "<group>"; };
+		D48FB1780E2130F40071F20E /* OVHotkeyField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVHotkeyField.h; path = Preferences/OVHotkeyField.h; sourceTree = "<group>"; };
+		D48FB17A0E2130FD0071F20E /* NDHotKeyEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NDHotKeyEvent.h; path = Preferences/NDHotKeyEvent.h; sourceTree = "<group>"; };
+		D48FB17B0E2130FD0071F20E /* NDHotKeyEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NDHotKeyEvent.m; path = Preferences/NDHotKeyEvent.m; sourceTree = "<group>"; };
 		D4ACB9F30E1E6BC9005E7BA7 /* Preferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Preferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ACBA030E1E6BFC005E7BA7 /* Preferences_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preferences_Prefix.pch; path = Preferences/Preferences_Prefix.pch; sourceTree = "<group>"; };
 		D4ACBA040E1E6BFC005E7BA7 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Preferences/main.m; sourceTree = "<group>"; };
@@ -674,6 +680,10 @@
 				D4D5520E0E1F0AC5003E2FC3 /* OVTableModuleController.m */,
 				D43D6C4E0E20FE3000ECA0DE /* OVShortcutHelper.h */,
 				D43D6C4F0E20FE3000ECA0DE /* OVShortcutHelper.mm */,
+				D48FB1770E2130F40071F20E /* OVHotkeyField.m */,
+				D48FB1780E2130F40071F20E /* OVHotkeyField.h */,
+				D48FB17A0E2130FD0071F20E /* NDHotKeyEvent.h */,
+				D48FB17B0E2130FD0071F20E /* NDHotKeyEvent.m */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -1110,6 +1120,8 @@
 				D4D5520F0E1F0AC5003E2FC3 /* OVTableModuleController.m in Sources */,
 				D4D552930E1F11B8003E2FC3 /* OVPreference_Toolbar.mm in Sources */,
 				D43D6C500E20FE3000ECA0DE /* OVShortcutHelper.mm in Sources */,
+				D48FB1790E2130F40071F20E /* OVHotkeyField.m in Sources */,
+				D48FB17C0E2130FD0071F20E /* NDHotKeyEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

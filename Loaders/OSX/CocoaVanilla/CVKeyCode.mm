@@ -53,7 +53,7 @@ CVKeyCode::CVKeyCode(const char *charcode, const char *modifiers)
 CVKeyCode::CVKeyCode(NSString *s)
 {
 	NSArray *a = [s splitBySpaceWithQuote];
-	if ([a count] < 2) {
+	if ([a count] < 2) {file://localhost/Users/zonble/Desktop/bigicon.png
 		init([s UTF8String], "");
 	}
 	else {
