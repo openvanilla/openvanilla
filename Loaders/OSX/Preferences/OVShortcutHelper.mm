@@ -17,9 +17,9 @@
 		return nil;
 	
 	CVKeyCode cvkc(shortcut);
-	NSString *code = cvkc.getKeyCodeString();
+	NSString *code = cvkc.getKeyIconString();
 	NSString *modifier = cvkc.getModifierIconString();
-	return [NSString stringWithFormat:@"%@ %@", modifier, code];
+	return [NSString stringWithFormat:@"%@%@", modifier, code];
 }
 
 @end

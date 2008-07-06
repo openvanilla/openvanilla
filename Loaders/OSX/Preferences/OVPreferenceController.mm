@@ -95,7 +95,6 @@
 		NSDictionary *dictionary = [_config valueForKey:identifier];
 		BOOL enabled = ![_excludeModuleList containsObject:identifier];
 		NSString *shortcut = [menuManagerDicttionary valueForKey:identifier];
-		NSLog(@"short cut: %@ :: %@",shortcut, [OVShortcutHelper readableShortCut:shortcut]);
 		
 		if (!dictionary) {
 			dictionary = [NSDictionary dictionary];
@@ -105,14 +104,17 @@
 		if ([[w moduleType] isEqualToString:@"OVInputMethod"]) {
 			if ([[w identifier] hasPrefix:@"OVIMGeneric-"]) {
 				OVIMGenericController *moduleCotroller = [[OVIMGenericController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
+				[moduleCotroller setShortcut:shortcut];
 				[m_moduleListController addInputMethod:moduleCotroller];				
 			}
 			else if ([dictionary count]) {
 				OVTableModuleController *moduleCotroller = [[OVTableModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
+				[moduleCotroller setShortcut:shortcut];				
 				[m_moduleListController addInputMethod:moduleCotroller];
 			}
 			else {
 				OVModuleController *moduleCotroller = [[OVModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
+				[moduleCotroller setShortcut:shortcut];				
 				[m_moduleListController addInputMethod:moduleCotroller];
 			}
 		}
@@ -123,6 +125,7 @@
 				NSMutableDictionary *d = [NSMutableDictionary dictionaryWithDictionary:[outputFilterOrderArray objectAtIndex:i]];
 				[d setValue:localizedName forKey:@"localizedName"];
 //				[d setValue:dictionary forKey:@"dictionary"];
+				[d setValue:shortcut forKey:@"shortcut"];
 				[d setValue:[NSNumber numberWithBool:enabled] forKey:@"enabled"];
 				[outputFilterOrderArray replaceObjectAtIndex:i withObject:d];
 				NSLog(@"found!");
@@ -132,6 +135,7 @@
 				[d setValue:identifier forKey:@"identifier"];
 				[d setValue:localizedName forKey:@"localizedName"];
 //				[d setValue:dictionary forKey:@"dictionary"];
+				[d setValue:shortcut forKey:@"shortcut"];				
 				[d setValue:[NSNumber numberWithBool:enabled] forKey:@"enabled"];					
 				[outputFilterOrderArray addObject:d];
 				NSLog(@"not found!");				
@@ -146,7 +150,9 @@
 		NSString *localizedName = [d valueForKey:@"localizedName"];
 //		NSDictionary *dictionary = [d valueForKey:@"dictionary"];
 		BOOL enabled = [[d valueForKey:@"enabled"] boolValue];
+		NSString *shortcut = [d valueForKey:@"shortcut"];
 		OVModuleController *moduleCotroller = [[OVModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:nil enabled:enabled delegate:self];
+		[moduleCotroller setShortcut:shortcut];		
 		[m_moduleListController addOutputFilter:moduleCotroller];
 	}
 	

@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="490"/>
+			<integer value="493"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1274,13 +1274,14 @@
 												<reference key="NSTableView" ref="631555167"/>
 											</object>
 											<object class="NSTableColumn" id="930334898">
+												<string key="NSIdentifier">shortcut</string>
 												<double key="NSWidth">7.000000e+01</double>
 												<double key="NSMinWidth">1.000000e+01</double>
 												<double key="NSMaxWidth">3.402823e+38</double>
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
 													<int key="NSCellFlags">75628032</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Short Cut</string>
+													<string key="NSContents">Shortcut</string>
 													<reference key="NSSupport" ref="26"/>
 													<object class="NSColor" key="NSBackgroundColor">
 														<int key="NSColorSpace">6</int>

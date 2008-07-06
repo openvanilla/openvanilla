@@ -7,7 +7,7 @@
 //
 
 #import "OVModulesListController.h"
-
+#import "OVShortcutHelper.h"
 
 @implementation OVModulesListController
 
@@ -197,6 +197,14 @@
 		else {
 			BOOL enabled = [item isEnabled];
 			return [NSNumber numberWithBool:enabled];
+		}
+	}
+	else if ([[tableColumn identifier] isEqualToString:@"shortcut"]) {
+		if (item == nil || item == m_inputMethods || item == m_ouputFilters) {
+			return nil;
+		}
+		else {		
+			return [OVShortcutHelper readableShortCut:[item shortcut]];
 		}
 	}
 	return nil;

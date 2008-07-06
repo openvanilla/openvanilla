@@ -60,6 +60,7 @@ public:
     // facility functions for OVPreference
     virtual NSArray *getKeyList();
     virtual NSString *getKeyCodeString();
+	virtual NSString *getKeyIconString();
     virtual NSString *getModifierString();
     virtual NSString *getModifierIconString();
 protected:

@@ -13,6 +13,7 @@
 	IBOutlet NSView *view;
 	NSString *_identifier;
 	NSString *_localizedName;
+	NSString *_shortcut;
 	NSMutableDictionary *_dictionary;
 	BOOL _enabled;
 	id _delegate;
@@ -27,6 +28,8 @@
 - (void)setDictionary:(NSDictionary *)dictionary;
 - (BOOL)isEnabled;
 - (void)setEnabled:(BOOL)enabled;
+- (NSString *)shortcut;
+- (void)setShortcut:(NSString *)shortcut;
 - (id)delegate;
 - (void)setDelegate:(id)delegate;
 - (void)setValue:(id)value forKey:(NSString *)key;

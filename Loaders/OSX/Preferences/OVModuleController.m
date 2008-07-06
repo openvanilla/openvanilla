@@ -71,6 +71,16 @@
 	[_dictionary removeAllObjects];
 	[_dictionary addEntriesFromDictionary:dictionary];
 }
+- (NSString *)shortcut
+{
+	return _shortcut;
+}
+- (void)setShortcut:(NSString *)shortcut
+{
+	id tmp = _shortcut;
+	_shortcut = [shortcut retain];
+	[tmp release];
+}
 - (id)delegate
 {
 	return _delegate;
@@ -78,7 +88,7 @@
 - (void)setDelegate:(id)delegate
 {
 	id tmp = _delegate;
-	_delegate = delegate;
+	_delegate = [delegate retain];
 	[tmp release];
 }
 - (BOOL)isEnabled
@@ -93,7 +103,6 @@
 {
 	[_dictionary setValue:value forKey:key];
 }
-
 - (void)update
 {
 	[_delegate updateConfigWithIdentifer:_identifier dictionary:_dictionary];	

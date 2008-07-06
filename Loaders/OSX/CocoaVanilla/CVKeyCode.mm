@@ -214,6 +214,50 @@ NSString *CVKeyCode::getKeyCodeString()
     return [NSString stringWithUTF8String:buf];
 }
 
+NSString *CVKeyCode::getKeyIconString()
+{
+	NSString *string = getKeyCodeString();
+	if ([string isEqualToString:@"space"]) {
+		return [NSString stringWithUTF8String:"Space"];
+	}
+	else if ([string isEqualToString:@"delete"]) {
+		return [NSString stringWithUTF8String:"⌦"];
+	}
+	else if ([string isEqualToString:@"backspace"]) {
+		return [NSString stringWithUTF8String:"⌫"];
+	}
+	else if ([string isEqualToString:@"up"]) {
+		return [NSString stringWithUTF8String:"↑"];
+	}
+	else if ([string isEqualToString:@"down"]) {
+		return [NSString stringWithUTF8String:"↓"];
+	}
+	else if ([string isEqualToString:@"left"]) {
+		return [NSString stringWithUTF8String:"←"];
+	}
+	else if ([string isEqualToString:@"right"]) {
+		return [NSString stringWithUTF8String:"→"];
+	}
+	else if ([string isEqualToString:@"home"]) {
+		return [NSString stringWithUTF8String:"↖"];
+	}	
+	else if ([string isEqualToString:@"end"]) {
+		return [NSString stringWithUTF8String:"↘"];
+	}
+	else if ([string isEqualToString:@"pageup"]) {
+		return [NSString stringWithUTF8String:"⇞"];
+	}
+	else if ([string isEqualToString:@"pagedown"]) {
+		return [NSString stringWithUTF8String:"⇟"];
+	}
+	else if ([string isEqualToString:@"tab"]) {
+		return [NSString stringWithUTF8String:"⇥"];
+	}
+	
+	
+	return string;
+}
+
 NSString *CVKeyCode::getModifierIconString()
 { 
     char func[32];
