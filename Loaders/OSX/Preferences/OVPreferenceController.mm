@@ -192,9 +192,14 @@
 	if ([self updateConfigWithIdentifer:identifier dictionary:dictionary])
 		[self writeConfig];
 }
+- (void)updateOutputFilterOrder:(NSArray *)order
+{
+	NSMutableDictionary *menuManagerDictionary = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVMenuManager"]];
+	[menuManagerDictionary setValue:order forKey:@"outputFilterOrder"];
+	[self writeConfigWithIdentifer:@"OVMenuManager" dictionary:menuManagerDictionary];
+}
 - (void)addToExcludeList:(NSString *)identifier
 {
-	NSLog(@"i");
 	[_excludeModuleList addObject:identifier];
 	NSMutableDictionary *loaderConfig = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVLoader"]];
 	[loaderConfig setValue:_excludeModuleList forKey:@"excludeModuleList"];
@@ -202,7 +207,6 @@
 }
 - (void)removeFromExcludeList:(NSString *)identifier
 {
-	NSLog(@"i");	
 	[_excludeModuleList removeObject:identifier];
 	NSMutableDictionary *loaderConfig = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVLoader"]];
 	[loaderConfig setValue:_excludeModuleList forKey:@"excludeModuleList"];

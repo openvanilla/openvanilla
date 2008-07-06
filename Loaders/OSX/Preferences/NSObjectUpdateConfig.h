@@ -11,6 +11,7 @@
 @interface NSObject(UpdateConfig)
 - (BOOL)updateConfigWithIdentifer:(NSString *)identifier dictionary:(NSDictionary *)dictionary;
 - (void)writeConfigWithIdentifer:(NSString *)identifier dictionary:(NSDictionary *)dictionary;
+- (void)updateOutputFilterOrder:(NSArray *)order;
 - (void)addToExcludeList:(NSString *)identifier;
 - (void)removeFromExcludeList:(NSString *)identifier;
 @end

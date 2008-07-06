@@ -279,6 +279,16 @@
 	[m_ouputFilters insertObject:[_draggingItem copy] atIndex:childIndex];
 	[m_ouputFilters removeObject:_draggingItem];
 	[u_outlineView reloadData];
+	
+	NSMutableArray *outputFilterOrder = [NSMutableArray array];
+	NSEnumerator *enumerator = [m_ouputFilters objectEnumerator];
+	id controller;
+	while (controller = [enumerator nextObject]) {
+		NSString *identifier = [controller moduleIdentifer];
+		[outputFilterOrder addObject:identifier];
+	}
+	[m_preferenceController updateOutputFilterOrder:outputFilterOrder];
+	
 	return YES;
 }
 @end
