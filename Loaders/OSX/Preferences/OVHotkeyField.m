@@ -8,6 +8,7 @@
 
 #import "OVHotkeyField.h"
 #import "NDHotKeyEvent.h"
+#import "OVShortcutHelper.h"
 
 typedef int CGSConnection;
 
@@ -85,19 +86,15 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
     if (hotKey != newHotKey) {
         [hotKey release];
         hotKey = [newHotKey retain];
-		/*
-		NSDictionary *binding=[self infoForBinding:@"hotKey"];
-		if (binding)
-			[[binding objectForKey:NSObservedObjectKey] setValue:hotKey forKeyPath:[binding objectForKey:NSObservedKeyPathKey]];
-			*/
-	
 		[self updateStringForHotKey];
+		[OVShortcutHelper shortcutFromDictionary:hotKey];
     }
 } 
 
 - (void)updateStringForHotKey
 {
 	if ([hotKey isKindOfClass:[NSDictionary class]]) {
+		NSLog([hotKey description]);
 		NSString *descrip;
 		if (![hotKey objectForKey:@"keyCode"]) {
 			descrip = @"";
@@ -155,7 +152,8 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
 				{
 					unsigned short keyCode=[theEvent keyCode];
 					NSString *characters=[theEvent charactersIgnoringModifiers];
-					if (keyCode == 48) characters=@"\t";
+					if (keyCode == 48) 
+						characters=@"\t";
 					
 					if ([theEvent modifierFlags] & (NSCommandKeyMask|NSFunctionKeyMask|NSControlKeyMask|NSAlternateKeyMask)){
 						[self setHotKey:[self hotKeyDictForEvent:theEvent]];
@@ -164,14 +162,14 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
 					else if ([theEvent keyCode] == 53) { //Escape
 						collectEvents = NO; 
 					}
-					else if ([theEvent keyCode] == 48) { //Tab
-						[[self window] makeFirstResponder:[self nextKeyView]];
-						collectEvents = NO;
-					}
-					else if ([theEvent keyCode] == 51) { //Delete
-						[self setHotKey:nil];
-						collectEvents=NO; 
-					}
+//					else if ([theEvent keyCode] == 48) { //Tab
+//						[[self window] makeFirstResponder:[self nextKeyView]];
+//						collectEvents = NO;
+//					}
+//					else if ([theEvent keyCode] == 51) { //Delete
+//						[self setHotKey:nil];
+//						collectEvents=NO; 
+//					}
 					else {
 						NSBeep();
 					}

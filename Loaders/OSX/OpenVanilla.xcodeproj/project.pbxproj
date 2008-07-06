@@ -364,7 +364,7 @@
 		D48FB1770E2130F40071F20E /* OVHotkeyField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OVHotkeyField.m; path = Preferences/OVHotkeyField.m; sourceTree = "<group>"; };
 		D48FB1780E2130F40071F20E /* OVHotkeyField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVHotkeyField.h; path = Preferences/OVHotkeyField.h; sourceTree = "<group>"; };
 		D48FB17A0E2130FD0071F20E /* NDHotKeyEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NDHotKeyEvent.h; path = Preferences/NDHotKeyEvent.h; sourceTree = "<group>"; };
-		D48FB17B0E2130FD0071F20E /* NDHotKeyEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NDHotKeyEvent.m; path = Preferences/NDHotKeyEvent.m; sourceTree = "<group>"; };
+		D48FB17B0E2130FD0071F20E /* NDHotKeyEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NDHotKeyEvent.m; path = Preferences/NDHotKeyEvent.m; sourceTree = "<group>"; wrapsLines = 1; };
 		D4ACB9F30E1E6BC9005E7BA7 /* Preferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Preferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ACBA030E1E6BFC005E7BA7 /* Preferences_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preferences_Prefix.pch; path = Preferences/Preferences_Prefix.pch; sourceTree = "<group>"; };
 		D4ACBA040E1E6BFC005E7BA7 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Preferences/main.m; sourceTree = "<group>"; };

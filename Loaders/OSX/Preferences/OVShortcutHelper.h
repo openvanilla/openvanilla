@@ -14,5 +14,5 @@
 }
 
 + (NSString *)readableShortCut:(NSString *)shortcut;
-
++ (NSString *)shortcutFromDictionary: (NSDictionary *)dictionary;
 @end

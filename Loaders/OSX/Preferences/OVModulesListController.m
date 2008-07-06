@@ -186,23 +186,23 @@
 		else if (item == m_ouputFilters) {
 			return @"Output Filters";
 		}
-		else {			
+		else if ([item isKindOfClass:[OVModuleController class]]) {
 			return [item localizedName];;
 		}
 	}
 	else if ([[tableColumn identifier] isEqualToString:@"enabled"]) {
-		if (item == nil || item == m_inputMethods || item == m_ouputFilters) {
+		if (![item isKindOfClass:[OVModuleController class]]) {
 			return nil;
-		}
+		}		
 		else {
 			BOOL enabled = [item isEnabled];
 			return [NSNumber numberWithBool:enabled];
 		}
 	}
 	else if ([[tableColumn identifier] isEqualToString:@"shortcut"]) {
-		if (item == nil || item == m_inputMethods || item == m_ouputFilters) {
+		if (![item isKindOfClass:[OVModuleController class]]) {
 			return nil;
-		}
+		}		
 		else {		
 			return [OVShortcutHelper readableShortCut:[item shortcut]];
 		}
@@ -222,6 +222,9 @@
 	if (item == nil || item == m_inputMethods || item == m_ouputFilters) {
 		return NO;
 	}
+	if (![item isKindOfClass:[OVModuleController class]]) {
+		return;
+	}	
 	[self setCurrentItem:item];
 	return YES;
 }
@@ -240,7 +243,10 @@
 {
 	if (item == nil || item == m_inputMethods || item == m_ouputFilters) {
 		return;
-	}	
+	}
+	if (![item isKindOfClass:[OVModuleController class]]) {
+		return;
+	}
 	if ([[tableColumn identifier] isEqualToString:@"enabled"]) {
 		BOOL enabled = [object boolValue];
 		[item setEnabled:enabled];
@@ -283,7 +289,6 @@
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(NSInteger)childIndex
 {
-	int originalIndex = [m_ouputFilters indexOfObject:_draggingItem];
 	[m_ouputFilters insertObject:[_draggingItem copy] atIndex:childIndex];
 	[m_ouputFilters removeObject:_draggingItem];
 	[u_outlineView reloadData];

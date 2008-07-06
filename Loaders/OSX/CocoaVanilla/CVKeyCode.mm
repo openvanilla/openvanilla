@@ -53,7 +53,7 @@ CVKeyCode::CVKeyCode(const char *charcode, const char *modifiers)
 CVKeyCode::CVKeyCode(NSString *s)
 {
 	NSArray *a = [s splitBySpaceWithQuote];
-	if ([a count] < 2) {file://localhost/Users/zonble/Desktop/bigicon.png
+	if ([a count] < 2) {
 		init([s UTF8String], "");
 	}
 	else {
@@ -86,7 +86,7 @@ void CVKeyCode::init(const char *charcode, const char *modifiers) {
 	m = 0;
 	
 	for (size_t i = 0; i < strlen(modifiers); i++) {
-		switch(toupper(modifiers[i])) {
+		switch (toupper(modifiers[i])) {
 			case 'M': m |= cmdKey; break;
 			case 'O': m |= optionKey; break;
 			case 'C': m |= controlKey; break;
