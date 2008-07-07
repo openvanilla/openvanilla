@@ -9,10 +9,12 @@
 #import <Cocoa/Cocoa.h>
 
 @interface OVHotkeyField : NSView {
+	IBOutlet id u_outlineView;
 	NSTextField *u_displayTextView;
 	NSButton *u_setButton;
-	NSString *m_shortcut;
+	id _moduleController;
 	@private
+	NSString *m_shortcut;	
 	NSDictionary *hotKey;
 }
 - (IBAction)set:(id)sender;
@@ -20,4 +22,6 @@
 - (void)setHotKey:(NSDictionary *)newHotKey;
 - (void)updateStringForHotKey;
 - (void)absorbEvents;
+- (void)setModuleController: (id)controller;
+- (id)moduleController;
 @end

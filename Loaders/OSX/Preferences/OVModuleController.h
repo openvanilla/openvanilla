@@ -30,6 +30,7 @@
 - (void)setEnabled:(BOOL)enabled;
 - (NSString *)shortcut;
 - (void)setShortcut:(NSString *)shortcut;
+- (void)setShortcut:(NSString *)shortcut fromSender:(id)sender;
 - (id)delegate;
 - (void)setDelegate:(id)delegate;
 - (void)setValue:(id)value forKey:(NSString *)key;

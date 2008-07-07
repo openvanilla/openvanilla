@@ -8,8 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface OVShortcutHelper : NSObject {
-
+@interface OVShortcutHelper : NSObject {	
 }
 
 + (NSString *)readableShortCut:(NSString *)shortcut;

@@ -56,6 +56,7 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
 	[u_setButton release];
 	[u_displayTextView release];
 	[m_shortcut release];
+	[_moduleController release];
 	[hotKey release];
 	[super dealloc];
 }
@@ -89,13 +90,15 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
 }
 
 - (void)updateStringForHotKey {
-//	if (![hotKey isKindOfClass:[NSDictionary class]]) {
-//		[u_displayTextView setStringValue:@"invalid"];
-//		return;
-//	}
 	m_shortcut = [[OVShortcutHelper shortcutFromDictionary:hotKey] retain];
 	if (m_shortcut) {
 		[u_displayTextView setStringValue:[OVShortcutHelper readableShortCut:m_shortcut]];
+		if (_moduleController) {
+			[_moduleController setShortcut:m_shortcut fromSender:self];
+			if (u_outlineView) {
+				[u_outlineView reloadData];
+			}
+		}
 	}
 	else {
 		[u_displayTextView setStringValue:@""];	
@@ -194,5 +197,19 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
 {
 	[self absorbEvents];
 }
+
+- (void)setModuleController: (id)controller
+{
+	id tmp = _moduleController;
+	_moduleController = [controller retain];
+	[tmp release];
+	NSString *shortcut = [_moduleController shortcut];
+	[u_displayTextView setStringValue:[OVShortcutHelper readableShortCut:shortcut]];
+}
+- (id)moduleController
+{
+	return _moduleController;
+}
+
 
 @end

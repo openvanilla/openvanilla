@@ -9,11 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import "NSObjectUpdateConfig.h"
 #import "OVModuleController.h"
+#import "OVHotkeyField.h"
 
 @interface OVModulesListController : NSObject {
 	IBOutlet NSOutlineView *u_outlineView;
 	IBOutlet NSView *u_settingView;
 	IBOutlet NSView *u_mainView;
+	IBOutlet OVHotkeyField *u_hotkeyField;
 	IBOutlet id m_preferenceController;
 	
 	NSMutableArray *m_inputMethods;

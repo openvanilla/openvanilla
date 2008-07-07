@@ -81,6 +81,13 @@
 	_shortcut = [shortcut retain];
 	[tmp release];
 }
+- (void)setShortcut:(NSString *)shortcut fromSender:(id)sender
+{
+	id tmp = _shortcut;
+	_shortcut = [shortcut retain];
+	[tmp release];
+}
+
 - (id)delegate
 {
 	return _delegate;

@@ -27,6 +27,8 @@
 //	[u_outlineView setDataSource:self];
 }
 
+// This function is called when the main preference controller
+// finishes generating the list of all modules.
 - (void)expandAll
 {
 	[u_outlineView setDelegate:self];
@@ -39,6 +41,7 @@
 			[u_outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
 			id selectedController = [m_inputMethods objectAtIndex:0];
 			[self switchToView:[selectedController view]];
+			[u_hotkeyField setModuleController:selectedController];
 		}
 	}
 	if (m_ouputFilters) {
@@ -231,6 +234,7 @@
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
+	[u_hotkeyField setModuleController:_currentItem];
 	[self switchToView:[_currentItem view]];
 }
 
