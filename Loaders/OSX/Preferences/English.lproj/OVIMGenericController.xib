@@ -34,7 +34,7 @@
 					<object class="NSStepper" id="323972693">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{256, 137}, {19, 27}}</string>
+						<string key="NSFrame">{{256, 199}, {19, 27}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSStepperCell" key="NSCell" id="568158883">
@@ -49,7 +49,7 @@
 					<object class="NSTextField" id="185537174">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{195, 140}, {56, 22}}</string>
+						<string key="NSFrame">{{195, 202}, {56, 22}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="497558912">
@@ -142,7 +142,7 @@
 					<object class="NSTextField" id="679964652">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{17, 145}, {173, 17}}</string>
+						<string key="NSFrame">{{17, 207}, {173, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="926679167">
@@ -151,7 +151,7 @@
 							<string key="NSContents">Maximum radical length:</string>
 							<reference key="NSSupport" ref="31845602"/>
 							<reference key="NSControlView" ref="679964652"/>
-							<object class="NSColor" key="NSBackgroundColor">
+							<object class="NSColor" key="NSBackgroundColor" id="854352265">
 								<int key="NSColorSpace">6</int>
 								<string key="NSCatalogName">System</string>
 								<string key="NSColorName">controlColor</string>
@@ -160,7 +160,7 @@
 									<bytes key="NSWhite">MC42NjY2NjY2OQA</bytes>
 								</object>
 							</object>
-							<object class="NSColor" key="NSTextColor">
+							<object class="NSColor" key="NSTextColor" id="968345201">
 								<int key="NSColorSpace">6</int>
 								<string key="NSCatalogName">System</string>
 								<string key="NSColorName">controlTextColor</string>
@@ -171,13 +171,13 @@
 					<object class="NSButton" id="488868202">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{18, 86}, {204, 18}}</string>
+						<string key="NSFrame">{{18, 115}, {204, 18}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="1032221023">
 							<int key="NSCellFlags">67239424</int>
 							<int key="NSCellFlags2">0</int>
-							<string key="NSContents">Show candidates as you type</string>
+							<string key="NSContents">Show candidates as typing.</string>
 							<reference key="NSSupport" ref="31845602"/>
 							<reference key="NSControlView" ref="488868202"/>
 							<int key="NSButtonFlags">1211912703</int>
@@ -194,13 +194,13 @@
 					<object class="NSButton" id="752802866">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{18, 66}, {246, 18}}</string>
+						<string key="NSFrame">{{18, 95}, {250, 18}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="374029776">
 							<int key="NSCellFlags">67239424</int>
 							<int key="NSCellFlags2">0</int>
-							<string key="NSContents">Commit at maximum radical length</string>
+							<string key="NSContents">Commit at maximum radical length.</string>
 							<reference key="NSSupport" ref="31845602"/>
 							<reference key="NSControlView" ref="752802866"/>
 							<int key="NSButtonFlags">1211912703</int>
@@ -215,13 +215,13 @@
 					<object class="NSButton" id="899649087">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{18, 106}, {288, 18}}</string>
+						<string key="NSFrame">{{18, 135}, {288, 18}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="655974361">
 							<int key="NSCellFlags">67239424</int>
 							<int key="NSCellFlags2">0</int>
-							<string key="NSContents">Space key chooses the 1st candidate</string>
+							<string key="NSContents">Space key chooses the first candidate.</string>
 							<reference key="NSSupport" ref="31845602"/>
 							<reference key="NSControlView" ref="899649087"/>
 							<int key="NSButtonFlags">1211912703</int>
@@ -236,13 +236,13 @@
 					<object class="NSButton" id="729066748">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{18, 46}, {227, 18}}</string>
+						<string key="NSFrame">{{18, 75}, {227, 18}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="275395989">
 							<int key="NSCellFlags">67239424</int>
 							<int key="NSCellFlags2">0</int>
-							<string key="NSContents">Warning beep</string>
+							<string key="NSContents">Beep on errors.</string>
 							<reference key="NSSupport" ref="31845602"/>
 							<reference key="NSControlView" ref="729066748"/>
 							<int key="NSButtonFlags">1211912703</int>
@@ -254,8 +254,28 @@
 							<int key="NSPeriodicInterval">25</int>
 						</object>
 					</object>
+					<object class="NSTextField" id="602256051">
+						<reference key="NSNextResponder" ref="1005"/>
+						<int key="NSvFlags">270</int>
+						<string key="NSFrame">{{17, 153}, {290, 40}}</string>
+						<reference key="NSSuperview" ref="1005"/>
+						<bool key="NSEnabled">YES</bool>
+						<object class="NSTextFieldCell" key="NSCell" id="141709617">
+							<int key="NSCellFlags">67239424</int>
+							<int key="NSCellFlags2">272760832</int>
+							<string key="NSContents">For example, the maximum radical length of the Cangjie Input Method is 5.</string>
+							<object class="NSFont" key="NSSupport">
+								<string key="NSName">LucidaGrande</string>
+								<double key="NSSize">1.100000e+01</double>
+								<int key="NSfFlags">3100</int>
+							</object>
+							<reference key="NSControlView" ref="602256051"/>
+							<reference key="NSBackgroundColor" ref="854352265"/>
+							<reference key="NSTextColor" ref="968345201"/>
+						</object>
+					</object>
 				</object>
-				<string key="NSFrameSize">{324, 187}</string>
+				<string key="NSFrameSize">{324, 244}</string>
 				<reference key="NSSuperview"/>
 				<string key="NSClassName">NSView</string>
 			</object>
@@ -409,6 +429,7 @@
 							<reference ref="752802866"/>
 							<reference ref="899649087"/>
 							<reference ref="729066748"/>
+							<reference ref="602256051"/>
 						</object>
 						<reference key="parent" ref="1002"/>
 					</object>
@@ -519,6 +540,20 @@
 						<reference key="object" ref="1027023448"/>
 						<reference key="parent" ref="497558912"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">36</int>
+						<reference key="object" ref="602256051"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="141709617"/>
+						</object>
+						<reference key="parent" ref="1005"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">37</int>
+						<reference key="object" ref="141709617"/>
+						<reference key="parent" ref="602256051"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -539,6 +574,8 @@
 					<string>2.IBPluginDependency</string>
 					<string>25.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
+					<string>36.IBPluginDependency</string>
+					<string>37.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
@@ -553,7 +590,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilderKit</string>
 					<string>com.apple.InterfaceBuilderKit</string>
-					<string>{{21, 535}, {324, 187}}</string>
+					<string>{{21, 478}, {324, 244}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{628, 654}</string>
 					<string>{{217, 442}, {480, 272}}</string>
@@ -561,6 +598,8 @@
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -594,7 +633,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">33</int>
+			<int key="maxID">37</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

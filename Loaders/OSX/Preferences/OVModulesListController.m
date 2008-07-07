@@ -21,14 +21,12 @@
 		m_ouputFilters = [NSMutableArray new];
 
     [u_outlineView registerForDraggedTypes:[NSArray arrayWithObjects:DragDropSimplePboardType, NSStringPboardType, NSFilenamesPboardType, nil]];
-    [u_outlineView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:YES];
-	
-//	[u_outlineView setDelegate:self];
-//	[u_outlineView setDataSource:self];
+    [u_outlineView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:YES];	
 }
 
 // This function is called when the main preference controller
 // finishes generating the list of all modules.
+// This function must be called once.
 - (void)expandAll
 {
 	[u_outlineView setDelegate:self];
@@ -42,6 +40,9 @@
 			id selectedController = [m_inputMethods objectAtIndex:0];
 			[self switchToView:[selectedController view]];
 			[u_hotkeyField setModuleController:selectedController];
+		}
+		else {
+			[u_hotkeyView setHidden:YES];
 		}
 	}
 	if (m_ouputFilters) {
@@ -215,8 +216,8 @@
 
 - (void)setCurrentItem:(id)item
 {
-	id tmp = _currentItem;
-	_currentItem = [item retain];
+	id tmp = m_currentItem;
+	m_currentItem = [item retain];
 	[tmp release];	
 }
 
@@ -234,8 +235,9 @@
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
-	[u_hotkeyField setModuleController:_currentItem];
-	[self switchToView:[_currentItem view]];
+	[u_hotkeyView setHidden:NO];
+	[u_hotkeyField setModuleController:m_currentItem];
+	[self switchToView:[m_currentItem view]];
 }
 
 - (CGFloat)indentationPerLevel
@@ -258,10 +260,10 @@
 		NSLog(identifier);
 		if (m_preferenceController) {
 			if (enabled == YES) {
-				[m_preferenceController removeFromExcludeList:identifier];
+				[m_preferenceController removeModuleFromExcludeList:identifier];
 			}
 			else {
-				[m_preferenceController addToExcludeList:identifier];
+				[m_preferenceController addModuleToExcludeList:identifier];
 			}
 
 		}		
@@ -274,7 +276,7 @@
 	if (![m_ouputFilters containsObject:[items objectAtIndex:0]])
 		return NO;
 	
-	_draggingItem = draggingItem;
+	m_draggingItem = draggingItem;
 	[pboard declareTypes:[NSArray arrayWithObjects:DragDropSimplePboardType, nil] owner:self];	
     [pboard setData:[NSData data] forType:DragDropSimplePboardType]; 
     return YES;
@@ -293,8 +295,8 @@
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(NSInteger)childIndex
 {
-	[m_ouputFilters insertObject:[_draggingItem copy] atIndex:childIndex];
-	[m_ouputFilters removeObject:_draggingItem];
+	[m_ouputFilters insertObject:[m_draggingItem copy] atIndex:childIndex];
+	[m_ouputFilters removeObject:m_draggingItem];
 	[u_outlineView reloadData];
 	
 	NSMutableArray *outputFilterOrder = [NSMutableArray array];

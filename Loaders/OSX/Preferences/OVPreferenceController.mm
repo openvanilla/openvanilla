@@ -11,6 +11,8 @@
 
 @implementation OVPreferenceController
 
+#pragma mark Initialize the environment.
+
 - (void)setExcludeList
 {
 	NSEnumerator *enumerator;
@@ -46,7 +48,6 @@
 
 - (int)outputFilterExists:(NSString *)identifier inArray:(NSArray *)outputFilterArray
 {
-	NSLog(@"hi");
 	if (![outputFilterArray count])
 		return -1;
 	NSEnumerator *e = [outputFilterArray objectEnumerator];
@@ -102,16 +103,19 @@
 		//      NSString *shortcut=[menucfg valueForKey:mid default:@""];	
 		
 		if ([[w moduleType] isEqualToString:@"OVInputMethod"]) {
+			// The Generic Input Method modules.
 			if ([[w identifier] hasPrefix:@"OVIMGeneric-"]) {
 				OVIMGenericController *moduleCotroller = [[OVIMGenericController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
 				[moduleCotroller setShortcut:shortcut];
 				[m_moduleListController addInputMethod:moduleCotroller];				
 			}
+			// The Input Methods with extra settings.
 			else if ([dictionary count]) {
 				OVTableModuleController *moduleCotroller = [[OVTableModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
 				[moduleCotroller setShortcut:shortcut];				
 				[m_moduleListController addInputMethod:moduleCotroller];
 			}
+			// The Input Methods without extar settings.
 			else {
 				OVModuleController *moduleCotroller = [[OVModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
 				[moduleCotroller setShortcut:shortcut];				
@@ -120,7 +124,6 @@
 		}
 		else if ([[w moduleType] isEqualToString:@"OVOutputFilter"]) {
 			int i = [self outputFilterExists:identifier inArray:outputFilterOrderArray];
-			NSLog(@"i: %d", i);
 			if (i >= 0) {
 				NSMutableDictionary *d = [NSMutableDictionary dictionaryWithDictionary:[outputFilterOrderArray objectAtIndex:i]];
 				[d setValue:localizedName forKey:@"localizedName"];
@@ -128,7 +131,6 @@
 				[d setValue:shortcut forKey:@"shortcut"];
 				[d setValue:[NSNumber numberWithBool:enabled] forKey:@"enabled"];
 				[outputFilterOrderArray replaceObjectAtIndex:i withObject:d];
-				NSLog(@"found!");
 			}
 			else {
 				NSMutableDictionary *d = [NSMutableDictionary dictionary];
@@ -138,7 +140,6 @@
 				[d setValue:shortcut forKey:@"shortcut"];				
 				[d setValue:[NSNumber numberWithBool:enabled] forKey:@"enabled"];					
 				[outputFilterOrderArray addObject:d];
-				NSLog(@"not found!");				
 			}			
 		}
 	}
@@ -185,6 +186,9 @@
 	[super dealloc];
 }
 
+#pragma mark Methods to update configurations.
+// Most of the methods are defined in NSObjectUpdateConfig.h.
+
 - (BOOL)updateConfigWithIdentifer:(NSString *)identifier dictionary:(NSDictionary *)dictionary
 {
 	if (!identifier || ![identifier length])
@@ -207,19 +211,25 @@
 	[menuManagerDictionary setValue:order forKey:@"outputFilterOrder"];
 	[self writeConfigWithIdentifer:@"OVMenuManager" dictionary:menuManagerDictionary];
 }
-- (void)addToExcludeList:(NSString *)identifier
+- (void)addModuleToExcludeList:(NSString *)identifier
 {
 	[_excludeModuleList addObject:identifier];
 	NSMutableDictionary *loaderConfig = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVLoader"]];
 	[loaderConfig setValue:_excludeModuleList forKey:@"excludeModuleList"];
 	[self writeConfigWithIdentifer:@"OVLoader" dictionary:loaderConfig];	
 }
-- (void)removeFromExcludeList:(NSString *)identifier
+- (void)removeModuleFromExcludeList:(NSString *)identifier
 {
 	[_excludeModuleList removeObject:identifier];
 	NSMutableDictionary *loaderConfig = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVLoader"]];
 	[loaderConfig setValue:_excludeModuleList forKey:@"excludeModuleList"];
 	[self writeConfigWithIdentifer:@"OVLoader" dictionary:loaderConfig];		
+}
+- (void)updateShortcut:(NSString *)shortcut forModule:(NSString *)identifier
+{
+	NSMutableDictionary *menuManagerDictionary = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVMenuManager"]];
+	[menuManagerDictionary setValue:shortcut forKey:identifier];
+	[self writeConfigWithIdentifer:@"OVMenuManager" dictionary:menuManagerDictionary];
 }
 
 - (void)writeConfig
@@ -229,6 +239,9 @@
 	[[[_loader config] dictionary] addEntriesFromDictionary:_config];
 	[[_loader config] sync];
 }
+
+#pragma mark The main User Interface of the preference tool.
+
 - (void)setActiveView:(NSView *)view animate:(BOOL)flag
 {	
 	NSRect windowFrame = [[self window] frame];
@@ -244,8 +257,11 @@
 	[u_mainView addSubview:view];
 }
 
+#pragma mark NSWindow delegate methods.
+
 - (void)windowWillClose:(NSNotification *)notification
 {
+	// We will terminate the application when the main window is closed.
 	[NSApp terminate:self];
 }
 

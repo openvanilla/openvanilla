@@ -86,6 +86,7 @@
 	id tmp = _shortcut;
 	_shortcut = [shortcut retain];
 	[tmp release];
+	[_delegate updateShortcut:shortcut forModule:_identifier];
 }
 
 - (id)delegate

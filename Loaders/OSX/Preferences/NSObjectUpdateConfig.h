@@ -12,6 +12,7 @@
 - (BOOL)updateConfigWithIdentifer:(NSString *)identifier dictionary:(NSDictionary *)dictionary;
 - (void)writeConfigWithIdentifer:(NSString *)identifier dictionary:(NSDictionary *)dictionary;
 - (void)updateOutputFilterOrder:(NSArray *)order;
-- (void)addToExcludeList:(NSString *)identifier;
-- (void)removeFromExcludeList:(NSString *)identifier;
+- (void)addModuleToExcludeList:(NSString *)identifier;
+- (void)removeModuleFromExcludeList:(NSString *)identifier;
+- (void)updateShortcut:(NSString *)shortcut forModule:(NSString *)identifier;
 @end

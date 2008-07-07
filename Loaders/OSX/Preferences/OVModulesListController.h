@@ -10,19 +10,21 @@
 #import "NSObjectUpdateConfig.h"
 #import "OVModuleController.h"
 #import "OVHotkeyField.h"
+#define MSG(x)      [[NSBundle mainBundle] localizedStringForKey:x value:nil table:nil]
 
 @interface OVModulesListController : NSObject {
 	IBOutlet NSOutlineView *u_outlineView;
 	IBOutlet NSView *u_settingView;
 	IBOutlet NSView *u_mainView;
 	IBOutlet OVHotkeyField *u_hotkeyField;
+	IBOutlet NSView *u_hotkeyView;
 	IBOutlet id m_preferenceController;
 	
 	NSMutableArray *m_inputMethods;
 	NSMutableArray *m_ouputFilters;
 	
-	id _currentItem;
-	id _draggingItem;
+	id m_currentItem;
+	id m_draggingItem;
 }
 
 - (NSView *)view;
