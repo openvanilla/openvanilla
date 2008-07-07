@@ -147,6 +147,8 @@
 		D4ACBA310E1E6C8D005E7BA7 /* CocoaVanilla.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ACC51670CCF7F7700E2307C /* CocoaVanilla.framework */; };
 		D4ACBAFA0E1E6CDD005E7BA7 /* OVPreferenceController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4ACBAF90E1E6CDD005E7BA7 /* OVPreferenceController.mm */; };
 		D4ACBB220E1E72D3005E7BA7 /* OVModulesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACBB210E1E72D3005E7BA7 /* OVModulesListController.m */; };
+		D4D1D0E60E228CD300E2B227 /* OVIMPOJHoloController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D1D0E50E228CD300E2B227 /* OVIMPOJHoloController.m */; };
+		D4D1D0F40E228D8E00E2B227 /* OVIMPOJHoloController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D1D0F20E228D8E00E2B227 /* OVIMPOJHoloController.xib */; };
 		D4D5520F0E1F0AC5003E2FC3 /* OVTableModuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D5520E0E1F0AC5003E2FC3 /* OVTableModuleController.m */; };
 		D4D5521B0E1F0B19003E2FC3 /* OVTableModuleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D552190E1F0B19003E2FC3 /* OVTableModuleController.xib */; };
 		D4D552930E1F11B8003E2FC3 /* OVPreference_Toolbar.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4D552920E1F11B8003E2FC3 /* OVPreference_Toolbar.mm */; };
@@ -371,6 +373,9 @@
 		D4ACBAF90E1E6CDD005E7BA7 /* OVPreferenceController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OVPreferenceController.mm; path = Preferences/OVPreferenceController.mm; sourceTree = "<group>"; wrapsLines = 1; };
 		D4ACBB200E1E72D3005E7BA7 /* OVModulesListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVModulesListController.h; path = Preferences/OVModulesListController.h; sourceTree = "<group>"; };
 		D4ACBB210E1E72D3005E7BA7 /* OVModulesListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OVModulesListController.m; path = Preferences/OVModulesListController.m; sourceTree = "<group>"; wrapsLines = 1; };
+		D4D1D0E40E228CD300E2B227 /* OVIMPOJHoloController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVIMPOJHoloController.h; path = Preferences/OVIMPOJHoloController.h; sourceTree = "<group>"; };
+		D4D1D0E50E228CD300E2B227 /* OVIMPOJHoloController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OVIMPOJHoloController.m; path = Preferences/OVIMPOJHoloController.m; sourceTree = "<group>"; };
+		D4D1D0F30E228D8E00E2B227 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Preferences/English.lproj/OVIMPOJHoloController.xib; sourceTree = "<group>"; };
 		D4D5520D0E1F0AC5003E2FC3 /* OVTableModuleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVTableModuleController.h; path = Preferences/OVTableModuleController.h; sourceTree = "<group>"; };
 		D4D5520E0E1F0AC5003E2FC3 /* OVTableModuleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OVTableModuleController.m; path = Preferences/OVTableModuleController.m; sourceTree = "<group>"; wrapsLines = 1; };
 		D4D5521A0E1F0B19003E2FC3 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Preferences/English.lproj/OVTableModuleController.xib; sourceTree = "<group>"; };
@@ -657,10 +662,8 @@
 		D4ACB9EC0E1E6BB6005E7BA7 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				D4D552190E1F0B19003E2FC3 /* OVTableModuleController.xib */,
-				D45277A20E1ED00A00AF407A /* OVIMGenericController.xib */,
-				D4ACBA060E1E6C09005E7BA7 /* MainMenu.xib */,
-				D4ACBA080E1E6C09005E7BA7 /* InfoPlist.strings */,
+				D4D1D0E90E228CEF00E2B227 /* Resources */,
+				D4D1D0E80E228CE000E2B227 /* ModuleControllers */,
 				D4ACBA030E1E6BFC005E7BA7 /* Preferences_Prefix.pch */,
 				D4ACBA040E1E6BFC005E7BA7 /* main.m */,
 				D452786D0E1EDDBD00AF407A /* NSObjectUpdateConfig.h */,
@@ -669,18 +672,47 @@
 				D4D552920E1F11B8003E2FC3 /* OVPreference_Toolbar.mm */,
 				D4ACBB200E1E72D3005E7BA7 /* OVModulesListController.h */,
 				D4ACBB210E1E72D3005E7BA7 /* OVModulesListController.m */,
-				D45277540E1EC9F300AF407A /* OVModuleController.h */,
-				D45277550E1EC9F300AF407A /* OVModuleController.m */,
-				D45277AC0E1ED08800AF407A /* OVIMGenericController.h */,
-				D45277AD0E1ED08800AF407A /* OVIMGenericController.m */,
-				D4D5520D0E1F0AC5003E2FC3 /* OVTableModuleController.h */,
-				D4D5520E0E1F0AC5003E2FC3 /* OVTableModuleController.m */,
 				D43D6C4E0E20FE3000ECA0DE /* OVShortcutHelper.h */,
 				D43D6C4F0E20FE3000ECA0DE /* OVShortcutHelper.mm */,
 				D48FB1770E2130F40071F20E /* OVHotkeyField.m */,
 				D48FB1780E2130F40071F20E /* OVHotkeyField.h */,
 			);
 			name = Preferences;
+			sourceTree = "<group>";
+		};
+		D4D1D0E80E228CE000E2B227 /* ModuleControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D4D1D0EA0E228D0200E2B227 /* Resources */,
+				D45277540E1EC9F300AF407A /* OVModuleController.h */,
+				D45277550E1EC9F300AF407A /* OVModuleController.m */,
+				D45277AC0E1ED08800AF407A /* OVIMGenericController.h */,
+				D45277AD0E1ED08800AF407A /* OVIMGenericController.m */,
+				D4D5520D0E1F0AC5003E2FC3 /* OVTableModuleController.h */,
+				D4D5520E0E1F0AC5003E2FC3 /* OVTableModuleController.m */,
+				D4D1D0E40E228CD300E2B227 /* OVIMPOJHoloController.h */,
+				D4D1D0E50E228CD300E2B227 /* OVIMPOJHoloController.m */,
+			);
+			name = ModuleControllers;
+			sourceTree = "<group>";
+		};
+		D4D1D0E90E228CEF00E2B227 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D4ACBA060E1E6C09005E7BA7 /* MainMenu.xib */,
+				D4ACBA080E1E6C09005E7BA7 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		D4D1D0EA0E228D0200E2B227 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D4D552190E1F0B19003E2FC3 /* OVTableModuleController.xib */,
+				D45277A20E1ED00A00AF407A /* OVIMGenericController.xib */,
+				D4D1D0F20E228D8E00E2B227 /* OVIMPOJHoloController.xib */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -976,6 +1008,7 @@
 				D4ACBA0B0E1E6C09005E7BA7 /* InfoPlist.strings in Resources */,
 				D45277A40E1ED00A00AF407A /* OVIMGenericController.xib in Resources */,
 				D4D5521B0E1F0B19003E2FC3 /* OVTableModuleController.xib in Resources */,
+				D4D1D0F40E228D8E00E2B227 /* OVIMPOJHoloController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1116,6 +1149,7 @@
 				D4D552930E1F11B8003E2FC3 /* OVPreference_Toolbar.mm in Sources */,
 				D43D6C500E20FE3000ECA0DE /* OVShortcutHelper.mm in Sources */,
 				D48FB1790E2130F40071F20E /* OVHotkeyField.m in Sources */,
+				D4D1D0E60E228CD300E2B227 /* OVIMPOJHoloController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1272,6 +1306,14 @@
 				D4ACBA090E1E6C09005E7BA7 /* English */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D4D1D0F20E228D8E00E2B227 /* OVIMPOJHoloController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4D1D0F30E228D8E00E2B227 /* English */,
+			);
+			name = OVIMPOJHoloController.xib;
 			sourceTree = "<group>";
 		};
 		D4D552190E1F0B19003E2FC3 /* OVTableModuleController.xib */ = {
