@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface OVHotkeyField : NSView {
 	NSTextField *u_displayTextView;
 	NSButton *u_setButton;

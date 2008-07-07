@@ -83,7 +83,51 @@ unichar unicharForKeyCode( unsigned short aKeyCode )
 	}
 	unsigned short aCode = [keyCode shortValue];
 	unichar aCharacter = unicharForKeyCode(aCode);
-	NSString *keyString = [NSString stringWithCharacters:&aCharacter length:1];
+	NSString *keyString;
+
+	if (aCharacter == ovkSpace) {
+		keyString = @"space";
+	}
+	else if (aCharacter == ovkDelete) {
+		keyString = @"delete";
+	}
+	else if (aCharacter == ovkBackspace) {
+		keyString = @"backspace";
+	}
+	else if (aCharacter == ovkUp) {
+		keyString = @"up";
+	}
+	else if (aCharacter == ovkUp) {
+		keyString = @"down";
+	}
+	else if (aCharacter == ovkLeft) {
+		keyString = @"left";
+	}
+	else if (aCharacter == ovkRight) {
+		keyString = @"right";
+	}
+	else if (aCharacter == ovkHome) {
+		keyString = @"home";
+	}
+	else if (aCharacter == ovkEnd) {
+		keyString = @"end";
+	}
+	else if (aCharacter == ovkPageUp) {
+		keyString = @"pageup";
+	}
+	else if (aCharacter == ovkPageDown) {
+		keyString = @"pagedown";
+	}
+	else if (aCharacter == ovkTab) {
+		keyString = @"tab";
+	}	
+	else {
+		keyString = [NSString stringWithCharacters:&aCharacter length:1];
+	}
+	
+	if (!keyString || ![keyString length]) {
+		return @"";
+	}
 
 	unsigned int aModifierFlags = [modifiers unsignedIntValue];
 	NSMutableString *modifierString = [NSMutableString string];
@@ -102,9 +146,41 @@ unichar unicharForKeyCode( unsigned short aKeyCode )
 	}
 	
 	NSString *s = [NSString stringWithFormat:@"%@ %@", keyString, modifierString];
-	NSLog(s);
-	
 	return s;
+}
+
+
++ (NSString *)stringForModifiers: (unsigned int)aModifierFlags
+{
+	NSMutableString		* theString;
+	unichar					theCharacter;
+	
+	theString = [NSMutableString string];
+	if( aModifierFlags & NSControlKeyMask)
+	{
+		theCharacter = kControlUnicode;
+		[theString appendString:[NSString stringWithCharacters:&theCharacter length:1]];
+	}
+	
+	if( aModifierFlags & NSAlternateKeyMask)
+	{
+		theCharacter = kOptionUnicode;
+		[theString appendString:[NSString stringWithCharacters:&theCharacter length:1]];
+	}
+	
+	if( aModifierFlags & NSShiftKeyMask)
+	{
+		theCharacter = kShiftUnicode;
+		[theString appendString:[NSString stringWithCharacters:&theCharacter length:1]];
+	}
+	
+	if( aModifierFlags & NSCommandKeyMask)
+	{
+		theCharacter = kCommandUnicode;
+		[theString appendString:[NSString stringWithCharacters:&theCharacter length:1]];
+	}
+	
+	return theString;
 }
 
 @end

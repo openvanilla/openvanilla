@@ -181,11 +181,9 @@ NSArray *CVKeyCode::getKeyList()
     KMAP(@"tab");
     #undef KMAP
     char *s = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;< = >?@[\\]^_`";
-    char buf[2];
-    buf[1] = 0;
-    for (size_t i = 0; i<strlen(s); i++) {
-        buf[0] = s[i];
-        [ma addObject:[NSString stringWithUTF8String:buf]];
+    for (size_t i = 0; i < strlen(s); i++) {
+		unichar c = s[i];
+		[ma addObject:[NSString stringWithCharacters:&c length:1]];
     }
 
     return ma;

@@ -7,7 +7,6 @@
 //
 
 #import "OVHotkeyField.h"
-#import "NDHotKeyEvent.h"
 #import "OVShortcutHelper.h"
 
 typedef int CGSConnection;
@@ -86,32 +85,20 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
     if (hotKey != newHotKey) {
         [hotKey release];
         hotKey = [newHotKey retain];
-		[self updateStringForHotKey];
-		[OVShortcutHelper shortcutFromDictionary:hotKey];
     }
-} 
+}
 
-- (void)updateStringForHotKey
-{
-	if ([hotKey isKindOfClass:[NSDictionary class]]) {
-		NSLog([hotKey description]);
-		NSString *descrip;
-		if (![hotKey objectForKey:@"keyCode"]) {
-			descrip = @"";
-		}
-		else if (![hotKey objectForKey:@"modifiers"]) {
-			descrip = @"";
-		}
-		else {
-			descrip = [[NDHotKeyEvent getHotKeyForKeyCode:[[hotKey objectForKey:@"keyCode"]shortValue] character:[[hotKey objectForKey:@"character"]characterAtIndex:0] modifierFlags:[[hotKey objectForKey:@"modifiers"]unsignedIntValue]] stringValue];
-		}
-		[u_displayTextView setStringValue:descrip?descrip:@""]; 
-	}
-	else if (hotKey) {
-		[u_displayTextView setStringValue:@"invalid"];
+- (void)updateStringForHotKey {
+//	if (![hotKey isKindOfClass:[NSDictionary class]]) {
+//		[u_displayTextView setStringValue:@"invalid"];
+//		return;
+//	}
+	m_shortcut = [[OVShortcutHelper shortcutFromDictionary:hotKey] retain];
+	if (m_shortcut) {
+		[u_displayTextView setStringValue:[OVShortcutHelper readableShortCut:m_shortcut]];
 	}
 	else {
-		[u_displayTextView setStringValue:@""];
+		[u_displayTextView setStringValue:@""];	
 	}
 }
 
@@ -146,30 +133,33 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
 	CGSSetGlobalHotKeyOperatingMode(conn, CGSGlobalHotKeyDisable);
 	BOOL collectEvents = YES;
 	while (collectEvents) {
-		theEvent=[NSApp nextEventMatchingMask:NSKeyDownMask|NSFlagsChangedMask|NSLeftMouseDownMask|NSAppKitDefinedMask|NSSystemDefinedMask untilDate:[NSDate dateWithTimeIntervalSinceNow:10.0] inMode:NSDefaultRunLoopMode dequeue:YES];
+		theEvent = [NSApp nextEventMatchingMask:NSKeyDownMask|NSFlagsChangedMask|NSLeftMouseDownMask|NSAppKitDefinedMask|NSSystemDefinedMask untilDate:[NSDate dateWithTimeIntervalSinceNow:10.0] inMode:NSDefaultRunLoopMode dequeue:YES];
 		switch ([theEvent type]) {
 			case NSKeyDown:
 				{
-					unsigned short keyCode=[theEvent keyCode];
-					NSString *characters=[theEvent charactersIgnoringModifiers];
+					unsigned short keyCode = [theEvent keyCode];
+					NSString *characters = [theEvent charactersIgnoringModifiers];
 					if (keyCode == 48) 
-						characters=@"\t";
-					
-					if ([theEvent modifierFlags] & (NSCommandKeyMask|NSFunctionKeyMask|NSControlKeyMask|NSAlternateKeyMask)){
+						characters = @"\t";
+//					NSLog(@"%d", keyCode);
+
+					if (keyCode == 36) {
+						// Enter
+						// Do nothing.
+					}
+					else if (keyCode == 122 || keyCode == 120 || keyCode == 99 || keyCode == 118 || keyCode == 96 || keyCode == 97 || keyCode == 98 || keyCode == 100 || keyCode == 101 || keyCode == 109 || keyCode == 103 || keyCode == 111) {
+						// F1 - F12
+						// Do nothing.
+					}						
+					else if (keyCode == 53) { 
+						// Escape
+						// Leave
+						collectEvents = NO; 
+					}					
+					else if ([theEvent modifierFlags] & (NSCommandKeyMask|NSFunctionKeyMask|NSControlKeyMask|NSAlternateKeyMask)){
 						[self setHotKey:[self hotKeyDictForEvent:theEvent]];
 						collectEvents = NO; 
 					}
-					else if ([theEvent keyCode] == 53) { //Escape
-						collectEvents = NO; 
-					}
-//					else if ([theEvent keyCode] == 48) { //Tab
-//						[[self window] makeFirstResponder:[self nextKeyView]];
-//						collectEvents = NO;
-//					}
-//					else if ([theEvent keyCode] == 51) { //Delete
-//						[self setHotKey:nil];
-//						collectEvents=NO; 
-//					}
 					else {
 						NSBeep();
 					}
@@ -177,8 +167,7 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
 					break;
 			case NSFlagsChanged:
 			{
-				NSString *newString = stringForModifiers([theEvent modifierFlags]);
-				// NSLog(newString);
+				NSString *newString = [OVShortcutHelper stringForModifiers:[theEvent modifierFlags]];
 				[u_displayTextView setStringValue:[newString length]?newString:@""];	
 				[u_displayTextView display];
 				[u_setButton display];
@@ -203,10 +192,7 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
 
 - (void)mouseDown:(NSEvent *)event
 {
-	
 	[self absorbEvents];
 }
-
-
 
 @end
