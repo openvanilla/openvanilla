@@ -15,6 +15,7 @@
 #import "OVIMGenericController.h"
 #import "OVTableModuleController.h"
 #import "OVIMPOJHoloController.h"
+#import "OVIMTibetanController.h"
 
 // The height of the window title and tool bar.
 #define WINDOW_TITLE_HEIGHT 78

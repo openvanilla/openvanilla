@@ -100,12 +100,16 @@
 		if (!dictionary) {
 			dictionary = [NSDictionary dictionary];
 		}
-		//      NSString *shortcut=[menucfg valueForKey:mid default:@""];	
 		
 		if ([[w moduleType] isEqualToString:@"OVInputMethod"]) {
 			// The Generic Input Method modules.
 			if ([identifier isEqualToString:@"OVIMPOJ-Holo"]) {
 				OVIMPOJHoloController *moduleCotroller = [[OVIMPOJHoloController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
+				[moduleCotroller setShortcut:shortcut];
+				[m_moduleListController addInputMethod:moduleCotroller];
+			}
+			else if ([identifier isEqualToString:@"OVIMTibetan"]) {				
+				OVIMTibetanController *moduleCotroller = [[OVIMTibetanController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
 				[moduleCotroller setShortcut:shortcut];
 				[m_moduleListController addInputMethod:moduleCotroller];
 			}
