@@ -17,7 +17,7 @@
 {
 	NSEnumerator *enumerator;
 	
-	NSMutableDictionary *moduleLibraries = [NSMutableDictionary dictionary];
+	_moduleLibraries = [NSMutableDictionary new];
     NSDictionary *history = [_loader loadHistory];
 	enumerator = [[history allKeys] objectEnumerator];
     NSString *loaderKey;
@@ -29,7 +29,7 @@
         while (s = [loaderEnumerator nextObject])  {
 			[newnode setValue:[NSNumber numberWithBool:TRUE] forKey:s];
 		}
-        [moduleLibraries setValue:newnode forKey:[loaderKey lastPathComponent]];        
+        [_moduleLibraries setValue:newnode forKey:[loaderKey lastPathComponent]];        
     }
 	
 	NSArray *loaderConfig = [_config valueForKey:@"OVLoader"];
@@ -39,7 +39,7 @@
     enumerator = [[loaderConfig valueForKey:@"excludeLibraryList"] objectEnumerator];
     NSString *s;
     while (s = [enumerator nextObject]) {
-        NSDictionary *moduleLibrary = [moduleLibraries valueForKey:s];
+        NSDictionary *moduleLibrary = [_moduleLibraries valueForKey:s];
         if (moduleLibrary) 
 			[_excludeModuleList addObjectsFromArray:[moduleLibrary allKeys]];
     }
@@ -196,6 +196,7 @@
 {
 	[_loader release];
 	[_config release];
+	[_moduleLibraries release];
 	[_excludeModuleList release];
 	[super dealloc];
 }
@@ -225,19 +226,48 @@
 	[menuManagerDictionary setValue:order forKey:@"outputFilterOrder"];
 	[self writeConfigWithIdentifer:@"OVMenuManager" dictionary:menuManagerDictionary];
 }
+- (void)setNewExcludeList
+{
+	NSMutableArray *newLibExclude = [NSMutableArray array];
+    NSMutableArray *newModeExclude = [NSMutableArray array];
+
+	NSLog([_moduleLibraries description]);
+	
+	NSEnumerator *enumerator = [[_moduleLibraries allKeys] objectEnumerator];
+	NSString *libraryName;
+	while (libraryName = [enumerator nextObject]) {
+		NSDictionary *node = [_moduleLibraries valueForKey:libraryName];
+		NSArray *modulesInNode = [node allKeys];
+		NSMutableArray *disabledModules = [NSMutableArray array];
+		NSEnumerator *e = [modulesInNode objectEnumerator];
+		while (NSString *identifier = [e nextObject]) {
+			if ([_excludeModuleList containsObject:identifier])
+				[disabledModules addObject:identifier];
+		}
+		if ([modulesInNode count] == [disabledModules count]) {
+			[newLibExclude addObject:libraryName];
+		}
+		else {
+			if ([disabledModules count]) {
+				[newModeExclude addObjectsFromArray:disabledModules];
+			}
+		}
+	}
+	NSMutableDictionary *loaderConfig = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVLoader"]];
+	[loaderConfig setValue:newLibExclude forKey:@"excludeLibraryList"];	
+	[loaderConfig setValue:newModeExclude forKey:@"excludeModuleList"];
+	[self writeConfigWithIdentifer:@"OVLoader" dictionary:loaderConfig];	
+	
+}
 - (void)addModuleToExcludeList:(NSString *)identifier
 {
 	[_excludeModuleList addObject:identifier];
-	NSMutableDictionary *loaderConfig = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVLoader"]];
-	[loaderConfig setValue:_excludeModuleList forKey:@"excludeModuleList"];
-	[self writeConfigWithIdentifer:@"OVLoader" dictionary:loaderConfig];	
+	[self setNewExcludeList];
 }
 - (void)removeModuleFromExcludeList:(NSString *)identifier
 {
 	[_excludeModuleList removeObject:identifier];
-	NSMutableDictionary *loaderConfig = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVLoader"]];
-	[loaderConfig setValue:_excludeModuleList forKey:@"excludeModuleList"];
-	[self writeConfigWithIdentifer:@"OVLoader" dictionary:loaderConfig];		
+	[self setNewExcludeList];
 }
 - (void)updateShortcut:(NSString *)shortcut forModule:(NSString *)identifier
 {

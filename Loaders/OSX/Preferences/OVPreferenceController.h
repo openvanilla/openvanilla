@@ -33,6 +33,7 @@ static NSString *ModulesToolbarItemIdentifier				= @"Modules";
 	// The while OpenVanilla config.
     NSMutableDictionary *_config;
 	// The list of excluded modules.
+	NSMutableDictionary *_moduleLibraries;	
 	NSMutableArray *_excludeModuleList;
 }
 - (void)writeConfig;
