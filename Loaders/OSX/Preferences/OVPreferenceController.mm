@@ -103,7 +103,12 @@
 		
 		if ([[w moduleType] isEqualToString:@"OVInputMethod"]) {
 			// The Generic Input Method modules.
-			if ([identifier isEqualToString:@"OVIMPOJ-Holo"]) {
+			if ([identifier isEqualToString:@"OVIMPhonetic"]) {
+				OVIMPhoneticController *moduleCotroller = [[OVIMPhoneticController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
+				[moduleCotroller setShortcut:shortcut];
+				[m_moduleListController addInputMethod:moduleCotroller];
+			}			
+			else if ([identifier isEqualToString:@"OVIMPOJ-Holo"]) {
 				OVIMPOJHoloController *moduleCotroller = [[OVIMPOJHoloController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
 				[moduleCotroller setShortcut:shortcut];
 				[m_moduleListController addInputMethod:moduleCotroller];

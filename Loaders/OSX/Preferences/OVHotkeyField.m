@@ -33,20 +33,28 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
     self = [super initWithFrame:frame];
 	
     if (self) {
-		NSRect textRect = NSMakeRect(0, 0, frame.size.width - 36, frame.size.height);
+		NSRect textRect = NSMakeRect(0, 0, frame.size.width - 106, frame.size.height);
 		u_displayTextView = [[NSTextField alloc] initWithFrame:textRect];
 		[u_displayTextView setEditable:NO];
 		[u_displayTextView setAlignment:NSCenterTextAlignment];
 		[u_displayTextView setStringValue:@""];
 		[self addSubview:u_displayTextView];	
 		
-		NSRect buttonRect = NSMakeRect(frame.size.width -30, 0, 30, frame.size.height);	
+		NSRect buttonRect = NSMakeRect(frame.size.width -100, 0, 50, frame.size.height);	
 		u_setButton = [[NSButton alloc] initWithFrame:buttonRect];
-		[u_setButton	setTitle:@"Set"];
+		[u_setButton setTitle:@"Set"];
 		[u_setButton setAction:@selector(set:)];
 		[u_setButton setBezelStyle:NSTexturedSquareBezelStyle];
 		[u_setButton setButtonType:NSToggleButton];
-		[self addSubview:u_setButton];		
+		[self addSubview:u_setButton];
+		
+		NSRect clearRect = NSMakeRect(frame.size.width -50, 0, 50, frame.size.height);	
+		u_clearButton = [[NSButton alloc] initWithFrame:clearRect];
+		[u_clearButton setTitle:@"Clear"];
+		[u_clearButton setAction:@selector(clear:)];
+		[u_clearButton setBezelStyle:NSTexturedSquareBezelStyle];
+		[u_clearButton setButtonType:NSMomentaryLightButton];
+		[self addSubview:u_clearButton];		
     }
     return self;
 }
@@ -54,9 +62,10 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
 - (void)dealloc
 {
 	[u_setButton release];
+	[u_clearButton release];
 	[u_displayTextView release];
 	[m_shortcut release];
-	[_moduleController release];
+	[m_moduleController release];
 	[hotKey release];
 	[super dealloc];
 }
@@ -78,7 +87,7 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
 
 - (NSDictionary *)hotKey 
 {
-	return [[hotKey retain] autorelease]; 
+	return [[hotKey retain] autorelease];
 }
 
 - (void)setHotKey:(NSDictionary *)newHotKey
@@ -93,8 +102,8 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
 	m_shortcut = [[OVShortcutHelper shortcutFromDictionary:hotKey] retain];
 	if (m_shortcut) {
 		[u_displayTextView setStringValue:[OVShortcutHelper readableShortCut:m_shortcut]];
-		if (_moduleController) {
-			[_moduleController setShortcut:m_shortcut fromSender:self];
+		if (m_moduleController) {
+			[m_moduleController setShortcut:m_shortcut fromSender:self];
 			if (u_outlineView) {
 				[u_outlineView reloadData];
 			}
@@ -108,6 +117,17 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
 - (IBAction)set:(id)sender
 {
 	[self absorbEvents];
+}
+
+- (IBAction)clear:(id)sender
+{
+	[u_displayTextView setStringValue:@""];
+	if (m_moduleController) {
+		[m_moduleController setShortcut:@"" fromSender:self];
+		if (u_outlineView) {
+			[u_outlineView reloadData];
+		}
+	}
 }
 
 - (void)timerFire:(NSTimer *)timer
@@ -200,15 +220,15 @@ extern CGError CGSSetGlobalHotKeyOperatingMode(CGSConnection connection, CGSGlob
 
 - (void)setModuleController: (id)controller
 {
-	id tmp = _moduleController;
-	_moduleController = [controller retain];
+	id tmp = m_moduleController;
+	m_moduleController = [controller retain];
 	[tmp release];
-	NSString *shortcut = [_moduleController shortcut];
+	NSString *shortcut = [m_moduleController shortcut];
 	[u_displayTextView setStringValue:[OVShortcutHelper readableShortCut:shortcut]];
 }
 - (id)moduleController
 {
-	return _moduleController;
+	return m_moduleController;
 }
 
 

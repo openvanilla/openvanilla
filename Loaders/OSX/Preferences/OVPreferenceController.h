@@ -14,6 +14,7 @@
 #import "OVModuleController.h"
 #import "OVIMGenericController.h"
 #import "OVTableModuleController.h"
+#import "OVIMPhoneticController.h"
 #import "OVIMPOJHoloController.h"
 #import "OVIMTibetanController.h"
 
