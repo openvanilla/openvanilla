@@ -1,10 +1,32 @@
+// OVShortcutHelper.mm : The helper for shortcut setting.
 //
-//  OVShortcutHelper.m
-//  OpenVanilla
-//
-//  Created by zonble on 2008/7/6.
-//  Copyright 2008 __MyCompanyName__. All rights reserved.
-//
+// Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. Neither the name of OpenVanilla nor the names of its contributors
+//    may be used to endorse or promote products derived from this software
+//    without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
 
 #import "OVShortcutHelper.h"
 #import "CVKeyCode.h"
@@ -19,12 +41,10 @@ unichar unicharForKeyCode( unsigned short aKeyCode )
 	KeyboardLayoutRef		theCurrentKeyBoardLayout;
 	UInt32					theChar = kNullCharCode;
 	
-	if( KLGetCurrentKeyboardLayout( &theCurrentKeyBoardLayout ) == noErr && KLGetKeyboardLayoutProperty( theCurrentKeyBoardLayout, kKLKCHRData, &theKeyboardLayoutData) == noErr )
-	{
-		theChar = KeyTranslate ( theKeyboardLayoutData, aKeyCode, &theState );
+	if( KLGetCurrentKeyboardLayout( &theCurrentKeyBoardLayout ) == noErr && KLGetKeyboardLayoutProperty( theCurrentKeyBoardLayout, kKLKCHRData, &theKeyboardLayoutData) == noErr ) {
+		theChar = KeyTranslate (theKeyboardLayoutData, aKeyCode, &theState);
 		
-		switch( theChar )
-		{
+		switch(theChar) {
 			case kHomeCharCode: theChar = NSHomeFunctionKey; break;
 				//			case kEnterCharCode: theChar = ; break;
 			case kEndCharCode: theChar = NSEndFunctionKey; break;
@@ -85,42 +105,20 @@ unichar unicharForKeyCode( unsigned short aKeyCode )
 	unichar aCharacter = unicharForKeyCode(aCode);
 	NSString *keyString;
 
-	if (aCharacter == ovkSpace) {
-		keyString = @"space";
-	}
-	else if (aCharacter == ovkDelete) {
-		keyString = @"delete";
-	}
-	else if (aCharacter == ovkBackspace) {
-		keyString = @"backspace";
-	}
-	else if (aCharacter == ovkUp) {
-		keyString = @"up";
-	}
-	else if (aCharacter == ovkUp) {
-		keyString = @"down";
-	}
-	else if (aCharacter == ovkLeft) {
-		keyString = @"left";
-	}
-	else if (aCharacter == ovkRight) {
-		keyString = @"right";
-	}
-	else if (aCharacter == ovkHome) {
-		keyString = @"home";
-	}
-	else if (aCharacter == ovkEnd) {
-		keyString = @"end";
-	}
-	else if (aCharacter == ovkPageUp) {
-		keyString = @"pageup";
-	}
-	else if (aCharacter == ovkPageDown) {
-		keyString = @"pagedown";
-	}
-	else if (aCharacter == ovkTab) {
-		keyString = @"tab";
-	}	
+	#define KMAP(x, y) if (aCharacter == x) keyString = y;
+
+	KMAP(ovkSpace, @"space")
+	else KMAP(NSDeleteCharFunctionKey, @"delete")
+	else KMAP(ovkBackspace, @"backspace")
+	else KMAP(NSUpArrowFunctionKey, @"up")
+	else KMAP(NSDownArrowFunctionKey, @"down")
+	else KMAP(NSLeftArrowFunctionKey, @"left")
+	else KMAP(NSRightArrowFunctionKey, @"right")
+	else KMAP(NSHomeFunctionKey, @"home")
+	else KMAP(NSEndFunctionKey, @"end")
+	else KMAP(NSPageUpFunctionKey, @"pageup")
+	else KMAP(NSPageDownFunctionKey, @"pagedown")
+	else KMAP(ovkTab, @"tab")	
 	else {
 		keyString = [NSString stringWithCharacters:&aCharacter length:1];
 	}
@@ -132,18 +130,12 @@ unichar unicharForKeyCode( unsigned short aKeyCode )
 	unsigned int aModifierFlags = [modifiers unsignedIntValue];
 	NSMutableString *modifierString = [NSMutableString string];
 	
-	if (aModifierFlags & NSCommandKeyMask) {
-		[modifierString appendString:@"m"];
-	}	
-	if (aModifierFlags & NSAlternateKeyMask) {
-		[modifierString appendString:@"o"];
-	}	
-	if (aModifierFlags & NSControlKeyMask) {
-		[modifierString appendString:@"c"];
-	}	
-	if (aModifierFlags & NSShiftKeyMask) {
-		[modifierString appendString:@"s"];		
-	}
+	#define APPEND(x) [modifierString appendString:x];
+	if (aModifierFlags & NSCommandKeyMask) APPEND(@"m")
+	if (aModifierFlags & NSAlternateKeyMask) APPEND(@"o")
+	if (aModifierFlags & NSControlKeyMask) APPEND(@"c")
+	if (aModifierFlags & NSShiftKeyMask) APPEND(@"s")
+	#undef APPEND
 	
 	NSString *s = [NSString stringWithFormat:@"%@ %@", keyString, modifierString];
 	return s;
@@ -152,35 +144,16 @@ unichar unicharForKeyCode( unsigned short aKeyCode )
 
 + (NSString *)stringForModifiers: (unsigned int)aModifierFlags
 {
-	NSMutableString		* theString;
-	unichar					theCharacter;
+	NSMutableString	*s = [NSMutableString string];
+	unichar ch;
 	
-	theString = [NSMutableString string];
-	if( aModifierFlags & NSControlKeyMask)
-	{
-		theCharacter = kControlUnicode;
-		[theString appendString:[NSString stringWithCharacters:&theCharacter length:1]];
-	}
-	
-	if( aModifierFlags & NSAlternateKeyMask)
-	{
-		theCharacter = kOptionUnicode;
-		[theString appendString:[NSString stringWithCharacters:&theCharacter length:1]];
-	}
-	
-	if( aModifierFlags & NSShiftKeyMask)
-	{
-		theCharacter = kShiftUnicode;
-		[theString appendString:[NSString stringWithCharacters:&theCharacter length:1]];
-	}
-	
-	if( aModifierFlags & NSCommandKeyMask)
-	{
-		theCharacter = kCommandUnicode;
-		[theString appendString:[NSString stringWithCharacters:&theCharacter length:1]];
-	}
-	
-	return theString;
+	#define APPEND(x)  {ch = x; [s appendString:[NSString stringWithCharacters:&ch length:1]];}
+    if (aModifierFlags & NSCommandKeyMask) APPEND(kCommandUnicode)
+    if (aModifierFlags & NSAlternateKeyMask) APPEND(kOptionUnicode)
+    if (aModifierFlags & NSControlKeyMask) APPEND(kControlUnicode)
+    if (aModifierFlags & NSShiftKeyMask) APPEND(kShiftUnicode)		
+	#undef APPEND
+	return s;
 }
 
 @end

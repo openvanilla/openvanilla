@@ -224,34 +224,39 @@ NSString *CVKeyCode::getKeyIconString()
 	else KMAP(@"pageup", "⇞");
 	else KMAP(@"pagedown", "⇟");
 	else KMAP(@"tab", "⇥");	
-	#undef KMAP	
+	#undef KMAP
 	return string;
 }
 
 NSString *CVKeyCode::getModifierIconString()
 { 
 	NSMutableString *s = [NSMutableString string];
-    if (isCommand()) 
-		[s appendString:[NSString stringWithUTF8String:"⌘"]];
-    if (isOpt()) 
-		[s appendString:[NSString stringWithUTF8String:"⌥"]];
-    if (isCtrl()) 
-		[s appendString:[NSString stringWithUTF8String:"^"]];
-    if (isShift()) 
-		[s appendString:[NSString stringWithUTF8String:"⇧"]];
+
+//	#define APPEND(x) [s appendString:[NSString stringWithUTF8String:x]];
+//  if (isCommand()) APPEND("⌘")
+//  if (isOpt()) APPEND("⌥")
+//  if (isCtrl()) APPEND("⌃")
+//  if (isShift()) APPEND("⇧")
+
+	unichar ch;
+	#define APPEND(x)  { ch = x; [s appendString:[NSString stringWithCharacters:&ch length:1]];}
+    if (isCommand()) APPEND(kCommandUnicode)
+    if (isOpt()) APPEND(kOptionUnicode)
+    if (isCtrl()) APPEND(kControlUnicode)
+    if (isShift()) APPEND(kShiftUnicode)		
+	#undef APPEND	
 	return s;
 }
 
 NSString *CVKeyCode::getModifierString()
 {
 	NSMutableString *s = [NSMutableString string];
-    if (isCommand()) 
-		[s appendString:@"m"];
-    if (isOpt()) 
-		[s appendString:@"o"];
-    if (isCtrl()) 
-		[s appendString:@"c"];
-    if (isShift()) 
-		[s appendString:@"s"];
+	
+	#define APPEND(x) [s appendString:x];
+    if (isCommand()) APPEND(@"m")
+    if (isOpt()) APPEND(@"o")
+    if (isCtrl()) APPEND(@"c")
+	if (isShift()) APPEND(@"s")
+	#undef APPEND
 	return s;	
 }

@@ -1,6 +1,6 @@
 // CVPreviewView.mm: Preview view for color/font settings
 //
-// Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
+// Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
@@ -32,8 +32,10 @@
 #import "NSDictionaryExtension.h"
 
 @implementation CVPreviewView
-- (void)awakeFromNib {
-    NSLog(@"view awake from nib!");
+
+- (void)awakeFromNib
+{
+    // NSLog(@"view awake from nib!");
 }
 
 - (id)initWithFrame:(NSRect)frameRect
@@ -65,20 +67,21 @@
 	[NSGraphicsContext restoreGraphicsState];
 } 
 
-- (void)changeConfig:(NSDictionary*)d {
+- (void)changeConfig:(NSDictionary *)d
+{
     float alpha=1.0;	
-	NSColor* fc=[[d valueForKey:@"foreground" default:@"1.0 1.0 1.0"] colorByString];
-	NSColor* bc=[[d valueForKey:@"background" default:@"0.0 0.0 0.0"] colorByString];	
-	NSString* font=[d valueForKey:@"font" default:@"Lucida Grande"];
-	float s=[[d valueForKey:@"size" default:@"18"] floatValue];
+	NSColor *fc = [[d valueForKey:@"foreground" default:@"1.0 1.0 1.0"] colorByString];
+	NSColor *bc = [[d valueForKey:@"background" default:@"0.0 0.0 0.0"] colorByString];	
+	NSString *font = [d valueForKey:@"font" default:@"Lucida Grande"];
+	float s = [[d valueForKey:@"size" default:@"18"] floatValue];
 	
     [_text setFont:[NSFont fontWithName:font size:s]];
 	[_text setTextColor:[fc colorWithAlphaComponent:alpha]]; 	
 	[_text setBackgroundColor:[bc colorWithAlphaComponent:alpha]];	
 	[_text setText:[NSString stringWithUTF8String:"Aa10あア繁简♨"]];	
 	
-    NSRect r=[_text boundingRect];	
-    NSRect vf=[self frame];
+    NSRect r = [_text boundingRect];	
+    NSRect vf = [self frame];
     [_text setFrameOrigin:NSMakePoint((vf.size.width-r.size.width)/2, (vf.size.height-r.size.height)/2)];	
 	[_text setFrameSize:r.size];	
 	[self setNeedsDisplay:TRUE];	

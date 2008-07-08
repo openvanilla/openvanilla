@@ -1,6 +1,6 @@
 // CVPreviewView.h: Preview view for color/font settings
 //
-// Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
+// Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
@@ -32,10 +32,11 @@
 #import "CVBubbleTextView.h"
 #import "NSStringExtension.h"
 
-@interface CVPreviewView : NSView
-{
+@interface CVPreviewView : NSView {
 	CVBubbleTextView *_text;
 	NSImage *_background;
 }
-- (void)changeConfig:(NSDictionary*)d;
+
+- (void)changeConfig:(NSDictionary *)d;
+
 @end
