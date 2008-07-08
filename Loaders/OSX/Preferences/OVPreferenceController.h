@@ -17,6 +17,7 @@
 #import "OVIMPhoneticController.h"
 #import "OVIMPOJHoloController.h"
 #import "OVIMTibetanController.h"
+#import "OVDisplayController.h"
 
 // The height of the window title and tool bar.
 #define WINDOW_TITLE_HEIGHT 78
@@ -28,8 +29,10 @@ static NSString *ModulesToolbarItemIdentifier				= @"Modules";
 @interface OVPreferenceController : NSWindowController {
 	IBOutlet NSView *u_mainView;
 	IBOutlet OVModulesListController *m_moduleListController;
+	OVDisplayController *m_displayController;
 	
     CVEmbeddedLoader *_loader;
+	
 	// The while OpenVanilla config.
     NSMutableDictionary *_config;
 	// The list of excluded modules.

@@ -137,6 +137,8 @@
 		D45277560E1EC9F300AF407A /* OVModuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = D45277550E1EC9F300AF407A /* OVModuleController.m */; };
 		D45277A40E1ED00A00AF407A /* OVIMGenericController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D45277A20E1ED00A00AF407A /* OVIMGenericController.xib */; };
 		D45277AE0E1ED08800AF407A /* OVIMGenericController.m in Sources */ = {isa = PBXBuildFile; fileRef = D45277AD0E1ED08800AF407A /* OVIMGenericController.m */; };
+		D475921B0E231A450039A33B /* WindowBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D47592190E231A450039A33B /* WindowBackground.jpg */; };
+		D475921C0E231A450039A33B /* OVPreferences.icns in Resources */ = {isa = PBXBuildFile; fileRef = D475921A0E231A450039A33B /* OVPreferences.icns */; };
 		D48FB1790E2130F40071F20E /* OVHotkeyField.m in Sources */ = {isa = PBXBuildFile; fileRef = D48FB1770E2130F40071F20E /* OVHotkeyField.m */; };
 		D4ACBA050E1E6BFC005E7BA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACBA040E1E6BFC005E7BA7 /* main.m */; };
 		D4ACBA0A0E1E6C09005E7BA7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ACBA060E1E6C09005E7BA7 /* MainMenu.xib */; };
@@ -156,6 +158,10 @@
 		D4D5520F0E1F0AC5003E2FC3 /* OVTableModuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D5520E0E1F0AC5003E2FC3 /* OVTableModuleController.m */; };
 		D4D5521B0E1F0B19003E2FC3 /* OVTableModuleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D552190E1F0B19003E2FC3 /* OVTableModuleController.xib */; };
 		D4D552930E1F11B8003E2FC3 /* OVPreference_Toolbar.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4D552920E1F11B8003E2FC3 /* OVPreference_Toolbar.mm */; };
+		D4F4FC4B0E234555007A73B4 /* OVDisplayController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4F4FC4A0E234555007A73B4 /* OVDisplayController.mm */; };
+		D4F4FC500E2345A4007A73B4 /* OVDisplayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F4FC4E0E2345A4007A73B4 /* OVDisplayController.xib */; };
+		D4F4FCAD0E234B2A007A73B4 /* General.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D4F4FCAB0E234B2A007A73B4 /* General.tiff */; };
+		D4F4FCAE0E234B2A007A73B4 /* Modules.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D4F4FCAC0E234B2A007A73B4 /* Modules.tiff */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -366,6 +372,8 @@
 		D45277AC0E1ED08800AF407A /* OVIMGenericController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVIMGenericController.h; path = Preferences/OVIMGenericController.h; sourceTree = "<group>"; };
 		D45277AD0E1ED08800AF407A /* OVIMGenericController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OVIMGenericController.m; path = Preferences/OVIMGenericController.m; sourceTree = "<group>"; wrapsLines = 1; };
 		D452786D0E1EDDBD00AF407A /* NSObjectUpdateConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSObjectUpdateConfig.h; path = Preferences/NSObjectUpdateConfig.h; sourceTree = "<group>"; };
+		D47592190E231A450039A33B /* WindowBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = WindowBackground.jpg; path = Preferences/Images/WindowBackground.jpg; sourceTree = "<group>"; };
+		D475921A0E231A450039A33B /* OVPreferences.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OVPreferences.icns; path = Preferences/Images/OVPreferences.icns; sourceTree = "<group>"; };
 		D48FB1770E2130F40071F20E /* OVHotkeyField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OVHotkeyField.m; path = Preferences/OVHotkeyField.m; sourceTree = "<group>"; };
 		D48FB1780E2130F40071F20E /* OVHotkeyField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVHotkeyField.h; path = Preferences/OVHotkeyField.h; sourceTree = "<group>"; };
 		D4ACB9F30E1E6BC9005E7BA7 /* Preferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Preferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -390,6 +398,11 @@
 		D4D5520E0E1F0AC5003E2FC3 /* OVTableModuleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OVTableModuleController.m; path = Preferences/OVTableModuleController.m; sourceTree = "<group>"; wrapsLines = 1; };
 		D4D5521A0E1F0B19003E2FC3 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Preferences/English.lproj/OVTableModuleController.xib; sourceTree = "<group>"; };
 		D4D552920E1F11B8003E2FC3 /* OVPreference_Toolbar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OVPreference_Toolbar.mm; path = Preferences/OVPreference_Toolbar.mm; sourceTree = "<group>"; };
+		D4F4FC490E234555007A73B4 /* OVDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVDisplayController.h; path = Preferences/OVDisplayController.h; sourceTree = "<group>"; };
+		D4F4FC4A0E234555007A73B4 /* OVDisplayController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OVDisplayController.mm; path = Preferences/OVDisplayController.mm; sourceTree = "<group>"; };
+		D4F4FC4F0E2345A4007A73B4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Preferences/English.lproj/OVDisplayController.xib; sourceTree = "<group>"; };
+		D4F4FCAB0E234B2A007A73B4 /* General.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = General.tiff; path = Preferences/Images/General.tiff; sourceTree = "<group>"; };
+		D4F4FCAC0E234B2A007A73B4 /* Modules.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = Modules.tiff; path = Preferences/Images/Modules.tiff; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -706,6 +719,8 @@
 				D4D1D0E50E228CD300E2B227 /* OVIMPOJHoloController.m */,
 				D4D1D16A0E22950600E2B227 /* OVIMTibetanController.h */,
 				D4D1D16B0E22950600E2B227 /* OVIMTibetanController.m */,
+				D4F4FC490E234555007A73B4 /* OVDisplayController.h */,
+				D4F4FC4A0E234555007A73B4 /* OVDisplayController.mm */,
 			);
 			name = ModuleControllers;
 			sourceTree = "<group>";
@@ -713,6 +728,10 @@
 		D4D1D0E90E228CEF00E2B227 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D4F4FCAB0E234B2A007A73B4 /* General.tiff */,
+				D4F4FCAC0E234B2A007A73B4 /* Modules.tiff */,
+				D47592190E231A450039A33B /* WindowBackground.jpg */,
+				D475921A0E231A450039A33B /* OVPreferences.icns */,
 				D4ACBA060E1E6C09005E7BA7 /* MainMenu.xib */,
 				D4ACBA080E1E6C09005E7BA7 /* InfoPlist.strings */,
 			);
@@ -727,6 +746,7 @@
 				D4D1D18F0E229CBD00E2B227 /* OVIMPhoneticController.xib */,
 				D4D1D0F20E228D8E00E2B227 /* OVIMPOJHoloController.xib */,
 				D4D1D1650E2294ED00E2B227 /* OVIMTibetanController.xib */,
+				D4F4FC4E0E2345A4007A73B4 /* OVDisplayController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1027,6 +1047,11 @@
 				D4D1D0F40E228D8E00E2B227 /* OVIMPOJHoloController.xib in Resources */,
 				D4D1D1670E2294ED00E2B227 /* OVIMTibetanController.xib in Resources */,
 				D4D1D1910E229CBD00E2B227 /* OVIMPhoneticController.xib in Resources */,
+				D475921B0E231A450039A33B /* WindowBackground.jpg in Resources */,
+				D475921C0E231A450039A33B /* OVPreferences.icns in Resources */,
+				D4F4FC500E2345A4007A73B4 /* OVDisplayController.xib in Resources */,
+				D4F4FCAD0E234B2A007A73B4 /* General.tiff in Resources */,
+				D4F4FCAE0E234B2A007A73B4 /* Modules.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1170,6 +1195,7 @@
 				D4D1D0E60E228CD300E2B227 /* OVIMPOJHoloController.m in Sources */,
 				D4D1D16C0E22950600E2B227 /* OVIMTibetanController.m in Sources */,
 				D4D1D1960E229CEE00E2B227 /* OVIMPhoneticController.m in Sources */,
+				D4F4FC4B0E234555007A73B4 /* OVDisplayController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1358,6 +1384,14 @@
 				D4D5521A0E1F0B19003E2FC3 /* English */,
 			);
 			name = OVTableModuleController.xib;
+			sourceTree = "<group>";
+		};
+		D4F4FC4E0E2345A4007A73B4 /* OVDisplayController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4F4FC4F0E2345A4007A73B4 /* English */,
+			);
+			name = OVDisplayController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

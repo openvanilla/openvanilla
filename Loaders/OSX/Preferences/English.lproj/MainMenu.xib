@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="517"/>
+			<integer value="453"/>
 			<integer value="371"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -1144,7 +1144,7 @@
 					<object class="NSCustomView" id="534552864">
 						<reference key="NSNextResponder" ref="625296402"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{314, 0}, {349, 429}}</string>
+						<string key="NSFrame">{{314, 0}, {314, 429}}</string>
 						<reference key="NSSuperview" ref="625296402"/>
 						<string key="NSClassName">NSView</string>
 					</object>
@@ -1420,12 +1420,12 @@
 								<string key="NSClassName">OVHotkeyField</string>
 							</object>
 						</object>
-						<string key="NSFrame">{{314, 437}, {329, 41}}</string>
+						<string key="NSFrame">{{314, 437}, {314, 41}}</string>
 						<reference key="NSSuperview" ref="625296402"/>
 						<string key="NSClassName">NSView</string>
 					</object>
 				</object>
-				<string key="NSFrameSize">{663, 498}</string>
+				<string key="NSFrameSize">{628, 498}</string>
 				<reference key="NSSuperview"/>
 				<string key="NSClassName">NSView</string>
 			</object>
@@ -3519,7 +3519,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{10, 243}, {663, 498}}</string>
+					<string>{{10, 243}, {628, 498}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

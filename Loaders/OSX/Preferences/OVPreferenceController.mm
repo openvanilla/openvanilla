@@ -67,8 +67,8 @@
 {
 	NSEnumerator *enumerator;
 	
-	NSDictionary *menuManagerDicttionary = [_config valueForKey:@"OVMenuManager"];
-	NSArray *outputFilterOrderConfigArray = [menuManagerDicttionary valueForKey:@"outputFilterOrder"];
+	NSDictionary *menuManagerDictionary = [_config valueForKey:@"OVMenuManager"];
+	NSArray *outputFilterOrderConfigArray = [menuManagerDictionary valueForKey:@"outputFilterOrder"];
 	NSMutableArray *outputFilterOrderArray = [NSMutableArray array];
 	enumerator = [outputFilterOrderConfigArray objectEnumerator];
 	NSString *outputFilterIdentfier;
@@ -95,7 +95,7 @@
         NSString *localizedName = [NSString stringWithUTF8String:ovm->localizedName(locale)];
 		NSDictionary *dictionary = [_config valueForKey:identifier];
 		BOOL enabled = ![_excludeModuleList containsObject:identifier];
-		NSString *shortcut = [menuManagerDicttionary valueForKey:identifier];
+		NSString *shortcut = [menuManagerDictionary valueForKey:identifier];
 		
 		if (!dictionary) {
 			dictionary = [NSDictionary dictionary];
@@ -174,6 +174,17 @@
 	[m_moduleListController expandAll];
 }
 
+- (void)setDisplayController
+{
+	NSString *identifier = @"OVDisplayServer";
+	NSString *localizedName = @"";
+	NSDictionary *dictionary = [_config valueForKey:identifier];
+	NSDictionary *menuManagerDictionary = [_config valueForKey:@"OVMenuManager"];	
+	NSString *shortcut = [menuManagerDictionary valueForKey:@"fastIMSwitch"];	
+	m_displayController = [[OVDisplayController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:nil enabled:NO delegate:self];
+	[m_displayController setShortcut:shortcut];	
+}
+
 - (void)awakeFromNib
 {	
 	[[self window] setDelegate:self];
@@ -181,15 +192,19 @@
 	NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@""];
 	[toolbar setDelegate:self];
 	[toolbar autorelease];
+	[toolbar setSelectedItemIdentifier:GeneralToolbarItemIdentifier];	
 	[[self window] setToolbar:toolbar];
-	[[self window] center];	
 	
 	_loader = [CVEmbeddedLoader new];
     _config = [[NSMutableDictionary dictionaryWithDictionary:[[_loader config] dictionary]] retain];
 	
 	[self setExcludeList];
-	[self setUpModules];	
-	[self setActiveView:[m_moduleListController view] animate:NO];
+	[self setUpModules];
+	[self setDisplayController];
+
+	[self setActiveView:[m_displayController view] animate:NO];	
+	[[self window] setTitle:MSG(GeneralToolbarItemIdentifier)];
+	[[self window] center];
 }
 
 - (void) dealloc
@@ -299,6 +314,19 @@
 	[[self window] setFrame:windowFrame display:YES animate:flag];		
 	[u_mainView setFrame:[view frame]];
 	[u_mainView addSubview:view];
+}
+
+- (void)toggleActivePreferenceView:(id)sender
+{
+	NSView *view;
+	
+	if ([[sender itemIdentifier] isEqualToString:GeneralToolbarItemIdentifier])
+		view = [m_displayController view];
+	else if ([[sender itemIdentifier] isEqualToString:ModulesToolbarItemIdentifier])
+		view = [m_moduleListController view];
+	
+	[self setActiveView:view animate:YES];
+	[[self window] setTitle:MSG([sender itemIdentifier])];
 }
 
 #pragma mark NSWindow delegate methods.
