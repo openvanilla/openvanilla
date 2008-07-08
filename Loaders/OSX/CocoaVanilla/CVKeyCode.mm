@@ -239,7 +239,6 @@ NSString *CVKeyCode::getModifierIconString()
 		[s appendString:[NSString stringWithUTF8String:"^"]];
     if (isShift()) 
 		[s appendString:[NSString stringWithUTF8String:"⇧"]];
-	NSLog(s);
 	return s;
 }
 

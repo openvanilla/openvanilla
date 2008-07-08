@@ -31,24 +31,28 @@
 #include "CVCandidate.h"
 #include "OVDisplayServer.h"
 
-CVCandidateState::CVCandidateState(NSString *s, Point p, BOOL o) {
-    str=[[NSString alloc] initWithString:s];
-    pos=p;
-    onscreen=o;
+CVCandidateState::CVCandidateState(NSString *s, Point p, BOOL o)
+{
+    str = [[NSString alloc] initWithString:s];
+    pos = p;
+    onscreen = o;
 }
 
-CVCandidateState::~CVCandidateState() {
+CVCandidateState::~CVCandidateState()
+{
 	[str release];
 }
 
-CVCandidate::CVCandidate(id s) {
-	srvr=s;
-	text=[NSMutableString new];
-	pos=(Point){0, 0};
-	onscreen=NO;
+CVCandidate::CVCandidate(id s)
+{
+	srvr = s;
+	text = [NSMutableString new];
+	pos = (Point){0, 0};
+	onscreen = NO;
 }
 
-CVCandidate::~CVCandidate() {
+CVCandidate::~CVCandidate()
+{
 	[text release];
 }
 
@@ -57,56 +61,74 @@ void CVCandidate::changeDisplayServer(id newServer)
 	srvr = newServer;
 }
 
-OVCandidate* CVCandidate::clear() {
+OVCandidate* CVCandidate::clear()
+{
 	[text setString:@""];
     return this;
 }
 
-OVCandidate* CVCandidate::append(const char *s) {
-    NSString *u8s=[NSString stringWithUTF8String:s];
-	if (u8s) [text appendString:u8s];
+OVCandidate* CVCandidate::append(const char *s)
+{
+    NSString *u8s = [NSString stringWithUTF8String:s];
+	if (u8s) 
+		[text appendString:u8s];
     return this;
 }
 
-OVCandidate* CVCandidate::hide() {
+OVCandidate* CVCandidate::hide()
+{
 	if (onscreen) {
-		if (srvr) [srvr candidateHide];
-		onscreen=NO;
+		if (srvr) 
+			[srvr candidateHide];
+		onscreen = NO;
 	}
     return this;
 }
 
-OVCandidate* CVCandidate::show() {
+OVCandidate* CVCandidate::show()
+{
 	if (!onscreen) {
-		if (srvr) [srvr candidateShow];
-		onscreen=YES;
+		if (srvr) 
+			[srvr candidateShow];
+		onscreen = YES;
 	}
     return this;
 }
 
-OVCandidate* CVCandidate::update() {
-	if (srvr) [srvr candidateUpdate:text position:pos];
+OVCandidate* CVCandidate::update()
+{
+	if (srvr)
+		[srvr candidateUpdate:text position:pos];
     return this;
 }
 
-bool CVCandidate::onScreen() {
+bool CVCandidate::onScreen()
+{
     return onscreen;
 }
 
-OVCandidate* CVCandidate::setPosition(Point p) {
-	pos=p;
+OVCandidate* CVCandidate::setPosition(Point p)
+{
+	pos = p;
     return this;
 }
 
-CVCandidateState* CVCandidate::saveState() {
+CVCandidateState* CVCandidate::saveState()
+{
 	return new CVCandidateState(text, pos, onscreen);
 }
 
-OVCandidate* CVCandidate::restoreState(CVCandidateState *s) {
+OVCandidate* CVCandidate::restoreState(CVCandidateState *s)
+{
 	[text setString:s->str];
-	pos=s->pos;
+	pos = s->pos;
 	update();
-	if (s->onscreen) show(); else hide();
+	
+	if (s->onscreen) 
+		show(); 
+	else 
+		hide();
+	
     return this;
 }
 

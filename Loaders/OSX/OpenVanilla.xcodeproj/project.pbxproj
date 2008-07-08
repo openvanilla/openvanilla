@@ -219,7 +219,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6ACC51660CCF7F7700E2307C /* CocoaVanilla */;
+			remoteGlobalIDString = 6ACC51660CCF7F7700E2307C;
 			remoteInfo = CocoaVanilla;
 		};
 /* End PBXContainerItemProxy section */

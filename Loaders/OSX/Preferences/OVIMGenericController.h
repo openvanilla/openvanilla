@@ -16,8 +16,12 @@
 	IBOutlet id u_autoCompose;
 	IBOutlet id u_hitMaxAndCompose;
 	IBOutlet id u_warningBeep;
+	IBOutlet id u_matchOneChar;
+	IBOutlet id u_matchZeroOrMoreChar;
 }
 
 - (IBAction)changeMaxLength:(id)sender;
 - (IBAction)changePreference:(id)sender; 
+- (IBAction)changeMatchOneChar:(id)sender;
+- (IBAction)changeMatchZeroOrMoreChar:(id)sender;
 @end
