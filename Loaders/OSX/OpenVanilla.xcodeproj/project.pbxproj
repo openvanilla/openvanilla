@@ -215,6 +215,13 @@
 			remoteGlobalIDString = 6ACC51F50CCF82C000E2307C;
 			remoteInfo = OVPreferences;
 		};
+		D4B456170E23B9BB00E546E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6ACC512D0CCF7EC600E2307C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6ACC51660CCF7F7700E2307C /* CocoaVanilla */;
+			remoteInfo = CocoaVanilla;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -930,6 +937,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D4B456180E23B9BB00E546E5 /* PBXTargetDependency */,
 			);
 			name = Preferences;
 			productName = Preferences;
@@ -1242,6 +1250,11 @@
 			isa = PBXTargetDependency;
 			target = 6ACC51F50CCF82C000E2307C /* OVPreferences */;
 			targetProxy = D404064E0CCFACE400AD5D83 /* PBXContainerItemProxy */;
+		};
+		D4B456180E23B9BB00E546E5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6ACC51660CCF7F7700E2307C /* CocoaVanilla */;
+			targetProxy = D4B456170E23B9BB00E546E5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

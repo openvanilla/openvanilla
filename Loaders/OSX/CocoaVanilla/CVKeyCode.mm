@@ -53,12 +53,10 @@ CVKeyCode::CVKeyCode(const char *charcode, const char *modifiers)
 CVKeyCode::CVKeyCode(NSString *s)
 {
 	NSArray *a = [s splitBySpaceWithQuote];
-	if ([a count] < 2) {
+	if ([a count] < 2)
 		init([s UTF8String], "");
-	}
-	else {
+	else
 		init([[a objectAtIndex:0] UTF8String], [[a objectAtIndex:1] UTF8String]);
-	}
 }
 
 void CVKeyCode::init(const char *charcode, const char *modifiers) {
@@ -164,7 +162,7 @@ bool CVKeyCode::isCapslock()
 
 NSArray *CVKeyCode::getKeyList()
 {
-    NSMutableArray *ma = [[NSMutableArray new] autorelease];
+    NSMutableArray *ma = [NSMutableArray array];
     #define KMAP(x)     [ma addObject:x]
     KMAP(@"esc");
     KMAP(@"space");
@@ -191,97 +189,70 @@ NSArray *CVKeyCode::getKeyList()
 
 NSString *CVKeyCode::getKeyCodeString()
 {
-    char buf[32];
-    bzero(buf, 32);
-    buf[0] = code();
-    #define KMAP(x,y)  if(c == y) strcpy(buf, x)
-    KMAP("esc", ovkEsc);
-    else KMAP("space", ovkSpace);
-    else KMAP("delete", ovkDelete);
-    else KMAP("backspace", ovkBackspace);
-    else KMAP("up", ovkUp);
-    else KMAP("down", ovkDown);
-    else KMAP("left", ovkLeft);
-    else KMAP("right", ovkRight);
-    else KMAP("home", ovkHome);
-    else KMAP("end", ovkEnd);
-    else KMAP("pageup", ovkPageUp);
-    else KMAP("pagedown", ovkPageDown);
-    else KMAP("tab", ovkTab);
-    #undef KMAP
-    return [NSString stringWithUTF8String:buf];
+	#define KMAP(x,y)  if(c == y) return x
+    KMAP(@"esc", ovkEsc);
+    else KMAP(@"space", ovkSpace);
+    else KMAP(@"delete", ovkDelete);
+    else KMAP(@"backspace", ovkBackspace);
+    else KMAP(@"up", ovkUp);
+    else KMAP(@"down", ovkDown);
+    else KMAP(@"left", ovkLeft);
+    else KMAP(@"right", ovkRight);
+    else KMAP(@"home", ovkHome);
+    else KMAP(@"end", ovkEnd);
+    else KMAP(@"pageup", ovkPageUp);
+    else KMAP(@"pagedown", ovkPageDown);
+    else KMAP(@"tab", ovkTab);
+	#undef KMAP
+	unichar c = code();
+	return [NSString stringWithCharacters:&c length:1];
 }
 
 NSString *CVKeyCode::getKeyIconString()
 {
 	NSString *string = getKeyCodeString();
-	if ([string isEqualToString:@"space"]) {
-		return [NSString stringWithUTF8String:"Space"];
-	}
-	else if ([string isEqualToString:@"delete"]) {
-		return [NSString stringWithUTF8String:"⌦"];
-	}
-	else if ([string isEqualToString:@"backspace"]) {
-		return [NSString stringWithUTF8String:"⌫"];
-	}
-	else if ([string isEqualToString:@"up"]) {
-		return [NSString stringWithUTF8String:"↑"];
-	}
-	else if ([string isEqualToString:@"down"]) {
-		return [NSString stringWithUTF8String:"↓"];
-	}
-	else if ([string isEqualToString:@"left"]) {
-		return [NSString stringWithUTF8String:"←"];
-	}
-	else if ([string isEqualToString:@"right"]) {
-		return [NSString stringWithUTF8String:"→"];
-	}
-	else if ([string isEqualToString:@"home"]) {
-		return [NSString stringWithUTF8String:"↖"];
-	}	
-	else if ([string isEqualToString:@"end"]) {
-		return [NSString stringWithUTF8String:"↘"];
-	}
-	else if ([string isEqualToString:@"pageup"]) {
-		return [NSString stringWithUTF8String:"⇞"];
-	}
-	else if ([string isEqualToString:@"pagedown"]) {
-		return [NSString stringWithUTF8String:"⇟"];
-	}
-	else if ([string isEqualToString:@"tab"]) {
-		return [NSString stringWithUTF8String:"⇥"];
-	}
-	
-	
+	#define KMAP(x,y)  if([string isEqualToString:x]) return [NSString stringWithUTF8String:y]
+	KMAP(@"space", "Space");
+	else KMAP(@"delete", "⌦");
+	else KMAP(@"backspace", "⌫");
+	else KMAP(@"up", "↑");
+	else KMAP(@"down", "↓");
+	else KMAP(@"left", "←");
+	else KMAP(@"right", "→");
+	else KMAP(@"home", "↖");
+	else KMAP(@"end", "↘");
+	else KMAP(@"pageup", "⇞");
+	else KMAP(@"pagedown", "⇟");
+	else KMAP(@"tab", "⇥");	
+	#undef KMAP	
 	return string;
 }
 
 NSString *CVKeyCode::getModifierIconString()
 { 
-    char func[32];
-    bzero(func, 32);
+	NSMutableString *s = [NSMutableString string];
     if (isCommand()) 
-		strcat(func, "⌘");
+		[s appendString:[NSString stringWithUTF8String:"⌘"]];
     if (isOpt()) 
-		strcat(func, "⌥");
+		[s appendString:[NSString stringWithUTF8String:"⌥"]];
     if (isCtrl()) 
-		strcat(func, "^");
+		[s appendString:[NSString stringWithUTF8String:"^"]];
     if (isShift()) 
-		strcat(func, "⇧");
-    return [NSString stringWithUTF8String:func];
+		[s appendString:[NSString stringWithUTF8String:"⇧"]];
+	NSLog(s);
+	return s;
 }
 
 NSString *CVKeyCode::getModifierString()
 {
-    char func[32];
-    bzero(func, 32);
+	NSMutableString *s = [NSMutableString string];
     if (isCommand()) 
-		strcat(func, "m");
+		[s appendString:@"m"];
     if (isOpt()) 
-		strcat(func, "o");
+		[s appendString:@"o"];
     if (isCtrl()) 
-		strcat(func, "c");
+		[s appendString:@"c"];
     if (isShift()) 
-		strcat(func, "s");
-    return [NSString stringWithUTF8String:func];
+		[s appendString:@"s"];
+	return s;	
 }
