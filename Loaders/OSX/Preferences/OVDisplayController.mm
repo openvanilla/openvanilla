@@ -10,6 +10,41 @@
 #import "NSStringExtension.h"
 #import "OVHotkeyField.h"
 
+@interface OVDisplayController(Private)
+- (NSString *)_shortenedFilename:(NSString *)filename maxLength:(int)maxLength;
+- (NSArray *)_enumeratePath:(NSString *)path withExtension:(NSString *)ext;
+@end
+
+@implementation OVDisplayController(Private)
+- (NSString *)_shortenedFilename:(NSString*)filename maxLength:(int)maxLength
+{
+    NSString *shortenedFilename = filename;
+    if ([filename length] > (size_t)maxLength) {
+        NSArray *pathComponents = [filename pathComponents];
+        if ([pathComponents count] > 2) {
+            shortenedFilename = [NSString stringWithFormat:@"%@%@/.../%@",
+								 [pathComponents objectAtIndex:0],
+								 [pathComponents objectAtIndex:1],
+								 [pathComponents objectAtIndex:[pathComponents count] - 1]];
+        }
+    }
+    return shortenedFilename;
+}
+- (NSArray *)_enumeratePath:(NSString *)path withExtension:(NSString *)ext
+{
+    NSString *stdpath = [path stringByStandardizingPath];
+    NSMutableArray *a = [[NSMutableArray new] autorelease];
+    NSDirectoryEnumerator *direnum = [[NSFileManager defaultManager] enumeratorAtPath:stdpath];
+	NSString *pname;
+    while (pname = [direnum nextObject]) {
+        if ([pname hasSuffix:ext])
+            [a addObject:[stdpath stringByAppendingPathComponent:pname]];
+        [direnum skipDescendents];
+    }
+    return a;
+}
+@end
+
 @implementation OVDisplayController
 
 - (void)loadNib
@@ -21,8 +56,40 @@
 
 - (void) dealloc
 {
-	[beepSound release];
+	[_beepSound release];
+	[_sound release];
 	[super dealloc];
+}
+
+- (void)setSound
+{
+	NSLog(_beepSound);
+	
+	[u_soundMenu removeAllItems];
+	[u_soundMenu addItemWithTitle:MSG(@"Default")];
+	
+	NSArray *aiff = [self _enumeratePath:@"/System/Library/Sounds" withExtension:@".aiff"];
+	NSEnumerator *e = [aiff objectEnumerator];
+	NSString *soundFile;
+	while (soundFile = [e nextObject]) {
+		NSString *soundName = [[soundFile lastPathComponent] stringByDeletingPathExtension];
+		[u_soundMenu addItemWithTitle:soundName];
+		if ([soundFile isEqualToString:_beepSound]) {
+			[u_soundMenu selectItemWithTitle:soundName];
+		}
+	}
+	[u_soundMenu addItemWithTitle:MSG(@"Customize...")];
+	
+	
+	if (!_beepSound || ![_beepSound length]) {
+		[u_soundMenu selectItemAtIndex:0];
+	}
+	else if ([u_soundMenu selectedItem] == 0) {
+		[u_soundMenu selectItem:[u_soundMenu lastItem]];
+		
+		NSString *title = [NSString stringWithFormat:@"%@ (%@)", MSG(@"Customized..."), [self _shortenedFilename:[_beepSound lastPathComponent] maxLength:20]];		
+		[[u_soundMenu lastItem] setTitle:[NSString stringWithFormat:title]];
+	}
 }
 
 - (void)awakeFromNib
@@ -45,7 +112,7 @@
 	[u_background setColor:[[d valueForKey:@"background"] colorByString]];
 	
 	NSString *fontName = [d valueForKey:@"font"];
-	CGFloat fontSize = [[d valueForKey:@"size"] floatValue];
+	float fontSize = [[d valueForKey:@"size"] floatValue];
 	NSFont *font = [NSFont fontWithName:fontName size:14];
 	
 	[u_fontLabel setFont:font];
@@ -53,6 +120,7 @@
 	
 	[u_useWindowAnimation setIntValue:[[d valueForKey:@"useWindowAnimation"] intValue]];
 	NSString *style = [d valueForKey:@"notificationStyle"];
+	
 	if ([style isEqualToString:@"silent"]) {
 		[u_notificationStyle setIntValue:0];
 	}
@@ -60,6 +128,7 @@
 		[d setValue:@"default" forKey:@"notificationStyle"];
 		[u_notificationStyle setIntValue:1];
 	}
+	
 	float opacity = [[d valueForKey:@"opacity"] floatValue];
 	[u_opacityScroll setIntValue:(int)(opacity * 100)];
 	[u_opacityLabel setStringValue:[NSString stringWithFormat:@"%d%%", (int)(opacity * 100)]];
@@ -69,7 +138,13 @@
 	[self update];
 	
 	[u_hotkeyField setModuleController:self];
+	_beepSound = @"";
+	_beepSound = [_delegate beepSound];
+	
+	[self setSound];
 }
+
+#pragma mark Interface Builder actions.
 
 - (IBAction)changeColor:(id)sender
 {
@@ -81,9 +156,83 @@
 - (IBAction)changeOpacity:(id)sender
 {
 	[u_opacityLabel setStringValue:[NSString stringWithFormat:@"%d%%", [sender intValue]]];	
-	CGFloat opacity = ([sender floatValue] / 100);
+	float opacity = ([sender floatValue] / 100);
 	[self setValue:[NSNumber numberWithFloat:opacity] forKey:@"opacity"];
 	[self updateAndWrite];
+}
+- (IBAction)changeSound:(id)sender
+{
+	if (_sound) {
+        if ([_sound isPlaying]) 
+			[_sound stop];
+    }
+	
+	if ([sender indexOfSelectedItem] == 0) {
+		_beepSound = @"";
+	}
+	else if ([sender indexOfSelectedItem] == ([[u_soundMenu itemArray] count] - 1)) {
+		NSOpenPanel *op = [NSOpenPanel openPanel];
+		NSArray *filetypes = [NSArray arrayWithObjects:@"aiff", @"aif", @"aifc", @"wav", @"wave", @"snd", @"au", @"mp3", @"ulw", @"mp4", @"m4a", nil];
+        [op setAllowsMultipleSelection:FALSE];
+		[op setCanCreateDirectories:NO];
+		[op setMessage:MSG(@"Please choose the audio clip which you want to use:")];
+		[op setTitle:MSG(@"Choose Audio Clip...")];
+		[op setPrompt:MSG(@"Choose")];
+		if ([op runModalForDirectory:nil file:nil types:filetypes] == NSOKButton) {
+			NSString *soundFile = [[op filenames] objectAtIndex:0];			
+			if (![[NSFileManager defaultManager] fileExistsAtPath:soundFile]){
+				[u_soundMenu selectItemAtIndex:0];
+				_beepSound = @"";
+			}
+			else {
+				NSString *title = [NSString stringWithFormat:@"%@ (%@)", MSG(@"Customized..."), [self _shortenedFilename:[u_soundMenu lastPathComponent] maxLength:20]];	
+				[[sender lastItem] setTitle:title];
+				_beepSound = [soundFile retain];
+			}
+        }
+        else {
+            [sender selectItemWithTitle:MSG(@"Default")];
+			[[sender lastItem] setTitle:MSG(@"Customized...")];
+			_beepSound = @"";
+        }
+	}
+	else {
+		NSString *t = [sender titleOfSelectedItem];
+		_beepSound = [NSString stringWithFormat:@"/System/Library/Sounds/%@.aiff", t];
+		[[sender lastItem] setTitle:MSG(@"Customized...")];		
+	}
+	
+	[self testSound:sender];
+	[_delegate updateBeepSound:_beepSound];
+}
+
+- (IBAction)testSound:(id)sender
+{
+	if (_sound) {
+		if ([_sound isPlaying])
+			[_sound stop];
+	}
+	if ([u_soundMenu indexOfSelectedItem] == 0) {
+		NSBeep();
+	}
+	else {
+		if (_sound) {
+			//[_sound release];
+			_sound = nil;			
+		}
+		if ([_beepSound length]) {			
+			_sound = [[NSSound alloc] initWithContentsOfFile:_beepSound byReference:YES];
+			if (!_sound) 
+				return;
+			[_sound play];
+			[_sound setDelegate:self];
+			[u_testSoundButton setEnabled:NO];
+		}
+	}
+}
+- (void)sound:(NSSound *)sound didFinishPlaying:(BOOL)finishedPlaying
+{
+	[u_testSoundButton setEnabled:YES];
 }
 - (IBAction)launchFontPanel:(id)sender
 {
@@ -129,5 +278,9 @@
 {
 	[super setShortcut:shortcut];
 	[_delegate updateShortcut:shortcut forModule:@"fastIMSwitch"];
+}
+- (NSString *)beepSound
+{
+	return _beepSound;
 }
 @end

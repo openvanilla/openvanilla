@@ -15,4 +15,6 @@
 - (void)addModuleToExcludeList:(NSString *)identifier;
 - (void)removeModuleFromExcludeList:(NSString *)identifier;
 - (void)updateShortcut:(NSString *)shortcut forModule:(NSString *)identifier;
+- (NSString *)beepSound;
+- (void)updateBeepSound:(NSString *)beepSound;
 @end

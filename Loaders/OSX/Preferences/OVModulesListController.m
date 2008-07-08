@@ -240,7 +240,7 @@
 	[self switchToView:[m_currentItem view]];
 }
 
-- (CGFloat)indentationPerLevel
+- (float)indentationPerLevel
 {
 	return 0;
 }
@@ -282,7 +282,7 @@
     return YES;
 }
 
-- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(NSInteger)childIndex
+- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(int)childIndex
 {
 	if (childIndex < 0) {
 		return NSDragOperationNone;
@@ -293,7 +293,7 @@
 	return NSDragOperationGeneric;
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(NSInteger)childIndex
+- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(int)childIndex
 {
 	[m_ouputFilters insertObject:[m_draggingItem copy] atIndex:childIndex];
 	[m_ouputFilters removeObject:m_draggingItem];

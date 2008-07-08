@@ -43,7 +43,6 @@
         if (moduleLibrary) 
 			[_excludeModuleList addObjectsFromArray:[moduleLibrary allKeys]];
     }
-//    NSLog(@"exclude list=%@", [_excludeModuleList description]);	
 }
 
 - (int)outputFilterExists:(NSString *)identifier inArray:(NSArray *)outputFilterArray
@@ -175,7 +174,6 @@
 	NSDictionary *menuManagerDictionary = [_config valueForKey:@"OVMenuManager"];	
 	NSString *shortcut = [menuManagerDictionary valueForKey:@"fastIMSwitch"];
 	m_displayController = [[OVDisplayController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:NO delegate:self shortcut:shortcut];
-//	NSLog(@"shortcut %@", shortcut);
 }
 
 - (void)awakeFromNib
@@ -324,12 +322,22 @@
 }
 - (void)updateShortcut:(NSString *)shortcut forModule:(NSString *)identifier
 {
-	NSLog(@"short cut2");
 	NSMutableDictionary *menuManagerDictionary = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVMenuManager"]];
 	[menuManagerDictionary setValue:shortcut forKey:identifier];
 	[self writeConfigWithIdentifer:@"OVMenuManager" dictionary:menuManagerDictionary];
 }
-
+- (NSString *)beepSound
+{
+	NSString *beepSound = [[_config valueForKey:@"OVLoader"] valueForKey:@"beepSound"];
+	return beepSound;
+}
+- (void)updateBeepSound:(NSString *)beepSound
+{
+	NSLog(@"updateBeepSound: %@",  beepSound);
+	NSMutableDictionary *loaderConfig = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVLoader"]];
+	[loaderConfig setValue:beepSound forKey:@"beepSound"];
+	[self writeConfigWithIdentifer:@"OVLoader" dictionary:loaderConfig];
+}
 - (void)writeConfig
 {
 	[[_loader config] sync];
