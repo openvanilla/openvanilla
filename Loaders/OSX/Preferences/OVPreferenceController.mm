@@ -181,7 +181,7 @@
 	NSDictionary *dictionary = [_config valueForKey:identifier];
 	NSDictionary *menuManagerDictionary = [_config valueForKey:@"OVMenuManager"];	
 	NSString *shortcut = [menuManagerDictionary valueForKey:@"fastIMSwitch"];	
-	m_displayController = [[OVDisplayController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:nil enabled:NO delegate:self];
+	m_displayController = [[OVDisplayController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:NO delegate:self];
 	[m_displayController setShortcut:shortcut];	
 }
 
@@ -336,5 +336,13 @@
 	// We will terminate the application when the main window is closed.
 	[NSApp terminate:self];
 }
+
+- (void)changeFont:(id)sender
+{
+	NSLog(@"change Font 2");
+	[m_displayController changeFont:sender];
+	//    NSFont *newfont=[sender convertFont:[[NSFontManager sharedFontManager] selectedFont]];	
+}
+
 
 @end

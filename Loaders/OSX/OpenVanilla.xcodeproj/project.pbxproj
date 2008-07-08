@@ -162,6 +162,7 @@
 		D4F4FC500E2345A4007A73B4 /* OVDisplayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F4FC4E0E2345A4007A73B4 /* OVDisplayController.xib */; };
 		D4F4FCAD0E234B2A007A73B4 /* General.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D4F4FCAB0E234B2A007A73B4 /* General.tiff */; };
 		D4F4FCAE0E234B2A007A73B4 /* Modules.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D4F4FCAC0E234B2A007A73B4 /* Modules.tiff */; };
+		D4F4FD470E2354B9007A73B4 /* CVPreviewView.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4F4FD450E2354B9007A73B4 /* CVPreviewView.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -403,6 +404,8 @@
 		D4F4FC4F0E2345A4007A73B4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Preferences/English.lproj/OVDisplayController.xib; sourceTree = "<group>"; };
 		D4F4FCAB0E234B2A007A73B4 /* General.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = General.tiff; path = Preferences/Images/General.tiff; sourceTree = "<group>"; };
 		D4F4FCAC0E234B2A007A73B4 /* Modules.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = Modules.tiff; path = Preferences/Images/Modules.tiff; sourceTree = "<group>"; };
+		D4F4FD450E2354B9007A73B4 /* CVPreviewView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CVPreviewView.mm; path = Preferences/CVPreviewView.mm; sourceTree = "<group>"; };
+		D4F4FD460E2354B9007A73B4 /* CVPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVPreviewView.h; path = Preferences/CVPreviewView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -685,6 +688,8 @@
 		D4ACB9EC0E1E6BB6005E7BA7 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				D4F4FD450E2354B9007A73B4 /* CVPreviewView.mm */,
+				D4F4FD460E2354B9007A73B4 /* CVPreviewView.h */,
 				D4D1D0E90E228CEF00E2B227 /* Resources */,
 				D4D1D0E80E228CE000E2B227 /* ModuleControllers */,
 				D4ACBA030E1E6BFC005E7BA7 /* Preferences_Prefix.pch */,
@@ -1196,6 +1201,7 @@
 				D4D1D16C0E22950600E2B227 /* OVIMTibetanController.m in Sources */,
 				D4D1D1960E229CEE00E2B227 /* OVIMPhoneticController.m in Sources */,
 				D4F4FC4B0E234555007A73B4 /* OVDisplayController.mm in Sources */,
+				D4F4FD470E2354B9007A73B4 /* CVPreviewView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
