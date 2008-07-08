@@ -13,13 +13,11 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    id copy = [[[self class] allocWithZone: zone] initWithIdentifier:_identifier localizedName:_localizedName dictionary:_dictionary enabled:_enabled delegate:_delegate];
+    id copy = [[[self class] allocWithZone: zone] initWithIdentifier:_identifier localizedName:_localizedName dictionary:_dictionary enabled:_enabled delegate:_delegate shortcut:_shortcut];
     return copy;
 }
 
-// - (id)initWithIdentifier:(NSString *)identifier localizedName:(NSString *)localizedName dictionary:(NSDictionary *)dictionary delegate:(id)delegate
-- (id)initWithIdentifier:(NSString *)identifier localizedName:(NSString *)localizedName dictionary:(NSDictionary *)dictionary enabled:(BOOL)enabled delegate:(id)delegate;
-
+- (id)initWithIdentifier:(NSString *)identifier localizedName:(NSString *)localizedName dictionary:(NSDictionary *)dictionary enabled:(BOOL)enabled delegate:(id)delegate shortcut:(NSString *)shortcut
 {
 	self = [super init];
 	if (self != nil) {
@@ -29,6 +27,7 @@
 		[_dictionary retain];
 		_enabled = enabled;
 		_delegate = [delegate retain];
+		_shortcut = [shortcut retain];
 		[self loadNib];
 	}
 	return self;

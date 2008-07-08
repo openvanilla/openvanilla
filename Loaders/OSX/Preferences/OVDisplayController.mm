@@ -8,6 +8,7 @@
 
 #import "OVDisplayController.h"
 #import "NSStringExtension.h"
+#import "OVHotkeyField.h"
 
 @implementation OVDisplayController
 
@@ -22,15 +23,6 @@
 {
 	[beepSound release];
 	[super dealloc];
-}
-
-- (BOOL)becomeFirstResponder
-{
-	return YES;
-}
-- (BOOL)acceptsFirstResponder
-{
-	return YES;
 }
 
 - (void)awakeFromNib
@@ -74,8 +66,11 @@
 	
 	[self setDictionary:d];
 	[u_preview changeConfig:[self dictionary]];
-	[self update];	
+	[self update];
+	
+	[u_hotkeyField setModuleController:self];
 }
+
 - (IBAction)changeColor:(id)sender
 {
 	[self setValue:[NSString stringByColor:[u_foreground color]] forKey:@"foreground"];
@@ -123,5 +118,16 @@
 	[self updateAndWrite];
 
 }
-
+- (void)setShortcut:(NSString *)shortcut
+{
+	[super setShortcut:shortcut];
+	if (![u_hotkeyField moduleController]) {
+		[u_hotkeyField setModuleController:self];
+	}
+}
+- (void)setShortcut:(NSString *)shortcut fromSender:(id)sender
+{
+	[super setShortcut:shortcut];
+	[_delegate updateShortcut:shortcut forModule:@"fastIMSwitch"];
+}
 @end

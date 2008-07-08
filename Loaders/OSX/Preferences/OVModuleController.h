@@ -20,7 +20,7 @@
 }
 
 - (id)copyWithZone:(NSZone *)zone;
-- (id)initWithIdentifier:(NSString *)identifier localizedName:(NSString *)localizedName dictionary:(NSDictionary *)dictionary enabled:(BOOL)enabled delegate:(id)delegate;
+- (id)initWithIdentifier:(NSString *)identifier localizedName:(NSString *)localizedName dictionary:(NSDictionary *)dictionary enabled:(BOOL)enabled delegate:(id)delegate shortcut:(NSString *)shortcut;
 - (void)loadNib;
 - (NSString *)moduleIdentifer;
 - (NSString *)localizedName;

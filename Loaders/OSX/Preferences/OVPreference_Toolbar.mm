@@ -45,7 +45,7 @@
 		[item setAction:@selector(toggleActivePreferenceView:)];
 	}
 	else if ([identifier isEqualToString:ModulesToolbarItemIdentifier]) {
-		[item setLabel:MSG(GeneralToolbarItemIdentifier)];
+		[item setLabel:MSG(ModulesToolbarItemIdentifier)];
 		[item setImage:[NSImage imageNamed:@"Modules"]];
 		[item setTarget:self];
 		[item setAction:@selector(toggleActivePreferenceView:)];

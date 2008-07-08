@@ -104,35 +104,29 @@
 		if ([[w moduleType] isEqualToString:@"OVInputMethod"]) {
 			// The Generic Input Method modules.
 			if ([identifier isEqualToString:@"OVIMPhonetic"]) {
-				OVIMPhoneticController *moduleCotroller = [[OVIMPhoneticController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
-				[moduleCotroller setShortcut:shortcut];
+				OVIMPhoneticController *moduleCotroller = [[OVIMPhoneticController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self shortcut:shortcut];
 				[m_moduleListController addInputMethod:moduleCotroller];
 			}			
 			else if ([identifier isEqualToString:@"OVIMPOJ-Holo"]) {
-				OVIMPOJHoloController *moduleCotroller = [[OVIMPOJHoloController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
-				[moduleCotroller setShortcut:shortcut];
+				OVIMPOJHoloController *moduleCotroller = [[OVIMPOJHoloController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self shortcut:shortcut];
 				[m_moduleListController addInputMethod:moduleCotroller];
 			}
 			else if ([identifier isEqualToString:@"OVIMTibetan"]) {				
-				OVIMTibetanController *moduleCotroller = [[OVIMTibetanController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
-				[moduleCotroller setShortcut:shortcut];
+				OVIMTibetanController *moduleCotroller = [[OVIMTibetanController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self shortcut:shortcut];
 				[m_moduleListController addInputMethod:moduleCotroller];
 			}
 			else if ([identifier hasPrefix:@"OVIMGeneric-"]) {
-				OVIMGenericController *moduleCotroller = [[OVIMGenericController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
-				[moduleCotroller setShortcut:shortcut];
+				OVIMGenericController *moduleCotroller = [[OVIMGenericController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self shortcut:shortcut];
 				[m_moduleListController addInputMethod:moduleCotroller];				
 			}
 			// The Input Methods with extra settings.
 			else if ([dictionary count]) {
-				OVTableModuleController *moduleCotroller = [[OVTableModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
-				[moduleCotroller setShortcut:shortcut];				
+				OVTableModuleController *moduleCotroller = [[OVTableModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self shortcut:shortcut];
 				[m_moduleListController addInputMethod:moduleCotroller];
 			}
 			// The Input Methods without extar settings.
 			else {
-				OVModuleController *moduleCotroller = [[OVModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self];
-				[moduleCotroller setShortcut:shortcut];				
+				OVModuleController *moduleCotroller = [[OVModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:enabled delegate:self shortcut:shortcut];
 				[m_moduleListController addInputMethod:moduleCotroller];
 			}
 		}
@@ -166,8 +160,7 @@
 //		NSDictionary *dictionary = [d valueForKey:@"dictionary"];
 		BOOL enabled = [[d valueForKey:@"enabled"] boolValue];
 		NSString *shortcut = [d valueForKey:@"shortcut"];
-		OVModuleController *moduleCotroller = [[OVModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:nil enabled:enabled delegate:self];
-		[moduleCotroller setShortcut:shortcut];		
+		OVModuleController *moduleCotroller = [[OVModuleController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:nil enabled:enabled delegate:self shortcut:shortcut];
 		[m_moduleListController addOutputFilter:moduleCotroller];
 	}
 	
@@ -180,9 +173,9 @@
 	NSString *localizedName = @"";
 	NSDictionary *dictionary = [_config valueForKey:identifier];
 	NSDictionary *menuManagerDictionary = [_config valueForKey:@"OVMenuManager"];	
-	NSString *shortcut = [menuManagerDictionary valueForKey:@"fastIMSwitch"];	
-	m_displayController = [[OVDisplayController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:NO delegate:self];
-	[m_displayController setShortcut:shortcut];	
+	NSString *shortcut = [menuManagerDictionary valueForKey:@"fastIMSwitch"];
+	m_displayController = [[OVDisplayController alloc] initWithIdentifier:identifier localizedName:localizedName dictionary:dictionary enabled:NO delegate:self shortcut:shortcut];
+//	NSLog(@"shortcut %@", shortcut);
 }
 
 - (void)awakeFromNib
@@ -214,89 +207,6 @@
 	[_moduleLibraries release];
 	[_excludeModuleList release];
 	[super dealloc];
-}
-
-#pragma mark Methods to update configurations.
-// Most of the methods are defined in NSObjectUpdateConfig.h.
-
-- (BOOL)updateConfigWithIdentifer:(NSString *)identifier dictionary:(NSDictionary *)dictionary
-{
-	if (!identifier || ![identifier length])
-		return NO;
-	if (!dictionary)
-		return NO;
-	
-	[_config setValue:dictionary forKey:identifier];
-	
-	return YES;
-}
-- (void)writeConfigWithIdentifer:(NSString *)identifier dictionary:(NSDictionary *)dictionary
-{
-	if ([self updateConfigWithIdentifer:identifier dictionary:dictionary])
-		[self writeConfig];
-}
-- (void)updateOutputFilterOrder:(NSArray *)order
-{
-	NSMutableDictionary *menuManagerDictionary = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVMenuManager"]];
-	[menuManagerDictionary setValue:order forKey:@"outputFilterOrder"];
-	[self writeConfigWithIdentifer:@"OVMenuManager" dictionary:menuManagerDictionary];
-}
-- (void)setNewExcludeList
-{
-	NSMutableArray *newLibExclude = [NSMutableArray array];
-    NSMutableArray *newModeExclude = [NSMutableArray array];
-
-	NSLog([_moduleLibraries description]);
-	
-	NSEnumerator *enumerator = [[_moduleLibraries allKeys] objectEnumerator];
-	NSString *libraryName;
-	while (libraryName = [enumerator nextObject]) {
-		NSDictionary *node = [_moduleLibraries valueForKey:libraryName];
-		NSArray *modulesInNode = [node allKeys];
-		NSMutableArray *disabledModules = [NSMutableArray array];
-		NSEnumerator *e = [modulesInNode objectEnumerator];
-		while (NSString *identifier = [e nextObject]) {
-			if ([_excludeModuleList containsObject:identifier])
-				[disabledModules addObject:identifier];
-		}
-		if ([modulesInNode count] == [disabledModules count]) {
-			[newLibExclude addObject:libraryName];
-		}
-		else {
-			if ([disabledModules count]) {
-				[newModeExclude addObjectsFromArray:disabledModules];
-			}
-		}
-	}
-	NSMutableDictionary *loaderConfig = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVLoader"]];
-	[loaderConfig setValue:newLibExclude forKey:@"excludeLibraryList"];	
-	[loaderConfig setValue:newModeExclude forKey:@"excludeModuleList"];
-	[self writeConfigWithIdentifer:@"OVLoader" dictionary:loaderConfig];	
-	
-}
-- (void)addModuleToExcludeList:(NSString *)identifier
-{
-	[_excludeModuleList addObject:identifier];
-	[self setNewExcludeList];
-}
-- (void)removeModuleFromExcludeList:(NSString *)identifier
-{
-	[_excludeModuleList removeObject:identifier];
-	[self setNewExcludeList];
-}
-- (void)updateShortcut:(NSString *)shortcut forModule:(NSString *)identifier
-{
-	NSMutableDictionary *menuManagerDictionary = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVMenuManager"]];
-	[menuManagerDictionary setValue:shortcut forKey:identifier];
-	[self writeConfigWithIdentifer:@"OVMenuManager" dictionary:menuManagerDictionary];
-}
-
-- (void)writeConfig
-{
-	[[_loader config] sync];
-	[[[_loader config] dictionary] removeAllObjects];
-	[[[_loader config] dictionary] addEntriesFromDictionary:_config];
-	[[_loader config] sync];
 }
 
 #pragma mark The main User Interface of the preference tool.
@@ -337,11 +247,95 @@
 	[NSApp terminate:self];
 }
 
+#pragma mark NSObject delegate methods.
+
 - (void)changeFont:(id)sender
 {
-	NSLog(@"change Font 2");
 	[m_displayController changeFont:sender];
-	//    NSFont *newfont=[sender convertFont:[[NSFontManager sharedFontManager] selectedFont]];	
+}
+
+#pragma mark Methods to update configurations.
+// Most of the methods are defined in NSObjectUpdateConfig.h.
+
+- (BOOL)updateConfigWithIdentifer:(NSString *)identifier dictionary:(NSDictionary *)dictionary
+{
+	if (!identifier || ![identifier length])
+		return NO;
+	if (!dictionary)
+		return NO;
+	
+	[_config setValue:dictionary forKey:identifier];
+	
+	return YES;
+}
+- (void)writeConfigWithIdentifer:(NSString *)identifier dictionary:(NSDictionary *)dictionary
+{
+	if ([self updateConfigWithIdentifer:identifier dictionary:dictionary])
+		[self writeConfig];
+}
+- (void)updateOutputFilterOrder:(NSArray *)order
+{
+	NSMutableDictionary *menuManagerDictionary = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVMenuManager"]];
+	[menuManagerDictionary setValue:order forKey:@"outputFilterOrder"];
+	[self writeConfigWithIdentifer:@"OVMenuManager" dictionary:menuManagerDictionary];
+}
+- (void)setNewExcludeList
+{
+	NSMutableArray *newLibExclude = [NSMutableArray array];
+    NSMutableArray *newModeExclude = [NSMutableArray array];
+	
+	NSLog([_moduleLibraries description]);
+	
+	NSEnumerator *enumerator = [[_moduleLibraries allKeys] objectEnumerator];
+	NSString *libraryName;
+	while (libraryName = [enumerator nextObject]) {
+		NSDictionary *node = [_moduleLibraries valueForKey:libraryName];
+		NSArray *modulesInNode = [node allKeys];
+		NSMutableArray *disabledModules = [NSMutableArray array];
+		NSEnumerator *e = [modulesInNode objectEnumerator];
+		while (NSString *identifier = [e nextObject]) {
+			if ([_excludeModuleList containsObject:identifier])
+				[disabledModules addObject:identifier];
+		}
+		if ([modulesInNode count] == [disabledModules count]) {
+			[newLibExclude addObject:libraryName];
+		}
+		else {
+			if ([disabledModules count]) {
+				[newModeExclude addObjectsFromArray:disabledModules];
+			}
+		}
+	}
+	NSMutableDictionary *loaderConfig = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVLoader"]];
+	[loaderConfig setValue:newLibExclude forKey:@"excludeLibraryList"];	
+	[loaderConfig setValue:newModeExclude forKey:@"excludeModuleList"];
+	[self writeConfigWithIdentifer:@"OVLoader" dictionary:loaderConfig];	
+	
+}
+- (void)addModuleToExcludeList:(NSString *)identifier
+{
+	[_excludeModuleList addObject:identifier];
+	[self setNewExcludeList];
+}
+- (void)removeModuleFromExcludeList:(NSString *)identifier
+{
+	[_excludeModuleList removeObject:identifier];
+	[self setNewExcludeList];
+}
+- (void)updateShortcut:(NSString *)shortcut forModule:(NSString *)identifier
+{
+	NSLog(@"short cut2");
+	NSMutableDictionary *menuManagerDictionary = [NSMutableDictionary dictionaryWithDictionary:[_config valueForKey:@"OVMenuManager"]];
+	[menuManagerDictionary setValue:shortcut forKey:identifier];
+	[self writeConfigWithIdentifer:@"OVMenuManager" dictionary:menuManagerDictionary];
+}
+
+- (void)writeConfig
+{
+	[[_loader config] sync];
+	[[[_loader config] dictionary] removeAllObjects];
+	[[[_loader config] dictionary] addEntriesFromDictionary:_config];
+	[[_loader config] sync];
 }
 
 
