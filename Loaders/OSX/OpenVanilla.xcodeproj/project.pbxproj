@@ -391,6 +391,18 @@
 		D497A2800E250D9B00C680D5 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = Preferences/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D497A2930E2513E200C680D5 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = Preferences/zh_TW.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		D497A2940E2513E600C680D5 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = Preferences/zh_CN.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		D497A29A0E2516DA00C680D5 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = Preferences/zh_TW.lproj/OVIMTibetanController.xib; sourceTree = "<group>"; };
+		D497A29B0E2516DC00C680D5 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = Preferences/zh_CN.lproj/OVIMTibetanController.xib; sourceTree = "<group>"; };
+		D497A2A40E25175700C680D5 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = Preferences/zh_TW.lproj/OVTableModuleController.xib; sourceTree = "<group>"; };
+		D497A2A50E25175A00C680D5 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = Preferences/zh_CN.lproj/OVTableModuleController.xib; sourceTree = "<group>"; };
+		D497A2AE0E251CC500C680D5 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = Preferences/zh_TW.lproj/OVIMPhoneticController.xib; sourceTree = "<group>"; };
+		D497A2AF0E251CC900C680D5 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = Preferences/zh_CN.lproj/OVIMPhoneticController.xib; sourceTree = "<group>"; };
+		D497A2BB0E251E7000C680D5 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = Preferences/zh_TW.lproj/OVIMGenericController.xib; sourceTree = "<group>"; };
+		D497A2BC0E251E7300C680D5 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = Preferences/zh_CN.lproj/OVIMGenericController.xib; sourceTree = "<group>"; };
+		D497A2C30E2523AE00C680D5 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = Preferences/zh_TW.lproj/OVDisplayController.xib; sourceTree = "<group>"; };
+		D497A2C40E2523B100C680D5 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = Preferences/zh_CN.lproj/OVDisplayController.xib; sourceTree = "<group>"; };
+		D497A2CD0E25271F00C680D5 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = Preferences/zh_TW.lproj/OVIMPOJHoloController.xib; sourceTree = "<group>"; };
+		D497A2CE0E25272200C680D5 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = Preferences/zh_CN.lproj/OVIMPOJHoloController.xib; sourceTree = "<group>"; };
 		D4AAB7470E2471DC00DE55DC /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Preferences/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4ACB9F30E1E6BC9005E7BA7 /* Preferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Preferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ACBA030E1E6BFC005E7BA7 /* Preferences_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preferences_Prefix.pch; path = Preferences/Preferences_Prefix.pch; sourceTree = "<group>"; };
@@ -1363,6 +1375,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				D45277A30E1ED00A00AF407A /* English */,
+				D497A2BB0E251E7000C680D5 /* zh_TW */,
+				D497A2BC0E251E7300C680D5 /* zh_CN */,
 			);
 			name = OVIMGenericController.xib;
 			sourceTree = "<group>";
@@ -1401,6 +1415,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				D4D1D0F30E228D8E00E2B227 /* English */,
+				D497A2CD0E25271F00C680D5 /* zh_TW */,
+				D497A2CE0E25272200C680D5 /* zh_CN */,
 			);
 			name = OVIMPOJHoloController.xib;
 			sourceTree = "<group>";
@@ -1409,6 +1425,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				D4D1D1660E2294ED00E2B227 /* English */,
+				D497A29A0E2516DA00C680D5 /* zh_TW */,
+				D497A29B0E2516DC00C680D5 /* zh_CN */,
 			);
 			name = OVIMTibetanController.xib;
 			sourceTree = "<group>";
@@ -1417,6 +1435,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				D4D1D1900E229CBD00E2B227 /* English */,
+				D497A2AE0E251CC500C680D5 /* zh_TW */,
+				D497A2AF0E251CC900C680D5 /* zh_CN */,
 			);
 			name = OVIMPhoneticController.xib;
 			sourceTree = "<group>";
@@ -1425,6 +1445,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				D4D5521A0E1F0B19003E2FC3 /* English */,
+				D497A2A40E25175700C680D5 /* zh_TW */,
+				D497A2A50E25175A00C680D5 /* zh_CN */,
 			);
 			name = OVTableModuleController.xib;
 			sourceTree = "<group>";
@@ -1433,6 +1455,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				D4F4FC4F0E2345A4007A73B4 /* English */,
+				D497A2C30E2523AE00C680D5 /* zh_TW */,
+				D497A2C40E2523B100C680D5 /* zh_CN */,
 			);
 			name = OVDisplayController.xib;
 			sourceTree = "<group>";

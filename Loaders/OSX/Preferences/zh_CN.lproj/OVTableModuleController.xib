@@ -70,7 +70,7 @@
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
 													<int key="NSCellFlags">75628032</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Key</string>
+													<string type="base64-UTF8" key="NSContents">6K6+5a6a6aG555uuA</string>
 													<object class="NSFont" key="NSSupport" id="26">
 														<string key="NSName">LucidaGrande</string>
 														<double key="NSSize">1.100000e+01</double>
@@ -128,7 +128,7 @@
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
 													<int key="NSCellFlags">75628032</int>
 													<int key="NSCellFlags2">0</int>
-													<string key="NSContents">Value</string>
+													<string type="base64-UTF8" key="NSContents">6K6+5a6a5YC8A</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSBackgroundColor" ref="303495976"/>
 													<reference key="NSTextColor" ref="1034151699"/>
@@ -229,13 +229,13 @@
 					<object class="NSTextField" id="600337515">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{17, 312}, {59, 17}}</string>
+						<string key="NSFrame">{{17, 312}, {61, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="182641120">
 							<int key="NSCellFlags">68288064</int>
 							<int key="NSCellFlags2">272630784</int>
-							<string key="NSContents">Settings:</string>
+							<string type="base64-UTF8" key="NSContents">6K6+5a6a6aG555uuOg</string>
 							<reference key="NSSupport" ref="351665065"/>
 							<reference key="NSControlView" ref="600337515"/>
 							<object class="NSColor" key="NSBackgroundColor" id="605232805">
@@ -256,8 +256,8 @@
 						<object class="NSTextFieldCell" key="NSCell" id="426523635">
 							<int key="NSCellFlags">67239424</int>
 							<int key="NSCellFlags2">272629760</int>
-							<string type="base64-UTF8" key="NSContents">Q2xpY2sgb24gdGhlICJWYWx1ZSIgY29sdW1uIGluIHRoZSB0YWJsZSB0byBlZGl0IHRoZSBzZXR0aW5n
-cy4</string>
+							<string type="base64-UTF8" key="NSContents">6K+354K56YCJ6KGo5qC85Lit55qE44CM6K6+5a6a5YC844CN5qCP5L2N77yM5L+u5pS56K6+5a6a44CC
+A</string>
 							<reference key="NSSupport" ref="351665065"/>
 							<reference key="NSControlView" ref="550232864"/>
 							<reference key="NSBackgroundColor" ref="605232805"/>
