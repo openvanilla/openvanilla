@@ -69,7 +69,7 @@
 
 - (void)changeConfig:(NSDictionary *)d
 {
-    float alpha=1.0;	
+    float alpha = 1.0;	
 	NSColor *fc = [[d valueForKey:@"foreground" default:@"1.0 1.0 1.0"] colorByString];
 	NSColor *bc = [[d valueForKey:@"background" default:@"0.0 0.0 0.0"] colorByString];	
 	NSString *font = [d valueForKey:@"font" default:@"Lucida Grande"];
@@ -82,7 +82,7 @@
 	
     NSRect r = [_text boundingRect];	
     NSRect vf = [self frame];
-    [_text setFrameOrigin:NSMakePoint((vf.size.width-r.size.width)/2, (vf.size.height-r.size.height)/2)];	
+    [_text setFrameOrigin:NSMakePoint((vf.size.width - r.size.width)/2, (vf.size.height - r.size.height)/2)];
 	[_text setFrameSize:r.size];	
 	[self setNeedsDisplay:TRUE];	
 }

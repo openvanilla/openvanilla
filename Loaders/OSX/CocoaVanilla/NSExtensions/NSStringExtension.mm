@@ -50,16 +50,16 @@
 - (NSString *)stringByQuoting
 {
     int l = [self length];
-    UniChar *s = (UniChar*)calloc(1, l*sizeof(UniChar));
+    UniChar *s = (UniChar*)calloc(1, l * sizeof(UniChar));
     [self getCharacters:s];
-    UniChar *buf = (UniChar*)calloc(1, (l*2+2)*sizeof(UniChar));
+    UniChar *buf = (UniChar*)calloc(1, (l * 2 + 2) * sizeof(UniChar));
     int i, p = 0;
     
-    buf[p++]='\"';
+    buf[p++] = '\"';
     for (i = 0; i < l; i++) {
-        if (s[i]=='\"')
-			buf[p++]='\\';
-        buf[p++]=s[i];
+        if (s[i] == '\"')
+			buf[p++] = '\\';
+        buf[p++] = s[i];
     }
     buf[p++]='\"';
     NSString *r = [NSString stringWithCharacters:buf length:p];
@@ -72,7 +72,7 @@
     int i;
     int l = [self length];
     if (!l)
-		return [[NSString new] autorelease];
+		return @"";
     
     for (i = l-1; i >= 0; i--) {
         if ([self characterAtIndex:i]!='\n')
@@ -80,7 +80,7 @@
     }
     
     if (i == -1)
-		return [[NSString new] autorelease];
+		return @"";
 	
     NSRange r = (NSRange){0, i+1};
     return [self substringWithRange:r];
