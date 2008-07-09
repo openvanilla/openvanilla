@@ -1,5 +1,5 @@
 // OVOVSpeak.cpp: The Tibetan Input Method
-// 2004-2006 by Weizhong Yang 
+// 2004-2008 by Weizhong Yang 
 //
 // http://openvanilla.org
 //

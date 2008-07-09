@@ -1,5 +1,5 @@
 // OVIMTibetan.h: The Tibetan Input Method
-// 2004-2006 by Weizhong Yang 
+// 2004-2008 by Weizhong Yang 
 //
 // http://openvanilla.org
 //
@@ -16,34 +16,34 @@
 const int ebMaxKeySeq=10;
 class KeySeq
 {
-	public:
-		KeySeq() { len=0; buf[0]=0; }
-		void add(char c) {
-			if (len == ebMaxKeySeq)
-				return;
-			buf[len++]=c;
-		}
-		void remove() {
-			if (!len)
-				return;
-			buf[--len]=0;
-		}
-		void clear() {
-			len = 0;
-			buf[0] = 0;
-		}
-		void lastisvowel() {
-			last = VOWEL;
-		}
-		void lastisconsonant() {
-			last = CONSONAT;
-		}
-		void lastisother() {
-			last = OTHER;
-		}
-		char buf[ebMaxKeySeq];
-		int len;
-		int last;
+public:
+	KeySeq() { len=0; buf[0]=0; }
+	void add(char c) {
+		if (len == ebMaxKeySeq)
+			return;
+		buf[len++]=c;
+	}
+	void remove() {
+		if (!len)
+			return;
+		buf[--len]=0;
+	}
+	void clear() {
+		len = 0;
+		buf[0] = 0;
+	}
+	void lastisvowel() {
+		last = VOWEL;
+	}
+	void lastisconsonant() {
+		last = CONSONAT;
+	}
+	void lastisother() {
+		last = OTHER;
+	}
+	char buf[ebMaxKeySeq];
+	int len;
+	int last;
 };
 
 #define SYMBOL_NUM 11
@@ -223,3 +223,44 @@ short isFinalAddKey(int key);
 	in the array defined in OVIMTibetan.h.
 */
 short isHtransform(int key);
+
+class OVIMTibetan;
+
+class OVTibetanContext:public OVInputMethodContext
+{
+public:
+	OVTibetanContext(OVIMTibetan * p) { parent = p; }
+	virtual ~ OVTibetanContext() { }
+	virtual void clear();
+	virtual void end();
+	virtual int keyEvent(OVKeyCode * key, OVBuffer * buf, OVCandidate * textbar, OVService * srv);
+protected:
+	OVIMTibetan * parent;
+	KeySeq keyseq;
+};
+
+/*
+!
+	@class OVIMTibetan
+	@abstract The OpenVanilla Tibetan Keyboard Module.
+	@discussion 
+	OpenVanilla Tibetan Input Method is based on the Sambhota Keyboard,
+	now it supports four keyboard layouts. please check
+	http://iris.lib.virginia.edu/tibet/tools/jskad_docs/Sambhota_keymap_one.rtf
+	for detail.
+*/
+class OVIMTibetan:public OVInputMethod
+{
+public:
+	OVIMTibetan() {
+	}
+	virtual const char *identifier() {
+		return "OVIMTibetan";
+	}
+	virtual const char *localizedName(const char *locale);
+	virtual int initialize(OVDictionary * l, OVService *, const char *modulePath);
+	virtual int update(OVDictionary *, OVDictionary *) { return 1; }
+	virtual OVInputMethodContext *newContext() {
+		return new OVTibetanContext(this);
+	}
+};

@@ -1,6 +1,6 @@
 // POJ-Holo.cpp: Implementation of POJ-Holo's key sequence
 //
-// Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
+// Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
@@ -33,11 +33,11 @@
 #include <ctype.h>
 #include "POJ-Holo.h"
 
-const char *pojHoloToneComposeKey=" 12345678";
-const char *pojHoloVowel="aeimnoquAEIMNOQU";
-const char *pojHoloNasel="\xe2\x81\xbf";
+const char *pojHoloToneComposeKey = " 12345678";
+const char *pojHoloVowel = "aeimnoquAEIMNOQU";
+const char *pojHoloNasel = "\xe2\x81\xbf";
 // USE U+0358 (DEFAULT)
-const char *pojHoloToneTable[]= {
+const char *pojHoloToneTable[] = {
     "a", "\xc3\xa1", "\xc3\xa0", "a", "\xc3\xa2", "\xc3\xa1", "\xc4\x81", "a\xcc\x8d",
     "e", "\xc3\xa9", "\xc3\xa8", "e", "\xc3\xaa", "\xc3\xa9", "\xc4\x93", "e\xcc\x8d",
     "i", "\xc3\xad", "\xc3\xac", "i", "\xc3\xae", "\xc3\xad", "\xc4\xab", "i\xcc\x8d",
@@ -77,40 +77,49 @@ const char *pojHoloToneTableMiddleDot[]= {
 
 // vcomposed state
 enum {
-    POJ_Holo_VowelNone=0,
-	POJ_Holo_VowelMN=1,
-	POJ_Holo_VowelAEIOU=2
+    POJ_Holo_VowelNone = 0,
+	POJ_Holo_VowelMN = 1,
+	POJ_Holo_VowelAEIOU = 2
 };
 
-POJHoloKeySequence::POJHoloKeySequence() {
+POJHoloKeySequence::POJHoloKeySequence()
+{
     clear();
 }
 
-bool POJHoloKeySequence::isEmpty() {
-    if (len) return false;
+bool POJHoloKeySequence::isEmpty()
+{
+    if (len)
+		return false;
     return true;
 }
 
-void POJHoloKeySequence::clear() {
-    len=0;
-    prebindwait=0;
-    presettone=0;
-    bindvowel=0;
+void POJHoloKeySequence::clear()
+{
+    len = 0;
+    prebindwait = 0;
+    presettone = 0;
+    bindvowel = 0;
     memset(seq, 0, POJ_Holo_MaxSeqLen);
     memset(composebuf, 0, POJ_Holo_MaxBufLen);
 }
 
-bool POJHoloKeySequence::isComposeKey(char c) {
-    if (strchr(pojHoloToneComposeKey, c)) return true;
+bool POJHoloKeySequence::isComposeKey(char c)
+{
+    if (strchr(pojHoloToneComposeKey, c))
+		return true;
     return false;
 }
 
-bool POJHoloKeySequence::add(char c, int layout) {   
+bool POJHoloKeySequence::add(char c, int layout)
+{ 
     // if the sequence buffer is already full
-    if (len >= POJ_Holo_MaxSeqLen) return false;
+    if (len >= POJ_Holo_MaxSeqLen)
+		return false;
     
     // ignore space and non-print characters
-    if (c==' ' || !isprint(c)) return true;
+    if (c == ' ' || !isprint(c))
+		return true;
     
     // determine if it's tone
     if (c >= '1' && c <= '8') {
@@ -123,104 +132,122 @@ bool POJHoloKeySequence::add(char c, int layout) {
     // (so if the c is not pojHoloVowel, the waiting state is canceled anyway)
     if (prebindwait) {
         if (vowelorder(c) != -1)  {
-            presettone=prebindwait;
+            presettone = prebindwait;
             remove();                   // remove the waiting tone mark
-            bindvowel=len+1;     // as we're going to add one char
+            bindvowel = len + 1;     // as we're going to add one char
         }
-        prebindwait=0;      
+        prebindwait = 0;
     }
 
-    int tmptone=toneMark(c);
+    int tmptone = toneMark(c);
     if (tmptone) {
         // ignore pojToneByNumber; we don't allow tone marks to be used in
         // that keyboard layout
-        if (prebindwait) return false;
-        if (presettone) return false;
+        if (prebindwait)
+			return false;
+        if (presettone)
+			return false;
         if (layout==POJ_Holo_ToneByPreceedingSymbol)
             prebindwait=tmptone;
         else if (layout==POJ_Holo_ToneBySucceedingSymbol) {
             // check if the preceding char is a pojHoloVowel
-            if (len) 
-                if (vowelorder(seq[len-1])!=-1) 
-                {
+            if (len) {
+                if (vowelorder(seq[len-1])!=-1) {
                     presettone=tmptone;
                     bindvowel=len;
                 }
+			}
             return true;
         }
     }
             
     // repleace "q" to "ou"
-    if (c=='q') { if (add('o')) return add('u'); else return false; }
-    if (c=='Q') { if (add('O')) return add('O'); else return false; }
+    if (c=='q') {
+		if (add('o'))
+			return add('u');
+		else 
+			return false;
+	}
+    if (c=='Q') { 
+		if (add('O'))
+			return add('O');
+		else
+			return false; 
+	}
     
-    seq[len++]=c;
-    seq[len]=0;
+    seq[len++] = c;
+    seq[len] = 0;
     return true;
 }
 
-void POJHoloKeySequence::remove() {
-    if (!len) return;
+void POJHoloKeySequence::remove()
+{
+    if (!len)
+		return;
     
     // "ou" rule
-    if (tolower(seq[len-1])=='u') {
-        if (len>1 && tolower(seq[len-2])=='o') {
-            len-=2;
-            seq[len]=0;
+    if (tolower(seq[len-1]) == 'u') {
+        if (len > 1 && tolower(seq[len - 2]) == 'o') {
+            len -= 2;
+            seq[len] = 0;
             if (bindvowel && len<bindvowel) {
-                bindvowel=0;
-                presettone=0;
+                bindvowel = 0;
+                presettone = 0;
             }
             return;
         }
     }
     
-    seq[--len]=0;
+    seq[--len] = 0;
     if (bindvowel && len<bindvowel) {
-        bindvowel=0;
-        presettone=0;
+        bindvowel = 0;
+        presettone = 0;
     }
 }
 
 void POJHoloKeySequence::normalize()
 {
-    int t=presettone;
-    presettone=0;
+    int t = presettone;
+    presettone = 0;
     
     if (!t) return;
     if (!len) return;
 
     // if already finalized, we remove the finalized mark
-    if (seq[len-1] >= '1' && seq[len-1] <= '8') seq[--len]=0;  
+    if (seq[len - 1] >= '1' && seq[len - 1] <= '8')
+		seq[--len] = 0;  
     
     // there is no tone 6 in Holo, tone 1 needs no extra mark,
     // tone 4 is not necessary (if syllable ends in h/k/p/t and tone!=8,
     // it's tone 4)
-    if (t==1 || t==6 || t==4) return;
+    if (t == 1 || t == 6 || t == 4)
+		return;
     
     // only tone 8 is possible for syllable ending in h, k, p, t
-    char c=tolower(seq[len-1]);
-    int hkpt=(c=='h' || c=='k' || c=='p' || c=='t');
-    if (hkpt && t!=8) return;
-    if (!hkpt && t==8) return;
+    char c = tolower(seq[len-1]);
+    int hkpt = (c == 'h' || c == 'k' || c == 'p' || c == 't');
+    if (hkpt && t != 8) return;
+    if (!hkpt && t == 8) return;
     
-    presettone=t;
+    presettone = t;
     return;
 }
 
-const char *POJHoloKeySequence::sequence() {
+const char *POJHoloKeySequence::sequence()
+{
     return seq;
 }
 
-const char *POJHoloKeySequence::finalize() {
+const char *POJHoloKeySequence::finalize()
+{
     // if it already exceeds maximum length, we can't append tone
     if (len == POJ_Holo_MaxSeqLen) return seq; 
     if (!len) return seq;
     normalize();
     
     if (presettone) {
-        seq[len++]=presettone+'0';
-        seq[len]=0;
+        seq[len++] = presettone + '0';
+        seq[len] = 0;
     }
     
     return seq;
@@ -235,24 +262,26 @@ const char *POJHoloKeySequence::compose(bool pureascii, bool ou_encoding)
     // if asciioutput is on, directly copy the internal representation
     // presumes normailization
     if (pureascii) {
-        b=composebuf;
+        b = composebuf;
         strcpy(composebuf, seq);
         while (*b++) ;
-        if (presettone) *b++ = presettone+'0';
-        *b=0;
+        if (presettone)
+			*b++ = presettone+'0';
+        *b = 0;
         return composebuf;
     }
     
-    int tone=1;    
-    b=composebuf;
+    int tone = 1;    
+    b = composebuf;
 
-    if (presettone) tone=presettone;
+    if (presettone)
+		tone = presettone;
 
-    char c, *s=seq;
-    int vcomposed=0;        // if the first pojHoloVowel is composed
+    char c, *s = seq;
+    int vcomposed = 0;        // if the first pojHoloVowel is composed
     
-    while((c=*s))   {       // C style, very C style
-        char cnext=*(s+1);
+    while((c = *s))   {       // C style, very C style
+        char cnext = *(s + 1);
 
         if (isComposeKey(c)) break; // if we encountering tone mark, the end
         
@@ -260,10 +289,10 @@ const char *POJHoloKeySequence::compose(bool pureascii, bool ou_encoding)
 
         // pojHoloNasel? ("nn") -- note that this rule should never apply
         // when "nn" appears in the beginning of the sequence
-        if (tolower(c)=='n' && tolower(cnext)=='n' && tolower(*(s+2))!='g') {
+        if (tolower(c) == 'n' && tolower(cnext) == 'n' && tolower(*(s + 2)) != 'g') {
             strcat(b, pojHoloNasel);
-            b+=strlen(pojHoloNasel);
-            s+=2;
+            b += strlen(pojHoloNasel);
+            s += 2;
             continue;
         }
 
@@ -273,10 +302,11 @@ const char *POJHoloKeySequence::compose(bool pureascii, bool ou_encoding)
         // pojHoloVowel right here, we should discard tone on M,N.
         // (That means re-copy all leading characters.)
         if (vcomposed == POJ_Holo_VowelMN && ( vo != -1 ) && !IRULE ) {
-        	char *t=seq;
-        	b=composebuf;
-        	while(t<s) *b++=*t++;
-        	*b=0;
+        	char *t = seq;
+        	b = composebuf;
+        	while (t < s)
+				*b++ = *t++;
+        	*b = 0;
         	vcomposed = POJ_Holo_VowelNone;
         }
 
@@ -284,53 +314,59 @@ const char *POJHoloKeySequence::compose(bool pureascii, bool ou_encoding)
         // here we also apply "i" rule (if "i" is followed by a pojHoloVowel,
         // the tone mark will never be placed upon "i")
         if (vcomposed || ( vo == -1 ) || IRULE ) {
-            *b++=*s++;
-            *b=0;   // to supress junk
+            *b++ = *s++;
+            *b = 0;   // to supress junk
             continue;
         }
 #undef IRULE
 
         // "ou" and "OU" rule
-        if (c=='o' && tolower(cnext)=='u') {
-            c='q';
+        if (c == 'o' && tolower(cnext) == 'u') {
+            c = 'q';
             s++;    // shift one char
         }
         
-        if (c=='O' && tolower(cnext)=='u') {
-            c='Q';
+        if (c=='O' && tolower(cnext) == 'u') {
+            c = 'Q';
             s++;    // shift one char
         }
     
-        char *vstr=(char*)vowel2tone(c, tone, ou_encoding);
+        char *vstr = (char*)vowel2tone(c, tone, ou_encoding);
         if (vstr) {
             // compose the tone mark
             strcat(b, vstr);
 
-            b+=strlen(vstr);
+            b += strlen(vstr);
             vcomposed = (tolower(c) == 'm' || tolower(c) == 'n') ? POJ_Holo_VowelMN : POJ_Holo_VowelAEIOU;
         }
         s++;
     }
-    *b=0;
+    *b = 0;
     return composebuf;
 }
 
 int POJHoloKeySequence::vowelorder(char c)
 {
-    const char *v=pojHoloVowel;
-    for (int i=0; *v; i++, v++) if (c==*v) return i;
+    const char *v = pojHoloVowel;
+    for (int i = 0; *v; i++, v++) {
+		if (c == *v)
+			return i;
+	}
     return -1;
 }
 
 // tone must be between 1-8
-const char *POJHoloKeySequence::vowel2tone(char c, int tone, bool ou_encoding)  {
-    if (tone < 1 || tone > 8) return NULL;
-    int o=vowelorder(c);
-    if (o==-1) return NULL;
-    if (ou_encoding==OU_EncodedBy_CDRA)
-        return pojHoloToneTable[o*8+(tone-1)];
+const char *POJHoloKeySequence::vowel2tone(char c, int tone, bool ou_encoding)
+{
+    if (tone < 1 || tone > 8)
+		return NULL;
+    int o = vowelorder(c);
+    if (o == -1)
+		return NULL;
+    if (ou_encoding == OU_EncodedBy_CDRA)
+        return pojHoloToneTable[o * 8 + (tone - 1)];
     else
-        return pojHoloToneTableMiddleDot[o*8+(tone-1)];
+        return pojHoloToneTableMiddleDot[o * 8 + (tone - 1)];
 }
 
 int POJHoloKeySequence::toneMark(char c)

@@ -3,7 +3,7 @@
 # use this Perl script to generate "-lookup.cin" cin files
 # usage: ./generate-pl < SOURCE.cin > TARGET.cin
 #
-# Copyright (c) 2004-2006 The OpenVanilla Project (http://openvanilla.org)
+# Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
