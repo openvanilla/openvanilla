@@ -1163,10 +1163,10 @@
 										<reference key="NSSuperview" ref="1010641187"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSTableHeaderView" key="NSHeaderView" id="398703418">
-											<reference key="NSNextResponder" ref="555243735"/>
+											<reference key="NSNextResponder" ref="389011908"/>
 											<int key="NSvFlags">256</int>
 											<string key="NSFrameSize">{290, 17}</string>
-											<reference key="NSSuperview" ref="555243735"/>
+											<reference key="NSSuperview" ref="389011908"/>
 											<reference key="NSTableView" ref="631555167"/>
 										</object>
 										<object class="_NSCornerView" key="NSCornerView" id="553110540">
@@ -1322,7 +1322,7 @@
 											</object>
 										</object>
 										<double key="NSRowHeight">1.700000e+01</double>
-										<int key="NSTvFlags">-1035993088</int>
+										<int key="NSTvFlags">1111490560</int>
 										<int key="NSGridStyleMask">2</int>
 										<int key="NSColumnAutoresizingStyle">5</int>
 										<int key="NSDraggingSourceMaskForLocal">15</int>
@@ -1344,8 +1344,7 @@
 								<reference key="NSSuperview" ref="644777769"/>
 								<reference key="NSTarget" ref="644777769"/>
 								<string key="NSAction">_doScroller:</string>
-								<double key="NSCurValue">3.700000e+01</double>
-								<double key="NSPercent">1.390978e-01</double>
+								<double key="NSPercent">9.979166e-01</double>
 							</object>
 							<object class="NSScroller" id="871713424">
 								<reference key="NSNextResponder" ref="644777769"/>
@@ -1357,7 +1356,7 @@
 								<string key="NSAction">_doScroller:</string>
 								<double key="NSPercent">9.959016e-01</double>
 							</object>
-							<object class="NSClipView" id="555243735">
+							<object class="NSClipView" id="389011908">
 								<reference key="NSNextResponder" ref="644777769"/>
 								<int key="NSvFlags">2304</int>
 								<object class="NSMutableArray" key="NSSubviews">
@@ -1380,7 +1379,7 @@
 						<reference key="NSVScroller" ref="123441563"/>
 						<reference key="NSHScroller" ref="871713424"/>
 						<reference key="NSContentView" ref="1010641187"/>
-						<reference key="NSHeaderClipView" ref="555243735"/>
+						<reference key="NSHeaderClipView" ref="389011908"/>
 						<reference key="NSCornerView" ref="553110540"/>
 						<bytes key="NSScrollAmts">QSAAAEEgAABBoAAAQaAAAA</bytes>
 					</object>
@@ -3007,11 +3006,6 @@
 						<reference key="parent" ref="644777769"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">494</int>
-						<reference key="object" ref="398703418"/>
-						<reference key="parent" ref="644777769"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">495</int>
 						<reference key="object" ref="149539337"/>
 						<object class="NSMutableArray" key="children">
@@ -3081,6 +3075,11 @@
 						<int key="objectID">514</int>
 						<reference key="object" ref="598070457"/>
 						<reference key="parent" ref="416397246"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">522</int>
+						<reference key="object" ref="398703418"/>
+						<reference key="parent" ref="644777769"/>
 					</object>
 				</object>
 			</object>
@@ -3284,7 +3283,6 @@
 					<string>491.IBPluginDependency</string>
 					<string>492.IBPluginDependency</string>
 					<string>493.IBPluginDependency</string>
-					<string>494.IBPluginDependency</string>
 					<string>495.IBPluginDependency</string>
 					<string>496.IBPluginDependency</string>
 					<string>498.IBPluginDependency</string>
@@ -3530,7 +3528,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="9"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3591,7 +3588,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">521</int>
+			<int key="maxID">522</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

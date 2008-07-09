@@ -140,6 +140,7 @@
 		D475921B0E231A450039A33B /* WindowBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D47592190E231A450039A33B /* WindowBackground.jpg */; };
 		D475921C0E231A450039A33B /* OVPreferences.icns in Resources */ = {isa = PBXBuildFile; fileRef = D475921A0E231A450039A33B /* OVPreferences.icns */; };
 		D48FB1790E2130F40071F20E /* OVHotkeyField.m in Sources */ = {isa = PBXBuildFile; fileRef = D48FB1770E2130F40071F20E /* OVHotkeyField.m */; };
+		D4AAB7480E2471DC00DE55DC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AAB7460E2471DC00DE55DC /* Localizable.strings */; };
 		D4ACBA050E1E6BFC005E7BA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACBA040E1E6BFC005E7BA7 /* main.m */; };
 		D4ACBA0A0E1E6C09005E7BA7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ACBA060E1E6C09005E7BA7 /* MainMenu.xib */; };
 		D4ACBA0B0E1E6C09005E7BA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4ACBA080E1E6C09005E7BA7 /* InfoPlist.strings */; };
@@ -384,6 +385,7 @@
 		D475921A0E231A450039A33B /* OVPreferences.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OVPreferences.icns; path = Preferences/Images/OVPreferences.icns; sourceTree = "<group>"; };
 		D48FB1770E2130F40071F20E /* OVHotkeyField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OVHotkeyField.m; path = Preferences/OVHotkeyField.m; sourceTree = "<group>"; };
 		D48FB1780E2130F40071F20E /* OVHotkeyField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVHotkeyField.h; path = Preferences/OVHotkeyField.h; sourceTree = "<group>"; };
+		D4AAB7470E2471DC00DE55DC /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Preferences/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4ACB9F30E1E6BC9005E7BA7 /* Preferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Preferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ACBA030E1E6BFC005E7BA7 /* Preferences_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preferences_Prefix.pch; path = Preferences/Preferences_Prefix.pch; sourceTree = "<group>"; };
 		D4ACBA040E1E6BFC005E7BA7 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Preferences/main.m; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 		D4D1D0E90E228CEF00E2B227 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D4AAB7460E2471DC00DE55DC /* Localizable.strings */,
 				D4F4FCAB0E234B2A007A73B4 /* General.tiff */,
 				D4F4FCAC0E234B2A007A73B4 /* Modules.tiff */,
 				D47592190E231A450039A33B /* WindowBackground.jpg */,
@@ -1065,6 +1068,7 @@
 				D4F4FC500E2345A4007A73B4 /* OVDisplayController.xib in Resources */,
 				D4F4FCAD0E234B2A007A73B4 /* General.tiff in Resources */,
 				D4F4FCAE0E234B2A007A73B4 /* Modules.tiff in Resources */,
+				D4AAB7480E2471DC00DE55DC /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1355,6 +1359,14 @@
 				D45277A30E1ED00A00AF407A /* English */,
 			);
 			name = OVIMGenericController.xib;
+			sourceTree = "<group>";
+		};
+		D4AAB7460E2471DC00DE55DC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4AAB7470E2471DC00DE55DC /* English */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		D4ACBA060E1E6C09005E7BA7 /* MainMenu.xib */ = {

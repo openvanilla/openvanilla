@@ -99,7 +99,7 @@
 	}	
 	[m_ouputFilters addObject:outputFilter];
 }
-- (void)switchToView: (NSView *)view
+- (void)switchToView:(NSView *)view
 {
 	if ([[u_settingView subviews] count]) {
 		[[[u_settingView subviews] objectAtIndex:0] removeFromSuperview];
@@ -133,12 +133,10 @@
 {
 	return YES;
 }
-
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(id)item
 {
 	return NO;
 }
-
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
 	if (item == nil || item == m_inputMethods || item == m_ouputFilters) {
@@ -146,7 +144,6 @@
 	}
 	return NO;
 }
-
 - (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item
 {
 	if (item == nil) {
@@ -225,14 +222,12 @@
 	}
 	return nil;
 }
-
 - (void)setCurrentItem:(id)item
 {
 	id tmp = m_currentItem;
 	m_currentItem = [item retain];
 	[tmp release];	
 }
-
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
 {
 	if (item == nil || item == m_inputMethods || item == m_ouputFilters) {
@@ -244,19 +239,16 @@
 	[self setCurrentItem:item];
 	return YES;
 }
-
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
 	[u_hotkeyView setHidden:NO];
 	[u_hotkeyField setModuleController:m_currentItem];
 	[self switchToView:[m_currentItem view]];
 }
-
 - (float)indentationPerLevel
 {
 	return 0;
 }
-
 - (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
 	if (item == nil || item == m_inputMethods || item == m_ouputFilters)
@@ -301,6 +293,7 @@
 {
 	[m_ouputFilters insertObject:[m_draggingItem copy] atIndex:childIndex];
 	[m_ouputFilters removeObject:m_draggingItem];
+	[m_draggingItem release];
 	[u_outlineView reloadData];
 	
 	NSMutableArray *outputFilterOrder = [NSMutableArray array];

@@ -41,7 +41,8 @@ CVTimeTag CVGetFileTimeStamp(NSString *filename)
     struct stat s;
     CVTimeTag t;
     bzero(&t, sizeof(t));
-    if (f && !stat(f, &s)) t=s.st_mtimespec;
+    if (f && !stat(f, &s))
+		t = s.st_mtimespec;
     return t;
 }
 

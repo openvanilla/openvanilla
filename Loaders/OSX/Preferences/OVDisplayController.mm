@@ -96,7 +96,7 @@
 			[u_soundMenu selectItemWithTitle:soundName];
 		}
 	}
-	[u_soundMenu addItemWithTitle:MSG(@"Customize...")];
+	[u_soundMenu addItemWithTitle:MSG(@"Customized...")];
 	
 	if (!m_beepSound || ![m_beepSound length]) {
 		[u_soundMenu selectItemAtIndex:0];
