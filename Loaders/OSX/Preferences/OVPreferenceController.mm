@@ -208,7 +208,7 @@
 - (void)awakeFromNib
 {	
 	[[self window] setDelegate:self];
-	
+	[[self window] setLevel:NSFloatingWindowLevel];
 	
 	// Initialize the toolbar on the main window.
 	

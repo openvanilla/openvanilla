@@ -385,6 +385,12 @@
 		D475921A0E231A450039A33B /* OVPreferences.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OVPreferences.icns; path = Preferences/Images/OVPreferences.icns; sourceTree = "<group>"; };
 		D48FB1770E2130F40071F20E /* OVHotkeyField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OVHotkeyField.m; path = Preferences/OVHotkeyField.m; sourceTree = "<group>"; };
 		D48FB1780E2130F40071F20E /* OVHotkeyField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVHotkeyField.h; path = Preferences/OVHotkeyField.h; sourceTree = "<group>"; };
+		D497A27C0E250D8000C680D5 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = Preferences/zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D497A27D0E250D8C00C680D5 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = Preferences/zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D497A27F0E250D9800C680D5 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = Preferences/zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D497A2800E250D9B00C680D5 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = Preferences/zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D497A2930E2513E200C680D5 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = Preferences/zh_TW.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		D497A2940E2513E600C680D5 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = Preferences/zh_CN.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		D4AAB7470E2471DC00DE55DC /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Preferences/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D4ACB9F30E1E6BC9005E7BA7 /* Preferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Preferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ACBA030E1E6BFC005E7BA7 /* Preferences_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preferences_Prefix.pch; path = Preferences/Preferences_Prefix.pch; sourceTree = "<group>"; };
@@ -1365,6 +1371,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				D4AAB7470E2471DC00DE55DC /* English */,
+				D497A27C0E250D8000C680D5 /* zh_TW */,
+				D497A27D0E250D8C00C680D5 /* zh_CN */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1373,6 +1381,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				D4ACBA070E1E6C09005E7BA7 /* English */,
+				D497A2930E2513E200C680D5 /* zh_TW */,
+				D497A2940E2513E600C680D5 /* zh_CN */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -1381,6 +1391,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				D4ACBA090E1E6C09005E7BA7 /* English */,
+				D497A27F0E250D9800C680D5 /* zh_TW */,
+				D497A2800E250D9B00C680D5 /* zh_CN */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
