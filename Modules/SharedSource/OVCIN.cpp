@@ -33,6 +33,10 @@
 #include "OVFileHandler.h"
 #include "OVWildcard.h"
 
+#ifdef __linux__
+	#include <string.h>
+#endif
+
 #include <algorithm>	//for stable_sort() and transform()
 
 using namespace std;

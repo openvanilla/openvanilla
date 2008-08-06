@@ -31,6 +31,10 @@
 #include "OVFileHandler.h"
 #include "OVStringToolKit.h"
 
+#ifdef __linux__
+	#include <string.h>
+#endif
+
 using namespace std;
 
 

@@ -39,6 +39,10 @@
     #include <sys/types.h>
     #include <dirent.h>
     #include <unistd.h>
+
+    #ifdef __linux__
+    	#include <stdlib.h>
+    #endif
 #else   
     #include "OpenVanilla.h"
     #include "OVUtility.h"

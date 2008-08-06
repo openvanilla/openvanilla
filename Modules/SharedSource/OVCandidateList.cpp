@@ -32,6 +32,10 @@
 #include "OVCIN.h"
 #include <iostream>
 
+#ifdef __linux__
+	#include <string.h>
+#endif
+
 using namespace std;
 
 void OVCandidateList::prepare(vector<string>* l, char* skey, OVCandidate *textbar)
