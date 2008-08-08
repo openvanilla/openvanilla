@@ -1,0 +1,14 @@
+LOADER_DIR=Loaders/SCIM/
+export OV_MODULEDIR=/usr/lib/openvanilla/
+
+build: 
+	cd  $(LOADER_DIR); $(MAKE) 
+
+configure:
+	cd  $(LOADER_DIR); ./configure --prefix=$(CURDIR)/debian/scim-openvanilla
+
+install: 
+	cd  $(LOADER_DIR); $(MAKE) install DESTDIR=$(CURDIR)/debian/scim-openvanilla
+
+clean: 
+	cd  $(LOADER_DIR); $(MAKE) distclean

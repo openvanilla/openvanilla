@@ -18,3 +18,7 @@ uninstall:
 clean:
 	make -f Makefile.$(OS) $@
 
+debian:
+	ln -s ./Distributions/Debian/Latest/ ./debian
+	dpkg-buildpackage -rfakeroot 
+	rm ./debian

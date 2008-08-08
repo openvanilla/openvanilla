@@ -1,0 +1,15 @@
+MODULES=OVIMArray OVIMGeneric OVIMPhonetic OVIMPOJ-Holo OVIMTibetan
+MODULE_DIR=Modules/
+DESTDIR=$(CURDIR)/debian/openvanilla-im-modules
+export DESTDIR
+
+configure:
+
+build:
+	for m in $(MODULES);do cd $(MODULE_DIR)/$$m; make; cd -; done
+
+clean:
+	for m in $(MODULES);do cd $(MODULE_DIR)/$$m; make clean; cd -; done
+
+install:
+	for m in $(MODULES);do cd $(MODULE_DIR)/$$m; make install; cd -; done
