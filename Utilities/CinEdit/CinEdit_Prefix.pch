@@ -1,7 +1,0 @@
-//
-// Prefix header for all source files of the 'CinEdit' target in the 'CinEdit' project
-//
-
-#ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
-#endif
