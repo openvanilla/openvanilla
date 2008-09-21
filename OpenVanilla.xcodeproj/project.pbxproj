@@ -6,14 +6,122 @@
 	objectVersion = 42;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6A6A86600E867E9300B94B7F /* OpenVanilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865B0E867E9300B94B7F /* OpenVanilla.h */; };
+		6A6A86610E867E9300B94B7F /* OVLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865C0E867E9300B94B7F /* OVLibrary.h */; };
+		6A6A86620E867E9300B94B7F /* OVUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865D0E867E9300B94B7F /* OVUtility.h */; };
+		6A6A86630E867E9300B94B7F /* FrameworkStub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A865F0E867E9300B94B7F /* FrameworkStub.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6A6A86100E867B2E00B94B7F /* OpenVanilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenVanilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A6A86120E867B2E00B94B7F /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-Info.plist"; path = "Frameworks/OpenVanilla/OpenVanilla-Info.plist"; sourceTree = "<group>"; };
+		6A6A865B0E867E9300B94B7F /* OpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenVanilla.h; sourceTree = "<group>"; };
+		6A6A865C0E867E9300B94B7F /* OVLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLibrary.h; sourceTree = "<group>"; };
+		6A6A865D0E867E9300B94B7F /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUtility.h; sourceTree = "<group>"; };
+		6A6A865F0E867E9300B94B7F /* FrameworkStub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameworkStub.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6A6A860E0E867B2E00B94B7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
 		6A6A85AD0E86750E00B94B7F = {
 			isa = PBXGroup;
 			children = (
+				6A6A86650E867E9800B94B7F /* Frameworks */,
+				6A6A86110E867B2E00B94B7F /* Products */,
+				6A6A86120E867B2E00B94B7F /* OpenVanilla-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
+		6A6A86110E867B2E00B94B7F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A6A86100E867B2E00B94B7F /* OpenVanilla.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6A6A86170E867B3700B94B7F /* OpenVanilla */ = {
+			isa = PBXGroup;
+			children = (
+				6A6A865A0E867E9300B94B7F /* Headers */,
+				6A6A865E0E867E9300B94B7F /* Source */,
+			);
+			name = OpenVanilla;
+			sourceTree = "<group>";
+		};
+		6A6A865A0E867E9300B94B7F /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				6A6A865B0E867E9300B94B7F /* OpenVanilla.h */,
+				6A6A865C0E867E9300B94B7F /* OVLibrary.h */,
+				6A6A865D0E867E9300B94B7F /* OVUtility.h */,
+			);
+			name = Headers;
+			path = Frameworks/OpenVanilla/Headers;
+			sourceTree = "<group>";
+		};
+		6A6A865E0E867E9300B94B7F /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				6A6A865F0E867E9300B94B7F /* FrameworkStub.cpp */,
+			);
+			name = Source;
+			path = Frameworks/OpenVanilla/Source;
+			sourceTree = "<group>";
+		};
+		6A6A86650E867E9800B94B7F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6A6A86170E867B3700B94B7F /* OpenVanilla */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6A6A860B0E867B2E00B94B7F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A6A86600E867E9300B94B7F /* OpenVanilla.h in Headers */,
+				6A6A86610E867E9300B94B7F /* OVLibrary.h in Headers */,
+				6A6A86620E867E9300B94B7F /* OVUtility.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6A6A860F0E867B2E00B94B7F /* OpenVanilla */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A6A86150E867B2F00B94B7F /* Build configuration list for PBXNativeTarget "OpenVanilla" */;
+			buildPhases = (
+				6A6A860B0E867B2E00B94B7F /* Headers */,
+				6A6A860C0E867B2E00B94B7F /* Resources */,
+				6A6A860D0E867B2E00B94B7F /* Sources */,
+				6A6A860E0E867B2E00B94B7F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenVanilla;
+			productName = OpenVanilla;
+			productReference = 6A6A86100E867B2E00B94B7F /* OpenVanilla.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		6A6A85AF0E86750E00B94B7F /* Project object */ = {
@@ -22,12 +130,35 @@
 			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 0;
 			mainGroup = 6A6A85AD0E86750E00B94B7F;
+			productRefGroup = 6A6A86110E867B2E00B94B7F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				6A6A860F0E867B2E00B94B7F /* OpenVanilla */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6A6A860C0E867B2E00B94B7F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6A6A860D0E867B2E00B94B7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A6A86630E867E9300B94B7F /* FrameworkStub.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		6A6A85B00E86750E00B94B7F /* Debug */ = {
@@ -44,6 +175,60 @@
 			};
 			name = Release;
 		};
+		6A6A86130E867B2F00B94B7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Frameworks/OpenVanilla/OpenVanilla-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenVanilla;
+			};
+			name = Debug;
+		};
+		6A6A86140E867B2F00B94B7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Frameworks/OpenVanilla/OpenVanilla-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenVanilla;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -52,6 +237,15 @@
 			buildConfigurations = (
 				6A6A85B00E86750E00B94B7F /* Debug */,
 				6A6A85B10E86750E00B94B7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A6A86150E867B2F00B94B7F /* Build configuration list for PBXNativeTarget "OpenVanilla" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A6A86130E867B2F00B94B7F /* Debug */,
+				6A6A86140E867B2F00B94B7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
