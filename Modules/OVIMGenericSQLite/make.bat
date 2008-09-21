@@ -1,2 +1,0 @@
-cl /I..\..\Headers /I..\..\Experiments\Win32\SQLite3 /GR /EHsc /MT /D"WIN32" /FeOVIMGenericSQLite.DLL /LD OVIMGenericSQLite.cpp /link /DEF:..\..\Experiments\Win32\OVModule.DEF ..\..\Experiments\Win32\SQLite3\sqlite3.lib
-pause

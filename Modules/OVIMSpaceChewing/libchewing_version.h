@@ -1,1 +1,0 @@
-#define LIBCHEWING_VERSION "0.3.091" 
