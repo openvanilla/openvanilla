@@ -1,6 +1,0 @@
----
-name: OV
-db: dbi:SQLite:root/imtables.db
-static:
-  ignore_extensions:
-    - tt2
