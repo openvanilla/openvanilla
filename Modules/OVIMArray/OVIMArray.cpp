@@ -420,7 +420,7 @@ int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path)
     };
 
 #ifdef OSX_INCLUDE
-    CFBundleRef bundle = CFBundleGetBundleWithIdentifier(CFSTR("org.openvanilla.module.ovimarray"));
+    CFBundleRef bundle = CFBundleGetBundleWithIdentifier(CFSTR("org.openvanilla.ModulePackage.OVIMArray"));
     if (!bundle)
 		return 0;
 
