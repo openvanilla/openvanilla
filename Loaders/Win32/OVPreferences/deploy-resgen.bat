@@ -1,8 +1,0 @@
-call "C:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\Bin\ResGen.exe" "..\..\Properties\Resource.en-US.resx"
-call "C:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\Bin\ResGen.exe" "..\..\Properties\Resource.zh-TW.resx"
-mkdir "C:\OpenVanilla\Resources"
-mkdir ".\Resources"
-copy "..\..\Properties\Resource.en-US.resources" ".\Resources\"
-copy "..\..\Properties\Resource.zh-TW.resources" ".\Resources\"
-copy "..\..\Properties\Resource.en-US.resources" "C:\OpenVanilla\Resources\"
-copy "..\..\Properties\Resource.zh-TW.resources" "C:\OpenVanilla\Resources\"

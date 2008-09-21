@@ -1,2 +1,0 @@
-The Makefile and *.bat are not work now, please refer to
-trunk/README.Win32.zh_HANT.UTF-8.txt for current building procedures.
