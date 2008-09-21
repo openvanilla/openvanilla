@@ -1,4 +1,0 @@
-CREATE TABLE tsi(tsi text, freq integer, bpmf text, tone text);
-CREATE INDEX tsi_index_bpmf on tsi(bpmf);
-CREATE TABLE bpmf(bpmf text, chr text, ord integer);
-CREATE INDEX bpmf_index_bpmf on bpmf(bpmf);
