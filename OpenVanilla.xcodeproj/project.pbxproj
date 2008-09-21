@@ -7,10 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6A6A86600E867E9300B94B7F /* OpenVanilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865B0E867E9300B94B7F /* OpenVanilla.h */; };
-		6A6A86610E867E9300B94B7F /* OVLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865C0E867E9300B94B7F /* OVLibrary.h */; };
-		6A6A86620E867E9300B94B7F /* OVUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865D0E867E9300B94B7F /* OVUtility.h */; };
-		6A6A86630E867E9300B94B7F /* FrameworkStub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A865F0E867E9300B94B7F /* FrameworkStub.cpp */; };
+		6A6A86600E867E9300B94B7F /* OpenVanilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865B0E867E9300B94B7F /* OpenVanilla.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A6A86610E867E9300B94B7F /* OVLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865C0E867E9300B94B7F /* OVLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A6A86620E867E9300B94B7F /* OVUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865D0E867E9300B94B7F /* OVUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A6A867E0E86805700B94B7F /* OVCandidateList.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A86740E86805700B94B7F /* OVCandidateList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A6A867F0E86805700B94B7F /* OVCIN.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A86750E86805700B94B7F /* OVCIN.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A6A86800E86805700B94B7F /* OVCINInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A86760E86805700B94B7F /* OVCINInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A6A86810E86805700B94B7F /* OVFileHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A86770E86805700B94B7F /* OVFileHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A6A86820E86805700B94B7F /* OVKeySequence.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A86780E86805700B94B7F /* OVKeySequence.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A6A86830E86805700B94B7F /* OVOSDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A86790E86805700B94B7F /* OVOSDef.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A6A86840E86805700B94B7F /* OVPhoneticLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A867A0E86805700B94B7F /* OVPhoneticLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A6A86850E86805700B94B7F /* OVSQLite3.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A867B0E86805700B94B7F /* OVSQLite3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A6A86860E86805700B94B7F /* OVStringToolKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A867C0E86805700B94B7F /* OVStringToolKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A6A86870E86805700B94B7F /* OVWildcard.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A867D0E86805700B94B7F /* OVWildcard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A6A868E0E86806600B94B7F /* OVCandidateList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A86880E86806600B94B7F /* OVCandidateList.cpp */; };
+		6A6A868F0E86806600B94B7F /* OVCIN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A86890E86806600B94B7F /* OVCIN.cpp */; };
+		6A6A86900E86806600B94B7F /* OVCINInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A868A0E86806600B94B7F /* OVCINInfo.cpp */; };
+		6A6A86910E86806600B94B7F /* OVFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A868B0E86806600B94B7F /* OVFileHandler.cpp */; };
+		6A6A86920E86806600B94B7F /* OVPhoneticLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A868C0E86806600B94B7F /* OVPhoneticLib.cpp */; };
+		6A6A86930E86806600B94B7F /* OVStringToolKit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A868D0E86806600B94B7F /* OVStringToolKit.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,7 +34,22 @@
 		6A6A865B0E867E9300B94B7F /* OpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenVanilla.h; sourceTree = "<group>"; };
 		6A6A865C0E867E9300B94B7F /* OVLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLibrary.h; sourceTree = "<group>"; };
 		6A6A865D0E867E9300B94B7F /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUtility.h; sourceTree = "<group>"; };
-		6A6A865F0E867E9300B94B7F /* FrameworkStub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameworkStub.cpp; sourceTree = "<group>"; };
+		6A6A86740E86805700B94B7F /* OVCandidateList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCandidateList.h; sourceTree = "<group>"; };
+		6A6A86750E86805700B94B7F /* OVCIN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCIN.h; sourceTree = "<group>"; };
+		6A6A86760E86805700B94B7F /* OVCINInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCINInfo.h; sourceTree = "<group>"; };
+		6A6A86770E86805700B94B7F /* OVFileHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVFileHandler.h; sourceTree = "<group>"; };
+		6A6A86780E86805700B94B7F /* OVKeySequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVKeySequence.h; sourceTree = "<group>"; };
+		6A6A86790E86805700B94B7F /* OVOSDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVOSDef.h; sourceTree = "<group>"; };
+		6A6A867A0E86805700B94B7F /* OVPhoneticLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVPhoneticLib.h; sourceTree = "<group>"; };
+		6A6A867B0E86805700B94B7F /* OVSQLite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVSQLite3.h; sourceTree = "<group>"; };
+		6A6A867C0E86805700B94B7F /* OVStringToolKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVStringToolKit.h; sourceTree = "<group>"; };
+		6A6A867D0E86805700B94B7F /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVWildcard.h; sourceTree = "<group>"; };
+		6A6A86880E86806600B94B7F /* OVCandidateList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVCandidateList.cpp; sourceTree = "<group>"; };
+		6A6A86890E86806600B94B7F /* OVCIN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVCIN.cpp; sourceTree = "<group>"; };
+		6A6A868A0E86806600B94B7F /* OVCINInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVCINInfo.cpp; sourceTree = "<group>"; };
+		6A6A868B0E86806600B94B7F /* OVFileHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVFileHandler.cpp; sourceTree = "<group>"; };
+		6A6A868C0E86806600B94B7F /* OVPhoneticLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVPhoneticLib.cpp; sourceTree = "<group>"; };
+		6A6A868D0E86806600B94B7F /* OVStringToolKit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVStringToolKit.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +95,16 @@
 				6A6A865B0E867E9300B94B7F /* OpenVanilla.h */,
 				6A6A865C0E867E9300B94B7F /* OVLibrary.h */,
 				6A6A865D0E867E9300B94B7F /* OVUtility.h */,
+				6A6A86740E86805700B94B7F /* OVCandidateList.h */,
+				6A6A86750E86805700B94B7F /* OVCIN.h */,
+				6A6A86760E86805700B94B7F /* OVCINInfo.h */,
+				6A6A86770E86805700B94B7F /* OVFileHandler.h */,
+				6A6A86780E86805700B94B7F /* OVKeySequence.h */,
+				6A6A86790E86805700B94B7F /* OVOSDef.h */,
+				6A6A867A0E86805700B94B7F /* OVPhoneticLib.h */,
+				6A6A867B0E86805700B94B7F /* OVSQLite3.h */,
+				6A6A867C0E86805700B94B7F /* OVStringToolKit.h */,
+				6A6A867D0E86805700B94B7F /* OVWildcard.h */,
 			);
 			name = Headers;
 			path = Frameworks/OpenVanilla/Headers;
@@ -73,7 +113,12 @@
 		6A6A865E0E867E9300B94B7F /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				6A6A865F0E867E9300B94B7F /* FrameworkStub.cpp */,
+				6A6A86880E86806600B94B7F /* OVCandidateList.cpp */,
+				6A6A86890E86806600B94B7F /* OVCIN.cpp */,
+				6A6A868A0E86806600B94B7F /* OVCINInfo.cpp */,
+				6A6A868B0E86806600B94B7F /* OVFileHandler.cpp */,
+				6A6A868C0E86806600B94B7F /* OVPhoneticLib.cpp */,
+				6A6A868D0E86806600B94B7F /* OVStringToolKit.cpp */,
 			);
 			name = Source;
 			path = Frameworks/OpenVanilla/Source;
@@ -97,6 +142,16 @@
 				6A6A86600E867E9300B94B7F /* OpenVanilla.h in Headers */,
 				6A6A86610E867E9300B94B7F /* OVLibrary.h in Headers */,
 				6A6A86620E867E9300B94B7F /* OVUtility.h in Headers */,
+				6A6A867E0E86805700B94B7F /* OVCandidateList.h in Headers */,
+				6A6A867F0E86805700B94B7F /* OVCIN.h in Headers */,
+				6A6A86800E86805700B94B7F /* OVCINInfo.h in Headers */,
+				6A6A86810E86805700B94B7F /* OVFileHandler.h in Headers */,
+				6A6A86820E86805700B94B7F /* OVKeySequence.h in Headers */,
+				6A6A86830E86805700B94B7F /* OVOSDef.h in Headers */,
+				6A6A86840E86805700B94B7F /* OVPhoneticLib.h in Headers */,
+				6A6A86850E86805700B94B7F /* OVSQLite3.h in Headers */,
+				6A6A86860E86805700B94B7F /* OVStringToolKit.h in Headers */,
+				6A6A86870E86805700B94B7F /* OVWildcard.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +209,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A6A86630E867E9300B94B7F /* FrameworkStub.cpp in Sources */,
+				6A6A868E0E86806600B94B7F /* OVCandidateList.cpp in Sources */,
+				6A6A868F0E86806600B94B7F /* OVCIN.cpp in Sources */,
+				6A6A86900E86806600B94B7F /* OVCINInfo.cpp in Sources */,
+				6A6A86910E86806600B94B7F /* OVFileHandler.cpp in Sources */,
+				6A6A86920E86806600B94B7F /* OVPhoneticLib.cpp in Sources */,
+				6A6A86930E86806600B94B7F /* OVStringToolKit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
