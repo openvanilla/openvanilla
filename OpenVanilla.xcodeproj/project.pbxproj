@@ -26,6 +26,25 @@
 		6A6A86910E86806600B94B7F /* OVFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A868B0E86806600B94B7F /* OVFileHandler.cpp */; };
 		6A6A86920E86806600B94B7F /* OVPhoneticLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A868C0E86806600B94B7F /* OVPhoneticLib.cpp */; };
 		6A6A86930E86806600B94B7F /* OVStringToolKit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A868D0E86806600B94B7F /* OVStringToolKit.cpp */; };
+		6A6A869D0E86813300B94B7F /* OpenVanilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865B0E867E9300B94B7F /* OpenVanilla.h */; };
+		6A6A869E0E86813300B94B7F /* OVLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865C0E867E9300B94B7F /* OVLibrary.h */; };
+		6A6A869F0E86813300B94B7F /* OVUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865D0E867E9300B94B7F /* OVUtility.h */; };
+		6A6A86A00E86813300B94B7F /* OVCandidateList.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A86740E86805700B94B7F /* OVCandidateList.h */; };
+		6A6A86A10E86813300B94B7F /* OVCIN.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A86750E86805700B94B7F /* OVCIN.h */; };
+		6A6A86A20E86813300B94B7F /* OVCINInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A86760E86805700B94B7F /* OVCINInfo.h */; };
+		6A6A86A30E86813300B94B7F /* OVFileHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A86770E86805700B94B7F /* OVFileHandler.h */; };
+		6A6A86A40E86813300B94B7F /* OVKeySequence.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A86780E86805700B94B7F /* OVKeySequence.h */; };
+		6A6A86A50E86813300B94B7F /* OVOSDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A86790E86805700B94B7F /* OVOSDef.h */; };
+		6A6A86A60E86813300B94B7F /* OVPhoneticLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A867A0E86805700B94B7F /* OVPhoneticLib.h */; };
+		6A6A86A70E86813300B94B7F /* OVSQLite3.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A867B0E86805700B94B7F /* OVSQLite3.h */; };
+		6A6A86A80E86813300B94B7F /* OVStringToolKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A867C0E86805700B94B7F /* OVStringToolKit.h */; };
+		6A6A86A90E86813300B94B7F /* OVWildcard.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A867D0E86805700B94B7F /* OVWildcard.h */; };
+		6A6A86AA0E86813900B94B7F /* OVCandidateList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A86880E86806600B94B7F /* OVCandidateList.cpp */; };
+		6A6A86AB0E86813900B94B7F /* OVCIN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A86890E86806600B94B7F /* OVCIN.cpp */; };
+		6A6A86AC0E86813900B94B7F /* OVCINInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A868A0E86806600B94B7F /* OVCINInfo.cpp */; };
+		6A6A86AD0E86813900B94B7F /* OVFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A868B0E86806600B94B7F /* OVFileHandler.cpp */; };
+		6A6A86AE0E86813900B94B7F /* OVPhoneticLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A868C0E86806600B94B7F /* OVPhoneticLib.cpp */; };
+		6A6A86AF0E86813900B94B7F /* OVStringToolKit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A868D0E86806600B94B7F /* OVStringToolKit.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,10 +69,18 @@
 		6A6A868B0E86806600B94B7F /* OVFileHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVFileHandler.cpp; sourceTree = "<group>"; };
 		6A6A868C0E86806600B94B7F /* OVPhoneticLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVPhoneticLib.cpp; sourceTree = "<group>"; };
 		6A6A868D0E86806600B94B7F /* OVStringToolKit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVStringToolKit.cpp; sourceTree = "<group>"; };
+		6A6A869A0E86811500B94B7F /* libOpenVanilla.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libOpenVanilla.a; path = build/Debug/libOpenVanilla.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		6A6A860E0E867B2E00B94B7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A6A86980E86811500B94B7F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -76,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				6A6A86100E867B2E00B94B7F /* OpenVanilla.framework */,
+				6A6A869A0E86811500B94B7F /* libOpenVanilla.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -155,12 +183,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6A6A86960E86811500B94B7F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A6A869D0E86813300B94B7F /* OpenVanilla.h in Headers */,
+				6A6A869E0E86813300B94B7F /* OVLibrary.h in Headers */,
+				6A6A869F0E86813300B94B7F /* OVUtility.h in Headers */,
+				6A6A86A00E86813300B94B7F /* OVCandidateList.h in Headers */,
+				6A6A86A10E86813300B94B7F /* OVCIN.h in Headers */,
+				6A6A86A20E86813300B94B7F /* OVCINInfo.h in Headers */,
+				6A6A86A30E86813300B94B7F /* OVFileHandler.h in Headers */,
+				6A6A86A40E86813300B94B7F /* OVKeySequence.h in Headers */,
+				6A6A86A50E86813300B94B7F /* OVOSDef.h in Headers */,
+				6A6A86A60E86813300B94B7F /* OVPhoneticLib.h in Headers */,
+				6A6A86A70E86813300B94B7F /* OVSQLite3.h in Headers */,
+				6A6A86A80E86813300B94B7F /* OVStringToolKit.h in Headers */,
+				6A6A86A90E86813300B94B7F /* OVWildcard.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		6A6A860F0E867B2E00B94B7F /* OpenVanilla */ = {
+		6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6A6A86150E867B2F00B94B7F /* Build configuration list for PBXNativeTarget "OpenVanilla" */;
+			buildConfigurationList = 6A6A86150E867B2F00B94B7F /* Build configuration list for PBXNativeTarget "OpenVanilla (Framework)" */;
 			buildPhases = (
 				6A6A860B0E867B2E00B94B7F /* Headers */,
 				6A6A860C0E867B2E00B94B7F /* Resources */,
@@ -171,10 +219,27 @@
 			);
 			dependencies = (
 			);
-			name = OpenVanilla;
+			name = "OpenVanilla (Framework)";
 			productName = OpenVanilla;
 			productReference = 6A6A86100E867B2E00B94B7F /* OpenVanilla.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		6A6A86990E86811500B94B7F /* OpenVanilla (Library) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A6A86C40E86813F00B94B7F /* Build configuration list for PBXNativeTarget "OpenVanilla (Library)" */;
+			buildPhases = (
+				6A6A86960E86811500B94B7F /* Headers */,
+				6A6A86970E86811500B94B7F /* Sources */,
+				6A6A86980E86811500B94B7F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenVanilla (Library)";
+			productName = OpenVanilla;
+			productReference = 6A6A869A0E86811500B94B7F /* libOpenVanilla.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -189,7 +254,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6A6A860F0E867B2E00B94B7F /* OpenVanilla */,
+				6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */,
+				6A6A86990E86811500B94B7F /* OpenVanilla (Library) */,
 			);
 		};
 /* End PBXProject section */
@@ -215,6 +281,19 @@
 				6A6A86910E86806600B94B7F /* OVFileHandler.cpp in Sources */,
 				6A6A86920E86806600B94B7F /* OVPhoneticLib.cpp in Sources */,
 				6A6A86930E86806600B94B7F /* OVStringToolKit.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A6A86970E86811500B94B7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A6A86AA0E86813900B94B7F /* OVCandidateList.cpp in Sources */,
+				6A6A86AB0E86813900B94B7F /* OVCIN.cpp in Sources */,
+				6A6A86AC0E86813900B94B7F /* OVCINInfo.cpp in Sources */,
+				6A6A86AD0E86813900B94B7F /* OVFileHandler.cpp in Sources */,
+				6A6A86AE0E86813900B94B7F /* OVPhoneticLib.cpp in Sources */,
+				6A6A86AF0E86813900B94B7F /* OVStringToolKit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +368,36 @@
 			};
 			name = Release;
 		};
+		6A6A869B0E86811500B94B7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenVanilla;
+			};
+			name = Debug;
+		};
+		6A6A869C0E86811500B94B7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenVanilla;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -301,11 +410,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6A6A86150E867B2F00B94B7F /* Build configuration list for PBXNativeTarget "OpenVanilla" */ = {
+		6A6A86150E867B2F00B94B7F /* Build configuration list for PBXNativeTarget "OpenVanilla (Framework)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6A6A86130E867B2F00B94B7F /* Debug */,
 				6A6A86140E867B2F00B94B7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A6A86C40E86813F00B94B7F /* Build configuration list for PBXNativeTarget "OpenVanilla (Library)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A6A869B0E86811500B94B7F /* Debug */,
+				6A6A869C0E86811500B94B7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
