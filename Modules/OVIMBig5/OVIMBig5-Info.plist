@@ -7,14 +7,16 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.Framework.OpenVanilla</string>
+	<string>org.openvanilla.ModulePackage.OVIMBig5</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
-	<string>FMWK</string>
+	<string>BNDL</string>
 	<key>CFBundleSignature</key>
 	<string>OPVN</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>CSResourcesFileMapped</key>
+	<string>yes</string>
 </dict>
 </plist>
