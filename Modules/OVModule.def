@@ -1,4 +1,0 @@
-EXPORTS
-OVGetLibraryVersion
-OVInitializeLibrary
-OVGetModuleFromLibrary
