@@ -63,7 +63,6 @@
 		6A6A86AF0E86813900B94B7F /* OVStringToolKit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A868D0E86806600B94B7F /* OVStringToolKit.cpp */; };
 		6A6A86DF0E86830D00B94B7F /* Big5ToUnicodeTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A86DD0E86830D00B94B7F /* Big5ToUnicodeTable.cpp */; };
 		6A6A86E00E86830D00B94B7F /* OVIMBig5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A86DE0E86830D00B94B7F /* OVIMBig5.cpp */; };
-		6A6A86E10E86831900B94B7F /* OpenVanilla.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6A86100E867B2E00B94B7F /* OpenVanilla.framework */; };
 		6A6A86E20E86831900B94B7F /* libOpenVanilla.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6A869A0E86811500B94B7F /* libOpenVanilla.a */; };
 /* End PBXBuildFile section */
 
@@ -72,22 +71,36 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */;
+			remoteGlobalIDString = 6A6A860F0E867B2E00B94B7F;
 			remoteInfo = "OpenVanilla (Framework)";
 		};
 		6A6A86FF0E8683D000B94B7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6A6A86990E86811500B94B7F /* OpenVanilla (Library) */;
+			remoteGlobalIDString = 6A6A86990E86811500B94B7F;
 			remoteInfo = "OpenVanilla (Library)";
 		};
 		6A6A87010E8683D100B94B7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6A6A86D70E8682F400B94B7F /* OVIMBig5 */;
+			remoteGlobalIDString = 6A6A86D70E8682F400B94B7F;
 			remoteInfo = OVIMBig5;
+		};
+		D45BFD4D0E8688BB00BD3E5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A6A86990E86811500B94B7F /* OpenVanilla (Library) */;
+			remoteInfo = "OpenVanilla (Library)";
+		};
+		D45BFD4F0E8688E500BD3E5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */;
+			remoteInfo = "OpenVanilla (Framework)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -140,7 +153,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A6A86E20E86831900B94B7F /* libOpenVanilla.a in Frameworks */,
-				6A6A86E10E86831900B94B7F /* OpenVanilla.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +324,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D45BFD500E8688E500BD3E5B /* PBXTargetDependency */,
 			);
 			name = "OpenVanilla (Library)";
 			productName = OpenVanilla;
@@ -329,6 +342,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D45BFD4E0E8688BB00BD3E5B /* PBXTargetDependency */,
 			);
 			name = OVIMBig5;
 			productName = OVIMBig5;
@@ -426,6 +440,16 @@
 			isa = PBXTargetDependency;
 			target = 6A6A86D70E8682F400B94B7F /* OVIMBig5 */;
 			targetProxy = 6A6A87010E8683D100B94B7F /* PBXContainerItemProxy */;
+		};
+		D45BFD4E0E8688BB00BD3E5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A6A86990E86811500B94B7F /* OpenVanilla (Library) */;
+			targetProxy = D45BFD4D0E8688BB00BD3E5B /* PBXContainerItemProxy */;
+		};
+		D45BFD500E8688E500BD3E5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */;
+			targetProxy = D45BFD4F0E8688E500BD3E5B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
