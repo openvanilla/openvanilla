@@ -26,25 +26,7 @@
 		6A21A9C40E9CFC2A0078C2E9 /* LVModuleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A21A9C30E9CFC2A0078C2E9 /* LVModuleManager.mm */; };
 		6A21AA3E0E9D097E0078C2E9 /* OVUTF8Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA3C0E9D097E0078C2E9 /* OVUTF8Helper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A21AA410E9D0A290078C2E9 /* FrameworkStub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA400E9D0A290078C2E9 /* FrameworkStub.cpp */; };
-		6A21AA620E9D0AB60078C2E9 /* OVCandidateList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA530E9D0AB60078C2E9 /* OVCandidateList.cpp */; };
-		6A21AA630E9D0AB60078C2E9 /* OVCandidateList.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA540E9D0AB60078C2E9 /* OVCandidateList.h */; };
-		6A21AA640E9D0AB60078C2E9 /* OVCIN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA550E9D0AB60078C2E9 /* OVCIN.cpp */; };
-		6A21AA650E9D0AB60078C2E9 /* OVCIN.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA560E9D0AB60078C2E9 /* OVCIN.h */; };
-		6A21AA660E9D0AB60078C2E9 /* OVCINInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA570E9D0AB60078C2E9 /* OVCINInfo.cpp */; };
-		6A21AA670E9D0AB60078C2E9 /* OVCINInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA580E9D0AB60078C2E9 /* OVCINInfo.h */; };
-		6A21AA680E9D0AB60078C2E9 /* OVFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA590E9D0AB60078C2E9 /* OVFileHandler.cpp */; };
-		6A21AA690E9D0AB60078C2E9 /* OVFileHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA5A0E9D0AB60078C2E9 /* OVFileHandler.h */; };
-		6A21AA6A0E9D0AB60078C2E9 /* OVKeySequence.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA5B0E9D0AB60078C2E9 /* OVKeySequence.h */; };
-		6A21AA6B0E9D0AB60078C2E9 /* OVOSDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA5C0E9D0AB60078C2E9 /* OVOSDef.h */; };
-		6A21AA6C0E9D0AB60078C2E9 /* OVPhoneticLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA5D0E9D0AB60078C2E9 /* OVPhoneticLib.cpp */; };
-		6A21AA6D0E9D0AB60078C2E9 /* OVPhoneticLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA5E0E9D0AB60078C2E9 /* OVPhoneticLib.h */; };
-		6A21AA6E0E9D0AB60078C2E9 /* OVSQLite3.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA5F0E9D0AB60078C2E9 /* OVSQLite3.h */; };
-		6A21AA6F0E9D0AB60078C2E9 /* OVStringToolKit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA600E9D0AB60078C2E9 /* OVStringToolKit.cpp */; };
-		6A21AA700E9D0AB60078C2E9 /* OVStringToolKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA610E9D0AB60078C2E9 /* OVStringToolKit.h */; };
 		6A21AA8C0E9D0B740078C2E9 /* OVIMPhoneticStatic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA8B0E9D0B740078C2E9 /* OVIMPhoneticStatic.cpp */; };
-		6A21AAAC0E9D0C380078C2E9 /* libOVLegacyModuleLibrary.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A21AA4E0E9D0A950078C2E9 /* libOVLegacyModuleLibrary.dylib */; };
-		6A21AAAD0E9D0C3D0078C2E9 /* libOVLegacyModuleLibrary.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A21AA4E0E9D0A950078C2E9 /* libOVLegacyModuleLibrary.dylib */; };
-		6A21AAB00E9D0C460078C2E9 /* libOVLegacyModuleLibrary.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A21AA4E0E9D0A950078C2E9 /* libOVLegacyModuleLibrary.dylib */; };
 		6A21AB170E9D0EDC0078C2E9 /* OVPhoneticData.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AB160E9D0EDC0078C2E9 /* OVPhoneticData.c */; };
 		6A21AB360E9D13ED0078C2E9 /* LVImplementations.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AB350E9D13ED0078C2E9 /* LVImplementations.mm */; };
 		6A21AB970E9D22930078C2E9 /* OVIMPhonetic.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A21AA860E9D0B3D0078C2E9 /* OVIMPhonetic.bundle */; };
@@ -66,37 +48,29 @@
 		D42E38910E86A64900453DE6 /* array30.cin in Resources */ = {isa = PBXBuildFile; fileRef = D42E388E0E86A64900453DE6 /* array30.cin */; };
 		D42E38920E86A64900453DE6 /* array-shortcode.cin in Resources */ = {isa = PBXBuildFile; fileRef = D42E388F0E86A64900453DE6 /* array-shortcode.cin */; };
 		D42E38930E86A64900453DE6 /* array-special.cin in Resources */ = {isa = PBXBuildFile; fileRef = D42E38900E86A64900453DE6 /* array-special.cin */; };
+		D44D46F10E9DB0FF0062F692 /* OVCandidateList.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA540E9D0AB60078C2E9 /* OVCandidateList.h */; };
+		D44D46F20E9DB0FF0062F692 /* OVCIN.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA560E9D0AB60078C2E9 /* OVCIN.h */; };
+		D44D46F30E9DB0FF0062F692 /* OVCINInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA580E9D0AB60078C2E9 /* OVCINInfo.h */; };
+		D44D46F40E9DB0FF0062F692 /* OVFileHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA5A0E9D0AB60078C2E9 /* OVFileHandler.h */; };
+		D44D46F50E9DB0FF0062F692 /* OVKeySequence.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA5B0E9D0AB60078C2E9 /* OVKeySequence.h */; };
+		D44D46F60E9DB0FF0062F692 /* OVOSDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA5C0E9D0AB60078C2E9 /* OVOSDef.h */; };
+		D44D46F70E9DB0FF0062F692 /* OVPhoneticLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA5E0E9D0AB60078C2E9 /* OVPhoneticLib.h */; };
+		D44D46F80E9DB0FF0062F692 /* OVSQLite3.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA5F0E9D0AB60078C2E9 /* OVSQLite3.h */; };
+		D44D46F90E9DB0FF0062F692 /* OVStringToolKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA610E9D0AB60078C2E9 /* OVStringToolKit.h */; };
+		D44D46FA0E9DB1150062F692 /* OVCandidateList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA530E9D0AB60078C2E9 /* OVCandidateList.cpp */; };
+		D44D46FB0E9DB1150062F692 /* OVCIN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA550E9D0AB60078C2E9 /* OVCIN.cpp */; };
+		D44D46FC0E9DB1150062F692 /* OVCINInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA570E9D0AB60078C2E9 /* OVCINInfo.cpp */; };
+		D44D46FD0E9DB1150062F692 /* OVFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA590E9D0AB60078C2E9 /* OVFileHandler.cpp */; };
+		D44D46FE0E9DB1150062F692 /* OVPhoneticLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA5D0E9D0AB60078C2E9 /* OVPhoneticLib.cpp */; };
+		D44D46FF0E9DB1150062F692 /* OVStringToolKit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA600E9D0AB60078C2E9 /* OVStringToolKit.cpp */; };
+		D44D471F0E9DB2E80062F692 /* libOVLegacyModuleLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D44D46EC0E9DB0E30062F692 /* libOVLegacyModuleLibrary.a */; };
+		D44D47340E9DB3D70062F692 /* libOVLegacyModuleLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D44D46EC0E9DB0E30062F692 /* libOVLegacyModuleLibrary.a */; };
+		D44D47F30E9DB4290062F692 /* libOVLegacyModuleLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D44D46EC0E9DB0E30062F692 /* libOVLegacyModuleLibrary.a */; };
+		D44D47F60E9DB43E0062F692 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42E38500E86A29100453DE6 /* Carbon.framework */; };
+		D44D47F70E9DB4430062F692 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42E38500E86A29100453DE6 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6A21AA710E9D0AC40078C2E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6A21AA4D0E9D0A950078C2E9;
-			remoteInfo = OVLegacyModuleLibrary;
-		};
-		6A21AA730E9D0AC80078C2E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6A21AA4D0E9D0A950078C2E9;
-			remoteInfo = OVLegacyModuleLibrary;
-		};
-		6A21AA770E9D0ADA0078C2E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6A6A860F0E867B2E00B94B7F;
-			remoteInfo = "OpenVanilla (Framework)";
-		};
-		6A21AA980E9D0BCA0078C2E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6A21AA4D0E9D0A950078C2E9;
-			remoteInfo = OVLegacyModuleLibrary;
-		};
 		6A21AB2C0E9D11100078C2E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
@@ -132,6 +106,20 @@
 			remoteGlobalIDString = 6A6A860F0E867B2E00B94B7F;
 			remoteInfo = "OpenVanilla (Framework)";
 		};
+		D44D46EF0E9DB0F20062F692 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A6A860F0E867B2E00B94B7F;
+			remoteInfo = "OpenVanilla (Framework)";
+		};
+		D44D47180E9DB17B0062F692 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D44D46EB0E9DB0E30062F692;
+			remoteInfo = OVLegacyModuleLibrary;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -152,7 +140,6 @@
 		6A21A9C30E9CFC2A0078C2E9 /* LVModuleManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVModuleManager.mm; path = "Loaders/OSX-IMK/LVModuleManager.mm"; sourceTree = "<group>"; };
 		6A21AA3C0E9D097E0078C2E9 /* OVUTF8Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUTF8Helper.h; sourceTree = "<group>"; };
 		6A21AA400E9D0A290078C2E9 /* FrameworkStub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameworkStub.cpp; sourceTree = "<group>"; };
-		6A21AA4E0E9D0A950078C2E9 /* libOVLegacyModuleLibrary.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libOVLegacyModuleLibrary.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A21AA530E9D0AB60078C2E9 /* OVCandidateList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVCandidateList.cpp; path = Modules/SharedLibrary/OVCandidateList.cpp; sourceTree = "<group>"; };
 		6A21AA540E9D0AB60078C2E9 /* OVCandidateList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVCandidateList.h; path = Modules/SharedLibrary/OVCandidateList.h; sourceTree = "<group>"; };
 		6A21AA550E9D0AB60078C2E9 /* OVCIN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVCIN.cpp; path = Modules/SharedLibrary/OVCIN.cpp; sourceTree = "<group>"; };
@@ -205,21 +192,16 @@
 		D42E388E0E86A64900453DE6 /* array30.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = array30.cin; path = Modules/OVIMArray/array30.cin; sourceTree = "<group>"; };
 		D42E388F0E86A64900453DE6 /* array-shortcode.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "array-shortcode.cin"; path = "Modules/OVIMArray/array-shortcode.cin"; sourceTree = "<group>"; };
 		D42E38900E86A64900453DE6 /* array-special.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "array-special.cin"; path = "Modules/OVIMArray/array-special.cin"; sourceTree = "<group>"; };
+		D44D46EC0E9DB0E30062F692 /* libOVLegacyModuleLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOVLegacyModuleLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6A21AA4C0E9D0A950078C2E9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6A21AA840E9D0B3D0078C2E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A21AAAD0E9D0C3D0078C2E9 /* libOVLegacyModuleLibrary.dylib in Frameworks */,
+				D44D47F70E9DB4430062F692 /* Carbon.framework in Frameworks */,
+				D44D471F0E9DB2E80062F692 /* libOVLegacyModuleLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +216,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A21AAAC0E9D0C380078C2E9 /* libOVLegacyModuleLibrary.dylib in Frameworks */,
+				D44D47F60E9DB43E0062F692 /* Carbon.framework in Frameworks */,
+				D44D47340E9DB3D70062F692 /* libOVLegacyModuleLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,8 +234,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A21AAB00E9D0C460078C2E9 /* libOVLegacyModuleLibrary.dylib in Frameworks */,
+				D44D47F30E9DB4290062F692 /* libOVLegacyModuleLibrary.a in Frameworks */,
 				D42E38510E86A29100453DE6 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D44D46EA0E9DB0E30062F692 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,8 +308,8 @@
 				6A6A86D80E8682F400B94B7F /* OVIMBig5.bundle */,
 				D42E383B0E86A22300453DE6 /* OVIMArray.bundle */,
 				6AB6CE6A0E9CF46F0001B127 /* OpenVanilla.app */,
-				6A21AA4E0E9D0A950078C2E9 /* libOVLegacyModuleLibrary.dylib */,
 				6A21AA860E9D0B3D0078C2E9 /* OVIMPhonetic.bundle */,
+				D44D46EC0E9DB0E30062F692 /* libOVLegacyModuleLibrary.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -455,22 +445,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		6A21AA4A0E9D0A950078C2E9 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6A21AA630E9D0AB60078C2E9 /* OVCandidateList.h in Headers */,
-				6A21AA650E9D0AB60078C2E9 /* OVCIN.h in Headers */,
-				6A21AA670E9D0AB60078C2E9 /* OVCINInfo.h in Headers */,
-				6A21AA690E9D0AB60078C2E9 /* OVFileHandler.h in Headers */,
-				6A21AA6A0E9D0AB60078C2E9 /* OVKeySequence.h in Headers */,
-				6A21AA6B0E9D0AB60078C2E9 /* OVOSDef.h in Headers */,
-				6A21AA6D0E9D0AB60078C2E9 /* OVPhoneticLib.h in Headers */,
-				6A21AA6E0E9D0AB60078C2E9 /* OVSQLite3.h in Headers */,
-				6A21AA700E9D0AB60078C2E9 /* OVStringToolKit.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6A6A860B0E867B2E00B94B7F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -483,27 +457,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D44D46E80E9DB0E30062F692 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D44D46F10E9DB0FF0062F692 /* OVCandidateList.h in Headers */,
+				D44D46F20E9DB0FF0062F692 /* OVCIN.h in Headers */,
+				D44D46F30E9DB0FF0062F692 /* OVCINInfo.h in Headers */,
+				D44D46F40E9DB0FF0062F692 /* OVFileHandler.h in Headers */,
+				D44D46F50E9DB0FF0062F692 /* OVKeySequence.h in Headers */,
+				D44D46F60E9DB0FF0062F692 /* OVOSDef.h in Headers */,
+				D44D46F70E9DB0FF0062F692 /* OVPhoneticLib.h in Headers */,
+				D44D46F80E9DB0FF0062F692 /* OVSQLite3.h in Headers */,
+				D44D46F90E9DB0FF0062F692 /* OVStringToolKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		6A21AA4D0E9D0A950078C2E9 /* OVLegacyModuleLibrary */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6A21AA520E9D0AA20078C2E9 /* Build configuration list for PBXNativeTarget "OVLegacyModuleLibrary" */;
-			buildPhases = (
-				6A21AA4A0E9D0A950078C2E9 /* Headers */,
-				6A21AA4B0E9D0A950078C2E9 /* Sources */,
-				6A21AA4C0E9D0A950078C2E9 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6A21AA780E9D0ADA0078C2E9 /* PBXTargetDependency */,
-			);
-			name = OVLegacyModuleLibrary;
-			productName = OVLegacyModuleLibrary;
-			productReference = 6A21AA4E0E9D0A950078C2E9 /* libOVLegacyModuleLibrary.dylib */;
-			productType = "com.apple.product-type.library.dynamic";
-		};
 		6A21AA850E9D0B3D0078C2E9 /* OVIMPhonetic */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A21AA8A0E9D0B3E0078C2E9 /* Build configuration list for PBXNativeTarget "OVIMPhonetic" */;
@@ -516,7 +488,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				6A21AA990E9D0BCA0078C2E9 /* PBXTargetDependency */,
+				D44D47190E9DB17B0062F692 /* PBXTargetDependency */,
 			);
 			name = OVIMPhonetic;
 			productName = OVIMPhonetic;
@@ -552,7 +524,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6A21AA720E9D0AC40078C2E9 /* PBXTargetDependency */,
 			);
 			name = OVIMBig5;
 			productName = OVIMBig5;
@@ -590,12 +561,29 @@
 			buildRules = (
 			);
 			dependencies = (
-				6A21AA740E9D0AC80078C2E9 /* PBXTargetDependency */,
 			);
 			name = OVIMArray;
 			productName = OVIMArray;
 			productReference = D42E383B0E86A22300453DE6 /* OVIMArray.bundle */;
 			productType = "com.apple.product-type.bundle";
+		};
+		D44D46EB0E9DB0E30062F692 /* OVLegacyModuleLibrary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D44D470B0E9DB11A0062F692 /* Build configuration list for PBXNativeTarget "OVLegacyModuleLibrary" */;
+			buildPhases = (
+				D44D46E80E9DB0E30062F692 /* Headers */,
+				D44D46E90E9DB0E30062F692 /* Sources */,
+				D44D46EA0E9DB0E30062F692 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D44D46F00E9DB0F20062F692 /* PBXTargetDependency */,
+			);
+			name = OVLegacyModuleLibrary;
+			productName = OVLegacyModuleLibrary2;
+			productReference = D44D46EC0E9DB0E30062F692 /* libOVLegacyModuleLibrary.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -610,10 +598,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6A6A86FA0E8683CB00B94B7F /* Distribution */,
-				6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */,
 				6AB6CE690E9CF46F0001B127 /* OpenVanilla (Loader IMK) */,
-				6A21AA4D0E9D0A950078C2E9 /* OVLegacyModuleLibrary */,
+				6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */,
+				6A6A86FA0E8683CB00B94B7F /* Distribution */,
+				D44D46EB0E9DB0E30062F692 /* OVLegacyModuleLibrary */,
 				D42E383A0E86A22300453DE6 /* OVIMArray */,
 				6A6A86D70E8682F400B94B7F /* OVIMBig5 */,
 				6A21AA850E9D0B3D0078C2E9 /* OVIMPhonetic */,
@@ -682,19 +670,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		6A21AA4B0E9D0A950078C2E9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6A21AA620E9D0AB60078C2E9 /* OVCandidateList.cpp in Sources */,
-				6A21AA640E9D0AB60078C2E9 /* OVCIN.cpp in Sources */,
-				6A21AA660E9D0AB60078C2E9 /* OVCINInfo.cpp in Sources */,
-				6A21AA680E9D0AB60078C2E9 /* OVFileHandler.cpp in Sources */,
-				6A21AA6C0E9D0AB60078C2E9 /* OVPhoneticLib.cpp in Sources */,
-				6A21AA6F0E9D0AB60078C2E9 /* OVStringToolKit.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6A21AA830E9D0B3D0078C2E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -741,29 +716,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D44D46E90E9DB0E30062F692 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D44D46FA0E9DB1150062F692 /* OVCandidateList.cpp in Sources */,
+				D44D46FB0E9DB1150062F692 /* OVCIN.cpp in Sources */,
+				D44D46FC0E9DB1150062F692 /* OVCINInfo.cpp in Sources */,
+				D44D46FD0E9DB1150062F692 /* OVFileHandler.cpp in Sources */,
+				D44D46FE0E9DB1150062F692 /* OVPhoneticLib.cpp in Sources */,
+				D44D46FF0E9DB1150062F692 /* OVStringToolKit.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6A21AA720E9D0AC40078C2E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6A21AA4D0E9D0A950078C2E9 /* OVLegacyModuleLibrary */;
-			targetProxy = 6A21AA710E9D0AC40078C2E9 /* PBXContainerItemProxy */;
-		};
-		6A21AA740E9D0AC80078C2E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6A21AA4D0E9D0A950078C2E9 /* OVLegacyModuleLibrary */;
-			targetProxy = 6A21AA730E9D0AC80078C2E9 /* PBXContainerItemProxy */;
-		};
-		6A21AA780E9D0ADA0078C2E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */;
-			targetProxy = 6A21AA770E9D0ADA0078C2E9 /* PBXContainerItemProxy */;
-		};
-		6A21AA990E9D0BCA0078C2E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6A21AA4D0E9D0A950078C2E9 /* OVLegacyModuleLibrary */;
-			targetProxy = 6A21AA980E9D0BCA0078C2E9 /* PBXContainerItemProxy */;
-		};
 		6A21AB2D0E9D11100078C2E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6AB6CE690E9CF46F0001B127 /* OpenVanilla (Loader IMK) */;
@@ -789,6 +757,16 @@
 			target = 6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */;
 			targetProxy = 6AB6CE720E9CF49C0001B127 /* PBXContainerItemProxy */;
 		};
+		D44D46F00E9DB0F20062F692 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */;
+			targetProxy = D44D46EF0E9DB0F20062F692 /* PBXContainerItemProxy */;
+		};
+		D44D47190E9DB17B0062F692 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D44D46EB0E9DB0E30062F692 /* OVLegacyModuleLibrary */;
+			targetProxy = D44D47180E9DB17B0062F692 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -803,38 +781,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		6A21AA4F0E9D0A960078C2E9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				EXECUTABLE_PREFIX = lib;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				INSTALL_PATH = /usr/local/lib;
-				PREBINDING = NO;
-				PRODUCT_NAME = OVLegacyModuleLibrary;
-			};
-			name = Debug;
-		};
-		6A21AA500E9D0A960078C2E9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				EXECUTABLE_PREFIX = lib;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_MODEL_TUNING = G5;
-				INSTALL_PATH = /usr/local/lib;
-				PREBINDING = NO;
-				PRODUCT_NAME = OVLegacyModuleLibrary;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		6A21AA880E9D0B3D0078C2E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1126,18 +1072,51 @@
 			};
 			name = Release;
 		};
+		D44D46ED0E9DB0E40062F692 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVLegacyModuleLibrary;
+			};
+			name = Debug;
+		};
+		D44D46EE0E9DB0E40062F692 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVLegacyModuleLibrary;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6A21AA520E9D0AA20078C2E9 /* Build configuration list for PBXNativeTarget "OVLegacyModuleLibrary" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6A21AA4F0E9D0A960078C2E9 /* Debug */,
-				6A21AA500E9D0A960078C2E9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		6A21AA8A0E9D0B3E0078C2E9 /* Build configuration list for PBXNativeTarget "OVIMPhonetic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1197,6 +1176,15 @@
 			buildConfigurations = (
 				D42E383D0E86A22400453DE6 /* Debug */,
 				D42E383E0E86A22400453DE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D44D470B0E9DB11A0062F692 /* Build configuration list for PBXNativeTarget "OVLegacyModuleLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D44D46ED0E9DB0E40062F692 /* Debug */,
+				D44D46EE0E9DB0E40062F692 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
