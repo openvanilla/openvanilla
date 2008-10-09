@@ -1,5 +1,3 @@
-// OVWildcard.h: Wildcard support (? and * in Regular Expression)
-//
 // Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
@@ -34,17 +32,27 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <ctype.h>
+#include <cctype>
 
 namespace OpenVanilla {
     using namespace std;
 
 	class OVWildcard {
 	public:
-		OVWildcard(const string& expression, char matchOneChar = '?', char matchZeroOrMoreChar = '*', bool matchEndOfLine = true)
+		OVWildcard(const string& expression, char matchOneChar = '?', char matchZeroOrMoreChar = '*', bool matchEndOfLine = true, bool caseSensitive = false)
+		    : m_caseSensitive(caseSensitive)
+		    , m_expression(expression)
+		    , m_matchEndOfLine(matchEndOfLine)
+		    , m_matchOneChar(matchOneChar)
+		    , m_matchZeroOrMoreChar(matchZeroOrMoreChar)
 		{
-			m_matchEndOfLine = matchEndOfLine;
-			
+            size_t index;
+            for (index = 0; index < expression.length(); index++) {
+                if (expression[index] == matchOneChar || expression[index] == matchZeroOrMoreChar) break;
+            }
+            
+            m_longestHeadMatchString = expression.substr(0, index);
+            
 			for (string::size_type i = 0; i < expression.length(); i++) {
 				char c = expression[i];
 				if (c == matchOneChar) {
@@ -71,13 +79,13 @@ namespace OpenVanilla {
 				}
 			}
 		}
-		
-		bool match(const string& target)
+
+		bool match(const string& target, size_t fromState = 0) const
 		{
 			string::size_type i = 0, slength = target.length();
 			vector<State>::size_type j, vlength = m_states.size();
 			
-			for (j = 0; j < vlength; j++) {
+			for (j = fromState; j < vlength; j++) {
 				State state = m_states[j];
 				Directive d = state.first;
 				int k = state.second;
@@ -86,10 +94,10 @@ namespace OpenVanilla {
 					if (d == AnyUntil && !k) return true;
 					return false;
 				}
-											
+				
 				switch (d) {
 					case Exact:
-						if (tolower(target[i]) != tolower(k)) return false;
+						if (!equalChars(target[i], k)) return false;
 						i++;
 						break;
 
@@ -108,25 +116,60 @@ namespace OpenVanilla {
 						}
 						else {
 							bool found = false;
-							
-							while (i < slength) {
-								if (tolower(target[i]) == tolower(k)) {
-									i++;
-									found = true;
-									break;
-								}							
-								i++;
-							}
-							
-							if (!found) return false;
+                            string::size_type backIndex;
+                            
+                            for (backIndex = slength - 1; backIndex >= i; backIndex--) {
+								if (equalChars(target[backIndex], k)) {
+                                    string substring = target.substr(backIndex + 1, slength - (backIndex + 1));
+                                    
+                                    if (match(substring, j + 1)) {
+                                        found = true;
+                                        i = backIndex + 1;
+                                        break;
+                                    }
+                                }
+                                
+                                if (!backIndex)
+                                    break;
+                            }
+                            
+                            if (!found)
+                                return false;
 						}						
 						
 						break;
 				}				
 			}
 			
-			if (m_matchEndOfLine && i != slength) return false;
+			if (m_matchEndOfLine && i != slength)
+			    return false;
+
 			return true;
+		}
+		
+		const string longestHeadMatchString() const
+		{
+            return m_longestHeadMatchString;
+		}
+		
+		const string expression() const
+		{
+            return m_expression;
+		}
+		
+		bool isCaseSensitive() const
+		{
+            return m_caseSensitive;
+		}
+		
+		char matchOneChar() const
+		{
+            return m_matchOneChar;
+		}
+		
+		char matchZeroOrMoreChar() const
+		{
+            return m_matchZeroOrMoreChar;
 		}
 		
 		friend ostream& operator<<(ostream& stream, const OVWildcard& wildcard);
@@ -140,9 +183,55 @@ namespace OpenVanilla {
 		
 		typedef pair<Directive, int> State;
 		
+		bool equalChars(char a, char b) const
+		{
+		    if (m_caseSensitive)
+                return a == b;
+            else
+                return tolower(a) == tolower(b);
+		}
 	    
+        bool m_caseSensitive;
 		bool m_matchEndOfLine;
+        char m_matchOneChar;
+        char m_matchZeroOrMoreChar;
 		vector<State> m_states;
+		
+        string m_expression;
+        string m_longestHeadMatchString;
+        
+    public:
+        static const bool Match(const string& text, const string& expression, char matchOneChar = '?', char matchZeroOrMoreChar = '*', bool matchEndOfLine = true, bool caseSensitive = false)
+        {
+            OVWildcard exp(expression, matchOneChar, matchZeroOrMoreChar, matchEndOfLine, caseSensitive);            
+            return exp.match(text);
+        }
+        
+        static const vector<OVWildcard> WildcardsFromStrings(const vector<string>& expressions, char matchOneChar = '?', char matchZeroOrMoreChar = '*', bool matchEndOfLine = true, bool caseSensitive = false)
+        {
+            vector<OVWildcard> result;
+            vector<string>::const_iterator iter = expressions.begin();
+            for ( ; iter != expressions.end(); iter++)
+                result.push_back(OVWildcard(*iter, matchOneChar, matchZeroOrMoreChar, matchEndOfLine, caseSensitive));
+            
+            return result;
+        }
+        
+        static bool MultiWildcardMatchAny(const string& target, const vector<string>& expressions, char matchOneChar = '?', char matchZeroOrMoreChar = '*', bool matchEndOfLine = true, bool caseSensitive = false)
+        {
+            return MultiWildcardMatchAny(target, WildcardsFromStrings(expressions, matchOneChar, matchZeroOrMoreChar, matchEndOfLine, caseSensitive));
+        }
+        
+        static bool MultiWildcardMatchAny(const string& target, const vector<OVWildcard>& expressions)
+        {
+            vector<OVWildcard>::const_iterator iter = expressions.begin();
+            for ( ; iter != expressions.end(); iter++) {
+                if ((*iter).match(target))
+                    return true;
+            }
+            
+            return false;
+        }
 	};
 
 	inline ostream& operator<<(ostream& stream, const OVWildcard& wildcard)
