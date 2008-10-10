@@ -26,10 +26,10 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#import "LVController.h"
+#import "LVInputController.h"
 #import "LVModuleManager.h"
 
-@implementation LVController
+@implementation LVInputController
 - (id)initWithServer:(IMKServer*)server delegate:(id)delegate client:(id)inputClient
 {
 	if (self = [super initWithServer:server delegate:delegate client:inputClient]) {

@@ -26,22 +26,10 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#import <Cocoa/Cocoa.h>
-
-#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_5
-    #import <InputMethodKit/InputMethodKit.h>
-#else
-    #import "InputMethodKitTiger.h"
-#endif
-
-#import "LVConfig.h"
-#import "LVImplementations.h"
+#import "LVOVImplementations.h"
 #import "LVModuleManager.h"
 
-@interface LVController : IMKInputController
+const char *LVService::userSpacePath(const char *modid)
 {
-	LVContextSandwich *_contextSandwich;
-	LVBuffer *_composingBuffer;
-	LVCandidate *_candidateText;
+    return [[[LVModuleManager sharedManager] userDataPathForModuleID:[NSString stringWithUTF8String:modid]] UTF8String];
 }
-@end

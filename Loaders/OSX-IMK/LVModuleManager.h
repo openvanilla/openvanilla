@@ -29,7 +29,7 @@
 #import <Cocoa/Cocoa.h>
 #import <OpenVanilla/OpenVanilla.h>
 #import <OpenVanilla/OVLibrary.h>
-#import "LVImplementations.h"
+#import "LVOVImplementations.h"
 
 class LVContextSandwich : public OVBase {
 public:

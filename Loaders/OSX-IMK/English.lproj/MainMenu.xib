@@ -35,7 +35,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSCustomObject" id="837333632">
-				<string key="NSClassName">LVApplicationController</string>
+				<string key="NSClassName">LVUIController</string>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -129,11 +129,11 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">LVApplicationController</string>
+					<string key="className">LVUIController</string>
 					<string key="superclassName">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Loaders/OSX-IMK/LVApplicationController.h</string>
+						<string key="minorKey">Loaders/OSX-IMK/LVUIController.h</string>
 					</object>
 				</object>
 			</object>
