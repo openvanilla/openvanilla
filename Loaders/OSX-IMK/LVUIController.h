@@ -28,14 +28,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LVConfig.h"
-#import "LVModuleManager.h"
+#import "LVTextView.h"
+#import "LVTopMostWindow.h"
 
 @interface LVUIController : NSObject
 {
-	NSWindow *_candidateWindow;
-	NSTextField *_candidateText;
-	NSWindow *_tooltipWindow;
-	NSTextField *_tooltipText;
+	IBOutlet LVTopMostWindow *_candidateWindow;
+	IBOutlet LVTextView *_candidateTextView;
 }
 - (void)showCandidateWindow;
 - (void)hideCandidateWindow;

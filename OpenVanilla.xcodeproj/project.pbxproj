@@ -30,6 +30,8 @@
 		6A21AB170E9D0EDC0078C2E9 /* OVPhoneticData.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AB160E9D0EDC0078C2E9 /* OVPhoneticData.c */; };
 		6A21AB360E9D13ED0078C2E9 /* LVOVImplementations.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AB350E9D13ED0078C2E9 /* LVOVImplementations.mm */; };
 		6A21AB970E9D22930078C2E9 /* OVIMPhonetic.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A21AA860E9D0B3D0078C2E9 /* OVIMPhonetic.bundle */; };
+		6A3516910E9FA35700420428 /* LVTopMostWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3516900E9FA35700420428 /* LVTopMostWindow.mm */; };
+		6A3516B20E9FA54500420428 /* LVTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3516B10E9FA54500420428 /* LVTextView.mm */; };
 		6A6A86600E867E9300B94B7F /* OpenVanilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865B0E867E9300B94B7F /* OpenVanilla.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A6A86610E867E9300B94B7F /* OVLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865C0E867E9300B94B7F /* OVLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A6A86620E867E9300B94B7F /* OVUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865D0E867E9300B94B7F /* OVUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -162,6 +164,10 @@
 		6A21AB160E9D0EDC0078C2E9 /* OVPhoneticData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = OVPhoneticData.c; path = Modules/OVIMPhonetic/OVPhoneticData.c; sourceTree = "<group>"; };
 		6A21AB340E9D13ED0078C2E9 /* LVOVImplementations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVOVImplementations.h; path = "Loaders/OSX-IMK/LVOVImplementations.h"; sourceTree = "<group>"; };
 		6A21AB350E9D13ED0078C2E9 /* LVOVImplementations.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVOVImplementations.mm; path = "Loaders/OSX-IMK/LVOVImplementations.mm"; sourceTree = "<group>"; };
+		6A35168F0E9FA35700420428 /* LVTopMostWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVTopMostWindow.h; path = "Loaders/OSX-IMK/LVTopMostWindow.h"; sourceTree = "<group>"; };
+		6A3516900E9FA35700420428 /* LVTopMostWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVTopMostWindow.mm; path = "Loaders/OSX-IMK/LVTopMostWindow.mm"; sourceTree = "<group>"; };
+		6A3516B00E9FA54500420428 /* LVTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVTextView.h; path = "Loaders/OSX-IMK/LVTextView.h"; sourceTree = "<group>"; };
+		6A3516B10E9FA54500420428 /* LVTextView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVTextView.mm; path = "Loaders/OSX-IMK/LVTextView.mm"; sourceTree = "<group>"; };
 		6A6A86100E867B2E00B94B7F /* OpenVanilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenVanilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A6A86120E867B2E00B94B7F /* OpenVanillaFramework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanillaFramework-Info.plist"; path = "Frameworks/OpenVanilla/OpenVanillaFramework-Info.plist"; sourceTree = "<group>"; };
 		6A6A865B0E867E9300B94B7F /* OpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenVanilla.h; sourceTree = "<group>"; };
@@ -394,6 +400,10 @@
 				6A21A9C30E9CFC2A0078C2E9 /* LVModuleManager.mm */,
 				6A21AB340E9D13ED0078C2E9 /* LVOVImplementations.h */,
 				6A21AB350E9D13ED0078C2E9 /* LVOVImplementations.mm */,
+				6A3516B00E9FA54500420428 /* LVTextView.h */,
+				6A3516B10E9FA54500420428 /* LVTextView.mm */,
+				6A35168F0E9FA35700420428 /* LVTopMostWindow.h */,
+				6A3516900E9FA35700420428 /* LVTopMostWindow.mm */,
 				6AB6CF380E9CF5B60001B127 /* LVUIController.h */,
 				6AB6CF390E9CF5B60001B127 /* LVUIController.mm */,
 				6AB6CF3A0E9CF5B60001B127 /* main.mm */,
@@ -705,6 +715,8 @@
 				6AB6CF400E9CF5B60001B127 /* LVInputController.mm in Sources */,
 				6A21A9C40E9CFC2A0078C2E9 /* LVModuleManager.mm in Sources */,
 				6A21AB360E9D13ED0078C2E9 /* LVOVImplementations.mm in Sources */,
+				6A3516910E9FA35700420428 /* LVTopMostWindow.mm in Sources */,
+				6A3516B20E9FA54500420428 /* LVTextView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

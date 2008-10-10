@@ -28,6 +28,7 @@
 
 #import "LVInputController.h"
 #import "LVModuleManager.h"
+#import "LVUIController.h"
 
 @implementation LVInputController
 - (id)initWithServer:(IMKServer*)server delegate:(id)delegate client:(id)inputClient
@@ -224,12 +225,29 @@
     // update cursor position
     NSPoint caretPosition;
     NSRect lineHeightRect;
-    CGFloat fontHeight;
-
 	[sender attributesForCharacterIndex:0 lineHeightRectangle:&lineHeightRect];
 	caretPosition = [self _fixCaretPosition:lineHeightRect.origin];			
-	fontHeight = lineHeightRect.size.height;		
-    
+
+	LVUIController *uiController = (LVUIController *)[NSApp delegate];
+	
+	if (_candidateText->shouldUpdate()) {
+		NSString *text = [NSString stringWithUTF8String:_candidateText->candidateText().c_str()];		
+		[uiController updateCandidateText:text];
+		[uiController setCandidateWindowOrigin:caretPosition];
+		_candidateText->clearUpdateState();
+	}
+	
+    if (_candidateText->onScreen()) {
+		NSLog(@"show");
+		[uiController showCandidateWindow];
+	}
+	else {
+		NSLog(@"hide");
+		[uiController hideCandidateWindow];
+	}
+	
+	
+	
     return handled;
 }
 
