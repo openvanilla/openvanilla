@@ -48,19 +48,29 @@
 	delete _composingBuffer;
     [super dealloc];
 }
+- (void)_resetUI
+{
+	_candidateText->clear();
+	_candidateText->clearUpdateState();
+	_candidateText->hide();
+	_composingBuffer->clear();
+	_composingBuffer->clearUpdateState();
+	_composingBuffer->clearCommittedString();	
+	[[LVModuleManager sharedManager] loaderService]->notify("");
+	
+	LVUIController *uiController = (LVUIController *)[NSApp delegate];
+	[uiController hideCandidateWindow];
+	[uiController hideTooltip];
+}
 - (void)_recreateSandwich
 {
+	[self _resetUI];
 	if (_contextSandwich) {
 		delete _contextSandwich;
 	}
 	
 	_contextSandwich = [[LVModuleManager sharedManager] createContextSandwich];
-	
-	_candidateText->clear();
-	_candidateText->clearUpdateState();
-	_composingBuffer->clear();
-	_composingBuffer->clearUpdateState();
-	_composingBuffer->clearCommittedString();
+	_contextSandwich->start(_composingBuffer, _candidateText, [[LVModuleManager sharedManager] loaderService]);	
 }
 
 - (void)_updateComposingBuffer:(id)client cursorAtIndex:(NSUInteger)cursorIndex highlightRange:(NSRange)range
@@ -156,11 +166,13 @@
 }
 - (void)activateServer:(id)sender
 {
+	[self _resetUI];	
 	_contextSandwich->start(_composingBuffer, _candidateText, [[LVModuleManager sharedManager] loaderService]);
 }
 - (void)deactivateServer:(id)sender
 {
 	_contextSandwich->end();
+	[self _resetUI];	
 }
 - (void)commitComposition:(id)sender 
 {    
