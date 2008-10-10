@@ -247,6 +247,11 @@ public:
     {
         return m_candidateText;
     }
+	
+	virtual bool shouldUpdate()
+	{
+		return m_shouldUpdate;
+	}
     
     virtual void clearUpdateState()
     {
@@ -374,7 +379,6 @@ public:
 	}
     virtual int UTF8ToUTF16(const char *src, unsigned short **rcvr)
 	{
-		// dangerous		
 		_UTF16Buffer = OVUTF16::FromUTF8(src);
 		
 		_UTF16ShortBuffer = (unsigned short *)realloc(_UTF16ShortBuffer, (_UTF16Buffer.length() + 1) * sizeof(unsigned short));

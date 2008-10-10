@@ -11,7 +11,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>org.openvanilla.inputmethod.LoaderIMK</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>	
+	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -19,13 +19,13 @@
 	<key>CFBundleSignature</key>
 	<string>OPVN</string>
 	<key>CFBundleVersion</key>
-  <string>0.9.0</string>
+	<string>0.9.0</string>
 	<key>InputMethodConnectionName</key>
 	<string>OpenVanilla_090_Connection</string>
 	<key>InputMethodServerControllerClass</key>
-	<string>LVController</string>
+	<string>LVInputController</string>
 	<key>InputMethodServerDelegateClass</key>
-	<string>LVController</string>
+	<string>LVInputController</string>
 	<key>LSBackgroundOnly</key>
 	<string>0</string>
 	<key>LSHasLocalizedDisplayName</key>
@@ -39,6 +39,6 @@
 	<key>TISInputSourceID</key>
 	<string>org.openvanilla.inputmethod.LoaderIMK</string>
 	<key>tsInputMethodIconFileKey</key>
-	<string>OpenVanilla.icns</string>	
+	<string>OpenVanilla.icns</string>
 </dict>
 </plist>

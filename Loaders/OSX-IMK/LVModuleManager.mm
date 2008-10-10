@@ -70,7 +70,6 @@
 	
 	#warning Completes the config system
 	NSMutableDictionary *configDict = [NSMutableDictionary dictionary];
-	[configDict setObject:[NSNumber numberWithInt:1] forKey:@"keyboardLayout"];
 	
 	LVDictionary cd(configDict);
 	
@@ -175,7 +174,6 @@
 								LVModule *loadedModule = [LVModule moduleWithModuleObject:module moduleDataPath:resourceDir];
 								[_loadedModuleDictionary setObject:loadedModule forKey:[loadedModule moduleIdentifier]];
 								moduleIterator++;
-								NSLog(@"loaded %d", moduleIterator);
 							}
 							
 							if (moduleIterator)

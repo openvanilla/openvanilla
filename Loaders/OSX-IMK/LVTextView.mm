@@ -26,34 +26,36 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#import <Cocoa/Cocoa.h>
-#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_5
-    #import <InputMethodKit/InputMethodKit.h>
-#else
-    #import "InputMethodKitTiger.h"
-#endif
-#import "LVConfig.h"
-#import "LVModuleManager.h"
+#import "LVTextView.h"
 
-int main(int argc, char *argv[])
+@implementation LVTextView
+- (void)dealloc
 {
-    NSAutoreleasePool *pool = [NSAutoreleasePool new];	
-	
-	NSLog(@"main");
-	NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
-	NSString *modulesPath = [resourcePath stringByAppendingPathComponent:@"Modules"];	
-	[[LVModuleManager sharedManager] setModulePackageBundlePaths:[NSArray arrayWithObject:modulesPath]];
-	[[LVModuleManager sharedManager] loadModulePackageBundles];
-	
-	IMKServer *inputMethodServer = [[IMKServer alloc] initWithName:OPENVANILLA_CONNECTION_NAME bundleIdentifier:[[NSBundle mainBundle] bundleIdentifier]];
-	
-    if (!inputMethodServer) {
-		NSLog(@"OpenVanilla initialization failed!");
-        return 1;
-    }
-	
-	[NSBundle loadNibNamed:@"MainMenu" owner:[NSApplication sharedApplication]];
-	[[NSApplication sharedApplication] run];
-	[pool drain];
-	return 0;
+    [_attributeString release];
+	[super dealloc];
 }
+- (id)initWithFrame:(NSRect)frame
+{
+	if (self = [super initWithFrame:frame]) {
+		_attributeString = [[NSMutableAttributedString alloc] initWithString:@""];
+	}
+	
+	return self;
+}
+- (void)setSimpleText:(NSString *)text
+{
+	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSColor whiteColor], NSForegroundColorAttributeName, nil];
+	[[_attributeString mutableString] setString:text];
+	[_attributeString setAttributes:attributes range:NSMakeRange(0, [text length])];	
+}
+- (NSRect)boundingRectForText
+{
+	return [_attributeString boundingRectWithSize:NSMakeSize(16000.0, 16000.0) options:NSStringDrawingUsesLineFragmentOrigin];
+}
+- (void)drawRect:(NSRect)aRect
+{
+	[[NSColor blackColor] setFill];
+	[NSBezierPath fillRect:aRect];
+	[_attributeString drawAtPoint:NSMakePoint(0.0, 0.0)];
+}
+@end

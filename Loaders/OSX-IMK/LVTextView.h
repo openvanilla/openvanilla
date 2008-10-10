@@ -27,33 +27,11 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #import <Cocoa/Cocoa.h>
-#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_5
-    #import <InputMethodKit/InputMethodKit.h>
-#else
-    #import "InputMethodKitTiger.h"
-#endif
-#import "LVConfig.h"
-#import "LVModuleManager.h"
 
-int main(int argc, char *argv[])
+@interface LVTextView : NSView
 {
-    NSAutoreleasePool *pool = [NSAutoreleasePool new];	
-	
-	NSLog(@"main");
-	NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
-	NSString *modulesPath = [resourcePath stringByAppendingPathComponent:@"Modules"];	
-	[[LVModuleManager sharedManager] setModulePackageBundlePaths:[NSArray arrayWithObject:modulesPath]];
-	[[LVModuleManager sharedManager] loadModulePackageBundles];
-	
-	IMKServer *inputMethodServer = [[IMKServer alloc] initWithName:OPENVANILLA_CONNECTION_NAME bundleIdentifier:[[NSBundle mainBundle] bundleIdentifier]];
-	
-    if (!inputMethodServer) {
-		NSLog(@"OpenVanilla initialization failed!");
-        return 1;
-    }
-	
-	[NSBundle loadNibNamed:@"MainMenu" owner:[NSApplication sharedApplication]];
-	[[NSApplication sharedApplication] run];
-	[pool drain];
-	return 0;
+    NSMutableAttributedString *_attributeString;
 }
+- (void)setSimpleText:(NSString *)text;
+- (NSRect)boundingRectForText;
+@end

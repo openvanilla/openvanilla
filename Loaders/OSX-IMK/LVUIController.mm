@@ -29,20 +29,28 @@
 #import "LVUIController.h"
 
 @implementation LVUIController
-- (void)awakeFromNib
-{
-}
 - (void)showCandidateWindow
 {
+	if (![_candidateWindow isVisible]) {
+		[_candidateWindow orderFront:self];
+	}
 }
 - (void)hideCandidateWindow
 {
+	if ([_candidateWindow isVisible]) {
+		[_candidateWindow orderOut:self];
+	}
 }
 - (void)setCandidateWindowOrigin:(NSPoint)origin
 {
+	NSRect frameRect = [_candidateWindow frame];
+	origin.y -= frameRect.size.height;
+	[_candidateWindow setFrameOrigin:origin];
 }
 - (void)updateCandidateText:(NSString *)text
 {
+	[_candidateTextView setSimpleText:text];
+	[_candidateWindow setContentSize:[_candidateTextView boundingRectForText].size];
 }
 - (void)showTooltipWithText:(NSString *)text
 {
