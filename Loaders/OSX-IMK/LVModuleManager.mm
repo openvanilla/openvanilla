@@ -28,6 +28,11 @@
 
 #import "LVConfig.h"
 #import "LVModuleManager.h"
+#include <OpenVanilla/OVWildcard.h>
+
+using namespace OpenVanilla;
+
+NSString *LVPrimaryInputMethodKey = @"primaryInputMethod";
 
 @implementation LVModule
 - (void)dealloc
@@ -44,7 +49,6 @@
 	}
 	return self;
 }
-	
 + (LVModule *)moduleWithModuleObject:(OVModule*)module moduleDataPath:(NSString *)dataPath
 {
 	return [[[LVModule alloc] initWithModule:module moduleDataPath:(NSString *)dataPath] autorelease];
@@ -62,20 +66,26 @@
 	const char *i = _module->identifier();
 	return [NSString stringWithUTF8String:_module->identifier()];
 }
-- (BOOL)lazyInitWithLoaderService:(LVService*)service
+- (BOOL)lazyInitWithLoaderService:(LVService*)service configDictionary:(NSMutableDictionary *)configDict
 {
 	if (_initialized) {
 		return _usable;
 	}
 	
-	#warning Completes the config system
-	NSMutableDictionary *configDict = [NSMutableDictionary dictionary];
 	
 	LVDictionary cd(configDict);
 	
 	_initialized = YES;
 	_usable = !!_module->initialize(&cd, service, [_moduleDataPath UTF8String]);
 		
+	return _usable;
+}
+- (BOOL)isUsable
+{
+	if (!_initialized) {
+		return YES;
+	}
+	
 	return _usable;
 }
 @end
@@ -94,13 +104,81 @@
 	}
 	[_loadedModulePackageBundleDictionary removeAllObjects];
 }
+- (void)_writeConfigurationFile
+{
+	NSEnumerator *keyEnum = [_configDictionary keyEnumerator];
+	NSString *key;
+	while (key = [keyEnum nextObject]) {
+		CFPreferencesSetAppValue((CFStringRef)key, (CFPropertyListRef)[_configDictionary objectForKey:key], (CFStringRef)OPENVANILLA_LOADER_PLIST_ID);
+	}
+	
+	CFPreferencesAppSynchronize((CFStringRef)OPENVANILLA_LOADER_PLIST_ID);	
+}
+
+- (void)_validateAndWriteConfig
+{
+	// validate the config
+	if (![_primaryInputMethodModuleID length]) {
+		NSArray *allInputMethods = [self inputMethodTitlesAndModuleIDs];
+		if ([allInputMethods count]) {
+			[_primaryInputMethodModuleID autorelease];
+			_primaryInputMethodModuleID = [[[allInputMethods objectAtIndex:0] objectAtIndex:1] retain];
+		}
+	}
+	
+	if ([_primaryInputMethodModuleID length]) {
+		LVModule *module = [_loadedModuleDictionary objectForKey:_primaryInputMethodModuleID];
+		
+		BOOL valid = NO;
+		if (module) {
+			if (OVWildcard::Match([module moduleObject]->moduleType(), "OVInputMethod")) {
+				valid = YES;
+			}
+		}
+		
+		if (!valid) {
+			[_primaryInputMethodModuleID autorelease];
+			_primaryInputMethodModuleID = nil;
+		}
+	}
+	
+	[_configDictionary setObject:([_primaryInputMethodModuleID length] ? _primaryInputMethodModuleID : @"") forKey:LVPrimaryInputMethodKey];
+	[self _writeConfigurationFile];	
+}
+
+- (void)_syncConfigurationWithNotification:(BOOL)sendNotification
+{
+	NSDictionary *oldConfigDict = [[_configDictionary copy] autorelease];
+	[_configDictionary removeAllObjects];
+	
+	CFPreferencesAppSynchronize((CFStringRef)OPENVANILLA_LOADER_PLIST_ID);
+	
+	// get a list of all keys
+	CFArrayRef allKeysRef = CFPreferencesCopyKeyList((CFStringRef)OPENVANILLA_LOADER_PLIST_ID, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);	
+	NSArray *allKeys = (NSArray *)[NSMakeCollectable(allKeysRef) autorelease];	
+	
+	NSEnumerator *keyEnum = [allKeys objectEnumerator];
+	NSString *key;
+	while (key = [keyEnum nextObject]) {
+		CFTypeRef value = CFPreferencesCopyAppValue((CFStringRef)key, (CFStringRef)OPENVANILLA_LOADER_PLIST_ID);
+		[_configDictionary setObject:[NSMakeCollectable(value) autorelease] forKey:key];		
+	}
+	
+	_primaryInputMethodModuleID = [[_configDictionary objectForKey:LVPrimaryInputMethodKey] retain];
+	[self _validateAndWriteConfig];
+		
+	if (sendNotification && ![oldConfigDict isEqualToDictionary:_configDictionary]) {		
+	}
+}
+
 - (void)delloc
 {
     [self _unloadEverything];
 	[_loadedModuleDictionary release];
     [_loadedModulePackageBundleDictionary release];
-    [_modulePackageBundlePaths release];
-	
+    [_modulePackageBundlePaths release];	
+	[_configDictionary release];
+	[_primaryInputMethodModuleID release];
 	delete _loaderService;
 	
     [super dealloc];
@@ -108,6 +186,7 @@
 - (id)init
 {
     if (self = [super init]) {
+		_configDictionary = [NSMutableDictionary new];
         _modulePackageBundlePaths = [NSMutableArray new];
         _loadedModulePackageBundleDictionary = [NSMutableDictionary new];
 		_loadedModuleDictionary = [NSMutableDictionary new];
@@ -197,6 +276,8 @@
 			CFRelease(bundle);
 		}
 	}
+	
+	[self _syncConfigurationWithNotification:NO];
 }
 - (LVService*)loaderService
 {
@@ -204,14 +285,61 @@
 }
 - (LVContextSandwich *)createContextSandwich
 {
-	LVModule *module = [_loadedModuleDictionary objectForKey:@"OVIMPhonetic"];
-	NSAssert(module, @"Must have OVIMPhonetic for the time being");
-	[module lazyInitWithLoaderService:_loaderService];
+	OVInputMethodContext* inputMethodContext = 0;
+
+	if ([_primaryInputMethodModuleID length]) {
+		LVModule *module = [_loadedModuleDictionary objectForKey:_primaryInputMethodModuleID];
+
+		NSMutableDictionary *configDict = [_configDictionary objectForKey:_primaryInputMethodModuleID];
+		if (!configDict) {
+			configDict = [NSMutableDictionary dictionary];
+			[_configDictionary setObject:configDict forKey:_primaryInputMethodModuleID];
+		}		
+		if ([module lazyInitWithLoaderService:_loaderService configDictionary:configDict]) {
+			inputMethodContext = ((OVInputMethod*)[module moduleObject])->newContext();
+			[self _writeConfigurationFile];
+		}
+	}
 	
-	OVInputMethodContext* inputMethodContext = ((OVInputMethod*)[module moduleObject])->newContext();
 	LVContextSandwich* sandwich = new LVContextSandwich(inputMethodContext);
 	return sandwich;
 }
+- (void)syncConfiguration
+{
+	[self _syncConfigurationWithNotification:YES];
+}
+
+- (LVModule *)moduleForIdentifier:(NSString *)identifier
+{
+	return [_loadedModuleDictionary objectForKey:identifier];
+}
+
+- (void)setPrimaryInputMethodModuleID:(NSString *)moduleID
+{
+	NSString *tmp = _primaryInputMethodModuleID;
+	_primaryInputMethodModuleID = [moduleID copy];
+	[tmp release];
+	[self _validateAndWriteConfig];
+}
+- (NSString *)primaryInputMethodModuleID
+{
+	return _primaryInputMethodModuleID;
+}
+- (NSArray *)inputMethodTitlesAndModuleIDs
+{
+	NSMutableArray *result = [NSMutableArray array];
+	NSEnumerator *keyEnum = [_loadedModuleDictionary keyEnumerator];
+	NSString *key;
+	
+	while (key = [keyEnum nextObject]) {
+		LVModule *module = [_loadedModuleDictionary objectForKey:key];		
+		NSString *localizedName = [NSString stringWithUTF8String:[module moduleObject]->localizedName(_loaderService->locale())];
+		[result addObject:[NSArray arrayWithObjects:localizedName, key, nil]];
+	}
+	
+	return result;
+}
+
 @end
 
 @implementation LVModuleManager (ProtectedMethods)

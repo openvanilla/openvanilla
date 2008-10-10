@@ -32,6 +32,7 @@
 		6A21AB970E9D22930078C2E9 /* OVIMPhonetic.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A21AA860E9D0B3D0078C2E9 /* OVIMPhonetic.bundle */; };
 		6A3516910E9FA35700420428 /* LVTopMostWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3516900E9FA35700420428 /* LVTopMostWindow.mm */; };
 		6A3516B20E9FA54500420428 /* LVTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3516B10E9FA54500420428 /* LVTextView.mm */; };
+		6A45E0180E9FCFE30075D9AE /* OVIMArray.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D42E383B0E86A22300453DE6 /* OVIMArray.bundle */; };
 		6A6A86600E867E9300B94B7F /* OpenVanilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865B0E867E9300B94B7F /* OpenVanilla.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A6A86610E867E9300B94B7F /* OVLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865C0E867E9300B94B7F /* OVLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A6A86620E867E9300B94B7F /* OVUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865D0E867E9300B94B7F /* OVUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -94,6 +95,13 @@
 			remoteGlobalIDString = 6A21AA850E9D0B3D0078C2E9;
 			remoteInfo = OVIMPhonetic;
 		};
+		6A45E0120E9FCFDD0075D9AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D42E383A0E86A22300453DE6 /* OVIMArray */;
+			remoteInfo = OVIMArray;
+		};
 		6A6A86FD0E8683CE00B94B7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
@@ -131,6 +139,7 @@
 			dstPath = Modules;
 			dstSubfolderSpec = 7;
 			files = (
+				6A45E0180E9FCFE30075D9AE /* OVIMArray.bundle in CopyFiles */,
 				6A21AB970E9D22930078C2E9 /* OVIMPhonetic.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,6 +562,7 @@
 			);
 			dependencies = (
 				6AB6CE730E9CF49C0001B127 /* PBXTargetDependency */,
+				6A45E0130E9FCFDD0075D9AE /* PBXTargetDependency */,
 				6A21AB8E0E9D22800078C2E9 /* PBXTargetDependency */,
 			);
 			name = "OpenVanilla (Loader IMK)";
@@ -758,6 +768,11 @@
 			isa = PBXTargetDependency;
 			target = 6A21AA850E9D0B3D0078C2E9 /* OVIMPhonetic */;
 			targetProxy = 6A21AB8D0E9D22800078C2E9 /* PBXContainerItemProxy */;
+		};
+		6A45E0130E9FCFDD0075D9AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D42E383A0E86A22300453DE6 /* OVIMArray */;
+			targetProxy = 6A45E0120E9FCFDD0075D9AE /* PBXContainerItemProxy */;
 		};
 		6A6A86FE0E8683CE00B94B7F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

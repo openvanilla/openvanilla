@@ -39,7 +39,6 @@ int main(int argc, char *argv[])
 {
     NSAutoreleasePool *pool = [NSAutoreleasePool new];	
 	
-	NSLog(@"main");
 	NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
 	NSString *modulesPath = [resourcePath stringByAppendingPathComponent:@"Modules"];	
 	[[LVModuleManager sharedManager] setModulePackageBundlePaths:[NSArray arrayWithObject:modulesPath]];

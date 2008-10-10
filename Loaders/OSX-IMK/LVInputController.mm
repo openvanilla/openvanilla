@@ -48,6 +48,20 @@
 	delete _composingBuffer;
     [super dealloc];
 }
+- (void)_recreateSandwich
+{
+	if (_contextSandwich) {
+		delete _contextSandwich;
+	}
+	
+	_contextSandwich = [[LVModuleManager sharedManager] createContextSandwich];
+	
+	_candidateText->clear();
+	_candidateText->clearUpdateState();
+	_composingBuffer->clear();
+	_composingBuffer->clearUpdateState();
+	_composingBuffer->clearCommittedString();
+}
 
 - (void)_updateComposingBuffer:(id)client cursorAtIndex:(NSUInteger)cursorIndex highlightRange:(NSRange)range
 {
@@ -238,17 +252,54 @@
 	}
 	
     if (_candidateText->onScreen()) {
-		NSLog(@"show");
 		[uiController showCandidateWindow];
 	}
 	else {
-		NSLog(@"hide");
 		[uiController hideCandidateWindow];
 	}
 	
 	
 	
     return handled;
+}
+- (void)_switchInputMethodAction:(id)sender
+{
+    NSMenuItem *menuItem = [sender objectForKey:@"IMKCommandMenuItem"];
+	
+	[[LVModuleManager sharedManager] setPrimaryInputMethodModuleID:[menuItem representedObject]];
+	[self _recreateSandwich];
+}
+
+- (NSMenuItem *)_createMenuItemWithIndentifer:(NSString *)identifier localizedName:(NSString *)localizedName
+{
+	NSMenuItem *menuItem = [[[NSMenuItem alloc] init] autorelease];
+	if (![[[LVModuleManager sharedManager] moduleForIdentifier:identifier] isUsable]) {
+		[menuItem setEnabled:NO];
+	}
+	else {        
+		if ([[[LVModuleManager sharedManager] primaryInputMethodModuleID] isEqualTo:identifier]) {
+			[menuItem setState:NSOnState];
+		}
+		
+		[menuItem setTarget:self];
+		[menuItem setAction:@selector(_switchInputMethodAction:)];
+		[menuItem setRepresentedObject:identifier];
+	}
+	[menuItem setTitle:localizedName];
+	return menuItem;
+}
+
+- (NSMenu *)menu
+{
+    NSMenu *menu = [[[NSMenu alloc] init] autorelease];
+	
+	NSArray *namesAndIDs = [[LVModuleManager sharedManager] inputMethodTitlesAndModuleIDs];
+	NSEnumerator *arrayEnum = [namesAndIDs objectEnumerator];
+	NSArray *nameIDPair;
+	while (nameIDPair = [arrayEnum nextObject]) {
+		[menu addItem:[self _createMenuItemWithIndentifer:[nameIDPair objectAtIndex:1] localizedName:[nameIDPair objectAtIndex:0]]];
+	}
+    return menu;
 }
 
 @end
