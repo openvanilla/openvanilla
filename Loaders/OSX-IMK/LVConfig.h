@@ -28,3 +28,4 @@
 
 #define OPENVANILLA_NAME @"OpenVanilla"
 #define OPENVANILLA_CONNECTION_NAME @"OpenVanilla_090_Connection"
+#define OPENVANILLA_LOADER_PLIST_ID @"org.openvanilla"

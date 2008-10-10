@@ -92,21 +92,33 @@ protected:
 - (OVModule *)moduleObject;
 - (NSString *)description;
 - (NSString *)moduleIdentifier;
-- (BOOL)lazyInitWithLoaderService:(LVService*)service;
+- (BOOL)lazyInitWithLoaderService:(LVService*)service configDictionary:(NSMutableDictionary *)configDict;
+- (BOOL)isUsable;
 @end
 
 @interface LVModuleManager : NSObject
 {
+	NSMutableDictionary *_configDictionary;
+	NSDate *_configTimestamp;
+	
     NSMutableArray *_modulePackageBundlePaths;
     NSMutableDictionary *_loadedModulePackageBundleDictionary;	
 	NSMutableDictionary *_loadedModuleDictionary;
 	LVService *_loaderService;
+	
+	NSString *_primaryInputMethodModuleID;	
 }
 + (LVModuleManager *)sharedManager;
 - (void)setModulePackageBundlePaths:(NSArray *)array;
 - (void)loadModulePackageBundles;
 - (LVService*)loaderService;
 - (LVContextSandwich*)createContextSandwich;
+- (void)syncConfiguration;
+
+- (LVModule *)moduleForIdentifier:(NSString *)identifier;
+- (void)setPrimaryInputMethodModuleID:(NSString *)moduleID;
+- (NSString *)primaryInputMethodModuleID;
+- (NSArray *)inputMethodTitlesAndModuleIDs;
 @end
 
 @interface LVModuleManager (ProtectedMethods)
