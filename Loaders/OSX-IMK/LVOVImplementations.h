@@ -29,6 +29,7 @@
 #import <Cocoa/Cocoa.h>
 #include <OpenVanilla/OpenVanilla.h>
 #include <OpenVanilla/OVUTF8Helper.h>
+#include <OpenVanilla/OVWildcard.h>
 #include "LVConfig.h"
 #include <string>
 
@@ -341,12 +342,23 @@ public:
 
     virtual const char *toUTF8(const char *encoding, const char *src)
 	{
-	    #warning finish this
+		if (OVWildcard::Match(encoding, "big5*") || OVWildcard::Match(encoding, "big-5")) {
+			CFStringRef convStr = CFStringCreateWithBytes(NULL, (const UInt8 *)src, (CFIndex)strlen(src), kCFStringEncodingBig5_HKSCS_1999, false);
+			if (convStr) {
+				[_conversionBuffer setString:(NSString *)convStr];
+				CFRelease(convStr);
+				return [_conversionBuffer UTF8String];
+			}
+		}
+		
         return src;
 	}
     virtual const char *fromUTF8(const char *encoding, const char *src)
 	{		
-	    #warning finish this
+		if (OVWildcard::Match(encoding, "big5*") || OVWildcard::Match(encoding, "big-5")) {
+			[_conversionBuffer setString:[NSString stringWithUTF8String:src]];
+			return [_conversionBuffer cStringUsingEncoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingBig5_HKSCS_1999)];
+		}
         return src;
 	}
 	

@@ -30,7 +30,17 @@
 #import "LVConfig.h"
 #import "LVModuleManager.h"
 
-@interface LVApplicationController : NSObject
-{	
+@interface LVUIController : NSObject
+{
+	NSWindow *_candidateWindow;
+	NSTextField *_candidateText;
+	NSWindow *_tooltipWindow;
+	NSTextField *_tooltipText;
 }
+- (void)showCandidateWindow;
+- (void)hideCandidateWindow;
+- (void)setCandidateWindowOrigin:(NSPoint)origin;
+- (void)updateCandidateText:(NSString *)text;
+- (void)showTooltipWithText:(NSString *)text;
+- (void)hideTooltip;
 @end

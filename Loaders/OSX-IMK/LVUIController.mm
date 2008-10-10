@@ -26,7 +26,28 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#import "LVApplicationController.h"
+#import "LVUIController.h"
 
-@implementation LVApplicationController
+@implementation LVUIController
+- (void)awakeFromNib
+{
+}
+- (void)showCandidateWindow
+{
+}
+- (void)hideCandidateWindow
+{
+}
+- (void)setCandidateWindowOrigin:(NSPoint)origin
+{
+}
+- (void)updateCandidateText:(NSString *)text
+{
+}
+- (void)showTooltipWithText:(NSString *)text
+{
+}
+- (void)hideTooltip
+{
+}
 @end

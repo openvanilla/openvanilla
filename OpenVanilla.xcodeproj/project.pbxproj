@@ -28,7 +28,7 @@
 		6A21AA410E9D0A290078C2E9 /* FrameworkStub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA400E9D0A290078C2E9 /* FrameworkStub.cpp */; };
 		6A21AA8C0E9D0B740078C2E9 /* OVIMPhoneticStatic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA8B0E9D0B740078C2E9 /* OVIMPhoneticStatic.cpp */; };
 		6A21AB170E9D0EDC0078C2E9 /* OVPhoneticData.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AB160E9D0EDC0078C2E9 /* OVPhoneticData.c */; };
-		6A21AB360E9D13ED0078C2E9 /* LVImplementations.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AB350E9D13ED0078C2E9 /* LVImplementations.mm */; };
+		6A21AB360E9D13ED0078C2E9 /* LVOVImplementations.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AB350E9D13ED0078C2E9 /* LVOVImplementations.mm */; };
 		6A21AB970E9D22930078C2E9 /* OVIMPhonetic.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A21AA860E9D0B3D0078C2E9 /* OVIMPhonetic.bundle */; };
 		6A6A86600E867E9300B94B7F /* OpenVanilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865B0E867E9300B94B7F /* OpenVanilla.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A6A86610E867E9300B94B7F /* OVLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865C0E867E9300B94B7F /* OVLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,9 +36,9 @@
 		6A6A86870E86805700B94B7F /* OVWildcard.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A867D0E86805700B94B7F /* OVWildcard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A6A86DF0E86830D00B94B7F /* Big5ToUnicodeTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A86DD0E86830D00B94B7F /* Big5ToUnicodeTable.cpp */; };
 		6A6A86E00E86830D00B94B7F /* OVIMBig5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A86DE0E86830D00B94B7F /* OVIMBig5.cpp */; };
-		6AB6CF3E0E9CF5B60001B127 /* LVApplicationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6CF390E9CF5B60001B127 /* LVApplicationController.mm */; };
+		6AB6CF3E0E9CF5B60001B127 /* LVUIController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6CF390E9CF5B60001B127 /* LVUIController.mm */; };
 		6AB6CF3F0E9CF5B60001B127 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6CF3A0E9CF5B60001B127 /* main.mm */; };
-		6AB6CF400E9CF5B60001B127 /* LVController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6CF3D0E9CF5B60001B127 /* LVController.mm */; };
+		6AB6CF400E9CF5B60001B127 /* LVInputController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6CF3D0E9CF5B60001B127 /* LVInputController.mm */; };
 		6AB6CF430E9CF5D00001B127 /* OpenVanilla.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6CF420E9CF5D00001B127 /* OpenVanilla.icns */; };
 		6AB6CF470E9CF5F00001B127 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6CF460E9CF5F00001B127 /* MainMenu.xib */; };
 		6AB6CF580E9CF69C0001B127 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB6CF570E9CF69C0001B127 /* Cocoa.framework */; };
@@ -160,8 +160,8 @@
 		6A21AA8B0E9D0B740078C2E9 /* OVIMPhoneticStatic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMPhoneticStatic.cpp; path = Modules/OVIMPhonetic/OVIMPhoneticStatic.cpp; sourceTree = "<group>"; };
 		6A21AA8D0E9D0B8A0078C2E9 /* convert-phonedata.pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; name = "convert-phonedata.pl"; path = "Modules/OVIMPhonetic/convert-phonedata.pl"; sourceTree = "<group>"; };
 		6A21AB160E9D0EDC0078C2E9 /* OVPhoneticData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = OVPhoneticData.c; path = Modules/OVIMPhonetic/OVPhoneticData.c; sourceTree = "<group>"; };
-		6A21AB340E9D13ED0078C2E9 /* LVImplementations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVImplementations.h; path = "Loaders/OSX-IMK/LVImplementations.h"; sourceTree = "<group>"; };
-		6A21AB350E9D13ED0078C2E9 /* LVImplementations.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVImplementations.mm; path = "Loaders/OSX-IMK/LVImplementations.mm"; sourceTree = "<group>"; };
+		6A21AB340E9D13ED0078C2E9 /* LVOVImplementations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVOVImplementations.h; path = "Loaders/OSX-IMK/LVOVImplementations.h"; sourceTree = "<group>"; };
+		6A21AB350E9D13ED0078C2E9 /* LVOVImplementations.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVOVImplementations.mm; path = "Loaders/OSX-IMK/LVOVImplementations.mm"; sourceTree = "<group>"; };
 		6A6A86100E867B2E00B94B7F /* OpenVanilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenVanilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A6A86120E867B2E00B94B7F /* OpenVanillaFramework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanillaFramework-Info.plist"; path = "Frameworks/OpenVanilla/OpenVanillaFramework-Info.plist"; sourceTree = "<group>"; };
 		6A6A865B0E867E9300B94B7F /* OpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenVanilla.h; sourceTree = "<group>"; };
@@ -174,12 +174,12 @@
 		6A6A86DE0E86830D00B94B7F /* OVIMBig5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMBig5.cpp; path = Modules/OVIMBig5/OVIMBig5.cpp; sourceTree = "<group>"; };
 		6AB6CE6A0E9CF46F0001B127 /* OpenVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB6CE6C0E9CF46F0001B127 /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-Info.plist"; path = "Loaders/OSX-IMK/OpenVanilla-Info.plist"; sourceTree = "<group>"; };
-		6AB6CF380E9CF5B60001B127 /* LVApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVApplicationController.h; path = "Loaders/OSX-IMK/LVApplicationController.h"; sourceTree = "<group>"; };
-		6AB6CF390E9CF5B60001B127 /* LVApplicationController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVApplicationController.mm; path = "Loaders/OSX-IMK/LVApplicationController.mm"; sourceTree = "<group>"; };
+		6AB6CF380E9CF5B60001B127 /* LVUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVUIController.h; path = "Loaders/OSX-IMK/LVUIController.h"; sourceTree = "<group>"; };
+		6AB6CF390E9CF5B60001B127 /* LVUIController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVUIController.mm; path = "Loaders/OSX-IMK/LVUIController.mm"; sourceTree = "<group>"; };
 		6AB6CF3A0E9CF5B60001B127 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = "Loaders/OSX-IMK/main.mm"; sourceTree = "<group>"; };
 		6AB6CF3B0E9CF5B60001B127 /* LVConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVConfig.h; path = "Loaders/OSX-IMK/LVConfig.h"; sourceTree = "<group>"; };
-		6AB6CF3C0E9CF5B60001B127 /* LVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVController.h; path = "Loaders/OSX-IMK/LVController.h"; sourceTree = "<group>"; };
-		6AB6CF3D0E9CF5B60001B127 /* LVController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVController.mm; path = "Loaders/OSX-IMK/LVController.mm"; sourceTree = "<group>"; };
+		6AB6CF3C0E9CF5B60001B127 /* LVInputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVInputController.h; path = "Loaders/OSX-IMK/LVInputController.h"; sourceTree = "<group>"; };
+		6AB6CF3D0E9CF5B60001B127 /* LVInputController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVInputController.mm; path = "Loaders/OSX-IMK/LVInputController.mm"; sourceTree = "<group>"; };
 		6AB6CF420E9CF5D00001B127 /* OpenVanilla.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanilla.icns; path = "Loaders/OSX-IMK/Images/OpenVanilla.icns"; sourceTree = "<group>"; };
 		6AB6CF440E9CF5ED0001B127 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Loaders/OSX-IMK/English.lproj/MainMenu.xib"; sourceTree = "<group>"; };
 		6AB6CF570E9CF69C0001B127 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -386,18 +386,17 @@
 		6AB6CE650E9CF4510001B127 /* OSX-IMK */ = {
 			isa = PBXGroup;
 			children = (
-				6A21AB340E9D13ED0078C2E9 /* LVImplementations.h */,
-				6A21AB350E9D13ED0078C2E9 /* LVImplementations.mm */,
+				6AB6CF410E9CF5BC0001B127 /* Resources */,
+				6AB6CF3B0E9CF5B60001B127 /* LVConfig.h */,
+				6AB6CF3C0E9CF5B60001B127 /* LVInputController.h */,
+				6AB6CF3D0E9CF5B60001B127 /* LVInputController.mm */,
 				6A21A9C20E9CFC2A0078C2E9 /* LVModuleManager.h */,
 				6A21A9C30E9CFC2A0078C2E9 /* LVModuleManager.mm */,
-				6AB6CF410E9CF5BC0001B127 /* Resources */,
-				6AB6CF380E9CF5B60001B127 /* LVApplicationController.h */,
-				6AB6CF390E9CF5B60001B127 /* LVApplicationController.mm */,
+				6A21AB340E9D13ED0078C2E9 /* LVOVImplementations.h */,
+				6A21AB350E9D13ED0078C2E9 /* LVOVImplementations.mm */,
+				6AB6CF380E9CF5B60001B127 /* LVUIController.h */,
+				6AB6CF390E9CF5B60001B127 /* LVUIController.mm */,
 				6AB6CF3A0E9CF5B60001B127 /* main.mm */,
-				6AB6CF3B0E9CF5B60001B127 /* LVConfig.h */,
-				6AB6CF3C0E9CF5B60001B127 /* LVController.h */,
-				6AB6CF3D0E9CF5B60001B127 /* LVController.mm */,
-				6AB6CE6C0E9CF46F0001B127 /* OpenVanilla-Info.plist */,
 			);
 			name = "OSX-IMK";
 			sourceTree = "<group>";
@@ -415,6 +414,7 @@
 		6AB6CF410E9CF5BC0001B127 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6AB6CE6C0E9CF46F0001B127 /* OpenVanilla-Info.plist */,
 				6AB6CF420E9CF5D00001B127 /* OpenVanilla.icns */,
 				6AB6CF460E9CF5F00001B127 /* MainMenu.xib */,
 			);
@@ -700,11 +700,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AB6CF3E0E9CF5B60001B127 /* LVApplicationController.mm in Sources */,
+				6AB6CF3E0E9CF5B60001B127 /* LVUIController.mm in Sources */,
 				6AB6CF3F0E9CF5B60001B127 /* main.mm in Sources */,
-				6AB6CF400E9CF5B60001B127 /* LVController.mm in Sources */,
+				6AB6CF400E9CF5B60001B127 /* LVInputController.mm in Sources */,
 				6A21A9C40E9CFC2A0078C2E9 /* LVModuleManager.mm in Sources */,
-				6A21AB360E9D13ED0078C2E9 /* LVImplementations.mm in Sources */,
+				6A21AB360E9D13ED0078C2E9 /* LVOVImplementations.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
