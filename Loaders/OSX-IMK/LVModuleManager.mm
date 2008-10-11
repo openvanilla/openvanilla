@@ -333,8 +333,10 @@ NSString *LVPrimaryInputMethodKey = @"primaryInputMethod";
 	
 	while (key = [keyEnum nextObject]) {
 		LVModule *module = [_loadedModuleDictionary objectForKey:key];		
-		NSString *localizedName = [NSString stringWithUTF8String:[module moduleObject]->localizedName(_loaderService->locale())];
-		[result addObject:[NSArray arrayWithObjects:localizedName, key, nil]];
+		if (OVWildcard::Match([module moduleObject]->moduleType(), "OVInputMethod")) {		
+			NSString *localizedName = [NSString stringWithUTF8String:[module moduleObject]->localizedName(_loaderService->locale())];
+			[result addObject:[NSArray arrayWithObjects:localizedName, key, nil]];
+		}
 	}
 	
 	return result;
