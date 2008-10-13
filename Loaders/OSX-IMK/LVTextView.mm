@@ -44,7 +44,7 @@
 }
 - (void)setSimpleText:(NSString *)text
 {
-	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSColor whiteColor], NSForegroundColorAttributeName, nil];
+	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSColor whiteColor], NSForegroundColorAttributeName, [NSFont systemFontOfSize:18.0], NSFontAttributeName, nil];
 	[[_attributeString mutableString] setString:text];
 	[_attributeString setAttributes:attributes range:NSMakeRange(0, [text length])];	
 }
