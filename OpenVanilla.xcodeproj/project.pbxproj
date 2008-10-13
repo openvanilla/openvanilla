@@ -46,6 +46,13 @@
 		6AB6CF470E9CF5F00001B127 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6CF460E9CF5F00001B127 /* MainMenu.xib */; };
 		6AB6CF580E9CF69C0001B127 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB6CF570E9CF69C0001B127 /* Cocoa.framework */; };
 		6AB6CF5A0E9CF69C0001B127 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB6CF590E9CF69C0001B127 /* InputMethodKit.framework */; };
+		D403C32C0EA3CC83006F0A89 /* OVIMTibetan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D403C32B0EA3CC83006F0A89 /* OVIMTibetan.cpp */; };
+		D403C3470EA3CCD0006F0A89 /* OVIMBig5.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A86D80E8682F400B94B7F /* OVIMBig5.bundle */; };
+		D403C3480EA3CCD2006F0A89 /* OVIMTibetan.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D403C3110EA3CBD0006F0A89 /* OVIMTibetan.bundle */; };
+		D403C3B20EA3CF9C006F0A89 /* OVIMRoman.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D403C3B10EA3CF9C006F0A89 /* OVIMRoman.cpp */; };
+		D403C3BE0EA3CFB6006F0A89 /* OVIMRoman.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D403C39A0EA3CEF1006F0A89 /* OVIMRoman.bundle */; };
+		D403C4720EA3D159006F0A89 /* OVIMUnicode.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D403C4570EA3D10A006F0A89 /* OVIMUnicode.bundle */; };
+		D403C4AE0EA3D1B7006F0A89 /* OVIMUnicode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D403C4AD0EA3D1B7006F0A89 /* OVIMUnicode.cpp */; };
 		D42E384F0E86A25200453DE6 /* OVIMArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42E384D0E86A25200453DE6 /* OVIMArray.cpp */; };
 		D42E38510E86A29100453DE6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42E38500E86A29100453DE6 /* Carbon.framework */; };
 		D42E38910E86A64900453DE6 /* array30.cin in Resources */ = {isa = PBXBuildFile; fileRef = D42E388E0E86A64900453DE6 /* array30.cin */; };
@@ -67,10 +74,7 @@
 		D44D46FE0E9DB1150062F692 /* OVPhoneticLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA5D0E9D0AB60078C2E9 /* OVPhoneticLib.cpp */; };
 		D44D46FF0E9DB1150062F692 /* OVStringToolKit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA600E9D0AB60078C2E9 /* OVStringToolKit.cpp */; };
 		D44D471F0E9DB2E80062F692 /* libOVLegacyModuleLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D44D46EC0E9DB0E30062F692 /* libOVLegacyModuleLibrary.a */; };
-		D44D47340E9DB3D70062F692 /* libOVLegacyModuleLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D44D46EC0E9DB0E30062F692 /* libOVLegacyModuleLibrary.a */; };
 		D44D47F30E9DB4290062F692 /* libOVLegacyModuleLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D44D46EC0E9DB0E30062F692 /* libOVLegacyModuleLibrary.a */; };
-		D44D47F60E9DB43E0062F692 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42E38500E86A29100453DE6 /* Carbon.framework */; };
-		D44D47F70E9DB4430062F692 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42E38500E86A29100453DE6 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +120,48 @@
 			remoteGlobalIDString = 6A6A860F0E867B2E00B94B7F;
 			remoteInfo = "OpenVanilla (Framework)";
 		};
+		D403C32E0EA3CC9B006F0A89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A6A86D70E8682F400B94B7F /* OVIMBig5 */;
+			remoteInfo = OVIMBig5;
+		};
+		D403C3300EA3CC9D006F0A89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D403C3100EA3CBD0006F0A89 /* OVIMTibetan */;
+			remoteInfo = OVIMTibetan;
+		};
+		D403C3690EA3CE0F006F0A89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D44D46EB0E9DB0E30062F692 /* OVLegacyModuleLibrary */;
+			remoteInfo = OVLegacyModuleLibrary;
+		};
+		D403C36B0EA3CE16006F0A89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D44D46EB0E9DB0E30062F692 /* OVLegacyModuleLibrary */;
+			remoteInfo = OVLegacyModuleLibrary;
+		};
+		D403C3B30EA3CFAB006F0A89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D403C3990EA3CEF1006F0A89 /* OVIMRoman */;
+			remoteInfo = OVIMRoman;
+		};
+		D403C4A60EA3D16E006F0A89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D403C4560EA3D10A006F0A89 /* OVIMUnicode */;
+			remoteInfo = OVIMUnicode;
+		};
 		D44D46EF0E9DB0F20062F692 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
@@ -140,7 +186,11 @@
 			dstSubfolderSpec = 7;
 			files = (
 				6A45E0180E9FCFE30075D9AE /* OVIMArray.bundle in CopyFiles */,
+				D403C3470EA3CCD0006F0A89 /* OVIMBig5.bundle in CopyFiles */,
 				6A21AB970E9D22930078C2E9 /* OVIMPhonetic.bundle in CopyFiles */,
+				D403C3BE0EA3CFB6006F0A89 /* OVIMRoman.bundle in CopyFiles */,
+				D403C3480EA3CCD2006F0A89 /* OVIMTibetan.bundle in CopyFiles */,
+				D403C4720EA3D159006F0A89 /* OVIMUnicode.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,7 +226,7 @@
 		6A35168F0E9FA35700420428 /* LVTopMostWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVTopMostWindow.h; path = "Loaders/OSX-IMK/LVTopMostWindow.h"; sourceTree = "<group>"; };
 		6A3516900E9FA35700420428 /* LVTopMostWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVTopMostWindow.mm; path = "Loaders/OSX-IMK/LVTopMostWindow.mm"; sourceTree = "<group>"; };
 		6A3516B00E9FA54500420428 /* LVTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVTextView.h; path = "Loaders/OSX-IMK/LVTextView.h"; sourceTree = "<group>"; };
-		6A3516B10E9FA54500420428 /* LVTextView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVTextView.mm; path = "Loaders/OSX-IMK/LVTextView.mm"; sourceTree = "<group>"; };
+		6A3516B10E9FA54500420428 /* LVTextView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVTextView.mm; path = "Loaders/OSX-IMK/LVTextView.mm"; sourceTree = "<group>"; wrapsLines = 1; };
 		6A6A86100E867B2E00B94B7F /* OpenVanilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenVanilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A6A86120E867B2E00B94B7F /* OpenVanillaFramework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanillaFramework-Info.plist"; path = "Frameworks/OpenVanilla/OpenVanillaFramework-Info.plist"; sourceTree = "<group>"; };
 		6A6A865B0E867E9300B94B7F /* OpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenVanilla.h; sourceTree = "<group>"; };
@@ -184,7 +234,6 @@
 		6A6A865D0E867E9300B94B7F /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUtility.h; sourceTree = "<group>"; };
 		6A6A867D0E86805700B94B7F /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVWildcard.h; sourceTree = "<group>"; };
 		6A6A86D80E8682F400B94B7F /* OVIMBig5.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMBig5.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A6A86D90E8682F400B94B7F /* OVIMBig5-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OVIMBig5-Info.plist"; path = "Modules/OVIMBig5/OVIMBig5-Info.plist"; sourceTree = "<group>"; };
 		6A6A86DD0E86830D00B94B7F /* Big5ToUnicodeTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Big5ToUnicodeTable.cpp; path = Modules/OVIMBig5/Big5ToUnicodeTable.cpp; sourceTree = "<group>"; };
 		6A6A86DE0E86830D00B94B7F /* OVIMBig5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMBig5.cpp; path = Modules/OVIMBig5/OVIMBig5.cpp; sourceTree = "<group>"; };
 		6AB6CE6A0E9CF46F0001B127 /* OpenVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,6 +248,13 @@
 		6AB6CF440E9CF5ED0001B127 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Loaders/OSX-IMK/English.lproj/MainMenu.xib"; sourceTree = "<group>"; };
 		6AB6CF570E9CF69C0001B127 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		6AB6CF590E9CF69C0001B127 /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = /System/Library/Frameworks/InputMethodKit.framework; sourceTree = "<absolute>"; };
+		D403C3110EA3CBD0006F0A89 /* OVIMTibetan.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMTibetan.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D403C32A0EA3CC83006F0A89 /* OVIMTibetan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVIMTibetan.h; path = Modules/OVIMTibetan/OVIMTibetan.h; sourceTree = "<group>"; };
+		D403C32B0EA3CC83006F0A89 /* OVIMTibetan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMTibetan.cpp; path = Modules/OVIMTibetan/OVIMTibetan.cpp; sourceTree = "<group>"; };
+		D403C39A0EA3CEF1006F0A89 /* OVIMRoman.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMRoman.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D403C3B10EA3CF9C006F0A89 /* OVIMRoman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMRoman.cpp; path = Modules/OVIMRoman/OVIMRoman.cpp; sourceTree = "<group>"; };
+		D403C4570EA3D10A006F0A89 /* OVIMUnicode.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMUnicode.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D403C4AD0EA3D1B7006F0A89 /* OVIMUnicode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMUnicode.cpp; path = Modules/OVIMUnicode/OVIMUnicode.cpp; sourceTree = "<group>"; };
 		D42E383B0E86A22300453DE6 /* OVIMArray.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMArray.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		D42E384C0E86A25200453DE6 /* ArrayKeySequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrayKeySequence.h; path = Modules/OVIMArray/ArrayKeySequence.h; sourceTree = "<group>"; };
 		D42E384D0E86A25200453DE6 /* OVIMArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMArray.cpp; path = Modules/OVIMArray/OVIMArray.cpp; sourceTree = "<group>"; };
@@ -215,7 +271,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D44D47F70E9DB4430062F692 /* Carbon.framework in Frameworks */,
 				D44D471F0E9DB2E80062F692 /* libOVLegacyModuleLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,8 +286,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D44D47F60E9DB43E0062F692 /* Carbon.framework in Frameworks */,
-				D44D47340E9DB3D70062F692 /* libOVLegacyModuleLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +295,27 @@
 			files = (
 				6AB6CF580E9CF69C0001B127 /* Cocoa.framework in Frameworks */,
 				6AB6CF5A0E9CF69C0001B127 /* InputMethodKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D403C30F0EA3CBD0006F0A89 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D403C3980EA3CEF1006F0A89 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D403C4550EA3D10A006F0A89 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,12 +393,15 @@
 		6A6A86110E867B2E00B94B7F /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				6AB6CE6A0E9CF46F0001B127 /* OpenVanilla.app */,
+				D44D46EC0E9DB0E30062F692 /* libOVLegacyModuleLibrary.a */,
 				6A6A86100E867B2E00B94B7F /* OpenVanilla.framework */,
 				6A6A86D80E8682F400B94B7F /* OVIMBig5.bundle */,
 				D42E383B0E86A22300453DE6 /* OVIMArray.bundle */,
-				6AB6CE6A0E9CF46F0001B127 /* OpenVanilla.app */,
 				6A21AA860E9D0B3D0078C2E9 /* OVIMPhonetic.bundle */,
-				D44D46EC0E9DB0E30062F692 /* libOVLegacyModuleLibrary.a */,
+				D403C3110EA3CBD0006F0A89 /* OVIMTibetan.bundle */,
+				D403C39A0EA3CEF1006F0A89 /* OVIMRoman.bundle */,
+				D403C4570EA3D10A006F0A89 /* OVIMUnicode.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -373,9 +450,12 @@
 			isa = PBXGroup;
 			children = (
 				6A21AA510E9D0AA20078C2E9 /* Legacy Module Library */,
-				6A21AA7A0E9D0AF20078C2E9 /* OVIMPhonetic */,
 				D42E38340E86A1E900453DE6 /* OVIMArray */,
 				6A6A86C90E86817300B94B7F /* OVIMBig5 */,
+				6A21AA7A0E9D0AF20078C2E9 /* OVIMPhonetic */,
+				D403C39F0EA3CF04006F0A89 /* OVIMRoman */,
+				D403C3030EA3CB99006F0A89 /* OVIMTibetan */,
+				D403C4460EA3D0EA006F0A89 /* OVIMUnicode */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -383,7 +463,6 @@
 		6A6A86C90E86817300B94B7F /* OVIMBig5 */ = {
 			isa = PBXGroup;
 			children = (
-				6A6A86D90E8682F400B94B7F /* OVIMBig5-Info.plist */,
 				6A6A86DD0E86830D00B94B7F /* Big5ToUnicodeTable.cpp */,
 				6A6A86DE0E86830D00B94B7F /* OVIMBig5.cpp */,
 			);
@@ -438,6 +517,31 @@
 				6AB6CF460E9CF5F00001B127 /* MainMenu.xib */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		D403C3030EA3CB99006F0A89 /* OVIMTibetan */ = {
+			isa = PBXGroup;
+			children = (
+				D403C32A0EA3CC83006F0A89 /* OVIMTibetan.h */,
+				D403C32B0EA3CC83006F0A89 /* OVIMTibetan.cpp */,
+			);
+			name = OVIMTibetan;
+			sourceTree = "<group>";
+		};
+		D403C39F0EA3CF04006F0A89 /* OVIMRoman */ = {
+			isa = PBXGroup;
+			children = (
+				D403C3B10EA3CF9C006F0A89 /* OVIMRoman.cpp */,
+			);
+			name = OVIMRoman;
+			sourceTree = "<group>";
+		};
+		D403C4460EA3D0EA006F0A89 /* OVIMUnicode */ = {
+			isa = PBXGroup;
+			children = (
+				D403C4AD0EA3D1B7006F0A89 /* OVIMUnicode.cpp */,
+			);
+			name = OVIMUnicode;
 			sourceTree = "<group>";
 		};
 		D42E38340E86A1E900453DE6 /* OVIMArray */ = {
@@ -562,13 +666,69 @@
 			);
 			dependencies = (
 				6AB6CE730E9CF49C0001B127 /* PBXTargetDependency */,
+				D403C36A0EA3CE0F006F0A89 /* PBXTargetDependency */,
 				6A45E0130E9FCFDD0075D9AE /* PBXTargetDependency */,
 				6A21AB8E0E9D22800078C2E9 /* PBXTargetDependency */,
+				D403C32F0EA3CC9B006F0A89 /* PBXTargetDependency */,
+				D403C3310EA3CC9D006F0A89 /* PBXTargetDependency */,
+				D403C3B40EA3CFAB006F0A89 /* PBXTargetDependency */,
+				D403C4A70EA3D16E006F0A89 /* PBXTargetDependency */,
 			);
 			name = "OpenVanilla (Loader IMK)";
 			productName = OpenVanilla;
 			productReference = 6AB6CE6A0E9CF46F0001B127 /* OpenVanilla.app */;
 			productType = "com.apple.product-type.application";
+		};
+		D403C3100EA3CBD0006F0A89 /* OVIMTibetan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D403C3150EA3CBD1006F0A89 /* Build configuration list for PBXNativeTarget "OVIMTibetan" */;
+			buildPhases = (
+				D403C30D0EA3CBD0006F0A89 /* Resources */,
+				D403C30E0EA3CBD0006F0A89 /* Sources */,
+				D403C30F0EA3CBD0006F0A89 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVIMTibetan;
+			productName = OVIMTibetan;
+			productReference = D403C3110EA3CBD0006F0A89 /* OVIMTibetan.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D403C3990EA3CEF1006F0A89 /* OVIMRoman */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D403C39E0EA3CEF2006F0A89 /* Build configuration list for PBXNativeTarget "OVIMRoman" */;
+			buildPhases = (
+				D403C3960EA3CEF1006F0A89 /* Resources */,
+				D403C3970EA3CEF1006F0A89 /* Sources */,
+				D403C3980EA3CEF1006F0A89 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVIMRoman;
+			productName = OVIMRoman;
+			productReference = D403C39A0EA3CEF1006F0A89 /* OVIMRoman.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D403C4560EA3D10A006F0A89 /* OVIMUnicode */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D403C45B0EA3D10A006F0A89 /* Build configuration list for PBXNativeTarget "OVIMUnicode" */;
+			buildPhases = (
+				D403C4530EA3D10A006F0A89 /* Resources */,
+				D403C4540EA3D10A006F0A89 /* Sources */,
+				D403C4550EA3D10A006F0A89 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OVIMUnicode;
+			productName = OVIMUnicode;
+			productReference = D403C4570EA3D10A006F0A89 /* OVIMUnicode.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 		D42E383A0E86A22300453DE6 /* OVIMArray */ = {
 			isa = PBXNativeTarget;
@@ -581,6 +741,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D403C36C0EA3CE16006F0A89 /* PBXTargetDependency */,
 			);
 			name = OVIMArray;
 			productName = OVIMArray;
@@ -625,6 +786,9 @@
 				D42E383A0E86A22300453DE6 /* OVIMArray */,
 				6A6A86D70E8682F400B94B7F /* OVIMBig5 */,
 				6A21AA850E9D0B3D0078C2E9 /* OVIMPhonetic */,
+				D403C3100EA3CBD0006F0A89 /* OVIMTibetan */,
+				D403C3990EA3CEF1006F0A89 /* OVIMRoman */,
+				D403C4560EA3D10A006F0A89 /* OVIMUnicode */,
 			);
 		};
 /* End PBXProject section */
@@ -657,6 +821,27 @@
 			files = (
 				6AB6CF430E9CF5D00001B127 /* OpenVanilla.icns in Resources */,
 				6AB6CF470E9CF5F00001B127 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D403C30D0EA3CBD0006F0A89 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D403C3960EA3CEF1006F0A89 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D403C4530EA3D10A006F0A89 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,6 +915,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D403C30E0EA3CBD0006F0A89 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D403C32C0EA3CC83006F0A89 /* OVIMTibetan.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D403C3970EA3CEF1006F0A89 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D403C3B20EA3CF9C006F0A89 /* OVIMRoman.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D403C4540EA3D10A006F0A89 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D403C4AE0EA3D1B7006F0A89 /* OVIMUnicode.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D42E38380E86A22300453DE6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -784,6 +993,36 @@
 			target = 6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */;
 			targetProxy = 6AB6CE720E9CF49C0001B127 /* PBXContainerItemProxy */;
 		};
+		D403C32F0EA3CC9B006F0A89 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A6A86D70E8682F400B94B7F /* OVIMBig5 */;
+			targetProxy = D403C32E0EA3CC9B006F0A89 /* PBXContainerItemProxy */;
+		};
+		D403C3310EA3CC9D006F0A89 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D403C3100EA3CBD0006F0A89 /* OVIMTibetan */;
+			targetProxy = D403C3300EA3CC9D006F0A89 /* PBXContainerItemProxy */;
+		};
+		D403C36A0EA3CE0F006F0A89 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D44D46EB0E9DB0E30062F692 /* OVLegacyModuleLibrary */;
+			targetProxy = D403C3690EA3CE0F006F0A89 /* PBXContainerItemProxy */;
+		};
+		D403C36C0EA3CE16006F0A89 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D44D46EB0E9DB0E30062F692 /* OVLegacyModuleLibrary */;
+			targetProxy = D403C36B0EA3CE16006F0A89 /* PBXContainerItemProxy */;
+		};
+		D403C3B40EA3CFAB006F0A89 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D403C3990EA3CEF1006F0A89 /* OVIMRoman */;
+			targetProxy = D403C3B30EA3CFAB006F0A89 /* PBXContainerItemProxy */;
+		};
+		D403C4A70EA3D16E006F0A89 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D403C4560EA3D10A006F0A89 /* OVIMUnicode */;
+			targetProxy = D403C4A60EA3D16E006F0A89 /* PBXContainerItemProxy */;
+		};
 		D44D46F00E9DB0F20062F692 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */;
@@ -818,13 +1057,10 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "Modules/OVIMPhonetic/OVIMPhonetic-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Carbon,
-				);
+				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = OVIMPhonetic;
 				WRAPPER_EXTENSION = bundle;
@@ -840,13 +1076,10 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "Modules/OVIMPhonetic/OVIMPhonetic-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Carbon,
-				);
+				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = OVIMPhonetic;
 				WRAPPER_EXTENSION = bundle;
@@ -932,7 +1165,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "Modules/OVIMBig5/OVIMBig5-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				LIBRARY_SEARCH_PATHS = (
@@ -942,10 +1175,7 @@
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/build/Debug\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/build/Debug\"";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Carbon,
-				);
+				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = OVIMBig5;
 				WRAPPER_EXTENSION = bundle;
@@ -961,7 +1191,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "Modules/OVIMBig5/OVIMBig5-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				LIBRARY_SEARCH_PATHS = (
@@ -971,10 +1201,7 @@
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/build/Debug\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/build/Debug\"";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Carbon,
-				);
+				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = OVIMBig5;
 				WRAPPER_EXTENSION = bundle;
@@ -1047,6 +1274,129 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = OpenVanilla;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D403C3130EA3CBD1006F0A89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Modules/OVIMTibetan/OVIMTibetan-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMTibetan;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		D403C3140EA3CBD1006F0A89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				INFOPLIST_FILE = "OVIMTibetan-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMTibetan;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D403C39C0EA3CEF2006F0A89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Modules/OVIMRoman/OVIMRoman-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMRoman;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		D403C39D0EA3CEF2006F0A89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Modules/OVIMRoman/OVIMRoman-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMRoman;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		D403C4590EA3D10A006F0A89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Modules/OVIMUnicode/OVIMUnicode-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMUnicode;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		D403C45A0EA3D10A006F0A89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Modules/OVIMUnicode/OVIMUnicode-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = OVIMUnicode;
+				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -1194,6 +1544,33 @@
 			buildConfigurations = (
 				6AB6CE6D0E9CF4700001B127 /* Debug */,
 				6AB6CE6E0E9CF4700001B127 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D403C3150EA3CBD1006F0A89 /* Build configuration list for PBXNativeTarget "OVIMTibetan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D403C3130EA3CBD1006F0A89 /* Debug */,
+				D403C3140EA3CBD1006F0A89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D403C39E0EA3CEF2006F0A89 /* Build configuration list for PBXNativeTarget "OVIMRoman" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D403C39C0EA3CEF2006F0A89 /* Debug */,
+				D403C39D0EA3CEF2006F0A89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D403C45B0EA3D10A006F0A89 /* Build configuration list for PBXNativeTarget "OVIMUnicode" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D403C4590EA3D10A006F0A89 /* Debug */,
+				D403C45A0EA3D10A006F0A89 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
