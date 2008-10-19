@@ -33,6 +33,7 @@
 using namespace OpenVanilla;
 
 NSString *LVPrimaryInputMethodKey = @"primaryInputMethod";
+NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotification";
 
 @implementation LVModule
 - (void)dealloc
@@ -80,18 +81,28 @@ NSString *LVPrimaryInputMethodKey = @"primaryInputMethod";
 		
 	return _usable;
 }
+- (BOOL)isInitialized
+{
+	return _initialized;
+}
 - (BOOL)isUsable
 {
 	if (!_initialized) {
 		return YES;
 	}
-	
 	return _usable;
 }
 @end
 
 
 @implementation LVModuleManager : NSObject
+- (NSString *)_configFilePath
+{
+	NSArray *dirs = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSAssert([dirs count], @"NSSearchPathForDirectoriesInDomains");		
+	NSString *prefPath = [[dirs objectAtIndex:0] stringByAppendingPathComponent:@"Preferences"];	
+	return [prefPath stringByAppendingPathComponent:OPENVANILLA_LOADER_PLIST_FILENAME];
+}
 - (void)_unloadEverything
 {
 	[_loadedModuleDictionary removeAllObjects];
@@ -106,13 +117,13 @@ NSString *LVPrimaryInputMethodKey = @"primaryInputMethod";
 }
 - (void)_writeConfigurationFile
 {
-	NSEnumerator *keyEnum = [_configDictionary keyEnumerator];
-	NSString *key;
-	while (key = [keyEnum nextObject]) {
-		CFPreferencesSetAppValue((CFStringRef)key, (CFPropertyListRef)[_configDictionary objectForKey:key], (CFStringRef)OPENVANILLA_LOADER_PLIST_ID);
+	NSData *data = [NSPropertyListSerialization dataFromPropertyList:_configDictionary format:NSPropertyListXMLFormat_v1_0 errorDescription:nil];
+	if (data) {
+		[data writeToFile:[self _configFilePath] atomically:YES];
+		
+		NSDictionary *attr = [[NSFileManager defaultManager] fileAttributesAtPath:[self _configFilePath] traverseLink:YES];
+		_configTimestamp = [[attr objectForKey:NSFileModificationDate] timeIntervalSince1970];
 	}
-	
-	CFPreferencesAppSynchronize((CFStringRef)OPENVANILLA_LOADER_PLIST_ID);	
 }
 
 - (void)_validateAndWriteConfig
@@ -149,26 +160,55 @@ NSString *LVPrimaryInputMethodKey = @"primaryInputMethod";
 - (void)_syncConfigurationWithNotification:(BOOL)sendNotification
 {
 	NSDictionary *oldConfigDict = [[_configDictionary copy] autorelease];
-	[_configDictionary removeAllObjects];
-	
-	CFPreferencesAppSynchronize((CFStringRef)OPENVANILLA_LOADER_PLIST_ID);
 	
 	// get a list of all keys
-	CFArrayRef allKeysRef = CFPreferencesCopyKeyList((CFStringRef)OPENVANILLA_LOADER_PLIST_ID, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);	
-	NSArray *allKeys = (NSArray *)[NSMakeCollectable(allKeysRef) autorelease];	
+	NSDictionary *attr = [[NSFileManager defaultManager] fileAttributesAtPath:[self _configFilePath] traverseLink:YES];
+	NSTimeInterval nowTimestamp = [[attr objectForKey:NSFileModificationDate] timeIntervalSince1970];
 	
-	NSEnumerator *keyEnum = [allKeys objectEnumerator];
-	NSString *key;
-	while (key = [keyEnum nextObject]) {
-		CFTypeRef value = CFPreferencesCopyAppValue((CFStringRef)key, (CFStringRef)OPENVANILLA_LOADER_PLIST_ID);
-		[_configDictionary setObject:[NSMakeCollectable(value) autorelease] forKey:key];		
+	if (_configTimestamp == nowTimestamp) {
+		return;
 	}
 	
-	_primaryInputMethodModuleID = [[_configDictionary objectForKey:LVPrimaryInputMethodKey] retain];
-	[self _validateAndWriteConfig];
+	_configTimestamp = nowTimestamp;
+	
+	NSData *configData = [NSData dataWithContentsOfFile:[self _configFilePath]];
+	if (configData) {
+		NSPropertyListFormat format;
+		id plist = [NSPropertyListSerialization propertyListFromData:configData mutabilityOption:NSPropertyListMutableContainersAndLeaves format:&format errorDescription:nil];
+		if ([plist isKindOfClass:[NSDictionary class]]) {
+			[_configDictionary removeAllObjects];
+			[_configDictionary addEntriesFromDictionary:plist];
+		}
+	}
 		
-	if (sendNotification && ![oldConfigDict isEqualToDictionary:_configDictionary]) {		
+	_primaryInputMethodModuleID = [[_configDictionary objectForKey:LVPrimaryInputMethodKey] retain];
+		
+	if (![oldConfigDict isEqualToDictionary:_configDictionary]) {
+		// tell every usable module that some configuration has been changed
+		
+		NSEnumerator *keyEnum = [_loadedModuleDictionary keyEnumerator];
+		NSString *moduleIdentifier;
+		while (moduleIdentifier = [keyEnum nextObject]) {
+			LVModule *module = [_loadedModuleDictionary objectForKey:moduleIdentifier];
+			if ([module isInitialized]  && [module isUsable]) {
+				OVModule *moduleObject = [module moduleObject];
+				NSMutableDictionary *configDict = [_configDictionary objectForKey:[module moduleIdentifier]];
+				if (!configDict) {
+					configDict = [NSMutableDictionary dictionary];
+					[_configDictionary setObject:configDict forKey:[module moduleIdentifier]];
+				}		
+				
+				LVDictionary dict(configDict);
+				moduleObject->update(&dict, _loaderService);
+			}
+		}
+		
+		if (sendNotification) {
+			[[NSNotificationCenter defaultCenter] postNotificationName:LVModuleConfigChangedNotification object:self];
+		}
 	}
+
+	[self _writeConfigurationFile];
 }
 
 - (void)delloc
@@ -290,14 +330,18 @@ NSString *LVPrimaryInputMethodKey = @"primaryInputMethod";
 	if ([_primaryInputMethodModuleID length]) {
 		LVModule *module = [_loadedModuleDictionary objectForKey:_primaryInputMethodModuleID];
 
+		NSDictionary *oldConfigDict = [[_configDictionary copy] autorelease];		
 		NSMutableDictionary *configDict = [_configDictionary objectForKey:_primaryInputMethodModuleID];
 		if (!configDict) {
 			configDict = [NSMutableDictionary dictionary];
 			[_configDictionary setObject:configDict forKey:_primaryInputMethodModuleID];
-		}		
+		}
 		if ([module lazyInitWithLoaderService:_loaderService configDictionary:configDict]) {
 			inputMethodContext = ((OVInputMethod*)[module moduleObject])->newContext();
-			[self _writeConfigurationFile];
+			
+			if (![oldConfigDict isEqualTo:_configDictionary]) {
+				[self _writeConfigurationFile];
+			}
 		}
 	}
 	

@@ -132,63 +132,63 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6A6A86D70E8682F400B94B7F /* OVIMBig5 */;
+			remoteGlobalIDString = 6A6A86D70E8682F400B94B7F;
 			remoteInfo = OVIMBig5;
 		};
 		D403C3300EA3CC9D006F0A89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D403C3100EA3CBD0006F0A89 /* OVIMTibetan */;
+			remoteGlobalIDString = D403C3100EA3CBD0006F0A89;
 			remoteInfo = OVIMTibetan;
 		};
 		D403C3690EA3CE0F006F0A89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D44D46EB0E9DB0E30062F692 /* OVLegacyModuleLibrary */;
+			remoteGlobalIDString = D44D46EB0E9DB0E30062F692;
 			remoteInfo = OVLegacyModuleLibrary;
 		};
 		D403C36B0EA3CE16006F0A89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D44D46EB0E9DB0E30062F692 /* OVLegacyModuleLibrary */;
+			remoteGlobalIDString = D44D46EB0E9DB0E30062F692;
 			remoteInfo = OVLegacyModuleLibrary;
 		};
 		D403C3B30EA3CFAB006F0A89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D403C3990EA3CEF1006F0A89 /* OVIMRoman */;
+			remoteGlobalIDString = D403C3990EA3CEF1006F0A89;
 			remoteInfo = OVIMRoman;
 		};
 		D403C4A60EA3D16E006F0A89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D403C4560EA3D10A006F0A89 /* OVIMUnicode */;
+			remoteGlobalIDString = D403C4560EA3D10A006F0A89;
 			remoteInfo = OVIMUnicode;
 		};
 		D403C4DD0EA3D35B006F0A89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D403C4C50EA3D2E4006F0A89 /* OVIMEsperanto */;
+			remoteGlobalIDString = D403C4C50EA3D2E4006F0A89;
 			remoteInfo = OVIMEsperanto;
 		};
 		D403C58C0EA3D541006F0A89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D403C5750EA3D49E006F0A89 /* OVOFFullWidthCharacter */;
+			remoteGlobalIDString = D403C5750EA3D49E006F0A89;
 			remoteInfo = OVOFFullWidthCharacter;
 		};
 		D403C6630EA3D655006F0A89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D403C5F20EA3D5C0006F0A89 /* OVOFHanConvert */;
+			remoteGlobalIDString = D403C5F20EA3D5C0006F0A89;
 			remoteInfo = OVOFHanConvert;
 		};
 		D44D46EF0E9DB0F20062F692 /* PBXContainerItemProxy */ = {
