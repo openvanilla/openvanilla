@@ -37,12 +37,15 @@
 		_contextSandwich = [[LVModuleManager sharedManager] createContextSandwich];
 		_candidateText = new LVCandidate;
 		_composingBuffer = new LVBuffer;
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handleModuleConfigChanged:) name:LVModuleConfigChangedNotification object:nil];
 	}
 
 	return self;
 }
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	delete _contextSandwich;
 	delete _candidateText;
 	delete _composingBuffer;
@@ -71,6 +74,11 @@
 	
 	_contextSandwich = [[LVModuleManager sharedManager] createContextSandwich];
 	_contextSandwich->start(_composingBuffer, _candidateText, [[LVModuleManager sharedManager] loaderService]);	
+}
+
+- (void)_handleModuleConfigChanged:(NSNotification *)notification
+{
+	[self _recreateSandwich];
 }
 
 - (void)_updateComposingBuffer:(id)client cursorAtIndex:(NSUInteger)cursorIndex highlightRange:(NSRange)range
@@ -166,7 +174,8 @@
 }
 - (void)activateServer:(id)sender
 {
-	[self _resetUI];	
+	[self _resetUI];
+	[[LVModuleManager sharedManager] syncConfiguration];
 	_contextSandwich->start(_composingBuffer, _candidateText, [[LVModuleManager sharedManager] loaderService]);
 }
 - (void)deactivateServer:(id)sender
