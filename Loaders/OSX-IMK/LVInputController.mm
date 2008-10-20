@@ -93,7 +93,8 @@
 	
 	unicharIndex.push_back(0);
 	for (vector<string>::const_iterator citer = codepoints.begin() ; citer != codepoints.end() ; ++citer) {
-		unicharIndex.push_back(OVUTF16::FromUTF8(*citer).length());
+		accuIndex += OVUTF16::FromUTF8(*citer).length();
+		unicharIndex.push_back(accuIndex);
 	}
 	
 	if (cursorIndex <= unicharIndex.size()) {
