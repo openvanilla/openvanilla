@@ -219,7 +219,7 @@ public:
     }
     
     virtual OVCandidate* append(const char *s)
-    {
+    {		
         m_candidateText += s;
         return this;
     }

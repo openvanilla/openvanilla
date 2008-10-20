@@ -49,8 +49,6 @@ int main(int argc, char *argv[])
 	
 	IMKServer *inputMethodServer = [[IMKServer alloc] initWithName:OPENVANILLA_CONNECTION_NAME bundleIdentifier:[[NSBundle mainBundle] bundleIdentifier]];
 	
-	NSLog(@"%@", inputMethodServer);
-	
     if (!inputMethodServer) {
 		NSLog(@"OpenVanilla initialization failed!");
         return 1;
