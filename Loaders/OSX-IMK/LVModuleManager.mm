@@ -38,6 +38,75 @@ using namespace OpenVanilla;
 NSString *LVPrimaryInputMethodKey = @"primaryInputMethod";
 NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotification";
 
+// we need this stuff otherwise funny things would happen... 
+// http://www.cocoadev.com/index.pl?MutableDeepCopyAndUserDefaults
+
+
+@interface NSObject (MutableDeepCopy)
+- (id)mutableDeepCopy;
+@end
+
+@implementation NSObject (MutableDeepCopy)
+- (id)mutableDeepCopy
+{
+    if([self respondsToSelector:@selector(mutableCopyWithZone:)])
+        return [self mutableCopy];
+    else if([self respondsToSelector:@selector(copyWithZone:)])
+        return [self copy];
+    else
+        return [self retain];
+}
+@end
+
+@implementation NSArray (MutableDeepCopy)
+- (id)mutableDeepCopy
+{
+    NSMutableArray *newArray = [[NSMutableArray alloc] init];
+    NSEnumerator *enumerator = [self objectEnumerator];
+    id obj;
+    while((obj = [enumerator nextObject]))
+    {
+        obj = [obj mutableDeepCopy];
+        [newArray addObject:obj];
+        [obj release];
+    }
+    return newArray;
+}
+@end
+
+@implementation NSSet (MutableDeepCopy)
+- (id)mutableDeepCopy
+{
+    NSMutableSet *newSet = [[NSMutableSet alloc] init];
+    NSEnumerator *enumerator = [self objectEnumerator];
+    id obj;
+    while((obj = [enumerator nextObject]))
+    {
+        obj = [obj mutableDeepCopy];
+        [newSet addObject:obj];
+        [obj release];
+    }
+    return newSet;
+}
+@end
+
+@implementation NSDictionary (MutableDeepCopy)
+- (id)mutableDeepCopy
+{
+    NSMutableDictionary *newDictionary = [[NSMutableDictionary alloc] init];
+    NSEnumerator *enumerator = [self keyEnumerator];
+    id key;
+    while((key = [enumerator nextObject]))
+    {
+        id obj = [[self objectForKey:key] mutableDeepCopy];
+        [newDictionary setObject:obj forKey:key];
+        [obj release];
+    }
+    return newDictionary;
+}
+@end
+
+
 @implementation LVModule
 - (void)dealloc
 {
@@ -162,7 +231,7 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 
 - (void)_syncConfigurationWithNotification:(BOOL)sendNotification
 {
-	NSDictionary *oldConfigDict = [[_configDictionary copy] autorelease];
+	NSDictionary *oldConfigDict = [[_configDictionary mutableDeepCopy] autorelease];
 	
 	// get a list of all keys
 	NSDictionary *attr = [[NSFileManager defaultManager] fileAttributesAtPath:[self _configFilePath] traverseLink:YES];
@@ -183,7 +252,7 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 			[_configDictionary addEntriesFromDictionary:plist];
 		}
 	}
-		
+	
 	_primaryInputMethodModuleID = [[_configDictionary objectForKey:LVPrimaryInputMethodKey] retain];
 		
 	if (![oldConfigDict isEqualToDictionary:_configDictionary]) {
@@ -276,7 +345,6 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 	// now try to load everything
 	NSEnumerator *bpaEnum = [_bundlePathArray objectEnumerator];
 	while (path = [bpaEnum nextObject]) {
-		NSLog(@"Attempting to load: %@", path);
 		CFBundleRef bundle = CFBundleCreate(NULL, (CFURLRef)[NSURL URLWithString:path]);
 		BOOL loaded = NO;
 		if (bundle) {
@@ -333,7 +401,7 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 	if ([_primaryInputMethodModuleID length]) {
 		LVModule *module = [_loadedModuleDictionary objectForKey:_primaryInputMethodModuleID];
 
-		NSDictionary *oldConfigDict = [[_configDictionary copy] autorelease];		
+		NSDictionary *oldConfigDict = [[_configDictionary mutableDeepCopy] autorelease];		
 		NSMutableDictionary *configDict = [_configDictionary objectForKey:_primaryInputMethodModuleID];
 		if (!configDict) {
 			configDict = [NSMutableDictionary dictionary];
