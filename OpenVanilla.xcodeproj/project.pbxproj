@@ -22,6 +22,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6A0F2D4E0EAC8B3E00434743 /* OVFileHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0F2D4C0EAC8B3E00434743 /* OVFileHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A0F2D4F0EAC8B3E00434743 /* OVStringHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0F2D4D0EAC8B3E00434743 /* OVStringHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A21A9C40E9CFC2A0078C2E9 /* LVModuleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A21A9C30E9CFC2A0078C2E9 /* LVModuleManager.mm */; };
 		6A21AA3E0E9D097E0078C2E9 /* OVUTF8Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA3C0E9D097E0078C2E9 /* OVUTF8Helper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A21AA410E9D0A290078C2E9 /* FrameworkStub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA400E9D0A290078C2E9 /* FrameworkStub.cpp */; };
@@ -132,14 +134,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6AB6CE690E9CF46F0001B127 /* OpenVanilla (Loader IMK) */;
+			remoteGlobalIDString = 6AB6CE690E9CF46F0001B127;
 			remoteInfo = "OpenVanilla (Loader IMK)";
 		};
 		6AA6D1970EAC5F1100DF1C2C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6AAF6E170EAB772B00F4DFE0 /* OpenVanilla (TSM Component) */;
+			remoteGlobalIDString = 6AAF6E170EAB772B00F4DFE0;
 			remoteInfo = "OpenVanilla (TSM Component)";
 		};
 		6AAF6EA10EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
@@ -362,6 +364,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6A0F2D4C0EAC8B3E00434743 /* OVFileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVFileHelper.h; sourceTree = "<group>"; };
+		6A0F2D4D0EAC8B3E00434743 /* OVStringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVStringHelper.h; sourceTree = "<group>"; };
 		6A21A9C20E9CFC2A0078C2E9 /* LVModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVModuleManager.h; path = "Loaders/OSX-IMK/LVModuleManager.h"; sourceTree = "<group>"; };
 		6A21A9C30E9CFC2A0078C2E9 /* LVModuleManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LVModuleManager.mm; path = "Loaders/OSX-IMK/LVModuleManager.mm"; sourceTree = "<group>"; };
 		6A21AA3C0E9D097E0078C2E9 /* OVUTF8Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUTF8Helper.h; sourceTree = "<group>"; };
@@ -648,10 +652,12 @@
 		6A6A865A0E867E9300B94B7F /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				6A21AA3C0E9D097E0078C2E9 /* OVUTF8Helper.h */,
 				6A6A865B0E867E9300B94B7F /* OpenVanilla.h */,
+				6A0F2D4C0EAC8B3E00434743 /* OVFileHelper.h */,
 				6A6A865C0E867E9300B94B7F /* OVLibrary.h */,
+				6A0F2D4D0EAC8B3E00434743 /* OVStringHelper.h */,
 				6A6A865D0E867E9300B94B7F /* OVUtility.h */,
+				6A21AA3C0E9D097E0078C2E9 /* OVUTF8Helper.h */,
 				6A6A867D0E86805700B94B7F /* OVWildcard.h */,
 			);
 			name = Headers;
@@ -885,6 +891,8 @@
 				6A6A86620E867E9300B94B7F /* OVUtility.h in Headers */,
 				6A6A86870E86805700B94B7F /* OVWildcard.h in Headers */,
 				6A21AA3E0E9D097E0078C2E9 /* OVUTF8Helper.h in Headers */,
+				6A0F2D4E0EAC8B3E00434743 /* OVFileHelper.h in Headers */,
+				6A0F2D4F0EAC8B3E00434743 /* OVStringHelper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
