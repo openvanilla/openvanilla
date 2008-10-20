@@ -288,7 +288,7 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 				
 				if (getVersion && initLib && getModule) {
 					if (getVersion() == OV_VERSION) {
-						NSString *resourceDir = [path stringByAppendingPathComponent:@"Resources"];
+						NSString *resourceDir = [[path stringByAppendingPathComponent:@"Contents"] stringByAppendingPathComponent:@"Resources"];
 						if (initLib(_loaderService, [resourceDir UTF8String])) {
 							size_t moduleIterator = 0;
 							OVModule *module;
