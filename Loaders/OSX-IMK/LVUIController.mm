@@ -53,6 +53,7 @@
 - (void)updateCandidateText:(NSString *)text
 {
 	[_candidateTextView setSimpleText:text];	
+	[_candidateTextView setNeedsDisplay:YES];
 	[_candidateWindow setContentSize:[_candidateTextView boundingRectForText].size];
 }
 - (void)showTooltipWithText:(NSString *)text
