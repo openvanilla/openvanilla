@@ -1,3 +1,6 @@
+//
+// LVOVImplementations.h
+//
 // Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
@@ -41,6 +44,7 @@ public:
     bool capsLock;
     bool ctrl;
     bool opt;
+    bool num;
     int keyCode;
     
 public:
@@ -48,6 +52,7 @@ public:
         : capsLock(false)
         , ctrl(false)
         , opt(false)
+        , num(false)
         , keyCode(0)
     {
     }
@@ -79,7 +84,7 @@ public:
     
     virtual bool isNum()
     {
-        return false;
+        return num;
     }    
 };
 

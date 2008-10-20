@@ -1,3 +1,6 @@
+//
+// main.mm
+//
 // Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
@@ -45,6 +48,8 @@ int main(int argc, char *argv[])
 	[[LVModuleManager sharedManager] loadModulePackageBundles];
 	
 	IMKServer *inputMethodServer = [[IMKServer alloc] initWithName:OPENVANILLA_CONNECTION_NAME bundleIdentifier:[[NSBundle mainBundle] bundleIdentifier]];
+	
+	NSLog(@"%@", inputMethodServer);
 	
     if (!inputMethodServer) {
 		NSLog(@"OpenVanilla initialization failed!");

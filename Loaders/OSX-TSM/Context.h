@@ -1,6 +1,7 @@
-// TSComposingBuffer.mm: Composing buffer object for text service component
 //
-// Copyright (c) 2004-2009 The OpenVanilla Project (http://openvanilla.org)
+// Context.h
+//
+// Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
@@ -28,59 +29,33 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#import <Cocoa/Cocoa.h>
 #import <Carbon/Carbon.h>
-#import "CocoaVanilla/TSComposingBuffer.h"
+#import <Cocoa/Cocoa.h>
+#import "InputMethodKitTiger.h"
 
-TSComposingBuffer::TSComposingBuffer(ComponentInstance i) : inst(i), lastupdate(0), str(nil)
-{
-}
+#define TSC_MENU_ITEM_INDEX_BASE    1000
 
-TSComposingBuffer::~TSComposingBuffer()
+@interface TextServiceContext : NSObject
 {
+    ComponentInstance _componentInstance;
+	size_t _lastUpdateLength;
+    NSString *_contextID;
 }
+- (id)initWithComponentInstance:(ComponentInstance)instance;
+- (NSString*)contextID;
+- (void)setContextID:(NSString*)contextID;
+- (void)setMarkedText:(NSAttributedString*)text selectionRange:(NSRange)selRange replacementRange:(NSRange)rplRange;
+- (void)overrideKeyboardWithKeyboardNamed:(NSString*)keyboardName;
+- (void)insertText:(NSString*)text replacementRange:(NSRange)rplRange;
+- (NSDictionary*)attributesForCharacterIndex:(int)index lineHeightRectangle:(NSRect*)returnRect;
+- (NSString*)bundleIdentifier;
 
-TSComposingBuffer* TSComposingBuffer::clear()
-{
-	NSLog(@"clear");
-    return this;
-}
+// InputMethodKitTiger-specific
++ (void)setSharedMenu:(MenuRef)menu;
++ (MenuRef)sharedMenu;
+- (void)refreshMenu:(NSArray*)menuItems;
+@end
 
-TSComposingBuffer* TSComposingBuffer::send()
-{
-	NSLog(@"send");
-    return clear();
-}
-
-Boolean TSComposingBuffer::isEmpty()
-{
-	return TRUE;
-}
-
-NSMutableString* TSComposingBuffer::getContent()
-{
-	return [NSMutableString string];
-}
-
-TSComposingBuffer* TSComposingBuffer::append(NSString *s)
-{
-    return this;
-}
-
-int TSComposingBuffer::realPos(int p)
-{
-	return 0;
-}
-
-Point TSComposingBuffer::getAppCursorPosition()
-{
-    Point pnt;
-	pnt.h = 0;
-	pnt.v = 0;
-    return pnt;
-}
-
-TSComposingBuffer* TSComposingBuffer::update(Boolean send, int cursor, int markFrom, int markTo)
-{
-	return this;
-}
+//
+// Free Tibet
+//
