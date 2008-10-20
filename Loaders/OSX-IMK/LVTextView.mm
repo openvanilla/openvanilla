@@ -1,3 +1,6 @@
+//
+// LVTextView.mm
+//
 // Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
@@ -50,11 +53,12 @@
 }
 - (NSRect)boundingRectForText
 {
-	return [_attributeString boundingRectWithSize:NSMakeSize(16000.0, 16000.0) options:NSStringDrawingUsesLineFragmentOrigin];
+	NSRect result = [_attributeString boundingRectWithSize:NSMakeSize(2000.0, 2000.0) options:NSStringDrawingUsesLineFragmentOrigin];
+	return result;
 }
 - (void)drawRect:(NSRect)aRect
 {
-	[[NSColor blackColor] setFill];
+	[[NSColor colorWithCalibratedRed:0.1 green:0.1 blue:0.1 alpha:1.0] setFill];
 	[NSBezierPath fillRect:aRect];
 	[_attributeString drawAtPoint:NSMakePoint(0.0, 0.0)];
 }

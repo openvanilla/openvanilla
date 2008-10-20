@@ -13,9 +13,8 @@
 			buildPhases = (
 			);
 			dependencies = (
-				6A6A86FE0E8683CE00B94B7F /* PBXTargetDependency */,
-				6A21AB2D0E9D11100078C2E9 /* PBXTargetDependency */,
-				6A21AB2F0E9D11150078C2E9 /* PBXTargetDependency */,
+				6AA6D1960EAC5F0F00DF1C2C /* PBXTargetDependency */,
+				6AA6D1980EAC5F1100DF1C2C /* PBXTargetDependency */,
 			);
 			name = Distribution;
 			productName = Distribution;
@@ -39,6 +38,34 @@
 		6A6A86870E86805700B94B7F /* OVWildcard.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A867D0E86805700B94B7F /* OVWildcard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A6A86DF0E86830D00B94B7F /* Big5ToUnicodeTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A86DD0E86830D00B94B7F /* Big5ToUnicodeTable.cpp */; };
 		6A6A86E00E86830D00B94B7F /* OVIMBig5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A86DE0E86830D00B94B7F /* OVIMBig5.cpp */; };
+		6A6DB7100EAB7AB200A09A03 /* OVLoaderServer.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6AAF6ED10EAB781300F4DFE0 /* OVLoaderServer.app */; };
+		6AAF6EB70EAB781300F4DFE0 /* OpenVanilla.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6CF420E9CF5D00001B127 /* OpenVanilla.icns */; };
+		6AAF6EB80EAB781300F4DFE0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6CF460E9CF5F00001B127 /* MainMenu.xib */; };
+		6AAF6EBA0EAB781300F4DFE0 /* LVUIController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6CF390E9CF5B60001B127 /* LVUIController.mm */; };
+		6AAF6EBB0EAB781300F4DFE0 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6CF3A0E9CF5B60001B127 /* main.mm */; };
+		6AAF6EBC0EAB781300F4DFE0 /* LVInputController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6CF3D0E9CF5B60001B127 /* LVInputController.mm */; };
+		6AAF6EBD0EAB781300F4DFE0 /* LVModuleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A21A9C30E9CFC2A0078C2E9 /* LVModuleManager.mm */; };
+		6AAF6EBE0EAB781300F4DFE0 /* LVOVImplementations.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AB350E9D13ED0078C2E9 /* LVOVImplementations.mm */; };
+		6AAF6EBF0EAB781300F4DFE0 /* LVTopMostWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3516900E9FA35700420428 /* LVTopMostWindow.mm */; };
+		6AAF6EC00EAB781300F4DFE0 /* LVTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3516B10E9FA54500420428 /* LVTextView.mm */; };
+		6AAF6EC20EAB781300F4DFE0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB6CF570E9CF69C0001B127 /* Cocoa.framework */; };
+		6AAF6EC50EAB781300F4DFE0 /* OVIMArray.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D42E383B0E86A22300453DE6 /* OVIMArray.bundle */; };
+		6AAF6EC60EAB781300F4DFE0 /* OVIMBig5.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A86D80E8682F400B94B7F /* OVIMBig5.bundle */; };
+		6AAF6EC70EAB781300F4DFE0 /* OVIMEsperanto.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D403C4C60EA3D2E4006F0A89 /* OVIMEsperanto.bundle */; };
+		6AAF6EC80EAB781300F4DFE0 /* OVIMPhonetic.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A21AA860E9D0B3D0078C2E9 /* OVIMPhonetic.bundle */; };
+		6AAF6EC90EAB781300F4DFE0 /* OVIMRoman.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D403C39A0EA3CEF1006F0A89 /* OVIMRoman.bundle */; };
+		6AAF6ECA0EAB781300F4DFE0 /* OVIMTibetan.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D403C3110EA3CBD0006F0A89 /* OVIMTibetan.bundle */; };
+		6AAF6ECB0EAB781300F4DFE0 /* OVIMUnicode.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D403C4570EA3D10A006F0A89 /* OVIMUnicode.bundle */; };
+		6AAF6ECC0EAB781300F4DFE0 /* OVOFHanConvert.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D403C5F30EA3D5C0006F0A89 /* OVOFHanConvert.bundle */; };
+		6AAF6ECD0EAB781300F4DFE0 /* OVOFFullWidthCharacter.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D403C5760EA3D49E006F0A89 /* OVOFFullWidthCharacter.bundle */; };
+		6AAF6F3B0EAB789400F4DFE0 /* InputMethodKitTiger.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AAF6F3A0EAB789400F4DFE0 /* InputMethodKitTiger.mm */; };
+		6AAF6F3F0EAB78B600F4DFE0 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AAF6F3E0EAB78B600F4DFE0 /* Context.m */; };
+		6AAF6F590EAB78E100F4DFE0 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42E38500E86A29100453DE6 /* Carbon.framework */; };
+		6AAF6F620EAB790D00F4DFE0 /* Component.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AAF6F5E0EAB790D00F4DFE0 /* Component.m */; };
+		6AAF6F750EAB795E00F4DFE0 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42E38500E86A29100453DE6 /* Carbon.framework */; };
+		6AAF6F760EAB795E00F4DFE0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB6CF570E9CF69C0001B127 /* Cocoa.framework */; };
+		6AAF6F790EAB797A00F4DFE0 /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AAF6F3E0EAB78B600F4DFE0 /* Context.m */; };
+		6AB521C20EAB8A2900E99252 /* OpenVanilla.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6CF420E9CF5D00001B127 /* OpenVanilla.icns */; };
 		6AB6CF3E0E9CF5B60001B127 /* LVUIController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6CF390E9CF5B60001B127 /* LVUIController.mm */; };
 		6AB6CF3F0E9CF5B60001B127 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6CF3A0E9CF5B60001B127 /* main.mm */; };
 		6AB6CF400E9CF5B60001B127 /* LVInputController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6CF3D0E9CF5B60001B127 /* LVInputController.mm */; };
@@ -46,6 +73,7 @@
 		6AB6CF470E9CF5F00001B127 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6CF460E9CF5F00001B127 /* MainMenu.xib */; };
 		6AB6CF580E9CF69C0001B127 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB6CF570E9CF69C0001B127 /* Cocoa.framework */; };
 		6AB6CF5A0E9CF69C0001B127 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB6CF590E9CF69C0001B127 /* InputMethodKit.framework */; };
+		6AB839EB0EAB79F900B52A3B /* Component.r in Rez */ = {isa = PBXBuildFile; fileRef = 6AAF6F5F0EAB790D00F4DFE0 /* Component.r */; };
 		D403C32C0EA3CC83006F0A89 /* OVIMTibetan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D403C32B0EA3CC83006F0A89 /* OVIMTibetan.cpp */; };
 		D403C3470EA3CCD0006F0A89 /* OVIMBig5.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A86D80E8682F400B94B7F /* OVIMBig5.bundle */; };
 		D403C3480EA3CCD2006F0A89 /* OVIMTibetan.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D403C3110EA3CBD0006F0A89 /* OVIMTibetan.bundle */; };
@@ -86,20 +114,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6A21AB2C0E9D11100078C2E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6AB6CE690E9CF46F0001B127;
-			remoteInfo = "OpenVanilla (Loader IMK)";
-		};
-		6A21AB2E0E9D11150078C2E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6A21AA850E9D0B3D0078C2E9;
-			remoteInfo = OVIMPhonetic;
-		};
 		6A21AB8D0E9D22800078C2E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
@@ -114,12 +128,103 @@
 			remoteGlobalIDString = D42E383A0E86A22300453DE6;
 			remoteInfo = OVIMArray;
 		};
-		6A6A86FD0E8683CE00B94B7F /* PBXContainerItemProxy */ = {
+		6AA6D1950EAC5F0F00DF1C2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6AB6CE690E9CF46F0001B127 /* OpenVanilla (Loader IMK) */;
+			remoteInfo = "OpenVanilla (Loader IMK)";
+		};
+		6AA6D1970EAC5F1100DF1C2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6AAF6E170EAB772B00F4DFE0 /* OpenVanilla (TSM Component) */;
+			remoteInfo = "OpenVanilla (TSM Component)";
+		};
+		6AAF6EA10EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6A6A860F0E867B2E00B94B7F;
 			remoteInfo = "OpenVanilla (Framework)";
+		};
+		6AAF6EA30EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D44D46EB0E9DB0E30062F692;
+			remoteInfo = OVLegacyModuleLibrary;
+		};
+		6AAF6EA50EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D42E383A0E86A22300453DE6;
+			remoteInfo = OVIMArray;
+		};
+		6AAF6EA70EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A6A86D70E8682F400B94B7F;
+			remoteInfo = OVIMBig5;
+		};
+		6AAF6EA90EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D403C4C50EA3D2E4006F0A89;
+			remoteInfo = OVIMEsperanto;
+		};
+		6AAF6EAB0EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A21AA850E9D0B3D0078C2E9;
+			remoteInfo = OVIMPhonetic;
+		};
+		6AAF6EAD0EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D403C3990EA3CEF1006F0A89;
+			remoteInfo = OVIMRoman;
+		};
+		6AAF6EAF0EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D403C3100EA3CBD0006F0A89;
+			remoteInfo = OVIMTibetan;
+		};
+		6AAF6EB10EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D403C4560EA3D10A006F0A89;
+			remoteInfo = OVIMUnicode;
+		};
+		6AAF6EB30EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D403C5F20EA3D5C0006F0A89;
+			remoteInfo = OVOFHanConvert;
+		};
+		6AAF6EB50EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D403C5750EA3D49E006F0A89;
+			remoteInfo = OVOFFullWidthCharacter;
+		};
+		6AAF6F730EAB794B00F4DFE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6AAF6E9F0EAB781300F4DFE0;
+			remoteInfo = "OpenVanilla (LoaderServer TSM)";
 		};
 		6AB6CE720E9CF49C0001B127 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -226,6 +331,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6A6DB70F0EAB7AAB00A09A03 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 12;
+			files = (
+				6A6DB7100EAB7AB200A09A03 /* OVLoaderServer.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AAF6EC40EAB781300F4DFE0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Modules;
+			dstSubfolderSpec = 7;
+			files = (
+				6AAF6EC50EAB781300F4DFE0 /* OVIMArray.bundle in CopyFiles */,
+				6AAF6EC60EAB781300F4DFE0 /* OVIMBig5.bundle in CopyFiles */,
+				6AAF6EC70EAB781300F4DFE0 /* OVIMEsperanto.bundle in CopyFiles */,
+				6AAF6EC80EAB781300F4DFE0 /* OVIMPhonetic.bundle in CopyFiles */,
+				6AAF6EC90EAB781300F4DFE0 /* OVIMRoman.bundle in CopyFiles */,
+				6AAF6ECA0EAB781300F4DFE0 /* OVIMTibetan.bundle in CopyFiles */,
+				6AAF6ECB0EAB781300F4DFE0 /* OVIMUnicode.bundle in CopyFiles */,
+				6AAF6ECC0EAB781300F4DFE0 /* OVOFHanConvert.bundle in CopyFiles */,
+				6AAF6ECD0EAB781300F4DFE0 /* OVOFFullWidthCharacter.bundle in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -268,6 +401,18 @@
 		6A6A86D80E8682F400B94B7F /* OVIMBig5.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMBig5.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A6A86DD0E86830D00B94B7F /* Big5ToUnicodeTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Big5ToUnicodeTable.cpp; path = Modules/OVIMBig5/Big5ToUnicodeTable.cpp; sourceTree = "<group>"; };
 		6A6A86DE0E86830D00B94B7F /* OVIMBig5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMBig5.cpp; path = Modules/OVIMBig5/OVIMBig5.cpp; sourceTree = "<group>"; };
+		6AAF6E180EAB772B00F4DFE0 /* OpenVanilla.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenVanilla.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AAF6E190EAB772B00F4DFE0 /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-Info.plist"; path = "Loaders/OSX-TSM/OpenVanilla-Info.plist"; sourceTree = "<group>"; };
+		6AAF6E7C0EAB77D500F4DFE0 /* OVLoaderServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OVLoaderServer-Info.plist"; path = "Loaders/OSX-TSM/OVLoaderServer-Info.plist"; sourceTree = "<group>"; };
+		6AAF6ED10EAB781300F4DFE0 /* OVLoaderServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVLoaderServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AAF6F390EAB789400F4DFE0 /* InputMethodKitTiger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputMethodKitTiger.h; path = "Loaders/OSX-TSM/InputMethodKitTiger.h"; sourceTree = "<group>"; };
+		6AAF6F3A0EAB789400F4DFE0 /* InputMethodKitTiger.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = InputMethodKitTiger.mm; path = "Loaders/OSX-TSM/InputMethodKitTiger.mm"; sourceTree = "<group>"; };
+		6AAF6F3D0EAB78B600F4DFE0 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Context.h; path = "Loaders/OSX-TSM/Context.h"; sourceTree = "<group>"; };
+		6AAF6F3E0EAB78B600F4DFE0 /* Context.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Context.m; path = "Loaders/OSX-TSM/Context.m"; sourceTree = "<group>"; };
+		6AAF6F5C0EAB790D00F4DFE0 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Component.h; path = "Loaders/OSX-TSM/Component.h"; sourceTree = "<group>"; };
+		6AAF6F5E0EAB790D00F4DFE0 /* Component.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Component.m; path = "Loaders/OSX-TSM/Component.m"; sourceTree = "<group>"; };
+		6AAF6F5F0EAB790D00F4DFE0 /* Component.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; name = Component.r; path = "Loaders/OSX-TSM/Component.r"; sourceTree = "<group>"; };
+		6AAF6F600EAB790D00F4DFE0 /* ComponentConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComponentConfig.h; path = "Loaders/OSX-TSM/ComponentConfig.h"; sourceTree = "<group>"; };
 		6AB6CE6A0E9CF46F0001B127 /* OpenVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB6CE6C0E9CF46F0001B127 /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-Info.plist"; path = "Loaders/OSX-IMK/OpenVanilla-Info.plist"; sourceTree = "<group>"; };
 		6AB6CF380E9CF5B60001B127 /* LVUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVUIController.h; path = "Loaders/OSX-IMK/LVUIController.h"; sourceTree = "<group>"; };
@@ -326,6 +471,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AAF6E160EAB772B00F4DFE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AAF6F750EAB795E00F4DFE0 /* Carbon.framework in Frameworks */,
+				6AAF6F760EAB795E00F4DFE0 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AAF6EC10EAB781300F4DFE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AAF6EC20EAB781300F4DFE0 /* Cocoa.framework in Frameworks */,
+				6AAF6F590EAB78E100F4DFE0 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +629,8 @@
 				D403C4C60EA3D2E4006F0A89 /* OVIMEsperanto.bundle */,
 				D403C5760EA3D49E006F0A89 /* OVOFFullWidthCharacter.bundle */,
 				D403C5F30EA3D5C0006F0A89 /* OVOFHanConvert.bundle */,
+				6AAF6E180EAB772B00F4DFE0 /* OpenVanilla.bundle */,
+				6AAF6ED10EAB781300F4DFE0 /* OVLoaderServer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -529,9 +694,32 @@
 			name = OVIMBig5;
 			sourceTree = "<group>";
 		};
+		6AAF6F380EAB787800F4DFE0 /* OSX-TSM */ = {
+			isa = PBXGroup;
+			children = (
+				6AAF6E190EAB772B00F4DFE0 /* OpenVanilla-Info.plist */,
+				6AAF6E7C0EAB77D500F4DFE0 /* OVLoaderServer-Info.plist */,
+				6ABE2AE70EAB8B05001A7E7D /* Component */,
+				6AAF6F5B0EAB78F000F4DFE0 /* IMK Emulation Layer */,
+			);
+			name = "OSX-TSM";
+			sourceTree = "<group>";
+		};
+		6AAF6F5B0EAB78F000F4DFE0 /* IMK Emulation Layer */ = {
+			isa = PBXGroup;
+			children = (
+				6AAF6F3D0EAB78B600F4DFE0 /* Context.h */,
+				6AAF6F3E0EAB78B600F4DFE0 /* Context.m */,
+				6AAF6F390EAB789400F4DFE0 /* InputMethodKitTiger.h */,
+				6AAF6F3A0EAB789400F4DFE0 /* InputMethodKitTiger.mm */,
+			);
+			name = "IMK Emulation Layer";
+			sourceTree = "<group>";
+		};
 		6AB6CE640E9CF44B0001B127 /* Loaders */ = {
 			isa = PBXGroup;
 			children = (
+				6AAF6F380EAB787800F4DFE0 /* OSX-TSM */,
 				6AB6CE650E9CF4510001B127 /* OSX-IMK */,
 			);
 			name = Loaders;
@@ -577,6 +765,17 @@
 				6AB6CF460E9CF5F00001B127 /* MainMenu.xib */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		6ABE2AE70EAB8B05001A7E7D /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				6AAF6F5C0EAB790D00F4DFE0 /* Component.h */,
+				6AAF6F5E0EAB790D00F4DFE0 /* Component.m */,
+				6AAF6F5F0EAB790D00F4DFE0 /* Component.r */,
+				6AAF6F600EAB790D00F4DFE0 /* ComponentConfig.h */,
+			);
+			name = Component;
 			sourceTree = "<group>";
 		};
 		D403C3030EA3CB99006F0A89 /* OVIMTibetan */ = {
@@ -762,6 +961,55 @@
 			productReference = 6A6A86D80E8682F400B94B7F /* OVIMBig5.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		6AAF6E170EAB772B00F4DFE0 /* OpenVanilla (TSM Component) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AAF6E1C0EAB772C00F4DFE0 /* Build configuration list for PBXNativeTarget "OpenVanilla (TSM Component)" */;
+			buildPhases = (
+				6AAF6E140EAB772B00F4DFE0 /* Resources */,
+				6AAF6E150EAB772B00F4DFE0 /* Sources */,
+				6AAF6E160EAB772B00F4DFE0 /* Frameworks */,
+				6AB839FB0EAB7A0300B52A3B /* Rez */,
+				6A6DB70F0EAB7AAB00A09A03 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6AAF6F740EAB794B00F4DFE0 /* PBXTargetDependency */,
+			);
+			name = "OpenVanilla (TSM Component)";
+			productName = OpenVanilla;
+			productReference = 6AAF6E180EAB772B00F4DFE0 /* OpenVanilla.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		6AAF6E9F0EAB781300F4DFE0 /* OpenVanilla (LoaderServer for TSM) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AAF6ECE0EAB781300F4DFE0 /* Build configuration list for PBXNativeTarget "OpenVanilla (LoaderServer for TSM)" */;
+			buildPhases = (
+				6AAF6EB60EAB781300F4DFE0 /* Resources */,
+				6AAF6EB90EAB781300F4DFE0 /* Sources */,
+				6AAF6EC10EAB781300F4DFE0 /* Frameworks */,
+				6AAF6EC40EAB781300F4DFE0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6AAF6EA00EAB781300F4DFE0 /* PBXTargetDependency */,
+				6AAF6EA20EAB781300F4DFE0 /* PBXTargetDependency */,
+				6AAF6EA40EAB781300F4DFE0 /* PBXTargetDependency */,
+				6AAF6EA60EAB781300F4DFE0 /* PBXTargetDependency */,
+				6AAF6EA80EAB781300F4DFE0 /* PBXTargetDependency */,
+				6AAF6EAA0EAB781300F4DFE0 /* PBXTargetDependency */,
+				6AAF6EAC0EAB781300F4DFE0 /* PBXTargetDependency */,
+				6AAF6EAE0EAB781300F4DFE0 /* PBXTargetDependency */,
+				6AAF6EB00EAB781300F4DFE0 /* PBXTargetDependency */,
+				6AAF6EB20EAB781300F4DFE0 /* PBXTargetDependency */,
+				6AAF6EB40EAB781300F4DFE0 /* PBXTargetDependency */,
+			);
+			name = "OpenVanilla (LoaderServer for TSM)";
+			productName = OVLoaderServer;
+			productReference = 6AAF6ED10EAB781300F4DFE0 /* OVLoaderServer.app */;
+			productType = "com.apple.product-type.application";
+		};
 		6AB6CE690E9CF46F0001B127 /* OpenVanilla (Loader IMK) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6AB6CE6F0E9CF4710001B127 /* Build configuration list for PBXNativeTarget "OpenVanilla (Loader IMK)" */;
@@ -942,9 +1190,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6AB6CE690E9CF46F0001B127 /* OpenVanilla (Loader IMK) */,
-				6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */,
 				6A6A86FA0E8683CB00B94B7F /* Distribution */,
+				6AB6CE690E9CF46F0001B127 /* OpenVanilla (Loader IMK) */,
+				6AAF6E170EAB772B00F4DFE0 /* OpenVanilla (TSM Component) */,
+				6AAF6E9F0EAB781300F4DFE0 /* OpenVanilla (LoaderServer for TSM) */,
+				6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */,
 				D44D46EB0E9DB0E30062F692 /* OVLegacyModuleLibrary */,
 				D42E383A0E86A22300453DE6 /* OVIMArray */,
 				6A6A86D70E8682F400B94B7F /* OVIMBig5 */,
@@ -978,6 +1228,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AAF6E140EAB772B00F4DFE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AB521C20EAB8A2900E99252 /* OpenVanilla.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AAF6EB60EAB781300F4DFE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AAF6EB70EAB781300F4DFE0 /* OpenVanilla.icns in Resources */,
+				6AAF6EB80EAB781300F4DFE0 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1044,6 +1311,17 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXRezBuildPhase section */
+		6AB839FB0EAB7A0300B52A3B /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AB839EB0EAB79F900B52A3B /* Component.r in Rez */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
 /* Begin PBXShellScriptBuildPhase section */
 		6A21AA8F0E9D0B9E0078C2E9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1085,6 +1363,31 @@
 			files = (
 				6A6A86DF0E86830D00B94B7F /* Big5ToUnicodeTable.cpp in Sources */,
 				6A6A86E00E86830D00B94B7F /* OVIMBig5.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AAF6E150EAB772B00F4DFE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AAF6F620EAB790D00F4DFE0 /* Component.m in Sources */,
+				6AAF6F790EAB797A00F4DFE0 /* Context.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AAF6EB90EAB781300F4DFE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AAF6EBA0EAB781300F4DFE0 /* LVUIController.mm in Sources */,
+				6AAF6EBB0EAB781300F4DFE0 /* main.mm in Sources */,
+				6AAF6EBC0EAB781300F4DFE0 /* LVInputController.mm in Sources */,
+				6AAF6EBD0EAB781300F4DFE0 /* LVModuleManager.mm in Sources */,
+				6AAF6EBE0EAB781300F4DFE0 /* LVOVImplementations.mm in Sources */,
+				6AAF6EBF0EAB781300F4DFE0 /* LVTopMostWindow.mm in Sources */,
+				6AAF6EC00EAB781300F4DFE0 /* LVTextView.mm in Sources */,
+				6AAF6F3B0EAB789400F4DFE0 /* InputMethodKitTiger.mm in Sources */,
+				6AAF6F3F0EAB78B600F4DFE0 /* Context.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1176,16 +1479,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6A21AB2D0E9D11100078C2E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6AB6CE690E9CF46F0001B127 /* OpenVanilla (Loader IMK) */;
-			targetProxy = 6A21AB2C0E9D11100078C2E9 /* PBXContainerItemProxy */;
-		};
-		6A21AB2F0E9D11150078C2E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6A21AA850E9D0B3D0078C2E9 /* OVIMPhonetic */;
-			targetProxy = 6A21AB2E0E9D11150078C2E9 /* PBXContainerItemProxy */;
-		};
 		6A21AB8E0E9D22800078C2E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6A21AA850E9D0B3D0078C2E9 /* OVIMPhonetic */;
@@ -1196,10 +1489,75 @@
 			target = D42E383A0E86A22300453DE6 /* OVIMArray */;
 			targetProxy = 6A45E0120E9FCFDD0075D9AE /* PBXContainerItemProxy */;
 		};
-		6A6A86FE0E8683CE00B94B7F /* PBXTargetDependency */ = {
+		6AA6D1960EAC5F0F00DF1C2C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6AB6CE690E9CF46F0001B127 /* OpenVanilla (Loader IMK) */;
+			targetProxy = 6AA6D1950EAC5F0F00DF1C2C /* PBXContainerItemProxy */;
+		};
+		6AA6D1980EAC5F1100DF1C2C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6AAF6E170EAB772B00F4DFE0 /* OpenVanilla (TSM Component) */;
+			targetProxy = 6AA6D1970EAC5F1100DF1C2C /* PBXContainerItemProxy */;
+		};
+		6AAF6EA00EAB781300F4DFE0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */;
-			targetProxy = 6A6A86FD0E8683CE00B94B7F /* PBXContainerItemProxy */;
+			targetProxy = 6AAF6EA10EAB781300F4DFE0 /* PBXContainerItemProxy */;
+		};
+		6AAF6EA20EAB781300F4DFE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D44D46EB0E9DB0E30062F692 /* OVLegacyModuleLibrary */;
+			targetProxy = 6AAF6EA30EAB781300F4DFE0 /* PBXContainerItemProxy */;
+		};
+		6AAF6EA40EAB781300F4DFE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D42E383A0E86A22300453DE6 /* OVIMArray */;
+			targetProxy = 6AAF6EA50EAB781300F4DFE0 /* PBXContainerItemProxy */;
+		};
+		6AAF6EA60EAB781300F4DFE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A6A86D70E8682F400B94B7F /* OVIMBig5 */;
+			targetProxy = 6AAF6EA70EAB781300F4DFE0 /* PBXContainerItemProxy */;
+		};
+		6AAF6EA80EAB781300F4DFE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D403C4C50EA3D2E4006F0A89 /* OVIMEsperanto */;
+			targetProxy = 6AAF6EA90EAB781300F4DFE0 /* PBXContainerItemProxy */;
+		};
+		6AAF6EAA0EAB781300F4DFE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A21AA850E9D0B3D0078C2E9 /* OVIMPhonetic */;
+			targetProxy = 6AAF6EAB0EAB781300F4DFE0 /* PBXContainerItemProxy */;
+		};
+		6AAF6EAC0EAB781300F4DFE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D403C3990EA3CEF1006F0A89 /* OVIMRoman */;
+			targetProxy = 6AAF6EAD0EAB781300F4DFE0 /* PBXContainerItemProxy */;
+		};
+		6AAF6EAE0EAB781300F4DFE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D403C3100EA3CBD0006F0A89 /* OVIMTibetan */;
+			targetProxy = 6AAF6EAF0EAB781300F4DFE0 /* PBXContainerItemProxy */;
+		};
+		6AAF6EB00EAB781300F4DFE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D403C4560EA3D10A006F0A89 /* OVIMUnicode */;
+			targetProxy = 6AAF6EB10EAB781300F4DFE0 /* PBXContainerItemProxy */;
+		};
+		6AAF6EB20EAB781300F4DFE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D403C5F20EA3D5C0006F0A89 /* OVOFHanConvert */;
+			targetProxy = 6AAF6EB30EAB781300F4DFE0 /* PBXContainerItemProxy */;
+		};
+		6AAF6EB40EAB781300F4DFE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D403C5750EA3D49E006F0A89 /* OVOFFullWidthCharacter */;
+			targetProxy = 6AAF6EB50EAB781300F4DFE0 /* PBXContainerItemProxy */;
+		};
+		6AAF6F740EAB794B00F4DFE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6AAF6E9F0EAB781300F4DFE0 /* OpenVanilla (LoaderServer for TSM) */;
+			targetProxy = 6AAF6F730EAB794B00F4DFE0 /* PBXContainerItemProxy */;
 		};
 		6AB6CE730E9CF49C0001B127 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1299,6 +1657,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1414,6 +1774,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1458,6 +1820,113 @@
 			};
 			name = Release;
 		};
+		6AAF6E1A0EAB772C00F4DFE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "Loaders/OSX-TSM/OpenVanilla-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenVanilla;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		6AAF6E1B0EAB772C00F4DFE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "Loaders/OSX-TSM/OpenVanilla-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenVanilla;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		6AAF6ECF0EAB781300F4DFE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "Loaders/OSX-TSM/OVLoaderServer-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVLoaderServer;
+				SDKROOT = "";
+			};
+			name = Debug;
+		};
+		6AAF6ED00EAB781300F4DFE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "Loaders/OSX-TSM/OVLoaderServer-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVLoaderServer;
+				SDKROOT = "";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		6AB6CE6D0E9CF4700001B127 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1492,7 +1961,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "OpenVanilla-Info.plist";
+				INFOPLIST_FILE = "Loaders/OSX-IMK/OpenVanilla-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1530,13 +1999,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				INFOPLIST_FILE = "OVIMTibetan-Info.plist";
+				INFOPLIST_FILE = "Modules/OVIMTibetan/OVIMTibetan-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1573,6 +2044,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1613,6 +2086,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1653,6 +2128,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1693,6 +2170,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1733,6 +2212,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1777,6 +2258,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1822,6 +2305,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1883,6 +2368,24 @@
 			buildConfigurations = (
 				6A6A86FB0E8683CB00B94B7F /* Debug */,
 				6A6A86FC0E8683CB00B94B7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6AAF6E1C0EAB772C00F4DFE0 /* Build configuration list for PBXNativeTarget "OpenVanilla (TSM Component)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AAF6E1A0EAB772C00F4DFE0 /* Debug */,
+				6AAF6E1B0EAB772C00F4DFE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6AAF6ECE0EAB781300F4DFE0 /* Build configuration list for PBXNativeTarget "OpenVanilla (LoaderServer for TSM)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AAF6ECF0EAB781300F4DFE0 /* Debug */,
+				6AAF6ED00EAB781300F4DFE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -54,7 +54,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSCustomView" id="408218890">
 							<reference key="NSNextResponder" ref="904103643"/>
-							<int key="NSvFlags">286</int>
+							<int key="NSvFlags">274</int>
 							<string key="NSFrameSize">{382, 109}</string>
 							<reference key="NSSuperview" ref="904103643"/>
 							<string key="NSClassName">LVTextView</string>
@@ -243,6 +243,13 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Loaders/OSX-IMK/LVUIController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Loaders/OSX-TSM/InputMethodKitTiger.h</string>
 					</object>
 				</object>
 			</object>

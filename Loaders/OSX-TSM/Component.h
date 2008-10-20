@@ -1,6 +1,7 @@
-// LVComposingBuffer.h: Composing buffer object for text service component
 //
-// Copyright (c) 2004-2007 The OpenVanilla Project (http://openvanilla.org)
+// Component.h
+//
+// Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
@@ -28,28 +29,37 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef LVComposingBuffer_h
-#define LVComposingBuffer_h
+// AppleComponent stands for "Apple component return type"
+#define AppleComponent    pascal ComponentResult      // no extern "C" here
 
-#import "TSComposingBuffer.h"
+// main entry point
+AppleComponent TSMCDispatch(ComponentParameters *param, Handle hndl);
 
-@class LVInputMethodController;
+// we implement these in this module
+AppleComponent TSMCCanDo(SInt16 selector);
+AppleComponent TSMCGetVersion();
+AppleComponent TSMCGetScriptLangSupport(Handle hndl, ScriptLanguageSupportHandle *outhndl);
 
-class LVComposingBuffer : public TSComposingBuffer
-{
-public:
-	LVComposingBuffer(LVInputMethodController *controller);
-    virtual TSComposingBuffer* clear();
-    virtual TSComposingBuffer* send();
-    virtual TSComposingBuffer* update(Boolean send = FALSE, int cursor = -1, int markFrom = -1, int markTo = -1);
-    virtual TSComposingBuffer* append(NSString* s);
-    virtual Boolean isEmpty();
-    
-    virtual Point getAppCursorPosition();
-    virtual NSMutableString* getContent();
-    
-protected:
-	LVInputMethodController *m_controller;
-};
+// component entry points
+AppleComponent TSMCOpenComponent(ComponentInstance inst);
+AppleComponent TSMCCloseComponent(Handle hndl, ComponentInstance inst);
 
-#endif
+// text service component entry points
+AppleComponent TSMCInitiateTextService(Handle hndl);
+AppleComponent TSMCTerminateTextService(Handle hndl);
+AppleComponent TSMCActivateTextService(Handle hndl);
+AppleComponent TSMCDeactivateTextService(Handle hndl);
+AppleComponent TSMCTextServiceEvent(Handle hndl, EventRef evnt);
+AppleComponent TSMCGetTextServiceMenu(Handle hndl, MenuHandle *mnu);
+AppleComponent TSMCFixTextService(Handle hndl);
+AppleComponent TSMCHidePaletteWindows(Handle hndl);
+
+// initializer (pencil menu, bundle loading, call TSB init)
+AppleComponent TSMCInitialize(ComponentInstance inst);
+
+// menu handler
+pascal OSStatus TSMCMenuHandler(EventHandlerCallRef callref, EventRef evnt, void *userdata);
+
+//
+// Free Tibet.
+//

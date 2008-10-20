@@ -3,42 +3,42 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>zh_TW</string>
+	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>LeopardVanilla</string>
+	<string>OpenVanilla</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.inputmethod.leopardvanilla</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
+	<string>org.openvanilla.LoaderServer</string>
 	<key>CFBundleName</key>
 	<string>${PRODUCT_NAME}</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
 	<string>OPVN</string>
 	<key>CFBundleVersion</key>
-	<string>0.8.0.3</string>
-	<key>CSResourcesFileMapped</key>
-	<true/>
+	<string>0.9.0</string>
 	<key>InputMethodConnectionName</key>
-	<string>LeopardVanilla_1_Connection</string>
+	<string>OpenVanilla_090_Connection</string>
 	<key>InputMethodServerControllerClass</key>
-	<string>LVInputMethodController</string>
+	<string>LVInputController</string>
 	<key>InputMethodServerDelegateClass</key>
-	<string>LVInputMethodController</string>
+	<string>LVInputController</string>
 	<key>LSBackgroundOnly</key>
 	<string>0</string>
+	<key>LSHasLocalizedDisplayName</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>All Rights Reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>TISInputSourceID</key>
-	<string>org.openvanilla.inputmethod.leopardvanilla</string>
+	<string>org.openvanilla.inputmethod.LoaderIMK</string>
 	<key>tsInputMethodIconFileKey</key>
-	<string>OpenVanillaInputMenu.icns</string>
-	<key>LSHasLocalizedDisplayName</key>
-	<true/>	
+	<string>OpenVanilla.icns</string>
 </dict>
 </plist>

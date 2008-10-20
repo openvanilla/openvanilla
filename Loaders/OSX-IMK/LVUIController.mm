@@ -1,3 +1,6 @@
+//
+// LVUIController.mm
+//
 // Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
@@ -43,13 +46,20 @@
 }
 - (void)setCandidateWindowOrigin:(NSPoint)origin
 {
+	NSLog(@"Origin: %@", NSStringFromPoint(origin));
 	NSRect frameRect = [_candidateWindow frame];
-	origin.y -= frameRect.size.height;
+
+	NSLog(@"Old window frame: %@", NSStringFromRect(frameRect));
+	
+    origin.y -= ([_candidateTextView boundingRectForText].size.height + 5.0);
+	
+	NSLog(@"setting origin: %@", NSStringFromPoint(origin));
+	
 	[_candidateWindow setFrameOrigin:origin];
 }
 - (void)updateCandidateText:(NSString *)text
 {
-	[_candidateTextView setSimpleText:text];
+	[_candidateTextView setSimpleText:text];	
 	[_candidateWindow setContentSize:[_candidateTextView boundingRectForText].size];
 }
 - (void)showTooltipWithText:(NSString *)text

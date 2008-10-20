@@ -1,3 +1,6 @@
+//
+// LVInputController.mm
+//
 // Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
@@ -83,7 +86,34 @@
 
 - (void)_updateComposingBuffer:(id)client cursorAtIndex:(NSUInteger)cursorIndex highlightRange:(NSRange)range
 {
-	#warning Calculate UTF-16
+	// we first need to map the cursor and highlight range (which are codepoint-based) to UniChar-based indexes
+	vector<string> codepoints = OVUTF8Helper::SplitStringByCodePoint(_composingBuffer->composingBuffer());	
+	vector<size_t> unicharIndex;	
+	size_t accuIndex = 0;
+	
+	unicharIndex.push_back(0);
+	for (vector<string>::const_iterator citer = codepoints.begin() ; citer != codepoints.end() ; ++citer) {
+		unicharIndex.push_back(OVUTF16::FromUTF8(*citer).length());
+	}
+	
+	if (cursorIndex <= unicharIndex.size()) {
+		cursorIndex = unicharIndex[cursorIndex];
+	}
+	
+	if (range.location != NSNotFound) {
+		if (range.length != NSNotFound) { 
+			NSInteger to = range.location + range.length;
+			if (to <= unicharIndex.size()) {
+				range.length = unicharIndex[to] - unicharIndex[range.location];
+			}
+		}
+		
+		if (range.location <= unicharIndex.size()) {
+			range.location = unicharIndex[range.location];
+		}
+	}
+
+	
 	NSString *composingBuffer = [NSString stringWithUTF8String:_composingBuffer->composingBuffer().c_str()];
 	
 	NSMutableAttributedString *attrString = [[[NSMutableAttributedString alloc] initWithString:composingBuffer attributes:[NSDictionary dictionary]] autorelease];    
@@ -203,10 +233,8 @@
 		
 		LVKeyCode keyCode;		
         if (cocoaModifiers & NSAlphaShiftKeyMask) keyCode.capsLock = true;
-        // if (cocoaModifiers & NSShiftKeyMask) vanillaModifiers |= OVKeyMask::Shift;
         if (cocoaModifiers & NSControlKeyMask) keyCode.ctrl = true;
         if (cocoaModifiers & NSAlternateKeyMask) keyCode.opt = true;
-        // if (cocoaModifiers & NSCommandKeyMask) vanillaModifiers |= OVKeyMask::Command;
 
 		UInt32 numKeys[16] = {    
 			0x52, 0x53, 0x54, 0x55, 0x56, 0x57, // 0,1,2,3,4,5
@@ -215,7 +243,7 @@
 		
 		for (size_t i = 0; i < 16; i++) {
 			if (virtualKeyCode == numKeys[i]) {
-                // vanillaModifiers |= OVKeyMask::NumLock; // only if it's numpad key we put mask back
+                keyCode.num = true;
 				break;
 			}
 		}
@@ -278,8 +306,6 @@
 	else {
 		[uiController hideCandidateWindow];
 	}
-	
-	
 	
     return handled;
 }
