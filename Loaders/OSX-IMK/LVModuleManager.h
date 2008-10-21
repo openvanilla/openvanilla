@@ -123,6 +123,9 @@ protected:
 - (void)setPrimaryInputMethodModuleID:(NSString *)moduleID;
 - (NSString *)primaryInputMethodModuleID;
 - (NSArray *)inputMethodTitlesAndModuleIDs;
+
+- (NSMutableDictionary *)configDictionary;
+- (void)forceSyncConfiguration;
 @end
 
 @interface LVModuleManager (ProtectedMethods)

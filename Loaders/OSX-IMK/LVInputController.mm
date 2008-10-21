@@ -313,7 +313,6 @@
 - (void)_switchInputMethodAction:(id)sender
 {
     NSMenuItem *menuItem = [sender objectForKey:@"IMKCommandMenuItem"];
-	
 	[[LVModuleManager sharedManager] setPrimaryInputMethodModuleID:[menuItem representedObject]];
 	[self _recreateSandwich];
 }
