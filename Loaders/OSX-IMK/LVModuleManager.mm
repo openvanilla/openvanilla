@@ -229,6 +229,32 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 	[self _writeConfigurationFile];	
 }
 
+- (void)_notify:(BOOL)sendNotification
+{
+	// tell every usable module that some configuration has been changed
+	
+	NSEnumerator *keyEnum = [_loadedModuleDictionary keyEnumerator];
+	NSString *moduleIdentifier;
+	while (moduleIdentifier = [keyEnum nextObject]) {
+		LVModule *module = [_loadedModuleDictionary objectForKey:moduleIdentifier];
+		if ([module isInitialized]  && [module isUsable]) {
+			OVModule *moduleObject = [module moduleObject];
+			NSMutableDictionary *configDict = [_configDictionary objectForKey:[module moduleIdentifier]];
+			if (!configDict) {
+				configDict = [NSMutableDictionary dictionary];
+				[_configDictionary setObject:configDict forKey:[module moduleIdentifier]];
+			}		
+			
+			LVDictionary dict(configDict);
+			moduleObject->update(&dict, _loaderService);
+		}
+	}
+	
+	if (sendNotification) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:LVModuleConfigChangedNotification object:self];
+	}	
+}
+
 - (void)_syncConfigurationWithNotification:(BOOL)sendNotification
 {
 	NSDictionary *oldConfigDict = [[_configDictionary mutableDeepCopy] autorelease];
@@ -256,28 +282,7 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 	_primaryInputMethodModuleID = [[_configDictionary objectForKey:LVPrimaryInputMethodKey] retain];
 		
 	if (![oldConfigDict isEqualToDictionary:_configDictionary]) {
-		// tell every usable module that some configuration has been changed
-		
-		NSEnumerator *keyEnum = [_loadedModuleDictionary keyEnumerator];
-		NSString *moduleIdentifier;
-		while (moduleIdentifier = [keyEnum nextObject]) {
-			LVModule *module = [_loadedModuleDictionary objectForKey:moduleIdentifier];
-			if ([module isInitialized]  && [module isUsable]) {
-				OVModule *moduleObject = [module moduleObject];
-				NSMutableDictionary *configDict = [_configDictionary objectForKey:[module moduleIdentifier]];
-				if (!configDict) {
-					configDict = [NSMutableDictionary dictionary];
-					[_configDictionary setObject:configDict forKey:[module moduleIdentifier]];
-				}		
-				
-				LVDictionary dict(configDict);
-				moduleObject->update(&dict, _loaderService);
-			}
-		}
-		
-		if (sendNotification) {
-			[[NSNotificationCenter defaultCenter] postNotificationName:LVModuleConfigChangedNotification object:self];
-		}
+		[self _notify:sendNotification];
 	}
 
 	[self _writeConfigurationFile];
@@ -457,6 +462,15 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 	return result;
 }
 
+- (NSMutableDictionary *)configDictionary
+{
+	return _configDictionary;
+}
+- (void)forceSyncConfiguration
+{
+	[self _writeConfigurationFile];
+	[self _notify:YES];
+}
 @end
 
 @implementation LVModuleManager (ProtectedMethods)

@@ -58,7 +58,7 @@
 }
 - (void)drawRect:(NSRect)aRect
 {
-	[[NSColor colorWithCalibratedRed:0.1 green:0.1 blue:0.1 alpha:1.0] setFill];
+	[[NSColor colorWithCalibratedRed:0.1 green:0.1 blue:0.5 alpha:1.0] setFill];
 	[NSBezierPath fillRect:aRect];
 	[_attributeString drawAtPoint:NSMakePoint(0.0, 0.0)];
 }
