@@ -285,7 +285,7 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 		[self _notify:sendNotification];
 	}
 
-	[self _writeConfigurationFile];
+	[self _validateAndWriteConfig];
 }
 
 - (void)delloc
@@ -393,7 +393,7 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 		}
 	}
 	
-	[self _syncConfigurationWithNotification:NO];
+	[self _validateAndWriteConfig];
 }
 - (LVService*)loaderService
 {
