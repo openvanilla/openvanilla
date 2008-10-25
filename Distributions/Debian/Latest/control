@@ -1,7 +1,7 @@
 Source: openvanilla
 Priority: optional
 Maintainer: Mat <MatLinuxer2@gmail.com>
-Build-Depends: debhelper (>= 4.0.0), autotools-dev
+Build-Depends: debhelper, autotools-dev
 Standards-Version: 3.6.1
 Section: libs
 
