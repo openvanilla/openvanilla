@@ -8,8 +8,9 @@ AC_CONFIG_HEADER([config.h])
 
 # Check variables
 AC_ARG_WITH( cin, AC_HELP_STRING([--with-cin=CIN_FILEPATH], [to use custom cin file]),[CIN=$withval],[CIN=""])
-AC_SUBST(CIN)
-AM_CONDITIONAL( WITH_CIN,[test "x$CIN" != "x"  ])
+if test -e $CIN; then
+cp -v $CIN single.cin
+fi
 
 AC_ARG_WITH( name,AC_HELP_STRING([--with-name=MODULE_NAME],[to use custom module name]),[NAME=$withval],[NAME=""])
 AC_DEFINE_UNQUOTED( NAME, "$NAME",[name for the single module])

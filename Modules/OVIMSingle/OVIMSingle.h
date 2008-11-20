@@ -1,4 +1,4 @@
-// OVIMGeneric.h: Generic Input Method, reads .cin
+// OVIMSingle.h: Single Input Method, reads .cin
 //
 // Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
@@ -28,8 +28,8 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef __OVIMGeneric_h
-#define __OVIMGeneric_h
+#ifndef __OVIMSingle_h
+#define __OVIMSingle_h
 
 #ifndef WIN32
 	#include <OpenVanilla/OpenVanilla.h>
@@ -58,10 +58,10 @@
 
 using namespace std;
 
-class GenericKeySequence : public OVKeySequenceSimple
+class SingleKeySequence : public OVKeySequenceSimple
 {
 public:
-    GenericKeySequence(OVCIN* cintab);
+    SingleKeySequence(OVCIN* cintab);
     virtual int length() { return len; }
     virtual bool add(char c);
     virtual bool valid(char c);
@@ -72,12 +72,12 @@ protected:
     OVCIN* cinTable;
 };
 
-class OVIMGeneric;
+class OVIMSingle;
 
-class OVGenericContext : public OVInputMethodContext
+class OVSingleContext : public OVInputMethodContext
 {
 public:
-    OVGenericContext(OVIMGeneric* p, OVCIN* tab) : 
+    OVSingleContext(OVIMSingle* p, OVCIN* tab) : 
         parent(p), keyseq(tab), cintab(tab), autocomposing(false) {}
     virtual int keyEvent(OVKeyCode*, OVBuffer*, OVCandidate*, OVService*);
     virtual void clear();
@@ -88,8 +88,8 @@ protected:
     virtual int candidateEvent(OVKeyCode*, OVBuffer*, OVCandidate*, OVService*);
     virtual void cancelAutoCompose(OVCandidate *textbar);
     
-    OVIMGeneric* parent;
-    GenericKeySequence keyseq;
+    OVIMSingle* parent;
+    SingleKeySequence keyseq;
     OVCandidateList candi;
     OVCIN* cintab;
     
@@ -97,11 +97,11 @@ protected:
     vector<string> candidateStringVector;
 };
 
-class OVIMGeneric : public OVInputMethod
+class OVIMSingle : public OVInputMethod
 {
 public:
-    OVIMGeneric(const OVCINInfo& ci);
-    virtual ~OVIMGeneric();
+    OVIMSingle(const OVCINInfo& ci);
+    virtual ~OVIMSingle();
     virtual const char* identifier();
     virtual const char* localizedName(const char* locale);
     virtual int initialize(OVDictionary*, OVService*, const char*);

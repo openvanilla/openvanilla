@@ -10,8 +10,3 @@ libovim@NAME@_la_CPPFLAGS = -I../SharedHeaders/
 
 ovimsingledir=$(libdir)/OVIM@NAME@/
 ovimsingle_DATA=single.cin
-
-if WITH_CIN
-install-data-hook:
-	cp -v @CIN@ single.cin
-endif
