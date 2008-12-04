@@ -31,6 +31,18 @@
 #include "CIN-Defaults.h"
 #include <stdlib.h>
 
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+/*
+SINGLE_MAXSEQLEN 
+SINGLE_AUTOCOMPOSE
+SINGLE_HITMAX
+SINGLE_SHIFTSELECTIONKEY
+ will be defined in config.h via configure
+*/
+
 #include "OVOSDef.h"
 /*
 #ifndef WIN32
@@ -99,6 +111,7 @@ bool CINSetDefaults(const char *shortname, OVDictionary *dict) {
     if (S, "wubizixing.cin", 4, 0, 1) R;  // maxlen=4, hitmax&cmpse;
     if (S, "wus.cin", 13) R;
     if (S, "wut.cin", 13) R;
+    if (S, "single.cin", SINGLE_MAXSEQLEN, SINGLE_AUTOCOMPOSE, SINGLE_HITMAX, SINGLE_SHIFTSELECTIONKEY ) R;
     
     CINSetConfig(NULL, dict, NULL, 7);
     return true;

@@ -17,6 +17,22 @@ AC_DEFINE_UNQUOTED( NAME, "$NAME",[name for the single module])
 AC_SUBST(NAME)
 #AM_CONDITIONAL(WITH_NAME,[test "x$NAME" != "x" ])
 
+AC_ARG_WITH( maxseqlen,AC_HELP_STRING([--with-maxseqlen=MAXLEN],[max length of input seqence]),[MAXSEQLEN=$withval],[MAXSEQLEN="4"])
+AC_DEFINE_UNQUOTED( SINGLE_MAXSEQLEN, "$MAXSEQLEN",[max length of input seqence])
+AC_SUBST(SINGLE_MAXSEQLEN)
+
+AC_ARG_WITH( autocompose,AC_HELP_STRING([--with-autocompose],[to enable autocompose or not]),[AUTOCOMPOSE="1"],[AUTOCOMPOSE="0"])
+AC_DEFINE_UNQUOTED( SINGLE_AUTOCOMPOSE, "$AUTOCOMPOSE",[to enable autocompose or not])
+AC_SUBST(SINGLE_AUTOCOMPOSE)
+
+AC_ARG_WITH( hitmax,AC_HELP_STRING([--with-hitmax],[to enable hitmax or not]),[HITMAX="1"],[HITMAX="0"])
+AC_DEFINE_UNQUOTED( SINGLE_HITMAX, "$HITMAX",[to enable hitmax or not])
+AC_SUBST(SINGLE_HITMAX)
+
+AC_ARG_WITH( shiftselectionkey,AC_HELP_STRING([--with-shiftselectionkey],[to enable shiftselectionkey or not]),[SHIFTSELECTIONKEY="1"],[SHIFTSELECTIONKEY="0"])
+AC_DEFINE_UNQUOTED( SINGLE_SHIFTSELECTIONKEY, "$SHIFTSELECTIONKEY",[to enable shiftselectionkey or not])
+AC_SUBST(SINGLE_SHIFTSELECTIONKEY)
+
 
 # Checks for programs.
 AC_PROG_CXX
