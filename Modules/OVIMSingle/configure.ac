@@ -65,6 +65,8 @@ AC_FUNC_SELECT_ARGTYPES
 AC_FUNC_STAT
 AC_CHECK_FUNCS([bzero floor memset munmap select setenv strcasecmp strchr strcspn strspn strstr strtol])
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile
+		SharedHeaders/Makefile
+		SharedSource/Makefile])
 
 AC_OUTPUT
