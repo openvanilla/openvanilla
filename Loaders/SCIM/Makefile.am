@@ -1,1 +1,2 @@
-SUBDIRS = src
+AUTOMAKE_OPTIONS=foreign
+SUBDIRS = src 

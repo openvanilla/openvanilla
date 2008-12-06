@@ -1,7 +1,3 @@
-## Makefile.am -- Process this file with automake to produce Makefile.in
-
-MAINTAINERCLEANFILES = Makefile.in
-
 INCLUDES = \
 	-I$(top_builddir) \
 	-I$(top_srcdir) \
@@ -13,13 +9,12 @@ INCLUDES = \
 	-DSCIM_ICONDIR=\"@SCIM_ICONDIR@\" \
 	-DSCIM_CHEWING_ICON_FILE=\"@SCIM_ICONDIR@/scim-chewing.png\" 
 	
-
 #noinst_HEADERS = scim_chewing_imengine.h scim_chewing_config_entry.h
 
 moduledir = @SCIM_MODULEDIR@/IMEngine
 module_LTLIBRARIES = OVLoader-SCIM.la
 
-OVLoader_SCIM_la_SOURCES  = OVLoader-SCIM.cpp
+OVLoader_SCIM_la_SOURCES  = AVDictionary.cpp AVConfig.cpp OVLoader-SCIM.cpp AVConfig.h AVDictionary.h DummyLoader.h OVLoader-SCIM.h
 
 OVLoader_SCIM_la_CFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@ 
 OVLoader_SCIM_la_CXXFLAGS = @SCIM_CFLAGS@ @SCIM_DEBUG_FLAGS@ 
@@ -33,3 +28,4 @@ OVLoader_SCIM_la_LDFLAGS = \
 	@LIBTOOL_EXPORT_OPTIONS@ \
 	@INTLLIBS@ @SCIM_LIBS@ 
 
+EXTRA_DIST= OpenVanilla/OVLibrary.h OpenVanilla/OVUtility.h OpenVanilla/OpenVanilla.h

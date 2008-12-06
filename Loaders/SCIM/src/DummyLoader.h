@@ -33,12 +33,12 @@ class DummyKeyCode : public OVKeyCode  {
 public:
     DummyKeyCode (int p=0)          { chr=p; shift=capslock=ctrl=alt=0; }
     virtual int code()              { return chr; }
-    virtual int isShift()           { return shift; }
-    virtual int isCapslock()        { return capslock; }
-    virtual int isCtrl()            { return ctrl; }
-    virtual int isAlt()             { return alt; }
-    virtual int isOpt()             { return alt; }
-    virtual int isNum()             { return 0; }
+    virtual bool isShift()           { return shift; }
+    virtual bool isCapslock()        { return capslock; }
+    virtual bool isCtrl()            { return ctrl; }
+    virtual bool isAlt()             { return alt; }
+    virtual bool isOpt()             { return alt; }
+    virtual bool isNum()             { return 0; }
     
     virtual void setCode(int x)     { chr=x; }
     virtual void setShift(int x)    { shift=x; }
@@ -84,7 +84,7 @@ public:
         im->update_preedit_caret(cursorPos);
         return this;
     }
-    virtual int isEmpty() {
+    virtual bool isEmpty() {
         if (!strlen(buf)) return 1;
         return 0;
     }
@@ -128,7 +128,7 @@ public:
         im->update_aux_string(utf8_mbstowcs(buf));
         return this;
     }
-    virtual int onScreen() {
+    virtual bool onScreen() {
         return onscreen;
     }
 

@@ -11,11 +11,12 @@
 
 #include "OVLoader-SCIM.h"
 
-#include "../../AmphiVanilla/AVConfig.h"
+#include "AVConfig.h"
 
 #include <stdio.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <iostream>
 
 AVConfig im_config("/tmp/org.openvanilla.072.plist");
 
@@ -92,11 +93,14 @@ OPEN_FAILED:
 static int scan_ov_modules(){
    DIR* dir = opendir(OV_MODULEDIR);
    DummyService srv;
+   std::cerr << "Load OV module Start " << "\n";
    if(dir){
       struct dirent *d_ent;
       while( (d_ent = readdir(dir)) != NULL ){
          if( strstr( d_ent->d_name, ".so" ) ){
             SCIM_DEBUG_IMENGINE(2) << "Load OV module: " << d_ent->d_name << "\n";
+	    std::cerr << "Load OV module: " << d_ent->d_name << "\n";
+
             OVLibrary* mod = open_module(d_ent->d_name);
             if(mod){
                OVModule* m;
@@ -109,6 +113,7 @@ static int scan_ov_modules(){
       }
       closedir(dir);
    }
+   std::cerr << "Load OV module end:" << mod_vector.size() << "\n";
    return mod_vector.size();
 }
 

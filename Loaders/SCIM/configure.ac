@@ -1,6 +1,6 @@
 AC_PREREQ(2.59)
 
-AC_INIT(OVLoader-SCIM, 0.1.0, openvanilla.org)
+AC_INIT(OVLoader-SCIM, 0.1.4, openvanilla.org)
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/OVLoader-SCIM.cpp])
 
@@ -75,16 +75,9 @@ if test "x$SCIM_MODULEDIR" = "x"; then
 fi
 
 if test "x$OV_MODULEDIR" = "x"; then
-   OV_MODULEDIR="/usr/local/lib/openvanilla/"
+   OV_MODULEDIR="/usr/lib/openvanilla/"
 fi
 
-maybe_ov_header=`pwd`/../../Framework/Headers/OpenVanilla.h
-if test -f $maybe_ov_header ; then
-  OV_HEADER=\"$maybe_ov_header\"
-else
-  dnl Use assumed path
-  OV_HEADER=\"/usr/local/include/OpenVanilla/OpenVanilla.h\"
-fi
 
 AC_SUBST(SCIM_ICONDIR)
 AC_SUBST(SCIM_MODULEDIR)
@@ -92,6 +85,6 @@ AC_SUBST(SCIM_DATADIR)
 AC_SUBST(OV_MODULEDIR)
 AC_SUBST(OV_HEADER)
 
-
-AC_CONFIG_FILES([Makefile src/Makefile])
+AC_CONFIG_FILES([Makefile 
+		 src/Makefile])
 AC_OUTPUT
