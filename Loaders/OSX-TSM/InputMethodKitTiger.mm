@@ -189,11 +189,18 @@
     NSMenuItem *item;
     
     while (item = [e nextObject]) {
-        [translatedArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-            ([item isSeparatorItem] ? @"-" : [item title]), @"Title",
-            [NSNumber numberWithBool:[item isEnabled]], @"IsEnabled",
-            [NSNumber numberWithInt:[item state]], @"State",
-            nil]];
+		NSMutableDictionary *newItem = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+										([item isSeparatorItem] ? @"-" : [item title]), @"Title",
+										[NSNumber numberWithBool:[item isEnabled]], @"IsEnabled",
+										[NSNumber numberWithInt:[item state]], @"State",
+										nil]];
+		
+		if ([[item keyEquivalent] length]) {
+			[newItem setObject:[item keyEquivalent] forKey:@"KeyEquivalent"];
+			[newItem setObject:[NSNumber numberWithInt:[item keyEquivalentModifierMask]] forKey:@"KeyEquivalentModifierMask"];
+		}
+		
+        [translatedArray addObject:newItem];
     }
     
     return translatedArray;

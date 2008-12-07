@@ -33,6 +33,14 @@
 #import "LVModuleManager.h"
 #import "LVUIController.h"
 
+@interface NSObject (LVInputControllerPrivateInterface)
+- (bool)_handleExtraKeyAction:(OVKeyCode*)k;
+@end
+
+
+static LVInputController *LVICCurrentlyActiveController = nil;
+static id LVICCurrentlyActiveSender = nil;
+
 @implementation LVInputController
 - (id)initWithServer:(IMKServer*)server delegate:(id)delegate client:(id)inputClient
 {
@@ -54,6 +62,15 @@
 	delete _composingBuffer;
     [super dealloc];
 }
+
++ (void)setActiveContext:(LVInputController *)context sender:(id)sender
+{
+    LVICCurrentlyActiveController = context;	
+	id tmp = LVICCurrentlyActiveSender;	
+    LVICCurrentlyActiveSender = [sender retain];
+	[tmp release];
+}
+
 - (void)_resetUI
 {
 	_candidateText->clear();
@@ -68,6 +85,36 @@
 	[uiController hideCandidateWindow];
 	[uiController hideTooltip];
 }
+- (void)sendComposedStringToClient:(NSString *)text sender:(id)sender
+{	
+	_composingBuffer->clear();
+	_composingBuffer->clearCommittedString();
+	_composingBuffer->append([text UTF8String]);
+	_composingBuffer->send();
+	
+ 	// force commit
+	_contextSandwich->clear();
+	_committedByOurselves = YES;
+	[self commitComposition:sender];
+
+	// set again, because this flag is reset by commitComposition:
+	_committedByOurselves = YES;
+	[self _resetUI];	
+	_committedByOurselves = NO;
+	
+	[[LVModuleManager sharedManager] loaderService]->cleartNotifyMessage();
+}
+
++ (void)sendComposedStringToCurrentlyActiveContext:(NSString *)text
+{
+    if (LVICCurrentlyActiveController && LVICCurrentlyActiveSender && [text length]) {
+//		NSLog(@"Sending direct text: %@", text);
+        [LVICCurrentlyActiveController sendComposedStringToClient:text sender:LVICCurrentlyActiveSender];
+    }
+    else {
+    }
+}
+
 - (void)_recreateSandwich
 {
 	[self _resetUI];
@@ -180,13 +227,14 @@
 		NSRect screenFrame = [screen frame];
 		
 		if (!hasFocus && caretPosition.x >= NSMinX(screenFrame) && caretPosition.x <= NSMaxX(screenFrame)) {
-			frame = screenFrame;
+			frame = [screen visibleFrame];
 			hasFocus = YES;
 			break;
 		}
 	}
 	
-	if (hasFocus) {		
+	if (hasFocus) {
+		LVUIController *uiController = (LVUIController *)[NSApp delegate];
 		return caretPosition;
 	}
 
@@ -194,6 +242,51 @@
 	point.x = (int)(frame.size.width / 2.0);
 	point.y = (int)(frame.size.height / 2.0);
 	return point;
+}
+- (void)_handleCandidateWindow:(id)sender
+{
+    // update cursor position
+    NSPoint caretPosition;
+    NSRect lineHeightRect;
+	[sender attributesForCharacterIndex:0 lineHeightRectangle:&lineHeightRect];
+	
+	LVUIController *uiController = (LVUIController *)[NSApp delegate];
+	
+	if (_candidateText->shouldUpdate()) {
+		NSString *text = [NSString stringWithUTF8String:_candidateText->candidateText().c_str()];		
+		[uiController updateCandidateText:text];
+		caretPosition = [self _fixCaretPosition:lineHeightRect.origin];			
+		[uiController setCandidateWindowOrigin:caretPosition];
+		_candidateText->clearUpdateState();
+	}
+	
+    if (_candidateText->onScreen()) 
+		[uiController showCandidateWindow];
+	else
+		[uiController hideCandidateWindow];
+}
+- (void)_handleNotifyMessage:(id)sender
+{
+	LVService* service = [[LVModuleManager sharedManager] loaderService];
+	NSString* notifyMsg = [NSString stringWithUTF8String:service->notifyMessage().c_str()];
+	
+	LVUIController *uiController = (LVUIController *)[NSApp delegate];
+	
+	if ([notifyMsg length]) {
+		// show notify message at current caret position, adjust position if there's already candidate window
+		NSPoint location;
+		NSRect lineHeightRect;
+		[sender attributesForCharacterIndex:0 lineHeightRectangle:&lineHeightRect];
+		location = lineHeightRect.origin;
+		
+		#warning No tooltip yet
+//		[uiController showTooltipWithText:notifyMsg atPoint:location];		
+		service->cleartNotifyMessage();
+	}
+	else {
+		[uiController hideTooltip];
+		// hide notify message tooltip if there's already one, otherwise do nothing
+	}
 }
 - (unsigned int)recognizedEvents:(id)sender
 {
@@ -208,17 +301,49 @@
 	[self _resetUI];
 	[[LVModuleManager sharedManager] syncConfiguration];
 	_contextSandwich->start(_composingBuffer, _candidateText, [[LVModuleManager sharedManager] loaderService]);
+	[[self class] setActiveContext:self sender:sender];
+	
+	// this clears the composing buffer in Tiger, important
+    [self _updateComposingBuffer:sender cursorAtIndex:_composingBuffer->cursorIndex() highlightRange:NSMakeRange(NSNotFound, NSNotFound)];	
 }
 - (void)deactivateServer:(id)sender
 {
+	[[self class] setActiveContext:nil sender:nil];
+
+    _committedByOurselves = NO;
+	_composingBuffer->clear();
+	_composingBuffer->clearCommittedString();
+    [self commitComposition:sender];
+
 	_contextSandwich->end();
 	[self _resetUI];	
 }
 - (void)commitComposition:(id)sender 
-{    
-	NSString *committedText = [NSString stringWithUTF8String:_composingBuffer->committedString().c_str()];
-    [sender insertText:committedText replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
-	_composingBuffer->clearCommittedString();
+{    	
+	if (_committedByOurselves) {
+	    _committedByOurselves = NO;
+    }
+    else {
+        _contextSandwich->clear();
+		_composingBuffer->clear();
+		_composingBuffer->clearCommittedString();
+        [self _resetUI];
+    }
+	
+	if (_composingBuffer->committedString().length()) {
+		// NSLog(@"updating buffer");
+		NSString *committedText = [NSString stringWithUTF8String:_composingBuffer->committedString().c_str()];
+
+		// we can't use the following line because this will create an NSAttributeString with underline attributes;
+		// to workaround the bug in PowerPoint 2008, we need to give a "no-attr" NSAttributeString
+		// [self _updateComposingBuffer:sender cursorAtIndex:_composingBuffer->cursorIndex() highlightRange:NSMakeRange(NSNotFound, NSNotFound)];
+		NSMutableAttributedString *attrString = [[[NSMutableAttributedString alloc] initWithString:committedText attributes:[NSDictionary dictionary]] autorelease];    
+		[sender setMarkedText:attrString selectionRange:NSMakeRange([committedText length], 0) replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
+		
+		
+		[sender insertText:committedText replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
+		_composingBuffer->clearCommittedString();	
+	}
 }
 - (BOOL)handleEvent:(NSEvent*)event client:(id)sender
 {
@@ -234,8 +359,10 @@
 		
 		LVKeyCode keyCode;		
         if (cocoaModifiers & NSAlphaShiftKeyMask) keyCode.capsLock = true;
-        if (cocoaModifiers & NSControlKeyMask) keyCode.ctrl = true;
+        if (cocoaModifiers & NSControlKeyMask) keyCode.ctrl = true;        
         if (cocoaModifiers & NSAlternateKeyMask) keyCode.opt = true;
+        if (cocoaModifiers & NSCommandKeyMask) keyCode.command = true;
+		if (cocoaModifiers & NSShiftKeyMask) keyCode.shift = true;
 
 		UInt32 numKeys[16] = {    
 			0x52, 0x53, 0x54, 0x55, 0x56, 0x57, // 0,1,2,3,4,5
@@ -261,7 +388,12 @@
 			keyCode.keyCode = unicharCode;
 			
             if (unicharCode < 128) {
-				handled = _contextSandwich->keyEvent(&keyCode, _composingBuffer, _candidateText, [[LVModuleManager sharedManager] loaderService]);
+				if ([self respondsToSelector:@selector(_handleExtraKeyAction:)]) {
+					handled = [self _handleExtraKeyAction:&keyCode];
+				}
+				if (!handled) {
+					handled = _contextSandwich->keyEvent(&keyCode, _composingBuffer, _candidateText, [[LVModuleManager sharedManager] loaderService]);
+				}
             }
             else {
             }
@@ -271,7 +403,9 @@
     }
 	
 	if (_composingBuffer->shouldCommit()) {
+        _committedByOurselves = YES;
 		[self commitComposition:sender];
+        
 		_composingBuffer->clearCommittedString();
 	}
 	
@@ -284,29 +418,9 @@
 		
 		[self _updateComposingBuffer:sender cursorAtIndex:_composingBuffer->cursorIndex() highlightRange:highlightRange];
 	}
-	
 
-    // update cursor position
-    NSPoint caretPosition;
-    NSRect lineHeightRect;
-	[sender attributesForCharacterIndex:0 lineHeightRectangle:&lineHeightRect];
-	caretPosition = [self _fixCaretPosition:lineHeightRect.origin];			
-
-	LVUIController *uiController = (LVUIController *)[NSApp delegate];
-	
-	if (_candidateText->shouldUpdate()) {
-		NSString *text = [NSString stringWithUTF8String:_candidateText->candidateText().c_str()];		
-		[uiController updateCandidateText:text];
-		[uiController setCandidateWindowOrigin:caretPosition];
-		_candidateText->clearUpdateState();
-	}
-	
-    if (_candidateText->onScreen()) {
-		[uiController showCandidateWindow];
-	}
-	else {
-		[uiController hideCandidateWindow];
-	}
+	[self _handleCandidateWindow:sender];
+	[self _handleNotifyMessage:sender];
 	
     return handled;
 }
@@ -348,5 +462,4 @@
 	}
     return menu;
 }
-
 @end

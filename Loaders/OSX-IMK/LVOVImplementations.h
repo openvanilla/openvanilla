@@ -44,7 +44,9 @@ public:
     bool capsLock;
     bool ctrl;
     bool opt;
+    bool command;
     bool num;
+    bool shift;
     int keyCode;
     
 public:
@@ -52,7 +54,9 @@ public:
         : capsLock(false)
         , ctrl(false)
         , opt(false)
+        , command(false)
         , num(false)
+        , shift(false)
         , keyCode(0)
     {
     }
@@ -64,7 +68,7 @@ public:
     
     virtual bool isShift()
     {
-        return false;
+        return shift;
     }
     
     virtual bool isCapslock()
@@ -81,6 +85,11 @@ public:
     {
         return opt;
     }
+
+    virtual bool isCommand()
+    {
+        return command;
+    }    
     
     virtual bool isNum()
     {
@@ -335,12 +344,12 @@ public:
     
     virtual void notify(const char *msg)
     {
-        NSLog(@"notify message: %s", msg);
+		_notifyMessage = msg ? msg : "";
     }
     
     virtual const char *locale()
     {
-        return "en";
+        return _locale.c_str();
     }
     
     virtual const char *userSpacePath(const char *modid);
@@ -398,10 +407,29 @@ public:
 		return _UTF16Buffer.length();
 	}
 	
+public:
+	virtual const string notifyMessage() const
+	{
+		return _notifyMessage;
+	}
+	
+	virtual void cleartNotifyMessage()
+	{
+		_notifyMessage = "";
+	}
+	
+	virtual void setLocale(const string& locale)
+	{
+		_locale = locale;
+	}
+	
 protected:
 	unsigned short *_UTF16ShortBuffer;
 	wstring _UTF16Buffer;
 	string _UTF8Buffer;
 	NSMutableString *_conversionBuffer;
+	
+	string _notifyMessage;
+	string _locale;
 };
 

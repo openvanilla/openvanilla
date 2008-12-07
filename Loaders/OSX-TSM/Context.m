@@ -78,12 +78,27 @@ static MenuRef TSCSharedMenu = NULL;
 
     if ([text length]) {
         do {
-           NSDictionary *attributes = [text attributesAtIndex:currentRange.location longestEffectiveRange:&currentRange inRange:maxRange];       
-           [highlightSegments addObject:[NSArray arrayWithObjects:[NSValue valueWithRange:currentRange], [attributes objectForKey:@"UnderlineStyleAttribute"], nil]];       
-           currentRange.location += currentRange.length;              
+			NSDictionary *attributes = [text attributesAtIndex:currentRange.location longestEffectiveRange:&currentRange inRange:maxRange];       
+
+//			NSLog(@"section range: %@, attr: %@", NSStringFromRange(currentRange), attributes);
+			id usa = [attributes objectForKey:@"UnderlineStyleAttribute"];
+			if (!usa) {
+				usa = [NSNumber numberWithInt:NSUnderlineStyleSingle];
+			}
+			[highlightSegments addObject:[NSArray arrayWithObjects:[NSValue valueWithRange:currentRange], usa, nil]];       
+			currentRange.location += currentRange.length;              
         } while (currentRange.location < maxRange.length);
     }
     
+//	NSLog(@"now highlight seg count: %d, text %@, selRange: %@", [highlightSegments count], [text string], NSStringFromRange(selRange));
+	
+//	if (![highlightSegments count]) {
+//		NSLog(@"using no segments");
+//		[highlightSegments addObject:[NSArray arrayWithObjects:[NSValue valueWithRange:maxRange], [NSNumber numberWithInt:NSUnderlineStyleSingle], nil]];       
+//	}
+	
+	
+	
     OSStatus status;
     long fixLength = 0;
     long updateLength = [text length] * sizeof(UniChar);
@@ -323,6 +338,9 @@ static MenuRef TSCSharedMenu = NULL;
         int state = [[item objectForKey:@"State"] intValue];
         BOOL enabled = [[item objectForKey:@"IsEnabled"] boolValue];
         
+		NSString *keyEquivalent = [item objectForKey:@"KeyEquivalent"];
+		unsigned int keyEquivalentModifierMask = [[item objectForKey:@"KeyEquivalentModifierMask"] intValue];
+		
         if ([title isEqualToString:@"-"]) {
             InsertMenuItemTextWithCFString(TSCSharedMenu, (CFStringRef)title, count, kMenuItemAttrSeparator, 0);
             count++;
@@ -331,6 +349,44 @@ static MenuRef TSCSharedMenu = NULL;
             InsertMenuItemTextWithCFString(TSCSharedMenu, (CFStringRef)title, count, 0, TSC_MENU_ITEM_INDEX_BASE + count);
             count++;
 
+			if (keyEquivalent) {
+				Boolean isVirtualKey = TRUE;
+				UniChar uc = [keyEquivalent characterAtIndex:0];
+				UInt16 inKey = uc;
+				
+				// this is copied from the old CocoaVanilla's CVSmartMenu
+				#define VKC(k, v) case k: inKey = v; break;
+				switch (uc) {
+					VKC(32, 0x31); // space
+					VKC(27, 0x35); // esc
+					VKC(13, 0x24); // return
+					VKC(127, 0x75); //delete
+					VKC(8, 0x33); // backspace
+					VKC(30, 0x7e); // up
+					VKC(31, 0x7d); // down
+					VKC(28, 0x7b); // left
+					VKC(29, 0x7c); // right
+					VKC(1, 0x73); // home
+					VKC(4, 0x77); // end
+					VKC(11, 0x74); // page up
+					VKC(12, 0x79); // page down
+					VKC(9, 0x30); // tab	
+					default:
+						isVirtualKey = FALSE;
+				}
+			#undef VKC
+				
+				SetMenuItemCommandKey(TSCSharedMenu, count, isVirtualKey, inKey);
+				
+				UInt8 modifiers = 0;
+				if (!(keyEquivalentModifierMask & NSCommandKeyMask)) modifiers |= kMenuNoCommandModifier;
+				if (keyEquivalentModifierMask & NSShiftKeyMask) modifiers |= kMenuShiftModifier;
+				if (keyEquivalentModifierMask & NSAlternateKeyMask) modifiers |= kMenuOptionModifier;
+				if (keyEquivalentModifierMask & NSControlKeyMask) modifiers |= kMenuControlModifier;
+				
+				SetMenuItemModifiers(TSCSharedMenu, count, modifiers);
+			}
+			
             if (state == NSOnState)
                 CheckMenuItem(TSCSharedMenu, count, TRUE);
             
