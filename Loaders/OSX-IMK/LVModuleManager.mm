@@ -263,6 +263,16 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 	NSDictionary *attr = [[NSFileManager defaultManager] fileAttributesAtPath:[self _configFilePath] traverseLink:YES];
 	NSTimeInterval nowTimestamp = [[attr objectForKey:NSFileModificationDate] timeIntervalSince1970];
 	
+	if (!attr) {
+		// file doesn't exist (1st run)--force write config file and quit
+		[self _validateAndWriteConfig];
+		
+		// set this to zero to ensure next write-sync (because our time resolution is 1 sec which is too coarse-grained)
+		_configTimestamp = 0;
+		
+		return;
+	}
+	
 	if (_configTimestamp == nowTimestamp) {
 		return;
 	}
@@ -309,6 +319,14 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 		_loadedModuleDictionary = [NSMutableDictionary new];
 		
 		_loaderService = new LVService;
+		
+	    NSArray *languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+		if ([languages count]) {
+			_loaderService->setLocale([[languages objectAtIndex:0] UTF8String]);
+		}
+		else {
+			_loaderService->setLocale("en");
+		}		
     }
     return self;
 }
@@ -350,7 +368,7 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 	// now try to load everything
 	NSEnumerator *bpaEnum = [_bundlePathArray objectEnumerator];
 	while (path = [bpaEnum nextObject]) {
-		CFBundleRef bundle = CFBundleCreate(NULL, (CFURLRef)[NSURL URLWithString:path]);
+		CFBundleRef bundle = CFBundleCreate(NULL, (CFURLRef)[NSURL fileURLWithPath:path]);
 		BOOL loaded = NO;
 		if (bundle) {
 			if (CFBundleLoadExecutable(bundle)) {
@@ -393,7 +411,7 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 		}
 	}
 	
-	[self _validateAndWriteConfig];
+	[self _syncConfigurationWithNotification:YES];
 }
 - (LVService*)loaderService
 {

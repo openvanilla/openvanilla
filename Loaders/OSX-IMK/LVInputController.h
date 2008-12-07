@@ -46,5 +46,7 @@
 	LVContextSandwich *_contextSandwich;
 	LVBuffer *_composingBuffer;
 	LVCandidate *_candidateText;
+    BOOL _committedByOurselves;
 }
++ (void)sendComposedStringToCurrentlyActiveContext:(NSString *)text;
 @end

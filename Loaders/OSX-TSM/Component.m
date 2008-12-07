@@ -39,10 +39,26 @@ bool _ComponentInitialized = false;
 id _InputMethodServer = nil;
 Handle _ActiveHandle = NULL;
 bool _KeyEventSessionOn = false;
+id _ComponentAutoreleasePool = nil;
 
 // creates a new session context
 AppleComponent TSMCOpenComponent(ComponentInstance instance)
 {
+	if (!_ComponentAutoreleasePool) {
+		NSApplicationLoad();
+		_ComponentAutoreleasePool = [NSAutoreleasePool new];
+		
+		// see if it's some unsupported app..
+		
+		NSString *bid = [[NSBundle mainBundle] bundleIdentifier];
+		
+		if ([bid isEqualToString:@"com.atomix.dojam"]) {
+			NSRunAlertPanel(@"Unsupported App", @"This app is too old for the input method to support", @"Dismiss", nil, nil);
+			_ComponentInitialized = true;
+			return -1;
+		}
+	}
+	
     ComponentResult result = noErr;
     
     if (!_ComponentInitialized) {
@@ -91,7 +107,6 @@ AppleComponent TSMCOpenComponent(ComponentInstance instance)
     		}
     	}
         
-        
         if (!_InputMethodServer) {
             NSLog(@"Cannot connect to server via name: %@", TSMC_SERVER_CONNECTION_NAME);
             return -1;
@@ -122,7 +137,13 @@ AppleComponent TSMCCloseComponent(Handle handle, ComponentInstance instance)
         return paramErr;
 
     if (handle) {
-        [_InputMethodServer destroyContext:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];
+		@try {
+			[_InputMethodServer destroyContext:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];
+		}
+		@catch (NSException *exception) {
+			_InputMethodServer = nil;
+		}
+		
         [(TextServiceContext*)handle release];
     }
         
@@ -135,12 +156,16 @@ AppleComponent TSMCActivateTextService(Handle handle)
 {
 	_ActiveHandle = handle;
 	
-	if (handle)
-		[_InputMethodServer activateContextID:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];
-	
-	if (handle)
-		[_InputMethodServer refreshMenuOfContext:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];		
-
+	if (handle) {
+		@try {
+			[_InputMethodServer activateContextID:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];
+			[_InputMethodServer refreshMenuOfContext:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];		
+		}
+		@catch (NSException *exception) {
+			_InputMethodServer = nil;
+		}
+	}
+		
     return noErr;
 }
 
@@ -149,8 +174,14 @@ AppleComponent TSMCDeactivateTextService(Handle handle)
     if (_ActiveHandle == handle)
         _ActiveHandle = NULL;
     
-    if (handle)
-        [_InputMethodServer deactivateContextID:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];
+    if (handle) {
+		@try {
+			[_InputMethodServer deactivateContextID:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];
+		}
+		@catch (NSException *exception) {
+			_InputMethodServer = nil;
+		}		
+	}
     return noErr;
 }
 
@@ -181,11 +212,19 @@ AppleComponent TSMCTextServiceEvent(Handle handle, EventRef event)
 		if (modifiers & cmdKey)     cocoaModifiers |= NSCommandKeyMask;
 
         _KeyEventSessionOn = true;
-        BOOL result = [_InputMethodServer handleEventForContext:[(TextServiceContext*)handle contextID]
-            charString:(NSString*)charStr
-            cocoaModifiers:cocoaModifiers
-            virtualKeyCode:virtualKeyCode
-            sender:(TextServiceContext*)handle];
+        BOOL result = false;
+		
+		@try {
+			result = [_InputMethodServer handleEventForContext:[(TextServiceContext*)handle contextID]
+				charString:(NSString*)charStr
+				cocoaModifiers:cocoaModifiers
+				virtualKeyCode:virtualKeyCode
+				sender:(TextServiceContext*)handle];
+		}
+		@catch (NSException *exception) {
+			_InputMethodServer = nil;
+		}
+		
         _KeyEventSessionOn = false;
             
         return result;
@@ -196,8 +235,14 @@ AppleComponent TSMCTextServiceEvent(Handle handle, EventRef event)
 
 AppleComponent TSMCFixTextService(Handle handle)
 {
-    if (handle && !_KeyEventSessionOn)
-        [_InputMethodServer forceFixContext:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];
+    if (handle && !_KeyEventSessionOn) {
+		@try {
+			[_InputMethodServer forceFixContext:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];
+		}
+		@catch (NSException *exception) {
+			_InputMethodServer = nil;
+		}		
+	}
     return noErr;
 }
 
@@ -207,10 +252,16 @@ pascal OSStatus TSMCMenuHandler(EventHandlerCallRef callRef, EventRef event, voi
  	if (GetEventParameter(event, kEventParamDirectObject, typeHICommand, nil, sizeof(command), nil, &command) != noErr)
  	    return eventNotHandledErr;
 
-    if (_ActiveHandle)
-        [_InputMethodServer triggerMenuOfContext:[(TextServiceContext*)_ActiveHandle contextID] 
-            itemIndexWithoutBase:command.commandID - TSC_MENU_ITEM_INDEX_BASE
-            sender:(TextServiceContext*)_ActiveHandle];
+    if (_ActiveHandle) {
+		@try {
+			[_InputMethodServer triggerMenuOfContext:[(TextServiceContext*)_ActiveHandle contextID] 
+				itemIndexWithoutBase:command.commandID - TSC_MENU_ITEM_INDEX_BASE
+				sender:(TextServiceContext*)_ActiveHandle];
+		}
+		@catch (NSException *exception) {
+			_InputMethodServer = nil;
+		}		
+	}
     
     return noErr;
 }
