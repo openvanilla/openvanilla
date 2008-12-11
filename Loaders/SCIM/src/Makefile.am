@@ -11,7 +11,7 @@ INCLUDES = \
 	
 #noinst_HEADERS = scim_chewing_imengine.h scim_chewing_config_entry.h
 
-moduledir = @SCIM_MODULEDIR@/IMEngine
+moduledir = $(libdir)/@SCIM_MODULEDIR@/IMEngine
 module_LTLIBRARIES = OVLoader-SCIM.la
 
 OVLoader_SCIM_la_SOURCES  = AVDictionary.cpp AVConfig.cpp OVLoader-SCIM.cpp AVConfig.h AVDictionary.h DummyLoader.h OVLoader-SCIM.h

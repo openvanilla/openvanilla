@@ -71,7 +71,7 @@ if test "x$SCIM_ICONDIR" = "x"; then
 fi
 
 if test "x$SCIM_MODULEDIR" = "x"; then
-   SCIM_MODULEDIR=${libdir}/scim-1.0
+   SCIM_MODULEDIR=scim-1.0
 fi
 
 if test "x$OV_MODULEDIR" = "x"; then
