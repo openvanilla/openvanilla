@@ -279,8 +279,7 @@ static id LVICCurrentlyActiveSender = nil;
 		[sender attributesForCharacterIndex:0 lineHeightRectangle:&lineHeightRect];
 		location = lineHeightRect.origin;
 		
-		#warning No tooltip yet
-//		[uiController showTooltipWithText:notifyMsg atPoint:location];		
+		#warning No tooltip handler yet
 		service->cleartNotifyMessage();
 	}
 	else {
@@ -308,7 +307,9 @@ static id LVICCurrentlyActiveSender = nil;
 }
 - (void)deactivateServer:(id)sender
 {
-	[[self class] setActiveContext:nil sender:nil];
+	if (LVICCurrentlyActiveController == self && LVICCurrentlyActiveSender == sender) {
+		[[self class] setActiveContext:nil sender:nil];
+	}
 
     _committedByOurselves = NO;
 	_composingBuffer->clear();
