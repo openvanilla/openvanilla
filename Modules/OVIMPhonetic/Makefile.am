@@ -2,7 +2,7 @@ AUTOMAKE_OPTIONS=foreign
 libdir=$(prefix)/lib/openvanilla/
 
 lib_LTLIBRARIES = libovimphonetic.la
-libovimphonetic_la_SOURCES = OVIMPhoneticStatic.cpp
+libovimphonetic_la_SOURCES = OVIMPhoneticStatic.cpp OVPhoneticData.c
 libovimphonetic_la_LDFLAGS = -lsharedsource
 libovimphonetic_la_LIBADD = -L../SharedSource/
 libovimphonetic_la_CPPFLAGS = -I$(top_srcdir)/SharedHeaders/
