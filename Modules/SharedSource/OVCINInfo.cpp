@@ -113,6 +113,12 @@ OVCINList::OVCINList(const char *pathseparator) {
         int count=scandir(loadpath, &files, CLFileSelect, alphasort);        
 
         int loaded=0;
+
+	if ( count < 0 )
+	{
+		return loaded; 
+	}
+
         for (int i=0; i<count; i++) {
             if (preparse(loadpath, files[i]->d_name)) loaded++;
             free(files[i]);
