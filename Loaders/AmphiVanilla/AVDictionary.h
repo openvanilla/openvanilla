@@ -66,7 +66,7 @@ public:
         _datanode->setChildByKey(key, n);
     }
 
-    virtual int keyExist(const char *key)
+    virtual bool keyExist(const char *key)
     {
         return _datanode->findChildByKey(key) ? 1 : 0;
     }
