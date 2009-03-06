@@ -4,7 +4,7 @@
 # Here thanks for the autotool teaching from Fourdollars <fourdollars@gmail.com> 
 
 AC_PREREQ(2.61)
-AC_INIT([openvanilla-modules],[0.8.0],[ucimf@googlegroups.com])
+AC_INIT([openvanilla-modules],[0.8.0_7],[ucimf@googlegroups.com])
 AM_INIT_AUTOMAKE
 AC_CONFIG_HEADER([config.h])
 
@@ -41,7 +41,6 @@ AC_CHECK_FUNCS([bzero floor memset munmap select setenv strcasecmp strchr strcsp
 
 AC_CONFIG_FILES([Makefile
                  OVIMGeneric/Makefile
-                 OVIMPhonetic/Makefile
                  SharedData/Makefile
                  SharedHeaders/Makefile
                  SharedSource/Makefile])
