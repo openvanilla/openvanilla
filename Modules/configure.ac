@@ -5,7 +5,7 @@
 
 AC_PREREQ(2.61)
 AC_INIT([openvanilla-modules],[0.8.0_7],[ucimf@googlegroups.com])
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_CONFIG_HEADER([config.h])
 
 # Checks for programs.
