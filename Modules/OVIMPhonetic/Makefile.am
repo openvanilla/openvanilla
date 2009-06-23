@@ -1,4 +1,3 @@
-AUTOMAKE_OPTIONS=foreign
 libdir=$(prefix)/lib/openvanilla/
 
 lib_LTLIBRARIES = libovimphonetic.la
@@ -11,5 +10,3 @@ ovimphoneticdir=$(libdir)/OVIMPhonetic/
 ovimphonetic_DATA= bpmf-ext.cin bpmf.cin punctuations.cin
 
 EXTRA_DIST=  bpmf-sqlconvert.pl convert-phonedata.pl bpmf-ext.cin bpmf.cin punctuations.cin
-
-

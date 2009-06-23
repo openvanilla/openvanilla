@@ -1,5 +1,1 @@
-AUTOMAKE_OPTIONS=foreign
-
-SUBDIRS = SharedData SharedHeaders SharedSource OVIMGeneric 
-
-
+SUBDIRS = SharedData SharedHeaders SharedSource OVIMGeneric
