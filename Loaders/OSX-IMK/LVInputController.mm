@@ -385,6 +385,23 @@ static id LVICCurrentlyActiveSender = nil;
             if (unicharCode < 27 && (cocoaModifiers & NSControlKeyMask)) {
                 unicharCode += ('a' - 1);
             }
+			
+			UniChar remappedNSEventCode = unicharCode;
+			
+			// remap; fix 10.6 "bug"
+            switch(unicharCode) {
+                case NSUpArrowFunctionKey:      remappedNSEventCode = ovkUp; break;
+                case NSDownArrowFunctionKey:    remappedNSEventCode = ovkDown; break;
+                case NSLeftArrowFunctionKey:    remappedNSEventCode = ovkLeft; break;
+                case NSRightArrowFunctionKey:   remappedNSEventCode = ovkRight; break;
+                case NSDeleteFunctionKey:       remappedNSEventCode = ovkDelete; break;
+                case NSHomeFunctionKey:         remappedNSEventCode = ovkHome; break;
+                case NSEndFunctionKey:          remappedNSEventCode = ovkEnd; break;
+                case NSPageUpFunctionKey:       remappedNSEventCode = ovkPageUp; break;
+                case NSPageDownFunctionKey:     remappedNSEventCode = ovkPageDown; break; 
+            }
+            
+            unicharCode = remappedNSEventCode;
             
 			keyCode.keyCode = unicharCode;
 			

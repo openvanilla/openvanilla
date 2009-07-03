@@ -14,7 +14,7 @@
 /* Begin PBXFileReference section */
 		6AFA6072097C8ACB00976C01 /* OVIMUIM.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVIMUIM.mm; sourceTree = "<group>"; };
 		6AFA6077097C8ADA00976C01 /* OVIMUIM.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OVIMUIM.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		6AFA6079097C8ADA00976C01 /* OVIMUIM-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "OVIMUIM-Info.plist"; sourceTree = "<group>"; };
+		6AFA6079097C8ADA00976C01 /* OVIMUIM-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OVIMUIM-Info.plist"; sourceTree = "<group>"; };
 		6AFA6083097C8B5100976C01 /* UIM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIM.framework; path = /Library/Frameworks/UIM.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
