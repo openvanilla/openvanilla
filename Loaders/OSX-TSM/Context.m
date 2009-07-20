@@ -1,7 +1,7 @@
 //
 // Context.m
 //
-// Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
+// Copyright (c) 2004-2009 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
@@ -321,6 +321,36 @@ static MenuRef TSCSharedMenu = NULL;
     *returnRect = NSMakeRect(point.x, point.y, 1.0, 10.0);
     return [NSDictionary dictionary];
 }
+
++ (NSArray*)translateMenuItemArray:(NSArray*)menuItemArray
+{
+    NSMutableArray *translatedArray = [NSMutableArray array];
+    NSEnumerator *e = [menuItemArray objectEnumerator];
+    NSMenuItem *item;
+    
+    while (item = [e nextObject]) {
+		NSMutableDictionary *newItem = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                      ([item isSeparatorItem] ? @"-" : [item title]), @"Title",
+                                                                                      [NSNumber numberWithBool:[item isEnabled]], @"IsEnabled",
+                                                                                      [NSNumber numberWithInt:[item state]], @"State",
+                                                                                      nil]];
+		
+		if ([[item keyEquivalent] length]) {
+			[newItem setObject:[item keyEquivalent] forKey:@"KeyEquivalent"];
+			[newItem setObject:[NSNumber numberWithInt:[item keyEquivalentModifierMask]] forKey:@"KeyEquivalentModifierMask"];
+		}
+		
+        [translatedArray addObject:newItem];
+    }
+    
+    return translatedArray;
+}
+
+- (void)refreshMenuWithNSMenu:(NSMenu *)menu
+{
+    [self refreshMenu:[[self class] translateMenuItemArray:[menu itemArray]]];
+}
+
 - (void)refreshMenu:(NSArray*)menuItems
 {
 	int count = CountMenuItems(TSCSharedMenu);

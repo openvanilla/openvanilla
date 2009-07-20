@@ -1,7 +1,7 @@
 //
 // InputMethodKitTiger.mm
 //
-// Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
+// Copyright (c) 2004-2009 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
@@ -113,6 +113,7 @@
 - (void)activateContextID:(NSString*)contextID sender:(id)sender
 {
     [[_contextDictionary objectForKey:contextID] activateServer:sender];
+    [self refreshMenuOfContext:contextID sender:sender];
 }
 - (void)deactivateContextID:(NSString*)contextID sender:(id)sender
 {

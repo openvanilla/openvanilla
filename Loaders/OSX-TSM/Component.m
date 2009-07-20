@@ -1,7 +1,7 @@
 //
 // Component.m
 //
-// Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
+// Copyright (c) 2004-2009 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
@@ -141,7 +141,8 @@ AppleComponent TSMCCloseComponent(Handle handle, ComponentInstance instance)
 			[_InputMethodServer destroyContext:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];
 		}
 		@catch (NSException *exception) {
-			_InputMethodServer = nil;
+            NSLog(@"Exception encountered, ignoring and try keeping going: %@", exception);
+			// _InputMethodServer = nil;
 		}
 		
         [(TextServiceContext*)handle release];
@@ -162,7 +163,8 @@ AppleComponent TSMCActivateTextService(Handle handle)
 			[_InputMethodServer refreshMenuOfContext:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];		
 		}
 		@catch (NSException *exception) {
-			_InputMethodServer = nil;
+            NSLog(@"Exception encountered, ignoring and try keeping going: %@", exception);
+			// _InputMethodServer = nil;
 		}
 	}
 		
@@ -179,7 +181,8 @@ AppleComponent TSMCDeactivateTextService(Handle handle)
 			[_InputMethodServer deactivateContextID:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];
 		}
 		@catch (NSException *exception) {
-			_InputMethodServer = nil;
+            NSLog(@"Exception encountered, ignoring and try keeping going: %@", exception);
+			// _InputMethodServer = nil;
 		}		
 	}
     return noErr;
@@ -222,7 +225,8 @@ AppleComponent TSMCTextServiceEvent(Handle handle, EventRef event)
 				sender:(TextServiceContext*)handle];
 		}
 		@catch (NSException *exception) {
-			_InputMethodServer = nil;
+            NSLog(@"Exception encountered, ignoring and try keeping going: %@", exception);
+			// _InputMethodServer = nil;
 		}
 		
         _KeyEventSessionOn = false;
@@ -240,7 +244,8 @@ AppleComponent TSMCFixTextService(Handle handle)
 			[_InputMethodServer forceFixContext:[(TextServiceContext*)handle contextID] sender:(TextServiceContext*)handle];
 		}
 		@catch (NSException *exception) {
-			_InputMethodServer = nil;
+            NSLog(@"Exception encountered, ignoring and try keeping going: %@", exception);
+			// _InputMethodServer = nil;
 		}		
 	}
     return noErr;
@@ -259,7 +264,8 @@ pascal OSStatus TSMCMenuHandler(EventHandlerCallRef callRef, EventRef event, voi
 				sender:(TextServiceContext*)_ActiveHandle];
 		}
 		@catch (NSException *exception) {
-			_InputMethodServer = nil;
+            NSLog(@"Exception encountered, ignoring and try keeping going: %@", exception);
+			// _InputMethodServer = nil;
 		}		
 	}
     
