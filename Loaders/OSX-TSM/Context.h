@@ -1,7 +1,7 @@
 //
 // Context.h
 //
-// Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
+// Copyright (c) 2004-2009 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
@@ -53,7 +53,8 @@
 // InputMethodKitTiger-specific
 + (void)setSharedMenu:(MenuRef)menu;
 + (MenuRef)sharedMenu;
-- (void)refreshMenu:(NSArray*)menuItems;
+- (void)refreshMenu:(NSArray *)menuItems;
+- (void)refreshMenuWithNSMenu:(NSMenu *)menu;
 @end
 
 //
