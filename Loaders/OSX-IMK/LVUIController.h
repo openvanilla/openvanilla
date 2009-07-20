@@ -1,7 +1,7 @@
 //
 // LVUIController.h
 //
-// Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
+// Copyright (c) 2004-2009 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
