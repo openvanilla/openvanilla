@@ -1,7 +1,7 @@
 //
 // LVInputController.mm
 //
-// Copyright (c) 2004-2008 The OpenVanilla Project (http://openvanilla.org)
+// Copyright (c) 2004-2009 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,6 @@
 @interface NSObject (LVInputControllerPrivateInterface)
 - (bool)_handleExtraKeyAction:(OVKeyCode*)k;
 @end
-
 
 static LVInputController *LVICCurrentlyActiveController = nil;
 static id LVICCurrentlyActiveSender = nil;
@@ -232,12 +231,12 @@ static id LVICCurrentlyActiveSender = nil;
 			break;
 		}
 	}
-	
+
 	if (hasFocus) {
-		LVUIController *uiController = (LVUIController *)[NSApp delegate];
+		// TO DO: Fix caret position according to the current window dimension
 		return caretPosition;
 	}
-
+	
 	NSPoint point;		
 	point.x = (int)(frame.size.width / 2.0);
 	point.y = (int)(frame.size.height / 2.0);
@@ -255,6 +254,8 @@ static id LVICCurrentlyActiveSender = nil;
 	if (_candidateText->shouldUpdate()) {
 		NSString *text = [NSString stringWithUTF8String:_candidateText->candidateText().c_str()];		
 		[uiController updateCandidateText:text];
+		
+		// TO DO: set font metrics
 		caretPosition = [self _fixCaretPosition:lineHeightRect.origin];			
 		[uiController setCandidateWindowOrigin:caretPosition];
 		_candidateText->clearUpdateState();
@@ -279,7 +280,8 @@ static id LVICCurrentlyActiveSender = nil;
 		[sender attributesForCharacterIndex:0 lineHeightRectangle:&lineHeightRect];
 		location = lineHeightRect.origin;
 		
-		#warning No tooltip handler yet
+		// TO DO: Handle tooltip better
+		[uiController showTooltipWithText:notifyMsg];		
 		service->cleartNotifyMessage();
 	}
 	else {
@@ -302,19 +304,32 @@ static id LVICCurrentlyActiveSender = nil;
 	_contextSandwich->start(_composingBuffer, _candidateText, [[LVModuleManager sharedManager] loaderService]);
 	[[self class] setActiveContext:self sender:sender];
 	
-	// this clears the composing buffer in Tiger, important
-    [self _updateComposingBuffer:sender cursorAtIndex:_composingBuffer->cursorIndex() highlightRange:NSMakeRange(NSNotFound, NSNotFound)];	
+	if (_shouldClearBufferAtActivationBecauseOfNonEmptyBufferWhenDeactivated) {
+		// this clears the composing buffer in Tiger, important
+		[self _updateComposingBuffer:sender cursorAtIndex:_composingBuffer->cursorIndex() highlightRange:NSMakeRange(NSNotFound, NSNotFound)];	
+	}
 }
 - (void)deactivateServer:(id)sender
 {
 	if (LVICCurrentlyActiveController == self && LVICCurrentlyActiveSender == sender) {
 		[[self class] setActiveContext:nil sender:nil];
 	}
-
+		
     _committedByOurselves = NO;
 	_composingBuffer->clear();
 	_composingBuffer->clearCommittedString();
+	
+	// if fix-context is sent by the OS, we need to keep this flag
+	BOOL keepFlag = NO;
+	if (_shouldClearBufferAtActivationBecauseOfNonEmptyBufferWhenDeactivated) {
+		keepFlag = YES;
+	}
+	
     [self commitComposition:sender];
+	
+	if (keepFlag) {
+		_shouldClearBufferAtActivationBecauseOfNonEmptyBufferWhenDeactivated = keepFlag;
+	}
 
 	_contextSandwich->end();
 	[self _resetUI];	
@@ -323,8 +338,12 @@ static id LVICCurrentlyActiveSender = nil;
 {    	
 	if (_committedByOurselves) {
 	    _committedByOurselves = NO;
+		
+		_shouldClearBufferAtActivationBecauseOfNonEmptyBufferWhenDeactivated = NO;
     }
     else {
+		_shouldClearBufferAtActivationBecauseOfNonEmptyBufferWhenDeactivated = !_composingBuffer->isEmpty();
+
         _contextSandwich->clear();
 		_composingBuffer->clear();
 		_composingBuffer->clearCommittedString();
@@ -381,27 +400,52 @@ static id LVICCurrentlyActiveSender = nil;
 		if ([chars length] > 0) {
 			unicharCode = [chars characterAtIndex:0];
             
-            // translates CTRL-[A-Z] to the correct PVKeyImpl
-            if (unicharCode < 27 && (cocoaModifiers & NSControlKeyMask)) {
-                unicharCode += ('a' - 1);
-            }
+			// translates CTRL-[A-Z] to the correct PVKeyImpl
+			if (cocoaModifiers & NSControlKeyMask) {
+				if (unicharCode < 27) {
+					unicharCode += ('a' - 1);
+				}
+				else {
+					switch (unicharCode) {
+						case 27:
+							unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '{' : '[';
+							break;
+						case 28:
+							unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '|' : '\\';
+							break;
+						case 29:
+							unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '}': ']';
+							break;
+						case 31:
+							unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '_' : '-';
+							break;							
+					}
+				}
+			}
 			
-			UniChar remappedNSEventCode = unicharCode;
-			
-			// remap; fix 10.6 "bug"
+            // remap; fix 10.6 "bug"
             switch(unicharCode) {
-                case NSUpArrowFunctionKey:      remappedNSEventCode = ovkUp; break;
-                case NSDownArrowFunctionKey:    remappedNSEventCode = ovkDown; break;
-                case NSLeftArrowFunctionKey:    remappedNSEventCode = ovkLeft; break;
-                case NSRightArrowFunctionKey:   remappedNSEventCode = ovkRight; break;
-                case NSDeleteFunctionKey:       remappedNSEventCode = ovkDelete; break;
-                case NSHomeFunctionKey:         remappedNSEventCode = ovkHome; break;
-                case NSEndFunctionKey:          remappedNSEventCode = ovkEnd; break;
-                case NSPageUpFunctionKey:       remappedNSEventCode = ovkPageUp; break;
-                case NSPageDownFunctionKey:     remappedNSEventCode = ovkPageDown; break; 
+                case NSUpArrowFunctionKey:      unicharCode = ovkUp; break;
+                case NSDownArrowFunctionKey:    unicharCode = ovkDown; break;
+                case NSLeftArrowFunctionKey:    unicharCode = ovkLeft; break;
+                case NSRightArrowFunctionKey:   unicharCode = ovkRight; break;
+                case NSDeleteFunctionKey:       unicharCode = ovkDelete; break;
+                case NSHomeFunctionKey:         unicharCode = ovkHome; break;
+                case NSEndFunctionKey:          unicharCode = ovkEnd; break;
+                case NSPageUpFunctionKey:       unicharCode = ovkPageUp; break;
+                case NSPageDownFunctionKey:     unicharCode = ovkPageDown; break;           
+                case NSF1FunctionKey:           unicharCode = 0x11001; break;   // Carbon F1-F10
+                case NSF2FunctionKey:           unicharCode = 0x11002; break;
+                case NSF3FunctionKey:           unicharCode = 0x11003; break;
+                case NSF4FunctionKey:           unicharCode = 0x11004; break;
+                case NSF5FunctionKey:           unicharCode = 0x11005; break;
+                case NSF6FunctionKey:           unicharCode = 0x11006; break;
+                case NSF7FunctionKey:           unicharCode = 0x11007; break;
+                case NSF8FunctionKey:           unicharCode = 0x11008; break;
+                case NSF9FunctionKey:           unicharCode = 0x11009; break;
+                case NSF10FunctionKey:          unicharCode = 0x11010; break;
+					
             }
-            
-            unicharCode = remappedNSEventCode;
             
 			keyCode.keyCode = unicharCode;
 			
