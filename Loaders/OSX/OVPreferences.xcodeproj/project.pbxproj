@@ -1,0 +1,811 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6A98F28D1026053700EA4E49 /* CVPreviewView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2481026053700EA4E49 /* CVPreviewView.mm */; };
+		6A98F28E1026053700EA4E49 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A98F2491026053700EA4E49 /* InfoPlist.strings */; };
+		6A98F28F1026053700EA4E49 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A98F24B1026053700EA4E49 /* Localizable.strings */; };
+		6A98F2901026053700EA4E49 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A98F24D1026053700EA4E49 /* MainMenu.xib */; };
+		6A98F2911026053700EA4E49 /* OVDisplayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A98F24F1026053700EA4E49 /* OVDisplayController.xib */; };
+		6A98F2921026053700EA4E49 /* OVIMGenericController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A98F2511026053700EA4E49 /* OVIMGenericController.xib */; };
+		6A98F2931026053700EA4E49 /* OVIMPhoneticController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A98F2531026053700EA4E49 /* OVIMPhoneticController.xib */; };
+		6A98F2941026053700EA4E49 /* OVIMPOJHoloController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A98F2551026053700EA4E49 /* OVIMPOJHoloController.xib */; };
+		6A98F2951026053700EA4E49 /* OVIMTibetanController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A98F2571026053700EA4E49 /* OVIMTibetanController.xib */; };
+		6A98F2961026053700EA4E49 /* OVTableModuleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A98F2591026053700EA4E49 /* OVTableModuleController.xib */; };
+		6A98F2971026053700EA4E49 /* General.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6A98F25C1026053700EA4E49 /* General.tiff */; };
+		6A98F2981026053700EA4E49 /* Modules.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6A98F25D1026053700EA4E49 /* Modules.tiff */; };
+		6A98F2991026053700EA4E49 /* OVPreferences.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A98F25E1026053700EA4E49 /* OVPreferences.icns */; };
+		6A98F29A1026053700EA4E49 /* WindowBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6A98F25F1026053700EA4E49 /* WindowBackground.jpg */; };
+		6A98F29C1026053700EA4E49 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2611026053700EA4E49 /* main.m */; };
+		6A98F29D1026053700EA4E49 /* OVDisplayController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2641026053700EA4E49 /* OVDisplayController.mm */; };
+		6A98F29E1026053700EA4E49 /* OVHotkeyField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2661026053700EA4E49 /* OVHotkeyField.m */; };
+		6A98F29F1026053700EA4E49 /* OVIMGenericController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2681026053700EA4E49 /* OVIMGenericController.m */; };
+		6A98F2A01026053700EA4E49 /* OVIMPhoneticController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F26A1026053700EA4E49 /* OVIMPhoneticController.m */; };
+		6A98F2A11026053700EA4E49 /* OVIMPOJHoloController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F26C1026053700EA4E49 /* OVIMPOJHoloController.m */; };
+		6A98F2A21026053700EA4E49 /* OVIMTibetanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F26E1026053700EA4E49 /* OVIMTibetanController.m */; };
+		6A98F2A31026053700EA4E49 /* OVModuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2701026053700EA4E49 /* OVModuleController.m */; };
+		6A98F2A41026053700EA4E49 /* OVModulesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2721026053700EA4E49 /* OVModulesListController.m */; };
+		6A98F2A51026053700EA4E49 /* OVPreference_Toolbar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2731026053700EA4E49 /* OVPreference_Toolbar.mm */; };
+		6A98F2A61026053700EA4E49 /* OVPreferenceController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2751026053700EA4E49 /* OVPreferenceController.mm */; };
+		6A98F2A71026053700EA4E49 /* OVShortcutHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2771026053700EA4E49 /* OVShortcutHelper.mm */; };
+		6A98F2A81026053700EA4E49 /* OVTableModuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2791026053700EA4E49 /* OVTableModuleController.m */; };
+		6A98F2DF1026056B00EA4E49 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2B31026056B00EA4E49 /* CTGradient.m */; };
+		6A98F2E01026056B00EA4E49 /* CVBubbleTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2B51026056B00EA4E49 /* CVBubbleTextView.m */; };
+		6A98F2E11026056B00EA4E49 /* CVBubbleTextWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2B71026056B00EA4E49 /* CVBubbleTextWindow.m */; };
+		6A98F2E21026056B00EA4E49 /* CVBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2B91026056B00EA4E49 /* CVBuffer.mm */; };
+		6A98F2E31026056B00EA4E49 /* CVCandidate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2BB1026056B00EA4E49 /* CVCandidate.mm */; };
+		6A98F2E41026056B00EA4E49 /* CVConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2BD1026056B00EA4E49 /* CVConfig.mm */; };
+		6A98F2E51026056B00EA4E49 /* CVDictionary.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2BF1026056B00EA4E49 /* CVDictionary.mm */; };
+		6A98F2E61026056B00EA4E49 /* CVEmbeddedLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2C11026056B00EA4E49 /* CVEmbeddedLoader.mm */; };
+		6A98F2E71026056B00EA4E49 /* CVKeyCode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2C31026056B00EA4E49 /* CVKeyCode.mm */; };
+		6A98F2E81026056B00EA4E49 /* CVLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2C51026056B00EA4E49 /* CVLoader.mm */; };
+		6A98F2E91026056B00EA4E49 /* CVLoaderConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2C71026056B00EA4E49 /* CVLoaderConfig.mm */; };
+		6A98F2EA1026056B00EA4E49 /* CVLoaderUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2C91026056B00EA4E49 /* CVLoaderUtility.mm */; };
+		6A98F2EB1026056B00EA4E49 /* CVService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2CB1026056B00EA4E49 /* CVService.mm */; };
+		6A98F2EC1026056B00EA4E49 /* CVSmartMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2CD1026056B00EA4E49 /* CVSmartMenu.mm */; };
+		6A98F2ED1026056B00EA4E49 /* CVWrappers.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2CF1026056B00EA4E49 /* CVWrappers.mm */; };
+		6A98F2EE1026056B00EA4E49 /* IMInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2D11026056B00EA4E49 /* IMInterface.mm */; };
+		6A98F2EF1026056B00EA4E49 /* NSBezierPathAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2D41026056B00EA4E49 /* NSBezierPathAdditions.m */; };
+		6A98F2F01026056B00EA4E49 /* NSDictionaryExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2D61026056B00EA4E49 /* NSDictionaryExtension.mm */; };
+		6A98F2F11026056B00EA4E49 /* NSStringExtension.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2D81026056B00EA4E49 /* NSStringExtension.mm */; };
+		6A98F2F21026056B00EA4E49 /* TSBundle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2DB1026056B00EA4E49 /* TSBundle.mm */; };
+		6A98F2F31026056B00EA4E49 /* TSComposingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F2DD1026056B00EA4E49 /* TSComposingBuffer.mm */; };
+		6A98F3441026071400EA4E49 /* OpenVanilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A98F33A1026071400EA4E49 /* OpenVanilla.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A98F3451026071400EA4E49 /* OVFileHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A98F33B1026071400EA4E49 /* OVFileHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A98F3461026071400EA4E49 /* OVLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A98F33C1026071400EA4E49 /* OVLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A98F3471026071400EA4E49 /* OVStringHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A98F33D1026071400EA4E49 /* OVStringHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A98F3481026071400EA4E49 /* OVUTF8Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A98F33E1026071400EA4E49 /* OVUTF8Helper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A98F3491026071400EA4E49 /* OVUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A98F33F1026071400EA4E49 /* OVUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A98F34A1026071400EA4E49 /* OVWildcard.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A98F3401026071400EA4E49 /* OVWildcard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A98F34C1026071400EA4E49 /* FrameworkStub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A98F3431026071400EA4E49 /* FrameworkStub.cpp */; };
+		6A98F3881026081100EA4E49 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A98F3871026081100EA4E49 /* Carbon.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6A98F3561026079B00EA4E49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A98F22A1026050000EA4E49 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A98F331102606FE00EA4E49;
+			remoteInfo = OpenVanilla;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6A98F23F1026052B00EA4E49 /* OVPreferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OVPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A98F2421026052B00EA4E49 /* OVPreferences-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OVPreferences-Info.plist"; sourceTree = "<group>"; };
+		6A98F2471026053700EA4E49 /* CVPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVPreviewView.h; sourceTree = "<group>"; };
+		6A98F2481026053700EA4E49 /* CVPreviewView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVPreviewView.mm; sourceTree = "<group>"; };
+		6A98F24A1026053700EA4E49 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6A98F24C1026053700EA4E49 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6A98F24E1026053700EA4E49 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		6A98F2501026053700EA4E49 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVDisplayController.xib; sourceTree = "<group>"; };
+		6A98F2521026053700EA4E49 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMGenericController.xib; sourceTree = "<group>"; };
+		6A98F2541026053700EA4E49 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMPhoneticController.xib; sourceTree = "<group>"; };
+		6A98F2561026053700EA4E49 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMPOJHoloController.xib; sourceTree = "<group>"; };
+		6A98F2581026053700EA4E49 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMTibetanController.xib; sourceTree = "<group>"; };
+		6A98F25A1026053700EA4E49 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVTableModuleController.xib; sourceTree = "<group>"; };
+		6A98F25C1026053700EA4E49 /* General.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = General.tiff; sourceTree = "<group>"; };
+		6A98F25D1026053700EA4E49 /* Modules.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Modules.tiff; sourceTree = "<group>"; };
+		6A98F25E1026053700EA4E49 /* OVPreferences.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = OVPreferences.icns; sourceTree = "<group>"; };
+		6A98F25F1026053700EA4E49 /* WindowBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WindowBackground.jpg; sourceTree = "<group>"; };
+		6A98F2611026053700EA4E49 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6A98F2621026053700EA4E49 /* NSObjectUpdateConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjectUpdateConfig.h; sourceTree = "<group>"; };
+		6A98F2631026053700EA4E49 /* OVDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVDisplayController.h; sourceTree = "<group>"; };
+		6A98F2641026053700EA4E49 /* OVDisplayController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVDisplayController.mm; sourceTree = "<group>"; };
+		6A98F2651026053700EA4E49 /* OVHotkeyField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVHotkeyField.h; sourceTree = "<group>"; };
+		6A98F2661026053700EA4E49 /* OVHotkeyField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVHotkeyField.m; sourceTree = "<group>"; };
+		6A98F2671026053700EA4E49 /* OVIMGenericController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMGenericController.h; sourceTree = "<group>"; };
+		6A98F2681026053700EA4E49 /* OVIMGenericController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMGenericController.m; sourceTree = "<group>"; };
+		6A98F2691026053700EA4E49 /* OVIMPhoneticController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMPhoneticController.h; sourceTree = "<group>"; };
+		6A98F26A1026053700EA4E49 /* OVIMPhoneticController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMPhoneticController.m; sourceTree = "<group>"; };
+		6A98F26B1026053700EA4E49 /* OVIMPOJHoloController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMPOJHoloController.h; sourceTree = "<group>"; };
+		6A98F26C1026053700EA4E49 /* OVIMPOJHoloController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMPOJHoloController.m; sourceTree = "<group>"; };
+		6A98F26D1026053700EA4E49 /* OVIMTibetanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMTibetanController.h; sourceTree = "<group>"; };
+		6A98F26E1026053700EA4E49 /* OVIMTibetanController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMTibetanController.m; sourceTree = "<group>"; };
+		6A98F26F1026053700EA4E49 /* OVModuleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVModuleController.h; sourceTree = "<group>"; };
+		6A98F2701026053700EA4E49 /* OVModuleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVModuleController.m; sourceTree = "<group>"; };
+		6A98F2711026053700EA4E49 /* OVModulesListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVModulesListController.h; sourceTree = "<group>"; };
+		6A98F2721026053700EA4E49 /* OVModulesListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVModulesListController.m; sourceTree = "<group>"; };
+		6A98F2731026053700EA4E49 /* OVPreference_Toolbar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVPreference_Toolbar.mm; sourceTree = "<group>"; };
+		6A98F2741026053700EA4E49 /* OVPreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVPreferenceController.h; sourceTree = "<group>"; };
+		6A98F2751026053700EA4E49 /* OVPreferenceController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVPreferenceController.mm; sourceTree = "<group>"; };
+		6A98F2761026053700EA4E49 /* OVShortcutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVShortcutHelper.h; sourceTree = "<group>"; };
+		6A98F2771026053700EA4E49 /* OVShortcutHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVShortcutHelper.mm; sourceTree = "<group>"; };
+		6A98F2781026053700EA4E49 /* OVTableModuleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTableModuleController.h; sourceTree = "<group>"; };
+		6A98F2791026053700EA4E49 /* OVTableModuleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVTableModuleController.m; sourceTree = "<group>"; };
+		6A98F27A1026053700EA4E49 /* Preferences_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences_Prefix.pch; sourceTree = "<group>"; };
+		6A98F27B1026053700EA4E49 /* zh_CN */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6A98F27C1026053700EA4E49 /* zh_CN */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6A98F27D1026053700EA4E49 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		6A98F27E1026053700EA4E49 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/OVDisplayController.xib; sourceTree = "<group>"; };
+		6A98F27F1026053700EA4E49 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/OVIMGenericController.xib; sourceTree = "<group>"; };
+		6A98F2801026053700EA4E49 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/OVIMPhoneticController.xib; sourceTree = "<group>"; };
+		6A98F2811026053700EA4E49 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/OVIMPOJHoloController.xib; sourceTree = "<group>"; };
+		6A98F2821026053700EA4E49 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/OVIMTibetanController.xib; sourceTree = "<group>"; };
+		6A98F2831026053700EA4E49 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/OVTableModuleController.xib; sourceTree = "<group>"; };
+		6A98F2841026053700EA4E49 /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6A98F2851026053700EA4E49 /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6A98F2861026053700EA4E49 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = zh_TW.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		6A98F2871026053700EA4E49 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = zh_TW.lproj/OVDisplayController.xib; sourceTree = "<group>"; };
+		6A98F2881026053700EA4E49 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = zh_TW.lproj/OVIMGenericController.xib; sourceTree = "<group>"; };
+		6A98F2891026053700EA4E49 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = zh_TW.lproj/OVIMPhoneticController.xib; sourceTree = "<group>"; };
+		6A98F28A1026053700EA4E49 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = zh_TW.lproj/OVIMPOJHoloController.xib; sourceTree = "<group>"; };
+		6A98F28B1026053700EA4E49 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = zh_TW.lproj/OVIMTibetanController.xib; sourceTree = "<group>"; };
+		6A98F28C1026053700EA4E49 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = zh_TW.lproj/OVTableModuleController.xib; sourceTree = "<group>"; };
+		6A98F2B01026056B00EA4E49 /* CocoaVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaVanilla.h; sourceTree = "<group>"; };
+		6A98F2B21026056B00EA4E49 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
+		6A98F2B31026056B00EA4E49 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
+		6A98F2B41026056B00EA4E49 /* CVBubbleTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVBubbleTextView.h; sourceTree = "<group>"; };
+		6A98F2B51026056B00EA4E49 /* CVBubbleTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVBubbleTextView.m; sourceTree = "<group>"; };
+		6A98F2B61026056B00EA4E49 /* CVBubbleTextWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVBubbleTextWindow.h; sourceTree = "<group>"; };
+		6A98F2B71026056B00EA4E49 /* CVBubbleTextWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVBubbleTextWindow.m; sourceTree = "<group>"; };
+		6A98F2B81026056B00EA4E49 /* CVBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVBuffer.h; sourceTree = "<group>"; };
+		6A98F2B91026056B00EA4E49 /* CVBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVBuffer.mm; sourceTree = "<group>"; };
+		6A98F2BA1026056B00EA4E49 /* CVCandidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVCandidate.h; sourceTree = "<group>"; };
+		6A98F2BB1026056B00EA4E49 /* CVCandidate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVCandidate.mm; sourceTree = "<group>"; };
+		6A98F2BC1026056B00EA4E49 /* CVConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVConfig.h; sourceTree = "<group>"; };
+		6A98F2BD1026056B00EA4E49 /* CVConfig.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVConfig.mm; sourceTree = "<group>"; };
+		6A98F2BE1026056B00EA4E49 /* CVDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVDictionary.h; sourceTree = "<group>"; };
+		6A98F2BF1026056B00EA4E49 /* CVDictionary.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVDictionary.mm; sourceTree = "<group>"; };
+		6A98F2C01026056B00EA4E49 /* CVEmbeddedLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVEmbeddedLoader.h; sourceTree = "<group>"; };
+		6A98F2C11026056B00EA4E49 /* CVEmbeddedLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVEmbeddedLoader.mm; sourceTree = "<group>"; };
+		6A98F2C21026056B00EA4E49 /* CVKeyCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVKeyCode.h; sourceTree = "<group>"; };
+		6A98F2C31026056B00EA4E49 /* CVKeyCode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVKeyCode.mm; sourceTree = "<group>"; };
+		6A98F2C41026056B00EA4E49 /* CVLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVLoader.h; sourceTree = "<group>"; };
+		6A98F2C51026056B00EA4E49 /* CVLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVLoader.mm; sourceTree = "<group>"; };
+		6A98F2C61026056B00EA4E49 /* CVLoaderConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVLoaderConfig.h; sourceTree = "<group>"; };
+		6A98F2C71026056B00EA4E49 /* CVLoaderConfig.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVLoaderConfig.mm; sourceTree = "<group>"; };
+		6A98F2C81026056B00EA4E49 /* CVLoaderUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVLoaderUtility.h; sourceTree = "<group>"; };
+		6A98F2C91026056B00EA4E49 /* CVLoaderUtility.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVLoaderUtility.mm; sourceTree = "<group>"; };
+		6A98F2CA1026056B00EA4E49 /* CVService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVService.h; sourceTree = "<group>"; };
+		6A98F2CB1026056B00EA4E49 /* CVService.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVService.mm; sourceTree = "<group>"; };
+		6A98F2CC1026056B00EA4E49 /* CVSmartMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVSmartMenu.h; sourceTree = "<group>"; };
+		6A98F2CD1026056B00EA4E49 /* CVSmartMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVSmartMenu.mm; sourceTree = "<group>"; };
+		6A98F2CE1026056B00EA4E49 /* CVWrappers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVWrappers.h; sourceTree = "<group>"; };
+		6A98F2CF1026056B00EA4E49 /* CVWrappers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVWrappers.mm; sourceTree = "<group>"; };
+		6A98F2D01026056B00EA4E49 /* IMInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMInterface.h; sourceTree = "<group>"; };
+		6A98F2D11026056B00EA4E49 /* IMInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IMInterface.mm; sourceTree = "<group>"; };
+		6A98F2D31026056B00EA4E49 /* NSBezierPathAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPathAdditions.h; sourceTree = "<group>"; };
+		6A98F2D41026056B00EA4E49 /* NSBezierPathAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBezierPathAdditions.m; sourceTree = "<group>"; };
+		6A98F2D51026056B00EA4E49 /* NSDictionaryExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryExtension.h; sourceTree = "<group>"; };
+		6A98F2D61026056B00EA4E49 /* NSDictionaryExtension.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSDictionaryExtension.mm; sourceTree = "<group>"; };
+		6A98F2D71026056B00EA4E49 /* NSStringExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringExtension.h; sourceTree = "<group>"; };
+		6A98F2D81026056B00EA4E49 /* NSStringExtension.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSStringExtension.mm; sourceTree = "<group>"; };
+		6A98F2D91026056B00EA4E49 /* OVDisplayServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVDisplayServer.h; sourceTree = "<group>"; };
+		6A98F2DA1026056B00EA4E49 /* TSBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSBundle.h; sourceTree = "<group>"; };
+		6A98F2DB1026056B00EA4E49 /* TSBundle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TSBundle.mm; sourceTree = "<group>"; };
+		6A98F2DC1026056B00EA4E49 /* TSComposingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSComposingBuffer.h; sourceTree = "<group>"; };
+		6A98F2DD1026056B00EA4E49 /* TSComposingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TSComposingBuffer.mm; sourceTree = "<group>"; };
+		6A98F332102606FE00EA4E49 /* OpenVanilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenVanilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A98F333102606FE00EA4E49 /* OpenVanillaFramework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanillaFramework-Info.plist"; path = "../../Frameworks/OpenVanilla/OpenVanillaFramework-Info.plist"; sourceTree = "<group>"; };
+		6A98F33A1026071400EA4E49 /* OpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenVanilla.h; sourceTree = "<group>"; };
+		6A98F33B1026071400EA4E49 /* OVFileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVFileHelper.h; sourceTree = "<group>"; };
+		6A98F33C1026071400EA4E49 /* OVLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLibrary.h; sourceTree = "<group>"; };
+		6A98F33D1026071400EA4E49 /* OVStringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVStringHelper.h; sourceTree = "<group>"; };
+		6A98F33E1026071400EA4E49 /* OVUTF8Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUTF8Helper.h; sourceTree = "<group>"; };
+		6A98F33F1026071400EA4E49 /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUtility.h; sourceTree = "<group>"; };
+		6A98F3401026071400EA4E49 /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVWildcard.h; sourceTree = "<group>"; };
+		6A98F3431026071400EA4E49 /* FrameworkStub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameworkStub.cpp; sourceTree = "<group>"; };
+		6A98F364102607C900EA4E49 /* ATSComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSComponent.h; sourceTree = "<group>"; };
+		6A98F3871026081100EA4E49 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6A98F23D1026052B00EA4E49 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A98F3881026081100EA4E49 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A98F330102606FE00EA4E49 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6A98F2281026050000EA4E49 = {
+			isa = PBXGroup;
+			children = (
+				6A98F362102607C900EA4E49 /* TextServiceComponent */,
+				6A98F3381026071400EA4E49 /* OpenVanilla */,
+				6A98F2AE1026056B00EA4E49 /* CocoaVanilla */,
+				6A98F2461026053700EA4E49 /* Preferences */,
+				6A98F2401026052B00EA4E49 /* Products */,
+				6A98F2421026052B00EA4E49 /* OVPreferences-Info.plist */,
+				6A98F333102606FE00EA4E49 /* OpenVanillaFramework-Info.plist */,
+				6A98F3871026081100EA4E49 /* Carbon.framework */,
+			);
+			sourceTree = "<group>";
+		};
+		6A98F2401026052B00EA4E49 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A98F23F1026052B00EA4E49 /* OVPreferences.app */,
+				6A98F332102606FE00EA4E49 /* OpenVanilla.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6A98F2461026053700EA4E49 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				6A98F2471026053700EA4E49 /* CVPreviewView.h */,
+				6A98F2481026053700EA4E49 /* CVPreviewView.mm */,
+				6A98F2491026053700EA4E49 /* InfoPlist.strings */,
+				6A98F24B1026053700EA4E49 /* Localizable.strings */,
+				6A98F24D1026053700EA4E49 /* MainMenu.xib */,
+				6A98F24F1026053700EA4E49 /* OVDisplayController.xib */,
+				6A98F2511026053700EA4E49 /* OVIMGenericController.xib */,
+				6A98F2531026053700EA4E49 /* OVIMPhoneticController.xib */,
+				6A98F2551026053700EA4E49 /* OVIMPOJHoloController.xib */,
+				6A98F2571026053700EA4E49 /* OVIMTibetanController.xib */,
+				6A98F2591026053700EA4E49 /* OVTableModuleController.xib */,
+				6A98F25B1026053700EA4E49 /* Images */,
+				6A98F2611026053700EA4E49 /* main.m */,
+				6A98F2621026053700EA4E49 /* NSObjectUpdateConfig.h */,
+				6A98F2631026053700EA4E49 /* OVDisplayController.h */,
+				6A98F2641026053700EA4E49 /* OVDisplayController.mm */,
+				6A98F2651026053700EA4E49 /* OVHotkeyField.h */,
+				6A98F2661026053700EA4E49 /* OVHotkeyField.m */,
+				6A98F2671026053700EA4E49 /* OVIMGenericController.h */,
+				6A98F2681026053700EA4E49 /* OVIMGenericController.m */,
+				6A98F2691026053700EA4E49 /* OVIMPhoneticController.h */,
+				6A98F26A1026053700EA4E49 /* OVIMPhoneticController.m */,
+				6A98F26B1026053700EA4E49 /* OVIMPOJHoloController.h */,
+				6A98F26C1026053700EA4E49 /* OVIMPOJHoloController.m */,
+				6A98F26D1026053700EA4E49 /* OVIMTibetanController.h */,
+				6A98F26E1026053700EA4E49 /* OVIMTibetanController.m */,
+				6A98F26F1026053700EA4E49 /* OVModuleController.h */,
+				6A98F2701026053700EA4E49 /* OVModuleController.m */,
+				6A98F2711026053700EA4E49 /* OVModulesListController.h */,
+				6A98F2721026053700EA4E49 /* OVModulesListController.m */,
+				6A98F2731026053700EA4E49 /* OVPreference_Toolbar.mm */,
+				6A98F2741026053700EA4E49 /* OVPreferenceController.h */,
+				6A98F2751026053700EA4E49 /* OVPreferenceController.mm */,
+				6A98F2761026053700EA4E49 /* OVShortcutHelper.h */,
+				6A98F2771026053700EA4E49 /* OVShortcutHelper.mm */,
+				6A98F2781026053700EA4E49 /* OVTableModuleController.h */,
+				6A98F2791026053700EA4E49 /* OVTableModuleController.m */,
+				6A98F27A1026053700EA4E49 /* Preferences_Prefix.pch */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		6A98F25B1026053700EA4E49 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				6A98F25C1026053700EA4E49 /* General.tiff */,
+				6A98F25D1026053700EA4E49 /* Modules.tiff */,
+				6A98F25E1026053700EA4E49 /* OVPreferences.icns */,
+				6A98F25F1026053700EA4E49 /* WindowBackground.jpg */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		6A98F2AE1026056B00EA4E49 /* CocoaVanilla */ = {
+			isa = PBXGroup;
+			children = (
+				6A98F2B01026056B00EA4E49 /* CocoaVanilla.h */,
+				6A98F2B11026056B00EA4E49 /* CTGradient */,
+				6A98F2B41026056B00EA4E49 /* CVBubbleTextView.h */,
+				6A98F2B51026056B00EA4E49 /* CVBubbleTextView.m */,
+				6A98F2B61026056B00EA4E49 /* CVBubbleTextWindow.h */,
+				6A98F2B71026056B00EA4E49 /* CVBubbleTextWindow.m */,
+				6A98F2B81026056B00EA4E49 /* CVBuffer.h */,
+				6A98F2B91026056B00EA4E49 /* CVBuffer.mm */,
+				6A98F2BA1026056B00EA4E49 /* CVCandidate.h */,
+				6A98F2BB1026056B00EA4E49 /* CVCandidate.mm */,
+				6A98F2BC1026056B00EA4E49 /* CVConfig.h */,
+				6A98F2BD1026056B00EA4E49 /* CVConfig.mm */,
+				6A98F2BE1026056B00EA4E49 /* CVDictionary.h */,
+				6A98F2BF1026056B00EA4E49 /* CVDictionary.mm */,
+				6A98F2C01026056B00EA4E49 /* CVEmbeddedLoader.h */,
+				6A98F2C11026056B00EA4E49 /* CVEmbeddedLoader.mm */,
+				6A98F2C21026056B00EA4E49 /* CVKeyCode.h */,
+				6A98F2C31026056B00EA4E49 /* CVKeyCode.mm */,
+				6A98F2C41026056B00EA4E49 /* CVLoader.h */,
+				6A98F2C51026056B00EA4E49 /* CVLoader.mm */,
+				6A98F2C61026056B00EA4E49 /* CVLoaderConfig.h */,
+				6A98F2C71026056B00EA4E49 /* CVLoaderConfig.mm */,
+				6A98F2C81026056B00EA4E49 /* CVLoaderUtility.h */,
+				6A98F2C91026056B00EA4E49 /* CVLoaderUtility.mm */,
+				6A98F2CA1026056B00EA4E49 /* CVService.h */,
+				6A98F2CB1026056B00EA4E49 /* CVService.mm */,
+				6A98F2CC1026056B00EA4E49 /* CVSmartMenu.h */,
+				6A98F2CD1026056B00EA4E49 /* CVSmartMenu.mm */,
+				6A98F2CE1026056B00EA4E49 /* CVWrappers.h */,
+				6A98F2CF1026056B00EA4E49 /* CVWrappers.mm */,
+				6A98F2D01026056B00EA4E49 /* IMInterface.h */,
+				6A98F2D11026056B00EA4E49 /* IMInterface.mm */,
+				6A98F2D21026056B00EA4E49 /* NSExtensions */,
+				6A98F2D91026056B00EA4E49 /* OVDisplayServer.h */,
+				6A98F2DA1026056B00EA4E49 /* TSBundle.h */,
+				6A98F2DB1026056B00EA4E49 /* TSBundle.mm */,
+				6A98F2DC1026056B00EA4E49 /* TSComposingBuffer.h */,
+				6A98F2DD1026056B00EA4E49 /* TSComposingBuffer.mm */,
+			);
+			path = CocoaVanilla;
+			sourceTree = "<group>";
+		};
+		6A98F2B11026056B00EA4E49 /* CTGradient */ = {
+			isa = PBXGroup;
+			children = (
+				6A98F2B21026056B00EA4E49 /* CTGradient.h */,
+				6A98F2B31026056B00EA4E49 /* CTGradient.m */,
+			);
+			path = CTGradient;
+			sourceTree = "<group>";
+		};
+		6A98F2D21026056B00EA4E49 /* NSExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				6A98F2D31026056B00EA4E49 /* NSBezierPathAdditions.h */,
+				6A98F2D41026056B00EA4E49 /* NSBezierPathAdditions.m */,
+				6A98F2D51026056B00EA4E49 /* NSDictionaryExtension.h */,
+				6A98F2D61026056B00EA4E49 /* NSDictionaryExtension.mm */,
+				6A98F2D71026056B00EA4E49 /* NSStringExtension.h */,
+				6A98F2D81026056B00EA4E49 /* NSStringExtension.mm */,
+			);
+			path = NSExtensions;
+			sourceTree = "<group>";
+		};
+		6A98F3381026071400EA4E49 /* OpenVanilla */ = {
+			isa = PBXGroup;
+			children = (
+				6A98F3391026071400EA4E49 /* Headers */,
+				6A98F3421026071400EA4E49 /* Source */,
+			);
+			name = OpenVanilla;
+			path = ../../Frameworks/OpenVanilla;
+			sourceTree = SOURCE_ROOT;
+		};
+		6A98F3391026071400EA4E49 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				6A98F33A1026071400EA4E49 /* OpenVanilla.h */,
+				6A98F33B1026071400EA4E49 /* OVFileHelper.h */,
+				6A98F33C1026071400EA4E49 /* OVLibrary.h */,
+				6A98F33D1026071400EA4E49 /* OVStringHelper.h */,
+				6A98F33E1026071400EA4E49 /* OVUTF8Helper.h */,
+				6A98F33F1026071400EA4E49 /* OVUtility.h */,
+				6A98F3401026071400EA4E49 /* OVWildcard.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		6A98F3421026071400EA4E49 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				6A98F3431026071400EA4E49 /* FrameworkStub.cpp */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		6A98F362102607C900EA4E49 /* TextServiceComponent */ = {
+			isa = PBXGroup;
+			children = (
+				6A98F364102607C900EA4E49 /* ATSComponent.h */,
+			);
+			path = TextServiceComponent;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6A98F32D102606FE00EA4E49 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A98F3441026071400EA4E49 /* OpenVanilla.h in Headers */,
+				6A98F3451026071400EA4E49 /* OVFileHelper.h in Headers */,
+				6A98F3461026071400EA4E49 /* OVLibrary.h in Headers */,
+				6A98F3471026071400EA4E49 /* OVStringHelper.h in Headers */,
+				6A98F3481026071400EA4E49 /* OVUTF8Helper.h in Headers */,
+				6A98F3491026071400EA4E49 /* OVUtility.h in Headers */,
+				6A98F34A1026071400EA4E49 /* OVWildcard.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6A98F23E1026052B00EA4E49 /* OVPreferences */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A98F2451026052C00EA4E49 /* Build configuration list for PBXNativeTarget "OVPreferences" */;
+			buildPhases = (
+				6A98F23B1026052B00EA4E49 /* Resources */,
+				6A98F23C1026052B00EA4E49 /* Sources */,
+				6A98F23D1026052B00EA4E49 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6A98F3571026079B00EA4E49 /* PBXTargetDependency */,
+			);
+			name = OVPreferences;
+			productName = OVPreferences;
+			productReference = 6A98F23F1026052B00EA4E49 /* OVPreferences.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6A98F331102606FE00EA4E49 /* OpenVanilla */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A98F336102606FF00EA4E49 /* Build configuration list for PBXNativeTarget "OpenVanilla" */;
+			buildPhases = (
+				6A98F32D102606FE00EA4E49 /* Headers */,
+				6A98F32E102606FE00EA4E49 /* Resources */,
+				6A98F32F102606FE00EA4E49 /* Sources */,
+				6A98F330102606FE00EA4E49 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenVanilla;
+			productName = OpenVanilla;
+			productReference = 6A98F332102606FE00EA4E49 /* OpenVanilla.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6A98F22A1026050000EA4E49 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 6A98F22D1026050000EA4E49 /* Build configuration list for PBXProject "OVPreferences" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				zh_CN,
+				zh_TW,
+			);
+			mainGroup = 6A98F2281026050000EA4E49;
+			productRefGroup = 6A98F2401026052B00EA4E49 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6A98F23E1026052B00EA4E49 /* OVPreferences */,
+				6A98F331102606FE00EA4E49 /* OpenVanilla */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6A98F23B1026052B00EA4E49 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A98F28E1026053700EA4E49 /* InfoPlist.strings in Resources */,
+				6A98F28F1026053700EA4E49 /* Localizable.strings in Resources */,
+				6A98F2901026053700EA4E49 /* MainMenu.xib in Resources */,
+				6A98F2911026053700EA4E49 /* OVDisplayController.xib in Resources */,
+				6A98F2921026053700EA4E49 /* OVIMGenericController.xib in Resources */,
+				6A98F2931026053700EA4E49 /* OVIMPhoneticController.xib in Resources */,
+				6A98F2941026053700EA4E49 /* OVIMPOJHoloController.xib in Resources */,
+				6A98F2951026053700EA4E49 /* OVIMTibetanController.xib in Resources */,
+				6A98F2961026053700EA4E49 /* OVTableModuleController.xib in Resources */,
+				6A98F2971026053700EA4E49 /* General.tiff in Resources */,
+				6A98F2981026053700EA4E49 /* Modules.tiff in Resources */,
+				6A98F2991026053700EA4E49 /* OVPreferences.icns in Resources */,
+				6A98F29A1026053700EA4E49 /* WindowBackground.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A98F32E102606FE00EA4E49 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6A98F23C1026052B00EA4E49 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A98F28D1026053700EA4E49 /* CVPreviewView.mm in Sources */,
+				6A98F29C1026053700EA4E49 /* main.m in Sources */,
+				6A98F29D1026053700EA4E49 /* OVDisplayController.mm in Sources */,
+				6A98F29E1026053700EA4E49 /* OVHotkeyField.m in Sources */,
+				6A98F29F1026053700EA4E49 /* OVIMGenericController.m in Sources */,
+				6A98F2A01026053700EA4E49 /* OVIMPhoneticController.m in Sources */,
+				6A98F2A11026053700EA4E49 /* OVIMPOJHoloController.m in Sources */,
+				6A98F2A21026053700EA4E49 /* OVIMTibetanController.m in Sources */,
+				6A98F2A31026053700EA4E49 /* OVModuleController.m in Sources */,
+				6A98F2A41026053700EA4E49 /* OVModulesListController.m in Sources */,
+				6A98F2A51026053700EA4E49 /* OVPreference_Toolbar.mm in Sources */,
+				6A98F2A61026053700EA4E49 /* OVPreferenceController.mm in Sources */,
+				6A98F2A71026053700EA4E49 /* OVShortcutHelper.mm in Sources */,
+				6A98F2A81026053700EA4E49 /* OVTableModuleController.m in Sources */,
+				6A98F2DF1026056B00EA4E49 /* CTGradient.m in Sources */,
+				6A98F2E01026056B00EA4E49 /* CVBubbleTextView.m in Sources */,
+				6A98F2E11026056B00EA4E49 /* CVBubbleTextWindow.m in Sources */,
+				6A98F2E21026056B00EA4E49 /* CVBuffer.mm in Sources */,
+				6A98F2E31026056B00EA4E49 /* CVCandidate.mm in Sources */,
+				6A98F2E41026056B00EA4E49 /* CVConfig.mm in Sources */,
+				6A98F2E51026056B00EA4E49 /* CVDictionary.mm in Sources */,
+				6A98F2E61026056B00EA4E49 /* CVEmbeddedLoader.mm in Sources */,
+				6A98F2E71026056B00EA4E49 /* CVKeyCode.mm in Sources */,
+				6A98F2E81026056B00EA4E49 /* CVLoader.mm in Sources */,
+				6A98F2E91026056B00EA4E49 /* CVLoaderConfig.mm in Sources */,
+				6A98F2EA1026056B00EA4E49 /* CVLoaderUtility.mm in Sources */,
+				6A98F2EB1026056B00EA4E49 /* CVService.mm in Sources */,
+				6A98F2EC1026056B00EA4E49 /* CVSmartMenu.mm in Sources */,
+				6A98F2ED1026056B00EA4E49 /* CVWrappers.mm in Sources */,
+				6A98F2EE1026056B00EA4E49 /* IMInterface.mm in Sources */,
+				6A98F2EF1026056B00EA4E49 /* NSBezierPathAdditions.m in Sources */,
+				6A98F2F01026056B00EA4E49 /* NSDictionaryExtension.mm in Sources */,
+				6A98F2F11026056B00EA4E49 /* NSStringExtension.mm in Sources */,
+				6A98F2F21026056B00EA4E49 /* TSBundle.mm in Sources */,
+				6A98F2F31026056B00EA4E49 /* TSComposingBuffer.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A98F32F102606FE00EA4E49 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A98F34C1026071400EA4E49 /* FrameworkStub.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6A98F3571026079B00EA4E49 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A98F331102606FE00EA4E49 /* OpenVanilla */;
+			targetProxy = 6A98F3561026079B00EA4E49 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6A98F2491026053700EA4E49 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A98F24A1026053700EA4E49 /* English */,
+				6A98F27B1026053700EA4E49 /* zh_CN */,
+				6A98F2841026053700EA4E49 /* zh_TW */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6A98F24B1026053700EA4E49 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A98F24C1026053700EA4E49 /* English */,
+				6A98F27C1026053700EA4E49 /* zh_CN */,
+				6A98F2851026053700EA4E49 /* zh_TW */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6A98F24D1026053700EA4E49 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A98F24E1026053700EA4E49 /* English */,
+				6A98F27D1026053700EA4E49 /* zh_CN */,
+				6A98F2861026053700EA4E49 /* zh_TW */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		6A98F24F1026053700EA4E49 /* OVDisplayController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A98F2501026053700EA4E49 /* English */,
+				6A98F27E1026053700EA4E49 /* zh_CN */,
+				6A98F2871026053700EA4E49 /* zh_TW */,
+			);
+			name = OVDisplayController.xib;
+			sourceTree = "<group>";
+		};
+		6A98F2511026053700EA4E49 /* OVIMGenericController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A98F2521026053700EA4E49 /* English */,
+				6A98F27F1026053700EA4E49 /* zh_CN */,
+				6A98F2881026053700EA4E49 /* zh_TW */,
+			);
+			name = OVIMGenericController.xib;
+			sourceTree = "<group>";
+		};
+		6A98F2531026053700EA4E49 /* OVIMPhoneticController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A98F2541026053700EA4E49 /* English */,
+				6A98F2801026053700EA4E49 /* zh_CN */,
+				6A98F2891026053700EA4E49 /* zh_TW */,
+			);
+			name = OVIMPhoneticController.xib;
+			sourceTree = "<group>";
+		};
+		6A98F2551026053700EA4E49 /* OVIMPOJHoloController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A98F2561026053700EA4E49 /* English */,
+				6A98F2811026053700EA4E49 /* zh_CN */,
+				6A98F28A1026053700EA4E49 /* zh_TW */,
+			);
+			name = OVIMPOJHoloController.xib;
+			sourceTree = "<group>";
+		};
+		6A98F2571026053700EA4E49 /* OVIMTibetanController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A98F2581026053700EA4E49 /* English */,
+				6A98F2821026053700EA4E49 /* zh_CN */,
+				6A98F28B1026053700EA4E49 /* zh_TW */,
+			);
+			name = OVIMTibetanController.xib;
+			sourceTree = "<group>";
+		};
+		6A98F2591026053700EA4E49 /* OVTableModuleController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A98F25A1026053700EA4E49 /* English */,
+				6A98F2831026053700EA4E49 /* zh_CN */,
+				6A98F28C1026053700EA4E49 /* zh_TW */,
+			);
+			name = OVTableModuleController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6A98F22B1026050000EA4E49 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		6A98F22C1026050000EA4E49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Release;
+		};
+		6A98F2431026052B00EA4E49 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVPreferences-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVPreferences;
+			};
+			name = Debug;
+		};
+		6A98F2441026052B00EA4E49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "OVPreferences-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OVPreferences;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		6A98F334102606FF00EA4E49 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "../../Frameworks/OpenVanilla/OpenVanillaFramework-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenVanilla;
+			};
+			name = Debug;
+		};
+		6A98F335102606FF00EA4E49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "../../Frameworks/OpenVanilla/OpenVanillaFramework-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenVanilla;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6A98F22D1026050000EA4E49 /* Build configuration list for PBXProject "OVPreferences" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A98F22B1026050000EA4E49 /* Debug */,
+				6A98F22C1026050000EA4E49 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A98F2451026052C00EA4E49 /* Build configuration list for PBXNativeTarget "OVPreferences" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A98F2431026052B00EA4E49 /* Debug */,
+				6A98F2441026052B00EA4E49 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A98F336102606FF00EA4E49 /* Build configuration list for PBXNativeTarget "OpenVanilla" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A98F334102606FF00EA4E49 /* Debug */,
+				6A98F335102606FF00EA4E49 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6A98F22A1026050000EA4E49 /* Project object */;
+}

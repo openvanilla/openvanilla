@@ -51,6 +51,12 @@ void CVPreparePath() {
 NSArray *CVGetModuleLoadPath() {
     NSMutableArray *a = [[NSMutableArray new] autorelease];
     
+#warning Make-shift
+	
+	[a addObject:[@"~/Library/Input Methods/OpenVanilla.app/Contents/Resources/Modules" stringByStandardizingPath]];
+	NSLog(@"Using module path: %@", [a objectAtIndex:0]);
+	
+	/*
     // put in CVLC_SYSMODULE_PATH (/Library/OpenVanilla/[version_no]/Modules)
     [a addObject:CVLC_SYSMODULE_PATH];
 
@@ -61,6 +67,8 @@ NSArray *CVGetModuleLoadPath() {
 		[[NSFileManager defaultManager] createDirectoryAtPath:um attributes:nil];		
 	}
     [a addObject:um];
+	 */
+	
     return a;
 }
 
