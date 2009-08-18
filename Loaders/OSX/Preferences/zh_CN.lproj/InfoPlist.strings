@@ -1,5 +1,0 @@
-﻿/* Localized versions of Info.plist keys */
-
-CFBundleName = "OpenVanilla 预置";
-CFBundleDisplayName = "OpenVanilla 预置";
-NSHumanReadableCopyright = "Copyright © 2004-2008, OpenVanilla.org.";
