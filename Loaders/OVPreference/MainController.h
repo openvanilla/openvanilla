@@ -18,6 +18,7 @@
 
 - (NSString *)plistFilePath;
 - (void)loadPlist;
+- (void)updateSettingWithIdentifier:(NSString *)identifier settings:(NSDictionary *)settings;
 - (void)writePlist;
 - (void)initModules;
 

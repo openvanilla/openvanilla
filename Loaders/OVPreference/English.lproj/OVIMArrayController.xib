@@ -74,13 +74,13 @@
 					<object class="NSButton" id="776538825">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{18, 415}, {97, 18}}</string>
+						<string key="NSFrame">{{18, 415}, {103, 18}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="1066884362">
 							<int key="NSCellFlags">-2080244224</int>
 							<int key="NSCellFlags2">0</int>
-							<string type="base64-UTF8" key="NSContents">54m55Yil56K85o+Q56S6A</string>
+							<string key="NSContents">Special Code</string>
 							<reference key="NSSupport" ref="357060054"/>
 							<reference key="NSControlView" ref="776538825"/>
 							<int key="NSButtonFlags">1211912703</int>
@@ -104,51 +104,43 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">_quickModeCheckBox</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="788877451"/>
+					</object>
+					<int key="connectionID">20</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_specialCodeCheckBox</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="776538825"/>
+					</object>
+					<int key="connectionID">22</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">_view</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="1005"/>
 					</object>
-					<int key="connectionID">16</int>
+					<int key="connectionID">23</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string type="base64-UTF8" key="label">dmFsdWU6IF9kaWN0aW9uYXJ5LueJueWIpeeivOaPkOekug</string>
-						<reference key="source" ref="776538825"/>
-						<reference key="destination" ref="1001"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="776538825"/>
-							<reference key="NSDestination" ref="1001"/>
-							<string type="base64-UTF8" key="NSLabel">dmFsdWU6IF9kaWN0aW9uYXJ5LueJueWIpeeivOaPkOekug</string>
-							<string key="NSBinding">value</string>
-							<string type="base64-UTF8" key="NSKeyPath">X2RpY3Rpb25hcnku54m55Yil56K85o+Q56S6A</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSValidatesImmediately</string>
-								<boolean value="YES" key="NS.object.0" id="5"/>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
+					<object class="IBActionConnection" key="connection">
+						<string key="label">setQuickModeAction:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="788877451"/>
 					</object>
-					<int key="connectionID">18</int>
+					<int key="connectionID">24</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: _dictionary.QuickMode</string>
-						<reference key="source" ref="788877451"/>
-						<reference key="destination" ref="1001"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="788877451"/>
-							<reference key="NSDestination" ref="1001"/>
-							<string key="NSLabel">value: _dictionary.QuickMode</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">_dictionary.QuickMode</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSValidatesImmediately</string>
-								<reference key="NS.object.0" ref="5"/>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
+					<object class="IBActionConnection" key="connection">
+						<string key="label">setSpecialCodeAction:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="776538825"/>
 					</object>
-					<int key="connectionID">19</int>
+					<int key="connectionID">25</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -271,7 +263,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">19</int>
+			<int key="maxID">25</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -279,6 +271,32 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">OVIMArrayController</string>
 					<string key="superclassName">OVViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSMutableArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>setQuickModeAction:</string>
+							<string>setSpecialCodeAction:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSMutableArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>_quickModeCheckBox</string>
+							<string>_specialCodeCheckBox</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSButton</string>
+							<string>NSButton</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">OVIMArrayController.h</string>

@@ -7,7 +7,8 @@
 #import "MainController+TableView.h"
 #import "OVViewController.h"
 #import "OVIMArrayController.h"
-
+#import "OVIMPhoneticController.h"
+#import "OVIMTibetanController.h"
 
 @implementation MainController
 
@@ -60,8 +61,15 @@
 		[_settingDictionary setDictionary:plist];
 	}
 }
+- (void)updateSettingWithIdentifier:(NSString *)identifier settings:(NSDictionary *)settings
+{
+	[_settingDictionary setValue:settings forKey:identifier];
+	[self writePlist];
+}
 - (void)writePlist
 {
+	NSString *plistFilePath = [self plistFilePath];
+	[_settingDictionary writeToFile:plistFilePath atomically:YES];
 }
 - (void)initModules
 {
@@ -70,6 +78,18 @@
 	[arrayController setDictinary:d];
 	[arrayController setLocalizedName:@"Array"];
 	[_controllersArray addObject:arrayController];
+	
+	d = [_settingDictionary valueForKey:@"OVIMPhonetic"];
+	OVIMPhoneticController *phoneticController = [[[OVIMPhoneticController alloc] initWithIdentifier:@"OVIMPhonetic" nibName:@"OVIMPhoneticController"] autorelease];	
+	[phoneticController setDictinary:d];
+	[phoneticController setLocalizedName:@"Phonetic"];
+	[_controllersArray addObject:phoneticController];
+
+	d = [_settingDictionary valueForKey:@"OVIMTibetan"];
+	OVIMTibetanController *tibetanController = [[[OVIMTibetanController alloc] initWithIdentifier:@"OVIMTibetan" nibName:@"OVIMTibetanController"] autorelease];	
+	[tibetanController setDictinary:d];
+	[tibetanController setLocalizedName:@"Tibetan"];
+	[_controllersArray addObject:tibetanController];
 	
 	[_moduleListTableView reloadData];
 	if ([_controllersArray count]) {

@@ -3,7 +3,7 @@
 //  OVPreference
 
 #import "OVViewController.h"
-
+#import "MainController.h"
 
 @implementation OVViewController
 
@@ -32,6 +32,14 @@
 {
 	[_dictionary setDictionary:dictionary];
 }
+- (NSDictionary *)dictionary
+{
+	return _dictionary;
+}
+- (void)setValue:(id)value forKey:(NSString *)key
+{
+	[_dictionary setValue:value forKey:key];
+}
 - (void)setIdentifier:(NSString *)identifier
 {
 	id tmp = _identifier;
@@ -57,15 +65,23 @@
 {
 	return _view;
 }
+- (void)writeSetting
+{
+	MainController *controller = (MainController *)[NSApp delegate];
+	[controller updateSettingWithIdentifier:_identifier settings:_dictionary];
+}
 
 #pragma mark -
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	NSLog(@"%s", __PRETTY_FUNCTION__);
-	NSLog(@"keyPath %@", keyPath);
-	NSLog(@"object %@", [object description]);
-	NSLog(@"change %@", [change description]);
+	if ([object isKindOfClass:[NSDictionary class]]) {
+		NSLog(@"%s", __PRETTY_FUNCTION__);
+		NSLog(@"keyPath %@", keyPath);
+		NSLog(@"object %@", [object description]);
+		NSLog(@"change %@", [change description]);
+		[self writeSetting];
+	}
 }
 
 - (void)didChangeValueForKey:(NSString *)key

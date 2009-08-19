@@ -9,7 +9,7 @@
 
 - (void)setActiveModuleSettingView:(NSView *)view
 {
-	NSArray *subViews = [[[_moduleContentView subviews] copy] autorelease];
+	NSArray *subViews = [NSArray arrayWithArray:[_moduleContentView subviews]];
 	NSEnumerator *enumerator = [subViews objectEnumerator];
 	NSView *subView = nil;
 	while (subView = [enumerator nextObject]) {
@@ -37,7 +37,7 @@
 {
 	NSTableView *tableview = [aNotification object];
 	NSInteger index = [tableview selectedRow];
-	if (index > 0 && index < [_controllersArray count]) {
+	if (index >= 0 && index < [_controllersArray count]) {
 		OVViewController *controller = [_controllersArray objectAtIndex:index];
 		NSView *view = [controller view];
 		[self setActiveModuleSettingView:view];

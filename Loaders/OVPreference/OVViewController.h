@@ -19,10 +19,13 @@
 - (id)initWithIdentifier:(NSString *)identifier nibName:(NSString *)nibName;
 
 - (void)setDictinary:(NSDictionary *)dictionary;
+- (NSDictionary *)dictionary;
+- (void)setValue:(id)value forKey:(NSString *)key;
 - (void)setIdentifier:(NSString *)identifier;
 - (NSString *)identifier;
 - (void)setLocalizedName:(NSString *)localizedName;
 - (NSString *)localizedName;
 - (NSView *)view;
+- (void)writeSetting;
 
 @end

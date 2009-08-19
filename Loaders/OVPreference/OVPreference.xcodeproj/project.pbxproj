@@ -17,6 +17,10 @@
 		D417D818103C223D00739686 /* OVIMArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = D417D817103C223D00739686 /* OVIMArrayController.m */; };
 		D417D821103C226A00739686 /* OVIMArrayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D417D820103C226A00739686 /* OVIMArrayController.xib */; };
 		D417D82D103C253B00739686 /* MainController+TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D417D82C103C253B00739686 /* MainController+TableView.m */; };
+		D4EEE8BA103C3F6700170D8D /* OVIMPhoneticController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4EEE8B9103C3F6700170D8D /* OVIMPhoneticController.m */; };
+		D4EEE8C3103C3FA000170D8D /* OVIMPhoneticController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4EEE8C2103C3FA000170D8D /* OVIMPhoneticController.xib */; };
+		D4EEE925103C460300170D8D /* OVIMTibetanController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4EEE924103C460300170D8D /* OVIMTibetanController.m */; };
+		D4EEE930103C462D00170D8D /* OVIMTibetanController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4EEE92F103C462D00170D8D /* OVIMTibetanController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +45,12 @@
 		D417D81E103C226700739686 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMArrayController.xib; sourceTree = "<group>"; };
 		D417D82B103C253B00739686 /* MainController+TableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MainController+TableView.h"; sourceTree = "<group>"; };
 		D417D82C103C253B00739686 /* MainController+TableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MainController+TableView.m"; sourceTree = "<group>"; };
+		D4EEE8B8103C3F6700170D8D /* OVIMPhoneticController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMPhoneticController.h; sourceTree = "<group>"; };
+		D4EEE8B9103C3F6700170D8D /* OVIMPhoneticController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMPhoneticController.m; sourceTree = "<group>"; };
+		D4EEE8C0103C3F9C00170D8D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMPhoneticController.xib; sourceTree = "<group>"; };
+		D4EEE923103C460300170D8D /* OVIMTibetanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMTibetanController.h; sourceTree = "<group>"; };
+		D4EEE924103C460300170D8D /* OVIMTibetanController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMTibetanController.m; sourceTree = "<group>"; };
+		D4EEE92D103C462900170D8D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMTibetanController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +135,8 @@
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 				D417D820103C226A00739686 /* OVIMArrayController.xib */,
+				D4EEE8C2103C3FA000170D8D /* OVIMPhoneticController.xib */,
+				D4EEE92F103C462D00170D8D /* OVIMTibetanController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -143,6 +155,10 @@
 			children = (
 				D417D816103C223D00739686 /* OVIMArrayController.h */,
 				D417D817103C223D00739686 /* OVIMArrayController.m */,
+				D4EEE8B8103C3F6700170D8D /* OVIMPhoneticController.h */,
+				D4EEE8B9103C3F6700170D8D /* OVIMPhoneticController.m */,
+				D4EEE923103C460300170D8D /* OVIMTibetanController.h */,
+				D4EEE924103C460300170D8D /* OVIMTibetanController.m */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -193,6 +209,8 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				D417D821103C226A00739686 /* OVIMArrayController.xib in Resources */,
+				D4EEE8C3103C3FA000170D8D /* OVIMPhoneticController.xib in Resources */,
+				D4EEE930103C462D00170D8D /* OVIMTibetanController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +227,8 @@
 				D417D7ED103C17F700739686 /* OVViewController.m in Sources */,
 				D417D818103C223D00739686 /* OVIMArrayController.m in Sources */,
 				D417D82D103C253B00739686 /* MainController+TableView.m in Sources */,
+				D4EEE8BA103C3F6700170D8D /* OVIMPhoneticController.m in Sources */,
+				D4EEE925103C460300170D8D /* OVIMTibetanController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +257,22 @@
 				D417D81E103C226700739686 /* English */,
 			);
 			name = OVIMArrayController.xib;
+			sourceTree = "<group>";
+		};
+		D4EEE8C2103C3FA000170D8D /* OVIMPhoneticController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4EEE8C0103C3F9C00170D8D /* English */,
+			);
+			name = OVIMPhoneticController.xib;
+			sourceTree = "<group>";
+		};
+		D4EEE92F103C462D00170D8D /* OVIMTibetanController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4EEE92D103C462900170D8D /* English */,
+			);
+			name = OVIMTibetanController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
