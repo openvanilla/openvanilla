@@ -27,7 +27,7 @@
 	<key>InputMethodServerDelegateClass</key>
 	<string>LVInputController</string>
 	<key>LSBackgroundOnly</key>
-	<string>0</string>
+	<true />
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
