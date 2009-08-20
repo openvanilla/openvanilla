@@ -134,11 +134,13 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 {
 	return [NSString stringWithFormat:@"OVModule (type '%s', identifier '%s', en name '%s')", _module->moduleType(), _module->identifier(), _module->localizedName("en")];
 }
+
 - (NSString *)moduleIdentifier
 {
 	const char *i = _module->identifier();
 	return [NSString stringWithUTF8String:_module->identifier()];
 }
+
 - (BOOL)lazyInitWithLoaderService:(LVService*)service configDictionary:(NSMutableDictionary *)configDict
 {
 	if (_initialized) {
@@ -506,7 +508,20 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 
 - (NSArray *)loadedModuleList
 {
-	return [_loadedModuleDictionary allKeys];
+	NSEnumerator *keyEnum = [[_loadedModuleDictionary allKeys] objectEnumerator];
+	NSString *nextKey;
+	
+	NSMutableArray *result = [NSMutableArray array];
+	while (nextKey = [keyEnum nextObject]) {
+		LVModule *module = [_loadedModuleDictionary objectForKey:nextKey];		
+		
+		NSString *moduleType = [NSString stringWithUTF8String:[module moduleObject]->moduleType()];
+		NSString *localizedName = [NSString stringWithUTF8String:[module moduleObject]->localizedName(_loaderService->locale())];
+		
+		[result addObject:[NSDictionary dictionaryWithObjectsAndKeys:nextKey, LVDOModuleIdentifierKey, moduleType, LVDOModuleTypeKey, localizedName, LVDOModuleLocalizedNameKey, nil]];
+	}
+	
+	return result;
 }
 @end
 

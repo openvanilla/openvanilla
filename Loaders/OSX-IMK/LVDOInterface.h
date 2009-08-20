@@ -31,8 +31,15 @@
 
 #import <Foundation/Foundation.h>
 
+#define LVDOINTERFACE_PROTOCOL_NAME @"LeopardVanillaDOInterface"
+
+
 @protocol LVDOInterface <NSObject>
+// returns an arry of dictionaries containing the keys below
 - (NSArray *)loadedModuleList;
 @end
 
-#define LVDOINTERFACE_PROTOCOL_NAME @"LeopardVanillaDOInterface"
+#define LVDOModuleIdentifierKey @"ModuleIdentifier"
+#define LVDOModuleLocalizedNameKey @"ModuleLocalizedName"
+#define LVDOModuleTypeKey @"ModuleType"
+
