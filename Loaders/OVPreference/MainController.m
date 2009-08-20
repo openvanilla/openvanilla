@@ -32,6 +32,12 @@
 	[_moduleListTableView setDelegate:self];
 	
 	[self setActiveView:_moduleSettingView animate:YES];
+	
+	_loader = (id<LVDOInterface>)[NSConnection rootProxyForConnectionWithRegisteredName:LVDOINTERFACE_PROTOCOL_NAME host:nil];
+	// TO DO: retain the object if run under 10.4
+	[(id)_loader setProtocolForProxy:@protocol(LVDOInterface)];
+
+	NSLog(@"loaded module identifiers: %@", [_loader loadedModuleList]);
 }
 
 - (NSString *)plistFilePath

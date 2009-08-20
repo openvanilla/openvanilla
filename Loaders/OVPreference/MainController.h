@@ -3,7 +3,7 @@
 //  OVPreference
 
 #import <Cocoa/Cocoa.h>
-
+#import "LVDOInterface.h"
 
 @interface MainController : NSWindowController 
 {
@@ -14,6 +14,8 @@
 	IBOutlet NSView *_moduleSettingView;
 	IBOutlet NSView *_moduleContentView;
 	IBOutlet NSTableView *_moduleListTableView;
+	
+	id<LVDOInterface> _loader;
 }
 
 - (NSString *)plistFilePath;

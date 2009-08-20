@@ -33,6 +33,7 @@
 #import <OpenVanilla/OpenVanilla.h>
 #import <OpenVanilla/OVLibrary.h>
 #import "LVOVImplementations.h"
+#import "LVDOInterface.h"
 
 class LVContextSandwich : public OVBase {
 public:
@@ -100,7 +101,7 @@ protected:
 - (BOOL)isUsable;
 @end
 
-@interface LVModuleManager : NSObject
+@interface LVModuleManager : NSObject <LVDOInterface>
 {
 	NSMutableDictionary *_configDictionary;
 	NSTimeInterval _configTimestamp;
@@ -111,6 +112,9 @@ protected:
 	LVService *_loaderService;
 	
 	NSString *_primaryInputMethodModuleID;
+	
+	NSPort *_distributedObjectPort;
+	NSConnection *_distributedObjectConnection;
 }
 + (LVModuleManager *)sharedManager;
 - (void)setModulePackageBundlePaths:(NSArray *)array;

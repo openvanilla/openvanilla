@@ -377,6 +377,7 @@
 		6A6A865C0E867E9300B94B7F /* OVLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLibrary.h; sourceTree = "<group>"; };
 		6A6A865D0E867E9300B94B7F /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUtility.h; sourceTree = "<group>"; };
 		6A6A867D0E86805700B94B7F /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVWildcard.h; sourceTree = "<group>"; };
+		6A8C6C9C103D3D1D00DE4A39 /* LVDOInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDOInterface.h; path = "Loaders/OSX-IMK/LVDOInterface.h"; sourceTree = "<group>"; };
 		6AAF6E180EAB772B00F4DFE0 /* OpenVanilla.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenVanilla.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AAF6E190EAB772B00F4DFE0 /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-Info.plist"; path = "Loaders/OSX-TSM/OpenVanilla-Info.plist"; sourceTree = "<group>"; };
 		6AAF6E7C0EAB77D500F4DFE0 /* OVLoaderServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OVLoaderServer-Info.plist"; path = "Loaders/OSX-TSM/OVLoaderServer-Info.plist"; sourceTree = "<group>"; };
@@ -710,6 +711,7 @@
 		6AB6CE650E9CF4510001B127 /* OSX-IMK */ = {
 			isa = PBXGroup;
 			children = (
+				6A8C6C9C103D3D1D00DE4A39 /* LVDOInterface.h */,
 				6AB6CF410E9CF5BC0001B127 /* Resources */,
 				6AB6CF3B0E9CF5B60001B127 /* LVConfig.h */,
 				6AB6CF3C0E9CF5B60001B127 /* LVInputController.h */,

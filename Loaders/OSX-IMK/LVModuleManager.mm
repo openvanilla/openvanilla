@@ -306,6 +306,7 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
     [_modulePackageBundlePaths release];	
 	[_configDictionary release];
 	[_primaryInputMethodModuleID release];
+	[_distributedObjectPort release];
 	delete _loaderService;
 	
     [super dealloc];
@@ -326,7 +327,18 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 		}
 		else {
 			_loaderService->setLocale("en");
+		}
+		
+		_distributedObjectPort = [[NSPort port] retain];
+		_distributedObjectConnection  = [[NSConnection connectionWithReceivePort:_distributedObjectPort sendPort:_distributedObjectPort] retain];	
+		[_distributedObjectConnection setRootObject:self];
+		
+		if ([_distributedObjectConnection registerName:LVDOINTERFACE_PROTOCOL_NAME]) {
+		}
+		else {
+			NSLog(@"Failed to register DO service named: %@", LVDOINTERFACE_PROTOCOL_NAME);
 		}		
+		
     }
     return self;
 }
@@ -488,6 +500,13 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 {
 	[self _writeConfigurationFile];
 	[self _notify:YES];
+}
+
+#pragma mark LVDOInterface
+
+- (NSArray *)loadedModuleList
+{
+	return [_loadedModuleDictionary allKeys];
 }
 @end
 
