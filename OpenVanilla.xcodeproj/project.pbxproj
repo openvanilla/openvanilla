@@ -39,6 +39,19 @@
 		6A6A86620E867E9300B94B7F /* OVUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865D0E867E9300B94B7F /* OVUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A6A86870E86805700B94B7F /* OVWildcard.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A867D0E86805700B94B7F /* OVWildcard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A6DB7100EAB7AB200A09A03 /* OVLoaderServer.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6AAF6ED10EAB781300F4DFE0 /* OVLoaderServer.app */; };
+		6A8C6D17103D3FA800DE4A39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6CFD103D3FA800DE4A39 /* InfoPlist.strings */; };
+		6A8C6D18103D3FA800DE4A39 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6CFF103D3FA800DE4A39 /* MainMenu.xib */; };
+		6A8C6D19103D3FA800DE4A39 /* OVIMArrayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6D01103D3FA800DE4A39 /* OVIMArrayController.xib */; };
+		6A8C6D1A103D3FA800DE4A39 /* OVIMPhoneticController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6D03103D3FA800DE4A39 /* OVIMPhoneticController.xib */; };
+		6A8C6D1B103D3FA800DE4A39 /* OVIMTibetanController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6D05103D3FA800DE4A39 /* OVIMTibetanController.xib */; };
+		6A8C6D1D103D3FA800DE4A39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8C6D08103D3FA800DE4A39 /* main.m */; };
+		6A8C6D1E103D3FA800DE4A39 /* MainController+TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8C6D0A103D3FA800DE4A39 /* MainController+TableView.m */; };
+		6A8C6D1F103D3FA800DE4A39 /* MainController+Toolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8C6D0C103D3FA800DE4A39 /* MainController+Toolbar.m */; };
+		6A8C6D20103D3FA800DE4A39 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8C6D0E103D3FA800DE4A39 /* MainController.m */; };
+		6A8C6D21103D3FA800DE4A39 /* OVIMArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8C6D10103D3FA800DE4A39 /* OVIMArrayController.m */; };
+		6A8C6D22103D3FA800DE4A39 /* OVIMPhoneticController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8C6D12103D3FA800DE4A39 /* OVIMPhoneticController.m */; };
+		6A8C6D23103D3FA800DE4A39 /* OVIMTibetanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8C6D14103D3FA800DE4A39 /* OVIMTibetanController.m */; };
+		6A8C6D24103D3FA800DE4A39 /* OVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8C6D16103D3FA800DE4A39 /* OVViewController.m */; };
 		6AAF6EB70EAB781300F4DFE0 /* OpenVanilla.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6CF420E9CF5D00001B127 /* OpenVanilla.icns */; };
 		6AAF6EB80EAB781300F4DFE0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6CF460E9CF5F00001B127 /* MainMenu.xib */; };
 		6AAF6EBA0EAB781300F4DFE0 /* LVUIController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6CF390E9CF5B60001B127 /* LVUIController.mm */; };
@@ -364,6 +377,29 @@
 		6A6A865D0E867E9300B94B7F /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUtility.h; sourceTree = "<group>"; };
 		6A6A867D0E86805700B94B7F /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVWildcard.h; sourceTree = "<group>"; };
 		6A8C6C9C103D3D1D00DE4A39 /* LVDOInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDOInterface.h; path = "Loaders/OSX-IMK/LVDOInterface.h"; sourceTree = "<group>"; };
+		6A8C6CE7103D3F8D00DE4A39 /* Preferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Preferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A8C6CE9103D3F8D00DE4A39 /* Preferences-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Preferences-Info.plist"; sourceTree = "<group>"; };
+		6A8C6CFE103D3FA800DE4A39 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6A8C6D00103D3FA800DE4A39 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		6A8C6D02103D3FA800DE4A39 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMArrayController.xib; sourceTree = "<group>"; };
+		6A8C6D04103D3FA800DE4A39 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMPhoneticController.xib; sourceTree = "<group>"; };
+		6A8C6D06103D3FA800DE4A39 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMTibetanController.xib; sourceTree = "<group>"; };
+		6A8C6D07103D3FA800DE4A39 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A8C6D08103D3FA800DE4A39 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6A8C6D09103D3FA800DE4A39 /* MainController+TableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MainController+TableView.h"; sourceTree = "<group>"; };
+		6A8C6D0A103D3FA800DE4A39 /* MainController+TableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MainController+TableView.m"; sourceTree = "<group>"; };
+		6A8C6D0B103D3FA800DE4A39 /* MainController+Toolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MainController+Toolbar.h"; sourceTree = "<group>"; };
+		6A8C6D0C103D3FA800DE4A39 /* MainController+Toolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MainController+Toolbar.m"; sourceTree = "<group>"; };
+		6A8C6D0D103D3FA800DE4A39 /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
+		6A8C6D0E103D3FA800DE4A39 /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
+		6A8C6D0F103D3FA800DE4A39 /* OVIMArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMArrayController.h; sourceTree = "<group>"; };
+		6A8C6D10103D3FA800DE4A39 /* OVIMArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMArrayController.m; sourceTree = "<group>"; };
+		6A8C6D11103D3FA800DE4A39 /* OVIMPhoneticController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMPhoneticController.h; sourceTree = "<group>"; };
+		6A8C6D12103D3FA800DE4A39 /* OVIMPhoneticController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMPhoneticController.m; sourceTree = "<group>"; };
+		6A8C6D13103D3FA800DE4A39 /* OVIMTibetanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMTibetanController.h; sourceTree = "<group>"; };
+		6A8C6D14103D3FA800DE4A39 /* OVIMTibetanController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMTibetanController.m; sourceTree = "<group>"; };
+		6A8C6D15103D3FA800DE4A39 /* OVViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVViewController.h; sourceTree = "<group>"; };
+		6A8C6D16103D3FA800DE4A39 /* OVViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVViewController.m; sourceTree = "<group>"; };
 		6AAF6E180EAB772B00F4DFE0 /* OpenVanilla.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenVanilla.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AAF6E190EAB772B00F4DFE0 /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-Info.plist"; path = "Loaders/OSX-TSM/OpenVanilla-Info.plist"; sourceTree = "<group>"; };
 		6AAF6E7C0EAB77D500F4DFE0 /* OVLoaderServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OVLoaderServer-Info.plist"; path = "Loaders/OSX-TSM/OVLoaderServer-Info.plist"; sourceTree = "<group>"; };
@@ -422,6 +458,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6A6A860E0E867B2E00B94B7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A8C6CE5103D3F8D00DE4A39 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -553,11 +596,13 @@
 		6A6A85AD0E86750E00B94B7F = {
 			isa = PBXGroup;
 			children = (
+				6A8C6CFB103D3FA800DE4A39 /* HelperApps */,
 				6A6A86650E867E9800B94B7F /* Frameworks */,
 				6AB6CE640E9CF44B0001B127 /* Loaders */,
 				6A6A86C70E86816100B94B7F /* Modules */,
 				6AB6CE790E9CF58D0001B127 /* Apple Frameworks */,
 				6A6A86110E867B2E00B94B7F /* Products */,
+				6A8C6CE9103D3F8D00DE4A39 /* Preferences-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -576,6 +621,7 @@
 				D403C5F30EA3D5C0006F0A89 /* OVOFHanConvert.bundle */,
 				6AAF6E180EAB772B00F4DFE0 /* OpenVanilla.bundle */,
 				6AAF6ED10EAB781300F4DFE0 /* OVLoaderServer.app */,
+				6A8C6CE7103D3F8D00DE4A39 /* Preferences.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -630,6 +676,42 @@
 				D403C5610EA3D47E006F0A89 /* Output Filters */,
 			);
 			name = Modules;
+			sourceTree = "<group>";
+		};
+		6A8C6CFB103D3FA800DE4A39 /* HelperApps */ = {
+			isa = PBXGroup;
+			children = (
+				6A8C6CFC103D3FA800DE4A39 /* PreferencesMac */,
+			);
+			path = HelperApps;
+			sourceTree = "<group>";
+		};
+		6A8C6CFC103D3FA800DE4A39 /* PreferencesMac */ = {
+			isa = PBXGroup;
+			children = (
+				6A8C6CFD103D3FA800DE4A39 /* InfoPlist.strings */,
+				6A8C6CFF103D3FA800DE4A39 /* MainMenu.xib */,
+				6A8C6D01103D3FA800DE4A39 /* OVIMArrayController.xib */,
+				6A8C6D03103D3FA800DE4A39 /* OVIMPhoneticController.xib */,
+				6A8C6D05103D3FA800DE4A39 /* OVIMTibetanController.xib */,
+				6A8C6D07103D3FA800DE4A39 /* Info.plist */,
+				6A8C6D08103D3FA800DE4A39 /* main.m */,
+				6A8C6D09103D3FA800DE4A39 /* MainController+TableView.h */,
+				6A8C6D0A103D3FA800DE4A39 /* MainController+TableView.m */,
+				6A8C6D0B103D3FA800DE4A39 /* MainController+Toolbar.h */,
+				6A8C6D0C103D3FA800DE4A39 /* MainController+Toolbar.m */,
+				6A8C6D0D103D3FA800DE4A39 /* MainController.h */,
+				6A8C6D0E103D3FA800DE4A39 /* MainController.m */,
+				6A8C6D0F103D3FA800DE4A39 /* OVIMArrayController.h */,
+				6A8C6D10103D3FA800DE4A39 /* OVIMArrayController.m */,
+				6A8C6D11103D3FA800DE4A39 /* OVIMPhoneticController.h */,
+				6A8C6D12103D3FA800DE4A39 /* OVIMPhoneticController.m */,
+				6A8C6D13103D3FA800DE4A39 /* OVIMTibetanController.h */,
+				6A8C6D14103D3FA800DE4A39 /* OVIMTibetanController.m */,
+				6A8C6D15103D3FA800DE4A39 /* OVViewController.h */,
+				6A8C6D16103D3FA800DE4A39 /* OVViewController.m */,
+			);
+			path = PreferencesMac;
 			sourceTree = "<group>";
 		};
 		6AAF6F380EAB787800F4DFE0 /* OSX-TSM */ = {
@@ -875,6 +957,23 @@
 			productReference = 6A6A86100E867B2E00B94B7F /* OpenVanilla.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		6A8C6CE6103D3F8D00DE4A39 /* Preferences */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A8C6CEC103D3F8E00DE4A39 /* Build configuration list for PBXNativeTarget "Preferences" */;
+			buildPhases = (
+				6A8C6CE3103D3F8D00DE4A39 /* Resources */,
+				6A8C6CE4103D3F8D00DE4A39 /* Sources */,
+				6A8C6CE5103D3F8D00DE4A39 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Preferences;
+			productName = Preferences;
+			productReference = 6A8C6CE7103D3F8D00DE4A39 /* Preferences.app */;
+			productType = "com.apple.product-type.application";
+		};
 		6AAF6E170EAB772B00F4DFE0 /* OpenVanilla (TSM Component) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6AAF6E1C0EAB772C00F4DFE0 /* Build configuration list for PBXNativeTarget "OpenVanilla (TSM Component)" */;
@@ -1096,6 +1195,7 @@
 				D403C4560EA3D10A006F0A89 /* OVIMUnicode */,
 				D403C5F20EA3D5C0006F0A89 /* OVOFHanConvert */,
 				D403C5750EA3D49E006F0A89 /* OVOFFullWidthCharacter */,
+				6A8C6CE6103D3F8D00DE4A39 /* Preferences */,
 			);
 		};
 /* End PBXProject section */
@@ -1112,6 +1212,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A8C6CE3103D3F8D00DE4A39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A8C6D17103D3FA800DE4A39 /* InfoPlist.strings in Resources */,
+				6A8C6D18103D3FA800DE4A39 /* MainMenu.xib in Resources */,
+				6A8C6D19103D3FA800DE4A39 /* OVIMArrayController.xib in Resources */,
+				6A8C6D1A103D3FA800DE4A39 /* OVIMPhoneticController.xib in Resources */,
+				6A8C6D1B103D3FA800DE4A39 /* OVIMTibetanController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1231,6 +1343,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A21AA410E9D0A290078C2E9 /* FrameworkStub.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A8C6CE4103D3F8D00DE4A39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A8C6D1D103D3FA800DE4A39 /* main.m in Sources */,
+				6A8C6D1E103D3FA800DE4A39 /* MainController+TableView.m in Sources */,
+				6A8C6D1F103D3FA800DE4A39 /* MainController+Toolbar.m in Sources */,
+				6A8C6D20103D3FA800DE4A39 /* MainController.m in Sources */,
+				6A8C6D21103D3FA800DE4A39 /* OVIMArrayController.m in Sources */,
+				6A8C6D22103D3FA800DE4A39 /* OVIMPhoneticController.m in Sources */,
+				6A8C6D23103D3FA800DE4A39 /* OVIMTibetanController.m in Sources */,
+				6A8C6D24103D3FA800DE4A39 /* OVViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1462,6 +1589,46 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		6A8C6CFD103D3FA800DE4A39 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A8C6CFE103D3FA800DE4A39 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6A8C6CFF103D3FA800DE4A39 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A8C6D00103D3FA800DE4A39 /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		6A8C6D01103D3FA800DE4A39 /* OVIMArrayController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A8C6D02103D3FA800DE4A39 /* English */,
+			);
+			name = OVIMArrayController.xib;
+			sourceTree = "<group>";
+		};
+		6A8C6D03103D3FA800DE4A39 /* OVIMPhoneticController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A8C6D04103D3FA800DE4A39 /* English */,
+			);
+			name = OVIMPhoneticController.xib;
+			sourceTree = "<group>";
+		};
+		6A8C6D05103D3FA800DE4A39 /* OVIMTibetanController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A8C6D06103D3FA800DE4A39 /* English */,
+			);
+			name = OVIMTibetanController.xib;
+			sourceTree = "<group>";
+		};
 		6AB6CF460E9CF5F00001B127 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1602,6 +1769,54 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				PRODUCT_NAME = Distribution;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		6A8C6CEA103D3F8E00DE4A39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = HelperApps/PreferencesMac/Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Preferences;
+			};
+			name = Debug;
+		};
+		6A8C6CEB103D3F8E00DE4A39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = HelperApps/PreferencesMac/Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Preferences;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -2105,6 +2320,15 @@
 			buildConfigurations = (
 				6A6A86FB0E8683CB00B94B7F /* Debug */,
 				6A6A86FC0E8683CB00B94B7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A8C6CEC103D3F8E00DE4A39 /* Build configuration list for PBXNativeTarget "Preferences" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A8C6CEA103D3F8E00DE4A39 /* Debug */,
+				6A8C6CEB103D3F8E00DE4A39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
