@@ -109,7 +109,7 @@ OVCINList::OVCINList(const char *pathseparator) {
     int OVCINList::load(const char *loadpath, const char *extension) {
         clExtension=extension;
     
-        struct dirent **files;
+        struct dirent **files = NULL;
         int count=scandir(loadpath, &files, CLFileSelect, alphasort);        
 
         int loaded=0;
@@ -123,7 +123,11 @@ OVCINList::OVCINList(const char *pathseparator) {
             if (preparse(loadpath, files[i]->d_name)) loaded++;
             free(files[i]);
         }
-        free(files);
+		
+		if (files) {
+			free(files);
+		}
+		
         return loaded;
     }
 #else   
