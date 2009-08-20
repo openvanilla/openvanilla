@@ -9,6 +9,7 @@
 #import "OVIMArrayController.h"
 #import "OVIMPhoneticController.h"
 #import "OVIMTibetanController.h"
+#import "OVIMGenericController.h"
 
 @implementation MainController
 
@@ -33,11 +34,11 @@
 	
 	[self setActiveView:_moduleSettingView animate:YES];
 	
-	_loader = (id<LVDOInterface>)[NSConnection rootProxyForConnectionWithRegisteredName:LVDOINTERFACE_PROTOCOL_NAME host:nil];
-	// TO DO: retain the object if run under 10.4
-	[(id)_loader setProtocolForProxy:@protocol(LVDOInterface)];
-
-	NSLog(@"loaded module identifiers: %@", [_loader loadedModuleList]);
+//	_loader = (id<LVDOInterface>)[NSConnection rootProxyForConnectionWithRegisteredName:LVDOINTERFACE_PROTOCOL_NAME host:nil];
+//	// TO DO: retain the object if run under 10.4
+//	[(id)_loader setProtocolForProxy:@protocol(LVDOInterface)];
+//
+//	NSLog(@"loaded module identifiers: %@", [_loader loadedModuleList]);
 }
 
 - (NSString *)plistFilePath
@@ -54,7 +55,7 @@
 		[[NSFileManager defaultManager] removeItemAtPath:prefPath error:nil];
 		[[NSFileManager defaultManager] createDirectoryAtPath:prefPath attributes:nil];
 	}
-	return [prefPath stringByAppendingPathComponent:@"org.openvanilla.plist"];
+	return [prefPath stringByAppendingPathComponent:OPENVANILLA_LOADER_PLIST_FILENAME];
 }
 - (void)loadPlist
 {
@@ -79,23 +80,43 @@
 }
 - (void)initModules
 {
-	NSDictionary *d = [_settingDictionary valueForKey:@"OVIMArray"];
-	OVIMArrayController *arrayController = [[[OVIMArrayController alloc] initWithIdentifier:@"OVIMArray" nibName:@"OVIMArrayController"] autorelease];
-	[arrayController setDictinary:d];
-	[arrayController setLocalizedName:@"Array"];
-	[_controllersArray addObject:arrayController];
+	_loader = (id<LVDOInterface>)[NSConnection rootProxyForConnectionWithRegisteredName:LVDOINTERFACE_PROTOCOL_NAME host:nil];
+	// TO DO: retain the object if run under 10.4
+	[(id)_loader setProtocolForProxy:@protocol(LVDOInterface)];
 	
-	d = [_settingDictionary valueForKey:@"OVIMPhonetic"];
-	OVIMPhoneticController *phoneticController = [[[OVIMPhoneticController alloc] initWithIdentifier:@"OVIMPhonetic" nibName:@"OVIMPhoneticController"] autorelease];	
-	[phoneticController setDictinary:d];
-	[phoneticController setLocalizedName:@"Phonetic"];
-	[_controllersArray addObject:phoneticController];
-
-	d = [_settingDictionary valueForKey:@"OVIMTibetan"];
-	OVIMTibetanController *tibetanController = [[[OVIMTibetanController alloc] initWithIdentifier:@"OVIMTibetan" nibName:@"OVIMTibetanController"] autorelease];	
-	[tibetanController setDictinary:d];
-	[tibetanController setLocalizedName:@"Tibetan"];
-	[_controllersArray addObject:tibetanController];
+//	NSLog(@"loaded module identifiers: %@", [_loader loadedModuleList]);
+	NSArray *moduleList = [_loader loadedModuleList];
+	NSDictionary *module = nil;
+	NSEnumerator *enumerator = [moduleList objectEnumerator];
+	while (module = [enumerator nextObject]) {
+		NSString *identifier = [module valueForKey:@"ModuleIdentifier"];
+		NSString *localizedName = [module valueForKey:@"ModuleLocalizedName"];
+		NSDictionary *d = [_settingDictionary valueForKey:identifier];
+		if ([identifier isEqualToString:@"OVIMArray"]) {
+			OVIMArrayController *arrayController = [[[OVIMArrayController alloc] initWithIdentifier:identifier nibName:@"OVIMArrayController"] autorelease];
+			[arrayController setDictinary:d];
+			[arrayController setLocalizedName:localizedName];
+			[_controllersArray addObject:arrayController];
+		}
+		else if ([identifier isEqualToString:@"OVIMPhonetic"]) {
+			OVIMPhoneticController *phoneticController = [[[OVIMPhoneticController alloc] initWithIdentifier:identifier nibName:@"OVIMPhoneticController"] autorelease];	
+			[phoneticController setDictinary:d];
+			[phoneticController setLocalizedName:localizedName];
+			[_controllersArray addObject:phoneticController];
+		}
+		else if ([identifier isEqualToString:@"OVIMTibetan"]) {
+			OVIMTibetanController *tibetanController = [[[OVIMTibetanController alloc] initWithIdentifier:identifier nibName:@"OVIMTibetanController"] autorelease];	
+			[tibetanController setDictinary:d];
+			[tibetanController setLocalizedName:localizedName];
+			[_controllersArray addObject:tibetanController];
+		}
+		else if ([identifier hasPrefix:@"OVIMGeneric-"]) {
+			OVIMGenericController *genericController = [[[OVIMGenericController alloc] initWithIdentifier:identifier nibName:@"OVIMGenericController"] autorelease];	
+			[genericController setDictinary:d];
+			[genericController setLocalizedName:localizedName];
+			[_controllersArray addObject:genericController];
+		}
+	}
 	
 	[_moduleListTableView reloadData];
 	if ([_controllersArray count]) {

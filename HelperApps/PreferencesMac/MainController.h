@@ -4,6 +4,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LVDOInterface.h"
+#import "LVConfig.h"
 
 @interface MainController : NSWindowController 
 {
