@@ -378,7 +378,6 @@
 		6A6A867D0E86805700B94B7F /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVWildcard.h; sourceTree = "<group>"; };
 		6A8C6C9C103D3D1D00DE4A39 /* LVDOInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDOInterface.h; path = "Loaders/OSX-IMK/LVDOInterface.h"; sourceTree = "<group>"; };
 		6A8C6CE7103D3F8D00DE4A39 /* Preferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Preferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A8C6CE9103D3F8D00DE4A39 /* Preferences-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Preferences-Info.plist"; sourceTree = "<group>"; };
 		6A8C6CFE103D3FA800DE4A39 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A8C6D00103D3FA800DE4A39 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		6A8C6D02103D3FA800DE4A39 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMArrayController.xib; sourceTree = "<group>"; };
@@ -602,7 +601,6 @@
 				6A6A86C70E86816100B94B7F /* Modules */,
 				6AB6CE790E9CF58D0001B127 /* Apple Frameworks */,
 				6A6A86110E867B2E00B94B7F /* Products */,
-				6A8C6CE9103D3F8D00DE4A39 /* Preferences-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
