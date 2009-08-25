@@ -393,7 +393,7 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 				
 				if (getVersion && initLib && getModule) {
 					if (getVersion() == OV_VERSION) {
-						NSString *resourceDir = [[path stringByAppendingPathComponent:@"Contents"] stringByAppendingPathComponent:@"Resources"];
+						NSString *resourceDir = [[[path stringByAppendingPathComponent:@"Contents"] stringByAppendingPathComponent:@"Resources"] stringByAppendingString:@"/"];
 						if (initLib(_loaderService, [resourceDir UTF8String])) {
 							size_t moduleIterator = 0;
 							OVModule *module;
@@ -532,13 +532,27 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
     NSAssert([dirs count], @"NSSearchPathForDirectoriesInDomains");	
 
 	NSString *userPath = [[dirs objectAtIndex:0] stringByAppendingPathComponent:OPENVANILLA_NAME];
+
 	BOOL isDir = YES;
 	if (![[NSFileManager defaultManager] fileExistsAtPath:userPath isDirectory:&isDir]) {
 		[[NSFileManager defaultManager] createDirectoryAtPath:userPath attributes:nil];
-	}
-	
+	}	
 	NSAssert1(isDir, @"%@ must be a directory", userPath);	
 	
-    return [[userPath stringByAppendingPathComponent:moduleID] stringByAppendingString:@"/"];
+	NSString *userDataPath = [userPath stringByAppendingPathComponent:@"UserData"];
+	isDir = YES;
+	if (![[NSFileManager defaultManager] fileExistsAtPath:userDataPath isDirectory:&isDir]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:userDataPath attributes:nil];
+	}	
+	NSAssert1(isDir, @"%@ must be a directory", userDataPath);	
+	
+	NSString *moduleDataPath = [userDataPath stringByAppendingPathComponent:moduleID];
+	isDir = YES;
+	if (![[NSFileManager defaultManager] fileExistsAtPath:moduleDataPath isDirectory:&isDir]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:moduleDataPath attributes:nil];
+	}	
+	NSAssert1(isDir, @"%@ must be a directory", moduleDataPath);		
+	
+    return [moduleDataPath stringByAppendingString:@"/"];
 }
 @end

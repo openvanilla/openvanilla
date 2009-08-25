@@ -42,9 +42,34 @@ int main(int argc, char *argv[])
 {
     NSAutoreleasePool *pool = [NSAutoreleasePool new];	
 	
+	NSMutableArray *moduleLoadPaths = [NSMutableArray array];
 	NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
-	NSString *modulesPath = [resourcePath stringByAppendingPathComponent:@"Modules"];	
-	[[LVModuleManager sharedManager] setModulePackageBundlePaths:[NSArray arrayWithObject:modulesPath]];
+	NSString *defaultModulesPath = [resourcePath stringByAppendingPathComponent:@"Modules"];	
+	[moduleLoadPaths addObject:defaultModulesPath];
+	
+	do {
+		NSArray *dirs = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+		
+		NSString *userOVPath = [[dirs objectAtIndex:0] stringByAppendingPathComponent:OPENVANILLA_NAME];
+		BOOL isDir = YES;
+		if (![[NSFileManager defaultManager] fileExistsAtPath:userOVPath isDirectory:&isDir]) {
+			[[NSFileManager defaultManager] createDirectoryAtPath:userOVPath attributes:nil];
+		}		
+		
+		isDir = YES;
+		NSString *userModulePath = [userOVPath stringByAppendingPathComponent:@"Modules"];
+		if (![[NSFileManager defaultManager] fileExistsAtPath:userModulePath isDirectory:&isDir]) {
+			[[NSFileManager defaultManager] createDirectoryAtPath:userModulePath attributes:nil];
+		}		
+		
+		if (isDir) {		
+			[moduleLoadPaths addObject:userModulePath];
+		}
+	} while(0);
+
+	[moduleLoadPaths addObject:@"/Library/OpenVanilla/0.9/Modules"];
+	
+	[[LVModuleManager sharedManager] setModulePackageBundlePaths:moduleLoadPaths];	
 	[[LVModuleManager sharedManager] loadModulePackageBundles];
 	
 	IMKServer *inputMethodServer = [[IMKServer alloc] initWithName:OPENVANILLA_CONNECTION_NAME bundleIdentifier:[[NSBundle mainBundle] bundleIdentifier]];
