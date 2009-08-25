@@ -68,6 +68,7 @@
 		6A8C6EBD103D46E500DE4A39 /* array-shortcode.cin in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6EBA103D46E500DE4A39 /* array-shortcode.cin */; };
 		6A8C6EBE103D46E500DE4A39 /* array-special.cin in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6EBB103D46E500DE4A39 /* array-special.cin */; };
 		6A8C6EBF103D46E500DE4A39 /* array30.cin in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6EBC103D46E500DE4A39 /* array30.cin */; };
+		6AAC1700104478640042BB90 /* Preferences.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A8C6CE7103D3F8D00DE4A39 /* Preferences.app */; };
 		6AAF6EB70EAB781300F4DFE0 /* OpenVanilla.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6CF420E9CF5D00001B127 /* OpenVanilla.icns */; };
 		6AAF6EB80EAB781300F4DFE0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6CF460E9CF5F00001B127 /* MainMenu.xib */; };
 		6AAF6EBA0EAB781300F4DFE0 /* LVUIController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AB6CF390E9CF5B60001B127 /* LVUIController.mm */; };
@@ -178,6 +179,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6AAF6E170EAB772B00F4DFE0;
 			remoteInfo = "OpenVanilla (TSM Component)";
+		};
+		6AAC16EE104478410042BB90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A8C6CE6103D3F8D00DE4A39 /* Preferences */;
+			remoteInfo = Preferences;
 		};
 		6AAF6EA10EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -359,6 +367,16 @@
 				6A8C6E0E103D461200DE4A39 /* dayi3-patched.cin in CopyFiles */,
 				6A8C6E0F103D461200DE4A39 /* simplex-ext.cin in CopyFiles */,
 				6A8C6E10103D461200DE4A39 /* wubizixing.cin in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AAC1702104478820042BB90 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 12;
+			files = (
+				6AAC1700104478640042BB90 /* Preferences.app in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1131,6 +1149,7 @@
 				6AB6CE670E9CF46F0001B127 /* Sources */,
 				6AB6CE680E9CF46F0001B127 /* Frameworks */,
 				6A21AB990E9D22B10078C2E9 /* CopyFiles */,
+				6AAC1702104478820042BB90 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1145,6 +1164,7 @@
 				D403C6640EA3D655006F0A89 /* PBXTargetDependency */,
 				D403C58D0EA3D541006F0A89 /* PBXTargetDependency */,
 				6A8C6E45103D469400DE4A39 /* PBXTargetDependency */,
+				6AAC16EF104478410042BB90 /* PBXTargetDependency */,
 			);
 			name = "OpenVanilla (Loader IMK)";
 			productName = OpenVanilla;
@@ -1615,6 +1635,11 @@
 			isa = PBXTargetDependency;
 			target = 6AAF6E170EAB772B00F4DFE0 /* OpenVanilla (TSM Component) */;
 			targetProxy = 6AA6D1970EAC5F1100DF1C2C /* PBXContainerItemProxy */;
+		};
+		6AAC16EF104478410042BB90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A8C6CE6103D3F8D00DE4A39 /* Preferences */;
+			targetProxy = 6AAC16EE104478410042BB90 /* PBXContainerItemProxy */;
 		};
 		6AAF6EA00EAB781300F4DFE0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

@@ -493,6 +493,13 @@ static id LVICCurrentlyActiveSender = nil;
 	[self _recreateSandwich];
 }
 
+- (void)_openPreferencesAction:(id)sender
+{
+	NSString *prefAppPath = [[[NSBundle bundleForClass:[self class]] sharedSupportPath] stringByAppendingPathComponent:@"Preferences.app"];
+	NSLog(@"launching: %@", prefAppPath);
+	[[NSWorkspace sharedWorkspace] openFile:prefAppPath];
+}
+
 - (NSMenuItem *)_createMenuItemWithIndentifer:(NSString *)identifier localizedName:(NSString *)localizedName
 {
 	NSMenuItem *menuItem = [[[NSMenuItem alloc] init] autorelease];
@@ -522,6 +529,18 @@ static id LVICCurrentlyActiveSender = nil;
 	while (nameIDPair = [arrayEnum nextObject]) {
 		[menu addItem:[self _createMenuItemWithIndentifer:[nameIDPair objectAtIndex:1] localizedName:[nameIDPair objectAtIndex:0]]];
 	}
+	
+	[menu addItem:[NSMenuItem separatorItem]];
+	
+	NSMenuItem *menuItem = nil;
+	menuItem = [[[NSMenuItem alloc] init] autorelease];
+	[menuItem setEnabled:YES];
+	[menuItem setTarget:self];
+	[menuItem setAction:@selector(_openPreferencesAction:)];
+	[menuItem setTitle:@"Preferences…"];
+	[menu addItem:menuItem];
+	
+	
     return menu;
 }
 @end
