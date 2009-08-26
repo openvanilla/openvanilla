@@ -27,7 +27,7 @@
 	<key>InputMethodServerDelegateClass</key>
 	<string>LVInputController</string>
 	<key>LSBackgroundOnly</key>
-	<true />
+	<true/>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
@@ -40,6 +40,6 @@ All Rights Reserved.</string>
 	<key>TISInputSourceID</key>
 	<string>org.openvanilla.inputmethod.LoaderIMK</string>
 	<key>tsInputMethodIconFileKey</key>
-	<string>OpenVanilla.icns</string>
+	<string>OpenVanillaSmall.icns</string>
 </dict>
 </plist>

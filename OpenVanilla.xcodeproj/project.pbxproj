@@ -40,6 +40,8 @@
 		6A6A86620E867E9300B94B7F /* OVUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A865D0E867E9300B94B7F /* OVUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A6A86870E86805700B94B7F /* OVWildcard.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A867D0E86805700B94B7F /* OVWildcard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A6DB7100EAB7AB200A09A03 /* OVLoaderServer.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6AAF6ED10EAB781300F4DFE0 /* OVLoaderServer.app */; };
+		6A8449691045439E0050F09F /* OpenVanillaSmall.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A8449681045439E0050F09F /* OpenVanillaSmall.icns */; };
+		6A84496A1045439E0050F09F /* OpenVanillaSmall.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A8449681045439E0050F09F /* OpenVanillaSmall.icns */; };
 		6A8C6D17103D3FA800DE4A39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6CFD103D3FA800DE4A39 /* InfoPlist.strings */; };
 		6A8C6D18103D3FA800DE4A39 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6CFF103D3FA800DE4A39 /* MainMenu.xib */; };
 		6A8C6D19103D3FA800DE4A39 /* OVIMArrayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6D01103D3FA800DE4A39 /* OVIMArrayController.xib */; };
@@ -456,6 +458,7 @@
 		6A6A865C0E867E9300B94B7F /* OVLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLibrary.h; sourceTree = "<group>"; };
 		6A6A865D0E867E9300B94B7F /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUtility.h; sourceTree = "<group>"; };
 		6A6A867D0E86805700B94B7F /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVWildcard.h; sourceTree = "<group>"; };
+		6A8449681045439E0050F09F /* OpenVanillaSmall.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaSmall.icns; path = "Loaders/OSX-IMK/Images/OpenVanillaSmall.icns"; sourceTree = "<group>"; };
 		6A8C6C9C103D3D1D00DE4A39 /* LVDOInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDOInterface.h; path = "Loaders/OSX-IMK/LVDOInterface.h"; sourceTree = "<group>"; };
 		6A8C6CE7103D3F8D00DE4A39 /* Preferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Preferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A8C6CFE103D3FA800DE4A39 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -911,6 +914,7 @@
 		6AB6CF410E9CF5BC0001B127 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A8449681045439E0050F09F /* OpenVanillaSmall.icns */,
 				6AB6CE6C0E9CF46F0001B127 /* OpenVanilla-Info.plist */,
 				6AB6CF420E9CF5D00001B127 /* OpenVanilla.icns */,
 				6AB6CF460E9CF5F00001B127 /* MainMenu.xib */,
@@ -1377,6 +1381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AB521C20EAB8A2900E99252 /* OpenVanilla.icns in Resources */,
+				6A8449691045439E0050F09F /* OpenVanillaSmall.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1395,6 +1400,7 @@
 			files = (
 				6AB6CF430E9CF5D00001B127 /* OpenVanilla.icns in Resources */,
 				6AB6CF470E9CF5F00001B127 /* MainMenu.xib in Resources */,
+				6A84496A1045439E0050F09F /* OpenVanillaSmall.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

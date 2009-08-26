@@ -17,6 +17,6 @@
 	<key>CFBundleVersion</key>
 	<string>0.9.0</string>
 	<key>tsInputMethodIconFileKey</key>
-	<string>OpenVanilla.icns</string>
+	<string>OpenVanillaSmall.icns</string>
 </dict>
 </plist>
