@@ -1,5 +1,5 @@
 //
-// OVIMTibetanController.h
+// OVIMSpaceChewingController.m
 //
 // Copyright (c) 2004-2009 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
@@ -29,12 +29,30 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#import <Cocoa/Cocoa.h>
-#import "OVViewController.h"
+#import "OVIMSpaceChewingController.h"
 
-@interface OVIMTibetanController : OVViewController
+
+@implementation OVIMSpaceChewingController
+
+- (void)setDictinary:(NSDictionary *)dictionary
 {
-	IBOutlet NSPopUpButton *_keyboardLayout;
+	[super setDictinary:dictionary];
+
+	if (![[self dictionary] objectForKey:@"keyboardLayout"]) {
+		[[self dictionary] setValue:[NSNumber numberWithInt:0] forKey:@"keyboardLayout"];
+	}	
+	[_keyboardLayoutPopButton selectItemAtIndex:[[[self dictionary] valueForKey:@"keyboardLayout"] intValue]];
+	[[self dictionary] addObserver:self forKeyPath:@"keyboardLayout" options:NSKeyValueObservingOptionNew context:NULL];
+
+	if (![[self dictionary] objectForKey:@"addPhraseForward"]) {
+		[[self dictionary] setValue:[NSNumber numberWithInt:0] forKey:@"addPhraseForward"];
+	}	
+	[_addPhraseForwardCheckBox setIntValue:[[[self dictionary] valueForKey:@"addPhraseForward"] intValue]];
+	[[self dictionary] addObserver:self forKeyPath:@"addPhraseForward" options:NSKeyValueObservingOptionNew context:NULL];
+	
+	
 }
+
+
 
 @end

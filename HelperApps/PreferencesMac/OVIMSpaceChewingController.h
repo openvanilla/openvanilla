@@ -1,5 +1,5 @@
 //
-// OVIMTibetanController.h
+// OVIMSpaceChewingController.h
 //
 // Copyright (c) 2004-2009 The OpenVanilla Project (http://openvanilla.org)
 // All rights reserved.
@@ -32,9 +32,11 @@
 #import <Cocoa/Cocoa.h>
 #import "OVViewController.h"
 
-@interface OVIMTibetanController : OVViewController
+@interface OVIMSpaceChewingController : OVViewController
 {
-	IBOutlet NSPopUpButton *_keyboardLayout;
+	IBOutlet NSPopUpButton *_keyboardLayoutPopButton;
+	IBOutlet NSButton *_addPhraseForwardCheckBox;
+
 }
 
 @end

@@ -8,9 +8,9 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="372"/>
 			<integer value="57"/>
 			<integer value="454"/>
-			<integer value="372"/>
 			<integer value="455"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -1151,7 +1151,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSScrollView" id="494849413">
 						<reference key="NSNextResponder" ref="399454739"/>
-						<int key="NSvFlags">4364</int>
+						<int key="NSvFlags">4372</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="NSClipView" id="454438652">
@@ -1306,12 +1306,12 @@
 					<object class="NSTextField" id="637627175">
 						<reference key="NSNextResponder" ref="399454739"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{227, 402}, {305, 17}}</string>
+						<string key="NSFrame">{{227, 393}, {305, 30}}</string>
 						<reference key="NSSuperview" ref="399454739"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="440335753">
-							<int key="NSCellFlags">68288064</int>
-							<int key="NSCellFlags2">272630784</int>
+							<int key="NSCellFlags">67239424</int>
+							<int key="NSCellFlags2">272629760</int>
 							<string key="NSContents"/>
 							<reference key="NSSupport" ref="979589945"/>
 							<reference key="NSControlView" ref="637627175"/>
