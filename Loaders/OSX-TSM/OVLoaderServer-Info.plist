@@ -41,5 +41,7 @@ All Rights Reserved.</string>
 	<string>org.openvanilla.inputmethod.LoaderIMK</string>
 	<key>tsInputMethodIconFileKey</key>
 	<string>OpenVanilla.icns</string>
+	<key>LSUIElement</key>
+	<true/>	
 </dict>
 </plist>

@@ -42,6 +42,7 @@
 		6A6DB7100EAB7AB200A09A03 /* OVLoaderServer.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6AAF6ED10EAB781300F4DFE0 /* OVLoaderServer.app */; };
 		6A8449691045439E0050F09F /* OpenVanillaSmall.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A8449681045439E0050F09F /* OpenVanillaSmall.icns */; };
 		6A84496A1045439E0050F09F /* OpenVanillaSmall.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6A8449681045439E0050F09F /* OpenVanillaSmall.icns */; };
+		6A844980104545350050F09F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A84497F104545350050F09F /* InfoPlist.strings */; };
 		6A8C6D17103D3FA800DE4A39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6CFD103D3FA800DE4A39 /* InfoPlist.strings */; };
 		6A8C6D18103D3FA800DE4A39 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6CFF103D3FA800DE4A39 /* MainMenu.xib */; };
 		6A8C6D19103D3FA800DE4A39 /* OVIMArrayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C6D01103D3FA800DE4A39 /* OVIMArrayController.xib */; };
@@ -459,6 +460,7 @@
 		6A6A865D0E867E9300B94B7F /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUtility.h; sourceTree = "<group>"; };
 		6A6A867D0E86805700B94B7F /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVWildcard.h; sourceTree = "<group>"; };
 		6A8449681045439E0050F09F /* OpenVanillaSmall.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = OpenVanillaSmall.icns; path = "Loaders/OSX-IMK/Images/OpenVanillaSmall.icns"; sourceTree = "<group>"; };
+		6A84497F104545350050F09F /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = "Loaders/OSX-TSM/InfoPlist.strings"; sourceTree = "<group>"; };
 		6A8C6C9C103D3D1D00DE4A39 /* LVDOInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVDOInterface.h; path = "Loaders/OSX-IMK/LVDOInterface.h"; sourceTree = "<group>"; };
 		6A8C6CE7103D3F8D00DE4A39 /* Preferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Preferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A8C6CFE103D3FA800DE4A39 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -850,6 +852,7 @@
 		6AAF6F380EAB787800F4DFE0 /* OSX-TSM */ = {
 			isa = PBXGroup;
 			children = (
+				6A84497F104545350050F09F /* InfoPlist.strings */,
 				6AAF6E190EAB772B00F4DFE0 /* OpenVanilla-Info.plist */,
 				6AAF6E7C0EAB77D500F4DFE0 /* OVLoaderServer-Info.plist */,
 				6ABE2AE70EAB8B05001A7E7D /* Component */,
@@ -1391,6 +1394,7 @@
 			files = (
 				6AAF6EB70EAB781300F4DFE0 /* OpenVanilla.icns in Resources */,
 				6AAF6EB80EAB781300F4DFE0 /* MainMenu.xib in Resources */,
+				6A844980104545350050F09F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

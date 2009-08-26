@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 		}
 	} while(0);
 
-	[moduleLoadPaths addObject:@"/Library/OpenVanilla/0.9/Modules"];
+	[moduleLoadPaths addObject:@"/Library/OpenVanilla/0.9-Old/Modules"];
 	
 	[[LVModuleManager sharedManager] setModulePackageBundlePaths:moduleLoadPaths];	
 	[[LVModuleManager sharedManager] loadModulePackageBundles];
