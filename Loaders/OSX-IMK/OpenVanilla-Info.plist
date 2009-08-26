@@ -31,7 +31,8 @@
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>All Rights Reserved.</string>
+	<string>© 2004-2009 The OpenVanilla Project.
+All Rights Reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
