@@ -24,7 +24,7 @@ OS X Tiger 版本：
 2.  限於時間，我們只做了少量的安裝測試，分別是：
 
     *   Mac OS X 10.4 on PowerPC Mac
-    *   Mac OS X 10.5 on Intel Mac
+    *   Mac OS X 10.5 on PowerPC Mac
     *   Mac OS X 10.5 on Intel Mac
     *   Mac OS X 10.6 on Intel Mac (32-bit)
     
