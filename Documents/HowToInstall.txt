@@ -1,0 +1,13 @@
+How to Install OpenVanilla 0.9 for Mac OS X
+===========================================
+
+1. If you have downloaded the Leopard version
+
+Simply copy OpenVanilla.app in the unzipped folder to ~/Library/Input Methods, that is your "Home > Library > Input Methods". Log out, then log in again. Open System Preferences, go to International settings, and enable OpenVanilla in Input Menu.
+
+2. If you have downloaded the Tiger version
+
+Copy OpenVanilla.bundle in the unzipped folder to /Library/Components, that is your hard disk drive's root folder, then "Library > Components". You might be prompted for administrator user name and password to complete the copy. Then log out, then log in again. Open System Preferences, go to International settings, and enable OpenVanilla in Input Menu. 
+
+
+To uninstall, simply remove the installed file in the respective folder.
