@@ -337,6 +337,8 @@ static id LVICCurrentlyActiveSender = nil;
         [self _resetUI];
     }
 	
+	committedString = [[LVModuleManager sharedManager] processStringWithOutputFilters:committedString];
+	
 	if (committedString.length()) {
 		// NSLog(@"updating buffer");
 		NSString *committedText = [NSString stringWithUTF8String:committedString.c_str()];
@@ -480,6 +482,13 @@ static id LVICCurrentlyActiveSender = nil;
 	[self _recreateSandwich];
 }
 
+- (void)_toggleOutputFilterAction:(id)sender
+{
+    NSMenuItem *menuItem = [sender objectForKey:@"IMKCommandMenuItem"];
+	[[LVModuleManager sharedManager] toggleOutputFilterModuleID:[menuItem representedObject]];
+	[self _recreateSandwich];	
+}
+
 - (void)_openPreferencesAction:(id)sender
 {
 	NSString *prefAppPath = [[[NSBundle bundleForClass:[self class]] sharedSupportPath] stringByAppendingPathComponent:@"Preferences.app"];
@@ -487,7 +496,7 @@ static id LVICCurrentlyActiveSender = nil;
 	[[NSWorkspace sharedWorkspace] openFile:prefAppPath];
 }
 
-- (NSMenuItem *)_createMenuItemWithIndentifer:(NSString *)identifier localizedName:(NSString *)localizedName
+- (NSMenuItem *)_createInputMethodMenuItemWithIndentifer:(NSString *)identifier localizedName:(NSString *)localizedName
 {
 	NSMenuItem *menuItem = [[[NSMenuItem alloc] init] autorelease];
 	if (![[[LVModuleManager sharedManager] moduleForIdentifier:identifier] isUsable]) {
@@ -506,6 +515,25 @@ static id LVICCurrentlyActiveSender = nil;
 	return menuItem;
 }
 
+- (NSMenuItem *)_createOutputFilterMenuItemWithIndentifer:(NSString *)identifier localizedName:(NSString *)localizedName
+{
+	NSMenuItem *menuItem = [[[NSMenuItem alloc] init] autorelease];
+	if (![[[LVModuleManager sharedManager] moduleForIdentifier:identifier] isUsable]) {
+		[menuItem setEnabled:NO];
+	}
+	else {        
+		if ([[LVModuleManager sharedManager] isOutputFilterActivated:identifier]) {
+			[menuItem setState:NSOnState];
+		}
+		
+		[menuItem setTarget:self];
+		[menuItem setAction:@selector(_toggleOutputFilterAction:)];
+		[menuItem setRepresentedObject:identifier];
+	}
+	[menuItem setTitle:localizedName];
+	return menuItem;
+}
+
 - (NSMenu *)menu
 {
     NSMenu *menu = [[[NSMenu alloc] init] autorelease];
@@ -514,8 +542,16 @@ static id LVICCurrentlyActiveSender = nil;
 	NSEnumerator *arrayEnum = [namesAndIDs objectEnumerator];
 	NSArray *nameIDPair;
 	while (nameIDPair = [arrayEnum nextObject]) {
-		[menu addItem:[self _createMenuItemWithIndentifer:[nameIDPair objectAtIndex:1] localizedName:[nameIDPair objectAtIndex:0]]];
+		[menu addItem:[self _createInputMethodMenuItemWithIndentifer:[nameIDPair objectAtIndex:1] localizedName:[nameIDPair objectAtIndex:0]]];
 	}
+
+	[menu addItem:[NSMenuItem separatorItem]];
+
+	namesAndIDs = [[LVModuleManager sharedManager] outputFilterTitlesAndModuleIDs];
+	arrayEnum = [namesAndIDs objectEnumerator];
+	while (nameIDPair = [arrayEnum nextObject]) {
+		[menu addItem:[self _createOutputFilterMenuItemWithIndentifer:[nameIDPair objectAtIndex:1] localizedName:[nameIDPair objectAtIndex:0]]];
+	}	
 	
 	[menu addItem:[NSMenuItem separatorItem]];
 	

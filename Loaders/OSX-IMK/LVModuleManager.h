@@ -112,6 +112,7 @@ protected:
 	LVService *_loaderService;
 	
 	NSString *_primaryInputMethodModuleID;
+	NSMutableArray *_activatedOutputFilterModuleIDs;
 	
 	NSPort *_distributedObjectPort;
 	NSConnection *_distributedObjectConnection;
@@ -127,9 +128,14 @@ protected:
 - (void)setPrimaryInputMethodModuleID:(NSString *)moduleID;
 - (NSString *)primaryInputMethodModuleID;
 - (NSArray *)inputMethodTitlesAndModuleIDs;
+- (NSArray *)outputFilterTitlesAndModuleIDs;
+- (BOOL)isOutputFilterActivated:(NSString *)outputFilterID;
+- (void)toggleOutputFilterModuleID:(NSString *)outputFilterID;
 
 - (NSMutableDictionary *)configDictionary;
 - (void)forceSyncConfiguration;
+
+- (string)processStringWithOutputFilters:(const string &)inputString;
 @end
 
 @interface LVModuleManager (ProtectedMethods)

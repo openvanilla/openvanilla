@@ -35,7 +35,9 @@
 
 using namespace OpenVanilla;
 
-NSString *LVPrimaryInputMethodKey = @"primaryInputMethod";
+static NSString *LVPrimaryInputMethodKey = @"primaryInputMethod";
+static NSString *LVActivatedOutputFiltersKey = @"activatedOutputFilters";
+
 NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotification";
 
 // we need this stuff otherwise funny things would happen... 
@@ -227,6 +229,28 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 		}
 	}
 	
+	NSMutableArray *fa = [NSMutableArray array];
+	NSEnumerator *fe = [_activatedOutputFilterModuleIDs objectEnumerator];
+	NSString *fi;
+	while (fi = [fe nextObject]) {
+		LVModule *module = [_loadedModuleDictionary objectForKey:fi];
+		
+		BOOL valid = NO;
+		if (module) {
+			if (OVWildcard::Match([module moduleObject]->moduleType(), "OVOutputFilter")) {
+				valid = YES;
+			}
+		}
+		
+		if (valid) {
+			[fa addObject:fi];
+		}		
+	}
+	
+	[_activatedOutputFilterModuleIDs removeAllObjects];
+	[_activatedOutputFilterModuleIDs addObjectsFromArray:fa];
+	
+	[_configDictionary setObject:_activatedOutputFilterModuleIDs forKey:LVActivatedOutputFiltersKey];
 	[_configDictionary setObject:([_primaryInputMethodModuleID length] ? _primaryInputMethodModuleID : @"") forKey:LVPrimaryInputMethodKey];
 	[self _writeConfigurationFile];	
 }
@@ -292,6 +316,12 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 	}
 	
 	_primaryInputMethodModuleID = [[_configDictionary objectForKey:LVPrimaryInputMethodKey] retain];
+	[_activatedOutputFilterModuleIDs removeAllObjects];
+	
+	NSArray *filterIDs = [_configDictionary objectForKey:LVActivatedOutputFiltersKey];
+	if ([filterIDs isKindOfClass:[NSArray class]]) {
+		[_activatedOutputFilterModuleIDs addObjectsFromArray:filterIDs];
+	}	
 		
 	if (![oldConfigDict isEqualToDictionary:_configDictionary]) {
 		[self _notify:sendNotification];
@@ -308,6 +338,7 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
     [_modulePackageBundlePaths release];	
 	[_configDictionary release];
 	[_primaryInputMethodModuleID release];
+	[_activatedOutputFilterModuleIDs release];
 	[_distributedObjectPort release];
 	delete _loaderService;
 	
@@ -320,6 +351,7 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
         _modulePackageBundlePaths = [NSMutableArray new];
         _loadedModulePackageBundleDictionary = [NSMutableDictionary new];
 		_loadedModuleDictionary = [NSMutableDictionary new];
+		_activatedOutputFilterModuleIDs = [NSMutableArray new];
 		
 		_loaderService = new LVService;
 		
@@ -477,7 +509,8 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 {
 	return _primaryInputMethodModuleID;
 }
-- (NSArray *)inputMethodTitlesAndModuleIDs
+
+- (NSArray *)_moduleTitlesAndIDsByType:(const char*)type
 {
 	NSMutableArray *result = [NSMutableArray array];
 	NSEnumerator *keyEnum = [_loadedModuleDictionary keyEnumerator];
@@ -485,23 +518,86 @@ NSString *LVModuleConfigChangedNotification = @"LVModuleConfigChangedNotificatio
 	
 	while (key = [keyEnum nextObject]) {
 		LVModule *module = [_loadedModuleDictionary objectForKey:key];		
-		if (OVWildcard::Match([module moduleObject]->moduleType(), "OVInputMethod")) {		
+		if (OVWildcard::Match([module moduleObject]->moduleType(), type)) {		
 			NSString *localizedName = [NSString stringWithUTF8String:[module moduleObject]->localizedName(_loaderService->locale())];
 			[result addObject:[NSArray arrayWithObjects:localizedName, key, nil]];
 		}
 	}
 	
-	return result;
+	return result;	
+}
+
+- (NSArray *)inputMethodTitlesAndModuleIDs
+{
+	return [self _moduleTitlesAndIDsByType:"OVInputMethod"];
+}
+
+- (NSArray *)outputFilterTitlesAndModuleIDs
+{
+	return [self _moduleTitlesAndIDsByType:"OVOutputFilter"];
+}
+
+- (BOOL)isOutputFilterActivated:(NSString *)outputFilterID
+{
+	return [_activatedOutputFilterModuleIDs containsObject:outputFilterID];
+}
+
+- (void)toggleOutputFilterModuleID:(NSString *)outputFilterID
+{	
+	if ([_activatedOutputFilterModuleIDs containsObject:outputFilterID]) {
+		[_activatedOutputFilterModuleIDs removeObject:outputFilterID];
+	}
+	else {
+		NSArray *outputFilters = [self outputFilterTitlesAndModuleIDs];
+		NSEnumerator *ofe = [outputFilters objectEnumerator];
+		NSMutableArray *fa = [NSMutableArray array];
+		
+		NSArray *oftmi;
+		while (oftmi = [ofe nextObject]) {
+			NSString *ofid = [oftmi objectAtIndex:1];
+			if ([ofid isEqualToString:outputFilterID]) {
+				[fa addObject:ofid];
+			}
+			else if ([_activatedOutputFilterModuleIDs containsObject:ofid]) {
+				[fa addObject:ofid];
+			}
+		}
+		
+		[_activatedOutputFilterModuleIDs removeAllObjects];
+		[_activatedOutputFilterModuleIDs addObjectsFromArray:fa];
+	}
+	
+	[self _validateAndWriteConfig];
 }
 
 - (NSMutableDictionary *)configDictionary
 {
 	return _configDictionary;
 }
+
 - (void)forceSyncConfiguration
 {
 	[self _writeConfigurationFile];
 	[self _notify:YES];
+}
+
+- (string)processStringWithOutputFilters:(const string &)inputString
+{
+	if (![_activatedOutputFilterModuleIDs count]) {
+		return inputString;
+	}
+	
+	NSEnumerator *ofe = [_activatedOutputFilterModuleIDs objectEnumerator];
+	NSString *ofi;
+	
+	string currentInput = inputString;
+	while (ofi = [ofe nextObject]) {
+		LVModule *module = [_loadedModuleDictionary objectForKey:ofi];		
+		OVOutputFilter *filter = (OVOutputFilter *)[module moduleObject];
+		currentInput = filter->process(currentInput.c_str(), _loaderService);
+	}
+	
+	return currentInput;
 }
 
 #pragma mark LVDOInterface
