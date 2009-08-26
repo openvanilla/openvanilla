@@ -496,6 +496,11 @@ static id LVICCurrentlyActiveSender = nil;
 	[[NSWorkspace sharedWorkspace] openFile:prefAppPath];
 }
 
+- (void)_showAboutPanelAction:(id)sender
+{
+	[[NSApplication sharedApplication] orderFrontStandardAboutPanel:self];
+}
+
 - (NSMenuItem *)_createInputMethodMenuItemWithIndentifer:(NSString *)identifier localizedName:(NSString *)localizedName
 {
 	NSMenuItem *menuItem = [[[NSMenuItem alloc] init] autorelease];
@@ -562,8 +567,14 @@ static id LVICCurrentlyActiveSender = nil;
 	[menuItem setAction:@selector(_openPreferencesAction:)];
 	[menuItem setTitle:@"Preferences…"];
 	[menu addItem:menuItem];
-	
-	
+
+	menuItem = [[[NSMenuItem alloc] init] autorelease];
+	[menuItem setEnabled:YES];
+	[menuItem setTarget:self];
+	[menuItem setAction:@selector(_showAboutPanelAction:)];
+	[menuItem setTitle:@"About OpenVanilla"];
+	[menu addItem:menuItem];
+		
     return menu;
 }
 @end
