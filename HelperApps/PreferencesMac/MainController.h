@@ -16,6 +16,8 @@
 	IBOutlet NSView *_moduleContentView;
 	IBOutlet NSTableView *_moduleListTableView;
 	
+	IBOutlet NSTextField *_titleLabel;
+	
 	id<LVDOInterface> _loader;
 }
 

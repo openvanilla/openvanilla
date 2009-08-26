@@ -7,7 +7,7 @@
 
 @interface OVViewController : NSObject 
 {
-@private
+//@private
 	IBOutlet NSView *_view;
 	NSMutableDictionary *_dictionary;
 	NSString *_identifier;

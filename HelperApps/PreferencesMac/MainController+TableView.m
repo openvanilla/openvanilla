@@ -41,6 +41,7 @@
 		OVViewController *controller = [_controllersArray objectAtIndex:index];
 		NSView *view = [controller view];
 		[self setActiveModuleSettingView:view];
+		[_titleLabel setStringValue:[controller localizedName]];
 	}
 }
 

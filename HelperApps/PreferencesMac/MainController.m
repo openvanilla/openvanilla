@@ -24,7 +24,7 @@
 	_settingDictionary = [[NSMutableDictionary alloc] init];
 	_controllersArray = [[NSMutableArray alloc] init];
 	
-	[self initToolbar];
+//	[self initToolbar];
 	[[self window] center];
 	[self loadPlist];
 	[self initModules];
@@ -123,6 +123,7 @@
 		[_moduleListTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 		NSView *view = [[_controllersArray objectAtIndex:0] view];
 		[self setActiveModuleSettingView:view];
+		[_titleLabel setStringValue:[[_controllersArray objectAtIndex:0] localizedName]];
 	}
 
 }
