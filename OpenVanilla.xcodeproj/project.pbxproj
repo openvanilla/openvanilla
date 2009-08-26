@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		6A6A86FA0E8683CB00B94B7F /* Distribution */ = {
+		6A6A86FA0E8683CB00B94B7F /* All */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 6A6A87090E8683D800B94B7F /* Build configuration list for PBXAggregateTarget "Distribution" */;
+			buildConfigurationList = 6A6A87090E8683D800B94B7F /* Build configuration list for PBXAggregateTarget "All" */;
 			buildPhases = (
 			);
 			dependencies = (
 				6AA6D1960EAC5F0F00DF1C2C /* PBXTargetDependency */,
 				6AA6D1980EAC5F1100DF1C2C /* PBXTargetDependency */,
 			);
-			name = Distribution;
+			name = All;
 			productName = Distribution;
 		};
 /* End PBXAggregateTarget section */
@@ -714,9 +714,11 @@
 			isa = PBXGroup;
 			children = (
 				6AB6CE6A0E9CF46F0001B127 /* OpenVanilla.app */,
+				6AAF6ED10EAB781300F4DFE0 /* OVLoaderServer.app */,
 				D44D46EC0E9DB0E30062F692 /* libOVLegacyModuleLibrary.a */,
 				6A6A86100E867B2E00B94B7F /* OpenVanilla.framework */,
 				D42E383B0E86A22300453DE6 /* OVIMArray.bundle */,
+				6A8C6DFC103D459F00DE4A39 /* OVIMGeneric.bundle */,
 				6A21AA860E9D0B3D0078C2E9 /* OVIMPhonetic.bundle */,
 				D403C3110EA3CBD0006F0A89 /* OVIMTibetan.bundle */,
 				D403C4570EA3D10A006F0A89 /* OVIMUnicode.bundle */,
@@ -724,9 +726,7 @@
 				D403C5760EA3D49E006F0A89 /* OVOFFullWidthCharacter.bundle */,
 				D403C5F30EA3D5C0006F0A89 /* OVOFHanConvert.bundle */,
 				6AAF6E180EAB772B00F4DFE0 /* OpenVanilla.bundle */,
-				6AAF6ED10EAB781300F4DFE0 /* OVLoaderServer.app */,
 				6A8C6CE7103D3F8D00DE4A39 /* Preferences.app */,
-				6A8C6DFC103D459F00DE4A39 /* OVIMGeneric.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1332,7 +1332,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6A6A86FA0E8683CB00B94B7F /* Distribution */,
+				6A6A86FA0E8683CB00B94B7F /* All */,
 				6AB6CE690E9CF46F0001B127 /* OpenVanilla (Loader IMK) */,
 				6AAF6E170EAB772B00F4DFE0 /* OpenVanilla (TSM Component) */,
 				6AAF6E9F0EAB781300F4DFE0 /* OpenVanilla (LoaderServer for TSM) */,
@@ -1340,13 +1340,13 @@
 				D44D46EB0E9DB0E30062F692 /* OVLegacyModuleLibrary */,
 				D42E383A0E86A22300453DE6 /* OVIMArray */,
 				D403C4C50EA3D2E4006F0A89 /* OVIMEsperanto */,
+				6A8C6DFB103D459F00DE4A39 /* OVIMGeneric */,
 				6A21AA850E9D0B3D0078C2E9 /* OVIMPhonetic */,
 				D403C3100EA3CBD0006F0A89 /* OVIMTibetan */,
 				D403C4560EA3D10A006F0A89 /* OVIMUnicode */,
 				D403C5F20EA3D5C0006F0A89 /* OVOFHanConvert */,
 				D403C5750EA3D49E006F0A89 /* OVOFFullWidthCharacter */,
 				6A8C6CE6103D3F8D00DE4A39 /* Preferences */,
-				6A8C6DFB103D459F00DE4A39 /* OVIMGeneric */,
 			);
 		};
 /* End PBXProject section */
@@ -2563,7 +2563,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6A6A87090E8683D800B94B7F /* Build configuration list for PBXAggregateTarget "Distribution" */ = {
+		6A6A87090E8683D800B94B7F /* Build configuration list for PBXAggregateTarget "All" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6A6A86FB0E8683CB00B94B7F /* Debug */,
