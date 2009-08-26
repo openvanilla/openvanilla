@@ -26,5 +26,9 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>LSHasLocalizedDisplayName</key>
+	<true/>
+	<key>LSUIElement</key>
+	<true/>
 </dict>
 </plist>
