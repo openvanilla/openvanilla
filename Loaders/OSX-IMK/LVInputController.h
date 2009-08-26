@@ -47,8 +47,6 @@
 	LVBuffer *_composingBuffer;
 	LVCandidate *_candidateText;
     BOOL _committedByOurselves;
-	
-	BOOL _shouldClearBufferAtActivationBecauseOfNonEmptyBufferWhenDeactivated;
 }
 + (void)sendComposedStringToCurrentlyActiveContext:(NSString *)text;
 @end

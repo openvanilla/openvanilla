@@ -24,6 +24,7 @@
 /* Begin PBXBuildFile section */
 		6A0F2D4E0EAC8B3E00434743 /* OVFileHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0F2D4C0EAC8B3E00434743 /* OVFileHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A0F2D4F0EAC8B3E00434743 /* OVStringHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0F2D4D0EAC8B3E00434743 /* OVStringHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A1E224110452E1900161627 /* Preferences.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A8C6CE7103D3F8D00DE4A39 /* Preferences.app */; };
 		6A21A9C40E9CFC2A0078C2E9 /* LVModuleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A21A9C30E9CFC2A0078C2E9 /* LVModuleManager.mm */; };
 		6A21AA3E0E9D097E0078C2E9 /* OVUTF8Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA3C0E9D097E0078C2E9 /* OVUTF8Helper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A21AA410E9D0A290078C2E9 /* FrameworkStub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A21AA400E9D0A290078C2E9 /* FrameworkStub.cpp */; };
@@ -138,6 +139,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6A1E221B10452DE600161627 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A8C6CE6103D3F8D00DE4A39 /* Preferences */;
+			remoteInfo = Preferences;
+		};
 		6A21AB8D0E9D22800078C2E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
@@ -184,7 +192,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6A8C6CE6103D3F8D00DE4A39 /* Preferences */;
+			remoteGlobalIDString = 6A8C6CE6103D3F8D00DE4A39;
 			remoteInfo = Preferences;
 		};
 		6AAF6EA10EAB781300F4DFE0 /* PBXContainerItemProxy */ = {
@@ -330,6 +338,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		6A1E226710452E2200161627 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 12;
+			files = (
+				6A1E224110452E1900161627 /* Preferences.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6A21AB990E9D22B10078C2E9 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1121,6 +1139,7 @@
 				6AAF6EB90EAB781300F4DFE0 /* Sources */,
 				6AAF6EC10EAB781300F4DFE0 /* Frameworks */,
 				6AAF6EC40EAB781300F4DFE0 /* CopyFiles */,
+				6A1E226710452E2200161627 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1135,6 +1154,7 @@
 				6AAF6EB20EAB781300F4DFE0 /* PBXTargetDependency */,
 				6AAF6EB40EAB781300F4DFE0 /* PBXTargetDependency */,
 				6A8C6E97103D46B100DE4A39 /* PBXTargetDependency */,
+				6A1E221C10452DE600161627 /* PBXTargetDependency */,
 			);
 			name = "OpenVanilla (LoaderServer for TSM)";
 			productName = OVLoaderServer;
@@ -1606,6 +1626,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6A1E221C10452DE600161627 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A8C6CE6103D3F8D00DE4A39 /* Preferences */;
+			targetProxy = 6A1E221B10452DE600161627 /* PBXContainerItemProxy */;
+		};
 		6A21AB8E0E9D22800078C2E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6A21AA850E9D0B3D0078C2E9 /* OVIMPhonetic */;
@@ -1949,6 +1974,7 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = HelperApps/PreferencesMac/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1964,6 +1990,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1972,6 +2000,7 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = HelperApps/PreferencesMac/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,

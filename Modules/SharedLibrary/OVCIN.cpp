@@ -112,7 +112,7 @@ void OVCIN::parseCinVector(const vector<string>& cinVector){
         string::size_type del_pos;
         if( (del_pos=line.find_first_of(delimiters)) != string::npos ){
             string key = line.substr(0, del_pos);
-            unsigned int value_pos=(unsigned int)line.find_first_not_of(delimiters, del_pos);
+            size_t value_pos = (unsigned int)line.find_first_not_of(delimiters, del_pos);
             if( value_pos == string::npos )
                 continue;
             string value = line.substr( value_pos, line.length() - value_pos );

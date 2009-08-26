@@ -302,12 +302,7 @@ static id LVICCurrentlyActiveSender = nil;
 	[self _resetUI];
 	[[LVModuleManager sharedManager] syncConfiguration];
 	_contextSandwich->start(_composingBuffer, _candidateText, [[LVModuleManager sharedManager] loaderService]);
-	[[self class] setActiveContext:self sender:sender];
-	
-	if (_shouldClearBufferAtActivationBecauseOfNonEmptyBufferWhenDeactivated) {
-		// this clears the composing buffer in Tiger, important
-		[self _updateComposingBuffer:sender cursorAtIndex:_composingBuffer->cursorIndex() highlightRange:NSMakeRange(NSNotFound, NSNotFound)];	
-	}
+	[[self class] setActiveContext:self sender:sender];	
 }
 - (void)deactivateServer:(id)sender
 {
@@ -316,43 +311,35 @@ static id LVICCurrentlyActiveSender = nil;
 	}
 		
     _committedByOurselves = NO;
+	string committedString = _composingBuffer->committedString();
+	NSLog(@"%s, str: %s, commited by ourselves? %d", __PRETTY_FUNCTION__, committedString.c_str(), _committedByOurselves);
+    
+	[self commitComposition:sender];
 	_composingBuffer->clear();
-	_composingBuffer->clearCommittedString();
-	
-	// if fix-context is sent by the OS, we need to keep this flag
-	BOOL keepFlag = NO;
-	if (_shouldClearBufferAtActivationBecauseOfNonEmptyBufferWhenDeactivated) {
-		keepFlag = YES;
-	}
-	
-    [self commitComposition:sender];
-	
-	if (keepFlag) {
-		_shouldClearBufferAtActivationBecauseOfNonEmptyBufferWhenDeactivated = keepFlag;
-	}
 
 	_contextSandwich->end();
 	[self _resetUI];	
 }
 - (void)commitComposition:(id)sender 
 {    	
+	string committedString;
+	
 	if (_committedByOurselves) {
 	    _committedByOurselves = NO;
-		
-		_shouldClearBufferAtActivationBecauseOfNonEmptyBufferWhenDeactivated = NO;
+		committedString = _composingBuffer->committedString();
     }
     else {
-		_shouldClearBufferAtActivationBecauseOfNonEmptyBufferWhenDeactivated = !_composingBuffer->isEmpty();
-
+		_composingBuffer->send();
+		committedString = _composingBuffer->committedString();
+		
         _contextSandwich->clear();
 		_composingBuffer->clear();
-		_composingBuffer->clearCommittedString();
         [self _resetUI];
     }
 	
-	if (_composingBuffer->committedString().length()) {
+	if (committedString.length()) {
 		// NSLog(@"updating buffer");
-		NSString *committedText = [NSString stringWithUTF8String:_composingBuffer->committedString().c_str()];
+		NSString *committedText = [NSString stringWithUTF8String:committedString.c_str()];
 
 		// we can't use the following line because this will create an NSAttributeString with underline attributes;
 		// to workaround the bug in PowerPoint 2008, we need to give a "no-attr" NSAttributeString
