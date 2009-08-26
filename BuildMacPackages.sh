@@ -24,7 +24,7 @@ echo Removing file if it exists: $TSM
 rm -f $TSM
 
 echo Building the targets
-xcodebuild -project OpenVanilla.xcodeproj -target All -configuration Release build
+xcodebuild -project OpenVanilla.xcodeproj -target All -configuration Release clean build
 
 ROOT=$PWD
 cd $PWD/build/Release
