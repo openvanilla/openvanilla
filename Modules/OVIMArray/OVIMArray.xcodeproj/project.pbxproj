@@ -149,6 +149,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 4FADC23708B4156C00ABE55E /* Build configuration list for PBXProject "OVIMArray" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* OVIMArray */;
 			projectDirPath = "";
