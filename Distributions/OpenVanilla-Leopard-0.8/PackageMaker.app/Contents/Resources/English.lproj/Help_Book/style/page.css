@@ -1,0 +1,40 @@
+body {
+	font-size: 90%;
+}
+#content {
+	line-height: 150%;
+	width: 80%;
+	margin: 0 auto;
+	padding-bottom: 20px;
+	font-size: 95%;
+}
+#content h1 {
+	font-size: 18px;
+}
+#content h3 {
+	margin-bottom: 5px;
+}
+#content h4 {
+	color: #626C81;
+	margin: 0;
+	padding: 0;
+}
+h4 + p {
+	margin-top: 2px;
+	padding-top: 0;
+}
+#content h4 + ul {
+	margin-bottom: 10px;
+}
+.caption {
+	display: block;
+	font-weight: bold;
+	font-size: 80%;
+	margin-bottom: 10px;
+}
+pre + .caption {
+	margin-top: -10px;
+}
+img {
+	border: 1px solid #666;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Creating a Distribution - Requirements Editor</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> →
+			<a href="index.html">Creating a Distribution</a>
+		</div>
+		<div id="content">
+			<h1>Creating Scripts Using the Requirements Editor</h1>
+
+			<p>The Requirements Editor provided by PackageMaker allows you to write JavaScript for your distribution using a rules interface as seen in Mail.app. The editor is accessed through the editor drop-down menu in the script-editing sheet.</p>
+			<p>To create or edit a script using the Requirements Editor, take the following steps:</p>
+
+			<ol>
+				<li>Specify a wrapper function name. This is will be the root function for your script and is the function you should call to execute the script.</li>
+				<li>Create one or more clauses and specify the boolean operators used to combine the clauses.<br><a href="#clauses">More Info&hellip;</a></li>
+				<li>Optionally specify the failure message for each clause.<br><a href="#clauseErrors">More Info&hellip;</a></li>
+				<li>Add one or more rules to each clause and specify the boolean operator used to combine the rule results.<br><a href="#rules">More Info&hellip;</a></li>
+			</ol>
+
+			<p>The Requirements Editor will create its JavaScript output as follows:</p>
+
+			<ul>
+				<li>A function will be created for each clause. Within the clause function will be the code for each rule combined with the appropriate boolean operator. The function will also contain the necessary code to setup the failure condition specified.</li>
+				<li>The wrapper function will be created. The function will call each clause function and combine the results with the appropriate boolean operators.</li>
+				<li>At the bottom of the code, the Requirements Editor will write a comment block containing a representation of the script so that you can use the editor to edit your script later.</li>
+			</ul>
+
+			<a name="clauses"></a>
+			<h3>Clauses</h3>
+			<p>Clauses are the organizing groups for requirements scripts. A clause is made up of a title, one or more rules, a failure message, and specifies how to combine the rules (a clause can succeed if all or any rules succeed). Clauses will be evaluated in order from top-to-bottom. They can be reordered via drag-n-drop. After two or more clauses are added, PackageMaker will expose radio buttons allowing you to specify how to combine that clause with its neighbors.</p>
+			<a name="clauseErrors"></a>
+			<h4>Clause Failure</h4>
+			<p>If the clause fails, it will set the <code>my.result</code> object as specified in the PackageMaker user interface. <strong>Fatal</strong> will cause the Installer to exit, <strong>Warn</strong> will display the message to the user, but allow installation to continue, and <strong>None</strong> will act like a Warn.</p>
+
+			<a name="rules"></a>
+			<h3>Rules</h3>
+			<p>You can add one-or-more rules to a clause. A rule specifies a condition you want met. The built-in rules expose almost all of the options available to distribution scripts. The rules editor will warn you if a certain rule only works in certain types of scripts.</p>
+			<p></p>
+		</div>
+	</body>
+</html>

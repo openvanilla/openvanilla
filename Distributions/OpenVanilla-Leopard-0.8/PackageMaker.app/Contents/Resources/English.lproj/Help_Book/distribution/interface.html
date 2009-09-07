@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Creating a Distribution - Specifying the Interface</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> →
+			<a href="index.html">Creating a Distribution</a>
+		</div>
+		<div id="content">
+			<h1>Specifying the Interface</h1>
+
+			<p>Like packages and metapackages, a distribution has a title. In PackageMaker, you can set the Title in the &ldquo;Installer Interface&rdquo; pane. Also, the <a href="../package/interface.html">same localizable resources</a> can be specified for a distribution (background image, welcome, read me, and license). These items can also be specified in the &ldquo;Installer Interface&rdquo; tab.</p>
+
+			<img src="graphics/interface_title.jpg">
+			<span class="caption">Specifying the Title and Accessing the Interface Editor</span>
+
+			<p>In addition to these resources, a distribution also gives you control of the &ldquo;Custom Install&rdquo; pane of the Installer. This differs from a metapackage, whose &ldquo;Custom Install&rdquo; pane is constructed based on the packages it contains.</p>
+
+			<p>Within PackageMaker, you can customize the &ldquo;Custom Install&rdquo; pane by adding choices, which are the checkboxes that will be displayed in the pane. Choices can be added in the &ldquo;Distribution Details&rdquo; sidebar or in the &ldquo;Installer Interface Editor&rdquo; available in the &ldquo;Installer Interface&rdquo; pane.</p>
+
+			<img src="graphics/interface_choiceEditor.png">
+			<span class="caption">Editing choices in the Installer Interface Editor</span>
+
+			<p>Choices can be arbitrarily nested, allowing for subchoices, sub-subchoices, and so on. Each choice can have one or more <a href="contents.html">package references associated with it</a>. Packages are added via drag-n-drop, the Project &gt; Add Package&hellip; menu item, or the Project &gt; Add Package Reference&hellip; menu item. The packages associated with a choice will be installed if that choice is selected by the user during install.</p>
+
+			<p>Choices have a number of properties that can be set by selecting them in either the &ldquo;Distribution Details&rdquo; sidebar or within the &ldquo;Installer Interface Editor&rdquo;:</p>
+			<ul>
+				<li>The title, tooltip, and description will be presented to the user during install and can be <a href="localization.html">localized</a>.</li>
+				<li>The identifier is primarily used for scripting and should generally be unique among all choices.</li>
+				<li>If a custom location is specified, the Installer will allow the user to specify where the packages for that choice should be installed.</li>
+			</ul>
+
+			<img src="graphics/localizable_choicePane.jpg">
+			<span class="caption">Editing a choice</span>
+
+			<p>Choices also be selected (checked or unchecked), enabled/disabled, and visible/invisible. These state variables are controllable via JavaScript, which can be edited in the same place as the other choice properties. The package author can specify an initial state, as well as how the state should change in response to events, such as the user selecting other choices.<br><a href="scripts.html">More Info&hellip;</a></p>
+
+			<img src="graphics/interface_choiceScripts.png">
+			<span class="caption">Editing choice scripts</span>
+		</div>
+	</body>
+</html>

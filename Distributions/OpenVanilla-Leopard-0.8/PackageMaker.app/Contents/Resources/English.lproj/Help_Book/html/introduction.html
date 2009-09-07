@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<title>Package Creation Help - Introduction</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/content.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a>
+		</div>
+		<div id="toc">
+			<h3>Contents</h3>
+			<ul>
+				<li><a href="../html/introduction.html" id="current">Introduction</a></li>
+				<li><a href="../package/index.html">Package a single item for installation</a></li>
+				<li><a href="../html/multiple_items.html">Package multiple items for installation</a></li>
+				<li><a href="../metapackage/index.html">Creating Metapackages</a></li>
+				<li><a href="../distribution/index.html">Creating Distributions</a></li>
+				<li><a href="../html/verify.html">Verify your package</a></li>
+				<li><a href="../setupassistant/index.html">Use the Package Setup Assistant</a></li>
+				<li><a href="../automation/index.html">Automate PackageMaker</a></li>
+				<li><a href="../package/snapshot.html">Make a snapshot package</a></li>
+			</ul>
+		</div>
+		<div id="content">
+			<h1>Introduction to PackageMaker</h1>
+			<p>PackageMaker is an application shipped with the Developer Tools for creating installation packages. To create an installer for a single item, such as an application, a <a href="../package/index.html">package</a> should be created. To create an installer for multiple items, a <a href="../metapackage/index.html">metapackage</a> or <a href="../distribution/index.html">distribution</a> should be created.</p>
+
+			<p>The workflow in PackageMaker is to create a PackageMaker document (.pmproj) file and then build your package (.pkg), metapackage (.mpkg), or distribution (.mpkg) from this document file. The document file can be stored separately from the .pkg or .mpkg so that you can easily rebuild later.</p>
+
+			<p>In addition, PackageMaker can edit .pkg and .mpkg files directly. This works exactly like editing a .pmproj file, with the following notes:</p>
+
+			<ul>
+				<li>Keys and properties not yet supported by the PackageMaker user interface are passed through unchanged. For example, Locator definitions in distribution XML.</li>
+				<li>The &ldquo;Discard Resource Forks&rdquo; flag in the &ldquo;Contents&rdquo; tab in the Package user interface is not preserved, as this flag is not stored in a .pkg.</li>
+				<li>When saving changes to an edited .pkg, PackageMaker unpackages the contents to a temporary directory, then repackages them.</li>
+			</ul>
+
+			<p>Alternatively, you can use the <a href="../setupassistant/index.html">Package Setup Assistant</a> to quickly and easily create your package/metapackage/distribution. It provides a step-by-step interface where you simply provide the items you want to install along with relevant metadata, and it takes care of the rest.</p>
+		</div>
+	</body>
+</html>

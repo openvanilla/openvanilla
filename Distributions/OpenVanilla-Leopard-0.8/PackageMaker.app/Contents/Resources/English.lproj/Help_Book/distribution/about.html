@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Creating a Distribution - About Distributions</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> →
+			<a href="index.html">Creating a Distribution</a>
+		</div>
+		<div id="content">
+			<h1>About Distributions</h1>
+
+			<p>A distribution (.mpkg) is similar to a <a href="../metapackage/index.html">metapackage</a> in that it bundles multiple items together into a single install. However, a distribution offers more flexibility in <a href="interface.html">specifying the interface</a> for your installer. This flexibility is provided by a <strong>distribution script</strong>, which is XML combined with JavaScript. For a full description of all XML elements and JavaScript objects, see the <a href="http://developer.apple.com/releasenotes/DeveloperTools/Installer.html">Installer Release Notes</a>.</p>
+
+			<p>A distribution script consolidates the information previously scattered across many files within an mpkg, such as: InstallationCheck, VolumeCheck, IFRequirements, IFPkgFlagPackageSelection, IFPkgFlagPackageList, IFPkgFlagRootVolumeOnly, IFPkgFlagRestartAction, IFPkgFlagDefaultLocation, IFPkgFlagAuthorizationAction, IFPkgFlagBackgroundAlignment, IFPkgFlagBackgroundScaling, and many others.</p>
+			<p>Using a distribution script to replace your InstallationCheck tool or script with a JavaScript equivalent removes the &ldquo;This Installer package needs to run a program to determine if it can be installed.&rdquo; sheet. The JavaScript in the distribution script lets the package author script the InstallationCheck, VolumeCheck, and Installer.app interface. The JavaScript runs in a custom run-time.<br><a href="scripts.html">More Info&hellip;</a></p>
+
+			<p>The packages bundled with a distribution can be inside the distribution, on the same level as the distribution, on removable media, or at a custom location.<br><a href="contents.html">More Info&hellip;</a></p>
+
+			<p>A distribution (with extension .mpkg) is an OS X bundle, meaning that it appears as a single file in the Finder, but is really a directory. The structure of a distribution is as follows:</p>
+
+			<ul>
+				<li><strong>Foo.mpkg</strong></li>
+				<ul>
+					<li><strong>Contents</strong></li>
+					<ul>
+						<li><em>distribution.dist</em></li>
+						<li><strong>Packages</strong></li>
+						<ul>
+							<li>a.pkg</li>
+							<li>b.pkg</li>
+							<li>c.pkg</li>
+						</ul>
+						<li><strong>Resources</strong></li>
+						<ul>
+							<li>Localized resources in .lproj directories</li>
+							<li>Scripts</li>
+							<li>Other resources</li>
+						</ul>
+					</ul>
+				</ul>
+			</ul>
+
+			<p>The <em>italicized items</em> can be created by PackageMaker. The package author is responsible for all other items.</p>
+		</div>
+	</body>
+</html>

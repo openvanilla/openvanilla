@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Creating a Distribution - Localization</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> →
+			<a href="index.html">Creating a Distribution</a>
+		</div>
+		<div id="content">
+			<h1>Localizing a Distribution</h1>
+
+			<p>The resources of a distribution (welcome, read me, license, etc.) can be localized as in packages and metapackages by using .lproj directories within the <code>Contents/Resources</code> directory of the distribution .mpkg. PackageMaker currently does not provide an interface to do this.</p>
+
+			<p>In addition to the resources, the choice title, tooltip, and description can be localized. The localized values can be stored in a <code>Localizable.strings</code> file in the .lproj directories or can be specified in the distribution XML. The values can then be referenced by key. PackageMaker does provide an interface for this, which is accessible by editing a choice:</p>
+
+			<ol>
+				<li>Select the choice in the &ldquo;Distribution Details&rdquo; sidebar.</li>
+				<li>Check the &ldquo;Make localizable&rdquo; checkbox underneath the description field. You'll notice that PackageMaker replaces the existing title, tooltip, and description with unique keys used to reference the localized values. <a href="#choicePane">Screenshot&hellip;</a></li>
+				<li>Click the &ldquo;Edit Localizations&rdquo; button.</li>
+				<li>Select the language you wish to edit. If the language does not exist, type the name of the language and press Return.</li>
+				<li>Enter the desired title, tooltip, and description values for the selected language. <a href="#localizePane">Screenshot&hellip;</a></li>
+				<li>To remove a localization, select it in and press the &ldquo;Remove&rdquo; button. PackageMaker requires there to be at least one localization.</li>
+				<li>When finished, press the &ldquo;Close&rdquo; button.</li>
+			</ol>
+
+			<p>PackageMaker writes the localization definition into the distribution XML rather than the Localizable.strings files. <a href="#example">Example&hellip;</a></p>
+
+			<a name="choicePane"></a>
+			<img src="graphics/localizable_choicePane.jpg">
+			<span class="caption">A localizable choice in PackageMaker</span>
+
+			<img src="graphics/localization_EnglishPane.jpg">
+			<span class="caption">English localized values</span>
+
+			<a name="localizePane"></a>
+			<img src="graphics/localization_FrenchPane.jpg">
+			<span class="caption">Le Fran&ccedil;ais localise des valeurs</span>
+
+			<a name="example"></a>
+			<pre>
+&lt;localization&gt;
+	&lt;strings language="English"&gt;
+"choice0-title" = "English Title";
+"choice0-tooltip" = "English Tooltip";
+"choice0-description" = "English Description";
+	&lt;/strings&gt;
+
+	&lt;strings language="French"&gt;
+"choice0-title" = "Titre Fran\U00e7ais";
+"choice0-tooltip" = "Tooltip Fran\U00e7ais";
+"choice0-description" = "Description fran\U00e7aise";
+	&lt;/strings&gt;
+&lt;/localization&gt;</pre>
+
+			<span class="caption">Applicable section of distribution XML</span>
+
+			<pre>
+"choice0-title" = "English Title";
+"choice0-tooltip" = "English Tooltip";
+"choice0-description" = "English Description";</pre>
+
+			<span class="caption">The corresponding <code>English.lproj/Localizable.strings</code></span>
+		</div>
+	</body>
+</html>

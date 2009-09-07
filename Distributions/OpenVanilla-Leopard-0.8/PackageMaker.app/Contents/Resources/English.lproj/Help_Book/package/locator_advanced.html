@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Creating a Package - Specifying Locator Definitions by Hand</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> →
+			<a href="index.html">Creating a Package</a>
+		</div>
+		<div id="content">
+			<h1>Specifying Locator Definitions by Hand</h1>
+
+			<p>A warning before we begin: this is not for the faint of heart.</p>
+
+			<p>Locator definitions are spread over two files. The <strong><a href="#mappings">path mappings</a></strong> are put in <code>Contents/Info.plist</code>, while the <strong>token definitions</strong> are put in <code>Contents/Resources/TokenDefinitions.plist</code>.</p>
+
+			<h3>Token Definitions</h3>
+			<p>The <code>TokenDefinitions.plist</code> file groups search methods together, giving each group a name, or token. This token is used to assign the group of search methods to a path in your root in the <a href="#mappings">path mappings</a>.</p>
+			<p>An example <code>TokenDefinitions.plist</code> could look like the following:</p>
+			<pre>
+&lt;key&gt;ClockToken&lt;/key&gt;
+&lt;array&gt;
+	&lt;dict&gt;
+		&lt;key&gt;searchPlugin&lt;/key&gt;
+		&lt;string&gt;CheckPath&lt;/string&gt;
+		&lt;key&gt;path&lt;/key&gt;
+		&lt;string&gt;/Applications/Clock.app&lt;/string&gt;
+	&lt;/dict&gt;
+	&lt;dict&gt;
+		&lt;key&gt;searchPlugin&lt;/key&gt;
+		&lt;string&gt;LaunchServicesLookup&lt;/string&gt;
+		&lt;key&gt;identifier&lt;/key&gt;
+		&lt;string&gt;com.apple.clock&lt;/string&gt;
+	&lt;/dict&gt;
+	&lt;dict&gt;
+		&lt;key&gt;searchPlugin&lt;/key&gt;
+		&lt;string&gt;BundleIdentifierSearch&lt;/string&gt;
+		&lt;key&gt;identifier&lt;/key&gt;
+		&lt;string&gt;com.apple.clock&lt;/string&gt;
+		&lt;key&gt;excludedDirs&lt;/key&gt;
+		&lt;array&gt;
+			&lt;string&gt;/System&lt;/string&gt;
+			&lt;string&gt;/Developer&lt;/string&gt;
+			&lt;string&gt;/AppleInternal&lt;/string&gt;
+		&lt;/array&gt;
+		&lt;key&gt;maxDepth&lt;/key&gt;
+		&lt;integer&gt;6&lt;/integer&gt;
+		&lt;key&gt;startingPoint&lt;/key&gt;
+		&lt;string&gt;/&lt;/string&gt;
+		&lt;key&gt;successCase&lt;/key&gt;
+		&lt;string&gt;findOne&lt;/string&gt;
+	&lt;/dict&gt;
+&lt;/array&gt;</pre>
+			<p>As can be seen, it is a dictionary of tokens, with each token specifying an array of search methods. Each search method in the array is represented by a dictionary with certain parameters as specified below:</p>
+
+			<h4>CheckPath</h4>
+			<ul>
+				<li><strong>path</strong>: <em>required</em>: A string specifying the path to search (such as <code>/Applications</code>).</li>
+			</ul>
+
+			<h4>LaunchServicesLookup</h4>
+			<ul>
+				<li><strong>identifier</strong>: <em>optional</em>: The <code>CFBundleIdentifier</code> for the bundle the search is intended to locate (for example, com.apple.clock). Prior to Mac OS X version 10.3 (v10.3), this key was required. Starting in Mac OS X v10.3, you must specify either this key or the <code>creator</code> key.</li>
+				<li><strong>creator</strong>: <em>optional</em>: A string that specifies a four-character creator (for example, <code>ttxt</code> for the TextEdit application). Prior to Mac OS X v10.3, this key was required. Starting in Mac OS X v10.3, you must specify either this key or the <code>identifier</code> key.</li>
+				<li><strong>type</strong>: <em>optional</em>: A string that specifies a four-character document type the application can open (for example, TEXT). Starting in Mac OS X v10.3, this key is ignored, and you must specify either the <code>creator</code> key or the <code>identifier</code> key.</li>
+				<li><strong>extension</strong>: <em>optional</em>: The extension for a file type the application can open (for example, .txt). Starting in Mac OS X v10.3, this key is ignored, and you must specify either the <code>creator</code> key or the <code>identifier</code> key.</li>
+			</ul>
+
+			<h4>BundleIdentifierSearch</h4>
+			<ul>
+				<li><strong>startingPoint</strong>: <em>optional</em>: A string specifying the path from which to start searching. If not specified, / is used.</li>
+				<li><strong>identifier</strong>: <em>required</em>: The <code>CFBundleIdentifer</code> for the bundle the search is intended to locate.</li>
+				<li><strong>successCase</strong>: <em>optional</em>: Specifies the behavior to use with the search succeeds. The three legal values are:</li>
+				<ul>
+					<li><code>findOne</code>: Terminates the search as soon as a match is identified. This is the default.</li>
+					<li><code>findAll</code>: Does not stop if a match is found, so finds all matches. Succeeds if any matches are found.</li>
+					<li><code>neverSucceed</code>: Iterates over the entire file system and compiles results that can be used by the &ldquo;<a href="#bundleVersionFilter">BundleVersionFilter</a>&rdquo; search method.</li>
+				</ul>
+				<li><strong>maxDepth</strong>: <em>optional</em>: The maximum directory depth to descend in the search.</li>
+				<li><strong>excludedDirs</strong>: <em>optional</em>: An array of one or more strings, each of which identifies a directory that should be exlcluded from the search. For example, you can avoid a great deal of searching by excluding the locations <code>/System</code> and <code>/Developer</code> if your software is unlikely to be located within either of those directories.</li>
+			</ul>
+
+			<a name="bundleVersionFilter"></a>
+			<h4>BundleVersionFilter</h4>
+			<p>This search method is used to filter the results of the previous search method. It succeeds if one or more bundles fall in the specified version range. Available in OS 10.3 or later.</p>
+			<ul>
+				<li><strong>maxVersion</strong>: <em>optional</em>: The maximum version allowed, specified as a 5-tuple version in a string. See &ldquo;<a href="http://developer.apple.com/documentation/DeveloperTools/Conceptual/SoftwareDistribution/Concepts/sd_pkg_version_info.html#//apple_ref/doc/uid/20001942-1016661-CEGBFEAA">How Installer Computes a Version</a>&rdquo;.</li>
+				<li><strong>minVersion</strong>: <em>optional</em>: The minimum version allowed, specified the same way as <code>maxVersion</code>.</li>
+			</ul>
+
+			<h4>CommonAppSearch</h4>
+			<ul>
+				<li><strong>path</strong>: <em>required</em>: The default path to the application to locate.</li>
+				<li><strong>identifier</strong>: <em>required</em>: The <code>CFBundleIdentifier</code> for the application to locate.</li>
+			</ul>
+
+			<a name="mappings"></a>
+			<h3>Path Mappings</h3>
+			<p>Path mapping entries are specified in a dictionary in the Info.plist of your package, and map a path in the package to a location associated with a token in your TokenDefinitions. A path mapping specifies the beginning part of a path, and every file beginning with the path will be installed at the new location.</p>
+			<p>To specify your path mappings, use a syntax like the following in your Info.plist:</p>
+			<pre>
+&lt;key&gt;IFPkgPathMappings&lt;/key&gt;
+&lt;dict&gt;
+	&lt;key&gt;./Applications/Clock.app&lt;/key&gt;
+	&lt;string&gt;{ClockToken}&lt;/string&gt;
+&lt;/dict&gt;</pre>
+
+			<p>In this example, if the ClockToken search succeeded, files starting with <code>./Applications/Clock.app</code> in your package would be installed to path associated with ClockToken. If the ClockToken search failed, the Installer would fall back to where it would normally install the file.</p>
+		</div>
+	</body>
+</html>

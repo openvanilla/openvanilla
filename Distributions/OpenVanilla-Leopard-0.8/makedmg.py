@@ -48,6 +48,7 @@ def build_release():
 	project_target_name = "LeopardVanilla"
 	clean_command = "xcodebuild -project ../../Loaders/OSX-Leopard/LeopardVanilla.xcodeproj -configuration Release clean"
 	build_command = "xcodebuild -project ../../Loaders/OSX-Leopard/LeopardVanilla.xcodeproj -configuration Release -target \"" + project_target_name + "\" build"
+	os.system(clean_command)
 	os.system(build_command)
 	
 def copy_release_to_tmp():
@@ -78,23 +79,38 @@ def clean_DS_store():
 	os.system(command)
 
 def build_package():
-	package_maker = "/Developer/Applications/Utilities/PackageMaker.app/Contents/MacOS/PackageMaker"
-	arg = " -d OpenVanilla.pmdoc -o " + pkg + " -t " + disk + " -e Resources"
+	package_maker = "./PackageMaker.app/Contents/MacOS/PackageMaker"
+	arg = " -build -ds -v -proj ./OpenVanillaLoader.pmproj -p Loader.pkg"
+	print package_maker + arg
 	os.system(package_maker + arg)
+	arg = " -build -ds -v -proj ./OpenVanillaModule.pmproj -p Modules.pkg"
+	print package_maker + arg
+	os.system(package_maker + arg)
+	arg = " -build -ds -v -proj ./OpenVanilla.pmproj -p " + pkg
+	print package_maker + arg
+	os.system(package_maker + arg)
+
+	pkg_path = os.path.join(os.path.abspath(pkg), "Contents/Packages");
+	try:
+		os.mkdir(pkg_path)
+	except:
+		pass
+	shutil.copytree("Loader.pkg", os.path.join(pkg_path, "Loader.pkg"))
+	shutil.copytree("Modules.pkg", os.path.join(pkg_path, "Modules.pkg"))
+	os.system("sudo rm -rf Loader.pkg")
+	os.system("sudo rm -rf Modules.pkg")
+
 
 def build_uninstaller():
 	project_target_name = "OVUninstall"
 	clean_command = "xcodebuild -project ../../Utilities/OVUninstall/OVUninstall.xcodeproj -configuration Release clean"
 	build_command = "xcodebuild -project ../../Utilities/OVUninstall/OVUninstall.xcodeproj -configuration Release -target \"" + project_target_name + "\" build"
+	os.system(clean_command)
 	os.system(build_command)
 
 def make_dmg():
-	size = 10 * 1024 * 2;
+	size = 16 * 1024 * 2;
 	command = "/usr/bin/hdiutil"
-	# arg = "create -sectors " + str(size) + " -volname \"" + disk + "\" -attach -fs HFS+ \"OpenVanilla.dmg\""
-	# os.system(command + " " + arg)
-	# return 
-	# cmd = command + " " + arg
 	arg = [command, "create",  "-sectors", str(size), "-volname", disk, "-attach", "-fs", "HFS+", "OpenVanilla.dmg"]
 	
 	result = subprocess.Popen(arg, stdout=subprocess.PIPE).communicate()
@@ -104,7 +120,7 @@ def make_dmg():
 		if line.find("Apple_HFS") > -1:
 			space = line.find(" ")
 			device = line[:12]
-	shutil.copy2(pkg, os.path.join("/Volumes", disk , pkg))
+	shutil.copytree(pkg, os.path.join("/Volumes", disk , pkg))
 
 	uninstaller = "Uninstall OpenVanilla.app"
 	uninstaller_path = os.path.abspath(os.path.join("../../Utilities/OVUninstall/build/Release", uninstaller))
@@ -130,10 +146,13 @@ def main():
 	print "Building Package..."
 	build_package()
 	os.system("sudo rm -rf tmp")
-	
+	print "Done.."
+
+	print "Building DMG..."
 	make_dmg()
 	os.system("sudo rm -rf " + pkg)
 	os.system("sudo rm -rf OpenVanilla.dmg")
+	print "Done.."
 	pass
 
 

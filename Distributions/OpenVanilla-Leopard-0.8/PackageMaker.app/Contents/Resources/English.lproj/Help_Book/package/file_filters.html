@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Creating a Package - File Filters</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> →
+			<a href="index.html">Creating a Package</a>
+		</div>
+		<div id="content">
+			<h1>File Filters</h1>
+
+			<p>File Filters (available from the &ldquo;Contents&rdquo; and &ldquo;Scripts&rdquo; tabs of the PackageMaker user interface) allow the package author to specify regular expressions to filter out files/directories from the root. When building the package, any files in the root matching these expressions will not be added to the package.</p>
+
+			<img src="graphics/contents_FileFilters.png">
+			<span class="caption">The File Filters sheet</span>
+
+			<p>You can test your regular expressions by typing a file path or file path fragment into the search field. Matching expressions will be displayed in the table.</p>
+
+			<p>These regular expressions will be matched against the entire path of the file in the root. For example, a package like the following:</p>
+
+			<pre>
+- My Great App.app
+    - Contents
+    Info.plist
+    - MacOS
+        My Great App
+    - Resources
+        - English.lproj
+            - MainMenu.nib
+                classes.nib
+                info.nib
+                keyedobjects.nib</pre>
+
+			<p>Would have the following paths:</p>
+
+			<pre>
+./My Great App.app
+./My Great App.app/Contents
+./My Great App.app/Contents/Info.plist
+./My Great App.app/Contents/MacOS
+./My Great App.app/Contents/MacOS/My Great App
+./My Great App.app/Contents/Resources
+./My Great App.app/Contents/Resources/English.lproj
+./My Great App.app/Contents/Resources/English.lproj/MainMenu.nib
+./My Great App.app/Contents/Resources/English.lproj/MainMenu.nib/classes.nib
+./My Great App.app/Contents/Resources/English.lproj/MainMenu.nib/info.nib
+./My Great App.app/Contents/Resources/English.lproj/MainMenu.nib/keyedobjects.nib</pre>
+
+			<p>Generally, you'll want to match the last path component. This can be done by anchoring the regular expression to the end of the string using the $ modifier (as seen in the built-in regular expressions). Once a directory has been filtered, all files within the directory will be filtered as well.</p>
+
+		</div>
+	</body>
+</html>

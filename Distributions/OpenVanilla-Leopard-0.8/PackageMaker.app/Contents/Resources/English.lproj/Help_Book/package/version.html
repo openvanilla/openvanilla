@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Creating a Package - Versioning Your Package</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> →
+			<a href="index.html">Creating a Package</a>
+		</div>
+		<div id="content">
+			<h1>Versioning Your Package</h1>
+
+			<p>The bundle identifier and version number of your package are very important. Both can be set in the &ldquo;Package Version&rdquo; tab of the PackageMaker user interface.</p>
+
+			<img src="graphics/versioning_Pane.png">
+			<span class="caption">The &ldquo;Package Version&rdquo; tab</span>
+
+			<p>The bundle identifier should be <strong>unique</strong> for all packages, including all packages you distribute. For example, if you were creating packages for iTunes and an iTunes daemon, you might give the packages identifiers of com.apple.iTunes.application and com.apple.iTunes.daemon respectively. Installer.app uses the bundle identifier to determine which package to upgrade during an upgrade install.</p>
+
+			<p>The version number is also important. Installer.app uses the version number to determine if an upgrade is needed from a previous install. It is also used to prevent downgrades. It need not match the version number of what you are installing.</p>
+		</div>
+	</body>
+</html>

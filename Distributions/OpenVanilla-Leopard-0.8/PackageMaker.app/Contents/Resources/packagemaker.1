@@ -1,0 +1,185 @@
+.Dd August 3, 2005                      \" Document date
+.Dt  PackageMaker 1                    
+.Os Mac OS X
+.Sh NAME
+.Nm PackageMaker ,
+.Nm packagemaker
+.Nd Installation-package creation tool
+.Sh SYNOPSIS
+.Nm
+.Fl build
+.Fl p Ar destination-path
+.Fl f Ar root-path
+.Op Fl b Ar build-dir
+.Op Fl s
+.Op Fl ds
+.Op Fl v
+.Op Fl u
+.Op Fl r Ar resources-path
+.Op Fl i Ar info-file
+.Op Fl d Ar description-file
+.Pp
+.Nm
+.Fl build
+.Fl mi | ms | mc Ar pkg-dir
+.Fl p Ar destination-path
+.Op Fl v
+.Op Fl r Ar resources-path
+.Op Fl i Ar info-file
+.Op Fl d Ar description-file
+.Pp
+.Nm
+.Fl build
+.Fl proj Ar project-path
+.Fl p Ar destination-path
+.Op Fl v
+.Pp
+.Nm
+.Fl build
+.Fl snapshot Ar snapshot-path
+.Op Fl b Ar build-dir
+.Op Fl s
+.Op Fl ds
+.Op Fl v
+.Op Fl u
+.Op Fl r Ar resources-path
+.Op Fl i Ar info-file
+.Op Fl d Ar description-file
+.Op Fl v
+.Pp
+.Nm
+.Fl -snapshot Ar root-path destination-path
+.Pp
+.Nm
+.Fl help
+.Sh DESCRIPTION
+.Nm
+allows you to package files in a way that makes it easy for end users to install them on their computers.
+.Pp
+.Nm
+-build can create the installation package (.pkg), metapackage (.mpkg), or distribution (.mpkg) file specified by destination-path. For a package, the payload is the contents of root-path. For a metapackage, the contained packages are specified by pkg-dir. Distributions can currently only be built from PackageMaker project files (.pmproj).
+.Pp
+An installation package contains everything the Installer application needs to install a group of files (the package's payload), which can include application bundles, documentation files, scripts, and so on. In general, a package contains the following:
+.Pp
+.Bl -tag -width -indent
+.It A bill of materials file:
+A binary file that describes the contents of the package.
+.It \&An information property list:
+An XML file that contains the information about the package, such as default location and version.
+.It \&An archive file:
+The set of files to be installed, also known as the payload. With 
+.Nm ,
+this archive is always compressed.
+.It Resources directory:
+This directory contains files Installer uses during an installation but doesn't install on the target computer. They include Read Me files, license-agreement files, and scripts.
+.El
+.Pp
+Unless the root-path is specified (see below), the working directory must be the one containing the package's payload.
+.Pp
+A metapackage is a file that includes a list of packages (and possibly other metapackages) and any additional information needed to install them. The actual packages can be stored in the metapackage (-mi), on the same level as the metapackage (-ms), or at a custom location (-mc). In general, a metapackage contains the following:
+.Pp
+.Bl -tag -width -indent
+.It \&An information property list:
+An XML file that contains the information about the metapackage, such as version and package list.
+.It \&Packages directory:
+Contains any packages stored within the metapackage.
+.It Resources directory:
+This directory contains files Installer uses during an installation but doesn't install on the target computer. They include Read Me files, license-agreement files, and scripts.
+.El
+.Pp
+A distribution is similar to a metapackage, except that it contains a distribution.dist file, which contains XML and JavaScript which specify the UI for the Install. In general, a distribution contains the following:
+.Pp
+.Bl -tag -width -indent
+.It \&An distribution script:
+An XML file specifying the UI for the install. May also contain JavaScript.
+.It \&Packages directory:
+Contains any packages stored within the distribution.
+.It Resources directory:
+This directory contains files Installer uses during an installation but doesn't install on the target computer. They include Read Me files, license-agreement files, and scripts.
+.El
+.Pp
+See http://developer.apple.com/documentation/DeveloperTools/Conceptual/SoftwareDistribution/ as well as the help integrated into PackageMaker for information on the keys of the property-list files as well as a detailed explanation of package creation, format, and use.
+.Sh OPTIONS
+.Bl -tag -width -indent
+.It Fl build
+Create an installation package, metapackage, or distribution.
+.It Fl p
+The path, including the package name and extension (.pkg) where the package is created.
+.It Fl f
+Directory containing the contents of the package.
+.It Fl b
+Directory used to temporarily copy and modify the root if splitting resource forks (suggestion: /tmp).  Overrides default behavior that builds off (and temporarily modifies) the original root. 
+.It Fl s
+Split files with resource forks (Installer will reassemble them).  Overrides default behavior that discards resource forks.
+.It Fl ds
+Filter .DS_Store files out of the creation process.
+.It Fl v
+Verbose output during archiving.
+.It Fl u
+Create uncompressed archive.
+.It Fl r
+Directory containing installation resources, such as scripts and Read Me files.
+.It Fl i
+Path to property list file (.plist) that is copied to the package's Contents directory as Info.plist, the only modification being the insertion of the package's installed size (IFPkgFlagInstalledSize). This option must be specified and the Info.plist must contain a CFBundleIdentifier key. This CFBundleIdentifier should uniquely identify your package.
+.It Fl d
+Path to property list file (.plist) that is copied to the package's Resources directory as Description.plist. If this option is unspecified a skeletal Description.plist is generated for the package. You should add the title and description entries to the Description.plist file after creating the package.
+.It Fl mi
+Path to directory of packages/metapackages to be included in the metapackage. The packages will be stored within the created metapackage.
+.It Fl ms
+Path to directory of packages/metapackages to be included in the metapackage. The packages will not be stored within the created metapackage, rather, they should be on the same level as the .mpkg file.
+.It Fl mc
+Path to directory of packages/metapackages to be included in the metapackage. The packages will not be stored within the created metapackage, rather, they should remain at the location specified.
+.It Fl proj
+Path to a .pmproj created with the
+.Nm
+GUI client.
+.Nm
+will build the package/metapackage/distribution specified by the .pmproj file. This flag overrides most other flags.
+.It Fl snapshot
+Path to a .snapshot directory created with
+.Nm
+.Fl -snapshot\&.
+Will build a package containing files added to the directory that was snapshotted since the snapshot was taken.
+.It Fl -snapshot
+Creates a snapshot directory of root-path at destination-path. The directory contains an Info.plist and a bill-of-materials file describing the root.
+.Nm
+.Fl build snapshot
+can then be used to build a package with files added to the root since the snapshot.
+.It Fl help
+Display help information.
+.El
+.Sh SCRIPTS
+You define scripts when you need to test certain conditions before installation or when you need to perform special tasks as the installation takes place.
+.Pp
+To add a script to an installation, place it in the resources directory (specified with the
+.Fl r
+option).
+.Pp
+Scripts can be run before and after the package's payload is installed. There are two types of scripts: environment-test scripts and installation scripts.
+.Pp
+These are the environment-test scripts you can define for an installation:
+.Bl -tag -width -indent
+.It Ar InstallationCheck
+Installer runs this script to determine whether the installation should proceed.
+.It Ar VolumeCheck
+Installer runs this script to determine whether a particular volume can receive the package's payload.
+.El
+.Pp
+If the environment-test scripts allow the installation to proceed, Installer performs the installation scripts and the installs the payload in the following order:
+.Pp
+.Bl -tag -compact
+.It Ar preflight
+.It Ar preinstall
+or
+.Ar preupgrade
+.It Payload installation
+.It Ar postinstall
+or
+.Ar postupgrade
+.It Ar postflight
+.El
+.Sh EXAMPLES
+Creating Cool_App.pkg with existing Info.plist and Description.plist files:
+.D1	PackageMaker -build -p /Volumes/Packages/Cool_App/Cool_App.pkg -f /Volumes/Packages/Cool_App/Package_contents -i /Volumes/Packages/Cool_App/Info.plist -d /Volumes/Packages/Cool_App/Description.plist
+.Sh SEE ALSO
+.Xr installer 8

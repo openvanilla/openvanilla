@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Creating a Package - Automation</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> → <a href="../html/contents.html">Contents</a>
+		</div>
+		<div id="content">
+			<h1>Automating PackageMaker</h1>
+			
+			<p>In addition to the graphical interface for PackageMaker, there is also a command-line interface. The command-line interface allows for the automation of package creation. Both interfaces use the same executable. That is, to invoke the command-line interface, you would use the following command:</p>
+
+			<pre>
+/Developer/Applications/Utilities/PackageMaker.app/ 
+	Contents/MacOS/PackageMaker -build [other options]</pre>
+
+			<p>typed on one line without spaces in the path. There is a more convenient symlink located at:</p>
+			<pre>/Developer/Tools/packagemaker</pre>
+
+			<p>The CLI can create packages, metapackages, or distributions. The easiest method is to specify a PackageMaker .pmproj document created in the GUI, but it is also possible to specify all necessary parameters.</p>
+
+			<p>For full details on the PackageMaker CLI, see the man page:</p>
+
+			<pre>man packagemaker</pre>
+		</div>
+	</body>
+</html>

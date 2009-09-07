@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Package Setup Assistant - The Creation Pane</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> →
+			<a href="index.html">Package Setup Assistant</a>
+		</div>
+		<div id="content">
+			<h1>The Creation Pane</h1>
+
+			<p>After all previous panes have been completed, the creation pane takes the information and actually builds your packages one-by-one. For each item in the <a href="contents.html">Contents pane</a>, it will create a package as follows:</p>
+
+			<ol>
+				<li>Copy the file/directory at the specified path to a temporary location</li>
+				<li><a href="../package/permissions.html">Apply recommended permissions</a></li>
+				<li>Preserve resource forks</li>
+				<li>Setup <a href="../package/locator.html">Locator definitions</a> if the item is a relocatable application</li>
+				<li>Assign an authorization level based on the specified install location</li>
+				<li>Set the specified values for title, description, bundle identifier, version, post-install action, and resources</li>
+				<li>Build the package</li>
+				<li>Delete the temporary location</li>
+			</ol>
+
+			<p>The assistant may require authentication to build the package(s).</p>
+
+			<p>If multiple items were specified, when the assistant finishes building each package, it will wrap them in a distribution or a metapackage as follows:</p>
+
+			<h3>Metapackage</h3>
+			<ol>
+				<li>Set the specified values for title, description, bundle identifier, version, and resources</li>
+				<li>Add the packages as internal packages with selected status<br><a href="../metapackage/contents.html">More Info&hellip;</a></li>
+				<li>Build the metapackage</li>
+			</ol>
+
+			<h3>Distribution</h3>
+			<ol>
+				<li>Set the specified values for title, bundle identifier, version, and resources</li>
+				<li>Create a choice for each package and add the package as an internal local package reference<br><a href="../distribution/contents.html">More Info&hellip;</a></li>
+				<li>Build the distribution</li>
+			</ol>
+
+			<p>When creation is completed, you can view the package/metapackage in the Finder, edit it in PackageMaker, or test it in the Installer.</p>
+		</div>
+	</body>
+</html>

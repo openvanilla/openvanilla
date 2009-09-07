@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Creating a Metapackage - About Metapackages</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> →
+			<a href="index.html">Creating a Metapackage</a>
+		</div>
+		<div id="content">
+			<h1>About Metapackages</h1>
+
+			<p>A metapackage is used to bundle multiple packages/metapackages together into one install. The packages can be required or optional. Like a package, a metapackage can have <a href="../package/interface.html">metadata</a> and <a href="../package/scripts.html">scripts</a> associated with it.</p>
+
+			<p>The packages bundled with a metapackage can be inside the metapackage, on the same level as the metapackage, or at a custom location.<br><a href="contents.html">More Info&hellip;</a></p>
+
+			<p>A metapackage (with extension .mpkg) is an OS X bundle, meaning that it appears as a single file in the Finder, but is really a directory. The structure of a metapackage is as follows:</p>
+
+			<ul>
+				<li><strong>Foo.mpkg</strong></li>
+				<ul>
+					<li><strong>Contents</strong></li>
+					<ul>
+						<li><em>Info.plist</em></li>
+						<li><strong>Packages</strong></li>
+						<ul>
+							<li>a.pkg</li>
+							<li>b.pkg</li>
+							<li>c.pkg</li>
+						</ul>
+						<li><em>PkgInfo</em></li>
+						<li><strong>Resources</strong></li>
+						<ul>
+							<li>Localized resources in .lproj directories</li>
+							<li><em>package_version</em></li>
+							<li>Scripts</li>
+							<li>Other resources</li>
+						</ul>
+					</ul>
+				</ul>
+			</ul>
+
+			<p>The <em>italicized items</em> can be created by PackageMaker. The package author is responsible for all other items. For a metapackage with packages inside the metapackage, you will need to copy the packages yourself.</p>
+		</div>
+	</body>
+</html>

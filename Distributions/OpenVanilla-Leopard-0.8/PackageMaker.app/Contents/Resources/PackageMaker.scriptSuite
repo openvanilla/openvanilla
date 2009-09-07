@@ -1,0 +1,17 @@
+{
+	"Name" = "PackageMaker";
+	"AppleEventCode" = "pkMK";
+	
+	"Classes" = {
+		"PModel" = {
+            "Superclass" = "NSCoreSuite.AbstractObject";
+			"Attributes" = {
+				"buildPath" = {
+					"Type" = "NSString";
+                    "AppleEventCode" = "blpt";
+				};
+			};
+			"AppleEventCode" = "cobj";
+		};
+	};
+}

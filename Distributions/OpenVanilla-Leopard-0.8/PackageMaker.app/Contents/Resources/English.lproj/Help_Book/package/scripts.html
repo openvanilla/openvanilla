@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Creating a Package - Scripts</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> →
+			<a href="index.html">Creating a Package</a>
+		</div>
+		<div id="content">
+			<h1>Scripts</h1>
+
+			<p>You can bundle executable files within your package and Installer.app will run these executables during the install. Generally these files will be shell scripts.</p>
+			<p>In a built package, scripts are stored in the <code>Contents/Resources/</code> directory of your package and must have their executable bit set. When building a package, scripts and all other resources should be placed in the <code>Install_resources</code> directory or your root. This directory can be specified in the &ldquo;Scripts&rdquo; tab of the PackageMaker user interface.</p>
+
+			<img src="graphics/scripts_Pane.png">
+			<span class="caption">The &ldquo;Scripts&rdquo; tab</span>
+
+			<p>Installation scripts run during the actual installation of your package. Installer.app looks for scripts with specific names at certain times. You should use the following names for your scripts:</p>
+			<ul>
+				<li><code>preflight</code>: Executed before the installation process.</li>
+				<li><code>postflight</code>: Executed after the installation process.</li>
+				<li><code>preinstall</code>: Executed before installing a single package. Not executed during an upgrade.</li>
+				<li><code>postinstall</code>: Executed after installing a single package. Not executed during an upgrade.</li>
+				<li><code>preupgrade</code>: Executed before upgrading a single package. Not executed during an install.</li>
+				<li><code>postupgrade</code>: Executed after upgrading a single package. Not executed during an install.</li>
+			</ul>
+
+			<h3>Arguments</h3>
+			<p>Installer.app provides the following arguments:</p>
+			<ul>
+				<li><code>$1</code>: The full path to the installation package.</li>
+				<li><code>$2</code>: The full path to the installation destination.</li>
+				<li><code>$3</code>: The mountpoint of the destination volume.</li>
+				<li><code>$4</code>: The root directory for the current System folder.</li>
+			</ul>
+
+			<h3>Environment Variables</h3>
+			<p>In addition to arguments, Installer.app sets some Environment variables:</p>
+
+			<ul>
+				<li><code>$INSTALLER_TEMP</code>: The scratch area used by Installer.app for temporary work. Executable files may write to this directory, but must not overwrite Installer files. Available to preinstall, preupgrade, postflight, postupgrade, and postinstall.</li>
+				<li><code>$PACKAGE_PATH</code>: Same as the $1 argument. Available to preinstall, preupgrade, postfight, and postupgrade.</li>
+				<li><code>$RECEIPT_PATH</code>: The full path to the directory containing the file being executed. This is a location to which the package has been copied. The executable can currently use this path to locate other files in the package, but this may change in the future. Available to postflight, postupgrade, and postinstall.</li>
+				<li><code>$SCRIPT_NAME</code>: The name of the file being executed. Available to postflight, postupgrade, and postinstall.</li>
+				<li><code>$TMPDIR</code>: This variable is set when the user is doing a Net or CD installation, but is not set when the user is running on a local writable file system. If set, it contains a path to a location on a writable destination volume. Available to preinstall, preupgrade, postflight, postupgrade, and postinstall.</li>
+			</ul>
+
+			<h3>An Example</h3>
+			<pre>
+#!/bin/bash
+#
+# This postflight script echoes the values of the available 
+# arguments and environmental variables.
+#
+echo "Start postflight script"
+echo ""
+echo "Arguments:"
+echo ""
+echo "\$1: full path to the installation package"
+echo "     $1"
+echo "\$2: full path to the installation destination"
+echo "     $2"
+echo "\$3: mountpoint of the destination volume"
+echo "     $3"
+echo "\$4: root directory \"/\" for the current System folder"
+echo "     $4"
+echo ""
+echo "Environment variables available to a postflight executable:"
+echo "     INSTALLER_TEMP, PACKAGE_PATH, RECEIPT_PATH, SCRIPT_NAME, and TMPDIR"
+echo ""
+echo "\$INSTALLER_TEMP: scratch area used by Installer for temporary work files"
+echo "     $INSTALLER_TEMP"
+echo ""
+echo "\$PACKAGE_PATH: full path to the installation package; should be same as \$1"
+echo "     $PACKAGE_PATH"
+echo ""
+echo "\$RECEIPT_PATH: full path to directory containing the file being executed"
+echo "     $RECEIPT_PATH"
+echo ""
+echo "\$SCRIPT_NAME: name of the file being executed"
+echo "     $SCRIPT_NAME"
+echo ""
+echo "\$TMPDIR: if set, a path to a location on a writable destination volume"
+echo "     $TMPDIR"
+echo ""
+echo "End postflight script"
+exit 0</pre>
+		</div>
+	</body>
+</html>

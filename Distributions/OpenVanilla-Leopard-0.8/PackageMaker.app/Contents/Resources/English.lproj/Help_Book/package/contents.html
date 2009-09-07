@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Creating a Package - Specifying the Contents</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> →
+			<a href="index.html">Creating a Package</a>
+		</div>
+		<div id="content">
+			<h1>Specifying the Contents</h1>
+
+			<p>The contents for your package must be organized into a single directory, called a root. The directory structure within this root will be installed to the install location.</p>
+			<p>The root directory for your package is specified in the &ldquo;Contents&rdquo; tab, and can be an absolute or relative path.</p>
+
+			<img src="graphics/contents_Window.png">
+			<span class="caption">The &ldquo;Contents&rdquo; tab</span>
+
+			<p>If there are files in your root that you do not wish to be included in your package (e.g. CVS or Subversion directories), you can filter them with regular expression &ldquo;File Filters&rdquo;.<br><a href="file_filters.html">More Info&hellip;</a></p>
+			
+			<p>If you are installing items to multiple locations, the affected directory structure must be duplicated within your root. For example, if you were installing an application to <code>/Applications</code> and a font to <code>/Library/Fonts</code>, you'd have a root similar to the following:</p>
+			<pre>
+- Root
+	- Applications
+		My Great App.app
+	- Library
+		- Fonts
+			- My Great Font.dfont</pre>
+			<p>In this example, you would make your install location /. However, it is recommended that in cases like this, you make separate packages for the application and for the font.</p>
+			<p>It is also critical in situations like this to ensure that the permissions and ownership of files in your root are correct.<br><a href="permissions.html">More Info&hellip;</a></p>
+			<p>An <code>Install_Resources</code> directory within your root will not be installed, but rather used by Installer.app to configure its interface during your install.<br><a href="interface.html">More Info&hellip;</a></p>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Creating a Package - Configuring your Package</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> →
+			<a href="index.html">Creating a Package</a>
+		</div>
+		<div id="content">
+			<h1>Configuring your Package</h1>
+
+			<p>Packages have quite a few options which can be configured, naturally enough, in the &ldquo;Configuration&rdquo; tab of the PackageMaker user interface. The options have the following meanings:</p>
+
+			<ul>
+				<li><strong>Default Location:</strong> The location where Installer.app will install the package if the user does not relocate the file, or <a href="locator.html">Locator</a> does not find software to upgrade.</li>
+				<li><strong>Authentication:</strong> The level of authentication Installer.app will require to complete the install. For most installs, this should be Administrator. For installs that write into system directories, Root should be used. No authentication should only be used when installing into a user's home directory.</li>
+				<li><strong>Post-Install Action:</strong> What Installer.app will do when the installation completes succesfully. If possible, do not require any Post-Install action.</li>
+				<li><strong>Relocatable:</strong> If yes, Installer.app will allow the user to change the install location from the Default Location. <a href="locator.html">Locator</a> can still change the install location.</li>
+				<li><strong>Root volume only:</strong> If yes, Installer.app will only allow installation on the root volume.</li>
+				<li><strong>Follow symbolic links:</strong> If yes, Installer.app will follow symbolic links during install. If no, <em>Installer.app will clobber symlinks</em>. It is advised that you leave this flag on.</li>
+				<li><strong>Overwrite directory permissions:</strong> If yes, and your authorization allows it, Installer.app will chmod/chown directories to match those in the root. If your permissions/ownership are incorrect, <em>this can cause all sorts of problems on the user's machine.</em> It is advised that you leave this flag off.</li>
+				<li><strong>Allow Revert to Previous Version:</strong> If yes, Installer.app will allow downgrades (that is, installing an older version of the package over a newer version).</li>
+				<li><strong>Update Installed Languages Only:</strong> If yes, Installer.app will not add new languages, it will only update the currently installed languages.</li>
+			</ul>
+
+			<br>
+
+			<img src="graphics/configuration_Pane.png">
+			<span class="caption">The &ldquo;Configuration&rdquo; tab</span>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Package Setup Assistant - The Contents Pane</title>
+		<link rel="stylesheet" type="text/css" href="../style/shared.css">
+		<link rel="stylesheet" type="text/css" href="../style/page.css">
+	</head>
+	<body>
+		<div id="breadcrumbs">
+			<a href="../index.html">PackageMaker Help</a> →
+			<a href="index.html">Package Setup Assistant</a>
+		</div>
+		<div id="content">
+			<h1>The Contents Pane</h1>
+
+			<p>This pane prompts you for the payload, the specific items you will be installing, and where each item should be installed. To add items, either drag them to the table or use the +/- buttons. The table contents can be rearranged via drag-n-drop. A package will be created for each row in the table. The assistant makes a best-effort guess at where you might like to install items such as Applications, Fonts, Frameworks, Kernel Extensions, etc. You can of course specify any location you want.</p>
+
+			<p>Items can be made relocatable using the checkbox in the &ldquo;Destination&rdquo; area. Relocatable items will give the user the opportunity to customize the install location. In addition, applications marked as relocatable will have <a href="../package/locator.html">Locator definitions</a> configured for them.</p>
+
+			<p>When multiple items are added, a blue &ldquo;Information&rdquo; button will be displayed for each row. Clicking this button allows you to specify some metadata for that item, including the title, description, and post-install action. For a single item, this information is entered in a separate pane, but for multiple items, this is not possible.</p>
+
+			<img src="graphics/contents_InfoButton.png">
+			<span class="caption">A row with the &ldquo;Information&rdquo; button</span>
+
+			<img src="graphics/contents_InfoSheet.png">
+			<span class="caption">The Information Sheet</span>
+		</div>
+	</body>
+</html>
