@@ -13,7 +13,7 @@ import subprocess
 
 version = "0.8.1"
 current_folder = os.path.abspath(os.path.dirname(__file__))
-disk = "OpenVanilla-" + version
+disk = "OpenVanilla-Leopard-" + version
 pkg = disk + ".pkg"
 
 applescript  = "tell application \"Finder\"\n\
@@ -125,12 +125,15 @@ def main():
 	build_loader_and_modules()
 	clean_DS_store()
 	os.chdir(current_folder)
+	build_uninstaller()
 	
 	print "Building Package..."
 	build_package()
 	os.system("sudo rm -rf tmp")
 	
 	make_dmg()
+	os.system("sudo rm -rf " + pkg)
+	os.system("sudo rm -rf OpenVanilla.dmg")
 	pass
 
 
