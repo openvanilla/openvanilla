@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>OPVN</string>
 	<key>CFBundleVersion</key>
-	<string>0.8.0.3</string>
+	<string>0.8.1</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	<key>InputMethodConnectionName</key>
@@ -29,7 +29,7 @@
 	<key>InputMethodServerDelegateClass</key>
 	<string>LVInputMethodController</string>
 	<key>LSBackgroundOnly</key>
-	<string>0</string>
+	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -39,6 +39,6 @@
 	<key>tsInputMethodIconFileKey</key>
 	<string>OpenVanillaInputMenu.icns</string>
 	<key>LSHasLocalizedDisplayName</key>
-	<true/>	
+	<true/>
 </dict>
 </plist>
