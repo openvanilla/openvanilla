@@ -1,5 +1,5 @@
 # Makefile.Darwin: Makefile for OpenVanilla Framework and Loader for Mac OS X
-# Copyright (c) 2004-2007 The OpenVanilla Project
+# Copyright (c) 2004-2009 The OpenVanilla Project
 # Please see License/license.txt for the terms of use
 
 # global variables
@@ -19,18 +19,18 @@ LIBLDR=$(DSTROOT)/Library/Components/OpenVanilla-$(VERSION).bundle \
 CF=../../Framework/build/Release/
 
 all:
-	xcodebuild -project $(FW) -configuration $(CONFIG) build $(MAKEFLAGS)
-	xcodebuild -project $(LD) -configuration $(CONFIG) build $(MAKEFLAGS)
+	xcodebuild -project $(FW) -configuration $(CONFIG) build $(MAKEFLAGS) -alltargets
+	xcodebuild -project $(LD) -configuration $(CONFIG) build $(MAKEFLAGS) -alltargets
 	make CFLAGS+=-F$(CF) -C Modules all
 
 install:
-	xcodebuild -project $(FW) -configuration $(CONFIG) install $(MAKEFLAGS)
-	xcodebuild -project $(LD) -configuration $(CONFIG) install $(MAKEFLAGS) 
+	xcodebuild -project $(FW) -configuration $(CONFIG) install $(MAKEFLAGS) -alltargets
+	xcodebuild -project $(LD) -configuration $(CONFIG) install $(MAKEFLAGS) -alltargets
 	make CFLAGS+=-F$(CF) -C Modules install
 
 clean:
-	xcodebuild -project $(FW) -configuration $(CONFIG) clean $(MAKEFLAGS)
-	xcodebuild -project $(LD) -configuration $(CONFIG) clean $(MAKEFLAGS)
+	xcodebuild -project $(FW) -configuration $(CONFIG) clean $(MAKEFLAGS) -alltargets
+	xcodebuild -project $(LD) -configuration $(CONFIG) clean $(MAKEFLAGS) -alltargets
 	make -C Modules clean
         
 uninstall:

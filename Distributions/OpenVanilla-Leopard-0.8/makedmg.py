@@ -55,10 +55,9 @@ def main():
 	copy_release_to_tmp()
 	build_loader_and_modules()
 	clean_DS_store()
-
-	print current_folder
 	os.chdir(current_folder)
 
+	print "Building Package..."
 	build_package()
 	pass
 

@@ -145,6 +145,52 @@
 		UniChar unicharCode = 0;
 		if ([chars length] > 0) {
 			unicharCode = [chars characterAtIndex:0];
+			
+			if (cocoaModifiers & NSControlKeyMask) {
+				if (unicharCode < 27) {
+					unicharCode += ('a' - 1);
+				}
+				else {
+					switch (unicharCode) {
+						case 27:
+							unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '{' : '[';
+							break;
+						case 28:
+							unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '|' : '\\';
+							break;
+						case 29:
+							unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '}': ']';
+							break;
+						case 31:
+							unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '_' : '-';
+							break;							
+					}
+				}
+			}
+			
+            // remap; fix 10.6 "bug"
+            switch(unicharCode) {
+                case NSUpArrowFunctionKey:      unicharCode = ovkUp; break;
+                case NSDownArrowFunctionKey:    unicharCode = ovkDown; break;
+                case NSLeftArrowFunctionKey:    unicharCode = ovkLeft; break;
+                case NSRightArrowFunctionKey:   unicharCode = ovkRight; break;
+                case NSDeleteFunctionKey:       unicharCode = ovkDelete; break;
+                case NSHomeFunctionKey:         unicharCode = ovkHome; break;
+                case NSEndFunctionKey:          unicharCode = ovkEnd; break;
+                case NSPageUpFunctionKey:       unicharCode = ovkPageUp; break;
+                case NSPageDownFunctionKey:     unicharCode = ovkPageDown; break;           
+                case NSF1FunctionKey:           unicharCode = 0x11001; break;   // Carbon F1-F10
+                case NSF2FunctionKey:           unicharCode = 0x11002; break;
+                case NSF3FunctionKey:           unicharCode = 0x11003; break;
+                case NSF4FunctionKey:           unicharCode = 0x11004; break;
+                case NSF5FunctionKey:           unicharCode = 0x11005; break;
+                case NSF6FunctionKey:           unicharCode = 0x11006; break;
+                case NSF7FunctionKey:           unicharCode = 0x11007; break;
+                case NSF8FunctionKey:           unicharCode = 0x11008; break;
+                case NSF9FunctionKey:           unicharCode = 0x11009; break;
+                case NSF10FunctionKey:          unicharCode = 0x11010; break;
+					
+            }
 		}
 
 		// NSLog(@"key down, unicharCode = %d, virtualKeyCode = %d, cocoaModifiers = %08x, carbonModifiers = %08x", unicharCode, virtualKeyCode, cocoaModifiers, carbonModifiers);
