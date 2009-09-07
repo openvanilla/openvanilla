@@ -47,7 +47,7 @@
 	NSMutableArray *m_ouputFilters;
 	
 	id m_currentItem;
-	id m_draggingItem;
+//	id m_draggingItem;
 }
 
 - (NSView *)view;

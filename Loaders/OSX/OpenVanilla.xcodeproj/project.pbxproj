@@ -245,7 +245,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smTradChinese.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-0.8-smTradChinese.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smSimpChinese.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-0.8-smSimpChinese.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A77AA490CCFA83900203045 /* OpenVanilla-smSimpChinese-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-smSimpChinese-Info.plist"; path = "TextServiceComponent/OpenVanilla-smSimpChinese-Info.plist"; sourceTree = "<group>"; };
 		6A93BA730CCF973500BF99B9 /* OpenVanilla-0.8-smTradChinese.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenVanilla-0.8-smTradChinese.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A93BA750CCF973500BF99B9 /* OpenVanilla-smTradChinese-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "OpenVanilla-smTradChinese-Info.plist"; path = "TextServiceComponent/OpenVanilla-smTradChinese-Info.plist"; sourceTree = "<group>"; };
@@ -516,7 +516,7 @@
 				6ACC53E80CCF872200E2307C /* OVLoader.bundle */,
 				6ACC556A0CCF8AE800E2307C /* OpenVanilla-0.8.bundle */,
 				6A93BA730CCF973500BF99B9 /* OpenVanilla-0.8-smTradChinese.bundle */,
-				6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smTradChinese.bundle */,
+				6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smSimpChinese.bundle */,
 				D4ACB9F30E1E6BC9005E7BA7 /* OVPreferences.app */,
 			);
 			name = Products;
@@ -752,7 +752,7 @@
 			);
 			name = "OpenVanilla (smSimpChinese)";
 			productName = OpenVanilla;
-			productReference = 6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smTradChinese.bundle */;
+			productReference = 6A77AA450CCFA83900203045 /* OpenVanilla-0.8-smSimpChinese.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		6A93BA660CCF973500BF99B9 /* OpenVanilla (smTradChinese) */ = {
@@ -1311,6 +1311,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_PREPROCESSOR_DEFINITIONS = ATSC_TRADITIONAL_CHINESE;
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = "TextServiceComponent/OpenVanilla-smSimpChinese-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = (
@@ -1336,6 +1337,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_PREPROCESSOR_DEFINITIONS = ATSC_SIMPLIFIED_CHINESE;
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = "TextServiceComponent/OpenVanilla-smSimpChinese-Info.plist";
 				INSTALL_PATH = /Library/Components;
 				OTHER_LDFLAGS = (
@@ -1386,6 +1388,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_PREPROCESSOR_DEFINITIONS = ATSC_TRADITIONAL_CHINESE;
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = "TextServiceComponent/OpenVanilla-smTradChinese-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = (
@@ -1411,6 +1414,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_PREPROCESSOR_DEFINITIONS = ATSC_TRADITIONAL_CHINESE;
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = "TextServiceComponent/OpenVanilla-smTradChinese-Info.plist";
 				INSTALL_PATH = /Library/Components;
 				OTHER_LDFLAGS = (
@@ -1466,6 +1470,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = "CocoaVanilla/CocoaVanilla-Info.plist";
 				INSTALL_PATH = "@loader_path/../Frameworks";
 				OTHER_LDFLAGS = (
@@ -1493,6 +1498,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = "CocoaVanilla/CocoaVanilla-Info.plist";
 				INSTALL_PATH = "@loader_path/../Frameworks";
 				OTHER_LDFLAGS = (
@@ -1520,6 +1526,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = "OVDisplayServer/OVDisplayServer-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
@@ -1546,6 +1553,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = "OVDisplayServer/OVDisplayServer-Info.plist";
 				INSTALL_PATH = /Library/OpenVanilla/0.8/Loader;
 				OTHER_LDFLAGS = (
@@ -1572,6 +1580,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = "OVLoader/OVLoader-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = (
@@ -1597,6 +1606,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = "OVLoader/OVLoader-Info.plist";
 				INSTALL_PATH = /Library/OpenVanilla/0.8/Loader;
 				OTHER_LDFLAGS = (
@@ -1623,6 +1633,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = "TextServiceComponent/OpenVanilla-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = (
@@ -1648,6 +1659,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = "TextServiceComponent/OpenVanilla-Info.plist";
 				INSTALL_PATH = /Library/Components;
 				OTHER_LDFLAGS = (
@@ -1674,6 +1686,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = Preferences/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
@@ -1697,6 +1710,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = Preferences/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (

@@ -274,10 +274,11 @@
     id draggingItem = [items objectAtIndex:0];
 	if (![m_ouputFilters containsObject:[items objectAtIndex:0]])
 		return NO;
-	
-	m_draggingItem = draggingItem;
+//	
+//	m_draggingItem = draggingItem;
+	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:items];
 	[pboard declareTypes:[NSArray arrayWithObjects:DragDropSimplePboardType, nil] owner:self];	
-    [pboard setData:[NSData data] forType:DragDropSimplePboardType]; 
+    [pboard setData:data forType:DragDropSimplePboardType]; 
     return YES;
 }
 - (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(int)childIndex
@@ -291,9 +292,15 @@
 }
 - (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(int)childIndex
 {
-	[m_ouputFilters insertObject:[m_draggingItem copy] atIndex:childIndex];
-	[m_ouputFilters removeObject:m_draggingItem];
-	[m_draggingItem release];
+	NSPasteboard* pboard = [info draggingPasteboard];
+	NSData *rowData = [pboard dataForType:DragDropSimplePboardType];
+    NSArray	*items = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
+	
+	id draggingItem = [items objectAtIndex:0];
+	
+	[m_ouputFilters insertObject:[draggingItem copy] atIndex:childIndex];
+	[m_ouputFilters removeObject:draggingItem];
+	[draggingItem release];
 	[u_outlineView reloadData];
 	
 	NSMutableArray *outputFilterOrder = [NSMutableArray array];
