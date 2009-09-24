@@ -141,6 +141,8 @@
 		D45AFE6610455A3A00353563 /* OVIMSpaceChewingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D45AFE6510455A3A00353563 /* OVIMSpaceChewingController.xib */; };
 		D48A53B1103D4CB30072485F /* OVIMGenericController.m in Sources */ = {isa = PBXBuildFile; fileRef = D48A53B0103D4CB30072485F /* OVIMGenericController.m */; };
 		D48A53B9103D4CF20072485F /* OVIMGenericController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D48A53B8103D4CF20072485F /* OVIMGenericController.xib */; };
+		D4F064DE106B86A9002BCF9F /* LVTooltipTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F064DD106B86A9002BCF9F /* LVTooltipTextView.m */; };
+		D4F064DF106B86A9002BCF9F /* LVTooltipTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F064DD106B86A9002BCF9F /* LVTooltipTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -548,6 +550,8 @@
 		D48A53AF103D4CB30072485F /* OVIMGenericController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMGenericController.h; sourceTree = "<group>"; };
 		D48A53B0103D4CB30072485F /* OVIMGenericController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMGenericController.m; sourceTree = "<group>"; };
 		D48A53B6103D4CEA0072485F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMGenericController.xib; sourceTree = "<group>"; };
+		D4F064DC106B86A9002BCF9F /* LVTooltipTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVTooltipTextView.h; path = "Loaders/OSX-IMK/LVTooltipTextView.h"; sourceTree = "<group>"; };
+		D4F064DD106B86A9002BCF9F /* LVTooltipTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVTooltipTextView.m; path = "Loaders/OSX-IMK/LVTooltipTextView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -903,6 +907,8 @@
 				6A21AB350E9D13ED0078C2E9 /* LVOVImplementations.mm */,
 				6A3516B00E9FA54500420428 /* LVTextView.h */,
 				6A3516B10E9FA54500420428 /* LVTextView.mm */,
+				D4F064DC106B86A9002BCF9F /* LVTooltipTextView.h */,
+				D4F064DD106B86A9002BCF9F /* LVTooltipTextView.m */,
 				6A35168F0E9FA35700420428 /* LVTopMostWindow.h */,
 				6A3516900E9FA35700420428 /* LVTopMostWindow.mm */,
 				6AB6CF380E9CF5B60001B127 /* LVUIController.h */,
@@ -1563,6 +1569,7 @@
 				6AAF6EC00EAB781300F4DFE0 /* LVTextView.mm in Sources */,
 				6AAF6F3B0EAB789400F4DFE0 /* InputMethodKitTiger.mm in Sources */,
 				6AAF6F3F0EAB78B600F4DFE0 /* Context.m in Sources */,
+				D4F064DF106B86A9002BCF9F /* LVTooltipTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1577,6 +1584,7 @@
 				6A21AB360E9D13ED0078C2E9 /* LVOVImplementations.mm in Sources */,
 				6A3516910E9FA35700420428 /* LVTopMostWindow.mm in Sources */,
 				6A3516B20E9FA54500420428 /* LVTextView.mm in Sources */,
+				D4F064DE106B86A9002BCF9F /* LVTooltipTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

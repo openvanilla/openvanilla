@@ -29,13 +29,12 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
+#import "LVTextView.h"
 
-@interface LVTextView : NSView
+@interface LVTooltipTextView : LVTextView
 {
-    NSMutableAttributedString *_attributeString;
+
 }
-- (void)setSimpleText:(NSString *)text;
-- (NSRect)boundingRectForText;
 
 @end

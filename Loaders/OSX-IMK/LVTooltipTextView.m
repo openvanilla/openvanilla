@@ -29,13 +29,32 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#import <Cocoa/Cocoa.h>
+#import "LVTooltipTextView.h"
 
-@interface LVTextView : NSView
+
+@implementation LVTooltipTextView
+
+- (void)setSimpleText:(NSString *)text
 {
-    NSMutableAttributedString *_attributeString;
+	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSColor blackColor], NSForegroundColorAttributeName, [NSFont systemFontOfSize:[NSFont smallSystemFontSize]], NSFontAttributeName, nil];
+	[[_attributeString mutableString] setString:text];
+	[_attributeString setAttributes:attributes range:NSMakeRange(0, [text length])];	
 }
-- (void)setSimpleText:(NSString *)text;
-- (NSRect)boundingRectForText;
+- (NSRect)boundingRectForText
+{
+	NSRect result = [_attributeString boundingRectWithSize:NSMakeSize(2000.0, 2000.0) options:NSStringDrawingUsesLineFragmentOrigin];
+	result.size.width += 10;
+	result.size.height += 10;
+	return result;
+}
+- (void)drawRect:(NSRect)aRect
+{
+	[[NSColor colorWithCalibratedHue:0.16 saturation:0.22 brightness:0.97 alpha:1.00] setFill];
+	[[NSColor blackColor] setStroke];
+	NSBezierPath *path = [NSBezierPath bezierPathWithRect:[self bounds]];
+	[path fill];
+	[path stroke];
+	[_attributeString drawAtPoint:NSMakePoint(5.0, 5.0)];
+}
 
 @end
