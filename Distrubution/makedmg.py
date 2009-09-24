@@ -54,12 +54,12 @@ def copy_release_to_tmp():
 	target = os.path.abspath(os.path.join(current_folder, "tmp"))
 	try:
 		os.system("sudo rm -rf " + target)
-	except Exception as e:
+	except Exception: # as e:
 		print str(e)
 		pass
 	try:
 		os.mkdir(target)
-	except Exception as e:
+	except Exception: # as e:
 		print str(e)
 		pass
 	shutil.copytree(source, os.path.join(target, source_filename))
