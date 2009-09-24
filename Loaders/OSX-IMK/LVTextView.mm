@@ -62,7 +62,11 @@
 {
 	[[NSColor whiteColor] setFill];
 	[[NSColor grayColor] setStroke];
+#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_5
 	NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:[self bounds] xRadius:5 yRadius:5];
+#else
+	NSBezierPath *path = [NSBezierPath bezierPathWithRect:[self bounds]];
+#endif
 	[path fill];
 	[path stroke];
 	[_attributeString drawAtPoint:NSMakePoint(5.0, 5.0)];

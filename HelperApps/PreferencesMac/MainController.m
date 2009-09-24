@@ -55,6 +55,7 @@
 	_controllersArray = [[NSMutableArray alloc] init];
 	
 //	[self initToolbar];
+	[[self window] setLevel:NSFloatingWindowLevel];
 	[[self window] center];
 	[self loadPlist];
 	[self initModules];

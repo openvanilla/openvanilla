@@ -38,11 +38,17 @@
 {
 	IBOutlet LVTopMostWindow *_candidateWindow;
 	IBOutlet LVTextView *_candidateTextView;
+	
+	IBOutlet LVTopMostWindow *_tooltipWindow;
+	IBOutlet LVTextView *_tooltipTextView;	
+	float _fontHeight;
 }
+- (void)setFontHeight:(CGFloat)fontHeight;
+- (NSPoint)estimatePoint:(NSPoint)point rect:(NSRect)rect;
 - (void)showCandidateWindow;
 - (void)hideCandidateWindow;
 - (void)setCandidateWindowOrigin:(NSPoint)origin;
 - (void)updateCandidateText:(NSString *)text;
-- (void)showTooltipWithText:(NSString *)text;
+- (void)showTooltipWithText:(NSString *)text atPoint:(NSPoint)point;
 - (void)hideTooltip;
 @end

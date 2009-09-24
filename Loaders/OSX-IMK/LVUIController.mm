@@ -32,6 +32,33 @@
 #import "LVUIController.h"
 
 @implementation LVUIController
+
+- (void)awakeFromNib
+{
+	_fontHeight = 20.0;
+}
+- (void)setFontHeight:(CGFloat)fontHeight
+{
+	_fontHeight = fontHeight;
+}
+- (NSPoint)estimatePoint:(NSPoint)point rect:(NSRect)rect
+{
+	NSRect frameRect = [_candidateWindow frame];
+	
+	if (point.x < NSMinX(rect))
+		point.x = NSMinX(rect);
+	if (point.x + frameRect.size.width> NSMaxX(rect))
+		point.x = NSMaxX(rect) - frameRect.size.width;
+	
+	if (point.y < NSMinY(rect))
+		point.y = NSMinY(rect) - frameRect.size.height;
+	else if ((point.y - frameRect.size.height) < NSMinY(rect))
+		point.y += _fontHeight + 5;
+	else
+		point.y -= frameRect.size.height;
+	
+	return point;
+}
 - (void)showCandidateWindow
 {
 	if (![_candidateWindow isVisible]) {
@@ -46,8 +73,6 @@
 }
 - (void)setCandidateWindowOrigin:(NSPoint)origin
 {
-	NSRect frameRect = [_candidateWindow frame];
-    origin.y -= ([_candidateTextView boundingRectForText].size.height + 5.0);
 	[_candidateWindow setFrameOrigin:origin];
 }
 - (void)updateCandidateText:(NSString *)text
@@ -56,10 +81,25 @@
 	[_candidateTextView setNeedsDisplay:YES];
 	[_candidateWindow setContentSize:[_candidateTextView boundingRectForText].size];
 }
-- (void)showTooltipWithText:(NSString *)text
+- (void)showTooltipWithText:(NSString *)text atPoint:(NSPoint)point
 {
+	[_tooltipTextView setSimpleText:text];	
+	[_tooltipTextView setNeedsDisplay:YES];
+	[_tooltipWindow setContentSize:[_tooltipTextView boundingRectForText].size];	
+
+	NSRect frameRect = [_tooltipWindow frame];
+    point.y -= (frameRect.size.height + 5.0);
+	[_tooltipWindow setFrameOrigin:point];	
+	
+	if (![_tooltipWindow isVisible]) {
+		[_tooltipWindow orderFront:self];
+	}
+	
 }
 - (void)hideTooltip
 {
+	if ([_tooltipWindow isVisible]) {
+		[_tooltipWindow orderOut:self];
+	}
 }
 @end

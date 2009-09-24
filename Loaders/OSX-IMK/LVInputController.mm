@@ -213,7 +213,6 @@ static id LVICCurrentlyActiveSender = nil;
 	NSRange selectionRange = NSMakeRange(cursorIndex, 0);	
 	[client setMarkedText:attrString selectionRange:selectionRange replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
 }
-// To fix the curson position in some applications such as WOW
 - (NSPoint)_fixCaretPosition:(NSPoint)caretPosition
 {
 	NSRect frame = [[NSScreen mainScreen] frame];
@@ -222,6 +221,15 @@ static id LVICCurrentlyActiveSender = nil;
 	NSArray *screens = [NSScreen screens];
 	NSEnumerator *enumerator = [screens objectEnumerator];
 	NSScreen *screen;
+	
+	if ([screens count] < 2) {
+		screen = [NSScreen mainScreen];
+		frame = [screen visibleFrame];
+		LVUIController *uiController = (LVUIController *)[NSApp delegate];
+		caretPosition = [uiController estimatePoint:caretPosition rect:frame];
+		return caretPosition;		
+	}
+	
 	while (screen = [enumerator nextObject]) {
 		NSRect screenFrame = [screen frame];
 		
@@ -231,9 +239,10 @@ static id LVICCurrentlyActiveSender = nil;
 			break;
 		}
 	}
-
+	
 	if (hasFocus) {
-		// TO DO: Fix caret position according to the current window dimension
+		LVUIController *uiController = (LVUIController *)[NSApp delegate];
+		caretPosition = [uiController estimatePoint:caretPosition rect:frame];
 		return caretPosition;
 	}
 	
@@ -281,7 +290,8 @@ static id LVICCurrentlyActiveSender = nil;
 		location = lineHeightRect.origin;
 		
 		// TO DO: Handle tooltip better
-		[uiController showTooltipWithText:notifyMsg];		
+//		[uiController showTooltipWithText:notifyMsg];		
+		[uiController showTooltipWithText:notifyMsg atPoint:location];
 		service->cleartNotifyMessage();
 	}
 	else {
