@@ -47,19 +47,24 @@
 }
 - (void)setSimpleText:(NSString *)text
 {
-	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSColor whiteColor], NSForegroundColorAttributeName, [NSFont systemFontOfSize:18.0], NSFontAttributeName, nil];
+	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSColor blackColor], NSForegroundColorAttributeName, [NSFont systemFontOfSize:18.0], NSFontAttributeName, nil];
 	[[_attributeString mutableString] setString:text];
 	[_attributeString setAttributes:attributes range:NSMakeRange(0, [text length])];	
 }
 - (NSRect)boundingRectForText
 {
 	NSRect result = [_attributeString boundingRectWithSize:NSMakeSize(2000.0, 2000.0) options:NSStringDrawingUsesLineFragmentOrigin];
+	result.size.width += 10;
+	result.size.height += 10;
 	return result;
 }
 - (void)drawRect:(NSRect)aRect
 {
-	[[NSColor colorWithCalibratedRed:0.1 green:0.1 blue:0.5 alpha:1.0] setFill];
-	[NSBezierPath fillRect:aRect];
-	[_attributeString drawAtPoint:NSMakePoint(0.0, 0.0)];
+	[[NSColor whiteColor] setFill];
+	[[NSColor grayColor] setStroke];
+	NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:[self bounds] xRadius:5 yRadius:5];
+	[path fill];
+	[path stroke];
+	[_attributeString drawAtPoint:NSMakePoint(5.0, 5.0)];
 }
 @end
