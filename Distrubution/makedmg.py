@@ -10,6 +10,7 @@ version = "0.9"
 current_folder = os.path.abspath(os.path.dirname(__file__))
 disk = "OpenVanilla-" + version
 pkg = disk + ".pkg"
+dmg_icns = "../Artworks/icon2008/ovdmg/ovdmg.icns"
 
 applescript  = "tell application \"Finder\"\n\
 		tell disk \"" + disk + "\"\n" + """
@@ -88,7 +89,10 @@ def make_dmg():
 			space = line.find(" ")
 			device = line[:12]
 	shutil.copy(pkg, os.path.join("/Volumes", disk , pkg))
+	shutil.copy(dmg_icns, os.path.join("/Volumes", disk , ".VolumeIcon.icns"))
+	os.system("SetFile -a C " + os.path.join("/Volumes", disk))
 
+	subprocess.Popen(["osascript", "-e", applescript])
 	os.system("sleep 1")
 	
 	os.system("hdiutil detach " + device )
