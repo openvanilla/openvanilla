@@ -120,6 +120,12 @@
 		D403C6240EA3D645006F0A89 /* OVOFHanConvert.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D403C5F30EA3D5C0006F0A89 /* OVOFHanConvert.bundle */; };
 		D42E384F0E86A25200453DE6 /* OVIMArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42E384D0E86A25200453DE6 /* OVIMArray.cpp */; };
 		D42E38510E86A29100453DE6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42E38500E86A29100453DE6 /* Carbon.framework */; };
+		D44641D1106CC0E9002C5621 /* CinInstallerMacAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D44641CF106CC0E9002C5621 /* CinInstallerMacAppDelegate.m */; };
+		D44641D2106CC0E9002C5621 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D44641D0106CC0E9002C5621 /* main.m */; };
+		D44641D7106CC0FF002C5621 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D44641D3106CC0FF002C5621 /* InfoPlist.strings */; };
+		D44641D8106CC0FF002C5621 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D44641D5106CC0FF002C5621 /* MainMenu.xib */; };
+		D4464237106CC187002C5621 /* CinInstaller.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = D44641C4106CC0CF002C5621 /* CinInstaller.app */; };
+		D4464242106CC190002C5621 /* CinInstaller.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = D44641C4106CC0CF002C5621 /* CinInstaller.app */; };
 		D44D46F10E9DB0FF0062F692 /* OVCandidateList.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA540E9D0AB60078C2E9 /* OVCandidateList.h */; };
 		D44D46F20E9DB0FF0062F692 /* OVCIN.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA560E9D0AB60078C2E9 /* OVCIN.h */; };
 		D44D46F30E9DB0FF0062F692 /* OVCINInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A21AA580E9D0AB60078C2E9 /* OVCINInfo.h */; };
@@ -141,6 +147,7 @@
 		D45AFE6610455A3A00353563 /* OVIMSpaceChewingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D45AFE6510455A3A00353563 /* OVIMSpaceChewingController.xib */; };
 		D48A53B1103D4CB30072485F /* OVIMGenericController.m in Sources */ = {isa = PBXBuildFile; fileRef = D48A53B0103D4CB30072485F /* OVIMGenericController.m */; };
 		D48A53B9103D4CF20072485F /* OVIMGenericController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D48A53B8103D4CF20072485F /* OVIMGenericController.xib */; };
+		D48C56C5106CC28700FD913D /* OpenVanilla.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6CF420E9CF5D00001B127 /* OpenVanilla.icns */; };
 		D4F064DE106B86A9002BCF9F /* LVTooltipTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F064DD106B86A9002BCF9F /* LVTooltipTextView.m */; };
 		D4F064DF106B86A9002BCF9F /* LVTooltipTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F064DD106B86A9002BCF9F /* LVTooltipTextView.m */; };
 /* End PBXBuildFile section */
@@ -328,6 +335,20 @@
 			remoteGlobalIDString = D403C5F20EA3D5C0006F0A89;
 			remoteInfo = OVOFHanConvert;
 		};
+		D44641FC106CC15D002C5621 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D44641C3106CC0CF002C5621;
+			remoteInfo = CinInstaller;
+		};
+		D446420E106CC169002C5621 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D44641C3106CC0CF002C5621;
+			remoteInfo = CinInstaller;
+		};
 		D44D46EF0E9DB0F20062F692 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A6A85AF0E86750E00B94B7F /* Project object */;
@@ -351,6 +372,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 12;
 			files = (
+				D4464237106CC187002C5621 /* CinInstaller.app in CopyFiles */,
 				6A1E224110452E1900161627 /* Preferences.app in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +423,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 12;
 			files = (
+				D4464242106CC190002C5621 /* CinInstaller.app in CopyFiles */,
 				6AAC1700104478640042BB90 /* Preferences.app in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,6 +566,13 @@
 		D42E384D0E86A25200453DE6 /* OVIMArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OVIMArray.cpp; path = Modules/OVIMArray/OVIMArray.cpp; sourceTree = "<group>"; };
 		D42E384E0E86A25200453DE6 /* OVIMArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OVIMArray.h; path = Modules/OVIMArray/OVIMArray.h; sourceTree = "<group>"; };
 		D42E38500E86A29100453DE6 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		D44641C4106CC0CF002C5621 /* CinInstaller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CinInstaller.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D44641CE106CC0E9002C5621 /* CinInstallerMacAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CinInstallerMacAppDelegate.h; path = CinInstallerMac/CinInstallerMacAppDelegate.h; sourceTree = "<group>"; };
+		D44641CF106CC0E9002C5621 /* CinInstallerMacAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CinInstallerMacAppDelegate.m; path = CinInstallerMac/CinInstallerMacAppDelegate.m; sourceTree = "<group>"; };
+		D44641D0106CC0E9002C5621 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CinInstallerMac/main.m; sourceTree = "<group>"; };
+		D44641D4106CC0FF002C5621 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = CinInstallerMac/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D44641D6106CC0FF002C5621 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = CinInstallerMac/English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		D446425C106CC228002C5621 /* CinInstallerMac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "CinInstallerMac-Info.plist"; path = "CinInstallerMac/CinInstallerMac-Info.plist"; sourceTree = "<group>"; };
 		D44D46EC0E9DB0E30062F692 /* libOVLegacyModuleLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOVLegacyModuleLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D45AFE481045594100353563 /* OVIMSpaceChewingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMSpaceChewingController.h; sourceTree = "<group>"; };
 		D45AFE491045594100353563 /* OVIMSpaceChewingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMSpaceChewingController.m; sourceTree = "<group>"; };
@@ -655,6 +685,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D44641C2106CC0CF002C5621 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D44D46EA0E9DB0E30062F692 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -736,6 +773,7 @@
 				D403C5F30EA3D5C0006F0A89 /* OVOFHanConvert.bundle */,
 				6AAF6E180EAB772B00F4DFE0 /* OpenVanilla.bundle */,
 				6A8C6CE7103D3F8D00DE4A39 /* Preferences.app */,
+				D44641C4106CC0CF002C5621 /* CinInstaller.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -795,6 +833,7 @@
 		6A8C6CFB103D3FA800DE4A39 /* HelperApps */ = {
 			isa = PBXGroup;
 			children = (
+				D44641AF106CC0BA002C5621 /* CinInstaller */,
 				6A8C6CFC103D3FA800DE4A39 /* PreferencesMac */,
 			);
 			path = HelperApps;
@@ -1025,6 +1064,19 @@
 			name = OVIMArray;
 			sourceTree = "<group>";
 		};
+		D44641AF106CC0BA002C5621 /* CinInstaller */ = {
+			isa = PBXGroup;
+			children = (
+				D446425C106CC228002C5621 /* CinInstallerMac-Info.plist */,
+				D44641D3106CC0FF002C5621 /* InfoPlist.strings */,
+				D44641D5106CC0FF002C5621 /* MainMenu.xib */,
+				D44641CE106CC0E9002C5621 /* CinInstallerMacAppDelegate.h */,
+				D44641CF106CC0E9002C5621 /* CinInstallerMacAppDelegate.m */,
+				D44641D0106CC0E9002C5621 /* main.m */,
+			);
+			name = CinInstaller;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1176,6 +1228,7 @@
 				6AAF6EB40EAB781300F4DFE0 /* PBXTargetDependency */,
 				6A8C6E97103D46B100DE4A39 /* PBXTargetDependency */,
 				6A1E221C10452DE600161627 /* PBXTargetDependency */,
+				D446420F106CC169002C5621 /* PBXTargetDependency */,
 			);
 			name = "OpenVanilla (LoaderServer for TSM)";
 			productName = OVLoaderServer;
@@ -1206,6 +1259,7 @@
 				D403C58D0EA3D541006F0A89 /* PBXTargetDependency */,
 				6A8C6E45103D469400DE4A39 /* PBXTargetDependency */,
 				6AAC16EF104478410042BB90 /* PBXTargetDependency */,
+				D44641FD106CC15D002C5621 /* PBXTargetDependency */,
 			);
 			name = "OpenVanilla (Loader IMK)";
 			productName = OpenVanilla;
@@ -1315,6 +1369,23 @@
 			productReference = D42E383B0E86A22300453DE6 /* OVIMArray.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		D44641C3106CC0CF002C5621 /* CinInstaller */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D44641C9106CC0D0002C5621 /* Build configuration list for PBXNativeTarget "CinInstaller" */;
+			buildPhases = (
+				D44641C0106CC0CF002C5621 /* Resources */,
+				D44641C1106CC0CF002C5621 /* Sources */,
+				D44641C2106CC0CF002C5621 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CinInstaller;
+			productName = CinInstaller;
+			productReference = D44641C4106CC0CF002C5621 /* CinInstaller.app */;
+			productType = "com.apple.product-type.application";
+		};
 		D44D46EB0E9DB0E30062F692 /* OVLegacyModuleLibrary */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D44D470B0E9DB11A0062F692 /* Build configuration list for PBXNativeTarget "OVLegacyModuleLibrary" */;
@@ -1361,6 +1432,7 @@
 				D403C5F20EA3D5C0006F0A89 /* OVOFHanConvert */,
 				D403C5750EA3D49E006F0A89 /* OVOFFullWidthCharacter */,
 				6A8C6CE6103D3F8D00DE4A39 /* Preferences */,
+				D44641C3106CC0CF002C5621 /* CinInstaller */,
 			);
 		};
 /* End PBXProject section */
@@ -1465,6 +1537,16 @@
 				6A8C6EBD103D46E500DE4A39 /* array-shortcode.cin in Resources */,
 				6A8C6EBE103D46E500DE4A39 /* array-special.cin in Resources */,
 				6A8C6EBF103D46E500DE4A39 /* array30.cin in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D44641C0106CC0CF002C5621 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D48C56C5106CC28700FD913D /* OpenVanilla.icns in Resources */,
+				D44641D7106CC0FF002C5621 /* InfoPlist.strings in Resources */,
+				D44641D8106CC0FF002C5621 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1638,6 +1720,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D44641C1106CC0CF002C5621 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D44641D1106CC0E9002C5621 /* CinInstallerMacAppDelegate.m in Sources */,
+				D44641D2106CC0E9002C5621 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D44D46E90E9DB0E30062F692 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1784,6 +1875,16 @@
 			target = D403C5F20EA3D5C0006F0A89 /* OVOFHanConvert */;
 			targetProxy = D403C6630EA3D655006F0A89 /* PBXContainerItemProxy */;
 		};
+		D44641FD106CC15D002C5621 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D44641C3106CC0CF002C5621 /* CinInstaller */;
+			targetProxy = D44641FC106CC15D002C5621 /* PBXContainerItemProxy */;
+		};
+		D446420F106CC169002C5621 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D44641C3106CC0CF002C5621 /* CinInstaller */;
+			targetProxy = D446420E106CC169002C5621 /* PBXContainerItemProxy */;
+		};
 		D44D46F00E9DB0F20062F692 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6A6A860F0E867B2E00B94B7F /* OpenVanilla (Framework) */;
@@ -1841,6 +1942,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				6AB6CF440E9CF5ED0001B127 /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		D44641D3106CC0FF002C5621 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D44641D4106CC0FF002C5621 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D44641D5106CC0FF002C5621 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D44641D6106CC0FF002C5621 /* English */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -2517,6 +2634,54 @@
 			};
 			name = Release;
 		};
+		D44641C7106CC0CF002C5621 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "HelperApps/CinInstallerMac/CinInstallerMac-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CinInstaller;
+			};
+			name = Debug;
+		};
+		D44641C8106CC0CF002C5621 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "HelperApps/CinInstallerMac/CinInstallerMac-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CinInstaller;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		D44D46ED0E9DB0E40062F692 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2695,6 +2860,15 @@
 			buildConfigurations = (
 				D42E383D0E86A22400453DE6 /* Debug */,
 				D42E383E0E86A22400453DE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D44641C9106CC0D0002C5621 /* Build configuration list for PBXNativeTarget "CinInstaller" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D44641C7106CC0CF002C5621 /* Debug */,
+				D44641C8106CC0CF002C5621 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -505,6 +505,12 @@ static id LVICCurrentlyActiveSender = nil;
 	NSLog(@"launching: %@", prefAppPath);
 	[[NSWorkspace sharedWorkspace] openFile:prefAppPath];
 }
+- (void)_openCinInstallerAction:(id)sender
+{
+	NSString *cinInstallerAppPath = [[[NSBundle bundleForClass:[self class]] sharedSupportPath] stringByAppendingPathComponent:@"CinInstaller.app"];
+	NSLog(@"launching: %@", cinInstallerAppPath);
+	[[NSWorkspace sharedWorkspace] openFile:cinInstallerAppPath];
+}
 
 - (void)_showAboutPanelAction:(id)sender
 {
@@ -575,14 +581,21 @@ static id LVICCurrentlyActiveSender = nil;
 	[menuItem setEnabled:YES];
 	[menuItem setTarget:self];
 	[menuItem setAction:@selector(_openPreferencesAction:)];
-	[menuItem setTitle:@"Preferences…"];
+	[menuItem setTitle:NSLocalizedString(@"Preferences...", @"")];
 	[menu addItem:menuItem];
 
 	menuItem = [[[NSMenuItem alloc] init] autorelease];
 	[menuItem setEnabled:YES];
 	[menuItem setTarget:self];
+	[menuItem setAction:@selector(_openCinInstallerAction:)];
+	[menuItem setTitle:NSLocalizedString(@"Install Generic Tables", @"")];
+	[menu addItem:menuItem];
+	
+	menuItem = [[[NSMenuItem alloc] init] autorelease];
+	[menuItem setEnabled:YES];
+	[menuItem setTarget:self];
 	[menuItem setAction:@selector(_showAboutPanelAction:)];
-	[menuItem setTitle:@"About OpenVanilla"];
+	[menuItem setTitle:NSLocalizedString(@"About OpenVanilla", @"")];
 	[menu addItem:menuItem];
 		
     return menu;
