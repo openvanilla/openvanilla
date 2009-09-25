@@ -156,9 +156,9 @@ public:
 	{
 		if (!strcasecmp(locale, "ja"))
 			return "\xE3\x82\xA8\xE3\x82\xB9\xE3\x83\x9A\xE3\x83\xA9\xE3\x83\xB3\xE3\x83\x88";
-        if (!strcasecmp(locale, "zh_TW"))
+        if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh-Hant"))
 			return "\xE4\xB8\x96\xE7\x95\x8C\xE8\xAA\x9E";
-        if (!strcasecmp(locale, "zh_CN"))
+        if (!strcasecmp(locale, "zh_CN") || !strcasecmp(locale, "zh-Hans"))
 			return "\xE4\xB8\x96\xE7\x95\x8C\xE8\xAF\xAD";
         return "Esperanto";
     }

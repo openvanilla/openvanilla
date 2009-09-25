@@ -94,8 +94,10 @@ protected:
                        
 const char *OVOFConvSC2TC::localizedName(const char *locale)
 {
-    if (!strcasecmp(locale, "zh_TW")) return "\xE7\xB0\xA1\xE9\xAB\x94\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\x89\xE7\xB9\x81\xE9\xAB\x94";//"Á∞°È?‰∏≠Ê?ËΩâÁ?È´?;
-    if (!strcasecmp(locale, "zh_CN")) return "\xE7\xAE\x80\xE4\xBD\x93\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\xAC\xE7\xB9\x81\xE4\xBD\x93";//"ÁÆÄ‰Ωì‰∏≠?áËΩ¨ÁπÅ‰?";
+    if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh-Hant"))
+		return "\xE7\xB0\xA1\xE9\xAB\x94\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\x89\xE7\xB9\x81\xE9\xAB\x94";//"Á∞°È?‰∏≠Ê?ËΩâÁ?È´?;
+    if (!strcasecmp(locale, "zh_CN") || !strcasecmp(locale, "zh-Hans")) 
+		return "\xE7\xAE\x80\xE4\xBD\x93\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\xAC\xE7\xB9\x81\xE4\xBD\x93";//"ÁÆÄ‰Ωì‰∏≠?áËΩ¨ÁπÅ‰?";
     return "Simplified Chinese to Traditional Chinese";
 }
 
@@ -139,8 +141,10 @@ protected:
                        
 const char *OVOFConvTC2SC::localizedName(const char *locale)
 {
-    if (!strcasecmp(locale, "zh_TW")) return "\xE7\xB9\x81\xE9\xAB\x94\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\x89\xE7\xB0\xA1\xE9\xAB\x94";//"ÁπÅÈ?‰∏≠Ê?ËΩâÁ∞°È´?;
-    if (!strcasecmp(locale, "zh_CN")) return "\xE7\xB9\x81\xE4\xBD\x93\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\xAC\xE7\xAE\x80\xE4\xBD\x93";//"ÁπÅ‰?‰∏≠Ê?ËΩ¨Á?‰Ω?;
+    if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh-Hant"))
+		return "\xE7\xB9\x81\xE9\xAB\x94\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\x89\xE7\xB0\xA1\xE9\xAB\x94";//"ÁπÅÈ?‰∏≠Ê?ËΩâÁ∞°È´?;
+    if (!strcasecmp(locale, "zh_CN") || !strcasecmp(locale, "zh-Hans")) 
+		return "\xE7\xB9\x81\xE4\xBD\x93\xE4\xB8\xAD\xE6\x96\x87\xE8\xBD\xAC\xE7\xAE\x80\xE4\xBD\x93";//"ÁπÅ‰?‰∏≠Ê?ËΩ¨Á?‰Ω?;
     return "Traditional Chinese to Simpified Chinese";
 }
 

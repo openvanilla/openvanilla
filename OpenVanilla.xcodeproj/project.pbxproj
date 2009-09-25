@@ -148,6 +148,8 @@
 		D48A53B1103D4CB30072485F /* OVIMGenericController.m in Sources */ = {isa = PBXBuildFile; fileRef = D48A53B0103D4CB30072485F /* OVIMGenericController.m */; };
 		D48A53B9103D4CF20072485F /* OVIMGenericController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D48A53B8103D4CF20072485F /* OVIMGenericController.xib */; };
 		D48C56C5106CC28700FD913D /* OpenVanilla.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6AB6CF420E9CF5D00001B127 /* OpenVanilla.icns */; };
+		D49BAD08106CCCB3002A202B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D49BAD06106CCCB3002A202B /* Localizable.strings */; };
+		D49BAD09106CCCB3002A202B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D49BAD06106CCCB3002A202B /* Localizable.strings */; };
 		D4F064DE106B86A9002BCF9F /* LVTooltipTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F064DD106B86A9002BCF9F /* LVTooltipTextView.m */; };
 		D4F064DF106B86A9002BCF9F /* LVTooltipTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F064DD106B86A9002BCF9F /* LVTooltipTextView.m */; };
 /* End PBXBuildFile section */
@@ -580,6 +582,8 @@
 		D48A53AF103D4CB30072485F /* OVIMGenericController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMGenericController.h; sourceTree = "<group>"; };
 		D48A53B0103D4CB30072485F /* OVIMGenericController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMGenericController.m; sourceTree = "<group>"; };
 		D48A53B6103D4CEA0072485F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMGenericController.xib; sourceTree = "<group>"; };
+		D49BAD07106CCCB3002A202B /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = "Loaders/OSX-IMK/English.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D49BAD0D106CCCE3002A202B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "Loaders/OSX-IMK/zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D4F064DC106B86A9002BCF9F /* LVTooltipTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVTooltipTextView.h; path = "Loaders/OSX-IMK/LVTooltipTextView.h"; sourceTree = "<group>"; };
 		D4F064DD106B86A9002BCF9F /* LVTooltipTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVTooltipTextView.m; path = "Loaders/OSX-IMK/LVTooltipTextView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -903,6 +907,7 @@
 		6AAF6F380EAB787800F4DFE0 /* OSX-TSM */ = {
 			isa = PBXGroup;
 			children = (
+				D49BAD06106CCCB3002A202B /* Localizable.strings */,
 				6A84497F104545350050F09F /* InfoPlist.strings */,
 				6AAF6E190EAB772B00F4DFE0 /* OpenVanilla-Info.plist */,
 				6AAF6E7C0EAB77D500F4DFE0 /* OVLoaderServer-Info.plist */,
@@ -1412,6 +1417,13 @@
 			buildConfigurationList = 6A6A85B20E86750E00B94B7F /* Build configuration list for PBXProject "OpenVanilla" */;
 			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				"zh-Hant",
+			);
 			mainGroup = 6A6A85AD0E86750E00B94B7F;
 			productRefGroup = 6A6A86110E867B2E00B94B7F /* Products */;
 			projectDirPath = "";
@@ -1482,6 +1494,7 @@
 				6AAF6EB70EAB781300F4DFE0 /* OpenVanilla.icns in Resources */,
 				6AAF6EB80EAB781300F4DFE0 /* MainMenu.xib in Resources */,
 				6A844980104545350050F09F /* InfoPlist.strings in Resources */,
+				D49BAD09106CCCB3002A202B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1492,6 +1505,7 @@
 				6AB6CF430E9CF5D00001B127 /* OpenVanilla.icns in Resources */,
 				6AB6CF470E9CF5F00001B127 /* MainMenu.xib in Resources */,
 				6A84496A1045439E0050F09F /* OpenVanillaSmall.icns in Resources */,
+				D49BAD08106CCCB3002A202B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1976,6 +1990,15 @@
 				D48A53B6103D4CEA0072485F /* English */,
 			);
 			name = OVIMGenericController.xib;
+			sourceTree = "<group>";
+		};
+		D49BAD06106CCCB3002A202B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D49BAD07106CCCB3002A202B /* English */,
+				D49BAD0D106CCCE3002A202B /* zh-Hant */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

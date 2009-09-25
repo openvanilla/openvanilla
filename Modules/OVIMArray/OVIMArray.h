@@ -128,7 +128,7 @@ public:
     int updateConfig(OVDictionary *conf);
     virtual const char *localizedName(const char *locale)
 	{  
-        if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN")){
+        if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN") || !strcasecmp(locale, "zh-Hant") || !strcasecmp(locale, "zh-Hans")) {
             strcpy(cname,"\xE8\xA1\x8C\xE5\x88\x97"); //¦æ¦C
             //if( isForceSP() )   strcat(cname, "(§Ö)");
             return cname;

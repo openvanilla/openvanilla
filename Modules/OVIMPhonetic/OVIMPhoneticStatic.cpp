@@ -145,8 +145,8 @@ const char *OVIMPhoneticStatic::identifier()
 
 const char *OVIMPhoneticStatic::localizedName(const char *lc)
 {
-    if (!strcasecmp(lc, "zh_TW")) return OVIMP_NAME_ZH_TW;
-    if (!strcasecmp(lc, "zh_CN")) return OVIMP_NAME_ZH_CN;
+    if (!strcasecmp(lc, "zh_TW") || !strcasecmp(lc, "zh-Hant")) return OVIMP_NAME_ZH_TW;
+    if (!strcasecmp(lc, "zh_CN") || !strcasecmp(lc, "zh-Hans")) return OVIMP_NAME_ZH_CN;
     return OVIMP_NAME_EN;
 }
 

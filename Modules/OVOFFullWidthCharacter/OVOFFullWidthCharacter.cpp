@@ -78,8 +78,10 @@ protected:
                        
 const char *OVOFFullWidthCharacter::localizedName(const char *locale)
 {
-    if (!strcasecmp(locale, "zh_TW")) return "\xE5\x85\xA8\xE5\xBD\xA2\xE8\x8B\xB1\xE6\x95\xB8\xE5\xAD\x97";//"?¨å½¢?±æ•¸å­?;
-    if (!strcasecmp(locale, "zh_CN")) return "\xE5\x85\xA8\xE8\xA7\x92\xE8\x8B\xB1\xE6\x95\xB8\xE5\xAD\x97";//"?¨è??±æ•°å­?;
+    if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh-Hant"))
+		return "\xE5\x85\xA8\xE5\xBD\xA2\xE8\x8B\xB1\xE6\x95\xB8\xE5\xAD\x97";//"?¨å½¢?±æ•¸å­?;
+    if (!strcasecmp(locale, "zh_CN") || !strcasecmp(locale, "zh-Hans"))
+		return "\xE5\x85\xA8\xE8\xA7\x92\xE8\x8B\xB1\xE6\x95\xB8\xE5\xAD\x97";//"?¨è??±æ•°å­?;
     return "Full-Width ASCII Character";
 }
 

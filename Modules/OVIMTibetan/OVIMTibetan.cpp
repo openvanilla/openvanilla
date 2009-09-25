@@ -398,7 +398,7 @@ int OVTibetanContext::keyEvent(OVKeyCode * key, OVBuffer * buf, OVCandidate * te
 
 const char *OVIMTibetan::localizedName(const char *locale)
 {
-	if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN"))
+	if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN") || !strcasecmp(locale, "zh-Hant") || !strcasecmp(locale, "zh-Hans"))
 		return "\xE8\x97\x8F\xE6\x96\x87";
 	else
 		return "Tibetan";

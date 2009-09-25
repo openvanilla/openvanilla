@@ -27,15 +27,15 @@ public:
     }
     void add(char c) {
         if (len == ebMaxKeySeq) return;
-        buf[len++]=c;
-        buf[len]=0;
+        buf[len++] = c;
+        buf[len] = 0;
     }
     void remove() {
         if (!len) return;
-        buf[--len]=0;
+        buf[--len] = 0;
     }
     void clear() {
-        len=0; buf[0]=0;
+        len = 0; buf[0] = 0;
     }
     char buf[ebMaxKeySeq];
     size_t len;
@@ -99,13 +99,13 @@ public:
     void commitUTF16(unsigned u, OVBuffer *buf, OVService *srv) {
         buf->clear();
         if (u <= 0xffff) {
-            unsigned short s=u;
+            unsigned short s = u;
             buf->append(srv->UTF16ToUTF8((unsigned short*)&s, 1))->send();
         }
         else if (u <= 0xfffff) {
             unsigned short sur[2];
-            sur[0]=(0xd800 - (0x10000 >> 10))+(u >> 10);
-            sur[1]=0xdc00 + (u & 0x3ff);
+            sur[0] = (0xd800 - (0x10000 >> 10))+(u >> 10);
+            sur[1] = 0xdc00 + (u & 0x3ff);
             buf->append(srv->UTF16ToUTF8(sur, 2))->send();
         }
     }
@@ -120,9 +120,9 @@ public:
     virtual const char* identifier() { return "OVIMUnicode"; }
     
     virtual const char* localizedName(const char *locale) {
-        if (!strcasecmp(locale, "zh_TW"))
+        if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh-Hant"))
             return "Unicode 內碼";
-        else if (!strcasecmp(locale, "zh_CN"))
+        else if (!strcasecmp(locale, "zh_CN")|| !strcasecmp(locale, "zh-Hans"))
             return "Unicode 内码";
         return "Unicode Hexadecimal";        
     }
