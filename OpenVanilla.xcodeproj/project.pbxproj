@@ -584,6 +584,11 @@
 		D48A53B6103D4CEA0072485F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OVIMGenericController.xib; sourceTree = "<group>"; };
 		D49BAD07106CCCB3002A202B /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = "Loaders/OSX-IMK/English.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D49BAD0D106CCCE3002A202B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "Loaders/OSX-IMK/zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D4CBACB3106F0FB400BC7A08 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/OVIMSpaceChewingController.xib"; sourceTree = "<group>"; };
+		D4CBACB5106F101500BC7A08 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/OVIMGenericController.xib"; sourceTree = "<group>"; };
+		D4CBACCA106F11F800BC7A08 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/OVIMTibetanController.xib"; sourceTree = "<group>"; };
+		D4CBACD5106F136000BC7A08 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/OVIMPhoneticController.xib"; sourceTree = "<group>"; };
+		D4CBACD8106F143800BC7A08 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/OVIMArrayController.xib"; sourceTree = "<group>"; };
 		D4F064DC106B86A9002BCF9F /* LVTooltipTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVTooltipTextView.h; path = "Loaders/OSX-IMK/LVTooltipTextView.h"; sourceTree = "<group>"; };
 		D4F064DD106B86A9002BCF9F /* LVTooltipTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVTooltipTextView.m; path = "Loaders/OSX-IMK/LVTooltipTextView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1932,6 +1937,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6A8C6D02103D3FA800DE4A39 /* English */,
+				D4CBACD8106F143800BC7A08 /* zh-Hant */,
 			);
 			name = OVIMArrayController.xib;
 			sourceTree = "<group>";
@@ -1940,6 +1946,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6A8C6D04103D3FA800DE4A39 /* English */,
+				D4CBACD5106F136000BC7A08 /* zh-Hant */,
 			);
 			name = OVIMPhoneticController.xib;
 			sourceTree = "<group>";
@@ -1948,6 +1955,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6A8C6D06103D3FA800DE4A39 /* English */,
+				D4CBACCA106F11F800BC7A08 /* zh-Hant */,
 			);
 			name = OVIMTibetanController.xib;
 			sourceTree = "<group>";
@@ -1980,6 +1988,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D45AFE6210455A3100353563 /* English */,
+				D4CBACB3106F0FB400BC7A08 /* zh-Hant */,
 			);
 			name = OVIMSpaceChewingController.xib;
 			sourceTree = "<group>";
@@ -1988,6 +1997,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D48A53B6103D4CEA0072485F /* English */,
+				D4CBACB5106F101500BC7A08 /* zh-Hant */,
 			);
 			name = OVIMGenericController.xib;
 			sourceTree = "<group>";
