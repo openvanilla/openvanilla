@@ -1,0 +1,16 @@
+*.suo
+*.ncb
+Debug
+Release
+*.vcproj.*.user
+debug
+release
+obj
+x64
+build
+*.pbxuser
+*.mode1v3
+*.tm_build_errors
+*.perspectivev3
+.DS_Store
+._*

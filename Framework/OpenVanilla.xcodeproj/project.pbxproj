@@ -1,0 +1,488 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6A957B44111B048B00549826 /* OpenVanilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B22111B048B00549826 /* OpenVanilla.h */; };
+		6A957B45111B048B00549826 /* OVAroundFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B23111B048B00549826 /* OVAroundFilter.h */; };
+		6A957B46111B048B00549826 /* OVBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B24111B048B00549826 /* OVBase.h */; };
+		6A957B47111B048B00549826 /* OVBenchmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B25111B048B00549826 /* OVBenchmark.h */; };
+		6A957B48111B048B00549826 /* OVCandidateService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B26111B048B00549826 /* OVCandidateService.h */; };
+		6A957B49111B048B00549826 /* OVCINDatabaseService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B27111B048B00549826 /* OVCINDatabaseService.h */; };
+		6A957B4A111B048B00549826 /* OVCINDataTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B28111B048B00549826 /* OVCINDataTable.h */; };
+		6A957B4B111B048B00549826 /* OVCINToSQLiteConvertor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B29111B048B00549826 /* OVCINToSQLiteConvertor.h */; };
+		6A957B4C111B048B00549826 /* OVDatabaseService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B2A111B048B00549826 /* OVDatabaseService.h */; };
+		6A957B4D111B048B00549826 /* OVDateTimeHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B2B111B048B00549826 /* OVDateTimeHelper.h */; };
+		6A957B4E111B048B00549826 /* OVEncodingService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B2C111B048B00549826 /* OVEncodingService.h */; };
+		6A957B4F111B048B00549826 /* OVEventHandlingContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B2D111B048B00549826 /* OVEventHandlingContext.h */; };
+		6A957B50111B048B00549826 /* OVException.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B2E111B048B00549826 /* OVException.h */; };
+		6A957B51111B048B00549826 /* OVFileHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B2F111B048B00549826 /* OVFileHelper.h */; };
+		6A957B52111B048B00549826 /* OVFrameworkInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B30111B048B00549826 /* OVFrameworkInfo.h */; };
+		6A957B53111B048B00549826 /* OVInputMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B31111B048B00549826 /* OVInputMethod.h */; };
+		6A957B54111B048B00549826 /* OVKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B32111B048B00549826 /* OVKey.h */; };
+		6A957B55111B048B00549826 /* OVKeyPreprocessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B33111B048B00549826 /* OVKeyPreprocessor.h */; };
+		6A957B56111B048B00549826 /* OVKeyValueMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B34111B048B00549826 /* OVKeyValueMap.h */; };
+		6A957B57111B048B00549826 /* OVLoaderBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B35111B048B00549826 /* OVLoaderBase.h */; };
+		6A957B58111B048B00549826 /* OVLoaderService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B36111B048B00549826 /* OVLoaderService.h */; };
+		6A957B59111B048B00549826 /* OVLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B37111B048B00549826 /* OVLocalization.h */; };
+		6A957B5A111B048B00549826 /* OVModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B38111B048B00549826 /* OVModule.h */; };
+		6A957B5B111B048B00549826 /* OVModulePackage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B39111B048B00549826 /* OVModulePackage.h */; };
+		6A957B5C111B048B00549826 /* OVOutputFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B3A111B048B00549826 /* OVOutputFilter.h */; };
+		6A957B5D111B048B00549826 /* OVPathInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B3B111B048B00549826 /* OVPathInfo.h */; };
+		6A957B5E111B048B00549826 /* OVSQLiteDatabaseService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B3C111B048B00549826 /* OVSQLiteDatabaseService.h */; };
+		6A957B5F111B048B00549826 /* OVSQLiteWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B3D111B048B00549826 /* OVSQLiteWrapper.h */; };
+		6A957B60111B048B00549826 /* OVStringHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B3E111B048B00549826 /* OVStringHelper.h */; };
+		6A957B61111B048B00549826 /* OVTextBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B3F111B048B00549826 /* OVTextBuffer.h */; };
+		6A957B62111B048B00549826 /* OVUTF8Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B40111B048B00549826 /* OVUTF8Helper.h */; };
+		6A957B63111B048B00549826 /* OVWildcard.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B41111B048B00549826 /* OVWildcard.h */; };
+		6A957B64111B048B00549826 /* OVFrameworkInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A957B43111B048B00549826 /* OVFrameworkInfo.cpp */; };
+		6A957B8F111B054B00549826 /* OpenVanilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B22111B048B00549826 /* OpenVanilla.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B90111B054B00549826 /* OVAroundFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B23111B048B00549826 /* OVAroundFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B91111B054B00549826 /* OVBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B24111B048B00549826 /* OVBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B92111B054B00549826 /* OVBenchmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B25111B048B00549826 /* OVBenchmark.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B93111B054B00549826 /* OVCandidateService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B26111B048B00549826 /* OVCandidateService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B94111B054B00549826 /* OVCINDatabaseService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B27111B048B00549826 /* OVCINDatabaseService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B95111B054B00549826 /* OVCINDataTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B28111B048B00549826 /* OVCINDataTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B96111B054B00549826 /* OVCINToSQLiteConvertor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B29111B048B00549826 /* OVCINToSQLiteConvertor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B97111B054B00549826 /* OVDatabaseService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B2A111B048B00549826 /* OVDatabaseService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B98111B054B00549826 /* OVDateTimeHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B2B111B048B00549826 /* OVDateTimeHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B99111B054B00549826 /* OVEncodingService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B2C111B048B00549826 /* OVEncodingService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B9A111B054B00549826 /* OVEventHandlingContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B2D111B048B00549826 /* OVEventHandlingContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B9B111B054B00549826 /* OVException.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B2E111B048B00549826 /* OVException.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B9C111B054B00549826 /* OVFileHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B2F111B048B00549826 /* OVFileHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B9D111B054B00549826 /* OVFrameworkInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B30111B048B00549826 /* OVFrameworkInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B9E111B054B00549826 /* OVInputMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B31111B048B00549826 /* OVInputMethod.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957B9F111B054B00549826 /* OVKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B32111B048B00549826 /* OVKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BA0111B054B00549826 /* OVKeyPreprocessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B33111B048B00549826 /* OVKeyPreprocessor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BA1111B054B00549826 /* OVKeyValueMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B34111B048B00549826 /* OVKeyValueMap.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BA2111B054B00549826 /* OVLoaderBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B35111B048B00549826 /* OVLoaderBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BA3111B054B00549826 /* OVLoaderService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B36111B048B00549826 /* OVLoaderService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BA4111B054B00549826 /* OVLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B37111B048B00549826 /* OVLocalization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BA5111B054B00549826 /* OVModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B38111B048B00549826 /* OVModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BA6111B054B00549826 /* OVModulePackage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B39111B048B00549826 /* OVModulePackage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BA7111B054B00549826 /* OVOutputFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B3A111B048B00549826 /* OVOutputFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BA8111B054B00549826 /* OVPathInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B3B111B048B00549826 /* OVPathInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BA9111B054B00549826 /* OVSQLiteDatabaseService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B3C111B048B00549826 /* OVSQLiteDatabaseService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BAA111B054B00549826 /* OVSQLiteWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B3D111B048B00549826 /* OVSQLiteWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BAB111B054B00549826 /* OVStringHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B3E111B048B00549826 /* OVStringHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BAC111B054B00549826 /* OVTextBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B3F111B048B00549826 /* OVTextBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BAD111B054B00549826 /* OVUTF8Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B40111B048B00549826 /* OVUTF8Helper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BAE111B054B00549826 /* OVWildcard.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A957B41111B048B00549826 /* OVWildcard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A957BB4111B055C00549826 /* OVFrameworkInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A957B43111B048B00549826 /* OVFrameworkInfo.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6A957B1C111B048000549826 /* libOpenVanilla.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOpenVanilla.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A957B22111B048B00549826 /* OpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenVanilla.h; sourceTree = "<group>"; };
+		6A957B23111B048B00549826 /* OVAroundFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVAroundFilter.h; sourceTree = "<group>"; };
+		6A957B24111B048B00549826 /* OVBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVBase.h; sourceTree = "<group>"; };
+		6A957B25111B048B00549826 /* OVBenchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVBenchmark.h; sourceTree = "<group>"; };
+		6A957B26111B048B00549826 /* OVCandidateService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCandidateService.h; sourceTree = "<group>"; };
+		6A957B27111B048B00549826 /* OVCINDatabaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCINDatabaseService.h; sourceTree = "<group>"; };
+		6A957B28111B048B00549826 /* OVCINDataTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCINDataTable.h; sourceTree = "<group>"; };
+		6A957B29111B048B00549826 /* OVCINToSQLiteConvertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCINToSQLiteConvertor.h; sourceTree = "<group>"; };
+		6A957B2A111B048B00549826 /* OVDatabaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVDatabaseService.h; sourceTree = "<group>"; };
+		6A957B2B111B048B00549826 /* OVDateTimeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVDateTimeHelper.h; sourceTree = "<group>"; };
+		6A957B2C111B048B00549826 /* OVEncodingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVEncodingService.h; sourceTree = "<group>"; };
+		6A957B2D111B048B00549826 /* OVEventHandlingContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVEventHandlingContext.h; sourceTree = "<group>"; };
+		6A957B2E111B048B00549826 /* OVException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVException.h; sourceTree = "<group>"; };
+		6A957B2F111B048B00549826 /* OVFileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVFileHelper.h; sourceTree = "<group>"; };
+		6A957B30111B048B00549826 /* OVFrameworkInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVFrameworkInfo.h; sourceTree = "<group>"; };
+		6A957B31111B048B00549826 /* OVInputMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVInputMethod.h; sourceTree = "<group>"; };
+		6A957B32111B048B00549826 /* OVKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVKey.h; sourceTree = "<group>"; };
+		6A957B33111B048B00549826 /* OVKeyPreprocessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVKeyPreprocessor.h; sourceTree = "<group>"; };
+		6A957B34111B048B00549826 /* OVKeyValueMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVKeyValueMap.h; sourceTree = "<group>"; };
+		6A957B35111B048B00549826 /* OVLoaderBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLoaderBase.h; sourceTree = "<group>"; };
+		6A957B36111B048B00549826 /* OVLoaderService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLoaderService.h; sourceTree = "<group>"; };
+		6A957B37111B048B00549826 /* OVLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLocalization.h; sourceTree = "<group>"; };
+		6A957B38111B048B00549826 /* OVModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVModule.h; sourceTree = "<group>"; };
+		6A957B39111B048B00549826 /* OVModulePackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVModulePackage.h; sourceTree = "<group>"; };
+		6A957B3A111B048B00549826 /* OVOutputFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVOutputFilter.h; sourceTree = "<group>"; };
+		6A957B3B111B048B00549826 /* OVPathInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVPathInfo.h; sourceTree = "<group>"; };
+		6A957B3C111B048B00549826 /* OVSQLiteDatabaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVSQLiteDatabaseService.h; sourceTree = "<group>"; };
+		6A957B3D111B048B00549826 /* OVSQLiteWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVSQLiteWrapper.h; sourceTree = "<group>"; };
+		6A957B3E111B048B00549826 /* OVStringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVStringHelper.h; sourceTree = "<group>"; };
+		6A957B3F111B048B00549826 /* OVTextBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTextBuffer.h; sourceTree = "<group>"; };
+		6A957B40111B048B00549826 /* OVUTF8Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUTF8Helper.h; sourceTree = "<group>"; };
+		6A957B41111B048B00549826 /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVWildcard.h; sourceTree = "<group>"; };
+		6A957B43111B048B00549826 /* OVFrameworkInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVFrameworkInfo.cpp; sourceTree = "<group>"; };
+		6A957B80111B050600549826 /* OpenVanilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenVanilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A957B81111B050600549826 /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenVanilla-Info.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6A957B1A111B048000549826 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A957B7E111B050600549826 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6A957B07111B045700549826 = {
+			isa = PBXGroup;
+			children = (
+				6A957B21111B048B00549826 /* Headers */,
+				6A957B42111B048B00549826 /* Source */,
+				6A957B1D111B048000549826 /* Products */,
+				6A957B81111B050600549826 /* OpenVanilla-Info.plist */,
+			);
+			sourceTree = "<group>";
+		};
+		6A957B1D111B048000549826 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A957B1C111B048000549826 /* libOpenVanilla.a */,
+				6A957B80111B050600549826 /* OpenVanilla.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6A957B21111B048B00549826 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				6A957B22111B048B00549826 /* OpenVanilla.h */,
+				6A957B23111B048B00549826 /* OVAroundFilter.h */,
+				6A957B24111B048B00549826 /* OVBase.h */,
+				6A957B25111B048B00549826 /* OVBenchmark.h */,
+				6A957B26111B048B00549826 /* OVCandidateService.h */,
+				6A957B27111B048B00549826 /* OVCINDatabaseService.h */,
+				6A957B28111B048B00549826 /* OVCINDataTable.h */,
+				6A957B29111B048B00549826 /* OVCINToSQLiteConvertor.h */,
+				6A957B2A111B048B00549826 /* OVDatabaseService.h */,
+				6A957B2B111B048B00549826 /* OVDateTimeHelper.h */,
+				6A957B2C111B048B00549826 /* OVEncodingService.h */,
+				6A957B2D111B048B00549826 /* OVEventHandlingContext.h */,
+				6A957B2E111B048B00549826 /* OVException.h */,
+				6A957B2F111B048B00549826 /* OVFileHelper.h */,
+				6A957B30111B048B00549826 /* OVFrameworkInfo.h */,
+				6A957B31111B048B00549826 /* OVInputMethod.h */,
+				6A957B32111B048B00549826 /* OVKey.h */,
+				6A957B33111B048B00549826 /* OVKeyPreprocessor.h */,
+				6A957B34111B048B00549826 /* OVKeyValueMap.h */,
+				6A957B35111B048B00549826 /* OVLoaderBase.h */,
+				6A957B36111B048B00549826 /* OVLoaderService.h */,
+				6A957B37111B048B00549826 /* OVLocalization.h */,
+				6A957B38111B048B00549826 /* OVModule.h */,
+				6A957B39111B048B00549826 /* OVModulePackage.h */,
+				6A957B3A111B048B00549826 /* OVOutputFilter.h */,
+				6A957B3B111B048B00549826 /* OVPathInfo.h */,
+				6A957B3C111B048B00549826 /* OVSQLiteDatabaseService.h */,
+				6A957B3D111B048B00549826 /* OVSQLiteWrapper.h */,
+				6A957B3E111B048B00549826 /* OVStringHelper.h */,
+				6A957B3F111B048B00549826 /* OVTextBuffer.h */,
+				6A957B40111B048B00549826 /* OVUTF8Helper.h */,
+				6A957B41111B048B00549826 /* OVWildcard.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		6A957B42111B048B00549826 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				6A957B43111B048B00549826 /* OVFrameworkInfo.cpp */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6A957B18111B048000549826 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A957B44111B048B00549826 /* OpenVanilla.h in Headers */,
+				6A957B45111B048B00549826 /* OVAroundFilter.h in Headers */,
+				6A957B46111B048B00549826 /* OVBase.h in Headers */,
+				6A957B47111B048B00549826 /* OVBenchmark.h in Headers */,
+				6A957B48111B048B00549826 /* OVCandidateService.h in Headers */,
+				6A957B49111B048B00549826 /* OVCINDatabaseService.h in Headers */,
+				6A957B4A111B048B00549826 /* OVCINDataTable.h in Headers */,
+				6A957B4B111B048B00549826 /* OVCINToSQLiteConvertor.h in Headers */,
+				6A957B4C111B048B00549826 /* OVDatabaseService.h in Headers */,
+				6A957B4D111B048B00549826 /* OVDateTimeHelper.h in Headers */,
+				6A957B4E111B048B00549826 /* OVEncodingService.h in Headers */,
+				6A957B4F111B048B00549826 /* OVEventHandlingContext.h in Headers */,
+				6A957B50111B048B00549826 /* OVException.h in Headers */,
+				6A957B51111B048B00549826 /* OVFileHelper.h in Headers */,
+				6A957B52111B048B00549826 /* OVFrameworkInfo.h in Headers */,
+				6A957B53111B048B00549826 /* OVInputMethod.h in Headers */,
+				6A957B54111B048B00549826 /* OVKey.h in Headers */,
+				6A957B55111B048B00549826 /* OVKeyPreprocessor.h in Headers */,
+				6A957B56111B048B00549826 /* OVKeyValueMap.h in Headers */,
+				6A957B57111B048B00549826 /* OVLoaderBase.h in Headers */,
+				6A957B58111B048B00549826 /* OVLoaderService.h in Headers */,
+				6A957B59111B048B00549826 /* OVLocalization.h in Headers */,
+				6A957B5A111B048B00549826 /* OVModule.h in Headers */,
+				6A957B5B111B048B00549826 /* OVModulePackage.h in Headers */,
+				6A957B5C111B048B00549826 /* OVOutputFilter.h in Headers */,
+				6A957B5D111B048B00549826 /* OVPathInfo.h in Headers */,
+				6A957B5E111B048B00549826 /* OVSQLiteDatabaseService.h in Headers */,
+				6A957B5F111B048B00549826 /* OVSQLiteWrapper.h in Headers */,
+				6A957B60111B048B00549826 /* OVStringHelper.h in Headers */,
+				6A957B61111B048B00549826 /* OVTextBuffer.h in Headers */,
+				6A957B62111B048B00549826 /* OVUTF8Helper.h in Headers */,
+				6A957B63111B048B00549826 /* OVWildcard.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A957B7B111B050600549826 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A957B8F111B054B00549826 /* OpenVanilla.h in Headers */,
+				6A957B90111B054B00549826 /* OVAroundFilter.h in Headers */,
+				6A957B91111B054B00549826 /* OVBase.h in Headers */,
+				6A957B92111B054B00549826 /* OVBenchmark.h in Headers */,
+				6A957B93111B054B00549826 /* OVCandidateService.h in Headers */,
+				6A957B94111B054B00549826 /* OVCINDatabaseService.h in Headers */,
+				6A957B95111B054B00549826 /* OVCINDataTable.h in Headers */,
+				6A957B96111B054B00549826 /* OVCINToSQLiteConvertor.h in Headers */,
+				6A957B97111B054B00549826 /* OVDatabaseService.h in Headers */,
+				6A957B98111B054B00549826 /* OVDateTimeHelper.h in Headers */,
+				6A957B99111B054B00549826 /* OVEncodingService.h in Headers */,
+				6A957B9A111B054B00549826 /* OVEventHandlingContext.h in Headers */,
+				6A957B9B111B054B00549826 /* OVException.h in Headers */,
+				6A957B9C111B054B00549826 /* OVFileHelper.h in Headers */,
+				6A957B9D111B054B00549826 /* OVFrameworkInfo.h in Headers */,
+				6A957B9E111B054B00549826 /* OVInputMethod.h in Headers */,
+				6A957B9F111B054B00549826 /* OVKey.h in Headers */,
+				6A957BA0111B054B00549826 /* OVKeyPreprocessor.h in Headers */,
+				6A957BA1111B054B00549826 /* OVKeyValueMap.h in Headers */,
+				6A957BA2111B054B00549826 /* OVLoaderBase.h in Headers */,
+				6A957BA3111B054B00549826 /* OVLoaderService.h in Headers */,
+				6A957BA4111B054B00549826 /* OVLocalization.h in Headers */,
+				6A957BA5111B054B00549826 /* OVModule.h in Headers */,
+				6A957BA6111B054B00549826 /* OVModulePackage.h in Headers */,
+				6A957BA7111B054B00549826 /* OVOutputFilter.h in Headers */,
+				6A957BA8111B054B00549826 /* OVPathInfo.h in Headers */,
+				6A957BA9111B054B00549826 /* OVSQLiteDatabaseService.h in Headers */,
+				6A957BAA111B054B00549826 /* OVSQLiteWrapper.h in Headers */,
+				6A957BAB111B054B00549826 /* OVStringHelper.h in Headers */,
+				6A957BAC111B054B00549826 /* OVTextBuffer.h in Headers */,
+				6A957BAD111B054B00549826 /* OVUTF8Helper.h in Headers */,
+				6A957BAE111B054B00549826 /* OVWildcard.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6A957B1B111B048000549826 /* OpenVanilla (static lib) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A957B20111B048100549826 /* Build configuration list for PBXNativeTarget "OpenVanilla (static lib)" */;
+			buildPhases = (
+				6A957B18111B048000549826 /* Headers */,
+				6A957B19111B048000549826 /* Sources */,
+				6A957B1A111B048000549826 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenVanilla (static lib)";
+			productName = OpenVanilla;
+			productReference = 6A957B1C111B048000549826 /* libOpenVanilla.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		6A957B7F111B050600549826 /* OpenVanilla (framework) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A957B84111B050600549826 /* Build configuration list for PBXNativeTarget "OpenVanilla (framework)" */;
+			buildPhases = (
+				6A957B7B111B050600549826 /* Headers */,
+				6A957B7C111B050600549826 /* Resources */,
+				6A957B7D111B050600549826 /* Sources */,
+				6A957B7E111B050600549826 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenVanilla (framework)";
+			productName = OpenVanilla;
+			productReference = 6A957B80111B050600549826 /* OpenVanilla.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6A957B09111B045700549826 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 6A957B0C111B045700549826 /* Build configuration list for PBXProject "OpenVanilla" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 0;
+			mainGroup = 6A957B07111B045700549826;
+			productRefGroup = 6A957B1D111B048000549826 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6A957B7F111B050600549826 /* OpenVanilla (framework) */,
+				6A957B1B111B048000549826 /* OpenVanilla (static lib) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6A957B7C111B050600549826 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6A957B19111B048000549826 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A957B64111B048B00549826 /* OVFrameworkInfo.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A957B7D111B050600549826 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A957BB4111B055C00549826 /* OVFrameworkInfo.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6A957B0A111B045700549826 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		6A957B0B111B045700549826 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Release;
+		};
+		6A957B1E111B048000549826 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenVanilla;
+			};
+			name = Debug;
+		};
+		6A957B1F111B048000549826 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenVanilla;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		6A957B82111B050600549826 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				INFOPLIST_FILE = "OpenVanilla-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenVanilla;
+			};
+			name = Debug;
+		};
+		6A957B83111B050600549826 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				INFOPLIST_FILE = "OpenVanilla-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenVanilla;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6A957B0C111B045700549826 /* Build configuration list for PBXProject "OpenVanilla" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A957B0A111B045700549826 /* Debug */,
+				6A957B0B111B045700549826 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A957B20111B048100549826 /* Build configuration list for PBXNativeTarget "OpenVanilla (static lib)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A957B1E111B048000549826 /* Debug */,
+				6A957B1F111B048000549826 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A957B84111B050600549826 /* Build configuration list for PBXNativeTarget "OpenVanilla (framework)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A957B82111B050600549826 /* Debug */,
+				6A957B83111B050600549826 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6A957B09111B045700549826 /* Project object */;
+}
