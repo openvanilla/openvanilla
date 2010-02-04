@@ -7,7 +7,7 @@ The code supplied here is the basic framework that builds on both Mac OS X and W
 *   Xcode 3.2 on Mac OS X
 *   Microsoft Visual Studio 2005 on Windows
 
-This project also include unit testing modules. Build `TestOpenVanilla.xcodeproj` or `TestOpenVanilla.sln` to run the test. A shell script, `ExternalLibraries/getexterns.sh`, fetches all the external dependencies ([UnitTest++](http://unittest-cpp.sourceforge.net/) and [SQLite](http://www.sqlite.org/)) for you.
+This project also includes unit testing modules. Build `TestOpenVanilla.xcodeproj` or `TestOpenVanilla.sln` to run the test. A shell script, `ExternalLibraries/getexterns.sh`, fetches all the external dependencies ([UnitTest++](http://unittest-cpp.sourceforge.net/) and [SQLite](http://www.sqlite.org/)) for you.
 
 The framework has a version number of 1.5.0. Efforts are made to ensure that modules written with this framework are never loaded by the currently circulating OpenVanilla implementations, which range from version 0.6 to 0.9.
 
