@@ -1595,7 +1595,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# never run bpmf-ext.cin with this\n\nA=$PROJECT_DIR/Modules/OVIMPhonetic/OVPhoneticData.c\nSRC1=$PROJECT_DIR/Modules/SharedData/bpmf.cin\nSRC2=$PROJECT_DIR/Modules/SharedData/punctuations.cin\nSCRIPT=$PROJECT_DIR/Modules/OVIMPhonetic/convert-phonedata.pl\n\nif [ -f $A ] \nthen\n\techo \"exists\"\nelse\n\techo \"doesn't exist\"\n\tperl $SCRIPT $SRC1 $SRC2 > $A\nfi\n";
+			shellScript = "# never run bpmf-ext.cin with this\n\nA=$PROJECT_DIR/Modules/OVIMPhonetic/OVPhoneticData.c\nSRC1=$PROJECT_DIR/DataTables/bpmf.cin\nSRC2=$PROJECT_DIR/DataTables/punctuations.cin\nSCRIPT=$PROJECT_DIR/Modules/OVIMPhonetic/convert-phonedata.pl\n\nif [ -f $A ] \nthen\n\techo \"exists\"\nelse\n\techo \"doesn't exist\"\n\tperl $SCRIPT $SRC1 $SRC2 > $A\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
