@@ -33,7 +33,7 @@
 #define ComponentConfig_h
 
 // configurables
-#define TSMC_VERSION            0x00090000	// OpenVanilla 0.9.0
+#define TSMC_VERSION            0x00090100	// OpenVanilla 0.9.1
 #define TSMC_VENDOR             'opvn'
 #define TSMC_NAME               "OpenVanilla"
 #define TSMC_NAME_LENGTH        $"0b"
