@@ -18,7 +18,7 @@ Limitations
 
 1.  No Preferences app is provided. Edit the configuration in ~/Library/Preferences/org.openvanilla.plist. Changes take effect immediately.
 2.  The candidate window is largely simplified. Only a minimal text label is provided.
-3.  Only the core modules are provided and are currently bundled directly with the loader itself.
+3.  Only the core modules are provided and are currently bundled directly with the loader itself. (The project also builds OVIMPOJ, but does not bundle it into the distributed package.)
     *   OVIMArray
     *   OVIMEsperanto
     *   OVIMGeneric (when there is data)
