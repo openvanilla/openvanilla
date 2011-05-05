@@ -31,17 +31,12 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
+#include <cstring>
 #include <iostream>
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVFileHelper.h>
-    #include <OpenVanilla/OVUTF8Helper.h>
-    #include <OpenVanilla/OVWildcard.h>
-#else
-    #include "OVFileHelper.h"
-    #include "OVUTF8Helper.h"
-    #include "OVWildcard.h"
-#endif
+#include "OVFileHelper.h"
+#include "OVUTF8Helper.h"
+#include "OVWildcard.h"
 
 #include <map>
 
