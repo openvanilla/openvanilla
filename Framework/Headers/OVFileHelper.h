@@ -201,7 +201,7 @@ namespace OpenVanilla {
             if (!realPath.length())
                 return string(".");
                 
-            for (size_t index = realPath.length() - 1; index >= 0 ; index--) {
+            for (size_t index = realPath.length() - 1; true ; index--) {
                 if (realPath[index] == separator) {
                     if (index) {
                         // reserve the \\ on Windows
@@ -231,7 +231,7 @@ namespace OpenVanilla {
             if (!path.length())
                 return string();
                 
-            for (size_t index = path.length() - 1; index >= 0 ; index--) {
+            for (size_t index = path.length() - 1; true ; index--) {
                 if (path[index] == separator)
                     return path.substr(index + 1, path.length() - (index + 1));
                     
@@ -247,7 +247,7 @@ namespace OpenVanilla {
             if (!path.length())
                 return string();
 
-            for (size_t index = path.length() - 1; index >= 0 ; index--) {                
+            for (size_t index = path.length() - 1; true ; index--) {                
                 if (path[index] == separator)
                     break;
                     

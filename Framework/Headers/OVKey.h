@@ -218,7 +218,7 @@ namespace OpenVanilla {
         
         virtual bool isKeyCodeAlpha() const
         {
-            if (keyCode() >= 'A' && keyCode() <= 'Z' || keyCode() >= 'a' && keyCode() <= 'z')
+            if ((keyCode() >= 'A' && keyCode() <= 'Z') || (keyCode() >= 'a' && keyCode() <= 'z'))
                 return true;
             
             return false;

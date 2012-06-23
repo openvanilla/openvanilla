@@ -66,6 +66,34 @@ namespace OpenVanilla {
             
             return result;
         }
+
+        static size_t CodePointCount(const string& utf8String)
+        {
+            size_t index, length = utf8String.length();
+            size_t count = 0;
+            
+            for (index = 0; index < length; index++) {
+                unsigned char c = utf8String[index];
+                
+                if (!(c & 0x80)) {
+                    count++;
+                }
+                else if ((c & (0x80 | 0x40)) && !(c & 0x20)) {
+                    count++;
+                    index += 1;
+                }
+                else if ((c & (0x80 | 0x40 | 0x20)) && !(c & 0x10)) {
+                    count++;
+                    index += 2;
+                }
+                else if ((c & (0x80 | 0x40 | 0x20 | 0x10)) && !(c & 0x8)) {
+                    count++;
+                    index += 3;
+                }                
+            }
+            
+            return count;
+        }
         
         static const string CombineCodePoints(const vector<string>& codePoints)
         {
@@ -144,13 +172,13 @@ namespace OpenVanilla {
             }
             else if (codePoint < 0x10000) {
                 utf8String += (unsigned char)((codePoint >> 12) | 0xe0);
-                utf8String += (unsigned char)((codePoint >> 6) & 0x3f | 0x80);
+                utf8String += (unsigned char)(((codePoint >> 6) & 0x3f) | 0x80);
                 utf8String += (unsigned char)((codePoint & 0x3f) | 0x80);                
             }
             else {
                 utf8String += (unsigned char)((codePoint >> 18) | 0xf0);
                 utf8String += (unsigned char)((codePoint >> 12) | 0x80);
-                utf8String += (unsigned char)((codePoint >> 6) & 0x3f | 0x80);
+                utf8String += (unsigned char)(((codePoint >> 6) & 0x3f) | 0x80);
                 utf8String += (unsigned char)((codePoint & 0x3f) | 0x80);                
             }
             
