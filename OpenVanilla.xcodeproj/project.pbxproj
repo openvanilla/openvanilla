@@ -1,0 +1,301 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6ABBAEF515CD58F90080EE7D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAEF415CD58F90080EE7D /* Cocoa.framework */; };
+		6ABBAEFF15CD58F90080EE7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAEFD15CD58F90080EE7D /* InfoPlist.strings */; };
+		6ABBAF0115CD58F90080EE7D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0015CD58F90080EE7D /* main.m */; };
+		6ABBAF0515CD58F90080EE7D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0315CD58F90080EE7D /* Credits.rtf */; };
+		6ABBAF0815CD58F90080EE7D /* OVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0715CD58F90080EE7D /* OVAppDelegate.m */; };
+		6ABBAF0B15CD58F90080EE7D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0915CD58F90080EE7D /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6ABBAEF415CD58F90080EE7D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		6ABBAEF715CD58F90080EE7D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		6ABBAEF815CD58F90080EE7D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6ABBAEF915CD58F90080EE7D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6ABBAEFC15CD58F90080EE7D /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenVanilla-Info.plist"; sourceTree = "<group>"; };
+		6ABBAEFE15CD58F90080EE7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6ABBAF0015CD58F90080EE7D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6ABBAF0215CD58F90080EE7D /* OpenVanilla-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanilla-Prefix.pch"; sourceTree = "<group>"; };
+		6ABBAF0415CD58F90080EE7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		6ABBAF0615CD58F90080EE7D /* OVAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OVAppDelegate.h; sourceTree = "<group>"; };
+		6ABBAF0715CD58F90080EE7D /* OVAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OVAppDelegate.m; sourceTree = "<group>"; };
+		6ABBAF0A15CD58F90080EE7D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6ABBAEED15CD58F90080EE7D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6ABBAEF515CD58F90080EE7D /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6ABBAEE515CD58F90080EE7D = {
+			isa = PBXGroup;
+			children = (
+				6ABBAEFA15CD58F90080EE7D /* OpenVanilla */,
+				6ABBAEF315CD58F90080EE7D /* Frameworks */,
+				6ABBAEF115CD58F90080EE7D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6ABBAEF115CD58F90080EE7D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6ABBAEF315CD58F90080EE7D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6ABBAEF415CD58F90080EE7D /* Cocoa.framework */,
+				6ABBAEF615CD58F90080EE7D /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6ABBAEF615CD58F90080EE7D /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6ABBAEF715CD58F90080EE7D /* AppKit.framework */,
+				6ABBAEF815CD58F90080EE7D /* CoreData.framework */,
+				6ABBAEF915CD58F90080EE7D /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		6ABBAEFA15CD58F90080EE7D /* OpenVanilla */ = {
+			isa = PBXGroup;
+			children = (
+				6ABBAF0615CD58F90080EE7D /* OVAppDelegate.h */,
+				6ABBAF0715CD58F90080EE7D /* OVAppDelegate.m */,
+				6ABBAF0915CD58F90080EE7D /* MainMenu.xib */,
+				6ABBAEFB15CD58F90080EE7D /* Supporting Files */,
+			);
+			name = OpenVanilla;
+			path = Source/Mac;
+			sourceTree = "<group>";
+		};
+		6ABBAEFB15CD58F90080EE7D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6ABBAEFC15CD58F90080EE7D /* OpenVanilla-Info.plist */,
+				6ABBAEFD15CD58F90080EE7D /* InfoPlist.strings */,
+				6ABBAF0015CD58F90080EE7D /* main.m */,
+				6ABBAF0215CD58F90080EE7D /* OpenVanilla-Prefix.pch */,
+				6ABBAF0315CD58F90080EE7D /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6ABBAEEF15CD58F90080EE7D /* OpenVanilla */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6ABBAF0E15CD58F90080EE7D /* Build configuration list for PBXNativeTarget "OpenVanilla" */;
+			buildPhases = (
+				6ABBAEEC15CD58F90080EE7D /* Sources */,
+				6ABBAEED15CD58F90080EE7D /* Frameworks */,
+				6ABBAEEE15CD58F90080EE7D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenVanilla;
+			productName = OpenVanilla;
+			productReference = 6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6ABBAEE715CD58F90080EE7D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = OV;
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "The OpenVanilla Project";
+			};
+			buildConfigurationList = 6ABBAEEA15CD58F90080EE7D /* Build configuration list for PBXProject "OpenVanilla" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6ABBAEE515CD58F90080EE7D;
+			productRefGroup = 6ABBAEF115CD58F90080EE7D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6ABBAEEF15CD58F90080EE7D /* OpenVanilla */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6ABBAEEE15CD58F90080EE7D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6ABBAEFF15CD58F90080EE7D /* InfoPlist.strings in Resources */,
+				6ABBAF0515CD58F90080EE7D /* Credits.rtf in Resources */,
+				6ABBAF0B15CD58F90080EE7D /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6ABBAEEC15CD58F90080EE7D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6ABBAF0115CD58F90080EE7D /* main.m in Sources */,
+				6ABBAF0815CD58F90080EE7D /* OVAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6ABBAEFD15CD58F90080EE7D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6ABBAEFE15CD58F90080EE7D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6ABBAF0315CD58F90080EE7D /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6ABBAF0415CD58F90080EE7D /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		6ABBAF0915CD58F90080EE7D /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6ABBAF0A15CD58F90080EE7D /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6ABBAF0C15CD58F90080EE7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		6ABBAF0D15CD58F90080EE7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		6ABBAF0F15CD58F90080EE7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Source/Mac/OpenVanilla-Prefix.pch";
+				INFOPLIST_FILE = "Source/Mac/OpenVanilla-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6ABBAF1015CD58F90080EE7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Source/Mac/OpenVanilla-Prefix.pch";
+				INFOPLIST_FILE = "Source/Mac/OpenVanilla-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6ABBAEEA15CD58F90080EE7D /* Build configuration list for PBXProject "OpenVanilla" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6ABBAF0C15CD58F90080EE7D /* Debug */,
+				6ABBAF0D15CD58F90080EE7D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6ABBAF0E15CD58F90080EE7D /* Build configuration list for PBXNativeTarget "OpenVanilla" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6ABBAF0F15CD58F90080EE7D /* Debug */,
+				6ABBAF1015CD58F90080EE7D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6ABBAEE715CD58F90080EE7D /* Project object */;
+}
