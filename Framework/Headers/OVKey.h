@@ -92,11 +92,14 @@ namespace OpenVanilla {
                 
         virtual bool operator==(const OVKey& key) const
         {
-            if (isAltPressed() == key.isAltPressed() && isOptPressed() == key.isOptPressed() && isCtrlPressed() == key.isCtrlPressed() && isShiftPressed() == key.isShiftPressed() && isCommandPressed() == key.isCommandPressed())
-                if (!keyCode() && !key.keyCode())
+            if (isAltPressed() == key.isAltPressed() && isOptPressed() == key.isOptPressed() && isCtrlPressed() == key.isCtrlPressed() && isShiftPressed() == key.isShiftPressed() && isCommandPressed() == key.isCommandPressed()) {
+                if (!keyCode() && !key.keyCode()) {
                     return receivedString() == key.receivedString();
-                else
+                }
+                else {
                     return keyCode() == key.keyCode();
+                }
+            }
 
             return false;
         }
