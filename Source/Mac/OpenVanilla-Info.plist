@@ -2,14 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <!-- Shared settings -->    
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>OpenVanilla-App</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>org.openvanilla.inputmethod.OpenVanilla</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -30,5 +31,32 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	
+	<!-- Additional shared settings -->
+    <key>LSUIElement</key>
+    <false/>
+	<key>LSHasLocalizedDisplayName</key>
+	<false/>
+	
+	<!-- Input method-specific settings, see IMKServer Class Reference -->
+	<key>InputMethodConnectionName</key>
+	<string>OpenVanilla_1_Connection</string>
+	<key>InputMethodServerControllerClass</key>
+	<string>OVInputMethodController</string>
+	<key>InputMethodServerDelegateClass</key>
+	<string>OVInputMethodController</string>
+	<key>tsInputMethodCharacterRepertoireKey</key>
+	<array>
+		<string>Hant</string>
+		<string>Hans</string>
+	</array>
+	<key>tsInputMethodIconFileKey</key>
+	<string>OpenVanilla-InputMenu.icns</string>
+
+    <!-- Used by HIToolbox, see HIToolbox Release Notes for Mac OS X 10.5 -->
+	<key>TISInputSourceID</key>
+	<string>org.openvanilla.inputmethod.OpenVanilla</string>
+	<key>TISIntendedLanguage</key>
+	<string>zh-Hant</string>
 </dict>
 </plist>

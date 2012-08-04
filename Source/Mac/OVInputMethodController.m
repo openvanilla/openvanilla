@@ -1,8 +1,8 @@
 //
-// OVAppDelegate.m
+// OVInputMethodController.m
 //
 // Copyright (c) 2004-2012 Lukhnos Liu (lukhnos at openvanilla dot org)
-//
+// 
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -25,18 +25,58 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "OVAppDelegate.h"
+#import "OVInputMethodController.h"
 
-@implementation OVAppDelegate
+#if DEBUG
+    #define IMEDebug NSLog
+#else
+    #define IMEDebug(...)
+#endif
 
+@implementation OVInputMethodController
 - (void)dealloc
 {
     [super dealloc];
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+- (id)initWithServer:(IMKServer *)server delegate:(id)aDelegate client:(id)client
 {
-    // Insert code here to initialize your application
+    IMEDebug(@"%s", __PRETTY_FUNCTION__);
+    
+    self = [super initWithServer:server delegate:aDelegate client:client];
+	if (self) {
+	}
+	
+	return self;
+}
+
+- (NSMenu *)menu
+{
+    IMEDebug(@"%s", __PRETTY_FUNCTION__);
+    return nil;
+}
+
+#pragma mark IMKStateSetting protocol methods
+
+- (void)activateServer:(id)client
+{
+    IMEDebug(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)deactivateServer:(id)client
+{
+    IMEDebug(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)commitComposition:(id)client 
+{    
+    IMEDebug(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (BOOL)handleEvent:(NSEvent *)inEvent client:(id)client
+{
+    IMEDebug(@"%s", __PRETTY_FUNCTION__);
+    return NO;
 }
 
 @end

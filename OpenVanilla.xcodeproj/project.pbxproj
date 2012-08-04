@@ -13,6 +13,13 @@
 		6ABBAF0515CD58F90080EE7D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0315CD58F90080EE7D /* Credits.rtf */; };
 		6ABBAF0815CD58F90080EE7D /* OVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0715CD58F90080EE7D /* OVAppDelegate.m */; };
 		6ABBAF0B15CD58F90080EE7D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0915CD58F90080EE7D /* MainMenu.xib */; };
+		6ABBAF2115CD615B0080EE7D /* OVConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF1C15CD615B0080EE7D /* OVConstants.m */; };
+		6ABBAF2215CD615B0080EE7D /* OVInputMethodController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF1E15CD615B0080EE7D /* OVInputMethodController.m */; };
+		6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.m */; };
+		6ABBAF2715CD617D0080EE7D /* OpenVanilla-App.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2515CD617D0080EE7D /* OpenVanilla-App.icns */; };
+		6ABBAF2815CD617D0080EE7D /* OpenVanilla-InputMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */; };
+		6ABBAF2A15CD61B60080EE7D /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */; };
+		6ABBAF2C15CD61BE0080EE7D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +36,16 @@
 		6ABBAF0615CD58F90080EE7D /* OVAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OVAppDelegate.h; sourceTree = "<group>"; };
 		6ABBAF0715CD58F90080EE7D /* OVAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OVAppDelegate.m; sourceTree = "<group>"; };
 		6ABBAF0A15CD58F90080EE7D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		6ABBAF1B15CD615B0080EE7D /* OVConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVConstants.h; sourceTree = "<group>"; };
+		6ABBAF1C15CD615B0080EE7D /* OVConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVConstants.m; sourceTree = "<group>"; };
+		6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVInputMethodController.h; sourceTree = "<group>"; };
+		6ABBAF1E15CD615B0080EE7D /* OVInputMethodController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVInputMethodController.m; sourceTree = "<group>"; };
+		6ABBAF1F15CD615B0080EE7D /* OVInputSourceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVInputSourceHelper.h; sourceTree = "<group>"; };
+		6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVInputSourceHelper.m; sourceTree = "<group>"; };
+		6ABBAF2515CD617D0080EE7D /* OpenVanilla-App.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "OpenVanilla-App.icns"; path = "Images/OpenVanilla-App.icns"; sourceTree = SOURCE_ROOT; };
+		6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "OpenVanilla-InputMenu.tiff"; path = "Images/OpenVanilla-InputMenu.tiff"; sourceTree = SOURCE_ROOT; };
+		6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = System/Library/Frameworks/InputMethodKit.framework; sourceTree = SDKROOT; };
+		6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,7 +53,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ABBAF2C15CD61BE0080EE7D /* Carbon.framework in Frameworks */,
 				6ABBAEF515CD58F90080EE7D /* Cocoa.framework in Frameworks */,
+				6ABBAF2A15CD61B60080EE7D /* InputMethodKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,7 +65,9 @@
 		6ABBAEE515CD58F90080EE7D = {
 			isa = PBXGroup;
 			children = (
-				6ABBAEFA15CD58F90080EE7D /* OpenVanilla */,
+				6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */,
+				6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */,
+				6ABBAEFA15CD58F90080EE7D /* InputMethod Application */,
 				6ABBAEF315CD58F90080EE7D /* Frameworks */,
 				6ABBAEF115CD58F90080EE7D /* Products */,
 			);
@@ -79,15 +100,22 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		6ABBAEFA15CD58F90080EE7D /* OpenVanilla */ = {
+		6ABBAEFA15CD58F90080EE7D /* InputMethod Application */ = {
 			isa = PBXGroup;
 			children = (
 				6ABBAF0615CD58F90080EE7D /* OVAppDelegate.h */,
 				6ABBAF0715CD58F90080EE7D /* OVAppDelegate.m */,
+				6ABBAF1B15CD615B0080EE7D /* OVConstants.h */,
+				6ABBAF1C15CD615B0080EE7D /* OVConstants.m */,
+				6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */,
+				6ABBAF1E15CD615B0080EE7D /* OVInputMethodController.m */,
+				6ABBAF1F15CD615B0080EE7D /* OVInputSourceHelper.h */,
+				6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.m */,
 				6ABBAF0915CD58F90080EE7D /* MainMenu.xib */,
+				6ABBAF2415CD61680080EE7D /* Resources */,
 				6ABBAEFB15CD58F90080EE7D /* Supporting Files */,
 			);
-			name = OpenVanilla;
+			name = "InputMethod Application";
 			path = Source/Mac;
 			sourceTree = "<group>";
 		};
@@ -103,6 +131,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6ABBAF2415CD61680080EE7D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6ABBAF2515CD617D0080EE7D /* OpenVanilla-App.icns */,
+				6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -113,6 +150,7 @@
 				6ABBAEEC15CD58F90080EE7D /* Sources */,
 				6ABBAEED15CD58F90080EE7D /* Frameworks */,
 				6ABBAEEE15CD58F90080EE7D /* Resources */,
+				6ABBAF3215CD62440080EE7D /* Install and Activate Input Method (Run Script) */,
 			);
 			buildRules = (
 			);
@@ -158,10 +196,29 @@
 				6ABBAEFF15CD58F90080EE7D /* InfoPlist.strings in Resources */,
 				6ABBAF0515CD58F90080EE7D /* Credits.rtf in Resources */,
 				6ABBAF0B15CD58F90080EE7D /* MainMenu.xib in Resources */,
+				6ABBAF2715CD617D0080EE7D /* OpenVanilla-App.icns in Resources */,
+				6ABBAF2815CD617D0080EE7D /* OpenVanilla-InputMenu.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6ABBAF3215CD62440080EE7D /* Install and Activate Input Method (Run Script) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Install and Activate Input Method (Run Script)";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "killall $EXECUTABLE_NAME\npwd\n# ls -l\n# rm -rf \"$HOME/Library/Input Methods/$FULL_PRODUCT_NAME\"\ncp -R $BUILT_PRODUCTS_DIR/$FULL_PRODUCT_NAME \"$HOME/Library/Input Methods/\"\n\"$HOME/Library/Input Methods/$EXECUTABLE_FOLDER_PATH/$EXECUTABLE_NAME\" install";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6ABBAEEC15CD58F90080EE7D /* Sources */ = {
@@ -170,6 +227,9 @@
 			files = (
 				6ABBAF0115CD58F90080EE7D /* main.m in Sources */,
 				6ABBAF0815CD58F90080EE7D /* OVAppDelegate.m in Sources */,
+				6ABBAF2115CD615B0080EE7D /* OVConstants.m in Sources */,
+				6ABBAF2215CD615B0080EE7D /* OVInputMethodController.m in Sources */,
+				6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

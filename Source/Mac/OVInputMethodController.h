@@ -1,8 +1,8 @@
 //
-// OVAppDelegate.m
+// OVInputMethodController.h
 //
 // Copyright (c) 2004-2012 Lukhnos Liu (lukhnos at openvanilla dot org)
-//
+// 
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -25,18 +25,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "OVAppDelegate.h"
+#import <Cocoa/Cocoa.h>
+#import <InputMethodKit/InputMethodKit.h>
 
-@implementation OVAppDelegate
-
-- (void)dealloc
-{
-    [super dealloc];
-}
-
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-    // Insert code here to initialize your application
-}
-
+@interface OVInputMethodController : IMKInputController
 @end

@@ -1,8 +1,8 @@
 //
-// OVAppDelegate.m
+// OVInputSourceHelper.h
 //
-// Copyright (c) 2004-2012 Lukhnos Liu (lukhnos at openvanilla dot org)
-//
+// Copyright (c) 2010-2011 Lukhnos D. Liu (lukhnos at openvanilla dot org)
+// 
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -25,18 +25,24 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "OVAppDelegate.h"
+#import <InputMethodKit/InputMethodKit.h>
 
-@implementation OVAppDelegate
+@interface OVInputSourceHelper : NSObject
+// list all installed input sources
++ (NSArray *)allInstalledInputSources;
 
-- (void)dealloc
-{
-    [super dealloc];
-}
+// search for a certain input source
++ (TISInputSourceRef)inputSourceForProperty:(CFStringRef)inPropertyKey stringValue:(NSString *)inValue;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-    // Insert code here to initialize your application
-}
+// shorthand for -inputSourceForProerty:kTISPropertyInputSourceID stringValue:<value>
++ (TISInputSourceRef)inputSourceForInputSourceID:(NSString *)inID;
 
+// enable/disable an input source (along with all its input modes)
++ (BOOL)inputSourceEnabled:(TISInputSourceRef)inInputSource;
++ (BOOL)enableInputSource:(TISInputSourceRef)inInputSource;
++ (BOOL)disableInputSource:(TISInputSourceRef)inInputSource;
+
+// register (i.e. make available to Input Source tab in Language & Text Preferences)
+// an input source installed in (~)/Library/Input Methods or (~)/Library/Keyboard Layouts/
++ (BOOL)registerInputSource:(NSURL *)inBundleURL;
 @end
