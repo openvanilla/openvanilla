@@ -20,14 +20,12 @@
 		6ABBAF2815CD617D0080EE7D /* OpenVanilla-InputMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */; };
 		6ABBAF2A15CD61B60080EE7D /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */; };
 		6ABBAF2C15CD61BE0080EE7D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */; };
+		6ABBAF6715CD6F8C0080EE7D /* OVFrameworkInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF6615CD6F8C0080EE7D /* OVFrameworkInfo.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ABBAEF415CD58F90080EE7D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		6ABBAEF715CD58F90080EE7D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		6ABBAEF815CD58F90080EE7D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		6ABBAEF915CD58F90080EE7D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6ABBAEFC15CD58F90080EE7D /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenVanilla-Info.plist"; sourceTree = "<group>"; };
 		6ABBAEFE15CD58F90080EE7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6ABBAF0015CD58F90080EE7D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -46,6 +44,39 @@
 		6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "OpenVanilla-InputMenu.tiff"; path = "Images/OpenVanilla-InputMenu.tiff"; sourceTree = SOURCE_ROOT; };
 		6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = System/Library/Frameworks/InputMethodKit.framework; sourceTree = SDKROOT; };
 		6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		6ABBAF4515CD6F8C0080EE7D /* OpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenVanilla.h; sourceTree = "<group>"; };
+		6ABBAF4615CD6F8C0080EE7D /* OVAroundFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVAroundFilter.h; sourceTree = "<group>"; };
+		6ABBAF4715CD6F8C0080EE7D /* OVBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVBase.h; sourceTree = "<group>"; };
+		6ABBAF4815CD6F8C0080EE7D /* OVBenchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVBenchmark.h; sourceTree = "<group>"; };
+		6ABBAF4915CD6F8C0080EE7D /* OVCandidateService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCandidateService.h; sourceTree = "<group>"; };
+		6ABBAF4A15CD6F8C0080EE7D /* OVCINDatabaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCINDatabaseService.h; sourceTree = "<group>"; };
+		6ABBAF4B15CD6F8C0080EE7D /* OVCINDataTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCINDataTable.h; sourceTree = "<group>"; };
+		6ABBAF4C15CD6F8C0080EE7D /* OVCINToSQLiteConvertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCINToSQLiteConvertor.h; sourceTree = "<group>"; };
+		6ABBAF4D15CD6F8C0080EE7D /* OVDatabaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVDatabaseService.h; sourceTree = "<group>"; };
+		6ABBAF4E15CD6F8C0080EE7D /* OVDateTimeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVDateTimeHelper.h; sourceTree = "<group>"; };
+		6ABBAF4F15CD6F8C0080EE7D /* OVEncodingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVEncodingService.h; sourceTree = "<group>"; };
+		6ABBAF5015CD6F8C0080EE7D /* OVEventHandlingContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVEventHandlingContext.h; sourceTree = "<group>"; };
+		6ABBAF5115CD6F8C0080EE7D /* OVException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVException.h; sourceTree = "<group>"; };
+		6ABBAF5215CD6F8C0080EE7D /* OVFileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVFileHelper.h; sourceTree = "<group>"; };
+		6ABBAF5315CD6F8C0080EE7D /* OVFrameworkInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVFrameworkInfo.h; sourceTree = "<group>"; };
+		6ABBAF5415CD6F8C0080EE7D /* OVInputMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVInputMethod.h; sourceTree = "<group>"; };
+		6ABBAF5515CD6F8C0080EE7D /* OVKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVKey.h; sourceTree = "<group>"; };
+		6ABBAF5615CD6F8C0080EE7D /* OVKeyPreprocessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVKeyPreprocessor.h; sourceTree = "<group>"; };
+		6ABBAF5715CD6F8C0080EE7D /* OVKeyValueMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVKeyValueMap.h; sourceTree = "<group>"; };
+		6ABBAF5815CD6F8C0080EE7D /* OVLoaderBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLoaderBase.h; sourceTree = "<group>"; };
+		6ABBAF5915CD6F8C0080EE7D /* OVLoaderService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLoaderService.h; sourceTree = "<group>"; };
+		6ABBAF5A15CD6F8C0080EE7D /* OVLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLocalization.h; sourceTree = "<group>"; };
+		6ABBAF5B15CD6F8C0080EE7D /* OVModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVModule.h; sourceTree = "<group>"; };
+		6ABBAF5C15CD6F8C0080EE7D /* OVModulePackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVModulePackage.h; sourceTree = "<group>"; };
+		6ABBAF5D15CD6F8C0080EE7D /* OVOutputFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVOutputFilter.h; sourceTree = "<group>"; };
+		6ABBAF5E15CD6F8C0080EE7D /* OVPathInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVPathInfo.h; sourceTree = "<group>"; };
+		6ABBAF5F15CD6F8C0080EE7D /* OVSQLiteDatabaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVSQLiteDatabaseService.h; sourceTree = "<group>"; };
+		6ABBAF6015CD6F8C0080EE7D /* OVSQLiteWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVSQLiteWrapper.h; sourceTree = "<group>"; };
+		6ABBAF6115CD6F8C0080EE7D /* OVStringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVStringHelper.h; sourceTree = "<group>"; };
+		6ABBAF6215CD6F8C0080EE7D /* OVTextBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTextBuffer.h; sourceTree = "<group>"; };
+		6ABBAF6315CD6F8C0080EE7D /* OVUTF8Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUTF8Helper.h; sourceTree = "<group>"; };
+		6ABBAF6415CD6F8C0080EE7D /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVWildcard.h; sourceTree = "<group>"; };
+		6ABBAF6615CD6F8C0080EE7D /* OVFrameworkInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVFrameworkInfo.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +96,8 @@
 		6ABBAEE515CD58F90080EE7D = {
 			isa = PBXGroup;
 			children = (
-				6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */,
-				6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */,
 				6ABBAEFA15CD58F90080EE7D /* InputMethod Application */,
+				6ABBAF4315CD6F760080EE7D /* OpenVanilla Framework */,
 				6ABBAEF315CD58F90080EE7D /* Frameworks */,
 				6ABBAEF115CD58F90080EE7D /* Products */,
 			);
@@ -84,20 +114,11 @@
 		6ABBAEF315CD58F90080EE7D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */,
 				6ABBAEF415CD58F90080EE7D /* Cocoa.framework */,
-				6ABBAEF615CD58F90080EE7D /* Other Frameworks */,
+				6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		6ABBAEF615CD58F90080EE7D /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6ABBAEF715CD58F90080EE7D /* AppKit.framework */,
-				6ABBAEF815CD58F90080EE7D /* CoreData.framework */,
-				6ABBAEF915CD58F90080EE7D /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		6ABBAEFA15CD58F90080EE7D /* InputMethod Application */ = {
@@ -138,6 +159,63 @@
 				6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		6ABBAF4315CD6F760080EE7D /* OpenVanilla Framework */ = {
+			isa = PBXGroup;
+			children = (
+				6ABBAF4415CD6F8C0080EE7D /* Headers */,
+				6ABBAF6515CD6F8C0080EE7D /* Source */,
+			);
+			name = "OpenVanilla Framework";
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		6ABBAF4415CD6F8C0080EE7D /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				6ABBAF4515CD6F8C0080EE7D /* OpenVanilla.h */,
+				6ABBAF4615CD6F8C0080EE7D /* OVAroundFilter.h */,
+				6ABBAF4715CD6F8C0080EE7D /* OVBase.h */,
+				6ABBAF4815CD6F8C0080EE7D /* OVBenchmark.h */,
+				6ABBAF4915CD6F8C0080EE7D /* OVCandidateService.h */,
+				6ABBAF4A15CD6F8C0080EE7D /* OVCINDatabaseService.h */,
+				6ABBAF4B15CD6F8C0080EE7D /* OVCINDataTable.h */,
+				6ABBAF4C15CD6F8C0080EE7D /* OVCINToSQLiteConvertor.h */,
+				6ABBAF4D15CD6F8C0080EE7D /* OVDatabaseService.h */,
+				6ABBAF4E15CD6F8C0080EE7D /* OVDateTimeHelper.h */,
+				6ABBAF4F15CD6F8C0080EE7D /* OVEncodingService.h */,
+				6ABBAF5015CD6F8C0080EE7D /* OVEventHandlingContext.h */,
+				6ABBAF5115CD6F8C0080EE7D /* OVException.h */,
+				6ABBAF5215CD6F8C0080EE7D /* OVFileHelper.h */,
+				6ABBAF5315CD6F8C0080EE7D /* OVFrameworkInfo.h */,
+				6ABBAF5415CD6F8C0080EE7D /* OVInputMethod.h */,
+				6ABBAF5515CD6F8C0080EE7D /* OVKey.h */,
+				6ABBAF5615CD6F8C0080EE7D /* OVKeyPreprocessor.h */,
+				6ABBAF5715CD6F8C0080EE7D /* OVKeyValueMap.h */,
+				6ABBAF5815CD6F8C0080EE7D /* OVLoaderBase.h */,
+				6ABBAF5915CD6F8C0080EE7D /* OVLoaderService.h */,
+				6ABBAF5A15CD6F8C0080EE7D /* OVLocalization.h */,
+				6ABBAF5B15CD6F8C0080EE7D /* OVModule.h */,
+				6ABBAF5C15CD6F8C0080EE7D /* OVModulePackage.h */,
+				6ABBAF5D15CD6F8C0080EE7D /* OVOutputFilter.h */,
+				6ABBAF5E15CD6F8C0080EE7D /* OVPathInfo.h */,
+				6ABBAF5F15CD6F8C0080EE7D /* OVSQLiteDatabaseService.h */,
+				6ABBAF6015CD6F8C0080EE7D /* OVSQLiteWrapper.h */,
+				6ABBAF6115CD6F8C0080EE7D /* OVStringHelper.h */,
+				6ABBAF6215CD6F8C0080EE7D /* OVTextBuffer.h */,
+				6ABBAF6315CD6F8C0080EE7D /* OVUTF8Helper.h */,
+				6ABBAF6415CD6F8C0080EE7D /* OVWildcard.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		6ABBAF6515CD6F8C0080EE7D /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				6ABBAF6615CD6F8C0080EE7D /* OVFrameworkInfo.cpp */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,6 +308,7 @@
 				6ABBAF2115CD615B0080EE7D /* OVConstants.m in Sources */,
 				6ABBAF2215CD615B0080EE7D /* OVInputMethodController.m in Sources */,
 				6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.m in Sources */,
+				6ABBAF6715CD6F8C0080EE7D /* OVFrameworkInfo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
