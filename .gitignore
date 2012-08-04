@@ -1,3 +1,16 @@
+# Xcode and Mac files
+*.mode1v3
+*.pbxuser
+*.tm_build_errors
+*.xcworkspace
+*.perspectivev3
+.DS_Store
+xcuserdata
+build
+*.pkg
+*.dmg
+
+# Visual Studio files
 *.suo
 *.ncb
 Debug
@@ -7,12 +20,6 @@ debug
 release
 obj
 x64
-build
-*.pbxuser
-*.mode1v3
-*.tm_build_errors
-*.perspectivev3
-.DS_Store
+
+# Misc
 ._*
-*.pkg
-*.dmg
