@@ -28,11 +28,7 @@
 #ifndef OVException_h
 #define OVException_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVBase.h>
-#else
-    #include "OVBase.h"
-#endif
+#include "OVBase.h"
 
 namespace OpenVanilla {
     using namespace std;

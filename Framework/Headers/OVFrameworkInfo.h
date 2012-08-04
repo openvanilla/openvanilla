@@ -28,11 +28,7 @@
 #ifndef OVFrameworkVersion_h
 #define OVFrameworkVersion_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVBase.h>
-#else
-    #include "OVBase.h"
-#endif
+#include "OVBase.h"
 
 #include <sstream>
 

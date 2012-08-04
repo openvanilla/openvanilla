@@ -28,15 +28,9 @@
 #ifndef OVCandidateService_h
 #define OVCandidateService_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVBase.h>
-    #include <OpenVanilla/OVKey.h>
-    #include <OpenVanilla/OVLoaderService.h>
-#else
-    #include "OVBase.h"
-    #include "OVKey.h"
-    #include "OVLoaderService.h"
-#endif
+#include "OVBase.h"
+#include "OVKey.h"
+#include "OVLoaderService.h"
 
 namespace OpenVanilla {
     using namespace std;

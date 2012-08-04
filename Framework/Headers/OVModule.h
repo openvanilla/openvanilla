@@ -28,15 +28,9 @@
 #ifndef OVModule_h
 #define OVModule_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVEventHandlingContext.h>
-    #include <OpenVanilla/OVKeyValueMap.h>
-    #include <OpenVanilla/OVPathInfo.h>
-#else
-    #include "OVEventHandlingContext.h"
-    #include "OVKeyValueMap.h"
-    #include "OVPathInfo.h"
-#endif
+#include "OVEventHandlingContext.h"
+#include "OVKeyValueMap.h"
+#include "OVPathInfo.h"
 
 namespace OpenVanilla {
     using namespace std;

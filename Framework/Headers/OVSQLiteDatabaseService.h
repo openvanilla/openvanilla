@@ -28,15 +28,9 @@
 #ifndef OVSQLiteDatabaseService_h
 #define OVSQLiteDatabaseService_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVDatabaseService.h>
-    #include <OpenVanilla/OVSQLiteWrapper.h>
-	#include <OpenVanilla/OVWildcard.h>
-#else
-    #include "OVDatabaseService.h"
-    #include "OVSQLiteWrapper.h"
-	#include "OVWildcard.h"
-#endif
+#include "OVDatabaseService.h"
+#include "OVSQLiteWrapper.h"
+#include "OVWildcard.h"
 
 namespace OpenVanilla {
     using namespace std;

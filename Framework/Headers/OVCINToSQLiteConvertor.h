@@ -28,13 +28,8 @@
 #ifndef OVCINToSQLiteConvertor_h
 #define OVCINToSQLiteConvertor_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVCINDataTable.h>
-    #include <OpenVanilla/OVSQLiteWrapper.h>
-#else
-    #include "OVCINDataTable.h"
-    #include "OVSQLiteWrapper.h"
-#endif
+#include "OVCINDataTable.h"
+#include "OVSQLiteWrapper.h"
 
 namespace OpenVanilla {
     using namespace std;

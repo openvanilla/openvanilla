@@ -28,11 +28,7 @@
 #ifndef OVPathInfo_h
 #define OVPathInfo_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVFileHelper.h>
-#else
-    #include "OVFileHelper.h"
-#endif
+#include "OVFileHelper.h"
 
 namespace OpenVanilla {
     using namespace std;

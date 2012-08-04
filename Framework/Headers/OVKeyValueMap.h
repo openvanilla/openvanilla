@@ -28,11 +28,7 @@
 #ifndef OVKeyValueMap_h
 #define OVKeyValueMap_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVBase.h>
-#else
-    #include "OVBase.h"
-#endif
+#include "OVBase.h"
 
 #include <sstream>
 

@@ -28,13 +28,8 @@
 #ifndef OVCINDatabaseService_h
 #define OVCINDatabaseService_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVCINDataTable.h>
-    #include <OpenVanilla/OVDatabaseService.h>    
-#else
-    #include "OVCINDataTable.h"
-    #include "OVDatabaseService.h"
-#endif
+#include "OVCINDataTable.h"
+#include "OVDatabaseService.h"
 
 namespace OpenVanilla {
     using namespace std;

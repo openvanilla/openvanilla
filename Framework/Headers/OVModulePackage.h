@@ -28,13 +28,8 @@
 #ifndef OVModulePackage_h
 #define OVModulePackage_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVFrameworkInfo.h>
-    #include <OpenVanilla/OVModule.h>
-#else
-    #include "OVFrameworkInfo.h"
-    #include "OVModule.h"
-#endif
+#include "OVFrameworkInfo.h"
+#include "OVModule.h"
 
 #ifdef WIN32
 	#define OVEXPORT __declspec(dllexport)

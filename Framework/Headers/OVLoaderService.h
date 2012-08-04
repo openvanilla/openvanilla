@@ -28,17 +28,10 @@
 #ifndef OVLoaderService_h
 #define OVLoaderService_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVBase.h>
-    #include <OpenVanilla/OVDatabaseService.h>
-    #include <OpenVanilla/OVEncodingService.h>
-    #include <OpenVanilla/OVKey.h>
-#else
-    #include "OVBase.h"
-    #include "OVDatabaseService.h"
-    #include "OVEncodingService.h"
-    #include "OVKey.h"
-#endif
+#include "OVBase.h"
+#include "OVDatabaseService.h"
+#include "OVEncodingService.h"
+#include "OVKey.h"
 
 #include <iostream>
 #include <sstream>

@@ -28,11 +28,7 @@
 #ifndef OVEncodingService_h
 #define OVEncodingService_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVUTF8Helper.h>
-#else
-    #include "OVUTF8Helper.h"
-#endif
+#include "OVUTF8Helper.h"
 
 namespace OpenVanilla {
     using namespace std;

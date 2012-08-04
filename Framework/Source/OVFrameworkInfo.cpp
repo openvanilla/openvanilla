@@ -25,11 +25,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OpenVanilla.h>
-#else
-    #include "OpenVanilla.h"
-#endif
+#include "OpenVanilla.h"
 
 namespace OpenVanilla {
 const unsigned int OVFrameworkInfo::c_MajorVersion = 1;

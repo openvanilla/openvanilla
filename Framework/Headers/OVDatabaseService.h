@@ -28,17 +28,10 @@
 #ifndef OVDatabaseService_h
 #define OVDatabaseService_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVBase.h>
-    #include <OpenVanilla/OVCINDataTable.h>
-    #include <OpenVanilla/OVFileHelper.h>
-    #include <OpenVanilla/OVWildcard.h>
-#else
-    #include "OVBase.h"
-    #include "OVCINDataTable.h"
-    #include "OVFileHelper.h"
-    #include "OVWildcard.h"
-#endif
+#include "OVBase.h"
+#include "OVCINDataTable.h"
+#include "OVFileHelper.h"
+#include "OVWildcard.h"
 
 #include <map>
 

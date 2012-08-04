@@ -28,21 +28,12 @@
 #ifndef OVEventHandlingContext_h
 #define OVEventHandlingContext_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVBase.h>
-    #include <OpenVanilla/OVCandidateService.h>
-    #include <OpenVanilla/OVStringHelper.h>
-    #include <OpenVanilla/OVTextBuffer.h>
-    #include <OpenVanilla/OVKey.h>
-    #include <OpenVanilla/OVLoaderService.h>
-#else
-    #include "OVBase.h"
-    #include "OVCandidateService.h"
-    #include "OVStringHelper.h"
-    #include "OVTextBuffer.h"
-    #include "OVKey.h"
-    #include "OVLoaderService.h"
-#endif
+#include "OVBase.h"
+#include "OVCandidateService.h"
+#include "OVStringHelper.h"
+#include "OVTextBuffer.h"
+#include "OVKey.h"
+#include "OVLoaderService.h"
 
 namespace OpenVanilla {
     using namespace std;

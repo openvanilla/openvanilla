@@ -28,11 +28,7 @@
 #ifndef OVLoaderBase_h
 #define OVLoaderBase_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVModule.h>
-#else
-    #include "OVModule.h"
-#endif
+#include "OVModule.h"
 
 namespace OpenVanilla {
     using namespace std;

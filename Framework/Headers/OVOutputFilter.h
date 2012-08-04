@@ -28,11 +28,7 @@
 #ifndef OVOutputFilter_h
 #define OVOutputFilter_h
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OVModule.h>
-#else
-    #include "OVModule.h"
-#endif
+#include "OVModule.h"
 
 namespace OpenVanilla {
     using namespace std;

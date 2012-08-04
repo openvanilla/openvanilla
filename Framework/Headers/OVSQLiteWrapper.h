@@ -30,11 +30,7 @@
 
 #include <sqlite3.h>
 
-#if defined(__APPLE__)
-    #include <OpenVanilla/OpenVanilla.h>
-#else
-    #include "OpenVanilla.h"
-#endif
+#include "OpenVanilla.h"
 
 // For status codes (SQLITE_OK, SQLITE_ERROR, etc.), please refer to sqlite3.h
 
