@@ -28,6 +28,9 @@
 #ifndef OVKey_h
 #define OVKey_h
 
+#include <string>
+#include "OVBase.h"
+
 namespace OpenVanilla {
     using namespace std;
     
