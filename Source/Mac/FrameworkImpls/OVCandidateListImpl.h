@@ -1,5 +1,5 @@
 //
-// OVConcreteKeyImpl.mm
+// OVCandidateListImpl.h
 //
 // Copyright (c) 2004-2012 Lukhnos Liu (lukhnos at openvanilla dot org)
 //
@@ -25,45 +25,28 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "OVLoaderServiceImpl.h"
-#import <Cocoa/Cocoa.h>
-#import "OVConcreteKeyImpl.h"
+#import <Foundation/Foundation.h>
+#import <string>
+#import <vector>
+#import "OpenVanilla.h"
 
-using namespace OpenVanilla;
+namespace OpenVanilla {
+    using namespace std;
 
-void OVLoaderServiceImpl::beep()
-{
-    NSBeep();
-}
+    class OVCandidateListImpl : public OVCandidateList {
+    public:
+        OVCandidateListImpl();
+        ~OVCandidateListImpl();
+        virtual void clear();
+        virtual size_t size() const;
+        virtual string candidateAtIndex(size_t index) const;
+        virtual NSString *candidateAtIndex(size_t index);
+        virtual void setCandidate(size_t index, const string& candidate);
+        virtual void setCandidates(const vector<string>& candidates);
+        virtual void addCandidate(const string& candidate);
+        virtual void addCandidates(const vector<string>& candidates);
 
-const string OVLoaderServiceImpl::locale() const
-{
-    return "en";
-}
-
-const OVKey OVLoaderServiceImpl::makeOVKey(int characterCode, bool alt, bool opt, bool ctrl, bool shift, bool command, bool capsLock, bool numLock)
-{
-    OVConcreteKeyImpl keyImpl(characterCode, alt, opt, ctrl, shift, command, capsLock, numLock);
-    return OVKey(&keyImpl);
-}
-
-const OVKey OVLoaderServiceImpl::makeOVKey(const string& receivedString, bool alt, bool opt, bool ctrl, bool shift, bool command, bool capsLock, bool numLock)
-{
-    OVConcreteKeyImpl keyImpl(receivedString, alt, opt, ctrl, shift, command, capsLock, numLock);
-    return OVKey(&keyImpl);
-}
-
-ostream& OVLoaderServiceImpl::logger(const string& sectionName)
-{
-    return cerr;
-}
-
-OVDatabaseService* OVLoaderServiceImpl::defaultDatabaseService()
-{
-    return 0;
-}
-
-OVDatabaseService* OVLoaderServiceImpl::CINDatabaseService()
-{
-    return 0;
-}
+    protected:
+        NSMutableArray *m_array;
+    };
+};
