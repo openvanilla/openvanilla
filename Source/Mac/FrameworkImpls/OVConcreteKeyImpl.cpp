@@ -32,35 +32,38 @@ using namespace OpenVanilla;
 #import "OVKey.h"
 
 OVConcreteKeyImpl::OVConcreteKeyImpl()
-  : m_characterCode(0)
-  , m_opt(false)
-  , m_ctrl(false)
-  , m_shift(false)
-  , m_command(false)
-  , m_numLock(false)
-  , m_capsLock(false)
+    : m_characterCode(0)
+    , m_opt(false)
+    , m_ctrl(false)
+    , m_shift(false)
+    , m_command(false)
+    , m_numLock(false)
+    , m_capsLock(false)
 {
 }
 
 OVConcreteKeyImpl::OVConcreteKeyImpl(int characterCode, bool alt, bool opt, bool ctrl, bool shift, bool command, bool capsLock, bool numLock)
-  : m_characterCode(characterCode)
-  , m_opt(alt || opt)
-  , m_ctrl(ctrl)
-  , m_shift(shift)
-  , m_command(command)
-  , m_numLock(numLock)
-  , m_capsLock(capsLock)
+    : m_characterCode(characterCode)
+    , m_opt(alt || opt)
+    , m_ctrl(ctrl)
+    , m_shift(shift)
+    , m_command(command)
+    , m_numLock(numLock)
+    , m_capsLock(capsLock)
 {
+    if (isprint(characterCode)) {
+        m_receivedString = string(1, (char)characterCode);
+    }
 }
 
 OVConcreteKeyImpl::OVConcreteKeyImpl(const std::string& receivedString, bool alt, bool opt, bool ctrl, bool shift, bool command, bool capsLock, bool numLock)
-  : m_receivedString(receivedString)
-  , m_opt(alt || opt)
-  , m_ctrl(ctrl)
-  , m_shift(shift)
-  , m_command(command)
-  , m_numLock(numLock)
-  , m_capsLock(capsLock)
+    : m_receivedString(receivedString)
+    , m_opt(alt || opt)
+    , m_ctrl(ctrl)
+    , m_shift(shift)
+    , m_command(command)
+    , m_numLock(numLock)
+    , m_capsLock(capsLock)
 {
     uint8_t c = 0;
     if (receivedString.size()) {

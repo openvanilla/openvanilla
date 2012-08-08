@@ -50,6 +50,7 @@ namespace OpenVanilla {
 
         virtual bool shouldDelete() const;
         virtual OVKeyImpl* copy();
+
     protected:
         int m_characterCode;
         std::string m_receivedString;
