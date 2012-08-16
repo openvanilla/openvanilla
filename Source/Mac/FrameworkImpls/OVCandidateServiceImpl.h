@@ -34,6 +34,8 @@ namespace OpenVanilla {
         virtual OVOneDimensionalCandidatePanel* useHorizontalCandidatePanel();
         virtual OVOneDimensionalCandidatePanel* useVerticalCandidatePanel();
 
+        virtual OVOneDimensionalCandidatePanelImpl* currentCandidatePanel();
+
     protected:
         OVOneDimensionalCandidatePanelImpl m_horizontalCandidatePanel;
         OVOneDimensionalCandidatePanelImpl m_verticalCandidatePanel;

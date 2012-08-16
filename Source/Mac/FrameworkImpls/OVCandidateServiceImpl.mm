@@ -46,3 +46,9 @@ OVOneDimensionalCandidatePanel* OVCandidateServiceImpl::useVerticalCandidatePane
 {
     return &m_verticalCandidatePanel;
 }
+
+OVOneDimensionalCandidatePanelImpl* OVCandidateServiceImpl::currentCandidatePanel()
+{
+    return &m_verticalCandidatePanel;
+}
+
