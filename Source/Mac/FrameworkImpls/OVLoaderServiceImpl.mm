@@ -43,27 +43,15 @@ const string OVLoaderServiceImpl::locale() const
 
 const OVKey OVLoaderServiceImpl::makeOVKey(int characterCode, bool alt, bool opt, bool ctrl, bool shift, bool command, bool capsLock, bool numLock)
 {
-    OVConcreteKeyImpl keyImpl(characterCode, alt, opt, ctrl, shift, command, capsLock, numLock);
-    return OVKey(&keyImpl);
+    return OVKey(new OVConcreteKeyImpl (characterCode, alt, opt, ctrl, shift, command, capsLock, numLock));
 }
 
 const OVKey OVLoaderServiceImpl::makeOVKey(const string& receivedString, bool alt, bool opt, bool ctrl, bool shift, bool command, bool capsLock, bool numLock)
 {
-    OVConcreteKeyImpl keyImpl(receivedString, alt, opt, ctrl, shift, command, capsLock, numLock);
-    return OVKey(&keyImpl);
+    return OVKey(new OVConcreteKeyImpl(receivedString, alt, opt, ctrl, shift, command, capsLock, numLock));
 }
 
 ostream& OVLoaderServiceImpl::logger(const string& sectionName)
 {
     return cerr;
-}
-
-OVDatabaseService* OVLoaderServiceImpl::defaultDatabaseService()
-{
-    return 0;
-}
-
-OVDatabaseService* OVLoaderServiceImpl::CINDatabaseService()
-{
-    return 0;
 }

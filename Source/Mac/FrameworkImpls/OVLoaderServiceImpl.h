@@ -43,8 +43,8 @@ namespace OpenVanilla {
 
         virtual ostream& logger(const string& sectionName = "");
 
-        virtual OVDatabaseService* defaultDatabaseService();
-        virtual OVDatabaseService* CINDatabaseService();
+        virtual OVDatabaseService* defaultDatabaseService() { return 0; }
+        virtual OVDatabaseService* CINDatabaseService() { return 0; }
         virtual OVDatabaseService* SQLiteDatabaseService() { return 0; }
 
         virtual OVEncodingService* encodingService() { return 0; }
