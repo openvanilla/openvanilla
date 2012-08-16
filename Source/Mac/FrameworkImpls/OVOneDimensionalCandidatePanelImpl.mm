@@ -35,6 +35,21 @@ NSString *const OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification
 NSString *const OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey = @"OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey";
 NSString *const OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey = @"OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey";
 
+static bool IsKeyInList(const OVKey* key, OVKeyVector list, size_t* outIndex = 0)
+{
+    size_t index = 0;
+    for (OVKeyVector::const_iterator i = list.begin(), e = list.end(); i != e; ++i, ++index) {
+        if (*key == *i) {
+            if (outIndex) {
+                *outIndex = index;
+            }
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 @interface OVOneDimensionalCandidatePanelImplDelegate : NSObject <VTCandidateControllerDelegate>
 {
     OVCandidateListImpl *_candidateList;
@@ -74,6 +89,8 @@ NSString *const OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey = @
 
 
 OVOneDimensionalCandidatePanelImpl::OVOneDimensionalCandidatePanelImpl(Class panelClass, OVLoaderService* loaderService)
+    : m_inControl(false)
+    , m_visible(false)
 {
     m_candidateController = [[panelClass alloc] init];
     m_candidateDelegate = [[OVOneDimensionalCandidatePanelImplDelegate alloc] initWithCandidateList:&m_candidateList];
@@ -123,12 +140,12 @@ OVOneDimensionalCandidatePanelImpl::~OVOneDimensionalCandidatePanelImpl()
 
 void OVOneDimensionalCandidatePanelImpl::hide()
 {
-    m_candidateController.visible = NO;
+    m_visible = false;
 }
 
 void OVOneDimensionalCandidatePanelImpl::show()
 {
-    m_candidateController.visible = YES;
+    m_visible = true;
 }
 
 void OVOneDimensionalCandidatePanelImpl::updateDisplay()
@@ -138,7 +155,7 @@ void OVOneDimensionalCandidatePanelImpl::updateDisplay()
 
 bool OVOneDimensionalCandidatePanelImpl::isVisible()
 {
-    return m_candidateController.visible;
+    return m_visible;
 }
 
 void OVOneDimensionalCandidatePanelImpl::setPrompt(const string& prompt)
@@ -320,7 +337,7 @@ void OVOneDimensionalCandidatePanelImpl::setCandidateKeys(const OVKeyVector& key
     for (OVKeyVector::const_iterator i = keys.begin(), e = keys.end(); i != e; ++i) {
         [labels addObject:[NSString stringWithUTF8String:(*i).receivedString().c_str()]];
     }
-    
+
     m_candidateController.keyLabels = labels;
 }
 
@@ -388,3 +405,100 @@ const OVKeyVector OVOneDimensionalCandidatePanelImpl::defaultChooseHighlightedCa
 {
     return m_defaultChooseHighlightedCandidateKeys;
 }
+
+bool OVOneDimensionalCandidatePanelImpl::isInControl() const
+{
+    return m_inControl;
+}
+
+OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePanelImpl::handleKey(OVKey* key)
+{
+    size_t selectedCandidateKeyIndex;
+
+    if (IsKeyInList(key, m_candidateKeys, &selectedCandidateKeyIndex)) {
+        if (selectedCandidateKeyIndex >= currentPageCandidateCount()) {
+            return Invalid;
+        }
+
+        hide();
+        m_inControl = false;
+        setHighlightIndex(selectedCandidateKeyIndex);
+        return CandidateSelected;
+    }
+    else if (IsKeyInList(key, m_chooseHighlightedCandidateKeys)) {
+        hide();
+        m_inControl = false;
+        return CandidateSelected;
+    }
+    else if (IsKeyInList(key, m_cancelKeys)) {
+        hide();
+        m_inControl = false;
+        return Canceled;
+    }
+    else if (IsKeyInList(key, m_nextPageKeys)) {
+        size_t index = currentHightlightIndexInCandidateList();
+        size_t lastIndex = m_candidateList.size();
+        if (lastIndex) {
+            lastIndex--;
+        }
+        size_t clampedIndex = min(index + candidatesPerPage(), lastIndex);
+        if (index == clampedIndex) {
+            return Invalid;
+        }
+        
+        m_candidateController.selectedCandidateIndex = (NSUInteger)clampedIndex;
+        return Handled;
+    }
+    else if (IsKeyInList(key, m_nextCandidateKeys)) {
+        size_t index = currentHightlightIndexInCandidateList();
+        size_t lastIndex = m_candidateList.size();
+        if (lastIndex) {
+            lastIndex--;
+        }
+        size_t clampedIndex = min(index + 1, lastIndex);
+        m_candidateController.selectedCandidateIndex = (NSUInteger)clampedIndex;
+        return Handled;        
+    }
+    else if (IsKeyInList(key, m_previousPageKeys)) {
+        size_t index = currentHightlightIndexInCandidateList();
+        if (!index) {
+            return Invalid;
+        }
+        
+        size_t cpp = candidatesPerPage();
+        if (index > cpp) {
+            index -= cpp;
+        }
+        else {
+            index = 0;            
+        }
+        
+        m_candidateController.selectedCandidateIndex = (NSUInteger)index;
+        return Handled;
+    }
+    else if (IsKeyInList(key, m_previousCandidateKeys)) {
+        size_t index = currentHightlightIndexInCandidateList();
+        if (!index) {
+            return Invalid;
+        }
+        
+        index--;
+        m_candidateController.selectedCandidateIndex = (NSUInteger)index;
+        return Handled;
+    }
+    
+    return NonCandidatePanelKeyReceived;
+}
+
+void OVOneDimensionalCandidatePanelImpl::setPanelOrigin(NSPoint origin)
+{
+    m_candidateController.windowTopLeftPoint = origin;
+}
+
+void OVOneDimensionalCandidatePanelImpl::updateVisibility()
+{
+    if (m_candidateController.visible != m_visible) {
+        m_candidateController.visible = m_visible;
+    }
+}
+

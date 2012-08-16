@@ -44,8 +44,8 @@ namespace OpenVanilla {
         virtual void show();
         virtual void updateDisplay();
         virtual bool isVisible();        
-    	virtual void setPrompt(const string& prompt);
-    	virtual string prompt();
+        virtual void setPrompt(const string& prompt);
+        virtual string prompt();
         virtual bool yieldToCandidateEventHandler();
         virtual void cancelEventHandler();
         virtual void reset();
@@ -88,9 +88,23 @@ namespace OpenVanilla {
         virtual const OVKeyVector defaultCancelKeys() const;
         virtual const OVKeyVector defaultChooseHighlightedCandidateKeys() const;
         
+        enum KeyHandlerResult {
+            Handled,
+            CandidateSelected,
+            Canceled,
+            NonCandidatePanelKeyReceived,
+            Invalid
+        };
+
+        virtual bool isInControl() const;        
+        virtual KeyHandlerResult handleKey(OVKey* key);
+        virtual void setPanelOrigin(NSPoint origin);
+        virtual void updateVisibility();
+
     protected:
         OVCandidateListImpl m_candidateList;
         bool m_inControl;
+        bool m_visible;
         VTCandidateController *m_candidateController;
         NSObject<VTCandidateControllerDelegate> *m_candidateDelegate;
 
