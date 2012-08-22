@@ -1,0 +1,341 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6AC45DD81524121000C5E259 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5C389515227A81000657BC /* Cocoa.framework */; };
+		6AC45DDE1524121100C5E259 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AC45DDC1524121100C5E259 /* InfoPlist.strings */; };
+		6AC45DE01524121100C5E259 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC45DDF1524121100C5E259 /* main.m */; };
+		6AC45DE41524121100C5E259 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6AC45DE21524121100C5E259 /* Credits.rtf */; };
+		6AC45DE71524121100C5E259 /* VTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC45DE61524121100C5E259 /* VTAppDelegate.m */; };
+		6AC45DEA1524121100C5E259 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AC45DE81524121100C5E259 /* MainMenu.xib */; };
+		6AC45DFE152412A200C5E259 /* VTHorizontalCandidateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3307D015238D5F00118E65 /* VTHorizontalCandidateController.m */; };
+		6AC45DFF152412A200C5E259 /* VTHorizontalCandidateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3307D215238D5F00118E65 /* VTHorizontalCandidateView.m */; };
+		6AC45E00152412A200C5E259 /* VTVerticalCandidateTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3307C01522A82200118E65 /* VTVerticalCandidateTableView.m */; };
+		6AC45E01152412A200C5E259 /* VTVerticalKeyLabelStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5C38C6152294EA000657BC /* VTVerticalKeyLabelStripView.m */; };
+		6AC45E02152412A200C5E259 /* VTVerticalCandidateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5C38B615227BD4000657BC /* VTVerticalCandidateController.m */; };
+		6AC45E03152412A200C5E259 /* VTCandidateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5C38B315227B02000657BC /* VTCandidateController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6A3307BF1522A82200118E65 /* VTVerticalCandidateTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTVerticalCandidateTableView.h; sourceTree = "<group>"; };
+		6A3307C01522A82200118E65 /* VTVerticalCandidateTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTVerticalCandidateTableView.m; sourceTree = "<group>"; };
+		6A3307CF15238D5F00118E65 /* VTHorizontalCandidateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTHorizontalCandidateController.h; sourceTree = "<group>"; };
+		6A3307D015238D5F00118E65 /* VTHorizontalCandidateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTHorizontalCandidateController.m; sourceTree = "<group>"; };
+		6A3307D115238D5F00118E65 /* VTHorizontalCandidateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTHorizontalCandidateView.h; sourceTree = "<group>"; };
+		6A3307D215238D5F00118E65 /* VTHorizontalCandidateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTHorizontalCandidateView.m; sourceTree = "<group>"; };
+		6A5C389515227A81000657BC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		6A5C389815227A81000657BC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		6A5C389915227A81000657BC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6A5C389A15227A81000657BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6A5C38B215227B02000657BC /* VTCandidateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTCandidateController.h; sourceTree = "<group>"; };
+		6A5C38B315227B02000657BC /* VTCandidateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTCandidateController.m; sourceTree = "<group>"; };
+		6A5C38B515227BD4000657BC /* VTVerticalCandidateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTVerticalCandidateController.h; sourceTree = "<group>"; };
+		6A5C38B615227BD4000657BC /* VTVerticalCandidateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTVerticalCandidateController.m; sourceTree = "<group>"; };
+		6A5C38C5152294EA000657BC /* VTVerticalKeyLabelStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTVerticalKeyLabelStripView.h; sourceTree = "<group>"; };
+		6A5C38C6152294EA000657BC /* VTVerticalKeyLabelStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTVerticalKeyLabelStripView.m; sourceTree = "<group>"; };
+		6AC45DD61524121000C5E259 /* CandidateTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CandidateTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AC45DDB1524121000C5E259 /* CandidateTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CandidateTest-Info.plist"; sourceTree = "<group>"; };
+		6AC45DDD1524121100C5E259 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6AC45DDF1524121100C5E259 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6AC45DE11524121100C5E259 /* CandidateTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CandidateTest-Prefix.pch"; sourceTree = "<group>"; };
+		6AC45DE31524121100C5E259 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		6AC45DE51524121100C5E259 /* VTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTAppDelegate.h; sourceTree = "<group>"; };
+		6AC45DE61524121100C5E259 /* VTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTAppDelegate.m; sourceTree = "<group>"; };
+		6AC45DE91524121100C5E259 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6AC45DD31524121000C5E259 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AC45DD81524121000C5E259 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6A5C388615227A81000657BC = {
+			isa = PBXGroup;
+			children = (
+				6A5C389B15227A81000657BC /* Voltaire */,
+				6AC45DD91524121000C5E259 /* CandidateTest */,
+				6A5C389415227A81000657BC /* Frameworks */,
+				6A5C389215227A81000657BC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6A5C389215227A81000657BC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6AC45DD61524121000C5E259 /* CandidateTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6A5C389415227A81000657BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6A5C389515227A81000657BC /* Cocoa.framework */,
+				6A5C389715227A81000657BC /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6A5C389715227A81000657BC /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6A5C389815227A81000657BC /* AppKit.framework */,
+				6A5C389915227A81000657BC /* CoreData.framework */,
+				6A5C389A15227A81000657BC /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		6A5C389B15227A81000657BC /* Voltaire */ = {
+			isa = PBXGroup;
+			children = (
+				6A3307CF15238D5F00118E65 /* VTHorizontalCandidateController.h */,
+				6A3307D015238D5F00118E65 /* VTHorizontalCandidateController.m */,
+				6A3307D115238D5F00118E65 /* VTHorizontalCandidateView.h */,
+				6A3307D215238D5F00118E65 /* VTHorizontalCandidateView.m */,
+				6A3307BF1522A82200118E65 /* VTVerticalCandidateTableView.h */,
+				6A3307C01522A82200118E65 /* VTVerticalCandidateTableView.m */,
+				6A5C38C5152294EA000657BC /* VTVerticalKeyLabelStripView.h */,
+				6A5C38C6152294EA000657BC /* VTVerticalKeyLabelStripView.m */,
+				6A5C38B515227BD4000657BC /* VTVerticalCandidateController.h */,
+				6A5C38B615227BD4000657BC /* VTVerticalCandidateController.m */,
+				6A5C38B215227B02000657BC /* VTCandidateController.h */,
+				6A5C38B315227B02000657BC /* VTCandidateController.m */,
+			);
+			path = Voltaire;
+			sourceTree = "<group>";
+		};
+		6AC45DD91524121000C5E259 /* CandidateTest */ = {
+			isa = PBXGroup;
+			children = (
+				6AC45DE51524121100C5E259 /* VTAppDelegate.h */,
+				6AC45DE61524121100C5E259 /* VTAppDelegate.m */,
+				6AC45DE81524121100C5E259 /* MainMenu.xib */,
+				6AC45DDA1524121000C5E259 /* Supporting Files */,
+			);
+			path = CandidateTest;
+			sourceTree = "<group>";
+		};
+		6AC45DDA1524121000C5E259 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6AC45DDB1524121000C5E259 /* CandidateTest-Info.plist */,
+				6AC45DDC1524121100C5E259 /* InfoPlist.strings */,
+				6AC45DDF1524121100C5E259 /* main.m */,
+				6AC45DE11524121100C5E259 /* CandidateTest-Prefix.pch */,
+				6AC45DE21524121100C5E259 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6AC45DD51524121000C5E259 /* CandidateTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AC45DED1524121100C5E259 /* Build configuration list for PBXNativeTarget "CandidateTest" */;
+			buildPhases = (
+				6AC45DD21524121000C5E259 /* Sources */,
+				6AC45DD31524121000C5E259 /* Frameworks */,
+				6AC45DD41524121000C5E259 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CandidateTest;
+			productName = CandidateTest;
+			productReference = 6AC45DD61524121000C5E259 /* CandidateTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6A5C388815227A81000657BC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = VT;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 6A5C388B15227A81000657BC /* Build configuration list for PBXProject "Voltaire" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6A5C388615227A81000657BC;
+			productRefGroup = 6A5C389215227A81000657BC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6AC45DD51524121000C5E259 /* CandidateTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6AC45DD41524121000C5E259 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AC45DDE1524121100C5E259 /* InfoPlist.strings in Resources */,
+				6AC45DE41524121100C5E259 /* Credits.rtf in Resources */,
+				6AC45DEA1524121100C5E259 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6AC45DD21524121000C5E259 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AC45DE01524121100C5E259 /* main.m in Sources */,
+				6AC45DE71524121100C5E259 /* VTAppDelegate.m in Sources */,
+				6AC45DFE152412A200C5E259 /* VTHorizontalCandidateController.m in Sources */,
+				6AC45DFF152412A200C5E259 /* VTHorizontalCandidateView.m in Sources */,
+				6AC45E00152412A200C5E259 /* VTVerticalCandidateTableView.m in Sources */,
+				6AC45E01152412A200C5E259 /* VTVerticalKeyLabelStripView.m in Sources */,
+				6AC45E02152412A200C5E259 /* VTVerticalCandidateController.m in Sources */,
+				6AC45E03152412A200C5E259 /* VTCandidateController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6AC45DDC1524121100C5E259 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6AC45DDD1524121100C5E259 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6AC45DE21524121100C5E259 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6AC45DE31524121100C5E259 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		6AC45DE81524121100C5E259 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6AC45DE91524121100C5E259 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6A5C38AD15227A81000657BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		6A5C38AE15227A81000657BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		6AC45DEB1524121100C5E259 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CandidateTest/CandidateTest-Prefix.pch";
+				GCC_WARN_PEDANTIC = YES;
+				INFOPLIST_FILE = "CandidateTest/CandidateTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6AC45DEC1524121100C5E259 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CandidateTest/CandidateTest-Prefix.pch";
+				GCC_WARN_PEDANTIC = YES;
+				INFOPLIST_FILE = "CandidateTest/CandidateTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6A5C388B15227A81000657BC /* Build configuration list for PBXProject "Voltaire" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A5C38AD15227A81000657BC /* Debug */,
+				6A5C38AE15227A81000657BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6AC45DED1524121100C5E259 /* Build configuration list for PBXNativeTarget "CandidateTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AC45DEB1524121100C5E259 /* Debug */,
+				6AC45DEC1524121100C5E259 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6A5C388815227A81000657BC /* Project object */;
+}
