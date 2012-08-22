@@ -32,6 +32,7 @@
 #import "OVTextBufferImpl.h"
 #import "OVPlistBackedKeyValueMapImpl.h"
 #import "OVTextBufferCombinator.h"
+#import "OVModuleManager.h"
 
 using namespace OpenVanilla;
 
@@ -40,11 +41,6 @@ using namespace OpenVanilla;
 #else
     #define IMEDebug(...)
 #endif
-
-OVCINDatabaseService* g_dbService = 0;
-OVLoaderServiceImpl* g_loaderService = 0;
-OVCandidateServiceImpl* g_candidateService = 0;
-OVInputMethod* g_inputMethod = 0;
 
 @interface OVInputMethodController ()
 {
@@ -81,12 +77,6 @@ OVInputMethod* g_inputMethod = 0;
 {
     IMEDebug(@"%s", __PRETTY_FUNCTION__);
 
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        g_loaderService = new OVLoaderServiceImpl;
-        g_candidateService = new OVCandidateServiceImpl(g_loaderService);
-    });
-
     self = [super initWithServer:server delegate:aDelegate client:client];
 	if (self) {
         _composingText = new OVTextBufferImpl;
@@ -117,12 +107,12 @@ OVInputMethod* g_inputMethod = 0;
         _inputMethodContext = 0;
     }
 
-    if (g_inputMethod) {
-        _inputMethodContext = g_inputMethod->createContext();
+    if ([OVModuleManager defaultManager].inputMethod) {
+        _inputMethodContext = [OVModuleManager defaultManager].inputMethod->createContext();
     }
 
     if (_inputMethodContext) {
-        _inputMethodContext->startSession(g_loaderService);
+        _inputMethodContext->startSession([OVModuleManager defaultManager].loaderService);
     }
 }
 
@@ -130,7 +120,7 @@ OVInputMethod* g_inputMethod = 0;
 {
     IMEDebug(@"%s", __PRETTY_FUNCTION__);
     if (_inputMethodContext) {
-        _inputMethodContext->stopSession(g_loaderService);
+        _inputMethodContext->stopSession([OVModuleManager defaultManager].loaderService);
         delete _inputMethodContext;
         _inputMethodContext = 0;
     }
@@ -154,7 +144,7 @@ OVInputMethod* g_inputMethod = 0;
     bool handled = false;
     bool candidatePanelFallThrough = false;
 
-    OVOneDimensionalCandidatePanelImpl* panel = dynamic_cast<OVOneDimensionalCandidatePanelImpl*>(g_candidateService->useVerticalCandidatePanel());
+    OVOneDimensionalCandidatePanelImpl* panel = dynamic_cast<OVOneDimensionalCandidatePanelImpl*>([OVModuleManager defaultManager].candidateService->useVerticalCandidatePanel());
     if (panel && panel->isInControl()) {
         OVOneDimensionalCandidatePanelImpl::KeyHandlerResult result = panel->handleKey(&key);
         switch (result) {
@@ -167,14 +157,14 @@ OVInputMethod* g_inputMethod = 0;
             {
                 size_t index = panel->currentHightlightIndexInCandidateList();
                 string candidate = panel->candidateList()->candidateAtIndex(index);
-                handled = _inputMethodContext->candidateSelected(g_candidateService, candidate, index, _readingText, _composingText, g_loaderService);
+                handled = _inputMethodContext->candidateSelected([OVModuleManager defaultManager].candidateService, candidate, index, _readingText, _composingText, [OVModuleManager defaultManager].loaderService);
                 candidatePanelFallThrough = true;
                 break;
             }
 
             case OVOneDimensionalCandidatePanelImpl::Canceled:
             {
-                _inputMethodContext->candidateCanceled(g_candidateService, _readingText, _composingText, g_loaderService);
+                _inputMethodContext->candidateCanceled([OVModuleManager defaultManager].candidateService, _readingText, _composingText, [OVModuleManager defaultManager].loaderService);
                 handled = true;
                 candidatePanelFallThrough = true;
                 break;
@@ -182,14 +172,14 @@ OVInputMethod* g_inputMethod = 0;
 
             case OVOneDimensionalCandidatePanelImpl::NonCandidatePanelKeyReceived:
             {
-                handled = _inputMethodContext->candidateNonPanelKeyReceived(g_candidateService, &key, _readingText, _composingText, g_loaderService);
+                handled = _inputMethodContext->candidateNonPanelKeyReceived([OVModuleManager defaultManager].candidateService, &key, _readingText, _composingText, [OVModuleManager defaultManager].loaderService);
                 candidatePanelFallThrough = true;
                 break;
             }
 
             case OVOneDimensionalCandidatePanelImpl::Invalid:
             {
-                g_loaderService->beep();
+                [OVModuleManager defaultManager].loaderService->beep();
                 return YES;
             }
 
@@ -197,7 +187,7 @@ OVInputMethod* g_inputMethod = 0;
     }
 
     if (!candidatePanelFallThrough) {
-        handled = _inputMethodContext->handleKey(&key, _readingText, _composingText, g_candidateService, g_loaderService);
+        handled = _inputMethodContext->handleKey(&key, _readingText, _composingText, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
     }
 
     if (_composingText->isCommitted()) {
@@ -229,8 +219,8 @@ OVInputMethod* g_inputMethod = 0;
     @catch (NSException *exception) {
     }
 
-    g_candidateService->currentCandidatePanel()->setPanelOrigin(lineHeightRect.origin);
-    g_candidateService->currentCandidatePanel()->updateVisibility();
+    [OVModuleManager defaultManager].candidateService->currentCandidatePanel()->setPanelOrigin(lineHeightRect.origin);
+    [OVModuleManager defaultManager].candidateService->currentCandidatePanel()->updateVisibility();
     
     return handled;
 }
@@ -322,10 +312,10 @@ OVInputMethod* g_inputMethod = 0;
     }
 
     if (unicharCode < 128) {
-        key = g_loaderService->makeOVKey(unicharCode, opt, opt, ctrl, shift, cmd, capsLock, numLock);
+        key = [OVModuleManager defaultManager].loaderService->makeOVKey(unicharCode, opt, opt, ctrl, shift, cmd, capsLock, numLock);
     }
     else {
-        key = g_loaderService->makeOVKey(string([chars UTF8String]), opt, opt, ctrl, shift, cmd, capsLock, numLock);
+        key = [OVModuleManager defaultManager].loaderService->makeOVKey(string([chars UTF8String]), opt, opt, ctrl, shift, cmd, capsLock, numLock);
     }
 
     return [self handleOVKey:key client:client];

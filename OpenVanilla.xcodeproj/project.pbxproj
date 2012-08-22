@@ -14,14 +14,55 @@
 		6ABBAF0815CD58F90080EE7D /* OVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0715CD58F90080EE7D /* OVAppDelegate.m */; };
 		6ABBAF0B15CD58F90080EE7D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0915CD58F90080EE7D /* MainMenu.xib */; };
 		6ABBAF2115CD615B0080EE7D /* OVConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF1C15CD615B0080EE7D /* OVConstants.m */; };
-		6ABBAF2215CD615B0080EE7D /* OVInputMethodController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF1E15CD615B0080EE7D /* OVInputMethodController.m */; };
 		6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.m */; };
 		6ABBAF2715CD617D0080EE7D /* OpenVanilla-App.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2515CD617D0080EE7D /* OpenVanilla-App.icns */; };
 		6ABBAF2815CD617D0080EE7D /* OpenVanilla-InputMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */; };
 		6ABBAF2A15CD61B60080EE7D /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */; };
 		6ABBAF2C15CD61BE0080EE7D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */; };
 		6ABBAF6715CD6F8C0080EE7D /* OVFrameworkInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF6615CD6F8C0080EE7D /* OVFrameworkInfo.cpp */; };
+		6ACB49BA15E49E6600380B82 /* cj-ext.cin in Resources */ = {isa = PBXBuildFile; fileRef = 6ACB49B615E49E6600380B82 /* cj-ext.cin */; };
+		6ACB49BB15E49E6600380B82 /* dayi3-patched.cin in Resources */ = {isa = PBXBuildFile; fileRef = 6ACB49B715E49E6600380B82 /* dayi3-patched.cin */; };
+		6ACB49BC15E49E6600380B82 /* ehq-symbols.cin in Resources */ = {isa = PBXBuildFile; fileRef = 6ACB49B815E49E6600380B82 /* ehq-symbols.cin */; };
+		6ACB49BD15E49E6600380B82 /* simplex-ext.cin in Resources */ = {isa = PBXBuildFile; fileRef = 6ACB49B915E49E6600380B82 /* simplex-ext.cin */; };
+		6ACB49BE15E49E8600380B82 /* cj-ext.cin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6ACB49B615E49E6600380B82 /* cj-ext.cin */; };
+		6ACB49BF15E49E8600380B82 /* dayi3-patched.cin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6ACB49B715E49E6600380B82 /* dayi3-patched.cin */; };
+		6ACB49C015E49E8600380B82 /* ehq-symbols.cin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6ACB49B815E49E6600380B82 /* ehq-symbols.cin */; };
+		6ACB49C115E49E8600380B82 /* simplex-ext.cin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6ACB49B915E49E6600380B82 /* simplex-ext.cin */; };
+		6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */; };
+		6ACB49C615E49EB400380B82 /* OVModuleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49C515E49EB400380B82 /* OVModuleManager.mm */; };
+		6ACB49CD15E49ECB00380B82 /* OVIMTableBased.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49C915E49ECB00380B82 /* OVIMTableBased.cpp */; };
+		6ACB49CE15E49ECB00380B82 /* OVIMTableBasedContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49CB15E49ECB00380B82 /* OVIMTableBasedContext.cpp */; };
+		6ACB49E015E49EF100380B82 /* OVCandidateListImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49D115E49EF100380B82 /* OVCandidateListImpl.mm */; };
+		6ACB49E115E49EF100380B82 /* OVCandidateServiceImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49D315E49EF100380B82 /* OVCandidateServiceImpl.mm */; };
+		6ACB49E215E49EF100380B82 /* OVConcreteKeyImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49D415E49EF100380B82 /* OVConcreteKeyImpl.cpp */; };
+		6ACB49E315E49EF100380B82 /* OVLoaderServiceImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49D715E49EF100380B82 /* OVLoaderServiceImpl.mm */; };
+		6ACB49E415E49EF100380B82 /* OVOneDimensionalCandidatePanelImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49D915E49EF100380B82 /* OVOneDimensionalCandidatePanelImpl.mm */; };
+		6ACB49E515E49EF100380B82 /* OVPlistBackedKeyValueMapImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49DA15E49EF100380B82 /* OVPlistBackedKeyValueMapImpl.cpp */; };
+		6ACB49E615E49EF100380B82 /* OVTextBufferCombinator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49DD15E49EF100380B82 /* OVTextBufferCombinator.mm */; };
+		6ACB49E715E49EF100380B82 /* OVTextBufferImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49DE15E49EF100380B82 /* OVTextBufferImpl.cpp */; };
+		6ACB49F615E49F2900380B82 /* VTCandidateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49EB15E49F2900380B82 /* VTCandidateController.m */; };
+		6ACB49F715E49F2900380B82 /* VTHorizontalCandidateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49ED15E49F2900380B82 /* VTHorizontalCandidateController.m */; };
+		6ACB49F815E49F2900380B82 /* VTHorizontalCandidateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49EF15E49F2900380B82 /* VTHorizontalCandidateView.m */; };
+		6ACB49F915E49F2900380B82 /* VTVerticalCandidateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49F115E49F2900380B82 /* VTVerticalCandidateController.m */; };
+		6ACB49FA15E49F2900380B82 /* VTVerticalCandidateTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49F315E49F2900380B82 /* VTVerticalCandidateTableView.m */; };
+		6ACB49FB15E49F2900380B82 /* VTVerticalKeyLabelStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49F515E49F2900380B82 /* VTVerticalKeyLabelStripView.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6ACB49B515E49E1400380B82 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = DataTables;
+			dstSubfolderSpec = 7;
+			files = (
+				6ACB49BE15E49E8600380B82 /* cj-ext.cin in CopyFiles */,
+				6ACB49BF15E49E8600380B82 /* dayi3-patched.cin in CopyFiles */,
+				6ACB49C015E49E8600380B82 /* ehq-symbols.cin in CopyFiles */,
+				6ACB49C115E49E8600380B82 /* simplex-ext.cin in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,7 +78,6 @@
 		6ABBAF1B15CD615B0080EE7D /* OVConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVConstants.h; sourceTree = "<group>"; };
 		6ABBAF1C15CD615B0080EE7D /* OVConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVConstants.m; sourceTree = "<group>"; };
 		6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVInputMethodController.h; sourceTree = "<group>"; };
-		6ABBAF1E15CD615B0080EE7D /* OVInputMethodController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVInputMethodController.m; sourceTree = "<group>"; };
 		6ABBAF1F15CD615B0080EE7D /* OVInputSourceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVInputSourceHelper.h; sourceTree = "<group>"; };
 		6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVInputSourceHelper.m; sourceTree = "<group>"; };
 		6ABBAF2515CD617D0080EE7D /* OpenVanilla-App.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "OpenVanilla-App.icns"; path = "Images/OpenVanilla-App.icns"; sourceTree = SOURCE_ROOT; };
@@ -77,6 +117,45 @@
 		6ABBAF6315CD6F8C0080EE7D /* OVUTF8Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUTF8Helper.h; sourceTree = "<group>"; };
 		6ABBAF6415CD6F8C0080EE7D /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVWildcard.h; sourceTree = "<group>"; };
 		6ABBAF6615CD6F8C0080EE7D /* OVFrameworkInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVFrameworkInfo.cpp; sourceTree = "<group>"; };
+		6ACB49B615E49E6600380B82 /* cj-ext.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "cj-ext.cin"; sourceTree = "<group>"; };
+		6ACB49B715E49E6600380B82 /* dayi3-patched.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "dayi3-patched.cin"; sourceTree = "<group>"; };
+		6ACB49B815E49E6600380B82 /* ehq-symbols.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ehq-symbols.cin"; sourceTree = "<group>"; };
+		6ACB49B915E49E6600380B82 /* simplex-ext.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "simplex-ext.cin"; sourceTree = "<group>"; };
+		6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVInputMethodController.mm; sourceTree = "<group>"; };
+		6ACB49C415E49EB400380B82 /* OVModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVModuleManager.h; sourceTree = "<group>"; };
+		6ACB49C515E49EB400380B82 /* OVModuleManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVModuleManager.mm; sourceTree = "<group>"; };
+		6ACB49C915E49ECB00380B82 /* OVIMTableBased.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVIMTableBased.cpp; sourceTree = "<group>"; };
+		6ACB49CA15E49ECB00380B82 /* OVIMTableBased.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMTableBased.h; sourceTree = "<group>"; };
+		6ACB49CB15E49ECB00380B82 /* OVIMTableBasedContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVIMTableBasedContext.cpp; sourceTree = "<group>"; };
+		6ACB49CC15E49ECB00380B82 /* OVIMTableBasedContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMTableBasedContext.h; sourceTree = "<group>"; };
+		6ACB49D015E49EF100380B82 /* OVCandidateListImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCandidateListImpl.h; sourceTree = "<group>"; };
+		6ACB49D115E49EF100380B82 /* OVCandidateListImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVCandidateListImpl.mm; sourceTree = "<group>"; };
+		6ACB49D215E49EF100380B82 /* OVCandidateServiceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCandidateServiceImpl.h; sourceTree = "<group>"; };
+		6ACB49D315E49EF100380B82 /* OVCandidateServiceImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVCandidateServiceImpl.mm; sourceTree = "<group>"; };
+		6ACB49D415E49EF100380B82 /* OVConcreteKeyImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVConcreteKeyImpl.cpp; sourceTree = "<group>"; };
+		6ACB49D515E49EF100380B82 /* OVConcreteKeyImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVConcreteKeyImpl.h; sourceTree = "<group>"; };
+		6ACB49D615E49EF100380B82 /* OVLoaderServiceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLoaderServiceImpl.h; sourceTree = "<group>"; };
+		6ACB49D715E49EF100380B82 /* OVLoaderServiceImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVLoaderServiceImpl.mm; sourceTree = "<group>"; };
+		6ACB49D815E49EF100380B82 /* OVOneDimensionalCandidatePanelImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVOneDimensionalCandidatePanelImpl.h; sourceTree = "<group>"; };
+		6ACB49D915E49EF100380B82 /* OVOneDimensionalCandidatePanelImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVOneDimensionalCandidatePanelImpl.mm; sourceTree = "<group>"; };
+		6ACB49DA15E49EF100380B82 /* OVPlistBackedKeyValueMapImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVPlistBackedKeyValueMapImpl.cpp; sourceTree = "<group>"; };
+		6ACB49DB15E49EF100380B82 /* OVPlistBackedKeyValueMapImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVPlistBackedKeyValueMapImpl.h; sourceTree = "<group>"; };
+		6ACB49DC15E49EF100380B82 /* OVTextBufferCombinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTextBufferCombinator.h; sourceTree = "<group>"; };
+		6ACB49DD15E49EF100380B82 /* OVTextBufferCombinator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVTextBufferCombinator.mm; sourceTree = "<group>"; };
+		6ACB49DE15E49EF100380B82 /* OVTextBufferImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVTextBufferImpl.cpp; sourceTree = "<group>"; };
+		6ACB49DF15E49EF100380B82 /* OVTextBufferImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTextBufferImpl.h; sourceTree = "<group>"; };
+		6ACB49EA15E49F2900380B82 /* VTCandidateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTCandidateController.h; sourceTree = "<group>"; };
+		6ACB49EB15E49F2900380B82 /* VTCandidateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTCandidateController.m; sourceTree = "<group>"; };
+		6ACB49EC15E49F2900380B82 /* VTHorizontalCandidateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTHorizontalCandidateController.h; sourceTree = "<group>"; };
+		6ACB49ED15E49F2900380B82 /* VTHorizontalCandidateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTHorizontalCandidateController.m; sourceTree = "<group>"; };
+		6ACB49EE15E49F2900380B82 /* VTHorizontalCandidateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTHorizontalCandidateView.h; sourceTree = "<group>"; };
+		6ACB49EF15E49F2900380B82 /* VTHorizontalCandidateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTHorizontalCandidateView.m; sourceTree = "<group>"; };
+		6ACB49F015E49F2900380B82 /* VTVerticalCandidateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTVerticalCandidateController.h; sourceTree = "<group>"; };
+		6ACB49F115E49F2900380B82 /* VTVerticalCandidateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTVerticalCandidateController.m; sourceTree = "<group>"; };
+		6ACB49F215E49F2900380B82 /* VTVerticalCandidateTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTVerticalCandidateTableView.h; sourceTree = "<group>"; };
+		6ACB49F315E49F2900380B82 /* VTVerticalCandidateTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTVerticalCandidateTableView.m; sourceTree = "<group>"; };
+		6ACB49F415E49F2900380B82 /* VTVerticalKeyLabelStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTVerticalKeyLabelStripView.h; sourceTree = "<group>"; };
+		6ACB49F515E49F2900380B82 /* VTVerticalKeyLabelStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTVerticalKeyLabelStripView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +175,9 @@
 		6ABBAEE515CD58F90080EE7D = {
 			isa = PBXGroup;
 			children = (
+				6ACB49E815E49EF500380B82 /* Libraries */,
+				6ACB49C715E49EBE00380B82 /* Modules */,
+				6ACB49B315E49DF200380B82 /* DataTables */,
 				6ABBAEFA15CD58F90080EE7D /* InputMethod Application */,
 				6ABBAF4315CD6F760080EE7D /* OpenVanilla Framework */,
 				6ABBAEF315CD58F90080EE7D /* Frameworks */,
@@ -124,14 +206,17 @@
 		6ABBAEFA15CD58F90080EE7D /* InputMethod Application */ = {
 			isa = PBXGroup;
 			children = (
+				6ACB49CF15E49EF100380B82 /* FrameworkImpls */,
 				6ABBAF0615CD58F90080EE7D /* OVAppDelegate.h */,
 				6ABBAF0715CD58F90080EE7D /* OVAppDelegate.m */,
 				6ABBAF1B15CD615B0080EE7D /* OVConstants.h */,
 				6ABBAF1C15CD615B0080EE7D /* OVConstants.m */,
 				6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */,
-				6ABBAF1E15CD615B0080EE7D /* OVInputMethodController.m */,
+				6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */,
 				6ABBAF1F15CD615B0080EE7D /* OVInputSourceHelper.h */,
 				6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.m */,
+				6ACB49C415E49EB400380B82 /* OVModuleManager.h */,
+				6ACB49C515E49EB400380B82 /* OVModuleManager.mm */,
 				6ABBAF0915CD58F90080EE7D /* MainMenu.xib */,
 				6ABBAF2415CD61680080EE7D /* Resources */,
 				6ABBAEFB15CD58F90080EE7D /* Supporting Files */,
@@ -218,6 +303,87 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		6ACB49B315E49DF200380B82 /* DataTables */ = {
+			isa = PBXGroup;
+			children = (
+				6ACB49B615E49E6600380B82 /* cj-ext.cin */,
+				6ACB49B715E49E6600380B82 /* dayi3-patched.cin */,
+				6ACB49B815E49E6600380B82 /* ehq-symbols.cin */,
+				6ACB49B915E49E6600380B82 /* simplex-ext.cin */,
+			);
+			path = DataTables;
+			sourceTree = "<group>";
+		};
+		6ACB49C715E49EBE00380B82 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				6ACB49C815E49ECB00380B82 /* TableBased */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		6ACB49C815E49ECB00380B82 /* TableBased */ = {
+			isa = PBXGroup;
+			children = (
+				6ACB49C915E49ECB00380B82 /* OVIMTableBased.cpp */,
+				6ACB49CA15E49ECB00380B82 /* OVIMTableBased.h */,
+				6ACB49CB15E49ECB00380B82 /* OVIMTableBasedContext.cpp */,
+				6ACB49CC15E49ECB00380B82 /* OVIMTableBasedContext.h */,
+			);
+			path = TableBased;
+			sourceTree = "<group>";
+		};
+		6ACB49CF15E49EF100380B82 /* FrameworkImpls */ = {
+			isa = PBXGroup;
+			children = (
+				6ACB49D015E49EF100380B82 /* OVCandidateListImpl.h */,
+				6ACB49D115E49EF100380B82 /* OVCandidateListImpl.mm */,
+				6ACB49D215E49EF100380B82 /* OVCandidateServiceImpl.h */,
+				6ACB49D315E49EF100380B82 /* OVCandidateServiceImpl.mm */,
+				6ACB49D415E49EF100380B82 /* OVConcreteKeyImpl.cpp */,
+				6ACB49D515E49EF100380B82 /* OVConcreteKeyImpl.h */,
+				6ACB49D615E49EF100380B82 /* OVLoaderServiceImpl.h */,
+				6ACB49D715E49EF100380B82 /* OVLoaderServiceImpl.mm */,
+				6ACB49D815E49EF100380B82 /* OVOneDimensionalCandidatePanelImpl.h */,
+				6ACB49D915E49EF100380B82 /* OVOneDimensionalCandidatePanelImpl.mm */,
+				6ACB49DA15E49EF100380B82 /* OVPlistBackedKeyValueMapImpl.cpp */,
+				6ACB49DB15E49EF100380B82 /* OVPlistBackedKeyValueMapImpl.h */,
+				6ACB49DC15E49EF100380B82 /* OVTextBufferCombinator.h */,
+				6ACB49DD15E49EF100380B82 /* OVTextBufferCombinator.mm */,
+				6ACB49DE15E49EF100380B82 /* OVTextBufferImpl.cpp */,
+				6ACB49DF15E49EF100380B82 /* OVTextBufferImpl.h */,
+			);
+			path = FrameworkImpls;
+			sourceTree = "<group>";
+		};
+		6ACB49E815E49EF500380B82 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				6ACB49E915E49F0100380B82 /* Voltaire */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		6ACB49E915E49F0100380B82 /* Voltaire */ = {
+			isa = PBXGroup;
+			children = (
+				6ACB49EA15E49F2900380B82 /* VTCandidateController.h */,
+				6ACB49EB15E49F2900380B82 /* VTCandidateController.m */,
+				6ACB49EC15E49F2900380B82 /* VTHorizontalCandidateController.h */,
+				6ACB49ED15E49F2900380B82 /* VTHorizontalCandidateController.m */,
+				6ACB49EE15E49F2900380B82 /* VTHorizontalCandidateView.h */,
+				6ACB49EF15E49F2900380B82 /* VTHorizontalCandidateView.m */,
+				6ACB49F015E49F2900380B82 /* VTVerticalCandidateController.h */,
+				6ACB49F115E49F2900380B82 /* VTVerticalCandidateController.m */,
+				6ACB49F215E49F2900380B82 /* VTVerticalCandidateTableView.h */,
+				6ACB49F315E49F2900380B82 /* VTVerticalCandidateTableView.m */,
+				6ACB49F415E49F2900380B82 /* VTVerticalKeyLabelStripView.h */,
+				6ACB49F515E49F2900380B82 /* VTVerticalKeyLabelStripView.m */,
+			);
+			name = Voltaire;
+			path = Voltaire/Voltaire;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -229,6 +395,7 @@
 				6ABBAEED15CD58F90080EE7D /* Frameworks */,
 				6ABBAEEE15CD58F90080EE7D /* Resources */,
 				6ABBAF3215CD62440080EE7D /* Install and Activate Input Method (Run Script) */,
+				6ACB49B515E49E1400380B82 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -276,6 +443,10 @@
 				6ABBAF0B15CD58F90080EE7D /* MainMenu.xib in Resources */,
 				6ABBAF2715CD617D0080EE7D /* OpenVanilla-App.icns in Resources */,
 				6ABBAF2815CD617D0080EE7D /* OpenVanilla-InputMenu.tiff in Resources */,
+				6ACB49BA15E49E6600380B82 /* cj-ext.cin in Resources */,
+				6ACB49BB15E49E6600380B82 /* dayi3-patched.cin in Resources */,
+				6ACB49BC15E49E6600380B82 /* ehq-symbols.cin in Resources */,
+				6ACB49BD15E49E6600380B82 /* simplex-ext.cin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,9 +477,26 @@
 				6ABBAF0115CD58F90080EE7D /* main.m in Sources */,
 				6ABBAF0815CD58F90080EE7D /* OVAppDelegate.m in Sources */,
 				6ABBAF2115CD615B0080EE7D /* OVConstants.m in Sources */,
-				6ABBAF2215CD615B0080EE7D /* OVInputMethodController.m in Sources */,
 				6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.m in Sources */,
 				6ABBAF6715CD6F8C0080EE7D /* OVFrameworkInfo.cpp in Sources */,
+				6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */,
+				6ACB49C615E49EB400380B82 /* OVModuleManager.mm in Sources */,
+				6ACB49CD15E49ECB00380B82 /* OVIMTableBased.cpp in Sources */,
+				6ACB49CE15E49ECB00380B82 /* OVIMTableBasedContext.cpp in Sources */,
+				6ACB49E015E49EF100380B82 /* OVCandidateListImpl.mm in Sources */,
+				6ACB49E115E49EF100380B82 /* OVCandidateServiceImpl.mm in Sources */,
+				6ACB49E215E49EF100380B82 /* OVConcreteKeyImpl.cpp in Sources */,
+				6ACB49E315E49EF100380B82 /* OVLoaderServiceImpl.mm in Sources */,
+				6ACB49E415E49EF100380B82 /* OVOneDimensionalCandidatePanelImpl.mm in Sources */,
+				6ACB49E515E49EF100380B82 /* OVPlistBackedKeyValueMapImpl.cpp in Sources */,
+				6ACB49E615E49EF100380B82 /* OVTextBufferCombinator.mm in Sources */,
+				6ACB49E715E49EF100380B82 /* OVTextBufferImpl.cpp in Sources */,
+				6ACB49F615E49F2900380B82 /* VTCandidateController.m in Sources */,
+				6ACB49F715E49F2900380B82 /* VTHorizontalCandidateController.m in Sources */,
+				6ACB49F815E49F2900380B82 /* VTHorizontalCandidateView.m in Sources */,
+				6ACB49F915E49F2900380B82 /* VTVerticalCandidateController.m in Sources */,
+				6ACB49FA15E49F2900380B82 /* VTVerticalCandidateTableView.m in Sources */,
+				6ACB49FB15E49F2900380B82 /* VTVerticalKeyLabelStripView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
