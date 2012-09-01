@@ -26,6 +26,7 @@
 //
 
 #import "OVAppDelegate.h"
+#import "OVModuleManager.h"
 
 @implementation OVAppDelegate
 
@@ -36,6 +37,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [[OVModuleManager defaultManager] reload];
 }
 
 @end
