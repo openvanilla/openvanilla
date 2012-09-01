@@ -44,6 +44,7 @@ class OVInputMethod;
 @property (assign, readonly) OpenVanilla::OVLoaderServiceImpl* loaderService;
 @property (assign, readonly) OpenVanilla::OVCandidateServiceImpl* candidateService;
 @property (assign, readonly) OpenVanilla::OVInputMethod* activeInputMethod;
+@property (readonly) NSString *activeInputMethodIdentifier;
 @property (readonly) NSArray *inputMethodIdentifiers;
 @end
 

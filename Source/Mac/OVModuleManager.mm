@@ -60,10 +60,12 @@ static string InputMethodConfigIdentifier(const string& identifier)
 @end
 
 @implementation OVModuleManager
+@dynamic activeInputMethodIdentifier;
 @synthesize loaderService = _loaderService;
 @synthesize candidateService = _candidateService;
 @synthesize activeInputMethod = _activeInputMethod;
 @synthesize inputMethodMap = _inputMethodMap;
+@synthesize cachedLocale = _cachedLocale;
 
 + (OVModuleManager *)defaultManager
 {
@@ -83,6 +85,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
         _loaderService = new OVLoaderServiceImpl;
         _candidateService = new OVCandidateServiceImpl(_loaderService);
         _inputMethodMap = new OVInputMethodMap;
+        _inputMethodIdentifiers = [[NSMutableArray alloc] init];
+        _cachedLocale = @"en";	
     }
     return self;
 }
@@ -95,6 +99,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
         delete (*i).second;
     }
     delete _inputMethodMap;
+    [_inputMethodIdentifiers release];
     [super dealloc];
 }
 
@@ -159,6 +164,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
 - (void)reload
 {
+    [_inputMethodIdentifiers removeAllObjects];
+
     for (OVInputMethodMap::iterator i = _inputMethodMap->begin(), e = _inputMethodMap->end(); i != e; ++i) {
         delete (*i).second;
     }
@@ -167,7 +174,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
     _inputMethodMap->clear();
 
     // TODO: Load user tables
-    NSSet *basicTables = [NSSet setWithObjects:@"cj-ext.cin", @"simplex-ext.cin", @"dayi3-patched.cin", @"ehq-symbols.cin", nil];
+    NSArray *basicTables = [NSArray arrayWithObjects:@"cj-ext.cin", @"simplex-ext.cin", @"dayi3-patched.cin", @"ehq-symbols.cin", nil];
     NSString *tableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables"];
 
     for (NSString *tableName in basicTables) {
@@ -182,6 +189,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
         else {
             string identifier = InputMethodConfigIdentifier(inputMethod->identifier());
             _inputMethodMap->operator[](identifier) = inputMethod;
+
+            [_inputMethodIdentifiers addObject:[NSString stringWithUTF8String:identifier.c_str()]];
         }
     }
 
@@ -206,5 +215,15 @@ static string InputMethodConfigIdentifier(const string& identifier)
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:OVActiveInputMethodIdentifierKey];
         }
     }
+}
+
+- (NSString *)activeInputMethodIdentifier
+{
+    if (!_activeInputMethod) {
+        return nil;
+    }
+
+    string identifier = InputMethodConfigIdentifier(_activeInputMethod->identifier());
+    return [NSString stringWithUTF8String:identifier.c_str()];
 }
 @end

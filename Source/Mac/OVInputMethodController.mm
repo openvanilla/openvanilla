@@ -49,11 +49,15 @@ using namespace OpenVanilla;
     OVTextBufferImpl *_readingText;
     OVEventHandlingContext *_inputMethodContext;
 }
+- (void)changeInputMethodAction:(id)sender;
+- (void)handleInputMethodChange:(NSNotification *)notification;
 @end
 
 @implementation OVInputMethodController
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     if (_composingText) {
         delete _composingText;
     }
@@ -81,6 +85,7 @@ using namespace OpenVanilla;
 	if (self) {
         _composingText = new OVTextBufferImpl;
         _readingText = new OVTextBufferImpl;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInputMethodChange:) name:OVModuleManagerDidUpdateActiveInputMethodNotification object:[OVModuleManager defaultManager]];
 	}
 	
 	return self;
@@ -89,7 +94,28 @@ using namespace OpenVanilla;
 - (NSMenu *)menu
 {
     IMEDebug(@"%s", __PRETTY_FUNCTION__);
-    return nil;
+
+    NSMenu *menu = [[[NSMenu alloc] init] autorelease];
+
+
+    NSString *activeInputMethodIdentifier = [OVModuleManager defaultManager].activeInputMethodIdentifier;
+    NSArray *inputMethodIdentifiers = [[OVModuleManager defaultManager] inputMethodIdentifiers];
+    for (NSString *identifier in inputMethodIdentifiers) {
+        NSLog(@"%@", identifier);
+        NSMenuItem *item = [[[NSMenuItem alloc] init] autorelease];
+        [item setTitle:[[OVModuleManager defaultManager] localizedInputMethodName:identifier]];
+        [item setRepresentedObject:identifier];
+        [item setTarget:self];
+        [item setAction:@selector(changeInputMethodAction:)];
+
+        if ([activeInputMethodIdentifier isEqualToString:identifier]) {
+            [item setState:NSOnState];
+        }
+
+        [menu addItem:item];
+    }
+
+    return menu;
 }
 
 #pragma mark IMKStateSetting protocol methods
@@ -99,15 +125,9 @@ using namespace OpenVanilla;
     IMEDebug(@"%s", __PRETTY_FUNCTION__);
     [client overrideKeyboardWithKeyboardNamed:@"com.apple.keylayout.US"];
 
-    _composingText->clear();
-    _readingText->clear();
+    [[OVModuleManager defaultManager] synchronizeActiveInputMethodSettings];
 
-    if (_inputMethodContext) {
-        delete _inputMethodContext;
-        _inputMethodContext = 0;
-    }
-
-    if ([OVModuleManager defaultManager].activeInputMethod) {
+    if (!_inputMethodContext && [OVModuleManager defaultManager].activeInputMethod) {
         _inputMethodContext = [OVModuleManager defaultManager].activeInputMethod->createContext();
     }
 
@@ -121,9 +141,10 @@ using namespace OpenVanilla;
     IMEDebug(@"%s", __PRETTY_FUNCTION__);
     if (_inputMethodContext) {
         _inputMethodContext->stopSession([OVModuleManager defaultManager].loaderService);
-        delete _inputMethodContext;
-        _inputMethodContext = 0;
     }
+
+    _composingText->clear();
+    _readingText->clear();
 }
 
 - (void)commitComposition:(id)sender
@@ -321,4 +342,31 @@ using namespace OpenVanilla;
     return [self handleOVKey:key client:client];
 }
 
+- (void)handleInputMethodChange:(NSNotification *)notification
+{
+    _composingText->clear();
+    _readingText->clear();
+
+    if (_inputMethodContext) {
+        delete _inputMethodContext;
+        _inputMethodContext = 0;
+    }
+
+    if (!_inputMethodContext && [OVModuleManager defaultManager].activeInputMethod) {
+        _inputMethodContext = [OVModuleManager defaultManager].activeInputMethod->createContext();
+    }
+
+    if (_inputMethodContext) {
+        _inputMethodContext->startSession([OVModuleManager defaultManager].loaderService);
+    }
+}
+
+- (void)changeInputMethodAction:(id)sender
+{
+    NSMenuItem *item = [sender objectForKey:kIMKCommandMenuItemName];
+    if (item) {
+        NSString *identifier = [item representedObject];
+        [[OVModuleManager defaultManager] selectInputMethod:identifier];
+    }
+}
 @end
