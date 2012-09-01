@@ -37,7 +37,14 @@ class OVInputMethod;
 
 @interface OVModuleManager : NSObject
 + (OVModuleManager *)defaultManager;
+- (void)selectInputMethod:(NSString *)identifier;
+- (NSString *)localizedInputMethodName:(NSString *)identifier;
+- (void)reload;
+- (void)synchronizeActiveInputMethodSettings;
 @property (assign, readonly) OpenVanilla::OVLoaderServiceImpl* loaderService;
 @property (assign, readonly) OpenVanilla::OVCandidateServiceImpl* candidateService;
-@property (assign, readonly) OpenVanilla::OVInputMethod* inputMethod;
+@property (assign, readonly) OpenVanilla::OVInputMethod* activeInputMethod;
+@property (readonly) NSArray *inputMethodIdentifiers;
 @end
+
+extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification;

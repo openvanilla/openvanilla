@@ -29,13 +29,41 @@
 #import "OVLoaderServiceImpl.h"
 #import "OVCandidateServiceImpl.h"
 #import "OVIMTableBased.h"
+#import "OVPlistBackedKeyValueMapImpl.h"
+#import <map>
+
+extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification = @"OVModuleManagerDidUpdateActiveInputMethodNotification";
+
+static NSString *const OVActiveInputMethodIdentifierKey = @"ActiveInputMethod";
+static NSString *const OVDefaultInputMethod = @"org.openvanilla.OVIMTableBased.cj-ext";
 
 using namespace OpenVanilla;
+
+typedef map<string, OVInputMethod *> OVInputMethodMap;
+
+static string InputMethodConfigIdentifier(const string& identifier)
+{
+    if (identifier.find(".") != string::npos) {
+        return identifier;
+    }
+    
+    return string("org.openvanilla.module.") + identifier;
+}
+
+@interface OVModuleManager ()
+{
+    NSMutableArray *_inputMethodIdentifiers;
+}
+- (BOOL)canSelectInputMethod:(NSString *)identifier;
+@property (readonly) NSString *cachedLocale;
+@property (assign) OVInputMethodMap* inputMethodMap;
+@end
 
 @implementation OVModuleManager
 @synthesize loaderService = _loaderService;
 @synthesize candidateService = _candidateService;
-@synthesize inputMethod = _inputMethod;
+@synthesize activeInputMethod = _activeInputMethod;
+@synthesize inputMethodMap = _inputMethodMap;
 
 + (OVModuleManager *)defaultManager
 {
@@ -54,15 +82,7 @@ using namespace OpenVanilla;
     if (self) {
         _loaderService = new OVLoaderServiceImpl;
         _candidateService = new OVCandidateServiceImpl(_loaderService);
-
-
-        NSString *tableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables"];
-        NSString *cjTable = [tableRoot stringByAppendingPathComponent:@"cj-ext.cin"];
-
-        _inputMethod = new OVIMTableBased([cjTable UTF8String]);
-        OVPathInfo info;
-        bool result = self.inputMethod->initialize(&info, self.loaderService);
-        NSLog(@"%s %d", __PRETTY_FUNCTION__, result);
+        _inputMethodMap = new OVInputMethodMap;
     }
     return self;
 }
@@ -71,7 +91,120 @@ using namespace OpenVanilla;
 {
     delete _loaderService;
     delete _candidateService;
-    delete _inputMethod;
+    for (OVInputMethodMap::iterator i = _inputMethodMap->begin(), e = _inputMethodMap->end(); i != e; ++i) {
+        delete (*i).second;
+    }
+    delete _inputMethodMap;
     [super dealloc];
+}
+
+- (BOOL)canSelectInputMethod:(NSString *)identifier
+{
+    if ([identifier length]) {
+        OVInputMethodMap::const_iterator f = _inputMethodMap->find([identifier UTF8String]);
+        if (f != _inputMethodMap->end()) {
+            return YES;
+        }
+    }
+
+    return NO;
+}
+
+- (void)selectInputMethod:(NSString *)identifier
+{
+    OVInputMethod *chosenInputMethod = 0;
+    if ([identifier length]) {
+        OVInputMethodMap::const_iterator f = _inputMethodMap->find([identifier UTF8String]);
+        if (f != _inputMethodMap->end()) {
+            chosenInputMethod = (*f).second;
+        }
+    }
+
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    if (!chosenInputMethod) {
+        _activeInputMethod = 0;
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:OVActiveInputMethodIdentifierKey];
+        [[NSNotificationCenter defaultCenter] postNotificationName:OVModuleManagerDidUpdateActiveInputMethodNotification object:self];
+    }
+    else {
+        string identifier = InputMethodConfigIdentifier(chosenInputMethod->identifier());
+        NSString *idNSStr = [NSString stringWithUTF8String:identifier.c_str()];
+        OVPlistBackedKeyValueMapImpl kvmi((CFStringRef)idNSStr);
+        OVKeyValueMap kvm(&kvmi);
+        chosenInputMethod->loadConfig(&kvm, _loaderService);
+        chosenInputMethod->saveConfig(&kvm, _loaderService);
+        
+        if (chosenInputMethod != _activeInputMethod) {
+            _activeInputMethod = chosenInputMethod;
+            [[NSUserDefaults standardUserDefaults] setObject:idNSStr forKey:OVActiveInputMethodIdentifierKey];
+            [[NSNotificationCenter defaultCenter] postNotificationName:OVModuleManagerDidUpdateActiveInputMethodNotification object:self];
+        }
+    }
+}
+
+- (NSString *)localizedInputMethodName:(NSString *)identifier
+{
+    OVInputMethodMap::const_iterator f = _inputMethodMap->find([identifier UTF8String]);
+    if (f != _inputMethodMap->end()) {
+        OVInputMethod *inputMethod = (*f).second;
+        string locale = [self.cachedLocale UTF8String];
+        string localizedName = inputMethod->localizedName(locale);
+        NSString *result = [NSString stringWithUTF8String:localizedName.c_str()];
+        return result;
+    }
+    else {
+        return nil;
+    }    
+}
+
+- (void)reload
+{
+    for (OVInputMethodMap::iterator i = _inputMethodMap->begin(), e = _inputMethodMap->end(); i != e; ++i) {
+        delete (*i).second;
+    }
+
+    _activeInputMethod = 0;
+    _inputMethodMap->clear();
+
+    // TODO: Load user tables
+    NSSet *basicTables = [NSSet setWithObjects:@"cj-ext.cin", @"simplex-ext.cin", @"dayi3-patched.cin", @"ehq-symbols.cin", nil];
+    NSString *tableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables"];
+
+    for (NSString *tableName in basicTables) {
+        NSString *tablePath = [tableRoot stringByAppendingPathComponent:tableName];
+
+        OVInputMethod *inputMethod = new OVIMTableBased([tablePath UTF8String]);
+        OVPathInfo info;
+        bool result = inputMethod->initialize(&info, self.loaderService);
+        if (!result) {
+            delete inputMethod;
+        }
+        else {
+            string identifier = InputMethodConfigIdentifier(inputMethod->identifier());
+            _inputMethodMap->operator[](identifier) = inputMethod;
+        }
+    }
+
+    [self synchronizeActiveInputMethodSettings];
+}
+ 
+
+- (void)synchronizeActiveInputMethodSettings
+{
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSString *activeInputMethodIdentifier = [[NSUserDefaults standardUserDefaults] stringForKey:OVActiveInputMethodIdentifierKey];
+    
+    if ([self canSelectInputMethod:activeInputMethodIdentifier]) {
+        [self selectInputMethod:activeInputMethodIdentifier];
+    }
+    else {
+        // default input method
+        if ([self canSelectInputMethod:OVDefaultInputMethod]) {
+            [self selectInputMethod:OVDefaultInputMethod];
+        }
+        else {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:OVActiveInputMethodIdentifierKey];
+        }
+    }
 }
 @end

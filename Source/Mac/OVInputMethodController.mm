@@ -107,8 +107,8 @@ using namespace OpenVanilla;
         _inputMethodContext = 0;
     }
 
-    if ([OVModuleManager defaultManager].inputMethod) {
-        _inputMethodContext = [OVModuleManager defaultManager].inputMethod->createContext();
+    if ([OVModuleManager defaultManager].activeInputMethod) {
+        _inputMethodContext = [OVModuleManager defaultManager].activeInputMethod->createContext();
     }
 
     if (_inputMethodContext) {
