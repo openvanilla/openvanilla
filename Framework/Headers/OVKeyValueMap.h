@@ -163,6 +163,27 @@ namespace OpenVanilla {
             return m_keyValueMapImpl ? m_keyValueMapImpl->stringValueForKeyWithDefault(key, defaultValue, setIfNotFound) : string();
         }
         
+            
+        virtual bool setKeyIntValue(const string& key, int value)
+        {
+            return m_keyValueMapImpl ? m_keyValueMapImpl->setKeyIntValue(key, value) : false;
+        }
+
+        virtual bool setKeyBoolValue(const string& key, bool value)
+        {
+            return m_keyValueMapImpl ? m_keyValueMapImpl->setKeyBoolValue(key, value) : false;
+        }
+            
+        virtual int intValueForKey(const string& key)
+        {
+            return m_keyValueMapImpl ? m_keyValueMapImpl->intValueForKey(key) : 0;
+        }
+        
+        virtual bool isKeyTrue(const string& key)
+        {
+            return m_keyValueMapImpl ? m_keyValueMapImpl->isKeyTrue(key) : false;
+        }
+            
     protected:
         OVKeyValueMapImpl* m_keyValueMapImpl;
     };
