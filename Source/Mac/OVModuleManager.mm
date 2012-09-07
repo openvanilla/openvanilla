@@ -55,7 +55,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
     NSMutableArray *_inputMethodIdentifiers;
 }
 - (BOOL)canSelectInputMethod:(NSString *)identifier;
-@property (readonly) NSString *cachedLocale;
+- (void)handleLocaleChangeNotification:(NSNotification *)aNotification;
+@property (retain) NSString *cachedLocale;
 @property (assign) OVInputMethodMap* inputMethodMap;
 @end
 
@@ -86,7 +87,9 @@ static string InputMethodConfigIdentifier(const string& identifier)
         _candidateService = new OVCandidateServiceImpl(_loaderService);
         _inputMethodMap = new OVInputMethodMap;
         _inputMethodIdentifiers = [[NSMutableArray alloc] init];
-        _cachedLocale = @"en";	
+        _cachedLocale = [@"en" retain];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLocaleChangeNotification:) name:NSCurrentLocaleDidChangeNotification object:nil];
     }
     return self;
 }
@@ -100,6 +103,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
     }
     delete _inputMethodMap;
     [_inputMethodIdentifiers release];
+    [_cachedLocale release];
     [super dealloc];
 }
 
@@ -194,6 +198,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
         }
     }
 
+    [self handleLocaleChangeNotification:nil];
     [self synchronizeActiveInputMethodSettings];
 }
  
@@ -225,5 +230,14 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
     string identifier = InputMethodConfigIdentifier(_activeInputMethod->identifier());
     return [NSString stringWithUTF8String:identifier.c_str()];
+}
+
+- (void)handleLocaleChangeNotification:(NSNotification *)aNotification
+{
+    NSArray *tags = [NSLocale preferredLanguages];
+    
+    if ([tags count]) {
+        self.cachedLocale = [tags objectAtIndex:0];
+    }
 }
 @end
