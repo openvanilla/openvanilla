@@ -43,6 +43,7 @@
 		6ACB49F915E49F2900380B82 /* VTVerticalCandidateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49F115E49F2900380B82 /* VTVerticalCandidateController.m */; };
 		6ACB49FA15E49F2900380B82 /* VTVerticalCandidateTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49F315E49F2900380B82 /* VTVerticalCandidateTableView.m */; };
 		6ACB49FB15E49F2900380B82 /* VTVerticalKeyLabelStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49F515E49F2900380B82 /* VTVerticalKeyLabelStripView.m */; };
+		6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -154,6 +155,8 @@
 		6ACB49F315E49F2900380B82 /* VTVerticalCandidateTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTVerticalCandidateTableView.m; sourceTree = "<group>"; };
 		6ACB49F415E49F2900380B82 /* VTVerticalKeyLabelStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTVerticalKeyLabelStripView.h; sourceTree = "<group>"; };
 		6ACB49F515E49F2900380B82 /* VTVerticalKeyLabelStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTVerticalKeyLabelStripView.m; sourceTree = "<group>"; };
+		6AFBA9BF15F9AE0A007DC9E6 /* OVPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVPreferencesWindowController.h; sourceTree = "<group>"; };
+		6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVPreferencesWindowController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,7 +218,8 @@
 				6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.m */,
 				6ACB49C415E49EB400380B82 /* OVModuleManager.h */,
 				6ACB49C515E49EB400380B82 /* OVModuleManager.mm */,
-				6ABBAF0915CD58F90080EE7D /* MainMenu.xib */,
+				6AFBA9BF15F9AE0A007DC9E6 /* OVPreferencesWindowController.h */,
+				6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.m */,
 				6ABBAF2415CD61680080EE7D /* Resources */,
 				6ABBAEFB15CD58F90080EE7D /* Supporting Files */,
 			);
@@ -238,6 +242,7 @@
 		6ABBAF2415CD61680080EE7D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6ABBAF0915CD58F90080EE7D /* MainMenu.xib */,
 				6ABBAF2515CD617D0080EE7D /* OpenVanilla-App.icns */,
 				6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */,
 				6AB4A07715ED2BBA00E78557 /* preferences.xib */,
@@ -493,6 +498,7 @@
 				6ACB49F915E49F2900380B82 /* VTVerticalCandidateController.m in Sources */,
 				6ACB49FA15E49F2900380B82 /* VTVerticalCandidateTableView.m in Sources */,
 				6ACB49FB15E49F2900380B82 /* VTVerticalKeyLabelStripView.m in Sources */,
+				6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

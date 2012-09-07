@@ -27,6 +27,7 @@
 
 #import "OVAppDelegate.h"
 #import "OVModuleManager.h"
+#import "OVPreferencesWindowController.h"
 
 @implementation OVAppDelegate
 
@@ -38,6 +39,12 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [[OVModuleManager defaultManager] reload];
+
+
+    OVPreferencesWindowController *controller = [[OVPreferencesWindowController alloc] initWithWindowNibName:@"preferences"];
+    NSLog(@"window: %@", controller);
+    [[controller window] center];
+    [[controller window] orderFront:self];
 }
 
 @end
