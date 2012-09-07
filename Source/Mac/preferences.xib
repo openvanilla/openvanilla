@@ -751,7 +751,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="NSTitle">16</string>
 								<string key="NSKeyEquiv"/>
 								<int key="NSMnemonicLoc">2147483647</int>
-								<int key="NSState">1</int>
 								<reference key="NSOnImage" ref="949755367"/>
 								<reference key="NSMixedImage" ref="619677181"/>
 								<string key="NSAction">_popUpItemAction:</string>
@@ -1416,28 +1415,18 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string key="className">OVPreferencesWindowController</string>
 					<string key="superclassName">NSWindowController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="generalPreferencesView">NSView</string>
 						<string key="generalPreferencesViewController">NSViewController</string>
 						<string key="modulePreferencesContainerView">NSView</string>
-						<string key="tableBasedMoudlePreferencesView">NSView</string>
 						<string key="tableBasedMoudlePreferencesViewController">NSViewController</string>
 						<string key="tableView">NSTableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="generalPreferencesView">
-							<string key="name">generalPreferencesView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="generalPreferencesViewController">
 							<string key="name">generalPreferencesViewController</string>
 							<string key="candidateClassName">NSViewController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="modulePreferencesContainerView">
 							<string key="name">modulePreferencesContainerView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tableBasedMoudlePreferencesView">
-							<string key="name">tableBasedMoudlePreferencesView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="tableBasedMoudlePreferencesViewController">
