@@ -67,7 +67,7 @@ namespace OpenVanilla {
         char m_configMatchZeroOrMoreChar;
         size_t m_configMaximumRadicalLength;
         bool m_configSendFirstCandidateWithSpaceWithOnePageList;
-        bool m_configShouldCommitAtMaximumRadicalLength;
+        bool m_configShouldComposeAtMaximumRadicalLength;
         bool m_configUseSpaceAsFirstCandidateSelectionKey;
     };
 };

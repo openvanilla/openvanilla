@@ -161,7 +161,7 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
 
     bool excludeEndKey = (m_components.size() > 1) && (key->keyCode() == m_module->m_configMatchOneChar || key->keyCode() == m_module->m_configMatchZeroOrMoreChar);
 
-    if ((isEndKey(key) && !excludeEndKey) || (m_module->m_configShouldCommitAtMaximumRadicalLength && m_components.size() >= m_module->m_configMaximumRadicalLength)) {
+    if ((isEndKey(key) && !excludeEndKey) || (m_module->m_configShouldComposeAtMaximumRadicalLength && m_components.size() >= m_module->m_configMaximumRadicalLength)) {
         compose(readingText, composingText, candidateService, loaderService);
     }
     else {
@@ -239,7 +239,7 @@ bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* can
             bool excludeEndKey = (m_components.size() > 1) && (key->keyCode() == m_module->m_configMatchOneChar || key->keyCode() == m_module->m_configMatchZeroOrMoreChar);
             bool hasCandidates = false;
 
-            if ((isEndKey(key) && !excludeEndKey) || (m_module->m_configShouldCommitAtMaximumRadicalLength && m_components.size() >= m_module->m_configMaximumRadicalLength)) {
+            if ((isEndKey(key) && !excludeEndKey) || (m_module->m_configShouldComposeAtMaximumRadicalLength && m_components.size() >= m_module->m_configMaximumRadicalLength)) {
                 hasCandidates = compose(readingText, composingText, candidateService, loaderService);
             }
             else if (m_module->m_configComposeWhileTyping) {
@@ -266,7 +266,7 @@ bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* can
     readingText->updateDisplay();
 
     bool excludeEndKey = (m_components.size() > 1) && (key->keyCode() == m_module->m_configMatchOneChar || key->keyCode() == m_module->m_configMatchZeroOrMoreChar);
-    if ((isEndKey(key) && !excludeEndKey) || (m_module->m_configShouldCommitAtMaximumRadicalLength && m_components.size() >= m_module->m_configMaximumRadicalLength)) {
+    if ((isEndKey(key) && !excludeEndKey) || (m_module->m_configShouldComposeAtMaximumRadicalLength && m_components.size() >= m_module->m_configMaximumRadicalLength)) {
         compose(readingText, composingText, candidateService, loaderService);
     }
 

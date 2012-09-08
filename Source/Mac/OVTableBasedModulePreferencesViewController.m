@@ -14,7 +14,7 @@
 @synthesize fieldClearReadingBufferAtCompositionError = _fieldClearReadingBufferAtCompositionError;
 @synthesize fieldComposeWhileTyping = _fieldComposeWhileTyping;
 @synthesize fieldSendFirstCandidateWithSpaceWithOnePageList = _fieldSendFirstCandidateWithSpaceWithOnePageList;
-@synthesize fieldShouldCommitAtMaximumRadicalLength = _fieldShouldCommitAtMaximumRadicalLength;
+@synthesize fieldShouldComposeAtMaximumRadicalLength = _fieldShouldComposeAtMaximumRadicalLength;
 @synthesize fieldUseSpaceAsFirstCandidateSelectionKey = _fieldUseSpaceAsFirstCandidateSelectionKey;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -37,7 +37,7 @@
     [super synchronize];
     [self setStateForButton:self.fieldClearReadingBufferAtCompositionError forKey:@"ClearReadingBufferAtCompositionError"];
     [self setStateForButton:self.fieldComposeWhileTyping forKey:@"ComposeWhileTyping"];
-    [self setStateForButton:self.fieldShouldCommitAtMaximumRadicalLength forKey:@"ShouldCommitAtMaximumRadicalLength"];
+    [self setStateForButton:self.fieldShouldComposeAtMaximumRadicalLength forKey:@"ShouldComposeAtMaximumRadicalLength"];
 
     if ([self boolValueForKey:@"UseSpaceAsFirstCandidateSelectionKey"]) {
         [self.fieldUseSpaceAsFirstCandidateSelectionKey setState:NSOnState];
@@ -67,7 +67,7 @@
 
     [self setBoolValue:([self.fieldClearReadingBufferAtCompositionError state] == NSOnState) forKey:@"ClearReadingBufferAtCompositionError"];
     [self setBoolValue:([self.fieldComposeWhileTyping state] == NSOnState) forKey:@"ComposeWhileTyping"];
-    [self setBoolValue:([self.fieldShouldCommitAtMaximumRadicalLength state] == NSOnState) forKey:@"ShouldCommitAtMaximumRadicalLength"];
+    [self setBoolValue:([self.fieldShouldComposeAtMaximumRadicalLength state] == NSOnState) forKey:@"ShouldComposeAtMaximumRadicalLength"];
     [self setBoolValue:([self.fieldUseSpaceAsFirstCandidateSelectionKey state] == NSOnState) forKey:@"UseSpaceAsFirstCandidateSelectionKey"];
     [self setBoolValue:([self.fieldSendFirstCandidateWithSpaceWithOnePageList state] == NSOnState) forKey:@"SendFirstCandidateWithSpaceWithOnePageList"];
 }

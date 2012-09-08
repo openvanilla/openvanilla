@@ -37,7 +37,7 @@ OVIMTableBased::OVIMTableBased(const string& tablePath)
     , m_configComposeWhileTyping(false)
     , m_configMaximumRadicalLength(5)
     , m_configSendFirstCandidateWithSpaceWithOnePageList(true)
-    , m_configShouldCommitAtMaximumRadicalLength(true)
+    , m_configShouldComposeAtMaximumRadicalLength(true)
     , m_configUseSpaceAsFirstCandidateSelectionKey(false)
     , m_configMatchOneChar('?')
     , m_configMatchZeroOrMoreChar('*')
@@ -159,8 +159,8 @@ void OVIMTableBased::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* lo
         m_configSendFirstCandidateWithSpaceWithOnePageList = moduleConfig->isKeyTrue("SendFirstCandidateWithSpaceWithOnePageList");
     }
 
-    if (moduleConfig->hasKey("ShouldCommitAtMaximumRadicalLength")) {
-        m_configShouldCommitAtMaximumRadicalLength = moduleConfig->isKeyTrue("ShouldCommitAtMaximumRadicalLength");
+    if (moduleConfig->hasKey("ShouldComposeAtMaximumRadicalLength")) {
+        m_configShouldComposeAtMaximumRadicalLength = moduleConfig->isKeyTrue("ShouldComposeAtMaximumRadicalLength");
     }
 
     if (moduleConfig->hasKey("UseSpaceAsFirstCandidateSelectionKey")) {
@@ -176,7 +176,7 @@ void OVIMTableBased::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* lo
     moduleConfig->setKeyStringValue("MatchZeroOrMoreChar", string(1, m_configMatchZeroOrMoreChar));
     moduleConfig->setKeyIntValue("MaximumRadicalLength", (int)m_configMaximumRadicalLength);
     moduleConfig->setKeyBoolValue("SendFirstCandidateWithSpaceWithOnePageList", m_configSendFirstCandidateWithSpaceWithOnePageList);
-    moduleConfig->setKeyBoolValue("ShouldCommitAtMaximumRadicalLength", m_configShouldCommitAtMaximumRadicalLength);
+    moduleConfig->setKeyBoolValue("ShouldComposeAtMaximumRadicalLength", m_configShouldComposeAtMaximumRadicalLength);
     moduleConfig->setKeyBoolValue("UseSpaceAsFirstCandidateSelectionKey", m_configUseSpaceAsFirstCandidateSelectionKey);
 }
 

@@ -1048,7 +1048,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">fieldShouldCommitAtMaximumRadicalLength</string>
+						<string key="label">fieldShouldComposeAtMaximumRadicalLength</string>
 						<reference key="source" ref="632629047"/>
 						<reference key="destination" ref="628330742"/>
 					</object>

@@ -15,7 +15,7 @@
     NSButton *_fieldClearReadingBufferAtCompositionError;
     NSButton *_fieldComposeWhileTyping;
     NSButton *_fieldSendFirstCandidateWithSpaceWithOnePageList;
-    NSButton *_fieldShouldCommitAtMaximumRadicalLength;
+    NSButton *_fieldShouldComposeAtMaximumRadicalLength;
     NSButton *_fieldUseSpaceAsFirstCandidateSelectionKey;
 }
 
@@ -24,6 +24,6 @@
 @property (assign, nonatomic) IBOutlet NSButton *fieldClearReadingBufferAtCompositionError;
 @property (assign, nonatomic) IBOutlet NSButton *fieldComposeWhileTyping;
 @property (assign, nonatomic) IBOutlet NSButton *fieldSendFirstCandidateWithSpaceWithOnePageList;
-@property (assign, nonatomic) IBOutlet NSButton *fieldShouldCommitAtMaximumRadicalLength;
+@property (assign, nonatomic) IBOutlet NSButton *fieldShouldComposeAtMaximumRadicalLength;
 @property (assign, nonatomic) IBOutlet NSButton *fieldUseSpaceAsFirstCandidateSelectionKey;
 @end
