@@ -129,6 +129,7 @@ using namespace OpenVanilla;
 
     if (!_inputMethodContext && [OVModuleManager defaultManager].activeInputMethod) {
         _inputMethodContext = [OVModuleManager defaultManager].activeInputMethod->createContext();
+        NSLog(@"%p", _inputMethodContext);
     }
 
     if (_inputMethodContext) {
@@ -354,6 +355,7 @@ using namespace OpenVanilla;
 
     if (!_inputMethodContext && [OVModuleManager defaultManager].activeInputMethod) {
         _inputMethodContext = [OVModuleManager defaultManager].activeInputMethod->createContext();
+        NSLog(@"! %p", _inputMethodContext);
     }
 
     if (_inputMethodContext) {

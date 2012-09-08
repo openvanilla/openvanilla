@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.m */; };
+		6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m */; };
 		6AB4A07815ED2BBA00E78557 /* preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB4A07715ED2BBA00E78557 /* preferences.xib */; };
 		6ABBAEF515CD58F90080EE7D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAEF415CD58F90080EE7D /* Cocoa.framework */; };
 		6ABBAEFF15CD58F90080EE7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAEFD15CD58F90080EE7D /* InfoPlist.strings */; };
@@ -43,7 +45,7 @@
 		6ACB49F915E49F2900380B82 /* VTVerticalCandidateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49F115E49F2900380B82 /* VTVerticalCandidateController.m */; };
 		6ACB49FA15E49F2900380B82 /* VTVerticalCandidateTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49F315E49F2900380B82 /* VTVerticalCandidateTableView.m */; };
 		6ACB49FB15E49F2900380B82 /* VTVerticalKeyLabelStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49F515E49F2900380B82 /* VTVerticalKeyLabelStripView.m */; };
-		6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.m */; };
+		6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +65,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6A3914AB15FAE96500DC57C3 /* OVBasePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVBasePreferencesViewController.h; sourceTree = "<group>"; };
+		6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVBasePreferencesViewController.m; sourceTree = "<group>"; };
+		6A3914AF15FAE99400DC57C3 /* OVTableBasedModulePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTableBasedModulePreferencesViewController.h; sourceTree = "<group>"; };
+		6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVTableBasedModulePreferencesViewController.m; sourceTree = "<group>"; };
 		6AB4A07715ED2BBA00E78557 /* preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = preferences.xib; sourceTree = "<group>"; };
 		6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ABBAEF415CD58F90080EE7D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -156,7 +162,7 @@
 		6ACB49F415E49F2900380B82 /* VTVerticalKeyLabelStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTVerticalKeyLabelStripView.h; sourceTree = "<group>"; };
 		6ACB49F515E49F2900380B82 /* VTVerticalKeyLabelStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTVerticalKeyLabelStripView.m; sourceTree = "<group>"; };
 		6AFBA9BF15F9AE0A007DC9E6 /* OVPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVPreferencesWindowController.h; sourceTree = "<group>"; };
-		6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVPreferencesWindowController.m; sourceTree = "<group>"; };
+		6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVPreferencesWindowController.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +216,8 @@
 				6ACB49CF15E49EF100380B82 /* FrameworkImpls */,
 				6ABBAF0615CD58F90080EE7D /* OVAppDelegate.h */,
 				6ABBAF0715CD58F90080EE7D /* OVAppDelegate.mm */,
+				6A3914AB15FAE96500DC57C3 /* OVBasePreferencesViewController.h */,
+				6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.m */,
 				6ABBAF1B15CD615B0080EE7D /* OVConstants.h */,
 				6ABBAF1C15CD615B0080EE7D /* OVConstants.m */,
 				6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */,
@@ -219,9 +227,11 @@
 				6ACB49C415E49EB400380B82 /* OVModuleManager.h */,
 				6ACB49C515E49EB400380B82 /* OVModuleManager.mm */,
 				6AFBA9BF15F9AE0A007DC9E6 /* OVPreferencesWindowController.h */,
-				6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.m */,
+				6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */,
 				6ABBAF2415CD61680080EE7D /* Resources */,
 				6ABBAEFB15CD58F90080EE7D /* Supporting Files */,
+				6A3914AF15FAE99400DC57C3 /* OVTableBasedModulePreferencesViewController.h */,
+				6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m */,
 			);
 			name = "InputMethod Application";
 			path = Source/Mac;
@@ -456,7 +466,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		6ABBAF3215CD62440080EE7D /* Install and Activate Input Method (Run Script) */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -464,7 +474,7 @@
 			name = "Install and Activate Input Method (Run Script)";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "killall $EXECUTABLE_NAME\npwd\n# ls -l\n# rm -rf \"$HOME/Library/Input Methods/$FULL_PRODUCT_NAME\"\ncp -R $BUILT_PRODUCTS_DIR/$FULL_PRODUCT_NAME \"$HOME/Library/Input Methods/\"\n\"$HOME/Library/Input Methods/$EXECUTABLE_FOLDER_PATH/$EXECUTABLE_NAME\" install";
 		};
@@ -498,7 +508,9 @@
 				6ACB49F915E49F2900380B82 /* VTVerticalCandidateController.m in Sources */,
 				6ACB49FA15E49F2900380B82 /* VTVerticalCandidateTableView.m in Sources */,
 				6ACB49FB15E49F2900380B82 /* VTVerticalKeyLabelStripView.m in Sources */,
-				6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.m in Sources */,
+				6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.mm in Sources */,
+				6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.m in Sources */,
+				6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

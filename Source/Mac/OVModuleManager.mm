@@ -192,6 +192,12 @@ static string InputMethodConfigIdentifier(const string& identifier)
         }
         else {
             string identifier = InputMethodConfigIdentifier(inputMethod->identifier());
+            NSString *idNSStr = [NSString stringWithUTF8String:identifier.c_str()];
+            OVPlistBackedKeyValueMapImpl kvmi((CFStringRef)idNSStr);
+            OVKeyValueMap kvm(&kvmi);
+            inputMethod->loadConfig(&kvm, _loaderService);
+            inputMethod->saveConfig(&kvm, _loaderService);
+
             _inputMethodMap->operator[](identifier) = inputMethod;
 
             [_inputMethodIdentifiers addObject:[NSString stringWithUTF8String:identifier.c_str()]];

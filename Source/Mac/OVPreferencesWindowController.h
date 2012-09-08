@@ -7,18 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "OVBasePreferencesViewController.h"
 
 @interface OVPreferencesWindowController : NSWindowController <NSTableViewDataSource, NSTableViewDelegate>
 {
     NSMutableArray *_items;
     NSTableView *_tableView;
     NSView *_modulePreferencesContainerView;
-    NSViewController *_generalPreferencesViewController;
-    NSViewController *_tableBasedMoudlePreferencesViewController;
-    NSViewController *_currentPreferencesViewController;
+    OVBasePreferencesViewController *_generalPreferencesViewController;
+    OVBasePreferencesViewController *_tableBasedMoudlePreferencesViewController;
+    OVBasePreferencesViewController *_currentPreferencesViewController;
 }
 @property (assign, nonatomic) IBOutlet NSTableView *tableView;
 @property (assign, nonatomic) IBOutlet NSView *modulePreferencesContainerView;
-@property (assign, nonatomic) IBOutlet NSViewController *generalPreferencesViewController;
-@property (assign, nonatomic) IBOutlet NSViewController *tableBasedMoudlePreferencesViewController;
+@property (assign, nonatomic) IBOutlet OVBasePreferencesViewController *generalPreferencesViewController;
+@property (assign, nonatomic) IBOutlet OVBasePreferencesViewController *tableBasedMoudlePreferencesViewController;
 @end
