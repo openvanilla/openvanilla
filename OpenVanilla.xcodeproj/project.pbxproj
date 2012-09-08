@@ -228,10 +228,10 @@
 				6ACB49C515E49EB400380B82 /* OVModuleManager.mm */,
 				6AFBA9BF15F9AE0A007DC9E6 /* OVPreferencesWindowController.h */,
 				6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */,
-				6ABBAF2415CD61680080EE7D /* Resources */,
-				6ABBAEFB15CD58F90080EE7D /* Supporting Files */,
 				6A3914AF15FAE99400DC57C3 /* OVTableBasedModulePreferencesViewController.h */,
 				6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m */,
+				6ABBAF2415CD61680080EE7D /* Resources */,
+				6ABBAEFB15CD58F90080EE7D /* Supporting Files */,
 			);
 			name = "InputMethod Application";
 			path = Source/Mac;
