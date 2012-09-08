@@ -51,6 +51,20 @@
         [self.fieldUseSpaceAsFirstCandidateSelectionKey setState:NSOffState];
         [self.fieldSendFirstCandidateWithSpaceWithOnePageList setState:NSOffState];
     }
+
+    NSUInteger length = [self unsignedIntegerValueForKey:@"MaximumRadicalLength"];
+    if (!length || length > 100) {
+        length = 5;
+    }
+
+    [self.fieldMaximumRadicalLength selectItemWithTitle:@"5"];
+
+    for (NSMenuItem *item in [[self.fieldMaximumRadicalLength menu] itemArray]) {
+        if ([[item title] integerValue] == length) {
+            [self.fieldMaximumRadicalLength selectItem:item];
+            break;
+        }
+    }
 }
 
 - (IBAction)updateField:(id)sender

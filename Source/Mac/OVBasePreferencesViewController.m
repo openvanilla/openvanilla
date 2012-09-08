@@ -52,4 +52,27 @@
     CFPreferencesSetValue((CFStringRef)key, (value ? kCFBooleanTrue : kCFBooleanFalse), (CFStringRef)self.moduleIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
     CFPreferencesSynchronize((CFStringRef)self.moduleIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
 }
+
+- (NSUInteger)unsignedIntegerValueForKey:(NSString *)key
+{
+    if (!self.moduleIdentifier) {
+        return NO;
+    }
+
+    CFTypeRef valueRef = CFPreferencesCopyValue((CFStringRef)key, (CFStringRef)self.moduleIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+    id value = [NSMakeCollectable(valueRef) autorelease];
+    if (![value isKindOfClass:[NSNumber class]]) {
+        return NO;
+    }
+
+    return [value unsignedIntegerValue];
+}
+
+- (void)setUnsignedIntegerValue:(NSUInteger)value forKey:(NSString *)key
+{
+    CFPreferencesSetValue((CFStringRef)key, (CFNumberRef)[NSNumber numberWithUnsignedInteger:value], (CFStringRef)self.moduleIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+    CFPreferencesSynchronize((CFStringRef)self.moduleIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+
+}
+
 @end

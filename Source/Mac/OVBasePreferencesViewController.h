@@ -15,5 +15,7 @@
 - (void)synchronize;
 - (BOOL)boolValueForKey:(NSString *)key;
 - (void)setBoolValue:(BOOL)value forKey:(NSString *)key;
+- (NSUInteger)unsignedIntegerValueForKey:(NSString *)key;
+- (void)setUnsignedIntegerValue:(NSUInteger)value forKey:(NSString *)key;
 @property (retain, nonatomic) NSString *moduleIdentifier;
 @end

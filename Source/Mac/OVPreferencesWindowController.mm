@@ -50,21 +50,19 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 
     [_items removeAllObjects];
 
-    [_items addObject:Item(kGeneralSettingIdentifier, NSLocalizedString(@"General", nil), self.generalPreferencesViewController)];
+    [_items addObject:Item(kGeneralSettingIdentifier, NSLocalizedString(@"General Settings", nil), self.generalPreferencesViewController)];
 
     for (NSString *moduleIdentifier in [OVModuleManager defaultManager].inputMethodIdentifiers) {
         [_items addObject:Item(moduleIdentifier, [[OVModuleManager defaultManager] localizedInputMethodName:moduleIdentifier], self.tableBasedMoudlePreferencesViewController)];
     }
 
-    [_items addObject:Item(kCheckUpdateIdentifier, NSLocalizedString(@"Check Update", nil), self.generalPreferencesViewController)];
-    [_items addObject:Item(kAddInputMethodIdentifier, NSLocalizedString(@"Add New Input Method…", nil), self.generalPreferencesViewController)];
+    [_items addObject:Item(kAddInputMethodIdentifier, NSLocalizedString(@"Add New Input Method", nil), self.generalPreferencesViewController)];
 
     [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
-    NSLog(@"%@", aNotification);
     if (self.currentPreferencesViewController) {
         [[self.currentPreferencesViewController view] removeFromSuperview];
         self.currentPreferencesViewController = nil;
@@ -84,10 +82,14 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
         controller.moduleIdentifier = [item objectForKey:kIdentifierKey];
         [controller synchronize];
     }
-
-    // [controller synchronize];
+    else {
+        // [controller synchronize];
+    }
 
     [self.modulePreferencesContainerView addSubview:[controller view]];
+
+    NSString *title = [NSString stringWithFormat:NSLocalizedString(@"OpenVanilla - %@", nil), [item objectForKey:kLocalizedNameKey]];
+    [[self window] setTitle:title];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
