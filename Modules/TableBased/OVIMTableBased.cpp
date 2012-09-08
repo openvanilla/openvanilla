@@ -42,6 +42,37 @@ OVIMTableBased::OVIMTableBased(const string& tablePath)
     , m_configMatchOneChar('?')
     , m_configMatchZeroOrMoreChar('*')
 {
+    // populate well-known defaults based on file names
+    // (cj*.cin, or Cangjei-based tables simply use the default)
+    string filename = OVPathHelper::FilenameWithoutPath(m_tablePath);
+
+    // cj*.cin: Cangjei uses the default value
+    if (OVWildcard::Match(filename, "simplex*.cin") || filename == "qcj.cin") {
+        m_configMaximumRadicalLength = 2;
+    }
+    else if (OVWildcard::Match(filename, "dayi*.cin")) {
+        m_configMaximumRadicalLength = 4;
+        m_configUseSpaceAsFirstCandidateSelectionKey = false;
+        m_configUseSpaceAsFirstCandidateSelectionKey = true;
+    } else if (OVWildcard::Match(filename, "ehq*.cin")) {
+        m_configMaximumRadicalLength = 10;
+        m_configComposeWhileTyping = true;
+    } else if (filename == "bpmf-symbol.cin") {
+        m_configMaximumRadicalLength = 1;
+    } else if (OVWildcard::Match(filename, "pinyin*.cin")) {
+        m_configMaximumRadicalLength = 50;
+        m_configComposeWhileTyping = true;
+    } else if (OVWildcard::Match(filename, "wubizixing*.cin")) {
+        m_configMaximumRadicalLength = 4;
+    } else if (filename == "corner.cin" || filename == "telecode.cin") {
+        m_configMaximumRadicalLength = 4;
+    } else if (filename == "biaoyin.cin") {
+        m_configMaximumRadicalLength = 7;
+    } else if (filename == "jyutping.cin") {
+        m_configMaximumRadicalLength = 7;
+    } else if (filename == "klingon.cin") {
+        m_configMaximumRadicalLength = 1;
+    }
 }
 
 OVIMTableBased::~OVIMTableBased()
