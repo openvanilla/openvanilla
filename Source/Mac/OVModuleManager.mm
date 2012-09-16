@@ -29,6 +29,7 @@
 #import "OVLoaderServiceImpl.h"
 #import "OVCandidateServiceImpl.h"
 #import "OVIMTableBased.h"
+#import "OVIMArray.h"
 #import "OVPlistBackedKeyValueMapImpl.h"
 #import <map>
 
@@ -179,12 +180,26 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
     // TODO: Load user tables
     NSArray *basicTables = [NSArray arrayWithObjects:@"cj-ext.cin", @"simplex-ext.cin", @"dayi3-patched.cin", @"ehq-symbols.cin", nil];
-    NSString *tableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables"];
+    NSString *tableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/TableBased"];
 
+    vector<OVInputMethod*> inputMethods;
     for (NSString *tableName in basicTables) {
         NSString *tablePath = [tableRoot stringByAppendingPathComponent:tableName];
 
         OVInputMethod *inputMethod = new OVIMTableBased([tablePath UTF8String]);
+        inputMethods.push_back(inputMethod);
+    }
+
+    do {
+        NSString *arrayTableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/Array"];
+        OVInputMethod *inputMethod = new OVIMArray([arrayTableRoot UTF8String]);
+        inputMethods.push_back(inputMethod);
+    } while (0);
+
+
+
+    for (vector<OVInputMethod*>::iterator i = inputMethods.begin(), e = inputMethods.end(); i != e; ++i) {
+        OVInputMethod* inputMethod = *i;
         OVPathInfo info;
         bool result = inputMethod->initialize(&info, self.loaderService);
         if (!result) {
@@ -207,7 +222,6 @@ static string InputMethodConfigIdentifier(const string& identifier)
     [self handleLocaleChangeNotification:nil];
     [self synchronizeActiveInputMethodSettings];
 }
- 
 
 - (void)synchronizeActiveInputMethodSettings
 {

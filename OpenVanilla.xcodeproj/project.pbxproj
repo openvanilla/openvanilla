@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.m */; };
 		6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m */; };
+		6A8832311605C0B300FBEB85 /* OVIMArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A88322C1605C0B300FBEB85 /* OVIMArray.cpp */; };
+		6A8832321605C0B300FBEB85 /* OVIMArrayContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A88322E1605C0B300FBEB85 /* OVIMArrayContext.cpp */; };
+		6A88323B1605C2D200FBEB85 /* array-shortcode.cin in Copy Array Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A8832341605C1FE00FBEB85 /* array-shortcode.cin */; };
+		6A88323C1605C2D600FBEB85 /* array-special.cin in Copy Array Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A8832351605C1FE00FBEB85 /* array-special.cin */; };
+		6A88323D1605C2D800FBEB85 /* array30.cin in Copy Array Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A8832361605C1FE00FBEB85 /* array30.cin */; };
 		6AB4A07815ED2BBA00E78557 /* preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB4A07715ED2BBA00E78557 /* preferences.xib */; };
 		6ABBAEF515CD58F90080EE7D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAEF415CD58F90080EE7D /* Cocoa.framework */; };
 		6ABBAEFF15CD58F90080EE7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAEFD15CD58F90080EE7D /* InfoPlist.strings */; };
@@ -23,10 +28,10 @@
 		6ABBAF2A15CD61B60080EE7D /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */; };
 		6ABBAF2C15CD61BE0080EE7D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */; };
 		6ABBAF6715CD6F8C0080EE7D /* OVFrameworkInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF6615CD6F8C0080EE7D /* OVFrameworkInfo.cpp */; };
-		6ACB49BE15E49E8600380B82 /* cj-ext.cin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6ACB49B615E49E6600380B82 /* cj-ext.cin */; };
-		6ACB49BF15E49E8600380B82 /* dayi3-patched.cin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6ACB49B715E49E6600380B82 /* dayi3-patched.cin */; };
-		6ACB49C015E49E8600380B82 /* ehq-symbols.cin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6ACB49B815E49E6600380B82 /* ehq-symbols.cin */; };
-		6ACB49C115E49E8600380B82 /* simplex-ext.cin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6ACB49B915E49E6600380B82 /* simplex-ext.cin */; };
+		6ACB49BE15E49E8600380B82 /* cj-ext.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6ACB49B615E49E6600380B82 /* cj-ext.cin */; };
+		6ACB49BF15E49E8600380B82 /* dayi3-patched.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6ACB49B715E49E6600380B82 /* dayi3-patched.cin */; };
+		6ACB49C015E49E8600380B82 /* ehq-symbols.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6ACB49B815E49E6600380B82 /* ehq-symbols.cin */; };
+		6ACB49C115E49E8600380B82 /* simplex-ext.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6ACB49B915E49E6600380B82 /* simplex-ext.cin */; };
 		6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */; };
 		6ACB49C615E49EB400380B82 /* OVModuleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49C515E49EB400380B82 /* OVModuleManager.mm */; };
 		6ACB49CD15E49ECB00380B82 /* OVIMTableBased.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49C915E49ECB00380B82 /* OVIMTableBased.cpp */; };
@@ -49,17 +54,31 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6ACB49B515E49E1400380B82 /* CopyFiles */ = {
+		6A8832331605C1D800FBEB85 /* Copy Array Input Method Tables */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = DataTables;
+			dstPath = DataTables/Array;
 			dstSubfolderSpec = 7;
 			files = (
-				6ACB49BE15E49E8600380B82 /* cj-ext.cin in CopyFiles */,
-				6ACB49BF15E49E8600380B82 /* dayi3-patched.cin in CopyFiles */,
-				6ACB49C015E49E8600380B82 /* ehq-symbols.cin in CopyFiles */,
-				6ACB49C115E49E8600380B82 /* simplex-ext.cin in CopyFiles */,
+				6A88323B1605C2D200FBEB85 /* array-shortcode.cin in Copy Array Input Method Tables */,
+				6A88323C1605C2D600FBEB85 /* array-special.cin in Copy Array Input Method Tables */,
+				6A88323D1605C2D800FBEB85 /* array30.cin in Copy Array Input Method Tables */,
 			);
+			name = "Copy Array Input Method Tables";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ACB49B515E49E1400380B82 /* Copy TableBased Input Method Tables */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = DataTables/TableBased;
+			dstSubfolderSpec = 7;
+			files = (
+				6ACB49BE15E49E8600380B82 /* cj-ext.cin in Copy TableBased Input Method Tables */,
+				6ACB49BF15E49E8600380B82 /* dayi3-patched.cin in Copy TableBased Input Method Tables */,
+				6ACB49C015E49E8600380B82 /* ehq-symbols.cin in Copy TableBased Input Method Tables */,
+				6ACB49C115E49E8600380B82 /* simplex-ext.cin in Copy TableBased Input Method Tables */,
+			);
+			name = "Copy TableBased Input Method Tables";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -69,6 +88,14 @@
 		6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVBasePreferencesViewController.m; sourceTree = "<group>"; };
 		6A3914AF15FAE99400DC57C3 /* OVTableBasedModulePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTableBasedModulePreferencesViewController.h; sourceTree = "<group>"; };
 		6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVTableBasedModulePreferencesViewController.m; sourceTree = "<group>"; };
+		6A88322C1605C0B300FBEB85 /* OVIMArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVIMArray.cpp; sourceTree = "<group>"; };
+		6A88322D1605C0B300FBEB85 /* OVIMArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMArray.h; sourceTree = "<group>"; };
+		6A88322E1605C0B300FBEB85 /* OVIMArrayContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVIMArrayContext.cpp; sourceTree = "<group>"; };
+		6A88322F1605C0B300FBEB85 /* OVIMArrayContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMArrayContext.h; sourceTree = "<group>"; };
+		6A8832301605C0B300FBEB85 /* OVIMArrayKeySequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMArrayKeySequence.h; sourceTree = "<group>"; };
+		6A8832341605C1FE00FBEB85 /* array-shortcode.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "array-shortcode.cin"; sourceTree = "<group>"; };
+		6A8832351605C1FE00FBEB85 /* array-special.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "array-special.cin"; sourceTree = "<group>"; };
+		6A8832361605C1FE00FBEB85 /* array30.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = array30.cin; sourceTree = "<group>"; };
 		6AB4A07715ED2BBA00E78557 /* preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = preferences.xib; sourceTree = "<group>"; };
 		6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ABBAEF415CD58F90080EE7D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -179,6 +206,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A88322B1605C0A300FBEB85 /* Array */ = {
+			isa = PBXGroup;
+			children = (
+				6A88322C1605C0B300FBEB85 /* OVIMArray.cpp */,
+				6A88322D1605C0B300FBEB85 /* OVIMArray.h */,
+				6A88322E1605C0B300FBEB85 /* OVIMArrayContext.cpp */,
+				6A88322F1605C0B300FBEB85 /* OVIMArrayContext.h */,
+				6A8832301605C0B300FBEB85 /* OVIMArrayKeySequence.h */,
+			);
+			path = Array;
+			sourceTree = "<group>";
+		};
+		6A88323A1605C20100FBEB85 /* Array */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Array;
+			sourceTree = "<group>";
+		};
 		6ABBAEE515CD58F90080EE7D = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +366,10 @@
 		6ACB49B315E49DF200380B82 /* DataTables */ = {
 			isa = PBXGroup;
 			children = (
+				6A88323A1605C20100FBEB85 /* Array */,
+				6A8832341605C1FE00FBEB85 /* array-shortcode.cin */,
+				6A8832351605C1FE00FBEB85 /* array-special.cin */,
+				6A8832361605C1FE00FBEB85 /* array30.cin */,
 				6ACB49B615E49E6600380B82 /* cj-ext.cin */,
 				6ACB49B715E49E6600380B82 /* dayi3-patched.cin */,
 				6ACB49B815E49E6600380B82 /* ehq-symbols.cin */,
@@ -331,6 +381,7 @@
 		6ACB49C715E49EBE00380B82 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				6A88322B1605C0A300FBEB85 /* Array */,
 				6ACB49C815E49ECB00380B82 /* TableBased */,
 			);
 			path = Modules;
@@ -408,8 +459,9 @@
 				6ABBAEEC15CD58F90080EE7D /* Sources */,
 				6ABBAEED15CD58F90080EE7D /* Frameworks */,
 				6ABBAEEE15CD58F90080EE7D /* Resources */,
+				6ACB49B515E49E1400380B82 /* Copy TableBased Input Method Tables */,
+				6A8832331605C1D800FBEB85 /* Copy Array Input Method Tables */,
 				6ABBAF3215CD62440080EE7D /* Install and Activate Input Method (Run Script) */,
-				6ACB49B515E49E1400380B82 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -511,6 +563,8 @@
 				6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.mm in Sources */,
 				6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.m in Sources */,
 				6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m in Sources */,
+				6A8832311605C0B300FBEB85 /* OVIMArray.cpp in Sources */,
+				6A8832321605C0B300FBEB85 /* OVIMArrayContext.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
