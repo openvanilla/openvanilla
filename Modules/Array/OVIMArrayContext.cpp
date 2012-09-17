@@ -27,12 +27,13 @@
 
 #include "OVIMArrayContext.h"
 #include "OVIMArray.h"
-#include "OVIMArrayKeySequence.h"
 
 using namespace OpenVanilla;
 
 OVIMArrayContext::OVIMArrayContext(OVIMArray* module)
-	: m_module(module)
+	: parent(module)
+    , keyseq(module->m_mainTable)
+    , state(STATE_WAIT_KEY1)
 {
 }
 
@@ -57,4 +58,36 @@ bool OVIMArrayContext::candidateSelected(OVCandidateService* candidateService, c
 bool OVIMArrayContext::candidateNonPanelKeyReceived(OVCandidateService* candidateService, const OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService)
 {
 	return false;
+}
+
+void OVIMArrayContext::changeBackState(STATE s)
+{
+    switch(s){
+        case STATE_WAIT_CANDIDATE:
+        case STATE_WAIT_KEY2: 
+            changeState(STATE_WAIT_KEY1); 
+            break;
+        case STATE_WAIT_KEY3: 
+            if (keyseq.length() == 2)
+                changeState(STATE_WAIT_KEY2); 
+            else if (keyseq.length() == 1)
+                changeState(STATE_WAIT_KEY1);
+            break;
+        default: break;
+    }
+}
+
+void OVIMArrayContext::changeState(STATE s)
+{
+    state = s;  
+}
+
+bool OVIMArrayContext::isWSeq(char a, char b) const
+{ 
+	return a == 'w' && isdigit(b);
+}
+
+bool OVIMArrayContext::isForceSPSeq()
+{
+	return keyseq.length() == 4 && (keyseq.content() == ",,sp");
 }

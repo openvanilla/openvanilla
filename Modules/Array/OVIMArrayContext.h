@@ -29,6 +29,7 @@
 #define OVIMArrayContext_h
 
 #include "OpenVanilla.h"
+#include "OVIMArrayKeySequence.h"
 
 namespace OpenVanilla {
     using namespace std;
@@ -45,7 +46,26 @@ namespace OpenVanilla {
         virtual bool candidateNonPanelKeyReceived(OVCandidateService* candidateService, const OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService);
 
     protected:
-        OVIMArray* m_module;
+        enum STATE {
+            STATE_WAIT_KEY1 = 0,
+            STATE_WAIT_KEY2,
+            STATE_WAIT_KEY3,
+            STATE_WAIT_CANDIDATE
+        };
+
+        const int RET_PASS = 0;
+        const int RET_DONE = 1;
+        const int RET_CONTINUE = 2;
+
+        void changeState(STATE s);
+        void changeBackState(STATE s);
+
+        bool isWSeq(char a, char b) const;
+        bool isForceSPSeq();
+
+        OVIMArray* parent;
+        OVIMArrayKeySequence keyseq;
+        STATE state;
     };
 };
 
