@@ -41,9 +41,6 @@ namespace OpenVanilla {
         OVIMArrayContext(OVIMArray* module);
         virtual void startSession(OVLoaderService* loaderService);
         virtual bool handleKey(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
-        virtual void candidateCanceled(OVCandidateService* candidateService, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService);        
-        virtual bool candidateSelected(OVCandidateService* candidateService, const string& text, size_t index, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService);
-        virtual bool candidateNonPanelKeyReceived(OVCandidateService* candidateService, const OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService);
 
     protected:
         enum STATE {
@@ -63,9 +60,27 @@ namespace OpenVanilla {
         bool isWSeq(char a, char b) const;
         bool isForceSPSeq();
 
+        void clear();
+        void clearAll(OVTextBuffer* buf, OVCandidateService* candi_bar);
+        void clearCandidate(OVCandidateService *candi_bar);
+
+        void updateDisplay(OVTextBuffer*);
+        int updateCandidate(OVCINDataTable *tab,OVTextBuffer *buf, OVCandidateService *candibar, OVLoaderService *loaderService);
+        
+        void sendAndReset(const char *, OVTextBuffer* , OVCandidateService* , OVLoaderService* );
+        void queryKeyName(const char *keys, std::string& outKeyNames);
+
+        int keyEvent(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
+        void dispatchStateHandler(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
+        int WaitKey1(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
+        int WaitKey2(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
+        int WaitKey3(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
+        int WaitCandidate(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
+
         OVIMArray* parent;
         OVIMArrayKeySequence keyseq;
         STATE state;
+        vector<string> candidateStringVector;
     };
 };
 
