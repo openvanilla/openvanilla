@@ -40,6 +40,7 @@ OVIMArrayContext::OVIMArrayContext(OVIMArray* module)
 
 void OVIMArrayContext::startSession(OVLoaderService* loaderService)
 {
+    parent->checkTables();
 }
 
 bool OVIMArrayContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService)
