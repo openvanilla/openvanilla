@@ -100,6 +100,7 @@ namespace OpenVanilla {
         virtual KeyHandlerResult handleKey(OVKey* key);
         virtual void setPanelOrigin(NSPoint origin);
         virtual void updateVisibility();
+        virtual void applyFontSettings(NSString *fontName = nil, NSUInteger fontSize = 0);
 
     protected:
         OVCandidateListImpl m_candidateList;

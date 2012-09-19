@@ -140,12 +140,20 @@ using namespace OpenVanilla;
 - (void)deactivateServer:(id)client
 {
     IMEDebug(@"%s", __PRETTY_FUNCTION__);
+
     if (_inputMethodContext) {
         _inputMethodContext->stopSession([OVModuleManager defaultManager].loaderService);
     }
 
+    NSAttributedString *emptyReading = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+    [client setMarkedText:emptyReading selectionRange:NSMakeRange(0, 0) replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
+
+    _composingText->commit();
+    [self commitComposition:client];
+
     _composingText->clear();
     _readingText->clear();
+    [OVModuleManager defaultManager].candidateService->resetAll();
 }
 
 - (void)commitComposition:(id)sender

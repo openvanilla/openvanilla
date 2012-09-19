@@ -37,18 +37,41 @@ OVCandidateServiceImpl::OVCandidateServiceImpl(OVLoaderService* loaderService)
 {    
 }
 
+OVOneDimensionalCandidatePanel* OVCandidateServiceImpl::useOneDimensionalCandidatePanel()
+{
+    if (!m_currentCandidatePanel) {
+        m_currentCandidatePanel = &m_verticalCandidatePanel;
+    }
+
+    return m_currentCandidatePanel;
+}
+
 OVOneDimensionalCandidatePanel* OVCandidateServiceImpl::useHorizontalCandidatePanel()
 {
-    return &m_horizontalCandidatePanel;
+    m_currentCandidatePanel = &m_horizontalCandidatePanel;
+    return m_currentCandidatePanel;
 }
 
 OVOneDimensionalCandidatePanel* OVCandidateServiceImpl::useVerticalCandidatePanel()
 {
-    return &m_verticalCandidatePanel;
+    m_currentCandidatePanel = &m_verticalCandidatePanel;
+    return m_currentCandidatePanel;
 }
 
 OVOneDimensionalCandidatePanelImpl* OVCandidateServiceImpl::currentCandidatePanel()
 {
-    return &m_verticalCandidatePanel;
+    return m_currentCandidatePanel;
+}
+
+void OVCandidateServiceImpl::resetAll()
+{
+    m_horizontalCandidatePanel.reset();
+    m_verticalCandidatePanel.reset();
+}
+
+void OVCandidateServiceImpl::applyFontSettings(NSString *fontName, NSUInteger fontSize)
+{
+    m_horizontalCandidatePanel.applyFontSettings(fontName, fontSize);
+    m_verticalCandidatePanel.applyFontSettings(fontName, fontSize);
 }
 

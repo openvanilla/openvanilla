@@ -31,6 +31,11 @@
 
 using namespace OpenVanilla;
 
+static const NSInteger kDefaultCandidateListTextSize = 16;
+static const NSInteger kMinKeyLabelSize = 10;
+static const NSInteger kMinCandidateListTextSize = 12;
+static const NSInteger kMaxCandidateListTextSize = 196;
+
 NSString *const OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification = @"OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification";
 NSString *const OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey = @"OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey";
 NSString *const OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey = @"OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey";
@@ -130,6 +135,8 @@ OVOneDimensionalCandidatePanelImpl::OVOneDimensionalCandidatePanelImpl(Class pan
     m_nextPageKeys = m_defaultNextPageKeys;
     m_previousCandidateKeys = m_defaultPreviousCandidateKeys;
     m_previousPageKeys = m_defaultPreviousPageKeys;
+
+    applyFontSettings();
 }
 
 OVOneDimensionalCandidatePanelImpl::~OVOneDimensionalCandidatePanelImpl()
@@ -181,6 +188,7 @@ void OVOneDimensionalCandidatePanelImpl::cancelEventHandler()
 void OVOneDimensionalCandidatePanelImpl::reset()
 {
     m_inControl = false;
+    m_visible = false;
     m_candidateList.clear();
     m_candidateController.visible = NO;
     [m_candidateController reloadData];
@@ -502,3 +510,25 @@ void OVOneDimensionalCandidatePanelImpl::updateVisibility()
     }
 }
 
+void OVOneDimensionalCandidatePanelImpl::applyFontSettings(NSString *fontName, NSUInteger fontSize)
+{
+    if (fontSize == 0) {
+        fontSize = kDefaultCandidateListTextSize;
+    }
+
+    if (fontSize < kMinCandidateListTextSize) {
+        fontSize = kMinCandidateListTextSize;
+    }
+
+    if (fontSize > kMaxCandidateListTextSize) {
+        fontSize = kMaxCandidateListTextSize;
+    }
+
+    NSInteger keyLabelSize = fontSize / 2;
+    if (keyLabelSize < kMinKeyLabelSize) {
+        keyLabelSize = kMinKeyLabelSize;
+    }
+
+    m_candidateController.keyLabelFont = fontName ? [NSFont fontWithName:fontName size:keyLabelSize] : [NSFont systemFontOfSize:keyLabelSize];
+    m_candidateController.candidateFont = fontName ? [NSFont fontWithName:fontName size:fontSize] : [NSFont systemFontOfSize:fontSize];
+}

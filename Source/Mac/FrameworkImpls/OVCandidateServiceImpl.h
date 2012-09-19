@@ -31,13 +31,17 @@ namespace OpenVanilla {
     class OVCandidateServiceImpl : public OVCandidateService {
     public:
         OVCandidateServiceImpl(OVLoaderService* loaderService);
+        virtual OVOneDimensionalCandidatePanel* useOneDimensionalCandidatePanel();
         virtual OVOneDimensionalCandidatePanel* useHorizontalCandidatePanel();
         virtual OVOneDimensionalCandidatePanel* useVerticalCandidatePanel();
 
         virtual OVOneDimensionalCandidatePanelImpl* currentCandidatePanel();
+        virtual void resetAll();
+        virtual void applyFontSettings(NSString *fontName, NSUInteger fontSize);
 
     protected:
         OVOneDimensionalCandidatePanelImpl m_horizontalCandidatePanel;
         OVOneDimensionalCandidatePanelImpl m_verticalCandidatePanel;
+        OVOneDimensionalCandidatePanelImpl* m_currentCandidatePanel;
     };
 };
