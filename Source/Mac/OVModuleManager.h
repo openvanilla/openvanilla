@@ -46,6 +46,8 @@ class OVInputMethod;
 @property (assign, readonly) OpenVanilla::OVInputMethod* activeInputMethod;
 @property (readonly) NSString *activeInputMethodIdentifier;
 @property (readonly) NSArray *inputMethodIdentifiers;
+
+@property (readonly) NSString *basisKeyboardLayoutIdentifier;
 @end
 
 extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification;

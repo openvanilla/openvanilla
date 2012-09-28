@@ -26,6 +26,7 @@
 //
 
 #import "OVModuleManager.h"
+#import "OVConstants.h"
 #import "OVLoaderServiceImpl.h"
 #import "OVCandidateServiceImpl.h"
 #import "OVIMTableBased.h"
@@ -34,9 +35,6 @@
 #import <map>
 
 extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification = @"OVModuleManagerDidUpdateActiveInputMethodNotification";
-
-static NSString *const OVActiveInputMethodIdentifierKey = @"ActiveInputMethod";
-static NSString *const OVDefaultInputMethod = @"org.openvanilla.OVIMTableBased.cj-ext";
 
 using namespace OpenVanilla;
 
@@ -53,6 +51,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
 @interface OVModuleManager ()
 {
+    NSString *_basisKeyboardLayout;
     NSMutableArray *_inputMethodIdentifiers;
 }
 - (BOOL)canSelectInputMethod:(NSString *)identifier;
@@ -89,6 +88,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
         _inputMethodMap = new OVInputMethodMap;
         _inputMethodIdentifiers = [[NSMutableArray alloc] init];
         _cachedLocale = [@"en" retain];
+
+        _basisKeyboardLayout = [OVDefaultBasisKeyboardLayoutIdentifier copy];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLocaleChangeNotification:) name:NSCurrentLocaleDidChangeNotification object:nil];
     }
@@ -143,8 +144,30 @@ static string InputMethodConfigIdentifier(const string& identifier)
         OVKeyValueMap kvm(&kvmi);
         chosenInputMethod->loadConfig(&kvm, _loaderService);
         chosenInputMethod->saveConfig(&kvm, _loaderService);
-        
         if (chosenInputMethod != _activeInputMethod) {
+
+            // set keyboard layout
+            NSString *currentLayout = nil;
+            id obj = (id)CFPreferencesCopyAppValue((CFStringRef)OVBasisKeyboardLayoutKey, (CFStringRef)idNSStr);
+            if ([obj isKindOfClass:[NSString class]]) {
+                currentLayout = [(NSString *)obj autorelease];
+            }
+            else {
+                obj = [[NSUserDefaults standardUserDefaults] stringForKey:OVBasisKeyboardLayoutKey];
+                if ([obj isKindOfClass:[NSString class]]) {
+                    currentLayout = obj;
+                }
+
+            }
+
+            if (!currentLayout) {
+                currentLayout = OVDefaultBasisKeyboardLayoutIdentifier;
+            }
+
+            id tmp = _basisKeyboardLayout;
+            _basisKeyboardLayout = [currentLayout copy];
+            [tmp release];
+
             _activeInputMethod = chosenInputMethod;
             [[NSUserDefaults standardUserDefaults] setObject:idNSStr forKey:OVActiveInputMethodIdentifierKey];
             [[NSNotificationCenter defaultCenter] postNotificationName:OVModuleManagerDidUpdateActiveInputMethodNotification object:self];
@@ -207,14 +230,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
         }
         else {
             string identifier = InputMethodConfigIdentifier(inputMethod->identifier());
-            NSString *idNSStr = [NSString stringWithUTF8String:identifier.c_str()];
-            OVPlistBackedKeyValueMapImpl kvmi((CFStringRef)idNSStr);
-            OVKeyValueMap kvm(&kvmi);
-            inputMethod->loadConfig(&kvm, _loaderService);
-            inputMethod->saveConfig(&kvm, _loaderService);
-
             _inputMethodMap->operator[](identifier) = inputMethod;
-
             [_inputMethodIdentifiers addObject:[NSString stringWithUTF8String:identifier.c_str()]];
         }
     }
@@ -233,8 +249,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
     }
     else {
         // default input method
-        if ([self canSelectInputMethod:OVDefaultInputMethod]) {
-            [self selectInputMethod:OVDefaultInputMethod];
+        if ([self canSelectInputMethod:OVDefaultInputMethodIdentifier]) {
+            [self selectInputMethod:OVDefaultInputMethodIdentifier];
         }
         else {
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:OVActiveInputMethodIdentifierKey];
@@ -259,5 +275,10 @@ static string InputMethodConfigIdentifier(const string& identifier)
     if ([tags count]) {
         self.cachedLocale = [tags objectAtIndex:0];
     }
+}
+
+- (NSString *)basisKeyboardLayoutIdentifier
+{
+    return _basisKeyboardLayout;
 }
 @end

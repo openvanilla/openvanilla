@@ -28,3 +28,13 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *const OVInputMethodConnectionName;
+extern NSString *const OVActiveInputMethodIdentifierKey;
+extern NSString *const OVDefaultInputMethodIdentifier;
+extern NSString *const OVBasisKeyboardLayoutKey;
+extern NSString *const OVDefaultBasisKeyboardLayoutIdentifier;
+extern NSString *const OVCandidateListStyleNameKey;
+extern NSString *const OVCandidateListTextSizeKey;
+extern NSString *const OVCandidateTextFontNameKey;
+extern NSString *const OVMakeSoundFeedbackOnInputErrorKey;
+extern NSString *const OVScheduledUpdateCheckTimeKey;
+extern NSString *const OVCheckForUpdateKey;

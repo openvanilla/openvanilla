@@ -1,5 +1,5 @@
 //
-// OVTableBasedModulePreferencesViewController.h
+// OVBasePreferencesViewController.h
 //
 // Copyright (c) 2004-2012 Lukhnos Liu (lukhnos at openvanilla dot org)
 //
@@ -25,24 +25,11 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "OVBaseModulePreferencesViewController.h"
+#import "OVBasePreferencesViewController.h"
 
-@interface OVTableBasedModulePreferencesViewController : OVBaseModulePreferencesViewController
-{
-    NSPopUpButton *_fieldMaximumRadicalLength;
-    NSButton *_fieldClearReadingBufferAtCompositionError;
-    NSButton *_fieldComposeWhileTyping;
-    NSButton *_fieldSendFirstCandidateWithSpaceWithOnePageList;
-    NSButton *_fieldShouldComposeAtMaximumRadicalLength;
-    NSButton *_fieldUseSpaceAsFirstCandidateSelectionKey;
-}
-
-- (IBAction)updateField:(id)sender;
-@property (assign, nonatomic) IBOutlet NSPopUpButton *fieldMaximumRadicalLength;
-@property (assign, nonatomic) IBOutlet NSButton *fieldClearReadingBufferAtCompositionError;
-@property (assign, nonatomic) IBOutlet NSButton *fieldComposeWhileTyping;
-@property (assign, nonatomic) IBOutlet NSButton *fieldSendFirstCandidateWithSpaceWithOnePageList;
-@property (assign, nonatomic) IBOutlet NSButton *fieldShouldComposeAtMaximumRadicalLength;
-@property (assign, nonatomic) IBOutlet NSButton *fieldUseSpaceAsFirstCandidateSelectionKey;
+@interface OVBaseModulePreferencesViewController : OVBasePreferencesViewController
+- (BOOL)boolValueForKey:(NSString *)key;
+- (void)setBoolValue:(BOOL)value forKey:(NSString *)key;
+- (NSUInteger)unsignedIntegerValueForKey:(NSString *)key;
+- (void)setUnsignedIntegerValue:(NSUInteger)value forKey:(NSString *)key;
 @end
