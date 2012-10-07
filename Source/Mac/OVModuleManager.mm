@@ -32,13 +32,11 @@
 #import "OVIMTableBased.h"
 #import "OVIMArray.h"
 #import "OVPlistBackedKeyValueMapImpl.h"
-#import <map>
+#import <set>
 
 extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification = @"OVModuleManagerDidUpdateActiveInputMethodNotification";
 
 using namespace OpenVanilla;
-
-typedef map<string, OVInputMethod *> OVInputMethodMap;
 
 static string InputMethodConfigIdentifier(const string& identifier)
 {
@@ -50,12 +48,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
 }
 
 @interface OVModuleManager ()
-{
-    NSMutableArray *_inputMethodIdentifiers;
-}
 - (BOOL)canSelectInputMethod:(NSString *)identifier;
 - (void)handleLocaleChangeNotification:(NSNotification *)aNotification;
-@property (retain) NSString *cachedLocale;
 @property (assign) OVInputMethodMap* inputMethodMap;
 @end
 
@@ -66,7 +60,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
 @synthesize candidateService = _candidateService;
 @synthesize activeInputMethod = _activeInputMethod;
 @synthesize inputMethodMap = _inputMethodMap;
-@synthesize cachedLocale = _cachedLocale;
+@synthesize currentLocale = _currentLocale;
 
 + (OVModuleManager *)defaultManager
 {
@@ -87,7 +81,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
         _candidateService = new OVCandidateServiceImpl(_loaderService);
         _inputMethodMap = new OVInputMethodMap;
         _inputMethodIdentifiers = [[NSMutableArray alloc] init];
-        _cachedLocale = [@"en" retain];
+        _customTableBasedInputMethodIdentifiers = [[NSMutableSet alloc] init];
+        _currentLocale = [@"en" retain];
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLocaleChangeNotification:) name:NSCurrentLocaleDidChangeNotification object:nil];
 
@@ -122,7 +117,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
     }
     delete _inputMethodMap;
     [_inputMethodIdentifiers release];
-    [_cachedLocale release];
+    [_currentLocale release];
     [super dealloc];
 }
 
@@ -160,7 +155,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
     OVInputMethodMap::const_iterator f = _inputMethodMap->find([identifier UTF8String]);
     if (f != _inputMethodMap->end()) {
         OVInputMethod *inputMethod = (*f).second;
-        string locale = [self.cachedLocale UTF8String];
+        string locale = [self.currentLocale UTF8String];
         string localizedName = inputMethod->localizedName(locale);
         NSString *result = [NSString stringWithUTF8String:localizedName.c_str()];
         return result;
@@ -181,12 +176,52 @@ static string InputMethodConfigIdentifier(const string& identifier)
     _activeInputMethod = 0;
     _inputMethodMap->clear();
 
-    // TODO: Load user tables
+    vector<OVInputMethod*> inputMethods;
+    set<OVInputMethod*> customTableInputMethods;
+    NSMutableSet *customTableNames = [NSMutableSet set];
+
+    NSArray *appSupportPaths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    if ([appSupportPaths count]) {
+        NSString *appSupportRoot = [appSupportPaths objectAtIndex:0];
+
+        NSString *appDataRoot = [appSupportRoot stringByAppendingPathComponent:[[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleNameKey]];
+        NSString *tableRoot = [appDataRoot stringByAppendingPathComponent:@"TableBased"];
+        NSLog(@"%@", tableRoot);
+
+        BOOL isDir = NO;
+        BOOL pathExists = [[NSFileManager defaultManager] fileExistsAtPath:tableRoot isDirectory:&isDir];
+
+        if (!pathExists) {
+            [[NSFileManager defaultManager] createDirectoryAtPath:tableRoot withIntermediateDirectories:YES attributes:nil error:NULL];
+            pathExists = [[NSFileManager defaultManager] fileExistsAtPath:tableRoot isDirectory:&isDir];
+        }
+
+        if (pathExists && isDir) {
+            NSArray *subpaths = [[NSFileManager defaultManager] subpathsAtPath:tableRoot];
+
+            for (NSString *tableName in subpaths) {
+                if (![[tableName pathExtension] isEqualToString:@"cin"]) {
+                    continue;
+                }
+
+                NSString *tablePath = [tableRoot stringByAppendingPathComponent:tableName];
+                OVInputMethod *inputMethod = new OVIMTableBased([tablePath UTF8String]);
+                inputMethods.push_back(inputMethod);
+                customTableInputMethods.insert(inputMethod);
+                [customTableNames addObject:tableName];
+            }
+        }
+    }
+
+
     NSArray *basicTables = [NSArray arrayWithObjects:@"cj-ext.cin", @"simplex-ext.cin", @"dayi3-patched.cin", @"ehq-symbols.cin", nil];
     NSString *tableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/TableBased"];
 
-    vector<OVInputMethod*> inputMethods;
     for (NSString *tableName in basicTables) {
+        if ([customTableNames containsObject:tableName]) {
+            continue;
+        }
+
         NSString *tablePath = [tableRoot stringByAppendingPathComponent:tableName];
 
         OVInputMethod *inputMethod = new OVIMTableBased([tablePath UTF8String]);
@@ -207,8 +242,13 @@ static string InputMethodConfigIdentifier(const string& identifier)
         }
         else {
             string identifier = InputMethodConfigIdentifier(inputMethod->identifier());
+            NSString *idNSStr = [NSString stringWithUTF8String:identifier.c_str()];
             _inputMethodMap->operator[](identifier) = inputMethod;
-            [_inputMethodIdentifiers addObject:[NSString stringWithUTF8String:identifier.c_str()]];
+            [_inputMethodIdentifiers addObject:idNSStr];
+
+            if (customTableInputMethods.count(inputMethod)) {
+                [_customTableBasedInputMethodIdentifiers addObject:idNSStr];
+            }
         }
     }
 
@@ -279,6 +319,9 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
 - (BOOL)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path willOverrideBuiltInTable:(BOOL *)willOverride error:(NSError **)error
 {
+    const char *posixPath = [path fileSystemRepresentation];
+
+
     return NO;
 }
 
@@ -288,7 +331,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
 - (BOOL)isCustomTableBasedInputMethod:(NSString *)identifier
 {
-    return NO;
+    return [_customTableBasedInputMethodIdentifiers containsObject:identifier];
 }
 
 - (void)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError *)error
@@ -327,7 +370,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
     NSArray *tags = [NSLocale preferredLanguages];
 
     if ([tags count]) {
-        self.cachedLocale = [tags objectAtIndex:0];
+        self.currentLocale = [tags objectAtIndex:0];
     }
 }
 

@@ -27,6 +27,7 @@
 
 #import "OVTableBasedModulePreferencesViewController.h"
 #import "OVConstants.h"
+#import "OVModuleManager.h"
 
 @implementation OVTableBasedModulePreferencesViewController
 
@@ -57,6 +58,14 @@
 - (void)loadPreferences
 {
     [super loadPreferences];
+    if ([[OVModuleManager defaultManager] isCustomTableBasedInputMethod:self.moduleIdentifier]) {
+        [self.cusmtomTableBasedInputMethodInfo setHidden:NO];
+        [self.removeInputMethodButton setHidden:NO];
+    }
+    else {
+        [self.cusmtomTableBasedInputMethodInfo setHidden:YES];
+        [self.removeInputMethodButton setHidden:YES];
+    }
 
     [self setStateForButton:self.fieldClearReadingBufferAtCompositionError forKey:@"ClearReadingBufferAtCompositionError"];
     [self setStateForButton:self.fieldComposeWhileTyping forKey:@"ComposeWhileTyping"];

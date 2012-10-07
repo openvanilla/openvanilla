@@ -26,16 +26,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <map>
 
 namespace OpenVanilla {
-
-class OVLoaderServiceImpl;
-class OVCandidateServiceImpl;
-class OVInputMethod;
-
+    class OVLoaderServiceImpl;
+    class OVCandidateServiceImpl;
+    class OVInputMethod;
+    typedef std::map<std::string, OVInputMethod *> OVInputMethodMap;
 };
 
 @interface OVModuleManager : NSObject
+{
+    NSMutableArray *_inputMethodIdentifiers;
+    NSMutableSet *_customTableBasedInputMethodIdentifiers;
+    OpenVanilla::OVLoaderServiceImpl* _loaderService;
+    OpenVanilla::OVCandidateServiceImpl* _candidateService;
+    OpenVanilla::OVInputMethod* _activeInputMethod;
+    OpenVanilla::OVInputMethodMap* _inputMethodMap;
+    NSString *_currentLocale;
+}
+
 + (OVModuleManager *)defaultManager;
 - (void)selectInputMethod:(NSString *)identifier;
 - (NSString *)localizedInputMethodName:(NSString *)identifier;
@@ -54,6 +64,7 @@ class OVInputMethod;
 @property (assign, readonly) OpenVanilla::OVInputMethod* activeInputMethod;
 @property (readonly) NSString *activeInputMethodIdentifier;
 @property (readonly) NSArray *inputMethodIdentifiers;
+@property (retain) NSString *currentLocale;
 
 @property (copy) NSString *sharedAlphanumericKeyboardLayoutIdentifier;
 @end
