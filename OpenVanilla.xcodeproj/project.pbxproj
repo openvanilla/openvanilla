@@ -12,6 +12,9 @@
 		6A0BEB6C161573A400FCB59A /* OVImportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BEB69161573A400FCB59A /* OVImportTableViewController.m */; };
 		6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */; };
 		6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m */; };
+		6A6B2144162174DB00697149 /* OVIMArrayPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.m */; };
+		6A6B21481621753300697149 /* OVAddTableBasedInputMethodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B21471621753300697149 /* OVAddTableBasedInputMethodViewController.m */; };
+		6A6B214A1621758700697149 /* OpenVanilla-InputMenu@x2.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6A6B21491621758700697149 /* OpenVanilla-InputMenu@x2.tiff */; };
 		6A8832311605C0B300FBEB85 /* OVIMArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A88322C1605C0B300FBEB85 /* OVIMArray.cpp */; };
 		6A8832321605C0B300FBEB85 /* OVIMArrayContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A88322E1605C0B300FBEB85 /* OVIMArrayContext.cpp */; };
 		6A88323B1605C2D200FBEB85 /* array-shortcode.cin in Copy Array Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A8832341605C1FE00FBEB85 /* array-shortcode.cin */; };
@@ -97,6 +100,11 @@
 		6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVBasePreferencesViewController.mm; sourceTree = "<group>"; };
 		6A3914AF15FAE99400DC57C3 /* OVTableBasedModulePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTableBasedModulePreferencesViewController.h; sourceTree = "<group>"; };
 		6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVTableBasedModulePreferencesViewController.m; sourceTree = "<group>"; };
+		6A6B2142162174DB00697149 /* OVIMArrayPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMArrayPreferencesViewController.h; sourceTree = "<group>"; };
+		6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMArrayPreferencesViewController.m; sourceTree = "<group>"; };
+		6A6B21461621753300697149 /* OVAddTableBasedInputMethodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVAddTableBasedInputMethodViewController.h; sourceTree = "<group>"; };
+		6A6B21471621753300697149 /* OVAddTableBasedInputMethodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVAddTableBasedInputMethodViewController.m; sourceTree = "<group>"; };
+		6A6B21491621758700697149 /* OpenVanilla-InputMenu@x2.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "OpenVanilla-InputMenu@x2.tiff"; path = "Images/OpenVanilla-InputMenu@x2.tiff"; sourceTree = SOURCE_ROOT; };
 		6A88322C1605C0B300FBEB85 /* OVIMArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVIMArray.cpp; sourceTree = "<group>"; };
 		6A88322D1605C0B300FBEB85 /* OVIMArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMArray.h; sourceTree = "<group>"; };
 		6A88322E1605C0B300FBEB85 /* OVIMArrayContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVIMArrayContext.cpp; sourceTree = "<group>"; };
@@ -269,6 +277,8 @@
 			isa = PBXGroup;
 			children = (
 				6ACB49CF15E49EF100380B82 /* FrameworkImpls */,
+				6A6B21461621753300697149 /* OVAddTableBasedInputMethodViewController.h */,
+				6A6B21471621753300697149 /* OVAddTableBasedInputMethodViewController.m */,
 				6ABBAF0615CD58F90080EE7D /* OVAppDelegate.h */,
 				6ABBAF0715CD58F90080EE7D /* OVAppDelegate.mm */,
 				6A0BEB64161573A400FCB59A /* OVBaseModulePreferencesViewController.h */,
@@ -279,6 +289,8 @@
 				6ABBAF1C15CD615B0080EE7D /* OVConstants.m */,
 				6A0BEB66161573A400FCB59A /* OVGeneralPreferencesViewController.h */,
 				6A0BEB67161573A400FCB59A /* OVGeneralPreferencesViewController.m */,
+				6A6B2142162174DB00697149 /* OVIMArrayPreferencesViewController.h */,
+				6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.m */,
 				6A0BEB68161573A400FCB59A /* OVImportTableViewController.h */,
 				6A0BEB69161573A400FCB59A /* OVImportTableViewController.m */,
 				6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */,
@@ -316,6 +328,7 @@
 				6ABBAF0915CD58F90080EE7D /* MainMenu.xib */,
 				6ABBAF2515CD617D0080EE7D /* OpenVanilla-App.icns */,
 				6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */,
+				6A6B21491621758700697149 /* OpenVanilla-InputMenu@x2.tiff */,
 				6AB4A07715ED2BBA00E78557 /* preferences.xib */,
 			);
 			name = Resources;
@@ -525,6 +538,7 @@
 				6ABBAF2715CD617D0080EE7D /* OpenVanilla-App.icns in Resources */,
 				6ABBAF2815CD617D0080EE7D /* OpenVanilla-InputMenu.tiff in Resources */,
 				6AB4A07815ED2BBA00E78557 /* preferences.xib in Resources */,
+				6A6B214A1621758700697149 /* OpenVanilla-InputMenu@x2.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +597,8 @@
 				6A0BEB6A161573A400FCB59A /* OVBaseModulePreferencesViewController.m in Sources */,
 				6A0BEB6B161573A400FCB59A /* OVGeneralPreferencesViewController.m in Sources */,
 				6A0BEB6C161573A400FCB59A /* OVImportTableViewController.m in Sources */,
+				6A6B2144162174DB00697149 /* OVIMArrayPreferencesViewController.m in Sources */,
+				6A6B21481621753300697149 /* OVAddTableBasedInputMethodViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

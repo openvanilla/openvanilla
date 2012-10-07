@@ -35,10 +35,14 @@
     NSView *_modulePreferencesContainerView;
     OVBasePreferencesViewController *_generalPreferencesViewController;
     OVBasePreferencesViewController *_tableBasedMoudlePreferencesViewController;
+    OVBasePreferencesViewController *_arrayMoudlePreferencesViewController;
     OVBasePreferencesViewController *_currentPreferencesViewController;
+    OVBasePreferencesViewController *_addTableBasedInputMethodViewController;
 }
 @property (assign, nonatomic) IBOutlet NSTableView *tableView;
 @property (assign, nonatomic) IBOutlet NSView *modulePreferencesContainerView;
 @property (assign, nonatomic) IBOutlet OVBasePreferencesViewController *generalPreferencesViewController;
 @property (assign, nonatomic) IBOutlet OVBasePreferencesViewController *tableBasedMoudlePreferencesViewController;
+@property (assign, nonatomic) IBOutlet OVBasePreferencesViewController *arrayMoudlePreferencesViewController;
+@property (assign, nonatomic) IBOutlet OVBasePreferencesViewController *addTableBasedInputMethodViewController;
 @end

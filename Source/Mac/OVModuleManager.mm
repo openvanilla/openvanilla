@@ -143,15 +143,13 @@ static string InputMethodConfigIdentifier(const string& identifier)
         [[NSNotificationCenter defaultCenter] postNotificationName:OVModuleManagerDidUpdateActiveInputMethodNotification object:self];
     }
     else {
-        string identifier = InputMethodConfigIdentifier(chosenInputMethod->identifier());
-        NSString *idNSStr = [NSString stringWithUTF8String:identifier.c_str()];
-        OVPlistBackedKeyValueMapImpl kvmi((CFStringRef)idNSStr);
+        OVPlistBackedKeyValueMapImpl kvmi((CFStringRef)identifier);
         OVKeyValueMap kvm(&kvmi);
         chosenInputMethod->loadConfig(&kvm, _loaderService);
         chosenInputMethod->saveConfig(&kvm, _loaderService);
         if (chosenInputMethod != _activeInputMethod) {
             _activeInputMethod = chosenInputMethod;
-            [[NSUserDefaults standardUserDefaults] setObject:idNSStr forKey:OVActiveInputMethodIdentifierKey];
+            [[NSUserDefaults standardUserDefaults] setObject:identifier forKey:OVActiveInputMethodIdentifierKey];
             [[NSNotificationCenter defaultCenter] postNotificationName:OVModuleManagerDidUpdateActiveInputMethodNotification object:self];
         }
     }
@@ -195,6 +193,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
         inputMethods.push_back(inputMethod);
     }
 
+    // TODO: Array always use US keyboard layout
     NSString *arrayTableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/Array"];
     OVInputMethod *inputMethod = new OVIMArray([arrayTableRoot UTF8String]);
     inputMethods.push_back(inputMethod);
@@ -264,16 +263,18 @@ static string InputMethodConfigIdentifier(const string& identifier)
         return self.sharedAlphanumericKeyboardLayoutIdentifier;
     }
 
-    string moduleIdentifier = InputMethodConfigIdentifier((*f).second->identifier());
-    NSString *idNSStr = [NSString stringWithUTF8String:moduleIdentifier.c_str()];
-
     NSString *layout = nil;
-    id obj = (id)CFPreferencesCopyAppValue((CFStringRef)OVAlphanumericKeyboardLayoutKey, (CFStringRef)idNSStr);
+    id obj = (id)CFPreferencesCopyAppValue((CFStringRef)OVAlphanumericKeyboardLayoutKey, (CFStringRef)identifier);
     if ([obj isKindOfClass:[NSString class]]) {
         layout = [(NSString *)obj autorelease];
     }
 
     return layout ? layout : self.sharedAlphanumericKeyboardLayoutIdentifier;
+}
+
+- (BOOL)isTableBasedInputMethodIdentifier:(NSString *)identifier
+{
+    return [identifier hasPrefix:@"org.openvanilla.OVIMTableBased."];
 }
 
 #pragma mark - Properties

@@ -1,8 +1,8 @@
 //
-// OVModuleManager.h
+// OVAddTableBasedInputMethodViewController.m
 //
 // Copyright (c) 2004-2012 Lukhnos Liu (lukhnos at openvanilla dot org)
-// 
+//
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -25,33 +25,15 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "OVAddTableBasedInputMethodViewController.h"
 
-namespace OpenVanilla {
-
-class OVLoaderServiceImpl;
-class OVCandidateServiceImpl;
-class OVInputMethod;
-
-};
-
-@interface OVModuleManager : NSObject
-+ (OVModuleManager *)defaultManager;
-- (void)selectInputMethod:(NSString *)identifier;
-- (NSString *)localizedInputMethodName:(NSString *)identifier;
-- (void)reload;
-- (void)synchronizeActiveInputMethodSettings;
-
-- (NSString *)alphanumericKeyboardLayoutForInputMethod:(NSString *)identifier;
-- (BOOL)isTableBasedInputMethodIdentifier:(NSString *)identifier;
-
-@property (assign, readonly) OpenVanilla::OVLoaderServiceImpl* loaderService;
-@property (assign, readonly) OpenVanilla::OVCandidateServiceImpl* candidateService;
-@property (assign, readonly) OpenVanilla::OVInputMethod* activeInputMethod;
-@property (readonly) NSString *activeInputMethodIdentifier;
-@property (readonly) NSArray *inputMethodIdentifiers;
-
-@property (copy) NSString *sharedAlphanumericKeyboardLayoutIdentifier;
+@interface OVAddTableBasedInputMethodViewController ()
 @end
 
-extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification;
+@implementation OVAddTableBasedInputMethodViewController
+
+- (IBAction)importNewTableAction:(id)sender
+{
+    NSLog(@"to be implemented");
+}
+@end

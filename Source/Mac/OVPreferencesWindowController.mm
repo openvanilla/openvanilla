@@ -34,6 +34,7 @@ static NSString *const kControllerKey = @"ControllerKey";
 static NSString *const kGeneralSettingIdentifier = @"GeneralSettingIdentifier";
 static NSString *const kAddInputMethodIdentifier = @"AddInputMethodIdentifier";
 static NSString *const kCheckUpdateIdentifier = @"CheckUpdateIdentifier";
+static NSString *const kArrayModuleIdentifier = @"org.openvanilla.OVIMArray";
 
 static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBasePreferencesViewController *controller)
 {
@@ -52,6 +53,8 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 @synthesize generalPreferencesViewController = _generalPreferencesViewController;
 @synthesize tableBasedMoudlePreferencesViewController = _tableBasedMoudlePreferencesViewController;
 @synthesize currentPreferencesViewController = _currentPreferencesViewController;
+@synthesize arrayMoudlePreferencesViewController = _arrayMoudlePreferencesViewController;
+@synthesize addTableBasedInputMethodViewController = _addTableBasedInputMethodViewController;
 
 - (void)dealloc
 {
@@ -72,10 +75,14 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
     [_items addObject:Item(kGeneralSettingIdentifier, NSLocalizedString(@"General Settings", nil), self.generalPreferencesViewController)];
 
     for (NSString *moduleIdentifier in [OVModuleManager defaultManager].inputMethodIdentifiers) {
-        [_items addObject:Item(moduleIdentifier, [[OVModuleManager defaultManager] localizedInputMethodName:moduleIdentifier], self.tableBasedMoudlePreferencesViewController)];
+        if ([[OVModuleManager defaultManager] isTableBasedInputMethodIdentifier:moduleIdentifier]) {
+            [_items addObject:Item(moduleIdentifier, [[OVModuleManager defaultManager] localizedInputMethodName:moduleIdentifier], self.tableBasedMoudlePreferencesViewController)];
+        }
     }
 
-    [_items addObject:Item(kAddInputMethodIdentifier, NSLocalizedString(@"Add New Input Method", nil), self.generalPreferencesViewController)];
+    [_items addObject:Item(kArrayModuleIdentifier, [[OVModuleManager defaultManager] localizedInputMethodName:kArrayModuleIdentifier], self.arrayMoudlePreferencesViewController)];
+
+    [_items addObject:Item(kAddInputMethodIdentifier, NSLocalizedString(@"Add New Input Method", nil), self.addTableBasedInputMethodViewController)];
 
     [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 }
