@@ -90,6 +90,25 @@ static string InputMethodConfigIdentifier(const string& identifier)
         _cachedLocale = [@"en" retain];
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLocaleChangeNotification:) name:NSCurrentLocaleDidChangeNotification object:nil];
+
+        // populate default settings; input method identifier and font name can take care of themselves
+
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        if (![userDefaults objectForKey:OVCandidateListStyleNameKey]) {
+            [userDefaults setObject:OVDefaultCandidateListStyleName forKey:OVCandidateListStyleNameKey];
+        }
+
+        if (![userDefaults objectForKey:OVCandidateListTextSizeKey]) {
+            [userDefaults setInteger:OVDefaultCandidateListTextSize forKey:OVCandidateListTextSizeKey];
+        }
+
+        if (![userDefaults objectForKey:OVMakeSoundFeedbackOnInputErrorKey]) {
+            [userDefaults setBool:YES forKey:OVMakeSoundFeedbackOnInputErrorKey];
+        }
+
+        if (![userDefaults objectForKey:OVCheckForUpdateKey]) {
+            [userDefaults setBool:YES forKey:OVCheckForUpdateKey];
+        }
     }
     return self;
 }
@@ -214,6 +233,27 @@ static string InputMethodConfigIdentifier(const string& identifier)
         else {
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:OVActiveInputMethodIdentifierKey];
         }
+    }
+
+    NSString *candidateFontName = [[NSUserDefaults standardUserDefaults] stringForKey:OVCandidateTextFontNameKey];
+    NSInteger candidateFontSize = [[NSUserDefaults standardUserDefaults] integerForKey:OVCandidateListTextSizeKey];
+
+    if (candidateFontSize < OVMinCandidateListTextSize) {
+        candidateFontSize = OVMinCandidateListTextSize;
+    }
+    else if (candidateFontSize > OVMaxCandidateListTextSize) {
+        candidateFontSize = OVMaxCandidateListTextSize;
+    }
+
+    _candidateService->applyFontSettings(candidateFontName, candidateFontSize);
+
+    NSString *candidateStyle = [[NSUserDefaults standardUserDefaults] stringForKey:OVCandidateListStyleNameKey];
+    if (![candidateStyle isEqual:OVHorizontalCandidateListStyleName]) {
+        _candidateService->useVerticalCandidatePanel();
+    }
+    else {
+        NSLog(@"use hori!");
+        _candidateService->useHorizontalCandidatePanel();
     }
 }
 

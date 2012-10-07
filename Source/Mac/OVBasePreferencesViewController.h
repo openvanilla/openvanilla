@@ -32,6 +32,7 @@
     NSString *_moduleIdentifier;
 }
 - (void)configureKeyboardLayoutList:(NSPopUpButton *)popUpButton;
+- (void)setSharedAlphanumericKeyboardLayout:(NSString *)identifier;
 - (void)loadPreferences;
 @property (retain, nonatomic) NSString *moduleIdentifier;
 @end

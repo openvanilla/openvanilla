@@ -51,7 +51,11 @@
 - (void)configureKeyboardLayoutList:(NSPopUpButton *)popUpButton
 {
     NSString *defaultIdentifier = [OVModuleManager defaultManager].sharedAlphanumericKeyboardLayoutIdentifier;
-    NSString *layoutIdentifier = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:self.moduleIdentifier];
+    NSString *layoutIdentifier = defaultIdentifier;
+
+    if (self.moduleIdentifier) {
+        layoutIdentifier = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:self.moduleIdentifier];
+    }
 
     CFArrayRef list = TISCreateInputSourceList(NULL, true);
     NSMenuItem *usKeyboardLayoutItem = nil;
@@ -105,6 +109,11 @@
     
     CFRelease(list);
 
+}
+
+- (void)setSharedAlphanumericKeyboardLayout:(NSString *)identifier
+{
+    [OVModuleManager defaultManager].sharedAlphanumericKeyboardLayoutIdentifier = identifier;
 }
 
 - (void)loadPreferences

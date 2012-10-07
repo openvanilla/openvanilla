@@ -28,4 +28,21 @@
 #import "OVBasePreferencesViewController.h"
 
 @interface OVGeneralPreferencesViewController : OVBasePreferencesViewController
+{
+    NSPopUpButton *_fieldCandidateSize;
+    NSMatrix *_fieldCandidateSytle;
+    NSPopUpButton *_fieldAlphanumericKeyboardLayout;
+    NSButton *_fieldPlaySound;
+    NSButton *_fieldCheckForUpdate;
+    NSTextField *_lastUpdateCheckDateLabel;
+    
+}
+- (IBAction)checkForUpdateAction:(id)sender;
+- (IBAction)updateField:(id)sender;
+@property (assign, nonatomic) IBOutlet NSPopUpButton *fieldCandidateSize;
+@property (assign, nonatomic) IBOutlet NSMatrix *fieldCandidateSytle;
+@property (assign, nonatomic) IBOutlet NSPopUpButton *fieldAlphanumericKeyboardLayout;
+@property (assign, nonatomic) IBOutlet NSButton *fieldPlaySound;
+@property (assign, nonatomic) IBOutlet NSButton *fieldCheckForUpdate;
+@property (assign, nonatomic) IBOutlet NSTextField *lastUpdateCheckDateLabel;
 @end

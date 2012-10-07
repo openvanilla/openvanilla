@@ -28,17 +28,20 @@
 #import "OVLoaderServiceImpl.h"
 #import <Cocoa/Cocoa.h>
 #import "OVConcreteKeyImpl.h"
+#import "OVConstants.h"
 
 using namespace OpenVanilla;
 
 void OVLoaderServiceImpl::beep()
 {
-    NSBeep();
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:OVMakeSoundFeedbackOnInputErrorKey]) {
+        NSBeep();
+    }
 }
 
 const string OVLoaderServiceImpl::locale() const
 {
-    return "en";
+    return string([[NSLocale currentLocale] UTF8String]);
 }
 
 const OVKey OVLoaderServiceImpl::makeOVKey(int characterCode, bool alt, bool opt, bool ctrl, bool shift, bool command, bool capsLock, bool numLock)

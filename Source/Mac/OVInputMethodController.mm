@@ -176,7 +176,7 @@ using namespace OpenVanilla;
     bool handled = false;
     bool candidatePanelFallThrough = false;
 
-    OVOneDimensionalCandidatePanelImpl* panel = dynamic_cast<OVOneDimensionalCandidatePanelImpl*>([OVModuleManager defaultManager].candidateService->useVerticalCandidatePanel());
+    OVOneDimensionalCandidatePanelImpl* panel = dynamic_cast<OVOneDimensionalCandidatePanelImpl*>([OVModuleManager defaultManager].candidateService->currentCandidatePanel());
     if (panel && panel->isInControl()) {
         OVOneDimensionalCandidatePanelImpl::KeyHandlerResult result = panel->handleKey(&key);
         switch (result) {

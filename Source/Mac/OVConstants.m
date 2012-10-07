@@ -28,13 +28,22 @@
 #import "OVConstants.h"
 
 NSString *const OVInputMethodConnectionName = @"OpenVanilla_1_Connection";
+
 NSString *const OVActiveInputMethodIdentifierKey = @"ActiveInputMethod";
-NSString *const OVDefaultInputMethodIdentifier = @"org.openvanilla.OVIMTableBased.cj-ext";
 NSString *const OVAlphanumericKeyboardLayoutKey = @"AlphanumericKeyboardLayout";
-NSString *const OVDefaultAlphanumericKeyboardLayoutIdentifier = @"com.apple.keylayout.US";
 NSString *const OVCandidateListStyleNameKey = @"CandidateListStyle";
 NSString *const OVCandidateListTextSizeKey = @"CandidateListTextSize";
 NSString *const OVCandidateTextFontNameKey = @"CandidateTextFontName";
 NSString *const OVMakeSoundFeedbackOnInputErrorKey = @"MakeSoundFeedbackOnInputError";
-NSString *const OVScheduledUpdateCheckTimeKey = @"ScheduledUpdateCheckTime";
+NSString *const OVLastUpdateCheckTimeKey = @"LastUpdateCheckTime";
 NSString *const OVCheckForUpdateKey = @"CheckForUpdate";
+
+NSString *const OVDefaultInputMethodIdentifier = @"org.openvanilla.OVIMTableBased.cj-ext";
+NSString *const OVDefaultAlphanumericKeyboardLayoutIdentifier = @"com.apple.keylayout.US";
+NSString *const OVDefaultCandidateListStyleName = @"vertical";
+const NSUInteger OVDefaultCandidateListTextSize = 16;
+const NSUInteger OVMaxCandidateListTextSize = 256;
+const NSUInteger OVMinCandidateListTextSize = 12;
+
+NSString *const OVVerticalCandidateListStyleName = @"vertical";
+NSString *const OVHorizontalCandidateListStyleName = @"horizontal";
