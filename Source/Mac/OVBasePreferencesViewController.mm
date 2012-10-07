@@ -27,6 +27,7 @@
 
 #import "OVBasePreferencesViewController.h"
 #import <Carbon/Carbon.h>
+#import "OVModuleManager.h"
 
 @implementation OVBasePreferencesViewController
 @synthesize moduleIdentifier = _moduleIdentifier;
@@ -47,8 +48,11 @@
     [super dealloc];
 }
 
-+ (void)configureKeyboardLayoutList:(NSPopUpButton *)popUpButton selectedLayoutIdentifier:(NSString *)layoutIdentifier defaultIdentifier:(NSString *)defaultIdentifier
+- (void)configureKeyboardLayoutList:(NSPopUpButton *)popUpButton
 {
+    NSString *defaultIdentifier = [OVModuleManager defaultManager].sharedAlphanumericKeyboardLayoutIdentifier;
+    NSString *layoutIdentifier = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:self.moduleIdentifier];
+
     CFArrayRef list = TISCreateInputSourceList(NULL, true);
     NSMenuItem *usKeyboardLayoutItem = nil;
     NSMenuItem *chosenItem = nil;
@@ -58,17 +62,17 @@
     for (int i = 0; i < CFArrayGetCount(list); i++) {
         TISInputSourceRef source = (TISInputSourceRef)CFArrayGetValueAtIndex(list, i);
 
-        CFStringRef category = TISGetInputSourceProperty(source, kTISPropertyInputSourceCategory);
+        CFStringRef category = (CFStringRef)TISGetInputSourceProperty(source, kTISPropertyInputSourceCategory);
         if (CFStringCompare(category, kTISCategoryKeyboardInputSource, 0) != kCFCompareEqualTo) {
             continue;
         }
 
-        CFBooleanRef asciiCapable = TISGetInputSourceProperty(source, kTISPropertyInputSourceIsASCIICapable);
+        CFBooleanRef asciiCapable = (CFBooleanRef)TISGetInputSourceProperty(source, kTISPropertyInputSourceIsASCIICapable);
         if (!CFBooleanGetValue(asciiCapable)) {
             continue;
         }
 
-        CFStringRef sourceType = TISGetInputSourceProperty(source, kTISPropertyInputSourceType);
+        CFStringRef sourceType = (CFStringRef)TISGetInputSourceProperty(source, kTISPropertyInputSourceType);
         if (CFStringCompare(sourceType, kTISTypeKeyboardLayout, 0) != kCFCompareEqualTo) {
             continue;
         }
@@ -102,9 +106,8 @@
     CFRelease(list);
 
 }
-- (void)synchronize
-{
-    CFPreferencesSynchronize((CFStringRef)self.moduleIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-}
 
+- (void)loadPreferences
+{
+}
 @end

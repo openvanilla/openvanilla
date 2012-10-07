@@ -31,7 +31,7 @@
 {
     NSString *_moduleIdentifier;
 }
-+ (void)configureKeyboardLayoutList:(NSPopUpButton *)list selectedLayoutIdentifier:(NSString *)layoutIdentifier defaultIdentifier:(NSString *)defaultIdentifier;
-- (void)synchronize;
+- (void)configureKeyboardLayoutList:(NSPopUpButton *)popUpButton;
+- (void)loadPreferences;
 @property (retain, nonatomic) NSString *moduleIdentifier;
 @end

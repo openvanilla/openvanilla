@@ -30,8 +30,8 @@
 NSString *const OVInputMethodConnectionName = @"OpenVanilla_1_Connection";
 NSString *const OVActiveInputMethodIdentifierKey = @"ActiveInputMethod";
 NSString *const OVDefaultInputMethodIdentifier = @"org.openvanilla.OVIMTableBased.cj-ext";
-NSString *const OVBasisKeyboardLayoutKey = @"BasisKeyboardLayoutKey";
-NSString *const OVDefaultBasisKeyboardLayoutIdentifier = @"com.apple.keylayout.US";
+NSString *const OVAlphanumericKeyboardLayoutKey = @"AlphanumericKeyboardLayout";
+NSString *const OVDefaultAlphanumericKeyboardLayoutIdentifier = @"com.apple.keylayout.US";
 NSString *const OVCandidateListStyleNameKey = @"CandidateListStyle";
 NSString *const OVCandidateListTextSizeKey = @"CandidateListTextSize";
 NSString *const OVCandidateTextFontNameKey = @"CandidateTextFontName";

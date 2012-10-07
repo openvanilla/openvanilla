@@ -30,6 +30,7 @@
 
 @interface OVTableBasedModulePreferencesViewController : OVBaseModulePreferencesViewController
 {
+    NSPopUpButton *_fieldAlphaNumericKeyboardLayout;
     NSPopUpButton *_fieldMaximumRadicalLength;
     NSButton *_fieldClearReadingBufferAtCompositionError;
     NSButton *_fieldComposeWhileTyping;
@@ -39,6 +40,7 @@
 }
 
 - (IBAction)updateField:(id)sender;
+@property (assign, nonatomic) IBOutlet NSPopUpButton *fieldAlphaNumericKeyboardLayout;
 @property (assign, nonatomic) IBOutlet NSPopUpButton *fieldMaximumRadicalLength;
 @property (assign, nonatomic) IBOutlet NSButton *fieldClearReadingBufferAtCompositionError;
 @property (assign, nonatomic) IBOutlet NSButton *fieldComposeWhileTyping;

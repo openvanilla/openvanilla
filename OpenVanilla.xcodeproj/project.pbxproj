@@ -10,7 +10,7 @@
 		6A0BEB6A161573A400FCB59A /* OVBaseModulePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BEB65161573A400FCB59A /* OVBaseModulePreferencesViewController.m */; };
 		6A0BEB6B161573A400FCB59A /* OVGeneralPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BEB67161573A400FCB59A /* OVGeneralPreferencesViewController.m */; };
 		6A0BEB6C161573A400FCB59A /* OVImportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BEB69161573A400FCB59A /* OVImportTableViewController.m */; };
-		6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.m */; };
+		6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */; };
 		6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m */; };
 		6A8832311605C0B300FBEB85 /* OVIMArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A88322C1605C0B300FBEB85 /* OVIMArray.cpp */; };
 		6A8832321605C0B300FBEB85 /* OVIMArrayContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A88322E1605C0B300FBEB85 /* OVIMArrayContext.cpp */; };
@@ -94,7 +94,7 @@
 		6A0BEB68161573A400FCB59A /* OVImportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVImportTableViewController.h; sourceTree = "<group>"; };
 		6A0BEB69161573A400FCB59A /* OVImportTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVImportTableViewController.m; sourceTree = "<group>"; };
 		6A3914AB15FAE96500DC57C3 /* OVBasePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVBasePreferencesViewController.h; sourceTree = "<group>"; };
-		6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVBasePreferencesViewController.m; sourceTree = "<group>"; };
+		6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVBasePreferencesViewController.mm; sourceTree = "<group>"; };
 		6A3914AF15FAE99400DC57C3 /* OVTableBasedModulePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTableBasedModulePreferencesViewController.h; sourceTree = "<group>"; };
 		6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVTableBasedModulePreferencesViewController.m; sourceTree = "<group>"; };
 		6A88322C1605C0B300FBEB85 /* OVIMArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVIMArray.cpp; sourceTree = "<group>"; };
@@ -274,7 +274,7 @@
 				6A0BEB64161573A400FCB59A /* OVBaseModulePreferencesViewController.h */,
 				6A0BEB65161573A400FCB59A /* OVBaseModulePreferencesViewController.m */,
 				6A3914AB15FAE96500DC57C3 /* OVBasePreferencesViewController.h */,
-				6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.m */,
+				6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */,
 				6ABBAF1B15CD615B0080EE7D /* OVConstants.h */,
 				6ABBAF1C15CD615B0080EE7D /* OVConstants.m */,
 				6A0BEB66161573A400FCB59A /* OVGeneralPreferencesViewController.h */,
@@ -576,7 +576,7 @@
 				6ACB49FA15E49F2900380B82 /* VTVerticalCandidateTableView.m in Sources */,
 				6ACB49FB15E49F2900380B82 /* VTVerticalKeyLabelStripView.m in Sources */,
 				6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.mm in Sources */,
-				6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.m in Sources */,
+				6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.mm in Sources */,
 				6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m in Sources */,
 				6A8832311605C0B300FBEB85 /* OVIMArray.cpp in Sources */,
 				6A8832321605C0B300FBEB85 /* OVIMArrayContext.cpp in Sources */,

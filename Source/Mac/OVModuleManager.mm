@@ -51,7 +51,6 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
 @interface OVModuleManager ()
 {
-    NSString *_basisKeyboardLayout;
     NSMutableArray *_inputMethodIdentifiers;
 }
 - (BOOL)canSelectInputMethod:(NSString *)identifier;
@@ -62,6 +61,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
 @implementation OVModuleManager
 @dynamic activeInputMethodIdentifier;
+@dynamic sharedAlphanumericKeyboardLayoutIdentifier;
 @synthesize loaderService = _loaderService;
 @synthesize candidateService = _candidateService;
 @synthesize activeInputMethod = _activeInputMethod;
@@ -89,8 +89,6 @@ static string InputMethodConfigIdentifier(const string& identifier)
         _inputMethodIdentifiers = [[NSMutableArray alloc] init];
         _cachedLocale = [@"en" retain];
 
-        _basisKeyboardLayout = [OVDefaultBasisKeyboardLayoutIdentifier copy];
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLocaleChangeNotification:) name:NSCurrentLocaleDidChangeNotification object:nil];
     }
     return self;
@@ -107,18 +105,6 @@ static string InputMethodConfigIdentifier(const string& identifier)
     [_inputMethodIdentifiers release];
     [_cachedLocale release];
     [super dealloc];
-}
-
-- (BOOL)canSelectInputMethod:(NSString *)identifier
-{
-    if ([identifier length]) {
-        OVInputMethodMap::const_iterator f = _inputMethodMap->find([identifier UTF8String]);
-        if (f != _inputMethodMap->end()) {
-            return YES;
-        }
-    }
-
-    return NO;
 }
 
 - (void)selectInputMethod:(NSString *)identifier
@@ -145,29 +131,6 @@ static string InputMethodConfigIdentifier(const string& identifier)
         chosenInputMethod->loadConfig(&kvm, _loaderService);
         chosenInputMethod->saveConfig(&kvm, _loaderService);
         if (chosenInputMethod != _activeInputMethod) {
-
-            // set keyboard layout
-            NSString *currentLayout = nil;
-            id obj = (id)CFPreferencesCopyAppValue((CFStringRef)OVBasisKeyboardLayoutKey, (CFStringRef)idNSStr);
-            if ([obj isKindOfClass:[NSString class]]) {
-                currentLayout = [(NSString *)obj autorelease];
-            }
-            else {
-                obj = [[NSUserDefaults standardUserDefaults] stringForKey:OVBasisKeyboardLayoutKey];
-                if ([obj isKindOfClass:[NSString class]]) {
-                    currentLayout = obj;
-                }
-
-            }
-
-            if (!currentLayout) {
-                currentLayout = OVDefaultBasisKeyboardLayoutIdentifier;
-            }
-
-            id tmp = _basisKeyboardLayout;
-            _basisKeyboardLayout = [currentLayout copy];
-            [tmp release];
-
             _activeInputMethod = chosenInputMethod;
             [[NSUserDefaults standardUserDefaults] setObject:idNSStr forKey:OVActiveInputMethodIdentifierKey];
             [[NSNotificationCenter defaultCenter] postNotificationName:OVModuleManagerDidUpdateActiveInputMethodNotification object:self];
@@ -213,13 +176,9 @@ static string InputMethodConfigIdentifier(const string& identifier)
         inputMethods.push_back(inputMethod);
     }
 
-    do {
-        NSString *arrayTableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/Array"];
-        OVInputMethod *inputMethod = new OVIMArray([arrayTableRoot UTF8String]);
-        inputMethods.push_back(inputMethod);
-    } while (0);
-
-
+    NSString *arrayTableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/Array"];
+    OVInputMethod *inputMethod = new OVIMArray([arrayTableRoot UTF8String]);
+    inputMethods.push_back(inputMethod);
 
     for (vector<OVInputMethod*>::iterator i = inputMethods.begin(), e = inputMethods.end(); i != e; ++i) {
         OVInputMethod* inputMethod = *i;
@@ -258,6 +217,27 @@ static string InputMethodConfigIdentifier(const string& identifier)
     }
 }
 
+- (NSString *)alphanumericKeyboardLayoutForInputMethod:(NSString *)identifier
+{
+    OVInputMethodMap::const_iterator f = _inputMethodMap->find([identifier UTF8String]);
+    if (f == _inputMethodMap->end()) {
+        return self.sharedAlphanumericKeyboardLayoutIdentifier;
+    }
+
+    string moduleIdentifier = InputMethodConfigIdentifier((*f).second->identifier());
+    NSString *idNSStr = [NSString stringWithUTF8String:moduleIdentifier.c_str()];
+
+    NSString *layout = nil;
+    id obj = (id)CFPreferencesCopyAppValue((CFStringRef)OVAlphanumericKeyboardLayoutKey, (CFStringRef)idNSStr);
+    if ([obj isKindOfClass:[NSString class]]) {
+        layout = [(NSString *)obj autorelease];
+    }
+
+    return layout ? layout : self.sharedAlphanumericKeyboardLayoutIdentifier;
+}
+
+#pragma mark - Properties
+
 - (NSString *)activeInputMethodIdentifier
 {
     if (!_activeInputMethod) {
@@ -268,17 +248,39 @@ static string InputMethodConfigIdentifier(const string& identifier)
     return [NSString stringWithUTF8String:identifier.c_str()];
 }
 
+- (NSString *)sharedAlphanumericKeyboardLayoutIdentifier
+{
+
+    NSString *layout = [[NSUserDefaults standardUserDefaults] stringForKey:OVAlphanumericKeyboardLayoutKey];
+    return layout ? layout : OVDefaultAlphanumericKeyboardLayoutIdentifier;
+}
+
+- (void)setSharedAlphanumericKeyboardLayoutIdentifier:(NSString *)sharedAlphanumericKeyboardLayoutIdentifier
+{
+    [[NSUserDefaults standardUserDefaults] setObject:sharedAlphanumericKeyboardLayoutIdentifier forKey:OVAlphanumericKeyboardLayoutKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark - Private Methods
+
 - (void)handleLocaleChangeNotification:(NSNotification *)aNotification
 {
     NSArray *tags = [NSLocale preferredLanguages];
-    
+
     if ([tags count]) {
         self.cachedLocale = [tags objectAtIndex:0];
     }
 }
 
-- (NSString *)basisKeyboardLayoutIdentifier
+- (BOOL)canSelectInputMethod:(NSString *)identifier
 {
-    return _basisKeyboardLayout;
+    if ([identifier length]) {
+        OVInputMethodMap::const_iterator f = _inputMethodMap->find([identifier UTF8String]);
+        if (f != _inputMethodMap->end()) {
+            return YES;
+        }
+    }
+
+    return NO;
 }
 @end

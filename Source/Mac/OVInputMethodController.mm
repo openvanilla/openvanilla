@@ -123,7 +123,9 @@ using namespace OpenVanilla;
 - (void)activateServer:(id)client
 {
     IMEDebug(@"%s", __PRETTY_FUNCTION__);
-    [client overrideKeyboardWithKeyboardNamed:@"com.apple.keylayout.US"];
+    NSString *keyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
+    NSLog(@"using: %@", keyboardLayout);
+    [client overrideKeyboardWithKeyboardNamed:keyboardLayout];
 
     [[OVModuleManager defaultManager] synchronizeActiveInputMethodSettings];
 
@@ -377,6 +379,8 @@ using namespace OpenVanilla;
     if (item) {
         NSString *identifier = [item representedObject];
         [[OVModuleManager defaultManager] selectInputMethod:identifier];
+
+        // TODO: Use retained client to override keyboard layout
     }
 }
 @end

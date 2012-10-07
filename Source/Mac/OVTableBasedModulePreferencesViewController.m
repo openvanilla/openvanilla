@@ -26,9 +26,11 @@
 //
 
 #import "OVTableBasedModulePreferencesViewController.h"
+#import "OVConstants.h"
 
 @implementation OVTableBasedModulePreferencesViewController
 
+@synthesize fieldAlphaNumericKeyboardLayout = _fieldAlphaNumericKeyboardLayout;
 @synthesize fieldMaximumRadicalLength = _fieldMaximumRadicalLength;
 @synthesize fieldClearReadingBufferAtCompositionError = _fieldClearReadingBufferAtCompositionError;
 @synthesize fieldComposeWhileTyping = _fieldComposeWhileTyping;
@@ -40,7 +42,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.
     }
     
     return self;
@@ -51,9 +52,10 @@
     [button setState:([self boolValueForKey:key] ? NSOnState : NSOffState)];
 }
 
-- (void)synchronize
+- (void)loadPreferences
 {
-    [super synchronize];
+    [super loadPreferences];
+
     [self setStateForButton:self.fieldClearReadingBufferAtCompositionError forKey:@"ClearReadingBufferAtCompositionError"];
     [self setStateForButton:self.fieldComposeWhileTyping forKey:@"ComposeWhileTyping"];
     [self setStateForButton:self.fieldShouldComposeAtMaximumRadicalLength forKey:@"ShouldComposeAtMaximumRadicalLength"];
@@ -84,6 +86,8 @@
             break;
         }
     }
+
+    [self configureKeyboardLayoutList:self.fieldAlphaNumericKeyboardLayout];
 }
 
 - (IBAction)updateField:(id)sender
@@ -92,10 +96,14 @@
         if ([self.fieldUseSpaceAsFirstCandidateSelectionKey state] == NSOnState) {
             [self.fieldSendFirstCandidateWithSpaceWithOnePageList setState:NSOffState];
         }
-    } else if (sender == self.fieldSendFirstCandidateWithSpaceWithOnePageList) {
+    }
+    else if (sender == self.fieldSendFirstCandidateWithSpaceWithOnePageList) {
         if ([self.fieldSendFirstCandidateWithSpaceWithOnePageList state] == NSOnState) {
             [self.fieldUseSpaceAsFirstCandidateSelectionKey setState:NSOffState];
         }
+    }
+    else if (sender == self.fieldAlphaNumericKeyboardLayout) {
+        [self setStringValue:[[self.fieldAlphaNumericKeyboardLayout selectedItem] representedObject] forKey:OVAlphanumericKeyboardLayoutKey];
     }
 
     [self setBoolValue:([self.fieldClearReadingBufferAtCompositionError state] == NSOnState) forKey:@"ClearReadingBufferAtCompositionError"];

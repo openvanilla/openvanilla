@@ -30,6 +30,8 @@
 @interface OVBaseModulePreferencesViewController : OVBasePreferencesViewController
 - (BOOL)boolValueForKey:(NSString *)key;
 - (void)setBoolValue:(BOOL)value forKey:(NSString *)key;
+- (NSString *)stringValueForKey:(NSString *)key;
+- (void)setStringValue:(NSString *)value forKey:(NSString *)key;
 - (NSUInteger)unsignedIntegerValueForKey:(NSString *)key;
 - (void)setUnsignedIntegerValue:(NSUInteger)value forKey:(NSString *)key;
 @end
