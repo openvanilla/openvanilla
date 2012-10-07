@@ -44,6 +44,10 @@ class OVInputMethod;
 
 - (NSString *)alphanumericKeyboardLayoutForInputMethod:(NSString *)identifier;
 - (BOOL)isTableBasedInputMethodIdentifier:(NSString *)identifier;
+- (BOOL)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path willOverrideBuiltInTable:(BOOL *)willOverride error:(NSError **)error;
+- (void)installCustomTableBasedInputMethodWithTablePath:(NSString *)path;
+- (BOOL)isCustomTableBasedInputMethod:(NSString *)identifier;
+- (void)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError *)error;
 
 @property (assign, readonly) OpenVanilla::OVLoaderServiceImpl* loaderService;
 @property (assign, readonly) OpenVanilla::OVCandidateServiceImpl* candidateService;

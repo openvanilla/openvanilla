@@ -277,6 +277,24 @@ static string InputMethodConfigIdentifier(const string& identifier)
     return [identifier hasPrefix:@"org.openvanilla.OVIMTableBased."];
 }
 
+- (BOOL)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path willOverrideBuiltInTable:(BOOL *)willOverride error:(NSError **)error
+{
+    return NO;
+}
+
+- (void)installCustomTableBasedInputMethodWithTablePath:(NSString *)path
+{
+}
+
+- (BOOL)isCustomTableBasedInputMethod:(NSString *)identifier
+{
+    return NO;
+}
+
+- (void)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError *)error
+{
+}
+
 #pragma mark - Properties
 
 - (NSString *)activeInputMethodIdentifier
