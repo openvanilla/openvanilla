@@ -34,7 +34,6 @@ static NSString *const kControllerKey = @"ControllerKey";
 static NSString *const kGeneralSettingIdentifier = @"GeneralSettingIdentifier";
 static NSString *const kAddInputMethodIdentifier = @"AddInputMethodIdentifier";
 static NSString *const kCheckUpdateIdentifier = @"CheckUpdateIdentifier";
-static NSString *const kArrayModuleIdentifier = @"org.openvanilla.OVIMArray";
 
 static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBasePreferencesViewController *controller)
 {
@@ -80,7 +79,7 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
         }
     }
 
-    [_items addObject:Item(kArrayModuleIdentifier, [[OVModuleManager defaultManager] localizedInputMethodName:kArrayModuleIdentifier], self.arrayMoudlePreferencesViewController)];
+    [_items addObject:Item(self.arrayMoudlePreferencesViewController.moduleIdentifier, [[OVModuleManager defaultManager] localizedInputMethodName:self.arrayMoudlePreferencesViewController.moduleIdentifier], self.arrayMoudlePreferencesViewController)];
 
     [_items addObject:Item(kAddInputMethodIdentifier, NSLocalizedString(@"Add New Input Method", nil), self.addTableBasedInputMethodViewController)];
 

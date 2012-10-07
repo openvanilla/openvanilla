@@ -37,9 +37,13 @@
     NSButton *_fieldSendFirstCandidateWithSpaceWithOnePageList;
     NSButton *_fieldShouldComposeAtMaximumRadicalLength;
     NSButton *_fieldUseSpaceAsFirstCandidateSelectionKey;
+    NSTextField *_cusmtomTableBasedInputMethodInfo;
+    NSButton *_removeInputMethodButton;
 }
 
 - (IBAction)updateField:(id)sender;
+- (IBAction)removeInputMethodAction:(id)sender;
+
 @property (assign, nonatomic) IBOutlet NSPopUpButton *fieldAlphaNumericKeyboardLayout;
 @property (assign, nonatomic) IBOutlet NSPopUpButton *fieldMaximumRadicalLength;
 @property (assign, nonatomic) IBOutlet NSButton *fieldClearReadingBufferAtCompositionError;
@@ -47,4 +51,6 @@
 @property (assign, nonatomic) IBOutlet NSButton *fieldSendFirstCandidateWithSpaceWithOnePageList;
 @property (assign, nonatomic) IBOutlet NSButton *fieldShouldComposeAtMaximumRadicalLength;
 @property (assign, nonatomic) IBOutlet NSButton *fieldUseSpaceAsFirstCandidateSelectionKey;
+@property (assign, nonatomic) IBOutlet NSTextField *cusmtomTableBasedInputMethodInfo;
+@property (assign, nonatomic) IBOutlet NSButton *removeInputMethodButton;
 @end

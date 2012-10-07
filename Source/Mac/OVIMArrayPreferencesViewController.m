@@ -27,7 +27,19 @@
 
 #import "OVIMArrayPreferencesViewController.h"
 
+static NSString *const kArrayModuleIdentifier = @"org.openvanilla.OVIMArray";
+
 @implementation OVIMArrayPreferencesViewController
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.moduleIdentifier = kArrayModuleIdentifier;
+    }
+    return self;
+}
+
 @synthesize fieldAutoSP = _fieldAutoSP;
 @synthesize fieldForceSP = _fieldForceSP;
 @end

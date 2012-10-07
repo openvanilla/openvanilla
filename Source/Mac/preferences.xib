@@ -251,7 +251,7 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSTextField" id="61075014">
 						<reference key="NSNextResponder" ref="165452036"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">-2147483380</int>
 						<string key="NSFrame">{{17, 23}, {232, 17}}</string>
 						<reference key="NSSuperview" ref="165452036"/>
 						<reference key="NSWindow"/>
@@ -1386,8 +1386,8 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSViewController" id="632629047"/>
-			<object class="NSViewController" id="63785927"/>
-			<object class="NSViewController" id="669908856"/>
+			<object class="NSViewController" id="740473986"/>
+			<object class="NSViewController" id="168932056"/>
 			<object class="NSViewController" id="769292640"/>
 			<object class="NSCustomView" id="412271375">
 				<reference key="NSNextResponder"/>
@@ -1587,7 +1587,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">arrayMoudlePreferencesViewController</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="669908856"/>
+						<reference key="destination" ref="168932056"/>
 					</object>
 					<int key="connectionID">174</int>
 				</object>
@@ -1595,7 +1595,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">addTableBasedInputMethodViewController</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="63785927"/>
+						<reference key="destination" ref="740473986"/>
 					</object>
 					<int key="connectionID">175</int>
 				</object>
@@ -1736,6 +1736,30 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">154</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">removeInputMethodAction:</string>
+						<reference key="source" ref="632629047"/>
+						<reference key="destination" ref="653017351"/>
+					</object>
+					<int key="connectionID">176</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">cusmtomTableBasedInputMethodInfo</string>
+						<reference key="source" ref="632629047"/>
+						<reference key="destination" ref="61075014"/>
+					</object>
+					<int key="connectionID">177</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">removeInputMethodButton</string>
+						<reference key="source" ref="632629047"/>
+						<reference key="destination" ref="653017351"/>
+					</object>
+					<int key="connectionID">178</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">view</string>
 						<reference key="source" ref="769292640"/>
@@ -1842,7 +1866,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">view</string>
-						<reference key="source" ref="669908856"/>
+						<reference key="source" ref="168932056"/>
 						<reference key="destination" ref="514070333"/>
 					</object>
 					<int key="connectionID">171</int>
@@ -1850,7 +1874,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">view</string>
-						<reference key="source" ref="63785927"/>
+						<reference key="source" ref="740473986"/>
 						<reference key="destination" ref="412271375"/>
 					</object>
 					<int key="connectionID">172</int>
@@ -1858,7 +1882,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">importNewTableAction:</string>
-						<reference key="source" ref="63785927"/>
+						<reference key="source" ref="740473986"/>
 						<reference key="destination" ref="412912829"/>
 					</object>
 					<int key="connectionID">173</int>
@@ -2647,12 +2671,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">167</int>
-						<reference key="object" ref="669908856"/>
+						<reference key="object" ref="168932056"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">168</int>
-						<reference key="object" ref="63785927"/>
+						<reference key="object" ref="740473986"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</array>
@@ -2785,7 +2809,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">175</int>
+			<int key="maxID">178</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2947,18 +2971,22 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<object class="IBPartialClassDescription">
 					<string key="className">OVTableBasedModulePreferencesViewController</string>
 					<string key="superclassName">OVBaseModulePreferencesViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">updateField:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">updateField:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="removeInputMethodAction:">id</string>
+						<string key="updateField:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="removeInputMethodAction:">
+							<string key="name">removeInputMethodAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="updateField:">
 							<string key="name">updateField:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="cusmtomTableBasedInputMethodInfo">NSTextField</string>
 						<string key="fieldAlphaNumericKeyboardLayout">NSPopUpButton</string>
 						<string key="fieldClearReadingBufferAtCompositionError">NSButton</string>
 						<string key="fieldComposeWhileTyping">NSButton</string>
@@ -2966,8 +2994,13 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<string key="fieldSendFirstCandidateWithSpaceWithOnePageList">NSButton</string>
 						<string key="fieldShouldComposeAtMaximumRadicalLength">NSButton</string>
 						<string key="fieldUseSpaceAsFirstCandidateSelectionKey">NSButton</string>
+						<string key="removeInputMethodButton">NSButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="cusmtomTableBasedInputMethodInfo">
+							<string key="name">cusmtomTableBasedInputMethodInfo</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="fieldAlphaNumericKeyboardLayout">
 							<string key="name">fieldAlphaNumericKeyboardLayout</string>
 							<string key="candidateClassName">NSPopUpButton</string>
@@ -2994,6 +3027,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 						<object class="IBToOneOutletInfo" key="fieldUseSpaceAsFirstCandidateSelectionKey">
 							<string key="name">fieldUseSpaceAsFirstCandidateSelectionKey</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="removeInputMethodButton">
+							<string key="name">removeInputMethodButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
 					</dictionary>
