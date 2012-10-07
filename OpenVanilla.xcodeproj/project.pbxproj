@@ -14,7 +14,7 @@
 		6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.m */; };
 		6A6B2144162174DB00697149 /* OVIMArrayPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.m */; };
 		6A6B21481621753300697149 /* OVAddTableBasedInputMethodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B21471621753300697149 /* OVAddTableBasedInputMethodViewController.m */; };
-		6A6B214A1621758700697149 /* OpenVanilla-InputMenu@x2.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6A6B21491621758700697149 /* OpenVanilla-InputMenu@x2.tiff */; };
+		6A6B214A1621758700697149 /* OpenVanilla-InputMenu@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6A6B21491621758700697149 /* OpenVanilla-InputMenu@2x.tiff */; };
 		6A8832311605C0B300FBEB85 /* OVIMArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A88322C1605C0B300FBEB85 /* OVIMArray.cpp */; };
 		6A8832321605C0B300FBEB85 /* OVIMArrayContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A88322E1605C0B300FBEB85 /* OVIMArrayContext.cpp */; };
 		6A88323B1605C2D200FBEB85 /* array-shortcode.cin in Copy Array Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A8832341605C1FE00FBEB85 /* array-shortcode.cin */; };
@@ -104,7 +104,7 @@
 		6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMArrayPreferencesViewController.m; sourceTree = "<group>"; };
 		6A6B21461621753300697149 /* OVAddTableBasedInputMethodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVAddTableBasedInputMethodViewController.h; sourceTree = "<group>"; };
 		6A6B21471621753300697149 /* OVAddTableBasedInputMethodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVAddTableBasedInputMethodViewController.m; sourceTree = "<group>"; };
-		6A6B21491621758700697149 /* OpenVanilla-InputMenu@x2.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "OpenVanilla-InputMenu@x2.tiff"; path = "Images/OpenVanilla-InputMenu@x2.tiff"; sourceTree = SOURCE_ROOT; };
+		6A6B21491621758700697149 /* OpenVanilla-InputMenu@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "OpenVanilla-InputMenu@2x.tiff"; path = "Images/OpenVanilla-InputMenu@2x.tiff"; sourceTree = SOURCE_ROOT; };
 		6A88322C1605C0B300FBEB85 /* OVIMArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVIMArray.cpp; sourceTree = "<group>"; };
 		6A88322D1605C0B300FBEB85 /* OVIMArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMArray.h; sourceTree = "<group>"; };
 		6A88322E1605C0B300FBEB85 /* OVIMArrayContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVIMArrayContext.cpp; sourceTree = "<group>"; };
@@ -328,7 +328,7 @@
 				6ABBAF0915CD58F90080EE7D /* MainMenu.xib */,
 				6ABBAF2515CD617D0080EE7D /* OpenVanilla-App.icns */,
 				6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */,
-				6A6B21491621758700697149 /* OpenVanilla-InputMenu@x2.tiff */,
+				6A6B21491621758700697149 /* OpenVanilla-InputMenu@2x.tiff */,
 				6AB4A07715ED2BBA00E78557 /* preferences.xib */,
 			);
 			name = Resources;
@@ -537,8 +537,8 @@
 				6ABBAF0B15CD58F90080EE7D /* MainMenu.xib in Resources */,
 				6ABBAF2715CD617D0080EE7D /* OpenVanilla-App.icns in Resources */,
 				6ABBAF2815CD617D0080EE7D /* OpenVanilla-InputMenu.tiff in Resources */,
+				6A6B214A1621758700697149 /* OpenVanilla-InputMenu@2x.tiff in Resources */,
 				6AB4A07815ED2BBA00E78557 /* preferences.xib in Resources */,
-				6A6B214A1621758700697149 /* OpenVanilla-InputMenu@x2.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,7 +547,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		6ABBAF3215CD62440080EE7D /* Install and Activate Input Method (Run Script) */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -555,7 +555,7 @@
 			name = "Install and Activate Input Method (Run Script)";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "killall $EXECUTABLE_NAME\npwd\n# ls -l\n# rm -rf \"$HOME/Library/Input Methods/$FULL_PRODUCT_NAME\"\ncp -R $BUILT_PRODUCTS_DIR/$FULL_PRODUCT_NAME \"$HOME/Library/Input Methods/\"\n\"$HOME/Library/Input Methods/$EXECUTABLE_FOLDER_PATH/$EXECUTABLE_NAME\" install";
 		};
