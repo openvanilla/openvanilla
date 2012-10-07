@@ -34,6 +34,23 @@
 
 - (IBAction)importNewTableAction:(id)sender
 {
-    NSLog(@"to be implemented");
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    [panel setAllowsMultipleSelection:NO];
+    [panel setAllowedFileTypes:[NSArray arrayWithObject:@"cin"]];
+
+    [panel beginWithCompletionHandler:^(NSInteger result) {
+        if (!result == NSFileHandlingPanelOKButton) {
+            return;
+        }
+
+        NSArray *files = [panel URLs];
+        if (![files count]) {
+            return;
+        }
+
+        NSString *cinPath = [[files objectAtIndex:0] path];
+        
+        NSLog(@"to be implemented: %@", cinPath);
+    }];
 }
 @end

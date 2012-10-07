@@ -37,12 +37,14 @@ namespace OpenVanilla {
 
 @interface OVModuleManager : NSObject
 {
-    NSMutableArray *_inputMethodIdentifiers;
-    NSMutableSet *_customTableBasedInputMethodIdentifiers;
     OpenVanilla::OVLoaderServiceImpl* _loaderService;
     OpenVanilla::OVCandidateServiceImpl* _candidateService;
-    OpenVanilla::OVInputMethod* _activeInputMethod;
+
+    NSMutableArray *_inputMethodIdentifiers;
+    NSMutableDictionary *_customTableBasedInputMethodIdentifierTableNameMap;
     OpenVanilla::OVInputMethodMap* _inputMethodMap;
+
+    OpenVanilla::OVInputMethod* _activeInputMethod;
     NSString *_currentLocale;
 }
 
