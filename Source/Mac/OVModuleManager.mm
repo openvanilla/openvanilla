@@ -186,7 +186,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
         NSString *appSupportRoot = [appSupportPaths objectAtIndex:0];
 
         NSString *appDataRoot = [appSupportRoot stringByAppendingPathComponent:[[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleNameKey]];
-        NSString *tableRoot = [appDataRoot stringByAppendingPathComponent:@"TableBased"];
+        NSString *tableRoot = [appDataRoot stringByAppendingPathComponent:@"UserData/TableBased"];
         NSLog(@"%@", tableRoot);
 
         BOOL isDir = NO;
