@@ -40,9 +40,7 @@
 {
     [[OVModuleManager defaultManager] reload];
 
-
     OVPreferencesWindowController *controller = [[OVPreferencesWindowController alloc] initWithWindowNibName:@"preferences"];
-    NSLog(@"window: %@", controller);
     [[controller window] center];
     [[controller window] orderFront:self];
 }

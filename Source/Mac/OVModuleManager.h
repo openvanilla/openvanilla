@@ -59,7 +59,7 @@ namespace OpenVanilla {
 - (BOOL)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path willOverrideBuiltInTable:(BOOL *)willOverride error:(NSError **)error;
 - (void)installCustomTableBasedInputMethodWithTablePath:(NSString *)path;
 - (BOOL)isCustomTableBasedInputMethod:(NSString *)identifier;
-- (void)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError *)error;
+- (BOOL)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError **)error;
 
 @property (assign, readonly) OpenVanilla::OVLoaderServiceImpl* loaderService;
 @property (assign, readonly) OpenVanilla::OVCandidateServiceImpl* candidateService;
@@ -71,4 +71,5 @@ namespace OpenVanilla {
 @property (copy) NSString *sharedAlphanumericKeyboardLayoutIdentifier;
 @end
 
+extern NSString *const OVModuleManagerDidReloadNotification;
 extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification;

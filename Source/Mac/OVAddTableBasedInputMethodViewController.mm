@@ -26,9 +26,7 @@
 //
 
 #import "OVAddTableBasedInputMethodViewController.h"
-
-@interface OVAddTableBasedInputMethodViewController ()
-@end
+#import "OVModuleManager.h"
 
 @implementation OVAddTableBasedInputMethodViewController
 
@@ -49,8 +47,7 @@
         }
 
         NSString *cinPath = [[files objectAtIndex:0] path];
-        
-        NSLog(@"to be implemented: %@", cinPath);
+        [[OVModuleManager defaultManager] installCustomTableBasedInputMethodWithTablePath:cinPath];
     }];
 }
 @end

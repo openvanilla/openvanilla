@@ -34,6 +34,7 @@
 #import "OVPlistBackedKeyValueMapImpl.h"
 #import <set>
 
+extern NSString *const OVModuleManagerDidReloadNotification = @"OVModuleManagerDidReloadNotification";
 extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification = @"OVModuleManagerDidUpdateActiveInputMethodNotification";
 
 using namespace OpenVanilla;
@@ -48,6 +49,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
 }
 
 @interface OVModuleManager ()
+- (NSString *)rootPathForCustomInputMethodTables;
 - (BOOL)canSelectInputMethod:(NSString *)identifier;
 - (void)handleLocaleChangeNotification:(NSNotification *)aNotification;
 @property (assign) OVInputMethodMap* inputMethodMap;
@@ -181,39 +183,22 @@ static string InputMethodConfigIdentifier(const string& identifier)
     map<OVInputMethod*, string> customTableInputMethodTableNameMap;
     NSMutableSet *customTableNames = [NSMutableSet set];
 
-    NSArray *appSupportPaths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    if ([appSupportPaths count]) {
-        NSString *appSupportRoot = [appSupportPaths objectAtIndex:0];
+    NSString *userTableRoot = [self rootPathForCustomInputMethodTables];
+    if (userTableRoot) {
+        NSArray *subpaths = [[NSFileManager defaultManager] subpathsAtPath:userTableRoot];
 
-        NSString *appDataRoot = [appSupportRoot stringByAppendingPathComponent:[[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleNameKey]];
-        NSString *tableRoot = [appDataRoot stringByAppendingPathComponent:@"UserData/TableBased"];
-        NSLog(@"%@", tableRoot);
-
-        BOOL isDir = NO;
-        BOOL pathExists = [[NSFileManager defaultManager] fileExistsAtPath:tableRoot isDirectory:&isDir];
-
-        if (!pathExists) {
-            [[NSFileManager defaultManager] createDirectoryAtPath:tableRoot withIntermediateDirectories:YES attributes:nil error:NULL];
-            pathExists = [[NSFileManager defaultManager] fileExistsAtPath:tableRoot isDirectory:&isDir];
-        }
-
-        if (pathExists && isDir) {
-            NSArray *subpaths = [[NSFileManager defaultManager] subpathsAtPath:tableRoot];
-
-            for (NSString *tableName in subpaths) {
-                if (![[tableName pathExtension] isEqualToString:@"cin"]) {
-                    continue;
-                }
-
-                NSString *tablePath = [tableRoot stringByAppendingPathComponent:tableName];
-                OVInputMethod *inputMethod = new OVIMTableBased([tablePath fileSystemRepresentation]);
-                inputMethods.push_back(inputMethod);
-                customTableInputMethodTableNameMap[inputMethod] = string([tableName UTF8String]);
-                [customTableNames addObject:tableName];
+        for (NSString *tableName in subpaths) {
+            if (![[tableName pathExtension] isEqualToString:@"cin"]) {
+                continue;
             }
+
+            NSString *tablePath = [userTableRoot stringByAppendingPathComponent:tableName];
+            OVInputMethod *inputMethod = new OVIMTableBased([tablePath fileSystemRepresentation]);
+            inputMethods.push_back(inputMethod);
+            customTableInputMethodTableNameMap[inputMethod] = string([tableName UTF8String]);
+            [customTableNames addObject:tableName];
         }
     }
-
 
     NSArray *basicTables = [NSArray arrayWithObjects:@"cj-ext.cin", @"simplex-ext.cin", @"dayi3-patched.cin", @"ehq-symbols.cin", nil];
     NSString *tableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/TableBased"];
@@ -259,6 +244,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
     [self handleLocaleChangeNotification:nil];
     [self synchronizeActiveInputMethodSettings];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:OVModuleManagerDidReloadNotification object:self];
 }
 
 - (void)synchronizeActiveInputMethodSettings
@@ -358,6 +345,24 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
 - (void)installCustomTableBasedInputMethodWithTablePath:(NSString *)path
 {
+    if (![self canInstallCustomTableBasedInputMethodWithTablePath:path willOverrideBuiltInTable:NULL error:NULL]) {
+        return;
+    }
+
+    NSString *userTableRoot = [self rootPathForCustomInputMethodTables];
+    if (!userTableRoot) {
+        return;
+    }
+
+    // TODO: Better error handling
+    NSString *targetPath = [userTableRoot stringByAppendingPathComponent:[path lastPathComponent]];
+    NSError *error = nil;
+    BOOL success = [[NSFileManager defaultManager] copyItemAtPath:path toPath:targetPath error:&error];
+    if (!success) {
+        NSLog(@"Cannot copy %@ to %@, error: %@", path, targetPath, error);
+    }
+
+    // TODO: Reload reason (the identifier of the added input method)
     [self reload];
 }
 
@@ -366,8 +371,26 @@ static string InputMethodConfigIdentifier(const string& identifier)
     return [_customTableBasedInputMethodIdentifierTableNameMap objectForKey:identifier] != nil;
 }
 
-- (void)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError *)error
+- (BOOL)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError **)error
 {
+    if (![self isCustomTableBasedInputMethod:identifier]) {
+        // TODO: error
+        return NO;
+    }
+
+    NSString *userTableRoot = [self rootPathForCustomInputMethodTables];
+    if (!userTableRoot) {
+        // TODO: error
+        return NO;
+    }
+
+    NSString *baseTableName = [_customTableBasedInputMethodIdentifierTableNameMap objectForKey:identifier];
+    NSString *path = [userTableRoot stringByAppendingPathComponent:baseTableName];
+    BOOL success = [[NSFileManager defaultManager] removeItemAtPath:path error:error];
+    if (success) {
+        [self reload];
+    }
+    return success;
 }
 
 #pragma mark - Properties
@@ -397,13 +420,31 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
 #pragma mark - Private Methods
 
-- (void)handleLocaleChangeNotification:(NSNotification *)aNotification
+- (NSString *)rootPathForCustomInputMethodTables
 {
-    NSArray *tags = [NSLocale preferredLanguages];
-
-    if ([tags count]) {
-        self.currentLocale = [tags objectAtIndex:0];
+    NSArray *appSupportPaths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    if (![appSupportPaths count]) {
+        return nil;
     }
+
+    NSString *appSupportRoot = [appSupportPaths objectAtIndex:0];
+
+    NSString *appDataRoot = [appSupportRoot stringByAppendingPathComponent:[[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleNameKey]];
+    NSString *tableRoot = [appDataRoot stringByAppendingPathComponent:@"UserData/TableBased"];
+
+    BOOL isDir = NO;
+    BOOL pathExists = [[NSFileManager defaultManager] fileExistsAtPath:tableRoot isDirectory:&isDir];
+
+    if (!pathExists) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:tableRoot withIntermediateDirectories:YES attributes:nil error:NULL];
+        pathExists = [[NSFileManager defaultManager] fileExistsAtPath:tableRoot isDirectory:&isDir];
+    }
+
+    if (pathExists && isDir) {
+        return tableRoot;
+    }
+
+    return nil;
 }
 
 - (BOOL)canSelectInputMethod:(NSString *)identifier
@@ -416,5 +457,14 @@ static string InputMethodConfigIdentifier(const string& identifier)
     }
 
     return NO;
+}
+
+- (void)handleLocaleChangeNotification:(NSNotification *)aNotification
+{
+    NSArray *tags = [NSLocale preferredLanguages];
+
+    if ([tags count]) {
+        self.currentLocale = [tags objectAtIndex:0];
+    }
 }
 @end

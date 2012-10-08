@@ -41,6 +41,7 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 }
 
 @interface OVPreferencesWindowController ()
+- (void)reload:(NSNotification *)notification;
 @property (assign, nonatomic) NSViewController *currentPreferencesViewController;
 @property (retain, nonatomic) NSMutableArray *items;
 @end
@@ -57,6 +58,7 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_items release];
     [super dealloc];
 }
@@ -64,6 +66,16 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+    [self reload:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:OVModuleManagerDidReloadNotification object:nil];
+}
+
+
+#pragma mark - Private methods
+
+- (void)reload:(NSNotification *)notification
+{
+    [self.tableView deselectAll:self];
 
     if (!_items) {
         _items = [[NSMutableArray alloc] init];
@@ -81,10 +93,16 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 
     [_items addObject:Item(self.arrayMoudlePreferencesViewController.moduleIdentifier, [[OVModuleManager defaultManager] localizedInputMethodName:self.arrayMoudlePreferencesViewController.moduleIdentifier], self.arrayMoudlePreferencesViewController)];
 
-    [_items addObject:Item(kAddInputMethodIdentifier, NSLocalizedString(@"Add New Input Method", nil), self.addTableBasedInputMethodViewController)];
+    // This panel is available on OS X 10.6+
+    if ([NSOpenPanel instancesRespondToSelector:@selector(beginWithCompletionHandler:)]) {
+        [_items addObject:Item(kAddInputMethodIdentifier, NSLocalizedString(@"Add New Input Method", nil), self.addTableBasedInputMethodViewController)];
+    }
 
+    [self.tableView reloadData];
     [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 }
+
+#pragma mark - NSTableView delegate methods
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {

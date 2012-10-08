@@ -126,6 +126,12 @@
 
 - (IBAction)removeInputMethodAction:(id)sender
 {
-    
+    // TODO: Alert
+    NSError *error = nil;
+    BOOL success = [[OVModuleManager defaultManager] removeCustomTableBasedInputMethod:self.moduleIdentifier error:&error];
+    if (!success) {
+        // TODO: error
+        NSLog(@"Cannot remove input method: %@, error: %@", self.moduleIdentifier, error);
+    }
 }
 @end
