@@ -7,9 +7,9 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>OpenVanilla-App</string>
+	<string>OpenVanilla-App.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openvanilla.inputmethod.OpenVanilla</string>
+	<string>org.openvanilla.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -19,37 +19,18 @@
 	<key>CFBundleShortVersionString</key>
 	<string>0.9.9.0</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>MBIN</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>InputMethodConnectionName</key>
-	<string>OpenVanilla_1_Connection</string>
-	<key>InputMethodServerControllerClass</key>
-	<string>OVInputMethodController</string>
-	<key>InputMethodServerDelegateClass</key>
-	<string>OVInputMethodController</string>
 	<key>LSHasLocalizedDisplayName</key>
-	<false/>
+	<true/>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
-	<key>LSUIElement</key>
-	<false/>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2012 The OpenVanilla Project. All rights reserved.</string>
+	<string>Copyright © 2004-2012 Lukhnos Liu</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>TISInputSourceID</key>
-	<string>org.openvanilla.inputmethod.OpenVanilla</string>
-	<key>TISIntendedLanguage</key>
-	<string>zh-Hant</string>
-	<key>tsInputMethodCharacterRepertoireKey</key>
-	<array>
-		<string>Hant</string>
-		<string>Hans</string>
-	</array>
-	<key>tsInputMethodIconFileKey</key>
-	<string>OpenVanilla-InputMenu.icns</string>
 </dict>
 </plist>
