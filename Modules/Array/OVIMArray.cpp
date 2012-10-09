@@ -61,6 +61,11 @@ OVIMArray::~OVIMArray()
 
 OVEventHandlingContext* OVIMArray::createContext()
 {
+    checkTables();
+    if (!tablesUsable()) {
+        return 0;
+    }
+
     return new OVIMArrayContext(this);
 }
 
