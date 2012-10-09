@@ -66,6 +66,7 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+    [[self window] center];
     [self reload:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:OVModuleManagerDidReloadNotification object:nil];
 }

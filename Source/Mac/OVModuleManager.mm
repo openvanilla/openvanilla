@@ -200,7 +200,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
         }
     }
 
-    NSArray *basicTables = [NSArray arrayWithObjects:@"cj-ext.cin", @"simplex-ext.cin", @"dayi3-patched.cin", @"ehq-symbols.cin", nil];
+    NSArray *basicTables = [NSArray arrayWithObjects:@"cj.cin", @"simplex.cin", @"dayi3-patched.cin", @"ehq-symbols.cin", nil];
     NSString *tableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/TableBased"];
 
     for (NSString *tableName in basicTables) {
@@ -289,6 +289,10 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
 - (NSString *)alphanumericKeyboardLayoutForInputMethod:(NSString *)identifier
 {
+    if (!identifier) {
+        return self.sharedAlphanumericKeyboardLayoutIdentifier;
+    }
+
     OVInputMethodMap::const_iterator f = _inputMethodMap->find([identifier UTF8String]);
     if (f == _inputMethodMap->end()) {
         return self.sharedAlphanumericKeyboardLayoutIdentifier;

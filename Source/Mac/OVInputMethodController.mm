@@ -97,7 +97,6 @@ using namespace OpenVanilla;
 
     NSMenu *menu = [[[NSMenu alloc] init] autorelease];
 
-
     NSString *activeInputMethodIdentifier = [OVModuleManager defaultManager].activeInputMethodIdentifier;
     NSArray *inputMethodIdentifiers = [[OVModuleManager defaultManager] inputMethodIdentifiers];
     for (NSString *identifier in inputMethodIdentifiers) {
@@ -114,6 +113,14 @@ using namespace OpenVanilla;
 
         [menu addItem:item];
     }
+
+    [menu addItem:[NSMenuItem separatorItem]];
+
+    NSMenuItem *preferenceMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"OpenVanilla Preferences", @"") action:@selector(showPreferences:) keyEquivalent:@""] autorelease];
+    [menu addItem:preferenceMenuItem];
+
+    NSMenuItem *aboutMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"About OpenVanilla…", @"") action:@selector(showAbout:) keyEquivalent:@""] autorelease];
+    [menu addItem:aboutMenuItem];
 
     return menu;
 }
@@ -382,5 +389,18 @@ using namespace OpenVanilla;
 
         // TODO: Use retained client to override keyboard layout
     }
+}
+
+- (void)showPreferences:(id)sender
+{
+    // show the preferences panel, and also make the IME app itself the focus
+    [super showPreferences:sender];
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+}
+
+- (void)showAbout:(id)sender
+{
+    [[NSApplication sharedApplication] orderFrontStandardAboutPanel:sender];
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 @end

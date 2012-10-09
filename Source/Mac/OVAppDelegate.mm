@@ -40,9 +40,11 @@
 {
     [[OVModuleManager defaultManager] reload];
 
-    OVPreferencesWindowController *controller = [[OVPreferencesWindowController alloc] initWithWindowNibName:@"preferences"];
-    [[controller window] center];
-    [[controller window] orderFront:self];
+    if (0) {
+        OVPreferencesWindowController *controller = [[OVPreferencesWindowController alloc] initWithWindowNibName:@"preferences"];
+        [[controller window] center];
+        [[controller window] orderFront:self];
+    }
 }
 
 @end

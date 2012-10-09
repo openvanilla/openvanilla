@@ -38,7 +38,7 @@ NSString *const OVMakeSoundFeedbackOnInputErrorKey = @"MakeSoundFeedbackOnInputE
 NSString *const OVLastUpdateCheckTimeKey = @"LastUpdateCheckTime";
 NSString *const OVCheckForUpdateKey = @"CheckForUpdate";
 
-NSString *const OVDefaultInputMethodIdentifier = @"org.openvanilla.OVIMTableBased.cj-ext";
+NSString *const OVDefaultInputMethodIdentifier = @"org.openvanilla.OVIMTableBased.cj";
 NSString *const OVDefaultAlphanumericKeyboardLayoutIdentifier = @"com.apple.keylayout.US";
 NSString *const OVDefaultCandidateListStyleName = @"vertical";
 const NSUInteger OVDefaultCandidateListTextSize = 16;
