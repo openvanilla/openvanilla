@@ -30,6 +30,8 @@
 static NSString *const kArrayModuleIdentifier = @"org.openvanilla.OVIMArray";
 
 @implementation OVIMArrayPreferencesViewController
+@synthesize fieldAutoSP = _fieldAutoSP;
+@synthesize fieldForceSP = _fieldForceSP;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -40,6 +42,21 @@ static NSString *const kArrayModuleIdentifier = @"org.openvanilla.OVIMArray";
     return self;
 }
 
-@synthesize fieldAutoSP = _fieldAutoSP;
-@synthesize fieldForceSP = _fieldForceSP;
+- (IBAction)updateField:(id)sender
+{
+    [self setBoolValue:([self.fieldAutoSP state] == NSOnState) forKey:@"SpecialCodePrompt"];
+    [self setBoolValue:([self.fieldForceSP state] == NSOnState) forKey:@"QuickMode"];
+}
+
+- (void)setStateForButton:(NSButton *)button forKey:(NSString *)key
+{
+    [button setState:([self boolValueForKey:key] ? NSOnState : NSOffState)];
+}
+
+- (void)loadPreferences
+{
+    [super loadPreferences];
+    [self setStateForButton:self.fieldAutoSP forKey:@"SpecialCodePrompt"];
+    [self setStateForButton:self.fieldForceSP forKey:@"QuickMode"];
+}
 @end

@@ -25,13 +25,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "OVBasePreferencesViewController.h"
+#import "OVBaseModulePreferencesViewController.h"
 
-@interface OVIMArrayPreferencesViewController : OVBasePreferencesViewController
+@interface OVIMArrayPreferencesViewController : OVBaseModulePreferencesViewController
 {
     NSButton *_fieldAutoSP;
     NSButton *_fieldForceSP;
 }
+- (IBAction)updateField:(id)sender;
 @property (assign, nonatomic) IBOutlet NSButton *fieldAutoSP;
 @property (assign, nonatomic) IBOutlet NSButton *fieldForceSP;
 @end
