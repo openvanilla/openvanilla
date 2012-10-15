@@ -122,12 +122,9 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
     OVBasePreferencesViewController *controller = [item objectForKey:kControllerKey];
 
     self.currentPreferencesViewController = controller;
-    if (controller == self.tableBasedMoudlePreferencesViewController) {
+    if (controller == self.tableBasedMoudlePreferencesViewController || controller == self.arrayMoudlePreferencesViewController) {
         controller.moduleIdentifier = [item objectForKey:kIdentifierKey];
         [controller loadPreferences];
-    }
-    else {
-        // [controller loadPreferences];
     }
 
     [self.modulePreferencesContainerView addSubview:[controller view]];
