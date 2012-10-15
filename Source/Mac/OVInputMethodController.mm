@@ -48,6 +48,7 @@ using namespace OpenVanilla;
     OVTextBufferImpl *_composingText;
     OVTextBufferImpl *_readingText;
     OVEventHandlingContext *_inputMethodContext;
+    id _currentClient;
 }
 - (void)changeInputMethodAction:(id)sender;
 - (void)handleInputMethodChange:(NSNotification *)notification;
@@ -131,7 +132,7 @@ using namespace OpenVanilla;
 {
     IMEDebug(@"%s", __PRETTY_FUNCTION__);
     NSString *keyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
-    NSLog(@"using: %@", keyboardLayout);
+    NSLog(@"using layout: %@", keyboardLayout);
     [client overrideKeyboardWithKeyboardNamed:keyboardLayout];
 
     [[OVModuleManager defaultManager] synchronizeActiveInputMethodSettings];
@@ -144,6 +145,8 @@ using namespace OpenVanilla;
     if (_inputMethodContext) {
         _inputMethodContext->startSession([OVModuleManager defaultManager].loaderService);
     }
+
+    _currentClient = client;
 }
 
 - (void)deactivateServer:(id)client
@@ -163,6 +166,8 @@ using namespace OpenVanilla;
     _composingText->clear();
     _readingText->clear();
     [OVModuleManager defaultManager].candidateService->resetAll();
+
+    _currentClient = nil;
 }
 
 - (void)commitComposition:(id)sender
@@ -377,6 +382,10 @@ using namespace OpenVanilla;
 
     if (_inputMethodContext) {
         _inputMethodContext->startSession([OVModuleManager defaultManager].loaderService);
+
+        NSString *keyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
+        NSLog(@"using layout: %@", keyboardLayout);
+        [_currentClient overrideKeyboardWithKeyboardNamed:keyboardLayout];
     }
 }
 
