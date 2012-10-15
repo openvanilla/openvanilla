@@ -49,6 +49,11 @@ bool OVIMArrayContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVTextBu
 	return result != 0;
 }
 
+bool OVIMArrayContext::candidateSelected(OVCandidateService* candidateService, const string& text, size_t index, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService)
+{
+    return false;
+}
+
 void OVIMArrayContext::changeBackState(STATE s)
 {
     switch(s){

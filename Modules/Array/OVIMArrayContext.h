@@ -41,6 +41,7 @@ namespace OpenVanilla {
         OVIMArrayContext(OVIMArray* module);
         virtual void startSession(OVLoaderService* loaderService);
         virtual bool handleKey(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
+        virtual bool candidateSelected(OVCandidateService* candidateService, const string& text, size_t index, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService);
 
     protected:
         enum STATE {
