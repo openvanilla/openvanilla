@@ -157,7 +157,9 @@ void OVOneDimensionalCandidatePanelImpl::show()
 
 void OVOneDimensionalCandidatePanelImpl::updateDisplay()
 {
+    NSUInteger selectedIndex = m_candidateController.selectedCandidateIndex;
     [m_candidateController reloadData];
+    m_candidateController.selectedCandidateIndex = selectedIndex;
 }
 
 bool OVOneDimensionalCandidatePanelImpl::isVisible()
