@@ -50,8 +50,13 @@ using namespace OpenVanilla;
     OVEventHandlingContext *_inputMethodContext;
     id _currentClient;
 }
-- (void)changeInputMethodAction:(id)sender;
+- (BOOL)handleOVKey:(OVKey &)key client:(id)client;
 - (void)handleInputMethodChange:(NSNotification *)notification;
+- (void)updateClientComposingBuffer:(id)sender;
+- (void)changeInputMethodAction:(id)sender;
+- (void)toggleTraditionalToSimplifiedChineseFilterAction:(id)sender;
+- (void)toggleSimplifiedToTraditionalChineseFilterAction:(id)sender;
+- (void)showAboutAction:(id)sender;
 @end
 
 @implementation OVInputMethodController
@@ -101,7 +106,6 @@ using namespace OpenVanilla;
     NSString *activeInputMethodIdentifier = [OVModuleManager defaultManager].activeInputMethodIdentifier;
     NSArray *inputMethodIdentifiers = [[OVModuleManager defaultManager] inputMethodIdentifiers];
     for (NSString *identifier in inputMethodIdentifiers) {
-        NSLog(@"%@", identifier);
         NSMenuItem *item = [[[NSMenuItem alloc] init] autorelease];
         [item setTitle:[[OVModuleManager defaultManager] localizedInputMethodName:identifier]];
         [item setRepresentedObject:identifier];
@@ -117,10 +121,21 @@ using namespace OpenVanilla;
 
     [menu addItem:[NSMenuItem separatorItem]];
 
+    NSMenuItem *filterItem;
+    filterItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Traditional Chinese to Simplified", @"") action:@selector(toggleTraditionalToSimplifiedChineseFilterAction:) keyEquivalent:@""] autorelease];
+    [filterItem setState:([OVModuleManager defaultManager].traditionalToSimplifiedChineseFilterEnabled ? NSOnState : NSOffState)];
+    [menu addItem:filterItem];
+
+    filterItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Simplified Chinese to Traditional", @"") action:@selector(toggleSimplifiedToTraditionalChineseFilterAction:) keyEquivalent:@""] autorelease];
+    [filterItem setState:([OVModuleManager defaultManager].simplifiedToTraditionalChineseFilterEnabled ? NSOnState : NSOffState)];
+    [menu addItem:filterItem];
+
+    [menu addItem:[NSMenuItem separatorItem]];
+
     NSMenuItem *preferenceMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"OpenVanilla Preferences", @"") action:@selector(showPreferences:) keyEquivalent:@""] autorelease];
     [menu addItem:preferenceMenuItem];
 
-    NSMenuItem *aboutMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"About OpenVanilla…", @"") action:@selector(showAbout:) keyEquivalent:@""] autorelease];
+    NSMenuItem *aboutMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"About OpenVanilla…", @"") action:@selector(showAboutAction:) keyEquivalent:@""] autorelease];
     [menu addItem:aboutMenuItem];
 
     return menu;
@@ -132,14 +147,12 @@ using namespace OpenVanilla;
 {
     IMEDebug(@"%s", __PRETTY_FUNCTION__);
     NSString *keyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
-    NSLog(@"using layout: %@", keyboardLayout);
     [client overrideKeyboardWithKeyboardNamed:keyboardLayout];
 
     [[OVModuleManager defaultManager] synchronizeActiveInputMethodSettings];
 
     if (!_inputMethodContext && [OVModuleManager defaultManager].activeInputMethod) {
         _inputMethodContext = [OVModuleManager defaultManager].activeInputMethod->createContext();
-        NSLog(@"%p", _inputMethodContext);
     }
 
     if (_inputMethodContext) {
@@ -170,103 +183,25 @@ using namespace OpenVanilla;
     _currentClient = nil;
 }
 
-- (void)commitComposition:(id)sender
+- (void)showPreferences:(id)sender
 {
-    if (_composingText->isCommitted()) {
-        NSString *combinedText = [NSString stringWithUTF8String:_composingText->composedCommittedText().c_str()];
-
-        [sender insertText:combinedText replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
-    }
+    // show the preferences panel, and also make the IME app itself the focus
+    [super showPreferences:sender];
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 
-- (BOOL)handleOVKey:(OVKey &)key client:(id)client
+- (void)commitComposition:(id)sender
 {
-    if (!_inputMethodContext) {
-        return NO;
-    }
-
-    bool handled = false;
-    bool candidatePanelFallThrough = false;
-
-    OVOneDimensionalCandidatePanelImpl* panel = dynamic_cast<OVOneDimensionalCandidatePanelImpl*>([OVModuleManager defaultManager].candidateService->currentCandidatePanel());
-    if (panel && panel->isInControl()) {
-        OVOneDimensionalCandidatePanelImpl::KeyHandlerResult result = panel->handleKey(&key);
-        switch (result) {
-            case OVOneDimensionalCandidatePanelImpl::Handled:
-            {
-                return YES;
-            }
-
-            case OVOneDimensionalCandidatePanelImpl::CandidateSelected:
-            {
-                size_t index = panel->currentHightlightIndexInCandidateList();
-                string candidate = panel->candidateList()->candidateAtIndex(index);
-                handled = _inputMethodContext->candidateSelected([OVModuleManager defaultManager].candidateService, candidate, index, _readingText, _composingText, [OVModuleManager defaultManager].loaderService);
-                candidatePanelFallThrough = true;
-                break;
-            }
-
-            case OVOneDimensionalCandidatePanelImpl::Canceled:
-            {
-                _inputMethodContext->candidateCanceled([OVModuleManager defaultManager].candidateService, _readingText, _composingText, [OVModuleManager defaultManager].loaderService);
-                handled = true;
-                candidatePanelFallThrough = true;
-                break;
-            }
-
-            case OVOneDimensionalCandidatePanelImpl::NonCandidatePanelKeyReceived:
-            {
-                handled = _inputMethodContext->candidateNonPanelKeyReceived([OVModuleManager defaultManager].candidateService, &key, _readingText, _composingText, [OVModuleManager defaultManager].loaderService);
-                candidatePanelFallThrough = true;
-                break;
-            }
-
-            case OVOneDimensionalCandidatePanelImpl::Invalid:
-            {
-                [OVModuleManager defaultManager].loaderService->beep();
-                return YES;
-            }
-
-        }
-    }
-
-    if (!candidatePanelFallThrough) {
-        handled = _inputMethodContext->handleKey(&key, _readingText, _composingText, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
+    // fix the premature commit bug in Terminal.app since OS X 10.5
+    if ([[sender bundleIdentifier] isEqualToString:@"com.apple.Terminal"] && ![NSStringFromClass([sender class]) isEqualToString:@"IPMDServerClientWrapper"]) {
+        [self performSelector:@selector(updateClientComposingBuffer:) withObject:_currentClient afterDelay:0.0];
+        return;
     }
 
     if (_composingText->isCommitted()) {
-        [self commitComposition:client];
-        _composingText->finishCommit();
+        NSString *combinedText = [NSString stringWithUTF8String:_composingText->composedCommittedText().c_str()];
+        [sender insertText:combinedText replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
     }
-
-    OVTextBufferCombinator combinedText(_composingText, _readingText);
-    NSAttributedString *attrString = combinedText.combinedAttributedString();
-    NSRange selectionRange = combinedText.selectionRange();
-
-    if (_composingText->shouldUpdate() || _readingText->shouldUpdate()) {
-
-        [client setMarkedText:attrString selectionRange:selectionRange replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
-
-        _composingText->finishUpdate();
-        _readingText->finishUpdate();
-    }
-
-    NSUInteger cursorIndex = selectionRange.location;
-    if (cursorIndex == [attrString length] && cursorIndex) {
-        cursorIndex--;
-    }
-
-    NSRect lineHeightRect = NSMakeRect(0.0, 0.0, 16.0, 16.0);
-    @try {
-        [client attributesForCharacterIndex:cursorIndex lineHeightRectangle:&lineHeightRect];
-    }
-    @catch (NSException *exception) {
-    }
-
-    [OVModuleManager defaultManager].candidateService->currentCandidatePanel()->setPanelOrigin(lineHeightRect.origin);
-    [OVModuleManager defaultManager].candidateService->currentCandidatePanel()->updateVisibility();
-    
-    return handled;
 }
 
 - (BOOL)handleEvent:(NSEvent *)event client:(id)client
@@ -287,7 +222,7 @@ using namespace OpenVanilla;
 	bool cmd = !!(cocoaModifiers & NSCommandKeyMask);
     bool numLock = false;
 
-    UInt32 numKeys[16] = {
+    static UInt32 numKeys[16] = {
         // 0,1,2,3,4,5, 6,7,8,9,.,+,-,*,/,=
         0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5b, 0x5c, 0x41, 0x45, 0x4e, 0x43, 0x4b, 0x51
     };
@@ -365,6 +300,73 @@ using namespace OpenVanilla;
     return [self handleOVKey:key client:client];
 }
 
+
+#pragma mark - Private methods
+
+- (BOOL)handleOVKey:(OVKey &)key client:(id)client
+{
+    if (!_inputMethodContext) {
+        return NO;
+    }
+
+    bool handled = false;
+    bool candidatePanelFallThrough = false;
+
+    OVOneDimensionalCandidatePanelImpl* panel = dynamic_cast<OVOneDimensionalCandidatePanelImpl*>([OVModuleManager defaultManager].candidateService->currentCandidatePanel());
+    if (panel && panel->isInControl()) {
+        OVOneDimensionalCandidatePanelImpl::KeyHandlerResult result = panel->handleKey(&key);
+        switch (result) {
+            case OVOneDimensionalCandidatePanelImpl::Handled:
+            {
+                return YES;
+            }
+
+            case OVOneDimensionalCandidatePanelImpl::CandidateSelected:
+            {
+                size_t index = panel->currentHightlightIndexInCandidateList();
+                string candidate = panel->candidateList()->candidateAtIndex(index);
+                handled = _inputMethodContext->candidateSelected([OVModuleManager defaultManager].candidateService, candidate, index, _readingText, _composingText, [OVModuleManager defaultManager].loaderService);
+                candidatePanelFallThrough = true;
+                break;
+            }
+
+            case OVOneDimensionalCandidatePanelImpl::Canceled:
+            {
+                _inputMethodContext->candidateCanceled([OVModuleManager defaultManager].candidateService, _readingText, _composingText, [OVModuleManager defaultManager].loaderService);
+                handled = true;
+                candidatePanelFallThrough = true;
+                break;
+            }
+
+            case OVOneDimensionalCandidatePanelImpl::NonCandidatePanelKeyReceived:
+            {
+                handled = _inputMethodContext->candidateNonPanelKeyReceived([OVModuleManager defaultManager].candidateService, &key, _readingText, _composingText, [OVModuleManager defaultManager].loaderService);
+                candidatePanelFallThrough = true;
+                break;
+            }
+
+            case OVOneDimensionalCandidatePanelImpl::Invalid:
+            {
+                [OVModuleManager defaultManager].loaderService->beep();
+                return YES;
+            }
+
+        }
+    }
+
+    if (!candidatePanelFallThrough) {
+        handled = _inputMethodContext->handleKey(&key, _readingText, _composingText, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
+    }
+
+    if (_composingText->isCommitted()) {
+        [self commitComposition:client];
+        _composingText->finishCommit();
+    }
+
+    [self updateClientComposingBuffer:client];
+    return handled;
+}
+
 - (void)handleInputMethodChange:(NSNotification *)notification
 {
     _composingText->clear();
@@ -377,16 +379,45 @@ using namespace OpenVanilla;
 
     if (!_inputMethodContext && [OVModuleManager defaultManager].activeInputMethod) {
         _inputMethodContext = [OVModuleManager defaultManager].activeInputMethod->createContext();
-        NSLog(@"! %p", _inputMethodContext);
     }
 
     if (_inputMethodContext) {
         _inputMethodContext->startSession([OVModuleManager defaultManager].loaderService);
 
+        // update keyboard layout
         NSString *keyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
-        NSLog(@"using layout: %@", keyboardLayout);
         [_currentClient overrideKeyboardWithKeyboardNamed:keyboardLayout];
     }
+}
+
+- (void)updateClientComposingBuffer:(id)sender
+{
+    OVTextBufferCombinator combinedText(_composingText, _readingText);
+    NSAttributedString *attrString = combinedText.combinedAttributedString();
+    NSRange selectionRange = combinedText.selectionRange();
+
+    if (_composingText->shouldUpdate() || _readingText->shouldUpdate()) {
+
+        [sender setMarkedText:attrString selectionRange:selectionRange replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
+
+        _composingText->finishUpdate();
+        _readingText->finishUpdate();
+    }
+
+    NSUInteger cursorIndex = selectionRange.location;
+    if (cursorIndex == [attrString length] && cursorIndex) {
+        cursorIndex--;
+    }
+
+    NSRect lineHeightRect = NSMakeRect(0.0, 0.0, 16.0, 16.0);
+    @try {
+        [sender attributesForCharacterIndex:cursorIndex lineHeightRectangle:&lineHeightRect];
+    }
+    @catch (NSException *exception) {
+    }
+
+    [OVModuleManager defaultManager].candidateService->currentCandidatePanel()->setPanelOrigin(lineHeightRect.origin);
+    [OVModuleManager defaultManager].candidateService->currentCandidatePanel()->updateVisibility();
 }
 
 - (void)changeInputMethodAction:(id)sender
@@ -395,19 +426,24 @@ using namespace OpenVanilla;
     if (item) {
         NSString *identifier = [item representedObject];
         [[OVModuleManager defaultManager] selectInputMethod:identifier];
-
-        // TODO: Use retained client to override keyboard layout
     }
 }
 
-- (void)showPreferences:(id)sender
+- (void)toggleTraditionalToSimplifiedChineseFilterAction:(id)sender
 {
-    // show the preferences panel, and also make the IME app itself the focus
-    [super showPreferences:sender];
-    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+    OVModuleManager *manager = [OVModuleManager defaultManager];
+    manager.traditionalToSimplifiedChineseFilterEnabled = !manager.traditionalToSimplifiedChineseFilterEnabled;
+    manager.simplifiedToTraditionalChineseFilterEnabled = NO;
 }
 
-- (void)showAbout:(id)sender
+- (void)toggleSimplifiedToTraditionalChineseFilterAction:(id)sender
+{
+    OVModuleManager *manager = [OVModuleManager defaultManager];
+    manager.simplifiedToTraditionalChineseFilterEnabled = !manager.simplifiedToTraditionalChineseFilterEnabled;
+    manager.traditionalToSimplifiedChineseFilterEnabled = NO;
+}
+
+- (void)showAboutAction:(id)sender
 {
     [[NSApplication sharedApplication] orderFrontStandardAboutPanel:sender];
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
