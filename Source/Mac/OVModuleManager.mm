@@ -397,6 +397,18 @@ static string InputMethodConfigIdentifier(const string& identifier)
     return success;
 }
 
+- (NSString *)filteredStringWithString:(NSString *)input
+{
+    if (self.traditionalToSimplifiedChineseFilterEnabled) {
+
+    }
+    else if (self.simplifiedToTraditionalChineseFilterEnabled) {
+
+    }
+
+    return input;
+}
+
 #pragma mark - Properties
 
 - (NSString *)activeInputMethodIdentifier
@@ -419,6 +431,28 @@ static string InputMethodConfigIdentifier(const string& identifier)
 - (void)setSharedAlphanumericKeyboardLayoutIdentifier:(NSString *)sharedAlphanumericKeyboardLayoutIdentifier
 {
     [[NSUserDefaults standardUserDefaults] setObject:sharedAlphanumericKeyboardLayoutIdentifier forKey:OVAlphanumericKeyboardLayoutKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)traditionalToSimplifiedChineseFilterEnabled
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:OVTraditionalToSimplifiedChineseFilterEnabledKey];
+}
+
+- (void)setTraditionalToSimplifiedChineseFilterEnabled:(BOOL)traditionalToSimplifiedChineseFilterEnabled
+{
+    [[NSUserDefaults standardUserDefaults] setBool:traditionalToSimplifiedChineseFilterEnabled forKey:OVTraditionalToSimplifiedChineseFilterEnabledKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)simplifiedToTraditionalChineseFilterEnabled
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:OVSimplifiedToTraditionalChineseFilterEnabledKey];
+}
+
+- (void)setSimplifiedToTraditionalChineseFilterEnabled:(BOOL)simplifiedToTraditionalChineseFilterEnabled
+{
+    [[NSUserDefaults standardUserDefaults] setBool:simplifiedToTraditionalChineseFilterEnabled forKey:OVSimplifiedToTraditionalChineseFilterEnabledKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

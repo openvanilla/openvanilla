@@ -37,6 +37,8 @@ NSString *const OVCandidateTextFontNameKey = @"CandidateTextFontName";
 NSString *const OVMakeSoundFeedbackOnInputErrorKey = @"MakeSoundFeedbackOnInputError";
 NSString *const OVLastUpdateCheckTimeKey = @"LastUpdateCheckTime";
 NSString *const OVCheckForUpdateKey = @"CheckForUpdate";
+NSString *const OVTraditionalToSimplifiedChineseFilterEnabledKey = @"EnableTraditionalToSimplifiedChineseFilter";
+NSString *const OVSimplifiedToTraditionalChineseFilterEnabledKey = @"EnableSimplifiedToTraditionalChineseFilter";
 
 NSString *const OVDefaultInputMethodIdentifier = @"org.openvanilla.OVIMTableBased.cj";
 NSString *const OVDefaultAlphanumericKeyboardLayoutIdentifier = @"com.apple.keylayout.US";

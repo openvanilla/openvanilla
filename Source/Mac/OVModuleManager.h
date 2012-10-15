@@ -61,12 +61,17 @@ namespace OpenVanilla {
 - (BOOL)isCustomTableBasedInputMethod:(NSString *)identifier;
 - (BOOL)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError **)error;
 
+- (NSString *)filteredStringWithString:(NSString *)input;
+
 @property (assign, readonly) OpenVanilla::OVLoaderServiceImpl* loaderService;
 @property (assign, readonly) OpenVanilla::OVCandidateServiceImpl* candidateService;
 @property (assign, readonly) OpenVanilla::OVInputMethod* activeInputMethod;
 @property (readonly) NSString *activeInputMethodIdentifier;
 @property (readonly) NSArray *inputMethodIdentifiers;
 @property (retain) NSString *currentLocale;
+
+@property (assign) BOOL traditionalToSimplifiedChineseFilterEnabled;
+@property (assign) BOOL simplifiedToTraditionalChineseFilterEnabled;
 
 @property (copy) NSString *sharedAlphanumericKeyboardLayoutIdentifier;
 @end

@@ -37,6 +37,8 @@ extern NSString *const OVCandidateTextFontNameKey;
 extern NSString *const OVMakeSoundFeedbackOnInputErrorKey;
 extern NSString *const OVLastUpdateCheckTimeKey;
 extern NSString *const OVCheckForUpdateKey;
+extern NSString *const OVTraditionalToSimplifiedChineseFilterEnabledKey;
+extern NSString *const OVSimplifiedToTraditionalChineseFilterEnabledKey;
 
 extern NSString *const OVDefaultInputMethodIdentifier;
 extern NSString *const OVDefaultAlphanumericKeyboardLayoutIdentifier;
