@@ -52,6 +52,7 @@ using namespace OpenVanilla;
 }
 - (BOOL)handleOVKey:(OVKey &)key client:(id)client;
 - (void)handleInputMethodChange:(NSNotification *)notification;
+- (void)handleCandidateSelected:(NSNotification *)notification;
 - (void)updateClientComposingBuffer:(id)sender;
 - (void)changeInputMethodAction:(id)sender;
 - (void)toggleTraditionalToSimplifiedChineseFilterAction:(id)sender;
@@ -160,6 +161,8 @@ using namespace OpenVanilla;
     }
 
     _currentClient = client;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCandidateSelected:) name:OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification object:nil];
 }
 
 - (void)deactivateServer:(id)client
@@ -181,6 +184,8 @@ using namespace OpenVanilla;
     [OVModuleManager defaultManager].candidateService->resetAll();
 
     _currentClient = nil;
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification object:nil];
 }
 
 - (void)showPreferences:(id)sender
@@ -388,6 +393,37 @@ using namespace OpenVanilla;
         NSString *keyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
         [_currentClient overrideKeyboardWithKeyboardNamed:keyboardLayout];
     }
+}
+
+- (void)handleCandidateSelected:(NSNotification *)notification
+{
+    if (!_inputMethodContext) {
+        return;
+    }
+
+    NSDictionary *dict = [notification userInfo];
+    NSString *candidate = [dict objectForKey:OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey];
+    NSUInteger index = [[dict objectForKey:OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey] unsignedIntegerValue];
+
+    OVModuleManager *manager = [OVModuleManager defaultManager];
+    OVOneDimensionalCandidatePanel *panel = manager.candidateService->currentCandidatePanel();
+
+    bool handled = _inputMethodContext->candidateSelected(manager.candidateService, string([candidate UTF8String]), (size_t)index, _readingText, _composingText, manager.loaderService);
+    if (handled) {
+        panel->hide();
+        panel->cancelEventHandler();
+    }
+    else {
+        manager.loaderService->beep();
+        return;
+    }
+
+    if (_composingText->isCommitted()) {
+        [self commitComposition:_currentClient];
+        _composingText->finishCommit();
+    }
+
+    [self updateClientComposingBuffer:_currentClient];
 }
 
 - (void)updateClientComposingBuffer:(id)sender
