@@ -124,6 +124,10 @@ void OVIMArray::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderS
 {
     moduleConfig->setKeyBoolValue("SpecialCodePrompt", m_cfgAutoSP);    
     moduleConfig->setKeyBoolValue("QuickMode", m_cfgForceSP);
+
+    if (!moduleConfig->hasKey("AlphanumericKeyboardLayout")) {
+        moduleConfig->setKeyStringValue("AlphanumericKeyboardLayout", "com.apple.keylayout.US");
+    }
 }
 
 bool OVIMArray::fetchTableProperty(const string& key, string& outValue)

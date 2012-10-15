@@ -71,7 +71,7 @@ namespace OpenVanilla {
         void queryKeyName(const char *keys, std::string& outKeyNames);
 
         int keyEvent(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
-        void dispatchStateHandler(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
+        int dispatchStateHandler(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
         int WaitKey1(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
         int WaitKey2(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
         int WaitKey3(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );

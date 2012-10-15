@@ -108,8 +108,8 @@ void OVIMArrayContext::updateDisplay(OVTextBuffer* buf)
 {
     buf->clear();
     if (keyseq.length()) {
-        string str;
-        buf->appendText(keyseq.compose());
+        string str = keyseq.compose();
+        buf->appendText(str);
     }
     buf->updateDisplay();
 }
@@ -230,8 +230,10 @@ int OVIMArrayContext::keyEvent(OVKey* key, OVTextBuffer* buf, OVCandidateService
     const bool validkey = keyseq.valid(keycode) || 
       ( keyseq.content()[0] == 'w' && isdigit(keycode) );
 
-    if (!keyseq.length() && !isprint(keycode))
+    if (!keyseq.length() && !isprint(keycode)) {
         return 0;
+    }
+
     if (!keyseq.length() && key->isCombinedFunctionKey())
         return 0;
     
@@ -355,26 +357,28 @@ int OVIMArrayContext::keyEvent(OVKey* key, OVTextBuffer* buf, OVCandidateService
         changeBackState(state);
         ret = 1;
     }
-    dispatchStateHandler(key, buf, candi_bar, srv);
+    ret = dispatchStateHandler(key, buf, candi_bar, srv);
     return ret;
 }
 
-void OVIMArrayContext::dispatchStateHandler(OVKey* key, OVTextBuffer* buf, 
+int OVIMArrayContext::dispatchStateHandler(OVKey* key, OVTextBuffer* buf, 
                                             OVCandidateService* candi_bar, OVLoaderService* srv)
 {
     switch(state){
         case STATE_WAIT_KEY1:
-            WaitKey1(key, buf, candi_bar, srv);
+            return WaitKey1(key, buf, candi_bar, srv);
             break;
         case STATE_WAIT_KEY2:
-            WaitKey2(key, buf, candi_bar, srv);
+            return WaitKey2(key, buf, candi_bar, srv);
             break;
         case STATE_WAIT_KEY3:
-            WaitKey3(key, buf, candi_bar, srv);
+            return WaitKey3(key, buf, candi_bar, srv);
             break;
         default:
             break;
     }
+
+    return 0;
 }
 
 int OVIMArrayContext::WaitKey1(OVKey* key, OVTextBuffer* buf, 
@@ -429,9 +433,12 @@ int OVIMArrayContext::WaitKey3(OVKey* key, OVTextBuffer* buf,
                                OVCandidateService* candibar, OVLoaderService* srv)
 {
     if (keyseq.length() >= 3) {
-        if (!keyseq.hasWildcardCharacter())
+        if (!keyseq.hasWildcardCharacter()) {
             updateCandidate(parent->m_mainTable, buf, candibar, srv);
+        }
+
     }
+    updateDisplay(buf);
     return 1;    
 }
 
@@ -455,28 +462,40 @@ int OVIMArrayContext::WaitCandidate(OVKey* key, OVTextBuffer* buf,
         (panel->pageCount() > 1 && keycode == OVKeyCode::Space)) {
         panel->goToNextPage();
         panel->updateDisplay();
+        updateDisplay(buf);
         return RET_DONE;
     }
 
     if (keycode == OVKeyCode::Up || keycode == OVKeyCode::Left) {
         panel->goToPreviousPage();
         panel->updateDisplay();
+        updateDisplay(buf);
         return RET_DONE;
     }
 
     // enter == first candidate
     // space (when candidate list has only one page) == first candidate
     bool notSelkey = parent->m_mainTable->findProperty("selkey").find(keycode) == string::npos;
-
     bool defaultSelKey = (keycode == OVKeyCode::Return || (panel->pageCount() == 1 && keycode == OVKeyCode::Space));
     if (defaultSelKey || notSelkey) {
-        string output = list->candidateAtIndex(0);
+        keycode = parent->m_mainTable->findProperty("selkey")[0];
+    }
+
+    size_t index = parent->m_mainTable->findProperty("selkey").find(keycode);
+    if (index != string::npos) {
+        panel->setHighlightIndex(index);
+        size_t candidateIndex = panel->currentHightlightIndexInCandidateList();
+        string output = list->candidateAtIndex(candidateIndex);
         sendAndReset(output.c_str(), buf, candibar, srv);
-        if (notSelkey && !defaultSelKey)
+        if (notSelkey && !defaultSelKey) {
+            updateDisplay(buf);
             return RET_CONTINUE;
+        }
         return RET_DONE;
     }
     
+    updateDisplay(buf);
+    srv->beep();
     return RET_PASS;
 }
 
