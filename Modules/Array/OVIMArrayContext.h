@@ -38,50 +38,6 @@ namespace OpenVanilla {
     
     class OVIMArrayContext : public OVEventHandlingContext {
     public:  
-        OVIMArrayContext(OVIMArray* module);
-        virtual void startSession(OVLoaderService* loaderService);
-        virtual bool handleKey(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
-        virtual bool candidateSelected(OVCandidateService* candidateService, const string& text, size_t index, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService);
-
-    protected:
-        enum STATE {
-            STATE_WAIT_KEY1 = 0,
-            STATE_WAIT_KEY2,
-            STATE_WAIT_KEY3,
-            STATE_WAIT_CANDIDATE
-        };
-
-        const int RET_PASS = 0;
-        const int RET_DONE = 1;
-        const int RET_CONTINUE = 2;
-
-        void changeState(STATE s);
-        void changeBackState(STATE s);
-
-        bool isWSeq(char a, char b) const;
-        bool isForceSPSeq();
-
-        void clear();
-        void clearAll(OVTextBuffer* buf, OVCandidateService* candi_bar);
-        void clearCandidate(OVCandidateService *candi_bar);
-
-        void updateDisplay(OVTextBuffer*);
-        int updateCandidate(OVCINDataTable *tab,OVTextBuffer *buf, OVCandidateService *candibar, OVLoaderService *loaderService);
-        
-        void sendAndReset(const char *, OVTextBuffer* , OVCandidateService* , OVLoaderService* );
-        void queryKeyName(const char *keys, std::string& outKeyNames);
-
-        int keyEvent(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
-        int dispatchStateHandler(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
-        int WaitKey1(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
-        int WaitKey2(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
-        int WaitKey3(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
-        int WaitCandidate(OVKey* , OVTextBuffer* , OVCandidateService* , OVLoaderService* );
-
-        OVIMArray* parent;
-        OVIMArrayKeySequence keyseq;
-        STATE state;
-        vector<string> candidateStringVector;
     };
 };
 

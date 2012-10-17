@@ -50,26 +50,7 @@ namespace OpenVanilla {
         virtual void loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService);
         virtual void saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService);
         
-    private:
-        bool fetchTableProperty(const string& key, string& outValue);
-
-        string m_mainTablePath;
-        string m_shortCodeTablePath;
-        string m_specialCodeTablePath;
-        OVFileTimestamp m_mainTableTimestamp;
-        OVFileTimestamp m_shortCodeTableTimestamp;
-        OVFileTimestamp m_specialCodeTableTimestamp;                
-        map<string, string> m_preloadedMainTableProperties;
-
     protected:
-        friend class OVIMArrayContext;
-        void checkTables();
-        bool tablesUsable();
-
-        OVCINDataTable *m_mainTable;
-        OVCINDataTable *m_shortCodeTable;
-        OVCINDataTable *m_specialCodeTable;
-
         bool m_cfgAutoSP;
         bool m_cfgForceSP;
     };

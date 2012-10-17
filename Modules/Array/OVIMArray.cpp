@@ -33,40 +33,16 @@
 using namespace OpenVanilla;
 
 OVIMArray::OVIMArray(const string& tableRootPath)
-    : m_mainTable(0)
-    , m_shortCodeTable(0)
-    , m_specialCodeTable(0)
-    , m_cfgAutoSP(true)
-    , m_cfgForceSP(false)
 {
-    m_mainTablePath = OVPathHelper::PathCat(tableRootPath, "array30.cin");
-    m_shortCodeTablePath = OVPathHelper::PathCat(tableRootPath, "array-shortcode.cin");
-    m_specialCodeTablePath =OVPathHelper::PathCat(tableRootPath, "array-special.cin");
 }
 
 OVIMArray::~OVIMArray()
 {
-    if (m_mainTable) {
-        delete m_mainTable;
-    }
-
-    if (m_shortCodeTable) {
-        delete m_shortCodeTable;
-    }
-
-    if (m_specialCodeTable) {
-        delete m_specialCodeTable;
-    }
 }
 
 OVEventHandlingContext* OVIMArray::createContext()
 {
-    checkTables();
-    if (!tablesUsable()) {
-        return 0;
-    }
-
-    return new OVIMArrayContext(this);
+    return 0;
 }
 
 const string OVIMArray::identifier() const
@@ -85,28 +61,7 @@ const string OVIMArray::localizedName(const string& locale)
 
 bool OVIMArray::initialize(OVPathInfo* pathInfo, OVLoaderService* loaderService)
 {
-    if (!OVPathHelper::PathExists(m_mainTablePath)) {
-        return false;
-    }
-
-    if (!OVPathHelper::PathExists(m_shortCodeTablePath)) {
-        return false;
-    }
-
-    if (!OVPathHelper::PathExists(m_specialCodeTablePath)) {
-        return false;
-    } 
-
-    m_mainTableTimestamp = OVPathHelper::TimestampForPath(m_mainTablePath);
-    m_shortCodeTableTimestamp = OVPathHelper::TimestampForPath(m_shortCodeTablePath);
-    m_specialCodeTableTimestamp = OVPathHelper::TimestampForPath(m_specialCodeTablePath);
-
-    m_preloadedMainTableProperties = OVCINDataTableParser::QuickParseProperty(m_mainTablePath);
-    if (!m_preloadedMainTableProperties.size()) {
-        return false;
-    }
-
-    return true;
+    return false;
 }
 
 void OVIMArray::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)
@@ -128,77 +83,4 @@ void OVIMArray::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderS
     if (!moduleConfig->hasKey("AlphanumericKeyboardLayout")) {
         moduleConfig->setKeyStringValue("AlphanumericKeyboardLayout", "com.apple.keylayout.US");
     }
-}
-
-bool OVIMArray::fetchTableProperty(const string& key, string& outValue)
-{
-    if (m_mainTable) {
-        string value = m_mainTable->findProperty(key);
-        if (value.length()) {
-            outValue = value;
-            return true;
-        }
-        return false;
-    }
-
-    map<string, string>::iterator f = m_preloadedMainTableProperties.find(key);
-    if (f == m_preloadedMainTableProperties.end()) {
-        return false;
-    }
-
-    outValue = (*f).second;
-    return true;
-}
-
-void OVIMArray::checkTables()
-{
-    if (!OVPathHelper::PathExists(m_mainTablePath)) {
-        return;
-    }
-
-    if (!OVPathHelper::PathExists(m_shortCodeTablePath)) {
-        return;
-    }
-
-    if (!OVPathHelper::PathExists(m_specialCodeTablePath)) {
-        return;
-    } 
-
-    OVFileTimestamp timestamp;
-
-    timestamp = OVPathHelper::TimestampForPath(m_mainTablePath);
-    if (timestamp > m_mainTableTimestamp && m_mainTable) {
-        delete m_mainTable;
-        m_mainTable = 0;
-        m_mainTableTimestamp = timestamp;        
-    }
-
-    OVCINDataTableParser mainTableParser;
-    m_mainTable = mainTableParser.CINDataTableFromFileName(m_mainTablePath);
-
-
-    timestamp = OVPathHelper::TimestampForPath(m_shortCodeTablePath);
-    if (timestamp > m_shortCodeTableTimestamp && m_shortCodeTable) {
-        delete m_shortCodeTable;
-        m_shortCodeTable = 0;
-        m_shortCodeTableTimestamp = timestamp;        
-    }
-
-    OVCINDataTableParser shortCodeTableParser;
-    m_shortCodeTable = shortCodeTableParser.CINDataTableFromFileName(m_shortCodeTablePath);
-
-    timestamp = OVPathHelper::TimestampForPath(m_specialCodeTablePath);
-    if (timestamp > m_specialCodeTableTimestamp && m_specialCodeTable) {
-        delete m_specialCodeTable;
-        m_specialCodeTable = 0;
-        m_specialCodeTableTimestamp = timestamp;        
-    }
-
-    OVCINDataTableParser specialCodeTableParser;
-    m_specialCodeTable = specialCodeTableParser.CINDataTableFromFileName(m_specialCodeTablePath);
-}
-
-bool OVIMArray::tablesUsable()
-{
-    return m_mainTable != 0 && m_shortCodeTable != 0 && m_specialCodeTable != 0;
 }
