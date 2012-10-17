@@ -47,6 +47,7 @@ void OVTextBufferImpl::clear()
     m_codePoints.clear();
     m_textSegments.clear();
     m_readingTextStyle = Horizontal;
+    clearToolTip();
 }
 
 void OVTextBufferImpl::setText(const string& text)
@@ -172,10 +173,12 @@ size_t OVTextBufferImpl::cursorPosition() const
 
 void OVTextBufferImpl::showToolTip(const string& text)
 {
+    m_toolTipText = text;
 }
 
 void OVTextBufferImpl::clearToolTip()
 {
+    m_toolTipText = "";
 }
 
 void OVTextBufferImpl::setHighlightMark(const OVTextBuffer::RangePair& range)
@@ -266,7 +269,7 @@ void OVTextBufferImpl::setComposedCommittedText(const string& text)
 
 const string OVTextBufferImpl::toolTipText() const
 {
-    return string();
+    return m_toolTipText;
 }
 
 OVTextBuffer::RangePair OVTextBufferImpl::clampedRangePair(const OVTextBuffer::RangePair& range)

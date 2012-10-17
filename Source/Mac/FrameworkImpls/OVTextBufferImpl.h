@@ -84,6 +84,8 @@ namespace OpenVanilla {
         string m_composedCommittedText;
         vector<OVTextBuffer::RangePair> m_textSegments;
         vector<string> m_composedCommittedTextSegments;
+
+        string m_toolTipText;
     };
 };
 

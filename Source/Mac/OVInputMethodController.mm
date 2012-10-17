@@ -182,6 +182,7 @@ using namespace OpenVanilla;
     _composingText->clear();
     _readingText->clear();
     [OVModuleManager defaultManager].candidateService->resetAll();
+    [[[OVModuleManager defaultManager].toolTipWindowController window] orderOut:self];
 
     _currentClient = nil;
 
@@ -207,11 +208,21 @@ using namespace OpenVanilla;
         NSString *combinedText = [NSString stringWithUTF8String:_composingText->composedCommittedText().c_str()];
         [sender insertText:combinedText replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
     }
+
+    _readingText->clearToolTip();
+    _composingText->clearToolTip();
+    [[[OVModuleManager defaultManager].toolTipWindowController window] orderOut:self];
 }
 
 - (BOOL)handleEvent:(NSEvent *)event client:(id)client
 {
     IMEDebug(@"%s", __PRETTY_FUNCTION__);
+    if (_readingText->toolTipText().length() || _composingText->toolTipText().length()) {
+        _readingText->clearToolTip();
+        _composingText->clearToolTip();
+        [[[OVModuleManager defaultManager].toolTipWindowController window] orderOut:self];
+    }
+
     if ([event type] != NSKeyDown) {
         return NO;
     }
@@ -452,8 +463,27 @@ using namespace OpenVanilla;
     @catch (NSException *exception) {
     }
 
-    [OVModuleManager defaultManager].candidateService->currentCandidatePanel()->setPanelOrigin(lineHeightRect.origin);
-    [OVModuleManager defaultManager].candidateService->currentCandidatePanel()->updateVisibility();
+    OVOneDimensionalCandidatePanelImpl *currentCandidatePanel = [OVModuleManager defaultManager].candidateService->currentCandidatePanel();
+
+    currentCandidatePanel->setPanelOrigin(lineHeightRect.origin);
+    currentCandidatePanel->updateVisibility();
+
+    string toolTipText = _readingText->toolTipText();
+    if (!toolTipText.length()) {
+        toolTipText = _composingText->toolTipText();
+    }
+
+    if (toolTipText.length()) {
+        NSPoint toolTipOrigin = lineHeightRect.origin;
+        BOOL fromTopLeft = YES;
+        if (currentCandidatePanel->isVisible()) {
+            toolTipOrigin.y += lineHeightRect.size.height + 4.0f;
+            fromTopLeft = NO;
+        }
+
+        [[OVModuleManager defaultManager].toolTipWindowController setToolTipText:[NSString stringWithUTF8String:toolTipText.c_str()] atOrigin:toolTipOrigin fromTopLeft:fromTopLeft];
+        [[[OVModuleManager defaultManager].toolTipWindowController window] orderFront:self];
+    }
 }
 
 - (void)changeInputMethodAction:(id)sender

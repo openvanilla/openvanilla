@@ -27,6 +27,7 @@
 
 #import <Foundation/Foundation.h>
 #import <map>
+#import "OVToolTipWindowController.h"
 
 namespace OpenVanilla {
     class OVLoaderServiceImpl;
@@ -37,8 +38,10 @@ namespace OpenVanilla {
 
 @interface OVModuleManager : NSObject
 {
+@private
     OpenVanilla::OVLoaderServiceImpl* _loaderService;
     OpenVanilla::OVCandidateServiceImpl* _candidateService;
+    OVToolTipWindowController *_toolTipWindowController;
 
     NSMutableArray *_inputMethodIdentifiers;
     NSMutableDictionary *_customTableBasedInputMethodIdentifierTableNameMap;
@@ -65,6 +68,8 @@ namespace OpenVanilla {
 
 @property (assign, readonly) OpenVanilla::OVLoaderServiceImpl* loaderService;
 @property (assign, readonly) OpenVanilla::OVCandidateServiceImpl* candidateService;
+@property (retain) OVToolTipWindowController *toolTipWindowController;
+
 @property (assign, readonly) OpenVanilla::OVInputMethod* activeInputMethod;
 @property (readonly) NSString *activeInputMethodIdentifier;
 @property (readonly) NSArray *inputMethodIdentifiers;

@@ -60,6 +60,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
 @dynamic sharedAlphanumericKeyboardLayoutIdentifier;
 @synthesize loaderService = _loaderService;
 @synthesize candidateService = _candidateService;
+@synthesize toolTipWindowController = _toolTipWindowController;
 @synthesize activeInputMethod = _activeInputMethod;
 @synthesize inputMethodMap = _inputMethodMap;
 @synthesize currentLocale = _currentLocale;
@@ -81,6 +82,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
     if (self) {
         _loaderService = new OVLoaderServiceImpl;
         _candidateService = new OVCandidateServiceImpl(_loaderService);
+        _toolTipWindowController = [[OVToolTipWindowController alloc] init];
         _inputMethodMap = new OVInputMethodMap;
         _inputMethodIdentifiers = [[NSMutableArray alloc] init];
         _customTableBasedInputMethodIdentifierTableNameMap = [[NSMutableDictionary alloc] init];
@@ -114,6 +116,9 @@ static string InputMethodConfigIdentifier(const string& identifier)
 {
     delete _loaderService;
     delete _candidateService;
+
+    [_toolTipWindowController release];
+
     for (OVInputMethodMap::iterator i = _inputMethodMap->begin(), e = _inputMethodMap->end(); i != e; ++i) {
         delete (*i).second;
     }
