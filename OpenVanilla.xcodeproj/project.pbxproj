@@ -45,6 +45,11 @@
 		6ABBAF2A15CD61B60080EE7D /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */; };
 		6ABBAF2C15CD61BE0080EE7D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */; };
 		6ABBAF6715CD6F8C0080EE7D /* OVFrameworkInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF6615CD6F8C0080EE7D /* OVFrameworkInfo.cpp */; };
+		6AC9A45B162E64470049E289 /* LegacyOVIMArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC9A459162E64470049E289 /* LegacyOVIMArray.cpp */; };
+		6AC9A47B162E64ED0049E289 /* OVCIN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC9A479162E64ED0049E289 /* OVCIN.cpp */; };
+		6AC9A47F162E65110049E289 /* OVCandidateList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC9A47C162E65110049E289 /* OVCandidateList.cpp */; };
+		6AC9A484162E664A0049E289 /* OVFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC9A482162E664A0049E289 /* OVFileHandler.cpp */; };
+		6AC9A487162E66670049E289 /* OVStringToolKit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC9A485162E66670049E289 /* OVStringToolKit.cpp */; };
 		6ACB49BF15E49E8600380B82 /* dayi3-patched.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6ACB49B715E49E6600380B82 /* dayi3-patched.cin */; };
 		6ACB49C015E49E8600380B82 /* ehq-symbols.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6ACB49B815E49E6600380B82 /* ehq-symbols.cin */; };
 		6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */; };
@@ -205,6 +210,22 @@
 		6ABBAF6315CD6F8C0080EE7D /* OVUTF8Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUTF8Helper.h; sourceTree = "<group>"; };
 		6ABBAF6415CD6F8C0080EE7D /* OVWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVWildcard.h; sourceTree = "<group>"; };
 		6ABBAF6615CD6F8C0080EE7D /* OVFrameworkInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVFrameworkInfo.cpp; sourceTree = "<group>"; };
+		6AC9A458162E64470049E289 /* ArrayKeySequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayKeySequence.h; sourceTree = "<group>"; };
+		6AC9A459162E64470049E289 /* LegacyOVIMArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LegacyOVIMArray.cpp; sourceTree = "<group>"; };
+		6AC9A45A162E64470049E289 /* LegacyOVIMArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegacyOVIMArray.h; sourceTree = "<group>"; };
+		6AC9A477162E64CF0049E289 /* LegacyOpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegacyOpenVanilla.h; sourceTree = "<group>"; };
+		6AC9A478162E64DB0049E289 /* OVKeySequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVKeySequence.h; sourceTree = "<group>"; };
+		6AC9A479162E64ED0049E289 /* OVCIN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVCIN.cpp; sourceTree = "<group>"; };
+		6AC9A47A162E64ED0049E289 /* OVCIN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCIN.h; sourceTree = "<group>"; };
+		6AC9A47C162E65110049E289 /* OVCandidateList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVCandidateList.cpp; sourceTree = "<group>"; };
+		6AC9A47D162E65110049E289 /* OVCandidateList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCandidateList.h; sourceTree = "<group>"; };
+		6AC9A47E162E65110049E289 /* OVOSDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVOSDef.h; sourceTree = "<group>"; };
+		6AC9A480162E65940049E289 /* OVLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLibrary.h; sourceTree = "<group>"; };
+		6AC9A481162E65FC0049E289 /* OVUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUtility.h; sourceTree = "<group>"; };
+		6AC9A482162E664A0049E289 /* OVFileHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVFileHandler.cpp; sourceTree = "<group>"; };
+		6AC9A483162E664A0049E289 /* OVFileHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVFileHandler.h; sourceTree = "<group>"; };
+		6AC9A485162E66670049E289 /* OVStringToolKit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVStringToolKit.cpp; sourceTree = "<group>"; };
+		6AC9A486162E66670049E289 /* OVStringToolKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVStringToolKit.h; sourceTree = "<group>"; };
 		6ACB49B715E49E6600380B82 /* dayi3-patched.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "dayi3-patched.cin"; sourceTree = "<group>"; };
 		6ACB49B815E49E6600380B82 /* ehq-symbols.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ehq-symbols.cin"; sourceTree = "<group>"; };
 		6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVInputMethodController.mm; sourceTree = "<group>"; };
@@ -298,6 +319,8 @@
 		6A88322B1605C0A300FBEB85 /* Array */ = {
 			isa = PBXGroup;
 			children = (
+				6AC9A45D162E64670049E289 /* LegacyFramework */,
+				6AC9A457162E64470049E289 /* LegacyModule */,
 				6A88322C1605C0B300FBEB85 /* OVIMArray.cpp */,
 				6A88322D1605C0B300FBEB85 /* OVIMArray.h */,
 				6A88322E1605C0B300FBEB85 /* OVIMArrayContext.cpp */,
@@ -468,6 +491,36 @@
 				6ABBAF6615CD6F8C0080EE7D /* OVFrameworkInfo.cpp */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		6AC9A457162E64470049E289 /* LegacyModule */ = {
+			isa = PBXGroup;
+			children = (
+				6AC9A458162E64470049E289 /* ArrayKeySequence.h */,
+				6AC9A459162E64470049E289 /* LegacyOVIMArray.cpp */,
+				6AC9A45A162E64470049E289 /* LegacyOVIMArray.h */,
+			);
+			path = LegacyModule;
+			sourceTree = "<group>";
+		};
+		6AC9A45D162E64670049E289 /* LegacyFramework */ = {
+			isa = PBXGroup;
+			children = (
+				6AC9A485162E66670049E289 /* OVStringToolKit.cpp */,
+				6AC9A486162E66670049E289 /* OVStringToolKit.h */,
+				6AC9A482162E664A0049E289 /* OVFileHandler.cpp */,
+				6AC9A483162E664A0049E289 /* OVFileHandler.h */,
+				6AC9A481162E65FC0049E289 /* OVUtility.h */,
+				6AC9A480162E65940049E289 /* OVLibrary.h */,
+				6AC9A47C162E65110049E289 /* OVCandidateList.cpp */,
+				6AC9A47D162E65110049E289 /* OVCandidateList.h */,
+				6AC9A47E162E65110049E289 /* OVOSDef.h */,
+				6AC9A479162E64ED0049E289 /* OVCIN.cpp */,
+				6AC9A47A162E64ED0049E289 /* OVCIN.h */,
+				6AC9A478162E64DB0049E289 /* OVKeySequence.h */,
+				6AC9A477162E64CF0049E289 /* LegacyOpenVanilla.h */,
+			);
+			path = LegacyFramework;
 			sourceTree = "<group>";
 		};
 		6ACB49B315E49DF200380B82 /* DataTables */ = {
@@ -717,6 +770,11 @@
 				6A6B2144162174DB00697149 /* OVIMArrayPreferencesViewController.m in Sources */,
 				6A6B21481621753300697149 /* OVAddTableBasedInputMethodViewController.mm in Sources */,
 				6AAB3401162E529E00C4C22F /* OVToolTipWindowController.m in Sources */,
+				6AC9A45B162E64470049E289 /* LegacyOVIMArray.cpp in Sources */,
+				6AC9A47B162E64ED0049E289 /* OVCIN.cpp in Sources */,
+				6AC9A47F162E65110049E289 /* OVCandidateList.cpp in Sources */,
+				6AC9A484162E664A0049E289 /* OVFileHandler.cpp in Sources */,
+				6AC9A487162E66670049E289 /* OVStringToolKit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
