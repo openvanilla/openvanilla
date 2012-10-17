@@ -220,8 +220,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
     }
 
     // TODO: Array always use US keyboard layout
-    NSString *arrayTableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/Array"];
-    OVInputMethod *inputMethod = new OVIMArray([arrayTableRoot UTF8String]);
+    NSString *arrayTableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables"];
+    OVInputMethod *inputMethod = new OpenVanilla::OVIMArray([arrayTableRoot UTF8String]);
     inputMethods.push_back(inputMethod);
 
     for (vector<OVInputMethod*>::iterator i = inputMethods.begin(), e = inputMethods.end(); i != e; ++i) {

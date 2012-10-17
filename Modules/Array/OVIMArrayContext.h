@@ -29,7 +29,8 @@
 #define OVIMArrayContext_h
 
 #include "OpenVanilla.h"
-#include "OVIMArrayKeySequence.h"
+
+class OVInputMethodContext;
 
 namespace OpenVanilla {
     using namespace std;
@@ -37,7 +38,15 @@ namespace OpenVanilla {
     class OVIMArray;
     
     class OVIMArrayContext : public OVEventHandlingContext {
-    public:  
+    public:
+        OVIMArrayContext(::OVInputMethodContext* legacyContext);
+        virtual void startSession(OVLoaderService* loaderService);
+        virtual void stopSession(OVLoaderService* loaderService);
+        virtual bool handleKey(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
+        virtual bool candidateSelected(OVCandidateService* candidateService, const string& text, size_t index, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService);
+
+    protected:
+        ::OVInputMethodContext* m_legacyContext;
     };
 };
 

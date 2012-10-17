@@ -33,6 +33,8 @@
 
 #include "OpenVanilla.h"
 
+class OVIMArray;
+
 namespace OpenVanilla {
     using namespace std;
 
@@ -51,6 +53,10 @@ namespace OpenVanilla {
         virtual void saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService);
         
     protected:
+        bool m_lazyInitialized;
+        string m_tableRootPath;
+        ::OVIMArray *m_legacyArrayModule;
+
         bool m_cfgAutoSP;
         bool m_cfgForceSP;
     };

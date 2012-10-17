@@ -152,10 +152,10 @@
 		6A88322D1605C0B300FBEB85 /* OVIMArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMArray.h; sourceTree = "<group>"; };
 		6A88322E1605C0B300FBEB85 /* OVIMArrayContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVIMArrayContext.cpp; sourceTree = "<group>"; };
 		6A88322F1605C0B300FBEB85 /* OVIMArrayContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMArrayContext.h; sourceTree = "<group>"; };
-		6A8832301605C0B300FBEB85 /* OVIMArrayKeySequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMArrayKeySequence.h; sourceTree = "<group>"; };
 		6A8832341605C1FE00FBEB85 /* array-shortcode.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "array-shortcode.cin"; sourceTree = "<group>"; };
 		6A8832351605C1FE00FBEB85 /* array-special.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "array-special.cin"; sourceTree = "<group>"; };
 		6A8832361605C1FE00FBEB85 /* array30.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = array30.cin; sourceTree = "<group>"; };
+		6A8F56AA162E6EF30037990F /* LegacyOVFrameworkWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegacyOVFrameworkWrapper.h; sourceTree = "<group>"; };
 		6AAB33FF162E529E00C4C22F /* OVToolTipWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVToolTipWindowController.h; sourceTree = "<group>"; };
 		6AAB3400162E529E00C4C22F /* OVToolTipWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVToolTipWindowController.m; sourceTree = "<group>"; };
 		6AB4A07715ED2BBA00E78557 /* preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = preferences.xib; sourceTree = "<group>"; };
@@ -321,11 +321,11 @@
 			children = (
 				6AC9A45D162E64670049E289 /* LegacyFramework */,
 				6AC9A457162E64470049E289 /* LegacyModule */,
+				6A8F56AA162E6EF30037990F /* LegacyOVFrameworkWrapper.h */,
 				6A88322C1605C0B300FBEB85 /* OVIMArray.cpp */,
 				6A88322D1605C0B300FBEB85 /* OVIMArray.h */,
 				6A88322E1605C0B300FBEB85 /* OVIMArrayContext.cpp */,
 				6A88322F1605C0B300FBEB85 /* OVIMArrayContext.h */,
-				6A8832301605C0B300FBEB85 /* OVIMArrayKeySequence.h */,
 			);
 			path = Array;
 			sourceTree = "<group>";
@@ -506,19 +506,19 @@
 		6AC9A45D162E64670049E289 /* LegacyFramework */ = {
 			isa = PBXGroup;
 			children = (
-				6AC9A485162E66670049E289 /* OVStringToolKit.cpp */,
-				6AC9A486162E66670049E289 /* OVStringToolKit.h */,
-				6AC9A482162E664A0049E289 /* OVFileHandler.cpp */,
-				6AC9A483162E664A0049E289 /* OVFileHandler.h */,
-				6AC9A481162E65FC0049E289 /* OVUtility.h */,
-				6AC9A480162E65940049E289 /* OVLibrary.h */,
+				6AC9A477162E64CF0049E289 /* LegacyOpenVanilla.h */,
 				6AC9A47C162E65110049E289 /* OVCandidateList.cpp */,
 				6AC9A47D162E65110049E289 /* OVCandidateList.h */,
-				6AC9A47E162E65110049E289 /* OVOSDef.h */,
 				6AC9A479162E64ED0049E289 /* OVCIN.cpp */,
 				6AC9A47A162E64ED0049E289 /* OVCIN.h */,
+				6AC9A482162E664A0049E289 /* OVFileHandler.cpp */,
+				6AC9A483162E664A0049E289 /* OVFileHandler.h */,
 				6AC9A478162E64DB0049E289 /* OVKeySequence.h */,
-				6AC9A477162E64CF0049E289 /* LegacyOpenVanilla.h */,
+				6AC9A480162E65940049E289 /* OVLibrary.h */,
+				6AC9A47E162E65110049E289 /* OVOSDef.h */,
+				6AC9A485162E66670049E289 /* OVStringToolKit.cpp */,
+				6AC9A486162E66670049E289 /* OVStringToolKit.h */,
+				6AC9A481162E65FC0049E289 /* OVUtility.h */,
 			);
 			path = LegacyFramework;
 			sourceTree = "<group>";

@@ -27,6 +27,38 @@
 
 #include "OVIMArrayContext.h"
 #include "OVIMArray.h"
+#include "LegacyOVIMArray.h"
+#include "LegacyOVFrameworkWrapper.h"
 
 using namespace OpenVanilla;
 
+OpenVanilla::OVIMArrayContext::OVIMArrayContext(::OVInputMethodContext* legacyContext)
+    : m_legacyContext(legacyContext)
+{
+}
+
+void OpenVanilla::OVIMArrayContext::startSession(OVLoaderService* loaderService)
+{
+    m_legacyContext->clear();
+}
+
+void OpenVanilla::OVIMArrayContext::stopSession(OVLoaderService* loaderService)
+{
+    m_legacyContext->clear();
+}
+
+bool OpenVanilla::OVIMArrayContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService)
+{
+    OVLegacyKeyCodeWrapper legacyKey(key);
+    OVLegacyBufferWrapper legacyBuffer(composingText, candidateService);
+    OVLegacyCandidateWrapper legacyCandidate(candidateService, loaderService);
+    OVLegacyServiceWrapper legacyService(loaderService, composingText);
+
+    int handled = m_legacyContext->keyEvent(&legacyKey, &legacyBuffer, &legacyCandidate, &legacyService);
+    return handled;
+}
+
+bool OpenVanilla::OVIMArrayContext::candidateSelected(OVCandidateService* candidateService, const string& text, size_t index, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService)
+{
+    return false;
+}

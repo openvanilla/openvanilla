@@ -136,6 +136,11 @@ public:
 	{ 
         cfgForceSP = value; 
     }
+
+    virtual void setAutoSP(bool value)
+    {
+        cfgAutoSP = value;
+    }
 };
 
 #endif

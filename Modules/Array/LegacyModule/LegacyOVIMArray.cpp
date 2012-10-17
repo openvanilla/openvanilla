@@ -28,7 +28,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#define OV_DEBUG
+// #define OV_DEBUG
 #include "ctype.h"
 #include "LegacyOVIMArray.h"
 #include "OVLibrary.h"
@@ -421,7 +421,8 @@ int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path)
     CFURLGetFileSystemRepresentation(url, TRUE, (UInt8*)buf, sizeof(buf) - 1);
     sprintf(arraypath, "%s/", buf);
 #else
-    sprintf(arraypath, "%sOVIMArray%s", path, s->pathSeparator());
+    // sprintf(arraypath, "%sOVIMArray%s", path, s->pathSeparator());
+    sprintf(arraypath, "%sArray%s", path, s->pathSeparator());
 #endif
     printf("OVIMArray: data dir %s", arraypath);
 

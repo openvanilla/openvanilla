@@ -29,28 +29,63 @@
 
 #include "OVIMArray.h"
 #include "OVIMArrayContext.h"
+#include "LegacyOVIMArray.h"
+#include "LegacyOVFrameworkWrapper.h"
 
 using namespace OpenVanilla;
 
-OVIMArray::OVIMArray(const string& tableRootPath)
+OpenVanilla::OVIMArray::OVIMArray(const string& tableRootPath)
+    : m_lazyInitialized(false)
+    , m_tableRootPath(tableRootPath)
+    , m_legacyArrayModule(0)
+    , m_cfgAutoSP(true)
+    , m_cfgForceSP(false)
 {
 }
 
-OVIMArray::~OVIMArray()
+OpenVanilla::OVIMArray::~OVIMArray()
 {
+    if (m_legacyArrayModule) {
+        delete m_legacyArrayModule;
+    }
 }
 
-OVEventHandlingContext* OVIMArray::createContext()
+OVEventHandlingContext* OpenVanilla::OVIMArray::createContext()
 {
-    return 0;
+    if (!m_legacyArrayModule) {
+        if (m_lazyInitialized) {
+            return 0;
+        }
+
+        m_lazyInitialized = true;
+        m_legacyArrayModule = new ::OVIMArray;
+
+        OVLegacyServiceWrapper service;
+        OVLegacyDictionaryWrapper dictionary;
+
+        // legacy module requires path with path separator in the end
+        string tableRootPath = m_tableRootPath + string(1, OVPathHelper::Separator());
+        int success = m_legacyArrayModule->initialize(&dictionary, &service, tableRootPath.c_str());
+        if (!success) {
+            delete m_legacyArrayModule;
+            m_legacyArrayModule = 0;
+        }
+
+        m_legacyArrayModule->setAutoSP(m_cfgAutoSP);
+        m_legacyArrayModule->setForceSP(m_cfgForceSP);
+    }
+    
+    ::OVInputMethodContext* legacyContext = m_legacyArrayModule->newContext();
+    OpenVanilla::OVIMArrayContext* context = new OpenVanilla::OVIMArrayContext(legacyContext);
+    return context;
 }
 
-const string OVIMArray::identifier() const
+const string OpenVanilla::OVIMArray::identifier() const
 {
     return string("org.openvanilla.OVIMArray");
 }
 
-const string OVIMArray::localizedName(const string& locale)
+const string OpenVanilla::OVIMArray::localizedName(const string& locale)
 {
     if (locale.find("zh") == 0) {
         return string("行列");
@@ -59,12 +94,12 @@ const string OVIMArray::localizedName(const string& locale)
     return string("Array");
 }
 
-bool OVIMArray::initialize(OVPathInfo* pathInfo, OVLoaderService* loaderService)
+bool OpenVanilla::OVIMArray::initialize(OVPathInfo* pathInfo, OVLoaderService* loaderService)
 {
-    return false;
+    return true;
 }
 
-void OVIMArray::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)
+void OpenVanilla::OVIMArray::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)
 {
     if (moduleConfig->hasKey("SpecialCodePrompt")) {
         m_cfgAutoSP = moduleConfig->isKeyTrue("SpecialCodePrompt");
@@ -72,12 +107,23 @@ void OVIMArray::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderS
 
     if (moduleConfig->hasKey("QuickMode")) {
         m_cfgForceSP = moduleConfig->isKeyTrue("QuickMode");
-    }        
+    }
+
+    if (m_legacyArrayModule) {
+        m_legacyArrayModule->setAutoSP(m_cfgAutoSP);
+        m_legacyArrayModule->setForceSP(m_cfgForceSP);
+    }
+
 }
 
-void OVIMArray::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)
+void OpenVanilla::OVIMArray::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)
 {
-    moduleConfig->setKeyBoolValue("SpecialCodePrompt", m_cfgAutoSP);    
+    if (m_legacyArrayModule) {
+        m_cfgAutoSP = m_legacyArrayModule->isAutoSP();
+        m_cfgForceSP = m_legacyArrayModule->isForceSP();
+    }
+
+    moduleConfig->setKeyBoolValue("SpecialCodePrompt", m_cfgAutoSP);
     moduleConfig->setKeyBoolValue("QuickMode", m_cfgForceSP);
 
     if (!moduleConfig->hasKey("AlphanumericKeyboardLayout")) {
