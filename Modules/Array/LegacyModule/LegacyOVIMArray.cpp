@@ -30,19 +30,9 @@
 
 #define OV_DEBUG
 #include "ctype.h"
-#include "OVIMArray.h"
-#ifndef WIN32
-	#include <OpenVanilla/OVLibrary.h>
-	#include <OpenVanilla/OVUtility.h>
-#else
-	#include "OVLibrary.h"
-	#include "OVUtility.h"
-
-	//<comment author='b6s'> Uses OVOSDef.h in OVIMArray.h instead.
-	//#include <stdlib.h>
-	//#define PATH_MAX _MAX_PATH
-	//</comment>
-#endif
+#include "LegacyOVIMArray.h"
+#include "OVLibrary.h"
+#include "OVUtility.h"
 #include <utility>
 #ifdef OSX_INCLUDE
         #include <Carbon/Carbon.h>
@@ -51,17 +41,14 @@
 using namespace std;
 using namespace OV_Array;
 
-/*
 
 void OVIMArrayContext::clear()
 {
     keyseq.clear();
     changeState(STATE_WAIT_KEY1);
 }
-*/
 
-/*
-void OVIMArrayContext::updateDisplay(OVTextBuffer* buf)
+void OVIMArrayContext::updateDisplay(OVBuffer* buf)
 {
     buf->clear();
     if (keyseq.length()) {
@@ -72,7 +59,7 @@ void OVIMArrayContext::updateDisplay(OVTextBuffer* buf)
     buf->update();
 }
 
-int OVIMArrayContext::updateCandidate(OVCINDataTable *tab,OVTextBuffer *buf, OVCandidateService *candibar)
+int OVIMArrayContext::updateCandidate(OVCIN *tab,OVBuffer *buf, OVCandidate *candibar)
 {
     tab->getWordVectorByCharWithWildcardSupport(keyseq.getSeq(), candidateStringVector, '?', '*');
     string currentSelKey = tab->getSelKey();
@@ -85,10 +72,9 @@ int OVIMArrayContext::updateCandidate(OVCINDataTable *tab,OVTextBuffer *buf, OVC
 	}
     return 1;
 }
-*/
 
-int OVIMArrayContext::WaitKey1(OVKeyCode* key, OVTextBuffer* buf, 
-                               OVCandidateService* candibar, OVLoaderService* srv)
+int OVIMArrayContext::WaitKey1(OVKeyCode* key, OVBuffer* buf, 
+                               OVCandidate* candibar, OVService* srv)
 {
     if (keyseq.length() != 1)
         return 0;
@@ -107,8 +93,8 @@ int OVIMArrayContext::WaitKey1(OVKeyCode* key, OVTextBuffer* buf,
     return 1;
 }
 
-int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVTextBuffer* buf, 
-                               OVCandidateService* candibar, OVLoaderService* srv)
+int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf, 
+                               OVCandidate* candibar, OVService* srv)
 {
     if (keyseq.length() != 2)
         return 0;
@@ -130,8 +116,8 @@ int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVTextBuffer* buf,
     return 1;    
 }
 
-int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVTextBuffer* buf, 
-                               OVCandidateService* candibar, OVLoaderService* srv)
+int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVBuffer* buf, 
+                               OVCandidate* candibar, OVService* srv)
 {
     if (keyseq.length() >= 3) {
 		if (!keyseq.hasWildcardCharacter())
@@ -141,8 +127,8 @@ int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVTextBuffer* buf,
 }
 
 
-int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVTextBuffer* buf, 
-                                    OVCandidateService* candibar, OVLoaderService* srv)
+int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVBuffer* buf, 
+                                    OVCandidate* candibar, OVService* srv)
 {
     const char keycode = key->code();
 
@@ -188,7 +174,7 @@ int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVTextBuffer* buf,
 
 void OVIMArrayContext::queryKeyName(const char *keys, std::string& outKeyNames)
 {
-    int len = strlen(keys);
+    int len = (int)strlen(keys);
     for (int i = 0; i < len; i++) {
         string inKey(keys, i, 1);
         vector<string> keyName;
@@ -197,15 +183,15 @@ void OVIMArrayContext::queryKeyName(const char *keys, std::string& outKeyNames)
     }
 }
 
-void OVIMArrayContext::sendAndReset(const char *ch, OVTextBuffer* buf, 
-                                    OVCandidateService* candibar, OVLoaderService* srv)
+void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf, 
+                                    OVCandidate* candibar, OVService* srv)
 {
     bool notifySP = false;
     
     // lookup special code
     if((parent->isAutoSP() || parent->isForceSP()) &&
        tabs[SPECIAL_TAB]->getWordVectorByCharWithWildcardSupport(ch, specialCodeVector, '?', '*') > 0) {
-        int splen = specialCodeVector[0].length();
+        int splen = (int)specialCodeVector[0].length();
         const char *spcode = specialCodeVector[0].c_str();
         if (!(splen == keyseq.length() && 
               equal(spcode, spcode+splen, keyseq.getSeq()))) {
@@ -244,20 +230,18 @@ void OVIMArrayContext::sendAndReset(const char *ch, OVTextBuffer* buf,
     changeState(STATE_WAIT_KEY1);
 }
 
-/*
-void OVIMArrayContext::clearAll(OVTextBuffer* buf, OVCandidateService* candi_bar)
+void OVIMArrayContext::clearAll(OVBuffer* buf, OVCandidate* candi_bar)
 {
     clearCandidate(candi_bar);
     buf->clear()->update();
     keyseq.clear();
 }
 
-void OVIMArrayContext::clearCandidate(OVCandidateService *candi_bar)
+void OVIMArrayContext::clearCandidate(OVCandidate *candi_bar)
 {
     candi.cancel();
     candi_bar->hide()->clear();
 }   
-*/
 
 int OVIMArrayContext::selectCandidate(int num, string& out)
 {
@@ -265,8 +249,8 @@ int OVIMArrayContext::selectCandidate(int num, string& out)
 	return candi.select(c, out);
 }
 
-int OVIMArrayContext::keyEvent(OVKeyCode* key, OVTextBuffer* buf, 
-                               OVCandidateService* candi_bar, OVLoaderService* srv)
+int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf, 
+                               OVCandidate* candi_bar, OVService* srv)
 {
     int ret = 0;
     const char keycode = key->code();
@@ -291,13 +275,13 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVTextBuffer* buf,
     }
 
     if (key->isShift() && isprint(keycode) && keyseq.length() == 0 && keycode != '*' && keycode != '?') {
-        char k[2] = { tolower(keycode), 0 };
+        char k[2] = { (char)tolower(keycode), 0 };
         buf->append(k)->send();
         return 1;
     }
 
     if (!keyseq.length() && !validkey) {
-        char k[2] = { tolower(keycode), 0 };
+        char k[2] = { (char)tolower(keycode), 0 };
         buf->append(k)->send();
         return 1;
     }
@@ -374,8 +358,8 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVTextBuffer* buf,
     return ret;
 }
 
-void OVIMArrayContext::dispatchStateHandler(OVKeyCode* key, OVTextBuffer* buf, 
-                                            OVCandidateService* candi_bar, OVLoaderService* srv)
+void OVIMArrayContext::dispatchStateHandler(OVKeyCode* key, OVBuffer* buf, 
+                                            OVCandidate* candi_bar, OVService* srv)
 {
     switch(state){
         case STATE_WAIT_KEY1:
@@ -392,7 +376,6 @@ void OVIMArrayContext::dispatchStateHandler(OVKeyCode* key, OVTextBuffer* buf,
     }
 }
 
-/*
 void OVIMArrayContext::changeBackState(STATE s)
 {
     switch(s){
@@ -415,17 +398,15 @@ void OVIMArrayContext::changeState(STATE s)
     murmur("OVIMArray change state: %d -> %d", state, s);
     state = s;  
 }
-*/
 
-/*
-int OVIMArray::initialize(OVDictionary *conf, OVLoaderService* s, const char *path)
+int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path)
 {
     char arraypath[PATH_MAX];
     char buf[PATH_MAX];
     char *cinfiles[] = { 
-        "%sarray30.cin",  
-        "%sarray-shortcode.cin",
-        "%sarray-special.cin"
+        (char *)"%sarray30.cin",
+        (char *)"%sarray-shortcode.cin",
+        (char *)"%sarray-special.cin"
     };
 
 #ifdef OSX_INCLUDE
@@ -447,7 +428,7 @@ int OVIMArray::initialize(OVDictionary *conf, OVLoaderService* s, const char *pa
     for (int i = 0; i < 3 ; i++) {
         sprintf(buf, cinfiles[i], arraypath);
         murmur("OVIMArray: open cin %s", buf);
-        tabs[i] = new OVCINDataTable(buf); 
+        tabs[i] = new OVCIN(buf); 
     }
     updateConfig(conf);
     return 1;
@@ -470,4 +451,4 @@ int OVIMArray::updateConfig(OVDictionary *conf){
 }
 
 OV_SINGLE_MODULE_WRAPPER(OVIMArray);
-*/
+
