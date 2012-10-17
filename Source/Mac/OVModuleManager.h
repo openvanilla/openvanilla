@@ -27,7 +27,8 @@
 
 #import <Foundation/Foundation.h>
 #import <map>
-#import "OVToolTipWindowController.h"
+
+@class OVToolTipWindowController;
 
 namespace OpenVanilla {
     class OVLoaderServiceImpl;

@@ -26,13 +26,15 @@
 //
 
 #import "OVModuleManager.h"
-#import "OVConstants.h"
-#import "OVLoaderServiceImpl.h"
-#import "OVCandidateServiceImpl.h"
-#import "OVIMTableBased.h"
-#import "OVIMArray.h"
-#import "OVPlistBackedKeyValueMapImpl.h"
 #import <set>
+#import "OVCandidateServiceImpl.h"
+#import "OVConstants.h"
+#import "OVIMArray.h"
+#import "OVIMTableBased.h"
+#import "OVLoaderServiceImpl.h"
+#import "OVPlistBackedKeyValueMapImpl.h"
+#import "OVToolTipWindowController.h"
+#import "VXHanConvert.h"
 
 extern NSString *const OVModuleManagerDidReloadNotification = @"OVModuleManagerDidReloadNotification";
 extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification = @"OVModuleManagerDidUpdateActiveInputMethodNotification";
@@ -404,11 +406,35 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
 - (NSString *)filteredStringWithString:(NSString *)input
 {
-    if (self.traditionalToSimplifiedChineseFilterEnabled) {
+    if (![input length]) {
+        return input;
+    }
 
+    uint16_t (*filterFunction)(uint16_t) = 0;
+
+    if (self.traditionalToSimplifiedChineseFilterEnabled) {
+        filterFunction = VXUCS2TradToSimpChinese;
     }
     else if (self.simplifiedToTraditionalChineseFilterEnabled) {
+        filterFunction = VXUCS2SimpToTradChinese;
+    }
 
+    if (filterFunction) {
+        NSUInteger length = [input length];
+        unichar *chars = (unichar *)calloc(length, sizeof(unichar));
+        if (chars) {
+            [input getCharacters:chars range:NSMakeRange(0, length)];
+            for (NSUInteger i = 0; i < length; i++) {
+                unichar f = filterFunction(chars[i]);
+                if (f) {
+                    chars[i] = f;
+                }
+            }
+
+            NSString *output = [[[NSString alloc] initWithCharacters:chars length:length] autorelease];
+            free(chars);
+            return output;
+        }
     }
 
     return input;

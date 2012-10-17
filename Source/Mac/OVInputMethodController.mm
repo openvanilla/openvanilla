@@ -32,6 +32,7 @@
 #import "OVTextBufferImpl.h"
 #import "OVPlistBackedKeyValueMapImpl.h"
 #import "OVTextBufferCombinator.h"
+#import "OVToolTipWindowController.h"
 #import "OVModuleManager.h"
 
 using namespace OpenVanilla;
@@ -206,7 +207,8 @@ using namespace OpenVanilla;
 
     if (_composingText->isCommitted()) {
         NSString *combinedText = [NSString stringWithUTF8String:_composingText->composedCommittedText().c_str()];
-        [sender insertText:combinedText replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
+        NSString *filteredText = [[OVModuleManager defaultManager] filteredStringWithString:combinedText];
+        [sender insertText:filteredText replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
     }
 }
 
