@@ -57,18 +57,19 @@ public:
 
     virtual OVBuffer* clear()
     {
-        m_buffer->clear();
+        m_string = "";
         return this;
     }
 
     virtual OVBuffer* append(const char *s)
     {
-        m_buffer->appendText(s);
+        m_string += s;
         return this;
     }
 
     virtual OVBuffer* send()
     {
+        m_buffer->setText(m_string);
         m_buffer->commit();
         m_candidateService->useOneDimensionalCandidatePanel()->hide();
         return this;
@@ -76,12 +77,14 @@ public:
 
     virtual OVBuffer* update()
     {
+        m_buffer->setText(m_string);
         m_buffer->updateDisplay();
         return this;
     }
 
     virtual OVBuffer* update(int cursorPos, int markFrom = -1, int markTo = -1)
     {
+        m_buffer->setText(m_string);
         m_buffer->setCursorPosition(cursorPos);
         m_buffer->updateDisplay();
         return this;
@@ -89,12 +92,13 @@ public:
 
     virtual bool isEmpty()
     {
-        return m_buffer->isEmpty();
+        return m_string.length() == 0;
     }
 
 protected:
     OpenVanilla::OVTextBuffer* m_buffer;
     OpenVanilla::OVCandidateService* m_candidateService;
+    string m_string;
 };
 
 class OVLegacyCandidateWrapper : public OVCandidate  {
