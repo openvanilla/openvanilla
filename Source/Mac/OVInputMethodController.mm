@@ -208,10 +208,6 @@ using namespace OpenVanilla;
         NSString *combinedText = [NSString stringWithUTF8String:_composingText->composedCommittedText().c_str()];
         [sender insertText:combinedText replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
     }
-
-    _readingText->clearToolTip();
-    _composingText->clearToolTip();
-    [[[OVModuleManager defaultManager].toolTipWindowController window] orderOut:self];
 }
 
 - (BOOL)handleEvent:(NSEvent *)event client:(id)client
