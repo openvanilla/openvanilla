@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.9.9.4</string>
+	<string>0.9.9.5</string>
 	<key>CFBundleSignature</key>
 	<string>OPVN</string>
 	<key>CFBundleVersion</key>
-	<string>91</string>
+	<string>95</string>
 	<key>InputMethodConnectionName</key>
 	<string>OpenVanilla_1_Connection</string>
 	<key>InputMethodServerControllerClass</key>
