@@ -21,6 +21,8 @@
 		6A0E0AD61623EEDB004FED10 /* OpenVanilla.app in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */; };
 		6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */; };
 		6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm */; };
+		6A616643162FD8420042559F /* OVNonModalAlertWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A616641162FD8420042559F /* OVNonModalAlertWindowController.m */; };
+		6A616644162FD8420042559F /* OVNonModalAlertWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A616642162FD8420042559F /* OVNonModalAlertWindowController.xib */; };
 		6A63D1C1162F1DBA001175D2 /* VXHanConvert.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A63D1BD162F1DBA001175D2 /* VXHanConvert.c */; };
 		6A63D1C2162F1DBA001175D2 /* VXHCSC2TCTable.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A63D1BF162F1DBA001175D2 /* VXHCSC2TCTable.c */; };
 		6A63D1C3162F1DBA001175D2 /* VXHCTC2SCTable.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A63D1C0162F1DBA001175D2 /* VXHCTC2SCTable.c */; };
@@ -144,6 +146,9 @@
 		6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVBasePreferencesViewController.mm; sourceTree = "<group>"; };
 		6A3914AF15FAE99400DC57C3 /* OVTableBasedModulePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTableBasedModulePreferencesViewController.h; sourceTree = "<group>"; };
 		6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVTableBasedModulePreferencesViewController.mm; sourceTree = "<group>"; };
+		6A616640162FD8420042559F /* OVNonModalAlertWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVNonModalAlertWindowController.h; sourceTree = "<group>"; };
+		6A616641162FD8420042559F /* OVNonModalAlertWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVNonModalAlertWindowController.m; sourceTree = "<group>"; };
+		6A616642162FD8420042559F /* OVNonModalAlertWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OVNonModalAlertWindowController.xib; sourceTree = "<group>"; };
 		6A63D1BD162F1DBA001175D2 /* VXHanConvert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VXHanConvert.c; sourceTree = "<group>"; };
 		6A63D1BE162F1DBA001175D2 /* VXHanConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VXHanConvert.h; sourceTree = "<group>"; };
 		6A63D1BF162F1DBA001175D2 /* VXHCSC2TCTable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VXHCSC2TCTable.c; sourceTree = "<group>"; };
@@ -418,6 +423,8 @@
 				6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.m */,
 				6ACB49C415E49EB400380B82 /* OVModuleManager.h */,
 				6ACB49C515E49EB400380B82 /* OVModuleManager.mm */,
+				6A616640162FD8420042559F /* OVNonModalAlertWindowController.h */,
+				6A616641162FD8420042559F /* OVNonModalAlertWindowController.m */,
 				6AFBA9BF15F9AE0A007DC9E6 /* OVPreferencesWindowController.h */,
 				6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */,
 				6AAB33FF162E529E00C4C22F /* OVToolTipWindowController.h */,
@@ -449,6 +456,7 @@
 				6ABBAF2515CD617D0080EE7D /* OpenVanilla-App.icns */,
 				6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */,
 				6A6B21491621758700697149 /* OpenVanilla-InputMenu@2x.tiff */,
+				6A616642162FD8420042559F /* OVNonModalAlertWindowController.xib */,
 				6AB4A07715ED2BBA00E78557 /* preferences.xib */,
 			);
 			name = Resources;
@@ -719,6 +727,7 @@
 				6ABBAF2815CD617D0080EE7D /* OpenVanilla-InputMenu.tiff in Resources */,
 				6A6B214A1621758700697149 /* OpenVanilla-InputMenu@2x.tiff in Resources */,
 				6AB4A07815ED2BBA00E78557 /* preferences.xib in Resources */,
+				6A616644162FD8420042559F /* OVNonModalAlertWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,6 +806,7 @@
 				6A63D1C1162F1DBA001175D2 /* VXHanConvert.c in Sources */,
 				6A63D1C2162F1DBA001175D2 /* VXHCSC2TCTable.c in Sources */,
 				6A63D1C3162F1DBA001175D2 /* VXHCTC2SCTable.c in Sources */,
+				6A616643162FD8420042559F /* OVNonModalAlertWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
