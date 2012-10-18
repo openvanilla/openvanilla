@@ -33,6 +33,8 @@
 - (IBAction)importNewTableAction:(id)sender
 {
     NSOpenPanel *panel = [NSOpenPanel openPanel];
+    [panel setTitle:NSLocalizedString(@"Pick the .cin Table to Import", nil)];
+    [panel setLevel:CGShieldingWindowLevel() + 1];
     [panel setAllowsMultipleSelection:NO];
     [panel setAllowedFileTypes:[NSArray arrayWithObject:@"cin"]];
 
