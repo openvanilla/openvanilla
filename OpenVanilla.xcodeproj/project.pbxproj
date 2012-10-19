@@ -29,8 +29,9 @@
 		6A6B2144162174DB00697149 /* OVIMArrayPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.m */; };
 		6A6B21481621753300697149 /* OVAddTableBasedInputMethodViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B21471621753300697149 /* OVAddTableBasedInputMethodViewController.mm */; };
 		6A6B214A1621758700697149 /* OpenVanilla-InputMenu@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6A6B21491621758700697149 /* OpenVanilla-InputMenu@2x.tiff */; };
-		6A7087C11623F79400DC33E0 /* cj.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A7087BD1623F73A00DC33E0 /* cj.cin */; };
-		6A7087C21623F79B00DC33E0 /* simplex.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A7087BE1623F73A00DC33E0 /* simplex.cin */; };
+		6A7789FB163121B0000C85A2 /* cj.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A7789F516312186000C85A2 /* cj.cin */; };
+		6A7789FC163121B0000C85A2 /* ehq-symbols.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A7789F616312186000C85A2 /* ehq-symbols.cin */; };
+		6A7789FD163121B0000C85A2 /* simplex.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A7789F716312186000C85A2 /* simplex.cin */; };
 		6A8832311605C0B300FBEB85 /* OVIMArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A88322C1605C0B300FBEB85 /* OVIMArray.cpp */; };
 		6A8832321605C0B300FBEB85 /* OVIMArrayContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A88322E1605C0B300FBEB85 /* OVIMArrayContext.cpp */; };
 		6A88323B1605C2D200FBEB85 /* array-shortcode.cin in Copy Array Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A8832341605C1FE00FBEB85 /* array-shortcode.cin */; };
@@ -56,7 +57,6 @@
 		6AC9A484162E664A0049E289 /* OVFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC9A482162E664A0049E289 /* OVFileHandler.cpp */; };
 		6AC9A487162E66670049E289 /* OVStringToolKit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC9A485162E66670049E289 /* OVStringToolKit.cpp */; };
 		6ACB49BF15E49E8600380B82 /* dayi3-patched.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6ACB49B715E49E6600380B82 /* dayi3-patched.cin */; };
-		6ACB49C015E49E8600380B82 /* ehq-symbols.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6ACB49B815E49E6600380B82 /* ehq-symbols.cin */; };
 		6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */; };
 		6ACB49C615E49EB400380B82 /* OVModuleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49C515E49EB400380B82 /* OVModuleManager.mm */; };
 		6ACB49CD15E49ECB00380B82 /* OVIMTableBased.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49C915E49ECB00380B82 /* OVIMTableBased.cpp */; };
@@ -108,10 +108,10 @@
 			dstPath = DataTables/TableBased;
 			dstSubfolderSpec = 7;
 			files = (
-				6A7087C11623F79400DC33E0 /* cj.cin in Copy TableBased Input Method Tables */,
 				6ACB49BF15E49E8600380B82 /* dayi3-patched.cin in Copy TableBased Input Method Tables */,
-				6A7087C21623F79B00DC33E0 /* simplex.cin in Copy TableBased Input Method Tables */,
-				6ACB49C015E49E8600380B82 /* ehq-symbols.cin in Copy TableBased Input Method Tables */,
+				6A7789FB163121B0000C85A2 /* cj.cin in Copy TableBased Input Method Tables */,
+				6A7789FC163121B0000C85A2 /* ehq-symbols.cin in Copy TableBased Input Method Tables */,
+				6A7789FD163121B0000C85A2 /* simplex.cin in Copy TableBased Input Method Tables */,
 			);
 			name = "Copy TableBased Input Method Tables";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,8 +158,9 @@
 		6A6B21461621753300697149 /* OVAddTableBasedInputMethodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVAddTableBasedInputMethodViewController.h; sourceTree = "<group>"; };
 		6A6B21471621753300697149 /* OVAddTableBasedInputMethodViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVAddTableBasedInputMethodViewController.mm; sourceTree = "<group>"; };
 		6A6B21491621758700697149 /* OpenVanilla-InputMenu@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "OpenVanilla-InputMenu@2x.tiff"; path = "Images/OpenVanilla-InputMenu@2x.tiff"; sourceTree = SOURCE_ROOT; };
-		6A7087BD1623F73A00DC33E0 /* cj.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cj.cin; sourceTree = "<group>"; };
-		6A7087BE1623F73A00DC33E0 /* simplex.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = simplex.cin; sourceTree = "<group>"; };
+		6A7789F516312186000C85A2 /* cj.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cj.cin; sourceTree = "<group>"; };
+		6A7789F616312186000C85A2 /* ehq-symbols.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ehq-symbols.cin"; sourceTree = "<group>"; };
+		6A7789F716312186000C85A2 /* simplex.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = simplex.cin; sourceTree = "<group>"; };
 		6A88322C1605C0B300FBEB85 /* OVIMArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVIMArray.cpp; sourceTree = "<group>"; };
 		6A88322D1605C0B300FBEB85 /* OVIMArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMArray.h; sourceTree = "<group>"; };
 		6A88322E1605C0B300FBEB85 /* OVIMArrayContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVIMArrayContext.cpp; sourceTree = "<group>"; };
@@ -239,7 +240,6 @@
 		6AC9A485162E66670049E289 /* OVStringToolKit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVStringToolKit.cpp; sourceTree = "<group>"; };
 		6AC9A486162E66670049E289 /* OVStringToolKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVStringToolKit.h; sourceTree = "<group>"; };
 		6ACB49B715E49E6600380B82 /* dayi3-patched.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "dayi3-patched.cin"; sourceTree = "<group>"; };
-		6ACB49B815E49E6600380B82 /* ehq-symbols.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ehq-symbols.cin"; sourceTree = "<group>"; };
 		6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVInputMethodController.mm; sourceTree = "<group>"; };
 		6ACB49C415E49EB400380B82 /* OVModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVModuleManager.h; sourceTree = "<group>"; };
 		6ACB49C515E49EB400380B82 /* OVModuleManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVModuleManager.mm; sourceTree = "<group>"; };
@@ -338,6 +338,25 @@
 			);
 			path = VXHanConvert;
 			sourceTree = "<group>";
+		};
+		6A7789F316312148000C85A2 /* Original Tables */ = {
+			isa = PBXGroup;
+			children = (
+				6ACB49B715E49E6600380B82 /* dayi3-patched.cin */,
+			);
+			name = "Original Tables";
+			sourceTree = "<group>";
+		};
+		6A7789F416312163000C85A2 /* Tables Arranged for Mac */ = {
+			isa = PBXGroup;
+			children = (
+				6A7789F516312186000C85A2 /* cj.cin */,
+				6A7789F616312186000C85A2 /* ehq-symbols.cin */,
+				6A7789F716312186000C85A2 /* simplex.cin */,
+			);
+			name = "Tables Arranged for Mac";
+			path = Source/Mac/MacDataTables;
+			sourceTree = SOURCE_ROOT;
 		};
 		6A88322B1605C0A300FBEB85 /* Array */ = {
 			isa = PBXGroup;
@@ -553,10 +572,8 @@
 			isa = PBXGroup;
 			children = (
 				6A88323A1605C20100FBEB85 /* Array */,
-				6A7087BD1623F73A00DC33E0 /* cj.cin */,
-				6ACB49B715E49E6600380B82 /* dayi3-patched.cin */,
-				6ACB49B815E49E6600380B82 /* ehq-symbols.cin */,
-				6A7087BE1623F73A00DC33E0 /* simplex.cin */,
+				6A7789F316312148000C85A2 /* Original Tables */,
+				6A7789F416312163000C85A2 /* Tables Arranged for Mac */,
 			);
 			path = DataTables;
 			sourceTree = "<group>";
