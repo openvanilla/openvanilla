@@ -761,11 +761,14 @@ namespace OpenVanilla {
             
                 if (*buffer == '#')
                     continue;
+
+                if (*buffer != '%')
+                    continue;
                     
                 pair<string, string> pv = SplitPropertyString(buffer + 1);
                 if (pv.first == "keyname")
                     break;
-                    
+
                 properties[pv.first] = pv.second;
             }
             
