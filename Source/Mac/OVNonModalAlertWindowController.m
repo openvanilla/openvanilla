@@ -27,13 +27,15 @@
 
 - (void)showWithTitle:(NSString *)title content:(NSString *)content confirmButtonTitle:(NSString *)confirmTitle cancelButtonTitle:(NSString *)cancelButtonTitle cancelAsDefault:(BOOL)cancelAsDefault delegate:(id<OVNonModalAlertWindowControllerDelegate>)delegate;
 {
+    _delegate = delegate;
+
     NSRect oldFrame = [self.confirmButton frame];
     [self.confirmButton setTitle:confirmTitle];
     [self.confirmButton sizeToFit];
 
     NSRect newFrame = [self.confirmButton frame];
 
-    newFrame.size.width = MAX(90.0, newFrame.size.width);
+    newFrame.size.width = MAX(90.0, (newFrame.size.width + 10.0));
     newFrame.origin.x += (oldFrame.size.width - newFrame.size.width);
     [self.confirmButton setFrame:newFrame];
 
@@ -41,7 +43,7 @@
         [self.cancelButton setTitle:cancelButtonTitle];
         [self.cancelButton sizeToFit];
         NSRect adjustedFrame = [self.cancelButton frame];
-        adjustedFrame.size.width = MAX(90.0, adjustedFrame.size.width);
+        adjustedFrame.size.width = MAX(90.0, (adjustedFrame.size.width + 10.0));
         adjustedFrame.origin.x = newFrame.origin.x - adjustedFrame.size.width;
         [self.cancelButton setFrame:adjustedFrame];
         [self.cancelButton setHidden:NO];
