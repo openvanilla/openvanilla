@@ -27,6 +27,10 @@
 
 #import "OVAddTableBasedInputMethodViewController.h"
 #import "OVModuleManager.h"
+#import "OVNonModalAlertWindowController.h"
+
+@interface OVAddTableBasedInputMethodViewController () <OVNonModalAlertWindowControllerDelegate>
+@end
 
 @implementation OVAddTableBasedInputMethodViewController
 
@@ -49,7 +53,28 @@
         }
 
         NSString *cinPath = [[files objectAtIndex:0] path];
+        NSError *error = nil;
+        BOOL override = NO;
+        BOOL canInstall = [[OVModuleManager defaultManager] canInstallCustomTableBasedInputMethodWithTablePath:cinPath willOverrideBuiltInTable:&override error:&error];
+        if (!canInstall) {
+            [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Cannot Import Input Method", nil) content:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" is not a valid cin file.", nil), [cinPath lastPathComponent]] confirmButtonTitle:NSLocalizedString(@"Dismiss", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
+            return;
+        }
+
+        if (override) {
+            [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Overwriting Existing Input Method", nil) content:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" will replace an existing input method that you have. Do you want to continue?", nil), [cinPath lastPathComponent]] confirmButtonTitle:NSLocalizedString(@"Overwrite", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) cancelAsDefault:YES delegate:self];
+            return;
+        }
+
+
         [[OVModuleManager defaultManager] installCustomTableBasedInputMethodWithTablePath:cinPath];
+
+        [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Input Method Imported", nil) content:NSLocalizedString(@"Your new input method is ready to use", nil) confirmButtonTitle:NSLocalizedString(@"OK", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
     }];
+}
+
+- (void)nonModalAlertWindowControllerDidConfirm:(OVNonModalAlertWindowController *)controller
+{
+    NSLog(@"!");
 }
 @end
