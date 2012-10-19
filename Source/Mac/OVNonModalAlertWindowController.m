@@ -73,11 +73,10 @@
 
     NSRect infiniteHeightFrame = oldFrame;
     infiniteHeightFrame.size.height = 10240;
-    NSSize newSize = [[self.contentTextField cell] cellSizeForBounds:infiniteHeightFrame];
-    newFrame = [content boundingRectWithSize:infiniteHeightFrame.size options:0 attributes:[NSDictionary dictionaryWithObjectsAndKeys:[self.contentTextField font], NSFontAttributeName, nil]];
+    newFrame = [content boundingRectWithSize:infiniteHeightFrame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:[self.contentTextField font], NSFontAttributeName, nil]];
+    newFrame.size.width = MAX(newFrame.size.width, oldFrame.size.width);
     newFrame.origin = oldFrame.origin;
-    newFrame.size = newSize;
-    newFrame.origin.y -= (newSize.height - oldFrame.size.height);
+    newFrame.origin.y -= (newFrame.size.height - oldFrame.size.height);
     [self.contentTextField setFrame:newFrame];
 
     NSRect windowFrame = [[self window] frame];
