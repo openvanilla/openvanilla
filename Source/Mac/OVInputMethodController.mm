@@ -148,6 +148,9 @@ using namespace OpenVanilla;
 - (void)activateServer:(id)client
 {
     IMEDebug(@"%s", __PRETTY_FUNCTION__);
+
+    [OVModuleManager defaultManager].candidateService->resetAll();
+
     NSString *keyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
     [client overrideKeyboardWithKeyboardNamed:keyboardLayout];
 
@@ -387,9 +390,19 @@ using namespace OpenVanilla;
     _readingText->clear();
 
     if (_inputMethodContext) {
+        _inputMethodContext->stopSession([OVModuleManager defaultManager].loaderService);
         delete _inputMethodContext;
         _inputMethodContext = 0;
     }
+
+    NSAttributedString *emptyReading = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+    [_currentClient setMarkedText:emptyReading selectionRange:NSMakeRange(0, 0) replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
+    _composingText->commit();
+    [self commitComposition:_currentClient];
+    _composingText->clear();
+    _readingText->clear();
+    [OVModuleManager defaultManager].candidateService->resetAll();
+    [[[OVModuleManager defaultManager].toolTipWindowController window] orderOut:self];
 
     if (!_inputMethodContext && [OVModuleManager defaultManager].activeInputMethod) {
         _inputMethodContext = [OVModuleManager defaultManager].activeInputMethod->createContext();
