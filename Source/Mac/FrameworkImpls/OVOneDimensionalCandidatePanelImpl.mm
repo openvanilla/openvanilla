@@ -179,6 +179,11 @@ string OVOneDimensionalCandidatePanelImpl::prompt()
 bool OVOneDimensionalCandidatePanelImpl::yieldToCandidateEventHandler()
 {
     m_inControl = true;
+
+    if (m_candidateList.size()) {
+        m_candidateController.selectedCandidateIndex = 0;
+    }
+
     return m_inControl;
 }
 

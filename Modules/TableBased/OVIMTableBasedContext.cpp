@@ -405,6 +405,8 @@ bool OVIMTableBasedContext::compose(OVTextBuffer* readingText, OVTextBuffer* com
             nextPageKeys = panel->defaultNextPageKeys();
         }
 
+        panel->setNextPageKeys(nextPageKeys);
+
         if (results.size() <= candidateKeys.size()) {
             panel->setCandidatesPerPage(results.size());
         }
