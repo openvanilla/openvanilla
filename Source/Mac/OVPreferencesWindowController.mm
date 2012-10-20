@@ -36,6 +36,34 @@ static NSString *const kGeneralSettingIdentifier = @"GeneralSettingIdentifier";
 static NSString *const kAddInputMethodIdentifier = @"AddInputMethodIdentifier";
 static NSString *const kCheckUpdateIdentifier = @"CheckUpdateIdentifier";
 
+
+static void ListTitlesInView(NSView *view, NSMutableDictionary *dict)
+{
+    if ([view isKindOfClass:[NSPopUpButton class]]) {
+        return;
+    }
+    
+    if ([view isKindOfClass:[NSTextField class]] && ![(id)view isEditable]) {
+        [dict setObject:[(id)view stringValue] forKey:[NSValue valueWithNonretainedObject:view]];
+        return;
+    }
+
+    if ([view isKindOfClass:[NSMatrix class]]) {
+        for (NSCell *cell in [(NSMatrix *)view cells]) {
+            [dict setObject:[cell title] forKey:[NSValue valueWithNonretainedObject:cell]];
+       }
+        return;
+    }
+
+    if ([view respondsToSelector:@selector(title)]) {
+        [dict setObject:[(id)view title] forKey:[NSValue valueWithNonretainedObject:view]];
+    }
+
+    for (NSView *subview in [view subviews]) {
+        ListTitlesInView(subview, dict);
+    }
+}
+
 static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBasePreferencesViewController *controller)
 {
     return [NSDictionary dictionaryWithObjectsAndKeys:identifier, kIdentifierKey, localizedName, kLocalizedNameKey, controller, kControllerKey, nil];
@@ -43,6 +71,7 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 
 @interface OVPreferencesWindowController ()
 - (void)reload:(NSNotification *)notification;
+- (void)updateLocalization;
 @property (assign, nonatomic) OVBasePreferencesViewController *currentPreferencesViewController;
 @property (retain, nonatomic) NSMutableArray *items;
 @end
@@ -72,6 +101,17 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:OVModuleManagerDidReloadNotification object:nil];
 
     ((OVAddTableBasedInputMethodViewController *)self.addTableBasedInputMethodViewController).preferencesWindowController = self;
+
+    if (!_localizableObjects) {
+        _localizableObjects = [[NSMutableDictionary alloc] init];
+
+        [_localizableObjects removeAllObjects];
+        ListTitlesInView([self.generalPreferencesViewController view], _localizableObjects);
+        ListTitlesInView([self.tableBasedMoudlePreferencesViewController view], _localizableObjects);
+        ListTitlesInView([self.arrayMoudlePreferencesViewController view], _localizableObjects);
+        ListTitlesInView([self.addTableBasedInputMethodViewController view], _localizableObjects);
+        [self updateLocalization];
+    }
 }
 
 - (void)selectInputMethodIdentifier:(NSString *)identifier
@@ -114,6 +154,23 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 
     [self.tableView reloadData];
     [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+}
+
+- (void)updateLocalization
+{
+    for (NSValue *value in _localizableObjects) {
+        id view = [value nonretainedObjectValue];
+        NSString *text = NSLocalizedString([_localizableObjects objectForKey:value], nil);
+
+        if ([view isKindOfClass:[NSTextField class]] && ![(id)view isEditable]) {
+            [view setStringValue:text];
+            continue;
+        }
+        else if ([view respondsToSelector:@selector(setTitle:)]) {
+            [view setTitle:text];
+            continue;
+        }
+    }
 }
 
 #pragma mark - NSWindowDelegate methods

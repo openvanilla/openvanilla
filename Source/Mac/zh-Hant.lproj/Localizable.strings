@@ -1,0 +1,132 @@
+/* No comment provided by engineer. */
+"\"%@\" is not a valid cin file." = "\"%@\" 不是符合規格的 .cin 檔案";
+
+/* No comment provided by engineer. */
+"\"%@\" will replace an existing input method that you have. Do you want to continue?" = "「%@\」會取代現有的輸入法。是否確定要取代？";
+
+/* No comment provided by engineer. */
+"About OpenVanilla" = "關於 OpenVanilla";
+
+/* No comment provided by engineer. */
+"Add New Input Method" = "加入新輸入法";
+
+/* No comment provided by engineer. */
+"Are you sure you want to remove the input method\"%@\"?" = "確定要移除「%@」輸入法？";
+
+/* No comment provided by engineer. */
+"Cancel" = "取消";
+
+/* No comment provided by engineer. */
+"Cannot activate the input method." = "無法啟用輸入法。";
+
+/* No comment provided by engineer. */
+"Cannot Import Input Method" = "無法匯入輸入法";
+
+/* No comment provided by engineer. */
+"Cannot use the file \"%@\": file may be corrupt or is not a valid CIN file" = "無法使用表格檔「%@」：檔案不符合 .cin 格式。";
+
+/* No comment provided by engineer. */
+"Check for Update Completed" = "新版檢查完畢";
+
+/* No comment provided by engineer. */
+"Confirm Removal" = "確認移除";
+
+/* No comment provided by engineer. */
+"Convert Simplified Chinese to Traditional" = "簡體轉繁體";
+
+/* No comment provided by engineer. */
+"Convert Traditional Chinese to Simplified" = "繁體轉簡體";
+
+/* No comment provided by engineer. */
+"Dismiss" = "關閉本視窗";
+
+/* No comment provided by engineer. */
+"Failed to remove the input method\"%@\".\n\nError: %@" = "無法移除輸入法「%1$@」。\n\n錯誤說明：%2$@";
+
+/* No comment provided by engineer. */
+"General Settings" = "一般設定";
+
+/* No comment provided by engineer. */
+"Input Method Imported" = "輸入法匯入成功";
+
+/* No comment provided by engineer. */
+"Last checked: %@" = "上次檢查時間：%@";
+
+/* No comment provided by engineer. */
+"New Version Available" = "有新版可下載";
+
+/* No comment provided by engineer. */
+"Not Now" = "以後再說";
+
+/* No comment provided by engineer. */
+"OK" = "好";
+
+/* No comment provided by engineer. */
+"OpenVanilla - %@" = "OpenVanilla - %@";
+
+/* No comment provided by engineer. */
+"OpenVanilla Preferences…" = "OpenVanilla 偏好設定…";
+
+/* No comment provided by engineer. */
+"Overwrite" = "取代";
+
+/* No comment provided by engineer. */
+"Overwriting Existing Input Method" = "取代現有輸入法";
+
+/* No comment provided by engineer. */
+"Pick the .cin Table to Import" = "選擇要匯入的 .cin 輸入法表格";
+
+/* No comment provided by engineer. */
+"Removal Failed" = "移除輸入法失敗";
+
+/* No comment provided by engineer. */
+"Remove" = "移除";
+
+/* No comment provided by engineer. */
+"There may be no internet connection or the server failed to respond.\n\nError message: %@" = "網路連線失敗，或是伺服器沒有回應。\n\n錯誤說明：%@";
+
+/* No comment provided by engineer. */
+"This is a built-in input method." = "這是內建的輸入法。";
+
+/* No comment provided by engineer. */
+"This is a customized input method." = "這是使用者自訂的輸入法。";
+
+/* No comment provided by engineer. */
+"Update Check Failed" = "無法檢查新版";
+
+/* No comment provided by engineer. */
+"Visit Website" = "前往網站";
+
+/* No comment provided by engineer. */
+"You are already using the latest version of OpenVanilla." = "目前使用的已經是最新版本。";
+
+/* No comment provided by engineer. */
+"You're currently using OpenVanilla %@ (%@), a new version %@ (%@) is now available. Do you want to visit openvanilla.org to download the version?%@" = "目前使用的 OpenVanilla 版本是 %1$@ (%2$@)，網路上有更新版本 %3$@ (%4$@) 可供下載。是否要前往 openvanilla.org 下載新版來安裝？%5$@";
+
+/* No comment provided by engineer. */
+"Your new input method \"%@\" is ready to use" = "新輸入法「%@」可以使用了";
+
+/* Preferences */
+"Check for new versions" = "定期檢查新版";
+"Update Check:" = "檢查新版：";
+"Use Space as the first candidate key" = "使用空白鍵選第一個候選字詞";
+"Play sound on input error" = "輸入錯誤時發出警告聲";
+"Vertical" = "直式";
+"Clear the composing buffer on error" = "輸入錯誤時，立刻清除組字區";
+"Candidate list style:" = "選字窗樣式：";
+"Check Now" = "立刻檢查";
+"Maximum component buffer length:" = "最大組字區（字根）長度：";
+"Candidate list font size:" = "選字窗字體大小：";
+"Special code prompt (Auto SP)" = "特別碼提示";
+"Last checked: %@" = "上次檢查時間：%@";
+"Alphanumeric keyboard layout:" = "英數字鍵盤配置：";
+"Space selects the first candidate when there's only one page" = "如果候選字詞只有一頁，按空白鍵送出第一詞";
+"For more information, visit http://openvanilla.org" = "詳細說明，請前往以下網站: http://openvanilla.org";
+"While typing, show candidate list if there are candidates" = "一邊打字一邊組字，如果有候選詞就顯示選字窗";
+"Remove Input Method" = "移除輸入法";
+"Import…" = "匯入…";
+"Compose when reaching the maximum component length" = "打滿最大組字（或字根）長度就組字";
+"Horizontal" = "橫式";
+"Feedback:" = "音效：";
+"Quick mode (Force SP)" = "快打模式";
+"Create a customized input method by importing a .cin file" = "匯入 .cin 格式檔案，建立新的輸入法";

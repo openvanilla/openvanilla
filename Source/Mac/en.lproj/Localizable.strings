@@ -1,0 +1,163 @@
+/* No comment provided by engineer. */
+"%@ (for version %@)" = "%1$@ (for version %2$@)";
+
+/* No comment provided by engineer. */
+"\"%@\" is not a valid cin file." = "\"%@\" is not a valid cin file.";
+
+/* No comment provided by engineer. */
+"\"%@\" will replace an existing input method that you have. Do you want to continue?" = "\"%@\" will replace an existing input method that you have. Do you want to continue?";
+
+/* No comment provided by engineer. */
+"A legacy version of OpenVanilla (0.6, 0.7, 0.8) exists.\n\nPlease delete it before installing OpenVanilla." = "A legacy version of OpenVanilla (0.6, 0.7, 0.8) exists.\n\nPlease delete it before installing OpenVanilla.";
+
+/* No comment provided by engineer. */
+"About OpenVanilla" = "About OpenVanilla";
+
+/* No comment provided by engineer. */
+"Add New Input Method" = "Add New Input Method";
+
+/* No comment provided by engineer. */
+"Agree and Upgrade" = "Agree and Upgrade";
+
+/* No comment provided by engineer. */
+"Are you sure you want to remove the input method\"%@\"?" = "Are you sure you want to remove the input method\"%@\"?";
+
+/* No comment provided by engineer. */
+"Cancel" = "Cancel";
+
+/* No comment provided by engineer. */
+"Cannot activate the input method." = "Cannot activate the input method.";
+
+/* No comment provided by engineer. */
+"Cannot copy the file to the destination." = "Cannot copy the file to the destination.";
+
+/* No comment provided by engineer. */
+"Cannot Import Input Method" = "Cannot Import Input Method";
+
+/* No comment provided by engineer. */
+"Cannot use the file \"%@\": file may be corrupt or is not a valid CIN file" = "Cannot use the file \"%@\": file may be corrupt or is not a valid CIN file";
+
+/* No comment provided by engineer. */
+"Check for Update Completed" = "Check for Update Completed";
+
+/* No comment provided by engineer. */
+"Confirm Removal" = "Confirm Removal";
+
+/* No comment provided by engineer. */
+"Convert Simplified Chinese to Traditional" = "Convert Simplified Chinese to Traditional";
+
+/* No comment provided by engineer. */
+"Convert Traditional Chinese to Simplified" = "Convert Traditional Chinese to Simplified";
+
+/* No comment provided by engineer. */
+"Dismiss" = "Dismiss";
+
+/* No comment provided by engineer. */
+"Failed to remove the input method\"%@\".\n\nError: %@" = "Failed to remove the input method\"%1$@\".\n\nError: %2$@";
+
+/* No comment provided by engineer. */
+"General Settings" = "General Settings";
+
+/* No comment provided by engineer. */
+"Input Method Imported" = "Input Method Imported";
+
+/* No comment provided by engineer. */
+"Install Failed" = "Install Failed";
+
+/* No comment provided by engineer. */
+"Installation Successful" = "Installation Successful";
+
+/* No comment provided by engineer. */
+"Last checked: %@" = "Last checked: %@";
+
+/* No comment provided by engineer. */
+"Legacy Version Warning" = "Legacy Version Warning";
+
+/* No comment provided by engineer. */
+"New Version Available" = "New Version Available";
+
+/* No comment provided by engineer. */
+"Not Now" = "Not Now";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
+
+/* No comment provided by engineer. */
+"OpenVanilla - %@" = "OpenVanilla - %@";
+
+/* No comment provided by engineer. */
+"OpenVanilla is ready to use." = "OpenVanilla is ready to use.";
+
+/* No comment provided by engineer. */
+"OpenVanilla Preferences…" = "OpenVanilla Preferences…";
+
+/* No comment provided by engineer. */
+"Overwrite" = "Overwrite";
+
+/* No comment provided by engineer. */
+"Overwriting Existing Input Method" = "Overwriting Existing Input Method";
+
+/* No comment provided by engineer. */
+"Pick the .cin Table to Import" = "Pick the .cin Table to Import";
+
+/* No comment provided by engineer. */
+"Quit Installer" = "Quit Installer";
+
+/* No comment provided by engineer. */
+"Removal Failed" = "Removal Failed";
+
+/* No comment provided by engineer. */
+"Remove" = "Remove";
+
+/* No comment provided by engineer. */
+"There may be no internet connection or the server failed to respond.\n\nError message: %@" = "There may be no internet connection or the server failed to respond.\n\nError message: %@";
+
+/* No comment provided by engineer. */
+"This is a built-in input method." = "This is a built-in input method.";
+
+/* No comment provided by engineer. */
+"This is a customized input method." = "This is a customized input method.";
+
+/* No comment provided by engineer. */
+"Update Check Failed" = "Update Check Failed";
+
+/* No comment provided by engineer. */
+"Visit Website" = "Visit Website";
+
+/* No comment provided by engineer. */
+"You are already using the latest version of OpenVanilla." = "You are already using the latest version of OpenVanilla.";
+
+/* No comment provided by engineer. */
+"You're currently using OpenVanilla %@ (%@), a new version %@ (%@) is now available. Do you want to visit openvanilla.org to download the version?%@" = "You're currently using OpenVanilla %1$@ (%2$@), a new version %3$@ (%4$@) is now available. Do you want to visit openvanilla.org to download the version?%5$@";
+
+/* No comment provided by engineer. */
+"Your new input method \"%@\" is ready to use" = "Your new input method \"%@\" is ready to use";
+
+/* Preferences */
+"Check for new versions" = "Check for new versions";
+"Update Check:" = "Update Check:";
+"Use Space as the first candidate key" = "Use Space as the first candidate key";
+"Play sound on input error" = "Play sound on input error";
+"Vertical" = "Vertical";
+"Clear the composing buffer on error" = "Clear the composing buffer on error";
+"Candidate list style:" = "Candidate list style:";
+"Check Now" = "Check Now";
+"Maximum component buffer length:" = "Maximum component buffer length:";
+"Candidate list font size:" = "Candidate list font size:";
+"This is a customized input method." = "This is a customized input method.";
+"Special code prompt (Auto SP)" = "Special code prompt (Auto SP)";
+"Last checked: %@" = "Last checked: %@";
+"Alphanumeric keyboard layout:" = "Alphanumeric keyboard layout:";
+"Space selects the first candidate when there's only one page" = "Space selects the first candidate when there's only one page";
+"For more information, visit
+ http://openvanilla.org" = "For more information, visit
+ http://openvanilla.org";
+"While typing, show candidate list if there are candidates" = "While typing, show candidate list if there are candidates";
+"Remove Input Method" = "Remove Input Method";
+"Import…" = "Import…";
+"Compose when reaching the maximum component length" = "Compose when reaching the maximum component length";
+"Horizontal" = "Horizontal";
+"Feedback:" = "Feedback:";
+"Quick mode (Force SP)" = "Quick mode (Force SP)";
+"Alphanumeric keyboard layout:" = "Alphanumeric keyboard layout:";
+"Create a customized input method by importing a .cin file" = "Create a customized input method by importing a .cin file";

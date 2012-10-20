@@ -251,7 +251,7 @@
 					<object class="NSTextField" id="61075014">
 						<reference key="NSNextResponder" ref="165452036"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{17, 23}, {232, 17}}</string>
+						<string key="NSFrame">{{18, 25}, {232, 17}}</string>
 						<reference key="NSSuperview" ref="165452036"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="653017351"/>
@@ -259,7 +259,7 @@
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="1012072263">
 							<int key="NSCellFlags">68157504</int>
-							<int key="NSCellFlags2">272630784</int>
+							<int key="NSCellFlags2">4195328</int>
 							<string key="NSContents">This is a customized input method.</string>
 							<reference key="NSSupport" ref="26"/>
 							<string key="NSCellIdentifier">_NS:1535</string>
@@ -277,7 +277,7 @@
 					<object class="NSButton" id="653017351">
 						<reference key="NSNextResponder" ref="165452036"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{248, 13}, {179, 32}}</string>
+						<string key="NSFrame">{{249, 16}, {176, 32}}</string>
 						<reference key="NSSuperview" ref="165452036"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -301,7 +301,7 @@
 					<object class="NSPopUpButton" id="121830230">
 						<reference key="NSNextResponder" ref="165452036"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{220, 183}, {164, 26}}</string>
+						<string key="NSFrame">{{252, 183}, {164, 26}}</string>
 						<reference key="NSSuperview" ref="165452036"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="628330742"/>
@@ -377,7 +377,7 @@
 					<object class="NSTextField" id="914482221">
 						<reference key="NSNextResponder" ref="165452036"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{17, 189}, {201, 17}}</string>
+						<string key="NSFrame">{{17, 189}, {233, 17}}</string>
 						<reference key="NSSuperview" ref="165452036"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="121830230"/>
@@ -385,7 +385,7 @@
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="365750152">
 							<int key="NSCellFlags">68157504</int>
-							<int key="NSCellFlags2">4195328</int>
+							<int key="NSCellFlags2">71304192</int>
 							<string key="NSContents">Alphanumeric keyboard layout:</string>
 							<reference key="NSSupport" ref="874086433"/>
 							<string key="NSCellIdentifier">_NS:1535</string>
@@ -642,7 +642,7 @@
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="110070861">
 							<int key="NSCellFlags">68157504</int>
-							<int key="NSCellFlags2">272630784</int>
+							<int key="NSCellFlags2">71304192</int>
 							<string key="NSContents">Maximum component buffer length:</string>
 							<reference key="NSSupport" ref="874086433"/>
 							<string key="NSCellIdentifier">_NS:1535</string>
@@ -1394,7 +1394,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="NSTextField" id="546102524">
 						<reference key="NSNextResponder" ref="412271375"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{76, 54}, {289, 34}}</string>
+						<string key="NSFrame">{{114, 75}, {212, 34}}</string>
 						<reference key="NSSuperview" ref="412271375"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -1403,7 +1403,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<object class="NSTextFieldCell" key="NSCell" id="143021750">
 							<int key="NSCellFlags">67108864</int>
 							<int key="NSCellFlags2">138412032</int>
-							<string key="NSContents">For more information, visit http://openvanilla.org</string>
+							<string key="NSContents">For more information, visit http://openvanilla.org</string>
 							<object class="NSFont" key="NSSupport" id="909718974">
 								<string key="NSName">LucidaGrande</string>
 								<double key="NSSize">13</double>
@@ -1419,7 +1419,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="NSTextField" id="34989962">
 						<reference key="NSNextResponder" ref="412271375"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{71, 178}, {289, 34}}</string>
+						<string key="NSFrame">{{71, 182}, {289, 34}}</string>
 						<reference key="NSSuperview" ref="412271375"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="412912829"/>
@@ -1441,7 +1441,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="NSButton" id="412912829">
 						<reference key="NSNextResponder" ref="412271375"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{133, 113}, {174, 32}}</string>
+						<string key="NSFrame">{{133, 128}, {174, 32}}</string>
 						<reference key="NSSuperview" ref="412271375"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="546102524"/>
@@ -2030,15 +2030,15 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<array class="NSMutableArray" key="children">
 							<reference ref="87198802"/>
 							<reference ref="143166894"/>
-							<reference ref="914482221"/>
 							<reference ref="628330742"/>
 							<reference ref="358590985"/>
 							<reference ref="280813538"/>
 							<reference ref="948473245"/>
 							<reference ref="245632435"/>
+							<reference ref="121830230"/>
+							<reference ref="914482221"/>
 							<reference ref="653017351"/>
 							<reference ref="61075014"/>
-							<reference ref="121830230"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -2641,8 +2641,8 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<int key="objectID">136</int>
 						<reference key="object" ref="412271375"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="412912829"/>
 							<reference ref="34989962"/>
+							<reference ref="412912829"/>
 							<reference ref="546102524"/>
 						</array>
 						<reference key="parent" ref="0"/>

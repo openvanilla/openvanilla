@@ -38,6 +38,7 @@
     OVBasePreferencesViewController *_arrayMoudlePreferencesViewController;
     OVBasePreferencesViewController *_currentPreferencesViewController;
     OVBasePreferencesViewController *_addTableBasedInputMethodViewController;
+    NSMutableDictionary *_localizableObjects;
 }
 
 - (void)selectInputMethodIdentifier:(NSString *)identifier;

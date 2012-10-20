@@ -18,6 +18,7 @@
 		6A0E0AD41623EDF5004FED10 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0E0AC91623EDF5004FED10 /* main.m */; };
 		6A0E0AD51623EE82004FED10 /* OpenVanilla-App.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2515CD617D0080EE7D /* OpenVanilla-App.icns */; };
 		6A0E0AD61623EEDB004FED10 /* OpenVanilla.app in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */; };
+		6A30CB0616329CF400DC0755 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A30CB0416329CF400DC0755 /* Localizable.strings */; };
 		6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */; };
 		6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm */; };
 		6A616643162FD8420042559F /* OVNonModalAlertWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A616641162FD8420042559F /* OVNonModalAlertWindowController.m */; };
@@ -140,6 +141,10 @@
 		6A0E0ACB1623EDF5004FED10 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hant"; path = "zh-Hant.lproj/License.rtf"; sourceTree = "<group>"; };
 		6A0E0ACC1623EDF5004FED10 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6A0E0ACD1623EDF5004FED10 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		6A30CB0516329CF400DC0755 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6A30CB0816329CFC00DC0755 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6A30CB0916329D2300DC0755 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6A30CB0A16329D3000DC0755 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.xib"; sourceTree = "<group>"; };
 		6A3914AB15FAE96500DC57C3 /* OVBasePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVBasePreferencesViewController.h; sourceTree = "<group>"; };
 		6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVBasePreferencesViewController.mm; sourceTree = "<group>"; };
 		6A3914AF15FAE99400DC57C3 /* OVTableBasedModulePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTableBasedModulePreferencesViewController.h; sourceTree = "<group>"; };
@@ -471,6 +476,7 @@
 		6ABBAF2415CD61680080EE7D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A30CB0416329CF400DC0755 /* Localizable.strings */,
 				6ABBAF0915CD58F90080EE7D /* MainMenu.xib */,
 				6ABBAF2515CD617D0080EE7D /* OpenVanilla-App.icns */,
 				6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */,
@@ -745,6 +751,7 @@
 				6A6B214A1621758700697149 /* OpenVanilla-InputMenu@2x.tiff in Resources */,
 				6AB4A07815ED2BBA00E78557 /* preferences.xib in Resources */,
 				6A616644162FD8420042559F /* OVNonModalAlertWindowController.xib in Resources */,
+				6A30CB0616329CF400DC0755 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -874,10 +881,20 @@
 			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
+		6A30CB0416329CF400DC0755 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A30CB0516329CF400DC0755 /* en */,
+				6A30CB0816329CFC00DC0755 /* zh-Hant */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		6ABBAEFD15CD58F90080EE7D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6ABBAEFE15CD58F90080EE7D /* en */,
+				6A30CB0916329D2300DC0755 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -886,6 +903,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6ABBAF0A15CD58F90080EE7D /* en */,
+				6A30CB0A16329D3000DC0755 /* zh-Hant */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

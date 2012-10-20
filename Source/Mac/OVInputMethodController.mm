@@ -136,10 +136,10 @@ using namespace OpenVanilla;
 
     [menu addItem:[NSMenuItem separatorItem]];
 
-    NSMenuItem *preferenceMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"OpenVanilla Preferences", @"") action:@selector(showPreferences:) keyEquivalent:@""] autorelease];
+    NSMenuItem *preferenceMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"OpenVanilla Preferences…", @"") action:@selector(showPreferences:) keyEquivalent:@""] autorelease];
     [menu addItem:preferenceMenuItem];
 
-    NSMenuItem *aboutMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"About OpenVanilla…", @"") action:@selector(showAboutAction:) keyEquivalent:@""] autorelease];
+    NSMenuItem *aboutMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"About OpenVanilla", @"") action:@selector(showAboutAction:) keyEquivalent:@""] autorelease];
     [menu addItem:aboutMenuItem];
 
     return menu;
