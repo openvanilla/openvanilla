@@ -75,7 +75,7 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
         }
     }
 
-    NSURL *url = [NSURL URLWithString:@"http://openvanilla.org/updates/Info.plist"];
+    NSURL *url = [NSURL URLWithString:OVUpdateCheckInfoURLString];
     if (!url) {
         return;
     }
@@ -218,6 +218,6 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
 
 - (void)nonModalAlertWindowControllerDidConfirm:(OVNonModalAlertWindowController *)controller
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://openvanilla.org/updates/"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:OVUpdateDownloadURLString]];
 }
 @end

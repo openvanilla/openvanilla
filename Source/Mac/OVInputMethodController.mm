@@ -39,12 +39,6 @@
 
 using namespace OpenVanilla;
 
-#if DEBUG
-    #define IMEDebug NSLog
-#else
-    #define IMEDebug(...)
-#endif
-
 @interface OVInputMethodController ()
 {
 @protected
@@ -60,6 +54,7 @@ using namespace OpenVanilla;
 - (void)changeInputMethodAction:(id)sender;
 - (void)toggleTraditionalToSimplifiedChineseFilterAction:(id)sender;
 - (void)toggleSimplifiedToTraditionalChineseFilterAction:(id)sender;
+- (void)openUserGuideAction:(id)sender;
 - (void)showAboutAction:(id)sender;
 @end
 
@@ -89,8 +84,6 @@ using namespace OpenVanilla;
 
 - (id)initWithServer:(IMKServer *)server delegate:(id)aDelegate client:(id)client
 {
-    IMEDebug(@"%s", __PRETTY_FUNCTION__);
-
     self = [super initWithServer:server delegate:aDelegate client:client];
 	if (self) {
         _composingText = new OVTextBufferImpl;
@@ -103,8 +96,6 @@ using namespace OpenVanilla;
 
 - (NSMenu *)menu
 {
-    IMEDebug(@"%s", __PRETTY_FUNCTION__);
-
     NSMenu *menu = [[[NSMenu alloc] init] autorelease];
 
     NSString *activeInputMethodIdentifier = [OVModuleManager defaultManager].activeInputMethodIdentifier;
@@ -139,6 +130,9 @@ using namespace OpenVanilla;
     NSMenuItem *preferenceMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"OpenVanilla Preferences…", @"") action:@selector(showPreferences:) keyEquivalent:@""] autorelease];
     [menu addItem:preferenceMenuItem];
 
+    NSMenuItem *userManualItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"User Guide", @"") action:@selector(openUserGuideAction:) keyEquivalent:@""] autorelease];
+    [menu addItem:userManualItem];
+
     NSMenuItem *aboutMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"About OpenVanilla", @"") action:@selector(showAboutAction:) keyEquivalent:@""] autorelease];
     [menu addItem:aboutMenuItem];
 
@@ -149,8 +143,6 @@ using namespace OpenVanilla;
 
 - (void)activateServer:(id)client
 {
-    IMEDebug(@"%s", __PRETTY_FUNCTION__);
-
     [OVModuleManager defaultManager].candidateService->resetAll();
 
     NSString *keyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
@@ -177,8 +169,6 @@ using namespace OpenVanilla;
 
 - (void)deactivateServer:(id)client
 {
-    IMEDebug(@"%s", __PRETTY_FUNCTION__);
-
     if (_inputMethodContext) {
         _inputMethodContext->stopSession([OVModuleManager defaultManager].loaderService);
     }
@@ -223,7 +213,6 @@ using namespace OpenVanilla;
 
 - (BOOL)handleEvent:(NSEvent *)event client:(id)client
 {
-    IMEDebug(@"%s", __PRETTY_FUNCTION__);
     if (_readingText->toolTipText().length() || _composingText->toolTipText().length()) {
         _readingText->clearToolTip();
         _composingText->clearToolTip();
@@ -524,6 +513,11 @@ using namespace OpenVanilla;
     OVModuleManager *manager = [OVModuleManager defaultManager];
     manager.simplifiedToTraditionalChineseFilterEnabled = !manager.simplifiedToTraditionalChineseFilterEnabled;
     manager.traditionalToSimplifiedChineseFilterEnabled = NO;
+}
+
+- (void)openUserGuideAction:(id)sender
+{
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:OVUserGuideURLString]];
 }
 
 - (void)showAboutAction:(id)sender

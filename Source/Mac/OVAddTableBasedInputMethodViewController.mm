@@ -26,6 +26,7 @@
 //
 
 #import "OVAddTableBasedInputMethodViewController.h"
+#import "OVConstants.h"
 #import "OVModuleManager.h"
 #import "OVNonModalAlertWindowController.h"
 #import "OVPreferencesWindowController.h"
@@ -48,13 +49,13 @@
     // cf. http://developer.apple.com/library/mac/#qa/qa1487/_index.html
 
     NSMutableAttributedString *attrString = [[[self.moreInfoTextField attributedStringValue] mutableCopy] autorelease];
-    NSRange linkRange = [[attrString string] rangeOfString:@"http://openvanilla.org"];
+    NSRange linkRange = [[attrString string] rangeOfString:OVMainSiteURLString];
     if (linkRange.location == NSNotFound) {
         return;
     }
 
     [attrString beginEditing];
-    NSURL *url = [NSURL URLWithString:@"http://openvanilla.org"];
+    NSURL *url = [NSURL URLWithString:OVMainSiteURLString];
     [attrString addAttribute:NSLinkAttributeName value:url range:linkRange];
     [attrString addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:linkRange];
     [attrString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSSingleUnderlineStyle] range:linkRange];

@@ -54,3 +54,8 @@ extern NSString *const OVHorizontalCandidateListStyleName;
 
 extern const NSTimeInterval OVNextUpdateCheckInterval;
 extern const NSTimeInterval OVNextUpdateCheckRetryInterval;
+
+extern NSString *const OVMainSiteURLString;
+extern NSString *const OVUserGuideURLString;
+extern NSString *const OVUpdateCheckInfoURLString;
+extern NSString *const OVUpdateDownloadURLString;
