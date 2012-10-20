@@ -39,6 +39,9 @@
     OVBasePreferencesViewController *_currentPreferencesViewController;
     OVBasePreferencesViewController *_addTableBasedInputMethodViewController;
 }
+
+- (void)selectInputMethodIdentifier:(NSString *)identifier;
+
 @property (assign, nonatomic) IBOutlet NSTableView *tableView;
 @property (assign, nonatomic) IBOutlet NSView *modulePreferencesContainerView;
 @property (assign, nonatomic) IBOutlet OVBasePreferencesViewController *generalPreferencesViewController;

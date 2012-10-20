@@ -13,6 +13,7 @@
 @synthesize contentTextField = _contentTextField;
 @synthesize confirmButton = _confirmButton;
 @synthesize cancelButton = _cancelButton;
+@synthesize delegate = _delegate;
 
 + (OVNonModalAlertWindowController *)sharedInstance
 {
@@ -27,6 +28,13 @@
 
 - (void)showWithTitle:(NSString *)title content:(NSString *)content confirmButtonTitle:(NSString *)confirmTitle cancelButtonTitle:(NSString *)cancelButtonTitle cancelAsDefault:(BOOL)cancelAsDefault delegate:(id<OVNonModalAlertWindowControllerDelegate>)delegate;
 {
+    // cancel previous alert
+    if ([[self window] isVisible]) {
+        if ([_delegate respondsToSelector:@selector(nonModalAlertWindowControllerDidCancel:)]) {
+            [_delegate nonModalAlertWindowControllerDidCancel:self];
+        }
+    }
+
     _delegate = delegate;
 
     NSRect oldFrame = [self.confirmButton frame];
@@ -74,9 +82,11 @@
     [self.contentTextField setStringValue:content];
 
     NSRect infiniteHeightFrame = oldFrame;
+    infiniteHeightFrame.size.width -= 4.0;
     infiniteHeightFrame.size.height = 10240;
     newFrame = [content boundingRectWithSize:infiniteHeightFrame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:[self.contentTextField font], NSFontAttributeName, nil]];
     newFrame.size.width = MAX(newFrame.size.width, oldFrame.size.width);
+    newFrame.size.height += 4.0;
     newFrame.origin = oldFrame.origin;
     newFrame.origin.y -= (newFrame.size.height - oldFrame.size.height);
     [self.contentTextField setFrame:newFrame];
@@ -88,6 +98,7 @@
     [[self window] setFrame:windowFrame display:YES];
     [[self window] center];
     [[self window] makeKeyAndOrderFront:self];
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 
 - (IBAction)confirmButtonAction:(id)sender

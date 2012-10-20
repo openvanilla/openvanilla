@@ -35,4 +35,5 @@
 @property (assign) IBOutlet NSTextField *contentTextField;
 @property (assign) IBOutlet NSButton *confirmButton;
 @property (assign) IBOutlet NSButton *cancelButton;
+@property (assign) id<OVNonModalAlertWindowControllerDelegate> delegate;
 @end

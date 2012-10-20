@@ -319,7 +319,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
     return [identifier hasPrefix:@"org.openvanilla.OVIMTableBased."];
 }
 
-- (BOOL)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path willOverrideBuiltInTable:(BOOL *)willOverride error:(NSError **)error
+- (BOOL)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path willOverrideBuiltInTable:(BOOL *)willOverride identifier:(NSString **)identifierIfInstalled localizedName:(NSString **)localizedNameIfInstalled error:(NSError **)error
 {
     const char *posixPath = [path fileSystemRepresentation];
     NSLog(@"attempting: %s", posixPath);
@@ -350,13 +350,23 @@ static string InputMethodConfigIdentifier(const string& identifier)
         }
     }
 
+    if (identifierIfInstalled) {
+        *identifierIfInstalled = idNSStr;
+    }
+
+    if (localizedNameIfInstalled) {
+        string locale = [self.currentLocale UTF8String];
+        string localizedName = inputMethod->localizedName(locale);
+        *localizedNameIfInstalled = [NSString stringWithUTF8String:localizedName.c_str()];
+    }
+
     delete inputMethod;
     return YES;
 }
 
 - (void)installCustomTableBasedInputMethodWithTablePath:(NSString *)path
 {
-    if (![self canInstallCustomTableBasedInputMethodWithTablePath:path willOverrideBuiltInTable:NULL error:NULL]) {
+    if (![self canInstallCustomTableBasedInputMethodWithTablePath:path willOverrideBuiltInTable:NULL identifier:NULL localizedName:NULL error:NULL]) {
         return;
     }
 

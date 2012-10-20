@@ -60,7 +60,7 @@ namespace OpenVanilla {
 
 - (NSString *)alphanumericKeyboardLayoutForInputMethod:(NSString *)identifier;
 - (BOOL)isTableBasedInputMethodIdentifier:(NSString *)identifier;
-- (BOOL)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path willOverrideBuiltInTable:(BOOL *)willOverride error:(NSError **)error;
+- (BOOL)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path willOverrideBuiltInTable:(BOOL *)willOverride identifier:(NSString **)identifierIfInstalled localizedName:(NSString **)localizedNameIfInstalled error:(NSError **)error;
 - (void)installCustomTableBasedInputMethodWithTablePath:(NSString *)path;
 - (BOOL)isCustomTableBasedInputMethod:(NSString *)identifier;
 - (BOOL)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError **)error;

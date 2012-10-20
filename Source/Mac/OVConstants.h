@@ -36,6 +36,7 @@ extern NSString *const OVCandidateListTextSizeKey;
 extern NSString *const OVCandidateTextFontNameKey;
 extern NSString *const OVMakeSoundFeedbackOnInputErrorKey;
 extern NSString *const OVLastUpdateCheckTimeKey;
+extern NSString *const OVNextUpdateCheckTimeKey;
 extern NSString *const OVCheckForUpdateKey;
 extern NSString *const OVTraditionalToSimplifiedChineseFilterEnabledKey;
 extern NSString *const OVSimplifiedToTraditionalChineseFilterEnabledKey;
@@ -50,3 +51,6 @@ extern const NSUInteger OVMinCandidateListTextSize;
 
 extern NSString *const OVVerticalCandidateListStyleName;
 extern NSString *const OVHorizontalCandidateListStyleName;
+
+extern const NSTimeInterval OVNextUpdateCheckInterval;
+extern const NSTimeInterval OVNextUpdateCheckRetryInterval;

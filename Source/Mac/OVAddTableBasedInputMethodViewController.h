@@ -27,6 +27,16 @@
 
 #import "OVBasePreferencesViewController.h"
 
+@class OVPreferencesWindowController;
+
 @interface OVAddTableBasedInputMethodViewController : OVBasePreferencesViewController
+{
+    NSString *_tablePathToBeInstalled;
+    NSString *_moduleIdentifierIfInstalled;
+    NSTextField *_moreInfoTextField;
+    OVPreferencesWindowController *_preferencesWindowController;
+}
 - (IBAction)importNewTableAction:(id)sender;
+@property (assign, nonatomic) IBOutlet NSTextField *moreInfoTextField;
+@property (assign, nonatomic) OVPreferencesWindowController *preferencesWindowController;
 @end

@@ -27,6 +27,7 @@
 
 #import "OVPreferencesWindowController.h"
 #import "OVModuleManager.h"
+#import "OVAddTableBasedInputMethodViewController.h"
 
 static NSString *const kIdentifierKey = @"IdentifierKey";
 static NSString *const kLocalizedNameKey = @"LocalizedNameKey";
@@ -42,7 +43,7 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 
 @interface OVPreferencesWindowController ()
 - (void)reload:(NSNotification *)notification;
-@property (assign, nonatomic) NSViewController *currentPreferencesViewController;
+@property (assign, nonatomic) OVBasePreferencesViewController *currentPreferencesViewController;
 @property (retain, nonatomic) NSMutableArray *items;
 @end
 
@@ -69,8 +70,20 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
     [[self window] center];
     [self reload:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:OVModuleManagerDidReloadNotification object:nil];
+
+    ((OVAddTableBasedInputMethodViewController *)self.addTableBasedInputMethodViewController).preferencesWindowController = self;
 }
 
+- (void)selectInputMethodIdentifier:(NSString *)identifier
+{
+    for (NSUInteger index = 0, length = [_items count]; index < length; index++) {
+        if ([[[_items objectAtIndex:index] objectForKey:kIdentifierKey] isEqualToString:identifier]) {
+            [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+            [[OVModuleManager defaultManager] selectInputMethod:identifier];
+            return;
+        }
+    }
+}
 
 #pragma mark - Private methods
 
@@ -103,6 +116,13 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
     [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 }
 
+#pragma mark - NSWindowDelegate methods
+
+- (void)windowDidBecomeMain:(NSNotification *)notification
+{
+    [self.currentPreferencesViewController loadPreferences];
+}
+
 #pragma mark - NSTableView delegate methods
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
@@ -124,9 +144,9 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
     self.currentPreferencesViewController = controller;
     if (controller == self.tableBasedMoudlePreferencesViewController || controller == self.arrayMoudlePreferencesViewController) {
         controller.moduleIdentifier = [item objectForKey:kIdentifierKey];
-        [controller loadPreferences];
     }
 
+    [controller loadPreferences];
     [self.modulePreferencesContainerView addSubview:[controller view]];
 
     NSString *title = [NSString stringWithFormat:NSLocalizedString(@"OpenVanilla - %@", nil), [item objectForKey:kLocalizedNameKey]];

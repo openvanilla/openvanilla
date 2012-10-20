@@ -27,6 +27,11 @@
 
 #import "OVGeneralPreferencesViewController.h"
 #import "OVConstants.h"
+#import "OVUpdateChecker.h"
+
+@interface OVGeneralPreferencesViewController ()
+- (void)handleUpdateCheckDidComplete:(NSNotification *)notification;
+@end
 
 @implementation OVGeneralPreferencesViewController
 @synthesize fieldCandidateSize = _fieldCandidateSize;
@@ -35,23 +40,12 @@
 @synthesize fieldPlaySound = _fieldPlaySound;
 @synthesize fieldCheckForUpdate = _fieldCheckForUpdate;
 @synthesize lastUpdateCheckDateLabel = _lastUpdateCheckDateLabel;
+@synthesize checkForUpdateButton = _checkForUpdateButton;
 
 // TODO: Window become active -> reload prefs
 
 - (void)awakeFromNib
 {
-    id object = [[NSUserDefaults standardUserDefaults] objectForKey:OVLastUpdateCheckTimeKey];
-    if ([object isKindOfClass:[NSDate class]]) {
-        [self.lastUpdateCheckDateLabel setHidden:NO];
-
-        NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-
-        NSString *lastCheckString = [NSString stringWithFormat:NSLocalizedString(@"Last checked: %@", nil), [dateFormatter stringFromDate:object]];
-        [self.lastUpdateCheckDateLabel setStringValue:lastCheckString];
-    }
-
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
     NSString *candidateSize = [NSString stringWithFormat:@"%ju", (uintmax_t)[userDefaults integerForKey:OVCandidateListTextSizeKey]];
@@ -72,11 +66,36 @@
 
     [self.fieldPlaySound setState:([userDefaults boolForKey:OVMakeSoundFeedbackOnInputErrorKey] ? NSOnState : NSOffState)];
     [self.fieldCheckForUpdate setState:([userDefaults boolForKey:OVCheckForUpdateKey] ? NSOnState : NSOffState)];
+
+    // this is never deallocated (only on app exit), so no need to remove observer
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUpdateCheckDidComplete:) name:OVUpdateCheckerDidFinishCheckingNotification object:nil];
+}
+
+- (void)loadPreferences
+{
+    if ([OVUpdateChecker sharedInstance].busy) {
+        [self.checkForUpdateButton setEnabled:NO];
+    }
+
+    NSDate *lastCheckDate = [OVUpdateChecker sharedInstance].lastUpdateCheckDate;
+    if (!lastCheckDate) {
+        [self.lastUpdateCheckDateLabel setHidden:YES];
+        return;
+    }
+
+    [self.lastUpdateCheckDateLabel setHidden:NO];
+
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    NSString *lastCheckString = [NSString stringWithFormat:NSLocalizedString(@"Last checked: %@", nil), [dateFormatter stringFromDate:lastCheckDate]];
+    [self.lastUpdateCheckDateLabel setStringValue:lastCheckString];
 }
 
 - (IBAction)checkForUpdateAction:(id)sender
 {
-
+    [self.checkForUpdateButton setEnabled:NO];
+    [[OVUpdateChecker sharedInstance] checkForUpdate];
 }
 
  - (IBAction)updateField:(id)sender
@@ -95,5 +114,13 @@
     [userDefaults setBool:([self.fieldPlaySound state] == NSOnState) forKey:OVMakeSoundFeedbackOnInputErrorKey];
     [userDefaults setBool:([self.fieldCheckForUpdate state] == NSOnState) forKey:OVCheckForUpdateKey];
     [userDefaults synchronize];
+}
+
+#pragma mark -
+
+- (void)handleUpdateCheckDidComplete:(NSNotification *)notification
+{
+    [self.checkForUpdateButton setEnabled:YES];
+    [self loadPreferences];
 }
 @end

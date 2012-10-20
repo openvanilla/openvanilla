@@ -35,7 +35,7 @@
     NSButton *_fieldPlaySound;
     NSButton *_fieldCheckForUpdate;
     NSTextField *_lastUpdateCheckDateLabel;
-    
+    NSButton *_checkForUpdateButton;
 }
 - (IBAction)checkForUpdateAction:(id)sender;
 - (IBAction)updateField:(id)sender;
@@ -45,4 +45,5 @@
 @property (assign, nonatomic) IBOutlet NSButton *fieldPlaySound;
 @property (assign, nonatomic) IBOutlet NSButton *fieldCheckForUpdate;
 @property (assign, nonatomic) IBOutlet NSTextField *lastUpdateCheckDateLabel;
+@property (assign, nonatomic) IBOutlet NSButton *checkForUpdateButton;
 @end

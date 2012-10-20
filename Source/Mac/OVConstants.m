@@ -36,6 +36,7 @@ NSString *const OVCandidateListTextSizeKey = @"CandidateListTextSize";
 NSString *const OVCandidateTextFontNameKey = @"CandidateTextFontName";
 NSString *const OVMakeSoundFeedbackOnInputErrorKey = @"MakeSoundFeedbackOnInputError";
 NSString *const OVLastUpdateCheckTimeKey = @"LastUpdateCheckTime";
+NSString *const OVNextUpdateCheckTimeKey = @"NextUpdateCheckTime";
 NSString *const OVCheckForUpdateKey = @"CheckForUpdate";
 NSString *const OVTraditionalToSimplifiedChineseFilterEnabledKey = @"EnableTraditionalToSimplifiedChineseFilter";
 NSString *const OVSimplifiedToTraditionalChineseFilterEnabledKey = @"EnableSimplifiedToTraditionalChineseFilter";
@@ -49,3 +50,11 @@ const NSUInteger OVMinCandidateListTextSize = 12;
 
 NSString *const OVVerticalCandidateListStyleName = @"vertical";
 NSString *const OVHorizontalCandidateListStyleName = @"horizontal";
+
+#if DEBUG
+const NSTimeInterval OVNextUpdateCheckInterval = 30.0;
+const NSTimeInterval OVNextUpdateCheckRetryInterval = 10.0;
+#else
+const NSTimeInterval OVNextUpdateCheckInterval = 86400.0;
+const NSTimeInterval OVNextUpdateCheckRetryInterval = 3600.0;
+#endif

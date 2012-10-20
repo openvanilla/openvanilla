@@ -34,6 +34,8 @@
 #import "OVTextBufferCombinator.h"
 #import "OVToolTipWindowController.h"
 #import "OVModuleManager.h"
+#import "OVUpdateChecker.h"
+#import "OVConstants.h"
 
 using namespace OpenVanilla;
 
@@ -167,6 +169,10 @@ using namespace OpenVanilla;
     _currentClient = client;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCandidateSelected:) name:OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification object:nil];
+
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:OVCheckForUpdateKey]) {
+        [[OVUpdateChecker sharedInstance] checkForUpdateIfNeeded];
+    }
 }
 
 - (void)deactivateServer:(id)client

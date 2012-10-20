@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">12C54</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2840</string>
+			<string key="NS.object.0">2843</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSButton</string>
@@ -250,7 +250,7 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSTextField" id="61075014">
 						<reference key="NSNextResponder" ref="165452036"/>
-						<int key="NSvFlags">-2147483380</int>
+						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{17, 23}, {232, 17}}</string>
 						<reference key="NSSuperview" ref="165452036"/>
 						<reference key="NSWindow"/>
@@ -834,7 +834,7 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="180398658">
-							<int key="NSCellFlags">603979776</int>
+							<int key="NSCellFlags">67108864</int>
 							<int key="NSCellFlags2">134217728</int>
 							<string key="NSContents">Check Now</string>
 							<reference key="NSSupport" ref="874086433"/>
@@ -859,7 +859,7 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="884004195">
-							<int key="NSCellFlags">-1543503872</int>
+							<int key="NSCellFlags">-2080374784</int>
 							<int key="NSCellFlags2">268435456</int>
 							<string key="NSContents">Check for new versions</string>
 							<reference key="NSSupport" ref="874086433"/>
@@ -1597,6 +1597,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="185860151"/>
+						<reference key="destination" ref="1001"/>
+					</object>
+					<int key="connectionID">183</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">dataSource</string>
 						<reference key="source" ref="238286268"/>
 						<reference key="destination" ref="1001"/>
@@ -1861,6 +1869,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">checkForUpdateButton</string>
+						<reference key="source" ref="769292640"/>
+						<reference key="destination" ref="1046869103"/>
+					</object>
+					<int key="connectionID">184</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">view</string>
 						<reference key="source" ref="168932056"/>
 						<reference key="destination" ref="514070333"/>
@@ -1914,6 +1930,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="destination" ref="412912829"/>
 					</object>
 					<int key="connectionID">173</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">moreInfoTextField</string>
+						<reference key="source" ref="740473986"/>
+						<reference key="destination" ref="546102524"/>
+					</object>
+					<int key="connectionID">185</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2837,7 +2861,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">182</int>
+			<int key="maxID">185</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2853,6 +2877,17 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<object class="IBActionInfo" key="NS.object.0">
 							<string key="name">importNewTableAction:</string>
 							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">moreInfoTextField</string>
+						<string key="NS.object.0">NSTextField</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">moreInfoTextField</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">moreInfoTextField</string>
+							<string key="candidateClassName">NSTextField</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -2894,6 +2929,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="checkForUpdateButton">NSButton</string>
 						<string key="fieldAlphanumericKeyboardLayout">NSPopUpButton</string>
 						<string key="fieldCandidateSize">NSPopUpButton</string>
 						<string key="fieldCandidateSytle">NSMatrix</string>
@@ -2902,6 +2938,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<string key="lastUpdateCheckDateLabel">NSTextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="checkForUpdateButton">
+							<string key="name">checkForUpdateButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="fieldAlphanumericKeyboardLayout">
 							<string key="name">fieldAlphanumericKeyboardLayout</string>
 							<string key="candidateClassName">NSPopUpButton</string>

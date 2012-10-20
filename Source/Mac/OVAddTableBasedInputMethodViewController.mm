@@ -28,11 +28,42 @@
 #import "OVAddTableBasedInputMethodViewController.h"
 #import "OVModuleManager.h"
 #import "OVNonModalAlertWindowController.h"
+#import "OVPreferencesWindowController.h"
 
 @interface OVAddTableBasedInputMethodViewController () <OVNonModalAlertWindowControllerDelegate>
+- (BOOL)install:(NSString *)path;
+@property (retain) NSString *tablePathToBeInstalled;
+@property (retain) NSString *moduleIdentifierIfInstalled;
 @end
 
 @implementation OVAddTableBasedInputMethodViewController
+@synthesize tablePathToBeInstalled = _tablePathToBeInstalled;
+@synthesize moduleIdentifierIfInstalled = _moduleIdentifierIfInstalled;
+@synthesize moreInfoTextField = _moreInfoTextField;
+@synthesize preferencesWindowController = _preferencesWindowController;
+
+- (void)loadPreferences
+{
+    // add link to the more info text field
+    // cf. http://developer.apple.com/library/mac/#qa/qa1487/_index.html
+
+    NSMutableAttributedString *attrString = [[[self.moreInfoTextField attributedStringValue] mutableCopy] autorelease];
+    NSRange linkRange = [[attrString string] rangeOfString:@"http://openvanilla.org"];
+    if (linkRange.location == NSNotFound) {
+        return;
+    }
+
+    [attrString beginEditing];
+    NSURL *url = [NSURL URLWithString:@"http://openvanilla.org"];
+    [attrString addAttribute:NSLinkAttributeName value:url range:linkRange];
+    [attrString addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:linkRange];
+    [attrString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSSingleUnderlineStyle] range:linkRange];
+    [attrString endEditing];
+
+    [self.moreInfoTextField setAttributedStringValue:attrString];
+    [self.moreInfoTextField setAllowsEditingTextAttributes:YES];
+    [self.moreInfoTextField setSelectable:YES];
+}
 
 - (IBAction)importNewTableAction:(id)sender
 {
@@ -55,26 +86,56 @@
         NSString *cinPath = [[files objectAtIndex:0] path];
         NSError *error = nil;
         BOOL override = NO;
-        BOOL canInstall = [[OVModuleManager defaultManager] canInstallCustomTableBasedInputMethodWithTablePath:cinPath willOverrideBuiltInTable:&override error:&error];
+        NSString *identifier = nil;
+        NSString *localizedName = nil;
+        BOOL canInstall = [[OVModuleManager defaultManager] canInstallCustomTableBasedInputMethodWithTablePath:cinPath willOverrideBuiltInTable:&override identifier:&identifier localizedName:&localizedName error:&error];
         if (!canInstall) {
             [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Cannot Import Input Method", nil) content:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" is not a valid cin file.", nil), [cinPath lastPathComponent]] confirmButtonTitle:NSLocalizedString(@"Dismiss", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
             return;
         }
 
         if (override) {
+            self.tablePathToBeInstalled = cinPath;
+            self.moduleIdentifierIfInstalled = identifier;
+            
             [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Overwriting Existing Input Method", nil) content:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" will replace an existing input method that you have. Do you want to continue?", nil), [cinPath lastPathComponent]] confirmButtonTitle:NSLocalizedString(@"Overwrite", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) cancelAsDefault:YES delegate:self];
             return;
         }
 
-
-        [[OVModuleManager defaultManager] installCustomTableBasedInputMethodWithTablePath:cinPath];
-
-        [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Input Method Imported", nil) content:NSLocalizedString(@"Your new input method is ready to use", nil) confirmButtonTitle:NSLocalizedString(@"OK", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
+        [self install:cinPath];
     }];
+}
+
+- (BOOL)install:(NSString *)path
+{
+    NSString *cinPath = path;
+    NSError *error = nil;
+    BOOL override = NO;
+    NSString *identifier = nil;
+    NSString *localizedName = nil;
+    BOOL canInstall = [[OVModuleManager defaultManager] canInstallCustomTableBasedInputMethodWithTablePath:cinPath willOverrideBuiltInTable:&override identifier:&identifier localizedName:&localizedName error:&error];
+    if (!canInstall) {
+        [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Cannot Import Input Method", nil) content:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" is not a valid cin file.", nil), [cinPath lastPathComponent]] confirmButtonTitle:NSLocalizedString(@"Dismiss", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
+        return NO;
+    }
+
+    [[OVModuleManager defaultManager] installCustomTableBasedInputMethodWithTablePath:path];
+
+    [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Input Method Imported", nil) content:[NSString stringWithFormat:NSLocalizedString(@"Your new input method \"%@\" is ready to use", nil), localizedName] confirmButtonTitle:NSLocalizedString(@"OK", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
+
+    [self.preferencesWindowController selectInputMethodIdentifier:identifier];
+    return YES;
 }
 
 - (void)nonModalAlertWindowControllerDidConfirm:(OVNonModalAlertWindowController *)controller
 {
-    NSLog(@"!");
+    if ([self install:self.tablePathToBeInstalled]) {        
+    }
+}
+
+- (void)nonModalAlertWindowControllerDidCancel:(OVNonModalAlertWindowController *)controller
+{
+    self.tablePathToBeInstalled = nil;
+    self.moduleIdentifierIfInstalled = nil;
 }
 @end
