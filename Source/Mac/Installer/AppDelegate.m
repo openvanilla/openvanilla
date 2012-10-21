@@ -43,7 +43,6 @@ static NSString *const kLegacyAppPath = @"/Library/Input Methods/OpenVanilla.app
 - (void)dealloc
 {
     [_installingVersion release];
-    [_currentVersion release];
     [super dealloc];
 }
 
@@ -68,10 +67,21 @@ static NSString *const kLegacyAppPath = @"/Library/Input Methods/OpenVanilla.app
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[kTargetPartialPath stringByExpandingTildeInPath]]) {
         NSBundle *currentBundle = [NSBundle bundleWithPath:[kTargetPartialPath stringByExpandingTildeInPath]];
-        _currentVersion = [[[currentBundle infoDictionary] objectForKey:@"CFBundleShortVersionString"] retain];
+
+        NSString *currentVersion = nil;
+
+        currentVersion = [[[currentBundle infoDictionary] objectForKey:@"CFBundleShortVersionString"] retain];
+        if (currentVersion && [currentVersion compare:_installingVersion] == NSOrderedAscending) {
+            _upgrading = YES;
+        }
+        else if (!currentVersion) {
+            // legacy OV (pre-1.0, most likely 0.9.0)
+            _upgrading = YES;
+            _upgradingFromLegacy = YES;
+        }
     }
-    
-    if (_currentVersion && [_currentVersion compare:_installingVersion] == NSOrderedAscending) {
+
+    if (_upgrading) {
         [_installButton setTitle:NSLocalizedString(@"Agree and Upgrade", nil)];
     }
 }
@@ -97,7 +107,7 @@ static NSString *const kLegacyAppPath = @"/Library/Input Methods/OpenVanilla.app
         (void)tag;
 
         // alno need to restart SystemUIServer to ensure that the icon is fully cleaned up
-        if (_currentVersion && [_currentVersion compare:@"0.9.9"] != NSOrderedDescending) {
+        if (_upgradingFromLegacy) {
             NSTask *restartSystemUIServerTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall" arguments:[NSArray arrayWithObjects: @"-9", @"SystemUIServer", nil]];
             [restartSystemUIServerTask waitUntilExit];
         }

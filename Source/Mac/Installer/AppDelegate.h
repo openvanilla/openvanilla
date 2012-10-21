@@ -31,7 +31,8 @@
 {
 @protected
     NSString *_installingVersion;
-    NSString *_currentVersion;
+    BOOL _upgrading;
+    BOOL _upgradingFromLegacy;
     NSButton *_installButton;
     NSButton *_cancelButton;
     NSTextView *_textView;
