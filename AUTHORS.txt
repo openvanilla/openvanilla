@@ -1,0 +1,21 @@
+Current contributors:
+
+*	Lukhnos Liu - current 1.0 code base
+
+
+Past contributors:
+
+*	b6s - OVIMGeneric, .cin tools
+* 	zonble - Preferences for 0.8 and 0.9, OVIMTibetan
+*	gugod - OVIMSpaceChewing, framework, build system
+*	kanru - Windows port
+*	vgod - OVIMArray
+*	mjhsieh - data quality and documentation
+*	PCMan - Windows port
+*	jaimielin - Windows port
+*	MatLinuxer2 - Linux port
+*	pektiong - OVIMPOJ
+*	cschin - Python bridge
+* 	yylin - extension of cj.cin, simplex.cin and bpmf.cin
+* 	fourdollars - Linux port
+*	othree - Web-based input method experiment
