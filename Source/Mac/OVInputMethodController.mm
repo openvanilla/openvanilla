@@ -183,6 +183,7 @@ using namespace OpenVanilla;
     _readingText->clear();
     [OVModuleManager defaultManager].candidateService->resetAll();
     [[[OVModuleManager defaultManager].toolTipWindowController window] orderOut:self];
+    [[OVModuleManager defaultManager] writeOutActiveInputMethodSettings];
 
     _currentClient = nil;
 

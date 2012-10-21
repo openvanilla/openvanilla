@@ -259,7 +259,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
 {
     [[NSUserDefaults standardUserDefaults] synchronize];
     NSString *activeInputMethodIdentifier = [[NSUserDefaults standardUserDefaults] stringForKey:OVActiveInputMethodIdentifierKey];
-    
+
     if ([self canSelectInputMethod:activeInputMethodIdentifier]) {
         [self selectInputMethod:activeInputMethodIdentifier];
     }
@@ -291,6 +291,15 @@ static string InputMethodConfigIdentifier(const string& identifier)
     }
     else {
         _candidateService->useHorizontalCandidatePanel();
+    }
+}
+
+- (void)writeOutActiveInputMethodSettings
+{
+    if (_activeInputMethod) {
+        OVPlistBackedKeyValueMapImpl kvmi((CFStringRef)self.activeInputMethodIdentifier);
+        OVKeyValueMap kvm(&kvmi);
+        _activeInputMethod->saveConfig(&kvm, _loaderService);
     }
 }
 

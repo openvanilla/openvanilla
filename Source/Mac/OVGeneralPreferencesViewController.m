@@ -46,7 +46,14 @@
 
 - (void)awakeFromNib
 {
+    // this is never deallocated (only on app exit), so no need to remove observer
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUpdateCheckDidComplete:) name:OVUpdateCheckerDidFinishCheckingNotification object:nil];
+}
+
+- (void)loadPreferences
+{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults synchronize];
 
     NSString *candidateSize = [NSString stringWithFormat:@"%ju", (uintmax_t)[userDefaults integerForKey:OVCandidateListTextSizeKey]];
     [self.fieldCandidateSize selectItemWithTitle:candidateSize];
@@ -67,12 +74,6 @@
     [self.fieldPlaySound setState:([userDefaults boolForKey:OVMakeSoundFeedbackOnInputErrorKey] ? NSOnState : NSOffState)];
     [self.fieldCheckForUpdate setState:([userDefaults boolForKey:OVCheckForUpdateKey] ? NSOnState : NSOffState)];
 
-    // this is never deallocated (only on app exit), so no need to remove observer
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUpdateCheckDidComplete:) name:OVUpdateCheckerDidFinishCheckingNotification object:nil];
-}
-
-- (void)loadPreferences
-{
     if ([OVUpdateChecker sharedInstance].busy) {
         [self.checkForUpdateButton setEnabled:NO];
     }

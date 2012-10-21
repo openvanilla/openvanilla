@@ -57,6 +57,7 @@ namespace OpenVanilla {
 - (NSString *)localizedInputMethodName:(NSString *)identifier;
 - (void)reload;
 - (void)synchronizeActiveInputMethodSettings;
+- (void)writeOutActiveInputMethodSettings;
 
 - (NSString *)alphanumericKeyboardLayoutForInputMethod:(NSString *)identifier;
 - (BOOL)isTableBasedInputMethodIdentifier:(NSString *)identifier;
