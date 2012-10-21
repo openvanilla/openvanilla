@@ -35,6 +35,9 @@ static NSString *const kTargetPartialPath = @"~/Library/Input Methods/OpenVanill
 static NSString *const kTargetFullBinPartialPath = @"~/Library/Input Methods/OpenVanilla.app/Contents/MacOS/OpenVanilla";
 static NSString *const kLegacyAppPath = @"/Library/Input Methods/OpenVanilla.app";
 static NSString *const kLogoutRequirementExplanationURLString = @"http://openvanilla.org/docs/why-logout-is-needed.html";
+static NSString *const kLegacyMigrationURLString = @"http://openvanilla.org/docs/migrate-from-old-openvanilla.html";
+static NSString *const kMcBopomofoURLString = @"http://mcbopomofo.openvanilla.org";
+static NSString *const kPreviousVersionSettings = @"~/Library/Preferences/org.openvanilla.plist";
 
 @implementation AppDelegate
 @synthesize installButton = _installButton;
@@ -49,9 +52,16 @@ static NSString *const kLogoutRequirementExplanationURLString = @"http://openvan
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [[self window] center];
-    [[self window] orderFront:self];
-    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:kLegacyAppPath]) {
+        NSUInteger result = NSRunAlertPanel(NSLocalizedString(@"Cannot Upgrade from Legacy Version", nil), NSLocalizedString(@"A legacy version of OpenVanilla (prior to 0.9) exists.\n\nPlease delete it before installing OpenVanilla.", nil), NSLocalizedString(@"Quit Installer", nil), NSLocalizedString(@"Uninstall Instructions", nil), nil);
+
+        if (result == NSAlertAlternateReturn) {
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:kLegacyMigrationURLString]];
+        }
+
+        [[NSApplication sharedApplication] performSelector:@selector(terminate:) withObject:self afterDelay:0.1];
+        return;
+    }
 
     [self.cancelButton setNextKeyView:self.installButton];
     [self.installButton setNextKeyView:self.cancelButton];
@@ -79,24 +89,40 @@ static NSString *const kLogoutRequirementExplanationURLString = @"http://openvan
             // legacy OV (pre-1.0, most likely 0.9.0)
             _upgrading = YES;
             _upgradingFromLegacy = YES;
+
+            // see if the user is using a bopomofo input method
+            NSDictionary *oldSettings = [NSDictionary dictionaryWithContentsOfFile:[kPreviousVersionSettings stringByExpandingTildeInPath]];
+            if (oldSettings) {
+                NSString *primaryInputMethod = [oldSettings objectForKey:@"primaryInputMethod"];
+                if ([primaryInputMethod isEqualToString:@"OVIMPhonetic"] || [primaryInputMethod isEqualToString:@"OVIMSpaceChewing"] || [primaryInputMethod isEqualToString:@"OVIMChewing"]) {                    
+                    NSUInteger result = NSRunAlertPanel(NSLocalizedString(@"Unsupported Input Method", nil), NSLocalizedString(@"You are using a Bopomofo-based input method, which OpenVanilla no longer supports.\n\nWe recommend you install McBopomofo instead.", nil), NSLocalizedString(@"Visit McBopomofo Website", nil), NSLocalizedString(@"Continue Anyway", nil), NSLocalizedString(@"Quit Installer", nil));
+
+                    if (result == NSAlertDefaultReturn) {
+                        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:kMcBopomofoURLString]];
+                    }
+
+                    if (result != NSAlertAlternateReturn) {
+                        [[NSApplication sharedApplication] performSelector:@selector(terminate:) withObject:self afterDelay:0.1];
+                        return;
+                    }
+                }
+            }
         }
     }
 
     if (_upgrading) {
         [_installButton setTitle:NSLocalizedString(@"Agree and Upgrade", nil)];
     }
+
+    [[self window] center];
+    [[self window] orderFront:self];
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 
 - (IBAction)agreeAndInstallAction:(id)sender
 {
     [_cancelButton setEnabled:NO];
     [_installButton setEnabled:NO];
-
-
-    if ([[NSFileManager defaultManager] fileExistsAtPath:kLegacyAppPath]) {
-        NSRunAlertPanel(NSLocalizedString(@"Legacy Version Warning", nil), NSLocalizedString(@"A legacy version of OpenVanilla (0.6, 0.7, 0.8) exists.\n\nPlease delete it before installing OpenVanilla.", nil), NSLocalizedString(@"Quit Installer", nil), nil, nil);
-        [[NSApplication sharedApplication] terminate:self];
-    }
 
     if ([[NSFileManager defaultManager] fileExistsAtPath:[kTargetPartialPath stringByExpandingTildeInPath]]) {
         // http://www.cocoadev.com/index.pl?MoveToTrash
@@ -146,10 +172,9 @@ static NSString *const kLogoutRequirementExplanationURLString = @"http://openvan
     }
     else {
         NSRunAlertPanel(NSLocalizedString(@"Installation Successful", nil), NSLocalizedString(@"OpenVanilla is ready to use.", nil),  NSLocalizedString(@"OK", nil), nil, nil);
-        
     }
 
-    [NSApp terminate:self];
+    [[NSApplication sharedApplication] performSelector:@selector(terminate:) withObject:self afterDelay:0.1];
 }
                                    
 

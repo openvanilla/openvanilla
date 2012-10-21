@@ -25,3 +25,18 @@
 /* No comment provided by engineer. */
 "OpenVanilla is ready to use." = "OpenVanilla 安裝成功";
 
+"Cannot Upgrade from Legacy Version" = "要先移除舊版 OpenVanilla 才能安裝";
+"A legacy version of OpenVanilla (prior to 0.9) exists.\n\nPlease delete it before installing OpenVanilla." = "您的機器上裝有舊版（早於 0.9）的 OpenVanilla。舊版必須要先移除，才能安裝新版。";
+"Quit Installer" = "結束";
+"Uninstall Instructions" = "移除安裝說明";
+
+"Unsupported Input Method" = "新版不支援注音類的輸入法";
+"You are using a Bopomofo-based input method, which OpenVanilla no longer supports.\n\nWe recommend you install McBopomofo instead." = "您目前使用的是注音類（傳統注音或自動選字注音）的輸入法。這個版本的 OpenVanilla 已經不再提供注音類輸入法。\n\n建議您安裝「小麥注音」。";
+"Visit McBopomofo Website" = "前往小麥注音網站";
+"Continue Anyway" = "繼續安裝";
+
+"Upgrade Successful" = "升級完成";
+"OpenVanilla is ready to use.\n\nSince you have upgraded from an older version of OpenVanilla (before 1.0), we recommend you log out to make sure that when you come back, every app works with OpenVanilla." = "OpenVanilla 安裝成功！\n\n由於您機器上先前裝有舊版（早於 1.0 版）的 OpenVanilla，為確保所有應用程式都能順利使用新版輸入法，建議您登出。";
+"Log Out" = "登出";
+"Why I Need This?" = "為什麼需要登出？";
+"Finish" = "結束";

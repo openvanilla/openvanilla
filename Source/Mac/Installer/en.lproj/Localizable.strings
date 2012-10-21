@@ -25,6 +25,16 @@
 /* No comment provided by engineer. */
 "OpenVanilla is ready to use." = "OpenVanilla is ready to use.";
 
+"Cannot Upgrade from Legacy Version" = "Cannot Upgrade from Legacy Version";
+"A legacy version of OpenVanilla (prior to 0.9) exists.\n\nPlease delete it before installing OpenVanilla." = "A legacy version of OpenVanilla (prior to 0.9) exists.\n\nPlease delete it before installing OpenVanilla.";
+"Quit Installer" = "Quit Installer";
+"Uninstall Instructions" = "Uninstall Instructions";
+
+"Unsupported Input Method" = "Unsupported Input Method";
+"You are using a Bopomofo-based input method, which OpenVanilla no longer supports.\n\nWe recommend you install McBopomofo instead." = "You are using a Bopomofo-based input method, which OpenVanilla no longer supports.\n\nWe recommend you install McBopomofo instead.";
+"Visit McBopomofo Website" = "Visit McBopomofo Website";
+"Continue Anyway" = "Continue Anyway";
+
 "Upgrade Successful" = "Upgrade Successful";
 "OpenVanilla is ready to use.\n\nSince you have upgraded from an older version of OpenVanilla (before 1.0), we recommend you log out to make sure that when you come back, every app works with OpenVanilla." = "OpenVanilla is ready to use.\n\nSince you have upgraded from an older version of OpenVanilla (before 1.0), we recommend you log out to make sure that when you come back, every app works with OpenVanilla.";
 "Log Out" = "Log Out";
