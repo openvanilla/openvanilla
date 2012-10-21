@@ -1,0 +1,138 @@
+/* No comment provided by engineer. */
+"\"%@\" is not a valid cin file." = "\"%@\" 不是符合规格的 .cin 文件";
+
+/* No comment provided by engineer. */
+"\"%@\" will replace an existing input method that you have. Do you want to continue?" = "\"%@\"会取代现有的输入法。是否确定要取代？";
+
+/* No comment provided by engineer. */
+"About OpenVanilla" = "关于 OpenVanilla";
+
+/* No comment provided by engineer. */
+"Add New Input Method" = "加入新输入法";
+
+/* No comment provided by engineer. */
+"Are you sure you want to remove the input method\"%@\"?" = "确定要移除\"%@\"输入法？";
+
+/* No comment provided by engineer. */
+"Cancel" = "取消";
+
+/* No comment provided by engineer. */
+"Cannot activate the input method." = "无法激活输入法。";
+
+/* No comment provided by engineer. */
+"Cannot Import Input Method" = "无法汇入输入法";
+
+/* No comment provided by engineer. */
+"Cannot use the file \"%@\": file may be corrupt or is not a valid CIN file" = "无法使用表格档\"%@\"：文件不符合 .cin 格式。";
+
+/* No comment provided by engineer. */
+"Check for Update Completed" = "新版检查完毕";
+
+/* No comment provided by engineer. */
+"Confirm Removal" = "确认移除";
+
+/* No comment provided by engineer. */
+"Convert Simplified Chinese to Traditional" = "简体转繁体";
+
+/* No comment provided by engineer. */
+"Convert Traditional Chinese to Simplified" = "繁体转简体";
+
+/* No comment provided by engineer. */
+"Dismiss" = "关闭本视窗";
+
+/* No comment provided by engineer. */
+"Failed to remove the input method\"%@\".\n\nError: %@" = "无法移除输入法\"%1$@\"。\n\n错误说明：%2$@";
+
+/* No comment provided by engineer. */
+"General Settings" = "一般设置";
+
+/* No comment provided by engineer. */
+"Input Method Imported" = "输入法汇入成功";
+
+/* No comment provided by engineer. */
+"Last checked: %@" = "上次检查时间：%@";
+
+/* No comment provided by engineer. */
+"New Version Available" = "有新版可下载";
+
+/* No comment provided by engineer. */
+"Not Now" = "以后再说";
+
+/* No comment provided by engineer. */
+"OK" = "好";
+
+/* No comment provided by engineer. */
+"OpenVanilla - %@" = "OpenVanilla - %@";
+
+/* No comment provided by engineer. */
+"OpenVanilla Preferences…" = "OpenVanilla 设置…";
+
+/* No comment provided by engineer. */
+"Overwrite" = "取代";
+
+/* No comment provided by engineer. */
+"Overwriting Existing Input Method" = "取代现有输入法";
+
+/* No comment provided by engineer. */
+"Pick the .cin Table to Import" = "选择要汇入的 .cin 输入法表格";
+
+/* No comment provided by engineer. */
+"Removal Failed" = "移除输入法失败";
+
+/* No comment provided by engineer. */
+"Remove" = "移除";
+
+/* No comment provided by engineer. */
+"There may be no internet connection or the server failed to respond.\n\nError message: %@" = "网路连线失败，或是服务器没有回应。\n\n错误说明：%@";
+
+/* No comment provided by engineer. */
+"The version information returned by the server is not valid." = "服务器回传的版本信息不正确。";
+
+/* No comment provided by engineer. */
+"This is a built-in input method." = "这是内置的输入法。";
+
+/* No comment provided by engineer. */
+"This is a customized input method." = "这是用户自订的输入法。";
+
+/* No comment provided by engineer. */
+"Update Check Failed" = "无法检查新版";
+
+/* No comment provided by engineer. */
+"User Guide" = "使用手册";
+
+/* No comment provided by engineer. */
+"Visit Website" = "前往网站";
+
+/* No comment provided by engineer. */
+"You are already using the latest version of OpenVanilla." = "目前使用的已经是最新版本。";
+
+/* No comment provided by engineer. */
+"You're currently using OpenVanilla %@ (%@), a new version %@ (%@) is now available. Do you want to visit openvanilla.org to download the version?%@" = "目前使用的 OpenVanilla 版本是 %1$@ (%2$@)，网路上有更新版本 %3$@ (%4$@) 可供下载。是否要前往 openvanilla.org 下载新版来安装？%5$@";
+
+/* No comment provided by engineer. */
+"Your new input method \"%@\" is ready to use" = "新输入法\"%@\"可以使用了";
+
+/* Preferences */
+"Check for new versions" = "定期检查新版";
+"Update Check:" = "检查新版：";
+"Use Space as the first candidate key" = "使用空白键选第一个候选字词";
+"Play sound on input error" = "输入错误时发出警告声";
+"Vertical" = "直式";
+"Clear the composing buffer on error" = "输入错误时，立刻清除组字区";
+"Candidate list style:" = "选字窗样式：";
+"Check Now" = "立刻检查";
+"Maximum component buffer length:" = "最大组字区（字根）长度：";
+"Candidate list font size:" = "选字窗字体大小：";
+"Special code prompt (Auto SP)" = "特别码提示";
+"Last checked: %@" = "上次检查时间：%@";
+"Alphanumeric keyboard layout:" = "英数字键盘配置：";
+"Space selects the first candidate when there's only one page" = "如果候选字词只有一页，按空白键送出第一词";
+"For more information, visit http://openvanilla.org" = "详细说明，请前往以下网站: http://openvanilla.org";
+"While typing, show candidate list if there are candidates" = "一边打字一边组字，如果有候选词就显示选字窗";
+"Remove Input Method" = "移除输入法";
+"Import…" = "汇入…";
+"Compose when reaching the maximum component length" = "打满最大组字（或字根）长度就组字";
+"Horizontal" = "横式";
+"Feedback:" = "音效：";
+"Quick mode (Force SP)" = "快打模式";
+"Create a customized input method by importing a .cin file" = "汇入 .cin 格式文件，建立新的输入法";

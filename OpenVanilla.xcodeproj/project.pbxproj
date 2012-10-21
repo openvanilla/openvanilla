@@ -281,6 +281,13 @@
 		6ACB49F315E49F2900380B82 /* VTVerticalCandidateTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTVerticalCandidateTableView.m; sourceTree = "<group>"; };
 		6ACB49F415E49F2900380B82 /* VTVerticalKeyLabelStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTVerticalKeyLabelStripView.h; sourceTree = "<group>"; };
 		6ACB49F515E49F2900380B82 /* VTVerticalKeyLabelStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTVerticalKeyLabelStripView.m; sourceTree = "<group>"; };
+		6AD4989E163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6AD4989F163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		6AD498A0163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6AD498A1163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6AD498A2163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/License.rtf"; sourceTree = "<group>"; };
+		6AD498A3163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6AD498A4163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
 		6AFBA9BF15F9AE0A007DC9E6 /* OVPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVPreferencesWindowController.h; sourceTree = "<group>"; };
 		6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVPreferencesWindowController.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -707,6 +714,7 @@
 			knownRegions = (
 				en,
 				"zh-Hant",
+				"zh-Hans",
 			);
 			mainGroup = 6ABBAEE515CD58F90080EE7D;
 			productRefGroup = 6ABBAEF115CD58F90080EE7D /* Products */;
@@ -844,6 +852,7 @@
 			children = (
 				6A0E0AC01623EDF5004FED10 /* en */,
 				6A0E0ACA1623EDF5004FED10 /* zh-Hant */,
+				6AD498A1163396FA005D5382 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -853,6 +862,7 @@
 			children = (
 				6A0E0AC21623EDF5004FED10 /* en */,
 				6A0E0ACB1623EDF5004FED10 /* zh-Hant */,
+				6AD498A2163396FA005D5382 /* zh-Hans */,
 			);
 			name = License.rtf;
 			sourceTree = "<group>";
@@ -862,6 +872,7 @@
 			children = (
 				6A0E0AC41623EDF5004FED10 /* en */,
 				6A0E0ACC1623EDF5004FED10 /* zh-Hant */,
+				6AD498A3163396FA005D5382 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -871,6 +882,7 @@
 			children = (
 				6A0E0AC61623EDF5004FED10 /* en */,
 				6A0E0ACD1623EDF5004FED10 /* zh-Hant */,
+				6AD498A4163396FA005D5382 /* zh-Hans */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -880,6 +892,7 @@
 			children = (
 				6A30CB0516329CF400DC0755 /* en */,
 				6A30CB0816329CFC00DC0755 /* zh-Hant */,
+				6AD4989E163396FA005D5382 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -889,6 +902,7 @@
 			children = (
 				6ABBAEFE15CD58F90080EE7D /* en */,
 				6A30CB0916329D2300DC0755 /* zh-Hant */,
+				6AD498A0163396FA005D5382 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -898,6 +912,7 @@
 			children = (
 				6ABBAF0A15CD58F90080EE7D /* en */,
 				6A30CB0A16329D3000DC0755 /* zh-Hant */,
+				6AD4989F163396FA005D5382 /* zh-Hans */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
