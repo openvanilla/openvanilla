@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.9.9.7</string>
+	<string>0.9.9.8</string>
 	<key>CFBundleSignature</key>
 	<string>OVIN</string>
 	<key>CFBundleVersion</key>
-	<string>116</string>
+	<string>122</string>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
 	<key>LSMinimumSystemVersion</key>
