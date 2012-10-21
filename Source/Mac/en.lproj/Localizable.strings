@@ -113,6 +113,9 @@
 "There may be no internet connection or the server failed to respond.\n\nError message: %@" = "There may be no internet connection or the server failed to respond.\n\nError message: %@";
 
 /* No comment provided by engineer. */
+"The version information returned by the server is not valid." = "The version information returned by the server is not valid.";
+
+/* No comment provided by engineer. */
 "This is a built-in input method." = "This is a built-in input method.";
 
 /* No comment provided by engineer. */

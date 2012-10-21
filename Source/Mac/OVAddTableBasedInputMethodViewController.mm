@@ -130,7 +130,8 @@
 
 - (void)nonModalAlertWindowControllerDidConfirm:(OVNonModalAlertWindowController *)controller
 {
-    if ([self install:self.tablePathToBeInstalled]) {        
+    if (controller.delegate == self) {
+        [self install:self.tablePathToBeInstalled];
     }
 }
 

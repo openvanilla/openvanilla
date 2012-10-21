@@ -86,6 +86,9 @@
 "There may be no internet connection or the server failed to respond.\n\nError message: %@" = "網路連線失敗，或是伺服器沒有回應。\n\n錯誤說明：%@";
 
 /* No comment provided by engineer. */
+"The version information returned by the server is not valid." = "伺服器回傳的版本資訊不正確。";
+
+/* No comment provided by engineer. */
 "This is a built-in input method." = "這是內建的輸入法。";
 
 /* No comment provided by engineer. */

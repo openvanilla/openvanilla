@@ -15,6 +15,7 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
 @interface OVUpdateChecker () <NSURLConnectionDataDelegate, OVNonModalAlertWindowControllerDelegate>
 - (void)cleanUp;
 - (void)checkForUpdateForced:(BOOL)forced;
+- (void)showPlistError;
 @property (retain) NSDate *nextUpdateCheckDate;
 @end
 
@@ -87,6 +88,19 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
     [_connection start];
 }
 
+- (void)showPlistError
+{
+#if DEBUG
+    NSLog(@"Update check: plist error, forced check: %d", _forcedCheck);
+#endif
+
+    if (!_forcedCheck) {
+        return;
+    }
+
+    [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Update Check Failed", nil) content:NSLocalizedString(@"The version information returned by the server is not valid.", nil) confirmButtonTitle:NSLocalizedString(@"Dismiss", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
+}
+
 #pragma mark - Properties
 
 - (BOOL)busy
@@ -128,6 +142,10 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+#if DEBUG
+    NSLog(@"Update check: connection error, forced check: %d, error: %@", _forcedCheck, error);
+#endif
+
     NSDate *now = [NSDate date];
     [self setLastUpdateCheckDate:now];
     [self setNextUpdateCheckDate:[NSDate dateWithTimeInterval:OVNextUpdateCheckRetryInterval sinceDate:now]];
@@ -162,20 +180,23 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
     [[NSNotificationCenter defaultCenter] postNotificationName:OVUpdateCheckerDidFinishCheckingNotification object:self];
     
     if (!plist) {
-        NSLog(@"cannot parse update info, error: %@", errorDescription);
+        [self showPlistError];
         return;
     }
 
-    NSLog(@"plist: %@",plist);
-
+#if DEBUG
+    NSLog(@"update check plist: %@",plist);
+#endif
 
     NSString *remoteVersion = [plist objectForKey:(id)kCFBundleVersionKey];
     if (!remoteVersion) {
+        [self showPlistError];
         return;
     }
 
     NSString *remoteShortVersion = [plist objectForKey:@"CFBundleShortVersionString"];
     if (!remoteShortVersion) {
+        [self showPlistError];
         return;
     }
 
@@ -218,6 +239,16 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
 
 - (void)nonModalAlertWindowControllerDidConfirm:(OVNonModalAlertWindowController *)controller
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:OVUpdateDownloadURLString]];
+    if (controller.delegate == self) {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:OVUpdateDownloadURLString]];
+    }
+}
+
+- (void)nonModalAlertWindowControllerDidCancel:(OVNonModalAlertWindowController *)controller
+{
+    if (controller.delegate == self) {
+        NSDate *now = [NSDate date];
+        [self setNextUpdateCheckDate:[NSDate dateWithTimeInterval:OVNextUpdateCheckRemindLaterInterval sinceDate:now]];
+    }
 }
 @end

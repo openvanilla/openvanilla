@@ -52,10 +52,12 @@ NSString *const OVVerticalCandidateListStyleName = @"vertical";
 NSString *const OVHorizontalCandidateListStyleName = @"horizontal";
 
 #if DEBUG
-const NSTimeInterval OVNextUpdateCheckInterval = 30.0;
-const NSTimeInterval OVNextUpdateCheckRetryInterval = 10.0;
+const NSTimeInterval OVNextUpdateCheckInterval = 600.0;
+const NSTimeInterval OVNextUpdateCheckRemindLaterInterval = 3600.0;
+const NSTimeInterval OVNextUpdateCheckRetryInterval = 300.0;
 #else
 const NSTimeInterval OVNextUpdateCheckInterval = 86400.0;
+const NSTimeInterval OVNextUpdateCheckRemindLaterInterval = 86400.0 * 7.0;
 const NSTimeInterval OVNextUpdateCheckRetryInterval = 3600.0;
 #endif
 
