@@ -34,6 +34,7 @@ static NSString *const kDestinationPartial = @"~/Library/Input Methods/";
 static NSString *const kTargetPartialPath = @"~/Library/Input Methods/OpenVanilla.app";
 static NSString *const kTargetFullBinPartialPath = @"~/Library/Input Methods/OpenVanilla.app/Contents/MacOS/OpenVanilla";
 static NSString *const kLegacyAppPath = @"/Library/Input Methods/OpenVanilla.app";
+static NSString *const kLogoutRequirementExplanationURLString = @"http://openvanilla.org/docs/why-logout-is-needed.html";
 
 @implementation AppDelegate
 @synthesize installButton = _installButton;
@@ -125,13 +126,29 @@ static NSString *const kLegacyAppPath = @"/Library/Input Methods/OpenVanilla.app
 
     NSArray *installArgs = [NSArray arrayWithObjects:@"install", nil];
     NSTask *installTask = [NSTask launchedTaskWithLaunchPath:[kTargetFullBinPartialPath stringByExpandingTildeInPath] arguments:installArgs];
-    [installTask waitUntilExit];                                                                              
+    [installTask waitUntilExit];
     if ([installTask terminationStatus] != 0) {
         NSRunAlertPanel(NSLocalizedString(@"Install Failed", nil), NSLocalizedString(@"Cannot activate the input method.", nil),  NSLocalizedString(@"Cancel", nil), nil, nil);
         [NSApp terminate:self];        
     }
 
-    NSRunAlertPanel(NSLocalizedString(@"Installation Successful", nil), NSLocalizedString(@"OpenVanilla is ready to use.", nil),  NSLocalizedString(@"OK", nil), nil, nil);
+    if (_upgradingFromLegacy) {
+        NSInteger result = NSRunAlertPanel(NSLocalizedString(@"Upgrade Successful", nil), NSLocalizedString(@"OpenVanilla is ready to use.\n\nSince you have upgraded from an older version of OpenVanilla (before 1.0), we recommend you log out to make sure that when you come back, every app works with OpenVanilla.", nil), NSLocalizedString(@"Log Out", nil), NSLocalizedString(@"Why I Need This?", nil), NSLocalizedString(@"Finish", nil));
+        if (result == NSAlertDefaultReturn) {
+            NSString *scriptSource = @"tell application \"System Events\" to log out";
+            NSAppleScript *appleScript = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
+            NSDictionary *errDict = nil;
+            [appleScript executeAndReturnError:&errDict];
+        }
+        else if (result == NSAlertAlternateReturn) {
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:kLogoutRequirementExplanationURLString]];
+        }
+    }
+    else {
+        NSRunAlertPanel(NSLocalizedString(@"Installation Successful", nil), NSLocalizedString(@"OpenVanilla is ready to use.", nil),  NSLocalizedString(@"OK", nil), nil, nil);
+        
+    }
+
     [NSApp terminate:self];
 }
                                    

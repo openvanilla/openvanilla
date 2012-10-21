@@ -25,3 +25,8 @@
 /* No comment provided by engineer. */
 "OpenVanilla is ready to use." = "OpenVanilla is ready to use.";
 
+"Upgrade Successful" = "Upgrade Successful";
+"OpenVanilla is ready to use.\n\nSince you have upgraded from an older version of OpenVanilla (before 1.0), we recommend you log out to make sure that when you come back, every app works with OpenVanilla." = "OpenVanilla is ready to use.\n\nSince you have upgraded from an older version of OpenVanilla (before 1.0), we recommend you log out to make sure that when you come back, every app works with OpenVanilla.";
+"Log Out" = "Log Out";
+"Why I Need This?" = "Why I Need This?";
+"Finish" = "Finish";
