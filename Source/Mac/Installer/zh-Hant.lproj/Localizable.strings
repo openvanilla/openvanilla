@@ -35,6 +35,9 @@
 "Visit McBopomofo Website" = "前往小麥注音網站";
 "Continue Anyway" = "繼續安裝";
 
+"Table-Based Input Method Setup Notice" = "泛用輸入法升級後需要重新設定";
+"Since you have been using a table-based input method, please go to OpenVanilla preferences to update your input method settings after installation." = "您目前使用的輸入法是由泛用（表格輸入法）模組所提供的，在升級安裝完後，請記得到「OpenVanilla 偏好設定」更新您的輸入法設定。";
+
 "Upgrade Successful" = "升級完成";
 "OpenVanilla is ready to use.\n\nSince you have upgraded from an older version of OpenVanilla (before 1.0), we recommend you log out to make sure that when you come back, every app works with OpenVanilla." = "OpenVanilla 安裝成功！\n\n由於您機器上先前裝有舊版（早於 1.0 版）的 OpenVanilla，為確保所有應用程式都能順利使用新版輸入法，建議您登出。";
 "Log Out" = "登出";

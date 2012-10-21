@@ -33,6 +33,7 @@
     NSString *_installingVersion;
     BOOL _upgrading;
     BOOL _upgradingFromLegacy;
+    BOOL _wasUsingOVIMGeneric;
     NSButton *_installButton;
     NSButton *_cancelButton;
     NSTextView *_textView;

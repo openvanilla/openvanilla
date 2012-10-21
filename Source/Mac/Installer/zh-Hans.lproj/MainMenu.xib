@@ -238,7 +238,7 @@
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<object class="NSView" key="NSWindowView" id="439893737">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSScrollView" id="547588290">
@@ -252,9 +252,10 @@
 										<object class="NSTextView" id="577177142">
 											<reference key="NSNextResponder" ref="329700074"/>
 											<int key="NSvFlags">2322</int>
-											<string key="NSFrameSize">{598, 249}</string>
+											<string key="NSFrameSize">{583, 249}</string>
 											<reference key="NSSuperview" ref="329700074"/>
-											<reference key="NSNextKeyView" ref="671016224"/>
+											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView" ref="931438549"/>
 											<string key="NSReuseIdentifierKey">_NS:13</string>
 											<object class="NSTextContainer" key="NSTextContainer" id="462803533">
 												<object class="NSLayoutManager" key="NSLayoutManager">
@@ -271,7 +272,7 @@
 													<nil key="NSDelegate"/>
 												</object>
 												<reference key="NSTextView" ref="577177142"/>
-												<double key="NSWidth">598</double>
+												<double key="NSWidth">583</double>
 												<int key="NSTCFlags">1</int>
 											</object>
 											<object class="NSTextViewSharedData" key="NSSharedData">
@@ -323,8 +324,9 @@
 											<nil key="NSDelegate"/>
 										</object>
 									</array>
-									<string key="NSFrame">{{1, 1}, {598, 249}}</string>
+									<string key="NSFrame">{{1, 1}, {583, 249}}</string>
 									<reference key="NSSuperview" ref="547588290"/>
+									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="577177142"/>
 									<string key="NSReuseIdentifierKey">_NS:11</string>
 									<reference key="NSDocView" ref="577177142"/>
@@ -353,8 +355,9 @@
 								<object class="NSScroller" id="931438549">
 									<reference key="NSNextResponder" ref="547588290"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{583, 1}, {16, 249}}</string>
+									<string key="NSFrame">{{584, 1}, {15, 249}}</string>
 									<reference key="NSSuperview" ref="547588290"/>
+									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="491430932"/>
 									<string key="NSReuseIdentifierKey">_NS:84</string>
 									<reference key="NSTarget" ref="547588290"/>
@@ -367,6 +370,7 @@
 									<int key="NSvFlags">-2147483392</int>
 									<string key="NSFrame">{{-100, -100}, {87, 18}}</string>
 									<reference key="NSSuperview" ref="547588290"/>
+									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="329700074"/>
 									<string key="NSReuseIdentifierKey">_NS:33</string>
 									<int key="NSsFlags">1</int>
@@ -378,7 +382,8 @@
 							</array>
 							<string key="NSFrame">{{20, 60}, {600, 251}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
-							<reference key="NSNextKeyView" ref="329700074"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="671016224"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<int key="NSsFlags">133138</int>
 							<reference key="NSVScroller" ref="931438549"/>
@@ -390,6 +395,8 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{460, 12}, {166, 32}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="697424423">
@@ -416,6 +423,7 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{330, 12}, {130, 32}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="1003422388"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
@@ -439,13 +447,14 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{17, 323}, {559, 17}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="547588290"/>
 							<string key="NSReuseIdentifierKey">_NS:1505</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="215692125">
 								<int key="NSCellFlags">68157504</int>
 								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents">歡迎您安裝 OpenVanilla！在安裝之前，請您閱讀本軟體的使用授權：</string>
+								<string key="NSContents">欢迎您安装 OpenVanilla！在安装之前，请您阅读本软件的使用授权：</string>
 								<reference key="NSSupport" ref="607665754"/>
 								<string key="NSCellIdentifier">_NS:1505</string>
 								<reference key="NSControlView" ref="1004656893"/>
@@ -468,13 +477,14 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{17, 19}, {337, 17}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="224965611"/>
 							<string key="NSReuseIdentifierKey">_NS:1505</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="766981580">
 								<int key="NSCellFlags">68157504</int>
 								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents">點選「同意安裝」，表示您同意本軟體的使用授權。</string>
+								<string key="NSContents">點選 "同意安裝"，表示您同意本軟體的使用授權。</string>
 								<object class="NSFont" key="NSSupport">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">11</double>
@@ -488,6 +498,8 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{640, 360}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="1004656893"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>

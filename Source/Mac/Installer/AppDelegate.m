@@ -39,6 +39,9 @@ static NSString *const kLegacyMigrationURLString = @"http://openvanilla.org/docs
 static NSString *const kMcBopomofoURLString = @"http://mcbopomofo.openvanilla.org";
 static NSString *const kPreviousVersionSettings = @"~/Library/Preferences/org.openvanilla.plist";
 
+static NSString *const kLegacyOVIMGenericUserTablePath = @"~/Library/Application Support/OpenVanilla/UserData/OVIMGeneric";
+static NSString *const kNewOVIMTableBasedUserTablePath = @"~/Library/Application Support/OpenVanilla/UserData/TableBased";
+
 @implementation AppDelegate
 @synthesize installButton = _installButton;
 @synthesize cancelButton = _cancelButton;
@@ -94,6 +97,9 @@ static NSString *const kPreviousVersionSettings = @"~/Library/Preferences/org.op
             NSDictionary *oldSettings = [NSDictionary dictionaryWithContentsOfFile:[kPreviousVersionSettings stringByExpandingTildeInPath]];
             if (oldSettings) {
                 NSString *primaryInputMethod = [oldSettings objectForKey:@"primaryInputMethod"];
+
+                _wasUsingOVIMGeneric = [primaryInputMethod hasPrefix:@"OVIMGeneric"];
+
                 if ([primaryInputMethod isEqualToString:@"OVIMPhonetic"] || [primaryInputMethod isEqualToString:@"OVIMSpaceChewing"] || [primaryInputMethod isEqualToString:@"OVIMChewing"]) {                    
                     NSUInteger result = NSRunAlertPanel(NSLocalizedString(@"Unsupported Input Method", nil), NSLocalizedString(@"You are using a Bopomofo-based input method, which OpenVanilla no longer supports.\n\nWe recommend you install McBopomofo instead.", nil), NSLocalizedString(@"Visit McBopomofo Website", nil), NSLocalizedString(@"Continue Anyway", nil), NSLocalizedString(@"Quit Installer", nil));
 
@@ -159,6 +165,14 @@ static NSString *const kPreviousVersionSettings = @"~/Library/Preferences/org.op
     }
 
     if (_upgradingFromLegacy) {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[kLegacyOVIMGenericUserTablePath stringByExpandingTildeInPath]] && ![[NSFileManager defaultManager] fileExistsAtPath:[kNewOVIMTableBasedUserTablePath stringByExpandingTildeInPath]]) {
+            [[NSFileManager defaultManager] moveItemAtPath:[kLegacyOVIMGenericUserTablePath stringByExpandingTildeInPath] toPath:[kNewOVIMTableBasedUserTablePath stringByExpandingTildeInPath] error:NULL];
+        }
+
+        if (_wasUsingOVIMGeneric) {
+            NSRunAlertPanel(NSLocalizedString(@"Table-Based Input Method Setup Notice", nil), NSLocalizedString(@"Since you have been using a table-based input method, please go to OpenVanilla preferences to update your input method settings after installation.", nil),  NSLocalizedString(@"OK", nil), nil, nil);
+        }
+
         NSInteger result = NSRunAlertPanel(NSLocalizedString(@"Upgrade Successful", nil), NSLocalizedString(@"OpenVanilla is ready to use.\n\nSince you have upgraded from an older version of OpenVanilla (before 1.0), we recommend you log out to make sure that when you come back, every app works with OpenVanilla.", nil), NSLocalizedString(@"Log Out", nil), NSLocalizedString(@"Why I Need This?", nil), NSLocalizedString(@"Finish", nil));
         if (result == NSAlertDefaultReturn) {
             NSString *scriptSource = @"tell application \"System Events\" to log out";

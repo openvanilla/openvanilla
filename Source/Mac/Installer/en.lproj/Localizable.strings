@@ -35,6 +35,9 @@
 "Visit McBopomofo Website" = "Visit McBopomofo Website";
 "Continue Anyway" = "Continue Anyway";
 
+"Table-Based Input Method Setup Notice" = "Table-Based Input Method Setup Notice";
+"Since you have been using a table-based input method, please go to OpenVanilla preferences to update your input method settings after installation." = "Since you have been using a table-based input method, please go to OpenVanilla preferences to update your input method settings after installation.";
+
 "Upgrade Successful" = "Upgrade Successful";
 "OpenVanilla is ready to use.\n\nSince you have upgraded from an older version of OpenVanilla (before 1.0), we recommend you log out to make sure that when you come back, every app works with OpenVanilla." = "OpenVanilla is ready to use.\n\nSince you have upgraded from an older version of OpenVanilla (before 1.0), we recommend you log out to make sure that when you come back, every app works with OpenVanilla.";
 "Log Out" = "Log Out";
