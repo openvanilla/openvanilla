@@ -53,6 +53,10 @@ static NSString *const kLegacyAppPath = @"/Library/Input Methods/OpenVanilla.app
     [[self window] orderFront:self];
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 
+    [self.cancelButton setNextKeyView:self.installButton];
+    [self.installButton setNextKeyView:self.cancelButton];
+    [[self window] setDefaultButtonCell:[self.installButton cell]];
+
     NSAttributedString *attrStr = [[[NSAttributedString alloc] initWithRTF:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"License" ofType:@"rtf"]] documentAttributes:NULL] autorelease];
 
     [[self.textView textStorage] setAttributedString:attrStr];
