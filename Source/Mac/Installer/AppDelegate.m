@@ -97,7 +97,7 @@ static NSString *const kLegacyAppPath = @"/Library/Input Methods/OpenVanilla.app
         (void)tag;
 
         // alno need to restart SystemUIServer to ensure that the icon is fully cleaned up
-        if (_currentVersion && [_currentVersion compare:@"0.9.4"] != NSOrderedDescending) {
+        if (_currentVersion && [_currentVersion compare:@"0.9.9"] != NSOrderedDescending) {
             NSTask *restartSystemUIServerTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall" arguments:[NSArray arrayWithObjects: @"-9", @"SystemUIServer", nil]];
             [restartSystemUIServerTask waitUntilExit];
         }
