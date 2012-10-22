@@ -20,7 +20,7 @@ Mac OS X 10.6.8 以上版本。
 
 ## 軟體授權
 
-本專案採用 MIT License 釋出，使用者可自由使用、散播本軟體，惟散播時必須保持軟體完整、不得修改版權文字。[授權全文在此](https://github.com/lukhnos/openvanilla/blob/master/AUTHORS.txt)。
+本專案採用 MIT License 釋出，使用者可自由使用、散播本軟體，惟散播時必須保持軟體完整、不得修改版權文字。[授權全文在此](https://github.com/lukhnos/openvanilla/blob/master/LICENSE.txt)。
 
 ## 卸載方式
 
@@ -90,7 +90,7 @@ OpenVanilla 的 Windows 版本已經停止開發。原始程式碼仍然可從 G
 
 OpenVanilla 是開放原始碼的計畫，歡迎從 [GitHub](https://github.com/lukhnos/openvanilla/) 取得原始碼。
 
-有開發上的疑問，歡迎透過 [GitHub](https://github.com/lukhnos/openvanilla/issues) 的工作追蹤系統或 [Google Groups 論壇](https://groups.google.com/forum/?fromgroups/openvanilla#!forum/openvanilla)回報。
+有開發上的疑問，歡迎透過 GitHub 的[追蹤系統](https://github.com/lukhnos/openvanilla/issues)或 [Google Groups 論壇](https://groups.google.com/forum/?fromgroups/openvanilla#!forum/openvanilla)回報。
 
 ### Q: 為什麼叫 OpenVanilla?
 
