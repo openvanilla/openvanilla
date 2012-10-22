@@ -42,7 +42,7 @@ Mac OS X 10.6.8 以上版本。
 
 ### Q: 如何匯入輸入法表格？
 
-將 OpenVanilla 輸入法選單拉下來，選「OpenVanilla 偏好設定…」，然後選「加入新輸入法」，按「匯入…」按鈕，然後選取下載來的 .cin 檔案就可以了。
+將 OpenVanilla 輸入法選單拉下來，選「OpenVanilla 偏好設定…」，然後選「加入新輸入法」，按「匯入…」按鈕，然後選取下載來的 .cin 檔案就可以了。
 
 ### Q: 如何製作自己的 .cin 輸入法表格檔？
 
@@ -56,7 +56,7 @@ Mac OS X 10.6.8 以上版本。
 * 藏文輸入法：OS X 已經內建
 * POJ: 請使用「[信望愛台語客語輸入法](http://taigi.fhl.net/TaigiIME/)」或「[教育部台灣閩南語輸入法](http://www.edu.tw/mandr/download.aspx?download_sn=3015&pages=0&site_content_sn=3364)」，兩者都有 Mac 版本
 
-另外，嘸蝦米輸入法的使用者，請前往[嘸蝦米官方網站](http://boshiamy.com)取得 Mac 版本。
+另外，嘸蝦米輸入法的使用者，請前往[嘸蝦米官方網站](http://boshiamy.com)取得 Mac 版本。
 
 ### Q: 輸入法在有的程式可以用，有的程式卻顯示灰色的圖示，怎麼辦？
 
