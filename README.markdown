@@ -24,7 +24,7 @@ Mac OS X 10.6.8 以上版本。
 
 ## 卸載方式
 
-要卸載 OpenVanilla，請在 Finder 視窗中按著  鍵 (Command 鍵) 不放，繼續按 Shift 鍵和 G 鍵 (Cmd-Shift-G)，這時會出現對話框，打入 ~/Library/Input Methods/ 按下 Enter 鍵，這時會跳出一個資料夾，將裡面的 OpenVanilla 檔拖入垃圾桶，登出目前帳號再登入即可。
+要卸載 OpenVanilla，請在 Finder 視窗中按著  鍵 (Command 鍵) 不放，繼續按 Shift 鍵和 G 鍵 (Cmd-Shift-G)，這時會出現對話框，打入 `~/Library/Input Methods/` 按下 Enter 鍵，這時會跳出一個資料夾，將裡面的 `OpenVanilla` 檔拖入垃圾桶，登出目前帳號再登入即可。
 
 ## 線上論壇
 
@@ -76,7 +76,7 @@ Mac OS X 10.6.8 以上版本。
 
 ### Q: 安裝程式告訴我要卸載 0.8 版才能安裝。要如何卸載 0.8 版？
 
-請在 Finder 視窗中按著  鍵 (Command 鍵) 不放，繼續按 Shift 鍵和 G 鍵 (Cmd-Shift-G)，這時會出現對話框，打入 /Library/Input Methods/ 按下 Enter 鍵（請注意，這一串檔名的前面沒有 ~ 符號），這時會跳出一個資料夾，將裡面的 "LeopardVanilla" 檔案拖入垃圾統。刪除該檔案的時候，Finder 可能會提示需要使用者帳號密碼認證。
+請在 Finder 視窗中按著  鍵 (Command 鍵) 不放，繼續按 Shift 鍵和 G 鍵 (Cmd-Shift-G)，這時會出現對話框，打入 `/Library/Input Methods/` 按下 Enter 鍵（請注意，這一串檔名的前面沒有 ~ 符號），這時會跳出一個資料夾，將裡面的 `LeopardVanilla` 檔案拖入垃圾統。刪除該檔案的時候，Finder 可能會提示需要使用者帳號密碼認證。
 
 刪除後，登出目前帳號再登入即可，就完成 0.8 版的卸載。
 
@@ -91,6 +91,10 @@ OpenVanilla 的 Windows 版本已經停止開發。原始程式碼仍然可從 G
 OpenVanilla 是開放原始碼的計畫，歡迎從 [GitHub](https://github.com/lukhnos/openvanilla/) 取得原始碼。
 
 有開發上的疑問，歡迎透過 GitHub 的[追蹤系統](https://github.com/lukhnos/openvanilla/issues)或 [Google Groups 論壇](https://groups.google.com/forum/?fromgroups/openvanilla#!forum/openvanilla)回報。
+
+### Q: 要如何從原始碼建立 OpenVanilla 執行檔？
+
+請先至 GitHub 取得 [OpenVanilla 原始碼](https://github.com/lukhnos/openvanilla)，並安裝最新版的 [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)。打開其中的 `OpenVanilla.xcodeproj` 計畫檔，在 Xcode 內選擇 Build 指令就可以編譯出 `OpenVanilla.app`。要注意的是這個 target 並不會自動安裝輸入法（因此不會覆蓋你現有的版本）。如果要安裝輸入法，可另行 build `OpenVanillaInstaller` 這個 target（會自動 build 其相依的 `OpenVanilla` target），然後執行 installer 就可以安裝了。
 
 ### Q: 為什麼叫 OpenVanilla?
 
