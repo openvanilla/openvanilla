@@ -221,7 +221,6 @@ static string InputMethodConfigIdentifier(const string& identifier)
         inputMethods.push_back(inputMethod);
     }
 
-    // TODO: Array always use US keyboard layout
     NSString *arrayTableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables"];
     OVInputMethod *inputMethod = new OpenVanilla::OVIMArray([arrayTableRoot UTF8String]);
     inputMethods.push_back(inputMethod);
@@ -230,7 +229,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
         OVInputMethod* inputMethod = *i;
         OVPathInfo info;
 
-        // TODO: furnish path info
+        // TODO: furnish path info for dynamically-loaded bundles (if supported in the future)
         bool result = inputMethod->initialize(&info, self.loaderService);
         if (!result) {
             delete inputMethod;
@@ -331,11 +330,10 @@ static string InputMethodConfigIdentifier(const string& identifier)
 - (BOOL)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path willOverrideBuiltInTable:(BOOL *)willOverride identifier:(NSString **)identifierIfInstalled localizedName:(NSString **)localizedNameIfInstalled error:(NSError **)error
 {
     const char *posixPath = [path fileSystemRepresentation];
-    NSLog(@"attempting: %s", posixPath);
 
     OVInputMethod *inputMethod = new OVIMTableBased(posixPath);
 
-    // TODO: furnish info
+    // TODO: furnish path info for dynamically-loaded bundles (if supported in the future)
     OVPathInfo info;
     bool result = inputMethod->initialize(&info, self.loaderService);
 
@@ -384,7 +382,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
         return;
     }
 
-    // TODO: Better error handling
+    // TODO: Show error info
     NSString *targetPath = [userTableRoot stringByAppendingPathComponent:[path lastPathComponent]];
     NSError *error = nil;
     BOOL success = [[NSFileManager defaultManager] copyItemAtPath:path toPath:targetPath error:&error];
@@ -392,7 +390,6 @@ static string InputMethodConfigIdentifier(const string& identifier)
         NSLog(@"Cannot copy %@ to %@, error: %@", path, targetPath, error);
     }
 
-    // TODO: Reload reason (the identifier of the added input method)
     [self reload];
 }
 
@@ -404,13 +401,13 @@ static string InputMethodConfigIdentifier(const string& identifier)
 - (BOOL)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError **)error
 {
     if (![self isCustomTableBasedInputMethod:identifier]) {
-        // TODO: error
+        // TODO: furnish error info
         return NO;
     }
 
     NSString *userTableRoot = [self rootPathForCustomInputMethodTables];
     if (!userTableRoot) {
-        // TODO: error
+        // TODO: furnish error info
         return NO;
     }
 

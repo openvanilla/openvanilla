@@ -42,8 +42,6 @@
 @synthesize lastUpdateCheckDateLabel = _lastUpdateCheckDateLabel;
 @synthesize checkForUpdateButton = _checkForUpdateButton;
 
-// TODO: Window become active -> reload prefs
-
 - (void)awakeFromNib
 {
     // this is never deallocated (only on app exit), so no need to remove observer
