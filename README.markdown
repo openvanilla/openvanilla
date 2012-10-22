@@ -82,9 +82,9 @@ Mac OS X 10.6.8 以上版本。
 
 ### Q: Linux 版本跟 Windows 版本在哪裡？
 
-由 MatLinuxer2 及 fourdollars 開發的 OpenVanilla 的 Linux 版本，仍然可從 GitHub 上的這個分支取得。
+由 MatLinuxer2 及 fourdollars 開發的 OpenVanilla 的 Linux 版本，仍然可從 GitHub 上的 [0.8.1 這個分支](https://github.com/lukhnos/openvanilla/tree/0.8.1)取得。
 
-OpenVanilla 的 Windows 版本已經停止開發。原始程式碼仍然可從 GitHub 的分支上取得，但是可能已經無法在目前的 Windows 開發工具上組建。
+OpenVanilla 的 Windows 版本已經停止開發。原始程式碼仍然可從 GitHub 的[分支](https://github.com/lukhnos/openvanilla/tree/0.8.1)上取得，但是應該已經無法在目前的 Windows 開發工具上組建。
 
 ### Q: 要如何參與開發？
 
