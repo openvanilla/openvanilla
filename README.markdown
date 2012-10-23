@@ -1,6 +1,6 @@
 # OpenVanilla 輸入法套件
 
-最新版本: 1.0 [由此處下載](https://github.com/downloads/lukhnos/openvanilla/OpenVanilla-Installer-Mac-1.0.0.zip)
+最新版本: 1.0 [由此處下載](https://github.com/downloads/lukhnos/openvanilla/OpenVanilla-Installer-Mac-1.0.zip)
 
 ## 簡介
 
@@ -38,7 +38,7 @@ Mac OS X 10.6.8 以上版本。
 
 ### Q: 如何取得其他輸入法表格？
 
-常用的輸入法表格可從 OpenVanilla 的[原始碼網站](https://github.com/lukhnos/openvanilla/tree/master/DataTables)下載，例如[大字集的倉頡](https://github.com/lukhnos/openvanilla/blob/master/DataTables/cj-ext.cin)、[簡體倉頡](https://github.com/lukhnos/openvanilla/blob/master/DataTables/jtcj.cin)、[粵語拼音](https://github.com/lukhnos/openvanilla/blob/master/DataTables/jyutping.cin)、[電信碼](https://github.com/lukhnos/openvanilla/blob/master/DataTables/telecode.cin)、[五筆](https://github.com/lukhnos/openvanilla/blob/master/DataTables/wubizixing.cin)等。
+常用的輸入法表格可從 OpenVanilla 的[原始碼網站](https://github.com/lukhnos/openvanilla/tree/master/DataTables)下載，例如[大字集的倉頡](https://raw.github.com/lukhnos/openvanilla/master/DataTables/cj-ext.cin)、[粵語拼音](https://raw.github.com/lukhnos/openvanilla/master/DataTables/jyutping.cin)、[電信碼](https://raw.github.com/lukhnos/openvanilla/master/DataTables/telecode.cin)、[五筆](https://raw.github.com/lukhnos/openvanilla/master/DataTables/wubizixing.cin)等。
 
 ### Q: 如何匯入輸入法表格？
 
@@ -106,4 +106,5 @@ OpenVanilla 的前身是一個名叫 VanillaInput 的輸入法軟體，原先 (2
 
 ### Q: 有使用上的問題，要去哪裡問？
 
-OpenVanilla 的 [Google Groups 線上論壇](https://groups.google.com/forum/?fromgroups/openvanilla#!forum/openvanilla)。
+OpenVanilla 的 [Google Groups 線上論壇](https://groups.google.com/forum/?fromgroups/openvanilla#!forum/openvanilla)。或是到 Twitter 留言給 [@OpenVanilla](https://twitter.com/OpenVanilla)。
+
