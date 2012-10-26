@@ -1,6 +1,6 @@
 # OpenVanilla 輸入法套件
 
-最新版本: 1.0 [由此處下載](https://github.com/downloads/lukhnos/openvanilla/OpenVanilla-Installer-Mac-1.0.zip)
+最新版本: 1.0.1 [由此處下載](https://github.com/downloads/lukhnos/openvanilla/OpenVanilla-Installer-Mac-1.0.1.zip)
 
 ## 簡介
 
