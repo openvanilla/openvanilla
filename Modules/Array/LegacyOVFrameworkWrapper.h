@@ -42,6 +42,7 @@ public:
     virtual bool isCtrl() { return m_key->isCtrlPressed(); }
     virtual bool isAlt() { return m_key->isAltPressed(); }
     virtual bool isNum() { return m_key->isNumLockOn(); }
+    virtual bool isCommand() { return m_key->isCommandPressed(); }
 
 protected:
     OpenVanilla::OVKey* m_key;
