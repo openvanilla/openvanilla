@@ -36,7 +36,16 @@ int main(int argc, char *argv[])
     // register and enable the input source (along with all its input modes)
     if (argc > 1 && !strcmp(argv[1], "install")) {
         NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
-        NSURL *bundleURL = [[NSBundle mainBundle] bundleURL];
+        NSURL *bundleURL = nil;
+        if ([[NSBundle mainBundle] respondsToSelector:@selector(bundleURL)]) {
+            // For Mac OS X 10.6+
+            bundleURL = [[NSBundle mainBundle] bundleURL];
+        }
+        else {
+            // For Mac OS X 10.5
+            bundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+        }
+		
         TISInputSourceRef inputSource = [OVInputSourceHelper inputSourceForInputSourceID:bundleID];
 
         if (!inputSource) {

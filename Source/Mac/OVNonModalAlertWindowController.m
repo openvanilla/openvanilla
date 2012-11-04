@@ -21,12 +21,13 @@
 
 + (OVNonModalAlertWindowController *)sharedInstance
 {
-    static OVNonModalAlertWindowController *instance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[OVNonModalAlertWindowController alloc] initWithWindowNibName:@"OVNonModalAlertWindowController"];
-        [instance window];
-    });
+    static OVNonModalAlertWindowController *instance = nil;
+	@synchronized(self) {
+		if (!instance) {
+			instance = [[OVNonModalAlertWindowController alloc] initWithWindowNibName:@"OVNonModalAlertWindowController"];
+			[instance window];
+		}
+	}
     return instance;
 }
 

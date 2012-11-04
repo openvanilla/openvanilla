@@ -70,11 +70,12 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
 + (OVModuleManager *)defaultManager
 {
-    static OVModuleManager *instance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[OVModuleManager alloc] init];
-    });
+    static OVModuleManager *instance = nil;
+	@synchronized(self) {
+		if (!instance) {
+			instance = [[OVModuleManager alloc] init];
+		}
+	}
 
     return instance;
 }

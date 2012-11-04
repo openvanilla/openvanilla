@@ -109,7 +109,11 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
         ListTitlesInView([self.generalPreferencesViewController view], _localizableObjects);
         ListTitlesInView([self.tableBasedMoudlePreferencesViewController view], _localizableObjects);
         ListTitlesInView([self.arrayMoudlePreferencesViewController view], _localizableObjects);
-        ListTitlesInView([self.addTableBasedInputMethodViewController view], _localizableObjects);
+		
+		if (0) {
+			ListTitlesInView([self.addTableBasedInputMethodViewController view], _localizableObjects);
+		}
+		
         [self updateLocalization];
     }
 }

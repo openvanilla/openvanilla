@@ -61,7 +61,10 @@
     NSMenuItem *usKeyboardLayoutItem = nil;
     NSMenuItem *chosenItem = nil;
 
-    [[popUpButton menu] removeAllItems];
+	NSArray *oldItems = [[[[popUpButton menu] itemArray] copy] autorelease];
+	for (NSMenuItem *item in oldItems) {
+		[[popUpButton menu] removeItem:item];
+	}
 
     for (int i = 0; i < CFArrayGetCount(list); i++) {
         TISInputSourceRef source = (TISInputSourceRef)CFArrayGetValueAtIndex(list, i);
