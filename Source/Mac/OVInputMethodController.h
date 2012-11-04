@@ -27,6 +27,25 @@
 
 #import <Cocoa/Cocoa.h>
 #import <InputMethodKit/InputMethodKit.h>
+#import "OpenVanilla.h"
+#import "OVLoaderServiceImpl.h"
+#import "OVCandidateServiceImpl.h"
+#import "OVTextBufferImpl.h"
+#import "OVPlistBackedKeyValueMapImpl.h"
+#import "OVTextBufferCombinator.h"
+#import "OVToolTipWindowController.h"
+#import "OVModuleManager.h"
+#import "OVUpdateChecker.h"
+#import "OVConstants.h"
+
+using namespace OpenVanilla;
 
 @interface OVInputMethodController : IMKInputController
+{
+@protected
+    OVTextBufferImpl *_composingText;
+    OVTextBufferImpl *_readingText;
+    OVEventHandlingContext *_inputMethodContext;
+    id _currentClient;
+}
 @end

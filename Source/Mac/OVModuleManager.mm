@@ -36,8 +36,8 @@
 #import "OVToolTipWindowController.h"
 #import "VXHanConvert.h"
 
-extern NSString *const OVModuleManagerDidReloadNotification = @"OVModuleManagerDidReloadNotification";
-extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification = @"OVModuleManagerDidUpdateActiveInputMethodNotification";
+NSString *const OVModuleManagerDidReloadNotification = @"OVModuleManagerDidReloadNotification";
+NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification = @"OVModuleManagerDidUpdateActiveInputMethodNotification";
 
 using namespace OpenVanilla;
 
@@ -66,6 +66,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
 @synthesize activeInputMethod = _activeInputMethod;
 @synthesize inputMethodMap = _inputMethodMap;
 @synthesize currentLocale = _currentLocale;
+@synthesize inputMethodIdentifiers = _inputMethodIdentifiers;
 
 + (OVModuleManager *)defaultManager
 {

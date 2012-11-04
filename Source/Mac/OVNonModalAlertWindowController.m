@@ -8,6 +8,10 @@
 
 #import "OVNonModalAlertWindowController.h"
 
+@interface OVNonModalAlertWindowController ()
+- (void)cancel:(id)sender;
+@end
+
 @implementation OVNonModalAlertWindowController
 @synthesize titleTextField = _titleTextField;
 @synthesize contentTextField = _contentTextField;

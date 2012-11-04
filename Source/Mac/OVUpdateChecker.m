@@ -12,7 +12,7 @@
 
 NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateCheckerDidFinishCheckingNotification";
 
-@interface OVUpdateChecker () <NSURLConnectionDataDelegate, OVNonModalAlertWindowControllerDelegate>
+@interface OVUpdateChecker () <OVNonModalAlertWindowControllerDelegate>
 - (void)cleanUp;
 - (void)checkForUpdateForced:(BOOL)forced;
 - (void)showPlistError;

@@ -30,6 +30,7 @@
 #import "OVPreferencesWindowController.h"
 
 @implementation OVAppDelegate
+@synthesize window = _window;
 
 - (void)dealloc
 {
