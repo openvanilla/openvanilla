@@ -238,12 +238,20 @@ void OVIMTableBased::checkTable()
     }
 
     OVFileTimestamp timestamp = OVPathHelper::TimestampForPath(m_tablePath);
-    if (timestamp > m_tableTimestamp && m_table) {
-        delete m_table;
-        m_table = 0;
-        m_tableTimestamp = timestamp;
+
+    // if table exists and the timestamp is not newer, bail
+    if (m_table && !(timestamp > m_tableTimestamp)) {
+        return;
     }
 
+    // if table exists, delete the table
+    if (m_table) {
+        delete m_table;
+        m_table = 0;
+    }
+
+    // update timestamp and reload the table
+    m_tableTimestamp = timestamp;
     OVCINDataTableParser parser;
     m_table = parser.CINDataTableFromFileName(m_tablePath);
 }
