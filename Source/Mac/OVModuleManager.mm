@@ -315,8 +315,12 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
     NSString *layout = nil;
     id obj = (id)CFPreferencesCopyAppValue((CFStringRef)OVAlphanumericKeyboardLayoutKey, (CFStringRef)identifier);
-    if ([obj isKindOfClass:[NSString class]]) {
-        layout = [(NSString *)obj autorelease];
+
+    if (obj) {
+        layout = [NSMakeCollectable(obj) autorelease];
+        if (![layout isKindOfClass:[NSString class]]) {
+            layout = nil;
+        }
     }
 
     return layout ? layout : self.sharedAlphanumericKeyboardLayoutIdentifier;
