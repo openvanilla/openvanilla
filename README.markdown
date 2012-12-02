@@ -76,7 +76,7 @@ Mac OS X 10.6.8 以上版本。
 
 ### Q: 安裝程式告訴我要卸載 0.8 版才能安裝。要如何卸載 0.8 版？
 
-請在 Finder 視窗中按著  鍵 (Command 鍵) 不放，繼續按 Shift 鍵和 G 鍵 (Cmd-Shift-G)，這時會出現對話框，打入 `/Library/Input Methods/` 按下 Enter 鍵（請注意，這一串檔名的前面沒有 ~ 符號），這時會跳出一個資料夾，將裡面的 `LeopardVanilla` 檔案拖入垃圾統。刪除該檔案的時候，Finder 可能會提示需要使用者帳號密碼認證。
+請在 Finder 視窗中按著  鍵 (Command 鍵) 不放，繼續按 Shift 鍵和 G 鍵 (Cmd-Shift-G)，這時會出現對話框，打入 `/Library/Input Methods/` 按下 Enter 鍵（請注意，這一串檔名的前面沒有 ~ 符號），這時會跳出一個資料夾，將裡面的 `LeopardVanilla` 檔案拖入垃圾桶。刪除該檔案的時候，Finder 可能會提示需要使用者帳號密碼認證。
 
 刪除後，登出目前帳號再登入即可，就完成 0.8 版的卸載。
 
