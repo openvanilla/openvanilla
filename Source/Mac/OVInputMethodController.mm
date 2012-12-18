@@ -173,11 +173,15 @@ using namespace OpenVanilla;
         _inputMethodContext->stopSession([OVModuleManager defaultManager].loaderService);
     }
 
-    NSAttributedString *emptyReading = [[[NSAttributedString alloc] initWithString:@""] autorelease];
-    [client setMarkedText:emptyReading selectionRange:NSMakeRange(0, 0) replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
+    // clean up reading buffer residue if not empty
+    if (!_readingText->isEmpty()) {
+        NSAttributedString *emptyReading = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+        [client setMarkedText:emptyReading selectionRange:NSMakeRange(0, 0) replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
+    }
 
     _composingText->commit();
     [self commitComposition:client];
+    _composingText->finishCommit();
 
     _composingText->clear();
     _readingText->clear();
