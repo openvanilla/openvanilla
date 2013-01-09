@@ -140,7 +140,7 @@ void* OVFileHandler::openFileByMMAP (const char* file_name)
 		return NULL;
     }
     mmap_ptr = mmap(0 /* select by system */,
-	    stat.st_size /* len */,
+	    (size_t)stat.st_size /* len */,
 	    PROT_READ /* Read */,
 	    MAP_SHARED /* use no flag */,
 	    fd /* file pointer */,

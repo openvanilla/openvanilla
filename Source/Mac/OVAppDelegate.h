@@ -28,7 +28,9 @@
 #import <Cocoa/Cocoa.h>
 
 @interface OVAppDelegate : NSObject <NSApplicationDelegate>
+{
+    NSWindow *_window;
+}
 
 @property (assign) IBOutlet NSWindow *window;
-
 @end

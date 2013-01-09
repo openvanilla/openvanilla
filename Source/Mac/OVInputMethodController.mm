@@ -26,10 +26,8 @@
 //
 
 #import "OVInputMethodController.h"
-#import "OpenVanilla.h"
 #import "OVLoaderServiceImpl.h"
 #import "OVCandidateServiceImpl.h"
-#import "OVTextBufferImpl.h"
 #import "OVPlistBackedKeyValueMapImpl.h"
 #import "OVTextBufferCombinator.h"
 #import "OVToolTipWindowController.h"
@@ -37,16 +35,7 @@
 #import "OVUpdateChecker.h"
 #import "OVConstants.h"
 
-using namespace OpenVanilla;
-
 @interface OVInputMethodController ()
-{
-@protected
-    OVTextBufferImpl *_composingText;
-    OVTextBufferImpl *_readingText;
-    OVEventHandlingContext *_inputMethodContext;
-    id _currentClient;
-}
 - (BOOL)handleOVKey:(OVKey &)key client:(id)client;
 - (void)handleInputMethodChange:(NSNotification *)notification;
 - (void)handleCandidateSelected:(NSNotification *)notification;
