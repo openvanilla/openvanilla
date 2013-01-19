@@ -66,6 +66,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
 @synthesize activeInputMethod = _activeInputMethod;
 @synthesize inputMethodMap = _inputMethodMap;
 @synthesize currentLocale = _currentLocale;
+@synthesize inputMethodIdentifiers = _inputMethodIdentifiers;
 
 + (OVModuleManager *)defaultManager
 {
