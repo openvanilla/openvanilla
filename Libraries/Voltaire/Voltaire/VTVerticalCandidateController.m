@@ -242,11 +242,6 @@ static const CGFloat kCandidateTextLeftMargin = 8.0;
         }
     }
 
-    // fix a subtle on 10.7 that, since we force the scroller to appear, scrolling sometimes shows a temporarily "broken" scroll bar (but quickly disappears)
-    if ([_scrollView hasVerticalScroller]) {
-        [[_scrollView verticalScroller] setNeedsDisplay];
-    }
-    
     return attrString;
 }
 
@@ -258,6 +253,13 @@ static const CGFloat kCandidateTextLeftMargin = 8.0;
         NSInteger firstVisibleRow = [_tableView rowAtPoint:[_scrollView documentVisibleRect].origin];
         _keyLabelStripView.highlightedIndex = selectedRow - firstVisibleRow;
         [_keyLabelStripView setNeedsDisplay:YES];
+
+        // fix a subtle OS X "bug" that, since we force the scroller to appear,
+        // scrolling sometimes shows a temporarily "broken" scroll bar
+        // (but quickly disappears)
+        if ([_scrollView hasVerticalScroller]) {
+            [[_scrollView verticalScroller] setNeedsDisplay];
+        }
     }    
 }
 
