@@ -505,9 +505,9 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
     return NonCandidatePanelKeyReceived;
 }
 
-void OVOneDimensionalCandidatePanelImpl::setPanelOrigin(NSPoint origin)
+void OVOneDimensionalCandidatePanelImpl::setPanelOrigin(NSPoint origin, CGFloat adjustmentHeight)
 {
-    m_candidateController.windowTopLeftPoint = origin;
+    [m_candidateController setWindowTopLeftPoint:origin bottomOutOfScreenAdjustmentHeight:adjustmentHeight];
 }
 
 void OVOneDimensionalCandidatePanelImpl::updateVisibility()

@@ -470,7 +470,7 @@
 
     OVOneDimensionalCandidatePanelImpl *currentCandidatePanel = [OVModuleManager defaultManager].candidateService->currentCandidatePanel();
 
-    currentCandidatePanel->setPanelOrigin(lineHeightRect.origin);
+    currentCandidatePanel->setPanelOrigin(lineHeightRect.origin, lineHeightRect.size.height + 4.0);
     currentCandidatePanel->updateVisibility();
 
     string toolTipText = _readingText->toolTipText();

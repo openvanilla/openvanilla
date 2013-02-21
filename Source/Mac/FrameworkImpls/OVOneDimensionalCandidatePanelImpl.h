@@ -98,7 +98,7 @@ namespace OpenVanilla {
 
         virtual bool isInControl() const;        
         virtual KeyHandlerResult handleKey(OVKey* key);
-        virtual void setPanelOrigin(NSPoint origin);
+        virtual void setPanelOrigin(NSPoint origin, CGFloat adjustmentHeight);
         virtual void updateVisibility();
         virtual void applyFontSettings(NSString *fontName = nil, NSUInteger fontSize = 0);
 
