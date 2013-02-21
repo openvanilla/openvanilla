@@ -458,7 +458,12 @@
 
     NSRect lineHeightRect = NSMakeRect(0.0, 0.0, 16.0, 16.0);
     @try {
-        [sender attributesForCharacterIndex:cursorIndex lineHeightRectangle:&lineHeightRect];
+        NSDictionary *attr = [sender attributesForCharacterIndex:cursorIndex lineHeightRectangle:&lineHeightRect];
+
+        // fall back to index 0 if no attributes are reported at cursorIndex
+        if (![attr count]) {
+            [sender attributesForCharacterIndex:0 lineHeightRectangle:&lineHeightRect];
+        }
     }
     @catch (NSException *exception) {
     }
