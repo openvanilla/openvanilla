@@ -266,7 +266,11 @@ void OVOneDimensionalCandidatePanelImpl::setAllowsPageWrapping(bool allowsPageWr
 size_t OVOneDimensionalCandidatePanelImpl::currentHightlightIndex() const
 {
     size_t cpp = candidatesPerPage();
-    return cpp ? (currentHightlightIndexInCandidateList() % cpp) : 0;
+    if (!cpp) {
+        return 0;
+    }
+
+    return (size_t)(m_candidateController.selectedCandidateIndex - [m_candidateController candidateIndexAtKeyLabelIndex:0]);
 }
 
 void OVOneDimensionalCandidatePanelImpl::setHighlightIndex(size_t index)
@@ -276,7 +280,7 @@ void OVOneDimensionalCandidatePanelImpl::setHighlightIndex(size_t index)
         return;
     }
     
-    size_t newIndex = currentHightlightIndexInCandidateList() - currentHightlightIndex() + index;
+    size_t newIndex = (size_t)[m_candidateController candidateIndexAtKeyLabelIndex:0] + index;
     if (newIndex >= cc) {
         newIndex = cc - 1;
     }
