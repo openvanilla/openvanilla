@@ -126,6 +126,12 @@
     [self setBoolValue:([self.fieldShouldComposeAtMaximumRadicalLength state] == NSOnState) forKey:@"ShouldComposeAtMaximumRadicalLength"];
     [self setBoolValue:([self.fieldUseSpaceAsFirstCandidateSelectionKey state] == NSOnState) forKey:@"UseSpaceAsFirstCandidateSelectionKey"];
     [self setBoolValue:([self.fieldSendFirstCandidateWithSpaceWithOnePageList state] == NSOnState) forKey:@"SendFirstCandidateWithSpaceWithOnePageList"];
+
+    NSMenuItem *selectedItem = [self.fieldMaximumRadicalLength selectedItem];
+    if (selectedItem) {
+        NSInteger length = [[selectedItem title] integerValue];
+        [self setUnsignedIntegerValue:(NSUInteger)length forKey:@"MaximumRadicalLength"];
+    }
 }
 
 - (IBAction)removeInputMethodAction:(id)sender
