@@ -85,7 +85,7 @@ static NSString *const kNewOVIMTableBasedUserTablePath = @"~/Library/Application
         NSString *currentVersion = nil;
 
         currentVersion = [[currentBundle infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-        if (currentVersion && [currentVersion compare:_installingVersion] == NSOrderedAscending) {
+        if (currentVersion && [currentVersion compare:_installingVersion options:NSNumericSearch] == NSOrderedAscending) {
             _upgrading = YES;
         }
         else if (!currentVersion) {
