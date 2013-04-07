@@ -1,8 +1,8 @@
 //
-// OVInputMethodController.h
+// OVAFAssociatedPhrases.h
 //
-// Copyright (c) 2004-2012 Lukhnos Liu (lukhnos at openvanilla dot org)
-// 
+// Copyright (c) 2004-2013 Lukhnos Liu (lukhnos at openvanilla dot org)
+//
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -25,21 +25,35 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Cocoa/Cocoa.h>
-#import <InputMethodKit/InputMethodKit.h>
-#import "OpenVanilla.h"
-#import "OVTextBufferImpl.h"
 
-using namespace OpenVanilla;
+#ifndef OVAFAssociatedPhrases_h
+#define OVAFAssociatedPhrases_h
 
-@interface OVInputMethodController : IMKInputController
-{
-@protected
-    OVTextBufferImpl *_composingText;
-    OVTextBufferImpl *_readingText;
-    OVEventHandlingContext *_inputMethodContext;
-    OVEventHandlingContext *_associatedPhrasesContext;
-    BOOL _associatedPhrasesContextInUse;
-    id _currentClient;
-}
-@end
+#include "OpenVanilla.h"
+
+namespace OpenVanilla {
+    using namespace std;
+
+    class OVAFAssociatedPhrasesContext;
+
+    class OVAFAssociatedPhrases : public OVAroundFilter {
+    public:
+        OVAFAssociatedPhrases(const string& tablePath);
+        ~OVAFAssociatedPhrases();
+
+        virtual OVEventHandlingContext* createContext();
+        virtual const string identifier() const;
+        virtual bool initialize(OVPathInfo* pathInfo, OVLoaderService* loaderService);
+
+    private:
+        string m_tablePath;
+        OVFileTimestamp m_tableTimestamp;
+
+    protected:
+        friend class OVAFAssociatedPhrasesContext;
+        virtual void checkTable();
+        OVCINDataTable *m_table;
+    };
+};
+
+#endif

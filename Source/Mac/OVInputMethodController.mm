@@ -52,17 +52,10 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
-    if (_composingText) {
-        delete _composingText;
-    }
-
-    if (_readingText) {
-        delete _readingText;
-    }
-
-    if (_inputMethodContext) {
-        delete _inputMethodContext;
-    }
+    delete _composingText;
+    delete _readingText;
+    delete _inputMethodContext;
+    delete _associatedPhrasesContext;
 
     [super dealloc];
 }
@@ -143,10 +136,18 @@
         _inputMethodContext = [OVModuleManager defaultManager].activeInputMethod->createContext();
     }
 
+    if (!_associatedPhrasesContext && [OVModuleManager defaultManager].associatedPhrasesModule) {
+        _associatedPhrasesContext = [OVModuleManager defaultManager].associatedPhrasesModule->createContext();
+    }
+
     if (_inputMethodContext) {
         _inputMethodContext->startSession([OVModuleManager defaultManager].loaderService);
     }
 
+    if (_associatedPhrasesContext) {
+        _associatedPhrasesContext->startSession([OVModuleManager defaultManager].loaderService);
+    }
+    
     _currentClient = client;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCandidateSelected:) name:OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification object:nil];
@@ -160,6 +161,15 @@
 {
     if (_inputMethodContext) {
         _inputMethodContext->stopSession([OVModuleManager defaultManager].loaderService);
+        delete _inputMethodContext;
+        _inputMethodContext = 0;
+    }
+
+    if (_associatedPhrasesContext) {
+        _associatedPhrasesContext->stopSession([OVModuleManager defaultManager].loaderService);
+        delete _associatedPhrasesContext;
+        _associatedPhrasesContext = 0;
+        _associatedPhrasesContextInUse = NO;
     }
 
     // clean up reading buffer residue if not empty
@@ -361,7 +371,20 @@
     }
 
     if (!candidatePanelFallThrough) {
-        handled = _inputMethodContext->handleKey(&key, _readingText, _composingText, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
+        if (_associatedPhrasesContextInUse) {
+            handled = _associatedPhrasesContext->handleKey(&key, _readingText, _composingText, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
+            _associatedPhrasesContextInUse = NO;
+        }
+        else {
+            handled = _inputMethodContext->handleKey(&key, _readingText, _composingText, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
+            
+            if (_composingText->isCommitted()) {
+                string commitText = _composingText->composedCommittedText();
+
+                _associatedPhrasesContextInUse = _associatedPhrasesContext->handleDirectText(commitText, _readingText, _composingText, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
+                cerr << "in use: " << (bool)_associatedPhrasesContextInUse << "\n";
+            }
+        }
     }
 
     if (_composingText->isCommitted()) {

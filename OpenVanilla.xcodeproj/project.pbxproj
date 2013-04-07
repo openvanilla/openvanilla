@@ -18,6 +18,9 @@
 		6A0E0AD41623EDF5004FED10 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0E0AC91623EDF5004FED10 /* main.m */; };
 		6A0E0AD51623EE82004FED10 /* OpenVanilla-App.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2515CD617D0080EE7D /* OpenVanilla-App.icns */; };
 		6A0E0AD61623EEDB004FED10 /* OpenVanilla.app in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */; };
+		6A2793C4171201C000F1E13D /* OVAFAssociatedPhrases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A2793C0171201C000F1E13D /* OVAFAssociatedPhrases.cpp */; };
+		6A2793C5171201C000F1E13D /* OVAFAssociatedPhrasesContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A2793C2171201C000F1E13D /* OVAFAssociatedPhrasesContext.cpp */; };
+		6A2793CA171209E200F1E13D /* associated-phrases.cin in Copy Associated Phrases Table */ = {isa = PBXBuildFile; fileRef = 6A2793C7171209A400F1E13D /* associated-phrases.cin */; };
 		6A30CB0616329CF400DC0755 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A30CB0416329CF400DC0755 /* Localizable.strings */; };
 		6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */; };
 		6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm */; };
@@ -90,6 +93,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		6A2793C9171209CE00F1E13D /* Copy Associated Phrases Table */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = DataTables/AssociatedPhrases;
+			dstSubfolderSpec = 7;
+			files = (
+				6A2793CA171209E200F1E13D /* associated-phrases.cin in Copy Associated Phrases Table */,
+			);
+			name = "Copy Associated Phrases Table";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6A8832331605C1D800FBEB85 /* Copy Array Input Method Tables */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -141,6 +155,11 @@
 		6A0E0ACB1623EDF5004FED10 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hant"; path = "zh-Hant.lproj/License.rtf"; sourceTree = "<group>"; };
 		6A0E0ACC1623EDF5004FED10 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6A0E0ACD1623EDF5004FED10 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		6A2793C0171201C000F1E13D /* OVAFAssociatedPhrases.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVAFAssociatedPhrases.cpp; sourceTree = "<group>"; };
+		6A2793C1171201C000F1E13D /* OVAFAssociatedPhrases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVAFAssociatedPhrases.h; sourceTree = "<group>"; };
+		6A2793C2171201C000F1E13D /* OVAFAssociatedPhrasesContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVAFAssociatedPhrasesContext.cpp; sourceTree = "<group>"; };
+		6A2793C3171201C000F1E13D /* OVAFAssociatedPhrasesContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVAFAssociatedPhrasesContext.h; sourceTree = "<group>"; };
+		6A2793C7171209A400F1E13D /* associated-phrases.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "associated-phrases.cin"; sourceTree = "<group>"; };
 		6A30CB0516329CF400DC0755 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6A30CB0816329CFC00DC0755 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6A30CB0916329D2300DC0755 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -338,6 +357,25 @@
 			);
 			name = Installer;
 			path = Source/Mac/Installer;
+			sourceTree = "<group>";
+		};
+		6A2793BF171201C000F1E13D /* AssociatedPhrases */ = {
+			isa = PBXGroup;
+			children = (
+				6A2793C0171201C000F1E13D /* OVAFAssociatedPhrases.cpp */,
+				6A2793C1171201C000F1E13D /* OVAFAssociatedPhrases.h */,
+				6A2793C2171201C000F1E13D /* OVAFAssociatedPhrasesContext.cpp */,
+				6A2793C3171201C000F1E13D /* OVAFAssociatedPhrasesContext.h */,
+			);
+			path = AssociatedPhrases;
+			sourceTree = "<group>";
+		};
+		6A2793C61712098C00F1E13D /* Associated Phrases */ = {
+			isa = PBXGroup;
+			children = (
+				6A2793C7171209A400F1E13D /* associated-phrases.cin */,
+			);
+			name = "Associated Phrases";
 			sourceTree = "<group>";
 		};
 		6A63D1BC162F1DBA001175D2 /* VXHanConvert */ = {
@@ -578,6 +616,7 @@
 			isa = PBXGroup;
 			children = (
 				6A88323A1605C20100FBEB85 /* Array */,
+				6A2793C61712098C00F1E13D /* Associated Phrases */,
 				6A7789F416312163000C85A2 /* Tables Arranged for Mac */,
 			);
 			path = DataTables;
@@ -587,6 +626,7 @@
 			isa = PBXGroup;
 			children = (
 				6A88322B1605C0A300FBEB85 /* Array */,
+				6A2793BF171201C000F1E13D /* AssociatedPhrases */,
 				6ACB49C815E49ECB00380B82 /* TableBased */,
 			);
 			path = Modules;
@@ -685,6 +725,7 @@
 				6ABBAEEE15CD58F90080EE7D /* Resources */,
 				6ACB49B515E49E1400380B82 /* Copy TableBased Input Method Tables */,
 				6A8832331605C1D800FBEB85 /* Copy Array Input Method Tables */,
+				6A2793C9171209CE00F1E13D /* Copy Associated Phrases Table */,
 				6ABBAF3215CD62440080EE7D /* Install and Activate Input Method (Run Script) */,
 			);
 			buildRules = (
@@ -831,6 +872,8 @@
 				6A63D1C3162F1DBA001175D2 /* VXHCTC2SCTable.c in Sources */,
 				6A616643162FD8420042559F /* OVNonModalAlertWindowController.m in Sources */,
 				6ABC1D931631AC7C005FF9B5 /* OVUpdateChecker.m in Sources */,
+				6A2793C4171201C000F1E13D /* OVAFAssociatedPhrases.cpp in Sources */,
+				6A2793C5171201C000F1E13D /* OVAFAssociatedPhrasesContext.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

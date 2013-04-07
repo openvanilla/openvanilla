@@ -27,6 +27,7 @@
 
 #import "OVModuleManager.h"
 #import <set>
+#import "OVAFAssociatedPhrasesContext.h"
 #import "OVCandidateServiceImpl.h"
 #import "OVConstants.h"
 #import "OVIMArray.h"
@@ -67,6 +68,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
 @synthesize inputMethodMap = _inputMethodMap;
 @synthesize currentLocale = _currentLocale;
 @synthesize inputMethodIdentifiers = _inputMethodIdentifiers;
+@synthesize associatedPhrasesModule = _associatedPhrasesModule;
 
 + (OVModuleManager *)defaultManager
 {
@@ -126,6 +128,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
         delete (*i).second;
     }
     delete _inputMethodMap;
+    delete _associatedPhrasesModule;
+    
     [_inputMethodIdentifiers release];
     [_currentLocale release];
     [super dealloc];
@@ -248,6 +252,18 @@ static string InputMethodConfigIdentifier(const string& identifier)
             }
         }
     }
+
+    do {
+        OVPathInfo info;
+        NSString *associatedPhraseTable = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/AssociatedPhrases/associated-phrases.cin"];
+        _associatedPhrasesModule = new OVAFAssociatedPhrases([associatedPhraseTable UTF8String]);
+        bool result = _associatedPhrasesModule->initialize(&info, self.loaderService);
+        if (!result) {
+            delete _associatedPhrasesModule;
+            _associatedPhrasesModule = 0;
+        }
+    } while(0);
+
 
     [self handleLocaleChangeNotification:nil];
     [self synchronizeActiveInputMethodSettings];

@@ -34,6 +34,7 @@ namespace OpenVanilla {
     class OVLoaderServiceImpl;
     class OVCandidateServiceImpl;
     class OVInputMethod;
+    class OVAroundFilter;
     typedef std::map<std::string, OVInputMethod *> OVInputMethodMap;
 };
 
@@ -47,6 +48,8 @@ namespace OpenVanilla {
     NSMutableArray *_inputMethodIdentifiers;
     NSMutableDictionary *_customTableBasedInputMethodIdentifierTableNameMap;
     OpenVanilla::OVInputMethodMap* _inputMethodMap;
+
+    OpenVanilla::OVAroundFilter* _associatedPhrasesModule;
 
     OpenVanilla::OVInputMethod* _activeInputMethod;
     NSString *_currentLocale;
@@ -81,6 +84,8 @@ namespace OpenVanilla {
 @property (assign) BOOL simplifiedToTraditionalChineseFilterEnabled;
 
 @property (copy) NSString *sharedAlphanumericKeyboardLayoutIdentifier;
+
+@property (assign, readonly) OpenVanilla::OVAroundFilter* associatedPhrasesModule;
 @end
 
 extern NSString *const OVModuleManagerDidReloadNotification;
