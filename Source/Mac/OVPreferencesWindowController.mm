@@ -34,7 +34,6 @@ static NSString *const kLocalizedNameKey = @"LocalizedNameKey";
 static NSString *const kControllerKey = @"ControllerKey";
 static NSString *const kGeneralSettingIdentifier = @"GeneralSettingIdentifier";
 static NSString *const kAddInputMethodIdentifier = @"AddInputMethodIdentifier";
-static NSString *const kCheckUpdateIdentifier = @"CheckUpdateIdentifier";
 
 
 static void ListTitlesInView(NSView *view, NSMutableDictionary *dict)

@@ -75,7 +75,7 @@
     [panel setAllowedFileTypes:[NSArray arrayWithObject:@"cin"]];
 
     [panel beginWithCompletionHandler:^(NSInteger result) {
-        if (!result == NSFileHandlingPanelOKButton) {
+        if (result != NSFileHandlingPanelOKButton) {
             return;
         }
 
