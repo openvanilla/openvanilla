@@ -46,7 +46,7 @@ Mac OS X 10.6.8 以上版本。
 
 ### Q: 如何製作自己的 .cin 輸入法表格檔？
 
-請參考這份[舊文件](https://docs.google.com/document/pub?id=1ew408138FCRivleknnw5IRnFqSFH3bHnDyammmiasDo)。請注意文件內容已經有許多地方過時。OpenVanilla 1.0 版不再需要使用者自行複製檔案到特定目錄（目錄也已經改名），現在從偏好設定就可以加入或移除自訂的輸入法了。
+請參考這份[舊文件](CinHowTo.markdown)。請注意文件內容已經有許多地方過時。OpenVanilla 1.0 版不再需要使用者自行複製檔案到特定目錄（目錄也已經改名），現在從偏好設定就可以加入或移除自訂的輸入法了。
 
 ### Q: 其他非表格類的輸入法，要去哪裡取得？
 
@@ -107,4 +107,3 @@ OpenVanilla 的前身是一個名叫 VanillaInput 的輸入法軟體，原先 (2
 ### Q: 有使用上的問題，要去哪裡問？
 
 OpenVanilla 的 [Google Groups 線上論壇](https://groups.google.com/forum/?fromgroups/openvanilla#!forum/openvanilla)。或是到 Twitter 留言給 [@OpenVanilla](https://twitter.com/OpenVanilla)。
-
