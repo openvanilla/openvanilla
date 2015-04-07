@@ -12151,10 +12151,6 @@ zyut   蕝
 zyut   嘬
 zyut   腏
 zyut   歠
-#
-# The following are HKSCS, from Unihan.txt version 3.1.1
-# Last updated: 2001-09-05
-#
 gung	䳍
 baa	䰾
 jit	㗁
@@ -12686,7 +12682,6 @@ saam	彡
 pok	攴
 nik	疒
 coek	辵
-# leoi5	裏
 kau	䊵
 din	㙉
 tin	㙉
@@ -12785,56 +12780,34 @@ zan	眞
 zoek	着
 zaau	着
 si	㺨
-#
-# The following are HKSCS, added by Anthony Fok <anthony@thizlinux.com>
-# Last updated: 2001-09-05
-#
 sung   餸
 so     儍
 zung   糭
-# 粬
 loeng  両
 wai    衞
 bou    埗
 haa    吓
 wing   咏
-# 吔
-# 嚒
 lak    嘞
 bo     噃
 bo     𡃓
 gaak   𠺝
 gaa    㗎
 tam    𠱁
-# 𠲖
-# 𠹶
 gan    𡁵
-# 咔
-# 唓
 wui    滙
 fung   峯
 ling   灵
 soeng  双
 lip    𨋢
 nei    祢
-# 脗
 hyun   煊
 gui    攰
-# 脉
-# 緜
 ci     糍
-# 𠈌
 gaan   鐧
 gaan   𨰝
 laap   𩶘
 laap   鱲
-# 鱏
-# 鱓
-# 鱻
 man    鰵
-# 鰐
-# 魿
-# 鯏
-# 鼹
 bit    𡋾
 %chardef end

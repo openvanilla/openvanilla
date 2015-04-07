@@ -12678,10 +12678,6 @@ zyut6   拙
 zyut6   輟
 zyut6   絀
 zyut6   黜
-#
-# The following are HKSCS, from Unihan.txt version 3.1.1
-# Last updated: 2001-09-05
-#
 gung1  䳍
 baa1   䰾
 jit6   㗁
@@ -13238,7 +13234,6 @@ saam1  彡
 pok3   攴
 nik6   疒
 coek3  辵
-# leoi5	裏	# F9D8 inside, interior, within
 kau4   䊵
 din6   㙉
 tin2   㙉
@@ -13340,56 +13335,34 @@ zoek3  着
 zaau1  着
 zaau2  着
 si1    㺨
-#
-# The following are HKSCS, added by Anthony Fok <anthony@thizlinux.com>
-# Last updated: 2001-09-05
-#
 sung3   餸
 so4     儍
 zung2   糭
-# 粬
 loeng2  両
 wai6    衞
 bou2    埗
 haa2    吓
 wing6   咏
-# 吔
-# 嚒
 lak3    嘞
 bo3     噃
 bo3     𡃓
 gaak3   𠺝
 gaa3    㗎
 tam3    𠱁
-# 𠲖
-# 𠹶
 gan2    𡁵
-# 咔
-# 唓
 wui6    滙
 fung1   峯
 ling4   灵
 soeng1  双
 lip1    𨋢
 nei5    祢
-# 脗
 hyun1   煊
 gui6    攰
-# 脉
-# 緜
 ci4     糍
-# 𠈌
 gaan2   鐧
 gaan2   𨰝
 laap6   𩶘
 laap6   鱲
-# 鱏
-# 鱓
-# 鱻
 man5    鰵
-# 鰐
-# 魿
-# 鯏
-# 鼹
 bit6    𡋾
 %chardef end
