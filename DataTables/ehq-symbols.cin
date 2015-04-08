@@ -433,8 +433,8 @@ gya	ぎゃ
 gyi	ぎぃ
 gyu	ぎゅ
 gye	ぎぇ
-gyo	ぎょ		
-gyou	ぎょう		
+gyo	ぎょ
+gyou	ぎょう
 gu     ぐ
 gwa	ぐぁ
 gwi	ぐぃ
@@ -687,7 +687,7 @@ vyi	ヴぃ
 vyi	ヴィ
 vyu	ヴゅ
 vyu	ヴュ
-vyo	ヴョ	
+vyo	ヴョ
 XU     ゥ
 E      エ
 XE     ェ
@@ -1241,9 +1241,9 @@ mid ㊥
 zz ㊦
 zz ☟
 down ㊦
-down ☟ 
+down ☟
 aa ㊧
-left ㊧ 
+left ㊧
 dd ㊨
 right ㊨
 cal ㎈
@@ -1268,7 +1268,7 @@ mb ㎆
 gb ㎇
 m2 ㎡
 mm ㎜
-mm ㎟	
+mm ㎟
 mm2 ㎟
 mm ㎣
 mm3 ㎣
@@ -1635,7 +1635,7 @@ man ㊚
 + ✤
 + ✥
 cross †
-crose ‡
+cross ‡
 cross ✙
 cross ✚
 cross ✛
@@ -1644,7 +1644,7 @@ cross ✝
 cross ✞
 cross ✟
 cross ✠
-corss ☩
+cross ☩
 cross ♱
 cross ♰
 cross ✢
