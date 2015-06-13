@@ -80,6 +80,7 @@ public:
     }
     virtual int keyEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     virtual void clear();
+    bool isComposing();
 private:
     void changeState(OV_Array::STATE s);
     void changeBackState(OV_Array::STATE s);

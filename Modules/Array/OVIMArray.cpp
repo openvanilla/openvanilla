@@ -75,7 +75,7 @@ OVEventHandlingContext* OpenVanilla::OVIMArray::createContext()
         m_legacyArrayModule->setForceSP(m_cfgForceSP);
     }
     
-    ::OVInputMethodContext* legacyContext = m_legacyArrayModule->newContext();
+    ::OVIMArrayContext* legacyContext = static_cast<::OVIMArrayContext*>(m_legacyArrayModule->newContext());
     OpenVanilla::OVIMArrayContext* context = new OpenVanilla::OVIMArrayContext(legacyContext);
     return context;
 }
