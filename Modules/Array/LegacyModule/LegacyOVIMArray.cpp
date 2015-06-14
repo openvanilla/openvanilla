@@ -48,6 +48,11 @@ void OVIMArrayContext::clear()
     changeState(STATE_WAIT_KEY1);
 }
 
+bool OVIMArrayContext::isComposing()
+{
+    return state == STATE_WAIT_CANDIDATE;
+}
+
 void OVIMArrayContext::updateDisplay(OVBuffer* buf)
 {
     buf->clear();
@@ -296,7 +301,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
 	if (!keyseq.hasWildcardCharacter() && (keycode == '?' || keycode== '*')) {
 		murmur("candidate canceled because of wildcard");
 		clearCandidate(candi_bar);
-		state = STATE_WAIT_KEY3;
+		changeState(STATE_WAIT_KEY3);
 	}
 
     if( state == STATE_WAIT_CANDIDATE ){
@@ -396,7 +401,7 @@ void OVIMArrayContext::changeBackState(STATE s)
 void OVIMArrayContext::changeState(STATE s)
 {
     murmur("OVIMArray change state: %d -> %d", state, s);
-    state = s;  
+    state = s;
 }
 
 int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path)

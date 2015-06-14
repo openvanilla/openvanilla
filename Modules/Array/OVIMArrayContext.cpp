@@ -32,7 +32,7 @@
 
 using namespace OpenVanilla;
 
-OpenVanilla::OVIMArrayContext::OVIMArrayContext(::OVInputMethodContext* legacyContext)
+OpenVanilla::OVIMArrayContext::OVIMArrayContext(::OVIMArrayContext* legacyContext)
     : m_legacyContext(legacyContext)
 {
 }
@@ -49,12 +49,19 @@ void OpenVanilla::OVIMArrayContext::stopSession(OVLoaderService* loaderService)
 
 bool OpenVanilla::OVIMArrayContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService)
 {
+    composingText->appendText(readingText->composedText());
     OVLegacyKeyCodeWrapper legacyKey(key);
     OVLegacyBufferWrapper legacyBuffer(composingText, candidateService);
     OVLegacyCandidateWrapper legacyCandidate(candidateService, loaderService);
     OVLegacyServiceWrapper legacyService(loaderService, composingText);
 
     int handled = m_legacyContext->keyEvent(&legacyKey, &legacyBuffer, &legacyCandidate, &legacyService);
+    if (m_legacyContext->isComposing()) {
+        readingText->clear();
+    } else {
+        readingText->setText(composingText->composedText());
+        composingText->setText(""); // use `setText` to keep its commit state
+    }
     return handled;
 }
 
