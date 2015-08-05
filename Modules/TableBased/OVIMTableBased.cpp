@@ -49,10 +49,8 @@ OVIMTableBased::OVIMTableBased(const string& tablePath)
     // cj*.cin: Cangjei uses the default value
     if (OVWildcard::Match(filename, "simplex*.cin") || filename == "qcj.cin") {
         m_configMaximumRadicalLength = 2;
-    }
-    else if (OVWildcard::Match(filename, "dayi*.cin")) {
+    } else if (OVWildcard::Match(filename, "dayi*.cin")) {
         m_configMaximumRadicalLength = 4;
-        m_configUseSpaceAsFirstCandidateSelectionKey = false;
         m_configUseSpaceAsFirstCandidateSelectionKey = true;
     } else if (OVWildcard::Match(filename, "ehq*.cin")) {
         m_configMaximumRadicalLength = 10;
