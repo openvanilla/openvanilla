@@ -101,7 +101,7 @@ const string OVIMTableBased::localizedName(const string& locale)
     bool find;
     string value;
 
-    if (locale == "zh-Hant" || locale == "zh-TW" || locale == "zh_TW" || locale == "zh-HK" || locale == "zh_HK") {
+    if (OVWildcard::Match(locale, "zh-Hant-*") || locale == "zh-Hant" || locale == "zh-TW" || locale == "zh_TW" || locale == "zh-HK" || locale == "zh_HK") {
         find = fetchTableProperty("tcname", value);
         if (find) {
             return value;
