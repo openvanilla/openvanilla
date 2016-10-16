@@ -1,7 +1,9 @@
 Current contributors:
 
-*	lukhnos - current 1.0 code base
-
+*	Lukhnos Liu (@lukhnos)
+*	Hill Ma (@mahiuchun)
+*       CHOU Sheng-kai (@syimyuzya)
+*	Google Inc.
 
 Past contributors:
 
