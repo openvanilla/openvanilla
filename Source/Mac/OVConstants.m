@@ -61,7 +61,7 @@ const NSTimeInterval OVNextUpdateCheckRemindLaterInterval = 86400.0 * 7.0;
 const NSTimeInterval OVNextUpdateCheckRetryInterval = 3600.0;
 #endif
 
-NSString *const OVMainSiteURLString = @"http://openvanilla.org";
-NSString *const OVUserGuideURLString = @"http://openvanilla.org/docs/";
-NSString *const OVUpdateCheckInfoURLString = @"http://openvanilla.org/updates/Info.plist";
-NSString *const OVUpdateDownloadURLString = @"http://openvanilla.org/updates/";
+NSString *const OVMainSiteURLString = @"https://openvanilla.org";
+NSString *const OVUserGuideURLString = @"https://openvanilla.org/docs/";
+NSString *const OVUpdateCheckInfoURLString = @"https://openvanilla.org/updates/Info.plist";
+NSString *const OVUpdateDownloadURLString = @"https://openvanilla.org/updates/";

@@ -34,9 +34,9 @@ static NSString *const kDestinationPartial = @"~/Library/Input Methods/";
 static NSString *const kTargetPartialPath = @"~/Library/Input Methods/OpenVanilla.app";
 static NSString *const kTargetFullBinPartialPath = @"~/Library/Input Methods/OpenVanilla.app/Contents/MacOS/OpenVanilla";
 static NSString *const kLegacyAppPath = @"/Library/Input Methods/OpenVanilla.app";
-static NSString *const kLogoutRequirementExplanationURLString = @"http://openvanilla.org/docs/why-logout-is-needed.html";
-static NSString *const kLegacyMigrationURLString = @"http://openvanilla.org/docs/migrate-from-old-openvanilla.html";
-static NSString *const kMcBopomofoURLString = @"http://mcbopomofo.openvanilla.org";
+static NSString *const kLogoutRequirementExplanationURLString = @"https://openvanilla.org/docs/why-logout-is-needed.html";
+static NSString *const kLegacyMigrationURLString = @"https://openvanilla.org/docs/migrate-from-old-openvanilla.html";
+static NSString *const kMcBopomofoURLString = @"https://mcbopomofo.openvanilla.org";
 static NSString *const kPreviousVersionSettings = @"~/Library/Preferences/org.openvanilla.plist";
 
 static NSString *const kLegacyOVIMGenericUserTablePath = @"~/Library/Application Support/OpenVanilla/UserData/OVIMGeneric";
