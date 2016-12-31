@@ -43,3 +43,5 @@
 "Log Out" = "登出";
 "Why I Need This?" = "为什么需要登出？";
 "Finish" = "结束";
+"Attention" = "请注意";
+"OpenVanilla is upgraded, but please log out or reboot for the new version to be fully functional." = "OpenVanilla 安装完成，但建议您登出或重新开机，以便顺利使用新版。";

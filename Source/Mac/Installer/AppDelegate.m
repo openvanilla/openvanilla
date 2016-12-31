@@ -26,6 +26,7 @@
 //
 
 #import "AppDelegate.h"
+#import <sys/mount.h>
 
 static NSString *const kTargetBin = @"OpenVanilla";
 static NSString *const kTargetType = @"app";
@@ -42,6 +43,9 @@ static NSString *const kPreviousVersionSettings = @"~/Library/Preferences/org.op
 static NSString *const kLegacyOVIMGenericUserTablePath = @"~/Library/Application Support/OpenVanilla/UserData/OVIMGeneric";
 static NSString *const kNewOVIMTableBasedUserTablePath = @"~/Library/Application Support/OpenVanilla/UserData/TableBased";
 
+static const NSTimeInterval kTranslocationRemovalTickInterval = 0.5;
+static const NSTimeInterval kTranslocationRemovalDeadline = 60.0;
+
 @implementation AppDelegate
 @synthesize installButton = _installButton;
 @synthesize cancelButton = _cancelButton;
@@ -50,6 +54,7 @@ static NSString *const kNewOVIMTableBasedUserTablePath = @"~/Library/Application
 - (void)dealloc
 {
     [_installingVersion release];
+    [_translocationRemovalStartTime release];
     [super dealloc];
 }
 
@@ -129,8 +134,17 @@ static NSString *const kNewOVIMTableBasedUserTablePath = @"~/Library/Application
 {
     [_cancelButton setEnabled:NO];
     [_installButton setEnabled:NO];
+    [self removeThenInstallInputMethod];
+}
 
+- (void)removeThenInstallInputMethod
+{
     if ([[NSFileManager defaultManager] fileExistsAtPath:[kTargetPartialPath stringByExpandingTildeInPath]]) {
+
+        BOOL shouldWaitForTranslocationRemoval =
+            [self appBundleTranslocatedToARandomizedPath:kTargetPartialPath] &&
+            [self.window respondsToSelector:@selector(beginSheet:completionHandler:)];
+
         // http://www.cocoadev.com/index.pl?MoveToTrash
         NSString *sourceDir = [kDestinationPartial stringByExpandingTildeInPath];
         NSString *trashDir = [NSHomeDirectory() stringByAppendingPathComponent:@".Trash"];
@@ -147,8 +161,48 @@ static NSString *const kNewOVIMTableBasedUserTablePath = @"~/Library/Application
 
         NSTask *killTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall" arguments:[NSArray arrayWithObjects: @"-9", kTargetBin, nil]];
         [killTask waitUntilExit];
+
+        if (shouldWaitForTranslocationRemoval) {
+            [self.progressIndicator startAnimation:self];
+            [self.window beginSheet:self.progressSheet completionHandler:^(NSModalResponse returnCode) {
+                // Schedule the install action in runloop so that the sheet gets a change to dismiss itself.
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (returnCode == NSModalResponseContinue) {
+                        [self installInputMethodWithWarning:NO];
+                    } else {
+                        [self installInputMethodWithWarning:YES];
+                    }
+                });
+            }];
+
+            [_translocationRemovalStartTime release];
+            _translocationRemovalStartTime = [[NSDate date] retain];
+            [NSTimer scheduledTimerWithTimeInterval:kTranslocationRemovalTickInterval target:self selector:@selector(timerTick:) userInfo:nil repeats:YES];
+            return;
+        }
     }
     
+    [self installInputMethodWithWarning:NO];
+}
+
+- (void)timerTick:(NSTimer *)timer
+{
+    NSTimeInterval elapsed = [[NSDate date] timeIntervalSinceDate:_translocationRemovalStartTime];
+    [self.progressIndicator setDoubleValue:MIN(elapsed / kTranslocationRemovalDeadline, 1.0)];
+
+    if (elapsed >= kTranslocationRemovalDeadline) {
+        [timer invalidate];
+        [self.window endSheet:self.progressSheet returnCode:NSModalResponseCancel];
+    } else if (![self appBundleTranslocatedToARandomizedPath:kTargetPartialPath]) {
+        [self.progressIndicator setDoubleValue:1.0];
+        [timer invalidate];
+        [self.window endSheet:self.progressSheet returnCode:NSModalResponseContinue];
+    }
+}
+
+
+- (void)installInputMethodWithWarning:(BOOL)warning
+{
     NSTask *cpTask = [NSTask launchedTaskWithLaunchPath:@"/bin/cp" arguments:[NSArray arrayWithObjects:@"-R", [[NSBundle mainBundle] pathForResource:kTargetBin ofType:kTargetType], [kDestinationPartial stringByExpandingTildeInPath], nil]];
     [cpTask waitUntilExit];
     if ([cpTask terminationStatus] != 0) {
@@ -185,7 +239,11 @@ static NSString *const kNewOVIMTableBasedUserTablePath = @"~/Library/Application
         }
     }
     else {
-        NSRunAlertPanel(NSLocalizedString(@"Installation Successful", nil), NSLocalizedString(@"OpenVanilla is ready to use.", nil),  NSLocalizedString(@"OK", nil), nil, nil);
+        if (warning) {
+            NSRunAlertPanel(NSLocalizedString(@"Attention", nil), NSLocalizedString(@"OpenVanilla is upgraded, but please log out or reboot for the new version to be fully functional.", nil),  NSLocalizedString(@"OK", nil), nil, nil);
+        } else {
+            NSRunAlertPanel(NSLocalizedString(@"Installation Successful", nil), NSLocalizedString(@"OpenVanilla is ready to use.", nil),  NSLocalizedString(@"OK", nil), nil, nil);
+        }
     }
 
     [[NSApplication sharedApplication] performSelector:@selector(terminate:) withObject:self afterDelay:0.1];
@@ -200,5 +258,23 @@ static NSString *const kNewOVIMTableBasedUserTablePath = @"~/Library/Application
 - (void)windowWillClose:(NSNotification *)notification
 {
     [NSApp terminate:self];    
+}
+
+// Determines if an app is translocated by Gatekeeper to a randomized path
+// See https://weblog.rogueamoeba.com/2016/06/29/sierra-and-gatekeeper-path-randomization/
+- (BOOL)appBundleTranslocatedToARandomizedPath:(NSString *)bundle
+{
+    const char *bundleAbsPath = [[bundle stringByExpandingTildeInPath] UTF8String];
+    int entryCount = getfsstat(NULL, 0, 0);
+    int entrySize = sizeof(struct statfs);
+    struct statfs *bufs = (struct statfs *)calloc(entryCount, entrySize);
+    entryCount = getfsstat(bufs, entryCount * entrySize, MNT_NOWAIT);
+    for (int i = 0; i < entryCount; i++) {
+        if (!strcmp(bundleAbsPath, bufs[i].f_mntfromname)) {
+            return YES;
+        }
+    }
+    return NO;
+
 }
 @end
