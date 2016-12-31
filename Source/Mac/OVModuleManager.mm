@@ -253,17 +253,14 @@ static string InputMethodConfigIdentifier(const string& identifier)
         }
     }
 
-    do {
-        OVPathInfo info;
-        NSString *associatedPhraseTable = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/AssociatedPhrases/associated-phrases.cin"];
-        _associatedPhrasesModule = new OVAFAssociatedPhrases([associatedPhraseTable UTF8String]);
-        bool result = _associatedPhrasesModule->initialize(&info, self.loaderService);
-        if (!result) {
-            delete _associatedPhrasesModule;
-            _associatedPhrasesModule = 0;
-        }
-    } while(0);
-
+    OVPathInfo info;
+    NSString *associatedPhraseTable = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/AssociatedPhrases/associated-phrases.cin"];
+    _associatedPhrasesModule = new OVAFAssociatedPhrases([associatedPhraseTable UTF8String]);
+    bool result = _associatedPhrasesModule->initialize(&info, self.loaderService);
+    if (!result) {
+        delete _associatedPhrasesModule;
+        _associatedPhrasesModule = 0;
+    }
 
     [self handleLocaleChangeNotification:nil];
     [self synchronizeActiveInputMethodSettings];

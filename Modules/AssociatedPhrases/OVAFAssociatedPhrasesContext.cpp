@@ -48,6 +48,10 @@ bool OVAFAssociatedPhrasesContext::handleKey(OVKey* key, OVTextBuffer* readingTe
 		return false;
 	}
 
+    if (m_candidates.empty()) {
+        return false;
+    }
+
      OVOneDimensionalCandidatePanel* panel = candidateService->useOneDimensionalCandidatePanel();
 
     if (key->keyCode() == OVKeyCode::PageUp) {
@@ -66,7 +70,7 @@ bool OVAFAssociatedPhrasesContext::handleKey(OVKey* key, OVTextBuffer* readingTe
     size_t keyIndex;
     size_t selKeyLength = strlen(kSelectionKeys);
 
-    for (keyIndex = 0; keyIndex < selKeyLength; key++) {
+    for (keyIndex = 0; keyIndex < selKeyLength; keyIndex++) {
         if (key->keyCode() == kSelectionKeys[keyIndex]) break;
     }
 
@@ -85,6 +89,7 @@ bool OVAFAssociatedPhrasesContext::handleKey(OVKey* key, OVTextBuffer* readingTe
         keyHandled = true;
     }
 
+    m_candidates.clear();
     panel->hide();
     panel->reset();
     panel->updateDisplay();
@@ -105,33 +110,29 @@ bool OVAFAssociatedPhrasesContext::handleKey(OVKey* key, OVTextBuffer* readingTe
 bool OVAFAssociatedPhrasesContext::handleDirectText(const string& text, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService)
 {
 	if (!m_module->m_table) {
-        cerr << "1\n";
 		return false;
 	}
 
     if (!(readingText->isEmpty() && composingText->isEmpty())) {
-        cerr << "2\n";
         return false;
     }
     
     vector<string> codepoints = OVUTF8Helper::SplitStringByCodePoint(text);
     if (codepoints.size() != 1) {
-        cerr << "3\n";
         return false;
     }
 
     composingText->setText(text);
     composingText->commit();
 
-    vector<string> candidates = m_module->m_table->findChardef(text);
-    cerr << "text: " << text << ", c: " << candidates.size() << endl;
-
-    if (candidates.size()) {
+    m_candidates = m_module->m_table->findChardef(text);
+    if (m_candidates.size()) {
         OVOneDimensionalCandidatePanel* panel = candidateService->useOneDimensionalCandidatePanel();
         OVCandidateList* list = panel->candidateList();
-        list->setCandidates(candidates);
+        list->setCandidates(m_candidates);
+
         panel->setCandidateKeys(kSelectionKeys, loaderService);
-        panel->setCandidatesPerPage(9);
+        panel->setCandidatesPerPage(10);
         panel->updateDisplay();
         panel->show();
         return true;

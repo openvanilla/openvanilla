@@ -68,7 +68,6 @@ bool OVAFAssociatedPhrases::initialize(OVPathInfo* pathInfo, OVLoaderService* lo
 void OVAFAssociatedPhrases::checkTable()
 {
     if (!OVPathHelper::PathExists(m_tablePath)) {
-        cerr << "a\n";
         return;
     }
 
@@ -76,7 +75,6 @@ void OVAFAssociatedPhrases::checkTable()
 
     // if table exists and the timestamp is not newer, bail
     if (m_table && !(timestamp > m_tableTimestamp)) {
-        cerr << "b\n";
         return;
     }
 
@@ -90,5 +88,4 @@ void OVAFAssociatedPhrases::checkTable()
     m_tableTimestamp = timestamp;
     OVCINDataTableParser parser;
     m_table = parser.CINDataTableFromFileName(m_tablePath);
-    cerr << "table? " << (void*)m_table << "\n";
 }

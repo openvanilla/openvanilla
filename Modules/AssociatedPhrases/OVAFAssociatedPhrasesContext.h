@@ -44,6 +44,7 @@ namespace OpenVanilla {
 
 	protected:
 		OVAFAssociatedPhrases* m_module;
+        vector<string> m_candidates;
     };
 };
 

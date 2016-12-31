@@ -144,6 +144,7 @@
         _inputMethodContext->startSession([OVModuleManager defaultManager].loaderService);
     }
 
+    _associatedPhrasesContextInUse = NO;
     if (_associatedPhrasesContext) {
         _associatedPhrasesContext->startSession([OVModuleManager defaultManager].loaderService);
     }
@@ -329,6 +330,8 @@
     bool candidatePanelFallThrough = false;
 
     OVOneDimensionalCandidatePanelImpl* panel = dynamic_cast<OVOneDimensionalCandidatePanelImpl*>([OVModuleManager defaultManager].candidateService->currentCandidatePanel());
+    
+    // Here we assume the associated phrase context never yields control to the panel.
     if (panel && panel->isInControl()) {
         OVOneDimensionalCandidatePanelImpl::KeyHandlerResult result = panel->handleKey(&key);
         switch (result) {
@@ -373,21 +376,31 @@
     if (!candidatePanelFallThrough) {
         if (_associatedPhrasesContextInUse) {
             handled = _associatedPhrasesContext->handleKey(&key, _readingText, _composingText, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
-            _associatedPhrasesContextInUse = NO;
         }
-        else {
-            handled = _inputMethodContext->handleKey(&key, _readingText, _composingText, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
-            
-            if (_composingText->isCommitted()) {
-                string commitText = _composingText->composedCommittedText();
 
-                _associatedPhrasesContextInUse = _associatedPhrasesContext->handleDirectText(commitText, _readingText, _composingText, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
-                cerr << "in use: " << (bool)_associatedPhrasesContextInUse << "\n";
-            }
+        if (handled) {
+            _associatedPhrasesContextInUse = YES;
+        } else {
+            _associatedPhrasesContextInUse = NO;
+            handled = _inputMethodContext->handleKey(&key, _readingText, _composingText, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);            
         }
     }
 
     if (_composingText->isCommitted()) {
+        string commitText = _composingText->composedCommittedText();
+
+        if (_associatedPhrasesContext) {
+            OVTextBufferImpl tempReading;
+            OVTextBufferImpl tempComposing;
+            _associatedPhrasesContextInUse = _associatedPhrasesContext->handleDirectText(commitText, &tempReading, &tempComposing, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
+            
+            if (tempComposing.isCommitted()) {
+                _composingText->finishCommit();
+                _composingText->setText(tempComposing.composedCommittedText());
+                _composingText->commit();
+            }
+        }
+
         [self commitComposition:client];
         _composingText->finishCommit();
     }
@@ -442,7 +455,14 @@
     OVModuleManager *manager = [OVModuleManager defaultManager];
     OVOneDimensionalCandidatePanel *panel = manager.candidateService->currentCandidatePanel();
 
-    bool handled = _inputMethodContext->candidateSelected(manager.candidateService, string([candidate UTF8String]), (size_t)index, _readingText, _composingText, manager.loaderService);
+    bool handled;
+    if (_associatedPhrasesContextInUse) {
+        handled = _associatedPhrasesContext->candidateSelected(manager.candidateService, string([candidate UTF8String]), (size_t)index, _readingText, _composingText, manager.loaderService);
+        _associatedPhrasesContextInUse = NO;
+    } else {
+        handled = _inputMethodContext->candidateSelected(manager.candidateService, string([candidate UTF8String]), (size_t)index, _readingText, _composingText, manager.loaderService);        
+    }
+
     if (handled) {
         panel->hide();
         panel->cancelEventHandler();
