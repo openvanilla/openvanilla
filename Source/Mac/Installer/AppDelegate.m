@@ -80,17 +80,16 @@ static const NSTimeInterval kTranslocationRemovalDeadline = 60.0;
     [[self.textView textStorage] setAttributedString:attrStr];
     
     NSBundle *installingBundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:kTargetBin ofType:kTargetType]];
-    _installingVersion = [[[installingBundle infoDictionary] objectForKey:@"CFBundleShortVersionString"] retain];
+    _installingVersion = [[[installingBundle infoDictionary] objectForKey:(id)kCFBundleVersionKey] retain];
     
     [[self window] setTitle:[NSString stringWithFormat:NSLocalizedString(@"%@ (for version %@)", nil), [[self window] title], _installingVersion]];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[kTargetPartialPath stringByExpandingTildeInPath]]) {
         NSBundle *currentBundle = [NSBundle bundleWithPath:[kTargetPartialPath stringByExpandingTildeInPath]];
 
-        NSString *currentVersion = nil;
-
-        currentVersion = [[currentBundle infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-        if (currentVersion && [currentVersion compare:_installingVersion options:NSNumericSearch] == NSOrderedAscending) {
+        NSString *shortVersion = [[currentBundle infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        NSString *currentVersion = [[currentBundle infoDictionary] objectForKey:(id)kCFBundleVersionKey];
+        if (shortVersion && currentVersion && [currentVersion compare:_installingVersion options:NSNumericSearch] == NSOrderedAscending) {
             _upgrading = YES;
         }
         else if (!currentVersion) {
