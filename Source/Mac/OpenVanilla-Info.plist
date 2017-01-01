@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>OPVN</string>
 	<key>CFBundleVersion</key>
-	<string>3190</string>
+	<string>3197</string>
 	<key>InputMethodConnectionName</key>
 	<string>OpenVanilla_1_Connection</string>
 	<key>InputMethodServerControllerClass</key>
