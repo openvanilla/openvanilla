@@ -107,6 +107,10 @@
     [filterItem setState:([OVModuleManager defaultManager].simplifiedToTraditionalChineseFilterEnabled ? NSOnState : NSOffState)];
     [menu addItem:filterItem];
 
+    filterItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Associated Phrases", @"") action:@selector(toggleAssociatedPhrasesAroundFilterEnabledAction:) keyEquivalent:@""] autorelease];
+    [filterItem setState:([OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled ? NSOnState : NSOffState)];
+    [menu addItem:filterItem];
+
     [menu addItem:[NSMenuItem separatorItem]];
 
     NSMenuItem *preferenceMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"OpenVanilla Preferences…", @"") action:@selector(showPreferences:) keyEquivalent:@""] autorelease];
@@ -136,19 +140,12 @@
         _inputMethodContext = [OVModuleManager defaultManager].activeInputMethod->createContext();
     }
 
-    if (!_associatedPhrasesContext && [OVModuleManager defaultManager].associatedPhrasesModule) {
-        _associatedPhrasesContext = [OVModuleManager defaultManager].associatedPhrasesModule->createContext();
-    }
-
     if (_inputMethodContext) {
         _inputMethodContext->startSession([OVModuleManager defaultManager].loaderService);
     }
 
-    _associatedPhrasesContextInUse = NO;
-    if (_associatedPhrasesContext) {
-        _associatedPhrasesContext->startSession([OVModuleManager defaultManager].loaderService);
-    }
-    
+    [self startOrStopAssociatedPhrasesContext];
+
     _currentClient = client;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCandidateSelected:) name:OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification object:nil];
@@ -166,12 +163,7 @@
         _inputMethodContext = 0;
     }
 
-    if (_associatedPhrasesContext) {
-        _associatedPhrasesContext->stopSession([OVModuleManager defaultManager].loaderService);
-        delete _associatedPhrasesContext;
-        _associatedPhrasesContext = 0;
-        _associatedPhrasesContextInUse = NO;
-    }
+    [self stopAssociatedPhrasesContext];
 
     // clean up reading buffer residue if not empty
     if (!_readingText->isEmpty()) {
@@ -389,7 +381,8 @@
     if (_composingText->isCommitted()) {
         string commitText = _composingText->composedCommittedText();
 
-        if (_associatedPhrasesContext) {
+        // Toggling menu item does not deactive the current session, so the context may still exist after it's disabled, and hence the extra check with the preferences.
+        if (_associatedPhrasesContext && [OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled) {
             OVTextBufferImpl tempReading;
             OVTextBufferImpl tempComposing;
             _associatedPhrasesContextInUse = _associatedPhrasesContext->handleDirectText(commitText, &tempReading, &tempComposing, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
@@ -557,6 +550,13 @@
     manager.traditionalToSimplifiedChineseFilterEnabled = NO;
 }
 
+- (void)toggleAssociatedPhrasesAroundFilterEnabledAction:(id)sender
+{
+    OVModuleManager *manager = [OVModuleManager defaultManager];
+    manager.associatedPhrasesAroundFilterEnabled = !manager.associatedPhrasesAroundFilterEnabled;
+    [self startOrStopAssociatedPhrasesContext];
+}
+
 - (void)openUserGuideAction:(id)sender
 {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:OVUserGuideURLString]];
@@ -566,5 +566,28 @@
 {
     [[NSApplication sharedApplication] orderFrontStandardAboutPanel:sender];
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+}
+
+- (void)startOrStopAssociatedPhrasesContext
+{
+    if (!_associatedPhrasesContext && [OVModuleManager defaultManager].associatedPhrasesModule && [OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled) {
+        _associatedPhrasesContext = [OVModuleManager defaultManager].associatedPhrasesModule->createContext();
+        _associatedPhrasesContext->startSession([OVModuleManager defaultManager].loaderService);
+    } else if (_associatedPhrasesContext && ![OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled) {
+        [self stopAssociatedPhrasesContext];
+    }
+    _associatedPhrasesContextInUse = NO;
+}
+
+- (void)stopAssociatedPhrasesContext
+{
+    if (!_associatedPhrasesContext) {
+        return;
+    }
+
+    _associatedPhrasesContext->stopSession([OVModuleManager defaultManager].loaderService);
+    delete _associatedPhrasesContext;
+    _associatedPhrasesContext = 0;
+    _associatedPhrasesContextInUse = NO;
 }
 @end

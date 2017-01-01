@@ -521,6 +521,16 @@ static string InputMethodConfigIdentifier(const string& identifier)
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (BOOL)associatedPhrasesAroundFilterEnabled
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:OVAssociatedPhrasesAroundFilterEnabledKey];
+}
+- (void)setAssociatedPhrasesAroundFilterEnabled:(BOOL)associatedPhrasesAroundFilterEnabled
+{
+    [[NSUserDefaults standardUserDefaults] setBool:associatedPhrasesAroundFilterEnabled forKey:OVAssociatedPhrasesAroundFilterEnabledKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark - Private Methods
 
 - (NSString *)rootPathForCustomInputMethodTables

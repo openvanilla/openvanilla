@@ -82,6 +82,7 @@ namespace OpenVanilla {
 
 @property (assign) BOOL traditionalToSimplifiedChineseFilterEnabled;
 @property (assign) BOOL simplifiedToTraditionalChineseFilterEnabled;
+@property (assign) BOOL associatedPhrasesAroundFilterEnabled;
 
 @property (copy) NSString *sharedAlphanumericKeyboardLayoutIdentifier;
 

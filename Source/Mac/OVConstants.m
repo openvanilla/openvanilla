@@ -40,6 +40,7 @@ NSString *const OVNextUpdateCheckTimeKey = @"NextUpdateCheckTime";
 NSString *const OVCheckForUpdateKey = @"CheckForUpdate";
 NSString *const OVTraditionalToSimplifiedChineseFilterEnabledKey = @"EnableTraditionalToSimplifiedChineseFilter";
 NSString *const OVSimplifiedToTraditionalChineseFilterEnabledKey = @"EnableSimplifiedToTraditionalChineseFilter";
+NSString *const OVAssociatedPhrasesAroundFilterEnabledKey = @"EnableAssociatedPhrasesAroundFilter";
 
 NSString *const OVDefaultInputMethodIdentifier = @"org.openvanilla.OVIMTableBased.cj";
 NSString *const OVDefaultAlphanumericKeyboardLayoutIdentifier = @"com.apple.keylayout.US";
