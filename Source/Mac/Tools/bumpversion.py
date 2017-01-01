@@ -1,35 +1,87 @@
 #!/usr/bin/env python
 
+import argparse
 import plistlib
+import re
 import subprocess
 import sys
 
-# revs has an empty line, so len(rev) gives us what we want
-# (which is commit count + 1)
-revs = subprocess.check_output(["git", "rev-list", "HEAD"]).split("\n")
+VER_PATTERN = re.compile(r'(\d+(\.\d+)*)(.*)')
 
-latest = None
 
-for argv in sys.argv[1:]:
-	plist = plistlib.readPlist(argv)
-	print("updating: %s" % argv)
+def upgrade(dry_run, revision_number, version_name, commit, plists):
+    if revision_number:
+        target_rev = revision_number
+    else:
+        # revs has an empty line, so len(rev) gives us what we want
+        # (which is commit count + 1)
+        target_rev = str(len(subprocess.check_output(
+            ["git", "rev-list", "HEAD"]).split("\n")))
 
-	bundle_version = int(plist["CFBundleVersion"])	
-	short_version_components = plist["CFBundleShortVersionString"].split(".")
-	print("was: %s, %s" % (bundle_version, short_version_components))
+    latest = None
 
-	bundle_version = str(len(revs))
-	short_version_components[-1] = str(int(short_version_components[-1]) + 1)
-	print("now: %s, %s" % (bundle_version, short_version_components))
+    for path in plists:
+        plist = plistlib.readPlist(path)
 
-	plist["CFBundleVersion"] = bundle_version
-	plist["CFBundleShortVersionString"] = ".".join(short_version_components)
-	latest = plist["CFBundleShortVersionString"]
+        bundle_version = int(plist["CFBundleVersion"])
+        new_bundle_version = target_rev
 
-	plistlib.writePlist(plist, argv)
+        short_version_string = plist["CFBundleShortVersionString"]
+        if version_name:
+            new_short_version_string = version_name
+        else:
+            matches = VER_PATTERN.match(short_version_string)
+            if matches:
+                short_version_components = matches.group(1).split(".")
+                short_version_components[-1] = str(
+                    int(short_version_components[-1]) + 1)
+                new_short_version_string = ".".join(
+                    short_version_components) + matches.group(3)
+            else:
+                new_short_version_string = short_version_string
 
-if latest:
-	msg = "Bump to %s" % latest
-	cmd = ["git", "commit", "-m", msg] + sys.argv[1:]
-	print cmd
-	subprocess.call(cmd)
+        msg = ('{path}: {old_name} ({old_rev}) -> '
+               '{new_name}{name_info} ({new_rev}{rev_info}){dry_run}').format(
+            path=path,
+            old_name=short_version_string,
+            old_rev=bundle_version,
+            new_name=new_short_version_string,
+            name_info=('' if version_name else ' [inferred]'),
+            new_rev=new_bundle_version,
+            rev_info=('' if revision_number else ' [inferred]'),
+            dry_run=(' (dry run)' if dry_run else ''))
+        print(msg)
+
+        if not dry_run:
+            plist["CFBundleVersion"] = new_bundle_version
+            plist["CFBundleShortVersionString"] = new_short_version_string
+            latest = plist["CFBundleShortVersionString"]
+            plistlib.writePlist(plist, path)
+
+    if latest and commit:
+        msg = "Bump to %s" % latest
+        cmd = ["git", "commit", "-m", msg] + plists
+        print('committing with command: %s' % cmd)
+        subprocess.call(cmd)
+
+
+def main():
+    parser = argparse.ArgumentParser(description='bump Info.plist versions')
+    parser.add_argument('plists', metavar='PATH', nargs='+', type=str)
+    parser.add_argument('-n', '--dry-run', action='store_true',
+                        help='dry run (preview the results')
+    parser.add_argument(
+        '--revision-number', type=int,
+        help='default is inferred from number of commits plus one')
+    parser.add_argument(
+        '--version-name',
+        help='default is the last current version component by one')
+    parser.add_argument(
+        '--commit', action='store_true',
+        help='Commit the changes using the last version string as message')
+    args = parser.parse_args()
+    upgrade(args.dry_run, args.revision_number,
+            args.version_name, args.commit, args.plists)
+
+if __name__ == "__main__":
+    main()
