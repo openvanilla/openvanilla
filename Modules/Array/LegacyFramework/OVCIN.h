@@ -68,7 +68,7 @@ namespace _OVCIN{
 
 class OVCIN
 {
-private:
+public:
     typedef vector< pair<string, vector<string> > > CinMap;
     _OVCIN::State state;
     string delimiters;

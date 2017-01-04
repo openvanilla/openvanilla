@@ -191,47 +191,69 @@ void OVIMArrayContext::queryKeyName(const char *keys, std::string& outKeyNames)
 void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf, 
                                     OVCandidate* candibar, OVService* srv)
 {
+    // If âŽ”, prompt and reset state.
+    if (!strcmp(ch, "âŽ”")) {
+        clearAll(buf, candibar);
+        changeState(STATE_WAIT_KEY1);
+        srv->notify("ç„¡æ­¤å­—");
+        return;
+    }
+
     bool notifySP = false;
-    
+    string notifyText;
+
     // lookup special code
-    if((parent->isAutoSP() || parent->isForceSP()) &&
-       tabs[SPECIAL_TAB]->getWordVectorByCharWithWildcardSupport(ch, specialCodeVector, '?', '*') > 0) {
-        int splen = (int)specialCodeVector[0].length();
-        const char *spcode = specialCodeVector[0].c_str();
-        if (!(splen == keyseq.length() && 
-              equal(spcode, spcode+splen, keyseq.getSeq()))) {
-            char buf[16];
-            string keynames;
-            queryKeyName(specialCodeVector[0].c_str(), keynames);
-            sprintf(buf, "%s: %s", ch, keynames.c_str());
-            srv->notify(buf);
-            notifySP = true;
+    if (parent->isForceSP() || parent->isAutoSP()) {
+
+        // Special table is short enough to allow sequential search.
+        OVCIN *specialTab = tabs[SPECIAL_TAB];
+        OVCIN::CinMap& chardefMap = specialTab->maps[_OVCIN::M_CHAR];
+        string searchValue(ch);
+        string matchKey;
+        string matchValue;
+        for (OVCIN::CinMap::iterator i = chardefMap.begin(); i != chardefMap.end(); ++i) {
+            pair<string, vector<string> >& p = *i;
+            string& k = p.first;
+            vector<string>& v = p.second;
+            for (vector<string>::iterator vi = v.begin(); vi != v.end(); ++vi) {
+                if (*vi == searchValue) {
+                    matchValue = *vi;
+                    matchKey = k;
+                    break;
+                }
+            }
+        }
+
+        if (!matchKey.empty()) {
+            int splen = (int)matchKey.length();
+            const char *spcode = matchKey.c_str();
+            if (!equal(spcode, spcode+splen, keyseq.getSeq())) {
+                stringstream s;
+                string keynames;
+                queryKeyName(spcode, keynames);
+                s << ch << ": " << keynames;
+                notifyText = s.str();
+                notifySP = true;
+            }
         }
     }
 
     bool committed = false;
-
-    if (isForceSPSeq()) {
-        parent->setForceSP(!parent->isForceSP());
-	}
-    else {
-        if (!(parent->isForceSP() && notifySP)) {
-            buf->clear()->append(ch)->send();
-            committed = true;
-        }
-        else {
-            srv->beep();
-		}
+    if (!(parent->isForceSP() && notifySP)) {
+        buf->clear()->append(ch)->send();
+        committed = true;
     }
-    
-    // clearAll(buf, candibar);
-    
-    // we can't call clearAll becaue clearAll does one extra clean-up, this causes problem in WoW
-    clearCandidate(candibar);
-    if (!committed)
+    else {
         buf->clear()->update();
+        srv->beep();
+    }
+
+    if (notifySP) {
+        srv->notify(notifyText.c_str());
+    }
+
+    clearCandidate(candibar);
     keyseq.clear();
-        
     changeState(STATE_WAIT_KEY1);
 }
 
@@ -327,6 +349,19 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
     }
     
     if (keyseq.length() && keycode == ovkSpace) {
+
+        if (isForceSPSeq()) {
+            bool newState = !parent->isForceSP();
+            stringstream s;
+            s << "å¿«æ‰“æ¨¡å¼ï¼š" << (newState ? "å•Ÿç”¨" : "é—œé–‰");
+            parent->setForceSP(newState);
+            srv->notify(s.str().c_str());
+            clearAll(buf, candi_bar);
+            changeState(STATE_WAIT_KEY1);
+            return 1;
+        }
+
+
         tabs[MAIN_TAB]->getWordVectorByCharWithWildcardSupport(keyseq.getSeq(), candidateStringVector, '?', '*');
         string c;
         if (candidateStringVector.size() == 1) {
@@ -441,8 +476,8 @@ int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path)
 }
 
 int OVIMArray::updateConfig(OVDictionary *conf){
-    const char *AutoSP = "\xE7\x89\xB9\xE5\x88\xA5\xE7\xA2\xBC\xE6\x8F\x90\xE7\xA4\xBA"; // ¯S§O½X´£¥Ü
-    const char *ForceSP = "\xE5\xBF\xAB\xE6\x89\x93\xE6\xA8\xA1\xE5\xBC\x8F"; // §Ö¥´¼Ò¦¡
+    const char *AutoSP = "\xE7\x89\xB9\xE5\x88\xA5\xE7\xA2\xBC\xE6\x8F\x90\xE7\xA4\xBA";
+    const char *ForceSP = "\xE5\xBF\xAB\xE6\x89\x93\xE6\xA8\xA1\xE5\xBC\x8F";
 
     if (!conf->keyExist(AutoSP))
 		conf->setInteger(AutoSP, 1);
