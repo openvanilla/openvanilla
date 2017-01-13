@@ -132,7 +132,7 @@ int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVBuffer* buf,
 }
 
 
-int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVBuffer* buf, 
+int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVBuffer* buf,
                                     OVCandidate* candibar, OVService* srv)
 {
     const char keycode = key->code();
@@ -373,6 +373,10 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
             if (selectCandidate(0, c))
                 buf->clear()->append(c.c_str())->update();
             changeState(STATE_WAIT_CANDIDATE);
+        } else {
+            clearAll(buf, candi_bar);
+            changeState(STATE_WAIT_KEY1);
+            srv->notify("無此字");
         }
         return 1;
     }
@@ -393,6 +397,10 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
             clearCandidate(candi_bar);
         changeBackState(state);
         ret = 1;
+    } else {
+        srv->beep();
+        updateDisplay(buf);
+        return 1;
     }
     dispatchStateHandler(key, buf, candi_bar, srv);
     return ret;
