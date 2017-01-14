@@ -237,7 +237,7 @@ static const CGFloat kCandidateTextLeftMargin = 8.0;
             }
         }
         
-        if (newHilightIndex != _keyLabelStripView.highlightedIndex) {
+        if (newHilightIndex != _keyLabelStripView.highlightedIndex && newHilightIndex >= 0) {
             _keyLabelStripView.highlightedIndex = newHilightIndex;
             [_keyLabelStripView setNeedsDisplay:YES];            
         }
@@ -342,6 +342,12 @@ static const CGFloat kCandidateTextLeftMargin = 8.0;
                            
 - (void)layoutCandidateView
 {
+     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(doLayoutCanaditeView) object:nil];
+     [self performSelector:@selector(doLayoutCanaditeView) withObject:nil afterDelay:0.0];
+}
+
+- (void)doLayoutCanaditeView
+{
     NSUInteger count = [_delegate candidateCountForController:self];
     if (!count) {
         return;
@@ -382,9 +388,19 @@ static const CGFloat kCandidateTextLeftMargin = 8.0;
     
     CGFloat rowHeight = ceil(fontSize * 1.25);
     [_tableView setRowHeight:rowHeight];
-    
+
+    CGFloat maxKeyLabelWidth = keyLabelFontSize;
+    NSDictionary *textAttr = [NSDictionary dictionaryWithObjectsAndKeys:
+                              _keyLabelFont, NSFontAttributeName,
+                              nil];
+    NSSize boundingBox = NSMakeSize(1600.0, 1600.0);
+    for (NSString *label in _keyLabels) {
+        NSRect rect = [label boundingRectWithSize:boundingBox options:NSStringDrawingUsesLineFragmentOrigin attributes:textAttr];
+        maxKeyLabelWidth = max(rect.size.width, maxKeyLabelWidth);
+    }
+
     CGFloat rowSpacing = [_tableView intercellSpacing].height;    
-    CGFloat stripWidth = ceil(keyLabelFontSize * 1.20);
+    CGFloat stripWidth = ceil(maxKeyLabelWidth * 1.20);
     CGFloat tableViewStartWidth = ceil(_maxCandidateAttrStringWidth + scrollerWidth);;
     CGFloat windowWidth = stripWidth + 1.0 + tableViewStartWidth;
     CGFloat windowHeight = keyLabelCount * (rowHeight + rowSpacing);
