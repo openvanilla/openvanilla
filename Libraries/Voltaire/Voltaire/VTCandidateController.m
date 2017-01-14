@@ -132,11 +132,13 @@
 
 - (BOOL)visible
 {
-    return [[self window] isVisible];
+    // Because setVisible: defers its action, we need to use our own visible. Do not use [[self window] isVisible].
+    return _visible;
 }
 
 - (void)setVisible:(BOOL)visible
 {
+    _visible = visible;
     if (visible) {
         [[self window] performSelector:@selector(orderFront:) withObject:self afterDelay:0.0];
     }
