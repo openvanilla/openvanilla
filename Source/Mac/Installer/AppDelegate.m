@@ -81,8 +81,9 @@ static const NSTimeInterval kTranslocationRemovalDeadline = 60.0;
     
     NSBundle *installingBundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:kTargetBin ofType:kTargetType]];
     _installingVersion = [[[installingBundle infoDictionary] objectForKey:(id)kCFBundleVersionKey] retain];
-    
-    [[self window] setTitle:[NSString stringWithFormat:NSLocalizedString(@"%@ (for version %@)", nil), [[self window] title], _installingVersion]];
+    NSString *versionString = [[installingBundle infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+
+    [[self window] setTitle:[NSString stringWithFormat:NSLocalizedString(@"%@ (for version %@, r%@)", nil), [[self window] title], versionString, _installingVersion]];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[kTargetPartialPath stringByExpandingTildeInPath]]) {
         NSBundle *currentBundle = [NSBundle bundleWithPath:[kTargetPartialPath stringByExpandingTildeInPath]];
