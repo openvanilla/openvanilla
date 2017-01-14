@@ -543,3 +543,16 @@ void OVOneDimensionalCandidatePanelImpl::applyFontSettings(NSString *fontName, N
     m_candidateController.keyLabelFont = fontName ? [NSFont fontWithName:fontName size:keyLabelSize] : [NSFont systemFontOfSize:keyLabelSize];
     m_candidateController.candidateFont = fontName ? [NSFont fontWithName:fontName size:fontSize] : [NSFont systemFontOfSize:fontSize];
 }
+
+void OVOneDimensionalCandidatePanelImpl::setCandidateKeysAndLabels(const vector<pair<OVKey, string>>& keyLabelPairs)
+{
+    vector<OVKey> keys;
+    NSMutableArray *labels = [NSMutableArray array];
+    for (auto keyLabelPair : keyLabelPairs) {
+        keys.push_back(keyLabelPair.first);
+        [labels addObject:[NSString stringWithUTF8String:keyLabelPair.second.c_str()]];
+    }
+
+    m_candidateKeys = keys;
+    m_candidateController.keyLabels = labels;
+}
