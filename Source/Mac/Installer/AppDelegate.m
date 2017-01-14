@@ -90,6 +90,8 @@ static const NSTimeInterval kTranslocationRemovalDeadline = 60.0;
 
         NSString *shortVersion = [[currentBundle infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         NSString *currentVersion = [[currentBundle infoDictionary] objectForKey:(id)kCFBundleVersionKey];
+
+        _currentVersionNumber = [currentVersion integerValue];
         if (shortVersion && currentVersion && [currentVersion compare:_installingVersion options:NSNumericSearch] == NSOrderedAscending) {
             _upgrading = YES;
         }
@@ -239,6 +241,8 @@ static const NSTimeInterval kTranslocationRemovalDeadline = 60.0;
         }
     }
     else {
+        [self resetArrayModuleSettings];
+
         if (warning) {
             NSRunAlertPanel(NSLocalizedString(@"Attention", nil), NSLocalizedString(@"OpenVanilla is upgraded, but please log out or reboot for the new version to be fully functional.", nil),  NSLocalizedString(@"OK", nil), nil, nil);
         } else {
@@ -276,5 +280,17 @@ static const NSTimeInterval kTranslocationRemovalDeadline = 60.0;
     }
     return NO;
 
+}
+
+- (void)resetArrayModuleSettings
+{
+    if (!_upgrading || _currentVersionNumber >= 3199) {
+        return;
+    }
+
+    CFStringRef bundleId = CFSTR("org.openvanilla.OVIMArray");
+    CFPreferencesSetAppValue(CFSTR("QuickMode"), kCFBooleanFalse, bundleId);
+    CFPreferencesSetAppValue(CFSTR("SpecialCodePrompt"), kCFBooleanTrue, bundleId);
+    CFPreferencesAppSynchronize(bundleId);
 }
 @end

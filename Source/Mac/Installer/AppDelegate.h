@@ -39,6 +39,7 @@
     NSTextView *_textView;
     NSProgressIndicator *_progressIndicator;
     NSDate *_translocationRemovalStartTime;
+    NSInteger _currentVersionNumber;
 }
 - (IBAction)agreeAndInstallAction:(id)sender;
 - (IBAction)cancelAction:(id)sender;
