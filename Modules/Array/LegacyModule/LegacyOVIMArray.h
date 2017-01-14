@@ -31,12 +31,12 @@
 #ifndef _OVIMARRAY_H
 #define _OVIMARRAY_H
 
+#include "OpenVanilla.h"
 #include "LegacyOpenVanilla.h"
 #include "OVOSDef.h"
 
 #include "ArrayKeySequence.h"
 #include "OVCandidateList.h"
-#include "OVCIN.h"
 #include <cstring>
 
 namespace OV_Array {
@@ -63,20 +63,25 @@ class OVIMArrayContext : public OVInputMethodContext
 {
 private:
     OVIMArray* parent;
-    OVCIN **tabs;
+    OpenVanilla::OVCINDataTable **tabs;
     ArrayKeySequence keyseq;
     OV_Array::STATE state;
     OVCandidateList candi;
     std::vector<std::string> candidateStringVector, specialCodeVector;
+    string selKeys;
 
     //OVBuffer* _buf;
     //OVCandidate* _candibar;
     //OVService* _srv;
 public:
-    OVIMArrayContext(OVIMArray* p, OVCIN** t)
+    OVIMArrayContext(OVIMArray* p, OpenVanilla::OVCINDataTable** t)
         : parent(p), tabs(t), keyseq(t[OV_Array::MAIN_TAB])
 	{
         state = OV_Array::STATE_WAIT_KEY1;
+        selKeys = tabs[OV_Array::MAIN_TAB]->findProperty("selkey");
+        if (!selKeys.length()) {
+            selKeys = "123456789";
+        }
     }
     virtual int keyEvent(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     virtual void clear();
@@ -90,7 +95,7 @@ private:
     int WaitKey2(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int WaitKey3(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int WaitCandidate(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
-    int updateCandidate(OVCIN *tab,OVBuffer *buf, OVCandidate *candibar);
+    int updateCandidate(OpenVanilla::OVCINDataTable *tab,OVBuffer *buf, OVCandidate *candibar);
     void sendAndReset(const char *, OVBuffer* , OVCandidate* , OVService* );
     void clearAll(OVBuffer* buf, OVCandidate* candi_bar);
     void clearCandidate(OVCandidate *candi_bar);
@@ -107,7 +112,7 @@ class OVIMArray : public OVInputMethod
 {
 private:
     char cname[128], ename[128];
-    OVCIN *tabs[3];    // main, short-code, special-code
+    OpenVanilla::OVCINDataTable *tabs[3]; // main, short-code, special-code
     int cfgAutoSP, cfgForceSP;
 
 public:

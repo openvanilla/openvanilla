@@ -39,18 +39,17 @@
 class ArrayKeySequence : public OVKeySequenceSimple
 {
 protected:
-    OVCIN* cinTable;
+    OpenVanilla::OVCINDataTable* cinTable;
 public:
-    ArrayKeySequence(OVCIN* tab) : cinTable(tab) {}
+    ArrayKeySequence(OpenVanilla::OVCINDataTable* tab) : cinTable(tab) {}
     virtual int length() { return len; }
     virtual bool add(char c){
 //        if (valid(c) == 0) return 0;
         return OVKeySequenceSimple::add(c);
     }
     virtual int valid(char c){
-        std::string inKey;
-        inKey.push_back(c);
-        if (!cinTable->isValidKey(inKey)) return 0;
+        std::string inKey(1, c);
+        if (cinTable->findKeyname(inKey).empty()) return 0;
         return 1;
     
     }
@@ -59,9 +58,7 @@ public:
         {
             std::string inKey;
             inKey.push_back(seq[i]);
-            vector<std::string> outStringVectorRef;
-            if (cinTable->getCharVectorByKey(inKey, outStringVectorRef) > 0)
-                s.append(outStringVectorRef[0]);
+            s.append(cinTable->findKeyname(inKey));
         }
         return s;
     }

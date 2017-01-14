@@ -64,16 +64,19 @@ void OVIMArrayContext::updateDisplay(OVBuffer* buf)
     buf->update();
 }
 
-int OVIMArrayContext::updateCandidate(OVCIN *tab,OVBuffer *buf, OVCandidate *candibar)
+int OVIMArrayContext::updateCandidate(OpenVanilla::OVCINDataTable *tab,OVBuffer *buf, OVCandidate *candibar)
 {
-    tab->getWordVectorByCharWithWildcardSupport(keyseq.getSeq(), candidateStringVector, '?', '*');
-    string currentSelKey = tab->getSelKey();
+    candidateStringVector.clear();
+    auto pairs = tab->findChardefWithWildcard(string(keyseq.getSeq()));
+    for (auto pair : pairs) {
+        candidateStringVector.push_back(pair.second);
+    }
     if (candidateStringVector.size() == 0) {
         clearCandidate(candibar);	
 	}
     else {
         candi.prepare(&candidateStringVector,
-                          const_cast<char*>(currentSelKey.c_str()), candibar);
+                          const_cast<char*>(selKeys.c_str()), candibar);
 	}
     return 1;
 }
@@ -157,7 +160,7 @@ int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVBuffer* buf,
     // enter == first candidate
     // space (when candidate list has only one page) == first candidate
     char c = key->code();
-    bool notSelkey = tabs[MAIN_TAB]->getSelKey().find(keycode) == string::npos;
+    bool notSelkey = selKeys.find(keycode) == string::npos;
 
     bool defaultSelKey = (keycode == ovkReturn || (candi.onePage() && keycode == ovkSpace));
     murmur("notSelkey: %d", notSelkey);
@@ -182,9 +185,7 @@ void OVIMArrayContext::queryKeyName(const char *keys, std::string& outKeyNames)
     int len = (int)strlen(keys);
     for (int i = 0; i < len; i++) {
         string inKey(keys, i, 1);
-        vector<string> keyName;
-        if (tabs[MAIN_TAB]->getCharVectorByKey(inKey, keyName) > 0)
-            outKeyNames.append(keyName[0]);
+        outKeyNames.append(tabs[MAIN_TAB]->findKeyname(inKey));
     }
 }
 
@@ -206,21 +207,14 @@ void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf,
     if (parent->isForceSP() || parent->isAutoSP()) {
 
         // Special table is short enough to allow sequential search.
-        OVCIN *specialTab = tabs[SPECIAL_TAB];
-        OVCIN::CinMap& chardefMap = specialTab->maps[_OVCIN::M_CHAR];
+        OpenVanilla::OVFastKeyValuePairMap* kvm = tabs[SPECIAL_TAB]->chardefMap();
         string searchValue(ch);
         string matchKey;
-        string matchValue;
-        for (OVCIN::CinMap::iterator i = chardefMap.begin(); i != chardefMap.end(); ++i) {
-            pair<string, vector<string> >& p = *i;
-            string& k = p.first;
-            vector<string>& v = p.second;
-            for (vector<string>::iterator vi = v.begin(); vi != v.end(); ++vi) {
-                if (*vi == searchValue) {
-                    matchValue = *vi;
-                    matchKey = k;
-                    break;
-                }
+        for (size_t i = 0, len = kvm->size(); i < len; i++) {
+            auto kv = kvm->keyValuePairAtIndex(i);
+            if (searchValue == kv.second) {
+                matchKey = kv.first;
+                break;
             }
         }
 
@@ -361,8 +355,11 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
             return 1;
         }
 
-
-        tabs[MAIN_TAB]->getWordVectorByCharWithWildcardSupport(keyseq.getSeq(), candidateStringVector, '?', '*');
+        auto pairs = tabs[MAIN_TAB]->findChardefWithWildcard(OpenVanilla::OVWildcard(keyseq.getSeq()));
+        candidateStringVector.clear();
+        for (auto pair : pairs) {
+            candidateStringVector.push_back(pair.second);
+        }
         string c;
         if (candidateStringVector.size() == 1) {
             if (selectCandidate(0, c))
@@ -475,9 +472,10 @@ int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path)
     printf("OVIMArray: data dir %s", arraypath);
 
     for (int i = 0; i < 3 ; i++) {
+        OpenVanilla::OVCINDataTableParser parser;
         sprintf(buf, cinfiles[i], arraypath);
         murmur("OVIMArray: open cin %s", buf);
-        tabs[i] = new OVCIN(buf); 
+        tabs[i] = parser.CINDataTableFromFileName(buf);
     }
     updateConfig(conf);
     return 1;
