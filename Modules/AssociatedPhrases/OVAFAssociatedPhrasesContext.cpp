@@ -28,9 +28,11 @@
 
 #include "OVAFAssociatedPhrasesContext.h"
 
-static const char *const kSelectionKeys = "!@#$%^&*()";
-
 using namespace OpenVanilla;
+
+static const char *const kSelectionKeys = "!@#$%^&*()";
+static const char *const kSelectionKeyLabels = "1234567890";
+static const char *const kSelectionKeyLabelPrefix = "⇧";
 
 OVAFAssociatedPhrasesContext::OVAFAssociatedPhrasesContext(OVAFAssociatedPhrases* module)
 	: m_module(module)
@@ -131,7 +133,11 @@ bool OVAFAssociatedPhrasesContext::handleDirectText(const string& text, OVTextBu
         OVCandidateList* list = panel->candidateList();
         list->setCandidates(m_candidates);
 
-        panel->setCandidateKeys(kSelectionKeys, loaderService);
+        vector<pair<OVKey, string>> keyLabelPairs;
+        for (size_t i = 0, len = strlen(kSelectionKeys); i < len; i++) {
+            keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(kSelectionKeys[i]), string(kSelectionKeyLabelPrefix) + string(1, kSelectionKeyLabels[i])));
+        }
+        panel->setCandidateKeysAndLabels(keyLabelPairs);
         panel->setCandidatesPerPage(10);
         panel->updateDisplay();
         panel->show();
