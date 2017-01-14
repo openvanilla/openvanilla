@@ -12,7 +12,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu title="AMainMenu" systemMenu="main" id="29">
             <items>
                 <menuItem title="安装 OpenVanilla" id="56">
@@ -94,15 +94,15 @@
                         <rect key="frame" x="20" y="60" width="600" height="251"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="407-3f-ara">
-                            <rect key="frame" x="1" y="1" width="583" height="249"/>
+                            <rect key="frame" x="1" y="1" width="598" height="249"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" spellingCorrection="YES" smartInsertDelete="YES" id="537">
                                     <rect key="frame" x="0.0" y="0.0" width="583" height="249"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="583" height="249"/>
-                                    <size key="maxSize" width="598" height="10000000"/>
+                                    <size key="minSize" width="598" height="249"/>
+                                    <size key="maxSize" width="600" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 </textView>
                             </subviews>
@@ -113,7 +113,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="539">
-                            <rect key="frame" x="584" y="1" width="15" height="249"/>
+                            <rect key="frame" x="583" y="1" width="16" height="249"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
@@ -145,8 +145,8 @@ Gw
                     <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" id="623">
                         <rect key="frame" x="17" y="323" width="559" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="欢迎您安装 OpenVanilla！在安装之前，请您阅读本软件的使用授权：" id="624">
-                            <font key="font" metaFont="system"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="欢迎您安装 OpenVanilla！在安装之前，请您阅读本软件的授权条款：" id="624">
+                            <font key="font" size="13" name=".HiraginoSansGBInterface-W3"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -154,7 +154,7 @@ Gw
                     <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" id="688">
                         <rect key="frame" x="17" y="19" width="337" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="点击 &quot;同意安装&quot;，表示您同意本软件的使用授权。" id="689">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="点击 &quot;同意安装&quot;，表示您同意本软件的授权条款。" id="689">
                             <font key="font" size="11" name=".PingFangTC-Regular"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
