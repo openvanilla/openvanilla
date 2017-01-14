@@ -90,7 +90,6 @@ z 1⇣
 #%quickkey end
 
 %chardef begin
-# Begin of CJK Unified Ideographs + Extension A
 cpu	溫
 wpu	媼
 g.;	啟
@@ -13673,8 +13672,6 @@ iolj	鉚
 u,av	鮇
 grsz	碡
 /rsz	蝳
-
-# Begin of Array30 Special Code
 ak	大
 ah	不
 dk	小
@@ -14073,8 +14070,6 @@ z/	感
 /w	按
 /;	喜
 dp	舊
-# End of Array30 Special Code
-
 ;gzt	哪
 wgzt	娜
 ogzt	挪
@@ -31616,8 +31611,6 @@ zzi	㚐
 zzi	㚘
 zzqi	䦈
 zzzzi	镸
-# End of CJK Unified Ideographs + Extension A
-# Begin of CJK Unified Ideographs Extension B
 ffffi	𠀆
 ooooi	𠀉
 rrrri	𠀎
@@ -80799,8 +80792,6 @@ i;;ti	𪛕
 i;;.i	𪛕
 i;;si	𪛕
 i;;,i	𪛖
-# End of CJK Unified Ideographs Extension B
-# Begin of CJK Unified Ideographs Extension C & D
 fgi	𪜀
 aji	𪜁
 alshi	𪜂
@@ -85783,8 +85774,6 @@ e,d;i	𫠚
 eipri	𫠛
 eiosi	𫠜
 cj;si	𫠝
-# End of CJK Unified Ideographs Extension C & D
-# Begin of CJK Unified Ideographs Extension E
 asi	𫠠
 akdi	𫠡
 eaadi	𫠢
@@ -92401,8 +92390,6 @@ i;;si	𬺟
 wcifi	𬺠
 tcifi	𬺠
 znifi	𬺡
-# End of CJK Unified Ideographs Extension E
-# CJK Symbols & Punctuation for Array30 input method (w+0~9)
 w0	ㄅ
 w0	ㄆ
 w0	ㄇ
