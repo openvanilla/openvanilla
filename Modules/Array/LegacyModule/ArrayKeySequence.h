@@ -33,7 +33,6 @@
 
 #include "LegacyOpenVanilla.h"
 #include "OVKeySequence.h"
-#include "OVCIN.h"
 #include <string>
 
 class ArrayKeySequence : public OVKeySequenceSimple

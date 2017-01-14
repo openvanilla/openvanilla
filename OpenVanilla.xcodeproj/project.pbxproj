@@ -57,7 +57,6 @@
 		6ABBAF6715CD6F8C0080EE7D /* OVFrameworkInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF6615CD6F8C0080EE7D /* OVFrameworkInfo.cpp */; };
 		6ABC1D931631AC7C005FF9B5 /* OVUpdateChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC1D921631AC7C005FF9B5 /* OVUpdateChecker.m */; };
 		6AC9A45B162E64470049E289 /* LegacyOVIMArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC9A459162E64470049E289 /* LegacyOVIMArray.cpp */; };
-		6AC9A47B162E64ED0049E289 /* OVCIN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC9A479162E64ED0049E289 /* OVCIN.cpp */; };
 		6AC9A47F162E65110049E289 /* OVCandidateList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC9A47C162E65110049E289 /* OVCandidateList.cpp */; };
 		6AC9A484162E664A0049E289 /* OVFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC9A482162E664A0049E289 /* OVFileHandler.cpp */; };
 		6AC9A487162E66670049E289 /* OVStringToolKit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC9A485162E66670049E289 /* OVStringToolKit.cpp */; };
@@ -253,8 +252,6 @@
 		6AC9A45A162E64470049E289 /* LegacyOVIMArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegacyOVIMArray.h; sourceTree = "<group>"; };
 		6AC9A477162E64CF0049E289 /* LegacyOpenVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegacyOpenVanilla.h; sourceTree = "<group>"; };
 		6AC9A478162E64DB0049E289 /* OVKeySequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVKeySequence.h; sourceTree = "<group>"; };
-		6AC9A479162E64ED0049E289 /* OVCIN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVCIN.cpp; sourceTree = "<group>"; };
-		6AC9A47A162E64ED0049E289 /* OVCIN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCIN.h; sourceTree = "<group>"; };
 		6AC9A47C162E65110049E289 /* OVCandidateList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVCandidateList.cpp; sourceTree = "<group>"; };
 		6AC9A47D162E65110049E289 /* OVCandidateList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCandidateList.h; sourceTree = "<group>"; };
 		6AC9A47E162E65110049E289 /* OVOSDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVOSDef.h; sourceTree = "<group>"; };
@@ -598,8 +595,6 @@
 				6AC9A477162E64CF0049E289 /* LegacyOpenVanilla.h */,
 				6AC9A47C162E65110049E289 /* OVCandidateList.cpp */,
 				6AC9A47D162E65110049E289 /* OVCandidateList.h */,
-				6AC9A479162E64ED0049E289 /* OVCIN.cpp */,
-				6AC9A47A162E64ED0049E289 /* OVCIN.h */,
 				6AC9A482162E664A0049E289 /* OVFileHandler.cpp */,
 				6AC9A483162E664A0049E289 /* OVFileHandler.h */,
 				6AC9A478162E64DB0049E289 /* OVKeySequence.h */,
@@ -863,7 +858,6 @@
 				6A6B21481621753300697149 /* OVAddTableBasedInputMethodViewController.mm in Sources */,
 				6AAB3401162E529E00C4C22F /* OVToolTipWindowController.m in Sources */,
 				6AC9A45B162E64470049E289 /* LegacyOVIMArray.cpp in Sources */,
-				6AC9A47B162E64ED0049E289 /* OVCIN.cpp in Sources */,
 				6AC9A47F162E65110049E289 /* OVCandidateList.cpp in Sources */,
 				6AC9A484162E664A0049E289 /* OVFileHandler.cpp in Sources */,
 				6AC9A487162E66670049E289 /* OVStringToolKit.cpp in Sources */,

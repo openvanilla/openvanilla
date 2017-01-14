@@ -29,7 +29,6 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #include "OVCandidateList.h"
-#include "OVCIN.h"
 #include <iostream>
 
 #ifdef __linux__
