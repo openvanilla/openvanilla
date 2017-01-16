@@ -20,6 +20,7 @@
 		6A0E0AD61623EEDB004FED10 /* OpenVanilla.app in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */; };
 		6A12FD5C1E2D323400CA5AEE /* jyutping-toneless.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A12FD581E2D31EA00CA5AEE /* jyutping-toneless.cin */; };
 		6A12FD5D1E2D323700CA5AEE /* jyutping.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A12FD591E2D31EA00CA5AEE /* jyutping.cin */; };
+		6A12FD601E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A12FD5F1E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.m */; };
 		6A2793C4171201C000F1E13D /* OVAFAssociatedPhrases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A2793C0171201C000F1E13D /* OVAFAssociatedPhrases.cpp */; };
 		6A2793C5171201C000F1E13D /* OVAFAssociatedPhrasesContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A2793C2171201C000F1E13D /* OVAFAssociatedPhrasesContext.cpp */; };
 		6A2793CA171209E200F1E13D /* associated-phrases.cin in Copy Associated Phrases Table */ = {isa = PBXBuildFile; fileRef = 6A2793C7171209A400F1E13D /* associated-phrases.cin */; };
@@ -160,6 +161,8 @@
 		6A0E0ACD1623EDF5004FED10 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.xib"; sourceTree = "<group>"; };
 		6A12FD581E2D31EA00CA5AEE /* jyutping-toneless.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "jyutping-toneless.cin"; sourceTree = "<group>"; };
 		6A12FD591E2D31EA00CA5AEE /* jyutping.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jyutping.cin; sourceTree = "<group>"; };
+		6A12FD5E1E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVAFAssociatedPhrasesPreferencesViewController.h; sourceTree = "<group>"; };
+		6A12FD5F1E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVAFAssociatedPhrasesPreferencesViewController.m; sourceTree = "<group>"; };
 		6A2793C0171201C000F1E13D /* OVAFAssociatedPhrases.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVAFAssociatedPhrases.cpp; sourceTree = "<group>"; };
 		6A2793C1171201C000F1E13D /* OVAFAssociatedPhrases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVAFAssociatedPhrases.h; sourceTree = "<group>"; };
 		6A2793C2171201C000F1E13D /* OVAFAssociatedPhrasesContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVAFAssociatedPhrasesContext.cpp; sourceTree = "<group>"; };
@@ -470,6 +473,8 @@
 				6ACB49CF15E49EF100380B82 /* FrameworkImpls */,
 				6A6B21461621753300697149 /* OVAddTableBasedInputMethodViewController.h */,
 				6A6B21471621753300697149 /* OVAddTableBasedInputMethodViewController.mm */,
+				6A12FD5E1E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.h */,
+				6A12FD5F1E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.m */,
 				6ABBAF0615CD58F90080EE7D /* OVAppDelegate.h */,
 				6ABBAF0715CD58F90080EE7D /* OVAppDelegate.mm */,
 				6A0BEB64161573A400FCB59A /* OVBaseModulePreferencesViewController.h */,
@@ -492,10 +497,10 @@
 				6A616641162FD8420042559F /* OVNonModalAlertWindowController.m */,
 				6AFBA9BF15F9AE0A007DC9E6 /* OVPreferencesWindowController.h */,
 				6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */,
-				6AAB33FF162E529E00C4C22F /* OVToolTipWindowController.h */,
-				6AAB3400162E529E00C4C22F /* OVToolTipWindowController.m */,
 				6A3914AF15FAE99400DC57C3 /* OVTableBasedModulePreferencesViewController.h */,
 				6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm */,
+				6AAB33FF162E529E00C4C22F /* OVToolTipWindowController.h */,
+				6AAB3400162E529E00C4C22F /* OVToolTipWindowController.m */,
 				6ABC1D911631AC7C005FF9B5 /* OVUpdateChecker.h */,
 				6ABC1D921631AC7C005FF9B5 /* OVUpdateChecker.m */,
 				6ABBAF2415CD61680080EE7D /* Resources */,
@@ -851,6 +856,7 @@
 				6ACB49E715E49EF100380B82 /* OVTextBufferImpl.cpp in Sources */,
 				6ACB49F615E49F2900380B82 /* VTCandidateController.m in Sources */,
 				6ACB49F715E49F2900380B82 /* VTHorizontalCandidateController.m in Sources */,
+				6A12FD601E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.m in Sources */,
 				6ACB49F815E49F2900380B82 /* VTHorizontalCandidateView.m in Sources */,
 				6ACB49F915E49F2900380B82 /* VTVerticalCandidateController.m in Sources */,
 				6ACB49FA15E49F2900380B82 /* VTVerticalCandidateTableView.m in Sources */,

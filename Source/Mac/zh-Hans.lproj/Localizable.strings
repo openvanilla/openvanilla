@@ -139,3 +139,6 @@
 "Feedback:" = "音效：";
 "Quick mode (Force SP)" = "快打模式";
 "Create a customized input method by importing a .cin file" = "汇入 .cin 格式文件，建立新的输入法";
+"Selection keys:" = "选字键：";
+"After a candidate is chosen:" = "选完联想字词后：";
+"Keep showing new candidates" = "继续提供联想字词";

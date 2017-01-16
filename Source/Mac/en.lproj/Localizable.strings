@@ -170,3 +170,6 @@
 "Quick mode (Force SP)" = "Enforce special code (\"Quick Mode\" or Force SP)";
 "Alphanumeric keyboard layout:" = "Alphanumeric keyboard layout:";
 "Create a customized input method by importing a .cin file" = "Create a customized input method by importing a .cin file";
+"Selection keys:" = "Selection keys:";
+"After a candidate is chosen:" = "After a candidate is chosen:";
+"Keep showing new candidates" = "Keep showing new candidates";

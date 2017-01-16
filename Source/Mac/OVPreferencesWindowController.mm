@@ -33,6 +33,7 @@ static NSString *const kIdentifierKey = @"IdentifierKey";
 static NSString *const kLocalizedNameKey = @"LocalizedNameKey";
 static NSString *const kControllerKey = @"ControllerKey";
 static NSString *const kGeneralSettingIdentifier = @"GeneralSettingIdentifier";
+static NSString *const kAssociatedPhrasesSettingIdentifier = @"org.openvanilla.OVAFAssociatedPhrases";
 static NSString *const kAddInputMethodIdentifier = @"AddInputMethodIdentifier";
 
 
@@ -80,6 +81,7 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 @synthesize tableView = _tableView;
 @synthesize modulePreferencesContainerView = _modulePreferencesContainerView;
 @synthesize generalPreferencesViewController = _generalPreferencesViewController;
+@synthesize associatedPhrasesPreferencesViewController = _associatedPhrasesPreferencesViewController;
 @synthesize tableBasedMoudlePreferencesViewController = _tableBasedMoudlePreferencesViewController;
 @synthesize currentPreferencesViewController = _currentPreferencesViewController;
 @synthesize arrayMoudlePreferencesViewController = _arrayMoudlePreferencesViewController;
@@ -106,6 +108,7 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 
         [_localizableObjects removeAllObjects];
         ListTitlesInView([self.generalPreferencesViewController view], _localizableObjects);
+        ListTitlesInView([self.associatedPhrasesPreferencesViewController view], _localizableObjects);
         ListTitlesInView([self.tableBasedMoudlePreferencesViewController view], _localizableObjects);
         ListTitlesInView([self.arrayMoudlePreferencesViewController view], _localizableObjects);
         ListTitlesInView([self.addTableBasedInputMethodViewController view], _localizableObjects);
@@ -137,6 +140,8 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
     [_items removeAllObjects];
 
     [_items addObject:Item(kGeneralSettingIdentifier, NSLocalizedString(@"General Settings", nil), self.generalPreferencesViewController)];
+
+    [_items addObject:Item(kAssociatedPhrasesSettingIdentifier, NSLocalizedString(@"Associated Phrases", nil), self.associatedPhrasesPreferencesViewController)];
 
     for (NSString *moduleIdentifier in [OVModuleManager defaultManager].inputMethodIdentifiers) {
         if ([[OVModuleManager defaultManager] isTableBasedInputMethodIdentifier:moduleIdentifier]) {
@@ -198,7 +203,7 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
     OVBasePreferencesViewController *controller = [item objectForKey:kControllerKey];
 
     self.currentPreferencesViewController = controller;
-    if (controller == self.tableBasedMoudlePreferencesViewController || controller == self.arrayMoudlePreferencesViewController) {
+    if (controller == self.tableBasedMoudlePreferencesViewController || controller == self.arrayMoudlePreferencesViewController || controller == self.associatedPhrasesPreferencesViewController) {
         controller.moduleIdentifier = [item objectForKey:kIdentifierKey];
     }
 
