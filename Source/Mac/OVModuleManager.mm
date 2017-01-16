@@ -212,7 +212,14 @@ static string InputMethodConfigIdentifier(const string& identifier)
         }
     }
 
-    NSArray *basicTables = [NSArray arrayWithObjects:@"cj.cin", @"simplex.cin", @"dayi3.cin", @"ehq-symbols.cin", nil];
+    NSArray *basicTables = [NSArray arrayWithObjects:
+                            @"cj.cin",
+                            @"simplex.cin",
+                            @"dayi3.cin",
+                            @"jyutping.cin",
+                            @"jyutping-toneless.cin",
+                            @"ehq-symbols.cin",
+                            nil];
     NSString *tableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/TableBased"];
 
     for (NSString *tableName in basicTables) {

@@ -18,6 +18,8 @@
 		6A0E0AD41623EDF5004FED10 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0E0AC91623EDF5004FED10 /* main.m */; };
 		6A0E0AD51623EE82004FED10 /* OpenVanilla-App.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2515CD617D0080EE7D /* OpenVanilla-App.icns */; };
 		6A0E0AD61623EEDB004FED10 /* OpenVanilla.app in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */; };
+		6A12FD5C1E2D323400CA5AEE /* jyutping-toneless.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A12FD581E2D31EA00CA5AEE /* jyutping-toneless.cin */; };
+		6A12FD5D1E2D323700CA5AEE /* jyutping.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A12FD591E2D31EA00CA5AEE /* jyutping.cin */; };
 		6A2793C4171201C000F1E13D /* OVAFAssociatedPhrases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A2793C0171201C000F1E13D /* OVAFAssociatedPhrases.cpp */; };
 		6A2793C5171201C000F1E13D /* OVAFAssociatedPhrasesContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A2793C2171201C000F1E13D /* OVAFAssociatedPhrasesContext.cpp */; };
 		6A2793CA171209E200F1E13D /* associated-phrases.cin in Copy Associated Phrases Table */ = {isa = PBXBuildFile; fileRef = 6A2793C7171209A400F1E13D /* associated-phrases.cin */; };
@@ -125,6 +127,8 @@
 				6A7789FB163121B0000C85A2 /* cj.cin in Copy TableBased Input Method Tables */,
 				6A6BB4611633784300871443 /* dayi3.cin in Copy TableBased Input Method Tables */,
 				6A7789FC163121B0000C85A2 /* ehq-symbols.cin in Copy TableBased Input Method Tables */,
+				6A12FD5C1E2D323400CA5AEE /* jyutping-toneless.cin in Copy TableBased Input Method Tables */,
+				6A12FD5D1E2D323700CA5AEE /* jyutping.cin in Copy TableBased Input Method Tables */,
 				6A7789FD163121B0000C85A2 /* simplex.cin in Copy TableBased Input Method Tables */,
 			);
 			name = "Copy TableBased Input Method Tables";
@@ -154,6 +158,8 @@
 		6A0E0ACB1623EDF5004FED10 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hant"; path = "zh-Hant.lproj/License.rtf"; sourceTree = "<group>"; };
 		6A0E0ACC1623EDF5004FED10 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6A0E0ACD1623EDF5004FED10 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		6A12FD581E2D31EA00CA5AEE /* jyutping-toneless.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "jyutping-toneless.cin"; sourceTree = "<group>"; };
+		6A12FD591E2D31EA00CA5AEE /* jyutping.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jyutping.cin; sourceTree = "<group>"; };
 		6A2793C0171201C000F1E13D /* OVAFAssociatedPhrases.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVAFAssociatedPhrases.cpp; sourceTree = "<group>"; };
 		6A2793C1171201C000F1E13D /* OVAFAssociatedPhrases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVAFAssociatedPhrases.h; sourceTree = "<group>"; };
 		6A2793C2171201C000F1E13D /* OVAFAssociatedPhrasesContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVAFAssociatedPhrasesContext.cpp; sourceTree = "<group>"; };
@@ -392,6 +398,8 @@
 				6A7789F516312186000C85A2 /* cj.cin */,
 				6A6BB45E1633783800871443 /* dayi3.cin */,
 				6A7789F616312186000C85A2 /* ehq-symbols.cin */,
+				6A12FD581E2D31EA00CA5AEE /* jyutping-toneless.cin */,
+				6A12FD591E2D31EA00CA5AEE /* jyutping.cin */,
 				6A7789F716312186000C85A2 /* simplex.cin */,
 			);
 			name = "Tables Arranged for Mac";
