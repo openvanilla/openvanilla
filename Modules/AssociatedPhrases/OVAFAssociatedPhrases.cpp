@@ -30,9 +30,16 @@
 
 using namespace OpenVanilla;
 
+static const char *const kDefaultSelectionKeys = "!@#$%^&*()";
+static const char *const kDefaultUnshiftedSelectionKeyLabels = "1234567890";
+static const char *const kDefaultShiftKeySymbol = "⇧";
+
 OVAFAssociatedPhrases::OVAFAssociatedPhrases(const string& tablePath)
     : m_tablePath(tablePath)
     , m_table(0)
+    , m_selectionKeys(kDefaultSelectionKeys)
+    , m_shiftKeySymbol(kDefaultShiftKeySymbol)
+    , m_continuousAssociation(true)
 {
 }
 
@@ -64,6 +71,38 @@ bool OVAFAssociatedPhrases::initialize(OVPathInfo* pathInfo, OVLoaderService* lo
     return true;
 }
 
+void OVAFAssociatedPhrases::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)
+{
+    m_continuousAssociation = true;
+    if (moduleConfig->hasKey("ContinuousAssociation")) {
+        m_continuousAssociation = moduleConfig->isKeyTrue("ContinuousAssociation");
+    }
+
+    m_selectionKeys = kDefaultSelectionKeys;
+    if (moduleConfig->hasKey("SelectionKeys")) {
+        string selKeys = moduleConfig->stringValueForKey("SelectionKeys");
+
+        // Only accept sequences whose length is equal to or more than 4 chars.
+        if (selKeys.length() >= 4) {
+            m_selectionKeys = selKeys;
+        }
+    }
+
+    m_shiftKeySymbol = kDefaultShiftKeySymbol;
+    if (moduleConfig->hasKey("ShiftKeySymbol")) {
+        string symbol = moduleConfig->stringValueForKey("ShiftKeySymbol");
+        if (!symbol.empty()) {
+            m_shiftKeySymbol = symbol;
+        }
+    }
+}
+
+void OVAFAssociatedPhrases::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)
+{
+    moduleConfig->setKeyBoolValue("ContinuousAssociation", m_continuousAssociation);
+    moduleConfig->setKeyStringValue("SelectionKeys", m_selectionKeys);
+    moduleConfig->setKeyStringValue("ShiftKeySymbol", m_shiftKeySymbol);
+}
 
 void OVAFAssociatedPhrases::checkTable()
 {
@@ -88,4 +127,20 @@ void OVAFAssociatedPhrases::checkTable()
     m_tableTimestamp = timestamp;
     OVCINDataTableParser parser;
     m_table = parser.CINDataTableFromFileName(m_tablePath);
+}
+
+vector<pair<OVKey, string>> OVAFAssociatedPhrases::getSelectionKeyLabelPairs(OVLoaderService* loaderService)
+{
+    vector<pair<OVKey, string>> keyLabelPairs;
+    if (m_selectionKeys.length() <= strlen(kDefaultSelectionKeys) &&
+        string(kDefaultSelectionKeys, m_selectionKeys.length()) == m_selectionKeys) {
+        for (size_t i = 0, len = m_selectionKeys.length(); i < len; i++) {
+            keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(m_selectionKeys[i]), m_shiftKeySymbol + string(1, kDefaultUnshiftedSelectionKeyLabels[i])));
+        }
+    } else {
+        for (auto key : m_selectionKeys) {
+            keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(key), string(1, key)));
+        }
+    }
+    return keyLabelPairs;
 }

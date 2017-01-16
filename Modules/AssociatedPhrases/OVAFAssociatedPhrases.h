@@ -44,15 +44,21 @@ namespace OpenVanilla {
         virtual OVEventHandlingContext* createContext();
         virtual const string identifier() const;
         virtual bool initialize(OVPathInfo* pathInfo, OVLoaderService* loaderService);
+        virtual void loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService);
+        virtual void saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService);
 
     private:
         string m_tablePath;
         OVFileTimestamp m_tableTimestamp;
+        string m_shiftKeySymbol;
 
     protected:
         friend class OVAFAssociatedPhrasesContext;
         virtual void checkTable();
         OVCINDataTable *m_table;
+        bool m_continuousAssociation; // Use the output of this filter as the next input.
+        string m_selectionKeys; // The actual selection keys.
+        vector<pair<OVKey, string>> getSelectionKeyLabelPairs(OVLoaderService* loaderService);
     };
 };
 

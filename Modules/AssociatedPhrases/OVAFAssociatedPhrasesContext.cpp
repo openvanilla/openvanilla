@@ -30,10 +30,6 @@
 
 using namespace OpenVanilla;
 
-static const char *const kSelectionKeys = "!@#$%^&*()";
-static const char *const kSelectionKeyLabels = "1234567890";
-static const char *const kSelectionKeyLabelPrefix = "⇧";
-
 OVAFAssociatedPhrasesContext::OVAFAssociatedPhrasesContext(OVAFAssociatedPhrases* module)
 	: m_module(module)
 {
@@ -70,13 +66,13 @@ bool OVAFAssociatedPhrasesContext::handleKey(OVKey* key, OVTextBuffer* readingTe
 		  
     bool keyHandled = false;
     size_t keyIndex;
-    size_t selKeyLength = strlen(kSelectionKeys);
+    size_t selKeyLength = m_module->m_selectionKeys.length();
 
     for (keyIndex = 0; keyIndex < selKeyLength; keyIndex++) {
-        if (key->keyCode() == kSelectionKeys[keyIndex]) break;
+        if (key->keyCode() == m_module->m_selectionKeys[keyIndex]) break;
     }
 
-    if (keyIndex < selKeyLength && key->isShiftPressed()) {
+    if (keyIndex < selKeyLength) {
         if (keyIndex >= panel->currentPageCandidateCount()) {
             loaderService->beep();
         }
@@ -84,6 +80,7 @@ bool OVAFAssociatedPhrasesContext::handleKey(OVKey* key, OVTextBuffer* readingTe
             panel->setHighlightIndex(keyIndex);
             size_t candidateIndex = panel->currentHightlightIndexInCandidateList();
             string candidate = panel->candidateList()->candidateAtIndex(candidateIndex);
+            m_lastOutput = candidate;
             composingText->setText(candidate);
             composingText->commit();
         }
@@ -118,27 +115,31 @@ bool OVAFAssociatedPhrasesContext::handleDirectText(const string& text, OVTextBu
     if (!(readingText->isEmpty() && composingText->isEmpty())) {
         return false;
     }
-    
+
+    // If continuous association is not on and the text is from our last output, don't make the associations.
+    // In other words, if continuous association is on (default), this module acts like a lot of input methods on mobile--
+    // it'll continue the association.
+    if (!m_module->m_continuousAssociation && m_lastOutput == text) {
+        return false;
+    }
+    m_lastOutput = "";
+
     vector<string> codepoints = OVUTF8Helper::SplitStringByCodePoint(text);
-    if (codepoints.size() != 1) {
+    if (codepoints.empty()) {
         return false;
     }
 
     composingText->setText(text);
     composingText->commit();
 
-    m_candidates = m_module->m_table->findChardef(text);
+    m_candidates = m_module->m_table->findChardef(codepoints.back());
     if (m_candidates.size()) {
         OVOneDimensionalCandidatePanel* panel = candidateService->useOneDimensionalCandidatePanel();
         OVCandidateList* list = panel->candidateList();
         list->setCandidates(m_candidates);
-
-        vector<pair<OVKey, string>> keyLabelPairs;
-        for (size_t i = 0, len = strlen(kSelectionKeys); i < len; i++) {
-            keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(kSelectionKeys[i]), string(kSelectionKeyLabelPrefix) + string(1, kSelectionKeyLabels[i])));
-        }
-        panel->setCandidateKeysAndLabels(keyLabelPairs);
-        panel->setCandidatesPerPage(10);
+        auto pairs = m_module->getSelectionKeyLabelPairs(loaderService);
+        panel->setCandidateKeysAndLabels(pairs);
+        panel->setCandidatesPerPage(pairs.size());
         panel->updateDisplay();
         panel->show();
         return true;
@@ -153,6 +154,7 @@ bool OVAFAssociatedPhrasesContext::candidateSelected(OVCandidateService* candida
 		return false;
 	}
 
+    m_lastOutput = text;
     composingText->setText(text);
     composingText->commit();
     return true;

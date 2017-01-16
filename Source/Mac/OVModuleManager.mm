@@ -268,6 +268,19 @@ static string InputMethodConfigIdentifier(const string& identifier)
     [[NSNotificationCenter defaultCenter] postNotificationName:OVModuleManagerDidReloadNotification object:self];
 }
 
+- (void)synchronizeAroundFilterSettings
+{
+    if (!_associatedPhrasesModule) {
+        return;
+    }
+
+    NSString *identifier = [NSString stringWithUTF8String:_associatedPhrasesModule->identifier().c_str()];
+    OVPlistBackedKeyValueMapImpl kvmi((CFStringRef)identifier);
+    OVKeyValueMap kvm(&kvmi);
+    _associatedPhrasesModule->loadConfig(&kvm, _loaderService);
+    _associatedPhrasesModule->saveConfig(&kvm, _loaderService);
+}
+
 - (void)synchronizeActiveInputMethodSettings
 {
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -285,6 +298,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:OVActiveInputMethodIdentifierKey];
         }
     }
+
+    [self synchronizeAroundFilterSettings];
 
     NSString *candidateFontName = [[NSUserDefaults standardUserDefaults] stringForKey:OVCandidateTextFontNameKey];
     NSInteger candidateFontSize = [[NSUserDefaults standardUserDefaults] integerForKey:OVCandidateListTextSizeKey];
