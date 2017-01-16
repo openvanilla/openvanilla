@@ -37,6 +37,7 @@
     NSButton *_installButton;
     NSButton *_cancelButton;
     NSTextView *_textView;
+    NSWindow *_progressSheet;
     NSProgressIndicator *_progressIndicator;
     NSDate *_translocationRemovalStartTime;
     NSInteger _currentVersionNumber;

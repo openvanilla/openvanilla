@@ -50,6 +50,8 @@ static const NSTimeInterval kTranslocationRemovalDeadline = 60.0;
 @synthesize installButton = _installButton;
 @synthesize cancelButton = _cancelButton;
 @synthesize textView = _textView;
+@synthesize progressSheet = _progressSheet;
+@synthesize progressIndicator = _progressIndicator;
 
 - (void)dealloc
 {
