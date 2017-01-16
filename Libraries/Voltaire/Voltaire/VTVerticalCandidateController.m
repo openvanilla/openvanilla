@@ -162,18 +162,27 @@ static const CGFloat kCandidateTextLeftMargin = 8.0;
     return (selectedRow == -1) ? NSUIntegerMax : selectedRow;
 }
 
-- (void)setSelectedCandidateIndex:(NSUInteger)newIndex
+- (void)setSelectedCandidateIndex:(NSUInteger)aNewIndex
 {
+    NSUInteger newIndex = aNewIndex;
+
     NSInteger selectedRow = [_tableView selectedRow];
 
     NSUInteger labelCount = [_keyLabels count];
     NSUInteger itemCount = [_delegate candidateCountForController:self];
-    
+
+    if (newIndex == NSUIntegerMax) {
+        if (itemCount == 0) {
+            [_tableView deselectAll:self];
+            return;
+        }
+        newIndex = 0;
+    }
+
     NSUInteger lastVisibleRow = newIndex;
-    
     if (selectedRow != -1 && itemCount > 0 && itemCount > labelCount) {
         if (newIndex > selectedRow && (newIndex - selectedRow) > 1) {
-            lastVisibleRow = min(newIndex + labelCount - 1, itemCount - 1);            
+            lastVisibleRow = min(newIndex + labelCount - 1, itemCount - 1);
         }
         
         // no need to handle the backward case: (newIndex < selectedRow && selectedRow - newIndex > 1)
@@ -182,7 +191,7 @@ static const CGFloat kCandidateTextLeftMargin = 8.0;
     if (itemCount > labelCount) {
         [_tableView scrollRowToVisible:lastVisibleRow];
     }
-    
+
     [_tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:newIndex] byExtendingSelection:NO];
 }
 
