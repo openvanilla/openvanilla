@@ -224,6 +224,10 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
         }
         versionDescription = [versionDescriptions objectForKey:locale];
         if (!versionDescription) {
+            versionDescription = [versionDescriptions objectForKey:@"en"];
+        }
+
+        if (!versionDescription) {
             versionDescription = @"";
         }
         else {
