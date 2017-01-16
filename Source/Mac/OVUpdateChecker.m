@@ -217,9 +217,10 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
     NSString *versionDescription = @"";
     if ([versionDescriptions isKindOfClass:[NSDictionary class]]) {
         NSString *locale = @"en";
-        NSArray *tags = [NSLocale preferredLanguages];
-        if ([tags count]) {
-            locale = [tags objectAtIndex:0];
+        NSArray *supportedLocales = [NSArray arrayWithObjects:@"en", @"zh-Hant", @"zh-Hans", nil];
+        NSArray *preferredTags = [NSBundle preferredLocalizationsFromArray:supportedLocales];
+        if ([preferredTags count]) {
+            locale = [preferredTags objectAtIndex:0];
         }
         versionDescription = [versionDescriptions objectForKey:locale];
         if (!versionDescription) {
