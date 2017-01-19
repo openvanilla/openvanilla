@@ -44,7 +44,9 @@ static bool IsKeyInList(const OVKey* key, OVKeyVector list, size_t* outIndex = 0
 {
     size_t index = 0;
     for (OVKeyVector::const_iterator i = list.begin(), e = list.end(); i != e; ++i, ++index) {
-        if (*key == *i) {
+        // Do not use *key == *i, since on macOS, *key contains shift mask, but selection keys
+        // must all be printable characters, and that include "shift" keys such as !@#$%^&*().
+        if (key->receivedString() == i->receivedString()) {
             if (outIndex) {
                 *outIndex = index;
             }
