@@ -734,7 +734,6 @@
 				6ACB49B515E49E1400380B82 /* Copy TableBased Input Method Tables */,
 				6A8832331605C1D800FBEB85 /* Copy Array Input Method Tables */,
 				6A2793C9171209CE00F1E13D /* Copy Associated Phrases Table */,
-				6ABBAF3215CD62440080EE7D /* Install and Activate Input Method (Run Script) */,
 			);
 			buildRules = (
 			);
@@ -805,23 +804,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		6ABBAF3215CD62440080EE7D /* Install and Activate Input Method (Run Script) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Install and Activate Input Method (Run Script)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "killall $EXECUTABLE_NAME\npwd\n# ls -l\n# rm -rf \"$HOME/Library/Input Methods/$FULL_PRODUCT_NAME\"\ncp -R $BUILT_PRODUCTS_DIR/$FULL_PRODUCT_NAME \"$HOME/Library/Input Methods/\"\n\"$HOME/Library/Input Methods/$EXECUTABLE_FOLDER_PATH/$EXECUTABLE_NAME\" install";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6A0E0A9B1623EDA9004FED10 /* Sources */ = {
