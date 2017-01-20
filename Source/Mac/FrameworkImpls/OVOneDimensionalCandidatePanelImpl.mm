@@ -44,7 +44,13 @@ static bool IsKeyInList(const OVKey* key, OVKeyVector list, size_t* outIndex = 0
 {
     size_t index = 0;
     for (OVKeyVector::const_iterator i = list.begin(), e = list.end(); i != e; ++i, ++index) {
-        if (*key == *i) {
+        // First compare *key and *i. If they are not equal, compare their keyCode() if they are both printable.
+        // This is because input methods (such as the "%selkey" directive in .cin-based modules) may use ASCII
+        // code to indicate that shift keys are used for candidate seleciton keys, such as ! == Shift-1,
+        // @ == Shift-2, and so on. This assumption only works with US layout and requires further work for
+        // other layouts.
+        if (*key == *i ||
+            (isprint(key->keyCode()) && isprint(i->keyCode()) && key->keyCode() == i->keyCode())) {
             if (outIndex) {
                 *outIndex = index;
             }
