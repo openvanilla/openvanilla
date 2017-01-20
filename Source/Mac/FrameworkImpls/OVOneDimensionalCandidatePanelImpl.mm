@@ -554,7 +554,7 @@ void OVOneDimensionalCandidatePanelImpl::setCandidateKeysAndLabels(const vector<
 {
     vector<OVKey> keys;
     NSMutableArray *labels = [NSMutableArray array];
-    for (auto keyLabelPair : keyLabelPairs) {
+    for (const auto& keyLabelPair : keyLabelPairs) {
         keys.push_back(keyLabelPair.first);
         [labels addObject:[NSString stringWithUTF8String:keyLabelPair.second.c_str()]];
     }

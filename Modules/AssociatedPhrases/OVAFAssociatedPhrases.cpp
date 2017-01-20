@@ -138,7 +138,7 @@ vector<pair<OVKey, string>> OVAFAssociatedPhrases::getSelectionKeyLabelPairs(OVL
             keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(m_selectionKeys[i]), m_shiftKeySymbol + string(1, kDefaultUnshiftedSelectionKeyLabels[i])));
         }
     } else {
-        for (auto key : m_selectionKeys) {
+        for (const auto& key : m_selectionKeys) {
             keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(key), string(1, key)));
         }
     }

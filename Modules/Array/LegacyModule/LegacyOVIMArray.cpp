@@ -68,7 +68,7 @@ int OVIMArrayContext::updateCandidate(OpenVanilla::OVCINDataTable *tab,OVBuffer 
 {
     candidateStringVector.clear();
     auto pairs = tab->findChardefWithWildcard(string(keyseq.getSeq()));
-    for (auto pair : pairs) {
+    for (const auto& pair : pairs) {
         candidateStringVector.push_back(pair.second);
     }
     if (candidateStringVector.size() == 0) {
@@ -211,7 +211,7 @@ void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf,
         string searchValue(ch);
         string matchKey;
         for (size_t i = 0, len = kvm->size(); i < len; i++) {
-            auto kv = kvm->keyValuePairAtIndex(i);
+            const auto& kv = kvm->keyValuePairAtIndex(i);
             if (searchValue == kv.second) {
                 matchKey = kv.first;
                 break;
@@ -357,7 +357,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
 
         auto pairs = tabs[MAIN_TAB]->findChardefWithWildcard(OpenVanilla::OVWildcard(keyseq.getSeq()));
         candidateStringVector.clear();
-        for (auto pair : pairs) {
+        for (const auto& pair : pairs) {
             candidateStringVector.push_back(pair.second);
         }
         string c;

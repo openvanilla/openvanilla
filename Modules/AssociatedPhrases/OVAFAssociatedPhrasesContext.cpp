@@ -137,7 +137,7 @@ bool OVAFAssociatedPhrasesContext::handleDirectText(const string& text, OVTextBu
         OVOneDimensionalCandidatePanel* panel = candidateService->useOneDimensionalCandidatePanel();
         OVCandidateList* list = panel->candidateList();
         list->setCandidates(m_candidates);
-        auto pairs = m_module->getSelectionKeyLabelPairs(loaderService);
+        const auto& pairs = m_module->getSelectionKeyLabelPairs(loaderService);
         panel->setCandidateKeysAndLabels(pairs);
         panel->setCandidatesPerPage(pairs.size());
         panel->updateDisplay();
