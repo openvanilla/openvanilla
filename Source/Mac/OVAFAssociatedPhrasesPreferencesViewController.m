@@ -47,9 +47,9 @@ static NSString *const kModuleIdentifier = @"org.openvanilla.OVAFAssociatedPhras
 }
 
 - (void)dealloc {
-    [super dealloc];
     [_defaultSelectionKeys release];
     [_defaultSelectionKeyTitles release];
+    [super dealloc];
 }
 
 - (IBAction)updateField:(id)sender

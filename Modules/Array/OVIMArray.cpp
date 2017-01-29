@@ -70,14 +70,20 @@ OVEventHandlingContext* OpenVanilla::OVIMArray::createContext()
             delete m_legacyArrayModule;
             m_legacyArrayModule = 0;
         }
-
-        m_legacyArrayModule->setAutoSP(m_cfgAutoSP);
-        m_legacyArrayModule->setForceSP(m_cfgForceSP);
+        else {
+            m_legacyArrayModule->setAutoSP(m_cfgAutoSP);
+            m_legacyArrayModule->setForceSP(m_cfgForceSP);
+        }
     }
-    
-    ::OVIMArrayContext* legacyContext = static_cast<::OVIMArrayContext*>(m_legacyArrayModule->newContext());
-    OpenVanilla::OVIMArrayContext* context = new OpenVanilla::OVIMArrayContext(legacyContext);
-    return context;
+
+    if (m_legacyArrayModule) {
+        ::OVIMArrayContext* legacyContext = static_cast<::OVIMArrayContext*>(m_legacyArrayModule->newContext());
+        OpenVanilla::OVIMArrayContext* context = new OpenVanilla::OVIMArrayContext(legacyContext);
+        return context;
+    }
+    else {
+        return nullptr;
+    }
 }
 
 const string OpenVanilla::OVIMArray::identifier() const

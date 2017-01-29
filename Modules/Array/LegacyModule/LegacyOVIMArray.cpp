@@ -232,10 +232,8 @@ void OVIMArrayContext::sendAndReset(const char *ch, OVBuffer* buf,
         }
     }
 
-    bool committed = false;
     if (!(parent->isForceSP() && notifySP)) {
         buf->clear()->append(ch)->send();
-        committed = true;
     }
     else {
         buf->clear()->update();

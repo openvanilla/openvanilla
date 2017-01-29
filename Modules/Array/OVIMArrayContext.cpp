@@ -37,6 +37,11 @@ OpenVanilla::OVIMArrayContext::OVIMArrayContext(::OVIMArrayContext* legacyContex
 {
 }
 
+OpenVanilla::OVIMArrayContext::~OVIMArrayContext()
+{
+    delete m_legacyContext;
+}
+
 void OpenVanilla::OVIMArrayContext::startSession(OVLoaderService* loaderService)
 {
     m_legacyContext->clear();

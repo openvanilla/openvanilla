@@ -65,15 +65,17 @@ void OVCandidateList::update(OVCandidate *textbar)
 			append(const_cast<char*>(list->at(i).c_str()))->
             append(" ");
     }
-    
-    int totalpage=(count % perpage) ? (count/perpage)+1 : (count/perpage);
-    int currentpage=(pos/perpage)+1;
-//  if (totalpage >1)
-//  {
-        sprintf (buf, "(%d/%d)", currentpage, totalpage);
-        textbar->append(buf);
-//  }
-    textbar->update();   
+
+    if (perpage > 0) {
+        int totalpage = (count % perpage) ? (count/perpage)+1 : (count/perpage);
+        int currentpage=(pos/perpage)+1;
+    //  if (totalpage >1)
+    //  {
+            sprintf (buf, "(%d/%d)", currentpage, totalpage);
+            textbar->append(buf);
+    //  }
+    }
+    textbar->update();
 }
 
 OVCandidateList* OVCandidateList::pageUp()

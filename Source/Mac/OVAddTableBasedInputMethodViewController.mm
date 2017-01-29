@@ -43,6 +43,13 @@
 @synthesize moreInfoTextField = _moreInfoTextField;
 @synthesize preferencesWindowController = _preferencesWindowController;
 
+- (void)dealloc
+{
+    [_tablePathToBeInstalled release];
+    [_moduleIdentifierIfInstalled release];
+    [super dealloc];
+}
+
 - (void)loadPreferences
 {
     // add link to the more info text field

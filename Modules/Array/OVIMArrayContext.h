@@ -41,6 +41,7 @@ namespace OpenVanilla {
     class OVIMArrayContext : public OVEventHandlingContext {
     public:
         OVIMArrayContext(::OVIMArrayContext* legacyContext);
+        ~OVIMArrayContext();
         virtual void startSession(OVLoaderService* loaderService);
         virtual void stopSession(OVLoaderService* loaderService);
         virtual bool handleKey(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
