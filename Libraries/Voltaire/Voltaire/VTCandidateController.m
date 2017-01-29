@@ -81,6 +81,17 @@
 
 - (void)setWindowTopLeftPoint:(NSPoint)topLeftPoint bottomOutOfScreenAdjustmentHeight:(CGFloat)height
 {
+    // Since layout is now deferred, the origin setting should also be deferred so that
+    // the correct visible frame dimensions are used.
+    NSArray *params = [NSArray arrayWithObjects:[NSValue valueWithPoint:topLeftPoint], [NSNumber numberWithDouble:height], nil];
+    [self performSelector:@selector(deferredSetWindowTopLeftPoint:) withObject:params afterDelay:0.0];
+}
+
+- (void)deferredSetWindowTopLeftPoint:(NSArray *)params
+{
+    NSPoint topLeftPoint = [[params objectAtIndex:0] pointValue];
+    CGFloat height = [[params objectAtIndex:1] doubleValue];
+
     NSPoint adjustedPoint = topLeftPoint;
     CGFloat adjustedHeight = height;
     
