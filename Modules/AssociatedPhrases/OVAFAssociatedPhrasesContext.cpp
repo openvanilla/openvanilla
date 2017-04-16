@@ -140,6 +140,8 @@ bool OVAFAssociatedPhrasesContext::handleDirectText(const string& text, OVTextBu
         const auto& pairs = m_module->getSelectionKeyLabelPairs(loaderService);
         panel->setCandidateKeysAndLabels(pairs);
         panel->setCandidatesPerPage(pairs.size());
+        panel->goToPage(0);
+        panel->setHighlightIndex(0);
         panel->updateDisplay();
         panel->show();
         return true;
