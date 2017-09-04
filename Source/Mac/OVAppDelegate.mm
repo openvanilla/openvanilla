@@ -35,18 +35,21 @@
 
 - (void)dealloc
 {
+    [_preferencesWindowController release];
     [super dealloc];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [[OVModuleManager defaultManager] reload];
-
-    if (0) {
-        OVPreferencesWindowController *controller = [[OVPreferencesWindowController alloc] initWithWindowNibName:@"preferences"];
-        [[controller window] center];
-        [[controller window] orderFront:self];
-    }
 }
 
+- (void)showPreferences
+{
+    if (!_preferencesWindowController) {
+        _preferencesWindowController = [[OVPreferencesWindowController alloc] initWithWindowNibName:@"preferences"];
+    }
+    [[_preferencesWindowController window] center];
+    [[_preferencesWindowController window] orderFront:self];
+}
 @end

@@ -34,6 +34,7 @@
 #import "OVModuleManager.h"
 #import "OVUpdateChecker.h"
 #import "OVConstants.h"
+#import "OVAppDelegate.h"
 
 @interface OVInputMethodController ()
 - (BOOL)handleOVKey:(OVKey &)key client:(id)client;
@@ -189,7 +190,11 @@
 - (void)showPreferences:(id)sender
 {
     // show the preferences panel, and also make the IME app itself the focus
-    [super showPreferences:sender];
+    if ([IMKInputController instancesRespondToSelector:@selector(showPreferences:)]) {
+        [super showPreferences:sender];
+    } else {
+        [(OVAppDelegate *)[NSApp delegate] showPreferences];
+    }
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 
