@@ -133,6 +133,11 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
 
         if (compose(readingText, composingText, candidateService, loaderService)) {
             return true;
+        } else if (m_module->m_configClearReadingBufferAtCompositionError) {
+            m_components.clear();
+            readingText->clear();
+            readingText->updateDisplay();
+            return true;
         }
     }
     else if (key->keyCode() == OVKeyCode::Esc) {
