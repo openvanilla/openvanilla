@@ -31,6 +31,7 @@
 #if defined(__APPLE__)
     #include <dirent.h>
     #include <stdio.h>
+    #include <unistd.h>
 #else
 	#include <windows.h>
     #include <shlobj.h>
