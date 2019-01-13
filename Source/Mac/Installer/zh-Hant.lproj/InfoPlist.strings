@@ -1,4 +1,4 @@
 /* Localized versions of Info.plist keys */
 
 CFBundleName = "安裝 OpenVanilla";
-NSHumanReadableCopyright = "Copyright © 2004-2017 The OpenVanilla Project.\nAll Rights Reserved.";
+NSHumanReadableCopyright = "Copyright © 2004-2019 The OpenVanilla Project.\nAll Rights Reserved.";
