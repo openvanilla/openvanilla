@@ -67,6 +67,8 @@ $ ＄
 ) ）
 _ ＿
 + ＋
+%keyname end
+%chardef begin
 1 １
 2 ２
 3 ３
@@ -77,8 +79,6 @@ _ ＿
 8 ８
 9 ９
 0 ０
-%keyname end
-%chardef begin
 ' 、
 ' ′
 ' ‘
