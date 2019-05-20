@@ -2,6 +2,8 @@
 
 最新版本[由此處下載](https://github.com/openvanilla/openvanilla/releases)
 
+僅以此 README 紀念李士傑 (Shih-Chieh Ilya Li, 1973-2019)。
+
 ## 簡介
 
 OpenVanilla 是一套為 Mac 設計的輸入法套件。內建的輸入法包括了倉頡、簡易（速成）、大易、行列、符號與日文假名共五種。使用者可透過偏好設定，匯入其他輸入法的表格，來建立符合自己需要的輸入法。
