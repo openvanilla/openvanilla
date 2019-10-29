@@ -11,7 +11,7 @@ VER_PATTERN = re.compile(r'(\d+(\.\d+)*)(.*)')
 
 def upgrade(dry_run, revision_number, version_name, commit, plists):
     if revision_number:
-        target_rev = revision_number
+        target_rev = str(revision_number)
     else:
         # revs has an empty line, so len(rev) gives us what we want
         # (which is commit count + 1)
