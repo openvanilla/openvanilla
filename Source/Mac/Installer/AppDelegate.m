@@ -72,6 +72,7 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
 
 - (void)dealloc
 {
+    [_archiveUtil release];
     [_installingVersion release];
     [_translocationRemovalStartTime release];
     [super dealloc];
@@ -79,6 +80,12 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    _installingVersion = [[[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleVersionKey] retain];
+    NSString *versionString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+
+    _archiveUtil = [[ArchiveUtil alloc] initWithAppName:kTargetBin targetAppBundleName:kTargetBundle];
+    [_archiveUtil validateIfNotarizedArchiveExists];
+
     if ([[NSFileManager defaultManager] fileExistsAtPath:kLegacyAppPath]) {
         NSModalResponse result = RunAlertPanel(NSLocalizedString(@"Cannot Upgrade from Legacy Version", nil), NSLocalizedString(@"A legacy version of OpenVanilla (prior to 0.9) exists.\n\nPlease delete it before installing OpenVanilla.", nil), NSLocalizedString(@"Quit Installer", nil), NSLocalizedString(@"Uninstall Instructions", nil), nil);
 
@@ -101,10 +108,6 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
     [[self.textView textStorage] setAttributedString:mutableAttrStr];
     [self.textView setSelectedRange:NSMakeRange(0, 0)];
     
-    NSBundle *installingBundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:kTargetBin ofType:kTargetType]];
-    _installingVersion = [[[installingBundle infoDictionary] objectForKey:(id)kCFBundleVersionKey] retain];
-    NSString *versionString = [[installingBundle infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-
     [[self window] setTitle:[NSString stringWithFormat:NSLocalizedString(@"%@ (for version %@, r%@)", nil), [[self window] title], versionString, _installingVersion]];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[kTargetPartialPath stringByExpandingTildeInPath]]) {
@@ -227,7 +230,13 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
 
 - (void)installInputMethodWithWarning:(BOOL)warning
 {
-    NSTask *cpTask = [NSTask launchedTaskWithLaunchPath:@"/bin/cp" arguments:[NSArray arrayWithObjects:@"-R", [[NSBundle mainBundle] pathForResource:kTargetBin ofType:kTargetType], [kDestinationPartial stringByExpandingTildeInPath], nil]];
+    // If the unzipped archive does not exist, this must be a dev-mode installer.
+    NSString *targetBundle = [_archiveUtil unzipNotarizedArchive];
+    if (!targetBundle) {
+        targetBundle = [[NSBundle mainBundle] pathForResource:kTargetBin ofType:kTargetType];
+    }
+    
+    NSTask *cpTask = [NSTask launchedTaskWithLaunchPath:@"/bin/cp" arguments:[NSArray arrayWithObjects:@"-R", targetBundle, [kDestinationPartial stringByExpandingTildeInPath], nil]];
     [cpTask waitUntilExit];
     if ([cpTask terminationStatus] != 0) {
         RunAlertPanel(NSLocalizedString(@"Install Failed", nil), NSLocalizedString(@"Cannot copy the file to the destination.", nil),  NSLocalizedString(@"Cancel", nil), nil, nil);

@@ -82,6 +82,8 @@
 		6ACB49FA15E49F2900380B82 /* VTVerticalCandidateTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49F315E49F2900380B82 /* VTVerticalCandidateTableView.m */; };
 		6ACB49FB15E49F2900380B82 /* VTVerticalKeyLabelStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49F515E49F2900380B82 /* VTVerticalKeyLabelStripView.m */; };
 		6ACD12832368894B005046C7 /* NoOp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6ACD12822368894B005046C7 /* NoOp.xcassets */; };
+		6ACD128623688A23005046C7 /* ArchiveUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACD128423688A23005046C7 /* ArchiveUtil.m */; };
+		6ACD128823688A32005046C7 /* NotarizedArchives in Resources */ = {isa = PBXBuildFile; fileRef = 6ACD128723688A32005046C7 /* NotarizedArchives */; };
 		6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */; };
 /* End PBXBuildFile section */
 
@@ -307,6 +309,9 @@
 		6ACB49F415E49F2900380B82 /* VTVerticalKeyLabelStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTVerticalKeyLabelStripView.h; sourceTree = "<group>"; };
 		6ACB49F515E49F2900380B82 /* VTVerticalKeyLabelStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTVerticalKeyLabelStripView.m; sourceTree = "<group>"; };
 		6ACD12822368894B005046C7 /* NoOp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NoOp.xcassets; sourceTree = "<group>"; };
+		6ACD128423688A23005046C7 /* ArchiveUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveUtil.m; sourceTree = "<group>"; };
+		6ACD128523688A23005046C7 /* ArchiveUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveUtil.h; sourceTree = "<group>"; };
+		6ACD128723688A32005046C7 /* NotarizedArchives */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NotarizedArchives; sourceTree = "<group>"; };
 		6AD4989E163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6AD4989F163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
 		6AD498A0163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -353,8 +358,11 @@
 		6A0E0ABC1623EDF5004FED10 /* Installer */ = {
 			isa = PBXGroup;
 			children = (
+				6ACD128723688A32005046C7 /* NotarizedArchives */,
 				6A0E0ABD1623EDF5004FED10 /* AppDelegate.h */,
 				6A0E0ABE1623EDF5004FED10 /* AppDelegate.m */,
+				6ACD128523688A23005046C7 /* ArchiveUtil.h */,
+				6ACD128423688A23005046C7 /* ArchiveUtil.m */,
 				6A0E0ABF1623EDF5004FED10 /* InfoPlist.strings */,
 				6A0E0AC11623EDF5004FED10 /* License.rtf */,
 				6A0E0AC31623EDF5004FED10 /* Localizable.strings */,
@@ -716,6 +724,7 @@
 				6A0E0A9B1623EDA9004FED10 /* Sources */,
 				6A0E0A9C1623EDA9004FED10 /* Frameworks */,
 				6A0E0A9D1623EDA9004FED10 /* Resources */,
+				6ACD128923688A49005046C7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -785,6 +794,7 @@
 			files = (
 				6A0E0ACF1623EDF5004FED10 /* InfoPlist.strings in Resources */,
 				6A0E0AD01623EDF5004FED10 /* License.rtf in Resources */,
+				6ACD128823688A32005046C7 /* NotarizedArchives in Resources */,
 				6A0E0AD11623EDF5004FED10 /* Localizable.strings in Resources */,
 				6A0E0AD21623EDF5004FED10 /* MainMenu.xib in Resources */,
 				6A0E0AD51623EE82004FED10 /* OpenVanilla-App.icns in Resources */,
@@ -810,12 +820,33 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6ACD128923688A49005046C7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Remove the README.md in the NotarizedArchives directory\n    rm -f \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotarizedArchives/README.md\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6A0E0A9B1623EDA9004FED10 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				6A0E0ACE1623EDF5004FED10 /* AppDelegate.m in Sources */,
+				6ACD128623688A23005046C7 /* ArchiveUtil.m in Sources */,
 				6A0E0AD41623EDF5004FED10 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
