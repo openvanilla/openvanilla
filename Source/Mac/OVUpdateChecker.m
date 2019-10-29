@@ -169,8 +169,7 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSString *errorDescription = nil;
-    id plist = [NSPropertyListSerialization propertyListFromData:_data mutabilityOption:NSPropertyListImmutable format:NULL errorDescription:&errorDescription];
+    id plist = [NSPropertyListSerialization propertyListWithData:_data options:NSPropertyListImmutable format:NULL error:NULL];
 
     NSDate *now = [NSDate date];
     [self setLastUpdateCheckDate:now];

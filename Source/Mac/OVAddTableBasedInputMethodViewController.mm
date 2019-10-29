@@ -65,7 +65,7 @@
     NSURL *url = [NSURL URLWithString:OVMainSiteURLString];
     [attrString addAttribute:NSLinkAttributeName value:url range:linkRange];
     [attrString addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:linkRange];
-    [attrString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSSingleUnderlineStyle] range:linkRange];
+    [attrString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:linkRange];
     [attrString endEditing];
 
     [self.moreInfoTextField setAttributedStringValue:attrString];
