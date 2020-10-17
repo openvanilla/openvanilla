@@ -187,9 +187,10 @@ public:
 	OVLegacyServiceWrapper(OpenVanilla::OVLoaderService* service = 0, OpenVanilla::OVTextBuffer* textBuffer = 0)
         : m_service(service)
         , m_textBuffer(textBuffer)
+    , m_locale(service ? service->locale() : "en")
     {
     }
-    
+
     virtual void beep()
     {
         if (m_service) {
@@ -205,11 +206,7 @@ public:
     }
     virtual const char *locale()
     {
-        if (m_service) {
-            return m_service->locale().c_str();
-        }
-
-        return "en";
+        return m_locale.c_str();
     }
 
     virtual const char *userSpacePath(const char *modid)
@@ -230,6 +227,7 @@ public:
 protected:
     OpenVanilla::OVLoaderService* m_service;
     OpenVanilla::OVTextBuffer* m_textBuffer;
+    std::string m_locale;
 };
 
 

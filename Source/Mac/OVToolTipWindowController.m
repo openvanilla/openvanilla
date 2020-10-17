@@ -42,6 +42,7 @@
         _toolTip = [[NSTextField alloc] initWithFrame:contentRect];
         [_toolTip setEditable:NO];
         [_toolTip setSelectable:NO];
+        [_toolTip setTextColor:[NSColor blackColor]];
         [_toolTip setBackgroundColor:[NSColor yellowColor]];
         [_toolTip setBezeled:NO];
         [_toolTip setFont:[NSFont systemFontOfSize:14.0]];
