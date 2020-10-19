@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>TISParticipatesInTouchBar</key>
-	<false/>
-	<key>TICapsLockLanguageSwitchCapable</key>
-	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -46,10 +42,14 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>TICapsLockLanguageSwitchCapable</key>
+	<true/>
 	<key>TISInputSourceID</key>
 	<string>org.openvanilla.inputmethod.OpenVanilla</string>
 	<key>TISIntendedLanguage</key>
 	<string>zh-Hant</string>
+	<key>TISParticipatesInTouchBar</key>
+	<false/>
 	<key>tsInputMethodCharacterRepertoireKey</key>
 	<array>
 		<string>Hant</string>
