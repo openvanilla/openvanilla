@@ -82,8 +82,8 @@
 		6AECB188253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */; };
 		6AECB189253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */; };
 		6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */; };
-		AA6B9EF9257F691E001E8DD8 /* jyutping-toneless.cin in Resources */ = {isa = PBXBuildFile; fileRef = AA6B9EF7257F691E001E8DD8 /* jyutping-toneless.cin */; };
-		AA6B9EFA257F691E001E8DD8 /* jyutping.cin in Resources */ = {isa = PBXBuildFile; fileRef = AA6B9EF8257F691E001E8DD8 /* jyutping.cin */; };
+		AA43E0EA257F72A600FB694D /* jyutping-toneless.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = AA6B9EF7257F691E001E8DD8 /* jyutping-toneless.cin */; };
+		AA43E0EB257F72A600FB694D /* jyutping.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = AA6B9EF8257F691E001E8DD8 /* jyutping.cin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +127,8 @@
 			dstPath = DataTables/TableBased;
 			dstSubfolderSpec = 7;
 			files = (
+				AA43E0EA257F72A600FB694D /* jyutping-toneless.cin in Copy TableBased Input Method Tables */,
+				AA43E0EB257F72A600FB694D /* jyutping.cin in Copy TableBased Input Method Tables */,
 				6A7789FB163121B0000C85A2 /* cj.cin in Copy TableBased Input Method Tables */,
 				6A6BB4611633784300871443 /* dayi3.cin in Copy TableBased Input Method Tables */,
 				6A7789FC163121B0000C85A2 /* ehq-symbols.cin in Copy TableBased Input Method Tables */,
@@ -805,8 +807,6 @@
 				6ABBAF0B15CD58F90080EE7D /* MainMenu.xib in Resources */,
 				6ABBAF2815CD617D0080EE7D /* OpenVanilla-InputMenu.tiff in Resources */,
 				6A6B214A1621758700697149 /* OpenVanilla-InputMenu@2x.tiff in Resources */,
-				AA6B9EFA257F691E001E8DD8 /* jyutping.cin in Resources */,
-				AA6B9EF9257F691E001E8DD8 /* jyutping-toneless.cin in Resources */,
 				6AB4A07815ED2BBA00E78557 /* preferences.xib in Resources */,
 				6A616644162FD8420042559F /* OVNonModalAlertWindowController.xib in Resources */,
 				6AECB188253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */,
