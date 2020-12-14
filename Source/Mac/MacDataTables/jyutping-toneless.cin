@@ -11,11 +11,11 @@
 # Rime 粵語拼音方案: https://github.com/rime/rime-cantonese
 # 共享創意 - 姓名標示 4.0 國際: https://creativecommons.org/licenses/by/4.0/deed.zh_TW
 #
-%ename Jyut6ping3 (Toneless)
-%cname 粵拼 (無調號)
+%ename Cantonese (Toneless)
+%cname 粵語拼音 (無調號版)
 %encoding UTF-8
 %selkey 1234567890
-%endkey 
+%endkey
 %keyname begin
 a a
 b b
