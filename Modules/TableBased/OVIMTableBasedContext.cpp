@@ -58,7 +58,8 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
         return true;
     }
 
-    if (key->isCapsLockOn() || key->isNumLockOn() || (key->isShiftPressed() && key->isKeyCodeAlpha())) {
+    // 增加判斷 OVCINDataTable 是否含有大寫英文字根定義
+    if (key->isCapsLockOn() || key->isNumLockOn() || (key->isShiftPressed() && key->isKeyCodeAlpha() )) { // && !isKeyNameCaseSensitive() )) {
         if (!readingText->isEmpty()) {
             readingText->clear();
             readingText->updateDisplay();
