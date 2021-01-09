@@ -59,7 +59,7 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
     }
 
     // 增加判斷 OVCINDataTable 是否含有大寫英文字根定義
-    if (key->isCapsLockOn() || key->isNumLockOn() || (key->isShiftPressed() && key->isKeyCodeAlpha() )) { // && !isKeyNameCaseSensitive() )) {
+    if ((key->isCapsLockOn() || key->isNumLockOn() || (key->isShiftPressed() && key->isKeyCodeAlpha())) && m_module->m_table->keynameMap()->isPairMapCaseSensitive()) {
         if (!readingText->isEmpty()) {
             readingText->clear();
             readingText->updateDisplay();
