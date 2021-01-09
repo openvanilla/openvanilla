@@ -303,7 +303,8 @@ namespace OpenVanilla {
             // scanPairMap4CaseSensitivity(): return true if there is any ASCII 大寫字根
             
             for (size_t index = 0; index < m_size; index++) {
-                if (m_data->key[index])
+                char c = m_data->key[index];
+                if (c >= 'A' && c <= 'Z')
                     return true;
             }
             return false;
