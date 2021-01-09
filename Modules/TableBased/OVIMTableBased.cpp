@@ -251,14 +251,7 @@ void OVIMTableBased::checkTable()
     // update timestamp and reload the table
     m_tableTimestamp = timestamp;
     OVCINDataTableParser parser;
-    m_table = parser.CINDataTableFromFileName(m_tablePath);
-    
-    
-    
-    
-    // In order for later isKeyNameCaseSensitive check, should this function called with caseSensitive == true?
-    // m_table = parser.CINDataTableFromFileName(m_tablePath, true);
-    
-    // 輸入法模組把所有的 %keyname 定義都掃描一遍，如果找到有 ASCII 大寫的字根，就 disable shift key （也就是大寫英文字）的處理
-    // isKeyNameCaseSensitive(): return true if there is any ASCII 大寫字根
+    // m_table = parser.CINDataTableFromFileName(m_tablePath);
+    // In order for later isPairMapCaseSensitive check, should this function called with caseSensitive == true?
+    m_table = parser.CINDataTableFromFileName(m_tablePath, true);
 }

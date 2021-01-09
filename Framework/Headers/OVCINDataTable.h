@@ -120,14 +120,21 @@ namespace OpenVanilla {
             
             return result;
         }
+        
+        virtual bool isPairMapCaseSensitive() const
+        {
+            return m_isPairMapCaseSensitive;
+        }
+        
     protected:
         friend class OVCINDataTableParser;
         
-        OVFastKeyValuePairMap(size_t initSize, size_t growSize, bool caseSensitive = false)
+        OVFastKeyValuePairMap(size_t initSize, size_t growSize, bool caseSensitive = false, bool isPairMapCaseSensitive = false)
             : m_index(0)
             , m_size(initSize ? initSize : 1)
             , m_growSize(growSize)
             , m_caseSensitive(caseSensitive)
+            , m_isPairMapCaseSensitive(isPairMapCaseSensitive)
         {
             m_data = (KVPair*)calloc(1, sizeof(KVPair) * m_size);
         }
@@ -148,10 +155,13 @@ namespace OpenVanilla {
         {
             m_size = m_index;
             
-            if (m_caseSensitive)
+            if (m_caseSensitive) {
                 qsort(m_data, m_index, sizeof(KVPair), OVFastKeyValuePairMap::qsortCompareCaseSensitive);
-            else
+                m_isPairMapCaseSensitive = scanPairMap4CaseSensitivity();
+            }
+            else {
                 qsort(m_data, m_index, sizeof(KVPair), OVFastKeyValuePairMap::qsortCompare);
+            }
         }
         
         void insensitivizeString(string& str)
@@ -286,6 +296,19 @@ namespace OpenVanilla {
             m_size += growSize;
         }
 
+        bool scanPairMap4CaseSensitivity()
+        {
+            // 輸入法模組把所有的 %keyname 定義都掃描一遍，
+            // 如果找到有 ASCII 大寫的字根，就 disable shift key （也就是大寫英文字）的處理
+            // scanPairMap4CaseSensitivity(): return true if there is any ASCII 大寫字根
+            
+            for (size_t index = 0; index < m_size; index++) {
+                if (m_data->key[index])
+                    return true;
+            }
+            return false;
+        }
+        
     protected:
         struct KVPair {
             char* key;
@@ -297,6 +320,7 @@ namespace OpenVanilla {
         size_t m_size;
         size_t m_index;
         KVPair* m_data;
+        bool m_isPairMapCaseSensitive;
     };
     
     class OVCINDataTable {
