@@ -40,6 +40,8 @@
 
 #include <map>
 
+#include <algorithm>
+
 namespace OpenVanilla {
     using namespace std;
     
@@ -126,6 +128,11 @@ namespace OpenVanilla {
             return m_isPairMapCaseSensitive;
         }
         
+        virtual bool isCaseSensitive() const
+        {
+            return m_caseSensitive;
+        }
+        
     protected:
         friend class OVCINDataTableParser;
         
@@ -157,7 +164,7 @@ namespace OpenVanilla {
             
             if (m_caseSensitive) {
                 qsort(m_data, m_index, sizeof(KVPair), OVFastKeyValuePairMap::qsortCompareCaseSensitive);
-                m_isPairMapCaseSensitive = scanPairMap4CaseSensitivity();
+                scanPairMap4CaseSensitivity();
             }
             else {
                 qsort(m_data, m_index, sizeof(KVPair), OVFastKeyValuePairMap::qsortCompare);
@@ -296,18 +303,24 @@ namespace OpenVanilla {
             m_size += growSize;
         }
 
-        bool scanPairMap4CaseSensitivity()
+        void scanPairMap4CaseSensitivity()
         {
             // 輸入法模組把所有的 %keyname 定義都掃描一遍，
             // 如果找到有 ASCII 大寫的字根，就 disable shift key （也就是大寫英文字）的處理
             // scanPairMap4CaseSensitivity(): return true if there is any ASCII 大寫字根
             
             for (size_t index = 0; index < m_size; index++) {
-                char c = m_data->key[index];
-                if (c >= 'A' && c <= 'Z')
-                    return true;
+                pair<string, string> entry = keyValuePairAtIndex(index);
+                string a = entry.first;
+                for (int i = 0; i < a.length(); i++) {
+                    if (isupper(a.at(i))) {
+                        m_isPairMapCaseSensitive = true;
+                        return;
+                    }
+                }
             }
-            return false;
+            
+            
         }
         
     protected:
