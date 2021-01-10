@@ -312,6 +312,12 @@ namespace OpenVanilla {
             for (size_t index = 0; index < m_size; index++) {
                 pair<string, string> entry = keyValuePairAtIndex(index);
                 string a = entry.first;
+                
+//                if (any_of(a.begin(), a.end(), isupper)) {
+//                    m_isPairMapCaseSensitive = true;
+//                    return;
+//                }
+                
                 for (int i = 0; i < a.length(); i++) {
                     if (isupper(a.at(i))) {
                         m_isPairMapCaseSensitive = true;
