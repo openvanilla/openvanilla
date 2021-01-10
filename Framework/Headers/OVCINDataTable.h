@@ -309,6 +309,8 @@ namespace OpenVanilla {
             // 如果找到有 ASCII 大寫的字根，就 disable shift key （也就是大寫英文字）的處理
             // scanPairMap4CaseSensitivity(): return true if there is any ASCII 大寫字根
             
+//            m_isPairMapCaseSensitive = true;
+            
             for (size_t index = 0; index < m_size; index++) {
                 pair<string, string> entry = keyValuePairAtIndex(index);
                 string a = entry.first;

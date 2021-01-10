@@ -99,6 +99,10 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
         return true;
     }
 
+    // ????????????????????????
+    // seems like the keynameMap is not correctly mapped for upper case keys
+    // ????????????????????????
+    
     if (key->receivedString().size() && key->keyCode() != 32 && !key->isDirectTextKey()) {
         if (isValidKeyString(string(1, key->keyCode()))) {
             if (m_components.size() >= m_module->m_configMaximumRadicalLength) {
