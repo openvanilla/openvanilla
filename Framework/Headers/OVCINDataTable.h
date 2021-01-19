@@ -40,8 +40,6 @@
 
 #include <map>
 
-#include <algorithm>
-
 namespace OpenVanilla {
     using namespace std;
     
@@ -307,19 +305,11 @@ namespace OpenVanilla {
         {
             // 輸入法模組把所有的 %keyname 定義都掃描一遍，
             // 如果找到有 ASCII 大寫的字根，就 disable shift key （也就是大寫英文字）的處理
-            // scanPairMap4CaseSensitivity(): return true if there is any ASCII 大寫字根
-            
-//            m_isPairMapCaseSensitive = true;
-            
+            // scanPairMap4CaseSensitivity(): return true if there is any ASCII 大寫字根 in the map
+
             for (size_t index = 0; index < m_size; index++) {
-                pair<string, string> entry = keyValuePairAtIndex(index);
+                const pair<string, string> entry = keyValuePairAtIndex(index);
                 string a = entry.first;
-                
-//                if (any_of(a.begin(), a.end(), isupper)) {
-//                    m_isPairMapCaseSensitive = true;
-//                    return;
-//                }
-                
                 for (int i = 0; i < a.length(); i++) {
                     if (isupper(a.at(i))) {
                         m_isPairMapCaseSensitive = true;
@@ -327,8 +317,6 @@ namespace OpenVanilla {
                     }
                 }
             }
-            
-            
         }
         
     protected:

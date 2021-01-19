@@ -251,7 +251,7 @@ void OVIMTableBased::checkTable()
     // update timestamp and reload the table
     m_tableTimestamp = timestamp;
     OVCINDataTableParser parser;
-    // m_table = parser.CINDataTableFromFileName(m_tablePath);
-    // In order for later isPairMapCaseSensitive check, should this function called with caseSensitive == true?
+    
+    // In order for later isPairMapCaseSensitive check, this function should be called with caseSensitive == true !
     m_table = parser.CINDataTableFromFileName(m_tablePath, true);
 }

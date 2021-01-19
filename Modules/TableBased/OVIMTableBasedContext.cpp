@@ -57,14 +57,7 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
         composingText->commit();
         return true;
     }
-
     
-//    if (m_module->m_table->keynameMap()->isCaseSensitive()) {
-//    if (m_module->m_table->keynameMap()->isPairMapCaseSensitive()) {
-//        loaderService->beep();
-//    }
-    
-    // 增加判斷 OVCINDataTable 是否含有大寫英文字根定義
     if (key->isCapsLockOn() || key->isNumLockOn() || (key->isShiftPressed() && key->isKeyCodeAlpha() && !m_module->m_table->keynameMap()->isPairMapCaseSensitive())) {
         if (!readingText->isEmpty()) {
             readingText->clear();
@@ -98,10 +91,6 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
         composingText->commit();
         return true;
     }
-
-    // ????????????????????????
-    // seems like the keynameMap is not correctly mapped for upper case keys
-    // ????????????????????????
     
     if (key->receivedString().size() && key->keyCode() != 32 && !key->isDirectTextKey()) {
         if (isValidKeyString(string(1, key->keyCode()))) {
