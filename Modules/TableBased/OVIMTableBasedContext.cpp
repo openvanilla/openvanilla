@@ -58,7 +58,7 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
         return true;
     }
     
-    if (key->isCapsLockOn() || key->isNumLockOn() || (key->isShiftPressed() && key->isKeyCodeAlpha() && !m_module->m_table->keynameMap()->isPairMapCaseSensitive())) {
+    if (key->isCapsLockOn() || key->isNumLockOn() || (key->isShiftPressed() && key->isKeyCodeAlpha() && !m_module->m_table->keynameMap()->isPairMapMixedCase())) {
         if (!readingText->isEmpty()) {
             readingText->clear();
             readingText->updateDisplay();

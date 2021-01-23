@@ -121,9 +121,9 @@ namespace OpenVanilla {
             return result;
         }
         
-        virtual bool isPairMapCaseSensitive() const
+        virtual bool isPairMapMixedCase() const
         {
-            return m_isPairMapCaseSensitive;
+            return m_isPairMapMixedCase;
         }
         
         virtual bool isCaseSensitive() const
@@ -131,15 +131,20 @@ namespace OpenVanilla {
             return m_caseSensitive;
         }
         
+        virtual void SetCaseSensitive(bool caseSensitive)
+        {
+            m_caseSensitive = caseSensitive;
+        }
+        
     protected:
         friend class OVCINDataTableParser;
         
-        OVFastKeyValuePairMap(size_t initSize, size_t growSize, bool caseSensitive = false, bool isPairMapCaseSensitive = false)
+        OVFastKeyValuePairMap(size_t initSize, size_t growSize, bool caseSensitive = false, bool isPairMapMixedCase = false)
             : m_index(0)
             , m_size(initSize ? initSize : 1)
             , m_growSize(growSize)
             , m_caseSensitive(caseSensitive)
-            , m_isPairMapCaseSensitive(isPairMapCaseSensitive)
+            , m_isPairMapMixedCase(isPairMapMixedCase)
         {
             m_data = (KVPair*)calloc(1, sizeof(KVPair) * m_size);
         }
@@ -162,7 +167,6 @@ namespace OpenVanilla {
             
             if (m_caseSensitive) {
                 qsort(m_data, m_index, sizeof(KVPair), OVFastKeyValuePairMap::qsortCompareCaseSensitive);
-                scanPairMap4CaseSensitivity();
             }
             else {
                 qsort(m_data, m_index, sizeof(KVPair), OVFastKeyValuePairMap::qsortCompare);
@@ -176,6 +180,60 @@ namespace OpenVanilla {
                         
             for (string::iterator iter = str.begin() ; iter != str.end() ; ++iter)
                 *iter = tolower(*iter);
+        }
+        
+        void detectMixedCase()
+        {
+            // detectMixedCase(): make m_isPairMapMixedCase = true if the pair map has mixed case
+            bool lowerCaseExist = false;
+            bool upperCaseExist = false;
+            
+            for (size_t index = 0; index < m_size; index++) {
+                const pair<string, string> entry = keyValuePairAtIndex(index);
+                string key = entry.first;
+                
+                if (!lowerCaseExist || !upperCaseExist) {
+                    for (int i = 0; i < key.length(); i++) {
+                        if (isupper(key.at(i))) {
+                            upperCaseExist = true;
+                            break;
+                        } else if (islower(key.at(i))) {
+                            lowerCaseExist = true;
+                            break;
+                        }
+                    }
+                } else {
+                    m_isPairMapMixedCase = true;
+                    return;
+                }
+            }
+        }
+        
+        void insensitivizeMap(){
+            if (m_isPairMapMixedCase)
+                return;
+            
+            // if the map is not case mixed, make all the alphabet lowercase
+            for (size_t index = 0; index < m_size; index++) {
+                const pair<string, string> entry = keyValuePairAtIndex(index);
+                string key = entry.first;
+                
+                for (int i = 0; i < key.length(); i++) {
+                    char c = key.at(i);
+                    if (c >= 'A' && c <= 'Z') {
+                        insensitivizeKey(index);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        void insensitivizeKey(size_t index){
+            if (index >= m_index)
+                return;
+            
+            KVPair* entry = m_data + index;
+            makeLowerCase(entry->key);
         }
         
     protected:
@@ -300,22 +358,12 @@ namespace OpenVanilla {
 
             m_size += growSize;
         }
-
-        void scanPairMap4CaseSensitivity()
+        
+        void makeLowerCase(char* ptr)
         {
-            // 輸入法模組把所有的 %keyname 定義都掃描一遍，
-            // 如果找到有 ASCII 大寫的字根，就 disable shift key （也就是大寫英文字）的處理
-            // scanPairMap4CaseSensitivity(): return true if there is any ASCII 大寫字根 in the map
-
-            for (size_t index = 0; index < m_size; index++) {
-                const pair<string, string> entry = keyValuePairAtIndex(index);
-                string a = entry.first;
-                for (int i = 0; i < a.length(); i++) {
-                    if (isupper(a.at(i))) {
-                        m_isPairMapCaseSensitive = true;
-                        return;
-                    }
-                }
+            while (*ptr) {
+                *ptr = tolower(*ptr);
+                ptr++;
             }
         }
         
@@ -330,7 +378,7 @@ namespace OpenVanilla {
         size_t m_size;
         size_t m_index;
         KVPair* m_data;
-        bool m_isPairMapCaseSensitive;
+        bool m_isPairMapMixedCase;
     };
     
     class OVCINDataTable {
@@ -536,7 +584,8 @@ namespace OpenVanilla {
                 return 0;
             }
             
-            OVFastKeyValuePairMap* keynameMap = new OVFastKeyValuePairMap(64, 0, caseSensitive);
+            // In order for later isPairMapMixedCase check, keynameMap is always caseSensitive!
+            OVFastKeyValuePairMap* keynameMap = new OVFastKeyValuePairMap(64, 0, true);
             if (!keynameMap) {
                 free(m_data);
                 delete propertyMap;
@@ -588,9 +637,6 @@ namespace OpenVanilla {
                             blockMode = 0;
                         }
                         else {
-                            if (!caseSensitive)
-                                makeLowerCase(key);
-                        
                             keynameMap->add(key, value);
                         }
                     }
@@ -644,6 +690,12 @@ namespace OpenVanilla {
                         }
                         else if (!strcmp(key, "chardef") && !strcmp(value, "begin")) {
                             blockMode = 2;
+                            
+                            // Assuming %keyname section is always in front of %chardef
+                            // beginning of chardef scan
+                            keynameMap->detectMixedCase();
+                            keynameMap->insensitivizeMap();
+                            chardefMap->SetCaseSensitive(keynameMap->m_isPairMapMixedCase);
                         }
                         else {
                             propertyMap->add(key, value);
