@@ -202,7 +202,7 @@ namespace OpenVanilla {
                             break;
                         }
                     }
-                } else {
+                } else if (lowerCaseExist && upperCaseExist) {
                     m_isPairMapMixedCase = true;
                     return;
                 }
