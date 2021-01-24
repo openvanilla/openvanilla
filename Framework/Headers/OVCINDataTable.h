@@ -693,9 +693,11 @@ namespace OpenVanilla {
                             
                             // Assuming %keyname section is always in front of %chardef
                             // beginning of chardef scan
-                            keynameMap->detectMixedCase();
-                            keynameMap->insensitivizeMap();
-                            chardefMap->SetCaseSensitive(keynameMap->m_isPairMapMixedCase);
+                            if (!caseSensitive) {
+                                keynameMap->detectMixedCase();
+                                keynameMap->insensitivizeMap();
+                                chardefMap->SetCaseSensitive(keynameMap->m_isPairMapMixedCase);
+                            }
                         }
                         else {
                             propertyMap->add(key, value);
