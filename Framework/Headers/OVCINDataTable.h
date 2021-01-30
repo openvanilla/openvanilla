@@ -697,6 +697,7 @@ namespace OpenVanilla {
                                 keynameMap->detectMixedCase();
                                 keynameMap->insensitivizeMap();
                                 chardefMap->SetCaseSensitive(keynameMap->m_isPairMapMixedCase);
+                                caseSensitive = keynameMap->m_isPairMapMixedCase;
                             }
                         }
                         else {
