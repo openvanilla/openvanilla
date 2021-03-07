@@ -188,7 +188,8 @@ namespace OpenVanilla {
             bool lowerCaseExist = false;
             bool upperCaseExist = false;
             
-            for (size_t index = 0; index < m_size; index++) {
+            // Use m_index since the map may not have been frozen yet.
+            for (size_t index = 0; index < m_index; index++) {
                 const pair<string, string> entry = keyValuePairAtIndex(index);
                 const auto& key = entry.first;
                 
@@ -210,23 +211,13 @@ namespace OpenVanilla {
         
         void insensitivizeMap(){
             // if the map is not case mixed, make all the alphabet lowercase
-            for (size_t index = 0; index < m_size; index++) {
-                
-//                KVPair* entry = m_data + index;
-//                char* key = entry->key;
-//                while ((char c == *key)) {
-//                    if (isupper(c)) *key = tolower(c);
-//                    ++key;
-//                }
-                const pair<string, string> entry = keyValuePairAtIndex(index);
-                string key = entry.first;
-                
-                for (int i = 0; i < key.length(); i++) {
-                    char c = key.at(i);
-                    if (c >= 'A' && c <= 'Z') {
-                        insensitivizeKey(index);
-                        break;
-                    }
+            // Use m_index since the map may not have been frozen yet.
+            for (size_t index = 0; index < m_index; index++) {
+                KVPair* entry = m_data + index;
+                char* key = entry->key;
+                while (char c = *key) {
+                    if (isupper(c)) *key = tolower(c);
+                    ++key;
                 }
             }
         }
