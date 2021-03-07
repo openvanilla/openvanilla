@@ -131,7 +131,7 @@ namespace OpenVanilla {
             return m_caseSensitive;
         }
         
-        virtual void SetCaseSensitive(bool caseSensitive)
+        virtual void setCaseSensitive(bool caseSensitive)
         {
             m_caseSensitive = caseSensitive;
         }
@@ -190,19 +190,18 @@ namespace OpenVanilla {
             
             for (size_t index = 0; index < m_size; index++) {
                 const pair<string, string> entry = keyValuePairAtIndex(index);
-                string key = entry.first;
+                const auto& key = entry.first;
                 
-                if (!lowerCaseExist || !upperCaseExist) {
-                    for (int i = 0; i < key.length(); i++) {
-                        if (isupper(key.at(i))) {
-                            upperCaseExist = true;
-                            break;
-                        } else if (islower(key.at(i))) {
-                            lowerCaseExist = true;
-                            break;
-                        }
+                for (auto c : key) {
+                    if (!upperCaseExist && isupper(c)) {
+                        upperCaseExist = true;
+                        break;
+                    } else if (!lowerCaseExist && islower(c)) {
+                        lowerCaseExist = true;
+                        break;
                     }
-                } else if (lowerCaseExist && upperCaseExist) {
+                }
+                if (lowerCaseExist && upperCaseExist) {
                     m_isPairMapMixedCase = true;
                     return;
                 }
@@ -210,11 +209,15 @@ namespace OpenVanilla {
         }
         
         void insensitivizeMap(){
-            if (m_isPairMapMixedCase)
-                return;
-            
             // if the map is not case mixed, make all the alphabet lowercase
             for (size_t index = 0; index < m_size; index++) {
+                
+//                KVPair* entry = m_data + index;
+//                char* key = entry->key;
+//                while ((char c == *key)) {
+//                    if (isupper(c)) *key = tolower(c);
+//                    ++key;
+//                }
                 const pair<string, string> entry = keyValuePairAtIndex(index);
                 string key = entry.first;
                 
@@ -695,9 +698,11 @@ namespace OpenVanilla {
                             // beginning of chardef scan
                             if (!caseSensitive) {
                                 keynameMap->detectMixedCase();
-                                keynameMap->insensitivizeMap();
-                                chardefMap->SetCaseSensitive(keynameMap->m_isPairMapMixedCase);
-                                caseSensitive = keynameMap->m_isPairMapMixedCase;
+                                if (!keynameMap->m_isPairMapMixedCase) {
+                                    keynameMap->insensitivizeMap();
+                                    chardefMap->setCaseSensitive(keynameMap->m_isPairMapMixedCase);
+                                    caseSensitive = keynameMap->m_isPairMapMixedCase;
+                                }
                             }
                         }
                         else {
