@@ -91,9 +91,9 @@ static bool IsKeyInList(const OVKey* key, OVKeyVector list, size_t* outIndex = 0
 - (void)candidateController:(VTCandidateController *)controller didSelectCandidateAtIndex:(NSUInteger)index
 {
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          _candidateList->candidateAtIndex(index), OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey,
-                          [NSNumber numberWithUnsignedInteger:(NSUInteger)index], OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey,
-                          nil];
+            _candidateList->candidateAtIndex(index), OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey,
+            @((NSUInteger)index), OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey,
+                    nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification object:controller userInfo:dict];
 }
 @end

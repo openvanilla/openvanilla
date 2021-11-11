@@ -34,27 +34,27 @@
     NSUInteger styleMask = NSBorderlessWindowMask | NSNonactivatingPanelMask;
 
     NSPanel *panel = [[NSPanel alloc] initWithContentRect:contentRect styleMask:styleMask backing:NSBackingStoreBuffered defer:NO];
-    [panel setLevel:CGShieldingWindowLevel() + 1];
-    [panel setHasShadow:YES];
+    panel.level = CGShieldingWindowLevel() + 1;
+    panel.hasShadow = YES;
 
     self = [self initWithWindow:panel];
     if (self) {
         _toolTip = [[NSTextField alloc] initWithFrame:contentRect];
-        [_toolTip setEditable:NO];
-        [_toolTip setSelectable:NO];
-        [_toolTip setTextColor:[NSColor blackColor]];
-        [_toolTip setBackgroundColor:[NSColor yellowColor]];
-        [_toolTip setBezeled:NO];
-        [_toolTip setFont:[NSFont systemFontOfSize:14.0]];
-        [[panel contentView] addSubview:_toolTip];
-    }  
+        _toolTip.editable = NO;
+        _toolTip.selectable = NO;
+        _toolTip.textColor = [NSColor blackColor];
+        _toolTip.backgroundColor = [NSColor yellowColor];
+        _toolTip.bezeled = NO;
+        _toolTip.font = [NSFont systemFontOfSize:14.0];
+        [panel.contentView addSubview:_toolTip];
+    }
 
     return self;
 }
 
 - (void)setToolTipText:(NSString *)text atOrigin:(NSPoint)origin fromTopLeft:(BOOL)topLeft
 {
-    [_toolTip setStringValue:text];
+    _toolTip.stringValue = text;
     [_toolTip sizeToFit];
     NSRect frameRect;
     frameRect.origin = origin;
@@ -64,6 +64,7 @@
         frameRect.origin.y -= frameRect.size.height;
     }
 
-    [[self window] setFrame:frameRect display:YES];
+    [self.window setFrame:frameRect display:YES];
 }
+
 @end

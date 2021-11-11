@@ -27,7 +27,6 @@
 
 #import "OVAppDelegate.h"
 #import "OVModuleManager.h"
-#import "OVPreferencesWindowController.h"
 
 @implementation OVAppDelegate
 
@@ -41,8 +40,8 @@
     if (!_preferencesWindowController) {
         _preferencesWindowController = [[OVPreferencesWindowController alloc] initWithWindowNibName:@"preferences"];
     }
-    [[_preferencesWindowController window] center];
-    [[_preferencesWindowController window] orderFront:self];
+    [_preferencesWindowController.window center];
+    [_preferencesWindowController.window orderFront:self];
 }
 
 @end

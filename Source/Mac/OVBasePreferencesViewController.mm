@@ -38,7 +38,7 @@
     if (self) {
         // Initialization code here.
     }
-    
+
     return self;
 }
 
@@ -56,7 +56,7 @@
     NSMenuItem *usKeyboardLayoutItem = nil;
     NSMenuItem *chosenItem = nil;
 
-    [[popUpButton menu] removeAllItems];
+    [popUpButton.menu removeAllItems];
 
     for (int i = 0; i < CFArrayGetCount(list); i++) {
         TISInputSourceRef source = (TISInputSourceRef)CFArrayGetValueAtIndex(list, i);
@@ -80,8 +80,8 @@
         NSString *localizedName = (__bridge NSString *)TISGetInputSourceProperty(source, kTISPropertyLocalizedName);
 
         NSMenuItem *item = [[NSMenuItem alloc] init];
-        [item setTitle:localizedName];
-        [item setRepresentedObject:sourceID];
+        item.title = localizedName;
+        item.representedObject = sourceID;
 
         if ([sourceID isEqualToString:defaultIdentifier]) {
             usKeyboardLayoutItem = item;
@@ -92,7 +92,7 @@
             chosenItem = item;
         }
 
-        [[popUpButton menu] addItem:item];
+        [popUpButton.menu addItem:item];
     }
 
     if (chosenItem) {
@@ -101,7 +101,7 @@
     else if (usKeyboardLayoutItem) {
         [popUpButton selectItem:usKeyboardLayoutItem];
     }
-    
+
     CFRelease(list);
 
 }

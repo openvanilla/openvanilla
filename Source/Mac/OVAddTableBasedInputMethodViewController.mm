@@ -33,6 +33,7 @@
 
 @interface OVAddTableBasedInputMethodViewController () <OVNonModalAlertWindowControllerDelegate>
 - (BOOL)install:(NSString *)path;
+
 @property (strong) NSString *tablePathToBeInstalled;
 @property (strong) NSString *moduleIdentifierIfInstalled;
 @end
@@ -43,14 +44,13 @@
 @synthesize moreInfoTextField = _moreInfoTextField;
 @synthesize preferencesWindowController = _preferencesWindowController;
 
-
 - (void)loadPreferences
 {
     // add link to the more info text field
     // cf. http://developer.apple.com/library/mac/#qa/qa1487/_index.html
 
-    NSMutableAttributedString *attrString = [[self.moreInfoTextField attributedStringValue] mutableCopy];
-    NSRange linkRange = [[attrString string] rangeOfString:OVMainSiteURLString];
+    NSMutableAttributedString *attrString = [self.moreInfoTextField.attributedStringValue mutableCopy];
+    NSRange linkRange = [attrString.string rangeOfString:OVMainSiteURLString];
     if (linkRange.location == NSNotFound) {
         return;
     }
@@ -59,12 +59,12 @@
     NSURL *url = [NSURL URLWithString:OVMainSiteURLString];
     [attrString addAttribute:NSLinkAttributeName value:url range:linkRange];
     [attrString addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:linkRange];
-    [attrString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:linkRange];
+    [attrString addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleSingle) range:linkRange];
     [attrString endEditing];
 
-    [self.moreInfoTextField setAttributedStringValue:attrString];
-    [self.moreInfoTextField setAllowsEditingTextAttributes:YES];
-    [self.moreInfoTextField setSelectable:YES];
+    self.moreInfoTextField.attributedStringValue = attrString;
+    self.moreInfoTextField.allowsEditingTextAttributes = YES;
+    self.moreInfoTextField.selectable = YES;
 }
 
 - (IBAction)importNewTableAction:(id)sender
@@ -73,7 +73,7 @@
     [panel setTitle:NSLocalizedString(@"Pick the .cin Table to Import", nil)];
     [panel setLevel:CGShieldingWindowLevel() + 1];
     [panel setAllowsMultipleSelection:NO];
-    [panel setAllowedFileTypes:[NSArray arrayWithObject:@"cin"]];
+    [panel setAllowedFileTypes:@[@"cin"]];
 
     [panel beginWithCompletionHandler:^(NSInteger result) {
         if (result != NSFileHandlingPanelOKButton) {
@@ -85,7 +85,7 @@
             return;
         }
 
-        NSString *cinPath = [[files objectAtIndex:0] path];
+        NSString *cinPath = [files[0] path];
         NSError *error = nil;
         BOOL override = NO;
         NSString *identifier = nil;
@@ -99,7 +99,7 @@
         if (override) {
             self.tablePathToBeInstalled = cinPath;
             self.moduleIdentifierIfInstalled = identifier;
-            
+
             [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Overwriting Existing Input Method", nil) content:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" will replace an existing input method that you have. Do you want to continue?", nil), [cinPath lastPathComponent]] confirmButtonTitle:NSLocalizedString(@"Overwrite", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) cancelAsDefault:YES delegate:self];
             return;
         }

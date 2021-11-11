@@ -33,6 +33,7 @@
     NSArray *_defaultSelectionKeyTitles;
 }
 - (IBAction)updateField:(id)sender;
+
 @property (assign, nonatomic) IBOutlet NSPopUpButton *fieldSelectionKeys;
 @property (assign, nonatomic) IBOutlet NSButton *fieldContinuousAssociation;
 @end

@@ -97,7 +97,7 @@
     [[OVUpdateChecker sharedInstance] checkForUpdate];
 }
 
- - (IBAction)updateField:(id)sender
+- (IBAction)updateField:(id)sender
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setInteger:[[[self.fieldCandidateSize selectedItem] title] integerValue] forKey:OVCandidateListTextSizeKey];
@@ -110,8 +110,8 @@
 
     [self setSharedAlphanumericKeyboardLayout:[[self.fieldAlphanumericKeyboardLayout selectedItem] representedObject]];
 
-    [userDefaults setBool:([self.fieldPlaySound state] == NSOnState) forKey:OVMakeSoundFeedbackOnInputErrorKey];
-    [userDefaults setBool:([self.fieldCheckForUpdate state] == NSOnState) forKey:OVCheckForUpdateKey];
+    [userDefaults setBool:(self.fieldPlaySound.state == NSOnState) forKey:OVMakeSoundFeedbackOnInputErrorKey];
+    [userDefaults setBool:(self.fieldCheckForUpdate.state == NSOnState) forKey:OVCheckForUpdateKey];
     [userDefaults synchronize];
 }
 
