@@ -38,10 +38,8 @@ static NSString *const kModuleIdentifier = @"org.openvanilla.OVAFAssociatedPhras
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.moduleIdentifier = kModuleIdentifier;
-        _defaultSelectionKeys = [NSArray arrayWithObjects:
-                                 @"!@#$%^&*()", @"!@#$%^&*(", @"1234567890", @"123456789", nil];
-        _defaultSelectionKeyTitles = [NSArray arrayWithObjects:
-                                 @"Shift-1 ~ Shift-0", @"Shift-1 ~ Shift-9", @"1234567890", @"123456789", nil];
+        _defaultSelectionKeys = @[@"!@#$%^&*()", @"!@#$%^&*(", @"1234567890", @"123456789"];
+        _defaultSelectionKeyTitles = @[@"Shift-1 ~ Shift-0", @"Shift-1 ~ Shift-9", @"1234567890", @"123456789"];
     }
     return self;
 }
@@ -56,17 +54,13 @@ static NSString *const kModuleIdentifier = @"org.openvanilla.OVAFAssociatedPhras
     }
 
     NSString *newSelectionKeys;
-    if (selectedIndex < [_defaultSelectionKeyTitles count]) {
-        newSelectionKeys = [_defaultSelectionKeys objectAtIndex:selectedIndex];
-    } else {
-        newSelectionKeys = [_defaultSelectionKeyTitles objectAtIndex:selectedIndex];
-    }
+    newSelectionKeys = (selectedIndex < _defaultSelectionKeyTitles.count ? _defaultSelectionKeys : _defaultSelectionKeyTitles)[selectedIndex];
     [self setStringValue:newSelectionKeys forKey:@"SelectionKeys"];
 }
 
 - (void)setStateForButton:(NSButton *)button forKey:(NSString *)key
 {
-    [button setState:([self boolValueForKey:key] ? NSOnState : NSOffState)];
+    button.state = [self boolValueForKey:key] ? NSOnState : NSOffState;
 }
 
 - (void)loadPreferences
@@ -86,7 +80,8 @@ static NSString *const kModuleIdentifier = @"org.openvanilla.OVAFAssociatedPhras
         NSArray *titles = [_defaultSelectionKeyTitles arrayByAddingObject:selectionKeys];
         [self.fieldSelectionKeys addItemsWithTitles:titles];
         [self.fieldSelectionKeys selectItemAtIndex:[titles count] - 1];
-    } else {
+    }
+    else {
         [self.fieldSelectionKeys addItemsWithTitles:_defaultSelectionKeyTitles];
         [self.fieldSelectionKeys selectItemAtIndex:selectedIndex];
     }

@@ -35,17 +35,16 @@
 @synthesize candidateFont = _candidateFont;
 
 
-
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
     if (self) {
         // populate the default values        
-        _keyLabels = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", nil];
+        _keyLabels = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9"];
         _keyLabelFont = [NSFont systemFontOfSize:14.0];
         _candidateFont = [NSFont systemFontOfSize:18.0];
     }
-    
+
     return self;
 }
 
@@ -77,21 +76,21 @@
 {
     // Since layout is now deferred, the origin setting should also be deferred so that
     // the correct visible frame dimensions are used.
-    NSArray *params = [NSArray arrayWithObjects:[NSValue valueWithPoint:topLeftPoint], [NSNumber numberWithDouble:height], nil];
+    NSArray *params = @[[NSValue valueWithPoint:topLeftPoint], @(height)];
     [self performSelector:@selector(deferredSetWindowTopLeftPoint:) withObject:params afterDelay:0.0];
 }
 
 - (void)deferredSetWindowTopLeftPoint:(NSArray *)params
 {
-    NSPoint topLeftPoint = [[params objectAtIndex:0] pointValue];
-    CGFloat height = [[params objectAtIndex:1] doubleValue];
+    NSPoint topLeftPoint = [params[0] pointValue];
+    CGFloat height = [params[1] doubleValue];
 
     NSPoint adjustedPoint = topLeftPoint;
     CGFloat adjustedHeight = height;
-    
+
     // first, locate the screen the point is in
     NSRect screenFrame = [[NSScreen mainScreen] visibleFrame];
-    
+
     for (NSScreen *screen in [NSScreen screens]) {
         NSRect frame = [screen visibleFrame];
         if (topLeftPoint.x >= NSMinX(frame) && topLeftPoint.x <= NSMaxX(frame)) {
@@ -99,35 +98,35 @@
             break;
         }
     }
-    
+
     // make sure we don't have any erratic value
     if (adjustedHeight > screenFrame.size.height / 2.0) {
         adjustedHeight = 0.0;
     }
-    
+
     NSSize windowSize = [[self window] frame].size;
-    
+
     // bottom beneath the screen?
     if (adjustedPoint.y - windowSize.height < NSMinY(screenFrame)) {
         adjustedPoint.y = topLeftPoint.y + adjustedHeight + windowSize.height;
     }
-    
+
     // top over the screen?
     if (adjustedPoint.y >= NSMaxY(screenFrame)) {
         adjustedPoint.y = NSMaxY(screenFrame) - 1.0;
     }
-    
+
     // right
     if (adjustedPoint.x + windowSize.width >= NSMaxX(screenFrame)) {
         adjustedPoint.x = NSMaxX(screenFrame) - windowSize.width;
     }
-    
+
     // left
     if (adjustedPoint.x < NSMinX(screenFrame)) {
         adjustedPoint.x = NSMinX(screenFrame);
     }
-    
-    [[self window] setFrameTopLeftPoint:adjustedPoint];
+
+    self.window.frameTopLeftPoint = adjustedPoint;
 }
 
 - (NSUInteger)candidateIndexAtKeyLabelIndex:(NSUInteger)index
@@ -145,16 +144,16 @@
 {
     _visible = visible;
     if (visible) {
-        [[self window] performSelector:@selector(orderFront:) withObject:self afterDelay:0.0];
+        [self.window performSelector:@selector(orderFront:) withObject:self afterDelay:0.0];
     }
     else {
-        [[self window] performSelector:@selector(orderOut:) withObject:self afterDelay:0.0];
+        [self.window performSelector:@selector(orderOut:) withObject:self afterDelay:0.0];
     }
 }
 
 - (NSPoint)windowTopLeftPoint
 {
-    NSRect frameRect = [[self window] frame];
+    NSRect frameRect = self.window.frame;
     return NSMakePoint(frameRect.origin.x, frameRect.origin.y + frameRect.size.height);
 }
 

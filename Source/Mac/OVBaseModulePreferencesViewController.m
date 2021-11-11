@@ -89,6 +89,6 @@
 {
     CFPreferencesSetValue((CFStringRef)key, (CFNumberRef)[NSNumber numberWithUnsignedInteger:value], (CFStringRef)self.moduleIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
     CFPreferencesSynchronize((CFStringRef)self.moduleIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-
 }
+
 @end

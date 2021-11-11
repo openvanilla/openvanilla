@@ -44,19 +44,19 @@ static void ListTitlesInView(NSView *view, NSMutableDictionary *dict)
     }
     
     if ([view isKindOfClass:[NSTextField class]] && ![(id)view isEditable]) {
-        [dict setObject:[(id)view stringValue] forKey:[NSValue valueWithNonretainedObject:view]];
+        dict[[NSValue valueWithNonretainedObject:view]] = [(id)view stringValue];
         return;
     }
 
     if ([view isKindOfClass:[NSMatrix class]]) {
         for (NSCell *cell in [(NSMatrix *)view cells]) {
-            [dict setObject:[cell title] forKey:[NSValue valueWithNonretainedObject:cell]];
+            dict[[NSValue valueWithNonretainedObject:cell]] = [cell title];
        }
         return;
     }
 
     if ([view respondsToSelector:@selector(title)]) {
-        [dict setObject:[(id)view title] forKey:[NSValue valueWithNonretainedObject:view]];
+        dict[[NSValue valueWithNonretainedObject:view]] = [(id)view title];
     }
 
     for (NSView *subview in [view subviews]) {
@@ -66,7 +66,7 @@ static void ListTitlesInView(NSView *view, NSMutableDictionary *dict)
 
 static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBasePreferencesViewController *controller)
 {
-    return [NSDictionary dictionaryWithObjectsAndKeys:identifier, kIdentifierKey, localizedName, kLocalizedNameKey, controller, kControllerKey, nil];
+    return @{kIdentifierKey: identifier, kLocalizedNameKey: localizedName, kControllerKey: controller};
 }
 
 @interface OVPreferencesWindowController ()
@@ -137,9 +137,9 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 
     [_items removeAllObjects];
 
-    [_items addObject:Item(kGeneralSettingIdentifier, NSLocalizedString(@"General Settings", nil), self.generalPreferencesViewController)];
+    [_items addObject:Item(kGeneralSettingIdentifier, @"General Settings", self.generalPreferencesViewController)];
 
-    [_items addObject:Item(kAssociatedPhrasesSettingIdentifier, NSLocalizedString(@"Associated Phrases", nil), self.associatedPhrasesPreferencesViewController)];
+    [_items addObject:Item(kAssociatedPhrasesSettingIdentifier, @"Associated Phrases", self.associatedPhrasesPreferencesViewController)];
 
     for (NSString *moduleIdentifier in [OVModuleManager defaultManager].inputMethodIdentifiers) {
         if ([[OVModuleManager defaultManager] isTableBasedInputMethodIdentifier:moduleIdentifier]) {
@@ -162,7 +162,7 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 {
     for (NSValue *value in _localizableObjects) {
         id view = [value nonretainedObjectValue];
-        NSString *text = NSLocalizedString([_localizableObjects objectForKey:value], nil);
+        NSString *text = NSLocalizedString(_localizableObjects[value], nil);
 
         if ([view isKindOfClass:[NSTextField class]] && ![(id)view isEditable]) {
             [view setStringValue:text];
@@ -196,19 +196,19 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
         return;
     }
 
-    NSDictionary *item = [self.items objectAtIndex:selection];
+    NSDictionary *item = self.items[selection];
 
-    OVBasePreferencesViewController *controller = [item objectForKey:kControllerKey];
+    OVBasePreferencesViewController *controller = item[kControllerKey];
 
     self.currentPreferencesViewController = controller;
     if (controller == self.tableBasedMoudlePreferencesViewController || controller == self.arrayMoudlePreferencesViewController || controller == self.associatedPhrasesPreferencesViewController) {
-        controller.moduleIdentifier = [item objectForKey:kIdentifierKey];
+        controller.moduleIdentifier = item[kIdentifierKey];
     }
 
     [controller loadPreferences];
     [self.modulePreferencesContainerView addSubview:[controller view]];
 
-    NSString *title = [NSString stringWithFormat:NSLocalizedString(@"OpenVanilla - %@", nil), [item objectForKey:kLocalizedNameKey]];
+    NSString *title = [NSString stringWithFormat:NSLocalizedString(@"OpenVanilla - %@", nil), item[kLocalizedNameKey]];
     [[self window] setTitle:title];
 }
 
@@ -219,6 +219,6 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
-    return [[self.items objectAtIndex:rowIndex] objectForKey:kLocalizedNameKey];
+    return [self.items[rowIndex] objectForKey:kLocalizedNameKey];
 }
 @end

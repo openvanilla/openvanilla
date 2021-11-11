@@ -14,8 +14,11 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
 
 @interface OVUpdateChecker () <NSURLConnectionDataDelegate, OVNonModalAlertWindowControllerDelegate>
 - (void)cleanUp;
+
 - (void)checkForUpdateForced:(BOOL)forced;
+
 - (void)showPlistError;
+
 @property (strong) NSDate *nextUpdateCheckDate;
 @end
 
@@ -23,7 +26,7 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
 + (OVUpdateChecker *)sharedInstance
 {
     static OVUpdateChecker *instance;
-    @synchronized(self) {
+    @synchronized (self) {
         if (!instance) {
             instance = [[OVUpdateChecker alloc] init];
         }
@@ -172,14 +175,14 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
 
     [self cleanUp];
     [[NSNotificationCenter defaultCenter] postNotificationName:OVUpdateCheckerDidFinishCheckingNotification object:self];
-    
+
     if (!plist) {
         [self showPlistError];
         return;
     }
 
 #if DEBUG
-    NSLog(@"update check plist: %@",plist);
+    NSLog(@"update check plist: %@", plist);
 #endif
 
     NSString *remoteVersion = [plist objectForKey:(id)kCFBundleVersionKey];
@@ -195,9 +198,9 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
     }
 
     NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-    NSString *currentVersion = [infoDict objectForKey:(id)kCFBundleVersionKey];
-    NSString *currentShortVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
-    NSComparisonResult result  = [currentVersion compare:remoteVersion options:NSNumericSearch];
+    NSString *currentVersion = infoDict[(id)kCFBundleVersionKey];
+    NSString *currentShortVersion = infoDict[@"CFBundleShortVersionString"];
+    NSComparisonResult result = [currentVersion compare:remoteVersion options:NSNumericSearch];
 
     if (result != NSOrderedAscending) {
         if (_forcedCheck) {
@@ -207,18 +210,18 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
         return;
     }
 
-    NSDictionary *versionDescriptions = [plist objectForKey:@"Description"];
+    NSDictionary *versionDescriptions = (id)[plist objectForKey:@"Description"];
     NSString *versionDescription = @"";
     if ([versionDescriptions isKindOfClass:[NSDictionary class]]) {
         NSString *locale = @"en";
-        NSArray *supportedLocales = [NSArray arrayWithObjects:@"en", @"zh-Hant", @"zh-Hans", nil];
+        NSArray *supportedLocales = @[@"en", @"zh-Hant", @"zh-Hans"];
         NSArray *preferredTags = [NSBundle preferredLocalizationsFromArray:supportedLocales];
         if ([preferredTags count]) {
-            locale = [preferredTags objectAtIndex:0];
+            locale = preferredTags[0];
         }
-        versionDescription = [versionDescriptions objectForKey:locale];
+        versionDescription = versionDescriptions[locale];
         if (!versionDescription) {
-            versionDescription = [versionDescriptions objectForKey:@"en"];
+            versionDescription = versionDescriptions[@"en"];
         }
 
         if (!versionDescription) {

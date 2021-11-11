@@ -39,7 +39,7 @@
     if (self) {
         _keyLabelFont = [NSFont systemFontOfSize:[NSFont smallSystemFontSize]];
     }
-    
+
     return self;
 }
 
@@ -52,47 +52,40 @@
 {
     NSRect bounds = [self bounds];
     [[NSColor whiteColor] setFill];
-    [NSBezierPath fillRect:bounds];    
+    [NSBezierPath fillRect:bounds];
 
-    NSUInteger count = [_keyLabels count];    
+    NSUInteger count = [_keyLabels count];
     if (!count) {
         return;
     }
 
-    CGFloat cellHeight = bounds.size.height / count;    
+    CGFloat cellHeight = bounds.size.height / count;
     NSColor *black = [NSColor blackColor];
     NSColor *darkGray = [NSColor colorWithDeviceWhite:0.7 alpha:1.0];
     NSColor *lightGray = [NSColor colorWithDeviceWhite:0.8 alpha:1.0];
 
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     [style setAlignment:NSCenterTextAlignment];
-    
-    NSDictionary *textAttr = [NSDictionary dictionaryWithObjectsAndKeys:
-                              _keyLabelFont, NSFontAttributeName,
-                              black, NSForegroundColorAttributeName,
-                              style, NSParagraphStyleAttributeName,
-                              nil];
+
+    NSDictionary *textAttr = @{NSFontAttributeName: _keyLabelFont,
+                               NSForegroundColorAttributeName: black,
+                               NSParagraphStyleAttributeName: style};
 
     for (NSUInteger index = 0; index < count; index++) {
         NSRect textRect = NSMakeRect(0.0, index * cellHeight + _labelOffsetY, bounds.size.width, cellHeight - _labelOffsetY);
         NSRect cellRect = NSMakeRect(0.0, index * cellHeight, bounds.size.width, cellHeight - 1);
-        
+
         // fill in the last cell
         if (index + 1 >= count) {
             cellRect.size.height += 1.0;
         }
-        
-        if (index == _highlightedIndex) {
-            [darkGray setFill];
-        }
-        else {
-            [lightGray setFill];
-        }
-        
+
+        [index == _highlightedIndex ? darkGray : lightGray setFill];
+
         [NSBezierPath fillRect:cellRect];
-        
-        NSString *text = [_keyLabels objectAtIndex:index];
+
+        NSString *text = _keyLabels[index];
         [text drawInRect:textRect withAttributes:textAttr];
-    }    
+    }
 }
 @end

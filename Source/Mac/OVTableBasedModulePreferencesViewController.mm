@@ -50,7 +50,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
     }
-    
+
     return self;
 }
 
@@ -63,12 +63,12 @@
 {
     [super loadPreferences];
     if ([[OVModuleManager defaultManager] isCustomTableBasedInputMethod:self.moduleIdentifier]) {
-        [self.cusmtomTableBasedInputMethodInfo setStringValue:NSLocalizedString(@"This is a customized input method.", nil)];
-        [self.removeInputMethodButton setHidden:NO];
+        self.cusmtomTableBasedInputMethodInfo.stringValue = NSLocalizedString(@"This is a customized input method.", nil);
+        self.removeInputMethodButton.hidden = NO;
     }
     else {
-        [self.cusmtomTableBasedInputMethodInfo setStringValue:NSLocalizedString(@"This is a built-in input method.", nil)];
-        [self.removeInputMethodButton setHidden:YES];
+        self.cusmtomTableBasedInputMethodInfo.stringValue = NSLocalizedString(@"This is a built-in input method.", nil);
+        self.removeInputMethodButton.hidden = YES;
     }
 
     [self setStateForButton:self.fieldClearReadingBufferAtCompositionError forKey:@"ClearReadingBufferAtCompositionError"];
@@ -76,16 +76,16 @@
     [self setStateForButton:self.fieldShouldComposeAtMaximumRadicalLength forKey:@"ShouldComposeAtMaximumRadicalLength"];
 
     if ([self boolValueForKey:@"UseSpaceAsFirstCandidateSelectionKey"]) {
-        [self.fieldUseSpaceAsFirstCandidateSelectionKey setState:NSOnState];
-        [self.fieldSendFirstCandidateWithSpaceWithOnePageList setState:NSOffState];
+        self.fieldUseSpaceAsFirstCandidateSelectionKey.state = NSOnState;
+        self.fieldSendFirstCandidateWithSpaceWithOnePageList.state = NSOffState;
     }
     else if ([self boolValueForKey:@"SendFirstCandidateWithSpaceWithOnePageList"]) {
-        [self.fieldUseSpaceAsFirstCandidateSelectionKey setState:NSOffState];
-        [self.fieldSendFirstCandidateWithSpaceWithOnePageList setState:NSOnState];
+        self.fieldUseSpaceAsFirstCandidateSelectionKey.state = NSOffState;
+        self.fieldSendFirstCandidateWithSpaceWithOnePageList.state = NSOnState;
     }
     else {
-        [self.fieldUseSpaceAsFirstCandidateSelectionKey setState:NSOffState];
-        [self.fieldSendFirstCandidateWithSpaceWithOnePageList setState:NSOffState];
+        self.fieldUseSpaceAsFirstCandidateSelectionKey.state = NSOffState;
+        self.fieldSendFirstCandidateWithSpaceWithOnePageList.state = NSOffState;
     }
 
     NSUInteger length = [self unsignedIntegerValueForKey:@"MaximumRadicalLength"];
@@ -95,7 +95,7 @@
 
     [self.fieldMaximumRadicalLength selectItemWithTitle:@"5"];
 
-    for (NSMenuItem *item in [[self.fieldMaximumRadicalLength menu] itemArray]) {
+    for (NSMenuItem *item in self.fieldMaximumRadicalLength.menu.itemArray) {
         if ([[item title] integerValue] == length) {
             [self.fieldMaximumRadicalLength selectItem:item];
             break;
@@ -108,28 +108,28 @@
 - (IBAction)updateField:(id)sender
 {
     if (sender == self.fieldUseSpaceAsFirstCandidateSelectionKey) {
-        if ([self.fieldUseSpaceAsFirstCandidateSelectionKey state] == NSOnState) {
-            [self.fieldSendFirstCandidateWithSpaceWithOnePageList setState:NSOffState];
+        if (self.fieldUseSpaceAsFirstCandidateSelectionKey.state == NSOnState) {
+            self.fieldSendFirstCandidateWithSpaceWithOnePageList.state = NSOffState;
         }
     }
     else if (sender == self.fieldSendFirstCandidateWithSpaceWithOnePageList) {
-        if ([self.fieldSendFirstCandidateWithSpaceWithOnePageList state] == NSOnState) {
-            [self.fieldUseSpaceAsFirstCandidateSelectionKey setState:NSOffState];
+        if (self.fieldSendFirstCandidateWithSpaceWithOnePageList.state == NSOnState) {
+            self.fieldUseSpaceAsFirstCandidateSelectionKey.state = NSOffState;
         }
     }
     else if (sender == self.fieldAlphaNumericKeyboardLayout) {
-        [self setStringValue:[[self.fieldAlphaNumericKeyboardLayout selectedItem] representedObject] forKey:OVAlphanumericKeyboardLayoutKey];
+        [self setStringValue:self.fieldAlphaNumericKeyboardLayout.selectedItem.representedObject forKey:OVAlphanumericKeyboardLayoutKey];
     }
 
-    [self setBoolValue:([self.fieldClearReadingBufferAtCompositionError state] == NSOnState) forKey:@"ClearReadingBufferAtCompositionError"];
-    [self setBoolValue:([self.fieldComposeWhileTyping state] == NSOnState) forKey:@"ComposeWhileTyping"];
-    [self setBoolValue:([self.fieldShouldComposeAtMaximumRadicalLength state] == NSOnState) forKey:@"ShouldComposeAtMaximumRadicalLength"];
-    [self setBoolValue:([self.fieldUseSpaceAsFirstCandidateSelectionKey state] == NSOnState) forKey:@"UseSpaceAsFirstCandidateSelectionKey"];
-    [self setBoolValue:([self.fieldSendFirstCandidateWithSpaceWithOnePageList state] == NSOnState) forKey:@"SendFirstCandidateWithSpaceWithOnePageList"];
+    [self setBoolValue:(self.fieldClearReadingBufferAtCompositionError.state == NSOnState) forKey:@"ClearReadingBufferAtCompositionError"];
+    [self setBoolValue:(self.fieldComposeWhileTyping.state == NSOnState) forKey:@"ComposeWhileTyping"];
+    [self setBoolValue:(self.fieldShouldComposeAtMaximumRadicalLength.state == NSOnState) forKey:@"ShouldComposeAtMaximumRadicalLength"];
+    [self setBoolValue:(self.fieldUseSpaceAsFirstCandidateSelectionKey.state == NSOnState) forKey:@"UseSpaceAsFirstCandidateSelectionKey"];
+    [self setBoolValue:(self.fieldSendFirstCandidateWithSpaceWithOnePageList.state == NSOnState) forKey:@"SendFirstCandidateWithSpaceWithOnePageList"];
 
-    NSMenuItem *selectedItem = [self.fieldMaximumRadicalLength selectedItem];
+    NSMenuItem *selectedItem = self.fieldMaximumRadicalLength.selectedItem;
     if (selectedItem) {
-        NSInteger length = [[selectedItem title] integerValue];
+        NSInteger length = selectedItem.title.integerValue;
         [self setUnsignedIntegerValue:(NSUInteger)length forKey:@"MaximumRadicalLength"];
     }
 }

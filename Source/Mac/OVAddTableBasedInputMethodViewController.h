@@ -37,6 +37,7 @@
     OVPreferencesWindowController *__weak _preferencesWindowController;
 }
 - (IBAction)importNewTableAction:(id)sender;
+
 @property (weak, nonatomic) IBOutlet NSTextField *moreInfoTextField;
 @property (weak, nonatomic) OVPreferencesWindowController *preferencesWindowController;
 @end

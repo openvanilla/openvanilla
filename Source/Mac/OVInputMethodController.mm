@@ -28,7 +28,6 @@
 #import "OVInputMethodController.h"
 #import "OVLoaderServiceImpl.h"
 #import "OVCandidateServiceImpl.h"
-#import "OVPlistBackedKeyValueMapImpl.h"
 #import "OVTextBufferCombinator.h"
 #import "OVToolTipWindowController.h"
 #import "OVModuleManager.h"
@@ -38,13 +37,21 @@
 
 @interface OVInputMethodController ()
 - (BOOL)handleOVKey:(OVKey &)key client:(id)client;
+
 - (void)handleInputMethodChange:(NSNotification *)notification;
+
 - (void)handleCandidateSelected:(NSNotification *)notification;
+
 - (void)updateClientComposingBuffer:(id)sender;
+
 - (void)changeInputMethodAction:(id)sender;
+
 - (void)toggleTraditionalToSimplifiedChineseFilterAction:(id)sender;
+
 - (void)toggleSimplifiedToTraditionalChineseFilterAction:(id)sender;
+
 - (void)openUserGuideAction:(id)sender;
+
 - (void)showAboutAction:(id)sender;
 @end
 
@@ -66,13 +73,13 @@
 - (id)initWithServer:(IMKServer *)server delegate:(id)aDelegate client:(id)client
 {
     self = [super initWithServer:server delegate:aDelegate client:client];
-	if (self) {
+    if (self) {
         _composingText = new OVTextBufferImpl;
         _readingText = new OVTextBufferImpl;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInputMethodChange:) name:OVModuleManagerDidUpdateActiveInputMethodNotification object:[OVModuleManager defaultManager]];
-	}
-	
-	return self;
+    }
+
+    return self;
 }
 
 - (NSMenu *)menu
@@ -83,13 +90,13 @@
     NSArray *inputMethodIdentifiers = [[OVModuleManager defaultManager] inputMethodIdentifiers];
     for (NSString *identifier in inputMethodIdentifiers) {
         NSMenuItem *item = [[NSMenuItem alloc] init];
-        [item setTitle:[[OVModuleManager defaultManager] localizedInputMethodName:identifier]];
-        [item setRepresentedObject:identifier];
-        [item setTarget:self];
-        [item setAction:@selector(changeInputMethodAction:)];
+        item.title = [[OVModuleManager defaultManager] localizedInputMethodName:identifier];
+        item.representedObject = identifier;
+        item.target = self;
+        item.action = @selector(changeInputMethodAction:);
 
         if ([activeInputMethodIdentifier isEqualToString:identifier]) {
-            [item setState:NSOnState];
+            item.state = NSOnState;
         }
 
         [menu addItem:item];
@@ -99,15 +106,15 @@
 
     NSMenuItem *filterItem;
     filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Traditional Chinese to Simplified", @"") action:@selector(toggleTraditionalToSimplifiedChineseFilterAction:) keyEquivalent:@""];
-    [filterItem setState:([OVModuleManager defaultManager].traditionalToSimplifiedChineseFilterEnabled ? NSOnState : NSOffState)];
+    filterItem.state = [OVModuleManager defaultManager].traditionalToSimplifiedChineseFilterEnabled ? NSOnState : NSOffState;
     [menu addItem:filterItem];
 
     filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Simplified Chinese to Traditional", @"") action:@selector(toggleSimplifiedToTraditionalChineseFilterAction:) keyEquivalent:@""];
-    [filterItem setState:([OVModuleManager defaultManager].simplifiedToTraditionalChineseFilterEnabled ? NSOnState : NSOffState)];
+    filterItem.state = [OVModuleManager defaultManager].simplifiedToTraditionalChineseFilterEnabled ? NSOnState : NSOffState;
     [menu addItem:filterItem];
 
     filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Associated Phrases", @"") action:@selector(toggleAssociatedPhrasesAroundFilterEnabledAction:) keyEquivalent:@""];
-    [filterItem setState:([OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled ? NSOnState : NSOffState)];
+    filterItem.state = [OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled ? NSOnState : NSOffState;
     [menu addItem:filterItem];
 
     [menu addItem:[NSMenuItem separatorItem]];
@@ -177,7 +184,7 @@
     _composingText->clear();
     _readingText->clear();
     [OVModuleManager defaultManager].candidateService->resetAll();
-    [[[OVModuleManager defaultManager].toolTipWindowController window] orderOut:self];
+    [[OVModuleManager defaultManager].toolTipWindowController.window orderOut:self];
     [[OVModuleManager defaultManager] writeOutActiveInputMethodSettings];
 
     _currentClient = nil;
@@ -190,7 +197,8 @@
     // show the preferences panel, and also make the IME app itself the focus
     if ([IMKInputController instancesRespondToSelector:@selector(showPreferences:)]) {
         [super showPreferences:sender];
-    } else {
+    }
+    else {
         [(OVAppDelegate *)[NSApp delegate] showPreferences];
     }
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
@@ -216,7 +224,7 @@
     if (_readingText->toolTipText().length() || _composingText->toolTipText().length()) {
         _readingText->clearToolTip();
         _composingText->clearToolTip();
-        [[[OVModuleManager defaultManager].toolTipWindowController window] orderOut:self];
+        [[OVModuleManager defaultManager].toolTipWindowController.window orderOut:self];
     }
 
     if ([event type] != NSKeyDown) {
@@ -228,15 +236,15 @@
     unsigned short virtualKeyCode = [event keyCode];
 
     bool capsLock = !!(cocoaModifiers & NSAlphaShiftKeyMask);
-	bool shift = !!(cocoaModifiers & NSShiftKeyMask);
-	bool ctrl = !!(cocoaModifiers & NSControlKeyMask);
+    bool shift = !!(cocoaModifiers & NSShiftKeyMask);
+    bool ctrl = !!(cocoaModifiers & NSControlKeyMask);
     bool opt = !!(cocoaModifiers & NSAlternateKeyMask);
-	bool cmd = !!(cocoaModifiers & NSCommandKeyMask);
+    bool cmd = !!(cocoaModifiers & NSCommandKeyMask);
     bool numLock = false;
 
     static UInt32 numKeys[16] = {
-        // 0,1,2,3,4,5, 6,7,8,9,.,+,-,*,/,=
-        0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5b, 0x5c, 0x41, 0x45, 0x4e, 0x43, 0x4b, 0x51
+            // 0,1,2,3,4,5, 6,7,8,9,.,+,-,*,/,=
+            0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5b, 0x5c, 0x41, 0x45, 0x4e, 0x43, 0x4b, 0x51
     };
 
     for (size_t i = 0; i < 16; i++) {
@@ -265,7 +273,7 @@
                         unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '|' : '\\';
                         break;
                     case 29:
-                        unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '}': ']';
+                        unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '}' : ']';
                         break;
                     case 31:
                         unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '_' : '-';
@@ -277,26 +285,64 @@
         UniChar remappedKeyCode = unicharCode;
 
         // remap function key codes
-        switch(unicharCode) {
-            case NSUpArrowFunctionKey:      remappedKeyCode = (UniChar)OVKeyCode::Up; break;
-            case NSDownArrowFunctionKey:    remappedKeyCode = (UniChar)OVKeyCode::Down; break;
-            case NSLeftArrowFunctionKey:    remappedKeyCode = (UniChar)OVKeyCode::Left; break;
-            case NSRightArrowFunctionKey:   remappedKeyCode = (UniChar)OVKeyCode::Right; break;
-            case NSDeleteFunctionKey:       remappedKeyCode = (UniChar)OVKeyCode::Delete; break;
-            case NSHomeFunctionKey:         remappedKeyCode = (UniChar)OVKeyCode::Home; break;
-            case NSEndFunctionKey:          remappedKeyCode = (UniChar)OVKeyCode::End; break;
-            case NSPageUpFunctionKey:       remappedKeyCode = (UniChar)OVKeyCode::PageUp; break;
-            case NSPageDownFunctionKey:     remappedKeyCode = (UniChar)OVKeyCode::PageDown; break;
-            case NSF1FunctionKey:           remappedKeyCode = (UniChar)OVKeyCode::F1; break;
-            case NSF2FunctionKey:           remappedKeyCode = (UniChar)OVKeyCode::F2; break;
-            case NSF3FunctionKey:           remappedKeyCode = (UniChar)OVKeyCode::F3; break;
-            case NSF4FunctionKey:           remappedKeyCode = (UniChar)OVKeyCode::F4; break;
-            case NSF5FunctionKey:           remappedKeyCode = (UniChar)OVKeyCode::F5; break;
-            case NSF6FunctionKey:           remappedKeyCode = (UniChar)OVKeyCode::F6; break;
-            case NSF7FunctionKey:           remappedKeyCode = (UniChar)OVKeyCode::F7; break;
-            case NSF8FunctionKey:           remappedKeyCode = (UniChar)OVKeyCode::F8; break;
-            case NSF9FunctionKey:           remappedKeyCode = (UniChar)OVKeyCode::F9; break;
-            case NSF10FunctionKey:          remappedKeyCode = (UniChar)OVKeyCode::F10; break;
+        switch (unicharCode) {
+            case NSUpArrowFunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::Up;
+                break;
+            case NSDownArrowFunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::Down;
+                break;
+            case NSLeftArrowFunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::Left;
+                break;
+            case NSRightArrowFunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::Right;
+                break;
+            case NSDeleteFunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::Delete;
+                break;
+            case NSHomeFunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::Home;
+                break;
+            case NSEndFunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::End;
+                break;
+            case NSPageUpFunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::PageUp;
+                break;
+            case NSPageDownFunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::PageDown;
+                break;
+            case NSF1FunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::F1;
+                break;
+            case NSF2FunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::F2;
+                break;
+            case NSF3FunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::F3;
+                break;
+            case NSF4FunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::F4;
+                break;
+            case NSF5FunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::F5;
+                break;
+            case NSF6FunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::F6;
+                break;
+            case NSF7FunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::F7;
+                break;
+            case NSF8FunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::F8;
+                break;
+            case NSF9FunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::F9;
+                break;
+            case NSF10FunctionKey:
+                remappedKeyCode = (UniChar)OVKeyCode::F10;
+                break;
         }
 
         unicharCode = remappedKeyCode;
@@ -324,19 +370,17 @@
     bool handled = false;
     bool candidatePanelFallThrough = false;
 
-    OVOneDimensionalCandidatePanelImpl* panel = dynamic_cast<OVOneDimensionalCandidatePanelImpl*>([OVModuleManager defaultManager].candidateService->currentCandidatePanel());
-    
+    OVOneDimensionalCandidatePanelImpl *panel = dynamic_cast<OVOneDimensionalCandidatePanelImpl *>([OVModuleManager defaultManager].candidateService->currentCandidatePanel());
+
     // Here we assume the associated phrase context never yields control to the panel.
     if (panel && panel->isInControl()) {
         OVOneDimensionalCandidatePanelImpl::KeyHandlerResult result = panel->handleKey(&key);
         switch (result) {
-            case OVOneDimensionalCandidatePanelImpl::Handled:
-            {
+            case OVOneDimensionalCandidatePanelImpl::Handled: {
                 return YES;
             }
 
-            case OVOneDimensionalCandidatePanelImpl::CandidateSelected:
-            {
+            case OVOneDimensionalCandidatePanelImpl::CandidateSelected: {
                 size_t index = panel->currentHightlightIndexInCandidateList();
                 string candidate = panel->candidateList()->candidateAtIndex(index);
                 handled = _inputMethodContext->candidateSelected([OVModuleManager defaultManager].candidateService, candidate, index, _readingText, _composingText, [OVModuleManager defaultManager].loaderService);
@@ -344,23 +388,20 @@
                 break;
             }
 
-            case OVOneDimensionalCandidatePanelImpl::Canceled:
-            {
+            case OVOneDimensionalCandidatePanelImpl::Canceled: {
                 _inputMethodContext->candidateCanceled([OVModuleManager defaultManager].candidateService, _readingText, _composingText, [OVModuleManager defaultManager].loaderService);
                 handled = true;
                 candidatePanelFallThrough = true;
                 break;
             }
 
-            case OVOneDimensionalCandidatePanelImpl::NonCandidatePanelKeyReceived:
-            {
+            case OVOneDimensionalCandidatePanelImpl::NonCandidatePanelKeyReceived: {
                 handled = _inputMethodContext->candidateNonPanelKeyReceived([OVModuleManager defaultManager].candidateService, &key, _readingText, _composingText, [OVModuleManager defaultManager].loaderService);
                 candidatePanelFallThrough = true;
                 break;
             }
 
-            case OVOneDimensionalCandidatePanelImpl::Invalid:
-            {
+            case OVOneDimensionalCandidatePanelImpl::Invalid: {
                 [OVModuleManager defaultManager].loaderService->beep();
                 return YES;
             }
@@ -375,9 +416,10 @@
 
         if (handled) {
             _associatedPhrasesContextInUse = YES;
-        } else {
+        }
+        else {
             _associatedPhrasesContextInUse = NO;
-            handled = _inputMethodContext->handleKey(&key, _readingText, _composingText, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);            
+            handled = _inputMethodContext->handleKey(&key, _readingText, _composingText, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
         }
     }
 
@@ -389,7 +431,7 @@
             OVTextBufferImpl tempReading;
             OVTextBufferImpl tempComposing;
             _associatedPhrasesContextInUse = _associatedPhrasesContext->handleDirectText(commitText, &tempReading, &tempComposing, [OVModuleManager defaultManager].candidateService, [OVModuleManager defaultManager].loaderService);
-            
+
             if (tempComposing.isCommitted()) {
                 _composingText->finishCommit();
                 _composingText->setText(tempComposing.composedCommittedText());
@@ -445,8 +487,8 @@
     }
 
     NSDictionary *dict = [notification userInfo];
-    NSString *candidate = [dict objectForKey:OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey];
-    NSUInteger index = [[dict objectForKey:OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey] unsignedIntegerValue];
+    NSString *candidate = dict[OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey];
+    NSUInteger index = [dict[OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey] unsignedIntegerValue];
 
     OVModuleManager *manager = [OVModuleManager defaultManager];
     OVOneDimensionalCandidatePanel *panel = manager.candidateService->currentCandidatePanel();
@@ -455,8 +497,9 @@
     if (_associatedPhrasesContextInUse) {
         handled = _associatedPhrasesContext->candidateSelected(manager.candidateService, string([candidate UTF8String]), (size_t)index, _readingText, _composingText, manager.loaderService);
         _associatedPhrasesContextInUse = NO;
-    } else {
-        handled = _inputMethodContext->candidateSelected(manager.candidateService, string([candidate UTF8String]), (size_t)index, _readingText, _composingText, manager.loaderService);        
+    }
+    else {
+        handled = _inputMethodContext->candidateSelected(manager.candidateService, string([candidate UTF8String]), (size_t)index, _readingText, _composingText, manager.loaderService);
     }
 
     if (handled) {
@@ -490,7 +533,7 @@
         _readingText->finishUpdate();
     }
 
-    NSArray *params = [NSArray arrayWithObjects:sender, attrString, [NSValue valueWithRange:selectionRange], nil];
+    NSArray *params = @[sender, attrString, [NSValue valueWithRange:selectionRange]];
     // If the sender is Chrome, use a 1/20 sec delay. This is likely because some
     // internally async updates need to catch up. This is considered a hack, not a
     // real solution. Please see these two long-standing bugs below, which also
@@ -499,16 +542,17 @@
     // https://bugs.chromium.org/p/chromium/issues/detail?id=580808
     if ([[sender bundleIdentifier] isEqualToString:@"com.google.Chrome"]) {
         [self performSelector:@selector(deferredUpdateClientComposingBuffer:) withObject:params afterDelay:0.05];
-    } else {
+    }
+    else {
         [self deferredUpdateClientComposingBuffer:params];
     }
 }
 
 - (void)deferredUpdateClientComposingBuffer:(NSArray *)params
 {
-    id sender = [params objectAtIndex:0];
-    NSAttributedString *attrString = [params objectAtIndex:1];
-    NSRange selectionRange = [[params objectAtIndex:2] rangeValue];
+    id sender = params[0];
+    NSAttributedString *attrString = params[1];
+    NSRange selectionRange = [params[2] rangeValue];
 
     NSUInteger cursorIndex = selectionRange.location;
     if (cursorIndex == [attrString length] && cursorIndex) {
@@ -596,7 +640,8 @@
     if (!_associatedPhrasesContext && [OVModuleManager defaultManager].associatedPhrasesModule && [OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled) {
         _associatedPhrasesContext = [OVModuleManager defaultManager].associatedPhrasesModule->createContext();
         _associatedPhrasesContext->startSession([OVModuleManager defaultManager].loaderService);
-    } else if (_associatedPhrasesContext && ![OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled) {
+    }
+    else if (_associatedPhrasesContext && ![OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled) {
         [self stopAssociatedPhrasesContext];
     }
     _associatedPhrasesContextInUse = NO;
