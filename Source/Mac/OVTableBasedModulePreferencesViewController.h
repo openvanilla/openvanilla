@@ -29,28 +29,28 @@
 #import "OVBaseModulePreferencesViewController.h"
 
 @interface OVTableBasedModulePreferencesViewController : OVBaseModulePreferencesViewController
-{
-    NSPopUpButton *_fieldAlphaNumericKeyboardLayout;
-    NSPopUpButton *_fieldMaximumRadicalLength;
-    NSButton *_fieldClearReadingBufferAtCompositionError;
-    NSButton *_fieldComposeWhileTyping;
-    NSButton *_fieldSendFirstCandidateWithSpaceWithOnePageList;
-    NSButton *_fieldShouldComposeAtMaximumRadicalLength;
-    NSButton *_fieldUseSpaceAsFirstCandidateSelectionKey;
-    NSTextField *_cusmtomTableBasedInputMethodInfo;
-    NSButton *_removeInputMethodButton;
-}
+//{
+//    NSPopUpButton *_fieldAlphaNumericKeyboardLayout;
+//    NSPopUpButton *_fieldMaximumRadicalLength;
+//    NSButton *_fieldClearReadingBufferAtCompositionError;
+//    NSButton *_fieldComposeWhileTyping;
+//    NSButton *_fieldSendFirstCandidateWithSpaceWithOnePageList;
+//    NSButton *_fieldShouldComposeAtMaximumRadicalLength;
+//    NSButton *_fieldUseSpaceAsFirstCandidateSelectionKey;
+//    NSTextField *_cusmtomTableBasedInputMethodInfo;
+//    NSButton *_removeInputMethodButton;
+//}
 
 - (IBAction)updateField:(id)sender;
 - (IBAction)removeInputMethodAction:(id)sender;
 
-@property (assign, nonatomic) IBOutlet NSPopUpButton *fieldAlphaNumericKeyboardLayout;
-@property (assign, nonatomic) IBOutlet NSPopUpButton *fieldMaximumRadicalLength;
-@property (assign, nonatomic) IBOutlet NSButton *fieldClearReadingBufferAtCompositionError;
-@property (assign, nonatomic) IBOutlet NSButton *fieldComposeWhileTyping;
-@property (assign, nonatomic) IBOutlet NSButton *fieldSendFirstCandidateWithSpaceWithOnePageList;
-@property (assign, nonatomic) IBOutlet NSButton *fieldShouldComposeAtMaximumRadicalLength;
-@property (assign, nonatomic) IBOutlet NSButton *fieldUseSpaceAsFirstCandidateSelectionKey;
-@property (assign, nonatomic) IBOutlet NSTextField *cusmtomTableBasedInputMethodInfo;
-@property (assign, nonatomic) IBOutlet NSButton *removeInputMethodButton;
+@property (weak, nonatomic) IBOutlet NSPopUpButton *fieldAlphaNumericKeyboardLayout;
+@property (weak, nonatomic) IBOutlet NSPopUpButton *fieldMaximumRadicalLength;
+@property (weak, nonatomic) IBOutlet NSButton *fieldClearReadingBufferAtCompositionError;
+@property (weak, nonatomic) IBOutlet NSButton *fieldComposeWhileTyping;
+@property (weak, nonatomic) IBOutlet NSButton *fieldSendFirstCandidateWithSpaceWithOnePageList;
+@property (weak, nonatomic) IBOutlet NSButton *fieldShouldComposeAtMaximumRadicalLength;
+@property (weak, nonatomic) IBOutlet NSButton *fieldUseSpaceAsFirstCandidateSelectionKey;
+@property (weak, nonatomic) IBOutlet NSTextField *cusmtomTableBasedInputMethodInfo;
+@property (weak, nonatomic) IBOutlet NSButton *removeInputMethodButton;
 @end

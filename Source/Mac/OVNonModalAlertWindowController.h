@@ -18,22 +18,15 @@
 @end
 
 @interface OVNonModalAlertWindowController : NSWindowController
-{
-@private
-    NSTextField *_titleTextField;
-    NSTextField *_contentTextField;
-    NSButton *_confirmButton;
-    NSButton *_cancelButton;
-    id<OVNonModalAlertWindowControllerDelegate> _delegate;
-}
 
 + (OVNonModalAlertWindowController *)sharedInstance;
 - (void)showWithTitle:(NSString *)title content:(NSString *)content confirmButtonTitle:(NSString *)confirmTitle cancelButtonTitle:(NSString *)cancelButtonTitle cancelAsDefault:(BOOL)cancelAsDefault delegate:(id<OVNonModalAlertWindowControllerDelegate>)delegate;
 - (IBAction)confirmButtonAction:(id)sender;
 - (IBAction)cancelButtonAction:(id)sender;
-@property (assign) IBOutlet NSTextField *titleTextField;
-@property (assign) IBOutlet NSTextField *contentTextField;
-@property (assign) IBOutlet NSButton *confirmButton;
-@property (assign) IBOutlet NSButton *cancelButton;
-@property (assign) id<OVNonModalAlertWindowControllerDelegate> delegate;
+
+@property (weak) IBOutlet NSTextField *titleTextField;
+@property (weak) IBOutlet NSTextField *contentTextField;
+@property (weak) IBOutlet NSButton *confirmButton;
+@property (weak) IBOutlet NSButton *cancelButton;
+@property (weak) id<OVNonModalAlertWindowControllerDelegate> delegate;
 @end

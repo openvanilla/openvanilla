@@ -38,20 +38,12 @@
 
 @implementation VTHorizontalCandidateController
 
-- (void)dealloc
-{
-    [_candidateView release];
-    [_prevPageButton release];
-    [_nextPageButton release];
-    [super dealloc];
-}
-
 - (id)init
 {
     NSRect contentRect = NSMakeRect(128.0, 128.0, 0.0, 0.0);
     NSUInteger styleMask = NSBorderlessWindowMask | NSNonactivatingPanelMask;
     
-    NSPanel *panel = [[[NSPanel alloc] initWithContentRect:contentRect styleMask:styleMask backing:NSBackingStoreBuffered defer:NO] autorelease];
+    NSPanel *panel = [[NSPanel alloc] initWithContentRect:contentRect styleMask:styleMask backing:NSBackingStoreBuffered defer:NO];
     [panel setLevel:kCGPopUpMenuWindowLevel];
     [panel setHasShadow:YES];
     

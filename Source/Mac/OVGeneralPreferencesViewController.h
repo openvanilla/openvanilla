@@ -28,22 +28,15 @@
 #import "OVBasePreferencesViewController.h"
 
 @interface OVGeneralPreferencesViewController : OVBasePreferencesViewController
-{
-    NSPopUpButton *_fieldCandidateSize;
-    NSMatrix *_fieldCandidateSytle;
-    NSPopUpButton *_fieldAlphanumericKeyboardLayout;
-    NSButton *_fieldPlaySound;
-    NSButton *_fieldCheckForUpdate;
-    NSTextField *_lastUpdateCheckDateLabel;
-    NSButton *_checkForUpdateButton;
-}
+
 - (IBAction)checkForUpdateAction:(id)sender;
 - (IBAction)updateField:(id)sender;
-@property (assign, nonatomic) IBOutlet NSPopUpButton *fieldCandidateSize;
-@property (assign, nonatomic) IBOutlet NSMatrix *fieldCandidateSytle;
-@property (assign, nonatomic) IBOutlet NSPopUpButton *fieldAlphanumericKeyboardLayout;
-@property (assign, nonatomic) IBOutlet NSButton *fieldPlaySound;
-@property (assign, nonatomic) IBOutlet NSButton *fieldCheckForUpdate;
-@property (assign, nonatomic) IBOutlet NSTextField *lastUpdateCheckDateLabel;
-@property (assign, nonatomic) IBOutlet NSButton *checkForUpdateButton;
+
+@property (weak, nonatomic) IBOutlet NSPopUpButton *fieldCandidateSize;
+@property (weak, nonatomic) IBOutlet NSMatrix *fieldCandidateSytle;
+@property (weak, nonatomic) IBOutlet NSPopUpButton *fieldAlphanumericKeyboardLayout;
+@property (weak, nonatomic) IBOutlet NSButton *fieldPlaySound;
+@property (weak, nonatomic) IBOutlet NSButton *fieldCheckForUpdate;
+@property (weak, nonatomic) IBOutlet NSTextField *lastUpdateCheckDateLabel;
+@property (weak, nonatomic) IBOutlet NSButton *checkForUpdateButton;
 @end

@@ -33,7 +33,7 @@
     NSRect contentRect = NSZeroRect;
     NSUInteger styleMask = NSBorderlessWindowMask | NSNonactivatingPanelMask;
 
-    NSPanel *panel = [[[NSPanel alloc] initWithContentRect:contentRect styleMask:styleMask backing:NSBackingStoreBuffered defer:NO] autorelease];
+    NSPanel *panel = [[NSPanel alloc] initWithContentRect:contentRect styleMask:styleMask backing:NSBackingStoreBuffered defer:NO];
     [panel setLevel:CGShieldingWindowLevel() + 1];
     [panel setHasShadow:YES];
 
@@ -50,11 +50,6 @@
     }  
 
     return self;
-}
-- (void)dealloc
-{
-	[_toolTip release];
-	[super dealloc];
 }
 
 - (void)setToolTipText:(NSString *)text atOrigin:(NSPoint)origin fromTopLeft:(BOOL)topLeft

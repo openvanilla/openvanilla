@@ -33,8 +33,8 @@
 
 @interface OVAddTableBasedInputMethodViewController () <OVNonModalAlertWindowControllerDelegate>
 - (BOOL)install:(NSString *)path;
-@property (retain) NSString *tablePathToBeInstalled;
-@property (retain) NSString *moduleIdentifierIfInstalled;
+@property (strong) NSString *tablePathToBeInstalled;
+@property (strong) NSString *moduleIdentifierIfInstalled;
 @end
 
 @implementation OVAddTableBasedInputMethodViewController
@@ -43,19 +43,13 @@
 @synthesize moreInfoTextField = _moreInfoTextField;
 @synthesize preferencesWindowController = _preferencesWindowController;
 
-- (void)dealloc
-{
-    [_tablePathToBeInstalled release];
-    [_moduleIdentifierIfInstalled release];
-    [super dealloc];
-}
 
 - (void)loadPreferences
 {
     // add link to the more info text field
     // cf. http://developer.apple.com/library/mac/#qa/qa1487/_index.html
 
-    NSMutableAttributedString *attrString = [[[self.moreInfoTextField attributedStringValue] mutableCopy] autorelease];
+    NSMutableAttributedString *attrString = [[self.moreInfoTextField attributedStringValue] mutableCopy];
     NSRange linkRange = [[attrString string] rangeOfString:OVMainSiteURLString];
     if (linkRange.location == NSNotFound) {
         return;

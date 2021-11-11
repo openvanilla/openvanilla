@@ -33,13 +33,6 @@
 @synthesize keyLabels = _keyLabels;
 @synthesize highlightedIndex = _highlightedIndex;
 
-- (void)dealloc
-{
-    [_keyLabelFont release];
-    [_keyLabels release];
-    [super dealloc];
-}
-
 - (id)initWithFrame:(NSRect)frameRect
 {
     self = [super initWithFrame:frameRect];
@@ -71,7 +64,7 @@
     NSColor *darkGray = [NSColor colorWithDeviceWhite:0.7 alpha:1.0];
     NSColor *lightGray = [NSColor colorWithDeviceWhite:0.8 alpha:1.0];
 
-    NSMutableParagraphStyle *style = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     [style setAlignment:NSCenterTextAlignment];
     
     NSDictionary *textAttr = [NSDictionary dictionaryWithObjectsAndKeys:

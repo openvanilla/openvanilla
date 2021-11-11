@@ -31,8 +31,7 @@
 
 int main(int argc, char *argv[])
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
+@autoreleasepool {
     // register and enable the input source (along with all its input modes)
     if (argc > 1 && !strcmp(argv[1], "install")) {
         NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
@@ -45,14 +44,12 @@ int main(int argc, char *argv[])
             
             if (!status) {
                 NSLog(@"Fatal error: Cannot register input source %@ at %@.", bundleID, [bundleURL absoluteString]);
-                [pool drain];
                 return -1;                
             }
             
             inputSource = [OVInputSourceHelper inputSourceForInputSourceID:bundleID];
             if (!inputSource) {
                 NSLog(@"Fatal error: Cannot find input source %@ after registration at %@.", bundleID, [bundleURL absoluteString]);
-                [pool drain];
                 return -1;                
             }
         }
@@ -63,7 +60,6 @@ int main(int argc, char *argv[])
             
             if (!status) {
                 NSLog(@"Fatal error: Cannot enable input source %@.", bundleID);
-                [pool drain];
                 return -1;
             }
         }
@@ -74,33 +70,28 @@ int main(int argc, char *argv[])
     NSString *mainNibName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"NSMainNibFile"];
     if (!mainNibName) {
         NSLog(@"Fatal error: NSMainNibFile key not defined in Info.plist.");
-        [pool drain];        
         return -1;
     }
     
     NSString *connectionName = OVInputMethodConnectionName;
     if (!connectionName) {
         NSLog(@"Fatal error: InputMethodConnectionName key not defined in Info.plist.");
-        [pool drain];        
         return -1;
     }    
 
     BOOL loadResult = [[NSBundle mainBundle] loadNibNamed:mainNibName owner:[NSApplication sharedApplication] topLevelObjects:NULL];
     if (!loadResult) {
         NSLog(@"Fatal error: Cannot load %@.", mainNibName);
-        [pool drain];        
         return -1;        
     }
     
     IMKServer *server = [[IMKServer alloc] initWithName:connectionName bundleIdentifier:[[NSBundle mainBundle] bundleIdentifier]];
     if (!server) {
         NSLog(@"Fatal error: Cannot initialize input method server with connection %@.", connectionName);
-        [pool drain];        
         return -1;    
     }
 
     [[NSApplication sharedApplication] run];
-    [server release];    
-    [pool drain];
     return 0;
+}
 }

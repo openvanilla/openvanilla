@@ -31,14 +31,6 @@
 @interface OVPreferencesWindowController : NSWindowController <NSTableViewDataSource, NSTableViewDelegate>
 {
     NSMutableArray *_items;
-    NSTableView *_tableView;
-    NSView *_modulePreferencesContainerView;
-    OVBasePreferencesViewController *_generalPreferencesViewController;
-    OVBasePreferencesViewController *_associatedPhrasesPreferencesViewController;
-    OVBasePreferencesViewController *_tableBasedMoudlePreferencesViewController;
-    OVBasePreferencesViewController *_arrayMoudlePreferencesViewController;
-    OVBasePreferencesViewController *_currentPreferencesViewController;
-    OVBasePreferencesViewController *_addTableBasedInputMethodViewController;
     NSMutableDictionary *_localizableObjects;
 }
 

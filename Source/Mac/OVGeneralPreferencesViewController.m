@@ -84,7 +84,7 @@
 
     [self.lastUpdateCheckDateLabel setHidden:NO];
 
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     NSString *lastCheckString = [NSString stringWithFormat:NSLocalizedString(@"Last checked: %@", nil), [dateFormatter stringFromDate:lastCheckDate]];

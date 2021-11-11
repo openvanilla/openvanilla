@@ -73,12 +73,12 @@ namespace OpenVanilla {
 
 @property (assign, readonly) OpenVanilla::OVLoaderServiceImpl* loaderService;
 @property (assign, readonly) OpenVanilla::OVCandidateServiceImpl* candidateService;
-@property (retain) OVToolTipWindowController *toolTipWindowController;
+@property (strong) OVToolTipWindowController *toolTipWindowController;
 
 @property (assign, readonly) OpenVanilla::OVInputMethod* activeInputMethod;
-@property (readonly) NSString *activeInputMethodIdentifier;
+@property (weak, readonly) NSString *activeInputMethodIdentifier;
 @property (readonly) NSArray *inputMethodIdentifiers;
-@property (retain) NSString *currentLocale;
+@property (strong) NSString *currentLocale;
 
 @property (assign) BOOL traditionalToSimplifiedChineseFilterEnabled;
 @property (assign) BOOL simplifiedToTraditionalChineseFilterEnabled;

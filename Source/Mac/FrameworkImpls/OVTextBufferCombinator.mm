@@ -138,7 +138,6 @@ OVTextBufferCombinator::OVTextBufferCombinator(const OVTextBufferImpl* composing
 
 OVTextBufferCombinator::~OVTextBufferCombinator()
 {
-    [m_attrText release];
 }
 
 NSAttributedString *OVTextBufferCombinator::combinedAttributedString()
