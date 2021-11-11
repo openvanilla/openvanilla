@@ -33,10 +33,10 @@
 {
     NSString *_tablePathToBeInstalled;
     NSString *_moduleIdentifierIfInstalled;
-    NSTextField *_moreInfoTextField;
-    OVPreferencesWindowController *_preferencesWindowController;
+    NSTextField *__weak _moreInfoTextField;
+    OVPreferencesWindowController *__weak _preferencesWindowController;
 }
 - (IBAction)importNewTableAction:(id)sender;
-@property (assign, nonatomic) IBOutlet NSTextField *moreInfoTextField;
-@property (assign, nonatomic) OVPreferencesWindowController *preferencesWindowController;
+@property (weak, nonatomic) IBOutlet NSTextField *moreInfoTextField;
+@property (weak, nonatomic) OVPreferencesWindowController *preferencesWindowController;
 @end

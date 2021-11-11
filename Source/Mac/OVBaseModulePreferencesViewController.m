@@ -35,7 +35,7 @@
     }
 
     CFTypeRef valueRef = CFPreferencesCopyValue((CFStringRef)key, (CFStringRef)self.moduleIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-    id value = [NSMakeCollectable(valueRef) autorelease];
+    id value = CFBridgingRelease(valueRef);
     if (![value isKindOfClass:[NSNumber class]]) {
         return NO;
     }
@@ -56,7 +56,7 @@
     }
 
     CFTypeRef valueRef = CFPreferencesCopyValue((CFStringRef)key, (CFStringRef)self.moduleIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-    id value = [NSMakeCollectable(valueRef) autorelease];
+    id value = CFBridgingRelease(valueRef);
     if (![value isKindOfClass:[NSString class]]) {
         return nil;
     }
@@ -77,7 +77,7 @@
     }
 
     CFTypeRef valueRef = CFPreferencesCopyValue((CFStringRef)key, (CFStringRef)self.moduleIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-    id value = [NSMakeCollectable(valueRef) autorelease];
+    id value = CFBridgingRelease(valueRef);
     if (![value isKindOfClass:[NSNumber class]]) {
         return NO;
     }

@@ -16,7 +16,7 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
 - (void)cleanUp;
 - (void)checkForUpdateForced:(BOOL)forced;
 - (void)showPlistError;
-@property (retain) NSDate *nextUpdateCheckDate;
+@property (strong) NSDate *nextUpdateCheckDate;
 @end
 
 @implementation OVUpdateChecker
@@ -35,9 +35,6 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
 - (void)dealloc
 {
     [_connection cancel];
-    [_connection release];
-    [_data release];
-    [super dealloc];
 }
 
 - (void)checkForUpdate
@@ -54,9 +51,7 @@ NSString *const OVUpdateCheckerDidFinishCheckingNotification = @"OVUpdateChecker
 
 - (void)cleanUp
 {
-    [_connection release];
     _connection = nil;
-    [_data release];
     _data = nil;
 }
 

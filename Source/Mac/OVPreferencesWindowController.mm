@@ -90,8 +90,6 @@ static NSDictionary *Item(NSString *identifier, NSString *localizedName, OVBaseP
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_items release];
-    [super dealloc];
 }
 
 - (void)windowDidLoad

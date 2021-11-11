@@ -37,28 +37,12 @@ NS_INLINE CGFloat max(CGFloat a, CGFloat b) { return a > b ? a : b; }
 @synthesize action = _action;
 @synthesize target = _target;
 
-- (void)dealloc
-{
-    [_keyLabels release];
-    [_displayedCandidates release];
-    [_keyLabelAttrDict release];
-    [_candidateAttrDict release];
-    [_elementWidths release];
-    [super dealloc];
-}
-
 - (void)setKeyLabels:(NSArray *)labels displayedCandidates:(NSArray *)candidates
 {
     NSUInteger count = min([labels count], [candidates count]);
-    id tmp;
-    
-    tmp = _keyLabels;
-    _keyLabels = [[labels subarrayWithRange:NSMakeRange(0, count)] retain];
-    [tmp release];
-    
-    tmp = _displayedCandidates;
-    _displayedCandidates = [[candidates subarrayWithRange:NSMakeRange(0, count)] retain];
-    [tmp release];
+    _keyLabels = [labels subarrayWithRange:NSMakeRange(0, count)];
+
+    _displayedCandidates = [candidates subarrayWithRange:NSMakeRange(0, count)];
     
     NSMutableArray *newWidths = [NSMutableArray array];
     
@@ -71,33 +55,26 @@ NS_INLINE CGFloat max(CGFloat a, CGFloat b) { return a > b ? a : b; }
         CGFloat width = max(labelRect.size.width, candidateRect.size.width) + _cellPadding;
         [newWidths addObject:[NSNumber numberWithDouble:width]];
     }
-    
-    tmp = _elementWidths;
-    _elementWidths = [newWidths retain];
-    [tmp release];
+
+    _elementWidths = newWidths;
 }
 
 - (void)setKeyLabelFont:(NSFont *)labelFont candidateFont:(NSFont *)candidateFont
 {
-    NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+    NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     [paraStyle setAlignment:NSCenterTextAlignment];
     
-    id tmp;
-    tmp = _keyLabelAttrDict;
-    _keyLabelAttrDict = [[NSDictionary dictionaryWithObjectsAndKeys:
+    _keyLabelAttrDict = [NSDictionary dictionaryWithObjectsAndKeys:
                          labelFont, NSFontAttributeName,
                          paraStyle, NSParagraphStyleAttributeName,
                          [NSColor blackColor], NSForegroundColorAttributeName,
-                          nil] retain];
-    [tmp release];
-    
-    tmp = _candidateAttrDict;
-    _candidateAttrDict = [[NSDictionary dictionaryWithObjectsAndKeys:
+                          nil];
+
+    _candidateAttrDict = [NSDictionary dictionaryWithObjectsAndKeys:
                            candidateFont, NSFontAttributeName,
                            paraStyle, NSParagraphStyleAttributeName,
                            [NSColor textColor], NSForegroundColorAttributeName,
-                           nil] retain];
-    [tmp release];
+                           nil];
     
     CGFloat labelFontSize = [labelFont pointSize];
     CGFloat candidateFontSize = [candidateFont pointSize];
@@ -165,7 +142,7 @@ NS_INLINE CGFloat max(CGFloat a, CGFloat b) { return a > b ? a : b; }
         if (index == _highlightedIndex) {
             [[NSColor selectedTextBackgroundColor] setFill];
             
-            activeCandidateAttr = [[_candidateAttrDict mutableCopy] autorelease];
+            activeCandidateAttr = [_candidateAttrDict mutableCopy];
             [(NSMutableDictionary *)activeCandidateAttr setObject:[NSColor selectedTextColor] forKey:NSForegroundColorAttributeName];
         }
         else {

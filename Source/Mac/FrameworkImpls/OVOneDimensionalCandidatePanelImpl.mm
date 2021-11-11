@@ -147,8 +147,8 @@ OVOneDimensionalCandidatePanelImpl::OVOneDimensionalCandidatePanelImpl(Class pan
 
 OVOneDimensionalCandidatePanelImpl::~OVOneDimensionalCandidatePanelImpl()
 {
-    [m_candidateController release];
-    [m_candidateDelegate release];
+//    [m_candidateController release];
+//    [m_candidateDelegate release];
 }
 
 void OVOneDimensionalCandidatePanelImpl::hide()

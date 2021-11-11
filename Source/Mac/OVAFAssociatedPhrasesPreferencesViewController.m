@@ -38,18 +38,12 @@ static NSString *const kModuleIdentifier = @"org.openvanilla.OVAFAssociatedPhras
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.moduleIdentifier = kModuleIdentifier;
-        _defaultSelectionKeys = [[NSArray arrayWithObjects:
-                                 @"!@#$%^&*()", @"!@#$%^&*(", @"1234567890", @"123456789", nil] retain];
-        _defaultSelectionKeyTitles = [[NSArray arrayWithObjects:
-                                 @"Shift-1 ~ Shift-0", @"Shift-1 ~ Shift-9", @"1234567890", @"123456789", nil] retain];
+        _defaultSelectionKeys = [NSArray arrayWithObjects:
+                                 @"!@#$%^&*()", @"!@#$%^&*(", @"1234567890", @"123456789", nil];
+        _defaultSelectionKeyTitles = [NSArray arrayWithObjects:
+                                 @"Shift-1 ~ Shift-0", @"Shift-1 ~ Shift-9", @"1234567890", @"123456789", nil];
     }
     return self;
-}
-
-- (void)dealloc {
-    [_defaultSelectionKeys release];
-    [_defaultSelectionKeyTitles release];
-    [super dealloc];
 }
 
 - (IBAction)updateField:(id)sender

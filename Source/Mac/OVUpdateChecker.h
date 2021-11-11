@@ -17,7 +17,7 @@
 + (OVUpdateChecker *)sharedInstance;
 - (void)checkForUpdate;
 - (void)checkForUpdateIfNeeded;
-@property (readonly) NSDate *lastUpdateCheckDate;
+@property (weak, readonly) NSDate *lastUpdateCheckDate;
 @property (readonly) BOOL busy;
 @end
 

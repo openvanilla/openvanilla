@@ -57,8 +57,6 @@
     delete _readingText;
     delete _inputMethodContext;
     delete _associatedPhrasesContext;
-
-    [super dealloc];
 }
 
 + (void)load
@@ -79,12 +77,12 @@
 
 - (NSMenu *)menu
 {
-    NSMenu *menu = [[[NSMenu alloc] init] autorelease];
+    NSMenu *menu = [[NSMenu alloc] init];
 
     NSString *activeInputMethodIdentifier = [OVModuleManager defaultManager].activeInputMethodIdentifier;
     NSArray *inputMethodIdentifiers = [[OVModuleManager defaultManager] inputMethodIdentifiers];
     for (NSString *identifier in inputMethodIdentifiers) {
-        NSMenuItem *item = [[[NSMenuItem alloc] init] autorelease];
+        NSMenuItem *item = [[NSMenuItem alloc] init];
         [item setTitle:[[OVModuleManager defaultManager] localizedInputMethodName:identifier]];
         [item setRepresentedObject:identifier];
         [item setTarget:self];
@@ -100,27 +98,27 @@
     [menu addItem:[NSMenuItem separatorItem]];
 
     NSMenuItem *filterItem;
-    filterItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Traditional Chinese to Simplified", @"") action:@selector(toggleTraditionalToSimplifiedChineseFilterAction:) keyEquivalent:@""] autorelease];
+    filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Traditional Chinese to Simplified", @"") action:@selector(toggleTraditionalToSimplifiedChineseFilterAction:) keyEquivalent:@""];
     [filterItem setState:([OVModuleManager defaultManager].traditionalToSimplifiedChineseFilterEnabled ? NSOnState : NSOffState)];
     [menu addItem:filterItem];
 
-    filterItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Simplified Chinese to Traditional", @"") action:@selector(toggleSimplifiedToTraditionalChineseFilterAction:) keyEquivalent:@""] autorelease];
+    filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Simplified Chinese to Traditional", @"") action:@selector(toggleSimplifiedToTraditionalChineseFilterAction:) keyEquivalent:@""];
     [filterItem setState:([OVModuleManager defaultManager].simplifiedToTraditionalChineseFilterEnabled ? NSOnState : NSOffState)];
     [menu addItem:filterItem];
 
-    filterItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Associated Phrases", @"") action:@selector(toggleAssociatedPhrasesAroundFilterEnabledAction:) keyEquivalent:@""] autorelease];
+    filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Associated Phrases", @"") action:@selector(toggleAssociatedPhrasesAroundFilterEnabledAction:) keyEquivalent:@""];
     [filterItem setState:([OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled ? NSOnState : NSOffState)];
     [menu addItem:filterItem];
 
     [menu addItem:[NSMenuItem separatorItem]];
 
-    NSMenuItem *preferenceMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"OpenVanilla Preferences…", @"") action:@selector(showPreferences:) keyEquivalent:@""] autorelease];
+    NSMenuItem *preferenceMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"OpenVanilla Preferences…", @"") action:@selector(showPreferences:) keyEquivalent:@""];
     [menu addItem:preferenceMenuItem];
 
-    NSMenuItem *userManualItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"User Guide", @"") action:@selector(openUserGuideAction:) keyEquivalent:@""] autorelease];
+    NSMenuItem *userManualItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"User Guide", @"") action:@selector(openUserGuideAction:) keyEquivalent:@""];
     [menu addItem:userManualItem];
 
-    NSMenuItem *aboutMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"About OpenVanilla", @"") action:@selector(showAboutAction:) keyEquivalent:@""] autorelease];
+    NSMenuItem *aboutMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"About OpenVanilla", @"") action:@selector(showAboutAction:) keyEquivalent:@""];
     [menu addItem:aboutMenuItem];
 
     return menu;
@@ -168,7 +166,7 @@
 
     // clean up reading buffer residue if not empty
     if (!_readingText->isEmpty()) {
-        NSAttributedString *emptyReading = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+        NSAttributedString *emptyReading = [[NSAttributedString alloc] initWithString:@""];
         [client setMarkedText:emptyReading selectionRange:NSMakeRange(0, 0) replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
     }
 
@@ -418,7 +416,7 @@
         _inputMethodContext = 0;
     }
 
-    NSAttributedString *emptyReading = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+    NSAttributedString *emptyReading = [[NSAttributedString alloc] initWithString:@""];
     [_currentClient setMarkedText:emptyReading selectionRange:NSMakeRange(0, 0) replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
     _composingText->commit();
     [self commitComposition:_currentClient];

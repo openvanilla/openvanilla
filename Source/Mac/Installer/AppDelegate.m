@@ -60,7 +60,7 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
     if (otherButtonTitle) {
         [alert addButtonWithTitle:otherButtonTitle];
     }
-    return [[alert autorelease] runModal];
+    return [alert runModal];
 }
 
 @implementation AppDelegate
@@ -70,17 +70,10 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
 @synthesize progressSheet = _progressSheet;
 @synthesize progressIndicator = _progressIndicator;
 
-- (void)dealloc
-{
-    [_archiveUtil release];
-    [_installingVersion release];
-    [_translocationRemovalStartTime release];
-    [super dealloc];
-}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    _installingVersion = [[[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleVersionKey] retain];
+    _installingVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleVersionKey];
     NSString *versionString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 
     _archiveUtil = [[ArchiveUtil alloc] initWithAppName:kTargetBin targetAppBundleName:kTargetBundle];
@@ -101,9 +94,9 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
     [self.installButton setNextKeyView:self.cancelButton];
     [[self window] setDefaultButtonCell:[self.installButton cell]];
 
-    NSAttributedString *attrStr = [[[NSAttributedString alloc] initWithRTF:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"License" ofType:@"rtf"]] documentAttributes:NULL] autorelease];
+    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithRTF:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"License" ofType:@"rtf"]] documentAttributes:NULL];
 
-    NSMutableAttributedString *mutableAttrStr = [[attrStr mutableCopy] autorelease];
+    NSMutableAttributedString *mutableAttrStr = [attrStr mutableCopy];
     [mutableAttrStr addAttribute:NSForegroundColorAttributeName value:[NSColor controlTextColor] range:NSMakeRange(0, [mutableAttrStr length])];
     [[self.textView textStorage] setAttributedString:mutableAttrStr];
     [self.textView setSelectedRange:NSMakeRange(0, 0)];
@@ -202,8 +195,7 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
                 });
             }];
 
-            [_translocationRemovalStartTime release];
-            _translocationRemovalStartTime = [[NSDate date] retain];
+            _translocationRemovalStartTime = [NSDate date];
             [NSTimer scheduledTimerWithTimeInterval:kTranslocationRemovalTickInterval target:self selector:@selector(timerTick:) userInfo:nil repeats:YES];
             return;
         }
@@ -263,7 +255,7 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
         NSModalResponse result = RunAlertPanel(NSLocalizedString(@"Upgrade Successful", nil), NSLocalizedString(@"OpenVanilla is ready to use.\n\nSince you have upgraded from an older version of OpenVanilla (before 1.0), we recommend you log out to make sure that when you come back, every app works with OpenVanilla.", nil), NSLocalizedString(@"Log Out", nil), NSLocalizedString(@"Why I Need This?", nil), NSLocalizedString(@"Finish", nil));
         if (result == NSAlertFirstButtonReturn) {
             NSString *scriptSource = @"tell application \"System Events\" to log out";
-            NSAppleScript *appleScript = [[[NSAppleScript alloc] initWithSource:scriptSource] autorelease];
+            NSAppleScript *appleScript = [[NSAppleScript alloc] initWithSource:scriptSource];
             NSDictionary *errDict = nil;
             [appleScript executeAndReturnError:&errDict];
         }

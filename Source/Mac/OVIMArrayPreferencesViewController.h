@@ -29,10 +29,10 @@
 
 @interface OVIMArrayPreferencesViewController : OVBaseModulePreferencesViewController
 {
-    NSButton *_fieldAutoSP;
-    NSButton *_fieldForceSP;
+    NSButton *__weak _fieldAutoSP;
+    NSButton *__weak _fieldForceSP;
 }
 - (IBAction)updateField:(id)sender;
-@property (assign, nonatomic) IBOutlet NSButton *fieldAutoSP;
-@property (assign, nonatomic) IBOutlet NSButton *fieldForceSP;
+@property (weak, nonatomic) IBOutlet NSButton *fieldAutoSP;
+@property (weak, nonatomic) IBOutlet NSButton *fieldForceSP;
 @end

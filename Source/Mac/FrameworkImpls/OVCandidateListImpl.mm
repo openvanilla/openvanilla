@@ -36,7 +36,6 @@ OVCandidateListImpl::OVCandidateListImpl()
 
 OVCandidateListImpl::~OVCandidateListImpl()
 {
-    [m_array release];
 }
 
 void OVCandidateListImpl::clear()

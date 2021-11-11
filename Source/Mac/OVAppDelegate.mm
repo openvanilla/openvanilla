@@ -31,14 +31,6 @@
 
 @implementation OVAppDelegate
 
-@synthesize window = _window;
-
-- (void)dealloc
-{
-    [_preferencesWindowController release];
-    [super dealloc];
-}
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [[OVModuleManager defaultManager] reload];
@@ -52,4 +44,5 @@
     [[_preferencesWindowController window] center];
     [[_preferencesWindowController window] orderFront:self];
 }
+
 @end
