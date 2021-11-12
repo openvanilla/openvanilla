@@ -38,10 +38,7 @@
     NSDictionary *_keyLabelAttrDict;
     NSDictionary *_candidateAttrDict;
     NSArray *_elementWidths;
-    NSUInteger _highlightedIndex;
     NSUInteger _trackingHighlightedIndex;
-    SEL _action;
-    __weak id _target;
 }
 
 - (void)setKeyLabels:(NSArray *)labels displayedCandidates:(NSArray *)candidates;

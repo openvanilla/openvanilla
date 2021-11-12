@@ -30,8 +30,6 @@
 static NSString *const kModuleIdentifier = @"org.openvanilla.OVAFAssociatedPhrases";
 
 @implementation OVAFAssociatedPhrasesPreferencesViewController
-@synthesize fieldContinuousAssociation = _fieldContinuousAssociation;
-@synthesize fieldSelectionKeys = _fieldSelectionKeys;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {

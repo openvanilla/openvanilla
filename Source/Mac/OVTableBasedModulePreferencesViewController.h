@@ -29,17 +29,6 @@
 #import "OVBaseModulePreferencesViewController.h"
 
 @interface OVTableBasedModulePreferencesViewController : OVBaseModulePreferencesViewController
-//{
-//    NSPopUpButton *_fieldAlphaNumericKeyboardLayout;
-//    NSPopUpButton *_fieldMaximumRadicalLength;
-//    NSButton *_fieldClearReadingBufferAtCompositionError;
-//    NSButton *_fieldComposeWhileTyping;
-//    NSButton *_fieldSendFirstCandidateWithSpaceWithOnePageList;
-//    NSButton *_fieldShouldComposeAtMaximumRadicalLength;
-//    NSButton *_fieldUseSpaceAsFirstCandidateSelectionKey;
-//    NSTextField *_cusmtomTableBasedInputMethodInfo;
-//    NSButton *_removeInputMethodButton;
-//}
 
 - (IBAction)updateField:(id)sender;
 - (IBAction)removeInputMethodAction:(id)sender;

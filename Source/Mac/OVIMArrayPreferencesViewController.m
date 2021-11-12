@@ -30,8 +30,6 @@
 static NSString *const kArrayModuleIdentifier = @"org.openvanilla.OVIMArray";
 
 @implementation OVIMArrayPreferencesViewController
-@synthesize fieldAutoSP = _fieldAutoSP;
-@synthesize fieldForceSP = _fieldForceSP;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {

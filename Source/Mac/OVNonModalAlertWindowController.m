@@ -9,11 +9,6 @@
 #import "OVNonModalAlertWindowController.h"
 
 @implementation OVNonModalAlertWindowController
-@synthesize titleTextField = _titleTextField;
-@synthesize contentTextField = _contentTextField;
-@synthesize confirmButton = _confirmButton;
-@synthesize cancelButton = _cancelButton;
-@synthesize delegate = _delegate;
 
 + (OVNonModalAlertWindowController *)sharedInstance
 {

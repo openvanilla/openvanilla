@@ -64,12 +64,6 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
 }
 
 @implementation AppDelegate
-@synthesize installButton = _installButton;
-@synthesize cancelButton = _cancelButton;
-@synthesize textView = _textView;
-@synthesize progressSheet = _progressSheet;
-@synthesize progressIndicator = _progressIndicator;
-
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {

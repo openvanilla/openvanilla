@@ -41,18 +41,8 @@ namespace OpenVanilla {
 @interface OVModuleManager : NSObject
 {
 @private
-    OpenVanilla::OVLoaderServiceImpl* _loaderService;
-    OpenVanilla::OVCandidateServiceImpl* _candidateService;
-    OVToolTipWindowController *_toolTipWindowController;
-
-    NSMutableArray *_inputMethodIdentifiers;
     NSMutableDictionary *_customTableBasedInputMethodIdentifierTableNameMap;
-    OpenVanilla::OVInputMethodMap* _inputMethodMap;
-
-    OpenVanilla::OVAroundFilter* _associatedPhrasesModule;
-
-    OpenVanilla::OVInputMethod* _activeInputMethod;
-    NSString *_currentLocale;
+    NSMutableArray *_inputMethodIdentifiers;
 }
 
 + (OVModuleManager *)defaultManager;

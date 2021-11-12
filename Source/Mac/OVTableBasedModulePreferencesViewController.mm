@@ -35,16 +35,6 @@
 
 @implementation OVTableBasedModulePreferencesViewController
 
-@synthesize fieldAlphaNumericKeyboardLayout = _fieldAlphaNumericKeyboardLayout;
-@synthesize fieldMaximumRadicalLength = _fieldMaximumRadicalLength;
-@synthesize fieldClearReadingBufferAtCompositionError = _fieldClearReadingBufferAtCompositionError;
-@synthesize fieldComposeWhileTyping = _fieldComposeWhileTyping;
-@synthesize fieldSendFirstCandidateWithSpaceWithOnePageList = _fieldSendFirstCandidateWithSpaceWithOnePageList;
-@synthesize fieldShouldComposeAtMaximumRadicalLength = _fieldShouldComposeAtMaximumRadicalLength;
-@synthesize fieldUseSpaceAsFirstCandidateSelectionKey = _fieldUseSpaceAsFirstCandidateSelectionKey;
-@synthesize cusmtomTableBasedInputMethodInfo = _cusmtomTableBasedInputMethodInfo;
-@synthesize removeInputMethodButton = _removeInputMethodButton;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

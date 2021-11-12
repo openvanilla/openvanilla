@@ -30,7 +30,6 @@
 #import "OVModuleManager.h"
 
 @implementation OVBasePreferencesViewController
-@synthesize moduleIdentifier = _moduleIdentifier;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

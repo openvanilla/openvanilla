@@ -28,9 +28,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface OVBasePreferencesViewController : NSViewController
-{
-    NSString *_moduleIdentifier;
-}
+
 - (void)configureKeyboardLayoutList:(NSPopUpButton *)popUpButton;
 - (void)setSharedAlphanumericKeyboardLayout:(NSString *)identifier;
 - (void)loadPreferences;

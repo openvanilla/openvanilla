@@ -136,12 +136,12 @@ static const CGFloat kCandidateTextLeftMarginWithMandatedTableViewPadding = 0.0;
 
 - (void)reloadData
 {
-    _maxCandidateAttrStringWidth = ceil([_candidateFont pointSize] * 2.0 + _candidateTextPadding);
+    _maxCandidateAttrStringWidth = ceil([self.candidateFont pointSize] * 2.0 + _candidateTextPadding);
 
     [_tableView reloadData];
     [self layoutCandidateView];
 
-    if ([_delegate candidateCountForController:self]) {
+    if ([self.delegate candidateCountForController:self]) {
         self.selectedCandidateIndex = 0;
     }
 }
@@ -171,7 +171,7 @@ static const CGFloat kCandidateTextLeftMarginWithMandatedTableViewPadding = 0.0;
     NSInteger firstVisibleRow = [_tableView rowAtPoint:[_scrollView documentVisibleRect].origin];
     if (firstVisibleRow != -1) {
         NSUInteger result = firstVisibleRow + index;
-        if (result < [_delegate candidateCountForController:self]) {
+        if (result < [self.delegate candidateCountForController:self]) {
             return result;
         }
     }
@@ -191,8 +191,8 @@ static const CGFloat kCandidateTextLeftMarginWithMandatedTableViewPadding = 0.0;
 
     NSInteger selectedRow = [_tableView selectedRow];
 
-    NSUInteger labelCount = [_keyLabels count];
-    NSUInteger itemCount = [_delegate candidateCountForController:self];
+    NSUInteger labelCount = [self.keyLabels count];
+    NSUInteger itemCount = [self.delegate candidateCountForController:self];
 
     if (newIndex == NSUIntegerMax) {
         if (itemCount == 0) {
@@ -225,7 +225,7 @@ static const CGFloat kCandidateTextLeftMarginWithMandatedTableViewPadding = 0.0;
 @implementation VTVerticalCandidateController (Private)
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return [_delegate candidateCountForController:self];
+    return [self.delegate candidateCountForController:self];
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
@@ -234,11 +234,11 @@ static const CGFloat kCandidateTextLeftMarginWithMandatedTableViewPadding = 0.0;
 
     // rendering can occur when the delegate is already gone or data goes stale; in that case we ignore it    
 
-    if (row < [_delegate candidateCountForController:self]) {
-        candidate = [_delegate candidateController:self candidateAtIndex:row];
+    if (row < [self.delegate candidateCountForController:self]) {
+        candidate = [self.delegate candidateController:self candidateAtIndex:row];
     }
 
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:candidate attributes:@{NSFontAttributeName: _candidateFont, NSParagraphStyleAttributeName: _candidateTextParagraphStyle}];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:candidate attributes:@{NSFontAttributeName: self.candidateFont, NSParagraphStyleAttributeName: _candidateTextParagraphStyle}];
 
     // we do more work than what this method is expected to; normally not a good practice, but for the amount of data (9 to 10 rows max), we can afford the overhead
 
@@ -251,7 +251,7 @@ static const CGFloat kCandidateTextLeftMarginWithMandatedTableViewPadding = 0.0;
     }
 
     // keep track of the highlighted index in the key label strip
-    NSUInteger count = [_keyLabels count];
+    NSUInteger count = [self.keyLabels count];
     NSInteger selectedRow = [_tableView selectedRow];
     if (selectedRow != -1) {
         // cast this into signed integer to make our life easier
@@ -300,14 +300,14 @@ static const CGFloat kCandidateTextLeftMarginWithMandatedTableViewPadding = 0.0;
 {
     NSInteger clickedRow = [_tableView clickedRow];
     if (clickedRow != -1) {
-        [_delegate candidateController:self didSelectCandidateAtIndex:clickedRow];
+        [self.delegate candidateController:self didSelectCandidateAtIndex:clickedRow];
     }
 }
 
 - (BOOL)scrollPageByOne:(BOOL)forward
 {
-    NSUInteger labelCount = [_keyLabels count];
-    NSUInteger itemCount = [_delegate candidateCountForController:self];
+    NSUInteger labelCount = [self.keyLabels count];
+    NSUInteger itemCount = [self.delegate candidateCountForController:self];
 
     if (0 == itemCount) {
         return NO;
@@ -345,7 +345,7 @@ static const CGFloat kCandidateTextLeftMarginWithMandatedTableViewPadding = 0.0;
 
 - (BOOL)moveSelectionByOne:(BOOL)forward
 {
-    NSUInteger itemCount = [_delegate candidateCountForController:self];
+    NSUInteger itemCount = [self.delegate candidateCountForController:self];
 
     if (0 == itemCount) {
         return NO;
@@ -380,18 +380,18 @@ static const CGFloat kCandidateTextLeftMarginWithMandatedTableViewPadding = 0.0;
 
 - (void)doLayoutCanaditeView
 {
-    NSUInteger count = [_delegate candidateCountForController:self];
+    NSUInteger count = [self.delegate candidateCountForController:self];
     if (!count) {
         return;
     }
 
-    CGFloat candidateFontSize = ceil([_candidateFont pointSize]);
-    CGFloat keyLabelFontSize = ceil([_keyLabelFont pointSize]);
+    CGFloat candidateFontSize = ceil([self.candidateFont pointSize]);
+    CGFloat keyLabelFontSize = ceil([self.keyLabelFont pointSize]);
     CGFloat fontSize = max(candidateFontSize, keyLabelFontSize);
 
     NSControlSize controlSize = (fontSize > 36.0) ? NSRegularControlSize : NSSmallControlSize;
 
-    NSUInteger keyLabelCount = [_keyLabels count];
+    NSUInteger keyLabelCount = [self.keyLabels count];
     CGFloat scrollerWidth = 0.0;
     if (count <= keyLabelCount) {
         keyLabelCount = count;
@@ -406,17 +406,17 @@ static const CGFloat kCandidateTextLeftMarginWithMandatedTableViewPadding = 0.0;
         scrollerWidth = [NSScroller scrollerWidthForControlSize:controlSize scrollerStyle:NSScrollerStyleLegacy];
     }
 
-    _keyLabelStripView.keyLabelFont = _keyLabelFont;
-    _keyLabelStripView.keyLabels = [_keyLabels subarrayWithRange:NSMakeRange(0, keyLabelCount)];
+    _keyLabelStripView.keyLabelFont = self.keyLabelFont;
+    _keyLabelStripView.keyLabels = [self.keyLabels subarrayWithRange:NSMakeRange(0, keyLabelCount)];
     _keyLabelStripView.labelOffsetY = (keyLabelFontSize >= candidateFontSize) ? 0.0 : floor((candidateFontSize - keyLabelFontSize) / 2.0);
 
     CGFloat rowHeight = ceil(fontSize * 1.25);
     _tableView.rowHeight = rowHeight;
 
     CGFloat maxKeyLabelWidth = keyLabelFontSize;
-    NSDictionary *textAttr = @{NSFontAttributeName: _keyLabelFont};
+    NSDictionary *textAttr = @{NSFontAttributeName: self.keyLabelFont};
     NSSize boundingBox = NSMakeSize(1600.0, 1600.0);
-    for (NSString *label in _keyLabels) {
+    for (NSString *label in self.keyLabels) {
         NSRect rect = [label boundingRectWithSize:boundingBox options:NSStringDrawingUsesLineFragmentOrigin attributes:textAttr];
         maxKeyLabelWidth = max(rect.size.width, maxKeyLabelWidth);
     }

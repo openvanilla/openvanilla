@@ -14,9 +14,11 @@
     NSURLConnection *_connection;
     NSMutableData *_data;
 }
+
 + (OVUpdateChecker *)sharedInstance;
 - (void)checkForUpdate;
 - (void)checkForUpdateIfNeeded;
+
 @property (weak, readonly) NSDate *lastUpdateCheckDate;
 @property (readonly) BOOL busy;
 @end
