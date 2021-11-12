@@ -39,10 +39,6 @@
 @end
 
 @implementation OVAddTableBasedInputMethodViewController
-@synthesize tablePathToBeInstalled = _tablePathToBeInstalled;
-@synthesize moduleIdentifierIfInstalled = _moduleIdentifierIfInstalled;
-@synthesize moreInfoTextField = _moreInfoTextField;
-@synthesize preferencesWindowController = _preferencesWindowController;
 
 - (void)loadPreferences
 {
@@ -141,4 +137,5 @@
     self.tablePathToBeInstalled = nil;
     self.moduleIdentifierIfInstalled = nil;
 }
+
 @end

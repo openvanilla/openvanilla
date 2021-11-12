@@ -28,13 +28,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface VTVerticalKeyLabelStripView : NSView
-{
-@protected
-    NSFont *_keyLabelFont;
-    CGFloat _labelOffsetY;
-    NSArray *_keyLabels;
-    NSInteger _highlightedIndex;
-}
 
 @property (retain, nonatomic) NSFont *keyLabelFont;
 @property (assign, nonatomic) CGFloat labelOffsetY;

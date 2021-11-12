@@ -30,11 +30,8 @@
 
 @interface VTHorizontalCandidateController (Private)
 - (NSUInteger)pageCount;
-
 - (void)layoutCandidateView;
-
 - (void)pageButtonAction:(id)sender;
-
 - (void)candidateViewMouseDidClick:(id)sender;
 @end
 
@@ -114,7 +111,7 @@
 - (BOOL)highlightNextCandidate
 {
     NSUInteger currentIndex = self.selectedCandidateIndex;
-    if (currentIndex + 1 >= [_delegate candidateCountForController:self]) {
+    if (currentIndex + 1 >= [self.delegate candidateCountForController:self]) {
         return NO;
     }
 
@@ -135,20 +132,20 @@
 
 - (NSUInteger)candidateIndexAtKeyLabelIndex:(NSUInteger)index
 {
-    NSUInteger result = _currentPage * _keyLabels.count + index;
-    return result < [_delegate candidateCountForController:self] ? result : NSUIntegerMax;
+    NSUInteger result = _currentPage * self.keyLabels.count + index;
+    return result < [self.delegate candidateCountForController:self] ? result : NSUIntegerMax;
 }
 
 
 - (NSUInteger)selectedCandidateIndex
 {
-    return _currentPage * _keyLabels.count + _candidateView.highlightedIndex;
+    return _currentPage * self.keyLabels.count + _candidateView.highlightedIndex;
 }
 
 - (void)setSelectedCandidateIndex:(NSUInteger)newIndex
 {
-    NSUInteger keyLabelCount = _keyLabels.count;
-    if (newIndex < [_delegate candidateCountForController:self]) {
+    NSUInteger keyLabelCount = self.keyLabels.count;
+    if (newIndex < [self.delegate candidateCountForController:self]) {
         _currentPage = newIndex / keyLabelCount;
         _candidateView.highlightedIndex = newIndex % keyLabelCount;
         [self layoutCandidateView];
@@ -160,25 +157,25 @@
 @implementation VTHorizontalCandidateController (Private)
 - (NSUInteger)pageCount
 {
-    NSUInteger totalCount = [_delegate candidateCountForController:self];
-    NSUInteger keyLabelCount = _keyLabels.count;
+    NSUInteger totalCount = [self.delegate candidateCountForController:self];
+    NSUInteger keyLabelCount = self.keyLabels.count;
     return totalCount / keyLabelCount + ((totalCount % keyLabelCount) != 0 ? 1 : 0);
 }
 
 - (void)layoutCandidateView
 {
-    [_candidateView setKeyLabelFont:_keyLabelFont candidateFont:_candidateFont];
+    [_candidateView setKeyLabelFont:self.keyLabelFont candidateFont:self.candidateFont];
 
     NSMutableArray *candidates = [NSMutableArray array];
-    NSUInteger count = [_delegate candidateCountForController:self];
-    NSUInteger keyLabelCount = _keyLabels.count;
+    NSUInteger count = [self.delegate candidateCountForController:self];
+    NSUInteger keyLabelCount = self.keyLabels.count;
     for (NSUInteger index = _currentPage * keyLabelCount, j = 0; index < count && j < keyLabelCount; index++, j++) {
-        [candidates addObject:[_delegate candidateController:self candidateAtIndex:index]];
+        [candidates addObject:[self.delegate candidateController:self candidateAtIndex:index]];
     }
 
-    [_candidateView setKeyLabels:_keyLabels displayedCandidates:candidates];
-    NSSize newSize = _candidateView.sizeForView;
+    [_candidateView setKeyLabels:self.keyLabels displayedCandidates:candidates];
 
+    NSSize newSize = _candidateView.sizeForView;
     NSRect frameRect = _candidateView.frame;
     frameRect.size = newSize;
     _candidateView.frame = frameRect;
@@ -241,6 +238,6 @@
 
 - (void)candidateViewMouseDidClick:(id)sender
 {
-    [_delegate candidateController:self didSelectCandidateAtIndex:self.selectedCandidateIndex];
+    [self.delegate candidateController:self didSelectCandidateAtIndex:self.selectedCandidateIndex];
 }
 @end

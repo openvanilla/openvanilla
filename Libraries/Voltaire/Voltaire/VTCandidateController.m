@@ -27,13 +27,10 @@
 
 #import "VTCandidateController.h"
 
-
 @implementation VTCandidateController
-@synthesize delegate = _delegate;
-@synthesize keyLabels = _keyLabels;
-@synthesize keyLabelFont = _keyLabelFont;
-@synthesize candidateFont = _candidateFont;
-
+{
+    BOOL _visible;
+}
 
 - (id)initWithWindow:(NSWindow *)window
 {

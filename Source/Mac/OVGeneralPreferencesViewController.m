@@ -34,13 +34,6 @@
 @end
 
 @implementation OVGeneralPreferencesViewController
-@synthesize fieldCandidateSize = _fieldCandidateSize;
-@synthesize fieldCandidateSytle = _fieldCandidateSytle;
-@synthesize fieldAlphanumericKeyboardLayout = _fieldAlphanumericKeyboardLayout;
-@synthesize fieldPlaySound = _fieldPlaySound;
-@synthesize fieldCheckForUpdate = _fieldCheckForUpdate;
-@synthesize lastUpdateCheckDateLabel = _lastUpdateCheckDateLabel;
-@synthesize checkForUpdateButton = _checkForUpdateButton;
 
 - (void)awakeFromNib
 {

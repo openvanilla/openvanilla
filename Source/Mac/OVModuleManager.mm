@@ -61,14 +61,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
 @implementation OVModuleManager
 @dynamic activeInputMethodIdentifier;
 @dynamic sharedAlphanumericKeyboardLayoutIdentifier;
-@synthesize loaderService = _loaderService;
-@synthesize candidateService = _candidateService;
-@synthesize toolTipWindowController = _toolTipWindowController;
-@synthesize activeInputMethod = _activeInputMethod;
-@synthesize inputMethodMap = _inputMethodMap;
-@synthesize currentLocale = _currentLocale;
 @synthesize inputMethodIdentifiers = _inputMethodIdentifiers;
-@synthesize associatedPhrasesModule = _associatedPhrasesModule;
 
 + (OVModuleManager *)defaultManager
 {

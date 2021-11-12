@@ -30,12 +30,7 @@
 @class OVPreferencesWindowController;
 
 @interface OVAddTableBasedInputMethodViewController : OVBasePreferencesViewController
-{
-    NSString *_tablePathToBeInstalled;
-    NSString *_moduleIdentifierIfInstalled;
-    NSTextField *__weak _moreInfoTextField;
-    OVPreferencesWindowController *__weak _preferencesWindowController;
-}
+
 - (IBAction)importNewTableAction:(id)sender;
 
 @property (weak, nonatomic) IBOutlet NSTextField *moreInfoTextField;

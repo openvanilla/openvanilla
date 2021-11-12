@@ -28,10 +28,6 @@
 #import "VTVerticalKeyLabelStripView.h"
 
 @implementation VTVerticalKeyLabelStripView
-@synthesize keyLabelFont = _keyLabelFont;
-@synthesize labelOffsetY = _labelOffsetY;
-@synthesize keyLabels = _keyLabels;
-@synthesize highlightedIndex = _highlightedIndex;
 
 - (id)initWithFrame:(NSRect)frameRect
 {

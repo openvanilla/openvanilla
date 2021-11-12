@@ -36,11 +36,6 @@
     BOOL _upgrading;
     BOOL _upgradingFromLegacy;
     BOOL _wasUsingOVIMGeneric;
-    NSButton *__weak _installButton;
-    NSButton *__weak _cancelButton;
-    NSTextView *__unsafe_unretained _textView;
-    NSWindow *__weak _progressSheet;
-    NSProgressIndicator *__weak _progressIndicator;
     NSDate *_translocationRemovalStartTime;
     NSInteger _currentVersionNumber;
 }

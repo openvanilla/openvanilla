@@ -38,10 +38,6 @@ NS_INLINE CGFloat max(CGFloat a, CGFloat b) {
 
 @implementation VTHorizontalCandidateView
 
-@synthesize highlightedIndex = _highlightedIndex;
-@synthesize action = _action;
-@synthesize target = _target;
-
 - (void)setKeyLabels:(NSArray *)labels displayedCandidates:(NSArray *)candidates
 {
     NSUInteger count = min([labels count], [candidates count]);
@@ -208,9 +204,12 @@ NS_INLINE CGFloat max(CGFloat a, CGFloat b) {
     _trackingHighlightedIndex = 0;
     [self setNeedsDisplay:YES];
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
     if (triggerAction && _target && _action) {
         [_target performSelector:_action withObject:self];
     }
+#pragma clang diagnostic pop
 }
 
 @end
