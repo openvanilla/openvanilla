@@ -205,7 +205,7 @@ NS_INLINE CGFloat max(CGFloat a, CGFloat b) {
     [self setNeedsDisplay:YES];
 
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     if (triggerAction && _target && _action) {
         [_target performSelector:_action withObject:self];
     }
