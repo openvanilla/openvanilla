@@ -27,6 +27,7 @@
 
 #import "AppDelegate.h"
 #import <sys/mount.h>
+#import "OVInputSourceHelper.h"
 
 static NSString *const kTargetBin = @"OpenVanilla";
 static NSString *const kTargetType = @"app";
@@ -182,9 +183,9 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
                 // Schedule the install action in runloop so that the sheet gets a change to dismiss itself.
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (returnCode == NSModalResponseContinue) {
-                        [self installInputMethodWithWarning:NO];
+                        [self installInputMethodWithPreviousExists:YES previousVersionNotFullyDeactivatedWarning:NO];
                     } else {
-                        [self installInputMethodWithWarning:YES];
+                        [self installInputMethodWithPreviousExists:YES previousVersionNotFullyDeactivatedWarning:YES];
                     }
                 });
             }];
@@ -195,7 +196,7 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
         }
     }
     
-    [self installInputMethodWithWarning:NO];
+    [self installInputMethodWithPreviousExists:NO previousVersionNotFullyDeactivatedWarning:NO];
 }
 
 - (void)timerTick:(NSTimer *)timer
@@ -214,7 +215,7 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
 }
 
 
-- (void)installInputMethodWithWarning:(BOOL)warning
+- (void)installInputMethodWithPreviousExists:(BOOL)previousVersionExists previousVersionNotFullyDeactivatedWarning:(BOOL)warning
 {
     // If the unzipped archive does not exist, this must be a dev-mode installer.
     NSString *targetBundle = [_archiveUtil unzipNotarizedArchive];
@@ -229,12 +230,57 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
         [NSApp terminate:self];        
     }
 
-    NSArray *installArgs = [NSArray arrayWithObjects:@"install", nil];
-    NSTask *installTask = [NSTask launchedTaskWithLaunchPath:[kTargetFullBinPartialPath stringByExpandingTildeInPath] arguments:installArgs];
-    [installTask waitUntilExit];
-    if ([installTask terminationStatus] != 0) {
-        RunAlertPanel(NSLocalizedString(@"Install Failed", nil), NSLocalizedString(@"Cannot activate the input method.", nil),  NSLocalizedString(@"Cancel", nil), nil, nil);
-        [NSApp terminate:self];        
+    NSBundle *imeBundle = [NSBundle bundleWithPath:[kTargetPartialPath stringByExpandingTildeInPath]];
+    NSCAssert(imeBundle != nil, @"Target bundle must exists");
+    NSURL *imeBundleURL = imeBundle.bundleURL;
+    NSString *imeIdentifier = imeBundle.bundleIdentifier;
+
+    TISInputSourceRef inputSource = [OVInputSourceHelper inputSourceForInputSourceID:imeIdentifier];
+
+    // if this IME name is not found in the list of available IMEs
+    if (!inputSource) {
+        NSLog(@"Registering input source %@ at %@.", imeIdentifier, imeBundleURL.absoluteString);
+        // then register
+        BOOL status = [OVInputSourceHelper registerInputSource:imeBundleURL];
+
+        if (!status) {
+            NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot register input source %@ at %@.", nil), imeIdentifier, imeBundleURL.absoluteString];
+            RunAlertPanel(NSLocalizedString(@"Fatal Error", nil), message, NSLocalizedString(@"Abort", nil), nil, nil);
+            [self endAppWithDelay];
+            return;
+        }
+
+        inputSource = [OVInputSourceHelper inputSourceForInputSourceID:imeIdentifier];
+        // if it still doesn't register successfully, bail.
+        if (!inputSource) {
+            NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot find input source %@ after registration.", nil), imeIdentifier];
+            RunAlertPanel(NSLocalizedString(@"Fatal Error", nil), message, NSLocalizedString(@"Abort", nil), nil, nil);
+            [self endAppWithDelay];
+            return;
+        }
+    }
+
+    BOOL isMacOS12OrAbove = NO;
+    if (@available(macOS 12.0, *)) {
+        NSLog(@"macOS 12 or later detected.");
+        isMacOS12OrAbove = YES;
+    } else {
+        NSLog(@"Installer runs with the pre-macOS 12 flow.");
+    }
+
+    // If the IME is not enabled, enable it. Also, unconditionally enable it on macOS 12.0+,
+    // as the kTISPropertyInputSourceIsEnabled can still be true even if the IME is *not*
+    // enabled in the user's current set of IMEs (which means the IME does not show up in
+    // the user's input menu).
+    BOOL mainInputSourceEnabled = [OVInputSourceHelper inputSourceEnabled:inputSource];
+    if (!mainInputSourceEnabled || isMacOS12OrAbove) {
+
+        mainInputSourceEnabled = [OVInputSourceHelper enableInputSource:inputSource];
+        if (mainInputSourceEnabled) {
+            NSLog(@"Input method enabled: %@", imeIdentifier);
+        } else {
+            NSLog(@"Failed to enable input method: %@", imeIdentifier);
+        }
     }
 
     if (_upgradingFromLegacy) {
@@ -263,13 +309,22 @@ NSModalResponse RunAlertPanel(NSString *title, NSString *message, NSString *butt
         if (warning) {
             RunAlertPanel(NSLocalizedString(@"Attention", nil), NSLocalizedString(@"OpenVanilla is upgraded, but please log out or reboot for the new version to be fully functional.", nil),  NSLocalizedString(@"OK", nil), nil, nil);
         } else {
-            RunAlertPanel(NSLocalizedString(@"Installation Successful", nil), NSLocalizedString(@"OpenVanilla is ready to use.", nil),  NSLocalizedString(@"OK", nil), nil, nil);
+            // Only prompt a warning if pre-macOS 12. The flag is not indicative of anything meaningful due to the need of user intervention in Prefernces.app on macOS 12.
+            if (!mainInputSourceEnabled && !isMacOS12OrAbove) {
+                RunAlertPanel(NSLocalizedString(@"Warning", nil), NSLocalizedString(@"Input method may not be fully enabled. Please enable it through System Preferences > Keyboard > Input Sources.", nil), NSLocalizedString(@"Continue", nil), nil, nil);
+            } else {
+                RunAlertPanel(NSLocalizedString(@"Installation Successful", nil), NSLocalizedString(@"OpenVanilla is ready to use.", nil),  NSLocalizedString(@"OK", nil), nil, nil);
+            }
         }
     }
 
+    [self endAppWithDelay];
+}
+
+- (void)endAppWithDelay
+{
     [[NSApplication sharedApplication] performSelector:@selector(terminate:) withObject:self afterDelay:0.1];
 }
-                                   
 
 - (IBAction)cancelAction:(id)sender
 {
