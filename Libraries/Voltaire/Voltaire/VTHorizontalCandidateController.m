@@ -46,6 +46,8 @@
     NSPanel *panel = [[NSPanel alloc] initWithContentRect:contentRect styleMask:styleMask backing:NSBackingStoreBuffered defer:NO];
     panel.level = kCGPopUpMenuWindowLevel;
     panel.hasShadow = YES;
+    panel.opaque = NO;
+    panel.backgroundColor = [NSColor colorWithCalibratedWhite:1.0 alpha:0.0];
 
     self = [self initWithWindow:panel];
     if (self) {
@@ -55,20 +57,24 @@
         _candidateView.action = @selector(candidateViewMouseDidClick:);
         [panel.contentView addSubview:_candidateView];
 
-        contentRect.size = NSMakeSize(36.0, 20.0);
+        contentRect.size = NSMakeSize(16.0, 20.0);
         _nextPageButton = [[NSButton alloc] initWithFrame:contentRect];
         _prevPageButton = [[NSButton alloc] initWithFrame:contentRect];
         _nextPageButton.buttonType = NSMomentaryLightButton;
         _nextPageButton.bezelStyle = NSSmallSquareBezelStyle;
-        _nextPageButton.title = @"»";
+        _nextPageButton.title = @"↓";
         _nextPageButton.target = self;
         _nextPageButton.action = @selector(pageButtonAction:);
+        _nextPageButton.wantsLayer = YES;
+        _nextPageButton.layer.cornerRadius = 3;
 
         _prevPageButton.buttonType = NSMomentaryLightButton;
         _prevPageButton.bezelStyle = NSSmallSquareBezelStyle;
-        _prevPageButton.title = @"«";
+        _prevPageButton.title = @"↑";
         _prevPageButton.target = self;
         _prevPageButton.action = @selector(pageButtonAction:);
+        _nextPageButton.wantsLayer = YES;
+        _nextPageButton.layer.cornerRadius = 3;
 
         [panel.contentView addSubview:_nextPageButton];
         [panel.contentView addSubview:_prevPageButton];

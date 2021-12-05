@@ -38,6 +38,11 @@ NS_INLINE CGFloat max(CGFloat a, CGFloat b) {
 
 @implementation VTHorizontalCandidateView
 
+static NSColor *colorFromRGBA(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+{
+    return [NSColor colorWithDeviceRed:(r/255.0f) green:(g/255.0f) blue:(b/255.0f) alpha:(a/255.0f)];
+}
+
 - (void)setKeyLabels:(NSArray *)labels displayedCandidates:(NSArray *)candidates
 {
     NSUInteger count = min([labels count], [candidates count]);
@@ -62,16 +67,19 @@ NS_INLINE CGFloat max(CGFloat a, CGFloat b) {
 
 - (void)setKeyLabelFont:(NSFont *)labelFont candidateFont:(NSFont *)candidateFont
 {
+    NSColor *clrCandidateText = colorFromRGBA(223,223,223,255);
+    NSColor *clrCandidateTextIndex = colorFromRGBA(223,223,223,255);
+
     NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     [paraStyle setAlignment:NSCenterTextAlignment];
 
     _keyLabelAttrDict = @{NSFontAttributeName: labelFont,
                           NSParagraphStyleAttributeName: paraStyle,
-                          NSForegroundColorAttributeName: [NSColor blackColor]};
+                          NSForegroundColorAttributeName: clrCandidateTextIndex};
 
     _candidateAttrDict = @{NSFontAttributeName: candidateFont,
                            NSParagraphStyleAttributeName: paraStyle,
-                           NSForegroundColorAttributeName: [NSColor textColor]};
+                           NSForegroundColorAttributeName: clrCandidateText};
 
     CGFloat labelFontSize = [labelFont pointSize];
     CGFloat candidateFontSize = [candidateFont pointSize];
@@ -105,17 +113,21 @@ NS_INLINE CGFloat max(CGFloat a, CGFloat b) {
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    NSColor *backgroundColor = [NSColor controlBackgroundColor];
-    NSColor *darkGray = [NSColor colorWithDeviceWhite:0.7 alpha:1.0];
-    NSColor *lightGray = [NSColor colorWithDeviceWhite:0.8 alpha:1.0];
+    NSColor *clrCandidateSelectedBG = colorFromRGBA(0,88,208,255);
+    NSColor *clrCandidateSelectedText = colorFromRGBA(223,223,223,255);
+    NSColor *clrCandidateWindowBorder = colorFromRGBA(255,255,255,75);
+    NSColor *clrCandidateWindowBG = colorFromRGBA(50,50,50,255);
+    NSColor *clrCandidateBG = colorFromRGBA(50,50,50,255);
 
+    [self setWantsLayer: YES];
+    [self.layer setBorderColor: [clrCandidateWindowBorder CGColor]];
+    [self.layer setBorderWidth: 1];
+    [self.layer setCornerRadius: 6];
+    
     NSRect bounds = [self bounds];
 
-    [backgroundColor setFill];
+    [clrCandidateWindowBG setFill];
     [NSBezierPath fillRect:bounds];
-
-    [[NSColor darkGrayColor] setStroke];
-    [NSBezierPath strokeLineFromPoint:NSMakePoint(bounds.size.width, 0.0) toPoint:NSMakePoint(bounds.size.width, bounds.size.height)];
 
     NSUInteger count = _elementWidths.count;
     CGFloat accuWidth = 0.0;
@@ -124,26 +136,26 @@ NS_INLINE CGFloat max(CGFloat a, CGFloat b) {
         NSDictionary *activeCandidateAttr = _candidateAttrDict;
         CGFloat currentWidth = [_elementWidths[index] doubleValue];
         NSRect labelRect = NSMakeRect(accuWidth, 0.0, currentWidth, _keyLabelHeight);
-        NSRect candidateRect = NSMakeRect(accuWidth, _keyLabelHeight + 1.0, currentWidth, _candidateTextHeight);
+        NSRect candidateRect = NSMakeRect(accuWidth, _keyLabelHeight, currentWidth, _candidateTextHeight);
 
         if (index == _highlightedIndex) {
-            [darkGray setFill];
+            [clrCandidateSelectedBG setFill];
         }
         else {
-            [lightGray setFill];
+            [clrCandidateBG setFill];
         }
 
         [NSBezierPath fillRect:labelRect];
         [_keyLabels[index] drawInRect:labelRect withAttributes:_keyLabelAttrDict];
 
         if (index == _highlightedIndex) {
-            [[NSColor selectedTextBackgroundColor] setFill];
+            [clrCandidateSelectedBG setFill];
 
             activeCandidateAttr = [_candidateAttrDict mutableCopy];
-            ((NSMutableDictionary *)activeCandidateAttr)[NSForegroundColorAttributeName] = [NSColor selectedTextColor];
+            ((NSMutableDictionary *)activeCandidateAttr)[NSForegroundColorAttributeName] = clrCandidateSelectedText;
         }
         else {
-            [backgroundColor setFill];
+            [clrCandidateBG setFill];
         }
 
         [NSBezierPath fillRect:candidateRect];
@@ -172,7 +184,7 @@ NS_INLINE CGFloat max(CGFloat a, CGFloat b) {
             break;
         }
 
-        accuWidth += currentWidth + 1.0;
+        accuWidth += currentWidth;
     }
 
     return result;
