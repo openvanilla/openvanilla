@@ -69,6 +69,7 @@ namespace OpenVanilla {
         bool m_configSendFirstCandidateWithSpaceWithOnePageList;
         bool m_configShouldComposeAtMaximumRadicalLength;
         bool m_configUseSpaceAsFirstCandidateSelectionKey;
+        bool m_configOnlyUseNumPadNumbersForRadicals;
     };
 };
 
