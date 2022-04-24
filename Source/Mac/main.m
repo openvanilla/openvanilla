@@ -25,6 +25,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#import "OVAppDelegate.h"
 #import "OVConstants.h"
 #import "OVInputSourceHelper.h"
 
@@ -87,6 +88,10 @@ int main(int argc, char *argv[]) {
         if (!server) {
             NSLog(@"Fatal error: Cannot initialize input method server with connection %@.", connectionName);
             return -1;
+        }
+
+        if (argc > 1 && !strcmp(argv[1], "preferences")) {
+            [OVAppDelegate setDebugShowPreferencesAfterAppLaunched:YES];
         }
 
         [[NSApplication sharedApplication] run];

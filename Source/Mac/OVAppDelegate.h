@@ -35,4 +35,5 @@
 
 @property (weak) IBOutlet NSWindow *window;
 - (void)showPreferences;
++ (void)setDebugShowPreferencesAfterAppLaunched:(BOOL)show;
 @end

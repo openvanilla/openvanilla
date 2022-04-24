@@ -28,11 +28,16 @@
 #import "OVAppDelegate.h"
 #import "OVModuleManager.h"
 
+static BOOL DebugShowPreferencesAfterAppLaunched = NO;
+
 @implementation OVAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [[OVModuleManager defaultManager] reload];
+    if (DebugShowPreferencesAfterAppLaunched) {
+        [self showPreferences];
+    }
 }
 
 - (void)showPreferences
@@ -44,4 +49,8 @@
     [_preferencesWindowController.window orderFront:self];
 }
 
++ (void)setDebugShowPreferencesAfterAppLaunched:(BOOL)show
+{
+    DebugShowPreferencesAfterAppLaunched = YES;
+}
 @end
