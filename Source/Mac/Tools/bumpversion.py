@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import argparse
 import plistlib
@@ -11,17 +11,21 @@ VER_PATTERN = re.compile(r'(\d+(\.\d+)*)(.*)')
 
 def upgrade(dry_run, revision_number, version_name, commit, plists):
     if revision_number:
+        # value must be a string, lest an <integer> tag be used in plist
         target_rev = str(revision_number)
     else:
         # revs has an empty line, so len(rev) gives us what we want
         # (which is commit count + 1)
-        target_rev = str(len(subprocess.check_output(
-            ["git", "rev-list", "HEAD"]).split("\n")))
+        s = subprocess.check_output(
+            ["git", "rev-list", "HEAD"]).decode('utf-8')
+        # value must be a string, lest an <integer> tag be used in plist
+        target_rev = str(len(s.split("\n")))
 
     latest = None
 
     for path in plists:
-        plist = plistlib.readPlist(path)
+        with open(path, 'rb') as f:
+            plist = plistlib.load(f)
 
         bundle_version = int(plist["CFBundleVersion"])
         new_bundle_version = target_rev
@@ -56,7 +60,8 @@ def upgrade(dry_run, revision_number, version_name, commit, plists):
             plist["CFBundleVersion"] = new_bundle_version
             plist["CFBundleShortVersionString"] = new_short_version_string
             latest = plist["CFBundleShortVersionString"]
-            plistlib.writePlist(plist, path)
+            with open(path, 'wb') as f:
+                plistlib.dump(plist, f)
 
     if latest and commit:
         msg = "Bump to %s" % latest
