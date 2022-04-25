@@ -30,6 +30,9 @@
 
 using namespace OpenVanilla;
 
+// A macOS-specific OVKeyCode that represents the Enter key on the numpad,
+// or the key resulting from hitting Fn+Return.
+constexpr unsigned int kMacEnter = 3;
 
 OVIMTableBasedContext::OVIMTableBasedContext(OVIMTableBased* module)
     : m_module(module)
@@ -130,7 +133,7 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
             }
         }
     }
-    else if (key->keyCode() == OVKeyCode::Space || key->keyCode() == OVKeyCode::Return) {
+    else if (key->keyCode() == OVKeyCode::Space || key->keyCode() == OVKeyCode::Return || key->keyCode() == kMacEnter) {
         if (readingText->isEmpty()) {
 
             if (key->keyCode() == OVKeyCode::Space) {
@@ -235,6 +238,17 @@ bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* can
             composingText->commit();
             return true;
         }
+    }
+
+    if (key->keyCode() == kMacEnter) {
+        panel->hide();
+        panel->cancelEventHandler();
+        m_components.clear();
+        readingText->clear();
+        readingText->updateDisplay();
+        composingText->setText(panel->candidateList()->candidateAtIndex(0));
+        composingText->commit();
+        return true;
     }
 
     if (!(currentCandidate.length() && isValidKeyString(string(1, key->keyCode())) && !key->isDirectTextKey())) {
