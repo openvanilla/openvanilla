@@ -154,7 +154,7 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
             return true;
         }
     }
-    else if (key->keyCode() == OVKeyCode::Esc) {
+    else if (key->keyCode() == OVKeyCode::Esc || key->keyCode() == OVKeyCode::Enter) {
         m_components.clear();
         readingText->clear();
         readingText->updateDisplay();

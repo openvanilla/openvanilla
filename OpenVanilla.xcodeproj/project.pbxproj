@@ -87,6 +87,9 @@
 		6AECB188253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */; };
 		6AECB189253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */; };
 		6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */; };
+		D404CB3C29977324006153C3 /* OVIMBig5Code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D404CB3A29977324006153C3 /* OVIMBig5Code.cpp */; };
+		D404CB3D299777DB006153C3 /* OVIMBig5CodeContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = D67EE8F0CC32635912348F59 /* OVIMBig5CodeContext.mm */; };
+		D67EE92402CCD0EED20AE1B0 /* OVIMBig5CodeContext.h in Resources */ = {isa = PBXBuildFile; fileRef = D67EE395FCA44F8EDD3B5692 /* OVIMBig5CodeContext.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -322,6 +325,10 @@
 		6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = OpenVanilla.xcassets; path = Images/OpenVanilla.xcassets; sourceTree = SOURCE_ROOT; };
 		6AFBA9BF15F9AE0A007DC9E6 /* OVPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVPreferencesWindowController.h; sourceTree = "<group>"; };
 		6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVPreferencesWindowController.mm; sourceTree = "<group>"; };
+		D404CB3A29977324006153C3 /* OVIMBig5Code.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OVIMBig5Code.cpp; sourceTree = "<group>"; };
+		D404CB3B29977324006153C3 /* OVIMBig5Code.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OVIMBig5Code.h; sourceTree = "<group>"; };
+		D67EE395FCA44F8EDD3B5692 /* OVIMBig5CodeContext.h */ = {isa = PBXFileReference; lastKnownFileType = file.h; path = OVIMBig5CodeContext.h; sourceTree = "<group>"; };
+		D67EE8F0CC32635912348F59 /* OVIMBig5CodeContext.mm */ = {isa = PBXFileReference; lastKnownFileType = file.mm; path = OVIMBig5CodeContext.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -646,6 +653,7 @@
 		6ACB49C715E49EBE00380B82 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D404CB39299772EC006153C3 /* Big5Code */,
 				6A88322B1605C0A300FBEB85 /* Array */,
 				6A2793BF171201C000F1E13D /* AssociatedPhrases */,
 				6ACB49C815E49ECB00380B82 /* TableBased */,
@@ -716,6 +724,17 @@
 			path = Voltaire/Voltaire;
 			sourceTree = "<group>";
 		};
+		D404CB39299772EC006153C3 /* Big5Code */ = {
+			isa = PBXGroup;
+			children = (
+				D404CB3A29977324006153C3 /* OVIMBig5Code.cpp */,
+				D404CB3B29977324006153C3 /* OVIMBig5Code.h */,
+				D67EE8F0CC32635912348F59 /* OVIMBig5CodeContext.mm */,
+				D67EE395FCA44F8EDD3B5692 /* OVIMBig5CodeContext.h */,
+			);
+			path = Big5Code;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -765,7 +784,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = OV;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = "The OpenVanilla Project";
 			};
 			buildConfigurationList = 6ABBAEEA15CD58F90080EE7D /* Build configuration list for PBXProject "OpenVanilla" */;
@@ -816,6 +835,7 @@
 				6A616644162FD8420042559F /* OVNonModalAlertWindowController.xib in Resources */,
 				6AECB188253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */,
 				6A30CB0616329CF400DC0755 /* Localizable.strings in Resources */,
+				D67EE92402CCD0EED20AE1B0 /* OVIMBig5CodeContext.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -875,6 +895,7 @@
 				6ACB49E615E49EF100380B82 /* OVTextBufferCombinator.mm in Sources */,
 				6ACB49E715E49EF100380B82 /* OVTextBufferImpl.cpp in Sources */,
 				6ACB49F615E49F2900380B82 /* VTCandidateController.m in Sources */,
+				D404CB3C29977324006153C3 /* OVIMBig5Code.cpp in Sources */,
 				6ACB49F715E49F2900380B82 /* VTHorizontalCandidateController.m in Sources */,
 				6A12FD601E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.m in Sources */,
 				6ACB49F815E49F2900380B82 /* VTHorizontalCandidateView.m in Sources */,
@@ -885,6 +906,7 @@
 				6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.mm in Sources */,
 				6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm in Sources */,
 				6A8832311605C0B300FBEB85 /* OVIMArray.cpp in Sources */,
+				D404CB3D299777DB006153C3 /* OVIMBig5CodeContext.mm in Sources */,
 				6A8832321605C0B300FBEB85 /* OVIMArrayContext.cpp in Sources */,
 				6A0BEB6A161573A400FCB59A /* OVBaseModulePreferencesViewController.m in Sources */,
 				6A0BEB6B161573A400FCB59A /* OVGeneralPreferencesViewController.m in Sources */,
@@ -999,11 +1021,12 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/Mac/Installer/OpenVanillaInstaller-Prefix.pch";
 				HEADER_SEARCH_PATHS = ../;
 				INFOPLIST_FILE = "Source/Mac/Installer/OpenVanillaInstaller-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openvanilla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1020,11 +1043,12 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/Mac/Installer/OpenVanillaInstaller-Prefix.pch";
 				HEADER_SEARCH_PATHS = ../;
 				INFOPLIST_FILE = "Source/Mac/Installer/OpenVanillaInstaller-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openvanilla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1056,6 +1080,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1074,7 +1099,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -1105,6 +1130,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1116,7 +1142,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -1129,10 +1155,11 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/Mac/OpenVanilla-Prefix.pch";
 				INFOPLIST_FILE = "Source/Mac/OpenVanilla-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openvanilla.inputmethod.OpenVanilla;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1147,10 +1174,11 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/Mac/OpenVanilla-Prefix.pch";
 				INFOPLIST_FILE = "Source/Mac/OpenVanilla-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openvanilla.inputmethod.OpenVanilla;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
