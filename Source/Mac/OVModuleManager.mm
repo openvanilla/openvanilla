@@ -32,6 +32,7 @@
 #import "OVConstants.h"
 #import "OVIMArray.h"
 #import "OVIMTableBased.h"
+#import "OVIMBig5Code.h"
 #import "OVLoaderServiceImpl.h"
 #import "OVPlistBackedKeyValueMapImpl.h"
 #import "OVToolTipWindowController.h"
@@ -225,6 +226,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
     NSString *arrayTableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables"];
     OVInputMethod *inputMethod = new OpenVanilla::OVIMArray([arrayTableRoot UTF8String]);
     inputMethods.push_back(inputMethod);
+    OVInputMethod *big5Code = new OpenVanilla::OVIMBig5Code();
+    inputMethods.push_back(big5Code);
 
     for (vector<OVInputMethod*>::iterator i = inputMethods.begin(), e = inputMethods.end(); i != e; ++i) {
         OVInputMethod* inputMethod = *i;
