@@ -35,6 +35,30 @@
 #import "OVConstants.h"
 #import "OVAppDelegate.h"
 
+struct LatencyMeasurement {
+    LatencyMeasurement(NSString *sec) {
+        start = [NSDate date];
+        section = sec;
+        NSLog(@"ov-debug entering %@", section);
+    }
+
+    ~LatencyMeasurement() {
+        NSLog(@"ov-debug exiting %@, total latency: %.6f", section, elapsed());
+    }
+
+    void mark(NSString *annotation) {
+        NSLog(@"ov-debug %@%@%@, latency: %.6f", section, annotation.length > 0 ? @" " : @"", annotation, elapsed());
+    }
+
+    NSTimeInterval elapsed() {
+        return -[start timeIntervalSinceNow];
+    }
+
+    // Since the struct is only used within a method
+    NSString *section;
+    NSDate *start;
+};
+
 @interface OVInputMethodController ()
 - (BOOL)handleOVKey:(OVKey &)key client:(id)client;
 
@@ -206,8 +230,13 @@
 
 - (void)commitComposition:(id)sender
 {
+    LatencyMeasurement m(@"commitComposition");
     // fix the premature commit bug in Terminal.app since OS X 10.5
-    if ([[sender bundleIdentifier] isEqualToString:@"com.apple.Terminal"] && ![NSStringFromClass([sender class]) isEqualToString:@"IPMDServerClientWrapper"]) {
+
+    NSString *bid = [sender bundleIdentifier];
+    m.mark([NSString stringWithFormat:@"bundleIdentifier (%@)", bid]);
+
+    if ([bid isEqualToString:@"com.apple.Terminal"] && ![NSStringFromClass([sender class]) isEqualToString:@"IPMDServerClientWrapper"]) {
         [self performSelector:@selector(updateClientComposingBuffer:) withObject:_currentClient afterDelay:0.0];
         return;
     }
@@ -221,6 +250,7 @@
 
 - (BOOL)handleEvent:(NSEvent *)event client:(id)client
 {
+    LatencyMeasurement m(@"handleEvent");
     if (_readingText->toolTipText().length() || _composingText->toolTipText().length()) {
         _readingText->clearToolTip();
         _composingText->clearToolTip();
@@ -482,6 +512,8 @@
 
 - (void)handleCandidateSelected:(NSNotification *)notification
 {
+    LatencyMeasurement m(@"handleCandidateSelected");
+
     if (!_inputMethodContext) {
         return;
     }
@@ -521,6 +553,7 @@
 
 - (void)updateClientComposingBuffer:(id)sender
 {
+    LatencyMeasurement m(@"updateClientComposingBuffer");
     OVTextBufferCombinator combinedText(_composingText, _readingText);
     NSAttributedString *attrString = combinedText.combinedAttributedString();
     NSRange selectionRange = combinedText.selectionRange();
@@ -540,7 +573,9 @@
     // affect Google Japanese Input on Mac as well as Apple's built-in Pinyin IME:
     // https://bugs.chromium.org/p/chromium/issues/detail?id=86460
     // https://bugs.chromium.org/p/chromium/issues/detail?id=580808
-    if ([[sender bundleIdentifier] isEqualToString:@"com.google.Chrome"]) {
+    NSString *bid = [sender bundleIdentifier];
+    m.mark([NSString stringWithFormat:@"bundleIdentifier (%@)", bid]);
+    if ([bid isEqualToString:@"com.google.Chrome"]) {
         [self performSelector:@selector(deferredUpdateClientComposingBuffer:) withObject:params afterDelay:0.05];
     }
     else {
@@ -550,6 +585,8 @@
 
 - (void)deferredUpdateClientComposingBuffer:(NSArray *)params
 {
+    LatencyMeasurement m(@"deferredUpdateClientComposingBuffer");
+
     id sender = params[0];
     NSAttributedString *attrString = params[1];
     NSRange selectionRange = [params[2] rangeValue];
@@ -561,6 +598,7 @@
 
     NSRect lineHeightRect = NSMakeRect(0.0, 0.0, 16.0, 16.0);
     @try {
+        m.mark(@"attributesForCharacterIndex");
         NSDictionary *attr = [sender attributesForCharacterIndex:cursorIndex lineHeightRectangle:&lineHeightRect];
 
         // fall back to index 0 if no attributes are reported at cursorIndex
@@ -569,6 +607,7 @@
         }
     }
     @catch (NSException *exception) {
+        m.mark(@"catch");
     }
 
     OVOneDimensionalCandidatePanelImpl *currentCandidatePanel = [OVModuleManager defaultManager].candidateService->currentCandidatePanel();
