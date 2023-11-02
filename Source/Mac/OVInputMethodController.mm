@@ -159,6 +159,8 @@ struct LatencyMeasurement {
 
 - (void)activateServer:(id)client
 {
+    LatencyMeasurement m(@"activateServer");
+
     [OVModuleManager defaultManager].candidateService->resetAll();
 
     NSString *keyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
@@ -187,6 +189,8 @@ struct LatencyMeasurement {
 
 - (void)deactivateServer:(id)client
 {
+    LatencyMeasurement m(@"deactivateServer");
+
     if (_inputMethodContext) {
         _inputMethodContext->stopSession([OVModuleManager defaultManager].loaderService);
         delete _inputMethodContext;
@@ -230,17 +234,6 @@ struct LatencyMeasurement {
 
 - (void)commitComposition:(id)sender
 {
-    LatencyMeasurement m(@"commitComposition");
-    // fix the premature commit bug in Terminal.app since OS X 10.5
-
-    NSString *bid = [sender bundleIdentifier];
-    m.mark([NSString stringWithFormat:@"bundleIdentifier (%@)", bid]);
-
-    if ([bid isEqualToString:@"com.apple.Terminal"] && ![NSStringFromClass([sender class]) isEqualToString:@"IPMDServerClientWrapper"]) {
-        [self performSelector:@selector(updateClientComposingBuffer:) withObject:_currentClient afterDelay:0.0];
-        return;
-    }
-
     if (_composingText->isCommitted()) {
         NSString *combinedText = [NSString stringWithUTF8String:_composingText->composedCommittedText().c_str()];
         NSString *filteredText = [[OVModuleManager defaultManager] filteredStringWithString:combinedText];
@@ -553,7 +546,6 @@ struct LatencyMeasurement {
 
 - (void)updateClientComposingBuffer:(id)sender
 {
-    LatencyMeasurement m(@"updateClientComposingBuffer");
     OVTextBufferCombinator combinedText(_composingText, _readingText);
     NSAttributedString *attrString = combinedText.combinedAttributedString();
     NSRange selectionRange = combinedText.selectionRange();
@@ -566,48 +558,17 @@ struct LatencyMeasurement {
         _readingText->finishUpdate();
     }
 
-    NSArray *params = @[sender, attrString, [NSValue valueWithRange:selectionRange]];
-    // If the sender is Chrome, use a 1/20 sec delay. This is likely because some
-    // internally async updates need to catch up. This is considered a hack, not a
-    // real solution. Please see these two long-standing bugs below, which also
-    // affect Google Japanese Input on Mac as well as Apple's built-in Pinyin IME:
-    // https://bugs.chromium.org/p/chromium/issues/detail?id=86460
-    // https://bugs.chromium.org/p/chromium/issues/detail?id=580808
-    NSString *bid = [sender bundleIdentifier];
-    m.mark([NSString stringWithFormat:@"bundleIdentifier (%@)", bid]);
-    if ([bid isEqualToString:@"com.google.Chrome"]) {
-        [self performSelector:@selector(deferredUpdateClientComposingBuffer:) withObject:params afterDelay:0.05];
-    }
-    else {
-        [self deferredUpdateClientComposingBuffer:params];
-    }
-}
-
-- (void)deferredUpdateClientComposingBuffer:(NSArray *)params
-{
-    LatencyMeasurement m(@"deferredUpdateClientComposingBuffer");
-
-    id sender = params[0];
-    NSAttributedString *attrString = params[1];
-    NSRange selectionRange = [params[2] rangeValue];
-
     NSUInteger cursorIndex = selectionRange.location;
     if (cursorIndex == [attrString length] && cursorIndex) {
         cursorIndex--;
     }
 
     NSRect lineHeightRect = NSMakeRect(0.0, 0.0, 16.0, 16.0);
-    @try {
-        m.mark(@"attributesForCharacterIndex");
-        NSDictionary *attr = [sender attributesForCharacterIndex:cursorIndex lineHeightRectangle:&lineHeightRect];
+    NSDictionary *attr = [sender attributesForCharacterIndex:cursorIndex lineHeightRectangle:&lineHeightRect];
 
-        // fall back to index 0 if no attributes are reported at cursorIndex
-        if (![attr count]) {
-            [sender attributesForCharacterIndex:0 lineHeightRectangle:&lineHeightRect];
-        }
-    }
-    @catch (NSException *exception) {
-        m.mark(@"catch");
+    // fall back to index 0 if no attributes are reported at cursorIndex
+    if (![attr count]) {
+        [sender attributesForCharacterIndex:0 lineHeightRectangle:&lineHeightRect];
     }
 
     OVOneDimensionalCandidatePanelImpl *currentCandidatePanel = [OVModuleManager defaultManager].candidateService->currentCandidatePanel();
