@@ -56,7 +56,7 @@ macOS 10.10 以上（含）版本。
 
 * 注音輸入法（自動選字注音及傳統注音）：請下載[小麥注音](http://mcbopomofo.openvanilla.org)
 * 藏文輸入法：OS X 已經內建
-* POJ: 請使用「[信望愛台語客語輸入法](http://taigi.fhl.net/TaigiIME/)」或「[教育部台灣閩南語輸入法](http://www.edu.tw/mandr/download.aspx?download_sn=3015&pages=0&site_content_sn=3364)」，兩者都有 Mac 版本
+* POJ: 請使用「[信望愛台語客語輸入法](http://taigi.fhl.net/TaigiIME/)」或「[教育部臺灣閩南語漢字輸入法](https://language.moe.gov.tw/result.aspx?classify_sn=23&subclassify_sn=442&content_sn=28)」，兩者都有 Mac 版本
 
 另外，嘸蝦米輸入法的使用者，請前往[嘸蝦米官方網站](http://boshiamy.com)取得 Mac 版本。
 
