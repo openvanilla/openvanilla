@@ -55,14 +55,14 @@ macOS 10.10 以上（含）版本。
 以下是一些 OpenVanilla 過去支援，從 1.0 開始不再提供的輸入法，以及替代方案：
 
 * 注音輸入法（自動選字注音及傳統注音）：請下載[小麥注音](http://mcbopomofo.openvanilla.org)
-* 藏文輸入法：OS X 已經內建
-* POJ: 請使用「[信望愛台語客語輸入法](http://taigi.fhl.net/TaigiIME/)」或「[教育部臺灣閩南語漢字輸入法](https://language.moe.gov.tw/result.aspx?classify_sn=23&subclassify_sn=442&content_sn=28)」，兩者都有 Mac 版本
+* 藏文輸入法：macOS 已經內建
+* POJ: 請使用[意傳台文輸入法](https://sujiphuat.ithuan.tw/)、[信望愛台語客語輸入法](http://taigi.fhl.net/TaigiIME/)或[教育部臺灣閩南語漢字輸入法](https://language.moe.gov.tw/result.aspx?classify_sn=23&subclassify_sn=442&content_sn=28)；這三套輸入法都有 Mac 版本
 
 另外，嘸蝦米輸入法的使用者，請前往[嘸蝦米官方網站](http://boshiamy.com)取得 Mac 版本。
 
 ### Q: 輸入法在有的程式可以用，有的程式卻顯示灰色的圖示，怎麼辦？
 
-這可能是 OS X 的 bug。要解決此問題，請先完全卸載 OpenVanilla（卸載方式請參考上面），重新登入後，再重新安裝一次 OpenVanilla。
+這可能是 macOS 的 bug。要解決此問題，請先完全卸載 OpenVanilla（卸載方式請參考上面），重新登入後，再重新安裝一次 OpenVanilla。
 
 <a id="why-logout-is-needed"></a>
 
@@ -100,12 +100,12 @@ OpenVanilla 是開放原始碼的計畫，歡迎從 [GitHub](https://github.com/
 
 ### Q: 為什麼叫 OpenVanilla?
 
-OpenVanilla 的前身是一個名叫 VanillaInput 的輸入法軟體，原先 (2004年時) 設計來取代 OS X 內建的傳統注音。
+OpenVanilla 的前身是一個名叫 VanillaInput 的輸入法軟體，原先 (2004年時) 設計來取代 Mac OS X 內建的傳統注音。
 
-由於 OS X 內建的倉頡輸入法當時有許多與習慣不合處，VanillaInput 後來加入了倉頡輸入法。之後幾個朋友一起擴充了這個架構，變成可以用來開發新輸入法的軟體專案。
+由於 Mac OS X 內建的倉頡輸入法當時有許多與習慣不合處，VanillaInput 後來加入了倉頡輸入法。之後幾個朋友一起擴充了這個架構，變成可以用來開發新輸入法的軟體專案。
 
 因為是開放原始碼的計畫，又採取開放架構，因此稱之為 OpenVanilla。雖然一般俗稱「香草輸入法」，但 OpenVanilla 本身並不是一套輸入法，而是用來提供像倉頡、簡易等輸入法的套件，因此本站通稱 OpenVanilla。
 
 ### Q: 有使用上的問題，要去哪裡問？
 
-OpenVanilla 的 [Google Groups 線上論壇](https://groups.google.com/forum/?fromgroups/openvanilla#!forum/openvanilla)。或是到 Twitter 留言給 [@OpenVanilla](https://twitter.com/OpenVanilla)。
+OpenVanilla 的 [Google Groups 線上論壇](https://groups.google.com/forum/?fromgroups/openvanilla#!forum/openvanilla)。
