@@ -145,7 +145,7 @@ namespace OpenVanilla {
         virtual const OVKeyVector defaultCancelKeys() const = 0;
         virtual const OVKeyVector defaultChooseHighlightedCandidateKeys() const = 0;
 
-        virtual void setCandidateKeysAndLabels(const vector<pair<OVKey, string>>& keyLabelPairs) = 0;
+        virtual void setCandidateKeysAndLabels(const vector<pair<OVKey, string> >& keyLabelPairs) = 0;
     };
 
     class OVFreeContentStorage : public OVBase {
