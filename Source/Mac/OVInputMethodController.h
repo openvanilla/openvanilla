@@ -27,8 +27,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import <InputMethodKit/InputMethodKit.h>
-#import "OpenVanilla.h"
-#import "OVTextBufferImpl.h"
+//#import "OpenVanilla.h"
+//#import "OVTextBufferImpl.h"
+@import OpenVanilla;
+@import OpenVanillaImp;
+
 
 using namespace OpenVanilla;
 
