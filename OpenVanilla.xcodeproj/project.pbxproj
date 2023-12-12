@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6A0BEB6A161573A400FCB59A /* OVBaseModulePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BEB65161573A400FCB59A /* OVBaseModulePreferencesViewController.m */; };
-		6A0BEB6B161573A400FCB59A /* OVGeneralPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BEB67161573A400FCB59A /* OVGeneralPreferencesViewController.m */; };
+		6A0BEB6A161573A400FCB59A /* OVBaseModulePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BEB65161573A400FCB59A /* OVBaseModulePreferencesViewController.mm */; };
+		6A0BEB6B161573A400FCB59A /* OVGeneralPreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BEB67161573A400FCB59A /* OVGeneralPreferencesViewController.mm */; };
 		6A0E0ACE1623EDF5004FED10 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0E0ABE1623EDF5004FED10 /* AppDelegate.m */; };
 		6A0E0ACF1623EDF5004FED10 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A0E0ABF1623EDF5004FED10 /* InfoPlist.strings */; };
 		6A0E0AD01623EDF5004FED10 /* License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6A0E0AC11623EDF5004FED10 /* License.rtf */; };
@@ -18,14 +18,14 @@
 		6A0E0AD61623EEDB004FED10 /* OpenVanilla.app in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */; };
 		6A12FD5C1E2D323400CA5AEE /* jyutping-toneless.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A12FD581E2D31EA00CA5AEE /* jyutping-toneless.cin */; };
 		6A12FD5D1E2D323700CA5AEE /* jyutping.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A12FD591E2D31EA00CA5AEE /* jyutping.cin */; };
-		6A12FD601E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A12FD5F1E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.m */; };
+		6A12FD601E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A12FD5F1E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.mm */; };
 		6A2793CA171209E200F1E13D /* associated-phrases.cin in Copy Associated Phrases Table */ = {isa = PBXBuildFile; fileRef = 6A2793C7171209A400F1E13D /* associated-phrases.cin */; };
 		6A30CB0616329CF400DC0755 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A30CB0416329CF400DC0755 /* Localizable.strings */; };
 		6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */; };
 		6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm */; };
-		6A616643162FD8420042559F /* OVNonModalAlertWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A616641162FD8420042559F /* OVNonModalAlertWindowController.m */; };
+		6A616643162FD8420042559F /* OVNonModalAlertWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A616641162FD8420042559F /* OVNonModalAlertWindowController.mm */; };
 		6A616644162FD8420042559F /* OVNonModalAlertWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A616642162FD8420042559F /* OVNonModalAlertWindowController.xib */; };
-		6A6B2144162174DB00697149 /* OVIMArrayPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.m */; };
+		6A6B2144162174DB00697149 /* OVIMArrayPreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.mm */; };
 		6A6B21481621753300697149 /* OVAddTableBasedInputMethodViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B21471621753300697149 /* OVAddTableBasedInputMethodViewController.mm */; };
 		6A6B214A1621758700697149 /* OpenVanilla-InputMenu@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6A6B21491621758700697149 /* OpenVanilla-InputMenu@2x.tiff */; };
 		6A6BB4611633784300871443 /* dayi3.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A6BB45E1633783800871443 /* dayi3.cin */; };
@@ -35,21 +35,20 @@
 		6A88323B1605C2D200FBEB85 /* array-shortcode.cin in Copy Array Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A8832341605C1FE00FBEB85 /* array-shortcode.cin */; };
 		6A88323C1605C2D600FBEB85 /* array-special.cin in Copy Array Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A8832351605C1FE00FBEB85 /* array-special.cin */; };
 		6A88323D1605C2D800FBEB85 /* array30.cin in Copy Array Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A8832361605C1FE00FBEB85 /* array30.cin */; };
-		6AA7C2AB274F490400B84443 /* OVInputSourceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.m */; };
+		6AA7C2AB274F490400B84443 /* OVInputSourceHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.mm */; };
 		6AA7C2AD274F4FC000B84443 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAEF415CD58F90080EE7D /* Cocoa.framework */; };
 		6AA7C2AE274F4FC900B84443 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */; };
 		6AA7C2AF274F4FF000B84443 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */; };
 		6AB4A07815ED2BBA00E78557 /* preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB4A07715ED2BBA00E78557 /* preferences.xib */; };
 		6ABBAEF515CD58F90080EE7D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAEF415CD58F90080EE7D /* Cocoa.framework */; };
 		6ABBAEFF15CD58F90080EE7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAEFD15CD58F90080EE7D /* InfoPlist.strings */; };
-		6ABBAF0115CD58F90080EE7D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0015CD58F90080EE7D /* main.m */; };
+		6ABBAF0115CD58F90080EE7D /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0015CD58F90080EE7D /* main.mm */; };
 		6ABBAF0815CD58F90080EE7D /* OVAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0715CD58F90080EE7D /* OVAppDelegate.mm */; };
 		6ABBAF0B15CD58F90080EE7D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0915CD58F90080EE7D /* MainMenu.xib */; };
-		6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.m */; };
+		6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.mm */; };
 		6ABBAF2815CD617D0080EE7D /* OpenVanilla-InputMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */; };
 		6ABBAF2A15CD61B60080EE7D /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */; };
 		6ABBAF2C15CD61BE0080EE7D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */; };
-		6ABC1D931631AC7C005FF9B5 /* OVUpdateChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC1D921631AC7C005FF9B5 /* OVUpdateChecker.m */; };
 		6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */; };
 		6ACD128623688A23005046C7 /* ArchiveUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACD128423688A23005046C7 /* ArchiveUtil.m */; };
 		6ACD128823688A32005046C7 /* NotarizedArchives in Resources */ = {isa = PBXBuildFile; fileRef = 6ACD128723688A32005046C7 /* NotarizedArchives */; };
@@ -57,6 +56,8 @@
 		6AECB189253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */; };
 		6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */; };
 		D46CD4CC2B21A21B00AEBCA6 /* OpenVanilla in Frameworks */ = {isa = PBXBuildFile; productRef = D46CD4CB2B21A21B00AEBCA6 /* OpenVanilla */; };
+		D4F50BBC2B28898E00C6C364 /* OVUpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBB2B28898E00C6C364 /* OVUpdateChecker.swift */; };
+		D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,9 +115,9 @@
 
 /* Begin PBXFileReference section */
 		6A0BEB64161573A400FCB59A /* OVBaseModulePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVBaseModulePreferencesViewController.h; sourceTree = "<group>"; };
-		6A0BEB65161573A400FCB59A /* OVBaseModulePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVBaseModulePreferencesViewController.m; sourceTree = "<group>"; };
+		6A0BEB65161573A400FCB59A /* OVBaseModulePreferencesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVBaseModulePreferencesViewController.mm; sourceTree = "<group>"; };
 		6A0BEB66161573A400FCB59A /* OVGeneralPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVGeneralPreferencesViewController.h; sourceTree = "<group>"; };
-		6A0BEB67161573A400FCB59A /* OVGeneralPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVGeneralPreferencesViewController.m; sourceTree = "<group>"; };
+		6A0BEB67161573A400FCB59A /* OVGeneralPreferencesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVGeneralPreferencesViewController.mm; sourceTree = "<group>"; };
 		6A0E0A9F1623EDA9004FED10 /* OpenVanillaInstaller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVanillaInstaller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A0E0AA31623EDAA004FED10 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		6A0E0AA41623EDAA004FED10 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -136,7 +137,7 @@
 		6A12FD581E2D31EA00CA5AEE /* jyutping-toneless.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "jyutping-toneless.cin"; sourceTree = "<group>"; };
 		6A12FD591E2D31EA00CA5AEE /* jyutping.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jyutping.cin; sourceTree = "<group>"; };
 		6A12FD5E1E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVAFAssociatedPhrasesPreferencesViewController.h; sourceTree = "<group>"; };
-		6A12FD5F1E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVAFAssociatedPhrasesPreferencesViewController.m; sourceTree = "<group>"; };
+		6A12FD5F1E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVAFAssociatedPhrasesPreferencesViewController.mm; sourceTree = "<group>"; };
 		6A2793C7171209A400F1E13D /* associated-phrases.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "associated-phrases.cin"; sourceTree = "<group>"; };
 		6A30CB0516329CF400DC0755 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6A30CB0816329CFC00DC0755 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -147,10 +148,10 @@
 		6A3914AF15FAE99400DC57C3 /* OVTableBasedModulePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTableBasedModulePreferencesViewController.h; sourceTree = "<group>"; };
 		6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVTableBasedModulePreferencesViewController.mm; sourceTree = "<group>"; };
 		6A616640162FD8420042559F /* OVNonModalAlertWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVNonModalAlertWindowController.h; sourceTree = "<group>"; };
-		6A616641162FD8420042559F /* OVNonModalAlertWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVNonModalAlertWindowController.m; sourceTree = "<group>"; };
+		6A616641162FD8420042559F /* OVNonModalAlertWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVNonModalAlertWindowController.mm; sourceTree = "<group>"; };
 		6A616642162FD8420042559F /* OVNonModalAlertWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OVNonModalAlertWindowController.xib; sourceTree = "<group>"; };
 		6A6B2142162174DB00697149 /* OVIMArrayPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMArrayPreferencesViewController.h; sourceTree = "<group>"; };
-		6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMArrayPreferencesViewController.m; sourceTree = "<group>"; };
+		6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVIMArrayPreferencesViewController.mm; sourceTree = "<group>"; };
 		6A6B21461621753300697149 /* OVAddTableBasedInputMethodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVAddTableBasedInputMethodViewController.h; sourceTree = "<group>"; };
 		6A6B21471621753300697149 /* OVAddTableBasedInputMethodViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVAddTableBasedInputMethodViewController.mm; sourceTree = "<group>"; };
 		6A6B21491621758700697149 /* OpenVanilla-InputMenu@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "OpenVanilla-InputMenu@2x.tiff"; path = "Images/OpenVanilla-InputMenu@2x.tiff"; sourceTree = SOURCE_ROOT; };
@@ -166,18 +167,16 @@
 		6ABBAEF415CD58F90080EE7D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		6ABBAEFC15CD58F90080EE7D /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenVanilla-Info.plist"; sourceTree = "<group>"; };
 		6ABBAEFE15CD58F90080EE7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6ABBAF0015CD58F90080EE7D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6ABBAF0015CD58F90080EE7D /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		6ABBAF0215CD58F90080EE7D /* OpenVanilla-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanilla-Prefix.pch"; sourceTree = "<group>"; };
 		6ABBAF0615CD58F90080EE7D /* OVAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OVAppDelegate.h; sourceTree = "<group>"; };
 		6ABBAF0715CD58F90080EE7D /* OVAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OVAppDelegate.mm; sourceTree = "<group>"; };
 		6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVInputMethodController.h; sourceTree = "<group>"; };
 		6ABBAF1F15CD615B0080EE7D /* OVInputSourceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVInputSourceHelper.h; sourceTree = "<group>"; };
-		6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVInputSourceHelper.m; sourceTree = "<group>"; };
+		6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVInputSourceHelper.mm; sourceTree = "<group>"; };
 		6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "OpenVanilla-InputMenu.tiff"; path = "Images/OpenVanilla-InputMenu.tiff"; sourceTree = SOURCE_ROOT; };
 		6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = System/Library/Frameworks/InputMethodKit.framework; sourceTree = SDKROOT; };
 		6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
-		6ABC1D911631AC7C005FF9B5 /* OVUpdateChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVUpdateChecker.h; sourceTree = "<group>"; };
-		6ABC1D921631AC7C005FF9B5 /* OVUpdateChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVUpdateChecker.m; sourceTree = "<group>"; };
 		6AC9E19321AB554000AF6B69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		6AC9E19421AB554000AF6B69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVInputMethodController.mm; sourceTree = "<group>"; };
@@ -194,6 +193,9 @@
 		6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = OpenVanilla.xcassets; path = Images/OpenVanilla.xcassets; sourceTree = SOURCE_ROOT; };
 		6AFBA9BF15F9AE0A007DC9E6 /* OVPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVPreferencesWindowController.h; sourceTree = "<group>"; };
 		6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVPreferencesWindowController.mm; sourceTree = "<group>"; };
+		D4F50BBA2B28898D00C6C364 /* OpenVanilla-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanilla-Bridging-Header.h"; sourceTree = "<group>"; };
+		D4F50BBB2B28898E00C6C364 /* OVUpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OVUpdateChecker.swift; sourceTree = "<group>"; };
+		D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPropertyWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,31 +322,32 @@
 				6A6B21461621753300697149 /* OVAddTableBasedInputMethodViewController.h */,
 				6A6B21471621753300697149 /* OVAddTableBasedInputMethodViewController.mm */,
 				6A12FD5E1E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.h */,
-				6A12FD5F1E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.m */,
+				6A12FD5F1E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.mm */,
 				6ABBAF0615CD58F90080EE7D /* OVAppDelegate.h */,
 				6ABBAF0715CD58F90080EE7D /* OVAppDelegate.mm */,
 				6A0BEB64161573A400FCB59A /* OVBaseModulePreferencesViewController.h */,
-				6A0BEB65161573A400FCB59A /* OVBaseModulePreferencesViewController.m */,
+				6A0BEB65161573A400FCB59A /* OVBaseModulePreferencesViewController.mm */,
 				6A3914AB15FAE96500DC57C3 /* OVBasePreferencesViewController.h */,
 				6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */,
 				6A0BEB66161573A400FCB59A /* OVGeneralPreferencesViewController.h */,
-				6A0BEB67161573A400FCB59A /* OVGeneralPreferencesViewController.m */,
+				6A0BEB67161573A400FCB59A /* OVGeneralPreferencesViewController.mm */,
 				6A6B2142162174DB00697149 /* OVIMArrayPreferencesViewController.h */,
-				6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.m */,
+				6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.mm */,
 				6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */,
 				6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */,
 				6ABBAF1F15CD615B0080EE7D /* OVInputSourceHelper.h */,
-				6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.m */,
+				6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.mm */,
 				6A616640162FD8420042559F /* OVNonModalAlertWindowController.h */,
-				6A616641162FD8420042559F /* OVNonModalAlertWindowController.m */,
+				6A616641162FD8420042559F /* OVNonModalAlertWindowController.mm */,
 				6AFBA9BF15F9AE0A007DC9E6 /* OVPreferencesWindowController.h */,
 				6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */,
 				6A3914AF15FAE99400DC57C3 /* OVTableBasedModulePreferencesViewController.h */,
 				6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm */,
-				6ABC1D911631AC7C005FF9B5 /* OVUpdateChecker.h */,
-				6ABC1D921631AC7C005FF9B5 /* OVUpdateChecker.m */,
+				D4F50BBB2B28898E00C6C364 /* OVUpdateChecker.swift */,
 				6ABBAF2415CD61680080EE7D /* Resources */,
 				6ABBAEFB15CD58F90080EE7D /* Supporting Files */,
+				D4F50BBA2B28898D00C6C364 /* OpenVanilla-Bridging-Header.h */,
+				D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */,
 			);
 			name = "InputMethod Application";
 			path = Source/Mac;
@@ -355,7 +358,7 @@
 			children = (
 				6ABBAEFC15CD58F90080EE7D /* OpenVanilla-Info.plist */,
 				6ABBAEFD15CD58F90080EE7D /* InfoPlist.strings */,
-				6ABBAF0015CD58F90080EE7D /* main.m */,
+				6ABBAF0015CD58F90080EE7D /* main.mm */,
 				6ABBAF0215CD58F90080EE7D /* OpenVanilla-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -439,6 +442,11 @@
 				CLASSPREFIX = OV;
 				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = "The OpenVanilla Project";
+				TargetAttributes = {
+					6ABBAEEF15CD58F90080EE7D = {
+						LastSwiftMigration = 1500;
+					};
+				};
 			};
 			buildConfigurationList = 6ABBAEEA15CD58F90080EE7D /* Build configuration list for PBXProject "OpenVanilla" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -523,7 +531,7 @@
 			files = (
 				6A0E0ACE1623EDF5004FED10 /* AppDelegate.m in Sources */,
 				6ACD128623688A23005046C7 /* ArchiveUtil.m in Sources */,
-				6AA7C2AB274F490400B84443 /* OVInputSourceHelper.m in Sources */,
+				6AA7C2AB274F490400B84443 /* OVInputSourceHelper.mm in Sources */,
 				6A0E0AD41623EDF5004FED10 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,20 +540,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6ABBAF0115CD58F90080EE7D /* main.m in Sources */,
+				6ABBAF0115CD58F90080EE7D /* main.mm in Sources */,
 				6ABBAF0815CD58F90080EE7D /* OVAppDelegate.mm in Sources */,
-				6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.m in Sources */,
+				6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.mm in Sources */,
 				6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */,
-				6A12FD601E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.m in Sources */,
+				6A12FD601E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.mm in Sources */,
 				6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.mm in Sources */,
 				6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.mm in Sources */,
 				6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm in Sources */,
-				6A0BEB6A161573A400FCB59A /* OVBaseModulePreferencesViewController.m in Sources */,
-				6A0BEB6B161573A400FCB59A /* OVGeneralPreferencesViewController.m in Sources */,
-				6A6B2144162174DB00697149 /* OVIMArrayPreferencesViewController.m in Sources */,
+				6A0BEB6A161573A400FCB59A /* OVBaseModulePreferencesViewController.mm in Sources */,
+				6A0BEB6B161573A400FCB59A /* OVGeneralPreferencesViewController.mm in Sources */,
+				6A6B2144162174DB00697149 /* OVIMArrayPreferencesViewController.mm in Sources */,
+				D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */,
 				6A6B21481621753300697149 /* OVAddTableBasedInputMethodViewController.mm in Sources */,
-				6A616643162FD8420042559F /* OVNonModalAlertWindowController.m in Sources */,
-				6ABC1D931631AC7C005FF9B5 /* OVUpdateChecker.m in Sources */,
+				6A616643162FD8420042559F /* OVNonModalAlertWindowController.mm in Sources */,
+				D4F50BBC2B28898E00C6C364 /* OVUpdateChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,6 +782,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -789,6 +799,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.openvanilla.inputmethod.OpenVanilla;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Source/Mac/OpenVanilla-Bridging-Header.h";
+				SWIFT_OBJC_INTEROP_MODE = objcxx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -797,6 +811,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -813,6 +828,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.openvanilla.inputmethod.OpenVanilla;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Source/Mac/OpenVanilla-Bridging-Header.h";
+				SWIFT_OBJC_INTEROP_MODE = objcxx;
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

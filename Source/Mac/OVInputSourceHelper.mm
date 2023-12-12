@@ -60,7 +60,7 @@
 
 + (BOOL)inputSourceEnabled:(TISInputSourceRef)inInputSource
 {
-	CFBooleanRef value = TISGetInputSourceProperty(inInputSource, kTISPropertyInputSourceIsEnabled);
+	CFBooleanRef value = (CFBooleanRef)TISGetInputSourceProperty(inInputSource, kTISPropertyInputSourceIsEnabled);
 	return value ? (BOOL)CFBooleanGetValue(value) : NO; 
 }
 

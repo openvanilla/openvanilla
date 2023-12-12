@@ -27,7 +27,7 @@
 
 #import "OVGeneralPreferencesViewController.h"
 #import "OVConstants.h"
-#import "OVUpdateChecker.h"
+#import "OpenVanilla-Swift.h"
 
 @interface OVGeneralPreferencesViewController ()
 - (void)handleUpdateCheckDidComplete:(NSNotification *)notification;
@@ -38,7 +38,7 @@
 - (void)awakeFromNib
 {
     // this is never deallocated (only on app exit), so no need to remove observer
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUpdateCheckDidComplete:) name:OVUpdateCheckerDidFinishCheckingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUpdateCheckDidComplete:) name:@"OVUpdateCheckerDidFinishCheckingNotification" object:nil];
 }
 
 - (void)loadPreferences
