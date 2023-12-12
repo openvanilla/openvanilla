@@ -26,13 +26,13 @@
 //
 
 #import "OVInputMethodController.h"
-#import "OVLoaderServiceImpl.h"
-#import "OVCandidateServiceImpl.h"
-#import "OVTextBufferCombinator.h"
-#import "OVToolTipWindowController.h"
-#import "OVModuleManager.h"
+//#import "OVLoaderServiceImpl.h"
+//#import "OVCandidateServiceImpl.h"
+//#import "OVTextBufferCombinator.h"
+//#import "OVToolTipWindowController.h"
+//#import "OVModuleManager.h"
 #import "OVUpdateChecker.h"
-#import "OVConstants.h"
+//#import "OVConstants.h"
 #import "OVAppDelegate.h"
 
 @interface OVInputMethodController ()

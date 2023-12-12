@@ -27,22 +27,23 @@
 
 #import "OVModuleManager.h"
 #import <set>
-//#import "OVAFAssociatedPhrasesContext.h"
+#import "OVAFAssociatedPhrasesContext.h"
 #import "OVCandidateServiceImpl.h"
 #import "OVConstants.h"
-//#import "OVIMArray.h"
-//#import "OVIMTableBased.h"
-//#import "OVIMBig5Code.h"
+#import "OVIMArray.h"
+#import "OVIMTableBased.h"
+#import "OVIMBig5Code.h"
 #import "OVLoaderServiceImpl.h"
 #import "OVPlistBackedKeyValueMapImpl.h"
 #import "OVToolTipWindowController.h"
 #import "VXHanConvert.h"
 
-@import OpenVanilla;
-@import OVIMArray;
-@import OVIMBig5Code;
-@import OVIMTableBased;
-@import OVAFAssociatedPhrases;
+//@import OpenVanilla;
+//@import OVIMArray;
+//@import OVIMBig5Code;
+//@import OVIMTableBased;
+//@import OVAFAssociatedPhrases;
+//@import Tooltip;
 
 extern NSString *const OVModuleManagerDidReloadNotification = @"OVModuleManagerDidReloadNotification";
 extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification = @"OVModuleManagerDidUpdateActiveInputMethodNotification";

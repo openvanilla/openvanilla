@@ -31,7 +31,9 @@
 //#import "OVTextBufferImpl.h"
 @import OpenVanilla;
 @import OpenVanillaImp;
-
+@import OVModuleLoader;
+@import OVModuleManager;
+@import Tooltip;
 
 using namespace OpenVanilla;
 

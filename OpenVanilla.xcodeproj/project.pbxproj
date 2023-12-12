@@ -42,7 +42,6 @@
 		6AA7C2AD274F4FC000B84443 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAEF415CD58F90080EE7D /* Cocoa.framework */; };
 		6AA7C2AE274F4FC900B84443 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */; };
 		6AA7C2AF274F4FF000B84443 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */; };
-		6AAB3401162E529E00C4C22F /* OVToolTipWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AAB3400162E529E00C4C22F /* OVToolTipWindowController.m */; };
 		6AB4A07815ED2BBA00E78557 /* preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB4A07715ED2BBA00E78557 /* preferences.xib */; };
 		6ABBAEF515CD58F90080EE7D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAEF415CD58F90080EE7D /* Cocoa.framework */; };
 		6ABBAEFF15CD58F90080EE7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAEFD15CD58F90080EE7D /* InfoPlist.strings */; };
@@ -169,8 +168,6 @@
 		6A8832341605C1FE00FBEB85 /* array-shortcode.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "array-shortcode.cin"; sourceTree = "<group>"; };
 		6A8832351605C1FE00FBEB85 /* array-special.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "array-special.cin"; sourceTree = "<group>"; };
 		6A8832361605C1FE00FBEB85 /* array30.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = array30.cin; sourceTree = "<group>"; };
-		6AAB33FF162E529E00C4C22F /* OVToolTipWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVToolTipWindowController.h; sourceTree = "<group>"; };
-		6AAB3400162E529E00C4C22F /* OVToolTipWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVToolTipWindowController.m; sourceTree = "<group>"; };
 		6AB4A07715ED2BBA00E78557 /* preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = preferences.xib; sourceTree = "<group>"; };
 		6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVanilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ABBAEF415CD58F90080EE7D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -363,8 +360,6 @@
 				6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */,
 				6A3914AF15FAE99400DC57C3 /* OVTableBasedModulePreferencesViewController.h */,
 				6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm */,
-				6AAB33FF162E529E00C4C22F /* OVToolTipWindowController.h */,
-				6AAB3400162E529E00C4C22F /* OVToolTipWindowController.m */,
 				6ABC1D911631AC7C005FF9B5 /* OVUpdateChecker.h */,
 				6ABC1D921631AC7C005FF9B5 /* OVUpdateChecker.m */,
 				6ABBAF2415CD61680080EE7D /* Resources */,
@@ -576,7 +571,6 @@
 				6A0BEB6B161573A400FCB59A /* OVGeneralPreferencesViewController.m in Sources */,
 				6A6B2144162174DB00697149 /* OVIMArrayPreferencesViewController.m in Sources */,
 				6A6B21481621753300697149 /* OVAddTableBasedInputMethodViewController.mm in Sources */,
-				6AAB3401162E529E00C4C22F /* OVToolTipWindowController.m in Sources */,
 				6A63D1C1162F1DBA001175D2 /* VXHanConvert.c in Sources */,
 				6A63D1C2162F1DBA001175D2 /* VXHCSC2TCTable.c in Sources */,
 				6A63D1C3162F1DBA001175D2 /* VXHCTC2SCTable.c in Sources */,
