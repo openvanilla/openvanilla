@@ -28,9 +28,9 @@
 #import "OVTableBasedModulePreferencesViewController.h"
 #import "OVConstants.h"
 #import "OVModuleManager.h"
-#import "OVNonModalAlertWindowController.h"
+#import "OpenVanilla-Swift.h"
 
-@interface OVTableBasedModulePreferencesViewController () <OVNonModalAlertWindowControllerDelegate>
+@interface OVTableBasedModulePreferencesViewController () <NonModalAlertWindowControllerDelegate>
 @end
 
 @implementation OVTableBasedModulePreferencesViewController
@@ -126,29 +126,29 @@
 
 - (IBAction)removeInputMethodAction:(id)sender
 {
-    [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Confirm Removal", nil) content:[NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to remove the input method\"%@\"?", nil), [[OVModuleManager defaultManager] localizedInputMethodName:self.moduleIdentifier]] confirmButtonTitle:NSLocalizedString(@"Remove", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) cancelAsDefault:YES delegate:self];
+    [[NonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Confirm Removal", nil) content:[NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to remove the input method\"%@\"?", nil), [[OVModuleManager defaultManager] localizedInputMethodName:self.moduleIdentifier]] confirmButtonTitle:NSLocalizedString(@"Remove", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) cancelAsDefault:YES delegate:self];
 }
 
 - (void)setModuleIdentifier:(NSString *)moduleIdentifier
 {
     [super setModuleIdentifier:moduleIdentifier];
 
-    OVNonModalAlertWindowController *controller = [OVNonModalAlertWindowController sharedInstance];
-    if ([[controller window] isVisible] && controller.delegate == self) {
+    NonModalAlertWindowController *controller = [NonModalAlertWindowController sharedInstance];
+    if ([[controller window] isVisible]) {
         [controller cancelOperation:self];
     }
 }
 
-- (void)nonModalAlertWindowControllerDidConfirm:(OVNonModalAlertWindowController *)controller
+- (void)nonModalAlertWindowControllerDidConfirm:(NonModalAlertWindowController *)controller
 {
     NSError *error = nil;
     BOOL success = [[OVModuleManager defaultManager] removeCustomTableBasedInputMethod:self.moduleIdentifier error:&error];
     if (!success) {
-        [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Removal Failed", nil) content:[NSString stringWithFormat:NSLocalizedString(@"Failed to remove the input method\"%@\".\n\nError: %@", nil), [[OVModuleManager defaultManager] localizedInputMethodName:self.moduleIdentifier], [error localizedDescription]] confirmButtonTitle:NSLocalizedString(@"Dismiss", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
+        [[NonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Removal Failed", nil) content:[NSString stringWithFormat:NSLocalizedString(@"Failed to remove the input method\"%@\".\n\nError: %@", nil), [[OVModuleManager defaultManager] localizedInputMethodName:self.moduleIdentifier], [error localizedDescription]] confirmButtonTitle:NSLocalizedString(@"Dismiss", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
     }
 }
 
-- (void)nonModalAlertWindowControllerDidCancel:(OVNonModalAlertWindowController *)controller
+- (void)nonModalAlertWindowControllerDidCancel:(NonModalAlertWindowController *)controller
 {
 }
 @end

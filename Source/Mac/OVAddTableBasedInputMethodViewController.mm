@@ -28,10 +28,10 @@
 #import "OVAddTableBasedInputMethodViewController.h"
 #import "OVConstants.h"
 #import "OVModuleManager.h"
-#import "OVNonModalAlertWindowController.h"
 #import "OVPreferencesWindowController.h"
+#import "OpenVanilla-Swift.h"
 
-@interface OVAddTableBasedInputMethodViewController () <OVNonModalAlertWindowControllerDelegate>
+@interface OVAddTableBasedInputMethodViewController () <NonModalAlertWindowControllerDelegate>
 - (BOOL)install:(NSString *)path;
 
 @property (strong) NSString *tablePathToBeInstalled;
@@ -88,7 +88,7 @@
         NSString *localizedName = nil;
         BOOL canInstall = [[OVModuleManager defaultManager] canInstallCustomTableBasedInputMethodWithTablePath:cinPath willOverrideBuiltInTable:&override identifier:&identifier localizedName:&localizedName error:&error];
         if (!canInstall) {
-            [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Cannot Import Input Method", nil) content:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" is not a valid cin file.", nil), [cinPath lastPathComponent]] confirmButtonTitle:NSLocalizedString(@"Dismiss", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
+            [[NonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Cannot Import Input Method", nil) content:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" is not a valid cin file.", nil), [cinPath lastPathComponent]] confirmButtonTitle:NSLocalizedString(@"Dismiss", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
             return;
         }
 
@@ -96,7 +96,7 @@
             self.tablePathToBeInstalled = cinPath;
             self.moduleIdentifierIfInstalled = identifier;
 
-            [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Overwriting Existing Input Method", nil) content:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" will replace an existing input method that you have. Do you want to continue?", nil), [cinPath lastPathComponent]] confirmButtonTitle:NSLocalizedString(@"Overwrite", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) cancelAsDefault:YES delegate:self];
+            [[NonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Overwriting Existing Input Method", nil) content:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" will replace an existing input method that you have. Do you want to continue?", nil), [cinPath lastPathComponent]] confirmButtonTitle:NSLocalizedString(@"Overwrite", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) cancelAsDefault:YES delegate:self];
             return;
         }
 
@@ -113,26 +113,26 @@
     NSString *localizedName = nil;
     BOOL canInstall = [[OVModuleManager defaultManager] canInstallCustomTableBasedInputMethodWithTablePath:cinPath willOverrideBuiltInTable:&override identifier:&identifier localizedName:&localizedName error:&error];
     if (!canInstall) {
-        [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Cannot Import Input Method", nil) content:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" is not a valid cin file.", nil), [cinPath lastPathComponent]] confirmButtonTitle:NSLocalizedString(@"Dismiss", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
+        [[NonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Cannot Import Input Method", nil) content:[NSString stringWithFormat:NSLocalizedString(@"\"%@\" is not a valid cin file.", nil), [cinPath lastPathComponent]] confirmButtonTitle:NSLocalizedString(@"Dismiss", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
         return NO;
     }
 
     [[OVModuleManager defaultManager] installCustomTableBasedInputMethodWithTablePath:path];
 
-    [[OVNonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Input Method Imported", nil) content:[NSString stringWithFormat:NSLocalizedString(@"Your new input method \"%@\" is ready to use", nil), localizedName] confirmButtonTitle:NSLocalizedString(@"OK", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
+    [[NonModalAlertWindowController sharedInstance] showWithTitle:NSLocalizedString(@"Input Method Imported", nil) content:[NSString stringWithFormat:NSLocalizedString(@"Your new input method \"%@\" is ready to use", nil), localizedName] confirmButtonTitle:NSLocalizedString(@"OK", nil) cancelButtonTitle:nil cancelAsDefault:NO delegate:nil];
 
     [self.preferencesWindowController selectInputMethodIdentifier:identifier];
     return YES;
 }
 
-- (void)nonModalAlertWindowControllerDidConfirm:(OVNonModalAlertWindowController *)controller
+- (void)nonModalAlertWindowControllerDidConfirm:(NonModalAlertWindowController *)controller
 {
-    if (controller.delegate == self) {
+//    if (controller.delegate == self) {
         [self install:self.tablePathToBeInstalled];
-    }
+//    }
 }
 
-- (void)nonModalAlertWindowControllerDidCancel:(OVNonModalAlertWindowController *)controller
+- (void)nonModalAlertWindowControllerDidCancel:(NonModalAlertWindowController *)controller
 {
     self.tablePathToBeInstalled = nil;
     self.moduleIdentifierIfInstalled = nil;

@@ -46,7 +46,7 @@ class OVUpdateChecker: NSObject {
                 return
             }
             DispatchQueue.main.async {
-                OVNonModalAlertWindowController.sharedInstance().show(withTitle: NSLocalizedString("Update Check Failed", comment: ""), content: NSLocalizedString("The version information returned by the server is not valid.", comment: ""), confirmButtonTitle: NSLocalizedString("Dismiss", comment: ""), cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
+                NonModalAlertWindowController.shared.show(title: NSLocalizedString("Update Check Failed", comment: ""), content: NSLocalizedString("The version information returned by the server is not valid.", comment: ""), confirmButtonTitle: NSLocalizedString("Dismiss", comment: ""), cancelButtonTitle: "", cancelAsDefault: false, delegate: nil)
             }
         }
 
@@ -74,7 +74,7 @@ class OVUpdateChecker: NSObject {
                 }
                 if forced {
                     DispatchQueue.main.async {
-                        OVNonModalAlertWindowController.sharedInstance().show(withTitle: NSLocalizedString("Update Check Failed", comment: ""), content: String(format: NSLocalizedString("There may be no internet connection or the server failed to respond.\n\nError message: %@", comment: ""), error.localizedDescription), confirmButtonTitle: NSLocalizedString("Dismiss", comment: ""), cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
+                        NonModalAlertWindowController.shared.show(title: NSLocalizedString("Update Check Failed", comment: ""), content: String(format: NSLocalizedString("There may be no internet connection or the server failed to respond.\n\nError message: %@", comment: ""), error.localizedDescription), confirmButtonTitle: NSLocalizedString("Dismiss", comment: ""), cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
                     }
                 }
                 return
@@ -106,7 +106,7 @@ class OVUpdateChecker: NSObject {
             if result != .orderedAscending {
                 if forced {
                     DispatchQueue.main.async {
-                        OVNonModalAlertWindowController.sharedInstance().show(withTitle: NSLocalizedString("Check for Update Completed", comment: ""), content: NSLocalizedString("You are already using the latest version of OpenVanilla.", comment: ""), confirmButtonTitle: NSLocalizedString("OK", comment: ""), cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
+                        NonModalAlertWindowController.shared.show(title: NSLocalizedString("Check for Update Completed", comment: ""), content: NSLocalizedString("You are already using the latest version of OpenVanilla.", comment: ""), confirmButtonTitle: NSLocalizedString("OK", comment: ""), cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
                     }
                 }
             }
@@ -123,7 +123,7 @@ class OVUpdateChecker: NSObject {
                 }
                 let content = String(format: NSLocalizedString("You're currently using OpenVanilla %@ (%@), a new version %@ (%@) is now available. Do you want to visit openvanilla.org to download the version?%@", comment: ""), currentShortVersion, currentVersion, remoteShortVersion, remoteVersion, versionDescription)
                 DispatchQueue.main.async {
-                    OVNonModalAlertWindowController.sharedInstance().show(withTitle: NSLocalizedString("New Version Available", comment: ""), content: content, confirmButtonTitle: NSLocalizedString("Visit Website", comment: ""), cancelButtonTitle: NSLocalizedString("Not Now", comment: ""), cancelAsDefault: false, delegate: self)
+                    NonModalAlertWindowController.shared.show(title: NSLocalizedString("New Version Available", comment: ""), content: content, confirmButtonTitle: NSLocalizedString("Visit Website", comment: ""), cancelButtonTitle: NSLocalizedString("Not Now", comment: ""), cancelAsDefault: false, delegate: self)
                 }
             }
 
@@ -135,18 +135,14 @@ class OVUpdateChecker: NSObject {
 }
 
 
-extension OVUpdateChecker: OVNonModalAlertWindowControllerDelegate {
-    func nonModalAlertWindowControllerDidConfirm(_ controller: OVNonModalAlertWindowController!) {
-        if controller.delegate.isEqual(self)  {
-            guard let url = URL(string: OVUpdateDownloadURLString) else { return }
-            NSWorkspace.shared.open(url)
-        }
+extension OVUpdateChecker: NonModalAlertWindowControllerDelegate {
+    func nonModalAlertWindowControllerDidConfirm(_ controller: NonModalAlertWindowController) {
+        guard let url = URL(string: OVUpdateDownloadURLString) else { return }
+        NSWorkspace.shared.open(url)
     }
 
-    func nonModalAlertWindowControllerDidCancel(_ controller: OVNonModalAlertWindowController!) {
-        if controller.delegate.isEqual(self)  {
-            let now = Date()
-            self.nextUpdateCheckDate = Date(timeInterval: OVNextUpdateCheckRemindLaterInterval, since: now)
-        }
+    func nonModalAlertWindowControllerDidCancel(_ controller: NonModalAlertWindowController) {
+        let now = Date()
+        self.nextUpdateCheckDate = Date(timeInterval: OVNextUpdateCheckRemindLaterInterval, since: now)
     }
 }
