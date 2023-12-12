@@ -57,6 +57,8 @@ namespace OpenVanilla {
     	virtual void __reserved6(const string&) {}
     	virtual void __reserved7(const string&, const string &) {}
         virtual void* __reserved8(const string&) { return 0; }
+
+        void setCurrentLocale(string locale);
     };
 };
 

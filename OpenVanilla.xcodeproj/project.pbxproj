@@ -25,9 +25,6 @@
 		6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm */; };
 		6A616643162FD8420042559F /* OVNonModalAlertWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A616641162FD8420042559F /* OVNonModalAlertWindowController.m */; };
 		6A616644162FD8420042559F /* OVNonModalAlertWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A616642162FD8420042559F /* OVNonModalAlertWindowController.xib */; };
-		6A63D1C1162F1DBA001175D2 /* VXHanConvert.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A63D1BD162F1DBA001175D2 /* VXHanConvert.c */; };
-		6A63D1C2162F1DBA001175D2 /* VXHCSC2TCTable.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A63D1BF162F1DBA001175D2 /* VXHCSC2TCTable.c */; };
-		6A63D1C3162F1DBA001175D2 /* VXHCTC2SCTable.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A63D1C0162F1DBA001175D2 /* VXHCTC2SCTable.c */; };
 		6A6B2144162174DB00697149 /* OVIMArrayPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.m */; };
 		6A6B21481621753300697149 /* OVAddTableBasedInputMethodViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B21471621753300697149 /* OVAddTableBasedInputMethodViewController.mm */; };
 		6A6B214A1621758700697149 /* OpenVanilla-InputMenu@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6A6B21491621758700697149 /* OpenVanilla-InputMenu@2x.tiff */; };
@@ -152,10 +149,6 @@
 		6A616640162FD8420042559F /* OVNonModalAlertWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVNonModalAlertWindowController.h; sourceTree = "<group>"; };
 		6A616641162FD8420042559F /* OVNonModalAlertWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVNonModalAlertWindowController.m; sourceTree = "<group>"; };
 		6A616642162FD8420042559F /* OVNonModalAlertWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OVNonModalAlertWindowController.xib; sourceTree = "<group>"; };
-		6A63D1BD162F1DBA001175D2 /* VXHanConvert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VXHanConvert.c; sourceTree = "<group>"; };
-		6A63D1BE162F1DBA001175D2 /* VXHanConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VXHanConvert.h; sourceTree = "<group>"; };
-		6A63D1BF162F1DBA001175D2 /* VXHCSC2TCTable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VXHCSC2TCTable.c; sourceTree = "<group>"; };
-		6A63D1C0162F1DBA001175D2 /* VXHCTC2SCTable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VXHCTC2SCTable.c; sourceTree = "<group>"; };
 		6A6B2142162174DB00697149 /* OVIMArrayPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVIMArrayPreferencesViewController.h; sourceTree = "<group>"; };
 		6A6B2143162174DB00697149 /* OVIMArrayPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVIMArrayPreferencesViewController.m; sourceTree = "<group>"; };
 		6A6B21461621753300697149 /* OVAddTableBasedInputMethodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVAddTableBasedInputMethodViewController.h; sourceTree = "<group>"; };
@@ -266,17 +259,6 @@
 			name = "Associated Phrases";
 			sourceTree = "<group>";
 		};
-		6A63D1BC162F1DBA001175D2 /* VXHanConvert */ = {
-			isa = PBXGroup;
-			children = (
-				6A63D1BD162F1DBA001175D2 /* VXHanConvert.c */,
-				6A63D1BE162F1DBA001175D2 /* VXHanConvert.h */,
-				6A63D1BF162F1DBA001175D2 /* VXHCSC2TCTable.c */,
-				6A63D1C0162F1DBA001175D2 /* VXHCTC2SCTable.c */,
-			);
-			path = VXHanConvert;
-			sourceTree = "<group>";
-		};
 		6A7789F416312163000C85A2 /* Tables Arranged for Mac */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,7 +286,6 @@
 		6ABBAEE515CD58F90080EE7D = {
 			isa = PBXGroup;
 			children = (
-				6ACB49E815E49EF500380B82 /* Libraries */,
 				6ACB49B315E49DF200380B82 /* DataTables */,
 				6ABBAEFA15CD58F90080EE7D /* InputMethod Application */,
 				6A0E0ABC1623EDF5004FED10 /* Installer */,
@@ -402,14 +383,6 @@
 				6A7789F416312163000C85A2 /* Tables Arranged for Mac */,
 			);
 			path = DataTables;
-			sourceTree = "<group>";
-		};
-		6ACB49E815E49EF500380B82 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				6A63D1BC162F1DBA001175D2 /* VXHanConvert */,
-			);
-			path = Libraries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -571,9 +544,6 @@
 				6A0BEB6B161573A400FCB59A /* OVGeneralPreferencesViewController.m in Sources */,
 				6A6B2144162174DB00697149 /* OVIMArrayPreferencesViewController.m in Sources */,
 				6A6B21481621753300697149 /* OVAddTableBasedInputMethodViewController.mm in Sources */,
-				6A63D1C1162F1DBA001175D2 /* VXHanConvert.c in Sources */,
-				6A63D1C2162F1DBA001175D2 /* VXHCSC2TCTable.c in Sources */,
-				6A63D1C3162F1DBA001175D2 /* VXHCTC2SCTable.c in Sources */,
 				6A616643162FD8420042559F /* OVNonModalAlertWindowController.m in Sources */,
 				6ABC1D931631AC7C005FF9B5 /* OVUpdateChecker.m in Sources */,
 			);

@@ -29,9 +29,10 @@
 #import <Cocoa/Cocoa.h>
 #import "OVConcreteKeyImpl.h"
 #import "OVConstants.h"
-//#import "OVModuleManager.h"
 
 using namespace OpenVanilla;
+
+static string currentLocale;
 
 void OVLoaderServiceImpl::beep()
 {
@@ -42,7 +43,7 @@ void OVLoaderServiceImpl::beep()
 
 const string OVLoaderServiceImpl::locale() const
 {
-    return string([[OVModuleManager defaultManager].currentLocale UTF8String]);
+    return currentLocale;
 }
 
 const OVKey OVLoaderServiceImpl::makeOVKey(int characterCode, bool alt, bool opt, bool ctrl, bool shift, bool command, bool capsLock, bool numLock)
@@ -58,4 +59,8 @@ const OVKey OVLoaderServiceImpl::makeOVKey(const string& receivedString, bool al
 ostream& OVLoaderServiceImpl::logger(const string& sectionName)
 {
     return cerr;
+}
+
+void OVLoaderServiceImpl::setCurrentLocale(string locale) {
+    currentLocale = locale;
 }

@@ -95,6 +95,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
         _currentLocale = @"en";
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLocaleChangeNotification:) name:NSCurrentLocaleDidChangeNotification object:nil];
+        _loaderService->setCurrentLocale(_currentLocale.UTF8String);
 
         // populate default settings; input method identifier and font name can take care of themselves
 
@@ -599,6 +600,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
 
     if ([tags count]) {
         self.currentLocale = [tags objectAtIndex:0];
+        _loaderService->setCurrentLocale(self.currentLocale.UTF8String);
     }
 }
 @end
