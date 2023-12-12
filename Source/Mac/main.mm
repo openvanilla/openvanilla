@@ -25,9 +25,9 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "OVAppDelegate.h"
 #import "OVConstants.h"
 #import "OVInputSourceHelper.h"
+#import "OpenVanilla-Swift.h"
 
 int main(int argc, char *argv[]) {
     @autoreleasepool {

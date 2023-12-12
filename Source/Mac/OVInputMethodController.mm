@@ -33,7 +33,6 @@
 //#import "OVModuleManager.h"
 //#import "OVUpdateChecker.h"
 //#import "OVConstants.h"
-#import "OVAppDelegate.h"
 #import "OpenVanilla-Swift.h"
 
 @interface OVInputMethodController ()
