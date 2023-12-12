@@ -13,6 +13,7 @@ let package = Package(
                       "OVModuleManager",
                       "OVModuleLoader",
                       "OpenVanillaImp",
+                      "LegacyOpenVanilla",
                       "OVIMBig5Code",
                       "OVIMTableBased",
                       "OVIMArray",
@@ -44,6 +45,9 @@ let package = Package(
             name: "OpenVanillaImp",
             dependencies: ["OpenVanilla", "Voltaire", "Tooltip"]),
         .target(
+            name: "LegacyOpenVanilla",
+            dependencies: ["OpenVanilla"]),
+        .target(
             name: "OVIMBig5Code",
             dependencies: ["OpenVanilla"]),
         .target(
@@ -51,7 +55,7 @@ let package = Package(
             dependencies: ["OpenVanilla"]),
         .target(
             name: "OVIMArray",
-            dependencies: ["OpenVanilla", "OpenVanillaImp"]),
+            dependencies: ["OpenVanilla", "LegacyOpenVanilla"]),
         .target(
             name: "OVAFAssociatedPhrases",
             dependencies: ["OpenVanilla"]),
