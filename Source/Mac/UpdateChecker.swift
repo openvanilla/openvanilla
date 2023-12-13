@@ -5,9 +5,9 @@ extension Notification.Name {
     static let UpdateCheckerDidFinishChecking = Notification.Name( "OVUpdateCheckerDidFinishCheckingNotification")
 }
 
-class OVUpdateChecker: NSObject {
+class UpdateChecker: NSObject {
     @objc(sharedInstance)
-    static let shared = OVUpdateChecker()
+    static let shared = UpdateChecker()
 
     private override init() {}
 
@@ -135,7 +135,7 @@ class OVUpdateChecker: NSObject {
 }
 
 
-extension OVUpdateChecker: NonModalAlertWindowControllerDelegate {
+extension UpdateChecker: NonModalAlertWindowControllerDelegate {
     func nonModalAlertWindowControllerDidConfirm(_ controller: NonModalAlertWindowController) {
         guard let url = URL(string: OVUpdateDownloadURLString) else { return }
         NSWorkspace.shared.open(url)

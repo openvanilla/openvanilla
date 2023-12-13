@@ -51,9 +51,9 @@
 		6ACD128823688A32005046C7 /* NotarizedArchives in Resources */ = {isa = PBXBuildFile; fileRef = 6ACD128723688A32005046C7 /* NotarizedArchives */; };
 		6AECB188253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */; };
 		6AECB189253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */; };
-		6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */; };
+		D414E3022B29AFD1001863EF /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414E3012B29AFD1001863EF /* PreferencesWindowController.swift */; };
 		D46CD4CC2B21A21B00AEBCA6 /* OpenVanilla in Frameworks */ = {isa = PBXBuildFile; productRef = D46CD4CB2B21A21B00AEBCA6 /* OpenVanilla */; };
-		D4F50BBC2B28898E00C6C364 /* OVUpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBB2B28898E00C6C364 /* OVUpdateChecker.swift */; };
+		D4F50BBC2B28898E00C6C364 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */; };
 		D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */; };
 		D4F50BC02B289C8C00C6C364 /* OVAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBF2B289C8C00C6C364 /* OVAppDelegate.swift */; };
 		D4F50BCA2B28A15400C6C364 /* NonModalAlertWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BC82B28A15300C6C364 /* NonModalAlertWindowController.swift */; };
@@ -186,10 +186,9 @@
 		6AD498A3163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6AD498A4163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
 		6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = OpenVanilla.xcassets; path = Images/OpenVanilla.xcassets; sourceTree = SOURCE_ROOT; };
-		6AFBA9BF15F9AE0A007DC9E6 /* OVPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVPreferencesWindowController.h; sourceTree = "<group>"; };
-		6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVPreferencesWindowController.mm; sourceTree = "<group>"; };
+		D414E3012B29AFD1001863EF /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		D4F50BBA2B28898D00C6C364 /* OpenVanilla-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanilla-Bridging-Header.h"; sourceTree = "<group>"; };
-		D4F50BBB2B28898E00C6C364 /* OVUpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OVUpdateChecker.swift; sourceTree = "<group>"; };
+		D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPropertyWrapper.swift; sourceTree = "<group>"; };
 		D4F50BBF2B289C8C00C6C364 /* OVAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OVAppDelegate.swift; sourceTree = "<group>"; };
 		D4F50BC82B28A15300C6C364 /* NonModalAlertWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonModalAlertWindowController.swift; sourceTree = "<group>"; };
@@ -335,11 +334,10 @@
 				6ABBAF1F15CD615B0080EE7D /* OVInputSourceHelper.h */,
 				6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.mm */,
 				D4F50BC82B28A15300C6C364 /* NonModalAlertWindowController.swift */,
-				6AFBA9BF15F9AE0A007DC9E6 /* OVPreferencesWindowController.h */,
-				6AFBA9C015F9AE0A007DC9E6 /* OVPreferencesWindowController.mm */,
+				D414E3012B29AFD1001863EF /* PreferencesWindowController.swift */,
 				6A3914AF15FAE99400DC57C3 /* OVTableBasedModulePreferencesViewController.h */,
 				6A3914B015FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm */,
-				D4F50BBB2B28898E00C6C364 /* OVUpdateChecker.swift */,
+				D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */,
 				6ABBAF2415CD61680080EE7D /* Resources */,
 				6ABBAEFB15CD58F90080EE7D /* Supporting Files */,
 				D4F50BBA2B28898D00C6C364 /* OpenVanilla-Bridging-Header.h */,
@@ -540,7 +538,6 @@
 				6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.mm in Sources */,
 				6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */,
 				6A12FD601E2D388500CA5AEE /* OVAFAssociatedPhrasesPreferencesViewController.mm in Sources */,
-				6AFBA9C115F9AE0A007DC9E6 /* OVPreferencesWindowController.mm in Sources */,
 				6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.mm in Sources */,
 				6A3914B115FAE99500DC57C3 /* OVTableBasedModulePreferencesViewController.mm in Sources */,
 				6A0BEB6A161573A400FCB59A /* OVBaseModulePreferencesViewController.mm in Sources */,
@@ -549,7 +546,8 @@
 				D4F50BCA2B28A15400C6C364 /* NonModalAlertWindowController.swift in Sources */,
 				D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */,
 				6A6B21481621753300697149 /* OVAddTableBasedInputMethodViewController.mm in Sources */,
-				D4F50BBC2B28898E00C6C364 /* OVUpdateChecker.swift in Sources */,
+				D4F50BBC2B28898E00C6C364 /* UpdateChecker.swift in Sources */,
+				D414E3022B29AFD1001863EF /* PreferencesWindowController.swift in Sources */,
 				D4F50BC02B289C8C00C6C364 /* OVAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -60,6 +60,11 @@ static string InputMethodConfigIdentifier(const string& identifier)
 }
 
 @interface OVModuleManager ()
+{
+    NSMutableDictionary *_customTableBasedInputMethodIdentifierTableNameMap;
+    NSMutableArray <NSString *> *_inputMethodIdentifiers;
+}
+
 - (NSString *)rootPathForCustomInputMethodTables;
 - (BOOL)canSelectInputMethod:(NSString *)identifier;
 - (void)handleLocaleChangeNotification:(NSNotification *)aNotification;
@@ -69,7 +74,10 @@ static string InputMethodConfigIdentifier(const string& identifier)
 @implementation OVModuleManager
 @dynamic activeInputMethodIdentifier;
 @dynamic sharedAlphanumericKeyboardLayoutIdentifier;
-@synthesize inputMethodIdentifiers = _inputMethodIdentifiers;
+
+- (NSArray *)inputMethodIdentifiers {
+    return _inputMethodIdentifiers;
+}
 
 + (OVModuleManager *)defaultManager
 {

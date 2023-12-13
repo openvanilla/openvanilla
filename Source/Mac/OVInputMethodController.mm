@@ -157,7 +157,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCandidateSelected:) name:OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification object:nil];
 
     if ([[NSUserDefaults standardUserDefaults] boolForKey:OVCheckForUpdateKey]) {
-        [[OVUpdateChecker sharedInstance] checkForUpdateIfNeeded];
+        [[UpdateChecker sharedInstance] checkForUpdateIfNeeded];
     }
 }
 

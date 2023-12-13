@@ -5,7 +5,7 @@ import OVModuleManager
 class OVAppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet var window: NSWindow?
-    private var preferencesWindowController: OVPreferencesWindowController?
+    private var preferencesWindowController: PreferencesWindowController?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         OVModuleManager.default().reload()
@@ -17,7 +17,7 @@ class OVAppDelegate: NSObject, NSApplicationDelegate {
     @objc
     func showPreferences() {
         if preferencesWindowController == nil {
-            preferencesWindowController = OVPreferencesWindowController(windowNibName: "preferences")
+            preferencesWindowController = PreferencesWindowController(windowNibName: "preferences")
         }
         preferencesWindowController?.window?.center()
         preferencesWindowController?.window?.orderFront(self)

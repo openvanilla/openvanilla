@@ -65,11 +65,11 @@
     [self.fieldPlaySound setState:([userDefaults boolForKey:OVMakeSoundFeedbackOnInputErrorKey] ? NSOnState : NSOffState)];
     [self.fieldCheckForUpdate setState:([userDefaults boolForKey:OVCheckForUpdateKey] ? NSOnState : NSOffState)];
 
-    if ([OVUpdateChecker sharedInstance].busy) {
+    if ([UpdateChecker sharedInstance].busy) {
         [self.checkForUpdateButton setEnabled:NO];
     }
 
-    NSDate *lastCheckDate = [OVUpdateChecker sharedInstance].lastUpdateCheckDate;
+    NSDate *lastCheckDate = [UpdateChecker sharedInstance].lastUpdateCheckDate;
     if (!lastCheckDate) {
         [self.lastUpdateCheckDateLabel setHidden:YES];
         return;
@@ -87,7 +87,7 @@
 - (IBAction)checkForUpdateAction:(id)sender
 {
     [self.checkForUpdateButton setEnabled:NO];
-    [[OVUpdateChecker sharedInstance] checkForUpdate];
+    [[UpdateChecker sharedInstance] checkForUpdate];
 }
 
 - (IBAction)updateField:(id)sender

@@ -28,6 +28,8 @@
 #import <Foundation/Foundation.h>
 #import <map>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class OVToolTipWindowController;
 
 namespace OpenVanilla {
@@ -39,11 +41,6 @@ namespace OpenVanilla {
 };
 
 @interface OVModuleManager : NSObject
-{
-@private
-    NSMutableDictionary *_customTableBasedInputMethodIdentifierTableNameMap;
-    NSMutableArray *_inputMethodIdentifiers;
-}
 
 + (OVModuleManager *)defaultManager;
 - (void)selectInputMethod:(NSString *)identifier;
@@ -54,7 +51,7 @@ namespace OpenVanilla {
 
 - (NSString *)alphanumericKeyboardLayoutForInputMethod:(NSString *)identifier;
 - (BOOL)isTableBasedInputMethodIdentifier:(NSString *)identifier;
-- (BOOL)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path willOverrideBuiltInTable:(BOOL *)willOverride identifier:(NSString **)identifierIfInstalled localizedName:(NSString **)localizedNameIfInstalled error:(NSError **)error;
+- (BOOL)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path willOverrideBuiltInTable:(BOOL *)willOverride identifier:(NSString * _Nullable * _Nullable)identifierIfInstalled localizedName:(NSString * _Nullable * _Nullable)localizedNameIfInstalled error:(NSError * _Nullable * _Nullable)error;
 - (void)installCustomTableBasedInputMethodWithTablePath:(NSString *)path;
 - (BOOL)isCustomTableBasedInputMethod:(NSString *)identifier;
 - (BOOL)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError **)error;
@@ -67,7 +64,7 @@ namespace OpenVanilla {
 
 @property (assign, readonly) OpenVanilla::OVInputMethod* activeInputMethod;
 @property (weak, readonly) NSString *activeInputMethodIdentifier;
-@property (readonly) NSArray *inputMethodIdentifiers;
+@property (readonly, nonnull) NSArray <NSString *>  *inputMethodIdentifiers;
 @property (strong) NSString *currentLocale;
 
 @property (assign) BOOL traditionalToSimplifiedChineseFilterEnabled;
@@ -81,3 +78,5 @@ namespace OpenVanilla {
 
 extern NSString *const OVModuleManagerDidReloadNotification;
 extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification;
+
+NS_ASSUME_NONNULL_END

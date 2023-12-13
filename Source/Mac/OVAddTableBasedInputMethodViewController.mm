@@ -28,7 +28,6 @@
 #import "OVAddTableBasedInputMethodViewController.h"
 #import "OVConstants.h"
 #import "OVModuleManager.h"
-#import "OVPreferencesWindowController.h"
 #import "OpenVanilla-Swift.h"
 
 @interface OVAddTableBasedInputMethodViewController () <NonModalAlertWindowControllerDelegate>
