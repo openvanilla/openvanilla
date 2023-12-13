@@ -15,8 +15,8 @@ class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var modulePreferencesContainerView: NSView!
     @IBOutlet weak var generalPreferencesViewController: OVBasePreferencesViewController!
     @IBOutlet weak var associatedPhrasesPreferencesViewController: OVBasePreferencesViewController!
-    @IBOutlet weak var tableBasedMoudlePreferencesViewController: OVBasePreferencesViewController!
-    @IBOutlet weak var arrayMoudlePreferencesViewController: OVBasePreferencesViewController!
+    @IBOutlet weak var tableBasedModulePreferencesViewController: OVBasePreferencesViewController!
+    @IBOutlet weak var arrayModulePreferencesViewController: OVBasePreferencesViewController!
     @IBOutlet weak var addTableBasedInputMethodViewController: OVBasePreferencesViewController!
 
     private var items: [PreferencesItem] = []
@@ -67,8 +67,8 @@ class PreferencesWindowController: NSWindowController {
         }
         ListTitlesInView(generalPreferencesViewController.view)
         ListTitlesInView(associatedPhrasesPreferencesViewController.view)
-        ListTitlesInView(tableBasedMoudlePreferencesViewController.view)
-        ListTitlesInView(arrayMoudlePreferencesViewController.view)
+        ListTitlesInView(tableBasedModulePreferencesViewController.view)
+        ListTitlesInView(arrayModulePreferencesViewController.view)
         ListTitlesInView(addTableBasedInputMethodViewController.view)
         updateLocalization()
     }
@@ -100,13 +100,13 @@ class PreferencesWindowController: NSWindowController {
             if OVModuleManager.default().isTableBasedInputMethodIdentifier(moduleIdentifier) {
                 items.append((moduleIdentifier,
                               OVModuleManager.default().localizedInputMethodName(moduleIdentifier),
-                              tableBasedMoudlePreferencesViewController))
+                              tableBasedModulePreferencesViewController))
             }
         }
 
-        items.append((arrayMoudlePreferencesViewController.moduleIdentifier,
-                      OVModuleManager.default().localizedInputMethodName(arrayMoudlePreferencesViewController.moduleIdentifier),
-                      arrayMoudlePreferencesViewController))
+        items.append((arrayModulePreferencesViewController.moduleIdentifier,
+                      OVModuleManager.default().localizedInputMethodName(arrayModulePreferencesViewController.moduleIdentifier),
+                      arrayModulePreferencesViewController))
 
         items.append((kAddInputMethodIdentifier, "Add New Input Method",  addTableBasedInputMethodViewController))
 
@@ -158,8 +158,8 @@ extension PreferencesWindowController: NSTableViewDataSource, NSTableViewDelegat
         let item = items[selection]
         let controller = item.viewController
         currentPreferencesViewController = controller
-        if controller == tableBasedMoudlePreferencesViewController ||
-            controller == arrayMoudlePreferencesViewController ||
+        if controller == tableBasedModulePreferencesViewController ||
+            controller == arrayModulePreferencesViewController ||
             controller == associatedPhrasesPreferencesViewController {
             controller.moduleIdentifier = item.identifier
         }
