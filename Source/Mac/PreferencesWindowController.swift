@@ -34,7 +34,7 @@ class PreferencesWindowController: NSWindowController {
         reload(nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: NSNotification.Name("OVModuleManagerDidReloadNotification"), object: nil)
-        (addTableBasedInputMethodViewController as? OVAddTableBasedInputMethodViewController)?.preferencesWindowController = self
+        (addTableBasedInputMethodViewController as? AddTableBasedInputMethodViewController)?.preferencesWindowController = self
 
         localizableObjects.removeAll()
 
@@ -114,8 +114,7 @@ class PreferencesWindowController: NSWindowController {
         tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
     }
 
-    @objc
-    func updateLocalization() {
+    private func updateLocalization() {
         for value in localizableObjects.keys {
             guard let view = value.nonretainedObjectValue as? NSView,
                   let dictKey = localizableObjects[value]

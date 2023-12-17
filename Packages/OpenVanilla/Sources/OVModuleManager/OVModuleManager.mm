@@ -38,12 +38,17 @@
 #import "OVToolTipWindowController.h"
 #import "VXHanConvert.h"
 
-//@import OpenVanilla;
-//@import OVIMArray;
-//@import OVIMBig5Code;
-//@import OVIMTableBased;
-//@import OVAFAssociatedPhrases;
-//@import Tooltip;
+
+@interface OVCanInstall ()
+@property (readwrite, assign) BOOL willOverrideBuiltInTable;
+@property (readwrite, strong) NSString * identifierIfInstalled;
+@property (readwrite, strong) NSString * localizedNameIfInstalled;
+@end
+
+@interface OVCanNotInstall()
+@property (readwrite, strong) NSError * error;
+@end
+
 
 extern NSString *const OVModuleManagerDidReloadNotification = @"OVModuleManagerDidReloadNotification";
 extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification = @"OVModuleManagerDidUpdateActiveInputMethodNotification";
@@ -375,6 +380,46 @@ static string InputMethodConfigIdentifier(const string& identifier)
     return [identifier hasPrefix:@"org.openvanilla.OVIMTableBased."];
 }
 
+- (id<ONCanInstallChekResult>)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path
+{
+    const char *posixPath = [path fileSystemRepresentation];
+
+    OVInputMethod *inputMethod = new OVIMTableBased(posixPath);
+
+    // TODO: furnish path info for dynamically-loaded bundles (if supported in the future)
+    OVPathInfo info;
+    bool result = inputMethod->initialize(&info, self.loaderService);
+
+    if (!result) {
+        delete inputMethod;
+        OVCanNotInstall *rtn = [[OVCanNotInstall alloc] init];
+
+        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot use the file \"%@\": file may be corrupt or is not a valid CIN file", nil), path];;
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
+        NSError *returnError = [NSError errorWithDomain:[[NSBundle mainBundle] bundleIdentifier] code:-1 userInfo:userInfo];
+        rtn.error = returnError;
+        return rtn;
+    }
+
+    OVCanInstall *rtn = [[OVCanInstall alloc] init];
+
+    string identifier = InputMethodConfigIdentifier(inputMethod->identifier());
+    NSString *idNSStr = [NSString stringWithUTF8String:identifier.c_str()];
+    if ([self.inputMethodIdentifiers containsObject:idNSStr]) {
+        rtn.willOverrideBuiltInTable = YES;
+    }
+
+    rtn.identifierIfInstalled = idNSStr;
+
+    string locale = [self.currentLocale UTF8String];
+    string localizedName = inputMethod->localizedName(locale);
+    rtn.localizedNameIfInstalled = [NSString stringWithUTF8String:localizedName.c_str()];
+    delete inputMethod;
+
+    return rtn;
+}
+
+
 - (BOOL)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path willOverrideBuiltInTable:(BOOL *)willOverride identifier:(NSString **)identifierIfInstalled localizedName:(NSString **)localizedNameIfInstalled error:(NSError **)error
 {
     const char *posixPath = [path fileSystemRepresentation];
@@ -611,4 +656,10 @@ static string InputMethodConfigIdentifier(const string& identifier)
         _loaderService->setCurrentLocale(self.currentLocale.UTF8String);
     }
 }
+@end
+
+@implementation OVCanInstall
+@end
+
+@implementation OVCanNotInstall
 @end

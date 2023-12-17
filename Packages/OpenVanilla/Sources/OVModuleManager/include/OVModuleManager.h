@@ -30,6 +30,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ONCanInstallChekResult <NSObject>
+@end
+
+@interface OVCanInstall : NSObject <ONCanInstallChekResult>
+@property (readonly, assign) BOOL willOverrideBuiltInTable;
+@property (readonly, strong) NSString *identifierIfInstalled;
+@property (readonly, strong) NSString *localizedNameIfInstalled;
+@end
+
+@interface OVCanNotInstall : NSObject <ONCanInstallChekResult>
+@property (readonly, strong) NSError *error;
+@end
+
 @class OVToolTipWindowController;
 
 namespace OpenVanilla {
@@ -51,7 +64,7 @@ namespace OpenVanilla {
 
 - (NSString *)alphanumericKeyboardLayoutForInputMethod:(NSString *)identifier;
 - (BOOL)isTableBasedInputMethodIdentifier:(NSString *)identifier;
-- (BOOL)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path willOverrideBuiltInTable:(BOOL *)willOverride identifier:(NSString * _Nullable * _Nullable)identifierIfInstalled localizedName:(NSString * _Nullable * _Nullable)localizedNameIfInstalled error:(NSError * _Nullable * _Nullable)error;
+- (id<ONCanInstallChekResult>)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path;
 - (void)installCustomTableBasedInputMethodWithTablePath:(NSString *)path;
 - (BOOL)isCustomTableBasedInputMethod:(NSString *)identifier;
 - (BOOL)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError **)error;
