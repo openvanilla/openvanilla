@@ -23,7 +23,6 @@
 //
 
 import Foundation
-import Cocoa
 import OpenVanillaImp
 import OVModuleManager
 
@@ -43,7 +42,8 @@ class AddTableBasedInputMethodViewController: OVBasePreferencesViewController {
         let attrString = self.moreInfoTextField.attributedStringValue.mutableCopy() as! NSMutableAttributedString
         let linkRange = attrString.string.range(of: OVMainSiteURLString)
         guard let linkRange = linkRange,
-              let url = URL(string: OVMainSiteURLString)else {
+              let url = URL(string: OVMainSiteURLString)
+        else {
             return
         }
         let nsRange = NSRange(linkRange, in: attrString.string)
@@ -53,9 +53,9 @@ class AddTableBasedInputMethodViewController: OVBasePreferencesViewController {
         attrString.addAttribute(.underlineColor, value: NSUnderlineStyle.single, range: nsRange)
         attrString.endEditing()
 
-        self.moreInfoTextField.attributedStringValue = attrString
-        self.moreInfoTextField.allowsEditingTextAttributes = true
-        self.moreInfoTextField.isSelectable = true
+        moreInfoTextField.attributedStringValue = attrString
+        moreInfoTextField.allowsEditingTextAttributes = true
+        moreInfoTextField.isSelectable = true
     }
 
 
@@ -80,8 +80,8 @@ class AddTableBasedInputMethodViewController: OVBasePreferencesViewController {
         return false
     }
 
-    @IBAction @objc(importNewTableAction:)
-    func importNewTableAction(_ sender: Any) {
+    @IBAction @objc (importNewTableAction:)
+    func importNewTableAction(_ sender: Any?) {
         let panel = NSOpenPanel()
         panel.title = NSLocalizedString("Pick the .cin Table to Import", comment: "")
         panel.level = NSWindow.Level(rawValue: Int(CGShieldingWindowLevel()) + 1)
@@ -116,23 +116,29 @@ class AddTableBasedInputMethodViewController: OVBasePreferencesViewController {
                 _ = self.install(path: cinPath)
             }
         }
-
-
     }
 
 }
 
 
-extension AddTableBasedInputMethodViewController : NonModalAlertWindowControllerDelegate {
+extension AddTableBasedInputMethodViewController: NonModalAlertWindowControllerDelegate {
     func nonModalAlertWindowControllerDidConfirm(_ controller: NonModalAlertWindowController) {
+        if controller.delegate as? NSObject != self {
+            return
+        }
+
         if let moduleIdentifierIfInstalled = moduleIdentifierIfInstalled {
-            _ = self.install(path: moduleIdentifierIfInstalled)
+            _ = install(path: moduleIdentifierIfInstalled)
         }
     }
 
     func nonModalAlertWindowControllerDidCancel(_ controller: NonModalAlertWindowController) {
-        self.tablePathToBeInstalled = nil
-        self.moduleIdentifierIfInstalled = nil
+        if controller.delegate as? NSObject != self {
+            return
+        }
+
+        tablePathToBeInstalled = nil
+        moduleIdentifierIfInstalled = nil
     }
 
 }

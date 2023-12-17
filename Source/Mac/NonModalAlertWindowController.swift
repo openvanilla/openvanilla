@@ -23,13 +23,13 @@
 
 import Cocoa
 
-@objc protocol NonModalAlertWindowControllerDelegate: AnyObject {
+@objc protocol NonModalAlertWindowControllerDelegate {
     func nonModalAlertWindowControllerDidConfirm(_ controller: NonModalAlertWindowController)
     func nonModalAlertWindowControllerDidCancel(_ controller: NonModalAlertWindowController)
 }
 
 class NonModalAlertWindowController: NSWindowController {
-    @objc(sharedInstance)
+    @objc (sharedInstance)
     static let shared = NonModalAlertWindowController(windowNibName: "NonModalAlertWindowController")
 
     @IBOutlet weak var titleTextField: NSTextField!
@@ -104,16 +104,16 @@ class NonModalAlertWindowController: NSWindowController {
         NSApp.activate(ignoringOtherApps: true)
     }
 
-    @IBAction func confirmButtonAction(_ sender: Any) {
+    @IBAction func confirmButtonAction(_ sender: Any?) {
         delegate?.nonModalAlertWindowControllerDidConfirm(self)
         window?.orderOut(self)
     }
 
-    @IBAction func cancelButtonAction(_ sender: Any) {
+    @IBAction func cancelButtonAction(_ sender: Any?) {
         cancel(sender)
     }
 
-    func cancel(_ sender: Any) {
+    func cancel(_ sender: Any?) {
         delegate?.nonModalAlertWindowControllerDidCancel(self)
         delegate = nil
         window?.orderOut(self)

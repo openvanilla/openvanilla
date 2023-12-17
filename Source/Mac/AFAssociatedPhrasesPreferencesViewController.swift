@@ -26,7 +26,7 @@ import Foundation
 
 fileprivate var kModuleIdentifier = "org.openvanilla.OVAFAssociatedPhrases"
 
-@objc(OVAFAssociatedPhrasesPreferencesViewController)
+@objc (OVAFAssociatedPhrasesPreferencesViewController)
 class AFAssociatedPhrasesPreferencesViewController: OVBaseModulePreferencesViewController {
 
     @IBOutlet weak var fieldSelectionKeys: NSPopUpButton!
@@ -37,12 +37,16 @@ class AFAssociatedPhrasesPreferencesViewController: OVBaseModulePreferencesViewC
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.moduleIdentifier = kModuleIdentifier
+        moduleIdentifier = kModuleIdentifier
+    }
+
+    private func setState(for button: NSButton, key: String) {
+        button.state = boolValue(forKey: key) == true ? .on : .off
     }
 
     override func loadPreferences() {
         super.loadPreferences()
-        
+
         fieldSelectionKeys.removeAllItems()
         guard let selectionKeys = stringValue(forKey: "SelectionKeys") else {
             return
@@ -66,12 +70,8 @@ class AFAssociatedPhrasesPreferencesViewController: OVBaseModulePreferencesViewC
         fieldSelectionKeys.selectItem(at: selectedIndex)
         setState(for: self.fieldContinuousAssociation, key: "ContinuousAssociation")
     }
-    
-    private func setState(for button: NSButton, key: String) {
-        button.state = self.boolValue(forKey: key) == true ? .on : .off
-    }
 
-    @IBAction func updateField(_ sender: Any) {
+    @IBAction func updateField(_ sender: Any?) {
         setBoolValue(self.fieldContinuousAssociation.state == .on, forKey: "ContinuousAssociation")
         var selectedIndex = self.fieldSelectionKeys.indexOfSelectedItem
         if selectedIndex == -1 {

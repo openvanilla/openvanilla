@@ -137,11 +137,18 @@ class UpdateChecker: NSObject {
 
 extension UpdateChecker: NonModalAlertWindowControllerDelegate {
     func nonModalAlertWindowControllerDidConfirm(_ controller: NonModalAlertWindowController) {
+        if controller.delegate as? NSObject != self {
+            return
+        }
         guard let url = URL(string: OVUpdateDownloadURLString) else { return }
         NSWorkspace.shared.open(url)
     }
 
     func nonModalAlertWindowControllerDidCancel(_ controller: NonModalAlertWindowController) {
+        if controller.delegate as? NSObject != self {
+            return
+        }
+
         let now = Date()
         self.nextUpdateCheckDate = Date(timeInterval: OVNextUpdateCheckRemindLaterInterval, since: now)
     }

@@ -1,5 +1,4 @@
 import Foundation
-import Cocoa
 import OVModuleManager
 
 class OVAppDelegate: NSObject, NSApplicationDelegate {
@@ -24,7 +23,8 @@ class OVAppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private static var DebugShowPreferencesAfterAppLaunched = false
-    @objc(setDebugShowPreferencesAfterAppLaunched:)
+
+    @objc (setDebugShowPreferencesAfterAppLaunched:)
     static func setDebugShowPreferencesAfterAppLaunched(show: Bool) {
         DebugShowPreferencesAfterAppLaunched = show
     }
