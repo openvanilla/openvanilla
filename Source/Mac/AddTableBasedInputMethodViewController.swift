@@ -36,6 +36,8 @@ class AddTableBasedInputMethodViewController: OVBasePreferencesViewController {
     private var moduleIdentifierIfInstalled: String?
 
     override func loadPreferences() {
+        super.loadPreferences()
+
         // add link to the more info text field
         // cf. http://developer.apple.com/library/mac/#qa/qa1487/_index.html
         let attrString = self.moreInfoTextField.attributedStringValue.mutableCopy() as! NSMutableAttributedString
