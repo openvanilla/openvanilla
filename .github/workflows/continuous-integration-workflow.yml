@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: latest-stable
+          xcode-version: "15.0.0"
       - uses: actions/checkout@v1
       - name: Clean
         run: xcodebuild -scheme OpenVanilla -configuration Release clean
@@ -18,4 +18,3 @@ jobs:
         run: xcodebuild -scheme OpenVanilla -configuration Release build
       - name: Build
         run: xcodebuild -scheme OpenVanillaInstaller -configuration Release build
-
