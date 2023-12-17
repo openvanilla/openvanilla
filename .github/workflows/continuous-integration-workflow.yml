@@ -4,7 +4,7 @@ on: [push]
 jobs:
   build:
     name: Build
-    runs-on: macOS-latest
+    runs-on: macOS-13
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
