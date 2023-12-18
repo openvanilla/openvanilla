@@ -122,6 +122,8 @@ class BasePreferencesViewController: NSViewController {
             if layoutIdentifier == sourceID {
                 chosenItem = menuItem
             }
+
+            popUpButton.menu?.addItem(menuItem)
         }
 
         if let chosenItem {
