@@ -26,32 +26,17 @@
 //
 
 #import "OVInputMethodController.h"
-//#import "OVLoaderServiceImpl.h"
-//#import "OVCandidateServiceImpl.h"
-//#import "OVTextBufferCombinator.h"
-//#import "OVToolTipWindowController.h"
-//#import "OVModuleManager.h"
-//#import "OVUpdateChecker.h"
-//#import "OVConstants.h"
 #import "OpenVanilla-Swift.h"
 
 @interface OVInputMethodController ()
 - (BOOL)handleOVKey:(OVKey &)key client:(id)client;
-
 - (void)handleInputMethodChange:(NSNotification *)notification;
-
 - (void)handleCandidateSelected:(NSNotification *)notification;
-
 - (void)updateClientComposingBuffer:(id)sender;
-
 - (void)changeInputMethodAction:(id)sender;
-
 - (void)toggleTraditionalToSimplifiedChineseFilterAction:(id)sender;
-
 - (void)toggleSimplifiedToTraditionalChineseFilterAction:(id)sender;
-
 - (void)openUserGuideAction:(id)sender;
-
 - (void)showAboutAction:(id)sender;
 @end
 
@@ -199,7 +184,9 @@
         [super showPreferences:sender];
     }
     else {
-        [(OVAppDelegate *)[NSApp delegate] showPreferences];
+        [(OVAppDelegate * )[
+        NSApp
+        delegate] showPreferences];
     }
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }

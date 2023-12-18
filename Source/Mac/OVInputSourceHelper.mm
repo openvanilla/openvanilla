@@ -30,55 +30,55 @@
 @implementation OVInputSourceHelper
 + (NSArray *)allInstalledInputSources
 {
-	CFArrayRef list = TISCreateInputSourceList(NULL, true);
-	return (__bridge NSArray *)list;
+    CFArrayRef list = TISCreateInputSourceList(NULL, true);
+    return (__bridge NSArray *)list;
 }
 
 + (TISInputSourceRef)inputSourceForProperty:(CFStringRef)inPropertyKey stringValue:(NSString *)inValue
 {
-	
-	CFTypeID stringID = CFStringGetTypeID();
 
-	for (id source in [self allInstalledInputSources]) {
-		CFTypeRef property = TISGetInputSourceProperty((__bridge TISInputSourceRef)source, inPropertyKey);
-		if (!property || CFGetTypeID(property) != stringID) {
-			continue;
-		}
+    CFTypeID stringID = CFStringGetTypeID();
 
-		if (inValue && [inValue compare:(__bridge NSString *)property] == NSOrderedSame) {
-			return (__bridge TISInputSourceRef)source;
-		}
-	}
-	
-	return NULL;
+    for (id source in [self allInstalledInputSources]) {
+        CFTypeRef property = TISGetInputSourceProperty((__bridge TISInputSourceRef)source, inPropertyKey);
+        if (!property || CFGetTypeID(property) != stringID) {
+            continue;
+        }
+
+        if (inValue && [inValue compare:(__bridge NSString *)property] == NSOrderedSame) {
+            return (__bridge TISInputSourceRef)source;
+        }
+    }
+
+    return NULL;
 }
 
 + (TISInputSourceRef)inputSourceForInputSourceID:(NSString *)inID
 {
-	return [self inputSourceForProperty:kTISPropertyInputSourceID stringValue:inID];
+    return [self inputSourceForProperty:kTISPropertyInputSourceID stringValue:inID];
 }
 
 + (BOOL)inputSourceEnabled:(TISInputSourceRef)inInputSource
 {
-	CFBooleanRef value = (CFBooleanRef)TISGetInputSourceProperty(inInputSource, kTISPropertyInputSourceIsEnabled);
-	return value ? (BOOL)CFBooleanGetValue(value) : NO; 
+    CFBooleanRef value = (CFBooleanRef)TISGetInputSourceProperty(inInputSource, kTISPropertyInputSourceIsEnabled);
+    return value ? (BOOL)CFBooleanGetValue(value) : NO;
 }
 
 + (BOOL)enableInputSource:(TISInputSourceRef)inInputSource
 {
-	OSStatus status = TISEnableInputSource(inInputSource);
-	return status == noErr;	
+    OSStatus status = TISEnableInputSource(inInputSource);
+    return status == noErr;
 }
 
 + (BOOL)disableInputSource:(TISInputSourceRef)inInputSource
 {
-	OSStatus status = TISDisableInputSource(inInputSource);
-	return status == noErr;	
+    OSStatus status = TISDisableInputSource(inInputSource);
+    return status == noErr;
 }
 
 + (BOOL)registerInputSource:(NSURL *)inBundleURL
 {
-	OSStatus status = TISRegisterInputSource((__bridge CFURLRef)inBundleURL);
-	return status == noErr;
+    OSStatus status = TISRegisterInputSource((__bridge CFURLRef)inBundleURL);
+    return status == noErr;
 }
 @end

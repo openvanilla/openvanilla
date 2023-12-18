@@ -48,7 +48,6 @@
 		D414E3042B2A2624001863EF /* AddTableBasedInputMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414E3032B2A2624001863EF /* AddTableBasedInputMethodViewController.swift */; };
 		D449C6372B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6362B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift */; };
 		D449C6392B2F68D90060653A /* TableBasedModulePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6382B2F68D90060653A /* TableBasedModulePreferencesViewController.swift */; };
-		D449C63B2B2F76D40060653A /* InputMethodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C63A2B2F76D40060653A /* InputMethodController.swift */; };
 		D449C63D2B2FF0FC0060653A /* ArrayPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C63C2B2FF0FC0060653A /* ArrayPreferencesViewController.swift */; };
 		D449C63F2B2FFA260060653A /* GeneralPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */; };
 		D449C6412B3009DC0060653A /* BaseModulePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */; };
@@ -177,7 +176,6 @@
 		D414E3032B2A2624001863EF /* AddTableBasedInputMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableBasedInputMethodViewController.swift; sourceTree = "<group>"; };
 		D449C6362B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociatedPhrasesPreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C6382B2F68D90060653A /* TableBasedModulePreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBasedModulePreferencesViewController.swift; sourceTree = "<group>"; };
-		D449C63A2B2F76D40060653A /* InputMethodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodController.swift; sourceTree = "<group>"; };
 		D449C63C2B2FF0FC0060653A /* ArrayPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayPreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModulePreferencesViewController.swift; sourceTree = "<group>"; };
@@ -313,7 +311,6 @@
 			children = (
 				D4AF7DA72B3097430025DAAF /* Preferences */,
 				D4F50BBF2B289C8C00C6C364 /* AppDelegate.swift */,
-				D449C63A2B2F76D40060653A /* InputMethodController.swift */,
 				6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */,
 				6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */,
 				6ABBAF1F15CD615B0080EE7D /* OVInputSourceHelper.h */,
@@ -541,7 +538,6 @@
 				D4F50BCA2B28A15400C6C364 /* NonModalAlertWindowController.swift in Sources */,
 				D449C6372B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift in Sources */,
 				D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */,
-				D449C63B2B2F76D40060653A /* InputMethodController.swift in Sources */,
 				D4F50BBC2B28898E00C6C364 /* UpdateChecker.swift in Sources */,
 				D414E3022B29AFD1001863EF /* PreferencesWindowController.swift in Sources */,
 				D449C6432B300FB60060653A /* BasePreferencesViewController.swift in Sources */,
