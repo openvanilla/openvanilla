@@ -63,9 +63,9 @@
 		D4AF7DC72B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBC2B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm */; };
 		D4AF7DC82B30A7DD0025DAAF /* OVCandidateListImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBE2B30A7DD0025DAAF /* OVCandidateListImpl.mm */; };
 		D4AF7DC92B30A7DD0025DAAF /* OVTextBufferImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBF2B30A7DD0025DAAF /* OVTextBufferImpl.cpp */; };
-		D4AF7DCE2B30A97F0025DAAF /* Voltaire in Frameworks */ = {isa = PBXBuildFile; productRef = D4AF7DCD2B30A97F0025DAAF /* Voltaire */; };
-		D4AF7DD02B30A97F0025DAAF /* VXHanConvert in Frameworks */ = {isa = PBXBuildFile; productRef = D4AF7DCF2B30A97F0025DAAF /* VXHanConvert */; };
-		D4AF7DD22B30A97F0025DAAF /* Tooltip in Frameworks */ = {isa = PBXBuildFile; productRef = D4AF7DD12B30A97F0025DAAF /* Tooltip */; };
+		D4EE86072B30B4CE00B3BFC9 /* VXHanConvert in Frameworks */ = {isa = PBXBuildFile; productRef = D4EE86062B30B4CE00B3BFC9 /* VXHanConvert */; };
+		D4EE86092B30B4CE00B3BFC9 /* CandidateUI in Frameworks */ = {isa = PBXBuildFile; productRef = D4EE86082B30B4CE00B3BFC9 /* CandidateUI */; };
+		D4EE860B2B30B4CE00B3BFC9 /* TooltipUI in Frameworks */ = {isa = PBXBuildFile; productRef = D4EE860A2B30B4CE00B3BFC9 /* TooltipUI */; };
 		D4F50BBC2B28898E00C6C364 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */; };
 		D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */; };
 		D4F50BC02B289C8C00C6C364 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBF2B289C8C00C6C364 /* AppDelegate.swift */; };
@@ -236,13 +236,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4EE860B2B30B4CE00B3BFC9 /* TooltipUI in Frameworks */,
 				D46CD4CC2B21A21B00AEBCA6 /* OpenVanilla in Frameworks */,
+				D4EE86072B30B4CE00B3BFC9 /* VXHanConvert in Frameworks */,
+				D4EE86092B30B4CE00B3BFC9 /* CandidateUI in Frameworks */,
 				6ABBAF2C15CD61BE0080EE7D /* Carbon.framework in Frameworks */,
 				6ABBAEF515CD58F90080EE7D /* Cocoa.framework in Frameworks */,
-				D4AF7DD22B30A97F0025DAAF /* Tooltip in Frameworks */,
 				6ABBAF2A15CD61B60080EE7D /* InputMethodKit.framework in Frameworks */,
-				D4AF7DD02B30A97F0025DAAF /* VXHanConvert in Frameworks */,
-				D4AF7DCE2B30A97F0025DAAF /* Voltaire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,9 +496,9 @@
 			name = OpenVanilla;
 			packageProductDependencies = (
 				D46CD4CB2B21A21B00AEBCA6 /* OpenVanilla */,
-				D4AF7DCD2B30A97F0025DAAF /* Voltaire */,
-				D4AF7DCF2B30A97F0025DAAF /* VXHanConvert */,
-				D4AF7DD12B30A97F0025DAAF /* Tooltip */,
+				D4EE86062B30B4CE00B3BFC9 /* VXHanConvert */,
+				D4EE86082B30B4CE00B3BFC9 /* CandidateUI */,
+				D4EE860A2B30B4CE00B3BFC9 /* TooltipUI */,
 			);
 			productName = OpenVanilla;
 			productReference = 6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */;
@@ -533,9 +533,9 @@
 			mainGroup = 6ABBAEE515CD58F90080EE7D;
 			packageReferences = (
 				D46CD4BF2B21943300AEBCA6 /* XCLocalSwiftPackageReference "Packages/OpenVanilla" */,
-				D4AF7DCA2B30A8B90025DAAF /* XCLocalSwiftPackageReference "Packages/Voltaire" */,
-				D4AF7DCB2B30A8C50025DAAF /* XCLocalSwiftPackageReference "Packages/VXHanConvert" */,
-				D4AF7DCC2B30A8DB0025DAAF /* XCLocalSwiftPackageReference "Packages/Tooltip" */,
+				D4EE86032B30B48D00B3BFC9 /* XCLocalSwiftPackageReference "Packages/VXHanConvert" */,
+				D4EE86042B30B49900B3BFC9 /* XCLocalSwiftPackageReference "Packages/CandidateUI" */,
+				D4EE86052B30B4A500B3BFC9 /* XCLocalSwiftPackageReference "Packages/TooltipUI" */,
 			);
 			productRefGroup = 6ABBAEF115CD58F90080EE7D /* Products */;
 			projectDirPath = "";
@@ -960,17 +960,17 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/OpenVanilla;
 		};
-		D4AF7DCA2B30A8B90025DAAF /* XCLocalSwiftPackageReference "Packages/Voltaire" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Packages/Voltaire;
-		};
-		D4AF7DCB2B30A8C50025DAAF /* XCLocalSwiftPackageReference "Packages/VXHanConvert" */ = {
+		D4EE86032B30B48D00B3BFC9 /* XCLocalSwiftPackageReference "Packages/VXHanConvert" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/VXHanConvert;
 		};
-		D4AF7DCC2B30A8DB0025DAAF /* XCLocalSwiftPackageReference "Packages/Tooltip" */ = {
+		D4EE86042B30B49900B3BFC9 /* XCLocalSwiftPackageReference "Packages/CandidateUI" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = Packages/Tooltip;
+			relativePath = Packages/CandidateUI;
+		};
+		D4EE86052B30B4A500B3BFC9 /* XCLocalSwiftPackageReference "Packages/TooltipUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/TooltipUI;
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -980,20 +980,20 @@
 			package = D46CD4BF2B21943300AEBCA6 /* XCLocalSwiftPackageReference "Packages/OpenVanilla" */;
 			productName = OpenVanilla;
 		};
-		D4AF7DCD2B30A97F0025DAAF /* Voltaire */ = {
+		D4EE86062B30B4CE00B3BFC9 /* VXHanConvert */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D4AF7DCA2B30A8B90025DAAF /* XCLocalSwiftPackageReference "Packages/Voltaire" */;
-			productName = Voltaire;
-		};
-		D4AF7DCF2B30A97F0025DAAF /* VXHanConvert */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D4AF7DCB2B30A8C50025DAAF /* XCLocalSwiftPackageReference "Packages/VXHanConvert" */;
+			package = D4EE86032B30B48D00B3BFC9 /* XCLocalSwiftPackageReference "Packages/VXHanConvert" */;
 			productName = VXHanConvert;
 		};
-		D4AF7DD12B30A97F0025DAAF /* Tooltip */ = {
+		D4EE86082B30B4CE00B3BFC9 /* CandidateUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D4AF7DCC2B30A8DB0025DAAF /* XCLocalSwiftPackageReference "Packages/Tooltip" */;
-			productName = Tooltip;
+			package = D4EE86042B30B49900B3BFC9 /* XCLocalSwiftPackageReference "Packages/CandidateUI" */;
+			productName = CandidateUI;
+		};
+		D4EE860A2B30B4CE00B3BFC9 /* TooltipUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4EE86052B30B4A500B3BFC9 /* XCLocalSwiftPackageReference "Packages/TooltipUI" */;
+			productName = TooltipUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
