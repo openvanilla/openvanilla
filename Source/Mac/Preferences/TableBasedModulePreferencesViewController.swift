@@ -119,7 +119,7 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
         setBoolValue(fieldSendFirstCandidateWithSpaceWithOnePageList.state == .on, forKey: "SendFirstCandidateWithSpaceWithOnePageList")
 
         let selectedItem = fieldMaximumRadicalLength.selectedItem
-        if let selectedItem = selectedItem {
+        if let selectedItem {
             let length = (selectedItem.title as NSString).integerValue
             setUnsignedIntegerValue(UInt(length), forKey: "MaximumRadicalLength")
         }

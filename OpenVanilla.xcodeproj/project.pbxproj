@@ -18,7 +18,6 @@
 		6A12FD5D1E2D323700CA5AEE /* jyutping.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A12FD591E2D31EA00CA5AEE /* jyutping.cin */; };
 		6A2793CA171209E200F1E13D /* associated-phrases.cin in Copy Associated Phrases Table */ = {isa = PBXBuildFile; fileRef = 6A2793C7171209A400F1E13D /* associated-phrases.cin */; };
 		6A30CB0616329CF400DC0755 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A30CB0416329CF400DC0755 /* Localizable.strings */; };
-		6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */; };
 		6A6B214A1621758700697149 /* OpenVanilla-InputMenu@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6A6B21491621758700697149 /* OpenVanilla-InputMenu@2x.tiff */; };
 		6A6BB4611633784300871443 /* dayi3.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A6BB45E1633783800871443 /* dayi3.cin */; };
 		6A7789FB163121B0000C85A2 /* cj.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A7789F516312186000C85A2 /* cj.cin */; };
@@ -53,6 +52,7 @@
 		D449C63D2B2FF0FC0060653A /* ArrayPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C63C2B2FF0FC0060653A /* ArrayPreferencesViewController.swift */; };
 		D449C63F2B2FFA260060653A /* GeneralPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */; };
 		D449C6412B3009DC0060653A /* BaseModulePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */; };
+		D449C6432B300FB60060653A /* BasePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6422B300FB60060653A /* BasePreferencesViewController.swift */; };
 		D46CD4CC2B21A21B00AEBCA6 /* OpenVanilla in Frameworks */ = {isa = PBXBuildFile; productRef = D46CD4CB2B21A21B00AEBCA6 /* OpenVanilla */; };
 		D4F50BBC2B28898E00C6C364 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */; };
 		D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */; };
@@ -138,8 +138,6 @@
 		6A30CB0816329CFC00DC0755 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6A30CB0916329D2300DC0755 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6A30CB0A16329D3000DC0755 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.xib"; sourceTree = "<group>"; };
-		6A3914AB15FAE96500DC57C3 /* OVBasePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVBasePreferencesViewController.h; sourceTree = "<group>"; };
-		6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVBasePreferencesViewController.mm; sourceTree = "<group>"; };
 		6A6B21491621758700697149 /* OpenVanilla-InputMenu@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "OpenVanilla-InputMenu@2x.tiff"; path = "Images/OpenVanilla-InputMenu@2x.tiff"; sourceTree = SOURCE_ROOT; };
 		6A6BB45E1633783800871443 /* dayi3.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dayi3.cin; sourceTree = "<group>"; };
 		6A7789F516312186000C85A2 /* cj.cin */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cj.cin; sourceTree = "<group>"; };
@@ -183,6 +181,7 @@
 		D449C63C2B2FF0FC0060653A /* ArrayPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayPreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModulePreferencesViewController.swift; sourceTree = "<group>"; };
+		D449C6422B300FB60060653A /* BasePreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePreferencesViewController.swift; sourceTree = "<group>"; };
 		D4F50BBA2B28898D00C6C364 /* OpenVanilla-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanilla-Bridging-Header.h"; sourceTree = "<group>"; };
 		D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPropertyWrapper.swift; sourceTree = "<group>"; };
@@ -312,22 +311,14 @@
 		6ABBAEFA15CD58F90080EE7D /* InputMethod Application */ = {
 			isa = PBXGroup;
 			children = (
-				D414E3032B2A2624001863EF /* AddTableBasedInputMethodViewController.swift */,
-				D449C6362B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift */,
+				D4AF7DA72B3097430025DAAF /* Preferences */,
 				D4F50BBF2B289C8C00C6C364 /* AppDelegate.swift */,
-				D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */,
-				6A3914AB15FAE96500DC57C3 /* OVBasePreferencesViewController.h */,
-				6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */,
-				D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */,
-				D449C63C2B2FF0FC0060653A /* ArrayPreferencesViewController.swift */,
 				D449C63A2B2F76D40060653A /* InputMethodController.swift */,
 				6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */,
 				6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */,
 				6ABBAF1F15CD615B0080EE7D /* OVInputSourceHelper.h */,
 				6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.mm */,
 				D4F50BC82B28A15300C6C364 /* NonModalAlertWindowController.swift */,
-				D414E3012B29AFD1001863EF /* PreferencesWindowController.swift */,
-				D449C6382B2F68D90060653A /* TableBasedModulePreferencesViewController.swift */,
 				D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */,
 				6ABBAF2415CD61680080EE7D /* Resources */,
 				6ABBAEFB15CD58F90080EE7D /* Supporting Files */,
@@ -371,6 +362,21 @@
 				6A7789F416312163000C85A2 /* Tables Arranged for Mac */,
 			);
 			path = DataTables;
+			sourceTree = "<group>";
+		};
+		D4AF7DA72B3097430025DAAF /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				D414E3012B29AFD1001863EF /* PreferencesWindowController.swift */,
+				D449C6422B300FB60060653A /* BasePreferencesViewController.swift */,
+				D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */,
+				D449C6382B2F68D90060653A /* TableBasedModulePreferencesViewController.swift */,
+				D449C63C2B2FF0FC0060653A /* ArrayPreferencesViewController.swift */,
+				D449C6362B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift */,
+				D414E3032B2A2624001863EF /* AddTableBasedInputMethodViewController.swift */,
+				D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -529,7 +535,6 @@
 				6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.mm in Sources */,
 				6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */,
 				D449C63F2B2FFA260060653A /* GeneralPreferencesViewController.swift in Sources */,
-				6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.mm in Sources */,
 				D449C63D2B2FF0FC0060653A /* ArrayPreferencesViewController.swift in Sources */,
 				D449C6412B3009DC0060653A /* BaseModulePreferencesViewController.swift in Sources */,
 				D414E3042B2A2624001863EF /* AddTableBasedInputMethodViewController.swift in Sources */,
@@ -539,6 +544,7 @@
 				D449C63B2B2F76D40060653A /* InputMethodController.swift in Sources */,
 				D4F50BBC2B28898E00C6C364 /* UpdateChecker.swift in Sources */,
 				D414E3022B29AFD1001863EF /* PreferencesWindowController.swift in Sources */,
+				D449C6432B300FB60060653A /* BasePreferencesViewController.swift in Sources */,
 				D4F50BC02B289C8C00C6C364 /* AppDelegate.swift in Sources */,
 				D449C6392B2F68D90060653A /* TableBasedModulePreferencesViewController.swift in Sources */,
 			);

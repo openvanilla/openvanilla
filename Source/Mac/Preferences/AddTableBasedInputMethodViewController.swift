@@ -27,7 +27,7 @@ import OpenVanillaImp
 import OVModuleManager
 
 @objc (OVAddTableBasedInputMethodViewController)
-class AddTableBasedInputMethodViewController: OVBasePreferencesViewController {
+class AddTableBasedInputMethodViewController: BasePreferencesViewController {
 
     @IBOutlet weak var moreInfoTextField: NSTextField!
     weak var preferencesWindowController: PreferencesWindowController?
@@ -127,7 +127,7 @@ extension AddTableBasedInputMethodViewController: NonModalAlertWindowControllerD
             return
         }
 
-        if let moduleIdentifierIfInstalled = moduleIdentifierIfInstalled {
+        if let moduleIdentifierIfInstalled {
             _ = install(path: moduleIdentifierIfInstalled)
         }
     }

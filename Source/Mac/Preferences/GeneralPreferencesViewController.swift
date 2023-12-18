@@ -2,7 +2,7 @@ import Foundation
 import OpenVanillaImp
 
 @objc (OVGeneralPreferencesViewController)
-class GeneralPreferencesViewController: OVBasePreferencesViewController {
+class GeneralPreferencesViewController: BasePreferencesViewController {
     @IBOutlet weak var fieldCandidateSize: NSPopUpButton!
     @IBOutlet weak var fieldCandidateStyle: NSMatrix!
     @IBOutlet weak var fieldAlphanumericKeyboardLayout: NSPopUpButton!

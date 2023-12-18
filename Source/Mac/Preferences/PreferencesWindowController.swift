@@ -7,21 +7,21 @@ private let kAddInputMethodIdentifier = "AddInputMethodIdentifier"
 
 typealias PreferencesItem = (identifier: String,
                              localizedName: String,
-                             viewController: OVBasePreferencesViewController)
+                             viewController: BasePreferencesViewController)
 
 @objc(OVPreferencesWindowController)
 class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var modulePreferencesContainerView: NSView!
-    @IBOutlet weak var generalPreferencesViewController: OVBasePreferencesViewController!
-    @IBOutlet weak var associatedPhrasesPreferencesViewController: OVBasePreferencesViewController!
-    @IBOutlet weak var tableBasedModulePreferencesViewController: OVBasePreferencesViewController!
-    @IBOutlet weak var arrayModulePreferencesViewController: OVBasePreferencesViewController!
-    @IBOutlet weak var addTableBasedInputMethodViewController: OVBasePreferencesViewController!
+    @IBOutlet weak var generalPreferencesViewController: BasePreferencesViewController!
+    @IBOutlet weak var associatedPhrasesPreferencesViewController: BasePreferencesViewController!
+    @IBOutlet weak var tableBasedModulePreferencesViewController: BasePreferencesViewController!
+    @IBOutlet weak var arrayModulePreferencesViewController: BasePreferencesViewController!
+    @IBOutlet weak var addTableBasedInputMethodViewController: BasePreferencesViewController!
 
     private var items: [PreferencesItem] = []
     private var localizableObjects: [NSValue:String] = [:]
-    private weak var currentPreferencesViewController: OVBasePreferencesViewController?
+    private weak var currentPreferencesViewController: BasePreferencesViewController?
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -104,8 +104,8 @@ class PreferencesWindowController: NSWindowController {
             }
         }
 
-        items.append((arrayModulePreferencesViewController.moduleIdentifier,
-                      OVModuleManager.default().localizedInputMethodName(arrayModulePreferencesViewController.moduleIdentifier),
+        items.append((arrayModulePreferencesViewController.moduleIdentifier ?? "",
+                      OVModuleManager.default().localizedInputMethodName(arrayModulePreferencesViewController.moduleIdentifier ?? ""),
                       arrayModulePreferencesViewController))
 
         items.append((kAddInputMethodIdentifier, "Add New Input Method",  addTableBasedInputMethodViewController))
