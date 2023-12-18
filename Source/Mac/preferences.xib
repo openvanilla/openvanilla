@@ -35,7 +35,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" id="APL-TT-LOB">
                             <rect key="frame" x="1" y="1" width="198" height="258"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" id="4">
                                     <rect key="frame" x="0.0" y="0.0" width="198" height="258"/>
@@ -233,6 +233,7 @@
                     </textFieldCell>
                 </textField>
             </subviews>
+            <point key="canvasLocation" x="-180" y="-205"/>
         </customView>
         <customView id="21">
             <rect key="frame" x="0.0" y="0.0" width="440" height="260"/>
@@ -408,6 +409,7 @@
                     </textFieldCell>
                 </textField>
             </subviews>
+            <point key="canvasLocation" x="-374" y="-530"/>
         </customView>
         <viewController id="69" customClass="OVTableBasedModulePreferencesViewController">
             <connections>
@@ -511,6 +513,7 @@
                     </connections>
                 </button>
             </subviews>
+            <point key="canvasLocation" x="-200" y="449"/>
         </customView>
         <customView id="Sdw-aj-CtP">
             <rect key="frame" x="0.0" y="0.0" width="440" height="260"/>
@@ -564,6 +567,7 @@
                     </connections>
                 </button>
             </subviews>
+            <point key="canvasLocation" x="-373" y="774"/>
         </customView>
         <viewController id="OTa-5M-Vdi" customClass="OVAFAssociatedPhrasesPreferencesViewController">
             <connections>

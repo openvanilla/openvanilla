@@ -4,7 +4,7 @@ import OpenVanillaImp
 @objc (OVGeneralPreferencesViewController)
 class GeneralPreferencesViewController: OVBasePreferencesViewController {
     @IBOutlet weak var fieldCandidateSize: NSPopUpButton!
-    @IBOutlet weak var fieldCandidateSytle: NSMatrix!
+    @IBOutlet weak var fieldCandidateStyle: NSMatrix!
     @IBOutlet weak var fieldAlphanumericKeyboardLayout: NSPopUpButton!
     @IBOutlet weak var fieldPlaySound: NSButton!
     @IBOutlet weak var fieldCheckForUpdate: NSButton!
@@ -33,7 +33,7 @@ class GeneralPreferencesViewController: OVBasePreferencesViewController {
 
 
         let style = userDefaults.object(forKey: OVCandidateListStyleNameKey) as? Bool ?? false
-        fieldCandidateSytle.selectCell(withTag: style ? 1 : 0)
+        fieldCandidateStyle.selectCell(withTag: style ? 1 : 0)
         configureKeyboardLayoutList(fieldAlphanumericKeyboardLayout)
         fieldPlaySound.state = userDefaults.bool(forKey: OVMakeSoundFeedbackOnInputErrorKey) ? .on : .off
         fieldCheckForUpdate.state = userDefaults.bool(forKey: OVCheckForUpdateKey) ? .on : .off
@@ -68,7 +68,7 @@ class GeneralPreferencesViewController: OVBasePreferencesViewController {
         if let candidateSize = fieldCandidateSize.selectedItem?.title {
             userDefaults.set((candidateSize as NSString).integerValue, forKey: OVCandidateListTextSizeKey)
         }
-        userDefaults.set(fieldCandidateSytle.selectedCell()?.tag == 0 ? OVVerticalCandidateListStyleName : OVHorizontalCandidateListStyleName, forKey: OVCandidateListStyleNameKey)
+        userDefaults.set(fieldCandidateStyle.selectedCell()?.tag == 0 ? OVVerticalCandidateListStyleName : OVHorizontalCandidateListStyleName, forKey: OVCandidateListStyleNameKey)
         if let layout = fieldAlphanumericKeyboardLayout.selectedItem?.representedObject as? String {
             setSharedAlphanumericKeyboardLayout(layout)
         }
