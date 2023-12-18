@@ -31,9 +31,10 @@
 #import "OVLoaderServiceImpl.h"
 #import "OVCandidateServiceImpl.h"
 #import "OVTextBufferCombinator.h"
-#import "OVToolTipWindowController.h"
 #import "OVModuleManager.h"
 #import "OVConstants.h"
+
+@import TooltipUI;
 
 @interface OVInputMethodController ()
 - (BOOL)handleOVKey:(OVKey &)key client:(id)client;
@@ -583,7 +584,8 @@
             fromTopLeft = NO;
         }
 
-        [[OVModuleManager defaultManager].toolTipWindowController setToolTipText:[NSString stringWithUTF8String:toolTipText.c_str()] atOrigin:toolTipOrigin fromTopLeft:fromTopLeft];
+        [[OVModuleManager defaultManager].toolTipWindowController showTooltip:[NSString stringWithUTF8String:toolTipText.c_str()] atPoint:toolTipOrigin];
+//        [[OVModuleManager defaultManager].toolTipWindowController setToolTipText:[NSString stringWithUTF8String:toolTipText.c_str()] atOrigin:toolTipOrigin fromTopLeft:fromTopLeft];
         [[[OVModuleManager defaultManager].toolTipWindowController window] orderFront:self];
     }
 }
@@ -652,4 +654,5 @@
     _associatedPhrasesContext = 0;
     _associatedPhrasesContextInUse = NO;
 }
+
 @end

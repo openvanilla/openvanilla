@@ -29,6 +29,7 @@
 #define OVPlistBackedKeyValueMapImpl_h
 
 #include <CoreFoundation/CoreFoundation.h>
+
 #include "OVKeyValueMap.h"
 
 namespace OpenVanilla {

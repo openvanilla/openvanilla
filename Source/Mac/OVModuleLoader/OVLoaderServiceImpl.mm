@@ -26,7 +26,6 @@
 //
 
 #import "OVLoaderServiceImpl.h"
-#import <Cocoa/Cocoa.h>
 #import "OVConcreteKeyImpl.h"
 #import "OVConstants.h"
 

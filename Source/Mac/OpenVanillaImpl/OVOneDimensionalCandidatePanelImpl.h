@@ -27,8 +27,8 @@
 
 #import "OVCandidateService.h"
 #import "OVCandidateListImpl.h"
-//#import "VTCandidateController.h"
-@import Voltaire;
+
+@import CandidateUI;
 
 extern NSString *const OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification;
 extern NSString *const OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey;

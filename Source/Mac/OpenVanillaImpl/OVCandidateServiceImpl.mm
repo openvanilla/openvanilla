@@ -26,9 +26,10 @@
 //
 
 #import "OVCandidateServiceImpl.h"
-@import Voltaire;
 
 using namespace OpenVanilla;
+
+@import CandidateUI;
 
 OVCandidateServiceImpl::OVCandidateServiceImpl(OVLoaderService* loaderService)
     : m_horizontalCandidatePanel([VTHorizontalCandidateController class], loaderService)

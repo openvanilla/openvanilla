@@ -26,7 +26,7 @@
 //
 
 #import "OVOneDimensionalCandidatePanelImpl.h"
-@import Voltaire;
+@import CandidateUI;
 
 using namespace OpenVanilla;
 

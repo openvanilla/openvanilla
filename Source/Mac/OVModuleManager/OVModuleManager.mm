@@ -35,9 +35,9 @@
 #import "OVIMBig5Code.h"
 #import "OVLoaderServiceImpl.h"
 #import "OVPlistBackedKeyValueMapImpl.h"
-#import "OVToolTipWindowController.h"
-#import "VXHanConvert.h"
 
+@import TooltipUI;
+@import VXHanConvert;
 
 @interface OVCanInstall ()
 @property (readwrite, assign) BOOL willOverrideBuiltInTable;

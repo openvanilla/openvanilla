@@ -24,6 +24,7 @@
 import Cocoa
 import Carbon
 
+@objc (OVInputSourceHelper)
 public class InputSourceHelper: NSObject {
 
     @available(*, unavailable)

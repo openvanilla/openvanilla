@@ -26,10 +26,9 @@
 //
 
 
-@import Cocoa;
 @import InputMethodKit;
 @import OpenVanilla;
-@import Tooltip;
+@import TooltipUI;
 
 #import "OVTextBufferImpl.h"
 

@@ -1,26 +1,27 @@
 import Foundation
 
 extension Notification.Name {
-    static let UpdateCheckerDidFinishChecking = Notification.Name( "OVUpdateCheckerDidFinishCheckingNotification")
+    static let UpdateCheckerDidFinishChecking = Notification.Name("OVUpdateCheckerDidFinishCheckingNotification")
 }
 
 class UpdateChecker: NSObject {
-    @objc(sharedInstance)
+    @objc (sharedInstance)
     static let shared = UpdateChecker()
 
-    private override init() {}
+    private override init() {
+    }
 
     @objc
     private (set) var busy = false
 
     @objc
-    @UserDefault(key: OVLastUpdateCheckTimeKey, defaultValue: nil)
+    @UserDefault (key: OVLastUpdateCheckTimeKey, defaultValue: nil)
     private (set) var lastUpdateCheckDate: Date?
 
     @objc
-    @UserDefault(key: OVNextUpdateCheckTimeKey, defaultValue: nil)
+    @UserDefault (key: OVNextUpdateCheckTimeKey, defaultValue: nil)
     private (set) var nextUpdateCheckDate: Date?
-    
+
     private var connection: URLSessionDataTask?
 
     func cancel() {
@@ -54,13 +55,13 @@ class UpdateChecker: NSObject {
         }
         let nextCheckDate = self.nextUpdateCheckDate
         let now = Date()
-        if nextCheckDate != nil && nextCheckDate?.compare(now) != ComparisonResult.orderedAscending  {
+        if nextCheckDate != nil && nextCheckDate?.compare(now) != ComparisonResult.orderedAscending {
             return
         }
         guard let url = URL(string: OVUpdateCheckInfoURLString) else {
             return
         }
-        
+
         connection = URLSession.shared.dataTask(with: url) { data, response, error in
             self.connection = nil
             let now = Date()
@@ -81,7 +82,7 @@ class UpdateChecker: NSObject {
 
 
             let data = data ?? Data()
-            guard let plist = try? PropertyListSerialization.propertyList(from: data, options: 0, format: nil) as? [AnyHashable:Any] else {
+            guard let plist = try? PropertyListSerialization.propertyList(from: data, options: 0, format: nil) as? [AnyHashable: Any] else {
                 showPlistError()
                 return
             }
@@ -91,17 +92,18 @@ class UpdateChecker: NSObject {
 
             guard let remoteVersion = plist[kCFBundleVersionKey] as? String,
                   let remoteShortVersion = plist["CFBundleShortVersionString"] as? String
-                else {
+            else {
                 showPlistError()
                 return
             }
             guard let infoDict = Bundle.main.infoDictionary,
                   let currentVersion = infoDict[kCFBundleVersionKey as String] as? String,
-                  let currentShortVersion = infoDict["CFBundleShortVersionString"] as? String else {
+                  let currentShortVersion = infoDict["CFBundleShortVersionString"] as? String
+            else {
                 return
             }
 
-            let result = (currentVersion as NSString).compare(remoteVersion, options:.numeric)
+            let result = (currentVersion as NSString).compare(remoteVersion, options: .numeric)
             if result != .orderedAscending {
                 if forced {
                     DispatchQueue.main.async {
@@ -110,13 +112,13 @@ class UpdateChecker: NSObject {
                 }
             }
             let versionDescriptions = plist["Description"]
-            if let versionDescriptions = versionDescriptions as? [AnyHashable:Any] {
+            if let versionDescriptions = versionDescriptions as? [AnyHashable: Any] {
                 let locale = {
                     let supportedLocales = ["en", "zh-Hant", "zh-Hans"]
                     let preferredTags = Bundle.preferredLocalizations(from: supportedLocales)
                     return preferredTags.first ?? "en"
                 }()
-                var versionDescription = versionDescriptions[locale] as? String  ?? ""
+                var versionDescription = versionDescriptions[locale] as? String ?? ""
                 if !versionDescription.isEmpty {
                     versionDescription = "\n\n" + versionDescription
                 }
@@ -139,7 +141,9 @@ extension UpdateChecker: NonModalAlertWindowControllerDelegate {
         if controller.delegate as? NSObject != self {
             return
         }
-        guard let url = URL(string: OVUpdateDownloadURLString) else { return }
+        guard let url = URL(string: OVUpdateDownloadURLString) else {
+            return
+        }
         NSWorkspace.shared.open(url)
     }
 

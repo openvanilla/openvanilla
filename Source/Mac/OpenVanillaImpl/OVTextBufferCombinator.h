@@ -25,7 +25,6 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "OVTextBufferImpl.h"
 
 namespace OpenVanilla {
