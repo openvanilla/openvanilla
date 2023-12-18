@@ -1,6 +1,3 @@
-//
-// OVIMArrayPreferencesViewController.m
-//
 // Copyright (c) 2004-2012 Lukhnos Liu (lukhnos at openvanilla dot org)
 //
 // Permission is hereby granted, free of charge, to any person
@@ -25,36 +22,36 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "OVIMArrayPreferencesViewController.h"
+import Foundation
+import OVModuleManager
 
-static NSString *const kArrayModuleIdentifier = @"org.openvanilla.OVIMArray";
+@objc (OVAppDelegate)
+class AppDelegate: NSObject, NSApplicationDelegate {
 
-@implementation OVIMArrayPreferencesViewController
+    @IBOutlet var window: NSWindow?
+    private var preferencesWindowController: PreferencesWindowController?
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        self.moduleIdentifier = kArrayModuleIdentifier;
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        OVModuleManager.default().reload()
+        if AppDelegate.DebugShowPreferencesAfterAppLaunched {
+            showPreferences()
+        }
     }
-    return self;
-}
 
-- (IBAction)updateField:(id)sender
-{
-    [self setBoolValue:([self.fieldAutoSP state] == NSOnState) forKey:@"SpecialCodePrompt"];
-    [self setBoolValue:([self.fieldForceSP state] == NSOnState) forKey:@"QuickMode"];
-}
+    @objc
+    func showPreferences() {
+        if preferencesWindowController == nil {
+            preferencesWindowController = PreferencesWindowController(windowNibName: "preferences")
+        }
+        preferencesWindowController?.window?.center()
+        preferencesWindowController?.window?.orderFront(self)
+    }
 
-- (void)setStateForButton:(NSButton *)button forKey:(NSString *)key
-{
-    [button setState:([self boolValueForKey:key] ? NSOnState : NSOffState)];
-}
+    private static var DebugShowPreferencesAfterAppLaunched = false
 
-- (void)loadPreferences
-{
-    [super loadPreferences];
-    [self setStateForButton:self.fieldAutoSP forKey:@"SpecialCodePrompt"];
-    [self setStateForButton:self.fieldForceSP forKey:@"QuickMode"];
+    @objc (setDebugShowPreferencesAfterAppLaunched:)
+    static func setDebugShowPreferencesAfterAppLaunched(show: Bool) {
+        DebugShowPreferencesAfterAppLaunched = show
+    }
+
 }
-@end
