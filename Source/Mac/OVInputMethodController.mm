@@ -81,7 +81,7 @@
         item.action = @selector(changeInputMethodAction:);
 
         if ([activeInputMethodIdentifier isEqualToString:identifier]) {
-            item.state = NSOnState;
+            item.state = NSControlStateValueOn;
         }
 
         [menu addItem:item];
@@ -91,15 +91,15 @@
 
     NSMenuItem *filterItem;
     filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Traditional Chinese to Simplified", @"") action:@selector(toggleTraditionalToSimplifiedChineseFilterAction:) keyEquivalent:@""];
-    filterItem.state = [OVModuleManager defaultManager].traditionalToSimplifiedChineseFilterEnabled ? NSOnState : NSOffState;
+    filterItem.state = [OVModuleManager defaultManager].traditionalToSimplifiedChineseFilterEnabled ? NSControlStateValueOn : NSControlStateValueOff;
     [menu addItem:filterItem];
 
     filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Simplified Chinese to Traditional", @"") action:@selector(toggleSimplifiedToTraditionalChineseFilterAction:) keyEquivalent:@""];
-    filterItem.state = [OVModuleManager defaultManager].simplifiedToTraditionalChineseFilterEnabled ? NSOnState : NSOffState;
+    filterItem.state = [OVModuleManager defaultManager].simplifiedToTraditionalChineseFilterEnabled ? NSControlStateValueOn : NSControlStateValueOff;
     [menu addItem:filterItem];
 
     filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Associated Phrases", @"") action:@selector(toggleAssociatedPhrasesAroundFilterEnabledAction:) keyEquivalent:@""];
-    filterItem.state = [OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled ? NSOnState : NSOffState;
+    filterItem.state = [OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled ? NSControlStateValueOn : NSControlStateValueOff;
     [menu addItem:filterItem];
 
     [menu addItem:[NSMenuItem separatorItem]];
@@ -214,7 +214,7 @@
         [[OVModuleManager defaultManager].toolTipWindowController.window orderOut:self];
     }
 
-    if ([event type] != NSKeyDown) {
+    if ([event type] != NSEventTypeKeyDown) {
         return NO;
     }
 
@@ -222,11 +222,11 @@
     NSUInteger cocoaModifiers = [event modifierFlags];
     unsigned short virtualKeyCode = [event keyCode];
 
-    bool capsLock = !!(cocoaModifiers & NSAlphaShiftKeyMask);
-    bool shift = !!(cocoaModifiers & NSShiftKeyMask);
-    bool ctrl = !!(cocoaModifiers & NSControlKeyMask);
-    bool opt = !!(cocoaModifiers & NSAlternateKeyMask);
-    bool cmd = !!(cocoaModifiers & NSCommandKeyMask);
+    bool capsLock = !!(cocoaModifiers & NSEventModifierFlagCapsLock);
+    bool shift = !!(cocoaModifiers & NSEventModifierFlagShift);
+    bool ctrl = !!(cocoaModifiers & NSEventModifierFlagControl);
+    bool opt = !!(cocoaModifiers & NSEventModifierFlagOption);
+    bool cmd = !!(cocoaModifiers & NSEventModifierFlagCommand);
     bool numLock = false;
 
     static UInt32 numKeys[16] = {
@@ -247,23 +247,23 @@
         unicharCode = [chars characterAtIndex:0];
 
         // map Ctrl-[A-Z] to a char code
-        if (cocoaModifiers & NSControlKeyMask) {
+        if (cocoaModifiers & NSEventModifierFlagControl) {
             if (unicharCode < 27) {
                 unicharCode += ('a' - 1);
             }
             else {
                 switch (unicharCode) {
                     case 27:
-                        unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '{' : '[';
+                        unicharCode = (cocoaModifiers & NSEventModifierFlagShift) ? '{' : '[';
                         break;
                     case 28:
-                        unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '|' : '\\';
+                        unicharCode = (cocoaModifiers & NSEventModifierFlagShift) ? '|' : '\\';
                         break;
                     case 29:
-                        unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '}' : ']';
+                        unicharCode = (cocoaModifiers & NSEventModifierFlagShift) ? '}' : ']';
                         break;
                     case 31:
-                        unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '_' : '-';
+                        unicharCode = (cocoaModifiers & NSEventModifierFlagShift) ? '_' : '-';
                         break;
                 }
             }
