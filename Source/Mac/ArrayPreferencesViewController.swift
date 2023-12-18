@@ -3,7 +3,7 @@ import Foundation
 private let kArrayModuleIdentifier = "org.openvanilla.OVIMArray"
 
 @objc (OVIMArrayPreferencesViewController)
-class ArrayPreferencesViewController: OVBaseModulePreferencesViewController {
+class ArrayPreferencesViewController: BaseModulePreferencesViewController {
     @IBOutlet weak var fieldAutoSP: NSButton!
     @IBOutlet weak var fieldForceSP: NSButton!
  

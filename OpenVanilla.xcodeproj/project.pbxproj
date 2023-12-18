@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6A0BEB6A161573A400FCB59A /* OVBaseModulePreferencesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BEB65161573A400FCB59A /* OVBaseModulePreferencesViewController.mm */; };
 		6A0E0ACE1623EDF5004FED10 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0E0ABE1623EDF5004FED10 /* AppDelegate.m */; };
 		6A0E0ACF1623EDF5004FED10 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A0E0ABF1623EDF5004FED10 /* InfoPlist.strings */; };
 		6A0E0AD01623EDF5004FED10 /* License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6A0E0AC11623EDF5004FED10 /* License.rtf */; };
@@ -53,6 +52,7 @@
 		D449C63B2B2F76D40060653A /* InputMethodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C63A2B2F76D40060653A /* InputMethodController.swift */; };
 		D449C63D2B2FF0FC0060653A /* ArrayPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C63C2B2FF0FC0060653A /* ArrayPreferencesViewController.swift */; };
 		D449C63F2B2FFA260060653A /* GeneralPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */; };
+		D449C6412B3009DC0060653A /* BaseModulePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */; };
 		D46CD4CC2B21A21B00AEBCA6 /* OpenVanilla in Frameworks */ = {isa = PBXBuildFile; productRef = D46CD4CB2B21A21B00AEBCA6 /* OpenVanilla */; };
 		D4F50BBC2B28898E00C6C364 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */; };
 		D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */; };
@@ -115,8 +115,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6A0BEB64161573A400FCB59A /* OVBaseModulePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVBaseModulePreferencesViewController.h; sourceTree = "<group>"; };
-		6A0BEB65161573A400FCB59A /* OVBaseModulePreferencesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVBaseModulePreferencesViewController.mm; sourceTree = "<group>"; };
 		6A0E0A9F1623EDA9004FED10 /* OpenVanillaInstaller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenVanillaInstaller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A0E0AA31623EDAA004FED10 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		6A0E0AA41623EDAA004FED10 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -184,6 +182,7 @@
 		D449C63A2B2F76D40060653A /* InputMethodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodController.swift; sourceTree = "<group>"; };
 		D449C63C2B2FF0FC0060653A /* ArrayPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayPreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesViewController.swift; sourceTree = "<group>"; };
+		D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModulePreferencesViewController.swift; sourceTree = "<group>"; };
 		D4F50BBA2B28898D00C6C364 /* OpenVanilla-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanilla-Bridging-Header.h"; sourceTree = "<group>"; };
 		D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPropertyWrapper.swift; sourceTree = "<group>"; };
@@ -316,8 +315,7 @@
 				D414E3032B2A2624001863EF /* AddTableBasedInputMethodViewController.swift */,
 				D449C6362B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift */,
 				D4F50BBF2B289C8C00C6C364 /* AppDelegate.swift */,
-				6A0BEB64161573A400FCB59A /* OVBaseModulePreferencesViewController.h */,
-				6A0BEB65161573A400FCB59A /* OVBaseModulePreferencesViewController.mm */,
+				D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */,
 				6A3914AB15FAE96500DC57C3 /* OVBasePreferencesViewController.h */,
 				6A3914AC15FAE96500DC57C3 /* OVBasePreferencesViewController.mm */,
 				D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */,
@@ -533,7 +531,7 @@
 				D449C63F2B2FFA260060653A /* GeneralPreferencesViewController.swift in Sources */,
 				6A3914AD15FAE96500DC57C3 /* OVBasePreferencesViewController.mm in Sources */,
 				D449C63D2B2FF0FC0060653A /* ArrayPreferencesViewController.swift in Sources */,
-				6A0BEB6A161573A400FCB59A /* OVBaseModulePreferencesViewController.mm in Sources */,
+				D449C6412B3009DC0060653A /* BaseModulePreferencesViewController.swift in Sources */,
 				D414E3042B2A2624001863EF /* AddTableBasedInputMethodViewController.swift in Sources */,
 				D4F50BCA2B28A15400C6C364 /* NonModalAlertWindowController.swift in Sources */,
 				D449C6372B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift in Sources */,

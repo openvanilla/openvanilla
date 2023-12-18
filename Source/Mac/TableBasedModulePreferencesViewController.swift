@@ -27,7 +27,7 @@ import OVModuleManager
 import OpenVanillaImp
 
 @objc (OVTableBasedModulePreferencesViewController)
-class TableBasedModulePreferencesViewController: OVBaseModulePreferencesViewController {
+class TableBasedModulePreferencesViewController: BaseModulePreferencesViewController {
 
     @IBOutlet var fieldAlphaNumericKeyboardLayout: NSPopUpButton!
     @IBOutlet var fieldMaximumRadicalLength: NSPopUpButton!
@@ -79,7 +79,7 @@ class TableBasedModulePreferencesViewController: OVBaseModulePreferencesViewCont
             fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
         }
 
-        var length = unsignedIntegerValue(forKey: "MaximumRadicalLength")
+        var length = unsignedIntegerValue(forKey: "MaximumRadicalLength") ?? 0
         if length == 0 || length > 100 {
             length = 5
         }
