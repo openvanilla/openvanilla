@@ -443,7 +443,7 @@
                 <outlet property="checkForUpdateButton" destination="120" id="184"/>
                 <outlet property="fieldAlphanumericKeyboardLayout" destination="38" id="157"/>
                 <outlet property="fieldCandidateSize" destination="22" id="155"/>
-                <outlet property="fieldCandidateSytle" destination="48" id="156"/>
+                <outlet property="fieldCandidateStyle" destination="48" id="uTQ-Vy-9TV"/>
                 <outlet property="fieldCheckForUpdate" destination="118" id="159"/>
                 <outlet property="fieldPlaySound" destination="54" id="158"/>
                 <outlet property="lastUpdateCheckDateLabel" destination="122" id="166"/>
