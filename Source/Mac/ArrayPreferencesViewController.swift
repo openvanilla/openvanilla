@@ -4,8 +4,8 @@ private let kArrayModuleIdentifier = "org.openvanilla.OVIMArray"
 
 @objc (OVIMArrayPreferencesViewController)
 class ArrayPreferencesViewController: OVBaseModulePreferencesViewController {
-    @IBOutlet var fieldAutoSP: NSButton!
-    @IBOutlet var fieldForceSP: NSButton!
+    @IBOutlet weak var fieldAutoSP: NSButton!
+    @IBOutlet weak var fieldForceSP: NSButton!
  
     required init?(coder: NSCoder) {
         super.init(coder: coder)

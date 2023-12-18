@@ -53,8 +53,8 @@ class UpdateChecker: NSObject {
         if busy {
             return
         }
-        var nextCheckDate = self.nextUpdateCheckDate
-        var now = Date()
+        let nextCheckDate = self.nextUpdateCheckDate
+        let now = Date()
         if nextCheckDate != nil && nextCheckDate?.compare(now) != ComparisonResult.orderedAscending  {
             return
         }
