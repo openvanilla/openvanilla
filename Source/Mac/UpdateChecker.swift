@@ -110,7 +110,9 @@ class UpdateChecker: NSObject {
                         NonModalAlertWindowController.shared.show(title: NSLocalizedString("Check for Update Completed", comment: ""), content: NSLocalizedString("You are already using the latest version of OpenVanilla.", comment: ""), confirmButtonTitle: NSLocalizedString("OK", comment: ""), cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
                     }
                 }
+                return
             }
+
             let versionDescriptions = plist["Description"]
             if let versionDescriptions = versionDescriptions as? [AnyHashable: Any] {
                 let locale = {

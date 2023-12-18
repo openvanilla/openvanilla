@@ -31,7 +31,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc
     func applicationDidFinishLaunching(_ notification: Notification) {
-        NSLog("applicationDidFinishLaunching")
         OVModuleManager.default().reload()
         if AppDelegate.DebugShowPreferencesAfterAppLaunched {
             showPreferences()
@@ -40,7 +39,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc
     func showPreferences() {
-        NSLog("showPreferences")
         if preferencesWindowController == nil {
             preferencesWindowController = PreferencesWindowController(windowNibName: "preferences")
         }
