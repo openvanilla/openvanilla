@@ -24,7 +24,6 @@
 
 import Foundation
 
-@objc (OVAppDelegate)
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet var window: NSWindow?

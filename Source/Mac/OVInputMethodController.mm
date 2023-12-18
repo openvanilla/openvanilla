@@ -192,7 +192,7 @@
         [super showPreferences:sender];
     }
     else {
-        [(OVAppDelegate * )[NSApp delegate] showPreferences];
+        [(AppDelegate * )[NSApp delegate] showPreferences];
     }
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }

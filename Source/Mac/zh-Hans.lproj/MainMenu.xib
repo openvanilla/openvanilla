@@ -6,7 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
             <connections>
-                <outlet property="delegate" destination="494" id="495"/>
+                <outlet property="delegate" destination="494" id="GCa-d1-uYU"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -645,8 +645,9 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="67" y="154"/>
         </menu>
-        <customObject id="494" customClass="AppDelegate"/>
+        <customObject id="494" customClass="AppDelegate" customModule="OpenVanilla"/>
         <customObject id="420" customClass="NSFontManager"/>
     </objects>
 </document>
