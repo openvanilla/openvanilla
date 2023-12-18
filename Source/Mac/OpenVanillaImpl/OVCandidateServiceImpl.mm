@@ -26,8 +26,7 @@
 //
 
 #import "OVCandidateServiceImpl.h"
-#import "VTHorizontalCandidateController.h"
-#import "VTVerticalCandidateController.h"
+@import Voltaire;
 
 using namespace OpenVanilla;
 

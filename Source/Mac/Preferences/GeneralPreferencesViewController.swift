@@ -1,5 +1,4 @@
 import Foundation
-import OpenVanillaImp
 
 @objc (OVGeneralPreferencesViewController)
 class GeneralPreferencesViewController: BasePreferencesViewController {

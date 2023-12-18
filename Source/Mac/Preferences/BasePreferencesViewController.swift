@@ -24,7 +24,6 @@
 
 import Foundation
 import Carbon
-import OVModuleManager
 
 @objc (BasePreferencesViewController)
 class BasePreferencesViewController: NSViewController {

@@ -53,6 +53,19 @@
 		D449C6412B3009DC0060653A /* BaseModulePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */; };
 		D449C6432B300FB60060653A /* BasePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6422B300FB60060653A /* BasePreferencesViewController.swift */; };
 		D46CD4CC2B21A21B00AEBCA6 /* OpenVanilla in Frameworks */ = {isa = PBXBuildFile; productRef = D46CD4CB2B21A21B00AEBCA6 /* OpenVanilla */; };
+		D4AF7DC02B30A7DD0025DAAF /* OVLoaderServiceImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DAA2B30A7DD0025DAAF /* OVLoaderServiceImpl.mm */; };
+		D4AF7DC12B30A7DD0025DAAF /* OVModuleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DAD2B30A7DD0025DAAF /* OVModuleManager.mm */; };
+		D4AF7DC22B30A7DD0025DAAF /* OVConcreteKeyImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DAF2B30A7DD0025DAAF /* OVConcreteKeyImpl.cpp */; };
+		D4AF7DC32B30A7DD0025DAAF /* OVConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DB22B30A7DD0025DAAF /* OVConstants.m */; };
+		D4AF7DC42B30A7DD0025DAAF /* OVTextBufferCombinator.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DB42B30A7DD0025DAAF /* OVTextBufferCombinator.mm */; };
+		D4AF7DC52B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBA2B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.cpp */; };
+		D4AF7DC62B30A7DD0025DAAF /* OVCandidateServiceImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBB2B30A7DD0025DAAF /* OVCandidateServiceImpl.mm */; };
+		D4AF7DC72B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBC2B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm */; };
+		D4AF7DC82B30A7DD0025DAAF /* OVCandidateListImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBE2B30A7DD0025DAAF /* OVCandidateListImpl.mm */; };
+		D4AF7DC92B30A7DD0025DAAF /* OVTextBufferImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBF2B30A7DD0025DAAF /* OVTextBufferImpl.cpp */; };
+		D4AF7DCE2B30A97F0025DAAF /* Voltaire in Frameworks */ = {isa = PBXBuildFile; productRef = D4AF7DCD2B30A97F0025DAAF /* Voltaire */; };
+		D4AF7DD02B30A97F0025DAAF /* VXHanConvert in Frameworks */ = {isa = PBXBuildFile; productRef = D4AF7DCF2B30A97F0025DAAF /* VXHanConvert */; };
+		D4AF7DD22B30A97F0025DAAF /* Tooltip in Frameworks */ = {isa = PBXBuildFile; productRef = D4AF7DD12B30A97F0025DAAF /* Tooltip */; };
 		D4F50BBC2B28898E00C6C364 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */; };
 		D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */; };
 		D4F50BC02B289C8C00C6C364 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBF2B289C8C00C6C364 /* AppDelegate.swift */; };
@@ -180,6 +193,26 @@
 		D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModulePreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C6422B300FB60060653A /* BasePreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePreferencesViewController.swift; sourceTree = "<group>"; };
+		D4AF7DA92B30A7DD0025DAAF /* OVLoaderServiceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVLoaderServiceImpl.h; sourceTree = "<group>"; };
+		D4AF7DAA2B30A7DD0025DAAF /* OVLoaderServiceImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVLoaderServiceImpl.mm; sourceTree = "<group>"; };
+		D4AF7DAC2B30A7DD0025DAAF /* OVModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVModuleManager.h; sourceTree = "<group>"; };
+		D4AF7DAD2B30A7DD0025DAAF /* OVModuleManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVModuleManager.mm; sourceTree = "<group>"; };
+		D4AF7DAF2B30A7DD0025DAAF /* OVConcreteKeyImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVConcreteKeyImpl.cpp; sourceTree = "<group>"; };
+		D4AF7DB02B30A7DD0025DAAF /* OVConcreteKeyImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVConcreteKeyImpl.h; sourceTree = "<group>"; };
+		D4AF7DB12B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVOneDimensionalCandidatePanelImpl.h; sourceTree = "<group>"; };
+		D4AF7DB22B30A7DD0025DAAF /* OVConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVConstants.m; sourceTree = "<group>"; };
+		D4AF7DB32B30A7DD0025DAAF /* OVCandidateServiceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCandidateServiceImpl.h; sourceTree = "<group>"; };
+		D4AF7DB42B30A7DD0025DAAF /* OVTextBufferCombinator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVTextBufferCombinator.mm; sourceTree = "<group>"; };
+		D4AF7DB52B30A7DD0025DAAF /* OVTextBufferImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTextBufferImpl.h; sourceTree = "<group>"; };
+		D4AF7DB62B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVPlistBackedKeyValueMapImpl.h; sourceTree = "<group>"; };
+		D4AF7DB72B30A7DD0025DAAF /* OVTextBufferCombinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTextBufferCombinator.h; sourceTree = "<group>"; };
+		D4AF7DB82B30A7DD0025DAAF /* OVCandidateListImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCandidateListImpl.h; sourceTree = "<group>"; };
+		D4AF7DBA2B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVPlistBackedKeyValueMapImpl.cpp; sourceTree = "<group>"; };
+		D4AF7DBB2B30A7DD0025DAAF /* OVCandidateServiceImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVCandidateServiceImpl.mm; sourceTree = "<group>"; };
+		D4AF7DBC2B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVOneDimensionalCandidatePanelImpl.mm; sourceTree = "<group>"; };
+		D4AF7DBD2B30A7DD0025DAAF /* OVConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVConstants.h; sourceTree = "<group>"; };
+		D4AF7DBE2B30A7DD0025DAAF /* OVCandidateListImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVCandidateListImpl.mm; sourceTree = "<group>"; };
+		D4AF7DBF2B30A7DD0025DAAF /* OVTextBufferImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVTextBufferImpl.cpp; sourceTree = "<group>"; };
 		D4F50BBA2B28898D00C6C364 /* OpenVanilla-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanilla-Bridging-Header.h"; sourceTree = "<group>"; };
 		D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPropertyWrapper.swift; sourceTree = "<group>"; };
@@ -206,7 +239,10 @@
 				D46CD4CC2B21A21B00AEBCA6 /* OpenVanilla in Frameworks */,
 				6ABBAF2C15CD61BE0080EE7D /* Carbon.framework in Frameworks */,
 				6ABBAEF515CD58F90080EE7D /* Cocoa.framework in Frameworks */,
+				D4AF7DD22B30A97F0025DAAF /* Tooltip in Frameworks */,
 				6ABBAF2A15CD61B60080EE7D /* InputMethodKit.framework in Frameworks */,
+				D4AF7DD02B30A97F0025DAAF /* VXHanConvert in Frameworks */,
+				D4AF7DCE2B30A97F0025DAAF /* Voltaire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +345,9 @@
 		6ABBAEFA15CD58F90080EE7D /* InputMethod Application */ = {
 			isa = PBXGroup;
 			children = (
+				D4AF7DAE2B30A7DD0025DAAF /* OpenVanillaImpl */,
+				D4AF7DA82B30A7DD0025DAAF /* OVModuleLoader */,
+				D4AF7DAB2B30A7DD0025DAAF /* OVModuleManager */,
 				D4AF7DA72B3097430025DAAF /* Preferences */,
 				D4F50BBF2B289C8C00C6C364 /* AppDelegate.swift */,
 				6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */,
@@ -317,10 +356,9 @@
 				6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.mm */,
 				D4F50BC82B28A15300C6C364 /* NonModalAlertWindowController.swift */,
 				D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */,
+				D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */,
 				6ABBAF2415CD61680080EE7D /* Resources */,
 				6ABBAEFB15CD58F90080EE7D /* Supporting Files */,
-				D4F50BBA2B28898D00C6C364 /* OpenVanilla-Bridging-Header.h */,
-				D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */,
 			);
 			name = "InputMethod Application";
 			path = Source/Mac;
@@ -329,6 +367,7 @@
 		6ABBAEFB15CD58F90080EE7D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D4F50BBA2B28898D00C6C364 /* OpenVanilla-Bridging-Header.h */,
 				6ABBAEFC15CD58F90080EE7D /* OpenVanilla-Info.plist */,
 				6ABBAEFD15CD58F90080EE7D /* InfoPlist.strings */,
 				6ABBAF0015CD58F90080EE7D /* main.mm */,
@@ -376,6 +415,47 @@
 			path = Preferences;
 			sourceTree = "<group>";
 		};
+		D4AF7DA82B30A7DD0025DAAF /* OVModuleLoader */ = {
+			isa = PBXGroup;
+			children = (
+				D4AF7DA92B30A7DD0025DAAF /* OVLoaderServiceImpl.h */,
+				D4AF7DAA2B30A7DD0025DAAF /* OVLoaderServiceImpl.mm */,
+			);
+			path = OVModuleLoader;
+			sourceTree = "<group>";
+		};
+		D4AF7DAB2B30A7DD0025DAAF /* OVModuleManager */ = {
+			isa = PBXGroup;
+			children = (
+				D4AF7DAC2B30A7DD0025DAAF /* OVModuleManager.h */,
+				D4AF7DAD2B30A7DD0025DAAF /* OVModuleManager.mm */,
+			);
+			path = OVModuleManager;
+			sourceTree = "<group>";
+		};
+		D4AF7DAE2B30A7DD0025DAAF /* OpenVanillaImpl */ = {
+			isa = PBXGroup;
+			children = (
+				D4AF7DBD2B30A7DD0025DAAF /* OVConstants.h */,
+				D4AF7DB22B30A7DD0025DAAF /* OVConstants.m */,
+				D4AF7DB02B30A7DD0025DAAF /* OVConcreteKeyImpl.h */,
+				D4AF7DAF2B30A7DD0025DAAF /* OVConcreteKeyImpl.cpp */,
+				D4AF7DB82B30A7DD0025DAAF /* OVCandidateListImpl.h */,
+				D4AF7DBE2B30A7DD0025DAAF /* OVCandidateListImpl.mm */,
+				D4AF7DB12B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.h */,
+				D4AF7DBC2B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm */,
+				D4AF7DB32B30A7DD0025DAAF /* OVCandidateServiceImpl.h */,
+				D4AF7DB62B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.h */,
+				D4AF7DBA2B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.cpp */,
+				D4AF7DBB2B30A7DD0025DAAF /* OVCandidateServiceImpl.mm */,
+				D4AF7DB52B30A7DD0025DAAF /* OVTextBufferImpl.h */,
+				D4AF7DBF2B30A7DD0025DAAF /* OVTextBufferImpl.cpp */,
+				D4AF7DB72B30A7DD0025DAAF /* OVTextBufferCombinator.h */,
+				D4AF7DB42B30A7DD0025DAAF /* OVTextBufferCombinator.mm */,
+			);
+			path = OpenVanillaImpl;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -416,6 +496,9 @@
 			name = OpenVanilla;
 			packageProductDependencies = (
 				D46CD4CB2B21A21B00AEBCA6 /* OpenVanilla */,
+				D4AF7DCD2B30A97F0025DAAF /* Voltaire */,
+				D4AF7DCF2B30A97F0025DAAF /* VXHanConvert */,
+				D4AF7DD12B30A97F0025DAAF /* Tooltip */,
 			);
 			productName = OpenVanilla;
 			productReference = 6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */;
@@ -450,6 +533,9 @@
 			mainGroup = 6ABBAEE515CD58F90080EE7D;
 			packageReferences = (
 				D46CD4BF2B21943300AEBCA6 /* XCLocalSwiftPackageReference "Packages/OpenVanilla" */,
+				D4AF7DCA2B30A8B90025DAAF /* XCLocalSwiftPackageReference "Packages/Voltaire" */,
+				D4AF7DCB2B30A8C50025DAAF /* XCLocalSwiftPackageReference "Packages/VXHanConvert" */,
+				D4AF7DCC2B30A8DB0025DAAF /* XCLocalSwiftPackageReference "Packages/Tooltip" */,
 			);
 			productRefGroup = 6ABBAEF115CD58F90080EE7D /* Products */;
 			projectDirPath = "";
@@ -532,17 +618,27 @@
 				6ABBAF0115CD58F90080EE7D /* main.mm in Sources */,
 				6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.mm in Sources */,
 				6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */,
+				D4AF7DC42B30A7DD0025DAAF /* OVTextBufferCombinator.mm in Sources */,
 				D449C63F2B2FFA260060653A /* GeneralPreferencesViewController.swift in Sources */,
 				D449C63D2B2FF0FC0060653A /* ArrayPreferencesViewController.swift in Sources */,
+				D4AF7DC22B30A7DD0025DAAF /* OVConcreteKeyImpl.cpp in Sources */,
+				D4AF7DC92B30A7DD0025DAAF /* OVTextBufferImpl.cpp in Sources */,
+				D4AF7DC32B30A7DD0025DAAF /* OVConstants.m in Sources */,
+				D4AF7DC72B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm in Sources */,
+				D4AF7DC12B30A7DD0025DAAF /* OVModuleManager.mm in Sources */,
 				D449C6412B3009DC0060653A /* BaseModulePreferencesViewController.swift in Sources */,
 				D414E3042B2A2624001863EF /* AddTableBasedInputMethodViewController.swift in Sources */,
+				D4AF7DC52B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.cpp in Sources */,
 				D4F50BCA2B28A15400C6C364 /* NonModalAlertWindowController.swift in Sources */,
 				D449C6372B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift in Sources */,
 				D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */,
 				D4F50BBC2B28898E00C6C364 /* UpdateChecker.swift in Sources */,
 				D414E3022B29AFD1001863EF /* PreferencesWindowController.swift in Sources */,
 				D449C6432B300FB60060653A /* BasePreferencesViewController.swift in Sources */,
+				D4AF7DC02B30A7DD0025DAAF /* OVLoaderServiceImpl.mm in Sources */,
 				D4F50BC02B289C8C00C6C364 /* AppDelegate.swift in Sources */,
+				D4AF7DC62B30A7DD0025DAAF /* OVCandidateServiceImpl.mm in Sources */,
+				D4AF7DC82B30A7DD0025DAAF /* OVCandidateListImpl.mm in Sources */,
 				D449C6392B2F68D90060653A /* TableBasedModulePreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -864,6 +960,18 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/OpenVanilla;
 		};
+		D4AF7DCA2B30A8B90025DAAF /* XCLocalSwiftPackageReference "Packages/Voltaire" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Voltaire;
+		};
+		D4AF7DCB2B30A8C50025DAAF /* XCLocalSwiftPackageReference "Packages/VXHanConvert" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/VXHanConvert;
+		};
+		D4AF7DCC2B30A8DB0025DAAF /* XCLocalSwiftPackageReference "Packages/Tooltip" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Tooltip;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -871,6 +979,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D46CD4BF2B21943300AEBCA6 /* XCLocalSwiftPackageReference "Packages/OpenVanilla" */;
 			productName = OpenVanilla;
+		};
+		D4AF7DCD2B30A97F0025DAAF /* Voltaire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4AF7DCA2B30A8B90025DAAF /* XCLocalSwiftPackageReference "Packages/Voltaire" */;
+			productName = Voltaire;
+		};
+		D4AF7DCF2B30A97F0025DAAF /* VXHanConvert */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4AF7DCB2B30A8C50025DAAF /* XCLocalSwiftPackageReference "Packages/VXHanConvert" */;
+			productName = VXHanConvert;
+		};
+		D4AF7DD12B30A97F0025DAAF /* Tooltip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4AF7DCC2B30A8DB0025DAAF /* XCLocalSwiftPackageReference "Packages/Tooltip" */;
+			productName = Tooltip;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

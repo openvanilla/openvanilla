@@ -10,40 +10,18 @@ let package = Package(
         .library(
             name: "OpenVanilla",
             targets: ["OpenVanilla",
-                      "OVModuleManager",
-                      "OVModuleLoader",
-                      "OpenVanillaImp",
                       "LegacyOpenVanilla",
                       "OVIMBig5Code",
                       "OVIMTableBased",
                       "OVIMArray",
                       "OVAFAssociatedPhrases"]),
     ],
-    dependencies: [.package(path: "../Voltaire"),
-                   .package(path: "../Tooltip"),
-                   .package(path: "../VXHanConvert")],
+    dependencies: [],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "OpenVanilla"),
-        .target(
-            name:"OVModuleManager",
-            dependencies: ["OpenVanilla",
-                           "OVModuleLoader",
-                           "OpenVanillaImp",
-                           "OVIMBig5Code",
-                           "OVIMTableBased",
-                           "OVIMArray",
-                           "OVAFAssociatedPhrases",
-                           "VXHanConvert"]
-            ),
-        .target(
-            name: "OVModuleLoader",
-            dependencies: ["OpenVanilla", "OpenVanillaImp"]),
-        .target(
-            name: "OpenVanillaImp",
-            dependencies: ["OpenVanilla", "Voltaire", "Tooltip"]),
         .target(
             name: "LegacyOpenVanilla",
             dependencies: ["OpenVanilla"]),

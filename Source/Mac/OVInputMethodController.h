@@ -25,13 +25,13 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Cocoa/Cocoa.h>
-#import <InputMethodKit/InputMethodKit.h>
+
+@import Cocoa;
+@import InputMethodKit;
 @import OpenVanilla;
-@import OpenVanillaImp;
-@import OVModuleLoader;
-@import OVModuleManager;
 @import Tooltip;
+
+#import "OVTextBufferImpl.h"
 
 using namespace OpenVanilla;
 

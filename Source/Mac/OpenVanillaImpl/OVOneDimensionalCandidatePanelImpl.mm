@@ -26,8 +26,7 @@
 //
 
 #import "OVOneDimensionalCandidatePanelImpl.h"
-#import "VTHorizontalCandidateController.h"
-#import "VTVerticalCandidateController.h"
+@import Voltaire;
 
 using namespace OpenVanilla;
 

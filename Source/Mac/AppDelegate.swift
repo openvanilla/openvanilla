@@ -23,7 +23,6 @@
 //
 
 import Foundation
-import OVModuleManager
 
 @objc (OVAppDelegate)
 class AppDelegate: NSObject, NSApplicationDelegate {

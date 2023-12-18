@@ -23,8 +23,6 @@
 //
 
 import Foundation
-import OVModuleManager
-import OpenVanillaImp
 
 @objc (OVTableBasedModulePreferencesViewController)
 class TableBasedModulePreferencesViewController: BaseModulePreferencesViewController {

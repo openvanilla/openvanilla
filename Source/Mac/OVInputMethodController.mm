@@ -27,6 +27,13 @@
 
 #import "OVInputMethodController.h"
 #import "OpenVanilla-Swift.h"
+#import "OVTextBufferImpl.h"
+#import "OVLoaderServiceImpl.h"
+#import "OVCandidateServiceImpl.h"
+#import "OVTextBufferCombinator.h"
+#import "OVToolTipWindowController.h"
+#import "OVModuleManager.h"
+#import "OVConstants.h"
 
 @interface OVInputMethodController ()
 - (BOOL)handleOVKey:(OVKey &)key client:(id)client;

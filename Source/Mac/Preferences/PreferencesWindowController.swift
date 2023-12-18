@@ -1,5 +1,4 @@
 import Foundation
-import OVModuleManager
 
 private let kGeneralSettingIdentifier = "GeneralSettingIdentifier"
 private let kAssociatedPhrasesSettingIdentifier = "org.openvanilla.OVAFAssociatedPhrases"

@@ -23,8 +23,6 @@
 //
 
 import Foundation
-import OpenVanillaImp
-import OVModuleManager
 
 @objc (OVAddTableBasedInputMethodViewController)
 class AddTableBasedInputMethodViewController: BasePreferencesViewController {
