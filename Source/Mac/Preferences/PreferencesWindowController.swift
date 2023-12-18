@@ -1,3 +1,27 @@
+// Copyright (c) 2004-2012 Lukhnos Liu (lukhnos at openvanilla dot org)
+//
+// Permission is hereby granted, free of charge, to any person
+// obtaining a copy of this software and associated documentation
+// files (the "Software"), to deal in the Software without
+// restriction, including without limitation the rights to use,
+// copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following
+// conditions:
+//
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+// OTHER DEALINGS IN THE SOFTWARE.
+//
+
 import Foundation
 
 private let kGeneralSettingIdentifier = "GeneralSettingIdentifier"
@@ -8,7 +32,7 @@ typealias PreferencesItem = (identifier: String,
                              localizedName: String,
                              viewController: BasePreferencesViewController)
 
-@objc(OVPreferencesWindowController)
+@objc (OVPreferencesWindowController)
 class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var modulePreferencesContainerView: NSView!
@@ -17,11 +41,11 @@ class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var tableBasedModulePreferencesViewController: BasePreferencesViewController!
     @IBOutlet weak var arrayModulePreferencesViewController: BasePreferencesViewController!
     @IBOutlet weak var addTableBasedInputMethodViewController: BasePreferencesViewController!
-
+    
     private var items: [PreferencesItem] = []
-    private var localizableObjects: [NSValue:String] = [:]
+    private var localizableObjects: [NSValue: String] = [:]
     private weak var currentPreferencesViewController: BasePreferencesViewController?
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -31,17 +55,17 @@ class PreferencesWindowController: NSWindowController {
         window?.center()
         window?.delegate = self
         reload(nil)
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: NSNotification.Name("OVModuleManagerDidReloadNotification"), object: nil)
         (addTableBasedInputMethodViewController as? AddTableBasedInputMethodViewController)?.preferencesWindowController = self
-
+        
         localizableObjects.removeAll()
-
-        func ListTitlesInView( _ view: NSView) {
+        
+        func ListTitlesInView(_ view: NSView) {
             if view is NSPopUpButton {
                 return
             }
-            if let view = view as? NSTextField{
+            if let view = view as? NSTextField {
                 if !view.isEditable {
                     localizableObjects[NSValue(nonretainedObject: view)] = view.stringValue
                     return
@@ -59,11 +83,12 @@ class PreferencesWindowController: NSWindowController {
                     localizableObjects[NSValue(nonretainedObject: view)] = title
                 }
             }
-
+            
             for subview in view.subviews {
                 ListTitlesInView(subview)
             }
         }
+        
         ListTitlesInView(generalPreferencesViewController.view)
         ListTitlesInView(associatedPhrasesPreferencesViewController.view)
         ListTitlesInView(tableBasedModulePreferencesViewController.view)
@@ -71,12 +96,12 @@ class PreferencesWindowController: NSWindowController {
         ListTitlesInView(addTableBasedInputMethodViewController.view)
         updateLocalization()
     }
-
+    
     // MARK: - Private methods
-
-    @objc(selectInputMethodIdentifier:)
+    
+    @objc (selectInputMethodIdentifier:)
     func select(inputMethodIdentifier identifier: String) {
-
+        
         for (index, element) in items.enumerated() {
             let elementIdentifier = element.0
             if identifier == elementIdentifier {
@@ -86,14 +111,14 @@ class PreferencesWindowController: NSWindowController {
             }
         }
     }
-
+    
     @objc
     func reload(_ notification: Notification?) {
         items.removeAll()
         tableView.deselectAll(self)
         items.append((kGeneralSettingIdentifier, "General Settings", generalPreferencesViewController))
         items.append((kAssociatedPhrasesSettingIdentifier, "Associated Phrases", associatedPhrasesPreferencesViewController))
-
+        
         let identifiers = OVModuleManager.default().inputMethodIdentifiers
         for moduleIdentifier in identifiers {
             if OVModuleManager.default().isTableBasedInputMethodIdentifier(moduleIdentifier) {
@@ -102,17 +127,17 @@ class PreferencesWindowController: NSWindowController {
                               tableBasedModulePreferencesViewController))
             }
         }
-
+        
         items.append((arrayModulePreferencesViewController.moduleIdentifier ?? "",
                       OVModuleManager.default().localizedInputMethodName(arrayModulePreferencesViewController.moduleIdentifier ?? ""),
                       arrayModulePreferencesViewController))
-
-        items.append((kAddInputMethodIdentifier, "Add New Input Method",  addTableBasedInputMethodViewController))
-
+        
+        items.append((kAddInputMethodIdentifier, "Add New Input Method", addTableBasedInputMethodViewController))
+        
         tableView.reloadData()
         tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
     }
-
+    
     private func updateLocalization() {
         for value in localizableObjects.keys {
             guard let view = value.nonretainedObjectValue as? NSView,
@@ -120,9 +145,9 @@ class PreferencesWindowController: NSWindowController {
             else {
                 continue
             }
-
+            
             let text = NSLocalizedString(dictKey, comment: "")
-
+            
             if let view = view as? NSTextField {
                 if !view.isEditable {
                     view.stringValue = text
@@ -135,7 +160,7 @@ class PreferencesWindowController: NSWindowController {
             }
         }
     }
-
+    
 }
 
 extension PreferencesWindowController: NSWindowDelegate {
@@ -166,13 +191,13 @@ extension PreferencesWindowController: NSTableViewDataSource, NSTableViewDelegat
         let title = String(format: NSLocalizedString("OpenVanilla - %@", comment: ""), item.localizedName)
         window?.title = title
     }
-
+    
     func numberOfRows(in tableView: NSTableView) -> Int {
         items.count
     }
-
+    
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         items[row].localizedName
     }
-
+    
 }

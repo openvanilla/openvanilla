@@ -81,4 +81,5 @@
     OSStatus status = TISRegisterInputSource((__bridge CFURLRef)inBundleURL);
     return status == noErr;
 }
+
 @end

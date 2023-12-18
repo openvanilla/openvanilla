@@ -41,12 +41,12 @@
 
 @interface OVCanInstall ()
 @property (readwrite, assign) BOOL willOverrideBuiltInTable;
-@property (readwrite, strong) NSString * identifierIfInstalled;
-@property (readwrite, strong) NSString * localizedNameIfInstalled;
+@property (readwrite, strong) NSString *identifierIfInstalled;
+@property (readwrite, strong) NSString *localizedNameIfInstalled;
 @end
 
-@interface OVCanNotInstall()
-@property (readwrite, strong) NSError * error;
+@interface OVCanNotInstall ()
+@property (readwrite, strong) NSError *error;
 @end
 
 
@@ -55,8 +55,7 @@ extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification = @
 
 using namespace OpenVanilla;
 
-static string InputMethodConfigIdentifier(const string& identifier)
-{
+static string InputMethodConfigIdentifier(const string &identifier) {
     if (identifier.find(".") != string::npos) {
         return identifier;
     }
@@ -73,14 +72,16 @@ static string InputMethodConfigIdentifier(const string& identifier)
 - (NSString *)rootPathForCustomInputMethodTables;
 - (BOOL)canSelectInputMethod:(NSString *)identifier;
 - (void)handleLocaleChangeNotification:(NSNotification *)aNotification;
-@property (assign) OVInputMethodMap* inputMethodMap;
+
+@property (assign) OVInputMethodMap *inputMethodMap;
 @end
 
 @implementation OVModuleManager
 @dynamic activeInputMethodIdentifier;
 @dynamic sharedAlphanumericKeyboardLayoutIdentifier;
 
-- (NSArray *)inputMethodIdentifiers {
+- (NSArray *)inputMethodIdentifiers
+{
     return _inputMethodIdentifiers;
 }
 
@@ -202,8 +203,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
     _activeInputMethod = 0;
     _inputMethodMap->clear();
 
-    vector<OVInputMethod*> inputMethods;
-    map<OVInputMethod*, string> customTableInputMethodTableNameMap;
+    vector<OVInputMethod *> inputMethods;
+    map<OVInputMethod *, string> customTableInputMethodTableNameMap;
     NSMutableSet *customTableNames = [NSMutableSet set];
 
     NSString *userTableRoot = [self rootPathForCustomInputMethodTables];
@@ -224,13 +225,13 @@ static string InputMethodConfigIdentifier(const string& identifier)
     }
 
     NSArray *basicTables = [NSArray arrayWithObjects:
-                            @"cj.cin",
-                            @"simplex.cin",
-                            @"dayi3.cin",
-                            @"jyutping.cin",
-                            @"jyutping-toneless.cin",
-                            @"ehq-symbols.cin",
-                            nil];
+            @"cj.cin",
+            @"simplex.cin",
+            @"dayi3.cin",
+            @"jyutping.cin",
+            @"jyutping-toneless.cin",
+            @"ehq-symbols.cin",
+                    nil];
     NSString *tableRoot = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataTables/TableBased"];
 
     for (NSString *tableName in basicTables) {
@@ -250,8 +251,8 @@ static string InputMethodConfigIdentifier(const string& identifier)
     OVInputMethod *big5Code = new OpenVanilla::OVIMBig5Code();
     inputMethods.push_back(big5Code);
 
-    for (vector<OVInputMethod*>::iterator i = inputMethods.begin(), e = inputMethods.end(); i != e; ++i) {
-        OVInputMethod* inputMethod = *i;
+    for (vector<OVInputMethod *>::iterator i = inputMethods.begin(), e = inputMethods.end(); i != e; ++i) {
+        OVInputMethod *inputMethod = *i;
         OVPathInfo info;
 
         // TODO: furnish path info for dynamically-loaded bundles (if supported in the future)
@@ -265,7 +266,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
             _inputMethodMap->operator[](identifier) = inputMethod;
             [_inputMethodIdentifiers addObject:idNSStr];
 
-            map<OVInputMethod*, string>::iterator f = customTableInputMethodTableNameMap.find(inputMethod);
+            map<OVInputMethod *, string>::iterator f = customTableInputMethodTableNameMap.find(inputMethod);
             if (f != customTableInputMethodTableNameMap.end()) {
                 NSString *tableName = [NSString stringWithUTF8String:(*f).second.c_str()];
                 [_customTableBasedInputMethodIdentifierTableNameMap setObject:tableName forKey:idNSStr];
@@ -380,7 +381,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
     return [identifier hasPrefix:@"org.openvanilla.OVIMTableBased."];
 }
 
-- (id<ONCanInstallChekResult>)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path
+- (id <ONCanInstallChekResult>)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path
 {
     const char *posixPath = [path fileSystemRepresentation];
 
@@ -600,6 +601,7 @@ static string InputMethodConfigIdentifier(const string& identifier)
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:OVAssociatedPhrasesAroundFilterEnabledKey];
 }
+
 - (void)setAssociatedPhrasesAroundFilterEnabled:(BOOL)associatedPhrasesAroundFilterEnabled
 {
     [[NSUserDefaults standardUserDefaults] setBool:associatedPhrasesAroundFilterEnabled forKey:OVAssociatedPhrasesAroundFilterEnabledKey];
