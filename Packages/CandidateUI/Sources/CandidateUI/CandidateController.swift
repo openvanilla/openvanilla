@@ -28,6 +28,7 @@ public class CandidateKeyLabel: NSObject {
     @objc public private(set) var key: String
     @objc public private(set) var displayedText: String
 
+    @objc
     public init(key: String, displayedText: String) {
         self.key = key
         self.displayedText = displayedText

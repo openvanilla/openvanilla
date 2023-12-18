@@ -359,7 +359,9 @@ void OVOneDimensionalCandidatePanelImpl::setCandidateKeys(const OVKeyVector& key
     m_candidateKeys = keys;
     NSMutableArray *labels = [NSMutableArray array];
     for (OVKeyVector::const_iterator i = keys.begin(), e = keys.end(); i != e; ++i) {
-        [labels addObject:[NSString stringWithUTF8String:(*i).receivedString().c_str()]];
+        NSString *key = [NSString stringWithUTF8String:(*i).receivedString().c_str()];
+        VTCandidateKeyLabel *label = [[VTCandidateKeyLabel alloc] initWithKey:key displayedText:key];
+        [labels addObject:label];
     }
 
     m_candidateController.keyLabels = labels;
@@ -555,7 +557,9 @@ void OVOneDimensionalCandidatePanelImpl::setCandidateKeysAndLabels(const vector<
     NSMutableArray *labels = [NSMutableArray array];
     for (const auto& keyLabelPair : keyLabelPairs) {
         keys.push_back(keyLabelPair.first);
-        [labels addObject:[NSString stringWithUTF8String:keyLabelPair.second.c_str()]];
+        NSString *key = [NSString stringWithUTF8String:keyLabelPair.second.c_str()];
+        VTCandidateKeyLabel *label = [[VTCandidateKeyLabel alloc] initWithKey:key displayedText:key];
+        [labels addObject:label];
     }
 
     m_candidateKeys = keys;

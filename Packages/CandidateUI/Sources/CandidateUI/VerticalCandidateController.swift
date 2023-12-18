@@ -501,6 +501,7 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
             scrollerWidth = NSScroller.scrollerWidth(for: .regular, scrollerStyle: NSScroller.preferredScrollerStyle)
         }
 
+        print("keyLabels \(keyLabels)")
         keyLabelStripView.keyLabelFont = keyLabelFont
         let actualKeyLabels = keyLabels[0..<Int(keyLabelCount)].map { $0.displayedText }
         keyLabelStripView.keyLabels = actualKeyLabels
