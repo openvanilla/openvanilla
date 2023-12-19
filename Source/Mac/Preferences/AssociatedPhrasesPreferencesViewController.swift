@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import Cocoa
 
 fileprivate var kModuleIdentifier = "org.openvanilla.OVAFAssociatedPhrases"
 

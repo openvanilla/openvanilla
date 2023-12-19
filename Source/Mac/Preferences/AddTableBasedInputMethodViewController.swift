@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import Cocoa
 
 @objc (OVAddTableBasedInputMethodViewController)
 class AddTableBasedInputMethodViewController: BasePreferencesViewController {

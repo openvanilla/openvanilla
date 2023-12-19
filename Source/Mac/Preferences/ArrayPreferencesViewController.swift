@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import Cocoa
 
 private let kArrayModuleIdentifier = "org.openvanilla.OVIMArray"
 

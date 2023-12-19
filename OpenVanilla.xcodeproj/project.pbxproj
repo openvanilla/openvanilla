@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6A0E0ACE1623EDF5004FED10 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0E0ABE1623EDF5004FED10 /* AppDelegate.m */; };
 		6A0E0ACF1623EDF5004FED10 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A0E0ABF1623EDF5004FED10 /* InfoPlist.strings */; };
 		6A0E0AD01623EDF5004FED10 /* License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6A0E0AC11623EDF5004FED10 /* License.rtf */; };
 		6A0E0AD11623EDF5004FED10 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A0E0AC31623EDF5004FED10 /* Localizable.strings */; };
 		6A0E0AD21623EDF5004FED10 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A0E0AC51623EDF5004FED10 /* MainMenu.xib */; };
-		6A0E0AD41623EDF5004FED10 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0E0AC91623EDF5004FED10 /* main.m */; };
 		6A0E0AD61623EEDB004FED10 /* OpenVanilla.app in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */; };
 		6A12FD5C1E2D323400CA5AEE /* jyutping-toneless.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A12FD581E2D31EA00CA5AEE /* jyutping-toneless.cin */; };
 		6A12FD5D1E2D323700CA5AEE /* jyutping.cin in Copy TableBased Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A12FD591E2D31EA00CA5AEE /* jyutping.cin */; };
@@ -26,24 +24,26 @@
 		6A88323B1605C2D200FBEB85 /* array-shortcode.cin in Copy Array Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A8832341605C1FE00FBEB85 /* array-shortcode.cin */; };
 		6A88323C1605C2D600FBEB85 /* array-special.cin in Copy Array Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A8832351605C1FE00FBEB85 /* array-special.cin */; };
 		6A88323D1605C2D800FBEB85 /* array30.cin in Copy Array Input Method Tables */ = {isa = PBXBuildFile; fileRef = 6A8832361605C1FE00FBEB85 /* array30.cin */; };
-		6AA7C2AB274F490400B84443 /* OVInputSourceHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.mm */; };
 		6AA7C2AD274F4FC000B84443 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAEF415CD58F90080EE7D /* Cocoa.framework */; };
 		6AA7C2AE274F4FC900B84443 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */; };
 		6AA7C2AF274F4FF000B84443 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */; };
 		6AB4A07815ED2BBA00E78557 /* preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AB4A07715ED2BBA00E78557 /* preferences.xib */; };
 		6ABBAEF515CD58F90080EE7D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAEF415CD58F90080EE7D /* Cocoa.framework */; };
 		6ABBAEFF15CD58F90080EE7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAEFD15CD58F90080EE7D /* InfoPlist.strings */; };
-		6ABBAF0115CD58F90080EE7D /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0015CD58F90080EE7D /* main.mm */; };
 		6ABBAF0B15CD58F90080EE7D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF0915CD58F90080EE7D /* MainMenu.xib */; };
-		6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.mm */; };
 		6ABBAF2815CD617D0080EE7D /* OpenVanilla-InputMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */; };
 		6ABBAF2A15CD61B60080EE7D /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */; };
 		6ABBAF2C15CD61BE0080EE7D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */; };
 		6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */; };
-		6ACD128623688A23005046C7 /* ArchiveUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACD128423688A23005046C7 /* ArchiveUtil.m */; };
 		6ACD128823688A32005046C7 /* NotarizedArchives in Resources */ = {isa = PBXBuildFile; fileRef = 6ACD128723688A32005046C7 /* NotarizedArchives */; };
 		6AECB188253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */; };
 		6AECB189253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */; };
+		D40E28FF2B31D17D00EBD97C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E28FE2B31D17D00EBD97C /* main.swift */; };
+		D40E29022B31D1AE00EBD97C /* InputSourceHelper in Frameworks */ = {isa = PBXBuildFile; productRef = D40E29012B31D1AE00EBD97C /* InputSourceHelper */; };
+		D40E29062B31D28500EBD97C /* ArchiveUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E29042B31D28500EBD97C /* ArchiveUtil.swift */; };
+		D40E29072B31D28500EBD97C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E29052B31D28500EBD97C /* AppDelegate.swift */; };
+		D40E29092B31D2C900EBD97C /* InputSourceHelper in Frameworks */ = {isa = PBXBuildFile; productRef = D40E29082B31D2C900EBD97C /* InputSourceHelper */; };
+		D40E290C2B31D38B00EBD97C /* BundleTranslocate.m in Sources */ = {isa = PBXBuildFile; fileRef = D40E290B2B31D38B00EBD97C /* BundleTranslocate.m */; };
 		D414E3022B29AFD1001863EF /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414E3012B29AFD1001863EF /* PreferencesWindowController.swift */; };
 		D414E3042B2A2624001863EF /* AddTableBasedInputMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414E3032B2A2624001863EF /* AddTableBasedInputMethodViewController.swift */; };
 		D449C6372B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6362B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift */; };
@@ -131,14 +131,11 @@
 		6A0E0AA31623EDAA004FED10 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		6A0E0AA41623EDAA004FED10 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6A0E0AA51623EDAA004FED10 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		6A0E0ABD1623EDF5004FED10 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		6A0E0ABE1623EDF5004FED10 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6A0E0AC01623EDF5004FED10 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A0E0AC21623EDF5004FED10 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/License.rtf; sourceTree = "<group>"; };
 		6A0E0AC41623EDF5004FED10 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6A0E0AC71623EDF5004FED10 /* OpenVanillaInstaller-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "OpenVanillaInstaller-Info.plist"; sourceTree = "<group>"; };
 		6A0E0AC81623EDF5004FED10 /* OpenVanillaInstaller-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenVanillaInstaller-Prefix.pch"; sourceTree = "<group>"; };
-		6A0E0AC91623EDF5004FED10 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6A0E0ACA1623EDF5004FED10 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6A0E0ACB1623EDF5004FED10 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hant"; path = "zh-Hant.lproj/License.rtf"; sourceTree = "<group>"; };
 		6A0E0ACC1623EDF5004FED10 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -163,19 +160,14 @@
 		6ABBAEF415CD58F90080EE7D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		6ABBAEFC15CD58F90080EE7D /* OpenVanilla-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenVanilla-Info.plist"; sourceTree = "<group>"; };
 		6ABBAEFE15CD58F90080EE7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6ABBAF0015CD58F90080EE7D /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		6ABBAF0215CD58F90080EE7D /* OpenVanilla-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanilla-Prefix.pch"; sourceTree = "<group>"; };
 		6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVInputMethodController.h; sourceTree = "<group>"; };
-		6ABBAF1F15CD615B0080EE7D /* OVInputSourceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVInputSourceHelper.h; sourceTree = "<group>"; };
-		6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVInputSourceHelper.mm; sourceTree = "<group>"; };
 		6ABBAF2615CD617D0080EE7D /* OpenVanilla-InputMenu.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "OpenVanilla-InputMenu.tiff"; path = "Images/OpenVanilla-InputMenu.tiff"; sourceTree = SOURCE_ROOT; };
 		6ABBAF2915CD61B60080EE7D /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = System/Library/Frameworks/InputMethodKit.framework; sourceTree = SDKROOT; };
 		6ABBAF2B15CD61BE0080EE7D /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		6AC9E19321AB554000AF6B69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		6AC9E19421AB554000AF6B69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVInputMethodController.mm; sourceTree = "<group>"; };
-		6ACD128423688A23005046C7 /* ArchiveUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveUtil.m; sourceTree = "<group>"; };
-		6ACD128523688A23005046C7 /* ArchiveUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveUtil.h; sourceTree = "<group>"; };
 		6ACD128723688A32005046C7 /* NotarizedArchives */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NotarizedArchives; sourceTree = "<group>"; };
 		6AD4989E163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6AD4989F163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
@@ -185,6 +177,12 @@
 		6AD498A3163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6AD498A4163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
 		6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = OpenVanilla.xcassets; path = Images/OpenVanilla.xcassets; sourceTree = SOURCE_ROOT; };
+		D40E28FE2B31D17D00EBD97C /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D40E29032B31D28400EBD97C /* OpenVanillaInstaller-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanillaInstaller-Bridging-Header.h"; sourceTree = "<group>"; };
+		D40E29042B31D28500EBD97C /* ArchiveUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveUtil.swift; sourceTree = "<group>"; };
+		D40E29052B31D28500EBD97C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D40E290A2B31D38B00EBD97C /* BundleTranslocate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundleTranslocate.h; sourceTree = "<group>"; };
+		D40E290B2B31D38B00EBD97C /* BundleTranslocate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BundleTranslocate.m; sourceTree = "<group>"; };
 		D414E3012B29AFD1001863EF /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		D414E3032B2A2624001863EF /* AddTableBasedInputMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableBasedInputMethodViewController.swift; sourceTree = "<group>"; };
 		D449C6362B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociatedPhrasesPreferencesViewController.swift; sourceTree = "<group>"; };
@@ -228,6 +226,7 @@
 			files = (
 				6AA7C2AF274F4FF000B84443 /* Carbon.framework in Frameworks */,
 				6AA7C2AE274F4FC900B84443 /* InputMethodKit.framework in Frameworks */,
+				D40E29092B31D2C900EBD97C /* InputSourceHelper in Frameworks */,
 				6AA7C2AD274F4FC000B84443 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,6 +237,7 @@
 			files = (
 				D4EE860B2B30B4CE00B3BFC9 /* TooltipUI in Frameworks */,
 				D46CD4CC2B21A21B00AEBCA6 /* OpenVanilla in Frameworks */,
+				D40E29022B31D1AE00EBD97C /* InputSourceHelper in Frameworks */,
 				D4EE86072B30B4CE00B3BFC9 /* VXHanConvert in Frameworks */,
 				D4EE86092B30B4CE00B3BFC9 /* CandidateUI in Frameworks */,
 				6ABBAF2C15CD61BE0080EE7D /* Carbon.framework in Frameworks */,
@@ -263,17 +263,17 @@
 			isa = PBXGroup;
 			children = (
 				6ACD128723688A32005046C7 /* NotarizedArchives */,
-				6A0E0ABD1623EDF5004FED10 /* AppDelegate.h */,
-				6A0E0ABE1623EDF5004FED10 /* AppDelegate.m */,
-				6ACD128523688A23005046C7 /* ArchiveUtil.h */,
-				6ACD128423688A23005046C7 /* ArchiveUtil.m */,
+				D40E29052B31D28500EBD97C /* AppDelegate.swift */,
+				D40E29042B31D28500EBD97C /* ArchiveUtil.swift */,
+				D40E290A2B31D38B00EBD97C /* BundleTranslocate.h */,
+				D40E290B2B31D38B00EBD97C /* BundleTranslocate.m */,
 				6A0E0ABF1623EDF5004FED10 /* InfoPlist.strings */,
 				6A0E0AC11623EDF5004FED10 /* License.rtf */,
 				6A0E0AC31623EDF5004FED10 /* Localizable.strings */,
 				6A0E0AC51623EDF5004FED10 /* MainMenu.xib */,
 				6A0E0AC71623EDF5004FED10 /* OpenVanillaInstaller-Info.plist */,
 				6A0E0AC81623EDF5004FED10 /* OpenVanillaInstaller-Prefix.pch */,
-				6A0E0AC91623EDF5004FED10 /* main.m */,
+				D40E29032B31D28400EBD97C /* OpenVanillaInstaller-Bridging-Header.h */,
 			);
 			name = Installer;
 			path = Source/Mac/Installer;
@@ -352,11 +352,10 @@
 				D4F50BBF2B289C8C00C6C364 /* AppDelegate.swift */,
 				6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */,
 				6ACB49C215E49EA700380B82 /* OVInputMethodController.mm */,
-				6ABBAF1F15CD615B0080EE7D /* OVInputSourceHelper.h */,
-				6ABBAF2015CD615B0080EE7D /* OVInputSourceHelper.mm */,
 				D4F50BC82B28A15300C6C364 /* NonModalAlertWindowController.swift */,
 				D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */,
 				D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */,
+				D40E28FE2B31D17D00EBD97C /* main.swift */,
 				6ABBAF2415CD61680080EE7D /* Resources */,
 				6ABBAEFB15CD58F90080EE7D /* Supporting Files */,
 			);
@@ -370,7 +369,6 @@
 				D4F50BBA2B28898D00C6C364 /* OpenVanilla-Bridging-Header.h */,
 				6ABBAEFC15CD58F90080EE7D /* OpenVanilla-Info.plist */,
 				6ABBAEFD15CD58F90080EE7D /* InfoPlist.strings */,
-				6ABBAF0015CD58F90080EE7D /* main.mm */,
 				6ABBAF0215CD58F90080EE7D /* OpenVanilla-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -474,6 +472,9 @@
 				6A0E0AD81623EF95004FED10 /* PBXTargetDependency */,
 			);
 			name = OpenVanillaInstaller;
+			packageProductDependencies = (
+				D40E29082B31D2C900EBD97C /* InputSourceHelper */,
+			);
 			productName = OpenVanillaInstaller;
 			productReference = 6A0E0A9F1623EDA9004FED10 /* OpenVanillaInstaller.app */;
 			productType = "com.apple.product-type.application";
@@ -499,6 +500,7 @@
 				D4EE86062B30B4CE00B3BFC9 /* VXHanConvert */,
 				D4EE86082B30B4CE00B3BFC9 /* CandidateUI */,
 				D4EE860A2B30B4CE00B3BFC9 /* TooltipUI */,
+				D40E29012B31D1AE00EBD97C /* InputSourceHelper */,
 			);
 			productName = OpenVanilla;
 			productReference = 6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */;
@@ -515,6 +517,9 @@
 				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = "The OpenVanilla Project";
 				TargetAttributes = {
+					6A0E0A9E1623EDA9004FED10 = {
+						LastSwiftMigration = 1500;
+					};
 					6ABBAEEF15CD58F90080EE7D = {
 						LastSwiftMigration = 1500;
 					};
@@ -536,6 +541,7 @@
 				D4EE86032B30B48D00B3BFC9 /* XCLocalSwiftPackageReference "Packages/VXHanConvert" */,
 				D4EE86042B30B49900B3BFC9 /* XCLocalSwiftPackageReference "Packages/CandidateUI" */,
 				D4EE86052B30B4A500B3BFC9 /* XCLocalSwiftPackageReference "Packages/TooltipUI" */,
+				D40E29002B31D1A000EBD97C /* XCLocalSwiftPackageReference "Packages/InputSourceHelper" */,
 			);
 			productRefGroup = 6ABBAEF115CD58F90080EE7D /* Products */;
 			projectDirPath = "";
@@ -604,10 +610,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A0E0ACE1623EDF5004FED10 /* AppDelegate.m in Sources */,
-				6ACD128623688A23005046C7 /* ArchiveUtil.m in Sources */,
-				6AA7C2AB274F490400B84443 /* OVInputSourceHelper.mm in Sources */,
-				6A0E0AD41623EDF5004FED10 /* main.m in Sources */,
+				D40E29072B31D28500EBD97C /* AppDelegate.swift in Sources */,
+				D40E29062B31D28500EBD97C /* ArchiveUtil.swift in Sources */,
+				D40E290C2B31D38B00EBD97C /* BundleTranslocate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,8 +620,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6ABBAF0115CD58F90080EE7D /* main.mm in Sources */,
-				6ABBAF2315CD615B0080EE7D /* OVInputSourceHelper.mm in Sources */,
 				6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */,
 				D4AF7DC42B30A7DD0025DAAF /* OVTextBufferCombinator.mm in Sources */,
 				D449C63F2B2FFA260060653A /* GeneralPreferencesViewController.swift in Sources */,
@@ -629,6 +632,7 @@
 				D449C6412B3009DC0060653A /* BaseModulePreferencesViewController.swift in Sources */,
 				D414E3042B2A2624001863EF /* AddTableBasedInputMethodViewController.swift in Sources */,
 				D4AF7DC52B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.cpp in Sources */,
+				D40E28FF2B31D17D00EBD97C /* main.swift in Sources */,
 				D4F50BCA2B28A15400C6C364 /* NonModalAlertWindowController.swift in Sources */,
 				D449C6372B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift in Sources */,
 				D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */,
@@ -732,6 +736,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -746,6 +751,9 @@
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openvanilla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Source/Mac/Installer/OpenVanillaInstaller-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -755,6 +763,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -769,6 +778,8 @@
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openvanilla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Source/Mac/Installer/OpenVanillaInstaller-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -958,6 +969,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		D40E29002B31D1A000EBD97C /* XCLocalSwiftPackageReference "Packages/InputSourceHelper" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/InputSourceHelper;
+		};
 		D46CD4BF2B21943300AEBCA6 /* XCLocalSwiftPackageReference "Packages/OpenVanilla" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/OpenVanilla;
@@ -977,6 +992,16 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D40E29012B31D1AE00EBD97C /* InputSourceHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D40E29002B31D1A000EBD97C /* XCLocalSwiftPackageReference "Packages/InputSourceHelper" */;
+			productName = InputSourceHelper;
+		};
+		D40E29082B31D2C900EBD97C /* InputSourceHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D40E29002B31D1A000EBD97C /* XCLocalSwiftPackageReference "Packages/InputSourceHelper" */;
+			productName = InputSourceHelper;
+		};
 		D46CD4CB2B21A21B00AEBCA6 /* OpenVanilla */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D46CD4BF2B21943300AEBCA6 /* XCLocalSwiftPackageReference "Packages/OpenVanilla" */;

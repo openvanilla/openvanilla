@@ -1,8 +1,5 @@
+// Copyright (c) 2022 and onwards The McBopomofo Authors.
 //
-// OVInputSourceHelper.h
-//
-// Copyright (c) 2010-2011 Lukhnos D. Liu (lukhnos at openvanilla dot org)
-// 
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -23,28 +20,13 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-//
 
-#import <InputMethodKit/InputMethodKit.h>
+@import Cocoa;
 
-@interface OVInputSourceHelper : NSObject
-// list all installed input sources
-+ (NSArray *)allInstalledInputSources;
+NS_ASSUME_NONNULL_BEGIN
 
-// search for a certain input source
-+ (TISInputSourceRef)inputSourceForProperty:(CFStringRef)inPropertyKey stringValue:(NSString *)inValue;
+// Determines if an app is translocated by Gatekeeper to a randomized path
+// See https://weblog.rogueamoeba.com/2016/06/29/sierra-and-gatekeeper-path-randomization/
+BOOL appBundleTranslocatedToARandomizedPath(NSString *bundle);
 
-// shorthand for -inputSourceForProerty:kTISPropertyInputSourceID stringValue:<value>
-+ (TISInputSourceRef)inputSourceForInputSourceID:(NSString *)inID;
-
-// enable/disable an input source (along with all its input modes)
-+ (BOOL)inputSourceEnabled:(TISInputSourceRef)inInputSource;
-
-+ (BOOL)enableInputSource:(TISInputSourceRef)inInputSource;
-
-+ (BOOL)disableInputSource:(TISInputSourceRef)inInputSource;
-
-// register (i.e. make available to Input Source tab in Language & Text Preferences)
-// an input source installed in (~)/Library/Input Methods or (~)/Library/Keyboard Layouts/
-+ (BOOL)registerInputSource:(NSURL *)inBundleURL;
-@end
+NS_ASSUME_NONNULL_END

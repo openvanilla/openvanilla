@@ -1,4 +1,5 @@
 import Foundation
+import Cocoa
 
 extension Notification.Name {
     static let UpdateCheckerDidFinishChecking = Notification.Name("OVUpdateCheckerDidFinishCheckingNotification")

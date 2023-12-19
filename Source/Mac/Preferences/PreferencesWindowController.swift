@@ -23,6 +23,7 @@
 //
 
 import Foundation
+import Cocoa
 
 private let kGeneralSettingIdentifier = "GeneralSettingIdentifier"
 private let kAssociatedPhrasesSettingIdentifier = "org.openvanilla.OVAFAssociatedPhrases"
