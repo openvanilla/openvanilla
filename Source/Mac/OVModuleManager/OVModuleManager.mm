@@ -38,10 +38,6 @@
 
 @import TooltipUI;
 @import VXHanConvert;
-//@import OVIMTableBased;
-//@import OVIMArray;
-//@import OVIMBig5Code;
-//@import OVAFAssociatedPhrases;
 
 @interface OVCanInstall ()
 @property (readwrite, assign) BOOL willOverrideBuiltInTable;
