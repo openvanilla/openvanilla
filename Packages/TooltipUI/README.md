@@ -1,3 +1,3 @@
 # TooltipUI
 
-A description of this package.
+The tooltip window for OpenVanilla/McBopomofo.

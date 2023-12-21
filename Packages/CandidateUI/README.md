@@ -1,3 +1,3 @@
 # CandidateUI
 
-The candidate window for McBopomofo.
+The candidate window for OpenVanilla/McBopomofo.
