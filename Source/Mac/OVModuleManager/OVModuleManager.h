@@ -55,8 +55,6 @@ namespace OpenVanilla {
 
 @interface OVModuleManager : NSObject
 
-+ (OVModuleManager *)defaultManager;
-
 - (void)selectInputMethod:(NSString *)identifier;
 - (NSString *)localizedInputMethodName:(NSString *)identifier;
 - (void)reload;
@@ -71,6 +69,8 @@ namespace OpenVanilla {
 - (BOOL)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError **)error;
 
 - (NSString *)filteredStringWithString:(NSString *)input;
+
+@property (class, readonly) OVModuleManager *defaultManager;
 
 @property (assign, readonly) OpenVanilla::OVLoaderServiceImpl* loaderService;
 @property (assign, readonly) OpenVanilla::OVCandidateServiceImpl* candidateService;

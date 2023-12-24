@@ -54,7 +54,7 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
     override func loadPreferences() {
         super.loadPreferences()
 
-        let manager = OVModuleManager.default()
+        let manager = OVModuleManager.default
         if manager.isCustomTableBasedInputMethod(moduleIdentifier) {
             cusmtomTableBasedInputMethodInfo.stringValue = NSLocalizedString("This is a customized input method.", comment: "")
             removeInputMethodButton.isHidden = false
@@ -125,7 +125,7 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
     }
 
     @IBAction func removeInputMethodAction(_ sender: Any?) {
-        NonModalAlertWindowController.shared.show(title: NSLocalizedString("Confirm Removal", comment: ""), content: String(format: NSLocalizedString("Are you sure you want to remove the input method\"%@\"", comment: ""), OVModuleManager.default().localizedInputMethodName(self.moduleIdentifier)), confirmButtonTitle: NSLocalizedString("Remove", comment: ""), cancelButtonTitle: NSLocalizedString("Cancel", comment: ""), cancelAsDefault: true, delegate: self)
+        NonModalAlertWindowController.shared.show(title: NSLocalizedString("Confirm Removal", comment: ""), content: String(format: NSLocalizedString("Are you sure you want to remove the input method\"%@\"", comment: ""), OVModuleManager.default.localizedInputMethodName(self.moduleIdentifier)), confirmButtonTitle: NSLocalizedString("Remove", comment: ""), cancelButtonTitle: NSLocalizedString("Cancel", comment: ""), cancelAsDefault: true, delegate: self)
     }
 
 }
@@ -136,9 +136,9 @@ extension TableBasedModulePreferencesViewController: NonModalAlertWindowControll
             return
         }
         do {
-            try OVModuleManager.default().removeCustomTableBasedInputMethod(self.moduleIdentifier)
+            try OVModuleManager.default.removeCustomTableBasedInputMethod(self.moduleIdentifier)
         } catch {
-            NonModalAlertWindowController.shared.show(title: NSLocalizedString("Removal Failed", comment: ""), content: String(format: NSLocalizedString("Failed to remove the input method\"%@\".\n\nError: %@", comment: ""), OVModuleManager.default().localizedInputMethodName(self.moduleIdentifier), error.localizedDescription), confirmButtonTitle: NSLocalizedString("Dismiss", comment: ""), cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
+            NonModalAlertWindowController.shared.show(title: NSLocalizedString("Removal Failed", comment: ""), content: String(format: NSLocalizedString("Failed to remove the input method\"%@\".\n\nError: %@", comment: ""), OVModuleManager.default.localizedInputMethodName(self.moduleIdentifier), error.localizedDescription), confirmButtonTitle: NSLocalizedString("Dismiss", comment: ""), cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
         }
     }
 

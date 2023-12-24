@@ -32,10 +32,10 @@ class BasePreferencesViewController: NSViewController {
     var moduleIdentifier: String?
     
     func configureKeyboardLayoutList(_ popUpButton: NSPopUpButton) {
-        let defaultIdentifier = OVModuleManager.default().sharedAlphanumericKeyboardLayoutIdentifier
+        let defaultIdentifier = OVModuleManager.default.sharedAlphanumericKeyboardLayoutIdentifier
         var layoutIdentifier = defaultIdentifier
         if let moduleIdentifier = moduleIdentifier {
-            layoutIdentifier = OVModuleManager.default().alphanumericKeyboardLayout(forInputMethod: moduleIdentifier)
+            layoutIdentifier = OVModuleManager.default.alphanumericKeyboardLayout(forInputMethod: moduleIdentifier)
         }
         
         let list = TISCreateInputSourceList(nil, true).takeRetainedValue() as! [TISInputSource]
@@ -137,7 +137,7 @@ class BasePreferencesViewController: NSViewController {
     
     
     func setSharedAlphanumericKeyboardLayout(_ identifier: String) {
-        OVModuleManager.default().sharedAlphanumericKeyboardLayoutIdentifier = identifier
+        OVModuleManager.default.sharedAlphanumericKeyboardLayoutIdentifier = identifier
     }
     
     func loadPreferences() {

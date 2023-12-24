@@ -133,9 +133,7 @@ class UpdateChecker: NSObject {
 
         }
         connection?.resume()
-
     }
-
 }
 
 

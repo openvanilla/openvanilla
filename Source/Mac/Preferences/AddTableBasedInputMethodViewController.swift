@@ -61,7 +61,7 @@ class AddTableBasedInputMethodViewController: BasePreferencesViewController {
     private func install(path: String) -> Bool {
         let cinPath = path
 
-        let manager = OVModuleManager.default()
+        let manager = OVModuleManager.default
         let canInstall = manager.canInstallCustomTableBasedInputMethod(withTablePath: cinPath)
 
         if canInstall is OVCanNotInstall {
@@ -96,7 +96,7 @@ class AddTableBasedInputMethodViewController: BasePreferencesViewController {
                 return
             }
 
-            let manager = OVModuleManager.default()
+            let manager = OVModuleManager.default
             let canInstall = manager.canInstallCustomTableBasedInputMethod(withTablePath: cinPath)
 
             if canInstall is OVCanNotInstall {

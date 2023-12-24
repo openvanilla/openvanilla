@@ -29,7 +29,8 @@ private let kGeneralSettingIdentifier = "GeneralSettingIdentifier"
 private let kAssociatedPhrasesSettingIdentifier = "org.openvanilla.OVAFAssociatedPhrases"
 private let kAddInputMethodIdentifier = "AddInputMethodIdentifier"
 
-final class Dummy: NSObject {
+// Note: A workaround to suppresses no-selector warnings.
+private final class Dummy: NSObject {
     @objc func title() -> String { "" }
     @objc func setTitle(_ title:String) {}
 }
@@ -112,7 +113,7 @@ class PreferencesWindowController: NSWindowController {
             let elementIdentifier = element.0
             if identifier == elementIdentifier {
                 tableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
-                OVModuleManager.default().selectInputMethod(identifier)
+                OVModuleManager.default.selectInputMethod(identifier)
                 return
             }
         }
@@ -125,17 +126,17 @@ class PreferencesWindowController: NSWindowController {
         items.append((kGeneralSettingIdentifier, NSLocalizedString("General Settings", comment:""), generalPreferencesViewController))
         items.append((kAssociatedPhrasesSettingIdentifier, NSLocalizedString("Associated Phrases", comment:""), associatedPhrasesPreferencesViewController))
 
-        let identifiers = OVModuleManager.default().inputMethodIdentifiers
+        let identifiers = OVModuleManager.default.inputMethodIdentifiers
         for moduleIdentifier in identifiers {
-            if OVModuleManager.default().isTableBasedInputMethodIdentifier(moduleIdentifier) {
+            if OVModuleManager.default.isTableBasedInputMethodIdentifier(moduleIdentifier) {
                 items.append((moduleIdentifier,
-                              OVModuleManager.default().localizedInputMethodName(moduleIdentifier),
+                              OVModuleManager.default.localizedInputMethodName(moduleIdentifier),
                               tableBasedModulePreferencesViewController))
             }
         }
         
         items.append((arrayModulePreferencesViewController.moduleIdentifier ?? "",
-                      OVModuleManager.default().localizedInputMethodName(arrayModulePreferencesViewController.moduleIdentifier ?? ""),
+                      OVModuleManager.default.localizedInputMethodName(arrayModulePreferencesViewController.moduleIdentifier ?? ""),
                       arrayModulePreferencesViewController))
         
         items.append((kAddInputMethodIdentifier, NSLocalizedString("Add New Input Method", comment:""), addTableBasedInputMethodViewController))

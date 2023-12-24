@@ -32,8 +32,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc
     func applicationDidFinishLaunching(_ notification: Notification) {
-        OVModuleManager.default().reload()
-        if AppDelegate.DebugShowPreferencesAfterAppLaunched {
+        OVModuleManager.default.reload()
+        if AppDelegate.debugShowPreferencesAfterAppLaunched {
             showPreferences()
         }
     }
@@ -47,11 +47,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         preferencesWindowController?.window?.orderFront(self)
     }
 
-    private static var DebugShowPreferencesAfterAppLaunched = false
+    private static var debugShowPreferencesAfterAppLaunched = false
 
     @objc (setDebugShowPreferencesAfterAppLaunched:)
     static func setDebugShowPreferencesAfterAppLaunched(show: Bool) {
-        DebugShowPreferencesAfterAppLaunched = show
+        debugShowPreferencesAfterAppLaunched = show
     }
 
 }
