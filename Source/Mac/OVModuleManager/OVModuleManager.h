@@ -56,6 +56,7 @@ namespace OpenVanilla {
 @interface OVModuleManager : NSObject
 
 + (OVModuleManager *)defaultManager;
+
 - (void)selectInputMethod:(NSString *)identifier;
 - (NSString *)localizedInputMethodName:(NSString *)identifier;
 - (void)reload;

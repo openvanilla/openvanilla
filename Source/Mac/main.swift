@@ -1,4 +1,4 @@
-// Copyright (c) 2022 and onwards The McBopomofo Authors.
+// Copyright (c) 2022 and onwards The OpenVanilla Authors.
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -70,7 +70,6 @@ private func install() -> Int32 {
     return 0
 }
 
-let kConnectionName = "McBopomofo_1_Connection"
 
 if CommandLine.arguments.count > 1 {
     if CommandLine.arguments[1] == "install" {
@@ -90,8 +89,8 @@ if !loaded {
     exit(-1)
 }
 
-guard let bundleID = Bundle.main.bundleIdentifier, let server = IMKServer(name: kConnectionName, bundleIdentifier: bundleID) else {
-    NSLog("Fatal error: Cannot initialize input method server with connection \(kConnectionName).")
+guard let bundleID = Bundle.main.bundleIdentifier, let server = IMKServer(name: OVInputMethodConnectionName, bundleIdentifier: bundleID) else {
+    NSLog("Fatal error: Cannot initialize input method server with connection \(OVInputMethodConnectionName).")
     exit(-1)
 }
 

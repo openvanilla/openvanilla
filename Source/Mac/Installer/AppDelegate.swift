@@ -1,4 +1,4 @@
-// Copyright (c) 2022 and onwards The McBopomofo Authors.
+// Copyright (c) 2022 and onwards The OpenVanilla Authors.
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -246,7 +246,7 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
         }
 
         if warning {
-            runAlertPanel(title: NSLocalizedString("Attention", comment: ""), message: NSLocalizedString("McBopomofo is upgraded, but please log out or reboot for the new version to be fully functional.", comment: ""), buttonTitle: NSLocalizedString("OK", comment: ""))
+            runAlertPanel(title: NSLocalizedString("Attention", comment: ""), message: NSLocalizedString("OpenVanilla is upgraded, but please log out or reboot for the new version to be fully functional.", comment: ""), buttonTitle: NSLocalizedString("OK", comment: ""))
             endAppWithDelay()
         } else {
             if !mainInputSourceEnabled && !isMacOS12OrAbove {
@@ -262,7 +262,7 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
                     NSAttributedString.Key.foregroundColor : NSColor.textColor
                 ]
                 let message = NSMutableAttributedString(string: NSLocalizedString("Installation Successful", comment: ""), attributes: headlineAttr)
-                let details = NSAttributedString(string: NSLocalizedString("McBopomofo is ready to use.", comment: ""), attributes: bodyAttr)
+                let details = NSAttributedString(string: NSLocalizedString("OpenVanilla is ready to use.", comment: ""), attributes: bodyAttr)
                 message.append(NSAttributedString(string: "\n\n"))
                 message.append(details)
                 textView.textStorage?.setAttributedString(message)
