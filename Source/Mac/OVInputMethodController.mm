@@ -26,32 +26,25 @@
 //
 
 #import "OVInputMethodController.h"
+#import "OpenVanilla-Swift.h"
+#import "OVTextBufferImpl.h"
 #import "OVLoaderServiceImpl.h"
 #import "OVCandidateServiceImpl.h"
 #import "OVTextBufferCombinator.h"
-#import "OVToolTipWindowController.h"
 #import "OVModuleManager.h"
-#import "OVUpdateChecker.h"
 #import "OVConstants.h"
-#import "OVAppDelegate.h"
+
+@import TooltipUI;
 
 @interface OVInputMethodController ()
 - (BOOL)handleOVKey:(OVKey &)key client:(id)client;
-
 - (void)handleInputMethodChange:(NSNotification *)notification;
-
 - (void)handleCandidateSelected:(NSNotification *)notification;
-
 - (void)updateClientComposingBuffer:(id)sender;
-
 - (void)changeInputMethodAction:(id)sender;
-
 - (void)toggleTraditionalToSimplifiedChineseFilterAction:(id)sender;
-
 - (void)toggleSimplifiedToTraditionalChineseFilterAction:(id)sender;
-
 - (void)openUserGuideAction:(id)sender;
-
 - (void)showAboutAction:(id)sender;
 @end
 
@@ -96,7 +89,7 @@
         item.action = @selector(changeInputMethodAction:);
 
         if ([activeInputMethodIdentifier isEqualToString:identifier]) {
-            item.state = NSOnState;
+            item.state = NSControlStateValueOn;
         }
 
         [menu addItem:item];
@@ -106,15 +99,15 @@
 
     NSMenuItem *filterItem;
     filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Traditional Chinese to Simplified", @"") action:@selector(toggleTraditionalToSimplifiedChineseFilterAction:) keyEquivalent:@""];
-    filterItem.state = [OVModuleManager defaultManager].traditionalToSimplifiedChineseFilterEnabled ? NSOnState : NSOffState;
+    filterItem.state = [OVModuleManager defaultManager].traditionalToSimplifiedChineseFilterEnabled ? NSControlStateValueOn : NSControlStateValueOff;
     [menu addItem:filterItem];
 
     filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Simplified Chinese to Traditional", @"") action:@selector(toggleSimplifiedToTraditionalChineseFilterAction:) keyEquivalent:@""];
-    filterItem.state = [OVModuleManager defaultManager].simplifiedToTraditionalChineseFilterEnabled ? NSOnState : NSOffState;
+    filterItem.state = [OVModuleManager defaultManager].simplifiedToTraditionalChineseFilterEnabled ? NSControlStateValueOn : NSControlStateValueOff;
     [menu addItem:filterItem];
 
     filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Associated Phrases", @"") action:@selector(toggleAssociatedPhrasesAroundFilterEnabledAction:) keyEquivalent:@""];
-    filterItem.state = [OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled ? NSOnState : NSOffState;
+    filterItem.state = [OVModuleManager defaultManager].associatedPhrasesAroundFilterEnabled ? NSControlStateValueOn : NSControlStateValueOff;
     [menu addItem:filterItem];
 
     [menu addItem:[NSMenuItem separatorItem]];
@@ -157,7 +150,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCandidateSelected:) name:OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification object:nil];
 
     if ([[NSUserDefaults standardUserDefaults] boolForKey:OVCheckForUpdateKey]) {
-        [[OVUpdateChecker sharedInstance] checkForUpdateIfNeeded];
+        [[UpdateChecker sharedInstance] checkForUpdateIfNeeded];
     }
 }
 
@@ -199,7 +192,7 @@
         [super showPreferences:sender];
     }
     else {
-        [(OVAppDelegate *)[NSApp delegate] showPreferences];
+        [(AppDelegate * )[NSApp delegate] showPreferences];
     }
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
@@ -227,7 +220,7 @@
         [[OVModuleManager defaultManager].toolTipWindowController.window orderOut:self];
     }
 
-    if ([event type] != NSKeyDown) {
+    if ([event type] != NSEventTypeKeyDown) {
         return NO;
     }
 
@@ -235,11 +228,11 @@
     NSUInteger cocoaModifiers = [event modifierFlags];
     unsigned short virtualKeyCode = [event keyCode];
 
-    bool capsLock = !!(cocoaModifiers & NSAlphaShiftKeyMask);
-    bool shift = !!(cocoaModifiers & NSShiftKeyMask);
-    bool ctrl = !!(cocoaModifiers & NSControlKeyMask);
-    bool opt = !!(cocoaModifiers & NSAlternateKeyMask);
-    bool cmd = !!(cocoaModifiers & NSCommandKeyMask);
+    bool capsLock = !!(cocoaModifiers & NSEventModifierFlagCapsLock);
+    bool shift = !!(cocoaModifiers & NSEventModifierFlagShift);
+    bool ctrl = !!(cocoaModifiers & NSEventModifierFlagControl);
+    bool opt = !!(cocoaModifiers & NSEventModifierFlagOption);
+    bool cmd = !!(cocoaModifiers & NSEventModifierFlagCommand);
     bool numLock = false;
 
     static UInt32 numKeys[16] = {
@@ -260,23 +253,23 @@
         unicharCode = [chars characterAtIndex:0];
 
         // map Ctrl-[A-Z] to a char code
-        if (cocoaModifiers & NSControlKeyMask) {
+        if (cocoaModifiers & NSEventModifierFlagControl) {
             if (unicharCode < 27) {
                 unicharCode += ('a' - 1);
             }
             else {
                 switch (unicharCode) {
                     case 27:
-                        unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '{' : '[';
+                        unicharCode = (cocoaModifiers & NSEventModifierFlagShift) ? '{' : '[';
                         break;
                     case 28:
-                        unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '|' : '\\';
+                        unicharCode = (cocoaModifiers & NSEventModifierFlagShift) ? '|' : '\\';
                         break;
                     case 29:
-                        unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '}' : ']';
+                        unicharCode = (cocoaModifiers & NSEventModifierFlagShift) ? '}' : ']';
                         break;
                     case 31:
-                        unicharCode = (cocoaModifiers & NSShiftKeyMask) ? '_' : '-';
+                        unicharCode = (cocoaModifiers & NSEventModifierFlagShift) ? '_' : '-';
                         break;
                 }
             }
@@ -589,7 +582,8 @@
             fromTopLeft = NO;
         }
 
-        [[OVModuleManager defaultManager].toolTipWindowController setToolTipText:[NSString stringWithUTF8String:toolTipText.c_str()] atOrigin:toolTipOrigin fromTopLeft:fromTopLeft];
+        [[OVModuleManager defaultManager].toolTipWindowController showTooltip:[NSString stringWithUTF8String:toolTipText.c_str()] atPoint:toolTipOrigin];
+//        [[OVModuleManager defaultManager].toolTipWindowController setToolTipText:[NSString stringWithUTF8String:toolTipText.c_str()] atOrigin:toolTipOrigin fromTopLeft:fromTopLeft];
         [[[OVModuleManager defaultManager].toolTipWindowController window] orderFront:self];
     }
 }
@@ -658,4 +652,5 @@
     _associatedPhrasesContext = 0;
     _associatedPhrasesContextInUse = NO;
 }
+
 @end

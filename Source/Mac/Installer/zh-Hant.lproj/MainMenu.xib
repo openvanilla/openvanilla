@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -81,21 +80,22 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="66" y="154"/>
         </menu>
         <window title="OpenVanilla 安裝程式" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="323" y="164" width="640" height="360"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="536">
+                    <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="536">
                         <rect key="frame" x="20" y="60" width="600" height="251"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" drawsBackground="NO" id="pm7-Hs-KrP">
-                            <rect key="frame" x="1" y="1" width="598" height="249"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <rect key="frame" x="1" y="1" width="583" height="249"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" spellingCorrection="YES" smartInsertDelete="YES" id="537">
                                     <rect key="frame" x="0.0" y="0.0" width="583" height="249"/>
@@ -117,7 +117,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <button verticalHuggingPriority="750" id="575">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="575">
                         <rect key="frame" x="460" y="12" width="166" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="同意安裝" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="576">
@@ -128,7 +128,7 @@
                             <action selector="agreeAndInstallAction:" target="494" id="708"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" id="592">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="592">
                         <rect key="frame" x="330" y="12" width="130" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="取消" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="593">
@@ -142,7 +142,7 @@ Gw
                             <action selector="cancelAction:" target="494" id="707"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" id="623">
+                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="623">
                         <rect key="frame" x="17" y="323" width="559" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="歡迎您安裝 OpenVanilla！在安裝之前，請您閱讀本軟體的使用授權：" id="624">
@@ -151,7 +151,7 @@ Gw
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="688">
+                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="688">
                         <rect key="frame" x="17" y="19" width="337" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="點選「同意安裝」，表示您同意本軟體的使用授權。" id="689">
@@ -165,14 +165,17 @@ Gw
             <connections>
                 <outlet property="delegate" destination="494" id="706"/>
             </connections>
+            <point key="canvasLocation" x="66" y="-123"/>
         </window>
         <customObject id="494" customClass="AppDelegate">
             <connections>
+                <outlet property="agreeText" destination="688" id="Lja-oT-xm9"/>
                 <outlet property="cancelButton" destination="592" id="710"/>
                 <outlet property="installButton" destination="575" id="709"/>
                 <outlet property="progressIndicator" destination="dPU-qB-OoB" id="VQs-9K-4nJ"/>
                 <outlet property="progressSheet" destination="afh-vl-Ne6" id="K2O-QC-fD5"/>
                 <outlet property="textView" destination="537" id="705"/>
+                <outlet property="welcomeText" destination="623" id="qNq-Kk-azx"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>
@@ -180,20 +183,20 @@ Gw
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="afh-vl-Ne6">
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="283" y="305" width="480" height="180"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
             <view key="contentView" id="OxS-km-6V4">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="180"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <progressIndicator wantsLayer="YES" maxValue="1" style="bar" id="dPU-qB-OoB">
+                    <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="1" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="dPU-qB-OoB">
                         <rect key="frame" x="20" y="67" width="440" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     </progressIndicator>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="vt5-sV-muK">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vt5-sV-muK">
                         <rect key="frame" x="18" y="94" width="444" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="等待舊版完全停用，大約需要一分鐘…" id="dFS-c5-8xC">
-                            <font key="font" size="13" name=".PingFangTC-Regular"/>
+                            <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
