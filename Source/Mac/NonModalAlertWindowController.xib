@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,9 +25,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="420" height="130"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5">
-                        <rect key="frame" x="314" y="13" width="92" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5">
+                        <rect key="frame" x="330" y="13" width="76" height="32"/>
                         <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -37,9 +35,8 @@
                             <action selector="confirmButtonAction:" target="-2" id="85"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="71">
-                        <rect key="frame" x="222" y="13" width="92" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="71">
+                        <rect key="frame" x="254" y="13" width="76" height="32"/>
                         <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="73">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -48,23 +45,24 @@
                             <action selector="cancelButtonAction:" target="-2" id="86"/>
                         </connections>
                     </button>
-                    <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="12">
+                    <imageView translatesAutoresizingMaskIntoConstraints="NO" id="12">
                         <rect key="frame" x="24" y="50" width="64" height="64"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="AlertIcon" id="13"/>
                     </imageView>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39">
+                    <textField focusRingType="none" verticalHuggingPriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="39">
                         <rect key="frame" x="103" y="97" width="300" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Lorem ipsum" id="40">
                             <font key="font" metaFont="systemBold"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="296" translatesAutoresizingMaskIntoConstraints="NO" id="59">
+                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="296" translatesAutoresizingMaskIntoConstraints="NO" id="59">
                         <rect key="frame" x="103" y="72" width="300" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="296" id="K0Q-KD-INC"/>
+                            <constraint firstAttribute="height" constant="17" id="ZZg-7l-87B"/>
+                        </constraints>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Lorem ipsum" id="60">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -72,6 +70,21 @@
                         </textFieldCell>
                     </textField>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="12" firstAttribute="top" secondItem="2" secondAttribute="top" constant="16" id="4Oh-wy-3df"/>
+                    <constraint firstItem="59" firstAttribute="leading" secondItem="12" secondAttribute="trailing" constant="17" id="Dut-Wd-Mem"/>
+                    <constraint firstItem="59" firstAttribute="trailing" secondItem="39" secondAttribute="trailing" id="MRc-pf-lXG"/>
+                    <constraint firstItem="59" firstAttribute="top" secondItem="39" secondAttribute="bottom" constant="8" symbolic="YES" id="RLf-J2-WZt"/>
+                    <constraint firstAttribute="trailing" secondItem="5" secondAttribute="trailing" constant="21" id="SEd-Mj-nEQ"/>
+                    <constraint firstAttribute="trailing" secondItem="59" secondAttribute="trailing" constant="19" id="WcY-NX-v5D"/>
+                    <constraint firstAttribute="bottom" secondItem="5" secondAttribute="bottom" constant="20" symbolic="YES" id="YfP-gn-vb7"/>
+                    <constraint firstItem="5" firstAttribute="leading" secondItem="71" secondAttribute="trailing" constant="14" id="bBf-2y-n0k"/>
+                    <constraint firstItem="5" firstAttribute="top" secondItem="59" secondAttribute="bottom" constant="32" id="cIW-ka-ahH"/>
+                    <constraint firstAttribute="bottom" secondItem="12" secondAttribute="bottom" constant="50" id="geq-JL-fU3"/>
+                    <constraint firstItem="12" firstAttribute="top" secondItem="39" secondAttribute="top" id="k0e-RP-ebs"/>
+                    <constraint firstItem="5" firstAttribute="baseline" secondItem="71" secondAttribute="baseline" id="vef-q4-VyI"/>
+                    <constraint firstItem="59" firstAttribute="leading" secondItem="39" secondAttribute="leading" id="xqG-nX-vGS"/>
+                </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="4"/>

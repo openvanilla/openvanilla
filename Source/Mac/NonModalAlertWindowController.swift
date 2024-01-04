@@ -57,7 +57,7 @@ class NonModalAlertWindowController: NSWindowController {
         if let cancelButtonTitle {
             cancelButton.title = cancelButtonTitle
             cancelButton.sizeToFit()
-            var adjustFrame = cancelButton.frame
+            var adjustFrame = confirmButton.frame
             adjustFrame.size.width = max(90, adjustFrame.size.width + 10)
             adjustFrame.origin.x = newFrame.origin.x - adjustFrame.size.width
             confirmButton.frame = adjustFrame
