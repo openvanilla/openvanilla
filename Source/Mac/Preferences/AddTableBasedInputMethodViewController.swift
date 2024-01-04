@@ -88,9 +88,11 @@ class AddTableBasedInputMethodViewController: BasePreferencesViewController {
         panel.allowedFileTypes = ["cin"]
 
         panel.begin { result in
-            if result != .continue {
+            if result.rawValue != 1 {
                 return
             }
+
+
             let files = panel.urls
             guard let cinPath = files.first?.path else {
                 return

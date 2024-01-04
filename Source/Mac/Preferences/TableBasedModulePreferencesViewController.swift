@@ -132,9 +132,6 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
 
 extension TableBasedModulePreferencesViewController: NonModalAlertWindowControllerDelegate {
     func nonModalAlertWindowControllerDidConfirm(_ controller: NonModalAlertWindowController) {
-        if controller.self as NSObject != self {
-            return
-        }
         do {
             try OVModuleManager.default.removeCustomTableBasedInputMethod(self.moduleIdentifier)
         } catch {
