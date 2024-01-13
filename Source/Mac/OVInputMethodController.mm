@@ -63,7 +63,7 @@
 {
 }
 
-- (id)initWithServer:(IMKServer *)server delegate:(id)aDelegate client:(id)client
+- (instancetype)initWithServer:(IMKServer *)server delegate:(id)aDelegate client:(id)client
 {
     self = [super initWithServer:server delegate:aDelegate client:client];
     if (self) {
@@ -80,7 +80,7 @@
     NSMenu *menu = [[NSMenu alloc] init];
 
     NSString *activeInputMethodIdentifier = [OVModuleManager defaultManager].activeInputMethodIdentifier;
-    NSArray *inputMethodIdentifiers = [[OVModuleManager defaultManager] inputMethodIdentifiers];
+    NSArray *inputMethodIdentifiers = [OVModuleManager defaultManager].inputMethodIdentifiers;
     for (NSString *identifier in inputMethodIdentifiers) {
         NSMenuItem *item = [[NSMenuItem alloc] init];
         item.title = [[OVModuleManager defaultManager] localizedInputMethodName:identifier];
@@ -192,7 +192,7 @@
         [super showPreferences:sender];
     }
     else {
-        [(AppDelegate * )[NSApp delegate] showPreferences];
+        [(AppDelegate * )NSApp.delegate showPreferences];
     }
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
@@ -206,7 +206,7 @@
     }
 
     if (_composingText->isCommitted()) {
-        NSString *combinedText = [NSString stringWithUTF8String:_composingText->composedCommittedText().c_str()];
+        NSString *combinedText = @(_composingText->composedCommittedText().c_str());
         NSString *filteredText = [[OVModuleManager defaultManager] filteredStringWithString:combinedText];
         [sender insertText:filteredText replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
     }
@@ -220,13 +220,13 @@
         [[OVModuleManager defaultManager].toolTipWindowController.window orderOut:self];
     }
 
-    if ([event type] != NSEventTypeKeyDown) {
+    if (event.type != NSEventTypeKeyDown) {
         return NO;
     }
 
-    NSString *chars = [event characters];
-    NSUInteger cocoaModifiers = [event modifierFlags];
-    unsigned short virtualKeyCode = [event keyCode];
+    NSString *chars = event.characters;
+    NSUInteger cocoaModifiers = event.modifierFlags;
+    unsigned short virtualKeyCode = event.keyCode;
 
     bool capsLock = !!(cocoaModifiers & NSEventModifierFlagCapsLock);
     bool shift = !!(cocoaModifiers & NSEventModifierFlagShift);
@@ -249,7 +249,7 @@
 
     OVKey key;
     UniChar unicharCode = 0;
-    if ([chars length] > 0) {
+    if (chars.length > 0) {
         unicharCode = [chars characterAtIndex:0];
 
         // map Ctrl-[A-Z] to a char code
@@ -345,7 +345,7 @@
         key = [OVModuleManager defaultManager].loaderService->makeOVKey(unicharCode, opt, opt, ctrl, shift, cmd, capsLock, numLock);
     }
     else {
-        key = [OVModuleManager defaultManager].loaderService->makeOVKey(string([chars UTF8String]), opt, opt, ctrl, shift, cmd, capsLock, numLock);
+        key = [OVModuleManager defaultManager].loaderService->makeOVKey(string(chars.UTF8String), opt, opt, ctrl, shift, cmd, capsLock, numLock);
     }
 
     return [self handleOVKey:key client:client];
@@ -458,7 +458,7 @@
     _composingText->clear();
     _readingText->clear();
     [OVModuleManager defaultManager].candidateService->resetAll();
-    [[[OVModuleManager defaultManager].toolTipWindowController window] orderOut:self];
+    [[OVModuleManager defaultManager].toolTipWindowController.window orderOut:self];
 
     if (!_inputMethodContext && [OVModuleManager defaultManager].activeInputMethod) {
         _inputMethodContext = [OVModuleManager defaultManager].activeInputMethod->createContext();
@@ -479,7 +479,7 @@
         return;
     }
 
-    NSDictionary *dict = [notification userInfo];
+    NSDictionary *dict = notification.userInfo;
     NSString *candidate = dict[OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey];
     NSUInteger index = [dict[OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey] unsignedIntegerValue];
 
@@ -488,11 +488,11 @@
 
     bool handled;
     if (_associatedPhrasesContextInUse) {
-        handled = _associatedPhrasesContext->candidateSelected(manager.candidateService, string([candidate UTF8String]), (size_t)index, _readingText, _composingText, manager.loaderService);
+        handled = _associatedPhrasesContext->candidateSelected(manager.candidateService, string(candidate.UTF8String), (size_t)index, _readingText, _composingText, manager.loaderService);
         _associatedPhrasesContextInUse = NO;
     }
     else {
-        handled = _inputMethodContext->candidateSelected(manager.candidateService, string([candidate UTF8String]), (size_t)index, _readingText, _composingText, manager.loaderService);
+        handled = _inputMethodContext->candidateSelected(manager.candidateService, string(candidate.UTF8String), (size_t)index, _readingText, _composingText, manager.loaderService);
     }
 
     if (handled) {
@@ -548,7 +548,7 @@
     NSRange selectionRange = [params[2] rangeValue];
 
     NSUInteger cursorIndex = selectionRange.location;
-    if (cursorIndex == [attrString length] && cursorIndex) {
+    if (cursorIndex == attrString.length && cursorIndex) {
         cursorIndex--;
     }
 
@@ -557,7 +557,7 @@
         NSDictionary *attr = [sender attributesForCharacterIndex:cursorIndex lineHeightRectangle:&lineHeightRect];
 
         // fall back to index 0 if no attributes are reported at cursorIndex
-        if (![attr count]) {
+        if (!attr.count) {
             [sender attributesForCharacterIndex:0 lineHeightRectangle:&lineHeightRect];
         }
     }
@@ -582,17 +582,16 @@
             fromTopLeft = NO;
         }
 
-        [[OVModuleManager defaultManager].toolTipWindowController showTooltip:[NSString stringWithUTF8String:toolTipText.c_str()] atPoint:toolTipOrigin];
-//        [[OVModuleManager defaultManager].toolTipWindowController setToolTipText:[NSString stringWithUTF8String:toolTipText.c_str()] atOrigin:toolTipOrigin fromTopLeft:fromTopLeft];
-        [[[OVModuleManager defaultManager].toolTipWindowController window] orderFront:self];
+        [[OVModuleManager defaultManager].toolTipWindowController showTooltip:@(toolTipText.c_str()) atPoint:toolTipOrigin];
+        [[OVModuleManager defaultManager].toolTipWindowController.window orderFront:self];
     }
 }
 
 - (void)changeInputMethodAction:(id)sender
 {
-    NSMenuItem *item = [sender objectForKey:kIMKCommandMenuItemName];
+    NSMenuItem *item = sender[kIMKCommandMenuItemName];
     if (item) {
-        NSString *identifier = [item representedObject];
+        NSString *identifier = item.representedObject;
         [[OVModuleManager defaultManager] selectInputMethod:identifier];
     }
 }

@@ -47,7 +47,7 @@ OVTextBufferCombinator::OVTextBufferCombinator(const OVTextBufferImpl* composing
     NSUInteger highlightLength = 0;
 
     for (size_t ci = 0, ce = composingText->cursorPosition(); ci != ce; ++ci) {
-        NSString *segment = [NSString stringWithUTF8String:composingCodePoints[ci].c_str()];
+        NSString *segment = @(composingCodePoints[ci].c_str());
         [text appendString:segment];
 
         if (hasHighlight && (ci == highlight.first)) {
@@ -55,7 +55,7 @@ OVTextBufferCombinator::OVTextBufferCombinator(const OVTextBufferImpl* composing
             highlightStarted = true;
         }
 
-        NSUInteger segLen = [segment length];
+        NSUInteger segLen = segment.length;
         m_cursorIndex += segLen;
         accuLength += (size_t)segLen;
 
@@ -68,9 +68,9 @@ OVTextBufferCombinator::OVTextBufferCombinator(const OVTextBufferImpl* composing
     }
 
     for (size_t ri = 0, re = readingCodePoints.size(); ri != re; ++ri) {
-        NSString *segment = [NSString stringWithUTF8String:readingCodePoints[ri].c_str()];
+        NSString *segment = @(readingCodePoints[ri].c_str());
         [text appendString:segment];
-        NSUInteger segLen = [segment length];
+        NSUInteger segLen = segment.length;
         accuLength += (size_t)segLen;
 
         if (ri < readingText->cursorPosition()) {
@@ -83,7 +83,7 @@ OVTextBufferCombinator::OVTextBufferCombinator(const OVTextBufferImpl* composing
     }
 
     for (size_t ci = composingText->cursorPosition(), ce = composingCodePoints.size(); ci != ce; ++ci) {
-        NSString *segment = [NSString stringWithUTF8String:composingCodePoints[ci].c_str()];
+        NSString *segment = @(composingCodePoints[ci].c_str());
         [text appendString:segment];
 
         if (hasHighlight && (ci == highlight.first)) {
@@ -91,7 +91,7 @@ OVTextBufferCombinator::OVTextBufferCombinator(const OVTextBufferImpl* composing
             highlightStarted = true;
         }
 
-        NSUInteger segLen = [segment length];
+        NSUInteger segLen = segment.length;
         accuLength += segLen;
         if (highlightStarted) {
             if (highlightAccumulator < highlight.second) {
@@ -107,9 +107,8 @@ OVTextBufferCombinator::OVTextBufferCombinator(const OVTextBufferImpl* composing
     NSInteger section = 0;
     if (highlightStart) {
         NSRange markerRange = NSMakeRange(0, highlightStart);
-        NSDictionary *attrDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  [NSNumber numberWithInteger:NSUnderlineStyleSingle], NSUnderlineStyleAttributeName,
-                                  [NSNumber numberWithInteger:section], NSMarkedClauseSegmentAttributeName, nil];
+        NSDictionary *attrDict = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),
+                                  NSMarkedClauseSegmentAttributeName: @(section)};
         [m_attrText setAttributes:attrDict range:markerRange];
         section++;
     }
@@ -117,9 +116,8 @@ OVTextBufferCombinator::OVTextBufferCombinator(const OVTextBufferImpl* composing
     // segment 2
     if (highlightLength) {
         NSRange markerRange = NSMakeRange(highlightStart, highlightLength);
-        NSDictionary *attrDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  [NSNumber numberWithInteger:NSUnderlineStyleThick], NSUnderlineStyleAttributeName,
-                                  [NSNumber numberWithInteger:section], NSMarkedClauseSegmentAttributeName, nil];
+        NSDictionary *attrDict = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleThick),
+                                  NSMarkedClauseSegmentAttributeName: @(section)};
         [m_attrText setAttributes:attrDict range:markerRange];
         section++;
     }
@@ -129,9 +127,8 @@ OVTextBufferCombinator::OVTextBufferCombinator(const OVTextBufferImpl* composing
     NSUInteger endSegmentLength = accuLength - endSegmentStart;
     if (endSegmentLength) {
         NSRange markerRange = NSMakeRange(endSegmentStart, endSegmentLength);
-        NSDictionary *attrDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  [NSNumber numberWithInteger:NSUnderlineStyleSingle], NSUnderlineStyleAttributeName,
-                                  [NSNumber numberWithInteger:section], NSMarkedClauseSegmentAttributeName, nil];
+        NSDictionary *attrDict = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),
+                                  NSMarkedClauseSegmentAttributeName: @(section)};
         [m_attrText setAttributes:attrDict range:markerRange];
     }
 }
