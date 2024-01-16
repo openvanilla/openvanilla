@@ -45,23 +45,23 @@ void OVCandidateListImpl::clear()
 
 size_t OVCandidateListImpl::size() const
 {
-    return (size_t)[m_array count];
+    return (size_t)m_array.count;
 }
 
 string OVCandidateListImpl::candidateAtIndex(size_t index) const
 {
-    return string([[m_array objectAtIndex:index] UTF8String]);
+    return string([m_array[index] UTF8String]);
 }
 
 NSString *OVCandidateListImpl::candidateAtIndex(size_t index)
 {
-    return [m_array objectAtIndex:(NSUInteger)index];
+    return m_array[(NSUInteger)index];
 }
 
 void OVCandidateListImpl::setCandidate(size_t index, const string& candidate)
 {
     NSCAssert(index < [m_array count], @"Index must be less than array size");
-    [m_array replaceObjectAtIndex:(NSUInteger)index withObject:[NSString stringWithUTF8String:candidate.c_str()]];
+    m_array[(NSUInteger)index] = @(candidate.c_str());
 }
 
 void OVCandidateListImpl::setCandidates(const vector<string>& candidates)
@@ -72,7 +72,7 @@ void OVCandidateListImpl::setCandidates(const vector<string>& candidates)
 
 void OVCandidateListImpl::addCandidate(const string& candidate)
 {
-    [m_array addObject:[NSString stringWithUTF8String:candidate.c_str()]];
+    [m_array addObject:@(candidate.c_str())];
 }
 
 void OVCandidateListImpl::addCandidates(const vector<string>& candidates)

@@ -56,7 +56,7 @@ static bool IsKeyInList(const OVKey* key, OVKeyVector list, size_t* outIndex = 0
             return true;
         }
     }
-    
+
     return false;
 }
 
@@ -64,11 +64,13 @@ static bool IsKeyInList(const OVKey* key, OVKeyVector list, size_t* outIndex = 0
 {
     OVCandidateListImpl *_candidateList;
 }
-- (id)initWithCandidateList:(OVCandidateListImpl *)candidateList;
+
+- (instancetype)initWithCandidateList:(OVCandidateListImpl *)candidateList;
 @end
 
 @implementation OVOneDimensionalCandidatePanelImplDelegate
-- (id)initWithCandidateList:(OVCandidateListImpl *)candidateList
+
+- (instancetype)initWithCandidateList:(OVCandidateListImpl *)candidateList
 {
     self = [super init];
     if (self) {
@@ -89,10 +91,8 @@ static bool IsKeyInList(const OVKey* key, OVKeyVector list, size_t* outIndex = 0
 
 - (void)candidateController:(VTCandidateController *)controller didSelectCandidateAtIndex:(NSUInteger)index
 {
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-            _candidateList->candidateAtIndex(index), OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey,
-            @((NSUInteger)index), OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey,
-                    nil];
+    NSDictionary *dict = @{OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey: _candidateList->candidateAtIndex(index),
+            OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey: @((NSUInteger)index)};
     [[NSNotificationCenter defaultCenter] postNotificationName:OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification object:controller userInfo:dict];
 }
 @end
@@ -105,15 +105,15 @@ OVOneDimensionalCandidatePanelImpl::OVOneDimensionalCandidatePanelImpl(Class pan
     m_candidateController = [[panelClass alloc] init];
     m_candidateDelegate = [[OVOneDimensionalCandidatePanelImplDelegate alloc] initWithCandidateList:&m_candidateList];
     m_candidateController.delegate = m_candidateDelegate;
-    
+
     string defaultCandidates = "1234567890";
     for (size_t index = 0; index < defaultCandidates.length(); index++) {
         m_defaultCandidateKeys.push_back(loaderService->makeOVKey(defaultCandidates[index]));
     }
-    
+
     m_defaultCancelKeys.push_back(loaderService->makeOVKey(OVKeyCode::Esc));
     m_defaultChooseHighlightedCandidateKeys.push_back(loaderService->makeOVKey(OVKeyCode::Return));
-    
+
     if ([m_candidateController isKindOfClass:[VTHorizontalCandidateController class]]) {
         m_defaultNextCandidateKeys.push_back(loaderService->makeOVKey(OVKeyCode::Right));
         m_defaultPreviousCandidateKeys.push_back(loaderService->makeOVKey(OVKeyCode::Left));
@@ -121,7 +121,7 @@ OVOneDimensionalCandidatePanelImpl::OVOneDimensionalCandidatePanelImpl(Class pan
         m_defaultNextPageKeys.push_back(loaderService->makeOVKey(OVKeyCode::Down));
         m_defaultNextPageKeys.push_back(loaderService->makeOVKey(OVKeyCode::Space));
         m_defaultPreviousPageKeys.push_back(loaderService->makeOVKey(OVKeyCode::PageUp));
-        m_defaultPreviousPageKeys.push_back(loaderService->makeOVKey(OVKeyCode::Up));        
+        m_defaultPreviousPageKeys.push_back(loaderService->makeOVKey(OVKeyCode::Up));
     }
     else {
         m_defaultNextCandidateKeys.push_back(loaderService->makeOVKey(OVKeyCode::Down));
@@ -130,9 +130,9 @@ OVOneDimensionalCandidatePanelImpl::OVOneDimensionalCandidatePanelImpl(Class pan
         m_defaultNextPageKeys.push_back(loaderService->makeOVKey(OVKeyCode::Space));
 		m_defaultNextPageKeys.push_back(loaderService->makeOVKey(OVKeyCode::Right));
         m_defaultPreviousPageKeys.push_back(loaderService->makeOVKey(OVKeyCode::PageUp));
-        m_defaultPreviousPageKeys.push_back(loaderService->makeOVKey(OVKeyCode::Left));        
+        m_defaultPreviousPageKeys.push_back(loaderService->makeOVKey(OVKeyCode::Left));
     }
-    
+
     m_candidateKeys = m_defaultCandidateKeys;
     m_cancelKeys = m_defaultCancelKeys;
     m_chooseHighlightedCandidateKeys = m_defaultChooseHighlightedCandidateKeys;
@@ -173,7 +173,7 @@ bool OVOneDimensionalCandidatePanelImpl::isVisible()
 }
 
 void OVOneDimensionalCandidatePanelImpl::setPrompt(const string& prompt)
-{   
+{
 }
 
 string OVOneDimensionalCandidatePanelImpl::prompt()
@@ -213,7 +213,7 @@ bool OVOneDimensionalCandidatePanelImpl::isHorizontal() const
 
 bool OVOneDimensionalCandidatePanelImpl::isVertical() const
 {
-    return [m_candidateController isKindOfClass:[VTVerticalCandidateController class]];   
+    return [m_candidateController isKindOfClass:[VTVerticalCandidateController class]];
 }
 
 OVCandidateList* OVOneDimensionalCandidatePanelImpl::candidateList()
@@ -223,15 +223,15 @@ OVCandidateList* OVOneDimensionalCandidatePanelImpl::candidateList()
 
 size_t OVOneDimensionalCandidatePanelImpl::candidatesPerPage() const
 {
-    return (size_t)[m_candidateController.keyLabels count];
+    return (size_t)m_candidateController.keyLabels.count;
 }
 
 void OVOneDimensionalCandidatePanelImpl::setCandidatesPerPage(size_t number)
-{    
+{
     if (!number || number > candidatesPerPage()) {
         return;
     }
-    
+
     m_candidateController.keyLabels = [m_candidateController.keyLabels subarrayWithRange:NSMakeRange(0, (NSUInteger)number)];
 }
 
@@ -241,7 +241,7 @@ size_t OVOneDimensionalCandidatePanelImpl::pageCount() const
     if (!cpp) {
         return 0;
     }
-    
+
     size_t cc = m_candidateList.size();
     size_t p = cc / cpp;
     return (cc % cpp) ? (p + 1) : p;
@@ -284,18 +284,18 @@ void OVOneDimensionalCandidatePanelImpl::setHighlightIndex(size_t index)
     if (!cc) {
         return;
     }
-    
+
     size_t newIndex = (size_t)[m_candidateController candidateIndexAtKeyLabelIndex:0] + index;
     if (newIndex >= cc) {
         newIndex = cc - 1;
     }
-    
+
     m_candidateController.selectedCandidateIndex = (NSUInteger)newIndex;
 }
 
 size_t OVOneDimensionalCandidatePanelImpl::currentHightlightIndexInCandidateList() const
 {
-    return (size_t)m_candidateController.selectedCandidateIndex;    
+    return (size_t)m_candidateController.selectedCandidateIndex;
 }
 
 size_t OVOneDimensionalCandidatePanelImpl::goToNextPage()
@@ -304,7 +304,7 @@ size_t OVOneDimensionalCandidatePanelImpl::goToNextPage()
     if (!cc) {
         return 0;
     }
-    
+
     size_t newIndex = currentHightlightIndexInCandidateList() + candidatesPerPage();
     if (newIndex >= cc) {
         newIndex = cc - 1;
@@ -324,9 +324,9 @@ size_t OVOneDimensionalCandidatePanelImpl::goToPreviousPage()
     if (!cc) {
         return 0;
     }
-    
+
     size_t newIndex = currentHightlightIndexInCandidateList();
-    
+
     if (newIndex < candidatesPerPage()) {
         newIndex = 0;
     }
@@ -335,7 +335,7 @@ size_t OVOneDimensionalCandidatePanelImpl::goToPreviousPage()
     }
 
     m_candidateController.selectedCandidateIndex = (NSUInteger)newIndex;
-    return currentPage();    
+    return currentPage();
 }
 
 size_t OVOneDimensionalCandidatePanelImpl::goToPage(size_t page)
@@ -343,7 +343,7 @@ size_t OVOneDimensionalCandidatePanelImpl::goToPage(size_t page)
     if (page >= pageCount()) {
         return currentPage();
     }
-    
+
     m_candidateController.selectedCandidateIndex = (NSUInteger)(page * candidatesPerPage());
     return page;
 }
@@ -359,7 +359,7 @@ void OVOneDimensionalCandidatePanelImpl::setCandidateKeys(const OVKeyVector& key
     m_candidateKeys = keys;
     NSMutableArray *labels = [NSMutableArray array];
     for (OVKeyVector::const_iterator i = keys.begin(), e = keys.end(); i != e; ++i) {
-        NSString *key = [NSString stringWithUTF8String:(*i).receivedString().c_str()];
+        NSString *key = @((*i).receivedString().c_str());
         VTCandidateKeyLabel *label = [[VTCandidateKeyLabel alloc] initWithKey:key displayedText:key];
         [labels addObject:label];
     }
@@ -471,7 +471,7 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
         if (index == clampedIndex) {
             return Invalid;
         }
-        
+
         m_candidateController.selectedCandidateIndex = (NSUInteger)clampedIndex;
         return Handled;
     }
@@ -483,22 +483,22 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
         }
         size_t clampedIndex = min(index + 1, lastIndex);
         m_candidateController.selectedCandidateIndex = (NSUInteger)clampedIndex;
-        return Handled;        
+        return Handled;
     }
     else if (IsKeyInList(key, m_previousPageKeys)) {
         size_t index = currentHightlightIndexInCandidateList();
         if (!index) {
             return Invalid;
         }
-        
+
         size_t cpp = candidatesPerPage();
         if (index > cpp) {
             index -= cpp;
         }
         else {
-            index = 0;            
+            index = 0;
         }
-        
+
         m_candidateController.selectedCandidateIndex = (NSUInteger)index;
         return Handled;
     }
@@ -507,12 +507,12 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
         if (!index) {
             return Invalid;
         }
-        
+
         index--;
         m_candidateController.selectedCandidateIndex = (NSUInteger)index;
         return Handled;
     }
-    
+
     return NonCandidatePanelKeyReceived;
 }
 
@@ -557,7 +557,7 @@ void OVOneDimensionalCandidatePanelImpl::setCandidateKeysAndLabels(const vector<
     NSMutableArray *labels = [NSMutableArray array];
     for (const auto& keyLabelPair : keyLabelPairs) {
         keys.push_back(keyLabelPair.first);
-        NSString *key = [NSString stringWithUTF8String:keyLabelPair.second.c_str()];
+        NSString *key = @(keyLabelPair.second.c_str());
         VTCandidateKeyLabel *label = [[VTCandidateKeyLabel alloc] initWithKey:key displayedText:key];
         [labels addObject:label];
     }

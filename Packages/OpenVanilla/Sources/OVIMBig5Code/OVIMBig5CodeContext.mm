@@ -85,6 +85,7 @@ bool OVIMBig5CodeContext::handleKey(OVKey *key, OVTextBuffer *readingText, OVTex
             composingText->setText(string(utf8String));
             composingText->commit();
             m_code.clear();
+            CFRelease(cfString);
         }
         else {
             readingText->setText(string("[內碼]") + m_code);
