@@ -26,8 +26,7 @@
 //
 
 #import "OVLoaderServiceImpl.h"
-#import "OVConcreteKeyImpl.h"
-#import "OVConstants.h"
+@import OpenVanillaImpl;
 
 using namespace OpenVanilla;
 

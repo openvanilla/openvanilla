@@ -11,6 +11,8 @@ let package = Package(
             name: "OpenVanilla",
             targets: ["OpenVanilla",
                       "OpenVanillaImpl",
+                      "LoaderService",
+                      "ModuleManager",
                       "LegacyOpenVanilla",
                       "OVIMBig5Code",
                       "OVIMTableBased",
@@ -19,6 +21,8 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../CandidateUI"),
+        .package(path: "../TooltipUI"),
+        .package(path: "../VXHanConvert"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -28,6 +32,20 @@ let package = Package(
         .target(
             name: "OpenVanillaImpl",
             dependencies: ["OpenVanilla", "CandidateUI"],
+            cxxSettings: [.unsafeFlags(["-fcxx-modules", "-fmodules"])]
+        ),
+        .target(
+            name: "LoaderService",
+            dependencies: ["OpenVanilla", "OpenVanillaImpl"],
+            cxxSettings: [.unsafeFlags(["-fcxx-modules", "-fmodules"])]
+        ),
+        .target(
+            name: "ModuleManager",
+            dependencies: ["OpenVanilla",
+                           "OpenVanillaImpl",
+                           "LoaderService",
+                           "CandidateUI", "TooltipUI", "VXHanConvert",
+                           "OVIMBig5Code", "OVIMTableBased", "OVIMArray", "OVAFAssociatedPhrases"],
             cxxSettings: [.unsafeFlags(["-fcxx-modules", "-fmodules"])]
         ),
         .target(

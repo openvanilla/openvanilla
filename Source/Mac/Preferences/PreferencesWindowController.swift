@@ -24,6 +24,7 @@
 
 import Foundation
 import Cocoa
+import ModuleManager
 
 private let kGeneralSettingIdentifier = "GeneralSettingIdentifier"
 private let kAssociatedPhrasesSettingIdentifier = "org.openvanilla.OVAFAssociatedPhrases"
