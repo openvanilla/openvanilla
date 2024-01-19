@@ -58,14 +58,6 @@
 		D449C6432B300FB60060653A /* BasePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6422B300FB60060653A /* BasePreferencesViewController.swift */; };
 		D4AF7DC02B30A7DD0025DAAF /* OVLoaderServiceImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DAA2B30A7DD0025DAAF /* OVLoaderServiceImpl.mm */; };
 		D4AF7DC12B30A7DD0025DAAF /* OVModuleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DAD2B30A7DD0025DAAF /* OVModuleManager.mm */; };
-		D4AF7DC22B30A7DD0025DAAF /* OVConcreteKeyImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DAF2B30A7DD0025DAAF /* OVConcreteKeyImpl.cpp */; };
-		D4AF7DC32B30A7DD0025DAAF /* OVConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DB22B30A7DD0025DAAF /* OVConstants.m */; };
-		D4AF7DC42B30A7DD0025DAAF /* OVTextBufferCombinator.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DB42B30A7DD0025DAAF /* OVTextBufferCombinator.mm */; };
-		D4AF7DC52B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBA2B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.cpp */; };
-		D4AF7DC62B30A7DD0025DAAF /* OVCandidateServiceImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBB2B30A7DD0025DAAF /* OVCandidateServiceImpl.mm */; };
-		D4AF7DC72B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBC2B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm */; };
-		D4AF7DC82B30A7DD0025DAAF /* OVCandidateListImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBE2B30A7DD0025DAAF /* OVCandidateListImpl.mm */; };
-		D4AF7DC92B30A7DD0025DAAF /* OVTextBufferImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBF2B30A7DD0025DAAF /* OVTextBufferImpl.cpp */; };
 		D4F50BBC2B28898E00C6C364 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */; };
 		D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */; };
 		D4F50BC02B289C8C00C6C364 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBF2B289C8C00C6C364 /* AppDelegate.swift */; };
@@ -200,22 +192,6 @@
 		D4AF7DAA2B30A7DD0025DAAF /* OVLoaderServiceImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVLoaderServiceImpl.mm; sourceTree = "<group>"; };
 		D4AF7DAC2B30A7DD0025DAAF /* OVModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVModuleManager.h; sourceTree = "<group>"; };
 		D4AF7DAD2B30A7DD0025DAAF /* OVModuleManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVModuleManager.mm; sourceTree = "<group>"; };
-		D4AF7DAF2B30A7DD0025DAAF /* OVConcreteKeyImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVConcreteKeyImpl.cpp; sourceTree = "<group>"; };
-		D4AF7DB02B30A7DD0025DAAF /* OVConcreteKeyImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVConcreteKeyImpl.h; sourceTree = "<group>"; };
-		D4AF7DB12B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVOneDimensionalCandidatePanelImpl.h; sourceTree = "<group>"; };
-		D4AF7DB22B30A7DD0025DAAF /* OVConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVConstants.m; sourceTree = "<group>"; };
-		D4AF7DB32B30A7DD0025DAAF /* OVCandidateServiceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCandidateServiceImpl.h; sourceTree = "<group>"; };
-		D4AF7DB42B30A7DD0025DAAF /* OVTextBufferCombinator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVTextBufferCombinator.mm; sourceTree = "<group>"; };
-		D4AF7DB52B30A7DD0025DAAF /* OVTextBufferImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTextBufferImpl.h; sourceTree = "<group>"; };
-		D4AF7DB62B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVPlistBackedKeyValueMapImpl.h; sourceTree = "<group>"; };
-		D4AF7DB72B30A7DD0025DAAF /* OVTextBufferCombinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVTextBufferCombinator.h; sourceTree = "<group>"; };
-		D4AF7DB82B30A7DD0025DAAF /* OVCandidateListImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVCandidateListImpl.h; sourceTree = "<group>"; };
-		D4AF7DBA2B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVPlistBackedKeyValueMapImpl.cpp; sourceTree = "<group>"; };
-		D4AF7DBB2B30A7DD0025DAAF /* OVCandidateServiceImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVCandidateServiceImpl.mm; sourceTree = "<group>"; };
-		D4AF7DBC2B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVOneDimensionalCandidatePanelImpl.mm; sourceTree = "<group>"; };
-		D4AF7DBD2B30A7DD0025DAAF /* OVConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OVConstants.h; sourceTree = "<group>"; };
-		D4AF7DBE2B30A7DD0025DAAF /* OVCandidateListImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OVCandidateListImpl.mm; sourceTree = "<group>"; };
-		D4AF7DBF2B30A7DD0025DAAF /* OVTextBufferImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OVTextBufferImpl.cpp; sourceTree = "<group>"; };
 		D4F50BBA2B28898D00C6C364 /* OpenVanilla-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanilla-Bridging-Header.h"; sourceTree = "<group>"; };
 		D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPropertyWrapper.swift; sourceTree = "<group>"; };
@@ -351,7 +327,6 @@
 		6ABBAEFA15CD58F90080EE7D /* InputMethod Application */ = {
 			isa = PBXGroup;
 			children = (
-				D4AF7DAE2B30A7DD0025DAAF /* OpenVanillaImpl */,
 				D4AF7DA82B30A7DD0025DAAF /* OVModuleLoader */,
 				D4AF7DAB2B30A7DD0025DAAF /* OVModuleManager */,
 				D4AF7DA72B3097430025DAAF /* Preferences */,
@@ -447,29 +422,6 @@
 				D4AF7DAD2B30A7DD0025DAAF /* OVModuleManager.mm */,
 			);
 			path = OVModuleManager;
-			sourceTree = "<group>";
-		};
-		D4AF7DAE2B30A7DD0025DAAF /* OpenVanillaImpl */ = {
-			isa = PBXGroup;
-			children = (
-				D4AF7DBD2B30A7DD0025DAAF /* OVConstants.h */,
-				D4AF7DB22B30A7DD0025DAAF /* OVConstants.m */,
-				D4AF7DB02B30A7DD0025DAAF /* OVConcreteKeyImpl.h */,
-				D4AF7DAF2B30A7DD0025DAAF /* OVConcreteKeyImpl.cpp */,
-				D4AF7DB82B30A7DD0025DAAF /* OVCandidateListImpl.h */,
-				D4AF7DBE2B30A7DD0025DAAF /* OVCandidateListImpl.mm */,
-				D4AF7DB12B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.h */,
-				D4AF7DBC2B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm */,
-				D4AF7DB32B30A7DD0025DAAF /* OVCandidateServiceImpl.h */,
-				D4AF7DB62B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.h */,
-				D4AF7DBA2B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.cpp */,
-				D4AF7DBB2B30A7DD0025DAAF /* OVCandidateServiceImpl.mm */,
-				D4AF7DB52B30A7DD0025DAAF /* OVTextBufferImpl.h */,
-				D4AF7DBF2B30A7DD0025DAAF /* OVTextBufferImpl.cpp */,
-				D4AF7DB72B30A7DD0025DAAF /* OVTextBufferCombinator.h */,
-				D4AF7DB42B30A7DD0025DAAF /* OVTextBufferCombinator.mm */,
-			);
-			path = OpenVanillaImpl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -640,17 +592,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */,
-				D4AF7DC42B30A7DD0025DAAF /* OVTextBufferCombinator.mm in Sources */,
 				D449C63F2B2FFA260060653A /* GeneralPreferencesViewController.swift in Sources */,
 				D449C63D2B2FF0FC0060653A /* ArrayPreferencesViewController.swift in Sources */,
-				D4AF7DC22B30A7DD0025DAAF /* OVConcreteKeyImpl.cpp in Sources */,
-				D4AF7DC92B30A7DD0025DAAF /* OVTextBufferImpl.cpp in Sources */,
-				D4AF7DC32B30A7DD0025DAAF /* OVConstants.m in Sources */,
-				D4AF7DC72B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm in Sources */,
 				D4AF7DC12B30A7DD0025DAAF /* OVModuleManager.mm in Sources */,
 				D449C6412B3009DC0060653A /* BaseModulePreferencesViewController.swift in Sources */,
 				D414E3042B2A2624001863EF /* AddTableBasedInputMethodViewController.swift in Sources */,
-				D4AF7DC52B30A7DD0025DAAF /* OVPlistBackedKeyValueMapImpl.cpp in Sources */,
 				D40E28FF2B31D17D00EBD97C /* main.swift in Sources */,
 				D4F50BCA2B28A15400C6C364 /* NonModalAlertWindowController.swift in Sources */,
 				D449C6372B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift in Sources */,
@@ -660,8 +606,6 @@
 				D449C6432B300FB60060653A /* BasePreferencesViewController.swift in Sources */,
 				D4AF7DC02B30A7DD0025DAAF /* OVLoaderServiceImpl.mm in Sources */,
 				D4F50BC02B289C8C00C6C364 /* AppDelegate.swift in Sources */,
-				D4AF7DC62B30A7DD0025DAAF /* OVCandidateServiceImpl.mm in Sources */,
-				D4AF7DC82B30A7DD0025DAAF /* OVCandidateListImpl.mm in Sources */,
 				D449C6392B2F68D90060653A /* TableBasedModulePreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

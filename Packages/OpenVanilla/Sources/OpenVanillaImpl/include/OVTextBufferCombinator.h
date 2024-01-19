@@ -26,6 +26,7 @@
 //
 
 #import "OVTextBufferImpl.h"
+@import Cocoa;
 
 namespace OpenVanilla {
     class OVTextBufferCombinator {

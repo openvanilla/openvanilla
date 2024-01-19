@@ -28,11 +28,14 @@
 #import "OVCandidateService.h"
 #import "OVCandidateListImpl.h"
 
-@import CandidateUI;
+//@import CandidateUI;
 
 extern NSString *const OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification;
 extern NSString *const OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey;
 extern NSString *const OVOneDimensionalCandidatePanelImplSelectedCandidateStringKey;
+
+@class VTCandidateController;
+@protocol VTCandidateControllerDelegate;
 
 namespace OpenVanilla {
 
