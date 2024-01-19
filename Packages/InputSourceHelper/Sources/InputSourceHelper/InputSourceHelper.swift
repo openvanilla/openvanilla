@@ -124,7 +124,7 @@ public class InputSourceHelper: NSObject {
     }
 
     @objc(registerInputSource:)
-    public static func registerTnputSource(at url: URL) -> Bool {
+    public static func registerInputSource(at url: URL) -> Bool {
         let status = TISRegisterInputSource(url as CFURL)
         return status == noErr
     }
