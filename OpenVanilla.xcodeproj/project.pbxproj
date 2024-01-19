@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -39,20 +39,23 @@
 		6AECB188253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */; };
 		6AECB189253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */; };
 		D40E28FF2B31D17D00EBD97C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E28FE2B31D17D00EBD97C /* main.swift */; };
-		D40E29022B31D1AE00EBD97C /* InputSourceHelper in Frameworks */ = {isa = PBXBuildFile; productRef = D40E29012B31D1AE00EBD97C /* InputSourceHelper */; };
 		D40E29062B31D28500EBD97C /* ArchiveUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E29042B31D28500EBD97C /* ArchiveUtil.swift */; };
 		D40E29072B31D28500EBD97C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E29052B31D28500EBD97C /* AppDelegate.swift */; };
-		D40E29092B31D2C900EBD97C /* InputSourceHelper in Frameworks */ = {isa = PBXBuildFile; productRef = D40E29082B31D2C900EBD97C /* InputSourceHelper */; };
 		D40E290C2B31D38B00EBD97C /* BundleTranslocate.m in Sources */ = {isa = PBXBuildFile; fileRef = D40E290B2B31D38B00EBD97C /* BundleTranslocate.m */; };
 		D414E3022B29AFD1001863EF /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414E3012B29AFD1001863EF /* PreferencesWindowController.swift */; };
 		D414E3042B2A2624001863EF /* AddTableBasedInputMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414E3032B2A2624001863EF /* AddTableBasedInputMethodViewController.swift */; };
+		D43066782B5A0921000639F3 /* CandidateUI in Frameworks */ = {isa = PBXBuildFile; productRef = D43066772B5A0921000639F3 /* CandidateUI */; };
+		D430667A2B5A0921000639F3 /* InputSourceHelper in Frameworks */ = {isa = PBXBuildFile; productRef = D43066792B5A0921000639F3 /* InputSourceHelper */; };
+		D430667C2B5A0921000639F3 /* OpenVanilla in Frameworks */ = {isa = PBXBuildFile; productRef = D430667B2B5A0921000639F3 /* OpenVanilla */; };
+		D430667E2B5A0921000639F3 /* TooltipUI in Frameworks */ = {isa = PBXBuildFile; productRef = D430667D2B5A0921000639F3 /* TooltipUI */; };
+		D43066802B5A0921000639F3 /* VXHanConvert in Frameworks */ = {isa = PBXBuildFile; productRef = D430667F2B5A0921000639F3 /* VXHanConvert */; };
+		D43066842B5A094C000639F3 /* InputSourceHelper in Frameworks */ = {isa = PBXBuildFile; productRef = D43066832B5A094C000639F3 /* InputSourceHelper */; };
 		D449C6372B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6362B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift */; };
 		D449C6392B2F68D90060653A /* TableBasedModulePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6382B2F68D90060653A /* TableBasedModulePreferencesViewController.swift */; };
 		D449C63D2B2FF0FC0060653A /* ArrayPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C63C2B2FF0FC0060653A /* ArrayPreferencesViewController.swift */; };
 		D449C63F2B2FFA260060653A /* GeneralPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */; };
 		D449C6412B3009DC0060653A /* BaseModulePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */; };
 		D449C6432B300FB60060653A /* BasePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6422B300FB60060653A /* BasePreferencesViewController.swift */; };
-		D46CD4CC2B21A21B00AEBCA6 /* OpenVanilla in Frameworks */ = {isa = PBXBuildFile; productRef = D46CD4CB2B21A21B00AEBCA6 /* OpenVanilla */; };
 		D4AF7DC02B30A7DD0025DAAF /* OVLoaderServiceImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DAA2B30A7DD0025DAAF /* OVLoaderServiceImpl.mm */; };
 		D4AF7DC12B30A7DD0025DAAF /* OVModuleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DAD2B30A7DD0025DAAF /* OVModuleManager.mm */; };
 		D4AF7DC22B30A7DD0025DAAF /* OVConcreteKeyImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DAF2B30A7DD0025DAAF /* OVConcreteKeyImpl.cpp */; };
@@ -63,9 +66,6 @@
 		D4AF7DC72B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBC2B30A7DD0025DAAF /* OVOneDimensionalCandidatePanelImpl.mm */; };
 		D4AF7DC82B30A7DD0025DAAF /* OVCandidateListImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBE2B30A7DD0025DAAF /* OVCandidateListImpl.mm */; };
 		D4AF7DC92B30A7DD0025DAAF /* OVTextBufferImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4AF7DBF2B30A7DD0025DAAF /* OVTextBufferImpl.cpp */; };
-		D4EE86072B30B4CE00B3BFC9 /* VXHanConvert in Frameworks */ = {isa = PBXBuildFile; productRef = D4EE86062B30B4CE00B3BFC9 /* VXHanConvert */; };
-		D4EE86092B30B4CE00B3BFC9 /* CandidateUI in Frameworks */ = {isa = PBXBuildFile; productRef = D4EE86082B30B4CE00B3BFC9 /* CandidateUI */; };
-		D4EE860B2B30B4CE00B3BFC9 /* TooltipUI in Frameworks */ = {isa = PBXBuildFile; productRef = D4EE860A2B30B4CE00B3BFC9 /* TooltipUI */; };
 		D4F50BBC2B28898E00C6C364 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */; };
 		D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBD2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift */; };
 		D4F50BC02B289C8C00C6C364 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBF2B289C8C00C6C364 /* AppDelegate.swift */; };
@@ -185,6 +185,11 @@
 		D40E290B2B31D38B00EBD97C /* BundleTranslocate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BundleTranslocate.m; sourceTree = "<group>"; };
 		D414E3012B29AFD1001863EF /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		D414E3032B2A2624001863EF /* AddTableBasedInputMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableBasedInputMethodViewController.swift; sourceTree = "<group>"; };
+		D43066682B5A08DE000639F3 /* OpenVanilla */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = OpenVanilla; path = Packages/OpenVanilla; sourceTree = "<group>"; };
+		D43066692B5A08E4000639F3 /* CandidateUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CandidateUI; path = Packages/CandidateUI; sourceTree = "<group>"; };
+		D430666A2B5A08E6000639F3 /* InputSourceHelper */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = InputSourceHelper; path = Packages/InputSourceHelper; sourceTree = "<group>"; };
+		D430666B2B5A08E9000639F3 /* TooltipUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TooltipUI; path = Packages/TooltipUI; sourceTree = "<group>"; };
+		D43066852B5A09E9000639F3 /* VXHanConvert */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = VXHanConvert; path = Packages/VXHanConvert; sourceTree = "<group>"; };
 		D449C6362B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociatedPhrasesPreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C6382B2F68D90060653A /* TableBasedModulePreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBasedModulePreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C63C2B2FF0FC0060653A /* ArrayPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayPreferencesViewController.swift; sourceTree = "<group>"; };
@@ -226,7 +231,7 @@
 			files = (
 				6AA7C2AF274F4FF000B84443 /* Carbon.framework in Frameworks */,
 				6AA7C2AE274F4FC900B84443 /* InputMethodKit.framework in Frameworks */,
-				D40E29092B31D2C900EBD97C /* InputSourceHelper in Frameworks */,
+				D43066842B5A094C000639F3 /* InputSourceHelper in Frameworks */,
 				6AA7C2AD274F4FC000B84443 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,13 +240,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4EE860B2B30B4CE00B3BFC9 /* TooltipUI in Frameworks */,
-				D46CD4CC2B21A21B00AEBCA6 /* OpenVanilla in Frameworks */,
-				D40E29022B31D1AE00EBD97C /* InputSourceHelper in Frameworks */,
-				D4EE86072B30B4CE00B3BFC9 /* VXHanConvert in Frameworks */,
-				D4EE86092B30B4CE00B3BFC9 /* CandidateUI in Frameworks */,
+				D430667E2B5A0921000639F3 /* TooltipUI in Frameworks */,
 				6ABBAF2C15CD61BE0080EE7D /* Carbon.framework in Frameworks */,
+				D43066802B5A0921000639F3 /* VXHanConvert in Frameworks */,
+				D430667A2B5A0921000639F3 /* InputSourceHelper in Frameworks */,
 				6ABBAEF515CD58F90080EE7D /* Cocoa.framework in Frameworks */,
+				D43066782B5A0921000639F3 /* CandidateUI in Frameworks */,
+				D430667C2B5A0921000639F3 /* OpenVanilla in Frameworks */,
 				6ABBAF2A15CD61B60080EE7D /* InputMethodKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,6 +319,7 @@
 		6ABBAEE515CD58F90080EE7D = {
 			isa = PBXGroup;
 			children = (
+				D43066672B5A08C7000639F3 /* Packages */,
 				6ACB49B315E49DF200380B82 /* DataTables */,
 				6ABBAEFA15CD58F90080EE7D /* InputMethod Application */,
 				6A0E0ABC1623EDF5004FED10 /* Installer */,
@@ -398,6 +404,18 @@
 			path = DataTables;
 			sourceTree = "<group>";
 		};
+		D43066672B5A08C7000639F3 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				D43066852B5A09E9000639F3 /* VXHanConvert */,
+				D430666A2B5A08E6000639F3 /* InputSourceHelper */,
+				D43066682B5A08DE000639F3 /* OpenVanilla */,
+				D43066692B5A08E4000639F3 /* CandidateUI */,
+				D430666B2B5A08E9000639F3 /* TooltipUI */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		D4AF7DA72B3097430025DAAF /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,11 +487,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				D43066822B5A0946000639F3 /* PBXTargetDependency */,
 				6A0E0AD81623EF95004FED10 /* PBXTargetDependency */,
 			);
 			name = OpenVanillaInstaller;
 			packageProductDependencies = (
-				D40E29082B31D2C900EBD97C /* InputSourceHelper */,
+				D43066832B5A094C000639F3 /* InputSourceHelper */,
 			);
 			productName = OpenVanillaInstaller;
 			productReference = 6A0E0A9F1623EDA9004FED10 /* OpenVanillaInstaller.app */;
@@ -493,14 +512,19 @@
 			buildRules = (
 			);
 			dependencies = (
+				D430666E2B5A0915000639F3 /* PBXTargetDependency */,
+				D43066702B5A0915000639F3 /* PBXTargetDependency */,
+				D43066722B5A0915000639F3 /* PBXTargetDependency */,
+				D43066742B5A0915000639F3 /* PBXTargetDependency */,
+				D43066762B5A0915000639F3 /* PBXTargetDependency */,
 			);
 			name = OpenVanilla;
 			packageProductDependencies = (
-				D46CD4CB2B21A21B00AEBCA6 /* OpenVanilla */,
-				D4EE86062B30B4CE00B3BFC9 /* VXHanConvert */,
-				D4EE86082B30B4CE00B3BFC9 /* CandidateUI */,
-				D4EE860A2B30B4CE00B3BFC9 /* TooltipUI */,
-				D40E29012B31D1AE00EBD97C /* InputSourceHelper */,
+				D43066772B5A0921000639F3 /* CandidateUI */,
+				D43066792B5A0921000639F3 /* InputSourceHelper */,
+				D430667B2B5A0921000639F3 /* OpenVanilla */,
+				D430667D2B5A0921000639F3 /* TooltipUI */,
+				D430667F2B5A0921000639F3 /* VXHanConvert */,
 			);
 			productName = OpenVanilla;
 			productReference = 6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */;
@@ -537,11 +561,6 @@
 			);
 			mainGroup = 6ABBAEE515CD58F90080EE7D;
 			packageReferences = (
-				D46CD4BF2B21943300AEBCA6 /* XCLocalSwiftPackageReference "Packages/OpenVanilla" */,
-				D4EE86032B30B48D00B3BFC9 /* XCLocalSwiftPackageReference "Packages/VXHanConvert" */,
-				D4EE86042B30B49900B3BFC9 /* XCLocalSwiftPackageReference "Packages/CandidateUI" */,
-				D4EE86052B30B4A500B3BFC9 /* XCLocalSwiftPackageReference "Packages/TooltipUI" */,
-				D40E29002B31D1A000EBD97C /* XCLocalSwiftPackageReference "Packages/InputSourceHelper" */,
 			);
 			productRefGroup = 6ABBAEF115CD58F90080EE7D /* Products */;
 			projectDirPath = "";
@@ -654,6 +673,30 @@
 			isa = PBXTargetDependency;
 			target = 6ABBAEEF15CD58F90080EE7D /* OpenVanilla */;
 			targetProxy = 6A0E0AD71623EF95004FED10 /* PBXContainerItemProxy */;
+		};
+		D430666E2B5A0915000639F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = D430666D2B5A0915000639F3 /* InputSourceHelper */;
+		};
+		D43066702B5A0915000639F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = D430666F2B5A0915000639F3 /* VXHanConvert */;
+		};
+		D43066722B5A0915000639F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = D43066712B5A0915000639F3 /* OpenVanilla */;
+		};
+		D43066742B5A0915000639F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = D43066732B5A0915000639F3 /* CandidateUI */;
+		};
+		D43066762B5A0915000639F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = D43066752B5A0915000639F3 /* TooltipUI */;
+		};
+		D43066822B5A0946000639F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = D43066812B5A0946000639F3 /* InputSourceHelper */;
 		};
 /* End PBXTargetDependency section */
 
@@ -968,59 +1011,54 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		D40E29002B31D1A000EBD97C /* XCLocalSwiftPackageReference "Packages/InputSourceHelper" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Packages/InputSourceHelper;
-		};
-		D46CD4BF2B21943300AEBCA6 /* XCLocalSwiftPackageReference "Packages/OpenVanilla" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Packages/OpenVanilla;
-		};
-		D4EE86032B30B48D00B3BFC9 /* XCLocalSwiftPackageReference "Packages/VXHanConvert" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Packages/VXHanConvert;
-		};
-		D4EE86042B30B49900B3BFC9 /* XCLocalSwiftPackageReference "Packages/CandidateUI" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Packages/CandidateUI;
-		};
-		D4EE86052B30B4A500B3BFC9 /* XCLocalSwiftPackageReference "Packages/TooltipUI" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Packages/TooltipUI;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		D40E29012B31D1AE00EBD97C /* InputSourceHelper */ = {
+		D430666D2B5A0915000639F3 /* InputSourceHelper */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D40E29002B31D1A000EBD97C /* XCLocalSwiftPackageReference "Packages/InputSourceHelper" */;
 			productName = InputSourceHelper;
 		};
-		D40E29082B31D2C900EBD97C /* InputSourceHelper */ = {
+		D430666F2B5A0915000639F3 /* VXHanConvert */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D40E29002B31D1A000EBD97C /* XCLocalSwiftPackageReference "Packages/InputSourceHelper" */;
-			productName = InputSourceHelper;
-		};
-		D46CD4CB2B21A21B00AEBCA6 /* OpenVanilla */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D46CD4BF2B21943300AEBCA6 /* XCLocalSwiftPackageReference "Packages/OpenVanilla" */;
-			productName = OpenVanilla;
-		};
-		D4EE86062B30B4CE00B3BFC9 /* VXHanConvert */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D4EE86032B30B48D00B3BFC9 /* XCLocalSwiftPackageReference "Packages/VXHanConvert" */;
 			productName = VXHanConvert;
 		};
-		D4EE86082B30B4CE00B3BFC9 /* CandidateUI */ = {
+		D43066712B5A0915000639F3 /* OpenVanilla */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D4EE86042B30B49900B3BFC9 /* XCLocalSwiftPackageReference "Packages/CandidateUI" */;
+			productName = OpenVanilla;
+		};
+		D43066732B5A0915000639F3 /* CandidateUI */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = CandidateUI;
 		};
-		D4EE860A2B30B4CE00B3BFC9 /* TooltipUI */ = {
+		D43066752B5A0915000639F3 /* TooltipUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D4EE86052B30B4A500B3BFC9 /* XCLocalSwiftPackageReference "Packages/TooltipUI" */;
 			productName = TooltipUI;
+		};
+		D43066772B5A0921000639F3 /* CandidateUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CandidateUI;
+		};
+		D43066792B5A0921000639F3 /* InputSourceHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = InputSourceHelper;
+		};
+		D430667B2B5A0921000639F3 /* OpenVanilla */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OpenVanilla;
+		};
+		D430667D2B5A0921000639F3 /* TooltipUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TooltipUI;
+		};
+		D430667F2B5A0921000639F3 /* VXHanConvert */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VXHanConvert;
+		};
+		D43066812B5A0946000639F3 /* InputSourceHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = InputSourceHelper;
+		};
+		D43066832B5A094C000639F3 /* InputSourceHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = InputSourceHelper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
