@@ -27,21 +27,6 @@
 
 
 @import InputMethodKit;
-@import OpenVanilla;
-@import TooltipUI;
-
-#import "OVTextBufferImpl.h"
-
-using namespace OpenVanilla;
 
 @interface OVInputMethodController : IMKInputController
-{
-@protected
-    OVTextBufferImpl *_composingText;
-    OVTextBufferImpl *_readingText;
-    OVEventHandlingContext *_inputMethodContext;
-    OVEventHandlingContext *_associatedPhrasesContext;
-    BOOL _associatedPhrasesContextInUse;
-    id _currentClient;
-}
 @end

@@ -27,16 +27,26 @@
 
 #import "OVInputMethodController.h"
 #import "OpenVanilla-Swift.h"
-#import "OVTextBufferImpl.h"
-#import "OVLoaderServiceImpl.h"
-#import "OVCandidateServiceImpl.h"
-#import "OVTextBufferCombinator.h"
-#import "OVModuleManager.h"
-#import "OVConstants.h"
 
+@import OpenVanilla;
+@import OpenVanillaImpl;
+@import LoaderService;
+@import ModuleManager;
 @import TooltipUI;
 
+using namespace OpenVanilla;
+
 @interface OVInputMethodController ()
+{
+@protected
+    OVTextBufferImpl *_composingText;
+    OVTextBufferImpl *_readingText;
+    OVEventHandlingContext *_inputMethodContext;
+    OVEventHandlingContext *_associatedPhrasesContext;
+    BOOL _associatedPhrasesContextInUse;
+    id _currentClient;
+}
+
 - (BOOL)handleOVKey:(OVKey &)key client:(id)client;
 - (void)handleInputMethodChange:(NSNotification *)notification;
 - (void)handleCandidateSelected:(NSNotification *)notification;
