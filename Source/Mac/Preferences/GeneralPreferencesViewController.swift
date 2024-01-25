@@ -24,6 +24,7 @@
 
 import Foundation
 import Cocoa
+import OpenVanillaImpl
 
 @objc (OVGeneralPreferencesViewController)
 class GeneralPreferencesViewController: BasePreferencesViewController {

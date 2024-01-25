@@ -30,16 +30,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ONCanInstallChekResult <NSObject>
+@protocol ONCanInstallCheckResult <NSObject>
 @end
 
-@interface OVCanInstall : NSObject <ONCanInstallChekResult>
+@interface OVCanInstall : NSObject <ONCanInstallCheckResult>
 @property (readonly, assign) BOOL willOverrideBuiltInTable;
 @property (readonly, strong) NSString *identifierIfInstalled;
 @property (readonly, strong) NSString *localizedNameIfInstalled;
 @end
 
-@interface OVCanNotInstall : NSObject <ONCanInstallChekResult>
+@interface OVCanNotInstall : NSObject <ONCanInstallCheckResult>
 @property (readonly, strong) NSError *error;
 @end
 
@@ -63,7 +63,7 @@ namespace OpenVanilla {
 
 - (NSString *)alphanumericKeyboardLayoutForInputMethod:(NSString *)identifier;
 - (BOOL)isTableBasedInputMethodIdentifier:(NSString *)identifier;
-- (id<ONCanInstallChekResult>)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path;
+- (id<ONCanInstallCheckResult>)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path;
 - (void)installCustomTableBasedInputMethodWithTablePath:(NSString *)path;
 - (BOOL)isCustomTableBasedInputMethod:(NSString *)identifier;
 - (BOOL)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError **)error;

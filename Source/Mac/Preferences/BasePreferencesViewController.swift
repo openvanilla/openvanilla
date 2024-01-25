@@ -25,6 +25,7 @@
 import Foundation
 import Cocoa
 import Carbon
+import ModuleManager
 
 @objc (BasePreferencesViewController)
 class BasePreferencesViewController: NSViewController {

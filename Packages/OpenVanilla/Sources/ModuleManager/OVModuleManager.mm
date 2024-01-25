@@ -27,17 +27,16 @@
 
 #import "OVModuleManager.h"
 #import <set>
-#import "OVAFAssociatedPhrasesContext.h"
-#import "OVCandidateServiceImpl.h"
-#import "OVConstants.h"
-#import "OVIMArray.h"
-#import "OVIMTableBased.h"
-#import "OVIMBig5Code.h"
 #import "OVLoaderServiceImpl.h"
 #import "OVPlistBackedKeyValueMapImpl.h"
 
+@import OpenVanillaImpl;
 @import TooltipUI;
 @import VXHanConvert;
+@import OVAFAssociatedPhrases;
+@import OVIMArray;
+@import OVIMTableBased;
+@import OVIMBig5Code;
 
 @interface OVCanInstall ()
 @property (readwrite, assign) BOOL willOverrideBuiltInTable;
@@ -381,7 +380,7 @@ static string InputMethodConfigIdentifier(const string &identifier) {
     return [identifier hasPrefix:@"org.openvanilla.OVIMTableBased."];
 }
 
-- (id <ONCanInstallChekResult>)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path
+- (id <ONCanInstallCheckResult>)canInstallCustomTableBasedInputMethodWithTablePath:(NSString *)path
 {
     const char *posixPath = path.fileSystemRepresentation;
 

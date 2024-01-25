@@ -24,6 +24,7 @@
 
 import Foundation
 import Cocoa
+import ModuleManager
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 

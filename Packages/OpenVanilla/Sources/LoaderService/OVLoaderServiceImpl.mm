@@ -1,5 +1,5 @@
 //
-// OVTextBufferCombinator.h
+// OVConcreteKeyImpl.mm
 //
 // Copyright (c) 2004-2012 Lukhnos Liu (lukhnos at openvanilla dot org)
 //
@@ -25,19 +25,40 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "OVTextBufferImpl.h"
+#import "OVLoaderServiceImpl.h"
+@import OpenVanillaImpl;
 
-namespace OpenVanilla {
-    class OVTextBufferCombinator {
-    public:
-        OVTextBufferCombinator(const OVTextBufferImpl* composingText, const OVTextBufferImpl* readingText);
-        ~OVTextBufferCombinator();
+using namespace OpenVanilla;
 
-        NSAttributedString *combinedAttributedString();
-        NSRange selectionRange();
+static string currentLocale;
 
-    protected:
-        NSUInteger m_cursorIndex;
-        NSMutableAttributedString *m_attrText;
-    };
-};
+void OVLoaderServiceImpl::beep()
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:OVMakeSoundFeedbackOnInputErrorKey]) {
+        NSBeep();
+    }
+}
+
+const string OVLoaderServiceImpl::locale() const
+{
+    return currentLocale;
+}
+
+const OVKey OVLoaderServiceImpl::makeOVKey(int characterCode, bool alt, bool opt, bool ctrl, bool shift, bool command, bool capsLock, bool numLock)
+{
+    return OVKey(new OVConcreteKeyImpl (characterCode, alt, opt, ctrl, shift, command, capsLock, numLock));
+}
+
+const OVKey OVLoaderServiceImpl::makeOVKey(const string& receivedString, bool alt, bool opt, bool ctrl, bool shift, bool command, bool capsLock, bool numLock)
+{
+    return OVKey(new OVConcreteKeyImpl(receivedString, alt, opt, ctrl, shift, command, capsLock, numLock));
+}
+
+ostream& OVLoaderServiceImpl::logger(const string& sectionName)
+{
+    return cerr;
+}
+
+void OVLoaderServiceImpl::setCurrentLocale(string locale) {
+    currentLocale = locale;
+}

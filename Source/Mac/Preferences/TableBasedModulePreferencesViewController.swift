@@ -24,6 +24,8 @@
 
 import Foundation
 import Cocoa
+import OpenVanillaImpl
+import ModuleManager
 
 @objc (OVTableBasedModulePreferencesViewController)
 class TableBasedModulePreferencesViewController: BaseModulePreferencesViewController {

@@ -24,6 +24,7 @@
 import Cocoa
 import InputMethodKit
 import InputSourceHelper
+import OpenVanillaImpl
 
 private func install() -> Int32 {
     guard let bundleID = Bundle.main.bundleIdentifier else {
@@ -35,7 +36,7 @@ private func install() -> Int32 {
     if maybeInputSource == nil {
         NSLog("Registering input source \(bundleID) at \(bundleUrl.absoluteString)");
         // then register
-        let status = InputSourceHelper.registerTnputSource(at: bundleUrl)
+        let status = InputSourceHelper.registerInputSource(at: bundleUrl)
 
         if !status {
             NSLog("Fatal error: Cannot register input source \(bundleID) at \(bundleUrl.absoluteString).")
