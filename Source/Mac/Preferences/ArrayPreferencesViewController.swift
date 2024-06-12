@@ -27,7 +27,7 @@ import Cocoa
 
 private let kArrayModuleIdentifier = "org.openvanilla.OVIMArray"
 
-@objc (OVIMArrayPreferencesViewController)
+@objc(OVIMArrayPreferencesViewController)
 class ArrayPreferencesViewController: BaseModulePreferencesViewController {
     @IBOutlet weak var fieldAutoSP: NSButton!
     @IBOutlet weak var fieldForceSP: NSButton!

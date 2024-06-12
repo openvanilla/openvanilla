@@ -27,7 +27,7 @@ import Cocoa
 
 fileprivate var kModuleIdentifier = "org.openvanilla.OVAFAssociatedPhrases"
 
-@objc (OVAFAssociatedPhrasesPreferencesViewController)
+@objc(OVAFAssociatedPhrasesPreferencesViewController)
 class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewController {
 
     @IBOutlet weak var fieldSelectionKeys: NSPopUpButton!

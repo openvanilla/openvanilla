@@ -27,7 +27,7 @@ import Cocoa
 import OpenVanillaImpl
 import ModuleManager
 
-@objc (OVTableBasedModulePreferencesViewController)
+@objc(OVTableBasedModulePreferencesViewController)
 class TableBasedModulePreferencesViewController: BaseModulePreferencesViewController {
 
     @IBOutlet var fieldAlphaNumericKeyboardLayout: NSPopUpButton!

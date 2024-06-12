@@ -27,7 +27,7 @@ import Cocoa
 import OpenVanillaImpl
 import ModuleManager
 
-@objc (OVAddTableBasedInputMethodViewController)
+@objc(OVAddTableBasedInputMethodViewController)
 class AddTableBasedInputMethodViewController: BasePreferencesViewController {
 
     @IBOutlet weak var moreInfoTextField: NSTextField!
@@ -81,7 +81,7 @@ class AddTableBasedInputMethodViewController: BasePreferencesViewController {
         return false
     }
 
-    @IBAction @objc (importNewTableAction:)
+    @IBAction @objc(importNewTableAction:)
     func importNewTableAction(_ sender: Any?) {
         let panel = NSOpenPanel()
         panel.title = NSLocalizedString("Pick the .cin Table to Import", comment: "")

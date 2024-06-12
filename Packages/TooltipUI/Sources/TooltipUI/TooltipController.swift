@@ -23,7 +23,7 @@
 
 import Cocoa
 
-@objc (OVToolTipWindowController)
+@objc(OVToolTipWindowController)
 public class TooltipController: NSWindowController {
     private let backgroundColor = NSColor(calibratedHue: 0.16, saturation: 0.22, brightness: 0.97, alpha: 1.0)
     private var messageTextField: NSTextField

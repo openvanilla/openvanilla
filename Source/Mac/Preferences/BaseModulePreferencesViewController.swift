@@ -26,7 +26,7 @@ import Foundation
 import Cocoa
 import Carbon
 
-@objc (OVBaseModulePreferencesViewController)
+@objc(OVBaseModulePreferencesViewController)
 class BaseModulePreferencesViewController: BasePreferencesViewController {
 
     func boolValue(forKey key: String) -> Bool {

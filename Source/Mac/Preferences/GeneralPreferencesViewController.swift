@@ -26,7 +26,7 @@ import Foundation
 import Cocoa
 import OpenVanillaImpl
 
-@objc (OVGeneralPreferencesViewController)
+@objc(OVGeneralPreferencesViewController)
 class GeneralPreferencesViewController: BasePreferencesViewController {
     @IBOutlet weak var fieldCandidateSize: NSPopUpButton!
     @IBOutlet weak var fieldCandidateStyle: NSMatrix!
@@ -81,13 +81,13 @@ class GeneralPreferencesViewController: BasePreferencesViewController {
         lastUpdateCheckDateLabel.stringValue = lastCheckString
     }
 
-    @objc (checkForUpdateAction:)
+    @objc(checkForUpdateAction:)
     @IBAction func checkForUpdateAction(_ sender: Any?) {
         checkForUpdateButton.isEnabled = false
         UpdateChecker.shared.checkForUpdate()
     }
 
-    @objc (updateField:)
+    @objc(updateField:)
     @IBAction func updateField(_ sender: Any?) {
         let userDefaults = UserDefaults.standard
         if let candidateSize = fieldCandidateSize.selectedItem?.title {

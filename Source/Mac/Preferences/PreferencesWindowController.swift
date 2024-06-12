@@ -40,7 +40,7 @@ typealias PreferencesItem = (identifier: String,
                              localizedName: String,
                              viewController: BasePreferencesViewController)
 
-@objc (OVPreferencesWindowController)
+@objc(OVPreferencesWindowController)
 class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var modulePreferencesContainerView: NSView!
@@ -107,7 +107,7 @@ class PreferencesWindowController: NSWindowController {
     
     // MARK: - Private methods
     
-    @objc (selectInputMethodIdentifier:)
+    @objc(selectInputMethodIdentifier:)
     func select(inputMethodIdentifier identifier: String) {
         
         for (index, element) in items.enumerated() {

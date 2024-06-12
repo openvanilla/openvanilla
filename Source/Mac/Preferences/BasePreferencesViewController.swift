@@ -27,7 +27,7 @@ import Cocoa
 import Carbon
 import ModuleManager
 
-@objc (BasePreferencesViewController)
+@objc(BasePreferencesViewController)
 class BasePreferencesViewController: NSViewController {
     
     var moduleIdentifier: String?
