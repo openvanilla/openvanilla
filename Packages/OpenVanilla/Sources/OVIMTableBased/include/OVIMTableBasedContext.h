@@ -54,7 +54,7 @@ namespace OpenVanilla {
         virtual bool handleBackspace(OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
         virtual bool isEndKey(const OVKey* key);
         virtual bool isValidKeyString(const string& keyString);
-        virtual void showSpecialCodePromptIfRequired(const string& sendText, OVLoaderService* srv);
+        virtual const string createTooltip(const string& sendText);
 
         OVIMTableBased* m_module;
         vector<string> m_components;

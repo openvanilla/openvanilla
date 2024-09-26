@@ -56,16 +56,13 @@ let package = Package(
             dependencies: ["OpenVanilla"]),
         .target(
             name: "OVIMTableBased",
-            dependencies: ["OpenVanilla", "LegacyOpenVanilla"]),
+            dependencies: ["OpenVanilla"]),
         .target(
             name: "OVIMArray",
             dependencies: ["OpenVanilla", "LegacyOpenVanilla"]),
         .target(
             name: "OVAFAssociatedPhrases",
             dependencies: ["OpenVanilla"]),
-//        .testTarget(
-//            name: "OpenVanillaTests",
-//            dependencies: ["OpenVanilla"]),
     ],
     cxxLanguageStandard: CXXLanguageStandard.cxx11
 )

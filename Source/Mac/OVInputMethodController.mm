@@ -229,12 +229,6 @@ using namespace OpenVanilla;
 
 - (BOOL)handleEvent:(NSEvent *)event client:(id)client
 {
-    if (_readingText->toolTipText().length() || _composingText->toolTipText().length()) {
-        _readingText->clearToolTip();
-        _composingText->clearToolTip();
-        [[OVModuleManager defaultManager].toolTipWindowController.window orderOut:self];
-    }
-
     if (event.type == NSEventTypeFlagsChanged) {
         NSString *sharedKeyboardLayout = [[OVModuleManager defaultManager] sharedAlphanumericKeyboardLayoutIdentifier];
         NSString *inputMethodKeyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
@@ -248,9 +242,15 @@ using namespace OpenVanilla;
         return NO;
     }
 
-
     if (event.type != NSEventTypeKeyDown) {
         return NO;
+    }
+
+    if (_readingText->toolTipText().length() || _composingText->toolTipText().length()) {
+        NSLog(@"clear tooltip");
+        _readingText->clearToolTip();
+        _composingText->clearToolTip();
+        [[OVModuleManager defaultManager].toolTipWindowController.window orderOut:self];
     }
 
     NSString *chars = event.characters;
@@ -483,7 +483,9 @@ using namespace OpenVanilla;
     NSAttributedString *emptyReading = [[NSAttributedString alloc] initWithString:@""];
     [_currentClient setMarkedText:emptyReading selectionRange:NSMakeRange(0, 0) replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
     _composingText->commit();
+
     [self commitComposition:_currentClient];
+
     _composingText->clear();
     _readingText->clear();
     [OVModuleManager defaultManager].candidateService->resetAll();
@@ -603,6 +605,7 @@ using namespace OpenVanilla;
         toolTipText = _composingText->toolTipText();
     }
 
+//    NSLog(@"toolTipText: %@", [NSString stringWithUTF8String:toolTipText.c_str()]);
     if (toolTipText.length()) {
         NSPoint toolTipOrigin = lineHeightRect.origin;
         BOOL fromTopLeft = YES;

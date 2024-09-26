@@ -71,7 +71,8 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
         composingText->commit();
         return true;
     }
-    
+
+    // Uppercased
     if (key->isCapsLockOn() || isNumPadKey || (key->isShiftPressed() && key->isKeyCodeAlpha() && !m_module->m_table->keynameMap()->isPairMapMixedCase())) {
         if (!readingText->isEmpty()) {
             readingText->clear();
@@ -138,7 +139,6 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
         if (readingText->isEmpty()) {
             if (key->keyCode() == OVKeyCode::Space) {
                 string text = key->receivedString();
-//              showSpecialCodePromptIfRequired(text, loaderService);
                 composingText->setText(text);
                 composingText->commit();
                 return true;
@@ -167,12 +167,15 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
     }
     else if (key->isDirectTextKey() && key->receivedString().size()) {
         string text = key->receivedString();
-        showSpecialCodePromptIfRequired(text, loaderService);
+        string tooltip = createTooltip(text);
         m_components.clear();
         readingText->clear();
         readingText->updateDisplay();
         composingText->setText(text);
         composingText->commit();
+        if (tooltip.length()) {
+            composingText->showToolTip(tooltip);
+        }
         return true;
     }
     else {
@@ -205,12 +208,15 @@ void OVIMTableBasedContext::candidateCanceled(OVCandidateService* candidateServi
 
 bool OVIMTableBasedContext::candidateSelected(OVCandidateService* candidateService, const string& text, size_t index, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService)
 {
-    showSpecialCodePromptIfRequired(text, loaderService);
+    string tooltip = createTooltip(text);
     m_components.clear();
     readingText->clear();
     readingText->updateDisplay();
     composingText->setText(text);
     composingText->commit();
+    if (tooltip.length()) {
+        composingText->showToolTip(tooltip);
+    }
     return true;
 }
 
@@ -236,13 +242,16 @@ bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* can
         if (m_module->m_configSendFirstCandidateWithSpaceWithOnePageList) {
             panel->hide();
             panel->cancelEventHandler();
-            auto text = panel->candidateList()->candidateAtIndex(0);
-            showSpecialCodePromptIfRequired(text, loaderService);
+            string text = panel->candidateList()->candidateAtIndex(0);
+            string tooltip = createTooltip(text);
             m_components.clear();
             readingText->clear();
             readingText->updateDisplay();
             composingText->setText(text);
             composingText->commit();
+            if (tooltip.length()) {
+                composingText->showToolTip(tooltip);
+            }
             return true;
         }
     }
@@ -250,13 +259,16 @@ bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* can
     if (key->keyCode() == kMacEnter) {
         panel->hide();
         panel->cancelEventHandler();
-        auto text = panel->candidateList()->candidateAtIndex(0);
-        showSpecialCodePromptIfRequired(text, loaderService);
+        string text = panel->candidateList()->candidateAtIndex(0);
+        string tooltip = createTooltip(text);
         m_components.clear();
         readingText->clear();
         readingText->updateDisplay();
         composingText->setText(text);
         composingText->commit();
+        if (tooltip.length()) {
+            composingText->showToolTip(tooltip);
+        }
         return true;
     }
 
@@ -408,11 +420,16 @@ bool OVIMTableBasedContext::compose(OVTextBuffer* readingText, OVTextBuffer* com
             panel->cancelEventHandler();
         }
 
+        string text = results[0];
+        string tooltip = createTooltip(text);
         m_components.clear();
         readingText->clear();
         readingText->updateDisplay();
-        composingText->setText(results[0]);
+        composingText->setText(text);
         composingText->commit();
+        if (tooltip.length()) {
+            composingText->showToolTip(tooltip);
+        }
         return true;
     }
     else {
@@ -504,22 +521,22 @@ bool OVIMTableBasedContext::isValidKeyString(const string& keyString)
     return keyNameForKeyString(keyString).length() > 0;
 }
 
-void OVIMTableBasedContext::showSpecialCodePromptIfRequired(const string& sendText, OVLoaderService* srv)
+const string OVIMTableBasedContext::createTooltip(const string& sendText)
 {
     if (!m_module->m_specialCodePrompt) {
-        return;
+        return "";
     }
     
     string queryKey = currentQueryKey();
     if (stringContainsWildcard(queryKey)) {
-        return;
+        return "";
     }
     vector<string> results = m_module->m_table->findKeys(sendText);
     std::sort(results.begin(), results.end(), [](const string& a, const string& b) {
         return a.length() < b.length();
     });
     if (results.size() == 0) {
-        return;;
+        return "";
     }
     string shortQueryKey = results[0];
     if (queryKey.length() > shortQueryKey.length()) {
@@ -529,7 +546,7 @@ void OVIMTableBasedContext::showSpecialCodePromptIfRequired(const string& sendTe
         }
         string reading = readingFromComponents(shortQueryKeyComponents);
         string message = sendText + ": " + reading;
-//        srv->logger(message);
-        srv->notify(message);
+        return message;
     }
+    return "";
 }
