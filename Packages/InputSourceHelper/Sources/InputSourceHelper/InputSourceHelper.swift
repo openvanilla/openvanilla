@@ -21,8 +21,8 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 
-import Cocoa
 import Carbon
+import Cocoa
 
 @objc(OVInputSourceHelper)
 public class InputSourceHelper: NSObject {
@@ -38,7 +38,9 @@ public class InputSourceHelper: NSObject {
     }
 
     @objc(inputSourceForProperty:stringValue:)
-    public static func inputSource(for propertyKey: CFString, stringValue: String) -> TISInputSource? {
+    public static func inputSource(for propertyKey: CFString, stringValue: String)
+        -> TISInputSource?
+    {
         let stringID = CFStringGetTypeID()
         for source in allInstalledInputSources() {
             if let propertyPtr = TISGetInputSourceProperty(source, propertyKey) {
@@ -80,7 +82,8 @@ public class InputSourceHelper: NSObject {
         var enabled = false
         for source in allInstalledInputSources() {
             guard let bundleIDPtr = TISGetInputSourceProperty(source, kTISPropertyBundleID),
-                  let _ = TISGetInputSourceProperty(source, kTISPropertyInputModeID) else {
+                TISGetInputSourceProperty(source, kTISPropertyInputModeID) != nil
+            else {
                 continue
             }
             let bundleID = Unmanaged<CFString>.fromOpaque(bundleIDPtr).takeUnretainedValue()
@@ -100,14 +103,18 @@ public class InputSourceHelper: NSObject {
     public static func enable(inputMode modeID: String, for bundleID: String) -> Bool {
         for source in allInstalledInputSources() {
             guard let bundleIDPtr = TISGetInputSourceProperty(source, kTISPropertyBundleID),
-                  let modePtr = TISGetInputSourceProperty(source, kTISPropertyInputModeID) else {
+                let modePtr = TISGetInputSourceProperty(source, kTISPropertyInputModeID)
+            else {
                 continue
             }
-            let inputsSourceBundleID = Unmanaged<CFString>.fromOpaque(bundleIDPtr).takeUnretainedValue()
+            let inputsSourceBundleID = Unmanaged<CFString>.fromOpaque(bundleIDPtr)
+                .takeUnretainedValue()
             let inputsSourceModeID = Unmanaged<CFString>.fromOpaque(modePtr).takeUnretainedValue()
             if modeID == String(inputsSourceModeID) && bundleID == String(inputsSourceBundleID) {
                 let enabled = enable(inputSource: source)
-                print("Attempt to enable input source of mode: \(modeID), bundle ID: \(bundleID), result: \(enabled)")
+                print(
+                    "Attempt to enable input source of mode: \(modeID), bundle ID: \(bundleID), result: \(enabled)"
+                )
                 return enabled
             }
 
@@ -130,4 +137,3 @@ public class InputSourceHelper: NSObject {
     }
 
 }
-
