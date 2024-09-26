@@ -137,7 +137,7 @@
 "Compose when reaching the maximum component length" = "打滿最大組字（或字根）長度就組字";
 "Horizontal" = "橫式";
 "Feedback:" = "音效：";
-"Quick mode (Force SP)" = "快打模式";
+"Quick mode (Force SP)" = "僅允許以特別碼輸入有特別碼的漢字";
 "Create a customized input method by importing a .cin file" = "匯入 .cin 格式檔案，建立新的輸入法";
 "Selection keys:" = "選字鍵：";
 "After a candidate is chosen:" = "選完聯想字詞後：";
