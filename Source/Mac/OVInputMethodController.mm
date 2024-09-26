@@ -239,7 +239,7 @@ using namespace OpenVanilla;
         NSString *sharedKeyboardLayout = [[OVModuleManager defaultManager] sharedAlphanumericKeyboardLayoutIdentifier];
         NSString *inputMethodKeyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
         if ((event.modifierFlags & NSEventModifierFlagShift) &&
-            [OVModuleManager defaultManager].alwaysFallbackToSharedAlphanumericKeyboardLayoutWhenShiftKeyPressed
+            [OVModuleManager defaultManager].fallbackToSharedAlphanumericKeyboardLayoutWhenShiftPressed
             ) {
             [client overrideKeyboardWithKeyboardNamed:sharedKeyboardLayout];
             return NO;

@@ -65,7 +65,7 @@ class GeneralPreferencesViewController: BasePreferencesViewController {
         fieldCandidateStyle.selectCell(withTag: style ? 1 : 0)
         configureKeyboardLayoutList(fieldAlphanumericKeyboardLayout)
         fieldAlwaysFallbackOnShift.state =
-            userDefaults.bool(forKey: OVAlwayFallbackToAlphanumericKeyboardLayoutOnShiffKey)
+            userDefaults.bool(forKey: OVFallbackToAlphanumericKeyboardLayoutOnShiftKey)
             ? .on : .off
         fieldPlaySound.state =
             userDefaults.bool(forKey: OVMakeSoundFeedbackOnInputErrorKey) ? .on : .off
@@ -113,7 +113,7 @@ class GeneralPreferencesViewController: BasePreferencesViewController {
         }
         userDefaults.setValue(
             fieldAlwaysFallbackOnShift.state == .on,
-            forKey: OVAlwayFallbackToAlphanumericKeyboardLayoutOnShiffKey)
+            forKey: OVFallbackToAlphanumericKeyboardLayoutOnShiftKey)
         userDefaults.setValue(
             fieldPlaySound.state == .on, forKey: OVMakeSoundFeedbackOnInputErrorKey)
         userDefaults.setValue(fieldCheckForUpdate.state == .on, forKey: OVCheckForUpdateKey)

@@ -574,15 +574,15 @@ static string InputMethodConfigIdentifier(const string &identifier) {
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (BOOL)alwaysFallbackToSharedAlphanumericKeyboardLayoutWhenShiftKeyPressed
+- (BOOL)fallbackToSharedAlphanumericKeyboardLayoutWhenShiftPressed
 {
-    BOOL flag = [[NSUserDefaults standardUserDefaults] boolForKey:OVAlwayFallbackToAlphanumericKeyboardLayoutOnShiffKey];
+    BOOL flag = [[NSUserDefaults standardUserDefaults] boolForKey:OVFallbackToAlphanumericKeyboardLayoutOnShiftKey];
     return flag;
 }
 
-- (void)setAlwaysFallbackToSharedAlphanumericKeyboardLayoutWhenShiftKeyPressed:(BOOL)flag
+- (void)setFallbackToSharedAlphanumericKeyboardLayoutWhenShiftPressed:(BOOL)flag
 {
-    [[NSUserDefaults standardUserDefaults] setBool:flag forKey:OVAlwayFallbackToAlphanumericKeyboardLayoutOnShiffKey];
+    [[NSUserDefaults standardUserDefaults] setBool:flag forKey:OVFallbackToAlphanumericKeyboardLayoutOnShiftKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
 }
