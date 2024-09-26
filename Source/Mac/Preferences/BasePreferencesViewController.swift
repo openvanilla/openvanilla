@@ -32,6 +32,9 @@ class BasePreferencesViewController: NSViewController {
 
     var moduleIdentifier: String?
 
+    /// Displays the menu of a pop-up button as a list of keyboard layouts.
+    ///
+    /// - Parameter popUpButton: The pup up button for selecting keyboard layout
     func configureKeyboardLayoutList(_ popUpButton: NSPopUpButton) {
         let defaultIdentifier = OVModuleManager.default.sharedAlphanumericKeyboardLayoutIdentifier
         var layoutIdentifier = defaultIdentifier
@@ -141,6 +144,9 @@ class BasePreferencesViewController: NSViewController {
         OVModuleManager.default.sharedAlphanumericKeyboardLayoutIdentifier = identifier
     }
 
+    /// Loads preferences.
+    ///
+    /// The subclasses should override the method.
     func loadPreferences() {
     }
 }

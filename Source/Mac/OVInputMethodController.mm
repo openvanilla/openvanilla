@@ -222,6 +222,11 @@ using namespace OpenVanilla;
     }
 }
 
+- (NSUInteger)recognizedEvents:(id)sender
+{
+    return NSEventMaskKeyDown | NSEventMaskFlagsChanged;
+}
+
 - (BOOL)handleEvent:(NSEvent *)event client:(id)client
 {
     if (_readingText->toolTipText().length() || _composingText->toolTipText().length()) {
@@ -229,6 +234,20 @@ using namespace OpenVanilla;
         _composingText->clearToolTip();
         [[OVModuleManager defaultManager].toolTipWindowController.window orderOut:self];
     }
+
+    if (event.type == NSEventTypeFlagsChanged) {
+        NSString *sharedKeyboardLayout = [[OVModuleManager defaultManager] sharedAlphanumericKeyboardLayoutIdentifier];
+        NSString *inputMethodKeyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
+        if ((event.modifierFlags & NSEventModifierFlagShift) &&
+            [OVModuleManager defaultManager].alwaysFallbackToSharedAlphanumericKeyboardLayoutWhenShiftKeyPressed
+            ) {
+            [client overrideKeyboardWithKeyboardNamed:sharedKeyboardLayout];
+            return NO;
+        }
+        [client overrideKeyboardWithKeyboardNamed:inputMethodKeyboardLayout];
+        return NO;
+    }
+
 
     if (event.type != NSEventTypeKeyDown) {
         return NO;

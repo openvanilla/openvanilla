@@ -142,3 +142,4 @@
 "Selection keys:" = "選字鍵：";
 "After a candidate is chosen:" = "選完聯想字詞後：";
 "Keep showing new candidates" = "繼續提供聯想字詞";
+"Always use the keyboard layout when Shift key is pressed" = "按下 Shift 時固定使用";

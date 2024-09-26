@@ -31,6 +31,7 @@ extern NSString *const OVInputMethodConnectionName;
 
 extern NSString *const OVActiveInputMethodIdentifierKey;
 extern NSString *const OVAlphanumericKeyboardLayoutKey;
+extern NSString *const OVAlwayFallbackToAlphanumericKeyboardLayoutOnShiffKey;
 extern NSString *const OVCandidateListStyleNameKey;
 extern NSString *const OVCandidateListTextSizeKey;
 extern NSString *const OVCandidateTextFontNameKey;

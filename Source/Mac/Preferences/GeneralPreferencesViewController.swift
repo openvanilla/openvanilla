@@ -31,6 +31,7 @@ class GeneralPreferencesViewController: BasePreferencesViewController {
     @IBOutlet weak var fieldCandidateSize: NSPopUpButton!
     @IBOutlet weak var fieldCandidateStyle: NSMatrix!
     @IBOutlet weak var fieldAlphanumericKeyboardLayout: NSPopUpButton!
+    @IBOutlet weak var fieldAlwaysFallbackOnShift: NSButton!
     @IBOutlet weak var fieldPlaySound: NSButton!
     @IBOutlet weak var fieldCheckForUpdate: NSButton!
     @IBOutlet weak var lastUpdateCheckDateLabel: NSTextField!
@@ -63,6 +64,9 @@ class GeneralPreferencesViewController: BasePreferencesViewController {
         let style = userDefaults.object(forKey: OVCandidateListStyleNameKey) as? Bool ?? false
         fieldCandidateStyle.selectCell(withTag: style ? 1 : 0)
         configureKeyboardLayoutList(fieldAlphanumericKeyboardLayout)
+        fieldAlwaysFallbackOnShift.state =
+            userDefaults.bool(forKey: OVAlwayFallbackToAlphanumericKeyboardLayoutOnShiffKey)
+            ? .on : .off
         fieldPlaySound.state =
             userDefaults.bool(forKey: OVMakeSoundFeedbackOnInputErrorKey) ? .on : .off
         fieldCheckForUpdate.state = userDefaults.bool(forKey: OVCheckForUpdateKey) ? .on : .off
@@ -107,6 +111,9 @@ class GeneralPreferencesViewController: BasePreferencesViewController {
         if let layout = fieldAlphanumericKeyboardLayout.selectedItem?.representedObject as? String {
             setSharedAlphanumericKeyboardLayout(layout)
         }
+        userDefaults.setValue(
+            fieldAlwaysFallbackOnShift.state == .on,
+            forKey: OVAlwayFallbackToAlphanumericKeyboardLayoutOnShiffKey)
         userDefaults.setValue(
             fieldPlaySound.state == .on, forKey: OVMakeSoundFeedbackOnInputErrorKey)
         userDefaults.setValue(fieldCheckForUpdate.state == .on, forKey: OVCheckForUpdateKey)
