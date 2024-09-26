@@ -82,14 +82,14 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="183"/>
             </connections>
-            <point key="canvasLocation" x="-213" y="-204"/>
+            <point key="canvasLocation" x="-193" y="109"/>
         </window>
         <customView id="12">
             <rect key="frame" x="0.0" y="0.0" width="440" height="260"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="83">
-                    <rect key="frame" x="18" y="151" width="389" height="18"/>
+                    <rect key="frame" x="18" y="157" width="389" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Compose when reaching the maximum component length" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="84">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -100,7 +100,7 @@
                     </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="13">
-                    <rect key="frame" x="18" y="131" width="261" height="18"/>
+                    <rect key="frame" x="18" y="137" width="261" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Clear the composing buffer on error" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="14">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -111,7 +111,7 @@
                     </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="15">
-                    <rect key="frame" x="18" y="111" width="375" height="18"/>
+                    <rect key="frame" x="18" y="117" width="375" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="While typing, show candidate list if there are candidates" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="16">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -122,7 +122,7 @@
                     </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17">
-                    <rect key="frame" x="18" y="71" width="402" height="18"/>
+                    <rect key="frame" x="18" y="77" width="402" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Space selects the first candidate when there's only one page" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="18">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -133,7 +133,7 @@
                     </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19">
-                    <rect key="frame" x="18" y="91" width="248" height="18"/>
+                    <rect key="frame" x="18" y="97" width="248" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Use Space as the first candidate key" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="20">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -213,7 +213,7 @@
                     </connections>
                 </popUpButton>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="132">
-                    <rect key="frame" x="249" y="16" width="176" height="32"/>
+                    <rect key="frame" x="249" y="13" width="176" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="Remove Input Method" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="133">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -224,7 +224,7 @@
                     </connections>
                 </button>
                 <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="134">
-                    <rect key="frame" x="18" y="25" width="232" height="17"/>
+                    <rect key="frame" x="18" y="22" width="232" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="This is a customized input method." id="135">
                         <font key="font" metaFont="smallSystem"/>
@@ -232,6 +232,17 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cm9-2B-Eff">
+                    <rect key="frame" x="18" y="55" width="404" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Special code prompt (Auto SP)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="DyU-rh-Fp1">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="updateField:" target="69" id="dvI-g8-TPo"/>
+                    </connections>
+                </button>
             </subviews>
             <point key="canvasLocation" x="-180" y="-205"/>
         </customView>
@@ -431,6 +442,7 @@
                 <outlet property="fieldMaximumRadicalLength" destination="77" id="85"/>
                 <outlet property="fieldSendFirstCandidateWithSpaceWithOnePageList" destination="17" id="91"/>
                 <outlet property="fieldShouldComposeAtMaximumRadicalLength" destination="83" id="87"/>
+                <outlet property="fieldSpecialCodePrompt" destination="cm9-2B-Eff" id="eSU-p8-0K4"/>
                 <outlet property="fieldUseSpaceAsFirstCandidateSelectionKey" destination="19" id="90"/>
                 <outlet property="removeInputMethodButton" destination="132" id="178"/>
                 <outlet property="view" destination="12" id="71"/>

@@ -584,7 +584,6 @@ static string InputMethodConfigIdentifier(const string &identifier) {
 {
     [[NSUserDefaults standardUserDefaults] setBool:flag forKey:OVFallbackToAlphanumericKeyboardLayoutOnShiftKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
-
 }
 
 - (BOOL)traditionalToSimplifiedChineseFilterEnabled

@@ -56,7 +56,7 @@ let package = Package(
             dependencies: ["OpenVanilla"]),
         .target(
             name: "OVIMTableBased",
-            dependencies: ["OpenVanilla"]),
+            dependencies: ["OpenVanilla", "LegacyOpenVanilla"]),
         .target(
             name: "OVIMArray",
             dependencies: ["OpenVanilla", "LegacyOpenVanilla"]),

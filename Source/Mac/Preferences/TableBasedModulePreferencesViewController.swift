@@ -37,6 +37,7 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
     @IBOutlet var fieldSendFirstCandidateWithSpaceWithOnePageList: NSButton!
     @IBOutlet var fieldShouldComposeAtMaximumRadicalLength: NSButton!
     @IBOutlet var fieldUseSpaceAsFirstCandidateSelectionKey: NSButton!
+    @IBOutlet var fieldSpecialCodePrompt: NSButton!
     @IBOutlet var cusmtomTableBasedInputMethodInfo: NSTextField!
     @IBOutlet var removeInputMethodButton: NSButton!
 
@@ -74,6 +75,9 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
         setState(
             for: fieldShouldComposeAtMaximumRadicalLength,
             key: "ShouldComposeAtMaximumRadicalLength")
+        setState(
+            for: fieldSpecialCodePrompt,
+            key: "SpecialCodePrompt")
 
         if boolValue(forKey: "UseSpaceAsFirstCandidateSelectionKey") {
             fieldUseSpaceAsFirstCandidateSelectionKey.state = .on
@@ -133,6 +137,10 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
         setBoolValue(
             fieldSendFirstCandidateWithSpaceWithOnePageList.state == .on,
             forKey: "SendFirstCandidateWithSpaceWithOnePageList")
+        setBoolValue(
+            fieldSpecialCodePrompt.state == .on,
+            forKey: "SpecialCodePrompt")
+
 
         let selectedItem = fieldMaximumRadicalLength.selectedItem
         if let selectedItem {

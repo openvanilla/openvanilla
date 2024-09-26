@@ -85,7 +85,24 @@ namespace OpenVanilla {
         {
             return fetchValuesFromIndex(findFirstOccuranceOfKey(key), key);
         }
-        
+
+
+        vector<pair<string, string> > findPairsWithValue(const char* value)
+        {
+            vector<pair<string, string> > result;
+            for (size_t index = 0 ; index < m_index; index++) {
+                KVPair* entry = m_data + index;
+
+                if (compareString(entry->value, value) == 0) {
+                    result.push_back(pair<string, string>(entry->key, entry->value));
+                }
+                else {
+                    continue;;
+                }
+            }
+            return result;
+        }
+
         vector<pair<string, string> > findPairsWithWildcard(const OVWildcard& pWildcard)
         {
             const OVWildcard* ptrWildcard = &pWildcard;            
@@ -414,7 +431,18 @@ namespace OpenVanilla {
                 
             return result;
         }
-        
+
+        vector<string> findKeys(const string& value) {
+            vector<pair<string, string> > ret = m_chardefMap->findPairsWithValue(value.c_str());
+            vector<string> result;
+            vector<pair<string, string> >::iterator iter= ret.begin();
+
+            for ( ; iter != ret.end(); iter++)
+                result.push_back((*iter).first);
+
+            return result;
+        }
+
         vector<pair<string, string> > findChardefWithWildcard(const OVWildcard& wildcard)
         {
             return m_chardefMap->findPairsWithWildcard(wildcard);

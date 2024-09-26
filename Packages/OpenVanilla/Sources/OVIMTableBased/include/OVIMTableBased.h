@@ -70,6 +70,7 @@ namespace OpenVanilla {
         bool m_configShouldComposeAtMaximumRadicalLength;
         bool m_configUseSpaceAsFirstCandidateSelectionKey;
         bool m_configOnlyUseNumPadNumbersForRadicals;
+        bool m_specialCodePrompt;
     };
 };
 

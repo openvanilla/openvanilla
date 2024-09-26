@@ -200,6 +200,10 @@ void OVIMTableBased::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* lo
     if (moduleConfig->hasKey("OnlyUseNumPadNumbersForRadicals")) {
         m_configOnlyUseNumPadNumbersForRadicals = moduleConfig->isKeyTrue("OnlyUseNumPadNumbersForRadicals");
     }
+
+    if (moduleConfig->hasKey("SpecialCodePrompt")) {
+        m_specialCodePrompt = moduleConfig->isKeyTrue("SpecialCodePrompt");
+    }
 }
 
 void OVIMTableBased::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)

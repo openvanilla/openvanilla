@@ -45,6 +45,7 @@ namespace OpenVanilla {
         virtual bool candidateNonPanelKeyReceived(OVCandidateService* candidateService, const OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService);
 
     protected:
+        virtual const string readingFromComponents(vector<string> components);
         virtual const string currentReading();
         virtual const string currentQueryKey();
         virtual bool stringContainsWildcard(const string& str);
@@ -53,6 +54,7 @@ namespace OpenVanilla {
         virtual bool handleBackspace(OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
         virtual bool isEndKey(const OVKey* key);
         virtual bool isValidKeyString(const string& keyString);
+        virtual void showSpecialCodePromptIfRequired(const string& sendText, OVLoaderService* srv);
 
         OVIMTableBased* m_module;
         vector<string> m_components;
