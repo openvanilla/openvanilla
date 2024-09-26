@@ -22,8 +22,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
 import Cocoa
+import Foundation
 import ModuleManager
 
 class AppDelegate: NSObject, NSApplicationDelegate {

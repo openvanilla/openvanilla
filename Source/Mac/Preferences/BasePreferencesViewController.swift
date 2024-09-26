@@ -22,45 +22,47 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
-import Cocoa
 import Carbon
+import Cocoa
+import Foundation
 import ModuleManager
 
 @objc(BasePreferencesViewController)
 class BasePreferencesViewController: NSViewController {
-    
+
     var moduleIdentifier: String?
-    
+
     func configureKeyboardLayoutList(_ popUpButton: NSPopUpButton) {
         let defaultIdentifier = OVModuleManager.default.sharedAlphanumericKeyboardLayoutIdentifier
         var layoutIdentifier = defaultIdentifier
         if let moduleIdentifier = moduleIdentifier {
-            layoutIdentifier = OVModuleManager.default.alphanumericKeyboardLayout(forInputMethod: moduleIdentifier)
+            layoutIdentifier = OVModuleManager.default.alphanumericKeyboardLayout(
+                forInputMethod: moduleIdentifier)
         }
-        
+
         let list = TISCreateInputSourceList(nil, true).takeRetainedValue() as! [TISInputSource]
         var usKeyboardLayoutItem: NSMenuItem?
         var chosenItem: NSMenuItem?
-        
+
         popUpButton.menu?.removeAllItems()
-        
+
         for source in list {
-            
+
             func getString(_ key: CFString) -> String? {
                 if let ptr = TISGetInputSourceProperty(source, key) {
                     return String(Unmanaged<CFString>.fromOpaque(ptr).takeUnretainedValue())
                 }
                 return nil
             }
-            
+
             func getBool(_ key: CFString) -> Bool? {
                 if let ptr = TISGetInputSourceProperty(source, key) {
-                    return Unmanaged<CFBoolean>.fromOpaque(ptr).takeUnretainedValue() == kCFBooleanTrue
+                    return Unmanaged<CFBoolean>.fromOpaque(ptr).takeUnretainedValue()
+                        == kCFBooleanTrue
                 }
                 return nil
             }
-            
+
             if let category = getString(kTISPropertyInputSourceCategory) {
                 if category != String(kTISCategoryKeyboardInputSource) {
                     continue
@@ -68,7 +70,7 @@ class BasePreferencesViewController: NSViewController {
             } else {
                 continue
             }
-            
+
             if let asciiCapable = getBool(kTISPropertyInputSourceIsASCIICapable) {
                 if !asciiCapable {
                     continue
@@ -76,7 +78,7 @@ class BasePreferencesViewController: NSViewController {
             } else {
                 continue
             }
-            
+
             if let sourceType = getString(kTISPropertyInputSourceType) {
                 if sourceType != String(kTISTypeKeyboardLayout) {
                     continue
@@ -84,22 +86,21 @@ class BasePreferencesViewController: NSViewController {
             } else {
                 continue
             }
-            
-            
+
             guard let sourceID = getString(kTISPropertyInputSourceID),
-                  let localizedName = getString(kTISPropertyLocalizedName)
+                let localizedName = getString(kTISPropertyLocalizedName)
             else {
                 continue
             }
-            
+
             let menuItem = NSMenuItem()
             menuItem.title = localizedName
             menuItem.representedObject = sourceID
-            
+
             if let iconPtr = TISGetInputSourceProperty(source, kTISPropertyIconRef) {
                 let icon = IconRef(iconPtr)
                 let image = NSImage(iconRef: icon)
-                
+
                 func resize(_ image: NSImage) -> NSImage {
                     let newImage = NSImage(size: NSSize(width: 16, height: 16))
                     newImage.lockFocus()
@@ -107,7 +108,7 @@ class BasePreferencesViewController: NSViewController {
                     newImage.unlockFocus()
                     return newImage
                 }
-                
+
                 let resizedImage = resize(image)
                 // On newer version of macOS, the icons became black and white
                 // so we make them template images so it could look better
@@ -117,31 +118,29 @@ class BasePreferencesViewController: NSViewController {
                 }
                 menuItem.image = resizedImage
             }
-            
+
             if sourceID == defaultIdentifier {
                 usKeyboardLayoutItem = menuItem
             }
-            
+
             if layoutIdentifier == sourceID {
                 chosenItem = menuItem
             }
-            
+
             popUpButton.menu?.addItem(menuItem)
         }
-        
+
         if let chosenItem {
             popUpButton.select(chosenItem)
         } else if let usKeyboardLayoutItem {
             popUpButton.select(usKeyboardLayoutItem)
         }
     }
-    
-    
+
     func setSharedAlphanumericKeyboardLayout(_ identifier: String) {
         OVModuleManager.default.sharedAlphanumericKeyboardLayoutIdentifier = identifier
     }
-    
+
     func loadPreferences() {
     }
 }
-

@@ -22,10 +22,10 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
 import Cocoa
-import OpenVanillaImpl
+import Foundation
 import ModuleManager
+import OpenVanillaImpl
 
 @objc(OVAddTableBasedInputMethodViewController)
 class AddTableBasedInputMethodViewController: BasePreferencesViewController {
@@ -40,10 +40,11 @@ class AddTableBasedInputMethodViewController: BasePreferencesViewController {
 
         // add link to the more info text field
         // cf. http://developer.apple.com/library/mac/#qa/qa1487/_index.html
-        let attrString = self.moreInfoTextField.attributedStringValue.mutableCopy() as! NSMutableAttributedString
+        let attrString =
+            self.moreInfoTextField.attributedStringValue.mutableCopy() as! NSMutableAttributedString
         let linkRange = attrString.string.range(of: OVMainSiteURLString)
         guard let linkRange = linkRange,
-              let url = URL(string: OVMainSiteURLString)
+            let url = URL(string: OVMainSiteURLString)
         else {
             return
         }
@@ -59,7 +60,6 @@ class AddTableBasedInputMethodViewController: BasePreferencesViewController {
         moreInfoTextField.isSelectable = true
     }
 
-
     private func install(path: String) -> Bool {
         let cinPath = path
 
@@ -67,14 +67,27 @@ class AddTableBasedInputMethodViewController: BasePreferencesViewController {
         let canInstall = manager.canInstallCustomTableBasedInputMethod(withTablePath: cinPath)
 
         if canInstall is OVCanNotInstall {
-            NonModalAlertWindowController.shared.show(title: NSLocalizedString("Cannot Import Input Method", comment: ""), content: String(format: NSLocalizedString("\"%@\" is not a valid cin file.", comment: ""), (cinPath as NSString).lastPathComponent), confirmButtonTitle: NSLocalizedString("Dismiss", comment: ""), cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
+            NonModalAlertWindowController.shared.show(
+                title: NSLocalizedString("Cannot Import Input Method", comment: ""),
+                content: String(
+                    format: NSLocalizedString("\"%@\" is not a valid cin file.", comment: ""),
+                    (cinPath as NSString).lastPathComponent),
+                confirmButtonTitle: NSLocalizedString("Dismiss", comment: ""),
+                cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
             return false
         }
 
         if let canInstall = canInstall as? OVCanInstall {
             manager.installCustomTableBasedInputMethod(withTablePath: cinPath)
 
-            NonModalAlertWindowController.shared.show(title: NSLocalizedString("Input Method Imported", comment: ""), content: String(format: NSLocalizedString("Your new input method \"%@\" is ready to use", comment: ""), canInstall.localizedNameIfInstalled), confirmButtonTitle: NSLocalizedString("OK", comment: ""), cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
+            NonModalAlertWindowController.shared.show(
+                title: NSLocalizedString("Input Method Imported", comment: ""),
+                content: String(
+                    format: NSLocalizedString(
+                        "Your new input method \"%@\" is ready to use", comment: ""),
+                    canInstall.localizedNameIfInstalled),
+                confirmButtonTitle: NSLocalizedString("OK", comment: ""), cancelButtonTitle: nil,
+                cancelAsDefault: false, delegate: nil)
             return true
         }
 
@@ -94,7 +107,6 @@ class AddTableBasedInputMethodViewController: BasePreferencesViewController {
                 return
             }
 
-
             let files = panel.urls
             guard let cinPath = files.first?.path else {
                 return
@@ -104,7 +116,13 @@ class AddTableBasedInputMethodViewController: BasePreferencesViewController {
             let canInstall = manager.canInstallCustomTableBasedInputMethod(withTablePath: cinPath)
 
             if canInstall is OVCanNotInstall {
-                NonModalAlertWindowController.shared.show(title: NSLocalizedString("Cannot Import Input Method", comment: ""), content: String(format: NSLocalizedString("\"%@\" is not a valid cin file.", comment: ""), (cinPath as NSString).lastPathComponent), confirmButtonTitle: NSLocalizedString("Dismiss", comment: ""), cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
+                NonModalAlertWindowController.shared.show(
+                    title: NSLocalizedString("Cannot Import Input Method", comment: ""),
+                    content: String(
+                        format: NSLocalizedString("\"%@\" is not a valid cin file.", comment: ""),
+                        (cinPath as NSString).lastPathComponent),
+                    confirmButtonTitle: NSLocalizedString("Dismiss", comment: ""),
+                    cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
                 return
             }
 
@@ -113,7 +131,15 @@ class AddTableBasedInputMethodViewController: BasePreferencesViewController {
                     self.tablePathToBeInstalled = cinPath
                     self.moduleIdentifierIfInstalled = canInstall.identifierIfInstalled
 
-                    NonModalAlertWindowController.shared.show(title: NSLocalizedString("Overwriting Existing Input Method", comment: ""), content: String(format: NSLocalizedString("\"%@\" will replace an existing input method that you have. Do you want to continue?", comment: ""), (cinPath as NSString).lastPathComponent), confirmButtonTitle: NSLocalizedString("Overwrite", comment: ""), cancelButtonTitle: NSLocalizedString("Cancel", comment: ""), cancelAsDefault: true, delegate: self)
+                    NonModalAlertWindowController.shared.show(
+                        title: NSLocalizedString("Overwriting Existing Input Method", comment: ""),
+                        content: String(
+                            format: NSLocalizedString(
+                                "\"%@\" will replace an existing input method that you have. Do you want to continue?",
+                                comment: ""), (cinPath as NSString).lastPathComponent),
+                        confirmButtonTitle: NSLocalizedString("Overwrite", comment: ""),
+                        cancelButtonTitle: NSLocalizedString("Cancel", comment: ""),
+                        cancelAsDefault: true, delegate: self)
 
                 }
                 _ = self.install(path: cinPath)
@@ -122,7 +148,6 @@ class AddTableBasedInputMethodViewController: BasePreferencesViewController {
     }
 
 }
-
 
 extension AddTableBasedInputMethodViewController: NonModalAlertWindowControllerDelegate {
     func nonModalAlertWindowControllerDidConfirm(_ controller: NonModalAlertWindowController) {
