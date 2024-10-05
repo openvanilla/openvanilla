@@ -209,10 +209,15 @@ using namespace OpenVanilla;
 
 - (void)commitComposition:(id)sender
 {
-    // fix the premature commit bug in Terminal.app since OS X 10.5
-    if ([[sender bundleIdentifier] isEqualToString:@"com.apple.Terminal"] && ![NSStringFromClass([sender class]) isEqualToString:@"IPMDServerClientWrapper"]) {
-        [self performSelector:@selector(updateClientComposingBuffer:) withObject:_currentClient afterDelay:0.0];
-        return;
+    NSString *osVersion = [[NSProcessInfo processInfo] operatingSystemVersionString];
+    NSString *termialFixedVersion = @"15.0.1";
+    
+    if ([osVersion compare:termialFixedVersion options:NSNumericSearch] == NSOrderedAscending) {
+        // fix the premature commit bug in Terminal.app since OS X 10.5
+        if ([[sender bundleIdentifier] isEqualToString:@"com.apple.Terminal"] && ![NSStringFromClass([sender class]) isEqualToString:@"IPMDServerClientWrapper"]) {
+            [self performSelector:@selector(updateClientComposingBuffer:) withObject:_currentClient afterDelay:0.0];
+            return;
+        }
     }
 
     if (_composingText->isCommitted()) {
