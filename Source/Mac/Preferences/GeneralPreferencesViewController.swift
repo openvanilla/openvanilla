@@ -61,8 +61,8 @@ class GeneralPreferencesViewController: BasePreferencesViewController {
             fieldCandidateSize.selectItem(withTitle: defaultCandidateSize)
         }
 
-        let style = userDefaults.object(forKey: OVCandidateListStyleNameKey) as? Bool ?? false
-        fieldCandidateStyle.selectCell(withTag: style ? 1 : 0)
+        let style = userDefaults.object(forKey: OVCandidateListStyleNameKey) as? String
+        fieldCandidateStyle.selectCell(withTag: style == OVHorizontalCandidateListStyleName ? 1 : 0)
         configureKeyboardLayoutList(fieldAlphanumericKeyboardLayout)
         fieldAlwaysFallbackOnShift.state =
             userDefaults.bool(forKey: OVFallbackToAlphanumericKeyboardLayoutOnShiftKey)

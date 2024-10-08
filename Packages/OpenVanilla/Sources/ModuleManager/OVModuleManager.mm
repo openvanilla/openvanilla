@@ -478,6 +478,10 @@ static string InputMethodConfigIdentifier(const string &identifier) {
     // TODO: Show error info
     NSString *targetPath = [userTableRoot stringByAppendingPathComponent:path.lastPathComponent];
     NSError *error = nil;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:targetPath]) {
+        [[NSFileManager defaultManager] removeItemAtPath:targetPath error:&error];
+    }
+
     BOOL success = [[NSFileManager defaultManager] copyItemAtPath:path toPath:targetPath error:&error];
     if (!success) {
         NSLog(@"Cannot copy %@ to %@, error: %@", path, targetPath, error);

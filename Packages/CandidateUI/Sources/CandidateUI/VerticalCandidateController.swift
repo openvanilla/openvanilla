@@ -246,6 +246,14 @@ public class VerticalCandidateController: CandidateController {
         scrollPageByOne(false)
     }
 
+    public override func showFirstPage() -> Bool {
+        return false
+    }
+
+    public override func showLastPage() -> Bool {
+        return false
+    }
+
     public override func highlightNextCandidate() -> Bool {
         moveSelectionByOne(true)
     }

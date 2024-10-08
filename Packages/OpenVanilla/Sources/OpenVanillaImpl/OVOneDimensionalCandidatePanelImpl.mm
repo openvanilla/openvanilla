@@ -469,7 +469,7 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
         }
         size_t clampedIndex = min(index + candidatesPerPage(), lastIndex);
         if (index == clampedIndex) {
-            return Invalid;
+            clampedIndex = 0;
         }
 
         m_candidateController.selectedCandidateIndex = (NSUInteger)clampedIndex;
@@ -481,22 +481,29 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
         if (lastIndex) {
             lastIndex--;
         }
-        size_t clampedIndex = min(index + 1, lastIndex);
+        size_t clampedIndex = index + 1;
+        if (clampedIndex >= lastIndex) {
+            clampedIndex = 0;
+        }
         m_candidateController.selectedCandidateIndex = (NSUInteger)clampedIndex;
         return Handled;
     }
     else if (IsKeyInList(key, m_previousPageKeys)) {
         size_t index = currentHightlightIndexInCandidateList();
-        if (!index) {
-            return Invalid;
-        }
-
         size_t cpp = candidatesPerPage();
-        if (index > cpp) {
-            index -= cpp;
-        }
-        else {
-            index = 0;
+        if (!index) {
+            size_t lastIndex = m_candidateList.size();
+            if (lastIndex) {
+                lastIndex--;
+            }
+            index = (lastIndex / cpp) * cpp;
+        } else {
+            if (index > cpp) {
+                index -= cpp;
+            }
+            else {
+                index = 0;
+            }
         }
 
         m_candidateController.selectedCandidateIndex = (NSUInteger)index;
@@ -505,10 +512,14 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
     else if (IsKeyInList(key, m_previousCandidateKeys)) {
         size_t index = currentHightlightIndexInCandidateList();
         if (!index) {
-            return Invalid;
+            size_t lastIndex = m_candidateList.size();
+            if (lastIndex) {
+                lastIndex--;
+            }
+            index = lastIndex;
+        } else {
+            index--;
         }
-
-        index--;
         m_candidateController.selectedCandidateIndex = (NSUInteger)index;
         return Handled;
     }

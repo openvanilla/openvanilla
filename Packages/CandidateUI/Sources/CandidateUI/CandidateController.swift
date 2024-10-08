@@ -96,6 +96,14 @@ public class CandidateController: NSWindowController {
         false
     }
 
+    @objc public func showFirstPage() -> Bool {
+        false
+    }
+
+    @objc public func showLastPage() -> Bool {
+        false
+    }
+
     @objc public func highlightNextCandidate() -> Bool {
         false
     }
@@ -107,6 +115,7 @@ public class CandidateController: NSWindowController {
     @objc public func candidateIndexAtKeyLabelIndex(_ index: UInt) -> UInt {
         UInt.max
     }
+
 
     /// Sets the location of the candidate window.
     ///
