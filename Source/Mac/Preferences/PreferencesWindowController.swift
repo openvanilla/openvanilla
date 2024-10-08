@@ -22,8 +22,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
 import Cocoa
+import Foundation
 import ModuleManager
 
 private let kGeneralSettingIdentifier = "GeneralSettingIdentifier"
@@ -33,14 +33,16 @@ private let kAddInputMethodIdentifier = "AddInputMethodIdentifier"
 // Note: A workaround to suppresses no-selector warnings.
 private final class Dummy: NSObject {
     @objc func title() -> String { "" }
-    @objc func setTitle(_ title:String) {}
+    @objc func setTitle(_ title: String) {}
 }
 
-typealias PreferencesItem = (identifier: String,
-                             localizedName: String,
-                             viewController: BasePreferencesViewController)
+typealias PreferencesItem = (
+    identifier: String,
+    localizedName: String,
+    viewController: BasePreferencesViewController
+)
 
-@objc (OVPreferencesWindowController)
+@objc(OVPreferencesWindowController)
 class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var modulePreferencesContainerView: NSView!
@@ -49,26 +51,29 @@ class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var tableBasedModulePreferencesViewController: BasePreferencesViewController!
     @IBOutlet weak var arrayModulePreferencesViewController: BasePreferencesViewController!
     @IBOutlet weak var addTableBasedInputMethodViewController: BasePreferencesViewController!
-    
+
     private var items: [PreferencesItem] = []
     private var localizableObjects: [NSValue: String] = [:]
     private weak var currentPreferencesViewController: BasePreferencesViewController?
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.center()
         window?.delegate = self
         reload(nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: NSNotification.Name("OVModuleManagerDidReloadNotification"), object: nil)
-        (addTableBasedInputMethodViewController as? AddTableBasedInputMethodViewController)?.preferencesWindowController = self
-        
+
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(reload(_:)),
+            name: NSNotification.Name("OVModuleManagerDidReloadNotification"), object: nil)
+        (addTableBasedInputMethodViewController as? AddTableBasedInputMethodViewController)?
+            .preferencesWindowController = self
+
         localizableObjects.removeAll()
-        
+
         func ListTitlesInView(_ view: NSView) {
             if view is NSPopUpButton {
                 return
@@ -91,12 +96,12 @@ class PreferencesWindowController: NSWindowController {
                     localizableObjects[NSValue(nonretainedObject: view)] = title
                 }
             }
-            
+
             for subview in view.subviews {
                 ListTitlesInView(subview)
             }
         }
-        
+
         ListTitlesInView(generalPreferencesViewController.view)
         ListTitlesInView(associatedPhrasesPreferencesViewController.view)
         ListTitlesInView(tableBasedModulePreferencesViewController.view)
@@ -104,12 +109,12 @@ class PreferencesWindowController: NSWindowController {
         ListTitlesInView(addTableBasedInputMethodViewController.view)
         updateLocalization()
     }
-    
+
     // MARK: - Private methods
-    
-    @objc (selectInputMethodIdentifier:)
+
+    @objc(selectInputMethodIdentifier:)
     func select(inputMethodIdentifier identifier: String) {
-        
+
         for (index, element) in items.enumerated() {
             let elementIdentifier = element.0
             if identifier == elementIdentifier {
@@ -119,43 +124,63 @@ class PreferencesWindowController: NSWindowController {
             }
         }
     }
-    
+
     @objc
     func reload(_ notification: Notification?) {
         items.removeAll()
         tableView.deselectAll(self)
-        items.append((kGeneralSettingIdentifier, NSLocalizedString("General Settings", comment:""), generalPreferencesViewController))
-        items.append((kAssociatedPhrasesSettingIdentifier, NSLocalizedString("Associated Phrases", comment:""), associatedPhrasesPreferencesViewController))
+        items.append(
+            (
+                kGeneralSettingIdentifier, NSLocalizedString("General Settings", comment: ""),
+                generalPreferencesViewController
+            ))
+        items.append(
+            (
+                kAssociatedPhrasesSettingIdentifier,
+                NSLocalizedString("Associated Phrases", comment: ""),
+                associatedPhrasesPreferencesViewController
+            ))
 
         let identifiers = OVModuleManager.default.inputMethodIdentifiers
         for moduleIdentifier in identifiers {
             if OVModuleManager.default.isTableBasedInputMethodIdentifier(moduleIdentifier) {
-                items.append((moduleIdentifier,
-                              OVModuleManager.default.localizedInputMethodName(moduleIdentifier),
-                              tableBasedModulePreferencesViewController))
+                items.append(
+                    (
+                        moduleIdentifier,
+                        OVModuleManager.default.localizedInputMethodName(moduleIdentifier),
+                        tableBasedModulePreferencesViewController
+                    ))
             }
         }
-        
-        items.append((arrayModulePreferencesViewController.moduleIdentifier ?? "",
-                      OVModuleManager.default.localizedInputMethodName(arrayModulePreferencesViewController.moduleIdentifier ?? ""),
-                      arrayModulePreferencesViewController))
-        
-        items.append((kAddInputMethodIdentifier, NSLocalizedString("Add New Input Method", comment:""), addTableBasedInputMethodViewController))
+
+        items.append(
+            (
+                arrayModulePreferencesViewController.moduleIdentifier ?? "",
+                OVModuleManager.default.localizedInputMethodName(
+                    arrayModulePreferencesViewController.moduleIdentifier ?? ""),
+                arrayModulePreferencesViewController
+            ))
+
+        items.append(
+            (
+                kAddInputMethodIdentifier, NSLocalizedString("Add New Input Method", comment: ""),
+                addTableBasedInputMethodViewController
+            ))
 
         tableView.reloadData()
         tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
     }
-    
+
     private func updateLocalization() {
         for value in localizableObjects.keys {
             guard let viewOrCell = value.nonretainedObjectValue as? NSObject,
-                  let dictKey = localizableObjects[value]
+                let dictKey = localizableObjects[value]
             else {
                 continue
             }
-            
+
             let text = NSLocalizedString(dictKey, comment: "")
-            
+
             if let view = viewOrCell as? NSTextField {
                 if !view.isEditable {
                     view.stringValue = text
@@ -173,7 +198,7 @@ class PreferencesWindowController: NSWindowController {
             }
         }
     }
-    
+
 }
 
 extension PreferencesWindowController: NSWindowDelegate {
@@ -194,23 +219,27 @@ extension PreferencesWindowController: NSTableViewDataSource, NSTableViewDelegat
         let item = items[selection]
         let controller = item.viewController
         currentPreferencesViewController = controller
-        if controller == tableBasedModulePreferencesViewController ||
-            controller == arrayModulePreferencesViewController ||
-            controller == associatedPhrasesPreferencesViewController {
+        if controller == tableBasedModulePreferencesViewController
+            || controller == arrayModulePreferencesViewController
+            || controller == associatedPhrasesPreferencesViewController
+        {
             controller.moduleIdentifier = item.identifier
         }
         controller.loadPreferences()
         modulePreferencesContainerView.addSubview(controller.view)
-        let title = String(format: NSLocalizedString("OpenVanilla - %@", comment: ""), item.localizedName)
+        let title = String(
+            format: NSLocalizedString("OpenVanilla - %@", comment: ""), item.localizedName)
         window?.title = title
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         items.count
     }
-    
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int)
+        -> Any?
+    {
         items[row].localizedName
     }
-    
+
 }

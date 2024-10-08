@@ -22,8 +22,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
 import Cocoa
+import Foundation
 import ModuleManager
 
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -50,7 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private static var debugShowPreferencesAfterAppLaunched = false
 
-    @objc (setDebugShowPreferencesAfterAppLaunched:)
+    @objc(setDebugShowPreferencesAfterAppLaunched:)
     static func setDebugShowPreferencesAfterAppLaunched(show: Bool) {
         debugShowPreferencesAfterAppLaunched = show
     }

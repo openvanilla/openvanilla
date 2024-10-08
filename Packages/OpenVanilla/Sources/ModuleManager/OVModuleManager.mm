@@ -574,6 +574,18 @@ static string InputMethodConfigIdentifier(const string &identifier) {
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (BOOL)fallbackToSharedAlphanumericKeyboardLayoutWhenShiftPressed
+{
+    BOOL flag = [[NSUserDefaults standardUserDefaults] boolForKey:OVFallbackToAlphanumericKeyboardLayoutOnShiftKey];
+    return flag;
+}
+
+- (void)setFallbackToSharedAlphanumericKeyboardLayoutWhenShiftPressed:(BOOL)flag
+{
+    [[NSUserDefaults standardUserDefaults] setBool:flag forKey:OVFallbackToAlphanumericKeyboardLayoutOnShiftKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (BOOL)traditionalToSimplifiedChineseFilterEnabled
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:OVTraditionalToSimplifiedChineseFilterEnabledKey];

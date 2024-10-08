@@ -29,8 +29,9 @@ import Cocoa
 }
 
 class NonModalAlertWindowController: NSWindowController {
-    @objc (sharedInstance)
-    static let shared = NonModalAlertWindowController(windowNibName: "NonModalAlertWindowController")
+    @objc(sharedInstance)
+    static let shared = NonModalAlertWindowController(
+        windowNibName: "NonModalAlertWindowController")
 
     @IBOutlet weak var titleTextField: NSTextField!
     @IBOutlet weak var contentTextField: NSTextField!
@@ -38,7 +39,10 @@ class NonModalAlertWindowController: NSWindowController {
     @IBOutlet weak var cancelButton: NSButton!
     weak var delegate: NonModalAlertWindowControllerDelegate?
 
-    @objc func show(title: String, content: String, confirmButtonTitle: String, cancelButtonTitle: String?, cancelAsDefault: Bool, delegate: NonModalAlertWindowControllerDelegate?) {
+    @objc func show(
+        title: String, content: String, confirmButtonTitle: String, cancelButtonTitle: String?,
+        cancelAsDefault: Bool, delegate: NonModalAlertWindowControllerDelegate?
+    ) {
         if window?.isVisible == true {
             self.delegate?.nonModalAlertWindowControllerDidCancel(self)
         }
@@ -88,7 +92,9 @@ class NonModalAlertWindowController: NSWindowController {
         var infiniteHeightFrame = oldFrame
         infiniteHeightFrame.size.width -= 4.0
         infiniteHeightFrame.size.height = 10240
-        newFrame = (content as NSString).boundingRect(with: infiniteHeightFrame.size, options: [.usesLineFragmentOrigin], attributes: [.font: contentTextField.font!])
+        newFrame = (content as NSString).boundingRect(
+            with: infiniteHeightFrame.size, options: [.usesLineFragmentOrigin],
+            attributes: [.font: contentTextField.font!])
         newFrame.size.width = max(newFrame.size.width, oldFrame.size.width)
         newFrame.size.height += 4.0
         newFrame.origin = oldFrame.origin

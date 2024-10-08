@@ -23,9 +23,10 @@
 
 import Cocoa
 
-@objc (OVToolTipWindowController)
+@objc(OVToolTipWindowController)
 public class TooltipController: NSWindowController {
-    private let backgroundColor = NSColor(calibratedHue: 0.16, saturation: 0.22, brightness: 0.97, alpha: 1.0)
+    private let backgroundColor = NSColor(
+        calibratedHue: 0.16, saturation: 0.22, brightness: 0.97, alpha: 1.0)
     private var messageTextField: NSTextField
     private var tooltip: String = "" {
         didSet {
@@ -37,7 +38,8 @@ public class TooltipController: NSWindowController {
     public init() {
         let contentRect = NSRect(x: 128.0, y: 128.0, width: 300.0, height: 20.0)
         let styleMask: NSWindow.StyleMask = [.borderless, .nonactivatingPanel]
-        let panel = NSPanel(contentRect: contentRect, styleMask: styleMask, backing: .buffered, defer: false)
+        let panel = NSPanel(
+            contentRect: contentRect, styleMask: styleMask, backing: .buffered, defer: false)
         panel.level = NSWindow.Level(Int(kCGPopUpMenuWindowLevel) + 1)
         panel.hasShadow = true
 
@@ -78,10 +80,9 @@ public class TooltipController: NSWindowController {
         var screenFrame = NSScreen.main?.visibleFrame ?? NSRect.zero
         for screen in NSScreen.screens {
             let frame = screen.visibleFrame
-            if windowTopLeftPoint.x >= frame.minX &&
-                windowTopLeftPoint.x <= frame.maxX &&
-                windowTopLeftPoint.y >= frame.minY &&
-                windowTopLeftPoint.y <= frame.maxY {
+            if windowTopLeftPoint.x >= frame.minX && windowTopLeftPoint.x <= frame.maxX
+                && windowTopLeftPoint.y >= frame.minY && windowTopLeftPoint.y <= frame.maxY
+            {
                 screenFrame = frame
                 break
             }
@@ -114,8 +115,9 @@ public class TooltipController: NSWindowController {
     }
 
     private func adjustSize() {
-        let attrString = messageTextField.attributedStringValue;
-        var rect = attrString.boundingRect(with: NSSize(width: 1600.0, height: 1600.0), options: .usesLineFragmentOrigin)
+        let attrString = messageTextField.attributedStringValue
+        var rect = attrString.boundingRect(
+            with: NSSize(width: 1600.0, height: 1600.0), options: .usesLineFragmentOrigin)
         rect.size.width += 10
         messageTextField.frame = rect
         window?.setFrame(rect, display: true)

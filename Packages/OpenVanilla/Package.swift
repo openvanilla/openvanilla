@@ -63,9 +63,6 @@ let package = Package(
         .target(
             name: "OVAFAssociatedPhrases",
             dependencies: ["OpenVanilla"]),
-//        .testTarget(
-//            name: "OpenVanillaTests",
-//            dependencies: ["OpenVanilla"]),
     ],
     cxxLanguageStandard: CXXLanguageStandard.cxx11
 )

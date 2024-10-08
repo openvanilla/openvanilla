@@ -34,12 +34,14 @@ private func install() -> Int32 {
     var maybeInputSource = InputSourceHelper.inputSource(for: bundleID)
 
     if maybeInputSource == nil {
-        NSLog("Registering input source \(bundleID) at \(bundleUrl.absoluteString)");
+        NSLog("Registering input source \(bundleID) at \(bundleUrl.absoluteString)")
         // then register
         let status = InputSourceHelper.registerInputSource(at: bundleUrl)
 
         if !status {
-            NSLog("Fatal error: Cannot register input source \(bundleID) at \(bundleUrl.absoluteString).")
+            NSLog(
+                "Fatal error: Cannot register input source \(bundleID) at \(bundleUrl.absoluteString)."
+            )
             return -1
         }
 
@@ -66,11 +68,13 @@ private func install() -> Int32 {
 
     if CommandLine.arguments.count > 2 && CommandLine.arguments[2] == "--all" {
         let enabled = InputSourceHelper.enableAllInputMode(for: bundleID)
-        NSLog(enabled ? "All input sources enabled for \(bundleID)" : "Cannot enable all input sources for \(bundleID), but this is ignored")
+        NSLog(
+            enabled
+                ? "All input sources enabled for \(bundleID)"
+                : "Cannot enable all input sources for \(bundleID), but this is ignored")
     }
     return 0
 }
-
 
 if CommandLine.arguments.count > 1 {
     if CommandLine.arguments[1] == "install" {
@@ -80,7 +84,7 @@ if CommandLine.arguments.count > 1 {
 }
 
 guard let mainNibName = Bundle.main.infoDictionary?["NSMainNibFile"] as? String else {
-    NSLog("Fatal error: NSMainNibFile key not defined in Info.plist.");
+    NSLog("Fatal error: NSMainNibFile key not defined in Info.plist.")
     exit(-1)
 }
 
@@ -90,8 +94,12 @@ if !loaded {
     exit(-1)
 }
 
-guard let bundleID = Bundle.main.bundleIdentifier, let server = IMKServer(name: OVInputMethodConnectionName, bundleIdentifier: bundleID) else {
-    NSLog("Fatal error: Cannot initialize input method server with connection \(OVInputMethodConnectionName).")
+guard let bundleID = Bundle.main.bundleIdentifier,
+    let server = IMKServer(name: OVInputMethodConnectionName, bundleIdentifier: bundleID)
+else {
+    NSLog(
+        "Fatal error: Cannot initialize input method server with connection \(OVInputMethodConnectionName)."
+    )
     exit(-1)
 }
 

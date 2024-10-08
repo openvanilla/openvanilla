@@ -71,7 +71,8 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
         composingText->commit();
         return true;
     }
-    
+
+    // Uppercased
     if (key->isCapsLockOn() || isNumPadKey || (key->isShiftPressed() && key->isKeyCodeAlpha() && !m_module->m_table->keynameMap()->isPairMapMixedCase())) {
         if (!readingText->isEmpty()) {
             readingText->clear();
@@ -102,6 +103,7 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
             }
             composingText->setText(string(1, c));
         }
+        // Send letter keys.
         composingText->commit();
         return true;
     }
@@ -135,9 +137,9 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
     }
     else if (key->keyCode() == OVKeyCode::Space || key->keyCode() == OVKeyCode::Return || key->keyCode() == kMacEnter) {
         if (readingText->isEmpty()) {
-
             if (key->keyCode() == OVKeyCode::Space) {
-                composingText->setText(key->receivedString());
+                string text = key->receivedString();
+                composingText->setText(text);
                 composingText->commit();
                 return true;
             }
@@ -164,11 +166,16 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
         return handleBackspace(readingText, composingText, candidateService, loaderService);
     }
     else if (key->isDirectTextKey() && key->receivedString().size()) {
+        string text = key->receivedString();
+        string tooltip = createTooltip(text);
         m_components.clear();
         readingText->clear();
         readingText->updateDisplay();
-        composingText->setText(key->receivedString());
+        composingText->setText(text);
         composingText->commit();
+        if (tooltip.length()) {
+            composingText->showToolTip(tooltip);
+        }
         return true;
     }
     else {
@@ -201,11 +208,15 @@ void OVIMTableBasedContext::candidateCanceled(OVCandidateService* candidateServi
 
 bool OVIMTableBasedContext::candidateSelected(OVCandidateService* candidateService, const string& text, size_t index, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService)
 {
+    string tooltip = createTooltip(text);
     m_components.clear();
     readingText->clear();
     readingText->updateDisplay();
     composingText->setText(text);
     composingText->commit();
+    if (tooltip.length()) {
+        composingText->showToolTip(tooltip);
+    }
     return true;
 }
 
@@ -231,11 +242,16 @@ bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* can
         if (m_module->m_configSendFirstCandidateWithSpaceWithOnePageList) {
             panel->hide();
             panel->cancelEventHandler();
+            string text = panel->candidateList()->candidateAtIndex(0);
+            string tooltip = createTooltip(text);
             m_components.clear();
             readingText->clear();
             readingText->updateDisplay();
-            composingText->setText(panel->candidateList()->candidateAtIndex(0));
+            composingText->setText(text);
             composingText->commit();
+            if (tooltip.length()) {
+                composingText->showToolTip(tooltip);
+            }
             return true;
         }
     }
@@ -243,11 +259,16 @@ bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* can
     if (key->keyCode() == kMacEnter) {
         panel->hide();
         panel->cancelEventHandler();
+        string text = panel->candidateList()->candidateAtIndex(0);
+        string tooltip = createTooltip(text);
         m_components.clear();
         readingText->clear();
         readingText->updateDisplay();
-        composingText->setText(panel->candidateList()->candidateAtIndex(0));
+        composingText->setText(text);
         composingText->commit();
+        if (tooltip.length()) {
+            composingText->showToolTip(tooltip);
+        }
         return true;
     }
 
@@ -303,10 +324,10 @@ bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* can
     return true;
 }
 
-const string OVIMTableBasedContext::currentReading()
+const string OVIMTableBasedContext::readingFromComponents(vector<string> components)
 {
     string reading;
-    for (vector<string>::const_iterator i = m_components.begin(), e = m_components.end(); i != e; ++i) {
+    for (vector<string>::const_iterator i = components.begin(), e = components.end(); i != e; ++i) {
         string r = keyNameForKeyString(*i);
         if (r.length()) {
             reading += r;
@@ -317,6 +338,12 @@ const string OVIMTableBasedContext::currentReading()
     }
 
     return reading;
+}
+
+
+const string OVIMTableBasedContext::currentReading()
+{
+    return readingFromComponents(m_components);
 }
 
 const string OVIMTableBasedContext::currentQueryKey()
@@ -393,11 +420,16 @@ bool OVIMTableBasedContext::compose(OVTextBuffer* readingText, OVTextBuffer* com
             panel->cancelEventHandler();
         }
 
+        string text = results[0];
+        string tooltip = createTooltip(text);
         m_components.clear();
         readingText->clear();
         readingText->updateDisplay();
-        composingText->setText(results[0]);
+        composingText->setText(text);
         composingText->commit();
+        if (tooltip.length()) {
+            composingText->showToolTip(tooltip);
+        }
         return true;
     }
     else {
@@ -487,4 +519,34 @@ bool OVIMTableBasedContext::isEndKey(const OVKey* key)
 bool OVIMTableBasedContext::isValidKeyString(const string& keyString)
 {
     return keyNameForKeyString(keyString).length() > 0;
+}
+
+const string OVIMTableBasedContext::createTooltip(const string& sendText)
+{
+    if (!m_module->m_specialCodePrompt) {
+        return "";
+    }
+    
+    string queryKey = currentQueryKey();
+    if (stringContainsWildcard(queryKey)) {
+        return "";
+    }
+    vector<string> results = m_module->m_table->findKeys(sendText);
+    std::sort(results.begin(), results.end(), [](const string& a, const string& b) {
+        return a.length() < b.length();
+    });
+    if (results.size() == 0) {
+        return "";
+    }
+    string shortQueryKey = results[0];
+    if (queryKey.length() > shortQueryKey.length()) {
+        std::vector<std::string> shortQueryKeyComponents;
+        for (char ch : shortQueryKey) {
+            shortQueryKeyComponents.push_back(std::string(1, ch));
+        }
+        string reading = readingFromComponents(shortQueryKeyComponents);
+        string message = sendText + ": " + reading;
+        return message;
+    }
+    return "";
 }

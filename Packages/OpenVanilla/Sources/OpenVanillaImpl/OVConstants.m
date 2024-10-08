@@ -31,6 +31,7 @@ NSString *const OVInputMethodConnectionName = @"OpenVanilla_1_Connection";
 
 NSString *const OVActiveInputMethodIdentifierKey = @"ActiveInputMethod";
 NSString *const OVAlphanumericKeyboardLayoutKey = @"AlphanumericKeyboardLayout";
+NSString *const OVFallbackToAlphanumericKeyboardLayoutOnShiftKey = @"FallbackToAlphanumericKeyboardLayoutOnShiftKey";
 NSString *const OVCandidateListStyleNameKey = @"CandidateListStyle";
 NSString *const OVCandidateListTextSizeKey = @"CandidateListTextSize";
 NSString *const OVCandidateTextFontNameKey = @"CandidateTextFontName";

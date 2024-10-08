@@ -22,12 +22,12 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
 import Cocoa
-import OpenVanillaImpl
+import Foundation
 import ModuleManager
+import OpenVanillaImpl
 
-@objc (OVTableBasedModulePreferencesViewController)
+@objc(OVTableBasedModulePreferencesViewController)
 class TableBasedModulePreferencesViewController: BaseModulePreferencesViewController {
 
     @IBOutlet var fieldAlphaNumericKeyboardLayout: NSPopUpButton!
@@ -37,6 +37,7 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
     @IBOutlet var fieldSendFirstCandidateWithSpaceWithOnePageList: NSButton!
     @IBOutlet var fieldShouldComposeAtMaximumRadicalLength: NSButton!
     @IBOutlet var fieldUseSpaceAsFirstCandidateSelectionKey: NSButton!
+    @IBOutlet var fieldSpecialCodePrompt: NSButton!
     @IBOutlet var cusmtomTableBasedInputMethodInfo: NSTextField!
     @IBOutlet var removeInputMethodButton: NSButton!
 
@@ -58,16 +59,25 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
 
         let manager = OVModuleManager.default
         if manager.isCustomTableBasedInputMethod(moduleIdentifier) {
-            cusmtomTableBasedInputMethodInfo.stringValue = NSLocalizedString("This is a customized input method.", comment: "")
+            cusmtomTableBasedInputMethodInfo.stringValue = NSLocalizedString(
+                "This is a customized input method.", comment: "")
             removeInputMethodButton.isHidden = false
         } else {
-            cusmtomTableBasedInputMethodInfo.stringValue = NSLocalizedString("This is a built-in input method.", comment: "")
+            cusmtomTableBasedInputMethodInfo.stringValue = NSLocalizedString(
+                "This is a built-in input method.", comment: "")
             removeInputMethodButton.isHidden = true
         }
 
-        setState(for: fieldClearReadingBufferAtCompositionError, key: "ClearReadingBufferAtCompositionError")
+        setState(
+            for: fieldClearReadingBufferAtCompositionError,
+            key: "ClearReadingBufferAtCompositionError")
         setState(for: fieldComposeWhileTyping, key: "ComposeWhileTyping")
-        setState(for: fieldShouldComposeAtMaximumRadicalLength, key: "ShouldComposeAtMaximumRadicalLength")
+        setState(
+            for: fieldShouldComposeAtMaximumRadicalLength,
+            key: "ShouldComposeAtMaximumRadicalLength")
+        setState(
+            for: fieldSpecialCodePrompt,
+            key: "SpecialCodePrompt")
 
         if boolValue(forKey: "UseSpaceAsFirstCandidateSelectionKey") {
             fieldUseSpaceAsFirstCandidateSelectionKey.state = .on
@@ -97,8 +107,7 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
         configureKeyboardLayoutList(fieldAlphaNumericKeyboardLayout)
     }
 
-
-    @IBAction func updateField(_  sender: NSObject) {
+    @IBAction func updateField(_ sender: NSObject) {
         if sender == fieldUseSpaceAsFirstCandidateSelectionKey {
             if fieldUseSpaceAsFirstCandidateSelectionKey.state == .on {
                 fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
@@ -108,16 +117,30 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
                 fieldUseSpaceAsFirstCandidateSelectionKey.state = .off
             }
         } else if sender == fieldAlphaNumericKeyboardLayout {
-            if let layout = fieldAlphaNumericKeyboardLayout.selectedItem?.representedObject as? String {
+            if let layout = fieldAlphaNumericKeyboardLayout.selectedItem?.representedObject
+                as? String
+            {
                 self.setStringValue(layout, forKey: OVAlphanumericKeyboardLayoutKey)
             }
         }
 
-        setBoolValue(fieldClearReadingBufferAtCompositionError.state == .on, forKey: "ClearReadingBufferAtCompositionError")
+        setBoolValue(
+            fieldClearReadingBufferAtCompositionError.state == .on,
+            forKey: "ClearReadingBufferAtCompositionError")
         setBoolValue(fieldComposeWhileTyping.state == .on, forKey: "ComposeWhileTyping")
-        setBoolValue(fieldShouldComposeAtMaximumRadicalLength.state == .on, forKey: "ShouldComposeAtMaximumRadicalLength")
-        setBoolValue(fieldUseSpaceAsFirstCandidateSelectionKey.state == .on, forKey: "UseSpaceAsFirstCandidateSelectionKey")
-        setBoolValue(fieldSendFirstCandidateWithSpaceWithOnePageList.state == .on, forKey: "SendFirstCandidateWithSpaceWithOnePageList")
+        setBoolValue(
+            fieldShouldComposeAtMaximumRadicalLength.state == .on,
+            forKey: "ShouldComposeAtMaximumRadicalLength")
+        setBoolValue(
+            fieldUseSpaceAsFirstCandidateSelectionKey.state == .on,
+            forKey: "UseSpaceAsFirstCandidateSelectionKey")
+        setBoolValue(
+            fieldSendFirstCandidateWithSpaceWithOnePageList.state == .on,
+            forKey: "SendFirstCandidateWithSpaceWithOnePageList")
+        setBoolValue(
+            fieldSpecialCodePrompt.state == .on,
+            forKey: "SpecialCodePrompt")
+
 
         let selectedItem = fieldMaximumRadicalLength.selectedItem
         if let selectedItem {
@@ -127,7 +150,15 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
     }
 
     @IBAction func removeInputMethodAction(_ sender: Any?) {
-        NonModalAlertWindowController.shared.show(title: NSLocalizedString("Confirm Removal", comment: ""), content: String(format: NSLocalizedString("Are you sure you want to remove the input method\"%@\"", comment: ""), OVModuleManager.default.localizedInputMethodName(self.moduleIdentifier)), confirmButtonTitle: NSLocalizedString("Remove", comment: ""), cancelButtonTitle: NSLocalizedString("Cancel", comment: ""), cancelAsDefault: true, delegate: self)
+        NonModalAlertWindowController.shared.show(
+            title: NSLocalizedString("Confirm Removal", comment: ""),
+            content: String(
+                format: NSLocalizedString(
+                    "Are you sure you want to remove the input method\"%@\"", comment: ""),
+                OVModuleManager.default.localizedInputMethodName(self.moduleIdentifier)),
+            confirmButtonTitle: NSLocalizedString("Remove", comment: ""),
+            cancelButtonTitle: NSLocalizedString("Cancel", comment: ""), cancelAsDefault: true,
+            delegate: self)
     }
 
 }
@@ -137,7 +168,15 @@ extension TableBasedModulePreferencesViewController: NonModalAlertWindowControll
         do {
             try OVModuleManager.default.removeCustomTableBasedInputMethod(self.moduleIdentifier)
         } catch {
-            NonModalAlertWindowController.shared.show(title: NSLocalizedString("Removal Failed", comment: ""), content: String(format: NSLocalizedString("Failed to remove the input method\"%@\".\n\nError: %@", comment: ""), OVModuleManager.default.localizedInputMethodName(self.moduleIdentifier), error.localizedDescription), confirmButtonTitle: NSLocalizedString("Dismiss", comment: ""), cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
+            NonModalAlertWindowController.shared.show(
+                title: NSLocalizedString("Removal Failed", comment: ""),
+                content: String(
+                    format: NSLocalizedString(
+                        "Failed to remove the input method\"%@\".\n\nError: %@", comment: ""),
+                    OVModuleManager.default.localizedInputMethodName(self.moduleIdentifier),
+                    error.localizedDescription),
+                confirmButtonTitle: NSLocalizedString("Dismiss", comment: ""),
+                cancelButtonTitle: nil, cancelAsDefault: false, delegate: nil)
         }
     }
 

@@ -22,19 +22,23 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
 import Cocoa
+import Foundation
 
-fileprivate var kModuleIdentifier = "org.openvanilla.OVAFAssociatedPhrases"
+private var kModuleIdentifier = "org.openvanilla.OVAFAssociatedPhrases"
 
-@objc (OVAFAssociatedPhrasesPreferencesViewController)
+@objc(OVAFAssociatedPhrasesPreferencesViewController)
 class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewController {
 
     @IBOutlet weak var fieldSelectionKeys: NSPopUpButton!
     @IBOutlet weak var fieldContinuousAssociation: NSButton!
 
-    private var defaultSelectionKeys: [String] = ["!#$%^&*()", "!#$%^&*(", "1234567890", "123456789"]
-    private var defaultSelectionKeyTitles: [String] = ["Shift-1 ~ Shift-0", "Shift-1 ~ Shift-9", "1234567890", "123456789"];
+    private var defaultSelectionKeys: [String] = [
+        "!#$%^&*()", "!#$%^&*(", "1234567890", "123456789",
+    ]
+    private var defaultSelectionKeyTitles: [String] = [
+        "Shift-1 ~ Shift-0", "Shift-1 ~ Shift-9", "1234567890", "123456789",
+    ]
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -78,7 +82,9 @@ class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewContr
         if selectedIndex == -1 {
             selectedIndex = 0
         }
-        let newSelectionKeys = (selectedIndex < defaultSelectionKeyTitles.count ? defaultSelectionKeys : defaultSelectionKeyTitles)[selectedIndex]
+        let newSelectionKeys =
+            (selectedIndex < defaultSelectionKeyTitles.count
+            ? defaultSelectionKeys : defaultSelectionKeyTitles)[selectedIndex]
         setStringValue(newSelectionKeys, forKey: "SelectionKeys")
     }
 }

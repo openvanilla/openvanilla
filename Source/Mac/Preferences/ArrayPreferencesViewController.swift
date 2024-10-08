@@ -22,33 +22,44 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
 import Cocoa
+import Foundation
+import ModuleManager
+import OpenVanillaImpl
 
 private let kArrayModuleIdentifier = "org.openvanilla.OVIMArray"
 
-@objc (OVIMArrayPreferencesViewController)
+@objc(OVIMArrayPreferencesViewController)
 class ArrayPreferencesViewController: BaseModulePreferencesViewController {
     @IBOutlet weak var fieldAutoSP: NSButton!
     @IBOutlet weak var fieldForceSP: NSButton!
-    
+    @IBOutlet var fieldAlphaNumericKeyboardLayout: NSPopUpButton!
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.moduleIdentifier = kArrayModuleIdentifier
     }
-    
+
     override func loadPreferences() {
         super.loadPreferences()
         setState(for: fieldAutoSP, key: "SpecialCodePrompt")
         setState(for: fieldForceSP, key: "QuickMode")
+        configureKeyboardLayoutList(fieldAlphaNumericKeyboardLayout)
     }
-    
+
     private func setState(for button: NSButton, key: String) {
         button.state = self.boolValue(forKey: key) == true ? .on : .off
     }
-    
-    @IBAction func updateField(_ sender: Any?) {
+
+    @IBAction func updateField(_ sender: NSObject?) {
         setBoolValue(fieldAutoSP.state == .on, forKey: "SpecialCodePrompt")
         setBoolValue(fieldForceSP.state == .on, forKey: "QuickMode")
+        if sender == fieldAlphaNumericKeyboardLayout {
+            if let layout = fieldAlphaNumericKeyboardLayout.selectedItem?.representedObject
+                as? String
+            {
+                self.setStringValue(layout, forKey: OVAlphanumericKeyboardLayoutKey)
+            }
+        }
     }
 }

@@ -7,22 +7,22 @@ extension Notification.Name {
 }
 
 class UpdateChecker: NSObject {
-    @objc (sharedInstance)
+    @objc(sharedInstance)
     static let shared = UpdateChecker()
 
     private override init() {
     }
 
     @objc
-    private (set) var busy = false
+    private(set) var busy = false
 
     @objc
     @UserDefault (key: OVLastUpdateCheckTimeKey, defaultValue: nil)
-    private (set) var lastUpdateCheckDate: Date?
+    private(set) var lastUpdateCheckDate: Date?
 
     @objc
     @UserDefault (key: OVNextUpdateCheckTimeKey, defaultValue: nil)
-    private (set) var nextUpdateCheckDate: Date?
+    private(set) var nextUpdateCheckDate: Date?
 
     private var connection: URLSessionDataTask?
 

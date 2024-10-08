@@ -209,10 +209,15 @@ using namespace OpenVanilla;
 
 - (void)commitComposition:(id)sender
 {
-    // fix the premature commit bug in Terminal.app since OS X 10.5
-    if ([[sender bundleIdentifier] isEqualToString:@"com.apple.Terminal"] && ![NSStringFromClass([sender class]) isEqualToString:@"IPMDServerClientWrapper"]) {
-        [self performSelector:@selector(updateClientComposingBuffer:) withObject:_currentClient afterDelay:0.0];
-        return;
+    NSString *osVersion = [[NSProcessInfo processInfo] operatingSystemVersionString];
+    NSString *termialFixedVersion = @"15.0.1";
+    
+    if ([osVersion compare:termialFixedVersion options:NSNumericSearch] == NSOrderedAscending) {
+        // fix the premature commit bug in Terminal.app since OS X 10.5
+        if ([[sender bundleIdentifier] isEqualToString:@"com.apple.Terminal"] && ![NSStringFromClass([sender class]) isEqualToString:@"IPMDServerClientWrapper"]) {
+            [self performSelector:@selector(updateClientComposingBuffer:) withObject:_currentClient afterDelay:0.0];
+            return;
+        }
     }
 
     if (_composingText->isCommitted()) {
@@ -222,16 +227,35 @@ using namespace OpenVanilla;
     }
 }
 
+- (NSUInteger)recognizedEvents:(id)sender
+{
+    return NSEventMaskKeyDown | NSEventMaskFlagsChanged;
+}
+
 - (BOOL)handleEvent:(NSEvent *)event client:(id)client
 {
-    if (_readingText->toolTipText().length() || _composingText->toolTipText().length()) {
-        _readingText->clearToolTip();
-        _composingText->clearToolTip();
-        [[OVModuleManager defaultManager].toolTipWindowController.window orderOut:self];
+    if (event.type == NSEventTypeFlagsChanged) {
+        NSString *sharedKeyboardLayout = [[OVModuleManager defaultManager] sharedAlphanumericKeyboardLayoutIdentifier];
+        NSString *inputMethodKeyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
+        if ((event.modifierFlags & NSEventModifierFlagShift) &&
+            [OVModuleManager defaultManager].fallbackToSharedAlphanumericKeyboardLayoutWhenShiftPressed
+            ) {
+            [client overrideKeyboardWithKeyboardNamed:sharedKeyboardLayout];
+            return NO;
+        }
+        [client overrideKeyboardWithKeyboardNamed:inputMethodKeyboardLayout];
+        return NO;
     }
 
     if (event.type != NSEventTypeKeyDown) {
         return NO;
+    }
+
+    if (_readingText->toolTipText().length() || _composingText->toolTipText().length()) {
+        NSLog(@"clear tooltip");
+        _readingText->clearToolTip();
+        _composingText->clearToolTip();
+        [[OVModuleManager defaultManager].toolTipWindowController.window orderOut:self];
     }
 
     NSString *chars = event.characters;
@@ -464,7 +488,9 @@ using namespace OpenVanilla;
     NSAttributedString *emptyReading = [[NSAttributedString alloc] initWithString:@""];
     [_currentClient setMarkedText:emptyReading selectionRange:NSMakeRange(0, 0) replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
     _composingText->commit();
+
     [self commitComposition:_currentClient];
+
     _composingText->clear();
     _readingText->clear();
     [OVModuleManager defaultManager].candidateService->resetAll();
@@ -584,6 +610,7 @@ using namespace OpenVanilla;
         toolTipText = _composingText->toolTipText();
     }
 
+//    NSLog(@"toolTipText: %@", [NSString stringWithUTF8String:toolTipText.c_str()]);
     if (toolTipText.length()) {
         NSPoint toolTipOrigin = lineHeightRect.origin;
         BOOL fromTopLeft = YES;
