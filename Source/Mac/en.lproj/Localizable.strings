@@ -154,7 +154,7 @@
 "Maximum component buffer length:" = "Maximum component buffer length:";
 "Candidate list font size:" = "Candidate list font size:";
 "This is a customized input method." = "This is a customized input method.";
-"Special code prompt (Auto SP)" = "Special code prompt (Auto SP)";
+"Prompt for a shorter combination if available" = "Prompt for a shorter combination if available";
 "Last checked: %@" = "Last checked: %@";
 "Alphanumeric keyboard layout:" = "Alphanumeric keyboard layout:";
 "Space selects the first candidate when there's only one page" = "Space selects the first candidate when there's only one page";
@@ -167,7 +167,7 @@
 "Compose when reaching the maximum component length" = "Compose when reaching the maximum component length";
 "Horizontal" = "Horizontal";
 "Feedback:" = "Feedback:";
-"Quick mode (Force SP)" = "Enforce special code (\"Quick Mode\" or Force SP)";
+"Only allow the shortest combination" = "Only allow the shortest combination";
 "Alphanumeric keyboard layout:" = "Alphanumeric keyboard layout:";
 "Create a customized input method by importing a .cin file" = "Create a customized input method by importing a .cin file";
 "Selection keys:" = "Selection keys:";
