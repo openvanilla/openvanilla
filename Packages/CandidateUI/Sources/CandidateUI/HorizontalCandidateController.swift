@@ -359,7 +359,7 @@ public class HorizontalCandidateController: CandidateController {
         }
 
         if currentPage + 1 >= pageCount {
-            return false
+            return showFirstPage()
         }
 
         currentPage += 1
@@ -374,10 +374,43 @@ public class HorizontalCandidateController: CandidateController {
         }
 
         if currentPage == 0 {
-            return false
+            return showLastPage()
         }
 
         currentPage -= 1
+        candidateView.highlightedIndex = 0
+        layoutCandidateView()
+        return true
+    }
+
+    public override func showFirstPage() -> Bool {
+        guard delegate != nil else {
+            return false
+        }
+
+        if currentPage == 0 {
+            return false
+        }
+
+        currentPage = 0
+        candidateView.highlightedIndex = 0
+        layoutCandidateView()
+        return true
+    }
+
+    public override func showLastPage() -> Bool {
+        guard let delegate else {
+            return false
+        }
+
+        let keyLabelCount = UInt(keyLabels.count)
+        let candidateCount = delegate.candidateCountForController(self)
+        let lastPage = candidateCount / keyLabelCount
+        if currentPage == lastPage {
+            return false
+        }
+
+        currentPage = lastPage
         candidateView.highlightedIndex = 0
         layoutCandidateView()
         return true
@@ -390,20 +423,22 @@ public class HorizontalCandidateController: CandidateController {
 
         let currentIndex = selectedCandidateIndex
         if currentIndex + 1 >= delegate.candidateCountForController(self) {
-            return false
+            return showFirstPage()
         }
         selectedCandidateIndex = currentIndex + 1
         return true
     }
 
     public override func highlightPreviousCandidate() -> Bool {
-        guard delegate != nil else {
+        guard let delegate else {
             return false
         }
 
         let currentIndex = selectedCandidateIndex
         if currentIndex == 0 {
-            return false
+            let candidateCount = delegate.candidateCountForController(self)
+            selectedCandidateIndex = candidateCount - 1
+            return true
         }
 
         selectedCandidateIndex = currentIndex - 1
