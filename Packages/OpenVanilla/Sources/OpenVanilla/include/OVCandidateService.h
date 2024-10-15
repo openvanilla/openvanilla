@@ -118,13 +118,14 @@ namespace OpenVanilla {
         virtual size_t goToPage(size_t page) = 0;
 
         virtual const OVKey candidateKeyAtIndex(size_t index) = 0;
-        virtual void setCandidateKeys(const string& asciiKeys, OVLoaderService* loaderService)
+        virtual void setCandidateKeys(const string& asciiKeys, bool useSpaceAsFirstCandidateSelectionKey, OVLoaderService* loaderService)
         {
             OVKeyVector keys;
             for (size_t index = 0; index < asciiKeys.length(); index++) {
                 keys.push_back(loaderService->makeOVKey(asciiKeys[index]));
             }
-            
+
+            m_useSpaceAsFirstCandidateSelectionKey = useSpaceAsFirstCandidateSelectionKey;
             setCandidateKeys(keys);
             setCandidatesPerPage(asciiKeys.length());
         }
@@ -146,6 +147,12 @@ namespace OpenVanilla {
         virtual const OVKeyVector defaultChooseHighlightedCandidateKeys() const = 0;
 
         virtual void setCandidateKeysAndLabels(const vector<pair<OVKey, string> >& keyLabelPairs) = 0;
+        virtual const bool useSpaceAsFirstCandidateSelectionKey() {
+            return m_useSpaceAsFirstCandidateSelectionKey;
+        }
+
+    private:
+        bool m_useSpaceAsFirstCandidateSelectionKey = false;
     };
 
     class OVFreeContentStorage : public OVBase {

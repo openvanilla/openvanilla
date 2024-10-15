@@ -439,19 +439,16 @@ bool OVIMTableBasedContext::compose(OVTextBuffer* readingText, OVTextBuffer* com
         candidates->setCandidates(results);
 
         string candidateKeys = m_module->m_table->findProperty("selkey");
+
         if (!candidateKeys.length()) {
             candidateKeys = "123456789";
-        }
-
-        if (m_module->m_configUseSpaceAsFirstCandidateSelectionKey) {
-            candidateKeys = string(" ") + candidateKeys;
         }
 
         if (results.size() < candidateKeys.length()) {
             candidateKeys = candidateKeys.substr(0, results.size());
         }
 
-        panel->setCandidateKeys(candidateKeys, loaderService);
+        panel->setCandidateKeys(candidateKeys, m_module->m_configUseSpaceAsFirstCandidateSelectionKey, loaderService);
 
         OVKeyVector nextPageKeys;
         if (results.size() <= candidateKeys.length() && (m_module->m_configUseSpaceAsFirstCandidateSelectionKey || m_module->m_configSendFirstCandidateWithSpaceWithOnePageList)) {
