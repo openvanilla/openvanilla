@@ -174,3 +174,7 @@
 "After a candidate is chosen:" = "After a candidate is chosen:";
 "Keep showing new candidates" = "Keep showing new candidates";
 "Always use the keyboard layout when Shift key is pressed" = "Always use it with Shift";
+"Use space as the first candidate key:" = "Use Space as the first candidate key:";
+"Disabled" = "Disabled";
+"Original first key selects the second candidate" = "Original first key selects the second candidate";
+"Both space and the first key selects the first candidate" = "Both Space and the first key selects the first candidate";

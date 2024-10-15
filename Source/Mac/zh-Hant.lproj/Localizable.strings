@@ -143,3 +143,8 @@
 "After a candidate is chosen:" = "選完聯想字詞後：";
 "Keep showing new candidates" = "繼續提供聯想字詞";
 "Always use the keyboard layout when Shift key is pressed" = "按下 Shift 時固定使用";
+"Use space as the first candidate key:" = "使用空白鍵選第一個候選字詞：";
+"Disabled" = "不使用";
+"Original first key selects the second candidate" = "原本第一個選字鍵選第二個字詞";
+"Both space and the first key selects the first candidate" = "空白鍵與原本第一個選字鍵都選第一個字詞";
+

@@ -36,7 +36,7 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
     @IBOutlet var fieldComposeWhileTyping: NSButton!
     @IBOutlet var fieldSendFirstCandidateWithSpaceWithOnePageList: NSButton!
     @IBOutlet var fieldShouldComposeAtMaximumRadicalLength: NSButton!
-    @IBOutlet var fieldUseSpaceAsFirstCandidateSelectionKey: NSButton!
+    @IBOutlet var fieldUseSpaceAsFirstCandidateSelectionKey: NSMatrix!
     @IBOutlet var fieldSpecialCodePrompt: NSButton!
     @IBOutlet var cusmtomTableBasedInputMethodInfo: NSTextField!
     @IBOutlet var removeInputMethodButton: NSButton!
@@ -79,14 +79,24 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
             for: fieldSpecialCodePrompt,
             key: "SpecialCodePrompt")
 
-        if boolValue(forKey: "UseSpaceAsFirstCandidateSelectionKey") {
-            fieldUseSpaceAsFirstCandidateSelectionKey.state = .on
+        var useSpaceAsFirstCandidateSelectionKey =
+            unsignedIntegerValue(forKey: "UseSpaceAsFirstCandidateSelectionKey") ?? 0
+
+        let legacyUseSpaceAsFirstCandidateSelectionKey = boolValue(
+            forKey: "UseSpaceAsFirstCandidateSelectionKey")
+        if legacyUseSpaceAsFirstCandidateSelectionKey {
+            useSpaceAsFirstCandidateSelectionKey = 1
+        }
+
+        if useSpaceAsFirstCandidateSelectionKey != 0 {
+            fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: Int(
+                useSpaceAsFirstCandidateSelectionKey))
             fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
         } else if boolValue(forKey: "SendFirstCandidateWithSpaceWithOnePageList") {
-            fieldUseSpaceAsFirstCandidateSelectionKey.state = .on
+            fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: 1)
             fieldSendFirstCandidateWithSpaceWithOnePageList.state = .on
         } else {
-            fieldUseSpaceAsFirstCandidateSelectionKey.state = .off
+            fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: 0)
             fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
         }
 
@@ -109,12 +119,12 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
 
     @IBAction func updateField(_ sender: NSObject) {
         if sender == fieldUseSpaceAsFirstCandidateSelectionKey {
-            if fieldUseSpaceAsFirstCandidateSelectionKey.state == .on {
+            if fieldUseSpaceAsFirstCandidateSelectionKey.selectedTag() != 0 {
                 fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
             }
         } else if sender == fieldSendFirstCandidateWithSpaceWithOnePageList {
             if fieldSendFirstCandidateWithSpaceWithOnePageList.state == .on {
-                fieldUseSpaceAsFirstCandidateSelectionKey.state = .off
+                fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: 0)
             }
         } else if sender == fieldAlphaNumericKeyboardLayout {
             if let layout = fieldAlphaNumericKeyboardLayout.selectedItem?.representedObject
@@ -131,8 +141,8 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
         setBoolValue(
             fieldShouldComposeAtMaximumRadicalLength.state == .on,
             forKey: "ShouldComposeAtMaximumRadicalLength")
-        setBoolValue(
-            fieldUseSpaceAsFirstCandidateSelectionKey.state == .on,
+        setUnsignedIntegerValue(
+            UInt(fieldUseSpaceAsFirstCandidateSelectionKey.selectedTag()),
             forKey: "UseSpaceAsFirstCandidateSelectionKey")
         setBoolValue(
             fieldSendFirstCandidateWithSpaceWithOnePageList.state == .on,
@@ -140,7 +150,6 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
         setBoolValue(
             fieldSpecialCodePrompt.state == .on,
             forKey: "SpecialCodePrompt")
-
 
         let selectedItem = fieldMaximumRadicalLength.selectedItem
         if let selectedItem {

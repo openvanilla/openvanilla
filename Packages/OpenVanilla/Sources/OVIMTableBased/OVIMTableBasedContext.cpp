@@ -444,11 +444,15 @@ bool OVIMTableBasedContext::compose(OVTextBuffer* readingText, OVTextBuffer* com
             candidateKeys = "123456789";
         }
 
+        if (m_module->m_configUseSpaceAsFirstCandidateSelectionKey == OriginalFirstKeySelectsSecondCandidate) {
+            candidateKeys = string(" ") + candidateKeys;
+        }
+
         if (results.size() < candidateKeys.length()) {
             candidateKeys = candidateKeys.substr(0, results.size());
         }
 
-        panel->setCandidateKeys(candidateKeys, m_module->m_configUseSpaceAsFirstCandidateSelectionKey, loaderService);
+        panel->setCandidateKeys(candidateKeys, m_module->m_configUseSpaceAsFirstCandidateSelectionKey == SpaceAndOriginalFirstKeySelectsFirstCandidate, loaderService);
 
         OVKeyVector nextPageKeys;
         if (results.size() <= candidateKeys.length() && (m_module->m_configUseSpaceAsFirstCandidateSelectionKey || m_module->m_configSendFirstCandidateWithSpaceWithOnePageList)) {

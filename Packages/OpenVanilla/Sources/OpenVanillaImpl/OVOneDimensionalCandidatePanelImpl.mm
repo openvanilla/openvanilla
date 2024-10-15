@@ -361,12 +361,19 @@ void OVOneDimensionalCandidatePanelImpl::setCandidateKeys(const OVKeyVector& key
     NSMutableArray *labels = [NSMutableArray array];
     for (OVKeyVector::const_iterator i = keys.begin(), e = keys.end(); i != e; ++i) {
         NSString *key = nil;
+        NSString *diaplayedText = nil;
         if (i == keys.begin() && useSpaceAsFirstCandidateSelectionKey()) {
-            key = @"␣";
+            key = @" ";
+            diaplayedText = @"␣";
         } else {
             key = @((*i).receivedString().c_str());
+            if ([key isEqualToString:@" "]) {
+                diaplayedText = @"␣";
+            } else {
+                diaplayedText = key;
+            }
         }
-        VTCandidateKeyLabel *label = [[VTCandidateKeyLabel alloc] initWithKey:key displayedText:key];
+        VTCandidateKeyLabel *label = [[VTCandidateKeyLabel alloc] initWithKey:key displayedText:diaplayedText];
         [labels addObject:label];
     }
 
