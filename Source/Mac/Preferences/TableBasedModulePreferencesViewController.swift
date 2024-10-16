@@ -79,21 +79,15 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
             for: fieldSpecialCodePrompt,
             key: "SpecialCodePrompt")
 
-        var useSpaceAsFirstCandidateSelectionKey =
+        let useSpaceAsFirstCandidateSelectionKey =
             unsignedIntegerValue(forKey: "UseSpaceAsFirstCandidateSelectionKey") ?? 0
-
-        let legacyUseSpaceAsFirstCandidateSelectionKey = boolValue(
-            forKey: "UseSpaceAsFirstCandidateSelectionKey")
-        if legacyUseSpaceAsFirstCandidateSelectionKey {
-            useSpaceAsFirstCandidateSelectionKey = 1
-        }
 
         if useSpaceAsFirstCandidateSelectionKey != 0 {
             fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: Int(
                 useSpaceAsFirstCandidateSelectionKey))
             fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
         } else if boolValue(forKey: "SendFirstCandidateWithSpaceWithOnePageList") {
-            fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: 1)
+            fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: 0)
             fieldSendFirstCandidateWithSpaceWithOnePageList.state = .on
         } else {
             fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: 0)
@@ -119,7 +113,7 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
 
     @IBAction func updateField(_ sender: NSObject) {
         if sender == fieldUseSpaceAsFirstCandidateSelectionKey {
-            if fieldUseSpaceAsFirstCandidateSelectionKey.selectedTag() != 0 {
+            if fieldUseSpaceAsFirstCandidateSelectionKey.selectedCell()?.tag ?? 0 != 0 {
                 fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
             }
         } else if sender == fieldSendFirstCandidateWithSpaceWithOnePageList {
@@ -142,7 +136,7 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
             fieldShouldComposeAtMaximumRadicalLength.state == .on,
             forKey: "ShouldComposeAtMaximumRadicalLength")
         setUnsignedIntegerValue(
-            UInt(fieldUseSpaceAsFirstCandidateSelectionKey.selectedTag()),
+            UInt(fieldUseSpaceAsFirstCandidateSelectionKey.selectedCell()?.tag ?? 0),
             forKey: "UseSpaceAsFirstCandidateSelectionKey")
         setBoolValue(
             fieldSendFirstCandidateWithSpaceWithOnePageList.state == .on,
