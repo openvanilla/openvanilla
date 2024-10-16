@@ -529,9 +529,6 @@ const string OVIMTableBasedContext::createTooltip(const string& sendText)
     }
     
     string queryKey = currentQueryKey();
-    if (stringContainsWildcard(queryKey)) {
-        return "";
-    }
     vector<string> results = m_module->m_table->findKeys(sendText);
     std::sort(results.begin(), results.end(), [](const string& a, const string& b) {
         return a.length() < b.length();
@@ -540,7 +537,7 @@ const string OVIMTableBasedContext::createTooltip(const string& sendText)
         return "";
     }
     string shortQueryKey = results[0];
-    if (queryKey.length() > shortQueryKey.length()) {
+    if (queryKey.length() > shortQueryKey.length() || stringContainsWildcard(queryKey)) {
         std::vector<std::string> shortQueryKeyComponents;
         for (char ch : shortQueryKey) {
             shortQueryKeyComponents.push_back(std::string(1, ch));
