@@ -38,7 +38,7 @@ OVIMTableBased::OVIMTableBased(const string& tablePath)
     , m_configMaximumRadicalLength(5)
     , m_configSendFirstCandidateWithSpaceWithOnePageList(true)
     , m_configShouldComposeAtMaximumRadicalLength(true)
-    , m_configUseSpaceAsFirstCandidateSelectionKey(false)
+    , m_configUseSpaceAsFirstCandidateSelectionKey(Disabled)
     , m_configMatchOneChar('?')
     , m_configMatchZeroOrMoreChar('*')
     , m_configOnlyUseNumPadNumbersForRadicals(false)
@@ -52,7 +52,7 @@ OVIMTableBased::OVIMTableBased(const string& tablePath)
         m_configMaximumRadicalLength = 2;
     } else if (OVWildcard::Match(filename, "dayi*.cin")) {
         m_configMaximumRadicalLength = 4;
-        m_configUseSpaceAsFirstCandidateSelectionKey = true;
+        m_configUseSpaceAsFirstCandidateSelectionKey = OriginalFirstKeySelectsSecondCandidate;
     } else if (OVWildcard::Match(filename, "ehq*.cin")) {
         m_configMaximumRadicalLength = 10;
         m_configComposeWhileTyping = true;
@@ -194,7 +194,7 @@ void OVIMTableBased::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* lo
     }
 
     if (moduleConfig->hasKey("UseSpaceAsFirstCandidateSelectionKey")) {
-        m_configUseSpaceAsFirstCandidateSelectionKey = moduleConfig->isKeyTrue("UseSpaceAsFirstCandidateSelectionKey");
+        m_configUseSpaceAsFirstCandidateSelectionKey = static_cast<UseSpaceAsFirstCandidateSelectionKeyOption>(moduleConfig->intValueForKey("UseSpaceAsFirstCandidateSelectionKey"));
     }
 
     if (moduleConfig->hasKey("OnlyUseNumPadNumbersForRadicals")) {

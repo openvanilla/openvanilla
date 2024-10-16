@@ -140,6 +140,7 @@ OVOneDimensionalCandidatePanelImpl::OVOneDimensionalCandidatePanelImpl(Class pan
     m_nextPageKeys = m_defaultNextPageKeys;
     m_previousCandidateKeys = m_defaultPreviousCandidateKeys;
     m_previousPageKeys = m_defaultPreviousPageKeys;
+    m_spaceKeys.push_back(loaderService->makeOVKey(OVKeyCode::Space));
 
     applyFontSettings();
 }
@@ -359,8 +360,20 @@ void OVOneDimensionalCandidatePanelImpl::setCandidateKeys(const OVKeyVector& key
     m_candidateKeys = keys;
     NSMutableArray *labels = [NSMutableArray array];
     for (OVKeyVector::const_iterator i = keys.begin(), e = keys.end(); i != e; ++i) {
-        NSString *key = @((*i).receivedString().c_str());
-        VTCandidateKeyLabel *label = [[VTCandidateKeyLabel alloc] initWithKey:key displayedText:key];
+        NSString *key = nil;
+        NSString *diaplayedText = nil;
+        if (i == keys.begin() && useSpaceAsFirstCandidateSelectionKey()) {
+            key = @" ";
+            diaplayedText = @"␣";
+        } else {
+            key = @((*i).receivedString().c_str());
+            if ([key isEqualToString:@" "]) {
+                diaplayedText = @"␣";
+            } else {
+                diaplayedText = key;
+            }
+        }
+        VTCandidateKeyLabel *label = [[VTCandidateKeyLabel alloc] initWithKey:key displayedText:diaplayedText];
         [labels addObject:label];
     }
 
@@ -441,7 +454,12 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
 {
     size_t selectedCandidateKeyIndex;
 
-    if (IsKeyInList(key, m_candidateKeys, &selectedCandidateKeyIndex)) {
+    if (useSpaceAsFirstCandidateSelectionKey() && IsKeyInList(key, m_spaceKeys)) {
+        hide();
+        m_inControl = false;
+        setHighlightIndex(0);
+        return CandidateSelected;
+    } else if (IsKeyInList(key, m_candidateKeys, &selectedCandidateKeyIndex)) {
         if (selectedCandidateKeyIndex >= currentPageCandidateCount()) {
             return Invalid;
         }

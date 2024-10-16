@@ -108,7 +108,8 @@ using namespace OpenVanilla;
     [menu addItem:[NSMenuItem separatorItem]];
 
     NSMenuItem *filterItem;
-    filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Traditional Chinese to Simplified", @"") action:@selector(toggleTraditionalToSimplifiedChineseFilterAction:) keyEquivalent:@""];
+    filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Traditional Chinese to Simplified", @"") action:@selector(toggleTraditionalToSimplifiedChineseFilterAction:) keyEquivalent:@"g"];
+    [filterItem setKeyEquivalentModifierMask:NSEventModifierFlagCommand | NSEventModifierFlagControl];
     filterItem.state = [OVModuleManager defaultManager].traditionalToSimplifiedChineseFilterEnabled ? NSControlStateValueOn : NSControlStateValueOff;
     [menu addItem:filterItem];
 

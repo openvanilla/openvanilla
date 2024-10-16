@@ -439,11 +439,12 @@ bool OVIMTableBasedContext::compose(OVTextBuffer* readingText, OVTextBuffer* com
         candidates->setCandidates(results);
 
         string candidateKeys = m_module->m_table->findProperty("selkey");
+
         if (!candidateKeys.length()) {
             candidateKeys = "123456789";
         }
 
-        if (m_module->m_configUseSpaceAsFirstCandidateSelectionKey) {
+        if (m_module->m_configUseSpaceAsFirstCandidateSelectionKey == OriginalFirstKeySelectsSecondCandidate) {
             candidateKeys = string(" ") + candidateKeys;
         }
 
@@ -451,7 +452,7 @@ bool OVIMTableBasedContext::compose(OVTextBuffer* readingText, OVTextBuffer* com
             candidateKeys = candidateKeys.substr(0, results.size());
         }
 
-        panel->setCandidateKeys(candidateKeys, loaderService);
+        panel->setCandidateKeys(candidateKeys, m_module->m_configUseSpaceAsFirstCandidateSelectionKey == SpaceAndOriginalFirstKeySelectsFirstCandidate, loaderService);
 
         OVKeyVector nextPageKeys;
         if (results.size() <= candidateKeys.length() && (m_module->m_configUseSpaceAsFirstCandidateSelectionKey || m_module->m_configSendFirstCandidateWithSpaceWithOnePageList)) {
@@ -528,9 +529,6 @@ const string OVIMTableBasedContext::createTooltip(const string& sendText)
     }
     
     string queryKey = currentQueryKey();
-    if (stringContainsWildcard(queryKey)) {
-        return "";
-    }
     vector<string> results = m_module->m_table->findKeys(sendText);
     std::sort(results.begin(), results.end(), [](const string& a, const string& b) {
         return a.length() < b.length();
@@ -539,7 +537,7 @@ const string OVIMTableBasedContext::createTooltip(const string& sendText)
         return "";
     }
     string shortQueryKey = results[0];
-    if (queryKey.length() > shortQueryKey.length()) {
+    if (queryKey.length() > shortQueryKey.length() || stringContainsWildcard(queryKey)) {
         std::vector<std::string> shortQueryKeyComponents;
         for (char ch : shortQueryKey) {
             shortQueryKeyComponents.push_back(std::string(1, ch));

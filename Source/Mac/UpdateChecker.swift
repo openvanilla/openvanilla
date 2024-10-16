@@ -17,11 +17,11 @@ class UpdateChecker: NSObject {
     private(set) var busy = false
 
     @objc
-    @UserDefault (key: OVLastUpdateCheckTimeKey, defaultValue: nil)
+    @UserDefault(key: OVLastUpdateCheckTimeKey, defaultValue: nil)
     private(set) var lastUpdateCheckDate: Date?
 
     @objc
-    @UserDefault (key: OVNextUpdateCheckTimeKey, defaultValue: nil)
+    @UserDefault(key: OVNextUpdateCheckTimeKey, defaultValue: nil)
     private(set) var nextUpdateCheckDate: Date?
 
     private var connection: URLSessionDataTask?

@@ -130,5 +130,6 @@ namespace OpenVanilla {
         OVKeyVector m_defaultPreviousPageKeys;
         OVKeyVector m_defaultNextCandidateKeys;
         OVKeyVector m_defaultPreviousCandidateKeys;
+        OVKeyVector m_spaceKeys;
     };
 };

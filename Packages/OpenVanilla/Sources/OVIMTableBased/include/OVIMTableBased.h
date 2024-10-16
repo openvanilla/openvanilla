@@ -36,6 +36,12 @@ namespace OpenVanilla {
 
     class OVIMTableBasedContext;
 
+    enum UseSpaceAsFirstCandidateSelectionKeyOption {
+        Disabled,
+        OriginalFirstKeySelectsSecondCandidate,
+        SpaceAndOriginalFirstKeySelectsFirstCandidate,
+    };
+
     class OVIMTableBased : public OVInputMethod {
     public:
         OVIMTableBased(const string& tablePath);
@@ -68,7 +74,7 @@ namespace OpenVanilla {
         size_t m_configMaximumRadicalLength;
         bool m_configSendFirstCandidateWithSpaceWithOnePageList;
         bool m_configShouldComposeAtMaximumRadicalLength;
-        bool m_configUseSpaceAsFirstCandidateSelectionKey;
+        UseSpaceAsFirstCandidateSelectionKeyOption m_configUseSpaceAsFirstCandidateSelectionKey;
         bool m_configOnlyUseNumPadNumbersForRadicals;
         bool m_specialCodePrompt;
     };

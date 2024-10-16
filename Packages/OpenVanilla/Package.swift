@@ -32,6 +32,10 @@ let package = Package(
         .target(
             name: "OpenVanillaImpl",
             dependencies: ["OpenVanilla", "CandidateUI"],
+            cSettings: [
+                .unsafeFlags(["-Wno-incomplete-umbrella"], .when(configuration: .release)),
+                .unsafeFlags(["-Wno-incomplete-umbrella"], .when(configuration: .debug))
+            ],
             cxxSettings: [.unsafeFlags(["-fcxx-modules", "-fmodules"])]
         ),
         .target(
@@ -46,6 +50,10 @@ let package = Package(
                            "LoaderService",
                            "CandidateUI", "TooltipUI", "VXHanConvert",
                            "OVIMBig5Code", "OVIMTableBased", "OVIMArray", "OVAFAssociatedPhrases"],
+            cSettings: [
+                .unsafeFlags(["-Wno-incomplete-umbrella"], .when(configuration: .release)),
+                .unsafeFlags(["-Wno-incomplete-umbrella"], .when(configuration: .debug))
+            ],
             cxxSettings: [.unsafeFlags(["-fcxx-modules", "-fmodules"])]
         ),
         .target(
