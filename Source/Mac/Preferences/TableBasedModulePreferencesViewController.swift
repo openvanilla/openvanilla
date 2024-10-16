@@ -38,7 +38,7 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
     @IBOutlet var fieldShouldComposeAtMaximumRadicalLength: NSButton!
     @IBOutlet var fieldUseSpaceAsFirstCandidateSelectionKey: NSMatrix!
     @IBOutlet var fieldSpecialCodePrompt: NSButton!
-    @IBOutlet var cusmtomTableBasedInputMethodInfo: NSTextField!
+    @IBOutlet var customTableBasedInputMethodInfo: NSTextField!
     @IBOutlet var removeInputMethodButton: NSButton!
 
     override var moduleIdentifier: String! {
@@ -59,11 +59,11 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
 
         let manager = OVModuleManager.default
         if manager.isCustomTableBasedInputMethod(moduleIdentifier) {
-            cusmtomTableBasedInputMethodInfo.stringValue = NSLocalizedString(
+            customTableBasedInputMethodInfo.stringValue = NSLocalizedString(
                 "This is a customized input method.", comment: "")
             removeInputMethodButton.isHidden = false
         } else {
-            cusmtomTableBasedInputMethodInfo.stringValue = NSLocalizedString(
+            customTableBasedInputMethodInfo.stringValue = NSLocalizedString(
                 "This is a built-in input method.", comment: "")
             removeInputMethodButton.isHidden = true
         }
