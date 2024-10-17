@@ -215,7 +215,7 @@ void OVIMTableBased::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* lo
     moduleConfig->setKeyIntValue("MaximumRadicalLength", (int)m_configMaximumRadicalLength);
     moduleConfig->setKeyBoolValue("SendFirstCandidateWithSpaceWithOnePageList", m_configSendFirstCandidateWithSpaceWithOnePageList);
     moduleConfig->setKeyBoolValue("ShouldComposeAtMaximumRadicalLength", m_configShouldComposeAtMaximumRadicalLength);
-    moduleConfig->setKeyBoolValue("UseSpaceAsFirstCandidateSelectionKey", m_configUseSpaceAsFirstCandidateSelectionKey);
+    moduleConfig->setKeyIntValue("UseSpaceAsFirstCandidateSelectionKey", m_configUseSpaceAsFirstCandidateSelectionKey);
     moduleConfig->setKeyBoolValue("OnlyUseNumPadNumbersForRadicals", m_configOnlyUseNumPadNumbersForRadicals);
 }
 
