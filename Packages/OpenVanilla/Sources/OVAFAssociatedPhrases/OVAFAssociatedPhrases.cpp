@@ -95,6 +95,12 @@ void OVAFAssociatedPhrases::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderServ
             m_shiftKeySymbol = symbol;
         }
     }
+    if (moduleConfig->hasKey("UseSpaceAsFirstCandidateSelectionKey")) {
+        m_configUseSpaceAsFirstCandidateSelectionKey = static_cast<UseSpaceAsFirstCandidateSelectionKeyOption>(moduleConfig->intValueForKey("UseSpaceAsFirstCandidateSelectionKey"));
+    }
+    if (moduleConfig->hasKey("SendFirstCandidateWithSpaceWithOnePageList")) {
+        m_configSendFirstCandidateWithSpaceWithOnePageList = moduleConfig->isKeyTrue("SendFirstCandidateWithSpaceWithOnePageList");
+    }
 }
 
 void OVAFAssociatedPhrases::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)
@@ -102,6 +108,8 @@ void OVAFAssociatedPhrases::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderServ
     moduleConfig->setKeyBoolValue("ContinuousAssociation", m_continuousAssociation);
     moduleConfig->setKeyStringValue("SelectionKeys", m_selectionKeys);
     moduleConfig->setKeyStringValue("ShiftKeySymbol", m_shiftKeySymbol);
+    moduleConfig->setKeyBoolValue("SendFirstCandidateWithSpaceWithOnePageList", m_configSendFirstCandidateWithSpaceWithOnePageList);
+    moduleConfig->setKeyIntValue("UseSpaceAsFirstCandidateSelectionKey", m_configUseSpaceAsFirstCandidateSelectionKey);
 }
 
 void OVAFAssociatedPhrases::checkTable()

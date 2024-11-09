@@ -46,6 +46,7 @@ namespace OpenVanilla {
 		OVAFAssociatedPhrases* m_module;
         vector<string> m_candidates;
         string m_lastOutput;
+
     };
 };
 

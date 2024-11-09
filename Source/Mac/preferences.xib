@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23094" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23094"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" id="APL-TT-LOB">
                             <rect key="frame" x="1" y="1" width="198" height="361"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" id="4">
                                     <rect key="frame" x="0.0" y="0.0" width="198" height="361"/>
@@ -650,6 +651,60 @@
                         <action selector="updateField:" target="OTa-5M-Vdi" id="Zma-W9-De4"/>
                     </connections>
                 </button>
+                <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ejo-nt-pLH">
+                    <rect key="frame" x="20" y="289" width="401" height="5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </box>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xWi-LO-wHK">
+                    <rect key="frame" x="19" y="267" width="227" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Use space as the first candidate key:" id="741-Tl-FIB">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <matrix verticalHuggingPriority="750" verticalCompressionResistancePriority="741" fixedFrame="YES" allowsEmptySelection="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTR-U1-kBZ">
+                    <rect key="frame" x="21" y="194" width="387" height="64"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    <size key="cellSize" width="387" height="20"/>
+                    <size key="intercellSpacing" width="4" height="2"/>
+                    <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="snZ-uD-BNQ">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <cells>
+                        <column>
+                            <buttonCell type="radio" title="Disabled" imagePosition="left" alignment="left" state="on" inset="2" id="9h4-WO-M0c">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <buttonCell type="radio" title="Original first key selects the second candidate" imagePosition="left" alignment="left" tag="1" inset="2" id="5GI-Jo-duf">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <buttonCell type="radio" title="Both space and the first key selects the first candidate" imagePosition="left" alignment="left" tag="2" inset="2" id="D6A-kN-xDH">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </column>
+                    </cells>
+                    <connections>
+                        <action selector="updateField:" target="OTa-5M-Vdi" id="aYx-7v-7Wl"/>
+                    </connections>
+                </matrix>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3TC-RO-K1L">
+                    <rect key="frame" x="20" y="169" width="402" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Space selects the first candidate when there's only one page" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Tu8-mP-oBb">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="updateField:" target="OTa-5M-Vdi" id="ieF-3B-lGb"/>
+                    </connections>
+                </button>
             </subviews>
             <point key="canvasLocation" x="-683" y="449"/>
         </customView>
@@ -657,6 +712,8 @@
             <connections>
                 <outlet property="fieldContinuousAssociation" destination="awe-EY-NXM" id="MF9-dT-18S"/>
                 <outlet property="fieldSelectionKeys" destination="WVL-Wd-oMk" id="g20-qv-HZl"/>
+                <outlet property="fieldSendFirstCandidateWithSpaceWithOnePageList" destination="3TC-RO-K1L" id="538-U9-Mz1"/>
+                <outlet property="fieldUseSpaceAsFirstCandidateSelectionKey" destination="gTR-U1-kBZ" id="nu7-Xr-2Kj"/>
                 <outlet property="view" destination="Sdw-aj-CtP" id="cHY-y9-i5i"/>
             </connections>
         </viewController>

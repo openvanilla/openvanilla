@@ -30,16 +30,16 @@ import OpenVanillaImpl
 @objc(OVTableBasedModulePreferencesViewController)
 class TableBasedModulePreferencesViewController: BaseModulePreferencesViewController {
 
-    @IBOutlet var fieldAlphaNumericKeyboardLayout: NSPopUpButton!
-    @IBOutlet var fieldMaximumRadicalLength: NSPopUpButton!
-    @IBOutlet var fieldClearReadingBufferAtCompositionError: NSButton!
-    @IBOutlet var fieldComposeWhileTyping: NSButton!
-    @IBOutlet var fieldSendFirstCandidateWithSpaceWithOnePageList: NSButton!
-    @IBOutlet var fieldShouldComposeAtMaximumRadicalLength: NSButton!
-    @IBOutlet var fieldUseSpaceAsFirstCandidateSelectionKey: NSMatrix!
-    @IBOutlet var fieldSpecialCodePrompt: NSButton!
-    @IBOutlet var customTableBasedInputMethodInfo: NSTextField!
-    @IBOutlet var removeInputMethodButton: NSButton!
+    @IBOutlet weak var fieldAlphaNumericKeyboardLayout: NSPopUpButton!
+    @IBOutlet weak var fieldMaximumRadicalLength: NSPopUpButton!
+    @IBOutlet weak var fieldClearReadingBufferAtCompositionError: NSButton!
+    @IBOutlet weak var fieldComposeWhileTyping: NSButton!
+    @IBOutlet weak var fieldSendFirstCandidateWithSpaceWithOnePageList: NSButton!
+    @IBOutlet weak var fieldShouldComposeAtMaximumRadicalLength: NSButton!
+    @IBOutlet weak var fieldUseSpaceAsFirstCandidateSelectionKey: NSMatrix!
+    @IBOutlet weak var fieldSpecialCodePrompt: NSButton!
+    @IBOutlet weak var customTableBasedInputMethodInfo: NSTextField!
+    @IBOutlet weak var removeInputMethodButton: NSButton!
 
     override var moduleIdentifier: String! {
         didSet {

@@ -34,6 +34,12 @@
 namespace OpenVanilla {
     using namespace std;
 
+    enum UseSpaceAsFirstCandidateSelectionKeyOption {
+        Disabled,
+        OriginalFirstKeySelectsSecondCandidate,
+        SpaceAndOriginalFirstKeySelectsFirstCandidate,
+    };
+
     class OVAFAssociatedPhrasesContext;
 
     class OVAFAssociatedPhrases : public OVAroundFilter {
@@ -58,6 +64,9 @@ namespace OpenVanilla {
         OVCINDataTable *m_table;
         bool m_continuousAssociation; // Use the output of this filter as the next input.
         string m_selectionKeys; // The actual selection keys.
+        UseSpaceAsFirstCandidateSelectionKeyOption m_configUseSpaceAsFirstCandidateSelectionKey;
+        bool m_configSendFirstCandidateWithSpaceWithOnePageList;
+
         vector<pair<OVKey, string>> getSelectionKeyLabelPairs(OVLoaderService* loaderService);
     };
 };

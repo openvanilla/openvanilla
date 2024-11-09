@@ -32,6 +32,8 @@ class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewContr
 
     @IBOutlet weak var fieldSelectionKeys: NSPopUpButton!
     @IBOutlet weak var fieldContinuousAssociation: NSButton!
+    @IBOutlet weak var fieldUseSpaceAsFirstCandidateSelectionKey: NSMatrix!
+    @IBOutlet weak var fieldSendFirstCandidateWithSpaceWithOnePageList: NSButton!
 
     private var defaultSelectionKeys: [String] = [
         "!#$%^&*()", "!#$%^&*(", "1234567890", "123456789",
@@ -74,9 +76,34 @@ class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewContr
         fieldSelectionKeys.addItems(withTitles: defaultSelectionKeyTitles)
         fieldSelectionKeys.selectItem(at: selectedIndex)
         setState(for: self.fieldContinuousAssociation, key: "ContinuousAssociation")
+
+        let useSpaceAsFirstCandidateSelectionKey =
+            unsignedIntegerValue(forKey: "UseSpaceAsFirstCandidateSelectionKey") ?? 0
+
+        if useSpaceAsFirstCandidateSelectionKey != 0 {
+            fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: Int(
+                useSpaceAsFirstCandidateSelectionKey))
+            fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
+        } else if boolValue(forKey: "SendFirstCandidateWithSpaceWithOnePageList") {
+            fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: 0)
+            fieldSendFirstCandidateWithSpaceWithOnePageList.state = .on
+        } else {
+            fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: 0)
+            fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
+        }
     }
 
-    @IBAction func updateField(_ sender: Any?) {
+    @IBAction func updateField(_ sender: NSObject?) {
+        if sender == fieldUseSpaceAsFirstCandidateSelectionKey {
+            if fieldUseSpaceAsFirstCandidateSelectionKey.selectedCell()?.tag ?? 0 != 0 {
+                fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
+            }
+        } else if sender == fieldSendFirstCandidateWithSpaceWithOnePageList {
+            if fieldSendFirstCandidateWithSpaceWithOnePageList.state == .on {
+                fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: 0)
+            }
+        }
+
         setBoolValue(self.fieldContinuousAssociation.state == .on, forKey: "ContinuousAssociation")
         var selectedIndex = self.fieldSelectionKeys.indexOfSelectedItem
         if selectedIndex == -1 {
@@ -86,5 +113,11 @@ class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewContr
             (selectedIndex < defaultSelectionKeyTitles.count
             ? defaultSelectionKeys : defaultSelectionKeyTitles)[selectedIndex]
         setStringValue(newSelectionKeys, forKey: "SelectionKeys")
+        setUnsignedIntegerValue(
+            UInt(fieldUseSpaceAsFirstCandidateSelectionKey.selectedCell()?.tag ?? 0),
+            forKey: "UseSpaceAsFirstCandidateSelectionKey")
+        setBoolValue(
+            fieldSendFirstCandidateWithSpaceWithOnePageList.state == .on,
+            forKey: "SendFirstCandidateWithSpaceWithOnePageList")
     }
 }

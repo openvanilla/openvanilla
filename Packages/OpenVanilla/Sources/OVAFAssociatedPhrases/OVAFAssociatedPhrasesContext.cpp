@@ -66,10 +66,15 @@ bool OVAFAssociatedPhrasesContext::handleKey(OVKey* key, OVTextBuffer* readingTe
 		  
     bool keyHandled = false;
     size_t keyIndex;
-    size_t selKeyLength = m_module->m_selectionKeys.length();
+    string candidateKeys = m_module->m_selectionKeys;
+    size_t selKeyLength = candidateKeys.length();
+
+    if (m_module->m_configUseSpaceAsFirstCandidateSelectionKey == OriginalFirstKeySelectsSecondCandidate) {
+        candidateKeys = string(" ") + candidateKeys;
+    }
 
     for (keyIndex = 0; keyIndex < selKeyLength; keyIndex++) {
-        if (key->keyCode() == m_module->m_selectionKeys[keyIndex]) break;
+        if (key->keyCode() == candidateKeys[keyIndex]) break;
     }
 
     if (keyIndex < selKeyLength) {
