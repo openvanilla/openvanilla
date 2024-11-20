@@ -7,7 +7,7 @@
 namespace OpenVanilla {
     using namespace std;
 
-    class OVIMArrayContext;
+    class OVIMBig5CodeContext;
 
     class OVIMBig5Code : public OVInputMethod {
     public:

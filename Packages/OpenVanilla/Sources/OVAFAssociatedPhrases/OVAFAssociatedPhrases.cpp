@@ -140,14 +140,24 @@ void OVAFAssociatedPhrases::checkTable()
 vector<pair<OVKey, string>> OVAFAssociatedPhrases::getSelectionKeyLabelPairs(OVLoaderService* loaderService)
 {
     vector<pair<OVKey, string>> keyLabelPairs;
-    if (m_selectionKeys.length() <= strlen(kDefaultSelectionKeys) &&
+    string selectionKeys = m_selectionKeys;
+    if (m_configUseSpaceAsFirstCandidateSelectionKey == OriginalFirstKeySelectsSecondCandidate) {
+        selectionKeys = string(" ") + selectionKeys;
+    }
+
+    if (selectionKeys.length() <= strlen(kDefaultSelectionKeys) &&
         string(kDefaultSelectionKeys, m_selectionKeys.length()) == m_selectionKeys) {
         for (size_t i = 0, len = m_selectionKeys.length(); i < len; i++) {
             keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(m_selectionKeys[i]), m_shiftKeySymbol + string(1, kDefaultUnshiftedSelectionKeyLabels[i])));
         }
     } else {
-        for (const auto& key : m_selectionKeys) {
-            keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(key), string(1, key)));
+        for (const auto& key : selectionKeys) {
+            string label = string(1, key);
+            string::size_type loc = string(kDefaultSelectionKeys).find(label, 0);
+            if (loc != string::npos) {
+                label = m_shiftKeySymbol + string(1, kDefaultUnshiftedSelectionKeyLabels[loc]);
+            }
+            keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(key), label));
         }
     }
     return keyLabelPairs;

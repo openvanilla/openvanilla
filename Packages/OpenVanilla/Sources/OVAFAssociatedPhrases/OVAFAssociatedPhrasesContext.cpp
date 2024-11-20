@@ -58,23 +58,34 @@ bool OVAFAssociatedPhrasesContext::handleKey(OVKey* key, OVTextBuffer* readingTe
         return true;
     }
     
-    if (key->keyCode() == OVKeyCode::PageDown || key->keyCode() == OVKeyCode::Space) {
+    if (key->keyCode() == OVKeyCode::PageDown ||
+        (key->keyCode() == OVKeyCode::Space &&
+         m_module->m_configUseSpaceAsFirstCandidateSelectionKey == Disabled)) {
         panel->goToNextPage();
         panel->updateDisplay();
         return true;
     }
 		  
     bool keyHandled = false;
-    size_t keyIndex;
-    string candidateKeys = m_module->m_selectionKeys;
-    size_t selKeyLength = candidateKeys.length();
+
+    string selectionKeys = m_module->m_selectionKeys;
 
     if (m_module->m_configUseSpaceAsFirstCandidateSelectionKey == OriginalFirstKeySelectsSecondCandidate) {
-        candidateKeys = string(" ") + candidateKeys;
+        selectionKeys = string(" ") + selectionKeys;
     }
 
-    for (keyIndex = 0; keyIndex < selKeyLength; keyIndex++) {
-        if (key->keyCode() == candidateKeys[keyIndex]) break;
+    size_t selKeyLength = selectionKeys.length();
+    size_t keyIndex = selKeyLength;
+    if (key->keyCode() == OVKeyCode::Space) {
+        if (m_module->m_configUseSpaceAsFirstCandidateSelectionKey == OriginalFirstKeySelectsSecondCandidate ||
+            m_module->m_configUseSpaceAsFirstCandidateSelectionKey == SpaceAndOriginalFirstKeySelectsFirstCandidate
+            ) {
+            keyIndex = 0;
+        }
+    } else {
+        for (keyIndex = 0; keyIndex < selKeyLength; keyIndex++) {
+            if (key->keyCode() == selectionKeys[keyIndex]) break;
+        }
     }
 
     if (keyIndex < selKeyLength) {
