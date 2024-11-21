@@ -57,10 +57,8 @@ bool OVAFAssociatedPhrasesContext::handleKey(OVKey* key, OVTextBuffer* readingTe
         panel->updateDisplay();
         return true;
     }
-    
-    if (key->keyCode() == OVKeyCode::PageDown ||
-        (key->keyCode() == OVKeyCode::Space &&
-         m_module->m_configUseSpaceAsFirstCandidateSelectionKey == Disabled)) {
+
+    if (key->keyCode() == OVKeyCode::PageDown) {
         panel->goToNextPage();
         panel->updateDisplay();
         return true;
@@ -77,6 +75,17 @@ bool OVAFAssociatedPhrasesContext::handleKey(OVKey* key, OVTextBuffer* readingTe
     size_t selKeyLength = selectionKeys.length();
     size_t keyIndex = selKeyLength;
     if (key->keyCode() == OVKeyCode::Space) {
+        if (m_module->m_configUseSpaceAsFirstCandidateSelectionKey == Disabled) {
+            if (m_module->m_configSendFirstCandidateWithSpaceWithOnePageList) {
+                if (m_candidates.size() <= selKeyLength) {
+                    keyIndex = 0;
+                }
+            } else {
+                panel->goToNextPage();
+                panel->updateDisplay();
+                return true;
+            }
+        }
         if (m_module->m_configUseSpaceAsFirstCandidateSelectionKey == OriginalFirstKeySelectsSecondCandidate ||
             m_module->m_configUseSpaceAsFirstCandidateSelectionKey == SpaceAndOriginalFirstKeySelectsFirstCandidate
             ) {

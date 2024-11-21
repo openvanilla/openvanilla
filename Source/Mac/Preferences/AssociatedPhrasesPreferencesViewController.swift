@@ -39,7 +39,7 @@ class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewContr
         ("!@#$%^&*()", "Shift-1 ~ Shift-0"),
         ("!@#$%^&*(", "Shift-1 ~ Shift-9"),
         ("1234567890", "1234567890"),
-        ("123456789", "1234567890"),
+        ("123456789", "123456789"),
     ]
 
     required init?(coder: NSCoder) {

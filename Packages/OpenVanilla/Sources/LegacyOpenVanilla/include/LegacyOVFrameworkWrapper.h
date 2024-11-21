@@ -156,7 +156,8 @@ public:
             m_list->addCandidate(s.substr(2));
         }
 
-        m_panel->setCandidateKeys(candidateKeys, false, m_service);
+//        m_panel->setCandidateKeys(candidateKeys, false, m_service);
+        m_panel->setCandidateKeys(candidateKeys, m_service);
         m_panel->updateDisplay();
         return this;
     }

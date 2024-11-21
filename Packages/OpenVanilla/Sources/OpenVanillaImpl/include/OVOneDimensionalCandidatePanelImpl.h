@@ -105,7 +105,6 @@ namespace OpenVanilla {
         virtual void setPanelOrigin(NSPoint origin, CGFloat adjustmentHeight);
         virtual void updateVisibility();
         virtual void applyFontSettings(NSString *fontName = nil, NSUInteger fontSize = 0);
-
         virtual void setCandidateKeysAndLabels(const vector<pair<OVKey, string>>& keyLabelPairs);
 
     protected:

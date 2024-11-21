@@ -145,20 +145,20 @@ vector<pair<OVKey, string>> OVAFAssociatedPhrases::getSelectionKeyLabelPairs(OVL
         selectionKeys = string(" ") + selectionKeys;
     }
 
-    if (selectionKeys.length() <= strlen(kDefaultSelectionKeys) &&
-        string(kDefaultSelectionKeys, m_selectionKeys.length()) == m_selectionKeys) {
-        for (size_t i = 0, len = m_selectionKeys.length(); i < len; i++) {
-            keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(m_selectionKeys[i]), m_shiftKeySymbol + string(1, kDefaultUnshiftedSelectionKeyLabels[i])));
-        }
-    } else {
-        for (const auto& key : selectionKeys) {
-            string label = string(1, key);
+    for (int i = 0; i < selectionKeys.size(); i++) {
+        string key = string(1, selectionKeys[i]);
+        string label = key;
+        if (i == 0 && m_configUseSpaceAsFirstCandidateSelectionKey == SpaceAndOriginalFirstKeySelectsFirstCandidate) {
+            label = "␣";
+        } else if (label == " ") {
+            label = "␣";
+        } else {
             string::size_type loc = string(kDefaultSelectionKeys).find(label, 0);
             if (loc != string::npos) {
                 label = m_shiftKeySymbol + string(1, kDefaultUnshiftedSelectionKeyLabels[loc]);
             }
-            keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(key), label));
         }
+        keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(key), label));
     }
     return keyLabelPairs;
 }
