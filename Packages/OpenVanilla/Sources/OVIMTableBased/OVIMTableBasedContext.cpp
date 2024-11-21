@@ -468,8 +468,9 @@ bool OVIMTableBasedContext::compose(OVTextBuffer* readingText, OVTextBuffer* com
         panel->setCandidateKeysAndLabels(keyLabelPairs);
 
         OVKeyVector nextPageKeys;
-        if (results.size() <= candidateKeys.length() &&
-            (m_module->m_configUseSpaceAsFirstCandidateSelectionKey || m_module->m_configSendFirstCandidateWithSpaceWithOnePageList)) {
+        if  (m_module->m_configUseSpaceAsFirstCandidateSelectionKey == OriginalFirstKeySelectsSecondCandidate ||
+             m_module->m_configUseSpaceAsFirstCandidateSelectionKey == SpaceAndOriginalFirstKeySelectsFirstCandidate ||
+             (results.size() <= candidateKeys.length() && m_module->m_configSendFirstCandidateWithSpaceWithOnePageList)) {
             OVKeyVector v = panel->defaultNextPageKeys();
             OVKey spaceKey = loaderService->makeOVKey(OVKeyCode::Space, false, false, false, false, false, false, false);
             for (OVKeyVector::const_iterator i = v.begin(), e = v.end(); i != e; ++i) {
