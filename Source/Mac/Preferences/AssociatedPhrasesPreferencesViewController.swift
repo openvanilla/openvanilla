@@ -32,12 +32,14 @@ class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewContr
 
     @IBOutlet weak var fieldSelectionKeys: NSPopUpButton!
     @IBOutlet weak var fieldContinuousAssociation: NSButton!
+    @IBOutlet weak var fieldUseSpaceAsFirstCandidateSelectionKey: NSMatrix!
+    @IBOutlet weak var fieldSendFirstCandidateWithSpaceWithOnePageList: NSButton!
 
-    private var defaultSelectionKeys: [String] = [
-        "!#$%^&*()", "!#$%^&*(", "1234567890", "123456789",
-    ]
-    private var defaultSelectionKeyTitles: [String] = [
-        "Shift-1 ~ Shift-0", "Shift-1 ~ Shift-9", "1234567890", "123456789",
+    private let defaultSelectionKeys: [(String, String)] = [
+        ("!@#$%^&*()", "Shift-1 ~ Shift-0"),
+        ("!@#$%^&*(", "Shift-1 ~ Shift-9"),
+        ("1234567890", "1234567890"),
+        ("123456789", "123456789"),
     ]
 
     required init?(coder: NSCoder) {
@@ -58,33 +60,68 @@ class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewContr
         }
         let selectedIndex: Int? = {
             if !selectionKeys.isEmpty {
-                return defaultSelectionKeys.firstIndex(of: selectionKeys)
+                return defaultSelectionKeys.firstIndex { value, title in
+                    value == selectionKeys
+                }
             }
             return nil
         }()
 
-        guard let selectedIndex = selectedIndex else {
-            var titles = defaultSelectionKeyTitles
+        if let selectedIndex = selectedIndex {
+            fieldSelectionKeys.addItems(withTitles: defaultSelectionKeys.map { $1 })
+            fieldSelectionKeys.selectItem(at: selectedIndex)
+        } else  {
+            var titles = defaultSelectionKeys.map { $1 }
             titles.append(selectionKeys)
             fieldSelectionKeys.addItems(withTitles: titles)
             fieldSelectionKeys.selectItem(at: titles.count - 1)
             return
         }
 
-        fieldSelectionKeys.addItems(withTitles: defaultSelectionKeyTitles)
-        fieldSelectionKeys.selectItem(at: selectedIndex)
         setState(for: self.fieldContinuousAssociation, key: "ContinuousAssociation")
+
+        let useSpaceAsFirstCandidateSelectionKey =
+            unsignedIntegerValue(forKey: "UseSpaceAsFirstCandidateSelectionKey") ?? 0
+
+        if useSpaceAsFirstCandidateSelectionKey != 0 {
+            fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: Int(
+                useSpaceAsFirstCandidateSelectionKey))
+            fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
+        } else if boolValue(forKey: "SendFirstCandidateWithSpaceWithOnePageList") {
+            fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: 0)
+            fieldSendFirstCandidateWithSpaceWithOnePageList.state = .on
+        } else {
+            fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: 0)
+            fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
+        }
     }
 
-    @IBAction func updateField(_ sender: Any?) {
+    @IBAction func updateField(_ sender: NSObject?) {
+        if sender == fieldUseSpaceAsFirstCandidateSelectionKey {
+            if fieldUseSpaceAsFirstCandidateSelectionKey.selectedCell()?.tag ?? 0 != 0 {
+                fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
+            }
+        } else if sender == fieldSendFirstCandidateWithSpaceWithOnePageList {
+            if fieldSendFirstCandidateWithSpaceWithOnePageList.state == .on {
+                fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: 0)
+            }
+        }
+
         setBoolValue(self.fieldContinuousAssociation.state == .on, forKey: "ContinuousAssociation")
         var selectedIndex = self.fieldSelectionKeys.indexOfSelectedItem
         if selectedIndex == -1 {
             selectedIndex = 0
         }
         let newSelectionKeys =
-            (selectedIndex < defaultSelectionKeyTitles.count
-            ? defaultSelectionKeys : defaultSelectionKeyTitles)[selectedIndex]
+            (selectedIndex < defaultSelectionKeys.count)
+                ? defaultSelectionKeys[selectedIndex].0 :
+                (fieldSelectionKeys.selectedItem?.title ?? defaultSelectionKeys[0].0)
         setStringValue(newSelectionKeys, forKey: "SelectionKeys")
+        setUnsignedIntegerValue(
+            UInt(fieldUseSpaceAsFirstCandidateSelectionKey.selectedCell()?.tag ?? 0),
+            forKey: "UseSpaceAsFirstCandidateSelectionKey")
+        setBoolValue(
+            fieldSendFirstCandidateWithSpaceWithOnePageList.state == .on,
+            forKey: "SendFirstCandidateWithSpaceWithOnePageList")
     }
 }

@@ -362,17 +362,7 @@ void OVOneDimensionalCandidatePanelImpl::setCandidateKeys(const OVKeyVector& key
     for (OVKeyVector::const_iterator i = keys.begin(), e = keys.end(); i != e; ++i) {
         NSString *key = nil;
         NSString *diaplayedText = nil;
-        if (i == keys.begin() && useSpaceAsFirstCandidateSelectionKey()) {
-            key = @" ";
-            diaplayedText = @"␣";
-        } else {
-            key = @((*i).receivedString().c_str());
-            if ([key isEqualToString:@" "]) {
-                diaplayedText = @"␣";
-            } else {
-                diaplayedText = key;
-            }
-        }
+        key = @((*i).receivedString().c_str());
         VTCandidateKeyLabel *label = [[VTCandidateKeyLabel alloc] initWithKey:key displayedText:diaplayedText];
         [labels addObject:label];
     }
@@ -454,12 +444,13 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
 {
     size_t selectedCandidateKeyIndex;
 
-    if (useSpaceAsFirstCandidateSelectionKey() && IsKeyInList(key, m_spaceKeys)) {
-        hide();
-        m_inControl = false;
-        setHighlightIndex(0);
-        return CandidateSelected;
-    } else if (IsKeyInList(key, m_candidateKeys, &selectedCandidateKeyIndex)) {
+//    if (useSpaceAsFirstCandidateSelectionKey() && IsKeyInList(key, m_spaceKeys)) {
+//        hide();
+//        m_inControl = false;
+//        setHighlightIndex(0);
+//        return CandidateSelected;
+//    } else
+    if (IsKeyInList(key, m_candidateKeys, &selectedCandidateKeyIndex)) {
         if (selectedCandidateKeyIndex >= currentPageCandidateCount()) {
             return Invalid;
         }

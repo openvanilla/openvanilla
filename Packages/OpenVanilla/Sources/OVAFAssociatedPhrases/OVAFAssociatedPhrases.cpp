@@ -95,6 +95,12 @@ void OVAFAssociatedPhrases::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderServ
             m_shiftKeySymbol = symbol;
         }
     }
+    if (moduleConfig->hasKey("UseSpaceAsFirstCandidateSelectionKey")) {
+        m_configUseSpaceAsFirstCandidateSelectionKey = static_cast<UseSpaceAsFirstCandidateSelectionKeyOption>(moduleConfig->intValueForKey("UseSpaceAsFirstCandidateSelectionKey"));
+    }
+    if (moduleConfig->hasKey("SendFirstCandidateWithSpaceWithOnePageList")) {
+        m_configSendFirstCandidateWithSpaceWithOnePageList = moduleConfig->isKeyTrue("SendFirstCandidateWithSpaceWithOnePageList");
+    }
 }
 
 void OVAFAssociatedPhrases::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)
@@ -102,6 +108,8 @@ void OVAFAssociatedPhrases::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderServ
     moduleConfig->setKeyBoolValue("ContinuousAssociation", m_continuousAssociation);
     moduleConfig->setKeyStringValue("SelectionKeys", m_selectionKeys);
     moduleConfig->setKeyStringValue("ShiftKeySymbol", m_shiftKeySymbol);
+    moduleConfig->setKeyBoolValue("SendFirstCandidateWithSpaceWithOnePageList", m_configSendFirstCandidateWithSpaceWithOnePageList);
+    moduleConfig->setKeyIntValue("UseSpaceAsFirstCandidateSelectionKey", m_configUseSpaceAsFirstCandidateSelectionKey);
 }
 
 void OVAFAssociatedPhrases::checkTable()
@@ -132,15 +140,25 @@ void OVAFAssociatedPhrases::checkTable()
 vector<pair<OVKey, string>> OVAFAssociatedPhrases::getSelectionKeyLabelPairs(OVLoaderService* loaderService)
 {
     vector<pair<OVKey, string>> keyLabelPairs;
-    if (m_selectionKeys.length() <= strlen(kDefaultSelectionKeys) &&
-        string(kDefaultSelectionKeys, m_selectionKeys.length()) == m_selectionKeys) {
-        for (size_t i = 0, len = m_selectionKeys.length(); i < len; i++) {
-            keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(m_selectionKeys[i]), m_shiftKeySymbol + string(1, kDefaultUnshiftedSelectionKeyLabels[i])));
+    string selectionKeys = m_selectionKeys;
+    if (m_configUseSpaceAsFirstCandidateSelectionKey == OriginalFirstKeySelectsSecondCandidate) {
+        selectionKeys = string(" ") + selectionKeys;
+    }
+
+    for (int i = 0; i < selectionKeys.size(); i++) {
+        string key = string(1, selectionKeys[i]);
+        string label = key;
+        if (i == 0 && m_configUseSpaceAsFirstCandidateSelectionKey == SpaceAndOriginalFirstKeySelectsFirstCandidate) {
+            label = "␣";
+        } else if (label == " ") {
+            label = "␣";
+        } else {
+            string::size_type loc = string(kDefaultSelectionKeys).find(label, 0);
+            if (loc != string::npos) {
+                label = m_shiftKeySymbol + string(1, kDefaultUnshiftedSelectionKeyLabels[loc]);
+            }
         }
-    } else {
-        for (const auto& key : m_selectionKeys) {
-            keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(key), string(1, key)));
-        }
+        keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(key), label));
     }
     return keyLabelPairs;
 }

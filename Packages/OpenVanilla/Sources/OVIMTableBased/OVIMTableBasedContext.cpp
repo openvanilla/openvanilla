@@ -239,7 +239,9 @@ bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* can
     }
 
     if (key->keyCode() == OVKeyCode::Space) {
-        if (m_module->m_configSendFirstCandidateWithSpaceWithOnePageList) {
+        if (
+            m_module->m_configUseSpaceAsFirstCandidateSelectionKey == SpaceAndOriginalFirstKeySelectsFirstCandidate ||
+            m_module->m_configSendFirstCandidateWithSpaceWithOnePageList) {
             panel->hide();
             panel->cancelEventHandler();
             string text = panel->candidateList()->candidateAtIndex(0);
@@ -452,10 +454,23 @@ bool OVIMTableBasedContext::compose(OVTextBuffer* readingText, OVTextBuffer* com
             candidateKeys = candidateKeys.substr(0, results.size());
         }
 
-        panel->setCandidateKeys(candidateKeys, m_module->m_configUseSpaceAsFirstCandidateSelectionKey == SpaceAndOriginalFirstKeySelectsFirstCandidate, loaderService);
+        vector<pair<OVKey, string>> keyLabelPairs;
+        for (int i = 0; i < candidateKeys.size(); i++) {
+            string key = string(1, candidateKeys[i]);
+            string label = key;
+            if (i == 0 && m_module->m_configUseSpaceAsFirstCandidateSelectionKey == SpaceAndOriginalFirstKeySelectsFirstCandidate) {
+                label = "␣";
+            } else if (label == " ") {
+                label = "␣";
+            }
+            keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(key), label));
+        }
+        panel->setCandidateKeysAndLabels(keyLabelPairs);
 
         OVKeyVector nextPageKeys;
-        if (results.size() <= candidateKeys.length() && (m_module->m_configUseSpaceAsFirstCandidateSelectionKey || m_module->m_configSendFirstCandidateWithSpaceWithOnePageList)) {
+        if  (m_module->m_configUseSpaceAsFirstCandidateSelectionKey == OriginalFirstKeySelectsSecondCandidate ||
+             m_module->m_configUseSpaceAsFirstCandidateSelectionKey == SpaceAndOriginalFirstKeySelectsFirstCandidate ||
+             (results.size() <= candidateKeys.length() && m_module->m_configSendFirstCandidateWithSpaceWithOnePageList)) {
             OVKeyVector v = panel->defaultNextPageKeys();
             OVKey spaceKey = loaderService->makeOVKey(OVKeyCode::Space, false, false, false, false, false, false, false);
             for (OVKeyVector::const_iterator i = v.begin(), e = v.end(); i != e; ++i) {
