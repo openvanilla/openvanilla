@@ -50,7 +50,8 @@ namespace OV_Array {
     enum {
         MAIN_TAB = 0,
         SHORT_TAB = 1,
-        SPECIAL_TAB = 2
+        SPECIAL_TAB = 2,
+        PHRASE_TAB = 3
     };
     const int RET_PASS = 0;
     const int RET_DONE = 1;
@@ -69,10 +70,6 @@ private:
     OVCandidateList candi;
     std::vector<std::string> candidateStringVector, specialCodeVector;
     string selKeys;
-
-    //OVBuffer* _buf;
-    //OVCandidate* _candibar;
-    //OVService* _srv;
 public:
     OVIMArrayContext(OVIMArray* p, OpenVanilla::OVCINDataTable** t)
         : parent(p), tabs(t), keyseq(t[OV_Array::MAIN_TAB])
@@ -112,7 +109,7 @@ class OVIMArray : public OVInputMethod
 {
 private:
     char cname[128], ename[128];
-    OpenVanilla::OVCINDataTable *tabs[3]; // main, short-code, special-code
+    OpenVanilla::OVCINDataTable *tabs[4]; // main, short-code, special-code, phrase
     int cfgAutoSP, cfgForceSP;
 
 public:
@@ -120,14 +117,14 @@ public:
     virtual const char* identifier() { return "OVIMArray"; }
     virtual OVInputMethodContext *newContext()
 	{ 
-        return new OVIMArrayContext(this,tabs); 
+        return new OVIMArrayContext(this, tabs);
     }
     int updateConfig(OVDictionary *conf);
     virtual const char *localizedName(const char *locale)
 	{  
         if (!strcasecmp(locale, "zh_TW") || !strcasecmp(locale, "zh_CN") || !strcasecmp(locale, "zh-Hant") || !strcasecmp(locale, "zh-Hans")) {
-            strcpy(cname,"\xE8\xA1\x8C\xE5\x88\x97"); //¦æ¦C
-            //if( isForceSP() )   strcat(cname, "(§Ö)");
+            strcpy(cname,"\xE8\xA1\x8C\xE5\x88\x97"); // è¡Œåˆ—
+            //if( isForceSP() )   strcat(cname, "(Q)");
             return cname;
         }
         else {

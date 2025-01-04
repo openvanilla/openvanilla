@@ -128,11 +128,13 @@ namespace OpenVanilla {
                 // if no more head matchZeroOrMoreChar
                 string keySubstr = keyString.substr(0, hSLength);
                 insensitivizeString(keySubstr);
-                if (keySubstr > headString)
+                if (keySubstr > headString) {
                     break;
-                
-                if (wildcard.match(keyString)) 
+                }
+
+                if (wildcard.match(keyString)) {
                     result.push_back(pair<string, string>(keyString, entry->value));
+                }
             }
             
             return result;
