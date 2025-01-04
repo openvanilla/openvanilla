@@ -103,6 +103,7 @@ private:
         return keyseq.length() == 4 && !memcmp(keyseq.getSeq(),",,sp",4);
     }
     void queryKeyName(const char *keys, std::string& outKeyNames);
+    void commitKeySeq(int table, const char* errorMessage, OVBuffer* buf, OVCandidate* candi_bar, OVService* srv);
 };
 
 class OVIMArray : public OVInputMethod

@@ -444,12 +444,6 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
 {
     size_t selectedCandidateKeyIndex;
 
-//    if (useSpaceAsFirstCandidateSelectionKey() && IsKeyInList(key, m_spaceKeys)) {
-//        hide();
-//        m_inControl = false;
-//        setHighlightIndex(0);
-//        return CandidateSelected;
-//    } else
     if (IsKeyInList(key, m_candidateKeys, &selectedCandidateKeyIndex)) {
         if (selectedCandidateKeyIndex >= currentPageCandidateCount()) {
             return Invalid;
