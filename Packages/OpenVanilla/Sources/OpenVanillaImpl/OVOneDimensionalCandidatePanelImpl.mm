@@ -470,7 +470,15 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
         if (lastIndex) {
             lastIndex--;
         }
-        size_t clampedIndex = min(index + candidatesPerPage(), lastIndex);
+        size_t cpp = candidatesPerPage();
+        // If there is only one page, just stay at the end of the first page.
+        if (lastIndex < cpp) {
+            m_candidateController.selectedCandidateIndex = lastIndex;
+            return Handled;
+        }
+        size_t clampedIndex = min(index + cpp, lastIndex);
+        // If there are multipe page, and it is the last page, go to the first page.
+        // Otherwise go to the next page.
         if (index == clampedIndex) {
             clampedIndex = 0;
         }
@@ -485,7 +493,8 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
             lastIndex--;
         }
         size_t clampedIndex = index + 1;
-        if (clampedIndex >= lastIndex) {
+        // If it is the last candidate, go to the first candidate.
+        if (clampedIndex > lastIndex) {
             clampedIndex = 0;
         }
         m_candidateController.selectedCandidateIndex = (NSUInteger)clampedIndex;
