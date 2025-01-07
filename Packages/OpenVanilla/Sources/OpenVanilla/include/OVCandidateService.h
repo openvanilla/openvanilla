@@ -120,12 +120,15 @@ namespace OpenVanilla {
         virtual const OVKey candidateKeyAtIndex(size_t index) = 0;
         virtual void setCandidateKeys(const string& asciiKeys, OVLoaderService* loaderService)
         {
-            OVKeyVector keys;
+            vector<pair<OVKey, string> > keyLabelPairs;
             for (size_t index = 0; index < asciiKeys.length(); index++) {
-                keys.push_back(loaderService->makeOVKey(asciiKeys[index]));
+                char c = asciiKeys[index];
+                OVKey key = loaderService->makeOVKey(c);
+                string label(1, c);
+                keyLabelPairs.push_back(make_pair(key, label));
             }
 
-            setCandidateKeys(keys);
+            setCandidateKeysAndLabels(keyLabelPairs);
             setCandidatesPerPage(asciiKeys.length());
         }
         

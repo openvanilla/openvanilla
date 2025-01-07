@@ -63,11 +63,26 @@ public:
     }
     virtual char* getSeq() { return seq; }
 
+    virtual bool hasOnlyWildcardCharacter()
+    {
+        if (len == 0) {
+            return false;
+        }
+        for (int i = 0; i < len; i++) {
+            if (seq[i] != '?' && seq[i] != '*') {
+                return false;
+            }
+        }
+        return true;
+    }
+
 	virtual bool hasWildcardCharacter()
 	{
-		for (int i = 0; i < len; i++)
-			if (seq[i] == '?' || seq[i] == '*')
-				return true;
+        for (int i = 0; i < len; i++) {
+            if (seq[i] == '?' || seq[i] == '*') {
+                return true;
+            }
+        }
 
 		return false;
 	}
