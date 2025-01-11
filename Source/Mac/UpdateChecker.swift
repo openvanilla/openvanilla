@@ -64,7 +64,7 @@ class UpdateChecker: NSObject {
             }
         }
 
-        guard let url = URL(string: OVUpdateCheckInfoURLString) else {
+        guard let url = URL(string: OVUpdateCheckInfoURLString + (forced ? "?manual=yes" : "")) else {
             return
         }
 
