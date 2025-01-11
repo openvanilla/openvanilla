@@ -41,7 +41,7 @@ class GeneralPreferencesViewController: BasePreferencesViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
-    override class func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
         NotificationCenter.default.addObserver(
             self, selector: #selector(handleUpdateCheckDidComplete(_:)),
