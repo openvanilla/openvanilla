@@ -55,11 +55,15 @@ class UpdateChecker: NSObject {
         if busy {
             return
         }
-        let nextCheckDate = self.nextUpdateCheckDate
-        let now = Date()
-        if nextCheckDate != nil && nextCheckDate?.compare(now) != ComparisonResult.orderedAscending {
-            return
+
+        if !forced {
+            let nextCheckDate = self.nextUpdateCheckDate
+            let now = Date()
+            if nextCheckDate != nil && nextCheckDate?.compare(now) != ComparisonResult.orderedAscending {
+                return
+            }
         }
+
         guard let url = URL(string: OVUpdateCheckInfoURLString) else {
             return
         }
