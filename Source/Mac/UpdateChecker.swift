@@ -29,6 +29,7 @@ class UpdateChecker: NSObject {
     func cancel() {
         connection?.cancel()
         connection = nil
+        busy = false
     }
 
     @objc
@@ -42,6 +43,11 @@ class UpdateChecker: NSObject {
     }
 
     private func checkForUpdateForced(forced: Bool) {
+        if busy {
+            return
+        }
+
+        busy = true
 
         func showPlistError() {
             if !forced {
@@ -52,23 +58,22 @@ class UpdateChecker: NSObject {
             }
         }
 
-        if busy {
-            return
-        }
-
         if !forced {
             let nextCheckDate = self.nextUpdateCheckDate
             let now = Date()
             if nextCheckDate != nil && nextCheckDate?.compare(now) != ComparisonResult.orderedAscending {
+                busy = false
                 return
             }
         }
 
         guard let url = URL(string: OVUpdateCheckInfoURLString + (forced ? "?manual=yes" : "")) else {
+            busy = false
             return
         }
 
         connection = URLSession.shared.dataTask(with: url) { data, response, error in
+            self.busy = false
             self.connection = nil
             let now = Date()
             self.lastUpdateCheckDate = now
