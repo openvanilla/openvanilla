@@ -10,12 +10,10 @@
             <connections>
                 <outlet property="addTableBasedInputMethodViewController" destination="168" id="175"/>
                 <outlet property="arrayModulePreferencesViewController" destination="167" id="YzL-Xb-GWO"/>
-                <outlet property="arrayMoudlePreferencesViewController" destination="167" id="174"/>
                 <outlet property="associatedPhrasesPreferencesViewController" destination="OTa-5M-Vdi" id="RaC-76-EEF"/>
                 <outlet property="generalPreferencesViewController" destination="70" id="74"/>
                 <outlet property="modulePreferencesContainerView" destination="59" id="68"/>
                 <outlet property="tableBasedModulePreferencesViewController" destination="69" id="buv-tw-HAl"/>
-                <outlet property="tableBasedMoudlePreferencesViewController" destination="69" id="73"/>
                 <outlet property="tableView" destination="4" id="65"/>
                 <outlet property="window" destination="1" id="58"/>
             </connections>
