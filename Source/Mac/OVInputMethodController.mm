@@ -552,27 +552,6 @@ using namespace OpenVanilla;
         _readingText->finishUpdate();
     }
 
-    NSArray *params = @[sender, attrString, [NSValue valueWithRange:selectionRange]];
-    // If the sender is Chrome, use a 1/20 sec delay. This is likely because some
-    // internally async updates need to catch up. This is considered a hack, not a
-    // real solution. Please see these two long-standing bugs below, which also
-    // affect Google Japanese Input on Mac as well as Apple's built-in Pinyin IME:
-    // https://bugs.chromium.org/p/chromium/issues/detail?id=86460
-    // https://bugs.chromium.org/p/chromium/issues/detail?id=580808
-    if ([[sender bundleIdentifier] isEqualToString:@"com.google.Chrome"]) {
-        [self performSelector:@selector(deferredUpdateClientComposingBuffer:) withObject:params afterDelay:0.05];
-    }
-    else {
-        [self deferredUpdateClientComposingBuffer:params];
-    }
-}
-
-- (void)deferredUpdateClientComposingBuffer:(NSArray *)params
-{
-    id sender = params[0];
-    NSAttributedString *attrString = params[1];
-    NSRange selectionRange = [params[2] rangeValue];
-
     NSUInteger cursorIndex = selectionRange.location;
     if (cursorIndex == attrString.length && cursorIndex) {
         cursorIndex--;
@@ -600,7 +579,6 @@ using namespace OpenVanilla;
         toolTipText = _composingText->toolTipText();
     }
 
-//    NSLog(@"toolTipText: %@", [NSString stringWithUTF8String:toolTipText.c_str()]);
     if (toolTipText.length()) {
         NSPoint toolTipOrigin = lineHeightRect.origin;
         BOOL fromTopLeft = YES;
