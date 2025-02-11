@@ -142,7 +142,10 @@ using namespace OpenVanilla;
     [OVModuleManager defaultManager].candidateService->resetAll();
 
     NSString *keyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
-    [client overrideKeyboardWithKeyboardNamed:keyboardLayout];
+
+    if ([client respondsToSelector:@selector(overrideKeyboardWithKeyboardNamed:)]) {
+        [client overrideKeyboardWithKeyboardNamed:keyboardLayout];
+    }
 
     [[OVModuleManager defaultManager] synchronizeActiveInputMethodSettings];
 
