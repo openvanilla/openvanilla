@@ -67,6 +67,10 @@ class UpdateChecker: NSObject {
             }
         }
 
+        // Set the next update check date using the regular interval.
+        let now = Date()
+        self.nextUpdateCheckDate = Date(timeInterval: OVNextUpdateCheckInterval, since: now)
+
         guard let url = URL(string: OVUpdateCheckInfoURLString + (forced ? "?manual=yes" : "")) else {
             busy = false
             return
@@ -77,9 +81,11 @@ class UpdateChecker: NSObject {
             self.connection = nil
             let now = Date()
             self.lastUpdateCheckDate = now
-            self.nextUpdateCheckDate = Date(timeInterval: OVNextUpdateCheckRetryInterval, since: now)
 
             if let error {
+                // If there's network error, retry within a shorter interval.
+                self.nextUpdateCheckDate = Date(timeInterval: OVNextUpdateCheckRetryInterval, since: now)
+
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .UpdateCheckerDidFinishChecking, object: self)
                 }
@@ -90,7 +96,6 @@ class UpdateChecker: NSObject {
                 }
                 return
             }
-
 
             let data = data ?? Data()
             guard let plist = try? PropertyListSerialization.propertyList(from: data, options: 0, format: nil) as? [AnyHashable: Any] else {
