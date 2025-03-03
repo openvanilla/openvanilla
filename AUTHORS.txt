@@ -1,14 +1,11 @@
 Current contributors:
 
+* 	Weizhong Yang (@zonble)
 *	Lukhnos Liu (@lukhnos)
-*	Hill Ma (@mahiuchun)
-*       CHOU Sheng-kai (@syimyuzya)
-*	Google Inc.
 
 Past contributors:
 
 *	b6s - OVIMGeneric, .cin tools
-* 	zonble - Preferences, OVIMTibetan, artworks, and documentation
 *	gugod - OVIMSpaceChewing, framework, build system
 *	kanru - Windows port
 *	vgod - OVIMArray
@@ -21,3 +18,6 @@ Past contributors:
 * 	yylin - extension of cj.cin, simplex.cin and bpmf.cin
 * 	fourdollars - Linux port
 *	othree - Web-based input method experiment
+*	Hill Ma (@mahiuchun)
+*   CHOU Sheng-kai (@syimyuzya)
+*	Google Inc.
