@@ -49,6 +49,7 @@
 
 "Fatal Error" = "Fatal Error";
 "Abort" = "Abort";
+"No installable packages found." = "No installable packages found.";
 "Cannot register input source %@ at %@." = "Cannot register input source %@ at %@.";
 "Cannot find input source %@ after registration." = "Cannot find input source %@ after registration.";
 
