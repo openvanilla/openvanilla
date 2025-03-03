@@ -51,6 +51,7 @@ class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var tableBasedModulePreferencesViewController: BasePreferencesViewController!
     @IBOutlet weak var arrayModulePreferencesViewController: BasePreferencesViewController!
     @IBOutlet weak var addTableBasedInputMethodViewController: BasePreferencesViewController!
+    @IBOutlet weak var filterInputMethodViewController: FilterInputMethodViewController!
 
     private var items: [PreferencesItem] = []
     private var localizableObjects: [NSValue: String] = [:]
@@ -107,6 +108,7 @@ class PreferencesWindowController: NSWindowController {
         ListTitlesInView(tableBasedModulePreferencesViewController.view)
         ListTitlesInView(arrayModulePreferencesViewController.view)
         ListTitlesInView(addTableBasedInputMethodViewController.view)
+        ListTitlesInView(filterInputMethodViewController.view)
         updateLocalization()
     }
 
@@ -114,7 +116,6 @@ class PreferencesWindowController: NSWindowController {
 
     @objc(selectInputMethodIdentifier:)
     func select(inputMethodIdentifier identifier: String) {
-
         for (index, element) in items.enumerated() {
             let elementIdentifier = element.0
             if identifier == elementIdentifier {
@@ -133,6 +134,11 @@ class PreferencesWindowController: NSWindowController {
             (
                 kGeneralSettingIdentifier, NSLocalizedString("General Settings", comment: ""),
                 generalPreferencesViewController
+            ))
+        items.append(
+            (
+                kGeneralSettingIdentifier, NSLocalizedString("Filter Input Methods", comment: ""),
+                filterInputMethodViewController
             ))
         items.append(
             (

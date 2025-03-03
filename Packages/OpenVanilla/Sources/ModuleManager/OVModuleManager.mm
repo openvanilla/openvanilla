@@ -623,6 +623,21 @@ static string InputMethodConfigIdentifier(const string &identifier) {
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (NSArray *)inputMethodFilterArray
+{
+    NSArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:OVFilterredInputMethodsKey];
+    if (![array isKindOfClass:[NSArray class]]) {
+        array = [NSArray array];
+    }
+    return array;
+}
+
+- (void)setInputMethodFilterArray:(NSArray *)array
+{
+    [[NSUserDefaults standardUserDefaults] setObject:array forKey:OVFilterredInputMethodsKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark - Private Methods
 
 - (NSString *)rootPathForCustomInputMethodTables

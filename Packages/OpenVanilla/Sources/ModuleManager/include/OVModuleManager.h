@@ -78,7 +78,7 @@ namespace OpenVanilla {
 
 @property (assign, readonly) OpenVanilla::OVInputMethod* activeInputMethod;
 @property (weak, readonly) NSString *activeInputMethodIdentifier;
-@property (readonly, nonnull) NSArray <NSString *>  *inputMethodIdentifiers;
+@property (readonly, nonnull) NSArray <NSString *> *inputMethodIdentifiers;
 @property (strong) NSString *currentLocale;
 
 @property (assign) BOOL traditionalToSimplifiedChineseFilterEnabled;
@@ -87,6 +87,7 @@ namespace OpenVanilla {
 
 @property (copy) NSString *sharedAlphanumericKeyboardLayoutIdentifier;
 @property (assign) BOOL fallbackToSharedAlphanumericKeyboardLayoutWhenShiftPressed;
+@property (copy) NSArray<NSString *> *inputMethodFilterArray;
 
 @property (assign, readonly) OpenVanilla::OVAroundFilter* associatedPhrasesModule;
 @end

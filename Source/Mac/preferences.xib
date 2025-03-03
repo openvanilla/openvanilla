@@ -11,6 +11,7 @@
                 <outlet property="addTableBasedInputMethodViewController" destination="168" id="175"/>
                 <outlet property="arrayModulePreferencesViewController" destination="167" id="YzL-Xb-GWO"/>
                 <outlet property="associatedPhrasesPreferencesViewController" destination="OTa-5M-Vdi" id="RaC-76-EEF"/>
+                <outlet property="filterInputMethodViewController" destination="Fck-mp-DVI" id="bha-vy-eSH"/>
                 <outlet property="generalPreferencesViewController" destination="70" id="74"/>
                 <outlet property="modulePreferencesContainerView" destination="59" id="68"/>
                 <outlet property="tableBasedModulePreferencesViewController" destination="69" id="buv-tw-HAl"/>
@@ -464,6 +465,12 @@
             </subviews>
             <point key="canvasLocation" x="-374" y="-528"/>
         </customView>
+        <viewController id="Fck-mp-DVI" customClass="OVFilterInputMethodViewController">
+            <connections>
+                <outlet property="tableView" destination="Jmv-7h-jve" id="2mK-KH-LMn"/>
+                <outlet property="view" destination="7Xx-7O-BYK" id="i49-cd-rYw"/>
+            </connections>
+        </viewController>
         <viewController id="69" customClass="OVTableBasedModulePreferencesViewController">
             <connections>
                 <outlet property="customTableBasedInputMethodInfo" destination="134" id="EKX-Oh-XYv"/>
@@ -715,5 +722,51 @@
                 <outlet property="view" destination="Sdw-aj-CtP" id="cHY-y9-i5i"/>
             </connections>
         </viewController>
+        <customView id="7Xx-7O-BYK">
+            <rect key="frame" x="0.0" y="0.0" width="440" height="364"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <scrollView focusRingType="none" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvZ-Ym-YYW">
+                    <rect key="frame" x="20" y="21" width="400" height="322"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <clipView key="contentView" id="Ttc-Ro-gnS">
+                        <rect key="frame" x="1" y="1" width="398" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" id="Jmv-7h-jve">
+                                <rect key="frame" x="0.0" y="0.0" width="398" height="320"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <size key="intercellSpacing" width="17" height="0.0"/>
+                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                <tableColumns>
+                                    <tableColumn identifier="CheckboxColumn" width="386" minWidth="40" maxWidth="1000" id="0Yi-pL-0pn">
+                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Enabled">
+                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                        </tableHeaderCell>
+                                        <buttonCell key="dataCell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="329-b6-RBr">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                    </tableColumn>
+                                </tableColumns>
+                            </tableView>
+                        </subviews>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Ian-aQ-T1Q">
+                        <rect key="frame" x="1" y="330" width="438" height="15"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="FLn-4Y-l3z">
+                        <rect key="frame" x="224" y="17" width="15" height="102"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+            </subviews>
+            <point key="canvasLocation" x="-853" y="-122"/>
+        </customView>
+        <userDefaultsController representsSharedInstance="YES" id="zpU-PS-fKW"/>
     </objects>
 </document>
