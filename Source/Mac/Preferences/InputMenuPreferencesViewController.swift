@@ -3,8 +3,8 @@ import AppKit
 import Foundation
 import ModuleManager
 
-@objc(OVFilterInputMethodViewController)
-class FilterInputMethodViewController: BasePreferencesViewController, NSTableViewDataSource, NSTableViewDelegate {
+@objc(OVInputMenuPreferencesViewController)
+class InputMenuPreferencesViewController: BasePreferencesViewController, NSTableViewDataSource, NSTableViewDelegate {
     @IBOutlet var tableView: NSTableView!
 
     override func awakeFromNib() {

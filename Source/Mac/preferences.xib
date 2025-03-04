@@ -11,8 +11,8 @@
                 <outlet property="addTableBasedInputMethodViewController" destination="168" id="175"/>
                 <outlet property="arrayModulePreferencesViewController" destination="167" id="YzL-Xb-GWO"/>
                 <outlet property="associatedPhrasesPreferencesViewController" destination="OTa-5M-Vdi" id="RaC-76-EEF"/>
-                <outlet property="filterInputMethodViewController" destination="Fck-mp-DVI" id="bha-vy-eSH"/>
                 <outlet property="generalPreferencesViewController" destination="70" id="74"/>
+                <outlet property="inputMenuPreferencesViewController" destination="Fck-mp-DVI" id="siT-1z-wRK"/>
                 <outlet property="modulePreferencesContainerView" destination="59" id="68"/>
                 <outlet property="tableBasedModulePreferencesViewController" destination="69" id="buv-tw-HAl"/>
                 <outlet property="tableView" destination="4" id="65"/>
@@ -465,7 +465,7 @@
             </subviews>
             <point key="canvasLocation" x="-374" y="-528"/>
         </customView>
-        <viewController id="Fck-mp-DVI" customClass="OVFilterInputMethodViewController">
+        <viewController id="Fck-mp-DVI" customClass="OVInputMenuPreferencesViewController">
             <connections>
                 <outlet property="tableView" destination="Jmv-7h-jve" id="2mK-KH-LMn"/>
                 <outlet property="view" destination="7Xx-7O-BYK" id="i49-cd-rYw"/>
