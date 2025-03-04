@@ -623,18 +623,18 @@ static string InputMethodConfigIdentifier(const string &identifier) {
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (NSArray *)inputMethodFilterArray
+- (NSArray *)excludedIdentifiers
 {
-    NSArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:OVFilterredInputMethodsKey];
+    NSArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:OVExcludedInputMethodIdentifiersKey];
     if (![array isKindOfClass:[NSArray class]]) {
         array = [NSArray array];
     }
     return array;
 }
 
-- (void)setInputMethodFilterArray:(NSArray *)array
+- (void)setExcludedIdentifiers:(NSArray *)array
 {
-    [[NSUserDefaults standardUserDefaults] setObject:array forKey:OVFilterredInputMethodsKey];
+    [[NSUserDefaults standardUserDefaults] setObject:array forKey:OVExcludedInputMethodIdentifiersKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

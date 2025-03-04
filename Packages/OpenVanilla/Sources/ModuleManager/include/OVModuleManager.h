@@ -87,7 +87,7 @@ namespace OpenVanilla {
 
 @property (copy) NSString *sharedAlphanumericKeyboardLayoutIdentifier;
 @property (assign) BOOL fallbackToSharedAlphanumericKeyboardLayoutWhenShiftPressed;
-@property (copy) NSArray<NSString *> *inputMethodFilterArray;
+@property (copy) NSArray<NSString *> *excludedIdentifiers;
 
 @property (assign, readonly) OpenVanilla::OVAroundFilter* associatedPhrasesModule;
 @end

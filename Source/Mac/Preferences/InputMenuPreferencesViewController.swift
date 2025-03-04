@@ -1,3 +1,27 @@
+// Copyright (c) 2004-2012 Lukhnos Liu (lukhnos at openvanilla dot org)
+//
+// Permission is hereby granted, free of charge, to any person
+// obtaining a copy of this software and associated documentation
+// files (the "Software"), to deal in the Software without
+// restriction, including without limitation the rights to use,
+// copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following
+// conditions:
+//
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+// OTHER DEALINGS IN THE SOFTWARE.
+//
+
 import Cocoa
 import AppKit
 import Foundation
@@ -25,14 +49,14 @@ class InputMenuPreferencesViewController: BasePreferencesViewController, NSTable
 
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         let identifier = OVModuleManager.default.inputMethodIdentifiers[row]
-        let array = OVModuleManager.default.inputMethodFilterArray
+        let array = OVModuleManager.default.excludedIdentifiers
         return array.contains(where: { $0 == identifier }) == false
     }
 
     func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
         if let newValue = object as? Bool {
             let identifier = OVModuleManager.default.inputMethodIdentifiers[row]
-            var array = OVModuleManager.default.inputMethodFilterArray
+            var array = OVModuleManager.default.excludedIdentifiers
             if newValue {
                 array.removeAll { $0 == identifier }
             } else {
@@ -42,7 +66,7 @@ class InputMenuPreferencesViewController: BasePreferencesViewController, NSTable
                 }
                 array.append(identifier)
             }
-            OVModuleManager.default.inputMethodFilterArray = array
+            OVModuleManager.default.excludedIdentifiers = array
             tableView.reloadData()
         }
     }

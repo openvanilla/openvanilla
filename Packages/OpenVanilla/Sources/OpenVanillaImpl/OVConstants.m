@@ -42,7 +42,7 @@ NSString *const OVCheckForUpdateKey = @"CheckForUpdate";
 NSString *const OVTraditionalToSimplifiedChineseFilterEnabledKey = @"EnableTraditionalToSimplifiedChineseFilter";
 NSString *const OVSimplifiedToTraditionalChineseFilterEnabledKey = @"EnableSimplifiedToTraditionalChineseFilter";
 NSString *const OVAssociatedPhrasesAroundFilterEnabledKey = @"EnableAssociatedPhrasesAroundFilter";
-NSString *const OVFilterredInputMethodsKey = @"FilterredInputMethods";
+NSString *const OVExcludedInputMethodIdentifiersKey = @"ExcludedInputMethods";
 
 NSString *const OVDefaultInputMethodIdentifier = @"org.openvanilla.OVIMTableBased.cj";
 NSString *const OVDefaultAlphanumericKeyboardLayoutIdentifier = @"com.apple.keylayout.US";

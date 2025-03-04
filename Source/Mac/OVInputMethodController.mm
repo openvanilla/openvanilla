@@ -91,7 +91,12 @@ using namespace OpenVanilla;
 
     NSString *activeInputMethodIdentifier = [OVModuleManager defaultManager].activeInputMethodIdentifier;
     NSArray *inputMethodIdentifiers = [OVModuleManager defaultManager].inputMethodIdentifiers;
+    NSArray *excludedIdentifiers = [OVModuleManager defaultManager].excludedIdentifiers;
     for (NSString *identifier in inputMethodIdentifiers) {
+        if ([excludedIdentifiers containsObject: identifier]) {
+            continue;;
+        }
+
         NSMenuItem *item = [[NSMenuItem alloc] init];
         item.title = [[OVModuleManager defaultManager] localizedInputMethodName:identifier];
         item.representedObject = identifier;
@@ -140,6 +145,27 @@ using namespace OpenVanilla;
 - (void)activateServer:(id)client
 {
     [OVModuleManager defaultManager].candidateService->resetAll();
+
+    NSString *activeInputMethodIdentifier = [OVModuleManager defaultManager].activeInputMethodIdentifier;
+    NSArray *identifiers = [OVModuleManager defaultManager].inputMethodIdentifiers;
+    NSArray *excludedIdentifiers = [OVModuleManager defaultManager].excludedIdentifiers;
+    NSMutableArray *availableInputMethods = [[NSMutableArray alloc] init];
+    for (NSString *identifier in identifiers) {
+        if ([excludedIdentifiers containsObject:identifier]) {
+            continue;;
+        }
+        [availableInputMethods addObject:identifier];
+    }
+    if (!availableInputMethods.count) {
+        NSString *first = identifiers[0];
+        NSMutableArray *excludedIdentifiersCopy = [NSMutableArray arrayWithArray:excludedIdentifiers];
+        [excludedIdentifiersCopy removeObject:first];
+        [OVModuleManager defaultManager].excludedIdentifiers = excludedIdentifiersCopy;
+        [[OVModuleManager defaultManager] selectInputMethod:first];
+    } else if (![availableInputMethods containsObject:activeInputMethodIdentifier]) {
+        NSString *first = identifiers[0];
+        [[OVModuleManager defaultManager] selectInputMethod:first];
+    }
 
     NSString *keyboardLayout = [[OVModuleManager defaultManager] alphanumericKeyboardLayoutForInputMethod:[OVModuleManager defaultManager].activeInputMethodIdentifier];
 
