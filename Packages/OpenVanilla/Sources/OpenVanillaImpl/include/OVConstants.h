@@ -42,6 +42,7 @@ extern NSString *const OVCheckForUpdateKey;
 extern NSString *const OVTraditionalToSimplifiedChineseFilterEnabledKey;
 extern NSString *const OVSimplifiedToTraditionalChineseFilterEnabledKey;
 extern NSString *const OVAssociatedPhrasesAroundFilterEnabledKey;
+extern NSString *const OVExcludedInputMethodIdentifiersKey;
 
 extern NSString *const OVDefaultInputMethodIdentifier;
 extern NSString *const OVDefaultAlphanumericKeyboardLayoutIdentifier;
