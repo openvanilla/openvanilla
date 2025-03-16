@@ -182,7 +182,7 @@ extension AddTableBasedInputMethodViewController: NonModalAlertWindowControllerD
 
 }
 
-extension AddTableBasedInputMethodViewController: CinInstallerWindowController.Delegate {
+extension AddTableBasedInputMethodViewController: CinInstallerWindowControllerDelegate {
     func controllerDidBecomeCancelled(_ controller: CinInstallerWindowController) {
         self.preferencesWindowController?.window?.endSheet(cinInstallerWindowController.window!)
     }

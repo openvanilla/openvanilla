@@ -27,13 +27,12 @@
 
 import Cocoa
 
+protocol CinInstallerWindowControllerDelegate: AnyObject {
+    func controllerDidBecomeCancelled(_ controller: CinInstallerWindowController)
+    func controller(_ controller: CinInstallerWindowController, didDownload file: URL)
+}
+
 class CinInstallerWindowController: NSWindowController {
-
-    protocol Delegate: NSObjectProtocol {
-        func controllerDidBecomeCancelled(_ controller: CinInstallerWindowController)
-        func controller(_ controller: CinInstallerWindowController, didDownload file: URL)
-    }
-
     @IBOutlet var outlineView: NSOutlineView!
     @IBOutlet var downloadButton: NSButton!
     @IBOutlet var downloadingProgressIndicator: NSProgressIndicator!
@@ -48,7 +47,7 @@ class CinInstallerWindowController: NSWindowController {
     }
     private var manager =  CinManager()
     private var downloader = CinDownloader()
-    weak var delegate: Delegate?
+    weak var delegate: CinInstallerWindowControllerDelegate?
 
     override func awakeFromNib() {
         updateUI(by: manager.state)
