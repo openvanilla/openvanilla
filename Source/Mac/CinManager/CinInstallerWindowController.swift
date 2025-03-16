@@ -54,6 +54,9 @@ class CinInstallerWindowController: NSWindowController {
         updateUI(by: manager.state)
         manager.delegate = self
         downloader.delegate = self
+        self.downloadButton.title = NSLocalizedString("Download", comment: "")
+        self.reloadButton.title = NSLocalizedString("Reload", comment: "")
+        self.cancelButton.title = NSLocalizedString("Cancel", comment: "")
     }
 
     private func updateUI(by state: CinManager.State) {
