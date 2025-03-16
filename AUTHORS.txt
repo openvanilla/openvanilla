@@ -1,23 +1,23 @@
 Current contributors:
 
-*	Lukhnos Liu (@lukhnos)
-*	Hill Ma (@mahiuchun)
-*       CHOU Sheng-kai (@syimyuzya)
-*	Google Inc.
+* Weizhong Yang (@zonble)
+* Lukhnos Liu (@lukhnos)
 
 Past contributors:
 
-*	b6s - OVIMGeneric, .cin tools
-* 	zonble - Preferences, OVIMTibetan, artworks, and documentation
-*	gugod - OVIMSpaceChewing, framework, build system
-*	kanru - Windows port
-*	vgod - OVIMArray
-*	mjhsieh - data quality and documentation
-*	PCMan - Windows port
-*	jaimielin - Windows port
-*	MatLinuxer2 - Linux port
-*	pektiong - OVIMPOJ
-*	cschin - Python bridge
-* 	yylin - extension of cj.cin, simplex.cin and bpmf.cin
-* 	fourdollars - Linux port
-*	othree - Web-based input method experiment
+* b6s - OVIMGeneric, .cin tools
+* gugod - OVIMSpaceChewing, framework, build system
+* kanru - Windows port
+* vgod - OVIMArray
+* mjhsieh - data quality and documentation
+* PCMan - Windows port
+* jaimielin - Windows port
+* MatLinuxer2 - Linux port
+* pektiong - OVIMPOJ
+* cschin - Python bridge
+* yylin - extension of cj.cin, simplex.cin and bpmf.cin
+* fourdollars - Linux port
+* othree - Web-based input method experiment
+* Hill Ma (@mahiuchun)
+* CHOU Sheng-kai (@syimyuzya)
+* Google Inc.
