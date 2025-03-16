@@ -27,11 +27,12 @@
 
 import Cocoa
 
+protocol CinDownloaderDelegate: AnyObject {
+    func cinDownloader(_ downloader: CinDownloader, didUpdate state: CinDownloader.State)
+}
+
 @MainActor
 class CinDownloader: NSObject {
-    protocol Delegate: AnyObject {
-        func cinDownloader(_ downloader: CinDownloader, didUpdate state: State)
-    }
 
     enum State {
         case initial
@@ -40,7 +41,7 @@ class CinDownloader: NSObject {
         case downloaded(table: CinTable, downloadedLocation: URL)
     }
 
-    weak var delegate: Delegate?
+    weak var delegate: CinDownloaderDelegate?
 
     var state = State.initial {
         didSet {
@@ -77,7 +78,8 @@ class CinDownloader: NSObject {
         let request = URLRequest(url: table.url)
         self.state = .downloading(table: table, progress: 0)
 
-        let task = session.downloadTask(with: request) { location, response, error in
+        let task = session.downloadTask(with: request) {[weak self] location, response, error in
+            guard let self else { return }
             if let error {
                 DispatchQueue.main.async {
                     self.task = nil

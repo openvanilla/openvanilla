@@ -190,7 +190,7 @@ extension AddTableBasedInputMethodViewController: CinInstallerWindowController.D
     func controller(_ controller: CinInstallerWindowController, didDownload file: URL) {
         self.preferencesWindowController?.window?.endSheet(cinInstallerWindowController.window!)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.install(path: file.path)
+            _ = self.install(path: file.path)
         }
     }
 }

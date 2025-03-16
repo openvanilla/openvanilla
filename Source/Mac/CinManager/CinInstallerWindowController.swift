@@ -142,7 +142,7 @@ class CinInstallerWindowController: NSWindowController {
     }
 }
 
-extension CinInstallerWindowController: CinManager.Delegate, CinDownloader.Delegate {
+extension CinInstallerWindowController: CinManagerDelegate, CinDownloaderDelegate {
     func cinManager(_ manager: CinManager, didUpdate state: CinManager.State) {
         updateUI(by: state)
     }
@@ -160,13 +160,14 @@ extension CinInstallerWindowController: CinManager.Delegate, CinDownloader.Deleg
 extension CinInstallerWindowController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     func currentCinGroup() -> [CinTableGroup]? {
         let state = manager.state
-        if case let .loaded(tableGroups) = state {
+        switch state {
+        case let .loaded(tableGroups):
             return tableGroups
-        }
-        if case let .loadedButLoading(tableGroups) = state {
+        case let .loadedButLoading(tableGroups):
             return tableGroups
+        default:
+            return nil
         }
-        return nil
     }
 
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {

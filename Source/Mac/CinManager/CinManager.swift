@@ -61,8 +61,6 @@ private struct CinReadMeParser {
             {
                 print("range \(range)")
                 let groupNameRange = range.range(at: 1)
-                //                let groupContentRange = range.range(at: 2)
-
                 let groupName = String(
                     line[
                         line.index(
@@ -114,11 +112,13 @@ private struct CinReadMeParser {
     }
 }
 
+protocol CinManagerDelegate: AnyObject {
+    func cinManager(_ manager: CinManager, didUpdate state: CinManager.State)
+}
+
+
 @MainActor
 class CinManager {
-    protocol Delegate: AnyObject {
-        func cinManager(_ manager: CinManager, didUpdate state: State)
-    }
 
     enum State {
         case initial
@@ -135,7 +135,7 @@ class CinManager {
         }
     }
 
-    weak var delegate: Delegate?
+    weak var delegate: CinManagerDelegate?
 
     var state = State.initial {
         didSet {
@@ -170,32 +170,35 @@ class CinManager {
         task = nil
 
         task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+            guard let self else {
+                return
+            }
             if let error {
                 DispatchQueue.main.async {
-                    self?.task = nil
-                    if case let .loadedButLoading(tabkeGroup) = self?.state {
-                        self?.state = .loaded(tableGroups: tabkeGroup)
+                    self.task = nil
+                    if case let .loadedButLoading(tabkeGroup) = self.state {
+                        self.state = .loaded(tableGroups: tabkeGroup)
                     } else {
-                        self?.state = .failed(error: error)
+                        self.state = .failed(error: error)
                     }
                 }
                 return
             }
             guard let data = data, let string = String(data: data, encoding: .utf8) else {
                 DispatchQueue.main.async {
-                    self?.task = nil
-                    if case let .loadedButLoading(tabkeGroup) = self?.state {
-                        self?.state = .loaded(tableGroups: tabkeGroup)
+                    self.task = nil
+                    if case let .loadedButLoading(tabkeGroup) = self.state {
+                        self.state = .loaded(tableGroups: tabkeGroup)
                     } else {
-                        self?.state = .failed(error: CinManagerError.noData)
+                        self.state = .failed(error: CinManagerError.noData)
                     }
                 }
                 return
             }
             let result = CinReadMeParser.parse(text: string)
             DispatchQueue.main.async {
-                self?.task = nil
-                self?.state = .loaded(tableGroups: result)
+                self.task = nil
+                self.state = .loaded(tableGroups: result)
             }
         }
         task?.resume()
