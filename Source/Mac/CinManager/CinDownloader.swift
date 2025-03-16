@@ -52,7 +52,7 @@ class CinDownloader: NSObject {
     enum CinDownloaderError: Error, LocalizedError {
         case noFile
         case cancelled
-        case failedToMoveFile(to: URL)
+        case failedToMoveFile(to: URL, underlyingError: Error)
         var noFile: String? {
             switch self {
             case .noFile:
@@ -109,7 +109,7 @@ class CinDownloader: NSObject {
                }
            } catch {
                DispatchQueue.main.async {
-                   self.state = .failed(table: table, error: CinDownloaderError.failedToMoveFile(to: destinationURL))
+                   self.state = .failed(table: table, error: CinDownloaderError.failedToMoveFile(to: destinationURL, underlyingError: error))
                }
            }
 

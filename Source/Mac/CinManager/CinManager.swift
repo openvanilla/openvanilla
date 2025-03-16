@@ -99,10 +99,12 @@ private struct CinReadMeParser {
                         line.index(
                             line.startIndex, offsetBy: shortDescriptionRange.lowerBound)..<line
                             .index(line.startIndex, offsetBy: shortDescriptionRange.upperBound)])
-                currentGroup?.insert(
-                    CinTable(
-                        filename: filename, url: URL(string: url)!, name: name,
-                        shortDescription: shortDescription))
+                if let url = URL(string: url) {
+                    currentGroup?.insert(
+                        CinTable(
+                            filename: filename, url: url, name: name,
+                            shortDescription: shortDescription))
+                }
             }
         }
         if let currentGroup = currentGroup {
