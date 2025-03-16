@@ -31,12 +31,15 @@ import OpenVanillaImpl
 class AddTableBasedInputMethodViewController: BasePreferencesViewController {
 
     @IBOutlet weak var moreInfoTextField: NSTextField!
+    @IBOutlet weak var cinInstallerWindowController:  CinInstallerWindowController!
     weak var preferencesWindowController: PreferencesWindowController?
+
     private var tablePathToBeInstalled: String?
     private var moduleIdentifierIfInstalled: String?
 
     override func loadPreferences() {
         super.loadPreferences()
+        cinInstallerWindowController.delegate = self
 
         // add link to the more info text field
         // cf. http://developer.apple.com/library/mac/#qa/qa1487/_index.html
@@ -92,6 +95,14 @@ class AddTableBasedInputMethodViewController: BasePreferencesViewController {
         }
 
         return false
+    }
+
+    @IBAction @objc(downloadFromChineseOpenDesktop:)
+    func downloadFromChineseOpenDesktop(_ sender: Any?) {
+        cinInstallerWindowController.reset()
+        cinInstallerWindowController.reload(self)
+        let window = cinInstallerWindowController.window!
+        preferencesWindowController?.window?.beginSheet(window, completionHandler: nil)
     }
 
     @IBAction @objc(importNewTableAction:)
@@ -170,3 +181,17 @@ extension AddTableBasedInputMethodViewController: NonModalAlertWindowControllerD
     }
 
 }
+
+extension AddTableBasedInputMethodViewController: CinInstallerWindowController.Delegate {
+    func controllerDidBecomeCancelled(_ controller: CinInstallerWindowController) {
+        self.preferencesWindowController?.window?.endSheet(cinInstallerWindowController.window!)
+    }
+    
+    func controller(_ controller: CinInstallerWindowController, didDownload file: URL) {
+        self.preferencesWindowController?.window?.endSheet(cinInstallerWindowController.window!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.install(path: file.path)
+        }
+    }
+}
+

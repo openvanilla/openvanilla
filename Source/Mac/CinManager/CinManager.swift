@@ -28,7 +28,7 @@
 import Foundation
 
 private let CinRepositoryBaseURL =
-"https://raw.githubusercontent.com/chinese-opendesktop/cin-tables/refs/heads/master"
+    "https://raw.githubusercontent.com/chinese-opendesktop/cin-tables/refs/heads/master"
 
 struct CinTable {
     var filename: String
@@ -46,8 +46,8 @@ struct CinTableGroup {
     }
 }
 
-fileprivate struct CinReadMeParser {
-    static func parse(text: String) -> [CinTableGroup]  {
+private struct CinReadMeParser {
+    static func parse(text: String) -> [CinTableGroup] {
         let lines = text.split(separator: "\n")
         let groupRegex = try! NSRegularExpression(pattern: "Language\\s=\\s\"(.*),(.*)\"")
         let tableRegex = try! NSRegularExpression(pattern: "(\\w+)\\.cin,\"(.*)\",\"(.*)\"")
@@ -56,12 +56,18 @@ fileprivate struct CinReadMeParser {
         var currentGroup: CinTableGroup?
 
         for line in lines {
-            if let range = groupRegex.firstMatch(in: String(line), range: NSRange(location: 0, length: line.utf16.count)) {
+            if let range = groupRegex.firstMatch(
+                in: String(line), range: NSRange(location: 0, length: line.utf16.count))
+            {
                 print("range \(range)")
                 let groupNameRange = range.range(at: 1)
-                let groupContentRange = range.range(at: 2)
+                //                let groupContentRange = range.range(at: 2)
 
-                let groupName = String(line[line.index(line.startIndex, offsetBy: groupNameRange.lowerBound)..<line.index(line.startIndex, offsetBy: groupNameRange.upperBound)])
+                let groupName = String(
+                    line[
+                        line.index(
+                            line.startIndex, offsetBy: groupNameRange.lowerBound)..<line.index(
+                                line.startIndex, offsetBy: groupNameRange.upperBound)])
 
                 if let currentGroup = currentGroup {
                     groups.append(currentGroup)
@@ -71,16 +77,34 @@ fileprivate struct CinReadMeParser {
                 continue
             }
 
-            if let range = tableRegex.firstMatch(in: String(line), range: NSRange(location: 0, length: line.utf16.count)) {
+            if let range = tableRegex.firstMatch(
+                in: String(line), range: NSRange(location: 0, length: line.utf16.count))
+            {
                 print("range \(range)")
                 let filenameRange = range.range(at: 1)
-                let filename = String(line[line.index(line.startIndex, offsetBy: filenameRange.lowerBound)..<line.index(line.startIndex, offsetBy: filenameRange.upperBound)]) + ".cin"
-                let url  = CinRepositoryBaseURL + "/" + filename
+                let filename =
+                    String(
+                        line[
+                            line.index(
+                                line.startIndex, offsetBy: filenameRange.lowerBound)..<line.index(
+                                    line.startIndex, offsetBy: filenameRange.upperBound)]) + ".cin"
+                let url = CinRepositoryBaseURL + "/" + filename
                 let nameRange = range.range(at: 2)
-                let name = String(line[line.index(line.startIndex, offsetBy: nameRange.lowerBound)..<line.index(line.startIndex, offsetBy: nameRange.upperBound)])
+                let name = String(
+                    line[
+                        line.index(
+                            line.startIndex, offsetBy: nameRange.lowerBound)..<line.index(
+                                line.startIndex, offsetBy: nameRange.upperBound)])
                 let shortDescriptionRange = range.range(at: 3)
-                let shortDescription = String(line[line.index(line.startIndex, offsetBy: shortDescriptionRange.lowerBound)..<line.index(line.startIndex, offsetBy: shortDescriptionRange.upperBound)])
-                currentGroup?.insert(CinTable(filename: filename, url: URL(string: url)!, name: name, shortDescription: shortDescription))
+                let shortDescription = String(
+                    line[
+                        line.index(
+                            line.startIndex, offsetBy: shortDescriptionRange.lowerBound)..<line
+                            .index(line.startIndex, offsetBy: shortDescriptionRange.upperBound)])
+                currentGroup?.insert(
+                    CinTable(
+                        filename: filename, url: URL(string: url)!, name: name,
+                        shortDescription: shortDescription))
             }
         }
         if let currentGroup = currentGroup {
@@ -91,9 +115,7 @@ fileprivate struct CinReadMeParser {
 }
 
 @MainActor
-class CinManager: Sendable {
-    static let shared = CinManager()
-
+class CinManager {
     protocol Delegate: AnyObject {
         func cinManager(_ manager: CinManager, didUpdate state: State)
     }
@@ -108,7 +130,6 @@ class CinManager: Sendable {
 
     enum CinManagerError: Error, LocalizedError {
         case noData
-
         var errorDescription: String? {
             "No data found."
         }
@@ -122,8 +143,16 @@ class CinManager: Sendable {
         }
     }
 
+    func reset() {
+        self.task?.cancel()
+        self.task = nil
+        self.state = .initial
+    }
+
+    private var task: URLSessionDataTask?
+
     func load() {
-        let readmeURLString = "README.md"
+        let readmeURLString = "README"
         guard let url = URL(string: CinRepositoryBaseURL + "/" + readmeURLString) else {
             return
         }
@@ -137,9 +166,13 @@ class CinManager: Sendable {
             self.state = .loadedButLoading(tableGroups: tableGroups)
         }
 
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+        task?.cancel()
+        task = nil
+
+        task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             if let error {
                 DispatchQueue.main.async {
+                    self?.task = nil
                     if case let .loadedButLoading(tabkeGroup) = self?.state {
                         self?.state = .loaded(tableGroups: tabkeGroup)
                     } else {
@@ -150,6 +183,7 @@ class CinManager: Sendable {
             }
             guard let data = data, let string = String(data: data, encoding: .utf8) else {
                 DispatchQueue.main.async {
+                    self?.task = nil
                     if case let .loadedButLoading(tabkeGroup) = self?.state {
                         self?.state = .loaded(tableGroups: tabkeGroup)
                     } else {
@@ -160,10 +194,11 @@ class CinManager: Sendable {
             }
             let result = CinReadMeParser.parse(text: string)
             DispatchQueue.main.async {
+                self?.task = nil
                 self?.state = .loaded(tableGroups: result)
             }
         }
-        task.resume()
+        task?.resume()
     }
 
 }
