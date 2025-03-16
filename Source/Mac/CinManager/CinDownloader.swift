@@ -51,12 +51,15 @@ class CinDownloader: NSObject {
     enum CinDownloaderError: Error, LocalizedError {
         case noFile
         case cancelled
+        case failedToMoveFile(to: URL)
         var noFile: String? {
             switch self {
             case .noFile:
                 return "Downloaaded file does not exist."
             case .cancelled:
                 return "Cancelled"
+            case .failedToMoveFile(_):
+                return "Failed to move file"
             }
         }
     }
@@ -89,11 +92,25 @@ class CinDownloader: NSObject {
                 }
                 return
             }
-            DispatchQueue.main.async {
-                self.task = nil
-                self.state = .downloading(table: table, progress: 1.0)
-                self.state = .downloaded(table: table, downloadedLocation: location)
-            }
+
+           let fileManager = FileManager.default
+           let destinationURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                .appendingPathComponent(table.filename)
+           try? fileManager.removeItem(at: destinationURL)
+
+           do {
+               try fileManager.moveItem(at: location, to: destinationURL)
+               DispatchQueue.main.async {
+                   self.task = nil
+                   self.state = .downloading(table: table, progress: 1.0)
+                   self.state = .downloaded(table: table, downloadedLocation: destinationURL)
+               }
+           } catch {
+               DispatchQueue.main.async {
+                   self.state = .failed(table: table, error: CinDownloaderError.failedToMoveFile(to: destinationURL))
+               }
+           }
+
         }
         self.task = task
         task.resume()
