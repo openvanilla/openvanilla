@@ -157,7 +157,7 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
             title: NSLocalizedString("Confirm Removal", comment: ""),
             content: String(
                 format: NSLocalizedString(
-                    "Are you sure you want to remove the input method\"%@\"", comment: ""),
+                    "Are you sure you want to remove the input method\"%@\"?", comment: ""),
                 OVModuleManager.default.localizedInputMethodName(self.moduleIdentifier)),
             confirmButtonTitle: NSLocalizedString("Remove", comment: ""),
             cancelButtonTitle: NSLocalizedString("Cancel", comment: ""), cancelAsDefault: true,

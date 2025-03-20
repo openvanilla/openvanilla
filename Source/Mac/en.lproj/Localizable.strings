@@ -179,3 +179,9 @@
 "Original first key selects the second candidate" = "Original first key selects the second candidate";
 "Both space and the first key selects the first candidate" = "Both Space and the first key selects the first candidate";
 "Input Menu" = "Input Menu";
+"Download" = "Download";
+"Reload" = "Reload";
+"Cancel" = "Cancel";
+"Failed to download." = "Failed to download.";
+"Failed to load tables." = "Failed to load tables.";
+"Download from Chinese Open Desktop" = "Download from Chinese Open Desktop";

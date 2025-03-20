@@ -148,3 +148,9 @@
 "Original first key selects the second candidate" = "原本第一個選字鍵選第二個字詞";
 "Both space and the first key selects the first candidate" = "空白鍵與原本第一個選字鍵都選第一個字詞";
 "Input Menu" = "輸入法選單";
+"Download" = "下載";
+"Reload" = "重新載入";
+"Cancel" = "取消";
+"Failed to download." = "下載失敗";
+"Failed to load tables." = "載入表格失敗";
+"Download from Chinese Open Desktop" = "從 Chinese Open Desktop 下載";

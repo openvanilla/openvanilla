@@ -56,6 +56,9 @@
 		D449C63F2B2FFA260060653A /* GeneralPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */; };
 		D449C6412B3009DC0060653A /* BaseModulePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */; };
 		D449C6432B300FB60060653A /* BasePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6422B300FB60060653A /* BasePreferencesViewController.swift */; };
+		D49AEE142D87181C008DCAD9 /* CinInstallerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49AEE132D87181C008DCAD9 /* CinInstallerWindowController.swift */; };
+		D49AEE152D87181C008DCAD9 /* CinDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49AEE122D87181C008DCAD9 /* CinDownloader.swift */; };
+		D49B8EB62D773BE800D56D75 /* CinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B8EB52D773BE500D56D75 /* CinManager.swift */; };
 		D4C466A42D7606D40018173E /* InputMenuPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C466A32D76069C0018173E /* InputMenuPreferencesViewController.swift */; };
 		D4D711F02D298D360084BB8E /* array-phrase.cin in Copy Array Input Method Tables */ = {isa = PBXBuildFile; fileRef = D4D711EE2D297E590084BB8E /* array-phrase.cin */; };
 		D4F50BBC2B28898E00C6C364 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F50BBB2B28898E00C6C364 /* UpdateChecker.swift */; };
@@ -189,6 +192,9 @@
 		D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C6402B3009DC0060653A /* BaseModulePreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModulePreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C6422B300FB60060653A /* BasePreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePreferencesViewController.swift; sourceTree = "<group>"; };
+		D49AEE122D87181C008DCAD9 /* CinDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinDownloader.swift; sourceTree = "<group>"; };
+		D49AEE132D87181C008DCAD9 /* CinInstallerWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinInstallerWindowController.swift; sourceTree = "<group>"; };
+		D49B8EB52D773BE500D56D75 /* CinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinManager.swift; sourceTree = "<group>"; };
 		D4C466A32D76069C0018173E /* InputMenuPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMenuPreferencesViewController.swift; sourceTree = "<group>"; };
 		D4D711EE2D297E590084BB8E /* array-phrase.cin */ = {isa = PBXFileReference; lastKnownFileType = text; path = "array-phrase.cin"; sourceTree = "<group>"; };
 		D4F50BBA2B28898D00C6C364 /* OpenVanilla-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanilla-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -327,6 +333,7 @@
 		6ABBAEFA15CD58F90080EE7D /* InputMethod Application */ = {
 			isa = PBXGroup;
 			children = (
+				D49B8EB42D773BD800D56D75 /* CinManager */,
 				D4AF7DA72B3097430025DAAF /* Preferences */,
 				D4F50BBF2B289C8C00C6C364 /* AppDelegate.swift */,
 				6ABBAF1D15CD615B0080EE7D /* OVInputMethodController.h */,
@@ -387,6 +394,16 @@
 				D430666B2B5A08E9000639F3 /* TooltipUI */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		D49B8EB42D773BD800D56D75 /* CinManager */ = {
+			isa = PBXGroup;
+			children = (
+				D49AEE122D87181C008DCAD9 /* CinDownloader.swift */,
+				D49AEE132D87181C008DCAD9 /* CinInstallerWindowController.swift */,
+				D49B8EB52D773BE500D56D75 /* CinManager.swift */,
+			);
+			path = CinManager;
 			sourceTree = "<group>";
 		};
 		D4AF7DA72B3097430025DAAF /* Preferences */ = {
@@ -572,6 +589,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D49B8EB62D773BE800D56D75 /* CinManager.swift in Sources */,
 				6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */,
 				D449C63F2B2FFA260060653A /* GeneralPreferencesViewController.swift in Sources */,
 				D449C63D2B2FF0FC0060653A /* ArrayPreferencesViewController.swift in Sources */,
@@ -579,6 +597,8 @@
 				D414E3042B2A2624001863EF /* AddTableBasedInputMethodViewController.swift in Sources */,
 				D40E28FF2B31D17D00EBD97C /* main.swift in Sources */,
 				D4C466A42D7606D40018173E /* InputMenuPreferencesViewController.swift in Sources */,
+				D49AEE142D87181C008DCAD9 /* CinInstallerWindowController.swift in Sources */,
+				D49AEE152D87181C008DCAD9 /* CinDownloader.swift in Sources */,
 				D4F50BCA2B28A15400C6C364 /* NonModalAlertWindowController.swift in Sources */,
 				D449C6372B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift in Sources */,
 				D4F50BBE2B28998500C6C364 /* UserDefaultsPropertyWrapper.swift in Sources */,
