@@ -59,7 +59,6 @@ private struct CinReadMeParser {
             if let range = groupRegex.firstMatch(
                 in: String(line), range: NSRange(location: 0, length: line.utf16.count))
             {
-                print("range \(range)")
                 let groupNameRange = range.range(at: 1)
                 let groupName = String(
                     line[
@@ -78,7 +77,6 @@ private struct CinReadMeParser {
             if let range = tableRegex.firstMatch(
                 in: String(line), range: NSRange(location: 0, length: line.utf16.count))
             {
-                print("range \(range)")
                 let filenameRange = range.range(at: 1)
                 let filename =
                     String(
