@@ -78,7 +78,7 @@ class CinDownloader: NSObject {
         let request = URLRequest(url: table.url)
         self.state = .downloading(table: table, progress: 0)
 
-        let task = session.downloadTask(with: request) {[weak self] location, response, error in
+        let task = session.downloadTask(with: request) { [weak self] location, response, error in
             guard let self else { return }
             if let error {
                 DispatchQueue.main.async {
@@ -95,23 +95,26 @@ class CinDownloader: NSObject {
                 return
             }
 
-           let fileManager = FileManager.default
-           let destinationURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                .appendingPathComponent(table.filename)
-           try? fileManager.removeItem(at: destinationURL)
+            let fileManager = FileManager.default
+            let destinationURL = FileManager.default.temporaryDirectory.appendingPathComponent(
+                table.filename)
+            try? fileManager.removeItem(at: destinationURL)
 
-           do {
-               try fileManager.moveItem(at: location, to: destinationURL)
-               DispatchQueue.main.async {
-                   self.task = nil
-                   self.state = .downloading(table: table, progress: 1.0)
-                   self.state = .downloaded(table: table, downloadedLocation: destinationURL)
-               }
-           } catch {
-               DispatchQueue.main.async {
-                   self.state = .failed(table: table, error: CinDownloaderError.failedToMoveFile(to: destinationURL, underlyingError: error))
-               }
-           }
+            do {
+                try fileManager.moveItem(at: location, to: destinationURL)
+                DispatchQueue.main.async {
+                    self.task = nil
+                    self.state = .downloading(table: table, progress: 1.0)
+                    self.state = .downloaded(table: table, downloadedLocation: destinationURL)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.state = .failed(
+                        table: table,
+                        error: CinDownloaderError.failedToMoveFile(
+                            to: destinationURL, underlyingError: error))
+                }
+            }
 
         }
         self.task = task

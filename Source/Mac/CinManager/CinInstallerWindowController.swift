@@ -45,7 +45,7 @@ class CinInstallerWindowController: NSWindowController {
             self.updateUI(by: downloader.state)
         }
     }
-    private var manager =  CinManager()
+    private var manager = CinManager()
     private var downloader = CinDownloader()
     weak var delegate: CinInstallerWindowControllerDelegate?
 

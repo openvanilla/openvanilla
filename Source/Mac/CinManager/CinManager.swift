@@ -116,7 +116,6 @@ protocol CinManagerDelegate: AnyObject {
     func cinManager(_ manager: CinManager, didUpdate state: CinManager.State)
 }
 
-
 @MainActor
 class CinManager {
 
