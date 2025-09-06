@@ -142,11 +142,11 @@ private class VerticalCandidateTableView: NSTableView {
             else {
                 return candidate?.string
             }
-            let explan = delegate.view(
+            let explanation = delegate.view(
                 owner,
                 didRequestExplanationFor: candate
             )
-            return explan ?? candidate?.string
+            return explanation ?? candidate?.string
         }
 
         override func isAccessibilityElement() -> Bool { true }

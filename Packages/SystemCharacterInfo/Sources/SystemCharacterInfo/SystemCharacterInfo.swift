@@ -59,7 +59,11 @@ private let path = "/System/Library/PrivateFrameworks/CoreChineseEngine.framewor
 
     @objc public func read(string: String) throws -> CharacterInfo {
         guard let db else {
-            throw NSError(domain: "SystemCharacterInfo", code: -100)
+            throw NSError(
+                domain: "SystemCharacterInfo",
+                code: -100,
+                userInfo: [NSLocalizedDescriptionKey: "Database not initialized."]
+            )
         }
 
         let zentry = Table("ZENTRY")
@@ -69,7 +73,11 @@ private let path = "/System/Library/PrivateFrameworks/CoreChineseEngine.framewor
             let result = try db.prepare(query)
             let rows = Array(result)
             guard let row = rows.first else {
-                throw NSError(domain: "SystemCharacterInfo", code: -101)
+                throw NSError(
+                    domain: "SystemCharacterInfo",
+                    code: -101,
+                    userInfo: [NSLocalizedDescriptionKey: "Not found."]
+                )
             }
             let zSimplifiedExamplar = SQLite.Expression<String?>("ZSIMPLIFIEDEXEMPLAR")
             let zTraditionalExamplar = SQLite.Expression<String?>("ZTRADITIONALEXEMPLAR")
@@ -83,7 +91,11 @@ private let path = "/System/Library/PrivateFrameworks/CoreChineseEngine.framewor
                 traditionalExample: try? row.get(zTraditionalExamplar)
             )
         } catch {
-            throw NSError(domain: "SystemCharacterInfo", code: -102)
+            throw NSError(
+                domain: "SystemCharacterInfo",
+                code: -102,
+                userInfo: [NSLocalizedDescriptionKey: "Failed to query the database."]
+            )
         }
     }
 
