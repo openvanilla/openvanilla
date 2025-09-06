@@ -137,8 +137,9 @@ private class VerticalCandidateTableView: NSTableView {
         override func accessibilityRole() -> NSAccessibility.Role { .unknown }
         override func accessibilityLabel() -> String? {
             guard let owner = owner,
-                    let delegate = owner.explanDelegate,
-                    let candate = candidate?.string else {
+                  let delegate = owner.explanDelegate,
+                  let candate = candidate?.string
+            else {
                 return candidate?.string
             }
             let explan = delegate.view(
@@ -147,6 +148,7 @@ private class VerticalCandidateTableView: NSTableView {
             )
             return explan ?? candidate?.string
         }
+
         override func isAccessibilityElement() -> Bool { true }
 
         func accessibilitySelected() -> Bool {
@@ -652,9 +654,9 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
 }
 
 extension VerticalCandidateController: VerticalCandidateTableViewDelegate {
-    fileprivate func view(_ view: VerticalCandidateTableView, didRequestExplanationFor candidate: String) -> String? {
+    fileprivate func view(_: VerticalCandidateTableView, didRequestExplanationFor candidate: String) -> String? {
         delegate?
-            .candidateController(self,requestExplanationFor: candidate)
+            .candidateController(self, requestExplanationFor: candidate)
     }
 }
 

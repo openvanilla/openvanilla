@@ -28,7 +28,6 @@ private protocol HorizontalCandidateViewDelegate: AnyObject {
 }
 
 private class HorizontalCandidateView: NSView {
-
     fileprivate weak var delegate: HorizontalCandidateViewDelegate?
 
     fileprivate final class CandidateAXItem: NSAccessibilityElement {
@@ -55,6 +54,7 @@ private class HorizontalCandidateView: NSView {
             let explan = delegate.view(owner, didRequestExplanationFor: candidate)
             return explan ?? candidate
         }
+
         override func isAccessibilityElement() -> Bool { true }
 
         func accessibilitySelected() -> Bool {
@@ -551,7 +551,7 @@ public class HorizontalCandidateController: CandidateController {
 }
 
 extension HorizontalCandidateController: HorizontalCandidateViewDelegate {
-    fileprivate func view(_ view: HorizontalCandidateView, didRequestExplanationFor candidate: String) -> String? {
+    fileprivate func view(_: HorizontalCandidateView, didRequestExplanationFor candidate: String) -> String? {
         delegate?.candidateController(self, requestExplanationFor: candidate)
     }
 }

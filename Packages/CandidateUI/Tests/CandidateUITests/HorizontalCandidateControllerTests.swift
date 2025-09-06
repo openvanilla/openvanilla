@@ -6,30 +6,29 @@ import Testing
 @MainActor
 @Suite("Test the Horizontal Candidate Controller")
 final class HorizontalCandidateControllerTests {
-
     class Mock: CandidateControllerDelegate {
         let candidates = ["A", "B", "C", "D", "E", "F", "G", "H"]
         var selected: String?
 
-        func candidateCountForController(_ controller: CandidateController) -> UInt {
+        func candidateCountForController(_: CandidateController) -> UInt {
             UInt(candidates.count)
         }
 
-        func candidateController(_ controller: CandidateController, candidateAtIndex index: UInt) -> String {
+        func candidateController(_: CandidateController, candidateAtIndex index: UInt) -> String {
             candidates[Int(index)]
         }
 
-        func candidateController(_ controller: CandidateController, didSelectCandidateAtIndex index: UInt) {
+        func candidateController(_: CandidateController, didSelectCandidateAtIndex index: UInt) {
             selected = candidates[Int(index)]
         }
 
-        func candidateController(_ controller: CandidateUI.CandidateController, requestExplanationFor candidate: String) -> String? {
+        func candidateController(_: CandidateUI.CandidateController, requestExplanationFor _: String) -> String? {
             nil
         }
     }
 
     @Test("Test if candidate controller can be positioned correctly when the input position is below the bottom of screen")
-    func testPositioning1() {
+    func positioning1() {
         let controller = HorizontalCandidateController()
         let mock = Mock()
         controller.delegate = mock
@@ -44,7 +43,7 @@ final class HorizontalCandidateControllerTests {
     }
 
     @Test("Test if candidate controller can be positioned correctly when the input position is over the top of screen")
-    func testPositioning2() {
+    func positioning2() {
         let controller = HorizontalCandidateController()
         let mock = Mock()
         controller.delegate = mock
@@ -165,5 +164,4 @@ final class HorizontalCandidateControllerTests {
         #expect(result == false)
         #expect(controller.selectedCandidateIndex == 0)
     }
-
 }

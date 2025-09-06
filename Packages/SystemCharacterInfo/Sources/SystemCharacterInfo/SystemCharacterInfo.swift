@@ -100,8 +100,7 @@ private let path = "/System/Library/PrivateFrameworks/CoreChineseEngine.framewor
                 if let components = result.components {
                     return "「\(components)」組成的「\(string)」"
                 }
-            } catch {
-            }
+            } catch {}
             return nil
         }
         var results: [String] = []
