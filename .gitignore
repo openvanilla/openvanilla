@@ -24,3 +24,5 @@ x64
 # Misc
 ._*
 .idea
+.swiftpm
+.vscode

@@ -23,6 +23,7 @@ let package = Package(
         .package(path: "../CandidateUI"),
         .package(path: "../TooltipUI"),
         .package(path: "../VXHanConvert"),
+        .package(path: "../SystemCharacterInfo"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -31,7 +32,7 @@ let package = Package(
             name: "OpenVanilla"),
         .target(
             name: "OpenVanillaImpl",
-            dependencies: ["OpenVanilla", "CandidateUI"],
+            dependencies: ["OpenVanilla", "CandidateUI", "SystemCharacterInfo",],
             cSettings: [
                 .unsafeFlags(["-Wno-incomplete-umbrella"], .when(configuration: .release)),
                 .unsafeFlags(["-Wno-incomplete-umbrella"], .when(configuration: .debug))

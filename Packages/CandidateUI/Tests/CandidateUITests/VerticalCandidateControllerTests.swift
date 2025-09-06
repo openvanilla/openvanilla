@@ -1,7 +1,10 @@
-import XCTest
+import Cocoa
+import Testing
 @testable import CandidateUI
 
-class VerticalCandidateControllerTests: XCTestCase {
+@MainActor
+@Suite("Test the Vertical Candidate Controller")
+final class VerticalCandidateControllerTests {
 
     class Mock: CandidateControllerDelegate {
         let candidates = ["A", "B", "C", "D", "E", "F", "G", "H"]
@@ -18,8 +21,13 @@ class VerticalCandidateControllerTests: XCTestCase {
         func candidateController(_ controller: CandidateController, didSelectCandidateAtIndex index: UInt) {
             selected = candidates[Int(index)]
         }
+
+        func candidateController(_ controller: CandidateUI.CandidateController, requestExplanationFor candidate: String) -> String? {
+            nil
+        }
     }
 
+    @Test("Test if candidate controller can be positioned correctly when the input position is below the bottom of screen")
     func testPositioning1() {
         let controller = HorizontalCandidateController()
         let mock = Mock()
@@ -30,11 +38,11 @@ class VerticalCandidateControllerTests: XCTestCase {
         controller.reloadData()
         controller.visible = true
         controller.set(windowTopLeftPoint: NSPoint(x: -100, y: 0), bottomOutOfScreenAdjustmentHeight: 10)
-        let exp = expectation(description: "wait")
-        _ = XCTWaiter.wait(for: [exp], timeout: 0.2)
-        XCTAssert(controller.window?.frame.minX ?? -1 >= 0)
+        Thread.sleep(forTimeInterval: 0.2)
+        #expect(controller.window?.frame.minX ?? -1 >= 0)
     }
 
+    @Test("Test if candidate controller can be positioned correctly when the input position is over the top of screen")
     func testPositioning2() {
         let controller = HorizontalCandidateController()
         let mock = Mock()
@@ -46,12 +54,12 @@ class VerticalCandidateControllerTests: XCTestCase {
         controller.visible = true
         let screenRect = NSScreen.main?.frame ?? NSRect.zero
         controller.set(windowTopLeftPoint: NSPoint(x: screenRect.maxX + 100, y: screenRect.maxY + 100), bottomOutOfScreenAdjustmentHeight: 10)
-        let exp = expectation(description: "wait")
-        _ = XCTWaiter.wait(for: [exp], timeout: 0.2)
-        XCTAssert(controller.window?.frame.maxX ?? CGFloat.greatestFiniteMagnitude <= screenRect.maxX)
-        XCTAssert(controller.window?.frame.maxY ?? CGFloat.greatestFiniteMagnitude <= screenRect.maxY)
+        Thread.sleep(forTimeInterval: 0.2)
+        #expect(controller.window?.frame.maxX ?? CGFloat.greatestFiniteMagnitude <= screenRect.maxX)
+        #expect(controller.window?.frame.maxY ?? CGFloat.greatestFiniteMagnitude <= screenRect.maxY)
     }
 
+    @Test("Test if the first candidate is selected after reloading data")
     func testReloadData() {
         let controller = VerticalCandidateController()
         let mock = Mock()
@@ -60,9 +68,10 @@ class VerticalCandidateControllerTests: XCTestCase {
             CandidateKeyLabel(key: $0, displayedText: $0)
         }
         controller.reloadData()
-        XCTAssert(controller.selectedCandidateIndex == 0)
+        #expect(controller.selectedCandidateIndex == 0)
     }
 
+    @Test("Test if highlightNextCandidate works correctly")
     func testHighlightNextCandidate() {
         let controller = VerticalCandidateController()
         let mock = Mock()
@@ -72,31 +81,32 @@ class VerticalCandidateControllerTests: XCTestCase {
         controller.delegate = mock
         controller.reloadData()
         var result = controller.highlightNextCandidate()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 1)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 1)
         result = controller.highlightNextCandidate()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 2)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 2)
         result = controller.highlightNextCandidate()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 3)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 3)
         result = controller.highlightNextCandidate()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 4)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 4)
         result = controller.highlightNextCandidate()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 5)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 5)
         result = controller.highlightNextCandidate()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 6)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 6)
         result = controller.highlightNextCandidate()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 7)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 7)
         result = controller.highlightNextCandidate()
-        XCTAssert(result == false)
-        XCTAssert(controller.selectedCandidateIndex == 7)
+        #expect(result == false)
+        #expect(controller.selectedCandidateIndex == 7)
     }
 
+    @Test("Test if highlightPreviousCandidate works correctly")
     func testHighlightPreviousCandidate() {
         let controller = VerticalCandidateController()
         let mock = Mock()
@@ -105,24 +115,25 @@ class VerticalCandidateControllerTests: XCTestCase {
         }
         controller.delegate = mock
         _ = controller.showNextPage()
-        XCTAssert(controller.selectedCandidateIndex == 4)
+        #expect(controller.selectedCandidateIndex == 4)
         var result = controller.highlightPreviousCandidate()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 3)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 3)
         result = controller.highlightPreviousCandidate()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 2)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 2)
         result = controller.highlightPreviousCandidate()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 1)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 1)
         result = controller.highlightPreviousCandidate()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 0)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 0)
         result = controller.highlightPreviousCandidate()
-        XCTAssert(result == false)
-        XCTAssert(controller.selectedCandidateIndex == 0)
+        #expect(result == false)
+        #expect(controller.selectedCandidateIndex == 0)
     }
 
+    @Test("Test if showNextPage works correctly")
     func testShowNextPage() {
         let controller = VerticalCandidateController()
         let mock = Mock()
@@ -131,16 +142,17 @@ class VerticalCandidateControllerTests: XCTestCase {
         }
         _ = controller.delegate = mock
         var result = controller.showNextPage()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 4)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 4)
         result = controller.showNextPage()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 7)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 7)
         result = controller.showNextPage()
-        XCTAssert(result == false)
-        XCTAssert(controller.selectedCandidateIndex == 7)
+        #expect(result == false)
+        #expect(controller.selectedCandidateIndex == 7)
     }
 
+    @Test("Test if showPreviousPage works correctly")
     func testShowPreviousPage() {
         let controller = VerticalCandidateController()
         let mock = Mock()
@@ -150,11 +162,11 @@ class VerticalCandidateControllerTests: XCTestCase {
         controller.delegate = mock
         _ = controller.showNextPage()
         var result = controller.showPreviousPage()
-        XCTAssert(result == true)
-        XCTAssert(controller.selectedCandidateIndex == 0)
+        #expect(result == true)
+        #expect(controller.selectedCandidateIndex == 0)
         result = controller.showPreviousPage()
-        XCTAssert(result == false)
-        XCTAssert(controller.selectedCandidateIndex == 0)
+        #expect(result == false)
+        #expect(controller.selectedCandidateIndex == 0)
     }
 
 }

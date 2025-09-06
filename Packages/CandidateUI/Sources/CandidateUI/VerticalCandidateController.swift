@@ -24,7 +24,7 @@
 import Cocoa
 
 private class VerticalKeyLabelStripView: NSView {
-    var keyLabelFont: NSFont = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
+    var keyLabelFont: NSFont = .systemFont(ofSize: NSFont.smallSystemFontSize)
     var labelOffsetY: CGFloat = 0
     var keyLabels: [String] = []
     var highlightedIndex: Int = -1
@@ -33,7 +33,7 @@ private class VerticalKeyLabelStripView: NSView {
         true
     }
 
-    override func draw(_ dirtyRect: NSRect) {
+    override func draw(_: NSRect) {
         var bigSurOrHigher = false
         if #available(macOS 10.16, *) {
             bigSurOrHigher = true
@@ -59,8 +59,7 @@ private class VerticalKeyLabelStripView: NSView {
         paraStyle.alignment = .center
 
         let textAttr: [NSAttributedString.Key: AnyObject] =
-            bigSurOrHigher
-            ? [
+            bigSurOrHigher ? [
                 .font: keyLabelFont,
                 .foregroundColor: NSColor.labelColor,
                 .paragraphStyle: paraStyle,
@@ -75,14 +74,10 @@ private class VerticalKeyLabelStripView: NSView {
             .foregroundColor: NSColor.selectedControlTextColor,
             .paragraphStyle: paraStyle,
         ]
-        for index in 0..<count {
-            let textRect = NSRect(
-                x: 0.0, y: CGFloat(index) * cellHeight + labelOffsetY, width: bounds.size.width,
-                height: cellHeight - labelOffsetY)
-            var cellRect = NSRect(
-                x: 0.0, y: CGFloat(index) * cellHeight, width: bounds.size.width, height: cellHeight
-            )
-            if !bigSurOrHigher && index + 1 < count {
+        for index in 0 ..< count {
+            let textRect = NSRect(x: 0.0, y: CGFloat(index) * cellHeight + labelOffsetY, width: bounds.size.width, height: cellHeight - labelOffsetY)
+            var cellRect = NSRect(x: 0.0, y: CGFloat(index) * cellHeight, width: bounds.size.width, height: cellHeight)
+            if !bigSurOrHigher, index + 1 < count {
                 cellRect.size.height -= 1.0
             }
 
@@ -92,9 +87,7 @@ private class VerticalKeyLabelStripView: NSView {
                     NSColor.selectedControlColor.setFill()
                     NSBezierPath.fill(cellRect)
                 }
-                (text as NSString).draw(
-                    in: textRect,
-                    withAttributes: (index == highlightedIndex) ? textAttrHighlighted : textAttr)
+                (text as NSString).draw(in: textRect, withAttributes: (index == highlightedIndex) ? textAttrHighlighted : textAttr)
             } else {
                 (index == highlightedIndex ? darkGray : lightGray).setFill()
                 NSBezierPath.fill(cellRect)
@@ -111,9 +104,101 @@ private let kCandidateTextLeftMarginWithMandatedTableViewPadding: CGFloat = 0.0
 
 // Only used in macOS 10.15 (Catalina) or lower
 private class BackgroundView: NSView {
-    override func draw(_ dirtyRect: NSRect) {
+    override func draw(_: NSRect) {
         NSColor.windowBackgroundColor.setFill()
-        NSBezierPath.fill(self.bounds)
+        NSBezierPath.fill(bounds)
+    }
+}
+
+private protocol VerticalCandidateTableViewDelegate: AnyObject {
+    func view(_ view: VerticalCandidateTableView, didRequestExplanationFor candidate: String) -> String?
+}
+
+private class VerticalCandidateTableView: NSTableView {
+    fileprivate weak var explanDelegate: VerticalCandidateTableViewDelegate?
+
+    fileprivate final class CandidateAXItem: NSAccessibilityElement {
+        weak var owner: VerticalCandidateTableView?
+        let index: UInt
+        let candidate: NSAttributedString?
+        let rect: NSRect
+
+        init(owner: VerticalCandidateTableView, index: UInt,
+             candidate: NSAttributedString?,
+             rect: NSRect)
+        {
+            self.owner = owner
+            self.index = index
+            self.candidate = candidate
+            self.rect = rect
+        }
+
+        override func accessibilityParent() -> Any? { owner }
+        override func accessibilityRole() -> NSAccessibility.Role { .unknown }
+        override func accessibilityLabel() -> String? {
+            guard let owner = owner,
+                    let delegate = owner.explanDelegate,
+                    let candate = candidate?.string else {
+                return candidate?.string
+            }
+            let explan = delegate.view(
+                owner,
+                didRequestExplanationFor: candate
+            )
+            return explan ?? candidate?.string
+        }
+        override func isAccessibilityElement() -> Bool { true }
+
+        func accessibilitySelected() -> Bool {
+            guard let selectedRow = owner?.selectedRow, selectedRow != NSNotFound else { return false }
+            return index == UInt(selectedRow)
+        }
+
+        override func accessibilityFrame() -> NSRect {
+            guard let owner, let window = owner.window else { return .zero }
+            let rectInScreen = owner.convert(rect, to: nil)
+            return window.convertToScreen(rectInScreen)
+        }
+    }
+
+    override func isAccessibilityElement() -> Bool {
+        false
+    }
+
+    var children: [CandidateAXItem] = []
+
+    override func accessibilityVisibleChildren() -> [Any]? {
+        children.filter { visibleRect.intersects($0.rect) }
+    }
+
+    override func accessibilityChildren() -> [Any]? {
+        children
+    }
+
+    func buildChildren() {
+        guard let dataSource,
+              let rows = dataSource.numberOfRows?(in: self)
+        else {
+            return
+        }
+        var children = [CandidateAXItem]()
+        for i in 0 ..< Int(rows) {
+            let candidate = dataSource.tableView?(self, objectValueFor: nil, row: i)
+            let rect = NSRect(
+                x: 0,
+                y: CGFloat(i) * rowHeight,
+                width: frame.width,
+                height: rowHeight
+            )
+            let child = CandidateAXItem(
+                owner: self,
+                index: UInt(i),
+                candidate: candidate as? NSAttributedString,
+                rect: rect
+            )
+            children.append(child)
+        }
+        self.children = children
     }
 }
 
@@ -121,7 +206,7 @@ private class BackgroundView: NSView {
 public class VerticalCandidateController: CandidateController {
     private var keyLabelStripView: VerticalKeyLabelStripView
     private var scrollView: NSScrollView
-    private var tableView: NSTableView
+    private var tableView: VerticalCandidateTableView
     private var candidateTextParagraphStyle: NSMutableParagraphStyle
     private var candidateTextPadding: CGFloat = kCandidateTextPadding
     private var candidateTextLeftMargin: CGFloat = kCandidateTextLeftMargin
@@ -137,8 +222,7 @@ public class VerticalCandidateController: CandidateController {
 
         var contentRect = NSRect(x: 128.0, y: 128.0, width: 0.0, height: 0.0)
         let styleMask: NSWindow.StyleMask = [.borderless, .nonactivatingPanel]
-        let panel = NSPanel(
-            contentRect: contentRect, styleMask: styleMask, backing: .buffered, defer: false)
+        let panel = NSPanel(contentRect: contentRect, styleMask: styleMask, backing: .buffered, defer: false)
         panel.level = NSWindow.Level(Int(kCGPopUpMenuWindowLevel) + 1)
         panel.hasShadow = true
 
@@ -161,6 +245,7 @@ public class VerticalCandidateController: CandidateController {
         tooltipView.isSelectable = false
         tooltipView.isBezeled = false
         tooltipView.drawsBackground = true
+        tooltipView.backgroundColor = NSColor.clear
         tooltipView.lineBreakMode = .byTruncatingTail
 
         contentRect.origin = NSPoint.zero
@@ -180,7 +265,7 @@ public class VerticalCandidateController: CandidateController {
             scrollView.contentView.drawsBackground = false
         }
 
-        tableView = NSTableView(frame: contentRect)
+        tableView = VerticalCandidateTableView(frame: contentRect)
         let column = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: "candidate"))
         column.dataCell = NSTextFieldCell()
         column.isEditable = false
@@ -215,54 +300,48 @@ public class VerticalCandidateController: CandidateController {
         super.init(window: panel)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.explanDelegate = self
         tableView.doubleAction = #selector(rowDoubleClicked(_:))
         tableView.target = self
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(boundsChange),
-            name: NSView.boundsDidChangeNotification,
-            object: scrollView.contentView)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(boundsChange),
+                                               name: NSView.boundsDidChangeNotification,
+                                               object: scrollView.contentView)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public override func reloadData() {
+    override public func reloadData() {
         maxCandidateAttrStringWidth = ceil(candidateFont.pointSize + candidateTextPadding)
         tableView.reloadData()
         layoutCandidateView()
+        tableView.buildChildren()
         if delegate?.candidateCountForController(self) ?? 0 > 0 {
             selectedCandidateIndex = 0
         }
     }
 
-    public override func showNextPage() -> Bool {
+    override public func showNextPage() -> Bool {
         scrollPageByOne(true)
     }
 
-    public override func showPreviousPage() -> Bool {
+    override public func showPreviousPage() -> Bool {
         scrollPageByOne(false)
     }
 
-    public override func showFirstPage() -> Bool {
-        return false
-    }
-
-    public override func showLastPage() -> Bool {
-        return false
-    }
-
-    public override func highlightNextCandidate() -> Bool {
+    override public func highlightNextCandidate() -> Bool {
         moveSelectionByOne(true)
     }
 
-    public override func highlightPreviousCandidate() -> Bool {
+    override public func highlightPreviousCandidate() -> Bool {
         moveSelectionByOne(false)
     }
 
-    public override func candidateIndexAtKeyLabelIndex(_ index: UInt) -> UInt {
+    override public func candidateIndexAtKeyLabelIndex(_ index: UInt) -> UInt {
         guard let delegate = delegate else {
             return UInt.max
         }
@@ -278,47 +357,52 @@ public class VerticalCandidateController: CandidateController {
         return UInt.max
     }
 
-    public override var selectedCandidateIndex: UInt {
+    override public var selectedCandidateIndex: UInt {
         get {
             let selectedRow = tableView.selectedRow
             return selectedRow == -1 ? UInt.max : UInt(selectedRow)
-
         }
         set {
             guard let delegate = delegate else {
                 return
             }
-            var newIndex = newValue
             let selectedRow = tableView.selectedRow
             let labelCount = keyLabels.count
             let itemCount = delegate.candidateCountForController(self)
 
-            if newIndex == UInt.max {
-                if itemCount == 0 {
-                    tableView.deselectAll(self)
-                    return
-                }
-                newIndex = 0
-            }
-
-            if newIndex == UInt.max {
+            if newValue == UInt.max {
+                tableView.deselectAll(self)
                 return
             }
 
-            var lastVisibleRow = newValue
+            if itemCount > labelCount {
+                var rowToScroll = Int(newValue)
 
-            if selectedRow != -1 && itemCount > 0 && itemCount > labelCount {
-                if newIndex > selectedRow && (Int(newIndex) - selectedRow) > 1 {
-                    lastVisibleRow = min(newIndex + UInt(labelCount) - 1, itemCount - 1)
+                if selectedRow != -1 && itemCount > 0 {
+                    let firstVisibleRow = tableView.row(at: scrollView.documentVisibleRect.origin)
+                    // If it's not single row movement, trigger forward page switching.
+                    if newValue > selectedRow && (Int(newValue) - selectedRow) > 1 {
+                        let lastVisibleRow = firstVisibleRow + labelCount - 1
+                        rowToScroll = min(lastVisibleRow + labelCount, Int(itemCount) - 1)
+                    }
+                    // If it's not single row movement, trigger backward page switching.
+                    if newValue < selectedRow && (selectedRow - Int(newValue)) > 1 {
+                        rowToScroll = max(0, firstVisibleRow - labelCount)
+                    }
                 }
-                // no need to handle the backward case: (newIndex < selectedRow && selectedRow - newIndex > 1)
-            }
 
-            if itemCount > labelCount && lastVisibleRow != UInt.max {
-                tableView.scrollRowToVisible(Int(lastVisibleRow))
+                if rowToScroll < Int.max {
+                    tableView.scrollRowToVisible(rowToScroll)
+                }
             }
-            tableView.selectRowIndexes(
-                IndexSet(integer: Int(newIndex)), byExtendingSelection: false)
+            tableView.selectRowIndexes(IndexSet(integer: Int(newValue)), byExtendingSelection: false)
+
+            // Note: When the selection changes, we need to notify accessibility.
+            if selectedCandidateIndex < tableView.children.count {
+                let child = tableView.children[Int(selectedCandidateIndex)]
+                NSAccessibility.post(element: child, notification: .focusedUIElementChanged)
+                NSAccessibility.post(element: tableView, notification: .selectedChildrenChanged)
+            }
         }
     }
 
@@ -327,31 +411,34 @@ public class VerticalCandidateController: CandidateController {
     @objc func boundsChange() {
         let visibleRect = tableView.visibleRect
         let visibleRowIndexes = tableView.rows(in: visibleRect)
-        let selected = selectedCandidateIndex
 
-        if selected == UInt.max || visibleRowIndexes.contains(Int(selected)) == false {
-            keyLabelStripView.highlightedIndex = -1
-            keyLabelStripView.setNeedsDisplay(keyLabelStripView.frame)
-        }
+        // Hide the key label strip highlight during scrolling.
+        keyLabelStripView.highlightedIndex = -1
+        keyLabelStripView.setNeedsDisplay(keyLabelStripView.frame)
 
         scrollTimer?.invalidate()
-        scrollTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: false) { timer in
-            self.tableView.scrollRowToVisible(visibleRowIndexes.lowerBound)
+        scrollTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: false) { _ in
             self.scrollTimer?.invalidate()
             self.scrollTimer = nil
+
+            self.tableView.scrollRowToVisible(visibleRowIndexes.lowerBound)
+
+            let finalSelected = self.selectedCandidateIndex
+            if finalSelected != UInt.max, visibleRowIndexes.contains(Int(finalSelected)) {
+                // Reset the key label strip highlight after the scroll.
+                self.keyLabelStripView.highlightedIndex = Int(finalSelected) - visibleRowIndexes.location
+                self.keyLabelStripView.setNeedsDisplay(self.keyLabelStripView.frame)
+            }
         }
     }
 }
 
 extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegate {
-
-    public func numberOfRows(in tableView: NSTableView) -> Int {
+    public func numberOfRows(in _: NSTableView) -> Int {
         Int(delegate?.candidateCountForController(self) ?? 0)
     }
 
-    public func tableView(
-        _ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int
-    ) -> Any? {
+    public func tableView(_ tableView: NSTableView, objectValueFor _: NSTableColumn?, row: Int) -> Any? {
         guard let delegate = delegate else {
             return nil
         }
@@ -359,18 +446,15 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
         if row < delegate.candidateCountForController(self) {
             candidate = delegate.candidateController(self, candidateAtIndex: UInt(row))
         }
-        let attrString = NSAttributedString(
-            string: candidate,
-            attributes: [
-                .font: candidateFont,
-                .paragraphStyle: candidateTextParagraphStyle,
-            ])
+        let attrString = NSAttributedString(string: candidate, attributes: [
+            .font: candidateFont,
+            .paragraphStyle: candidateTextParagraphStyle,
+        ])
 
         // we do more work than what this method is expected to; normally not a good practice, but for the amount of data (9 to 10 rows max), we can afford the overhead
 
         // expand the window width if text overflows
-        let boundingRect = attrString.boundingRect(
-            with: NSSize(width: 10240.0, height: 10240.0), options: .usesLineFragmentOrigin)
+        let boundingRect = attrString.boundingRect(with: NSSize(width: 10240.0, height: 10240.0), options: .usesLineFragmentOrigin)
         let textWidth = boundingRect.size.width + candidateTextPadding
         if textWidth > maxCandidateAttrStringWidth {
             maxCandidateAttrStringWidth = textWidth
@@ -384,9 +468,8 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
         if selectedRow != -1 {
             var newHilightIndex = 0
 
-            if keyLabelStripView.highlightedIndex != -1
-                && (row >= selectedRow + Int(count)
-                    || (selectedRow > count && row <= selectedRow - Int(count)))
+            if keyLabelStripView.highlightedIndex != -1,
+               row >= selectedRow + Int(count) || (selectedRow > count && row <= selectedRow - Int(count))
             {
                 newHilightIndex = -1
             } else {
@@ -397,16 +480,15 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
                 }
             }
 
-            if newHilightIndex != keyLabelStripView.highlightedIndex && newHilightIndex >= 0 {
+            if newHilightIndex != keyLabelStripView.highlightedIndex, newHilightIndex >= 0 {
                 keyLabelStripView.highlightedIndex = newHilightIndex
                 keyLabelStripView.setNeedsDisplay(keyLabelStripView.frame)
             }
-
         }
         return attrString
     }
 
-    public func tableViewSelectionDidChange(_ notification: Notification) {
+    public func tableViewSelectionDidChange(_: Notification) {
         let selectedRow = tableView.selectedRow
         if selectedRow != -1 {
             // keep track of the highlighted index in the key label strip
@@ -422,7 +504,7 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
         }
     }
 
-    @objc func rowDoubleClicked(_ sender: Any) {
+    @objc func rowDoubleClicked(_: Any) {
         let clickedRow = tableView.clickedRow
         if clickedRow != -1 {
             delegate?.candidateController(self, didSelectCandidateAtIndex: UInt(clickedRow))
@@ -435,7 +517,7 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
         }
         let labelCount = UInt(keyLabels.count)
         let itemCount = delegate.candidateCountForController(self)
-        if 0 == itemCount {
+        if itemCount == 0 {
             return false
         }
         if itemCount <= labelCount {
@@ -468,7 +550,7 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
             return false
         }
         let itemCount = delegate.candidateCountForController(self)
-        if 0 == itemCount {
+        if itemCount == 0 {
             return false
         }
         var newIndex = selectedCandidateIndex
@@ -482,7 +564,7 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
             }
             newIndex += 1
         } else {
-            if 0 == newIndex {
+            if newIndex == 0 {
                 return false
             }
             newIndex -= 1
@@ -502,7 +584,7 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
             return
         }
         let count = delegate.candidateCountForController(self)
-        if 0 == count {
+        if count == 0 {
             return
         }
 
@@ -514,7 +596,7 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
             let size = tooltipView.intrinsicContentSize
             tooltipWidth = size.width + tooltipPadding * 2
             tooltipHeight = size.height + tooltipPadding * 2
-            self.window?.contentView?.addSubview(tooltipView)
+            window?.contentView?.addSubview(tooltipView)
         } else {
             tooltipView.removeFromSuperview()
         }
@@ -530,16 +612,13 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
             scrollView.hasVerticalScroller = false
         } else {
             scrollView.hasVerticalScroller = true
-            scrollerWidth = NSScroller.scrollerWidth(
-                for: .regular, scrollerStyle: NSScroller.preferredScrollerStyle)
+            scrollerWidth = NSScroller.scrollerWidth(for: .regular, scrollerStyle: NSScroller.preferredScrollerStyle)
         }
 
         keyLabelStripView.keyLabelFont = keyLabelFont
-        let actualKeyLabels = keyLabels[0..<Int(keyLabelCount)].map { $0.displayedText }
+        let actualKeyLabels = keyLabels[0 ..< Int(keyLabelCount)].map { $0.displayedText }
         keyLabelStripView.keyLabels = actualKeyLabels
-        keyLabelStripView.labelOffsetY =
-            (keyLabelFontSize >= candidateFontSize)
-            ? 0.0 : floor((candidateFontSize - keyLabelFontSize) / 2.0)
+        keyLabelStripView.labelOffsetY = (keyLabelFontSize >= candidateFontSize) ? 0.0 : floor((candidateFontSize - keyLabelFontSize) / 2.0)
 
         let rowHeight = ceil(fontSize * 1.25)
         tableView.rowHeight = rowHeight
@@ -549,8 +628,7 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
         let boundingBox = NSSize(width: 1600.0, height: 1600.0)
 
         for label in actualKeyLabels {
-            let rect = (label as NSString).boundingRect(
-                with: boundingBox, options: .usesLineFragmentOrigin, attributes: textAttr)
+            let rect = (label as NSString).boundingRect(with: boundingBox, options: .usesLineFragmentOrigin, attributes: textAttr)
             maxKeyLabelWidth = max(rect.size.width, maxKeyLabelWidth)
         }
 
@@ -560,24 +638,24 @@ extension VerticalCandidateController: NSTableViewDataSource, NSTableViewDelegat
         let windowWidth = max(stripWidth + 1.0 + tableViewStartWidth, tooltipWidth)
         let windowHeight = CGFloat(keyLabelCount) * (rowHeight + rowSpacing) + tooltipHeight
 
-        var frameRect = self.window?.frame ?? NSRect.zero
-        let topLeftPoint = NSMakePoint(
-            frameRect.origin.x, frameRect.origin.y + frameRect.size.height)
+        var frameRect = window?.frame ?? NSRect.zero
+        let topLeftPoint = NSMakePoint(frameRect.origin.x, frameRect.origin.y + frameRect.size.height)
 
         frameRect.size = NSMakeSize(windowWidth, windowHeight)
         frameRect.origin = NSMakePoint(topLeftPoint.x, topLeftPoint.y - frameRect.size.height)
 
-        keyLabelStripView.frame = NSRect(
-            x: 0.0, y: 0, width: stripWidth, height: windowHeight - tooltipHeight)
-        scrollView.frame = NSRect(
-            x: stripWidth + 1.0, y: 0, width: (windowWidth - stripWidth - 1),
-            height: windowHeight - tooltipHeight)
-        tooltipView.frame = NSRect(
-            x: tooltipPadding, y: windowHeight - tooltipHeight + tooltipPadding, width: windowWidth,
-            height: tooltipHeight)
-        self.window?.setFrame(frameRect, display: false)
+        keyLabelStripView.frame = NSRect(x: 0.0, y: 0, width: stripWidth, height: windowHeight - tooltipHeight)
+        scrollView.frame = NSRect(x: stripWidth + 1.0, y: 0, width: windowWidth - stripWidth - 1, height: windowHeight - tooltipHeight)
+        tooltipView.frame = NSRect(x: tooltipPadding, y: windowHeight - tooltipHeight + tooltipPadding, width: windowWidth, height: tooltipHeight)
+        window?.setFrame(frameRect, display: false)
     }
+}
 
+extension VerticalCandidateController: VerticalCandidateTableViewDelegate {
+    fileprivate func view(_ view: VerticalCandidateTableView, didRequestExplanationFor candidate: String) -> String? {
+        delegate?
+            .candidateController(self,requestExplanationFor: candidate)
+    }
 }
 
 extension NSImage {
@@ -590,7 +668,6 @@ extension NSImage {
 
         image.capInsets = NSEdgeInsets(top: radius, left: radius, bottom: radius, right: radius)
         image.resizingMode = .stretch
-
         return image
     }
 }

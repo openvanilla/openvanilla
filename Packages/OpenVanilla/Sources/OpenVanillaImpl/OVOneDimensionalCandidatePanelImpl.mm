@@ -27,6 +27,7 @@
 
 #import "OVOneDimensionalCandidatePanelImpl.h"
 @import CandidateUI;
+@import SystemCharacterInfo;
 
 using namespace OpenVanilla;
 
@@ -65,6 +66,7 @@ static bool IsKeyInList(const OVKey* key, OVKeyVector list, size_t* outIndex = 0
     OVCandidateListImpl *_candidateList;
 }
 
+@property (strong) SystemCharacterInfo * systemCharacterInfo;
 - (instancetype)initWithCandidateList:(OVCandidateListImpl *)candidateList;
 @end
 
@@ -75,6 +77,7 @@ static bool IsKeyInList(const OVKey* key, OVKeyVector list, size_t* outIndex = 0
     self = [super init];
     if (self) {
         _candidateList = candidateList;
+        self.systemCharacterInfo = [[SystemCharacterInfo alloc] init];
     }
     return self;
 }
@@ -95,6 +98,12 @@ static bool IsKeyInList(const OVKey* key, OVKeyVector list, size_t* outIndex = 0
             OVOneDimensionalCandidatePanelImplSelectedCandidateIndexKey: @((NSUInteger)index)};
     [[NSNotificationCenter defaultCenter] postNotificationName:OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification object:controller userInfo:dict];
 }
+
+- (NSString *)candidateController:(VTCandidateController *)controller requestExplanationFor:(NSString *)candidate
+{
+    return [self.systemCharacterInfo getExplanationWithString:candidate];
+}
+
 @end
 
 
