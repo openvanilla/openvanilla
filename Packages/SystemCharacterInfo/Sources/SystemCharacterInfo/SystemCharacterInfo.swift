@@ -94,7 +94,6 @@ private let path = "/System/Library/PrivateFrameworks/CoreChineseEngine.framewor
         func getSingleExplanation(string: String) -> String? {
             do {
                 let result = try read(string: string)
-//                NSLog("any? \(result)")
                 if let sample = result.traditionalExample ?? result.simplifiedExample {
                     return "「\(sample)」的「\(string)」"
                 }
@@ -102,14 +101,12 @@ private let path = "/System/Library/PrivateFrameworks/CoreChineseEngine.framewor
                     return "「\(components)」組成的「\(string)」"
                 }
             } catch {
-//                print(error)
             }
             return nil
         }
         var results: [String] = []
         for char in string {
             let result = getSingleExplanation(string: String(char)) ?? string
-            NSLog(result)
             results.append(result)
         }
         NSLog("results?? \(results)")
