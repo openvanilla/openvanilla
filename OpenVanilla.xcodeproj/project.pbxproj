@@ -195,6 +195,7 @@
 		D49AEE122D87181C008DCAD9 /* CinDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinDownloader.swift; sourceTree = "<group>"; };
 		D49AEE132D87181C008DCAD9 /* CinInstallerWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinInstallerWindowController.swift; sourceTree = "<group>"; };
 		D49B8EB52D773BE500D56D75 /* CinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinManager.swift; sourceTree = "<group>"; };
+		D4BEDA502E6C38A800565677 /* SystemCharacterInfo */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SystemCharacterInfo; path = Packages/SystemCharacterInfo; sourceTree = "<group>"; };
 		D4C466A32D76069C0018173E /* InputMenuPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMenuPreferencesViewController.swift; sourceTree = "<group>"; };
 		D4D711EE2D297E590084BB8E /* array-phrase.cin */ = {isa = PBXFileReference; lastKnownFileType = text; path = "array-phrase.cin"; sourceTree = "<group>"; };
 		D4F50BBA2B28898D00C6C364 /* OpenVanilla-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanilla-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -387,6 +388,7 @@
 		D43066672B5A08C7000639F3 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				D4BEDA502E6C38A800565677 /* SystemCharacterInfo */,
 				D43066852B5A09E9000639F3 /* VXHanConvert */,
 				D430666A2B5A08E6000639F3 /* InputSourceHelper */,
 				D43066682B5A08DE000639F3 /* OpenVanilla */,
@@ -463,10 +465,7 @@
 			);
 			dependencies = (
 				D430666E2B5A0915000639F3 /* PBXTargetDependency */,
-				D43066702B5A0915000639F3 /* PBXTargetDependency */,
 				D43066722B5A0915000639F3 /* PBXTargetDependency */,
-				D43066742B5A0915000639F3 /* PBXTargetDependency */,
-				D43066762B5A0915000639F3 /* PBXTargetDependency */,
 			);
 			name = OpenVanilla;
 			packageProductDependencies = (
@@ -622,21 +621,9 @@
 			isa = PBXTargetDependency;
 			productRef = D430666D2B5A0915000639F3 /* InputSourceHelper */;
 		};
-		D43066702B5A0915000639F3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = D430666F2B5A0915000639F3 /* VXHanConvert */;
-		};
 		D43066722B5A0915000639F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = D43066712B5A0915000639F3 /* OpenVanilla */;
-		};
-		D43066742B5A0915000639F3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = D43066732B5A0915000639F3 /* CandidateUI */;
-		};
-		D43066762B5A0915000639F3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = D43066752B5A0915000639F3 /* TooltipUI */;
 		};
 		D43066822B5A0946000639F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -960,21 +947,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = InputSourceHelper;
 		};
-		D430666F2B5A0915000639F3 /* VXHanConvert */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = VXHanConvert;
-		};
 		D43066712B5A0915000639F3 /* OpenVanilla */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OpenVanilla;
-		};
-		D43066732B5A0915000639F3 /* CandidateUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CandidateUI;
-		};
-		D43066752B5A0915000639F3 /* TooltipUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = TooltipUI;
 		};
 		D43066772B5A0921000639F3 /* CandidateUI */ = {
 			isa = XCSwiftPackageProductDependency;

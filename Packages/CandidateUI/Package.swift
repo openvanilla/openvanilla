@@ -1,15 +1,16 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "CandidateUI",
-    platforms: [.macOS(.v10_10)],
+    platforms: [.macOS(.v10_13)],
     products: [
         .library(
             name: "CandidateUI",
-            targets: ["CandidateUI"]),
+            targets: ["CandidateUI"]
+        ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -20,10 +21,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "CandidateUI",
-            dependencies: []),
+            dependencies: []
+        ),
         .testTarget(
             name: "CandidateUITests",
-            dependencies: ["CandidateUI"]),
-
+            dependencies: ["CandidateUI"]
+        ),
     ]
 )
