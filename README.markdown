@@ -64,7 +64,7 @@ OpenVanilla 的歷來版本都可從[GitHub 的釋出版本頁面](https://githu
 
 - 注音輸入法（自動選字注音及傳統注音）：請下載[小麥注音](http://mcbopomofo.openvanilla.org)
 - 藏文輸入法：macOS 已經內建
-- POJ: 請使用[信望愛台語客語輸入法](http://taigi.fhl.net/TaigiIME/)或[教育部臺灣閩南語漢字輸入法](https://language.moe.gov.tw/result.aspx?classify_sn=23&subclassify_sn=442&content_sn=28)；這些輸入法都有 Mac 版本。另外也可以參考於 RIME 的[萌台語](https://github.com/whyjz/rime-moetaigi)輸入法
+- POJ: 請使用[信望愛台語客語輸入法](http://taigi.fhl.net/TaigiIME/)或[教育部臺灣閩南語漢字輸入法](https://language.moe.gov.tw/result.aspx?classify_sn=23&subclassify_sn=442&content_sn=28)；這些輸入法都有 Mac 版本。另外也可以參考基於 RIME 的[萌台語](https://github.com/whyjz/rime-moetaigi)輸入法
 
 另外，嘸蝦米輸入法的使用者，請前往[嘸蝦米官方網站](http://boshiamy.com)取得 Mac 版本。
 
@@ -101,4 +101,4 @@ OpenVanilla 的 [Google Groups 線上論壇](https://groups.google.com/forum/?fr
 您如果想要基於 OpenVanilla，開發新的 macOS 上的輸入方案，在您從 OpenVanilla 的程式碼建立新的開發分支的時候，請注意以下事項：
 
 1. 修改 Info.plist 裡面的 `CFBundleIdentifier`、`CFBundleName`、`InputMethodConnectionName`，避免與 OpenVanilla 本身衝突。如果您沒有修改這些設定，那麼，在同一台 macOS 主機上，同時安裝了 OpenVanilla 與您自己修改過的輸入法軟體，可能會導致系統無法正確辨識輸入法，造成無法使用、甚至無法安裝的情況。
-2. OpenVanilla 內建一套版本更新機制，方便用戶升級到最新的版本。在您基於 OpenVanilla 開發新的輸入法軟體的時候，請務必移除這個版本更新機制，避免您的輸入法軟體誤用 OpenVanilla 的版本更新機制。
+2. OpenVanilla 內建一套版本更新機制，方便用戶升級到最新的版本。在您基於 OpenVanilla 開發新的輸入法軟體的時候，請務必移除這個版本更新機制，避免您的輸入法軟體誤用 OpenVanilla 的版本更新機制。請參考 `UpdateChecker` 的相關程式碼。
