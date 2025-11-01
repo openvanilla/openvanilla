@@ -48,7 +48,7 @@ OpenVanilla 的歷來版本都可從[GitHub 的釋出版本頁面](https://githu
 
 （註：粵拼自 OpenVanilla 1.3.0 開始內建，同時內建有調號及無調號兩種版本。）
 
-在 Chinese OPen Desktop 專案中，也提供許多可以使用的[輸入法表格](https://github.com/chinese-opendesktop/cin-tables)。
+在 Chinese Open Desktop 專案中，也提供許多可以使用的[輸入法表格](https://github.com/chinese-opendesktop/cin-tables)。
 
 ### Q: 如何匯入輸入法表格？
 
