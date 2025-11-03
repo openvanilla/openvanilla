@@ -40,13 +40,15 @@ macOS 10.15 Catalina 或更高版本。
 
 ### Q: 舊版安裝程式要去哪邊找？
 
-OpenVanilla 的歷來版本都可從[GitHub的釋出版本頁面](https://github.com/openvanilla/openvanilla/releases)找到。要注意的是，1.0 之前的舊版，由於年代久遠，不保證能在現在的 macOS 上正確安裝，請參閱各版本的釋出說明。
+OpenVanilla 的歷來版本都可從[GitHub 的釋出版本頁面](https://github.com/openvanilla/openvanilla/releases)找到。要注意的是，1.0 之前的舊版，由於年代久遠，不保證能在現在的 macOS 上正確安裝，請參閱各版本的釋出說明。
 
 ### Q: 如何取得其他輸入法表格？
 
 常用的輸入法表格可從 OpenVanilla 的[原始碼網站](https://github.com/lukhnos/openvanilla/tree/master/DataTables)下載，例如[大字集的倉頡](https://raw.github.com/lukhnos/openvanilla/master/DataTables/cj-ext.cin)、[粵語拼音](https://raw.github.com/lukhnos/openvanilla/master/DataTables/jyutping.cin)、[電信碼](https://raw.github.com/lukhnos/openvanilla/master/DataTables/telecode.cin)、[五筆](https://raw.github.com/lukhnos/openvanilla/master/DataTables/wubizixing.cin)等。
 
 （註：粵拼自 OpenVanilla 1.3.0 開始內建，同時內建有調號及無調號兩種版本。）
+
+在 Chinese Open Desktop 專案中，也提供許多可以使用的[輸入法表格](https://github.com/chinese-opendesktop/cin-tables)。
 
 ### Q: 如何匯入輸入法表格？
 
@@ -60,9 +62,9 @@ OpenVanilla 的歷來版本都可從[GitHub的釋出版本頁面](https://github
 
 以下是一些 OpenVanilla 過去支援，從 1.0 開始不再提供的輸入法，以及替代方案：
 
-* 注音輸入法（自動選字注音及傳統注音）：請下載[小麥注音](http://mcbopomofo.openvanilla.org)
-* 藏文輸入法：macOS 已經內建
-* POJ: 請使用[意傳台文輸入法](https://sujiphuat.ithuan.tw/)、[信望愛台語客語輸入法](http://taigi.fhl.net/TaigiIME/)或[教育部臺灣閩南語漢字輸入法](https://language.moe.gov.tw/result.aspx?classify_sn=23&subclassify_sn=442&content_sn=28)；這三套輸入法都有 Mac 版本
+- 注音輸入法（自動選字注音及傳統注音）：請下載[小麥注音](http://mcbopomofo.openvanilla.org)
+- 藏文輸入法：macOS 已經內建
+- POJ: 請使用[信望愛台語客語輸入法](http://taigi.fhl.net/TaigiIME/)或[教育部臺灣閩南語漢字輸入法](https://language.moe.gov.tw/result.aspx?classify_sn=23&subclassify_sn=442&content_sn=28)；這些輸入法都有 Mac 版本。另外也可以參考基於 RIME 的[萌台語](https://github.com/whyjz/rime-moetaigi)輸入法
 
 另外，嘸蝦米輸入法的使用者，請前往[嘸蝦米官方網站](http://boshiamy.com)取得 Mac 版本。
 
@@ -84,7 +86,7 @@ OpenVanilla 是開放原始碼的計畫，歡迎從 [GitHub](https://github.com/
 
 ### Q: 為什麼叫 OpenVanilla?
 
-OpenVanilla 的前身是一個名叫 VanillaInput 的輸入法軟體，原先 (2004年時) 設計來取代 macOS 內建的傳統注音。
+OpenVanilla 的前身是一個名叫 VanillaInput 的輸入法軟體，原先 (2004 年時) 設計來取代 macOS 內建的傳統注音。
 
 由於 macOS 內建的倉頡輸入法當時有許多與習慣不合處，VanillaInput 後來加入了倉頡輸入法。之後幾個朋友一起擴充了這個架構，變成可以用來開發新輸入法的軟體專案。
 
@@ -93,3 +95,10 @@ OpenVanilla 的前身是一個名叫 VanillaInput 的輸入法軟體，原先 (2
 ### Q: 有使用上的問題，要去哪裡問？
 
 OpenVanilla 的 [Google Groups 線上論壇](https://groups.google.com/forum/?fromgroups/openvanilla#!forum/openvanilla)。
+
+### Q: 如果要基於 OpenVanilla 開發新的輸入法，有什麼要注意的地方？
+
+您如果想要基於 OpenVanilla，開發新的 macOS 上的輸入方案，在您從 OpenVanilla 的程式碼建立新的開發分支的時候，請注意以下事項：
+
+1. 修改 Info.plist 裡面的 `CFBundleIdentifier`、`CFBundleName`、`InputMethodConnectionName`，避免與 OpenVanilla 本身衝突。如果您沒有修改這些設定，那麼，在同一台 macOS 主機上，同時安裝了 OpenVanilla 與您自己修改過的輸入法軟體，可能會導致系統無法正確辨識輸入法，造成無法使用、甚至無法安裝的情況。
+2. OpenVanilla 內建一套版本更新機制，方便用戶升級到最新的版本。在您基於 OpenVanilla 開發新的輸入法軟體的時候，請務必移除這個版本更新機制，避免您的輸入法軟體誤用 OpenVanilla 的版本更新機制。請參考 `UpdateChecker` 的相關程式碼。
