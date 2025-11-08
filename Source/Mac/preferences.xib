@@ -821,7 +821,7 @@
         </customView>
         <viewController id="Mre-5P-U9h" customClass="OVAdvancedPreferencesViewController">
             <connections>
-                <outlet property="view" destination="xTn-B8-G3g" id="usc-3v-a9V"/>
+                <outlet property="view" destination="tR9-8a-TdG" id="Neo-iD-6d3"/>
             </connections>
         </viewController>
         <userDefaultsController representsSharedInstance="YES" id="zpU-PS-fKW"/>
