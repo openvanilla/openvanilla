@@ -154,3 +154,7 @@
 "Failed to download." = "下載失敗";
 "Failed to load tables." = "載入表格失敗";
 "Download from Chinese Open Desktop" = "從 Chinese Open Desktop 下載";
+"Advanced" = "進階設定";
+"Create System Report" = "產生系統報告";
+"You can create a system report and attach it when filing an issue, so the developers can help you better." = "當您在回報問題的時候，有時您可以提供一份系統報告，可以讓開發團隊更了解您的問題。";
+

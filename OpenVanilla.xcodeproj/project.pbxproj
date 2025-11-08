@@ -41,6 +41,7 @@
 		D409578F2EBF06B000FA0331 /* ReportGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D409578E2EBF06A700FA0331 /* ReportGenerator.swift */; };
 		D40957912EBF071200FA0331 /* InfoCollector in Frameworks */ = {isa = PBXBuildFile; productRef = D40957902EBF071200FA0331 /* InfoCollector */; };
 		D40957A42EBF0C8800FA0331 /* PreferencesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40957A32EBF0C8800FA0331 /* PreferencesHelper.swift */; };
+		D40957AA2EBF21F700FA0331 /* AdvancedPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40957A92EBF21EE00FA0331 /* AdvancedPreferencesViewController.swift */; };
 		D40E28FF2B31D17D00EBD97C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E28FE2B31D17D00EBD97C /* main.swift */; };
 		D40E29062B31D28500EBD97C /* ArchiveUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E29042B31D28500EBD97C /* ArchiveUtil.swift */; };
 		D40E29072B31D28500EBD97C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E29052B31D28500EBD97C /* AppDelegate.swift */; };
@@ -187,6 +188,7 @@
 		D409578E2EBF06A700FA0331 /* ReportGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportGenerator.swift; sourceTree = "<group>"; };
 		D40957962EBF088500FA0331 /* OpenVanillaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenVanillaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D40957A32EBF0C8800FA0331 /* PreferencesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesHelper.swift; sourceTree = "<group>"; };
+		D40957A92EBF21EE00FA0331 /* AdvancedPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedPreferencesViewController.swift; sourceTree = "<group>"; };
 		D40E28FE2B31D17D00EBD97C /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D40E29032B31D28400EBD97C /* OpenVanillaInstaller-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanillaInstaller-Bridging-Header.h"; sourceTree = "<group>"; };
 		D40E29042B31D28500EBD97C /* ArchiveUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveUtil.swift; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				D449C6362B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift */,
 				D414E3032B2A2624001863EF /* AddTableBasedInputMethodViewController.swift */,
 				D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */,
+				D40957A92EBF21EE00FA0331 /* AdvancedPreferencesViewController.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				D449C6412B3009DC0060653A /* BaseModulePreferencesViewController.swift in Sources */,
 				D414E3042B2A2624001863EF /* AddTableBasedInputMethodViewController.swift in Sources */,
 				D40E28FF2B31D17D00EBD97C /* main.swift in Sources */,
+				D40957AA2EBF21F700FA0331 /* AdvancedPreferencesViewController.swift in Sources */,
 				D4C466A42D7606D40018173E /* InputMenuPreferencesViewController.swift in Sources */,
 				D409578F2EBF06B000FA0331 /* ReportGenerator.swift in Sources */,
 				D49AEE142D87181C008DCAD9 /* CinInstallerWindowController.swift in Sources */,

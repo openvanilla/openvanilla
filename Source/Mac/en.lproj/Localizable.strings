@@ -185,3 +185,6 @@
 "Failed to download." = "Failed to download.";
 "Failed to load tables." = "Failed to load tables.";
 "Download from Chinese Open Desktop" = "Download from Chinese Open Desktop";
+"Advanced" = "Advanced";
+"Create System Report" = "Create System Report";
+"You can create a system report and attach it when filing an issue, so the developers can help you better." = "You can create a system report and attach it when filing an issue, so the developers can help you better.";
