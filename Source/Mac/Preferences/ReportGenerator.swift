@@ -24,6 +24,7 @@
 
 import InfoCollector
 import ModuleManager
+import OpenVanillaImpl
 
 private class OpenVanillaPreferenceCollector {
     static func genreate() -> String {
@@ -61,6 +62,12 @@ private class OpenVanillaPreferenceCollector {
         report += "- Traditional to Simpified Chinese Filter Enabled: " + (OVModuleManager.default.traditionalToSimplifiedChineseFilterEnabled ? "Y" : "N") + "\n"
         report += "- Simpified to Traditional Chinese Filter Enabled: " + (OVModuleManager.default.simplifiedToTraditionalChineseFilterEnabled ? "Y" : "N") + "\n"
         report += "- Associaed Phrase Around Filter Enabled: " + (OVModuleManager.default.associatedPhrasesAroundFilterEnabled ? "Y" : "N") + "\n"
+
+        let userDefaults = UserDefaults.standard
+        report += "- Candidate List Text Size: \(userDefaults.integer(forKey: OVCandidateListTextSizeKey))\n"
+        report += "- Candidate List Style Name: \(userDefaults.string(forKey: OVCandidateListStyleNameKey))\n"
+        report += "- Failback to Alphanumeric Keyboard Layout on Shift: \(userDefaults.bool(forKey: OVFallbackToAlphanumericKeyboardLayoutOnShiftKey) ? "Y" : "N")" + "\n"
+        report += "- Make Sound Feedback on Input Error: \(userDefaults.bool(forKey: OVMakeSoundFeedbackOnInputErrorKey) ? "Y" : "N")" + "\n"
         return report
     }
 }
