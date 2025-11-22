@@ -29,6 +29,7 @@ import ModuleManager
 private let kGeneralSettingIdentifier = "GeneralSettingIdentifier"
 private let kAssociatedPhrasesSettingIdentifier = "org.openvanilla.OVAFAssociatedPhrases"
 private let kAddInputMethodIdentifier = "AddInputMethodIdentifier"
+private let kAdvancedInputMethodIdentifier = "AdvancedInputMethodIdentifier"
 
 // Note: A workaround to suppresses no-selector warnings.
 private final class Dummy: NSObject {
@@ -177,7 +178,7 @@ class PreferencesWindowController: NSWindowController {
 
         items.append(
             (
-                kAddInputMethodIdentifier, NSLocalizedString("Advanced", comment: ""),
+                kAdvancedInputMethodIdentifier, NSLocalizedString("Advanced", comment: ""),
                 advancedPreferencesViewController
             ))
 
