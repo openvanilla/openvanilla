@@ -1,4 +1,4 @@
-// Copyright (c) 2004-2012 Lukhnos Liu (lukhnos at openvanilla dot org)
+// Copyright (c) 2025 and onwards The OpenVanilla Authors.
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation

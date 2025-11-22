@@ -1,4 +1,4 @@
-// Copyright (c) 2022 and onwards The McBopomofo Authors.
+// Copyright (c) 2025 and onwards The OpenVanilla Authors.
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -56,10 +56,10 @@ struct ActiveInputSourceListCollectorPlugin: InfoCollectorPlugin {
                     let name = getStringValue(src, kTISPropertyLocalizedName) ?? "<unknown>"
                     let sid = getStringValue(src, kTISPropertyInputSourceID) ?? ""
                     let category =
-                    getStringValue(
-                        src,
-                        kTISPropertyInputSourceCategory
-                    ) ?? ""
+                        getStringValue(
+                            src,
+                            kTISPropertyInputSourceCategory
+                        ) ?? ""
                     lines.append("  - \(name) (\(sid)) [\(category)]")
                 }
             }
