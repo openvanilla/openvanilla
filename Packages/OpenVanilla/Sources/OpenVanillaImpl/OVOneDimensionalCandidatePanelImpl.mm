@@ -25,6 +25,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
+@import AppKit;
 #import "OVOneDimensionalCandidatePanelImpl.h"
 @import CandidateUI;
 @import SystemCharacterInfo;
