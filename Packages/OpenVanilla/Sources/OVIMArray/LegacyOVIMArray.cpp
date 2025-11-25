@@ -295,13 +295,12 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
 
     if (isprint(key->code()) && key->isCapslock() && keyseq.length() == 0) {
         char cbuf[2];
-        if (key->isShift()) {
-            sprintf(cbuf, "%c", toupper(key->code()));
-        }
-        else {
-            sprintf(cbuf, "%c", tolower(key->code()));
-        }
-
+            if (key->isShift()) {
+                snprintf(cbuf, sizeof(cbuf), "%c", toupper(key->code()));
+            }
+            else {
+                snprintf(cbuf, sizeof(cbuf), "%c", tolower(key->code()));
+            }
         buf->append(cbuf)->send();
         return 1;
     }
@@ -497,16 +496,16 @@ int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path)
 		return 0;
 
     CFURLGetFileSystemRepresentation(url, TRUE, (UInt8*)buf, sizeof(buf) - 1);
-    sprintf(arraypath, "%s/", buf);
+    snprintf(arraypath, sizeof(arraypath), "%s/", buf);
 #else
-    // sprintf(arraypath, "%sOVIMArray%s", path, s->pathSeparator());
-    sprintf(arraypath, "%sArray%s", path, s->pathSeparator());
+    // snprintf(arraypath, sizeof(arraypath), "%sOVIMArray%s", path, s->pathSeparator());
+    snprintf(arraypath, sizeof(arraypath), "%sArray%s", path, s->pathSeparator());
 #endif
     printf("OVIMArray: data dir %s", arraypath);
 
     for (int i = 0; i < 4 ; i++) {
         OpenVanilla::OVCINDataTableParser parser;
-        sprintf(buf, cinfiles[i], arraypath);
+        snprintf(buf, sizeof(buf), cinfiles[i], arraypath);
         murmur("OVIMArray: open cin %s", buf);
         tabs[i] = parser.CINDataTableFromFileName(buf);
     }

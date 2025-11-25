@@ -30,67 +30,44 @@ import Foundation
 class BaseModulePreferencesViewController: BasePreferencesViewController {
 
     func boolValue(forKey key: String) -> Bool {
-        guard let moduleIdentifier = self.moduleIdentifier else {
+        guard let moduleIdentifier else {
             return false
         }
-        let value =
-            CFPreferencesCopyValue(
-                key as CFString, moduleIdentifier as CFString, kCFPreferencesCurrentUser,
-                kCFPreferencesAnyHost) as? Bool
-        return value ?? false
+        return PreferencesHelper.boolValue(moduleIdentifier: moduleIdentifier, forKey: key)
     }
 
     func setBoolValue(_ value: Bool, forKey key: String) {
-        guard let moduleIdentifier = self.moduleIdentifier else {
+        guard let moduleIdentifier else {
             return
         }
-        CFPreferencesSetValue(
-            key as CFString, value ? kCFBooleanTrue : kCFBooleanFalse, moduleIdentifier as CFString,
-            kCFPreferencesCurrentUser, kCFPreferencesAnyHost)
-        CFPreferencesSynchronize(
-            moduleIdentifier as CFString, kCFPreferencesCurrentUser, kCFPreferencesAnyHost)
+        PreferencesHelper.setBoolValue(moduleIdentifier: moduleIdentifier, value: value, forKey: key)
     }
 
     func stringValue(forKey key: String) -> String? {
-        guard let moduleIdentifier = self.moduleIdentifier else {
+        guard let moduleIdentifier else {
             return nil
         }
-        let value = CFPreferencesCopyValue(
-            key as CFString, moduleIdentifier as CFString, kCFPreferencesCurrentUser,
-            kCFPreferencesAnyHost)
-        return value as? String
+        return PreferencesHelper.stringValue(moduleIdentifier: moduleIdentifier, forKey: key)
     }
 
     func setStringValue(_ value: String, forKey key: String) {
-        guard let moduleIdentifier = self.moduleIdentifier else {
+        guard let moduleIdentifier else {
             return
         }
-        CFPreferencesSetValue(
-            key as CFString, value as CFString, moduleIdentifier as CFString,
-            kCFPreferencesCurrentUser, kCFPreferencesAnyHost)
-        CFPreferencesSynchronize(
-            moduleIdentifier as CFString, kCFPreferencesCurrentUser, kCFPreferencesAnyHost)
+        PreferencesHelper.setStringValue(moduleIdentifier: moduleIdentifier, value: value, forKey: key)
     }
 
     func unsignedIntegerValue(forKey key: String) -> UInt? {
         guard let moduleIdentifier = self.moduleIdentifier else {
             return nil
         }
-        let value =
-            CFPreferencesCopyValue(
-                key as CFString, moduleIdentifier as CFString, kCFPreferencesCurrentUser,
-                kCFPreferencesAnyHost) as? NSNumber
-        return value?.uintValue
+        return PreferencesHelper.unsignedIntegerValue(moduleIdentifier: moduleIdentifier, forKey: key)
     }
 
     func setUnsignedIntegerValue(_ value: UInt, forKey key: String) {
         guard let moduleIdentifier = self.moduleIdentifier else {
             return
         }
-        CFPreferencesSetValue(
-            key as CFString, NSNumber(value: value) as CFNumber, moduleIdentifier as CFString,
-            kCFPreferencesCurrentUser, kCFPreferencesAnyHost)
-        CFPreferencesSynchronize(
-            moduleIdentifier as CFString, kCFPreferencesCurrentUser, kCFPreferencesAnyHost)
+        PreferencesHelper.setUnsignedIntegerValue(moduleIdentifier: moduleIdentifier, value: value, forKey: key)
     }
 }

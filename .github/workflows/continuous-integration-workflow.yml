@@ -4,11 +4,11 @@ on: [push]
 jobs:
   build:
     name: Build
-    runs-on: macOS-13
+    runs-on: macOS-26
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: "^15.0.1"
+          xcode-version: "^26.0.1"
       - uses: actions/checkout@v1
       - name: Clean
         run: xcodebuild -scheme OpenVanilla -configuration Release clean

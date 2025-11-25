@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -39,6 +39,10 @@
 		6AD29A4D2ED4CA6000384421 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 6AD29A4B2ED4CA6000384421 /* Localizable.stringsdict */; };
 		6AECB188253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */; };
 		6AECB189253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */; };
+		D409578F2EBF06B000FA0331 /* ReportGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D409578E2EBF06A700FA0331 /* ReportGenerator.swift */; };
+		D40957912EBF071200FA0331 /* InfoCollector in Frameworks */ = {isa = PBXBuildFile; productRef = D40957902EBF071200FA0331 /* InfoCollector */; };
+		D40957A42EBF0C8800FA0331 /* PreferencesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40957A32EBF0C8800FA0331 /* PreferencesHelper.swift */; };
+		D40957AA2EBF21F700FA0331 /* AdvancedPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40957A92EBF21EE00FA0331 /* AdvancedPreferencesViewController.swift */; };
 		D40E28FF2B31D17D00EBD97C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E28FE2B31D17D00EBD97C /* main.swift */; };
 		D40E29062B31D28500EBD97C /* ArchiveUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E29042B31D28500EBD97C /* ArchiveUtil.swift */; };
 		D40E29072B31D28500EBD97C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E29052B31D28500EBD97C /* AppDelegate.swift */; };
@@ -71,6 +75,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		6A0E0AD71623EF95004FED10 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6ABBAEE715CD58F90080EE7D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6ABBAEEF15CD58F90080EE7D;
+			remoteInfo = OpenVanilla;
+		};
+		D409579A2EBF088500FA0331 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6ABBAEE715CD58F90080EE7D /* Project object */;
 			proxyType = 1;
@@ -177,6 +188,11 @@
 		6AD498A3163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6AD498A4163396FA005D5382 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
 		6AECB187253A6314008EB6E4 /* OpenVanilla.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = OpenVanilla.xcassets; path = Images/OpenVanilla.xcassets; sourceTree = SOURCE_ROOT; };
+		D409578D2EBF032100FA0331 /* InfoCollector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = InfoCollector; path = Packages/InfoCollector; sourceTree = "<group>"; };
+		D409578E2EBF06A700FA0331 /* ReportGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportGenerator.swift; sourceTree = "<group>"; };
+		D40957962EBF088500FA0331 /* OpenVanillaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenVanillaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D40957A32EBF0C8800FA0331 /* PreferencesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesHelper.swift; sourceTree = "<group>"; };
+		D40957A92EBF21EE00FA0331 /* AdvancedPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedPreferencesViewController.swift; sourceTree = "<group>"; };
 		D40E28FE2B31D17D00EBD97C /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D40E29032B31D28400EBD97C /* OpenVanillaInstaller-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenVanillaInstaller-Bridging-Header.h"; sourceTree = "<group>"; };
 		D40E29042B31D28500EBD97C /* ArchiveUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveUtil.swift; sourceTree = "<group>"; };
@@ -210,6 +226,10 @@
 		D4F50BC92B28A15400C6C364 /* NonModalAlertWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NonModalAlertWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D40957972EBF088500FA0331 /* OpenVanillaTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = OpenVanillaTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		6A0E0A9C1623EDA9004FED10 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -234,6 +254,14 @@
 				D43066782B5A0921000639F3 /* CandidateUI in Frameworks */,
 				D430667C2B5A0921000639F3 /* OpenVanilla in Frameworks */,
 				6ABBAF2A15CD61B60080EE7D /* InputMethodKit.framework in Frameworks */,
+				D40957912EBF071200FA0331 /* InfoCollector in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D40957932EBF088500FA0331 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +339,7 @@
 				6ACB49B315E49DF200380B82 /* DataTables */,
 				6ABBAEFA15CD58F90080EE7D /* InputMethod Application */,
 				6A0E0ABC1623EDF5004FED10 /* Installer */,
+				D40957972EBF088500FA0331 /* OpenVanillaTests */,
 				6ABBAEF315CD58F90080EE7D /* Frameworks */,
 				6ABBAEF115CD58F90080EE7D /* Products */,
 			);
@@ -321,6 +350,7 @@
 			children = (
 				6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */,
 				6A0E0A9F1623EDA9004FED10 /* OpenVanillaInstaller.app */,
+				D40957962EBF088500FA0331 /* OpenVanillaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -393,6 +423,7 @@
 		D43066672B5A08C7000639F3 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				D409578D2EBF032100FA0331 /* InfoCollector */,
 				D4BEDA502E6C38A800565677 /* SystemCharacterInfo */,
 				D43066852B5A09E9000639F3 /* VXHanConvert */,
 				D430666A2B5A08E6000639F3 /* InputSourceHelper */,
@@ -416,6 +447,8 @@
 		D4AF7DA72B3097430025DAAF /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				D40957A32EBF0C8800FA0331 /* PreferencesHelper.swift */,
+				D409578E2EBF06A700FA0331 /* ReportGenerator.swift */,
 				D4C466A32D76069C0018173E /* InputMenuPreferencesViewController.swift */,
 				D414E3012B29AFD1001863EF /* PreferencesWindowController.swift */,
 				D449C6422B300FB60060653A /* BasePreferencesViewController.swift */,
@@ -425,6 +458,7 @@
 				D449C6362B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift */,
 				D414E3032B2A2624001863EF /* AddTableBasedInputMethodViewController.swift */,
 				D449C63E2B2FFA260060653A /* GeneralPreferencesViewController.swift */,
+				D40957A92EBF21EE00FA0331 /* AdvancedPreferencesViewController.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -479,10 +513,34 @@
 				D430667B2B5A0921000639F3 /* OpenVanilla */,
 				D430667D2B5A0921000639F3 /* TooltipUI */,
 				D430667F2B5A0921000639F3 /* VXHanConvert */,
+				D40957902EBF071200FA0331 /* InfoCollector */,
 			);
 			productName = OpenVanilla;
 			productReference = 6ABBAEF015CD58F90080EE7D /* OpenVanilla.app */;
 			productType = "com.apple.product-type.application";
+		};
+		D40957952EBF088500FA0331 /* OpenVanillaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D409579C2EBF088500FA0331 /* Build configuration list for PBXNativeTarget "OpenVanillaTests" */;
+			buildPhases = (
+				D40957922EBF088500FA0331 /* Sources */,
+				D40957932EBF088500FA0331 /* Frameworks */,
+				D40957942EBF088500FA0331 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D409579B2EBF088500FA0331 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D40957972EBF088500FA0331 /* OpenVanillaTests */,
+			);
+			name = OpenVanillaTests;
+			packageProductDependencies = (
+			);
+			productName = OpenVanillaTests;
+			productReference = D40957962EBF088500FA0331 /* OpenVanillaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -492,6 +550,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = OV;
+				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = "The OpenVanilla Project";
 				TargetAttributes = {
@@ -500,6 +559,10 @@
 					};
 					6ABBAEEF15CD58F90080EE7D = {
 						LastSwiftMigration = 1500;
+					};
+					D40957952EBF088500FA0331 = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = 6ABBAEEF15CD58F90080EE7D;
 					};
 				};
 			};
@@ -522,6 +585,7 @@
 			targets = (
 				6ABBAEEF15CD58F90080EE7D /* OpenVanilla */,
 				6A0E0A9E1623EDA9004FED10 /* OpenVanillaInstaller */,
+				D40957952EBF088500FA0331 /* OpenVanillaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -554,6 +618,13 @@
 				D4F50BCB2B28A15400C6C364 /* NonModalAlertWindowController.xib in Resources */,
 				6AECB188253A6314008EB6E4 /* OpenVanilla.xcassets in Resources */,
 				6A30CB0616329CF400DC0755 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D40957942EBF088500FA0331 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,11 +668,14 @@
 				D49B8EB62D773BE800D56D75 /* CinManager.swift in Sources */,
 				6ACB49C315E49EA700380B82 /* OVInputMethodController.mm in Sources */,
 				D449C63F2B2FFA260060653A /* GeneralPreferencesViewController.swift in Sources */,
+				D40957A42EBF0C8800FA0331 /* PreferencesHelper.swift in Sources */,
 				D449C63D2B2FF0FC0060653A /* ArrayPreferencesViewController.swift in Sources */,
 				D449C6412B3009DC0060653A /* BaseModulePreferencesViewController.swift in Sources */,
 				D414E3042B2A2624001863EF /* AddTableBasedInputMethodViewController.swift in Sources */,
 				D40E28FF2B31D17D00EBD97C /* main.swift in Sources */,
+				D40957AA2EBF21F700FA0331 /* AdvancedPreferencesViewController.swift in Sources */,
 				D4C466A42D7606D40018173E /* InputMenuPreferencesViewController.swift in Sources */,
+				D409578F2EBF06B000FA0331 /* ReportGenerator.swift in Sources */,
 				D49AEE142D87181C008DCAD9 /* CinInstallerWindowController.swift in Sources */,
 				D49AEE152D87181C008DCAD9 /* CinDownloader.swift in Sources */,
 				D4F50BCA2B28A15400C6C364 /* NonModalAlertWindowController.swift in Sources */,
@@ -615,6 +689,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D40957922EBF088500FA0331 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -622,6 +703,11 @@
 			isa = PBXTargetDependency;
 			target = 6ABBAEEF15CD58F90080EE7D /* OpenVanilla */;
 			targetProxy = 6A0E0AD71623EF95004FED10 /* PBXContainerItemProxy */;
+		};
+		D409579B2EBF088500FA0331 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6ABBAEEF15CD58F90080EE7D /* OpenVanilla */;
+			targetProxy = D409579A2EBF088500FA0331 /* PBXContainerItemProxy */;
 		};
 		D430666E2B5A0915000639F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -882,6 +968,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/Mac/OpenVanilla-Prefix.pch";
 				INFOPLIST_FILE = "Source/Mac/OpenVanilla-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -911,6 +1002,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/Mac/OpenVanilla-Prefix.pch";
 				INFOPLIST_FILE = "Source/Mac/OpenVanilla-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -923,6 +1019,87 @@
 				SWIFT_OBJC_INTEROP_MODE = objcxx;
 				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D409579D2EBF088500FA0331 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.openvanilla.OpenVanillaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_INTEROP_MODE = objcxx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenVanilla.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OpenVanilla";
+			};
+			name = Debug;
+		};
+		D409579E2EBF088500FA0331 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.openvanilla.OpenVanillaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_INTEROP_MODE = objcxx;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenVanilla.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OpenVanilla";
 			};
 			name = Release;
 		};
@@ -956,9 +1133,22 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		D409579C2EBF088500FA0331 /* Build configuration list for PBXNativeTarget "OpenVanillaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D409579D2EBF088500FA0331 /* Debug */,
+				D409579E2EBF088500FA0331 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D40957902EBF071200FA0331 /* InfoCollector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = InfoCollector;
+		};
 		D430666D2B5A0915000639F3 /* InputSourceHelper */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = InputSourceHelper;

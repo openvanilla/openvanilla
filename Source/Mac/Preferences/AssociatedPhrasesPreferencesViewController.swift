@@ -70,7 +70,7 @@ class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewContr
         if let selectedIndex = selectedIndex {
             fieldSelectionKeys.addItems(withTitles: defaultSelectionKeys.map { $1 })
             fieldSelectionKeys.selectItem(at: selectedIndex)
-        } else  {
+        } else {
             var titles = defaultSelectionKeys.map { $1 }
             titles.append(selectionKeys)
             fieldSelectionKeys.addItems(withTitles: titles)
@@ -84,8 +84,9 @@ class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewContr
             unsignedIntegerValue(forKey: "UseSpaceAsFirstCandidateSelectionKey") ?? 0
 
         if useSpaceAsFirstCandidateSelectionKey != 0 {
-            fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: Int(
-                useSpaceAsFirstCandidateSelectionKey))
+            fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(
+                withTag: Int(
+                    useSpaceAsFirstCandidateSelectionKey))
             fieldSendFirstCandidateWithSpaceWithOnePageList.state = .off
         } else if boolValue(forKey: "SendFirstCandidateWithSpaceWithOnePageList") {
             fieldUseSpaceAsFirstCandidateSelectionKey.selectCell(withTag: 0)
@@ -114,8 +115,8 @@ class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewContr
         }
         let newSelectionKeys =
             (selectedIndex < defaultSelectionKeys.count)
-                ? defaultSelectionKeys[selectedIndex].0 :
-                (fieldSelectionKeys.selectedItem?.title ?? defaultSelectionKeys[0].0)
+            ? defaultSelectionKeys[selectedIndex].0
+            : (fieldSelectionKeys.selectedItem?.title ?? defaultSelectionKeys[0].0)
         setStringValue(newSelectionKeys, forKey: "SelectionKeys")
         setUnsignedIntegerValue(
             UInt(fieldUseSpaceAsFirstCandidateSelectionKey.selectedCell()?.tag ?? 0),

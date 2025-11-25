@@ -503,12 +503,13 @@ namespace OpenVanilla {
             #ifndef WIN32
             char *p = (char*)calloc(1, pattern.length() + 1);
             strcpy(p, pattern.c_str());
-            char *r = mktemp(p);
-            if (!r) {
+            int fd = mkstemp(p);
+            if (fd == -1) {
                 free(p);
                 return string();
-            }        
-            string result = r;
+            }
+            close(fd);
+            string result = p;
             free(p);
             return result;
             #else

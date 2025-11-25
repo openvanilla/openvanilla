@@ -29,6 +29,7 @@ import ModuleManager
 private let kGeneralSettingIdentifier = "GeneralSettingIdentifier"
 private let kAssociatedPhrasesSettingIdentifier = "org.openvanilla.OVAFAssociatedPhrases"
 private let kAddInputMethodIdentifier = "AddInputMethodIdentifier"
+private let kAdvancedInputMethodIdentifier = "AdvancedInputMethodIdentifier"
 
 // Note: A workaround to suppresses no-selector warnings.
 private final class Dummy: NSObject {
@@ -52,6 +53,7 @@ class PreferencesWindowController: NSWindowController {
     @IBOutlet weak var arrayModulePreferencesViewController: BasePreferencesViewController!
     @IBOutlet weak var addTableBasedInputMethodViewController: BasePreferencesViewController!
     @IBOutlet weak var inputMenuPreferencesViewController: InputMenuPreferencesViewController!
+    @IBOutlet weak var advancedPreferencesViewController: AdvancedPreferencesViewController!
 
     private var items: [PreferencesItem] = []
     private var localizableObjects: [NSValue: String] = [:]
@@ -109,6 +111,7 @@ class PreferencesWindowController: NSWindowController {
         ListTitlesInView(arrayModulePreferencesViewController.view)
         ListTitlesInView(addTableBasedInputMethodViewController.view)
         ListTitlesInView(inputMenuPreferencesViewController.view)
+        ListTitlesInView(advancedPreferencesViewController.view)
         updateLocalization()
     }
 
@@ -171,6 +174,12 @@ class PreferencesWindowController: NSWindowController {
             (
                 kAddInputMethodIdentifier, NSLocalizedString("Add New Input Method", comment: ""),
                 addTableBasedInputMethodViewController
+            ))
+
+        items.append(
+            (
+                kAdvancedInputMethodIdentifier, NSLocalizedString("Advanced", comment: ""),
+                advancedPreferencesViewController
             ))
 
         tableView.reloadData()

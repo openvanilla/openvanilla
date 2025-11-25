@@ -92,7 +92,7 @@ private:
 		char OV_USERDIR_PRE[MAX_PATH];
 
 		//GetWindowsDirectoryA(OV_BASEDIR_PRE, MAX_PATH - 14);
-		//sprintf(OV_BASEDIR_PRE, "%s\\%s", OV_BASEDIR_PRE, "OpenVanilla\\");
+		//snprintf(OV_BASEDIR_PRE, sizeof(OV_BASEDIR_PRE), "%s\\%s", OV_BASEDIR_PRE, "OpenVanilla\\");
 		strcpy(OV_BASEDIR_PRE, "C:\\OpenVanilla\\");
 
 		if (SHGetFolderPathA(
@@ -101,14 +101,14 @@ private:
 				NULL,
 				0,
 				OV_USERDIR_PRE) >= 0) {
-			sprintf(OV_USERDIR_PRE, "%s\\%s", OV_USERDIR_PRE, "OpenVanilla\\");
+			snprintf(OV_USERDIR_PRE, sizeof(OV_USERDIR_PRE), "%s\\%s", OV_USERDIR_PRE, "OpenVanilla\\");
 			if (_access (OV_USERDIR_PRE, 0))
 				CreateDirectoryA(OV_USERDIR_PRE, NULL);
 		} else
-			sprintf(OV_USERDIR_PRE, "%s\\%s", OV_BASEDIR_PRE, "User\\");
+			snprintf(OV_USERDIR_PRE, sizeof(OV_USERDIR_PRE), "%s\\%s", OV_BASEDIR_PRE, "User\\");
 
 		char OV_WIN32_DEBUG_LOG_PATH[MAX_PATH];
-		sprintf(OV_WIN32_DEBUG_LOG_PATH, "%s\\%s", OV_USERDIR_PRE, "orz.txt");
+		snprintf(OV_WIN32_DEBUG_LOG_PATH, sizeof(OV_WIN32_DEBUG_LOG_PATH), "%s\\%s", OV_USERDIR_PRE, "orz.txt");
 		//</comment>
 
 		FILE *fp;

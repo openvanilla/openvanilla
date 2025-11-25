@@ -60,7 +60,7 @@ void OVCandidateList::update(OVCandidate *textbar)
     
     for (int i=pos, j=0; i<bound; i++, j++)
     {
-        sprintf (buf, "%c.", selkey[j]);
+        snprintf(buf, sizeof(buf), "%c.", selkey[j]);
         textbar->append(buf)->
 			append(const_cast<char*>(list->at(i).c_str()))->
             append(" ");
@@ -71,7 +71,7 @@ void OVCandidateList::update(OVCandidate *textbar)
         int currentpage=(pos/perpage)+1;
     //  if (totalpage >1)
     //  {
-            sprintf (buf, "(%d/%d)", currentpage, totalpage);
+            snprintf(buf, sizeof(buf), "(%d/%d)", currentpage, totalpage);
             textbar->append(buf);
     //  }
     }

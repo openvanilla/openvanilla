@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24128" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24128"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="OVPreferencesWindowController">
             <connections>
                 <outlet property="addTableBasedInputMethodViewController" destination="168" id="175"/>
+                <outlet property="advancedPreferencesViewController" destination="Mre-5P-U9h" id="aKI-1l-L0M"/>
                 <outlet property="arrayModulePreferencesViewController" destination="167" id="YzL-Xb-GWO"/>
                 <outlet property="associatedPhrasesPreferencesViewController" destination="OTa-5M-Vdi" id="RaC-76-EEF"/>
                 <outlet property="generalPreferencesViewController" destination="70" id="74"/>
@@ -25,7 +26,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="121" y="123" width="640" height="364"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1049"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="364"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -498,6 +499,33 @@
                 <outlet property="view" destination="12" id="71"/>
             </connections>
         </viewController>
+        <customView id="tR9-8a-TdG">
+            <rect key="frame" x="0.0" y="0.0" width="440" height="364"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xTn-B8-G3g">
+                    <rect key="frame" x="20" y="320" width="160" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Create System Report" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ctA-hB-faW">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="generateReport:" target="Mre-5P-U9h" id="xea-ht-sDX"/>
+                    </connections>
+                </button>
+                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OHm-fb-ahk">
+                    <rect key="frame" x="18" y="269" width="404" height="43"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" title="You can create a system report and attach it when filing an issue, so the developers can help you better." id="4mx-DG-kRN">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <point key="canvasLocation" x="-200" y="862"/>
+        </customView>
         <viewController id="168" customClass="OVAddTableBasedInputMethodViewController">
             <connections>
                 <outlet property="cinInstallerWindowController" destination="tiW-BV-6lV" id="Nmq-1F-3fB"/>
@@ -780,7 +808,7 @@
                         </subviews>
                     </clipView>
                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Ian-aQ-T1Q">
-                        <rect key="frame" x="1" y="306" width="398" height="15"/>
+                        <rect key="frame" x="1" y="304" width="398" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="FLn-4Y-l3z">
@@ -791,12 +819,17 @@
             </subviews>
             <point key="canvasLocation" x="-853" y="-122"/>
         </customView>
+        <viewController id="Mre-5P-U9h" customClass="OVAdvancedPreferencesViewController">
+            <connections>
+                <outlet property="view" destination="tR9-8a-TdG" id="Neo-iD-6d3"/>
+            </connections>
+        </viewController>
         <userDefaultsController representsSharedInstance="YES" id="zpU-PS-fKW"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="NTP-DC-ymt">
             <windowStyleMask key="styleMask" titled="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="206" width="584" height="274"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1049"/>
             <value key="minSize" type="size" width="300" height="200"/>
             <value key="maxSize" type="size" width="800" height="500"/>
             <view key="contentView" id="JFf-DR-3gc">
@@ -850,7 +883,7 @@
                             </subviews>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="4X8-ZU-Pa2">
-                            <rect key="frame" x="1" y="197" width="583" height="15"/>
+                            <rect key="frame" x="1" y="195" width="583" height="17"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="c7T-RJ-DDd">
