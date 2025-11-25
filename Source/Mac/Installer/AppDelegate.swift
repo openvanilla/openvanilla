@@ -37,7 +37,7 @@ private let kTranslocationRemovalDeadline: TimeInterval = 60.0
 @NSApplicationMain
 @objc(AppDelegate)
 class AppDelegate: NSWindowController, NSApplicationDelegate {
-    @IBOutlet weak private var installButton: NSButton!
+    @IBOutlet weak private var actionButton: NSButton!
     @IBOutlet weak private var cancelButton: NSButton!
     @IBOutlet private var textView: NSTextView!
     @IBOutlet weak private var progressSheet: NSWindow!
@@ -50,6 +50,8 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
     private var upgrading = false
     private var translocationRemovalStartTime: Date?
     private var currentVersionNumber: Int = 0
+
+    private var installed = false
 
     func runAlertPanel(title: String, message: String, buttonTitle: String) {
         let alert = NSAlert()
@@ -69,9 +71,9 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
         self.archiveUtil = ArchiveUtil(appName: kTargetBin, targetAppBundleName: kTargetBundle)
         _ = archiveUtil?.validateIfNotarizedArchiveExists()
 
-        cancelButton.nextKeyView = installButton
-        installButton.nextKeyView = cancelButton
-        if let cell = installButton.cell as? NSButtonCell {
+        cancelButton.nextKeyView = actionButton
+        actionButton.nextKeyView = cancelButton
+        if let cell = actionButton.cell as? NSButtonCell {
             window?.defaultButtonCell = cell
         }
 
@@ -99,7 +101,7 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
         }
 
         if upgrading {
-            installButton.title = NSLocalizedString("Agree and Upgrade", comment: "")
+            actionButton.title = NSLocalizedString("Agree and Upgrade", comment: "")
         }
 
         window?.center()
@@ -108,13 +110,13 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
     }
 
     @IBAction func agreeAndInstallAction(_ sender: AnyObject) {
-        if !agreeText.isHidden {
+        if !installed {
             // user agreed to terms for install
             cancelButton.isEnabled = false
-            installButton.isEnabled = false
+            actionButton.isEnabled = false
             removeThenInstallInputMethod()
         } else {
-            // installation was successful, user clicked [Ok]
+            // installation was successful, user clicked the "Close Installer" button
             endAppWithDelay()
         }
     }
@@ -270,12 +272,16 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
                 message.append(NSAttributedString(string: "\n\n"))
                 message.append(details)
                 textView.textStorage?.setAttributedString(message)
-                
+
+                installed = true
+
                 welcomeText.isHidden = true
-                agreeText.isHidden = true
                 cancelButton.isHidden = true
-                installButton.title = NSLocalizedString("OK", comment: "")
-                installButton.isEnabled = true
+                actionButton.title = NSLocalizedString("Close Installer", comment: "")
+                actionButton.isEnabled = true
+
+                // System Settings now asks the user whether to activate the IME; auto-close the installer
+                scheduleAutoClose()
             }
         }
     }
@@ -294,5 +300,24 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
         NSApp.terminate(self)
     }
 
+    func updateAutoClosingMessage(seconds: Int) {
+        agreeText.stringValue = String.localizedStringWithFormat(
+            NSLocalizedString("The installer will close itself in %d second(s).", comment: ""),
+            seconds)
+    }
 
+    func scheduleAutoClose() {
+        var counter = 60
+        updateAutoClosingMessage(seconds: counter)
+
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+            counter -= 1
+            if counter == 0 {
+                timer.invalidate()
+                self?.endAppWithDelay()
+            } else {
+                self?.updateAutoClosingMessage(seconds: counter)
+            }
+        }
+    }
 }

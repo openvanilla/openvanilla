@@ -56,3 +56,6 @@
 "Warning" = "Warning";
 "Input method may not be fully enabled. Please enable it through System Preferences > Keyboard > Input Sources." = "Input method may not be fully enabled. Please enable it through System Preferences > Keyboard > Input Sources.";
 "Continue" = "Continue";
+
+/* No comment provided by engineer. */
+"Close Installer" = "Close Installer";
