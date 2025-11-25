@@ -99,8 +99,12 @@ static bool IsKeyInList(const OVKey* key, OVKeyVector list, size_t* outIndex = 0
     [[NSNotificationCenter defaultCenter] postNotificationName:OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification object:controller userInfo:dict];
 }
 
-- (NSString *)candidateController:(VTCandidateController *)controller requestExplanationFor:(NSString *)candidate
-{
+- (NSString * _Nullable)candidateController:(VTCandidateController * _Nonnull)controller readingAtIndex:(NSUInteger)index {
+    return nil;
+}
+
+
+- (NSString * _Nullable)candidateController:(VTCandidateController * _Nonnull)controller requestExplanationFor:(NSString * _Nonnull)candidate reading:(NSString * _Nonnull)reading {
     return [self.systemCharacterInfo getExplanationWithString:candidate];
 }
 
