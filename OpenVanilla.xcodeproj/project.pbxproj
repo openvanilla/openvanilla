@@ -968,6 +968,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/Mac/OpenVanilla-Prefix.pch";
 				INFOPLIST_FILE = "Source/Mac/OpenVanilla-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -997,6 +1002,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/Mac/OpenVanilla-Prefix.pch";
 				INFOPLIST_FILE = "Source/Mac/OpenVanilla-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
