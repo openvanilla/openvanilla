@@ -37,10 +37,6 @@ let package = Package(
         .target(
             name: "OpenVanillaImpl",
             dependencies: ["OpenVanilla", "CandidateUI", "SystemCharacterInfo",],
-            cSettings: [
-                .unsafeFlags(["-Wno-incomplete-umbrella"], .when(configuration: .release)),
-                .unsafeFlags(["-Wno-incomplete-umbrella"], .when(configuration: .debug))
-            ],
             cxxSettings: [.unsafeFlags(["-fcxx-modules", "-fmodules"])]
         ),
         .target(
@@ -56,6 +52,14 @@ let package = Package(
                            "CandidateUI", "TooltipUI", "VXHanConvert",
                            "OVIMBig5Code", "OVIMTableBased", "OVIMArray", "OVAFAssociatedPhrases"],
             cSettings: [
+                // We still have a number of umbrella headers that also define classes. For
+                // example, OVIMTableBased.h defines OVIMTableBased, and OVIMTableBasedContext.h
+                // depends on OVIMTableBased.h. It is not possible to also include
+                // OVIMTableBasedContext.h in OVIMTableBased.h, but this causes clang to complain
+                // about incomplete umbrella headers. Until we no longer define classes in umbrella
+                // headers, we'll rely on these to get rid of the warnings. Fortunately for these
+                // affected modules, only the principle class defined in the umbrella header matters
+                // when it comes to using those modules.
                 .unsafeFlags(["-Wno-incomplete-umbrella"], .when(configuration: .release)),
                 .unsafeFlags(["-Wno-incomplete-umbrella"], .when(configuration: .debug))
             ],
