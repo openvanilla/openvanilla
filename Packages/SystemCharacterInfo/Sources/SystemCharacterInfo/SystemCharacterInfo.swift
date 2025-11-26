@@ -120,7 +120,6 @@ private let path = "/System/Library/PrivateFrameworks/CoreChineseEngine.framewor
             let result = getSingleExplanation(string: String(char)) ?? string
             results.append(result)
         }
-        NSLog("results?? \(results)")
         switch results.count {
         case 0:
             return string

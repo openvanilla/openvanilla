@@ -101,7 +101,7 @@ static bool IsKeyInList(const OVKey* key, OVKeyVector list, size_t* outIndex = 0
 }
 
 - (NSString * _Nullable)candidateController:(VTCandidateController * _Nonnull)controller readingAtIndex:(NSUInteger)index {
-    return nil;
+    return _candidateList->candidateAtIndex(index);
 }
 
 
