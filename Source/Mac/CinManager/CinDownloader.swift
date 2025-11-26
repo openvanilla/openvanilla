@@ -59,7 +59,7 @@ class CinDownloader: NSObject {
                 return "Downloaaded file does not exist."
             case .cancelled:
                 return "Cancelled"
-            case .failedToMoveFile(_):
+            case .failedToMoveFile(_, _):
                 return "Failed to move file"
             }
         }
