@@ -518,11 +518,7 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
         size_t index = currentHightlightIndexInCandidateList();
         size_t cpp = candidatesPerPage();
         if (!index) {
-            size_t lastIndex = m_candidateList.size();
-            if (lastIndex) {
-                lastIndex--;
-            }
-            index = (lastIndex / cpp) * cpp;
+            index = m_candidateList.size() - 1;
         } else {
             if (index > cpp) {
                 index -= cpp;
