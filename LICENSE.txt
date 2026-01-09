@@ -7,7 +7,7 @@ directory under Libraries/ and each data table files under DataTables/
 for their licenses.
 
 
-Copyright (c) 2004-2012 The OpenVanilla Project.
+Copyright (c) 2004-2026 The OpenVanilla Project.
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
