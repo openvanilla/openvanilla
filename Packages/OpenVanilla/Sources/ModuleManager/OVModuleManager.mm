@@ -522,26 +522,34 @@ static string InputMethodConfigIdentifier(const string &identifier) {
         return input;
     }
 
-    NSString *converted = nil;
+    NSString *converted = input;
 
     if (self.traditionalToSimplifiedChineseFilterEnabled) {
-        converted = [input stringByApplyingTransform:@"Hant-Hans" reverse:NO];
+        NSString *result = [converted stringByApplyingTransform:@"Hant-Hans" reverse:NO];
+        if (result) {
+            converted = result;
+        }
     }
     else if (self.simplifiedToTraditionalChineseFilterEnabled) {
-        converted = [input stringByApplyingTransform:@"Hans-Hant" reverse:NO];
+        NSString *result = [converted stringByApplyingTransform:@"Hans-Hant" reverse:NO];
+        if (result) {
+            converted = result;
+        }
     }
 
-    NSString *stringToConvertPunctuation = converted ? converted : input;
     if (self.fullWidthToHalfWidthFilterEnabled) {
-        converted = [stringToConvertPunctuation stringByApplyingTransform:NSStringTransformFullwidthToHalfwidth reverse:NO];
+        NSString *result = [converted stringByApplyingTransform:NSStringTransformFullwidthToHalfwidth reverse:NO];
+        if (result) {
+            converted = result;
+        }
     }
     else if (self.halfWidthToFullWidthFilterEnabled) {
-        converted = [stringToConvertPunctuation stringByApplyingTransform:NSStringTransformFullwidthToHalfwidth reverse:YES];
+        NSString *result = [converted stringByApplyingTransform:NSStringTransformFullwidthToHalfwidth reverse:YES];
+        if (result) {
+            converted = result;
+        }
     }
 
-    if (converted == nil) {
-        return input;
-    }
     return converted;
 }
 
