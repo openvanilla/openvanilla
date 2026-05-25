@@ -54,6 +54,8 @@ using namespace OpenVanilla;
 - (void)changeInputMethodAction:(id)sender;
 - (void)toggleTraditionalToSimplifiedChineseFilterAction:(id)sender;
 - (void)toggleSimplifiedToTraditionalChineseFilterAction:(id)sender;
+- (void)toggleFullWidthToHalfWidthFilterAction:(id)sender;
+- (void)toggleHalfWidthToFullWidthFilterAction:(id)sender;
 - (void)openUserGuideAction:(id)sender;
 - (void)showAboutAction:(id)sender;
 @end
@@ -120,6 +122,14 @@ using namespace OpenVanilla;
 
     filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Simplified Chinese to Traditional", @"") action:@selector(toggleSimplifiedToTraditionalChineseFilterAction:) keyEquivalent:@""];
     filterItem.state = [OVModuleManager defaultManager].simplifiedToTraditionalChineseFilterEnabled ? NSControlStateValueOn : NSControlStateValueOff;
+    [menu addItem:filterItem];
+
+    filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Full-Width Punctuation to Half-Width", @"") action:@selector(toggleFullWidthToHalfWidthFilterAction:) keyEquivalent:@""];
+    filterItem.state = [OVModuleManager defaultManager].fullWidthToHalfWidthFilterEnabled ? NSControlStateValueOn : NSControlStateValueOff;
+    [menu addItem:filterItem];
+
+    filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Convert Half-Width Punctuation to Full-Width", @"") action:@selector(toggleHalfWidthToFullWidthFilterAction:) keyEquivalent:@""];
+    filterItem.state = [OVModuleManager defaultManager].halfWidthToFullWidthFilterEnabled ? NSControlStateValueOn : NSControlStateValueOff;
     [menu addItem:filterItem];
 
     filterItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Associated Phrases", @"") action:@selector(toggleAssociatedPhrasesAroundFilterEnabledAction:) keyEquivalent:@""];
@@ -642,6 +652,20 @@ using namespace OpenVanilla;
     OVModuleManager *manager = [OVModuleManager defaultManager];
     manager.simplifiedToTraditionalChineseFilterEnabled = !manager.simplifiedToTraditionalChineseFilterEnabled;
     manager.traditionalToSimplifiedChineseFilterEnabled = NO;
+}
+
+- (void)toggleFullWidthToHalfWidthFilterAction:(id)sender
+{
+    OVModuleManager *manager = [OVModuleManager defaultManager];
+    manager.fullWidthToHalfWidthFilterEnabled = !manager.fullWidthToHalfWidthFilterEnabled;
+    manager.halfWidthToFullWidthFilterEnabled = NO;
+}
+
+- (void)toggleHalfWidthToFullWidthFilterAction:(id)sender
+{
+    OVModuleManager *manager = [OVModuleManager defaultManager];
+    manager.halfWidthToFullWidthFilterEnabled = !manager.halfWidthToFullWidthFilterEnabled;
+    manager.fullWidthToHalfWidthFilterEnabled = NO;
 }
 
 - (void)toggleAssociatedPhrasesAroundFilterEnabledAction:(id)sender

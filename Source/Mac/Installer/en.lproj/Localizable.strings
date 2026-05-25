@@ -59,3 +59,6 @@
 
 /* No comment provided by engineer. */
 "Close Installer" = "Close Installer";
+
+"Convert Full-Width Punctuation to Half-Width" = "Convert Full-Width Punctuation to Half-Width";
+"Convert Half-Width Punctuation to Full-Width" = "Convert Half-Width Punctuation to Full-Width";

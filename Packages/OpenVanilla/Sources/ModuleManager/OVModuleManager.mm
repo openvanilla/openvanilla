@@ -32,7 +32,6 @@
 
 @import OpenVanillaImpl;
 @import TooltipUI;
-@import VXHanConvert;
 @import OVAFAssociatedPhrases;
 @import OVIMArray;
 @import OVIMTableBased;
@@ -523,34 +522,35 @@ static string InputMethodConfigIdentifier(const string &identifier) {
         return input;
     }
 
-    uint16_t (*filterFunction)(uint16_t) = 0;
+    NSString *converted = input;
 
     if (self.traditionalToSimplifiedChineseFilterEnabled) {
-        filterFunction = VXUCS2TradToSimpChinese;
+        NSString *result = [converted stringByApplyingTransform:@"Hant-Hans" reverse:NO];
+        if (result) {
+            converted = result;
+        }
     }
     else if (self.simplifiedToTraditionalChineseFilterEnabled) {
-        filterFunction = VXUCS2SimpToTradChinese;
-    }
-
-    if (filterFunction) {
-        NSUInteger length = input.length;
-        unichar *chars = (unichar *)calloc(length, sizeof(unichar));
-        if (chars) {
-            [input getCharacters:chars range:NSMakeRange(0, length)];
-            for (NSUInteger i = 0; i < length; i++) {
-                unichar f = filterFunction(chars[i]);
-                if (f) {
-                    chars[i] = f;
-                }
-            }
-
-            NSString *output = [[NSString alloc] initWithCharacters:chars length:length];
-            free(chars);
-            return output;
+        NSString *result = [converted stringByApplyingTransform:@"Hans-Hant" reverse:NO];
+        if (result) {
+            converted = result;
         }
     }
 
-    return input;
+    if (self.fullWidthToHalfWidthFilterEnabled) {
+        NSString *result = [converted stringByApplyingTransform:NSStringTransformFullwidthToHalfwidth reverse:NO];
+        if (result) {
+            converted = result;
+        }
+    }
+    else if (self.halfWidthToFullWidthFilterEnabled) {
+        NSString *result = [converted stringByApplyingTransform:NSStringTransformFullwidthToHalfwidth reverse:YES];
+        if (result) {
+            converted = result;
+        }
+    }
+
+    return converted;
 }
 
 #pragma mark - Properties
@@ -609,6 +609,28 @@ static string InputMethodConfigIdentifier(const string &identifier) {
 - (void)setSimplifiedToTraditionalChineseFilterEnabled:(BOOL)simplifiedToTraditionalChineseFilterEnabled
 {
     [[NSUserDefaults standardUserDefaults] setBool:simplifiedToTraditionalChineseFilterEnabled forKey:OVSimplifiedToTraditionalChineseFilterEnabledKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)fullWidthToHalfWidthFilterEnabled
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:OVFullWidthToHalfWidthFilterEnabledKey];
+}
+
+- (void)setFullWidthToHalfWidthFilterEnabled:(BOOL)fullWidthToHalfWidthFilterEnabled
+{
+    [[NSUserDefaults standardUserDefaults] setBool:fullWidthToHalfWidthFilterEnabled forKey:OVFullWidthToHalfWidthFilterEnabledKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)halfWidthToFullWidthFilterEnabled
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:OVHalfWidthToFullWidthFilterEnabledKey];
+}
+
+- (void)setHalfWidthToFullWidthFilterEnabled:(BOOL)halfWidthToFullWidthFilterEnabled
+{
+    [[NSUserDefaults standardUserDefaults] setBool:halfWidthToFullWidthFilterEnabled forKey:OVHalfWidthToFullWidthFilterEnabledKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

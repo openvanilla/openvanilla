@@ -41,6 +41,8 @@ extern NSString *const OVNextUpdateCheckTimeKey;
 extern NSString *const OVCheckForUpdateKey;
 extern NSString *const OVTraditionalToSimplifiedChineseFilterEnabledKey;
 extern NSString *const OVSimplifiedToTraditionalChineseFilterEnabledKey;
+extern NSString *const OVFullWidthToHalfWidthFilterEnabledKey;
+extern NSString *const OVHalfWidthToFullWidthFilterEnabledKey;
 extern NSString *const OVAssociatedPhrasesAroundFilterEnabledKey;
 extern NSString *const OVExcludedInputMethodIdentifiersKey;
 
