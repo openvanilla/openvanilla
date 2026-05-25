@@ -22,7 +22,6 @@ let package = Package(
     dependencies: [
         .package(path: "../CandidateUI"),
         .package(path: "../TooltipUI"),
-        .package(path: "../VXHanConvert"),
         .package(path: "../SystemCharacterInfo"),
     ],
     targets: [
@@ -49,7 +48,7 @@ let package = Package(
             dependencies: ["OpenVanilla",
                            "OpenVanillaImpl",
                            "LoaderService",
-                           "CandidateUI", "TooltipUI", "VXHanConvert",
+                           "CandidateUI", "TooltipUI",
                            "OVIMBig5Code", "OVIMTableBased", "OVIMArray", "OVAFAssociatedPhrases"],
             cSettings: [
                 // We still have a number of umbrella headers that also define classes. For

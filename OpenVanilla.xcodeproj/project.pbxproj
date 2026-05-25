@@ -53,7 +53,6 @@
 		D430667A2B5A0921000639F3 /* InputSourceHelper in Frameworks */ = {isa = PBXBuildFile; productRef = D43066792B5A0921000639F3 /* InputSourceHelper */; };
 		D430667C2B5A0921000639F3 /* OpenVanilla in Frameworks */ = {isa = PBXBuildFile; productRef = D430667B2B5A0921000639F3 /* OpenVanilla */; };
 		D430667E2B5A0921000639F3 /* TooltipUI in Frameworks */ = {isa = PBXBuildFile; productRef = D430667D2B5A0921000639F3 /* TooltipUI */; };
-		D43066802B5A0921000639F3 /* VXHanConvert in Frameworks */ = {isa = PBXBuildFile; productRef = D430667F2B5A0921000639F3 /* VXHanConvert */; };
 		D43066842B5A094C000639F3 /* InputSourceHelper in Frameworks */ = {isa = PBXBuildFile; productRef = D43066832B5A094C000639F3 /* InputSourceHelper */; };
 		D449C6372B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6362B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift */; };
 		D449C6392B2F68D90060653A /* TableBasedModulePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D449C6382B2F68D90060653A /* TableBasedModulePreferencesViewController.swift */; };
@@ -205,7 +204,6 @@
 		D43066692B5A08E4000639F3 /* CandidateUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CandidateUI; path = Packages/CandidateUI; sourceTree = "<group>"; };
 		D430666A2B5A08E6000639F3 /* InputSourceHelper */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = InputSourceHelper; path = Packages/InputSourceHelper; sourceTree = "<group>"; };
 		D430666B2B5A08E9000639F3 /* TooltipUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TooltipUI; path = Packages/TooltipUI; sourceTree = "<group>"; };
-		D43066852B5A09E9000639F3 /* VXHanConvert */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = VXHanConvert; path = Packages/VXHanConvert; sourceTree = "<group>"; };
 		D449C6362B2F60820060653A /* AssociatedPhrasesPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociatedPhrasesPreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C6382B2F68D90060653A /* TableBasedModulePreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBasedModulePreferencesViewController.swift; sourceTree = "<group>"; };
 		D449C63C2B2FF0FC0060653A /* ArrayPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayPreferencesViewController.swift; sourceTree = "<group>"; };
@@ -248,7 +246,6 @@
 			files = (
 				D430667E2B5A0921000639F3 /* TooltipUI in Frameworks */,
 				6ABBAF2C15CD61BE0080EE7D /* Carbon.framework in Frameworks */,
-				D43066802B5A0921000639F3 /* VXHanConvert in Frameworks */,
 				D430667A2B5A0921000639F3 /* InputSourceHelper in Frameworks */,
 				6ABBAEF515CD58F90080EE7D /* Cocoa.framework in Frameworks */,
 				D43066782B5A0921000639F3 /* CandidateUI in Frameworks */,
@@ -425,7 +422,6 @@
 			children = (
 				D409578D2EBF032100FA0331 /* InfoCollector */,
 				D4BEDA502E6C38A800565677 /* SystemCharacterInfo */,
-				D43066852B5A09E9000639F3 /* VXHanConvert */,
 				D430666A2B5A08E6000639F3 /* InputSourceHelper */,
 				D43066682B5A08DE000639F3 /* OpenVanilla */,
 				D43066692B5A08E4000639F3 /* CandidateUI */,
@@ -512,7 +508,6 @@
 				D43066792B5A0921000639F3 /* InputSourceHelper */,
 				D430667B2B5A0921000639F3 /* OpenVanilla */,
 				D430667D2B5A0921000639F3 /* TooltipUI */,
-				D430667F2B5A0921000639F3 /* VXHanConvert */,
 				D40957902EBF071200FA0331 /* InfoCollector */,
 			);
 			productName = OpenVanilla;
@@ -1172,10 +1167,6 @@
 		D430667D2B5A0921000639F3 /* TooltipUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TooltipUI;
-		};
-		D430667F2B5A0921000639F3 /* VXHanConvert */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = VXHanConvert;
 		};
 		D43066812B5A0946000639F3 /* InputSourceHelper */ = {
 			isa = XCSwiftPackageProductDependency;

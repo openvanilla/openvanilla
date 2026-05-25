@@ -32,7 +32,6 @@
 
 @import OpenVanillaImpl;
 @import TooltipUI;
-@import VXHanConvert;
 @import OVAFAssociatedPhrases;
 @import OVIMArray;
 @import OVIMTableBased;
@@ -523,34 +522,27 @@ static string InputMethodConfigIdentifier(const string &identifier) {
         return input;
     }
 
-    uint16_t (*filterFunction)(uint16_t) = 0;
+    NSString *converted = nil;
 
     if (self.traditionalToSimplifiedChineseFilterEnabled) {
-        filterFunction = VXUCS2TradToSimpChinese;
+        converted = [input stringByApplyingTransform:@"Hant-Hans" reverse:NO];
     }
     else if (self.simplifiedToTraditionalChineseFilterEnabled) {
-        filterFunction = VXUCS2SimpToTradChinese;
+        converted = [input stringByApplyingTransform:@"Hans-Hant" reverse:NO];
     }
 
-    if (filterFunction) {
-        NSUInteger length = input.length;
-        unichar *chars = (unichar *)calloc(length, sizeof(unichar));
-        if (chars) {
-            [input getCharacters:chars range:NSMakeRange(0, length)];
-            for (NSUInteger i = 0; i < length; i++) {
-                unichar f = filterFunction(chars[i]);
-                if (f) {
-                    chars[i] = f;
-                }
-            }
-
-            NSString *output = [[NSString alloc] initWithCharacters:chars length:length];
-            free(chars);
-            return output;
-        }
+    NSString *stringToConvertPunctuation = converted ? converted : input;
+    if (self.fullWidthToHalfWidthFilterEnabled) {
+        converted = [stringToConvertPunctuation stringByApplyingTransform:NSStringTransformFullwidthToHalfwidth reverse:NO];
+    }
+    else if (self.halfWidthToFullWidthFilterEnabled) {
+        converted = [stringToConvertPunctuation stringByApplyingTransform:NSStringTransformFullwidthToHalfwidth reverse:YES];
     }
 
-    return input;
+    if (converted == nil) {
+        return input;
+    }
+    return converted;
 }
 
 #pragma mark - Properties
@@ -609,6 +601,28 @@ static string InputMethodConfigIdentifier(const string &identifier) {
 - (void)setSimplifiedToTraditionalChineseFilterEnabled:(BOOL)simplifiedToTraditionalChineseFilterEnabled
 {
     [[NSUserDefaults standardUserDefaults] setBool:simplifiedToTraditionalChineseFilterEnabled forKey:OVSimplifiedToTraditionalChineseFilterEnabledKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)fullWidthToHalfWidthFilterEnabled
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:OVFullWidthToHalfWidthFilterEnabledKey];
+}
+
+- (void)setFullWidthToHalfWidthFilterEnabled:(BOOL)fullWidthToHalfWidthFilterEnabled
+{
+    [[NSUserDefaults standardUserDefaults] setBool:fullWidthToHalfWidthFilterEnabled forKey:OVFullWidthToHalfWidthFilterEnabledKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)halfWidthToFullWidthFilterEnabled
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:OVHalfWidthToFullWidthFilterEnabledKey];
+}
+
+- (void)setHalfWidthToFullWidthFilterEnabled:(BOOL)halfWidthToFullWidthFilterEnabled
+{
+    [[NSUserDefaults standardUserDefaults] setBool:halfWidthToFullWidthFilterEnabled forKey:OVHalfWidthToFullWidthFilterEnabledKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

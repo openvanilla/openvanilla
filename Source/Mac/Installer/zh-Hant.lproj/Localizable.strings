@@ -58,3 +58,6 @@
 
 /* No comment provided by engineer. */
 "Close Installer" = "關閉安裝程式";
+
+"Convert Full-Width Punctuation to Half-Width" = "全形標點轉換成半形標點";
+"Convert Half-Width Punctuation to Full-Width" = "半形標點轉換成全形標點";

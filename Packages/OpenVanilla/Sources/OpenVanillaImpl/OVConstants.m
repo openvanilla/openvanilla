@@ -41,6 +41,8 @@ NSString *const OVNextUpdateCheckTimeKey = @"NextUpdateCheckTime";
 NSString *const OVCheckForUpdateKey = @"CheckForUpdate";
 NSString *const OVTraditionalToSimplifiedChineseFilterEnabledKey = @"EnableTraditionalToSimplifiedChineseFilter";
 NSString *const OVSimplifiedToTraditionalChineseFilterEnabledKey = @"EnableSimplifiedToTraditionalChineseFilter";
+NSString *const OVFullWidthToHalfWidthFilterEnabledKey = @"EnableFullWidthToHalfWidthFilter";
+NSString *const OVHalfWidthToFullWidthFilterEnabledKey = @"EnableHalfWidthToFullWidthFilter";
 NSString *const OVAssociatedPhrasesAroundFilterEnabledKey = @"EnableAssociatedPhrasesAroundFilter";
 NSString *const OVExcludedInputMethodIdentifiersKey = @"ExcludedInputMethods";
 
