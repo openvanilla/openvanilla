@@ -31,28 +31,58 @@
 #ifndef _ARRAYKEYSEQUENCE_H
 #define _ARRAYKEYSEQUENCE_H
 
-#include "LegacyOpenVanilla.h"
-#include "OVKeySequence.h"
+#include "OpenVanilla.h"
+#include <cctype>
+#include <cstring>
 #include <string>
 
-class ArrayKeySequence : public OVKeySequenceSimple
+class ArrayKeySequence
 {
 protected:
     OpenVanilla::OVCINDataTable* cinTable;
+    static const int MaxSequenceLength = 32;
+    int len;
+    char seq[MaxSequenceLength];
+
 public:
-    ArrayKeySequence(OpenVanilla::OVCINDataTable* tab) : cinTable(tab) {}
-    virtual int length() { return len; }
-    virtual bool add(char c){
-//        if (valid(c) == 0) return 0;
-        return OVKeySequenceSimple::add(c);
+    ArrayKeySequence(OpenVanilla::OVCINDataTable* tab) : cinTable(tab), len(0)
+    {
+        seq[0] = 0;
     }
-    virtual int valid(char c){
+
+    int length() const { return len; }
+
+    bool add(char c)
+    {
+        if (len == MaxSequenceLength - 1) {
+            return false;
+        }
+        seq[len++] = static_cast<char>(tolower(static_cast<unsigned char>(c)));
+        seq[len] = 0;
+        return true;
+    }
+
+    void remove()
+    {
+        if (len) {
+            seq[--len] = 0;
+        }
+    }
+
+    void clear()
+    {
+        len = 0;
+        seq[0] = 0;
+    }
+
+    bool valid(char c) const
+    {
         std::string inKey(1, c);
-        if (cinTable->findKeyname(inKey).empty()) return 0;
-        return 1;
-    
+        return cinTable && !cinTable->findKeyname(inKey).empty();
     }
-    virtual std::string& compose(std::string& s){
+
+    std::string& compose(std::string& s) const
+    {
         for (int i=0; i<len; i++)
         {
             std::string inKey;
@@ -61,9 +91,10 @@ public:
         }
         return s;
     }
-    virtual char* getSeq() { return seq; }
 
-    virtual bool hasOnlyWildcardCharacter()
+    const char* getSeq() const { return seq; }
+
+    bool hasOnlyWildcardCharacter() const
     {
         if (len == 0) {
             return false;
@@ -76,7 +107,7 @@ public:
         return true;
     }
 
-	virtual bool hasWildcardCharacter()
+    bool hasWildcardCharacter() const
 	{
         for (int i = 0; i < len; i++) {
             if (seq[i] == '?' || seq[i] == '*') {

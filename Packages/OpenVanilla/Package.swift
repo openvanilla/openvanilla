@@ -75,7 +75,7 @@ let package = Package(
             dependencies: ["OpenVanilla"]),
         .target(
             name: "OVIMArray",
-            dependencies: ["OpenVanilla", "LegacyOpenVanilla"]),
+            dependencies: ["OpenVanilla"]),
         .target(
             name: "OVAFAssociatedPhrases",
             dependencies: ["OpenVanilla"]),

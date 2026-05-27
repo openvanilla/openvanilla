@@ -29,61 +29,34 @@
 
 #include "OVIMArray.h"
 #include "OVIMArrayContext.h"
-#include "LegacyOVIMArray.h"
-#include "LegacyOVFrameworkWrapper.h"
 
 using namespace OpenVanilla;
 
 OpenVanilla::OVIMArray::OVIMArray(const string& tableRootPath)
     : m_lazyInitialized(false)
     , m_tableRootPath(tableRootPath)
-    , m_legacyArrayModule(0)
     , m_cfgAutoSP(true)
     , m_cfgForceSP(false)
 {
+    for (size_t index = 0; index < 4; index++) {
+        m_tables[index] = 0;
+    }
 }
 
 OpenVanilla::OVIMArray::~OVIMArray()
 {
-    if (m_legacyArrayModule) {
-        delete m_legacyArrayModule;
+    for (size_t index = 0; index < 4; index++) {
+        delete m_tables[index];
     }
 }
 
 OVEventHandlingContext* OpenVanilla::OVIMArray::createContext()
 {
-    if (!m_legacyArrayModule) {
-        if (m_lazyInitialized) {
-            return 0;
-        }
-
-        m_lazyInitialized = true;
-        m_legacyArrayModule = new ::OVIMArray;
-
-        OVLegacyServiceWrapper service;
-        OVLegacyDictionaryWrapper dictionary;
-
-        // legacy module requires path with path separator in the end
-        string tableRootPath = m_tableRootPath + string(1, OVPathHelper::Separator());
-        int success = m_legacyArrayModule->initialize(&dictionary, &service, tableRootPath.c_str());
-        if (!success) {
-            delete m_legacyArrayModule;
-            m_legacyArrayModule = 0;
-        }
-        else {
-            m_legacyArrayModule->setAutoSP(m_cfgAutoSP);
-            m_legacyArrayModule->setForceSP(m_cfgForceSP);
-        }
+    if (!checkTable()) {
+        return 0;
     }
 
-    if (m_legacyArrayModule) {
-        ::OVIMArrayContext* legacyContext = static_cast<::OVIMArrayContext*>(m_legacyArrayModule->newContext());
-        OpenVanilla::OVIMArrayContext* context = new OpenVanilla::OVIMArrayContext(legacyContext);
-        return context;
-    }
-    else {
-        return nullptr;
-    }
+    return new OpenVanilla::OVIMArrayContext(this);
 }
 
 const string OpenVanilla::OVIMArray::identifier() const
@@ -114,25 +87,83 @@ void OpenVanilla::OVIMArray::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderSer
     if (moduleConfig->hasKey("QuickMode")) {
         m_cfgForceSP = moduleConfig->isKeyTrue("QuickMode");
     }
-
-    if (m_legacyArrayModule) {
-        m_legacyArrayModule->setAutoSP(m_cfgAutoSP);
-        m_legacyArrayModule->setForceSP(m_cfgForceSP);
-    }
-
 }
 
 void OpenVanilla::OVIMArray::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)
 {
-    if (m_legacyArrayModule) {
-        m_cfgAutoSP = m_legacyArrayModule->isAutoSP();
-        m_cfgForceSP = m_legacyArrayModule->isForceSP();
-    }
-
     moduleConfig->setKeyBoolValue("SpecialCodePrompt", m_cfgAutoSP);
     moduleConfig->setKeyBoolValue("QuickMode", m_cfgForceSP);
 
     if (!moduleConfig->hasKey("AlphanumericKeyboardLayout")) {
         moduleConfig->setKeyStringValue("AlphanumericKeyboardLayout", "com.apple.keylayout.US");
     }
+}
+
+bool OpenVanilla::OVIMArray::checkTable()
+{
+    if (m_tables[0]) {
+        return true;
+    }
+
+    if (m_lazyInitialized) {
+        return false;
+    }
+    m_lazyInitialized = true;
+
+    const char* filenames[] = {
+        "array30.cin",
+        "array-shortcode.cin",
+        "array-special.cin",
+        "array-phrase.cin",
+    };
+
+    vector<string> roots;
+    roots.push_back(m_tableRootPath);
+    roots.push_back(OVPathHelper::PathCat(m_tableRootPath, "Array"));
+
+    for (size_t tableIndex = 0; tableIndex < 4; tableIndex++) {
+        OVCINDataTable* loadedTable = 0;
+        for (vector<string>::const_iterator root = roots.begin(), end = roots.end(); root != end; ++root) {
+            string tablePath = OVPathHelper::PathCat(*root, filenames[tableIndex]);
+            OVCINDataTableParser parser;
+            loadedTable = parser.CINDataTableFromFileName(tablePath);
+            if (loadedTable) {
+                break;
+            }
+        }
+
+        if (!loadedTable) {
+            for (size_t index = 0; index < 4; index++) {
+                delete m_tables[index];
+                m_tables[index] = 0;
+            }
+            return false;
+        }
+        m_tables[tableIndex] = loadedTable;
+    }
+
+    return true;
+}
+
+OVCINDataTable* OpenVanilla::OVIMArray::table(size_t index) const
+{
+    if (index >= 4) {
+        return 0;
+    }
+    return m_tables[index];
+}
+
+bool OpenVanilla::OVIMArray::isAutoSP() const
+{
+    return m_cfgAutoSP;
+}
+
+bool OpenVanilla::OVIMArray::isForceSP() const
+{
+    return m_cfgForceSP;
+}
+
+void OpenVanilla::OVIMArray::setForceSP(bool value)
+{
+    m_cfgForceSP = value;
 }
