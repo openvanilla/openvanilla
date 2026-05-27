@@ -13,7 +13,6 @@ let package = Package(
                       "OpenVanillaImpl",
                       "LoaderService",
                       "ModuleManager",
-                      "LegacyOpenVanilla",
                       "OVIMBig5Code",
                       "OVIMTableBased",
                       "OVIMArray",
@@ -64,9 +63,6 @@ let package = Package(
             ],
             cxxSettings: [.unsafeFlags(["-fcxx-modules", "-fmodules"])]
         ),
-        .target(
-            name: "LegacyOpenVanilla",
-            dependencies: ["OpenVanilla"]),
         .target(
             name: "OVIMBig5Code",
             dependencies: ["OpenVanilla"]),
