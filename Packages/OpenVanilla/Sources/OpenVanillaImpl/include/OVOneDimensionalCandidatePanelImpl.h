@@ -69,7 +69,7 @@ namespace OpenVanilla {
 
         virtual size_t currentHightlightIndex() const;
         virtual void setHighlightIndex(size_t index);
-        virtual size_t currentHightlightIndexInCandidateList() const;
+        virtual size_t currentHighlightIndexInCandidateList() const;
 
         virtual size_t goToNextPage();
         virtual size_t goToPreviousPage();

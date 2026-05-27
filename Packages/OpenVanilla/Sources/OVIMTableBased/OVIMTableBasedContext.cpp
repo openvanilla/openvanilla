@@ -231,7 +231,7 @@ bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* can
     }
 
     OVCandidateList* candidates = panel->candidateList();
-    string currentCandidate = candidates->candidateAtIndex(panel->currentHightlightIndexInCandidateList());
+    string currentCandidate = candidates->candidateAtIndex(panel->currentHighlightIndexInCandidateList());
 
     if (key->keyCode() == OVKeyCode::Backspace) {
         panel->cancelEventHandler();
