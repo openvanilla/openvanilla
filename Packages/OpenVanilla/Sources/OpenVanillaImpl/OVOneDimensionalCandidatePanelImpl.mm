@@ -264,7 +264,7 @@ size_t OVOneDimensionalCandidatePanelImpl::pageCount() const
 
 size_t OVOneDimensionalCandidatePanelImpl::currentPage() const
 {
-    return currentHightlightIndexInCandidateList() / candidatesPerPage();
+    return currentHighlightIndexInCandidateList() / candidatesPerPage();
 }
 
 size_t OVOneDimensionalCandidatePanelImpl::currentPageCandidateCount() const
@@ -308,7 +308,7 @@ void OVOneDimensionalCandidatePanelImpl::setHighlightIndex(size_t index)
     m_candidateController.selectedCandidateIndex = (NSUInteger)newIndex;
 }
 
-size_t OVOneDimensionalCandidatePanelImpl::currentHightlightIndexInCandidateList() const
+size_t OVOneDimensionalCandidatePanelImpl::currentHighlightIndexInCandidateList() const
 {
     return (size_t)m_candidateController.selectedCandidateIndex;
 }
@@ -320,7 +320,7 @@ size_t OVOneDimensionalCandidatePanelImpl::goToNextPage()
         return 0;
     }
 
-    size_t newIndex = currentHightlightIndexInCandidateList() + candidatesPerPage();
+    size_t newIndex = currentHighlightIndexInCandidateList() + candidatesPerPage();
     if (newIndex >= cc) {
         newIndex = cc - 1;
     }
@@ -340,7 +340,7 @@ size_t OVOneDimensionalCandidatePanelImpl::goToPreviousPage()
         return 0;
     }
 
-    size_t newIndex = currentHightlightIndexInCandidateList();
+    size_t newIndex = currentHighlightIndexInCandidateList();
 
     if (newIndex < candidatesPerPage()) {
         newIndex = 0;
@@ -479,7 +479,7 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
         return Canceled;
     }
     else if (IsKeyInList(key, m_nextPageKeys)) {
-        size_t index = currentHightlightIndexInCandidateList();
+        size_t index = currentHighlightIndexInCandidateList();
         size_t lastIndex = m_candidateList.size();
         if (lastIndex) {
             lastIndex--;
@@ -501,7 +501,7 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
         return Handled;
     }
     else if (IsKeyInList(key, m_nextCandidateKeys)) {
-        size_t index = currentHightlightIndexInCandidateList();
+        size_t index = currentHighlightIndexInCandidateList();
         size_t lastIndex = m_candidateList.size();
         if (lastIndex) {
             lastIndex--;
@@ -515,7 +515,7 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
         return Handled;
     }
     else if (IsKeyInList(key, m_previousPageKeys)) {
-        size_t index = currentHightlightIndexInCandidateList();
+        size_t index = currentHighlightIndexInCandidateList();
         size_t cpp = candidatesPerPage();
         if (!index) {
             index = m_candidateList.size() - 1;
@@ -532,7 +532,7 @@ OVOneDimensionalCandidatePanelImpl::KeyHandlerResult OVOneDimensionalCandidatePa
         return Handled;
     }
     else if (IsKeyInList(key, m_previousCandidateKeys)) {
-        size_t index = currentHightlightIndexInCandidateList();
+        size_t index = currentHighlightIndexInCandidateList();
         if (!index) {
             size_t lastIndex = m_candidateList.size();
             if (lastIndex) {

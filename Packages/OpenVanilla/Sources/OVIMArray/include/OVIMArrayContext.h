@@ -29,26 +29,75 @@
 #define OVIMArrayContext_h
 
 #include "OpenVanilla.h"
-#include "LegacyOVIMArray.h"
-
-class OVInputMethodContext;
+#include "ArrayKeySequence.h"
 
 namespace OpenVanilla {
     using namespace std;
 
     class OVIMArray;
+
+    namespace OVIMArrayConstants {
+        enum State {
+            StateWaitKey1 = 0,
+            StateWaitKey2,
+            StateWaitKey3,
+            StateWaitCandidate
+        };
+
+        enum TableIndex {
+            MainTable = 0,
+            ShortTable = 1,
+            SpecialTable = 2,
+            PhraseTable = 3
+        };
+    };
     
     class OVIMArrayContext : public OVEventHandlingContext {
     public:
-        OVIMArrayContext(::OVIMArrayContext* legacyContext);
+        OVIMArrayContext(OVIMArray* module);
         ~OVIMArrayContext();
         virtual void startSession(OVLoaderService* loaderService);
         virtual void stopSession(OVLoaderService* loaderService);
         virtual bool handleKey(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
+        virtual void candidateCanceled(OVCandidateService* candidateService, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService);
         virtual bool candidateSelected(OVCandidateService* candidateService, const string& text, size_t index, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService);
+        virtual bool candidateNonPanelKeyReceived(OVCandidateService* candidateService, const OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService);
 
     protected:
-        ::OVIMArrayContext* m_legacyContext;
+        enum HandlerResult {
+            RetPass = 0,
+            RetDone = 1,
+            RetContinue = 2
+        };
+
+        void clear();
+        bool isComposing() const;
+        void updateDisplay(OVTextBuffer* readingText);
+        int updateCandidate(OVCINDataTable* table, OVCandidateService* candidateService, OVLoaderService* loaderService);
+        int waitKey1(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
+        int waitKey2(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
+        int waitKey3(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
+        int waitCandidate(const OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
+        void sendAndReset(const string& text, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
+        void clearAll(OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService);
+        void clearCandidate(OVCandidateService* candidateService);
+        bool selectCandidate(size_t index, string& out) const;
+        bool selectCandidate(char key, OVCandidateService* candidateService, string& out) const;
+        bool isWSeq(char a, char b) const;
+        bool isForceSPSeq() const;
+        void queryKeyName(const char* keys, string& outKeyNames);
+        void commitKeySeq(size_t table, const char* errorMessage, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
+        void dispatchStateHandler(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
+        void changeBackState(OVIMArrayConstants::State state);
+        void changeState(OVIMArrayConstants::State state);
+        OVCINDataTable* table(size_t index) const;
+        string readingFromKeySequence() const;
+
+        OVIMArray* m_module;
+        ArrayKeySequence m_keySequence;
+        OVIMArrayConstants::State m_state;
+        vector<string> m_candidateStrings;
+        string m_selectionKeys;
     };
 };
 
