@@ -103,7 +103,7 @@ bool OVAFAssociatedPhrasesContext::handleKey(OVKey* key, OVTextBuffer* readingTe
         }
         else {
             panel->setHighlightIndex(keyIndex);
-            size_t candidateIndex = panel->currentHightlightIndexInCandidateList();
+            size_t candidateIndex = panel->currentHighlightIndexInCandidateList();
             string candidate = panel->candidateList()->candidateAtIndex(candidateIndex);
             m_lastOutput = candidate;
             composingText->setText(candidate);

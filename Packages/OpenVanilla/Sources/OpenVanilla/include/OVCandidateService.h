@@ -109,9 +109,9 @@ namespace OpenVanilla {
         virtual bool allowsPageWrapping() const = 0;
         virtual void setAllowsPageWrapping(bool allowsPageWrapping) = 0;
 
-        virtual size_t currentHightlightIndex() const = 0;
+        virtual size_t currentHighlightIndex() const = 0;
         virtual void setHighlightIndex(size_t index) = 0;
-        virtual size_t currentHightlightIndexInCandidateList() const = 0;
+        virtual size_t currentHighlightIndexInCandidateList() const = 0;
 
         virtual size_t goToNextPage() = 0;
         virtual size_t goToPreviousPage() = 0;
