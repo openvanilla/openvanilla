@@ -283,7 +283,7 @@ void OVOneDimensionalCandidatePanelImpl::setAllowsPageWrapping(bool allowsPageWr
 {
 }
 
-size_t OVOneDimensionalCandidatePanelImpl::currentHightlightIndex() const
+size_t OVOneDimensionalCandidatePanelImpl::currentHighlightIndex() const
 {
     size_t cpp = candidatesPerPage();
     if (!cpp) {
