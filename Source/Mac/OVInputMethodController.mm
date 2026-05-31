@@ -437,7 +437,7 @@ using namespace OpenVanilla;
             }
 
             case OVOneDimensionalCandidatePanelImpl::CandidateSelected: {
-                size_t index = panel->currentHightlightIndexInCandidateList();
+                size_t index = panel->currentHighlightIndexInCandidateList();
                 string candidate = panel->candidateList()->candidateAtIndex(index);
                 handled = _inputMethodContext->candidateSelected([OVModuleManager defaultManager].candidateService, candidate, index, _readingText, _composingText, [OVModuleManager defaultManager].loaderService);
                 candidatePanelFallThrough = true;
