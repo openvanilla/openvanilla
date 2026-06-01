@@ -494,6 +494,9 @@ void OpenVanilla::OVIMArrayContext::commitKeySeq(size_t tableIndex, const char* 
         if (selectCandidate(0, candidate)) {
             composingText->setText(candidate);
             composingText->updateDisplay();
+            // Note: since the character is componsed, drop the reading.
+            readingText->clear();
+            readingText->updateDisplay();
         }
         changeState(StateWaitCandidate);
     }
