@@ -82,8 +82,8 @@ int OpenVanilla::OVIMArrayContext::updateCandidate(OVCINDataTable* table, OVCand
 {
     m_candidateStrings.clear();
     vector<pair<string, string> > pairs = table->findChardefWithWildcard(OVWildcard(m_keySequence.getSeq()));
-    for (vector<pair<string, string> >::const_iterator pair = pairs.begin(), end = pairs.end(); pair != end; ++pair) {
-        m_candidateStrings.push_back(pair->second);
+    for (const auto &pair : pairs) {
+      m_candidateStrings.push_back(pair.second);
     }
 
     if (!m_candidateStrings.size()) {
@@ -370,7 +370,7 @@ void OpenVanilla::OVIMArrayContext::sendAndReset(const string& text, OVTextBuffe
         OVFastKeyValuePairMap* map = table(SpecialTable)->chardefMap();
         string matchKey;
         for (size_t index = 0, size = map->size(); index < size; index++) {
-            pair<string, string> kv = map->keyValuePairAtIndex(index);
+            const auto& kv = map->keyValuePairAtIndex(index);
             if (text == kv.second) {
                 matchKey = kv.first;
                 break;
@@ -380,12 +380,13 @@ void OpenVanilla::OVIMArrayContext::sendAndReset(const string& text, OVTextBuffe
         if (!matchKey.empty()) {
             int specialCodeLength = static_cast<int>(matchKey.length());
             const char* specialCode = matchKey.c_str();
-            if (!equal(specialCode, specialCode + specialCodeLength, m_keySequence.getSeq())) {
-                string keyNames;
-                queryKeyName(specialCode, keyNames);
-                notifyText = text + ": " + keyNames;
-                notifySP = true;
+            if (matchKey != m_keySequence.getSeq()) {
+              string keyNames;
+              queryKeyName(matchKey.c_str(), keyNames);
+              notifyText = text + ": " + keyNames;
+              notifySP = true;
             }
+
         }
     }
 
@@ -464,8 +465,8 @@ void OpenVanilla::OVIMArrayContext::queryKeyName(const char* keys, string& outKe
 {
     int len = static_cast<int>(strlen(keys));
     for (int i = 0; i < len; i++) {
-        string inKey(keys, i, 1);
-        outKeyNames.append(table(MainTable)->findKeyname(inKey));
+      string inKey(1, keys[i]);
+      outKeyNames.append(table(MainTable)->findKeyname(inKey));
     }
 }
 
@@ -479,8 +480,8 @@ void OpenVanilla::OVIMArrayContext::commitKeySeq(size_t tableIndex, const char* 
 
     vector<pair<string, string> > pairs = table(tableIndex)->findChardefWithWildcard(OVWildcard(m_keySequence.getSeq()));
     m_candidateStrings.clear();
-    for (vector<pair<string, string> >::const_iterator pair = pairs.begin(), end = pairs.end(); pair != end; ++pair) {
-        m_candidateStrings.push_back(pair->second);
+    for (const auto &pair : pairs) {
+        m_candidateStrings.push_back(pair.second);
     }
 
     string candidate;
