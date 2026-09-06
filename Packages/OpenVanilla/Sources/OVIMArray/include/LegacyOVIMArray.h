@@ -93,11 +93,25 @@ private:
     int WaitKey3(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int WaitCandidate(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int updateCandidate(OpenVanilla::OVCINDataTable *tab,OVBuffer *buf, OVCandidate *candibar);
+    void showSymbolCandidates(OVBuffer* , OVCandidate* );
     void sendAndReset(const char *, OVBuffer* , OVCandidate* , OVService* );
     void clearAll(OVBuffer* buf, OVCandidate* candi_bar);
     void clearCandidate(OVCandidate *candi_bar);
     int selectCandidate(int num, string& out);
-    bool isWSeq(char a, char b) const {  return a == 'w' && isdigit(b);    }
+    // Symbol table prefixes: "w" is the original menu, "hg" is the second menu
+    // added by the v2026 Array table. A digit typed right after either of them
+    // picks a symbol group instead of selecting a candidate.
+    bool isSymbolPrefix(const char* seq, int len) const
+	{
+        if (len == 1) return seq[0] == 'w';
+        if (len == 2) return seq[0] == 'h' && seq[1] == 'g';
+        return false;
+    }
+    // True when the whole sequence is a complete symbol code, e.g. "w1", "hg1".
+    bool isSymbolSeq(const char* seq, int len) const
+	{
+        return len > 1 && isdigit(seq[len - 1]) && isSymbolPrefix(seq, len - 1);
+    }
     bool isForceSPSeq()
 	{
         return keyseq.length() == 4 && !memcmp(keyseq.getSeq(),",,sp",4);
