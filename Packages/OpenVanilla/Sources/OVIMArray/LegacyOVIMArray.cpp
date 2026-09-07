@@ -114,10 +114,8 @@ int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf,
 
     char keycode = keyseq.getSeq()[1];
 
-    if (isWSeq(keyseq.getSeq()[0], keyseq.getSeq()[1])) {
-        updateCandidate(tabs[MAIN_TAB], buf, candibar);
-        buf->clear()->append(candidateStringVector[0].c_str())->update();
-        changeState(STATE_WAIT_CANDIDATE);
+    if (isSymbolSeq(keyseq.getSeq(), keyseq.length())) {
+        showSymbolCandidates(buf, candibar);
     }
     else {
         if (!keyseq.hasWildcardCharacter()) {
@@ -134,6 +132,11 @@ int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf,
 int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVBuffer* buf, 
                                OVCandidate* candibar, OVService* srv)
 {
+    if (isSymbolSeq(keyseq.getSeq(), keyseq.length())) {
+        showSymbolCandidates(buf, candibar);
+        return 1;
+    }
+
     if (keyseq.length() >= 3) {
         if (!keyseq.hasWildcardCharacter()) {
             updateCandidate(tabs[MAIN_TAB], buf, candibar);
@@ -142,6 +145,19 @@ int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVBuffer* buf,
     return 1;    
 }
 
+
+// Shows the symbol group named by a complete symbol code. Groups can be empty:
+// hg3-hg7 are reserved but still unused, and a replacement array30.cin may not
+// define every w group either, so never touch the vector without checking.
+void OVIMArrayContext::showSymbolCandidates(OVBuffer* buf, OVCandidate* candibar)
+{
+    updateCandidate(tabs[MAIN_TAB], buf, candibar);
+    if (candidateStringVector.empty()) {
+        return;
+    }
+    buf->clear()->append(candidateStringVector[0].c_str())->update();
+    changeState(STATE_WAIT_CANDIDATE);
+}
 
 int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVBuffer* buf,
                                     OVCandidate* candibar, OVService* srv)
@@ -283,7 +299,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
     int ret = 0;
     const char keycode = key->code();
     const bool validkey = keyseq.valid(keycode) || 
-      ( keyseq.getSeq()[0] == 'w' && isdigit(keycode) );
+      ( isdigit(keycode) && isSymbolPrefix(keyseq.getSeq(), keyseq.length()) );
 
     murmur("OVIMArray state: %d", state);
     if (!keyseq.length() && !isprint(keycode)) {
@@ -338,7 +354,7 @@ int OVIMArrayContext::keyEvent(OVKeyCode* key, OVBuffer* buf,
     }
 
     if (candi.onDuty() && isdigit(keycode) && 
-        !(keyseq.length() == 1 && isWSeq(keyseq.getSeq()[0],keycode))) {
+        !isSymbolPrefix(keyseq.getSeq(), keyseq.length())) {
         string c;
         if (candi.select(keycode, c)){
             if (c != "?" ) {
