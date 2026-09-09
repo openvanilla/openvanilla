@@ -29,65 +29,47 @@
 
 #include "OVIMArray.h"
 #include "OVIMArrayContext.h"
-#include "LegacyOVIMArray.h"
-#include "LegacyOVFrameworkWrapper.h"
 
 using namespace OpenVanilla;
 
 OpenVanilla::OVIMArray::OVIMArray(const string& tableRootPath)
-    : m_lazyInitialized(false)
+    : m_tablesLoaded(false)
     , m_tableRootPath(tableRootPath)
-    , m_legacyArrayModule(0)
     , m_cfgAutoSP(true)
     , m_cfgForceSP(false)
 {
+    for (size_t i = 0; i < 4; i++) {
+        m_tables[i] = 0;
+    }
 }
 
 OpenVanilla::OVIMArray::~OVIMArray()
 {
-    if (m_legacyArrayModule) {
-        delete m_legacyArrayModule;
+    clearTables();
+}
+
+void OpenVanilla::OVIMArray::clearTables()
+{
+    for (size_t i = 0; i < 4; i++) {
+        if (m_tables[i]) {
+            delete m_tables[i];
+            m_tables[i] = 0;
+        }
     }
+    m_tablesLoaded = false;
 }
 
 OVEventHandlingContext* OpenVanilla::OVIMArray::createContext()
 {
-    if (!m_legacyArrayModule) {
-        if (m_lazyInitialized) {
-            return 0;
-        }
-
-        m_lazyInitialized = true;
-        m_legacyArrayModule = new ::OVIMArray;
-
-        if (m_customMainTablePath.length()) {
-            m_legacyArrayModule->setCustomMainTablePath(m_customMainTablePath.c_str());
-        }
-
-        OVLegacyServiceWrapper service;
-        OVLegacyDictionaryWrapper dictionary;
-
-        // legacy module requires path with path separator in the end
-        string tableRootPath = m_tableRootPath + string(1, OVPathHelper::Separator());
-        int success = m_legacyArrayModule->initialize(&dictionary, &service, tableRootPath.c_str());
-        if (!success) {
-            delete m_legacyArrayModule;
-            m_legacyArrayModule = 0;
-        }
-        else {
-            m_legacyArrayModule->setAutoSP(m_cfgAutoSP);
-            m_legacyArrayModule->setForceSP(m_cfgForceSP);
-        }
+    if (!m_tablesLoaded) {
+        checkTables();
     }
 
-    if (m_legacyArrayModule) {
-        ::OVIMArrayContext* legacyContext = static_cast<::OVIMArrayContext*>(m_legacyArrayModule->newContext());
-        OpenVanilla::OVIMArrayContext* context = new OpenVanilla::OVIMArrayContext(legacyContext);
-        return context;
+    if (!m_tables[0]) {
+        return 0;
     }
-    else {
-        return nullptr;
-    }
+
+    return new OVIMArrayContext(this);
 }
 
 const string OpenVanilla::OVIMArray::identifier() const
@@ -98,10 +80,10 @@ const string OpenVanilla::OVIMArray::identifier() const
 const string OpenVanilla::OVIMArray::localizedName(const string& locale)
 {
     if (locale.find("zh") == 0) {
-        return string("行列");
+        return string("行列30 (香草)");
     }
 
-    return string("Array");
+    return string("Array30 (OpenVanilla)");
 }
 
 bool OpenVanilla::OVIMArray::initialize(OVPathInfo* pathInfo, OVLoaderService* loaderService)
@@ -118,25 +100,84 @@ void OpenVanilla::OVIMArray::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderSer
     if (moduleConfig->hasKey("QuickMode")) {
         m_cfgForceSP = moduleConfig->isKeyTrue("QuickMode");
     }
-
-    if (m_legacyArrayModule) {
-        m_legacyArrayModule->setAutoSP(m_cfgAutoSP);
-        m_legacyArrayModule->setForceSP(m_cfgForceSP);
-    }
-
 }
 
 void OpenVanilla::OVIMArray::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)
 {
-    if (m_legacyArrayModule) {
-        m_cfgAutoSP = m_legacyArrayModule->isAutoSP();
-        m_cfgForceSP = m_legacyArrayModule->isForceSP();
-    }
-
     moduleConfig->setKeyBoolValue("SpecialCodePrompt", m_cfgAutoSP);
     moduleConfig->setKeyBoolValue("QuickMode", m_cfgForceSP);
 
     if (!moduleConfig->hasKey("AlphanumericKeyboardLayout")) {
         moduleConfig->setKeyStringValue("AlphanumericKeyboardLayout", "com.apple.keylayout.US");
     }
+}
+
+void OpenVanilla::OVIMArray::setCustomMainTablePath(const string& path)
+{
+    if (m_customMainTablePath == path) {
+        return;
+    }
+
+    m_customMainTablePath = path;
+    clearTables();
+}
+
+void OpenVanilla::OVIMArray::checkTables()
+{
+    if (m_tablesLoaded) {
+        return;
+    }
+
+    static const char* tableFiles[4] = {
+        "array30.cin",
+        "array-shortcode.cin",
+        "array-special.cin",
+        "array-phrase.cin",
+    };
+
+    string arrayDir = m_tableRootPath + string(1, OVPathHelper::Separator()) + "Array" + string(1, OVPathHelper::Separator());
+
+    OpenVanilla::OVCINDataTableParser parser;
+
+    // The main table can be replaced by a user-imported table (e.g. a newer
+    // Array30 release with the hg symbol groups). Fall back to the bundled
+    // table when the custom one is missing or fails to load.
+    if (m_customMainTablePath.length()) {
+        m_tables[0] = parser.CINDataTableFromFileName(m_customMainTablePath);
+        // A parseable file without any chardef is useless as a main table;
+        // treat it as a load failure so a stray file cannot brick the module.
+        if (m_tables[0] && m_tables[0]->chardefMap()->size() == 0) {
+            delete m_tables[0];
+            m_tables[0] = 0;
+        }
+    }
+    if (!m_tables[0]) {
+        m_tables[0] = parser.CINDataTableFromFileName(arrayDir + tableFiles[0]);
+    }
+
+    for (size_t i = 1; i < 4; i++) {
+        m_tables[i] = parser.CINDataTableFromFileName(arrayDir + tableFiles[i]);
+    }
+
+    m_tablesLoaded = true;
+}
+
+OpenVanilla::OVCINDataTable* OpenVanilla::OVIMArray::mainTable()
+{
+    return m_tables[0];
+}
+
+OpenVanilla::OVCINDataTable* OpenVanilla::OVIMArray::shortcodeTable()
+{
+    return m_tables[1];
+}
+
+OpenVanilla::OVCINDataTable* OpenVanilla::OVIMArray::specialTable()
+{
+    return m_tables[2];
+}
+
+OpenVanilla::OVCINDataTable* OpenVanilla::OVIMArray::phraseTable()
+{
+    return m_tables[3];
 }

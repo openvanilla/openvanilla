@@ -21,9 +21,18 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 
+//
+// Test doubles and session plumbing that let the Swift unit tests drive the
+// modern-API Array input method (OpenVanilla::OVIMArray / OVIMArrayContext)
+// without any AppKit dependency, mirroring the app's key routing.
+//
+
 #include "ArrayIMTestSupport.h"
 
-#include "LegacyOVIMArray.h"
+#include "OVIMArray.h"
+#include "OVIMArrayContext.h"
+#include "OVTextBufferImpl.h"
+#include "OVConcreteKeyImpl.h"
 
 #include <cctype>
 #include <cstdio>
@@ -39,70 +48,110 @@ using namespace std;
 using namespace OpenVanilla;
 
 // =========================================================================
-// Test doubles for the legacy (OV_Array) interfaces
+// Test doubles for the modern interfaces
 // =========================================================================
 
-class TestKey : public ::OVKeyCode {
-    char c;
-    bool shiftPressed = false;
-    bool capsLockOn = false;
+class StubCandidateList : public OpenVanilla::OVCandidateList {
 public:
-    explicit TestKey(char ch) : c(ch) {}
-    TestKey(char ch, bool shift, bool capslock) : c(ch), shiftPressed(shift), capsLockOn(capslock) {}
-    int code() override { return c; }
-    bool isShift() override { return shiftPressed; }
-    bool isCapslock() override { return capsLockOn; }
-    bool isCtrl() override { return false; }
-    bool isAlt() override { return false; }
-    bool isNum() override { return false; }
+    vector<string> list;
+    void clear() override { list.clear(); }
+    size_t size() const override { return list.size(); }
+    string candidateAtIndex(size_t i) const override { return i < list.size() ? list[i] : string(); }
+    void setCandidate(size_t i, const string& c) override { if (i < list.size()) list[i] = c; }
+    void setCandidates(const vector<string>& c) override { list = c; }
+    void addCandidate(const string& c) override { list.push_back(c); }
+    void addCandidates(const vector<string>& c) override { for (auto& s : c) list.push_back(s); }
 };
 
-class TestBuffer : public OVBuffer {
+class StubPanel : public OVOneDimensionalCandidatePanel {
 public:
-    string content;
-    string committed;
-    OVBuffer* clear() override { content.clear(); return this; }
-    OVBuffer* append(const char* s) override { if (s) content += s; return this; }
-    OVBuffer* send() override { committed += content; content.clear(); return this; }
-    OVBuffer* update() override { return this; }
-    OVBuffer* update(int, int = -1, int = -1) override { return this; }
-    bool isEmpty() override { return content.empty(); }
+    StubCandidateList candList;
+    bool visible = false;
+    vector<OVKey> candidateKeys;
+    size_t perPage = 10;
+
+    void hide() override { visible = false; }
+    void show() override { visible = true; }
+    void updateDisplay() override {}
+    bool isVisible() override { return visible; }
+    void setPrompt(const string&) override {}
+    string prompt() override { return ""; }
+    bool yieldToCandidateEventHandler() override { return false; }
+    void cancelEventHandler() override {}
+    void reset() override { visible = false; candList.clear(); }
+    bool isHorizontal() const override { return false; }
+    bool isVertical() const override { return true; }
+    OpenVanilla::OVCandidateList* candidateList() override { return &candList; }
+    size_t candidatesPerPage() const override { return perPage; }
+    void setCandidatesPerPage(size_t n) override { perPage = n; }
+    size_t pageCount() const override { return 0; }
+    size_t currentPage() const override { return 0; }
+    size_t currentPageCandidateCount() const override { return candList.size(); }
+    bool allowsPageWrapping() const override { return false; }
+    void setAllowsPageWrapping(bool) override {}
+    size_t currentHighlightIndex() const override { return 0; }
+    void setHighlightIndex(size_t) override {}
+    size_t currentHighlightIndexInCandidateList() const override { return 0; }
+    size_t goToNextPage() override { return 0; }
+    size_t goToPreviousPage() override { return 0; }
+    size_t goToPage(size_t) override { return 0; }
+    const OVKey candidateKeyAtIndex(size_t i) override { return candidateKeys[i]; }
+    void setCandidateKeys(const OVKeyVector& keys) override { candidateKeys = keys; }
+    void setNextPageKeys(const OVKeyVector&) override {}
+    void setPreviousPageKeys(const OVKeyVector&) override {}
+    void setNextCandidateKeys(const OVKeyVector&) override {}
+    void setPreviousCandidateKeys(const OVKeyVector&) override {}
+    void setCancelKeys(const OVKeyVector&) override {}
+    void setChooseHighlightedCandidateKeys(const OVKeyVector&) override {}
+    const OVKeyVector defaultCandidateKeys() const override { return OVKeyVector(); }
+    const OVKeyVector defaultNextPageKeys() const override { return OVKeyVector(); }
+    const OVKeyVector defaultNextCandidateKeys() const override { return OVKeyVector(); }
+    const OVKeyVector defaultPreviousPageKeys() const override { return OVKeyVector(); }
+    const OVKeyVector defaultPreviousCandidateKeys() const override { return OVKeyVector(); }
+    const OVKeyVector defaultCancelKeys() const override { return OVKeyVector(); }
+    const OVKeyVector defaultChooseHighlightedCandidateKeys() const override { return OVKeyVector(); }
+    void setCandidateKeysAndLabels(const vector<pair<OVKey, string> >& pairs) override {
+        candidateKeys.clear();
+        for (auto& p : pairs) candidateKeys.push_back(p.first);
+    }
 };
 
-class TestCandidate : public OVCandidate {
+class StubCandidateService : public OVCandidateService {
 public:
-    string content;
-    bool shown = false;
-    OVCandidate* clear() override { content.clear(); return this; }
-    OVCandidate* append(const char* s) override { if (s) content += s; return this; }
-    OVCandidate* hide() override { shown = false; return this; }
-    OVCandidate* show() override { shown = true; return this; }
-    OVCandidate* update() override { return this; }
-    bool onScreen() override { return shown; }
+    StubPanel panel;
+    OVOneDimensionalCandidatePanel* useOneDimensionalCandidatePanel() override { return &panel; }
 };
 
-class TestDictionary : public OVDictionary {
+class StubLoaderService : public OVLoaderService {
 public:
-    bool keyExist(const char*) override { return false; }
-    int getInteger(const char*) override { return 0; }
-    int setInteger(const char*, int) override { return 1; }
-    const char* getString(const char*) override { return ""; }
-    const char* setString(const char*, const char* v) override { return v; }
-};
-
-class TestService : public OVService {
-public:
-    int beeps = 0;
+    int beepCount = 0;
     string lastNotify;
-    void beep() override { beeps++; }
-    void notify(const char* msg) override { lastNotify = msg ? msg : ""; }
-    const char* locale() override { return "zh_TW"; }
-    const char* userSpacePath(const char*) override { return "/tmp"; }
-    const char* pathSeparator() override { return "/"; }
-    const char* toUTF8(const char*, const char* s) override { return s; }
-    const char* fromUTF8(const char*, const char* s) override { return s; }
-    const char* UTF16ToUTF8(unsigned short*, int) override { return ""; }
-    int UTF8ToUTF16(const char*, unsigned short**) override { return 0; }
+    void beep() override { beepCount++; }
+    void notify(const string& message) override { lastNotify = message; }
+    void HTMLNotify(const string&) override {}
+    const string locale() const override { return "zh_TW"; }
+    const OVKey makeOVKey(int characterCode, bool alt = false, bool opt = false, bool ctrl = false, bool shift = false, bool command = false, bool capsLock = false, bool numLock = false) override {
+        return OVKey(new OVConcreteKeyImpl(characterCode, alt, opt, ctrl, shift, command, capsLock, numLock));
+    }
+    const OVKey makeOVKey(const string& receivedString, bool alt = false, bool opt = false, bool ctrl = false, bool shift = false, bool command = false, bool capsLock = false, bool numLock = false) override {
+        return OVKey(new OVConcreteKeyImpl(receivedString, alt, opt, ctrl, shift, command, capsLock, numLock));
+    }
+    ostream& logger(const string& = "") override {
+        static ostringstream buf;
+        return buf;
+    }
+    OVDatabaseService* defaultDatabaseService() override { return 0; }
+    OVDatabaseService* CINDatabaseService() override { return 0; }
+    OVDatabaseService* SQLiteDatabaseService() override { return 0; }
+    OVEncodingService* encodingService() override { return 0; }
+    void __reserved1(const string&) override {}
+    void __reserved2(const string&) override {}
+    void __reserved3(const string&) override {}
+    void __reserved4(const string&) override {}
+    const string __reserved5() const override { return ""; }
+    void __reserved6(const string&) override {}
+    void __reserved7(const string&, const string&) override {}
+    void* __reserved8(const string&) override { return 0; }
 };
 
 // =========================================================================
@@ -110,14 +159,16 @@ public:
 // =========================================================================
 
 struct OVArrayLegacySession {
-    OVIMArray module;
-    TestDictionary dict;
-    TestService srv;
-    OVIMArrayContext* ctx = 0;
-    TestBuffer buf;
-    TestCandidate candi;
-    vector<string> parsedCandidates;
+    OpenVanilla::OVIMArray* module = 0;
+    OpenVanilla::OVIMArrayContext* ctx = 0;
+    StubLoaderService lsvc;
+    StubCandidateService csvc;
+    OVTextBufferImpl reading;
+    OVTextBufferImpl composing;
+    string committedAccumulator;
     string tmpRoot;   // owns the copied tables; removed on destroy
+    string cachedBuffer;
+    string cachedNotify;
 };
 
 static bool copyFile(const string& src, const string& dst)
@@ -137,28 +188,6 @@ static bool copyFile(const string& src, const string& dst)
     fclose(in);
     fclose(out);
     return true;
-}
-
-// Parses the legacy candidate bar text ("1.甲 2.乙 ...") into plain values.
-static vector<string> parseLegacyCandidates(const string& text)
-{
-    vector<string> result;
-    size_t pos = 0;
-    while (pos < text.size()) {
-        size_t end = text.find(' ', pos);
-        if (end == string::npos) end = text.size();
-        string token = text.substr(pos, end - pos);
-        pos = end + 1;
-        if (token.size() >= 3 && token[1] == '.') {
-            result.push_back(token.substr(2));
-        }
-    }
-    return result;
-}
-
-static void refreshLegacyCandidates(OVArrayLegacySession* s)
-{
-    s->parsedCandidates = parseLegacyCandidates(s->candi.content);
 }
 
 // =========================================================================
@@ -202,23 +231,18 @@ static OVArrayLegacySession* createSession(const char* dataTablesRoot, const cha
         }
     }
 
+    s->module = new OpenVanilla::OVIMArray(s->tmpRoot);
     if (customMainTablePath && strlen(customMainTablePath)) {
-        s->module.setCustomMainTablePath(customMainTablePath);
+        s->module->setCustomMainTablePath(customMainTablePath);
     }
 
-    string root = s->tmpRoot + "/";
-    if (!s->module.initialize(&s->dict, &s->srv, root.c_str())) {
-        ov_array_session_destroy(s);
-        return 0;
-    }
-
-    s->ctx = static_cast<OVIMArrayContext*>(s->module.newContext());
+    s->ctx = static_cast<OpenVanilla::OVIMArrayContext*>(s->module->createContext());
     if (!s->ctx) {
         ov_array_session_destroy(s);
         return 0;
     }
 
-    refreshLegacyCandidates(s);
+    s->ctx->startSession(&s->lsvc);
     return s;
 }
 
@@ -239,6 +263,8 @@ void ov_array_session_destroy(OVArrayLegacySession* s)
         delete s->ctx;
         s->ctx = 0;
     }
+    delete s->module;
+    s->module = 0;
     if (!s->tmpRoot.empty()) {
         string cmd = "rm -rf \"" + s->tmpRoot + "\"";
         system(cmd.c_str());
@@ -249,52 +275,53 @@ void ov_array_session_destroy(OVArrayLegacySession* s)
 void ov_array_session_reset(OVArrayLegacySession* s)
 {
     if (!s) return;
-    s->ctx->clear();
-    s->buf = TestBuffer();
-    s->candi = TestCandidate();
-    s->srv.beeps = 0;
-    s->srv.lastNotify.clear();
-    s->module.setAutoSP(true);
-    s->module.setForceSP(false);
-    refreshLegacyCandidates(s);
+    s->reading = OVTextBufferImpl();
+    s->composing = OVTextBufferImpl();
+    s->committedAccumulator.clear();
+    s->cachedBuffer.clear();
+    s->cachedNotify.clear();
+    s->lsvc.beepCount = 0;
+    s->lsvc.lastNotify.clear();
+    s->csvc.panel.reset();
+    s->ctx->startSession(&s->lsvc);
+    s->module->setAutoSP(true);
+    s->module->setForceSP(false);
+}
+
+static int sendKey(OVArrayLegacySession* s, char key, bool shift, bool capslock)
+{
+    if (!s || !s->ctx) return 0;
+
+    // Mirror OVInputMethodController: a tooltip is dismissed by the next key.
+    if (s->reading.toolTipText().length() || s->composing.toolTipText().length()) {
+        s->reading.clearToolTip();
+        s->composing.clearToolTip();
+    }
+
+    OVKey k = s->lsvc.makeOVKey((int)key, false, false, false, shift, false, capslock, false);
+    bool handled = s->ctx->handleKey(&k, &s->reading, &s->composing, &s->csvc, &s->lsvc);
+
+    if (s->composing.isCommitted()) {
+        s->committedAccumulator += s->composing.composedCommittedText();
+        s->composing.finishCommit();
+    }
+
+    // Cache the observable strings: composedText()/toolTipText() return
+    // values by value.
+    s->cachedBuffer = (s->ctx->isComposing()) ? s->composing.composedText() : s->reading.composedText();
+    s->cachedNotify = s->composing.toolTipText();
+
+    return handled ? 1 : 0;
 }
 
 int ov_array_session_key(OVArrayLegacySession* s, char key)
 {
-    if (!s || !s->ctx) return 0;
-    TestKey k(key);
-    int handled = s->ctx->keyEvent(&k, &s->buf, &s->candi, &s->srv);
-    refreshLegacyCandidates(s);
-    return handled;
+    return sendKey(s, key, false, false);
 }
 
 int ov_array_session_key_with_modifiers(OVArrayLegacySession* s, char key, int shift, int capslock)
 {
-    if (!s || !s->ctx) return 0;
-    TestKey k(key, shift != 0, capslock != 0);
-    int handled = s->ctx->keyEvent(&k, &s->buf, &s->candi, &s->srv);
-    refreshLegacyCandidates(s);
-    return handled;
-}
-
-int ov_array_session_beep_count(OVArrayLegacySession* s)
-{
-    return s ? s->srv.beeps : 0;
-}
-
-void ov_array_session_set_force_sp(OVArrayLegacySession* s, int on)
-{
-    if (s) s->module.setForceSP(on != 0);
-}
-
-void ov_array_session_set_auto_sp(OVArrayLegacySession* s, int on)
-{
-    if (s) s->module.setAutoSP(on != 0);
-}
-
-int ov_array_session_is_force_sp(OVArrayLegacySession* s)
-{
-    return s ? (s->module.isForceSP() ? 1 : 0) : 0;
+    return sendKey(s, key, shift != 0, capslock != 0);
 }
 
 int ov_array_session_is_composing(OVArrayLegacySession* s)
@@ -304,31 +331,51 @@ int ov_array_session_is_composing(OVArrayLegacySession* s)
 
 const char* ov_array_session_buffer(OVArrayLegacySession* s)
 {
-    return s ? s->buf.content.c_str() : "";
+    return s ? s->cachedBuffer.c_str() : "";
 }
 
 const char* ov_array_session_committed(OVArrayLegacySession* s)
 {
-    return s ? s->buf.committed.c_str() : "";
+    return s ? s->committedAccumulator.c_str() : "";
 }
 
 int ov_array_session_candidates_shown(OVArrayLegacySession* s)
 {
-    return s ? (s->candi.shown ? 1 : 0) : 0;
+    return s ? (s->csvc.panel.visible ? 1 : 0) : 0;
 }
 
 int ov_array_session_candidate_count(OVArrayLegacySession* s)
 {
-    return s ? (int)s->parsedCandidates.size() : 0;
+    return s ? (int)s->csvc.panel.candList.size() : 0;
 }
 
 const char* ov_array_session_candidate_at(OVArrayLegacySession* s, int index)
 {
-    if (!s || index < 0 || (size_t)index >= s->parsedCandidates.size()) return "";
-    return s->parsedCandidates[(size_t)index].c_str();
+    if (!s || index < 0 || (size_t)index >= s->csvc.panel.candList.list.size()) return "";
+    return s->csvc.panel.candList.list[(size_t)index].c_str();
 }
 
 const char* ov_array_session_last_notify(OVArrayLegacySession* s)
 {
-    return s ? s->srv.lastNotify.c_str() : "";
+    return s ? s->cachedNotify.c_str() : "";
+}
+
+int ov_array_session_beep_count(OVArrayLegacySession* s)
+{
+    return s ? s->lsvc.beepCount : 0;
+}
+
+void ov_array_session_set_auto_sp(OVArrayLegacySession* s, int on)
+{
+    if (s && s->module) s->module->setAutoSP(on != 0);
+}
+
+void ov_array_session_set_force_sp(OVArrayLegacySession* s, int on)
+{
+    if (s && s->module) s->module->setForceSP(on != 0);
+}
+
+int ov_array_session_is_force_sp(OVArrayLegacySession* s)
+{
+    return s && s->module ? (s->module->isForceSP() ? 1 : 0) : 0;
 }

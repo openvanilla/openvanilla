@@ -33,18 +33,20 @@
 
 #include "OpenVanilla.h"
 
+#include <string>
+
 class OVIMArray;
 
 namespace OpenVanilla {
     using namespace std;
 
     class OVIMArrayContext;
-    
+
     class OVIMArray : public OVInputMethod {
     public:
         OVIMArray(const string& tableRootPath);
         ~OVIMArray();
-        
+
         virtual OVEventHandlingContext* createContext();
         virtual const string identifier() const;
         virtual const string localizedName(const string& locale);
@@ -54,15 +56,26 @@ namespace OpenVanilla {
 
         // Replaces the main table (array30.cin) with a user-imported table;
         // the bundled table remains the fallback. Empty path = use built-in.
-        virtual void setCustomMainTablePath(const string& path)
-        {
-            m_customMainTablePath = path;
-        }
-        
+        virtual void setCustomMainTablePath(const string& path);
+
+        // Table access for the context.
+        virtual void checkTables();
+        virtual OVCINDataTable* mainTable();
+        virtual OVCINDataTable* shortcodeTable();
+        virtual OVCINDataTable* specialTable();
+        virtual OVCINDataTable* phraseTable();
+
+        virtual bool isAutoSP() const { return m_cfgAutoSP; }
+        virtual bool isForceSP() const { return m_cfgForceSP; }
+        virtual void setAutoSP(bool value) { m_cfgAutoSP = value; }
+        virtual void setForceSP(bool value) { m_cfgForceSP = value; }
+
     protected:
-        bool m_lazyInitialized;
+        void clearTables();
+
+        bool m_tablesLoaded;
         string m_tableRootPath;
-        ::OVIMArray *m_legacyArrayModule;
+        OVCINDataTable* m_tables[4];
 
         bool m_cfgAutoSP;
         bool m_cfgForceSP;
