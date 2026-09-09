@@ -79,6 +79,14 @@ let package = Package(
         .target(
             name: "OVAFAssociatedPhrases",
             dependencies: ["OpenVanilla"]),
+        .target(
+            name: "ArrayIMTestSupport",
+            dependencies: ["OpenVanilla",
+                           "LegacyOpenVanilla",
+                           "OVIMArray"]),
+        .testTarget(
+            name: "OpenVanillaTests",
+            dependencies: ["ArrayIMTestSupport"]),
     ],
     cxxLanguageStandard: CXXLanguageStandard.cxx11
 )
