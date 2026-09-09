@@ -60,6 +60,10 @@ OVEventHandlingContext* OpenVanilla::OVIMArray::createContext()
         m_lazyInitialized = true;
         m_legacyArrayModule = new ::OVIMArray;
 
+        if (m_customMainTablePath.length()) {
+            m_legacyArrayModule->setCustomMainTablePath(m_customMainTablePath.c_str());
+        }
+
         OVLegacyServiceWrapper service;
         OVLegacyDictionaryWrapper dictionary;
 

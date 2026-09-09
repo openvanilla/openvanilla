@@ -244,7 +244,12 @@ static string InputMethodConfigIdentifier(const string &identifier) {
     }
 
     NSString *arrayTableRoot = [[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:@"DataTables"];
-    OVInputMethod *inputMethod = new OpenVanilla::OVIMArray(arrayTableRoot.UTF8String);
+    OpenVanilla::OVIMArray *arrayInputMethod = new OpenVanilla::OVIMArray(arrayTableRoot.UTF8String);
+    NSString *customArray30TablePath = [self customArray30MainTablePath];
+    if (customArray30TablePath) {
+        arrayInputMethod->setCustomMainTablePath(customArray30TablePath.fileSystemRepresentation);
+    }
+    OVInputMethod *inputMethod = arrayInputMethod;
     inputMethods.push_back(inputMethod);
     OVInputMethod *big5Code = new OpenVanilla::OVIMBig5Code();
     inputMethods.push_back(big5Code);
@@ -687,6 +692,114 @@ static string InputMethodConfigIdentifier(const string &identifier) {
     }
 
     return nil;
+}
+
+- (NSString *)rootPathForCustomArray30Table
+{
+    NSArray *appSupportPaths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    if (!appSupportPaths.count) {
+        return nil;
+    }
+
+    NSString *appSupportRoot = appSupportPaths[0];
+    NSString *appDataRoot = [appSupportRoot stringByAppendingPathComponent:[NSBundle mainBundle].infoDictionary[(id)kCFBundleNameKey]];
+
+    // Deliberately NOT under UserData/TableBased: the table-based scanner would
+    // otherwise also register the table as a separate (generic) input method.
+    NSString *tableRoot = [appDataRoot stringByAppendingPathComponent:@"UserData/Array30"];
+
+    BOOL isDir = NO;
+    BOOL pathExists = [[NSFileManager defaultManager] fileExistsAtPath:tableRoot isDirectory:&isDir];
+
+    if (!pathExists) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:tableRoot withIntermediateDirectories:YES attributes:nil error:NULL];
+        pathExists = [[NSFileManager defaultManager] fileExistsAtPath:tableRoot isDirectory:&isDir];
+    }
+
+    if (pathExists && isDir) {
+        return tableRoot;
+    }
+
+    return nil;
+}
+
+- (NSString *)customArray30MainTablePath
+{
+    NSString *root = [self rootPathForCustomArray30Table];
+    if (!root) {
+        return nil;
+    }
+
+    NSString *path = [root stringByAppendingPathComponent:@"array30.cin"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        return path;
+    }
+
+    return nil;
+}
+
+- (BOOL)hasCustomArray30MainTable
+{
+    return [self customArray30MainTablePath] != nil;
+}
+
+- (BOOL)canInstallArray30MainTableWithTablePath:(NSString *)path error:(NSError **)error
+{
+    OpenVanilla::OVCINDataTableParser parser;
+    OpenVanilla::OVCINDataTable *table = parser.CINDataTableFromFileName(path.fileSystemRepresentation);
+
+    BOOL valid = table && table->keynameMap()->size() && table->chardefMap()->size();
+    delete table;
+
+    if (!valid) {
+        if (error) {
+            NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot use the file \"%@\": file may be corrupt or is not a valid CIN file", nil), path];
+            NSDictionary *userInfo = @{NSLocalizedDescriptionKey: message};
+            *error = [NSError errorWithDomain:[NSBundle mainBundle].bundleIdentifier code:-1 userInfo:userInfo];
+        }
+        return NO;
+    }
+
+    return YES;
+}
+
+- (BOOL)installArray30MainTableWithTablePath:(NSString *)path error:(NSError **)error
+{
+    if (![self canInstallArray30MainTableWithTablePath:path error:error]) {
+        return NO;
+    }
+
+    NSString *root = [self rootPathForCustomArray30Table];
+    if (!root) {
+        return NO;
+    }
+
+    NSString *targetPath = [root stringByAppendingPathComponent:@"array30.cin"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:targetPath]) {
+        [[NSFileManager defaultManager] removeItemAtPath:targetPath error:error];
+    }
+
+    BOOL success = [[NSFileManager defaultManager] copyItemAtPath:path toPath:targetPath error:error];
+    if (success) {
+        [self reload];
+    }
+
+    return success;
+}
+
+- (BOOL)removeArray30MainTable:(NSError **)error
+{
+    NSString *path = [self customArray30MainTablePath];
+    if (!path) {
+        return NO;
+    }
+
+    BOOL success = [[NSFileManager defaultManager] removeItemAtPath:path error:error];
+    if (success) {
+        [self reload];
+    }
+
+    return success;
 }
 
 - (BOOL)canSelectInputMethod:(NSString *)identifier

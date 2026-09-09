@@ -158,3 +158,14 @@
 "Create System Report" = "產生系統報告";
 "You can create a system report and attach it when filing an issue, so the developers can help you better." = "當您在回報問題的時候，有時您可以提供一份系統報告，可以讓開發團隊更了解您的問題。";
 
+
+"Using the built-in Array30 table." = "使用內建行列30字碼表。";
+"Using an imported Array30 table." = "使用匯入的行列30字碼表。";
+"Import Array30 Table…" = "匯入行列30字碼表…";
+"Use the Built-in Table" = "回復使用內建字碼表";
+"Pick the Array30 Table to Import" = "選取要匯入的行列30字碼表";
+"Cannot Import Array30 Table" = "無法匯入行列30字碼表";
+"Array30 Table Imported" = "已匯入行列30字碼表";
+"The Array30 input method now uses the imported table." = "行列輸入法現在使用匯入的字碼表。";
+"The Array30 input method will go back to using its built-in table." = "行列輸入法將回復使用內建的字碼表。";
+"Failed to remove the Array30 table.\n\nError: %@" = "無法移除行列30字碼表。\n\n錯誤：%@";

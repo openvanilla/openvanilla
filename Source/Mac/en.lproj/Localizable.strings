@@ -188,3 +188,14 @@
 "Advanced" = "Advanced";
 "Create System Report" = "Create System Report";
 "You can create a system report and attach it when filing an issue, so the developers can help you better." = "You can create a system report and attach it when filing an issue, so the developers can help you better.";
+
+"Using the built-in Array30 table." = "Using the built-in Array30 table.";
+"Using an imported Array30 table." = "Using an imported Array30 table.";
+"Import Array30 Table…" = "Import Array30 Table…";
+"Use the Built-in Table" = "Use the Built-in Table";
+"Pick the Array30 Table to Import" = "Pick the Array30 Table to Import";
+"Cannot Import Array30 Table" = "Cannot Import Array30 Table";
+"Array30 Table Imported" = "Array30 Table Imported";
+"The Array30 input method now uses the imported table." = "The Array30 input method now uses the imported table.";
+"The Array30 input method will go back to using its built-in table." = "The Array30 input method will go back to using its built-in table.";
+"Failed to remove the Array30 table.\n\nError: %@" = "Failed to remove the Array30 table.\n\nError: %@";

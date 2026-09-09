@@ -537,7 +537,10 @@
             <connections>
                 <outlet property="fieldAlphaNumericKeyboardLayout" destination="v1r-B2-JDD" id="Pb7-zh-9nQ"/>
                 <outlet property="fieldAutoSP" destination="146" id="181"/>
+                <outlet property="fieldCustomArray30TableInfo" destination="ovA-30-Sts" id="ovA-30-o1"/>
                 <outlet property="fieldForceSP" destination="148" id="182"/>
+                <outlet property="importArray30TableButton" destination="ovA-30-Imp" id="ovA-30-o2"/>
+                <outlet property="removeArray30TableButton" destination="ovA-30-Rmv" id="ovA-30-o3"/>
                 <outlet property="view" destination="145" id="171"/>
             </connections>
         </viewController>
@@ -652,6 +655,41 @@
                     </buttonCell>
                     <connections>
                         <action selector="updateField:" target="167" id="180"/>
+                    </connections>
+                </button>
+                <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ovA-30-Sep">
+                    <rect key="frame" x="20" y="250" width="401" height="5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </box>
+                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovA-30-Sts">
+                    <rect key="frame" x="18" y="200" width="404" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Using the built-in Array30 table" id="ovA-30-Stc">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovA-30-Imp">
+                    <rect key="frame" x="86" y="164" width="269" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Import Array30 Table…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ovA-30-Imc">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="importArray30TableAction:" target="167" id="ovA-30-ImpA"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovA-30-Rmv">
+                    <rect key="frame" x="86" y="128" width="269" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Use the Built-in Table" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ovA-30-Rmc">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="removeArray30TableAction:" target="167" id="ovA-30-RmvA"/>
                     </connections>
                 </button>
             </subviews>

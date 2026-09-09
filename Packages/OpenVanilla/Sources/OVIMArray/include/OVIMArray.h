@@ -51,6 +51,13 @@ namespace OpenVanilla {
         virtual bool initialize(OVPathInfo* pathInfo, OVLoaderService* loaderService);
         virtual void loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService);
         virtual void saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService);
+
+        // Replaces the main table (array30.cin) with a user-imported table;
+        // the bundled table remains the fallback. Empty path = use built-in.
+        virtual void setCustomMainTablePath(const string& path)
+        {
+            m_customMainTablePath = path;
+        }
         
     protected:
         bool m_lazyInitialized;
@@ -59,6 +66,7 @@ namespace OpenVanilla {
 
         bool m_cfgAutoSP;
         bool m_cfgForceSP;
+        string m_customMainTablePath;
     };
 };
 

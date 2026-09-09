@@ -1,8 +1,5 @@
+// Copyright (c) 2022 and onwards The OpenVanilla Authors.
 //
-// OVModuleManager.h
-//
-// Copyright (c) 2004-2012 Lukhnos Liu (lukhnos at openvanilla dot org)
-// 
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without
@@ -23,7 +20,6 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
-//
 
 #import <Foundation/Foundation.h>
 #import <map>
@@ -67,6 +63,14 @@ namespace OpenVanilla {
 - (void)installCustomTableBasedInputMethodWithTablePath:(NSString *)path;
 - (BOOL)isCustomTableBasedInputMethod:(NSString *)identifier;
 - (BOOL)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError **)error;
+
+// A user-imported Array30 main table replaces the bundled array30.cin of the
+// built-in Array input method (e.g. a newer Array30 release with the hg
+// symbol groups).
+- (BOOL)hasCustomArray30MainTable;
+- (BOOL)canInstallArray30MainTableWithTablePath:(NSString *)path error:(NSError **)error;
+- (BOOL)installArray30MainTableWithTablePath:(NSString *)path error:(NSError **)error;
+- (BOOL)removeArray30MainTable:(NSError **)error;
 
 - (NSString *)filteredStringWithString:(NSString *)input;
 

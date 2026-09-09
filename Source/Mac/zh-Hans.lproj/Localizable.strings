@@ -157,3 +157,14 @@
 "Advanced" = "高级设置";
 "Create System Report" = "产生系统报告";
 "You can create a system report and attach it when filing an issue, so the developers can help you better." = "当您在回报问题的时候，有时您可以提供一份系统报告，可以让开发团队更了解您的问题。";
+
+"Using the built-in Array30 table." = "使用内置行列30码表。";
+"Using an imported Array30 table." = "使用导入的行列30码表。";
+"Import Array30 Table…" = "导入行列30码表…";
+"Use the Built-in Table" = "恢复使用内置码表";
+"Pick the Array30 Table to Import" = "选取要导入的行列30码表";
+"Cannot Import Array30 Table" = "无法导入行列30码表";
+"Array30 Table Imported" = "已导入行列30码表";
+"The Array30 input method now uses the imported table." = "行列输入法现在使用导入的码表。";
+"The Array30 input method will go back to using its built-in table." = "行列输入法将恢复使用内置的码表。";
+"Failed to remove the Array30 table.\n\nError: %@" = "无法移除行列30码表。\n\n错误：%@";

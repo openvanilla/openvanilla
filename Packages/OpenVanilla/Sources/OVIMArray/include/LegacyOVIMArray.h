@@ -126,10 +126,36 @@ private:
     char cname[128], ename[128];
     OpenVanilla::OVCINDataTable *tabs[4]; // main, short-code, special-code, phrase
     int cfgAutoSP, cfgForceSP;
+    std::string customMainTablePath;
 
 public:
+    OVIMArray()
+    {
+        tabs[0] = tabs[1] = tabs[2] = tabs[3] = 0;
+        cfgAutoSP = 0;
+        cfgForceSP = 0;
+    }
+
     virtual int initialize(OVDictionary *, OVService*, const char *mp);
     virtual const char* identifier() { return "OVIMArray"; }
+
+    ~OVIMArray()
+    {
+        for (int i = 0; i < 4; i++) {
+            if (tabs[i]) {
+                delete tabs[i];
+                tabs[i] = 0;
+            }
+        }
+    }
+
+    // Replaces the main table (array30.cin) with a user-imported table.
+    // The bundled main table is still used as a fallback when the custom
+    // table is missing or fails to load.
+    virtual void setCustomMainTablePath(const char* path)
+    {
+        customMainTablePath = path ? path : "";
+    }
     virtual OVInputMethodContext *newContext()
 	{ 
         return new OVIMArrayContext(this, tabs);

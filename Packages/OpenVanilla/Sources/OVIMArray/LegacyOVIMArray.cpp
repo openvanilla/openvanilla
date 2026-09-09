@@ -519,8 +519,28 @@ int OVIMArray::initialize(OVDictionary *conf, OVService* s, const char *path)
 #endif
     printf("OVIMArray: data dir %s", arraypath);
 
-    for (int i = 0; i < 4 ; i++) {
-        OpenVanilla::OVCINDataTableParser parser;
+    OpenVanilla::OVCINDataTableParser parser;
+
+    // The main table can be replaced by a user-imported table (e.g. a newer
+    // Array30 release with the hg symbol groups). Fall back to the bundled
+    // table when the custom one is missing or fails to load.
+    if (!customMainTablePath.empty()) {
+        murmur("OVIMArray: open custom cin %s", customMainTablePath.c_str());
+        tabs[MAIN_TAB] = parser.CINDataTableFromFileName(customMainTablePath);
+        // A parseable file without any chardef is useless as a main table;
+        // treat it as a load failure so a stray file cannot brick the module.
+        if (tabs[MAIN_TAB] && tabs[MAIN_TAB]->chardefMap()->size() == 0) {
+            delete tabs[MAIN_TAB];
+            tabs[MAIN_TAB] = 0;
+        }
+    }
+    if (!tabs[MAIN_TAB]) {
+        snprintf(buf, sizeof(buf), cinfiles[MAIN_TAB], arraypath);
+        murmur("OVIMArray: open cin %s", buf);
+        tabs[MAIN_TAB] = parser.CINDataTableFromFileName(buf);
+    }
+
+    for (int i = 1; i < 4 ; i++) {
         snprintf(buf, sizeof(buf), cinfiles[i], arraypath);
         murmur("OVIMArray: open cin %s", buf);
         tabs[i] = parser.CINDataTableFromFileName(buf);
