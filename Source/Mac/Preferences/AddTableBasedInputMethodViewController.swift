@@ -107,13 +107,16 @@ class AddTableBasedInputMethodViewController: BasePreferencesViewController {
 
     @IBAction @objc(importNewTableAction:)
     func importNewTableAction(_ sender: Any?) {
+        guard let window = self.view.window else {
+            return
+        }
+
         let panel = NSOpenPanel()
         panel.title = NSLocalizedString("Pick the .cin Table to Import", comment: "")
-        panel.level = NSWindow.Level(rawValue: Int(CGShieldingWindowLevel()) + 1)
         panel.allowsMultipleSelection = false
         panel.allowedFileTypes = ["cin"]
 
-        panel.begin { result in
+        panel.beginSheetModal(for: window) { result in
             if result.rawValue != 1 {
                 return
             }
