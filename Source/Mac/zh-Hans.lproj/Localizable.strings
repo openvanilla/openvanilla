@@ -157,3 +157,5 @@
 "Advanced" = "高级设置";
 "Create System Report" = "产生系统报告";
 "You can create a system report and attach it when filing an issue, so the developers can help you better." = "当您在回报问题的时候，有时您可以提供一份系统报告，可以让开发团队更了解您的问题。";
+
+"Shift-Space toggles number and symbol width" = "使用 Shift＋空格键切换数字及符号全半角";

@@ -47,6 +47,7 @@ namespace OpenVanilla {
         OVIMTableBased(const string& tablePath);
         ~OVIMTableBased();
 
+        bool shiftSpaceTogglesWidth() const { return m_configShiftSpaceTogglesWidth; }
         virtual OVEventHandlingContext* createContext();
         virtual const string identifier() const;
         virtual const string localizedName(const string& locale);
@@ -77,7 +78,10 @@ namespace OpenVanilla {
         bool m_configSendFirstCandidateWithSpaceWithOnePageList;
         bool m_configOnlyUseNumPadNumbersForRadicals;
         bool m_specialCodePrompt;
+        bool m_configShiftSpaceTogglesWidth;
     };
 };
+
+#include "OVIMTableBasedContext.h"
 
 #endif

@@ -211,6 +211,17 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="width-toggle">
+                    <rect key="frame" x="19" y="44" width="402" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Shift-Space toggles number and symbol width" bezelStyle="regularSquare" imagePosition="left" inset="2" id="width-cell">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="updateField:" target="69" id="width-action"/>
+                    </connections>
+                </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cm9-2B-Eff">
                     <rect key="frame" x="18" y="199" width="404" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -493,6 +504,7 @@
                 <outlet property="fieldMaximumRadicalLength" destination="77" id="85"/>
                 <outlet property="fieldSendFirstCandidateWithSpaceWithOnePageList" destination="17" id="91"/>
                 <outlet property="fieldShouldComposeAtMaximumRadicalLength" destination="83" id="87"/>
+                <outlet property="fieldShiftSpaceTogglesWidth" destination="width-toggle" id="width-outlet"/>
                 <outlet property="fieldSpecialCodePrompt" destination="cm9-2B-Eff" id="eSU-p8-0K4"/>
                 <outlet property="fieldUseSpaceAsFirstCandidateSelectionKey" destination="6y2-gG-MYD" id="p8f-L8-wb4"/>
                 <outlet property="removeInputMethodButton" destination="132" id="178"/>

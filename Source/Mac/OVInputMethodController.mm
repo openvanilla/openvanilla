@@ -30,6 +30,7 @@
 
 @import OpenVanilla;
 @import OpenVanillaImpl;
+@import OVIMTableBased;
 @import LoaderService;
 @import ModuleManager;
 @import TooltipUI;
@@ -421,6 +422,14 @@ using namespace OpenVanilla;
 {
     if (!_inputMethodContext) {
         return NO;
+    }
+
+    // Candidate matching ignores Shift for printable keys, so reserve the
+    // enabled shortcut before either candidates or associated phrases see it.
+    auto tableContext = dynamic_cast<OVIMTableBasedContext *>(_inputMethodContext);
+    if (tableContext && tableContext->toggleWidth(&key, _composingText)) {
+        [self updateClientComposingBuffer:client];
+        return YES;
     }
 
     bool handled = false;
