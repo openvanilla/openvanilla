@@ -24,11 +24,15 @@
 
 import Cocoa
 import Foundation
+import ModuleManager
 
 private var kModuleIdentifier = "org.openvanilla.OVAFAssociatedPhrases"
 
 @objc(OVAFAssociatedPhrasesPreferencesViewController)
 class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewController {
+
+    @IBOutlet weak var fieldTableStatus: NSTextField!
+    @IBOutlet weak var restoreTableButton: NSButton!
 
     @IBOutlet weak var fieldSelectionKeys: NSPopUpButton!
     @IBOutlet weak var fieldContinuousAssociation: NSButton!
@@ -53,6 +57,7 @@ class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewContr
 
     override func loadPreferences() {
         super.loadPreferences()
+        updateTableStatus()
 
         fieldSelectionKeys.removeAllItems()
         guard let selectionKeys = stringValue(forKey: "SelectionKeys") else {
@@ -124,5 +129,41 @@ class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewContr
         setBoolValue(
             fieldSendFirstCandidateWithSpaceWithOnePageList.state == .on,
             forKey: "SendFirstCandidateWithSpaceWithOnePageList")
+    }
+}
+
+
+extension AssociatedPhrasesPreferencesViewController {
+    private func updateTableStatus() {
+        let custom = OVModuleManager.default.hasCustomAssociatedPhrases
+        fieldTableStatus.stringValue = NSLocalizedString(custom ? "Current table: Custom" : "Current table: Built-in", comment: "")
+        restoreTableButton.isEnabled = custom
+    }
+
+    @IBAction func importTable(_ sender: Any?) {
+        let panel = NSOpenPanel()
+        panel.title = NSLocalizedString("Import Associated Phrases", comment: "")
+        panel.allowedFileTypes = ["cin"]
+        panel.allowsMultipleSelection = false
+        panel.canChooseDirectories = false
+        guard let window = view.window else { return }
+        panel.beginSheetModal(for: window) { [weak self] response in
+            guard response == .OK, let url = panel.url, let self else { return }
+            do {
+                try OVModuleManager.default.importAssociatedPhrases(from: url)
+                self.updateTableStatus()
+            } catch {
+                self.presentError(error)
+            }
+        }
+    }
+
+    @IBAction func restoreTable(_ sender: Any?) {
+        do {
+            try OVModuleManager.default.restoreDefaultAssociatedPhrases()
+            updateTableStatus()
+        } catch {
+            presentError(error)
+        }
     }
 }

@@ -157,3 +157,11 @@
 "Advanced" = "高级设置";
 "Create System Report" = "产生系统报告";
 "You can create a system report and attach it when filing an issue, so the developers can help you better." = "当您在回报问题的时候，有时您可以提供一份系统报告，可以让开发团队更了解您的问题。";
+
+/* Custom associated phrase tables */
+"Current table: Custom" = "当前词表：自定义";
+"Current table: Built-in" = "当前词表：内置";
+"Import Associated Phrases…" = "导入联想词表…";
+"Import Associated Phrases" = "导入联想词表";
+"Restore Default Table" = "恢复默认词表";
+"Choose a UTF-8 CIN table with a nonempty chardef section and one character per key." = "请选择 UTF-8 CIN 词表，chardef 区段不能为空，每个索引必须为单个字符。";

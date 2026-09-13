@@ -273,7 +273,7 @@ static string InputMethodConfigIdentifier(const string &identifier) {
     }
 
     OVPathInfo info;
-    NSString *associatedPhraseTable = [[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:@"DataTables/AssociatedPhrases/associated-phrases.cin"];
+    NSString *associatedPhraseTable = [self activeAssociatedPhrasesPath];
     _associatedPhrasesModule = new OVAFAssociatedPhrases(associatedPhraseTable.UTF8String);
     bool result = _associatedPhrasesModule->initialize(&info, self.loaderService);
     if (!result) {
@@ -285,6 +285,51 @@ static string InputMethodConfigIdentifier(const string &identifier) {
     [self synchronizeActiveInputMethodSettings];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:OVModuleManagerDidReloadNotification object:self];
+}
+
+
+- (NSURL *)customAssociatedPhrasesURL
+{
+    NSURL *support = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask].firstObject;
+    return [support URLByAppendingPathComponent:@"OpenVanilla/UserData/AssociatedPhrases/associated-phrases.cin"];
+}
+
+- (BOOL)hasCustomAssociatedPhrases
+{
+    NSData *data = [NSData dataWithContentsOfURL:[self customAssociatedPhrasesURL]];
+    NSString *text = data ? [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] : nil;
+    return data.length && text && OVAFAssociatedPhrases::ValidateTable(string((const char *)data.bytes, data.length));
+}
+
+- (NSString *)activeAssociatedPhrasesPath
+{
+    if (self.hasCustomAssociatedPhrases) return [self customAssociatedPhrasesURL].path;
+    return [[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:@"DataTables/AssociatedPhrases/associated-phrases.cin"];
+}
+
+- (BOOL)importAssociatedPhrasesFromURL:(NSURL *)url error:(NSError **)error
+{
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:error];
+    if (!data) return NO;
+    NSString *text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if (!data.length || !text || !OVAFAssociatedPhrases::ValidateTable(string((const char *)data.bytes, data.length))) {
+        if (error) *error = [NSError errorWithDomain:@"org.openvanilla.AssociatedPhrases" code:1 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Choose a UTF-8 CIN table with a nonempty chardef section and one character per key.", nil)}];
+        return NO;
+    }
+    NSURL *destination = [self customAssociatedPhrasesURL];
+    if (![[NSFileManager defaultManager] createDirectoryAtURL:destination.URLByDeletingLastPathComponent withIntermediateDirectories:YES attributes:nil error:error]) return NO;
+    // Validate before replacing; an unsuccessful write leaves the previous table intact.
+    if (![data writeToURL:destination options:NSDataWritingAtomic error:error]) return NO;
+    if (_associatedPhrasesModule) ((OVAFAssociatedPhrases *)_associatedPhrasesModule)->setTablePath(destination.path.UTF8String);
+    return YES;
+}
+
+- (BOOL)restoreDefaultAssociatedPhrasesWithError:(NSError **)error
+{
+    NSURL *url = [self customAssociatedPhrasesURL];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:url.path] && ![[NSFileManager defaultManager] removeItemAtURL:url error:error]) return NO;
+    if (_associatedPhrasesModule) ((OVAFAssociatedPhrases *)_associatedPhrasesModule)->setTablePath([self activeAssociatedPhrasesPath].UTF8String);
+    return YES;
 }
 
 - (void)synchronizeAroundFilterSettings

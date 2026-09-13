@@ -27,6 +27,8 @@
 
 #include "OVAFAssociatedPhrases.h"
 #include "OVAFAssociatedPhrasesContext.h"
+#include <sstream>
+#include <memory>
 
 using namespace OpenVanilla;
 
@@ -161,4 +163,45 @@ vector<pair<OVKey, string>> OVAFAssociatedPhrases::getSelectionKeyLabelPairs(OVL
         keyLabelPairs.push_back(make_pair(loaderService->makeOVKey(key), label));
     }
     return keyLabelPairs;
+}
+
+void OVAFAssociatedPhrases::setTablePath(const string& tablePath)
+{
+    m_tablePath = tablePath;
+    delete m_table;
+    m_table = nullptr;
+    checkTable();
+}
+
+bool OVAFAssociatedPhrases::ValidateTable(const string& data)
+{
+    if (data.find('\0') != string::npos) return false;
+    std::istringstream input(data);
+    string line;
+    bool started = false, ended = false;
+    map<string, vector<string>> expected;
+    while (std::getline(input, line)) {
+        std::istringstream row(line);
+        string key, value, extra;
+        if (!(row >> key) || key[0] == '#') continue;
+        if (key == "%chardef") {
+            if (!(row >> value) || (row >> extra)) return false;
+            if (value == "begin" && !started) started = true;
+            else if (value == "end" && started && !ended) ended = true;
+            else return false;
+            continue;
+        }
+        if (!started) continue;
+        if (ended || !(row >> value) || (row >> extra)) return false;
+        if (OVUTF8Helper::SplitStringByCodePoint(key).size() != 1) return false;
+        expected[key].push_back(value);
+    }
+    if (!started || !ended || expected.empty()) return false;
+    OVCINDataTableParser parser;
+    std::unique_ptr<OVCINDataTable> table(parser.CINDataTableFromString(data.c_str()));
+    if (!table) return false;
+    for (const auto& entry : expected) {
+        if (table->findChardef(entry.first) != entry.second) return false;
+    }
+    return true;
 }

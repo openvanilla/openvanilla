@@ -18,3 +18,7 @@ jobs:
         run: xcodebuild -scheme OpenVanilla -configuration Release build
       - name: Build
         run: xcodebuild -scheme OpenVanillaInstaller -configuration Release build
+      - name: Test associated phrase tables
+        run: |
+          clang++ -std=c++11 -I Packages/OpenVanilla/Sources/OpenVanilla/include -I Packages/OpenVanilla/Sources/OVAFAssociatedPhrases/include Tests/AssociatedPhrasesTests.cpp Packages/OpenVanilla/Sources/OVAFAssociatedPhrases/OVAFAssociatedPhrases.cpp Packages/OpenVanilla/Sources/OVAFAssociatedPhrases/OVAFAssociatedPhrasesContext.cpp -o /tmp/associated-phrases-tests
+          /tmp/associated-phrases-tests DataTables/associated-phrases.cin

@@ -158,3 +158,11 @@
 "Create System Report" = "產生系統報告";
 "You can create a system report and attach it when filing an issue, so the developers can help you better." = "當您在回報問題的時候，有時您可以提供一份系統報告，可以讓開發團隊更了解您的問題。";
 
+
+/* Custom associated phrase tables */
+"Current table: Custom" = "目前詞表：自訂";
+"Current table: Built-in" = "目前詞表：內置";
+"Import Associated Phrases…" = "匯入聯想詞表…";
+"Import Associated Phrases" = "匯入聯想詞表";
+"Restore Default Table" = "恢復預設詞表";
+"Choose a UTF-8 CIN table with a nonempty chardef section and one character per key." = "請選擇 UTF-8 CIN 詞表，chardef 區段不可空白，每個索引必須為單一字元。";

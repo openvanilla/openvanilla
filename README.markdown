@@ -54,6 +54,12 @@ OpenVanilla 的歷來版本都可從[GitHub 的釋出版本頁面](https://githu
 
 將 OpenVanilla 輸入法選單拉下來，選「OpenVanilla 偏好設定…」，然後選「加入新輸入法」，按「匯入…」按鈕，然後選取下載來的 .cin 檔案就可以了。
 
+### Q: 如何更換聯想詞表？
+
+在「OpenVanilla 偏好設定」的「聯想詞」頁面，按「匯入聯想詞表…」，選擇 UTF-8 編碼的 `.cin` 檔。詞表須包含非空白的 `%chardef begin` / `%chardef end` 區段，每列為一個起始字及其聯想文字；同一起始字的候選會保留檔案內的順序。
+
+匯入成功後立即生效，副本保存在 `~/Library/Application Support/OpenVanilla/UserData/AssociatedPhrases/associated-phrases.cin`，更新應用程式不會覆蓋它。匯入失敗會保留原有詞表。按「恢復預設詞表」會刪除匯入的副本，改用內置詞表；若啟動時自訂詞表遺失或無效，亦會使用內置詞表。
+
 ### Q: 如何製作自己的 .cin 輸入法表格檔？
 
 請參考這份[舊文件](CinHowTo.markdown)。請注意文件內容已經有許多地方過時。OpenVanilla 1.0 版不再需要使用者自行複製檔案到特定目錄（目錄也已經改名），現在從偏好設定就可以加入或移除自訂的輸入法了。
