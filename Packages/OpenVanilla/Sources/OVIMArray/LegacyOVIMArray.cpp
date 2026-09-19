@@ -114,8 +114,11 @@ int OVIMArrayContext::WaitKey2(OVKeyCode* key, OVBuffer* buf,
 
     char keycode = keyseq.getSeq()[1];
 
+    // A complete symbol code opens its group like a committed key sequence:
+    // the group's candidates pop up, or "無此字" if the group is empty (the
+    // v2026 table reserves hg3-hg7 but leaves them undefined).
     if (isSymbolSeq(keyseq.getSeq(), keyseq.length())) {
-        showSymbolCandidates(buf, candibar);
+        commitKeySeq(MAIN_TAB, "無此字", buf, candibar, srv);
     }
     else {
         if (!keyseq.hasWildcardCharacter()) {
@@ -133,7 +136,7 @@ int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVBuffer* buf,
                                OVCandidate* candibar, OVService* srv)
 {
     if (isSymbolSeq(keyseq.getSeq(), keyseq.length())) {
-        showSymbolCandidates(buf, candibar);
+        commitKeySeq(MAIN_TAB, "無此字", buf, candibar, srv);
         return 1;
     }
 
@@ -145,19 +148,6 @@ int OVIMArrayContext::WaitKey3(OVKeyCode* key, OVBuffer* buf,
     return 1;    
 }
 
-
-// Shows the symbol group named by a complete symbol code. Groups can be empty:
-// hg3-hg7 are reserved but still unused, and a replacement array30.cin may not
-// define every w group either, so never touch the vector without checking.
-void OVIMArrayContext::showSymbolCandidates(OVBuffer* buf, OVCandidate* candibar)
-{
-    updateCandidate(tabs[MAIN_TAB], buf, candibar);
-    if (candidateStringVector.empty()) {
-        return;
-    }
-    buf->clear()->append(candidateStringVector[0].c_str())->update();
-    changeState(STATE_WAIT_CANDIDATE);
-}
 
 int OVIMArrayContext::WaitCandidate(OVKeyCode* key, OVBuffer* buf,
                                     OVCandidate* candibar, OVService* srv)
