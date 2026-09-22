@@ -85,7 +85,7 @@ using namespace OpenVanilla;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInputMethodChange:) name:OVModuleManagerDidUpdateActiveInputMethodNotification object:[OVModuleManager defaultManager]];
         // On macOS 26+/27, programmatic input-source switches may skip deactivateServer.
         // Finalize stranded composition when OV is no longer selected.
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInputSourceDidResign:) name:@"OVInputSourceDidResignNotification" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInputSourceDidResign:) name:OVInputSourceDidResignNotification object:nil];
     }
 
     return self;

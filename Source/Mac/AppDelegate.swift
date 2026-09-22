@@ -29,12 +29,6 @@ import InputSourceHelper
 import ModuleManager
 import OpenVanillaImpl
 
-extension Notification.Name {
-    /// Posted when OpenVanilla is no longer the selected input source.
-    /// Controllers with a live client session should finalize like deactivateServer.
-    static let OVInputSourceDidResign = Notification.Name("OVInputSourceDidResignNotification")
-}
-
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet var window: NSWindow?
@@ -72,6 +66,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if InputSourceHelper.inputSourceSelected(forBundleID: bundleID) {
             return
         }
+        // Shared with OVInputMethodController via OVConstants (Swift: .OVInputSourceDidResign).
         NotificationCenter.default.post(name: .OVInputSourceDidResign, object: self)
     }
 

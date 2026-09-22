@@ -29,6 +29,9 @@
 
 extern NSString *const OVInputMethodConnectionName;
 
+/// Posted when OpenVanilla is no longer the selected input source (see AppDelegate).
+extern NSString *const OVInputSourceDidResignNotification;
+
 extern NSString *const OVActiveInputMethodIdentifierKey;
 extern NSString *const OVAlphanumericKeyboardLayoutKey;
 extern NSString *const OVFallbackToAlphanumericKeyboardLayoutOnShiftKey;

@@ -51,6 +51,25 @@ private func pathHasQuarantine(_ path: String) -> Bool {
     return output.contains("com.apple.quarantine")
 }
 
+@discardableResult
+private func stripQuarantine(at path: String) -> Bool {
+    let task = Process()
+    task.executableURL = URL(fileURLWithPath: "/usr/bin/xattr")
+    task.arguments = ["-cr", path]
+    do {
+        try task.run()
+        task.waitUntilExit()
+    } catch {
+        NSLog("Warning: xattr -cr failed to start on \(path): \(error)")
+        return false
+    }
+    if task.terminationStatus != 0 {
+        NSLog("Warning: xattr -cr failed on \(path) with status \(task.terminationStatus)")
+        return false
+    }
+    return !pathHasQuarantine(path)
+}
+
 private func registerInputSource(at path: String) {
     guard Bundle.main.bundleIdentifier != nil else {
         return
@@ -60,11 +79,23 @@ private func registerInputSource(at path: String) {
     _ = InputSourceHelper.registerInputSource(at: url)
 }
 
+private func canSafelyRelaunch(from installPath: String) -> Bool {
+    let expectedExec = (installPath as NSString)
+        .appendingPathComponent("Contents/MacOS/OpenVanilla")
+    return FileManager.default.isExecutableFile(atPath: expectedExec)
+        && !pathLooksTranslocated(installPath)
+        && !pathHasQuarantine(installPath)
+}
+
 /// If we were launched from App Translocation, try to hand off to the real install.
-/// Returns true when this process should exit immediately.
+/// Returns true when this process should exit immediately (never serve IMK from translocation).
 private func recoverFromAppTranslocationIfNeeded() -> Bool {
     let bundlePath = Bundle.main.bundlePath
     guard pathLooksTranslocated(bundlePath) else {
+        if pathHasQuarantine(bundlePath) {
+            NSLog("Warning: quarantine still present on \(bundlePath); attempting to clear.")
+            _ = stripQuarantine(at: bundlePath)
+        }
         registerInputSource(at: bundlePath)
         return false
     }
@@ -73,21 +104,27 @@ private func recoverFromAppTranslocationIfNeeded() -> Bool {
         "Warning: OpenVanilla is running from App Translocation (\(bundlePath)). Attempting to recover via \(kExpectedInputMethodPath)."
     )
     guard FileManager.default.fileExists(atPath: kExpectedInputMethodPath) else {
-        return false
+        // No real install to hand off to — refuse to become IMKServer from a translocated path.
+        NSLog(
+            "No install at \(kExpectedInputMethodPath). Exiting translocated process; reinstall OpenVanilla."
+        )
+        return true
+    }
+
+    if pathHasQuarantine(kExpectedInputMethodPath) {
+        NSLog("Clearing quarantine on \(kExpectedInputMethodPath) before relaunch.")
+        _ = stripQuarantine(at: kExpectedInputMethodPath)
     }
 
     registerInputSource(at: kExpectedInputMethodPath)
 
     let expectedExec = (kExpectedInputMethodPath as NSString)
         .appendingPathComponent("Contents/MacOS/OpenVanilla")
-    guard FileManager.default.isExecutableFile(atPath: expectedExec),
-        !pathLooksTranslocated(kExpectedInputMethodPath),
-        !pathHasQuarantine(kExpectedInputMethodPath)
-    else {
+    guard canSafelyRelaunch(from: kExpectedInputMethodPath) else {
         NSLog(
-            "Cannot safely relaunch from \(kExpectedInputMethodPath) (missing, translocated, or still quarantined)."
+            "Cannot safely relaunch from \(kExpectedInputMethodPath) (missing, translocated, or still quarantined). Exiting without starting IMK from App Translocation."
         )
-        return false
+        return true
     }
 
     let relaunch = Process()
@@ -97,8 +134,8 @@ private func recoverFromAppTranslocationIfNeeded() -> Bool {
         NSLog("Relaunched OpenVanilla from \(expectedExec); exiting translocated process.")
         return true
     } catch {
-        NSLog("Failed to relaunch from \(expectedExec): \(error)")
-        return false
+        NSLog("Failed to relaunch from \(expectedExec): \(error). Exiting translocated process.")
+        return true
     }
 }
 

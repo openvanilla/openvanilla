@@ -29,6 +29,8 @@
 
 NSString *const OVInputMethodConnectionName = @"OpenVanilla_1_Connection";
 
+NSString *const OVInputSourceDidResignNotification = @"OVInputSourceDidResignNotification";
+
 NSString *const OVActiveInputMethodIdentifierKey = @"ActiveInputMethod";
 NSString *const OVAlphanumericKeyboardLayoutKey = @"AlphanumericKeyboardLayout";
 NSString *const OVFallbackToAlphanumericKeyboardLayoutOnShiftKey = @"FallbackToAlphanumericKeyboardLayoutOnShiftKey";

@@ -297,13 +297,8 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
             return
         }
 
-        // Always attempt enable. On macOS 12+, TIS may return success while IsEnabled stays
-        // false until the user confirms in System Settings — check the actual flag.
-        if #available(macOS 12.0, *) {
-            NSLog("macOS 12 or later detected.")
-        } else {
-            NSLog("Installer runs with the pre-macOS 12 flow.")
-        }
+        // Always attempt enable. On macOS 12+ (our minimum), TIS may leave IsEnabled false
+        // until the user confirms in System Settings — check the actual flag.
         _ = InputSourceHelper.enable(inputSource: inputSource)
         let mainInputSourceEnabled = InputSourceHelper.inputSourceEnabled(for: inputSource)
         if mainInputSourceEnabled {
@@ -311,10 +306,6 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
         } else {
             NSLog("Failed to enable input method: \(imeIdentifier)")
         }
-
-        // Quarantine-free install is the hard requirement for stability; TIS IsEnabled can
-        // be unreliable on macOS 12+ even when the IME still needs a manual System Settings add.
-        let installFullyStable = quarantineCleared
 
         if warning {
             runAlertPanel(title: NSLocalizedString("Attention", comment: ""), message: NSLocalizedString("OpenVanilla is upgraded, but please log out or reboot for the new version to be fully functional.", comment: ""), buttonTitle: NSLocalizedString("OK", comment: ""))
@@ -367,8 +358,8 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
         actionButton.title = NSLocalizedString("Close Installer", comment: "")
         actionButton.isEnabled = true
 
-        // Keep the guidance on screen unless everything looks fully stable.
-        if installFullyStable {
+        // Keep the guidance on screen unless quarantine was cleared successfully.
+        if quarantineCleared {
             scheduleAutoClose()
         }
     }
