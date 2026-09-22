@@ -26,3 +26,5 @@ x64
 .idea
 .swiftpm
 .vscode
+# Accidental clang -I vfs junk
+OpenVanilla.xcodeproj/-I/
