@@ -187,6 +187,8 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
             endAppWithDelay()
             return
         }
+        let installedPath = (kTargetPartialPath as NSString).expandingTildeInPath
+
         let cpTask = Process()
         cpTask.launchPath = "/bin/cp"
         cpTask.arguments = ["-R", targetBundle, (kDestinationPartial as NSString).expandingTildeInPath]
@@ -201,7 +203,27 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
             return
         }
 
-        guard let imeBundle = Bundle(path: (kTargetPartialPath as NSString).expandingTildeInPath),
+        // Strip quarantine / Gatekeeper xattrs so macOS does not App-Translocate the IME.
+        let xattrTask = Process()
+        xattrTask.launchPath = "/usr/bin/xattr"
+        xattrTask.arguments = ["-cr", installedPath]
+        xattrTask.launch()
+        xattrTask.waitUntilExit()
+        if xattrTask.terminationStatus != 0 {
+            NSLog("Warning: xattr -cr failed on \(installedPath) with status \(xattrTask.terminationStatus)")
+        }
+
+        // Force Launch Services to index the real install path (not Trash / AppTranslocation).
+        let lsregister = "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
+        if FileManager.default.isExecutableFile(atPath: lsregister) {
+            let lsTask = Process()
+            lsTask.launchPath = lsregister
+            lsTask.arguments = ["-f", installedPath]
+            lsTask.launch()
+            lsTask.waitUntilExit()
+        }
+
+        guard let imeBundle = Bundle(path: installedPath),
               let imeIdentifier = imeBundle.bundleIdentifier
                 else {
             endAppWithDelay()
@@ -209,78 +231,77 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
         }
 
         let imeBundleURL = imeBundle.bundleURL
-        var inputSource = InputSourceHelper.inputSource(for: imeIdentifier)
 
-        if inputSource == nil {
-            NSLog("Registering input source \(imeIdentifier) at \(imeBundleURL.absoluteString).");
-            let status = InputSourceHelper.registerInputSource(at: imeBundleURL)
-            if !status {
-                let message = String(format: NSLocalizedString("Cannot find input source %@ after registration.", comment: ""), imeIdentifier)
-                runAlertPanel(title: NSLocalizedString("Fatal Error", comment: ""), message: message, buttonTitle: NSLocalizedString("Abort", comment: ""))
-                endAppWithDelay()
-                return
-            }
-
-            inputSource = InputSourceHelper.inputSource(for: imeIdentifier)
-            if inputSource == nil {
-                let message = String(format: NSLocalizedString("Cannot find input source %@ after registration.", comment: ""), imeIdentifier)
-                runAlertPanel(title: NSLocalizedString("Fatal Error", comment: ""), message: message, buttonTitle: NSLocalizedString("Abort", comment: ""))
-            }
+        // Always re-register at the installed path so stale Trash/AppTranslocation registrations
+        // are overwritten after upgrades.
+        NSLog("Registering input source \(imeIdentifier) at \(imeBundleURL.absoluteString).")
+        let registered = InputSourceHelper.registerInputSource(at: imeBundleURL)
+        if !registered {
+            NSLog("Warning: TISRegisterInputSource returned false for \(imeBundleURL.absoluteString)")
         }
 
-        var isMacOS12OrAbove = false
+        guard let inputSource = InputSourceHelper.inputSource(for: imeIdentifier) else {
+            let message = String(format: NSLocalizedString("Cannot find input source %@ after registration.", comment: ""), imeIdentifier)
+            runAlertPanel(title: NSLocalizedString("Fatal Error", comment: ""), message: message, buttonTitle: NSLocalizedString("Abort", comment: ""))
+            endAppWithDelay()
+            return
+        }
+
+        // Always attempt enable. On macOS 12+, TIS may return success while IsEnabled stays
+        // false until the user confirms in System Settings — check the actual flag.
         if #available(macOS 12.0, *) {
-            NSLog("macOS 12 or later detected.");
-            isMacOS12OrAbove = true
+            NSLog("macOS 12 or later detected.")
         } else {
-            NSLog("Installer runs with the pre-macOS 12 flow.");
+            NSLog("Installer runs with the pre-macOS 12 flow.")
         }
-
-        // If the IME is not enabled, enable it. Also, unconditionally enable it on macOS 12.0+,
-        // as the kTISPropertyInputSourceIsEnabled can still be true even if the IME is *not*
-        // enabled in the user's current set of IMEs (which means the IME does not show up in
-        // the user's input menu).
-
-        var mainInputSourceEnabled = InputSourceHelper.inputSourceEnabled(for: inputSource!)
-        if !mainInputSourceEnabled || isMacOS12OrAbove {
-            mainInputSourceEnabled = InputSourceHelper.enable(inputSource: inputSource!)
-            if (mainInputSourceEnabled) {
-                NSLog("Input method enabled: \(imeIdentifier)");
-            } else {
-                NSLog("Failed to enable input method: \(imeIdentifier)");
-            }
+        _ = InputSourceHelper.enable(inputSource: inputSource)
+        let mainInputSourceEnabled = InputSourceHelper.inputSourceEnabled(for: inputSource)
+        if mainInputSourceEnabled {
+            NSLog("Input method enabled: \(imeIdentifier)")
+        } else {
+            NSLog("Failed to enable input method: \(imeIdentifier)")
         }
 
         if warning {
             runAlertPanel(title: NSLocalizedString("Attention", comment: ""), message: NSLocalizedString("OpenVanilla is upgraded, but please log out or reboot for the new version to be fully functional.", comment: ""), buttonTitle: NSLocalizedString("OK", comment: ""))
             endAppWithDelay()
         } else {
-            if !mainInputSourceEnabled && !isMacOS12OrAbove {
-                runAlertPanel(title: NSLocalizedString("Warning", comment: ""), message: NSLocalizedString("Input method may not be fully enabled. Please enable it through System Preferences > Keyboard > Input Sources.", comment: ""), buttonTitle: NSLocalizedString("Continue", comment: ""))
-                endAppWithDelay()
-            } else {
-                let headlineAttr = [
-                    NSAttributedString.Key.font : NSFont.boldSystemFont(ofSize: NSFont.systemFontSize * 1.3),
-                    NSAttributedString.Key.foregroundColor : NSColor.textColor
-                ]
-                let bodyAttr = [
-                    NSAttributedString.Key.font : NSFont.systemFont(ofSize: NSFont.systemFontSize),
-                    NSAttributedString.Key.foregroundColor : NSColor.textColor
-                ]
-                let message = NSMutableAttributedString(string: NSLocalizedString("Installation Successful", comment: ""), attributes: headlineAttr)
-                let details = NSAttributedString(string: NSLocalizedString("OpenVanilla is ready to use.", comment: ""), attributes: bodyAttr)
-                message.append(NSAttributedString(string: "\n\n"))
-                message.append(details)
-                textView.textStorage?.setAttributedString(message)
+            if !mainInputSourceEnabled {
+                runAlertPanel(
+                    title: NSLocalizedString("Warning", comment: ""),
+                    message: NSLocalizedString(
+                        "Input method was installed, but could not be enabled automatically. Please add OpenVanilla in System Settings > Keyboard > Input Sources, then log out and log back in.",
+                        comment: ""),
+                    buttonTitle: NSLocalizedString("Continue", comment: ""))
+            }
 
-                installed = true
+            let headlineAttr = [
+                NSAttributedString.Key.font : NSFont.boldSystemFont(ofSize: NSFont.systemFontSize * 1.3),
+                NSAttributedString.Key.foregroundColor : NSColor.textColor
+            ]
+            let bodyAttr = [
+                NSAttributedString.Key.font : NSFont.systemFont(ofSize: NSFont.systemFontSize),
+                NSAttributedString.Key.foregroundColor : NSColor.textColor
+            ]
+            let message = NSMutableAttributedString(string: NSLocalizedString("Installation Successful", comment: ""), attributes: headlineAttr)
+            let detailsKey =
+                mainInputSourceEnabled
+                ? "OpenVanilla is ready to use."
+                : "Input method was installed, but could not be enabled automatically. Please add OpenVanilla in System Settings > Keyboard > Input Sources, then log out and log back in."
+            let details = NSAttributedString(string: NSLocalizedString(detailsKey, comment: ""), attributes: bodyAttr)
+            message.append(NSAttributedString(string: "\n\n"))
+            message.append(details)
+            textView.textStorage?.setAttributedString(message)
 
-                welcomeText.isHidden = true
-                cancelButton.isHidden = true
-                actionButton.title = NSLocalizedString("Close Installer", comment: "")
-                actionButton.isEnabled = true
+            installed = true
 
-                // System Settings now asks the user whether to activate the IME; auto-close the installer
+            welcomeText.isHidden = true
+            cancelButton.isHidden = true
+            actionButton.title = NSLocalizedString("Close Installer", comment: "")
+            actionButton.isEnabled = true
+
+            // Only auto-close when enable looked successful; otherwise leave the guidance visible.
+            if mainInputSourceEnabled {
                 scheduleAutoClose()
             }
         }

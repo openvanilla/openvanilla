@@ -54,6 +54,7 @@
 
 "Warning" = "安装不完整";
 "Input method may not be fully enabled. Please enable it through System Preferences > Keyboard > Input Sources." = "输入法已经安装好，但可能没有完全激活。请从 “系统偏好设置” > “键盘” > “输入法” 分页加入输入法。";
+"Input method was installed, but could not be enabled automatically. Please add OpenVanilla in System Settings > Keyboard > Input Sources, then log out and log back in." = "输入法已安装，但无法自动启用。请到“系统设置”>“键盘”>“输入法”加入 OpenVanilla，然后注销再登录。";
 "Continue" = "继续";
 
 /* No comment provided by engineer. */
