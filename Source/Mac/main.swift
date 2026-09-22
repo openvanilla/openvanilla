@@ -26,15 +26,31 @@ import InputMethodKit
 import InputSourceHelper
 import OpenVanillaImpl
 
-private func registerInputSourceAtBundleURL() {
+private let kExpectedInputMethodPath = (NSString(string: "~/Library/Input Methods/OpenVanilla.app")
+    .expandingTildeInPath)
+
+private func pathLooksTranslocated(_ path: String) -> Bool {
+    path.contains("AppTranslocation")
+}
+
+private func pathHasQuarantine(_ path: String) -> Bool {
+    let task = Process()
+    task.launchPath = "/usr/bin/xattr"
+    task.arguments = ["-p", "com.apple.quarantine", path]
+    task.standardOutput = FileHandle.nullDevice
+    task.standardError = FileHandle.nullDevice
+    task.launch()
+    task.waitUntilExit()
+    return task.terminationStatus == 0
+}
+
+private func registerInputSource(at path: String) {
     guard let bundleID = Bundle.main.bundleIdentifier else {
         return
     }
-    let bundleUrl = Bundle.main.bundleURL
-    // Always re-register so Launch Services / TIS keep the real bundle path
-    // (not a stale Trash or AppTranslocation location).
-    NSLog("Registering input source \(bundleID) at \(bundleUrl.absoluteString)")
-    _ = InputSourceHelper.registerInputSource(at: bundleUrl)
+    let url = URL(fileURLWithPath: path)
+    NSLog("Registering input source \(bundleID) at \(url.absoluteString)")
+    _ = InputSourceHelper.registerInputSource(at: url)
 }
 
 private func install() -> Int32 {
@@ -43,7 +59,7 @@ private func install() -> Int32 {
     }
     let bundleUrl = Bundle.main.bundleURL
 
-    registerInputSourceAtBundleURL()
+    registerInputSource(at: Bundle.main.bundlePath)
 
     guard let inputSource = InputSourceHelper.inputSource(for: bundleID) else {
         NSLog("Fatal error: Cannot find input source \(bundleID) after registration.")
@@ -89,19 +105,37 @@ if !loaded {
 }
 
 let bundlePath = Bundle.main.bundlePath
-if bundlePath.contains("AppTranslocation") {
+if pathLooksTranslocated(bundlePath) {
     NSLog(
-        "Warning: OpenVanilla is running from App Translocation (\(bundlePath)). Quarantine xattrs likely remain; reinstall with a fixed installer or clear quarantine on ~/Library/Input Methods/OpenVanilla.app."
+        "Warning: OpenVanilla is running from App Translocation (\(bundlePath)). Attempting to recover via \(kExpectedInputMethodPath)."
     )
-    let expectedPath = (NSString(string: "~/Library/Input Methods/OpenVanilla.app")
-        .expandingTildeInPath)
-    if FileManager.default.fileExists(atPath: expectedPath) {
-        let expectedURL = URL(fileURLWithPath: expectedPath)
-        NSLog("Re-registering input source at expected path \(expectedURL.absoluteString)")
-        _ = InputSourceHelper.registerInputSource(at: expectedURL)
+    if FileManager.default.fileExists(atPath: kExpectedInputMethodPath) {
+        registerInputSource(at: kExpectedInputMethodPath)
+
+        let expectedExec = (kExpectedInputMethodPath as NSString)
+            .appendingPathComponent("Contents/MacOS/OpenVanilla")
+        // Only relaunch when the real install looks healthy; otherwise we can loop.
+        if FileManager.default.isExecutableFile(atPath: expectedExec),
+            !pathLooksTranslocated(kExpectedInputMethodPath),
+            !pathHasQuarantine(kExpectedInputMethodPath)
+        {
+            let relaunch = Process()
+            relaunch.executableURL = URL(fileURLWithPath: expectedExec)
+            do {
+                try relaunch.run()
+                NSLog("Relaunched OpenVanilla from \(expectedExec); exiting translocated process.")
+                exit(0)
+            } catch {
+                NSLog("Failed to relaunch from \(expectedExec): \(error)")
+            }
+        } else {
+            NSLog(
+                "Cannot safely relaunch from \(kExpectedInputMethodPath) (missing, translocated, or still quarantined)."
+            )
+        }
     }
 } else {
-    registerInputSourceAtBundleURL()
+    registerInputSource(at: bundlePath)
 }
 
 guard let bundleID = Bundle.main.bundleIdentifier,

@@ -180,6 +180,51 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
         }
     }
 
+    private func bundleHasQuarantine(at path: String) -> Bool {
+        let task = Process()
+        task.launchPath = "/usr/bin/xattr"
+        task.arguments = ["-p", "com.apple.quarantine", path]
+        task.standardOutput = FileHandle.nullDevice
+        task.standardError = FileHandle.nullDevice
+        task.launch()
+        task.waitUntilExit()
+        return task.terminationStatus == 0
+    }
+
+    @discardableResult
+    private func stripExtendedAttributes(at path: String) -> Bool {
+        let task = Process()
+        task.launchPath = "/usr/bin/xattr"
+        task.arguments = ["-cr", path]
+        task.launch()
+        task.waitUntilExit()
+        if task.terminationStatus != 0 {
+            NSLog("Warning: xattr -cr failed on \(path) with status \(task.terminationStatus)")
+            return false
+        }
+        return !bundleHasQuarantine(at: path)
+    }
+
+    private func forceLaunchServicesRegistration(at path: String) {
+        let lsregister = "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
+        guard FileManager.default.isExecutableFile(atPath: lsregister) else {
+            return
+        }
+        let lsTask = Process()
+        lsTask.launchPath = lsregister
+        lsTask.arguments = ["-f", path]
+        lsTask.launch()
+        lsTask.waitUntilExit()
+    }
+
+    private func killRunningInputMethod() {
+        let killTask = Process()
+        killTask.launchPath = "/usr/bin/killall"
+        killTask.arguments = ["-9", kTargetBin]
+        killTask.launch()
+        killTask.waitUntilExit()
+    }
+
     func installInputMethod(previousExists: Bool, previousVersionNotFullyDeactivatedWarning warning: Bool) {
         guard let targetBundle = archiveUtil?.unzipNotarizedArchive() ?? Bundle.main.path(forResource: kTargetBin, ofType: kTargetType) else {
             let message = NSLocalizedString("No installable packages found.", comment: "")
@@ -189,13 +234,14 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
         }
         let installedPath = (kTargetPartialPath as NSString).expandingTildeInPath
 
-        let cpTask = Process()
-        cpTask.launchPath = "/bin/cp"
-        cpTask.arguments = ["-R", targetBundle, (kDestinationPartial as NSString).expandingTildeInPath]
-        cpTask.launch()
-        cpTask.waitUntilExit()
+        // ditto copies into the destination app path directly (unlike cp -R into the parent folder).
+        let dittoTask = Process()
+        dittoTask.launchPath = "/usr/bin/ditto"
+        dittoTask.arguments = [targetBundle, installedPath]
+        dittoTask.launch()
+        dittoTask.waitUntilExit()
 
-        if cpTask.terminationStatus != 0 {
+        if dittoTask.terminationStatus != 0 {
             runAlertPanel(title: NSLocalizedString("Install Failed", comment: ""),
                           message: NSLocalizedString("Cannot copy the file to the destination.", comment: ""),
                           buttonTitle: NSLocalizedString("Cancel", comment: ""))
@@ -204,24 +250,16 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
         }
 
         // Strip quarantine / Gatekeeper xattrs so macOS does not App-Translocate the IME.
-        let xattrTask = Process()
-        xattrTask.launchPath = "/usr/bin/xattr"
-        xattrTask.arguments = ["-cr", installedPath]
-        xattrTask.launch()
-        xattrTask.waitUntilExit()
-        if xattrTask.terminationStatus != 0 {
-            NSLog("Warning: xattr -cr failed on \(installedPath) with status \(xattrTask.terminationStatus)")
+        let quarantineCleared = stripExtendedAttributes(at: installedPath)
+        if !quarantineCleared {
+            NSLog("Warning: quarantine may still be present on \(installedPath)")
         }
 
+        // Ensure any previously translocated IME process is gone before re-registering.
+        killRunningInputMethod()
+
         // Force Launch Services to index the real install path (not Trash / AppTranslocation).
-        let lsregister = "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
-        if FileManager.default.isExecutableFile(atPath: lsregister) {
-            let lsTask = Process()
-            lsTask.launchPath = lsregister
-            lsTask.arguments = ["-f", installedPath]
-            lsTask.launch()
-            lsTask.waitUntilExit()
-        }
+        forceLaunchServicesRegistration(at: installedPath)
 
         guard let imeBundle = Bundle(path: installedPath),
               let imeIdentifier = imeBundle.bundleIdentifier
@@ -262,48 +300,63 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
             NSLog("Failed to enable input method: \(imeIdentifier)")
         }
 
+        // Fully stable only when quarantine is gone and TIS reports enabled.
+        let installFullyStable = quarantineCleared && mainInputSourceEnabled
+
         if warning {
             runAlertPanel(title: NSLocalizedString("Attention", comment: ""), message: NSLocalizedString("OpenVanilla is upgraded, but please log out or reboot for the new version to be fully functional.", comment: ""), buttonTitle: NSLocalizedString("OK", comment: ""))
             endAppWithDelay()
+            return
+        }
+
+        if !quarantineCleared {
+            runAlertPanel(
+                title: NSLocalizedString("Warning", comment: ""),
+                message: NSLocalizedString(
+                    "Could not remove Gatekeeper quarantine from the installed app. OpenVanilla may stay unstable until quarantine is cleared and you log out.",
+                    comment: ""),
+                buttonTitle: NSLocalizedString("Continue", comment: ""))
+        } else if !mainInputSourceEnabled {
+            runAlertPanel(
+                title: NSLocalizedString("Warning", comment: ""),
+                message: NSLocalizedString(
+                    "Input method was installed, but could not be enabled automatically. Please add OpenVanilla in System Settings > Keyboard > Input Sources, then log out and log back in.",
+                    comment: ""),
+                buttonTitle: NSLocalizedString("Continue", comment: ""))
+        }
+
+        let headlineAttr = [
+            NSAttributedString.Key.font : NSFont.boldSystemFont(ofSize: NSFont.systemFontSize * 1.3),
+            NSAttributedString.Key.foregroundColor : NSColor.textColor
+        ]
+        let bodyAttr = [
+            NSAttributedString.Key.font : NSFont.systemFont(ofSize: NSFont.systemFontSize),
+            NSAttributedString.Key.foregroundColor : NSColor.textColor
+        ]
+        let message = NSMutableAttributedString(string: NSLocalizedString("Installation Successful", comment: ""), attributes: headlineAttr)
+        let detailsKey: String
+        if !quarantineCleared {
+            detailsKey = "Could not remove Gatekeeper quarantine from the installed app. OpenVanilla may stay unstable until quarantine is cleared and you log out."
+        } else if !mainInputSourceEnabled {
+            detailsKey = "Input method was installed, but could not be enabled automatically. Please add OpenVanilla in System Settings > Keyboard > Input Sources, then log out and log back in."
         } else {
-            if !mainInputSourceEnabled {
-                runAlertPanel(
-                    title: NSLocalizedString("Warning", comment: ""),
-                    message: NSLocalizedString(
-                        "Input method was installed, but could not be enabled automatically. Please add OpenVanilla in System Settings > Keyboard > Input Sources, then log out and log back in.",
-                        comment: ""),
-                    buttonTitle: NSLocalizedString("Continue", comment: ""))
-            }
+            detailsKey = "OpenVanilla is installed. For the most stable result on modern macOS, log out and log back in, then select OpenVanilla from the input menu."
+        }
+        let details = NSAttributedString(string: NSLocalizedString(detailsKey, comment: ""), attributes: bodyAttr)
+        message.append(NSAttributedString(string: "\n\n"))
+        message.append(details)
+        textView.textStorage?.setAttributedString(message)
 
-            let headlineAttr = [
-                NSAttributedString.Key.font : NSFont.boldSystemFont(ofSize: NSFont.systemFontSize * 1.3),
-                NSAttributedString.Key.foregroundColor : NSColor.textColor
-            ]
-            let bodyAttr = [
-                NSAttributedString.Key.font : NSFont.systemFont(ofSize: NSFont.systemFontSize),
-                NSAttributedString.Key.foregroundColor : NSColor.textColor
-            ]
-            let message = NSMutableAttributedString(string: NSLocalizedString("Installation Successful", comment: ""), attributes: headlineAttr)
-            let detailsKey =
-                mainInputSourceEnabled
-                ? "OpenVanilla is ready to use."
-                : "Input method was installed, but could not be enabled automatically. Please add OpenVanilla in System Settings > Keyboard > Input Sources, then log out and log back in."
-            let details = NSAttributedString(string: NSLocalizedString(detailsKey, comment: ""), attributes: bodyAttr)
-            message.append(NSAttributedString(string: "\n\n"))
-            message.append(details)
-            textView.textStorage?.setAttributedString(message)
+        installed = true
 
-            installed = true
+        welcomeText.isHidden = true
+        cancelButton.isHidden = true
+        actionButton.title = NSLocalizedString("Close Installer", comment: "")
+        actionButton.isEnabled = true
 
-            welcomeText.isHidden = true
-            cancelButton.isHidden = true
-            actionButton.title = NSLocalizedString("Close Installer", comment: "")
-            actionButton.isEnabled = true
-
-            // Only auto-close when enable looked successful; otherwise leave the guidance visible.
-            if mainInputSourceEnabled {
-                scheduleAutoClose()
-            }
+        // Keep the guidance on screen unless everything looks fully stable.
+        if installFullyStable {
+            scheduleAutoClose()
         }
     }
 

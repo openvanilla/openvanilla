@@ -56,6 +56,8 @@
 "Warning" = "Warning";
 "Input method may not be fully enabled. Please enable it through System Preferences > Keyboard > Input Sources." = "Input method may not be fully enabled. Please enable it through System Preferences > Keyboard > Input Sources.";
 "Input method was installed, but could not be enabled automatically. Please add OpenVanilla in System Settings > Keyboard > Input Sources, then log out and log back in." = "Input method was installed, but could not be enabled automatically. Please add OpenVanilla in System Settings > Keyboard > Input Sources, then log out and log back in.";
+"Could not remove Gatekeeper quarantine from the installed app. OpenVanilla may stay unstable until quarantine is cleared and you log out." = "Could not remove Gatekeeper quarantine from the installed app. OpenVanilla may stay unstable until quarantine is cleared and you log out.";
+"OpenVanilla is installed. For the most stable result on modern macOS, log out and log back in, then select OpenVanilla from the input menu." = "OpenVanilla is installed. For the most stable result on modern macOS, log out and log back in, then select OpenVanilla from the input menu.";
 "Continue" = "Continue";
 
 /* No comment provided by engineer. */
