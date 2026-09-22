@@ -22,9 +22,18 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
+import Carbon
 import Cocoa
 import Foundation
+import InputSourceHelper
 import ModuleManager
+import OpenVanillaImpl
+
+extension Notification.Name {
+    /// Posted when OpenVanilla is no longer the selected input source.
+    /// Controllers with a live client session should finalize like deactivateServer.
+    static let OVInputSourceDidResign = Notification.Name("OVInputSourceDidResignNotification")
+}
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -37,6 +46,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if AppDelegate.debugShowPreferencesAfterAppLaunched {
             showPreferences()
         }
+
+        DistributedNotificationCenter.default().addObserver(
+            self,
+            selector: #selector(handleSelectedInputSourceChanged(_:)),
+            name: Notification.Name(kTISNotifySelectedKeyboardInputSourceChanged as String),
+            object: nil,
+            suspensionBehavior: .deliverImmediately)
+
+        // Defer update checks away from IMK activateServer to avoid event-loop contention
+        // on modern macOS (Tahoe / macOS 27) where activate/deactivate races are common.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            guard UserDefaults.standard.bool(forKey: OVCheckForUpdateKey) else {
+                return
+            }
+            UpdateChecker.shared.checkForUpdateIfNeeded()
+        }
+    }
+
+    @objc
+    private func handleSelectedInputSourceChanged(_ notification: Notification) {
+        guard let bundleID = Bundle.main.bundleIdentifier else {
+            return
+        }
+        if InputSourceHelper.inputSourceSelected(forBundleID: bundleID) {
+            return
+        }
+        NotificationCenter.default.post(name: .OVInputSourceDidResign, object: self)
     }
 
     @objc

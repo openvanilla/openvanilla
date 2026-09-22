@@ -50,6 +50,7 @@ using namespace OpenVanilla;
 - (BOOL)handleOVKey:(OVKey &)key client:(id)client;
 - (void)handleInputMethodChange:(NSNotification *)notification;
 - (void)handleCandidateSelected:(NSNotification *)notification;
+- (void)handleInputSourceDidResign:(NSNotification *)notification;
 - (void)updateClientComposingBuffer:(id)sender;
 - (void)changeInputMethodAction:(id)sender;
 - (void)toggleTraditionalToSimplifiedChineseFilterAction:(id)sender;
@@ -82,6 +83,9 @@ using namespace OpenVanilla;
         _composingText = new OVTextBufferImpl;
         _readingText = new OVTextBufferImpl;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInputMethodChange:) name:OVModuleManagerDidUpdateActiveInputMethodNotification object:[OVModuleManager defaultManager]];
+        // On macOS 26+/27, programmatic input-source switches may skip deactivateServer.
+        // Finalize stranded composition when OV is no longer selected.
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInputSourceDidResign:) name:@"OVInputSourceDidResignNotification" object:nil];
     }
 
     return self;
@@ -198,10 +202,6 @@ using namespace OpenVanilla;
     _currentClient = client;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCandidateSelected:) name:OVOneDimensionalCandidatePanelImplDidSelectCandidateNotification object:nil];
-
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:OVCheckForUpdateKey]) {
-        [[UpdateChecker sharedInstance] checkForUpdateIfNeeded];
-    }
 }
 
 - (void)deactivateServer:(id)client
@@ -501,6 +501,23 @@ using namespace OpenVanilla;
 
     [self updateClientComposingBuffer:client];
     return handled;
+}
+
+- (void)handleInputSourceDidResign:(NSNotification *)notification
+{
+    // macOS 26+/27 may omit deactivateServer when another process switches the input source.
+    // If we still have a live client session, finalize exactly as deactivateServer would.
+    if (!_currentClient) {
+        return;
+    }
+    BOOL hasPending =
+        (_composingText && !_composingText->isEmpty()) ||
+        (_readingText && !_readingText->isEmpty()) ||
+        _associatedPhrasesContextInUse;
+    if (!hasPending && !_inputMethodContext) {
+        return;
+    }
+    [self deactivateServer:_currentClient];
 }
 
 - (void)handleInputMethodChange:(NSNotification *)notification

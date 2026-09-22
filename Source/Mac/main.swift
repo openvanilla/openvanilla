@@ -35,22 +35,71 @@ private func pathLooksTranslocated(_ path: String) -> Bool {
 
 private func pathHasQuarantine(_ path: String) -> Bool {
     let task = Process()
-    task.launchPath = "/usr/bin/xattr"
-    task.arguments = ["-p", "com.apple.quarantine", path]
-    task.standardOutput = FileHandle.nullDevice
+    task.executableURL = URL(fileURLWithPath: "/usr/bin/xattr")
+    task.arguments = ["-lr", path]
+    let pipe = Pipe()
+    task.standardOutput = pipe
     task.standardError = FileHandle.nullDevice
-    task.launch()
-    task.waitUntilExit()
-    return task.terminationStatus == 0
+    do {
+        try task.run()
+        task.waitUntilExit()
+    } catch {
+        return false
+    }
+    let data = pipe.fileHandleForReading.readDataToEndOfFile()
+    let output = String(data: data, encoding: .utf8) ?? ""
+    return output.contains("com.apple.quarantine")
 }
 
 private func registerInputSource(at path: String) {
-    guard let bundleID = Bundle.main.bundleIdentifier else {
+    guard Bundle.main.bundleIdentifier != nil else {
         return
     }
     let url = URL(fileURLWithPath: path)
-    NSLog("Registering input source \(bundleID) at \(url.absoluteString)")
+    NSLog("Registering input source at \(url.absoluteString)")
     _ = InputSourceHelper.registerInputSource(at: url)
+}
+
+/// If we were launched from App Translocation, try to hand off to the real install.
+/// Returns true when this process should exit immediately.
+private func recoverFromAppTranslocationIfNeeded() -> Bool {
+    let bundlePath = Bundle.main.bundlePath
+    guard pathLooksTranslocated(bundlePath) else {
+        registerInputSource(at: bundlePath)
+        return false
+    }
+
+    NSLog(
+        "Warning: OpenVanilla is running from App Translocation (\(bundlePath)). Attempting to recover via \(kExpectedInputMethodPath)."
+    )
+    guard FileManager.default.fileExists(atPath: kExpectedInputMethodPath) else {
+        return false
+    }
+
+    registerInputSource(at: kExpectedInputMethodPath)
+
+    let expectedExec = (kExpectedInputMethodPath as NSString)
+        .appendingPathComponent("Contents/MacOS/OpenVanilla")
+    guard FileManager.default.isExecutableFile(atPath: expectedExec),
+        !pathLooksTranslocated(kExpectedInputMethodPath),
+        !pathHasQuarantine(kExpectedInputMethodPath)
+    else {
+        NSLog(
+            "Cannot safely relaunch from \(kExpectedInputMethodPath) (missing, translocated, or still quarantined)."
+        )
+        return false
+    }
+
+    let relaunch = Process()
+    relaunch.executableURL = URL(fileURLWithPath: expectedExec)
+    do {
+        try relaunch.run()
+        NSLog("Relaunched OpenVanilla from \(expectedExec); exiting translocated process.")
+        return true
+    } catch {
+        NSLog("Failed to relaunch from \(expectedExec): \(error)")
+        return false
+    }
 }
 
 private func install() -> Int32 {
@@ -93,6 +142,11 @@ if CommandLine.arguments.count > 1 {
     }
 }
 
+// Resolve App Translocation before creating IMKServer / loading UI.
+if recoverFromAppTranslocationIfNeeded() {
+    exit(0)
+}
+
 guard let mainNibName = Bundle.main.infoDictionary?["NSMainNibFile"] as? String else {
     NSLog("Fatal error: NSMainNibFile key not defined in Info.plist.")
     exit(-1)
@@ -102,40 +156,6 @@ let loaded = Bundle.main.loadNibNamed(mainNibName, owner: NSApp, topLevelObjects
 if !loaded {
     NSLog("Fatal error: Cannot load \(mainNibName).")
     exit(-1)
-}
-
-let bundlePath = Bundle.main.bundlePath
-if pathLooksTranslocated(bundlePath) {
-    NSLog(
-        "Warning: OpenVanilla is running from App Translocation (\(bundlePath)). Attempting to recover via \(kExpectedInputMethodPath)."
-    )
-    if FileManager.default.fileExists(atPath: kExpectedInputMethodPath) {
-        registerInputSource(at: kExpectedInputMethodPath)
-
-        let expectedExec = (kExpectedInputMethodPath as NSString)
-            .appendingPathComponent("Contents/MacOS/OpenVanilla")
-        // Only relaunch when the real install looks healthy; otherwise we can loop.
-        if FileManager.default.isExecutableFile(atPath: expectedExec),
-            !pathLooksTranslocated(kExpectedInputMethodPath),
-            !pathHasQuarantine(kExpectedInputMethodPath)
-        {
-            let relaunch = Process()
-            relaunch.executableURL = URL(fileURLWithPath: expectedExec)
-            do {
-                try relaunch.run()
-                NSLog("Relaunched OpenVanilla from \(expectedExec); exiting translocated process.")
-                exit(0)
-            } catch {
-                NSLog("Failed to relaunch from \(expectedExec): \(error)")
-            }
-        } else {
-            NSLog(
-                "Cannot safely relaunch from \(kExpectedInputMethodPath) (missing, translocated, or still quarantined)."
-            )
-        }
-    }
-} else {
-    registerInputSource(at: bundlePath)
 }
 
 guard let bundleID = Bundle.main.bundleIdentifier,

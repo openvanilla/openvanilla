@@ -71,6 +71,35 @@ public class InputSourceHelper: NSObject {
         return false
     }
 
+    @objc(inputSourceSelected:)
+    public static func inputSourceSelected(for source: TISInputSource) -> Bool {
+        if let valuePts = TISGetInputSourceProperty(source, kTISPropertyInputSourceIsSelected) {
+            let value = Unmanaged<CFBoolean>.fromOpaque(valuePts).takeUnretainedValue()
+            return value == kCFBooleanTrue
+        }
+        return false
+    }
+
+    /// Returns whether any enabled input source for the given bundle ID is currently selected.
+    @objc(inputSourceSelectedForBundleID:)
+    public static func inputSourceSelected(forBundleID bundleID: String) -> Bool {
+        if let source = inputSource(for: kTISPropertyBundleID, stringValue: bundleID),
+            inputSourceSelected(for: source)
+        {
+            return true
+        }
+        for source in allInstalledInputSources() {
+            guard let bundleIDPtr = TISGetInputSourceProperty(source, kTISPropertyBundleID) else {
+                continue
+            }
+            let id = Unmanaged<CFString>.fromOpaque(bundleIDPtr).takeUnretainedValue() as String
+            if id == bundleID && inputSourceSelected(for: source) {
+                return true
+            }
+        }
+        return false
+    }
+
     @objc(enableInputSource:)
     public static func enable(inputSource: TISInputSource) -> Bool {
         let status = TISEnableInputSource(inputSource)

@@ -182,22 +182,34 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
 
     private func bundleHasQuarantine(at path: String) -> Bool {
         let task = Process()
-        task.launchPath = "/usr/bin/xattr"
-        task.arguments = ["-p", "com.apple.quarantine", path]
-        task.standardOutput = FileHandle.nullDevice
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/xattr")
+        task.arguments = ["-lr", path]
+        let pipe = Pipe()
+        task.standardOutput = pipe
         task.standardError = FileHandle.nullDevice
-        task.launch()
-        task.waitUntilExit()
-        return task.terminationStatus == 0
+        do {
+            try task.run()
+            task.waitUntilExit()
+        } catch {
+            return false
+        }
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        let output = String(data: data, encoding: .utf8) ?? ""
+        return output.contains("com.apple.quarantine")
     }
 
     @discardableResult
     private func stripExtendedAttributes(at path: String) -> Bool {
         let task = Process()
-        task.launchPath = "/usr/bin/xattr"
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/xattr")
         task.arguments = ["-cr", path]
-        task.launch()
-        task.waitUntilExit()
+        do {
+            try task.run()
+            task.waitUntilExit()
+        } catch {
+            NSLog("Warning: xattr -cr failed to start on \(path): \(error)")
+            return false
+        }
         if task.terminationStatus != 0 {
             NSLog("Warning: xattr -cr failed on \(path) with status \(task.terminationStatus)")
             return false
@@ -300,8 +312,9 @@ class AppDelegate: NSWindowController, NSApplicationDelegate {
             NSLog("Failed to enable input method: \(imeIdentifier)")
         }
 
-        // Fully stable only when quarantine is gone and TIS reports enabled.
-        let installFullyStable = quarantineCleared && mainInputSourceEnabled
+        // Quarantine-free install is the hard requirement for stability; TIS IsEnabled can
+        // be unreliable on macOS 12+ even when the IME still needs a manual System Settings add.
+        let installFullyStable = quarantineCleared
 
         if warning {
             runAlertPanel(title: NSLocalizedString("Attention", comment: ""), message: NSLocalizedString("OpenVanilla is upgraded, but please log out or reboot for the new version to be fully functional.", comment: ""), buttonTitle: NSLocalizedString("OK", comment: ""))

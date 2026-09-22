@@ -819,7 +819,7 @@
 				GCC_PREFIX_HEADER = "Source/Mac/Installer/OpenVanillaInstaller-Prefix.pch";
 				HEADER_SEARCH_PATHS = ../;
 				INFOPLIST_FILE = "Source/Mac/Installer/OpenVanillaInstaller-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openvanilla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/Mac/Installer/OpenVanillaInstaller-Bridging-Header.h";
@@ -846,7 +846,7 @@
 				GCC_PREFIX_HEADER = "Source/Mac/Installer/OpenVanillaInstaller-Prefix.pch";
 				HEADER_SEARCH_PATHS = ../;
 				INFOPLIST_FILE = "Source/Mac/Installer/OpenVanillaInstaller-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openvanilla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/Mac/Installer/OpenVanillaInstaller-Bridging-Header.h";
@@ -968,7 +968,7 @@
 					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fcxx-modules",
@@ -1002,7 +1002,7 @@
 					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-fcxx-modules",
