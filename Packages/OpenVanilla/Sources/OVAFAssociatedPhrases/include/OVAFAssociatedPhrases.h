@@ -47,6 +47,10 @@ namespace OpenVanilla {
         OVAFAssociatedPhrases(const string& tablePath);
         ~OVAFAssociatedPhrases();
 
+        // Reload without replacing the module referenced by active contexts.
+        void setTablePath(const string& tablePath);
+        static bool ValidateTable(const string& data);
+
         virtual OVEventHandlingContext* createContext();
         virtual const string identifier() const;
         virtual bool initialize(OVPathInfo* pathInfo, OVLoaderService* loaderService);
