@@ -93,7 +93,6 @@ private:
     int WaitKey3(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int WaitCandidate(OVKeyCode* , OVBuffer* , OVCandidate* , OVService* );
     int updateCandidate(OpenVanilla::OVCINDataTable *tab,OVBuffer *buf, OVCandidate *candibar);
-    void showSymbolCandidates(OVBuffer* , OVCandidate* );
     void sendAndReset(const char *, OVBuffer* , OVCandidate* , OVService* );
     void clearAll(OVBuffer* buf, OVCandidate* candi_bar);
     void clearCandidate(OVCandidate *candi_bar);
