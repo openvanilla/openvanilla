@@ -27,7 +27,8 @@
 
 #include "OVAFAssociatedPhrases.h"
 #include "OVAFAssociatedPhrasesContext.h"
-#include <sstream>
+#include <fstream>
+#include <iterator>
 #include <memory>
 
 using namespace OpenVanilla;
@@ -36,8 +37,9 @@ static const char *const kDefaultSelectionKeys = "!@#$%^&*()";
 static const char *const kDefaultUnshiftedSelectionKeyLabels = "1234567890";
 static const char *const kDefaultShiftKeySymbol = "⇧";
 
-OVAFAssociatedPhrases::OVAFAssociatedPhrases(const string& tablePath)
+OVAFAssociatedPhrases::OVAFAssociatedPhrases(const string& tablePath, const string& customTablePath)
     : m_tablePath(tablePath)
+    , m_customTablePath(customTablePath)
     , m_table(0)
     , m_selectionKeys(kDefaultSelectionKeys)
     , m_shiftKeySymbol(kDefaultShiftKeySymbol)
@@ -64,12 +66,8 @@ const string OVAFAssociatedPhrases::identifier() const
 
 bool OVAFAssociatedPhrases::initialize(OVPathInfo* pathInfo, OVLoaderService* loaderService)
 {
-    if (!OVPathHelper::PathExists(m_tablePath)) {
-        return false;
-    }
-
-    m_tableTimestamp = OVPathHelper::TimestampForPath(m_tablePath);
-
+    checkTable();
+    // Keep the module available so importing a valid table can recover it.
     return true;
 }
 
@@ -116,27 +114,22 @@ void OVAFAssociatedPhrases::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderServ
 
 void OVAFAssociatedPhrases::checkTable()
 {
-    if (!OVPathHelper::PathExists(m_tablePath)) {
-        return;
-    }
-
+    bool customExists = !m_customTablePath.empty() && OVPathHelper::PathExists(m_customTablePath);
     OVFileTimestamp timestamp = OVPathHelper::TimestampForPath(m_tablePath);
+    OVFileTimestamp customTimestamp = OVPathHelper::TimestampForPath(m_customTablePath);
+    if (m_checkedTable && customExists == m_customTableExists &&
+        timestamp == m_tableTimestamp && customTimestamp == m_customTableTimestamp) return;
 
-    // if table exists and the timestamp is not newer, bail
-    if (m_table && !(timestamp > m_tableTimestamp)) {
-        return;
-    }
-
-    // if table exists, delete the table
-    if (m_table) {        
-        delete m_table;
-        m_table = 0;
-    }
-
-    // update timestamp and reload the table
+    m_checkedTable = true;
+    m_customTableExists = customExists;
     m_tableTimestamp = timestamp;
-    OVCINDataTableParser parser;
-    m_table = parser.CINDataTableFromFileName(m_tablePath);
+    m_customTableTimestamp = customTimestamp;
+    OVCINDataTable* replacement = customExists ? LoadTable(m_customTablePath) : nullptr;
+    m_tableStatus = replacement ? Custom : (customExists ? CustomInvalid : BuiltIn);
+    if (!replacement) replacement = LoadTable(m_tablePath);
+    if (!replacement) m_tableStatus = Unavailable;
+    delete m_table;
+    m_table = replacement;
 }
 
 vector<pair<OVKey, string>> OVAFAssociatedPhrases::getSelectionKeyLabelPairs(OVLoaderService* loaderService)
@@ -165,43 +158,44 @@ vector<pair<OVKey, string>> OVAFAssociatedPhrases::getSelectionKeyLabelPairs(OVL
     return keyLabelPairs;
 }
 
-void OVAFAssociatedPhrases::setTablePath(const string& tablePath)
+void OVAFAssociatedPhrases::reloadTable()
 {
-    m_tablePath = tablePath;
-    delete m_table;
-    m_table = nullptr;
+    m_checkedTable = false;
     checkTable();
+}
+
+OVCINDataTable* OVAFAssociatedPhrases::ParseTable(const string& data)
+{
+    if (data.empty() || data.find('\0') != string::npos) return nullptr;
+    // Validate UTF-8 by round-tripping code points with the existing UTF-8 helper.
+    size_t validatedBytes = 0;
+    for (const auto& character : OVUTF8Helper::SplitStringByCodePoint(data)) {
+        validatedBytes += character.size();
+        unsigned int codePoint = OVUTF8Helper::CodePointFromSingleUTF8String(character);
+        if (codePoint > 0x10ffff || (codePoint >= 0xd800 && codePoint <= 0xdfff) ||
+            OVUTF8Helper::SingleUTF8StringFromCodePoint(codePoint) != character) return nullptr;
+    }
+    if (validatedBytes != data.size()) return nullptr;
+    OVCINDataTableParser parser;
+    std::unique_ptr<OVCINDataTable> table(parser.CINDataTableFromString(data.c_str()));
+    if (!table || !table->chardefMap()->size()) return nullptr;
+    for (size_t i = 0; i < table->chardefMap()->size(); ++i) {
+        const auto entry = table->chardefMap()->keyValuePairAtIndex(i);
+        if (OVUTF8Helper::SplitStringByCodePoint(entry.first).size() != 1 || entry.second.empty()) return nullptr;
+    }
+    return table.release();
+}
+
+OVCINDataTable* OVAFAssociatedPhrases::LoadTable(const string& path)
+{
+    std::ifstream input(path, std::ios::binary);
+    if (!input) return nullptr;
+    string data((std::istreambuf_iterator<char>(input)), std::istreambuf_iterator<char>());
+    return ParseTable(data);
 }
 
 bool OVAFAssociatedPhrases::ValidateTable(const string& data)
 {
-    if (data.find('\0') != string::npos) return false;
-    std::istringstream input(data);
-    string line;
-    bool started = false, ended = false;
-    map<string, vector<string>> expected;
-    while (std::getline(input, line)) {
-        std::istringstream row(line);
-        string key, value, extra;
-        if (!(row >> key) || key[0] == '#') continue;
-        if (key == "%chardef") {
-            if (!(row >> value) || (row >> extra)) return false;
-            if (value == "begin" && !started) started = true;
-            else if (value == "end" && started && !ended) ended = true;
-            else return false;
-            continue;
-        }
-        if (!started) continue;
-        if (ended || !(row >> value) || (row >> extra)) return false;
-        if (OVUTF8Helper::SplitStringByCodePoint(key).size() != 1) return false;
-        expected[key].push_back(value);
-    }
-    if (!started || !ended || expected.empty()) return false;
-    OVCINDataTableParser parser;
-    std::unique_ptr<OVCINDataTable> table(parser.CINDataTableFromString(data.c_str()));
-    if (!table) return false;
-    for (const auto& entry : expected) {
-        if (table->findChardef(entry.first) != entry.second) return false;
-    }
-    return true;
+    std::unique_ptr<OVCINDataTable> table(ParseTable(data));
+    return bool(table);
 }

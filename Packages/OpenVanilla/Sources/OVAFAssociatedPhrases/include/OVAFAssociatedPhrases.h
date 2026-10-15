@@ -44,11 +44,14 @@ namespace OpenVanilla {
 
     class OVAFAssociatedPhrases : public OVAroundFilter {
     public:
-        OVAFAssociatedPhrases(const string& tablePath);
+        OVAFAssociatedPhrases(const string& tablePath, const string& customTablePath = "");
         ~OVAFAssociatedPhrases();
 
         // Reload without replacing the module referenced by active contexts.
-        void setTablePath(const string& tablePath);
+        void reloadTable();
+        virtual void checkTable();
+        enum TableStatus { BuiltIn, Custom, CustomInvalid, Unavailable };
+        TableStatus tableStatus() const { return m_tableStatus; }
         static bool ValidateTable(const string& data);
 
         virtual OVEventHandlingContext* createContext();
@@ -59,12 +62,18 @@ namespace OpenVanilla {
 
     private:
         string m_tablePath;
+        string m_customTablePath;
         OVFileTimestamp m_tableTimestamp;
+        OVFileTimestamp m_customTableTimestamp;
+        bool m_checkedTable = false;
+        bool m_customTableExists = false;
+        TableStatus m_tableStatus = Unavailable;
+        static OVCINDataTable* ParseTable(const string& data);
+        static OVCINDataTable* LoadTable(const string& path);
         string m_shiftKeySymbol;
 
     protected:
         friend class OVAFAssociatedPhrasesContext;
-        virtual void checkTable();
         OVCINDataTable *m_table;
         bool m_continuousAssociation; // Use the output of this filter as the next input.
         string m_selectionKeys; // The actual selection keys.

@@ -166,3 +166,5 @@
 "Import Associated Phrases" = "匯入聯想詞表";
 "Restore Default Table" = "恢復預設詞表";
 "Choose a UTF-8 CIN table with a nonempty chardef section and one character per key." = "請選擇 UTF-8 CIN 詞表，chardef 區段不可空白，每個索引必須為單一字元。";
+"Custom table could not be loaded; using built-in table" = "自訂詞表無法載入，已使用內建詞表";
+"Associated phrases unavailable" = "聯想詞目前無法使用";

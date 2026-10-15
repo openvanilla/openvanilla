@@ -133,6 +133,7 @@ bool OVAFAssociatedPhrasesContext::handleKey(OVKey* key, OVTextBuffer* readingTe
 
 bool OVAFAssociatedPhrasesContext::handleDirectText(const string& text, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService)
 {
+    m_module->checkTable();
 	if (!m_module->m_table) {
 		return false;
 	}

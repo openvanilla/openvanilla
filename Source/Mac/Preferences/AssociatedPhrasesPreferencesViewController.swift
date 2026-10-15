@@ -136,7 +136,7 @@ class AssociatedPhrasesPreferencesViewController: BaseModulePreferencesViewContr
 extension AssociatedPhrasesPreferencesViewController {
     private func updateTableStatus() {
         let custom = OVModuleManager.default.hasCustomAssociatedPhrases
-        fieldTableStatus.stringValue = NSLocalizedString(custom ? "Current table: Custom" : "Current table: Built-in", comment: "")
+        fieldTableStatus.stringValue = NSLocalizedString(OVModuleManager.default.associatedPhrasesTableStatus, comment: "")
         restoreTableButton.isEnabled = custom
     }
 

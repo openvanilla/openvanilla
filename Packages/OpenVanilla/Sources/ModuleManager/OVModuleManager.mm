@@ -51,6 +51,9 @@
 extern NSString *const OVModuleManagerDidReloadNotification = @"OVModuleManagerDidReloadNotification";
 extern NSString *const OVModuleManagerDidUpdateActiveInputMethodNotification = @"OVModuleManagerDidUpdateActiveInputMethodNotification";
 
+static NSString *const OVCustomAssociatedPhrasesPath = @"OpenVanilla/UserData/AssociatedPhrases/associated-phrases.cin";
+static NSString *const OVBuiltInAssociatedPhrasesPath = @"DataTables/AssociatedPhrases/associated-phrases.cin";
+
 using namespace OpenVanilla;
 
 static string InputMethodConfigIdentifier(const string &identifier) {
@@ -273,8 +276,8 @@ static string InputMethodConfigIdentifier(const string &identifier) {
     }
 
     OVPathInfo info;
-    NSString *associatedPhraseTable = [self activeAssociatedPhrasesPath];
-    _associatedPhrasesModule = new OVAFAssociatedPhrases(associatedPhraseTable.UTF8String);
+    NSString *associatedPhraseTable = [[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:OVBuiltInAssociatedPhrasesPath];
+    _associatedPhrasesModule = new OVAFAssociatedPhrases(associatedPhraseTable.UTF8String, [self customAssociatedPhrasesURL].path.UTF8String);
     bool result = _associatedPhrasesModule->initialize(&info, self.loaderService);
     if (!result) {
         delete _associatedPhrasesModule;
@@ -291,28 +294,32 @@ static string InputMethodConfigIdentifier(const string &identifier) {
 - (NSURL *)customAssociatedPhrasesURL
 {
     NSURL *support = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask].firstObject;
-    return [support URLByAppendingPathComponent:@"OpenVanilla/UserData/AssociatedPhrases/associated-phrases.cin"];
+    return [support URLByAppendingPathComponent:OVCustomAssociatedPhrasesPath];
 }
 
 - (BOOL)hasCustomAssociatedPhrases
 {
-    NSData *data = [NSData dataWithContentsOfURL:[self customAssociatedPhrasesURL]];
-    NSString *text = data ? [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] : nil;
-    return data.length && text && OVAFAssociatedPhrases::ValidateTable(string((const char *)data.bytes, data.length));
+    return [[NSFileManager defaultManager] fileExistsAtPath:[self customAssociatedPhrasesURL].path];
 }
 
-- (NSString *)activeAssociatedPhrasesPath
+- (NSString *)associatedPhrasesTableStatus
 {
-    if (self.hasCustomAssociatedPhrases) return [self customAssociatedPhrasesURL].path;
-    return [[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:@"DataTables/AssociatedPhrases/associated-phrases.cin"];
+    if (!_associatedPhrasesModule) return @"Associated phrases unavailable";
+    auto *module = (OVAFAssociatedPhrases *)_associatedPhrasesModule;
+    module->checkTable(); // Only reload when file metadata has changed.
+    switch (module->tableStatus()) {
+        case OVAFAssociatedPhrases::Custom: return @"Current table: Custom";
+        case OVAFAssociatedPhrases::CustomInvalid: return @"Custom table could not be loaded; using built-in table";
+        case OVAFAssociatedPhrases::BuiltIn: return @"Current table: Built-in";
+        case OVAFAssociatedPhrases::Unavailable: return @"Associated phrases unavailable";
+    }
 }
 
 - (BOOL)importAssociatedPhrasesFromURL:(NSURL *)url error:(NSError **)error
 {
     NSData *data = [NSData dataWithContentsOfURL:url options:0 error:error];
     if (!data) return NO;
-    NSString *text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    if (!data.length || !text || !OVAFAssociatedPhrases::ValidateTable(string((const char *)data.bytes, data.length))) {
+    if (!data.length || !OVAFAssociatedPhrases::ValidateTable(string((const char *)data.bytes, data.length))) {
         if (error) *error = [NSError errorWithDomain:@"org.openvanilla.AssociatedPhrases" code:1 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Choose a UTF-8 CIN table with a nonempty chardef section and one character per key.", nil)}];
         return NO;
     }
@@ -320,7 +327,7 @@ static string InputMethodConfigIdentifier(const string &identifier) {
     if (![[NSFileManager defaultManager] createDirectoryAtURL:destination.URLByDeletingLastPathComponent withIntermediateDirectories:YES attributes:nil error:error]) return NO;
     // Validate before replacing; an unsuccessful write leaves the previous table intact.
     if (![data writeToURL:destination options:NSDataWritingAtomic error:error]) return NO;
-    if (_associatedPhrasesModule) ((OVAFAssociatedPhrases *)_associatedPhrasesModule)->setTablePath(destination.path.UTF8String);
+    if (_associatedPhrasesModule) ((OVAFAssociatedPhrases *)_associatedPhrasesModule)->reloadTable();
     return YES;
 }
 
@@ -328,7 +335,7 @@ static string InputMethodConfigIdentifier(const string &identifier) {
 {
     NSURL *url = [self customAssociatedPhrasesURL];
     if ([[NSFileManager defaultManager] fileExistsAtPath:url.path] && ![[NSFileManager defaultManager] removeItemAtURL:url error:error]) return NO;
-    if (_associatedPhrasesModule) ((OVAFAssociatedPhrases *)_associatedPhrasesModule)->setTablePath([self activeAssociatedPhrasesPath].UTF8String);
+    if (_associatedPhrasesModule) ((OVAFAssociatedPhrases *)_associatedPhrasesModule)->reloadTable();
     return YES;
 }
 

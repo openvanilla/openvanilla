@@ -165,3 +165,5 @@
 "Import Associated Phrases" = "导入联想词表";
 "Restore Default Table" = "恢复默认词表";
 "Choose a UTF-8 CIN table with a nonempty chardef section and one character per key." = "请选择 UTF-8 CIN 词表，chardef 区段不能为空，每个索引必须为单个字符。";
+"Custom table could not be loaded; using built-in table" = "自定义词表无法载入，已使用内置词表";
+"Associated phrases unavailable" = "联想词目前无法使用";
