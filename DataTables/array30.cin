@@ -1,5 +1,5 @@
 %gen_inp
-# 行列輸入法 30 鍵版鍵碼表 array30.cin for OpenVanilla (v2026-1.02), 2026-04-07
+# 行列輸入法 30 鍵版鍵碼表 array30.cin for OpenVanilla (v2026-1.11), 2026/10/14
 # 官方下載網址 https://github.com/gontera/array30
 # 有關本鍵碼表使用說明，請參閱 https://github.com/gontera/array30/wiki
 
@@ -86328,6 +86328,7 @@ e,d;i	𫠚
 eipri	𫠛
 eiosi	𫠜
 cj;si	𫠝
+pjki	𫠞
 # End of CJK Unified Ideographs Extension D
 
 # Begin of CJK Unified Ideographs Extension E
@@ -117248,6 +117249,7 @@ hg8	⿽
 hg8	⿾
 hg8	⿿
 hg8	〾
+hg8	㇯
 hg8	〿
 hg9	㇀
 hg9	㇁
