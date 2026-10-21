@@ -762,11 +762,40 @@
                         <action selector="updateField:" target="OTa-5M-Vdi" id="ieF-3B-lGb"/>
                     </connections>
                 </button>
+                <textField fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phr-status">
+                    <rect key="frame" x="20" y="120" width="400" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" title="Current table: Built-in" id="phr-status-cell">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phr-import">
+                    <rect key="frame" x="14" y="77" width="205" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Import Associated Phrases…" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="phr-import-cell">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections><action selector="importTable:" target="OTa-5M-Vdi" id="phr-import-action"/></connections>
+                </button>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phr-restore">
+                    <rect key="frame" x="225" y="77" width="200" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Restore Default Table" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="phr-restore-cell">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections><action selector="restoreTable:" target="OTa-5M-Vdi" id="phr-restore-action"/></connections>
+                </button>
             </subviews>
             <point key="canvasLocation" x="-683" y="449"/>
         </customView>
         <viewController id="OTa-5M-Vdi" customClass="OVAFAssociatedPhrasesPreferencesViewController">
             <connections>
+                <outlet property="fieldTableStatus" destination="phr-status" id="phr-status-outlet"/>
+                <outlet property="restoreTableButton" destination="phr-restore" id="phr-restore-outlet"/>
                 <outlet property="fieldContinuousAssociation" destination="awe-EY-NXM" id="MF9-dT-18S"/>
                 <outlet property="fieldSelectionKeys" destination="WVL-Wd-oMk" id="g20-qv-HZl"/>
                 <outlet property="fieldSendFirstCandidateWithSpaceWithOnePageList" destination="3TC-RO-K1L" id="538-U9-Mz1"/>
