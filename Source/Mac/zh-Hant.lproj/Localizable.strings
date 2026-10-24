@@ -158,3 +158,5 @@
 "Create System Report" = "產生系統報告";
 "You can create a system report and attach it when filing an issue, so the developers can help you better." = "當您在回報問題的時候，有時您可以提供一份系統報告，可以讓開發團隊更了解您的問題。";
 
+
+"Shift-Space toggles number and symbol width" = "使用 Shift＋空白鍵切換數字及符號全半形";
