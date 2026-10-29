@@ -45,10 +45,44 @@ void OVIMTableBasedContext::startSession(OVLoaderService* loaderService)
     m_components.clear();
 }
 
+bool OVIMTableBasedContext::toggleWidth(const OVKey* key, OVTextBuffer* composingText)
+{
+    if (!m_module->m_configShiftSpaceTogglesWidth || key->keyCode() != OVKeyCode::Space ||
+        !key->isShiftPressed() || key->isCombinedFunctionKey() || key->isCapsLockOn() ||
+        key->isDirectTextKey()) {
+        return false;
+    }
+    m_fullWidth = !m_fullWidth;
+    composingText->showToolTip(m_fullWidth ? "全形 １２３，。" : "半形 123,.");
+    return true;
+}
+
 bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService)
 {
     if (!m_module->m_table) {
         return false;
+    }
+
+    if (toggleWidth(key, composingText)) {
+        return true;
+    }
+
+    // Only intercept standalone numbers and punctuation. While composing,
+    // digits select candidates and * / ? retain their wildcard meanings.
+    if (m_module->m_configShiftSpaceTogglesWidth && readingText->isEmpty() &&
+        !key->isCombinedFunctionKey() && !key->isCapsLockOn() && !key->isDirectTextKey() &&
+        key->receivedString().size() == 1 && key->keyCode() > 32 && key->keyCode() <= 126 &&
+        !key->isKeyCodeAlpha()) {
+        if (!m_fullWidth || key->isKeyCodeNumeric() ||
+            !isValidKeyString(string(1, key->keyCode()))) {
+            string text = m_fullWidth
+                ? OVUTF8Helper::SingleUTF8StringFromCodePoint(key->keyCode() + 0xfee0)
+                : key->receivedString();
+            composingText->setText(text);
+            composingText->commit();
+            return true;
+        }
+        // Full-width punctuation keeps the CIN's original Chinese variants.
     }
 
     bool isNumPadKey = key->isNumLockOn();
@@ -223,6 +257,10 @@ bool OVIMTableBasedContext::candidateSelected(OVCandidateService* candidateServi
 
 bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* candidateService, const OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService)
 {
+    if (toggleWidth(key, composingText)) {
+        return true;
+    }
+
     OVOneDimensionalCandidatePanel* panel = candidateService->useOneDimensionalCandidatePanel();
 
     if (!m_module->m_table) {

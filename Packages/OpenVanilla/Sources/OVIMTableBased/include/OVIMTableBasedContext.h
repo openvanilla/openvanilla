@@ -38,6 +38,7 @@ namespace OpenVanilla {
     class OVIMTableBasedContext : public OVEventHandlingContext {
     public:
         OVIMTableBasedContext(OVIMTableBased* module);
+        bool toggleWidth(const OVKey* key, OVTextBuffer* composingText);
         virtual void startSession(OVLoaderService* loaderService);
         virtual bool handleKey(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
         virtual void candidateCanceled(OVCandidateService* candidateService, OVTextBuffer* readingText, OVTextBuffer* composingText, OVLoaderService* loaderService);
@@ -56,6 +57,7 @@ namespace OpenVanilla {
         virtual bool isValidKeyString(const string& keyString);
         virtual const string createTooltip(const string& sendText);
 
+        bool m_fullWidth = true;
         OVIMTableBased* m_module;
         vector<string> m_components;
     };

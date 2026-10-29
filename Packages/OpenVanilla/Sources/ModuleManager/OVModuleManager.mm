@@ -537,6 +537,12 @@ static string InputMethodConfigIdentifier(const string &identifier) {
         }
     }
 
+    // Per-input-method width switching takes precedence over global width filters.
+    auto tableInputMethod = dynamic_cast<OVIMTableBased *>(_activeInputMethod);
+    if (tableInputMethod && tableInputMethod->shiftSpaceTogglesWidth()) {
+        return converted;
+    }
+
     if (self.fullWidthToHalfWidthFilterEnabled) {
         NSString *result = [converted stringByApplyingTransform:NSStringTransformFullwidthToHalfwidth reverse:NO];
         if (result) {

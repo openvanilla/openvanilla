@@ -188,3 +188,5 @@
 "Advanced" = "Advanced";
 "Create System Report" = "Create System Report";
 "You can create a system report and attach it when filing an issue, so the developers can help you better." = "You can create a system report and attach it when filing an issue, so the developers can help you better.";
+
+"Shift-Space toggles number and symbol width" = "Shift-Space toggles number and symbol width";
