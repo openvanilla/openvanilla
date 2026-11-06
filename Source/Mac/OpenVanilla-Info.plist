@@ -20,6 +20,33 @@
 	<string>OPVN</string>
 	<key>CFBundleVersion</key>
 	<string>3520</string>
+	<key>ComponentInputModeDict</key>
+	<dict>
+		<key>tsInputModeListKey</key>
+		<dict>
+			<key>org.openvanilla.inputmethod.OpenVanilla.Default</key>
+			<dict>
+				<key>tsInputModeAlternateMenuIconFileKey</key>
+				<string>OpenVanilla-InputMenu.tiff</string>
+				<key>tsInputModeDefaultStateKey</key>
+				<true/>
+				<key>tsInputModeIsVisibleKey</key>
+				<true/>
+				<key>tsInputModeMenuIconFileKey</key>
+				<string>OpenVanilla-InputMenu.tiff</string>
+				<key>tsInputModePaletteIconFileKey</key>
+				<string>OpenVanilla-InputMenu.tiff</string>
+				<key>tsInputModePrimaryInScriptKey</key>
+				<true/>
+				<key>tsInputModeScriptKey</key>
+				<string>smUnicodeScript</string>
+			</dict>
+		</dict>
+		<key>tsVisibleInputModeOrderedArrayKey</key>
+		<array>
+			<string>org.openvanilla.inputmethod.OpenVanilla.Default</string>
+		</array>
+	</dict>
 	<key>InputMethodConnectionName</key>
 	<string>OpenVanilla_1_Connection</string>
 	<key>InputMethodServerControllerClass</key>
