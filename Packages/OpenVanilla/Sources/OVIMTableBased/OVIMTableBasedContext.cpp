@@ -110,6 +110,17 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
     
     if (key->receivedString().size() && key->keyCode() != 32 && !key->isDirectTextKey()) {
         if (isValidKeyString(string(1, key->keyCode()))) {
+            if (shouldSendCandidateBeforeKey(key)) {
+                vector<string> pending = m_module->m_table->findChardef(currentQueryKey());
+                if (pending.size()) {
+                    m_components.clear();
+                    readingText->clear();
+                    readingText->updateDisplay();
+                    composingText->setText(pending[0]);
+                    composingText->commit();
+                }
+            }
+
             if (m_components.size() >= m_module->m_configMaximumRadicalLength) {
                 loaderService->beep();
                 return true;
@@ -128,6 +139,27 @@ bool OVIMTableBasedContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVT
                 return false;
             }
             else {
+                // A punctuation or symbol key that is not a radical arrives while composing, e.g.
+                // the user forgot to press Space. If enabled, send the first candidate followed by
+                // the typed symbol instead of swallowing the key.
+                if (m_module->m_configSendCandidateBeforePunctuation && key->isPrintable() && key->receivedString().size()) {
+                    vector<string> pending = m_module->m_table->findChardef(currentQueryKey());
+                    if (pending.size()) {
+                        string text = pending[0] + key->receivedString();
+                        OVOneDimensionalCandidatePanel* panel = candidateService->useOneDimensionalCandidatePanel();
+                        if (panel->isVisible()) {
+                            panel->hide();
+                            panel->cancelEventHandler();
+                        }
+                        m_components.clear();
+                        readingText->clear();
+                        readingText->updateDisplay();
+                        composingText->setText(text);
+                        composingText->commit();
+                        return true;
+                    }
+                }
+
                 readingText->setText(currentReading());
                 readingText->updateDisplay();
                 loaderService->beep();
@@ -274,6 +306,21 @@ bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* can
         return true;
     }
 
+    // The candidate list is showing and a punctuation or symbol key that is not a radical arrives.
+    // If enabled, send the highlighted candidate followed by the symbol instead of dropping the
+    // candidate.
+    if (m_module->m_configSendCandidateBeforePunctuation && currentCandidate.length() && !isValidKeyString(string(1, key->keyCode())) && !key->isDirectTextKey() && key->isPrintable() && key->receivedString().size()) {
+        string text = currentCandidate + key->receivedString();
+        panel->hide();
+        panel->cancelEventHandler();
+        m_components.clear();
+        readingText->clear();
+        readingText->updateDisplay();
+        composingText->setText(text);
+        composingText->commit();
+        return true;
+    }
+
     if (!(currentCandidate.length() && isValidKeyString(string(1, key->keyCode())) && !key->isDirectTextKey())) {
         m_components.clear();
         readingText->clear();
@@ -283,7 +330,12 @@ bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* can
         return false;
     }
 
-    if (m_module->m_configComposeWhileTyping) {
+    // With compose-while-typing on, a radical key is normally appended to the reading. If enabled,
+    // skip that when the key should start a new character, so the code below sends the highlighted
+    // candidate and starts a new composition with this key.
+    bool startNewComposition = shouldSendCandidateBeforeKey(key);
+
+    if (m_module->m_configComposeWhileTyping && !startNewComposition) {
         if (isValidKeyString(string(1, key->keyCode())) && m_components.size() < m_module->m_configMaximumRadicalLength) {
             m_components.push_back(string(1, key->keyCode()));
             readingText->setText(currentReading());
@@ -321,6 +373,10 @@ bool OVIMTableBasedContext::candidateNonPanelKeyReceived(OVCandidateService* can
     bool excludeEndKey = (m_components.size() > 1) && (key->keyCode() == m_module->m_configMatchOneChar || key->keyCode() == m_module->m_configMatchZeroOrMoreChar);
     if ((isEndKey(key) && !excludeEndKey) || (m_module->m_configShouldComposeAtMaximumRadicalLength && m_components.size() >= m_module->m_configMaximumRadicalLength)) {
         compose(readingText, composingText, candidateService, loaderService);
+    }
+    else if (startNewComposition && m_module->m_configComposeWhileTyping) {
+        // Keep showing candidates for the new reading, as compose-while-typing does.
+        compose(readingText, composingText, candidateService, loaderService, false);
     }
 
     return true;
@@ -530,6 +586,37 @@ bool OVIMTableBasedContext::isEndKey(const OVKey* key)
 {
     string endKey = m_module->m_table->findProperty("endkey");
     return endKey.find((char)key->keyCode()) != string::npos;
+}
+
+bool OVIMTableBasedContext::shouldSendCandidateBeforeKey(const OVKey* key)
+{
+    // When "send candidate before punctuation" is enabled, decides whether a radical key typed
+    // while composing should first send the current candidate and then start a new character.
+    if (!m_module->m_configSendCandidateBeforePunctuation || !m_components.size()) {
+        return false;
+    }
+
+    string queryKey = currentQueryKey();
+    char keyCode = (char)key->keyCode();
+    if (stringContainsWildcard(queryKey) || keyCode == m_module->m_configMatchOneChar || keyCode == m_module->m_configMatchZeroOrMoreChar) {
+        return false;
+    }
+
+    // The reading was already completed by a punctuation end key, e.g. "," for "，" in Cangjie,
+    // and the user did not press Space before typing the next character.
+    string endKeys = m_module->m_table->findProperty("endkey");
+    const string& lastComponent = m_components.back();
+    if (lastComponent.length() && endKeys.find(lastComponent[0]) != string::npos) {
+        return true;
+    }
+
+    // A punctuation end key that produces a character by itself but cannot extend the current
+    // reading, e.g. "," typed right after the radicals of a character. End keys that do not
+    // produce anything alone, such as Bopomofo tone keys, are not affected.
+    string keyString(1, keyCode);
+    return isEndKey(key)
+        && m_module->m_table->findChardef(keyString).size()
+        && !m_module->m_table->findChardef(queryKey + keyString).size();
 }
 
 bool OVIMTableBasedContext::isValidKeyString(const string& keyString)

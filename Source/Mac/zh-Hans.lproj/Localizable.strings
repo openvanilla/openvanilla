@@ -127,6 +127,7 @@
 "Maximum component buffer length:" = "最大组字区（字根）长度：";
 "Candidate list font size:" = "选字窗字体大小：";
 "Prompt for a shorter combination if available" = "特别码提示";
+"Send the current candidate when a punctuation key is typed" = "输入标点时自动送出当前的候选字";
 "Last checked: %@" = "上次检查时间：%@";
 "Alphanumeric keyboard layout:" = "英数字键盘配置：";
 "Space selects the first candidate when there's only one page" = "如果候选字词只有一页，按空白键送出第一词";
