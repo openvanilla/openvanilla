@@ -76,6 +76,7 @@ namespace OpenVanilla {
         UseSpaceAsFirstCandidateSelectionKeyOption m_configUseSpaceAsFirstCandidateSelectionKey;
         bool m_configSendFirstCandidateWithSpaceWithOnePageList;
         bool m_configOnlyUseNumPadNumbersForRadicals;
+        bool m_configSendCandidateBeforePunctuation;
         bool m_specialCodePrompt;
     };
 };

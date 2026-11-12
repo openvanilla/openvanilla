@@ -222,12 +222,23 @@
                         <action selector="updateField:" target="69" id="dvI-g8-TPo"/>
                     </connections>
                 </button>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aN2-bX-3dG">
+                    <rect key="frame" x="18" y="179" width="404" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Send the current candidate when a punctuation key is typed" bezelStyle="regularSquare" imagePosition="left" inset="2" id="bR3-cY-4eH">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="updateField:" target="69" id="dF5-gZ-5fI"/>
+                    </connections>
+                </button>
                 <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="maI-Yg-HFe">
-                    <rect key="frame" x="19" y="186" width="401" height="5"/>
+                    <rect key="frame" x="19" y="166" width="401" height="5"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </box>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d1h-Gp-njO">
-                    <rect key="frame" x="18" y="164" width="227" height="16"/>
+                    <rect key="frame" x="18" y="144" width="227" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Use space as the first candidate key:" id="VMK-sQ-0rx">
                         <font key="font" metaFont="system"/>
@@ -236,7 +247,7 @@
                     </textFieldCell>
                 </textField>
                 <matrix verticalHuggingPriority="750" verticalCompressionResistancePriority="741" fixedFrame="YES" allowsEmptySelection="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6y2-gG-MYD">
-                    <rect key="frame" x="20" y="91" width="387" height="64"/>
+                    <rect key="frame" x="20" y="71" width="387" height="64"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     <size key="cellSize" width="387" height="20"/>
@@ -266,7 +277,7 @@
                     </connections>
                 </matrix>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17">
-                    <rect key="frame" x="19" y="66" width="402" height="18"/>
+                    <rect key="frame" x="19" y="46" width="402" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Space selects the first candidate when there's only one page" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="18">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -491,6 +502,7 @@
                 <outlet property="fieldClearReadingBufferAtCompositionError" destination="13" id="88"/>
                 <outlet property="fieldComposeWhileTyping" destination="15" id="89"/>
                 <outlet property="fieldMaximumRadicalLength" destination="77" id="85"/>
+                <outlet property="fieldSendCandidateBeforePunctuation" destination="aN2-bX-3dG" id="cG6-dH-7eJ"/>
                 <outlet property="fieldSendFirstCandidateWithSpaceWithOnePageList" destination="17" id="91"/>
                 <outlet property="fieldShouldComposeAtMaximumRadicalLength" destination="83" id="87"/>
                 <outlet property="fieldSpecialCodePrompt" destination="cm9-2B-Eff" id="eSU-p8-0K4"/>

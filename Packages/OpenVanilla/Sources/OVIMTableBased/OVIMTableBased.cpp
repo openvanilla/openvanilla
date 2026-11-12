@@ -42,6 +42,7 @@ OVIMTableBased::OVIMTableBased(const string& tablePath)
     , m_configMatchOneChar('?')
     , m_configMatchZeroOrMoreChar('*')
     , m_configOnlyUseNumPadNumbersForRadicals(false)
+    , m_configSendCandidateBeforePunctuation(false)
 {
     // populate well-known defaults based on file names
     // (cj*.cin, or Cangjei-based tables simply use the default)
@@ -201,6 +202,10 @@ void OVIMTableBased::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* lo
         m_configOnlyUseNumPadNumbersForRadicals = moduleConfig->isKeyTrue("OnlyUseNumPadNumbersForRadicals");
     }
 
+    if (moduleConfig->hasKey("SendCandidateBeforePunctuation")) {
+        m_configSendCandidateBeforePunctuation = moduleConfig->isKeyTrue("SendCandidateBeforePunctuation");
+    }
+
     if (moduleConfig->hasKey("SpecialCodePrompt")) {
         m_specialCodePrompt = moduleConfig->isKeyTrue("SpecialCodePrompt");
     }
@@ -217,6 +222,7 @@ void OVIMTableBased::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* lo
     moduleConfig->setKeyBoolValue("ShouldComposeAtMaximumRadicalLength", m_configShouldComposeAtMaximumRadicalLength);
     moduleConfig->setKeyIntValue("UseSpaceAsFirstCandidateSelectionKey", m_configUseSpaceAsFirstCandidateSelectionKey);
     moduleConfig->setKeyBoolValue("OnlyUseNumPadNumbersForRadicals", m_configOnlyUseNumPadNumbersForRadicals);
+    moduleConfig->setKeyBoolValue("SendCandidateBeforePunctuation", m_configSendCandidateBeforePunctuation);
 }
 
 bool OVIMTableBased::fetchTableProperty(const string& key, string& outValue)

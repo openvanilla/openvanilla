@@ -34,6 +34,7 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
     @IBOutlet weak var fieldMaximumRadicalLength: NSPopUpButton!
     @IBOutlet weak var fieldClearReadingBufferAtCompositionError: NSButton!
     @IBOutlet weak var fieldComposeWhileTyping: NSButton!
+    @IBOutlet weak var fieldSendCandidateBeforePunctuation: NSButton!
     @IBOutlet weak var fieldSendFirstCandidateWithSpaceWithOnePageList: NSButton!
     @IBOutlet weak var fieldShouldComposeAtMaximumRadicalLength: NSButton!
     @IBOutlet weak var fieldUseSpaceAsFirstCandidateSelectionKey: NSMatrix!
@@ -75,6 +76,9 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
         setState(
             for: fieldShouldComposeAtMaximumRadicalLength,
             key: "ShouldComposeAtMaximumRadicalLength")
+        setState(
+            for: fieldSendCandidateBeforePunctuation,
+            key: "SendCandidateBeforePunctuation")
         setState(
             for: fieldSpecialCodePrompt,
             key: "SpecialCodePrompt")
@@ -135,6 +139,9 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
         setBoolValue(
             fieldShouldComposeAtMaximumRadicalLength.state == .on,
             forKey: "ShouldComposeAtMaximumRadicalLength")
+        setBoolValue(
+            fieldSendCandidateBeforePunctuation.state == .on,
+            forKey: "SendCandidateBeforePunctuation")
         setUnsignedIntegerValue(
             UInt(fieldUseSpaceAsFirstCandidateSelectionKey.selectedCell()?.tag ?? 0),
             forKey: "UseSpaceAsFirstCandidateSelectionKey")
