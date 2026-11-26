@@ -155,6 +155,7 @@
 "Candidate list font size:" = "Candidate list font size:";
 "This is a customized input method." = "This is a customized input method.";
 "Prompt for a shorter combination if available" = "Prompt for a shorter combination if available";
+"Send the current candidate when a punctuation key is typed" = "Send the current candidate when a punctuation key is typed";
 "Last checked: %@" = "Last checked: %@";
 "Alphanumeric keyboard layout:" = "Alphanumeric keyboard layout:";
 "Space selects the first candidate when there's only one page" = "Space selects the first candidate when there's only one page";

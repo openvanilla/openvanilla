@@ -67,6 +67,11 @@ private class OpenVanillaPreferenceCollector {
                         .boolValue(moduleIdentifier: table, forKey: "SpecialCodePrompt")
                         ? "Y" : "N") + "\n"
                 report +=
+                    "    - Send candidate before punctuation: "
+                    + (PreferencesHelper
+                        .boolValue(moduleIdentifier: table, forKey: "SendCandidateBeforePunctuation")
+                        .yesNo) + "\n"
+                report +=
                     "    - Use space as first candidate selection key: \(PreferencesHelper.unsignedIntegerValue(moduleIdentifier: table, forKey: "UseSpaceAsFirstCandidateSelectionKey") ?? 0)\n"
                 report +=
                     "    - Maximum radical length: \(PreferencesHelper.unsignedIntegerValue(moduleIdentifier: table, forKey: "MaximumRadicalLength") ?? 0)\n"

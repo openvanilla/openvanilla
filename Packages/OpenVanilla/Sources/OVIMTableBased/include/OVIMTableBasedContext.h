@@ -53,6 +53,7 @@ namespace OpenVanilla {
         virtual bool compose(OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService, bool sendWhenOnlyOneCandidate = true);
         virtual bool handleBackspace(OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService);
         virtual bool isEndKey(const OVKey* key);
+        virtual bool shouldSendCandidateBeforeKey(const OVKey* key);
         virtual bool isValidKeyString(const string& keyString);
         virtual const string createTooltip(const string& sendText);
 
