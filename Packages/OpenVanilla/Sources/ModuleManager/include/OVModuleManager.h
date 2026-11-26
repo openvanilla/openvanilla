@@ -68,6 +68,11 @@ namespace OpenVanilla {
 - (BOOL)isCustomTableBasedInputMethod:(NSString *)identifier;
 - (BOOL)removeCustomTableBasedInputMethod:(NSString *)identifier error:(NSError **)error;
 
+@property (readonly) BOOL hasCustomAssociatedPhrases;
+@property (readonly, copy) NSString *associatedPhrasesTableStatus;
+- (BOOL)importAssociatedPhrasesFromURL:(NSURL *)url error:(NSError **)error;
+- (BOOL)restoreDefaultAssociatedPhrasesWithError:(NSError **)error;
+
 - (NSString *)filteredStringWithString:(NSString *)input;
 
 @property (class, readonly) OVModuleManager *defaultManager;

@@ -95,7 +95,7 @@ class PreferencesWindowController: NSWindowController {
             }
             let selector = #selector(Dummy.title)
             if view.responds(to: selector) {
-                if let title = view.perform(selector).takeRetainedValue() as? String {
+                if let title = view.perform(selector).takeUnretainedValue() as? String {
                     localizableObjects[NSValue(nonretainedObject: view)] = title
                 }
             }
