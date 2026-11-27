@@ -37,6 +37,7 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
     @IBOutlet weak var fieldSendFirstCandidateWithSpaceWithOnePageList: NSButton!
     @IBOutlet weak var fieldShouldComposeAtMaximumRadicalLength: NSButton!
     @IBOutlet weak var fieldUseSpaceAsFirstCandidateSelectionKey: NSMatrix!
+    @IBOutlet weak var fieldShiftSpaceTogglesWidth: NSButton!
     @IBOutlet weak var fieldSpecialCodePrompt: NSButton!
     @IBOutlet weak var customTableBasedInputMethodInfo: NSTextField!
     @IBOutlet weak var removeInputMethodButton: NSButton!
@@ -56,6 +57,14 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
 
     override func loadPreferences() {
         super.loadPreferences()
+
+        fieldShiftSpaceTogglesWidth.title = NSLocalizedString(
+            "Shift-Space toggles number and symbol width", comment: "")
+        fieldShiftSpaceTogglesWidth.isHidden = ![
+            "org.openvanilla.OVIMTableBased.cj",
+            "org.openvanilla.OVIMTableBased.simplex",
+        ].contains(moduleIdentifier)
+        setState(for: fieldShiftSpaceTogglesWidth, key: "ShiftSpaceTogglesWidth")
 
         let manager = OVModuleManager.default
         if manager.isCustomTableBasedInputMethod(moduleIdentifier) {
@@ -144,6 +153,10 @@ class TableBasedModulePreferencesViewController: BaseModulePreferencesViewContro
         setBoolValue(
             fieldSpecialCodePrompt.state == .on,
             forKey: "SpecialCodePrompt")
+
+        if !fieldShiftSpaceTogglesWidth.isHidden {
+            setBoolValue(fieldShiftSpaceTogglesWidth.state == .on, forKey: "ShiftSpaceTogglesWidth")
+        }
 
         let selectedItem = fieldMaximumRadicalLength.selectedItem
         if let selectedItem {

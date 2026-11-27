@@ -42,6 +42,7 @@ OVIMTableBased::OVIMTableBased(const string& tablePath)
     , m_configMatchOneChar('?')
     , m_configMatchZeroOrMoreChar('*')
     , m_configOnlyUseNumPadNumbersForRadicals(false)
+    , m_configShiftSpaceTogglesWidth(false)
 {
     // populate well-known defaults based on file names
     // (cj*.cin, or Cangjei-based tables simply use the default)
@@ -158,6 +159,12 @@ bool OVIMTableBased::initialize(OVPathInfo* pathInfo, OVLoaderService* loaderSer
 
 void OVIMTableBased::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)
 {
+    const string name = identifier();
+    m_configShiftSpaceTogglesWidth =
+        (name == "org.openvanilla.OVIMTableBased.cj" ||
+         name == "org.openvanilla.OVIMTableBased.simplex") &&
+        moduleConfig->isKeyTrue("ShiftSpaceTogglesWidth");
+
     if (moduleConfig->hasKey("ClearReadingBufferAtCompositionError")) {
         m_configClearReadingBufferAtCompositionError = moduleConfig->isKeyTrue("ClearReadingBufferAtCompositionError");
     }
@@ -208,6 +215,7 @@ void OVIMTableBased::loadConfig(OVKeyValueMap* moduleConfig, OVLoaderService* lo
 
 void OVIMTableBased::saveConfig(OVKeyValueMap* moduleConfig, OVLoaderService* loaderService)
 {
+    moduleConfig->setKeyBoolValue("ShiftSpaceTogglesWidth", m_configShiftSpaceTogglesWidth);
     moduleConfig->setKeyBoolValue("ClearReadingBufferAtCompositionError", m_configClearReadingBufferAtCompositionError);
     moduleConfig->setKeyBoolValue("ComposeWhileTyping", m_configComposeWhileTyping);
     moduleConfig->setKeyStringValue("MatchOneChar", string(1, m_configMatchOneChar));
